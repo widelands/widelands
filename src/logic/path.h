@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef S__PATH_H
-#define S__PATH_H
+#ifndef WL_LOGIC_PATH_H
+#define WL_LOGIC_PATH_H
 
 #include <vector>
 
@@ -106,4 +106,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_PATH_H

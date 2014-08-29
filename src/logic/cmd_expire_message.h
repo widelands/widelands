@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef CMD_EXPIRE_MESSAGE_H
-#define CMD_EXPIRE_MESSAGE_H
+#ifndef WL_LOGIC_CMD_EXPIRE_MESSAGE_H
+#define WL_LOGIC_CMD_EXPIRE_MESSAGE_H
 
 #include <memory>
 
@@ -42,7 +42,7 @@ struct Cmd_ExpireMessage : public Command {
 	{}
 
 	void execute (Game & game) override;
-	virtual uint8_t id() const override {return QUEUE_CMD_EXPIREMESSAGE;}
+	uint8_t id() const override {return QUEUE_CMD_EXPIREMESSAGE;}
 
 private:
 	Player_Number player;
@@ -51,4 +51,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_CMD_EXPIRE_MESSAGE_H

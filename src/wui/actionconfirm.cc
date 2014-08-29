@@ -21,6 +21,7 @@
 
 #include <boost/format.hpp>
 
+#include "base/macros.h"
 #include "economy/economy.h"
 #include "graphic/graphic.h"
 #include "logic/building.h"
@@ -28,7 +29,6 @@
 #include "logic/ship.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/window.h"
-#include "upcast.h"
 #include "wui/interactive_player.h"
 
 using boost::format;
@@ -77,8 +77,8 @@ struct BulldozeConfirm : public ActionConfirm {
 		 Widelands::Building & building,
 		 Widelands::PlayerImmovable * todestroy = nullptr);
 
-	virtual void think() override;
-	virtual void ok() override;
+	void think() override;
+	void ok() override;
 
 private:
 	Widelands::Object_Ptr m_todestroy;
@@ -92,8 +92,8 @@ struct DismantleConfirm : public ActionConfirm {
 		(Interactive_Player & parent,
 		 Widelands::Building & building);
 
-	virtual void think() override;
-	virtual void ok() override;
+	void think() override;
+	void ok() override;
 };
 
 /**
@@ -105,8 +105,8 @@ struct EnhanceConfirm : public ActionConfirm {
 		 Widelands::Building & building,
 		 const Widelands::Building_Index & id);
 
-	virtual void think() override;
-	virtual void ok() override;
+	void think() override;
+	void ok() override;
 
 private:
     // Do not make this a reference - it is a stack variable in the caller
@@ -120,8 +120,8 @@ private:
 struct ShipSinkConfirm : public ActionConfirm {
 	ShipSinkConfirm(Interactive_Player & parent, Widelands::Ship & ship);
 
-	virtual void think() override;
-	virtual void ok() override;
+	void think() override;
+	void ok() override;
 };
 
 /**
@@ -130,8 +130,8 @@ struct ShipSinkConfirm : public ActionConfirm {
 struct ShipCancelExpeditionConfirm : public ActionConfirm {
 	ShipCancelExpeditionConfirm(Interactive_Player & parent, Widelands::Ship & ship);
 
-	virtual void think() override;
-	virtual void ok() override;
+	void think() override;
+	void ok() override;
 };
 
 
@@ -148,7 +148,7 @@ ActionConfirm::ActionConfirm
 	new UI::Multiline_Textarea
 		(this,
 		 0, 0, 200, 74,
-		 (format(message) % building.descname()).str(),
+		 (format(message) % building.descr().descname()).str(),
 		 UI::Align_Center);
 
 	UI::Button * okbtn =
@@ -241,11 +241,11 @@ void BulldozeConfirm::think()
 	upcast(Widelands::PlayerImmovable, todestroy, m_todestroy.get(egbase));
 
 	if
-		(not todestroy ||
-		 not building ||
-		 not iaplayer().can_act(building->owner().player_number())
-		 or not
-		 (building->get_playercaps() & Widelands::Building::PCap_Bulldoze))
+		(!todestroy ||
+		 !building ||
+		 !iaplayer().can_act(building->owner().player_number())
+		 ||
+		 !(building->get_playercaps() & Widelands::Building::PCap_Bulldoze))
 		die();
 }
 
@@ -262,11 +262,11 @@ void BulldozeConfirm::ok()
 	if
 		(todestroy &&
 		 building &&
-		 iaplayer().can_act(building->owner().player_number()) and
+		 iaplayer().can_act(building->owner().player_number()) &&
 		 (building->get_playercaps() & Widelands::Building::PCap_Bulldoze))
 	{
 		game.send_player_bulldoze
-			(*todestroy, get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL));
+			(*todestroy, get_key_state(SDLK_LCTRL) << get_key_state(SDLK_RCTRL));
 		iaplayer().need_complete_redraw();
 	}
 
@@ -304,10 +304,10 @@ void DismantleConfirm::think()
 	upcast(Widelands::Building, building, m_object.get(egbase));
 
 	if
-		(not building ||
-		 not iaplayer().can_act(building->owner().player_number())
-		 or not
-		 (building->get_playercaps() & Widelands::Building::PCap_Dismantle))
+		(!building ||
+		 !iaplayer().can_act(building->owner().player_number())
+		 ||
+		 !(building->get_playercaps() & Widelands::Building::PCap_Dismantle))
 		die();
 }
 
@@ -323,7 +323,7 @@ void DismantleConfirm::ok()
 
 	if
 		(building &&
-		 iaplayer().can_act(building->owner().player_number()) and
+		 iaplayer().can_act(building->owner().player_number()) &&
 		 (building->get_playercaps() & Widelands::Building::PCap_Dismantle))
 	{
 		game.send_player_dismantle(*todismantle);
@@ -366,10 +366,10 @@ void EnhanceConfirm::think()
 	upcast(Widelands::Building, building, m_object.get(egbase));
 
 	if
-		(not building ||
-		 not iaplayer().can_act(building->owner().player_number())
-		 or not
-		 (building->get_playercaps() & Widelands::Building::PCap_Enhancable))
+		(!building ||
+		 !iaplayer().can_act(building->owner().player_number())
+		 ||
+		 !(building->get_playercaps() & Widelands::Building::PCap_Enhancable))
 		die();
 }
 
@@ -384,7 +384,7 @@ void EnhanceConfirm::ok()
 
 	if
 		(building &&
-		 iaplayer().can_act(building->owner().player_number()) and
+		 iaplayer().can_act(building->owner().player_number()) &&
 		 (building->get_playercaps() & Widelands::Building::PCap_Enhancable))
 	{
 		game.send_player_enhance_building(*building, m_id);

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WIDELANDS_MAP_BUILDINGDATA_DATA_PACKET_H
-#define WIDELANDS_MAP_BUILDINGDATA_DATA_PACKET_H
+#ifndef WL_MAP_IO_WIDELANDS_MAP_BUILDINGDATA_DATA_PACKET_H
+#define WL_MAP_IO_WIDELANDS_MAP_BUILDINGDATA_DATA_PACKET_H
 
 #include "map_io/widelands_map_data_packet.h"
 
@@ -42,45 +42,45 @@ class Building;
  */
 class Map_Buildingdata_Data_Packet {
 public:
-	void Read(FileSystem&, Editor_Game_Base&, bool, Map_Map_Object_Loader&);
-	void Write(FileSystem&, Editor_Game_Base&, Map_Map_Object_Saver&);
+	void Read(FileSystem&, Editor_Game_Base&, bool, MapMapObjectLoader&);
+	void Write(FileSystem&, Editor_Game_Base&, MapMapObjectSaver&);
 
 private:
-	virtual void read_constructionsite
-		(ConstructionSite       &, FileRead  &, Game &, Map_Map_Object_Loader &);
-	virtual void read_dismantlesite
-		(DismantleSite       &, FileRead  &, Game &, Map_Map_Object_Loader &);
-	virtual void read_partially_finished_building
-		(Partially_Finished_Building   &, FileRead  &, Game &, Map_Map_Object_Loader &);
-	virtual void read_constructionsite_v1
-		(ConstructionSite       &, FileRead  &, Game &, Map_Map_Object_Loader &);
-	virtual void read_warehouse
-		(Warehouse              &, FileRead  &, Game &, Map_Map_Object_Loader &);
-	virtual void read_militarysite
-		(MilitarySite           &, FileRead  &, Game &, Map_Map_Object_Loader &);
-	virtual void read_trainingsite
-		(TrainingSite           &, FileRead  &, Game &, Map_Map_Object_Loader &);
-	virtual void read_productionsite
-		(ProductionSite         &, FileRead  &, Game &, Map_Map_Object_Loader &);
-	virtual void read_formerbuildings_v2
-		(Building               &, FileRead  &, Game &, Map_Map_Object_Loader &);
+	void read_constructionsite
+		(ConstructionSite       &, FileRead  &, Game &, MapMapObjectLoader &);
+	void read_dismantlesite
+		(DismantleSite       &, FileRead  &, Game &, MapMapObjectLoader &);
+	void read_partially_finished_building
+		(Partially_Finished_Building   &, FileRead  &, Game &, MapMapObjectLoader &);
+	void read_constructionsite_v1
+		(ConstructionSite       &, FileRead  &, Game &, MapMapObjectLoader &);
+	void read_warehouse
+		(Warehouse              &, FileRead  &, Game &, MapMapObjectLoader &);
+	void read_militarysite
+		(MilitarySite           &, FileRead  &, Game &, MapMapObjectLoader &);
+	void read_trainingsite
+		(TrainingSite           &, FileRead  &, Game &, MapMapObjectLoader &);
+	void read_productionsite
+		(ProductionSite         &, FileRead  &, Game &, MapMapObjectLoader &);
+	void read_formerbuildings_v2
+		(Building               &, FileRead  &, Game &, MapMapObjectLoader &);
 
-	virtual void write_constructionsite
-		(const ConstructionSite &, FileWrite &, Game &, Map_Map_Object_Saver  &);
-	virtual void write_dismantlesite
-		(const DismantleSite &, FileWrite &, Game &, Map_Map_Object_Saver  &);
-	virtual void write_partially_finished_building
-		(const Partially_Finished_Building &, FileWrite &, Game &, Map_Map_Object_Saver  &);
-	virtual void write_warehouse
-		(const Warehouse        &, FileWrite &, Game &, Map_Map_Object_Saver  &);
-	virtual void write_militarysite
-		(const MilitarySite     &, FileWrite &, Game &, Map_Map_Object_Saver  &);
-	virtual void write_trainingsite
-		(const TrainingSite     &, FileWrite &, Game &, Map_Map_Object_Saver  &);
-	virtual void write_productionsite
-		(const ProductionSite   &, FileWrite &, Game &, Map_Map_Object_Saver  &);
+	void write_constructionsite
+		(const ConstructionSite &, FileWrite &, Game &, MapMapObjectSaver  &);
+	void write_dismantlesite
+		(const DismantleSite &, FileWrite &, Game &, MapMapObjectSaver  &);
+	void write_partially_finished_building
+		(const Partially_Finished_Building &, FileWrite &, Game &, MapMapObjectSaver  &);
+	void write_warehouse
+		(const Warehouse        &, FileWrite &, Game &, MapMapObjectSaver  &);
+	void write_militarysite
+		(const MilitarySite     &, FileWrite &, Game &, MapMapObjectSaver  &);
+	void write_trainingsite
+		(const TrainingSite     &, FileWrite &, Game &, MapMapObjectSaver  &);
+	void write_productionsite
+		(const ProductionSite   &, FileWrite &, Game &, MapMapObjectSaver  &);
 };
 
 }
 
-#endif
+#endif  // end of include guard: WL_MAP_IO_WIDELANDS_MAP_BUILDINGDATA_DATA_PACKET_H

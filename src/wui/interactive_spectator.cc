@@ -19,15 +19,15 @@
 
 #include "wui/interactive_spectator.h"
 
-#include "chat.h"
-#include "gamecontroller.h"
+#include "base/i18n.h"
+#include "base/macros.h"
+#include "chat/chat.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
+#include "logic/game_controller.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
-#include "upcast.h"
 #include "wui/fieldaction.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_main_menu_save_game.h"
@@ -77,7 +77,7 @@ Interactive_Spectator::Interactive_Spectator
 	m_toolbar.add(&m_toggle_minimap,         UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_chat,            UI::Box::AlignLeft);
 
-	// TODO : instead of making unneeded buttons invisible after generation,
+	// TODO(unknown): instead of making unneeded buttons invisible after generation,
 	// they should not at all be generated. -> implement more dynamic toolbar UI
 	if (is_multiplayer()) {
 		m_exit.set_visible(false);

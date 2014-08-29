@@ -17,21 +17,20 @@
  *
  */
 
-#ifndef RESOURCE_DESCRIPTION_H
-#define RESOURCE_DESCRIPTION_H
+#ifndef WL_LOGIC_WORLD_RESOURCE_DESCRIPTION_H
+#define WL_LOGIC_WORLD_RESOURCE_DESCRIPTION_H
 
 #include <string>
 #include <vector>
 
-#include <boost/noncopyable.hpp>
-
+#include "base/macros.h"
 #include "logic/widelands.h"
 
 class LuaTable;
 
 namespace Widelands {
 
-class ResourceDescription : boost::noncopyable {
+class ResourceDescription {
 public:
 	struct EditorPicture {
 		std::string picname;
@@ -62,8 +61,10 @@ private:
 	const bool detectable_;
 	const int32_t max_amount_;
 	std::vector<EditorPicture> editor_pictures_;
+
+	DISALLOW_COPY_AND_ASSIGN(ResourceDescription);
 };
 
 }  // namespace Widelands
 
-#endif /* end of include guard: RESOURCE_DESCRIPTION_H */
+#endif  // end of include guard: WL_LOGIC_WORLD_RESOURCE_DESCRIPTION_H

@@ -19,18 +19,22 @@
 
 #include "scripting/lua_game.h"
 
+#include <memory>
+
 #include <boost/format.hpp>
 
-#include "campvis.h"
+#include "base/i18n.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
-#include "gamecontroller.h"
-#include "i18n.h"
+#include "logic/campaign_visibility.h"
+#include "logic/constants.h"
+#include "logic/game_controller.h"
 #include "logic/objective.h"
 #include "logic/path.h"
 #include "logic/player.h"
 #include "logic/playersmanager.h"
 #include "logic/tribe.h"
+#include "profile/profile.h"
 #include "scripting/c_utils.h"
 #include "scripting/lua_map.h"
 #include "scripting/scripting.h"
@@ -94,8 +98,6 @@ const MethodType<L_Player> L_Player::Methods[] = {
 	METHOD(L_Player, reveal_scenario),
 	METHOD(L_Player, reveal_campaign),
 	METHOD(L_Player, get_buildings),
-	METHOD(L_Player, set_flag_style),
-	METHOD(L_Player, set_frontier_style),
 	METHOD(L_Player, get_suitability),
 	METHOD(L_Player, allow_workers),
 	METHOD(L_Player, switchplayer),
@@ -106,8 +108,6 @@ const PropertyType<L_Player> L_Player::Properties[] = {
 	PROP_RO(L_Player, allowed_buildings),
 	PROP_RO(L_Player, objectives),
 	PROP_RO(L_Player, defeated),
-	PROP_RW(L_Player, retreat_percentage),
-	PROP_RW(L_Player, changing_retreat_percentage_allowed),
 	PROP_RO(L_Player, inbox),
 	PROP_RW(L_Player, team),
 	PROP_RW(L_Player, see_all),
@@ -192,43 +192,6 @@ int L_Player::get_defeated(lua_State * L) {
 }
 
 /* RST
-	.. attribute:: retreat_percentage
-
-
-		(RW) Soldiers that only have this amount of total hitpoints
-		left will go home
-*/
-// UNTESTED
-int L_Player::get_retreat_percentage(lua_State * L) {
-	lua_pushuint32(L, get(L, get_egbase(L)).get_retreat_percentage());
-	return 1;
-}
-int L_Player::set_retreat_percentage(lua_State * L) {
-	uint32_t value = luaL_checkuint32(L, -1);
-	if (value > 100)
-		report_error(L, "%i is not a valid percentage!", value);
-
-	get(L, get_egbase(L)).set_retreat_percentage(value);
-	return 0;
-}
-
-/* RST
-	.. attribute:: changing_retreat_percentage_allowed
-
-		(RW) A boolean value. :const:`true` if the player is allowed to change
-		    the :attr:`retreat_percentage`, :const:`false` otherwise.
-*/
-// UNTESTED
-int L_Player::get_changing_retreat_percentage_allowed(lua_State * L) {
-	lua_pushuint32(L, get(L, get_egbase(L)).is_retreat_change_allowed());
-	return 1;
-}
-int L_Player::set_changing_retreat_percentage_allowed(lua_State * L) {
-	get(L, get_egbase(L)).allow_retreat_change(luaL_checkboolean(L, -1));
-	return 0;
-}
-
-/* RST
 	.. attribute:: inbox
 
 		(RO) An array of the message that are either read or new. Note that you
@@ -239,12 +202,12 @@ int L_Player::get_inbox(lua_State * L) {
 
 	lua_newtable(L);
 	uint32_t cidx = 1;
-	container_iterate_const(MessageQueue, p.messages(), m) {
-		if (m.current->second->status() == Message::Archived)
+	for (const std::pair<Message_Id, Message *>& temp_message : p.messages()) {
+		if (temp_message.second->status() == Message::Archived)
 			continue;
 
 		lua_pushuint32(L, cidx ++);
-		to_lua<L_Message>(L, new L_Message(player_number(), m.current->first));
+		to_lua<L_Message>(L, new L_Message(player_number(), temp_message.first));
 		lua_rawset(L, -3);
 	}
 
@@ -342,17 +305,17 @@ int L_Player::send_message(lua_State * L) {
 	if (n == 4) {
 		// Optional arguments
 		lua_getfield(L, 4, "duration");
-		if (not lua_isnil(L, -1))
+		if (!lua_isnil(L, -1))
 			d = luaL_checkuint32(L, -1);
 		lua_pop(L, 1);
 
 		lua_getfield(L, 4, "field");
-		if (not lua_isnil(L, -1))
+		if (!lua_isnil(L, -1))
 			c = (*get_user_class<L_Field>(L, -1))->coords();
 		lua_pop(L, 1);
 
 		lua_getfield(L, 4, "status");
-		if (not lua_isnil(L, -1)) {
+		if (!lua_isnil(L, -1)) {
 			std::string s = luaL_checkstring(L, -1);
 			if (s == "new") st = Message::New;
 			else if (s == "read") st = Message::Read;
@@ -362,12 +325,12 @@ int L_Player::send_message(lua_State * L) {
 		lua_pop(L, 1);
 
 		lua_getfield(L, 4, "sender");
-		if (not lua_isnil(L, -1))
+		if (!lua_isnil(L, -1))
 			sender = luaL_checkstring(L, -1);
 		lua_pop(L, 1);
 
 		lua_getfield(L, 4, "popup");
-		if (not lua_isnil(L, -1))
+		if (!lua_isnil(L, -1))
 			popup = luaL_checkboolean(L, -1);
 		lua_pop(L, 1);
 	}
@@ -443,7 +406,7 @@ int L_Player::message_box(lua_State * L) {
 
 #define CHECK_ARG(var, type) \
 	lua_getfield(L, -1, #var); \
-	if (not lua_isnil(L, -1)) var = luaL_check ## type(L, -1); \
+	if (!lua_isnil(L, -1)) var = luaL_check ## type(L, -1); \
 	lua_pop(L, 1);
 
 	if (lua_gettop(L) == 4) {
@@ -455,7 +418,7 @@ int L_Player::message_box(lua_State * L) {
 
 		// This must be done manually
 		lua_getfield(L, 4, "field");
-		if (not lua_isnil(L, -1)) {
+		if (!lua_isnil(L, -1)) {
 			Coords c = (*get_user_class<L_Field>(L, -1))->coords();
 			game.get_ipl()->move_view_to(c);
 		}
@@ -731,12 +694,12 @@ int L_Player::get_buildings(lua_State * L) {
 	lua_newtable(L);
 
 	uint32_t cidx = 1;
-	container_iterate_const(std::vector<Building_Index>, houses, i) {
+	for (const Building_Index& house : houses) {
 		const std::vector<Widelands::Player::Building_Stats> & vec =
-			p.get_building_statistics(*i.current);
+			p.get_building_statistics(house);
 
 		if (return_array) {
-			lua_pushstring(L, p.tribe().get_building_descr(*i.current)->name());
+			lua_pushstring(L, p.tribe().get_building_descr(house)->name());
 			lua_newtable(L);
 			cidx = 1;
 		}
@@ -746,7 +709,7 @@ int L_Player::get_buildings(lua_State * L) {
 				continue;
 
 			lua_pushuint32(L, cidx++);
-			upcasted_immovable_to_lua(L, (*map)[vec[l].pos].get_immovable());
+			upcasted_map_object_to_lua(L, (*map)[vec[l].pos].get_immovable());
 			lua_rawset(L, -3);
 		}
 
@@ -754,50 +717,6 @@ int L_Player::get_buildings(lua_State * L) {
 			lua_rawset(L, -3);
 	}
 	return 1;
-}
-
-/* RST
-	.. method:: set_flag_style(name)
-
-		Sets the appearance of the flags for this player to the given style.
-		The style must be defined for the tribe.
-
-		:arg name: name of style
-		:type name: :class:`string`
-*/
-// UNTESTED, UNUSED so far
-int L_Player::set_flag_style(lua_State * L) {
-	Player & p = get(L, get_game(L));
-	const char * name = luaL_checkstring(L, 2);
-
-	try {
-		p.set_flag_style(p.tribe().flag_style_index(name));
-	} catch (Tribe_Descr::Nonexistent &) {
-		report_error(L, "Flag style <%s> does not exist!\n", name);
-	}
-	return 0;
-}
-
-/* RST
-	.. method:: set_frontier_style(name)
-
-		Sets the appearance of the frontiers for this player to the given style.
-		The style must be defined for the tribe.
-
-		:arg name: name of style
-		:type name: :class:`string`
-*/
-// UNTESTED, UNUSED so far
-int L_Player::set_frontier_style(lua_State * L) {
-	Player & p = get(L, get_game(L));
-	const char * name = luaL_checkstring(L, 2);
-
-	try {
-		p.set_frontier_style(p.tribe().frontier_style_index(name));
-	} catch (Tribe_Descr::Nonexistent &) {
-		report_error(L, "Frontier style <%s> does not exist!\n", name);
-	}
-	return 0;
 }
 
 /* RST
@@ -854,8 +773,8 @@ int L_Player::allow_workers(lua_State * L) {
 		tribe.worker_types_without_cost();
 
 	for (Ware_Index i = 0; i < tribe.get_nrworkers(); ++i) {
-		const Worker_Descr & worker_descr = *tribe.get_worker_descr(i);
-		if (not worker_descr.is_buildable())
+		const WorkerDescr & worker_descr = *tribe.get_worker_descr(i);
+		if (!worker_descr.is_buildable())
 			continue;
 
 		player.allow_worker_type(i, true);
@@ -875,10 +794,11 @@ int L_Player::allow_workers(lua_State * L) {
 			}
 			for (uint32_t j = player.get_nr_economies(); j;) {
 				Economy & economy = *player.get_economy_by_number(--j);
-				container_iterate_const
-					(std::vector<Warehouse *>, economy.warehouses(), k)
-					(*k.current)->enable_spawn
+
+				for (Warehouse * warehouse : economy.warehouses()) {
+					warehouse->enable_spawn
 						(game, worker_types_without_cost_index);
+				}
 			}
 		}
 	}
@@ -945,9 +865,9 @@ int L_Player::m_allow_forbid_buildings(lua_State * L, bool allow)
 	std::vector<Building_Index> houses;
 	m_parse_building_list(L, p.tribe(), houses);
 
-	container_iterate_const(std::vector<Building_Index>, houses, i)
-		p.allow_building_type(*i.current, allow);
-
+	for (const Building_Index& house : houses) {
+		p.allow_building_type(house, allow);
+	}
 	return 0;
 }
 
@@ -1354,4 +1274,4 @@ void luaopen_wlgame(lua_State * L) {
 	register_class<L_Message>(L, "game");
 }
 
-};
+}

@@ -17,17 +17,17 @@
  *
  */
 
-#ifndef BOB_H
-#define BOB_H
+#ifndef WL_LOGIC_BOB_H
+#define WL_LOGIC_BOB_H
 
+#include "base/macros.h"
+#include "base/point.h"
 #include "economy/route.h"
 #include "graphic/animation.h"
 #include "graphic/diranimations.h"
 #include "logic/instances.h"
 #include "logic/walkingdir.h"
 #include "logic/widelands_geometry.h"
-#include "point.h"
-#include "port.h"
 
 class Profile;
 
@@ -51,15 +51,16 @@ struct BobProgramBase {
 class Bob;
 
 // Description for the Bob class.
-class BobDescr : public Map_Object_Descr {
+class BobDescr : public MapObjectDescr {
 public:
 	friend struct Map_Bobdata_Data_Packet;
 
-	BobDescr(const std::string& init_name,
+	BobDescr(MapObjectType type,
+	         const std::string& init_name,
 	         const std::string& init_descname,
 	         Tribe_Descr const* tribe);
+	~BobDescr() override {}
 
-	virtual ~BobDescr() {};
 	Bob& create(Editor_Game_Base&, Player* owner, const Coords&) const;
 
 	Tribe_Descr const* get_owner_tribe() const {
@@ -76,6 +77,7 @@ protected:
 
 private:
 	const Tribe_Descr* const owner_tribe_;  //  nullptr if world bob
+	DISALLOW_COPY_AND_ASSIGN(BobDescr);
 };
 
 /**
@@ -148,7 +150,7 @@ private:
  * To this end, a task may have a \ref Task::pop method. If this method
  * exists, it is always called just before the task is popped from the stack.
  */
-class Bob : public Map_Object {
+class Bob : public MapObject {
 public:
 	friend class Map;
 	friend struct Map_Bobdata_Data_Packet;
@@ -157,7 +159,6 @@ public:
 	struct State;
 	typedef void (Bob::*Ptr)(Game &, State &);
 	typedef void (Bob::*PtrSignal)(Game &, State &, const std::string &);
-	enum Type {CRITTER, WORKER, SHIP};
 
 	/// \see struct Bob for in-depth explanation
 	struct Task {
@@ -221,19 +222,14 @@ public:
 		const BobProgramBase * program; ///< pointer to current program
 	};
 
-	MO_DESCR(BobDescr);
+	MO_DESCR(BobDescr)
 
 	uint32_t get_current_anim() const {return m_anim;}
 	int32_t get_animstart() const {return m_animstart;}
 
-	virtual int32_t get_type() const override {return BOB;}
-	virtual char const * type_name() const override {return "bob";}
-	virtual Type get_bob_type() const = 0;
-	const std::string & name() const {return descr().name();}
-
-	virtual void init(Editor_Game_Base &) override;
-	virtual void cleanup(Editor_Game_Base &) override;
-	virtual void act(Game &, uint32_t data) override;
+	void init(Editor_Game_Base &) override;
+	void cleanup(Editor_Game_Base &) override;
+	void act(Game &, uint32_t data) override;
 	void schedule_destroy(Game &);
 	void schedule_act(Game &, uint32_t tdelta);
 	void skip_act();
@@ -243,8 +239,6 @@ public:
 	void set_position(Editor_Game_Base &, const Coords &);
 	const FCoords & get_position() const {return m_position;}
 	Bob * get_next_bob() const {return m_linknext;}
-
-	uint32_t vision_range() const {return descr().vision_range();}
 
 	/// Check whether this bob should be able to move onto the given node.
 	///
@@ -257,7 +251,7 @@ public:
 		(const Editor_Game_Base &, RenderTarget &, const Point&) const;
 
 	// For debug
-	virtual void log_general_info(const Editor_Game_Base &) override;
+	void log_general_info(const Editor_Game_Base &) override;
 
 	// default tasks
 	void reset_tasks(Game &);
@@ -311,7 +305,7 @@ public:
 	void signal_handled();
 
 	/// Automatically select a task.
-	virtual void init_auto_task(Game &) {};
+	virtual void init_auto_task(Game &) {}
 
 	// low level animation and walking handling
 	void set_animation(Editor_Game_Base &, uint32_t anim);
@@ -387,13 +381,13 @@ private:
 
 	// saving and loading
 protected:
-	struct Loader : public Map_Object::Loader {
+	struct Loader : public MapObject::Loader {
 	public:
 		Loader();
 
 		void load(FileRead &);
-		virtual void load_pointers() override;
-		virtual void load_finish() override;
+		void load_pointers() override;
+		void load_finish() override;
 
 	protected:
 		virtual const Task * get_task(const std::string & name);
@@ -409,12 +403,12 @@ protected:
 	};
 
 public:
-	virtual bool has_new_save_support() override {return true;}
+	bool has_new_save_support() override {return true;}
 
-	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
+	void save(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
 	// Pure Bobs cannot be loaded
 };
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_BOB_H

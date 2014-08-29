@@ -19,8 +19,8 @@
 
 #include "editor/ui_menus/editor_player_menu_allowed_buildings_menu.h"
 
+#include "base/i18n.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "logic/map.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
@@ -111,12 +111,12 @@ Editor_Player_Menu_Allowed_Buildings_Menu
 	const Widelands::Tribe_Descr & tribe = player.tribe();
 	Building_Index const nr_buildings = tribe.get_nrbuildings();
 	for (Building_Index i = 0; i < nr_buildings; ++i) {
-		const Widelands::Building_Descr & building =
+		const Widelands::BuildingDescr & building =
 			*tribe.get_building_descr(i);
-		if (not building.is_enhanced() and not building.is_buildable())
+		if (!building.is_enhanced() && !building.is_buildable())
 			continue;
 		(m_player.is_building_type_allowed(i) ? m_allowed : m_forbidden).add
-			(building.descname().c_str(), i, building.get_buildicon());
+			(building.descname().c_str(), i, building.get_icon());
 	}
 	m_forbidden.sort();
 	m_allowed  .sort();
@@ -153,12 +153,12 @@ void Editor_Player_Menu_Allowed_Buildings_Menu::clicked(const bool allow) {
 
 	Building_Index const building_index = source.get_selected();
 	source.remove_selected();
-	const Widelands::Building_Descr & building =
+	const Widelands::BuildingDescr & building =
 		*m_player.tribe().get_building_descr(building_index);
 	target.add
 		(building.descname().c_str(),
 		 building_index,
-		 building.get_buildicon());
+		 building.get_icon());
 	target.sort();
 	m_player.allow_building_type(building_index, allow);
 }

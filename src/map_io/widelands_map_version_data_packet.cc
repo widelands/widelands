@@ -36,7 +36,7 @@ void Map_Version_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
-	 Map_Map_Object_Loader &)
+	 MapMapObjectLoader &)
 {
 	if (skip)
 		return;
@@ -78,7 +78,7 @@ void Map_Version_Data_Packet::Read
 
 
 void Map_Version_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
+	(FileSystem & fs, Editor_Game_Base & egbase, MapMapObjectSaver &)
 {
 	Profile prof;
 	Section & globs = prof.create_section("global");
@@ -113,7 +113,7 @@ void Map_Version_Data_Packet::Write
 	//
 	// For now, these are meaningless. Let's hope it will not stay that way!
 
-	// FIXME -- we could store the unix time in uint32, as a partial fix to 2038 problem.
+	// TODO(unknown): -- we could store the unix time in uint32, as a partial fix to 2038 problem.
 	// There seems to be a get_safe_natural method, but not corresponding setter.
 
 	Map & map = egbase.map();

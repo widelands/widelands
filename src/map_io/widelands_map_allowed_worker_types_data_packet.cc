@@ -19,12 +19,12 @@
 
 #include "map_io/widelands_map_allowed_worker_types_data_packet.h"
 
+#include "base/macros.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "profile/profile.h"
-#include "upcast.h"
 
 namespace Widelands {
 
@@ -34,7 +34,7 @@ void Map_Allowed_Worker_Types_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
 	 bool                    skip,
-	 Map_Map_Object_Loader &)
+	 MapMapObjectLoader &)
 {
 	if (skip)
 		return;
@@ -63,7 +63,7 @@ void Map_Allowed_Worker_Types_Data_Packet::Read
 						continue;
 
 					for (Ware_Index w = 0; w < tribe.get_nrworkers(); ++w) {
-						const Worker_Descr & w_descr = *tribe.get_worker_descr(w);
+						const WorkerDescr & w_descr = *tribe.get_worker_descr(w);
 						if (w_descr.is_buildable())
 							player->allow_worker_type
 								(w, s->get_bool(w_descr.name().c_str(), true));
@@ -83,7 +83,7 @@ void Map_Allowed_Worker_Types_Data_Packet::Read
 
 
 void Map_Allowed_Worker_Types_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
+	(FileSystem & fs, Editor_Game_Base & egbase, MapMapObjectSaver &)
 {
 	Profile prof;
 	prof.create_section("global").set_int

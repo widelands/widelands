@@ -21,11 +21,12 @@
 
 #include <SDL_keysym.h>
 
+#include "base/i18n.h"
+#include "base/macros.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_place_bob_tool.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
-#include "logic/critter_bob.h"
+#include "logic/critter.h"
 #include "logic/map.h"
 #include "logic/world/world.h"
 #include "ui_basic/box.h"
@@ -33,7 +34,6 @@
 #include "ui_basic/checkbox.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
-#include "upcast.h"
 #include "wlapplication.h"
 
 
@@ -42,7 +42,7 @@ Editor_Tool_Place_Bob_Options_Menu::Editor_Tool_Place_Bob_Options_Menu
 	 Editor_Place_Bob_Tool      & pit,
 	 UI::UniqueWindow::Registry & registry)
 :
-Editor_Tool_Options_Menu(parent, registry, 100, 100, _("Bobs")),
+Editor_Tool_Options_Menu(parent, registry, 100, 100, _("Animals")),
 
 m_tabpanel          (this, 0, 0, g_gr->images().get("pics/but1.png")),
 m_pit               (pit),
@@ -88,7 +88,7 @@ m_click_recursion_protect(false)
 		}
 
 		const Widelands::BobDescr & descr = *world.get_bob_descr(i);
-		upcast(Widelands::Critter_Bob_Descr const, critter_descr, &descr);
+		upcast(Widelands::CritterDescr const, critter_descr, &descr);
 		UI::Checkbox & cb = *new UI::Checkbox
 			(box,
 			 pos,
@@ -120,17 +120,17 @@ void Editor_Tool_Place_Bob_Options_Menu::clicked
 	if (m_click_recursion_protect)
 		return;
 
-	//  FIXME This code is erroneous. It checks the current key state. What it
-	//  FIXME needs is the key state at the time the mouse was clicked. See the
-	//  FIXME usage comment for get_key_state.
+	//  TODO(unknown): This code is erroneous. It checks the current key state. What it
+	//  TODO(unknown): needs is the key state at the time the mouse was clicked. See the
+	//  TODO(unknown): usage comment for get_key_state.
 	const bool multiselect =
 		get_key_state(SDLK_LCTRL) | get_key_state(SDLK_RCTRL);
-	if (not t and (not multiselect or m_pit.get_nr_enabled() == 1)) {
+	if (!t && (!multiselect || m_pit.get_nr_enabled() == 1)) {
 		m_checkboxes[n]->set_state(true);
 		return;
 	}
 
-	if (not multiselect) {
+	if (!multiselect) {
 		for (uint32_t i = 0; m_pit.get_nr_enabled(); ++i) m_pit.enable(i, false);
 
 		//  disable all checkboxes

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef FULLSCREEN_MENU_INTERNET_LOBBY_H
-#define FULLSCREEN_MENU_INTERNET_LOBBY_H
+#ifndef WL_UI_FSMENU_INTERNET_LOBBY_H
+#define WL_UI_FSMENU_INTERNET_LOBBY_H
 
 #include <cstring>
 #include <string>
@@ -39,7 +39,7 @@ struct Fullscreen_Menu_Internet_Lobby : public Fullscreen_Menu_Base {
 
 	Fullscreen_Menu_Internet_Lobby (const char *, const char *, bool);
 
-	virtual void think() override;
+	void think() override;
 
 	/// \returns the maximum number of clients that may connect
 	int32_t get_maxclients() {
@@ -87,4 +87,4 @@ private:
 	bool compare_clienttype(unsigned int rowa, unsigned int rowb);
 };
 
-#endif
+#endif  // end of include guard: WL_UI_FSMENU_INTERNET_LOBBY_H

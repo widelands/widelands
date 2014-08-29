@@ -17,12 +17,14 @@
  *
  */
 
-#ifndef WLAPPLICATION_H
-#define WLAPPLICATION_H
+#ifndef WL_WLAPPLICATION_H
+#define WL_WLAPPLICATION_H
 
 //Workaround for bug http://sourceforge.net/p/mingw/bugs/2152/
 #ifdef __MINGW32__
+#ifndef _WIN64
 #define _USE_32BIT_TIME_T 1
+#endif
 #endif
 
 #include <cstring>
@@ -32,9 +34,8 @@
 
 #include <SDL_events.h>
 #include <SDL_keyboard.h>
-#include <SDL_types.h>
 
-#include "point.h"
+#include "base/point.h"
 
 
 namespace Widelands {class Game;}
@@ -45,19 +46,18 @@ struct Parameter_error : public std::runtime_error {
 	explicit Parameter_error(std::string text)
 		: std::runtime_error(text)
 	{}
-	virtual ~Parameter_error() throw () {}
 };
 
 // input
 struct InputCallback {
 	void (*mouse_press)
-	(const Uint8 button, // Button number as #defined in SDL_mouse.h.
+	(const uint8_t button, // Button number as #defined in SDL_mouse.h.
 	 int32_t x, int32_t y);      // The coordinates of the mouse at press time.
 	void (*mouse_release)
-	(const Uint8 button, // Button number as #defined in SDL_mouse.h.
+	(const uint8_t button, // Button number as #defined in SDL_mouse.h.
 	 int32_t x, int32_t y);      // The coordinates of the mouse at release time.
 	void (*mouse_move)
-	(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+	(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	void (*key)        (bool down, SDL_keysym code);
 };
 
@@ -70,10 +70,10 @@ struct InputCallback {
 /// i18n, input handling, timing, low level networking and graphics setup (the
 /// actual graphics work is done by Graphic).
 ///
-/// \todo Is the above part about i18n still true? \#bedouin
-///
-/// Equally important, the main event loop is chugging along in this class.
-/// [not yet but some time in the future \#bedouin8sep2007]
+// TODO(bedouin): Is the above part about i18n still true?
+//
+// Equally important, the main event loop is chugging along in this class.
+// [not yet but some time in the future \#bedouin8sep2007]
 ///
 /// \par WLApplication is a singleton
 ///
@@ -119,14 +119,15 @@ struct InputCallback {
 /// Ordinarily, relative coordinates break down when the cursor leaves the
 /// window. This means we have to grab the mouse, then relative coords are
 /// always available.
-/// \todo Actually do grab the mouse when it is locked
-///
-/// \todo Graphics are currently not handled by WLApplication, and it is
-/// non essential for playback anyway. Additionally, we will want several
-/// rendering backends (software and OpenGL). Maybe the graphics backend loader
-/// code should be in System, while the actual graphics work is done elsewhere.
-/// \todo Refactor the mainloop
-/// \todo Sensible use of exceptions (goes for whole game)
+// TODO(unknown): Actually do grab the mouse when it is locked
+// TODO(unknown): Graphics are currently not handled by WLApplication, and it is
+// non essential for playback anyway. Additionally, we will want several
+// rendering backends (software and OpenGL). Maybe the graphics backend loader
+// code should be in System, while the actual graphics work is done elsewhere.
+// TODO(unknown): Refactor the mainloop
+// TODO(unknown): Sensible use of exceptions (goes for whole game)
+// TODO(sirver): this class makes no sense for c++ - most of these should be
+// stand alone functions.
 struct WLApplication {
 	static WLApplication * get(int const argc = 0, char const * * argv = nullptr);
 	~WLApplication();
@@ -265,4 +266,4 @@ private:
 
 };
 
-#endif
+#endif  // end of include guard: WL_WLAPPLICATION_H

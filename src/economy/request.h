@@ -17,13 +17,13 @@
  *
  */
 
-#ifndef REQUEST_H
-#define REQUEST_H
+#ifndef WL_ECONOMY_REQUEST_H
+#define WL_ECONOMY_REQUEST_H
 
+#include "economy/trackptr.h"
 #include "logic/requirements.h"
 #include "logic/wareworker.h"
 #include "logic/widelands.h"
-#include "trackptr.h"
 
 class FileRead;
 class FileWrite;
@@ -34,8 +34,8 @@ class Economy;
 class Editor_Game_Base;
 struct Flag;
 class Game;
-class Map_Map_Object_Loader;
-struct Map_Map_Object_Saver;
+class MapMapObjectLoader;
+struct MapMapObjectSaver;
 struct PlayerImmovable;
 class RequestList;
 struct Requirements;
@@ -93,8 +93,8 @@ public:
 
 	void start_transfer(Game &, Supply &);
 
-	void Read (FileRead  &, Game &, Map_Map_Object_Loader &);
-	void Write(FileWrite &, Game &, Map_Map_Object_Saver  &) const;
+	void Read (FileRead  &, Game &, MapMapObjectLoader &);
+	void Write(FileWrite &, Game &, MapMapObjectSaver  &) const;
 	Worker * get_transfer_worker();
 
 	//  callbacks for WareInstance/Worker code
@@ -143,4 +143,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_ECONOMY_REQUEST_H

@@ -2,6 +2,10 @@ size=medium
 output=ration
 enhancement=inn
 
+[aihints]
+build_material=false
+is_food_basic=true
+
 [buildcost]
 log=3
 blackwood=2
@@ -13,9 +17,6 @@ log=1
 blackwood=1
 raw_stone=1
 
-[aihints]
-build_material=false
-
 [working positions]
 innkeeper=1
 
@@ -25,20 +26,15 @@ pittabread=4
 meat=4
 
 [programs]
-produce_ration=_Produce ration
-work=_Work
-
-[produce_ration]
-return=skipped unless economy needs ration
-consume=fish,pittabread,meat
-sleep=14000
-animate=working 19000
-produce=ration
+# TRANSLATORS: "Completed/Skipped/Did not start preparing a ration because ...
+work=_preparing a ration
 
 [work]
-call=produce_ration
-return=skipped
-
+sleep=14000
+return=skipped unless economy needs ration
+consume=fish,pittabread,meat
+animate=working 19000
+produce=ration
 
 [idle]
 pics=tavern_i_??.png  # ???

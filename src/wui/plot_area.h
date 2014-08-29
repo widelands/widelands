@@ -17,14 +17,14 @@
  *
  */
 
-#ifndef WUI_PLOT_AREA_H
-#define WUI_PLOT_AREA_H
+#ifndef WL_WUI_PLOT_AREA_H
+#define WL_WUI_PLOT_AREA_H
 
 #include <vector>
 
 #include <boost/bind.hpp>
 
-#include "rgbcolor.h"
+#include "graphic/color.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/slider.h"
 
@@ -55,7 +55,7 @@ struct WUIPlot_Area : public UI::Panel {
 	WUIPlot_Area
 		(UI::Panel * parent, int32_t x, int32_t y, int32_t w, int32_t h);
 
-	virtual void draw(RenderTarget &) override;
+	void draw(RenderTarget &) override;
 
 	void set_time(TIME id) {
 		m_time = id;
@@ -66,14 +66,14 @@ struct WUIPlot_Area : public UI::Panel {
 			set_time(TIME_GAME);
 		else
 			set_time(static_cast<TIME>(time));
-	};
-	TIME get_time() {return static_cast<TIME>(m_time); };
+	}
+	TIME get_time() {return static_cast<TIME>(m_time); }
 	int32_t get_time_id() {
 		if (m_time == TIME_GAME)
 			return m_game_time_id;
 		else
 			return m_time;
-	};
+	}
 	void set_sample_rate(uint32_t id); // in milliseconds
 
 	int32_t get_game_time_id();
@@ -157,7 +157,7 @@ public:
 	DifferentialPlot_Area
 		(UI::Panel * parent, int32_t x, int32_t y, int32_t w, int32_t h);
 
-	virtual void draw(RenderTarget &) override;
+	void draw(RenderTarget &) override;
 
 	void register_negative_plot_data
 		(uint32_t id, const std::vector<uint32_t> * data);
@@ -174,4 +174,4 @@ private:
 };
 
 
-#endif
+#endif  // end of include guard: WL_WUI_PLOT_AREA_H

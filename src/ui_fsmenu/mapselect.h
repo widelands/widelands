@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef FULLSCREEN_MENU_MAPSELECT_H
-#define FULLSCREEN_MENU_MAPSELECT_H
+#ifndef WL_UI_FSMENU_MAPSELECT_H
+#define WL_UI_FSMENU_MAPSELECT_H
 
 #include <set>
 #include <string>
@@ -111,4 +111,4 @@ private:
 	GameController       * m_ctrl;
 };
 
-#endif
+#endif  // end of include guard: WL_UI_FSMENU_MAPSELECT_H

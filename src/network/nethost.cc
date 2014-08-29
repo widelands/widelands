@@ -19,23 +19,25 @@
 
 #include "network/nethost.h"
 
+#include <memory>
 #include <sstream>
 
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
-#include <libintl.h>
 #ifndef _WIN32
 #include <unistd.h> // for usleep
 #endif
 
+#include "ai/computer_player.h"
+#include "base/i18n.h"
+#include "base/md5.h"
+#include "base/wexception.h"
 #include "build_info.h"
-#include "chat.h"
-#include "computer_player.h"
+#include "chat/chat.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
 #include "helper.h"
-#include "i18n.h"
 #include "io/dedicated_log.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -45,7 +47,7 @@
 #include "logic/playersmanager.h"
 #include "logic/tribe.h"
 #include "map_io/widelands_map_loader.h"
-#include "md5.h"
+#include "network/constants.h"
 #include "network/internet_gaming.h"
 #include "network/network_gaming_messages.h"
 #include "network/network_lan_promotion.h"
@@ -55,8 +57,7 @@
 #include "profile/profile.h"
 #include "scripting/scripting.h"
 #include "ui_basic/progresswindow.h"
-#include "ui_fsmenu/launchMPG.h"
-#include "wexception.h"
+#include "ui_fsmenu/launch_mpg.h"
 #include "wlapplication.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
@@ -73,12 +74,12 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		m_lua = nullptr;
 	}
 
-	virtual void setScenario(bool is_scenario) override {h->setScenario(is_scenario);}
+	void setScenario(bool is_scenario) override {h->setScenario(is_scenario);}
 
-	virtual const GameSettings & settings() override {return h->settings();}
+	const GameSettings & settings() override {return h->settings();}
 
-	virtual bool canChangeMap() override {return true;}
-	virtual bool canChangePlayerState(uint8_t const number) override {
+	bool canChangeMap() override {return true;}
+	bool canChangePlayerState(uint8_t const number) override {
 		if (settings().savegame)
 			return settings().players.at(number).state != PlayerSettings::stateClosed;
 		else if (settings().scenario)
@@ -92,15 +93,15 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 				settings().players.at(number).state == PlayerSettings::stateClosed;
 		return true;
 	}
-	virtual bool canChangePlayerTribe(uint8_t const number) override {
+	bool canChangePlayerTribe(uint8_t const number) override {
 		return canChangePlayerTeam(number);
 	}
-	virtual bool canChangePlayerInit(uint8_t const number) override {
+	bool canChangePlayerInit(uint8_t const number) override {
 		if (settings().scenario || settings().savegame)
 			return false;
 		return number < settings().players.size();
 	}
-	virtual bool canChangePlayerTeam(uint8_t number) override {
+	bool canChangePlayerTeam(uint8_t number) override {
 		if (settings().scenario || settings().savegame)
 			return false;
 		if (number >= settings().players.size())
@@ -111,7 +112,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			settings().players.at(number).state == PlayerSettings::stateComputer;
 	}
 
-	virtual bool canLaunch() override {return h->canLaunch();}
+	bool canLaunch() override {return h->canLaunch();}
 
 	virtual void setMap
 		(const std::string &       mapname,
@@ -129,7 +130,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 
 		h->setPlayerState(number, state);
 	}
-	virtual void nextPlayerState(uint8_t const number) override {
+	void nextPlayerState(uint8_t const number) override {
 		if (number > settings().players.size())
 			return;
 
@@ -232,7 +233,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			h->setPlayerTribe(number, tribe, random_tribe);
 	}
 
-	virtual void setPlayerTeam(uint8_t number, Widelands::TeamNumber team) override
+	void setPlayerTeam(uint8_t number, Widelands::TeamNumber team) override
 	{
 		if (number >= h->settings().players.size())
 			return;
@@ -243,57 +244,57 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			h->setPlayerTeam(number, team);
 	}
 
-	virtual void setPlayerCloseable(uint8_t number, bool closeable) override {
+	void setPlayerCloseable(uint8_t number, bool closeable) override {
 		if (number >= h->settings().players.size())
 			return;
 		h->setPlayerCloseable(number, closeable);
 	}
 
-	virtual void setPlayerShared(uint8_t number, uint8_t shared) override {
+	void setPlayerShared(uint8_t number, uint8_t shared) override {
 		if (number >= h->settings().players.size())
 			return;
 		h->setPlayerShared(number, shared);
 	}
 
-	virtual void setPlayerInit(uint8_t const number, uint8_t const index) override {
+	void setPlayerInit(uint8_t const number, uint8_t const index) override {
 		if (number >= h->settings().players.size())
 			return;
 
 		h->setPlayerInit(number, index);
 	}
 
-	virtual void setPlayerAI(uint8_t number, const std::string & name, bool const random_ai = false) override {
+	void setPlayerAI(uint8_t number, const std::string & name, bool const random_ai = false) override {
 		h->setPlayerAI(number, name, random_ai);
 	}
 
-	virtual void setPlayerName(uint8_t const number, const std::string & name) override {
+	void setPlayerName(uint8_t const number, const std::string & name) override {
 		if (number >= h->settings().players.size())
 			return;
 		h->setPlayerName(number, name);
 	}
 
-	virtual void setPlayer(uint8_t const number, PlayerSettings const ps) override {
+	void setPlayer(uint8_t const number, PlayerSettings const ps) override {
 		if (number >= h->settings().players.size())
 			return;
 		h->setPlayer(number, ps);
 	}
 
-	virtual void setPlayerNumber(uint8_t const number) override {
+	void setPlayerNumber(uint8_t const number) override {
 		if
-			(number == UserSettings::none() or
+			(number == UserSettings::none() ||
 			 number < h->settings().players.size())
 			h->setPlayerNumber(number);
 	}
 
-	virtual std::string getWinConditionScript() override {
+	std::string getWinConditionScript() override {
 		return h->settings().win_condition_script;
 	}
 
-	virtual void setWinConditionScript(std::string wc) override {
+	void setWinConditionScript(std::string wc) override {
 		h->setWinConditionScript(wc);
 	}
 
-	virtual void nextWinCondition() override {
+	void nextWinCondition() override {
 		if (m_win_condition_scripts.size() < 1) {
 			if (!m_lua)
 				m_lua = new LuaInterface();
@@ -513,7 +514,7 @@ struct HostChatProvider : public ChatProvider {
 
 	void receive(const ChatMessage & msg) {
 		messages.push_back(msg);
-		ChatProvider::send(msg);
+		Notifications::publish(msg);
 	}
 
 private:
@@ -667,7 +668,7 @@ NetHost::~NetHost ()
 {
 	clearComputerPlayers();
 
-	while (d->clients.size() > 0) {
+	while (!d->clients.empty()) {
 		disconnectClient(0, "SERVER_LEFT");
 		reaper();
 	}
@@ -764,9 +765,9 @@ void NetHost::run(bool const autorun)
 		// Setup by the users
 		log ("[Dedicated] Entering set up mode, waiting for user interaction!\n");
 
-		while (not d->dedicated_start) {
+		while (!d->dedicated_start) {
 			handle_network();
-			// TODO this should be improved.
+			// TODO(unknown): this should be improved.
 #ifndef _WIN32
 			if (d->clients.empty()) {
 				if (usleep(100000)) // Sleep for 0.1 seconds - there is not anybody connected anyways.
@@ -865,7 +866,7 @@ void NetHost::run(bool const autorun)
 				igb =
 					new Interactive_Player
 						(game, g_options.pull_section("global"),
-						pn, d->settings.scenario, true);
+						pn, true);
 			} else
 				igb =
 					new Interactive_Spectator
@@ -1021,8 +1022,6 @@ void NetHost::send(ChatMessage msg)
 		broadcast(s);
 
 		d->chat.receive(msg);
-
-		dedicatedlog("[Host]: chat: %s\n", msg.toPlainString().c_str());
 	} else { //  personal messages
 		SendPacket s;
 		s.Unsigned8(NETCMD_CHAT);
@@ -1257,8 +1256,9 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 		} else {
 			//try to save the game
 			std::string savename =  "save/" + arg1;
-			if (arg2.size() > 0) // only add space and arg2, if arg2 has anything to print.
+			if (!arg2.empty()) { // only add space and arg2, if arg2 has anything to print.
 				savename += " " + arg2;
+			}
 			savename += ".wgf";
 			std::string * error = new std::string();
 			SaveHandler & sh = d->game->save_handler();
@@ -1303,7 +1303,7 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 }
 
 void NetHost::dserver_send_maps_and_saves(Client & client) {
-	assert (not d->game);
+	assert (!d->game);
 
 	if (d->settings.maps.empty()) {
 		// Read in maps
@@ -1314,8 +1314,8 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 			directories.resize(directories.size() - 1);
 			Widelands::Map map;
 			const filenameset_t & gamefiles = files;
-			container_iterate_const(filenameset_t, gamefiles, i) {
-				char const * const name = i.current->c_str();
+			for (const std::string& temp_filenames : gamefiles) {
+				char const * const name = temp_filenames.c_str();
 				std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(name);
 				if (ml) {
 					map.set_filename(name);
@@ -1346,8 +1346,8 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 		Widelands::Game game;
 		Widelands::Game_Preload_Data_Packet gpdp;
 		const filenameset_t & gamefiles = files;
-		container_iterate_const(filenameset_t, gamefiles, i) {
-			char const * const name = i.current->c_str();
+		for (const std::string& temp_filenames : gamefiles) {
+			char const * const name = temp_filenames.c_str();
 			try {
 				Widelands::Game_Loader gl(name, game);
 				gl.preload_game(gpdp);
@@ -1533,7 +1533,7 @@ void NetHost::setMap
 	broadcast(s);
 
 	// If possible, offer the map / saved game as transfer
-	// TODO not yet able to handle directory type maps / savegames
+	// TODO(unknown): not yet able to handle directory type maps / savegames
 	if (!g_fs->IsDirectory(mapfilename)) {
 		// Read in the file
 		FileRead fr;
@@ -1646,10 +1646,10 @@ void NetHost::setPlayerTribe(uint8_t const number, const std::string & tribe, bo
 		actual_tribe = d->settings.tribes.at(random).name;
 	}
 
-	container_iterate_const(std::vector<TribeBasicInfo>, d->settings.tribes, i)
-		if (i.current->name == player.tribe) {
+	for (const TribeBasicInfo& temp_tribeinfo : d->settings.tribes) {
+		if (temp_tribeinfo.name == player.tribe) {
 			player.tribe = actual_tribe;
-			if (i.current->initializations.size() <= player.initialization_index)
+			if (temp_tribeinfo.initializations.size() <= player.initialization_index)
 				player.initialization_index = 0;
 
 			//  broadcast changes
@@ -1660,6 +1660,7 @@ void NetHost::setPlayerTribe(uint8_t const number, const std::string & tribe, bo
 			broadcast(s);
 			return;
 		}
+	}
 	log
 		("Player %u attempted to change to tribe %s; not a valid tribe\n",
 		 number, tribe.c_str());
@@ -1675,9 +1676,9 @@ void NetHost::setPlayerInit(uint8_t const number, uint8_t const index)
 	if (player.initialization_index == index)
 		return;
 
-	container_iterate_const(std::vector<TribeBasicInfo>, d->settings.tribes, i)
-		if (i.current->name == player.tribe) {
-			if (index < i.current->initializations.size()) {
+	for (const TribeBasicInfo& temp_tribeinfo : d->settings.tribes) {
+		if (temp_tribeinfo.name == player.tribe) {
+			if (index < temp_tribeinfo.initializations.size()) {
 				player.initialization_index = index;
 
 				//  broadcast changes
@@ -1693,6 +1694,7 @@ void NetHost::setPlayerInit(uint8_t const number, uint8_t const index)
 					 "for player %u.\n", index, number);
 			return;
 		}
+	}
 	assert(false);
 }
 
@@ -1918,9 +1920,11 @@ void NetHost::setPaused(bool /* paused */)
 // Send the packet to all properly connected clients
 void NetHost::broadcast(SendPacket & packet)
 {
-	container_iterate_const(std::vector<Client>, d->clients, i)
-		if (i.current->playernum != UserSettings::notConnected())
-			packet.send(i.current->sock);
+	for (const Client& client : d->clients) {
+		if (client.playernum != UserSettings::notConnected()) {
+			packet.send(client.sock);
+		}
+	}
 }
 
 void NetHost::writeSettingMap(SendPacket & packet)
@@ -1973,7 +1977,7 @@ void NetHost::writeSettingAllUsers(SendPacket & packet)
 * \returns true if the data was written, else false
 */
 bool NetHost::writeMapTransferInfo(SendPacket & s, std::string mapfilename) {
-	// TODO not yet able to handle directory type maps / savegames
+	// TODO(unknown): not yet able to handle directory type maps / savegames
 	if (g_fs->IsDirectory(mapfilename)) {
 		dedicatedlog("Map/Save is a directory! No way for making it available a.t.m.!\n");
 		return false;
@@ -2014,7 +2018,7 @@ std::string NetHost::getComputerPlayerName(uint8_t const playernum)
  */
 bool NetHost::haveUserName(const std::string & name, uint8_t ignoreplayer) {
 	for (uint32_t i = 0; i < d->settings.users.size(); ++i)
-		if (i != ignoreplayer and d->settings.users.at(i).name == name)
+		if (i != ignoreplayer && d->settings.users.at(i).name == name)
 			return true;
 
 	// Computer players are not handled like human users,
@@ -2022,7 +2026,7 @@ bool NetHost::haveUserName(const std::string & name, uint8_t ignoreplayer) {
 	if (ignoreplayer < d->settings.users.size())
 		ignoreplayer = d->settings.users.at(ignoreplayer).position;
 	for (uint32_t i = 0; i < d->settings.players.size(); ++i)
-		if (i != ignoreplayer and d->settings.players.at(i).name == name)
+		if (i != ignoreplayer && d->settings.players.at(i).name == name)
 			return true;
 
 	return false;

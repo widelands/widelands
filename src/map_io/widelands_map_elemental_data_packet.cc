@@ -21,7 +21,7 @@
 
 #include <boost/algorithm/string.hpp>
 
-#include "container_iterate.h"
+#include "base/deprecated.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
@@ -71,14 +71,14 @@ void Map_Elemental_Data_Packet::Pre_Read(FileSystem & fs, Map * map)
 
 
 void Map_Elemental_Data_Packet::Read
-	(FileSystem & fs, Editor_Game_Base & egbase, bool, Map_Map_Object_Loader &)
+	(FileSystem & fs, Editor_Game_Base & egbase, bool, MapMapObjectLoader &)
 {
 	Pre_Read(fs, &egbase.map());
 }
 
 
 void Map_Elemental_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
+	(FileSystem & fs, Editor_Game_Base & egbase, MapMapObjectSaver &)
 {
 
 	Profile prof;

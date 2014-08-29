@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef FULLSCREEN_MENU_OPTIONS_H
-#define FULLSCREEN_MENU_OPTIONS_H
+#ifndef WL_UI_FSMENU_OPTIONS_H
+#define WL_UI_FSMENU_OPTIONS_H
 
 #include <cstring>
 #include <string>
@@ -89,7 +89,7 @@ public:
 	};
 
 	/// Handle keypresses
-	virtual bool handle_key(bool down, SDL_keysym code) override;
+	bool handle_key(bool down, SDL_keysym code) override;
 
 private:
 	uint32_t                          m_vbutw;
@@ -153,7 +153,7 @@ public:
 	};
 
 	/// Handle keypresses
-	virtual bool handle_key(bool down, SDL_keysym code) override;
+	bool handle_key(bool down, SDL_keysym code) override;
 
 private:
 	uint32_t                    m_vbutw;
@@ -182,4 +182,4 @@ private:
 	Options_Ctrl::Options_Struct os;
 };
 
-#endif
+#endif  // end of include guard: WL_UI_FSMENU_OPTIONS_H

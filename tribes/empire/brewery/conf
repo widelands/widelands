@@ -3,6 +3,7 @@ output=beer
 
 [aihints]
 build_material=false
+is_food_basic=true
 
 [buildcost]
 log=1
@@ -21,13 +22,13 @@ water=7
 wheat=7
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start brewing because ...
+work=_brewing
 
 [work]
-return=skipped unless economy needs beer or not economy needs water
-return=skipped unless economy needs beer or not economy needs wheat
-consume=water wheat
 sleep=30000
+return=skipped unless economy needs beer
+consume=water wheat
 animate=working 30000
 produce=beer
 

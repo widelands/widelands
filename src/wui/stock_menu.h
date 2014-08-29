@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef STOCK_MENU_H
-#define STOCK_MENU_H
+#ifndef WL_WUI_STOCK_MENU_H
+#define WL_WUI_STOCK_MENU_H
 
 #include "ui_basic/unique_window.h"
 #include "wui/waresdisplay.h"
@@ -32,7 +32,7 @@ class Interactive_Player;
 struct Stock_Menu : public UI::UniqueWindow {
 	Stock_Menu(Interactive_Player &, UI::UniqueWindow::Registry &);
 
-	virtual void think() override;
+	void think() override;
 
 private:
 	Interactive_Player &  m_player;
@@ -45,4 +45,4 @@ private:
 	void fill_warehouse_waresdisplay(WaresDisplay * waresdisplay, Widelands::WareWorker type);
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_STOCK_MENU_H

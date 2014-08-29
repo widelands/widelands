@@ -19,7 +19,10 @@
 
 #include "map_io/widelands_map_saver.h"
 
-#include "log.h"
+#include "base/log.h"
+#include "base/scoped_timer.h"
+#include "base/wexception.h"
+#include "io/filesystem/filesystem.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/player.h"
@@ -49,8 +52,6 @@
 #include "map_io/widelands_map_scripting_data_packet.h"
 #include "map_io/widelands_map_terrain_data_packet.h"
 #include "map_io/widelands_map_version_data_packet.h"
-#include "scoped_timer.h"
-#include "wexception.h"
 
 namespace Widelands {
 
@@ -66,7 +67,7 @@ void Map_Saver::save() {
 	ScopedTimer timer("Map_Saver::save() took %ums");
 
 	delete m_mos;
-	m_mos = new Map_Map_Object_Saver();
+	m_mos = new MapMapObjectSaver();
 
 	// The binary data is saved in an own directory
 	// to keep it hidden from the poor debuggers
@@ -135,7 +136,7 @@ void Map_Saver::save() {
 	iterate_players_existing_const(plnum, nr_players, m_egbase, player) {
 		Building_Index const nr_buildings = player->tribe().get_nrbuildings();
 		for (Building_Index i = 0; i < nr_buildings; ++i)
-			if (not player->is_building_type_allowed(i)) {
+			if (!player->is_building_type_allowed(i)) {
 				log("Writing Allowed Building Types Data ... ");
 				Map_Allowed_Building_Types_Data_Packet p;
 				p                                  .Write(m_fs, m_egbase, *m_mos);
@@ -161,7 +162,7 @@ void Map_Saver::save() {
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Map Objects ... ");
-	{Map_Object_Packet                      p; p.Write(m_fs, m_egbase, *m_mos);}
+	{MapObjectPacket                      p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	// DATA PACKETS
@@ -200,7 +201,7 @@ void Map_Saver::save() {
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Objective Data ... ");
-	{Map_Objective_Data_Packet              p; p.Write(m_fs, m_egbase, *m_mos);}
+	{MapObjectiveDataPacket              p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 #ifndef NDEBUG

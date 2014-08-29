@@ -17,14 +17,16 @@
  *
  */
 
-#ifndef DEFAULTAI_H
-#define DEFAULTAI_H
+#ifndef WL_AI_DEFAULTAI_H
+#define WL_AI_DEFAULTAI_H
 
 #include <map>
+#include <memory>
 
 #include "ai/ai_help_structs.h"
-#include "computer_player.h"
-#include "i18n.h"
+#include "ai/computer_player.h"
+#include "base/i18n.h"
+#include "logic/immovable.h"
 
 namespace Widelands {
 struct Road;
@@ -50,28 +52,23 @@ struct Flag;
  *   only the host is running the computer player code and sends it's player
  *   commands to all other players. If this network behaviour is changed,
  *   remember to change some time() in network save random functions.
- *
- * \TODO Improvements:
- * - Improve different initialization types (Aggressive, Normal, Defensive)
- * - Improve update code - currently the whole buildable area owned by defaultAI
- *   is rechecked after construction of a building or a road. Instead it would
- *   be better to write down the changed coordinates and only check those and
- *   surrounding ones. Same applies for other parts of the code:
- *   e.g. check_militarysite checks the whole visible area for enemy area, but
- *   it would already be enough, if it checks the outer circle ring.
- * - improvements and speedups in the whole defaultAI code.
- * - handling of trainingsites (if supply line is broken - send some soldiers
- *   out, to have some more forces. Reincrease the number of soldiers that
- *   should be trained if inputs_ get filled again.).
- *
  */
+// TODO(unknown): Improvements:
+// - Improve different initialization types (Aggressive, Normal, Defensive)
+// - Improve update code - currently the whole buildable area owned by defaultAI
+//   is rechecked after construction of a building or a road. Instead it would
+//   be better to write down the changed coordinates and only check those and
+//   surrounding ones. Same applies for other parts of the code:
+//   e.g. check_militarysite checks the whole visible area for enemy area, but
+//   it would already be enough, if it checks the outer circle ring.
+// - improvements and speedups in the whole defaultAI code.
+// - handling of trainingsites (if supply line is broken - send some soldiers
+//   out, to have some more forces. Reincrease the number of soldiers that
+//   should be trained if inputs_ get filled again.).
 struct DefaultAI : Computer_Player {
 	DefaultAI(Widelands::Game&, const Widelands::Player_Number, uint8_t);
 	~DefaultAI();
-	virtual void think() override;
-
-	virtual void receive(const Widelands::NoteImmovable&) override;
-	virtual void receive(const Widelands::NoteFieldPossession&) override;
+	void think() override;
 
 	enum {
 		AGGRESSIVE = 2,
@@ -162,16 +159,16 @@ private:
 
 private:
 	// Variables of default AI
-	uint8_t type;
+	uint8_t type_;
 
 	bool m_buildable_changed;
 	bool m_mineable_changed;
 
-	Widelands::Player* player;
-	Widelands::Tribe_Descr const* tribe;
+	Widelands::Player* player_;
+	Widelands::Tribe_Descr const* tribe_;
 
-	std::vector<BuildingObserver> buildings;
-	uint32_t total_constructionsites;
+	std::vector<BuildingObserver> buildings_;
+	uint32_t num_constructionsites_;
 
 	std::list<Widelands::FCoords> unusable_fields;
 	std::list<BuildableField*> buildable_fields;
@@ -209,6 +206,9 @@ private:
 	uint16_t military_last_dismantle_;
 	int32_t military_last_build_;  // sometimes expansions just stops, this is time of last military
 	                               // building build
+
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldPossession>> field_possession_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteImmovable>> immovable_subscriber_;
 };
 
-#endif
+#endif  // end of include guard: WL_AI_DEFAULTAI_H

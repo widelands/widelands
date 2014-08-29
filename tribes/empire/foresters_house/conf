@@ -1,5 +1,9 @@
 size=small
 
+[aihints]
+space_consumer=true
+renews_map_resource=log
+
 [buildcost]
 log=1
 wood=1
@@ -12,12 +16,9 @@ stone=1
 [working positions]
 forester=1
 
-[aihints]
-space_consumer=true
-renews_map_resource=log
-
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [work]
 sleep=11000

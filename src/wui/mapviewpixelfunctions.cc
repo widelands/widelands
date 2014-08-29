@@ -19,7 +19,9 @@
 
 #include "wui/mapviewpixelfunctions.h"
 
-#include "vector.h"
+#include <cstdlib>
+
+#include "wui/vector.h"
 
 using namespace Widelands;
 
@@ -178,7 +180,7 @@ Node_and_Triangle<> MapviewPixelFunctions::calc_node_and_triangle
 			y;
 		if (lower_screen_dy < 0) {
 			row_number = next_row_number;
-			slash = not slash;
+			slash = !slash;
 		} else break;
 	}
 

@@ -17,16 +17,16 @@
  *
  */
 
-#ifndef WIDELANDS_MAP_DATA_PACKET_H
-#define WIDELANDS_MAP_DATA_PACKET_H
+#ifndef WL_MAP_IO_WIDELANDS_MAP_DATA_PACKET_H
+#define WL_MAP_IO_WIDELANDS_MAP_DATA_PACKET_H
 
 class FileSystem;
 
 namespace Widelands {
 
 class Editor_Game_Base;
-class Map_Map_Object_Loader;
-struct Map_Map_Object_Saver;
+class MapMapObjectLoader;
+struct MapMapObjectSaver;
 
 }
 
@@ -34,10 +34,9 @@ struct Map_Map_Object_Saver;
 	namespace Widelands {                                                            \
 	class name {                                                                     \
 	public:                                                                          \
-		void Read(FileSystem&, Editor_Game_Base&, bool, Map_Map_Object_Loader&); \
-		void Write(FileSystem&, Editor_Game_Base&, Map_Map_Object_Saver&);       \
+		void Read(FileSystem&, Editor_Game_Base&, bool, MapMapObjectLoader&); \
+		void Write(FileSystem&, Editor_Game_Base&, MapMapObjectSaver&);       \
 	};                                                                               \
 	}
 
-#endif
-
+#endif  // end of include guard: WL_MAP_IO_WIDELANDS_MAP_DATA_PACKET_H

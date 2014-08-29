@@ -22,11 +22,13 @@
 #include <SDL_image.h>
 
 #include "graphic/graphic.h"
+#include "graphic/image_io.h"
 #include "graphic/render/gl_surface.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface_cache.h"
 #include "graphic/texture.h"
 #include "io/fileread.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "logic/editor_game_base.h"
 #include "logic/player.h"
 #include "logic/world/terrain_description.h"
@@ -59,16 +61,8 @@ const GLSurfaceTexture * GameRendererGL::get_dither_edge_texture()
 	if (Surface* surface = g_gr->surfaces().get(cachename))
 		return dynamic_cast<GLSurfaceTexture *>(surface);
 
-	// TODO: This duplicates code from the ImageLoader, but as we cannot convert
-	// a GLSurface into another format currently, we have to eat this frog.
-	FileRead fr;
-	fr.Open(*g_fs, fname);
-
-	SDL_Surface * sdlsurf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
-	if (!sdlsurf)
-		throw wexception("%s", IMG_GetError());
-
-	GLSurfaceTexture * edgetexture = new GLSurfaceTexture(sdlsurf, true);
+	SDL_Surface* sdlsurf = load_image_as_sdl_surface(fname, g_fs);
+	GLSurfaceTexture* edgetexture = new GLSurfaceTexture(sdlsurf, true);
 	g_gr->surfaces().insert(cachename, edgetexture, false);
 	return edgetexture;
 }
@@ -129,7 +123,7 @@ void GameRendererGL::draw()
 	if (!m_surface)
 		return;
 	m_rect = m_dst->get_rect();
-	m_surface_offset = m_dst_offset + m_rect + m_dst->get_offset();
+	m_surface_offset = m_dst_offset + m_rect.top_left() + m_dst->get_offset();
 
 	m_patch_size.x = m_minfx - 1;
 	m_patch_size.y = m_minfy;

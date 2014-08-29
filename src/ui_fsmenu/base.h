@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef FULLSCREEN_MENU_BASE_H
-#define FULLSCREEN_MENU_BASE_H
+#ifndef WL_UI_FSMENU_BASE_H
+#define WL_UI_FSMENU_BASE_H
 
 #include <string>
 #include <memory>
@@ -39,7 +39,7 @@ struct Fullscreen_Menu_Base : public UI::Panel {
 	Fullscreen_Menu_Base(char const * bgpic);
 	~Fullscreen_Menu_Base();
 
-	virtual void draw(RenderTarget &) override;
+	void draw(RenderTarget &) override;
 
 public:
 	///\return the size for texts fitting to current resolution
@@ -64,4 +64,4 @@ private:
 };
 
 
-#endif
+#endif  // end of include guard: WL_UI_FSMENU_BASE_H

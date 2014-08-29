@@ -17,12 +17,12 @@
  *
  */
 
-#ifndef S__ROUTING_NODE_H
-#define S__ROUTING_NODE_H
+#ifndef WL_ECONOMY_ROUTING_NODE_H
+#define WL_ECONOMY_ROUTING_NODE_H
 
 #include <vector>
 
-#include "cookie_priority_queue.h"
+#include "logic/cookie_priority_queue.h"
 #include "logic/wareworker.h"
 #include "logic/widelands_geometry.h"
 
@@ -92,6 +92,4 @@ public:
 
 }
 
-#endif
-
-
+#endif  // end of include guard: WL_ECONOMY_ROUTING_NODE_H

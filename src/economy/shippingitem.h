@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef ECONOMY_SHIPPINGITEM_H
-#define ECONOMY_SHIPPINGITEM_H
+#ifndef WL_ECONOMY_SHIPPINGITEM_H
+#define WL_ECONOMY_SHIPPINGITEM_H
 
 #include "logic/game.h"
 #include "logic/instances.h"
@@ -30,9 +30,9 @@ namespace Widelands {
 
 class Economy;
 class Game;
-class Map_Map_Object_Loader;
-struct Map_Map_Object_Saver;
-class Map_Object;
+class MapMapObjectLoader;
+struct MapMapObjectSaver;
+class MapObject;
 class PortDock;
 class WareInstance;
 class Worker;
@@ -59,13 +59,13 @@ struct ShippingItem {
 
 	struct Loader {
 		void load(FileRead & fr);
-		ShippingItem get(Map_Map_Object_Loader & mol);
+		ShippingItem get(MapMapObjectLoader & mol);
 
 	private:
 		uint32_t m_serial;
 	};
 
-	void save(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw);
+	void save(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw);
 
 private:
 	friend class PortDock;
@@ -75,7 +75,7 @@ private:
 	void end_shipping(Game &);
 
 	// Sets the location of this shippingitem, this could be a ship, a portdock or a warehouse.
-	void set_location(Game&, Map_Object* obj);
+	void set_location(Game&, MapObject* obj);
 
 	// Updates m_destination_dock.
 	void update_destination(Game &, PortDock &);
@@ -86,4 +86,4 @@ private:
 
 } // namespace Widelands
 
-#endif // ECONOMY_SHIPPINGITEM_H
+#endif  // end of include guard: WL_ECONOMY_SHIPPINGITEM_H

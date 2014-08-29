@@ -47,7 +47,7 @@ void Map_Extradata_Data_Packet::Read(FileSystem& fs, bool const skip) {
 			prof.get_safe_section("global").get_safe_int("packet_version");
 		if (packet_version == CURRENT_PACKET_VERSION) {
 			// Read all pics.
-			if (fs.FileExists("pics") and fs.IsDirectory("pics")) {
+			if (fs.FileExists("pics") && fs.IsDirectory("pics")) {
 				filenameset_t pictures = fs.ListDirectory("pics");
 				for
 					(filenameset_t::iterator pname = pictures.begin();
@@ -95,10 +95,10 @@ void Map_Extradata_Data_Packet::Write
 	if (map_fs && map_fs->FileExists("pics") && map_fs->IsDirectory("pics")) {
 		fs.EnsureDirectoryExists("pics");
 		for (const std::string& picture : map_fs->ListDirectory("pics")) {
-		size_t length;
-		void* input_data = map_fs->Load(picture, length);
-		fs.Write(picture, input_data, length);
-		free(input_data);
+			size_t length;
+			void* input_data = map_fs->Load(picture, length);
+			fs.Write(picture, input_data, length);
+			free(input_data);
 		}
 	}
 	prof.write("extra_data", false, fs);

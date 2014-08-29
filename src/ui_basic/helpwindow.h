@@ -17,15 +17,21 @@
  *
  */
 
-#ifndef UI_HELPWINDOW_H
-#define UI_HELPWINDOW_H
+#ifndef WL_UI_BASIC_HELPWINDOW_H
+#define WL_UI_BASIC_HELPWINDOW_H
 
 #include <memory>
 
-#include "align.h"
+#include "graphic/align.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/unique_window.h"
 #include "ui_basic/window.h"
+
+class LuaInterface;
+
+namespace Widelands {
+struct BuildingDescr;
+}
 
 namespace UI {
 
@@ -82,9 +88,9 @@ private:
  */
 struct LuaTextHelpWindow : public UI::UniqueWindow {
 	LuaTextHelpWindow
-		(Panel * parent, UI::UniqueWindow::Registry &,
-		 const std::string& caption,
-		 const std::string& path_to_script,
+		(Panel * parent, UI::UniqueWindow::Registry& reg,
+		 const Widelands::BuildingDescr& building_description,
+		 LuaInterface * const lua,
 		 uint32_t width = 300, uint32_t height = 400);
 	~LuaTextHelpWindow();
 
@@ -94,4 +100,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_HELPWINDOW_H

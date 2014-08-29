@@ -21,16 +21,15 @@
 
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
-#include <libintl.h>
 
-#include "compile_diagnostics.h"
-#include "i18n.h"
+#include "base/i18n.h"
+#include "base/log.h"
+#include "base/macros.h"
+#include "base/warning.h"
 #include "io/dedicated_log.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "log.h"
 #include "network/internet_gaming_messages.h"
-#include "warning.h"
 
 
 
@@ -98,7 +97,7 @@ static InternetGaming * ig = nullptr;
 
 /// \returns the one and only InternetGaming instance.
 InternetGaming & InternetGaming::ref() {
-	if (not ig)
+	if (!ig)
 		ig = new InternetGaming();
 	return * ig;
 }
@@ -110,9 +109,9 @@ void InternetGaming::initialiseConnection() {
 	IPaddress peer;
 	if (hostent * const he = gethostbyname(m_meta.c_str())) {
 		peer.host = (reinterpret_cast<in_addr *>(he->h_addr_list[0]))->s_addr;
-GCC_DIAG_OFF("-Wold-style-cast")
+DIAG_OFF("-Wold-style-cast")
 		peer.port = htons(m_port);
-GCC_DIAG_ON("-Wold-style-cast")
+DIAG_ON("-Wold-style-cast")
 	} else
 		throw warning
 			(_("Connection problem"), "%s", _("Widelands could not connect to the metaserver."));
@@ -326,7 +325,7 @@ void InternetGaming::handle_metaserver_communication() {
 		}
 	}
 
-	if (waitcmd.size() > 0) {
+	if (!waitcmd.empty()) {
 		// Check if timeout is reached
 		time_t now = time(nullptr);
 		if (now > waittimeout) {

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef PARTIALLY_FINISHED_BUILDING_H
-#define PARTIALLY_FINISHED_BUILDING_H
+#ifndef WL_LOGIC_PARTIALLY_FINISHED_BUILDING_H
+#define WL_LOGIC_PARTIALLY_FINISHED_BUILDING_H
 
 #include "logic/building.h"
 
@@ -39,18 +39,16 @@ class Partially_Finished_Building : public Building {
 	friend struct Map_Building_Data_Packet;
 
 public:
-	Partially_Finished_Building(const Building_Descr & building_descr);
+	Partially_Finished_Building(const BuildingDescr & building_descr);
 
-	virtual void set_building         (const Building_Descr &);
+	virtual void set_building         (const BuildingDescr &);
 
-	virtual void init   (Editor_Game_Base &) override;
-	virtual void cleanup(Editor_Game_Base &) override;
-
-	virtual int32_t get_size() const override;
-	virtual uint32_t get_playercaps() const override;
-	virtual uint32_t get_ui_anim() const override;
-
-	virtual void set_economy(Economy *) override;
+	int32_t get_size() const override;
+	uint32_t get_playercaps() const override;
+	uint32_t get_ui_anim() const override;
+	void cleanup(Editor_Game_Base &) override;
+	void init   (Editor_Game_Base &) override;
+	void set_economy(Economy *) override;
 
 	uint32_t get_nrwaresqueues() {return m_wares.size();}
 	WaresQueue * get_waresqueue(uint32_t const idx) {return m_wares[idx];}
@@ -66,7 +64,7 @@ private:
 	virtual uint32_t build_step_time() const = 0;
 
 protected:
-	const Building_Descr * m_building; // type of building that was or will become
+	const BuildingDescr * m_building; // type of building that was or will become
 
 	Request * m_builder_request;
 	OPtr<Worker> m_builder;
@@ -83,4 +81,4 @@ protected:
 
 }
 
-#endif /* end of include guard: PARTIALLY_FINISHED_BUILDING_H */
+#endif  // end of include guard: WL_LOGIC_PARTIALLY_FINISHED_BUILDING_H

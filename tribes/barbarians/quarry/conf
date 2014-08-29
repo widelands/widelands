@@ -1,6 +1,10 @@
 size=small
 output=raw_stone
 
+[aihints]
+is_basic=true
+stoneproducer=true
+
 [buildcost]
 log=4
 
@@ -10,21 +14,22 @@ log=2
 [working positions]
 stonemason=1
 
-[aihints]
-is_basic=true
-stoneproducer=true
-
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [work]
-sleep=25000
-worker=cut
+worker=cut   # This order is on purpose so that the productivity
+sleep=25000  # drops fast once all stones are gone.
+
+[out_of_resource_notification]
+title=_Out of Rocks
+message=_The stonemason working at this quarry can’t find any rocks in his working radius.
 
 [idle]
-pics=b_quarry_i_??.png  # ???
+pics=quarry_i_??.png  # ???
 hotspot=45 40
 
 [build]
-pics=b_quarry_b_??.png  # ???
+pics=quarry_b_??.png  # ???
 hotspot=44 36

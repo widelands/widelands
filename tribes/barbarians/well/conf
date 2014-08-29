@@ -1,27 +1,33 @@
 size=small
 output=water
 
+[aihints]
+build_material=false
+mines_water=true
+
 [buildcost]
 log=4
 
 [return_on_dismantle]
 log=2
 
-[aihints]
-build_material=false
-mines_water=true
-
 [working positions]
 carrier=1
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [work]
 sleep=20000
 animate=working 20000
 mine=water 1 100 65 2
 produce=water
+
+[out_of_resource_notification]
+title=_Out of Water
+message=_The carrier working at this well can’t find any water in his working radius.
+delay_attempts=50
 
 [idle]
 pics=well_i_??.png

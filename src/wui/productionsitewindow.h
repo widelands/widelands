@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef _PRODUCTIONSITEWINDOW_H_
-#define _PRODUCTIONSITEWINDOW_H_
+#ifndef WL_WUI_PRODUCTIONSITEWINDOW_H
+#define WL_WUI_PRODUCTIONSITEWINDOW_H
 
 #include "wui/buildingwindow.h"
 #include "logic/productionsite.h"
@@ -35,7 +35,7 @@ struct ProductionSite_Window : public Building_Window {
 	}
 	void update_worker_table();
 protected:
-	virtual void think() override;
+	void think() override;
 	void evict_worker();
 
 private:
@@ -43,4 +43,4 @@ private:
 	UI::Box * m_worker_caps;
 };
 
-#endif // _PRODUCTIONSITEWINDOW_H_
+#endif  // end of include guard: WL_WUI_PRODUCTIONSITEWINDOW_H

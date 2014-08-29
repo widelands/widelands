@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef GAME_PRELOAD_DATA_PACKET_H
-#define GAME_PRELOAD_DATA_PACKET_H
+#ifndef WL_GAME_IO_GAME_PRELOAD_DATA_PACKET_H
+#define WL_GAME_IO_GAME_PRELOAD_DATA_PACKET_H
 
 #include <cstring>
 #include <string>
@@ -32,8 +32,8 @@ namespace Widelands {
  * a game for a user (for example in a listbox)
  */
 struct Game_Preload_Data_Packet : public Game_Data_Packet {
-	void Read (FileSystem &, Game &, Map_Map_Object_Loader * = nullptr) override;
-	void Write(FileSystem &, Game &, Map_Map_Object_Saver  * = nullptr) override;
+	void Read (FileSystem &, Game &, MapMapObjectLoader * = nullptr) override;
+	void Write(FileSystem &, Game &, MapMapObjectSaver  * = nullptr) override;
 
 	char const * get_mapname()      {return m_mapname.c_str();}
 	std::string get_background()    {return m_background;}
@@ -56,4 +56,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_GAME_IO_GAME_PRELOAD_DATA_PACKET_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WARESDISPLAY_H
-#define WARESDISPLAY_H
+#ifndef WL_WUI_WARESDISPLAY_H
+#define WL_WUI_WARESDISPLAY_H
 
 #include <vector>
 
@@ -56,7 +56,7 @@ public:
 	bool handle_mousemove
 		(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
-	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y) override;
+	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 
 	// Wares may be selected (highlighted)
 	void select_ware(Widelands::Ware_Index);
@@ -72,7 +72,7 @@ public:
 	Widelands::WareWorker get_type() const {return m_type;}
 
 protected:
-	virtual void layout() override;
+	void layout() override;
 
 	virtual std::string info_for_ware(Widelands::Ware_Index) = 0;
 
@@ -81,7 +81,7 @@ protected:
 	const Widelands::Tribe_Descr::WaresOrder & icons_order() const;
 	const Widelands::Tribe_Descr::WaresOrderCoords & icons_order_coords() const;
 	virtual Point ware_position(Widelands::Ware_Index) const;
-	virtual void draw(RenderTarget &) override;
+	void draw(RenderTarget &) override;
 	virtual void draw_ware
 		(RenderTarget &,
 		 Widelands::Ware_Index);
@@ -138,7 +138,7 @@ public:
 	void remove_all_warelists();
 
 protected:
-	virtual std::string info_for_ware(Widelands::Ware_Index) override;
+	std::string info_for_ware(Widelands::Ware_Index) override;
 
 private:
 	typedef std::vector<const Widelands::WareList *> vector_type;
@@ -150,4 +150,4 @@ std::string waremap_to_richtext
 		(const Widelands::Tribe_Descr & tribe,
 		 const std::map<Widelands::Ware_Index, uint8_t> & map);
 
-#endif
+#endif  // end of include guard: WL_WUI_WARESDISPLAY_H

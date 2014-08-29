@@ -28,7 +28,8 @@ obj_build_woodeconomy = {
    title =_"Build up a wood economy",
    number = 5,
    body = objective_text(_"Wood Economy",
-[[• ]] .. _[[Build three lumberjack’s houses, a forester’s house and a sawmill.]]),
+      listitem_bullet(_[[Build three lumberjack’s houses, a forester’s house and a sawmill.]])
+   ),
 }
 
 obj_build_quarry = {
@@ -36,7 +37,8 @@ obj_build_quarry = {
    title =_"Build a quarry",
    number = 1,
    body = objective_text(_"Quarry",
-[[• ]] .. _[[Build a quarry to the south of your headquarters.]]),
+      listitem_bullet(_[[Build a quarry to the south of your headquarters.]])
+   ),
 }
 
 obj_build_military_buildings = {
@@ -44,7 +46,8 @@ obj_build_military_buildings = {
    title =_"Protect your colony",
    number = 1,
    body = objective_text(_"Protect Your Colony",
-[[• ]] .. _[[Build some barracks and sentries around the colony.]]),
+      listitem_bullet(_[[Build some barracks and sentries around the colony.]])
+   ),
 }
 
 obj_build_marblemine = {
@@ -52,7 +55,8 @@ obj_build_marblemine = {
    title =_"Start mining marble",
    number = 1,
    body = objective_text(_"Marble",
-[[• ]] .. _[[Expand to the east, to start mining marble from the mountain.]]),
+      listitem_bullet(_[[Expand to the east, to start mining marble from the mountain.]])
+   ),
 }
 
 obj_build_mining_infrastructure = {
@@ -60,7 +64,8 @@ obj_build_mining_infrastructure = {
    title =_"Build a stonemason and mining infrastructure",
    number = 7,
    body = objective_text(_"Stonemason and Mining Infrastructure",
-[[• ]] .. _[[Build a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal burner, iron ore mine, toolsmithy, weapon smithy, armor smithy and smelting works).]]),
+      listitem_bullet(_[[Build a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal kiln, iron ore mine, toolsmithy, weapon smithy, armor smithy and smelting works).]])
+   ),
 }
 
 obj_build_Food_infrastructure = {
@@ -68,12 +73,11 @@ obj_build_Food_infrastructure = {
    title =_"Provide your miners with food",
    number = 1,
    body = objective_text(_"Food For Your Miners",
-[[• ]] .. _([[To produce some sustaining food for our miners, we could build up a tavern. ]] ..
-[[To supply them with some good and strong drinks, we could build up a brewery and a winery.]]) .. "<br>" ..
-[[• ]] .. _([[Of course this means we will need more resources for preparing this food – like fish, meat or bread. To provide these foodstuffs, you would have to build a fisher’s house, a farm, a mill and a bakery.]]) .. "<br>" ..
-[[• ]] .. _[[Maybe you will also need a hunter’s house, a piggery, a vineyard and some wells.]] .. paragraphdivider() ..
-[[→ ]] .. _([[It’s up to you what you want to build. But remember – coal and iron ore mines need beer, ]] ..
-[[marble and gold mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish.]])),
+      listitem_bullet(_[[To produce some sustaining food for our miners, we could build up a tavern. To supply them with some good and strong drinks, we could build up a brewery and a winery.]]) ..
+      listitem_bullet(_[[Of course this means we will need more resources for preparing this food – like fish, meat or bread. To provide these foodstuffs, you would have to build a fisher’s house, a farm, a mill and a bakery.]]) ..
+      listitem_bullet(_[[Maybe you will also need a hunter’s house, a piggery, a vineyard and some wells.]]) ..
+      listitem_arrow(_[[It’s up to you what you want to build. But remember – coal and iron ore mines need beer, marble and gold mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish.]])
+   ),
 }
 
 obj_build_bigger_military_buildings = {
@@ -81,9 +85,9 @@ obj_build_bigger_military_buildings = {
    title =_"Protect your eastern frontier",
    number = 1,
    body = objective_text(_"Protect Your Eastern Frontier",
-[[• ]] .. _[[Build up stronger military buildings, such as an outpost, a barrier or a tower, on the eastern frontier.]] ..
-paragraphdivider() ..
-[[→ ]] .. _[[To watch deep inside the enemy territory, build a tower.]]),
+      listitem_bullet(_[[Build up stronger military buildings, such as an outpost, a barrier or a tower, on the eastern frontier.]]) ..
+      listitem_arrow(_[[To watch deep inside the enemy territory, build a tower.]])
+   ),
 }
 
 obj_remove_the_barbarians = {
@@ -91,9 +95,9 @@ obj_remove_the_barbarians = {
    title =_"Destroy the barbarian tribe",
    number = 2,
    body = objective_text(_"Destroy the Barbarian Tribe",
-[[• ]] .. _[[As soon as you have enough soldiers, attack and completely destroy the barbarian buildings.]] .. "<br>" ..
-[[• ]] .. _([[Finally, build up a fortress on the peninsula (near where the barbarian headquarters stood before), ]] ..
-[[to avoid new settlements of other tribes in that region.]])),
+      listitem_bullet(_[[As soon as you have enough soldiers, attack and completely destroy the barbarian buildings.]]) ..
+      listitem_bullet(_[[Finally, build up a fortress on the peninsula (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region.]])
+   ),
 }
 
 -- =====================
@@ -181,7 +185,7 @@ saledus_3 = {
    body= saledus(_"Saledus is amazed",
 _([[By the Gods, this is an unbelievable stroke of fortune! ]] ..
 [[There are two more mountains, and it seems that one has a large quantity of coal and the other of iron ore. ]] ..
-[[We should immediately start to build iron ore and coal mines (or at least charcoal burners), ]] ..
+[[We should immediately start to build iron ore and coal mines (or at least charcoal kilns), ]] ..
 [[smelting works, toolsmithies, armor and weapon smithies.]]) .. paragraphdivider() ..
 _([[However: for all these bigger buildings, we need better and more elegant building materials. ]] ..
 [[So, let’s build a stonemason, who will cut columns from marble.]]) .. paragraphdivider() ..

@@ -20,20 +20,18 @@
 #include "wui/game_main_menu_save_game.h"
 
 #include <boost/format.hpp>
-#include <libintl.h>
 
-#include "constants.h"
+#include "base/i18n.h"
+#include "base/time_string.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
 #include "game_io/game_saver.h"
-#include "gamecontroller.h"
-#include "i18n.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
+#include "logic/game_controller.h"
 #include "logic/playersmanager.h"
 #include "profile/profile.h"
-#include "timestring.h"
 #include "wui/interactive_gamebase.h"
 
 using boost::format;
@@ -136,7 +134,7 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 		m_gametime.set_text(gametimestring(gametime));
 
 		int player_nr = parent.game().player_manager()->get_number_of_players();
-		// TODO: This should be ngettext(" %i player" etc. with boost::format, but it refuses to work
+		// TODO(GunChleoc): This should be ngettext(" %i player" etc. with boost::format, but it refuses to work
 		/** TRANSLATORS: This is preceded by a number */
 		m_players_label.set_text(
 		   (boost::format(ngettext("%i player", "%i players", player_nr)) % player_nr).str());
@@ -176,7 +174,8 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 		char buf[200];
 		sprintf
 			(buf, "%i %s", gpdp.get_number_of_players(),
-			// TODO: This should be ngettext(" %i player" etc. with boost::format, but it refuses to work
+			// TODO(GunChleoc): This should be ngettext(" %i player" etc.
+			// with boost::format, but it refuses to work
 			/** TRANSLATORS: This is preceded by a number */
 			ngettext("player", "players", gpdp.get_number_of_players()));
 			m_players_label.set_text(buf);

@@ -1,6 +1,9 @@
 size=mine
 output=raw_stone
 
+[aihints]
+mines=granite
+
 [buildcost]
 log=4
 raw_stone=2
@@ -12,21 +15,24 @@ raw_stone=1
 [working positions]
 miner=1
 
-[aihints]
-mines=granite
-
 [inputs]
 ration=8
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start mining because ...
+work=_mining
 
 [work]
-consume=ration
 sleep=20000
+return=skipped unless economy needs raw_stone
+consume=ration
 animate=working 20000
 mine=granite 2 100 5 17
 produce=raw_stone:2
+
+[out_of_resource_notification]
+title=_Main Granite Vein Exhausted
+message=_This granite mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it.
 
 [idle]
 pics=granitemine_i_??.png

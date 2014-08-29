@@ -9,12 +9,13 @@ plr = wl.Game().players[1]
 plr:allow_buildings("all")
 
 -- A default headquarters
-include "tribes/barbarians/scripting/sc00_headquarters_medium.lua"
-init.func(plr) -- defined in sc00_headquarters_medium
+include "tribes/barbarians/scripting/sc00_headquarters.lua"
+init.func(plr) -- defined in sc00_headquarters
 
 set_textdomain("scenario_tutorial01.wmf")
 
 include "scripting/coroutine.lua"
+include "scripting/infrastructure.lua"
 include "scripting/ui.lua"
 include "scripting/table.lua"
 
@@ -279,13 +280,13 @@ function remove_all_stones(fields, g_sleeptime)
       local remove_field = true
 
       if f.immovable then
-         local n = f.immovable.name:match("stones(%d*)")
+         local n = f.immovable.descr.name:match("greenland_stones(%d*)")
          if n then
             n = tonumber(n)
             f.immovable:remove()
             if n > 1 then
                remove_field = false
-               map:place_immovable("stones" .. n-1, f)
+               map:place_immovable("greenland_stones" .. n-1, f)
             end
             sleep(sleeptime)
          end
@@ -310,7 +311,7 @@ function register_immovable_as_allowed(i)
    end
 
     -- buildings and constructionsite have a flag
-   if i.building_type or i.type == "constructionsite" then
+   if is_building(i) or i.descr.type_name == "constructionsite" then
       registered_player_immovables[_fmt(i.fields[1].brn)] = true
    end
 end
@@ -349,15 +350,15 @@ end
 -- Allows constructionsites for the given buildings, all others are invalid
 -- as is any other immovable build by the player
 function allow_constructionsite(i, buildings)
-   if i.type == "constructionsite" then
+   if i.descr.type_name == "constructionsite" then
       if not buildings then return i end
       for idx,n in ipairs(buildings) do
          if i.building == n then return i end
       end
       return false
-   elseif i.type == "flag" then
+   elseif i.descr.type_name == "flag" then
       local tr = i.fields[1].tln.immovable
-      if tr and tr.type == "constructionsite" then
+      if tr and tr.descr.type_name == "constructionsite" then
          return allow_constructionsite(tr, buildings)
       end
    end
@@ -441,7 +442,7 @@ function build_lumberjack()
    blocker:lift_blocks()
 
    -- Wait for flag
-   while not (f.immovable and f.immovable.type == "flag") do sleep(300) end
+   while not (f.immovable and f.immovable.descr.type_name == "flag") do sleep(300) end
    o.done = true
 
    sleep(300)
@@ -505,7 +506,7 @@ function build_a_quarry()
 
    local function _rip_road()
       for idx,f in ipairs(cs.fields[1].brn:region(2)) do
-         if f.immovable and f.immovable.type == "road" then
+         if f.immovable and f.immovable.descr.type_name == "road" then
             click_on_field(f)
             click_on_panel(wl.ui.MapView().windows.
                field_action.buttons.destroy_road, 300)
@@ -670,7 +671,7 @@ function mining()
    local function _find_nearby_flag()
       for i=2,8 do
          for idx, f in ipairs(conquer_field:region(i)) do
-            if f.immovable and f.immovable.type == "flag" then
+            if f.immovable and f.immovable.descr.type_name == "flag" then
                return f
             end
          end
@@ -700,7 +701,7 @@ function mining()
       while 1 do
          local cnt = 0
          for idx, f in ipairs(dest:region(6)) do
-            if f.immovable and f.immovable.name:sub(1,4) == "resi" then
+            if f.immovable and f.immovable.descr.name:sub(1,4) == "resi" then
                cnt = cnt + 1
                if cnt >= wanted then return end
             end
@@ -735,7 +736,7 @@ function training()
 
    local o = msg_box(enhance_fortress)
    while not (citadel_field.immovable and
-      citadel_field.immovable.name == "citadel") do sleep(800) end
+      citadel_field.immovable.descr.name == "citadel") do sleep(800) end
    o.done = true
 
    -- Wait for soldiers to move in

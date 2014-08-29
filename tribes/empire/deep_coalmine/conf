@@ -3,6 +3,9 @@ buildable=no
 enhanced_building=yes
 output=coal
 
+[aihints]
+mines=coal
+
 [enhancement_cost]
 log=4
 wood=2
@@ -15,20 +18,17 @@ wood=1
 master-miner=1
 miner=1
 
-[aihints]
-mines=coal
-
 [inputs]
 meal=6
 beer=6
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start mining because ...
+work=_mining
 
 [work]
-return=skipped unless economy needs coal or not economy needs meal
-return=skipped unless economy needs coal or not economy needs beer
 sleep=42000
+return=skipped unless economy needs coal
 consume=beer meal
 animate=working 18000
 mine=coal 2 100 5 2
@@ -36,6 +36,10 @@ produce=coal:2
 animate=working 18000
 mine=coal 2 100 5 2
 produce=coal:3
+
+[out_of_resource_notification]
+title=_Main Coal Vein Exhausted
+message=_This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it.
 
 [idle]
 pics=deep_coalmine_i_??.png

@@ -21,20 +21,21 @@ stonemason=1
 marble=6
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [work]
+sleep=50000
 return=skipped unless economy needs marblecolumn
 consume=marble:2
-sleep=50000
 playFX=../../../sound/stonecutting/stonemason 192
 animate=working 32000
 produce=marblecolumn
 
 [idle]
-pics=stonemason_i_??.png  # ???
+pics=stonemasons_house_i_??.png  # ???
 hotspot=58 61
 
 [working]
-pics=stonemason_i_??.png  # ???
+pics=stonemasons_house_i_??.png  # ???
 hotspot=58 61

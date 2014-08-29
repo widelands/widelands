@@ -1,0 +1,39 @@
+size=medium
+output=coal
+
+[aihints]
+build_material=false
+
+[buildcost]
+log=3
+grout=2
+thatchreed=2
+
+[return_on_dismantle]
+log=2
+grout=1
+
+[working positions]
+charcoal_burner=1
+
+[inputs]
+log=8
+
+[programs]
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
+
+[work]
+sleep=30000
+return=skipped unless economy needs coal
+consume=log:6
+animate=working 90000 # charcoal fires are burning some days in real life
+produce=coal
+
+[idle]
+pics=charcoal_kiln_i_??.png  # ???
+hotspot=47 54
+
+[working]
+pics=charcoal_kiln_i_??.png  # ???
+hotspot=47 54

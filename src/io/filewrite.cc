@@ -55,7 +55,7 @@ void FileWrite::SetPos(const Pos pos) {
 }
 
 void FileWrite::Data(const void* const src, const size_t size, Pos const pos = Pos::Null()) {
-	assert(data_ or not length_);
+	assert(data_ || !length_);
 
 	Pos i = pos;
 	if (pos.isNull()) {
@@ -78,4 +78,8 @@ void FileWrite::Data(const void* const src, const size_t size, Pos const pos = P
 
 void FileWrite::Data(void const* const src, size_t const size) {
 	Data(src, size, Pos::Null());
+}
+
+std::string FileWrite::GetData() const {
+	return std::string(data_, length_);
 }

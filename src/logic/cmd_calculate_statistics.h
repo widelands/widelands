@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef CMD_CALCULATE_STATISTICS_H
-#define CMD_CALCULATE_STATISTICS_H
+#ifndef WL_LOGIC_CMD_CALCULATE_STATISTICS_H
+#define WL_LOGIC_CMD_CALCULATE_STATISTICS_H
 
 #include <string>
 
@@ -33,16 +33,15 @@ struct Cmd_CalculateStatistics : public GameLogicCommand {
 		GameLogicCommand(_duetime) {}
 
 	// Write these commands to a file (for savegames)
-	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Write(FileWrite &, Editor_Game_Base &, MapMapObjectSaver  &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
-	virtual uint8_t id() const override {return QUEUE_CMD_CALCULATE_STATISTICS;}
-	virtual void execute(Game &) override;
+	uint8_t id() const override {return QUEUE_CMD_CALCULATE_STATISTICS;}
+	void execute(Game &) override;
 };
 
 }
 
 
 
-#endif /* end of include guard: CMD_CALCULATE_STATISTICS_H */
-
+#endif  // end of include guard: WL_LOGIC_CMD_CALCULATE_STATISTICS_H

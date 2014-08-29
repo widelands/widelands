@@ -1,6 +1,10 @@
 size=small
 output=fish
 
+[aihints]
+build_material=false
+needs_water=true
+
 [buildcost]
 log=1
 wood=1
@@ -12,17 +16,18 @@ stone=1
 [working positions]
 fisher=1
 
-[aihints]
-build_material=false
-needs_water=true
-
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start fishing because ...
+work=_fishing
 
 [work]
 sleep=17000
 worker=fish
 
+[out_of_resource_notification]
+title=_Out of Fish
+message=_The fisher working in this fisher’s house can’t find any fish in his working radius.
+
 [idle]
-pics=fisher_i_??.png  # ???
+pics=fishers_house_i_??.png  # ???
 hotspot=42 60

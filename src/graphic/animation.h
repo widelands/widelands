@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef ANIMATION_H
-#define ANIMATION_H
+#ifndef WL_GRAPHIC_ANIMATION_H
+#define WL_GRAPHIC_ANIMATION_H
 
 #include <cstring>
 #include <map>
@@ -27,14 +27,18 @@
 
 #include <boost/utility.hpp>
 
-#include "point.h"
-#include "rect.h"
+#include "base/macros.h"
+#include "base/point.h"
+#include "base/rect.h"
 
 class Image;
 class LuaTable;
 class Section;
 class Surface;
 struct RGBColor;
+
+/// FRAME_LENGTH is the default animation speed
+constexpr int FRAME_LENGTH = 250;
 
 /**
  * Representation of an Animation in the game. An animation is a looping set of
@@ -45,7 +49,7 @@ struct RGBColor;
  * The dimensions of an animation is constant and can not change from frame to
  * frame.
  */
-class Animation : boost::noncopyable {
+class Animation {
 public:
 	Animation() {}
 	virtual ~Animation() {}
@@ -84,6 +88,9 @@ public:
 
 	/// Play the sound effect associated with this animation at the given time.
 	virtual void trigger_soundfx(uint32_t time, uint32_t stereo_position) const = 0;
+
+private:
+	DISALLOW_COPY_AND_ASSIGN(Animation);
 };
 
 /**
@@ -114,4 +121,4 @@ private:
 	std::vector<Animation*> m_animations;
 };
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_ANIMATION_H

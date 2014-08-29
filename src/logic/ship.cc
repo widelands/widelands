@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/deprecated.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/fleet.h"
@@ -43,16 +44,17 @@
 #include "logic/widelands_geometry_io.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "ref_cast.h"
+#include "profile/profile.h"
 #include "wui/interactive_gamebase.h"
 
 namespace Widelands {
 
-Ship_Descr::Ship_Descr
+ShipDescr::ShipDescr
 	(const char * given_name, const char * gdescname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & gtribe)
-: BobDescr(given_name, gdescname, &gtribe)
+	:
+	BobDescr(MapObjectType::SHIP, given_name, gdescname, &gtribe)
 {
 	{ //  global options
 		Section & idle_s = prof.get_safe_section("idle");
@@ -68,16 +70,16 @@ Ship_Descr::Ship_Descr
 	m_vision_range = global_s.get_natural("vision_range", 7);
 }
 
-uint32_t Ship_Descr::movecaps() const {
+uint32_t ShipDescr::movecaps() const {
 	return MOVECAPS_SWIM;
 }
 
-Bob & Ship_Descr::create_object() const {
+Bob & ShipDescr::create_object() const {
 	return *new Ship(*this);
 }
 
 
-Ship::Ship(const Ship_Descr & gdescr) :
+Ship::Ship(const ShipDescr & gdescr) :
 	Bob(gdescr),
 	m_window(nullptr),
 	m_fleet(nullptr),
@@ -88,10 +90,6 @@ Ship::Ship(const Ship_Descr & gdescr) :
 
 Ship::~Ship() {
 	close_window();
-}
-
-Bob::Type Ship::get_bob_type() const {
-	return SHIP;
 }
 
 PortDock* Ship::get_destination(Editor_Game_Base& egbase) const {
@@ -351,7 +349,7 @@ void Ship::ship_update_expedition(Game & game, Bob::State &) {
 	if (m_ship_state == EXP_SCOUTING) {
 		// Check surrounding fields for port buildspaces
 		std::unique_ptr<std::list<Coords> > temp_port_buildspaces(new std::list<Coords>());
-		MapRegion<Area<Coords> > mr(map, Area<Coords>(position, vision_range()));
+		MapRegion<Area<Coords> > mr(map, Area<Coords>(position, descr().vision_range()));
 		bool new_port_space = false;
 		do {
 			if (map.is_port_space(mr.location())) {
@@ -371,7 +369,7 @@ void Ship::ship_update_expedition(Game & game, Bob::State &) {
 				// NOTE There is a simple check for the current land owner to avoid placement of ports into enemy
 				// NOTE territory, as "clearing" is not yet implemented.
 				// NOTE further it checks, whether there is a Player_immovable on one of the fields.
-				// FIXME handle this more gracefully concering opposing players
+				// TODO(unknown): handle this more gracefully concering opposing players
 				Player_Number pn = get_owner()->player_number();
 				FCoords coord = fc;
 				bool invalid = false;
@@ -618,18 +616,17 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 					state.ivar1 = 1;
 					start_task_move(game, m_expedition->direction, descr().get_sail_anims(), false);
 					return;
-				} else { // coast reached
-					m_ship_state = EXP_WAITING;
-					start_task_idle(game, descr().main_animation(), 1500);
-					// Send a message to the player, that a new coast was reached
-					std::string msg_head = _("Coast Reached");
-					std::string msg_body =
-						_("An expedition ship reached a coast and is waiting for further commands.");
-					send_message(game, "exp_coast", msg_head, msg_body, "ship_explore_island_cw.png");
-					return;
 				}
+				// coast reached
+				m_ship_state = EXP_WAITING;
+				start_task_idle(game, descr().main_animation(), 1500);
+				// Send a message to the player, that a new coast was reached
+				std::string msg_head = _("Coast Reached");
+				std::string msg_body =
+					_("An expedition ship reached a coast and is waiting for further commands.");
+				send_message(game, "exp_coast", msg_head, msg_body, "ship_explore_island_cw.png");
+				return;
 			}
-			break;
 		}
 		case EXP_COLONIZING: {
 			assert(m_expedition->seen_port_buildspaces && !m_expedition->seen_port_buildspaces->empty());
@@ -658,7 +655,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 					worker->set_position(game, cs->get_position());
 					worker->reset_tasks(game);
 					Partially_Finished_Building::request_builder_callback
-						(game, *cs->get_builder_request(), worker->worker_index(), worker, *cs);
+						(game, *cs->get_builder_request(), worker->descr().worker_index(), worker, *cs);
 					m_items.resize(i);
 				}
 			}
@@ -690,8 +687,8 @@ void Ship::set_economy(Game & game, Economy * e) {
 	// we rely that wares really get reassigned our economy.
 
 	m_economy = e;
-	container_iterate(std::vector<ShippingItem>, m_items, it) {
-		it->set_economy(game, e);
+	for (ShippingItem& shipping_item : m_items) {
+		shipping_item.set_economy(game, e);
 	}
 }
 
@@ -707,7 +704,7 @@ void Ship::set_destination(Game & game, PortDock & pd) {
 }
 
 void Ship::add_item(Game & game, const ShippingItem & item) {
-	assert(m_items.size() < get_capacity());
+	assert(m_items.size() < descr().get_capacity());
 
 	m_items.push_back(item);
 	m_items.back().set_location(game, this);
@@ -882,11 +879,11 @@ void Ship::log_general_info(const Editor_Game_Base & egbase)
 		 m_destination.serial(), m_lastdock.serial(),
 		 m_items.size());
 
-	container_iterate(std::vector<ShippingItem>, m_items, it) {
+	for (const ShippingItem& shipping_item : m_items) {
 		molog
 			("  IT %u, destination %u\n",
-			 it.current->m_object.serial(),
-			 it.current->m_destination_dock.serial());
+			 shipping_item.m_object.serial(),
+			 shipping_item.m_destination_dock.serial());
 	}
 }
 
@@ -990,8 +987,8 @@ void Ship::Loader::load(FileRead & fr, uint8_t version)
 		m_destination = fr.Unsigned32();
 
 		m_items.resize(fr.Unsigned32());
-		container_iterate(std::vector<ShippingItem::Loader>, m_items, it) {
-			it->load(fr);
+		for (ShippingItem::Loader& item_loader : m_items) {
+			item_loader.load(fr);
 		}
 	}
 }
@@ -1039,8 +1036,8 @@ void Ship::Loader::load_finish()
 }
 
 
-Map_Object::Loader * Ship::load
-	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
+MapObject::Loader * Ship::load
+	(Editor_Game_Base & egbase, MapMapObjectLoader & mol, FileRead & fr)
 {
 	std::unique_ptr<Loader> loader(new Loader);
 
@@ -1051,12 +1048,12 @@ Map_Object::Loader * Ship::load
 		if (1 <= version && version <= SHIP_SAVEGAME_VERSION) {
 			std::string owner = fr.CString();
 			std::string name = fr.CString();
-			const Ship_Descr * descr = nullptr;
+			const ShipDescr * descr = nullptr;
 
 			egbase.manually_load_tribe(owner);
 
 			if (const Tribe_Descr * tribe = egbase.get_tribe(owner))
-				descr = dynamic_cast<const Ship_Descr *>
+				descr = dynamic_cast<const ShipDescr *>
 					(tribe->get_bob_descr(name));
 
 			if (!descr)
@@ -1075,9 +1072,9 @@ Map_Object::Loader * Ship::load
 }
 
 void Ship::save
-	(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
+	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(header_Ship);
+	fw.Unsigned8(HeaderShip);
 	fw.Unsigned8(SHIP_SAVEGAME_VERSION);
 
 	fw.CString(descr().get_owner_tribe()->name());
@@ -1117,8 +1114,8 @@ void Ship::save
 	fw.Unsigned32(mos.get_object_file_index_or_zero(m_destination.get(egbase)));
 
 	fw.Unsigned32(m_items.size());
-	container_iterate(std::vector<ShippingItem>, m_items, it) {
-		it->save(egbase, mos, fw);
+	for (ShippingItem& shipping_item : m_items) {
+		shipping_item.save(egbase, mos, fw);
 	}
 }
 

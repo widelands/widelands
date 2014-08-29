@@ -19,11 +19,15 @@
 
 #include "wui/chatoverlay.h"
 
-#include "chat.h"
+#include <memory>
+
+#include "chat/chat.h"
 #include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
-#include "logmessage.h"
+#include "graphic/text/rt_errors.h"
 #include "profile/profile.h"
+#include "wui/chat_msg_layout.h"
+#include "wui/logmessage.h"
 
 /**
  * Time, in seconds, that chat messages are shown in the overlay.
@@ -31,8 +35,7 @@
 static const int32_t CHAT_DISPLAY_TIME = 10;
 static const uint32_t MARGIN = 2;
 
-struct ChatOverlay::Impl : Widelands::NoteReceiver<ChatMessage>,
-	Widelands::NoteReceiver<LogMessage> {
+struct ChatOverlay::Impl {
 	bool transparent_;
 	ChatProvider * chat_;
 	bool havemessages_;
@@ -46,11 +49,24 @@ struct ChatOverlay::Impl : Widelands::NoteReceiver<ChatMessage>,
 	/// Log messages
 	std::vector<LogMessage> log_messages_;
 
-	Impl() : transparent_(false), chat_(nullptr), havemessages_(false), oldest_(0) {}
+	std::unique_ptr<Notifications::Subscriber<ChatMessage>> chat_message_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<LogMessage>> log_message_subscriber_;
+
+	Impl()
+	   : transparent_(false),
+	     chat_(nullptr),
+	     havemessages_(false),
+	     oldest_(0),
+	     chat_message_subscriber_(
+	        Notifications::subscribe<ChatMessage>([this](const ChatMessage&) {recompute();})),
+	     log_message_subscriber_(
+	        Notifications::subscribe<LogMessage>([this](const LogMessage& note) {
+		        log_messages_.push_back(note);
+		        recompute();
+		     })) {
+	}
 
 	void recompute();
-	virtual void receive(const ChatMessage & note) override;
-	virtual void receive(const LogMessage & note) override;
 };
 
 ChatOverlay::ChatOverlay
@@ -71,19 +87,8 @@ ChatOverlay::~ChatOverlay()
 void ChatOverlay::setChatProvider(ChatProvider & chat)
 {
 	m->chat_ = &chat;
-	Widelands::NoteReceiver<ChatMessage>* cmr
-		= dynamic_cast<Widelands::NoteReceiver<ChatMessage>*>(m.get());
-	cmr->connect(chat);
 	m->recompute();
 }
-
-void ChatOverlay::setLogProvider(Widelands::NoteSender<LogMessage>& log_sender)
-{
-	Widelands::NoteReceiver<LogMessage>* lmr
-		= dynamic_cast<Widelands::NoteReceiver<LogMessage>*>(m.get());
-	lmr->connect(log_sender);
-}
-
 
 /**
  * Check for message expiry.
@@ -95,21 +100,6 @@ void ChatOverlay::think()
 			m->recompute();
 	}
 }
-
-/**
- * Callback that is run when a new chat message comes in.
- */
-void ChatOverlay::Impl::receive(const ChatMessage & /* note */)
-{
-	recompute();
-}
-
-void ChatOverlay::Impl::receive(const LogMessage& note)
-{
-	log_messages_.push_back(note);
-	recompute();
-}
-
 
 /**
  * Recompute the chat message display.
@@ -146,7 +136,7 @@ void ChatOverlay::Impl::recompute()
 			// Chat message is more recent
 			oldest_ = chat_->getMessages()[chat_idx].time;
 			if (now - oldest_ < CHAT_DISPLAY_TIME) {
-				richtext = chat_->getMessages()[chat_idx].toPrintable()
+				richtext = format_as_richtext(chat_->getMessages()[chat_idx])
 					+ richtext;
 			}
 			chat_idx--;
@@ -176,18 +166,28 @@ void ChatOverlay::draw(RenderTarget & dst)
 	if (!m->havemessages_)
 		return;
 
-	const Image* im = UI::g_fh1->render(m->all_text_, get_w());
-	// Background
-	int32_t height = im->height() > get_h() ? get_h() : im->height();
-	int32_t top = get_h() - height - 2 * MARGIN;
+	const Image* im = nullptr;
+	try {
+		im = UI::g_fh1->render(m->all_text_, get_w());
+	} catch (RT::WidthTooSmall&) {
+		// Oops, maybe one long word? We render again, not limiting the width, but
+	   // render everything in one single line.
+	   im = UI::g_fh1->render(m->all_text_, 0);
+	}
+	assert(im != nullptr);
 
-	//FIXME: alpha channel not respected
+	// Background
+	const int32_t height = im->height() > get_h() ? get_h() : im->height();
+	const int32_t top = get_h() - height - 2 * MARGIN;
+	const int width = std::min<int>(get_w(), im->width());
+
+	// TODO(unknown): alpha channel not respected
 	if (!m->transparent_) {
-		Rect rect(0, top, im->width(), height);
+		Rect rect(0, top, width, height);
 		dst.fill_rect(rect, RGBAColor(50, 50, 50, 128));
 	}
 	int32_t topcrop = im->height() - height;
-	Rect cropRect(0, topcrop, im->width(), height);
+	Rect cropRect(0, topcrop, width, height);
 
 	Point pt(0, top);
 	dst.blitrect(pt, im, cropRect);

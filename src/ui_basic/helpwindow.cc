@@ -23,18 +23,18 @@
 
 #include <boost/format.hpp>
 
-#include "constants.h"
+#include "base/i18n.h"
+#include "base/log.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "log.h"
+#include "logic/building.h"
 #include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
-#include "wlapplication.h"
+#include "wui/text_constants.h"
 
 
 using boost::format;
@@ -182,26 +182,29 @@ void HelpWindow::pressedOk()
 LuaTextHelpWindow
 ===================
 */
-
 LuaTextHelpWindow::LuaTextHelpWindow
-	(Panel* const parent, UI::UniqueWindow::Registry& reg, const std::string&
-	 caption, const std::string& path_to_script, uint32_t width,
-	 uint32_t height)
-	: UI::UniqueWindow(parent, "help_window", &reg, width, height,
-			(boost::format(_("Help: %s")) % caption).str().c_str()),
-	textarea(new Multiline_Textarea(this, 5, 5, width - 10, height - 10,
-				std::string(), Align_Left))
+	(Panel * const parent,
+	 UI::UniqueWindow::Registry & reg,
+	 const Widelands::BuildingDescr& building_description,
+	 LuaInterface * const lua,
+	 uint32_t width, uint32_t height)
+	:
+	UI::UniqueWindow(parent, "help_window", &reg, width, height,
+			(boost::format(_("Help: %s")) % building_description.descname()).str().c_str()),
+	textarea(new Multiline_Textarea(this, 5, 5, width - 10, height -10, std::string(), Align_Left))
 {
-	LuaInterface lua;
-
 	try {
-		std::unique_ptr<LuaTable> t = lua.run_script(path_to_script);
-		textarea->set_text(t->get_string("text"));
-	} catch (LuaError & err) {
+		std::unique_ptr<LuaTable> t(
+		   lua->run_script(building_description.helptext_script()));
+		std::unique_ptr<LuaCoroutine> cr(t->get_coroutine("func"));
+		cr->push_arg(&building_description);
+		cr->resume();
+		const std::string help_text = cr->pop_string();
+		textarea->set_text(help_text);
+	} catch (LuaError& err) {
 		textarea->set_text(err.what());
 	}
 }
-
 LuaTextHelpWindow::~LuaTextHelpWindow()
 {
 }

@@ -22,12 +22,13 @@
 #include <clocale>
 #include <cstdio>
 
-#include <libintl.h>
+#include <boost/format.hpp>
 
+#include "base/i18n.h"
+#include "base/log.h"
+#include "base/macros.h"
 #include "economy/flag.h"
 #include "economy/request.h"
-#include "i18n.h"
-#include "log.h"
 #include "logic/battle.h"
 #include "logic/editor_game_base.h"
 #include "logic/findbob.h"
@@ -38,22 +39,21 @@
 #include "logic/tribe.h"
 #include "logic/worker.h"
 #include "profile/profile.h"
-#include "upcast.h"
 
 namespace Widelands {
 
-MilitarySite_Descr::MilitarySite_Descr
+MilitarySiteDescr::MilitarySiteDescr
 	(char        const * const _name,
 	 char        const * const _descname,
 	 const std::string & directory, Profile & prof,  Section & global_s,
 	 const Tribe_Descr & _tribe,
 	 const World& world)
-:
-	ProductionSite_Descr
-		(_name, _descname, directory, prof, global_s, _tribe, world),
-m_conquer_radius     (0),
-m_num_soldiers       (0),
-m_heal_per_second    (0)
+	:
+	ProductionSiteDescr
+		(MapObjectType::MILITARYSITE, _name, _descname, directory, prof, global_s, _tribe, world),
+	m_conquer_radius     (0),
+	m_num_soldiers       (0),
+	m_heal_per_second    (0)
 {
 	m_conquer_radius      = global_s.get_safe_int("conquers");
 	m_num_soldiers        = global_s.get_safe_int("max_soldiers");
@@ -74,7 +74,7 @@ m_heal_per_second    (0)
 Create a new building of this type
 ===============
 */
-Building & MilitarySite_Descr::create_object() const {
+Building & MilitarySiteDescr::create_object() const {
 	return *new MilitarySite(*this);
 }
 
@@ -87,7 +87,7 @@ class MilitarySite
 =============================
 */
 
-MilitarySite::MilitarySite(const MilitarySite_Descr & ms_descr) :
+MilitarySite::MilitarySite(const MilitarySiteDescr & ms_descr) :
 ProductionSite(ms_descr),
 m_didconquer  (false),
 m_capacity    (ms_descr.get_max_number_of_soldiers()),
@@ -112,34 +112,39 @@ MilitarySite::~MilitarySite()
 Display number of soldiers.
 ===============
 */
-std::string MilitarySite::get_statistics_string()
+void MilitarySite::update_statistics_string(std::string* s)
 {
-	char buffer[255];
-	std::string str;
+	s->clear();
 	uint32_t present = presentSoldiers().size();
-	uint32_t total = stationedSoldiers().size();
+	uint32_t stationed = stationedSoldiers().size();
 
-	if (present == total) {
-		snprintf
-			(buffer, sizeof(buffer),
-			 ngettext("%u soldier", "%u soldiers", total),
-			 total);
+	if (present == stationed) {
+		if (m_capacity > stationed) {
+			/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
+			/** TRANSLATORS: %2% is the maximum number of soldier slots in the building */
+			*s += (boost::format(ngettext("%1% soldier (+%2%)",
+																		  "%1% soldiers (+%2%)",
+																		  stationed))
+											% stationed % (m_capacity - stationed)).str();
+		} else {
+			*s += (boost::format(ngettext("%u soldier", "%u soldiers", stationed))
+											% stationed).str();
+		}
 	} else {
-		snprintf
-			(buffer, sizeof(buffer),
-			/** TRANSLATORS: %1$u is the number of soldiers the plural refers to */
-			/** TRANSLATORS: %2$u are open soldier slots in the building */
-			 ngettext("%1$u(+%2$u) soldier", "%1$u(+%2$u) soldiers", total),
-			 present, total - present);
+		if (m_capacity > stationed) {
+			/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
+			/** TRANSLATORS: %2% are currently open soldier slots in the building */
+			/** TRANSLATORS: %3% is the maximum number of soldier slots in the building */
+			*s =
+					(boost::format(ngettext("%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", stationed))
+					 % present % (stationed - present) % (m_capacity - stationed)).str();
+		} else {
+			/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
+			/** TRANSLATORS: %2% are currently open soldier slots in the building */
+			*s += (boost::format(ngettext("%1%(+%2%) soldier", "%1%(+%2%) soldiers", stationed))
+					% present % (stationed - present)).str();
+		}
 	}
-	str = buffer;
-
-	if (m_capacity > total) {
-		snprintf(buffer, sizeof(buffer), " (+%u)", m_capacity - total);
-		str += buffer;
-	}
-
-	return str;
 }
 
 
@@ -149,14 +154,14 @@ void MilitarySite::init(Editor_Game_Base & egbase)
 
 	upcast(Game, game, &egbase);
 
-	const std::vector<Worker*>& ws = get_workers();
-	container_iterate_const(std::vector<Worker *>, ws, i)
-		if (upcast(Soldier, soldier, *i.current)) {
+	for (Worker * worker : get_workers()) {
+		if (upcast(Soldier, soldier, worker)) {
 			soldier->set_location_initially(*this);
 			assert(!soldier->get_state()); //  Should be newly created.
 			if (game)
 				soldier->start_task_buildingwork(*game);
 		}
+	}
 	update_soldier_request();
 
 	//  schedule the first healing
@@ -195,7 +200,7 @@ void MilitarySite::cleanup(Editor_Game_Base & egbase)
 			(Player_Area<Area<FCoords> >
 			 	(owner().player_number(),
 			 	 Area<FCoords>
-			 	 	(egbase.map().get_fcoords(get_position()), get_conquers())),
+			 	 	(egbase.map().get_fcoords(get_position()), descr().get_conquers())),
 			 m_defeating_player);
 
 	ProductionSite::cleanup(egbase);
@@ -244,7 +249,7 @@ int MilitarySite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s)
 			send_message
 				(*game,
 				 "site_occupied",
-				 descname(),
+				 descr().descname(),
 				 descr().m_occupied_str,
 				 true);
 		}
@@ -392,7 +397,7 @@ void MilitarySite::update_normal_soldier_request()
 			m_normal_soldier_request.reset
 				(new Request
 					(*this,
-					 tribe().safe_worker_index("soldier"),
+					 descr().tribe().safe_worker_index("soldier"),
 					 MilitarySite::request_soldier_callback,
 					 wwWORKER));
 			m_normal_soldier_request->set_requirements (m_soldier_requirements);
@@ -448,7 +453,7 @@ void MilitarySite::update_upgrade_soldier_request()
 		m_upgrade_soldier_request.reset
 				(new Request
 				(*this,
-				tribe().safe_worker_index("soldier"),
+				descr().tribe().safe_worker_index("soldier"),
 				MilitarySite::request_soldier_callback,
 				wwWORKER));
 
@@ -525,10 +530,10 @@ void MilitarySite::update_soldier_request(bool incd)
 	}
 	else // not doing upgrade request
 	{
-		if ((capacity != stationed) or (m_normal_soldier_request))
+		if ((capacity != stationed) || (m_normal_soldier_request))
 			update_normal_soldier_request();
 
-		if ((capacity == stationed) and (! m_normal_soldier_request))
+		if ((capacity == stationed) && (! m_normal_soldier_request))
 		{
 			if (presentSoldiers().size() == capacity)
 			{
@@ -549,7 +554,7 @@ Advance the program state if applicable.
 */
 void MilitarySite::act(Game & game, uint32_t const data)
 {
-	// TODO: do all kinds of stuff, but if you do nothing, let
+	// TODO(unknown): do all kinds of stuff, but if you do nothing, let
 	// ProductionSite::act() handle all this. Also note, that some ProductionSite
 	// commands rely, that ProductionSite::act() is not called for a certain
 	// period (like cmdAnimation). This should be reworked.
@@ -567,7 +572,7 @@ void MilitarySite::act(Game & game, uint32_t const data)
 	// Therefore I must poll in some occasions. Let's do that rather infrequently,
 	// to keep the game lightweight.
 
-	//TODO: I would need two new callbacks, to get rid ot this polling.
+	//TODO(unknown): I would need two new callbacks, to get rid ot this polling.
 	if (timeofgame > m_next_swap_soldiers_time)
 		{
 			m_next_swap_soldiers_time = timeofgame + (m_soldier_upgrade_try ? 20000 : 100000);
@@ -605,7 +610,7 @@ void MilitarySite::remove_worker(Worker & w)
 	ProductionSite::remove_worker(w);
 
 	if (upcast(Soldier, soldier, &w))
-		popSoldierJob(soldier, nullptr, nullptr);
+		popSoldierJob(soldier, nullptr);
 
 	update_soldier_request();
 }
@@ -625,20 +630,19 @@ bool MilitarySite::get_building_work(Game & game, Worker & worker, bool)
 		}
 
 		bool stayhome;
-		uint8_t retreat;
 		if
-			(Map_Object * const enemy
+			(MapObject * const enemy
 			 =
-			 popSoldierJob(soldier, &stayhome, &retreat))
+			 popSoldierJob(soldier, &stayhome))
 		{
 			if (upcast(Building, building, enemy)) {
 				soldier->start_task_attack
-					(game, *building, retreat);
+					(game, *building);
 				return true;
 			} else if (upcast(Soldier, opponent, enemy)) {
 				if (!opponent->getBattle()) {
 					soldier->start_task_defense
-						(game, stayhome, retreat);
+						(game, stayhome);
 					if (stayhome)
 						opponent->send_signal(game, "sleep");
 					return true;
@@ -668,12 +672,13 @@ std::vector<Soldier *> MilitarySite::presentSoldiers() const
 {
 	std::vector<Soldier *> soldiers;
 
-	const std::vector<Worker *>& w = get_workers();
-	container_iterate_const(std::vector<Worker *>, w, i)
-		if (upcast(Soldier, soldier, *i.current))
-			if (isPresent(*soldier))
+	for (Worker * worker : get_workers()) {
+		if (upcast(Soldier, soldier, worker)) {
+			if (isPresent(*soldier)) {
 				soldiers.push_back(soldier);
-
+			}
+		}
+	}
 	return soldiers;
 }
 
@@ -682,11 +687,11 @@ std::vector<Soldier *> MilitarySite::stationedSoldiers() const
 {
 	std::vector<Soldier *> soldiers;
 
-	const std::vector<Worker *>& w = get_workers();
-	container_iterate_const(std::vector<Worker *>, w, i)
-		if (upcast(Soldier, soldier, *i.current))
+	for (Worker * worker : get_workers()) {
+		if (upcast(Soldier, soldier, worker)) {
 			soldiers.push_back(soldier);
-
+		}
+	}
 	return soldiers;
 }
 
@@ -737,7 +742,7 @@ void MilitarySite::conquer_area(Editor_Game_Base & egbase) {
 		(Player_Area<Area<FCoords> >
 		 	(owner().player_number(),
 		 	 Area<FCoords>
-		 	 	(egbase.map().get_fcoords(get_position()), get_conquers())));
+		 	 	(egbase.map().get_fcoords(get_position()), descr().get_conquers())));
 	m_didconquer = true;
 }
 
@@ -754,7 +759,7 @@ void MilitarySite::aggressor(Soldier & enemy)
 	if
 		(enemy.get_owner() == &owner() ||
 		 enemy.getBattle() ||
-		 get_conquers()
+		 descr().get_conquers()
 		 <=
 		 map.calc_distance(enemy.get_position(), get_position()))
 		return;
@@ -771,22 +776,23 @@ void MilitarySite::aggressor(Soldier & enemy)
 	// policy as to how many soldiers are allowed to leave as defenders
 	std::vector<Soldier *> present = presentSoldiers();
 
-	if (1 < present.size())
-		container_iterate_const(std::vector<Soldier *>, present, i)
-			if (!haveSoldierJob(**i.current)) {
+	if (1 < present.size()) {
+		for (Soldier * temp_soldier : present) {
+			if (!haveSoldierJob(*temp_soldier)) {
 				SoldierJob sj;
-				sj.soldier  = *i.current;
+				sj.soldier  = temp_soldier;
 				sj.enemy = &enemy;
 				sj.stayhome = false;
-				sj.retreat = owner().get_retreat_percentage();
 				m_soldierjobs.push_back(sj);
-				(*i.current)->update_task_buildingwork(game);
+				temp_soldier->update_task_buildingwork(game);
 				return;
 			}
+		}
+	}
 
 	// Inform the player, that we are under attack by adding a new entry to the
 	// message queue - a sound will automatically be played.
-	informPlayer(game, true);
+	notify_player(game, true);
 }
 
 bool MilitarySite::attack(Soldier & enemy)
@@ -799,20 +805,22 @@ bool MilitarySite::attack(Soldier & enemy)
 	if (!present.empty()) {
 		// Find soldier with greatest hitpoints
 		uint32_t current_max = 0;
-		container_iterate_const(std::vector<Soldier *>, present, i)
-			if ((*i.current)->get_current_hitpoints() > current_max) {
-				defender = *i.current;
+		for (Soldier * temp_soldier : present) {
+			if (temp_soldier->get_current_hitpoints() > current_max) {
+				defender = temp_soldier;
 				current_max = defender->get_current_hitpoints();
 			}
+		}
 	} else {
 		// If one of our stationed soldiers is currently walking into the
 		// building, give us another chance.
 		std::vector<Soldier *> stationed = stationedSoldiers();
-		container_iterate_const(std::vector<Soldier *>, stationed, i)
-			if ((*i.current)->get_position() == get_position()) {
-				defender = *i.current;
+		for (Soldier * temp_soldier : stationed) {
+			if (temp_soldier->get_position() == get_position()) {
+				defender = temp_soldier;
 				break;
 			}
+		}
 	}
 
 	if (defender) {
@@ -822,14 +830,13 @@ bool MilitarySite::attack(Soldier & enemy)
 		sj.soldier = defender;
 		sj.enemy = &enemy;
 		sj.stayhome = true;
-		sj.retreat = 0;         // Flag defenders could not retreat
 		m_soldierjobs.push_back(sj);
 
 		defender->update_task_buildingwork(game);
 
 		// Inform the player, that we are under attack by adding a new entry to
 		// the message queue - a sound will automatically be played.
-		informPlayer(game);
+		notify_player(game);
 
 		return true;
 	} else {
@@ -866,7 +873,7 @@ bool MilitarySite::attack(Soldier & enemy)
 		// the new owner comes from another tribe
 		Building::FormerBuildings former_buildings;
 		for (Building_Index former_idx : m_old_buildings) {
-			const Building_Descr * old_descr = tribe().get_building_descr(former_idx);
+			const BuildingDescr * old_descr = descr().tribe().get_building_descr(former_idx);
 			std::string bldname = old_descr->name();
 			// Has this building already a suffix? == conquered building?
 			std::string::size_type const dot = bldname.rfind('.');
@@ -908,6 +915,10 @@ void MilitarySite::reinit_after_conqueration(Game & game)
 	conquer_area(game);
 	update_soldier_request();
 	start_animation(game, descr().get_animation("idle"));
+
+	// feature request 1247384 in launchpad bugs: Conquered buildings tend to
+	// be in a hostile area; typically players want heroes there.
+	set_soldier_preference(kPrefersHeroes);
 }
 
 /// Calculates whether the military presence is still kept and \returns true if.
@@ -923,16 +934,16 @@ bool MilitarySite::military_presence_kept(Game & game)
 	for (uint32_t i = 0; i < immovables.size(); ++i)
 		if (upcast(MilitarySite const, militarysite, immovables[i].object))
 			if
-				(this       !=  militarysite          and
-				 &owner  () == &militarysite->owner() and
-				 get_size() <=  militarysite->get_size() and
+				(this       !=  militarysite          &&
+				 &owner  () == &militarysite->owner() &&
+				 get_size() <=  militarysite->get_size() &&
 				 militarysite->m_didconquer)
 				return true;
 	return false;
 }
 
 /// Informs the player about an attack of his opponent.
-void MilitarySite::informPlayer(Game & game, bool const discovered)
+void MilitarySite::notify_player(Game & game, bool const discovered)
 {
 	// Add a message as long as no previous message was send from a point with
 	// radius <= 5 near the current location in the last 60 seconds
@@ -967,7 +978,7 @@ void MilitarySite::clear_requirements ()
 }
 
 void MilitarySite::sendAttacker
-	(Soldier & soldier, Building & target, uint8_t retreat)
+	(Soldier & soldier, Building & target)
 {
 	assert(isPresent(soldier));
 
@@ -978,7 +989,6 @@ void MilitarySite::sendAttacker
 	sj.soldier  = &soldier;
 	sj.enemy    = &target;
 	sj.stayhome = false;
-	sj.retreat  = retreat;
 	m_soldierjobs.push_back(sj);
 
 	soldier.update_task_buildingwork
@@ -988,10 +998,11 @@ void MilitarySite::sendAttacker
 
 bool MilitarySite::haveSoldierJob(Soldier & soldier)
 {
-	container_iterate_const(std::vector<SoldierJob>, m_soldierjobs, i)
-		if (i.current->soldier == &soldier)
+	for (const SoldierJob& temp_job : m_soldierjobs) {
+		if (temp_job.soldier == &soldier) {
 			return true;
-
+		}
+	}
 	return false;
 }
 
@@ -1000,19 +1011,20 @@ bool MilitarySite::haveSoldierJob(Soldier & soldier)
  * \return the enemy, if any, that the given soldier was scheduled
  * to attack, and remove the job.
  */
-Map_Object * MilitarySite::popSoldierJob
-	(Soldier * const soldier, bool * const stayhome, uint8_t * const retreat)
+MapObject * MilitarySite::popSoldierJob
+	(Soldier * const soldier, bool * const stayhome)
 {
-	container_iterate(std::vector<SoldierJob>, m_soldierjobs, i)
-		if (i.current->soldier == soldier) {
-			Map_Object * const enemy = i.current->enemy.get(owner().egbase());
+	for (std::vector<SoldierJob>::iterator job_iter = m_soldierjobs.begin();
+		 job_iter != m_soldierjobs.end(); ++job_iter)
+	{
+		if (job_iter->soldier == soldier) {
+			MapObject * const enemy = job_iter->enemy.get(owner().egbase());
 			if (stayhome)
-				*stayhome = i.current->stayhome;
-			if (retreat)
-				*retreat = i.current->retreat;
-			m_soldierjobs.erase(i.current);
+				*stayhome = job_iter->stayhome;
+			m_soldierjobs.erase(job_iter);
 			return enemy;
 		}
+	}
 	return nullptr;
 }
 
@@ -1064,7 +1076,7 @@ MilitarySite::update_upgrade_requirements()
 	bool maxchanged = reqmax != soldier_upgrade_required_max;
 	bool minchanged = reqmin != soldier_upgrade_required_min;
 
-	if (maxchanged or minchanged)
+	if (maxchanged || minchanged)
 	{
 		if (m_upgrade_soldier_request && (m_upgrade_soldier_request->is_open()))
 		{

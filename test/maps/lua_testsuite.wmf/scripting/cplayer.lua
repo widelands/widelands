@@ -22,7 +22,7 @@ function player_tests:test_number_property()
 end
 
 -- =================
--- place_flag tests 
+-- place_flag tests
 -- =================
 function player_tests:test_create_flag()
    local k = player1:place_flag(map:get_field(10,10), true)
@@ -115,10 +115,10 @@ function road_construction_tests:test_road_crosses_itself()
 end
 
 -- =====================
--- place_building tests 
+-- place_building tests
 -- =====================
 place_building_tests = lunit.TestCase("Player.place_building tests")
-function place_building_tests:setup() 
+function place_building_tests:setup()
    self.pis = {}
    self.f = map:get_field(10,10)
 
@@ -126,8 +126,8 @@ function place_building_tests:setup()
 end
 function place_building_tests:teardown()
       for idx, b in ipairs(self.pis) do
-         pcall(function() 
-         if b.type == "flag" then
+         pcall(function()
+         if b.descr.type_name == "flag" then
             b:remove()
          else
             -- removing flag also removes building
@@ -142,7 +142,7 @@ function place_building_tests:test_place_building_no_cs()
    local k = player1:place_building("warehouse", self.f)
    self.pis[#self.pis + 1] = k
    assert_equal(1, k.owner.number)
-   assert_equal("warehouse", k.building_type)
+   assert_equal("warehouse", k.descr.type_name)
 end
 
 function place_building_tests:test_something_in_the_way_no_cs()
@@ -159,14 +159,14 @@ function place_building_tests:test_force_building_no_cs()
    self.pis[#self.pis + 1] = f
    local k = player1:place_building("lumberjacks_hut", self.f, false, true)
    self.pis[#self.pis + 1] = k
-   assert_equal("productionsite", k.building_type)
+   assert_equal("productionsite", k.descr.type_name)
 end
 
 function place_building_tests:test_place_building_cs()
    local k = player1:place_building("warehouse", self.f, true)
    self.pis[#self.pis + 1] = k
    assert_equal(1, k.owner.number)
-   assert_equal("constructionsite", k.building_type)
+   assert_equal("constructionsite", k.descr.type_name)
 end
 
 function place_building_tests:test_something_in_the_way_cs()
@@ -183,7 +183,7 @@ function place_building_tests:test_force_building_cs()
    self.pis[#self.pis + 1] = f
    local k = player1:place_building("lumberjacks_hut", self.f, true, true)
    self.pis[#self.pis + 1] = k
-   assert_equal("constructionsite", k.building_type)
+   assert_equal("constructionsite", k.descr.type_name)
 end
 
 function place_building_tests:test_force_building_illegal_name()
@@ -191,5 +191,3 @@ function place_building_tests:test_force_building_illegal_name()
       player1:place_building("kjhsfjkh", map:get_field(10,10))
    end)
 end
-
-

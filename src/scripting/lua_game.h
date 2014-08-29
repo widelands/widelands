@@ -17,20 +17,20 @@
  *
  */
 
-#ifndef LUA_GAME_H
-#define LUA_GAME_H
+#ifndef WL_SCRIPTING_LUA_GAME_H
+#define WL_SCRIPTING_LUA_GAME_H
 
 #include "logic/building.h"
 #include "logic/message_id.h"
-#include "scripting/eris/lua.hpp"
 #include "scripting/lua_bases.h"
 #include "scripting/luna.h"
+#include "third_party/eris/lua.hpp"
 
 namespace Widelands {
 	struct Tribe_Descr;
 	class Objective;
 	struct Message;
-};
+}
 
 namespace LuaGame {
 
@@ -63,10 +63,6 @@ public:
 	int get_allowed_buildings(lua_State * L);
 	int get_objectives(lua_State * L);
 	int get_defeated(lua_State * L);
-	int get_retreat_percentage(lua_State * L);
-	int set_retreat_percentage(lua_State * L);
-	int get_changing_retreat_percentage_allowed(lua_State * L);
-	int set_changing_retreat_percentage_allowed(lua_State * L);
 	int get_inbox(lua_State * L);
 	int get_team(lua_State * L);
 	int set_team(lua_State * L);
@@ -88,8 +84,6 @@ public:
 	int reveal_scenario(lua_State * L);
 	int reveal_campaign(lua_State * L);
 	int get_buildings(lua_State * L);
-	int set_flag_style(lua_State * L);
-	int set_frontier_style(lua_State * L);
 	int get_suitability(lua_State * L);
 	int allow_workers(lua_State * L);
 	int switchplayer(lua_State * L);
@@ -119,8 +113,8 @@ public:
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
 
-	virtual void __persist(lua_State *) override;
-	virtual void __unpersist(lua_State *) override;
+	void __persist(lua_State *) override;
+	void __unpersist(lua_State *) override;
 
 	/*
 	 * Properties
@@ -157,12 +151,12 @@ public:
 
 	L_Message(uint8_t, Widelands::Message_Id);
 	L_Message() : m_plr(0), m_mid(0) {}
-	L_Message(lua_State * L) : m_plr(0) {
+	L_Message(lua_State * L) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
 
-	virtual void __persist(lua_State *) override;
-	virtual void __unpersist(lua_State *) override;
+	void __persist(lua_State *) override;
+	void __unpersist(lua_State *) override;
 
 	/*
 	 * Properties
@@ -190,5 +184,5 @@ public:
 
 void luaopen_wlgame(lua_State *);
 
-#endif
-};
+#endif  // end of include guard: WL_SCRIPTING_LUA_GAME_H
+}

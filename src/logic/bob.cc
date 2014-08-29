@@ -23,14 +23,16 @@
 
 #include <stdint.h>
 
-#include "backtrace.h"
+#include "base/macros.h"
+#include "base/wexception.h"
 #include "economy/route.h"
 #include "economy/transfer.h"
 #include "graphic/rendertarget.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
+#include "logic/backtrace.h"
 #include "logic/checkstep.h"
-#include "logic/critter_bob.h"
+#include "logic/critter.h"
 #include "logic/findbob.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -43,17 +45,18 @@
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
 #include "profile/profile.h"
-#include "upcast.h"
-#include "wexception.h"
 #include "wui/mapviewpixelconstants.h"
 
 
 namespace Widelands {
 
-BobDescr::BobDescr(const std::string& init_name,
+BobDescr::BobDescr(MapObjectType type, const std::string& init_name,
                   const std::string& init_descname,
                   Tribe_Descr const* tribe)
-   : Map_Object_Descr(init_name, init_descname), owner_tribe_(tribe) {
+	:
+	MapObjectDescr(type, init_name, init_descname),
+	owner_tribe_    (tribe)
+{
 }
 
 /**
@@ -67,7 +70,7 @@ BobDescr::BobDescr(const std::string& init_name,
 uint32_t BobDescr::vision_range() const
 {
 	if (owner_tribe_) {
-		if (upcast(const Ship_Descr, ship, this))
+		if (upcast(const ShipDescr, ship, this))
 			return ship->vision_range();
 		return owner_tribe_->get_bob_vision_range();
 	}
@@ -94,7 +97,7 @@ Bob & BobDescr::create
 
 
 Bob::Bob(const BobDescr & _descr) :
-Map_Object       (&_descr),
+MapObject       (&_descr),
 m_owner          (nullptr),
 m_position       (FCoords(Coords(0, 0), nullptr)), // not linked anywhere
 m_linknext       (nullptr),
@@ -117,7 +120,7 @@ Bob::~Bob()
 {
 	if (m_position.field) {
 		molog
-			("Map_Object::~Map_Object: m_pos.field != 0, cleanup() not "
+			("MapObject::~MapObject: m_pos.field != 0, cleanup() not "
 			 "called!\n");
 		abort();
 	}
@@ -131,7 +134,7 @@ Bob::~Bob()
  */
 void Bob::init(Editor_Game_Base & egbase)
 {
-	Map_Object::init(egbase);
+	MapObject::init(egbase);
 
 	if (upcast(Game, game, &egbase))
 		schedule_act(*game, 1);
@@ -158,7 +161,7 @@ void Bob::cleanup(Editor_Game_Base & egbase)
 			m_linknext->m_linkpprev = m_linkpprev;
 	}
 
-	Map_Object::cleanup(egbase);
+	MapObject::cleanup(egbase);
 }
 
 
@@ -224,7 +227,7 @@ void Bob::do_act(Game & game)
  */
 void Bob::schedule_destroy(Game & game)
 {
-	Map_Object::schedule_destroy(game);
+	MapObject::schedule_destroy(game);
 	++m_actid; // to skip over any updates that may be scheduled
 	m_actscheduled = true;
 }
@@ -236,7 +239,7 @@ void Bob::schedule_destroy(Game & game)
  */
 void Bob::schedule_act(Game & game, uint32_t tdelta)
 {
-	Map_Object::schedule_act(game, tdelta, m_actid);
+	MapObject::schedule_act(game, tdelta, m_actid);
 	m_actscheduled = true;
 }
 
@@ -260,7 +263,7 @@ void Bob::skip_act()
  */
 void Bob::push_task(Game & game, const Task & task, uint32_t const tdelta)
 {
-	assert(not task.unique or not get_state(task));
+	assert(!task.unique || !get_state(task));
 	assert(m_in_act || m_stack.empty());
 
 	m_stack.push_back(State(&task));
@@ -468,7 +471,8 @@ struct BlockedTracker {
 		bool operator()(const CoordData & a, const CoordData & b) const {
 			if (a.dist != b.dist)
 				return a.dist < b.dist;
-			return a.coord.all < b.coord.all;
+			return std::forward_as_tuple(a.coord.y, a.coord.x) <
+			       std::forward_as_tuple(b.coord.y, b.coord.x);
 		}
 	};
 	typedef std::map<CoordData, bool, CoordOrdering> Cache;
@@ -649,8 +653,9 @@ bool Bob::start_task_movepath
 		molog
 			("ERROR: (%i, %i) is not on the given path:\n",
 			 get_position().x, get_position().y);
-		container_iterate_const(std::vector<Coords>, path.get_coords(), i)
-			molog("* (%i, %i)\n", i.current->x, i.current->y);
+		for (const Coords& coords : path.get_coords()) {
+			molog("* (%i, %i)\n", coords.x, coords.y);
+		}
 		log_general_info(game);
 		log("%s", get_backtrace().c_str());
 		throw wexception
@@ -706,7 +711,7 @@ void Bob::movepath_update(Game & game, State & state)
 
 	if
 		(state.ivar2
-		 and
+		 &&
 		 static_cast<Path::Step_Vector::size_type>(state.ivar1) + 1
 		 ==
 		 path->get_nsteps())
@@ -890,7 +895,7 @@ int32_t Bob::start_walk
 
 	//  Always call checkNodeBlocked, because it might communicate with other
 	//  bobs (as is the case for soldiers on the battlefield).
-	if (checkNodeBlocked(game, newnode, true) and !force)
+	if (checkNodeBlocked(game, newnode, true) && !force)
 		return -2;
 
 	// Move is go
@@ -916,9 +921,9 @@ bool Bob::checkNodeBlocked(Game & game, const FCoords & field, bool)
 		(Area<FCoords>(field, 0), &soldiers, FindBobEnemySoldier(get_owner()));
 
 	if (!soldiers.empty()) {
-		container_iterate(std::vector<Bob *>, soldiers, i) {
-			Soldier & soldier = ref_cast<Soldier, Bob>(**i.current);
-			if (soldier.getBattle())
+		for (Bob * temp_bob : soldiers) {
+			upcast(Soldier, soldier, temp_bob);
+			if (soldier->getBattle())
 				return true;
 		}
 	}
@@ -935,12 +940,12 @@ bool Bob::checkNodeBlocked(Game & game, const FCoords & field, bool)
 void Bob::set_owner(Player * const player)
 {
 	if (m_owner && m_position.field)
-		m_owner->unsee_area(Area<FCoords>(get_position(), vision_range()));
+		m_owner->unsee_area(Area<FCoords>(get_position(), descr().vision_range()));
 
 	m_owner = player;
 
 	if (m_owner != nullptr && m_position.field)
-		m_owner->see_area(Area<FCoords>(get_position(), vision_range()));
+		m_owner->see_area(Area<FCoords>(get_position(), descr().vision_range()));
 }
 
 
@@ -969,10 +974,10 @@ void Bob::set_position(Editor_Game_Base & egbase, const Coords & coords)
 	*m_linkpprev = this;
 
 	if (m_owner != nullptr) {
-		m_owner->see_area(Area<FCoords>(get_position(), vision_range()));
+		m_owner->see_area(Area<FCoords>(get_position(), descr().vision_range()));
 
 		if (oldposition.field)
-			m_owner->unsee_area(Area<FCoords>(oldposition, vision_range()));
+			m_owner->unsee_area(Area<FCoords>(oldposition, descr().vision_range()));
 	}
 
 	// Since pretty much everything in Widelands eventually results in the
@@ -1068,7 +1073,7 @@ Bob::Loader::Loader()
 
 void Bob::Loader::load(FileRead & fr)
 {
-	Map_Object::Loader::load(fr);
+	MapObject::Loader::load(fr);
 
 	uint8_t version = fr.Unsigned8();
 	if (version != BOB_SAVEGAME_VERSION)
@@ -1143,7 +1148,7 @@ void Bob::Loader::load(FileRead & fr)
 
 void Bob::Loader::load_pointers()
 {
-	Map_Object::Loader::load_pointers();
+	MapObject::Loader::load_pointers();
 
 	Bob & bob = get<Bob>();
 	for (uint32_t i = 0; i < bob.m_stack.size(); ++i) {
@@ -1151,7 +1156,7 @@ void Bob::Loader::load_pointers()
 		LoadState & loadstate = states[i];
 
 		if (loadstate.objvar1)
-			state.objvar1 = &mol().get<Map_Object>(loadstate.objvar1);
+			state.objvar1 = &mol().get<MapObject>(loadstate.objvar1);
 
 		if (state.route)
 			state.route->load_pointers(loadstate.route, mol());
@@ -1160,7 +1165,7 @@ void Bob::Loader::load_pointers()
 
 void Bob::Loader::load_finish()
 {
-	Map_Object::Loader::load_finish();
+	MapObject::Loader::load_finish();
 
 	// Care about new mapobject saving / loading - map objects don't get a task,
 	// if created in the editor, so we give them one here.
@@ -1189,9 +1194,9 @@ const BobProgramBase * Bob::Loader::get_program(const std::string & name)
 }
 
 void Bob::save
-	(Editor_Game_Base & eg, Map_Map_Object_Saver & mos, FileWrite & fw)
+	(Editor_Game_Base & eg, MapMapObjectSaver & mos, FileWrite & fw)
 {
-	Map_Object::save(eg, mos, fw);
+	MapObject::save(eg, mos, fw);
 
 	fw.Unsigned8(BOB_SAVEGAME_VERSION);
 
@@ -1219,7 +1224,7 @@ void Bob::save
 		fw.Signed32(state.ivar1);
 		fw.Signed32(state.ivar2);
 		fw.Signed32(state.ivar3);
-		if (const Map_Object * obj = state.objvar1.get(eg)) {
+		if (const MapObject * obj = state.objvar1.get(eg)) {
 			fw.Unsigned32(mos.get_object_file_index(*obj));
 		} else {
 			fw.Unsigned32(0);

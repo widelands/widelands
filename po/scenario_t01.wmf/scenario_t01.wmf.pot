@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-06-17 16:11+0000\n"
+"POT-Creation-Date: 2014-08-05 09:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -117,6 +117,12 @@ msgid ""
 "The colors of these symbols indicate how steep this part of the road will be. Green is for flat, yellow means steep and red stands for very steep. The steeper the road is, the harder it will be for your people to walk on it (and your wares will be transported more slowly)."
 msgstr ""
 
+#: ../../campaigns/t01.wmf/scripting/texts.lua:25
+#: ../../campaigns/t01.wmf/scripting/texts.lua:47
+msgid ""
+"You can click on any of the symbols to build the first part of the road there. New symbols will appear to show you where the next part of the road can go, and so on. However, you can also click farther away from the flag to build several steps at once. Click on the flag at the headquarters to finish the road."
+msgstr ""
+
 #: ../../campaigns/t01.wmf/scripting/texts.lua:41
 msgid ""
 "Build a road to the lumberjack’s hut"
@@ -125,11 +131,6 @@ msgstr ""
 #: ../../campaigns/t01.wmf/scripting/texts.lua:43
 msgid ""
 "Road to the lumberjack’ hut"
-msgstr ""
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:47
-msgid ""
-"You can click on any of the symbols to build the first part of the road there. New symbols will appear to show you where the next part of the road can go, and so on. However, you can also click farther away from the flag to build several steps at once. Click on the flag at the headquarters to finish the road."
 msgstr ""
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:53
@@ -199,7 +200,7 @@ msgstr ""
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:107
 msgid ""
-"None but the gods know how long we have to remain hidden here. The warriors hope we may march back gloriously any day now, but I strongly doubt that will happen soon. And the days are already getting shorter and colder..."
+"Only the gods know how long we have to remain hidden here. The warriors hope we may march back gloriously any day now, but I strongly doubt that will happen soon. And the days are already getting shorter and colder..."
 msgstr ""
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:108
@@ -378,7 +379,7 @@ msgid ""
 "“%s”"
 msgstr ""
 
-#: ../../scripting/format_scenario.lua:92
+#: ../../scripting/format_scenario.lua:129
 msgid ""
 "New Objective"
 msgid_plural ""

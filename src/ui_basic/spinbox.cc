@@ -21,11 +21,12 @@
 
 #include <vector>
 
-#include "container_iterate.h"
-#include "i18n.h"
+#include "base/deprecated.h"
+#include "base/i18n.h"
+#include "base/wexception.h"
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
-#include "wexception.h"
+#include "wui/text_constants.h"
 
 namespace UI {
 
@@ -160,19 +161,19 @@ SpinBox::~SpinBox() {
  */
 void SpinBox::update()
 {
-
-	for
-		(wl_const_range<std::vector<IntValueTextReplacement> > i(sbi->valrep);;
-		 ++i)
-		if (i.empty()) {
-			char buf[64];
-			snprintf(buf, sizeof(buf), "%i %s", sbi->value, sbi->unit.c_str());
-			sbi->text->set_text(buf);
-			break;
-		} else if (i.current->value == sbi->value) {
-			sbi->text->set_text(i.current->text);
+	bool was_in_list = false;
+	for (const IntValueTextReplacement& value : sbi->valrep) {
+		if (value.value == sbi->value) {
+			sbi->text->set_text(value.text);
+			was_in_list = true;
 			break;
 		}
+	}
+	if (!was_in_list) {
+		char buf[64];
+		snprintf(buf, sizeof(buf), "%i %s", sbi->value, sbi->unit.c_str());
+		sbi->text->set_text(buf);
+	}
 
 	sbi->butMinus->set_enabled(sbi->min < sbi->value);
 	sbi->butPlus ->set_enabled           (sbi->value < sbi->max);

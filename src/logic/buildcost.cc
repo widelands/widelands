@@ -19,11 +19,11 @@
 
 #include "logic/buildcost.h"
 
+#include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/tribe.h"
 #include "profile/profile.h"
-#include "wexception.h"
 
 namespace Widelands {
 
@@ -38,7 +38,7 @@ void Buildcost::parse(const Tribe_Descr & tribe, Section & buildcost_s)
 						("a buildcost item of this ware type has already been "
 						 "defined");
 				int32_t const value = val->get_int();
-				if (value < 1 or 255 < value)
+				if (value < 1 || 255 < value)
 					throw wexception("count is out of range 1 .. 255");
 				insert(std::pair<Ware_Index, uint8_t>(idx, value));
 			} else

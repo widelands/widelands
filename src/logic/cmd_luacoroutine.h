@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef CMD_LUACOROUTINE_H
-#define CMD_LUACOROUTINE_H
+#ifndef WL_LOGIC_CMD_LUACOROUTINE_H
+#define WL_LOGIC_CMD_LUACOROUTINE_H
 
 #include <string>
 
@@ -38,12 +38,12 @@ struct Cmd_LuaCoroutine : public GameLogicCommand {
 	}
 
 	// Write these commands to a file (for savegames)
-	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Write(FileWrite &, Editor_Game_Base &, MapMapObjectSaver  &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
-	virtual uint8_t id() const override {return QUEUE_CMD_LUACOROUTINE;}
+	uint8_t id() const override {return QUEUE_CMD_LUACOROUTINE;}
 
-	virtual void execute(Game &) override;
+	void execute(Game &) override;
 
 private:
 	LuaCoroutine * m_cr;
@@ -51,4 +51,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_CMD_LUACOROUTINE_H

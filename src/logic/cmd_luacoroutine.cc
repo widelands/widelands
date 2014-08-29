@@ -19,23 +19,23 @@
 
 #include "logic/cmd_luacoroutine.h"
 
-#include "gamecontroller.h"
+#include "base/log.h"
+#include "base/macros.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "log.h"
 #include "logic/game.h"
+#include "logic/game_controller.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
 #include "scripting/lua_coroutine.h"
 #include "scripting/scripting.h"
-#include "upcast.h"
 
 namespace Widelands {
 
 void Cmd_LuaCoroutine::execute (Game & game) {
 	try {
-		uint32_t sleeptime;
-		int rv = m_cr->resume(&sleeptime);
+		int rv = m_cr->resume();
+		const uint32_t sleeptime = m_cr->pop_uint32();
 		if (rv == LuaCoroutine::YIELDED) {
 			game.enqueue_command(new Widelands::Cmd_LuaCoroutine(sleeptime, m_cr));
 			m_cr = nullptr;  // Remove our ownership so we don't delete.
@@ -59,7 +59,7 @@ void Cmd_LuaCoroutine::execute (Game & game) {
 }
 
 #define CMD_LUACOROUTINE_VERSION 3
-void Cmd_LuaCoroutine::Read(FileRead& fr, Editor_Game_Base& egbase, Map_Map_Object_Loader& mol) {
+void Cmd_LuaCoroutine::Read(FileRead& fr, Editor_Game_Base& egbase, MapMapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CMD_LUACOROUTINE_VERSION) {
@@ -79,7 +79,7 @@ void Cmd_LuaCoroutine::Read(FileRead& fr, Editor_Game_Base& egbase, Map_Map_Obje
 	}
 }
 void Cmd_LuaCoroutine::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(CMD_LUACOROUTINE_VERSION);
 	GameLogicCommand::Write(fw, egbase, mos);

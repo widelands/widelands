@@ -4,7 +4,7 @@ function _cnt_wares(f)
    return rv
 end
 -- ===================
--- Flag functionality 
+-- Flag functionality
 -- ===================
 flag_tests = lunit.TestCase("flag tests")
 function flag_tests:setup()
@@ -16,10 +16,10 @@ function flag_tests:teardown()
 end
 
 function flag_tests:test_name()
-   assert_equal("flag", self.f.name)
+   assert_equal("flag", self.f.descr.name)
 end
 function flag_tests:test_type()
-   assert_equal("flag", self.f.type)
+   assert_equal("flag", self.f.descr.type_name)
 end
 function flag_tests:test_fields()
    local f = self.f.fields
@@ -139,4 +139,3 @@ function flag_tests:test_get_wares_non_existant_name()
       self.f:get_wares{"meat", "balloon"}
    end)
 end
-

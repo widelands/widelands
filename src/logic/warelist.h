@@ -17,13 +17,12 @@
  *
  */
 
-#ifndef WARELIST_H
-#define WARELIST_H
+#ifndef WL_LOGIC_WARELIST_H
+#define WL_LOGIC_WARELIST_H
 
 #include <cassert>
 #include <vector>
 
-#include <SDL.h>
 #include <boost/bind.hpp>
 #include <boost/signals2.hpp>
 
@@ -36,7 +35,7 @@ namespace Widelands {
  * It is useful for warehouses and for economy-wide inventory.
  */
 struct WareList {
-	WareList() {};
+	WareList() {}
 	~WareList();
 
 	void clear() {m_wares.clear();} /// Clear the storage
@@ -60,7 +59,7 @@ struct WareList {
 	}
 
 	bool operator== (const WareList &)    const;
-	bool operator!= (const WareList & wl) const {return not (*this == wl);}
+	bool operator!= (const WareList & wl) const {return !(*this == wl);}
 
 	mutable boost::signals2::signal<void ()> changed;
 
@@ -70,4 +69,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_WARELIST_H

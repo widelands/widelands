@@ -24,16 +24,16 @@
 
 #include <boost/format.hpp>
 
+#include "base/i18n.h"
+#include "base/log.h"
+#include "base/wexception.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "log.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"
-#include "s2map.h"
-#include "wexception.h"
+#include "wui/text_constants.h"
 
 using Widelands::WL_Map_Loader;
 
@@ -227,11 +227,11 @@ void Fullscreen_Menu_Editor_MapSelect::fill_list()
 	{
 		const char * const name = pname->c_str();
 		if
-			(strcmp(FileSystem::FS_Filename(name), ".")    and
+			(strcmp(FileSystem::FS_Filename(name), ".")    &&
 			 // Upsy, appeared again. ignore
-			 strcmp(FileSystem::FS_Filename(name), "..")   and
-			 g_fs->IsDirectory(name)                       and
-			 not WL_Map_Loader::is_widelands_map(name))
+			 strcmp(FileSystem::FS_Filename(name), "..")   &&
+			 g_fs->IsDirectory(name)                       &&
+			 !WL_Map_Loader::is_widelands_map(name))
 
 		m_list.add
 			(FileSystem::FS_Filename(name),

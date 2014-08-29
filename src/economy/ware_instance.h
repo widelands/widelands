@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef S__WARE_INSTANCE_H
-#define S__WARE_INSTANCE_H
+#ifndef WL_ECONOMY_WARE_INSTANCE_H
+#define WL_ECONOMY_WARE_INSTANCE_H
 
 #include "economy/transfer.h"
 #include "logic/instances.h"
@@ -32,7 +32,7 @@ class Economy;
 class Editor_Game_Base;
 class Game;
 struct IdleWareSupply;
-class Map_Object;
+class MapObject;
 struct PlayerImmovable;
 struct Transfer;
 
@@ -52,21 +52,16 @@ struct Transfer;
  * \li a \ref PortDock or \ref Ship where the ware is encapsulated in a \ref ShippingItem
  *     for seafaring
  */
-class WareInstance : public Map_Object {
+class WareInstance : public MapObject {
 	friend struct Map_Waredata_Data_Packet;
 
-	MO_DESCR(WareDescr);
+	MO_DESCR(WareDescr)
 
 public:
 	WareInstance(Ware_Index, const WareDescr* const);
 	~WareInstance();
 
-	virtual int32_t get_type() const override;
-	char const* type_name() const override {
-		return "ware";
-	}
-
-	Map_Object* get_location(Editor_Game_Base& egbase) {
+	MapObject* get_location(Editor_Game_Base& egbase) {
 		return m_location.get(egbase);
 	}
 	Economy* get_economy() const {
@@ -81,7 +76,7 @@ public:
 	void act(Game&, uint32_t data) override;
 	void update(Game&);
 
-	void set_location(Editor_Game_Base&, Map_Object* loc);
+	void set_location(Editor_Game_Base&, MapObject* loc);
 	void set_economy(Economy*);
 
 	void enter_building(Game&, Building& building);
@@ -97,7 +92,7 @@ public:
 		return m_transfer;
 	}
 
-	virtual void log_general_info(const Editor_Game_Base& egbase) override;
+	void log_general_info(const Editor_Game_Base& egbase) override;
 
 private:
 	Object_Ptr m_location;
@@ -110,12 +105,12 @@ private:
 
 	// loading and saving stuff
 protected:
-	struct Loader : Map_Object::Loader {
+	struct Loader : MapObject::Loader {
 		Loader();
 
 		void load(FileRead&);
-		virtual void load_pointers() override;
-		virtual void load_finish() override;
+		void load_pointers() override;
+		void load_finish() override;
 
 	private:
 		uint32_t m_location;
@@ -124,13 +119,13 @@ protected:
 	};
 
 public:
-	virtual bool has_new_save_support() override {
+	bool has_new_save_support() override {
 		return true;
 	}
 
-	virtual void save(Editor_Game_Base&, Map_Map_Object_Saver&, FileWrite&) override;
-	static Map_Object::Loader* load(Editor_Game_Base&, Map_Map_Object_Loader&, FileRead&);
+	void save(Editor_Game_Base&, MapMapObjectSaver&, FileWrite&) override;
+	static MapObject::Loader* load(Editor_Game_Base&, MapMapObjectLoader&, FileRead&);
 };
 }
 
-#endif
+#endif  // end of include guard: WL_ECONOMY_WARE_INSTANCE_H

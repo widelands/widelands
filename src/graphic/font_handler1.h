@@ -17,15 +17,16 @@
  *
  */
 
-#ifndef FONT_HANDLER1_H // TODO: rename
-#define FONT_HANDLER1_H
+// TODO(unknown): rename
+#ifndef WL_GRAPHIC_FONT_HANDLER1_H
+#define WL_GRAPHIC_FONT_HANDLER1_H
 
 #include <string>
 
-#include <boost/noncopyable.hpp>
+#include "base/macros.h"
+#include "base/point.h"
+#include "graphic/align.h"
 
-#include "align.h"
-#include "point.h"
 
 class FileSystem;
 class Image;
@@ -36,22 +37,25 @@ namespace UI {
 /**
  * Main class for string rendering. Manages the cache of pre-rendered strings.
  */
-class IFont_Handler1 : boost::noncopyable {
+class IFont_Handler1 {
 public:
-	virtual ~IFont_Handler1() {};
+	IFont_Handler1() = default;
+	virtual ~IFont_Handler1() {}
 
 	/*
 	 * Renders the given text into an image. The image is cached and therefore
 	 * ownership remains with this class. Will throw on error.
 	 */
 	virtual const Image* render(const std::string& text, uint16_t w = 0) = 0;
+
+	DISALLOW_COPY_AND_ASSIGN(IFont_Handler1);
 };
 
 // Create a new Font_Handler1. Ownership for the objects is not taken.
-IFont_Handler1 * create_fonthandler(Graphic* gr, FileSystem* fs);
+IFont_Handler1 * create_fonthandler(Graphic* gr);
 
 extern IFont_Handler1 * g_fh1;
 
 }
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_FONT_HANDLER1_H

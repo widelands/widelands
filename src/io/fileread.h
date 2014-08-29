@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef BASIC_FILEREAD_H
-#define BASIC_FILEREAD_H
+#ifndef WL_IO_FILEREAD_H
+#define WL_IO_FILEREAD_H
 
 #include <cassert>
 #include <limits>
@@ -29,7 +29,7 @@
 
 #include "io/filesystem/filesystem.h"
 #include "io/streamread.h"
-#include "machdep.h"
+#include "io/machdep.h"
 
 /// Can be used to read a file. It works quite naively by reading the entire
 /// file into memory. Convenience functions are available for endian-safe
@@ -79,7 +79,8 @@ public:
 	/// Loads a file into memory. Reserves one additional byte which is zeroed,
 	/// so that text files can be handled like a null-terminated string.
 	/// \throws an exception if the file couldn't be loaded for whatever reason.
-	/// \todo error handling
+
+	// TODO(unknown): error handling
 	void Open(FileSystem& fs, const std::string& filename);
 
 	/// Works just like Open, but returns false when the load fails.
@@ -103,7 +104,7 @@ public:
 
 	// Returns the next 'bytes' starting at 'pos' in the file. Can throw
 	// File_Boundary_Exceeded.
-	char* Data(uint32_t const bytes, const Pos pos = Pos::Null());
+	char* Data(uint32_t bytes, Pos pos = Pos::Null());
 
 	// Returns the whole file as a string starting from 'pos'.
 	char* CString(Pos pos);
@@ -117,4 +118,4 @@ private:
 	Pos filepos_;
 };
 
-#endif
+#endif  // end of include guard: WL_IO_FILEREAD_H

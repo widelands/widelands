@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef TEXTURE_H
-#define TEXTURE_H
+#ifndef WL_GRAPHIC_TEXTURE_H
+#define WL_GRAPHIC_TEXTURE_H
 
 #include <memory>
 #include <string>
@@ -28,6 +28,11 @@
 
 #include "graphic/colormap.h"
 #include "graphic/render/gl_surface_texture.h"
+
+/// Textures have a fixed size and are squares.
+/// TEXTURE_HEIGHT is just defined for easier understanding of the code.
+#define TEXTURE_WIDTH 64
+#define TEXTURE_HEIGHT TEXTURE_WIDTH
 
 /** struct Texture
 *
@@ -51,7 +56,7 @@ struct Texture {
 	uint8_t * get_curpixels() const {return m_curframe;}
 	void    * get_colormap () const {return m_colormap->get_colormap();}
 
-	uint32_t get_minimap_color(char shade);
+	RGBColor get_minimap_color(int8_t shade);
 
 	void animate(uint32_t time);
 	uint32_t getTexture() const
@@ -60,7 +65,7 @@ struct Texture {
 private:
 	std::unique_ptr<Colormap> m_colormap;
 	uint8_t   * m_pixels;
-	uint32_t    m_mmap_color[256];
+	RGBColor    m_minimap_colors[256];
 	uint8_t   * m_curframe;
 	int32_t     m_frame_num;
 	std::string m_texture_image;
@@ -69,4 +74,4 @@ private:
 	std::vector<std::unique_ptr<GLSurfaceTexture>> m_glFrames;
 };
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_TEXTURE_H

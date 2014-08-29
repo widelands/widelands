@@ -157,3 +157,20 @@ function place_building_in_region(
       building, plr.number)
    )
 end
+
+
+-- RST
+-- .. function:: is_building(immovable)
+--
+--    Checks whether an immpvable is a finished building, i.e. not
+--    a construction site.
+--
+--    :arg immovable: The immovable to test
+--
+--    :returns: true if the immovable is a building
+function is_building(immovable)
+	return immovable.descr.type_name == "productionsite" or
+		immovable.descr.type_name == "warehouse" or
+		immovable.descr.type_name == "militarysite" or
+		immovable.descr.type_name == "trainingsite"
+end

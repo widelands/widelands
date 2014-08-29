@@ -19,13 +19,13 @@
 
 #include "wui/mapview.h"
 
+#include "base/macros.h"
 #include "graphic/graphic.h"
 #include "graphic/render/gamerenderer_gl.h"
 #include "graphic/render/gamerenderer_sdl.h"
 #include "graphic/rendertarget.h"
 #include "logic/map.h"
 #include "logic/player.h"
-#include "upcast.h"
 #include "wlapplication.h"
 #include "wui/interactive_base.h"
 #include "wui/interactive_player.h"
@@ -59,7 +59,7 @@ void Map_View::warp_mouse_to_node(Widelands::Coords const c) {
 
 	//  If the user has scrolled the node outside the viewable area, he most
 	//  surely doesn't want to jump there.
-	if (p.x < get_w() and p.y < get_h()) {
+	if (p.x < get_w() && p.y < get_h()) {
 		if      (p.x <= 0)
 			warp_mouse_to_node(Widelands::Coords(c.x + map.get_width (), c.y));
 		else if (p.y <= 0)
@@ -152,7 +152,7 @@ void Map_View::stop_dragging() {
  * Left-press:    field action window
  */
 bool Map_View::handle_mousepress
-	(Uint8 const btn, int32_t const x, int32_t const y)
+	(uint8_t const btn, int32_t const x, int32_t const y)
 {
 	if (btn == SDL_BUTTON_LEFT)
 	{
@@ -167,9 +167,9 @@ bool Map_View::handle_mousepress
 	}
 	return true;
 }
-bool Map_View::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
+bool Map_View::handle_mouserelease(const uint8_t btn, int32_t, int32_t)
 {
-	if (btn == SDL_BUTTON_RIGHT and m_dragging)
+	if (btn == SDL_BUTTON_RIGHT && m_dragging)
 		stop_dragging();
 	return true;
 }
@@ -181,7 +181,7 @@ Scroll the view according to mouse movement.
 ===============
 */
 bool Map_View::handle_mousemove
-	(Uint8 const state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff)
+	(uint8_t const state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff)
 {
 	if (m_dragging) {
 		if (state & SDL_BUTTON(SDL_BUTTON_RIGHT))
@@ -189,7 +189,7 @@ bool Map_View::handle_mousemove
 		else stop_dragging();
 	}
 
-	if (not intbase().get_sel_freeze())
+	if (!intbase().get_sel_freeze())
 		track_sel(Point(x, y));
 
 	g_gr->update_fullscreen();

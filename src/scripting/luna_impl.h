@@ -23,11 +23,11 @@
  * it in a header file, not an implementation file
  */
 
-#ifndef LUNA_IMPL_H
-#define LUNA_IMPL_H
+#ifndef WL_SCRIPTING_LUNA_IMPL_H
+#define WL_SCRIPTING_LUNA_IMPL_H
 
 #include "scripting/c_utils.h"
-#include "scripting/eris/lua.hpp"
+#include "third_party/eris/lua.hpp"
 
 int luna_unpersisting_closure(lua_State * L);
 
@@ -300,6 +300,7 @@ void m_register_properties_in_metatable
 
 		// metatable[prop_name] = Pointer to getter setter
 		lua_pushstring(L, PT::Properties[i].name);
+
 		lua_newtable(L);
 		lua_pushstring(L, "getter");
 		lua_pushlightuserdata
@@ -366,4 +367,4 @@ void m_extract_userdata_from_user_class(lua_State * const L, int narg) {
 	}
 }
 
-#endif
+#endif  // end of include guard: WL_SCRIPTING_LUNA_IMPL_H

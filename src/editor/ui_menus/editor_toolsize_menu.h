@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_TOOLSIZE_MENU_H
-#define EDITOR_TOOLSIZE_MENU_H
+#ifndef WL_EDITOR_UI_MENUS_EDITOR_TOOLSIZE_MENU_H
+#define WL_EDITOR_UI_MENUS_EDITOR_TOOLSIZE_MENU_H
 
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
@@ -43,4 +43,4 @@ private:
 };
 
 
-#endif
+#endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_TOOLSIZE_MENU_H

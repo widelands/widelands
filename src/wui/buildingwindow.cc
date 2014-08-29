@@ -21,6 +21,7 @@
 
 #include <boost/format.hpp>
 
+#include "base/macros.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/image_transformations.h"
@@ -35,11 +36,10 @@
 #include "logic/warehouse.h"
 #include "ui_basic/helpwindow.h"
 #include "ui_basic/tabpanel.h"
-#include "unique_window_handler.h"
-#include "upcast.h"
 #include "wui/actionconfirm.h"
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
+#include "wui/unique_window_handler.h"
 #include "wui/waresqueuedisplay.h"
 
 static const char * pic_bulldoze           = "pics/menu_bld_bulldoze.png";
@@ -55,7 +55,7 @@ Building_Window::Building_Window
 	UI::Window
 		(&parent, "building_window",
 		 0, 0, Width, 0,
-		 b.descname()),
+		 b.descr().descname()),
 	m_registry(registry),
 	m_building       (b),
 	m_workarea_job_id(0),
@@ -103,7 +103,7 @@ Building_Window::~Building_Window()
 	m_registry = nullptr;
 }
 
-namespace Widelands {struct Building_Descr;}
+namespace Widelands {struct BuildingDescr;}
 using Widelands::Building;
 
 /*
@@ -129,14 +129,14 @@ Check the capabilities and setup the capsbutton panel in case they've changed.
 */
 void Building_Window::think()
 {
-	if (not igbase().can_see(building().owner().player_number()))
+	if (!igbase().can_see(building().owner().player_number()))
 		die();
 
 	if
-		(! m_caps_setup
-		 or
+		(!m_caps_setup
+		 ||
 		 m_capscache_player_number != igbase().player_number()
-		 or
+		 ||
 		 building().get_playercaps() != m_capscache)
 	{
 		m_capsbuttons->free_children();
@@ -222,13 +222,12 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 		} // upcast to productionsite
 
 		if (m_capscache & Widelands::Building::PCap_Enhancable) {
-			const std::set<Widelands::Building_Index> & enhancements =
-				m_building.enhancements();
+			const Widelands::Building_Index & enhancement =
+				m_building.descr().enhancement();
 			const Widelands::Tribe_Descr & tribe  = owner.tribe();
-			container_iterate_const(std::set<Widelands::Building_Index>, enhancements, i)
-				if (owner.is_building_type_allowed(*i.current)) {
-					const Widelands::Building_Descr & building_descr =
-						*tribe.get_building_descr(*i.current);
+			if (owner.is_building_type_allowed(enhancement)) {
+					const Widelands::BuildingDescr & building_descr =
+						*tribe.get_building_descr(enhancement);
 					char buffer[128];
 					snprintf
 						(buffer, sizeof(buffer),
@@ -237,16 +236,12 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 						new UI::Button
 							(capsbuttons, "enhance", 0, 0, 34, 34,
 							 g_gr->images().get("pics/but4.png"),
-							 building_descr.get_buildicon(),
+							 building_descr.get_icon(),
 							 std::string(buffer) + "<br><font size=11>" + _("Construction costs:") + "</font><br>" +
 								 waremap_to_richtext(tribe, building_descr.enhancement_cost()));
 					//  button id = building id
-					enhancebtn->sigclicked.connect
-						(boost::bind
-							(&Building_Window::act_enhance,
-							 boost::ref(*this),
-							 boost::ref(*i.current)));
-					capsbuttons->add
+				   enhancebtn->sigclicked.connect([this, enhancement] {act_enhance(enhancement);});
+				   capsbuttons->add
 						(enhancebtn,
 						 UI::Box::AlignCenter);
 					requires_destruction_separator = true;
@@ -287,7 +282,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 			requires_destruction_separator = true;
 		}
 
-		if (requires_destruction_separator and can_see) {
+		if (requires_destruction_separator && can_see) {
 			// Need this as well as the infinite space from the can_see section
 			// to ensure there is a separation.
 			UI::Panel * spacer = new UI::Panel(capsbuttons, 0, 0, 17, 34);
@@ -342,7 +337,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 			 UI::Box::AlignCenter);
 
 		if (m_building.descr().has_help_text()) {
-			if (not requires_destruction_separator) {
+			if (!requires_destruction_separator) {
 				// When there was no separation of destruction buttons put
 				// the infinite space here (e.g. Warehouses)
 				capsbuttons->add_inf_space();
@@ -356,10 +351,10 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 					 _("Help"));
 
 			UI::UniqueWindow::Registry& registry =
-			   igbase().unique_windows().get_registry(m_building.name() + "_help");
+			   igbase().unique_windows().get_registry(m_building.descr().name() + "_help");
 			registry.open_window = [this, &registry] {
 				new UI::LuaTextHelpWindow(
-				   &igbase(), registry, m_building.descname(), m_building.descr().helptext_script());
+				   &igbase(), registry, m_building.descr(), &igbase().egbase().lua());
 			};
 
 			helpbtn->sigclicked.connect(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(registry)));
@@ -375,7 +370,7 @@ Callback for bulldozing request
 */
 void Building_Window::act_bulldoze()
 {
-	if (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)) {
+	if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) {
 		if (m_building.get_playercaps() & Widelands::Building::PCap_Bulldoze)
 			igbase().game().send_player_bulldoze(m_building);
 	}
@@ -391,7 +386,7 @@ Callback for dismantling request
 */
 void Building_Window::act_dismantle()
 {
-	if (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)) {
+	if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) {
 		if (m_building.get_playercaps() & Widelands::Building::PCap_Dismantle)
 			igbase().game().send_player_dismantle(m_building);
 	}
@@ -434,7 +429,7 @@ Callback for enhancement request
 */
 void Building_Window::act_enhance(Widelands::Building_Index id)
 {
-	if (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)) {
+	if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) {
 		if (m_building.get_playercaps() & Widelands::Building::PCap_Enhancable)
 			igbase().game().send_player_enhance_building(m_building, id);
 	}

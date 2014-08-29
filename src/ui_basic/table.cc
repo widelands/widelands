@@ -21,17 +21,18 @@
 
 #include <boost/bind.hpp>
 
-#include "container_iterate.h"
+#include "base/deprecated.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "text_layout.h"
 #include "ui_basic/button.h"
 #include "ui_basic/mouse_constants.h"
 #include "ui_basic/scrollbar.h"
 #include "wlapplication.h"
+#include "wui/text_constants.h"
+#include "wui/text_layout.h"
 
 namespace UI {
 
@@ -71,8 +72,9 @@ Table<void *>::Table
 */
 Table<void *>::~Table()
 {
-	container_iterate_const(Entry_Record_vector, m_entry_records, i)
-		delete *i.current;
+	for (const Entry_Record * entry : m_entry_records) {
+		delete entry;
+	}
 }
 
 /// Add a new column to this table.
@@ -87,8 +89,9 @@ void Table<void *>::add_column
 	assert(size() == 0);
 
 	uint32_t complete_width = 0;
-	container_iterate_const(Columns, m_columns, i)
-		complete_width += i.current->width;
+	for (const Column& col : m_columns) {
+		complete_width += col.width;
+	}
 
 	m_total_width += width;
 	set_desired_size(m_total_width, get_h());
@@ -123,7 +126,7 @@ void Table<void *>::add_column
 
 		m_columns.push_back(c);
 	}
-	if (not m_scrollbar) {
+	if (!m_scrollbar) {
 		m_scrollbar =
 			new Scrollbar
 				(get_parent(),
@@ -201,10 +204,11 @@ Table<void *>::Entry_Record * Table<void *>::find
 	(const void * const entry) const
 
 {
-	container_iterate_const(Entry_Record_vector, m_entry_records, i)
-		if ((*i.current)->entry() == entry)
-			return *i.current;
-
+	for (Entry_Record * temp_entry : m_entry_records) {
+		if (temp_entry->entry() == entry) {
+			return temp_entry;
+		}
+	}
 	return nullptr;
 }
 
@@ -214,7 +218,7 @@ Table<void *>::Entry_Record * Table<void *>::find
 void Table<void *>::header_button_clicked(Columns::size_type const n) {
 	assert(m_columns.at(n).btn);
 	if (get_sort_colum() == n) {
-		set_sort_descending(not get_sort_descending()); //  change sort direction
+		set_sort_descending(!get_sort_descending()); //  change sort direction
 		sort();
 		return;
 	}
@@ -229,8 +233,9 @@ void Table<void *>::header_button_clicked(Columns::size_type const n) {
 */
 void Table<void *>::clear()
 {
-	container_iterate_const(Entry_Record_vector, m_entry_records, i)
-		delete *i.current;
+	for (const Entry_Record * entry : m_entry_records) {
+		delete entry;
+	}
 	m_entry_records.clear();
 
 	if (m_scrollbar)
@@ -345,7 +350,7 @@ bool Table<void *>::handle_key(bool down, SDL_keysym code)
  * Handle mouse presses: select the appropriate entry
  */
 bool Table<void *>::handle_mousepress
-	(Uint8 const btn, int32_t x, int32_t const y)
+	(uint8_t const btn, int32_t x, int32_t const y)
 {
 	if (get_can_focus())
 		focus();
@@ -385,9 +390,9 @@ bool Table<void *>::handle_mousepress
 
 		if //  check if doubleclicked
 			(time - real_last_click_time < DOUBLE_CLICK_INTERVAL
-			 and
+			 &&
 			 m_last_selection == m_selection
-			 and m_selection != no_selection_index())
+			 && m_selection != no_selection_index())
 			double_clicked(m_selection);
 
 		return true;
@@ -396,7 +401,7 @@ bool Table<void *>::handle_mousepress
 		return false;
 	}
 }
-bool Table<void *>::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
+bool Table<void *>::handle_mouserelease(const uint8_t btn, int32_t, int32_t)
 {
 	return btn == SDL_BUTTON_LEFT;
 }

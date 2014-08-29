@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef TRANSFER_H
-#define TRANSFER_H
+#ifndef WL_ECONOMY_TRANSFER_H
+#define WL_ECONOMY_TRANSFER_H
 
 #include "economy/route.h"
 
@@ -27,8 +27,8 @@ class Game;
 struct PlayerImmovable;
 class Request;
 class WareInstance;
-class Map_Map_Object_Loader;
-struct Map_Map_Object_Saver;
+class MapMapObjectLoader;
+struct MapMapObjectSaver;
 class Worker;
 
 /**
@@ -70,8 +70,8 @@ struct Transfer {
 	};
 
 	void read(FileRead & fr, ReadData & rd);
-	void read_pointers(Map_Map_Object_Loader & mol, const ReadData & rd);
-	void write(Map_Map_Object_Saver & mos, FileWrite & fw);
+	void read_pointers(MapMapObjectLoader & mol, const ReadData & rd);
+	void write(MapMapObjectSaver & mos, FileWrite & fw);
 
 private:
 	void tlog(char const * fmt, ...) PRINTF_FORMAT(2, 3);
@@ -86,4 +86,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_ECONOMY_TRANSFER_H

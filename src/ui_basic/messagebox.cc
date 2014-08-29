@@ -19,14 +19,12 @@
 
 #include "ui_basic/messagebox.h"
 
-#include "constants.h"
+#include "base/i18n.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/window.h"
-#include "wlapplication.h"
 
 namespace UI {
 
@@ -118,7 +116,7 @@ WLMessageBox::~WLMessageBox()
  * Clicking the right mouse button inside the window acts like pressing
  * Ok or No, depending on the message box type.
  */
-bool WLMessageBox::handle_mousepress(const Uint8 btn, int32_t, int32_t)
+bool WLMessageBox::handle_mousepress(const uint8_t btn, int32_t, int32_t)
 {
 	if (btn == SDL_BUTTON_RIGHT) {
 		play_click();
@@ -130,7 +128,7 @@ bool WLMessageBox::handle_mousepress(const Uint8 btn, int32_t, int32_t)
 	return true;
 }
 
-bool WLMessageBox::handle_mouserelease(const Uint8, int32_t, int32_t)
+bool WLMessageBox::handle_mouserelease(const uint8_t, int32_t, int32_t)
 {
 	return true;
 }
@@ -155,7 +153,6 @@ bool WLMessageBox::handle_key(bool down, SDL_keysym code)
 			return false;
 	}
 
-	return UI::Panel::handle_key(down, code);
 }
 
 void WLMessageBox::pressedOk()

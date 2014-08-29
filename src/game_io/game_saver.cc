@@ -19,6 +19,8 @@
 
 #include "game_io/game_saver.h"
 
+#include "base/log.h"
+#include "base/scoped_timer.h"
 #include "game_io/game_cmd_queue_data_packet.h"
 #include "game_io/game_game_class_data_packet.h"
 #include "game_io/game_interactive_player_data_packet.h"
@@ -27,9 +29,7 @@
 #include "game_io/game_player_info_data_packet.h"
 #include "game_io/game_preload_data_packet.h"
 #include "io/filesystem/filesystem.h"
-#include "log.h"
 #include "logic/game.h"
-#include "scoped_timer.h"
 
 namespace Widelands {
 
@@ -61,7 +61,7 @@ void Game_Saver::save() {
 	Game_Map_Data_Packet                         M; M.Write(m_fs, m_game, nullptr);
 	log("Game: Writing Map Data took %ums\n", timer.ms_since_last_query());
 
-	Map_Map_Object_Saver * const mos = M.get_map_object_saver();
+	MapMapObjectSaver * const mos = M.get_map_object_saver();
 
 	log("Game: Writing Player Economies Info ... ");
 	{Game_Player_Economies_Data_Packet           p; p.Write(m_fs, m_game, mos);}

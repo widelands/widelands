@@ -17,11 +17,11 @@
  *
  */
 
-#ifndef UI_ICON_H
-#define UI_ICON_H
+#ifndef WL_UI_BASIC_ICON_H
+#define WL_UI_BASIC_ICON_H
 
+#include "graphic/color.h"
 #include "ui_basic/panel.h"
-#include "rgbcolor.h"
 
 namespace UI {
 
@@ -38,7 +38,7 @@ struct Icon : public Panel {
 	void setFrame(const RGBColor& color);
 	void setNoFrame();
 
-	virtual void draw(RenderTarget &) override;
+	void draw(RenderTarget &) override;
 
 private:
 	const Image* m_pic;
@@ -48,4 +48,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_ICON_H

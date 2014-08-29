@@ -1,0 +1,9 @@
+This contains third party libraries that are uncommon and are therefore shipped
+with the Widelands source code for transparent compilation.
+
+Changes
+-------
+
+Eris:
+- removed luac.c. It defined a main() function which could hide our own main()
+  eris was linked in.

@@ -1,6 +1,9 @@
 size=medium
 output=flour
 
+[aihints]
+build_material=false
+
 [buildcost]
 log=3
 stone=3
@@ -11,9 +14,6 @@ log=1
 stone=2
 marble=1
 
-[aihints]
-build_material=false
-
 [working positions]
 miller=1
 
@@ -21,21 +21,22 @@ miller=1
 wheat=6
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start grinding wheat because ...
+work=_grinding wheat
 
 [work]
-return=skipped unless economy needs flour or not economy needs wheat
-consume=wheat
 sleep=5000
+return=skipped unless economy needs flour
+consume=wheat
 playFX=../../../sound/mill/mill_turning 240
 animate=working 10000
 produce=flour
 
 [idle]
-pics=windmill_i_??.png  # ???
+pics=mill_i_??.png  # ???
 hotspot=41 87
 
 [working]
-pics=windmill_w_??.png  # lets see the mill turn!
+pics=mill_w_??.png  # lets see the mill turn!
 hotspot=41 87
 fps=25

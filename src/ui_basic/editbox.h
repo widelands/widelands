@@ -17,15 +17,15 @@
  *
  */
 
-#ifndef UI_EDITBOX_H
-#define UI_EDITBOX_H
+#ifndef WL_UI_BASIC_EDITBOX_H
+#define WL_UI_BASIC_EDITBOX_H
 
 #include <memory>
 
 #include <SDL_keyboard.h>
 #include <boost/signals2.hpp>
 
-#include "align.h"
+#include "graphic/align.h"
 #include "ui_basic/button.h"
 #include "graphic/graphic.h"
 
@@ -59,8 +59,8 @@ struct EditBox : public Panel {
 
 	void activate_history(bool activate) {m_history_active = activate;}
 
-	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y) override;
-	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y) override;
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_key(bool down, SDL_keysym) override;
 
 	void draw(RenderTarget &) override;
@@ -78,4 +78,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_EDITBOX_H

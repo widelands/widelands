@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef GL_SURFACE_H
-#define GL_SURFACE_H
+#ifndef WL_GRAPHIC_RENDER_GL_SURFACE_H
+#define WL_GRAPHIC_RENDER_GL_SURFACE_H
 
 #include <memory>
 
@@ -33,16 +33,16 @@ public:
 	virtual ~GLSurface() {}
 
 	/// Interface implementations
-	virtual uint16_t width() const override;
-	virtual uint16_t height() const override;
-	virtual uint8_t * get_pixels() const override;
-	virtual void set_pixel(uint16_t x, uint16_t y, uint32_t clr) override;
-	virtual uint32_t get_pixel(uint16_t x, uint16_t y) override;
+	uint16_t width() const override;
+	uint16_t height() const override;
+	uint8_t * get_pixels() const override;
+	void set_pixel(uint16_t x, uint16_t y, uint32_t clr) override;
+	uint32_t get_pixel(uint16_t x, uint16_t y) override;
 
-	virtual void blit(const Point&, const Surface*, const Rect& srcrc, Composite cm) override;
-	virtual void fill_rect(const Rect&, RGBAColor) override;
-	virtual void draw_rect(const Rect&, RGBColor) override;
-	virtual void brighten_rect(const Rect&, int32_t factor) override;
+	void blit(const Point&, const Surface*, const Rect& srcrc, Composite cm) override;
+	void fill_rect(const Rect&, RGBAColor) override;
+	void draw_rect(const Rect&, RGBColor) override;
+	void brighten_rect(const Rect&, int32_t factor) override;
 
 	virtual void draw_line
 		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor&, uint8_t width) override;
@@ -56,5 +56,4 @@ protected:
 	std::unique_ptr<uint8_t[]> m_pixels;
 };
 
-#endif /* end of include guard: GL_SURFACE_H */
-
+#endif  // end of include guard: WL_GRAPHIC_RENDER_GL_SURFACE_H

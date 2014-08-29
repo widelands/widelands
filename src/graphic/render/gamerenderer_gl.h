@@ -17,15 +17,15 @@
  *
  */
 
-#ifndef WIDELANDS_GAMERENDERER_GL_H
-#define WIDELANDS_GAMERENDERER_GL_H
+#ifndef WL_GRAPHIC_RENDER_GAMERENDERER_GL_H
+#define WL_GRAPHIC_RENDER_GAMERENDERER_GL_H
 
 #include <memory>
 #include <vector>
 
+#include "base/rect.h"
 #include "graphic/render/gamerenderer.h"
 #include "logic/widelands.h"
-#include "rect.h"
 
 namespace Widelands {
 struct Coords;
@@ -125,4 +125,4 @@ private:
 	/*@}*/
 };
 
-#endif // WIDELANDS_GAMERENDERER_GL_H
+#endif  // end of include guard: WL_GRAPHIC_RENDER_GAMERENDERER_GL_H

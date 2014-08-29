@@ -25,12 +25,12 @@
 #include <SDL_rotozoom.h>
 #include <boost/format.hpp>
 
+#include "base/macros.h"
+#include "graphic/color.h"
 #include "graphic/graphic.h"
 #include "graphic/render/sdl_surface.h"
 #include "graphic/surface.h"
 #include "graphic/surface_cache.h"
-#include "rgbcolor.h"
-#include "upcast.h"
 
 using namespace std;
 
@@ -126,13 +126,13 @@ Surface* resize_surface(Surface* src, uint32_t w, uint32_t h) {
 			 fmt.BitsPerPixel, fmt.Rmask, fmt.Gmask, fmt.Bmask, fmt.Amask);
 		SDL_Rect srcrc =
 			{0, 0,
-			 static_cast<Uint16>(zoomed->w), static_cast<Uint16>(zoomed->h)
+			 static_cast<uint16_t>(zoomed->w), static_cast<uint16_t>(zoomed->h)
 			};  // For some reason SDL_Surface and SDL_Rect express w,h in different types
 		SDL_Rect dstrc = {0, 0, 0, 0};
 		SDL_SetAlpha(zoomed, 0, 0);
 		SDL_BlitSurface(zoomed, &srcrc, placed, &dstrc); // Updates dstrc
 
-		Uint32 fillcolor = SDL_MapRGBA(zoomed->format, 0, 0, 0, 255);
+		uint32_t fillcolor = SDL_MapRGBA(zoomed->format, 0, 0, 0, 255);
 
 		if (zoomed->w < placed->w) {
 			dstrc.x = zoomed->w;
@@ -304,10 +304,10 @@ public:
 	virtual ~TransformedImage() {}
 
 	// Implements Image.
-	virtual uint16_t width() const override {return original_.width();}
-	virtual uint16_t height() const override {return original_.height();}
-	virtual const string& hash() const override {return hash_;}
-	virtual Surface* surface() const override {
+	uint16_t width() const override {return original_.width();}
+	uint16_t height() const override {return original_.height();}
+	const string& hash() const override {return hash_;}
+	Surface* surface() const override {
 		Surface* surf = surface_cache_->get(hash_);
 		if (surf)
 			return surf;
@@ -337,11 +337,11 @@ public:
 	virtual ~ResizedImage() {}
 
 	// Overwrites TransformedImage.
-	virtual uint16_t width() const override {return w_;}
-	virtual uint16_t height() const override {return h_;}
+	uint16_t width() const override {return w_;}
+	uint16_t height() const override {return h_;}
 
 	// Implements TransformedImage.
-	virtual Surface* recalculate_surface() const override {
+	Surface* recalculate_surface() const override {
 		Surface* rv = resize_surface(original_.surface(), w_, h_);
 		return rv;
 	}
@@ -359,7 +359,7 @@ public:
 	virtual ~GrayedOutImage() {}
 
 	// Implements TransformedImage.
-	virtual Surface* recalculate_surface() const override {
+	Surface* recalculate_surface() const override {
 		return gray_out_surface(original_.surface());
 	}
 };
@@ -377,7 +377,7 @@ public:
 	virtual ~ChangeLuminosityImage() {}
 
 	// Implements TransformedImage.
-	virtual Surface* recalculate_surface() const override {
+	Surface* recalculate_surface() const override {
 		return change_luminosity_of_surface(original_.surface(), factor_, halve_alpha_);
 	}
 
@@ -398,7 +398,7 @@ public:
 	virtual ~PlayerColoredImage() {}
 
 	// Implements TransformedImage.
-	virtual Surface* recalculate_surface() const override {
+	Surface* recalculate_surface() const override {
 		return make_playerclr_surface(*original_.surface(), *mask_.surface(), color_);
 	}
 
@@ -425,7 +425,7 @@ void initialize() {
 }
 
 const Image* resize(const Image* original, uint16_t w, uint16_t h) {
-	if (original->width() == w and original->height() == h)
+	if (original->width() == w && original->height() == h)
 		return original;
 
 	const string new_hash = (boost::format("%s:%i:%i") % original->hash() % w % h).str();

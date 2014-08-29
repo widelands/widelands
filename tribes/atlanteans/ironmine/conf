@@ -1,6 +1,10 @@
 size=mine
 output=ironore
 
+[aihints]
+build_material=false
+mines=iron
+
 [buildcost]
 log=7
 planks=4
@@ -13,23 +17,19 @@ planks=2
 [working positions]
 miner=3
 
-[aihints]
-build_material=false
-mines=iron
-
 [inputs]
 bread=10
 smoked_fish=10
 smoked_meat=6
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start mining because ...
+work=_mining
 
 [work]
-return=skipped unless economy needs ironore or not economy needs bread
-return=skipped unless economy needs ironore or not economy needs smoked_fish
-consume=smoked_fish,smoked_meat:2 bread:2
 sleep=45000
+return=skipped unless economy needs ironore
+consume=smoked_fish,smoked_meat:2 bread:2
 animate=working 20000
 mine=iron 4 100 5 2
 produce=ironore
@@ -39,6 +39,10 @@ produce=ironore:2
 animate=working 20000
 mine=iron 4 100 5 2
 produce=ironore:2
+
+[out_of_resource_notification]
+title=_Main Iron Vein Exhausted
+message=_This iron mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it.
 
 [idle]
 pics=ironmine_i_??.png

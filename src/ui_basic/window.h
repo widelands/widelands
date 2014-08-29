@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef UI_WINDOW_H
-#define UI_WINDOW_H
+#ifndef WL_UI_BASIC_WINDOW_H
+#define WL_UI_BASIC_WINDOW_H
 
 #include "ui_basic/panel.h"
 
@@ -66,7 +66,7 @@ public:
 
 	void set_center_panel(Panel * panel);
 	void move_out_of_the_way();
-	virtual void move_inside_parent() override;
+	void move_inside_parent() override;
 	void center_to_parent();
 	void warp_mouse_to_fastclick_panel();
 	void set_fastclick_panel(Panel * p) {m_fastclick_panel = p;}
@@ -77,22 +77,22 @@ public:
 	bool is_snap_target() const override {return true;}
 
 	// Drawing and event handlers
-	virtual void draw(RenderTarget &) override;
+	void draw(RenderTarget &) override;
 	void draw_border(RenderTarget &) override;
 
 	void think() override;
 
-	bool handle_mousepress  (Uint8 btn, int32_t mx, int32_t my) override;
-	bool handle_mouserelease(Uint8 btn, int32_t mx, int32_t my) override;
+	bool handle_mousepress  (uint8_t btn, int32_t mx, int32_t my) override;
+	bool handle_mouserelease(uint8_t btn, int32_t mx, int32_t my) override;
 	bool handle_mousemove
-		(Uint8 state, int32_t mx, int32_t my, int32_t xdiff, int32_t ydiff) override;
+		(uint8_t state, int32_t mx, int32_t my, int32_t xdiff, int32_t ydiff) override;
 	bool handle_alt_drag (int32_t mx, int32_t my) override;
 	bool handle_tooltip() override;
 
 protected:
-	virtual void die() override;
-	virtual void layout() override;
-	virtual void update_desired_size() override;
+	void die() override;
+	void layout() override;
+	void update_desired_size() override;
 
 private:
 	bool _is_minimal;
@@ -115,4 +115,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_WINDOW_H

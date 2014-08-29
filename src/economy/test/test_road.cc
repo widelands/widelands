@@ -23,6 +23,7 @@
 
 #include "economy/flag.h"
 #include "economy/road.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "logic/editor_game_base.h"
 #include "logic/instances.h"
 #include "logic/player.h"
@@ -45,7 +46,7 @@ struct TestingFlag : public Flag {
 struct TestingMap : public Map {
 	TestingMap(int const w, int const h) : Map() {set_size(w, h);}
 
-	virtual void recalc_for_field_area(const World&, Area<FCoords>) override {}
+	void recalc_for_field_area(const World&, Area<FCoords>) override {}
 
 };
 

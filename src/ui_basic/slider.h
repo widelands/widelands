@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef UI_SLIDER_H
-#define UI_SLIDER_H
+#ifndef WL_UI_BASIC_SLIDER_H
+#define WL_UI_BASIC_SLIDER_H
 
 #include <boost/signals2.hpp>
 
@@ -74,7 +74,7 @@ protected:
 		(RenderTarget &, int32_t x, int32_t y, int32_t w, int32_t h);
 
 	//  mouse events
-	bool handle_mouserelease(Uint8 btn, int32_t, int32_t) override;
+	bool handle_mouserelease(uint8_t btn, int32_t, int32_t) override;
 	void handle_mousein(bool inside) override;
 	void cursor_moved(int32_t pointer, int32_t x, int32_t y);
 	void cursor_pressed(int32_t pointer);
@@ -138,8 +138,8 @@ struct HorizontalSlider : public Slider {
 
 protected:
 	void draw(RenderTarget & dst) override;
-	bool handle_mousemove (Uint8 btn, int32_t x, int32_t y, int32_t, int32_t) override;
-	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y) override;
+	bool handle_mousemove (uint8_t btn, int32_t x, int32_t y, int32_t, int32_t) override;
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	void layout() override;
 };
 
@@ -173,8 +173,8 @@ struct VerticalSlider : public Slider {
 
 protected:
 	void draw(RenderTarget & dst) override;
-	bool handle_mousemove (Uint8 btn, int32_t x, int32_t y, int32_t, int32_t) override;
-	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y) override;
+	bool handle_mousemove (uint8_t btn, int32_t x, int32_t y, int32_t, int32_t) override;
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	void layout() override;
 };
 
@@ -199,8 +199,8 @@ struct DiscreteSlider : public Panel {
 	boost::signals2::signal<void (int32_t)> changedto;
 
 protected:
-	virtual void draw(RenderTarget & dst) override;
-	virtual void layout() override;
+	void draw(RenderTarget & dst) override;
+	void layout() override;
 
 	HorizontalSlider slider;
 
@@ -211,4 +211,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_SLIDER_H

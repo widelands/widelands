@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WARE_TYPES_H
-#define WARE_TYPES_H
+#ifndef WL_LOGIC_BILL_OF_MATERIALS_H
+#define WL_LOGIC_BILL_OF_MATERIALS_H
 
 #include <vector>
 
@@ -37,7 +37,7 @@ struct ware_range
 		++i; ++current; return *this;
 	}
 	bool empty() const {return current == end;}
-	operator bool() const {return not empty();}
+	operator bool() const {return !empty();}
 
 	uint8_t i;
 	BillOfMaterials::const_iterator current;
@@ -47,4 +47,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_BILL_OF_MATERIALS_H

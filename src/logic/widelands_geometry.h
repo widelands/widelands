@@ -17,10 +17,11 @@
  *
  */
 
-#ifndef WIDELANDS_GEOMETRY_H
-#define WIDELANDS_GEOMETRY_H
+#ifndef WL_LOGIC_WIDELANDS_GEOMETRY_H
+#define WL_LOGIC_WIDELANDS_GEOMETRY_H
 
 #include <cmath>
+#include <tuple>
 
 #include <stdint.h>
 
@@ -33,53 +34,37 @@ struct Extent {
 	uint16_t w, h;
 };
 
+// TODO(sirver): Remove these typedefs.
 typedef int16_t Coordinate;
 typedef Coordinate X_Coordinate;
 typedef Coordinate Y_Coordinate;
+
 /**
  * Structure used to store map coordinates
  */
 struct Coords {
-	explicit Coords() {}
-	Coords(const X_Coordinate nx, const Y_Coordinate ny)
-		: x(nx), y(ny)
-	{}
+	Coords();
+	Coords(X_Coordinate nx, Y_Coordinate ny);
 
 	/// Returns a special value indicating invalidity.
-	static Coords Null() {return Coords(-1, -1);}
+	static Coords Null();
 
-	bool operator== (const Coords& other) const {
-		return x == other.x and y == other.y;
-	}
-	bool operator!= (const Coords & other) const {
-		return not (*this == other);
-	}
+	bool operator== (const Coords& other) const;
+	bool operator!= (const Coords & other) const;
+	operator bool() const;
 
-	operator bool() const {return *this != Null();}
-
-	/**
-	 * For use with standard containers.
-	 */
+	// Ordering functor for use with std:: containers.
 	struct ordering_functor {
 		bool operator()(const Coords & a, const Coords & b) const {
-			return a.all < b.all;
+			return std::forward_as_tuple(a.y, a.x) < std::forward_as_tuple(b.y, b.x);
 		}
 	};
 
-	void reorigin(Coords new_origin, const Extent & extent) {
-		if (*this) {
-			if (y < new_origin.y)
-				y += extent.h;
-			y -= new_origin.y;
-			if ((y & 1) and (new_origin.y & 1) and ++new_origin.x == extent.w)
-				new_origin.x = 0;
-			if (x < new_origin.x)
-				x += extent.w;
-			x -= new_origin.x;
-		}
-	}
+	// Move the coords to the 'new_origin'.
+	void reorigin(Coords new_origin, const Extent & extent);
 
-	union {struct {X_Coordinate x; Y_Coordinate y;}; uint32_t all;};
+	X_Coordinate x;
+	Y_Coordinate y;
 };
 static_assert(sizeof(Coords) == 4, "assert(sizeof(Coords) == 4) failed.");
 
@@ -94,10 +79,10 @@ struct Area : public _Coords_type
 	{}
 
 	bool operator== (const Area& other) const {
-		return Coords_type::operator== (other) and radius == other.radius;
+		return Coords_type::operator== (other) && radius == other.radius;
 	}
 	bool operator!= (const Area& other) const {
-		return Coords_type::operator!= (other) or  radius != other.radius;
+		return Coords_type::operator!= (other) ||  radius != other.radius;
 	}
 
 	Radius_type radius;
@@ -111,10 +96,10 @@ template <typename Area_type = Area<> > struct HollowArea : public Area_type {
 
 	bool operator== (const HollowArea& other) const {
 		return
-			Area_type::operator== (other) and hole_radius == other.hole_radius;
+			Area_type::operator== (other) && hole_radius == other.hole_radius;
 	}
 	bool operator!= (const HollowArea& other) const {
-		return not (*this == other);
+		return !(*this == other);
 	}
 
 	typename Area_type::Radius_type hole_radius;
@@ -148,10 +133,10 @@ template <typename Coords_type = Coords> struct TCoords : public Coords_type {
 	{}
 
 	bool operator== (const TCoords& other) const {
-		return Coords_type::operator== (other) and t == other.t;
+		return Coords_type::operator== (other) && t == other.t;
 	}
 	bool operator!= (const TCoords& other) const {
-		return Coords_type::operator!= (other) or  t != other.t;
+		return Coords_type::operator!= (other) ||  t != other.t;
 	}
 
 	TriangleIndex t;
@@ -170,16 +155,26 @@ struct Node_and_Triangle {
 	{}
 
 	bool operator== (Node_and_Triangle<> const other) const {
-		return node == other.node and triangle == other.triangle;
+		return node == other.node && triangle == other.triangle;
 	}
 	bool operator!= (Node_and_Triangle<> const other) const {
-		return not (*this == other);
+		return !(*this == other);
 	}
 
 	Node_Coords_type              node;
 	TCoords<Triangle_Coords_type> triangle;
 };
 
+// A height interval.
+struct HeightInterval {
+	HeightInterval(const uint8_t Min, const uint8_t Max) : min(Min), max(Max) {
+	}
+	bool valid() const {
+		return min <= max;
+	}
+
+	uint8_t min, max;
+};
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_WIDELANDS_GEOMETRY_H

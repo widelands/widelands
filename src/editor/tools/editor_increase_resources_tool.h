@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_INCREASE_RESOURCES_TOOL_H
-#define EDITOR_INCREASE_RESOURCES_TOOL_H
+#ifndef WL_EDITOR_TOOLS_EDITOR_INCREASE_RESOURCES_TOOL_H
+#define WL_EDITOR_TOOLS_EDITOR_INCREASE_RESOURCES_TOOL_H
 
 #include "editor/tools/editor_decrease_resources_tool.h"
 #include "editor/tools/editor_set_resources_tool.h"
@@ -72,9 +72,8 @@ private:
 	Widelands::Resource_Index m_cur_res;
 };
 
-int32_t Editor_Change_Resource_Tool_Callback(const Widelands::TCoords<Widelands::FCoords>& c,
-                                             Widelands::Map& map,
-                                             const Widelands::World& world,
-                                             int32_t const curres);
+int32_t Editor_Change_Resource_Tool_Callback
+	(const Widelands::TCoords<Widelands::FCoords>& c, Widelands::Map& map,
+	 const Widelands::World& world, int32_t const curres);
 
-#endif
+#endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_INCREASE_RESOURCES_TOOL_H

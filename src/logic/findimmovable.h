@@ -17,15 +17,17 @@
  *
  */
 
-#ifndef FINDIMMOVABLE_H
-#define FINDIMMOVABLE_H
+#ifndef WL_LOGIC_FINDIMMOVABLE_H
+#define WL_LOGIC_FINDIMMOVABLE_H
 
 #include <stdint.h>
+
+#include "logic/instances.h"
 
 namespace Widelands {
 
 struct BaseImmovable;
-struct Immovable_Descr;
+struct ImmovableDescr;
 class Player;
 
 struct FindImmovable {
@@ -92,12 +94,12 @@ private:
 	int32_t m_min, m_max;
 };
 struct FindImmovableType {
-	FindImmovableType(int32_t const type) : m_type(type) {}
+	FindImmovableType(MapObjectType const type) : m_type(type) {}
 
 	bool accept(const BaseImmovable &) const;
 
 private:
-	int32_t m_type;
+	MapObjectType m_type;
 };
 struct FindImmovableAttribute {
 	FindImmovableAttribute(uint32_t const attrib) : m_attrib(attrib) {}
@@ -125,11 +127,11 @@ struct FindImmovableAttackable {
 	bool accept(const BaseImmovable &) const;
 };
 struct FindImmovableByDescr {
-	FindImmovableByDescr(const Immovable_Descr & _descr) : descr(_descr) {}
+	FindImmovableByDescr(const ImmovableDescr & _descr) : descr(_descr) {}
 
 	bool accept(const BaseImmovable &) const;
 
-	const Immovable_Descr & descr;
+	const ImmovableDescr & descr;
 };
 struct FindFlagOf {
 	FindFlagOf(const FindImmovable & finder) : finder_(finder) {}
@@ -142,4 +144,4 @@ struct FindFlagOf {
 
 } // namespace Widelands
 
-#endif
+#endif  // end of include guard: WL_LOGIC_FINDIMMOVABLE_H

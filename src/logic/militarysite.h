@@ -17,9 +17,12 @@
  *
  */
 
-#ifndef MILITARYSITE_H
-#define MILITARYSITE_H
+#ifndef WL_LOGIC_MILITARYSITE_H
+#define WL_LOGIC_MILITARYSITE_H
 
+#include <memory>
+
+#include "base/macros.h"
 #include "logic/attackable.h"
 #include "logic/productionsite.h"
 #include "logic/requirements.h"
@@ -30,15 +33,16 @@ namespace Widelands {
 class Soldier;
 class World;
 
-struct MilitarySite_Descr : public ProductionSite_Descr {
-	MilitarySite_Descr
+struct MilitarySiteDescr : public ProductionSiteDescr {
+	MilitarySiteDescr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &,  Section & global_s,
 		 const Tribe_Descr & tribe, const World& world);
+	~MilitarySiteDescr() override {}
 
-	virtual Building & create_object() const override;
+	Building & create_object() const override;
 
-	virtual uint32_t get_conquers() const override {return m_conquer_radius;}
+	uint32_t get_conquers() const override {return m_conquer_radius;}
 	uint32_t get_max_number_of_soldiers () const {
 		return m_num_soldiers;
 	}
@@ -52,17 +56,20 @@ struct MilitarySite_Descr : public ProductionSite_Descr {
 	std::string m_attack_str;
 	std::string m_defeated_enemy_str;
 	std::string m_defeated_you_str;
+
+
 private:
 	uint32_t m_conquer_radius;
 	uint32_t m_num_soldiers;
 	uint32_t m_heal_per_second;
+	DISALLOW_COPY_AND_ASSIGN(MilitarySiteDescr);
 };
 
 class MilitarySite :
 	public ProductionSite, public SoldierControl, public Attackable
 {
 	friend class Map_Buildingdata_Data_Packet;
-	MO_DESCR(MilitarySite_Descr);
+	MO_DESCR(MilitarySiteDescr)
 
 public:
 	// I assume elsewhere, that enum SoldierPreference fits to uint8_t.
@@ -72,43 +79,37 @@ public:
 		kPrefersHeroes,
 	};
 
-	MilitarySite(const MilitarySite_Descr &);
+	MilitarySite(const MilitarySiteDescr &);
 	virtual ~MilitarySite();
 
-	char const * type_name() const override {return "militarysite";}
-	virtual std::string get_statistics_string() override;
+	void init(Editor_Game_Base &) override;
+	void cleanup(Editor_Game_Base &) override;
+	void act(Game &, uint32_t data) override;
+	void remove_worker(Worker &) override;
 
-	virtual void init(Editor_Game_Base &) override;
-	virtual void cleanup(Editor_Game_Base &) override;
-	virtual void act(Game &, uint32_t data) override;
-	virtual void remove_worker(Worker &) override;
-
-	virtual void set_economy(Economy *) override;
-	virtual bool get_building_work(Game &, Worker &, bool success) override;
+	void set_economy(Economy *) override;
+	bool get_building_work(Game &, Worker &, bool success) override;
 
 	// Begin implementation of SoldierControl
-	virtual std::vector<Soldier *> presentSoldiers() const override;
-	virtual std::vector<Soldier *> stationedSoldiers() const override;
-	virtual uint32_t minSoldierCapacity() const override;
-	virtual uint32_t maxSoldierCapacity() const override;
-	virtual uint32_t soldierCapacity() const override;
-	virtual void setSoldierCapacity(uint32_t capacity) override;
-	virtual void dropSoldier(Soldier &) override;
-	virtual int incorporateSoldier(Editor_Game_Base & game, Soldier & s) override;
-	// End implementation of SoldierControl
+	std::vector<Soldier *> presentSoldiers() const override;
+	std::vector<Soldier *> stationedSoldiers() const override;
+	uint32_t minSoldierCapacity() const override;
+	uint32_t maxSoldierCapacity() const override;
+	uint32_t soldierCapacity() const override;
+	void setSoldierCapacity(uint32_t capacity) override;
+	void dropSoldier(Soldier &) override;
+	int incorporateSoldier(Editor_Game_Base & game, Soldier & s) override;
 
 	// Begin implementation of Attackable
-	virtual Player & owner() const override {return Building::owner();}
-	virtual bool canAttack() override;
-	virtual void aggressor(Soldier &) override;
-	virtual bool attack   (Soldier &) override;
+	Player & owner() const override {return Building::owner();}
+	bool canAttack() override;
+	void aggressor(Soldier &) override;
+	bool attack   (Soldier &) override;
 	// End implementation of Attackable
 
-	/**
-	 * Launch the given soldier on an attack towards the given
-	 * target building.
-	 */
-	void sendAttacker(Soldier &, Building &, uint8_t);
+	/// Launch the given soldier on an attack towards the given
+	/// target building.
+	void sendAttacker(Soldier &, Building &);
 
 	/// This methods are helper for use at configure this site.
 	void set_requirements  (const Requirements &);
@@ -133,15 +134,17 @@ protected:
 		(Interactive_GameBase &, UI::Window * & registry) override;
 
 private:
+	void update_statistics_string(std::string*) override;
+
 	bool isPresent(Soldier &) const;
 	static void request_soldier_callback
 		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
 
-	Map_Object * popSoldierJob
-		(Soldier *, bool * stayhome = nullptr, uint8_t * retreat = nullptr);
+	MapObject * popSoldierJob
+		(Soldier *, bool * stayhome = nullptr);
 	bool haveSoldierJob(Soldier &);
 	bool military_presence_kept(Game &);
-	void informPlayer(Game &, bool discovered = false);
+	void notify_player(Game &, bool discovered = false);
 	bool update_upgrade_requirements();
 	void update_normal_soldier_request();
 	void update_upgrade_soldier_request();
@@ -167,7 +170,6 @@ private:
 		Soldier    * soldier;
 		Object_Ptr  enemy;
 		bool        stayhome;
-		uint8_t     retreat;
 	};
 	std::vector<SoldierJob> m_soldierjobs;
 	SoldierPreference m_soldier_preference;
@@ -178,4 +180,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_MILITARYSITE_H

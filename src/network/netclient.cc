@@ -19,14 +19,18 @@
 
 #include "network/netclient.h"
 
+#include <memory>
+
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/lexical_cast.hpp>
-#include <config.h>
 
+#include "base/i18n.h"
+#include "base/warning.h"
+#include "base/wexception.h"
 #include "build_info.h"
+#include "config.h"
 #include "game_io/game_loader.h"
 #include "helper.h"
-#include "i18n.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game.h"
@@ -43,9 +47,7 @@
 #include "scripting/scripting.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
-#include "ui_fsmenu/launchMPG.h"
-#include "warning.h"
-#include "wexception.h"
+#include "ui_fsmenu/launch_mpg.h"
 #include "wlapplication.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
@@ -203,7 +205,7 @@ void NetClient::run ()
 			igb =
 				new Interactive_Player
 					(game, g_options.pull_section("global"),
-					 pn, d->settings.scenario, true);
+					 pn, true);
 		else
 			igb =
 				new Interactive_Spectator
@@ -995,7 +997,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 		if (packet.Unsigned8())
 			c.recipient = packet.String();
 		d->chatmessages.push_back(c);
-		ChatProvider::send(c); // NoteSender<ChatMessage>
+		Notifications::publish(c);
 		break;
 	}
 	case NETCMD_SYSTEM_MESSAGE_CODE: {
@@ -1009,7 +1011,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 		c.playern = UserSettings::none(); //  == System message
 		// c.sender remains empty to indicate a system message
 		d->chatmessages.push_back(c);
-		ChatProvider::send(c);
+		Notifications::publish(c);
 		break;
 	}
 	case NETCMD_DEDICATED_ACCESS: {
@@ -1074,8 +1076,9 @@ void NetClient::disconnect
 			s.Unsigned8(NETCMD_DISCONNECT);
 			s.Unsigned8(arg.size() < 1 ? 1 : 2);
 			s.String(reason);
-			if (arg.size() > 0)
+			if (!arg.empty()) {
 				s.String(arg);
+			}
 			s.send(d->sock);
 		}
 

@@ -22,13 +22,18 @@
 #include <algorithm>
 #include <set>
 
+#include "base/i18n.h"
+#include "base/macros.h"
+#include "base/scoped_timer.h"
+#include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/road.h"
+#include "graphic/color.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "logic/battle.h"
 #include "logic/building.h"
+#include "logic/constants.h"
 #include "logic/dismantlesite.h"
 #include "logic/findimmovable.h"
 #include "logic/game.h"
@@ -41,14 +46,10 @@
 #include "logic/ware_descr.h"
 #include "logic/worker.h"
 #include "logic/world/world.h"
-#include "rgbcolor.h"
-#include "scoped_timer.h"
 #include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/progresswindow.h"
-#include "upcast.h"
-#include "wexception.h"
 #include "wui/interactive_base.h"
 #include "wui/interactive_gamebase.h"
 
@@ -69,7 +70,7 @@ ibase_             (nullptr),
 map_               (nullptr),
 lasttrackserial_   (0)
 {
-	if (not lua_) // TODO SirVer: this is sooo ugly, I can't say
+	if (!lua_) // TODO(SirVer): this is sooo ugly, I can't say
 		lua_.reset(new LuaEditorInterface(this));
 
 	g_sound_handler.egbase_ = this;
@@ -81,9 +82,9 @@ Editor_Game_Base::~Editor_Game_Base() {
 	delete map_;
 	delete player_manager_.release();
 
-	container_iterate_const(Tribe_Vector, tribes_, i)
-		delete *i.current;
-
+	for (Tribe_Descr* tribe_descr : tribes_) {
+		delete tribe_descr;
+	}
 	if (g_gr) { // dedicated does not use the sound_handler
 		assert(this == g_sound_handler.egbase_);
 		g_sound_handler.egbase_ = nullptr;
@@ -92,7 +93,7 @@ Editor_Game_Base::~Editor_Game_Base() {
 
 void Editor_Game_Base::think()
 {
-	//TODO: Get rid of this; replace by a function that just advances gametime
+	//TODO(unknown): Get rid of this; replace by a function that just advances gametime
 	// by a given number of milliseconds
 }
 
@@ -119,25 +120,6 @@ World* Editor_Game_Base::mutable_world() {
 		}
 	}
 	return world_.get();
-}
-
-void Editor_Game_Base::receive(const NoteImmovable & note)
-{
-	note.pi->owner().receive(note);
-}
-
-void Editor_Game_Base::receive(const NoteFieldPossession & note)
-{
-	get_player(note.fc.field->get_owned_by())->receive(note);
-}
-
-void Editor_Game_Base::receive(const NoteFieldTransformed & note)
-{
-	Widelands::Map_Index const i = note.fc.field - &(*map_)[0];
-
-	iterate_players_existing(p, map_->get_nrplayers(), *this, plr)
-		if (plr->vision(i) > 1) // player currently sees field?
-			plr->rediscover_node(*map_, (*map_)[0], note.fc);
 }
 
 Interactive_GameBase* Editor_Game_Base::get_igbase()
@@ -168,9 +150,11 @@ Player * Editor_Game_Base::add_player
 const Tribe_Descr & Editor_Game_Base::manually_load_tribe
 	(const std::string & tribe)
 {
-	container_iterate_const(Tribe_Vector, tribes_, i)
-		if ((*i.current)->name() == tribe)
-			return **i.current;
+	for (const Tribe_Descr* tribe_descr : tribes_) {
+		if (tribe_descr->name() == tribe) {
+			return *tribe_descr;
+		}
+	}
 
 	Tribe_Descr & result = *new Tribe_Descr(tribe, *this);
 	//resize the configuration of our wares if they won't fit in the current window (12 = info label size)
@@ -214,9 +198,9 @@ void Editor_Game_Base::inform_players_about_ownership
 	}
 }
 void Editor_Game_Base::inform_players_about_immovable
-	(Map_Index const i, Map_Object_Descr const * const descr)
+	(Map_Index const i, MapObjectDescr const * const descr)
 {
-	if (not Road::IsRoadDescr(descr))
+	if (!Road::IsRoadDescr(descr))
 		iterate_players_existing_const(plnum, MAX_PLAYERS, *this, p) {
 			Player::Field & player_field = p->m_fields[i];
 			if (1 < player_field.vision) {
@@ -236,8 +220,6 @@ void Editor_Game_Base::set_map(Map * const new_map) {
 	delete map_;
 
 	map_ = new_map;
-
-	NoteReceiver<NoteFieldTransformed>::connect(*map_);
 }
 
 
@@ -268,8 +250,8 @@ void Editor_Game_Base::postload()
 
 		if
 			(pid <= MAX_PLAYERS
-			 or
-			 not dynamic_cast<const Game *>(this))
+			 ||
+			 !dynamic_cast<const Game *>(this))
 		{ // if this is editor, load the tribe anyways
 			// the tribe is used, postload it
 			tribes_[id]->postload(*this);
@@ -280,7 +262,7 @@ void Editor_Game_Base::postload()
 		}
 	}
 
-	// TODO: postload players? (maybe)
+	// TODO(unknown): postload players? (maybe)
 }
 
 
@@ -293,12 +275,12 @@ void Editor_Game_Base::load_graphics(UI::ProgressWindow & loader_ui)
 {
 	loader_ui.step(_("Loading world data"));
 
-	container_iterate_const(Tribe_Vector, tribes_, i) {
+	for (Tribe_Descr* tribe_descr : tribes_) {
 		loader_ui.stepf(_("Loading tribes"));
-		(*i.current)->load_graphics();
+		tribe_descr->load_graphics();
 	}
 
-	// TODO: load player graphics? (maybe)
+	// TODO(unknown): load player graphics? (maybe)
 }
 
 /**
@@ -350,11 +332,11 @@ Building & Editor_Game_Base::warp_dismantlesite
 	Player            & plr   = player(owner);
 	const Tribe_Descr & tribe = plr.tribe();
 
-	Building_Descr const * const descr =
+	BuildingDescr const * const descr =
 		tribe.get_building_descr
 			(tribe.safe_building_index("dismantlesite"));
 
-	upcast(const DismantleSite_Descr, ds_descr, descr);
+	upcast(const DismantleSiteDescr, ds_descr, descr);
 
 	return
 		*new DismantleSite
@@ -416,7 +398,7 @@ Does not perform any placability checks.
 Immovable & Editor_Game_Base::create_immovable
 	(Coords const c, uint32_t const idx, Tribe_Descr const * const tribe)
 {
-	const Immovable_Descr & descr =
+	const ImmovableDescr & descr =
 		*
 		(tribe ?
 		 tribe->get_immovable_descr(idx)
@@ -532,19 +514,19 @@ void Editor_Game_Base::set_road
 	assert(&first_field <= f.field);
 	assert                (f.field < &first_field + m.max_index());
 	assert
-		(direction == Road_SouthWest or
-		 direction == Road_SouthEast or
+		(direction == Road_SouthWest ||
+		 direction == Road_SouthEast ||
 		 direction == Road_East);
 	assert
-		(roadtype == Road_None or roadtype == Road_Normal or
-		 roadtype == Road_Busy or roadtype == Road_Water);
+		(roadtype == Road_None || roadtype == Road_Normal ||
+		 roadtype == Road_Busy || roadtype == Road_Water);
 
 	if (f.field->get_road(direction) == roadtype)
 		return;
 	f.field->set_road(direction, roadtype);
 
 	FCoords neighbour;
-	uint8_t mask;
+	uint8_t mask = 0;
 	switch (direction) {
 	case Road_SouthWest:
 		neighbour = m.bl_n(f);
@@ -570,7 +552,7 @@ void Editor_Game_Base::set_road
 		Player::Field & player_field = (&first_player_field)[i];
 		if
 			(1 < player_field                      .vision
-				or
+				||
 				1 < (&first_player_field)[neighbour_i].vision)
 		{
 			player_field.roads &= ~mask;
@@ -609,7 +591,7 @@ void Editor_Game_Base::unconquer_area
 	//  Therefore the area must be enlarged before calling
 	//  cleanup_playerimmovables_area, so that those new border locations are
 	//  covered.
-	// SirVer, TODO: In the editor, no buildings should burn down when a military
+	// TODO(SirVer): In the editor, no buildings should burn down when a military
 	// building is removed. Check this again though
 	if (is_a(Game, this)) {
 		++player_area.radius;
@@ -640,6 +622,31 @@ void Editor_Game_Base::conquer_area(Player_Area<Area<FCoords> > player_area) {
 	cleanup_playerimmovables_area(player_area);
 }
 
+void Editor_Game_Base::change_field_owner(const FCoords& fc, Player_Number const new_owner) {
+	const Field & first_field = map()[0];
+
+	Player_Number const old_owner = fc.field->get_owned_by();
+	if (old_owner == new_owner) {
+		return;
+	}
+
+	if (old_owner) {
+		Notifications::publish(
+		   NoteFieldPossession(fc, NoteFieldPossession::Ownership::LOST, get_player(old_owner)));
+	}
+
+	fc.field->set_owned_by(new_owner);
+
+	// TODO(unknown): the player should do this when it gets the NoteFieldPossession.
+	// This means also sending a note when new_player = 0, i.e. the field is no
+	// longer owned.
+	inform_players_about_ownership(fc.field - &first_field, new_owner);
+
+	if (new_owner) {
+		Notifications::publish(
+		   NoteFieldPossession(fc, NoteFieldPossession::Ownership::GAINED, get_player(new_owner)));
+	}
+}
 
 void Editor_Game_Base::conquer_area_no_building
 	(Player_Area<Area<FCoords> > player_area)
@@ -655,15 +662,7 @@ void Editor_Game_Base::conquer_area_no_building
 	assert    (player_area.player_number <= map().get_nrplayers());
 	MapRegion<Area<FCoords> > mr(map(), player_area);
 	do {
-		Player_Number const owner = mr.location().field->get_owned_by();
-		if (owner != player_area.player_number) {
-			if (owner)
-				receive(NoteFieldPossession(mr.location(), LOSE));
-			mr.location().field->set_owned_by(player_area.player_number);
-			inform_players_about_ownership
-				(mr.location().field - &first_field, player_area.player_number);
-			receive (NoteFieldPossession(mr.location(), GAIN));
-		}
+		change_field_owner(mr.location(), player_area.player_number);
 	} while (mr.advance(map()));
 
 	//  This must reach one step beyond the conquered area to adjust the borders
@@ -675,7 +674,7 @@ void Editor_Game_Base::conquer_area_no_building
 
 /// Conquers the given area for that player; does the actual work.
 /// Additionally, it updates the visible area for that player.
-// TODO: this needs a more fine grained refactoring
+// TODO(unknown): this needs a more fine grained refactoring
 // for example scripts will want to (un)conquer area of non oval shape
 // or give area back to the neutral player (this is very important for the Lua
 // testsuite).
@@ -698,7 +697,7 @@ void Editor_Game_Base::do_conquer_area
 	assert    (player_area.player_number <= map().get_nrplayers());
 	assert    (preferred_player          <= map().get_nrplayers());
 	assert(preferred_player != player_area.player_number);
-	assert(not conquer or not preferred_player);
+	assert(!conquer || !preferred_player);
 	Player & conquering_player = player(player_area.player_number);
 	MapRegion<Area<FCoords> > mr(map(), player_area);
 	do {
@@ -710,33 +709,22 @@ void Editor_Game_Base::do_conquer_area
 		Player_Number const owner = mr.location().field->get_owned_by();
 		if (conquer) {
 			//  adds the influence
-			Military_Influence new_influence_modified =
-				conquering_player.military_influence(index) += influence;
-			if (owner and not conquer_guarded_location_by_superior_influence)
+			Military_Influence new_influence_modified = conquering_player.military_influence(index) +=
+			   influence;
+			if (owner && !conquer_guarded_location_by_superior_influence)
 				new_influence_modified = 1;
-			if
-				(not owner
-				 or
-				 player(owner).military_influence(index) < new_influence_modified)
-			{
-				if (owner)
-					receive(NoteFieldPossession(mr.location(), LOSE));
-				mr.location().field->set_owned_by(player_area.player_number);
-				inform_players_about_ownership(index, player_area.player_number);
-				receive (NoteFieldPossession(mr.location(), GAIN));
+			if (!owner || player(owner).military_influence(index) < new_influence_modified) {
+				change_field_owner(mr.location(), player_area.player_number);
 			}
-		} else if
-			(not (conquering_player.military_influence(index) -= influence)
-			 and
-			 owner == player_area.player_number)
-		{
+		} else if (!(conquering_player.military_influence(index) -= influence) &&
+		           owner == player_area.player_number) {
 			//  The player completely lost influence over the location, which he
 			//  owned. Now we must see if some other player has influence and if
 			//  so, transfer the ownership to that player.
 			Player_Number best_player;
 			if
 				(preferred_player
-				 and
+				 &&
 				 player(preferred_player).military_influence(index))
 				best_player = preferred_player;
 			else {
@@ -760,17 +748,13 @@ void Editor_Game_Base::do_conquer_area
 				}
 			}
 			if (best_player != player_area.player_number) {
-				receive (NoteFieldPossession(mr.location(), LOSE));
-				mr.location().field->set_owned_by (best_player);
-				inform_players_about_ownership(index, best_player);
-				if (best_player)
-					receive (NoteFieldPossession(mr.location(), GAIN));
+				change_field_owner(mr.location(), best_player);
 			}
 		}
 	} while (mr.advance(map()));
 
-	//  This must reach one step beyond the conquered area to adjust the borders
-	//  of neighbour players.
+	// This must reach one step beyond the conquered area to adjust the borders
+	// of neighbour players.
 	++player_area.radius;
 	map().recalc_for_field_area(world(), player_area);
 }
@@ -786,31 +770,31 @@ void Editor_Game_Base::cleanup_playerimmovables_area
 	//  find all immovables that need fixing
 	m.find_immovables(area, &immovables, FindImmovablePlayerImmovable());
 
-	container_iterate_const(std::vector<ImmovableFound>, immovables, i) {
-		PlayerImmovable & imm =
-			ref_cast<PlayerImmovable, BaseImmovable>(*i.current->object);
+	for (const ImmovableFound& temp_imm : immovables) {
+		upcast(PlayerImmovable, imm, temp_imm.object);
 		if
-			(not
-			 m[i.current->coords].is_interior(imm.owner().player_number()))
+			(!m[temp_imm.coords].is_interior(imm->owner().player_number())) {
 			if
-				(std::find(burnlist.begin(), burnlist.end(), &imm)
+				(std::find(burnlist.begin(), burnlist.end(), imm)
 				 ==
-				 burnlist.end())
-				burnlist.push_back(&imm);
+				 burnlist.end()) {
+				burnlist.push_back(imm);
+			}
+		}
 	}
 
 	//  fix all immovables
 	upcast(Game, game, this);
-	container_iterate_const(std::vector<PlayerImmovable *>, burnlist, i) {
-		if (upcast(Building, building, *i.current))
+	for (PlayerImmovable * temp_imm : burnlist) {
+		if (upcast(Building, building, temp_imm))
 			building->set_defeating_player(area.player_number);
-		else if (upcast(Flag,     flag,     *i.current))
+		else if (upcast(Flag, flag, temp_imm))
 			if (Building * const flag_building = flag->get_building())
 				flag_building->set_defeating_player(area.player_number);
 		if (game)
-			(*i.current)->schedule_destroy(*game);
+			temp_imm->schedule_destroy(*game);
 		else
-			(*i.current)->remove(*this);
+			temp_imm->remove(*this);
 	}
 }
 

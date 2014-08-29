@@ -24,35 +24,35 @@
 #include <cstring>
 #include <string>
 
-#include "container_iterate.h"
+#include "base/deprecated.h"
+#include "base/log.h"
+#include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "log.h"
 #include "logic/cmd_queue.h"
 #include "logic/game.h"
 #include "logic/queue_cmd_ids.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "wexception.h"
 
 namespace Widelands {
 
-Cmd_Destroy_Map_Object::Cmd_Destroy_Map_Object
-	(int32_t const t, Map_Object & o)
+CmdDestroyMapObject::CmdDestroyMapObject
+	(int32_t const t, MapObject & o)
 	: GameLogicCommand(t), obj_serial(o.serial())
 {}
 
-void Cmd_Destroy_Map_Object::execute(Game & game)
+void CmdDestroyMapObject::execute(Game & game)
 {
 	game.syncstream().Unsigned32(obj_serial);
 
-	if (Map_Object * obj = game.objects().get_object(obj_serial))
+	if (MapObject * obj = game.objects().get_object(obj_serial))
 		obj->destroy (game);
 }
 
 #define CMD_DESTROY_MAP_OBJECT_VERSION 1
-void Cmd_Destroy_Map_Object::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+void CmdDestroyMapObject::Read
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -60,7 +60,7 @@ void Cmd_Destroy_Map_Object::Read
 			GameLogicCommand::Read(fr, egbase, mol);
 			if (Serial const serial = fr.Unsigned32())
 				try {
-					obj_serial = mol.get<Map_Object>(serial).serial();
+					obj_serial = mol.get<MapObject>(serial).serial();
 				} catch (const _wexception & e) {
 					throw game_data_error("%u: %s", serial, e.what());
 				}
@@ -73,8 +73,8 @@ void Cmd_Destroy_Map_Object::Read
 		throw game_data_error("destroy map object: %s", e.what());
 	}
 }
-void Cmd_Destroy_Map_Object::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+void CmdDestroyMapObject::Write
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(CMD_DESTROY_MAP_OBJECT_VERSION);
@@ -86,7 +86,7 @@ void Cmd_Destroy_Map_Object::Write
 	fw.Unsigned32(mos.get_object_file_index_or_zero(egbase.objects().get_object(obj_serial)));
 }
 
-Cmd_Act::Cmd_Act(int32_t const t, Map_Object & o, int32_t const a) :
+Cmd_Act::Cmd_Act(int32_t const t, MapObject & o, int32_t const a) :
 	GameLogicCommand(t), obj_serial(o.serial()), arg(a)
 {}
 
@@ -95,14 +95,14 @@ void Cmd_Act::execute(Game & game)
 {
 	game.syncstream().Unsigned32(obj_serial);
 
-	if (Map_Object * const obj = game.objects().get_object(obj_serial))
+	if (MapObject * const obj = game.objects().get_object(obj_serial))
 		obj->act(game, arg);
 	// the object must queue the next CMD_ACT itself if necessary
 }
 
 #define CMD_ACT_VERSION 1
 void Cmd_Act::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -110,7 +110,7 @@ void Cmd_Act::Read
 			GameLogicCommand::Read(fr, egbase, mol);
 			if (Serial const object_serial = fr.Unsigned32())
 				try {
-					obj_serial = mol.get<Map_Object>(object_serial).serial();
+					obj_serial = mol.get<MapObject>(object_serial).serial();
 				} catch (const _wexception & e) {
 					throw game_data_error
 						("object %u: %s", object_serial, e.what());
@@ -126,7 +126,7 @@ void Cmd_Act::Read
 	}
 }
 void Cmd_Act::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(CMD_ACT_VERSION);
@@ -164,9 +164,9 @@ void Object_Manager::cleanup(Editor_Game_Base & egbase)
 }
 
 /**
- * Insert the given Map_Object into the object manager
+ * Insert the given MapObject into the object manager
  */
-void Object_Manager::insert(Map_Object * obj)
+void Object_Manager::insert(MapObject * obj)
 {
 	++m_lastserial;
 	assert(m_lastserial);
@@ -175,9 +175,9 @@ void Object_Manager::insert(Map_Object * obj)
 }
 
 /**
- * Remove the Map_Object from the manager
+ * Remove the MapObject from the manager
  */
-void Object_Manager::remove(Map_Object & obj)
+void Object_Manager::remove(MapObject & obj)
 {
 	m_objects.erase(obj.m_serial);
 }
@@ -188,19 +188,20 @@ void Object_Manager::remove(Map_Object & obj)
 std::vector<Serial> Object_Manager::all_object_serials_ordered () const {
 	std::vector<Serial> rv;
 
-	container_iterate_const(objmap_t, m_objects, o)
-		rv.push_back(o->first);
+	for (const std::pair<Serial, MapObject *>& o : m_objects) {
+		rv.push_back(o.first);
+	}
 
 	std::sort(rv.begin(), rv.end());
 
 	return rv;
 }
 
-Map_Object * Object_Ptr::get(const Editor_Game_Base & egbase)
+MapObject * Object_Ptr::get(const Editor_Game_Base & egbase)
 {
 	if (!m_serial)
 		return nullptr;
-	Map_Object * const obj = egbase.objects().get_object(m_serial);
+	MapObject * const obj = egbase.objects().get_object(m_serial);
 	if (!obj)
 		m_serial = 0;
 	return obj;
@@ -210,7 +211,7 @@ Map_Object * Object_Ptr::get(const Editor_Game_Base & egbase)
 // because it is logically the pointer that is const, not the object
 // that is pointed to.
 // That is, a 'const Object_Ptr' behaves like a 'Object_Ptr * const'.
-Map_Object * Object_Ptr::get(const Editor_Game_Base & egbase) const {
+MapObject * Object_Ptr::get(const Editor_Game_Base & egbase) const {
 	return m_serial ? egbase.objects().get_object(m_serial) : nullptr;
 }
 
@@ -220,42 +221,48 @@ Map_Object * Object_Ptr::get(const Editor_Game_Base & egbase) const {
 /*
 ==============================================================================
 
-Map_Object_Descr IMPLEMENTATION
+MapObjectDescr IMPLEMENTATION
 
 ==============================================================================
 */
 
-uint32_t Map_Object_Descr::s_dyn_attribhigh =
-	Map_Object::HIGHEST_FIXED_ATTRIBUTE;
-Map_Object_Descr::AttribMap Map_Object_Descr::s_dyn_attribs;
+uint32_t MapObjectDescr::s_dyn_attribhigh =
+	MapObject::HIGHEST_FIXED_ATTRIBUTE;
+MapObjectDescr::AttribMap MapObjectDescr::s_dyn_attribs;
 
 /**
  * Add this animation for this map object under this name
  */
-bool Map_Object_Descr::is_animation_known(const std::string & animname) const {
-	container_iterate_const(Anims, m_anims, i)
-		if (i.current->first == animname)
+bool MapObjectDescr::is_animation_known(const std::string & animname) const {
+	for (const std::pair<std::string, uint32_t>& anim : m_anims) {
+		if (anim.first == animname) {
 			return true;
+		}
+	}
 	return false;
 }
 
-void Map_Object_Descr::add_animation
+void MapObjectDescr::add_animation
 	(const std::string & animname, uint32_t const anim)
 {
 #ifndef NDEBUG
-	container_iterate_const(Anims, m_anims, i)
-		if (i.current->first == animname)
+	for (const std::pair<std::string, uint32_t>& temp_anim : m_anims) {
+		if (temp_anim.first == animname) {
 			throw wexception
 				("adding already existing animation \"%s\"", animname.c_str());
+		}
+	}
 #endif
 	m_anims.insert(std::pair<std::string, uint32_t>(animname, anim));
 }
 
+std::string MapObjectDescr::get_animation_name(uint32_t const anim) const {
 
-std::string Map_Object_Descr::get_animation_name(uint32_t const anim) const {
-	container_iterate_const(Anims, m_anims, i)
-		if (i.current->second == anim)
-			return i.current->first;
+	for (const std::pair<std::string, uint32_t>& temp_anim : m_anims) {
+		if (temp_anim.second == anim) {
+			return temp_anim.first;
+		}
+	}
 
 	// Never here
 	assert(false);
@@ -266,10 +273,12 @@ std::string Map_Object_Descr::get_animation_name(uint32_t const anim) const {
 /**
  * Search for the attribute in the attribute list
  */
-bool Map_Object_Descr::has_attribute(uint32_t const attr) const {
-	container_iterate_const(Attributes, m_attributes, i)
-		if (*i.current == attr)
+bool MapObjectDescr::has_attribute(uint32_t const attr) const {
+	for (const uint32_t& attrib : m_attributes) {
+		if (attrib == attr) {
 			return true;
+		}
+	}
 	return false;
 }
 
@@ -277,17 +286,17 @@ bool Map_Object_Descr::has_attribute(uint32_t const attr) const {
 /**
  * Add an attribute to the attribute list if it's not already there
  */
-void Map_Object_Descr::add_attribute(uint32_t const attr)
+void MapObjectDescr::add_attribute(uint32_t const attr)
 {
 	if (!has_attribute(attr))
 		m_attributes.push_back(attr);
 }
 
-void Map_Object_Descr::add_attributes(const std::vector<std::string>& attributes,
+void MapObjectDescr::add_attributes(const std::vector<std::string>& attributes,
                                       const std::set<uint32_t>& allowed_special) {
 	for (const std::string& attribute : attributes) {
 		uint32_t const attrib = get_attribute_id(attribute);
-		if (attrib < Map_Object::HIGHEST_FIXED_ATTRIBUTE) {
+		if (attrib < MapObject::HIGHEST_FIXED_ATTRIBUTE) {
 			if (!allowed_special.count(attrib)) {
 				throw game_data_error("bad attribute \"%s\"", attribute.c_str());
 			}
@@ -300,16 +309,16 @@ void Map_Object_Descr::add_attributes(const std::vector<std::string>& attributes
  * Lookup an attribute by name. If the attribute name hasn't been encountered
  * before, we add it to the map.
  */
-uint32_t Map_Object_Descr::get_attribute_id(const std::string & name) {
+uint32_t MapObjectDescr::get_attribute_id(const std::string & name) {
 	AttribMap::iterator it = s_dyn_attribs.find(name);
 
 	if (it != s_dyn_attribs.end())
 		return it->second;
 
 	if      (name == "worker")
-		return Map_Object::WORKER;
+		return MapObject::WORKER;
 	else if (name == "resi")
-		return Map_Object::RESI;
+		return MapObject::RESI;
 
 	++s_dyn_attribhigh;
 	s_dyn_attribs[name] = s_dyn_attribhigh;
@@ -323,7 +332,7 @@ uint32_t Map_Object_Descr::get_attribute_id(const std::string & name) {
  * Lookup an attribute by id. If the attribute isn't found,
  * returns an emtpy string.
  */
-std::string Map_Object_Descr::get_attribute_name(uint32_t id) {
+std::string MapObjectDescr::get_attribute_name(uint32_t id) {
 	for
 		(AttribMap::iterator iter = s_dyn_attribs.begin();
 		 iter != s_dyn_attribs.end(); ++iter)
@@ -337,7 +346,7 @@ std::string Map_Object_Descr::get_attribute_name(uint32_t id) {
 /*
 ==============================================================================
 
-Map_Object IMPLEMENTATION
+MapObject IMPLEMENTATION
 
 ==============================================================================
 */
@@ -345,7 +354,7 @@ Map_Object IMPLEMENTATION
 /**
  * Zero-initialize a map object
  */
-Map_Object::Map_Object(const Map_Object_Descr * const the_descr) :
+MapObject::MapObject(const MapObjectDescr * const the_descr) :
 m_descr(the_descr), m_serial(0), m_logsink(nullptr)
 {}
 
@@ -354,7 +363,7 @@ m_descr(the_descr), m_serial(0), m_logsink(nullptr)
  * Call this function if you want to remove the object immediately, without
  * any effects.
  */
-void Map_Object::remove(Editor_Game_Base & egbase)
+void MapObject::remove(Editor_Game_Base & egbase)
 {
 	removed(m_serial); // Signal call
 	cleanup(egbase);
@@ -372,7 +381,7 @@ void Map_Object::remove(Editor_Game_Base & egbase)
  * the object. Therefore, it may be safer to call schedule_destroy()
  * instead.
  */
-void Map_Object::destroy(Editor_Game_Base & egbase)
+void MapObject::destroy(Editor_Game_Base & egbase)
 {
 	remove(egbase);
 }
@@ -381,10 +390,10 @@ void Map_Object::destroy(Editor_Game_Base & egbase)
  * Schedule the object for immediate destruction.
  * This can be used to safely destroy the object from within an act function.
  */
-void Map_Object::schedule_destroy(Game & game)
+void MapObject::schedule_destroy(Game & game)
 {
 	game.cmdqueue().enqueue
-		(new Cmd_Destroy_Map_Object(game.get_gametime(), *this));
+		(new CmdDestroyMapObject(game.get_gametime(), *this));
 }
 
 /**
@@ -392,7 +401,7 @@ void Map_Object::schedule_destroy(Game & game)
  *
  * \warning Make sure you call this from derived classes!
  */
-void Map_Object::init(Editor_Game_Base & egbase)
+void MapObject::init(Editor_Game_Base & egbase)
 {
 	egbase.objects().insert(this);
 }
@@ -400,7 +409,7 @@ void Map_Object::init(Editor_Game_Base & egbase)
 /**
  * \warning Make sure you call this from derived classes!
  */
-void Map_Object::cleanup(Editor_Game_Base & egbase)
+void MapObject::cleanup(Editor_Game_Base & egbase)
 {
 	egbase.objects().remove(*this);
 }
@@ -408,7 +417,7 @@ void Map_Object::cleanup(Editor_Game_Base & egbase)
 /**
  * Default implementation
  */
-int32_t Map_Object::get_tattribute(uint32_t) const
+int32_t MapObject::get_tattribute(uint32_t) const
 {
 	return -1;
 }
@@ -419,7 +428,7 @@ int32_t Map_Object::get_tattribute(uint32_t) const
  *
  * \return The absolute gametime at which the CMD_ACT will occur.
  */
-uint32_t Map_Object::schedule_act
+uint32_t MapObject::schedule_act
 	(Game & game, uint32_t const tdelta, uint32_t const data)
 {
 	if (tdelta < Forever()) {
@@ -436,24 +445,24 @@ uint32_t Map_Object::schedule_act
 /**
  * Called when a CMD_ACT triggers.
  */
-void Map_Object::act(Game &, uint32_t) {}
+void MapObject::act(Game &, uint32_t) {}
 
 
 /**
  * Set the logsink. This should only be used by the debugging facilities.
  */
-void Map_Object::set_logsink(LogSink * const sink)
+void MapObject::set_logsink(LogSink * const sink)
 {
 	m_logsink = sink;
 }
 
 
-void Map_Object::log_general_info(const Editor_Game_Base &) {}
+void MapObject::log_general_info(const Editor_Game_Base &) {}
 
 /**
  * Prints a log message prepended by the object's serial number.
  */
-void Map_Object::molog(char const * fmt, ...) const
+void MapObject::molog(char const * fmt, ...) const
 {
 	if (!g_verbose && !m_logsink)
 		return;
@@ -476,20 +485,20 @@ void Map_Object::molog(char const * fmt, ...) const
 
 /**
  * Load the entire data package from the given file.
- * This will be called from the Map_Object's derived class static load function.
+ * This will be called from the MapObject's derived class static load function.
  *
  * Derived functions must read all data into member variables, even if
  * it is used only later in \ref load_pointers or \ref load_finish .
  *
  * Derived functions must call ancestor's function in the appropriate place.
  */
-void Map_Object::Loader::load(FileRead & fr)
+void MapObject::Loader::load(FileRead & fr)
 {
 	try {
 		uint8_t const header = fr.Unsigned8();
-		if (header != header_Map_Object)
+		if (header != HeaderMapObject)
 			throw wexception
-				("header is %u, expected %u", header, header_Map_Object);
+				("header is %u, expected %u", header, HeaderMapObject);
 
 		uint8_t const version = fr.Unsigned8();
 		if (version != CURRENT_SAVEGAME_VERSION)
@@ -497,7 +506,7 @@ void Map_Object::Loader::load(FileRead & fr)
 
 		Serial const serial = fr.Unsigned32();
 		try {
-			mol().register_object<Map_Object>(serial, *get_object());
+			mol().register_object<MapObject>(serial, *get_object());
 		} catch (const _wexception & e) {
 			throw wexception("%u: %s", serial, e.what());
 		}
@@ -517,7 +526,7 @@ void Map_Object::Loader::load(FileRead & fr)
  *
  * Derived functions must call ancestor's function in the appropriate place.
  */
-void Map_Object::Loader::load_pointers() {}
+void MapObject::Loader::load_pointers() {}
 
 
 /**
@@ -528,20 +537,67 @@ void Map_Object::Loader::load_pointers() {}
  *
  * Derived functions must call ancestor's function in the appropriate place.
  */
-void Map_Object::Loader::load_finish()
+void MapObject::Loader::load_finish()
 {
 }
 
 /**
- * Save the Map_Object to the given file.
+ * Save the MapObject to the given file.
  */
-void Map_Object::save
-	(Editor_Game_Base &, Map_Map_Object_Saver & mos, FileWrite & fw)
+void MapObject::save
+	(Editor_Game_Base &, MapMapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(header_Map_Object);
+	fw.Unsigned8(HeaderMapObject);
 	fw.Unsigned8(CURRENT_SAVEGAME_VERSION);
 
 	fw.Unsigned32(mos.get_object_file_index(*this));
+}
+
+std::string to_string(const MapObjectType type) {
+	switch (type) {
+	case MapObjectType::BOB:
+		return "bob";
+	case MapObjectType::CRITTER:
+		return "critter";
+	case MapObjectType::SHIP:
+		return "ship";
+	case MapObjectType::WORKER:
+		return "worker";
+	case MapObjectType::CARRIER:
+		return "carrier";
+	case MapObjectType::SOLDIER:
+		return "soldier";
+	case MapObjectType::WARE:
+		return "ware";
+	case MapObjectType::BATTLE:
+		return "battle";
+	case MapObjectType::FLEET:
+		return "fleet";
+	case MapObjectType::IMMOVABLE:
+		return "immovable";
+	case MapObjectType::FLAG:
+		return "flag";
+	case MapObjectType::ROAD:
+		return "road";
+	case MapObjectType::PORTDOCK:
+		return "portdock";
+	case MapObjectType::BUILDING:
+		return "building";
+	case MapObjectType::CONSTRUCTIONSITE:
+		return "constructionsite";
+	case MapObjectType::DISMANTLESITE:
+		return "dismantlesite";
+	case MapObjectType::WAREHOUSE:
+		return "warehouse";
+	case MapObjectType::PRODUCTIONSITE:
+		return "productionsite";
+	case MapObjectType::MILITARYSITE:
+		return "militarysite";
+	case MapObjectType::TRAININGSITE:
+		return "trainingsite";
+	default:
+		throw wexception("Unknown MapObjectType %d.", static_cast<int>(type));
+	}
 }
 
 }

@@ -23,30 +23,33 @@
 
 #include <boost/format.hpp>
 
+#include "base/i18n.h"
+#include "base/macros.h"
+#include "base/wexception.h"
 #include "economy/wares_queue.h"
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "i18n.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/tribe.h"
 #include "logic/worker.h"
+#include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/window.h"
-#include "upcast.h"
-#include "wexception.h"
 #include "wui/interactive_gamebase.h"
+#include "wui/text_constants.h"
 
 namespace Widelands {
 
-ConstructionSite_Descr::ConstructionSite_Descr
+ConstructionSiteDescr::ConstructionSiteDescr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _tribe)
-: Building_Descr(_name, _descname, directory, prof, global_s, _tribe)
+	:
+	BuildingDescr(MapObjectType::CONSTRUCTIONSITE, _name, _descname, directory, prof, global_s, _tribe)
 {
-	add_attribute(Map_Object::CONSTRUCTIONSITE);
+	add_attribute(MapObject::CONSTRUCTIONSITE);
 
 	{ // animation when a worker entered the site
 		Section & sec = prof.get_safe_section("idle_with_worker");
@@ -57,7 +60,7 @@ ConstructionSite_Descr::ConstructionSite_Descr
 }
 
 
-Building & ConstructionSite_Descr::create_object() const {
+Building & ConstructionSiteDescr::create_object() const {
 	return *new ConstructionSite(*this);
 }
 
@@ -71,26 +74,18 @@ IMPLEMENTATION
 */
 
 
-ConstructionSite::ConstructionSite(const ConstructionSite_Descr & cs_descr) :
+ConstructionSite::ConstructionSite(const ConstructionSiteDescr & cs_descr) :
 Partially_Finished_Building (cs_descr),
-m_fetchfromflag  (0),
-m_builder_idle   (false)
+m_fetchfromflag     (0),
+m_builder_idle      (false)
 {}
 
 
-/*
-===============
-Print completion percentage.
-===============
-*/
-std::string ConstructionSite::get_statistics_string()
+void ConstructionSite::update_statistics_string(std::string* s)
 {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
-	std::string perc_s =
-		(boost::format("<font color=%s>%s</font>")
-		 % UI_FONT_CLR_DARK_HEX % (boost::format(_("%i%% built")) % percent).str())
-		 .str();
-	return perc_s;
+	*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_DARK_HEX %
+	      (boost::format(_("%i%% built")) % percent).str()).str();
 }
 
 /*
@@ -99,14 +94,14 @@ Access to the wares queues by id
 =======
 */
 WaresQueue & ConstructionSite::waresqueue(Ware_Index const wi) {
-	container_iterate_const(Wares, m_wares, i) {
-		if ((*i.current)->get_ware() == wi) {
-			return **i.current;
+	for (WaresQueue * ware : m_wares) {
+		if (ware->get_ware() == wi) {
+			return *ware;
 		}
 	}
 	throw wexception
 		("%s (%u) (building %s) has no WaresQueue for %u",
-		 name().c_str(), serial(), m_building->name().c_str(), wi);
+		 descr().name().c_str(), serial(), m_building->name().c_str(), wi);
 }
 
 
@@ -115,7 +110,7 @@ WaresQueue & ConstructionSite::waresqueue(Ware_Index const wi) {
 Set the type of building we're going to build
 ===============
 */
-void ConstructionSite::set_building(const Building_Descr & building_descr) {
+void ConstructionSite::set_building(const BuildingDescr & building_descr) {
 	Partially_Finished_Building::set_building(building_descr);
 
 	m_info.becomes = &building_descr;
@@ -134,14 +129,14 @@ void ConstructionSite::init(Editor_Game_Base & egbase)
 	if (!m_old_buildings.empty()) {
 		// Enhancement
 		Building_Index was_index = m_old_buildings.back();
-		const Building_Descr* was_descr = tribe().get_building_descr(was_index);
+		const BuildingDescr* was_descr = descr().tribe().get_building_descr(was_index);
 		m_info.was = was_descr;
 		buildcost = &m_building->enhancement_cost();
 	} else {
 		buildcost = &m_building->buildcost();
 	}
 
-	//  TODO figure out whether planing is necessary
+	//  TODO(unknown): figure out whether planing is necessary
 
 	//  initialize the wares queues
 	size_t const buildcost_size = buildcost->size();
@@ -172,7 +167,7 @@ void ConstructionSite::cleanup(Editor_Game_Base & egbase)
 
 	if (m_work_steps <= m_work_completed) {
 		// Put the real building in place
-		Building_Index becomes_idx = tribe().building_index(m_building->name());
+		Building_Index becomes_idx = descr().tribe().building_index(m_building->name());
 		m_old_buildings.push_back(becomes_idx);
 		Building & b =
 			m_building->create(egbase, owner(), m_position, false, false, m_old_buildings);
@@ -202,7 +197,7 @@ bool ConstructionSite::burn_on_destroy()
 	if (m_work_completed >= m_work_steps)
 		return false; // completed, so don't burn
 
-	return m_work_completed or !m_old_buildings.empty();
+	return m_work_completed || !m_old_buildings.empty();
 }
 
 /*
@@ -235,7 +230,7 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 		return true;
 	}
 
-	if (not m_work_steps) //  Happens for building without buildcost.
+	if (!m_work_steps) //  Happens for building without buildcost.
 		schedule_destroy(game); //  Complete the building immediately.
 
 	// Check if one step has completed
@@ -243,7 +238,7 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 		if (static_cast<int32_t>(game.get_gametime() - m_work_steptime) < 0) {
 			worker.start_task_idle
 				(game,
-				 worker.get_animation("work"),
+				 worker.descr().get_animation("work"),
 				 m_work_steptime - game.get_gametime());
 			m_builder_idle = false;
 			return true;
@@ -268,11 +263,11 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 	}
 
 	// Drop all the wares that are too much out to the flag.
-	container_iterate(Wares, m_wares, iqueue) {
-		WaresQueue * queue = *iqueue;
+	for (WaresQueue * iqueue: m_wares) {
+		WaresQueue * queue = iqueue;
 		if (queue->get_filled() > queue->get_max_fill()) {
 			queue->set_filled(queue->get_filled() - 1);
-			const WareDescr & wd = *tribe().get_ware_descr(queue->get_ware());
+			const WareDescr & wd = *descr().tribe().get_ware_descr(queue->get_ware());
 			WareInstance & ware = *new WareInstance(queue->get_ware(), &wd);
 			ware.init(game);
 			worker.start_task_dropoff(game, ware);
@@ -299,14 +294,14 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 			m_work_steptime = game.get_gametime() + CONSTRUCTIONSITE_STEP_TIME;
 
 			worker.start_task_idle
-				(game, worker.get_animation("work"), CONSTRUCTIONSITE_STEP_TIME);
+				(game, worker.descr().get_animation("work"), CONSTRUCTIONSITE_STEP_TIME);
 			m_builder_idle = false;
 			return true;
 		}
 	}
 	// The only work we have got for you, is to run around to look cute ;)
 	if (!m_builder_idle) {
-		worker.set_animation(game, worker.get_animation("idle"));
+		worker.set_animation(game, worker.descr().get_animation("idle"));
 		m_builder_idle = true;
 	}
 	worker.schedule_act(game, 2000);
@@ -366,10 +361,10 @@ void ConstructionSite::draw
 	uint32_t cur_frame;
 	try {
 		anim_idx = building().get_animation("build");
-	} catch (Map_Object_Descr::Animation_Nonexistent & e) {
+	} catch (MapObjectDescr::Animation_Nonexistent&) {
 		try {
 			anim_idx = building().get_animation("unoccupied");
-		} catch (Map_Object_Descr::Animation_Nonexistent) {
+		} catch (MapObjectDescr::Animation_Nonexistent) {
 			anim_idx = building().get_animation("idle");
 		}
 	}
@@ -393,13 +388,13 @@ void ConstructionSite::draw
 		dst.drawanimrect(pos, anim_idx, tanim - FRAME_LENGTH, get_owner(), Rect(Point(0, 0), w, h - lines));
 	else if (!m_old_buildings.empty()) {
 		Building_Index prev_idx = m_old_buildings.back();
-		const Building_Descr* prev_building = tribe().get_building_descr(prev_idx);
+		const BuildingDescr* prev_building = descr().tribe().get_building_descr(prev_idx);
 		//  Is the first picture but there was another building here before,
 		//  get its most fitting picture and draw it instead.
 		uint32_t prev_building_anim_idx;
 		try {
 			prev_building_anim_idx = prev_building->get_animation("unoccupied");
-		} catch (Map_Object_Descr::Animation_Nonexistent &) {
+		} catch (MapObjectDescr::Animation_Nonexistent &) {
 			prev_building_anim_idx = prev_building->get_animation("idle");
 		}
 		const Animation& prev_building_anim = g_gr->animations().get_animation(prev_building_anim_idx);

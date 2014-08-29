@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef UI_MULTILINEEDITBOX_H
-#define UI_MULTILINEEDITBOX_H
+#ifndef WL_UI_BASIC_MULTILINEEDITBOX_H
+#define WL_UI_BASIC_MULTILINEEDITBOX_H
 
 #include <memory>
 
@@ -47,7 +47,7 @@ struct Multiline_Editbox : public Panel {
 	void set_maximum_bytes(uint32_t n);
 	uint32_t get_maximum_bytes() const;
 
-	virtual void focus() override;
+	void focus() override;
 
 protected:
 	void draw(RenderTarget &) override;
@@ -64,4 +64,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_MULTILINEEDITBOX_H

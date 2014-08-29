@@ -1,77 +1,61 @@
-file(GLOB_RECURSE ERIS_SRCS_C *.c)
-file(GLOB_RECURSE ERIS_SRCS_H *.h)
+add_subdirectory(test)
 
-SET(ERIS_SOURCES
-  eris/eris.c
-  eris/lapi.c
-  eris/lauxlib.c
-  eris/lbaselib.c
-  eris/lbitlib.c
-  eris/lcode.c
-  eris/lcorolib.c
-  eris/lctype.c
-  eris/ldblib.c
-  eris/ldebug.c
-  eris/ldo.c
-  eris/ldump.c
-  eris/lfunc.c
-  eris/lgc.c
-  eris/linit.c
-  eris/liolib.c
-  eris/llex.c
-  eris/lmathlib.c
-  eris/lmem.c
-  eris/loadlib.c
-  eris/lobject.c
-  eris/lopcodes.c
-  eris/loslib.c
-  eris/lparser.c
-  eris/lstate.c
-  eris/lstring.c
-  eris/lstrlib.c
-  eris/ltable.c
-  eris/ltablib.c
-  eris/ltm.c
-  eris/lua.c
-  eris/luac.c
-  eris/lundump.c
-  eris/lvm.c
-  eris/lzio.c
+# TODO(sirver): Separate lua_table and lua_coroutine if possible.
+wl_library(scripting
+  SRCS
+    c_utils.cc
+    c_utils.h
+    eris.h
+    factory.cc
+    factory.h
+    lua_bases.cc
+    lua_bases.h
+    lua_coroutine.cc
+    lua_coroutine.h
+    lua_editor.cc
+    lua_editor.h
+    lua_errors.h
+    lua_game.cc
+    lua_game.h
+    lua_globals.cc
+    lua_globals.h
+    lua_map.cc
+    lua_map.h
+    lua_path.cc
+    lua_path.h
+    lua_root.cc
+    lua_root.h
+    lua_table.cc
+    lua_table.h
+    lua_ui.cc
+    lua_ui.h
+    luna.h
+    luna_impl.cc
+    luna_impl.h
+    persistence.cc
+    persistence.h
+    scripting.cc
+    scripting.h
+  USES_BOOST_REGEX
+  DEPENDS
+    base_deprecated
+    base_exceptions
+    base_i18n
+    base_log
+    base_macros
+    build_info
+    economy
+    graphic
+    helper
+    io_fileread
+    io_filesystem
+    logic
+    logic_campaign_visibility
+    logic_game_controller
+    logic_widelands_geometry
+    map_io
+    profile
+    third_party_eris
+    ui_basic
+    wui
 )
-
-SET(ERIS_HEADERS
-  eris/eris.h
-  eris/lapi.h
-  eris/lauxlib.h
-  eris/lcode.h
-  eris/lctype.h
-  eris/ldebug.h
-  eris/ldo.h
-  eris/lfunc.h
-  eris/lgc.h
-  eris/llex.h
-  eris/llimits.h
-  eris/lmem.h
-  eris/lobject.h
-  eris/lopcodes.h
-  eris/lparser.h
-  eris/lstate.h
-  eris/lstring.h
-  eris/ltable.h
-  eris/ltm.h
-  eris/lua.h
-  eris/luaconf.h
-  eris/lualib.h
-  eris/lundump.h
-  eris/lvm.h
-  eris/lzio.h
-)
-
-add_library(eris STATIC
-  ${ERIS_SOURCES}
-  ${ERIS_HEADERS}
-)
-
-if (WL_UNIT_TESTS)
-  add_subdirectory(test)
-endif (WL_UNIT_TESTS)

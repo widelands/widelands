@@ -17,10 +17,10 @@
  *
  */
 
-#ifndef ECONOMY_ROUTEASTAR_H
-#define ECONOMY_ROUTEASTAR_H
+#ifndef WL_ECONOMY_ROUTEASTAR_H
+#define WL_ECONOMY_ROUTEASTAR_H
 
-#include "container_iterate.h"
+#include "base/deprecated.h"
 #include "economy/itransport_cost_calculator.h"
 #include "economy/routing_node.h"
 
@@ -136,8 +136,8 @@ RoutingNode * RouteAStar<Est_>::step()
 
 	current->get_neighbours(m_type, m_neighbours);
 
-	container_iterate_const(RoutingNodeNeighbours, m_neighbours, it) {
-		RoutingNode & neighbour = *it.current->get_neighbour();
+	for (RoutingNodeNeighbour& temp_neighbour : m_neighbours) {
+		RoutingNode & neighbour = *temp_neighbour.get_neighbour();
 
 		// We have already found the best path
 		// to this neighbour, no need to visit it again.
@@ -146,7 +146,7 @@ RoutingNode * RouteAStar<Est_>::step()
 			 !neighbour.cookie().is_active())
 			continue;
 
-		int32_t realcost = current->mpf_realcost + it.current->get_cost();
+		int32_t realcost = current->mpf_realcost + temp_neighbour.get_cost();
 		push(neighbour, realcost, current);
 	}
 
@@ -183,4 +183,4 @@ struct AStarZeroEstimator {
 
 } // namespace Widelands
 
-#endif // ECONOMY_ROUTEASTAR_H
+#endif  // end of include guard: WL_ECONOMY_ROUTEASTAR_H

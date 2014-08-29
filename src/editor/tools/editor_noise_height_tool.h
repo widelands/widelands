@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_NOISE_HEIGHT_TOOL_H
-#define EDITOR_NOISE_HEIGHT_TOOL_H
+#ifndef WL_EDITOR_TOOLS_EDITOR_NOISE_HEIGHT_TOOL_H
+#define WL_EDITOR_TOOLS_EDITOR_NOISE_HEIGHT_TOOL_H
 
 #include "editor/tools/editor_set_height_tool.h"
 
@@ -26,8 +26,8 @@
 struct Editor_Noise_Height_Tool : public Editor_Tool {
 	Editor_Noise_Height_Tool
 	(Editor_Set_Height_Tool & the_set_tool,
-	 const interval<Widelands::Field::Height> the_interval =
-	     interval<Widelands::Field::Height>(10, 14))
+	 const Widelands::HeightInterval the_interval =
+	     Widelands::HeightInterval(10, 14))
 		:
 		Editor_Tool(the_set_tool, the_set_tool),
 		m_set_tool(the_set_tool),
@@ -52,10 +52,10 @@ struct Editor_Noise_Height_Tool : public Editor_Tool {
 		return "pics/fsel_editor_noise_height.png";
 	}
 
-	interval<Widelands::Field::Height> get_interval() const {
+	Widelands::HeightInterval get_interval() const {
 		return m_interval;
 	}
-	void set_interval(interval<Widelands::Field::Height> const i) {
+	void set_interval(Widelands::HeightInterval const i) {
 		m_interval = i;
 	}
 
@@ -63,7 +63,7 @@ struct Editor_Noise_Height_Tool : public Editor_Tool {
 
 private:
 	Editor_Set_Height_Tool & m_set_tool;
-	interval<Widelands::Field::Height> m_interval;
+	Widelands::HeightInterval m_interval;
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_NOISE_HEIGHT_TOOL_H

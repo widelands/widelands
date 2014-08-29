@@ -17,11 +17,12 @@
  *
  */
 
-#ifndef ECONOMY_FLEET_H
-#define ECONOMY_FLEET_H
+#ifndef WL_ECONOMY_FLEET_H
+#define WL_ECONOMY_FLEET_H
 
 #include <boost/shared_ptr.hpp>
 
+#include "base/macros.h"
 #include "logic/instances.h"
 
 namespace Widelands {
@@ -31,6 +32,18 @@ struct Flag;
 class PortDock;
 struct RoutingNodeNeighbour;
 struct Ship;
+
+class FleetDescr : public MapObjectDescr {
+public:
+	FleetDescr(char const* const _name, char const* const _descname)
+		: MapObjectDescr(MapObjectType::FLEET, _name, _descname) {
+	}
+	~FleetDescr() override {
+	}
+
+private:
+	DISALLOW_COPY_AND_ASSIGN(FleetDescr);
+};
 
 /**
  * Manage all ships and ports of a player that are connected
@@ -50,13 +63,15 @@ struct Ship;
  * again in reaction to changes in the map. However, this may not work
  * properly at the moment.
  */
-struct Fleet : Map_Object {
+struct Fleet : MapObject {
 	struct PortPath {
 		int32_t cost;
 		boost::shared_ptr<Path> path;
 
 		PortPath() : cost(-1) {}
 	};
+
+	const FleetDescr& descr() const;
 
 	Fleet(Player & player);
 
@@ -69,11 +84,8 @@ struct Fleet : Map_Object {
 
 	bool active() const;
 
-	virtual int32_t get_type() const override;
-	virtual char const * type_name() const override;
-
-	virtual void init(Editor_Game_Base &) override;
-	virtual void cleanup(Editor_Game_Base &) override;
+	void init(Editor_Game_Base &) override;
+	void cleanup(Editor_Game_Base &) override;
 	void update(Editor_Game_Base &);
 
 	void add_ship(Ship * ship);
@@ -81,13 +93,13 @@ struct Fleet : Map_Object {
 	void add_port(Editor_Game_Base & egbase, PortDock * port);
 	void remove_port(Editor_Game_Base & egbase, PortDock * port);
 
-	virtual void log_general_info(const Editor_Game_Base &) override;
+	void log_general_info(const Editor_Game_Base &) override;
 
 	bool get_path(PortDock & start, PortDock & end, Path & path);
 	void add_neighbours(PortDock & pd, std::vector<RoutingNodeNeighbour> & neighbours);
 
 protected:
-	virtual void act(Game &, uint32_t data) override;
+	void act(Game &, uint32_t data) override;
 
 private:
 	void find_other_fleet(Editor_Game_Base & egbase);
@@ -116,12 +128,12 @@ private:
 
 	// saving and loading
 protected:
-	struct Loader : Map_Object::Loader {
+	struct Loader : MapObject::Loader {
 		Loader();
 
 		void load(FileRead &, uint8_t version);
-		virtual void load_pointers() override;
-		virtual void load_finish() override;
+		void load_pointers() override;
+		void load_finish() override;
 
 	private:
 		std::vector<uint32_t> m_ships;
@@ -129,13 +141,13 @@ protected:
 	};
 
 public:
-	virtual bool has_new_save_support() override {return true;}
-	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
+	bool has_new_save_support() override {return true;}
+	void save(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
 
-	static Map_Object::Loader * load
-		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);
+	static MapObject::Loader * load
+		(Editor_Game_Base &, MapMapObjectLoader &, FileRead &);
 };
 
 } // namespace Widelands
 
-#endif // ECONOMY_FLEET_H
+#endif  // end of include guard: WL_ECONOMY_FLEET_H

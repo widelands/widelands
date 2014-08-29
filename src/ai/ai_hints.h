@@ -17,18 +17,19 @@
  *
  */
 
-#ifndef AI_HINTS_H
-#define AI_HINTS_H
+#ifndef WL_AI_AI_HINTS_H
+#define WL_AI_AI_HINTS_H
 
-#include <SDL_types.h>
-#include <boost/noncopyable.hpp>
+#include <stdint.h>
+
+#include "base/macros.h"
 
 class Section;
 
 /// This struct is used to read out the data given in [aihints] section of a
 /// buildings conf file. It is used to tell the computer player about the
 /// special properties of a building.
-struct BuildingHints : boost::noncopyable {
+struct BuildingHints {
 	BuildingHints(Section*);
 	~BuildingHints();
 
@@ -42,6 +43,10 @@ struct BuildingHints : boost::noncopyable {
 
 	bool is_basic() const {
 		return basic_;
+	}
+
+	bool is_food_basic() const {
+		return food_basic_;
 	}
 
 	bool prod_build_material() const {
@@ -75,6 +80,15 @@ struct BuildingHints : boost::noncopyable {
 	bool is_space_consumer() const {
 		return space_consumer_;
 	}
+	bool is_expansion_type() const {
+		return expansion_;
+	}
+	bool is_fighting_type() const {
+		return fighting_;
+	}
+	bool is_mountain_conqueror() const {
+		return mountain_conqueror_;
+	}
 
 	uint8_t get_mines_percent() const {
 		return mines_percent_;
@@ -84,6 +98,7 @@ private:
 	char* renews_map_resource;
 	char* mines_;
 	bool basic_;
+	bool food_basic_;
 	bool build_material_;  // whether the building produces build material
 	bool log_producer_;
 	bool stone_producer_;
@@ -92,7 +107,12 @@ private:
 	bool mines_water_;
 	bool recruitment_;  // whether building recruits special workers
 	bool space_consumer_;
+	bool expansion_;
+	bool fighting_;
+	bool mountain_conqueror_;
 	uint8_t mines_percent_;
+
+	DISALLOW_COPY_AND_ASSIGN(BuildingHints);
 };
 
-#endif
+#endif  // end of include guard: WL_AI_AI_HINTS_H

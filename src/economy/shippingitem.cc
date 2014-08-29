@@ -48,22 +48,20 @@ void ShippingItem::get(Editor_Game_Base& game, WareInstance** ware, Worker** wor
 		*worker = nullptr;
 	}
 
-	if (Map_Object* obj = m_object.get(game)) {
-		switch (obj->get_type()) {
-		case Map_Object::WARE:
-			if (ware) {
-				*ware = dynamic_cast<WareInstance*>(obj);
-			}
-			break;
-		case Map_Object::BOB:
-			if (worker) {
-				*worker = dynamic_cast<Worker*>(obj);
-			}
-			break;
-		default:
-			assert(false);  // never here or unknown map object being shipped.
-			break;
+	MapObject* obj = m_object.get(game);
+	if (!obj) {
+		return;
+	}
+
+	if (obj->descr().type() == MapObjectType::WARE) {
+		if (ware) {
+			*ware = dynamic_cast<WareInstance*>(obj);
 		}
+		return;
+	}
+
+	if (worker) {
+		*worker = dynamic_cast<Worker*>(obj);
 	}
 }
 
@@ -79,7 +77,7 @@ void ShippingItem::set_economy(Game & game, Economy * e)
 		worker->set_economy(e);
 }
 
-void ShippingItem::set_location(Game& game, Map_Object* obj) {
+void ShippingItem::set_location(Game& game, MapObject* obj) {
 	WareInstance * ware;
 	Worker * worker;
 	get(game, &ware, &worker);
@@ -158,7 +156,7 @@ void ShippingItem::schedule_update(Game & game, int32_t delay)
  */
 void ShippingItem::remove(Editor_Game_Base & egbase)
 {
-	if (Map_Object * obj = m_object.get(egbase)) {
+	if (MapObject * obj = m_object.get(egbase)) {
 		obj->remove(egbase);
 		m_object = nullptr;
 	}
@@ -176,15 +174,15 @@ void ShippingItem::Loader::load(FileRead & fr)
 		throw game_data_error("unknown ShippingItem version %u", version);
 }
 
-ShippingItem ShippingItem::Loader::get(Map_Map_Object_Loader & mol)
+ShippingItem ShippingItem::Loader::get(MapMapObjectLoader & mol)
 {
 	ShippingItem it;
 	if (m_serial != 0)
-		it.m_object = &mol.get<Map_Object>(m_serial);
+		it.m_object = &mol.get<MapObject>(m_serial);
 	return it;
 }
 
-void ShippingItem::save(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
+void ShippingItem::save(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(SHIPPINGITEM_SAVEGAME_VERSION);
 	fw.Unsigned32(mos.get_object_file_index_or_zero(m_object.get(egbase)));

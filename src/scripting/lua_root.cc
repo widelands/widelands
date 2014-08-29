@@ -21,12 +21,11 @@
 
 #include <boost/format.hpp>
 
-#include "gamecontroller.h"
-#include "log.h"
 #include "logic/cmd_luacoroutine.h"
-#include "logic/critter_bob.h"
+#include "logic/critter.h"
 #include "logic/findimmovable.h"
 #include "logic/game.h"
+#include "logic/game_controller.h"
 #include "logic/immovable.h"
 #include "logic/tribe.h"
 #include "logic/world/world.h"
@@ -496,4 +495,4 @@ void luaopen_wlroot(lua_State * L, bool in_editor) {
 	register_class<L_World>(L, "", false);
 }
 
-};
+}

@@ -34,7 +34,7 @@ namespace Widelands {
 #define FILENAME_SIZE 19
 
 void Map_Players_Messages_Data_Packet::Read
-	(FileSystem & fs, Editor_Game_Base & egbase, bool, Map_Map_Object_Loader & mol)
+	(FileSystem & fs, Editor_Game_Base & egbase, bool, MapMapObjectLoader & mol)
 
 {
 	uint32_t      const gametime   = egbase.get_gametime ();
@@ -123,9 +123,9 @@ void Map_Players_Messages_Data_Packet::Read
 					Message::Status status = Message::Archived; //  default status
 					if (char const * const status_string = s->get_string("status")) {
 						try {
-							if      (not strcmp(status_string, "new"))
+							if      (!strcmp(status_string, "new"))
 								status = Message::New;
-							else if (not strcmp(status_string, "read"))
+							else if (!strcmp(status_string, "read"))
 								status = Message::Read;
 							else
 								throw game_data_error
@@ -138,7 +138,7 @@ void Map_Players_Messages_Data_Packet::Read
 					Serial serial = s->get_int("serial", 0);
 					if (serial > 0) {
 						assert(mol.is_object_known(serial));
-						Map_Object & mo = mol.get<Map_Object>(serial);
+						MapObject & mo = mol.get<MapObject>(serial);
 						assert(mol.is_object_loaded(mo));
 						serial = mo.serial();
 					}
@@ -169,7 +169,7 @@ void Map_Players_Messages_Data_Packet::Read
 }
 
 void Map_Players_Messages_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileSystem & fs, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	fs.EnsureDirectoryExists("player");
 	Player_Number const nr_players = egbase.map().get_nrplayers();
@@ -179,15 +179,15 @@ void Map_Players_Messages_Data_Packet::Write
 			("packet_version", CURRENT_PACKET_VERSION);
 		const MessageQueue & messages = player->messages();
 		Map_Message_Saver & message_saver = mos.message_savers[p - 1];
-		container_iterate_const(MessageQueue, messages, i) {
-			message_saver.add         (i.current->first);
-			const Message & message = *i.current->second;
+		for (const std::pair<Message_Id, Message *>& temp_message : messages) {
+			message_saver.add         (temp_message.first);
+			const Message & message = *temp_message.second;
 			assert(message.sent() <= static_cast<uint32_t>(egbase.get_gametime()));
 			assert
-				(message.duration() == Forever() or
+				(message.duration() == Forever() ||
 				 message.sent() < message.sent() + message.duration());
 			if
-				(message.duration() != Forever() and
+				(message.duration() != Forever() &&
 				 message.sent() + message.duration()
 				 <
 				 static_cast<uint32_t>(egbase.get_gametime()))
@@ -208,7 +208,7 @@ void Map_Players_Messages_Data_Packet::Write
 					 message.status() == Message::Read     ? "read"     :
 					 message.status() == Message::Archived ? "archived" : "ERROR");
 			assert
-				(message.duration() == Forever() or
+				(message.duration() == Forever() ||
 				 static_cast<uint32_t>(egbase.get_gametime())
 				 <=
 				 message.sent() + message.duration());
@@ -237,7 +237,7 @@ void Map_Players_Messages_Data_Packet::Write
 				assert(false);
 			}
 			if (message.serial()) {
-				const Map_Object* mo = egbase.objects().get_object(message.serial());
+				const MapObject* mo = egbase.objects().get_object(message.serial());
 				uint32_t fileindex = mos.get_object_file_index_or_zero(mo);
 				s.set_int       ("serial",    fileindex);
 			}

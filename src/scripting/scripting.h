@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef SCRIPTING_H
-#define SCRIPTING_H
+#ifndef WL_SCRIPTING_SCRIPTING_H
+#define WL_SCRIPTING_SCRIPTING_H
 
 #include <map>
 #include <memory>
@@ -26,8 +26,8 @@
 
 #include <stdint.h>
 
-#include "scripting/eris/lua.hpp"
 #include "scripting/lua_errors.h"
+#include "third_party/eris/lua.hpp"
 
 class FileRead;
 class FileWrite;
@@ -35,9 +35,8 @@ class FileWrite;
 namespace Widelands {
 	class Editor_Game_Base;
 	class Game;
-	class Map_Map_Object_Loader;
-	struct Map_Map_Object_Saver;
-	class Player;
+	class MapMapObjectLoader;
+	struct MapMapObjectSaver;
 }
 
 class EditorFactory;
@@ -81,12 +80,11 @@ public:
 
 	// Input output for the global game state.
 	void read_global_env
-		(FileRead &, Widelands::Map_Map_Object_Loader &, uint32_t);
+		(FileRead &, Widelands::MapMapObjectLoader &, uint32_t);
 	uint32_t write_global_env
-		(FileWrite &, Widelands::Map_Map_Object_Saver &);
+		(FileWrite &, Widelands::MapMapObjectSaver &);
 
 private:
 	std::unique_ptr<GameFactory> m_factory;
 };
-
-#endif
+#endif  // end of include guard: WL_SCRIPTING_SCRIPTING_H

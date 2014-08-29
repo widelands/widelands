@@ -9,6 +9,9 @@ attack_string=_Your guardhall is under attack.
 defeated_enemy_string=_The enemy defeated your soldiers at the guardhall.
 defeated_you_string=_Your soldiers defeated the enemy at the guardhall.
 
+[aihints]
+fighting=true
+
 [buildcost]
 log=2
 planks=3

@@ -24,8 +24,10 @@ log=2
 cloth=4
 
 [programs]
-ship=_Constructing ship
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start constructing a ship because ...
+ship=_constructing a ship
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [work]
 sleep=20000
@@ -38,17 +40,17 @@ animate=working 35000
 return=completed
 
 [idle]
-pics=work_??.png
+pics=shipyard_i_??.png
 hotspot=62 48
 
 [build]
-pics=build_??.png
+pics=shipyard_b_??.png
 hotspot=62 48
 
 [working]
-pics=work_??.png
+pics=shipyard_w_??.png
 hotspot=62 48
 
 [unoccupied]
-pics=vacant_??.png
+pics=shipyard_u_??.png
 hotspot=62 48

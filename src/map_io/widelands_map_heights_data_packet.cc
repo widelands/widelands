@@ -32,7 +32,7 @@ namespace Widelands {
 
 
 void Map_Heights_Data_Packet::Read
-	(FileSystem & fs, Editor_Game_Base & egbase, bool, Map_Map_Object_Loader &)
+	(FileSystem & fs, Editor_Game_Base & egbase, bool, MapMapObjectLoader &)
 {
 
 	FileRead fr;
@@ -58,7 +58,7 @@ void Map_Heights_Data_Packet::Read
  * Write Function
  */
 void Map_Heights_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
+	(FileSystem & fs, Editor_Game_Base & egbase, MapMapObjectSaver &)
 
 {
 	FileWrite fw;

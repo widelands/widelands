@@ -3,6 +3,7 @@ output=bread
 
 [aihints]
 build_material=false
+is_food_basic=true
 
 [buildcost]
 log=2
@@ -22,12 +23,13 @@ cornflour=4
 water=8
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [work]
+sleep=35000
 return=skipped unless economy needs bread
 consume=water:2 blackrootflour cornflour
-sleep=35000
 animate=working 30000
 produce=bread:2
 

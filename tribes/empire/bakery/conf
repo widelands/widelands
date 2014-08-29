@@ -21,7 +21,8 @@ flour=6
 water=6
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [work]
 sleep=15000
@@ -30,12 +31,12 @@ consume=flour water
 animate=working 15000
 produce=bread
 
-[build]
-pics=bakery_b_??.png  # ???
-hotspot=42 65
-
 [idle]
 pics=bakery_i_??.png  # ???
+hotspot=42 65
+
+[build]
+pics=bakery_b_??.png  # ???
 hotspot=42 65
 
 [working]

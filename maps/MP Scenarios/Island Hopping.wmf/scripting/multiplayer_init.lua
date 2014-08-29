@@ -206,8 +206,8 @@ function place_headquarters()
             armorsmith = 1,
             blackroot_farmer = 1,
             builder = 10,
-            burner = 1,
             carrier = 40,
+            charcoal_burner = 1,
             fish_breeder = 1,
             geologist = 4,
             miner = 4,
@@ -239,6 +239,9 @@ function initialize()
    disable_unused_buildings()
 
    send_to_all(welcome_msg)
+   -- set the objective with the game type for all players
+   -- TODO change this to a broadcast once individual game objectives have been implemented
+   game.players[1]:add_objective("win_conditions", _"Rules", welcome_msg)
 
    for idx,plr in ipairs(game.players) do
       run(function() run_island(plr, 1) end)

@@ -19,12 +19,12 @@
 
 #include "scripting/lua_ui.h"
 
-#include "gamecontroller.h"
+#include "base/macros.h"
+#include "logic/game_controller.h"
 #include "logic/player.h"
 #include "scripting/c_utils.h"
 #include "scripting/lua_map.h"
 #include "scripting/luna.h"
-#include "upcast.h"
 #include "wui/interactive_player.h"
 
 namespace LuaUi {
@@ -107,7 +107,7 @@ const MethodType<L_Panel> L_Panel::Methods[] = {
 static void _put_all_visible_buttons_into_table
 	(lua_State * L, UI::Panel * g)
 {
-	if (not g) return;
+	if (!g) return;
 
 	for (UI::Panel * f = g->get_first_child(); f; f = f->get_next_sibling())
 	{
@@ -138,16 +138,16 @@ int L_Panel::get_buttons(lua_State * L) {
 static void _put_all_tabs_into_table
 	(lua_State * L, UI::Panel * g)
 {
-	if (not g) return;
+	if (!g) return;
 
 	for (UI::Panel * f = g->get_first_child(); f; f = f->get_next_sibling())
 	{
 		_put_all_tabs_into_table(L, f);
 
 		if (upcast(UI::Tab_Panel, t, f))
-			container_iterate_const(UI::Tab_Panel::TabList, t->tabs(), tab) {
-				lua_pushstring(L, (*tab)->get_name());
-				to_lua<L_Tab>(L, new L_Tab(*tab));
+			for (UI::Tab* tab : t->tabs()) {
+				lua_pushstring(L, tab->get_name());
+				to_lua<L_Tab>(L, new L_Tab(tab));
 				lua_rawset(L, -3);
 			}
 	}
@@ -171,7 +171,7 @@ int L_Panel::get_tabs(lua_State * L) {
 static void _put_all_visible_windows_into_table
 	(lua_State * L, UI::Panel * g)
 {
-	if (not g) return;
+	if (!g) return;
 
 	for (UI::Panel * f = g->get_first_child(); f; f = f->get_next_sibling())
 	{
@@ -780,4 +780,4 @@ void luaopen_wlui(lua_State * L) {
 }
 
 
-};
+}

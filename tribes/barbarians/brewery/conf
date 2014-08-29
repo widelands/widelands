@@ -21,19 +21,20 @@ water=8
 wheat=8
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start brewing because ...
+work=_brewing
 
 [work]
-return=skipped unless economy needs strongbeer or not economy needs water
-return=skipped unless economy needs strongbeer or not economy needs wheat
-consume=water wheat
 sleep=30000
+return=skipped unless economy needs strongbeer
+consume=water wheat
 animate=working 30000
 produce=strongbeer
 
 [idle]
 pics=brewery_i_??.png  # ???
 hotspot=60 59
+
 [working]
 pics=brewery_i_??.png  # ???
 hotspot=60 59

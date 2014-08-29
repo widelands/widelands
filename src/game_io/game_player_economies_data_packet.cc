@@ -19,6 +19,7 @@
 
 #include "game_io/game_player_economies_data_packet.h"
 
+#include "base/macros.h"
 #include "economy/economy_data_packet.h"
 #include "economy/flag.h"
 #include "io/fileread.h"
@@ -28,7 +29,6 @@
 #include "logic/player.h"
 #include "logic/ship.h"
 #include "logic/widelands_geometry_io.h"
-#include "upcast.h"
 
 namespace Widelands {
 
@@ -36,7 +36,7 @@ namespace Widelands {
 
 
 void Game_Player_Economies_Data_Packet::Read
-	(FileSystem & fs, Game & game, Map_Map_Object_Loader *)
+	(FileSystem & fs, Game & game, MapMapObjectLoader *)
 {
 	try {
 		const Map   &       map        = game.map();
@@ -46,17 +46,14 @@ void Game_Player_Economies_Data_Packet::Read
 		FileRead fr;
 		fr.Open(fs, "binary/player_economies");
 		uint16_t const packet_version = fr.Unsigned16();
-		if (3 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
+		if (3 <= packet_version && packet_version <= CURRENT_PACKET_VERSION) {
 			iterate_players_existing(p, nr_players, game, player)
 				try {
 					Player::Economies & economies = player->m_economies;
-					uint16_t const nr_economies = economies.size();
-					Player::Economies ecos(nr_economies);
-					container_iterate(Player::Economies, ecos, i) {
+					for (uint32_t i = 0; i < economies.size(); ++i) {
 						uint32_t value = fr.Unsigned32();
 						if (value < 0xffffffff) {
 							if (upcast(Flag const, flag, map[value].get_immovable())) {
-								*i.current = flag->get_economy();
 								EconomyDataPacket d(flag->get_economy());
 								d.Read(fr);
 							} else {
@@ -95,7 +92,7 @@ void Game_Player_Economies_Data_Packet::Read
  * Write Function
  */
 void Game_Player_Economies_Data_Packet::Write
-	(FileSystem & fs, Game & game, Map_Map_Object_Saver * const)
+	(FileSystem & fs, Game & game, MapMapObjectSaver * const)
 {
 	FileWrite fw;
 
@@ -106,13 +103,13 @@ void Game_Player_Economies_Data_Packet::Write
 	Player_Number const nr_players = map.get_nrplayers();
 	iterate_players_existing_const(p, nr_players, game, player) {
 		const Player::Economies & economies = player->m_economies;
-		container_iterate_const(Player::Economies, economies, i) {
+		for (Economy * temp_economy : economies) {
 			bool wrote_this_economy = false;
 
 			// Walk the map so that we find a representative Flag.
 			for (Field const * field = &field_0; field < &map[map.max_index()]; ++field) {
 				if (upcast(Flag const, flag, field->get_immovable())) {
-					if (flag->get_economy() == *i.current) {
+					if (flag->get_economy() == temp_economy) {
 						fw.Unsigned32(field - &field_0);
 
 						EconomyDataPacket d(flag->get_economy());
@@ -132,7 +129,7 @@ void Game_Player_Economies_Data_Packet::Write
 					Bob* bob = field->get_first_bob();
 					while (bob) {
 						if (upcast(Ship const, ship, bob)) {
-							if (ship->get_economy() == *i.current) {
+							if (ship->get_economy() == temp_economy) {
 								// TODO(sirver): the 0xffffffff is ugly and fragile.
 								fw.Unsigned32(0xffffffff); // Sentinel value.
 								fw.Unsigned32(field - &field_0);

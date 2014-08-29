@@ -1,5 +1,6 @@
 help=_The Ax is the basic weapon of the barbarians. All young soldiers are equipped with it.
-default_target_quantity=15
+
+default_target_quantity=30
 preciousness=3
 
 [idle]

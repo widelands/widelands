@@ -19,15 +19,17 @@
 
 #include "ui_fsmenu/fileview.h"
 
+#include <memory>
+
 #include <boost/algorithm/string/predicate.hpp>
 
-#include "constants.h"
+#include "base/i18n.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "io/filesystem/filesystem.h"
 #include "profile/profile.h"
 #include "scripting/lua_table.h"
 #include "scripting/scripting.h"
+#include "wui/text_constants.h"
 
 
 namespace {

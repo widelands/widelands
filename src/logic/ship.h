@@ -17,12 +17,13 @@
  *
  */
 
-#ifndef SHIP_H
-#define SHIP_H
+#ifndef WL_LOGIC_SHIP_H
+#define WL_LOGIC_SHIP_H
 
 #include <list>
 #include <memory>
 
+#include "base/macros.h"
 #include "logic/bob.h"
 #include "economy/shippingitem.h"
 #include "graphic/diranimations.h"
@@ -36,24 +37,27 @@ class Economy;
 struct Fleet;
 class PortDock;
 
-struct Ship_Descr : BobDescr {
-	Ship_Descr
+struct ShipDescr : BobDescr {
+	ShipDescr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &);
+	~ShipDescr() override {}
 
-	virtual uint32_t movecaps() const override;
+	Bob & create_object() const override;
+
+	uint32_t movecaps() const override;
 	const DirAnimations & get_sail_anims() const {return m_sail_anims;}
 
 	uint32_t get_capacity() const {return m_capacity;}
 	uint32_t vision_range() const {return m_vision_range;}
 
-	virtual Bob & create_object() const override;
 
 private:
 	DirAnimations m_sail_anims;
 	uint32_t m_capacity;
 	uint32_t m_vision_range;
+	DISALLOW_COPY_AND_ASSIGN(ShipDescr);
 };
 
 /**
@@ -62,9 +66,9 @@ private:
  * are an economy of their own and are not part of a Fleet.
  */
 struct Ship : Bob {
-	MO_DESCR(Ship_Descr);
+	MO_DESCR(ShipDescr)
 
-	Ship(const Ship_Descr & descr);
+	Ship(const ShipDescr & descr);
 	virtual ~Ship();
 
 	// Returns the fleet the ship is a part of.
@@ -78,27 +82,21 @@ struct Ship : Bob {
 	// the last visited was removed.
 	PortDock* get_lastdock(Editor_Game_Base& egbase) const;
 
-
-
-	virtual Type get_bob_type() const override;
-
 	Economy * get_economy() const {return m_economy;}
 	void set_economy(Game &, Economy * e);
 	void set_destination(Game &, PortDock &);
 
 	void init_auto_task(Game &) override;
 
-	virtual void init(Editor_Game_Base &) override;
-	virtual void cleanup(Editor_Game_Base &) override;
+	void init(Editor_Game_Base &) override;
+	void cleanup(Editor_Game_Base &) override;
 
 	void start_task_ship(Game &);
 	void start_task_movetodock(Game &, PortDock &);
 	void start_task_expedition(Game &);
 
-	virtual void log_general_info(const Editor_Game_Base &) override;
+	void log_general_info(const Editor_Game_Base &) override;
 
-	uint32_t get_capacity() const {return descr().get_capacity();}
-	virtual uint32_t vision_range() const {return descr().vision_range();}
 	uint32_t get_nritems() const {return m_items.size();}
 	const ShippingItem & get_item(uint32_t idx) const {return m_items[idx];}
 
@@ -238,11 +236,11 @@ protected:
 	struct Loader : Bob::Loader {
 		Loader();
 
-		virtual const Task * get_task(const std::string & name) override;
+		const Task * get_task(const std::string & name) override;
 
 		void load(FileRead & fr, uint8_t version);
-		virtual void load_pointers() override;
-		virtual void load_finish() override;
+		void load_pointers() override;
+		void load_finish() override;
 
 	private:
 		uint32_t m_lastdock;
@@ -253,12 +251,12 @@ protected:
 	};
 
 public:
-	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
+	void save(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
 
-	static Map_Object::Loader * load
-		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);
+	static MapObject::Loader * load
+		(Editor_Game_Base &, MapMapObjectLoader &, FileRead &);
 };
 
 } // namespace Widelands
 
-#endif // SHIP_H
+#endif  // end of include guard: WL_LOGIC_SHIP_H

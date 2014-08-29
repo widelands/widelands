@@ -17,13 +17,13 @@
  *
  */
 
-#ifndef TATTRIBUTE_H
-#define TATTRIBUTE_H
+#ifndef WL_LOGIC_TATTRIBUTE_H
+#define WL_LOGIC_TATTRIBUTE_H
 
 namespace Widelands {
 
 /**
- * Indices for specific, individual attributes that \ref Map_Object instances
+ * Indices for specific, individual attributes that \ref MapObject instances
  * may have. Used in conjunction with \ref Requirements.
  */
 enum tAttribute {
@@ -36,4 +36,4 @@ enum tAttribute {
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_TATTRIBUTE_H

@@ -23,15 +23,15 @@
 
 #include <boost/bind.hpp>
 
+#include "base/i18n.h"
+#include "base/macros.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "i18n.h"
 #include "logic/building.h"
 #include "logic/player.h"
 #include "logic/productionsite.h"
 #include "logic/tribe.h"
 #include "ui_basic/button.h"
-#include "upcast.h"
 #include "wui/interactive_player.h"
 #include "wui/mapviewpixelconstants.h"
 #include "wui/plot_area.h"
@@ -272,7 +272,7 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets const id) {
 		int32_t const curindex = m_last_building_index;
 		found = false;
 		while (validate_pointer(&(--m_last_building_index), vec.size()) != curindex)
-			if (not vec[m_last_building_index].is_constructionsite) {
+			if (!vec[m_last_building_index].is_constructionsite) {
 				if
 					(upcast
 					 	(Widelands::ProductionSite,
@@ -283,7 +283,7 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets const id) {
 						break;
 					}
 			}
-		if (not found) // Now look at the old
+		if (!found) // Now look at the old
 			if
 				(upcast
 				 	(Widelands::ProductionSite,
@@ -298,7 +298,7 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets const id) {
 		found = false;
 		while
 			(validate_pointer(&(++m_last_building_index), vec.size()) != curindex)
-			if (not vec[m_last_building_index].is_constructionsite) {
+			if (!vec[m_last_building_index].is_constructionsite) {
 				if
 					(upcast
 					 	(Widelands::ProductionSite,
@@ -309,7 +309,7 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets const id) {
 						break;
 					}
 			}
-		if (not found) // Now look at the old
+		if (!found) // Now look at the old
 			if
 				(upcast
 				 	(Widelands::ProductionSite,
@@ -344,8 +344,8 @@ bool Building_Statistics_Menu::compare_building_size
 	const Widelands::Tribe_Descr & tribe = iplayer().player().tribe();
 	Widelands::Building_Index a = Widelands::Building_Index(m_table[rowa]);
 	Widelands::Building_Index b = Widelands::Building_Index(m_table[rowb]);
-	const Widelands::Building_Descr * descra = tribe.get_building_descr(a);
-	const Widelands::Building_Descr * descrb = tribe.get_building_descr(b);
+	const Widelands::BuildingDescr * descra = tribe.get_building_descr(a);
+	const Widelands::BuildingDescr * descrb = tribe.get_building_descr(b);
 
 	if (!descra || !descrb)
 		return false; // shouldn't happen, but be defensive
@@ -378,12 +378,12 @@ void Building_Statistics_Menu::update() {
 		 i < nr_buildings;
 		 ++i)
 	{
-		const Widelands::Building_Descr & building =
+		const Widelands::BuildingDescr & building =
 			*tribe.get_building_descr(i);
 		if
-			(not (building.is_buildable()
-			 or building.is_enhanced()
-			 or building.global()))
+			(!(building.is_buildable()
+			 || building.is_enhanced()
+			 || building.global()))
 			continue;
 
 		const std::vector<Widelands::Player::Building_Stats> & vec =
@@ -401,7 +401,7 @@ void Building_Statistics_Menu::update() {
 		}
 
 		//  If not in list, add new one, as long as this building is enabled.
-		if (not te) {
+		if (!te) {
 			if (! iplayer().player().is_building_type_allowed(i))
 				continue;
 			te = &m_table.add(i);
@@ -410,7 +410,7 @@ void Building_Statistics_Menu::update() {
 		uint32_t nr_owned   = 0;
 		uint32_t nr_build   = 0;
 		uint32_t total_prod = 0;
-		upcast(Widelands::ProductionSite_Descr const, productionsite, &building);
+		upcast(Widelands::ProductionSiteDescr const, productionsite, &building);
 		for (uint32_t l = 0; l < vec.size(); ++l) {
 			if (vec[l].is_constructionsite)
 				++nr_build;
@@ -425,7 +425,7 @@ void Building_Statistics_Menu::update() {
 		}
 
 		const bool is_selected = //  Is this entry selected?
-			m_table.has_selection() and m_table.get_selected() == i;
+			m_table.has_selection() && m_table.get_selected() == i;
 
 		if (is_selected) {
 			m_anim = building.get_ui_anim();
@@ -438,7 +438,7 @@ void Building_Statistics_Menu::update() {
 		//  add new Table Entry
 		char buffer[100];
 		te->set_picture
-			(Columns::Name, building.get_buildicon(), building.descname());
+			(Columns::Name, building.get_icon(), building.descname());
 
 		{
 			char const * pic = "pics/novalue.png";
@@ -464,7 +464,7 @@ void Building_Statistics_Menu::update() {
 			te->set_picture(Columns::Size, g_gr->images().get(pic));
 		}
 
-		if (productionsite and nr_owned) {
+		if (productionsite && nr_owned) {
 			uint32_t const percent =
 				static_cast<uint32_t>
 					(static_cast<float>(total_prod) / static_cast<float>(nr_owned));
@@ -497,7 +497,7 @@ void Building_Statistics_Menu::update() {
 	}
 
 	//  disable all buttons, if nothing to select
-	if (not m_table.has_selection()) {
+	if (!m_table.has_selection()) {
 		m_btn[Prev_Owned]       ->set_enabled(false);
 		m_btn[Next_Owned]       ->set_enabled(false);
 		m_btn[Prev_Construction]->set_enabled(false);

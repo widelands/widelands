@@ -18,9 +18,12 @@ raw_stone=2
 farmer=1
 
 [programs]
-plant_wheat=_Plant wheat
-harvest_wheat=_Harvest wheat
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start planting wheat because ...
+plant_wheat=_planting wheat
+# TRANSLATORS: "Completed/Skipped/Did not start harvesting wheat because ...
+harvest_wheat=_harvesting wheat
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [plant_wheat]
 sleep=14000  #orig 20000
@@ -35,6 +38,11 @@ call=plant_wheat
 call=harvest_wheat
 playFX=../../../sound/farm/farm_animal 192
 return=skipped
+
+[out_of_resource_notification]
+title=_Out of Fields
+message=_The farmer working at this farm has no cleared soil to plant his seeds.
+delay_attempts=10
 
 [idle]
 pics=farm_i_??.png  # ???

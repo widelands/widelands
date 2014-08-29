@@ -17,14 +17,14 @@
  *
  */
 
-#ifndef LUA_GLOBALS_H
-#define LUA_GLOBALS_H
+#ifndef WL_SCRIPTING_LUA_GLOBALS_H
+#define WL_SCRIPTING_LUA_GLOBALS_H
 
-#include "scripting/eris/lua.hpp"
+#include "third_party/eris/lua.hpp"
 
 namespace LuaGlobals {
 
 void luaopen_globals(lua_State *);
 
-#endif /* end of include guard: LUA_GLOBALS_H */
-};
+#endif  // end of include guard: WL_SCRIPTING_LUA_GLOBALS_H
+}

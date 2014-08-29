@@ -29,15 +29,19 @@ iron=8
 coal=8
 
 [programs]
-produce_ax=_Produce ax
-produce_sharpax=_Produce sharp ax
-produce_broadax=_Produce broad ax
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start forging an ax because ...
+produce_ax=_forging an ax
+# TRANSLATORS: "Completed/Skipped/Did not start forging a sharp ax because ...
+produce_sharpax=_forging a sharp ax
+# TRANSLATORS: "Completed/Skipped/Did not start forging a broad ax because ...
+produce_broadax=_forging a broad ax
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [produce_ax]
 return=skipped unless economy needs ax
-consume=coal iron
 sleep=32000
+consume=coal iron
 playFX=../../../sound/smiths/smith 192
 animate=working 25000
 playFX=../../../sound/smiths/sharpening 192
@@ -45,8 +49,8 @@ produce=ax
 
 [produce_sharpax]
 return=skipped unless economy needs sharpax
-consume=coal iron:2
 sleep=32000
+consume=coal iron:2
 playFX=../../../sound/smiths/smith 192
 animate=working 25000
 playFX=../../../sound/smiths/sharpening 192
@@ -54,8 +58,8 @@ produce=sharpax
 
 [produce_broadax]
 return=skipped unless economy needs broadax
-consume=coal:2 iron:2
 sleep=32000
+consume=coal:2 iron:2
 playFX=../../../sound/smiths/smith 192
 animate=working 25000
 playFX=../../../sound/smiths/sharpening 192
@@ -67,16 +71,16 @@ call=produce_sharpax
 call=produce_broadax
 return=skipped
 
+[idle]
+pics=axfactory_i_??.png  # ???
+hotspot=57 76
+
 [build]
 pics=axfactory_b_??.png  # ???
 hotspot=57 76
 
 [unoccupied]
 pics=axfactory_u_??.png  # ???
-hotspot=57 76
-
-[idle]
-pics=axfactory_i_??.png  # ???
 hotspot=57 76
 
 [working]

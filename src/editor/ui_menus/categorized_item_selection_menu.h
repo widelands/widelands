@@ -17,16 +17,16 @@
  *
  */
 
-#ifndef MULTI_SELECT_MENU_H
-#define MULTI_SELECT_MENU_H
+#ifndef WL_EDITOR_UI_MENUS_CATEGORIZED_ITEM_SELECTION_MENU_H
+#define WL_EDITOR_UI_MENUS_CATEGORIZED_ITEM_SELECTION_MENU_H
 
 #include <string>
 #include <cmath>
 
-#include "description_maintainer.h"
+#include "base/i18n.h"
 #include "graphic/image.h"
 #include "graphic/image_transformations.h"
-#include "i18n.h"
+#include "logic/description_maintainer.h"
 #include "logic/world/editor_category.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
@@ -47,7 +47,7 @@ public:
 	   UI::Panel* parent,
 	   const DescriptionMaintainer<Widelands::EditorCategory>& categories,
 	   const DescriptionMaintainer<DescriptionType>& descriptions,
-	   std::function<UI::Checkbox*(UI::Panel* parent, const DescriptionType& descr)> create_checkbox,
+	   std::function<UI::Checkbox* (UI::Panel* parent, const DescriptionType& descr)> create_checkbox,
 	   const std::function<void()> select_correct_tool,
 	   ToolType* const tool);
 
@@ -67,24 +67,23 @@ private:
 };
 
 template <typename DescriptionType, typename ToolType>
-CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectionMenu(
-   UI::Panel* parent,
-   const DescriptionMaintainer<Widelands::EditorCategory>& categories,
-   const DescriptionMaintainer<DescriptionType>& descriptions,
-   const std::function<UI::Checkbox*(UI::Panel* parent, const DescriptionType& descr)>
-      create_checkbox,
-   const std::function<void()> select_correct_tool,
-   ToolType* const tool)
-   : UI::Box(parent, 0, 0, UI::Box::Vertical),
-     descriptions_(descriptions),
-     select_correct_tool_(select_correct_tool),
-     protect_against_recursive_select_(false),
-     current_selection_names_(this, 0, 0, 0, 20, UI::Align_Center),
-     tool_(tool)
+CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectionMenu
+	(UI::Panel* parent,
+	const DescriptionMaintainer<Widelands::EditorCategory>& categories,
+	const DescriptionMaintainer<DescriptionType>& descriptions,
+	const std::function<UI::Checkbox* (UI::Panel* parent, const DescriptionType& descr)>
+		create_checkbox,
+	const std::function<void()> select_correct_tool,
+	ToolType* const tool) :
+	UI::Box(parent, 0, 0, UI::Box::Vertical),
+	descriptions_(descriptions),
+	select_correct_tool_(select_correct_tool),
+	protect_against_recursive_select_(false),
+	current_selection_names_(this, 0, 0, 0, 20, UI::Align_Center),
+	tool_(tool)
 {
-
 	UI::Tab_Panel* tab_panel = new UI::Tab_Panel(this, 0, 0, nullptr);
-	this->add(tab_panel, UI::Align_Center);
+	add(tab_panel, UI::Align_Center);
 
 	for (uint32_t category_index = 0; category_index < categories.get_nitems(); ++category_index) {
 		const Widelands::EditorCategory& category = *categories.get(category_index);
@@ -133,7 +132,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 		}
 		tab_panel->add(category.name(), category_picture, vertical, category.descname());
 	}
-	this->add(&current_selection_names_, UI::Align_Center, true);
+	add(&current_selection_names_, UI::Align_Center, true);
 }
 
 template <typename DescriptionType, typename ToolType>
@@ -142,14 +141,14 @@ void CategorizedItemSelectionMenu<DescriptionType, ToolType>::selected(const int
 	if (protect_against_recursive_select_)
 		return;
 
-	//  FIXME This code is erroneous. It checks the current key state. What it
-	//  FIXME needs is the key state at the time the mouse was clicked. See the
-	//  FIXME usage comment for get_key_state.
+	//  TODO(unknown): This code is erroneous. It checks the current key state. What it
+	//  needs is the key state at the time the mouse was clicked. See the
+	//  usage comment for get_key_state.
 	const bool multiselect = get_key_state(SDLK_LCTRL) | get_key_state(SDLK_RCTRL);
-	if (not t and(not multiselect or tool_->get_nr_enabled() == 1))
+	if (!t && (!multiselect || tool_->get_nr_enabled() == 1))
 		checkboxes_[n]->set_state(true);
 	else {
-		if (not multiselect) {
+		if (!multiselect) {
 			for (uint32_t i = 0; tool_->get_nr_enabled(); ++i)
 				tool_->enable(i, false);
 			//  disable all checkboxes
@@ -182,4 +181,4 @@ void CategorizedItemSelectionMenu<DescriptionType, ToolType>::update_label() {
 	current_selection_names_.set_text(buf);
 }
 
-#endif /* end of include guard: MULTI_SELECT_MENU_H */
+#endif  // end of include guard: WL_EDITOR_UI_MENUS_CATEGORIZED_ITEM_SELECTION_MENU_H

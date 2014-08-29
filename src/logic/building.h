@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef BUILDING_H
-#define BUILDING_H
+#ifndef WL_LOGIC_BUILDING_H
+#define WL_LOGIC_BUILDING_H
 
 #include <cstring>
 #include <string>
@@ -27,13 +27,14 @@
 #include <boost/signals2.hpp>
 
 #include "ai/ai_hints.h"
+#include "base/macros.h"
 #include "logic/bill_of_materials.h"
 #include "logic/buildcost.h"
 #include "logic/immovable.h"
 #include "logic/soldier_counts.h"
 #include "logic/wareworker.h"
 #include "logic/widelands.h"
-#include "workarea_info.h"
+#include "logic/workarea_info.h"
 
 namespace UI {class Window;}
 struct BuildingHints;
@@ -57,14 +58,14 @@ class Building;
 /*
  * Common to all buildings!
  */
-struct Building_Descr : public Map_Object_Descr {
-	typedef std::set<Building_Index> Enhancements;
+struct BuildingDescr : public MapObjectDescr {
 	typedef std::vector<Building_Index> FormerBuildings;
 
-	Building_Descr
-		(char const * _name, char const * _descname,
+	BuildingDescr
+		(MapObjectType type, char const * _name, char const * _descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &);
+	~BuildingDescr() override {}
 
 	bool is_buildable   () const {return m_buildable;}
 	bool is_destructible() const {return m_destructible;}
@@ -90,17 +91,16 @@ struct Building_Descr : public Map_Object_Descr {
 	 * The returned wares for a enhaced building
 	 */
 	const Buildcost & returned_wares_enhanced() const {return m_return_enhanced;}
-	const Image* get_buildicon() const {return m_buildicon;}
+	const Image* get_icon() const {return m_icon;}
+	std::string icon_name() const {return m_icon_fname;}
 	int32_t get_size() const {return m_size;}
 	bool get_ismine() const {return m_mine;}
 	bool get_isport() const {return m_port;}
 	virtual uint32_t get_ui_anim() const {return get_animation("idle");}
 
-	const Enhancements & enhancements() const {return m_enhancements;}
-	void add_enhancement(const Building_Index & i) {
-		assert(not m_enhancements.count(i));
-		m_enhancements.insert(i);
-	}
+	// Returns the enhancement this building can become or
+	// INVALID_INDEX if it cannot be enhanced.
+	const Building_Index & enhancement() const {return m_enhancement;}
 
 	/// Create a building of this type in the game. Calls init, which does
 	/// different things for different types of buildings (such as conquering
@@ -142,12 +142,12 @@ private:
 	Buildcost     m_return_dismantle; // Returned wares on dismantle
 	Buildcost     m_enhance_cost;     // cost for enhancing
 	Buildcost     m_return_enhanced;   // Returned ware for dismantling an enhanced building
-	const Image*     m_buildicon;       // if buildable: picture in the build dialog
-	std::string   m_buildicon_fname; // filename for this icon
+	const Image*     m_icon;       // if buildable: picture in the build dialog
+	std::string   m_icon_fname; // filename for this icon
 	int32_t       m_size;            // size of the building
 	bool          m_mine;
 	bool          m_port;
-	Enhancements  m_enhancements;
+	Building_Index  m_enhancement;
 	bool          m_enhanced_building; // if it is one, it is bulldozable
 	BuildingHints m_hints;             // hints (knowledge) for computer players
 	bool          m_global;            // whether this is a "global" building
@@ -155,14 +155,15 @@ private:
 
 	// for migration, 0 is the default, meaning get_conquers() + 4
 	uint32_t m_vision_range;
+	DISALLOW_COPY_AND_ASSIGN(BuildingDescr);
 };
 
 
 class Building : public PlayerImmovable {
-	friend struct Building_Descr;
+	friend struct BuildingDescr;
 	friend class Map_Buildingdata_Data_Packet;
 
-	MO_DESCR(Building_Descr)
+	MO_DESCR(BuildingDescr)
 
 public:
 	// Player capabilities: which commands can a player issue for this building?
@@ -175,36 +176,38 @@ public:
 	typedef std::vector<Building_Index> FormerBuildings;
 
 public:
-	Building(const Building_Descr &);
+	Building(const BuildingDescr &);
 	virtual ~Building();
 
 	void load_finish(Editor_Game_Base &) override;
 
-	const Tribe_Descr & tribe() const {return descr().tribe();}
+	int32_t  get_size    () const override;
+	bool get_passable() const override;
 
-	virtual int32_t  get_type    () const override;
-	char const * type_name() const override {return "building";}
-	virtual int32_t  get_size    () const override;
-	virtual bool get_passable() const override;
-	virtual uint32_t get_ui_anim () const;
+	//Return the animation ID that is used for the building in UI items
+	//(the building UI, messages, etc..)
+	virtual uint32_t get_ui_anim() const {return descr().get_ui_anim();}
 
-	virtual Flag & base_flag() override;
+	Flag & base_flag() override;
 	virtual uint32_t get_playercaps() const;
 
 	virtual Coords get_position() const {return m_position;}
-	virtual PositionList get_positions (const Editor_Game_Base &) const override;
-
-	const std::string & name() const override;
-	const std::string & descname() const {return descr().descname();}
+	PositionList get_positions (const Editor_Game_Base &) const override;
 
 	std::string info_string(const std::string & format);
-	virtual std::string get_statistics_string();
+
+	// Return the overlay string that is displayed on the map view when enabled
+	// by the player.
+	const std::string& update_and_get_statistics_string() {
+		update_statistics_string(&m_statistics_string);
+		return m_statistics_string;
+	}
 
 	/// \returns the queue for a ware type or \throws _wexception.
 	virtual WaresQueue & waresqueue(Ware_Index);
 
 	virtual bool burn_on_destroy();
-	virtual void destroy(Editor_Game_Base &) override;
+	void destroy(Editor_Game_Base &) override;
 
 	void show_options(Interactive_GameBase &, bool avoid_fastclick = false, Point pos = Point(- 1, - 1));
 	void hide_options();
@@ -215,11 +218,6 @@ public:
 
 	bool leave_check_and_wait(Game &, Worker &);
 	void leave_skip(Game &, Worker &);
-	uint32_t get_conquers() const {return descr().get_conquers();}
-	virtual uint32_t vision_range() const {
-		return descr().vision_range();
-	}
-
 
 	// Get/Set the priority for this waretype for this building. 'type' defines
 	// if this is for a worker or a ware, 'index' is the type of worker or ware.
@@ -233,26 +231,22 @@ public:
 	void collect_priorities
 		(std::map<int32_t, std::map<Ware_Index, int32_t> > & p) const;
 
-	const std::set<Building_Index> & enhancements() const {
-		return descr().enhancements();
-	}
-
 	/**
 	 * The former buildings vector keeps track of all former buildings
 	 * that have been enhanced up to the current one. The current building
 	 * index will be in the last position. For construction sites, it is
-	 * empty exceptenhancements. For a dismantle site, the last item will
+	 * empty except enhancements. For a dismantle site, the last item will
 	 * be the one being dismantled.
 	 */
 	const FormerBuildings get_former_buildings() {
 		return m_old_buildings;
 	}
 
-	virtual void log_general_info(const Editor_Game_Base &) override;
+	void log_general_info(const Editor_Game_Base &) override;
 
 	//  Use on training sites only.
-	virtual void change_train_priority(uint32_t, int32_t) {};
-	virtual void switch_train_mode () {};
+	virtual void change_train_priority(uint32_t, int32_t) {}
+	virtual void switch_train_mode () {}
 
 	///  Stores the Player_Number of the player who has defeated this building.
 	void set_defeating_player(Player_Number const player_number) {
@@ -271,14 +265,20 @@ public:
 		 bool link_to_building_lifetime = true,
 		 uint32_t throttle_time = 0,
 		 uint32_t throttle_radius = 0);
+
 protected:
+	// Updates 'statistics_string' with the string that should be displayed for
+	// this building right now. Overwritten by child classes.
+	virtual void update_statistics_string(std::string*) {
+	}
+
 	void start_animation(Editor_Game_Base &, uint32_t anim);
 
-	virtual void init(Editor_Game_Base &) override;
-	virtual void cleanup(Editor_Game_Base &) override;
-	virtual void act(Game &, uint32_t data) override;
+	void init(Editor_Game_Base &) override;
+	void cleanup(Editor_Game_Base &) override;
+	void act(Game &, uint32_t data) override;
 
-	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) override;
+	void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) override;
 	void draw_help(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
 
 	virtual void create_options_window
@@ -313,8 +313,11 @@ protected:
 
 	// The former buildings names, with the current one in last position.
 	FormerBuildings m_old_buildings;
+
+private:
+	std::string m_statistics_string;
 };
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_BUILDING_H

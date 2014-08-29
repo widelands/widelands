@@ -17,13 +17,12 @@
  *
  */
 
-#ifndef TERRAIN_DESCRIPTION_H
-#define TERRAIN_DESCRIPTION_H
+#ifndef WL_LOGIC_WORLD_TERRAIN_DESCRIPTION_H
+#define WL_LOGIC_WORLD_TERRAIN_DESCRIPTION_H
 
 #include <string>
 
-#include <boost/noncopyable.hpp>
-
+#include "base/macros.h"
 #include "logic/widelands.h"
 #include "logic/world/resource_description.h"
 
@@ -34,7 +33,7 @@ namespace Widelands {
 class EditorCategory;
 class World;
 
-class TerrainDescription : boost::noncopyable {
+class TerrainDescription {
 public:
 	enum Type {
 		GREEN = 0,
@@ -83,6 +82,16 @@ public:
 	/// Returns the editor category.
 	const EditorCategory& editor_category() const;
 
+	/// Parameters for terrain affinity of immovables.
+	/// Temperature in Kelvin.
+	double temperature() const;
+
+	/// Humidity in percent [0, 1].
+	double humidity() const;
+
+	/// Fertility in percent [0, 1].
+	double fertility() const;
+
 private:
 	const std::string name_;
 	const std::string descname_;
@@ -94,8 +103,13 @@ private:
 	const std::vector<std::string> texture_paths_;
 	int32_t dither_layer_;
 	uint32_t texture_;  ///< renderer's texture
+	double temperature_;
+	double fertility_;
+	double humidity_;
+
+	DISALLOW_COPY_AND_ASSIGN(TerrainDescription);
 };
 
 }  // namespace Widelands
 
-#endif /* end of include guard: TERRAIN_DESCRIPTION_H */
+#endif  // end of include guard: WL_LOGIC_WORLD_TERRAIN_DESCRIPTION_H

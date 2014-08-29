@@ -1,5 +1,5 @@
 -- =========================
--- Warehouses Functionality 
+-- Warehouses Functionality
 -- =========================
 warehouse_tests = lunit.TestCase("warehouse tests")
 function warehouse_tests:setup()
@@ -11,10 +11,10 @@ function warehouse_tests:teardown()
 end
 
 function warehouse_tests:test_name()
-   assert_equal("warehouse", self.w.name)
+   assert_equal("warehouse", self.w.descr.name)
 end
 function warehouse_tests:test_type()
-   assert_equal("warehouse", self.w.type)
+   assert_equal("warehouse", self.w.descr.type_name)
 end
 
 function warehouse_tests:test_upcasting_from_immovable_to_building()
@@ -80,10 +80,10 @@ function warehouse_tests:test_set_get_wares_set_is_not_increase()
    assert_equal(20, k.raw_stone)
 end
 function warehouse_tests:test_get_wares_non_existant_name()
-   assert_error("non existent ware", function() 
+   assert_error("non existent ware", function()
       self.w:get_wares("balloon")
    end)
-   assert_error("non existent ware", function() 
+   assert_error("non existent ware", function()
       self.w:get_wares{"meat", "balloon"}
    end)
 end
@@ -127,7 +127,7 @@ end
 
 
 -- =========
--- Soldiers 
+-- Soldiers
 -- =========
 function _cnt(a)
    local rv = 0
@@ -188,5 +188,3 @@ function warehouse_tests:test_set_soldiers_evade_too_high()
       self.w:set_soldiers({0,0,0,10}, 1)
    end)
 end
-
-

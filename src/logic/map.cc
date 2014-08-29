@@ -25,12 +25,14 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 
+#include "base/log.h"
+#include "base/macros.h"
+#include "base/wexception.h"
 #include "build_info.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "editor/tools/editor_increase_resources_tool.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "log.h"
 #include "logic/checkstep.h"
 #include "logic/findimmovable.h"
 #include "logic/findnode.h"
@@ -40,14 +42,12 @@
 #include "logic/player.h"
 #include "logic/soldier.h"
 #include "logic/tribe.h"
+#include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
-#include "map_generator.h"
+#include "map_io/s2map.h"
 #include "map_io/widelands_map_loader.h"
-#include "s2map.h"
-#include "upcast.h"
-#include "wexception.h"
+#include "notifications/notifications.h"
 #include "wui/overlay_manager.h"
-
 
 namespace Widelands {
 
@@ -101,7 +101,7 @@ void Map::recalc_border(const FCoords fc) {
 ===============
 Call this function whenever the field at fx/fy has changed in one of the ways:
  - height has changed
- - robust Map_Object has been added or removed
+ - robust MapObject has been added or removed
 
 This performs the steps outlined in the comment above Map::recalc_brightness()
 and recalcs the interactive player's overlay.
@@ -270,7 +270,7 @@ void Map::recalc_default_resources(const World& world) {
 			}
 			amount /= 6;
 
-			if (res == -1 or not amount) {
+			if (res == -1 || !amount) {
 				f.field->set_resources(0, 0);
 				f.field->set_starting_res_amount(0);
 			} else {
@@ -631,10 +631,10 @@ void Map::find_reachable
 				(pathfields->fields[neighb.field - m_fields.get()].cycle
 				 !=
 				 pathfields->cycle
-				 and
+				 &&
 				 //  node within the radius?
 				 calc_distance(area, neighb) <= area.radius
-				 and
+				 &&
 				 //  allowed to move onto this node?
 				 checkstep.allowed
 				 	(*this,
@@ -847,11 +847,13 @@ uint32_t Map::find_reachable_immovables_unique
 
 	find_reachable(area, checkstep, cb);
 
-	container_iterate_const(std::vector<ImmovableFound>, duplist, i) {
-		BaseImmovable & obj = *i.current->object;
-		if (std::find(list.begin(), list.end(), &obj) == list.end())
-			if (functor.accept(obj))
+	for (ImmovableFound& imm_found : duplist) {
+		BaseImmovable & obj = *imm_found.object;
+		if (std::find(list.begin(), list.end(), &obj) == list.end()) {
+			if (functor.accept(obj)) {
 				list.push_back(&obj);
+			}
+		}
 	}
 
 	return list.size();
@@ -939,8 +941,8 @@ Some events can change the map in a way that run-time calculated attributes
 These events include:
 - change of height (e.g. by planing)
 - change of terrain (in the editor)
-- insertion of a "robust" Map_Object
-- removal of a "robust" Map_Object
+- insertion of a "robust" MapObject
+- removal of a "robust" MapObject
 
 All these events can change the passability, buildability, etc. of fields
 with a radius of two fields. This means that you must build a list of the
@@ -1080,15 +1082,15 @@ NodeCaps Map::_calc_nodecaps_pass1(const World& world, FCoords const f, bool con
 
 	// if we are interested in the maximum theoretically available NodeCaps, this is not run
 	if (consider_mobs) {
-		//  3) General buildability check: if a "robust" Map_Object is on this node
+		//  3) General buildability check: if a "robust" MapObject is on this node
 		//  we cannot build anything on it. Exception: we can build flags on roads.
 		if (BaseImmovable * const imm = get_immovable(f))
 			if
-				(not dynamic_cast<Road const *>(imm)
+				(!dynamic_cast<Road const *>(imm)
 				&&
 				imm->get_size() >= BaseImmovable::SMALL)
 			{
-				// 3b) [OVERRIDE] check for "unpassable" Map_Objects
+				// 3b) [OVERRIDE] check for "unpassable" MapObjects
 				if (!imm->get_passable())
 					caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
 				return static_cast<NodeCaps>(caps);
@@ -1100,7 +1102,11 @@ NodeCaps Map::_calc_nodecaps_pass1(const World& world, FCoords const f, bool con
 	//  restrictions
 	if (caps & MOVECAPS_WALK) {
 		//  4b) Flags must be at least 2 edges apart
-		if (consider_mobs && find_immovables(Area<FCoords>(f, 1), nullptr, FindImmovableType(Map_Object::FLAG)))
+		if (consider_mobs &&
+			 find_immovables(
+				Area<FCoords>(f, 1),
+				nullptr,
+				FindImmovableType(MapObjectType::FLAG)))
 			return static_cast<NodeCaps>(caps);
 		caps |= BUILDCAPS_FLAG;
 	}
@@ -1120,7 +1126,9 @@ void Map::recalc_nodecaps_pass2(const World& world, const FCoords & f) {
 	f.field->caps = _calc_nodecaps_pass2(world, f, true);
 }
 
-NodeCaps Map::_calc_nodecaps_pass2(const World& world, FCoords const f, bool consider_mobs, NodeCaps initcaps) {
+NodeCaps Map::_calc_nodecaps_pass2
+	(const World& world, FCoords const f, bool consider_mobs, NodeCaps initcaps)
+{
 	uint8_t caps = consider_mobs ? f.field->caps : static_cast<uint8_t>(initcaps);
 
 	// NOTE  This dependency on the bottom-right neighbour is the reason
@@ -1132,7 +1140,7 @@ NodeCaps Map::_calc_nodecaps_pass2(const World& world, FCoords const f, bool con
 		if
 			(!(br.field->caps & BUILDCAPS_FLAG)
 			&&
-			(!br.field->get_immovable() || br.field->get_immovable()->get_type() != Map_Object::FLAG))
+			(!br.field->get_immovable() || br.field->get_immovable()->descr().type() != MapObjectType::FLAG))
 			return static_cast<NodeCaps>(caps);
 	} else {
 		if (!(_calc_nodecaps_pass1(world, br, false) & BUILDCAPS_FLAG))
@@ -1227,7 +1235,8 @@ NodeCaps Map::_calc_nodecaps_pass2(const World& world, FCoords const f, bool con
  * for the calculation. If not (calculation of maximum theoretical possible buildsize) initcaps must be set.
  */
 int Map::calc_buildsize
-	(const World& world, const FCoords & f, bool avoidnature, bool * ismine, bool consider_mobs, NodeCaps initcaps)
+	(const World& world, const FCoords & f, bool avoidnature, bool * ismine,
+	 bool consider_mobs, NodeCaps initcaps)
 {
 	if (consider_mobs) {
 		if (!(f.field->get_caps() & MOVECAPS_WALK))
@@ -1283,7 +1292,7 @@ int Map::calc_buildsize
 			int objsize = obj->get_size();
 			if (objsize == BaseImmovable::NONE)
 				continue;
-			if (avoidnature && obj->get_type() == Map_Object::IMMOVABLE)
+			if (avoidnature && obj->descr().type() == MapObjectType::IMMOVABLE)
 				objsize += 1;
 			if (objsize + buildsize > BaseImmovable::BIG)
 				buildsize = BaseImmovable::BIG - objsize + 1;
@@ -1632,9 +1641,8 @@ std::unique_ptr<Map_Loader> Map::get_correct_loader(const std::string& filename)
 		try {
 			result.reset(new WL_Map_Loader(g_fs->MakeSubFileSystem(filename), this));
 		} catch (...) {
-			//  If this fails, it is an illegal file (maybe old plain binary map
-			//  format)
-			//  TODO: catchall hides real errors! Replace with more specific code
+			//  If this fails, it is an illegal file.
+			//  TODO(unknown): catchall hides real errors! Replace with more specific code
 		}
 	} else if (boost::algorithm::ends_with(lower_filename, S2MF_SUFFIX) ||
 	           boost::algorithm::ends_with(lower_filename, S2MF_SUFFIX2)) {
@@ -1644,9 +1652,9 @@ std::unique_ptr<Map_Loader> Map::get_correct_loader(const std::string& filename)
 }
 
 /**
- * Finds a path from start to end for a Map_Object with the given movecaps.
+ * Finds a path from start to end for a MapObject with the given movecaps.
  *
- * The path is stored in \p path, as a series of Map_Object::WalkingDir entries.
+ * The path is stored in \p path, as a series of MapObject::WalkingDir entries.
  *
  * \param persist tells the function how hard it should try to find a path:
  * If \p persist is \c 0, the function will never give up early. Otherwise, the
@@ -1666,9 +1674,8 @@ std::unique_ptr<Map_Loader> Map::get_correct_loader(const std::string& filename)
  *
  * \return the cost of the path (in milliseconds of normal walking
  * speed) or -1 if no path has been found.
- *
- * \todo Document parameters instart, inend, path, flags
  */
+// TODO(unknown): Document parameters instart, inend, path, flags
 int32_t Map::findpath
 	(Coords                  instart,
 	 Coords                  inend,
@@ -1697,7 +1704,7 @@ int32_t Map::findpath
 		return 0; // duh...
 	}
 
-	if (not checkstep.reachabledest(*this, end))
+	if (!checkstep.reachabledest(*this, end))
 		return -1;
 
 	if (!persist)
@@ -1754,7 +1761,7 @@ int32_t Map::findpath
 
 			// Check passability
 			if
-				(not
+				(!
 				 checkstep.allowed
 				 	(*this,
 				 	 cur,
@@ -1844,7 +1851,7 @@ int32_t Map::change_terrain
 {
 	c.field->set_terrain(c.t, terrain);
 
-	NoteSender<NoteFieldTransformed>::send(NoteFieldTransformed(c));
+	Notifications::publish(NoteFieldTransformed(c, c.field - &m_fields[0]));
 
 	recalc_for_field_area(world, Area<FCoords>(c, 2));
 
@@ -1869,7 +1876,7 @@ uint32_t Map::change_height(const World& world, Area<FCoords> area, int16_t cons
 		do {
 			if
 				(difference < 0
-				 and
+				 &&
 				 mr.location().field->height
 				 <
 				 static_cast<uint8_t>(-difference))
@@ -1895,7 +1902,7 @@ uint32_t Map::change_height(const World& world, Area<FCoords> area, int16_t cons
 }
 
 uint32_t Map::set_height
-	(const World& world, Area<FCoords> area, interval<Field::Height> height_interval)
+	(const World& world, Area<FCoords> area, HeightInterval height_interval)
 {
 	assert(height_interval.valid());
 	assert(height_interval.max <= MAX_FIELD_HEIGHT);

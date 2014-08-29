@@ -1,5 +1,9 @@
 size=small
 
+[aihints]
+renews_map_resource=log
+space_consumer=true
+
 [buildcost]
 log=4
 
@@ -9,21 +13,18 @@ log=3
 [working positions]
 ranger=1
 
-[aihints]
-renews_map_resource=log
-space_consumer=true
-
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start planting trees because ...
+work=_planting trees
 
 [work]
 sleep=16000
 worker=plant
 
 [idle]
-pics=b_ranger_i_??.png  # ???
+pics=rangers_hut_i_??.png  # ???
 hotspot=43 40
 
 [build]
-pics=b_ranger_b_??.png  # ???
+pics=rangers_hut_b_??.png  # ???
 hotspot=40 33

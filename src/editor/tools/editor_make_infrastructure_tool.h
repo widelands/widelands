@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_MAKE_INFRASTRUCTURE_TOOL_H
-#define EDITOR_MAKE_INFRASTRUCTURE_TOOL_H
+#ifndef WL_EDITOR_TOOLS_EDITOR_MAKE_INFRASTRUCTURE_TOOL_H
+#define WL_EDITOR_TOOLS_EDITOR_MAKE_INFRASTRUCTURE_TOOL_H
 
 #include "editor/tools/editor_tool.h"
 #include "ui_basic/unique_window.h"
@@ -29,8 +29,8 @@ class Editor_Game_Base;
 
 /**
  * This places immovables on the map
- * \TODO Implement undo for this tool
-*/
+ */
+// TODO(unknown):  Implement undo for this tool
 struct Editor_Make_Infrastructure_Tool : public Editor_Tool {
 	Editor_Make_Infrastructure_Tool() : Editor_Tool(*this, *this, false), m_player(0) {}
 
@@ -57,4 +57,4 @@ int32_t Editor_Make_Infrastructure_Tool_Callback
 	(const Widelands::TCoords<Widelands::FCoords>& c,
 	 Widelands::Editor_Game_Base& egbase, int32_t const player);
 
-#endif
+#endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_MAKE_INFRASTRUCTURE_TOOL_H

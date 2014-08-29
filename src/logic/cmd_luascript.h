@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef CMD_LUASCRIPT_H
-#define CMD_LUASCRIPT_H
+#ifndef WL_LOGIC_CMD_LUASCRIPT_H
+#define WL_LOGIC_CMD_LUASCRIPT_H
 
 #include <string>
 
@@ -33,12 +33,12 @@ struct Cmd_LuaScript : public GameLogicCommand {
 		GameLogicCommand(_duetime), script_(script) {}
 
 	// Write these commands to a file (for savegames)
-	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Write(FileWrite &, Editor_Game_Base &, MapMapObjectSaver  &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
-	virtual uint8_t id() const override {return QUEUE_CMD_LUASCRIPT;}
+	uint8_t id() const override {return QUEUE_CMD_LUASCRIPT;}
 
-	virtual void execute(Game &) override;
+	void execute(Game &) override;
 
 private:
 	std::string script_;
@@ -46,4 +46,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_CMD_LUASCRIPT_H

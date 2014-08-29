@@ -17,54 +17,53 @@
  *
  */
 
-#ifndef ZIP_FILESYSTEM_H
-#define ZIP_FILESYSTEM_H
+#ifndef WL_IO_FILESYSTEM_ZIP_FILESYSTEM_H
+#define WL_IO_FILESYSTEM_ZIP_FILESYSTEM_H
 
 #include <cstring>
 #include <string>
 
-#include <minizip/unzip.h>
-#include <minizip/zip.h>
-
+#include "base/macros.h"
 #include "io/filesystem/filesystem.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"
-#include "port.h"
+#include "third_party/minizip/unzip.h"
+#include "third_party/minizip/zip.h"
 
 class ZipFilesystem : public FileSystem {
 public:
-	ZipFilesystem(const std::string &);
+	explicit ZipFilesystem(const std::string &);
 	virtual ~ZipFilesystem();
 
-	virtual bool IsWritable() const override;
+	bool IsWritable() const override;
 
-	virtual std::set<std::string> ListDirectory(const std::string& path) override;
+	std::set<std::string> ListDirectory(const std::string& path) override;
 
-	virtual bool IsDirectory(const std::string & path) override;
-	virtual bool FileExists (const std::string & path) override;
+	bool IsDirectory(const std::string & path) override;
+	bool FileExists (const std::string & path) override;
 
-	virtual void * Load(const std::string & fname, size_t & length) override;
+	void * Load(const std::string & fname, size_t & length) override;
 
 	virtual void Write
 		(const std::string & fname, void const * data, int32_t length) override;
-	virtual void EnsureDirectoryExists(const std::string & dirname) override;
-	virtual void   MakeDirectory      (const std::string & dirname) override;
+	void EnsureDirectoryExists(const std::string & dirname) override;
+	void   MakeDirectory      (const std::string & dirname) override;
 
 	virtual StreamRead  * OpenStreamRead
 		(const std::string & fname) override;
 	virtual StreamWrite * OpenStreamWrite
 		(const std::string & fname) override;
 
-	virtual FileSystem * MakeSubFileSystem(const std::string & dirname) override;
-	virtual FileSystem * CreateSubFileSystem(const std::string & dirname, Type) override;
-	virtual void Unlink(const std::string & filename) override;
-	virtual void Rename(const std::string &, const std::string &) override;
+	FileSystem * MakeSubFileSystem(const std::string & dirname) override;
+	FileSystem * CreateSubFileSystem(const std::string & dirname, Type) override;
+	void Unlink(const std::string & filename) override;
+	void Rename(const std::string &, const std::string &) override;
 
-	virtual unsigned long long DiskSpace() override;
+	unsigned long long DiskSpace() override;
 
 	static FileSystem * CreateFromDirectory(const std::string & directory);
 
-	virtual std::string getBasename() override {return m_zipfilename;};
+	std::string getBasename() override {return m_zipfilename;}
 
 protected:
 	void m_OpenUnzip();
@@ -91,8 +90,8 @@ protected:
 	struct ZipStreamRead : StreamRead {
 		explicit ZipStreamRead(zipFile file, ZipFilesystem* zipfs);
 		virtual ~ZipStreamRead();
-		virtual size_t Data(void* data, size_t bufsize) override;
-		virtual bool EndOfFile() const override;
+		size_t Data(void* data, size_t bufsize) override;
+		bool EndOfFile() const override;
 	private:
 		zipFile m_unzipfile;
 		ZipFilesystem* m_zipfs;
@@ -100,7 +99,7 @@ protected:
 	struct ZipStreamWrite : StreamWrite {
 		explicit ZipStreamWrite(zipFile file, ZipFilesystem* zipfs);
 		virtual ~ZipStreamWrite();
-		virtual void Data(const void* const data, size_t size) override;
+		void Data(const void* const data, size_t size) override;
 	private:
 		zipFile m_zipfile;
 		ZipFilesystem* m_zipfs;
@@ -110,4 +109,4 @@ protected:
 
 
 
-#endif
+#endif  // end of include guard: WL_IO_FILESYSTEM_ZIP_FILESYSTEM_H

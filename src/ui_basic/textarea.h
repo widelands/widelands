@@ -17,11 +17,10 @@
  *
  */
 
-#ifndef UI_TEXTAREA_H
-#define UI_TEXTAREA_H
+#ifndef WL_UI_BASIC_TEXTAREA_H
+#define WL_UI_BASIC_TEXTAREA_H
 
-#include "align.h"
-#include "constants.h"
+#include "graphic/align.h"
 #include "graphic/font.h"
 #include "ui_basic/panel.h"
 
@@ -82,7 +81,7 @@ struct Textarea : public Panel {
 	void set_font(const std::string & name, int size, RGBColor clr);
 
 protected:
-	virtual void update_desired_size() override;
+	void update_desired_size() override;
 
 private:
 	enum LayoutMode {
@@ -104,4 +103,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_TEXTAREA_H

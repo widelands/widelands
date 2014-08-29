@@ -19,9 +19,9 @@
 
 #include "network/network_player_settings_backend.h"
 
-#include "gamesettings.h"
-#include "i18n.h"
-#include "log.h"
+#include "base/i18n.h"
+#include "base/log.h"
+#include "logic/game_settings.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "profile/profile.h"
@@ -106,14 +106,16 @@ void NetworkPlayerSettingsBackend::toggle_init(uint8_t id) {
 		return;
 
 	const PlayerSettings & player = settings.players[id];
-	container_iterate_const(std::vector<TribeBasicInfo>, settings.tribes, j)
-		if (j.current->name == player.tribe)
+	for (const TribeBasicInfo& temp_tribeinfo : settings.tribes) {
+		if (temp_tribeinfo.name == player.tribe) {
 			return
 				s->setPlayerInit
 					(id,
 					 (player.initialization_index + 1)
 					 %
-					 j.current->initializations.size());
+					 temp_tribeinfo.initializations.size());
+		}
+	}
 	assert(false);
 }
 

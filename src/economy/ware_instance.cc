@@ -19,6 +19,10 @@
 
 #include "economy/ware_instance.h"
 
+#include <memory>
+
+#include "base/macros.h"
+#include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/fleet.h"
@@ -34,17 +38,14 @@
 #include "logic/worker.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "upcast.h"
-#include "wexception.h"
 
 namespace Widelands {
 
 
 /**
  * Whenever a WareInstance is idle, it issues an IdleWareSupply.
- *
- * \todo This maybe shouldn't be here.
-*/
+ */
+// TODO(unknown): This maybe shouldn't be here.
 struct IdleWareSupply : public Supply {
 	IdleWareSupply(WareInstance &);
 	virtual ~IdleWareSupply();
@@ -52,15 +53,15 @@ struct IdleWareSupply : public Supply {
 	void set_economy(Economy *);
 
 	//  implementation of Supply
-	virtual PlayerImmovable * get_position(Game &) override;
-	virtual bool is_active() const override;
-	virtual bool has_storage() const override;
-	virtual void get_ware_type(WareWorker & type, Ware_Index & ware) const override;
-	virtual void send_to_storage(Game &, Warehouse * wh) override;
+	PlayerImmovable * get_position(Game &) override;
+	bool is_active() const override;
+	bool has_storage() const override;
+	void get_ware_type(WareWorker & type, Ware_Index & ware) const override;
+	void send_to_storage(Game &, Warehouse * wh) override;
 
-	virtual uint32_t nr_supplies(const Game &, const Request &) const override;
-	virtual WareInstance & launch_ware(Game &, const Request &) override;
-	virtual Worker & launch_worker(Game &, const Request &) override;
+	uint32_t nr_supplies(const Game &, const Request &) const override;
+	WareInstance & launch_ware(Game &, const Request &) override;
+	Worker & launch_worker(Game &, const Request &) override;
 
 private:
 	WareInstance & m_ware;
@@ -102,7 +103,7 @@ void IdleWareSupply::set_economy(Economy * const e)
  */
 PlayerImmovable * IdleWareSupply::get_position(Game & game)
 {
-	Map_Object * const loc = m_ware.get_location(game);
+	MapObject * const loc = m_ware.get_location(game);
 
 	if (upcast(PlayerImmovable, playerimmovable, loc))
 		return playerimmovable;
@@ -184,7 +185,7 @@ void IdleWareSupply::send_to_storage(Game & game, Warehouse * wh)
 WareInstance::WareInstance
 	(Ware_Index const i, const WareDescr * const ware_descr)
 :
-Map_Object   (ware_descr),
+MapObject   (ware_descr),
 m_economy    (nullptr),
 m_descr_index(i),
 m_supply     (nullptr),
@@ -199,14 +200,9 @@ WareInstance::~WareInstance()
 	}
 }
 
-int32_t WareInstance::get_type() const
-{
-	return WARE;
-}
-
 void WareInstance::init(Editor_Game_Base & egbase)
 {
-	Map_Object::init(egbase);
+	MapObject::init(egbase);
 }
 
 void WareInstance::cleanup(Editor_Game_Base & egbase)
@@ -221,7 +217,7 @@ void WareInstance::cleanup(Editor_Game_Base & egbase)
 	cancel_moving();
 	set_location(egbase, nullptr);
 
-	Map_Object::cleanup(egbase);
+	MapObject::cleanup(egbase);
 }
 
 /**
@@ -229,7 +225,7 @@ void WareInstance::cleanup(Editor_Game_Base & egbase)
 */
 void WareInstance::set_economy(Economy * const e)
 {
-	if (m_descr_index == INVALID_INDEX or m_economy == e)
+	if (m_descr_index == INVALID_INDEX || m_economy == e)
 		return;
 
 	if (m_economy)
@@ -248,9 +244,9 @@ void WareInstance::set_economy(Economy * const e)
  * Once you've assigned a ware to its new location, you usually have to call
  * \ref update() as well.
 */
-void WareInstance::set_location(Editor_Game_Base & egbase, Map_Object * const location)
+void WareInstance::set_location(Editor_Game_Base & egbase, MapObject * const location)
 {
-	Map_Object * const oldlocation = m_location.get(egbase);
+	MapObject * const oldlocation = m_location.get(egbase);
 
 	if (oldlocation == location)
 		return;
@@ -307,7 +303,7 @@ void WareInstance::update(Game & game)
 	if (!m_descr) // Upsy, we're not even initialized. Happens on load
 		return;
 
-	Map_Object * const loc = m_location.get(game);
+	MapObject * const loc = m_location.get(game);
 
 	// Reset our state if we're not on location or outside an economy
 	if (!get_economy()) {
@@ -429,9 +425,9 @@ void WareInstance::enter_building(Game & game, Building & building)
 				("MO(%u): ware(%s): do not know how to move from building %u (%s at (%u,%u)) "
 				 "to %u (%s) -> not a warehouse!",
 				 serial(), m_descr->name().c_str(), building.serial(),
-				 building.name().c_str(), building.get_position().x,
+				 building.descr().name().c_str(), building.get_position().x,
 				 building.get_position().y, nextstep->serial(),
-				 nextstep->name().c_str());
+				 nextstep->descr().name().c_str());
 		} else {
 			Transfer * t = m_transfer;
 
@@ -533,7 +529,7 @@ PlayerImmovable * WareInstance::get_next_move_step(Game & game)
 
 void WareInstance::log_general_info(const Editor_Game_Base & egbase)
 {
-	Map_Object::log_general_info(egbase);
+	MapObject::log_general_info(egbase);
 
 	molog("Ware: %s\n", descr().name().c_str());
 	molog("Location: %u\n", m_location.serial());
@@ -558,7 +554,7 @@ WareInstance::Loader::Loader() :
 
 void WareInstance::Loader::load(FileRead & fr)
 {
-	Map_Object::Loader::load(fr);
+	MapObject::Loader::load(fr);
 
 	WareInstance & ware = get<WareInstance>();
 	m_location = fr.Unsigned32();
@@ -572,7 +568,7 @@ void WareInstance::Loader::load(FileRead & fr)
 
 void WareInstance::Loader::load_pointers()
 {
-	Map_Object::Loader::load_pointers();
+	MapObject::Loader::load_pointers();
 
 	WareInstance & ware = get<WareInstance>();
 
@@ -580,16 +576,16 @@ void WareInstance::Loader::load_pointers()
 	// for removal via the update callback, but the game is saved just before the
 	// removal. This is why we allow a null location on load.
 	if (m_location)
-		ware.set_location(egbase(), &mol().get<Map_Object>(m_location));
+		ware.set_location(egbase(), &mol().get<MapObject>(m_location));
 	if (m_transfer_nextstep)
-		ware.m_transfer_nextstep = &mol().get<Map_Object>(m_transfer_nextstep);
+		ware.m_transfer_nextstep = &mol().get<MapObject>(m_transfer_nextstep);
 	if (ware.m_transfer)
 		ware.m_transfer->read_pointers(mol(), m_transfer);
 }
 
 void WareInstance::Loader::load_finish()
 {
-	Map_Object::Loader::load_finish();
+	MapObject::Loader::load_finish();
 
 	WareInstance & ware = get<WareInstance>();
 	if (!ware.m_transfer || !ware.m_transfer->get_request()) {
@@ -600,14 +596,14 @@ void WareInstance::Loader::load_finish()
 
 
 void WareInstance::save
-	(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
+	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(header_WareInstance);
+	fw.Unsigned8(HeaderWareInstance);
 	fw.Unsigned8(WAREINSTANCE_SAVEGAME_VERSION);
 	fw.CString(descr().tribe().name());
 	fw.CString(descr().name());
 
-	Map_Object::save(egbase, mos, fw);
+	MapObject::save(egbase, mos, fw);
 
 	fw.Unsigned32(mos.get_object_file_index_or_zero(m_location.get(egbase)));
 	fw.Unsigned32
@@ -620,8 +616,8 @@ void WareInstance::save
 	}
 }
 
-Map_Object::Loader * WareInstance::load
-	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
+MapObject::Loader * WareInstance::load
+	(Editor_Game_Base & egbase, MapMapObjectLoader & mol, FileRead & fr)
 {
 	try {
 		uint8_t version = fr.Unsigned8();

@@ -28,12 +28,13 @@
 #include <windows.h>
 #endif
 
+#include "base/deprecated.h"
+#include "base/i18n.h"
+#include "base/log.h"
 #include "graphic/graphic.h"
 #include "helper.h"
-#include "i18n.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "log.h"
 #include "logic/game.h"
 #include "logic/map.h"
 #include "profile/profile.h"
@@ -75,8 +76,13 @@ Sound_Handler::Sound_Handler():
 /// themselves.
 Sound_Handler::~Sound_Handler()
 {
-	container_iterate_const  (FXset_map, fxs_,   i) delete i.current->second;
-	container_iterate_const(Songset_map, songs_, i) delete i.current->second;
+	for (const std::pair<std::string, FXset *> fx_pair : fxs_) {
+		delete fx_pair.second;
+	}
+
+	for (const std::pair<std::string, Songset *> song_pair : songs_) {
+		delete song_pair.second;
+	}
 
 	if (fx_lock_)
 	{
@@ -117,7 +123,7 @@ void Sound_Handler::init()
 
 	if
 		(SDL_InitSubSystem(SDL_INIT_AUDIO) == -1
-		 or
+		 ||
 		 Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, bufsize) == -1)
 	{
 		SDL_QuitSubSystem(SDL_INIT_AUDIO);
@@ -144,7 +150,7 @@ void Sound_Handler::shutdown()
 	Mix_HookMusicFinished(nullptr);
 
 	int numtimesopened, frequency, channels;
-	Uint16 format;
+	uint16_t format;
 	numtimesopened = Mix_QuerySpec(&frequency, &format, &channels);
 	log
 		("Sound_Handler closing times %i, freq %i, format %i, chan %i\n",
@@ -276,7 +282,7 @@ void Sound_Handler::load_one_fx
 	if (nosound_)
 		return;
 
-	if (not fr.TryOpen(*g_fs, path)) {
+	if (!fr.TryOpen(*g_fs, path)) {
 		log("WARNING: Could not open %s for reading!\n", path);
 		return;
 	}
@@ -338,8 +344,8 @@ int32_t Sound_Handler::stereo_position(Widelands::Coords const position)
 
 /** Find out whether to actually play a certain effect right now or rather not
  * (to avoid "sonic overload").
- * \todo What is the selection algorithm? cf class documentation
-*/
+ */
+// TODO(unknown): What is the selection algorithm? cf class documentation
 bool Sound_Handler::play_or_not
 	(const std::string &       fx_name,
 	 int32_t             const stereo_pos,
@@ -357,16 +363,16 @@ bool Sound_Handler::play_or_not
 	//  float division! not integer
 	probability = (priority % PRIO_ALLOW_MULTIPLE) / 128.0;
 
-	//TODO: what to do with fx that happen offscreen?
-	//TODO: reduce volume? reduce priority? other?
+	//TODO(unknown): what to do with fx that happen offscreen?
+	//TODO(unknown): reduce volume? reduce priority? other?
 	if (stereo_pos == -1) {
 		return false;
 	}
 
-	//TODO: check for a free channel
+	//TODO(unknown): check for a free channel
 
 	if (priority == PRIO_ALWAYS_PLAY) {
-		//TODO: if there is no free channel, kill a running fx and complain
+		//TODO(unknown): if there is no free channel, kill a running fx and complain
 		return true;
 	}
 
@@ -379,21 +385,25 @@ bool Sound_Handler::play_or_not
 	// Access to active_fx_ is protected because it can
 	// be accessed from callback
 	if (fx_lock_) SDL_LockMutex(fx_lock_);
-	container_iterate_const(Activefx_map, active_fx_, i)
+
+	// starting a block, so I can define a local type for iterating
 	{
-		if (i->second == fx_name) {
-			already_running = true;
-			break;
+		for (const std::pair<uint32_t, std::string> fx_pair : active_fx_) {
+			if (fx_pair.second == fx_name) {
+				already_running = true;
+				break;
+			}
 		}
 	}
+
 	if (fx_lock_) SDL_UnlockMutex(fx_lock_);
 
 	if (!allow_multiple && already_running)
 		return false;
 
-	//TODO: long time since any play increases weighted_priority
-	//TODO: high general frequency reduces weighted priority
-	//TODO: deal with "coupled" effects like throw_net and retrieve_net
+	//TODO(unknown): long time since any play increases weighted_priority
+	//TODO(unknown): high general frequency reduces weighted priority
+	//TODO(unknown): deal with "coupled" effects like throw_net and retrieve_net
 
 	uint32_t const ticks_since_last_play =
 		SDL_GetTicks() - fxs_[fx_name]->last_used_;
@@ -534,7 +544,7 @@ void Sound_Handler::register_song
 void Sound_Handler::start_music
 	(const std::string & songset_name, int32_t fadein_ms)
 {
-	if (get_disable_music() or nosound_)
+	if (get_disable_music() || nosound_)
 		return;
 
 	if (fadein_ms == 0) fadein_ms = 250; //  avoid clicks
@@ -564,7 +574,7 @@ void Sound_Handler::start_music
 */
 void Sound_Handler::stop_music(int32_t fadeout_ms)
 {
-	if (get_disable_music() or nosound_)
+	if (get_disable_music() || nosound_)
 		return;
 
 	if (fadeout_ms == 0) fadeout_ms = 250; //  avoid clicks
@@ -657,7 +667,7 @@ void Sound_Handler::set_disable_fx(bool const disable)
  * \param volume The new music volume.
  */
 void Sound_Handler::set_music_volume(int32_t volume) {
-	if (not lock_audio_disabling_ and not nosound_) {
+	if (!lock_audio_disabling_ && !nosound_) {
 		music_volume_ = volume;
 		Mix_VolumeMusic(volume);
 		g_options.pull_section("global").set_int("music_volume", volume);
@@ -672,7 +682,7 @@ void Sound_Handler::set_music_volume(int32_t volume) {
  * \param volume The new music volume.
  */
 void Sound_Handler::set_fx_volume(int32_t volume) {
-	if (not lock_audio_disabling_ and not nosound_) {
+	if (!lock_audio_disabling_ && !nosound_) {
 		fx_volume_ = volume;
 		Mix_Volume(-1, volume);
 		g_options.pull_section("global").set_int("fx_volume", volume);

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef GAME_CHAT_MENU_H
-#define GAME_CHAT_MENU_H
+#ifndef WL_WUI_GAME_CHAT_MENU_H
+#define WL_WUI_GAME_CHAT_MENU_H
 
 #include "wui/gamechatpanel.h"
 #include "ui_basic/unique_window.h"
@@ -54,4 +54,4 @@ private:
 	bool m_close_on_send;
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_GAME_CHAT_MENU_H

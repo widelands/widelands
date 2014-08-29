@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITORINTERACTIVE_H
-#define EDITORINTERACTIVE_H
+#ifndef WL_EDITOR_EDITORINTERACTIVE_H
+#define WL_EDITOR_EDITORINTERACTIVE_H
 
 #include "editor/tools/editor_history.h"
 #include "editor/tools/editor_increase_height_tool.h"
@@ -62,13 +62,13 @@ public:
 	void think() override;
 
 	void map_clicked(bool draw = false);
-	virtual void set_sel_pos(Widelands::Node_and_Triangle<>) override;
+	void set_sel_pos(Widelands::Node_and_Triangle<>) override;
 	void set_sel_radius_and_update_menu(uint32_t);
 
 	//  Handle UI elements.
 	bool handle_key(bool down, SDL_keysym) override;
-	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y) override;
-	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y) override;
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 
 	struct Tools {
 		Tools()
@@ -162,4 +162,4 @@ private:
 	UI::Button m_redo;
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_EDITORINTERACTIVE_H

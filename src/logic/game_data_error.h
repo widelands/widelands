@@ -17,10 +17,10 @@
  *
  */
 
-#ifndef GAME_DATA_ERROR_H
-#define GAME_DATA_ERROR_H
+#ifndef WL_LOGIC_GAME_DATA_ERROR_H
+#define WL_LOGIC_GAME_DATA_ERROR_H
 
-#include "wexception.h"
+#include "base/wexception.h"
 
 namespace Widelands {
 
@@ -29,11 +29,11 @@ namespace Widelands {
 struct game_data_error : public _wexception {
 	explicit game_data_error(char const * fmt, ...) PRINTF_FORMAT(2, 3);
 
-	virtual char const * what() const throw () override {return m_what.c_str();}
+	char const * what() const noexcept override {return m_what.c_str();}
 protected:
-	game_data_error() {};
+	game_data_error() {}
 };
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_GAME_DATA_ERROR_H

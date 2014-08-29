@@ -3,6 +3,11 @@ output=marble
 output=stone
 enhancement=deep_marblemine
 
+[aihints]
+mines=granite
+mines_percent=50
+marbleproducer=true
+
 [buildcost]
 log=4
 wood=2
@@ -14,22 +19,21 @@ wood=1
 [working positions]
 miner=1
 
-[aihints]
-mines=granite
-mines_percent=50
-marbleproducer=true
-
 [inputs]
 ration=6
 wine=6
 
 [programs]
-mine_marble=_Mine marble
-mine_stone=_Mine stone
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start mining marble because ...
+mine_marble=_mining marble
+# TRANSLATORS: "Completed/Skipped/Did not start mining stone because ...
+mine_stone=_mining stone
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [mine_marble]
 sleep=20000
+return=skipped unless economy needs marble or economy needs stone
 consume=wine ration
 animate=working 20000
 mine=granite 2 50 5 17
@@ -40,6 +44,7 @@ produce=marble stone
 
 [mine_stone]
 sleep=20000
+return=skipped unless economy needs marble or economy needs stone
 consume=ration wine
 animate=working 20000
 mine=granite 2 50 5 17
@@ -47,6 +52,10 @@ produce=stone marble
 animate=working 20000
 mine=granite 2 50 5 17
 produce=stone:2
+
+[out_of_resource_notification]
+title=_Main Marble Vein Exhausted
+message=_This marble mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it.
 
 [work]
 call=mine_marble

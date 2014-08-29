@@ -32,7 +32,6 @@
 #include <string>
 #include <vector>
 
-#include <config.h>
 #ifdef _WIN32
 #include <direct.h>
 #include <io.h>
@@ -44,11 +43,12 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+#include "base/log.h"
+#include "config.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filesystem/zip_exceptions.h"
 #include "io/filesystem/zip_filesystem.h"
-#include "log.h"
 
 #ifdef _WIN32
 #define stat _stat
@@ -151,7 +151,7 @@ std::string FileSystem::getWorkingDirectory() const {
 }
 
 
-/// \todo Write homedir detection for non-getenv-systems
+// TODO(unknown): Write homedir detection for non-getenv-systems
 std::string FileSystem::GetHomedir()
 {
 	std::string homedir;
@@ -161,7 +161,7 @@ std::string FileSystem::GetHomedir()
 	// their own "standards"?
 #define TRY_USE_AS_HOMEDIR(name)                                              \
    homedir = getenv(name);                                                    \
-   if (homedir.size() and check_writeable_for_data(homedir.c_str()))          \
+   if (homedir.size() && check_writeable_for_data(homedir.c_str()))           \
       return homedir;                                                         \
 
 	TRY_USE_AS_HOMEDIR("USERPROFILE");
@@ -182,7 +182,7 @@ std::string FileSystem::GetHomedir()
 			("\nWARNING: either we can not detect your home directory "
 			 "or you do not have one! Please contact the developers.\n\n");
 
-		//TODO: is it really a good idea to set homedir to "." then ??
+		//TODO(unknown): is it really a good idea to set homedir to "." then ??
 
 		log("Instead of your home directory, '.' will be used.\n\n");
 		homedir = ".";
@@ -232,9 +232,8 @@ static void FS_Tokenize
 
 /**
  * Transform any valid, unique pathname into a well-formed absolute path
- *
- * \todo Enable non-Unix paths
  */
+// TODO(unknown): Enable non-Unix paths
 std::string FileSystem::FS_CanonicalizeName(std::string path) const {
 	std::list<std::string> components;
 	std::list<std::string>::iterator i;
@@ -353,15 +352,15 @@ std::string FileSystem::FS_FilenameWoExt(const char * const p)
 }
 
 /// Create a filesystem from a zipfile or a real directory
-/// \todo Catch FileType_error in all users
-/// \todo Check for existence before doing anything with the file/dir
-/// \todo Catch FileNotFound_error in all users
 /// \throw FileNotFound_error if root does not exist, is some kind of special
 /// file, loops around (via symlinks) or is too long for the OS/filesystem.
 /// \throw FileAccessDenied_error if the OS denies access (of course ;-)
 /// \throw FileTypeError if root is neither a directory or regular file
-/// \todo throw FileTypeError if root is not a zipfile (exception from
-/// ZipFilesystem)
+// TODO(unknown): Catch FileType_error in all users
+// TODO(unknown): Check for existence before doing anything with the file/dir
+// TODO(unknown): Catch FileNotFound_error in all users
+// TODO(unknown): throw FileTypeError if root is not a zipfile (exception from
+// ZipFilesystem)
 FileSystem & FileSystem::Create(const std::string & root)
 {
 	struct stat statinfo;
@@ -385,7 +384,7 @@ FileSystem & FileSystem::Create(const std::string & root)
 	if (S_ISDIR(statinfo.st_mode)) {
 		return *new RealFSImpl(root);
 	}
-	if (S_ISREG(statinfo.st_mode)) { //TODO: ensure root is a zipfile
+	if (S_ISREG(statinfo.st_mode)) { //TODO(unknown): ensure root is a zipfile
 		return *new ZipFilesystem(root);
 	}
 

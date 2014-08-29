@@ -40,9 +40,9 @@ public:
 	virtual ~SurfaceCacheImpl();
 
 	// Implements SurfaceCache.
-	virtual void flush() override;
-	virtual Surface* get(const string& hash) override;
-	virtual Surface* insert(const string& hash, Surface*, bool) override;
+	void flush() override;
+	Surface* get(const string& hash) override;
+	Surface* insert(const string& hash, Surface*, bool) override;
 
 private:
 	void drop();
@@ -134,4 +134,3 @@ void SurfaceCacheImpl::drop() {
 SurfaceCache* create_surface_cache(uint32_t transient_memory_in_bytes) {
 	return new SurfaceCacheImpl(transient_memory_in_bytes);
 }
-

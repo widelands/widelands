@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef MESSAGE_H
-#define MESSAGE_H
+#ifndef WL_LOGIC_MESSAGE_H
+#define WL_LOGIC_MESSAGE_H
 
 #include <string>
 #include <boost/signals2.hpp>
@@ -39,7 +39,7 @@ struct Message {
 	 * \param b The message body
 	 * \param c The message coords. The player will be able to taken there.
 	 * Defaults to Coords::Null()
-	 * \param ser A Map_Object serial. If non null, the message will expire once
+	 * \param ser A MapObject serial. If non null, the message will expire once
 	 * the object is removed from the game. Defaults to 0
 	 * \param s The message status. Defaults to Status::New
 	 */
@@ -86,4 +86,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_MESSAGE_H

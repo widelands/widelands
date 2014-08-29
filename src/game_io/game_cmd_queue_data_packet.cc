@@ -19,13 +19,13 @@
 
 #include "game_io/game_cmd_queue_data_packet.h"
 
+#include "base/macros.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/cmd_queue.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/queue_cmd_factory.h"
-#include "upcast.h"
 
 namespace Widelands {
 
@@ -33,7 +33,7 @@ namespace Widelands {
 
 
 void Game_Cmd_Queue_Data_Packet::Read
-	(FileSystem & fs, Game & game, Map_Map_Object_Loader * const ol)
+	(FileSystem & fs, Game & game, MapMapObjectLoader * const ol)
 {
 	try {
 		FileRead fr;
@@ -89,7 +89,7 @@ void Game_Cmd_Queue_Data_Packet::Read
 
 
 void Game_Cmd_Queue_Data_Packet::Write
-	(FileSystem & fs, Game & game, Map_Map_Object_Saver * const os)
+	(FileSystem & fs, Game & game, MapMapObjectSaver * const os)
 {
 	FileWrite fw;
 

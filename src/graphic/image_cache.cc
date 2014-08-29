@@ -20,18 +20,13 @@
 #include "graphic/image_cache.h"
 
 #include <cassert>
-#include <map>
 #include <string>
 
+#include "base/log.h"
 #include "graphic/image.h"
-#include "graphic/image_loader.h"
+#include "graphic/image_io.h"
 #include "graphic/surface.h"
 #include "graphic/surface_cache.h"
-#include "log.h"
-
-
-using namespace std;
-
 
 namespace  {
 
@@ -39,9 +34,8 @@ namespace  {
 // Uses SurfaceCache. These images are meant to be cached in ImageCache.
 class FromDiskImage : public Image {
 public:
-	FromDiskImage(const string& filename, SurfaceCache* surface_cache, IImageLoader* image_loader) :
+	FromDiskImage(const std::string& filename, SurfaceCache* surface_cache) :
 		filename_(filename),
-		image_loader_(image_loader),
 		surface_cache_(surface_cache) {
 			Surface* surf = reload_image_();
 			w_ = surf->width();
@@ -50,10 +44,10 @@ public:
 	virtual ~FromDiskImage() {}
 
 	// Implements Image.
-	virtual uint16_t width() const override {return w_; }
-	virtual uint16_t height() const override {return h_;}
-	virtual const string& hash() const override {return filename_;}
-	virtual Surface* surface() const override {
+	uint16_t width() const override {return w_; }
+	uint16_t height() const override {return h_;}
+	const std::string& hash() const override {return filename_;}
+	Surface* surface() const override {
 		Surface* surf = surface_cache_->get(filename_);
 		if (surf)
 			return surf;
@@ -62,68 +56,42 @@ public:
 
 private:
 	Surface* reload_image_() const {
-		Surface* surf = surface_cache_->insert(filename_, image_loader_->load(filename_), false);
+		Surface* surf = surface_cache_->insert(filename_, load_image(filename_), false);
 		return surf;
 	}
 	uint16_t w_, h_;
-	const string filename_;
+	const std::string filename_;
 
-	// Nothing owned
-	IImageLoader* const image_loader_;
-	SurfaceCache* const surface_cache_;
+	SurfaceCache* const surface_cache_;  // Not owned.
 };
 
-class ImageCacheImpl : public ImageCache {
-public:
-	// No ownership is taken here.
-	ImageCacheImpl(IImageLoader* loader, SurfaceCache* surface_cache)
-		: image_loader_(loader), surface_cache_(surface_cache) {
-		}
-	virtual ~ImageCacheImpl();
+}  // namespace
 
-	// Implements ImageCache.
-	const Image* insert(const Image*) override;
-	bool has(const std::string& hash) const override;
-	virtual const Image* get(const std::string& hash) override;
+ImageCache::ImageCache(SurfaceCache* const surface_cache) : surface_cache_(surface_cache) {
+}
 
-private:
-	typedef map<string, const Image*> ImageMap;
-
-	// hash of cached filename/image pairs
-	ImageMap images_;
-
-	// None of these are owned.
-	IImageLoader* const image_loader_;
-	SurfaceCache* const surface_cache_;
-};
-
-ImageCacheImpl::~ImageCacheImpl() {
-	for (ImageMap::value_type& p : images_)
+ImageCache::~ImageCache() {
+	for (ImageMap::value_type& p : images_) {
 		delete p.second;
+	}
 	images_.clear();
 }
 
-bool ImageCacheImpl::has(const string& hash) const {
+bool ImageCache::has(const std::string& hash) const {
 	return images_.count(hash);
 }
 
-const Image* ImageCacheImpl::insert(const Image* image) {
+const Image* ImageCache::insert(const Image* image) {
 	assert(!has(image->hash()));
 	images_.insert(make_pair(image->hash(), image));
 	return image;
 }
 
-const Image* ImageCacheImpl::get(const string& hash) {
+const Image* ImageCache::get(const std::string& hash) {
 	ImageMap::const_iterator it = images_.find(hash);
 	if (it == images_.end()) {
-		images_.insert(make_pair(hash, new FromDiskImage(hash, surface_cache_, image_loader_)));
+		images_.insert(make_pair(hash, new FromDiskImage(hash, surface_cache_)));
 		return get(hash);
 	}
 	return it->second;
-}
-
-}  // namespace
-
-ImageCache* create_image_cache(IImageLoader* loader, SurfaceCache* surface_cache) {
-	return new ImageCacheImpl(loader, surface_cache);
 }

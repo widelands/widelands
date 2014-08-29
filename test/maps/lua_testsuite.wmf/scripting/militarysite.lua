@@ -1,9 +1,9 @@
 -- =======================================================================
---                          MilitarySite Testings                         
+--                          MilitarySite Testings
 -- =======================================================================
 
 -- ================
--- Soldier creation 
+-- Soldier creation
 -- ================
 function _cnt(a)
    local rv = 0
@@ -23,10 +23,10 @@ function militarysite_tests:teardown()
    end)
 end
 function militarysite_tests:test_name()
-   assert_equal("fortress", self.fortress.name)
+   assert_equal("fortress", self.fortress.descr.name)
 end
 function militarysite_tests:test_type()
-   assert_equal("militarysite", self.fortress.type)
+   assert_equal("militarysite", self.fortress.descr.type_name)
 end
 function militarysite_tests:test_no_soldiers_initially()
    assert_equal(0, _cnt(self.fortress:get_soldiers("all")))
@@ -80,4 +80,3 @@ function militarysite_tests:test_no_space()
   end)
    assert_equal(8, _cnt(self.fortress:get_soldiers("all")))
 end
-

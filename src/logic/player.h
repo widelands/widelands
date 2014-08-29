@@ -17,15 +17,18 @@
  *
  */
 
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef WL_LOGIC_PLAYER_H
+#define WL_LOGIC_PLAYER_H
 
+#include <memory>
+
+#include "base/macros.h"
+#include "graphic/color.h"
 #include "logic/building.h"
+#include "logic/constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/mapregion.h"
 #include "logic/message_queue.h"
-#include "logic/notification.h"
-#include "rgbcolor.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
 #include "logic/widelands.h"
@@ -52,11 +55,7 @@ struct AttackController;
  * \ref GameController and friends, so that replays and network games function
  * properly.
  */
-class Player :
-	boost::noncopyable,
-	public NoteReceiver<NoteImmovable>, public NoteReceiver<NoteFieldPossession>,
-	public NoteSender  <NoteImmovable>, public NoteSender  <NoteFieldPossession>
-{
+class Player {
 public:
 	// hard-coded playercolors
 	static const RGBColor Colors[MAX_PLAYERS];
@@ -117,8 +116,6 @@ public:
 
 	const std::string & get_name() const {return m_name;}
 	void set_name(const std::string & name) {m_name = name;}
-	void set_frontier_style(uint8_t a) {m_frontier_style_index = a;}
-	void set_flag_style(uint8_t a) {m_flag_style_index = a;}
 	void set_team_number(TeamNumber team);
 
 	void create_default_infrastructure();
@@ -134,14 +131,14 @@ public:
 	/// Per-player and per-field constructionsite information
 	struct Constructionsite_Information {
 		Constructionsite_Information() : becomes(nullptr), was(nullptr), totaltime(0), completedtime(0) {}
-		const Building_Descr * becomes; // Also works as a marker telling whether there is a construction site.
-		const Building_Descr * was; // only valid if "becomes" is an enhanced building.
+		const BuildingDescr * becomes; // Also works as a marker telling whether there is a construction site.
+		const BuildingDescr * was; // only valid if "becomes" is an enhanced building.
 		uint32_t               totaltime;
 		uint32_t               completedtime;
 	};
 
 	/// Per-player field information.
-	struct Field : boost::noncopyable {
+	struct Field {
 		Field() :
 			military_influence(0),
 			vision            (0),
@@ -241,8 +238,8 @@ public:
 		 * knows.
 		 * The d component is only valid when time_last_surveyed[0] != Never().
 		 * The r component is only valid when time_last_surveyed[1] != Never().
-		 * \todo Check this on access, at least in debug builds
 		 */
+		// TODO(unknown): Check this on access, at least in debug builds
 		Widelands::Field::Resource_Amounts resource_amounts;
 
 		/// Whether there is a road between this node and the node to the
@@ -316,7 +313,7 @@ public:
 		 * Only valid when the player has seen this node (or maybe a nearby node
 		 * if the immovable is big?). (Roads are not stored here.)
 		 */
-		const Map_Object_Descr             * map_object_descr[3];
+		const MapObjectDescr             * map_object_descr[3];
 
 		/// Information for constructionsite's animation.
 		/// only valid, if there is a constructionsite on this node
@@ -353,6 +350,9 @@ public:
 		//  border_br
 		//  border_bl
 		//  <end>                           0x100         0x160
+
+	private:
+		DISALLOW_COPY_AND_ASSIGN(Field);
 	};
 
 	const Field * fields() const {return m_fields;}
@@ -362,13 +362,6 @@ public:
 		// Node visible if > 1
 		return (m_see_all ? 2 : 0) + m_fields[i].vision;
 	}
-	/**
-	 * Called when a node becomes seen or has changed.  Discovers the node and
-	 * those of the 6 surrounding edges/triangles that are not seen from another
-	 * node.
-	 */
-	void rediscover_node(const Map &, const Widelands::Field &, FCoords)
-	;
 
 	bool has_view_changed() {
 		bool t = m_view_changed;
@@ -437,16 +430,6 @@ public:
 	}
 	void allow_building_type(Building_Index, bool allow);
 
-	// Battle options
-	void set_retreat_percentage(uint8_t value);
-	uint8_t get_retreat_percentage() const {
-		return m_retreat_percentage;
-	}
-	void allow_retreat_change(bool allow);
-	bool is_retreat_change_allowed() const {
-		return m_allow_retreat_change;
-	}
-
 	// Player commands
 	// Only to be called indirectly via CmdQueue
 	Flag & force_flag(FCoords);      /// Do what it takes to create the flag.
@@ -490,7 +473,7 @@ public:
 		 std::vector<Soldier *> * soldiers = nullptr,
 		 uint32_t                 max = std::numeric_limits<uint32_t>::max());
 	void enemyflagaction
-		(Flag &, Player_Number attacker, uint32_t count, uint8_t retreat);
+		(Flag &, Player_Number attacker, uint32_t count);
 
 	uint32_t casualties() const {return m_casualties;}
 	uint32_t kills     () const {return m_kills;}
@@ -504,13 +487,6 @@ public:
 	void count_msite_defeated    () {++m_msites_defeated;}
 	void count_civil_bld_lost    () {++m_civil_blds_lost;}
 	void count_civil_bld_defeated() {++m_civil_blds_defeated;}
-
-	uint32_t frontier_anim() const {
-		return tribe().frontier_animation(m_frontier_style_index);
-	}
-	uint32_t flag_anim    () const {
-		return tribe().flag_animation    (m_flag_style_index);
-	}
 
 	// Statistics
 	const Building_Stats_vector & get_building_statistics
@@ -536,10 +512,6 @@ public:
 	void ware_consumed(Ware_Index, uint8_t);
 	void next_ware_production_period();
 
-	void receive(const NoteImmovable &) override;
-	void receive(const NoteFieldPossession     &) override;
-	void receive(const NoteFieldTransformed     &);
-
 	void setAI(const std::string &);
 	const std::string & getAI() const;
 
@@ -550,21 +522,26 @@ public:
 	}
 
 private:
-	void update_building_statistics(Building &, losegain_t);
+	void update_building_statistics(Building &, NoteImmovable::Ownership ownership);
 	void update_team_players();
 	void play_message_sound(const std::string & sender);
 	void _enhance_or_dismantle
 		(Building *, Building_Index const index_of_new_building);
 
-private:
+	// Called when a node becomes seen or has changed.  Discovers the node and
+	// those of the 6 surrounding edges/triangles that are not seen from another
+	// node.
+	void rediscover_node(const Map&, const Widelands::Field&, FCoords);
+
+	std::unique_ptr<Notifications::Subscriber<NoteImmovable>> immovable_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<NoteFieldTransformed>> field_transformed_subscriber_;
+
 	MessageQueue           m_messages;
 
 	Editor_Game_Base     & m_egbase;
 	uint8_t                m_initialization_index;
 	std::vector<uint8_t>   m_further_initializations;    // used in shared kingdom mode
 	std::vector<uint8_t>   m_further_shared_in_player;   //  ''  ''   ''     ''     ''
-	uint8_t                m_frontier_style_index;
-	uint8_t                m_flag_style_index;
 	TeamNumber             m_team_number;
 	std::vector<Player *>  m_team_player;
 	bool                   m_team_player_uptodate;
@@ -575,14 +552,6 @@ private:
 	uint32_t               m_casualties, m_kills;
 	uint32_t               m_msites_lost,     m_msites_defeated;
 	uint32_t               m_civil_blds_lost, m_civil_blds_defeated;
-
-	/**
-	 * Is player allowed to modify m_retreat_percentage?
-	 * Below percentage value, soldiers will retreat when current battle finish
-	 */
-
-	bool                  m_allow_retreat_change;
-	uint8_t               m_retreat_percentage;
 
 	Field *               m_fields;
 	std::vector<bool>     m_allowed_worker_types;
@@ -621,6 +590,8 @@ private:
 	std::vector< std::vector<uint32_t> > m_ware_stocks;
 
 	BuildingStats m_building_stats;
+
+	DISALLOW_COPY_AND_ASSIGN(Player);
 };
 
 void find_former_buildings
@@ -629,4 +600,4 @@ void find_former_buildings
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_PLAYER_H

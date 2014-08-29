@@ -17,21 +17,26 @@
  *
  */
 
-#ifndef MINIMAP_H
-#define MINIMAP_H
+#ifndef WL_WUI_MINIMAP_H
+#define WL_WUI_MINIMAP_H
 
 #include <boost/signals2.hpp>
 
+#include "graphic/render/minimaprenderer.h"
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
 
-struct Interactive_Base;
+class Interactive_Base;
 
 struct MiniMap : public UI::UniqueWindow {
 	struct Registry : public UI::UniqueWindow::Registry {
-		int8_t flags; /**< Combination of \ref Layers flags */
+		MiniMapLayer flags; /**< Combination of \ref MiniMapLayer flags */
 
-		Registry() : flags(Terrn | Owner | Flags | Roads | Bldns) {}
+		Registry()
+		   : flags(MiniMapLayer::Terrain | MiniMapLayer::Owner |
+		                           MiniMapLayer::Flag | MiniMapLayer::Road |
+		                           MiniMapLayer::Building) {
+		}
 	};
 
 	MiniMap(Interactive_Base & parent, Registry *);
@@ -42,10 +47,8 @@ struct MiniMap : public UI::UniqueWindow {
 		m_view.set_view_pos(x, y);
 	}
 
-	enum Layers {Terrn = 1, Owner = 2, Flags = 4, Roads = 8, Bldns = 16, Zoom2 = 32};
-
 private:
-	void toggle(Layers);
+	void toggle(MiniMapLayer);
 	void update_button_permpressed();
 	void resize();
 
@@ -60,7 +63,7 @@ private:
 	 */
 	struct View : public UI::Panel {
 		View
-			(UI::Panel & parent, int8_t * flags,
+			(UI::Panel & parent, MiniMapLayer * flags,
 			 int32_t x, int32_t y, uint32_t w, uint32_t h,
 			 Interactive_Base &);
 
@@ -68,8 +71,8 @@ private:
 
 		void draw(RenderTarget &) override;
 
-		bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y) override;
-		bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y) override;
+		bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y) override;
+		bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 
 		void set_zoom(int32_t z);
 
@@ -79,7 +82,7 @@ private:
 		int32_t                m_viewx, m_viewy;
 		const Image* m_pic_map_spot;
 	public:
-		int8_t * m_flags;
+		MiniMapLayer * m_flags;
 	};
 
 	uint32_t number_of_buttons_per_row() const;
@@ -96,4 +99,4 @@ private:
 	UI::Button button_zoom;
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_MINIMAP_H

@@ -19,16 +19,16 @@
 
 #include "map_io/widelands_map_map_object_loader.h"
 
+#include "base/wexception.h"
 #include "logic/editor_game_base.h"
 #include "logic/instances.h"
-#include "wexception.h"
 
 namespace Widelands {
 
 /*
  * Returns true if this object has already been inserted
  */
-bool Map_Map_Object_Loader::is_object_known(Serial const n) {
+bool MapMapObjectLoader::is_object_known(Serial const n) {
 	return m_objects.find(n) != m_objects.end();
 }
 
@@ -36,7 +36,7 @@ bool Map_Map_Object_Loader::is_object_known(Serial const n) {
 /*
  * mark this object as saved
  */
-void Map_Map_Object_Loader::mark_object_as_loaded(Map_Object & obj)
+void MapMapObjectLoader::mark_object_as_loaded(MapObject & obj)
 {
 	m_loaded_obj[&obj] = true;
 }
@@ -44,13 +44,13 @@ void Map_Map_Object_Loader::mark_object_as_loaded(Map_Object & obj)
 /*
  * Return the number of unsaved objects
  */
-int32_t Map_Map_Object_Loader::get_nr_unloaded_objects()
+int32_t MapMapObjectLoader::get_nr_unloaded_objects()
 {
 	int32_t result = 0;
-	std::map<Map_Object *, bool>::const_iterator const loaded_obj_end =
+	std::map<MapObject *, bool>::const_iterator const loaded_obj_end =
 		m_loaded_obj.end();
 	for
-		(std::map<Map_Object *, bool>::const_iterator it = m_loaded_obj.begin();
+		(std::map<MapObject *, bool>::const_iterator it = m_loaded_obj.begin();
 		 it != loaded_obj_end;
 		 ++it)
 		if (!it->second)
@@ -63,7 +63,7 @@ int32_t Map_Map_Object_Loader::get_nr_unloaded_objects()
  *
  * \note Only use this for compatibility hacks!
  */
-void Map_Map_Object_Loader::schedule_destroy(Map_Object & obj)
+void MapMapObjectLoader::schedule_destroy(MapObject & obj)
 {
 	m_schedule_destroy.push_back(&obj);
 }
@@ -74,7 +74,7 @@ void Map_Map_Object_Loader::schedule_destroy(Map_Object & obj)
  *
  * \note Only use this for compatibility hacks!
  */
-void Map_Map_Object_Loader::schedule_act(Bob & bob)
+void MapMapObjectLoader::schedule_act(Bob & bob)
 {
 	m_schedule_act.push_back(&bob);
 }
@@ -84,7 +84,7 @@ void Map_Map_Object_Loader::schedule_act(Bob & bob)
  *
  * \note Only use this for compatibility hacks!
  */
-void Map_Map_Object_Loader::load_finish_game(Game & g)
+void MapMapObjectLoader::load_finish_game(Game & g)
 {
 	while (!m_schedule_destroy.empty()) {
 		m_schedule_destroy.back()->schedule_destroy(g);

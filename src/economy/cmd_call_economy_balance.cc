@@ -19,6 +19,7 @@
 
 #include "economy/cmd_call_economy_balance.h"
 
+#include "base/wexception.h"
 #include "economy/economy.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -26,7 +27,6 @@
 #include "logic/player.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "wexception.h"
 
 namespace Widelands {
 
@@ -54,7 +54,7 @@ void Cmd_Call_Economy_Balance::execute(Game & game)
  * Read and write
  */
 void Cmd_Call_Economy_Balance::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -68,7 +68,7 @@ void Cmd_Call_Economy_Balance::Read
 			GameLogicCommand::Read(fr, egbase, mol);
 			uint8_t const player_number = fr.Unsigned8();
 			if (Player * const player = egbase.get_player(player_number)) {
-				if (not fr.Unsigned8())
+				if (!fr.Unsigned8())
 					throw wexception("0 is not allowed here");
 				uint16_t const economy_number = fr.Unsigned16();
 				if (economy_number < player->get_nr_economies())
@@ -91,7 +91,7 @@ void Cmd_Call_Economy_Balance::Read
 	}
 }
 void Cmd_Call_Economy_Balance::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(CURRENT_CMD_CALL_ECONOMY_VERSION);
 

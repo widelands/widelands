@@ -19,10 +19,10 @@
 
 #include "logic/world/map_gen.h"
 
+#include <memory>
 #include <string>
 #include <vector>
 
-#include "helper.h"
 #include "logic/game_data_error.h"
 #include "logic/world/world.h"
 #include "profile/profile.h"
@@ -51,7 +51,6 @@ MapGenLandResource::getBobCategory(MapGenAreaInfo::MapGenTerrainType terrType) c
 	default:
 		return nullptr;
 	};
-	return nullptr;
 }
 
 MapGenLandResource::MapGenLandResource(const LuaTable& table, MapGenInfo& mapGenInfo) {
@@ -60,7 +59,7 @@ MapGenLandResource::MapGenLandResource(const LuaTable& table, MapGenInfo& mapGen
 	immovable_density_ = static_cast<uint8_t>(get_uint(table, "immovable_density"));
 	critter_density_ = static_cast<uint8_t>(get_uint(table, "critter_density"));
 
-	const auto& do_assign = [&table, &mapGenInfo](
+	const auto do_assign = [&table, &mapGenInfo](
 	   const std::string& key, const MapGenBobCategory** our_pointer) {
 		const std::string value = table.get_string(key);
 		if (value.empty()) {
@@ -82,7 +81,7 @@ MapGenAreaInfo::MapGenAreaInfo(const LuaTable& table,
                                MapGenAreaType const areaType) {
 	weight_ = get_positive_int(table, "weight");
 
-	const auto& read_terrains = [this, &table, &world](
+	const auto read_terrains = [this, &table, &world](
 	   const std::string& key, std::vector<Terrain_Index>* list) {
 		const std::vector<std::string> terrains = table.get_table(key)->array_entries<std::string>();
 

@@ -42,10 +42,10 @@ function road_tests:test_roadtype()
    assert_equal("normal", self.r.road_type)
 end
 function road_tests:test_type()
-   assert_equal("road", self.r.type)
+   assert_equal("road", self.r.descr.type_name)
 end
 function road_tests:test_name()
-   assert_equal("road", self.r.name)
+   assert_equal("road", self.r.descr.name)
 end
 
 function road_tests:test_deletion_of_flag()
@@ -104,4 +104,3 @@ function road_tests:test_valid_workers()
    assert_equal(1, _cnt(self.r.valid_workers))
    assert_equal(1, self.r.valid_workers.carrier)
 end
-

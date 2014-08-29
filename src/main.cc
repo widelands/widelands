@@ -22,15 +22,16 @@
 #include <typeinfo>
 
 #include <SDL_main.h>
-#include <config.h>
 #ifndef _WIN32
 #include <fcntl.h>
 #include <syslog.h>
 #endif
 #include <unistd.h>
 
+#include "base/log.h"
+#include "base/wexception.h"
 #include "build_info.h"
-#include "wexception.h"
+#include "config.h"
 #include "wlapplication.h"
 
 using std::cout;
@@ -90,7 +91,7 @@ int main(int argc, char * argv[])
 			// from now on, it's a daemon
 			openlog("FREELINE", LOG_PID, LOG_DAEMON);
 		} else {
-			printf("Child has PID %i.\n", pid);
+			log("Child has PID %i.\n", pid);
 			return 0;
 		}
 	}
@@ -99,7 +100,7 @@ int main(int argc, char * argv[])
 	WLApplication * g_app = nullptr;
 	try {
 		g_app = WLApplication::get(argc, const_cast<char const * *>(argv));
-		//TODO: handle exceptions from the constructor
+		//TODO(unknown): handle exceptions from the constructor
 		g_app->run();
 
 		delete g_app;

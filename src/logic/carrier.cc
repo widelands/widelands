@@ -19,6 +19,8 @@
 
 #include "logic/carrier.h"
 
+#include "base/macros.h"
+#include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "economy/ware_instance.h"
@@ -26,8 +28,6 @@
 #include "io/filewrite.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
-#include "upcast.h"
-#include "wexception.h"
 
 namespace Widelands {
 
@@ -113,7 +113,7 @@ void Carrier::road_update(Game & game, State & state)
 		return;
 
 	// Be bored. There's nothing good on TV, either.
-	// TODO: idle animations
+	// TODO(unknown): idle animations
 	set_animation(game, descr().get_animation("idle"));
 	state.ivar1 = 1; //  we are available immediately after an idle phase
 	return skip_act(); //  wait until signal
@@ -216,10 +216,9 @@ void Carrier::transport_update(Game & game, State & state)
  * Deliver all wares addressed to the building the carrier is already into
  *
  * \param state UNDOCUMENTED
- *
- * \todo Upgrade this function to really support many-wares-at-a-time
- * \todo Document parameter state
  */
+// TODO(unknown):  Upgrade this function to really support many-wares-at-a-time
+// TODO(unknown):  Document parameter state
 void Carrier::deliver_to_building(Game & game, State & state)
 {
 	BaseImmovable * const pos = game.map()[get_position()].get_immovable();
@@ -618,12 +617,17 @@ Carrier::Loader * Carrier::create_loader()
 }
 
 void Carrier::do_save
-	(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
+	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
 {
 	Worker::do_save(egbase, mos, fw);
 
 	fw.Unsigned8(CARRIER_SAVEGAME_VERSION);
 	fw.Signed32(m_promised_pickup_to);
 }
+
+/**
+ * Create a new carrier
+ */
+Bob & CarrierDescr::create_object() const {return *new Carrier(*this);}
 
 }

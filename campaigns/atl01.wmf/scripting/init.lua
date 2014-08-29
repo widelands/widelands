@@ -74,7 +74,7 @@ end
 function send_building_lost_message(f)
 -- TODO: replace menu.png with representative_image as soon as this has been wrapped
    p1:send_message(_"Building lost!",
-      rt("image=tribes/atlanteans/".. f.immovable.name .."/menu.png",
+      rt("image=tribes/atlanteans/".. f.immovable.descr.name .."/menu.png",
          p(_"We lost a building to the ocean!")
       ), { field = f, popup = true }
    )
@@ -88,8 +88,8 @@ function initialize()
    p1:forbid_buildings{"shipyard"}
 
    -- A default headquarters
-   include "tribes/atlanteans/scripting/sc00_headquarters_medium.lua"
-   init.func(p1) -- defined in sc00_headquarters_medium
+   include "tribes/atlanteans/scripting/sc00_headquarters.lua"
+   init.func(p1) -- defined in sc00_headquarters
    set_textdomain("scenario_atl01.wmf")
    local hq = wl.Game().map.player_slots[1].starting_field.immovable
    hq:set_workers{shipwright=1}
@@ -206,7 +206,7 @@ function make_spidercloth_production()
    local o = add_obj(obj_spidercloth_production)
 
    while not check_for_buildings(p1, {
-      spiderfarm = 1, goldweaver = 1, ["weaving-mill"] = 1
+      spiderfarm = 1, ["gold-spinning-mill"] = 1, ["weaving-mill"] = 1
    }) do sleep(6273) end
    o.done = true
 
@@ -283,7 +283,7 @@ function check_for_ships()
          local bobs = f.bobs
          if #bobs then
             for idx, b in ipairs(bobs) do
-               if b.name == "ship" then
+               if b.descr.type_name == "ship" then
                   nships = nships + 1
                end
             end
@@ -324,11 +324,11 @@ function water_rising()
       if not f.immovable then return end
 
       -- Flags are not so interesting
-      if f.immovable.type == "flag" and
-         (f.tln.immovable and f.tln.immovable.building_type) then
+      if f.immovable.descr.type_name == "flag" and
+         (f.tln.immovable and is_building(f.tln.immovable)) then
          f = f.tln
       end
-      if f.immovable.building_type then
+      if is_building(f.immovable) then
          send_building_lost_message(f)
       end
    end

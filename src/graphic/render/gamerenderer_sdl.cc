@@ -32,7 +32,7 @@
 using namespace Widelands;
 
 ///This is used by rendermap to calculate the brightness of the terrain.
-inline static Sint8 node_brightness
+inline static int8_t node_brightness
 	(Widelands::Time   const gametime,
 	 Widelands::Time   const last_seen,
 	 Widelands::Vision const vision,
@@ -44,8 +44,8 @@ inline static Sint8 node_brightness
 		assert(last_seen <= gametime);
 		Widelands::Duration const time_ago = gametime - last_seen;
 		result =
-			static_cast<Sint16>
-			(((static_cast<Sint16>(result) + 128) >> 1)
+			static_cast<int16_t>
+			(((static_cast<int16_t>(result) + 128) >> 1)
 			 *
 			 (1.0 + (time_ago < 45000 ? expf(-8.46126929e-5 * time_ago) : 0)))
 			-
@@ -134,10 +134,10 @@ void GameRendererSDL::draw_terrain()
 			const Texture * f_d_texture;
 			const Texture * tr_d_texture;
 			uint8_t roads;
-			Sint8 f_brightness;
-			Sint8 r_brightness;
-			Sint8 bl_brightness;
-			Sint8 br_brightness;
+			int8_t f_brightness;
+			int8_t r_brightness;
+			int8_t bl_brightness;
+			int8_t br_brightness;
 
 			if (m_player && !m_player->see_all()) {
 				const Player::Field & f_pf = m_player->fields()[f_index];
@@ -257,14 +257,14 @@ void GameRendererSDL::draw_field
 		sdlsurf->set_subwin(dst.get_rect());
 		switch (sdlsurf->format().BytesPerPixel) {
 		case 2:
-			draw_field_int<Uint16>
+			draw_field_int<uint16_t>
 				(*sdlsurf,
 				 f_vert, r_vert, bl_vert, br_vert,
 				 roads,
 				 tr_d_texture, l_r_texture, f_d_texture, f_r_texture);
 			break;
 		case 4:
-			draw_field_int<Uint32>
+			draw_field_int<uint32_t>
 				(*sdlsurf,
 				 f_vert, r_vert, bl_vert, br_vert,
 				 roads,

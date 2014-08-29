@@ -21,8 +21,9 @@
 
 #include <vector>
 
+#include "base/i18n.h"
+#include "base/macros.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "logic/bob.h"
 #include "logic/game.h"
 #include "logic/map.h"
@@ -30,7 +31,6 @@
 #include "profile/profile.h"
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
-#include "upcast.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/interactive_player.h"
 #include "wui/mapview.h"
@@ -69,7 +69,7 @@ struct WatchWindow : public UI::Window {
 	void toggle_buttons();
 
 protected:
-	virtual void think() override;
+	void think() override;
 	void stop_tracking_by_drag(int32_t x, int32_t y);
 
 private:

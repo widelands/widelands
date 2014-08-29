@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef MAPDIFFERENCEREGION_H
-#define MAPDIFFERENCEREGION_H
+#ifndef WL_LOGIC_MAPDIFFERENCEREGION_H
+#define WL_LOGIC_MAPDIFFERENCEREGION_H
 
 #include "logic/map.h"
 
@@ -44,8 +44,8 @@ template <typename Area_type = Area<> > struct MapDifferenceRegion {
 	{
 		assert(1 <= direction);
 		assert     (direction <= 6);
-		--direction; if (not direction) direction = 6;
-		--direction; if (not direction) direction = 6;
+		--direction; if (!direction) direction = 6;
+		--direction; if (!direction) direction = 6;
 		switch (direction) {
 #define DIRECTION_CASE(dir, neighbour_function)                               \
       case dir:                                                               \
@@ -61,8 +61,8 @@ template <typename Area_type = Area<> > struct MapDifferenceRegion {
 		DIRECTION_CASE(WALK_W,  get_ln);
 #undef DIRECTION_CASE
 		}
-		--direction; if (not direction) direction = 6;
-		--direction; if (not direction) direction = 6;
+		--direction; if (!direction) direction = 6;
+		--direction; if (!direction) direction = 6;
 		m_direction = direction;
 	}
 
@@ -90,4 +90,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_MAPDIFFERENCEREGION_H

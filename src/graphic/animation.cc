@@ -22,6 +22,7 @@
 #include <cassert>
 #include <cstdio>
 #include <limits>
+#include <memory>
 
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/algorithm/string/split.hpp>
@@ -29,8 +30,11 @@
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 
-#include "constants.h"
-#include "container_iterate.h"
+#include "base/deprecated.h"
+#include "base/i18n.h"
+#include "base/log.h"
+#include "base/macros.h"
+#include "base/wexception.h"
 #include "graphic/diranimations.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
@@ -38,22 +42,66 @@
 #include "graphic/image_transformations.h"
 #include "graphic/surface.h"
 #include "graphic/surface_cache.h"
-#include "helper.h"
-#include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "log.h"
 #include "logic/bob.h"
 #include "logic/instances.h"
 #include "profile/profile.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
-#include "wexception.h"
 
 
 using namespace std;
 
 
 namespace  {
+
+/// A class that makes iteration over filename_?.png templates easy.
+class NumberGlob {
+public:
+	typedef uint32_t type;
+	NumberGlob(const std::string& pictmp);
+
+	/// If there is a next filename, puts it in 's' and returns true.
+	bool next(std::string* s);
+
+private:
+	std::string templ_;
+	std::string fmtstr_;
+	std::string replstr_;
+	uint32_t cur_;
+	uint32_t max_;
+
+	DISALLOW_COPY_AND_ASSIGN(NumberGlob);
+};
+
+/**
+ * Implemantation for NumberGlob.
+ */
+NumberGlob::NumberGlob(const string& pictmp) : templ_(pictmp), cur_(0) {
+	int nchars = count(pictmp.begin(), pictmp.end(), '?');
+	fmtstr_ = "%0" + boost::lexical_cast<string>(nchars) + "i";
+
+	max_ = 1;
+	for (int i = 0; i < nchars; ++i) {
+		max_ *= 10;
+		replstr_ += "?";
+	}
+	max_ -= 1;
+}
+
+bool NumberGlob::next(string* s) {
+	if (cur_ > max_)
+		return false;
+
+	if (max_) {
+		*s = boost::replace_last_copy(templ_, replstr_, (boost::format(fmtstr_) % cur_).str());
+	} else {
+		*s = templ_;
+	}
+	++cur_;
+	return true;
+}
+
 
 // Parses an array { 12, 23 } into a point.
 void get_point(const LuaTable& table, Point* p) {
@@ -66,41 +114,6 @@ void get_point(const LuaTable& table, Point* p) {
 }
 
 /**
- * An Image Implementation that draws a static animation into a surface.
- */
-class AnimationImage : public Image {
-public:
-	AnimationImage
-		(const string& ghash, const Animation* anim, const RGBColor& clr)
-		: hash_(ghash), anim_(anim), clr_(clr) {}
-	virtual ~AnimationImage() {}
-
-	// Implements Image.
-	virtual uint16_t width() const {return anim_->width();}
-	virtual uint16_t height() const {return anim_->height();}
-	virtual const string& hash() const {return hash_;}
-	virtual Surface* surface() const {
-		SurfaceCache& surface_cache = g_gr->surfaces();
-		Surface* surf = surface_cache.get(hash_);
-		if (surf)
-			return surf;
-
-		// Blit the animation on a freshly wiped surface.
-		surf = Surface::create(width(), height());
-		surf->fill_rect(Rect(0, 0, surf->width(), surf->height()), RGBAColor(255, 255, 255, 0));
-		anim_->blit(0, Point(0, 0), Rect(0, 0, width(), height()), &clr_, surf);
-		surface_cache.insert(hash_, surf, true);
-
-		return surf;
-	}
-
-private:
-	const string hash_;
-	const Animation* const anim_;   // Not owned.
-	const RGBColor clr_;
-};
-
-/**
  * Implements the Animation interface for an animation that is unpacked on disk, that
  * is every frame and every pc color frame is an singular file on disk.
  */
@@ -111,16 +124,16 @@ public:
 	NonPackedAnimation(const LuaTable& table);
 
 	// Implements Animation.
-	virtual uint16_t width() const override;
-	virtual uint16_t height() const override;
-	virtual uint16_t nr_frames() const override;
-	virtual uint32_t frametime() const override;
-	virtual const Point& hotspot() const override;
-	virtual const Image& representative_image(const RGBColor& clr) const override;
-	virtual const Image& representative_image_from_disk() const override;
+	uint16_t width() const override;
+	uint16_t height() const override;
+	uint16_t nr_frames() const override;
+	uint32_t frametime() const override;
+	const Point& hotspot() const override;
+	const Image& representative_image(const RGBColor& clr) const override;
+	const Image& representative_image_from_disk() const override;
 	virtual void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*)
 	   const override;
-	virtual void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const override;
+	void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const override;
 
 
 private:
@@ -224,7 +237,7 @@ void NonPackedAnimation::load_graphics() {
 	if (image_files_.empty())
 		throw wexception("animation without pictures.");
 
-	if (pc_mask_image_files_.size() and pc_mask_image_files_.size() != image_files_.size())
+	if (pc_mask_image_files_.size() && pc_mask_image_files_.size() != image_files_.size())
 		throw wexception
 			("animation has %" PRIuS " frames but playercolor mask has %" PRIuS " frames",
 			 image_files_.size(), pc_mask_image_files_.size());
@@ -232,7 +245,7 @@ void NonPackedAnimation::load_graphics() {
 	for (const std::string& filename : image_files_) {
 		const Image* image = g_gr->images().get(filename);
 		if (frames_.size() &&
-		    (frames_[0]->width() != image->width() or frames_[0]->height() != image->height())) {
+		    (frames_[0]->width() != image->width() || frames_[0]->height() != image->height())) {
 			throw wexception("wrong size: (%u, %u), should be (%u, %u) like the first frame",
 			                 image->width(),
 			                 image->height(),
@@ -243,10 +256,11 @@ void NonPackedAnimation::load_graphics() {
 	}
 
 	for (const std::string& filename : pc_mask_image_files_) {
-		// TODO Do not load playercolor mask as opengl texture or use it as
+		// TODO(unknown): Do not load playercolor mask as opengl texture or use it as
 		//     opengl texture.
 		const Image* pc_image = g_gr->images().get(filename);
-		if (frames_[0]->width() != pc_image->width() or frames_[0]->height() != pc_image->height()) {
+		if (frames_[0]->width() != pc_image->width() || frames_[0]->height() != pc_image->height()) {
+			// TODO(unknown): see bug #1324642
 			throw wexception("playercolor mask has wrong size: (%u, %u), should "
 			                 "be (%u, %u) like the animation frame",
 			                 pc_image->width(),
@@ -370,7 +384,7 @@ DirAnimations::DirAnimations
  * @param optional No error if animations do not exist
  */
 void DirAnimations::parse
-	(Widelands::Map_Object_Descr & b,
+	(Widelands::MapObjectDescr & b,
 	 const string & directory,
 	 Profile & prof,
 	 const string & name,

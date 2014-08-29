@@ -25,16 +25,15 @@
 #include <boost/lambda/construct.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/type_traits.hpp>
-#include <libintl.h>
 
-#include "debugconsole.h"
+#include "base/i18n.h"
+#include "base/macros.h"
 #include "economy/flag.h"
 #include "game_io/game_loader.h"
 #include "graphic/font_handler.h"
-#include "helper.h"
-#include "i18n.h"
 #include "logic/building.h"
 #include "logic/cmd_queue.h"
+#include "logic/constants.h"
 #include "logic/constructionsite.h"
 #include "logic/immovable.h"
 #include "logic/message_queue.h"
@@ -44,8 +43,8 @@
 #include "logic/tribe.h"
 #include "profile/profile.h"
 #include "ui_basic/unique_window.h"
-#include "upcast.h"
 #include "wui/building_statistics_menu.h"
+#include "wui/debugconsole.h"
 #include "wui/encyclopedia_window.h"
 #include "wui/fieldaction.h"
 #include "wui/game_chat_menu.h"
@@ -64,6 +63,8 @@ using Widelands::Map;
 using boost::format;
 
 
+namespace  {
+
 // This function is the callback for recalculation of field overlays
 int32_t Int_Player_overlay_callback_function
 	(Widelands::TCoords<Widelands::FCoords> const c, Interactive_Player& iap)
@@ -72,11 +73,12 @@ int32_t Int_Player_overlay_callback_function
 	return iap.get_player()->get_buildcaps(c);
 }
 
+}  // namespace
+
 Interactive_Player::Interactive_Player
 	(Widelands::Game        &       _game,
 	 Section                &       global_s,
 	 Widelands::Player_Number const plyn,
-	 bool                     const scenario,
 	 bool                     const multiplayer)
 	:
 	Interactive_GameBase (_game, global_s, NONE, multiplayer, multiplayer),
@@ -142,7 +144,7 @@ m_toggle_help
 	m_toggle_help.sigclicked.connect
 		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_encyclopedia)));
 
-	// TODO : instead of making unneeded buttons invisible after generation,
+	// TODO(unknown): instead of making unneeded buttons invisible after generation,
 	// they should not at all be generated. -> implement more dynamic toolbar UI
 	m_toolbar.add(&m_toggle_options_menu,    UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_statistics_menu, UI::Box::AlignLeft);
@@ -155,10 +157,7 @@ m_toggle_help
 	}
 
 	m_toolbar.add(&m_toggle_help,            UI::Box::AlignLeft);
-	if (not scenario)
-		m_toggle_objectives.set_visible(false);
-	else
-		m_toolbar.add(&m_toggle_objectives,      UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_objectives,      UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_message_menu,    UI::Box::AlignLeft);
 
 	set_player_number(plyn);
@@ -229,7 +228,7 @@ void Interactive_Player::think()
 	if (m_flag_to_connect) {
 		Widelands::Field & field = egbase().map()[m_flag_to_connect];
 		if (upcast(Widelands::Flag const, flag, field.get_immovable())) {
-			if (not flag->has_road() and not is_building_road())
+			if (!flag->has_road() && !is_building_road())
 				if (m_auto_roadbuild_mode) {
 					//  There might be a fieldaction window open, showing a button
 					//  for roadbuilding. If that dialog remains open so that the
@@ -255,19 +254,16 @@ void Interactive_Player::think()
 		m_toggle_chat.set_enabled(m_chatenabled);
 	}
 	{
-		char         buffer[128];
-		char const * msg_icon    = "pics/menu_toggle_oldmessage_menu.png";
-		char const * msg_tooltip = _("Messages");
+		char const * msg_icon = "pics/menu_toggle_oldmessage_menu.png";
+		std::string msg_tooltip = _("Messages");
 		if
 			(uint32_t const nr_new_messages =
 			 	player().messages().nr_messages(Widelands::Message::New))
 		{
 			msg_icon    = "pics/menu_toggle_newmessage_menu.png";
-			snprintf
-				(buffer, sizeof(buffer),
-				 ngettext("%u new message", "%u new messages", nr_new_messages),
-				 nr_new_messages);
-			msg_tooltip = buffer;
+			msg_tooltip =
+			   (boost::format(ngettext("%u new message", "%u new messages", nr_new_messages)) %
+			    nr_new_messages).str();
 		}
 		m_toggle_message_menu.set_pic(g_gr->images().get(msg_icon));
 		m_toggle_message_menu.set_tooltip(msg_tooltip);
@@ -325,7 +321,7 @@ void Interactive_Player::toggle_chat() {
 
 bool Interactive_Player::can_see(Widelands::Player_Number const p) const
 {
-	return p == player_number() or player().see_all();
+	return p == player_number() || player().see_all();
 }
 bool Interactive_Player::can_act(Widelands::Player_Number const p) const
 {

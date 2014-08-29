@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef GL_SURFACE_TEXTURE_H
-#define GL_SURFACE_TEXTURE_H
+#ifndef WL_GRAPHIC_RENDER_GL_SURFACE_TEXTURE_H
+#define WL_GRAPHIC_RENDER_GL_SURFACE_TEXTURE_H
 
 #include "graphic/render/gl_surface.h"
 
@@ -37,10 +37,10 @@ public:
 
 	/// Interface implementation
 	//@{
-	virtual void lock(LockMode) override;
-	virtual void unlock(UnlockMode) override;
-	virtual uint16_t get_pitch() const override;
-	virtual const SDL_PixelFormat & format() const override;
+	void lock(LockMode) override;
+	void unlock(UnlockMode) override;
+	uint16_t get_pitch() const override;
+	const SDL_PixelFormat & format() const override;
 
 	// Note: the following functions are reimplemented here though they
 	// basically only call the functions in GLSurface wrapped in calls to
@@ -49,12 +49,12 @@ public:
 	// especially for blit which is called very often and mostly on the screen,
 	// this costs two virtual function calls which makes a notable difference in
 	// profiles.
-	virtual void fill_rect(const Rect&, RGBAColor) override;
-	virtual void draw_rect(const Rect&, RGBColor) override;
-	virtual void brighten_rect(const Rect&, int32_t factor) override;
+	void fill_rect(const Rect&, RGBAColor) override;
+	void draw_rect(const Rect&, RGBColor) override;
+	void brighten_rect(const Rect&, int32_t factor) override;
 	virtual void draw_line
 		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor&, uint8_t width) override;
-	virtual void blit(const Point&, const Surface*, const Rect& srcrc, Composite cm) override;
+	void blit(const Point&, const Surface*, const Rect& srcrc, Composite cm) override;
 
 	GLuint get_gl_texture() const {return m_texture;}
 	uint16_t get_tex_w() const {return m_tex_w;}
@@ -73,4 +73,4 @@ private:
 	uint16_t m_tex_w, m_tex_h;
 };
 
-#endif //GL_SURFACE_TEXTURE_H
+#endif  // end of include guard: WL_GRAPHIC_RENDER_GL_SURFACE_TEXTURE_H

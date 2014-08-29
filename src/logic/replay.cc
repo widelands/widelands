@@ -19,19 +19,19 @@
 
 #include "logic/replay.h"
 
+#include "base/log.h"
+#include "base/md5.h"
+#include "base/wexception.h"
 #include "game_io/game_loader.h"
-#include "gamecontroller.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"
-#include "log.h"
 #include "logic/game.h"
+#include "logic/game_controller.h"
 #include "logic/game_data_error.h"
 #include "logic/playercommand.h"
-#include "md5.h"
-#include "random.h"
-#include "save_handler.h"
-#include "wexception.h"
+#include "logic/save_handler.h"
+#include "random/random.h"
 
 namespace Widelands {
 
@@ -54,7 +54,7 @@ public:
 		: Command(_duetime), m_hash(hash)
 	{}
 
-	virtual uint8_t id() const override {return QUEUE_CMD_REPLAYSYNCREAD;}
+	uint8_t id() const override {return QUEUE_CMD_REPLAYSYNCREAD;}
 
 	void execute(Game & game) override
 	{
@@ -208,7 +208,7 @@ class Cmd_ReplaySyncWrite : public Command {
 public:
 	Cmd_ReplaySyncWrite(const uint32_t _duetime) : Command(_duetime) {}
 
-	virtual uint8_t id() const override {return QUEUE_CMD_REPLAYSYNCWRITE;}
+	uint8_t id() const override {return QUEUE_CMD_REPLAYSYNCWRITE;}
 
 	void execute(Game & game) override {
 		if (ReplayWriter * const rw = game.get_replaywriter()) {

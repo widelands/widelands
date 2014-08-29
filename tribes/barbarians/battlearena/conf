@@ -30,9 +30,12 @@ min_level=0
 max_level=1
 
 [programs]
-sleep=_Sleep
-upgrade_soldier_evade_0=_Upgrade soldier evade from level 0 to level 1
-upgrade_soldier_evade_1=_Upgrade soldier evade from level 1 to level 2
+# TRANSLATORS: "Completed/Skipped/Did not start sleeping because ...
+sleep=_sleeping
+# TRANSLATORS: "Completed/Skipped/Did not start upgrading ... because ...
+upgrade_soldier_evade_0=_upgrading soldier evade from level 0 to level 1
+# TRANSLATORS: "Completed/Skipped/Did not start upgrading ... because ...
+upgrade_soldier_evade_1=_upgrading soldier evade from level 1 to level 2
 
 [sleep]
 sleep=5000
@@ -41,18 +44,23 @@ check_soldier=soldier attack 9    # dummy check to get sleep rated as skipped - 
 [upgrade_soldier_evade_0]
 check_soldier=soldier evade 0 # Fails when aren't any soldier of level 0 evade
 sleep=15000
-animate=working 15000
 check_soldier=soldier evade 0 # Because the soldier can be expulsed by the player
 consume=pittabread fish,meat strongbeer
+animate=working 15000
 train=soldier evade 0 1
 
 [upgrade_soldier_evade_1]
 check_soldier=soldier evade 1 # Fails when aren't any soldier of level 1 evade
 sleep=15000
-animate=working 15000
 check_soldier=soldier evade 1 # Because the soldier can be expulsed by the player
 consume=pittabread:2 fish,meat strongbeer
+animate=working 15000
 train=soldier evade 1 2
+
+[idle]
+pics=battlearena_i_??.png  # ???
+hotspot=110 72
+fps=10
 
 [build]
 pics=battlearena_b_??.png
@@ -61,11 +69,6 @@ hotspot=110 72
 [unoccupied]
 pics=battlearena_u_??.png
 hotspot=110 72
-
-[idle]
-pics=battlearena_i_??.png  # ???
-hotspot=110 72
-fps=10
 
 [working]
 pics=battlearena_w_??.png  # ???

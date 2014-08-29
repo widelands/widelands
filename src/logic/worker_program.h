@@ -17,28 +17,28 @@
  *
  */
 
-#ifndef WORKER_PROGRAM_H
-#define WORKER_PROGRAM_H
+#ifndef WL_LOGIC_WORKER_PROGRAM_H
+#define WL_LOGIC_WORKER_PROGRAM_H
 
 #include "logic/bob.h"
-#include "workarea_info.h"
+#include "logic/workarea_info.h"
 #include "logic/worker.h"
 
 namespace Widelands {
 
-/// \todo (Antonio Trueba#1#): Get rid of forward class
-/// declaration (Chicken-and-egg problem)
-class Worker_Descr;
+// TODO(Antonio Trueba#1#): Get rid of forward class
+// declaration (Chicken-and-egg problem)
+class WorkerDescr;
 
 struct WorkerProgram : public BobProgramBase {
 	struct Parser {
-		Worker_Descr     * descr;
+		WorkerDescr     * descr;
 		std::string        directory;
 		Profile          * prof;
 	};
 
 	typedef void (WorkerProgram::*parse_t)
-		(Worker_Descr                   *,
+		(WorkerDescr                   *,
 		 Worker::Action                 *,
 		 Parser                         *,
 		 const std::vector<std::string> &);
@@ -56,7 +56,7 @@ struct WorkerProgram : public BobProgramBase {
 		return &m_actions[idx];
 	}
 
-	void parse(Worker_Descr *, Parser *, char const * name);
+	void parse(WorkerDescr *, Parser *, char const * name);
 	const Workarea_Info & get_workarea_info() const {return m_workarea_info;}
 
 private:
@@ -67,97 +67,97 @@ private:
 	};
 
 	void parse_mine
-		(Worker_Descr                   *,
+		(WorkerDescr                   *,
 		 Worker::Action                 *,
 		 Parser                         *,
 		 const std::vector<std::string> & cmd);
 	void parse_breed
-		(Worker_Descr                   *,
+		(WorkerDescr                   *,
 		 Worker::Action                 *,
 		 Parser                         *,
 		 const std::vector<std::string> & cmd);
 	void parse_createware
-		(Worker_Descr                   *,
+		(WorkerDescr                   *,
 		 Worker::Action                 *,
 		 Parser                         *,
 		 const std::vector<std::string> & cmd);
 	void parse_setdescription
-		(Worker_Descr                   *,
+		(WorkerDescr                   *,
 		 Worker::Action                 *,
 		 Parser                         *,
 		 const std::vector<std::string> & cmd);
 	void parse_setbobdescription
-		(Worker_Descr                   *,
+		(WorkerDescr                   *,
 		 Worker::Action                 *,
 		 Parser                         *,
 		 const std::vector<std::string> & cmd);
 	void parse_findobject
-		(Worker_Descr                   *,
+		(WorkerDescr                   *,
 		 Worker::Action                 *,
 		 Parser                         *,
 		 const std::vector<std::string> & cmd);
 	void parse_findspace
-		(Worker_Descr                   *,
+		(WorkerDescr                   *,
 		 Worker::Action                 *,
 		 Parser                         *,
 		 const std::vector<std::string> & cmd);
 	void parse_walk
-		(Worker_Descr                   *,
+		(WorkerDescr                   *,
 		 Worker::Action                 *,
 		 Parser                         *,
 		 const std::vector<std::string> & cmd);
 	void parse_animation
-		(Worker_Descr                   *,
+		(WorkerDescr                   *,
 		 Worker::Action                 *,
 		 Parser                         *,
 		 const std::vector<std::string> & cmd);
 	void parse_return
-		(Worker_Descr                   *,
+		(WorkerDescr                   *,
 		 Worker::Action                 *,
 		 Parser                         *,
 		 const std::vector<std::string> & cmd);
 	void parse_object
-		(Worker_Descr                   *,
+		(WorkerDescr                   *,
 		 Worker::Action                 *,
 		 Parser                         *,
 		 const std::vector<std::string> & cmd);
 	void parse_plant
-		(Worker_Descr                   *,
+		(WorkerDescr                   *,
 		 Worker::Action                 *,
 		 Parser                         *,
 		 const std::vector<std::string> & cmd);
 	void parse_create_bob
-		(Worker_Descr                   *,
+		(WorkerDescr                   *,
 		 Worker::Action                 *,
 		 Parser                         *,
 		 const std::vector<std::string> & cmd);
 	void parse_removeobject
-		(Worker_Descr                   *,
+		(WorkerDescr                   *,
 		 Worker::Action                 *,
 		 Parser                         *,
 		 const std::vector<std::string> & cmd);
 	void parse_geologist
-		(Worker_Descr                   *,
+		(WorkerDescr                   *,
 		 Worker::Action                 *,
 		 Parser                         *,
 		 const std::vector<std::string> & cmd);
 	void parse_geologist_find
-		(Worker_Descr                   *,
+		(WorkerDescr                   *,
 		 Worker::Action                 *,
 		 Parser                         *,
 		 const std::vector<std::string> & cmd);
 	void parse_scout
-		(Worker_Descr                   *,
+		(WorkerDescr                   *,
 		 Worker::Action                 *,
 		 Parser                         *,
 		 const std::vector<std::string> & cmd);
 	void parse_playFX
-		(Worker_Descr                   *,
+		(WorkerDescr                   *,
 		 Worker::Action                 *,
 		 Parser                         *,
 		 const std::vector<std::string> & cmd);
 	void parse_construct
-		(Worker_Descr                   *,
+		(WorkerDescr                   *,
 		 Worker::Action                 *,
 		 Parser                         *,
 		 const std::vector<std::string> & cmd);
@@ -169,4 +169,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_WORKER_PROGRAM_H

@@ -19,11 +19,11 @@
 
 #include "logic/findimmovable.h"
 
+#include "base/macros.h"
 #include "economy/flag.h"
 #include "logic/attackable.h"
 #include "logic/immovable.h"
 #include "logic/militarysite.h"
-#include "upcast.h"
 
 namespace Widelands {
 
@@ -43,7 +43,7 @@ bool FindImmovableSize              ::accept(const BaseImmovable & imm) const {
 }
 
 bool FindImmovableType              ::accept(const BaseImmovable & imm) const {
-	return m_type == imm.get_type();
+	return m_type == imm.descr().type();
 }
 
 bool FindImmovableAttribute         ::accept(const BaseImmovable & imm) const {

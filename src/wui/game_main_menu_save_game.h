@@ -17,11 +17,11 @@
  *
  */
 
-#ifndef GAME_MAIN_MENU_SAVE_GAME_H
-#define GAME_MAIN_MENU_SAVE_GAME_H
+#ifndef WL_WUI_GAME_MAIN_MENU_SAVE_GAME_H
+#define WL_WUI_GAME_MAIN_MENU_SAVE_GAME_H
 
-#include "i18n.h"
-#include "ref_cast.h"
+#include "base/deprecated.h"
+#include "base/i18n.h"
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/listselect.h"
@@ -40,7 +40,7 @@ struct Game_Main_Menu_Save_Game : public UI::UniqueWindow {
 	void fill_list();
 	void select_by_name(std::string name);
 protected:
-	virtual void die() override;
+	void die() override;
 private:
 	Interactive_GameBase & igbase();
 	void selected      (uint32_t);
@@ -63,4 +63,4 @@ private:
 	bool m_overwrite;
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_GAME_MAIN_MENU_SAVE_GAME_H

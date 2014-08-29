@@ -17,13 +17,12 @@
  *
  */
 
-#ifndef GAME_MESSAGE_MENU_H
-#define GAME_MESSAGE_MENU_H
+#ifndef WL_WUI_GAME_MESSAGE_MENU_H
+#define WL_WUI_GAME_MESSAGE_MENU_H
 
-#include "container_iterate.h"
-#include "i18n.h"
+#include "base/deprecated.h"
+#include "base/i18n.h"
 #include "logic/message_queue.h"
-#include "ref_cast.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/table.h"
@@ -32,7 +31,7 @@
 namespace Widelands {
 class Game;
 struct Message;
-};
+}
 class Interactive_Player;
 
 ///  Shows the not already fulfilled objectives.
@@ -46,7 +45,7 @@ struct GameMessageMenu : public UI::UniqueWindow {
 
 	enum Mode {Inbox, Archive};
 	void think() override;
-	virtual bool handle_key(bool down, SDL_keysym code) override;
+	bool handle_key(bool down, SDL_keysym code) override;
 
 private:
 	enum Cols {ColSelect, ColStatus, ColTitle, ColTimeSent};
@@ -71,4 +70,4 @@ private:
 	Mode mode;
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_GAME_MESSAGE_MENU_H

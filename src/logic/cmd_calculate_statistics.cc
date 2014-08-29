@@ -21,6 +21,7 @@
 
 #include "io/fileread.h"
 #include "io/filewrite.h"
+#include "logic/constants.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 
@@ -35,7 +36,7 @@ void Cmd_CalculateStatistics::execute (Game & game) {
 
 #define CMD_CALCULATE_STATISTICS_VERSION 1
 void Cmd_CalculateStatistics::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -49,7 +50,7 @@ void Cmd_CalculateStatistics::Read
 	}
 }
 void Cmd_CalculateStatistics::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(CMD_CALCULATE_STATISTICS_VERSION);
 	GameLogicCommand::Write(fw, egbase, mos);

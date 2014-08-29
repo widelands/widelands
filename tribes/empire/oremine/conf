@@ -2,6 +2,11 @@ size=mine
 output=ironore
 enhancement=deep_oremine
 
+[aihints]
+build_material=false
+mines=iron
+mines_percent=50
+
 [buildcost]
 log=4
 wood=2
@@ -13,22 +18,17 @@ wood=1
 [working positions]
 miner=1
 
-[aihints]
-build_material=false
-mines=iron
-mines_percent=50
-
 [inputs]
 ration=6
 beer=6
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start mining because ...
+work=_mining
 
 [work]
-return=skipped unless economy needs ironore or not economy needs ration
-return=skipped unless economy needs ironore or not economy needs beer
 sleep=45000
+return=skipped unless economy needs ironore
 consume=ration beer
 animate=working 20000
 mine=iron 2 50 5 17
@@ -36,6 +36,10 @@ produce=ironore
 animate=working 20000
 mine=iron 2 50 5 17
 produce=ironore:2
+
+[out_of_resource_notification]
+title=_Main Iron Vein Exhausted
+message=_This iron mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it.
 
 [idle]
 pics=oremine_i_??.png

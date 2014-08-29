@@ -42,7 +42,7 @@ struct MilitarySite_Window : public Building_Window {
 	}
 
 protected:
-	virtual void create_capsbuttons(UI::Box * buttons) override;
+	void create_capsbuttons(UI::Box * buttons) override;
 };
 
 

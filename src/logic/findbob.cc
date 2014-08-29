@@ -19,9 +19,9 @@
 
 #include "logic/findbob.h"
 
+#include "base/macros.h"
 #include "logic/player.h"
 #include "logic/soldier.h"
-#include "upcast.h"
 
 namespace Widelands {
 
@@ -44,7 +44,13 @@ bool FindBobEnemySoldier::accept(Bob * const imm) const
 
 bool FindBobShip::accept(Bob * bob) const
 {
-	return bob->get_bob_type() == Bob::SHIP;
+	return bob->descr().type() == MapObjectType::SHIP;
 }
+
+bool FindBobCritter::accept(Bob * bob) const
+{
+	return bob->descr().type() == MapObjectType::CRITTER;
+}
+
 
 } // namespace Widelands

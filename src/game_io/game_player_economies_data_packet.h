@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef GAME_PLAYER_ECONOMIES_DATA_PACKET_H
-#define GAME_PLAYER_ECONOMIES_DATA_PACKET_H
+#ifndef WL_GAME_IO_GAME_PLAYER_ECONOMIES_DATA_PACKET_H
+#define WL_GAME_IO_GAME_PLAYER_ECONOMIES_DATA_PACKET_H
 
 #include "game_io/game_data_packet.h"
 
@@ -28,10 +28,10 @@ namespace Widelands {
  * how many and which economies does a player have?
  */
 struct Game_Player_Economies_Data_Packet : public Game_Data_Packet {
-	void Read (FileSystem &, Game &, Map_Map_Object_Loader * = nullptr) override;
-	void Write(FileSystem &, Game &, Map_Map_Object_Saver  * = nullptr) override;
+	void Read (FileSystem &, Game &, MapMapObjectLoader * = nullptr) override;
+	void Write(FileSystem &, Game &, MapMapObjectSaver  * = nullptr) override;
 };
 
 }
 
-#endif
+#endif  // end of include guard: WL_GAME_IO_GAME_PLAYER_ECONOMIES_DATA_PACKET_H

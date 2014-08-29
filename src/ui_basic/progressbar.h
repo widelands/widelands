@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef UI_PROGRESSBAR_H
-#define UI_PROGRESSBAR_H
+#ifndef WL_UI_BASIC_PROGRESSBAR_H
+#define WL_UI_BASIC_PROGRESSBAR_H
 
 #include "ui_basic/panel.h"
 
@@ -51,7 +51,7 @@ public:
 	void set_total(uint32_t);
 
 protected:
-	virtual void draw(RenderTarget &) override;
+	void draw(RenderTarget &) override;
 
 private:
 	uint32_t m_orientation;
@@ -61,4 +61,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_PROGRESSBAR_H

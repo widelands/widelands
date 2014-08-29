@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef LOGIC_FINDBOB_H
-#define LOGIC_FINDBOB_H
+#ifndef WL_LOGIC_FINDBOB_H
+#define WL_LOGIC_FINDBOB_H
 
 #include "logic/map.h"
 
@@ -29,7 +29,7 @@ class Player;
 struct FindBobAttribute : public FindBob {
 	FindBobAttribute(uint32_t const attrib) : m_attrib(attrib) {}
 
-	virtual bool accept(Bob *) const override;
+	bool accept(Bob *) const override;
 
 	uint32_t m_attrib;
 	virtual ~FindBobAttribute() {}  // make gcc shut up
@@ -42,16 +42,20 @@ struct FindBobAttribute : public FindBob {
 struct FindBobEnemySoldier : public FindBob {
 	FindBobEnemySoldier(Player * _player) : player(_player) {}
 
-	virtual bool accept(Bob *) const override;
+	bool accept(Bob *) const override;
 
 	Player * player;
 };
 
 struct FindBobShip : FindBob {
-	virtual bool accept(Bob * bob) const override;
+	bool accept(Bob * bob) const override;
+};
+
+struct FindBobCritter : FindBob {
+	bool accept(Bob * bob) const override;
 };
 
 
 } // namespace Widelands
 
-#endif // LOGIC_FINDBOB_H
+#endif  // end of include guard: WL_LOGIC_FINDBOB_H

@@ -35,7 +35,7 @@ namespace Widelands {
 
 
 void Game_Interactive_Player_Data_Packet::Read
-	(FileSystem & fs, Game & game, Map_Map_Object_Loader *)
+	(FileSystem & fs, Game & game, MapMapObjectLoader *)
 {
 	try {
 		FileRead fr;
@@ -47,7 +47,7 @@ void Game_Interactive_Player_Data_Packet::Read
 				throw game_data_error("Invalid player number: %i.", player_number);
 			}
 
-			if (not game.get_player(player_number)) {
+			if (!game.get_player(player_number)) {
 				// This happens if the player, that saved the game, was a spectator
 				// and the slot for player 1 was not used in the game.
 				// So now we try to create an InteractivePlayer object for another
@@ -89,7 +89,7 @@ void Game_Interactive_Player_Data_Packet::Read
  * Write Function
  */
 void Game_Interactive_Player_Data_Packet::Write
-	(FileSystem & fs, Game & game, Map_Map_Object_Saver * const)
+	(FileSystem & fs, Game & game, MapMapObjectSaver * const)
 {
 	FileWrite fw;
 

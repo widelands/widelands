@@ -22,6 +22,8 @@
 #include <cstdio>
 #include <sstream>
 
+#include "base/macros.h"
+#include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/request.h"
 #include "graphic/font.h"
@@ -41,25 +43,23 @@
 #include "logic/worker.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
-#include "text_layout.h"
-#include "upcast.h"
-#include "wexception.h"
 #include "wui/interactive_player.h"
+#include "wui/text_layout.h"
 
 namespace Widelands {
 
 static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
 
 
-Building_Descr::Building_Descr
-	(char const * const _name, char const * const _descname,
+BuildingDescr::BuildingDescr
+	(const MapObjectType _type, char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _descr)
 	:
-	Map_Object_Descr(_name, _descname),
+	MapObjectDescr(_type, _name, _descname),
 	m_tribe         (_descr),
 	m_buildable     (true),
-	m_buildicon     (nullptr),
+	m_icon     (nullptr),
 	m_size          (BaseImmovable::SMALL),
 	m_mine          (false),
 	m_port          (false),
@@ -90,51 +90,45 @@ Building_Descr::Building_Descr
 	}
 
 	m_helptext_script = directory + "/help.lua";
-	if (not g_fs->FileExists(m_helptext_script))
+	if (!g_fs->FileExists(m_helptext_script))
 		m_helptext_script = "";
 
 	// Parse build options
 	m_buildable = global_s.get_bool("buildable", true);
 	m_destructible = global_s.get_bool("destructible", true);
-	while
-		(Section::Value const * const v = global_s.get_next_val("enhancement"))
-		try {
-			std::string const target_name = v->get_string();
-			if (target_name == name())
-				throw wexception("enhancement to same type");
-			if (target_name == "constructionsite")
-				throw wexception("enhancement to special type constructionsite");
-			Building_Index const en_i = tribe().building_index(target_name);
-			if (en_i != INVALID_INDEX) {
-				if (enhancements().count(en_i))
-					throw wexception("this has already been declared");
-				m_enhancements.insert(en_i);
+	m_enhancement = INVALID_INDEX;
 
-				//  Merge the enhancements workarea info into this building's
-				//  workarea info.
-				const Building_Descr & enhancement =
-					*tribe().get_building_descr(en_i);
-				container_iterate_const
-					(Workarea_Info, enhancement.m_workarea_info, j)
-				{
-					std::set<std::string> & r = m_workarea_info[j.current->first];
-					container_iterate_const
-						(std::set<std::string>, j.current->second, i)
-						r.insert(*i.current);
-				}
-			} else
-				throw wexception
-					("\"%s\" has not been defined as a building type (wrong declaration order?)",
-					 target_name.c_str());
-		} catch (const _wexception & e) {
-			throw wexception("\"enhancements=%s\": %s", v->get_string(), e.what());
-		}
+	if (Section::Value const * const enVal = global_s.get_next_val("enhancement"))
+	{
+		std::string const target_name = enVal->get_string();
+		if (target_name == name())
+			throw wexception("enhancement to same type");
+		Building_Index const en_i = tribe().building_index(target_name);
+		if (en_i != INVALID_INDEX) {
+			m_enhancement = en_i;
+
+			//  Merge the enhancements workarea info into this building's
+			//  workarea info.
+			const BuildingDescr * tmp_enhancement =
+				tribe().get_building_descr(en_i);
+			for (std::pair<uint32_t, std::set<std::string>> area : tmp_enhancement->m_workarea_info)
+			{
+				std::set<std::string> & strs = m_workarea_info[area.first];
+				for (std::string str : area.second)
+					strs.insert(str);
+			}
+		} else
+			throw wexception
+				("\"%s\" has not been defined as a building type (wrong declaration order?)",
+				target_name.c_str());
+	}
+
 	m_enhanced_building = global_s.get_bool("enhanced_building", false);
 	m_global = directory.find("global/") < directory.size();
 	if (m_buildable || m_enhanced_building) {
 		//  get build icon
-		m_buildicon_fname  = directory;
-		m_buildicon_fname += "/menu.png";
+		m_icon_fname  = directory;
+		m_icon_fname += "/menu.png";
 
 		//  build animation
 		if (Section * const build_s = prof.get_section("build")) {
@@ -160,8 +154,8 @@ Building_Descr::Building_Descr
 		}
 	} else if (m_global) {
 		//  get build icon for global buildings (for statistics window)
-		m_buildicon_fname  = directory;
-		m_buildicon_fname += "/menu.png";
+		m_icon_fname  = directory;
+		m_icon_fname += "/menu.png";
 	}
 
 	{ //  parse basic animation data
@@ -180,7 +174,7 @@ Building_Descr::Building_Descr
 }
 
 
-Building & Building_Descr::create
+Building & BuildingDescr::create
 	(Editor_Game_Base     &       egbase,
 	 Player               &       owner,
 	 Coords                 const pos,
@@ -204,7 +198,7 @@ Building & Building_Descr::create
 }
 
 
-int32_t Building_Descr::suitability(const Map &, FCoords const fc) const {
+int32_t BuildingDescr::suitability(const Map &, FCoords const fc) const {
 	return m_size <= (fc.field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK);
 }
 
@@ -213,7 +207,7 @@ int32_t Building_Descr::suitability(const Map &, FCoords const fc) const {
  *
  * \return the radius of the conquered area.
  */
-uint32_t Building_Descr::get_conquers() const
+uint32_t BuildingDescr::get_conquers() const
 {
 	return 0;
 }
@@ -223,7 +217,7 @@ uint32_t Building_Descr::get_conquers() const
  * \return the radius (in number of fields) of the area seen by this
  * building.
  */
-uint32_t Building_Descr::vision_range() const
+uint32_t BuildingDescr::vision_range() const
 {
 	return m_vision_range ? m_vision_range : get_conquers() + 4;
 }
@@ -234,10 +228,10 @@ uint32_t Building_Descr::vision_range() const
 Called whenever building graphics need to be loaded.
 ===============
 */
-void Building_Descr::load_graphics()
+void BuildingDescr::load_graphics()
 {
-	if (m_buildicon_fname.size())
-		m_buildicon = g_gr->images().get(m_buildicon_fname);
+	if (!m_icon_fname.empty())
+		m_icon = g_gr->images().get(m_icon_fname);
 }
 
 /*
@@ -245,13 +239,13 @@ void Building_Descr::load_graphics()
 Create a construction site for this type of building
 ===============
 */
-Building & Building_Descr::create_constructionsite() const
+Building & BuildingDescr::create_constructionsite() const
 {
-	Building_Descr const * const descr =
+	BuildingDescr const * const descr =
 		m_tribe.get_building_descr
 			(m_tribe.safe_building_index("constructionsite"));
 	ConstructionSite & csite =
-		ref_cast<ConstructionSite, Map_Object>(descr->create_object());
+		ref_cast<ConstructionSite, MapObject>(descr->create_object());
 	csite.set_building(*this);
 
 	return csite;
@@ -266,7 +260,7 @@ Implementation
 ==============================
 */
 
-Building::Building(const Building_Descr & building_descr) :
+Building::Building(const BuildingDescr & building_descr) :
 PlayerImmovable(building_descr),
 m_optionswindow(nullptr),
 m_flag         (nullptr),
@@ -299,7 +293,7 @@ void Building::load_finish(Editor_Game_Base & egbase) {
 		}
 
 		Bob::State const* const state = worker.get_state(Worker::taskLeavebuilding);
-		if (not state) {
+		if (!state) {
 			log
 				("WARNING: worker %u is in the leave queue of building %u but "
 				 "does not have a leavebuilding task! Removing from queue.\n",
@@ -323,8 +317,6 @@ void Building::load_finish(Editor_Game_Base & egbase) {
 	   m_leave_queue.end());
 }
 
-int32_t Building::get_type() const {return BUILDING;}
-
 int32_t Building::get_size() const {return descr().get_size();}
 
 bool Building::get_passable() const {return false;}
@@ -344,20 +336,16 @@ Flag & Building::base_flag()
  */
 uint32_t Building::get_playercaps() const {
 	uint32_t caps = 0;
-	const Building_Descr & d = descr();
-	if (d.is_destructible()) {
+	const BuildingDescr & tmp_descr = descr();
+	if (tmp_descr.is_destructible()) {
 		caps |= PCap_Bulldoze;
-		if (d.is_buildable() or d.is_enhanced())
+		if (tmp_descr.is_buildable() || tmp_descr.is_enhanced())
 			caps |= PCap_Dismantle;
 	}
-	if (d.enhancements().size())
+	if (tmp_descr.enhancement() != INVALID_INDEX)
 		caps |= PCap_Enhancable;
 	return caps;
 }
-
-
-const std::string & Building::name() const {return descr().name();}
-
 
 void Building::start_animation(Editor_Game_Base & egbase, uint32_t const anim)
 {
@@ -398,7 +386,7 @@ void Building::init(Editor_Game_Base & egbase)
 	map.get_brn(m_position, &neighb);
 	{
 		Flag * flag = dynamic_cast<Flag *>(map.get_immovable(neighb));
-		if (not flag)
+		if (!flag)
 			flag =
 				new Flag (egbase, owner(), neighb);
 		m_flag = flag;
@@ -505,7 +493,7 @@ void Building::destroy(Editor_Game_Base & egbase)
 {
 	const bool fire           = burn_on_destroy();
 	const Coords pos          = m_position;
-	const Tribe_Descr & t = tribe();
+	const Tribe_Descr & t     = descr().tribe();
 	PlayerImmovable::destroy(egbase);
 	// We are deleted. Only use stack variables beyond this point
 	if (fire)
@@ -513,30 +501,24 @@ void Building::destroy(Editor_Game_Base & egbase)
 }
 
 
-/*
-===============
-Building::get_ui_anim [virtual]
-
-Return the animation ID that is used for the building in UI items
-(the building UI, messages, etc..)
-===============
-*/
-uint32_t Building::get_ui_anim() const {return descr().get_ui_anim();}
-
-
 #define FORMAT(key, value) case key: result << value; break
 std::string Building::info_string(const std::string & format) {
 	std::ostringstream result;
-	container_iterate_const(std::string, format, i)
-		if (*i.current == '%') {
-			if (i.advance().empty()) { //  unterminated format sequence
+
+	for (std::string::const_iterator format_iter = format.begin();
+		  format_iter != format.end();
+		  ++format_iter) {
+
+		if (*format_iter == '%') {
+			if (++format_iter == format.end()) { // unterminated format sequence
 				result << '%';
 				break;
 			}
-			switch (*i.current) {
+
+			switch (*format_iter) {
 			FORMAT('%', '%');
 			FORMAT('i', serial());
-			FORMAT('t', get_statistics_string());
+			FORMAT('t', update_and_get_statistics_string());
 			FORMAT
 				('s',
 				 (descr().get_ismine()                  ? _("mine")   :
@@ -551,54 +533,38 @@ std::string Building::info_string(const std::string & format) {
 			FORMAT('y', get_position().y);
 			FORMAT
 				('c', '(' << get_position().x << ", " << get_position().y << ')');
-			FORMAT('A', descname());
-			FORMAT('a', name());
+			FORMAT('A', descr().descname());
+			FORMAT('a', descr().name());
 			case 'N':
 				if (upcast(ConstructionSite const, constructionsite, this))
 					result << constructionsite->building().descname();
 				else
-					result << descname();
+					result << descr().descname();
 				break;
 			case 'n':
 				if (upcast(ConstructionSite const, constructionsite, this))
 					result << constructionsite->building().name();
 				else
-					result << name();
+					result << descr().name();
 				break;
 			case 'r':
 				if (upcast(ProductionSite const, productionsite, this))
-					result << productionsite->result_string();
+					result << productionsite->production_result();
 				break;
 			default: //  invalid format sequence
-				result << '%' << *i.current;
+				result << '%' << *format_iter;
 				break;
 			}
 		} else
-			result << *i.current;
+			result << *format_iter;
+	}
 	const std::string result_str = result.str();
 	return result_str.empty() ? result_str : as_uifont(result_str);
 }
 
 
-/*
-===============
-Building::get_statistics_string [virtual]
-
-Return the overlay string that is displayed on the map view when enabled
-by the player.
-
-By default, there is no such string. Production buildings will want to
-override this with a percentage indicating how well the building works, etc.
-===============
-*/
-std::string Building::get_statistics_string()
-{
-	return "";
-}
-
-
 WaresQueue & Building::waresqueue(Ware_Index const wi) {
-	throw wexception("%s (%u) has no WaresQueue for %u", name().c_str(), serial(), wi);
+	throw wexception("%s (%u) has no WaresQueue for %u", descr().name().c_str(), serial(), wi);
 }
 
 /*
@@ -724,7 +690,7 @@ otherwise.
 */
 bool Building::fetch_from_flag(Game &)
 {
-	molog("TODO: Implement Building::fetch_from_flag\n");
+	molog("TODO(unknown): Implement Building::fetch_from_flag\n");
 
 	return false;
 }
@@ -855,7 +821,7 @@ void Building::log_general_info(const Editor_Game_Base & egbase) {
 
 
 void Building::add_worker(Worker & worker) {
-	if (not get_workers().size()) {
+	if (!get_workers().size()) {
 		if (worker.descr().name() != "builder")
 			set_seeing(true);
 	}
@@ -866,7 +832,7 @@ void Building::add_worker(Worker & worker) {
 
 void Building::remove_worker(Worker & worker) {
 	PlayerImmovable::remove_worker(worker);
-	if (not get_workers().size())
+	if (!get_workers().size())
 		set_seeing(false);
 	workers_changed();
 }
@@ -887,10 +853,10 @@ void Building::set_seeing(bool see)
 
 	if (see)
 		player.see_area
-			(Area<FCoords>(map.get_fcoords(get_position()), vision_range()));
+			(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
 	else
 		player.unsee_area
-			(Area<FCoords>(map.get_fcoords(get_position()), vision_range()));
+			(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
 
 	m_seeing = see;
 }
@@ -924,7 +890,7 @@ void Building::send_message
 	// animations of buildings so that the messages can still be displayed, even
 	// after reload.
 	const std::string& img = g_gr->animations().get_animation
-		(descr().get_ui_anim()).representative_image_from_disk().hash();
+		(get_ui_anim()).representative_image_from_disk().hash();
 	std::string rt_description;
 	rt_description.reserve
 		(strlen("<rt image=") + img.size() + 1 +
@@ -935,8 +901,8 @@ void Building::send_message
 	rt_description += img;
 	{
 		std::string::iterator it = rt_description.end() - 1;
-		for (; it != rt_description.begin() and *it != '?'; --it) {}
-		for (;                                  *it == '?'; --it)
+		for (; it != rt_description.begin() && *it != '?'; --it) {}
+		for (;                                 *it == '?'; --it)
 			*it = '0';
 	}
 	rt_description += "><p font-size=14 font-face=DejaVuSerif>";

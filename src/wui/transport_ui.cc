@@ -38,7 +38,7 @@ using Widelands::Editor_Game_Base;
 using Widelands::Game;
 using Widelands::WareDescr;
 using Widelands::Ware_Index;
-using Widelands::Worker_Descr;
+using Widelands::WorkerDescr;
 
 
 static const char pic_tab_wares[] = "pics/menu_tab_wares.png";
@@ -89,14 +89,14 @@ private:
 			if (type == Widelands::wwWORKER) {
 				Ware_Index nr_wares = m_economy.owner().tribe().get_nrworkers();
 				for (Ware_Index i = 0; i < nr_wares; ++i) {
-					if (not m_economy.owner().tribe().get_worker_descr(i)->has_demand_check()) {
+					if (!m_economy.owner().tribe().get_worker_descr(i)->has_demand_check()) {
 						hide_ware(i);
 					}
 				}
 			} else {
 				Ware_Index nr_wares = m_economy.owner().tribe().get_nrwares();
 				for (Ware_Index i = 0; i < nr_wares; ++i) {
-					if (not m_economy.owner().tribe().get_ware_descr(i)->has_demand_check()) {
+					if (!m_economy.owner().tribe().get_ware_descr(i)->has_demand_check()) {
 						hide_ware(i);
 					}
 				}
@@ -313,12 +313,10 @@ private:
 };
 
 
-/**
- * \todo: Neither this function nor the UI Registry should be part
- * of Economy. Economy should be made an observerable class where
- * users can register for change updates. The registry should be
- * moved to InteractivePlayer or some other UI component.
- */
+// TODO(unknown): Neither this function nor the UI Registry should be part
+// of Economy. Economy should be made an observerable class where
+// users can register for change updates. The registry should be
+// moved to InteractivePlayer or some other UI component.
 void Economy::show_options_window() {
 	if (m_optionswindow_registry.window)
 		m_optionswindow_registry.window->move_to_top();

@@ -17,9 +17,10 @@
  *
  */
 
-#ifndef WORKER_DESCR_H
-#define WORKER_DESCR_H
+#ifndef WL_LOGIC_WORKER_DESCR_H
+#define WL_LOGIC_WORKER_DESCR_H
 
+#include "base/macros.h"
 #include "logic/bob.h"
 #include "graphic/diranimations.h"
 #include "logic/immovable.h"
@@ -28,13 +29,13 @@ class Image;
 
 namespace Widelands {
 
-/// \todo (Antonio Trueba#1#): Get rid of forward class declaration
-/// (chicked-and-egg problem)
+// TODO(Antonio Trueba#1#): Get rid of forward class declaration
+// (chicked-and-egg problem)
 class Worker;
 struct WorkerProgram;
 
 
-class Worker_Descr : public BobDescr
+class WorkerDescr : public BobDescr
 {
 	friend struct Tribe_Descr;
 	friend class Warehouse;
@@ -43,19 +44,13 @@ class Worker_Descr : public BobDescr
 public:
 	typedef std::map<std::string, uint8_t> Buildcost;
 
-	enum Worker_Type {
-		NORMAL = 0,
-		CARRIER,
-		SOLDIER,
-	};
-
-	Worker_Descr
-		(char const * const name, char const * const descname,
+	WorkerDescr
+		(MapObjectType type, char const * const name, char const * const descname,
 		 const std::string & directory, Profile &,  Section & global_s,
 		 const Tribe_Descr &);
-	virtual ~Worker_Descr();
+	~WorkerDescr() override;
 
-	virtual Bob & create_object() const override;
+	Bob & create_object() const override;
 
 	virtual void load_graphics();
 
@@ -90,16 +85,15 @@ public:
 	}
 
 	const Image* icon() const {return m_icon;}
+	std::string icon_name() const {return m_icon_fname;}
 	const DirAnimations & get_walk_anims() const {return m_walk_anims;}
 	const DirAnimations & get_right_walk_anims(bool const carries_ware) const {
 		return carries_ware ? m_walkload_anims : m_walk_anims;
 	}
 	WorkerProgram const * get_program(const std::string &) const;
 
-	virtual Worker_Type get_worker_type() const {return NORMAL;}
-
 	// For leveling
-	int32_t get_level_experience() const {return m_level_experience;}
+	int32_t get_needed_experience() const {return m_needed_experience;}
 	Ware_Index becomes() const {return m_becomes;}
 	Ware_Index worker_index() const;
 	bool can_act_as(Ware_Index) const;
@@ -107,8 +101,8 @@ public:
 	Worker & create
 		(Editor_Game_Base &, Player &, PlayerImmovable *, Coords) const;
 
-	typedef std::map<Worker_Descr const *, std::string> becomes_map_t;
-	virtual uint32_t movecaps() const override;
+	typedef std::map<WorkerDescr const *, std::string> becomes_map_t;
+	uint32_t movecaps() const override;
 
 	typedef std::map<std::string, WorkerProgram *> Programs;
 	const Programs & programs() const {return m_programs;}
@@ -129,15 +123,17 @@ protected:
 	 * Number of experience points required for leveling up,
 	 * or -1 if the worker cannot level up.
 	 */
-	int32_t m_level_experience;
+	int32_t m_needed_experience;
 
 	/**
 	 * Type that this worker can become, i.e. level up to (or Null).
 	 */
 	Ware_Index  m_becomes;
 	Programs    m_programs;
+private:
+	DISALLOW_COPY_AND_ASSIGN(WorkerDescr);
 };
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_WORKER_DESCR_H

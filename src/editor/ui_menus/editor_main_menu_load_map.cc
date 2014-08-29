@@ -20,13 +20,15 @@
 #include "editor/ui_menus/editor_main_menu_load_map.h"
 
 #include <cstdio>
+#include <memory>
 
 #include <boost/format.hpp>
 
+#include "base/i18n.h"
+#include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_set_starting_pos_tool.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/building.h"
 #include "logic/editor_game_base.h"
@@ -39,7 +41,6 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_basic/textarea.h"
-#include "wexception.h"
 #include "wui/overlay_manager.h"
 
 using Widelands::WL_Map_Loader;
@@ -219,10 +220,10 @@ void Main_Menu_Load_Map::fill_list() {
 	{
 		const char * const name = pname->c_str();
 		if
-			(strcmp(FileSystem::FS_Filename(name), ".")    and
-			 strcmp(FileSystem::FS_Filename(name), "..")   and
-			 g_fs->IsDirectory(name)                       and
-			 not WL_Map_Loader::is_widelands_map(name))
+			(strcmp(FileSystem::FS_Filename(name), ".")    &&
+			 strcmp(FileSystem::FS_Filename(name), "..")   &&
+			 g_fs->IsDirectory(name)                       &&
+			 !WL_Map_Loader::is_widelands_map(name))
 
 		m_ls->add
 			(FileSystem::FS_Filename(name),

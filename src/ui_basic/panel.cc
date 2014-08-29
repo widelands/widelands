@@ -19,7 +19,7 @@
 
 #include "ui_basic/panel.h"
 
-#include "constants.h"
+#include "base/log.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
@@ -27,11 +27,11 @@
 #include "graphic/surface.h"
 #include "graphic/surface_cache.h"
 #include "helper.h"
-#include "log.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
-#include "text_layout.h"
 #include "wlapplication.h"
+#include "wui/text_constants.h"
+#include "wui/text_layout.h"
 
 
 using namespace std;
@@ -49,10 +49,10 @@ public:
 	virtual ~CacheImage() {}
 
 	// Implements Image.
-	virtual uint16_t width() const override {return width_;}
-	virtual uint16_t height() const override {return height_;}
-	virtual const string& hash() const override {return hash_;}
-	virtual Surface* surface() const override {
+	uint16_t width() const override {return width_;}
+	uint16_t height() const override {return height_;}
+	const string& hash() const override {return hash_;}
+	Surface* surface() const override {
 		Surface* rv = g_gr->surfaces().get(hash_);
 		if (rv)
 			return rv;
@@ -165,6 +165,7 @@ void Panel::free_children() {while (_fchild) delete _fchild;}
  */
 int32_t Panel::run()
 {
+	// TODO(sirver): the main loop should not be in UI, but in WLApplication.
 	WLApplication * const app = WLApplication::get();
 	Panel * const prevmodal = _modal;
 	_modal = this;
@@ -498,9 +499,9 @@ void Panel::draw_overlay(RenderTarget &) {}
 void Panel::update(int32_t x, int32_t y, int32_t w, int32_t h)
 {
 	if
-		(x >= static_cast<int32_t>(_w) or x + w <= 0
-		 or
-		 y >= static_cast<int32_t>(_h) or y + h <= 0)
+		(x >= static_cast<int32_t>(_w) || x + w <= 0
+		 ||
+		 y >= static_cast<int32_t>(_h) || y + h <= 0)
 		return;
 
 	_needdraw = true;
@@ -642,7 +643,7 @@ void Panel::handle_mousein(bool)
  *
  * \return true if the mouseclick was processed, flase otherwise
  */
-bool Panel::handle_mousepress  (const Uint8, int32_t, int32_t)
+bool Panel::handle_mousepress  (const uint8_t, int32_t, int32_t)
 {
 	return false;
 }
@@ -654,7 +655,7 @@ bool Panel::handle_mousepress  (const Uint8, int32_t, int32_t)
  *
  * \return true if the mouseclick was processed, false otherwise
  */
-bool Panel::handle_mouserelease(const Uint8, int32_t, int32_t)
+bool Panel::handle_mouserelease(const uint8_t, int32_t, int32_t)
 {
 	return false;
 }
@@ -662,7 +663,7 @@ bool Panel::handle_mouserelease(const Uint8, int32_t, int32_t)
 /**
  * Called when the mouse is moved while inside the panel
  */
-bool Panel::handle_mousemove(const Uint8, int32_t, int32_t, int32_t, int32_t)
+bool Panel::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_t)
 {
 	return !_tooltip.empty();
 }
@@ -949,9 +950,9 @@ inline Panel * Panel::child_at_mouse_cursor
 		if (!child->get_handle_mouse() || !child->is_visible())
 			continue;
 		if
-			(x < child->_x + static_cast<int32_t>(child->_w) and x >= child->_x
-			 and
-			 y < child->_y + static_cast<int32_t>(child->_h) and y >= child->_y)
+			(x < child->_x + static_cast<int32_t>(child->_w) && x >= child->_x
+			 &&
+			 y < child->_y + static_cast<int32_t>(child->_h) && y >= child->_y)
 			break;
 	}
 
@@ -970,7 +971,7 @@ inline Panel * Panel::child_at_mouse_cursor
  */
 void Panel::do_mousein(bool const inside)
 {
-	if (not _g_allow_user_input)
+	if (!_g_allow_user_input)
 		return;
 
 	if (!inside && _mousein) {
@@ -985,8 +986,8 @@ void Panel::do_mousein(bool const inside)
  *
  * Returns whether the event was processed.
  */
-bool Panel::do_mousepress(const Uint8 btn, int32_t x, int32_t y) {
-	if (not _g_allow_user_input) {
+bool Panel::do_mousepress(const uint8_t btn, int32_t x, int32_t y) {
+	if (!_g_allow_user_input) {
 		return true;
 	}
 	if (get_can_focus()) {
@@ -997,12 +998,12 @@ bool Panel::do_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 	if (_flags & pf_top_on_click)
 		move_to_top();
 
-	//  FIXME This code is erroneous. It checks the current key state. What it
-	//  FIXME needs is the key state at the time the mouse was clicked. See the
-	//  FIXME usage comment for get_key_state.
+	//  TODO(unknown): This code is erroneous. It checks the current key state. What it
+	//  needs is the key state at the time the mouse was clicked. See the
+	//  usage comment for get_key_state.
 	//  Some window managers use alt-drag, so we can't only use the alt keys
 	if
-		((not _g_mousegrab) && (btn == SDL_BUTTON_LEFT) &&
+		((!_g_mousegrab) && (btn == SDL_BUTTON_LEFT) &&
 		 ((get_key_state(SDLK_LALT) | get_key_state(SDLK_RALT) |
 		   get_key_state(SDLK_MODE) | get_key_state(SDLK_LSHIFT))))
 		if (handle_alt_drag(x, y))
@@ -1019,8 +1020,8 @@ bool Panel::do_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 			}
 	return handle_mousepress(btn, x, y);
 }
-bool Panel::do_mouserelease(const Uint8 btn, int32_t x, int32_t y) {
-	if (not _g_allow_user_input)
+bool Panel::do_mouserelease(const uint8_t btn, int32_t x, int32_t y) {
+	if (!_g_allow_user_input)
 		return true;
 
 	x -= _lborder;
@@ -1036,10 +1037,10 @@ bool Panel::do_mouserelease(const Uint8 btn, int32_t x, int32_t y) {
 }
 
 bool Panel::do_mousemove
-	(Uint8 const state,
+	(uint8_t const state,
 	 int32_t x, int32_t y, int32_t const xdiff, int32_t const ydiff)
 {
-	if (not _g_allow_user_input)
+	if (!_g_allow_user_input)
 		return true;
 
 	x -= _lborder;
@@ -1067,7 +1068,7 @@ bool Panel::do_mousemove
  */
 bool Panel::do_key(bool const down, SDL_keysym const code)
 {
-	if (not _g_allow_user_input)
+	if (!_g_allow_user_input)
 		return true;
 
 	if (_focus) {
@@ -1118,9 +1119,9 @@ Panel * Panel::ui_trackmouse(int32_t & x, int32_t & y)
 	}
 
 	if
-		(0 <= x and x < static_cast<int32_t>(mousein->_w)
-		 and
-		 0 <= y and y < static_cast<int32_t>(mousein->_h))
+		(0 <= x && x < static_cast<int32_t>(mousein->_w)
+		 &&
+		 0 <= y && y < static_cast<int32_t>(mousein->_h))
 		rcv = mousein;
 	else
 		mousein = nullptr;
@@ -1140,15 +1141,15 @@ Panel * Panel::ui_trackmouse(int32_t & x, int32_t & y)
  * Input callback function. Pass the mouseclick event to the currently modal
  * panel.
 */
-void Panel::ui_mousepress(const Uint8 button, int32_t x, int32_t y) {
-	if (not _g_allow_user_input)
+void Panel::ui_mousepress(const uint8_t button, int32_t x, int32_t y) {
+	if (!_g_allow_user_input)
 		return;
 
 	if (Panel * const p = ui_trackmouse(x, y))
 		p->do_mousepress(button, x, y);
 }
-void Panel::ui_mouserelease(const Uint8 button, int32_t x, int32_t y) {
-	if (not _g_allow_user_input)
+void Panel::ui_mouserelease(const uint8_t button, int32_t x, int32_t y) {
+	if (!_g_allow_user_input)
 		return;
 
 	if (Panel * const p = ui_trackmouse(x, y))
@@ -1160,10 +1161,10 @@ void Panel::ui_mouserelease(const Uint8 button, int32_t x, int32_t y) {
  * panel.
 */
 void Panel::ui_mousemove
-	(Uint8 const state,
+	(uint8_t const state,
 	 int32_t x, int32_t y, int32_t const xdiff, int32_t const ydiff)
 {
-	if (not _g_allow_user_input)
+	if (!_g_allow_user_input)
 		return;
 
 	if (!xdiff && !ydiff)
@@ -1188,7 +1189,7 @@ void Panel::ui_mousemove
  */
 void Panel::ui_key(bool const down, SDL_keysym const code)
 {
-	if (not _g_allow_user_input)
+	if (!_g_allow_user_input)
 		return;
 
 	_modal->do_key(down, code);
@@ -1227,7 +1228,7 @@ bool Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 
 	dst.fill_rect(r, RGBColor(63, 52, 34));
 	dst.draw_rect(r, RGBColor(0, 0, 0));
-	dst.blit(r + Point(2, 2), rendered_text);
+	dst.blit(r.top_left() + Point(2, 2), rendered_text);
 	return true;
 }
 

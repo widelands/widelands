@@ -21,9 +21,9 @@
 
 #include <memory>
 
+#include "base/log.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "log.h"
 #include "scripting/c_utils.h"
 #include "scripting/eris.h"
 #include "scripting/luna_impl.h"
@@ -176,7 +176,7 @@ static const char * m_persistent_globals[] = {
  */
 uint32_t persist_object
 	(lua_State * L,
-	 FileWrite & fw, Widelands::Map_Map_Object_Saver & mos)
+	 FileWrite & fw, Widelands::MapMapObjectSaver & mos)
 {
 	assert(lua_gettop(L) == 2); // S: globals_table object
 
@@ -223,7 +223,7 @@ uint32_t persist_object
 
 void unpersist_object
 	(lua_State * L,
-	 FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
+	 FileRead & fr, Widelands::MapMapObjectLoader & mol,
 	 uint32_t size)
 {
 	assert(lua_gettop(L) == 0); // S:

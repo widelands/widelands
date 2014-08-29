@@ -17,13 +17,13 @@
  *
  */
 
-#ifndef FIELD_H
-#define FIELD_H
+#ifndef WL_LOGIC_FIELD_H
+#define WL_LOGIC_FIELD_H
 
 #include <cassert>
 #include <limits>
 
-#include "constants.h"
+#include "logic/constants.h"
 #include "logic/nodecaps.h"
 #include "logic/roadtype.h"
 #include "logic/widelands.h"
@@ -54,7 +54,7 @@ struct BaseImmovable;
 // Field is used so often, make sure it is as small as possible.
 #pragma pack(push, 1)
 /// a field like it is represented in the game
-/// \todo This is all one evil hack :(
+// TODO(unknown): This is all one evil hack :(
 struct Field {
 	friend class Map;
 	friend class Bob;
@@ -205,7 +205,7 @@ public:
 		roads |= type << dir;
 	}
 
-	/// \todo This should return Resource_Index
+	// TODO(unknown): This should return Resource_Index
 	uint8_t get_resources() const {return m_resources;}
 	uint8_t get_resources_amount() const {return m_res_amount;}
 	void set_resources(uint8_t const res, uint8_t const amount) {
@@ -213,11 +213,11 @@ public:
 		m_res_amount = amount;
 	}
 
-	///<\todo This should take uint8_t
+	// TODO(unknown): This should take uint8_t
 	void set_starting_res_amount(int32_t const amount) {
 		m_starting_res_amount = amount;
 	}
-	/// \todo This should return uint8_t
+	// TODO(unknown): This should return uint8_t
 	int32_t get_starting_res_amount() const {return m_starting_res_amount;}
 
 	/// \note you must reset this field's + neighbor's brightness when you
@@ -240,4 +240,4 @@ static_assert(sizeof(Field) <= sizeof(void *) * 2 + 11, "Field is not tightly pa
 #endif
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_FIELD_H

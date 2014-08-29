@@ -12,17 +12,15 @@ icon=pics/icon.png
 # Entries in the columns separated by ,
 wares_order= raw_stone,log, blackwood, grout, thatchreed, cloth; fish, meat, water, wheat, pittabread, beer, strongbeer, ration, snack, meal; coal, ironore, iron, goldore, gold; pick, felling_ax, shovel, hammer, fishing_rod, hunting_spear, scythe, bread_paddle, kitchen_tools, fire_tongs; ax, sharpax, broadax, bronzeax, battleax, warriorsax, helm , mask , warhelm
 
-workers_order=carrier, ox, cattlebreeder; stonemason, lumberjack, ranger, builder, lime-burner, gardener, weaver, shipwright; fisher , hunter , gamekeeper, farmer, baker, brewer, master-brewer, innkeeper; geologist,miner, chief-miner, master-miner, burner, smelter; blacksmith, master-blacksmith; soldier, trainer, helmsmith, scout
+workers_order=carrier, ox, cattlebreeder; stonemason, lumberjack, ranger, builder, lime-burner, gardener, weaver, shipwright; fisher , hunter , gamekeeper, farmer, baker, brewer, master-brewer, innkeeper; geologist,miner, chief-miner, master-miner, charcoal_burner, smelter; blacksmith, master-blacksmith; soldier, trainer, helmsmith, scout
 
 
 [frontier]
-name=frontier
 pics=pics/frontier_??.png
 hotspot=1 19
 
 
 [flag]
-name=flag
 pics=pics/flag_??.png
 hotspot=10 38
 fps=5
@@ -43,17 +41,13 @@ resi_coal1=_Resource indicator: Coal (little)
 resi_coal2=_Resource indicator: Coal (much)
 resi_gold1=_Resource indicator: Gold (little)
 resi_gold2=_Resource indicator: Gold (much)
-resi_granit1=_Resource indicator: Granite (little)
-resi_granit2=_Resource indicator: Granite (much)
+resi_granite1=_Resource indicator: Granite (little)
+resi_granite2=_Resource indicator: Granite (much)
 resi_iron1=_Resource indicator: Iron (little)
 resi_iron2=_Resource indicator: Iron (much)
 resi_none=_Resource indicator: No resource
 resi_water1=_Resource indicator: Water
 shipconstruction=_Ship Construction Site
-
-[critter bob types]
-deer=_Deer
-wildboar=_Wild Boar
 
 [ware types]
 ax=_Ax
@@ -111,7 +105,7 @@ blacksmith=_Blacksmith
 master-brewer=_Master Brewer
 brewer=_Brewer
 builder=_Builder
-burner=_Burner
+charcoal_burner=_Charcoal Burner
 master-miner=_Master Miner
 chief-miner=_Chief Miner
 farmer=_Farmer
@@ -182,7 +176,7 @@ micro-brewery=_Micro Brewery
 big_inn=_Big Inn
 inn=_Inn
 tavern=_Tavern
-burners_house=_Charcoal Burner’s House
+charcoal_kiln=_Charcoal Kiln
 smelting_works=_Smelting Works
 shipyard=_Shipyard
 warmill=_War Mill
@@ -213,12 +207,3 @@ donjon=_Donjon
 [trainingsite types]
 battlearena=_Battle Arena
 trainingcamp=_Training Camp
-
-[initializations]
-headquarters_medium=_Headquarters Medium
-castle_village=_Citadel Village
-
-[military_data]
-retreat_interval=0-80
-retreat=20
-

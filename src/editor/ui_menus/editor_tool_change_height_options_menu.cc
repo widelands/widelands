@@ -21,11 +21,12 @@
 
 #include <cstdio>
 
+#include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_increase_height_tool.h"
 #include "editor/tools/editor_set_height_tool.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
+#include "logic/widelands_geometry.h"
 #include "ui_basic/button.h"
 
 #define width  20
@@ -36,7 +37,7 @@ Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu
 	 UI::UniqueWindow::Registry  & registry)
 	:
 	Editor_Tool_Options_Menu
-		(parent, registry, 135, 135, _("Height Tools Options")),
+		(parent, registry, 250, 135, _("Height Tools Options")),
 	m_increase_tool(increase_tool),
 	m_change_by_label
 		(this,
@@ -162,7 +163,7 @@ void Editor_Tool_Change_Height_Options_Menu::clicked_setto_decrement() {
 	--setto;
 
 	m_increase_tool.set_tool().set_interval
-		(interval<Widelands::Field::Height>(setto, setto));
+		(Widelands::HeightInterval(setto, setto));
 	m_set_to_decrease.set_enabled(0 < setto);
 	m_set_to_increase.set_enabled(true);
 	select_correct_tool();
@@ -179,7 +180,7 @@ void Editor_Tool_Change_Height_Options_Menu::clicked_setto_increment() {
 	++setto;
 
 	m_increase_tool.set_tool().set_interval
-		(interval<Widelands::Field::Height>(setto, setto));
+		(Widelands::HeightInterval(setto, setto));
 	m_set_to_decrease.set_enabled(true);
 	m_set_to_increase.set_enabled(setto < MAX_FIELD_HEIGHT);
 	select_correct_tool();

@@ -19,12 +19,13 @@
 
 #include "map_io/widelands_map_object_packet.h"
 
+#include "base/wexception.h"
 #include "economy/fleet.h"
 #include "economy/portdock.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/battle.h"
-#include "logic/critter_bob.h"
+#include "logic/critter.h"
 #include "logic/editor_game_base.h"
 #include "logic/immovable.h"
 #include "logic/map.h"
@@ -32,14 +33,13 @@
 #include "logic/worker.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "wexception.h"
 
 namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 1
 
 
-Map_Object_Packet::~Map_Object_Packet() {
+MapObjectPacket::~MapObjectPacket() {
 	while (loaders.size()) {
 		delete *loaders.begin();
 		loaders.erase(loaders.begin());
@@ -47,8 +47,9 @@ Map_Object_Packet::~Map_Object_Packet() {
 }
 
 
-void Map_Object_Packet::Read
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, const OneWorldLegacyLookupTable& lookup_table)
+void MapObjectPacket::Read
+	(FileSystem & fs, Editor_Game_Base & egbase, MapMapObjectLoader & mol,
+	 const OneWorldLegacyLookupTable& lookup_table)
 {
 	try {
 		FileRead fr;
@@ -64,35 +65,35 @@ void Map_Object_Packet::Read
 			switch (uint8_t const header = fr.Unsigned8()) {
 			case 0:
 				return;
-			case Map_Object::header_Immovable:
+			case MapObject::HeaderImmovable:
 				loaders.insert(Immovable::load(egbase, mol, fr, lookup_table));
 				break;
 
-			case Map_Object::header_Battle:
+			case MapObject::HeaderBattle:
 				loaders.insert(Battle::load(egbase, mol, fr));
 				break;
 
-			case Map_Object::header_Critter:
-				loaders.insert(Critter_Bob::load(egbase, mol, fr, lookup_table));
+			case MapObject::HeaderCritter:
+				loaders.insert(Critter::load(egbase, mol, fr, lookup_table));
 				break;
 
-			case Map_Object::header_Worker:
+			case MapObject::HeaderWorker:
 				loaders.insert(Worker::load(egbase, mol, fr));
 				break;
 
-			case Map_Object::header_WareInstance:
+			case MapObject::HeaderWareInstance:
 				loaders.insert(WareInstance::load(egbase, mol, fr));
 				break;
 
-			case Map_Object::header_Ship:
+			case MapObject::HeaderShip:
 				loaders.insert(Ship::load(egbase, mol, fr));
 				break;
 
-			case Map_Object::header_PortDock:
+			case MapObject::HeaderPortDock:
 				loaders.insert(PortDock::load(egbase, mol, fr));
 				break;
 
-			case Map_Object::header_Fleet:
+			case MapObject::HeaderFleet:
 				loaders.insert(Fleet::load(egbase, mol, fr));
 				break;
 
@@ -105,30 +106,34 @@ void Map_Object_Packet::Read
 }
 
 
-void Map_Object_Packet::LoadFinish() {
+void MapObjectPacket::LoadFinish() {
 	// load_pointer stage
-	container_iterate_const(LoaderSet, loaders, i) {
+	for (MapObject::Loader* temp_loader : loaders) {
 		try {
-			(*i.current)->load_pointers();
+			temp_loader->load_pointers();
 		} catch (const std::exception & e) {
-			throw wexception("load_pointers for %s: %s", (*i.current)->get_object()->type_name(), e.what());
+			throw wexception("load_pointers for %s: %s",
+				to_string(temp_loader->get_object()->descr().type()).c_str(),
+				e.what());
 		}
 	}
 
 	// load_finish stage
-	container_iterate_const(LoaderSet, loaders, i) {
+	for (MapObject::Loader* temp_loader : loaders) {
 		try {
-			(*i.current)->load_finish();
+			temp_loader->load_finish();
 		} catch (const std::exception & e) {
-			throw wexception("load_finish for %s: %s", (*i.current)->get_object()->type_name(), e.what());
+			throw wexception("load_finish for %s: %s",
+			                 to_string(temp_loader->get_object()->descr().type()).c_str(),
+			                 e.what());
 		}
-		(*i.current)->mol().mark_object_as_loaded(*(*i.current)->get_object());
+		temp_loader->mol().mark_object_as_loaded(*temp_loader->get_object());
 	}
 }
 
 
-void Map_Object_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+void MapObjectPacket::Write
+	(FileSystem & fs, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	FileWrite fw;
 
@@ -140,12 +145,12 @@ void Map_Object_Packet::Write
 		 cit != obj_serials.end();
 		 ++cit)
 	{
-		Map_Object * pobj = egbase.objects().get_object(*cit);
+		MapObject * pobj = egbase.objects().get_object(*cit);
 		assert(pobj);
-		Map_Object & obj = *pobj;
+		MapObject & obj = *pobj;
 
 		// These checks can be eliminated and the object saver simplified
-		// once all Map_Objects are saved using the new system
+		// once all MapObjects are saved using the new system
 		if (mos.is_object_known(obj))
 			continue;
 

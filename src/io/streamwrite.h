@@ -17,18 +17,16 @@
  *
  */
 
-#ifndef STREAMWRITE_H
-#define STREAMWRITE_H
+#ifndef WL_IO_STREAMWRITE_H
+#define WL_IO_STREAMWRITE_H
 
 #include <cassert>
 #include <cstring>
 #include <limits>
 #include <string>
 
-#include <boost/noncopyable.hpp>
-
-#include "machdep.h"
-#include "port.h"
+#include "base/macros.h"
+#include "io/machdep.h"
 
 /**
  * Abstract base class for stream-like data sinks.
@@ -40,7 +38,7 @@
  *
  * Convenience functions are provided for many data types.
  */
-class StreamWrite : boost::noncopyable {
+class StreamWrite {
 public:
 	explicit StreamWrite() {}
 	virtual ~StreamWrite();
@@ -58,7 +56,7 @@ public:
 	 */
 	virtual void Flush();
 
-	//TODO: implement an overloaded method that accepts fmt as std::string
+	//TODO(unknown): implement an overloaded method that accepts fmt as std::string
 	void Printf(char const *, ...) __attribute__((format(printf, 2, 3)));
 
 	void   Signed8  (int8_t const x) {Data(&x, 1);}
@@ -90,6 +88,9 @@ public:
 	//  Write strings without null terminator.
 	void Text   (char        const * const x) {Data(x,         strlen(x));}
 	void Text   (const std::string &       x) {Data(x.c_str(), x.size());}
+
+private:
+	DISALLOW_COPY_AND_ASSIGN(StreamWrite);
 };
 
-#endif
+#endif  // end of include guard: WL_IO_STREAMWRITE_H

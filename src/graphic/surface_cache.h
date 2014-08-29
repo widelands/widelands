@@ -17,12 +17,14 @@
  *
  */
 
-#ifndef SURFACE_CACHE_H
-#define SURFACE_CACHE_H
+#ifndef WL_GRAPHIC_SURFACE_CACHE_H
+#define WL_GRAPHIC_SURFACE_CACHE_H
 
 #include <string>
 
 #include <boost/utility.hpp>
+
+#include "base/macros.h"
 
 class Surface;
 
@@ -33,10 +35,10 @@ class Surface;
 // Nobody in Widelands should hold onto a Surface they get from this class,
 // instead, they should use it only temporarily and rerequest it whenever they
 // need it.
-class SurfaceCache : boost::noncopyable {
+class SurfaceCache {
 public:
-	SurfaceCache() {};
-	virtual ~SurfaceCache() {};
+	SurfaceCache() {}
+	virtual ~SurfaceCache() {}
 
 	/// Deletes all surfaces in the cache leaving it as if it were just created.
 	virtual void flush() = 0;
@@ -50,6 +52,9 @@ public:
 	// automatically - use this if surfaces are around for a long time and
 	// recreation is expensive (i.e. images loaded from disk).
 	virtual Surface* insert(const std::string& hash, Surface*, bool transient) = 0;
+
+private:
+	DISALLOW_COPY_AND_ASSIGN(SurfaceCache);
 };
 
 // Create a new Cache whichs combined pixels in all transient surfaces are
@@ -58,5 +63,4 @@ public:
 // surface).
 SurfaceCache* create_surface_cache(uint32_t transient_memory_in_bytes);
 
-#endif /* end of include guard: SURFACE_CACHE_H */
-
+#endif  // end of include guard: WL_GRAPHIC_SURFACE_CACHE_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_MAIN_MENU_SAVE_MAP_MAKE_DIRECTORY_H
-#define EDITOR_MAIN_MENU_SAVE_MAP_MAKE_DIRECTORY_H
+#ifndef WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_SAVE_MAP_MAKE_DIRECTORY_H
+#define WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_SAVE_MAP_MAKE_DIRECTORY_H
 
 #include <cstring>
 #include <string>
@@ -34,8 +34,8 @@ struct Button;
  * Show a small modal dialog allowing the user to enter
  * a directory name to be created
  *
- * \todo This should be moved to src/ui, it's not specific to the editor
  */
+// TODO(unknown): This should be moved to src/ui, it's not specific to the editor
 struct Main_Menu_Save_Map_Make_Directory : public UI::Window {
 	Main_Menu_Save_Map_Make_Directory(UI::Panel *, char const *);
 
@@ -48,4 +48,4 @@ private:
 	void edit_changed();
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_SAVE_MAP_MAKE_DIRECTORY_H

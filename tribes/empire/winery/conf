@@ -3,6 +3,7 @@ output=wine
 
 [aihints]
 build_material=false
+is_food_basic=true
 
 [buildcost]
 wood=1
@@ -22,7 +23,8 @@ brewer=1
 grape=8
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [work]
 # grapes are only needed for wine, so no need to check if wine is needed
@@ -32,9 +34,9 @@ animate=working 30000
 produce=wine
 
 [idle]
-pics=vintagery_i_??.png  # ???
+pics=winery_i_??.png  # ???
 hotspot=39 62
 
 [working]
-pics=vintagery_i_??.png  # ???
+pics=winery_i_??.png  # ???
 hotspot=39 62

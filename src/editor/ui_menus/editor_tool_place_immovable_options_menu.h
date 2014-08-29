@@ -17,9 +17,10 @@
  *
  */
 
-#ifndef EDITOR_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU_H
-#define EDITOR_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU_H
+#ifndef WL_EDITOR_UI_MENUS_EDITOR_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU_H
+#define WL_EDITOR_UI_MENUS_EDITOR_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU_H
 
+#include <memory>
 #include <vector>
 
 #include "editor/ui_menus/categorized_item_selection_menu.h"
@@ -35,8 +36,8 @@ struct Editor_Tool_Place_Immovable_Options_Menu : public Editor_Tool_Options_Men
 	virtual ~Editor_Tool_Place_Immovable_Options_Menu();
 
 private:
-	std::unique_ptr<CategorizedItemSelectionMenu<Widelands::Immovable_Descr, Editor_Place_Immovable_Tool>>
+	std::unique_ptr<CategorizedItemSelectionMenu<Widelands::ImmovableDescr, Editor_Place_Immovable_Tool>>
 	multi_select_menu_;
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU_H

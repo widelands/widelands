@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef _BUILDINGWINDOW_H_
-#define _BUILDINGWINDOW_H_
+#ifndef WL_WUI_BUILDINGWINDOW_H
+#define WL_WUI_BUILDINGWINDOW_H
 
 #include <cstdlib>
 
@@ -50,8 +50,8 @@ struct Building_Window : public UI::Window {
 		return ref_cast<Interactive_GameBase, UI::Panel>(*get_parent());
 	}
 
-	virtual void draw(RenderTarget &) override;
-	virtual void think() override;
+	void draw(RenderTarget &) override;
+	void think() override;
 	void set_avoid_fastclick(bool afc) {m_avoid_fastclick = afc;}
 
 protected:
@@ -93,4 +93,4 @@ private:
 	bool m_avoid_fastclick;
 };
 
-#endif // _BUILDINGWINDOW_H_
+#endif  // end of include guard: WL_WUI_BUILDINGWINDOW_H

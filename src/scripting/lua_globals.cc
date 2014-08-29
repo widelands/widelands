@@ -22,10 +22,9 @@
 #include <exception>
 
 #include <boost/format.hpp>
-#include <libintl.h>
 
+#include "base/i18n.h"
 #include "build_info.h"
-#include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
 #include "scripting/c_utils.h"
@@ -106,7 +105,6 @@ static int L_string_bformat(lua_State * L) {
 				case LUA_TTHREAD:
 				case LUA_TLIGHTUSERDATA:
 					report_error(L, "Cannot format the given type %s at index %i", lua_typename(L, i), i);
-					break;
 			}
 		}
 
@@ -151,7 +149,7 @@ static int L_set_textdomain(lua_State * L) {
 static int L__(lua_State * L) {
 	lua_getglobal(L, "__TEXTDOMAIN");
 
-	if (not lua_isnil(L, -1)) {
+	if (!lua_isnil(L, -1)) {
 		i18n::Textdomain dom(luaL_checkstring(L, -1));
 		lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
 	} else {
@@ -183,7 +181,7 @@ static int L_ngettext(lua_State * L) {
 	const uint32_t n = luaL_checkuint32(L, 3);
 
 	lua_getglobal(L, "__TEXTDOMAIN");
-	if (not lua_isnil(L, -1)) {
+	if (!lua_isnil(L, -1)) {
 		i18n::Textdomain dom(luaL_checkstring(L, -1));
 		lua_pushstring(L, ngettext(msgid.c_str(), msgid_plural.c_str(), n));
 	} else {

@@ -17,11 +17,10 @@
  *
  */
 
-#ifndef ITRANSPORT_COST_CALCULATOR_H
-#define ITRANSPORT_COST_CALCULATOR_H
+#ifndef WL_ECONOMY_ITRANSPORT_COST_CALCULATOR_H
+#define WL_ECONOMY_ITRANSPORT_COST_CALCULATOR_H
 
-#include <boost/noncopyable.hpp>
-
+#include "base/macros.h"
 #include "logic/widelands_geometry.h"
 
 namespace Widelands {
@@ -33,12 +32,17 @@ namespace Widelands {
  * At the time of this writing, Map implements all of this functionality
  * but most economy code doesn't need all of maps functionality
  */
-struct ITransportCostCalculator : boost::noncopyable {
+class ITransportCostCalculator {
+public:
+	ITransportCostCalculator() = default;
 	virtual ~ITransportCostCalculator() {}
 
 	virtual int32_t calc_cost_estimate(Coords, Coords) const = 0;
+
+private:
+	DISALLOW_COPY_AND_ASSIGN(ITransportCostCalculator);
 };
 
 }
 
-#endif
+#endif  // end of include guard: WL_ECONOMY_ITRANSPORT_COST_CALCULATOR_H

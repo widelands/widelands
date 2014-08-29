@@ -20,22 +20,24 @@ weaver=1
 thatchreed=8
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start weaving because ...
+work=_weaving
 
 [work]
-return=skipped unless economy needs cloth or not economy needs thatchreed
-animate=working 45000
+sleep=20000
+return=skipped unless economy needs cloth
 consume=thatchreed
+animate=working 25000
 produce=cloth
 
 [idle]
-pics=i_??.png
+pics=weaving-mill_i_??.png
 hotspot=36 74
 
 [build]
-pics=b_??.png
+pics=weaving-mill_b_??.png
 hotspot=36 74
 
 [working]
-pics=w_??.png
+pics=weaving-mill_w_??.png
 hotspot=36 74

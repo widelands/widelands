@@ -19,7 +19,7 @@
 
 #include "network/network.h"
 
-#include "log.h"
+#include "base/log.h"
 #include "wlapplication.h"
 
 
@@ -195,7 +195,7 @@ bool Deserializer::read(TCPsocket sock)
 
 	queue.insert(queue.end(), &buffer[0], &buffer[bytes]);
 
-	return queue.size() < 2 or 2 <= (queue[0] << 8 | queue[1]);
+	return queue.size() < 2 || 2 <= (queue[0] << 8 | queue[1]);
 }
 
 /**
@@ -226,11 +226,7 @@ DisconnectException::DisconnectException(const char * fmt, ...)
 	m_what = buffer;
 }
 
-DisconnectException::~DisconnectException() throw ()
-{
-}
-
-char const * DisconnectException::what() const throw ()
+char const * DisconnectException::what() const noexcept
 {
 	return m_what.c_str();
 }

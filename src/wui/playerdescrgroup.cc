@@ -21,17 +21,17 @@
 
 #include <boost/format.hpp>
 
-#include "constants.h"
-#include "gamesettings.h"
+#include "base/i18n.h"
+#include "base/wexception.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
+#include "logic/game_settings.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "profile/profile.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/textarea.h"
-#include "wexception.h"
+#include "wui/text_constants.h"
 
 
 struct PlayerDescriptionGroupImpl {
@@ -198,13 +198,11 @@ void PlayerDescriptionGroup::refresh()
 
 			{
 				i18n::Textdomain td(tribepath); // for translated initialisation
-				container_iterate_const
-					 (std::vector<TribeBasicInfo>, settings.tribes, i)
-				{
-					if (i.current->name == player.tribe) {
+				for (const TribeBasicInfo& tribeinfo : settings.tribes) {
+					if (tribeinfo.name == player.tribe) {
 						d->btnPlayerInit->set_title
 							(_
-								(i.current->initializations.at
+								(tribeinfo.initializations.at
 									(player.initialization_index)
 								 .second));
 						break;
@@ -325,13 +323,16 @@ void PlayerDescriptionGroup::toggle_playerinit()
 		return;
 
 	const PlayerSettings & player = settings.players[d->plnum];
-	container_iterate_const(std::vector<TribeBasicInfo>, settings.tribes, j)
-		if (j.current->name == player.tribe)
+
+	for (const TribeBasicInfo& tribeinfo : settings.tribes) {
+		if (tribeinfo.name == player.tribe) {
 			return
 				d->settings->setPlayerInit
 					(d->plnum,
 					 (player.initialization_index + 1)
 					 %
-					 j.current->initializations.size());
+					 tribeinfo.initializations.size());
+		}
+	}
 	assert(false);
 }

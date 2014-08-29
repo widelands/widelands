@@ -19,6 +19,7 @@
 
 #include "logic/partially_finished_building.h"
 
+#include "base/macros.h"
 #include "economy/request.h"
 #include "economy/wares_queue.h"
 #include "logic/game.h"
@@ -26,12 +27,11 @@
 #include "logic/tribe.h"
 #include "logic/worker.h"
 #include "sound/sound_handler.h"
-#include "upcast.h"
 
 namespace Widelands {
 
 Partially_Finished_Building::Partially_Finished_Building
-	(const Building_Descr & gdescr) :
+	(const BuildingDescr & gdescr) :
 Building         (gdescr),
 m_building       (nullptr),
 m_builder_request(nullptr),
@@ -46,7 +46,7 @@ m_work_steps     (0)
 Set the type of building we're going to build
 ===============
 */
-void Partially_Finished_Building::set_building(const Building_Descr & building_descr) {
+void Partially_Finished_Building::set_building(const BuildingDescr & building_descr) {
 	assert(!m_building);
 
 	m_building = &building_descr;
@@ -58,9 +58,9 @@ void Partially_Finished_Building::cleanup(Editor_Game_Base & egbase) {
 		m_builder_request = nullptr;
 	}
 
-	container_iterate_const(Wares, m_wares, i) {
-		(*i.current)->cleanup();
-		delete *i.current;
+	for (WaresQueue * temp_ware : m_wares) {
+		temp_ware->cleanup();
+		delete temp_ware;
 	}
 	m_wares.clear();
 
@@ -84,17 +84,19 @@ Note that the workers are dealt with in the PlayerImmovable code.
 */
 void Partially_Finished_Building::set_economy(Economy * const e)
 {
-	if (Economy * const old = get_economy())
-		container_iterate_const(Wares, m_wares, i)
-			(*i.current)->remove_from_economy(*old);
-
+	if (Economy * const old = get_economy()) {
+		for (WaresQueue * temp_ware : m_wares) {
+			temp_ware->remove_from_economy(*old);
+		}
+	}
 	Building::set_economy(e);
 	if (m_builder_request)
 		m_builder_request->set_economy(e);
 
 	if (e)
-		container_iterate_const(Wares, m_wares, i)
-			(*i.current)->add_to_economy(*e);
+		for (WaresQueue * temp_ware : m_wares) {
+			temp_ware->add_to_economy(*e);
+		}
 }
 
 
@@ -110,7 +112,7 @@ void Partially_Finished_Building::request_builder(Game &) {
 	m_builder_request =
 		new Request
 			(*this,
-			 tribe().safe_worker_index("builder"),
+			 descr().tribe().safe_worker_index("builder"),
 			 Partially_Finished_Building::request_builder_callback,
 			 wwWORKER);
 }
@@ -139,7 +141,6 @@ uint32_t Partially_Finished_Building::get_playercaps() const {
 	return caps;
 }
 
-
 /*
 ===============
 Return the animation for the building that is in construction, as this
@@ -152,14 +153,13 @@ uint32_t Partially_Finished_Building::get_ui_anim() const
 }
 
 
-
 /*
 ===============
 Return the completion "percentage", where 2^16 = completely built,
 0 = nothing built.
 ===============
 */
-// TODO: should take gametime or so
+// TODO(unknown): should take gametime or so
 uint32_t Partially_Finished_Building::get_built_per64k() const
 {
 	const uint32_t time = owner().egbase().get_gametime();

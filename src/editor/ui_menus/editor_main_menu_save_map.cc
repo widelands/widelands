@@ -26,11 +26,12 @@
 
 #include <boost/format.hpp>
 
-#include "constants.h"
+#include "base/i18n.h"
+#include "base/macros.h"
+#include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/ui_menus/editor_main_menu_save_map_make_directory.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filesystem/zip_filesystem.h"
@@ -43,8 +44,6 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
-#include "upcast.h"
-#include "wexception.h"
 
 inline Editor_Interactive & Main_Menu_Save_Map::eia() {
 	return ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
@@ -173,14 +172,14 @@ void Main_Menu_Save_Map::clicked_ok() {
 		fill_list();
 	} else { //  Ok, save this map
 		Widelands::Map & map = eia().egbase().map();
-		if (not strcmp(map.get_name(), _("No Name"))) {
+		if (!strcmp(map.get_name(), _("No Name"))) {
 			std::string::size_type const filename_size = filename.size();
 			map.set_name
 				((4 <= filename_size
-				  and filename[filename_size - 1] == 'f'
-				  and filename[filename_size - 2] == 'm'
-				  and filename[filename_size - 3] == 'w'
-				  and filename[filename_size - 4] == '.'
+				  && filename[filename_size - 1] == 'f'
+				  && filename[filename_size - 2] == 'm'
+				  && filename[filename_size - 3] == 'w'
+				  && filename[filename_size - 4] == '.'
 				  ?
 				  filename.substr(0, filename_size - 4) : filename)
 				 .c_str());
@@ -302,10 +301,10 @@ void Main_Menu_Save_Map::fill_list() {
 	{
 		const char * const name = pname->c_str();
 		if
-			(strcmp(FileSystem::FS_Filename(name), ".")    and
-			 strcmp(FileSystem::FS_Filename(name), "..")   and
-			 g_fs->IsDirectory(name)                       and
-			 not Widelands::WL_Map_Loader::is_widelands_map(name))
+			(strcmp(FileSystem::FS_Filename(name), ".")    &&
+			 strcmp(FileSystem::FS_Filename(name), "..")   &&
+			 g_fs->IsDirectory(name)                       &&
+			 !Widelands::WL_Map_Loader::is_widelands_map(name))
 
 		m_ls->add
 			(FileSystem::FS_Filename(name),
@@ -380,7 +379,7 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 				% FileSystem::FS_Filename(filename.c_str())).str();
 		UI::WLMessageBox mbox
 			(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::YESNO);
-		if (not mbox.run())
+		if (!mbox.run())
 			return false;
 
 		g_fs->Unlink(complete_filename);

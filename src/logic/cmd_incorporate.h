@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef CMD_INCORPORATE_H
-#define CMD_INCORPORATE_H
+#ifndef WL_LOGIC_CMD_INCORPORATE_H
+#define WL_LOGIC_CMD_INCORPORATE_H
 
 #include "logic/cmd_queue.h"
 #include "logic/worker.h"
@@ -35,10 +35,10 @@ struct Cmd_Incorporate : public GameLogicCommand {
 
 	void execute (Game & game) override {worker->incorporate(game);}
 
-	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Write(FileWrite &, Editor_Game_Base &, MapMapObjectSaver  &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
-	virtual uint8_t id() const override {return QUEUE_CMD_INCORPORATE;}
+	uint8_t id() const override {return QUEUE_CMD_INCORPORATE;}
 
 private:
 	Worker * worker;
@@ -46,4 +46,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_CMD_INCORPORATE_H

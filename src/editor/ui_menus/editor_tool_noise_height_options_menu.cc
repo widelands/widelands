@@ -21,12 +21,13 @@
 
 #include <cstdio>
 
+#include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_decrease_height_tool.h"
 #include "editor/tools/editor_increase_height_tool.h"
 #include "editor/tools/editor_noise_height_tool.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
+#include "logic/widelands_geometry.h"
 
 
 using Widelands::Field;
@@ -39,23 +40,24 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
 	 UI::UniqueWindow::Registry & registry)
 	:
 	Editor_Tool_Options_Menu
-		(parent, registry, 200, 115, _("Noise Height Options")),
+		(parent, registry, 250, 3 * height + 4 * vspacing() + 2 * vmargin(), _("Noise Height Options")),
 	m_noise_tool(noise_tool),
 	m_lower_label
 		(this,
 		 hmargin(),
-		 vmargin(), (get_inner_w() - 2 * hmargin() - spacing()) / 2, height,
-		 UI::Align_BottomLeft),
+		 vmargin(),
+		 width, height,
+		 UI::Align_Left),
 	m_upper_label
 		(this,
-		 get_inner_w() / 2,
-		 vmargin(), m_lower_label.get_w(), height,
-		 UI::Align_BottomLeft),
+		 hmargin(),
+		 m_lower_label.get_y() + m_lower_label.get_h() + 2 * vspacing(),
+		 width, height,
+		 UI::Align_Left),
 	m_lower_decrease
 		(this, "decr_lower",
-		 hmargin() +
-		 (get_inner_w() - 2 * hmargin() - hspacing() - 4 * width) / 4,
-		 m_lower_label.get_y() + m_lower_label.get_h() + vspacing(),
+		 get_inner_w() - 2 * width - hspacing(),
+		 m_lower_label.get_y(),
 		 width, height,
 		 g_gr->images().get("pics/but0.png"),
 		 g_gr->images().get("pics/scrollbar_down.png"),
@@ -63,8 +65,8 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
 		 0 < noise_tool.get_interval().min),
 	m_lower_increase
 		(this, "incr_lower",
-		 m_lower_decrease.get_x() + m_lower_decrease.get_w(),
-		 m_lower_decrease.get_y(),
+		 get_inner_w() - width - hspacing(),
+		 m_lower_label.get_y(),
 		 width, height,
 		 g_gr->images().get("pics/but0.png"),
 		 g_gr->images().get("pics/scrollbar_up.png"),
@@ -72,11 +74,8 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
 		 noise_tool.get_interval().min < MAX_FIELD_HEIGHT),
 	m_upper_decrease
 		(this, "decr_upper",
-		 m_lower_decrease.get_x() + width
-		 +
-		 (get_inner_w() - 2 * hmargin() - hspacing() - 4 * width) / 2 +
-		 hspacing(),
-		 m_lower_decrease.get_y(),
+		 get_inner_w() - 2 * width - hspacing(),
+		 m_upper_label.get_y(),
 		 width, height,
 		 g_gr->images().get("pics/but0.png"),
 		 g_gr->images().get("pics/scrollbar_down.png"),
@@ -84,8 +83,8 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
 		 0 < noise_tool.get_interval().max),
 	m_upper_increase
 		(this, "incr_upper",
-		 m_upper_decrease.get_x() + m_upper_decrease.get_w(),
-		 m_upper_decrease.get_y(),
+		 get_inner_w() - width - hspacing(),
+		 m_upper_label.get_y(),
 		 width, height,
 		 g_gr->images().get("pics/but0.png"),
 		 g_gr->images().get("pics/scrollbar_up.png"),
@@ -93,14 +92,14 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
 		 noise_tool.get_interval().max < MAX_FIELD_HEIGHT),
 	m_set_label
 		(this,
-		 hspacing(),
-		 m_upper_decrease.get_y() + m_upper_decrease.get_h() + vspacing(),
-		 get_inner_w() - 2 * hspacing(), height,
-		 UI::Align_BottomCenter),
+		 hmargin(),
+		 m_upper_label.get_y() + m_upper_label.get_h() + 2 * vspacing(),
+		 width, height,
+		 UI::Align_Left),
 	m_setto_decrease
 		(this, "decr_set_to",
-		 get_inner_w() / 2 - width,
-		 m_set_label.get_y() + m_set_label.get_h() + vspacing(),
+		 get_inner_w() - 2 * width - hspacing(),
+		 m_set_label.get_y(),
 		 width, height,
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_down.png"),
@@ -108,8 +107,8 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
 		 0 < noise_tool.set_tool().get_interval().min),
 	m_setto_increase
 		(this, "incr_set_to",
-		 get_inner_w() / 2,
-		 m_setto_decrease.get_y(),
+		 get_inner_w() - width - hspacing(),
+		 m_set_label.get_y(),
 		 width, height,
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_up.png"),
@@ -143,7 +142,7 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
 */
 void Editor_Tool_Noise_Height_Options_Menu::update() {
 	char buffer[200];
-	const interval<Field::Height> height_interval = m_noise_tool.get_interval();
+	const Widelands::HeightInterval height_interval = m_noise_tool.get_interval();
 	snprintf(buffer, sizeof(buffer), _("Minimum: %u"), height_interval.min);
 	m_lower_label.set_text(buffer);
 	snprintf(buffer, sizeof(buffer), _("Maximum: %u"), height_interval.max);
@@ -159,7 +158,7 @@ void Editor_Tool_Noise_Height_Options_Menu::update() {
 
 
 void Editor_Tool_Noise_Height_Options_Menu::clicked_lower_decrease() {
-	interval<Field::Height> height_interval = m_noise_tool.get_interval();
+	Widelands::HeightInterval height_interval = m_noise_tool.get_interval();
 
 	assert(height_interval.valid());
 	assert(0 < height_interval.min);
@@ -176,7 +175,7 @@ void Editor_Tool_Noise_Height_Options_Menu::clicked_lower_decrease() {
 
 
 void Editor_Tool_Noise_Height_Options_Menu::clicked_lower_increase() {
-	interval<Field::Height> height_interval = m_noise_tool.get_interval();
+	Widelands::HeightInterval height_interval = m_noise_tool.get_interval();
 
 	assert(height_interval.valid());
 	assert(height_interval.min < MAX_FIELD_HEIGHT);
@@ -197,7 +196,7 @@ void Editor_Tool_Noise_Height_Options_Menu::clicked_lower_increase() {
 
 
 void Editor_Tool_Noise_Height_Options_Menu::clicked_upper_decrease() {
-	interval<Field::Height> height_interval = m_noise_tool.get_interval();
+	Widelands::HeightInterval height_interval = m_noise_tool.get_interval();
 
 	assert(height_interval.valid());
 	assert(0 < m_noise_tool.get_interval().max);
@@ -217,7 +216,7 @@ void Editor_Tool_Noise_Height_Options_Menu::clicked_upper_decrease() {
 
 
 void Editor_Tool_Noise_Height_Options_Menu::clicked_upper_increase() {
-	interval<Field::Height> height_interval = m_noise_tool.get_interval();
+	Widelands::HeightInterval height_interval = m_noise_tool.get_interval();
 
 	assert(m_noise_tool.get_interval().valid());
 	assert(m_noise_tool.get_interval().max < MAX_FIELD_HEIGHT);
@@ -242,7 +241,7 @@ void Editor_Tool_Noise_Height_Options_Menu::clicked_setto_decrease() {
 
 	--h;
 
-	set_tool.set_interval(interval<Field::Height>(h, h));
+	set_tool.set_interval(Widelands::HeightInterval(h, h));
 	m_setto_decrease.set_enabled(0 < h);
 	m_setto_increase.set_enabled(true);
 	update();
@@ -258,7 +257,7 @@ void Editor_Tool_Noise_Height_Options_Menu::clicked_setto_increase() {
 
 	++h;
 
-	set_tool.set_interval(interval<Field::Height>(h, h));
+	set_tool.set_interval(Widelands::HeightInterval(h, h));
 	m_setto_decrease.set_enabled(true);
 	m_setto_increase.set_enabled(h < MAX_FIELD_HEIGHT);
 	update();

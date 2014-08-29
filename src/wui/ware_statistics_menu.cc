@@ -19,9 +19,10 @@
 
 #include "wui/ware_statistics_menu.h"
 
+#include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "i18n.h"
+#include "logic/constants.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/warelist.h"
@@ -41,7 +42,7 @@
 static const char pic_tab_production[] = "pics/menu_tab_wares_production.png";
 static const char pic_tab_consumption[] = "pics/menu_tab_wares_consumption.png";
 static const char pic_tab_economy[] = "pics/menu_tab_wares_econ_health.png";
-static const char pic_tab_stock[] = "pics/menu_tab_wares_stock.png"; //TODO replace place holder
+static const char pic_tab_stock[] = "pics/menu_tab_wares_stock.png"; // TODO(unknown): replace place holder
 
 static const RGBColor colors[] = {
 	RGBColor(115, 115, 115), //inactive

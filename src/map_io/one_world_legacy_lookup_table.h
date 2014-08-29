@@ -17,17 +17,18 @@
  *
  */
 
-#ifndef ONE_WORLD_LEGACY_CONVERSION_H
-#define ONE_WORLD_LEGACY_CONVERSION_H
+#ifndef WL_MAP_IO_ONE_WORLD_LEGACY_LOOKUP_TABLE_H
+#define WL_MAP_IO_ONE_WORLD_LEGACY_LOOKUP_TABLE_H
 
 #include <map>
 #include <memory>
 #include <string>
 
-#include <boost/noncopyable.hpp>
+#include "base/macros.h"
 
-class OneWorldLegacyLookupTable : boost::noncopyable {
+class OneWorldLegacyLookupTable {
 public:
+	OneWorldLegacyLookupTable() = default;
 	virtual ~OneWorldLegacyLookupTable();
 
 	/// Looks up the new name for the 'resource'.
@@ -41,10 +42,12 @@ public:
 
 	/// Looks up the new name for the 'immovable'.
 	virtual std::string lookup_immovable(const std::string& immovable) const = 0;
+
+private:
+	DISALLOW_COPY_AND_ASSIGN(OneWorldLegacyLookupTable);
 };
 
 std::unique_ptr<OneWorldLegacyLookupTable>
 create_one_world_legacy_lookup_table(const std::string& old_world);
 
-#endif /* end of include guard: ONE_WORLD_LEGACY_CONVERSION_H */
-
+#endif  // end of include guard: WL_MAP_IO_ONE_WORLD_LEGACY_LOOKUP_TABLE_H

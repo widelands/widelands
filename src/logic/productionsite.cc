@@ -21,14 +21,14 @@
 #include "logic/productionsite.h"
 
 #include <boost/format.hpp>
-#include <libintl.h>
 
+#include "base/i18n.h"
+#include "base/macros.h"
+#include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/request.h"
 #include "economy/ware_instance.h"
 #include "economy/wares_queue.h"
-#include "helper.h"
-#include "i18n.h"
 #include "logic/carrier.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
@@ -39,8 +39,7 @@
 #include "logic/warelist.h"
 #include "logic/world/world.h"
 #include "profile/profile.h"
-#include "upcast.h"
-#include "wexception.h"
+#include "wui/text_constants.h"
 
 namespace Widelands {
 
@@ -54,13 +53,26 @@ ProductionSite BUILDING
 ==============================================================================
 */
 
-ProductionSite_Descr::ProductionSite_Descr
-	(char const * const _name, char const * const _descname,
+ProductionSiteDescr::ProductionSiteDescr
+	(MapObjectType _type, char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _tribe, const World& world)
 	:
-	Building_Descr(_name, _descname, directory, prof, global_s, _tribe)
+	BuildingDescr(_type, _name, _descname, directory, prof, global_s, _tribe)
 {
+	Section * const section = prof.get_section("out_of_resource_notification");
+	if (section != nullptr)
+	{
+		m_out_of_resource_title = section->get_string("title", "");
+		m_out_of_resource_message = section->get_string("message", "");
+		m_out_of_resource_delay_attempts = section->get_natural("delay_attempts", 0);
+	}
+	else
+	{
+		m_out_of_resource_title = "";
+		m_out_of_resource_message = "";
+		m_out_of_resource_delay_attempts = 0;
+	}
 	while
 		(Section::Value const * const op = global_s.get_next_val("output"))
 		try {
@@ -84,11 +96,13 @@ ProductionSite_Descr::ProductionSite_Descr
 			try {
 				Ware_Index const idx = tribe().ware_index(val->get_name());
 				if (idx != INVALID_INDEX) {
-					container_iterate_const(BillOfMaterials, inputs(), i)
-						if (i.current->first == idx)
+					for (const WareAmount& temp_inputs : inputs()) {
+						if (temp_inputs.first == idx) {
 							throw wexception("duplicated");
+						}
+					}
 					int32_t const value = val->get_int();
-					if (value < 1 or 255 < value)
+					if (value < 1 || 255 < value)
 						throw wexception("count is out of range 1 .. 255");
 					m_inputs.push_back(std::pair<Ware_Index, uint8_t>(idx, value));
 				} else
@@ -105,16 +119,18 @@ ProductionSite_Descr::ProductionSite_Descr
 			try {
 				Ware_Index const woi = tribe().worker_index(v->get_name());
 				if (woi != INVALID_INDEX) {
-					container_iterate_const(BillOfMaterials, working_positions(), i)
-						if (i.current->first == woi)
+					for (const WareAmount& wp : working_positions()) {
+						if (wp.first == woi) {
 							throw wexception("duplicated");
+						}
+					}
 					m_working_positions.push_back(std::pair<Ware_Index, uint32_t>(woi, v->get_positive()));
 				} else
 					throw wexception("invalid");
 			} catch (const _wexception & e) {
 				throw wexception("%s=\"%s\": %s", v->get_name(), v->get_string(), e.what());
 			}
-	if (working_positions().empty() and not global_s.has_val("max_soldiers"))
+	if (working_positions().empty() && !global_s.has_val("max_soldiers"))
 		throw wexception("no working/soldier positions");
 
 	// Get programs
@@ -136,7 +152,7 @@ ProductionSite_Descr::ProductionSite_Descr
 	}
 }
 
-ProductionSite_Descr::~ProductionSite_Descr()
+ProductionSiteDescr::~ProductionSiteDescr()
 {
 	while (m_programs.size()) {
 		delete m_programs.begin()->second;
@@ -148,7 +164,7 @@ ProductionSite_Descr::~ProductionSite_Descr()
 /**
  * Get the program of the given name.
  */
-const ProductionProgram * ProductionSite_Descr::get_program
+const ProductionProgram * ProductionSiteDescr::get_program
 	(const std::string & program_name) const
 {
 	Programs::const_iterator const it = programs().find(program_name);
@@ -161,7 +177,7 @@ const ProductionProgram * ProductionSite_Descr::get_program
 /**
  * Create a new building of this type
  */
-Building & ProductionSite_Descr::create_object() const {
+Building & ProductionSiteDescr::create_object() const {
 	return *new ProductionSite(*this);
 }
 
@@ -174,7 +190,7 @@ IMPLEMENTATION
 ==============================
 */
 
-ProductionSite::ProductionSite(const ProductionSite_Descr & ps_descr) :
+ProductionSite::ProductionSite(const ProductionSiteDescr & ps_descr) :
 	Building            (ps_descr),
 	m_working_positions (new Working_Position[ps_descr.nr_working_positions()]),
 	m_fetchfromflag     (0),
@@ -182,14 +198,14 @@ ProductionSite::ProductionSite(const ProductionSite_Descr & ps_descr) :
 	m_program_time      (0),
 	m_post_timer        (50),
 	m_statistics        (STATISTICS_VECTOR_LENGTH, false),
-	m_statistics_changed(true),
 	m_last_stat_percent (0),
 	m_crude_percent     (0),
 	m_is_stopped        (false),
-	m_default_anim      ("idle")
+	m_default_anim      ("idle"),
+	m_production_result (""),
+	m_out_of_resource_delay_counter(0)
 {
-	m_statistics_buffer[0] = '\0';
-	m_result_buffer[0] = '\0';
+	calc_statistics();
 }
 
 ProductionSite::~ProductionSite() {
@@ -200,31 +216,30 @@ ProductionSite::~ProductionSite() {
 /**
  * Display whether we're occupied.
  */
-std::string ProductionSite::get_statistics_string()
-{
+void ProductionSite::update_statistics_string(std::string* s) {
 	uint32_t const nr_working_positions = descr().nr_working_positions();
-	uint32_t       nr_workers           = 0;
+	uint32_t nr_workers = 0;
 	for (uint32_t i = nr_working_positions; i;)
 		nr_workers += m_working_positions[--i].worker ? 1 : 0;
-	if (!nr_workers) {
-		 return
-			(boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD_HEX % _("(not occupied)")).str();
-	} else if (uint32_t const nr_requests = nr_working_positions - nr_workers) {
-		return
-			(boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD_HEX %
-				ngettext("Worker missing", "Workers missing", nr_requests))
-			.str();
+
+	if (nr_workers == 0) {
+		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD_HEX % _("(not occupied)"))
+		        .str();
+		return;
 	}
 
-	if (m_statistics_changed) {
-		calc_statistics();
+	if (uint32_t const nr_requests = nr_working_positions - nr_workers) {
+		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD_HEX %
+		      ngettext("Worker missing", "Workers missing", nr_requests)).str();
+		return;
 	}
 
 	if (m_is_stopped) {
-		return (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BRIGHT_HEX % _("(stopped)")).str();
+		*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BRIGHT_HEX % _("(stopped)"))
+		        .str();
+		return;
 	}
-
-	return m_statistics_buffer;
+	*s = m_statistics_string_on_changed_statistics;
 }
 
 /**
@@ -234,7 +249,7 @@ std::string ProductionSite::get_statistics_string()
 bool ProductionSite::has_workers(Building_Index targetSite, Game & /* game */)
 {
 	// bld holds the description of the building we want to have
-	if (upcast(ProductionSite_Descr const, bld, tribe().get_building_descr(targetSite))) {
+	if (upcast(ProductionSiteDescr const, bld, descr().tribe().get_building_descr(targetSite))) {
 		// if he has workers
 		if (bld->nr_working_positions()) {
 			Ware_Index need = bld->working_positions()[0].first;
@@ -242,8 +257,8 @@ bool ProductionSite::has_workers(Building_Index targetSite, Game & /* game */)
 				if (!working_positions()[i].worker) {
 					return false; // no one is in this house
 				} else {
-					Ware_Index have = working_positions()[i].worker->worker_index();
-					if (tribe().get_worker_descr(have)->can_act_as(need)) {
+					Ware_Index have = working_positions()[i].worker->descr().worker_index();
+					if (descr().tribe().get_worker_descr(have)->can_act_as(need)) {
 						return true; // he found a lead worker
 					}
 				}
@@ -255,12 +270,13 @@ bool ProductionSite::has_workers(Building_Index targetSite, Game & /* game */)
 }
 
 
-
 WaresQueue & ProductionSite::waresqueue(Ware_Index const wi) {
-	container_iterate_const(Input_Queues, m_input_queues, i)
-		if ((*i.current)->get_ware() == wi)
-			return **i.current;
-	   throw wexception("%s (%u) has no WaresQueue for %u", name().c_str(), serial(), wi);
+	for (WaresQueue * ip_queue : m_input_queues) {
+		if (ip_queue->get_ware() == wi) {
+			return *ip_queue;
+		}
+	}
+	throw wexception("%s (%u) has no WaresQueue for %u", descr().name().c_str(), serial(), wi);
 }
 
 /**
@@ -268,6 +284,10 @@ WaresQueue & ProductionSite::waresqueue(Ware_Index const wi) {
  */
 void ProductionSite::calc_statistics()
 {
+	// TODO(sirver): this method does too much: it calculates statistics for the
+	// last few cycles, but it also formats them as a string and persists them
+	// into a string for reuse when the class is asked for the statistics
+	// string. However this string should only then be constructed.
 	uint8_t pos;
 	uint8_t ok = 0;
 	uint8_t lastOk = 0;
@@ -280,11 +300,13 @@ void ProductionSite::calc_statistics()
 		}
 	}
 	// Somehow boost::format doesn't handle correctly uint8_t in this case
-	unsigned int percOk = (ok * 100) / STATISTICS_VECTOR_LENGTH;
-	unsigned int lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
+	const unsigned int percOk = (ok * 100) / STATISTICS_VECTOR_LENGTH;
+	m_last_stat_percent = percOk;
+
+	const unsigned int lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
 
 	std::string color;
-	if (percOk > (m_crude_percent / 10000) and percOk - (m_crude_percent / 10000) > 50)
+	if (percOk > (m_crude_percent / 10000) && percOk - (m_crude_percent / 10000) > 50)
 		color = UI_FONT_CLR_IDLE_HEX;
 	else if (percOk < 33)
 		color = UI_FONT_CLR_BAD_HEX;
@@ -293,7 +315,7 @@ void ProductionSite::calc_statistics()
 	else
 		color = UI_FONT_CLR_GOOD_HEX;
 	const std::string perc_str =
-		(boost::format("<font color=%1$s>%2$i%%</font>") % color % percOk).str();
+		(boost::format("<font color=%s>%i%%</font>") % color % percOk).str();
 
 	std::string trend;
 	if (lastPercOk > percOk) {
@@ -309,18 +331,12 @@ void ProductionSite::calc_statistics()
 	const std::string trend_str =
 		(boost::format("<font color=%s>%s</font>") % color % trend).str();
 
-	if (0 < percOk and percOk < 100) {
-		snprintf
-			(m_statistics_buffer, sizeof(m_statistics_buffer),
-			 "%s %s", perc_str.c_str(), trend_str.c_str());
+	if (0 < percOk && percOk < 100) {
+		// TODO(GunChleoc): We might need to reverse the order here for RTL languages
+		m_statistics_string_on_changed_statistics = (boost::format("%s %s") % perc_str % trend_str).str();
 	} else {
-		snprintf
-			(m_statistics_buffer, sizeof(m_statistics_buffer),
-			 "%s", perc_str.c_str());
+		m_statistics_string_on_changed_statistics = perc_str;
 	}
-	m_last_stat_percent = percOk;
-
-	m_statistics_changed = false;
 }
 
 
@@ -342,9 +358,9 @@ void ProductionSite::init(Editor_Game_Base & egbase)
 
 	//  Request missing workers.
 	Working_Position * wp = m_working_positions;
-	container_iterate_const(BillOfMaterials, descr().working_positions(), i) {
-		Ware_Index const worker_index = i.current->first;
-		for (uint32_t j = i.current->second; j; --j, ++wp)
+	for (const WareAmount& temp_wp : descr().working_positions()) {
+		Ware_Index const worker_index = temp_wp.first;
+		for (uint32_t j =  temp_wp.second; j; --j, ++wp)
 			if (Worker * const worker = wp->worker)
 				worker->set_location(this);
 			else
@@ -362,18 +378,22 @@ void ProductionSite::init(Editor_Game_Base & egbase)
  */
 void ProductionSite::set_economy(Economy * const e)
 {
-	if (Economy * const old = get_economy())
-		container_iterate_const(Input_Queues, m_input_queues, i)
-			(*i.current)->remove_from_economy(*old);
+	if (Economy * const old = get_economy()) {
+		for (WaresQueue * ip_queue : m_input_queues) {
+			ip_queue->remove_from_economy(*old);
+		}
+	}
 
 	Building::set_economy(e);
 	for (uint32_t i = descr().nr_working_positions(); i;)
 		if (Request * const r = m_working_positions[--i].worker_request)
 			r->set_economy(e);
 
-	if (e)
-		container_iterate_const(Input_Queues, m_input_queues, i)
-			(*i.current)->add_to_economy(*e);
+	if (e) {
+		for (WaresQueue * ip_queue : m_input_queues) {
+			ip_queue->add_to_economy(*e);
+		}
+	}
 }
 
 /**
@@ -412,7 +432,7 @@ void ProductionSite::cleanup(Editor_Game_Base & egbase)
  * returns 0 on success -1 if there is no room for this worker
  */
 int ProductionSite::warp_worker
-	(Editor_Game_Base & egbase, const Worker_Descr & wdes)
+	(Editor_Game_Base & egbase, const WorkerDescr & wdes)
 {
 	bool assigned = false;
 	Working_Position * current = m_working_positions;
@@ -439,7 +459,7 @@ int ProductionSite::warp_worker
 		assigned = true;
 		break;
 	}
-	if (not assigned)
+	if (!assigned)
 		return -1;
 
 	if (upcast(Game, game, &egbase))
@@ -452,12 +472,12 @@ int ProductionSite::warp_worker
  */
 void ProductionSite::remove_worker(Worker & w)
 {
-	molog("%s leaving\n", w.descname().c_str());
+	molog("%s leaving\n", w.descr().descname().c_str());
 	Working_Position * wp = m_working_positions;
 
-	container_iterate_const(BillOfMaterials, descr().working_positions(), i) {
-		Ware_Index const worker_index = i.current->first;
-		for (uint32_t j = i.current->second; j; --j, ++wp) {
+	for (const WareAmount& temp_wp : descr().working_positions()) {
+		Ware_Index const worker_index = temp_wp.first;
+		for (uint32_t j = temp_wp.second; j; --j, ++wp) {
 			Worker * const worker = wp->worker;
 			if (worker && worker == &w) {
 				// do not request the type of worker that is currently assigned - maybe a trained worker was
@@ -510,7 +530,7 @@ void ProductionSite::request_worker_callback
 	// needs a worker like the one just arrived. That way it is of course still possible, that the worker is
 	// placed on the slot that originally requested the arrived worker.
 	bool worker_placed = false;
-	Ware_Index     idx = w->worker_index();
+	Ware_Index     idx = w->descr().worker_index();
 	for (Working_Position * wp = psite.m_working_positions;; ++wp) {
 		if (wp->worker_request == &rq) {
 			if (wp->worker_request->get_index() == idx) {
@@ -545,10 +565,10 @@ void ProductionSite::request_worker_callback
 		}
 		if (!worker_placed) {
 			// Find the next smaller version of this worker
-			Ware_Index nuwo    = psite.tribe().get_nrworkers();
+			Ware_Index nuwo    = psite.descr().tribe().get_nrworkers();
 			Ware_Index current = Ware_Index(static_cast<size_t>(0));
 			for (; current < nuwo; ++current) {
-				Worker_Descr const * worker = psite.tribe().get_worker_descr(current);
+				WorkerDescr const * worker = psite.descr().tribe().get_worker_descr(current);
 				if (worker->becomes() == idx) {
 					idx = current;
 					break;
@@ -582,7 +602,7 @@ void ProductionSite::act(Game & game, uint32_t const data)
 
 	if
 		(m_program_timer
-		 and
+		 &&
 		 static_cast<int32_t>(game.get_gametime() - m_program_time) >= 0)
 	{
 		m_program_timer = false;
@@ -676,7 +696,7 @@ bool ProductionSite::can_start_working() const
 
 
 void ProductionSite::try_start_working(Game & game) {
-	if (can_start_working() and descr().working_positions().size()) {
+	if (can_start_working() && descr().working_positions().size()) {
 		Worker & main_worker = *m_working_positions[0].worker;
 		main_worker.reset_tasks(game);
 		main_worker.start_task_buildingwork(game);
@@ -721,7 +741,7 @@ bool ProductionSite::get_building_work
 		{
 			Ware_Index const ware_index = ware_type_with_count.first;
 			const WareDescr & ware_ware_descr =
-				*tribe().get_ware_descr(ware_type_with_count.first);
+				*descr().tribe().get_ware_descr(ware_type_with_count.first);
 			{
 				WareInstance & ware =
 					*new WareInstance(ware_index, &ware_ware_descr);
@@ -742,8 +762,8 @@ bool ProductionSite::get_building_work
 		std::pair<Ware_Index, uint8_t> & worker_type_with_count =
 			*m_recruited_workers.rbegin();
 		{
-			const Worker_Descr & worker_descr =
-				*tribe().get_worker_descr(worker_type_with_count.first);
+			const WorkerDescr & worker_descr =
+				*descr().tribe().get_worker_descr(worker_type_with_count.first);
 			{
 				Worker & recruit =
 					ref_cast<Worker, Bob>(worker_descr.create_object());
@@ -762,11 +782,10 @@ bool ProductionSite::get_building_work
 	}
 
 	// Drop all the wares that are too much out to the flag.
-	container_iterate(Input_Queues, m_input_queues, iqueue) {
-		WaresQueue * queue = *iqueue;
+	for (WaresQueue * queue : m_input_queues) {
 		if (queue->get_filled() > queue->get_max_fill()) {
 			queue->set_filled(queue->get_filled() - 1);
-			const WareDescr & wd = *tribe().get_ware_descr(queue->get_ware());
+			const WareDescr & wd = *descr().tribe().get_ware_descr(queue->get_ware());
 			WareInstance & ware = *new WareInstance(queue->get_ware(), &wd);
 			ware.init(game);
 			worker.start_task_dropoff(game, ware);
@@ -853,7 +872,6 @@ void ProductionSite::program_end(Game & game, Program_Result const result)
 	switch (result) {
 	case Failed:
 		//changed by TB below
-		m_statistics_changed = true;
 		m_statistics.erase(m_statistics.begin(), m_statistics.begin() + 1);
 		m_statistics.push_back(false);
 		calc_statistics();
@@ -862,13 +880,9 @@ void ProductionSite::program_end(Game & game, Program_Result const result)
 		//end of changed by TB
 	case Completed:
 		m_skipped_programs.erase(program_name);
-		m_statistics_changed = true;
 		m_statistics.erase(m_statistics.begin(), m_statistics.begin() + 1);
 		m_statistics.push_back(true);
-		//if (result == Completed) {
-			train_workers(game);
-			//m_result_buffer[0] = '\0';  //changed by TB
-		//}
+		train_workers(game);
 		m_crude_percent = m_crude_percent  * 8 / 10 + 1000000 * 2 / 10;
 		calc_statistics();
 		break;
@@ -896,6 +910,38 @@ void ProductionSite::train_workers(Game & game)
 }
 
 
+void ProductionSite::notify_player(Game & game, uint8_t minutes)
+{
+	if (m_out_of_resource_delay_counter >=
+		 descr().out_of_resource_delay_attempts()) {
+		if (descr().out_of_resource_title().empty())
+		{
+			set_production_result(_("Can’t find any more resources!"));
+		}
+		else {
+			set_production_result(descr().out_of_resource_title());
+
+			assert(!descr().out_of_resource_message().empty());
+			send_message
+				(game,
+					  "produce",
+				 descr().out_of_resource_title(),
+				 descr().out_of_resource_message(),
+				 true,
+				 minutes * 60000, 0);
+		}
+	}
+	if (m_out_of_resource_delay_counter++ >=
+		 descr().out_of_resource_delay_attempts()) {
+		m_out_of_resource_delay_counter = 0;
+	}
+}
+
+void ProductionSite::unnotify_player() {
+	 set_production_result("");
+}
+
+
 /// Changes the default anim string to \li anim
 void ProductionSite::set_default_anim(std::string anim)
 {
@@ -907,5 +953,6 @@ void ProductionSite::set_default_anim(std::string anim)
 
 	m_default_anim = anim;
 }
+
 
 }

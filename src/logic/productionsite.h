@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef PRODUCTIONSITE_H
-#define PRODUCTIONSITE_H
+#ifndef WL_LOGIC_PRODUCTIONSITE_H
+#define WL_LOGIC_PRODUCTIONSITE_H
 
 #include <cstring>
 #include <map>
@@ -26,6 +26,7 @@
 #include <string>
 #include <vector>
 
+#include "base/macros.h"
 #include "logic/bill_of_materials.h"
 #include "logic/building.h"
 #include "logic/production_program.h"
@@ -38,7 +39,7 @@ struct ProductionProgram;
 class Soldier;
 class Request;
 class WaresQueue;
-class Worker_Descr;
+class WorkerDescr;
 
 
 /**
@@ -51,21 +52,22 @@ class Worker_Descr;
  * A production site can have one (or more) input wares types. Every input
  * wares type has an associated store.
  */
-struct ProductionSite_Descr : public Building_Descr {
+struct ProductionSiteDescr : public BuildingDescr {
 	friend struct ProductionProgram; // To add animations
 
-	ProductionSite_Descr
-		(char const * name, char const * descname,
+	ProductionSiteDescr
+		(MapObjectType type, char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &, const World&);
-	virtual ~ProductionSite_Descr();
+	~ProductionSiteDescr() override;
 
-	virtual Building & create_object() const override;
+	Building & create_object() const override;
 
 	uint32_t nr_working_positions() const {
 		uint32_t result = 0;
-		container_iterate_const(BillOfMaterials, working_positions(), i)
-			result += i.current->second;
+		for (const WareAmount& working_pos : working_positions()) {
+			result += working_pos.second;
+		}
 		return result;
 	}
 	const BillOfMaterials & working_positions() const {
@@ -85,12 +87,28 @@ struct ProductionSite_Descr : public Building_Descr {
 	typedef std::map<std::string, ProductionProgram *> Programs;
 	const Programs & programs() const {return m_programs;}
 
+	const std::string& out_of_resource_title() const {
+		return m_out_of_resource_title;
+	}
+
+	const std::string& out_of_resource_message() const {
+		return m_out_of_resource_message;
+	}
+	uint32_t out_of_resource_delay_attempts() const {
+		return m_out_of_resource_delay_attempts;
+	}
+
 private:
 	BillOfMaterials m_working_positions;
 	BillOfMaterials m_inputs;
 	Output   m_output_ware_types;
 	Output   m_output_worker_types;
 	Programs m_programs;
+	std::string m_out_of_resource_title;
+	std::string m_out_of_resource_message;
+	uint32_t    m_out_of_resource_delay_attempts;
+
+	DISALLOW_COPY_AND_ASSIGN(ProductionSiteDescr);
 };
 
 class ProductionSite : public Building {
@@ -110,10 +128,10 @@ class ProductionSite : public Building {
 	friend struct ProductionProgram::ActTrain;
 	friend struct ProductionProgram::ActPlayFX;
 	friend struct ProductionProgram::ActConstruct;
-	MO_DESCR(ProductionSite_Descr);
+	MO_DESCR(ProductionSiteDescr)
 
 public:
-	ProductionSite(const ProductionSite_Descr & descr);
+	ProductionSite(const ProductionSiteDescr & descr);
 	virtual ~ProductionSite();
 
 	void log_general_info(const Editor_Game_Base &) override;
@@ -133,26 +151,32 @@ public:
 		return m_working_positions;
 	}
 
-	virtual std::string get_statistics_string() override;
 	virtual bool has_workers(Building_Index targetSite, Game & game);
 	uint8_t get_statistics_percent() {return m_last_stat_percent;}
 	uint8_t get_crude_statistics() {return (m_crude_percent + 5000) / 10000;}
-	char const * result_string() const {return m_result_buffer;}
 
-	virtual WaresQueue & waresqueue(Ware_Index) override;
+	const std::string& production_result() const {return m_production_result;}
 
-	char const * type_name() const override {return "productionsite";}
-	virtual void init(Editor_Game_Base &) override;
-	virtual void cleanup(Editor_Game_Base &) override;
-	virtual void act(Game &, uint32_t data) override;
+	 // Production and worker programs set this to explain the current
+	 // state of the production. This string is shown as a tooltip
+	 // when the mouse hovers over the building.
+	 void set_production_result(const std::string& text) {
+		m_production_result = text;
+	}
 
-	virtual void remove_worker(Worker &) override;
-	int warp_worker(Editor_Game_Base &, const Worker_Descr & wd);
+	WaresQueue & waresqueue(Ware_Index) override;
 
-	virtual bool fetch_from_flag(Game &) override;
-	virtual bool get_building_work(Game &, Worker &, bool success) override;
+	void init(Editor_Game_Base &) override;
+	void cleanup(Editor_Game_Base &) override;
+	void act(Game &, uint32_t data) override;
 
-	virtual void set_economy(Economy *) override;
+	void remove_worker(Worker &) override;
+	int warp_worker(Editor_Game_Base &, const WorkerDescr & wd);
+
+	bool fetch_from_flag(Game &) override;
+	bool get_building_work(Game &, Worker &, bool success) override;
+
+	void set_economy(Economy *) override;
 
 	typedef std::vector<WaresQueue *> Input_Queues;
 	const Input_Queues & warequeues() const {return m_input_queues;}
@@ -160,10 +184,16 @@ public:
 
 	bool can_start_working() const;
 
+	/// sends a message to the player e.g. if the building's resource can't be found
+	void notify_player(Game& game, uint8_t minutes);
+	void unnotify_player();
+
 	void set_default_anim(std::string);
 
 protected:
-	virtual void create_options_window
+	void update_statistics_string(std::string* statistics) override;
+
+	void create_options_window
 		(Interactive_GameBase &, UI::Window * & registry) override;
 
 protected:
@@ -241,13 +271,17 @@ protected:  // TrainingSite must have access to this stuff
 	ProductionProgram::ActProduce::Items m_recruited_workers;
 	Input_Queues m_input_queues; ///< input queues for all inputs
 	std::vector<bool>        m_statistics;
-	bool                     m_statistics_changed;
-	char                     m_statistics_buffer[128];
-	char                     m_result_buffer   [213];
 	uint8_t                  m_last_stat_percent;
 	uint32_t                 m_crude_percent; //integer0-10000000, to be shirink to range 0-10
 	bool                     m_is_stopped;
 	std::string              m_default_anim; // normally "idle", "empty", if empty mine.
+
+private:
+	std::string              m_statistics_string_on_changed_statistics;
+	std::string              m_production_result; // hover tooltip text
+	uint32_t                 m_out_of_resource_delay_counter;
+
+	DISALLOW_COPY_AND_ASSIGN(ProductionSite);
 };
 
 /**
@@ -271,4 +305,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_PRODUCTIONSITE_H

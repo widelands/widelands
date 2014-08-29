@@ -19,13 +19,13 @@
 
 #include "graphic/richtext.h"
 
+#include "base/rect.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
-#include "rect.h"
-#include "text_parser.h"
+#include "graphic/text_parser.h"
 
 namespace UI {
 
@@ -54,7 +54,7 @@ struct ImageElement : Element {
 	ImageElement(const Rect & _bbox, const Image* _image)
 		: Element(_bbox), image(_image) {}
 
-	virtual void draw(RenderTarget & dst) override
+	void draw(RenderTarget & dst) override
 	{
 		dst.blit(Point(0, 0), image);
 	}
@@ -69,7 +69,7 @@ struct TextlineElement : Element {
 		 std::vector<std::string>::const_iterator words_end)
 		: Element(_bbox), style(_style), words(words_begin, words_end) {}
 
-	virtual void draw(RenderTarget & dst) override
+	void draw(RenderTarget & dst) override
 	{
 		assert(words.size());
 		uint32_t x = g_fh->draw_text_raw(dst, style, Point(0, 0), words[0]);
@@ -481,8 +481,7 @@ void RichText::draw(RenderTarget & dst, const Point& offset, bool background)
 	{
 		Rect oldbox;
 		Point oldofs;
-		Rect bbox = (*elt)->bbox;
-		bbox += offset;
+		Rect bbox((*elt)->bbox.top_left() + offset, (*elt)->bbox.w, (*elt)->bbox.h);
 
 		if (dst.enter_window(bbox, &oldbox, &oldofs)) {
 			if (background)

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef INTERACTIVE_SPECTATOR_H
-#define INTERACTIVE_SPECTATOR_H
+#ifndef WL_WUI_INTERACTIVE_SPECTATOR_H
+#define WL_WUI_INTERACTIVE_SPECTATOR_H
 
 #include <SDL_keyboard.h>
 
@@ -52,10 +52,10 @@ private:
 	void toggle_statistics();
 	void exit_btn();
 	void save_btn();
-	virtual bool can_see(Widelands::Player_Number) const override;
-	virtual bool can_act(Widelands::Player_Number) const override;
-	virtual Widelands::Player_Number player_number() const override;
-	virtual void node_action() override;
+	bool can_see(Widelands::Player_Number) const override;
+	bool can_act(Widelands::Player_Number) const override;
+	Widelands::Player_Number player_number() const override;
+	void node_action() override;
 
 private:
 	UI::Button m_toggle_chat;
@@ -71,4 +71,4 @@ private:
 };
 
 
-#endif
+#endif  // end of include guard: WL_WUI_INTERACTIVE_SPECTATOR_H

@@ -22,7 +22,8 @@
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
 
-#include "container_iterate.h"
+#include "base/deprecated.h"
+#include "base/macros.h"
 #include "graphic/font.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -34,7 +35,6 @@
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/table.h"
-#include "upcast.h"
 #include "wlapplication.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/soldiercapacitycontrol.h"
@@ -52,16 +52,16 @@ struct SoldierPanel : UI::Panel {
 
 	Widelands::Editor_Game_Base & egbase() const {return m_egbase;}
 
-	virtual void think() override;
-	virtual void draw(RenderTarget &) override;
+	void think() override;
+	void draw(RenderTarget &) override;
 
 	void set_mouseover(const SoldierFn & fn);
 	void set_click(const SoldierFn & fn);
 
 protected:
-	virtual void handle_mousein(bool inside) override;
-	virtual bool handle_mousemove(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
-	virtual bool handle_mousepress(Uint8 btn, int32_t x, int32_t y) override;
+	void handle_mousein(bool inside) override;
+	bool handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 
 private:
 	Point calc_pos(uint32_t row, uint32_t col) const;
@@ -114,7 +114,7 @@ m_egbase(gegbase),
 m_soldiers(*dynamic_cast<SoldierControl *>(&building)),
 m_last_animate_time(0)
 {
-	Soldier::calc_info_icon_size(building.tribe(), m_icon_width, m_icon_height);
+	Soldier::calc_info_icon_size(building.descr().tribe(), m_icon_width, m_icon_height);
 	m_icon_width += 2 * IconBorder;
 	m_icon_height += 2 * IconBorder;
 
@@ -132,12 +132,11 @@ m_last_animate_time(0)
 	set_think(true);
 
 	// Initialize the icons
-	std::vector<Soldier *> soldierlist = m_soldiers.presentSoldiers();
 	uint32_t row = 0;
 	uint32_t col = 0;
-	container_iterate_const(std::vector<Soldier *>, soldierlist, sit) {
+	for (Soldier * soldier : m_soldiers.presentSoldiers()) {
 		Icon icon;
-		icon.soldier = *sit.current;
+		icon.soldier = soldier;
 		icon.row = row;
 		icon.col = col;
 		icon.pos = calc_pos(row, col);
@@ -219,11 +218,15 @@ void SoldierPanel::think()
 		icon.pos.x = get_w();
 
 		std::vector<Icon>::iterator insertpos = m_icons.begin();
-		container_iterate(std::vector<Icon>, m_icons, icon_it) {
-			if (icon_it.current->row <= icon.row)
-				insertpos = icon_it.current + 1;
 
-			icon.pos.x = std::max<int32_t>(icon.pos.x, icon_it.current->pos.x + m_icon_width);
+		for (std::vector<Icon>::iterator icon_iter = m_icons.begin();
+			  icon_iter != m_icons.end();
+			  ++icon_iter) {
+
+			if (icon_iter->row <= icon.row)
+				insertpos = icon_iter + 1;
+
+			icon.pos.x = std::max<int32_t>(icon.pos.x, icon_iter->pos.x + m_icon_width);
 		}
 
 		icon.cache_health = 0;
@@ -239,8 +242,7 @@ void SoldierPanel::think()
 	int32_t maxdist = dt * AnimateSpeed / 1000;
 	m_last_animate_time = curtime;
 
-	container_iterate(std::vector<Icon>, m_icons, icon_it) {
-		Icon & icon = *icon_it.current;
+	for (Icon& icon : m_icons) {
 		Point goal = calc_pos(icon.row, icon.col);
 		Point dp = goal - icon.pos;
 
@@ -255,9 +257,9 @@ void SoldierPanel::think()
 		// Check whether health and/or level of the soldier has changed
 		Soldier * soldier = icon.soldier.get(egbase());
 		uint32_t level = soldier->get_attack_level();
-		level = level * (soldier->get_max_defense_level() + 1) + soldier->get_defense_level();
-		level = level * (soldier->get_max_evade_level() + 1) + soldier->get_evade_level();
-		level = level * (soldier->get_max_hp_level() + 1) + soldier->get_hp_level();
+		level = level * (soldier->descr().get_max_defense_level() + 1) + soldier->get_defense_level();
+		level = level * (soldier->descr().get_max_evade_level() + 1) + soldier->get_evade_level();
+		level = level * (soldier->descr().get_max_hp_level() + 1) + soldier->get_hp_level();
 
 		uint32_t health = soldier->get_current_hitpoints();
 
@@ -294,8 +296,7 @@ void SoldierPanel::draw(RenderTarget & dst)
 			 RGBAColor(0, 0, 0, 0));
 
 	// Draw icons
-	container_iterate_const(std::vector<Icon>, m_icons, icon_it) {
-		const Icon & icon = *icon_it.current;
+	for (const Icon& icon : m_icons) {
 		const Soldier * soldier = icon.soldier.get(egbase());
 		if (!soldier)
 			continue;
@@ -314,10 +315,11 @@ Point SoldierPanel::calc_pos(uint32_t row, uint32_t col) const
  */
 const Soldier * SoldierPanel::find_soldier(int32_t x, int32_t y) const
 {
-	container_iterate_const(std::vector<Icon>, m_icons, icon_it) {
-		Rect r(icon_it.current->pos, m_icon_width, m_icon_height);
-		if (r.contains(Point(x, y)))
-			return icon_it.current->soldier.get(egbase());
+	for (const Icon& icon : m_icons) {
+		Rect r(icon.pos, m_icon_width, m_icon_height);
+		if (r.contains(Point(x, y))) {
+			return icon.soldier.get(egbase());
+		}
 	}
 
 	return nullptr;
@@ -330,7 +332,7 @@ void SoldierPanel::handle_mousein(bool inside)
 }
 
 bool SoldierPanel::handle_mousemove
-	(Uint8 /* state */,
+	(uint8_t /* state */,
 	 int32_t x,
 	 int32_t y,
 	 int32_t /* xdiff */,
@@ -341,7 +343,7 @@ bool SoldierPanel::handle_mousemove
 	return true;
 }
 
-bool SoldierPanel::handle_mousepress(Uint8 btn, int32_t x, int32_t y)
+bool SoldierPanel::handle_mousepress(uint8_t btn, int32_t x, int32_t y)
 {
 	if (btn == SDL_BUTTON_LEFT) {
 		if (m_click_fn) {
@@ -476,10 +478,10 @@ void SoldierList::mouseover(const Soldier * soldier)
 
 	m_infotext.set_text(
 		(boost::format(_("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"))
-			% soldier->get_hp_level() % soldier->get_max_hp_level()
-			% soldier->get_attack_level() % soldier->get_max_attack_level()
-			% soldier->get_defense_level() % soldier->get_max_defense_level()
-			% soldier->get_evade_level() % soldier->get_max_evade_level()
+			% soldier->get_hp_level() % soldier->descr().get_max_hp_level()
+			% soldier->get_attack_level() % soldier->descr().get_max_attack_level()
+			% soldier->get_defense_level() % soldier->descr().get_max_defense_level()
+			% soldier->get_evade_level() % soldier->descr().get_max_evade_level()
 		).str()
 	);
 }

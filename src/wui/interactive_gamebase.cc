@@ -19,12 +19,12 @@
 
 #include "wui/interactive_gamebase.h"
 
+#include "base/macros.h"
 #include "logic/findbob.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "logic/ship.h"
 #include "profile/profile.h"
-#include "upcast.h"
 #include "wui/game_summary.h"
 
 Interactive_GameBase::Interactive_GameBase
@@ -85,8 +85,8 @@ bool Interactive_GameBase::try_show_ship_window()
 	if (!map.find_bobs(area, &ships, Widelands::FindBobShip()))
 		return false;
 
-	container_iterate_const(std::vector<Widelands::Bob *>, ships, it) {
-		if (upcast(Widelands::Ship, ship, *it.current)) {
+	for (Widelands::Bob * temp_ship : ships) {
+		if (upcast(Widelands::Ship, ship, temp_ship)) {
 			if (can_see(ship->get_owner()->player_number())) {
 				ship->show_window(*this);
 				return true;

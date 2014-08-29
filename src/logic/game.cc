@@ -20,35 +20,40 @@
 #include "logic/game.h"
 
 #include <cstring>
+#include <limits>
 #include <memory>
 #include <string>
 
 #ifndef _WIN32
+#include <SDL.h> // for a dirty hack.
 #include <unistd.h> // for usleep
 #else
 #include <windows.h>
 #endif
 
-#include "computer_player.h"
+#include "base/i18n.h"
+#include "base/log.h"
+#include "base/macros.h"
+#include "base/time_string.h"
+#include "base/warning.h"
 #include "economy/economy.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
-#include "gamesettings.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
-#include "log.h"
 #include "logic/carrier.h"
 #include "logic/cmd_calculate_statistics.h"
 #include "logic/cmd_luacoroutine.h"
 #include "logic/cmd_luascript.h"
+#include "logic/game_settings.h"
 #include "logic/militarysite.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/replay.h"
 #include "logic/ship.h"
+#include "logic/single_player_game_controller.h"
 #include "logic/soldier.h"
 #include "logic/trainingsite.h"
 #include "logic/tribe.h"
@@ -57,12 +62,8 @@
 #include "profile/profile.h"
 #include "scripting/lua_table.h"
 #include "scripting/scripting.h"
-#include "single_player_game_controller.h"
 #include "sound/sound_handler.h"
-#include "timestring.h"
 #include "ui_basic/progresswindow.h"
-#include "upcast.h"
-#include "warning.h"
 #include "wlapplication.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
@@ -191,7 +192,7 @@ void Game::set_write_replay(bool const wr)
 	//  this is to ensure we do not crash because of diskspace
 	//  still this is only possibe to go from true->false
 	//  still probally should not do this with an assert but with better checks
-	assert(m_state == gs_notrunning || not wr);
+	assert(m_state == gs_notrunning || !wr);
 
 	m_writereplay = wr;
 }
@@ -227,8 +228,9 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 	loaderUI.step (_("Preloading a map"));
 	maploader->preload_map(true);
 	std::string const background = map().get_background();
-	if (background.size() > 0)
+	if (!background.empty()) {
 		loaderUI.set_background(background);
+	}
 
 	// We have to create the players here.
 	Player_Number const nr_players = map().get_nrplayers();
@@ -245,7 +247,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 
 	set_ibase
 		(new Interactive_Player
-		 	(*this, g_options.pull_section("global"), 1, true, false));
+		 	(*this, g_options.pull_section("global"), 1, false));
 
 	loaderUI.step (_("Loading a map"));
 	maploader->load_map_complete(*this, true);
@@ -262,8 +264,6 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 		m_ctrl = nullptr;
 		throw;
 	}
-
-	return false;
 }
 
 
@@ -287,8 +287,9 @@ void Game::init_newgame
 	maploader->preload_map(settings.scenario);
 	std::string const background = map().get_background();
 	if (loaderUI) {
-		if (background.size() > 0)
+		if (!background.empty()) {
 			loaderUI->set_background(background);
+		}
 		loaderUI->step(_("Configuring players"));
 	}
 	std::vector<PlayerSettings> shared;
@@ -396,7 +397,7 @@ bool Game::run_load_game(std::string filename, const std::string& script_to_run)
 		player_nr = gpdp.get_player_nr();
 		set_ibase
 			(new Interactive_Player
-			 	(*this, g_options.pull_section("global"), player_nr, true, false));
+			 	(*this, g_options.pull_section("global"), player_nr, false));
 
 		loaderUI.step(_("Loading..."));
 		gl.load_game();
@@ -416,8 +417,6 @@ bool Game::run_load_game(std::string filename, const std::string& script_to_run)
 		m_ctrl = nullptr;
 		throw;
 	}
-
-	return false;
 }
 
 /**
@@ -479,7 +478,7 @@ bool Game::run
 		} else {
 			// Is a scenario!
 			iterate_players_existing_novar(p, nr_players, *this) {
-				if (not map().get_starting_pos(p))
+				if (!map().get_starting_pos(p))
 				throw warning
 					(_("Missing starting position"),
 					 _
@@ -541,7 +540,7 @@ bool Game::run
 		if (m_writereplay) {
 			log("Starting replay writer\n");
 
-			assert(not m_replaywriter);
+			assert(!m_replaywriter);
 			m_replaywriter = new ReplayWriter(*this, fname);
 
 			log("Replay writer has started\n");
@@ -583,7 +582,7 @@ bool Game::run
 		m_state = gs_running;
 		//handle network
 		while (m_state == gs_running) {
-			// TODO this should be improved.
+			// TODO(unknown): this should be improved.
 #ifndef _WIN32
 			if (usleep(100) == -1)
 				break;
@@ -627,23 +626,26 @@ void Game::think()
 
 /// (Only) called by the dedicated server, to end a game once all players left
 void Game::end_dedicated_game() {
-	assert(not g_gr);
+	assert(!g_gr);
 	m_state = gs_notrunning;
 }
 
 /**
  * Cleanup for load
  * \deprecated
- * \todo Get rid of this. Prefer to delete and recreate Game-style objects
- * Note that this needs fixes in the editor.
  */
+// TODO(unknown): Get rid of this. Prefer to delete and recreate Game-style objects
+// Note that this needs fixes in the editor.
 void Game::cleanup_for_load()
 {
 	m_state = gs_notrunning;
 
 	Editor_Game_Base::cleanup_for_load();
-	container_iterate_const(std::vector<Tribe_Descr *>, tribes_, i)
-		delete *i.current;
+
+	for (Tribe_Descr* tribe : tribes_) {
+		delete tribe;
+	}
+
 	tribes_.clear();
 	cmdqueue().flush();
 
@@ -864,8 +866,7 @@ void Game::send_player_change_soldier_capacity
 void Game::send_player_enemyflagaction
 	(const Flag  &       flag,
 	 Player_Number const who_attacks,
-	 uint32_t      const num_soldiers,
-	 uint8_t       const retreat)
+	 uint32_t      const num_soldiers)
 {
 	if
 		(1
@@ -875,15 +876,9 @@ void Game::send_player_enemyflagaction
 		 	 	(flag.get_building()->get_position(), map().get_width())))
 		send_player_command
 			(*new Cmd_EnemyFlagAction
-			 	(get_gametime(), who_attacks, flag, num_soldiers, retreat));
+			 	(get_gametime(), who_attacks, flag, num_soldiers));
 }
 
-
-void Game::send_player_changemilitaryconfig(Player_Number const pid, uint8_t const retreat)
-{
-	send_player_command
-		(*new Cmd_ChangeMilitaryConfig(get_gametime(), pid, retreat));
-}
 
 void Game::send_player_ship_scout_direction(Ship & ship, uint8_t direction)
 {
@@ -1003,8 +998,8 @@ void Game::sample_statistics()
 				 workerid < tribe_workers;
 				 ++workerid)
 				if
-					(not
-					 dynamic_cast<Carrier::Descr const *>
+					(!
+					 dynamic_cast<CarrierDescr const *>
 					 	(tribe.get_worker_descr(workerid)))
 					wostock += eco->stock_worker(workerid);
 		}
@@ -1032,7 +1027,8 @@ void Game::sample_statistics()
 		iterate_players_existing(p, nr_plrs, *this, plr) {
 			std::unique_ptr<LuaCoroutine> cr(hook->get_coroutine("calculator"));
 			cr->push_arg(plr);
-			cr->resume(&custom_statistic[p - 1]);
+			cr->resume();
+			custom_statistic[p - 1] = cr->pop_uint32();
 		}
 	}
 
@@ -1159,6 +1155,10 @@ void Game::WriteStatistics(FileWrite & fw)
 			fw.Unsigned32(m_general_stats[p - 1].miltary_strength[j]);
 			fw.Unsigned32(m_general_stats[p - 1].custom_statistic[j]);
 		}
+}
+
+double logic_rand_as_double(Game* game) {
+	return static_cast<double>(game->logic_rand()) / std::numeric_limits<uint32_t>::max();
 }
 
 }

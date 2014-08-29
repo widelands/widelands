@@ -21,6 +21,7 @@
 
 #include <map>
 
+#include "base/macros.h"
 #include "economy/flag.h"
 #include "economy/request.h"
 #include "economy/ware_instance.h"
@@ -34,7 +35,6 @@
 #include "logic/worker.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "upcast.h"
 
 namespace Widelands {
 
@@ -44,7 +44,7 @@ void Map_Flagdata_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
-	 Map_Map_Object_Loader &       mol)
+	 MapMapObjectLoader &       mol)
 {
 	if (skip)
 		return;
@@ -54,15 +54,15 @@ void Map_Flagdata_Data_Packet::Read
 
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
+		if (1 <= packet_version && packet_version <= CURRENT_PACKET_VERSION) {
 			const Map  & map    = egbase.map();
 			Extent const extent = map.extent();
 			for (;;) {
-				if (2 <= packet_version and fr.EndOfFile())
+				if (2 <= packet_version && fr.EndOfFile())
 					break;
 				Serial const serial = fr.Unsigned32();
-				if (packet_version < 2 and serial == 0xffffffff) {
-					if (not fr.EndOfFile())
+				if (packet_version < 2 && serial == 0xffffffff) {
+					if (!fr.EndOfFile())
 						throw game_data_error
 							("expected end of file after serial 0xffffffff");
 					break;
@@ -226,7 +226,7 @@ void Map_Flagdata_Data_Packet::Read
 
 
 void Map_Flagdata_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileSystem & fs, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 
 {
 	FileWrite fw;
@@ -282,8 +282,8 @@ void Map_Flagdata_Data_Packet::Write
 			const Flag::CapacityWaitQueue & capacity_wait =
 				flag->m_capacity_wait;
 			fw.Unsigned16(capacity_wait.size());
-			container_iterate_const(Flag::CapacityWaitQueue, capacity_wait, i) {
-				Worker const * const obj = i.current->get(egbase);
+			for (const OPtr<Worker >&  temp_worker : capacity_wait) {
+				Worker const * const obj = temp_worker.get(egbase);
 				assert
 					(obj);
 				assert
@@ -297,16 +297,16 @@ void Map_Flagdata_Data_Packet::Write
 			}
 			const Flag::FlagJobs & flag_jobs = flag->m_flag_jobs;
 			fw.Unsigned16(flag_jobs.size());
-			container_iterate_const(Flag::FlagJobs, flag_jobs, i) {
-				if (i.current->request) {
+
+			for (const Flag::FlagJob& temp_job : flag_jobs) {
+				if (temp_job.request) {
 					fw.Unsigned8(1);
-					i.current->request->Write
+					temp_job.request->Write
 						(fw, ref_cast<Game, Editor_Game_Base>(egbase), mos);
 				} else
 					fw.Unsigned8(0);
 
-
-				fw.String(i.current->program);
+				fw.String(temp_job.program);
 			}
 
 			mos.mark_object_as_saved(*flag);

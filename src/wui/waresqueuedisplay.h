@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef _WARESQUEUEDISPLAY_H_
-#define _WARESQUEUEDISPLAY_H_
+#ifndef WL_WUI_WARESQUEUEDISPLAY_H
+#define WL_WUI_WARESQUEUEDISPLAY_H
 
 #include <cstdlib>
 
@@ -65,8 +65,8 @@ public:
 		 bool = false);
 	~WaresQueueDisplay();
 
-	virtual void think() override;
-	virtual void draw(RenderTarget &) override;
+	void think() override;
+	void draw(RenderTarget &) override;
 
 private:
 	Interactive_GameBase  & m_igb;
@@ -98,4 +98,4 @@ private:
 	void compute_max_fill_buttons_enabled_state();
 };
 
-#endif // _WARESQUEUEDISPLAY_H_
+#endif  // end of include guard: WL_WUI_WARESQUEUEDISPLAY_H

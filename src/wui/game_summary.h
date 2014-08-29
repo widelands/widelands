@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef GAME_SUMMARY_H
-#define GAME_SUMMARY_H
+#ifndef WL_WUI_GAME_SUMMARY_H
+#define WL_WUI_GAME_SUMMARY_H
 
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
@@ -39,7 +39,7 @@ public:
 	GameSummaryScreen
 		(Interactive_GameBase * parent, UI::UniqueWindow::Registry * r);
 
-	bool handle_mousepress(Uint8 btn, int32_t mx, int32_t my) override;
+	bool handle_mousepress(uint8_t btn, int32_t mx, int32_t my) override;
 private:
 	void fill_data();
 	void stop_clicked();
@@ -57,4 +57,4 @@ private:
 	UI::Table<uintptr_t const> *     m_players_table;
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_GAME_SUMMARY_H

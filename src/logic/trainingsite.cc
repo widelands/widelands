@@ -21,9 +21,10 @@
 
 #include <cstdio>
 
+#include "base/i18n.h"
+#include "base/macros.h"
 #include "economy/request.h"
 #include "helper.h"
-#include "i18n.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/player.h"
@@ -32,44 +33,40 @@
 #include "logic/tribe.h"
 #include "logic/worker.h"
 #include "profile/profile.h"
-#include "upcast.h"
 
 
 namespace Widelands {
 
 const uint32_t TrainingSite::training_state_multiplier = 12;
 
-TrainingSite_Descr::TrainingSite_Descr
+TrainingSiteDescr::TrainingSiteDescr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _tribe, const World& world)
 	:
-	ProductionSite_Descr
-		(_name, _descname, directory, prof, global_s, _tribe, world),
-
-	//  FIXME This is currently hardcoded for "soldier" but should allow any
-	//  FIXME soldier type name.
+	ProductionSiteDescr
+		(MapObjectType::TRAININGSITE, _name, _descname, directory, prof, global_s, _tribe, world),
 	m_num_soldiers      (global_s.get_safe_int("soldier_capacity")),
-	m_max_stall (global_s.get_safe_int("trainer_patience")),
+	m_max_stall         (global_s.get_safe_int("trainer_patience")),
 
-m_train_hp          (false),
-m_train_attack      (false),
-m_train_defense     (false),
-m_train_evade       (false),
-m_min_hp            (0),
-m_min_attack        (0),
-m_min_defense       (0),
-m_min_evade         (0),
-m_max_hp            (0),
-m_max_attack        (0),
-m_max_defense       (0),
-m_max_evade         (0)
+	m_train_hp          (false),
+	m_train_attack      (false),
+	m_train_defense     (false),
+	m_train_evade       (false),
+	m_min_hp            (0),
+	m_min_attack        (0),
+	m_min_defense       (0),
+	m_min_evade         (0),
+	m_max_hp            (0),
+	m_max_attack        (0),
+	m_max_defense       (0),
+	m_max_evade         (0)
 {
 	// Read the range of levels that can update this building
-	//  FIXME This is currently hardcoded to "soldier" but it should search for
-	//  FIXME sections starting with the name of each soldier type.
-	//  FIXME These sections also seem redundant. Eliminate them (having the
-	//  FIXME programs should be enough).
+	//  TODO(unknown): This is currently hardcoded to "soldier" but it should search for
+	//  sections starting with the name of each soldier type.
+	//  These sections also seem redundant. Eliminate them (having the
+	//  programs should be enough).
 	if (Section * const s = prof.get_section("soldier hp")) {
 		m_train_hp      = true;
 		m_min_hp        = s->get_safe_int("min_level");
@@ -96,7 +93,7 @@ m_max_evade         (0)
  * Create a new training site
  * \return  the new training site
  */
-Building & TrainingSite_Descr::create_object() const {
+Building & TrainingSiteDescr::create_object() const {
 	return *new TrainingSite(*this);
 }
 
@@ -105,7 +102,7 @@ Building & TrainingSite_Descr::create_object() const {
  * \return  the minimum level to which this building can downgrade a
  * specified attribute
  */
-int32_t TrainingSite_Descr::get_min_level(const tAttribute at) const {
+int32_t TrainingSiteDescr::get_min_level(const tAttribute at) const {
 	switch (at) {
 	case atrHP:
 		return m_min_hp;
@@ -126,7 +123,7 @@ int32_t TrainingSite_Descr::get_min_level(const tAttribute at) const {
  * \param at  the attribute to investigate
  * \return  the maximum level to be attained at this site
  */
-int32_t TrainingSite_Descr::get_max_level(const tAttribute at) const {
+int32_t TrainingSiteDescr::get_max_level(const tAttribute at) const {
 	switch (at) {
 	case atrHP:
 		return m_max_hp;
@@ -142,7 +139,7 @@ int32_t TrainingSite_Descr::get_max_level(const tAttribute at) const {
 }
 
 int32_t
-TrainingSite_Descr::get_max_stall() const
+TrainingSiteDescr::get_max_stall() const
 {
 	return m_max_stall;
 }
@@ -155,7 +152,7 @@ class TrainingSite
 =============================
 */
 
-TrainingSite::TrainingSite(const TrainingSite_Descr & d) :
+TrainingSite::TrainingSite(const TrainingSiteDescr & d) :
 ProductionSite   (d),
 m_soldier_request(nullptr),
 m_capacity       (descr().get_max_number_of_soldiers()),
@@ -180,22 +177,13 @@ m_result         (Failed)
 		init_kick_state(atrEvade, d);
 }
 void
-TrainingSite::init_kick_state(const tAttribute & art, const TrainingSite_Descr & d)
+TrainingSite::init_kick_state(const tAttribute & art, const TrainingSiteDescr & d)
 {
 		// Now with kick-out state saving implemented, initializing is an overkill
 		for (int t = d.get_min_level(art); t <= d.get_max_level(art); t++)
 			trainingAttempted(art, t);
 }
 
-
-/**
- * Retrieve the training program that is currently running.
- * \return  the name of the current program
- */
-std::string TrainingSite::get_statistics_string()
-{
-	return ProductionSite::get_statistics_string();
-}
 
 /**
  * Setup the building and request soldiers
@@ -206,12 +194,13 @@ void TrainingSite::init(Editor_Game_Base & egbase)
 
 	upcast(Game, game, &egbase);
 
-	container_iterate_const(std::vector<Soldier *>, m_soldiers, i) {
-		(*i.current)->set_location_initially(*this);
-		assert(not (*i.current)->get_state()); //  Should be newly created.
+	for (Soldier * soldier : m_soldiers) {
+		soldier->set_location_initially(*this);
+		assert(!soldier->get_state()); //  Should be newly created.
 
-		if (game)
-			(*i.current)->start_task_idle(*game, 0, -1);
+		if (game) {
+			soldier->start_task_idle(*game, 0, -1);
+		}
 	}
 	update_soldier_request();
 }
@@ -289,7 +278,7 @@ void TrainingSite::update_soldier_request() {
 			m_soldier_request =
 				new Request
 					(*this,
-					 tribe().safe_worker_index("soldier"),
+					 descr().tribe().safe_worker_index("soldier"),
 					 TrainingSite::request_soldier_callback,
 					 wwWORKER);
 
@@ -465,8 +454,9 @@ void TrainingSite::drop_unupgradable_soldiers(Game &)
 
 	// Drop soldiers only now, so that changes in the soldiers array don't
 	// mess things up
-	container_iterate_const(std::vector<Soldier *>, droplist, i)
-		dropSoldier(**i.current);
+	for (Soldier * soldier : droplist) {
+		dropSoldier(*soldier);
+	}
 }
 
 /**
@@ -590,16 +580,16 @@ void TrainingSite::find_and_start_next_program(Game & game)
 		uint32_t maxprio = 0;
 		uint32_t maxcredit = 0;
 
-		container_iterate(std::vector<Upgrade>, m_upgrades, i) {
-			if (i.current->credit >= 10) {
-				i.current->credit -= 10;
-				return start_upgrade(game, *i.current);
+		for (Upgrade& upgrade : m_upgrades) {
+			if (upgrade.credit >= 10) {
+				upgrade.credit -= 10;
+				return start_upgrade(game, upgrade);
 			}
 
-			if (maxprio   < i.current->prio)
-				maxprio    = i.current->prio;
-			if (maxcredit < i.current->credit)
-				maxcredit  = i.current->credit;
+			if (maxprio   < upgrade.prio)
+				maxprio    = upgrade.prio;
+			if (maxcredit < upgrade.credit)
+				maxcredit  = upgrade.credit;
 		}
 
 		if (maxprio == 0)
@@ -607,8 +597,9 @@ void TrainingSite::find_and_start_next_program(Game & game)
 
 		uint32_t const multiplier = 1 + (10 - maxcredit) / maxprio;
 
-		container_iterate(std::vector<Upgrade>, m_upgrades, i)
-			i.current->credit += multiplier * i.current->prio;
+		for (Upgrade& upgrade : m_upgrades) {
+			upgrade.credit += multiplier * upgrade.prio;
+		}
 	}
 }
 
@@ -622,8 +613,8 @@ void TrainingSite::start_upgrade(Game & game, Upgrade & upgrade)
 	int32_t minlevel = upgrade.max;
 	int32_t maxlevel = upgrade.min;
 
-	container_iterate_const(std::vector<Soldier *>, m_soldiers, i) {
-		int32_t const level = (*i.current)->get_level(upgrade.attribute);
+	for (Soldier * soldier : m_soldiers) {
+		int32_t const level = soldier->get_level(upgrade.attribute);
 
 		if (level > upgrade.max || level < upgrade.min)
 			continue;
@@ -671,10 +662,11 @@ void TrainingSite::start_upgrade(Game & game, Upgrade & upgrade)
 
 TrainingSite::Upgrade * TrainingSite::get_upgrade(tAttribute const atr)
 {
-	container_iterate(std::vector<Upgrade>, m_upgrades, i)
-		if (i.current->attribute == atr)
-			return &*i.current;
-
+	for (Upgrade& upgrade : m_upgrades) {
+		if (upgrade.attribute == atr) {
+			return &upgrade;
+		}
+	}
 	return nullptr;
 }
 
@@ -684,10 +676,11 @@ TrainingSite::Upgrade * TrainingSite::get_upgrade(tAttribute const atr)
  */
 int32_t TrainingSite::get_pri(tAttribute atr)
 {
-	container_iterate_const(std::vector<Upgrade>, m_upgrades, i)
-		if (i.current->attribute == atr)
-			return i.current->prio;
-
+	for (const Upgrade& upgrade : m_upgrades) {
+		if (upgrade.attribute == atr) {
+			return upgrade.prio;
+		}
+	}
 	return 0;
 }
 
@@ -699,11 +692,12 @@ void TrainingSite::set_pri(tAttribute atr, int32_t prio)
 	if (prio < 0)
 		prio = 0;
 
-	container_iterate(std::vector<Upgrade>, m_upgrades, i)
-		if (i.current->attribute == atr) {
-			i.current->prio = prio;
+	for (Upgrade& upgrade : m_upgrades) {
+		if (upgrade.attribute == atr) {
+			upgrade.prio = prio;
 			return;
 		}
+	}
 }
 
 /**
@@ -731,8 +725,8 @@ void TrainingSite::add_upgrade
 void TrainingSite::calc_upgrades() {
 	assert(m_upgrades.empty());
 
-	//  FIXME This is currently hardcoded for "soldier" but it should allow any
-	//  FIXME soldier type name.
+	//  TODO(unknown): This is currently hardcoded for "soldier" but it should allow any
+	//  soldier type name.
 	if (descr().get_train_hp())
 		add_upgrade(atrHP, "upgrade_soldier_hp_");
 	if (descr().get_train_attack())

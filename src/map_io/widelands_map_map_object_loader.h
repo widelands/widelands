@@ -17,31 +17,31 @@
  *
  */
 
-#ifndef WIDELANDS_MAP_MAP_OBJECT_LOADER_H
-#define WIDELANDS_MAP_MAP_OBJECT_LOADER_H
+#ifndef WL_MAP_IO_WIDELANDS_MAP_MAP_OBJECT_LOADER_H
+#define WL_MAP_IO_WIDELANDS_MAP_MAP_OBJECT_LOADER_H
 
 #include <map>
 #include <typeinfo>
 
 #include <stdint.h>
 
+#include "base/macros.h"
 #include "logic/game_data_error.h"
 #include "logic/instances.h"
 #include "logic/widelands.h"
-#include "upcast.h"
 
 
 namespace Widelands {
 class Bob;
-class Map_Object;
+class MapObject;
 class Editor_Game_Base;
 
 /*
  * This class helps to
  *   - keep track of map objects on the map (to be loaded)
- *   - translate file index pointers into Map_Objects
+ *   - translate file index pointers into MapObjects
  */
-class Map_Map_Object_Loader {
+class MapMapObjectLoader {
 public:
 	bool is_object_known(uint32_t);
 
@@ -51,58 +51,57 @@ public:
 	/// \throws _wexception if there is already an object registered with the
 	/// same serial. (not implemented: In that case, the object is deleted.)
 	///
-	/// \todo Currently the object must be passed as a parameter to this
-	/// function. This should be changed so that the object is allocated here.
-	/// The parameter object should then be removed and the function renamed to
-	/// create_object. Then there will no longer be necessary to delete the
-	/// object in case the serial number is alrealy known, since the object will
-	/// never even be allocated then. But this change can only be done when all
-	/// kinds of map objects have suitable default constructors.
+	// TODO(unknown): Currently the object must be passed as a parameter to this
+	// function. This should be changed so that the object is allocated here.
+	// The parameter object should then be removed and the function renamed to
+	// create_object. Then there will no longer be necessary to delete the
+	// object in case the serial number is alrealy known, since the object will
+	// never even be allocated then. But this change can only be done when all
+	// kinds of map objects have suitable default constructors.
 	template<typename T> T & register_object(Serial const n, T & object) {
-		Reverse_Map_Object_Map::const_iterator const existing =
+		ReverseMapObjectMap::const_iterator const existing =
 			m_objects.find(n);
 		if (existing != m_objects.end()) {
 			//delete &object; can not do this
-			throw game_data_error
-				("already loaded (%s)", existing->second->type_name());
+			throw game_data_error("already loaded (%s)", to_string(existing->second->descr().type()).c_str());
 		}
-		m_objects.insert(std::pair<Serial, Map_Object *>(n, &object));
+		m_objects.insert(std::pair<Serial, MapObject *>(n, &object));
 		m_loaded_obj[&object] = false;
 		return object;
 	}
 
 	template<typename T> T & get(Serial const serial) {
-		Reverse_Map_Object_Map::iterator const it = m_objects.find(serial);
+		ReverseMapObjectMap::iterator const it = m_objects.find(serial);
 		if (it == m_objects.end())
 			throw game_data_error("not found");
 		else if (upcast(T, result, it->second))
 			return *result;
 		else
-			throw game_data_error
-				("is a %s, expected a %s",
-				 it->second->type_name(), typeid(T).name());
+			throw game_data_error("is a %s, expected a %s",
+			                      to_string(it->second->descr().type()).c_str(),
+			                      typeid(T).name());
 	}
 
 	int32_t get_nr_unloaded_objects();
-	bool is_object_loaded(Map_Object & obj) {return m_loaded_obj[&obj];}
+	bool is_object_loaded(MapObject & obj) {return m_loaded_obj[&obj];}
 
-	void mark_object_as_loaded(Map_Object &);
+	void mark_object_as_loaded(MapObject &);
 
-	void schedule_destroy(Map_Object &);
+	void schedule_destroy(MapObject &);
 	void schedule_act(Bob &);
 
 	void load_finish_game(Game & g);
 
 private:
-	typedef std::map<Serial, Map_Object *> Reverse_Map_Object_Map;
+	typedef std::map<Serial, MapObject *> ReverseMapObjectMap;
 
-	std::map<Map_Object *, bool> m_loaded_obj;
-	Reverse_Map_Object_Map m_objects;
+	std::map<MapObject *, bool> m_loaded_obj;
+	ReverseMapObjectMap m_objects;
 
-	std::vector<Map_Object *> m_schedule_destroy;
+	std::vector<MapObject *> m_schedule_destroy;
 	std::vector<Bob *> m_schedule_act;
 };
 
 }
 
-#endif
+#endif  // end of include guard: WL_MAP_IO_WIDELANDS_MAP_MAP_OBJECT_LOADER_H

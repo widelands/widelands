@@ -17,15 +17,14 @@
  *
  */
 
-#ifndef COORDS_PROFILE_H
-#define COORDS_PROFILE_H
+#ifndef WL_MAP_IO_COORDS_PROFILE_H
+#define WL_MAP_IO_COORDS_PROFILE_H
 
 #include <string>
 
 #include "logic/widelands_geometry.h"
 
-struct Profile;
-struct Section;
+class Section;
 
 namespace Widelands {
 
@@ -46,4 +45,4 @@ void set_coords(const std::string& name, const Widelands::Coords& value, Section
 
 }  // namespace Widelands
 
-#endif /* end of include guard: COORDS_PROFILE_H */
+#endif  // end of include guard: WL_MAP_IO_COORDS_PROFILE_H

@@ -2,6 +2,11 @@ size=mine
 output=goldore
 enhancement=deep_goldmine
 
+[aihints]
+build_material=false
+mines=gold
+mines_percent=30
+
 [buildcost]
 log=4
 raw_stone=2
@@ -13,23 +18,24 @@ raw_stone=1
 [working positions]
 miner=1
 
-[aihints]
-build_material=false
-mines=gold
-mines_percent=30
-
 [inputs]
 ration=6
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start mining because ...
+work=_mining
 
 [work]
 sleep=45000
+return=skipped unless economy needs goldore
 consume=ration
 animate=working 20000
 mine=gold 2 33 5 17
 produce=goldore
+
+[out_of_resource_notification]
+title=_Main Gold Vein Exhausted
+message=_This gold mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it.
 
 [idle]
 pics=goldmine_i_??.png

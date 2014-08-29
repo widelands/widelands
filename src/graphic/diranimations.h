@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef DIRANIMATIONS_H
-#define DIRANIMATIONS_H
+#ifndef WL_GRAPHIC_DIRANIMATIONS_H
+#define WL_GRAPHIC_DIRANIMATIONS_H
 
 #include <string>
 
@@ -26,7 +26,7 @@
 
 #include "logic/widelands.h"
 
-namespace Widelands {struct Map_Object_Descr;}
+namespace Widelands {struct MapObjectDescr;}
 
 class Profile;
 class Section;
@@ -38,7 +38,7 @@ struct DirAnimations {
 		 uint32_t dir4 = 0, uint32_t dir5 = 0, uint32_t dir6 = 0);
 
 	void parse
-		(Widelands::Map_Object_Descr &,
+		(Widelands::MapObjectDescr &,
 		 const std::string           & directory,
 		 Profile                     &,
 		 const std::string & name,
@@ -62,4 +62,4 @@ private:
 	uint32_t m_animations[6];
 };
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_DIRANIMATIONS_H

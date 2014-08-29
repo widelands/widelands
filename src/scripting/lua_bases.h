@@ -17,11 +17,11 @@
  *
  */
 
-#ifndef LUA_BASES_H
-#define LUA_BASES_H
+#ifndef WL_SCRIPTING_LUA_BASES_H
+#define WL_SCRIPTING_LUA_BASES_H
 
-#include "scripting/eris/lua.hpp"
 #include "scripting/luna.h"
+#include "third_party/eris/lua.hpp"
 
 namespace LuaBases {
 
@@ -39,13 +39,13 @@ public:
 	LUNA_CLASS_HEAD(L_EditorGameBase);
 
 	L_EditorGameBase() {}
-	L_EditorGameBase(lua_State * L) {
+	L_EditorGameBase(lua_State* L) {
 		report_error(L, "Cannot instantiate a 'EditorGameBase' directly!");
 	}
 	virtual ~L_EditorGameBase() {}
 
-	virtual void __persist(lua_State * L) override;
-	virtual void __unpersist(lua_State * L) override;
+	void __persist(lua_State * L) override;
+	void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties
@@ -56,6 +56,9 @@ public:
 	/*
 	 * Lua methods
 	 */
+	int get_building_description(lua_State * L);
+	int get_ware_description(lua_State * L);
+	int get_worker_description(lua_State * L);
 
 	/*
 	 * C methods
@@ -72,7 +75,7 @@ public:
 
 
 	L_PlayerBase() : m_pl(NONE) {}
-	L_PlayerBase(lua_State * L) : m_pl(NONE) {
+	L_PlayerBase (lua_State * L) : m_pl(NONE) {
 		report_error(L, "Cannot instantiate a 'PlayerBase' directly!");
 	}
 	L_PlayerBase(Widelands::Player_Number n) {
@@ -80,8 +83,8 @@ public:
 	}
 	virtual ~L_PlayerBase() {}
 
-	virtual void __persist(lua_State * L) override;
-	virtual void __unpersist(lua_State * L) override;
+	void __persist(lua_State * L) override;
+	void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties
@@ -113,6 +116,6 @@ protected:
 
 void luaopen_wlbases(lua_State *);
 
-};
+}
 
-#endif
+#endif  // end of include guard: WL_SCRIPTING_LUA_BASES_H

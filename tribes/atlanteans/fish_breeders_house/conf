@@ -1,5 +1,10 @@
 size=small
 
+[aihints]
+build_material=false
+needs_water=true
+renews_map_resource=fish
+
 [buildcost]
 log=1
 planks=1
@@ -11,18 +16,14 @@ stone=1
 [working positions]
 fish_breeder=1
 
-[aihints]
-build_material=false
-needs_water=true
-renews_map_resource=fish
-
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [work]
 sleep=24000
 worker=breed
 
 [idle]
-pics=fish_breeder_i_??.png  # ???
+pics=fish_breeders_house_i_??.png  # ???
 hotspot=34 42

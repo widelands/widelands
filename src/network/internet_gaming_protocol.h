@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef INTERNET_GAMING_PROTOCOL_H
-#define INTERNET_GAMING_PROTOCOL_H
+#ifndef WL_NETWORK_INTERNET_GAMING_PROTOCOL_H
+#define WL_NETWORK_INTERNET_GAMING_PROTOCOL_H
 
 #include <string>
 
@@ -43,9 +43,8 @@
  * received. In case of a login or reconnect, this is the time to wait for the metaservers answer.
  *
  * value is in milliseconds
- *
- * \todo Should this be resetable by the user?
  */
+// TODO(unknown): Should this be resettable by the user?
 #define INTERNET_GAMING_TIMEOUT 10 // 10 seconds
 
 /**
@@ -54,17 +53,15 @@
  * received. In case of a login or reconnect, this is the time to wait for the metaservers answer.
  *
  * value is in milliseconds
- *
- * \todo Should this be resetable by the user?
  */
+// TODO(unknown): Should this be resettable by the user?
 #define INTERNET_GAMING_CLIENT_TIMEOUT 60 // 60 seconds - some time to reconnect
 
 /**
  * The default number of retries after a timeout after which the client finally closes the
  * connection to the metaserver.
- *
- * \todo Should this be resetable by the user?
  */
+// TODO(unknown): Should this be resettable by the user?
 #define INTERNET_GAMING_RETRIES 3
 
 
@@ -357,4 +354,4 @@ static const std::string IGPCMD_GAME_START = "GAME_START";
 static const std::string IGPCMD_GAME_END = "GAME_END";
 
 
-#endif
+#endif  // end of include guard: WL_NETWORK_INTERNET_GAMING_PROTOCOL_H

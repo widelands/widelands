@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef MAP_GEN_H
-#define MAP_GEN_H
+#ifndef WL_LOGIC_WORLD_MAP_GEN_H
+#define WL_LOGIC_WORLD_MAP_GEN_H
 
 #include <map>
 #include <string>
@@ -83,10 +83,10 @@ struct MapGenBobCategory {
 
 	const std::string & get_immovable(size_t index) const {
 		return immovables_[index];
-	};
+	}
 	const std::string & get_critter(size_t index) const {
 		return critters_[index];
-	};
+	}
 
 private:
 	std::vector<std::string> immovables_;
@@ -96,12 +96,12 @@ private:
 struct MapGenLandResource {
 	MapGenLandResource(const LuaTable& table, MapGenInfo& mapGenInfo);
 
-	uint32_t getWeight() const {return weight_;};
+	uint32_t getWeight() const {return weight_;}
 	const MapGenBobCategory * getBobCategory
 		(MapGenAreaInfo::MapGenTerrainType terrType) const;
 
-	uint8_t getImmovableDensity() const {return immovable_density_;};
-	uint8_t getMoveableDensity() const {return critter_density_;};
+	uint8_t getImmovableDensity() const {return immovable_density_;}
+	uint8_t getMoveableDensity() const {return critter_density_;}
 
 private:
 	uint32_t        weight_;
@@ -173,4 +173,4 @@ private:
 
 }  // namespace Widelands
 
-#endif /* end of include guard: MAP_GEN_H */
+#endif  // end of include guard: WL_LOGIC_WORLD_MAP_GEN_H

@@ -20,24 +20,26 @@
 #include "logic/tribe.h"
 
 #include <iostream>
+#include <memory>
 
 #include <boost/algorithm/string.hpp>
 
+#include "base/i18n.h"
+#include "base/macros.h"
 #include "graphic/graphic.h"
 #include "helper.h"
-#include "i18n.h"
 #include "io/fileread.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/carrier.h"
 #include "logic/constructionsite.h"
-#include "logic/critter_bob.h"
 #include "logic/dismantlesite.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/immovable.h"
 #include "logic/militarysite.h"
+#include "logic/parse_map_object_types.h"
 #include "logic/ship.h"
 #include "logic/soldier.h"
 #include "logic/trainingsite.h"
@@ -45,11 +47,9 @@
 #include "logic/worker.h"
 #include "logic/world/resource_description.h"
 #include "logic/world/world.h"
-#include "parse_map_object_types.h"
 #include "profile/profile.h"
 #include "scripting/lua_table.h"
 #include "scripting/scripting.h"
-#include "upcast.h"
 
 
 using namespace std;
@@ -78,15 +78,9 @@ Tribe_Descr::Tribe_Descr
 		{
 			std::set<std::string> names; //  To enforce name uniqueness.
 
-			PARSE_MAP_OBJECT_TYPES_BEGIN("critter bob")
-				m_bobs.add
-					(new Critter_Bob_Descr
-					 	(_name, _descname, path, prof, global_s,  this));
-			PARSE_MAP_OBJECT_TYPES_END;
-
 			PARSE_MAP_OBJECT_TYPES_BEGIN("ship")
 				m_bobs.add
-					(new Ship_Descr
+					(new ShipDescr
 					 	(_name, _descname, path, prof, global_s, *this));
 			PARSE_MAP_OBJECT_TYPES_END;
 
@@ -100,54 +94,60 @@ Tribe_Descr::Tribe_Descr
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("immovable")
 				m_immovables.add
-					(new Immovable_Descr
+					(new ImmovableDescr
 					 	(_name, _descname, path, prof, global_s, this));
 			PARSE_MAP_OBJECT_TYPES_END;
 
-#define PARSE_WORKER_TYPES(name, descr_type)                                  \
-         PARSE_MAP_OBJECT_TYPES_BEGIN(name)                                   \
-            descr_type & worker_descr =                                       \
-               *new descr_type                                                \
-                  (_name, _descname, path, prof, global_s, *this);            \
-            Ware_Index const worker_idx = m_workers.add(&worker_descr);       \
-            if                                                                \
-               (worker_descr.is_buildable() and                               \
-                worker_descr.buildcost().empty())                             \
-               m_worker_types_without_cost.push_back(worker_idx);             \
-         PARSE_MAP_OBJECT_TYPES_END;
+#define PARSE_SPECIAL_WORKER_TYPES(name, descr_type)                                               \
+	PARSE_MAP_OBJECT_TYPES_BEGIN(name)                                                              \
+	auto& worker_descr = *new descr_type(_name, _descname, path, prof, global_s, *this);      \
+	Ware_Index const worker_idx = m_workers.add(&worker_descr);                                     \
+	if (worker_descr.is_buildable() && worker_descr.buildcost().empty())                            \
+		m_worker_types_without_cost.push_back(worker_idx);                                           \
+	PARSE_MAP_OBJECT_TYPES_END;
 
-			PARSE_WORKER_TYPES("carrier", Carrier::Descr);
-			PARSE_WORKER_TYPES("soldier", Soldier_Descr);
-			PARSE_WORKER_TYPES("worker",  Worker_Descr);
+			PARSE_SPECIAL_WORKER_TYPES("carrier", CarrierDescr);
+			PARSE_SPECIAL_WORKER_TYPES("soldier", SoldierDescr);
+
+#define PARSE_WORKER_TYPES(name)                                                                   \
+	PARSE_MAP_OBJECT_TYPES_BEGIN(name)                                                              \
+	auto& worker_descr =                                                                      \
+		*new WorkerDescr(MapObjectType::WORKER, _name, _descname, path, prof, global_s, *this);   \
+	Ware_Index const worker_idx = m_workers.add(&worker_descr);                                     \
+	if (worker_descr.is_buildable() && worker_descr.buildcost().empty())                            \
+		m_worker_types_without_cost.push_back(worker_idx);                                           \
+	PARSE_MAP_OBJECT_TYPES_END;
+
+			PARSE_WORKER_TYPES("worker");
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("constructionsite")
 				m_buildings.add
-					(new ConstructionSite_Descr
+					(new ConstructionSiteDescr
 					 	(_name, _descname, path, prof, global_s, *this));
 			PARSE_MAP_OBJECT_TYPES_END;
 			safe_building_index("constructionsite"); // Check that it is defined.
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("dismantlesite")
 				m_buildings.add
-					(new DismantleSite_Descr
+					(new DismantleSiteDescr
 					 	(_name, _descname, path, prof, global_s, *this));
 			PARSE_MAP_OBJECT_TYPES_END;
 			safe_building_index("dismantlesite"); // Check that it is defined.
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("warehouse")
 				m_buildings.add
-					(new Warehouse_Descr
+					(new WarehouseDescr
 					 	(_name, _descname, path, prof, global_s, *this));
 			PARSE_MAP_OBJECT_TYPES_END;
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("productionsite")
-				m_buildings.add(new ProductionSite_Descr(
-					_name, _descname, path, prof, global_s, *this, world));
+				m_buildings.add(new ProductionSiteDescr(
+					MapObjectType::PRODUCTIONSITE, _name, _descname, path, prof, global_s, *this, world));
 			PARSE_MAP_OBJECT_TYPES_END;
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("militarysite")
 				m_buildings.add
-					(new MilitarySite_Descr
+					(new MilitarySiteDescr
 					 	(_name, _descname, path, prof, global_s, *this, world));
 			PARSE_MAP_OBJECT_TYPES_END;
 
@@ -160,7 +160,7 @@ Tribe_Descr::Tribe_Descr
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("global militarysite")
 				m_buildings.add
-					(new MilitarySite_Descr
+					(new MilitarySiteDescr
 					 	(_name, _descname, path, prof, global_s, *this, world));
 			PARSE_MAP_OBJECT_TYPES_END;
 
@@ -171,17 +171,10 @@ Tribe_Descr::Tribe_Descr
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("trainingsite")
 				m_buildings.add
-					(new TrainingSite_Descr
+					(new TrainingSiteDescr
 					 	(_name, _descname, path, prof, global_s, *this, world));
 			PARSE_MAP_OBJECT_TYPES_END;
 
-		}
-
-		{
-			/// Loads military data
-			Section * military_data_s = root_conf.get_section("military_data");
-			if (military_data_s)
-				m_military_data.parse(*military_data_s);
 		}
 
 		try {
@@ -240,47 +233,10 @@ Tribe_Descr::Tribe_Descr
 				PARSE_ORDER_INFORMATION(worker);
 			}
 
-			try {
-				while (Section * const s = root_conf.get_next_section("frontier"))
-				{
-					char const * const style_name = s->get_safe_string("name");
-					try {
-						if (m_anim_frontier.empty())
-							throw Nonexistent();
-						frontier_style_index(style_name);
-						throw game_data_error("\"%s\" is duplicated", style_name);
-					} catch (Nonexistent) {
-						m_anim_frontier.push_back
-							(std::pair<std::string, uint32_t>
-							 	(style_name, g_gr->animations().load(path, *s)));
-					}
-				}
-				if (m_anim_frontier.empty())
-					throw game_data_error("none found");
-			} catch (const _wexception & e) {
-				throw game_data_error("frontier styles: %s", e.what());
-			}
-			try {
-				while (Section * const s = root_conf.get_next_section("flag"))
-				{
-					char const * const style_name = s->get_safe_string("name");
-					try {
-						if (m_anim_flag.empty())
-							throw Nonexistent();
-						flag_style_index(style_name);
-						throw game_data_error("\"%s\" is duplicated", style_name);
-					} catch (Nonexistent) {
-						m_anim_flag.push_back
-							(std::pair<std::string, uint32_t>
-							 	(style_name,
-							 	 g_gr->animations().load(path, *s)));
-					}
-				}
-				if (m_anim_flag.empty())
-					throw game_data_error("none found");
-			} catch (const _wexception & e) {
-				throw game_data_error("flag styles: %s", e.what());
-			}
+			m_frontier_animation_id =
+			   g_gr->animations().load(path, root_conf.get_safe_section("frontier"));
+			m_flag_animation_id =
+			   g_gr->animations().load(path, root_conf.get_safe_section("flag"));
 
 			{
 				// Read initializations -- all scripts are initializations currently
@@ -311,7 +267,7 @@ Load all logic data
 ===============
 */
 void Tribe_Descr::postload(Editor_Game_Base &) {
-	// TODO: move more loads to postload
+	// TODO(unknown): move more loads to postload
 }
 
 /*
@@ -400,8 +356,9 @@ std::vector<std::string> Tribe_Descr::get_all_tribenames() {
 	}
 
 	std::sort(tribes.begin(), tribes.end(), TribeBasicComparator());
-	container_iterate_const(std::vector<TribeBasicInfo>, tribes, i)
-		tribenames.push_back(i.current->name);
+	for (const TribeBasicInfo& tribe : tribes) {
+		tribenames.push_back(tribe.name);
+	}
 	return tribenames;
 }
 
@@ -434,7 +391,7 @@ Find the best matching indicator for the given amount.
 uint32_t Tribe_Descr::get_resource_indicator
 	(ResourceDescription const * const res, uint32_t const amount) const
 {
-	if (not res or not amount) {
+	if (!res || !amount) {
 		int32_t idx = get_immovable_index("resi_none");
 		if (idx == -1)
 			throw game_data_error
@@ -455,7 +412,7 @@ uint32_t Tribe_Descr::get_resource_indicator
 		++num_indicators;
 	}
 
-	if (not num_indicators)
+	if (!num_indicators)
 		throw game_data_error
 			("tribe %s does not declare a resource indicator for resource %s",
 			 name().c_str(),
@@ -517,14 +474,11 @@ const Ware_Index result = worker_index(workername);
 /*
  * Return the given building or die trying
  */
-Building_Index Tribe_Descr::safe_building_index
-	(char const * const buildingname) const
-{
+Building_Index Tribe_Descr::safe_building_index(char const* const buildingname) const {
 	const Building_Index result = building_index(buildingname);
 	if (result == INVALID_INDEX) {
-		throw game_data_error
-			("tribe %s does not define building type \"%s\"",
-			 name().c_str(), buildingname);
+		throw game_data_error(
+		   "tribe %s does not define building type \"%s\"", name().c_str(), buildingname);
 	}
 	return result;
 }

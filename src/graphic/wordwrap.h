@@ -16,14 +16,14 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef WORDWRAP_H
-#define WORDWRAP_H
+#ifndef WL_GRAPHIC_WORDWRAP_H
+#define WL_GRAPHIC_WORDWRAP_H
 
 #include <string>
 
-#include "align.h"
+#include "graphic/align.h"
 #include "graphic/font.h"
-#include "point.h"
+#include "base/point.h"
 
 class RenderTarget;
 
@@ -77,4 +77,4 @@ private:
 
 } // namespace UI
 
-#endif // WORDWRAP_H
+#endif  // end of include guard: WL_GRAPHIC_WORDWRAP_H

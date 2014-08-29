@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
-#ifndef ROUTER_H
-#define ROUTER_H
+#ifndef WL_ECONOMY_ROUTER_H
+#define WL_ECONOMY_ROUTER_H
 
 #include <vector>
 
@@ -27,8 +27,8 @@
 #include "logic/wareworker.h"
 
 namespace Widelands {
+class ITransportCostCalculator;
 struct IRoute;
-struct ITransportCostCalculator;
 struct RoutingNode;
 
 /**
@@ -54,6 +54,4 @@ private:
 };
 
 }
-#endif
-
-
+#endif  // end of include guard: WL_ECONOMY_ROUTER_H

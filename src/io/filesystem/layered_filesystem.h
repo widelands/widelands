@@ -17,8 +17,10 @@
  *
  */
 
-#ifndef LAYERED_FILESYSTEM_H
-#define LAYERED_FILESYSTEM_H
+#ifndef WL_IO_FILESYSTEM_LAYERED_FILESYSTEM_H
+#define WL_IO_FILESYSTEM_LAYERED_FILESYSTEM_H
+
+#include <memory>
 
 #include "io/filesystem/filesystem.h"
 
@@ -46,62 +48,46 @@ public:
 	LayeredFileSystem();
 	virtual ~LayeredFileSystem();
 
-	virtual void    AddFileSystem(FileSystem &);
-	virtual void    SetHomeFileSystem(FileSystem &);
+	// Add a new filesystem to the top of the stack. Take ownership of the given
+	// filesystem.
+	void AddFileSystem(FileSystem*);
+
+	// Set the home filesystem (which is the preferred filesystem for writing
+	// files). Take ownership of the given filesystem.
+	void SetHomeFileSystem(FileSystem*);
 
 	virtual void RemoveFileSystem(const FileSystem &);
 
-	virtual std::set<std::string> ListDirectory(const std::string& path) override;
+	std::set<std::string> ListDirectory(const std::string& path) override;
 
-	virtual bool IsWritable() const override;
-	virtual bool            FileExists(const std::string & path) override;
-	virtual bool     IsDirectory      (const std::string & path) override;
-	virtual void EnsureDirectoryExists(const std::string & dirname) override;
-	virtual void   MakeDirectory      (const std::string & dirname) override;
+	bool IsWritable() const override;
+	bool            FileExists(const std::string & path) override;
+	bool     IsDirectory      (const std::string & path) override;
+	void EnsureDirectoryExists(const std::string & dirname) override;
+	void   MakeDirectory      (const std::string & dirname) override;
 
-	virtual void * Load(const std::string & fname, size_t & length) override;
+	void * Load(const std::string & fname, size_t & length) override;
 	virtual void Write
 		(const std::string & fname, void const * data, int32_t length) override;
 
-	virtual StreamRead  * OpenStreamRead (const std::string & fname) override;
-	virtual StreamWrite * OpenStreamWrite(const std::string & fname) override;
+	StreamRead  * OpenStreamRead (const std::string & fname) override;
+	StreamWrite * OpenStreamWrite(const std::string & fname) override;
 
-	virtual FileSystem * MakeSubFileSystem(const std::string & dirname) override;
-	virtual FileSystem * CreateSubFileSystem(const std::string & dirname, Type) override;
-	virtual void Unlink(const std::string & file) override;
-	virtual void Rename(const std::string &, const std::string &) override;
+	FileSystem * MakeSubFileSystem(const std::string & dirname) override;
+	FileSystem * CreateSubFileSystem(const std::string & dirname, Type) override;
+	void Unlink(const std::string & file) override;
+	void Rename(const std::string &, const std::string &) override;
 
-	virtual std::string getBasename() override {return std::string();};
+	std::string getBasename() override {return std::string();}
 
-	bool FindConflictingVersionFile(FileSystem &);
-	bool FindMatchingVersionFile(FileSystem &);
-
-	void PutRightVersionOnTop();
-
-	virtual unsigned long long DiskSpace() override;
+	unsigned long long DiskSpace() override;
 
 private:
-	bool m_read_version_from_version_file(FileSystem &, std::string *);
-
-	typedef std::vector<FileSystem *>::reverse_iterator FileSystem_rit;
-
-	std::vector<FileSystem *> m_filesystems;
-	FileSystem * m_home;
+	std::vector<std::unique_ptr<FileSystem>> m_filesystems;
+	std::unique_ptr<FileSystem> m_home;
 };
 
 /// Access all game data files etc. through this FileSystem
 extern LayeredFileSystem * g_fs;
 
-/// Create an object of this type to add a new filesystem to the top of the
-/// stack and make sure that it is removed when the object goes out of scope.
-/// This is exception-safe, unlike calling g_fs->AddFileSystem and
-/// g_fs->RemoveFileSystem directly.
-class FileSystemLayer {
-public:
-	FileSystemLayer(FileSystem & fs) : m_fs(fs) {g_fs->AddFileSystem(fs);}
-	~FileSystemLayer() {g_fs->RemoveFileSystem(m_fs);}
-private:
-	const FileSystem & m_fs;
-};
-
-#endif
+#endif  // end of include guard: WL_IO_FILESYSTEM_LAYERED_FILESYSTEM_H

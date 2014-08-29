@@ -22,9 +22,9 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include "scripting/eris/lua.hpp"
 #include "scripting/luna.h"
 #include "scripting/luna_impl.h"
+#include "third_party/eris/lua.hpp"
 
 #ifndef BEGIN_LUNA_PROPERTIES
 #define BEGIN_LUNA_PROPERTIES(klass) \
@@ -69,8 +69,8 @@ public:
 		prop = lua_tointeger(L, -1);
 		return 0;
 	}
-	virtual void __persist(lua_State * /* L */) override {}
-	virtual void __unpersist(lua_State * /* L */) override {}
+	void __persist(lua_State * /* L */) override {}
+	void __unpersist(lua_State * /* L */) override {}
 };
 const char L_Class::className[] = "Class";
 const MethodType<L_Class> L_Class::Methods[] = {
@@ -94,8 +94,8 @@ public:
 		lua_pushuint32(L, y);
 		return 1;
 	}
-	virtual void __persist(lua_State * /* L */) override {}
-	virtual void __unpersist(lua_State * /* L */) override {}
+	void __persist(lua_State * /* L */) override {}
+	void __unpersist(lua_State * /* L */) override {}
 };
 const char L_SubClass::className[] = "SubClass";
 const MethodType<L_SubClass> L_SubClass::Methods[] = {
@@ -117,8 +117,8 @@ public:
 		lua_pushuint32(L, z);
 		return 1;
 	}
-	virtual void __persist(lua_State * /* L */) override {}
-	virtual void __unpersist(lua_State * /* L */) override {}
+	void __persist(lua_State * /* L */) override {}
+	void __unpersist(lua_State * /* L */) override {}
 };
 const char L_VirtualClass::className[] = "VirtualClass";
 const MethodType<L_VirtualClass> L_VirtualClass::Methods[] = {
@@ -132,6 +132,8 @@ class L_Second
 {
 public:
 	int get_second(lua_State* L) {lua_pushint32(L, 2001); return 1;}
+	virtual ~L_Second() {}
+
 	virtual int multitest(lua_State* L)
 	{
 		lua_pushint32(L, 2002);
@@ -151,8 +153,8 @@ public:
 		lua_pushuint32(L, z);
 		return 1;
 	}
-	virtual void __persist(lua_State * /* L */) override {}
-	virtual void __unpersist(lua_State * /* L */) override {}
+	void __persist(lua_State * /* L */) override {}
+	void __unpersist(lua_State * /* L */) override {}
 };
 const char L_MultiClass::className[] = "MultiClass";
 const MethodType<L_MultiClass> L_MultiClass::Methods[] = {
@@ -171,7 +173,7 @@ const static struct luaL_Reg wl [] = {
 	{nullptr, nullptr}
 };
 
-int test_check_int(lua_State* L) {
+static int test_check_int(lua_State* L) {
 	int a = lua_tointeger(L, -2);
 	int b = lua_tointeger(L, -1);
 
@@ -179,7 +181,7 @@ int test_check_int(lua_State* L) {
 	return 0;
 }
 
-void InitLuaTests(lua_State* L)
+static void InitLuaTests(lua_State* L)
 {
 	luaL_openlibs(L);
 

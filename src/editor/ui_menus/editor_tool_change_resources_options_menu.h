@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_TOOL_CHANGE_RESOURCES_OPTIONS_MENU_H
-#define EDITOR_TOOL_CHANGE_RESOURCES_OPTIONS_MENU_H
+#ifndef WL_EDITOR_UI_MENUS_EDITOR_TOOL_CHANGE_RESOURCES_OPTIONS_MENU_H
+#define WL_EDITOR_UI_MENUS_EDITOR_TOOL_CHANGE_RESOURCES_OPTIONS_MENU_H
 
 #include "editor/ui_menus/editor_tool_options_menu.h"
 #include "ui_basic/button.h"
@@ -55,4 +55,4 @@ private:
 	Editor_Increase_Resources_Tool & m_increase_tool;
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_TOOL_CHANGE_RESOURCES_OPTIONS_MENU_H

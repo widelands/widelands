@@ -17,13 +17,13 @@
  *
  */
 
-#ifndef IMMOVABLE_PROGRAM_H
-#define IMMOVABLE_PROGRAM_H
+#ifndef WL_LOGIC_IMMOVABLE_PROGRAM_H
+#define WL_LOGIC_IMMOVABLE_PROGRAM_H
 
 #include <cstring>
 #include <string>
 
-#include <boost/noncopyable.hpp>
+#include "base/macros.h"
 
 /*
  * Implementation is in immovable.cc
@@ -40,9 +40,13 @@ namespace Widelands {
 struct ImmovableProgram {
 
 	/// Can be executed on an Immovable.
-	struct Action : boost::noncopyable {
+	struct Action {
+		Action() = default;
 		virtual ~Action();
-		virtual void execute(Game &, Immovable &) const = 0;
+		virtual void execute(Game&, Immovable&) const = 0;
+
+	private:
+		DISALLOW_COPY_AND_ASSIGN(Action);
 	};
 
 	/// Runs an animation.
@@ -61,8 +65,8 @@ struct ImmovableProgram {
 	/// will not be stopped by this command. It will run until another animation
 	/// is started.)
 	struct ActAnimate : public Action {
-		ActAnimate(char * parameters, Immovable_Descr &);
-		virtual void execute(Game &, Immovable &) const override;
+		ActAnimate(char * parameters, ImmovableDescr &);
+		void execute(Game &, Immovable &) const override;
 		uint32_t animation() const {return m_id;}
 	private:
 		uint32_t m_id;
@@ -87,8 +91,8 @@ struct ImmovableProgram {
 	///       name of the replacement object
 	struct ActTransform : public Action {
 		ActTransform
-			(char * parameters, Immovable_Descr &);
-		virtual void execute(Game &, Immovable &) const override;
+			(char * parameters, ImmovableDescr &);
+		void execute(Game &, Immovable &) const override;
 	private:
 		std::string type_name;
 		bool        bob;
@@ -99,23 +103,23 @@ struct ImmovableProgram {
 	/// Like ActTransform but the probability is determined by the suitability.
 	struct ActGrow : public Action {
 		ActGrow
-			(char * parameters, Immovable_Descr &);
-		virtual void execute(Game &, Immovable &) const override;
+			(char * parameters, ImmovableDescr &);
+		void execute(Game &, Immovable &) const override;
 	private:
 		std::string type_name;
 		bool        tribe;
 	};
 
 	struct ActRemove : public Action {
-		ActRemove(char * parameters, Immovable_Descr &);
-		virtual void execute(Game &, Immovable &) const override;
+		ActRemove(char * parameters, ImmovableDescr &);
+		void execute(Game &, Immovable &) const override;
 	private:
 		uint8_t probability;
 	};
 
 	struct ActSeed : public Action {
-		ActSeed(char * parameters, Immovable_Descr &);
-		virtual void execute(Game &, Immovable &) const override;
+		ActSeed(char * parameters, ImmovableDescr &);
+		void execute(Game &, Immovable &) const override;
 	private:
 		std::string type_name;
 		bool        tribe;
@@ -138,8 +142,8 @@ struct ImmovableProgram {
 	/// Plays the specified soundFX with the specified priority. Whether the
 	/// soundFX is actually played is determined by the sound handler.
 	struct ActPlayFX : public Action {
-		ActPlayFX(const std::string & directory, char * parameters, const Immovable_Descr &);
-		virtual void execute(Game &, Immovable &) const override;
+		ActPlayFX(const std::string & directory, char * parameters, const ImmovableDescr &);
+		void execute(Game &, Immovable &) const override;
 	private:
 		std::string name;
 		uint8_t     priority;
@@ -159,8 +163,8 @@ struct ImmovableProgram {
 	 *       Time until construction decays one step if no progress has been made.
 	 */
 	struct ActConstruction : public Action {
-		ActConstruction(char * parameters, Immovable_Descr &, const std::string & directory, Profile &);
-		virtual void execute(Game &, Immovable &) const override;
+		ActConstruction(char * parameters, ImmovableDescr &, const std::string & directory, Profile &);
+		void execute(Game &, Immovable &) const override;
 
 		Duration buildtime() const {return m_buildtime;}
 		Duration decaytime() const {return m_decaytime;}
@@ -181,18 +185,19 @@ struct ImmovableProgram {
 	// Create an immovable program from a number of lines.
 	ImmovableProgram(const std::string& init_name,
 	                 const std::vector<std::string>& lines,
-	                 Immovable_Descr* immovable);
+	                 ImmovableDescr* immovable);
 
 	/// Create a program by parsing a conf-file section.
 	ImmovableProgram
 		(const std::string    & directory,
 		 Profile              &,
 		 const std::string    & name,
-		 Immovable_Descr      &);
+		 ImmovableDescr      &);
 
 	~ImmovableProgram() {
-		container_iterate_const(Actions, m_actions, i)
-			delete *i.current;
+		for (Action * action : m_actions) {
+			delete action;
+		}
 	}
 
 	const std::string & name() const {return m_name;}
@@ -222,4 +227,4 @@ struct ImmovableActionData {
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_IMMOVABLE_PROGRAM_H

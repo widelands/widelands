@@ -17,10 +17,10 @@
  *
  */
 
-#ifndef LOGIC_MAPASTAR_H
-#define LOGIC_MAPASTAR_H
+#ifndef WL_LOGIC_MAPASTAR_H
+#define WL_LOGIC_MAPASTAR_H
 
-#include "log.h"
+#include "base/log.h"
 #include "logic/map.h"
 #include "logic/pathfield.h"
 
@@ -210,4 +210,4 @@ bool MapAStar<StepEval>::step(FCoords & cur, int32_t & cost)
 
 } // namespace Widelands
 
-#endif // LOGIC_MAPASTAR_H
+#endif  // end of include guard: WL_LOGIC_MAPASTAR_H

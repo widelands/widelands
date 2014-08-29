@@ -2,6 +2,9 @@ size=medium
 output=iron
 output=gold
 
+[aihints]
+build_material=false
+
 [buildcost]
 log=1
 stone=4
@@ -10,9 +13,6 @@ spidercloth=1
 
 [return_on_dismantle]
 stone=3
-
-[aihints]
-build_material=false
 
 [working positions]
 smelter=1
@@ -23,21 +23,24 @@ goldore=8
 coal=8
 
 [programs]
-smelt_iron=_Smelt iron
-smelt_gold=_Smelt gold
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start smelting iron because ...
+smelt_iron=_smelting iron
+# TRANSLATORS: "Completed/Skipped/Did not start smelting gold because ...
+smelt_gold=_smelting gold
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [smelt_iron]
 return=skipped unless economy needs iron
-consume=ironore coal
 sleep=25000
+consume=ironore coal
 animate=working 35000
 produce=iron
 
 [smelt_gold]
 return=skipped unless economy needs gold
-consume=goldore coal
 sleep=25000
+consume=goldore coal
 animate=working 35000
 produce=gold
 

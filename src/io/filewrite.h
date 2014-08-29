@@ -17,13 +17,14 @@
  *
  */
 
-#ifndef FILEWRITE_H
-#define FILEWRITE_H
+#ifndef WL_IO_FILEWRITE_H
+#define WL_IO_FILEWRITE_H
 
 #include <cassert>
 #include <cstdarg>
 #include <limits>
 #include <memory>
+#include <string>
 
 #include "io/streamwrite.h"
 
@@ -93,7 +94,10 @@ public:
 	void Data(const void* src, size_t size, Pos pos);
 
 	/// Write data at the current file pointer and advance it.
-	void Data(void const* const src, size_t const size) override;
+	void Data(void const* src, size_t size) override;
+
+	/// Returns the current buffer. Use this for in_memory operations.
+	std::string GetData() const;
 
 private:
 	char* data_;
@@ -102,4 +106,4 @@ private:
 	Pos filepos_;
 };
 
-#endif
+#endif  // end of include guard: WL_IO_FILEWRITE_H

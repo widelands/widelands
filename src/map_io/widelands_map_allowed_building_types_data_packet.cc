@@ -19,12 +19,12 @@
 
 #include "map_io/widelands_map_allowed_building_types_data_packet.h"
 
+#include "base/macros.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "profile/profile.h"
-#include "upcast.h"
 
 namespace Widelands {
 
@@ -34,7 +34,7 @@ void Map_Allowed_Building_Types_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
-	 Map_Map_Object_Loader &)
+	 MapMapObjectLoader &)
 {
 	if (skip)
 		return;
@@ -98,7 +98,7 @@ void Map_Allowed_Building_Types_Data_Packet::Read
 
 
 void Map_Allowed_Building_Types_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
+	(FileSystem & fs, Editor_Game_Base & egbase, MapMapObjectSaver &)
 {
 	Profile prof;
 	prof.create_section("global").set_int

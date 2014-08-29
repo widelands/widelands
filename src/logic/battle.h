@@ -16,13 +16,25 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
-#ifndef BATTLE_H
-#define BATTLE_H
+#ifndef WL_LOGIC_BATTLE_H
+#define WL_LOGIC_BATTLE_H
 
 #include "logic/instances.h"
 
 namespace Widelands {
 class Soldier;
+
+class BattleDescr : public MapObjectDescr {
+public:
+	BattleDescr(char const* const _name, char const* const _descname)
+		: MapObjectDescr(MapObjectType::BATTLE, _name, _descname) {
+	}
+	~BattleDescr() override {
+	}
+
+private:
+	DISALLOW_COPY_AND_ASSIGN(BattleDescr);
+};
 
 /**
  * Manages the battle between two opposing soldiers.
@@ -32,22 +44,20 @@ class Soldier;
  * Soldiers defined, the battle object must be destroyed as soon as there is no
  * other Soldier to battle anymore.
  */
-class Battle : public Map_Object {
+class Battle : public MapObject {
 public:
-	typedef Map_Object_Descr Descr;
+	const BattleDescr& descr() const;
 
 	Battle(); //  for loading an existing battle from a savegame
 	Battle(Game &, Soldier &, Soldier &); //  to create a new battle in the game
 
-	// Implements Map_Object.
-	virtual int32_t get_type() const override {return BATTLE;}
-	virtual char const * type_name() const override {return "battle";}
-	virtual void init(Editor_Game_Base &) override;
-	virtual void cleanup(Editor_Game_Base &) override;
-	virtual bool has_new_save_support() override {return true;}
-	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
-	static Map_Object::Loader * load
-		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);
+	// Implements MapObject.
+	void init(Editor_Game_Base &) override;
+	void cleanup(Editor_Game_Base &) override;
+	bool has_new_save_support() override {return true;}
+	void save(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
+	static MapObject::Loader * load
+		(Editor_Game_Base &, MapMapObjectLoader &, FileRead &);
 
 	// Cancel this battle immediately and schedule destruction.
 	void cancel(Game &, Soldier &);
@@ -69,9 +79,9 @@ public:
 	void getBattleWork(Game &, Soldier &);
 
 private:
-	struct Loader : public Map_Object::Loader {
+	struct Loader : public MapObject::Loader {
 		virtual void load(FileRead &, uint8_t version);
-		virtual void load_pointers() override;
+		void load_pointers() override;
 
 		Serial m_first;
 		Serial m_second;
@@ -112,4 +122,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_BATTLE_H

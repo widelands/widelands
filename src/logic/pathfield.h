@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef PATHFIELD_H
-#define PATHFIELD_H
+#ifndef WL_LOGIC_PATHFIELD_H
+#define WL_LOGIC_PATHFIELD_H
 
 #include <vector>
 #include <memory>
@@ -26,7 +26,7 @@
 #include <boost/shared_ptr.hpp>
 #include <stdint.h>
 
-#include "cookie_priority_queue.h"
+#include "logic/cookie_priority_queue.h"
 
 namespace Widelands {
 
@@ -88,4 +88,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_PATHFIELD_H

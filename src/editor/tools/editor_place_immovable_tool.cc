@@ -21,12 +21,12 @@
 
 #include <string>
 
+#include "base/macros.h"
 #include "editor/editorinteractive.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/immovable.h"
 #include "logic/mapregion.h"
-#include "upcast.h"
 
 /**
  * Choses an object to place randomly from all enabled
@@ -38,7 +38,7 @@ int32_t Editor_Place_Immovable_Tool::handle_click_impl(Widelands::Map& map,
                                                        Editor_Interactive& parent,
                                                        Editor_Action_Args& args) {
 	const int32_t radius = args.sel_radius;
-	if (not get_nr_enabled())
+	if (!get_nr_enabled())
 		return radius;
 	Widelands::Editor_Game_Base & egbase = parent.egbase();
 	if (args.oimmov_types.empty())
@@ -54,7 +54,7 @@ int32_t Editor_Place_Immovable_Tool::handle_click_impl(Widelands::Map& map,
 		} while (mr.advance(map));
 	}
 
-	if (not args.nimmov_types.empty())
+	if (!args.nimmov_types.empty())
 	{
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,
@@ -63,8 +63,8 @@ int32_t Editor_Place_Immovable_Tool::handle_click_impl(Widelands::Map& map,
 		std::list<int32_t>::iterator i = args.nimmov_types.begin();
 		do {
 			if
-			(not mr.location().field->get_immovable()
-			        and
+			(!mr.location().field->get_immovable()
+			        &&
 			        (mr.location().field->nodecaps() & Widelands::MOVECAPS_WALK))
 				egbase.create_immovable(mr.location(), *i, nullptr);
 			++i;

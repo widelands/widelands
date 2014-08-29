@@ -21,10 +21,11 @@
 
 #include <cassert>
 #include <cmath>
+#include <cstdlib>
 
+#include "base/macros.h"
 #include "graphic/graphic.h"
 #include "graphic/render/gl_surface_texture.h"
-#include "upcast.h"
 
 uint16_t GLSurface::width() const {
 	return m_w;
@@ -138,9 +139,9 @@ void GLSurface::brighten_rect(const Rect& rc, const int32_t factor)
 	// (this is the source color) over the region
 	glBegin(GL_QUADS); {
 		glColor4f
-			((fabsf(factor) / 256.0f),
-			 (fabsf(factor) / 256.0f),
-			 (fabsf(factor) / 256.0f),
+			((std::abs(factor) / 256.0f),
+			 (std::abs(factor) / 256.0f),
+			 (std::abs(factor) / 256.0f),
 			 0);
 		glVertex2f(rc.x,        rc.y);
 		glVertex2f(rc.x + rc.w, rc.y);
@@ -220,5 +221,3 @@ void GLSurface::blit
 		glVertex2f(dst.x, dst.y + srcrc.h);
 	} glEnd();
 }
-
-

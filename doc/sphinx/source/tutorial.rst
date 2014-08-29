@@ -5,7 +5,7 @@ Scenario Tutorial
 
 This section describes how to get a map ready for scripting addition and how
 to write simple Lua scripts. It goes trough all the concepts required to get
-you started writing cool widelands scenarios and campaigns. 
+you started writing cool widelands scenarios and campaigns.
 
 Designing the Map
 -----------------
@@ -14,7 +14,7 @@ Wideland's map files are plain directories containing various different files
 that describe a map. Normally, widelands saves those files in one zip archive
 file with the file extension ``.wmf``. To add scripting capabilities to maps,
 we have to create new text files in the ``scripting/`` directory of the map,
-therefore we want to have the map as a plain directory, so that we can 
+therefore we want to have the map as a plain directory, so that we can
 easily add new scripting files. There are two ways to achieve this:
 
    1. Set the nozip option in the advanced options inside of Widelands.
@@ -36,7 +36,7 @@ add a simple Lua script to it.  For this create a new text file and write the
 following inside:
 
 .. code-block:: lua
-   
+
    print "###############################"
    print "Hello World"
    print "###############################"
@@ -74,19 +74,19 @@ should see our text been printed::
 
 So what we learned is that widelands will run the script
 ``scripting/init.lua`` as soon as the map is finished loading. This script is
-the entry point for all scripting inside of widelands. 
+the entry point for all scripting inside of widelands.
 
-.. _`Lua`: http://www.lua.org/ 
+.. _`Lua`: http://www.lua.org/
 
 A Lua Primer
 ------------
 
 This section is intentionally cut short. There are excellent tutorials in
 `Luas Wiki`_ and there is a complete book free online: `Programming in Lua`_.
-You should definitively start there to learn Lua. 
+You should definitively start there to learn Lua.
 
 This section only contains the parts of Lua that I found bewildering and it
-also defines a few conventions that are used in this documentation. 
+also defines a few conventions that are used in this documentation.
 
 .. _`Luas Wiki`: http://lua-users.org/wiki/TutorialDirectory
 .. _`Programming in Lua`: http://www.lua.org/pil/
@@ -103,7 +103,7 @@ values in the table, either by using the ``d[key]`` syntax or by using the
 
 .. code-block:: lua
 
-   d = { 
+   d = {
       value_a = 23,
       b  = 34,
       90 = "Hallo"
@@ -137,7 +137,7 @@ Calling a function is Lua is straight forward, the only thing that comes as a
 surprise for most programmers is that Lua throws values away without notice.
 
 .. code-block:: lua
-   
+
    function f(a1, a2, a3) print("Hello World:", a1, a2, a3) end
 
    f() --- Prints 'Hello World: nil  nil  nil'
@@ -190,7 +190,7 @@ The most important feature of Lua that widelands is using are coroutines. We
 use them watered down and very simple, but their power is enormous. In
 Widelands use case, a coroutine is simply a function that can interrupt it's
 execution and give control back to widelands at any point in time. After
-it is awoken again by widelands, it will resume at precisely the same point 
+it is awoken again by widelands, it will resume at precisely the same point
 again. Let's dive into an example right away:
 
 .. code-block:: lua
@@ -211,14 +211,14 @@ will see "Hello World!" begin printed every second on the console. Let's
 digest this example. The first line imports the ``coroutine.lua`` script from
 the auxiliary Lua library that comes bundled with widelands. We use two
 functions from this in the rest of the code, namly :func:`sleep` and
-:func:`run`. 
+:func:`run`.
 
 Then we define a simple function :func:`print_a_word` that takes one argument
 and enters an infinite loop: it prints the argument, then sleeps for a second.
 The :func:`sleep` function puts the coroutine to sleep and tells widelands to
 wake the coroutine up again after 1000 ms have passed. The coroutine will then
 continue its execution directly after the sleep call, that is it will enter
-the loop's body again. 
+the loop's body again.
 
 All we need now is to get this function started and this is done via the
 :func:`run` function: it takes as first argument a function and then any
@@ -267,6 +267,80 @@ Let's consider a final example on how coroutines can interact with each other.
 The first coroutine will print out the current value of a, the second changes
 the value of the variable a asynchronously. So we see in this example that
 coroutines share the same environment and can therefore use global variables
-to communicate with each other.  
+to communicate with each other.
+
+
+Preparing Strings for Translation
+---------------------------------
+
+If you want your scenario to be translatable into different languages, it is important to keep in mind that languages differ widely in their grammar. This entails that word forms and word order will change, and some languages have more than one plural form. So, here are some pointers for good string design. For examples for the formatting discussed here, have a look at ``maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua`` in the source code.
+
+Marking a String for Translation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In order to tell Widelands to add a string to the list of translatable strings, simply add an underscore in front of it, like this:
+
+.. code-block:: lua
+
+   print _"Translate me"
+
+Strings that contain number variables have to be treated differently; cf. the ``Numbers in Placeholders`` section below.
+
+Translator Comments
+^^^^^^^^^^^^^^^^^^^
+
+If you have a string where you feel that translators will need a bit of help
+to understand what it does, you can add a translator comment to it. Translator
+comments are particularly useful when you are working with placeholders,
+because you can tell the translator what the placeholder will be replaced
+with. Translator comments need to be inserted into the code in the line
+directly above the translation. Each line of a translator comment has to be
+prefixed by ``-- TRANSLATORS:``, like this:
+
+.. code-block:: lua
+
+   -- TRANSLATORS: This is just a test string
+   -- TRANSLATORS: With a multiline comment
+   print _"Hello Word"
+
+
+Working with Placeholders
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If you have multiple variables in your script that you wish to include dynamically in the same string, please use ordered placeholders to give translators control over the word order. We have implemented a special Lua function for this called `bformat <https://wl.widelands.org/docs/wl/autogen_globals/#string.bformat>`_ that works just like the ``boost::format`` function in C++. Example:
+
+.. code-block:: lua
+
+   local world = _("world") -- Will print in Gaelic: "saoghal"
+   local hello = _("hello") -- Will print in Gaelic: "halò"
+   -- TRANSLATORS: %1$s = hello, %2$s = world
+   print  (_ "The %1$s is '%2$s'"):bformat(hello, world) -- Will print in Gaelic: "Is 'halò' an saoghal"
+
+
+Numbers in Placeholders
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Not all languages' number systems work the same as in English. For example, the Gaelic word for "cat" conveniently is "cat", and this is how its plural works: `0 cat`, `1 or 2 chat`, `3 cait`, `11 or 12 chat`, `13 cait`, `20 cat`... So, instead of using ``_`` to fetch the translation, any string containing a placeholder that is a number should be fetched with ``ngettext`` instead. First, you fetch the correct plural form, using the number variable and ``ngettext``:
+
+.. code-block:: lua
+
+   pretty_plurals_string = ngettext("There is %s world" , "There are %s worlds", number_of_worlds)
+
+
+Then you still need to format the string with your variable:
+
+.. code-block:: lua
+
+   print pretty_plurals_string:format(number_of_worlds)
+
+If you have a string with multiple numbers in it that would trigger plural forms, split it into separate strings that you can fetch with ``ngettext``. You can then combine them with ``bformat`` and ordered placeholders.
+
+
+Handling Long Strings
+^^^^^^^^^^^^^^^^^^^^^
+
+If you have a really long string, e.g. a dialog stretching over multiple sentences, check if there is a logical place where you could split this into two separate strings for translators. We don't have a "break after x characters" rule for this; please use common sense here. It is easier for translators to translate smaller chunks, and if you should have to change the string later on, e.g. to fix a typo, you will break less translations. The strings will be put into the translation files in the same order as they appear in the source code, so the context will remain intact for the translators.
+
+Also, please hide all formatting control characers from our translators. This includes HTML tags as well as new lines in the code! For an example, have a look at ``campaigns/atl01.wmf/scripting/texts.lua``
 
 .. vim:ft=rst:spelllang=en:spell

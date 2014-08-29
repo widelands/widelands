@@ -17,9 +17,10 @@
  *
  */
 
-#ifndef SOLDIER_H
-#define SOLDIER_H
+#ifndef WL_LOGIC_SOLDIER_H
+#define WL_LOGIC_SOLDIER_H
 
+#include "base/macros.h"
 #include "logic/tattribute.h"
 #include "logic/worker.h"
 
@@ -38,18 +39,15 @@ class Battle;
 
 #define HP_FRAMECOLOR RGBColor(255, 255, 255)
 
-struct Soldier_Descr : public Worker_Descr {
+struct SoldierDescr : public WorkerDescr {
 	friend class Economy;
-	Soldier_Descr
+	SoldierDescr
 		(char const * const _name, char const * const _descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &);
+	~SoldierDescr() override {}
 
-	// NOTE we have to explicitly return Worker_Descr::SOLDIER, as SOLDIER is
-	// NOTE as well defined in an enum in instances.h
-	virtual Worker_Type get_worker_type() const override {return Worker_Descr::SOLDIER;}
-
-	virtual void load_graphics() override;
+	void load_graphics() override;
 
 	uint32_t get_max_hp_level          () const {return m_max_hp_level;}
 	uint32_t get_max_attack_level      () const {return m_max_attack_level;}
@@ -80,12 +78,10 @@ struct Soldier_Descr : public Worker_Descr {
 		assert(level <= m_max_evade_level);   return m_evade_pics  [level];
 	}
 
-
-
 	uint32_t get_rand_anim(Game & game, const char * const name) const;
 
 protected:
-	virtual Bob & create_object() const override;
+	Bob & create_object() const override;
 
 	//  start values
 	uint32_t m_base_hp;
@@ -133,6 +129,8 @@ protected:
 			(const std::string & directory, Profile & prof, Section & global_s,
 			 const char * anim_name);
 
+private:
+	DISALLOW_COPY_AND_ASSIGN(SoldierDescr);
 };
 
 class Building;
@@ -148,36 +146,26 @@ enum CombatWalkingDir {
 };
 
 enum CombatFlags {
-	/**
-	 * CF_DEFEND_STAY_HOME
-	 *    Soldier will wait enemies at his building flag. Only for defenders.
-	 */
+	/// Soldier will wait enemies at his building flag. Only for defenders.
 	CF_DEFEND_STAYHOME = 1,
-	/**
-	 * CF_RETREAT_WHEN_INJURED
-	 *    When current hitpoints goes under arbitrary value, soldier will flee
-	 * and heal inside military building
-	 */
+	/// When current hitpoints goes under a fixed percentage, soldier will flee
+	/// and heal inside military building
 	CF_RETREAT_WHEN_INJURED = 2,
-	/**
-	 * CF_AVOID_COMBAT
-	 *    Attackers would try avoid entering combat with others soldiers but
-	 * 'flag deffenders'.
-	 */
+	/// Attackers would try avoid entering combat with others soldiers but 'flag
+	/// defenders'.
 	CF_AVOID_COMBAT = 4,
-
 };
 
 
 class Soldier : public Worker {
 	friend struct Map_Bobdata_Data_Packet;
-	MO_DESCR(Soldier_Descr);
+	MO_DESCR(SoldierDescr)
 
 public:
-	Soldier(const Soldier_Descr &);
+	Soldier(const SoldierDescr &);
 
-	virtual void init(Editor_Game_Base &) override;
-	virtual void cleanup(Editor_Game_Base &) override;
+	void init(Editor_Game_Base &) override;
+	void cleanup(Editor_Game_Base &) override;
 
 	void set_level
 		(uint32_t hp, uint32_t attack, uint32_t defense, uint32_t evade);
@@ -202,20 +190,6 @@ public:
 	static void calc_info_icon_size
 		(const Tribe_Descr &, uint32_t & w, uint32_t & h);
 	void draw_info_icon(RenderTarget &, Point, bool anchor_below) const;
-
-	//  Information function from description.
-	uint32_t get_max_hp_level     () const {
-		return descr().get_max_hp_level();
-	}
-	uint32_t get_max_attack_level () const {
-		return descr().get_max_attack_level();
-	}
-	uint32_t get_max_defense_level() const {
-		return descr().get_max_defense_level();
-	}
-	uint32_t get_max_evade_level  () const {
-		return descr().get_max_evade_level();
-	}
 
 	uint32_t get_current_hitpoints() const {return m_hp_current;}
 	uint32_t get_max_hitpoints() const;
@@ -247,18 +221,18 @@ public:
 	void heal (uint32_t);
 	void damage (uint32_t); /// Damage quantity of hit points
 
-	virtual void log_general_info(const Editor_Game_Base &) override;
+	void log_general_info(const Editor_Game_Base &) override;
 
 	bool isOnBattlefield();
 	bool is_attacking_player(Game &, Player &);
 	Battle * getBattle();
 	bool canBeChallenged();
-	virtual bool checkNodeBlocked(Game &, const FCoords &, bool commit) override;
+	bool checkNodeBlocked(Game &, const FCoords &, bool commit) override;
 
 	void setBattle(Game &, Battle *);
 
-	void start_task_attack(Game & game, Building &, uint8_t retreat);
-	void start_task_defense(Game & game, bool stayhome, uint8_t retreat);
+	void start_task_attack(Game & game, Building &);
+	void start_task_defense(Game & game, bool stayhome);
 	void start_task_battle(Game &);
 	void start_task_move_in_battle(Game &, CombatWalkingDir);
 	void start_task_die(Game &);
@@ -288,7 +262,7 @@ protected:
 	// May be this can be moved this to bob when finished
 	static Task const taskDie;
 
-	virtual bool is_evict_allowed() override;
+	bool is_evict_allowed() override;
 
 private:
 	uint32_t m_hp_current;
@@ -319,23 +293,23 @@ protected:
 	public:
 		Loader();
 
-		virtual void load(FileRead &) override;
-		virtual void load_pointers() override;
+		void load(FileRead &) override;
+		void load_pointers() override;
 
 	protected:
-		virtual const Task * get_task(const std::string & name) override;
+		const Task * get_task(const std::string & name) override;
 
 	private:
 		uint32_t m_battle;
 	};
 
-	virtual Loader * create_loader() override;
+	Loader * create_loader() override;
 
 public:
 	virtual void do_save
-		(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
+		(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
 };
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_SOLDIER_H

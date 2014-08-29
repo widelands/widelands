@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EDITOR_HISTORY_H
-#define EDITOR_HISTORY_H
+#ifndef WL_EDITOR_TOOLS_EDITOR_HISTORY_H
+#define WL_EDITOR_TOOLS_EDITOR_HISTORY_H
 
 #include <deque>
 
@@ -37,7 +37,7 @@ namespace UI {struct Button;}
 struct Editor_History {
 
 	Editor_History(UI::Button & undo, UI::Button & redo):
-		m_undo_button(undo), m_redo_button(redo) {};
+		m_undo_button(undo), m_redo_button(redo) {}
 
 	uint32_t do_action(Editor_Tool& tool,
 	                   Editor_Tool::Tool_Index ind,
@@ -66,4 +66,4 @@ private:
 
 
 
-#endif
+#endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_HISTORY_H

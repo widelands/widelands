@@ -26,14 +26,14 @@
  * A lot of new features (e.g. inheritance) were added for Widelands.
  */
 
-#ifndef LUNA_H
-#define LUNA_H
+#ifndef WL_SCRIPTING_LUNA_H
+#define WL_SCRIPTING_LUNA_H
 
 
 #define LUNA_CLASS_HEAD(klass) \
 	static const char className[]; \
 	static const MethodType<klass> Methods[]; \
-	static const PropertyType<klass> Properties[];
+	static const PropertyType<klass> Properties[]
 
 /*
  * Macros for filling the description tables
@@ -59,8 +59,8 @@
 #define UNPERS_UINT32(name, value) _UNPERS_TYPE(name, value, uint32)
 #define UNPERS_STRING(name, value) _UNPERS_TYPE(name, value, string)
 
-#include "scripting/eris/lua.hpp"
 #include "scripting/luna_impl.h"
+#include "third_party/eris/lua.hpp"
 
 /**
  * Base Class. All Luna class must derive from this
@@ -189,4 +189,4 @@ T ** get_base_user_class(lua_State * const L, int narg) {
 }
 
 
-#endif /* end of include guard: __S_LUNA_H */
+#endif  // end of include guard: WL_SCRIPTING_LUNA_H

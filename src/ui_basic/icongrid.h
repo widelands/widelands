@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef UI_ICONGRID_H
-#define UI_ICONGRID_H
+#ifndef WL_UI_BASIC_ICONGRID_H
+#define WL_UI_BASIC_ICONGRID_H
 
 #include <vector>
 
@@ -69,4 +69,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_ICONGRID_H

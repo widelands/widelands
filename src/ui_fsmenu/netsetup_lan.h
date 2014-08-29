@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef FULLSCREEN_MENU_NETSETUP_LAN_H
-#define FULLSCREEN_MENU_NETSETUP_LAN_H
+#ifndef WL_UI_FSMENU_NETSETUP_LAN_H
+#define WL_UI_FSMENU_NETSETUP_LAN_H
 
 #include <cstring>
 #include <list>
@@ -43,7 +43,7 @@ struct Fullscreen_Menu_NetSetupLAN : public Fullscreen_Menu_Base {
 
 	Fullscreen_Menu_NetSetupLAN ();
 
-	virtual void think() override;
+	void think() override;
 
 	/**
 	 * \param[out] addr filled in with the IP address of the chosen server
@@ -91,4 +91,4 @@ private:
 	void clicked_lasthost();
 };
 
-#endif
+#endif  // end of include guard: WL_UI_FSMENU_NETSETUP_LAN_H

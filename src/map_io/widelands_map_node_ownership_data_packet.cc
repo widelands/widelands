@@ -35,7 +35,7 @@ void Map_Node_Ownership_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
-	 Map_Map_Object_Loader &)
+	 MapMapObjectLoader &)
 
 {
 	if (skip)
@@ -67,7 +67,7 @@ void Map_Node_Ownership_Data_Packet::Read
 
 
 void Map_Node_Ownership_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
+	(FileSystem & fs, Editor_Game_Base & egbase, MapMapObjectSaver &)
 {
 	FileWrite fw;
 

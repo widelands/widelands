@@ -19,12 +19,14 @@
 
 #include "logic/playercommand.h"
 
+#include "base/log.h"
+#include "base/macros.h"
+#include "base/wexception.h"
 #include "economy/economy.h"
 #include "economy/wares_queue.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "io/streamwrite.h"
-#include "log.h"
 #include "logic/game.h"
 #include "logic/instances.h"
 #include "logic/militarysite.h"
@@ -35,8 +37,6 @@
 #include "logic/widelands_geometry_io.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "upcast.h"
-#include "wexception.h"
 
 namespace Widelands {
 
@@ -48,7 +48,7 @@ namespace {
 // means that get_object will always return nullptr and all upcasts will fail -
 // so the commands will never do anything when executed.
 template<typename T>
-Serial get_object_serial_or_zero(uint32_t object_index, Map_Map_Object_Loader& mol) {
+Serial get_object_serial_or_zero(uint32_t object_index, MapMapObjectLoader& mol) {
 	if (!object_index)
 		return 0;
 	return mol.get<T>(object_index).serial();
@@ -75,7 +75,7 @@ enum {
 	PLCMD_RESETWARETARGETQUANTITY          = 14,
 	PLCMD_SETWORKERTARGETQUANTITY          = 15,
 	PLCMD_RESETWORKERTARGETQUANTITY        = 16,
-	PLCMD_CHANGEMILITARYCONFIG             = 17,
+	// Used to be PLCMD_CHANGEMILITARYCONFIG
 	PLCMD_MESSAGESETSTATUSREAD             = 18,
 	PLCMD_MESSAGESETSTATUSARCHIVED         = 19,
 	PLCMD_SETSTOCKPOLICY                   = 20,
@@ -122,7 +122,6 @@ PlayerCommand * PlayerCommand::deserialize (StreamRead & des)
 	case PLCMD_RESETWARETARGETQUANTITY:   return new Cmd_ResetWareTargetQuantity  (des);
 	case PLCMD_SETWORKERTARGETQUANTITY:   return new Cmd_SetWorkerTargetQuantity  (des);
 	case PLCMD_RESETWORKERTARGETQUANTITY: return new Cmd_ResetWorkerTargetQuantity(des);
-	case PLCMD_CHANGEMILITARYCONFIG:      return new Cmd_ChangeMilitaryConfig     (des);
 	case PLCMD_MESSAGESETSTATUSREAD:      return new Cmd_MessageSetStatusRead     (des);
 	case PLCMD_MESSAGESETSTATUSARCHIVED:  return new Cmd_MessageSetStatusArchived (des);
 	case PLCMD_SETSTOCKPOLICY:            return new Cmd_SetStockPolicy           (des);
@@ -141,7 +140,7 @@ PlayerCommand * PlayerCommand::deserialize (StreamRead & des)
  */
 #define PLAYER_COMMAND_VERSION 2
 void PlayerCommand::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_COMMAND_VERSION);
@@ -153,14 +152,14 @@ void PlayerCommand::Write
 }
 
 void PlayerCommand::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.Unsigned16();
-		if (2 <= packet_version and packet_version <= PLAYER_COMMAND_VERSION) {
+		if (2 <= packet_version && packet_version <= PLAYER_COMMAND_VERSION) {
 			GameLogicCommand::Read(fr, egbase, mol);
 			m_sender    = fr.Unsigned8 ();
-			if (not egbase.get_player(m_sender))
+			if (!egbase.get_player(m_sender))
 				throw game_data_error("player %u does not exist", m_sender);
 			m_cmdserial = fr.Unsigned32();
 		} else
@@ -194,12 +193,12 @@ void Cmd_Bulldoze::serialize (StreamWrite & ser)
 }
 #define PLAYER_CMD_BULLDOZE_VERSION 2
 void Cmd_Bulldoze::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.Unsigned16();
 		if
-			(1 <= packet_version and
+			(1 <= packet_version &&
 			 packet_version <= PLAYER_CMD_BULLDOZE_VERSION)
 		{
 			PlayerCommand::Read(fr, egbase, mol);
@@ -213,7 +212,7 @@ void Cmd_Bulldoze::Read
 	}
 }
 void Cmd_Bulldoze::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_BULLDOZE_VERSION);
@@ -248,7 +247,7 @@ void Cmd_Build::serialize (StreamWrite & ser) {
 }
 #define PLAYER_CMD_BUILD_VERSION 1
 void Cmd_Build::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.Unsigned16();
@@ -265,7 +264,7 @@ void Cmd_Build::Read
 }
 
 void Cmd_Build::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_BUILD_VERSION);
@@ -297,7 +296,7 @@ void Cmd_BuildFlag::serialize (StreamWrite & ser)
 }
 #define PLAYER_CMD_BUILDFLAG_VERSION 1
 void Cmd_BuildFlag::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.Unsigned16();
@@ -312,7 +311,7 @@ void Cmd_BuildFlag::Read
 	}
 }
 void Cmd_BuildFlag::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_BUILDFLAG_VERSION);
@@ -379,7 +378,7 @@ void Cmd_BuildRoad::serialize (StreamWrite & ser)
 }
 #define PLAYER_CMD_BUILDROAD_VERSION 1
 void Cmd_BuildRoad::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.Unsigned16();
@@ -399,7 +398,7 @@ void Cmd_BuildRoad::Read
 	}
 }
 void Cmd_BuildRoad::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_BUILDROAD_VERSION);
@@ -438,7 +437,7 @@ void Cmd_FlagAction::serialize (StreamWrite & ser)
 
 #define PLAYER_CMD_FLAGACTION_VERSION 1
 void Cmd_FlagAction::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.Unsigned16();
@@ -454,7 +453,7 @@ void Cmd_FlagAction::Read
 	}
 }
 void Cmd_FlagAction::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_FLAGACTION_VERSION);
@@ -489,7 +488,7 @@ void Cmd_StartStopBuilding::serialize (StreamWrite & ser)
 }
 #define PLAYER_CMD_STOPBUILDING_VERSION 1
 void Cmd_StartStopBuilding::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.Unsigned16();
@@ -504,7 +503,7 @@ void Cmd_StartStopBuilding::Read
 	}
 }
 void Cmd_StartStopBuilding::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_STOPBUILDING_VERSION);
@@ -540,7 +539,7 @@ void Cmd_MilitarySiteSetSoldierPreference::execute (Game & game)
 
 #define PLAYER_CMD_SOLDIERPREFERENCE_VERSION 1
 void Cmd_MilitarySiteSetSoldierPreference::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_SOLDIERPREFERENCE_VERSION);
@@ -554,7 +553,7 @@ void Cmd_MilitarySiteSetSoldierPreference::Write
 }
 
 void Cmd_MilitarySiteSetSoldierPreference::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try
 	{
@@ -594,7 +593,7 @@ void Cmd_StartOrCancelExpedition::serialize (StreamWrite & ser)
 }
 #define PLAYER_CMD_EXPEDITION_VERSION 1
 void Cmd_StartOrCancelExpedition::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -609,7 +608,7 @@ void Cmd_StartOrCancelExpedition::Read
 	}
 }
 void Cmd_StartOrCancelExpedition::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_EXPEDITION_VERSION);
@@ -645,7 +644,7 @@ void Cmd_EnhanceBuilding::serialize (StreamWrite & ser)
 }
 #define PLAYER_CMD_ENHANCEBUILDING_VERSION 1
 void Cmd_EnhanceBuilding::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.Unsigned16();
@@ -661,7 +660,7 @@ void Cmd_EnhanceBuilding::Read
 	}
 }
 void Cmd_EnhanceBuilding::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_ENHANCEBUILDING_VERSION);
@@ -697,7 +696,7 @@ void Cmd_DismantleBuilding::serialize (StreamWrite & ser)
 }
 #define PLAYER_CMD_DISMANTLEBUILDING_VERSION 1
 void Cmd_DismantleBuilding::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.Unsigned16();
@@ -712,7 +711,7 @@ void Cmd_DismantleBuilding::Read
 	}
 }
 void Cmd_DismantleBuilding::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_DISMANTLEBUILDING_VERSION);
@@ -746,7 +745,7 @@ void Cmd_EvictWorker::serialize (StreamWrite & ser)
 }
 #define PLAYER_CMD_EVICTWORKER_VERSION 1
 void Cmd_EvictWorker::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.Unsigned16();
@@ -761,7 +760,7 @@ void Cmd_EvictWorker::Read
 	}
 }
 void Cmd_EvictWorker::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_EVICTWORKER_VERSION);
@@ -799,7 +798,7 @@ void Cmd_ShipScoutDirection::serialize (StreamWrite & ser)
 
 #define PLAYER_CMD_SHIP_SCOUT_DIRECTION_VERSION 1
 void Cmd_ShipScoutDirection::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.Unsigned16();
@@ -815,7 +814,7 @@ void Cmd_ShipScoutDirection::Read
 	}
 }
 void Cmd_ShipScoutDirection::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_SHIP_SCOUT_DIRECTION_VERSION);
@@ -856,7 +855,7 @@ void Cmd_ShipConstructPort::serialize (StreamWrite & ser)
 
 #define PLAYER_CMD_SHIP_CONSTRUCT_PORT_VERSION 1
 void Cmd_ShipConstructPort::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.Unsigned16();
@@ -872,7 +871,7 @@ void Cmd_ShipConstructPort::Read
 	}
 }
 void Cmd_ShipConstructPort::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_SHIP_CONSTRUCT_PORT_VERSION);
@@ -913,7 +912,7 @@ void Cmd_ShipExploreIsland::serialize (StreamWrite & ser)
 
 #define PLAYER_CMD_SHIP_EXPLORE_ISLAND_VERSION 1
 void Cmd_ShipExploreIsland::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.Unsigned16();
@@ -928,7 +927,7 @@ void Cmd_ShipExploreIsland::Read
 	}
 }
 void Cmd_ShipExploreIsland::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_SHIP_EXPLORE_ISLAND_VERSION);
@@ -967,7 +966,7 @@ void Cmd_ShipSink::serialize (StreamWrite & ser)
 
 #define PLAYER_CMD_SHIP_SINK_VERSION 1
 void Cmd_ShipSink::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.Unsigned16();
@@ -981,7 +980,7 @@ void Cmd_ShipSink::Read
 	}
 }
 void Cmd_ShipSink::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_SHIP_SINK_VERSION);
@@ -1017,7 +1016,7 @@ void Cmd_ShipCancelExpedition::serialize (StreamWrite & ser)
 
 #define PLAYER_CMD_SHIP_CANCELEXPEDITION_VERSION 1
 void Cmd_ShipCancelExpedition::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.Unsigned16();
@@ -1031,7 +1030,7 @@ void Cmd_ShipCancelExpedition::Read
 	}
 }
 void Cmd_ShipCancelExpedition::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_SHIP_CANCELEXPEDITION_VERSION);
@@ -1071,7 +1070,7 @@ void Cmd_SetWarePriority::execute(Game & game)
 #define PLAYER_CMD_SETWAREPRIORITY_VERSION 1
 
 void Cmd_SetWarePriority::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(PLAYER_CMD_SETWAREPRIORITY_VERSION);
 
@@ -1084,7 +1083,7 @@ void Cmd_SetWarePriority::Write
 }
 
 void Cmd_SetWarePriority::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.Unsigned16();
@@ -1147,7 +1146,7 @@ void Cmd_SetWareMaxFill::execute(Game & game)
 #define PLAYER_CMD_SETWAREMAXFILL_SIZE_VERSION 1
 
 void Cmd_SetWareMaxFill::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(PLAYER_CMD_SETWAREMAXFILL_SIZE_VERSION);
 
@@ -1159,7 +1158,7 @@ void Cmd_SetWareMaxFill::Write
 }
 
 void Cmd_SetWareMaxFill::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.Unsigned16();
@@ -1202,7 +1201,7 @@ Cmd_ChangeTargetQuantity::Cmd_ChangeTargetQuantity
 {}
 
 void Cmd_ChangeTargetQuantity::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	PlayerCommand::Write(fw, egbase, mos);
 	fw.Unsigned32(economy());
@@ -1211,7 +1210,7 @@ void Cmd_ChangeTargetQuantity::Write
 }
 
 void Cmd_ChangeTargetQuantity::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		PlayerCommand::Read(fr, egbase, mol);
@@ -1252,7 +1251,7 @@ void Cmd_SetWareTargetQuantity::execute(Game & game)
 {
 	Player & player = game.player(sender());
 	if
-		(economy  () < player.get_nr_economies() and
+		(economy  () < player.get_nr_economies() &&
 		 ware_type() < player.tribe().get_nrwares())
 		player.get_economy_by_number(economy())->set_ware_target_quantity
 			(ware_type(),  m_permanent, duetime());
@@ -1261,7 +1260,7 @@ void Cmd_SetWareTargetQuantity::execute(Game & game)
 #define PLAYER_CMD_SETWARETARGETQUANTITY_VERSION 2
 
 void Cmd_SetWareTargetQuantity::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(PLAYER_CMD_SETWARETARGETQUANTITY_VERSION);
 	Cmd_ChangeTargetQuantity::Write(fw, egbase, mos);
@@ -1269,7 +1268,7 @@ void Cmd_SetWareTargetQuantity::Write
 }
 
 void Cmd_SetWareTargetQuantity::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.Unsigned16();
@@ -1315,7 +1314,7 @@ void Cmd_ResetWareTargetQuantity::execute(Game & game)
 	Player & player = game.player(sender());
 	const Tribe_Descr & tribe = player.tribe();
 	if
-		(economy  () < player.get_nr_economies() and
+		(economy  () < player.get_nr_economies() &&
 		 ware_type() < tribe.get_nrwares())
 	{
 		const int32_t count =
@@ -1328,14 +1327,14 @@ void Cmd_ResetWareTargetQuantity::execute(Game & game)
 #define PLAYER_CMD_RESETWARETARGETQUANTITY_VERSION 1
 
 void Cmd_ResetWareTargetQuantity::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(PLAYER_CMD_RESETWARETARGETQUANTITY_VERSION);
 	Cmd_ChangeTargetQuantity::Write(fw, egbase, mos);
 }
 
 void Cmd_ResetWareTargetQuantity::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.Unsigned16();
@@ -1374,7 +1373,7 @@ void Cmd_SetWorkerTargetQuantity::execute(Game & game)
 {
 	Player & player = game.player(sender());
 	if
-		(economy  () < player.get_nr_economies() and
+		(economy  () < player.get_nr_economies() &&
 		 ware_type() < player.tribe().get_nrwares())
 		player.get_economy_by_number(economy())->set_worker_target_quantity
 			(ware_type(),  m_permanent, duetime());
@@ -1383,7 +1382,7 @@ void Cmd_SetWorkerTargetQuantity::execute(Game & game)
 #define PLAYER_CMD_SETWORKERTARGETQUANTITY_VERSION 2
 
 void Cmd_SetWorkerTargetQuantity::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(PLAYER_CMD_SETWORKERTARGETQUANTITY_VERSION);
 	Cmd_ChangeTargetQuantity::Write(fw, egbase, mos);
@@ -1391,7 +1390,7 @@ void Cmd_SetWorkerTargetQuantity::Write
 }
 
 void Cmd_SetWorkerTargetQuantity::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.Unsigned16();
@@ -1437,7 +1436,7 @@ void Cmd_ResetWorkerTargetQuantity::execute(Game & game)
 	Player & player = game.player(sender());
 	const Tribe_Descr & tribe = player.tribe();
 	if
-		(economy  () < player.get_nr_economies() and
+		(economy  () < player.get_nr_economies() &&
 		 ware_type() < tribe.get_nrwares())
 	{
 		const int32_t count =
@@ -1450,14 +1449,14 @@ void Cmd_ResetWorkerTargetQuantity::execute(Game & game)
 #define PLAYER_CMD_RESETWORKERTARGETQUANTITY_VERSION 1
 
 void Cmd_ResetWorkerTargetQuantity::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(PLAYER_CMD_RESETWORKERTARGETQUANTITY_VERSION);
 	Cmd_ChangeTargetQuantity::Write(fw, egbase, mos);
 }
 
 void Cmd_ResetWorkerTargetQuantity::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.Unsigned16();
@@ -1510,7 +1509,7 @@ void Cmd_ChangeTrainingOptions::serialize (StreamWrite & ser) {
 
 #define PLAYER_CMD_CHANGETRAININGOPTIONS_VERSION 1
 void Cmd_ChangeTrainingOptions::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.Unsigned16();
@@ -1528,7 +1527,7 @@ void Cmd_ChangeTrainingOptions::Read
 }
 
 void Cmd_ChangeTrainingOptions::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_CHANGETRAININGOPTIONS_VERSION);
@@ -1568,7 +1567,7 @@ void Cmd_DropSoldier::serialize (StreamWrite & ser)
 
 #define PLAYER_CMD_DROPSOLDIER_VERSION 1
 void Cmd_DropSoldier::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.Unsigned16();
@@ -1585,7 +1584,7 @@ void Cmd_DropSoldier::Read
 }
 
 void Cmd_DropSoldier::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_DROPSOLDIER_VERSION);
@@ -1627,7 +1626,7 @@ void Cmd_ChangeSoldierCapacity::serialize (StreamWrite & ser)
 
 #define PLAYER_CMD_CHANGESOLDIERCAPACITY_VERSION 1
 void Cmd_ChangeSoldierCapacity::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.Unsigned16();
@@ -1644,7 +1643,7 @@ void Cmd_ChangeSoldierCapacity::Read
 }
 
 void Cmd_ChangeSoldierCapacity::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_CHANGESOLDIERCAPACITY_VERSION);
@@ -1664,11 +1663,10 @@ void Cmd_ChangeSoldierCapacity::Write
 Cmd_EnemyFlagAction::Cmd_EnemyFlagAction (StreamRead & des) :
 PlayerCommand (0, des.Unsigned8())
 {
-	des         .Unsigned8 ();
-	serial   = des.Unsigned32();
-	des         .Unsigned8 ();
-	number   = des.Unsigned8 ();
-	retreat  = des.Unsigned8 ();
+	des.Unsigned8();
+	serial = des.Unsigned32();
+	des.Unsigned8();
+	number = des.Unsigned8();
 }
 
 void Cmd_EnemyFlagAction::execute (Game & game)
@@ -1684,13 +1682,13 @@ void Cmd_EnemyFlagAction::execute (Game & game)
 		if (const Building * const building = flag->get_building()) {
 			if
 				(player.is_hostile(flag->owner())
-				 and
+				 &&
 				 1
 				 <
 				 player.vision
 				 	(Map::get_index
 				 	 	(building->get_position(), game.map().get_width())))
-				player.enemyflagaction (*flag, sender(), number, retreat);
+				player.enemyflagaction (*flag, sender(), number);
 			else
 				log
 					("Cmd_EnemyFlagAction::execute: ERROR: wrong player target not "
@@ -1706,13 +1704,11 @@ void Cmd_EnemyFlagAction::serialize (StreamWrite & ser) {
 	ser.Unsigned32(serial);
 	ser.Unsigned8 (sender());
 	ser.Unsigned8 (number);
-	ser.Unsigned8 (retreat);
 }
-/// Version 2 and 3 are fully compatible: version 2 soldiers will never retreat
-/// but do not crash game.
+
 #define PLAYER_CMD_ENEMYFLAGACTION_VERSION 3
 void Cmd_EnemyFlagAction::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.Unsigned16();
@@ -1722,7 +1718,6 @@ void Cmd_EnemyFlagAction::Read
 			serial = get_object_serial_or_zero<Flag>(fr.Unsigned32(), mol);
 			fr           .Unsigned8 ();
 			number   = fr.Unsigned8 ();
-			retreat  = fr.Unsigned8 ();
 		} else
 			throw game_data_error
 				("unknown/unhandled version %u", packet_version);
@@ -1732,7 +1727,7 @@ void Cmd_EnemyFlagAction::Read
 }
 
 void Cmd_EnemyFlagAction::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(PLAYER_CMD_ENEMYFLAGACTION_VERSION);
@@ -1747,84 +1742,7 @@ void Cmd_EnemyFlagAction::Write
 	// Now param
 	fw.Unsigned8 (sender());
 	fw.Unsigned8 (number);
-	fw.Unsigned8 (retreat);
 }
-
-/*** Cmd_ChangeMilitaryConfig ***/
-
-Cmd_ChangeMilitaryConfig::Cmd_ChangeMilitaryConfig(StreamRead & des)
-:
-PlayerCommand (0, des.Unsigned8())
-{
-	retreat = des.Unsigned8();
-	/// Read reserved data
-	des.Unsigned8();
-	des.Unsigned8();
-}
-
-void Cmd_ChangeMilitaryConfig::execute (Game & game)
-{
-	game.get_player(sender())->set_retreat_percentage(retreat);
-}
-
-void Cmd_ChangeMilitaryConfig::serialize (StreamWrite & ser)
-{
-	ser.Unsigned8 (PLCMD_CHANGEMILITARYCONFIG);
-	ser.Unsigned8 (sender());
-	ser.Unsigned8 (retreat);
-	/// Serialize reserved data
-	ser.Unsigned8 (0);
-	ser.Unsigned8 (0);
-}
-
-#define PLAYER_CMD_CHANGEMILITARYCONFIG_VERSION 1
-void Cmd_ChangeMilitaryConfig::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
-{
-	try {
-		const uint16_t packet_version = fr.Unsigned16();
-		if (packet_version == PLAYER_CMD_CHANGEMILITARYCONFIG_VERSION) {
-			PlayerCommand::Read(fr, egbase, mol);
-			Player * plr = egbase.get_player(sender());
-			assert(plr);
-			retreat = fr.Unsigned8();
-			if
-				(retreat < plr->tribe().get_military_data().get_min_retreat()
-				 or
-				 retreat > plr->tribe().get_military_data().get_max_retreat())
-				throw game_data_error
-					("retreat: value out of range. Received %u, but expected %u-%u",
-					 retreat,
-					 plr->tribe().get_military_data().get_min_retreat(),
-					 plr->tribe().get_military_data().get_max_retreat());
-			/// Read reserved data
-			fr.Unsigned8();
-			fr.Unsigned8();
-		} else
-			throw game_data_error
-				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
-		throw game_data_error("change military config: %s", e.what());
-	}
-}
-
-void Cmd_ChangeMilitaryConfig::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
-{
-	// First, write version
-	fw.Unsigned16(PLAYER_CMD_CHANGEMILITARYCONFIG_VERSION);
-	// Write base classes
-	PlayerCommand::Write(fw, egbase, mos);
-
-	// Now retreat
-	fw.Unsigned8(retreat);
-
-	// Reserved for future versions
-	fw.Unsigned8(0);
-	fw.Unsigned8(0);
-
-}
-
 
 /*** struct PlayerMessageCommand ***/
 
@@ -1834,14 +1752,14 @@ PlayerCommand (0, des.Unsigned8()), m_message_id(des.Unsigned32())
 
 #define PLAYER_MESSAGE_CMD_VERSION 1
 void PlayerMessageCommand::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		const uint16_t packet_version = fr.Unsigned16();
 		if (packet_version == PLAYER_MESSAGE_CMD_VERSION) {
 			PlayerCommand::Read(fr, egbase, mol);
 			m_message_id = Message_Id(fr.Unsigned32());
-			if (not m_message_id)
+			if (!m_message_id)
 				throw game_data_error
 					("(player %u): message id is null", sender());
 		} else
@@ -1853,7 +1771,7 @@ void PlayerMessageCommand::Read
 }
 
 void PlayerMessageCommand::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(PLAYER_MESSAGE_CMD_VERSION);
 	PlayerCommand::Write(fw, egbase, mos);
@@ -1941,7 +1859,7 @@ void Cmd_SetStockPolicy::execute(Game & game)
 				return;
 			}
 
-			const Tribe_Descr & tribe = warehouse->tribe();
+			const Tribe_Descr & tribe = warehouse->descr().tribe();
 			if (m_isworker) {
 				if (!(m_ware < tribe.get_nrworkers())) {
 					log
@@ -1984,7 +1902,7 @@ void Cmd_SetStockPolicy::serialize(StreamWrite & ser)
 
 #define PLAYER_CMD_SETSTOCKPOLICY_VERSION 1
 void Cmd_SetStockPolicy::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
 		uint8_t version = fr.Unsigned8();
@@ -2001,7 +1919,7 @@ void Cmd_SetStockPolicy::Read
 }
 
 void Cmd_SetStockPolicy::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	fw.Unsigned8(PLAYER_CMD_SETSTOCKPOLICY_VERSION);
 	PlayerCommand::Write(fw, egbase, mos);

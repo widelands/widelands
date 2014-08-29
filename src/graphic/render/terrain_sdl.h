@@ -17,20 +17,19 @@
  *
  */
 
-#ifndef TERRAIN_SDL_H
-#define TERRAIN_SDL_H
+#ifndef WL_GRAPHIC_RENDER_TERRAIN_SDL_H
+#define WL_GRAPHIC_RENDER_TERRAIN_SDL_H
 
 #include <cassert>
 
-#include "constants.h"
+#include "base/log.h"
+#include "base/macros.h"
 #include "graphic/graphic.h"
-#include "graphic/texture.h"
-#include "log.h"
-#include "logic/roadtype.h"
-#include "random.h"
 #include "graphic/render/sdl_surface.h"
-#include "upcast.h"
-#include "vertex.h"
+#include "graphic/render/vertex.h"
+#include "graphic/texture.h"
+#include "logic/roadtype.h"
+#include "random/random.h"
 #include "wui/mapviewpixelconstants.h"
 
 ///Must be a power of two
@@ -39,9 +38,7 @@
 #define DITHER_RAND_MASK (DITHER_WIDTH * 2 - 1)
 #define DITHER_RAND_SHIFT (16 / DITHER_WIDTH)
 
-/**
- * \todo Dangerous: casting, assumptions for sizeof(X), bitshifting
- */
+// TODO(unknown): Dangerous: casting, assumptions for sizeof(X), bitshifting
 #define FTOFIX(f) (static_cast<int32_t>((f) * 0x10000))
 #define ITOFIX(i) ((i)<<16)
 #define FIXTOI(f) ((f)>>16)
@@ -161,7 +158,7 @@ template<typename T> static void render_edge_lists
 
 			T * scanline =
 				reinterpret_cast<T *>
-					(static_cast<Uint8 *>(dst.get_pixels()) + y * dst.get_pitch())
+					(static_cast<uint8_t *>(dst.get_pixels()) + y * dst.get_pitch())
 				+
 				leftx;
 
@@ -364,7 +361,7 @@ template<typename T> static void dither_edge_horiz
 	dty = (ITOFIX(end.ty) - ty) / (end.x - start.x + 1);
 	db  = (ITOFIX(end.b)  - b)  / (end.x - start.x + 1);
 
-	// TODO: seed this depending on field coordinates
+	// TODO(unknown): seed this depending on field coordinates
 	uint32_t rnd = 0;
 
 	const int32_t dstw = dst.width();
@@ -461,7 +458,7 @@ template<typename T> static void dither_edge_vert
 	dty = (ITOFIX(end.ty) - ty) / (end.y - start.y + 1);
 	db  = (ITOFIX(end.b)  - b)  / (end.y - start.y + 1);
 
-	// TODO: seed this depending on field coordinates
+	// TODO(unknown): seed this depending on field coordinates
 	uint32_t rnd = 0;
 
 	const int32_t dstw = dst.width();
@@ -488,7 +485,7 @@ template<typename T> static void dither_edge_vert
 				 ++i, ++x, tx0 += dty, ty0 -= dtx, rnd0 >>= DITHER_RAND_SHIFT)
 				if ((rnd0 & DITHER_RAND_MASK) <= i && x >= 0 && x < dstw)
 					reinterpret_cast<T *>
-						(static_cast<Uint8 *>(dst.get_pixels())
+						(static_cast<uint8_t *>(dst.get_pixels())
 						 +
 						 y * dst.get_pitch())
 						[x]
@@ -510,7 +507,7 @@ template<typename T> static void dither_edge_vert
 					 &&
 					 x >= 0 && x < dstw)
 					reinterpret_cast<T *>
-						(static_cast<Uint8 *>(dst.get_pixels())
+						(static_cast<uint8_t *>(dst.get_pixels())
 						 +
 						 y * dst.get_pitch())
 						[x]
@@ -543,7 +540,7 @@ template<typename T> static void render_road_horiz
 			continue;
 
 		for (int32_t i = 0, y = (centery >> 16) - 2; i < 5; ++i, ++y)
-			if (0 < y and y < dsth)
+			if (0 < y && y < dsth)
 				reinterpret_cast<T *>
 					(static_cast<uint8_t *>(dst.get_pixels()) + y * dst.get_pitch())
 					[x]
@@ -570,7 +567,7 @@ template<typename T> static void render_road_vert
 			continue;
 
 		for (int32_t i = 0, x = (centerx >> 16) - 2; i < 5; ++i, ++x)
-			if (0 < x and x < dstw)
+			if (0 < x && x < dstw)
 				reinterpret_cast<T *>
 					(static_cast<uint8_t *>(dst.get_pixels()) + y * dst.get_pitch())
 					[x]
@@ -607,7 +604,7 @@ template<typename T> static void draw_field_int
 	uint8_t road;
 
 	road = (roads >> Widelands::Road_East) & Widelands::Road_Mask;
-	if (-128 < f_vert.b or -128 < r_vert.b) {
+	if (-128 < f_vert.b || -128 < r_vert.b) {
 		if (road) {
 			switch (road) {
 			case Widelands::Road_Normal:
@@ -626,7 +623,7 @@ template<typename T> static void draw_field_int
 	}
 
 	road = (roads >> Widelands::Road_SouthEast) & Widelands::Road_Mask;
-	if (-128 < f_vert.b or -128 < br_vert.b) {
+	if (-128 < f_vert.b || -128 < br_vert.b) {
 		if (road) {
 			switch (road) {
 			case Widelands::Road_Normal:
@@ -645,7 +642,7 @@ template<typename T> static void draw_field_int
 	}
 
 	road = (roads >> Widelands::Road_SouthWest) & Widelands::Road_Mask;
-	if (-128 < f_vert.b or -128 < bl_vert.b) {
+	if (-128 < f_vert.b || -128 < bl_vert.b) {
 		if (road) {
 			switch (road) {
 			case Widelands::Road_Normal:
@@ -665,7 +662,7 @@ template<typename T> static void draw_field_int
 
 	dst.unlock(Surface::Unlock_Update);
 
-	// FIXME: similar textures may not need dithering
+	// TODO(unknown): similar textures may not need dithering
 }
 
-#endif
+#endif  // end of include guard: WL_GRAPHIC_RENDER_TERRAIN_SDL_H

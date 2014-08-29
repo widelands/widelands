@@ -125,7 +125,7 @@ void Tab_Panel::update_desired_size()
 		uint32_t panelw, panelh;
 
 		panel->get_desired_size(panelw, panelh);
-		// TODO  the panel might be bigger -> add a scrollbar in that case
+		// TODO(unknown):  the panel might be bigger -> add a scrollbar in that case
 		//panel->set_size(panelw, panelh);
 
 		if (panelw > w)
@@ -296,7 +296,7 @@ void Tab_Panel::handle_mousein(bool inside)
  * Update highlighting
 */
 bool Tab_Panel::handle_mousemove
-	(Uint8, int32_t const x, int32_t const y, int32_t, int32_t)
+	(uint8_t, int32_t const x, int32_t const y, int32_t, int32_t)
 {
 	int32_t hl;
 
@@ -331,7 +331,7 @@ bool Tab_Panel::handle_mousemove
 /**
  * Change the active tab if a tab button has been clicked
 */
-bool Tab_Panel::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
+bool Tab_Panel::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
 		int32_t id;
 
@@ -349,7 +349,7 @@ bool Tab_Panel::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 
 	return false;
 }
-bool Tab_Panel::handle_mouserelease(Uint8, int32_t, int32_t)
+bool Tab_Panel::handle_mouserelease(uint8_t, int32_t, int32_t)
 {
 	return false;
 }

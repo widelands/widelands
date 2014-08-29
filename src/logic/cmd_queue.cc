@@ -19,17 +19,17 @@
 
 #include "logic/cmd_queue.h"
 
+#include "base/macros.h"
+#include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
+#include "io/machdep.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/instances.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/worker.h"
-#include "machdep.h"
-#include "upcast.h"
-#include "wexception.h"
 
 namespace Widelands {
 
@@ -50,12 +50,12 @@ Cmd_Queue::~Cmd_Queue()
 /*
  * flushs all commands from the queue. Needed for
  * game loading (while in game)
- * FIXME ...but game loading while in game is not possible!
- * Note: Order of destruction of Items is not guaranteed
  */
+// TODO(unknown): ...but game loading while in game is not possible!
+// Note: Order of destruction of Items is not guaranteed
 void Cmd_Queue::flush() {
 	uint32_t cbucket = 0;
-	while (m_ncmds and cbucket < CMD_QUEUE_BUCKET_SIZE) {
+	while (m_ncmds && cbucket < CMD_QUEUE_BUCKET_SIZE) {
 		std::priority_queue<cmditem> & current_cmds = m_cmds[cbucket];
 
 		while (!current_cmds.empty()) {
@@ -153,7 +153,7 @@ void GameLogicCommand::Write
 #else
 	 Editor_Game_Base &,
 #endif
-	 Map_Map_Object_Saver &)
+	 MapMapObjectSaver &)
 {
 	// First version
 	fw.Unsigned16(BASE_CMD_VERSION);
@@ -169,7 +169,7 @@ void GameLogicCommand::Write
  * \note This function must be called by deriving objects that override it.
  */
 void GameLogicCommand::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader &)
+	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader &)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();

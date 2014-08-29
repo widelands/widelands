@@ -29,8 +29,8 @@
 #endif
 #include <stdint.h>
 
+#include "base/log.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "log.h"
 #include "scripting/c_utils.h"
 #include "scripting/factory.h"
 #include "scripting/lua_bases.h"
@@ -111,7 +111,7 @@ run_string_as_script(lua_State* L, const std::string& identifier, const std::str
 		lua_pop(L, 1);    // No return value from script
 		lua_newtable(L);  // Push an empty table
 	}
-	if (not lua_istable(L, -1))
+	if (!lua_istable(L, -1))
 		throw LuaError("Script did not return a table!");
 
 	// Restore old value of __file__.
@@ -336,7 +336,7 @@ void LuaGameInterface::write_coroutine(FileWrite& fw, LuaCoroutine* cr) {
 
 
 void LuaGameInterface::read_global_env
-	(FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
+	(FileRead & fr, Widelands::MapMapObjectLoader & mol,
 	 uint32_t size)
 {
 	// Clean out the garbage before loading.
@@ -375,7 +375,7 @@ void LuaGameInterface::read_global_env
 }
 
 uint32_t LuaGameInterface::write_global_env
-	(FileWrite & fw, Widelands::Map_Map_Object_Saver & mos)
+	(FileWrite & fw, Widelands::MapMapObjectSaver & mos)
 {
 	// Clean out the garbage before writing.
 	lua_gc(m_L, LUA_GCCOLLECT, 0);

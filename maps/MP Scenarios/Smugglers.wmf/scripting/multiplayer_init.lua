@@ -95,8 +95,8 @@ function place_headquarters()
             blacksmith = 2,
             brewer = 1,
             builder = 10,
-            burner = 1,
             carrier = 40,
+            charcoal_burner = 1,
             gardener = 1,
             geologist = 4,
             ["lime-burner"] = 1,
@@ -140,7 +140,9 @@ function initialize()
    end
 
    send_to_all(welcome_msg:format((ngettext("%i point", "%i points", points_to_win)):format(points_to_win)))
-
+   -- set the objective with the game type for all players
+   -- TODO change this to a broadcast once individual game objectives have been implementes
+   game.players[1]:add_objective("win_conditions", _"Rules", welcome_msg:format((ngettext("%i point", "%i points", points_to_win)):format(points_to_win)))
 
    for idx,descr in ipairs(route_descrs) do
       run(wait_for_established_route, descr)

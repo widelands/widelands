@@ -17,20 +17,19 @@
  *
  */
 
-#ifndef MESSAGE_QUEUE_H
-#define MESSAGE_QUEUE_H
+#ifndef WL_LOGIC_MESSAGE_QUEUE_H
+#define WL_LOGIC_MESSAGE_QUEUE_H
 
 #include <cassert>
 #include <map>
 
-#include <boost/noncopyable.hpp>
-
+#include "base/macros.h"
 #include "logic/message.h"
 #include "logic/message_id.h"
 
 namespace Widelands {
 
-struct MessageQueue : boost::noncopyable, private std::map<Message_Id, Message *> {
+struct MessageQueue : private std::map<Message_Id, Message *> {
 	friend class Map_Players_Messages_Data_Packet;
 	// Make typedefs public so that this looks like proper
 	// STL container to templated algorithms.
@@ -127,7 +126,7 @@ struct MessageQueue : boost::noncopyable, private std::map<Message_Id, Message *
 		iterator const it = find(id);
 		if (it == end()) {
 			// Messages can be expired when the timeout runs out, or when the linked
-			// Map_Object is removed, or both. In this later case, two expire commands
+			// MapObject is removed, or both. In this later case, two expire commands
 			// will be executed, and the message will not be present for the second one.
 			// So we assume here that the message was removed from an earlier expire cmd.
 			return;
@@ -159,9 +158,9 @@ private:
 	void clear() {
 		assert_counts();
 		m_current_message_id        = Message_Id::Null();
-		m_counts[Message::New]      = 0; //  C++0x: m_counts = {};
-		m_counts[Message::Read]     = 0; //  C++0x:
-		m_counts[Message::Archived] = 0; //  C++0x:
+		m_counts[Message::New]      = 0;
+		m_counts[Message::Read]     = 0;
+		m_counts[Message::Archived] = 0;
 		std::map<Message_Id, Message *>::clear();
 		assert_counts();
 	}
@@ -181,8 +180,10 @@ private:
 			 m_counts[Message::Read] +
 			 m_counts[Message::Archived]);
 	}
+
+	DISALLOW_COPY_AND_ASSIGN(MessageQueue);
 };
 
 }
 
-#endif
+#endif  // end of include guard: WL_LOGIC_MESSAGE_QUEUE_H

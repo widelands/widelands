@@ -19,10 +19,13 @@
 
 #include "logic/production_program.h"
 
-#include <boost/format.hpp>
-#include <config.h>
-#include <libintl.h>
+#include <sstream>
 
+#include <boost/format.hpp>
+
+#include "base/i18n.h"
+#include "base/macros.h"
+#include "config.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/wares_queue.h"
@@ -46,13 +49,98 @@
 #include "logic/world/world.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
-#include "upcast.h"
 
 namespace Widelands {
+
+namespace {
 
 // For formation of better translateable texts
 using boost::format;
 
+/**
+ * Convert std::string to any sstream-compatible type
+ *
+ * \see http://www.experts-exchange.com/Programming/
+ *    Programming_Languages/Cplusplus/Q_20670737.html
+ * \author AssafLavie on http://www.experts-exchange.com
+ */
+// TODO(sirver): Use boost::lexical_cast<>
+template <typename T> T string_to_type(const std::string& s) {
+	std::istringstream iss(s);
+	T x;
+	iss >> x;
+	return x;
+}
+
+/// Matches the string that candidate points to against the string that
+/// template points to. Stops at when reaching a null character or the
+/// character terminator. If a match is found, candidate is moved beyond the
+/// matched part.
+///
+/// example:
+///    char const * candidate = "return   75";
+///    bool const result = match(candidate, "return");
+/// now candidate points to "   75" and result is true
+bool match(char* & candidate, const char* pattern) {
+	for (char* p = candidate;; ++p, ++pattern)
+		if (!*pattern) {
+			candidate = p;
+			return true;
+		} else if (*p != *pattern)
+			break;
+	return false;
+}
+
+/// Skips a sequence of consecutive characters with the value c, starting at p.
+/// Throws _wexception if no characters were skipped.
+void force_skip(char* & p, char const c = ' ') {
+	char* t = p;
+	while (*t == c)
+		++t;
+	if (p < t)
+		p = t;
+	else
+		throw wexception("expected '%c' but found \"%s\"", c, p);
+}
+
+/// Skips a sequence of consecutive characters with the value c, starting at p.
+/// Returns whether any characters were skipped.
+bool skip(char* & p, char const c = ' ') {
+	char* t = p;
+	while (*t == c)
+		++t;
+	if (p < t) {
+		p = t;
+		return true;
+	} else
+		return false;
+}
+
+/// Combines match and force_skip.
+///
+/// example:
+///    char const * candidate = "return   75";
+///    bool const result = match_force_skip(candidate, "return");
+/// now candidate points to "75" and result is true
+///
+/// example:
+///   char const * candidate = "return75";
+///    bool const result = match_force_skip(candidate, "return");
+/// throws _wexception
+bool match_force_skip(char* & candidate, const char* pattern) {
+	for (char* p = candidate;; ++p, ++pattern)
+		if (!*pattern) {
+			force_skip(p);
+			candidate = p;
+			return true;
+		} else if (*p != *pattern)
+			return false;
+
+	return false;
+}
+
+
+}  // namespace
 
 ProductionProgram::Action::~Action() {}
 
@@ -77,24 +165,29 @@ void ProductionProgram::parse_ware_type_group
 	for (;;) {
 		char const * ware = parameters;
 		while
-			(*parameters        and *parameters != ',' and
-			 *parameters != ':' and *parameters != ' ')
+			(*parameters        && *parameters != ',' &&
+			 *parameters != ':' && *parameters != ' ')
 			++parameters;
 		char const terminator = *parameters;
 		*parameters = '\0';
+
 		Ware_Index const ware_index = tribe.safe_ware_index(ware);
-		for (wl_const_range<BillOfMaterials> i(inputs);; ++i)
-			if (i.empty())
+
+		for (BillOfMaterials::const_iterator input_it = inputs.begin(); input_it != inputs.end(); ++input_it) {
+			if (input_it == inputs.end()) {
 				throw game_data_error
 					(
 					 "%s is not declared as an input (\"%s=<count>\" was not "
 					 "found in the [inputs] section)",
 					 ware, ware);
-			else if (i->first == ware_index) {
-				count_max += i.front().second;
+			}
+			else if (input_it->first == ware_index) {
+				count_max += input_it->second;
 				break;
 			}
-		if (group.first.size() and ware_index <= *group.first.begin())
+		}
+
+		if (group.first.size() && ware_index <= *group.first.begin())
 			throw game_data_error
 				(
 				 "wrong order of ware types within group: ware type %s appears "
@@ -109,7 +202,7 @@ void ProductionProgram::parse_ware_type_group
 			char * endp;
 			unsigned long long int const value = strtoull(parameters, &endp, 0);
 			count = value;
-			if ((*endp and *endp != ' ') or value < 1 or count != value)
+			if ((*endp && *endp != ' ') || value < 1 || count != value)
 				throw game_data_error
 					("expected %s but found \"%s\"", "count", parameters);
 			parameters = endp;
@@ -146,13 +239,21 @@ ProductionProgram::ActReturn::Negation::~Negation() {
 bool ProductionProgram::ActReturn::Negation::evaluate
 	(const ProductionSite & ps) const
 {
-	return not operand->evaluate(ps);
+	return !operand->evaluate(ps);
 }
+
+// Just a dummy to satisfy the superclass interface. Do not use.
 std::string ProductionProgram::ActReturn::Negation::description
-	(const Tribe_Descr & tribe) const
+	(const Tribe_Descr &) const
 {
-	/** TRANSLATORS: %s = e.g. 'economy needs ...' Context: 'and/or not %s' */
-	return (boost::format(_("not %s")) % operand->description(tribe)).str();
+	throw wexception("Not implemented.");
+}
+
+// Just a dummy to satisfy the superclass interface. Do not use.
+std::string ProductionProgram::ActReturn::Negation::description_negation
+	(const Tribe_Descr &) const
+{
+	throw wexception("Not implemented.");
 }
 
 
@@ -164,8 +265,18 @@ bool ProductionProgram::ActReturn::Economy_Needs_Ware::evaluate
 std::string ProductionProgram::ActReturn::Economy_Needs_Ware::description
 	(const Tribe_Descr & tribe) const
 {
-	/** TRANSLATORS: e.g. 'economy needs water' Context: 'and/or (not) economy needs %s' */
-	return (boost::format(_("economy needs %s")) % tribe.get_ware_descr(ware_type)->descname()).str();
+	// TODO(GunChleoc): We can make this more elegant if we add another definition to the conf files,
+	// so for "Log"; we will also have "logs" (numberless plural)
+	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the ware ‘%s’*/
+	return (boost::format(_("the economy needs the ware ‘%s’"))
+			  % tribe.get_ware_descr(ware_type)->descname()).str();
+}
+std::string ProductionProgram::ActReturn::Economy_Needs_Ware::description_negation
+	(const Tribe_Descr & tribe) const
+{
+	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy doesn’t need the ware ‘%s’*/
+	return (boost::format(_("the economy doesn’t need the ware ‘%s’"))
+			  % tribe.get_ware_descr(ware_type)->descname()).str();
 }
 
 bool ProductionProgram::ActReturn::Economy_Needs_Worker::evaluate
@@ -176,12 +287,23 @@ bool ProductionProgram::ActReturn::Economy_Needs_Worker::evaluate
 std::string ProductionProgram::ActReturn::Economy_Needs_Worker::description
 	(const Tribe_Descr & tribe) const
 {
-	/** TRANSLATORS: e.g. 'economy needs worker' Context: 'and/or (not) economy needs %s' */
-	return (boost::format(_("economy needs %s")) % tribe.get_ware_descr(worker_type)->descname()).str();
+	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the worker ‘%s’*/
+	return (boost::format(_("the economy needs the worker ‘%s’"))
+			  % tribe.get_worker_descr(worker_type)->descname()).str();
 }
 
+std::string ProductionProgram::ActReturn::Economy_Needs_Worker::description_negation
+	(const Tribe_Descr & tribe) const
+{
+	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ...*/
+	/** TRANSLATORS:      ... because the economy doesn’t need the worker ‘%s’*/
+	return (boost::format(_("the economy doesn’t need the worker ‘%s’"))
+			  % tribe.get_worker_descr(worker_type)->descname()).str();
+}
+
+
 ProductionProgram::ActReturn::Site_Has::Site_Has
-	(char * & parameters, const ProductionSite_Descr & descr)
+	(char * & parameters, const ProductionSiteDescr & descr)
 {
 	try {
 		parse_ware_type_group(parameters, group, descr.tribe(), descr.inputs());
@@ -194,34 +316,60 @@ bool ProductionProgram::ActReturn::Site_Has::evaluate
 	(const ProductionSite & ps) const
 {
 	uint8_t count = group.second;
-	container_iterate_const(ProductionSite::Input_Queues, ps.warequeues(), i)
-		if (group.first.count((*i.current)->get_ware())) {
-			uint8_t const filled = (*i.current)->get_filled();
+	for (WaresQueue * ip_queue : ps.warequeues()) {
+		if (group.first.count(ip_queue->get_ware())) {
+			uint8_t const filled = ip_queue->get_filled();
 			if (count <= filled)
 				return true;
 			count -= filled;
 		}
+	}
 	return false;
 }
+
+
 std::string ProductionProgram::ActReturn::Site_Has::description
 	(const Tribe_Descr & tribe) const
 {
-	std::string condition = "";
-	container_iterate_const(std::set<Ware_Index>, group.first, i) {
-		condition =
-		/** TRANSLATORS: Adds a ware to list of wares in 'Failed/Skipped ...' messages. */
-			(boost::format(_("%1$s %2$s")) % condition % tribe.get_ware_descr(*i.current)->descname())
-			 .str();
-		/** TRANSLATORS: Separator for list of wares in 'Failed/Skipped ...' messages. */
-		condition = (boost::format(_("%s,")) % condition).str();
+	std::vector<std::string> condition_list;
+	for (const Ware_Index& temp_ware : group.first) {
+		condition_list.push_back(tribe.get_ware_descr(temp_ware)->descname());
 	}
+	std::string condition = i18n::localize_item_list(condition_list, i18n::ConcatenateWith::AND);
 	if (1 < group.second) {
-		// TODO this should be done with ngettext
-		condition =
-			(boost::format(_("%1$s (%2$i)")) % condition % static_cast<unsigned int>(group.second)).str();
+		/** TRANSLATORS: This is an item in a list of wares, e.g. "3x water": */
+		/** TRANSLATORS:    %1$s = "3" */
+		/** TRANSLATORS:    %2$i = "water" */
+		condition = (boost::format(_("%1$ix %2$s"))
+						 % static_cast<unsigned int>(group.second)
+						 % condition).str();
 	}
+
 	/** TRANSLATORS: %s is a list of wares*/
-	std::string result = (boost::format(_("site has%s")) % condition).str();
+	std::string result = (boost::format(_("the building has the following wares: %s")) % condition).str();
+	return result;
+}
+
+std::string ProductionProgram::ActReturn::Site_Has::description_negation
+	(const Tribe_Descr & tribe) const
+{
+	std::vector<std::string> condition_list;
+	for (const Ware_Index& temp_ware : group.first) {
+		condition_list.push_back(tribe.get_ware_descr(temp_ware)->descname());
+	}
+	std::string condition = i18n::localize_item_list(condition_list, i18n::ConcatenateWith::AND);
+	if (1 < group.second) {
+		/** TRANSLATORS: This is an item in a list of wares, e.g. "3x water": */
+		/** TRANSLATORS:    %1$i = "3" */
+		/** TRANSLATORS:    %2$s = "water" */
+		condition = (boost::format(_("%1$ix %2$s"))
+						 % static_cast<unsigned int>(group.second)
+						 % condition).str();
+	}
+
+	/** TRANSLATORS: %s is a list of wares*/
+	std::string result = (boost::format(_("the building doesn’t have the following wares: %s"))
+								 % condition).str();
 	return result;
 }
 
@@ -237,8 +385,15 @@ bool ProductionProgram::ActReturn::Workers_Need_Experience::evaluate
 std::string ProductionProgram::ActReturn::Workers_Need_Experience::description
 	(const Tribe_Descr &) const
 {
-	/** TRANSLATORS: 'Failed/Skipped ... because: workers need experience'. */
-	return _("workers need experience");
+	/** TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs experience'. */
+	return _("a worker needs experience");
+}
+
+std::string ProductionProgram::ActReturn::Workers_Need_Experience::description_negation
+	(const Tribe_Descr &) const
+{
+	/** TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers need no experience'. */
+	return _("the workers need no experience");
 }
 
 
@@ -249,7 +404,7 @@ ProductionProgram::ActReturn::Condition * create_economy_condition
 		if (match_force_skip(parameters, "needs"))
 			try {
 				bool reached_end;
-				char const * const type_name = match(parameters, reached_end);
+				char const * const type_name = next_word(parameters, reached_end);
 				Ware_Index index = tribe.ware_index(type_name);
 				if (index != INVALID_INDEX) {
 					tribe.set_ware_type_has_demand_check(index);
@@ -274,13 +429,11 @@ ProductionProgram::ActReturn::Condition * create_economy_condition
 	} catch (const _wexception & e) {
 		throw game_data_error("economy: %s", e.what());
 	}
-
-	return nullptr; // will never be reached
 }
 
 
 ProductionProgram::ActReturn::Condition * create_site_condition
-	(char * & parameters, const ProductionSite_Descr & descr)
+	(char * & parameters, const ProductionSiteDescr & descr)
 {
 	try {
 		if (match_force_skip(parameters, "has"))
@@ -292,8 +445,6 @@ ProductionProgram::ActReturn::Condition * create_site_condition
 	} catch (const _wexception & e) {
 		throw game_data_error("site: %s", e.what());
 	}
-
-	return nullptr; // will never be reached
 }
 
 
@@ -310,14 +461,12 @@ ProductionProgram::ActReturn::Condition * create_workers_condition
 	} catch (const _wexception & e) {
 		throw game_data_error("workers: %s", e.what());
 	}
-
-	return nullptr; // will never be reached
 }
 
 
 ProductionProgram::ActReturn::Condition *
 ProductionProgram::ActReturn::create_condition
-	(char * & parameters, const ProductionSite_Descr & descr)
+	(char * & parameters, const ProductionSiteDescr & descr)
 {
 	try {
 		if      (match_force_skip(parameters, "not"))
@@ -335,13 +484,11 @@ ProductionProgram::ActReturn::create_condition
 	} catch (const _wexception & e) {
 		throw game_data_error("invalid condition: %s", e.what());
 	}
-
-	return nullptr; // will never be reached
 }
 
 
 ProductionProgram::ActReturn::ActReturn
-	(char * parameters, const ProductionSite_Descr & descr)
+	(char * parameters, const ProductionSiteDescr & descr)
 {
 	try {
 		if      (match(parameters, "failed"))    m_result = Failed;
@@ -359,7 +506,7 @@ ProductionProgram::ActReturn::ActReturn
 					m_conditions.push_back(create_condition(parameters, descr));
 					if (*parameters) {
 						skip(parameters);
-						if (not match_force_skip(parameters, "and"))
+						if (!match_force_skip(parameters, "and"))
 							throw game_data_error
 								("expected \"%s\" or end of input", "and");
 					} else
@@ -368,13 +515,13 @@ ProductionProgram::ActReturn::ActReturn
 			} else if (match_force_skip(parameters, "unless")) {
 				m_is_when = false;
 				for (;;) {
-					if (not *parameters)
+					if (!*parameters)
 						throw game_data_error
 							("expected condition at end of input");
 					m_conditions.push_back(create_condition(parameters, descr));
 					if (*parameters) {
 						skip(parameters);
-						if (not match_force_skip(parameters, "or"))
+						if (!match_force_skip(parameters, "or"))
 							throw game_data_error
 								("expected \"%s\" or end of input", "or");
 					} else
@@ -397,80 +544,63 @@ ProductionProgram::ActReturn::ActReturn
 }
 
 ProductionProgram::ActReturn::~ActReturn() {
-	container_iterate_const(Conditions, m_conditions, i)
-		delete *i.current;
+	for (Condition * condition : m_conditions) {
+		delete condition;
+	}
 }
 
 void ProductionProgram::ActReturn::execute
 	(Game & game, ProductionSite & ps) const
 {
-	std::string statistics_string =
-		/** TRANSLATORS: 'Failed %s because (not): %s {and/or %s}' */
-		m_result == Failed    ? (boost::format(_("Failed %s")) % ps.top_state().program->descname()).str() :
-		/** TRANSLATORS: 'Completed %s because (not): %s {and/or %s}' */
-		m_result == Completed ? (boost::format(_("Completed %s")) % ps.top_state().program->descname()).str() :
-		/** TRANSLATORS: 'Skipped %s because (not): %s {and/or %s}' */
-					(boost::format(_("Skipped %s")) % ps.top_state().program->descname()).str();
-
 	if (!m_conditions.empty()) {
-		std::string result_string = statistics_string;
+		std::vector<std::string> condition_list;
 		if (m_is_when) { //  'when a and b and ...' (all conditions must be true)
-			std::string condition_string = "";
-			for (wl_const_range<Conditions> i(m_conditions); i;)
-			{
-				if (not (i.front()->evaluate(ps))) //  A condition is false,
+			for (const Condition * condition : m_conditions) {
+				if (!condition->evaluate(ps)) { //  A condition is false,
 					return ps.program_step(game); //  continue program.
-
-				condition_string += i.front()->description(ps.owner().tribe());
-				if (i.advance().empty())
-					break;
-				// TODO  Would prefer "%1$s and %2$s" but getting segfaults, so leaving this for now
-				/** TRANSLATORS: 'Failed/Completed/Skipped %s because: %s {and %s}' */
-				condition_string = (boost::format(_("%s and ")) % condition_string).str();
+				}
+				condition_list.push_back(condition->description(ps.owner().tribe()));
 			}
-			result_string =
-				/** TRANSLATORS: 'Failed/Completed/Skipped %s because: %s {and %s}' */
-				(boost::format(_("%1$s because: %2$s")) % statistics_string % condition_string).str();
 		} else { //  "unless a or b or ..." (all conditions must be false)
-			std::string condition_string = "";
-			for (wl_const_range<Conditions> i(m_conditions); i;)
-			{
-				if ((*i.current)->evaluate(ps)) //  A condition is true,
+			for (const Condition * condition : m_conditions) {
+				if (condition->evaluate(ps)) { //  A condition is true,
 					return ps.program_step(game); //  continue program.
-
-				condition_string += i.front()->description(ps.owner().tribe());
-				if (i.advance().empty())
-					break;
-				// TODO  Would prefer '%1$s or %2$s' but getting segfaults, so leaving this for now
-				/** TRANSLATORS: 'Failed/Completed/Skipped %s because not: %s {or %s}' */
-				condition_string = (boost::format(_("%s or ")) % condition_string).str();
+				}
+				condition_list.push_back(condition->description_negation(ps.owner().tribe()));
 			}
-			result_string =
-				/** TRANSLATORS: 'Failed/Completed/Skipped %s because not: %s {or %s}' */
-				(boost::format(_("%1$s because not: %2$s")) % statistics_string % condition_string).str();
 		}
-		snprintf
-			(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-			 "%s", result_string.c_str());
+		std::string condition_string = i18n::localize_item_list(condition_list, i18n::ConcatenateWith::AND);
+
+		std::string result_string = "";
+		if (m_result == Failed) {
+			/** TRANSLATORS: "Did not start working because the economy needs the ware ‘%s’" */
+			result_string =  (boost::format(_("Did not start %1$s because %2$s"))
+									% ps.top_state().program->descname()
+									% condition_string)
+								  .str();
+		}
+		else if (m_result == Completed) {
+			/** TRANSLATORS: "Completed working because the economy needs the ware ‘%s’" */
+			result_string =  (boost::format(_("Completed %1$s because %2$s"))
+									% ps.top_state().program->descname()
+									% condition_string)
+								  .str();
+		}
+		else {
+			/** TRANSLATORS: "Skipped working because the economy needs the ware ‘%s’" */
+			result_string =  (boost::format(_("Skipped %1$s because %2$s"))
+									% ps.top_state().program->descname()
+									% condition_string)
+								  .str();
+		}
+		ps.set_production_result(result_string);
 	}
-	// Commented out, as the information is already given in the hover text and
-	// should *not* be shown in general statistics string, as:
-	// 1) the strings are that long, that they clutter the screen (especially
-	//    if you build up an "industry park" ;)
-	// 2) in many cases the "real" statistics (in percent) are nearly no more
-	//    shown, so the user has no idea if "skipped because .. is missing" is
-	//    an exception or the normal case at the moment.
-	/*
-	snprintf
-		(ps.m_statistics_buffer, sizeof(ps.m_statistics_buffer),
-		 "%s", statistics_string.c_str());
-	*/
 	return ps.program_end(game, m_result);
 }
 
 
 ProductionProgram::ActCall::ActCall
-	(char * parameters, const ProductionSite_Descr & descr)
+	(char * parameters, const ProductionSiteDescr & descr)
 {
 	//  Initialize with default handling methods.
 	m_handling_methods[Failed    - 1] = Continue;
@@ -480,9 +610,9 @@ ProductionProgram::ActCall::ActCall
 	try {
 		bool reached_end;
 		{
-			char const * const program_name = match(parameters, reached_end);
-			const ProductionSite_Descr::Programs & programs = descr.programs();
-			ProductionSite_Descr::Programs::const_iterator const it =
+			char const * const program_name = next_word(parameters, reached_end);
+			const ProductionSiteDescr::Programs & programs = descr.programs();
+			ProductionSiteDescr::Programs::const_iterator const it =
 				programs.find(program_name);
 			if (it == programs.end())
 				throw game_data_error
@@ -494,7 +624,7 @@ ProductionProgram::ActCall::ActCall
 		}
 
 		//  Override with specified handling methods.
-		while (not reached_end) {
+		while (!reached_end) {
 			skip(parameters);
 			match_force_skip(parameters, "on");
 			log("found \"on \": parameters = \"%s\"\n", parameters);
@@ -535,7 +665,7 @@ ProductionProgram::ActCall::ActCall
 					 "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}",
 					 parameters);
 			m_handling_methods[result_to_set_method_for - 1] = handling_method;
-			reached_end = not *parameters;
+			reached_end = !*parameters;
 			log
 				("read handling method for result %u: %u, parameters = \"%s\", "
 				 "reached_end = %u\n",
@@ -576,32 +706,33 @@ void ProductionProgram::ActCall::execute
 }
 
 ProductionProgram::ActWorker::ActWorker(
-		char* parameters, const std::string& production_program_name, ProductionSite_Descr* descr)
+		char* parameters, const std::string& production_program_name, ProductionSiteDescr* descr)
 {
 	try {
 		m_program = parameters;
 
 		//  Quote form "void ProductionSite::program_act(Game &)":
 		//  "Always main worker is doing stuff"
-		const Worker_Descr & main_worker_descr =
+		const WorkerDescr & main_worker_descr =
 			*descr->tribe().get_worker_descr(descr->working_positions()[0].first);
 
 		//  This will fail unless the main worker has a program with the given
 		//  name, so it also validates the parameter.
 		const Workarea_Info & worker_workarea_info =
 			main_worker_descr.get_program(m_program)->get_workarea_info();
-		Workarea_Info & building_workarea_info = descr->m_workarea_info;
-		container_iterate_const(Workarea_Info, worker_workarea_info, i) {
+
+		// local typedef for iterator
+		for (const std::pair<uint32_t, std::set<std::string> >& area_info : worker_workarea_info) {
 			std::set<std::string> & building_radius_infos =
-				building_workarea_info[i.current->first];
-			const std::set<std::string> & descriptions = i.current->second;
-			container_iterate_const(std::set<std::string>, descriptions, de) {
+				descr->m_workarea_info[area_info.first];
+
+			for (const std::string& worker_descname : area_info.second) {
 				std::string description = descr->descname();
 				description += ' ';
 				description += production_program_name;
 				description += " worker ";
 				description += main_worker_descr.name();
-				description += *de.current;
+				description += worker_descname;
 				building_radius_infos.insert(description);
 			}
 		}
@@ -643,7 +774,7 @@ ProductionProgram::ActSleep::ActSleep(char* parameters) {
 			char * endp;
 			long long int const value = strtoll(parameters, &endp, 0);
 			m_duration = value;
-			if (*endp or value <= 0 or m_duration != value)
+			if (*endp || value <= 0 || m_duration != value)
 				throw game_data_error
 					("expected %s but found \"%s\"",
 					 "duration in ms", parameters);
@@ -683,7 +814,7 @@ void ProductionProgram::ActCheck_Map::execute(Game & game, ProductionSite & ps) 
 			if (game.map().get_port_spaces().size() > 1) // we need at least two port build spaces
 				return ps.program_step(game, 0);
 			else {
-				snprintf(ps.m_result_buffer, sizeof(ps.m_result_buffer), "No use for ships on this map!");
+				ps.set_production_result("No use for ships on this map!");
 				return ps.program_end(game, None);
 			}
 		}
@@ -694,11 +825,11 @@ void ProductionProgram::ActCheck_Map::execute(Game & game, ProductionSite & ps) 
 }
 
 ProductionProgram::ActAnimate::ActAnimate(
-	char* parameters, const std::string& directory, Profile& prof, ProductionSite_Descr* descr) {
+	char* parameters, const std::string& directory, Profile& prof, ProductionSiteDescr* descr) {
 	try {
 		bool reached_end;
-		char * const animation_name = match(parameters, reached_end);
-		if (not strcmp(animation_name, "idle"))
+		char * const animation_name = next_word(parameters, reached_end);
+		if (!strcmp(animation_name, "idle"))
 			throw game_data_error
 				("idle animation is default; calling is not allowed");
 		if (descr->is_animation_known(animation_name))
@@ -707,11 +838,11 @@ ProductionProgram::ActAnimate::ActAnimate(
 			m_id = g_gr->animations().load(directory.c_str(), prof.get_safe_section(animation_name));
 			descr->add_animation(animation_name, m_id);
 		}
-		if (not reached_end) { //  The next parameter is the duration.
+		if (!reached_end) { //  The next parameter is the duration.
 			char * endp;
 			long long int const value = strtoll(parameters, &endp, 0);
 			m_duration = value;
-			if (*endp or value <= 0 or m_duration != value)
+			if (*endp || value <= 0 || m_duration != value)
 				throw game_data_error
 					("expected %s but found \"%s\"",
 					 "duration in ms", parameters);
@@ -732,7 +863,7 @@ void ProductionProgram::ActAnimate::execute
 
 
 ProductionProgram::ActConsume::ActConsume
-	(char * parameters, const ProductionSite_Descr & descr)
+	(char * parameters, const ProductionSiteDescr & descr)
 {
 	try {
 		const Tribe_Descr & tribe = descr.tribe();
@@ -740,7 +871,7 @@ ProductionProgram::ActConsume::ActConsume
 			m_groups.resize(m_groups.size() + 1);
 			parse_ware_type_group
 				(parameters, *m_groups.rbegin(), tribe, descr.inputs());
-			if (not *parameters)
+			if (!*parameters)
 				break;
 			force_skip(parameters);
 		}
@@ -791,52 +922,54 @@ void ProductionProgram::ActConsume::execute
 				++it;
 	}
 
+	// "Did not start working because .... is/are missing"
 	if (uint8_t const nr_missing_groups = l_groups.size()) {
 		const Tribe_Descr & tribe = ps.owner().tribe();
-		std::string result_string =
-			/** TRANSLATORS: e.g. 'Failed work because: water, wheat (2) are missing' */
-			(boost::format(_("Failed %s because:")) % ps.top_state().program->descname()).str();
 
-		for (wl_const_range<Groups> i(l_groups); i;)
-		{
-			assert(i.current->first.size());
-			for (wl_const_range<std::set<Ware_Index> > j(i.current->first); j;)
-			{
-				result_string =
-					/** TRANSLATORS: Adds a ware to list of wares in 'Failed/Skipped ...' messages. */
-					(boost::format(_("%1$s %2$s")) % result_string
-					 % tribe.get_ware_descr(j.front())->descname())
+		std::vector<std::string> group_list;
+		for (const Ware_Type_Group& group : l_groups) {
+			assert(group.first.size());
+
+			std::vector<std::string> ware_list;
+			for (const Ware_Index& ware : group.first) {
+				ware_list.push_back(tribe.get_ware_descr(ware)->descname());
+			}
+			std::string ware_string = i18n::localize_item_list(ware_list, i18n::ConcatenateWith::OR);
+
+			uint8_t const count = group.second;
+			if (1 < count) {
+				ware_string =
+					/** TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing' */
+					/** TRANSLATORS: For this example, this is what's in the place holders: */
+					/** TRANSLATORS:    %1$i = "3" */
+					/** TRANSLATORS:    %2$s = "water" */
+					(boost::format(_("%1$ix %2$s"))
+					 % static_cast<unsigned int>(count)
+					 % ware_string)
 					 .str();
-				if (j.advance().empty())
-					break;
-				/** TRANSLATORS: Separator for list of wares in 'Failed/Skipped ...' messages. */
-				result_string = (boost::format(_("%s,")) % result_string).str();
 			}
-			{
-				uint8_t const count = i.current->second;
-				if (1 < count) {
-					// TODO this should be done with ngettext
-					result_string =
-						/** TRANSLATORS: e.g. 'Failed work because: water, wheat (2) are missing' */
-						(boost::format(_("%1$s (%2$i)")) % result_string
-						 % static_cast<unsigned int>(count))
-						 .str();
-				}
-			}
-			if (i.advance().empty())
-				break;
-			result_string = (boost::format(_("%s and")) % result_string).str();
+			group_list.push_back(ware_string);
 		}
-		result_string =
-			/** TRANSLATORS: e.g. %1$s = 'Failed work because: water, wheat (2)' %2$s = 'are missing' */
-			(boost::format(_("%1$s %2$s")) % result_string
-			/** TRANSLATORS: e.g. 'Failed work because: water, wheat (2) are missing' */
+
+		std::string result_string =
+			/** TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing' */
+			/** TRANSLATORS: For this example, this is what's in the place holders: */
+			/** TRANSLATORS:    %1$s = "work" */
+			/** TRANSLATORS:    %2$s = "water and wheat (2) " */
+			/** TRANSLATORS:    %3$s = "are missing" */
+			(boost::format(_("Did not start %1$s because %2$s %3$s"))
+			 % ps.top_state().program->descname()
+			 % i18n::localize_item_list(group_list, i18n::ConcatenateWith::AND)
+			/** TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing' */
+			/** TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta bread is missing' */
+			 /** TRANSLATORS: */
+			/** TRANSLATORS: This appears in the hover text on buildings. Please test these in context*/
+			/** TRANSLATORS: on a development build if you can, and let us know if there are any issues */
+			/** TRANSLATORS: we need to address for your language. */
 			 % ngettext(" is missing", " are missing", nr_missing_groups))
 			 .str();
 
-		snprintf
-			(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-			 "%s", result_string.c_str());
+		ps.set_production_result(result_string);
 		return ps.program_end(game, Failed);
 	} else { //  we fulfilled all consumption requirements
 		for (size_t i = 0; i < nr_warequeues; ++i)
@@ -853,7 +986,7 @@ void ProductionProgram::ActConsume::execute
 
 
 ProductionProgram::ActProduce::ActProduce
-	(char * parameters, const ProductionSite_Descr & descr)
+	(char * parameters, const ProductionSiteDescr & descr)
 {
 	try {
 		const Tribe_Descr & tribe = descr.tribe();
@@ -878,9 +1011,9 @@ ProductionProgram::ActProduce::ActProduce
 						strtoull(parameters, &endp, 0);
 					item.second = value;
 					if
-						((*endp and *endp != ' ')
-						 or
-						 value < 1 or item.second != value)
+						((*endp && *endp != ' ')
+						 ||
+						 value < 1 || item.second != value)
 						throw game_data_error
 							("expected %s but found \"%s\"",
 							 "count", parameters);
@@ -893,7 +1026,7 @@ ProductionProgram::ActProduce::ActProduce
 			more = *parameters != '\0';
 			*parameters = '\0';
 			if
-				(not
+				(!
 				 descr.is_output_ware_type
 				 	(item.first = tribe.safe_ware_index(ware)))
 				throw game_data_error
@@ -916,32 +1049,28 @@ void ProductionProgram::ActProduce::execute
 	ps.m_working_positions[0].worker->update_task_buildingwork(game);
 
 	const Tribe_Descr & tribe = ps.owner().tribe();
-	std::string result_string = "";
 	assert(m_items.size());
 
-	for (wl_const_range<Items> i(m_items); i;)
-	{
-		{
-			uint8_t const count = i.current->second;
-			if (1 < count) {
-				char buffer[5];
-				/** TRANSLATORS: Number used in list of wares */
-				sprintf(buffer, _("%u "), count);
-				result_string += buffer;
-			}
+	std::vector<std::string> ware_descnames;
+	for (const auto& item_pair : m_items) {
+		uint8_t const count = item_pair.second;
+		std::string ware_descname = tribe.get_ware_descr(item_pair.first)->descname();
+		// TODO(GunChleoc): needs ngettext when we have one_tribe.
+		if (1 < count) {
+			/** TRANSLATORS: This is an item in a list of wares, e.g. "Produced 2x Coal": */
+			/** TRANSLATORS:    %%1$i = "2" */
+			/** TRANSLATORS:    %2$s = "Coal" */
+			ware_descname = (boost::format(_("%1$ix %2$s"))
+								  % static_cast<unsigned int>(count)
+								  % ware_descname).str();
 		}
-		result_string += tribe.get_ware_descr(i.current->first)->descname();
-		if (i.advance().empty())
-			break;
-		/** TRANSLATORS: Separator for list of wares */
-		result_string += _(", ");
+		ware_descnames.push_back(ware_descname);
 	}
+	std::string ware_list = i18n::localize_item_list(ware_descnames, i18n::ConcatenateWith::AND);
+
 	// Keep translateability in mind!
 	/** TRANSLATORS: %s is a list of wares */
-	result_string = str(format(_("Produced %s")) % result_string);
-	snprintf
-		(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-		 "%s", result_string.c_str());
+	ps.set_production_result(str(format(_("Produced %s")) % ware_list));
 }
 
 bool ProductionProgram::ActProduce::get_building_work
@@ -954,7 +1083,7 @@ bool ProductionProgram::ActProduce::get_building_work
 
 
 ProductionProgram::ActRecruit::ActRecruit
-	(char * parameters, const ProductionSite_Descr & descr)
+	(char * parameters, const ProductionSiteDescr & descr)
 {
 	try {
 		const Tribe_Descr & tribe = descr.tribe();
@@ -979,9 +1108,9 @@ ProductionProgram::ActRecruit::ActRecruit
 						strtoull(parameters, &endp, 0);
 					item.second = value;
 					if
-						((*endp and *endp != ' ')
-						 or
-						 value < 1 or item.second != value)
+						((*endp && *endp != ' ')
+						 ||
+						 value < 1 || item.second != value)
 						throw game_data_error
 							("expected %s but found \"%s\"",
 							 "count", parameters);
@@ -994,7 +1123,7 @@ ProductionProgram::ActRecruit::ActRecruit
 			more = *parameters != '\0';
 			*parameters = '\0';
 			if
-				(not
+				(!
 				 descr.is_output_worker_type
 				 	(item.first = tribe.safe_worker_index(worker)))
 				throw game_data_error
@@ -1016,30 +1145,26 @@ void ProductionProgram::ActRecruit::execute
 	ps.m_working_positions[0].worker->update_task_buildingwork(game);
 
 	const Tribe_Descr & tribe = ps.owner().tribe();
-	std::string unit_string = ("");
 	assert(m_items.size());
-	for (wl_const_range<Items> i(m_items); i;)
-	{
-		{
-			uint8_t const count = i.current->second;
-			if (1 < count) {
-				char buffer[5];
-				/** TRANSLATORS: Number used in list of workers */
-				sprintf(buffer, _("%u "), count);
-				unit_string += buffer;
-			}
+	std::vector<std::string> worker_descnames;
+	for (const auto& item_pair : m_items) {
+		uint8_t const count = item_pair.second;
+		std::string worker_descname = tribe.get_worker_descr(item_pair.first)->descname();
+		// TODO(GunChleoc): needs ngettext when we have one_tribe.
+		if (1 < count) {
+			/** TRANSLATORS: This is an item in a list of workers, e.g. "Recruited 2x Ox": */
+			/** TRANSLATORS:    %1$i = "2" */
+			/** TRANSLATORS:    %2$s = "Ox" */
+			worker_descname = (boost::format(_("%1$ix %2$s"))
+									 % static_cast<unsigned int>(count)
+									 % worker_descname).str();
 		}
-		unit_string += tribe.get_worker_descr(i.current->first)->descname();
-		if (i.advance().empty())
-			break;
-		/** TRANSLATORS: Separator for list of workers */
-		unit_string += _(", ");
+		worker_descnames.push_back(worker_descname);
 	}
-	/** TRANSLATORS: %s is a lost of workers */
-	std::string result_string = (boost::format(_("Recruited %s")) % unit_string).str();
-	snprintf
-		(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-		 "%s", result_string.c_str());
+	std::string unit_string = i18n::localize_item_list(worker_descnames, i18n::ConcatenateWith::AND);
+
+	/** TRANSLATORS: %s is a list of workers */
+	ps.set_production_result((boost::format(_("Recruited %s")) % unit_string).str());
 }
 
 bool ProductionProgram::ActRecruit::get_building_work
@@ -1052,17 +1177,17 @@ bool ProductionProgram::ActRecruit::get_building_work
 
 ProductionProgram::ActMine::ActMine(
 		char* parameters, const World& world, const std::string& production_program_name,
-		ProductionSite_Descr* descr)
+		ProductionSiteDescr* descr)
 {
 	try {
 		bool reached_end;
-		m_resource = world.safe_resource_index(match(parameters, reached_end));
+		m_resource = world.safe_resource_index(next_word(parameters, reached_end));
 
 		{
 			char * endp;
 			unsigned long long int const value = strtoull(parameters, &endp, 0);
 			m_distance = value;
-			if (*endp != ' ' or m_distance != value)
+			if (*endp != ' ' || m_distance != value)
 				throw game_data_error
 					("expected %s but found \"%s\"", "distance", parameters);
 			parameters = endp;
@@ -1072,7 +1197,7 @@ ProductionProgram::ActMine::ActMine(
 			char * endp;
 			unsigned long long int const value = strtoull(parameters, &endp, 0);
 			m_max = value;
-			if (*endp != ' ' or value < 1 or 100 < value)
+			if (*endp != ' ' || value < 1 || 100 < value)
 				throw game_data_error
 					("expected %s but found \"%s\"",
 					 "percentage", parameters);
@@ -1083,7 +1208,7 @@ ProductionProgram::ActMine::ActMine(
 			char * endp;
 			unsigned long long int const value = strtoull(parameters, &endp, 0);
 			m_chance = value;
-			if (*endp != ' ' or value < 1 or 100 < value)
+			if (*endp != ' ' || value < 1 || 100 < value)
 				throw game_data_error
 					("expected %s but found \"%s\"",
 					 "percentage", parameters);
@@ -1093,7 +1218,7 @@ ProductionProgram::ActMine::ActMine(
 			char * endp;
 			unsigned long long int const value = strtoull(parameters, &endp, 0);
 			m_training = value;
-			if (*endp or value < 1 or 100 < value)
+			if (*endp || value < 1 || 100 < value)
 				throw game_data_error
 					("expected %s but found \"%s\"",
 					 "percentage", parameters);
@@ -1156,7 +1281,7 @@ void ProductionProgram::ActMine::execute
 	int32_t digged_percentage = 100;
 	if (totalstart)
 		digged_percentage = 100 - totalres * 100 / totalstart;
-	if (not totalres)
+	if (!totalres)
 		digged_percentage = 100;
 
 	if (digged_percentage < m_max) {
@@ -1200,7 +1325,7 @@ void ProductionProgram::ActMine::execute
 		//  will still produce enough.
 		//  e.g. mines have m_chance=5, wells have 65
 		if (m_chance <= 20) {
-			informPlayer(game, ps);
+				ps.notify_player(game, 60);
 			// and change the default animation
 			ps.set_default_anim("empty");
 		}
@@ -1209,9 +1334,7 @@ void ProductionProgram::ActMine::execute
 		//  independent of sourrunding resources. Do not decrease resources
 		//  further.
 		if (m_chance <= game.logic_rand() % 100) {
-			snprintf
-				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-				 _("Can’t find any more resources!"));
+
 			// Gain experience
 			if (m_training >= game.logic_rand() % 100) {
 			  ps.train_workers(game);
@@ -1221,34 +1344,16 @@ void ProductionProgram::ActMine::execute
 	}
 
 	//  done successful
-	//  FIXME Should pass the time it takes to mine in the phase parameter of
-	//  FIXME ProductionSite::program_step so that the following sleep/animate
-	//  FIXME command knows how long it should last.
+	//  TODO(unknown): Should pass the time it takes to mine in the phase parameter of
+	//  ProductionSite::program_step so that the following sleep/animate
+	//  command knows how long it should last.
 	return ps.program_step(game);
 }
 
-/// Copied from militarysite.cc, MilitarySite::informPlayer
-/// Informs the player about a mine that has run empty, if the mine has not
-/// sent this message within the last 60 minutes.
-void ProductionProgram::ActMine::informPlayer
-	(Game & game, ProductionSite & ps) const
-{
-	ps.send_message
-		(game,
-		 "mine",
-		 _("Main Vein Exhausted"),
-		 _
-		 ("This mine’s main vein is exhausted. Expect strongly diminished returns on investment. "
-		  "You should consider enhancing, dismantling or destroying it."),
-		 true,
-		 60 * 60 * 1000,
-		 0);
-}
-
 ProductionProgram::ActCheck_Soldier::ActCheck_Soldier(char* parameters) {
-	//  FIXME This is currently hardcoded for "soldier", but should allow any
-	//  FIXME soldier type name.
-	if (not match_force_skip(parameters, "soldier"))
+	//  TODO(unknown): This is currently hardcoded for "soldier", but should allow any
+	//  soldier type name.
+	if (!match_force_skip(parameters, "soldier"))
 		throw game_data_error
 			("expected %s but found \"%s\"", "soldier type", parameters);
 	try {
@@ -1268,7 +1373,7 @@ ProductionProgram::ActCheck_Soldier::ActCheck_Soldier(char* parameters) {
 		char * endp;
 		unsigned long long int const value = strtoull(parameters, &endp, 0);
 		level = value;
-		if (*endp or level != value)
+		if (*endp || level != value)
 			throw game_data_error
 				("expected %s but found \"%s\"", "level", parameters);
 	} catch (const _wexception & e) {
@@ -1282,9 +1387,7 @@ void ProductionProgram::ActCheck_Soldier::execute
 	SoldierControl & ctrl = dynamic_cast<SoldierControl &>(ps);
 	const std::vector<Soldier *> soldiers = ctrl.presentSoldiers();
 	if (soldiers.empty()) {
-			snprintf
-				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-				 _("No soldier to train!"));
+		ps.set_production_result(_("No soldier to train!"));
 		return ps.program_end(game, Skipped);
 	}
 	ps.molog("  Checking soldier (%u) level %d)\n", attribute, level);
@@ -1292,9 +1395,7 @@ void ProductionProgram::ActCheck_Soldier::execute
 	const std::vector<Soldier *>::const_iterator soldiers_end = soldiers.end();
 	for (std::vector<Soldier *>::const_iterator it = soldiers.begin();; ++it) {
 		if (it == soldiers_end) {
-			snprintf
-				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-				 _("No soldier found for this training level!"));
+			ps.set_production_result(_("No soldier found for this training level!"));
 			return ps.program_end(game, Skipped);
 		}
 		if        (attribute == atrHP)      {
@@ -1322,9 +1423,9 @@ void ProductionProgram::ActCheck_Soldier::execute
 }
 
 ProductionProgram::ActTrain::ActTrain(char* parameters) {
-	//  FIXME This is currently hardcoded for "soldier", but should allow any
-	//  FIXME soldier type name.
-	if (not match_force_skip(parameters, "soldier"))
+	//  TODO(unknown): This is currently hardcoded for "soldier", but should allow any
+	//  soldier type name.
+	if (!match_force_skip(parameters, "soldier"))
 		throw game_data_error
 			("expected %s but found \"%s\"", "soldier type", parameters);
 	try {
@@ -1345,7 +1446,7 @@ ProductionProgram::ActTrain::ActTrain(char* parameters) {
 			char * endp;
 			unsigned long long int const value = strtoull(parameters, &endp, 0);
 			level = value;
-			if (*endp != ' ' or level != value)
+			if (*endp != ' ' || level != value)
 				throw game_data_error
 					("expected %s but found \"%s\"", "level", parameters);
 			parameters = endp;
@@ -1355,7 +1456,7 @@ ProductionProgram::ActTrain::ActTrain(char* parameters) {
 			char * endp;
 			unsigned long long int const value = strtoull(parameters, &endp, 0);
 			target_level = value;
-			if (*endp or target_level != value or target_level <= level)
+			if (*endp || target_level != value || target_level <= level)
 				throw game_data_error
 					("expected level > %u but found \"%s\"", level, parameters);
 		}
@@ -1379,9 +1480,7 @@ void ProductionProgram::ActTrain::execute
 
 	for (;; ++it) {
 		if (it == soldiers_end) {
-			snprintf
-				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-				 _("No soldier found for this training level!"));
+			ps.set_production_result(_("No soldier found for this training level!"));
 			return ps.program_end(game, Skipped);
 		}
 		if        (attribute == atrHP)      {
@@ -1428,14 +1527,14 @@ ProductionProgram::ActPlayFX::ActPlayFX
 {
 	try {
 		bool reached_end;
-		std::string filename = match(parameters, reached_end);
+		std::string filename = next_word(parameters, reached_end);
 		name = directory + "/" + filename;
 
-		if (not reached_end) {
+		if (!reached_end) {
 			char * endp;
 			unsigned long long int const value = strtoull(parameters, &endp, 0);
 			priority = value;
-			if (*endp or priority != value)
+			if (*endp || priority != value)
 				throw game_data_error
 					("expected %s but found \"%s\"", "priority", parameters);
 		} else
@@ -1455,7 +1554,7 @@ void ProductionProgram::ActPlayFX::execute
 }
 
 ProductionProgram::ActConstruct::ActConstruct(
-		char* parameters, const std::string& production_program_name, ProductionSite_Descr* descr) {
+		char* parameters, const std::string& production_program_name, ProductionSiteDescr* descr) {
 	try {
 		std::vector<std::string> params = split_string(parameters, " ");
 
@@ -1464,7 +1563,7 @@ ProductionProgram::ActConstruct::ActConstruct(
 
 		objectname = params[0];
 		workerprogram = params[1];
-		radius = stringTo<uint32_t>(params[2]);
+		radius = string_to_type<uint32_t>(params[2]);
 
 		std::set<std::string> & building_radius_infos = descr->m_workarea_info[radius];
 		std::string description = descr->name() + ' ' + production_program_name;
@@ -1476,10 +1575,10 @@ ProductionProgram::ActConstruct::ActConstruct(
 	}
 }
 
-const Immovable_Descr & ProductionProgram::ActConstruct::get_construction_descr
+const ImmovableDescr & ProductionProgram::ActConstruct::get_construction_descr
 	(ProductionSite & psite) const
 {
-	const Immovable_Descr * descr = psite.tribe().get_immovable_descr(objectname);
+	const ImmovableDescr * descr = psite.descr().tribe().get_immovable_descr(objectname);
 	if (!descr)
 		throw wexception("ActConstruct: immovable '%s' does not exist", objectname.c_str());
 
@@ -1490,7 +1589,7 @@ const Immovable_Descr & ProductionProgram::ActConstruct::get_construction_descr
 void ProductionProgram::ActConstruct::execute(Game & g, ProductionSite & psite) const
 {
 	ProductionSite::State & state = psite.top_state();
-	const Immovable_Descr & descr = get_construction_descr(psite);
+	const ImmovableDescr & descr = get_construction_descr(psite);
 
 	// Early check for no resources
 	const Buildcost & buildcost = descr.buildcost();
@@ -1562,7 +1661,7 @@ bool ProductionProgram::ActConstruct::get_building_work
 			return false;
 		}
 	} else {
-		const Immovable_Descr & descr = get_construction_descr(psite);
+		const ImmovableDescr & descr = get_construction_descr(psite);
 		remaining = descr.buildcost();
 	}
 
@@ -1580,7 +1679,8 @@ bool ProductionProgram::ActConstruct::get_building_work
 	}
 
 	// Second step: give ware to worker
-	WareInstance * ware = new WareInstance(wq->get_ware(), psite.tribe().get_ware_descr(wq->get_ware()));
+	WareInstance* ware =
+	   new WareInstance(wq->get_ware(), psite.descr().tribe().get_ware_descr(wq->get_ware()));
 	ware->init(game);
 	worker.set_carried_ware(game, ware);
 	wq->set_filled(wq->get_filled() - 1);
@@ -1603,38 +1703,38 @@ void ProductionProgram::ActConstruct::building_work_failed
 ProductionProgram::ProductionProgram(
 		const std::string& directory, Profile& prof, const std::string& _name,
 		const std::string& _descname, const World& world,
-		ProductionSite_Descr* building)
+		ProductionSiteDescr* building)
 	: m_name(_name), m_descname(_descname) {
 	Section& program_s = prof.get_safe_section(_name.c_str());
 	while (Section::Value* const v = program_s.get_next_val()) {
 		ProductionProgram::Action* action;
-		if (not strcmp(v->get_name(), "return"))
+		if (!strcmp(v->get_name(), "return"))
 			action = new ActReturn(v->get_string(), *building);
-		else if (not strcmp(v->get_name(), "call"))
+		else if (!strcmp(v->get_name(), "call"))
 			action = new ActCall(v->get_string(), *building);
-		else if (not strcmp(v->get_name(), "sleep"))
+		else if (!strcmp(v->get_name(), "sleep"))
 			action = new ActSleep(v->get_string());
-		else if (not strcmp(v->get_name(), "animate"))
+		else if (!strcmp(v->get_name(), "animate"))
 			action = new ActAnimate(v->get_string(), directory, prof, building);
-		else if (not strcmp(v->get_name(), "consume"))
+		else if (!strcmp(v->get_name(), "consume"))
 			action = new ActConsume(v->get_string(), *building);
-		else if (not strcmp(v->get_name(), "produce"))
+		else if (!strcmp(v->get_name(), "produce"))
 			action = new ActProduce(v->get_string(), *building);
-		else if (not strcmp(v->get_name(), "recruit"))
+		else if (!strcmp(v->get_name(), "recruit"))
 			action = new ActRecruit(v->get_string(), *building);
-		else if (not strcmp(v->get_name(), "worker"))
+		else if (!strcmp(v->get_name(), "worker"))
 			action = new ActWorker(v->get_string(), _name, building);
-		else if (not strcmp(v->get_name(), "mine"))
+		else if (!strcmp(v->get_name(), "mine"))
 			action = new ActMine(v->get_string(), world, _name, building);
-		else if (not strcmp(v->get_name(), "check_soldier"))
+		else if (!strcmp(v->get_name(), "check_soldier"))
 			action = new ActCheck_Soldier(v->get_string());
-		else if (not strcmp(v->get_name(), "train"))
+		else if (!strcmp(v->get_name(), "train"))
 			action = new ActTrain(v->get_string());
-		else if (not strcmp(v->get_name(), "playFX"))
+		else if (!strcmp(v->get_name(), "playFX"))
 			action = new ActPlayFX(directory, v->get_string());
-		else if (not strcmp(v->get_name(), "construct"))
+		else if (!strcmp(v->get_name(), "construct"))
 			action = new ActConstruct(v->get_string(), _name, building);
-		else if (not strcmp(v->get_name(), "check_map"))
+		else if (!strcmp(v->get_name(), "check_map"))
 			action = new ActCheck_Map(v->get_string());
 		else
 			throw game_data_error("unknown command type \"%s\"", v->get_name());

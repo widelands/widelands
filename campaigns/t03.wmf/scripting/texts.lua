@@ -21,8 +21,13 @@ obj_build_small_food_economy = {
    title=_"Build up a small food economy",
    number = 5,
    body = objective_text(_"Build up a small food economy",
-[[• ]] .. _([[Build up a basic food economy to provide your people with food]] ..
-[[ – a fisher’s hut, a hunter’s hut, a well, a farm and a bakery.]])),
+      _"Build up a basic food economy to provide your people with food." ..
+      listitem_bullet(_"Build a fisher’s hut") ..
+      listitem_bullet(_"Build a hunter’s hut") ..
+      listitem_bullet(_"Build a well") ..
+      listitem_bullet(_"Build a farm") ..
+      listitem_bullet(_"Build a bakery")
+   ),
 }
 
 obj_build_cattlefarm = {
@@ -30,8 +35,9 @@ obj_build_cattlefarm = {
    title = _ "Build a cattle farm",
    number = 1,
    body = objective_text(_"Remember to build a cattle farm",
-_([[As your roads grow longer and your economy bigger, you should make good use of your oxen ]] ..
-[[to help transport wares more quickly. Remember to build a cattle farm!]])),
+      _"As your roads grow longer and your economy bigger, you should make good use of your oxen to help transport wares more quickly." ..
+      listitem_bullet(_"Remember to build a cattle farm")
+   ),
 }
 
 obj_build_a_donjon = {
@@ -39,8 +45,8 @@ obj_build_a_donjon = {
    title=_"Build a donjon",
    number = 1,
    body = objective_text(_"Build a donjon",
-[[• ]] .. _([[Build a donjon at the north-east of your territory to get greater visual range ]] ..
-[[and to protect your people from sudden attacks of enemies.]])),
+      listitem_bullet(_"Build a donjon at the north-east of your territory to get greater visual range and to protect your people from sudden attacks of enemies.")
+   ),
 }
 
 obj_explore_further = {
@@ -48,8 +54,8 @@ obj_explore_further = {
    title=_"Explore further",
    number = 1,
    body = objective_text(_"Explore further",
-[[• ]] .. _([[Build more military buildings to explore the area around the headquarters ]] ..
-[[and to ensure the safety of your people.]])),
+      listitem_bullet(_"Build more military buildings to explore the area around the headquarters and to ensure the safety of your people.")
+   ),
 }
 
 obj_build_mining_economy = {
@@ -57,8 +63,8 @@ obj_build_mining_economy = {
    title=_"Build a mining infrastructure",
    number = 6,
    body = objective_text(_"Build a mining infrastructure",
-[[• ]] .. _([[Expand your territory to the mountains, send geologists to search for ore and coal ]] ..
-[[and build a mining economy with mines, taverns, smelting works and metalworks.]])),
+      listitem_bullet(_"Expand your territory to the mountains, send geologists to search for ore and coal and build a mining economy with mines, taverns, smelting works and metal workshop.")
+   ),
 }
 
 obj_build_a_fortress = {
@@ -66,7 +72,8 @@ obj_build_a_fortress = {
    title=_"Build a fortress",
    number = 1,
    body = objective_text(_"Build a fortress",
-[[• ]] .. _"Build a fortress to the east of the mountains."),
+      listitem_bullet(_"Build a fortress to the east of the mountains.")
+   ),
 }
 
 obj_build_training_infrastructure = {
@@ -74,14 +81,10 @@ obj_build_training_infrastructure = {
    title=_"Build a training infrastructure",
    number = 4,
    body = objective_text(_"Build a training infrastructure",
-[[• ]] .. _"Build a battle arena and a training camp to the west of the mountains." ..
-"<br>" ..
-[[• ]] .. _([[Enhance your metal workshop to an axfactory in order to produce weapons, ]] ..
-[[and build up a second metal workshop to ensure the production of tools. ]] ..
-[[When the blacksmith reaches his next level (master blacksmith), ]] ..
-[[you can even enhance the axfactory to a war mill, which will produce additional weapons.]]) ..
-"<br>" ..
-[[• ]] .. _"Build a helmsmithy to the west of the mountains to provide your soldiers with better armor."),
+      listitem_bullet(_"Build a battle arena and a training camp to the west of the mountains.") ..
+      listitem_bullet(_"Enhance your metal workshop to an axfactory in order to produce weapons, and build up a second metal workshop to ensure the production of tools. When the blacksmith reaches his next level (master blacksmith), you can even enhance the axfactory to a war mill, which will produce additional weapons.") ..
+      listitem_bullet(_"Build a helmsmithy to the west of the mountains to provide your soldiers with better armor.")
+   ),
 }
 
 
@@ -90,12 +93,9 @@ obj_build_a_warehouse = {
    title=_"Build a warehouse",
    number = 1,
    body = objective_text(_"Build a warehouse",
-[[• ]] .. _"Build a warehouse to the west of the mountains." ..
-paragraphdivider() ..
-[[→ ]] .. _([[Warehouses are similar to your headquarters, ]] ..
-[[with the only difference that they aren’t defended by soldiers. ]] ..
-[[It is often wise to build a warehouse when your territory is growing ]] ..
-[[and the paths to your headquarters get longer and longer.]])),
+      listitem_bullet(_"Build a warehouse to the west of the mountains.") ..
+      listitem_arrow(_"Warehouses are similar to your headquarters, with the only difference that they aren’t defended by soldiers. It is often wise to build a warehouse when your territory is growing and the paths to your headquarters get longer and longer.")
+   ),
 }
 
 obj_build_trainingssites = {
@@ -103,12 +103,11 @@ obj_build_trainingssites = {
    title=_"Build training sites",
    number = 2,
    body = objective_text(_"Build training sites",
-[[• ]] .. _"Build a battle arena and a training camp to the west of the mountains." ..
-"<br>" ..
-[[→ ]] .. _([[Training sites like a training camp or a battle arena are used ]] ..
-[[for training soldiers in their different attributes. ]] ..
-[[These attributes are important in fights and the better a soldier is, the higher is the chance to win a fight.]]) .. "<br>" ..
-_"The attributes are: health points, attack, defense and evade."),
+      listitem_bullet(_"Build a battle arena and a training camp to the west of the mountains.") ..
+      listitem_arrow(_"Training sites like a training camp or a battle arena are used for training soldiers in their different attributes. These attributes are important in fights and the better a soldier is, the higher is the chance to win a fight." ..
+         "<br>" ..
+         _"The attributes are: health, attack, defense and evade.")
+   ),
 }
 
 obj_build_weapon_productions = {
@@ -116,10 +115,8 @@ obj_build_weapon_productions = {
    title=_"Build weapons production",
    number = 3,
    body = objective_text(_"Build weapons production",
-[[• ]] .. _([[Enhance your metal workshop to an axfactory in order to produce weapons, ]] ..
-[[and build up a second metal workshop to ensure the production of tools. ]] ..
-[[When the blacksmith reaches his next level (master blacksmith), ]] ..
-[[you can even enhance the axfactory to a war mill, which will produce additional weapons.]])),
+      listitem_bullet(_"Enhance your metal workshop to an axfactory in order to produce weapons, and build up a second metal workshop to ensure the production of tools. When the blacksmith reaches his next level (master blacksmith), you can even enhance the axfactory to a war mill, which will produce additional weapons.")
+   ),
 }
 
 obj_build_a_helmsmithy = {
@@ -127,7 +124,8 @@ obj_build_a_helmsmithy = {
    title=_"Build a helmsmithy",
    number = 1,
    body = objective_text(_"Build a helmsmithy",
-[[• ]] .. _"Build a helmsmithy to the west of the mountains to provide your soldiers with better armor."),
+      listitem_bullet(_"Build a helmsmithy to the west of the mountains to provide your soldiers with better armor.")
+   ),
 }
 
 obj_destroy_kalitaths_army = {
@@ -135,11 +133,9 @@ obj_destroy_kalitaths_army = {
    title=_"Destroy Kalitath’s army",
    number = 2,
    body = objective_text(_"Destroy Kalitath’s army",
-[[• ]] .. _"Destroy Kalitath’s army and expand your territory to the east." ..
-paragraphdivider() ..
-[[→ ]] .. _([[To attack an enemy, you must click on the door of an adversary’s military building. ]] ..
-[[A menu will pop up allowing you to select the number of soldiers that should attack. ]] ..
-[[When you are ready with setting the number, click on the cross (‘Start Attack’).]])),
+      listitem_bullet(_"Destroy Kalitath’s army and expand your territory to the east.") ..
+      listitem_arrow(_"To attack an enemy, you must click on the door of an adversary’s military building. A menu will pop up allowing you to select the number of soldiers that should attack. When you are ready with setting the number, click on the cross (‘Start Attack’).")
+   ),
 }
 
 obj_military_assault_on_althunran = {
@@ -147,7 +143,8 @@ obj_military_assault_on_althunran = {
    title=_"Military assault on Al’thunran",
    number = 1,
    body = objective_text(_"Military assault on Al’thunran",
-[[• ]] .. _"Destroy all forces of Thron’s two brothers to liberate the throne-circle."),
+      listitem_bullet(_"Destroy all forces of Thron’s two brothers to liberate the throne-circle.")
+   ),
 }
 
 -- =======================================================================

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef GAME_TIPS_H
-#define GAME_TIPS_H
+#ifndef WL_WUI_GAME_TIPS_H
+#define WL_WUI_GAME_TIPS_H
 
 #include <cstring>
 #include <string>
@@ -32,8 +32,8 @@ struct GameTips : public UI::IProgressVisualization {
 		(UI::ProgressWindow & progressWindow, const std::vector<std::string>&);
 	virtual ~GameTips();
 
-	virtual void update(bool repaint) override;
-	virtual void stop() override;
+	void update(bool repaint) override;
+	void stop() override;
 
 private:
 	struct Tip {
@@ -52,4 +52,4 @@ private:
 	std::vector<Tip>     m_tips;
 };
 
-#endif
+#endif  // end of include guard: WL_WUI_GAME_TIPS_H

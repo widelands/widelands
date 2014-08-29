@@ -17,12 +17,13 @@
  *
  */
 
-#ifndef FLAG_H
-#define FLAG_H
+#ifndef WL_ECONOMY_FLAG_H
+#define WL_ECONOMY_FLAG_H
 
 #include <list>
 #include <vector>
 
+#include "base/macros.h"
 #include "logic/immovable.h"
 #include "economy/routing_node.h"
 
@@ -32,7 +33,17 @@ class Request;
 struct Road;
 class WareInstance;
 
+class FlagDescr : public MapObjectDescr {
+public:
+	FlagDescr(char const* const _name, char const* const _descname)
+		: MapObjectDescr(MapObjectType::FLAG, _name, _descname) {
+	}
+	~FlagDescr() override {
+	}
 
+private:
+	DISALLOW_COPY_AND_ASSIGN(FlagDescr);
+};
 
 /**
  * Flag represents a flag, obviously.
@@ -59,27 +70,26 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	friend struct Map_Waredata_Data_Packet; // has to look at pending wares
 	friend struct Router;
 
+	const FlagDescr& descr() const;
+
 	Flag(); /// empty flag for savegame loading
 	Flag(Editor_Game_Base &, Player & owner, Coords); /// create a new flag
-	virtual ~Flag();
+	~Flag() override;
 
 	void load_finish(Editor_Game_Base &) override;
-	virtual void destroy(Editor_Game_Base &) override;
+	void destroy(Editor_Game_Base &) override;
 
-	virtual int32_t  get_type    () const override;
-	char const * type_name() const override {return "flag";}
-	virtual int32_t  get_size    () const override;
-	virtual bool get_passable() const override;
-	const std::string & name() const override;
+	int32_t  get_size    () const override;
+	bool get_passable() const override;
 
-	virtual Flag & base_flag() override;
+	Flag & base_flag() override;
 
 	const Coords & get_position() const override {return m_position;}
-	virtual PositionList get_positions (const Editor_Game_Base &) const override;
+	PositionList get_positions (const Editor_Game_Base &) const override;
 	void get_neighbours(WareWorker type, RoutingNodeNeighbours &) override;
 	int32_t get_waitcost() const {return m_ware_filled;}
 
-	virtual void set_economy(Economy *) override;
+	void set_economy(Economy *) override;
 
 	Building * get_building() const {return m_building;}
 	void attach_building(Editor_Game_Base &, Building &);
@@ -87,8 +97,8 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 
 	bool has_road() const {
 		return
-			m_roads[0] or m_roads[1] or m_roads[2] or
-			m_roads[3] or m_roads[4] or m_roads[5];
+			m_roads[0] || m_roads[1] || m_roads[2] ||
+			m_roads[3] || m_roads[4] || m_roads[5];
 	}
 	Road * get_road(uint8_t const dir) const {return m_roads[dir - 1];}
 	uint8_t nr_of_roads() const;
@@ -118,13 +128,13 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 
 	void add_flag_job(Game &, Ware_Index workerware, const std::string & programname);
 
-	virtual void log_general_info(const Editor_Game_Base &) override;
+	void log_general_info(const Editor_Game_Base &) override;
 
 protected:
-	virtual void init(Editor_Game_Base &) override;
-	virtual void cleanup(Editor_Game_Base &) override;
+	void init(Editor_Game_Base &) override;
+	void cleanup(Editor_Game_Base &) override;
 
-	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) override;
+	void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) override;
 
 	void wake_up_capacity_queue(Game &);
 
@@ -166,6 +176,7 @@ private:
 	FlagJobs m_flag_jobs;
 };
 
+extern FlagDescr g_flag_descr;
 }
 
-#endif
+#endif  // end of include guard: WL_ECONOMY_FLAG_H

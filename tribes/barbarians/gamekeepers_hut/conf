@@ -1,5 +1,9 @@
 size=small
 
+[aihints]
+build_material=false
+renews_map_resource=meat
+
 [buildcost]
 log=4
 raw_stone=1
@@ -11,12 +15,9 @@ raw_stone=1
 [working positions]
 gamekeeper=1
 
-[aihints]
-build_material=false
-renews_map_resource=meat
-
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [work]
 sleep=52500

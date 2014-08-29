@@ -2,6 +2,10 @@ size=medium
 output=ration
 enhancement=inn
 
+[aihints]
+build_material=false
+is_food_basic=true
+
 [buildcost]
 wood=2
 stone=2
@@ -12,9 +16,6 @@ wood=1
 stone=1
 marble=1
 
-[aihints]
-build_material=false
-
 [working positions]
 innkeeper=1
 
@@ -24,12 +25,13 @@ bread=5
 meat=5
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start preparing a ration because ...
+work=_preparing a ration
 
 [work]
+sleep=14000
 return=skipped unless economy needs ration
 consume=bread,fish,meat
-sleep=14000
 animate=working 19000
 produce=ration
 

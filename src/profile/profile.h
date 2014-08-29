@@ -17,19 +17,17 @@
  *
  */
 
-#ifndef PROFILE_H
-#define PROFILE_H
+#ifndef WL_PROFILE_PROFILE_H
+#define WL_PROFILE_PROFILE_H
 
 #include <cstring>
 #include <vector>
 
-#include <boost/noncopyable.hpp>
-
-//TODO: as soon as g_fs is not needed anymore, next include can be changed
-//to ..../filesystem.h
+#include "base/macros.h"
+#include "base/point.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "point.h"
-#include "port.h"
+// TODO(unknown): as soon as g_fs is not needed anymore,
+// include "filesystem.h" instead of layered_filesystem.h.
 
 extern class Profile g_options;
 class FileSystem;
@@ -189,7 +187,7 @@ private:
  * Returns the next unused section of the given name, or 0 if all sections
  * have been used. name can be 0 to retrieve any remaining sections.
  */
-class Profile : boost::noncopyable {
+class Profile {
 public:
 	enum {
 		err_ignore = 0,
@@ -238,6 +236,8 @@ private:
 	typedef std::vector<Section> Section_list;
 	Section_list m_sections;
 	int32_t m_error_level;
+
+	DISALLOW_COPY_AND_ASSIGN(Profile);
 };
 
-#endif
+#endif  // end of include guard: WL_PROFILE_PROFILE_H

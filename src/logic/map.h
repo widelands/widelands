@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef MAP_H
-#define MAP_H
+#ifndef WL_LOGIC_MAP_H
+#define WL_LOGIC_MAP_H
 
 #include <cstring>
 #include <map>
@@ -27,15 +27,16 @@
 #include <string>
 #include <vector>
 
+#include "base/i18n.h"
 #include "economy/itransport_cost_calculator.h"
-#include "interval.h"
 #include "logic/field.h"
 #include "logic/map_revision.h"
-#include "logic/notification.h"
 #include "logic/objective.h"
 #include "logic/walkingdir.h"
 #include "logic/widelands_geometry.h"
-#include "random.h"
+#include "notifications/note_ids.h"
+#include "notifications/notifications.h"
+#include "random/random.h"
 
 class FileSystem;
 class Image;
@@ -68,6 +69,16 @@ const uint16_t MAP_DIMENSIONS[] = {
 struct Path;
 class Immovable;
 
+struct NoteFieldTransformed {
+	CAN_BE_SEND_AS_NOTE(NoteId::FieldTransformed)
+
+	FCoords fc;
+	Map_Index map_index;
+
+	NoteFieldTransformed(const FCoords& init_fc, const Map_Index init_map_index)
+	   : fc(init_fc), map_index(init_map_index) {
+	}
+};
 
 struct ImmovableFound {
 	BaseImmovable * object;
@@ -98,7 +109,7 @@ struct CheckStep;
 Some very simple default predicates (more predicates below Map).
 */
 struct FindBobAlwaysTrue : public FindBob {
-	virtual bool accept(Bob *) const override {return true;}
+	bool accept(Bob *) const override {return true;}
 	virtual ~FindBobAlwaysTrue() {}  // make gcc shut up
 };
 
@@ -116,10 +127,7 @@ struct FindBobAlwaysTrue : public FindBob {
  *
  * Warning: width and height must be even
  */
-class Map :
-	public ITransportCostCalculator,
-	public NoteSender<NoteFieldTransformed>
-{
+class Map : public ITransportCostCalculator {
 public:
 	friend class Editor;
 	friend class Editor_Game_Base;
@@ -349,7 +357,7 @@ public:
 	 * the area, because this adjusts the surrounding nodes only once, after all
 	 * nodes in the area had their new height set.
 	 */
-	uint32_t set_height(const World& world, Area<FCoords>, interval<Field::Height> height_interval);
+	uint32_t set_height(const World& world, Area<FCoords>, HeightInterval height_interval);
 
 	//  change terrain of a triangle, recalculate buildcaps
 	int32_t change_terrain(const World& world, TCoords<FCoords>, Terrain_Index);
@@ -1065,4 +1073,4 @@ inline void move_r(X_Coordinate const mapwidth, FCoords & f, Map_Index & i) {
 }
 
 
-#endif
+#endif  // end of include guard: WL_LOGIC_MAP_H

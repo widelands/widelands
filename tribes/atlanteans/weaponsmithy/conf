@@ -30,17 +30,23 @@ coal=8
 planks=8
 
 [programs]
-produce_light_trident=_Produce light trident
-produce_long_trident=_Produce long trident
-produce_steel_trident=_Produce steel trident
-produce_double_trident=_Produce double trident
-produce_heavy_double_trident=_Produce heavy double trident
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start forging a light triden because ...
+produce_light_trident=_forging a light trident
+# TRANSLATORS: "Completed/Skipped/Did not start forging a long trident because ...
+produce_long_trident=_forging a long trident
+# TRANSLATORS: "Completed/Skipped/Did not start forging a steel trident because ...
+produce_steel_trident=_forging a steel trident
+# TRANSLATORS: "Completed/Skipped/Did not start forging a double trident because ...
+produce_double_trident=_forging a double trident
+# TRANSLATORS: "Completed/Skipped/Did not start forging a heavy double trident because ...
+produce_heavy_double_trident=_forging a heavy double trident
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [produce_light_trident]
 return=skipped unless economy needs light_trident
-consume=iron planks
 sleep=20000
+consume=iron planks
 playFX=../../../sound/smiths/smith 192
 animate=working 30000
 playFX=../../../sound/smiths/sharpening 192
@@ -48,8 +54,8 @@ produce=light_trident
 
 [produce_long_trident]
 return=skipped unless economy needs long_trident
-consume=iron coal planks
 sleep=32000
+consume=iron coal planks
 playFX=../../../sound/smiths/smith 192
 animate=working 45000
 playFX=../../../sound/smiths/sharpening 192
@@ -57,8 +63,8 @@ produce=long_trident
 
 [produce_steel_trident]
 return=skipped unless economy needs steel_trident
-consume=iron:2 coal planks
 sleep=32000
+consume=iron:2 coal planks
 playFX=../../../sound/smiths/smith 192
 animate=working 45000
 playFX=../../../sound/smiths/sharpening 192
@@ -66,8 +72,8 @@ produce=steel_trident
 
 [produce_double_trident]
 return=skipped unless economy needs double_trident
-consume=iron coal:2 planks gold
 sleep=32000
+consume=iron coal:2 planks gold
 playFX=../../../sound/smiths/smith 192
 animate=working 45000
 playFX=../../../sound/smiths/sharpening 192
@@ -75,8 +81,8 @@ produce=double_trident
 
 [produce_heavy_double_trident]
 return=skipped unless economy needs heavy_double_trident
-consume=iron:2 coal:2 planks gold
 sleep=32000
+consume=iron:2 coal:2 planks gold
 playFX=../../../sound/smiths/smith 192
 animate=working 45000
 playFX=../../../sound/smiths/sharpening 192
@@ -91,9 +97,9 @@ call=produce_heavy_double_trident
 return=skipped
 
 [idle]
-pics=weaponsmith_i_??.png  # ???
+pics=weaponsmithy_i_??.png  # ???
 hotspot=50 58
 
 [working]
-pics=weaponsmith_i_??.png  # ???
+pics=weaponsmithy_i_??.png  # ???
 hotspot=50 58

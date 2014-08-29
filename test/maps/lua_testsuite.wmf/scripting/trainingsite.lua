@@ -1,9 +1,9 @@
 -- =======================================================================
---                          TrainingSite Testings                         
+--                          TrainingSite Testings
 -- =======================================================================
 
 -- ================
--- Soldier creation 
+-- Soldier creation
 -- ================
 function _cnt(a)
    local rv = 0
@@ -24,14 +24,14 @@ function trainingsite_tests:teardown()
 end
 
 function trainingsite_tests:test_name()
-   assert_equal("trainingcamp", self.camp.name)
+   assert_equal("trainingcamp", self.camp.descr.name)
 end
 function trainingsite_tests:test_type()
-   assert_equal("trainingsite", self.camp.type)
+   assert_equal("trainingsite", self.camp.descr.type_name)
 end
 
 -- ================
--- Worker creation 
+-- Worker creation
 -- ================
 function trainingsite_tests:test_no_workers_initially()
    assert_equal(0, _cnt(self.camp:get_workers("all")))
@@ -179,7 +179,7 @@ function trainingsite_tests:test_get_wares_non_existant_name()
 end
 
 -- =================
--- Soldier creation 
+-- Soldier creation
 -- =================
 function trainingsite_tests:test_no_soldiers_initially()
    assert_equal(0, _cnt(self.camp:get_soldiers("all")))
@@ -233,4 +233,3 @@ function trainingsite_tests:test_no_space()
   end)
    assert_equal(12, _cnt(self.camp:get_soldiers("all")))
 end
-

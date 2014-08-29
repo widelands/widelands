@@ -19,16 +19,16 @@
 
 #include "wui/fieldaction.h"
 
+#include "base/i18n.h"
+#include "base/macros.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "graphic/graphic.h"
 #include "graphic/image_transformations.h"
-#include "i18n.h"
 #include "logic/attackable.h"
 #include "logic/cmd_queue.h"
 #include "logic/maphollowregion.h"
-#include "logic/militarysite.h"
 #include "logic/player.h"
 #include "logic/soldier.h"
 #include "logic/tribe.h"
@@ -39,17 +39,15 @@
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
-#include "upcast.h"
 #include "wui/actionconfirm.h"
 #include "wui/attack_box.h"
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
-#include "wui/military_box.h"
 #include "wui/overlay_manager.h"
 #include "wui/waresdisplay.h"
 #include "wui/watchwindow.h"
 
-namespace Widelands {struct Building_Descr;}
+namespace Widelands {struct BuildingDescr;}
 using Widelands::Building;
 using Widelands::Editor_Game_Base;
 using Widelands::Game;
@@ -57,6 +55,8 @@ using Widelands::Game;
 #define BG_CELL_WIDTH  34 // extents of one cell
 #define BG_CELL_HEIGHT 34
 
+//sizes for the images in the build menu (containing building icons)
+#define BUILDMENU_IMAGE_SIZE 30. // used for width and height
 
 // The BuildGrid presents a selection of buildable buildings
 struct BuildGrid : public UI::Icon_Grid {
@@ -102,7 +102,7 @@ Add a new building to the list of buildable buildings
 */
 void BuildGrid::add(Widelands::Building_Index id)
 {
-	const Widelands::Building_Descr & descr =
+	const Widelands::BuildingDescr & descr =
 		*tribe_.get_building_descr(Widelands::Building_Index(id));
 	const Image& anim_frame = g_gr->animations().get_animation(descr.get_animation("idle"))
 		.representative_image(player_color_);
@@ -180,7 +180,7 @@ public:
 		return ref_cast<Interactive_Base, UI::Panel>(*get_parent());
 	}
 
-	virtual void think() override;
+	void think() override;
 
 	void init();
 	void add_buttons_auto();
@@ -239,7 +239,6 @@ private:
 
 static const char * const pic_tab_buildroad  = "pics/menu_tab_buildroad.png";
 static const char * const pic_tab_watch      = "pics/menu_tab_watch.png";
-static const char * const pic_tab_military   = "pics/menu_tab_military.png";
 static const char * const pic_tab_buildhouse[] = {
 	"pics/menu_tab_buildsmall.png",
 	"pics/menu_tab_buildmedium.png",
@@ -311,8 +310,8 @@ FieldActionWindow::~FieldActionWindow()
 
 void FieldActionWindow::think() {
 	if
-		(m_plr and m_plr->vision(m_node.field - &ibase().egbase().map()[0]) <= 1
-		 and not m_plr->see_all())
+		(m_plr && m_plr->vision(m_node.field - &ibase().egbase().map()[0]) <= 1
+		 && !m_plr->see_all())
 		die();
 }
 
@@ -353,7 +352,7 @@ void FieldActionWindow::add_buttons_auto()
 
 	const Widelands::Player_Number owner = m_node.field->get_owned_by();
 
-	if (not igbase or igbase->can_see(owner)) {
+	if (!igbase || igbase->can_see(owner)) {
 		Widelands::BaseImmovable * const imm = m_map->get_immovable(m_node);
 		const bool can_act = igbase ? igbase->can_act(owner) : true;
 
@@ -421,7 +420,7 @@ void FieldActionWindow::add_buttons_auto()
 					 _("Destroy a road"));
 		}
 	} else if
-		(m_plr and
+		(m_plr &&
 		 1
 		 <
 		 m_plr->vision
@@ -456,25 +455,12 @@ void FieldActionWindow::add_buttons_auto()
 			 &FieldActionWindow::act_debug,
 			 _("Debug window"));
 
-	MilitaryBox * militarybox =
-		m_plr ? new MilitaryBox(&m_tabpanel, m_plr, 0, 0) : nullptr;
-
 	// Add tabs
 	if (buildbox && buildbox->get_nritems())
 		add_tab("roads", pic_tab_buildroad, buildbox, _("Build road"));
 
 	add_tab("watch", pic_tab_watch, &watchbox, _("Watch"));
 
-	if (militarybox)
-	{
-		if (militarybox->allowed_change())
-		{
-			add_tab
-				("military", pic_tab_military,
-				 militarybox, _("Military settings"));
-		} else
-			delete militarybox;
-	}
 }
 
 void FieldActionWindow::add_buttons_attack ()
@@ -513,7 +499,7 @@ Add buttons for house building.
 */
 void FieldActionWindow::add_buttons_build(int32_t buildcaps, const RGBColor& player_color)
 {
-	if (not m_plr)
+	if (!m_plr)
 		return;
 	BuildGrid * bbg_house[4] = {nullptr, nullptr, nullptr, nullptr};
 	BuildGrid * bbg_mine = nullptr;
@@ -528,7 +514,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, const RGBColor& pla
 		 id < nr_buildings;
 		 ++id)
 	{
-		const Widelands::Building_Descr & descr = *tribe.get_building_descr(id);
+		const Widelands::BuildingDescr & descr = *tribe.get_building_descr(id);
 		BuildGrid * * ppgrid;
 
 		//  Some building types cannot be built (i.e. construction site) and not
@@ -751,9 +737,9 @@ void FieldActionWindow::act_ripflag()
 	if (upcast(Widelands::Flag, flag, m_node.field->get_immovable())) {
 		if (Building * const building = flag->get_building()) {
 			if (building->get_playercaps() & Building::PCap_Bulldoze) {
-				if (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)) {
+				if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) {
 					ref_cast<Game, Editor_Game_Base>(egbase).send_player_bulldoze
-						(*flag, get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL));
+						(*flag, get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL));
 				}
 				else {
 					show_bulldoze_confirm
@@ -764,7 +750,7 @@ void FieldActionWindow::act_ripflag()
 			}
 		} else {
 			ref_cast<Game, Editor_Game_Base>(egbase).send_player_bulldoze
-					(*flag, get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL));
+					(*flag, get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL));
 			ibase().need_complete_redraw();
 		}
 	}
@@ -809,7 +795,7 @@ void FieldActionWindow::act_removeroad()
 	Widelands::Editor_Game_Base & egbase = ibase().egbase();
 	if (upcast(Widelands::Road, road, egbase.map().get_immovable(m_node)))
 		ref_cast<Game, Editor_Game_Base>(egbase).send_player_bulldoze
-			(*road, get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL));
+			(*road, get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL));
 	ibase().need_complete_redraw();
 	okdialog();
 }
@@ -848,7 +834,7 @@ void FieldActionWindow::building_icon_mouse_out
 void FieldActionWindow::building_icon_mouse_in
 	(const Widelands::Building_Index idx)
 {
-	if (ibase().m_show_workarea_preview and not m_workarea_preview_job_id) {
+	if (ibase().m_show_workarea_preview && !m_workarea_preview_job_id) {
 		const Workarea_Info & workarea_info =
 			m_plr->tribe().get_building_descr(Widelands::Building_Index(idx))
 			->m_workarea_info;
@@ -884,13 +870,10 @@ void FieldActionWindow::act_attack ()
 	assert(m_attack_box);
 	if (upcast(Building, building, game.map().get_immovable(m_node)))
 		if (m_attack_box->soldiers() > 0)
-			game.send_player_enemyflagaction
-				(building->base_flag(),
-				 ref_cast<const Interactive_Player, const Interactive_Base>
-				 	(ibase())
-				 .player_number(),
-				 m_attack_box->soldiers(), //  number of soldiers
-				 m_attack_box->retreat());
+			game.send_player_enemyflagaction(
+			   building->base_flag(),
+			   ref_cast<const Interactive_Player, const Interactive_Base>(ibase()).player_number(),
+			   m_attack_box->soldiers() /*  number of soldiers */);
 	okdialog();
 }
 
@@ -930,7 +913,7 @@ void show_field_action
 		FieldActionWindow & w = *new FieldActionWindow(ibase, player, registry);
 		w.add_buttons_road
 			(target != ibase->get_build_road_start()
-			 and
+			 &&
 			 (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG));
 		return w.init();
 	}

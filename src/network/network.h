@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef NETWORK_H
-#define NETWORK_H
+#ifndef WL_NETWORK_NETWORK_H
+#define WL_NETWORK_NETWORK_H
 
 #include <exception>
 #include <string>
@@ -47,9 +47,9 @@ struct SyncCallback {
 struct Cmd_NetCheckSync : public Widelands::Command {
 	Cmd_NetCheckSync (int32_t dt, SyncCallback *);
 
-	virtual void execute (Widelands::Game &) override;
+	void execute (Widelands::Game &) override;
 
-	virtual uint8_t id() const override {return QUEUE_CMD_NETCHECKSYNC;}
+	uint8_t id() const override {return QUEUE_CMD_NETCHECKSYNC;}
 
 private:
 	SyncCallback * m_callback;
@@ -164,9 +164,8 @@ struct DisconnectException : public std::exception {
 	explicit DisconnectException
 		(const char * fmt, ...)
 	 PRINTF_FORMAT(2, 3);
-	virtual ~DisconnectException() throw ();
 
-	virtual const char * what() const throw () override;
+	const char * what() const noexcept override;
 
 private:
 	std::string m_what;
@@ -178,11 +177,10 @@ private:
  */
 struct ProtocolException : public std::exception {
 	explicit ProtocolException(uint8_t code) {m_what = code;}
-	virtual ~ProtocolException() throw () {}
 
 	/// do NOT use!!! This exception shall only return the command number of the received message
 	/// via \ref ProtocolException:number()
-	virtual const char * what() const throw () override {assert(false); return "dummy";}
+	const char * what() const noexcept override {assert(false); return "dummy";}
 
 	/// \returns the command number of the received message
 	virtual int          number() const {return m_what;}
@@ -191,4 +189,4 @@ private:
 	int m_what;
 };
 
-#endif
+#endif  // end of include guard: WL_NETWORK_NETWORK_H

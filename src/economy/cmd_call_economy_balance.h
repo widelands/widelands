@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef S__CMD_CALL_ECONOMY_BALANCE_H
-#define S__CMD_CALL_ECONOMY_BALANCE_H
+#ifndef WL_ECONOMY_CMD_CALL_ECONOMY_BALANCE_H
+#define WL_ECONOMY_CMD_CALL_ECONOMY_BALANCE_H
 
 #include "economy/flag.h"
 #include "logic/cmd_queue.h"
@@ -27,7 +27,7 @@
 namespace Widelands {
 class Economy;
 class Game;
-class Map_Map_Object_Loader;
+class MapMapObjectLoader;
 
 
 struct Cmd_Call_Economy_Balance : public GameLogicCommand {
@@ -37,10 +37,10 @@ struct Cmd_Call_Economy_Balance : public GameLogicCommand {
 
 	void execute (Game &) override;
 
-	virtual uint8_t id() const override {return QUEUE_CMD_CALL_ECONOMY_BALANCE;}
+	uint8_t id() const override {return QUEUE_CMD_CALL_ECONOMY_BALANCE;}
 
-	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
+	void Write(FileWrite &, Editor_Game_Base &, MapMapObjectSaver  &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
 
 private:
 	OPtr<Flag> m_flag;
@@ -49,4 +49,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_ECONOMY_CMD_CALL_ECONOMY_BALANCE_H

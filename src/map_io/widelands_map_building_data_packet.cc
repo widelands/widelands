@@ -21,6 +21,7 @@
 
 #include <map>
 
+#include "base/macros.h"
 #include "economy/request.h"
 #include "graphic/graphic.h"
 #include "io/fileread.h"
@@ -32,7 +33,6 @@
 #include "logic/tribe.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "upcast.h"
 #include "wui/interactive_base.h"
 
 namespace Widelands {
@@ -46,7 +46,7 @@ void Map_Building_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
-	 Map_Map_Object_Loader &       mol)
+	 MapMapObjectLoader &       mol)
 {
 	if (skip)
 		return;
@@ -118,7 +118,7 @@ void Map_Building_Data_Packet::Read
  * Write Function
  */
 void Map_Building_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileSystem & fs, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	FileWrite fw;
 
@@ -131,7 +131,7 @@ void Map_Building_Data_Packet::Write
 	Extent const extent = map.extent();
 	iterate_Map_FCoords(map, extent, fc) {
 		upcast(Building const, building, fc.field->get_immovable());
-		if (building and building->get_position() == fc) {
+		if (building && building->get_position() == fc) {
 			//  We only write Buildings.
 			//  Buildings can life on only one main position.
 			assert(!mos.is_object_known(*building));
@@ -173,7 +173,7 @@ void Map_Building_Data_Packet::write_priorities
 	std::map<int32_t, std::map<Ware_Index, int32_t> > type_to_priorities;
 	std::map<int32_t, std::map<Ware_Index, int32_t> >::iterator it;
 
-	const Tribe_Descr & tribe = building.tribe();
+	const Tribe_Descr & tribe = building.descr().tribe();
 	building.collect_priorities(type_to_priorities);
 	for (it = type_to_priorities.begin(); it != type_to_priorities.end(); ++it)
 	{
@@ -213,7 +213,7 @@ void Map_Building_Data_Packet::read_priorities
 {
 	fr.Unsigned32(); // unused, was base_priority which is unused. Remove after b20.
 
-	const Tribe_Descr & tribe = building.tribe();
+	const Tribe_Descr & tribe = building.descr().tribe();
 	int32_t ware_type = -1;
 	// read ware type
 	while (0xff != (ware_type = fr.Unsigned8())) {

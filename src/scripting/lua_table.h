@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef LUA_TABLE_H
-#define LUA_TABLE_H
+#ifndef WL_SCRIPTING_LUA_TABLE_H
+#define WL_SCRIPTING_LUA_TABLE_H
 
 #include <memory>
 #include <set>
@@ -27,9 +27,9 @@
 #include <boost/lexical_cast.hpp>
 
 #include "scripting/c_utils.h"
-#include "scripting/eris/lua.hpp"
 #include "scripting/lua_coroutine.h"
 #include "scripting/lua_errors.h"
+#include "third_party/eris/lua.hpp"
 
 class LuaTableKeyError : public LuaError {
 public:
@@ -136,12 +136,11 @@ public:
 
 	template <typename KeyType> int get_int(const KeyType& key) const {
 		const double value = get_double(key);
-		const int integer = static_cast<int>(value);
 
-		if (value != integer) {
+		if (std::abs(value - std::floor(value)) > 1e-7) {
 			throw LuaError(boost::lexical_cast<std::string>(key) + " is not a integer value.");
 		}
-		return integer;
+		return static_cast<int>(value);
 	}
 
 	template <typename KeyType> bool get_bool(const KeyType& key) const {
@@ -168,7 +167,7 @@ public:
 			lua_xmove(t, L_, 1);
 		}
 
-		if (not lua_isthread(L_, -1)) {
+		if (!lua_isthread(L_, -1)) {
 			lua_pop(L_, 1);
 			throw LuaError(boost::lexical_cast<std::string>(key) + " is not a function value.");
 		}
@@ -212,5 +211,4 @@ template <typename KeyType> uint32_t get_positive_int(const LuaTable& table, con
 	return static_cast<uint32_t>(value);
 }
 
-#endif /* end of include guard: LUA_TABLE_H */
-
+#endif  // end of include guard: WL_SCRIPTING_LUA_TABLE_H

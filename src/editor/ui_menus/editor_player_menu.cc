@@ -21,10 +21,12 @@
 
 #include <boost/format.hpp>
 
+#include "base/i18n.h"
+#include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_set_starting_pos_tool.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
+#include "logic/constants.h"
 #include "logic/map.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
@@ -32,7 +34,6 @@
 #include "ui_basic/editbox.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/textarea.h"
-#include "wexception.h"
 #include "wui/overlay_manager.h"
 
 #define UNDEFINED_TRIBE_NAME "<undefined>"
@@ -226,7 +227,7 @@ void Editor_Player_Menu::clicked_remove_last_player() {
 	Widelands::Player_Number const nr_players     = old_nr_players - 1;
 	assert(1 <= nr_players);
 
-	if (not menu.is_player_tribe_referenced(old_nr_players)) {
+	if (!menu.is_player_tribe_referenced(old_nr_players)) {
 		if (const Widelands::Coords sp = map.get_starting_pos(old_nr_players)) {
 			//  Remove starting position marker.
 			char picsname[] = "pics/editor_player_00_starting_pos.png";
@@ -240,8 +241,8 @@ void Editor_Player_Menu::clicked_remove_last_player() {
 	m_remove_last_player.set_enabled(1 < nr_players);
 
 	update();
-	// SirVer TODO: Take steps when the player is referenced someplace. Not
-	// SirVer TODO: currently possible in the editor though.
+	// TODO(SirVer): Take steps when the player is referenced someplace. Not
+	// TODO(SirVer): currently possible in the editor though.
 }
 
 /*
@@ -270,12 +271,12 @@ called when a button is clicked
 //
 //                 map.set_nrplayers(nr_players);
 //                 map.set_scenario_player_name(nr_players, name);   //  ???
-//                 // SirVer TODO: next lines were commented without a clue
+//                 // TODO(SirVer): next lines were commented without a clue
 //                 // map.set_scenario_player_tribe(nr_players, tribe); //  ???
 //                 // menu.set_need_save(true);
 //                 m_add_player        .set_enabled(true);
 //                 m_remove_last_player.set_enabled(1 < nr_players);
-//                 // SirVer TODO: next lines were commented without a clue
+//                 // TODO(SirVer): next lines were commented without a clue
 //                 // if
 //                 //         (&menu.tools.current() == &menu.tools.set_starting_pos
 //                 //          and
@@ -289,7 +290,7 @@ called when a button is clicked
 //                 // else
 //                         update();
 //         } else {
-//                 // SirVer, TODO: this error was commented without a clue
+//                 // TODO(SirVer): this error was commented without a clue
 //                 // UI::WLMessageBox mmb
 //                 //         (&menu,
 //                 //          _("Error!"),
@@ -308,7 +309,7 @@ called when a button is clicked
 void Editor_Player_Menu::player_tribe_clicked(uint8_t n) {
 	Editor_Interactive & menu =
 		ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
-	if (not menu.is_player_tribe_referenced(n + 1)) {
+	if (!menu.is_player_tribe_referenced(n + 1)) {
 		std::string t = m_plr_set_tribes_buts[n]->get_title();
 		if (!Widelands::Tribe_Descr::exists_tribe(t))
 			throw wexception
@@ -326,7 +327,7 @@ void Editor_Player_Menu::player_tribe_clicked(uint8_t n) {
 			 _("Error!"),
 			 _
 			 	("Cannot remove player. It is referenced someplace. Remove all"
-			 	 " buildings and bobs that depend on this player and try again."),
+			 	 " buildings and animals that depend on this player and try again."),
 			 UI::WLMessageBox::OK);
 		mmb.run();
 	}
@@ -398,7 +399,7 @@ void Editor_Player_Menu::make_infrastructure_clicked(uint8_t n) {
 		// place a hq and reference the tribe
 		// so that this tribe can not be changed
 		egbase.add_player
-			(n, 0, // SirVer, TODO: initialization index makes no sense here
+			(n, 0, // TODO(SirVer): initialization index makes no sense here
 			 m_plr_set_tribes_buts[n - 1]->get_title(),
 			 m_plr_names[n - 1]->text());
 
@@ -411,7 +412,7 @@ void Editor_Player_Menu::make_infrastructure_clicked(uint8_t n) {
 	const Widelands::Player_Number player_number = p->player_number();
 	const Widelands::Coords starting_pos = map.get_starting_pos(player_number);
 	Widelands::BaseImmovable * const imm = map[starting_pos].get_immovable();
-	if (not imm) {
+	if (!imm) {
       // place HQ
 		const Widelands::Tribe_Descr & tribe = p->tribe();
 		const Widelands::Building_Index idx =

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WIDELANDS_GAMERENDERER_SDL_H
-#define WIDELANDS_GAMERENDERER_SDL_H
+#ifndef WL_GRAPHIC_RENDER_GAMERENDERER_SDL_H
+#define WL_GRAPHIC_RENDER_GAMERENDERER_SDL_H
 
 #include "graphic/render/gamerenderer.h"
 
@@ -52,4 +52,4 @@ private:
 		 const Texture &  f_r_texture);
 };
 
-#endif // WIDELANDS_GAMERENDERER_SDL_H
+#endif  // end of include guard: WL_GRAPHIC_RENDER_GAMERENDERER_SDL_H

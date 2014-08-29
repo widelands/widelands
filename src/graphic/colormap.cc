@@ -19,6 +19,7 @@
 
 #include "graphic/colormap.h"
 
+#include <algorithm>
 #include <cassert>
 #include <cstdlib>
 #include <cstring>
@@ -38,17 +39,13 @@ Colormap::Colormap (const SDL_Color & pal, const SDL_PixelFormat & format) {
 			int32_t shade = (j < 128) ? j : (j - 256);
 			shade = 256 + 2 * shade;
 
-			int32_t r = (palette[i].r * shade) >> 8;
-			int32_t g = (palette[i].g * shade) >> 8;
-			int32_t b = (palette[i].b * shade) >> 8;
+			const uint32_t r = std::min<uint32_t>((palette[i].r * shade) >> 8, 255);
+			const uint32_t g = std::min<uint32_t>((palette[i].g * shade) >> 8, 255);
+			const uint32_t b = std::min<uint32_t>((palette[i].b * shade) >> 8, 255);
 
-			if (r > 255) r = 255;
-			if (g > 255) g = 255;
-			if (b > 255) b = 255;
-
-			const Uint32 value =
+			const uint32_t value =
 				SDL_MapRGB(&const_cast<SDL_PixelFormat &>(format), r, g, b);
-			static_cast<Uint32 *>(colormap)[(j << 8) | i] = value;
+			static_cast<uint32_t *>(colormap)[(j << 8) | i] = value;
 		}
 }
 

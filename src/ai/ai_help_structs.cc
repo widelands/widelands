@@ -19,8 +19,8 @@
 
 #include "ai/ai_help_structs.h"
 
+#include "base/macros.h"
 #include "logic/player.h"
-#include "upcast.h"
 
 namespace Widelands {
 
@@ -28,8 +28,8 @@ namespace Widelands {
 
 bool FindNodeWithFlagOrRoad::accept(const Map&, FCoords fc) const {
 	if (upcast(PlayerImmovable const, pimm, fc.field->get_immovable()))
-		return pimm->get_economy() != economy and(dynamic_cast<Flag const*>(pimm)
-		                                          or(dynamic_cast<Road const*>(pimm) &&
+		return pimm->get_economy() != economy && (dynamic_cast<Flag const*>(pimm)
+		                                          || (dynamic_cast<Road const*>(pimm) &&
 		                                             (fc.field->nodecaps() & BUILDCAPS_FLAG)));
 	return false;
 }
@@ -37,7 +37,7 @@ bool FindNodeWithFlagOrRoad::accept(const Map&, FCoords fc) const {
 // CheckStepRoadAI
 
 bool CheckStepRoadAI::allowed(Map& map, FCoords, FCoords end, int32_t, CheckStep::StepId const id)
-	const {
+   const {
 	uint8_t endcaps = player_->get_buildcaps(end);
 
 	// Calculate cost and passability
@@ -53,7 +53,7 @@ bool CheckStepRoadAI::allowed(Map& map, FCoords, FCoords end, int32_t, CheckStep
 			if (dynamic_cast<Flag const*>(imm))
 				return true;
 
-			if (not dynamic_cast<Road const*>(imm) || !(endcaps & BUILDCAPS_FLAG))
+			if (!dynamic_cast<Road const*>(imm) || !(endcaps & BUILDCAPS_FLAG))
 				return false;
 		}
 

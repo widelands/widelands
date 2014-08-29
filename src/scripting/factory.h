@@ -17,12 +17,12 @@
  *
  */
 
-#ifndef FACTORY_H
-#define FACTORY_H
+#ifndef WL_SCRIPTING_FACTORY_H
+#define WL_SCRIPTING_FACTORY_H
 
 
 #include "logic/widelands.h"
-#include "scripting/eris/lua.hpp"
+#include "third_party/eris/lua.hpp"
 
 /*
  * Class to create the correct type for types shared between Editor and Game.
@@ -38,14 +38,14 @@ class GameFactory : public Factory {
 public:
 	virtual ~GameFactory() {}
 
-	virtual void push_player(lua_State * L, Widelands::Player_Number plr) override;
+	void push_player(lua_State * L, Widelands::Player_Number plr) override;
 };
 
 class EditorFactory  : public Factory {
 public:
 	virtual ~EditorFactory() {}
 
-	virtual void push_player(lua_State * L, Widelands::Player_Number plr) override;
+	void push_player(lua_State * L, Widelands::Player_Number plr) override;
 };
 
-#endif /* end of include guard: FACTORY_H */
+#endif  // end of include guard: WL_SCRIPTING_FACTORY_H

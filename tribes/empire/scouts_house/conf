@@ -1,14 +1,14 @@
 size=small
 
+[aihints]
+build_material=false
+
 [buildcost]
 log=2
 stone=1
 
 [return_on_dismantle]
 log=1
-
-[aihints]
-build_material=false
 
 [working positions]
 scout=1
@@ -17,7 +17,8 @@ scout=1
 ration=2
 
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start scouting because ...
+work=_scouting
 
 [work]
 sleep=30000

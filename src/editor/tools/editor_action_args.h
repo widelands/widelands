@@ -17,14 +17,14 @@
  *
  */
 
-#ifndef EDITOR_ACTION_ARGS_H
-#define EDITOR_ACTION_ARGS_H
+#ifndef WL_EDITOR_TOOLS_EDITOR_ACTION_ARGS_H
+#define WL_EDITOR_TOOLS_EDITOR_ACTION_ARGS_H
 
 #include <list>
 #include <string>
 
-#include "interval.h"
 #include "logic/field.h"
+#include "logic/widelands_geometry.h"
 
 namespace Widelands {
 class BobDescr;
@@ -36,6 +36,16 @@ struct Editor_Tool_Action;
 /// Class to save important and changeable properties of classes needed for actions
 // Implementations in editor_history.cc
 struct Editor_Action_Args {
+	Editor_Action_Args(Editor_Interactive & base);
+
+	// TODO(sirver): This class does its own reference counting. This design is
+	// brittle and on a quick overview I have a feeling that it might not be
+	// correct.
+	Editor_Action_Args(const Editor_Action_Args&) = default;
+	Editor_Action_Args& operator = (const Editor_Action_Args&) = default;
+
+	~Editor_Action_Args();
+
 	uint32_t sel_radius;
 
 	int32_t change_by;                                              // resources, hight change tools
@@ -45,14 +55,12 @@ struct Editor_Action_Args {
 	std::list<const Widelands::BobDescr *> obob_type, nbob_type;  // bob change tools
 	std::list<std::string> oimmov_types;                            // immovable change tools
 	std::list<int32_t> nimmov_types;                                // immovable change tools
-	interval<Widelands::Field::Height> m_interval;                  // noise hight tool
+	Widelands::HeightInterval m_interval;                  // noise hight tool
 	std::list<Widelands::Terrain_Index> terrainType, origTerrainType; // set terrain tool
 
 	std::list<Editor_Tool_Action *> draw_actions;                   // draw tool
 
-	Editor_Action_Args(Editor_Interactive & base);
-	~Editor_Action_Args();
 	uint32_t refcount;
 };
 
-#endif
+#endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_ACTION_ARGS_H

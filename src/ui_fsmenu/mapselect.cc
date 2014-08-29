@@ -23,19 +23,20 @@
 
 #include <boost/format.hpp>
 
-#include "gamecontroller.h"
-#include "gamesettings.h"
+#include "base/deprecated.h"
+#include "base/i18n.h"
+#include "base/log.h"
+#include "base/wexception.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "log.h"
 #include "logic/editor_game_base.h"
+#include "logic/game_controller.h"
+#include "logic/game_settings.h"
 #include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"
-#include "s2map.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
-#include "wexception.h"
+#include "wui/text_constants.h"
 
 
 using Widelands::WL_Map_Loader;
@@ -148,28 +149,30 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 		 boost::bind
 		 (&Fullscreen_Menu_MapSelect::compare_maprows, this, _1, _2));
 	m_table.set_sort_column(0);
-
 	m_load_map_as_scenario.set_state(false);
 	m_load_map_as_scenario.set_enabled(false);
 
 	m_table.selected.connect(boost::bind(&Fullscreen_Menu_MapSelect::map_selected, this, _1));
 	m_table.double_clicked.connect(boost::bind(&Fullscreen_Menu_MapSelect::double_clicked, this, _1));
 
-	UI::Box * vbox = new UI::Box
-		(this, m_table.get_x(), m_table.get_y() - 120, UI::Box::Horizontal, m_table.get_w());
+	UI::Box* vbox = new UI::Box(
+	   this, m_table.get_x(), m_table.get_y() - 120, UI::Box::Horizontal, m_table.get_w());
 	m_show_all_maps = _add_tag_checkbox(vbox, "blumba", _("Show all maps"));
 	m_tags_checkboxes.clear(); // Remove this again, it is a special tag checkbox
 	m_show_all_maps->set_state(true);
 	vbox->set_size(get_w(), 25);
+
 	vbox = new UI::Box(this, m_table.get_x(), m_table.get_y() - 90, UI::Box::Horizontal, m_table.get_w());
 	_add_tag_checkbox(vbox, "official", _("Official Map"));
 	_add_tag_checkbox(vbox, "seafaring", _("Seafaring Map"));
 	vbox->set_size(get_w(), 25);
+
 	vbox = new UI::Box(this, m_table.get_x(), m_table.get_y() - 60, UI::Box::Horizontal, m_table.get_w());
 	_add_tag_checkbox(vbox, "1v1", _("1v1"));
 	_add_tag_checkbox(vbox, "2teams", _("Teams of 2"));
 	_add_tag_checkbox(vbox, "3teams", _("Teams of 3"));
 	vbox->set_size(get_w(), 25);
+
 	vbox = new UI::Box(this, m_table.get_x(), m_table.get_y() - 30, UI::Box::Horizontal, m_table.get_w());
 	_add_tag_checkbox(vbox, "4teams", _("Teams of 4"));
 	_add_tag_checkbox(vbox, "ffa", _("Free for all"));
@@ -202,11 +205,11 @@ bool Fullscreen_Menu_MapSelect::compare_maprows
 	const MapData & r1 = m_maps_data[m_table[rowa]];
 	const MapData & r2 = m_maps_data[m_table[rowb]];
 
-	if (!r1.width and !r2.width) {
+	if (!r1.width && !r2.width) {
 		return r1.name < r2.name;
-	} else if (!r1.width and r2.width) {
+	} else if (!r1.width && r2.width) {
 		return true;
-	} else if (r1.width and !r2.width) {
+	} else if (r1.width && !r2.width) {
 		return false;
 	}
 	return r1.name < r2.name;
@@ -219,7 +222,7 @@ bool Fullscreen_Menu_MapSelect::is_scenario()
 
 MapData const * Fullscreen_Menu_MapSelect::get_map() const
 {
-	if (not m_table.has_selection())
+	if (!m_table.has_selection())
 		return nullptr;
 	return &m_maps_data[m_table.get_selected()];
 }
@@ -402,7 +405,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 					bool has_all_tags = true;
 					for (std::set<uint32_t>::const_iterator it = m_req_tags.begin(); it != m_req_tags.end(); ++it)
 						has_all_tags &= mapdata.tags.count(m_tags_ordered[*it]);
-					if (not has_all_tags)
+					if (!has_all_tags)
 						continue;
 
 
@@ -536,8 +539,9 @@ UI::Checkbox * Fullscreen_Menu_MapSelect::_add_tag_checkbox
 void Fullscreen_Menu_MapSelect::_tagbox_changed(int32_t id, bool to) {
 	if (id == 0) { // Show all maps checbox
 		if (to) {
-			container_iterate(std::vector<UI::Checkbox *>, m_tags_checkboxes, it)
-				(*it)->set_state(false);
+			for (UI::Checkbox * checkbox : m_tags_checkboxes) {
+				checkbox->set_state(false);
+			}
 		}
 	} else { // Any tag
 		if (to)

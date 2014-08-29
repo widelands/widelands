@@ -23,6 +23,7 @@
 
 #include <boost/algorithm/string/predicate.hpp>
 
+#include "base/macros.h"
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -33,12 +34,11 @@
 #include "logic/world/world.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
-#include "upcast.h"
 
 namespace Widelands {
 
 namespace {
-const int SCRIPTING_DATA_PACKET_VERSION = 1;
+const uint32_t SCRIPTING_DATA_PACKET_VERSION = 1;
 }  // namespace
 /*
  * ========================================================================
@@ -49,14 +49,14 @@ void Map_Scripting_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
 	 bool,
-	 Map_Map_Object_Loader &       mol)
+	 MapMapObjectLoader &       mol)
 {
 	// Always try to load the global State: even in a normal game, some lua
 	// coroutines could run. But make sure that this is really a game, other
 	// wise this makes no sense.
 	upcast(Game, g, &egbase);
 	FileRead fr;
-	if (g and fr.TryOpen(fs, "scripting/globals.dump"))
+	if (g && fr.TryOpen(fs, "scripting/globals.dump"))
 	{
 		const uint32_t sentinel = fr.Unsigned32();
 		const uint32_t packet_version = fr.Unsigned32();
@@ -71,7 +71,7 @@ void Map_Scripting_Data_Packet::Read
 
 
 void Map_Scripting_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileSystem & fs, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	fs.EnsureDirectoryExists("scripting");
 

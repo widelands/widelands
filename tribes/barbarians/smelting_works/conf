@@ -26,21 +26,24 @@ goldore=8
 coal=8
 
 [programs]
-smelt_iron=_Smelt iron
-smelt_gold=_Smelt gold
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start smelting iron because ...
+smelt_iron=_smelting iron
+# TRANSLATORS: "Completed/Skipped/Did not start smelting gold because ...
+smelt_gold=_smelting gold
+# TRANSLATORS: "Completed/Skipped/Did not start working because ...
+work=_working
 
 [smelt_iron]
 return=skipped unless economy needs iron
-consume=coal ironore
 sleep=32000
+consume=coal ironore
 animate=working 35000
 produce=iron
 
 [smelt_gold]
 return=skipped unless economy needs gold
-consume=coal goldore
 sleep=32000
+consume=coal goldore
 animate=working 35000
 produce=gold
 

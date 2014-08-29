@@ -17,11 +17,12 @@
  *
  */
 
-#ifndef ROAD_H
-#define ROAD_H
+#ifndef WL_ECONOMY_ROAD_H
+#define WL_ECONOMY_ROAD_H
 
 #include <vector>
 
+#include "base/macros.h"
 #include "logic/immovable.h"
 #include "logic/path.h"
 #include "logic/roadtype.h"
@@ -29,6 +30,17 @@
 namespace Widelands {
 struct Carrier;
 class Request;
+
+class RoadDescr : public MapObjectDescr {
+public:
+	RoadDescr(char const* const _name, char const* const _descname)
+		: MapObjectDescr(MapObjectType::ROAD, _name, _descname) {
+	}
+	~RoadDescr() override {}
+
+private:
+	DISALLOW_COPY_AND_ASSIGN(RoadDescr);
+};
 
 /**
  * Road is a special object which connects two flags.
@@ -49,7 +61,9 @@ struct Road : public PlayerImmovable {
 	friend class Map_Roaddata_Data_Packet; // For saving
 	friend class Map_Road_Data_Packet; // For init()
 
-	static bool IsRoadDescr(Map_Object_Descr const *);
+	const RoadDescr& descr() const;
+
+	static bool IsRoadDescr(MapObjectDescr const *);
 
 	enum FlagId {
 		FlagStart = 0,
@@ -73,17 +87,14 @@ struct Road : public PlayerImmovable {
 
 	Flag & get_flag(FlagId const flag) const {return *m_flags[flag];}
 
-	virtual int32_t  get_type    () const override;
 	uint8_t get_roadtype() const {return m_type;}
-	char const * type_name() const override {return "road";}
-	virtual int32_t  get_size    () const override;
-	virtual bool get_passable() const override;
-	virtual PositionList get_positions(const Editor_Game_Base &) const override;
-	const std::string & name() const override;
+	int32_t  get_size    () const override;
+	bool get_passable() const override;
+	PositionList get_positions(const Editor_Game_Base &) const override;
 
-	virtual Flag & base_flag() override;
+	Flag & base_flag() override;
 
-	virtual void set_economy(Economy *) override;
+	void set_economy(Economy *) override;
 
 	int32_t get_cost(FlagId fromflag);
 	const Path & get_path() const {return m_path;}
@@ -94,16 +105,16 @@ struct Road : public PlayerImmovable {
 
 	bool notify_ware(Game & game, FlagId flagid);
 
-	virtual void remove_worker(Worker &) override;
+	void remove_worker(Worker &) override;
 	void assign_carrier(Carrier &, uint8_t);
 
 	void log_general_info(const Editor_Game_Base &) override;
 
 protected:
-	virtual void init(Editor_Game_Base &) override;
-	virtual void cleanup(Editor_Game_Base &) override;
+	void init(Editor_Game_Base &) override;
+	void cleanup(Editor_Game_Base &) override;
 
-	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) override;
+	void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) override;
 
 private:
 	void _set_path(Editor_Game_Base &, const Path &);
@@ -142,4 +153,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_ECONOMY_ROAD_H

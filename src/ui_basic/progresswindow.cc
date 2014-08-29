@@ -23,15 +23,15 @@
 #include <sys/time.h>
 #endif
 
-#include "constants.h"
-#include "container_iterate.h"
+#include "base/deprecated.h"
+#include "base/i18n.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
-#include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "wui/text_constants.h"
 
 #define PROGRESS_FONT_COLOR_FG        RGBColor(128, 128, 255)
 #define PROGRESS_FONT_COLOR_BG        RGBColor(64, 64, 0)
@@ -52,9 +52,9 @@ ProgressWindow::ProgressWindow(const std::string & background)
 }
 
 ProgressWindow::~ProgressWindow() {
-	const VisualizationArray & visualizations = m_visualizations;
-	container_iterate_const(VisualizationArray, visualizations, i)
-		(*i.current)->stop(); //  inform visualizations
+	for (IProgressVisualization * visualization : m_visualizations) {
+		visualization->stop(); //  inform visualizations
+	}
 }
 
 void ProgressWindow::draw_background
@@ -64,7 +64,7 @@ void ProgressWindow::draw_background
 	m_label_center.y = yres * PROGRESS_LABEL_POSITION_Y / 100;
 	Rect wnd_rect(Point(0, 0), xres, yres);
 
-	if (!m_background_pic or xres != m_xres or yres != m_yres) {
+	if (!m_background_pic || xres != m_xres || yres != m_yres) {
 		// (Re-)Load background graphics
 		m_background_pic = ImageTransformations::resize(g_gr->images().get(m_background), xres, yres);
 
@@ -93,14 +93,11 @@ void ProgressWindow::draw_background
 /// Set a picture to render in the background
 void ProgressWindow::set_background(const std::string & file_name) {
 	RenderTarget & rt = *g_gr->get_render_target();
-	if (file_name.size() > 0) {
-		if (g_fs->FileExists(file_name))
-			m_background = file_name;
-		else {
-			m_background = "pics/progress.png";
-		}
-	} else
+	if (!file_name.empty() && g_fs->FileExists(file_name)) {
+		m_background = file_name;
+	} else {
 		m_background = "pics/progress.png";
+	}
 	m_background_pic = nullptr;
 	draw_background(rt, g_gr->get_xres(), g_gr->get_yres());
 	update(true);
@@ -131,10 +128,9 @@ void ProgressWindow::step(const std::string & description) {
 }
 
 void ProgressWindow::update(bool const repaint) {
-	VisualizationArray & visualizations = m_visualizations;
-	container_iterate_const(VisualizationArray, visualizations, i)
-		(*i.current)->update(repaint); //  let visualizations do their work
-
+	for (IProgressVisualization * visualization : m_visualizations) {
+		visualization->update(repaint); //  let visualizations do their work
+	}
 	g_gr->refresh(false);
 }
 
@@ -143,6 +139,7 @@ void ProgressWindow::update(bool const repaint) {
  * std:string style format broke format argument list
  * on windows visual studio.
  */
+// TODO(sirver): this should just take a string.
 void ProgressWindow::stepf(const char * format, ...) {
 	char buffer[1024];
 	va_list va;
@@ -161,11 +158,16 @@ void ProgressWindow::add_visualization(IProgressVisualization * const instance)
 
 void ProgressWindow::remove_visualization(IProgressVisualization * instance) {
 	VisualizationArray & visualizations = m_visualizations;
-	container_iterate(VisualizationArray, visualizations, i)
-		if (*i.current == instance) {
-			m_visualizations.erase (i.current);
+
+	for (VisualizationArray::iterator vis_iter = visualizations.begin();
+		  vis_iter != visualizations.end();
+		  ++vis_iter) {
+
+		if (*vis_iter == instance) {
+			m_visualizations.erase (vis_iter);
 			break;
 		}
+	}
 }
 
 }

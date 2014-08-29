@@ -19,6 +19,7 @@
 
 #include "economy/transfer.h"
 
+#include "base/macros.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/portdock.h"
@@ -34,7 +35,6 @@
 #include "logic/worker.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "upcast.h"
 
 namespace Widelands {
 
@@ -224,7 +224,7 @@ PlayerImmovable * Transfer::get_next_step
 		assert(&m_route.get_flag(m_game, 0) == location);
 
 		// special rule to get wares into buildings
-		if (m_ware and m_route.get_nrsteps() == 1)
+		if (m_ware && m_route.get_nrsteps() == 1)
 			if (dynamic_cast<Building const *>(destination)) {
 				assert(&m_route.get_flag(m_game, 1) == &destflag);
 
@@ -324,13 +324,13 @@ void Transfer::read(FileRead & fr, Transfer::ReadData & rd)
 }
 
 void Transfer::read_pointers
-	(Map_Map_Object_Loader & mol, const Widelands::Transfer::ReadData & rd)
+	(MapMapObjectLoader & mol, const Widelands::Transfer::ReadData & rd)
 {
 	if (rd.destination)
 		m_destination = &mol.get<PlayerImmovable>(rd.destination);
 }
 
-void Transfer::write(Map_Map_Object_Saver & mos, FileWrite & fw)
+void Transfer::write(MapMapObjectSaver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(TRANSFER_SAVEGAME_VERSION);
 	fw.Unsigned32(mos.get_object_file_index_or_zero(m_destination.get(m_game)));

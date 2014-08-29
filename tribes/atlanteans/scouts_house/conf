@@ -1,5 +1,8 @@
 size=small
 
+[aihints]
+build_material=false
+
 [buildcost]
 log=2
 stone=1
@@ -14,11 +17,9 @@ scout=1
 smoked_fish=2
 bread=2
 
-[aihints]
-build_material=false
-
 [programs]
-work=_Work
+# TRANSLATORS: "Completed/Skipped/Did not start scouting because ...
+work=_scouting
 
 [work]
 sleep=30000

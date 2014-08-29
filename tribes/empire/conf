@@ -12,17 +12,15 @@ icon=pics/icon.png
 # Entries in the columns separated by ,
 wares_order=stone, log, wood, wool,cloth;   fish,meat, water, wheat, flour, bread, beer, grape, wine, ration, meal;  marble, marblecolumn, coal, ironore, iron, goldore, gold;    pick, ax, saw, shovel, hammer, fishing_rod, hunting_spear, scythe, bread_paddle, basket, kitchen_tools, fire_tongs;   wood_lance, lance, advanced_lance, heavy_lance, war_lance, helm, armor, chain_armor, plate_armor
 
-workers_order=carrier, donkey, donkeybreeder;   stonemason, carpenter, lumberjack, forester, builder, shepherd, weaver, shipwright; fisher, hunter, farmer, miller, baker, brewer, pig-breeder, vinefarmer, innkeeper; geologist, miner, master-miner, burner, smelter; toolsmith; soldier, trainer, weaponsmith, armorsmith, scout
+workers_order=carrier, donkey, donkeybreeder;   stonemason, carpenter, lumberjack, forester, builder, shepherd, weaver, shipwright; fisher, hunter, farmer, miller, baker, brewer, pig-breeder, vinefarmer, innkeeper; geologist, miner, master-miner, charcoal_burner, smelter; toolsmith; soldier, trainer, weaponsmith, armorsmith, scout
 
 # No idea for the frontier. Maybe some javelins?
 [frontier]
-name=frontier
 pics=pics/frontier_??.png
 hotspot=1 19
 
 # Not just a plain color, maybe a cross or some stribes
 [flag]
-name=flag
 pics=pics/flag_??.png
 hotspot=14 38
 fps=10
@@ -39,8 +37,8 @@ resi_coal1=_Resource indicator: Coal (little)
 resi_coal2=_Resource indicator: Coal (much)
 resi_gold1=_Resource indicator: Gold (little)
 resi_gold2=_Resource indicator: Gold (much)
-resi_granit1=_Resource indicator: Granite (little)
-resi_granit2=_Resource indicator: Granite (much)
+resi_granite1=_Resource indicator: Granite (little)
+resi_granite2=_Resource indicator: Granite (much)
 resi_iron1=_Resource indicator: Iron (little)
 resi_iron2=_Resource indicator: Iron (much)
 resi_none=_Resource indicator: No resource
@@ -109,7 +107,7 @@ armorsmith=_Armorsmith
 baker=_Baker
 brewer=_Brewer
 builder=_Builder
-burner=_Burner
+charcoal_burner=_Charcoal Burner
 carpenter=_Carpenter
 farmer=_Farmer
 fisher=_Fisher
@@ -179,7 +177,7 @@ vineyard=_Vineyard
 winery=_Winery
 inn=_Inn
 tavern=_Tavern
-burners_house=_Charcoal Burner
+charcoal_kiln=_Charcoal Kiln
 smelting_works=_Smelting Works
 shipyard=_Shipyard
 toolsmithy=_Toolsmithy
@@ -214,12 +212,3 @@ fortress=_Fortress
 colosseum=_Colosseum
 arena=_Arena
 trainingcamp=_Training Camp
-
-[initializations]
-headquarters_medium=_Headquarters Medium
-castle_village=_Castle Village
-
-[military_data]
-retreat_interval=10-90
-retreat=50
-

@@ -19,9 +19,10 @@
 
 #include "logic/ware_descr.h"
 
+#include "base/i18n.h"
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
-#include "i18n.h"
+#include "logic/tribe.h"
 #include "profile/profile.h"
 
 namespace Widelands {
@@ -31,10 +32,10 @@ WareDescr::WareDescr
 	 char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s)
 	:
-	Map_Object_Descr(_name, _descname),
-	m_tribe(gtribe),
-	m_helptext(global_s.get_string("help", "")),
-	m_icon_fname(directory + "/menu.png"),
+	MapObjectDescr(MapObjectType::WARE, _name, _descname),
+	m_tribe         (gtribe),
+	m_helptext      (global_s.get_string("help", "")),
+	m_icon_fname    (directory + "/menu.png"),
 	m_icon(g_gr ? g_gr->images().get("pics/but0.png") : nullptr) // because of dedicated
 {
 	m_default_target_quantity =
@@ -45,7 +46,6 @@ WareDescr::WareDescr
 	m_preciousness =
 		static_cast<uint8_t>(global_s.get_natural("preciousness", 0));
 }
-
 
 /**
  * Load all static graphics

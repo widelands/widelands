@@ -8,7 +8,7 @@
 -- Find a warehouse for in the given area
 function find_warehouse(region)
    for idx,f in ipairs(region) do
-      if f.immovable and f.immovable.name == "warehouse" then
+      if f.immovable and f.immovable.descr.type_name == "warehouse" then
          return f.immovable
       end
    end
@@ -44,9 +44,9 @@ function do_smuggling(route_descr, recv_plr, send_plr, recv_whf, send_whf)
          break
       end
 
-      if not send_whf.immovable or send_whf.immovable.name ~= "warehouse" or
+      if not send_whf.immovable or send_whf.immovable.descr.type_name ~= "warehouse" or
          send_whf.immovable.owner ~= send_plr or
-         not recv_whf.immovable or recv_whf.immovable.name ~= "warehouse" or
+         not recv_whf.immovable or recv_whf.immovable.descr.type_name ~= "warehouse" or
          recv_whf.immovable.owner ~= recv_plr
       then
          send_to_all(smuggling_route_broken:bformat(

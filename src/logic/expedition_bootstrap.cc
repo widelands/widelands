@@ -19,13 +19,15 @@
 
 #include "logic/expedition_bootstrap.h"
 
+#include <memory>
+
+#include "base/macros.h"
 #include "economy/portdock.h"
 #include "io/filewrite.h"
 #include "logic/player.h"
 #include "logic/warehouse.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "upcast.h"
 #include "wui/interactive_gamebase.h"
 
 namespace Widelands {
@@ -178,7 +180,7 @@ WaresQueue& ExpeditionBootstrap::waresqueue(Ware_Index index) const {
 			return *wq.get();
 		}
 	}
-	assert(false); // Never here, otherwise we do not have a queue for this ware.
+	throw wexception("Never here.");
 }
 
 std::vector<WaresQueue*> ExpeditionBootstrap::wares() const {
@@ -238,7 +240,7 @@ void ExpeditionBootstrap::get_waiting_workers_and_wares
 	cleanup(game);
 }
 
-void ExpeditionBootstrap::save(FileWrite& fw, Game& game, Map_Map_Object_Saver& mos) {
+void ExpeditionBootstrap::save(FileWrite& fw, Game& game, MapMapObjectSaver& mos) {
 	// Expedition workers
 	fw.Unsigned8(workers_.size());
 	for (std::unique_ptr<ExpeditionWorker>& ew : workers_) {
@@ -260,7 +262,7 @@ void ExpeditionBootstrap::save(FileWrite& fw, Game& game, Map_Map_Object_Saver& 
 
 void ExpeditionBootstrap::load
 	(uint32_t warehouse_packet_version, Warehouse& warehouse, FileRead& fr,
-	 Game& game, Map_Map_Object_Loader& mol)
+	 Game& game, MapMapObjectLoader& mol)
 {
 	assert(warehouse_packet_version >= 6);
 

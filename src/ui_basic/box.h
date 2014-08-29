@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef UI_BOX_H
-#define UI_BOX_H
+#ifndef WL_UI_BASIC_BOX_H
+#define WL_UI_BASIC_BOX_H
 
 #include <vector>
 
@@ -67,8 +67,8 @@ public:
 	void set_min_desired_breadth(uint32_t min);
 
 protected:
-	virtual void layout() override;
-	virtual void update_desired_size() override;
+	void layout() override;
+	void update_desired_size() override;
 
 private:
 	void get_item_desired_size(uint32_t idx, uint32_t & depth, uint32_t & breadth);
@@ -114,4 +114,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_UI_BASIC_BOX_H

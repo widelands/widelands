@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef GAME_LOADER_H
-#define GAME_LOADER_H
+#ifndef WL_GAME_IO_GAME_LOADER_H
+#define WL_GAME_IO_GAME_LOADER_H
 
 #include <string>
 
@@ -49,4 +49,4 @@ private:
 
 }
 
-#endif
+#endif  // end of include guard: WL_GAME_IO_GAME_LOADER_H
