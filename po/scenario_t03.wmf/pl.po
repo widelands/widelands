@@ -6,17 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-07-16 06:11+0000\n"
-"PO-Revision-Date: 2014-03-12 12:36+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"POT-Creation-Date: 2014-08-05 09:15+0000\n"
+"PO-Revision-Date: 2014-07-27 16:53+0000\n"
+"Last-Translator: SirVer <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-07-17 05:41+0000\n"
-"X-Generator: Launchpad (build 17114)\n"
+"X-Launchpad-Export-Date: 2014-08-06 05:43+0000\n"
+"X-Generator: Launchpad (build 17147)\n"
 "Language: pl\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:21
@@ -53,17 +53,14 @@ msgid "Build a cattle farm"
 msgstr "Zbuduj farmę bydła"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:37
+#: ../../campaigns/t03.wmf/scripting/texts.lua:39
 msgid "Remember to build a cattle farm"
 msgstr "Pamiętaj, aby wybudować farmę dla bydła"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:38
 msgid ""
 "As your roads grow longer and your economy bigger, you should make good use "
-"of your oxen to help transport wares more quickly.)"
-msgstr ""
-
-#: ../../campaigns/t03.wmf/scripting/texts.lua:39
-msgid "Remember to build a cattle farm!"
+"of your oxen to help transport wares more quickly."
 msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:45
@@ -101,11 +98,8 @@ msgstr ""
 msgid ""
 "Expand your territory to the mountains, send geologists to search for ore "
 "and coal and build a mining economy with mines, taverns, smelting works and "
-"metalworks."
+"metal workshop."
 msgstr ""
-"Rozszerz swoje terytorium w kierunku gór, wyślij geologów w poszukiwaniu rud "
-"i węgla oraz zbuduj gospodarkę górniczą z kopalniami, tawernami, hutą i "
-"narzędziownią."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:72
 #: ../../campaigns/t03.wmf/scripting/texts.lua:74
@@ -185,7 +179,7 @@ msgstr ""
 "bitwy."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:109
-msgid "The attributes are: health points, attack, defense and evade."
+msgid "The attributes are: health, attack, defense and evade."
 msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:115

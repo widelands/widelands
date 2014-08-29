@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-07-16 06:11+0000\n"
-"PO-Revision-Date: 2014-07-17 05:13+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"POT-Creation-Date: 2014-08-05 09:15+0000\n"
+"PO-Revision-Date: 2014-08-03 12:33+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-18 04:37+0000\n"
-"X-Generator: Launchpad (build 17114)\n"
+"X-Launchpad-Export-Date: 2014-08-06 05:48+0000\n"
+"X-Generator: Launchpad (build 17147)\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 #: ../../tribes/empire/barracks/conf:8
@@ -282,18 +282,19 @@ msgstr ""
 "készül, és a kiképzőtáborban – élelemmel együtt – a katonák támadását "
 "fejlesztik vele 1.-ről 2. szintre."
 
-#: ../../tribes/empire/arena/conf:29
-#: ../../tribes/empire/colosseum/conf:35
-#: ../../tribes/empire/trainingcamp/conf:46
-msgid "Sleep"
-msgstr "Felfüggesztve"
-
 #: ../../tribes/empire/arena/conf:30
 #: ../../tribes/empire/colosseum/conf:36
-msgid "Upgrade soldier evade from level 0 to level 1"
-msgstr "Katona kitérésének fejlesztése 0.-ról 1. szintre"
+#: ../../tribes/empire/trainingcamp/conf:47
+msgid "sleeping"
+msgstr ""
+
+#: ../../tribes/empire/arena/conf:32
+#: ../../tribes/empire/colosseum/conf:38
+msgid "upgrading soldier evade from level 0 to level 1"
+msgstr ""
 
 #: ../../tribes/empire/arena/help.lua:15
+#: ../../tribes/empire/armorsmithy/help.lua:13
 #: ../../tribes/empire/armorsmithy/help.lua:17
 #: ../../tribes/empire/bakery/help.lua:13
 #: ../../tribes/empire/bakery/help.lua:17
@@ -301,9 +302,9 @@ msgstr "Katona kitérésének fejlesztése 0.-ról 1. szintre"
 #: ../../tribes/empire/barrier/help.lua:13
 #: ../../tribes/empire/brewery/help.lua:13
 #: ../../tribes/empire/brewery/help.lua:17
-#: ../../tribes/empire/burners_house/help.lua:13
-#: ../../tribes/empire/burners_house/help.lua:17
 #: ../../tribes/empire/castle/help.lua:13
+#: ../../tribes/empire/charcoal_kiln/help.lua:13
+#: ../../tribes/empire/charcoal_kiln/help.lua:17
 #: ../../tribes/empire/coalmine/help.lua:13
 #: ../../tribes/empire/colosseum/help.lua:15
 #: ../../tribes/empire/deep_coalmine/help.lua:13
@@ -320,21 +321,22 @@ msgstr "Katona kitérésének fejlesztése 0.-ról 1. szintre"
 #: ../../tribes/empire/fortress/help.lua:13
 #: ../../tribes/empire/goldmine/help.lua:13
 #: ../../tribes/empire/headquarters/help.lua:13
-#: ../../tribes/empire/headquarters/help.lua:17
+#: ../../tribes/empire/headquarters/help.lua:18
 #: ../../tribes/empire/headquarters_shipwreck/help.lua:13
-#: ../../tribes/empire/headquarters_shipwreck/help.lua:17
+#: ../../tribes/empire/headquarters_shipwreck/help.lua:18
 #: ../../tribes/empire/hunters_house/help.lua:13
 #: ../../tribes/empire/inn/help.lua:13
 #: ../../tribes/empire/inn/help.lua:17
 #: ../../tribes/empire/lumberjacks_house/help.lua:13
 #: ../../tribes/empire/marblemine/help.lua:13
+#: ../../tribes/empire/mill/help.lua:13
 #: ../../tribes/empire/mill/help.lua:17
 #: ../../tribes/empire/oremine/help.lua:13
 #: ../../tribes/empire/outpost/help.lua:13
 #: ../../tribes/empire/piggery/help.lua:13
 #: ../../tribes/empire/piggery/help.lua:17
 #: ../../tribes/empire/port/help.lua:13
-#: ../../tribes/empire/port/help.lua:18
+#: ../../tribes/empire/port/help.lua:17
 #: ../../tribes/empire/quarry/help.lua:13
 #: ../../tribes/empire/sawmill/help.lua:13
 #: ../../tribes/empire/sawmill/help.lua:17
@@ -343,7 +345,8 @@ msgstr "Katona kitérésének fejlesztése 0.-ról 1. szintre"
 #: ../../tribes/empire/sentry/help.lua:13
 #: ../../tribes/empire/sheepfarm/help.lua:13
 #: ../../tribes/empire/sheepfarm/help.lua:17
-#: ../../tribes/empire/shipyard/help.lua:18
+#: ../../tribes/empire/shipyard/help.lua:13
+#: ../../tribes/empire/shipyard/help.lua:17
 #: ../../tribes/empire/smelting_works/help.lua:13
 #: ../../tribes/empire/stonemasons_house/help.lua:13
 #: ../../tribes/empire/stonemasons_house/help.lua:17
@@ -355,7 +358,9 @@ msgstr "Katona kitérésének fejlesztése 0.-ról 1. szintre"
 #: ../../tribes/empire/trainingcamp/help.lua:15
 #: ../../tribes/empire/vineyard/help.lua:13
 #: ../../tribes/empire/warehouse/help.lua:13
+#: ../../tribes/empire/weaponsmithy/help.lua:13
 #: ../../tribes/empire/weaponsmithy/help.lua:17
+#: ../../tribes/empire/weaving-mill/help.lua:13
 #: ../../tribes/empire/well/help.lua:13
 #: ../../tribes/empire/winery/help.lua:13
 #: ../../tribes/empire/winery/help.lua:17
@@ -382,25 +387,26 @@ msgid ""
 "level with which they came."
 msgstr ""
 
-#: ../../tribes/empire/arena/help.lua:27
-#: ../../tribes/empire/colosseum/help.lua:27
+#: ../../tribes/empire/arena/help.lua:28
+#: ../../tribes/empire/colosseum/help.lua:28
 msgid "Evade Training:"
 msgstr ""
 
-#: ../../tribes/empire/arena/help.lua:37
+#: ../../tribes/empire/arena/help.lua:38
 #: ../../tribes/empire/armorsmithy/help.lua:29
 #: ../../tribes/empire/bakery/help.lua:30
 #: ../../tribes/empire/brewery/help.lua:29
-#: ../../tribes/empire/burners_house/help.lua:29
+#: ../../tribes/empire/charcoal_kiln/help.lua:29
 #: ../../tribes/empire/coalmine/help.lua:30
-#: ../../tribes/empire/colosseum/help.lua:37
+#: ../../tribes/empire/colosseum/help.lua:38
 #: ../../tribes/empire/deep_coalmine/help.lua:30
 #: ../../tribes/empire/deep_goldmine/help.lua:29
 #: ../../tribes/empire/deep_marblemine/help.lua:29
 #: ../../tribes/empire/deep_oremine/help.lua:29
-#: ../../tribes/empire/donkeyfarm/help.lua:30
+#: ../../tribes/empire/donkeyfarm/help.lua:29
 #: ../../tribes/empire/farm/help.lua:29
 #: ../../tribes/empire/fishers_house/help.lua:30
+#: ../../tribes/empire/foresters_house/help.lua:30
 #: ../../tribes/empire/goldmine/help.lua:30
 #: ../../tribes/empire/hunters_house/help.lua:30
 #: ../../tribes/empire/inn/help.lua:29
@@ -409,17 +415,17 @@ msgstr ""
 #: ../../tribes/empire/mill/help.lua:30
 #: ../../tribes/empire/oremine/help.lua:30
 #: ../../tribes/empire/piggery/help.lua:29
-#: ../../tribes/empire/port/help.lua:27
+#: ../../tribes/empire/port/help.lua:26
 #: ../../tribes/empire/quarry/help.lua:29
 #: ../../tribes/empire/sawmill/help.lua:29
 #: ../../tribes/empire/scouts_house/help.lua:29
 #: ../../tribes/empire/sheepfarm/help.lua:29
-#: ../../tribes/empire/shipyard/help.lua:30
+#: ../../tribes/empire/shipyard/help.lua:29
 #: ../../tribes/empire/smelting_works/help.lua:29
 #: ../../tribes/empire/stonemasons_house/help.lua:29
 #: ../../tribes/empire/tavern/help.lua:29
 #: ../../tribes/empire/toolsmithy/help.lua:29
-#: ../../tribes/empire/trainingcamp/help.lua:44
+#: ../../tribes/empire/trainingcamp/help.lua:46
 #: ../../tribes/empire/vineyard/help.lua:29
 #: ../../tribes/empire/weaponsmithy/help.lua:29
 #: ../../tribes/empire/weaving-mill/help.lua:29
@@ -442,75 +448,50 @@ msgstr ""
 msgid "Produces armor for the soldiers."
 msgstr "Páncélt készít a katonák számára."
 
-#: ../../tribes/empire/armorsmithy/conf:31
-msgid "Produce helm"
-msgstr "a sisakkészítés"
-
 #: ../../tribes/empire/armorsmithy/conf:32
-msgid "Produce armor"
-msgstr "a vértezetkészítés"
-
-#: ../../tribes/empire/armorsmithy/conf:33
-msgid "Produce chain armor"
-msgstr "a láncingkészítés"
+msgid "forging a helm"
+msgstr ""
 
 #: ../../tribes/empire/armorsmithy/conf:34
-msgid "Produce plate armor"
-msgstr "a lemezpáncél-készítés"
+msgid "forging an armor"
+msgstr ""
 
-#: ../../tribes/empire/armorsmithy/conf:35
-#: ../../tribes/empire/bakery/conf:24
-#: ../../tribes/empire/brewery/conf:25
-#: ../../tribes/empire/burners_house/conf:24
-#: ../../tribes/empire/coalmine/conf:25
-#: ../../tribes/empire/deep_coalmine/conf:26
-#: ../../tribes/empire/deep_goldmine/conf:26
-#: ../../tribes/empire/deep_marblemine/conf:27
-#: ../../tribes/empire/deep_oremine/conf:26
-#: ../../tribes/empire/donkeyfarm/conf:25
-#: ../../tribes/empire/farm/conf:26
-#: ../../tribes/empire/fishers_house/conf:20
-#: ../../tribes/empire/foresters_house/conf:20
-#: ../../tribes/empire/goldmine/conf:26
-#: ../../tribes/empire/hunters_house/conf:19
-#: ../../tribes/empire/inn/conf:27
-#: ../../tribes/empire/lumberjacks_house/conf:20
-#: ../../tribes/empire/marblemine/conf:29
-#: ../../tribes/empire/mill/conf:24
-#: ../../tribes/empire/oremine/conf:26
-#: ../../tribes/empire/piggery/conf:25
-#: ../../tribes/empire/quarry/conf:22
-#: ../../tribes/empire/sawmill/conf:23
-#: ../../tribes/empire/scouts_house/conf:20
-#: ../../tribes/empire/sheepfarm/conf:24
-#: ../../tribes/empire/shipyard/conf:28
-#: ../../tribes/empire/smelting_works/conf:28
-#: ../../tribes/empire/stonemasons_house/conf:24
-#: ../../tribes/empire/tavern/conf:28
-#: ../../tribes/empire/toolsmithy/conf:49
-#: ../../tribes/empire/vineyard/conf:26
-#: ../../tribes/empire/weaponsmithy/conf:38
-#: ../../tribes/empire/weaving-mill/conf:20
-#: ../../tribes/empire/well/conf:21
-#: ../../tribes/empire/winery/conf:26
-msgid "Work"
-msgstr "a munka"
+#: ../../tribes/empire/armorsmithy/conf:36
+msgid "forging a chain armor"
+msgstr ""
 
-#: ../../tribes/empire/ax/conf:1
-msgid ""
-"The ax is the tool for the lumberjack. It is produced by the toolsmith."
-msgstr "A fejsze a favágó eszköze. A szerszámkovács készíti."
+#: ../../tribes/empire/armorsmithy/conf:38
+msgid "forging a plate armor"
+msgstr ""
 
-#: ../../tribes/empire/baker/conf:1
-msgid "Bakes bread for workers."
-msgstr "Kenyeret süt a munkásoknak."
+#: ../../tribes/empire/armorsmithy/conf:40
+#: ../../tribes/empire/bakery/conf:25
+#: ../../tribes/empire/charcoal_kiln/conf:25
+#: ../../tribes/empire/farm/conf:29
+#: ../../tribes/empire/foresters_house/conf:21
+#: ../../tribes/empire/inn/conf:30
+#: ../../tribes/empire/lumberjacks_house/conf:21
+#: ../../tribes/empire/marblemine/conf:32
+#: ../../tribes/empire/quarry/conf:25
+#: ../../tribes/empire/sawmill/conf:24
+#: ../../tribes/empire/shipyard/conf:30
+#: ../../tribes/empire/smelting_works/conf:31
+#: ../../tribes/empire/stonemasons_house/conf:25
+#: ../../tribes/empire/toolsmithy/conf:62
+#: ../../tribes/empire/vineyard/conf:29
+#: ../../tribes/empire/weaponsmithy/conf:44
+#: ../../tribes/empire/well/conf:22
+#: ../../tribes/empire/winery/conf:27
+msgid "working"
+msgstr ""
 
+#: ../../tribes/empire/armorsmithy/help.lua:13
 #: ../../tribes/empire/bakery/help.lua:13
 #: ../../tribes/empire/barracks/help.lua:13
 #: ../../tribes/empire/barrier/help.lua:13
 #: ../../tribes/empire/brewery/help.lua:13
-#: ../../tribes/empire/burners_house/help.lua:13
 #: ../../tribes/empire/castle/help.lua:13
+#: ../../tribes/empire/charcoal_kiln/help.lua:13
 #: ../../tribes/empire/donkeyfarm/help.lua:13
 #: ../../tribes/empire/farm/help.lua:13
 #: ../../tribes/empire/fishers_house/help.lua:13
@@ -523,6 +504,7 @@ msgstr "Kenyeret süt a munkásoknak."
 #: ../../tribes/empire/inn/help.lua:13
 #: ../../tribes/empire/lumberjacks_house/help.lua:13
 #: ../../tribes/empire/marblemine/help.lua:13
+#: ../../tribes/empire/mill/help.lua:13
 #: ../../tribes/empire/oremine/help.lua:13
 #: ../../tribes/empire/outpost/help.lua:13
 #: ../../tribes/empire/piggery/help.lua:13
@@ -532,6 +514,7 @@ msgstr "Kenyeret süt a munkásoknak."
 #: ../../tribes/empire/scouts_house/help.lua:13
 #: ../../tribes/empire/sentry/help.lua:13
 #: ../../tribes/empire/sheepfarm/help.lua:13
+#: ../../tribes/empire/shipyard/help.lua:13
 #: ../../tribes/empire/smelting_works/help.lua:13
 #: ../../tribes/empire/stonemasons_house/help.lua:13
 #: ../../tribes/empire/tavern/help.lua:13
@@ -540,10 +523,21 @@ msgstr "Kenyeret süt a munkásoknak."
 #: ../../tribes/empire/trainingcamp/help.lua:15
 #: ../../tribes/empire/vineyard/help.lua:13
 #: ../../tribes/empire/warehouse/help.lua:13
+#: ../../tribes/empire/weaponsmithy/help.lua:13
+#: ../../tribes/empire/weaving-mill/help.lua:13
 #: ../../tribes/empire/well/help.lua:13
 #: ../../tribes/empire/winery/help.lua:13
 msgid "Source needed"
 msgstr ""
+
+#: ../../tribes/empire/ax/conf:1
+msgid ""
+"The ax is the tool for the lumberjack. It is produced by the toolsmith."
+msgstr "A fejsze a favágó eszköze. A szerszámkovács készíti."
+
+#: ../../tribes/empire/baker/conf:1
+msgid "Bakes bread for workers."
+msgstr "Kenyeret süt a munkásoknak."
 
 #: ../../tribes/empire/barracks/conf:7
 msgid "Your soldiers have occupied your barracks."
@@ -615,13 +609,13 @@ msgstr ""
 msgid "Produces beer or wine."
 msgstr "Sört vagy bort készít."
 
+#: ../../tribes/empire/brewery/conf:26
+msgid "brewing"
+msgstr ""
+
 #: ../../tribes/empire/builder/conf:1
 msgid "Works at construction sites to raise new buildings."
 msgstr "Építési területeken dolgozik, új épületeket emel."
-
-#: ../../tribes/empire/burner/conf:1
-msgid "Burns coal."
-msgstr "Faszenet készít."
 
 #: ../../tribes/empire/carpenter/conf:1
 msgid "Works in the sawmill."
@@ -645,6 +639,10 @@ msgstr ""
 "páncélkovácsműhelyben készül, és a kiképzőtáborban – élelemmel együtt – a "
 "katonák életerejét fejlesztik vele 2.-ról 3. szintre."
 
+#: ../../tribes/empire/charcoal_burner/conf:1
+msgid "Burns coal."
+msgstr "Faszenet készít."
+
 #: ../../tribes/empire/cloth/conf:1
 msgid ""
 "Cloth is needed to build several buildings. It is also consumed in the armor "
@@ -657,20 +655,38 @@ msgstr ""
 msgid ""
 "The fires of the Empire smelting works, armor smithies and weapon smithies "
 "are usually fed with coal. It is mined in coal mines or produced by a "
-"charcoal burner out of logs."
+"charcoal kiln out of logs."
 msgstr ""
-"A Birodalom kohóinak, páncél- és fegyverkovácsműhelyeinek tüzeit általában "
-"szén táplálja. Ezt szénbányákban termelik ki, vagy farönkből készítik a "
-"faszénégetőházban."
+
+#: ../../tribes/empire/coalmine/conf:26
+#: ../../tribes/empire/deep_coalmine/conf:27
+#: ../../tribes/empire/deep_goldmine/conf:27
+#: ../../tribes/empire/deep_marblemine/conf:28
+#: ../../tribes/empire/deep_oremine/conf:27
+#: ../../tribes/empire/goldmine/conf:27
+#: ../../tribes/empire/oremine/conf:27
+msgid "mining"
+msgstr ""
+
+#: ../../tribes/empire/coalmine/conf:40
+#: ../../tribes/empire/deep_coalmine/conf:41
+msgid "Main Coal Vein Exhausted"
+msgstr ""
+
+#: ../../tribes/empire/coalmine/conf:41
+msgid ""
+"This coal mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr ""
 
 #: ../../tribes/empire/coalmine/help.lua:17
 #: ../../tribes/empire/deep_coalmine/help.lua:18
 msgid "Digs coal out of the ground in mountain terrain."
 msgstr ""
 
-#: ../../tribes/empire/colosseum/conf:37
-msgid "Upgrade soldier evade from level 1 to level 2"
-msgstr "Katona kitérésének fejlesztése 1.-ről 2. szintre"
+#: ../../tribes/empire/colosseum/conf:40
+msgid "upgrading soldier evade from level 1 to level 2"
+msgstr ""
 
 #: ../../tribes/empire/conf:4
 msgid "The Widelands Development Team"
@@ -977,8 +993,8 @@ msgid "Builder"
 msgstr "Építész"
 
 #: ../../tribes/empire/conf:110
-msgid "Burner"
-msgstr "Faszénégető"
+msgid "Charcoal Burner"
+msgstr ""
 
 #: ../../tribes/empire/conf:111
 msgid "Carpenter"
@@ -1134,6 +1150,7 @@ msgid "Sentry"
 msgstr "Őrház"
 
 #: ../../tribes/empire/conf:158
+#: ../../tribes/empire/scripting/sc00_headquarters.lua:10
 msgid "Headquarters"
 msgstr "Főhadiszállás"
 
@@ -1214,8 +1231,8 @@ msgid "Tavern"
 msgstr "Kocsma"
 
 #: ../../tribes/empire/conf:180
-msgid "Charcoal Burner"
-msgstr "Faszénégetőház"
+msgid "Charcoal Kiln"
+msgstr ""
 
 #: ../../tribes/empire/conf:181
 msgid "Smelting Works"
@@ -1309,21 +1326,56 @@ msgstr "Aréna"
 msgid "Training Camp"
 msgstr "Kiképzőtábor"
 
-#: ../../tribes/empire/conf:217
-msgid "Headquarters Medium"
-msgstr "Közepes főhadiszállás"
+#: ../../tribes/empire/deep_coalmine/conf:42
+msgid ""
+"This coal mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
+msgstr ""
 
-#: ../../tribes/empire/conf:218
-msgid "Castle Village"
-msgstr "Vár körüli falu"
+#: ../../tribes/empire/deep_goldmine/conf:41
+#: ../../tribes/empire/goldmine/conf:41
+msgid "Main Gold Vein Exhausted"
+msgstr ""
+
+#: ../../tribes/empire/deep_goldmine/conf:42
+msgid ""
+"This gold mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
+msgstr ""
 
 #: ../../tribes/empire/deep_goldmine/help.lua:17
 #: ../../tribes/empire/goldmine/help.lua:17
 msgid "Digs gold ore out of the ground in mountain terrain."
 msgstr ""
 
+#: ../../tribes/empire/deep_marblemine/conf:42
+#: ../../tribes/empire/marblemine/conf:57
+msgid "Main Marble Vein Exhausted"
+msgstr ""
+
+#: ../../tribes/empire/deep_marblemine/conf:43
+msgid ""
+"This marble mine’s main vein is exhausted. Expect strongly diminished "
+"returns on investment. This mine can’t be enhanced any further, so you "
+"should consider dismantling or destroying it."
+msgstr ""
+
 #: ../../tribes/empire/deep_marblemine/help.lua:17
 msgid "Digs marble and stones out of the ground in mountain terrain."
+msgstr ""
+
+#: ../../tribes/empire/deep_oremine/conf:41
+#: ../../tribes/empire/oremine/conf:41
+msgid "Main Iron Vein Exhausted"
+msgstr ""
+
+#: ../../tribes/empire/deep_oremine/conf:42
+msgid ""
+"This iron mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
 msgstr ""
 
 #: ../../tribes/empire/deep_oremine/help.lua:17
@@ -1341,17 +1393,31 @@ msgstr ""
 msgid "Breeds cute and helpful donkeys"
 msgstr "Bájos és szolgálatkész szamarakat tenyészt."
 
+#: ../../tribes/empire/donkeyfarm/conf:26
+msgid "rearing donkeys"
+msgstr ""
+
 #: ../../tribes/empire/donkeyfarm/help.lua:17
 msgid "Breeds donkeys for adding them to the transportation system."
 msgstr ""
 
-#: ../../tribes/empire/farm/conf:24
-msgid "Plant wheat"
-msgstr "a búzavetés"
-
 #: ../../tribes/empire/farm/conf:25
-msgid "Harvest wheat"
-msgstr "Búza betakarítása"
+msgid "planting wheat"
+msgstr ""
+
+#: ../../tribes/empire/farm/conf:27
+msgid "harvesting wheat"
+msgstr ""
+
+#: ../../tribes/empire/farm/conf:46
+#: ../../tribes/empire/vineyard/conf:45
+msgid "Out of Fields"
+msgstr ""
+
+#: ../../tribes/empire/farm/conf:47
+msgid ""
+"The farmer working at this farm has no cleared soil to plant his seeds."
+msgstr ""
 
 #: ../../tribes/empire/farm/help.lua:17
 #: ../../tribes/empire/vineyard/help.lua:17
@@ -1382,6 +1448,20 @@ msgstr ""
 #: ../../tribes/empire/fisher/conf:1
 msgid "Catches fish in the sea."
 msgstr "Halat fog a tengerből."
+
+#: ../../tribes/empire/fishers_house/conf:21
+msgid "fishing"
+msgstr ""
+
+#: ../../tribes/empire/fishers_house/conf:28
+msgid "Out of Fish"
+msgstr ""
+
+#: ../../tribes/empire/fishers_house/conf:29
+msgid ""
+"The fisher working in this fisher’s house can’t find any fish in his working "
+"radius."
+msgstr ""
 
 #: ../../tribes/empire/fishers_house/help.lua:17
 msgid "Fishes on the coast near the house."
@@ -1421,10 +1501,6 @@ msgid ""
 "the trees."
 msgstr ""
 
-#: ../../tribes/empire/foresters_house/help.lua:30
-msgid "Calculaiton needed"
-msgstr ""
-
 #: ../../tribes/empire/fortress/conf:7
 msgid "Your soldiers have occupied your fortress."
 msgstr ""
@@ -1442,6 +1518,12 @@ msgstr ""
 "Az arany a legértékesebb fém, páncélzatot és fegyvereket díszítenek vele. "
 "Aranyércből nyerik ki a kohóban, és a páncél-, ill. a fegyverkovácsműhelyben "
 "dolgozzák fel."
+
+#: ../../tribes/empire/goldmine/conf:42
+msgid ""
+"This gold mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr ""
 
 #: ../../tribes/empire/goldore/conf:1
 msgid ""
@@ -1468,21 +1550,21 @@ msgid ""
 "is produced by the toolsmith."
 msgstr ""
 
-#: ../../tribes/empire/headquarters/help.lua:16
-msgid "Accomodation for your people. Also stores your wares and tools."
+#: ../../tribes/empire/headquarters/help.lua:17
+msgid "Accommodation for your people. Also stores your wares and tools."
 msgstr ""
 
-#: ../../tribes/empire/headquarters/help.lua:17
+#: ../../tribes/empire/headquarters/help.lua:18
 msgid "The headquarters is your main building."
 msgstr ""
 
-#: ../../tribes/empire/headquarters_shipwreck/help.lua:16
+#: ../../tribes/empire/headquarters_shipwreck/help.lua:17
 msgid ""
-"Although this ship ran aground, it still serves as accomodation for your "
+"Although this ship ran aground, it still serves as accommodation for your "
 "people. It also stores your wares and tools."
 msgstr ""
 
-#: ../../tribes/empire/headquarters_shipwreck/help.lua:17
+#: ../../tribes/empire/headquarters_shipwreck/help.lua:18
 msgid "The headquarters shipwreck is your main building."
 msgstr ""
 
@@ -1512,6 +1594,20 @@ msgstr ""
 msgid "The Hunter brings good meat to the colonists."
 msgstr "A vadász jó hússal látja el a hódítókat."
 
+#: ../../tribes/empire/hunters_house/conf:20
+msgid "hunting"
+msgstr ""
+
+#: ../../tribes/empire/hunters_house/conf:28
+msgid "Out of Game"
+msgstr ""
+
+#: ../../tribes/empire/hunters_house/conf:29
+msgid ""
+"The hunter working out of this hunter’s house can’t find any game in his "
+"working radius."
+msgstr ""
+
 #: ../../tribes/empire/hunters_house/help.lua:17
 msgid "Hunts animals to produce meat."
 msgstr ""
@@ -1528,13 +1624,14 @@ msgstr ""
 "Ez a lándzsa elég könnyű, hogy eldobják, de elég nehéz, hogy el lehessen "
 "vele ejteni egy állatot. Csak a vadászok használják."
 
-#: ../../tribes/empire/inn/conf:25
-msgid "Produce ration"
-msgstr "a harapnivaló-készítés"
-
 #: ../../tribes/empire/inn/conf:26
-msgid "Produce meal"
-msgstr "az ebédkészítés"
+#: ../../tribes/empire/tavern/conf:29
+msgid "preparing a ration"
+msgstr ""
+
+#: ../../tribes/empire/inn/conf:28
+msgid "preparing a meal"
+msgstr ""
 
 #: ../../tribes/empire/innkeeper/conf:1
 msgid "Produces food for miners."
@@ -1579,16 +1676,23 @@ msgstr ""
 msgid ""
 "Logs are an important building material for the Empire. The lumberjacks fell "
 "the trees; foresters care for the supply of trees. Logs are also used by the "
-"charcoal burner, the toolsmithy and the sawmill."
+"charcoal kiln, the toolsmithy and the sawmill."
 msgstr ""
-"A farönk a Birodalom egyik fontos építőanyaga. A favágók kivágják a fákat, "
-"az erdészek pedig gondoskodnak az utánpótlásukról. Farönköt a "
-"faszénégetőházban, a szerszámkovácsműhelyben és a fűrészmalomban is "
-"felhasználnak."
 
 #: ../../tribes/empire/lumberjack/conf:1
 msgid "Fells trees."
 msgstr "Kivágja a fákat."
+
+#: ../../tribes/empire/lumberjacks_house/conf:28
+msgid "Out of Trees"
+msgstr ""
+
+#: ../../tribes/empire/lumberjacks_house/conf:29
+msgid ""
+"The lumberjack working at this lumberjack’s house can’t find any trees in "
+"his working radius. You should consider dismantling or destroying the "
+"building or building a forester’s house."
+msgstr ""
 
 #: ../../tribes/empire/lumberjacks_house/help.lua:16
 msgid "Fell trees in the surrounding area and process them into logs."
@@ -1617,15 +1721,20 @@ msgstr ""
 "A márványoszlopok a Birodalom fejlett kultúráját mutatják, így szinte minden "
 "nagyobb épülethez felhasználják őket. Márványból készülnek a kőfaragóházban."
 
-#: ../../tribes/empire/marblemine/conf:27
-#: ../../tribes/empire/quarry/conf:21
-msgid "Mine marble"
-msgstr "a márványbányászat"
-
 #: ../../tribes/empire/marblemine/conf:28
-#: ../../tribes/empire/quarry/conf:20
-msgid "Mine stone"
-msgstr "a kőbányászat"
+msgid "mining marble"
+msgstr ""
+
+#: ../../tribes/empire/marblemine/conf:30
+msgid "mining stone"
+msgstr ""
+
+#: ../../tribes/empire/marblemine/conf:58
+msgid ""
+"This marble mine’s main vein is exhausted. Expect strongly diminished "
+"returns on investment. You should consider enhancing, dismantling or "
+"destroying it."
+msgstr ""
 
 #: ../../tribes/empire/marblemine/help.lua:17
 msgid "Carve marble and stones out of the rock in mountain terrain."
@@ -1656,9 +1765,19 @@ msgstr ""
 "kiképzőtábor) fogyasztják. Két forrása van: a disznók húsa a sertéstelepről, "
 "illetve a vadászok által elejtett vadak húsa."
 
+#: ../../tribes/empire/mill/conf:25
+msgid "grinding wheat"
+msgstr ""
+
 #: ../../tribes/empire/miller/conf:1
 msgid "Mills the wheat to produce flour."
 msgstr "Lisztté őrli a búzát."
+
+#: ../../tribes/empire/oremine/conf:42
+msgid ""
+"This iron mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr ""
 
 #: ../../tribes/empire/outpost/conf:7
 msgid "Your soldiers have occupied your outpost."
@@ -1676,6 +1795,10 @@ msgstr ""
 msgid "Breeds pigs."
 msgstr "Sertéseket tenyészt."
 
+#: ../../tribes/empire/piggery/conf:26
+msgid "raising pigs"
+msgstr ""
+
 #: ../../tribes/empire/plate_armor/conf:1
 msgid ""
 "The plate armor is the strongest armor an Empire soldier can have. It is "
@@ -1685,6 +1808,24 @@ msgstr ""
 "A lemezpáncél a Birodalom katonaságában a létező legerősebb vértezet. A "
 "páncélkovácsműhelyben készül, és a kiképzőhelyeken – élelemmel együtt – a "
 "katonák életerejét fejlesztik vele 3.-ról 4. szintre."
+
+#: ../../tribes/empire/quarry/conf:21
+msgid "quarrying stone"
+msgstr ""
+
+#: ../../tribes/empire/quarry/conf:23
+msgid "quarrying marble"
+msgstr ""
+
+#: ../../tribes/empire/quarry/conf:46
+msgid "Out of Rocks"
+msgstr ""
+
+#: ../../tribes/empire/quarry/conf:47
+msgid ""
+"The stonemason working at this quarry can’t find any rocks in his working "
+"radius."
+msgstr ""
 
 #: ../../tribes/empire/quarry/help.lua:17
 msgid "Carves marble and stone out of rocks in the vicinity."
@@ -1716,19 +1857,19 @@ msgstr ""
 "A felderítők, mint Feri, a felderítő, felderítenek felderítetlen területet "
 "felderítőruhában."
 
-#: ../../tribes/empire/scripting/sc00_headquarters_medium.lua:10
-msgid "Headquarters medium"
-msgstr "Közepes főhadiszállás"
+#: ../../tribes/empire/scouts_house/conf:21
+msgid "scouting"
+msgstr ""
 
-#: ../../tribes/empire/scripting/sc01_castle_village.lua:10
-msgid "Castle village"
-msgstr "Vár körüli falu"
+#: ../../tribes/empire/scripting/sc01_fortified_village.lua:10
+msgid "Fortified Village"
+msgstr ""
 
-#: ../../tribes/empire/scripting/sc01_castle_village.lua:119
+#: ../../tribes/empire/scripting/sc01_fortified_village.lua:119
 msgid "Not enough space"
 msgstr "Nincs elég hely"
 
-#: ../../tribes/empire/scripting/sc01_castle_village.lua:120
+#: ../../tribes/empire/scripting/sc01_fortified_village.lua:120
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
@@ -1747,6 +1888,10 @@ msgstr "A kasza a földművesek eszköze. A szerszámkovács készíti."
 msgid "Your soldiers have occupied your sentry."
 msgstr ""
 
+#: ../../tribes/empire/sheepfarm/conf:25
+msgid "breeding sheep"
+msgstr ""
+
 #: ../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheep."
 msgstr "Birkákat tart."
@@ -1759,9 +1904,9 @@ msgstr "Hajózásra alkalmas hajó"
 msgid "Works at the shipyard and constructs new ships."
 msgstr "A hajógyárban dolgozik, új hajókat épít."
 
-#: ../../tribes/empire/shipyard/conf:27
-msgid "Constructing ship"
-msgstr "Építőhajó"
+#: ../../tribes/empire/shipyard/conf:28
+msgid "constructing a ship"
+msgstr ""
 
 #: ../../tribes/empire/shovel/conf:1
 msgid ""
@@ -1775,13 +1920,13 @@ msgstr ""
 msgid "Smelts iron."
 msgstr "Vasat olvaszt"
 
-#: ../../tribes/empire/smelting_works/conf:26
-msgid "Smelt iron"
-msgstr "a vaskohászat"
-
 #: ../../tribes/empire/smelting_works/conf:27
-msgid "Smelt gold"
-msgstr "az aranykohászat"
+msgid "smelting iron"
+msgstr ""
+
+#: ../../tribes/empire/smelting_works/conf:29
+msgid "smelting gold"
+msgstr ""
 
 #: ../../tribes/empire/smelting_works/help.lua:17
 msgid "Smelts iron ore into iron and gold ore into gold."
@@ -1807,53 +1952,53 @@ msgstr "Nyers gránit- és márványdarabokat vág ki a kövekből."
 msgid "Produces tools for the workers."
 msgstr "Szerszámokat készít a munkásoknak."
 
-#: ../../tribes/empire/toolsmithy/conf:37
-msgid "Produce bread paddle"
-msgstr "a sütőlapát-készítés"
-
 #: ../../tribes/empire/toolsmithy/conf:38
-msgid "Produce fire tongs"
-msgstr "a tűzifogó-készítés"
-
-#: ../../tribes/empire/toolsmithy/conf:39
-msgid "Produce fishing rod"
-msgstr "a horgászbotkészítés"
+msgid "making an ax"
+msgstr ""
 
 #: ../../tribes/empire/toolsmithy/conf:40
-msgid "Produce hammer"
-msgstr "a kalapácskészítés"
-
-#: ../../tribes/empire/toolsmithy/conf:41
-msgid "Produce kitchen tools"
-msgstr "a konyhai eszközök készítése"
+msgid "making a basket"
+msgstr ""
 
 #: ../../tribes/empire/toolsmithy/conf:42
-msgid "Produce pick"
-msgstr "a csákánykészítés"
-
-#: ../../tribes/empire/toolsmithy/conf:43
-msgid "Produce scythe"
-msgstr "a kaszakészítés"
+msgid "making a bread paddle"
+msgstr ""
 
 #: ../../tribes/empire/toolsmithy/conf:44
-msgid "Produce shovel"
-msgstr "a lapátkészítés"
-
-#: ../../tribes/empire/toolsmithy/conf:45
-msgid "Produce hunting spear"
-msgstr "a vadászlándzsa-készítés"
+msgid "making fire tongs"
+msgstr ""
 
 #: ../../tribes/empire/toolsmithy/conf:46
-msgid "Produce basket"
-msgstr "a puttonykészítés"
-
-#: ../../tribes/empire/toolsmithy/conf:47
-msgid "Produce saw"
-msgstr "a fűrészkészítés"
+msgid "making a fishing rod"
+msgstr ""
 
 #: ../../tribes/empire/toolsmithy/conf:48
-msgid "Produce ax"
-msgstr "a fejszekészítés"
+msgid "making a hammer"
+msgstr ""
+
+#: ../../tribes/empire/toolsmithy/conf:50
+msgid "making a hunting spear"
+msgstr ""
+
+#: ../../tribes/empire/toolsmithy/conf:52
+msgid "making kitchen tools"
+msgstr ""
+
+#: ../../tribes/empire/toolsmithy/conf:54
+msgid "making a pick"
+msgstr ""
+
+#: ../../tribes/empire/toolsmithy/conf:56
+msgid "making a saw"
+msgstr ""
+
+#: ../../tribes/empire/toolsmithy/conf:58
+msgid "making a scythe"
+msgstr ""
+
+#: ../../tribes/empire/toolsmithy/conf:60
+msgid "making a shovel"
+msgstr ""
 
 #: ../../tribes/empire/tower/conf:7
 msgid "Your soldiers have occupied your tower."
@@ -1863,47 +2008,47 @@ msgstr ""
 msgid "Trains the soldiers."
 msgstr "Katonákat képez."
 
-#: ../../tribes/empire/trainingcamp/conf:47
-msgid "Upgrade soldier attack from level 0 to level 1"
-msgstr "Katona támadásának fejlesztése 0.-ról 1. szintre"
-
-#: ../../tribes/empire/trainingcamp/conf:48
-msgid "Upgrade soldier attack from level 1 to level 2"
-msgstr "Katona támadásának fejlesztése 1.-ről 2. szintre"
-
 #: ../../tribes/empire/trainingcamp/conf:49
-msgid "Upgrade soldier attack from level 2 to level 3"
-msgstr "Katona támadásának fejlesztése 2.-ról 3. szintre"
-
-#: ../../tribes/empire/trainingcamp/conf:50
-msgid "Upgrade soldier attack from level 3 to level 4"
-msgstr "Katona támadásának fejlesztése 3.-ról 4. szintre"
+msgid "upgrading soldier attack from level 0 to level 1"
+msgstr ""
 
 #: ../../tribes/empire/trainingcamp/conf:51
-msgid "Upgrade soldier health from level 0 to level 1"
-msgstr "Katona életerejének fejlesztése 0.-ról 1. szintre"
-
-#: ../../tribes/empire/trainingcamp/conf:52
-msgid "Upgrade soldier health from level 1 to level 2"
-msgstr "Katona életerejének fejlesztése 1.-ről 2. szintre"
+msgid "upgrading soldier attack from level 1 to level 2"
+msgstr ""
 
 #: ../../tribes/empire/trainingcamp/conf:53
-msgid "Upgrade soldier health from level 2 to level 3"
-msgstr "Katona életerejének fejlesztése 2.-ról 3. szintre"
+msgid "upgrading soldier attack from level 2 to level 3"
+msgstr ""
 
-#: ../../tribes/empire/trainingcamp/conf:54
-msgid "Upgrade soldier health from level 3 to level 4"
-msgstr "Katona életerejének fejlesztése 3.-ról 4. szintre"
+#: ../../tribes/empire/trainingcamp/conf:55
+msgid "upgrading soldier attack from level 3 to level 4"
+msgstr ""
+
+#: ../../tribes/empire/trainingcamp/conf:57
+msgid "upgrading soldier health from level 0 to level 1"
+msgstr ""
+
+#: ../../tribes/empire/trainingcamp/conf:59
+msgid "upgrading soldier health from level 1 to level 2"
+msgstr ""
+
+#: ../../tribes/empire/trainingcamp/conf:61
+msgid "upgrading soldier health from level 2 to level 3"
+msgstr ""
+
+#: ../../tribes/empire/trainingcamp/conf:63
+msgid "upgrading soldier health from level 3 to level 4"
+msgstr ""
 
 #: ../../tribes/empire/trainingcamp/help.lua:19
 msgid "Trains soldiers in ‘Attack’ and in ‘Health’."
 msgstr ""
 
-#: ../../tribes/empire/trainingcamp/help.lua:27
+#: ../../tribes/empire/trainingcamp/help.lua:29
 msgid "Attack Training:"
 msgstr ""
 
-#: ../../tribes/empire/trainingcamp/help.lua:32
+#: ../../tribes/empire/trainingcamp/help.lua:34
 msgid "Health Training:"
 msgstr ""
 
@@ -1911,13 +2056,18 @@ msgstr ""
 msgid "Grows vine."
 msgstr "Szőlőt termel."
 
-#: ../../tribes/empire/vineyard/conf:24
-msgid "Plant vine"
-msgstr "a szőlőültetés"
-
 #: ../../tribes/empire/vineyard/conf:25
-msgid "Harvest vine"
-msgstr "a szőlőszüretelés"
+msgid "planting grapevines"
+msgstr ""
+
+#: ../../tribes/empire/vineyard/conf:27
+msgid "harvesting grapes"
+msgstr ""
+
+#: ../../tribes/empire/vineyard/conf:46
+msgid ""
+"The farmer working at this vineyard has no cleared soil to plant his seeds."
+msgstr ""
 
 #: ../../tribes/empire/war_lance/conf:1
 msgid ""
@@ -1946,32 +2096,45 @@ msgstr ""
 msgid "Produces weapons for the soldiers."
 msgstr "Fegyvereket készít a katonáknak."
 
-#: ../../tribes/empire/weaponsmithy/conf:33
-msgid "Produce wood lance"
-msgstr "a falándzsakészítés"
-
 #: ../../tribes/empire/weaponsmithy/conf:34
-msgid "Produce lance"
-msgstr "a lándzsakészítés"
-
-#: ../../tribes/empire/weaponsmithy/conf:35
-msgid "Produce advanced lance"
-msgstr "a továbbfejlesztett lándzsa készítése"
+msgid "forging a wood lance"
+msgstr ""
 
 #: ../../tribes/empire/weaponsmithy/conf:36
-msgid "Produce heavy lance"
-msgstr "a nehézlándzsa-készítés"
+msgid "forging a lance"
+msgstr ""
 
-#: ../../tribes/empire/weaponsmithy/conf:37
-msgid "Produce war lance"
-msgstr "a harcilándzsa-készítés"
+#: ../../tribes/empire/weaponsmithy/conf:38
+msgid "forging an advanced lance"
+msgstr ""
+
+#: ../../tribes/empire/weaponsmithy/conf:40
+msgid "forging a heavy lance"
+msgstr ""
+
+#: ../../tribes/empire/weaponsmithy/conf:42
+msgid "forging a war lance"
+msgstr ""
 
 #: ../../tribes/empire/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."
 msgstr "Szövetet készít a hajóvitorlákhoz és a katonáknak."
 
+#: ../../tribes/empire/weaving-mill/conf:21
+msgid "weaving"
+msgstr ""
+
 #: ../../tribes/empire/weaving-mill/help.lua:17
 msgid "Weaves cloth out of wool."
+msgstr ""
+
+#: ../../tribes/empire/well/conf:31
+msgid "Out of Water"
+msgstr ""
+
+#: ../../tribes/empire/well/conf:32
+msgid ""
+"The carrier working at this well can’t find any water in his working radius."
 msgstr ""
 
 #: ../../tribes/empire/well/help.lua:18

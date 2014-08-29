@@ -12,15 +12,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-07-16 06:11+0000\n"
-"PO-Revision-Date: 2014-04-16 03:32+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"POT-Creation-Date: 2014-08-05 09:15+0000\n"
+"PO-Revision-Date: 2014-08-09 23:19+0000\n"
+"Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-17 05:42+0000\n"
-"X-Generator: Launchpad (build 17114)\n"
+"X-Launchpad-Export-Date: 2014-08-10 05:32+0000\n"
+"X-Generator: Launchpad (build 17156)\n"
 "Language: sk\n"
 
 #: ../../txts/README.lua:7
@@ -405,7 +405,7 @@ msgstr "Zvuk"
 
 #: ../../txts/developers:33
 msgid "Tongues"
-msgstr ""
+msgstr "Jazyky"
 
 #: ../../txts/developers:38
 msgid "Coders"
@@ -618,11 +618,11 @@ msgstr "I: aktivuje informačný nástroj"
 
 #: ../../txts/editor_readme:37
 msgid "CTRL+L: load map"
-msgstr ""
+msgstr "CTRL+L: načítať mapu"
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+S: save map"
-msgstr ""
+msgstr "CTRL+S: uložiť mapu"
 
 #: ../../txts/editor_readme:41
 msgid "1-0: changes tool size"
