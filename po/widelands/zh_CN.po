@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-05 10:15+0100\n"
-"PO-Revision-Date: 2014-06-18 02:41+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2014-08-28 08:35+0000\n"
+"Last-Translator: XIA <xiazhongyang@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-08-06 05:53+0000\n"
-"X-Generator: Launchpad (build 17147)\n"
+"X-Launchpad-Export-Date: 2014-08-29 05:58+0000\n"
+"X-Generator: Launchpad (build 17176)\n"
 
 #: ../../src/ai/computer_player.cc:39
 msgid "None"
@@ -72,13 +72,13 @@ msgstr "工具"
 #: ../../src/editor/editorinteractive.cc:92
 #: ../../src/editor/ui_menus/editor_toolsize_menu.cc:41
 msgid "Tool Size"
-msgstr ""
+msgstr "工具大小"
 
 #: ../../src/editor/editorinteractive.cc:95
 #: ../../src/wui/interactive_player.cc:118
 #: ../../src/wui/interactive_spectator.cc:61
 msgid "Minimap"
-msgstr ""
+msgstr "小地图"
 
 #: ../../src/editor/editorinteractive.cc:98
 #: ../../src/wui/interactive_player.cc:121
@@ -100,31 +100,31 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:190 ../../src/wlapplication.cc:439
 msgid "Unsupported format"
-msgstr ""
+msgstr "不支持的格式"
 
 #: ../../src/editor/editorinteractive.cc:191 ../../src/wlapplication.cc:440
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
-msgstr ""
+msgstr "Widelands 不能读取文件 “%s\"。文件格式似乎不兼容。"
 
 #: ../../src/editor/editorinteractive.cc:206
 msgid "Creating players"
-msgstr ""
+msgstr "正在创建玩家"
 
 #: ../../src/editor/editorinteractive.cc:212
 #: ../../src/editor/editorinteractive.cc:600
 msgid "Loading graphics..."
-msgstr ""
+msgstr "读取图形中"
 
 #: ../../src/editor/editorinteractive.cc:258
 msgid "Unsaved Map"
-msgstr ""
+msgstr "未保存的地图"
 
 #: ../../src/editor/editorinteractive.cc:259
 msgid "The map has not been saved, do you really want to quit?"
-msgstr ""
+msgstr "这个地图没有保存，您确定真的要退出吗？"
 
 #: ../../src/editor/editorinteractive.cc:595
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:154
@@ -154,22 +154,22 @@ msgstr ""
 #: ../../src/editor/tools/editor_info_tool.cc:53
 #, c-format
 msgid "Coordinates: (%1$i, %2$i)"
-msgstr ""
+msgstr "坐标：(%1$i, %2$i)"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:60
 msgid " small"
-msgstr ""
+msgstr " 小"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:62
 msgid " medium"
-msgstr ""
+msgstr " 中"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:64
 msgid " big"
-msgstr ""
+msgstr " 大"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:68
@@ -204,42 +204,42 @@ msgstr ""
 #: ../../src/editor/tools/editor_info_tool.cc:83
 #, c-format
 msgid "Owned by: %u"
-msgstr ""
+msgstr "拥有者：%u"
 
 #: ../../src/editor/tools/editor_info_tool.cc:86
 msgid "Owned by: —"
-msgstr ""
+msgstr "拥有者： —"
 
 #: ../../src/editor/tools/editor_info_tool.cc:89
 msgid "Has base immovable"
-msgstr ""
+msgstr "拥有固定的基地"
 
 #: ../../src/editor/tools/editor_info_tool.cc:89
 msgid "No base immovable"
-msgstr ""
+msgstr "没有固定的基地"
 
 #: ../../src/editor/tools/editor_info_tool.cc:92
 msgid "Has animals"
-msgstr ""
+msgstr "拥有动物"
 
 #: ../../src/editor/tools/editor_info_tool.cc:92
 msgid "No animals"
-msgstr ""
+msgstr "没有动物"
 
 #: ../../src/editor/tools/editor_info_tool.cc:96
 msgid "Terrain:"
-msgstr ""
+msgstr "地域："
 
 #: ../../src/editor/tools/editor_info_tool.cc:102
 #: ../../src/editor/tools/editor_info_tool.cc:123
 #, c-format
 msgid "Name: %s"
-msgstr ""
+msgstr "名称：%s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:103
 #, c-format
 msgid "Texture Number: %i"
-msgstr ""
+msgstr "材质序号：%i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:106
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:260
@@ -249,39 +249,39 @@ msgstr "资源："
 #: ../../src/editor/tools/editor_info_tool.cc:113
 #, c-format
 msgid "Resource name: %s"
-msgstr ""
+msgstr "资源名称：%s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:115
 #, c-format
 msgid "Resource amount: %i"
-msgstr ""
+msgstr "资源数量：%i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:118
 msgid "No resources"
-msgstr ""
+msgstr "没有资源"
 
 #: ../../src/editor/tools/editor_info_tool.cc:122
 msgid "Map:"
-msgstr ""
+msgstr "地图:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:124
 #, c-format
 msgid "Size: %1$ix%2$i"
-msgstr ""
+msgstr "大小：%1$ix%2$i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:129
 #, c-format
 msgid "Players: %d"
-msgstr ""
+msgstr "玩家：%d"
 
 #: ../../src/editor/tools/editor_info_tool.cc:132
 msgid "Players: -"
-msgstr ""
+msgstr "玩家：-"
 
 #: ../../src/editor/tools/editor_info_tool.cc:135
 #, c-format
 msgid "Author: %s"
-msgstr ""
+msgstr "作者：%s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:136
 #, c-format
@@ -295,43 +295,43 @@ msgstr "当前："
 #: ../../src/editor/ui_menus/editor_main_menu.cc:51
 #: ../../src/wui/game_main_menu.cc:39
 msgid "Main Menu"
-msgstr ""
+msgstr "主菜单"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:56
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:46
 #: ../../src/ui_fsmenu/editor.cc:43
 msgid "New Map"
-msgstr ""
+msgstr "新地图"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:61
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:51
 msgid "New Random Map"
-msgstr ""
+msgstr "新随机地图"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:66
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:52
 #: ../../src/ui_fsmenu/editor.cc:48
 msgid "Load Map"
-msgstr ""
+msgstr "加载地图"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:71
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:54
 msgid "Save Map"
-msgstr ""
+msgstr "保存地图"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:76
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:48
 msgid "Map Options"
-msgstr ""
+msgstr "地图选项"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:81
 #: ../../src/ui_fsmenu/main.cc:70
 msgid "View Readme"
-msgstr ""
+msgstr "查看说明文档"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:86
 msgid "Exit Editor"
-msgstr ""
+msgstr "退出编辑器"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:70
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:81
@@ -339,7 +339,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/editor_mapselect.cc:57
 #: ../../src/ui_fsmenu/mapselect.cc:66
 msgid "Name:"
-msgstr ""
+msgstr "名称："
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:77
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:75
@@ -348,7 +348,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/editor_mapselect.cc:62
 #: ../../src/ui_fsmenu/mapselect.cc:72
 msgid "Author:"
-msgstr ""
+msgstr "作者："
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:84
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:66
@@ -364,7 +364,7 @@ msgstr "尺寸："
 #: ../../src/ui_fsmenu/loadgame.cc:101 ../../src/ui_fsmenu/loadreplay.cc:86
 #: ../../src/ui_fsmenu/mapselect.cc:84
 msgid "Players:"
-msgstr ""
+msgstr "玩家："
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:99
 #: ../../src/ui_fsmenu/editor_mapselect.cc:77
@@ -384,7 +384,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/mapselect.cc:106
 #: ../../src/wui/game_main_menu_save_game.cc:94
 msgid "OK"
-msgstr ""
+msgstr "确认"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:123
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:132
@@ -393,7 +393,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/options.cc:422
 #: ../../src/wui/game_main_menu_save_game.cc:104 ../../src/wui/login_box.cc:70
 msgid "Cancel"
-msgstr ""
+msgstr "撤销"
 
 #. * TRANSLATORS: Parent directory
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:208
@@ -401,13 +401,13 @@ msgstr ""
 #: ../../src/ui_fsmenu/editor_mapselect.cc:215
 #: ../../src/ui_fsmenu/mapselect.cc:332
 msgid "parent"
-msgstr ""
+msgstr "上级"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:57
 #: ../../src/ui_fsmenu/loadgame.cc:91 ../../src/ui_fsmenu/loadreplay.cc:76
 #: ../../src/wui/game_main_menu_save_game.cc:67
 msgid "Map Name:"
-msgstr ""
+msgstr "地图名称："
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:71
 msgid "Nr Players:"
@@ -421,7 +421,7 @@ msgstr ""
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the top-"
 "left corner of a generated minimap."
-msgstr ""
+msgstr "已设置坐标为(0,0)的位置。这会在生成地图的左上角。"
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:63
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:134
@@ -441,27 +441,27 @@ msgstr "高度: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:109
 msgid "Create Map"
-msgstr ""
+msgstr "生成地图"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:55
 msgid "Summer"
-msgstr ""
+msgstr "夏"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:56
 msgid "Winter"
-msgstr ""
+msgstr "冬"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:57
 msgid "Desert"
-msgstr ""
+msgstr "沙漠"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:58
 msgid "Black"
-msgstr ""
+msgstr "黑色"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:76
 msgid "Random Number:"
-msgstr ""
+msgstr "随机数："
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:175
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:435
@@ -473,13 +473,13 @@ msgstr "水: %u %%"
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:438
 #, c-format
 msgid "Land: %u %%"
-msgstr ""
+msgstr "陆地：%u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:227
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:441
 #, c-format
 msgid "Wasteland: %u %%"
-msgstr ""
+msgstr "荒地：%u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:237
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:444
@@ -489,16 +489,16 @@ msgstr "山: %u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:253
 msgid "Island mode:"
-msgstr ""
+msgstr "岛屿模式"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:263
 msgid "Low"
-msgstr ""
+msgstr "低"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:264
 #: ../../src/logic/building.cc:531
 msgid "Medium"
-msgstr ""
+msgstr "中"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:265
 msgid "High"
@@ -506,21 +506,21 @@ msgstr "高"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:291
 msgid "Map ID:"
-msgstr ""
+msgstr "地图ID"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:325
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:447
 #, c-format
 msgid "Players: %u"
-msgstr "运动员: %u"
+msgstr "玩家：%u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:338
 msgid "Generate Map"
-msgstr ""
+msgstr "生成地图"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:481
 msgid "Generating random map..."
-msgstr ""
+msgstr "生成随机地图"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:109
 msgid "Descr: "
@@ -529,30 +529,30 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:139
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:32
 msgid "Make Directory"
-msgstr ""
+msgstr "建立目录"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:199
 msgid "unnamed"
-msgstr ""
+msgstr "未命名"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:246
 msgid "directory"
-msgstr ""
+msgstr "目录"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:250
 msgid "Not a map file"
-msgstr ""
+msgstr "不是一个地图文件"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:378
 #: ../../src/wui/game_main_menu_save_game.cc:267
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
-msgstr ""
+msgstr "文件‘%s’已经存在了，要覆盖吗？"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:381
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:401
 msgid "Error Saving Map!"
-msgstr ""
+msgstr "保存地图错误！"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:397
 msgid ""
@@ -561,90 +561,94 @@ msgid ""
 "\n"
 "Reason given:\n"
 msgstr ""
+"保存地图错误！\n"
+"已保存的地图文件可能损坏！\n"
+"\n"
+"原因：\n"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:38
 msgid "Enter Directory Name: "
-msgstr ""
+msgstr "进入目录名： "
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:45
 msgid "Player Options"
-msgstr ""
+msgstr "玩家选项"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:51
 msgid "Add player"
-msgstr ""
+msgstr "增加玩家"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:58
 msgid "Remove last player"
-msgstr ""
+msgstr "移除最近的玩家"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:73
 msgid "Number of Players"
-msgstr ""
+msgstr "玩家数量"
 
 #. * TRANSLATORS: Default player name, e.g. Player 1
 #: ../../src/editor/ui_menus/editor_player_menu.cc:211
 #: ../../src/network/nethost.cc:2080
 #, c-format
 msgid "Player %s"
-msgstr ""
+msgstr "玩家 %s"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:327
 msgid "Error!"
-msgstr ""
+msgstr "错误！"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:329
 msgid ""
 "Cannot remove player. It is referenced someplace. Remove all buildings and "
 "animals that depend on this player and try again."
-msgstr ""
+msgstr "无法移除玩家。它被某些地方所依赖。移除所有依赖它的建筑物和动物后再试一次。"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:57
 msgid "Allowed Buildings"
-msgstr ""
+msgstr "允许的建筑物"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:62
 msgid "Allowed Buildings:"
-msgstr ""
+msgstr "允许的建筑物："
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:68
 msgid "Forbidden Buildings:"
-msgstr ""
+msgstr "禁止的建筑物："
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:85
 msgid "Forbid"
-msgstr ""
+msgstr "禁止"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:94
 msgid "Allow"
-msgstr ""
+msgstr "允许"
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:40
 msgid "Height Tools Options"
-msgstr ""
+msgstr "高度工具选项"
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:45
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:50
 msgid "Increase/Decrease Value"
-msgstr ""
+msgstr "增加/减少值"
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:81
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:81
 msgid "Set Value"
-msgstr ""
+msgstr "设定值"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:46
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:70
 msgid "Resources"
-msgstr ""
+msgstr "资源文件"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:100
 msgid "Current Selection"
-msgstr ""
+msgstr "当前的选择范围"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:65
 msgid "Change height"
-msgstr ""
+msgstr "改变高度"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:66
 msgid "Noise height"
@@ -653,20 +657,20 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:67
 #: ../../src/wui/minimap.cc:150
 msgid "Terrain"
-msgstr ""
+msgstr "地形"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
 msgid "Immovables"
-msgstr ""
+msgstr "固定的"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:69
 #: ../../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:45
 msgid "Animals"
-msgstr ""
+msgstr "动物"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:71
 msgid "Set port space"
-msgstr ""
+msgstr "设置港口空间"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:43
 msgid "Noise Height Options"
@@ -675,17 +679,17 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:146
 #, c-format
 msgid "Minimum: %u"
-msgstr ""
+msgstr "最小值：%u"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:148
 #, c-format
 msgid "Maximum: %u"
-msgstr ""
+msgstr "最大值：%u"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:153
 #, c-format
 msgid "Set value: %u"
-msgstr ""
+msgstr "设定值：%u"
 
 #: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:58
 msgid "Immovable Select"
@@ -693,21 +697,21 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:119
 msgid "Terrain Select"
-msgstr ""
+msgstr "选择地形"
 
 #: ../../src/editor/ui_menus/editor_toolsize_menu.cc:75
 #, c-format
 msgid "Current Size: %u"
-msgstr ""
+msgstr "目前大小：%u"
 
 #: ../../src/io/dedicated_log.cc:66 ../../src/network/internet_gaming.cc:847
 #: ../../src/ui_fsmenu/mapselect.cc:484
 msgid "unknown"
-msgstr ""
+msgstr "未知的"
 
 #: ../../src/logic/building.cc:524
 msgid "mine"
-msgstr ""
+msgstr "矿"
 
 #: ../../src/logic/building.cc:525
 msgid "small"
@@ -715,7 +719,7 @@ msgstr "小"
 
 #: ../../src/logic/building.cc:526
 msgid "big"
-msgstr ""
+msgstr "大"
 
 #: ../../src/logic/building.cc:526
 msgid "medium"
@@ -723,7 +727,7 @@ msgstr "中"
 
 #: ../../src/logic/building.cc:529
 msgid "Mine"
-msgstr ""
+msgstr "矿"
 
 #: ../../src/logic/building.cc:530
 msgid "Small"
@@ -736,7 +740,7 @@ msgstr "大"
 #: ../../src/logic/constructionsite.cc:88 ../../src/logic/immovable.cc:570
 #, c-format
 msgid "%i%% built"
-msgstr ""
+msgstr "%i%% 已建造"
 
 #: ../../src/logic/dismantlesite.cc:99
 #, c-format
@@ -745,24 +749,24 @@ msgstr ""
 
 #: ../../src/logic/editor_game_base.cc:276
 msgid "Loading world data"
-msgstr ""
+msgstr "正在加载世界数据"
 
 #: ../../src/logic/editor_game_base.cc:279
 msgid "Loading tribes"
-msgstr ""
+msgstr "正在加载部落"
 
 #: ../../src/logic/game.cc:142
 msgid "Not set"
-msgstr ""
+msgstr "未设定"
 
 #: ../../src/logic/game.cc:228
 msgid "Preloading a map"
-msgstr ""
+msgstr "预加载地图"
 
 #: ../../src/logic/game.cc:238
 #, c-format
 msgid "Adding player %u"
-msgstr ""
+msgstr "正在添加玩家 %u"
 
 #: ../../src/logic/game.cc:246 ../../src/logic/game.cc:338
 #: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/ui_fsmenu/launch_spg.cc:241
@@ -772,20 +776,20 @@ msgstr "方案"
 
 #: ../../src/logic/game.cc:252
 msgid "Loading a map"
-msgstr ""
+msgstr "正在加载地图"
 
 #: ../../src/logic/game.cc:279 ../../src/logic/game.cc:356
 #: ../../src/logic/game.cc:385
 msgid "Preloading map"
-msgstr ""
+msgstr "预加载地图"
 
 #: ../../src/logic/game.cc:293
 msgid "Configuring players"
-msgstr ""
+msgstr "配置玩家"
 
 #: ../../src/logic/game.cc:327
 msgid "Loading map"
-msgstr ""
+msgstr "正在读取地图"
 
 #: ../../src/logic/game.cc:369 ../../src/logic/game.cc:402
 #: ../../src/wlapplication.cc:1672
@@ -798,7 +802,7 @@ msgstr ""
 
 #: ../../src/logic/game.cc:483 ../../src/logic/player.cc:228
 msgid "Missing starting position"
-msgstr ""
+msgstr "开始位置丢失"
 
 #: ../../src/logic/game.cc:485
 #, c-format
@@ -808,6 +812,8 @@ msgid ""
 "You can manually add a starting position with the Widelands Editor to fix "
 "this problem."
 msgstr ""
+"Widelands不能开始游戏，因为玩家%u没有开始位置。\n"
+"你可以用Widelands编辑器手动添加一个开始位置来解决这个问题。"
 
 #: ../../src/logic/map.cc:333
 msgid "Player 1"
@@ -822,15 +828,13 @@ msgstr ""
 #: ../../src/logic/militarysite.cc:125
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "士兵数量：%1%（最多%2%）"
 
 #: ../../src/logic/militarysite.cc:130
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "士兵数量：%u"
 
 #: ../../src/logic/militarysite.cc:139
 msgid "%1%(+%2%) soldier (+%3%)"
@@ -852,11 +856,11 @@ msgstr ""
 
 #: ../../src/logic/militarysite.cc:903
 msgid "Enemy at site defeated!"
-msgstr ""
+msgstr "阵地的敌军已击败！"
 
 #: ../../src/logic/militarysite.cc:953
 msgid "You are under attack"
-msgstr ""
+msgstr "你正在被攻击"
 
 #: ../../src/logic/objective.h:36
 msgid "no descr"
@@ -870,6 +874,8 @@ msgid ""
 "You can manually add a starting position with Widelands Editor, to fix this "
 "problem."
 msgstr ""
+"Widelands不能开启游戏，因为玩家%u没有开始位置。\n"
+"你可以手动使用Widelands编辑器来添加一个开始位置来解决这个问题。"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the ware ‘%s’
 #: ../../src/logic/production_program.cc:271
