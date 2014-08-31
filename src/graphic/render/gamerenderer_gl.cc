@@ -46,6 +46,18 @@ namespace  {
 
 constexpr int kAttribVertexPosition = 0;
 constexpr int kAttribVertexColor = 1;
+constexpr int kAttribVertexHeight = 2;
+
+struct TerrainProgramData {
+	float x;
+	float y;
+	float height;
+	float r;
+	float g;
+	float b;
+};
+
+static_assert(sizeof(TerrainProgramData) == 24, "Wrong padding.");
 
 // NOCOM(#sirver): should not load from a file
 GLuint load_shader(GLenum type, const std::string& source_file) {
@@ -199,9 +211,7 @@ uint8_t GameRendererGL::field_brightness(const FCoords & coords) const
 void GameRendererGL::initialize() {
 	// Setup Buffers;
 	handle_glerror();
-	glGenBuffers(1, &vertex_buffer_);
-	handle_glerror();
-	glGenBuffers(1, &color_buffer_);
+	glGenBuffers(1, &terrain_program_data_);
 	handle_glerror();
 	glGenBuffers(1, &indices_buffer_);
 	handle_glerror();
@@ -211,8 +221,8 @@ void GameRendererGL::initialize() {
 
 	handle_glerror();
 	glBindAttribLocation(terrain_program_, kAttribVertexPosition, "position");
-	handle_glerror();
-	// glBindAttribLocation(terrain_program_, kAttribVertexColor, "color");
+	glBindAttribLocation(terrain_program_, kAttribVertexColor, "color");
+	glBindAttribLocation(terrain_program_, kAttribVertexHeight, "height");
 	handle_glerror();
 
 	link_gl_program(terrain_program_);
@@ -220,37 +230,35 @@ void GameRendererGL::initialize() {
 	handle_glerror();
 
 	do_initialize_ = false;
-
 }
 
 void GameRendererGL::draw_terrain_triangles() {
 	const Map & map = m_egbase->map();
 	const World& world = m_egbase->world();
 
-	std::vector<float> vertices;
+	std::vector<TerrainProgramData> vertices;
 	std::vector<uint16_t> indices;
-	std::vector<float> color;
 
 	int current_index = 0;
-	const auto add_vertex = [this, &vertices, &indices, &color, &map, &current_index](
+	const auto add_vertex = [this, &vertices, &indices, &map, &current_index](
 	   int fx, int fy, const RGBColor& vertex_color) {
 		Coords coords(fx, fy);
 
+		TerrainProgramData v;
 		int x, y;
 		MapviewPixelFunctions::get_basepix(coords, x, y);
-		x += m_surface_offset.x;
-		y += m_surface_offset.y;
+		v.x = x + m_surface_offset.x;
+		v.y = y + m_surface_offset.y;
 
 		map.normalize_coords(coords);
 		const FCoords fcoords = map.get_fcoords(coords);
-		y -= fcoords.field->get_height() * HEIGHT_FACTOR;
-		vertices.push_back(x);
-		vertices.push_back(y);
+		v.height = fcoords.field->get_height();
+		v.r = vertex_color.r / 255.;
+		v.g = vertex_color.g / 255.;
+		v.b = vertex_color.b / 255.;
 
-		color.push_back(vertex_color.r / 255.);
-		color.push_back(vertex_color.g / 255.);
-		color.push_back(vertex_color.b / 255.);
 		indices.push_back(current_index++);
+		vertices.push_back(v);
 	};
 
 	for (int32_t fy = m_minfy; fy <= m_maxfy; ++fy) {
@@ -282,29 +290,39 @@ void GameRendererGL::draw_terrain_triangles() {
 	// Use the program object
 	glUseProgram(terrain_program_);
 
-	assert(vertices.size() == 2 * indices.size());
+	assert(vertices.size() == indices.size());
+
+	glBindBuffer(GL_ARRAY_BUFFER, terrain_program_data_);
+	handle_glerror();
+	glBufferData(
+		GL_ARRAY_BUFFER, sizeof(TerrainProgramData) * vertices.size(), vertices.data(), GL_STREAM_DRAW);
 
 	// Setup vertex position.
-	glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_);
-	handle_glerror();
-	glBufferData(
-		GL_ARRAY_BUFFER, sizeof(float) * vertices.size() * 2, vertices.data(), GL_STREAM_DRAW);
-	handle_glerror();
 	glEnableVertexAttribArray(kAttribVertexPosition);
-	handle_glerror();
-	glVertexAttribPointer(kAttribVertexPosition, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
-	handle_glerror();
+	glVertexAttribPointer(kAttribVertexPosition,
+	                      2,
+	                      GL_FLOAT,
+	                      GL_FALSE,
+	                      sizeof(TerrainProgramData),
+	                      reinterpret_cast<void*>(offsetof(TerrainProgramData, x)));
 
-	// Setup the pointer to the vertex data.
-	glBindBuffer(GL_ARRAY_BUFFER, color_buffer_);
-	handle_glerror();
-	glBufferData(
-		GL_ARRAY_BUFFER, sizeof(float) * color.size() * 3, color.data(), GL_STREAM_DRAW);
-	handle_glerror();
+	// Color.
 	glEnableVertexAttribArray(kAttribVertexColor);
-	handle_glerror();
-	glVertexAttribPointer(kAttribVertexColor, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), 0);
-	handle_glerror();
+	glVertexAttribPointer(kAttribVertexColor,
+	                      3,
+	                      GL_FLOAT,
+	                      GL_FALSE,
+	                      sizeof(TerrainProgramData),
+	                      reinterpret_cast<void*>(offsetof(TerrainProgramData, r)));
+
+	// Height.
+	glEnableVertexAttribArray(kAttribVertexHeight);
+	glVertexAttribPointer(kAttribVertexHeight,
+	                      1,
+	                      GL_FLOAT,
+	                      GL_FALSE,
+	                      sizeof(TerrainProgramData),
+	                      reinterpret_cast<void*>(offsetof(TerrainProgramData, height)));
 
 	// Which triangles to draw?
 	handle_glerror();
@@ -325,6 +343,7 @@ void GameRendererGL::draw_terrain_triangles() {
 
 void GameRendererGL::draw() {
 	if (do_initialize_) {
+		// NOCOM(#sirver): this is done for each gamerenderer. This is not really necessary.
 		initialize();
 	}
 
