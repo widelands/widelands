@@ -160,7 +160,6 @@ GLSurfaceTexture::GLSurfaceTexture(SDL_Surface * surface, bool intensity)
 	SDL_FreeSurface(surface);
 
 	glPopAttrib();
-	handle_glerror();
 }
 
 GLSurfaceTexture::~GLSurfaceTexture()
@@ -170,7 +169,6 @@ GLSurfaceTexture::~GLSurfaceTexture()
 
 void GLSurfaceTexture::init(uint16_t w, uint16_t h)
 {
-	handle_glerror();
 	m_w = w;
 	m_h = h;
 	if (m_w <= 0 || m_h <= 0) {
@@ -193,8 +191,6 @@ void GLSurfaceTexture::init(uint16_t w, uint16_t h)
 	// makes no difference
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	handle_glerror();
 }
 
 const SDL_PixelFormat & GLSurfaceTexture::format() const {

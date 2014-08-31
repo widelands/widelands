@@ -19,11 +19,14 @@
 
 #include "graphic/render/gamerenderer_gl.h"
 
+#include <memory>
+
 #include <SDL_image.h>
 
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
 #include "graphic/render/gl_surface.h"
+#include "graphic/render/gl_utils.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface_cache.h"
 #include "graphic/texture.h"
@@ -38,6 +41,88 @@
 #include "wui/overlay_manager.h"
 
 using namespace Widelands;
+
+namespace  {
+
+constexpr int kAttribVertexPosition = 0;
+constexpr int kAttribVertexColor = 1;
+
+// NOCOM(#sirver): should not load from a file
+GLuint load_shader(GLenum type, const std::string& source_file) {
+	std::string source;
+	{
+		FileRead fr;
+		fr.Open(*g_fs, source_file);
+		source = fr.CString();
+	}
+
+	const GLuint shader = glCreateShader(type);
+	if (!shader) {
+		throw wexception("Could not create shader from %s.", source_file.c_str());
+	}
+
+	const char* source_ptr = source.c_str();
+	glShaderSource(shader, 1, &source_ptr, nullptr);
+
+	glCompileShader(shader);
+	GLint compiled;
+	glGetShaderiv(shader, GL_COMPILE_STATUS, &compiled);
+	if (!compiled) {
+		GLint infoLen = 0;
+		glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &infoLen);
+
+		if (infoLen > 1) {
+			std::unique_ptr<char[]> infoLog(new char[infoLen]);
+			glGetShaderInfoLog(shader, infoLen, NULL, infoLog.get());
+			throw wexception("Error compiling shader %s:\n%s", source_file.c_str(), infoLog.get());
+		}
+		// NOCOM(#sirver): cleanup in any case.
+		// glDeleteShader(shader);
+		// exit(EXIT_FAILURE);
+		// return 0;
+	}
+
+	return shader;
+}
+
+GLuint compile_gl_program(const std::string& vertex_shader_file,
+                          const std::string& fragment_shader_file) {
+	const GLuint program_object = glCreateProgram();
+	if (!program_object) {
+		throw wexception("Could not create GL program.");
+	}
+
+	log("#sirver Compiling vertex_shader\n");
+	const GLuint vertex_shader = load_shader(GL_VERTEX_SHADER, vertex_shader_file);
+	glAttachShader(program_object, vertex_shader);
+
+	log("#sirver Compiling fragment_shader\n");
+	const GLuint fragment_shader = load_shader(GL_FRAGMENT_SHADER, fragment_shader_file);
+	glAttachShader(program_object, fragment_shader);
+	return program_object;
+}
+
+void link_gl_program(const GLuint program_object) {
+	glLinkProgram(program_object);
+
+	// Check the link status
+	GLint linked;
+	glGetProgramiv(program_object, GL_LINK_STATUS, &linked);
+	if (!linked) {
+		GLint infoLen = 0;
+		glGetProgramiv(program_object, GL_INFO_LOG_LENGTH, &infoLen);
+
+		if (infoLen > 1) {
+			std::unique_ptr<char[]> infoLog(new char[infoLen]);
+			glGetProgramInfoLog(program_object, infoLen, NULL, infoLog.get());
+			throw wexception("Error linking:\n%s", infoLog.get());
+		}
+		// NOCOM(#sirver): cleanup in any case.
+		// glDeleteProgram(program_object);
+		// return 0;
+	}
+}
+}  // namespace
 
 static const uint32_t PatchSize = 4;
 
@@ -111,9 +196,142 @@ uint8_t GameRendererGL::field_brightness(const FCoords & coords) const
 	return brightness;
 }
 
-void GameRendererGL::draw()
-{
-	const World & world = m_egbase->world();
+void GameRendererGL::initialize() {
+	// Setup Buffers;
+	handle_glerror();
+	glGenBuffers(1, &vertex_buffer_);
+	handle_glerror();
+	glGenBuffers(1, &color_buffer_);
+	handle_glerror();
+	glGenBuffers(1, &indices_buffer_);
+	handle_glerror();
+
+	terrain_program_ =
+	   compile_gl_program("src/graphic/render/terrain.vs", "src/graphic/render/terrain.fs");
+
+	handle_glerror();
+	glBindAttribLocation(terrain_program_, kAttribVertexPosition, "position");
+	handle_glerror();
+	// glBindAttribLocation(terrain_program_, kAttribVertexColor, "color");
+	handle_glerror();
+
+	link_gl_program(terrain_program_);
+
+	handle_glerror();
+
+	do_initialize_ = false;
+
+}
+
+void GameRendererGL::draw_terrain_triangles() {
+	const Map & map = m_egbase->map();
+	const World& world = m_egbase->world();
+
+	std::vector<float> vertices;
+	std::vector<uint16_t> indices;
+	std::vector<float> color;
+
+	int current_index = 0;
+	const auto add_vertex = [this, &vertices, &indices, &color, &map, &current_index](
+	   int fx, int fy, const RGBColor& vertex_color) {
+		Coords coords(fx, fy);
+
+		int x, y;
+		MapviewPixelFunctions::get_basepix(coords, x, y);
+		x += m_surface_offset.x;
+		y += m_surface_offset.y;
+
+		map.normalize_coords(coords);
+		const FCoords fcoords = map.get_fcoords(coords);
+		y -= fcoords.field->get_height() * HEIGHT_FACTOR;
+		vertices.push_back(x);
+		vertices.push_back(y);
+
+		color.push_back(vertex_color.r / 255.);
+		color.push_back(vertex_color.g / 255.);
+		color.push_back(vertex_color.b / 255.);
+		indices.push_back(current_index++);
+	};
+
+	for (int32_t fy = m_minfy; fy <= m_maxfy; ++fy) {
+		for (int32_t fx = m_minfx; fx <= m_maxfx; ++fx) {
+			Coords ncoords(fx, fy);
+			map.normalize_coords(ncoords);
+			const FCoords fcoords = map.get_fcoords(ncoords);
+
+			const int8_t brightness = fcoords.field->get_brightness();
+
+			// Right triangle.
+			const RGBColor color_r =
+			   g_gr->get_maptexture_data(world.terrain_descr(fcoords.field->terrain_r()).get_texture())
+			      ->get_minimap_color(brightness);
+			add_vertex(fx, fy, color_r);
+			add_vertex(fx + 1, fy, color_r); // right neighbor
+			add_vertex(fx + (fy & 1), fy + 1, color_r); // bottom right neighbor
+
+			// Bottom triangle.
+			const RGBColor color_d =
+			   g_gr->get_maptexture_data(world.terrain_descr(fcoords.field->terrain_d()).get_texture())
+			      ->get_minimap_color(brightness);
+			add_vertex(fx, fy, color_d);
+			add_vertex(fx + (fy & 1), fy + 1, color_d); // bottom right neighbor
+			add_vertex(fx + (fy & 1) - 1, fy + 1, color_d); // bottom left neighbor
+		}
+	}
+
+	// Use the program object
+	glUseProgram(terrain_program_);
+
+	assert(vertices.size() == 2 * indices.size());
+
+	// Setup vertex position.
+	glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_);
+	handle_glerror();
+	glBufferData(
+		GL_ARRAY_BUFFER, sizeof(float) * vertices.size() * 2, vertices.data(), GL_STREAM_DRAW);
+	handle_glerror();
+	glEnableVertexAttribArray(kAttribVertexPosition);
+	handle_glerror();
+	glVertexAttribPointer(kAttribVertexPosition, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
+	handle_glerror();
+
+	// Setup the pointer to the vertex data.
+	glBindBuffer(GL_ARRAY_BUFFER, color_buffer_);
+	handle_glerror();
+	glBufferData(
+		GL_ARRAY_BUFFER, sizeof(float) * color.size() * 3, color.data(), GL_STREAM_DRAW);
+	handle_glerror();
+	glEnableVertexAttribArray(kAttribVertexColor);
+	handle_glerror();
+	glVertexAttribPointer(kAttribVertexColor, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), 0);
+	handle_glerror();
+
+	// Which triangles to draw?
+	handle_glerror();
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indices_buffer_);
+	handle_glerror();
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER,
+					 sizeof(GL_UNSIGNED_SHORT) * indices.size(),
+					 indices.data(),
+					 GL_STREAM_DRAW);
+	handle_glerror();
+
+	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, 0 /* offset */);
+	handle_glerror();
+
+	// Release Program object.
+	glUseProgram(0);
+}
+
+void GameRendererGL::draw() {
+	if (do_initialize_) {
+		initialize();
+	}
+
+	// NOCOM(#sirver): Use this quantity to draw as many triangles as possible.
+	// glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &texture_units);
+
+	const World& world = m_egbase->world();
 	if (m_terrain_freq.size() < world.terrains().get_nitems()) {
 		m_terrain_freq.resize(world.terrains().get_nitems());
 		m_terrain_edge_freq.resize(world.terrains().get_nitems());
@@ -125,6 +343,13 @@ void GameRendererGL::draw()
 	m_rect = m_dst->get_rect();
 	m_surface_offset = m_dst_offset + m_rect.top_left() + m_dst->get_offset();
 
+	// NOCOM(#sirver): maiyb?
+	// glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	// Clear the color buffer
+	// glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//
+
+
 	m_patch_size.x = m_minfx - 1;
 	m_patch_size.y = m_minfy;
 	m_patch_size.w = ((m_maxfx - m_minfx + 2 + PatchSize) / PatchSize) * PatchSize;
@@ -135,15 +360,18 @@ void GameRendererGL::draw()
 		 m_rect.w, m_rect.h);
 	glEnable(GL_SCISSOR_TEST);
 
-	prepare_terrain_base();
-	draw_terrain_base();
-	if (g_gr->caps().gl.multitexture && g_gr->caps().gl.max_tex_combined >= 2) {
-		prepare_terrain_dither();
-		draw_terrain_dither();
-	}
-	prepare_roads();
-	draw_roads();
-	draw_objects();
+	draw_terrain_triangles();
+
+	// prepare_terrain_base();
+	// draw_terrain_base();
+
+	// if (g_gr->caps().gl.multitexture && g_gr->caps().gl.max_tex_combined >= 2) {
+		// prepare_terrain_dither();
+		// draw_terrain_dither();
+	// }
+	// prepare_roads();
+	// draw_roads();
+	// draw_objects();
 
 	glDisable(GL_SCISSOR_TEST);
 }

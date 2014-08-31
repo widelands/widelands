@@ -25,6 +25,7 @@
 
 #include "base/rect.h"
 #include "graphic/render/gamerenderer.h"
+#include "graphic/render/gl_utils.h"
 #include "logic/widelands.h"
 
 namespace Widelands {
@@ -45,6 +46,17 @@ public:
 	virtual ~GameRendererGL();
 
 private:
+	// NOCOM(#sirver): document
+	void initialize();
+	void draw_terrain_triangles();
+
+	bool do_initialize_ = true;
+	GLuint color_buffer_;
+	GLuint indices_buffer_;
+	GLuint vertex_buffer_;
+	GLuint terrain_program_;
+
+
 	struct basevertex {
 		float x;
 		float y;

@@ -100,6 +100,9 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 
 	if (opengl) {
 		log("Graphics: Trying opengl\n");
+
+		// NOCOM(#sirver): we should request a core context here.
+
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 		flags |= SDL_OPENGL;
 	}
@@ -151,6 +154,9 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 		//  about opengl and set the rendering capabilities.
 		log ("Graphics: OpenGL: OpenGL enabled\n");
 
+		// See http://stackoverflow.com/questions/13558073/program-crash-on-glgenvertexarrays-call for
+		// the next line.
+		glewExperimental = GL_TRUE;
 		GLenum err = glewInit();
 		if (err != GLEW_OK) {
 			log("glewInit returns %i\nYour OpenGL installation must be __very__ broken.\n", err);
