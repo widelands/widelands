@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-08-05 11:10+0000\n"
-"PO-Revision-Date: 2014-08-29 15:01+0000\n"
+"PO-Revision-Date: 2014-08-30 10:08+0000\n"
 "Last-Translator: wl-zocker <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-30 05:45+0000\n"
+"X-Launchpad-Export-Date: 2014-08-31 05:42+0000\n"
 "X-Generator: Launchpad (build 17176)\n"
 "X-Poedit-Country: GERMANY\n"
 "Language: de\n"
@@ -343,6 +343,9 @@ msgid ""
 "three buildings. It is an upgrade from the metal workshop but doesn’t "
 "require additional qualification for the worker."
 msgstr ""
+"Die Axtmanufaktur der Barbaren ist die mittlere Produktionsstätte in einer "
+"Reihe von drei Gebäuden. Sie ist die Erweiterung der Werkzeugschmiede, aber "
+"benötigt keine zusätzliche Qualifizierung der Arbeiter."
 
 #: ../../tribes/barbarians/axfactory/help.lua:30
 msgid ""
@@ -627,6 +630,8 @@ msgid ""
 "This fire-hardened wood is as hard as iron and it is used for several "
 "buildings. It is produced out of logs in the wood hardener."
 msgstr ""
+"Dieses vom Feuer gehärtete Holz ist so hart wie Eisen und wird für einige "
+"Gebäude benötigt. Es wird vom Holzhärter aus Stämmen hergestellt."
 
 #: ../../tribes/barbarians/bread_paddle/conf:1
 msgid ""
@@ -1441,8 +1446,6 @@ msgstr ""
 msgid ""
 "Excerpt from ‘Our Treasures Underground’,<br> a traditional Barbarian song."
 msgstr ""
-"Auszug aus dem traditionellen Barbarenlied<br> ‘Unsere Schätze aus der "
-"Tiefe’."
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:14
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:14
@@ -1452,7 +1455,7 @@ msgid ""
 "sun, wrought into eternity ...’"
 msgstr ""
 "‘Weich und geschmeidig.<br> Und doch von Wetter und Zeit unberührt.<br> "
-"Sonnenstrahlen, hervorgebracht in Ewigkeit...’"
+"Sonnenstrahlen, hervorgebracht in Ewigkeit ...’"
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:18
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:18
@@ -1725,7 +1728,7 @@ msgstr "Kinderspruch der Barbaren"
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:20
 msgid "Releases animals into the wild to steady the meat production."
-msgstr "Setzt Tiere für eine konstante Fleischproduktion in der Wildnis aus."
+msgstr "Züchtet Wildtiere, um die Fleischproduktion sicherzustellen."
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:32
 msgid "The gamekeeper pauses %s before going to work again."
@@ -1748,8 +1751,8 @@ msgid ""
 msgstr ""
 "Gold ist das wertvollste Metall; nur sehr wichtige Dinge werden damit "
 "verziert. Es wird im Hochofen aus Golderz erzeugt. Gold wird als kostbares "
-"Baumaterial verwendet und zur Herstellung höherwertiger Waffen und Helme in "
-"den entsprechenden Schmieden."
+"Baumaterial und zur Herstellung höherwertiger Waffen und Helme in den "
+"entsprechenden Schmieden verwendet."
 
 #: ../../tribes/barbarians/goldore/conf:1
 msgid ""
@@ -1793,8 +1796,8 @@ msgstr ""
 msgid ""
 "‘I can handle tons of granite, man, but no more of your vain prattle.’"
 msgstr ""
-"’Ich kann Unmengen von Granit bearbeiten, aber mit Eurem eitlen Geschwätz "
-"kann ich nichts anfangen!‘"
+"\"Ich kann Unmengen von Granit bearbeiten, aber mit Eurem eitlen Geschwätz "
+"kann ich nichts anfangen!\""
 
 #: ../../tribes/barbarians/granitemine/help.lua:17
 msgid "Carve raw stone out of the rock in mountain terrain."
@@ -1802,7 +1805,7 @@ msgstr "Schlägt Felsen aus dem Berggestein."
 
 #: ../../tribes/barbarians/granitemine/help.lua:18
 msgid "It cannot be upgraded."
-msgstr "Kann nicht ausgebaut werden."
+msgstr "Sie kann nicht ausgebaut werden."
 
 #: ../../tribes/barbarians/granitemine/help.lua:18
 msgid ""
@@ -1826,7 +1829,7 @@ msgid ""
 "Raw stone can be processed into grout which provides a solid, non burning "
 "building material. Grout is produced in a lime kiln."
 msgstr ""
-"Granit kann zu Mörtel verarbeitet werden, der den Bau haltbarer, schwer "
+"Felsen können zu Mörtel verarbeitet werden, der den Bau haltbarer, schwer "
 "entzündlicher Gebäude ermöglicht. Mörtel wird in der Kalkbrennerei "
 "produziert."
 
