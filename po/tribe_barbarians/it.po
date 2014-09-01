@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-08-05 11:10+0000\n"
-"PO-Revision-Date: 2014-08-30 21:38+0000\n"
+"PO-Revision-Date: 2014-08-31 12:20+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-31 05:42+0000\n"
+"X-Launchpad-Export-Date: 2014-09-01 05:48+0000\n"
 "X-Generator: Launchpad (build 17176)\n"
 "Language: it\n"
 
@@ -1872,7 +1872,7 @@ msgstr "Abbatte alberi."
 
 #: ../../tribes/barbarians/lumberjacks_hut/conf:26
 msgid "Out of Trees"
-msgstr ""
+msgstr "Alberi esauriti"
 
 #: ../../tribes/barbarians/lumberjacks_hut/conf:27
 msgid ""
@@ -2044,7 +2044,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/quarry/conf:26
 msgid "Out of Rocks"
-msgstr ""
+msgstr "Rocce esaurite"
 
 #: ../../tribes/barbarians/quarry/conf:27
 msgid ""
@@ -2165,7 +2165,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/scouts_hut/conf:22
 msgid "scouting"
-msgstr ""
+msgstr "sta esplorando"
 
 #: ../../tribes/barbarians/scripting/sc01_fortified_village.lua:10
 msgid "Fortified Village"
@@ -2340,7 +2340,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/warehouse/help.lua:16
 msgid "Warehouses store soldiers, wares and tools."
-msgstr ""
+msgstr "I magazzini immagazzinano soldati, merci e strumenti."
 
 #: ../../tribes/barbarians/warhelm/conf:1
 msgid ""
@@ -2351,15 +2351,15 @@ msgstr ""
 
 #: ../../tribes/barbarians/warmill/conf:43
 msgid "forging a bronze ax"
-msgstr ""
+msgstr "sta forgiando un'ascia di bronzo"
 
 #: ../../tribes/barbarians/warmill/conf:45
 msgid "forging a battle ax"
-msgstr ""
+msgstr "sta forgiando un'ascia da battaglia"
 
 #: ../../tribes/barbarians/warmill/conf:47
 msgid "forging a warrior’s ax"
-msgstr ""
+msgstr "sta forgiando un'ascia da guerriero"
 
 #: ../../tribes/barbarians/warmill/help.lua:17
 msgid ""
@@ -2408,7 +2408,7 @@ msgstr "Produce stoffa per navi e soldati."
 
 #: ../../tribes/barbarians/weaving-mill/conf:24
 msgid "weaving"
-msgstr ""
+msgstr "sta tessendo"
 
 #: ../../tribes/barbarians/weaving-mill/help.lua:17
 msgid "Weaves cloth out of thatch reed."
@@ -2416,7 +2416,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/well/conf:28
 msgid "Out of Water"
-msgstr "Acqua esaurita."
+msgstr "Acqua esaurita"
 
 #: ../../tribes/barbarians/well/conf:29
 msgid ""
