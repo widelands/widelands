@@ -1816,7 +1816,7 @@ msgid ""
 "toolsmithy and the shipyard. Also some higher developed buildings need "
 "spidercloth for their construction."
 msgstr ""
-"蜘蛛布は、機織所で蜘蛛糸を使用して生産されます。\r\n"
+"蜘蛛布は、機織所で蜘蛛糸を使用して生産されます。\n"
 "　道具工房と造船所で使用されます。またいくつかの高度に開発された建物が、その建設のために蜘蛛布を必要とします。"
 
 #: ../../tribes/atlanteans/spideryarn/conf:1
@@ -1824,7 +1824,7 @@ msgid ""
 "This yarn is produced by spiders, which are bred by spider farms. It is "
 "processed into spidercloth in a weaving mill."
 msgstr ""
-"この糸は、蜘蛛園で飼育された蜘蛛から、生産されます。\r\n"
+"この糸は、蜘蛛園で飼育された蜘蛛から、生産されます。\n"
 "　機織所で蜘蛛布をつくるために消費されます。"
 
 #: ../../tribes/atlanteans/steel_shield/conf:1

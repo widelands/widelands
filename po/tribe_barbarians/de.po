@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-08-05 11:10+0000\n"
-"PO-Revision-Date: 2014-08-23 12:19+0000\n"
+"PO-Revision-Date: 2014-09-03 11:59+0000\n"
 "Last-Translator: Mirian Margiani <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-24 05:52+0000\n"
-"X-Generator: Launchpad (build 17163)\n"
+"X-Launchpad-Export-Date: 2014-09-04 05:49+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 "X-Poedit-Country: GERMANY\n"
 "Language: de\n"
 "X-Poedit-Language: German\n"
@@ -321,7 +321,8 @@ msgid ""
 "An old Barbarian proverb<br> meaning that you need to take some risks "
 "sometimes."
 msgstr ""
-"Ein altes Barbarensprichwort<br> sagt, dass man manche Risiken eingehen muss."
+"Ein altes Barbarensprichwort<br> besagt, dass man manche Risiken eingehen "
+"muss."
 
 #: ../../tribes/barbarians/axfactory/help.lua:13
 #: ../../tribes/barbarians/warmill/help.lua:13
@@ -329,8 +330,8 @@ msgid ""
 "‘A new warrior’s ax brings forth the best in its wielder – or the worst in "
 "its maker.’"
 msgstr ""
-"'Eine neue Kriegsaxt weckt das Beste; in dem, der sie trägt - oder das "
-"Schlimmste; in dem, der sie fertigt.'"
+"\"Eine neue Kriegsaxt weckt das Beste in dem, der sie trägt - oder das "
+"Schlimmste in dem, der sie fertigt.\""
 
 #: ../../tribes/barbarians/axfactory/help.lua:17
 msgid "Produces axes, sharp axes and broad axes."
@@ -343,8 +344,8 @@ msgid ""
 "require additional qualification for the worker."
 msgstr ""
 "Die Axtmanufaktur der Barbaren ist die mittlere Produktionsstätte in einer "
-"Reihe von drei Gebäuden. Sie kann nur durch Ausbauen einer Werkzeugschmiede "
-"hergestellt werden und stellt keine besonderen Anforderungen an den Arbeiter."
+"Reihe von drei Gebäuden. Sie ist die Erweiterung der Werkzeugschmiede, aber "
+"benötigt keine zusätzliche Qualifizierung der Arbeiter."
 
 #: ../../tribes/barbarians/axfactory/help.lua:30
 msgid ""
@@ -396,7 +397,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr "Bäckt Brot für Arbeiter."
+msgstr "Backt Brot für Arbeiter."
 
 #: ../../tribes/barbarians/bakery/help.lua:13
 #: ../../tribes/barbarians/barrier/help.lua:13
@@ -525,8 +526,8 @@ msgstr "Soll angeblich von Neidhardt, dem berühmten Trainer, stammen."
 msgid ""
 "‘No better friend you have in battle than the enemy’s blow that misses.’"
 msgstr ""
-"‘Der beste Freund in der Schlacht ist der feindliche Schlag, der Dich "
-"verfehlt.’"
+"\"Der beste Freund in der Schlacht ist der feindliche Schlag, der dich "
+"verfehlt.\""
 
 #: ../../tribes/barbarians/battlearena/help.lua:19
 msgid "Trains soldiers in ‘Evade’."
@@ -629,9 +630,8 @@ msgid ""
 "This fire-hardened wood is as hard as iron and it is used for several "
 "buildings. It is produced out of logs in the wood hardener."
 msgstr ""
-"Dieses im Feuer veredelte Holz ist hart wie Stahl und wird zum Bau - "
-"insbesondere von Militärgebäuden - benötigt. Der Holzhärter stellt es aus "
-"Baumstämmen her."
+"Dieses vom Feuer gehärtete Holz ist so hart wie Eisen und wird für einige "
+"Gebäude benötigt. Es wird vom Holzhärter aus Stämmen hergestellt."
 
 #: ../../tribes/barbarians/bread_paddle/conf:1
 msgid ""
@@ -650,7 +650,7 @@ msgstr ""
 msgid ""
 "Produces the finest ales to keep warriors strong and happy in training."
 msgstr ""
-"Produziert das beste Ale, um die Soldaten bei ihrer Ausbildung zu versorgen."
+"Produziert das beste Bier, um die Soldaten bei ihrer Ausbildung zu versorgen."
 
 #: ../../tribes/barbarians/brewery/conf:25
 #: ../../tribes/barbarians/micro-brewery/conf:28
@@ -666,7 +666,7 @@ msgstr ""
 "Die Breitaxt wird in der Axtmanufaktur oder der Waffenschmiede hergestellt. "
 "Benötigt wird sie im Ausbildungslager, wo sie – bei entsprechender "
 "Verpflegung – die Angriffsstärke eines Kriegers von Stufe 1 zu Stufe 2 "
-"aufwertet."
+"verbessert."
 
 #: ../../tribes/barbarians/bronzeax/conf:1
 msgid ""
@@ -715,7 +715,7 @@ msgstr "Brennt Kohle aus Baumstämmen."
 #: ../../tribes/barbarians/master-miner/conf:1
 #: ../../tribes/barbarians/miner/conf:1
 msgid "Works deep in the mines to obtain coal, iron or gold."
-msgstr "Arbeitet tief in den Minen um Kohle, Eisen oder Gold zu schürfen."
+msgstr "Arbeitet tief in den Minen, um Kohle, Eisen oder Gold zu schürfen."
 
 #: ../../tribes/barbarians/citadel/conf:8
 msgid "Your soldiers have occupied your citadel."
@@ -725,7 +725,7 @@ msgstr "Deine Soldaten haben deine Zitadelle besetzt."
 msgid ""
 "Cloth is needed for barbarian ships. It is produced out of thatch reed."
 msgstr ""
-"Stoff wird für die Schiffe der Barbaren benötigt. Er wird aus Flachs "
+"Stoff wird für die Schiffe der Barbaren benötigt. Er wird aus Reet "
 "hergestellt."
 
 #: ../../tribes/barbarians/coal/conf:1
@@ -1446,8 +1446,8 @@ msgstr ""
 msgid ""
 "Excerpt from ‘Our Treasures Underground’,<br> a traditional Barbarian song."
 msgstr ""
-"Auszug aus dem traditionellen Barbarenlied<br> ‘Unsere Schätze aus der "
-"Tiefe’."
+"Auszug aus „unsere unterirdischen Schätze“,<br>einem traditionellen Lied der "
+"Barbaren."
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:14
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:14
@@ -1457,7 +1457,7 @@ msgid ""
 "sun, wrought into eternity ...’"
 msgstr ""
 "‘Weich und geschmeidig.<br> Und doch von Wetter und Zeit unberührt.<br> "
-"Sonnenstrahlen, hervorgebracht in Ewigkeit...’"
+"Sonnenstrahlen, hervorgebracht in Ewigkeit ...’"
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:18
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:18
@@ -1730,7 +1730,7 @@ msgstr "Kinderspruch der Barbaren"
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:20
 msgid "Releases animals into the wild to steady the meat production."
-msgstr "Setzt Tiere für eine konstante Fleischproduktion in der Wildnis aus."
+msgstr "Züchtet Wildtiere, um die Fleischproduktion sicherzustellen."
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:32
 msgid "The gamekeeper pauses %s before going to work again."
@@ -1753,8 +1753,8 @@ msgid ""
 msgstr ""
 "Gold ist das wertvollste Metall; nur sehr wichtige Dinge werden damit "
 "verziert. Es wird im Hochofen aus Golderz erzeugt. Gold wird als kostbares "
-"Baumaterial verwendet und zur Herstellung höherwertiger Waffen und Helme in "
-"den entsprechenden Schmieden."
+"Baumaterial und zur Herstellung höherwertiger Waffen und Helme in den "
+"entsprechenden Schmieden verwendet."
 
 #: ../../tribes/barbarians/goldore/conf:1
 msgid ""
@@ -1798,8 +1798,8 @@ msgstr ""
 msgid ""
 "‘I can handle tons of granite, man, but no more of your vain prattle.’"
 msgstr ""
-"’Ich kann Unmengen von Granit bearbeiten, aber mit Eurem eitlen Geschwätz "
-"kann ich nichts anfangen!‘"
+"\"Ich kann Unmengen von Granit bearbeiten, aber mit Eurem eitlen Geschwätz "
+"kann ich nichts anfangen!\""
 
 #: ../../tribes/barbarians/granitemine/help.lua:17
 msgid "Carve raw stone out of the rock in mountain terrain."
@@ -1807,7 +1807,7 @@ msgstr "Schlägt Felsen aus dem Berggestein."
 
 #: ../../tribes/barbarians/granitemine/help.lua:18
 msgid "It cannot be upgraded."
-msgstr "Kann nicht ausgebaut werden."
+msgstr "Sie kann nicht ausgebaut werden."
 
 #: ../../tribes/barbarians/granitemine/help.lua:18
 msgid ""
@@ -1831,7 +1831,7 @@ msgid ""
 "Raw stone can be processed into grout which provides a solid, non burning "
 "building material. Grout is produced in a lime kiln."
 msgstr ""
-"Granit kann zu Mörtel verarbeitet werden, der den Bau haltbarer, schwer "
+"Felsen können zu Mörtel verarbeitet werden, der den Bau haltbarer, schwer "
 "entzündlicher Gebäude ermöglicht. Mörtel wird in der Kalkbrennerei "
 "produziert."
 

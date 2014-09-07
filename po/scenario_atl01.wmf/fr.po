@@ -176,7 +176,7 @@ msgstr ""
 "le moulin à tisser. L'étoffe de soie d'araignée est nécessaire à la "
 "construction de certains bâtiments et vêtements. alors que les tabards sont "
 "les uniformes des soldats. Le moulin à tisser nécessite du fil doré et de la "
-"soie d'araignée comme matériaux de base.\r\n"
+"soie d'araignée comme matériaux de base.\n"
 "La soie d'araignée est produite dans les fermes aracnéïcoles, alors que le "
 "fil d'or est produit dans le moulin à filer l'or à partir d'or."
 
