@@ -306,6 +306,24 @@ private:
 	uint8_t    m_max;
 };
 
+/**
+ * Note to be published when a production site is out of resources
+ */
+// NOCOM(GunChleoc): This is the new note we're using to notify the AI
+struct NoteProductionSiteOutOfResources {
+	CAN_BE_SEND_AS_NOTE(NoteId::ProductionSiteOutOfResources)
+
+	// The production site that is out of resources.
+	ProductionSite* ps;
+
+	// The player that owns the production site.
+	Player * player;
+
+	NoteProductionSiteOutOfResources(ProductionSite* const init_ps, Player* init_player)
+		: ps(init_ps), player(init_player) {
+	}
+};
+
 }
 
 #endif  // end of include guard: WL_LOGIC_PRODUCTIONSITE_H
