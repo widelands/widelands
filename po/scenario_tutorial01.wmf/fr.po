@@ -1123,7 +1123,7 @@ msgid ""
 "tribes are explained in their individual tutorial campaigns."
 msgstr ""
 "Quoi qu'il en soit, guerroyer offre une voie d'affronter les autres joueurs, "
-"et il y a quelques mécaniques de jeu qui méritent quelques explications.\r\n"
+"et il y a quelques mécaniques de jeu qui méritent quelques explications.\n"
 "Les économies des tribus sont expliquées dans leurs campagnes tutorielles "
 "respectives."
 
