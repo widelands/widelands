@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-08-05 10:15+0100\n"
+"POT-Creation-Date: 2014-09-07 13:38-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1110,16 +1110,16 @@ msgid ""
 "compatible with world"
 msgstr ""
 
-#: ../../src/logic/worker.cc:944
+#: ../../src/logic/worker.cc:942
 msgid "A geologist found resources."
 msgstr ""
 
-#: ../../src/logic/worker.cc:1844
+#: ../../src/logic/worker.cc:1842
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr ""
 
-#: ../../src/logic/worker.cc:1851
+#: ../../src/logic/worker.cc:1849
 msgid "Worker got lost!"
 msgstr ""
 
@@ -2851,19 +2851,19 @@ msgstr ""
 msgid "Do you really want to cancel the active expedition?"
 msgstr ""
 
-#: ../../src/wui/attack_box.cc:148
+#: ../../src/wui/attack_box.cc:147
 msgid "Soldiers:"
 msgstr ""
 
-#: ../../src/wui/attack_box.cc:156
+#: ../../src/wui/attack_box.cc:155
 msgid "Send less soldiers"
 msgstr ""
 
-#: ../../src/wui/attack_box.cc:173
+#: ../../src/wui/attack_box.cc:172
 msgid "Number of soldiers"
 msgstr ""
 
-#: ../../src/wui/attack_box.cc:183
+#: ../../src/wui/attack_box.cc:182
 msgid "Send more soldiers"
 msgstr ""
 
