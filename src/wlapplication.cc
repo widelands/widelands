@@ -850,7 +850,7 @@ std::string WLApplication::get_executable_path()
 #endif
 #ifdef _WIN32
 	char filename[_MAX_PATH + 1] = {0};
-	GetModuleFileName(0, filename, _MAX_PATH);
+	GetModuleFileName(nullptr, filename, MAX_PATH);
 	executabledir = filename;
 	executabledir = executabledir.substr(0, executabledir.rfind('\\'));
 #endif
@@ -1781,7 +1781,7 @@ bool WLApplication::redirect_output(std::string path)
 	if (path.empty()) {
 #ifdef _WIN32
 		char module_name[MAX_PATH];
-		unsigned int name_length = GetModuleFileName(nullptr, module_name, MAX_PATH);
+		GetModuleFileName(nullptr, module_name, MAX_PATH);
 		path = module_name;
 		size_t pos = path.find_last_of("/\\");
 		if (pos == std::string::npos) return false;
