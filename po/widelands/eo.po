@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-05 10:15+0100\n"
-"PO-Revision-Date: 2014-06-18 08:07+0000\n"
-"Last-Translator: Fenris Wolf <fenris.kcf@googlemail.com>\n"
+"PO-Revision-Date: 2014-09-07 04:38+0000\n"
+"Last-Translator: Ivan Camilo Quintero Santacruz <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-08-06 05:49+0000\n"
-"X-Generator: Launchpad (build 17147)\n"
+"X-Launchpad-Export-Date: 2014-09-07 05:48+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 "Language: eo\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -25,36 +25,36 @@ msgstr "Nenio"
 
 #: ../../src/ai/defaultai.h:82
 msgid "Aggressive"
-msgstr ""
+msgstr "Atakema"
 
 #: ../../src/ai/defaultai.h:92
 msgid "Normal"
-msgstr ""
+msgstr "Normala"
 
 #: ../../src/ai/defaultai.h:102
 msgid "Defensive"
-msgstr ""
+msgstr "Defendema"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../src/base/i18n.cc:331
 #, c-format
 msgid "%1$s and %2$s"
-msgstr ""
+msgstr "%1$s kaj %2$s"
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../src/base/i18n.cc:336
 #, c-format
 msgid "%1$s or %2$s"
-msgstr ""
+msgstr "%1$s aŭ %2$s"
 
 #. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../src/base/i18n.cc:342
 #, c-format
 msgid "%1$s, %2$s"
-msgstr ""
+msgstr "%1$s, %2$s"
 
 #: ../../src/editor/editorinteractive.cc:64
 #, c-format
@@ -127,7 +127,7 @@ msgstr "Nekonservata mapo"
 
 #: ../../src/editor/editorinteractive.cc:259
 msgid "The map has not been saved, do you really want to quit?"
-msgstr ""
+msgstr "La mapo ne estas konservita, ĉu vi vere volas eliri?"
 
 #: ../../src/editor/editorinteractive.cc:595
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:154
