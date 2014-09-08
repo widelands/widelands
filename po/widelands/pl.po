@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-08-05 10:15+0100\n"
+"POT-Creation-Date: 2014-09-07 13:39-0700\n"
 "PO-Revision-Date: 2014-08-24 18:13+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-08-25 06:12+0000\n"
-"X-Generator: Launchpad (build 17163)\n"
+"X-Launchpad-Export-Date: 2014-09-08 06:17+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 
 #: ../../src/ai/computer_player.cc:39
 msgid "None"
@@ -1139,16 +1139,16 @@ msgstr ""
 "powinno się hodować surowiec %s, który nie jest dostępny w tym świecie; "
 "plemię jest niekompatybilne z tym światem"
 
-#: ../../src/logic/worker.cc:944
+#: ../../src/logic/worker.cc:942
 msgid "A geologist found resources."
 msgstr "Geolog znalazł surowce."
 
-#: ../../src/logic/worker.cc:1844
+#: ../../src/logic/worker.cc:1842
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr "Twój osadnik: %s nie może znaleźć drogi do domu i najpewniej umrze."
 
-#: ../../src/logic/worker.cc:1851
+#: ../../src/logic/worker.cc:1849
 msgid "Worker got lost!"
 msgstr "Zaginął robotnik!"
 
@@ -3032,19 +3032,19 @@ msgstr "Zatopić statek?"
 msgid "Do you really want to cancel the active expedition?"
 msgstr "Czy na pewno chcesz przerwać trwającą ekspedycję?"
 
-#: ../../src/wui/attack_box.cc:148
+#: ../../src/wui/attack_box.cc:147
 msgid "Soldiers:"
 msgstr "Żołnierze:"
 
-#: ../../src/wui/attack_box.cc:156
+#: ../../src/wui/attack_box.cc:155
 msgid "Send less soldiers"
 msgstr "Wyślij mniej żołnierzy"
 
-#: ../../src/wui/attack_box.cc:173
+#: ../../src/wui/attack_box.cc:172
 msgid "Number of soldiers"
 msgstr "Liczba żołnierzy"
 
-#: ../../src/wui/attack_box.cc:183
+#: ../../src/wui/attack_box.cc:182
 msgid "Send more soldiers"
 msgstr "Wyślij więcej żołnierzy"
 

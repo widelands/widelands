@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-08-05 10:15+0100\n"
+"POT-Creation-Date: 2014-09-07 13:39-0700\n"
 "PO-Revision-Date: 2014-08-09 20:12+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2014-08-10 05:33+0000\n"
-"X-Generator: Launchpad (build 17156)\n"
+"X-Launchpad-Export-Date: 2014-09-08 06:18+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 "Language: sk\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -1134,16 +1134,16 @@ msgstr ""
 "mal by chovať zdroj typu %s, ktorý neexistuje vo svete; kmeň nie je "
 "kompatibilný so svetom"
 
-#: ../../src/logic/worker.cc:944
+#: ../../src/logic/worker.cc:942
 msgid "A geologist found resources."
 msgstr "Geológ objavil zdroje."
 
-#: ../../src/logic/worker.cc:1844
+#: ../../src/logic/worker.cc:1842
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr ""
 
-#: ../../src/logic/worker.cc:1851
+#: ../../src/logic/worker.cc:1849
 msgid "Worker got lost!"
 msgstr "Pracovník sa stratil!"
 
@@ -3027,19 +3027,19 @@ msgstr "Potopiť loď?"
 msgid "Do you really want to cancel the active expedition?"
 msgstr "Naozaj chcete zrušiť aktívnu výpravu?"
 
-#: ../../src/wui/attack_box.cc:148
+#: ../../src/wui/attack_box.cc:147
 msgid "Soldiers:"
 msgstr "Vojaci:"
 
-#: ../../src/wui/attack_box.cc:156
+#: ../../src/wui/attack_box.cc:155
 msgid "Send less soldiers"
 msgstr "Vyslať menej vojakov"
 
-#: ../../src/wui/attack_box.cc:173
+#: ../../src/wui/attack_box.cc:172
 msgid "Number of soldiers"
 msgstr "Počet vojakov:"
 
-#: ../../src/wui/attack_box.cc:183
+#: ../../src/wui/attack_box.cc:182
 msgid "Send more soldiers"
 msgstr "Vyslať viac vojakov"
 
