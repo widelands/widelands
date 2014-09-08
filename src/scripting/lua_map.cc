@@ -3522,9 +3522,7 @@ void L_Field::__unpersist(lua_State * L) {
  */
 // Hash is used to identify a class in a Set
 int L_Field::get___hash(lua_State * L) {
-	lua_pushstring(L, (boost::format("%i_%i")
-							 % static_cast<unsigned int>(m_c.x)
-							 % static_cast<unsigned int>(m_c.y)).str().c_str());
+	lua_pushstring(L, (boost::format("%i_%i") % m_c.x % m_c.y).str().c_str());
 	return 1;
 }
 
@@ -3852,9 +3850,7 @@ int L_Field::__eq(lua_State * L) {
 	return 1;
 }
 int L_Field::__tostring(lua_State * L) {
-	lua_pushstring(L, (boost::format("Field(%i,%i)")
-							 % static_cast<unsigned int>(m_c.x)
-							 % static_cast<unsigned int>(m_c.y)).str().c_str());
+	lua_pushstring(L, (boost::format("Field(%i,%i)") % m_c.x % m_c.y).str().c_str());
 	return 1;
 }
 

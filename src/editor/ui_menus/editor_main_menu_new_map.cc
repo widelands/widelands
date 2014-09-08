@@ -62,8 +62,7 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive & parent)
 	}
 
 	m_width = new UI::Textarea(this, posx + spacing + 20, posy,
-										(boost::format(_("Width: %u"))
-										 % static_cast<unsigned int>(Widelands::MAP_DIMENSIONS[m_w])).str().c_str());
+										(boost::format(_("Width: %u")) % Widelands::MAP_DIMENSIONS[m_w]).str().c_str());
 
 	UI::Button * widthupbtn = new UI::Button
 		(this, "width_up",
@@ -83,7 +82,7 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive & parent)
 
 	m_height = new UI::Textarea(this, posx + spacing + 20, posy,
 										 (boost::format(_("Height: %u"))
-										  % static_cast<unsigned int>(Widelands::MAP_DIMENSIONS[m_h])).str().c_str());
+										  % Widelands::MAP_DIMENSIONS[m_h]).str().c_str());
 
 	UI::Button * heightupbtn = new UI::Button
 		(this, "height_up",
@@ -129,10 +128,8 @@ void Main_Menu_New_Map::button_clicked(int32_t n) {
 	if (m_w >= NUMBER_OF_MAP_DIMENSIONS) m_w = NUMBER_OF_MAP_DIMENSIONS - 1;
 	if (m_h <  0)                        m_h = 0;
 	if (m_h >= NUMBER_OF_MAP_DIMENSIONS) m_h = NUMBER_OF_MAP_DIMENSIONS - 1;
-	m_width ->set_text((boost::format(_("Width: %u"))
-							  % static_cast<unsigned int>(Widelands::MAP_DIMENSIONS[m_w])).str());
-	m_height->set_text((boost::format(_("Height: %u"))
-							  % static_cast<unsigned int>(Widelands::MAP_DIMENSIONS[m_h])).str());
+	m_width ->set_text((boost::format(_("Width: %u")) % Widelands::MAP_DIMENSIONS[m_w]).str());
+	m_height->set_text((boost::format(_("Height: %u")) % Widelands::MAP_DIMENSIONS[m_h]).str());
 }
 
 void Main_Menu_New_Map::clicked_create_map() {

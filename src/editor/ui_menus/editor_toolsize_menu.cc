@@ -73,8 +73,7 @@ void Editor_Toolsize_Menu::update(uint32_t const val) {
 	eia().set_sel_radius(val);
 	m_decrease.set_enabled(0 < val);
 	m_increase.set_enabled    (val < MAX_TOOL_AREA);
-	m_textarea.set_text((boost::format(_("Current Size: %u"))
-								% static_cast<unsigned int>(val + 1)).str());
+	m_textarea.set_text((boost::format(_("Current Size: %u")) % (val + 1)).str());
 }
 
 

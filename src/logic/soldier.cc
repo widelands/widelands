@@ -137,23 +137,23 @@ SoldierDescr::SoldierDescr
 	for (uint32_t i = 0; i <= m_max_hp_level;      ++i) {
 		m_hp_pics_fn[i] = dir;
 		m_hp_pics_fn[i] += global_s.get_safe_string((boost::format("hp_level_%u_pic")
-																	% static_cast<unsigned int>(i)).str().c_str());
+																	% i).str().c_str());
 
 	}
 	for (uint32_t i = 0; i <= m_max_attack_level;  ++i) {
 		m_attack_pics_fn[i] = dir;
 		m_attack_pics_fn[i] += global_s.get_safe_string((boost::format("attack_level_%u_pic")
-																		 % static_cast<unsigned int>(i)).str().c_str());
+																		 % i).str().c_str());
 	}
 	for (uint32_t i = 0; i <= m_max_defense_level; ++i) {
 		m_defense_pics_fn[i] = dir;
 		m_defense_pics_fn[i] += global_s.get_safe_string((boost::format("defense_level_%u_pic")
-																		  % static_cast<unsigned int>(i)).str().c_str());
+																		  % i).str().c_str());
 	}
 	for (uint32_t i = 0; i <= m_max_evade_level;   ++i) {
 		m_evade_pics_fn[i] = dir;
 		m_evade_pics_fn[i] += global_s.get_safe_string((boost::format("evade_level_%u_pic")
-																		% static_cast<unsigned int>(i)).str().c_str());
+																		% i).str().c_str());
 	}
 
 	{  ///  Battle animations
@@ -1560,12 +1560,12 @@ void Soldier::battle_update(Game & game, State &)
 												"implemented yet. (bug #536066) (The game has been "
 												"paused.)")
 							 % descr().descname().c_str()
-							 % static_cast<unsigned int>(serial())
+							 % serial()
 							 % static_cast<unsigned int>(owner().player_number())
 							 % get_position().x % get_position().y
 							 % (immovable_position ? immovable_position->descr().descname().c_str() : ("no"))
 							 % opponent.descr().descname().c_str()
-							 % static_cast<unsigned int>(opponent.serial())
+							 % opponent.serial()
 							 % static_cast<unsigned int>(opponent.owner().player_number())
 							 % dest.x % dest.y
 							 % (immovable_dest ? immovable_dest->descr().descname().c_str() : ("no"))

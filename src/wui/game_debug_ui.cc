@@ -309,11 +309,10 @@ void FieldDebugWindow::think()
 	iterate_players_existing_const(plnum, nr_players, egbase, player) {
 		const Widelands::Player::Field & player_field = player->fields()[i];
 		str += (boost::format("Player %u:\n") % static_cast<unsigned int>(plnum)).str();
-		str += (boost::format("  military influence: %u\n")
-				  % static_cast<unsigned int>(player_field.military_influence)).str();
+		str += (boost::format("  military influence: %u\n") % player_field.military_influence).str();
 
 		Widelands::Vision const vision = player_field.vision;
-		str += (boost::format("  vision: %u\n") % static_cast<unsigned int>(vision)).str();
+		str += (boost::format("  vision: %u\n") % vision).str();
 		{
 			Widelands::Time const time_last_surveyed =
 				player_field.time_triangle_last_surveyed[Widelands::TCoords<>::D];
@@ -352,7 +351,7 @@ void FieldDebugWindow::think()
 			break;
 		}
 		default:
-			str += (boost::format("  seen %u times\n") % static_cast<unsigned int>(vision - 1)).str();
+			str += (boost::format("  seen %u times\n") % (vision - 1)).str();
 			break;
 		}
 	}
@@ -374,7 +373,7 @@ void FieldDebugWindow::think()
 	{
 		m_ui_immovable.set_title((boost::format("%s (%u)")
 										  % imm->descr().name().c_str()
-										  % static_cast<unsigned int>(imm->serial())).str().c_str());
+										  % imm->serial()).str().c_str());
 		m_ui_immovable.set_enabled(true);
 	} else {
 		m_ui_immovable.set_title("no immovable");
@@ -419,7 +418,7 @@ void FieldDebugWindow::think()
 		m_ui_bobs.add(
 			(boost::format("%s (%u)")
 				% temp_bob->descr().name()
-				% static_cast<unsigned int>(temp_bob->serial())).str().c_str(),
+				% temp_bob->serial()).str().c_str(),
 			temp_bob->serial());
 	}
 }

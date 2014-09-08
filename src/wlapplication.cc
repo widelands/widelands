@@ -561,7 +561,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 					g_fs->EnsureDirectoryExists(SCREENSHOT_DIR);
 					for (uint32_t nr = 0; nr < 10000; ++nr) {
 						const std::string filename = (boost::format(SCREENSHOT_DIR "/shot%04u.png")
-																% static_cast<unsigned int>(nr)).str().c_str();
+																% nr).str().c_str();
 						if (g_fs->FileExists(filename))
 							continue;
 						g_gr->screenshot(filename);

@@ -120,10 +120,9 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map(Editor_Interactive& parent) :
 	widthdownbtn->sigclicked.connect
 		(boost::bind(&Main_Menu_New_Random_Map::button_clicked, this, MAP_W_MINUS));
 
-	m_width =
-		new UI::Textarea(this, posx + spacing + 20, posy,
-							  (boost::format(_("Width: %u"))
-								% static_cast<unsigned int>(Widelands::MAP_DIMENSIONS[m_w])).str().c_str());
+	m_width = new UI::Textarea(this, posx + spacing + 20, posy,
+										(boost::format(_("Width: %u"))
+										 % Widelands::MAP_DIMENSIONS[m_w]).str().c_str());
 
 	posy += 20 + spacing + spacing;
 
@@ -131,7 +130,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map(Editor_Interactive& parent) :
 
 	m_height = new UI::Textarea(this, posx + spacing + 20, posy,
 										 (boost::format(_("Height: %u"))
-										  % static_cast<unsigned int>(Widelands::MAP_DIMENSIONS[m_h])).str().c_str());
+										  % Widelands::MAP_DIMENSIONS[m_h]).str().c_str());
 
 	UI::Button * heightupbtn = new UI::Button
 		(this, "height_up",
@@ -418,11 +417,9 @@ void Main_Menu_New_Random_Map::button_clicked(Main_Menu_New_Random_Map::ButtonID
 	if (m_h <  0)                        m_h = 0;
 	if (m_h >= NUMBER_OF_MAP_DIMENSIONS) m_h = NUMBER_OF_MAP_DIMENSIONS - 1;
 
-	m_width ->set_text((boost::format(_("Width: %u"))
-							  % static_cast<unsigned int>(Widelands::MAP_DIMENSIONS[m_w])).str().c_str());
+	m_width ->set_text((boost::format(_("Width: %u")) % Widelands::MAP_DIMENSIONS[m_w]).str().c_str());
 
-	m_height->set_text((boost::format(_("Height: %u"))
-							  % static_cast<unsigned int>(Widelands::MAP_DIMENSIONS[m_h])).str().c_str());
+	m_height->set_text((boost::format(_("Height: %u")) % Widelands::MAP_DIMENSIONS[m_h]).str().c_str());
 
 	m_water->set_text((boost::format(_("Water: %i %%")) % m_waterval).str().c_str());
 
