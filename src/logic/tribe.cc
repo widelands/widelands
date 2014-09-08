@@ -433,7 +433,7 @@ uint32_t Tribe_Descr::get_resource_indicator
 
 	return get_immovable_index((boost::format("resi_%s%i")
 										 % res->name().c_str()
-										 % static_cast<int>(bestmatch)).str().c_str());
+										 % bestmatch).str().c_str());
 }
 
 /*

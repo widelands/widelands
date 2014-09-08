@@ -173,8 +173,8 @@ void Main_Menu_Load_Map::selected(uint32_t) {
 		m_nrplayers->set_text(std::to_string(static_cast<unsigned int>(map.get_nrplayers())));
 
 		m_size     ->set_text((boost::format(_("%1$ix%2$i"))
-									  % static_cast<int>(map.get_width())
-									  % static_cast<int>(map.get_height())).str().c_str());
+									  % map.get_width()
+									  % map.get_height()).str().c_str());
 	} else {
 		m_name     ->set_text("");
 		m_author   ->set_text("");

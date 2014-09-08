@@ -1562,12 +1562,12 @@ void Soldier::battle_update(Game & game, State &)
 							 % descr().descname().c_str()
 							 % static_cast<unsigned int>(serial())
 							 % static_cast<unsigned int>(owner().player_number())
-							 % static_cast<int>(get_position().x) % static_cast<int>(get_position().y)
+							 % get_position().x % get_position().y
 							 % (immovable_position ? immovable_position->descr().descname().c_str() : ("no"))
 							 % opponent.descr().descname().c_str()
 							 % static_cast<unsigned int>(opponent.serial())
 							 % static_cast<unsigned int>(opponent.owner().player_number())
-							 % static_cast<int>(dest.x) % static_cast<int>(dest.y)
+							 % dest.x % dest.y
 							 % (immovable_dest ? immovable_dest->descr().descname().c_str() : ("no"))
 							 % descr().descname().c_str()).str();
 					owner().add_message

@@ -171,8 +171,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map(Editor_Interactive& parent) :
 		(boost::bind(&Main_Menu_New_Random_Map::button_clicked, this, WATER_MINUS));
 
 	m_water = new UI::Textarea(this, posx + spacing + 20, posy,
-										(boost::format(_("Water: %i %%"))
-										 % static_cast<int>(m_waterval)).str().c_str());
+										(boost::format(_("Water: %i %%")) % m_waterval).str().c_str());
 
 	posy += 20 + spacing + spacing;
 
@@ -197,8 +196,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map(Editor_Interactive& parent) :
 		(boost::bind(&Main_Menu_New_Random_Map::button_clicked, this, LAND_MINUS));
 
 	m_land = new UI::Textarea(this, posx + spacing + 20, posy,
-									  (boost::format(_("Land: %i %%"))
-										% static_cast<int>(m_landval)).str().c_str());
+									  (boost::format(_("Land: %i %%")) % m_landval).str().c_str());
 
 	posy += 20 + spacing + spacing;
 
@@ -223,8 +221,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map(Editor_Interactive& parent) :
 		(boost::bind(&Main_Menu_New_Random_Map::button_clicked, this, WASTE_MINUS));
 
 	m_wasteland = new UI::Textarea(this, posx + spacing + 20, posy,
-											 (boost::format(_("Wasteland: %i %%"))
-											  % static_cast<int>(m_wastelandval)).str().c_str());
+											 (boost::format(_("Wasteland: %i %%")) % m_wastelandval).str().c_str());
 
 	posy += 20 + spacing + spacing;
 
@@ -234,7 +231,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map(Editor_Interactive& parent) :
 
 	m_mountains = new UI::Textarea(this, posx + spacing + 20, posy,
 											 (boost::format(_("Mountains: %i %%"))
-											  % static_cast<int>(100 - m_waterval - m_landval)).str().c_str());
+											  % (100 - m_waterval - m_landval)).str().c_str());
 
 	posy += 20 + spacing + spacing;
 
@@ -427,17 +424,14 @@ void Main_Menu_New_Random_Map::button_clicked(Main_Menu_New_Random_Map::ButtonID
 	m_height->set_text((boost::format(_("Height: %u"))
 							  % static_cast<unsigned int>(Widelands::MAP_DIMENSIONS[m_h])).str().c_str());
 
-	m_water->set_text((boost::format(_("Water: %i %%"))
-							 % static_cast<int>(m_waterval)).str().c_str());
+	m_water->set_text((boost::format(_("Water: %i %%")) % m_waterval).str().c_str());
 
-	m_land->set_text((boost::format(_("Land: %i %%"))
-							% static_cast<int>(m_landval)).str().c_str());
+	m_land->set_text((boost::format(_("Land: %i %%")) % m_landval).str().c_str());
 
-	m_wasteland->set_text((boost::format(_("Wasteland: %i %%"))
-								  % static_cast<int>(m_wastelandval)).str().c_str());
+	m_wasteland->set_text((boost::format(_("Wasteland: %i %%")) % m_wastelandval).str().c_str());
 
 	m_mountains->set_text((boost::format(_("Mountains: %i %%"))
-								  % static_cast<int>(100 - m_waterval - m_landval)).str().c_str());
+								  % (100 - m_waterval - m_landval)).str().c_str());
 
 	m_players->set_text((boost::format(_("Players: %u"))
 								% static_cast<unsigned int>(m_pn)).str().c_str());

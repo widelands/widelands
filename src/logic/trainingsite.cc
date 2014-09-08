@@ -659,7 +659,7 @@ void TrainingSite::start_upgrade(Game & game, Upgrade & upgrade)
 
 	return program_start(game, (boost::format("%s%i")
 										 % upgrade.prefix.c_str()
-										 % static_cast<int>(level)).str().c_str());
+										 % level).str().c_str());
 }
 
 TrainingSite::Upgrade * TrainingSite::get_upgrade(tAttribute const atr)
