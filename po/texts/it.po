@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-07-16 06:11+0000\n"
-"PO-Revision-Date: 2014-07-17 05:24+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"POT-Creation-Date: 2014-08-05 09:15+0000\n"
+"PO-Revision-Date: 2014-08-18 17:16+0000\n"
+"Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-18 04:35+0000\n"
-"X-Generator: Launchpad (build 17114)\n"
+"X-Launchpad-Export-Date: 2014-08-19 05:44+0000\n"
+"X-Generator: Launchpad (build 17156)\n"
 "X-Poedit-Country: ITALY\n"
 "Language: it\n"
 "X-Poedit-Language: Italian\n"
@@ -418,7 +418,7 @@ msgstr "Suono"
 
 #: ../../txts/developers:33
 msgid "Tongues"
-msgstr ""
+msgstr "Lingue"
 
 #: ../../txts/developers:38
 msgid "Coders"
@@ -632,11 +632,11 @@ msgstr "I: attiva lo strumento per le informazioni"
 
 #: ../../txts/editor_readme:37
 msgid "CTRL+L: load map"
-msgstr ""
+msgstr "CTRL+L: carica mappa"
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+S: save map"
-msgstr ""
+msgstr "CTRL+S: salva maèèa"
 
 #: ../../txts/editor_readme:41
 msgid "1-0: changes tool size"

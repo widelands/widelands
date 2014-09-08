@@ -781,8 +781,6 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 			return true;
 		}
 
-	std::vector<bool> is_tribe_specific;
-
 	// Figure the (at most) six best fitting immovables (as judged by terrain
 	// affinity). We will pick one of them at random later. The container is
 	// picked to be a stable sorting one, so that no deyncs happen in
@@ -2828,12 +2826,12 @@ void Worker::scout_update(Game & game, State & state)
 			(map.get_fcoords(get_position()), state.ivar1);
 		Coords oldest_coords = get_position();
 		Time oldest_time = game.get_gametime();
-		uint8_t oldest_distance = 0;
 
 		// if some fields can be reached
 		if (map.find_reachable_fields(exploring_area, &list, cstep, ffa) > 0) {
 			// Parse randomly the reachable fields, maximum 50 iterations
 			uint8_t iterations = list.size() % 51;
+			uint8_t oldest_distance = 0;
 			for (uint8_t i = 0; i < iterations; ++i) {
 				const std::vector<Coords>::size_type lidx = game.logic_rand() % list.size();
 				Coords const coord = list[lidx];

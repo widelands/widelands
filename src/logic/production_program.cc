@@ -1244,7 +1244,6 @@ void ProductionProgram::ActMine::execute
 	uint32_t totalres    = 0;
 	uint32_t totalchance = 0;
 	uint32_t totalstart  = 0;
-	int32_t pick;
 
 	{
 		MapRegion<Area<FCoords> > mr
@@ -1291,7 +1290,7 @@ void ProductionProgram::ActMine::execute
 
 		//  second pass through nodes
 		assert(totalchance);
-		pick = game.logic_rand() % totalchance;
+		int32_t pick = game.logic_rand() % totalchance;
 
 		{
 			MapRegion<Area<FCoords> > mr
@@ -1316,8 +1315,9 @@ void ProductionProgram::ActMine::execute
 			} while (mr.advance(map));
 		}
 
-		if (pick >= 0)
+		if (pick >= 0) {
 			return ps.program_end(game, Failed);
+		}
 
 	} else {
 		//  Inform the player about an empty mine, unless

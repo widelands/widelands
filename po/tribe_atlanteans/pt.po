@@ -3,19 +3,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-07-16 06:11+0000\n"
-"PO-Revision-Date: 2014-07-17 05:23+0000\n"
+"POT-Creation-Date: 2014-08-05 09:15+0000\n"
+"PO-Revision-Date: 2014-07-27 17:01+0000\n"
 "Last-Translator: SirVer <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-18 04:36+0000\n"
-"X-Generator: Launchpad (build 17114)\n"
+"X-Launchpad-Export-Date: 2014-08-06 05:45+0000\n"
+"X-Generator: Launchpad (build 17147)\n"
 "Language: pt\n"
 
 #: ../../tribes/atlanteans/dungeon/conf:39
-#: ../../tribes/atlanteans/labyrinth/conf:45
 msgid "Sleep"
 msgstr "Hibernar"
 
@@ -286,49 +285,41 @@ msgstr ""
 msgid "Produces armor for the soldiers."
 msgstr "Produz armaduras para os soldados."
 
-#: ../../tribes/atlanteans/armorsmithy/conf:28
-msgid "Produce steel shield"
-msgstr "Produz Escudo de ferro"
-
 #: ../../tribes/atlanteans/armorsmithy/conf:29
-msgid "Produce advanced shield"
-msgstr "Produz Escudo de guerra"
+msgid "forging a steel shield"
+msgstr ""
 
-#: ../../tribes/atlanteans/armorsmithy/conf:30
-#: ../../tribes/atlanteans/bakery/conf:26
-#: ../../tribes/atlanteans/blackroot_farm/conf:24
-#: ../../tribes/atlanteans/burners_house/conf:23
-#: ../../tribes/atlanteans/coalmine/conf:25
-#: ../../tribes/atlanteans/crystalmine/conf:30
-#: ../../tribes/atlanteans/farm/conf:26
-#: ../../tribes/atlanteans/fish_breeders_house/conf:20
-#: ../../tribes/atlanteans/fishers_house/conf:19
-#: ../../tribes/atlanteans/foresters_house/conf:20
-#: ../../tribes/atlanteans/gold-spinning-mill/conf:23
-#: ../../tribes/atlanteans/goldmine/conf:26
-#: ../../tribes/atlanteans/horsefarm/conf:25
-#: ../../tribes/atlanteans/hunters_house/conf:19
-#: ../../tribes/atlanteans/ironmine/conf:26
-#: ../../tribes/atlanteans/mill/conf:28
-#: ../../tribes/atlanteans/quarry/conf:19
-#: ../../tribes/atlanteans/sawmill/conf:22
-#: ../../tribes/atlanteans/scouts_house/conf:21
-#: ../../tribes/atlanteans/shipyard/conf:29
-#: ../../tribes/atlanteans/smelting_works/conf:28
-#: ../../tribes/atlanteans/smokery/conf:31
-#: ../../tribes/atlanteans/spiderfarm/conf:21
-#: ../../tribes/atlanteans/toolsmithy/conf:50
-#: ../../tribes/atlanteans/weaponsmithy/conf:38
-#: ../../tribes/atlanteans/weaving-mill/conf:27
-#: ../../tribes/atlanteans/well/conf:17
-#: ../../tribes/atlanteans/woodcutters_house/conf:20
-msgid "Work"
-msgstr "Trabalho"
+#: ../../tribes/atlanteans/armorsmithy/conf:31
+msgid "forging an advanced shield"
+msgstr ""
+
+#: ../../tribes/atlanteans/armorsmithy/conf:33
+#: ../../tribes/atlanteans/bakery/conf:27
+#: ../../tribes/atlanteans/blackroot_farm/conf:27
+#: ../../tribes/atlanteans/charcoal_kiln/conf:24
+#: ../../tribes/atlanteans/farm/conf:29
+#: ../../tribes/atlanteans/fish_breeders_house/conf:21
+#: ../../tribes/atlanteans/gold-spinning-mill/conf:24
+#: ../../tribes/atlanteans/mill/conf:31
+#: ../../tribes/atlanteans/quarry/conf:20
+#: ../../tribes/atlanteans/sawmill/conf:23
+#: ../../tribes/atlanteans/shipyard/conf:31
+#: ../../tribes/atlanteans/smelting_works/conf:31
+#: ../../tribes/atlanteans/smokery/conf:32
+#: ../../tribes/atlanteans/spiderfarm/conf:22
+#: ../../tribes/atlanteans/toolsmithy/conf:63
+#: ../../tribes/atlanteans/weaponsmithy/conf:44
+#: ../../tribes/atlanteans/weaving-mill/conf:34
+#: ../../tribes/atlanteans/well/conf:21
+#: ../../tribes/atlanteans/woodcutters_house/conf:21
+msgid "working"
+msgstr ""
 
 #: ../../tribes/atlanteans/armorsmithy/help.lua:13
 #: ../../tribes/atlanteans/bakery/help.lua:13
 #: ../../tribes/atlanteans/blackroot_farm/help.lua:13
 #: ../../tribes/atlanteans/castle/help.lua:13
+#: ../../tribes/atlanteans/charcoal_kiln/help.lua:13
 #: ../../tribes/atlanteans/crystalmine/help.lua:13
 #: ../../tribes/atlanteans/dungeon/help.lua:15
 #: ../../tribes/atlanteans/farm/help.lua:13
@@ -359,6 +350,7 @@ msgstr "Trabalho"
 #: ../../tribes/atlanteans/tower/help.lua:13
 #: ../../tribes/atlanteans/warehouse/help.lua:13
 #: ../../tribes/atlanteans/weaponsmithy/help.lua:13
+#: ../../tribes/atlanteans/weaving-mill/help.lua:13
 #: ../../tribes/atlanteans/well/help.lua:13
 #: ../../tribes/atlanteans/woodcutters_house/help.lua:13
 msgid "Source needed"
@@ -369,8 +361,9 @@ msgstr ""
 #: ../../tribes/atlanteans/bakery/help.lua:13
 #: ../../tribes/atlanteans/bakery/help.lua:17
 #: ../../tribes/atlanteans/blackroot_farm/help.lua:13
-#: ../../tribes/atlanteans/burners_house/help.lua:17
 #: ../../tribes/atlanteans/castle/help.lua:13
+#: ../../tribes/atlanteans/charcoal_kiln/help.lua:13
+#: ../../tribes/atlanteans/charcoal_kiln/help.lua:17
 #: ../../tribes/atlanteans/coalmine/help.lua:13
 #: ../../tribes/atlanteans/crystalmine/help.lua:13
 #: ../../tribes/atlanteans/dungeon/help.lua:15
@@ -384,7 +377,7 @@ msgstr ""
 #: ../../tribes/atlanteans/guardhall/help.lua:13
 #: ../../tribes/atlanteans/guardhouse/help.lua:13
 #: ../../tribes/atlanteans/headquarters/help.lua:13
-#: ../../tribes/atlanteans/headquarters/help.lua:17
+#: ../../tribes/atlanteans/headquarters/help.lua:18
 #: ../../tribes/atlanteans/high_tower/help.lua:13
 #: ../../tribes/atlanteans/horsefarm/help.lua:13
 #: ../../tribes/atlanteans/hunters_house/help.lua:13
@@ -393,7 +386,7 @@ msgstr ""
 #: ../../tribes/atlanteans/mill/help.lua:13
 #: ../../tribes/atlanteans/mill/help.lua:17
 #: ../../tribes/atlanteans/port/help.lua:13
-#: ../../tribes/atlanteans/port/help.lua:18
+#: ../../tribes/atlanteans/port/help.lua:17
 #: ../../tribes/atlanteans/quarry/help.lua:13
 #: ../../tribes/atlanteans/sawmill/help.lua:13
 #: ../../tribes/atlanteans/sawmill/help.lua:17
@@ -413,6 +406,7 @@ msgstr ""
 #: ../../tribes/atlanteans/warehouse/help.lua:13
 #: ../../tribes/atlanteans/weaponsmithy/help.lua:13
 #: ../../tribes/atlanteans/weaponsmithy/help.lua:17
+#: ../../tribes/atlanteans/weaving-mill/help.lua:13
 #: ../../tribes/atlanteans/weaving-mill/help.lua:17
 #: ../../tribes/atlanteans/well/help.lua:13
 #: ../../tribes/atlanteans/woodcutters_house/help.lua:13
@@ -422,21 +416,22 @@ msgstr ""
 #: ../../tribes/atlanteans/armorsmithy/help.lua:29
 #: ../../tribes/atlanteans/bakery/help.lua:30
 #: ../../tribes/atlanteans/blackroot_farm/help.lua:29
-#: ../../tribes/atlanteans/burners_house/help.lua:29
+#: ../../tribes/atlanteans/charcoal_kiln/help.lua:29
 #: ../../tribes/atlanteans/coalmine/help.lua:29
 #: ../../tribes/atlanteans/crystalmine/help.lua:29
-#: ../../tribes/atlanteans/dungeon/help.lua:38
+#: ../../tribes/atlanteans/dungeon/help.lua:40
 #: ../../tribes/atlanteans/farm/help.lua:29
 #: ../../tribes/atlanteans/fish_breeders_house/help.lua:29
 #: ../../tribes/atlanteans/fishers_house/help.lua:30
+#: ../../tribes/atlanteans/foresters_house/help.lua:30
 #: ../../tribes/atlanteans/gold-spinning-mill/help.lua:29
 #: ../../tribes/atlanteans/goldmine/help.lua:29
-#: ../../tribes/atlanteans/horsefarm/help.lua:30
+#: ../../tribes/atlanteans/horsefarm/help.lua:29
 #: ../../tribes/atlanteans/hunters_house/help.lua:30
 #: ../../tribes/atlanteans/ironmine/help.lua:29
-#: ../../tribes/atlanteans/labyrinth/help.lua:46
+#: ../../tribes/atlanteans/labyrinth/help.lua:48
 #: ../../tribes/atlanteans/mill/help.lua:30
-#: ../../tribes/atlanteans/port/help.lua:27
+#: ../../tribes/atlanteans/port/help.lua:26
 #: ../../tribes/atlanteans/quarry/help.lua:29
 #: ../../tribes/atlanteans/sawmill/help.lua:29
 #: ../../tribes/atlanteans/scouts_house/help.lua:29
@@ -466,13 +461,24 @@ msgstr ""
 "raízes escuras e processadas nos moinhos. Os Atlantas gostam do seu gosto "
 "forte e utilizam a sua farinha para fazer pães."
 
-#: ../../tribes/atlanteans/blackroot_farm/conf:22
-msgid "Plant blackroot"
-msgstr "Planta raízes negras"
-
 #: ../../tribes/atlanteans/blackroot_farm/conf:23
-msgid "Harvest blackroot"
-msgstr "Cultiva raiz negra"
+msgid "planting blackroot"
+msgstr ""
+
+#: ../../tribes/atlanteans/blackroot_farm/conf:25
+msgid "harvesting blackroot"
+msgstr ""
+
+#: ../../tribes/atlanteans/blackroot_farm/conf:43
+#: ../../tribes/atlanteans/farm/conf:46
+msgid "Out of Fields"
+msgstr ""
+
+#: ../../tribes/atlanteans/blackroot_farm/conf:44
+msgid ""
+"The farmer working at this blackroot farm has no cleared soil to plant his "
+"seeds."
+msgstr ""
 
 #: ../../tribes/atlanteans/blackroot_farm/help.lua:17
 msgid "Sow and harvest blackroot."
@@ -523,10 +529,6 @@ msgid "Works at construction sites to raise new buildings."
 msgstr ""
 "Trabalha nas obras de construção para construir as novas construções."
 
-#: ../../tribes/atlanteans/burner/conf:1
-msgid "Burns coal."
-msgstr "Produz Carvão."
-
 #
 # File: ../../tribes/atlanteans/carrier/conf, line: 1
 # File: ../../tribes/atlanteans/carrier/conf, line: 1
@@ -559,15 +561,33 @@ msgid ""
 "send him away."
 msgstr ""
 
+#: ../../tribes/atlanteans/charcoal_burner/conf:1
+msgid "Burns coal."
+msgstr "Produz Carvão."
+
 #: ../../tribes/atlanteans/coal/conf:1
 msgid ""
 "The Atlantean fires in smelting works, armorsmithies and weaponsmithies are "
 "fed with coal. This coal is mined in coal mines or produced out of logs by a "
-"charcoal burner."
+"charcoal kiln."
 msgstr ""
-"Os fogos dos Atlantas na funilaria, ferreiros de armas e armaduras são "
-"alimentados com carvão. O carvão é retirado em minas de carvão ou produzidas "
-"através de troncos de madeira na carvoaria."
+
+#: ../../tribes/atlanteans/coalmine/conf:26
+#: ../../tribes/atlanteans/crystalmine/conf:34
+#: ../../tribes/atlanteans/goldmine/conf:27
+#: ../../tribes/atlanteans/ironmine/conf:27
+msgid "mining"
+msgstr ""
+
+#: ../../tribes/atlanteans/coalmine/conf:43
+msgid "Main Coal Vein Exhausted"
+msgstr ""
+
+#: ../../tribes/atlanteans/coalmine/conf:44
+msgid ""
+"This coal mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider dismantling or destroying it."
+msgstr ""
 
 #: ../../tribes/atlanteans/coalmine/help.lua:17
 msgid "Digs coal out of the ground in mountain terrain."
@@ -892,8 +912,8 @@ msgid "Builder"
 msgstr "Construtor"
 
 #: ../../tribes/atlanteans/conf:111
-msgid "Burner"
-msgstr "Carvoeiro"
+msgid "Charcoal Burner"
+msgstr ""
 
 #: ../../tribes/atlanteans/conf:112
 msgid "Shipwright"
@@ -1036,6 +1056,7 @@ msgid "Tower"
 msgstr "Torre"
 
 #: ../../tribes/atlanteans/conf:158
+#: ../../tribes/atlanteans/scripting/sc00_headquarters.lua:10
 msgid "Headquarters"
 msgstr "Quartel-general"
 
@@ -1107,8 +1128,8 @@ msgid "Bakery"
 msgstr "Padaria"
 
 #: ../../tribes/atlanteans/conf:177
-msgid "Charcoal Burner’s House"
-msgstr "Casa do Carvoeiro"
+msgid "Charcoal Kiln"
+msgstr ""
 
 #: ../../tribes/atlanteans/conf:178
 msgid "Smelting Works"
@@ -1207,17 +1228,27 @@ msgstr ""
 "Farinha de milho é produzida no moinho através de milho e um dos três "
 "ingredientes do pão Atlanta produzido nas padarias."
 
-#: ../../tribes/atlanteans/crystalmine/conf:27
-msgid "Mine stone"
-msgstr "Extrai pedra"
-
 #: ../../tribes/atlanteans/crystalmine/conf:28
-msgid "Mine quartz"
-msgstr "Extrai quartzo"
+msgid "mining stone"
+msgstr ""
 
-#: ../../tribes/atlanteans/crystalmine/conf:29
-msgid "Mine diamond"
-msgstr "Extrai diamantes"
+#: ../../tribes/atlanteans/crystalmine/conf:30
+msgid "mining quartz"
+msgstr ""
+
+#: ../../tribes/atlanteans/crystalmine/conf:32
+msgid "mining diamonds"
+msgstr ""
+
+#: ../../tribes/atlanteans/crystalmine/conf:88
+msgid "Main Crystal Vein Exhausted"
+msgstr ""
+
+#: ../../tribes/atlanteans/crystalmine/conf:89
+msgid ""
+"This crystal mine’s main vein is exhausted. Expect strongly diminished "
+"returns on investment. You should consider dismantling or destroying it."
+msgstr ""
 
 #: ../../tribes/atlanteans/crystalmine/help.lua:17
 msgid "Carve precious stones out of the rock in mountain terrain."
@@ -1264,17 +1295,22 @@ msgstr ""
 msgid "Trains soldiers in ‘Attack’."
 msgstr ""
 
-#: ../../tribes/atlanteans/dungeon/help.lua:26
+#: ../../tribes/atlanteans/dungeon/help.lua:28
 msgid "Attack Training:"
 msgstr ""
 
-#: ../../tribes/atlanteans/farm/conf:24
-msgid "Plant corn"
-msgstr "Cultivar o milho"
-
 #: ../../tribes/atlanteans/farm/conf:25
-msgid "Harvest corn"
-msgstr "Colher o milho"
+msgid "planting corn"
+msgstr ""
+
+#: ../../tribes/atlanteans/farm/conf:27
+msgid "harvesting corn"
+msgstr ""
+
+#: ../../tribes/atlanteans/farm/conf:47
+msgid ""
+"The farmer working at this farm has no cleared soil to plant his seeds."
+msgstr ""
 
 #: ../../tribes/atlanteans/farm/help.lua:17
 msgid "Sow and harvest corn."
@@ -1313,6 +1349,21 @@ msgstr "Faz criação de peixe."
 msgid "The fisher fishes delicious fish."
 msgstr "O pescador pesca os mais frescos dos peixes."
 
+#: ../../tribes/atlanteans/fishers_house/conf:20
+msgid "fishing"
+msgstr ""
+
+#: ../../tribes/atlanteans/fishers_house/conf:27
+msgid "Out of Fish"
+msgstr ""
+
+#: ../../tribes/atlanteans/fishers_house/conf:28
+msgid ""
+"The fisher working out of this fisher’s house can’t find any fish in his "
+"working radius. Remember that you can increase the number of existing fish "
+"by building a fishbreeder’s house."
+msgstr ""
+
 #: ../../tribes/atlanteans/fishers_house/help.lua:17
 msgid "Fishes on the coast near the house."
 msgstr ""
@@ -1337,6 +1388,10 @@ msgstr ""
 msgid "Plants trees."
 msgstr "Planta árvores"
 
+#: ../../tribes/atlanteans/foresters_house/conf:21
+msgid "planting trees"
+msgstr ""
+
 #: ../../tribes/atlanteans/foresters_house/help.lua:17
 msgid "Plants trees in the surrounding area."
 msgstr ""
@@ -1345,10 +1400,6 @@ msgstr ""
 msgid ""
 "The foresters’s house needs free space within the working radius to plant "
 "the trees."
-msgstr ""
-
-#: ../../tribes/atlanteans/foresters_house/help.lua:30
-msgid "Calculaiton needed"
 msgstr ""
 
 #: ../../tribes/atlanteans/geologist/conf:1
@@ -1371,6 +1422,16 @@ msgid ""
 "Golden tabards are produced in Atlantean weaving mills out of gold yarn. "
 "They are used in the labyrinth – together with food – to train soldiers from "
 "health level 0 to level 1."
+msgstr ""
+
+#: ../../tribes/atlanteans/goldmine/conf:44
+msgid "Main Gold Vein Exhausted"
+msgstr ""
+
+#: ../../tribes/atlanteans/goldmine/conf:45
+msgid ""
+"This gold mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider dismantling or destroying it."
 msgstr ""
 
 #: ../../tribes/atlanteans/goldmine/help.lua:17
@@ -1405,11 +1466,11 @@ msgid ""
 "is produced by the toolsmith."
 msgstr ""
 
-#: ../../tribes/atlanteans/headquarters/help.lua:16
-msgid "Accomodation for your people. Also stores your wares and tools."
+#: ../../tribes/atlanteans/headquarters/help.lua:17
+msgid "Accommodation for your people. Also stores your wares and tools."
 msgstr ""
 
-#: ../../tribes/atlanteans/headquarters/help.lua:17
+#: ../../tribes/atlanteans/headquarters/help.lua:18
 msgid "The headquarters is your main building."
 msgstr ""
 
@@ -1446,6 +1507,10 @@ msgstr ""
 msgid "Breeds the strong atlantean horses"
 msgstr "Faz criação dos fortes cavalos Atlântas"
 
+#: ../../tribes/atlanteans/horsefarm/conf:26
+msgid "breeding horses"
+msgstr ""
+
 #: ../../tribes/atlanteans/horsefarm/help.lua:17
 msgid "Breeds horses for adding them to the transportation system."
 msgstr ""
@@ -1453,6 +1518,20 @@ msgstr ""
 #: ../../tribes/atlanteans/hunter/conf:1
 msgid "The Hunter brings fresh, raw meat to the Atlanteans."
 msgstr "O Caçador traz carne fresca e crua para os Atlântas."
+
+#: ../../tribes/atlanteans/hunters_house/conf:20
+msgid "hunting"
+msgstr ""
+
+#: ../../tribes/atlanteans/hunters_house/conf:28
+msgid "Out of Game"
+msgstr ""
+
+#: ../../tribes/atlanteans/hunters_house/conf:29
+msgid ""
+"The hunter working out of this hunter’s house can’t find any game in his "
+"working radius."
+msgstr ""
 
 #: ../../tribes/atlanteans/hunters_house/help.lua:17
 msgid "Hunts animals to produce meat."
@@ -1479,6 +1558,16 @@ msgstr ""
 "Ferro é feito do minério de ferro na funilaria. É utilizado pelos mais "
 "diversos ferreiros."
 
+#: ../../tribes/atlanteans/ironmine/conf:44
+msgid "Main Iron Vein Exhausted"
+msgstr ""
+
+#: ../../tribes/atlanteans/ironmine/conf:45
+msgid ""
+"This iron mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider dismantling or destroying it."
+msgstr ""
+
 #: ../../tribes/atlanteans/ironmine/help.lua:17
 msgid "Digs iron ore out of the ground in mountain terrain."
 msgstr ""
@@ -1492,38 +1581,42 @@ msgstr ""
 "funilaria."
 
 #: ../../tribes/atlanteans/labyrinth/conf:46
-msgid "Upgrade soldier defense from level 0 to level 1"
-msgstr ""
-
-#: ../../tribes/atlanteans/labyrinth/conf:47
-msgid "Upgrade soldier defense from level 1 to level 2"
+msgid "sleeping"
 msgstr ""
 
 #: ../../tribes/atlanteans/labyrinth/conf:48
-msgid "Upgrade soldier health from level 0 to level 1"
-msgstr ""
-
-#: ../../tribes/atlanteans/labyrinth/conf:49
-msgid "Upgrade soldier evade from level 0 to level 1"
+msgid "upgrading soldier defense from level 0 to level 1"
 msgstr ""
 
 #: ../../tribes/atlanteans/labyrinth/conf:50
-msgid "Upgrade soldier evade from level 1 to level 2"
+msgid "upgrading soldier defense from level 1 to level 2"
+msgstr ""
+
+#: ../../tribes/atlanteans/labyrinth/conf:52
+msgid "upgrading soldier health from level 0 to level 1"
+msgstr ""
+
+#: ../../tribes/atlanteans/labyrinth/conf:54
+msgid "upgrading soldier evade from level 0 to level 1"
+msgstr ""
+
+#: ../../tribes/atlanteans/labyrinth/conf:56
+msgid "upgrading soldier evade from level 1 to level 2"
 msgstr ""
 
 #: ../../tribes/atlanteans/labyrinth/help.lua:19
 msgid "Trains soldiers in ‘Defense’, ‘Evade’, and ‘Health’."
 msgstr ""
 
-#: ../../tribes/atlanteans/labyrinth/help.lua:26
+#: ../../tribes/atlanteans/labyrinth/help.lua:28
 msgid "Defense Training:"
 msgstr ""
 
-#: ../../tribes/atlanteans/labyrinth/help.lua:31
+#: ../../tribes/atlanteans/labyrinth/help.lua:33
 msgid "Evade Training:"
 msgstr ""
 
-#: ../../tribes/atlanteans/labyrinth/help.lua:34
+#: ../../tribes/atlanteans/labyrinth/help.lua:36
 msgid "Health Training:"
 msgstr ""
 
@@ -1540,12 +1633,9 @@ msgstr ""
 #: ../../tribes/atlanteans/log/conf:1
 msgid ""
 "Logs are the base for planks, which are used in nearly every building of the "
-"Atlanteans. Besides the sawmill, the charcoal burner, the toolsmithy and the "
+"Atlanteans. Besides the sawmill, the charcoal kiln, the toolsmithy and the "
 "smokery also need logs for their work."
 msgstr ""
-"Troncos de madeira são a base para as tábuas, que são utilizadas em "
-"praticamente todas as construções dos Atlantas. Além do marceneiro, a "
-"carvoaria, o ferreiro e a defumaria também necessitam destes troncos."
 
 #: ../../tribes/atlanteans/long_trident/conf:1
 msgid ""
@@ -1576,13 +1666,13 @@ msgstr ""
 "Pinças de ordenha são utilizadas pelo criador de aranhas para obter a sua "
 "seda. Produzidas no Ferramenteiro."
 
-#: ../../tribes/atlanteans/mill/conf:26
-msgid "Produce cornflour"
-msgstr "Produz farinha de milho"
-
 #: ../../tribes/atlanteans/mill/conf:27
-msgid "Produce blackrootflour"
-msgstr "Produz farinha de raiz negra"
+msgid "grinding corn"
+msgstr ""
+
+#: ../../tribes/atlanteans/mill/conf:29
+msgid "grinding blackroot"
+msgstr ""
 
 #
 # File: ../../tribes/atlanteans/miller/conf, line: 1
@@ -1619,6 +1709,16 @@ msgstr ""
 "estaleiro também utilizam tábuas de madeira para produzir vários tipos de "
 "tridentes e barcos."
 
+#: ../../tribes/atlanteans/quarry/conf:27
+msgid "Out of Rocks"
+msgstr ""
+
+#: ../../tribes/atlanteans/quarry/conf:28
+msgid ""
+"The stonecutter working at this quarry can’t find any rocks in his working "
+"radius."
+msgstr ""
+
 #: ../../tribes/atlanteans/quarry/help.lua:17
 msgid "Carves stones out of rocks in the vicinity."
 msgstr ""
@@ -1650,19 +1750,19 @@ msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
 msgstr "O explorador explora áreas inexploradas explorando-as."
 
-#: ../../tribes/atlanteans/scripting/sc00_headquarters_medium.lua:10
-msgid "Headquarters medium"
-msgstr "Quartel-general médio"
+#: ../../tribes/atlanteans/scouts_house/conf:22
+msgid "scouting"
+msgstr ""
 
-#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:10
-msgid "Castle village"
-msgstr "Aldeia do Castelo"
+#: ../../tribes/atlanteans/scripting/sc01_fortified_village.lua:10
+msgid "Fortified Village"
+msgstr ""
 
-#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:101
+#: ../../tribes/atlanteans/scripting/sc01_fortified_village.lua:101
 msgid "Not enough space"
 msgstr "Espaço insuficiente"
 
-#: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:102
+#: ../../tribes/atlanteans/scripting/sc01_fortified_village.lua:102
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
@@ -1685,9 +1785,9 @@ msgstr "Um Navio pronto para navegar"
 msgid "Works at the shipyard and constructs new ships."
 msgstr "Trabalha no Estaleiro naval onde constrói as novas embarcações"
 
-#: ../../tribes/atlanteans/shipyard/conf:28
-msgid "Constructing ship"
-msgstr "Construindo o Navio"
+#: ../../tribes/atlanteans/shipyard/conf:29
+msgid "constructing a ship"
+msgstr ""
 
 #: ../../tribes/atlanteans/shovel/conf:1
 msgid ""
@@ -1706,13 +1806,13 @@ msgstr ""
 msgid "Smelts iron."
 msgstr "Funde ferro"
 
-#: ../../tribes/atlanteans/smelting_works/conf:26
-msgid "Smelt iron"
-msgstr "Fundir ferro"
-
 #: ../../tribes/atlanteans/smelting_works/conf:27
-msgid "Smelt gold"
-msgstr "Fundir ouro"
+msgid "smelting iron"
+msgstr ""
+
+#: ../../tribes/atlanteans/smelting_works/conf:29
+msgid "smelting gold"
+msgstr ""
 
 #: ../../tribes/atlanteans/smelting_works/help.lua:17
 msgid "Smelts iron ore into iron and gold ore into gold."
@@ -1747,13 +1847,13 @@ msgid "Smokes meat and fish."
 msgstr ""
 "Defuma a carne e peixe, ou seja seca os alimentos com o fumo da madeira."
 
-#: ../../tribes/atlanteans/smokery/conf:29
-msgid "Smoke meat"
-msgstr "Defumar a carne"
+#: ../../tribes/atlanteans/smokery/conf:28
+msgid "smoking meat"
+msgstr ""
 
 #: ../../tribes/atlanteans/smokery/conf:30
-msgid "Smoke fish"
-msgstr "Defumar o peixe"
+msgid "smoking fish"
+msgstr ""
 
 #: ../../tribes/atlanteans/soldier/conf:1
 msgid "Defend and Conquer!"
@@ -1820,53 +1920,49 @@ msgstr ""
 msgid "Produces tools for the workers."
 msgstr "Produz ferramentas para os trabalhadores."
 
-#: ../../tribes/atlanteans/toolsmithy/conf:38
-msgid "Produce bread paddle"
+#: ../../tribes/atlanteans/toolsmithy/conf:39
+msgid "making a bread paddle"
 msgstr ""
 
-#: ../../tribes/atlanteans/toolsmithy/conf:39
-msgid "Produce bucket"
-msgstr "Produz balde"
-
-#: ../../tribes/atlanteans/toolsmithy/conf:40
-msgid "Produce fire tongs"
-msgstr "Produz Tenazes"
-
 #: ../../tribes/atlanteans/toolsmithy/conf:41
-msgid "Produce fishing net"
-msgstr "Produz rede de pesca"
-
-#: ../../tribes/atlanteans/toolsmithy/conf:42
-msgid "Produce hammer"
-msgstr "Produz martelos"
-
-#: ../../tribes/atlanteans/toolsmithy/conf:43
-msgid "Produce hook pole"
-msgstr "Produz gancho"
-
-#: ../../tribes/atlanteans/toolsmithy/conf:44
-msgid "Produce bow"
-msgstr "Produz arco"
+msgid "making a bucket"
+msgstr ""
 
 #: ../../tribes/atlanteans/toolsmithy/conf:45
-msgid "Produce milking tongs"
-msgstr "Produz pinças de ordenha"
-
-#: ../../tribes/atlanteans/toolsmithy/conf:46
-msgid "Produce pick"
-msgstr "Produz picareta"
+msgid "making a fishing net"
+msgstr ""
 
 #: ../../tribes/atlanteans/toolsmithy/conf:47
-msgid "Produce saw"
-msgstr "Produz serra"
-
-#: ../../tribes/atlanteans/toolsmithy/conf:48
-msgid "Produce scythe"
-msgstr "Produz foice"
+msgid "making a hammer"
+msgstr ""
 
 #: ../../tribes/atlanteans/toolsmithy/conf:49
-msgid "Produce shovel"
-msgstr "Produz pá"
+msgid "making a hook pole"
+msgstr ""
+
+#: ../../tribes/atlanteans/toolsmithy/conf:51
+msgid "making a bow"
+msgstr ""
+
+#: ../../tribes/atlanteans/toolsmithy/conf:53
+msgid "making milking tongs"
+msgstr ""
+
+#: ../../tribes/atlanteans/toolsmithy/conf:55
+msgid "making a pick"
+msgstr ""
+
+#: ../../tribes/atlanteans/toolsmithy/conf:57
+msgid "making a saw"
+msgstr ""
+
+#: ../../tribes/atlanteans/toolsmithy/conf:59
+msgid "making a scythe"
+msgstr ""
+
+#: ../../tribes/atlanteans/toolsmithy/conf:61
+msgid "making a shovel"
+msgstr ""
 
 #: ../../tribes/atlanteans/tower/conf:8
 msgid "Your soldiers have occupied your tower."
@@ -1892,41 +1988,50 @@ msgstr ""
 msgid "Produces weapons for the soldiers."
 msgstr "Produz armas para os soldados."
 
-#: ../../tribes/atlanteans/weaponsmithy/conf:33
-msgid "Produce light trident"
-msgstr "Produz tridente leve"
-
 #: ../../tribes/atlanteans/weaponsmithy/conf:34
-msgid "Produce long trident"
-msgstr "Produz tridente longo"
-
-#: ../../tribes/atlanteans/weaponsmithy/conf:35
-msgid "Produce steel trident"
-msgstr "Produz tridente de aço"
+msgid "forging a light trident"
+msgstr ""
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:36
-msgid "Produce double trident"
-msgstr "Produz tridente duplo"
+msgid "forging a long trident"
+msgstr ""
 
-#: ../../tribes/atlanteans/weaponsmithy/conf:37
-msgid "Produce heavy double trident"
-msgstr "Produz Tridente de Guerra"
+#: ../../tribes/atlanteans/weaponsmithy/conf:38
+msgid "forging a steel trident"
+msgstr ""
+
+#: ../../tribes/atlanteans/weaponsmithy/conf:40
+msgid "forging a double trident"
+msgstr ""
+
+#: ../../tribes/atlanteans/weaponsmithy/conf:42
+msgid "forging a heavy double trident"
+msgstr ""
 
 #: ../../tribes/atlanteans/weaver/conf:1
 msgid "Produces cloth for buildings, ships and soldiers."
 msgstr "Produz tecido para construções, barcos e soldados."
 
-#: ../../tribes/atlanteans/weaving-mill/conf:24
-msgid "Produce spidercloth"
-msgstr "Produz seda de aranha"
+#: ../../tribes/atlanteans/weaving-mill/conf:28
+msgid "weaving spidercloth"
+msgstr ""
 
-#: ../../tribes/atlanteans/weaving-mill/conf:25
-msgid "Produce tabard"
-msgstr "Produz túnicas"
+#: ../../tribes/atlanteans/weaving-mill/conf:30
+msgid "tailoring a tabard"
+msgstr ""
 
-#: ../../tribes/atlanteans/weaving-mill/conf:26
-msgid "Produce golden tabard"
-msgstr "Produz túnicas douradas"
+#: ../../tribes/atlanteans/weaving-mill/conf:32
+msgid "tailoring a golden tabard"
+msgstr ""
+
+#: ../../tribes/atlanteans/well/conf:30
+msgid "Out of Water"
+msgstr ""
+
+#: ../../tribes/atlanteans/well/conf:31
+msgid ""
+"The carrier working at this well can’t find any water in his working radius."
+msgstr ""
 
 #: ../../tribes/atlanteans/well/help.lua:18
 msgid "Draws water out of the deep."
@@ -1935,6 +2040,17 @@ msgstr ""
 #: ../../tribes/atlanteans/woodcutter/conf:1
 msgid "Fells trees."
 msgstr "Corta árvores"
+
+#: ../../tribes/atlanteans/woodcutters_house/conf:28
+msgid "Out of Trees"
+msgstr ""
+
+#: ../../tribes/atlanteans/woodcutters_house/conf:29
+msgid ""
+"The woodcutter working at this woodcutter’s house can’t find any trees in "
+"his working radius. You should consider dismantling or destroying the "
+"building or building a forester’s house."
+msgstr ""
 
 #: ../../tribes/atlanteans/woodcutters_house/help.lua:16
 msgid "Fell trees in the surrounding area and process them into logs."

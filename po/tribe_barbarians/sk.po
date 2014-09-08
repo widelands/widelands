@@ -2,96 +2,21 @@
 # Copyright (C) 2008 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
 # Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
-# Miroslav Remák <Unknown>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-07-16 06:11+0000\n"
-"PO-Revision-Date: 2014-07-17 05:24+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"POT-Creation-Date: 2014-08-05 11:10+0000\n"
+"PO-Revision-Date: 2014-08-10 20:08+0000\n"
+"Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2014-07-18 04:37+0000\n"
-"X-Generator: Launchpad (build 17114)\n"
-"X-Poedit-Country: Czech Republic\n"
+"X-Launchpad-Export-Date: 2014-08-11 05:36+0000\n"
+"X-Generator: Launchpad (build 17156)\n"
 "Language: sk\n"
-"X-Poedit-Language: czech\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your barracks discovered an aggressor."
@@ -348,60 +273,41 @@ msgid ""
 msgstr ""
 "Sekera je základnou zbraňou barbarov. Je ňou vyzbrojený každý mladý vojak."
 
-#: ../../tribes/barbarians/axfactory/conf:32
-#: ../../tribes/barbarians/warmill/conf:36
-msgid "Produce ax"
-msgstr "Vyrobiť sekeru"
-
 #: ../../tribes/barbarians/axfactory/conf:33
 #: ../../tribes/barbarians/warmill/conf:37
-msgid "Produce sharp ax"
-msgstr "Vyrobiť ostrú sekeru"
-
-#: ../../tribes/barbarians/axfactory/conf:34
-#: ../../tribes/barbarians/warmill/conf:38
-msgid "Produce broad ax"
-msgstr "Vyrobiť širokú sekeru"
+msgid "forging an ax"
+msgstr "kutie sekery"
 
 #: ../../tribes/barbarians/axfactory/conf:35
-#: ../../tribes/barbarians/bakery/conf:26
-#: ../../tribes/barbarians/big_inn/conf:30
-#: ../../tribes/barbarians/brewery/conf:24
-#: ../../tribes/barbarians/burners_house/conf:23
-#: ../../tribes/barbarians/cattlefarm/conf:25
-#: ../../tribes/barbarians/coalmine/conf:24
-#: ../../tribes/barbarians/deep_coalmine/conf:27
-#: ../../tribes/barbarians/deep_goldmine/conf:27
-#: ../../tribes/barbarians/deep_oremine/conf:27
-#: ../../tribes/barbarians/deeper_coalmine/conf:26
-#: ../../tribes/barbarians/deeper_goldmine/conf:26
-#: ../../tribes/barbarians/deeper_oremine/conf:26
-#: ../../tribes/barbarians/farm/conf:23
-#: ../../tribes/barbarians/fishers_hut/conf:18
-#: ../../tribes/barbarians/gamekeepers_hut/conf:19
-#: ../../tribes/barbarians/goldmine/conf:25
-#: ../../tribes/barbarians/granitemine/conf:22
-#: ../../tribes/barbarians/hardener/conf:22
-#: ../../tribes/barbarians/helmsmithy/conf:34
-#: ../../tribes/barbarians/hunters_hut/conf:19
-#: ../../tribes/barbarians/inn/conf:29
-#: ../../tribes/barbarians/lime_kiln/conf:22
-#: ../../tribes/barbarians/lumberjacks_hut/conf:18
-#: ../../tribes/barbarians/metalworks/conf:48
-#: ../../tribes/barbarians/micro-brewery/conf:27
-#: ../../tribes/barbarians/oremine/conf:25
-#: ../../tribes/barbarians/quarry/conf:18
-#: ../../tribes/barbarians/rangers_hut/conf:17
-#: ../../tribes/barbarians/reed_yard/conf:21
-#: ../../tribes/barbarians/scouts_hut/conf:21
-#: ../../tribes/barbarians/shipyard/conf:28
-#: ../../tribes/barbarians/smelting_works/conf:31
-#: ../../tribes/barbarians/tavern/conf:30
-#: ../../tribes/barbarians/warmill/conf:42
-#: ../../tribes/barbarians/weaving-mill/conf:23
-#: ../../tribes/barbarians/well/conf:18
-msgid "Work"
-msgstr "Práca"
+#: ../../tribes/barbarians/warmill/conf:39
+msgid "forging a sharp ax"
+msgstr "kutie ostrej sekery"
+
+#: ../../tribes/barbarians/axfactory/conf:37
+#: ../../tribes/barbarians/warmill/conf:41
+msgid "forging a broad ax"
+msgstr "kutie širokej sekery"
+
+#: ../../tribes/barbarians/axfactory/conf:39
+#: ../../tribes/barbarians/bakery/conf:27
+#: ../../tribes/barbarians/big_inn/conf:34
+#: ../../tribes/barbarians/charcoal_kiln/conf:24
+#: ../../tribes/barbarians/farm/conf:26
+#: ../../tribes/barbarians/gamekeepers_hut/conf:20
+#: ../../tribes/barbarians/hardener/conf:23
+#: ../../tribes/barbarians/helmsmithy/conf:38
+#: ../../tribes/barbarians/inn/conf:32
+#: ../../tribes/barbarians/lime_kiln/conf:23
+#: ../../tribes/barbarians/lumberjacks_hut/conf:19
+#: ../../tribes/barbarians/metalworks/conf:59
+#: ../../tribes/barbarians/quarry/conf:19
+#: ../../tribes/barbarians/reed_yard/conf:24
+#: ../../tribes/barbarians/shipyard/conf:30
+#: ../../tribes/barbarians/smelting_works/conf:34
+#: ../../tribes/barbarians/warmill/conf:49
+#: ../../tribes/barbarians/well/conf:19
+msgid "working"
+msgstr "pracovanie"
 
 #: ../../tribes/barbarians/axfactory/help.lua:13
 #: ../../tribes/barbarians/warmill/help.lua:13
@@ -418,10 +324,12 @@ msgid ""
 "‘A new warrior’s ax brings forth the best in its wielder – or the worst in "
 "its maker.’"
 msgstr ""
+"„Nová bojovnícka sekera dokáže zručnosť svojho nositeľa – alebo babráctvo "
+"svojho tvorcu.“"
 
 #: ../../tribes/barbarians/axfactory/help.lua:17
 msgid "Produces axes, sharp axes and broad axes."
-msgstr ""
+msgstr "Vyrába sekery, ostré sekery a široké sekery."
 
 #: ../../tribes/barbarians/axfactory/help.lua:18
 msgid ""
@@ -429,17 +337,22 @@ msgid ""
 "three buildings. It is an upgrade from the metal workshop but doesn’t "
 "require additional qualification for the worker."
 msgstr ""
+"Barbarská továreň na sekery je strednou produkčnou stavbou v sérii troch "
+"budov. Vzniká vylepšením kovodielne, ale nepožaduje vyššiu kvalifikáciu "
+"pracovníka."
 
 #: ../../tribes/barbarians/axfactory/help.lua:30
 msgid ""
 "If all needed wares are delivered in time, this building can produce each "
 "type of ax in about %s on average."
 msgstr ""
+"Ak sa všetok potrebný tovar dodá načas, táto budova dokáže vyrobiť každý typ "
+"sekery v priemere za asi %s."
 
 #: ../../tribes/barbarians/axfactory/help.lua:31
 #: ../../tribes/barbarians/bakery/help.lua:31
-#: ../../tribes/barbarians/battlearena/help.lua:38
-#: ../../tribes/barbarians/cattlefarm/help.lua:31
+#: ../../tribes/barbarians/battlearena/help.lua:40
+#: ../../tribes/barbarians/cattlefarm/help.lua:30
 #: ../../tribes/barbarians/coalmine/help.lua:32
 #: ../../tribes/barbarians/deep_coalmine/help.lua:34
 #: ../../tribes/barbarians/deep_goldmine/help.lua:32
@@ -448,7 +361,7 @@ msgstr ""
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:32
 #: ../../tribes/barbarians/deeper_oremine/help.lua:32
 #: ../../tribes/barbarians/fishers_hut/help.lua:31
-#: ../../tribes/barbarians/gamekeepers_hut/help.lua:31
+#: ../../tribes/barbarians/gamekeepers_hut/help.lua:33
 #: ../../tribes/barbarians/goldmine/help.lua:31
 #: ../../tribes/barbarians/granitemine/help.lua:31
 #: ../../tribes/barbarians/hunters_hut/help.lua:31
@@ -460,13 +373,14 @@ msgstr ""
 #: ../../tribes/barbarians/quarry/help.lua:30
 #: ../../tribes/barbarians/rangers_hut/help.lua:32
 #: ../../tribes/barbarians/reed_yard/help.lua:31
-#: ../../tribes/barbarians/trainingcamp/help.lua:46
+#: ../../tribes/barbarians/trainingcamp/help.lua:48
 #: ../../tribes/barbarians/warmill/help.lua:31
 #: ../../tribes/barbarians/well/help.lua:31
 msgid "%d second"
 msgid_plural "%d seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d sekúnd"
+msgstr[1] "%d sekundu"
+msgstr[2] "%d sekundy"
 
 #: ../../tribes/barbarians/axfactory/help.lua:33
 msgid ""
@@ -484,8 +398,8 @@ msgstr "Pečie chlieb pracovníkom."
 #: ../../tribes/barbarians/barrier/help.lua:13
 #: ../../tribes/barbarians/big_inn/help.lua:13
 #: ../../tribes/barbarians/brewery/help.lua:13
-#: ../../tribes/barbarians/burners_house/help.lua:13
 #: ../../tribes/barbarians/cattlefarm/help.lua:13
+#: ../../tribes/barbarians/charcoal_kiln/help.lua:13
 #: ../../tribes/barbarians/citadel/help.lua:13
 #: ../../tribes/barbarians/donjon/help.lua:13
 #: ../../tribes/barbarians/farm/help.lua:13
@@ -500,6 +414,7 @@ msgstr "Pečie chlieb pracovníkom."
 #: ../../tribes/barbarians/quarry/help.lua:13
 #: ../../tribes/barbarians/scouts_hut/help.lua:13
 #: ../../tribes/barbarians/sentry/help.lua:13
+#: ../../tribes/barbarians/shipyard/help.lua:13
 #: ../../tribes/barbarians/smelting_works/help.lua:13
 #: ../../tribes/barbarians/tavern/help.lua:13
 #: ../../tribes/barbarians/warehouse/help.lua:13
@@ -513,9 +428,9 @@ msgstr "Potrebný zdroj"
 #: ../../tribes/barbarians/big_inn/help.lua:17
 #: ../../tribes/barbarians/brewery/help.lua:13
 #: ../../tribes/barbarians/brewery/help.lua:17
-#: ../../tribes/barbarians/burners_house/help.lua:13
-#: ../../tribes/barbarians/burners_house/help.lua:17
 #: ../../tribes/barbarians/cattlefarm/help.lua:13
+#: ../../tribes/barbarians/charcoal_kiln/help.lua:13
+#: ../../tribes/barbarians/charcoal_kiln/help.lua:17
 #: ../../tribes/barbarians/citadel/help.lua:13
 #: ../../tribes/barbarians/donjon/help.lua:13
 #: ../../tribes/barbarians/farm/help.lua:13
@@ -523,20 +438,21 @@ msgstr "Potrebný zdroj"
 #: ../../tribes/barbarians/hardener/help.lua:13
 #: ../../tribes/barbarians/hardener/help.lua:17
 #: ../../tribes/barbarians/headquarters/help.lua:13
-#: ../../tribes/barbarians/headquarters/help.lua:17
+#: ../../tribes/barbarians/headquarters/help.lua:18
 #: ../../tribes/barbarians/headquarters_interim/help.lua:13
-#: ../../tribes/barbarians/headquarters_interim/help.lua:17
+#: ../../tribes/barbarians/headquarters_interim/help.lua:18
 #: ../../tribes/barbarians/helmsmithy/help.lua:13
 #: ../../tribes/barbarians/helmsmithy/help.lua:17
 #: ../../tribes/barbarians/inn/help.lua:13
 #: ../../tribes/barbarians/inn/help.lua:17
 #: ../../tribes/barbarians/port/help.lua:13
-#: ../../tribes/barbarians/port/help.lua:18
+#: ../../tribes/barbarians/port/help.lua:17
 #: ../../tribes/barbarians/quarry/help.lua:13
 #: ../../tribes/barbarians/scouts_hut/help.lua:13
 #: ../../tribes/barbarians/scouts_hut/help.lua:17
 #: ../../tribes/barbarians/sentry/help.lua:13
-#: ../../tribes/barbarians/shipyard/help.lua:18
+#: ../../tribes/barbarians/shipyard/help.lua:13
+#: ../../tribes/barbarians/shipyard/help.lua:17
 #: ../../tribes/barbarians/smelting_works/help.lua:13
 #: ../../tribes/barbarians/tavern/help.lua:13
 #: ../../tribes/barbarians/tavern/help.lua:17
@@ -547,13 +463,15 @@ msgstr "Potrebný text"
 
 #: ../../tribes/barbarians/bakery/help.lua:17
 msgid "Bakes pitta bread for soldiers and miners alike."
-msgstr ""
+msgstr "Pečie pitu pre vojakov a baníkov."
 
 #: ../../tribes/barbarians/bakery/help.lua:30
 msgid ""
 "If all needed wares are delivered in time, this building can produce a pitta "
 "bread in %s on average."
 msgstr ""
+"Ak sa všetok potrebný tovar dodá načas, táto budova dokáže vyrobiť jednu "
+"pitu v priemere za asi %s."
 
 #: ../../tribes/barbarians/barrier/conf:6
 msgid "Your soldiers have occupied your barrier."
@@ -565,7 +483,7 @@ msgstr "Vaši vojaci obsadili vašu hradbu."
 #: ../../tribes/barbarians/fortress/help.lua:16
 #: ../../tribes/barbarians/sentry/help.lua:16
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Umiestňuje vojakov a rozširuje územie."
 
 #: ../../tribes/barbarians/barrier/help.lua:17
 #: ../../tribes/barbarians/citadel/help.lua:17
@@ -577,19 +495,22 @@ msgid ""
 "arrow button to decrease the capacity. You can also click on a soldier to "
 "send him away."
 msgstr ""
-
-#: ../../tribes/barbarians/battlearena/conf:33
-#: ../../tribes/barbarians/trainingcamp/conf:43
-msgid "Sleep"
-msgstr "Spať"
+"Ak nemáte dostatok vojakov, ktorí by obsadzovali nové vojenské budovy, "
+"môžete znížiť kapacitu kliknutím na tlačidlo so šípkou nadol. Taktiež ak "
+"kliknete na niektorého vojaka, pošlete ho preč."
 
 #: ../../tribes/barbarians/battlearena/conf:34
-msgid "Upgrade soldier evade from level 0 to level 1"
-msgstr "Vylepšiť uhýbanie vojakov z úrovne 0 na úroveň 1"
+#: ../../tribes/barbarians/trainingcamp/conf:44
+msgid "sleeping"
+msgstr ""
 
-#: ../../tribes/barbarians/battlearena/conf:35
-msgid "Upgrade soldier evade from level 1 to level 2"
-msgstr "Vylepšiť uhýbanie vojakov z úrovne 1 na úroveň 2"
+#: ../../tribes/barbarians/battlearena/conf:36
+msgid "upgrading soldier evade from level 0 to level 1"
+msgstr "vylepšenie uhýbania vojakov z úrovne 0 na úroveň 1"
+
+#: ../../tribes/barbarians/battlearena/conf:38
+msgid "upgrading soldier evade from level 1 to level 2"
+msgstr "vylepšenie uhýbania vojakov z úrovne 1 na úroveň 2"
 
 #: ../../tribes/barbarians/battlearena/help.lua:15
 msgid "Said to originate from Neidhardt, the famous trainer."
@@ -602,7 +523,7 @@ msgstr "„Niet lepšieho priateľa v boji než úder nepriateľa, ktorý ťa mi
 
 #: ../../tribes/barbarians/battlearena/help.lua:19
 msgid "Trains soldiers in ‘Evade’."
-msgstr ""
+msgstr "Cvičí vojakov v uhýbaní."
 
 #: ../../tribes/barbarians/battlearena/help.lua:19
 msgid ""
@@ -617,23 +538,29 @@ msgid ""
 "Barbarian soldiers cannot be trained in ‘Defense’ and will remain at the "
 "level with which they came."
 msgstr ""
+"Barbarských vojakov nemožno cvičiť v obrane, a preto zostanú na úrovni, s "
+"ktorou začínali."
 
-#: ../../tribes/barbarians/battlearena/help.lua:26
+#: ../../tribes/barbarians/battlearena/help.lua:28
 msgid "Evade Training:"
 msgstr "Výcvik v uhýbaní:"
 
-#: ../../tribes/barbarians/battlearena/help.lua:36
+#: ../../tribes/barbarians/battlearena/help.lua:38
 msgid ""
 "If all needed wares are delivered in time, a battle arena can train evade "
 "for one soldier from 0 to the highest level in %1$s and %2$s on average."
 msgstr ""
+"Ak sa všetok potrebný tovar dodá načas, zápasnícka aréna dokáže vycvičiť "
+"jedného vojaka v uhýbaní z úrovne 0 na najvyššiu úroveň v priemere za %1$s a "
+"%2$s."
 
-#: ../../tribes/barbarians/battlearena/help.lua:37
-#: ../../tribes/barbarians/trainingcamp/help.lua:45
+#: ../../tribes/barbarians/battlearena/help.lua:39
+#: ../../tribes/barbarians/trainingcamp/help.lua:47
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d minút"
+msgstr[1] "%d minútu"
+msgstr[2] "%d minúty"
 
 #: ../../tribes/barbarians/battleax/conf:1
 msgid ""
@@ -655,31 +582,31 @@ msgstr ""
 "Pivo sa vyrába v mikropivovaroch a používa sa v hostincoch a veľkých "
 "hostincoch na výrobu desiat."
 
-#: ../../tribes/barbarians/big_inn/conf:27
-#: ../../tribes/barbarians/inn/conf:27
-#: ../../tribes/barbarians/tavern/conf:29
-msgid "Produce ration"
-msgstr "Vyrobiť prídel"
-
 #: ../../tribes/barbarians/big_inn/conf:28
 #: ../../tribes/barbarians/inn/conf:28
-msgid "Produce snack"
-msgstr "Vyrobiť desiatu"
+#: ../../tribes/barbarians/tavern/conf:30
+msgid "preparing a ration"
+msgstr "pripravovanie prídelu"
 
-#: ../../tribes/barbarians/big_inn/conf:29
-msgid "Produce meal"
-msgstr "Vyrobiť obed"
+#: ../../tribes/barbarians/big_inn/conf:30
+#: ../../tribes/barbarians/inn/conf:30
+msgid "preparing a snack"
+msgstr "pripravovanie desiaty"
+
+#: ../../tribes/barbarians/big_inn/conf:32
+msgid "preparing a meal"
+msgstr "pripravovanie obedu"
 
 #: ../../tribes/barbarians/big_inn/help.lua:29
 #: ../../tribes/barbarians/brewery/help.lua:29
-#: ../../tribes/barbarians/burners_house/help.lua:29
+#: ../../tribes/barbarians/charcoal_kiln/help.lua:29
 #: ../../tribes/barbarians/farm/help.lua:29
 #: ../../tribes/barbarians/hardener/help.lua:29
 #: ../../tribes/barbarians/helmsmithy/help.lua:29
 #: ../../tribes/barbarians/inn/help.lua:29
-#: ../../tribes/barbarians/port/help.lua:27
+#: ../../tribes/barbarians/port/help.lua:26
 #: ../../tribes/barbarians/scouts_hut/help.lua:29
-#: ../../tribes/barbarians/shipyard/help.lua:30
+#: ../../tribes/barbarians/shipyard/help.lua:29
 #: ../../tribes/barbarians/smelting_works/help.lua:29
 #: ../../tribes/barbarians/tavern/help.lua:29
 #: ../../tribes/barbarians/weaving-mill/help.lua:29
@@ -717,6 +644,11 @@ msgid ""
 msgstr ""
 "Vyrába tie najlepšie pivá na posilnenie a uspokojenie vojakov počas výcviku."
 
+#: ../../tribes/barbarians/brewery/conf:25
+#: ../../tribes/barbarians/micro-brewery/conf:28
+msgid "brewing"
+msgstr "varenie"
+
 #: ../../tribes/barbarians/broadax/conf:1
 msgid ""
 "The broad ax is produced by the axfactory and the war mill. It is used in "
@@ -741,10 +673,6 @@ msgstr ""
 msgid "Works at construction sites to raise new buildings."
 msgstr "Pracuje na staveniskách, aby postavil nové budovy."
 
-#: ../../tribes/barbarians/burner/conf:1
-msgid "Burns coal."
-msgstr "Páli uhlie."
-
 #: ../../tribes/barbarians/carrier/conf:1
 msgid "Carries items along the roads."
 msgstr "Nosí predmety po cestách."
@@ -753,15 +681,25 @@ msgstr "Nosí predmety po cestách."
 msgid "Breeds the strong oxen that help with transporting wares."
 msgstr "Chová silné voly, ktoré pomáhajú prevážať výrobky."
 
+#: ../../tribes/barbarians/cattlefarm/conf:26
+msgid "rearing cattle"
+msgstr "chovanie dobytka"
+
 #: ../../tribes/barbarians/cattlefarm/help.lua:17
 msgid "Breeds oxen for adding them to the transportation system."
-msgstr ""
+msgstr "Chová voly a začleňuje ich do prepravného systému."
 
-#: ../../tribes/barbarians/cattlefarm/help.lua:30
+#: ../../tribes/barbarians/cattlefarm/help.lua:29
 msgid ""
 "If all needed wares are delivered in time, this building can produce an ox "
 "in %s on average."
 msgstr ""
+"Ak sa všetok potrebný tovar dodá načas, táto budova dokáže vychovať jedného "
+"vola v priemere za %s."
+
+#: ../../tribes/barbarians/charcoal_burner/conf:1
+msgid "Burns coal."
+msgstr "Páli uhlie."
 
 #: ../../tribes/barbarians/chief-miner/conf:1
 #: ../../tribes/barbarians/master-miner/conf:1
@@ -781,13 +719,42 @@ msgstr "Látku je potrebná na výrobu barbarských lodí. Vyrába sa z trstiny.
 #: ../../tribes/barbarians/coal/conf:1
 msgid ""
 "The fires of the barbarians are usually fed with coal. It is produced in "
-"coal mines or out of logs in a charcoal burner’s house. Consumers are "
-"several buildings: lime kiln, smelting works, axfactory, war mill, and helm "
-"smithy."
+"coal mines or out of logs in a charcoal kiln. Consumers are several "
+"buildings: lime kiln, smelting works, axfactory, war mill, and helm smithy."
 msgstr ""
 "Barbari zvyčajne pridávajú do ohňa uhlie. Získava sa ťažbou v uhoľných "
-"baniach alebo výrobou z kmeňov stromov v uhliarni. Spotrebúva ho viacero "
-"budov: vápenka, taviareň, továreň na sekery, vojenský závod a vyhňa na helmy."
+"baniach alebo výrobou z kmeňov stromov v uhliarskej peci. Spotrebúva ho "
+"viacero budov: vápenka, taviareň, továreň na sekery, vojenský závod a vyhňa "
+"na helmy."
+
+#: ../../tribes/barbarians/coalmine/conf:25
+#: ../../tribes/barbarians/deep_coalmine/conf:28
+#: ../../tribes/barbarians/deep_goldmine/conf:28
+#: ../../tribes/barbarians/deep_oremine/conf:28
+#: ../../tribes/barbarians/deeper_coalmine/conf:27
+#: ../../tribes/barbarians/deeper_goldmine/conf:27
+#: ../../tribes/barbarians/deeper_oremine/conf:27
+#: ../../tribes/barbarians/goldmine/conf:26
+#: ../../tribes/barbarians/granitemine/conf:23
+#: ../../tribes/barbarians/oremine/conf:26
+msgid "mining"
+msgstr "ťaženie"
+
+#: ../../tribes/barbarians/coalmine/conf:36
+#: ../../tribes/barbarians/deep_coalmine/conf:42
+#: ../../tribes/barbarians/deeper_coalmine/conf:41
+msgid "Main Coal Vein Exhausted"
+msgstr "Hlavná uhoľná žila vyčerpaná"
+
+#: ../../tribes/barbarians/coalmine/conf:37
+#: ../../tribes/barbarians/deep_coalmine/conf:43
+msgid ""
+"This coal mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr ""
+"Hlavná žila tejto uhoľnej bane je vyčerpaná. Očakávajte preto prudko zníženú "
+"návratnosť investície. Mali by ste zvážiť vylepšenie, rozobratie alebo "
+"zničenie bane."
 
 #: ../../tribes/barbarians/coalmine/help.lua:13
 #: ../../tribes/barbarians/deep_coalmine/help.lua:14
@@ -798,12 +765,16 @@ msgid ""
 "Wood may serve for a household fire and to keep you warm, but when it comes "
 "to working with iron or gold, there is no way around coal."
 msgstr ""
+"Pred mnohými rokmi sa barbari naučili zavŕtať do úbočí na ťažbu toho "
+"čierneho materiálu, ktorý prikladajú do svojich pecí.<br>\n"
+"Na oheň v domácnosti a zahriatie poslúži aj drevo, ale keď ide o prácu so "
+"železom či zlatom, bez uhlia sa zaobísť nedá."
 
 #: ../../tribes/barbarians/coalmine/help.lua:18
 #: ../../tribes/barbarians/deep_coalmine/help.lua:20
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:19
 msgid "Digs coal out of the ground in mountain terrain."
-msgstr ""
+msgstr "Ťaží uhlie zo zeme na horskom teréne."
 
 #: ../../tribes/barbarians/coalmine/help.lua:19
 #: ../../tribes/barbarians/deep_coalmine/help.lua:21
@@ -811,6 +782,8 @@ msgid ""
 "This mine exploits only %s of the resource. From there on out, it will only "
 "have a 5%% chance of finding any coal."
 msgstr ""
+"Táto baňa dokáže vyťažiť len %s zdroja. Potom bude mať len 5%% šancu, že "
+"nájde nejaké uhlie."
 
 #: ../../tribes/barbarians/coalmine/help.lua:31
 #: ../../tribes/barbarians/deep_coalmine/help.lua:33
@@ -818,6 +791,8 @@ msgstr ""
 msgid ""
 "If the food supply is steady, this mine can produce coal in %s on average."
 msgstr ""
+"Pri stálom prívode jedla dokáže táto baňa vyprodukovať uhlie v priemere za "
+"%s."
 
 #: ../../tribes/barbarians/conf:4
 msgid "The Widelands Development Team"
@@ -920,542 +895,543 @@ msgid "Ship Construction Site"
 msgstr "Stavenisko lode"
 
 #: ../../tribes/barbarians/conf:53
-msgid "Deer"
-msgstr "Jeleň"
-
-#: ../../tribes/barbarians/conf:54
-msgid "Wild Boar"
-msgstr "Divá sviňa"
-
-#: ../../tribes/barbarians/conf:57
 msgid "Ax"
 msgstr "Sekera"
 
-#: ../../tribes/barbarians/conf:58
+#: ../../tribes/barbarians/conf:54
 msgid "Bread Paddle"
 msgstr "Pekárska lopata"
 
-#: ../../tribes/barbarians/conf:59
+#: ../../tribes/barbarians/conf:55
 msgid "Battle Ax"
 msgstr "Bojová sekera"
 
-#: ../../tribes/barbarians/conf:60
+#: ../../tribes/barbarians/conf:56
 msgid "Beer"
 msgstr "Pivo"
 
-#: ../../tribes/barbarians/conf:61
+#: ../../tribes/barbarians/conf:57
 msgid "Blackwood"
 msgstr "Upravené drevo"
 
-#: ../../tribes/barbarians/conf:62
+#: ../../tribes/barbarians/conf:58
 msgid "Broad Ax"
 msgstr "Široká sekera"
 
-#: ../../tribes/barbarians/conf:63
+#: ../../tribes/barbarians/conf:59
 msgid "Bronze Ax"
 msgstr "Bronzová sekera"
 
-#: ../../tribes/barbarians/conf:64
+#: ../../tribes/barbarians/conf:60
 msgid "Cloth"
 msgstr "Látka"
 
-#: ../../tribes/barbarians/conf:65
+#: ../../tribes/barbarians/conf:61
 msgid "Coal"
 msgstr "Uhlie"
 
-#: ../../tribes/barbarians/conf:66
+#: ../../tribes/barbarians/conf:62
 msgid "Felling Ax"
 msgstr "Drevorubačská sekera"
 
-#: ../../tribes/barbarians/conf:67
+#: ../../tribes/barbarians/conf:63
 msgid "Fire Tongs"
 msgstr "Kliešte na uhlie"
 
-#: ../../tribes/barbarians/conf:68
+#: ../../tribes/barbarians/conf:64
 msgid "Fish"
 msgstr "Ryby"
 
-#: ../../tribes/barbarians/conf:69
+#: ../../tribes/barbarians/conf:65
 msgid "Fishing Rod"
 msgstr "Udica"
 
-#: ../../tribes/barbarians/conf:70
+#: ../../tribes/barbarians/conf:66
 msgid "Gold"
 msgstr "Zlato"
 
-#: ../../tribes/barbarians/conf:71
+#: ../../tribes/barbarians/conf:67
 msgid "Gold Ore"
 msgstr "Zlatá ruda"
 
-#: ../../tribes/barbarians/conf:72
+#: ../../tribes/barbarians/conf:68
 msgid "Grout"
 msgstr "Malta"
 
-#: ../../tribes/barbarians/conf:73
+#: ../../tribes/barbarians/conf:69
 msgid "Hammer"
 msgstr "Kladivo"
 
-#: ../../tribes/barbarians/conf:74
+#: ../../tribes/barbarians/conf:70
 msgid "Helmet"
 msgstr "Helma"
 
-#: ../../tribes/barbarians/conf:75
+#: ../../tribes/barbarians/conf:71
 msgid "Hunting Spear"
 msgstr "Lovecký oštep"
 
-#: ../../tribes/barbarians/conf:76
+#: ../../tribes/barbarians/conf:72
 msgid "Iron"
 msgstr "Železo"
 
-#: ../../tribes/barbarians/conf:77
+#: ../../tribes/barbarians/conf:73
 msgid "Iron Ore"
 msgstr "Železná ruda"
 
-#: ../../tribes/barbarians/conf:78
+#: ../../tribes/barbarians/conf:74
 msgid "Kitchen Tools"
 msgstr "Kuchynské nástroje"
 
-#: ../../tribes/barbarians/conf:79
+#: ../../tribes/barbarians/conf:75
 msgid "Mask"
 msgstr "Maska"
 
-#: ../../tribes/barbarians/conf:80
+#: ../../tribes/barbarians/conf:76
 msgid "Meal"
 msgstr "Obed"
 
-#: ../../tribes/barbarians/conf:81
+#: ../../tribes/barbarians/conf:77
 msgid "Meat"
 msgstr "Mäso"
 
-#: ../../tribes/barbarians/conf:82
+#: ../../tribes/barbarians/conf:78
 msgid "Pick"
 msgstr "Krompáč"
 
-#: ../../tribes/barbarians/conf:83
+#: ../../tribes/barbarians/conf:79
 msgid "Pitta Bread"
-msgstr "Chlieb pita"
+msgstr "Pita"
 
-#: ../../tribes/barbarians/conf:84
+#: ../../tribes/barbarians/conf:80
 msgid "Ration"
 msgstr "Prídel"
 
-#: ../../tribes/barbarians/conf:85
+#: ../../tribes/barbarians/conf:81
 msgid "Raw Stone"
 msgstr "Surový kameň"
 
-#: ../../tribes/barbarians/conf:86
+#: ../../tribes/barbarians/conf:82
 msgid "Scythe"
 msgstr "Kosa"
 
-#: ../../tribes/barbarians/conf:87
+#: ../../tribes/barbarians/conf:83
 msgid "Sharp Ax"
 msgstr "Ostrá sekera"
 
-#: ../../tribes/barbarians/conf:88
+#: ../../tribes/barbarians/conf:84
 msgid "Shovel"
 msgstr "Lopata"
 
-#: ../../tribes/barbarians/conf:89
+#: ../../tribes/barbarians/conf:85
 msgid "Snack"
 msgstr "Desiata"
 
-#: ../../tribes/barbarians/conf:90
+#: ../../tribes/barbarians/conf:86
 msgid "Strong Beer"
 msgstr "Silné pivo"
 
-#: ../../tribes/barbarians/conf:91
+#: ../../tribes/barbarians/conf:87
 msgid "Thatch Reed"
 msgstr "Trstina"
 
-#: ../../tribes/barbarians/conf:92
+#: ../../tribes/barbarians/conf:88
 msgid "Log"
 msgstr "Kmeň"
 
-#: ../../tribes/barbarians/conf:93
+#: ../../tribes/barbarians/conf:89
 msgid "Warhelm"
 msgstr "Vojenská helma"
 
-#: ../../tribes/barbarians/conf:94
+#: ../../tribes/barbarians/conf:90
 msgid "Warrior’s Ax"
 msgstr "Bojovnícka sekera"
 
-#: ../../tribes/barbarians/conf:95
+#: ../../tribes/barbarians/conf:91
 msgid "Water"
 msgstr "Voda"
 
-#: ../../tribes/barbarians/conf:96
+#: ../../tribes/barbarians/conf:92
 msgid "Wheat"
 msgstr "Pšenica"
 
-#: ../../tribes/barbarians/conf:99
+#: ../../tribes/barbarians/conf:95
 msgid "Carrier"
 msgstr "Nosič"
 
-#: ../../tribes/barbarians/conf:100
+#: ../../tribes/barbarians/conf:96
 msgid "Ox"
 msgstr "Vôl"
 
-#: ../../tribes/barbarians/conf:103
+#: ../../tribes/barbarians/conf:99
 msgid "Soldier"
 msgstr "Vojak"
 
-#: ../../tribes/barbarians/conf:106
+#: ../../tribes/barbarians/conf:102
 msgid "Baker"
 msgstr "Pekár"
 
-#: ../../tribes/barbarians/conf:107
+#: ../../tribes/barbarians/conf:103
 msgid "Master Blacksmith"
-msgstr "Majster kováč"
+msgstr "Kováčsky majster"
 
-#: ../../tribes/barbarians/conf:108
+#: ../../tribes/barbarians/conf:104
 msgid "Blacksmith"
 msgstr "Kováč"
 
-#: ../../tribes/barbarians/conf:109
+#: ../../tribes/barbarians/conf:105
 msgid "Master Brewer"
-msgstr "Majster pivovarník"
+msgstr "Pivovarnícky majster"
 
-#: ../../tribes/barbarians/conf:110
+#: ../../tribes/barbarians/conf:106
 msgid "Brewer"
 msgstr "Pivovarník"
 
-#: ../../tribes/barbarians/conf:111
+#: ../../tribes/barbarians/conf:107
 msgid "Builder"
 msgstr "Stavbár"
 
-#: ../../tribes/barbarians/conf:112
-msgid "Burner"
+#: ../../tribes/barbarians/conf:108
+msgid "Charcoal Burner"
 msgstr "Uhliar"
 
-#: ../../tribes/barbarians/conf:113
+#: ../../tribes/barbarians/conf:109
 msgid "Master Miner"
-msgstr "Majster baník"
+msgstr "Banský majster"
 
-#: ../../tribes/barbarians/conf:114
+#: ../../tribes/barbarians/conf:110
 msgid "Chief Miner"
 msgstr "Hlavný baník"
 
-#: ../../tribes/barbarians/conf:115
+#: ../../tribes/barbarians/conf:111
 msgid "Farmer"
 msgstr "Farmár"
 
-#: ../../tribes/barbarians/conf:116
+#: ../../tribes/barbarians/conf:112
 msgid "Gardener"
 msgstr "Záhradník"
 
-#: ../../tribes/barbarians/conf:117
+#: ../../tribes/barbarians/conf:113
 msgid "Fisher"
 msgstr "Rybár"
 
-#: ../../tribes/barbarians/conf:118
+#: ../../tribes/barbarians/conf:114
 msgid "Gamekeeper"
 msgstr "Hájnik"
 
-#: ../../tribes/barbarians/conf:119
+#: ../../tribes/barbarians/conf:115
 msgid "Geologist"
 msgstr "Geológ"
 
-#: ../../tribes/barbarians/conf:120
+#: ../../tribes/barbarians/conf:116
 msgid "Helmsmith"
 msgstr "Kováč heliem"
 
-#: ../../tribes/barbarians/conf:121
+#: ../../tribes/barbarians/conf:117
 msgid "Hunter"
 msgstr "Lovec"
 
-#: ../../tribes/barbarians/conf:122
+#: ../../tribes/barbarians/conf:118
 msgid "Innkeeper"
 msgstr "Krčmár"
 
-#: ../../tribes/barbarians/conf:123
+#: ../../tribes/barbarians/conf:119
 msgid "Lime-Burner"
 msgstr "Vápenník"
 
-#: ../../tribes/barbarians/conf:124
+#: ../../tribes/barbarians/conf:120
 msgid "Lumberjack"
 msgstr "Drevorubač"
 
-#: ../../tribes/barbarians/conf:125
+#: ../../tribes/barbarians/conf:121
 msgid "Miner"
 msgstr "Baník"
 
-#: ../../tribes/barbarians/conf:126
+#: ../../tribes/barbarians/conf:122
 msgid "Ranger"
 msgstr "Lesník"
 
-#: ../../tribes/barbarians/conf:127
+#: ../../tribes/barbarians/conf:123
 msgid "Shipwright"
 msgstr "Staviteľ lodí"
 
-#: ../../tribes/barbarians/conf:128
+#: ../../tribes/barbarians/conf:124
 msgid "Smelter"
 msgstr "Tavič"
 
-#: ../../tribes/barbarians/conf:129
+#: ../../tribes/barbarians/conf:125
 msgid "Stonemason"
 msgstr "Kamenár"
 
-#: ../../tribes/barbarians/conf:130
+#: ../../tribes/barbarians/conf:126
 msgid "Trainer"
 msgstr "Tréner"
 
-#: ../../tribes/barbarians/conf:131
+#: ../../tribes/barbarians/conf:127
 msgid "Weaver"
 msgstr "Tkáč"
 
-#: ../../tribes/barbarians/conf:132
+#: ../../tribes/barbarians/conf:128
 msgid "Scout"
 msgstr "Prieskumník"
 
-#: ../../tribes/barbarians/conf:133
+#: ../../tribes/barbarians/conf:129
 msgid "Cattle Breeder"
 msgstr "Chovateľ dobytka"
 
-#: ../../tribes/barbarians/conf:136
+#: ../../tribes/barbarians/conf:132
 msgid "Ship"
 msgstr "Loď"
 
-#: ../../tribes/barbarians/conf:139
+#: ../../tribes/barbarians/conf:135
 msgid "Construction Site"
 msgstr "Stavenisko"
 
-#: ../../tribes/barbarians/conf:142
+#: ../../tribes/barbarians/conf:138
 msgid "Dismantle Site"
 msgstr "Rozobrať stavbu"
 
-#: ../../tribes/barbarians/conf:145
-#: ../../tribes/barbarians/conf:154
+#: ../../tribes/barbarians/conf:141
+#: ../../tribes/barbarians/conf:150
 msgid "Castle"
 msgstr "Hrad"
 
-#: ../../tribes/barbarians/conf:146
+#: ../../tribes/barbarians/conf:142
 msgid "Guardhall"
 msgstr "Veľká strážnica"
 
-#: ../../tribes/barbarians/conf:147
+#: ../../tribes/barbarians/conf:143
 msgid "Guardhouse"
 msgstr "Strážnica"
 
-#: ../../tribes/barbarians/conf:148
+#: ../../tribes/barbarians/conf:144
 msgid "High Tower"
 msgstr "Vysoká veža"
 
-#: ../../tribes/barbarians/conf:149
+#: ../../tribes/barbarians/conf:145
 msgid "Small Tower"
 msgstr "Malá veža"
 
-#: ../../tribes/barbarians/conf:150
-#: ../../tribes/barbarians/conf:157
+#: ../../tribes/barbarians/conf:146
+#: ../../tribes/barbarians/conf:153
 msgid "Tower"
 msgstr "Veža"
 
-#: ../../tribes/barbarians/conf:151
-#: ../../tribes/barbarians/conf:206
+#: ../../tribes/barbarians/conf:147
+#: ../../tribes/barbarians/conf:202
 msgid "Sentry"
 msgstr "Strážnica"
 
-#: ../../tribes/barbarians/conf:152
+#: ../../tribes/barbarians/conf:148
 msgid "Barracks"
 msgstr "Kasárne"
 
-#: ../../tribes/barbarians/conf:153
-#: ../../tribes/barbarians/conf:205
+#: ../../tribes/barbarians/conf:149
+#: ../../tribes/barbarians/conf:201
 msgid "Barrier"
 msgstr "Hradba"
 
-#: ../../tribes/barbarians/conf:155
-#: ../../tribes/barbarians/conf:208
+#: ../../tribes/barbarians/conf:151
+#: ../../tribes/barbarians/conf:204
 msgid "Fortress"
 msgstr "Pevnosť"
 
-#: ../../tribes/barbarians/conf:156
+#: ../../tribes/barbarians/conf:152
 msgid "Outpost"
 msgstr "Pozorovateľňa"
 
-#: ../../tribes/barbarians/conf:160
-#: ../../tribes/barbarians/conf:161
+#: ../../tribes/barbarians/conf:156
+#: ../../tribes/barbarians/conf:157
+#: ../../tribes/barbarians/scripting/sc00_headquarters.lua:10
 msgid "Headquarters"
 msgstr "Základňa"
 
-#: ../../tribes/barbarians/conf:162
+#: ../../tribes/barbarians/conf:158
 msgid "Warehouse"
 msgstr "Sklad"
 
-#: ../../tribes/barbarians/conf:163
+#: ../../tribes/barbarians/conf:159
 msgid "Port"
 msgstr "Prístav"
 
-#: ../../tribes/barbarians/conf:166
+#: ../../tribes/barbarians/conf:162
 msgid "Quarry"
 msgstr "Kameňolom"
 
-#: ../../tribes/barbarians/conf:167
+#: ../../tribes/barbarians/conf:163
 msgid "Lumberjack’s Hut"
 msgstr "Drevorubačská chatrč"
 
-#: ../../tribes/barbarians/conf:168
+#: ../../tribes/barbarians/conf:164
 msgid "Ranger’s Hut"
 msgstr "Lesnícka chatrč"
 
-#: ../../tribes/barbarians/conf:169
+#: ../../tribes/barbarians/conf:165
 msgid "Fisher’s Hut"
 msgstr "Rybárska chatrč"
 
-#: ../../tribes/barbarians/conf:170
+#: ../../tribes/barbarians/conf:166
 msgid "Hunter’s Hut"
 msgstr "Lovecká chatrč"
 
-#: ../../tribes/barbarians/conf:171
+#: ../../tribes/barbarians/conf:167
 msgid "Gamekeeper’s Hut"
 msgstr "Hájnická chatrč"
 
-#: ../../tribes/barbarians/conf:172
+#: ../../tribes/barbarians/conf:168
 msgid "Well"
 msgstr "Studňa"
 
-#: ../../tribes/barbarians/conf:173
+#: ../../tribes/barbarians/conf:169
 msgid "Scout’s Hut"
 msgstr "Prieskumnícka chatrč"
 
-#: ../../tribes/barbarians/conf:174
+#: ../../tribes/barbarians/conf:170
 msgid "Wood Hardener"
 msgstr "Sušiareň dreva"
 
-#: ../../tribes/barbarians/conf:175
+#: ../../tribes/barbarians/conf:171
 msgid "Lime Kiln"
 msgstr "Vápenka"
 
-#: ../../tribes/barbarians/conf:176
+#: ../../tribes/barbarians/conf:172
 msgid "Reed Yard"
 msgstr "Trstinová záhrada"
 
-#: ../../tribes/barbarians/conf:177
+#: ../../tribes/barbarians/conf:173
 msgid "Bakery"
 msgstr "Pekáreň"
 
-#: ../../tribes/barbarians/conf:178
+#: ../../tribes/barbarians/conf:174
 msgid "Brewery"
 msgstr "Pivovar"
 
-#: ../../tribes/barbarians/conf:179
+#: ../../tribes/barbarians/conf:175
 msgid "Micro Brewery"
 msgstr "Mikropivovar"
 
-#: ../../tribes/barbarians/conf:180
+#: ../../tribes/barbarians/conf:176
 msgid "Big Inn"
 msgstr "Veľký hostinec"
 
-#: ../../tribes/barbarians/conf:181
+#: ../../tribes/barbarians/conf:177
 msgid "Inn"
 msgstr "Hostinec"
 
-#: ../../tribes/barbarians/conf:182
+#: ../../tribes/barbarians/conf:178
 msgid "Tavern"
 msgstr "Krčma"
 
-#: ../../tribes/barbarians/conf:183
-msgid "Charcoal Burner’s House"
-msgstr "Uhliareň"
+#: ../../tribes/barbarians/conf:179
+msgid "Charcoal Kiln"
+msgstr "Uhliarska pec"
 
-#: ../../tribes/barbarians/conf:184
+#: ../../tribes/barbarians/conf:180
 msgid "Smelting Works"
 msgstr "Taviareň"
 
-#: ../../tribes/barbarians/conf:185
+#: ../../tribes/barbarians/conf:181
 msgid "Shipyard"
 msgstr "Lodenica"
 
-#: ../../tribes/barbarians/conf:186
+#: ../../tribes/barbarians/conf:182
 msgid "War Mill"
 msgstr "Vojenský závod"
 
-#: ../../tribes/barbarians/conf:187
+#: ../../tribes/barbarians/conf:183
 msgid "Axfactory"
 msgstr "Továreň na sekery"
 
-#: ../../tribes/barbarians/conf:188
+#: ../../tribes/barbarians/conf:184
 msgid "Metal Workshop"
 msgstr "Kovodielňa"
 
-#: ../../tribes/barbarians/conf:189
+#: ../../tribes/barbarians/conf:185
 msgid "Cattle Farm"
 msgstr "Kravín"
 
-#: ../../tribes/barbarians/conf:190
+#: ../../tribes/barbarians/conf:186
 msgid "Weaving Mill"
-msgstr ""
+msgstr "Tkáčovňa"
 
-#: ../../tribes/barbarians/conf:191
+#: ../../tribes/barbarians/conf:187
 msgid "Farm"
 msgstr "Farma"
 
-#: ../../tribes/barbarians/conf:192
+#: ../../tribes/barbarians/conf:188
 msgid "Helm Smithy"
 msgstr "Vyhňa na helmy"
 
-#: ../../tribes/barbarians/conf:193
+#: ../../tribes/barbarians/conf:189
 msgid "Granite Mine"
 msgstr "Žulový lom"
 
-#: ../../tribes/barbarians/conf:194
+#: ../../tribes/barbarians/conf:190
 msgid "Deeper Coal Mine"
 msgstr "Hlbočizná uhoľná baňa"
 
-#: ../../tribes/barbarians/conf:195
+#: ../../tribes/barbarians/conf:191
 msgid "Deep Coal Mine"
 msgstr "Hlbinná uhoľná baňa"
 
-#: ../../tribes/barbarians/conf:196
+#: ../../tribes/barbarians/conf:192
 msgid "Coal Mine"
 msgstr "Uhoľná baňa"
 
-#: ../../tribes/barbarians/conf:197
+#: ../../tribes/barbarians/conf:193
 msgid "Deeper Iron Ore Mine"
 msgstr "Hlbočizná železnorudná baňa"
 
-#: ../../tribes/barbarians/conf:198
+#: ../../tribes/barbarians/conf:194
 msgid "Deep Iron Ore Mine"
 msgstr "Hlbinná železnorudná baňa"
 
-#: ../../tribes/barbarians/conf:199
+#: ../../tribes/barbarians/conf:195
 msgid "Iron Ore Mine"
 msgstr "Železnorudná baňa"
 
-#: ../../tribes/barbarians/conf:200
+#: ../../tribes/barbarians/conf:196
 msgid "Deeper Gold Mine"
 msgstr "Hlbočizná zlatá baňa"
 
-#: ../../tribes/barbarians/conf:201
+#: ../../tribes/barbarians/conf:197
 msgid "Deep Gold Mine"
 msgstr "Hlbinná zlatá baňa"
 
-#: ../../tribes/barbarians/conf:202
+#: ../../tribes/barbarians/conf:198
 msgid "Gold Mine"
 msgstr "Zlatá baňa"
 
-#: ../../tribes/barbarians/conf:207
+#: ../../tribes/barbarians/conf:203
 msgid "Citadel"
 msgstr "Citadela"
 
-#: ../../tribes/barbarians/conf:209
+#: ../../tribes/barbarians/conf:205
 msgid "Donjon"
 msgstr "Donžon"
 
-#: ../../tribes/barbarians/conf:212
+#: ../../tribes/barbarians/conf:208
 msgid "Battle Arena"
 msgstr "Zápasnícka aréna"
 
-#: ../../tribes/barbarians/conf:213
+#: ../../tribes/barbarians/conf:209
 msgid "Training Camp"
 msgstr "Výcvikový tábor"
 
-#: ../../tribes/barbarians/conf:216
-msgid "Headquarters Medium"
-msgstr "Stredná základňa"
+#: ../../tribes/barbarians/deep_goldmine/conf:42
+#: ../../tribes/barbarians/deeper_goldmine/conf:41
+#: ../../tribes/barbarians/goldmine/conf:37
+msgid "Main Gold Vein Exhausted"
+msgstr "Hlavná zlatá žila vyčerpaná"
 
-#: ../../tribes/barbarians/conf:217
-msgid "Citadel Village"
-msgstr "Dedina s pevnosťou"
+#: ../../tribes/barbarians/deep_goldmine/conf:43
+#: ../../tribes/barbarians/goldmine/conf:38
+msgid ""
+"This gold mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr ""
+"Hlavná žila tejto zlatej bane je vyčerpaná. Očakávajte preto prudko zníženú "
+"návratnosť investície. Mali by ste zvážiť vylepšenie, rozobratie alebo "
+"zničenie bane."
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:14
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:14
@@ -1478,7 +1454,7 @@ msgstr ""
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:18
 #: ../../tribes/barbarians/goldmine/help.lua:17
 msgid "Digs gold ore out of the ground in mountain terrain."
-msgstr ""
+msgstr "Ťaží zlatú rudu zo zeme na horskom teréne."
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:19
 #: ../../tribes/barbarians/goldmine/help.lua:18
@@ -1486,6 +1462,8 @@ msgid ""
 "This mine exploits only %s of the resource. From there on out, it will only "
 "have a 5%% chance of finding any gold ore."
 msgstr ""
+"Táto baňa dokáže vyťažiť len %s zdroja. Potom bude mať len 5%% šancu, že "
+"nájde nejakú zlatú rudu."
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:31
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:31
@@ -1494,6 +1472,24 @@ msgid ""
 "If the food supply is steady, this mine can produce gold ore in %s on "
 "average."
 msgstr ""
+"Pri stálom prívode jedla dokáže táto baňa vyprodukovať zlatú rudu v priemere "
+"za %s."
+
+#: ../../tribes/barbarians/deep_oremine/conf:43
+#: ../../tribes/barbarians/deeper_oremine/conf:44
+#: ../../tribes/barbarians/oremine/conf:37
+msgid "Main Iron Vein Exhausted"
+msgstr "Hlavná železná žila vyčerpaná"
+
+#: ../../tribes/barbarians/deep_oremine/conf:44
+#: ../../tribes/barbarians/oremine/conf:38
+msgid ""
+"This iron mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr ""
+"Hlavná žila tejto železnorudnej bane je vyčerpaná. Očakávajte preto prudko "
+"zníženú návratnosť investície. Mali by ste vylepšiť, rozobrať alebo zničiť "
+"baňu."
 
 #: ../../tribes/barbarians/deep_oremine/help.lua:14
 #: ../../tribes/barbarians/deeper_oremine/help.lua:14
@@ -1515,7 +1511,7 @@ msgstr ""
 #: ../../tribes/barbarians/deeper_oremine/help.lua:18
 #: ../../tribes/barbarians/oremine/help.lua:17
 msgid "Digs iron ore out of the ground in mountain terrain."
-msgstr ""
+msgstr "Ťaží železnú rudu zo zeme na horskom teréne."
 
 #: ../../tribes/barbarians/deep_oremine/help.lua:19
 #: ../../tribes/barbarians/oremine/help.lua:18
@@ -1523,6 +1519,8 @@ msgid ""
 "This mine exploits only %s of the resource. From there on out, it will only "
 "have a 5%% chance of finding any iron ore."
 msgstr ""
+"Táto baňa dokáže vyťažiť len %s zdroja. Potom bude mať len 5%% šancu, že "
+"nájde nejakú železnú rudu."
 
 #: ../../tribes/barbarians/deep_oremine/help.lua:31
 #: ../../tribes/barbarians/deeper_oremine/help.lua:31
@@ -1531,6 +1529,18 @@ msgid ""
 "If the food supply is steady, this mine can produce iron ore in %s on "
 "average."
 msgstr ""
+"Pri stálom prívode jedla dokáže táto baňa vyprodukovať železnú rudu v "
+"priemere za %s."
+
+#: ../../tribes/barbarians/deeper_coalmine/conf:42
+msgid ""
+"This coal mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
+msgstr ""
+"Hlavná žila tejto uhoľnej bane je vyčerpaná. Očakávajte preto prudko zníženú "
+"návratnosť investície. Baňu už nemožno ďalej vylepšovať, takže by ste ju "
+"mali rozobrať alebo zničiť."
 
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:20
 msgid ""
@@ -1538,6 +1548,18 @@ msgid ""
 "after having done so, it will still have a %s chance of finding some more "
 "coal."
 msgstr ""
+"Táto baňa dokáže vyťažiť celý zdroj po najhlbšiu úroveň. Aj po tom, keď tak "
+"vykoná, bude stále mať %s šancu, že nájde ešte trocha uhlia."
+
+#: ../../tribes/barbarians/deeper_goldmine/conf:42
+msgid ""
+"This gold mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
+msgstr ""
+"Hlavná žila tejto zlatej bane je vyčerpaná. Očakávajte preto prudko zníženú "
+"návratnosť investície. Baňu už nemožno ďalej vylepšovať, takže by ste ju "
+"mali rozobrať alebo zničiť."
 
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:19
 msgid ""
@@ -1545,6 +1567,18 @@ msgid ""
 "after having done so, it will still have a %s chance of finding some more "
 "gold ore."
 msgstr ""
+"Táto baňa dokáže vyťažiť celý zdroj po najhlbšiu úroveň. Aj po tom, keď tak "
+"vykoná, bude stále mať %s šancu, že nájde ešte trocha zlatej rudy."
+
+#: ../../tribes/barbarians/deeper_oremine/conf:45
+msgid ""
+"This iron mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
+msgstr ""
+"Hlavná žila tejto železnorudnej bane je vyčerpaná. Očakávajte preto prudko "
+"zníženú návratnosť investície. Baňu už nemožno ďalej vylepšovať, takže by "
+"ste ju mali rozobrať alebo zničiť."
 
 #: ../../tribes/barbarians/deeper_oremine/help.lua:19
 msgid ""
@@ -1552,18 +1586,32 @@ msgid ""
 "after having done so, it will still have a %s chance of finding some more "
 "iron ore."
 msgstr ""
+"Táto baňa dokáže vyťažiť celý zdroj po najhlbšiu úroveň. Aj po tom, keď tak "
+"vykoná, bude stále mať %s šancu, že nájde ešte trocha železnej rudy."
 
 #: ../../tribes/barbarians/donjon/conf:7
 msgid "Your soldiers have occupied your donjon."
 msgstr "Vaši vojaci obsadili váš donžon."
 
-#: ../../tribes/barbarians/farm/conf:21
-msgid "Plant wheat"
-msgstr "Sadiť pšenicu"
-
 #: ../../tribes/barbarians/farm/conf:22
-msgid "Harvest wheat"
-msgstr "Zberať pšenicu"
+msgid "planting wheat"
+msgstr "sadenie pšenice"
+
+#: ../../tribes/barbarians/farm/conf:24
+msgid "harvesting wheat"
+msgstr "zbieranie pšenice"
+
+#: ../../tribes/barbarians/farm/conf:43
+#: ../../tribes/barbarians/reed_yard/conf:40
+msgid "Out of Fields"
+msgstr "Došli polia"
+
+#: ../../tribes/barbarians/farm/conf:44
+msgid ""
+"The farmer working at this farm has no cleared soil to plant his seeds."
+msgstr ""
+"Farmár pracujúci na tejto farme nemá k dispozícii čistú pôdu, na ktorej by "
+"mohol začať sadiť."
 
 #: ../../tribes/barbarians/farm/help.lua:17
 msgid "Sow and harvest wheat."
@@ -1599,13 +1647,29 @@ msgid ""
 "It is used in the taverns, inns and big inns and at the training sites "
 "(training camp and battle arena)."
 msgstr ""
-"Okrem chleba pita a mäsa, potraviny barbarov tvoria tiež ryby. Využívajú sa "
-"v krčmách, hostincoch a veľkých hostincoch a vo výcvikových stavbách "
+"Okrem pity a mäsa, potraviny barbarov tvoria tiež ryby. Využívajú sa v "
+"krčmách, hostincoch a veľkých hostincoch a vo výcvikových stavbách "
 "(výcvikový tábor a zápasnícka aréna)."
 
 #: ../../tribes/barbarians/fisher/conf:1
 msgid "Catches fish in the sea."
 msgstr "Chytá ryby z mora."
+
+#: ../../tribes/barbarians/fishers_hut/conf:19
+msgid "fishing"
+msgstr "chytanie rýb"
+
+#: ../../tribes/barbarians/fishers_hut/conf:26
+msgid "Out of Fish"
+msgstr "Došli ryby"
+
+#: ../../tribes/barbarians/fishers_hut/conf:27
+msgid ""
+"The fisher working out of this fisher’s hut can’t find any fish in his "
+"working radius."
+msgstr ""
+"Rybár pracujúci mimo tejto rybárskej chatrče nedokáže vo svojej pracovnej "
+"oblasti nájsť žiadne ryby."
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:13
 msgid "‘What do you mean, my fish ain’t fresh?!’"
@@ -1617,11 +1681,11 @@ msgstr "Chytá ryby na pobreží neďaleko chatrče."
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:18
 msgid "The fisher’s hut needs water full of fish within the working radius."
-msgstr ""
+msgstr "Rybárska chatrč potrebuje vo svojom pracovnom okolí vodu plnú rýb."
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:30
 msgid "The fisher pauses %s before going to work again."
-msgstr ""
+msgstr "Rybár sa pozastaví na %s, predtým ako začne opäť pracovať."
 
 #: ../../tribes/barbarians/fishing_rod/conf:1
 msgid ""
@@ -1629,7 +1693,7 @@ msgid ""
 "the basic tools produced in a metal workshop (but they cease to be produced "
 "by the building if it is enhanced to an axfactory and war mill)."
 msgstr ""
-"Udice potrebujú barbarskí rybári na rybárčenie. Sú jedným zo základných "
+"Udice potrebujú barbarskí rybári na lov rýb. Sú jedným zo základných "
 "nástrojov, ktoré sa vyrábajú v kovodielni (ale prestávajú sa v nej vyrábať "
 "po vylepšení na továreň na sekery alebo vojenský závod)."
 
@@ -1645,13 +1709,25 @@ msgstr ""
 "Hájnik zabezpečuje, aby prirodzená populácia zvierat nikdy neklesla na "
 "príliš nízku úroveň."
 
-#: ../../tribes/barbarians/gamekeepers_hut/help.lua:18
+#: ../../tribes/barbarians/gamekeepers_hut/help.lua:14
+msgid ""
+"‘He loves the animals and to breed them<br>\n"
+"\t\t\tas we love to cook and eat them.’"
+msgstr ""
+"„Zbožňuje zvieratá a chová ich rád,<br>\n"
+"\t\t\ttak ako my pečieme ich a utišujeme svoj hlad.“"
+
+#: ../../tribes/barbarians/gamekeepers_hut/help.lua:16
+msgid "Barbarian nursery rhyme"
+msgstr "Barbarská detská riekanka"
+
+#: ../../tribes/barbarians/gamekeepers_hut/help.lua:20
 msgid "Releases animals into the wild to steady the meat production."
 msgstr "Vypúšťa zvieratá do divočiny, aby upevnil produkciu mäsa."
 
-#: ../../tribes/barbarians/gamekeepers_hut/help.lua:30
+#: ../../tribes/barbarians/gamekeepers_hut/help.lua:32
 msgid "The gamekeeper pauses %s before going to work again."
-msgstr ""
+msgstr "Hájnik sa pozastaví na %s, predtým ako začne opäť pracovať."
 
 #: ../../tribes/barbarians/gardener/conf:1
 msgid "Grows thatch reed."
@@ -1683,6 +1759,20 @@ msgstr ""
 "zlato, ktoré sa používa ako vzácny stavebný materiál a na výrobu zbraní a "
 "zbrojí."
 
+#: ../../tribes/barbarians/granitemine/conf:34
+msgid "Main Granite Vein Exhausted"
+msgstr "Hlavná žulová žila vyčerpaná"
+
+#: ../../tribes/barbarians/granitemine/conf:35
+msgid ""
+"This granite mine’s main vein is exhausted. Expect strongly diminished "
+"returns on investment. This mine can’t be enhanced any further, so you "
+"should consider dismantling or destroying it."
+msgstr ""
+"Hlavná žila tohto žulového lomu je vyčerpaná. Očakávajte preto prudko "
+"zníženú návratnosť investície. Lom už nemožno ďalej vylepšovať, takže zvážte "
+"jeho rozobratie alebo zničenie."
+
 #: ../../tribes/barbarians/granitemine/help.lua:13
 msgid ""
 "This phrase was the reply Rimbert the miner – later known as Rimbert the "
@@ -1703,11 +1793,11 @@ msgstr "„Zvládnem tony žuly, človeče, ale už žiadnu z tvojich táranín.
 
 #: ../../tribes/barbarians/granitemine/help.lua:17
 msgid "Carve raw stone out of the rock in mountain terrain."
-msgstr ""
+msgstr "Vysekáva surový kameň zo skaly na horskom teréne."
 
 #: ../../tribes/barbarians/granitemine/help.lua:18
 msgid "It cannot be upgraded."
-msgstr ""
+msgstr "Nemožno vylepšiť."
 
 #: ../../tribes/barbarians/granitemine/help.lua:18
 msgid ""
@@ -1715,12 +1805,16 @@ msgid ""
 "after having done so, it will still have a %s chance of finding some more "
 "raw stone."
 msgstr ""
+"Táto baňa dokáže vyťažiť celý zdroj po najhlbšiu úroveň. Aj po tom, keď tak "
+"vykoná, bude stále mať %s šancu, že nájde ešte trocha surového kameňa."
 
 #: ../../tribes/barbarians/granitemine/help.lua:30
 msgid ""
 "If the food supply is steady, this mine can produce raw stone in %s on "
 "average."
 msgstr ""
+"Pri stálom prívode jedla dokáže táto baňa vyprodukovať surový kameň v "
+"priemere za %s."
 
 #: ../../tribes/barbarians/grout/conf:1
 msgid ""
@@ -1743,15 +1837,15 @@ msgstr ""
 "nástrojov a vyrába sa v kovodielni (ale prestáva sa v nej vyrábať po "
 "vylepšení na továreň na sekery alebo vojenský závod)."
 
-#: ../../tribes/barbarians/headquarters/help.lua:16
-#: ../../tribes/barbarians/headquarters_interim/help.lua:16
-msgid "Accomodation for your people. Also stores your wares and tools."
-msgstr ""
-
 #: ../../tribes/barbarians/headquarters/help.lua:17
 #: ../../tribes/barbarians/headquarters_interim/help.lua:17
+msgid "Accommodation for your people. Also stores your wares and tools."
+msgstr "Poskytuje ubytovanie pre obyvateľov a skladuje výrobky a nástroje."
+
+#: ../../tribes/barbarians/headquarters/help.lua:18
+#: ../../tribes/barbarians/headquarters_interim/help.lua:18
 msgid "The headquarters is your main building."
-msgstr ""
+msgstr "Základňa je vaša hlavná budova."
 
 #: ../../tribes/barbarians/helm/conf:1
 msgid ""
@@ -1760,28 +1854,46 @@ msgid ""
 "soldiers from health level 0 to level 1."
 msgstr ""
 "Helma je základnou pomôckou na ochranu bojovníkov. Vyrába sa vo vyhni na "
-"helmy a používa sa vo výcvikovom tábore – spolu s jedlom – na trénovanie "
-"zdravia vojakov z úrovne 0 na úroveň 1."
+"helmy a používa sa vo výcvikovom tábore – spolu s jedlom – na výcvik vojakov "
+"v zdraví z úrovne 0 na úroveň 1."
 
 #: ../../tribes/barbarians/helmsmith/conf:1
 msgid "Smelts helmets for soldiers."
 msgstr "Zlieva helmy pre vojakov."
 
-#: ../../tribes/barbarians/helmsmithy/conf:31
-msgid "Produce helm"
-msgstr "Vyrobiť helmu"
-
 #: ../../tribes/barbarians/helmsmithy/conf:32
-msgid "Produce mask"
-msgstr "Vytvoriť masku"
+msgid "forging a helm"
+msgstr "kutie helmy"
 
-#: ../../tribes/barbarians/helmsmithy/conf:33
-msgid "Produce warhelm"
-msgstr "Vyrobiť vojenskú helmu"
+#: ../../tribes/barbarians/helmsmithy/conf:34
+msgid "forging a mask"
+msgstr "kutie masky"
+
+#: ../../tribes/barbarians/helmsmithy/conf:36
+msgid "forging a warhelm"
+msgstr "kutie vojenskej helmy"
 
 #: ../../tribes/barbarians/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
 msgstr "Lovec prináša osadníkom dobré mäso."
+
+#: ../../tribes/barbarians/hunters_hut/conf:20
+msgid "hunting"
+msgstr "lovenie"
+
+#: ../../tribes/barbarians/hunters_hut/conf:28
+msgid "Out of Game"
+msgstr "Došla divá zver"
+
+#: ../../tribes/barbarians/hunters_hut/conf:29
+msgid ""
+"The hunter working out of this hunter’s hut can’t find any game in his "
+"working radius. Remember that you can build a gamekeeper’s hut to release "
+"more game into the wild."
+msgstr ""
+"Lovec pracujúci mimo tejto loveckej chatrče nedokáže vo svojej pracovnej "
+"oblasti nájsť žiadnu divú zver. Nezabudnite, že ak chcete vypúšťať zver do "
+"divočiny, postavte hájnickú chatrč."
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:13
 msgid ""
@@ -1789,7 +1901,7 @@ msgid ""
 "arrow,<br> as deadly as a viper.’"
 msgstr ""
 "„Tichý ako panter,<br> obratný ako lasica,<br> rýchly ako šíp,<br> smrtiaci "
-"ako zmija.„“"
+"ako zmija.“"
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:13
 msgid "‘The Art of Hunting’"
@@ -1797,15 +1909,15 @@ msgstr "„Umenie loviť“"
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:17
 msgid "Hunts animals to produce meat."
-msgstr ""
+msgstr "Loví zvieratá pre mäso."
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:18
 msgid "The hunter’s hut needs animals to hunt within the working radius."
-msgstr ""
+msgstr "Lovecká chatrč potrebuje vo svojej pracovnej oblasti lovnú zver."
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:30
 msgid "The hunter pauses %s before going to work again."
-msgstr ""
+msgstr "Lovec sa pozastaví na %s, predtým ako začne opäť pracovať."
 
 #: ../../tribes/barbarians/hunting_spear/conf:1
 msgid ""
@@ -1888,23 +2000,39 @@ msgid ""
 "If all needed wares are delivered in time, this building can produce grout "
 "in about %s on average."
 msgstr ""
+"Ak sa všetok potrebný tovar dodá načas, táto budova dokáže vyrobiť maltu v "
+"priemere za asi %s."
 
 #: ../../tribes/barbarians/log/conf:1
 msgid ""
 "Logs are a principal building material of the barbarians. The trees are "
 "felled by lumberjacks; rangers care for the supply of trees. Logs are also "
-"used in the metal workshop to build basic tools, and in the charcoal "
-"burner’s house in the production of coal. The wood hardener refines logs by "
-"hardening them in the fire which gives blackwood."
+"used in the metal workshop to build basic tools, and in the charcoal kiln "
+"for the production of coal. The wood hardener refines logs by hardening them "
+"in the fire which gives blackwood."
 msgstr ""
 "Kmene stromov sú hlavným stavebným materiálom barbarov. Stromy rúbu "
-"drevorubači, kým lesníci sa starajú ich zásobu. Kmene sa tiež používajú v "
-"kovodielni na výrobu základných nástrojov a v uhliarni na výrobu uhlia. V "
-"sušiarni dreva sa spevňujú na ohni a vzniká z nich upravené drevo."
+"drevorubači, kým lesníci sa starajú o ich zásobu. Kmene sa tiež používajú v "
+"kovodielni na výrobu základných nástrojov a v uhliarskej peci na výrobu "
+"uhlia. Sušiarne dreva ich spevňujú na ohni a spracovávajú na upravené drevo."
 
 #: ../../tribes/barbarians/lumberjack/conf:1
 msgid "Fells trees."
 msgstr "Rúbe stromy."
+
+#: ../../tribes/barbarians/lumberjacks_hut/conf:26
+msgid "Out of Trees"
+msgstr "Došli stromy"
+
+#: ../../tribes/barbarians/lumberjacks_hut/conf:27
+msgid ""
+"The lumberjack working at this lumberjack’s hut can’t find any trees in his "
+"working radius. You should consider dismantling or destroying the building "
+"or building a rangers’s hut."
+msgstr ""
+"Drevorubač pracujúci v tejto drevorubačskej chatrči nedokáže vo svojej "
+"pracovnej oblasti nájsť žiadne stromy. Mali by ste rozobrať alebo zničiť "
+"budovu, prípadne postaviť lesnícku chatrč."
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:13
 msgid ""
@@ -1912,10 +2040,12 @@ msgid ""
 "soldier. Take 50 and you're a hero. Take 20 and soon you will be a honorable "
 "lumberjack.\""
 msgstr ""
+"„Zrúb strom 200 zásahmi a si dieťa. Vystač si so 100 a si vojak. Vystač si s "
+"50 a si hrdina. Vystač si s 20 a čoskoro sa z teba stane čestný drevorubač.“"
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:13
 msgid "Krumta, carpenter of Chat'Karuth"
-msgstr ""
+msgstr "Krumta, Chat'Karuthov stolár"
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:16
 msgid "Fell trees in the surrounding area and process them into logs."
@@ -1923,13 +2053,15 @@ msgstr "Rúbať stromy na okolitom území a spracovať ich na kmene."
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:17
 msgid "The lumberjack's hut needs trees to fell within the working radius."
-msgstr ""
+msgstr "Drevorubačská chatrč potrebuje vo svojej pracovnej oblasti stromy."
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:29
 msgid ""
 "The lumberjack needs %s to fell a tree, not counting the time he needs to "
 "reach the destination and go home again."
 msgstr ""
+"Drevorubač zrúbe strom za %s, pričom sa nepočíta čas, ktorý potrebuje na to, "
+"aby sa dostal na miesto a opäť domov."
 
 #: ../../tribes/barbarians/mask/conf:1
 msgid ""
@@ -1938,17 +2070,16 @@ msgid ""
 "health level 2 to level 3."
 msgstr ""
 "Toto je najviac vylepšená barbarská zbroj. Vyrába sa vo vyhni na helmy a "
-"používa sa vo výcvikovom tábore – spolu s jedlom – na trénovanie zdravia "
-"vojakov z úrovne 2 na úroveň 3."
+"používa sa vo výcvikovom tábore – spolu s jedlom – na výcvik vojakov v "
+"zdraví z úrovne 2 na úroveň 3."
 
 #: ../../tribes/barbarians/meal/conf:1
 msgid ""
 "A meal is made out of pitta bread, strong beer and fish/meat in a big inn. "
 "This substantial food is exactly what workers in a deeper mine need."
 msgstr ""
-"Obedy sa vyrábajú z chleba pita, silného piva a mäsa/rýb vo veľkom hostinci. "
-"Toto výživné jedlo je presne to, čo pracovníci v hlbočizných baniach "
-"potrebujú."
+"Obedy sa vyrábajú z pity, silného piva a mäsa/rýb vo veľkom hostinci. Toto "
+"výživné jedlo je presne to, čo pracovníci v hlbočizných baniach potrebujú."
 
 #: ../../tribes/barbarians/meat/conf:1
 msgid ""
@@ -1962,45 +2093,45 @@ msgstr ""
 "baníkov. Spotrebováva sa aj vo výcvikových stavbách (výcvikový tábor a "
 "zápasnícka aréna)."
 
-#: ../../tribes/barbarians/metalworks/conf:38
-msgid "Produce felling ax"
-msgstr "Vyrobiť drevorubačskú sekeru"
-
 #: ../../tribes/barbarians/metalworks/conf:39
-msgid "Produce bread paddle"
-msgstr "Vyrobiť pekársku lopatu"
-
-#: ../../tribes/barbarians/metalworks/conf:40
-msgid "Produce fire tongs"
-msgstr "Vyrobiť kliešte na uhlie"
+msgid "making a bread paddle"
+msgstr "vyrábanie pekárskej lopaty"
 
 #: ../../tribes/barbarians/metalworks/conf:41
-msgid "Produce fishing rod"
-msgstr "Vyrobiť rybársku udicu"
-
-#: ../../tribes/barbarians/metalworks/conf:42
-msgid "Produce hammer"
-msgstr "Vyrobiť kladivo"
+msgid "making a felling ax"
+msgstr "vyrábanie drevorubačskej sekery"
 
 #: ../../tribes/barbarians/metalworks/conf:43
-msgid "Produce kitchen tools"
-msgstr "Vyrobiť kuchynské nástroje"
-
-#: ../../tribes/barbarians/metalworks/conf:44
-msgid "Produce pick"
-msgstr "Vyrobiť krompáč"
+msgid "making fire tongs"
+msgstr "vyrábanie klieští na uhlie"
 
 #: ../../tribes/barbarians/metalworks/conf:45
-msgid "Produce scythe"
-msgstr "Vyrobiť kosu"
-
-#: ../../tribes/barbarians/metalworks/conf:46
-msgid "Produce shovel"
-msgstr "Vyrobiť lopatu"
+msgid "making a fishing rod"
+msgstr "vyrábanie rybárskej udice"
 
 #: ../../tribes/barbarians/metalworks/conf:47
-msgid "Produce hunting spear"
-msgstr "Vyrobiť lovecký oštep"
+msgid "making a hammer"
+msgstr "vyrábanie kladiva"
+
+#: ../../tribes/barbarians/metalworks/conf:49
+msgid "making a hunting spear"
+msgstr "vyrábanie loveckého oštepu"
+
+#: ../../tribes/barbarians/metalworks/conf:51
+msgid "making kitchen tools"
+msgstr "vyrábanie kuchynských nástrojov"
+
+#: ../../tribes/barbarians/metalworks/conf:53
+msgid "making a pick"
+msgstr "vyrábanie krompáča"
+
+#: ../../tribes/barbarians/metalworks/conf:55
+msgid "making a scythe"
+msgstr "vyrábanie kosy"
+
+#: ../../tribes/barbarians/metalworks/conf:57
+msgid "making a shovel"
+msgstr "vyrábanie lopaty"
 
 #: ../../tribes/barbarians/metalworks/help.lua:13
 msgid ""
@@ -2020,6 +2151,9 @@ msgid ""
 "tongs, fishing rods, hammers, hunting spears, kitchen tools, picks, scythes "
 "and shovels."
 msgstr ""
+"Barbarská kovodielňa vyrába pekárske lopaty, drevorubačské sekery, kliešte "
+"na uhlie, rybárske udice, kladivá, lovecké oštepy, kuchynské nástroje, "
+"krompáče, kosy a lopaty."
 
 #: ../../tribes/barbarians/metalworks/help.lua:18
 msgid ""
@@ -2027,12 +2161,16 @@ msgid ""
 "three buildings and creates all the tools that barbarians need. The others "
 "are for weapons."
 msgstr ""
+"Barbarská kovodielňa je základnou produkčnou stavbou v sérii troch budov. "
+"Vyrába nástroje, ktoré barbari potrebujú. Ostatné sú na zbrane."
 
 #: ../../tribes/barbarians/metalworks/help.lua:30
 msgid ""
 "If all needed wares are delivered in time, this building can produce each "
 "tool in about %s on average."
 msgstr ""
+"Ak sa všetok potrebný tovar dodá načas, táto budova dokáže vyrobiť každý "
+"nástroj v priemere za asi %s."
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:13
 msgid "Widespread toast among Miners"
@@ -2043,8 +2181,8 @@ msgid ""
 "‘Let the first one drive away the hunger, the second one put you at ease; "
 "when you have swallowed up your third one, it’s time for the next shift!’"
 msgstr ""
-"„Nech prvý zaženie hlad, druhý nech ťa upokojí; keď prehltneš tretí, je čas "
-"na ďalšiu zmenu!“"
+"„Nech prvý zaženie hlad, druhý nech ťa upokojí; keď zhltneš tretí, je čas na "
+"ďalšiu zmenu!“"
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:17
 msgid ""
@@ -2052,12 +2190,17 @@ msgid ""
 "component of the snacks that inns and big inns prepare for miners in deep "
 "mines."
 msgstr ""
+"Mikropivovar vyrába pivo nižšieho stupňa. Toto pivo je dôležitou zložkou "
+"desiat, ktoré sa pripravujú v hostincoch a veľkých hostincoch pre baníkov v "
+"hlbinných baniach."
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:29
 msgid ""
 "If all needed wares are delivered in time, this building can produce beer in "
 "about %s on average."
 msgstr ""
+"Ak sa všetok potrebný tovar dodá načas, táto budova dokáže vyrobiť pivo v "
+"priemere za asi %s."
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid ""
@@ -2083,26 +2226,42 @@ msgid ""
 "It is also consumed at training sites (training camp and battle arena)."
 msgstr ""
 "Barbarskí pekári vynikajú v tvorbe tohto plochého a chutného chleba pita. "
-"Vyrába sa z pšenice a vody na základe tajného receptu. Chlieb pita sa "
-"používa v krčmách, hostincoch a veľkých hostincoch na prípravu prídelov, "
-"desiat a obedov. Spotrebováva sa aj vo výcvikových stavbách (výcvikový tábor "
-"a zápasnícka aréna)."
+"Vyrába sa z pšenice a vody na základe tajného receptu. Pita sa používa v "
+"krčmách, hostincoch a veľkých hostincoch na prípravu prídelov, desiat a "
+"obedov. Spotrebováva sa aj vo výcvikových stavbách (výcvikový tábor a "
+"zápasnícka aréna)."
+
+#: ../../tribes/barbarians/quarry/conf:26
+msgid "Out of Rocks"
+msgstr "Došli skaly"
+
+#: ../../tribes/barbarians/quarry/conf:27
+msgid ""
+"The stonemason working at this quarry can’t find any rocks in his working "
+"radius."
+msgstr ""
+"Kamenár pracujúci v tomto kameňolome nedokáže vo svojom okolí nájsť žiadne "
+"skaly."
 
 #: ../../tribes/barbarians/quarry/help.lua:17
 msgid "Carves raw stone out of rocks in the vicinity."
-msgstr ""
+msgstr "Vysekáva surový kameň z neďalekých skál."
 
 #: ../../tribes/barbarians/quarry/help.lua:17
 msgid "The quarry needs stones to cut within the working radius."
-msgstr ""
+msgstr "Kameňolom potrebuje vo svojej pracovnej oblasti kamene."
 
 #: ../../tribes/barbarians/quarry/help.lua:29
 msgid "The stonemason pauses %s before going back to work again."
-msgstr ""
+msgstr "Kamenár sa pozastaví na %s, predtým ako začne opäť pracovať."
 
 #: ../../tribes/barbarians/ranger/conf:1
 msgid "Plants trees."
 msgstr "Sadí stromy"
+
+#: ../../tribes/barbarians/rangers_hut/conf:18
+msgid "planting trees"
+msgstr "sadenie stromov"
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:14
 msgid "Chat’Karuth in a conversation with a Ranger"
@@ -2118,19 +2277,23 @@ msgstr ""
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:18
 msgid "Plants trees in the surrounding area."
-msgstr ""
+msgstr "Sadí stromy na okolitom území."
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:19
 msgid ""
 "The ranger’s hut needs free space within the working radius to plant the "
 "trees."
 msgstr ""
+"Lesnícka chatrč vyžaduje vo svojej pracovnej oblasti voľné miesto na sadenie "
+"stromov."
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:31
 msgid ""
 "The ranger needs %s to plant a tree, not counting the time he needs to reach "
 "the destination and go home again."
 msgstr ""
+"Lesník zasadí strom za %s, pričom sa nepočíta čas, ktorý potrebuje na to, "
+"aby sa dostal na miesto a opäť domov."
 
 #: ../../tribes/barbarians/ration/conf:1
 msgid ""
@@ -2140,23 +2303,31 @@ msgid ""
 msgstr ""
 "Malé sústo, ktoré dodá baníkom silu a udrží ich pri práci. Prídely konzumuje "
 "na svojich cestách aj prieskumník. Vyrábajú sa v krčme, hostinci a veľkom "
-"hostinci z rýb alebo mäsa alebo chleba pita."
+"hostinci z rýb alebo mäsa alebo pity."
 
 #: ../../tribes/barbarians/raw_stone/conf:1
 msgid ""
 "Raw Stones are a basic building material of the barbarians. It is produced "
 "in quarries and granite mines."
 msgstr ""
-"Nespracované kamene sú základným stavebným materiálom barbarov. Produkujú sa "
-"v kameňolomoch a žulových lomoch."
-
-#: ../../tribes/barbarians/reed_yard/conf:19
-msgid "Plant reed"
-msgstr "Sadiť trstinu"
+"Surové kamene sú základným stavebným materiálom barbarov. Ťažia sa v "
+"kameňolomoch a žulových lomoch."
 
 #: ../../tribes/barbarians/reed_yard/conf:20
-msgid "Harvest reed"
-msgstr "Zberať trstinu"
+msgid "planting reed"
+msgstr "sadenie trstiny"
+
+#: ../../tribes/barbarians/reed_yard/conf:22
+msgid "harvesting reed"
+msgstr "zbieranie trstiny"
+
+#: ../../tribes/barbarians/reed_yard/conf:41
+msgid ""
+"The gardener working at this reed yard has no cleared soil to plant his "
+"seeds."
+msgstr ""
+"Záhradník pracujúci v tejto trstinovej záhrade nemá k dispozícii čistú pôdu, "
+"na ktorej by mohol začať sadiť."
 
 #: ../../tribes/barbarians/reed_yard/help.lua:13
 msgid "Slogan of the Guild of Gardeners"
@@ -2171,11 +2342,22 @@ msgid ""
 "The Reed Yard cultivates reed that serves two different purposes for the "
 "Barbarian tribe."
 msgstr ""
+"Trstinová záhrada pestuje trstinu, ktorá slúži kmeňu barbarov na dva rôzne "
+"účely."
+
+#: ../../tribes/barbarians/reed_yard/help.lua:18
+msgid ""
+"Thatch reed is the traditional material for roofing, and it is woven into "
+"the extremely durable cloth that they use for their ships’ sails."
+msgstr ""
+"Trstina je tradičným materiálom na zastrešovanie a tká sa z nej mimoriadne "
+"trvanlivá látka, z ktorej vyrábajú lodné plachty."
 
 #: ../../tribes/barbarians/reed_yard/help.lua:30
 msgid ""
 "A reed yard can produce a sheaf of thatch reed in about %s on average."
 msgstr ""
+"Trstinová záhrada dokáže vyprodukovať zväzok trstiny v priemere za %s."
 
 #: ../../tribes/barbarians/scout/conf:1
 msgid ""
@@ -2184,27 +2366,27 @@ msgstr ""
 "Prieskumníci ako prieskumník Priemyslav preskúmali oblasti v prieskumníckom "
 "štýle."
 
-#: ../../tribes/barbarians/scripting/sc00_headquarters_medium.lua:10
-msgid "Headquarters medium"
-msgstr "Stredná základňa"
+#: ../../tribes/barbarians/scouts_hut/conf:22
+msgid "scouting"
+msgstr "preskúmavanie"
 
-#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:10
-msgid "Citadel village"
-msgstr "Dedina s pevnosťou"
+#: ../../tribes/barbarians/scripting/sc01_fortified_village.lua:10
+msgid "Fortified Village"
+msgstr "Opevnená dedina"
 
-#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:94
+#: ../../tribes/barbarians/scripting/sc01_fortified_village.lua:94
 msgid "Not enough space"
 msgstr "Nedostatok miesta"
 
-#: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:95
+#: ../../tribes/barbarians/scripting/sc01_fortified_village.lua:95
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr ""
-"Kvôli nedostatku miesta sa nepodarilo umiestniť niektoré z vašich "
-"počiatočných budov. Ste teda v nevýhode; zvážte reštart mapy s férovými "
-"počiatočnými podmienkami."
+"Pre nedostatok miesta sa nepodarilo umiestniť niektoré z počiatočných budov. "
+"Ste teda v nevýhode; ak to považujete za vhodné, reštartujte mapu so "
+"spravodlivými počiatočnými podmienkami."
 
 #: ../../tribes/barbarians/scythe/conf:1
 msgid ""
@@ -2239,9 +2421,9 @@ msgstr "Plavbyschopná loď"
 msgid "Works at the shipyard and constructs new ships."
 msgstr "Pracuje v lodenici a vyrába nové lode."
 
-#: ../../tribes/barbarians/shipyard/conf:27
-msgid "Constructing ship"
-msgstr "Stavba lode"
+#: ../../tribes/barbarians/shipyard/conf:28
+msgid "constructing a ship"
+msgstr "konštruovanie lode"
 
 #: ../../tribes/barbarians/shovel/conf:1
 msgid ""
@@ -2258,17 +2440,17 @@ msgstr ""
 msgid "Smelts iron."
 msgstr "Taví železo."
 
-#: ../../tribes/barbarians/smelting_works/conf:29
-msgid "Smelt iron"
-msgstr "Taviť železo"
-
 #: ../../tribes/barbarians/smelting_works/conf:30
-msgid "Smelt gold"
-msgstr "Taviť zlato"
+msgid "smelting iron"
+msgstr "tavenie železa"
+
+#: ../../tribes/barbarians/smelting_works/conf:32
+msgid "smelting gold"
+msgstr "tavenie zlata"
 
 #: ../../tribes/barbarians/smelting_works/help.lua:17
 msgid "Smelts iron ore into iron and gold ore into gold."
-msgstr ""
+msgstr "Taví železnú rudu na železo a zlatú rudu na zlato."
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
@@ -2276,7 +2458,7 @@ msgid ""
 "produced in an inn or a big inn out of fish/meat, pitta bread and beer."
 msgstr ""
 "Väčšie sústo než prídel, podáva sa baníkom v hlbinných baniach. Vyrába sa v "
-"hostinci alebo vo veľkom hostinci z rýb/mäsa, chleba pita a piva."
+"hostinci alebo vo veľkom hostinci z rýb/mäsa, pity a piva."
 
 #: ../../tribes/barbarians/soldier/conf:1
 msgid "Defend and Conquer!"
@@ -2294,9 +2476,9 @@ msgid ""
 "inns to prepare meals."
 msgstr ""
 "Bojovníci v zápasníckej aréne pripúšťajú len toto pivo. Hovorí sa, že v "
-"tomto pive sa ukrýva celá sila barbarov. Pomáha pri výcviku uhýbania vojakov "
-"z úrovne 0 na 1 a na 2. Zo silného piva sa vo veľkých hostincoch pripravujú "
-"obedy."
+"tomto pive sa ukrýva celá sila barbarov. Pomáha pri výcviku vojakov v "
+"uhýbaní z úrovne 0 na 1 a na 2. Zo silného piva sa vo veľkých hostincoch "
+"pripravujú obedy."
 
 #: ../../tribes/barbarians/thatchreed/conf:1
 msgid ""
@@ -2310,37 +2492,37 @@ msgstr ""
 msgid "Trains the soldiers."
 msgstr "Cvičí vojakov."
 
-#: ../../tribes/barbarians/trainingcamp/conf:44
-msgid "Upgrade soldier attack from level 0 to level 1"
-msgstr "Vylepšiť útok vojakov z úrovne 0 na úroveň 1"
-
-#: ../../tribes/barbarians/trainingcamp/conf:45
-msgid "Upgrade soldier attack from level 1 to level 2"
-msgstr "Vylepšiť útok vojakov z úrovne 1 na úroveň 2"
-
 #: ../../tribes/barbarians/trainingcamp/conf:46
-msgid "Upgrade soldier attack from level 2 to level 3"
-msgstr "Vylepšiť útok vojakov z úrovne 2 na úroveň 3"
-
-#: ../../tribes/barbarians/trainingcamp/conf:47
-msgid "Upgrade soldier attack from level 3 to level 4"
-msgstr "Vylepšiť útok vojakov z úrovne 3 na úroveň 4"
+msgid "upgrading soldier attack from level 0 to level 1"
+msgstr "vylepšenie útoku vojakov z úrovne 0 na úroveň 1"
 
 #: ../../tribes/barbarians/trainingcamp/conf:48
-msgid "Upgrade soldier attack from level 4 to level 5"
-msgstr "Vylepšiť útok vojakov z úrovne 4 na úroveň 5"
-
-#: ../../tribes/barbarians/trainingcamp/conf:49
-msgid "Upgrade soldier health from level 0 to level 1"
-msgstr "Vylepšiť zdravie vojakov z úrovne 0 na úroveň 1"
+msgid "upgrading soldier attack from level 1 to level 2"
+msgstr "vylepšenie útoku vojakov z úrovne 1 na úroveň 2"
 
 #: ../../tribes/barbarians/trainingcamp/conf:50
-msgid "Upgrade soldier health from level 1 to level 2"
-msgstr "Vylepšiť zdravie vojakov z úrovne 1 na úroveň 2"
+msgid "upgrading soldier attack from level 2 to level 3"
+msgstr "vylepšenie útoku vojakov z úrovne 2 na úroveň 3"
 
-#: ../../tribes/barbarians/trainingcamp/conf:51
-msgid "Upgrade soldier health from level 2 to level 3"
-msgstr "Vylepšiť zdravie vojakov z úrovne 2 na úroveň 3"
+#: ../../tribes/barbarians/trainingcamp/conf:52
+msgid "upgrading soldier attack from level 3 to level 4"
+msgstr "vylepšenie útoku vojakov z úrovne 3 na úroveň 4"
+
+#: ../../tribes/barbarians/trainingcamp/conf:54
+msgid "upgrading soldier attack from level 4 to level 5"
+msgstr "vylepšenie útoku vojakov z úrovne 4 na úroveň 5"
+
+#: ../../tribes/barbarians/trainingcamp/conf:56
+msgid "upgrading soldier health from level 0 to level 1"
+msgstr "vylepšenie zdravia vojakov z úrovne 0 na úroveň 1"
+
+#: ../../tribes/barbarians/trainingcamp/conf:58
+msgid "upgrading soldier health from level 1 to level 2"
+msgstr "vylepšenie zdravia vojakov z úrovne 1 na úroveň 2"
+
+#: ../../tribes/barbarians/trainingcamp/conf:60
+msgid "upgrading soldier health from level 2 to level 3"
+msgstr "vylepšenie zdravia vojakov z úrovne 2 na úroveň 3"
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:15
 msgid "Chief Chat’Karuth in a speech to his army."
@@ -2356,7 +2538,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:19
 msgid "Trains soldiers in ‘Attack’ and in ‘Health’."
-msgstr ""
+msgstr "Cvičí vojakov v útoku a zdraví."
 
 #: ../../tribes/barbarians/trainingcamp/help.lua:21
 msgid ""
@@ -2366,23 +2548,26 @@ msgstr ""
 "Barbarských vojakov nemožno cvičiť v obrane, a preto zostanú na počiatočnej "
 "úrovni."
 
-#: ../../tribes/barbarians/trainingcamp/help.lua:27
+#: ../../tribes/barbarians/trainingcamp/help.lua:29
 msgid "Attack Training:"
-msgstr ""
+msgstr "Výcvik útoku:"
 
-#: ../../tribes/barbarians/trainingcamp/help.lua:33
+#: ../../tribes/barbarians/trainingcamp/help.lua:35
 msgid "Health Training:"
-msgstr ""
+msgstr "Výcvik zdravia:"
 
-#: ../../tribes/barbarians/trainingcamp/help.lua:44
+#: ../../tribes/barbarians/trainingcamp/help.lua:46
 msgid ""
 "If all needed wares are delivered in time, a training camp can train one new "
 "soldier in attack and health to the final level in %1$s and %2$s on average."
 msgstr ""
+"Ak sa všetok potrebný tovar dodá načas, výcvikový tábor dokáže vycvičiť "
+"jedného nového vojaka v útoku a zdraví po konečnú úroveň v priemere za %1$s "
+"a %2$s."
 
 #: ../../tribes/barbarians/warehouse/help.lua:16
 msgid "Warehouses store soldiers, wares and tools."
-msgstr ""
+msgstr "Sklady skladujú vojakov, výrobky a nástroje."
 
 #: ../../tribes/barbarians/warhelm/conf:1
 msgid ""
@@ -2392,36 +2577,41 @@ msgid ""
 msgstr ""
 "Vojenská helma je vylepšená zbroj pre barbarských vojakov. Vyrába sa vo "
 "vyhni na helmy a používa sa vo výcvikovom tábore – spolu s jedlom – na "
-"trénovanie zdravia vojakov z úrovne 1 na úroveň 2."
+"výcvik vojakov v zdraví z úrovne 1 na úroveň 2."
 
-#: ../../tribes/barbarians/warmill/conf:39
-msgid "Produce bronze ax"
-msgstr "Vyrobiť bronzovú sekeru"
+#: ../../tribes/barbarians/warmill/conf:43
+msgid "forging a bronze ax"
+msgstr "kutie bronzovej sekery"
 
-#: ../../tribes/barbarians/warmill/conf:40
-msgid "Produce battle ax"
-msgstr "Vyrobiť bojovú sekeru"
+#: ../../tribes/barbarians/warmill/conf:45
+msgid "forging a battle ax"
+msgstr "kutie bojovej sekery"
 
-#: ../../tribes/barbarians/warmill/conf:41
-msgid "Produce warrior’s ax"
-msgstr "Vyrobiť bojovnícku sekeru"
+#: ../../tribes/barbarians/warmill/conf:47
+msgid "forging a warrior’s ax"
+msgstr "kutie bojovníckej sekery"
 
 #: ../../tribes/barbarians/warmill/help.lua:17
 msgid ""
 "The war mill produces all the axes that the barbarians use for warfare."
 msgstr ""
+"Vojenský závod vyrába všetky sekery, ktoré barbari používajú vo vojne."
 
 #: ../../tribes/barbarians/warmill/help.lua:18
 msgid ""
 "The barbarian war mill is their most advanced production site for weapons. "
 "As such it needs to be upgraded from an axfactory."
 msgstr ""
+"Barbarský vojenský závod je najpokročilejšou produkčnou stavbou na výrobu "
+"zbraní. Vzniká vylepšením továrne na sekery."
 
 #: ../../tribes/barbarians/warmill/help.lua:30
 msgid ""
 "If all needed wares are delivered in time, this building can produce each ax "
 "in about %s on average."
 msgstr ""
+"Ak sa všetok potrebný tovar dodá načas, táto budova dokáže vyrobiť každú "
+"sekeru v priemere za asi %s."
 
 #: ../../tribes/barbarians/warmill/help.lua:33
 msgid ""
@@ -2439,9 +2629,9 @@ msgid ""
 "train soldiers from attack level 4 to level 5."
 msgstr ""
 "Bojovnícka sekera je najnebezpečnejšou zbraňou barbarov. Len niekoľko "
-"vojakov dokázalo zaobchádzať s týmito obrovskými a silnými sekerami. Vyrába "
-"sa vo vojenskom závode a používa sa vo výcvikovom tábore – spolu s jedlom – "
-"na trénovanie útoku vojakov z úrovne 4 na úroveň 5."
+"vojakov v histórii dokázalo zaobchádzať s týmito obrovskými a silnými "
+"sekerami. Vyrába sa vo vojenskom závode a používa sa vo výcvikovom tábore – "
+"spolu s jedlom – na výcvik vojakov v útoku z úrovne 4 na úroveň 5."
 
 #: ../../tribes/barbarians/water/conf:1
 msgid ""
@@ -2449,16 +2639,30 @@ msgid ""
 "and the brewery. The lime kiln and the cattle farm also need to be supplied "
 "with water."
 msgstr ""
-"Voda je základ života! Využíva sa v pekárni, mikropivovare a pivovare. "
+"Voda je základ života! Spotrebúva sa v pekárni, mikropivovare a pivovare. "
 "Zásobované vodou musia byť aj vápenky a kravíny."
 
 #: ../../tribes/barbarians/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."
 msgstr "Vyrába látku pre lode a vojakov."
 
+#: ../../tribes/barbarians/weaving-mill/conf:24
+msgid "weaving"
+msgstr "tkanie"
+
 #: ../../tribes/barbarians/weaving-mill/help.lua:17
 msgid "Weaves cloth out of thatch reed."
+msgstr "Tká látku z trstiny."
+
+#: ../../tribes/barbarians/well/conf:28
+msgid "Out of Water"
+msgstr "Došla voda"
+
+#: ../../tribes/barbarians/well/conf:29
+msgid ""
+"The carrier working at this well can’t find any water in his working radius."
 msgstr ""
+"Nosič pracujúci v tejto studni nedokáže vo svojom okolí nájsť žiadnu vodu."
 
 #: ../../tribes/barbarians/well/help.lua:13
 msgid ""
@@ -2478,11 +2682,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/well/help.lua:18
 msgid "Draws water out of the deep."
-msgstr ""
+msgstr "Čerpá vodu z hlbín."
 
 #: ../../tribes/barbarians/well/help.lua:30
 msgid "The carrier needs %s to get one bucket full of water."
-msgstr ""
+msgstr "Nosič prinesie jedno vedro plné vody za %s."
 
 #: ../../tribes/barbarians/wheat/conf:1
 msgid ""
@@ -2491,5 +2695,4 @@ msgid ""
 "supplied with wheat."
 msgstr ""
 "Pšenica je nevyhnutná pre život. Pestuje sa na farmách a spotrebúva v "
-"pekárňach, mikropivovaroch a pivovaroch. Navyše, pšenicou sa musia zásobovať "
-"aj kravíny."
+"pekárňach, mikropivovaroch a pivovaroch. Musia sa ňou zásobovať aj kravíny."

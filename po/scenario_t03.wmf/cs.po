@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-07-16 06:11+0000\n"
-"PO-Revision-Date: 2014-05-31 13:44+0000\n"
+"POT-Creation-Date: 2014-08-05 09:15+0000\n"
+"PO-Revision-Date: 2014-07-27 16:57+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-07-17 05:41+0000\n"
-"X-Generator: Launchpad (build 17114)\n"
+"X-Launchpad-Export-Date: 2014-08-06 05:42+0000\n"
+"X-Generator: Launchpad (build 17147)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "Language: cs\n"
 "X-Poedit-Language: Czech\n"
@@ -55,17 +55,14 @@ msgid "Build a cattle farm"
 msgstr "Postav dobytčí farmu,"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:37
+#: ../../campaigns/t03.wmf/scripting/texts.lua:39
 msgid "Remember to build a cattle farm"
 msgstr "Postav dobytčí farmu"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:38
 msgid ""
 "As your roads grow longer and your economy bigger, you should make good use "
-"of your oxen to help transport wares more quickly.)"
-msgstr ""
-
-#: ../../campaigns/t03.wmf/scripting/texts.lua:39
-msgid "Remember to build a cattle farm!"
+"of your oxen to help transport wares more quickly."
 msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:45
@@ -103,10 +100,8 @@ msgstr "Postav důlní infrastrukturu"
 msgid ""
 "Expand your territory to the mountains, send geologists to search for ore "
 "and coal and build a mining economy with mines, taverns, smelting works and "
-"metalworks."
+"metal workshop."
 msgstr ""
-"Rozšiř své území až k horám a pošli geology hledat rudu a uhlí. Poté vybuduj "
-"těžební ekonomiku s doly, kuchyněmi, slévárnami a železárnami."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:72
 #: ../../campaigns/t03.wmf/scripting/texts.lua:74
@@ -186,8 +181,8 @@ msgstr ""
 "vítězství v boji."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:109
-msgid "The attributes are: health points, attack, defense and evade."
-msgstr "Atributy jsou: zdraví, útok, obrana a vyhnutí se."
+msgid "The attributes are: health, attack, defense and evade."
+msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:115
 #: ../../campaigns/t03.wmf/scripting/texts.lua:117
