@@ -667,7 +667,8 @@ function building_help_crew_string(tribename, building_description)
 		local worker_description = building_description.working_positions[1]
 		local becomes_description = nil
 		local number_of_workers = 0
-		local toolname = nil
+		local toolnames = {}
+		local number_of_tools = 0
 
 		for i, worker_description in ipairs(building_description.working_positions) do
 
@@ -675,7 +676,8 @@ function building_help_crew_string(tribename, building_description)
 			if(worker_description.buildable) then
 				for j, buildcost in ipairs(worker_description.buildcost) do
 					if( not (buildcost == "carrier" or buildcost == "none" or buildcost == nil)) then
-						toolname = buildcost
+						number_of_tools = number_of_tools + 1
+						toolnames[number_of_tools] = buildcost
 					end
 				end
 			end
@@ -692,7 +694,9 @@ function building_help_crew_string(tribename, building_description)
 			end
 		end
 
-		if(toolname) then result = result .. building_help_tool_string(tribename, toolname, number_of_workers) end
+		if(number_of_tools > 0) then
+			result = result .. building_help_tool_string(tribename, toolnames, number_of_workers)
+		end
 
 		if(becomes_description) then
 
@@ -723,17 +727,20 @@ end
 -- RST
 -- .. function building_help_tool_string(tribename, toolname)
 --
---    Displays a tool with an intro text and image
+--    Displays tools with an intro text and images
 --
 --    :arg tribename: e.g. "barbarians".
---    :arg toolname: e.g. "felling_axe".
---    :arg no_of_workers: the number of workers using the tool; for plural formatting.
---    :returns: text_line for the tool
+--    :arg toolnames: e.g. {"shovel", "basket"}.
+--    :arg no_of_workers: the number of workers using the tools; for plural formatting.
+--    :returns: text_line for the tools
 --
-function building_help_tool_string(tribename, toolname, no_of_workers)
-	local ware_description = wl.Game():get_ware_description(tribename, toolname)
-	return text_line((ngettext("Worker uses:","Workers use:", no_of_workers)),
-		ware_description.descname, ware_description.icon_name)
+function building_help_tool_string(tribename, toolnames, no_of_workers)
+	local result = rt(h3(ngettext("Worker uses:","Workers use:", no_of_workers)))
+	for i, toolname in ipairs(toolnames) do
+		local ware_description = wl.Game():get_ware_description(tribename, toolname)
+		result = result .. image_line(ware_description.icon_name, 1, p(ware_description.descname))
+	end
+	return result
 end
 
 -- RST
