@@ -236,12 +236,9 @@ void Fullscreen_Menu_LoadReplay::fill_list()
 			Widelands::Game_Loader gl(savename, m_game);
 			gl.preload_game(gpdp);
 
-			// NOCOM get_localized_display_title() doesn't work
+			// NOCOM move localization from data packet somewhere else
 			std::string displaytitle = FileSystem::FS_FilenameWoExt(pname->c_str());
-			if (is_timestring(displaytitle)) {
-				displaytitle = gpdp.get_localized_display_title();
-			}
-			m_list.add(displaytitle.c_str(), *pname);
+			m_list.add(gpdp.get_localized_display_title(displaytitle).c_str(), *pname);
 		} catch (const _wexception &) {} //  we simply skip illegal entries
 	}
 

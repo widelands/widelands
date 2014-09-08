@@ -29,15 +29,9 @@
 /// string which might be overwritten by subsequent calls.
 char * timestring();
 
-/// Format a localized timestring for display on screen for the user,
-/// so it is more easily read.
-/// If the string starts with the datetime format "YYYY-MM-DDThh.mm.ss",
-/// that part of the string is transformed to a localized datetime string.
-/// Any other parts of the string remain as is.
-std::string localize_timestring(const std::string& timestring);
-
-/// Returns true if this string starts with "YYYY-MM-DDThh.mm.ss"
-bool is_timestring(const std::string& timestring);
+/// Turn a month number into a short, localized month string,
+/// 1 = "Jan" ... 12 = "Dec"
+std::string localize_month(int8_t month);
 
 /// Get a string representation of the game time
 /// as hhh:mm:ss. If Time represents more than

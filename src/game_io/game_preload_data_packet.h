@@ -47,7 +47,12 @@ struct Game_Preload_Data_Packet : public Game_Data_Packet {
 	uint8_t get_number_of_players() {return m_number_of_players;}
 	std::string get_minimap_path() {return m_minimap_path;}
 
-	std::string get_localized_display_title();
+	std::string get_localized_display_title(std::string filename);
+	uint16_t get_saveyear() {return m_saveyear;}
+	uint8_t get_savemonth() {return m_savemonth;}
+	uint8_t get_saveday() {return m_saveday;}
+	uint8_t get_savehour() {return m_savehour;}
+	uint8_t get_saveminute() {return m_saveminute;}
 	GameController::GameType get_gametype() {return m_gametype;}
 
 private:
@@ -61,6 +66,8 @@ private:
 	uint16_t m_saveyear;
 	uint8_t  m_savemonth;
 	uint8_t  m_saveday;
+	uint8_t  m_savehour;
+	uint8_t  m_saveminute;
 	GameController::GameType m_gametype;
 };
 

@@ -24,6 +24,7 @@
 
 #include <boost/format.hpp>
 
+#include "base/time_string.h"
 #include "graphic/graphic.h"
 #include "graphic/in_memory_image.h"
 #include "graphic/render/minimaprenderer.h"
@@ -71,6 +72,8 @@ void Game_Preload_Data_Packet::Read
 			m_saveyear = s.get_int("saveyear");
 			m_savemonth = s.get_int("savemonth");
 			m_saveday = s.get_int("saveday");
+			m_savehour = s.get_int("savehour");
+			m_saveminute = s.get_int("saveminute");
 			m_gametype = static_cast<GameController::GameType>(s.get_natural("gametype"));
 		} else {
 			throw game_data_error
@@ -115,13 +118,14 @@ void Game_Preload_Data_Packet::Write
 	s.set_string("background", map.get_background());
 	s.set_string("win_condition", game.get_win_condition_displayname());
 
-	// NOCOM(#gun): this was the problem: you set these variables after the call to prof.write(), so they were never written.
 	time_t t;
 	time(&t);
 	struct tm * datetime  = localtime(&t);
 	s.set_int("saveyear", 1900 + datetime->tm_year); //  years start at 1900
 	s.set_int("savemonth", 1 + datetime->tm_mon); //  months start at 0
 	s.set_int("saveday", datetime->tm_mday);
+	s.set_int("savehour", datetime->tm_hour);
+	s.set_int("saveminute", datetime->tm_min);
 	s.set_int("gametype", static_cast<int32_t>(game.gameController()->getGameType()));
 
 	prof.write("preload", false, fs);
@@ -142,79 +146,45 @@ void Game_Preload_Data_Packet::Write
 
 }
 
-
-namespace  {
-std::string localize_month(int8_t month) {
-	switch (month) {
-		case 1:
-			/** TRANSLATORS: January */
-			return _("Jan");
-		case 2:
-			/** TRANSLATORS: February */
-			return _("Feb");
-		case 3:
-			/** TRANSLATORS: March */
-			return _("Mar");
-		case 4:
-			/** TRANSLATORS: April */
-			return _("Apr");
-		case 5:
-			/** TRANSLATORS: May */
-			return _("May");
-		case 6:
-			/** TRANSLATORS: June */
-			return _("Jun");
-		case 7:
-			/** TRANSLATORS: July */
-			return _("Jul");
-		case 8:
-			/** TRANSLATORS: August */
-			return _("Aug");
-		case 9:
-			/** TRANSLATORS: September */
-			return _("Sep");
-		case 10:
-			/** TRANSLATORS: October */
-			return _("Oct");
-		case 11:
-			/** TRANSLATORS: November */
-			return _("Nov");
-		case 12:
-			/** TRANSLATORS: December */
-			return _("Dec");
-		default:
-			return std::to_string(month);
-	}
-}
-}
-
-// NOCOM why are all the variables empty?
 // NOCOM(#gun): I do not like that this pulls in internationalization (which is a UI thing) into game_io. As much as possible try to handle i18n in the ui please.
-std::string Game_Preload_Data_Packet::get_localized_display_title() {
+// NOCOM(#sirver): WHere do you want it? The only common included header that would marginally make sense is logic/game_controller.h. Or a new h/cpp for this?
+// base/time_string.h doesn't make sense either, because we would have a reference to game_controller.h in there, which is even more ugly.
+std::string Game_Preload_Data_Packet::get_localized_display_title(std::string filename) {
 	std::string result;
-	log("#sirver m_saveyear: %d,m_savemonth: %d,m_saveday: %d\n", m_saveyear, m_savemonth, m_saveday);
 	if (m_saveyear > 0 && m_savemonth > 0 && m_saveday > 0) {
-		result = (boost::format(_("%1$u %2$s %3$u"))
-					 % static_cast<unsigned int>(m_saveyear)
+
+		if (m_gametype == GameController::GameType::SINGLEPLAYER) {
+			/** TRANSLATORS: Gametype used in filenames for loading games */
+			result = _("Single Player");
+		} else if (m_gametype == GameController::GameType::NETHOST) {
+			/** TRANSLATORS: Gametype used in filenames for loading games */
+			/** TRANSLATORS: %1% is the number of players */
+			result = (boost::format(_("Multiplayer (%1%, Host)"))
+						 % static_cast<unsigned int>(m_number_of_players)).str();
+		} else if (m_gametype == GameController::GameType::NETCLIENT) {
+			/** TRANSLATORS: Gametype used in filenames for loading games */
+			/** TRANSLATORS: %1% is the number of players */
+			result = (boost::format(_("Multiplayer (%1%)"))
+								% static_cast<unsigned int>(m_number_of_players)).str();
+		}
+		/** TRANSLATORS: Filenames for loading games */
+		/** TRANSLATORS: month day, year hour:minute gametype – mapname */
+		/** TRANSLATORS: The mapname should always come last, because it can be longer than the space we have */
+		result = (boost::format(_("%1$s %2$u, %3$u %4$u:%5$u %6$s – %7$s"))
 					 % localize_month(m_savemonth)
-					 % static_cast<unsigned int>(m_saveday)).str();
+					 % static_cast<unsigned int>(m_saveday)
+					 % static_cast<unsigned int>(m_saveyear)
+					 % static_cast<unsigned int>(m_savehour)
+					 % static_cast<unsigned int>(m_saveminute)
+					 % result
+					 % m_mapname).str();
+	} else {
+		result = filename;
 	}
-	if (m_gametype == GameController::GameType::SINGLEPLAYER) {
+	if (filename == "wl_autosave") {
 		/** TRANSLATORS: Used in filenames for loading games */
-		/** TRANSLATORS: %1% is a formatted date/time string */
-		result = (boost::format(_("%1% Single Player")) % result).str();
-	} else if (m_gametype == GameController::GameType::NETHOST) {
-		/** TRANSLATORS: Used in filenames for loading games */
-		/** TRANSLATORS: %1% is a formatted date/time string */
-		/** TRANSLATORS: %2% is the number of the player */
-		result = (boost::format(_("%1% Multiplayer (Player %2%, Host)"))
-					 % result % static_cast<unsigned int>(get_player_nr())).str();
-	} else if (m_gametype == GameController::GameType::NETCLIENT) {
-		/** TRANSLATORS: Used in filenames for loading games */
-		/** TRANSLATORS: %1% is a formatted date/time string */
-		/** TRANSLATORS: %2% is the number of the player */
-		result = (boost::format(_("%1% Multiplayer (Player %2%)"))
-							% result % static_cast<unsigned int>(get_player_nr())).str();
+		result = (boost::format(_("Autosave: %1%"))
+							% result).str();
 	}
 	return result;
 }

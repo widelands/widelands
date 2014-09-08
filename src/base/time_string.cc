@@ -88,90 +88,48 @@ char * timestring() {
 	return timestring_buffer;
 }
 
-namespace  {
 std::string localize_month(int8_t month) {
 	switch (month) {
 		case 1:
-			/** TRANSLATORS: January */
+			/** TRANSLATORS: January. Keep this short if you can. */
 			return _("Jan");
 		case 2:
-			/** TRANSLATORS: February */
+			/** TRANSLATORS: February. Keep this short if you can. */
 			return _("Feb");
 		case 3:
-			/** TRANSLATORS: March */
+			/** TRANSLATORS: March. Keep this short if you can. */
 			return _("Mar");
 		case 4:
-			/** TRANSLATORS: April */
+			/** TRANSLATORS: April. Keep this short if you can. */
 			return _("Apr");
 		case 5:
-			/** TRANSLATORS: May */
+			/** TRANSLATORS: May. Keep this short if you can. */
 			return _("May");
 		case 6:
-			/** TRANSLATORS: June */
+			/** TRANSLATORS: June. Keep this short if you can. */
 			return _("Jun");
 		case 7:
-			/** TRANSLATORS: July */
+			/** TRANSLATORS: July. Keep this short if you can. */
 			return _("Jul");
 		case 8:
-			/** TRANSLATORS: August */
+			/** TRANSLATORS: August. Keep this short if you can. */
 			return _("Aug");
 		case 9:
-			/** TRANSLATORS: September */
+			/** TRANSLATORS: September. Keep this short if you can. */
 			return _("Sep");
 		case 10:
-			/** TRANSLATORS: October */
+			/** TRANSLATORS: October. Keep this short if you can. */
 			return _("Oct");
 		case 11:
-			/** TRANSLATORS: November */
+			/** TRANSLATORS: November. Keep this short if you can. */
 			return _("Nov");
 		case 12:
-			/** TRANSLATORS: December */
+			/** TRANSLATORS: December. Keep this short if you can. */
 			return _("Dec");
 		default:
 			return std::to_string(month);
 	}
 }
-}
-
-
-// Locale-dependent formatting for datetime-based filenames.
-std::string localize_timestring(const std::string& timestring) {
-
-	std::string result;
-
-	// Do some formatting if this string starts with "YYYY-MM-DDThh.mm.ss"
-	if (is_timestring(timestring)) {
-		const std::string year = timestring.substr(0, 4);
-		std::string month = timestring.substr(5, 2);
-		const std::string day = timestring.substr(8, 2);
-		const std::string hour = timestring.substr(11, 2);
-		const std::string minute = timestring.substr(14, 2);
-		const std::string second = timestring.substr(17, 2);
-
-		month = localize_month(stoi(month));
-
-		/** TRANSLATORS: Date format for filenames on load game screens. YYYY Mon DD hh:mm:ss */
-		result = (boost::format(_("%1% %2% %3% %4%:%5%:%6%"))
-					 % day % month % year
-					 % hour % minute % second).str();
-
-		if (timestring.length() > sizeof(timestring_buffer) - 1) {
-			result.append(timestring.substr(19));
-		}
-	} else {
-		result = timestring;
-	}
-	return result;
-}
-
-
-// Check if this is a string of the type "YYYY-MM-DDThh.mm.ss"
-bool is_timestring(const std::string& timestring) {
-	boost::regex re("\\d\\d\\d\\d-\\d\\d-\\d\\dT\\d\\d\\.\\d\\d\\.\\d\\d.*");
-	return boost::regex_match(timestring, re);
-}
-
-
 
 char * gametimestring_leading_zeros(uint32_t gametime)
 {
