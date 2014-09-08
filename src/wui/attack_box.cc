@@ -142,50 +142,48 @@ void AttackBox::init() {
 
 	uint32_t max_attackers = get_max_attackers();
 
-	{ //  Soldiers line
-		UI::Box & linebox = *new UI::Box(this, 0, 0, UI::Box::Horizontal);
-		add(&linebox, UI::Box::AlignCenter);
-		add_text(linebox, _("Soldiers:"));
-		linebox.add_space(8);
+	UI::Box & linebox = *new UI::Box(this, 0, 0, UI::Box::Horizontal);
+	add(&linebox, UI::Box::AlignCenter);
+	add_text(linebox, _("Soldiers:"));
+	linebox.add_space(8);
 
-		m_less_soldiers =
-			&add_button
-				(linebox,
-				 "0",
-				 &AttackBox::send_less_soldiers,
-				 _("Send less soldiers"));
+	m_less_soldiers =
+		&add_button
+			(linebox,
+			 "0",
+			 &AttackBox::send_less_soldiers,
+			 _("Send less soldiers"));
 
-		//  Spliter of soldiers
-		UI::Box & columnbox = *new UI::Box(&linebox, 0, 0, UI::Box::Vertical);
-		linebox.add(&columnbox, UI::Box::AlignCenter);
+	//  Spliter of soldiers
+	UI::Box & columnbox = *new UI::Box(&linebox, 0, 0, UI::Box::Vertical);
+	linebox.add(&columnbox, UI::Box::AlignCenter);
 
-		sprintf(buf, "%u / %u", max_attackers > 0 ? 1 : 0, max_attackers);
+	sprintf(buf, "%u / %u", max_attackers > 0 ? 1 : 0, max_attackers);
 
-		m_text_soldiers =
-			&add_text(columnbox, buf, UI::Box::AlignCenter, UI_FONT_ULTRASMALL);
+	m_text_soldiers =
+		&add_text(columnbox, buf, UI::Box::AlignCenter, UI_FONT_ULTRASMALL);
 
-		m_slider_soldiers =
-			&add_slider
-				(columnbox,
-				 100, 10,
-				 0, max_attackers, max_attackers > 0 ? 1 : 0,
-				 "pics/but2.png",
-				 _("Number of soldiers"));
+	m_slider_soldiers =
+		&add_slider
+			(columnbox,
+			 100, 10,
+			 0, max_attackers, max_attackers > 0 ? 1 : 0,
+			 "pics/but2.png",
+			 _("Number of soldiers"));
 
-		m_slider_soldiers->changed.connect(boost::bind(&AttackBox::update_attack, this));
+	m_slider_soldiers->changed.connect(boost::bind(&AttackBox::update_attack, this));
 
-		sprintf(buf, "%u", max_attackers);
-		m_add_soldiers =
-			&add_button
-				(linebox,
-				 buf,
-				 &AttackBox::send_more_soldiers,
-				 _("Send more soldiers"));
+	sprintf(buf, "%u", max_attackers);
+	m_add_soldiers =
+		&add_button
+			(linebox,
+			 buf,
+			 &AttackBox::send_more_soldiers,
+			 _("Send more soldiers"));
 
-		m_slider_soldiers->set_enabled(max_attackers > 0);
-		m_add_soldiers   ->set_enabled(max_attackers > 0);
-		m_less_soldiers  ->set_enabled(max_attackers > 0);
-	}
+	m_slider_soldiers->set_enabled(max_attackers > 0);
+	m_add_soldiers   ->set_enabled(max_attackers > 0);
+	m_less_soldiers  ->set_enabled(max_attackers > 0);
 }
 
 void AttackBox::send_less_soldiers() {

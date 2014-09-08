@@ -98,7 +98,7 @@ function immovable_property_tests:setup()
    self.none = map:place_immovable("pebble1", map:get_field(19, 10))
    self.small = map:place_immovable("aspen_summer_old", map:get_field(18, 10))
    self.medium = player1:place_building(
-      "burners_house", map:get_field(10,10), false, true
+      "charcoal_kiln", map:get_field(10,10), false, true
    )
    self.big = map:place_immovable("greenland_stones4", map:get_field(20, 10))
    self.big_building = player1:place_building(
@@ -135,8 +135,8 @@ end
 function immovable_property_tests:test_name_tree()
    assert_equal("aspen_summer_old", self.small.descr.name)
 end
-function immovable_property_tests:test_name_charcoal_burner()
-   assert_equal("burners_house", self.medium.descr.name)
+function immovable_property_tests:test_name_charcoal_kiln()
+   assert_equal("charcoal_kiln", self.medium.descr.name)
 end
 function immovable_property_tests:test_name_stone()
    assert_equal("greenland_stones4", self.big.descr.name)
@@ -151,9 +151,9 @@ end
 function immovable_property_tests:test_type_tree()
    assert_equal("immovable", self.small.descr.type_name)
 end
-function immovable_property_tests:test_type_charcoal_burner()
+function immovable_property_tests:test_type_charcoal_kiln()
    assert_equal("productionsite", self.medium.descr.type_name)
-   assert_equal("burners_house", self.medium.descr.name)
+   assert_equal("charcoal_kiln", self.medium.descr.name)
 end
 function immovable_property_tests:test_type_stone()
    assert_equal("immovable", self.big.descr.type_name)
@@ -171,7 +171,7 @@ function immovable_property_tests:test_fields_tree()
    assert_equal(1, #self.small.fields)
    assert_equal(map:get_field(18,10), self.small.fields[1])
 end
-function immovable_property_tests:test_fields_charcoal_burner()
+function immovable_property_tests:test_fields_charcoal_kiln()
    assert_equal(1, #self.medium.fields)
    assert_equal(map:get_field(10,10), self.medium.fields[1])
 end

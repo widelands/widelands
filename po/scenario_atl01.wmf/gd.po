@@ -7,26 +7,26 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-07-16 06:11+0000\n"
-"PO-Revision-Date: 2014-04-16 02:58+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
-"Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
+"POT-Creation-Date: 2014-08-05 09:15+0000\n"
+"PO-Revision-Date: 2014-07-29 19:36+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-07-17 05:39+0000\n"
-"X-Generator: Launchpad (build 17114)\n"
+"X-Launchpad-Export-Date: 2014-08-06 05:40+0000\n"
+"X-Generator: Launchpad (build 17147)\n"
 "Language: gd\n"
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:76
 msgid "Building lost!"
-msgstr "Chaill thu togalach!"
+msgstr "Chaill sinn togalach!"
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:78
 msgid "We lost a building to the ocean!"
-msgstr ""
+msgstr "Chaill sinn togalach sa chuan!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Ensure the supply of building wares"
@@ -38,7 +38,7 @@ msgstr "Solair bathar togail"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:35
 msgid "Supply basic building material for your economy:"
-msgstr ""
+msgstr "Solair stuth togail bunasach dhan eaconamaidh agad:"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:36
 msgid "Build a quarry"
@@ -46,7 +46,7 @@ msgstr "Tog coireall"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:37
 msgid "Build two woodcutter’s houses"
-msgstr ""
+msgstr "Tog dà thaigh buaineadair-fhiodha"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:38
 msgid "Build two forester’s houses"
@@ -54,7 +54,7 @@ msgstr "Tog dà thaigh planntair-choille"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:39
 msgid "Build a sawmill"
-msgstr ""
+msgstr "Tog muileann-sàbhaidh"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:45
 msgid "Expand your territory and explore"
@@ -70,10 +70,14 @@ msgid ""
 "cannot relax. Explore and conquer it, this is the only way to protect us "
 "from threats on the island and from Atlantis."
 msgstr ""
+"Tha an t-eilean glè mhòr agus cho fad 's nach eil sinn cinnteach a bheil "
+"daoine eile a' fuireach ann, chan urrainn dhuinn gabhail air ar socair. "
+"Rùraich 's ceannsaich e oir chan eil dòigh eile ann ach an cumadh sinn "
+"sàbhailte o cunnart san eilean 's o Atlantis."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:50
 msgid "Build military sites to expand your territory"
-msgstr ""
+msgstr "Tog togalaichean an airm gus do ranntair a leudachadh"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:56
 msgid "Establish a solid food production"
@@ -81,7 +85,7 @@ msgstr "Tog saothrachadh bìdh seasmhach"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:58
 msgid "Food Production"
-msgstr ""
+msgstr "Saothrachadh bìdh"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:58
 msgid ""
@@ -90,6 +94,11 @@ msgid ""
 "farm and a mill. The two kinds of flour together with water from a well will "
 "be baked into bread in a bakery, so build a bakery and a well, too."
 msgstr ""
+"Tha biadh glè chudromach do mhèinnean 's ionadan trèanaidh an airm. "
+"Stèidhich àrainneachd a nì biadh gu dòigheil le co-dhiù aon tuathanas, "
+"tuathanas fhreumhagan 's muileann. nì taigh-fuine dà sheòrsa arain às an dà "
+"sheòrsa min-fhlùir 's uisge on tobar, mar sin tog taigh-fuine 's tobar "
+"cuideachd."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:59
 msgid ""
@@ -100,41 +109,50 @@ msgid ""
 "breeder won’t be able to breed new ones. The smoking happens in a smokery, "
 "you will need at least two of those."
 msgstr ""
+"'S e iasg-rèiste 's feòil-rèiste a th' anns an dà seòrsa bhìdh eile a tha "
+"cudromach. Bheir thu feòil on t-sealgair. Togaidh iasgair èisg on mhuir fhad "
+"'s a nì an tàrmachair iasg cinnteach nach tèid a h-uile iasg à bith. Dèan "
+"cinnteach gum bi èisg sa mhuir agad an-còmhnaidh oir cha tèid leis an "
+"tàrmachair cur riutha. Nì thu an toiteadh san taigh-toitidh is feumaidh tu "
+"dà dhiubh a thogail air a char as lugha."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:60
 msgid "Build a farm and a blackroot farm"
-msgstr ""
+msgstr "Tog tuathanas 's tuathanas fhreumhagan"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:61
 msgid "Build a mill to make cornflour and blackroot flour"
-msgstr ""
+msgstr "Tog muileann gus min-coirce 's min-freumhaige a dhèanamh"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a well"
-msgstr ""
+msgstr "Tog tobar"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:63
 msgid ""
 "Build a bakery to bake bread from cornflour, blackroot flour and water"
 msgstr ""
+"Tog taigh-fuine gus aran a dhèanamh à min-coirce, min-freumhaige 's uisge"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build a hunter’s house to get raw meat"
-msgstr ""
+msgstr "Tog taigh-sealgair gus feòil fhaighinn"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:65
 msgid "Build a fisher’s house close to water to get raw fish"
-msgstr ""
+msgstr "Tog taigh-iasgair faisg air uisge gus èisg a thogail"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:66
 msgid ""
 "Build a fish breeder’s house close to the fisher to make sure the fish do "
 "not die out"
 msgstr ""
+"Tog taigh tàrmachair iasg faisg air an taigh-iasgair ach nach tèid na h-èisg "
+"à bith"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:67
 msgid "Build two smokeries to smoke raw meat and fish"
-msgstr ""
+msgstr "Tog dà thaigh-toitidh gus na h-èisg 's an fheòil a thoiteadh"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:73
 msgid "Build a spider farm and a weaving mill"

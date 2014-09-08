@@ -186,8 +186,6 @@ int32_t Panel::run()
 	start();
 	g_gr->update_fullscreen();
 
-	uint32_t startTime;
-	uint32_t diffTime;
 	uint32_t minTime;
 	{
 		int32_t maxfps = g_options.pull_section("global").get_int("maxfps", 25);
@@ -197,7 +195,7 @@ int32_t Panel::run()
 	}
 
 	while (_running) {
-		startTime = SDL_GetTicks();
+		const uint32_t startTime = SDL_GetTicks();
 
 		static InputCallback icb = {
 			Panel::ui_mousepress,
@@ -232,9 +230,10 @@ int32_t Panel::run()
 			check_child_death();
 
 		//  Wait until 1second/maxfps are over.
-		diffTime = SDL_GetTicks() - startTime;
-		if (diffTime < minTime)
+		const uint32_t diffTime = SDL_GetTicks() - startTime;
+		if (diffTime < minTime) {
 			SDL_Delay(minTime - diffTime);
+		}
 	}
 	g_gr->update_fullscreen();
 	end();

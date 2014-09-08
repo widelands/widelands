@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4435\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-07-16 06:11+0000\n"
-"PO-Revision-Date: 2014-07-17 05:15+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"POT-Creation-Date: 2014-08-05 09:15+0000\n"
+"PO-Revision-Date: 2014-08-31 11:54+0000\n"
+"Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-18 04:35+0000\n"
-"X-Generator: Launchpad (build 17114)\n"
+"X-Launchpad-Export-Date: 2014-09-01 05:48+0000\n"
+"X-Generator: Launchpad (build 17176)\n"
 "X-Poedit-Country: ITALY\n"
 "Language: it\n"
 "X-Poedit-Language: Italian\n"
@@ -30,57 +30,55 @@ msgstr "Costruisci una piccola economia alimentare"
 #: ../../campaigns/t03.wmf/scripting/texts.lua:24
 msgid "Build up a basic food economy to provide your people with food."
 msgstr ""
+"Costruisci un'economia alimentare di base per fornire cibo al tuo popolo."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:25
 msgid "Build a fisher’s hut"
-msgstr ""
+msgstr "Costruisci una capanna del pescatore"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:26
 msgid "Build a hunter’s hut"
-msgstr ""
+msgstr "Costruisci una capanna del cacciatore"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:27
 msgid "Build a well"
-msgstr ""
+msgstr "Costruisci un pozzo"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:28
 msgid "Build a farm"
-msgstr ""
+msgstr "Costruisci una fattoria"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:29
 msgid "Build a bakery"
-msgstr ""
+msgstr "Costruisci un forno"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:35
 msgid "Build a cattle farm"
 msgstr "Costruisci una fattoria da bestiame"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:37
+#: ../../campaigns/t03.wmf/scripting/texts.lua:39
 msgid "Remember to build a cattle farm"
 msgstr "Ricorda di costruire una fattoria per il bestiame"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:38
 msgid ""
 "As your roads grow longer and your economy bigger, you should make good use "
-"of your oxen to help transport wares more quickly.)"
-msgstr ""
-
-#: ../../campaigns/t03.wmf/scripting/texts.lua:39
-msgid "Remember to build a cattle farm!"
+"of your oxen to help transport wares more quickly."
 msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:45
 #: ../../campaigns/t03.wmf/scripting/texts.lua:47
 msgid "Build a donjon"
-msgstr "Costruisci un dongione"
+msgstr "Costruisci un mastio"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:48
 msgid ""
 "Build a donjon at the north-east of your territory to get greater visual "
 "range and to protect your people from sudden attacks of enemies."
 msgstr ""
-"Costruisci un dongione a nord-est del territorio per ottenere una visione "
-"più vasta e per proteggere il tuo popolo da improvvisi attacchi dei nemici."
+"Costruisci un mastio a nord-est del territorio per ottenere una visione più "
+"vasta e per proteggere il tuo popolo da improvvisi attacchi dei nemici."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:54
 #: ../../campaigns/t03.wmf/scripting/texts.lua:56
@@ -98,17 +96,14 @@ msgstr ""
 #: ../../campaigns/t03.wmf/scripting/texts.lua:63
 #: ../../campaigns/t03.wmf/scripting/texts.lua:65
 msgid "Build a mining infrastructure"
-msgstr ""
+msgstr "Costruisci un'infrastruttura mineraria"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:66
 msgid ""
 "Expand your territory to the mountains, send geologists to search for ore "
 "and coal and build a mining economy with mines, taverns, smelting works and "
-"metalworks."
+"metal workshop."
 msgstr ""
-"Espandi il tuo territorio sino alle montagne, invia geologi per la ricerca "
-"di minerali e carbone e costruisci un'economia mineraria con le miniere, le "
-"taverne, la fonderia e l'officina."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:72
 #: ../../campaigns/t03.wmf/scripting/texts.lua:74
@@ -178,7 +173,7 @@ msgstr ""
 #: ../../campaigns/t03.wmf/scripting/texts.lua:103
 #: ../../campaigns/t03.wmf/scripting/texts.lua:105
 msgid "Build training sites"
-msgstr "Costruisci un'area addestramento"
+msgstr "Costruisci un'area di addestramento"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:107
 msgid ""
@@ -192,13 +187,13 @@ msgstr ""
 "soldato maggiore sarà la possibilità di vincere una battaglia."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:109
-msgid "The attributes are: health points, attack, defense and evade."
-msgstr ""
+msgid "The attributes are: health, attack, defense and evade."
+msgstr "Gli attributi sono: salute, attacco, difesa ed evasione."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:115
 #: ../../campaigns/t03.wmf/scripting/texts.lua:117
 msgid "Build weapons production"
-msgstr ""
+msgstr "Instaura una produzione di armi"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:124
 #: ../../campaigns/t03.wmf/scripting/texts.lua:126
@@ -445,7 +440,7 @@ msgstr "Inverno alle porte"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:251
 msgid "Boldreth says:"
-msgstr "Boldreth parla:"
+msgstr "Boldreth dice:"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:252
 msgid ""
@@ -486,7 +481,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:271
 msgid "Food Economy Completed"
-msgstr "Economia del cibo completata"
+msgstr "Economia alimentare completata"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:273
 msgid ""
@@ -724,7 +719,7 @@ msgstr "Così sia!"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:397
 msgid "Khantrukh says:"
-msgstr "Khantrukh parla:"
+msgstr "Khantrukh dice:"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:399
 msgid ""
@@ -739,10 +734,10 @@ msgstr ""
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../scripting/format_scenario.lua:129
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] "Nuovo Obiettivo"
-msgstr[1] "Nuovi Obiettivi"
+msgstr[0] "Nuovo obiettivo"
+msgstr[1] "Nuovi obiettivi"

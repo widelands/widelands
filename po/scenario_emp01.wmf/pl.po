@@ -6,17 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-07-16 06:11+0000\n"
-"PO-Revision-Date: 2014-03-12 12:34+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"POT-Creation-Date: 2014-08-05 09:15+0000\n"
+"PO-Revision-Date: 2014-09-02 10:28+0000\n"
+"Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-07-17 05:40+0000\n"
-"X-Generator: Launchpad (build 17114)\n"
+"X-Launchpad-Export-Date: 2014-09-03 05:47+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 "Language: pl\n"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:28
@@ -25,7 +25,7 @@ msgstr "Zbuduj koszary"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:30
 msgid "Barracks"
-msgstr ""
+msgstr "Koszary"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:31
 msgid ""
@@ -41,7 +41,7 @@ msgstr "Zbuduj chatę drwala"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:39
 msgid "Lumberjack’s House"
-msgstr ""
+msgstr "Chata drwala"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:40
 msgid ""
@@ -65,7 +65,7 @@ msgstr "Zbuduj dwie chaty drwali i tartak"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:49
 msgid "Two Lumberjack’s Houses and a Sawmill"
-msgstr ""
+msgstr "Dwie chaty drwali i tartak"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:50
 msgid ""
@@ -81,7 +81,7 @@ msgstr "Zbuduj leśniczówkę"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:58
 msgid "Forester’s House"
-msgstr ""
+msgstr "Leśniczówka"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:59
 msgid ""
@@ -94,7 +94,7 @@ msgstr "Zbuduj kamieniołom"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:67
 msgid "Quarry"
-msgstr ""
+msgstr "Kamieniołom"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:68
 msgid ""
@@ -155,7 +155,7 @@ msgstr ""
 "przed oblicze wodza. Splunął mi w twarz, drwił i kazał na zawsze opuścić tę "
 "krainę. Powiedział mi, że nie pragnął nowych ziem, nie pragnął naszych ziem, "
 "lecz że TEN las należy do nich i pozostanie tak dopóki duchy nie przyjdą po "
-"duszę ostatniego przedstawiciela jego ludu!"
+"duszę ostatniego z jego ludu!"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:93
 msgid ""
@@ -290,8 +290,8 @@ msgid ""
 "This is a good step forward. Now we can feel a bit safer and can look "
 "forward to repairing our ship."
 msgstr ""
-"To jest wielki krok naprzód. Teraz możemy poczuć się odrobinę bezpieczniej i "
-"zająć naprawą statku."
+"To dobry krok naprzód. Teraz możemy poczuć się odrobinę bezpieczniej i zająć "
+"naprawą statku."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:154
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:167
@@ -305,14 +305,14 @@ msgstr "Amalea uśmiecha się..."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:156
 msgid "Hey Lutius, I just met Saledus outside."
-msgstr "Hej Lucjuszu, właśnie spotkałem na zewnątrz Saledusa."
+msgstr "Witaj Lucjuszu, właśnie spotkałam na zewnątrz Saledusa."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:157
 msgid ""
 "He told me about the barracks. Well, I am not one of those girls who think "
 "we need more barracks – instead, we might concentrate on other things now."
 msgstr ""
-"Powiedział mi o koszarach. Nie jestem jednym z tych, którzy sądzą, że "
+"Powiedział mi o koszarach. Nie jestem jedną z tych, którzy sądzą, że "
 "potrzebujemy ich więcej - zamiast tego możemy skoncentrować się na innych "
 "rzeczach."
 
@@ -323,8 +323,8 @@ msgid ""
 "house, south of our provisional headquarters."
 msgstr ""
 "To oczywiste, że potrzebujemy drewna do naprawy statku. Przechodząc wczoraj "
-"przez las znalazłem dobre miejsce na chatę drwala, na południe od naszej "
-"prowizorycznej kwater głównej."
+"przez las znalazłam dobre miejsce na chatę drwala, na południe od naszej "
+"kwatery głównej."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:168
 msgid "Amalea recommends..."
@@ -338,7 +338,7 @@ msgid ""
 "logs faster."
 msgstr ""
 "Witaj Lucjuszu! Otrzymałam wiadomość, że pierwszy drwal zaczął dziś "
-"pracować. Być może dobrze byłoby poczekać aż oczyści kawałek lasu i "
+"pracować. Być może dobrze byłoby poczekać, aż oczyści kawałek lasu i "
 "dobudować jeszcze dwie chaty drwala, żeby zwiększyć produkcję belek."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:172
@@ -353,22 +353,22 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:181
 msgid "Amalea comes in..."
-msgstr "Wchodzi Amalea..."
+msgstr "Amalea wchodzi..."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:182
 msgid ""
 "Hi Lutius, I’ve got two important things to talk about... First the good "
 "news:"
 msgstr ""
-"Witaj Lucjuszu! Mam dwie istotne sprawy do omówienia - złą i dobrą "
-"wiadomość... Najpierw dobra wiadomość:"
+"Witaj Lucjuszu! Mam dwie istotne sprawy do omówienia - złą i dobrą... "
+"Najpierw dobra wiadomość:"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:183
 msgid ""
 "I noticed that the construction of the sawmill is complete, so we can begin "
 "to refine the logs that the lumberjacks are harvesting into lumber."
 msgstr ""
-"Zakończono budowę tartaku, a zatem możemy już przerabiać belki na drewno.<"
+"Zakończono budowę tartaku, a zatem możemy już przerabiać belki na drewno."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:185
 msgid ""
@@ -468,7 +468,7 @@ msgstr ""
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:224
 msgid "I still wonder if we will ever see Fremil again."
 msgstr ""
-"Wciąż zastanawiam się czy kiedyś będzie nam dane znów zobaczyć Fremil."
+"Wciąż zastanawiam się, czy kiedyś będzie nam dane znów zobaczyć Fremil."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:225
 msgid "Victory"
@@ -497,10 +497,11 @@ msgstr "Zmieniłeś półwysep w bardzo bezpieczne miejsce. Czas iść dalej!"
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "\"%s\""
 
 #: ../../scripting/format_scenario.lua:129
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nowy cel"
+msgstr[1] "Nowe cele"
+msgstr[2] "Nowe cele"
