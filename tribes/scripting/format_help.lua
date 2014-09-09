@@ -478,6 +478,7 @@ end
 --
 function building_help_building_section(tribename, building_description, enhanced_from, former_buildings)
 
+	-- TRANSLATORS: This is the header for the "Building" section in the building help, containing size info, buildcost etc.
 	local result = rt(h2(_"Building"))
 
 	-- Space required
