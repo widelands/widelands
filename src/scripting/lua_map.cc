@@ -968,7 +968,7 @@ int L_Map::place_immovable(lua_State * const L) {
 			}
 
 			m = &egbase.create_immovable(c->coords(), imm_idx, &tribe);
-		} catch (game_data_error &) {
+		} catch (GameDataError &) {
 			report_error(L, "Problem loading tribe <%s>. Maybe not existent?", from_where.c_str());
 		}
 	} else {

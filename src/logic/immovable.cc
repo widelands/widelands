@@ -71,7 +71,7 @@ BaseImmovable::Size string_to_size(const std::string& size) {
 		return BaseImmovable::MEDIUM;
 	if (size == "big")
 		return BaseImmovable::BIG;
-	throw game_data_error("Unknown size %s.", size.c_str());
+	throw GameDataError("Unknown size %s.", size.c_str());
 }
 
 }  // namespace
@@ -169,12 +169,12 @@ ImmovableProgram::ImmovableProgram(const std::string& directory,
 		} else if (!strcmp(v->get_name(), "construction")) {
 			action = new ActConstruction(v->get_string(), immovable, directory, prof);
 		} else {
-			throw game_data_error("unknown command type \"%s\"", v->get_name());
+			throw GameDataError("unknown command type \"%s\"", v->get_name());
 		}
 		m_actions.push_back(action);
 	}
 	if (m_actions.empty())
-		throw game_data_error("no actions");
+		throw GameDataError("no actions");
 }
 
 ImmovableProgram::ImmovableProgram(const std::string& init_name,
@@ -185,7 +185,7 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 		std::vector<std::string> parts;
 		boost::split(parts, line, boost::is_any_of("="));
 		if (parts.size() != 2) {
-			throw game_data_error("invalid line: %s.", line.c_str());
+			throw GameDataError("invalid line: %s.", line.c_str());
 		}
 		std::unique_ptr<char []> arguments(new char[parts[1].size() + 1]);
 		strncpy(arguments.get(), parts[1].c_str(), parts[1].size() + 1);
@@ -202,13 +202,13 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 		} else if (parts[0] == "seed") {
 			action = new ActSeed(arguments.get(), *immovable);
 		} else {
-			throw game_data_error(
+			throw GameDataError(
 			   "unknown or (here)not support command type \"%s\"", parts[0].c_str());
 		}
 		m_actions.push_back(action);
 	}
 	if (m_actions.empty())
-		throw game_data_error("no actions");
+		throw GameDataError("no actions");
 }
 
 /*
@@ -240,11 +240,11 @@ ImmovableDescr::ImmovableDescr
 			else if (!strcasecmp(string, "big"))
 				m_size = BaseImmovable::BIG;
 			else
-				throw game_data_error
+				throw GameDataError
 					("expected %s but found \"%s\"",
 					 "{\"small\"|\"medium\"|\"big\"}", string);
-		} catch (const _wexception & e) {
-			throw game_data_error("size: %s", e.what());
+		} catch (const WException & e) {
+			throw GameDataError("size: %s", e.what());
 		}
 
 	// parse attributes
@@ -264,11 +264,11 @@ ImmovableDescr::ImmovableDescr
 			 tolower);
 		try {
 			if (m_programs.count(program_name))
-				throw game_data_error("this program has already been declared");
+				throw GameDataError("this program has already been declared");
 			m_programs[program_name] =
 				new ImmovableProgram(directory, prof, program_name, *this);
 		} catch (const std::exception & e) {
-			throw game_data_error
+			throw GameDataError
 				("program %s: %s", program_name.c_str(), e.what());
 		}
 	}
@@ -314,7 +314,7 @@ ImmovableDescr::ImmovableDescr(const LuaTable& table, const World& world) :
 	int editor_category_index =
 	   world.editor_immovable_categories().get_index(table.get_string("editor_category"));
 	if (editor_category_index < 0) {
-		throw game_data_error("Unknown editor_category: %s\n",
+		throw GameDataError("Unknown editor_category: %s\n",
 		                      table.get_string("editor_category").c_str());
 	}
 	editor_category_ = world.editor_immovable_categories().get(editor_category_index);
@@ -364,7 +364,7 @@ ImmovableProgram const * ImmovableDescr::get_program
 	Programs::const_iterator const it = m_programs.find(program_name);
 
 	if (it == m_programs.end())
-		throw game_data_error
+		throw GameDataError
 			("immovable %s has no program \"%s\"",
 			 name().c_str(), program_name.c_str());
 
@@ -623,7 +623,7 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 		if (pn && pn <= MAX_PLAYERS) {
 			Player * plr = egbase().get_player(pn);
 			if (!plr)
-				throw game_data_error("Immovable::load: player %u does not exist", pn);
+				throw GameDataError("Immovable::load: player %u does not exist", pn);
 			imm.set_owner(plr);
 		}
 	}
@@ -779,7 +779,7 @@ MapObject::Loader * Immovable::load
 					if (idx != -1)
 						imm = new Immovable(*tribe->get_immovable_descr(idx));
 					else
-						throw game_data_error
+						throw GameDataError
 							("tribe %s does not define immovable type \"%s\"",
 							 owner_name.c_str(), old_name.c_str());
 				} else
@@ -798,7 +798,7 @@ MapObject::Loader * Immovable::load
 			loader->init(egbase, mol, *imm);
 			loader->load(fr, version);
 		} else
-			throw game_data_error("unknown/unhandled version %u", version);
+			throw GameDataError("unknown/unhandled version %u", version);
 	} catch (const std::exception & e) {
 		throw wexception("immovable type %s", e.what());
 	}
@@ -814,7 +814,7 @@ ImmovableProgram::ActAnimate::ActAnimate(char* parameters, ImmovableDescr& descr
 		bool reached_end;
 		char * const animation_name = next_word(parameters, reached_end);
 		if (!descr.is_animation_known(animation_name)) {
-			throw game_data_error("Unknown animation: %s.", animation_name);
+			throw GameDataError("Unknown animation: %s.", animation_name);
 		}
 		m_id = descr.get_animation(animation_name);
 
@@ -822,13 +822,13 @@ ImmovableProgram::ActAnimate::ActAnimate(char* parameters, ImmovableDescr& descr
 			char * endp;
 			long int const value = strtol(parameters, &endp, 0);
 			if (*endp || value <= 0)
-				throw game_data_error("expected %s but found \"%s\"", "duration in ms", parameters);
+				throw GameDataError("expected %s but found \"%s\"", "duration in ms", parameters);
 			m_duration = value;
 		} else {
 			m_duration = 0; //  forever
 		}
-	} catch (const _wexception & e) {
-		throw game_data_error("animate: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("animate: %s", e.what());
 	}
 }
 
@@ -857,14 +857,14 @@ ImmovableProgram::ActPlayFX::ActPlayFX
 			unsigned long long int const value = strtoull(parameters, &endp, 0);
 			priority = value;
 			if (*endp || priority != value)
-				throw game_data_error
+				throw GameDataError
 					("expected %s but found \"%s\"", "priority", parameters);
 		} else
 			priority = 127;
 
 		g_sound_handler.load_fx_if_needed(directory, filename, name);
-	} catch (const _wexception & e) {
-		throw game_data_error("playFX: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("playFX: %s", e.what());
 	}
 }
 
@@ -896,7 +896,7 @@ ImmovableProgram::ActTransform::ActTransform
 			else if (params[i][0] >= '0' && params[i][0] <= '9') {
 				long int const value = atoi(params[i].c_str());
 				if (value < 1 || 254 < value)
-					throw game_data_error
+					throw GameDataError
 						("expected %s but found \"%s\"", "probability in range [1, 254]",
 						 params[i].c_str());
 				probability = value;
@@ -904,16 +904,16 @@ ImmovableProgram::ActTransform::ActTransform
 				std::vector<std::string> segments = split_string(params[i], ":");
 
 				if (segments.size() > 2)
-					throw game_data_error("object type has more than 2 segments");
+					throw GameDataError("object type has more than 2 segments");
 				if (segments.size() == 2) {
 					if (segments[0] == "world")
 						tribe = false;
 					else if (segments[0] == "tribe") {
 						if (!descr.get_owner_tribe())
-							throw game_data_error("scope \"tribe\", but have no owner tribe");
+							throw GameDataError("scope \"tribe\", but have no owner tribe");
 						tribe = true;
 					} else
-						throw game_data_error
+						throw GameDataError
 							(
 							 "unknown scope \"%s\" given for target type (must be "
 							 "\"world\" or \"tribe\")",
@@ -926,9 +926,9 @@ ImmovableProgram::ActTransform::ActTransform
 			}
 		}
 		if (type_name == descr.name())
-			throw game_data_error("illegal transformation to the same type");
-	} catch (const _wexception & e) {
-		throw game_data_error("transform: %s", e.what());
+			throw GameDataError("illegal transformation to the same type");
+	} catch (const WException & e) {
+		throw GameDataError("transform: %s", e.what());
 	}
 }
 
@@ -958,7 +958,7 @@ ImmovableProgram::ActGrow::ActGrow
 	(char * parameters, ImmovableDescr & descr)
 {
 	if (!descr.has_terrain_affinity()) {
-		throw game_data_error(
+		throw GameDataError(
 		   "Immovable %s can 'grow', but has no terrain_affinity entry.", descr.name().c_str());
 	}
 
@@ -971,13 +971,13 @@ ImmovableProgram::ActGrow::ActGrow
 				++p;
 				Tribe_Descr const * const owner_tribe = descr.get_owner_tribe();
 				if (!owner_tribe)
-					throw game_data_error
+					throw GameDataError
 						(
 						 "immovable type not in tribe but target type has scope "
 						 "(\"%s\")",
 						 parameters);
 				else if (strcmp(parameters, "world"))
-					throw game_data_error
+					throw GameDataError
 						(
 						 "scope \"%s\" given for target type (must be "
 						 "\"world\")",
@@ -994,8 +994,8 @@ ImmovableProgram::ActGrow::ActGrow
 			}
 	end:
 		type_name = parameters;
-	} catch (const _wexception & e) {
-		throw game_data_error("grow: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("grow: %s", e.what());
 	}
 }
 
@@ -1024,14 +1024,14 @@ ImmovableProgram::ActRemove::ActRemove(char * parameters, ImmovableDescr &)
 			char * endp;
 			long int const value = strtol(parameters, &endp, 0);
 			if (*endp || value < 1 || 254 < value)
-				throw game_data_error
+				throw GameDataError
 					("expected %s but found \"%s\"",
 					 "probability in range [1, 254]", parameters);
 			probability = value;
 		} else
 			probability = 0;
-	} catch (const _wexception & e) {
-		throw game_data_error("remove: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("remove: %s", e.what());
 	}
 }
 
@@ -1056,13 +1056,13 @@ ImmovableProgram::ActSeed::ActSeed(char * parameters, ImmovableDescr & descr)
 				++p;
 				Tribe_Descr const * const owner_tribe = descr.get_owner_tribe();
 				if (!owner_tribe)
-					throw game_data_error
+					throw GameDataError
 						(
 						 "immovable type not in tribe but target type has scope "
 						 "(\"%s\")",
 						 parameters);
 				else if (strcmp(parameters, "world"))
-					throw game_data_error
+					throw GameDataError
 						(
 						 "scope \"%s\" given for target type (must be "
 						 "\"world\")",
@@ -1077,7 +1077,7 @@ ImmovableProgram::ActSeed::ActSeed(char * parameters, ImmovableDescr & descr)
 				char * endp;
 				long int const value = strtol(p, &endp, 0);
 				if (*endp || value < 1 || 254 < value)
-					throw game_data_error
+					throw GameDataError
 						("expected %s but found \"%s\"", "probability in range [1, 254]",
 						 p);
 				probability = value;
@@ -1092,8 +1092,8 @@ ImmovableProgram::ActSeed::ActSeed(char * parameters, ImmovableDescr & descr)
 			}
 	end:
 		type_name = parameters;
-	} catch (const _wexception & e) {
-		throw game_data_error("seed: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("seed: %s", e.what());
 	}
 }
 
@@ -1137,12 +1137,12 @@ ImmovableProgram::ActConstruction::ActConstruction
 {
 	try {
 		if (!descr.get_owner_tribe())
-			throw game_data_error("only usable for tribe immovable");
+			throw GameDataError("only usable for tribe immovable");
 
 		std::vector<std::string> params = split_string(parameters, " ");
 
 		if (params.size() != 3)
-			throw game_data_error("usage: animation-name buildtime decaytime");
+			throw GameDataError("usage: animation-name buildtime decaytime");
 
 		m_buildtime = atoi(params[1].c_str());
 		m_decaytime = atoi(params[2].c_str());
@@ -1156,8 +1156,8 @@ ImmovableProgram::ActConstruction::ActConstruction
 
 			descr.add_animation(animation_name, m_animid);
 		}
-	} catch (const _wexception & e) {
-		throw game_data_error("construction: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("construction: %s", e.what());
 	}
 }
 
@@ -1178,11 +1178,11 @@ struct ActConstructionData : ImmovableActionData {
 			if (version == CONSTRUCTION_DATA_VERSION) {
 				d->delivered.load(fr, *imm.descr().get_owner_tribe());
 			} else
-				throw game_data_error("unknown version %u", version);
-		} catch (const _wexception & e) {
+				throw GameDataError("unknown version %u", version);
+		} catch (const WException & e) {
 			delete d;
 			d = nullptr;
-			throw game_data_error("ActConstructionData: %s", e.what());
+			throw GameDataError("ActConstructionData: %s", e.what());
 		}
 
 		return d;
@@ -1468,17 +1468,17 @@ void PlayerImmovable::Loader::load(FileRead & fr)
 			Player_Number owner_number = fr.Unsigned8();
 
 			if (!owner_number || owner_number > egbase().map().get_nrplayers())
-				throw game_data_error
+				throw GameDataError
 					("owner number is %u but there are only %u players",
 					 owner_number, egbase().map().get_nrplayers());
 
 			Player * owner = egbase().get_player(owner_number);
 			if (!owner)
-				throw game_data_error("owning player %u does not exist", owner_number);
+				throw GameDataError("owning player %u does not exist", owner_number);
 
 			imm.m_owner = owner;
 		} else
-			throw game_data_error("unknown/unhandled version %u", version);
+			throw GameDataError("unknown/unhandled version %u", version);
 	} catch (const std::exception & e) {
 		throw wexception("loading player immovable: %s", e.what());
 	}

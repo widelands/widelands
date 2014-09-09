@@ -85,13 +85,13 @@ void Map_Players_Messages_Data_Packet::Read
 				try {
 					uint32_t const sent    = s->get_safe_int("sent");
 					if (sent < previous_message_sent)
-						throw game_data_error
+						throw GameDataError
 							(
 							 "messages are not ordered: sent at %u but previous "
 							 "message sent at %u",
 							 sent, previous_message_sent);
 					if (gametime < sent)
-						throw game_data_error
+						throw GameDataError
 							(
 							 "message is sent in the future: sent at %u but "
 							 "gametime is only %u",
@@ -100,7 +100,7 @@ void Map_Players_Messages_Data_Packet::Read
 					if (Section::Value const * const dv = s->get_val("duration")) {
 						duration = dv->get_positive();
 						if (duration == Forever())
-							throw game_data_error
+							throw GameDataError
 								(
 								 "the value %u is not allowed as duration; it is "
 								 "a special value meaning forever, which is the "
@@ -108,13 +108,13 @@ void Map_Players_Messages_Data_Packet::Read
 								 "message exist forever",
 								 Forever());
 						if (sent + duration < sent)
-							throw game_data_error
+							throw GameDataError
 								(
 								 "duration %u is too large; causes numeric "
 								 "overflow when added to sent time %u",
 								 duration, sent);
 						if (sent + duration < gametime)
-							throw game_data_error
+							throw GameDataError
 								(
 								 "message should have expired at %u; sent at %u "
 								 "with duration %u but gametime is already %u",
@@ -128,11 +128,11 @@ void Map_Players_Messages_Data_Packet::Read
 							else if (!strcmp(status_string, "read"))
 								status = Message::Read;
 							else
-								throw game_data_error
+								throw GameDataError
 									("expected %s but found \"%s\"",
 									 "{new|read}", status_string);
-						} catch (const _wexception & e) {
-							throw game_data_error("status: %s", e.what());
+						} catch (const WException & e) {
+							throw GameDataError("status: %s", e.what());
 						}
 					}
 					Serial serial = s->get_int("serial", 0);
@@ -157,13 +157,13 @@ void Map_Players_Messages_Data_Packet::Read
 					//  duration) after the command queue has been loaded (in
 					//  Game_Loader::load_game).
 					previous_message_sent = sent;
-				} catch (const _wexception & e) {
-					throw game_data_error
+				} catch (const WException & e) {
+					throw GameDataError
 						("\"%s\": %s", s->get_name(), e.what());
 				}
 				prof.check_used();
-		} catch (const _wexception & e) {
-			throw game_data_error
+		} catch (const WException & e) {
+			throw GameDataError
 				("messages for player %u: %s", p, e.what());
 		}
 }

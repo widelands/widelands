@@ -88,10 +88,10 @@ void Map_Exploration_Data_Packet::Read
 				}
 			}
 		else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
-		throw game_data_error("seen: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("seen: %s", e.what());
 	}
 }
 

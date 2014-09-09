@@ -60,14 +60,14 @@ void Map_Flag_Data_Packet::Read
 				if (fr.Unsigned8()) {
 					Player_Number const owner  = fr.Unsigned8();
 					if (!(0 < owner && owner <= nr_players)) {
-						throw game_data_error("Invalid player number: %i.", owner);
+						throw GameDataError("Invalid player number: %i.", owner);
 					}
 
 					Serial        const serial = fr.Unsigned32();
 
 					try {
 						if (fc.field->get_owned_by() != owner)
-							throw game_data_error
+							throw GameDataError
 								("the node is owned by player %u",
 								 fc.field->get_owned_by());
 
@@ -81,7 +81,7 @@ void Map_Flag_Data_Packet::Read
 							//  the border bit of the node because it has not been set
 							//  yet.
 							if (n.field->get_owned_by() != owner)
-								throw game_data_error
+								throw GameDataError
 									("is owned by player %u",
 									 n.field->get_owned_by());
 
@@ -90,10 +90,10 @@ void Map_Flag_Data_Packet::Read
 							//  the nodes that we have already read.
 							if (n.field < fc.field)
 								if (upcast(Flag const, nf, n.field->get_immovable()))
-									throw game_data_error
+									throw GameDataError
 										("has a flag (%u)", nf->serial());
-							} catch (const _wexception & e) {
-								throw game_data_error
+							} catch (const WException & e) {
+								throw GameDataError
 									("neighbour node (%i, %i): %s",
 									 n.x, n.y, e.what());
 							}
@@ -112,17 +112,17 @@ void Map_Flag_Data_Packet::Read
 							 	(ref_cast<Game, Editor_Game_Base>(egbase),
 							 	 egbase.player(owner),
 							 	 fc));
-					} catch (const _wexception & e) {
-						throw game_data_error
+					} catch (const WException & e) {
+						throw GameDataError
 							("%u (at (%i, %i), owned by player %u): %s",
 							 serial, fc.x, fc.y, owner, e.what());
 					}
 				}
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
-		throw game_data_error("flags: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("flags: %s", e.what());
 	}
 }
 

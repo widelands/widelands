@@ -1077,19 +1077,19 @@ void Bob::Loader::load(FileRead & fr)
 
 	uint8_t version = fr.Unsigned8();
 	if (version != BOB_SAVEGAME_VERSION)
-		throw game_data_error("unknown/unhandled version: %u", version);
+		throw GameDataError("unknown/unhandled version: %u", version);
 
 	Bob & bob = get<Bob>();
 
 	if (Player_Number owner_number = fr.Unsigned8()) {
 		if (owner_number > egbase().map().get_nrplayers())
-			throw game_data_error
+			throw GameDataError
 				("owner number is %u but there are only %u players",
 				 owner_number, egbase().map().get_nrplayers());
 
 		Player * owner = egbase().get_player(owner_number);
 		if (!owner)
-			throw game_data_error("owning player %u does not exist", owner_number);
+			throw GameDataError("owning player %u does not exist", owner_number);
 
 		bob.set_owner(owner);
 	}
@@ -1185,12 +1185,12 @@ const Bob::Task * Bob::Loader::get_task(const std::string & name)
 	if (name == "movepath") return &taskMovepath;
 	if (name == "idle") return &taskIdle;
 
-	throw game_data_error("unknown bob task '%s'", name.c_str());
+	throw GameDataError("unknown bob task '%s'", name.c_str());
 }
 
 const BobProgramBase * Bob::Loader::get_program(const std::string & name)
 {
-	throw game_data_error("unknown bob program '%s'", name.c_str());
+	throw GameDataError("unknown bob program '%s'", name.c_str());
 }
 
 void Bob::save

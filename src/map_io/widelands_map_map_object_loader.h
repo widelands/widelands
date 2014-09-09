@@ -48,7 +48,7 @@ public:
 	/// Registers the object as a new one.
 	///
 	/// \returns a reference to the object.
-	/// \throws _wexception if there is already an object registered with the
+	/// \throws WException if there is already an object registered with the
 	/// same serial. (not implemented: In that case, the object is deleted.)
 	///
 	// TODO(unknown): Currently the object must be passed as a parameter to this
@@ -63,7 +63,7 @@ public:
 			m_objects.find(n);
 		if (existing != m_objects.end()) {
 			//delete &object; can not do this
-			throw game_data_error("already loaded (%s)", to_string(existing->second->descr().type()).c_str());
+			throw GameDataError("already loaded (%s)", to_string(existing->second->descr().type()).c_str());
 		}
 		m_objects.insert(std::pair<Serial, MapObject *>(n, &object));
 		m_loaded_obj[&object] = false;
@@ -73,11 +73,11 @@ public:
 	template<typename T> T & get(Serial const serial) {
 		ReverseMapObjectMap::iterator const it = m_objects.find(serial);
 		if (it == m_objects.end())
-			throw game_data_error("not found");
+			throw GameDataError("not found");
 		else if (upcast(T, result, it->second))
 			return *result;
 		else
-			throw game_data_error("is a %s, expected a %s",
+			throw GameDataError("is a %s, expected a %s",
 			                      to_string(it->second->descr().type()).c_str(),
 			                      typeid(T).name());
 	}

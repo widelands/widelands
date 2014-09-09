@@ -550,7 +550,7 @@ MapObject::Loader * PortDock::load
 			loader->init(egbase, mol, *new PortDock(nullptr));
 			loader->load(fr, version);
 		} else
-			throw game_data_error("unknown/unhandled version %u", version);
+			throw GameDataError("unknown/unhandled version %u", version);
 	} catch (const std::exception & e) {
 		throw wexception("loading portdock: %s", e.what());
 	}

@@ -1057,13 +1057,13 @@ MapObject::Loader * Ship::load
 					(tribe->get_bob_descr(name));
 
 			if (!descr)
-				throw game_data_error
+				throw GameDataError
 					("undefined ship %s/%s", owner.c_str(), name.c_str());
 
 			loader->init(egbase, mol, descr->create_object());
 			loader->load(fr, version);
 		} else
-			throw game_data_error("unknown/unhandled version %u", version);
+			throw GameDataError("unknown/unhandled version %u", version);
 	} catch (const std::exception & e) {
 		throw wexception("loading ship: %s", e.what());
 	}

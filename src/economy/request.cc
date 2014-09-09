@@ -161,15 +161,15 @@ void Request::Read
 						transfer->set_request(this);
 						m_transfers.push_back(transfer);
 					}
-				} catch (const _wexception& e) {
+				} catch (const WException& e) {
 				   throw wexception("transfer %u: %s", i, e.what());
 				}
 			m_requirements.Read (fr, game, mol);
 			if (!is_open() && m_economy)
 				m_economy->remove_request(*this);
 		} else
-			throw game_data_error("unknown/unhandled version %u", version);
-	} catch (const _wexception & e) {
+			throw GameDataError("unknown/unhandled version %u", version);
+	} catch (const WException & e) {
 		throw wexception("request: %s", e.what());
 	}
 }

@@ -87,7 +87,7 @@ void Map_Buildingdata_Data_Packet::Read
 				Serial const serial = fr.Unsigned32();
 				if (packet_version < 2 && serial == 0xffffffff) {
 					if (!fr.EndOfFile())
-						throw game_data_error
+						throw GameDataError
 							("expected end of file after serial 0xffffffff");
 					break;
 				}
@@ -128,8 +128,8 @@ void Map_Buildingdata_Data_Packet::Read
 									//  worker (with his stack of tasks) has been fully
 									//  loaded.
 									*queue_iter = &mol.get<Worker>(leaver_serial);
-								} catch (const _wexception & e) {
-									throw game_data_error
+								} catch (const WException & e) {
+									throw GameDataError
 										("leave queue item #%lu (%u): %s",
 										 static_cast<long int>
 											(queue_iter - leave_queue.begin()),
@@ -146,8 +146,8 @@ void Map_Buildingdata_Data_Packet::Read
 						try {
 							building.m_leave_allow =
 								&mol.get<MapObject>(leaver_serial);
-						} catch (const _wexception & e) {
-							throw game_data_error
+						} catch (const WException & e) {
+							throw GameDataError
 								("leave allow item (%u): %s", leaver_serial, e.what());
 						}
 					else {
@@ -163,7 +163,7 @@ void Map_Buildingdata_Data_Packet::Read
 						}
 						// Only construction sites may have an empty list
 						if (building.m_old_buildings.empty() && !is_a(ConstructionSite, &building)) {
-							throw game_data_error
+							throw GameDataError
 								("Failed to read %s %u: No former buildings informations.\n"
 								"Your savegame is corrupted", building.descr().descname().c_str(), building.serial());
 						}
@@ -243,15 +243,15 @@ void Map_Buildingdata_Data_Packet::Read
 					}
 
 					mol.mark_object_as_loaded(building);
-				} catch (const _wexception & e) {
-					throw game_data_error("building %u: %s", serial, e.what());
+				} catch (const WException & e) {
+					throw GameDataError("building %u: %s", serial, e.what());
 				}
 			}
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
-		throw game_data_error("buildingdata: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("buildingdata: %s", e.what());
 	}
 }
 
@@ -323,8 +323,8 @@ void Map_Buildingdata_Data_Packet::read_partially_finished_building
 			if (uint32_t const builder_serial = fr.Unsigned32()) {
 				try {
 					pfb.m_builder = &mol.get<Worker>(builder_serial);
-				} catch (const _wexception & e) {
-					throw game_data_error
+				} catch (const WException & e) {
+					throw GameDataError
 						("builder (%u): %s", builder_serial, e.what());
 				}
 			} else
@@ -340,8 +340,8 @@ void Map_Buildingdata_Data_Packet::read_partially_finished_building
 						(pfb, INVALID_INDEX, 0);
 					pfb.m_wares[i]->Read(fr, game, mol);
 				}
-			} catch (const _wexception & e) {
-				throw game_data_error("wares: %s", e.what());
+			} catch (const WException & e) {
+				throw GameDataError("wares: %s", e.what());
 			}
 
 			pfb.m_working        = fr.Unsigned8 ();
@@ -349,10 +349,10 @@ void Map_Buildingdata_Data_Packet::read_partially_finished_building
 			pfb.m_work_completed = fr.Unsigned32();
 			pfb.m_work_steps     = fr.Unsigned32();
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
-		throw game_data_error("partially_constructed_buildings: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("partially_constructed_buildings: %s", e.what());
 	}
 }
 
@@ -389,10 +389,10 @@ void Map_Buildingdata_Data_Packet::read_constructionsite
 
 			constructionsite.m_fetchfromflag  = fr.  Signed32();
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
-		throw game_data_error("constructionsite: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("constructionsite: %s", e.what());
 	}
 }
 
@@ -425,8 +425,8 @@ void Map_Buildingdata_Data_Packet::read_constructionsite_v1
 	if (uint32_t const builder_serial = fr.Unsigned32()) {
 		try {
 			constructionsite.m_builder = &mol.get<Worker>(builder_serial);
-		} catch (const _wexception & e) {
-			throw game_data_error
+		} catch (const WException & e) {
+			throw GameDataError
 				("builder (%u): %s", builder_serial, e.what());
 		}
 	} else
@@ -444,8 +444,8 @@ void Map_Buildingdata_Data_Packet::read_constructionsite_v1
 				(ConstructionSite::wares_queue_callback, &constructionsite);
 			constructionsite.m_wares[i]->Read(fr, game, mol);
 		}
-	} catch (const _wexception & e) {
-		throw game_data_error("wares: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("wares: %s", e.what());
 	}
 
 	constructionsite.m_fetchfromflag  = fr.  Signed32();
@@ -469,10 +469,10 @@ void Map_Buildingdata_Data_Packet::read_dismantlesite
 
 			// Nothing to do
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
-		throw game_data_error("dismantlesite: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("dismantlesite: %s", e.what());
 	}
 }
 
@@ -561,7 +561,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 						if (1 == packet_version) {
 							char const * const name = fr.CString();
 							if (name != worker.descr().name())
-								throw game_data_error
+								throw GameDataError
 									("expected %s but found \"%s\"",
 									 worker.descr().name().c_str(), name);
 						}
@@ -569,8 +569,8 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 						if (!warehouse.m_incorporated_workers.count(worker_index))
 							warehouse.m_incorporated_workers[worker_index] = std::vector<Worker *>();
 						warehouse.m_incorporated_workers[worker_index].push_back(&worker);
-					} catch (const _wexception & e) {
-						throw game_data_error
+					} catch (const WException & e) {
+						throw GameDataError
 							("incorporated worker #%u (%u): %s",
 							 i, worker_serial, e.what());
 					}
@@ -654,7 +654,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 								(warehouse.m_next_worker_without_cost_spawn[i]
 								 !=
 								 static_cast<uint32_t>(Never()))
-								throw game_data_error
+								throw GameDataError
 									(
 									 "%s %u has a next_spawn time for worker type "
 									 "\"%s\" set to %u, but it was previously set "
@@ -738,10 +738,10 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 			warehouse.m_next_military_act = game.get_gametime();
 			//log("Read warehouse stuff for %p\n", &warehouse);
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
-		throw game_data_error("warehouse: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("warehouse: %s", e.what());
 	}
 }
 
@@ -817,7 +817,7 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 			militarysite.m_doing_upgrade_request = 0 != fr.Unsigned8() ? true : false;
 
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
 
 		//  If the site's capacity is outside the allowed range (can happen if
@@ -846,8 +846,8 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 				 militarysite.m_capacity, militarysite.maxSoldierCapacity());
 			militarysite.m_capacity = militarysite.maxSoldierCapacity();
 		}
-	} catch (const _wexception & e) {
-		throw game_data_error("militarysite: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("militarysite: %s", e.what());
 	}
 }
 
@@ -890,7 +890,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 							if (--count) {
 								++wp;
 							} else {
-								throw game_data_error
+								throw GameDataError
 									("request for %s does not match any free working "
 									 "position",
 									 productionsite.descr().tribe()
@@ -905,7 +905,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				}
 
 				if (!found_working_position)
-					throw game_data_error(
+					throw GameDataError(
 					   "site has request for %s, for which there is no working "
 					   "position",
 					   productionsite.descr().tribe().get_worker_descr(req.get_index())->name().c_str());
@@ -939,7 +939,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				}
 
 				if (!found_working_position)
-					throw game_data_error
+					throw GameDataError
 						("site has %s, for which there is no free working "
 						 "position",
 						 worker_descr.name().c_str());
@@ -947,7 +947,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 			}
 
 			if (nr_worker_requests + nr_workers < pr_descr.nr_working_positions())
-				throw game_data_error
+				throw GameDataError
 					("number of worker requests and workers are fewer than the "
 					 "number of working positions");
 
@@ -961,7 +961,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				if (pr_descr.programs().count(program_name)) {
 					uint32_t const skip_time = fr.Unsigned32();
 					if (gametime < skip_time)
-						throw game_data_error
+						throw GameDataError
 							(
 							 "program %s was skipped at time %u, but time is only "
 							 "%u",
@@ -1021,10 +1021,10 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 			productionsite.m_statistics_string_on_changed_statistics = fr.CString();
 			productionsite.m_production_result = fr.CString();
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
-		throw game_data_error
+	} catch (const WException & e) {
+		throw GameDataError
 			("productionsite (%s): %s",
 			 productionsite.descr().descname().c_str(), e.what());
 	}
@@ -1090,7 +1090,7 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 				trainingsite.training_failure_count[std::make_pair(traintype, trainlevel)] = t;
 			}
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", trainingsite_packet_version);
 
 		//  If the site's capacity is outside the allowed range (can happen if
@@ -1119,8 +1119,8 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 				 trainingsite.m_capacity, trainingsite.maxSoldierCapacity());
 			trainingsite.m_capacity = trainingsite.maxSoldierCapacity();
 		}
-	} catch (const _wexception & e) {
-		throw game_data_error("trainingsite: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("trainingsite: %s", e.what());
 	}
 }
 
@@ -1430,7 +1430,7 @@ void Map_Buildingdata_Data_Packet::write_militarysite
 	{
 		if (militarysite.m_upgrade_soldier_request)
 			{
-				throw game_data_error
+				throw GameDataError
 				("Internal error in a MilitarySite -- cannot continue. Use previous autosave.");
 			}
 	}

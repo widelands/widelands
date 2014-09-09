@@ -77,7 +77,7 @@ WorkerDescr::WorkerDescr
 				if (count != value)
 					throw wexception("count is out of range 1 .. 255");
 				m_buildcost.insert(std::pair<std::string, uint8_t>(input, value));
-			} catch (const _wexception & e) {
+			} catch (const WException & e) {
 				throw wexception
 					("[buildcost] \"%s=%s\": %s",
 					 val->get_name(), val->get_string(), e.what());

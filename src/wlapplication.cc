@@ -373,7 +373,7 @@ void WLApplication::run()
 		Widelands::Game game;
 		try {
 			game.run_load_game(m_filename.c_str(), m_script_to_run);
-		} catch (const Widelands::game_data_error & e) {
+		} catch (const Widelands::GameDataError & e) {
 			log("Game not loaded: Game data error: %s\n", e.what());
 		} catch (const std::exception & e) {
 			log("Fatal exception: %s\n", e.what());
@@ -384,7 +384,7 @@ void WLApplication::run()
 		Widelands::Game game;
 		try {
 			game.run_splayer_scenario_direct(m_filename.c_str(), m_script_to_run);
-		} catch (const Widelands::game_data_error & e) {
+		} catch (const Widelands::GameDataError & e) {
 			log("Scenario not started: Game data error: %s\n", e.what());
 		} catch (const std::exception & e) {
 			log("Fatal exception: %s\n", e.what());
@@ -1334,7 +1334,7 @@ void WLApplication::mainmenu()
 		} catch (const warning & e) {
 			messagetitle = (boost::format(_("Warning: %s")) % e.title()).str();
 			message = e.what();
-		} catch (const Widelands::game_data_error & e) {
+		} catch (const Widelands::GameDataError & e) {
 			messagetitle = _("Game data error");
 			message = e.what();
 		}

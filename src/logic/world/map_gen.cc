@@ -328,59 +328,59 @@ MapGenInfo::MapGenInfo(const LuaTable& table, const World& world) {
 	}
 
 	if (getNumAreas(MapGenAreaInfo::atWater) < 1)
-		throw game_data_error("missing a water area");
+		throw GameDataError("missing a water area");
 
 	if (getNumAreas(MapGenAreaInfo::atWater) > 3)
-		throw game_data_error("too many water areas (>3)");
+		throw GameDataError("too many water areas (>3)");
 
 	if (getNumAreas(MapGenAreaInfo::atLand) < 1)
-		throw game_data_error("missing a land area");
+		throw GameDataError("missing a land area");
 
 	if (getNumAreas(MapGenAreaInfo::atLand) > 3)
-		throw game_data_error("too many land areas (>3)");
+		throw GameDataError("too many land areas (>3)");
 
 	if (getNumAreas(MapGenAreaInfo::atWasteland) < 1)
-		throw game_data_error("missing a wasteland area");
+		throw GameDataError("missing a wasteland area");
 
 	if (getNumAreas(MapGenAreaInfo::atWasteland) > 2)
-		throw game_data_error("too many wasteland areas (>2)");
+		throw GameDataError("too many wasteland areas (>2)");
 
 	if (getNumAreas(MapGenAreaInfo::atMountains) < 1)
-		throw game_data_error("missing a mountain area");
+		throw GameDataError("missing a mountain area");
 
 	if (getNumAreas(MapGenAreaInfo::atMountains) > 1)
-		throw game_data_error("too many mountain areas (>1)");
+		throw GameDataError("too many mountain areas (>1)");
 
 	if (getArea(MapGenAreaInfo::atWater, 0).getNumTerrains(MapGenAreaInfo::ttWaterOcean) < 1)
-		throw game_data_error("missing a water/ocean terrain type");
+		throw GameDataError("missing a water/ocean terrain type");
 
 	if (getArea(MapGenAreaInfo::atWater, 0).getNumTerrains(MapGenAreaInfo::ttWaterShelf) < 1)
-		throw game_data_error("missing a water/shelf terrain type");
+		throw GameDataError("missing a water/shelf terrain type");
 
 	if (getArea(MapGenAreaInfo::atWater, 0).getNumTerrains(MapGenAreaInfo::ttWaterShallow) < 1)
-		throw game_data_error("is missing a water/shallow terrain type");
+		throw GameDataError("is missing a water/shallow terrain type");
 
 	if (getArea(MapGenAreaInfo::atLand, 0).getNumTerrains(MapGenAreaInfo::ttLandCoast) < 1)
-		throw game_data_error("missing a land/coast terrain type");
+		throw GameDataError("missing a land/coast terrain type");
 
 	if (getArea(MapGenAreaInfo::atLand, 0).getNumTerrains(MapGenAreaInfo::ttLandLand) < 1)
-		throw game_data_error("missing a land/land terrain type");
+		throw GameDataError("missing a land/land terrain type");
 
 	if (getArea(MapGenAreaInfo::atMountains, 0).getNumTerrains(MapGenAreaInfo::ttMountainsFoot) < 1)
-		throw game_data_error("missing a mountain/foot terrain type");
+		throw GameDataError("missing a mountain/foot terrain type");
 
 	if (getArea(MapGenAreaInfo::atMountains, 0).getNumTerrains(MapGenAreaInfo::ttMountainsMountain) <
 	    1)
-		throw game_data_error("missing a monutain/mountain terrain type");
+		throw GameDataError("missing a monutain/mountain terrain type");
 
 	if (getArea(MapGenAreaInfo::atMountains, 0).getNumTerrains(MapGenAreaInfo::ttMountainsSnow) < 1)
-		throw game_data_error("missing a mountain/snow terrain type");
+		throw GameDataError("missing a mountain/snow terrain type");
 
 	if (getArea(MapGenAreaInfo::atWasteland, 0).getNumTerrains(MapGenAreaInfo::ttWastelandInner) < 1)
-		throw game_data_error("missing a land/coast terrain type");
+		throw GameDataError("missing a land/coast terrain type");
 
 	if (getArea(MapGenAreaInfo::atWasteland, 0).getNumTerrains(MapGenAreaInfo::ttWastelandOuter) < 1)
-		throw game_data_error("missing a land/land terrain type");
+		throw GameDataError("missing a land/land terrain type");
 }
 
 }  // namespace Widelands

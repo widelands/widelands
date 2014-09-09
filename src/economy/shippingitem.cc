@@ -171,7 +171,7 @@ void ShippingItem::Loader::load(FileRead & fr)
 	if (1 <= version && version <= SHIPPINGITEM_SAVEGAME_VERSION) {
 		m_serial = fr.Unsigned32();
 	} else
-		throw game_data_error("unknown ShippingItem version %u", version);
+		throw GameDataError("unknown ShippingItem version %u", version);
 }
 
 ShippingItem ShippingItem::Loader::get(MapMapObjectLoader & mol)

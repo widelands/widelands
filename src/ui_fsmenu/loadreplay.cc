@@ -182,7 +182,7 @@ void Fullscreen_Menu_LoadReplay::replay_selected(uint32_t const selected)
 		try {
 			Widelands::Game_Loader gl(name, m_game);
 			gl.preload_game(gpdp);
-		} catch (const _wexception & e) {
+		} catch (const WException & e) {
 			log("Replay '%s' must have changed from under us\nException: %s\n", name.c_str(), e.what());
 			m_list.remove(selected);
 			return;
@@ -238,7 +238,7 @@ void Fullscreen_Menu_LoadReplay::fill_list()
 
 			m_list.add
 				(FileSystem::FS_FilenameWoExt(pname->c_str()).c_str(), *pname);
-		} catch (const _wexception &) {} //  we simply skip illegal entries
+		} catch (const WException &) {} //  we simply skip illegal entries
 	}
 
 	if (m_list.size())

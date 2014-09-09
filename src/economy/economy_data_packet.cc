@@ -57,7 +57,7 @@ void EconomyDataPacket::Read(FileRead & fr)
 								Economy::Target_Quantity & tq =
 									m_eco->m_ware_target_quantities[i];
 								if (tq.last_modified)
-									throw game_data_error
+									throw GameDataError
 										("duplicated entry for %s", type_name);
 								tq.permanent         = permanent;
 								tq.last_modified     = last_modified;
@@ -76,7 +76,7 @@ void EconomyDataPacket::Read(FileRead & fr)
 								Economy::Target_Quantity & tq =
 									m_eco->m_worker_target_quantities[i];
 								if (tq.last_modified)
-									throw game_data_error
+									throw GameDataError
 										("duplicated entry for %s", type_name);
 								tq.permanent         = permanent;
 								tq.last_modified     = last_modified;
@@ -88,15 +88,15 @@ void EconomyDataPacket::Read(FileRead & fr)
 								 "%s, ignoring\n",
 								 type_name, tribe.name().c_str());
 					}
-				} catch (const _wexception & e) {
-					throw game_data_error("target quantities: %s", e.what());
+				} catch (const WException & e) {
+					throw GameDataError("target quantities: %s", e.what());
 				}
 			m_eco->m_request_timerid = fr.Unsigned32();
 		} else {
-			throw game_data_error("unknown version %u", version);
+			throw GameDataError("unknown version %u", version);
 		}
 	} catch (const std::exception & e) {
-		throw game_data_error("economy: %s", e.what());
+		throw GameDataError("economy: %s", e.what());
 	}
 }
 

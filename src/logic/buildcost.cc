@@ -44,7 +44,7 @@ void Buildcost::parse(const Tribe_Descr & tribe, Section & buildcost_s)
 			} else
 				throw wexception
 					("tribe does not define a ware type with this name");
-		} catch (const _wexception & e) {
+		} catch (const WException & e) {
 			throw wexception
 				("[buildcost] \"%s=%s\": %s",
 				 val->get_name(), val->get_string(), e.what());

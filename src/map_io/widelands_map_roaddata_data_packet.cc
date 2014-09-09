@@ -64,17 +64,17 @@ void Map_Roaddata_Data_Packet::Read
 				Serial const serial = fr.Unsigned32();
 				if (packet_version < 2 && serial == 0xffffffff) {
 					if (!fr.EndOfFile())
-						throw game_data_error
+						throw GameDataError
 							("expected end of file after serial 0xffffffff");
 					break;
 				}
 				try {
 					Road & road = mol.get<Road>(serial);
 					if (mol.is_object_loaded(road))
-						throw game_data_error("already loaded");
+						throw GameDataError("already loaded");
 					Player_Number player_index = fr.Unsigned8();
 					if (!(0 < player_index && player_index <= nr_players)) {
-						throw game_data_error("Invalid player number: %i.", player_index);
+						throw GameDataError("Invalid player number: %i.", player_index);
 					}
 					Player & plr = egbase.player(player_index);
 
@@ -88,8 +88,8 @@ void Map_Roaddata_Data_Packet::Read
 						uint32_t const flag_0_serial = fr.Unsigned32();
 						try {
 							road.m_flags[0] = &mol.get<Flag>(flag_0_serial);
-						} catch (const _wexception & e) {
-							throw game_data_error
+						} catch (const WException & e) {
+							throw GameDataError
 								("flag 0 (%u): %s", flag_0_serial, e.what());
 						}
 					}
@@ -97,8 +97,8 @@ void Map_Roaddata_Data_Packet::Read
 						uint32_t const flag_1_serial = fr.Unsigned32();
 						try {
 							road.m_flags[1] = &mol.get<Flag>(flag_1_serial);
-						} catch (const _wexception & e) {
-							throw game_data_error
+						} catch (const WException & e) {
+							throw GameDataError
 								("flag 1 (%u): %s", flag_1_serial, e.what());
 						}
 					}
@@ -109,13 +109,13 @@ void Map_Roaddata_Data_Packet::Read
 					road.m_cost[1] = fr.Unsigned32();
 					Path::Step_Vector::size_type const nr_steps = fr.Unsigned16();
 					if (!nr_steps)
-						throw game_data_error("nr_steps = 0");
+						throw GameDataError("nr_steps = 0");
 					Path p(road.m_flags[0]->get_position());
 					for (Path::Step_Vector::size_type i = nr_steps; i; --i)
 						try {
 							p.append(egbase.map(), ReadDirection8(&fr));
-						} catch (const _wexception & e) {
-							throw game_data_error
+						} catch (const WException & e) {
+							throw GameDataError
 								("step #%lu: %s",
 								 static_cast<long unsigned int>(nr_steps - i),
 								 e.what());
@@ -130,9 +130,9 @@ void Map_Roaddata_Data_Packet::Read
 
 					uint32_t const count = fr.Unsigned32();
 					if (!count)
-						throw game_data_error("no carrier slot");
+						throw GameDataError("no carrier slot");
 					if (packet_version <= 2 && 1 < count)
-						throw game_data_error
+						throw GameDataError
 							(
 						 	 "expected 1 but found %u carrier slots in road saved "
 						 	 "with packet version 2 (old)",
@@ -147,8 +147,8 @@ void Map_Roaddata_Data_Packet::Read
 							try {
 								//log("Read carrier serial %u", carrier_serial);
 								carrier = &mol.get<Carrier>(carrier_serial);
-							} catch (const _wexception & e) {
-								throw game_data_error
+							} catch (const WException & e) {
+								throw GameDataError
 									("carrier (%u): %s", carrier_serial, e.what());
 							}
 						else {
@@ -202,15 +202,15 @@ void Map_Roaddata_Data_Packet::Read
 					}
 
 					mol.mark_object_as_loaded(road);
-				} catch (const _wexception & e) {
-					throw game_data_error("road %u: %s", serial, e.what());
+				} catch (const WException & e) {
+					throw GameDataError("road %u: %s", serial, e.what());
 				}
 			}
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
-		throw game_data_error("roaddata: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("roaddata: %s", e.what());
 	}
 }
 

@@ -63,7 +63,7 @@ void Map_Flagdata_Data_Packet::Read
 				Serial const serial = fr.Unsigned32();
 				if (packet_version < 2 && serial == 0xffffffff) {
 					if (!fr.EndOfFile())
-						throw game_data_error
+						throw GameDataError
 							("expected end of file after serial 0xffffffff");
 					break;
 				}
@@ -81,12 +81,12 @@ void Map_Flagdata_Data_Packet::Read
 							 	 .get_immovable()))
 						{
 							if (mf != &flag)
-								throw game_data_error
+								throw GameDataError
 									("wrong flag (%u) at given position (%i, %i)",
 									 mf->serial(),
 									 flag.m_position.x, flag.m_position.y);
 						} else
-							throw game_data_error
+							throw GameDataError
 								("no flag at given position (%i, %i)",
 								 flag.m_position.x, flag.m_position.y);
 					}
@@ -105,15 +105,15 @@ void Map_Flagdata_Data_Packet::Read
 								const Building & building =
 									mol.get<Building>(building_serial);
 								if (flag.m_building != &building)
-									throw game_data_error
+									throw GameDataError
 										(
 									 	 "has building %u at (%i, %i), which is not "
 									 	 "at the top left node",
 										 building_serial,
 										 building.get_position().x,
 										 building.get_position().y);
-							} catch (const _wexception & e) {
-								throw game_data_error
+							} catch (const WException & e) {
+								throw GameDataError
 									("building (%u): %s", building_serial, e.what());
 							}
 						else
@@ -147,15 +147,15 @@ void Map_Flagdata_Data_Packet::Read
 									try {
 										flag.m_wares[i].nextstep =
 											&mol.get<PlayerImmovable>(nextstep_serial);
-									} catch (const _wexception & e) {
-										throw game_data_error
+									} catch (const WException & e) {
+										throw GameDataError
 											("next step (%u): %s",
 											 nextstep_serial, e.what());
 									}
 								} else
 									flag.m_wares[i].nextstep = nullptr;
-							} catch (const _wexception & e) {
-								throw game_data_error
+							} catch (const WException & e) {
+								throw GameDataError
 									("ware #%u (%u): %s", i, ware_serial, e.what());
 							}
 						}
@@ -164,8 +164,8 @@ void Map_Flagdata_Data_Packet::Read
 							try {
 								flag.m_always_call_for_flag =
 									&mol.get<Flag>(always_call_serial);
-							} catch (const _wexception & e) {
-								throw game_data_error
+							} catch (const WException & e) {
+								throw GameDataError
 									("always_call (%u): %s",
 									 always_call_serial, e.what());
 							}
@@ -183,8 +183,8 @@ void Map_Flagdata_Data_Packet::Read
 								//  (with his stack of tasks) has been fully loaded.
 								flag.m_capacity_wait.push_back
 									(&mol.get<Worker>(worker_serial));
-							} catch (const _wexception & e) {
-								throw game_data_error
+							} catch (const WException & e) {
+								throw GameDataError
 									("worker #%u (%u): %s", i, worker_serial, e.what());
 							}
 						}
@@ -212,15 +212,15 @@ void Map_Flagdata_Data_Packet::Read
 
 						mol.mark_object_as_loaded(flag);
 					}
-				} catch (const _wexception & e) {
-					throw game_data_error("%u: %s", serial, e.what());
+				} catch (const WException & e) {
+					throw GameDataError("%u: %s", serial, e.what());
 				}
 			}
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
-		throw game_data_error("flagdata: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("flagdata: %s", e.what());
 	}
 }
 

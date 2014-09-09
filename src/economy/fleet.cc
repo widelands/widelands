@@ -760,18 +760,18 @@ MapObject::Loader * Fleet::load
 		if (1 <= version && version <= FLEET_SAVEGAME_VERSION) {
 			Player_Number owner_number = fr.Unsigned8();
 			if (!owner_number || owner_number > egbase.map().get_nrplayers())
-				throw game_data_error
+				throw GameDataError
 					("owner number is %u but there are only %u players",
 					 owner_number, egbase.map().get_nrplayers());
 
 			Player * owner = egbase.get_player(owner_number);
 			if (!owner)
-				throw game_data_error("owning player %u does not exist", owner_number);
+				throw GameDataError("owning player %u does not exist", owner_number);
 
 			loader->init(egbase, mol, *(new Fleet(*owner)));
 			loader->load(fr, version);
 		} else
-			throw game_data_error("unknown/unhandled version %u", version);
+			throw GameDataError("unknown/unhandled version %u", version);
 	} catch (const std::exception & e) {
 		throw wexception("loading portdock: %s", e.what());
 	}

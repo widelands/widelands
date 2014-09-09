@@ -84,9 +84,9 @@ void CmdCallEconomyBalance::Read
 			else
 				m_timerid = 0;
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
+	} catch (const WException & e) {
 		throw wexception("call economy balance: %s", e.what());
 	}
 }

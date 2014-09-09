@@ -85,7 +85,7 @@ void Path::load(FileRead & fr, const Map & map)
 {
 	uint8_t version = fr.Unsigned8();
 	if (version != 1)
-		throw game_data_error("path: unknown version %u", version);
+		throw GameDataError("path: unknown version %u", version);
 
 	m_start = m_end = ReadCoords32(&fr, map.extent());
 	m_path.clear();

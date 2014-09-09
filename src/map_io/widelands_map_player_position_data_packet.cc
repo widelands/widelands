@@ -51,15 +51,15 @@ void Map_Player_Position_Data_Packet::Read
 					char buffer[10];
 					snprintf(buffer, sizeof(buffer), "player_%u", p);
 					map.set_starting_pos(p, get_safe_coords(buffer, extent, &s));
-				} catch (const _wexception & e) {
-					throw game_data_error("player %u: %s", p, e.what());
+				} catch (const WException & e) {
+					throw GameDataError("player %u: %s", p, e.what());
 				}
 			}
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
-		throw game_data_error("player positions: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("player positions: %s", e.what());
 	}
 }
 

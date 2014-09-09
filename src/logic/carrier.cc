@@ -598,7 +598,7 @@ void Carrier::Loader::load(FileRead & fr)
 
 	uint8_t version = fr.Unsigned8();
 	if (version != CARRIER_SAVEGAME_VERSION)
-		throw game_data_error("unknown/unhandled version %u", version);
+		throw GameDataError("unknown/unhandled version %u", version);
 
 	Carrier & carrier = get<Carrier>();
 	carrier.m_promised_pickup_to = fr.Signed32();

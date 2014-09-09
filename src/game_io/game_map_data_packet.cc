@@ -38,7 +38,7 @@ void Game_Map_Data_Packet::Read
 	(FileSystem & fs, Game & game, MapMapObjectLoader * const)
 {
 	if (!fs.FileExists("map") || !fs.IsDirectory("map"))
-		throw game_data_error("no map");
+		throw GameDataError("no map");
 
 	//  Now Load the map as it would be a normal map saving.
 	delete m_wml;

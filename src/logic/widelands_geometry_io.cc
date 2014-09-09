@@ -27,23 +27,23 @@ namespace Widelands {
 Direction ReadDirection8(StreamRead* fr) {
 	uint8_t const d = fr->Unsigned8();
 	if (d == 0)
-		throw direction_is_null();
+		throw DirectionIsNull();
 	if (6 < d)
-		throw direction_invalid(d);
+		throw DirectionInvalid(d);
 	return d;
 }
 
 Direction ReadDirection8_allow_null(StreamRead* fr) {
 	uint8_t const d = fr->Unsigned8();
 	if (6 < d)
-		throw direction_invalid(d);
+		throw DirectionInvalid(d);
 	return d;
 }
 
 Map_Index ReadMap_Index32(StreamRead* fr, const Map_Index max) {
 	uint32_t const i = fr->Unsigned32();
 	if (max <= i)
-		throw exceeded_max_index(max, i);
+		throw ExceededMaxIndex(max, i);
 	return i;
 }
 
@@ -57,9 +57,9 @@ Coords ReadCoords32(StreamRead* stream_read, const Extent& extent) {
 	uint16_t const x = stream_read->Unsigned16();
 	uint16_t const y = stream_read->Unsigned16();
 	if (extent.w <= x)
-		throw exceeded_width(extent.w, x);
+		throw ExceededWidth(extent.w, x);
 	if (extent.h <= y)
-		throw exceeded_height(extent.h, y);
+		throw ExceededHeight(extent.h, y);
 	return Coords(x, y);
 }
 
@@ -69,9 +69,9 @@ Coords ReadCoords32_allow_null(StreamRead* fr, const Extent& extent) {
 	const Coords result(x, y);
 	if (result) {
 		if (extent.w <= x)
-			throw exceeded_width(extent.w, x);
+			throw ExceededWidth(extent.w, x);
 		if (extent.h <= y)
-			throw exceeded_height(extent.h, y);
+			throw ExceededHeight(extent.h, y);
 	}
 	return result;
 }

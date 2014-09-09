@@ -253,10 +253,10 @@ Tribe_Descr::Tribe_Descr
 				}
 			}
 		} catch (const std::exception & e) {
-			throw game_data_error("root conf: %s", e.what());
+			throw GameDataError("root conf: %s", e.what());
 		}
-	} catch (const _wexception & e) {
-		throw game_data_error("tribe %s: %s", tribename.c_str(), e.what());
+	} catch (const WException & e) {
+		throw GameDataError("tribe %s: %s", tribename.c_str(), e.what());
 	}
 }
 
@@ -320,8 +320,8 @@ bool Tribe_Descr::exists_tribe
 					info->initializations.push_back(
 					   TribeBasicInfo::Initialization(script, t->get_string("name")));
 				}
-			} catch (const _wexception & e) {
-				throw game_data_error
+			} catch (const WException & e) {
+				throw GameDataError
 					("reading basic info for tribe \"%s\": %s",
 					 name.c_str(), e.what());
 			}
@@ -394,7 +394,7 @@ uint32_t Tribe_Descr::get_resource_indicator
 	if (!res || !amount) {
 		int32_t idx = get_immovable_index("resi_none");
 		if (idx == -1)
-			throw game_data_error
+			throw GameDataError
 				("tribe %s does not declare a resource indicator resi_none!",
 				 name().c_str());
 		return idx;
@@ -413,7 +413,7 @@ uint32_t Tribe_Descr::get_resource_indicator
 	}
 
 	if (!num_indicators)
-		throw game_data_error
+		throw GameDataError
 			("tribe %s does not declare a resource indicator for resource %s",
 			 name().c_str(),
 			 res->name().c_str());
@@ -424,7 +424,7 @@ uint32_t Tribe_Descr::get_resource_indicator
 			 *
 			 num_indicators);
 	if (bestmatch > num_indicators)
-		throw game_data_error
+		throw GameDataError
 			("Amount of %s is %i but max amount is %i",
 			 res->name().c_str(),
 			 amount,
@@ -449,7 +449,7 @@ uint32_t Tribe_Descr::get_resource_indicator
 Ware_Index Tribe_Descr::safe_ware_index(const std::string & warename) const {
 	const Ware_Index result = ware_index(warename);
 	if (result == INVALID_INDEX) {
-		throw game_data_error("tribe %s does not define ware type \"%s\"", name().c_str(), warename.c_str());
+		throw GameDataError("tribe %s does not define ware type \"%s\"", name().c_str(), warename.c_str());
 	}
 	return result;
 }
@@ -465,7 +465,7 @@ Ware_Index Tribe_Descr::ware_index(const std::string & warename) const {
 Ware_Index Tribe_Descr::safe_worker_index(const std::string& workername) const {
 const Ware_Index result = worker_index(workername);
 	if (result == INVALID_INDEX) {
-		throw game_data_error(
+		throw GameDataError(
 		   "tribe %s does not define worker type \"%s\"", name().c_str(), workername.c_str());
 	}
 	return result;
@@ -477,7 +477,7 @@ const Ware_Index result = worker_index(workername);
 Building_Index Tribe_Descr::safe_building_index(char const* const buildingname) const {
 	const Building_Index result = building_index(buildingname);
 	if (result == INVALID_INDEX) {
-		throw game_data_error(
+		throw GameDataError(
 		   "tribe %s does not define building type \"%s\"", name().c_str(), buildingname);
 	}
 	return result;

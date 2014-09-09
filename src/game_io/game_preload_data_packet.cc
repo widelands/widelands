@@ -66,11 +66,11 @@ void Game_Preload_Data_Packet::Read
 				m_minimap_path = MINIMAP_FILENAME;
 			}
 		} else {
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %i", packet_version);
 		}
-	} catch (const _wexception & e) {
-		throw game_data_error("preload: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("preload: %s", e.what());
 	}
 }
 

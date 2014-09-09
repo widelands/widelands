@@ -330,7 +330,7 @@ void Main_Menu_Save_Map::fill_list() {
 					(FileSystem::FS_Filename(name),
 					 name,
 					 g_gr->images().get("pics/ls_wlmap.png"));
-			} catch (const _wexception &) {} //  we simply skip illegal entries
+			} catch (const WException &) {} //  we simply skip illegal entries
 		}
 	}
 	if (m_ls->size())

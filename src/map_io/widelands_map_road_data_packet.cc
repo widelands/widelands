@@ -57,15 +57,15 @@ void Map_Road_Data_Packet::Read
 					//  If this is already known, get it.
 					//  Road data is read somewhere else
 					mol.register_object(serial, *new Road()).init(egbase);
-				} catch (const _wexception & e) {
-					throw game_data_error("%u: %s", serial, e.what());
+				} catch (const WException & e) {
+					throw GameDataError("%u: %s", serial, e.what());
 				}
 			}
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
-		throw game_data_error("road: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("road: %s", e.what());
 	}
 }
 

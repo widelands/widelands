@@ -87,7 +87,7 @@ ProductionSiteDescr::ProductionSiteDescr
 				m_output_worker_types.insert(idx);
 			} else
 				throw wexception("tribe does not define a ware or worker type with this name");
-		} catch (const _wexception & e) {
+		} catch (const WException & e) {
 			throw wexception("output \"%s\": %s", op->get_string(), e.what());
 		}
 
@@ -108,7 +108,7 @@ ProductionSiteDescr::ProductionSiteDescr
 				} else
 					throw wexception
 						("tribe does not define a ware type with this name");
-			} catch (const _wexception & e) {
+			} catch (const WException & e) {
 				throw wexception("input \"%s=%s\": %s", val->get_name(), val->get_string(), e.what());
 			}
 
@@ -127,7 +127,7 @@ ProductionSiteDescr::ProductionSiteDescr
 					m_working_positions.push_back(std::pair<Ware_Index, uint32_t>(woi, v->get_positive()));
 				} else
 					throw wexception("invalid");
-			} catch (const _wexception & e) {
+			} catch (const WException & e) {
 				throw wexception("%s=\"%s\": %s", v->get_name(), v->get_string(), e.what());
 			}
 	if (working_positions().empty() && !global_s.has_val("max_soldiers"))

@@ -1362,7 +1362,7 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 				info.path     = name;
 				info.players  = static_cast<uint8_t>(s.get_safe_int("nr_players"));
 				d->settings.saved_games.push_back(info);
-			} catch (const _wexception &) {}
+			} catch (const WException &) {}
 		}
 	}
 
@@ -2654,7 +2654,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 
 						d->settings.scenario = false;
 						d->hp.setMap(gpdp.get_mapname(), path, nr_players, true);
-					} catch (const _wexception &) {}
+					} catch (const WException &) {}
 				}
 			} else {
 				if (g_fs->FileExists(path)) {

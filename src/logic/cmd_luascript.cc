@@ -38,7 +38,7 @@ void CmdLuaScript::execute (Game & game) {
 		log("not found.\n");
 		return;
 	} catch (LuaError & e) {
-		throw game_data_error("lua: %s", e.what());
+		throw GameDataError("lua: %s", e.what());
 	}
 	log("done\n");
 	return;
@@ -54,10 +54,10 @@ void CmdLuaScript::Read
 			GameLogicCommand::Read(fr, egbase, mol);
 			script_ = fr.String();
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
-		throw game_data_error("lua: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("lua: %s", e.what());
 	}
 }
 void CmdLuaScript::Write

@@ -68,16 +68,16 @@ void Map_Allowed_Worker_Types_Data_Packet::Read
 							player->allow_worker_type
 								(w, s->get_bool(w_descr.name().c_str(), true));
 					}
-				} catch (const _wexception & e) {
-					throw game_data_error
+				} catch (const WException & e) {
+					throw GameDataError
 						("player %u (%s): %s", p, tribe.name().c_str(), e.what());
 				}
 			}
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %i", packet_version);
-	} catch (const _wexception & e) {
-		throw game_data_error("allowed worker types: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("allowed worker types: %s", e.what());
 	}
 }
 

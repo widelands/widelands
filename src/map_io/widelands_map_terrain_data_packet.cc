@@ -56,13 +56,13 @@ void Map_Terrain_Data_Packet::Read(FileSystem& fs,
 				char const* const old_terrain_name = fr.CString();
 				terrain_id_map::const_iterator const it = smap.find(id);
 				if (it != smap.end()) {
-					throw game_data_error(
+					throw GameDataError(
 					   "Map_Terrain_Data_Packet::Read: WARNING: Found duplicate terrain id %i.", id);
 				}
 				const std::string new_terrain_name =
 				   lookup_table.lookup_terrain(old_terrain_name);
 				if (!world.get_ter(new_terrain_name.c_str())) {
-					throw game_data_error("Terrain '%s' exists in map, not in world!", new_terrain_name.c_str());
+					throw GameDataError("Terrain '%s' exists in map, not in world!", new_terrain_name.c_str());
 				}
 				smap[id] = world.terrains().get_index(new_terrain_name.c_str());
 			}
@@ -74,10 +74,10 @@ void Map_Terrain_Data_Packet::Read(FileSystem& fs,
 				f.set_terrain_d(smap[fr.Unsigned8()]);
 			}
 		} else {
-			throw game_data_error("unknown/unhandled version %u", packet_version);
+			throw GameDataError("unknown/unhandled version %u", packet_version);
 		}
-	} catch (const _wexception & e) {
-		throw game_data_error("terrain: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("terrain: %s", e.what());
 	}
 }
 

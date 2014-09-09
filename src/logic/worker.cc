@@ -113,7 +113,7 @@ bool Worker::run_mine(Game & game, State & state, const Action & action)
 	Resource_Index const res =
 		game.world().get_resource(action.sparam1.c_str());
 	if (static_cast<int8_t>(res) == -1) //  TODO(unknown): ARGH!!
-		throw game_data_error
+		throw GameDataError
 			(_
 			 	("should mine resource %s, which does not exist in world; tribe "
 			 	 "is not compatible with world"),
@@ -218,7 +218,7 @@ bool Worker::run_breed(Game & game, State & state, const Action & action)
 	Resource_Index const res =
 		game.world().get_resource(action.sparam1.c_str());
 	if (static_cast<int8_t>(res) == -1) //  TODO(unknown): ARGH!!
-		throw game_data_error
+		throw GameDataError
 			(_
 			 	("should breed resource type %s, which does not exist in world; "
 			 	 "tribe is not compatible with world"),
@@ -801,13 +801,13 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 	};
 
 	if (action.sparamv.size() != 1) {
-			throw game_data_error("plant takes only one argument.");
+			throw GameDataError("plant takes only one argument.");
 	}
 
 	std::vector<std::string> const list(split_string(action.sparamv[0], ":"));
 
 	if (list.size() != 2) {
-		throw game_data_error("plant takes either tribe:<immovable> or attrib:<attribute>");
+		throw GameDataError("plant takes either tribe:<immovable> or attrib:<attribute>");
 	}
 
 	if (list[0] == "attrib") {
@@ -2947,7 +2947,7 @@ void Worker::Loader::load(FileRead & fr)
 
 	uint8_t version = fr.Unsigned8();
 	if (!(1 <= version && version <= WORKER_SAVEGAME_VERSION))
-		throw game_data_error("unknown/unhandled version %u", version);
+		throw GameDataError("unknown/unhandled version %u", version);
 
 	Worker & worker = get<Worker>();
 	m_location = fr.Unsigned32();
@@ -3042,7 +3042,7 @@ MapObject::Loader * Worker::load
 
 		const Tribe_Descr * tribe = egbase.get_tribe(tribename);
 		if (!tribe)
-			throw game_data_error("unknown tribe '%s'", tribename.c_str());
+			throw GameDataError("unknown tribe '%s'", tribename.c_str());
 
 		const WorkerDescr * descr =
 			tribe->get_worker_descr(tribe->safe_worker_index(name));

@@ -61,8 +61,8 @@ public:
 		size_t pos;
 	};
 
-	struct File_Boundary_Exceeded : public StreamRead::_data_error {
-		File_Boundary_Exceeded() : StreamRead::_data_error("end of file") {
+	struct FileBoundaryExceeded : public StreamRead::DataError {
+		FileBoundaryExceeded() : StreamRead::DataError("end of file") {
 		}
 	};
 

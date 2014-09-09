@@ -82,11 +82,11 @@ BuildingDescr::BuildingDescr
 			m_size = BaseImmovable::BIG;
 			m_port = true;
 		} else
-			throw game_data_error
+			throw GameDataError
 				("expected %s but found \"%s\"",
 				 "{\"small\"|\"medium\"|\"big\"|\"port\"|\"mine\"}", string);
-	} catch (const _wexception & e) {
-		throw game_data_error("size: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("size: %s", e.what());
 	}
 
 	m_helptext_script = directory + "/help.lua";

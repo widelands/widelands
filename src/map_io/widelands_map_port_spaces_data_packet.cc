@@ -57,10 +57,10 @@ void Map_Port_Spaces_Data_Packet::Read
 				map.set_port_space(get_safe_coords(buf, ext, &s2), true);
 			}
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %i", packet_version);
-	} catch (const _wexception & e) {
-		throw game_data_error("port_spaces data: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("port_spaces data: %s", e.what());
 	}
 }
 

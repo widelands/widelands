@@ -420,10 +420,10 @@ size_t ZipFilesystem::ZipStreamRead::Data(void* data, size_t bufsize)
 {
 	int copied = unzReadCurrentFile(m_unzipfile, data, bufsize);
 	if (copied < 0) {
-		throw new _data_error("Failed to read from zip file");
+		throw new DataError("Failed to read from zip file");
 	}
 	if (copied == 0) {
-		throw new _data_error("End of file reaced while reading zip");
+		throw new DataError("End of file reaced while reading zip");
 	}
 	return copied;
 }

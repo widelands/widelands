@@ -86,7 +86,7 @@ SoldierDescr::SoldierDescr
 		const char * const attack = global_s.get_safe_string("attack");
 		std::vector<std::string> list(split_string(attack, "-"));
 		if (list.size() != 2)
-			throw game_data_error
+			throw GameDataError
 				("expected %s but found \"%s\"", "\"min-max\"", attack);
 		for (std::string& temp_str : list) {
 			remove_spaces(temp_str);
@@ -94,16 +94,16 @@ SoldierDescr::SoldierDescr
 		char * endp;
 		m_min_attack = strtol(list[0].c_str(), &endp, 0);
 		if (*endp || 0 == m_min_attack)
-			throw game_data_error
+			throw GameDataError
 				("expected %s but found \"%s\"",
 				 "positive integer", list[0].c_str());
 		m_max_attack = strtol(list[1].c_str(), &endp, 0);
 		if (*endp || m_max_attack < m_min_attack)
-			throw game_data_error
+			throw GameDataError
 				("expected positive integer >= %u but found \"%s\"",
 				 m_min_attack, list[1].c_str());
-	} catch (const _wexception & e) {
-		throw game_data_error("attack: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("attack: %s", e.what());
 	}
 
 	// Parse defend
@@ -202,7 +202,7 @@ std::vector<std::string> SoldierDescr::load_animations_from_string
 		const char * anim_string = global_s.get_safe_string(anim_name);
 		list = split_string(anim_string, ",");
 		if (list.size() < 1)
-			throw game_data_error
+			throw GameDataError
 				("expected %s but found \"%s\"",
 				 "\"anim_name[,another_anim,...]\"", anim_string);
 
@@ -217,8 +217,8 @@ std::vector<std::string> SoldierDescr::load_animations_from_string
 			add_animation
 				(temp_str.c_str(), g_gr->animations().load(directory, anim_s));
 		}
-	} catch (const _wexception & e) {
-		throw game_data_error("%s : %s", anim_name, e.what());
+	} catch (const WException & e) {
+		throw GameDataError("%s : %s", anim_name, e.what());
 	}
 
 	return list;
@@ -1369,7 +1369,7 @@ void Soldier::start_task_move_in_battle(Game & game, CombatWalkingDir dir)
 			mapdir = WALK_E;
 			break;
 		default:
-			throw game_data_error("bad direction '%d'", dir);
+			throw GameDataError("bad direction '%d'", dir);
 	}
 
 	Map & map = game.map();
@@ -1856,7 +1856,7 @@ void Soldier::Loader::load(FileRead & fr)
 
 	uint8_t version = fr.Unsigned8();
 	if (version > SOLDIER_SAVEGAME_VERSION)
-		throw game_data_error("unknown/unhandled version %u", version);
+		throw GameDataError("unknown/unhandled version %u", version);
 
 	Soldier & soldier = get<Soldier>();
 	soldier.m_hp_current = fr.Unsigned32();

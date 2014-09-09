@@ -115,7 +115,7 @@ int main(int argc, char * argv[])
 		return 0;
 	}
 #ifdef NDEBUG
-	catch (const _wexception & e) {
+	catch (const WException & e) {
 		cerr
 			<< "\nCaught exception (of type '" << typeid(e).name()
 			<< "') in outermost handler!\nThe exception said: " << e.what()

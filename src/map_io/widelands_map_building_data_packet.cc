@@ -75,7 +75,7 @@ void Map_Building_Data_Packet::Read
 							const Tribe_Descr & tribe = player->tribe();
 							const Building_Index index = tribe.building_index(name);
 							if (index == INVALID_INDEX) {
-								throw game_data_error
+								throw GameDataError
 									("tribe %s does not define building type \"%s\"",
 									 tribe.name().c_str(), name);
 							}
@@ -101,15 +101,15 @@ void Map_Building_Data_Packet::Read
 							if (g_gr) // but not on dedicated servers ;)
 								ibase.reference_player_tribe(p, &tribe);
 						} else
-							throw game_data_error("player %u does not exist", p);
+							throw GameDataError("player %u does not exist", p);
 					}
 				}
 			}
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
-		throw game_data_error("buildings: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("buildings: %s", e.what());
 	}
 }
 
@@ -195,7 +195,7 @@ void Map_Building_Data_Packet::write_priorities
 			else if (wwWORKER == ware_type)
 				name = tribe.get_worker_descr(ware_index)->name();
 			else
-				throw game_data_error
+				throw GameDataError
 						("unrecognized ware type %d while writing priorities",
 						 ware_type);
 
@@ -226,7 +226,7 @@ void Map_Building_Data_Packet::read_priorities
 			else if (wwWORKER == ware_type)
 				idx = tribe.safe_worker_index(fr.CString());
 			else
-				throw game_data_error
+				throw GameDataError
 						("unrecognized ware type %d while reading priorities",
 						 ware_type);
 

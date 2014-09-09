@@ -72,10 +72,10 @@ void CmdLuaCoroutine::Read(FileRead& fr, Editor_Game_Base& egbase, MapMapObjectL
 
 			m_cr = lgi->read_coroutine(fr);
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
-		throw game_data_error("lua function: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("lua function: %s", e.what());
 	}
 }
 void CmdLuaCoroutine::Write

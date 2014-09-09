@@ -203,7 +203,7 @@ public:
 		return m_statistics_string;
 	}
 
-	/// \returns the queue for a ware type or \throws _wexception.
+	/// \returns the queue for a ware type or \throws WException.
 	virtual WaresQueue & waresqueue(Ware_Index);
 
 	virtual bool burn_on_destroy();

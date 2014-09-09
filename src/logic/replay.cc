@@ -111,7 +111,7 @@ ReplayReader::ReplayReader(Game & game, const std::string & filename)
 			throw wexception
 				("Replay of version %u is known to have desync problems", version);
 		if (version != REPLAY_VERSION)
-			throw game_data_error("unknown/unhandled version %u", version);
+			throw GameDataError("unknown/unhandled version %u", version);
 
 		game.rng().ReadState(*m_cmdlog);
 	}
@@ -181,7 +181,7 @@ Command * ReplayReader::GetNextCommand(const uint32_t time)
 		default:
 			throw wexception("Unknown packet %u", pkt);
 		}
-	} catch (const _wexception & e) {
+	} catch (const WException & e) {
 		log("REPLAY: Caught exception %s\n", e.what());
 		delete m_cmdlog;
 		m_cmdlog = nullptr;

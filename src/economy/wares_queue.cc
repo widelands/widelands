@@ -283,10 +283,10 @@ void WaresQueue::Read(FileRead & fr, Game & game, MapMapObjectLoader & mol)
 			if (m_owner.get_economy())
 				add_to_economy(*m_owner.get_economy());
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const game_data_error & e) {
-		throw game_data_error("waresqueue: %s", e.what());
+	} catch (const GameDataError & e) {
+		throw GameDataError("waresqueue: %s", e.what());
 	}
 }
 

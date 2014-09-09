@@ -98,7 +98,7 @@ int32_t World::safe_resource_index(const char* const resourcename) const {
 	int32_t const result = get_resource(resourcename);
 
 	if (result == INVALID_INDEX)
-		throw game_data_error("world does not define resource type \"%s\"", resourcename);
+		throw GameDataError("world does not define resource type \"%s\"", resourcename);
 	return result;
 }
 

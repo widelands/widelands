@@ -61,16 +61,16 @@ void CmdDestroyMapObject::Read
 			if (Serial const serial = fr.Unsigned32())
 				try {
 					obj_serial = mol.get<MapObject>(serial).serial();
-				} catch (const _wexception & e) {
-					throw game_data_error("%u: %s", serial, e.what());
+				} catch (const WException & e) {
+					throw GameDataError("%u: %s", serial, e.what());
 				}
 			else
 				obj_serial = 0;
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
-		throw game_data_error("destroy map object: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("destroy map object: %s", e.what());
 	}
 }
 void CmdDestroyMapObject::Write
@@ -111,17 +111,17 @@ void CmdAct::Read
 			if (Serial const object_serial = fr.Unsigned32())
 				try {
 					obj_serial = mol.get<MapObject>(object_serial).serial();
-				} catch (const _wexception & e) {
-					throw game_data_error
+				} catch (const WException & e) {
+					throw GameDataError
 						("object %u: %s", object_serial, e.what());
 				}
 			else
 				obj_serial = 0;
 			arg = fr.Unsigned32();
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
+	} catch (const WException & e) {
 		throw wexception("act: %s", e.what());
 	}
 }
@@ -298,7 +298,7 @@ void MapObjectDescr::add_attributes(const std::vector<std::string>& attributes,
 		uint32_t const attrib = get_attribute_id(attribute);
 		if (attrib < MapObject::HIGHEST_FIXED_ATTRIBUTE) {
 			if (!allowed_special.count(attrib)) {
-				throw game_data_error("bad attribute \"%s\"", attribute.c_str());
+				throw GameDataError("bad attribute \"%s\"", attribute.c_str());
 			}
 		}
 		add_attribute(attrib);
@@ -502,15 +502,15 @@ void MapObject::Loader::load(FileRead & fr)
 
 		uint8_t const version = fr.Unsigned8();
 		if (version != CURRENT_SAVEGAME_VERSION)
-			throw game_data_error("unknown/unhandled version %u", version);
+			throw GameDataError("unknown/unhandled version %u", version);
 
 		Serial const serial = fr.Unsigned32();
 		try {
 			mol().register_object<MapObject>(serial, *get_object());
-		} catch (const _wexception & e) {
+		} catch (const WException & e) {
 			throw wexception("%u: %s", serial, e.what());
 		}
-	} catch (const _wexception & e) {
+	} catch (const WException & e) {
 		throw wexception("map object: %s", e.what());
 	}
 

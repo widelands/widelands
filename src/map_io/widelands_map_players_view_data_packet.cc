@@ -117,7 +117,7 @@ namespace {
 		(file).Open(fs, filename);                                                                   \
 	}                                                                                               \
 	catch (const File_error&) {                                                                     \
-		throw game_data_error("Map_Players_View_Data_Packet::Read: player %u:Could not open "        \
+		throw GameDataError("Map_Players_View_Data_Packet::Read: player %u:Could not open "        \
 		                      "\"%s\" for reading. This file should exist when \"%s\" exists",       \
 		                      plnum,                                                                 \
 		                      filename,                                                              \
@@ -138,7 +138,7 @@ namespace {
 		}                                                                                            \
 		catch (...) {                                                                                \
 			if (fileversion == 0)                                                                     \
-				throw game_data_error("Map_Players_View_Data_Packet::Read: player %u:Could not open "  \
+				throw GameDataError("Map_Players_View_Data_Packet::Read: player %u:Could not open "  \
 				                      "\"%s\" for reading. This file should exist when \"%s\" exists", \
 				                      plnum,                                                           \
 				                      filename,                                                        \
@@ -163,7 +163,7 @@ namespace {
 
 #define CHECK_TRAILING_BYTES(file, filename)                                                       \
 	if (!(file).EndOfFile())                                                                      \
-		throw game_data_error("Map_Players_View_Data_Packet::Read: player %u:"                       \
+		throw GameDataError("Map_Players_View_Data_Packet::Read: player %u:"                       \
 		                      "Found %lu trailing bytes in \"%s\"",                                  \
 		                      plnum,                                                                 \
 		                      static_cast<long unsigned int>((file).GetSize() - (file).GetPos()),    \
@@ -194,15 +194,15 @@ private:
 };
 
 // Errors for the Read* functions.
-struct tribe_nonexistent : public FileRead::_data_error {
-	tribe_nonexistent(char const* const Name)
-	   : _data_error("tribe \"%s\" does not exist", Name), name(Name) {
+struct TribeNonexistent : public FileRead::DataError {
+	TribeNonexistent(char const* const Name)
+	   : DataError("tribe \"%s\" does not exist", Name), name(Name) {
 	}
 	char const* const name;
 };
-struct tribe_immovable_nonexistent : public FileRead::_data_error {
-	tribe_immovable_nonexistent(const std::string& Tribename, const std::string& Name)
-	   : _data_error(
+struct TribeImmovableNonexistent : public FileRead::DataError {
+	TribeImmovableNonexistent(const std::string& Tribename, const std::string& Name)
+	   : DataError(
 	        "tribe %s does not define immovable type \"%s\"", Tribename.c_str(), Name.c_str()),
 	     tribename(Tribename),
 	     name(Name) {
@@ -211,16 +211,16 @@ struct tribe_immovable_nonexistent : public FileRead::_data_error {
 	std::string tribename;
 	std::string name;
 };
-struct world_immovable_nonexistent : public FileRead::_data_error {
-	world_immovable_nonexistent(char const* const Name)
-	   : _data_error("world does not define immovable type \"%s\"",  Name),
+struct WorldImmovableNonexistent : public FileRead::DataError {
+	WorldImmovableNonexistent(char const* const Name)
+	   : DataError("world does not define immovable type \"%s\"",  Name),
 	     name(Name) {
 	}
 	char const* const name;
 };
-struct building_nonexistent : public FileRead::_data_error {
-	building_nonexistent(const std::string& Tribename, char const* const Name)
-	   : _data_error("tribe %s does not define building type \"%s\"", Tribename.c_str(), Name),
+struct BuildingNonexistent : public FileRead::DataError {
+	BuildingNonexistent(const std::string& Tribename, char const* const Name)
+	   : DataError("tribe %s does not define building type \"%s\"", Tribename.c_str(), Name),
 	     tribename(Tribename),
 	     name(Name) {
 	}
@@ -238,7 +238,7 @@ const ImmovableDescr& ReadImmovable_Type(StreamRead* fr, const Tribe_Descr& trib
 	std::string name = fr->CString();
 	int32_t const index = tribe.get_immovable_index(name);
 	if (index == -1)
-		throw tribe_immovable_nonexistent(tribe.name(), name);
+		throw TribeImmovableNonexistent(tribe.name(), name);
 	return *tribe.get_immovable_descr(index);
 }
 
@@ -252,7 +252,7 @@ const Tribe_Descr& ReadTribe(StreamRead* fr, const Editor_Game_Base& egbase) {
 	if (Tribe_Descr const* const result = egbase.get_tribe(name))
 		return *result;
 	else
-		throw tribe_nonexistent(name);
+		throw TribeNonexistent(name);
 }
 
 // Reads a CString and interprets it as the name of a tribe.
@@ -268,7 +268,7 @@ Tribe_Descr const* ReadTribe_allow_null(StreamRead* fr, const Editor_Game_Base& 
 		if (Tribe_Descr const* const result = egbase.get_tribe(name))
 			return result;
 		else
-			throw tribe_nonexistent(name);
+			throw TribeNonexistent(name);
 	else
 		return nullptr;
 }
@@ -283,7 +283,7 @@ const ImmovableDescr& ReadImmovable_Type(StreamRead* fr, const World& world) {
 	char const* const name = fr->CString();
 	int32_t const index = world.get_immovable_index(name);
 	if (index == -1)
-		throw world_immovable_nonexistent(name);
+		throw WorldImmovableNonexistent(name);
 	return *world.get_immovable_descr(index);
 }
 
@@ -307,7 +307,7 @@ const BuildingDescr& ReadBuilding_Type(StreamRead* fr, const Tribe_Descr& tribe)
 	char const* const name = fr->CString();
 	Building_Index const index = tribe.building_index(name);
 	if (index == INVALID_INDEX)
-		throw building_nonexistent(tribe.name(), name);
+		throw BuildingNonexistent(tribe.name(), name);
 	return *tribe.get_building_descr(index);
 }
 
@@ -375,10 +375,10 @@ inline static MapObjectData read_unseen_immovable
 		case 4: // The player sees a port dock
 			m.map_object_descr = &g_portdock_descr;                       break;
 		default:
-			throw game_data_error("Unknown immovable-kind type %d", immovable_kind);
+			throw GameDataError("Unknown immovable-kind type %d", immovable_kind);
 		}
-	} catch (const _wexception & e) {
-		throw game_data_error("unseen immovable: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("unseen immovable: %s", e.what());
 	}
 	return m;
 }
@@ -654,8 +654,8 @@ void Map_Players_View_Data_Packet::Read
 					//  his information about the node from file.
 					try {
 						f_player_field.time_node_last_unseen = unseen_times_file.Unsigned32();
-					} catch (const FileRead::File_Boundary_Exceeded &) {
-						throw game_data_error
+					} catch (const FileRead::FileBoundaryExceeded &) {
+						throw GameDataError
 							("Map_Players_View_Data_Packet::Read: player %u: in "
 							 "\"%s\":%lu: node (%i, %i): unexpected end of file "
 							 "while reading time_node_last_unseen",
@@ -666,8 +666,8 @@ void Map_Players_View_Data_Packet::Read
 					}
 
 					try {owner = owners_file.Unsigned8();}
-					catch (const FileRead::File_Boundary_Exceeded &) {
-						throw game_data_error
+					catch (const FileRead::FileBoundaryExceeded &) {
+						throw GameDataError
 							("Map_Players_View_Data_Packet::Read: player %u: in "
 							 "\"%s\":%lu: node (%i, %i): unexpected end of file "
 							 "while reading owner",
@@ -678,7 +678,7 @@ void Map_Players_View_Data_Packet::Read
 							 f.x, f.y);
 					}
 					if (nr_players < owner) {
-						throw game_data_error
+						throw GameDataError
 							("Map_Players_View_Data_Packet::Read: player %u: in "
 							 "\"%s\":%lu & 0xf: node (%i, %i): Player thinks that "
 							 "this node is owned by player %u, but there are only %u "
@@ -756,8 +756,8 @@ void Map_Players_View_Data_Packet::Read
 					//  Load his information about the triangle from file.
 					if (terrains_file_version < 2) {
 						try {f_player_field.terrains.d = legacy_terrains_bitbuffer.get();}
-						catch (const FileRead::File_Boundary_Exceeded &) {
-							throw game_data_error
+						catch (const FileRead::FileBoundaryExceeded &) {
+							throw GameDataError
 								("Map_Players_View_Data_Packet::Read: player %u: in "
 								"\"%s\": node (%i, %i) t = D: unexpected end of file "
 								"while reading terrain",
@@ -789,8 +789,8 @@ void Map_Players_View_Data_Packet::Read
 					//  Load his information about the triangle from file.
 					if (terrains_file_version < 2) {
 						try {f_player_field.terrains.r = legacy_terrains_bitbuffer.get();}
-						catch (const FileRead::File_Boundary_Exceeded &) {
-							throw game_data_error
+						catch (const FileRead::FileBoundaryExceeded &) {
+							throw GameDataError
 								("Map_Players_View_Data_Packet::Read: player %u: in "
 								"\"%s\": node (%i, %i) t = R: unexpected end of file "
 								"while reading terrain",
@@ -820,8 +820,8 @@ void Map_Players_View_Data_Packet::Read
 						//  it now. Load his information about this edge from file.
 						if (road_file_version < 2) {
 							try {roads  = legacy_road_bitbuffer.get() << Road_SouthWest;}
-							catch (const FileRead::File_Boundary_Exceeded &) {
-								throw game_data_error
+							catch (const FileRead::FileBoundaryExceeded &) {
+								throw GameDataError
 									("Map_Players_View_Data_Packet::Read: player %u: in "
 									"\"%s\": node (%i, %i): unexpected end of file while "
 									"reading Road_SouthWest",
@@ -838,8 +838,8 @@ void Map_Players_View_Data_Packet::Read
 						//  it now. Load his information about this edge from file.
 						if (road_file_version < 2) {
 							try {roads |= legacy_road_bitbuffer.get() << Road_SouthEast;}
-							catch (const FileRead::File_Boundary_Exceeded &) {
-								throw game_data_error
+							catch (const FileRead::FileBoundaryExceeded &) {
+								throw GameDataError
 									("Map_Players_View_Data_Packet::Read: player %u: in "
 										"\"%s\": node (%i, %i): unexpected end of file while "
 										"reading Road_SouthEast",
@@ -856,8 +856,8 @@ void Map_Players_View_Data_Packet::Read
 						//  it now. Load his information about this edge from file.
 						if (road_file_version < 2) {
 							try {roads |= legacy_road_bitbuffer.get() << Road_East;}
-							catch (const FileRead::File_Boundary_Exceeded &) {
-								throw game_data_error
+							catch (const FileRead::FileBoundaryExceeded &) {
+								throw GameDataError
 									("Map_Players_View_Data_Packet::Read: player %u: in "
 										"\"%s\": node (%i, %i): unexpected end of file while "
 										"reading Road_East",
@@ -889,8 +889,8 @@ void Map_Players_View_Data_Packet::Read
 							try {
 								f_player_field.resource_amounts.d =
 									legacy_surveys_amount_bitbuffer.get();
-							} catch (const FileRead::File_Boundary_Exceeded &) {
-								throw game_data_error
+							} catch (const FileRead::FileBoundaryExceeded &) {
+								throw GameDataError
 									("Map_Players_View_Data_Packet::Read: player %u: in "
 										"\"%s\": node (%i, %i) t = D: unexpected end of file "
 										"while reading resource amount of surveyed triangle",
@@ -902,8 +902,8 @@ void Map_Players_View_Data_Packet::Read
 						try {
 							f_player_field.time_triangle_last_surveyed[TCoords<>::D] =
 								survey_times_file.Unsigned32();
-						} catch (const FileRead::File_Boundary_Exceeded &) {
-							throw game_data_error
+						} catch (const FileRead::FileBoundaryExceeded &) {
+							throw GameDataError
 								("Map_Players_View_Data_Packet::Read: player %u: in "
 								 "\"%s\":%lu: node (%i, %i) t = D: unexpected end of "
 								 "file while reading time_triangle_last_surveyed",
@@ -913,8 +913,8 @@ void Map_Players_View_Data_Packet::Read
 								 f.x, f.y);
 						}
 					}
-				} catch (const FileRead::File_Boundary_Exceeded &) {
-					throw game_data_error
+				} catch (const FileRead::FileBoundaryExceeded &) {
+					throw GameDataError
 						("Map_Players_View_Data_Packet::Read: player %u: in \"%s\": "
 						 "node (%i, %i) t = D: unexpected end of file while reading "
 						 "survey bit",
@@ -934,8 +934,8 @@ void Map_Players_View_Data_Packet::Read
 							try {
 								f_player_field.resource_amounts.r =
 									legacy_surveys_amount_bitbuffer.get();
-							} catch (const FileRead::File_Boundary_Exceeded &) {
-								throw game_data_error
+							} catch (const FileRead::FileBoundaryExceeded &) {
+								throw GameDataError
 									("Map_Players_View_Data_Packet::Read: player %u: in "
 									"\"%s\": node (%i, %i) t = R: unexpected end of file "
 									"while reading resource amount of surveyed triangle",
@@ -947,8 +947,8 @@ void Map_Players_View_Data_Packet::Read
 						try {
 							f_player_field.time_triangle_last_surveyed[TCoords<>::R] =
 								survey_times_file.Unsigned32();
-						} catch (const FileRead::File_Boundary_Exceeded &) {
-							throw game_data_error
+						} catch (const FileRead::FileBoundaryExceeded &) {
+							throw GameDataError
 								("Map_Players_View_Data_Packet::Read: player %u: in "
 								 "\"%s\":%lu: node (%i, %i) t = R: unexpected end of "
 								 "file while reading time_triangle_last_surveyed",
@@ -958,8 +958,8 @@ void Map_Players_View_Data_Packet::Read
 								 f.x, f.y);
 						}
 					}
-				} catch (const FileRead::File_Boundary_Exceeded &) {
-					throw game_data_error
+				} catch (const FileRead::FileBoundaryExceeded &) {
+					throw GameDataError
 						("Map_Players_View_Data_Packet::Read: player %u: in \"%s\": "
 						 "node (%i, %i) t = R: unexpected end of file while reading "
 						 "survey bit",

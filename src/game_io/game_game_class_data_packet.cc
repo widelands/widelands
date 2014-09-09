@@ -40,10 +40,10 @@ void Game_Game_Class_Data_Packet::Read
 			fr.Signed16(); // This used to be game speed
 			game.gametime_ = fr.Unsigned32();
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
-		throw game_data_error("game class: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("game class: %s", e.what());
 	}
 }
 

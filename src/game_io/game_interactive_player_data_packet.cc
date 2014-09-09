@@ -44,7 +44,7 @@ void Game_Interactive_Player_Data_Packet::Read
 		if (packet_version == CURRENT_PACKET_VERSION) {
 			Player_Number player_number = fr.Unsigned8();
 			if (!(0 < player_number && player_number <= game.map().get_nrplayers())) {
-				throw game_data_error("Invalid player number: %i.", player_number);
+				throw GameDataError("Invalid player number: %i.", player_number);
 			}
 
 			if (!game.get_player(player_number)) {
@@ -57,7 +57,7 @@ void Game_Interactive_Player_Data_Packet::Read
 					if (game.get_player(player_number))
 						break;
 				if (player_number > max)
-					throw game_data_error("The game has no players!");
+					throw GameDataError("The game has no players!");
 			}
 			int32_t       const x             = fr.Unsigned16();
 			int32_t       const y             = fr.Unsigned16();
@@ -78,10 +78,10 @@ void Game_Interactive_Player_Data_Packet::Read
 				ipl->set_player_number(player_number);
 			}
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
-		throw game_data_error("interactive player: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("interactive player: %s", e.what());
 	}
 }
 

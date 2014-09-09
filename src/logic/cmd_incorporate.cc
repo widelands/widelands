@@ -38,13 +38,13 @@ void CmdIncorporate::Read
 			uint32_t const worker_serial = fr.Unsigned32();
 			try {
 				worker = &mol.get<Worker>(worker_serial);
-			} catch (const _wexception & e) {
+			} catch (const WException & e) {
 				throw wexception("worker %u: %s", worker_serial, e.what());
 			}
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
+	} catch (const WException & e) {
 		throw wexception("incorporate: %s", e.what());
 	}
 }

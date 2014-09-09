@@ -43,10 +43,10 @@ void CmdCalculateStatistics::Read
 		if (packet_version == CMD_CALCULATE_STATISTICS_VERSION) {
 			GameLogicCommand::Read(fr, egbase, mol);
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
-		throw game_data_error("calculate statistics function: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("calculate statistics function: %s", e.what());
 	}
 }
 void CmdCalculateStatistics::Write

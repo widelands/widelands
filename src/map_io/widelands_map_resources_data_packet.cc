@@ -59,7 +59,7 @@ void Map_Resources_Data_Packet::Read
 			const std::string resource_name = lookup_table.lookup_resource(fr.CString());
 			int32_t const res = world.get_resource(resource_name.c_str());
 			if (res == -1)
-				throw game_data_error
+				throw GameDataError
 					("resource '%s' exists in map but not in world", resource_name.c_str());
 			smap[id] = res;
 		}
@@ -90,7 +90,7 @@ void Map_Resources_Data_Packet::Read
 			}
 		}
 	} else
-		throw game_data_error
+		throw GameDataError
 			("Unknown version in Map_Resources_Data_Packet: %u", packet_version);
 }
 

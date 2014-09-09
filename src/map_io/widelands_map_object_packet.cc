@@ -57,7 +57,7 @@ void MapObjectPacket::Read
 
 		const uint8_t packet_version = fr.Unsigned8();
 		if (packet_version != CURRENT_PACKET_VERSION)
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
 
 		// Initial loading stage
@@ -98,10 +98,10 @@ void MapObjectPacket::Read
 				break;
 
 			default:
-				throw game_data_error("unknown object header %u", header);
+				throw GameDataError("unknown object header %u", header);
 			}
 	} catch (const std::exception & e) {
-		throw game_data_error("map objects: %s", e.what());
+		throw GameDataError("map objects: %s", e.what());
 	}
 }
 
@@ -155,7 +155,7 @@ void MapObjectPacket::Write
 			continue;
 
 		if (!obj.has_new_save_support())
-			throw game_data_error
+			throw GameDataError
 				("MO(%u of type %s) without new style save support not saved "
 				 "explicitly",
 				 obj.serial(), obj.descr().descname().c_str());

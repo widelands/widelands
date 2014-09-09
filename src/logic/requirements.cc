@@ -46,9 +46,9 @@ void Requirements::Read
 		if (packet_version == REQUIREMENTS_VERSION) {
 			*this = RequirementsStorage::read(fr, egbase, mol);
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
+	} catch (const WException & e) {
 		throw wexception("requirements: %s", e.what());
 	}
 }
@@ -97,7 +97,7 @@ Requirements RequirementsStorage::read
 	StorageMap::iterator it = s.find(id);
 
 	if (it == s.end())
-		throw game_data_error("unknown requirement id %u", id);
+		throw GameDataError("unknown requirement id %u", id);
 
 	return it->second->m_reader(fr, egbase, mol);
 }
@@ -235,7 +235,7 @@ static Requirements readAttribute
 		(at != atrHP && at != atrAttack && at != atrDefense && at != atrEvade
 		 &&
 		 at != atrTotal)
-		throw game_data_error
+		throw GameDataError
 			(
 			 "expected atrHP (%u), atrAttack (%u), atrDefense (%u), atrEvade "
 			 "(%u) or atrTotal (%u) but found unknown attribute value (%u)",

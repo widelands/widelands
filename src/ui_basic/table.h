@@ -90,7 +90,7 @@ public:
 
 	void select(uint32_t);
 	void move_selection(int32_t offset);
-	struct No_Selection : public std::exception {
+	struct NoSelection : public std::exception {
 		char const * what() const noexcept override {
 			return "UI::Table<Entry>: No selection";
 		}
@@ -218,20 +218,20 @@ public:
 
 	void select(uint32_t);
 	void move_selection(int32_t offset);
-	struct No_Selection : public std::exception {
+	struct NoSelection : public std::exception {
 		char const * what() const noexcept override {
 			return "UI::Table<void *>: No selection";
 		}
 	};
 	Entry_Record & get_selected_record() const {
 		if (m_selection == no_selection_index())
-			throw No_Selection();
+			throw NoSelection();
 		assert(m_selection < m_entry_records.size());
 		return *m_entry_records.at(m_selection);
 	}
 	void remove_selected() {
 		if (m_selection == no_selection_index())
-			throw No_Selection();
+			throw NoSelection();
 		remove(m_selection);
 	}
 	void * get_selected() const {return get_selected_record().entry();}

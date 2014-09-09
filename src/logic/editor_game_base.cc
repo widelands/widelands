@@ -114,7 +114,7 @@ World* Editor_Game_Base::mutable_world() {
 		try {
 			lua_->run_script("world/init.lua");
 		}
-		catch (const _wexception& e) {
+		catch (const WException& e) {
 			log("Could not read world information: %s", e.what());
 			throw;
 		}

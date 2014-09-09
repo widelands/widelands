@@ -43,7 +43,7 @@ void Map_Bob_Data_Packet::ReadBob(FileRead& fr,
 	Serial const serial = fr.Unsigned32();
 
 	if (subtype != kLegacyCritterType || owner != "world") {
-		throw game_data_error("unknown legacy bob %s/%s", owner.c_str(), read_name);
+		throw GameDataError("unknown legacy bob %s/%s", owner.c_str(), read_name);
 	}
 
 	const std::string name = lookup_table.lookup_critter(read_name);
@@ -51,7 +51,7 @@ void Map_Bob_Data_Packet::ReadBob(FileRead& fr,
 		const World& world = egbase.world();
 		int32_t const idx = world.get_bob(name.c_str());
 		if (idx == INVALID_INDEX)
-			throw game_data_error("world does not define bob type \"%s\"", name.c_str());
+			throw GameDataError("world does not define bob type \"%s\"", name.c_str());
 
 		const BobDescr& descr = *world.get_bob_descr(idx);
 		descr.create(egbase, nullptr, coords);
@@ -61,8 +61,8 @@ void Map_Bob_Data_Packet::ReadBob(FileRead& fr,
 		// properly saves all state. Critters when create()ed have a valid state
 		// already (starting to roam), so we do not need to load anything
 		// further.
-	} catch (const _wexception& e) {
-		throw game_data_error(
+	} catch (const WException& e) {
+		throw GameDataError(
 		   "%u (owner = \"%s\", name = \"%s\"): %s", serial, owner.c_str(), name.c_str(), e.what());
 	}
 }
@@ -87,9 +87,9 @@ void Map_Bob_Data_Packet::Read(FileSystem& fs,
 				}
 			}
 		else
-			throw game_data_error("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception& e) {
-		throw game_data_error("bobs: %s", e.what());
+			throw GameDataError("unknown/unhandled version %u", packet_version);
+	} catch (const WException& e) {
+		throw GameDataError("bobs: %s", e.what());
 	}
 }
 }

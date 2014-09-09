@@ -72,10 +72,10 @@ public:
 
 	///  Base of all exceptions that are caused by errors in the data that is
 	///  read.
-	struct _data_error : public _wexception {
-		_data_error(char const * const fmt, ...) PRINTF_FORMAT(2, 3);
+	struct DataError : public WException {
+		DataError(char const * const fmt, ...) PRINTF_FORMAT(2, 3);
 	};
-#define data_error(...) _data_error(__VA_ARGS__)
+#define data_error(...) DataError(__VA_ARGS__)
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(StreamRead);

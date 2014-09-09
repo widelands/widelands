@@ -49,7 +49,7 @@ void Game_Player_Info_Data_Packet::Read
 
 					int32_t const plnum = fr.Unsigned8();
 					if (plnum < 1 || MAX_PLAYERS < plnum)
-						throw game_data_error
+						throw GameDataError
 							("player number (%i) is out of range (1 .. %u)",
 							 plnum, MAX_PLAYERS);
 					Widelands::TeamNumber team = 0;
@@ -89,10 +89,10 @@ void Game_Player_Info_Data_Packet::Read
 			else
 				game.ReadStatistics(fr, 4);
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
-		throw game_data_error("player info: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("player info: %s", e.what());
 	}
 }
 

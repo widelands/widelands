@@ -427,13 +427,13 @@ MapObject::Loader* Critter::load(Editor_Game_Base& egbase,
 			}
 
 			if (!descr)
-				throw game_data_error
+				throw GameDataError
 					("undefined critter %s/%s", owner.c_str(), critter_name.c_str());
 
 			loader->init(egbase, mol, descr->create_object());
 			loader->load(fr);
 		} else
-			throw game_data_error("unknown/unhandled version %u", version);
+			throw GameDataError("unknown/unhandled version %u", version);
 	} catch (const std::exception & e) {
 		throw wexception("loading critter: %s", e.what());
 	}

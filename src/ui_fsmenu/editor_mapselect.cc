@@ -256,7 +256,7 @@ void Fullscreen_Menu_Editor_MapSelect::fill_list()
 					 name,
 					 g_gr->images().get
 						 (dynamic_cast<WL_Map_Loader*>(ml.get()) ? "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
-			} catch (const _wexception &) {} //  we simply skip illegal entries
+			} catch (const WException &) {} //  we simply skip illegal entries
 		}
 	}
 

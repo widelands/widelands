@@ -42,7 +42,7 @@ void Map_Allowed_Building_Types_Data_Packet::Read
 	Profile prof;
 	try {
 		prof.read("allowed_building_types", nullptr, fs);
-	} catch (const _wexception &) {
+	} catch (const WException &) {
 		try {
 			prof.read("allowed_buildings", nullptr, fs);
 		} catch (...) {
@@ -79,20 +79,20 @@ void Map_Allowed_Building_Types_Data_Packet::Read
 						if (index != INVALID_INDEX)
 							player->allow_building_type(index, allowed);
 						else
-							throw game_data_error
+							throw GameDataError
 								("tribe %s does not define building type \"%s\"",
 								 tribe.name().c_str(), name);
 					}
-				} catch (const _wexception & e) {
-					throw game_data_error
+				} catch (const WException & e) {
+					throw GameDataError
 						("player %u (%s): %s", p, tribe.name().c_str(), e.what());
 				}
 			}
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %i", packet_version);
-	} catch (const _wexception & e) {
-		throw game_data_error("allowed buildings: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("allowed buildings: %s", e.what());
 	}
 }
 

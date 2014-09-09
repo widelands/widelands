@@ -69,10 +69,10 @@ void Map_Version_Data_Packet::Read
 			uint32_t ts = static_cast<uint32_t>(globv.get_safe_int("map_version_timestamp"));
 			map.m_map_version.m_map_version_timestamp = ts;
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
-		throw game_data_error("version: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("version: %s", e.what());
 	}
 }
 

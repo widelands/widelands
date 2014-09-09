@@ -61,7 +61,7 @@ void Map_Scripting_Data_Packet::Read
 		const uint32_t sentinel = fr.Unsigned32();
 		const uint32_t packet_version = fr.Unsigned32();
 		if (sentinel != 0xDEADBEEF && packet_version != SCRIPTING_DATA_PACKET_VERSION) {
-			throw game_data_error(
+			throw GameDataError(
 			   "This savegame is from an older version of Widelands and can not be loaded any more.");
 		}
 		upcast(LuaGameInterface, lgi, &g->lua());

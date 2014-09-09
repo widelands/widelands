@@ -53,22 +53,22 @@ void MapObjectiveDataPacket::Read
 					std::unique_ptr<Objective> objective(new Objective(name));
 					Map::Objectives* objectives = egbase.map().mutable_objectives();
 					if (objectives->count(name)) {
-						throw game_data_error("duplicated");
+						throw GameDataError("duplicated");
 					}
 					objective->set_descname(s->get_string("name", name));
 					objective->set_descr(s->get_safe_string("descr"));
 					objective->set_visible(s->get_safe_bool("visible"));
 					objective->set_done(s->get_bool("done", false));
 					objectives->insert(std::make_pair(name, std::move(objective)));
-				} catch (const _wexception & e) {
-					throw game_data_error("%s: %s", name, e.what());
+				} catch (const WException & e) {
+					throw GameDataError("%s: %s", name, e.what());
 				}
 			}
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %i", packet_version);
-	} catch (const _wexception & e) {
-		throw game_data_error("Objectives: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("Objectives: %s", e.what());
 	}
 }
 
