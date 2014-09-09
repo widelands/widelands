@@ -27,15 +27,15 @@
 
 namespace Widelands {
 
-void Cmd_CalculateStatistics::execute (Game & game) {
+void CmdCalculateStatistics::execute (Game & game) {
 	game.sample_statistics();
 	game.enqueue_command
-		(new Cmd_CalculateStatistics
+		(new CmdCalculateStatistics
 		 (game.get_gametime() + STATISTICS_SAMPLE_TIME));
 }
 
 #define CMD_CALCULATE_STATISTICS_VERSION 1
-void Cmd_CalculateStatistics::Read
+void CmdCalculateStatistics::Read
 	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
@@ -49,7 +49,7 @@ void Cmd_CalculateStatistics::Read
 		throw game_data_error("calculate statistics function: %s", e.what());
 	}
 }
-void Cmd_CalculateStatistics::Write
+void CmdCalculateStatistics::Write
 	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(CMD_CALCULATE_STATISTICS_VERSION);

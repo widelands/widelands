@@ -204,7 +204,7 @@ struct ProductionProgram {
 		};
 
 		typedef std::vector<Condition *> Conditions;
-		Program_Result m_result;
+		ProgramResult m_result;
 		bool       m_is_when; //  otherwise it is "unless"
 		Conditions m_conditions;
 	};
@@ -245,7 +245,7 @@ struct ProductionProgram {
 		void execute(Game &, ProductionSite &) const override;
 	private:
 		ProductionProgram             * m_program;
-		Program_Result_Handling_Method m_handling_methods[3];
+		ProgramResultHandlingMethod m_handling_methods[3];
 	};
 
 	/// Calls a program of the productionsite's main worker.

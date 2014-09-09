@@ -629,7 +629,7 @@ ProductionProgram::ActCall::ActCall
 			match_force_skip(parameters, "on");
 			log("found \"on \": parameters = \"%s\"\n", parameters);
 
-			Program_Result result_to_set_method_for;
+			ProgramResult result_to_set_method_for;
 			if        (match_force_skip(parameters, "failure"))    {
 				if (m_handling_methods[Failed    - 1] != Continue)
 					throw game_data_error
@@ -650,7 +650,7 @@ ProductionProgram::ActCall::ActCall
 					("expected %s but found \"%s\"",
 					 "{\"failure\"|\"completion\"|\"skip\"}", parameters);
 
-			Program_Result_Handling_Method handling_method;
+			ProgramResultHandlingMethod handling_method;
 			if      (match(parameters, "fail"))
 				handling_method = Fail;
 			else if (match(parameters, "complete"))
@@ -680,8 +680,8 @@ ProductionProgram::ActCall::ActCall
 void ProductionProgram::ActCall::execute
 	(Game & game, ProductionSite & ps) const
 {
-	Program_Result const program_result =
-		static_cast<Program_Result>(ps.top_state().phase);
+	ProgramResult const program_result =
+		static_cast<ProgramResult>(ps.top_state().phase);
 
 	if (program_result == None) //  The program has not yet been called.
 		//ps.molog("%s  Call %s\n", ps.descname().c_str(),

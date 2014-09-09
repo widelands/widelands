@@ -28,7 +28,7 @@
 
 namespace Widelands {
 
-void Cmd_Incorporate::Read
+void CmdIncorporate::Read
 	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
@@ -50,7 +50,7 @@ void Cmd_Incorporate::Read
 }
 
 
-void Cmd_Incorporate::Write
+void CmdIncorporate::Write
 	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version

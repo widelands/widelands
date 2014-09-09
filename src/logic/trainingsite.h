@@ -165,7 +165,7 @@ public:
 protected:
 	virtual void create_options_window
 		(Interactive_GameBase &, UI::Window * & registry) override;
-	void program_end(Game &, Program_Result) override;
+	void program_end(Game &, ProgramResult) override;
 
 private:
 	void update_soldier_request();
@@ -202,7 +202,7 @@ private:
 	std::vector<Upgrade> m_upgrades;
 	Upgrade * m_current_upgrade;
 
-	Program_Result m_result; /// The result of the last training program.
+	ProgramResult m_result; /// The result of the last training program.
 
 	// These are used for kicking out soldiers prematurely
 	static const uint32_t training_state_multiplier;

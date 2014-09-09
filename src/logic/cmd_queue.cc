@@ -36,13 +36,13 @@ namespace Widelands {
 //
 // class Cmd_Queue
 //
-Cmd_Queue::Cmd_Queue(Game & game) :
+CmdQueue::CmdQueue(Game & game) :
 	m_game(game),
 	nextserial(0),
 	m_ncmds(0),
 	m_cmds(CMD_QUEUE_BUCKET_SIZE, std::priority_queue<cmditem>()) {}
 
-Cmd_Queue::~Cmd_Queue()
+CmdQueue::~CmdQueue()
 {
 	flush();
 }
@@ -53,7 +53,7 @@ Cmd_Queue::~Cmd_Queue()
  */
 // TODO(unknown): ...but game loading while in game is not possible!
 // Note: Order of destruction of Items is not guaranteed
-void Cmd_Queue::flush() {
+void CmdQueue::flush() {
 	uint32_t cbucket = 0;
 	while (m_ncmds && cbucket < CMD_QUEUE_BUCKET_SIZE) {
 		std::priority_queue<cmditem> & current_cmds = m_cmds[cbucket];
@@ -74,7 +74,7 @@ void Cmd_Queue::flush() {
 Insert a new command into the queue; it will be executed at the given time
 ===============
 */
-void Cmd_Queue::enqueue (Command * const cmd)
+void CmdQueue::enqueue (Command * const cmd)
 {
 	cmditem ci;
 
@@ -98,7 +98,7 @@ void Cmd_Queue::enqueue (Command * const cmd)
 	++ m_ncmds;
 }
 
-int32_t Cmd_Queue::run_queue(int32_t const interval, int32_t & game_time_var) {
+int32_t CmdQueue::run_queue(int32_t const interval, int32_t & game_time_var) {
 	int32_t const final = game_time_var + interval;
 	int32_t cnt = 0;
 

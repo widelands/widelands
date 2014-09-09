@@ -241,7 +241,7 @@ protected:
 	void program_step(Game &, uint32_t delay = 10, uint32_t phase = 0);
 
 	void program_start(Game &, const std::string & program_name);
-	virtual void program_end(Game &, Program_Result);
+	virtual void program_end(Game &, ProgramResult);
 	virtual void train_workers(Game &);
 
 	void calc_statistics();

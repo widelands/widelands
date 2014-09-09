@@ -29,7 +29,7 @@
 
 namespace Widelands {
 
-void Cmd_LuaScript::execute (Game & game) {
+void CmdLuaScript::execute (Game & game) {
 	log("Trying to run: %s: ", script_.c_str());
 	try {
 		game.lua().run_script(script_);
@@ -45,7 +45,7 @@ void Cmd_LuaScript::execute (Game & game) {
 }
 
 #define CMD_LUASCRIPT_VERSION 1
-void Cmd_LuaScript::Read
+void CmdLuaScript::Read
 	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
@@ -60,7 +60,7 @@ void Cmd_LuaScript::Read
 		throw game_data_error("lua: %s", e.what());
 	}
 }
-void Cmd_LuaScript::Write
+void CmdLuaScript::Write
 	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(CMD_LUASCRIPT_VERSION);

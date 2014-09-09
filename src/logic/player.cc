@@ -208,7 +208,7 @@ void Player::create_default_infrastructure() {
 		table->do_not_warn_about_unaccessed_keys();
 		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
 		cr->push_arg(this);
-		game.enqueue_command(new Cmd_LuaCoroutine(game.get_gametime(), cr.release()));
+		game.enqueue_command(new CmdLuaCoroutine(game.get_gametime(), cr.release()));
 
 		// Check if other starting positions are shared in and initialize them as well
 		for (uint8_t n = 0; n < m_further_shared_in_player.size(); ++n) {
@@ -221,7 +221,7 @@ void Player::create_default_infrastructure() {
 					->get_coroutine("func");
 			ncr->push_arg(this);
 			ncr->push_arg(further_pos);
-			game.enqueue_command(new Cmd_LuaCoroutine(game.get_gametime(), ncr.release()));
+			game.enqueue_command(new CmdLuaCoroutine(game.get_gametime(), ncr.release()));
 		}
 	} else
 		throw warning
@@ -314,7 +314,7 @@ Message_Id Player::add_message
 	Duration const duration = message.duration();
 	if (duration != Forever()) {
 		game.cmdqueue().enqueue
-			(new Cmd_ExpireMessage
+			(new CmdExpireMessage
 			 	(game.get_gametime() + duration, player_number(), id));
 	}
 
@@ -366,7 +366,7 @@ void Player::message_object_removed(Message_Id m_id) const
 	}
 
 	game->cmdqueue().enqueue
-		(new Cmd_ExpireMessage
+		(new CmdExpireMessage
 			(game->get_gametime(), m_plnum, m_id));
 }
 

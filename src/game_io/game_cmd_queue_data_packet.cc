@@ -40,7 +40,7 @@ void Game_Cmd_Queue_Data_Packet::Read
 		fr.Open(fs, "binary/cmd_queue");
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CURRENT_PACKET_VERSION) {
-			Cmd_Queue & cmdq = game.cmdqueue();
+			CmdQueue & cmdq = game.cmdqueue();
 
 			// nothing to be done for m_game
 
@@ -56,7 +56,7 @@ void Game_Cmd_Queue_Data_Packet::Read
 				if (!packet_id)
 					break;
 
-				Cmd_Queue::cmditem item;
+				CmdQueue::cmditem item;
 				item.category = fr.Signed32();
 				item.serial = fr.Unsigned32();
 
@@ -71,7 +71,7 @@ void Game_Cmd_Queue_Data_Packet::Read
 				}
 
 				GameLogicCommand & cmd =
-					Queue_Cmd_Factory::create_correct_queue_command(packet_id);
+					QueueCmdFactory::create_correct_queue_command(packet_id);
 				cmd.Read(fr, game, *ol);
 
 				item.cmd = &cmd;
@@ -96,7 +96,7 @@ void Game_Cmd_Queue_Data_Packet::Write
 	// Now packet version
 	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-	const Cmd_Queue & cmdq = game.cmdqueue();
+	const CmdQueue & cmdq = game.cmdqueue();
 
 	// nothing to be done for m_game
 
@@ -111,10 +111,10 @@ void Game_Cmd_Queue_Data_Packet::Write
 
 	while (nhandled < cmdq.m_ncmds) {
 		// Make a copy, so we can pop stuff
-		std::priority_queue<Cmd_Queue::cmditem> p = cmdq.m_cmds[time % CMD_QUEUE_BUCKET_SIZE];
+		std::priority_queue<CmdQueue::cmditem> p = cmdq.m_cmds[time % CMD_QUEUE_BUCKET_SIZE];
 
 		while (!p.empty()) {
-			const Cmd_Queue::cmditem & it = p.top();
+			const CmdQueue::cmditem & it = p.top();
 			if (it.cmd->duetime() == time) {
 				if (upcast(GameLogicCommand, cmd, it.cmd)) {
 					// The id (aka command type)

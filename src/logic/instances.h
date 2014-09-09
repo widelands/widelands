@@ -477,9 +477,9 @@ private:
 	Serial obj_serial;
 };
 
-struct Cmd_Act : public GameLogicCommand {
-	Cmd_Act() : GameLogicCommand(0), obj_serial(0), arg(0) {} ///< For savegame loading
-	Cmd_Act (int32_t t, MapObject &, int32_t a);
+struct CmdAct : public GameLogicCommand {
+	CmdAct() : GameLogicCommand(0), obj_serial(0), arg(0) {} ///< For savegame loading
+	CmdAct (int32_t t, MapObject &, int32_t a);
 
 	void execute (Game &) override;
 

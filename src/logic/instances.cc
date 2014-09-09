@@ -86,12 +86,12 @@ void CmdDestroyMapObject::Write
 	fw.Unsigned32(mos.get_object_file_index_or_zero(egbase.objects().get_object(obj_serial)));
 }
 
-Cmd_Act::Cmd_Act(int32_t const t, MapObject & o, int32_t const a) :
+CmdAct::CmdAct(int32_t const t, MapObject & o, int32_t const a) :
 	GameLogicCommand(t), obj_serial(o.serial()), arg(a)
 {}
 
 
-void Cmd_Act::execute(Game & game)
+void CmdAct::execute(Game & game)
 {
 	game.syncstream().Unsigned32(obj_serial);
 
@@ -101,7 +101,7 @@ void Cmd_Act::execute(Game & game)
 }
 
 #define CMD_ACT_VERSION 1
-void Cmd_Act::Read
+void CmdAct::Read
 	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
@@ -125,7 +125,7 @@ void Cmd_Act::Read
 		throw wexception("act: %s", e.what());
 	}
 }
-void Cmd_Act::Write
+void CmdAct::Write
 	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	// First, write version
@@ -434,7 +434,7 @@ uint32_t MapObject::schedule_act
 	if (tdelta < Forever()) {
 		uint32_t const time = game.get_gametime() + tdelta;
 
-		game.cmdqueue().enqueue (new Cmd_Act(time, *this, data));
+		game.cmdqueue().enqueue (new CmdAct(time, *this, data));
 
 		return time;
 	} else

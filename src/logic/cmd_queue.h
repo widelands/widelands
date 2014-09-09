@@ -116,7 +116,7 @@ struct GameLogicCommand : public Command {
 		(FileRead  &, Editor_Game_Base &, MapMapObjectLoader &);
 };
 
-class Cmd_Queue {
+class CmdQueue {
 	friend struct Game_Cmd_Queue_Data_Packet;
 
 	enum {
@@ -148,8 +148,8 @@ class Cmd_Queue {
 	};
 
 public:
-	Cmd_Queue(Game &);
-	~Cmd_Queue();
+	CmdQueue(Game &);
+	~CmdQueue();
 
 	/// Add a command to the queue. Takes ownership.
 	void enqueue (Command *);

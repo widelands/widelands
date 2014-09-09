@@ -48,9 +48,9 @@ enum {
 #define SYNC_INTERVAL 200
 
 
-class Cmd_ReplaySyncRead : public Command {
+class CmdReplaySyncRead : public Command {
 public:
-	Cmd_ReplaySyncRead(const uint32_t _duetime, const md5_checksum & hash)
+	CmdReplaySyncRead(const uint32_t _duetime, const md5_checksum & hash)
 		: Command(_duetime), m_hash(hash)
 	{}
 
@@ -167,7 +167,7 @@ Command * ReplayReader::GetNextCommand(const uint32_t time)
 			md5_checksum hash;
 			m_cmdlog->Data(hash.data, sizeof(hash.data));
 
-			return new Cmd_ReplaySyncRead(duetime, hash);
+			return new CmdReplaySyncRead(duetime, hash);
 		}
 
 		case pkt_end: {
@@ -204,9 +204,9 @@ bool ReplayReader::EndOfReplay()
  * Command / timer that regularly inserts synchronization hashes into
  * the replay.
  */
-class Cmd_ReplaySyncWrite : public Command {
+class CmdReplaySyncWrite : public Command {
 public:
-	Cmd_ReplaySyncWrite(const uint32_t _duetime) : Command(_duetime) {}
+	CmdReplaySyncWrite(const uint32_t _duetime) : Command(_duetime) {}
 
 	uint8_t id() const override {return QUEUE_CMD_REPLAYSYNCWRITE;}
 
@@ -215,7 +215,7 @@ public:
 			rw->SendSync (game.get_sync_hash());
 
 			game.enqueue_command
-				(new Cmd_ReplaySyncWrite(duetime() + SYNC_INTERVAL));
+				(new CmdReplaySyncWrite(duetime() + SYNC_INTERVAL));
 		}
 	}
 };
@@ -248,7 +248,7 @@ ReplayWriter::ReplayWriter(Game & game, const std::string & filename)
 	log("Done reloading the game from replay\n");
 
 	game.enqueue_command
-		(new Cmd_ReplaySyncWrite(game.get_gametime() + SYNC_INTERVAL));
+		(new CmdReplaySyncWrite(game.get_gametime() + SYNC_INTERVAL));
 
 	m_cmdlog = g_fs->OpenStreamWrite(filename);
 	m_cmdlog->Unsigned32(REPLAY_MAGIC);

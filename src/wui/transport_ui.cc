@@ -166,7 +166,7 @@ private:
 						Widelands::Player & player = m_economy.owner();
 						Game & game = ref_cast<Game, Editor_Game_Base>(player.egbase());
 						game.send_player_command
-							(*new Widelands::Cmd_SetWareTargetQuantity
+							(*new Widelands::CmdSetWareTargetQuantity
 								(game.get_gametime(), player.player_number(),
 								 player.get_economy_number(&m_economy), id,
 								 tq.permanent - 1));
@@ -188,7 +188,7 @@ private:
 					Widelands::Player & player = m_economy.owner();
 					Game & game = ref_cast<Game, Editor_Game_Base>(player.egbase());
 					game.send_player_command
-						(*new Widelands::Cmd_SetWareTargetQuantity
+						(*new Widelands::CmdSetWareTargetQuantity
 							(game.get_gametime(), player.player_number(),
 							 player.get_economy_number(&m_economy), id,
 							 tq.permanent + 1));
@@ -207,7 +207,7 @@ private:
 					Widelands::Player & player = m_economy.owner();
 					Game & game = ref_cast<Game, Editor_Game_Base>(player.egbase());
 					game.send_player_command
-						(*new Widelands::Cmd_ResetWareTargetQuantity
+						(*new Widelands::CmdResetWareTargetQuantity
 							(game.get_gametime(), player.player_number(),
 							 player.get_economy_number(&m_economy), id));
 				}
@@ -263,7 +263,7 @@ private:
 						Widelands::Player & player = m_economy.owner();
 						Game & game = ref_cast<Game, Editor_Game_Base>(player.egbase());
 						game.send_player_command
-							(*new Widelands::Cmd_SetWorkerTargetQuantity
+							(*new Widelands::CmdSetWorkerTargetQuantity
 								(game.get_gametime(), player.player_number(),
 								 player.get_economy_number(&m_economy), id,
 								 tq.permanent - 1));
@@ -285,7 +285,7 @@ private:
 					Widelands::Player & player = m_economy.owner();
 					Game & game = ref_cast<Game, Editor_Game_Base>(player.egbase());
 					game.send_player_command
-						(*new Widelands::Cmd_SetWorkerTargetQuantity
+						(*new Widelands::CmdSetWorkerTargetQuantity
 							(game.get_gametime(), player.player_number(),
 							 player.get_economy_number(&m_economy), id,
 							 tq.permanent + 1));
@@ -303,7 +303,7 @@ private:
 					Widelands::Player & player = m_economy.owner();
 					Game & game = ref_cast<Game, Editor_Game_Base>(player.egbase());
 					game.send_player_command
-						(*new Widelands::Cmd_ResetWorkerTargetQuantity
+						(*new Widelands::CmdResetWorkerTargetQuantity
 							(game.get_gametime(), player.player_number(),
 							 player.get_economy_number(&m_economy), id));
 				}

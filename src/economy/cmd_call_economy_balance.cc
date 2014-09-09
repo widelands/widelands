@@ -30,7 +30,7 @@
 
 namespace Widelands {
 
-Cmd_Call_Economy_Balance::Cmd_Call_Economy_Balance
+CmdCallEconomyBalance::CmdCallEconomyBalance
 	(int32_t const starttime, Economy * const economy, uint32_t const timerid)
 	: GameLogicCommand(starttime)
 {
@@ -42,7 +42,7 @@ Cmd_Call_Economy_Balance::Cmd_Call_Economy_Balance
  * Called by Cmd_Queue as requested by start_request_timer().
  * Call economy functions to balance supply and request.
  */
-void Cmd_Call_Economy_Balance::execute(Game & game)
+void CmdCallEconomyBalance::execute(Game & game)
 {
 	if (Flag * const flag = m_flag.get(game))
 		flag->get_economy()->balance(m_timerid);
@@ -53,7 +53,7 @@ void Cmd_Call_Economy_Balance::execute(Game & game)
 /**
  * Read and write
  */
-void Cmd_Call_Economy_Balance::Read
+void CmdCallEconomyBalance::Read
 	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
 {
 	try {
@@ -90,7 +90,7 @@ void Cmd_Call_Economy_Balance::Read
 		throw wexception("call economy balance: %s", e.what());
 	}
 }
-void Cmd_Call_Economy_Balance::Write
+void CmdCallEconomyBalance::Write
 	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(CURRENT_CMD_CALL_ECONOMY_VERSION);

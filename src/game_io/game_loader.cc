@@ -107,7 +107,7 @@ int32_t Game_Loader::load_game(bool const multiplayer) {
 			Duration const duration = m->duration();
 			if (duration != Forever()) {
 				m_game.cmdqueue().enqueue
-					(new Cmd_ExpireMessage
+					(new CmdExpireMessage
 					 	(m->sent() + duration, p, m_id));
 			}
 			// Renew MapObject connections

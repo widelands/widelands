@@ -546,7 +546,7 @@ void TrainingSite::act(Game & game, uint32_t const data)
 }
 
 
-void TrainingSite::program_end(Game & game, Program_Result const result)
+void TrainingSite::program_end(Game & game, ProgramResult const result)
 {
 	m_result = result;
 	ProductionSite::program_end(game, result);

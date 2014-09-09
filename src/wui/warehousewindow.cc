@@ -157,7 +157,7 @@ void WarehouseWaresPanel::set_policy(Warehouse::StockPolicy newpolicy) {
 		{
 			if (m_display.ware_selected(id)) {
 				m_gb.game().send_player_command
-					(*new Widelands::Cmd_SetStockPolicy
+					(*new Widelands::CmdSetStockPolicy
 						(m_gb.game().get_gametime(),
 						 m_wh.owner().player_number(),
 						 m_wh, is_workers,

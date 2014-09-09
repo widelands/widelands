@@ -1241,7 +1241,7 @@ WareInstance * Worker::fetch_carried_ware(Editor_Game_Base & game)
  */
 void Worker::schedule_incorporate(Game & game)
 {
-	game.cmdqueue().enqueue (new Cmd_Incorporate(game.get_gametime(), this));
+	game.cmdqueue().enqueue (new CmdIncorporate(game.get_gametime(), this));
 	return skip_act();
 }
 

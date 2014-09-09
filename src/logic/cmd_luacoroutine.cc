@@ -32,12 +32,12 @@
 
 namespace Widelands {
 
-void Cmd_LuaCoroutine::execute (Game & game) {
+void CmdLuaCoroutine::execute (Game & game) {
 	try {
 		int rv = m_cr->resume();
 		const uint32_t sleeptime = m_cr->pop_uint32();
 		if (rv == LuaCoroutine::YIELDED) {
-			game.enqueue_command(new Widelands::Cmd_LuaCoroutine(sleeptime, m_cr));
+			game.enqueue_command(new Widelands::CmdLuaCoroutine(sleeptime, m_cr));
 			m_cr = nullptr;  // Remove our ownership so we don't delete.
 		} else if (rv == LuaCoroutine::DONE) {
 			delete m_cr;
@@ -59,7 +59,7 @@ void Cmd_LuaCoroutine::execute (Game & game) {
 }
 
 #define CMD_LUACOROUTINE_VERSION 3
-void Cmd_LuaCoroutine::Read(FileRead& fr, Editor_Game_Base& egbase, MapMapObjectLoader& mol) {
+void CmdLuaCoroutine::Read(FileRead& fr, Editor_Game_Base& egbase, MapMapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CMD_LUACOROUTINE_VERSION) {
@@ -78,7 +78,7 @@ void Cmd_LuaCoroutine::Read(FileRead& fr, Editor_Game_Base& egbase, MapMapObject
 		throw game_data_error("lua function: %s", e.what());
 	}
 }
-void Cmd_LuaCoroutine::Write
+void CmdLuaCoroutine::Write
 	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
 {
 	fw.Unsigned16(CMD_LUACOROUTINE_VERSION);

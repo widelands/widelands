@@ -333,7 +333,7 @@ void Game::init_newgame
 		table->do_not_warn_about_unaccessed_keys();
 		m_win_condition_displayname = table->get_string("name");
 		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
-		enqueue_command(new Cmd_LuaCoroutine(get_gametime() + 100, cr.release()));
+		enqueue_command(new CmdLuaCoroutine(get_gametime() + 100, cr.release()));
 	} else {
 		m_win_condition_displayname = _("Scenario");
 	}
@@ -513,17 +513,17 @@ bool Game::run
 
 		// Run the init script, if the map provides one.
 		if (start_game_type == NewSPScenario)
-			enqueue_command(new Cmd_LuaScript(get_gametime(), "map:scripting/init.lua"));
+			enqueue_command(new CmdLuaScript(get_gametime(), "map:scripting/init.lua"));
 		else if (start_game_type == NewMPScenario)
 			enqueue_command
-				(new Cmd_LuaScript(get_gametime(), "map:scripting/multiplayer_init.lua"));
+				(new CmdLuaScript(get_gametime(), "map:scripting/multiplayer_init.lua"));
 
 		// Queue first statistics calculation
-		enqueue_command(new Cmd_CalculateStatistics(get_gametime() + 1));
+		enqueue_command(new CmdCalculateStatistics(get_gametime() + 1));
 	}
 
 	if (!script_to_run.empty() && (start_game_type == NewSPScenario || start_game_type == Loaded)) {
-		enqueue_command(new Cmd_LuaScript(get_gametime() + 1, script_to_run));
+		enqueue_command(new CmdLuaScript(get_gametime() + 1, script_to_run));
 	}
 
 	if (m_writereplay || m_writesyncstream) {
@@ -733,14 +733,14 @@ void Game::enqueue_command (Command * const cmd)
 void Game::send_player_bulldoze (PlayerImmovable & pi, bool const recurse)
 {
 	send_player_command
-		(*new Cmd_Bulldoze
+		(*new CmdBulldoze
 		 	(get_gametime(), pi.owner().player_number(), pi, recurse));
 }
 
 void Game::send_player_dismantle (PlayerImmovable & pi)
 {
 	send_player_command
-		(*new Cmd_DismantleBuilding
+		(*new CmdDismantleBuilding
 		 	(get_gametime(), pi.owner().player_number(), pi));
 }
 
@@ -749,44 +749,44 @@ void Game::send_player_build
 	(int32_t const pid, Coords const coords, Building_Index const id)
 {
 	assert(id != INVALID_INDEX);
-	send_player_command (*new Cmd_Build(get_gametime(), pid, coords, id));
+	send_player_command (*new CmdBuild(get_gametime(), pid, coords, id));
 }
 
 void Game::send_player_build_flag (int32_t const pid, Coords const coords)
 {
-	send_player_command (*new Cmd_BuildFlag(get_gametime(), pid, coords));
+	send_player_command (*new CmdBuildFlag(get_gametime(), pid, coords));
 }
 
 void Game::send_player_build_road (int32_t pid, Path & path)
 {
-	send_player_command (*new Cmd_BuildRoad(get_gametime(), pid, path));
+	send_player_command (*new CmdBuildRoad(get_gametime(), pid, path));
 }
 
 void Game::send_player_flagaction (Flag & flag)
 {
 	send_player_command
-		(*new Cmd_FlagAction
+		(*new CmdFlagAction
 		 	(get_gametime(), flag.owner().player_number(), flag));
 }
 
 void Game::send_player_start_stop_building (Building & building)
 {
 	send_player_command
-		(*new Cmd_StartStopBuilding
+		(*new CmdStartStopBuilding
 		 	(get_gametime(), building.owner().player_number(), building));
 }
 
 void Game::send_player_militarysite_set_soldier_preference (Building & building, uint8_t my_preference)
 {
 	send_player_command
-		(*new Cmd_MilitarySiteSetSoldierPreference
+		(*new CmdMilitarySiteSetSoldierPreference
 		 (get_gametime(), building.owner().player_number(), building, my_preference));
 }
 
 void Game::send_player_start_or_cancel_expedition (Building & building)
 {
 	send_player_command
-		(*new Cmd_StartOrCancelExpedition
+		(*new CmdStartOrCancelExpedition
 		 	(get_gametime(), building.owner().player_number(), building));
 }
 
@@ -796,14 +796,14 @@ void Game::send_player_enhance_building
 	assert(id != INVALID_INDEX);
 
 	send_player_command
-		(*new Cmd_EnhanceBuilding
+		(*new CmdEnhanceBuilding
 		 	(get_gametime(), building.owner().player_number(), building, id));
 }
 
 void Game::send_player_evict_worker(Worker & worker)
 {
 	send_player_command
-		(*new Cmd_EvictWorker
+		(*new CmdEvictWorker
 			(get_gametime(), worker.owner().player_number(), worker));
 }
 
@@ -814,7 +814,7 @@ void Game::send_player_set_ware_priority
 	 int32_t           const prio)
 {
 	send_player_command
-		(*new Cmd_SetWarePriority
+		(*new CmdSetWarePriority
 		 	(get_gametime(),
 		 	 imm.owner().player_number(),
 		 	 imm,
@@ -829,7 +829,7 @@ void Game::send_player_set_ware_max_fill
 	 uint32_t          const max_fill)
 {
 	send_player_command
-		(*new Cmd_SetWareMaxFill
+		(*new CmdSetWareMaxFill
 		 	(get_gametime(),
 		 	 imm.owner().player_number(),
 		 	 imm,
@@ -842,7 +842,7 @@ void Game::send_player_change_training_options
 	(TrainingSite & ts, int32_t const atr, int32_t const val)
 {
 	send_player_command
-		(*new Cmd_ChangeTrainingOptions
+		(*new CmdChangeTrainingOptions
 		 	(get_gametime(), ts.owner().player_number(), ts, atr, val));
 }
 
@@ -850,7 +850,7 @@ void Game::send_player_drop_soldier (Building & b, int32_t const ser)
 {
 	assert(ser != -1);
 	send_player_command
-		(*new Cmd_DropSoldier
+		(*new CmdDropSoldier
 		 	(get_gametime(), b.owner().player_number(), b, ser));
 }
 
@@ -858,7 +858,7 @@ void Game::send_player_change_soldier_capacity
 	(Building & b, int32_t const val)
 {
 	send_player_command
-		(*new Cmd_ChangeSoldierCapacity
+		(*new CmdChangeSoldierCapacity
 		 	(get_gametime(), b.owner().player_number(), b, val));
 }
 
@@ -875,7 +875,7 @@ void Game::send_player_enemyflagaction
 		 	(Map::get_index
 		 	 	(flag.get_building()->get_position(), map().get_width())))
 		send_player_command
-			(*new Cmd_EnemyFlagAction
+			(*new CmdEnemyFlagAction
 			 	(get_gametime(), who_attacks, flag, num_soldiers));
 }
 
@@ -883,33 +883,33 @@ void Game::send_player_enemyflagaction
 void Game::send_player_ship_scout_direction(Ship & ship, uint8_t direction)
 {
 	send_player_command
-		(*new Cmd_ShipScoutDirection
+		(*new CmdShipScoutDirection
 			(get_gametime(), ship.get_owner()->player_number(), ship.serial(), direction));
 }
 
 void Game::send_player_ship_construct_port(Ship & ship, Coords coords)
 {
 	send_player_command
-		(*new Cmd_ShipConstructPort
+		(*new CmdShipConstructPort
 			(get_gametime(), ship.get_owner()->player_number(), ship.serial(), coords));
 }
 
 void Game::send_player_ship_explore_island(Ship & ship, bool cw)
 {
 	send_player_command
-		(*new Cmd_ShipExploreIsland
+		(*new CmdShipExploreIsland
 			(get_gametime(), ship.get_owner()->player_number(), ship.serial(), cw));
 }
 
 void Game::send_player_sink_ship(Ship & ship) {
 	send_player_command
-		(*new Cmd_ShipSink
+		(*new CmdShipSink
 			(get_gametime(), ship.get_owner()->player_number(), ship.serial()));
 }
 
 void Game::send_player_cancel_expedition_ship(Ship & ship) {
 	send_player_command
-		(*new Cmd_ShipCancelExpedition
+		(*new CmdShipCancelExpedition
 			(get_gametime(), ship.get_owner()->player_number(), ship.serial()));
 }
 

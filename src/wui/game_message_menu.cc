@@ -221,7 +221,7 @@ void GameMessageMenu::selected(uint32_t const t) {
 			if (message->status() == Message::New) {
 				Widelands::Game & game = iplayer().game();
 				game.send_player_command
-					(*new Widelands::Cmd_MessageSetStatusRead
+					(*new Widelands::CmdMessageSetStatusRead
 					 	(game.get_gametime(), player.player_number(), id));
 			}
 			m_centerviewbtn->set_enabled(message->position());
@@ -284,7 +284,7 @@ void GameMessageMenu::archive_or_restore()
 			{
 				work_done = true;
 				game.send_player_command
-					(*new Widelands::Cmd_MessageSetStatusArchived
+					(*new Widelands::CmdMessageSetStatusArchived
 					 	(gametime, plnum, Message_Id((*list)[i])));
 			}
 
@@ -293,7 +293,7 @@ void GameMessageMenu::archive_or_restore()
 			if (!list->has_selection()) return;
 
 			game.send_player_command
-				(*new Widelands::Cmd_MessageSetStatusArchived
+				(*new Widelands::CmdMessageSetStatusArchived
 					(gametime, plnum, Message_Id(list->get_selected())));
 		}
 		break;
@@ -304,7 +304,7 @@ void GameMessageMenu::archive_or_restore()
 			{
 				work_done = true;
 				game.send_player_command
-					(*new Widelands::Cmd_MessageSetStatusRead
+					(*new Widelands::CmdMessageSetStatusRead
 					 	(gametime, plnum, Message_Id((*list)[i])));
 			}
 
@@ -313,7 +313,7 @@ void GameMessageMenu::archive_or_restore()
 			if (!list->has_selection()) return;
 
 			game.send_player_command
-				(*new Widelands::Cmd_MessageSetStatusRead
+				(*new Widelands::CmdMessageSetStatusRead
 					(gametime, plnum, Message_Id(list->get_selected())));
 		}
 		break;

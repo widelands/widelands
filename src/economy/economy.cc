@@ -613,7 +613,7 @@ void Economy::_start_request_timer(int32_t const delta)
 {
 	if (upcast(Game, game, &m_owner.egbase()))
 		game->cmdqueue().enqueue
-			(new Cmd_Call_Economy_Balance
+			(new CmdCallEconomyBalance
 			 	(game->get_gametime() + delta, this, m_request_timerid));
 }
 

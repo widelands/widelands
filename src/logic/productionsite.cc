@@ -859,7 +859,7 @@ void ProductionSite::program_start
  * \pre Any program is running
  * \post No program is running, acting is scheduled
  */
-void ProductionSite::program_end(Game & game, Program_Result const result)
+void ProductionSite::program_end(Game & game, ProgramResult const result)
 {
 	assert(m_stack.size());
 

@@ -35,8 +35,8 @@ namespace Widelands {
 /// command and then when loading, checking that one exists for each message
 /// and if not, warn and recreate it. Such redundancy would also waste space in
 /// the savegame.
-struct Cmd_ExpireMessage : public Command {
-	Cmd_ExpireMessage
+struct CmdExpireMessage : public Command {
+	CmdExpireMessage
 		(int32_t const t, Player_Number const p, Message_Id const m)
 		: Command(t), player(p), message(m)
 	{}

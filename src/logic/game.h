@@ -86,7 +86,7 @@ public:
 	};
 	typedef std::vector<General_Stats> General_Stats_vector;
 
-	friend class Cmd_Queue; // this class handles the commands
+	friend class CmdQueue; // this class handles the commands
 	friend struct Game_Game_Class_Data_Packet;
 	friend struct Game_Player_Info_Data_Packet;
 	friend struct Game_Loader;
@@ -133,8 +133,8 @@ public:
 	void cleanup_for_load() override;
 
 	// in-game logic
-	const Cmd_Queue & cmdqueue() const {return m_cmdqueue;}
-	Cmd_Queue       & cmdqueue()       {return m_cmdqueue;}
+	const CmdQueue & cmdqueue() const {return m_cmdqueue;}
+	CmdQueue       & cmdqueue()       {return m_cmdqueue;}
 	const RNG       & rng     () const {return m_rng;}
 	RNG             & rng     ()       {return m_rng;}
 
@@ -253,7 +253,7 @@ private:
 
 	RNG                  m_rng;
 
-	Cmd_Queue            m_cmdqueue;
+	CmdQueue            m_cmdqueue;
 
 	SaveHandler          m_savehandler;
 
