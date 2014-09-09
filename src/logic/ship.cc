@@ -914,8 +914,7 @@ void Ship::send_message
 	rt_description += "</p></rt>";
 
 	Message * msg = new Message
-		(msgsender, game.get_gametime(), 60 * 60 * 1000,
-		 title, rt_description, get_position(), m_serial);
+		(msgsender, game.get_gametime(), title, rt_description, get_position(), m_serial);
 
 	get_owner()->add_message(game, *msg);
 }

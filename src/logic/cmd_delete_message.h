@@ -27,7 +27,7 @@
 
 namespace Widelands {
 
-/// Expires the player's message.
+/// Delete the player's message.
 ///
 /// \note This is not a GameLogicCommand because it should not be saved.
 /// Instead, the commands are recreated separately on load (when both command
@@ -35,8 +35,8 @@ namespace Widelands {
 /// command and then when loading, checking that one exists for each message
 /// and if not, warn and recreate it. Such redundancy would also waste space in
 /// the savegame.
-struct Cmd_ExpireMessage : public Command {
-	Cmd_ExpireMessage
+struct Cmd_DeleteMessage : public Command {
+	Cmd_DeleteMessage
 		(int32_t const t, Player_Number const p, Message_Id const m)
 		: Command(t), player(p), message(m)
 	{}

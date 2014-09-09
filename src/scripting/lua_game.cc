@@ -297,18 +297,12 @@ int L_Player::send_message(lua_State * L) {
 	std::string title = luaL_checkstring(L, 2);
 	std::string body = luaL_checkstring(L, 3);
 	Coords c = Coords::Null();
-	Duration d = Forever();
 	Message::Status st = Message::New;
 	std::string sender = "ScriptingEngine";
 	bool popup = false;
 
 	if (n == 4) {
 		// Optional arguments
-		lua_getfield(L, 4, "duration");
-		if (!lua_isnil(L, -1))
-			d = luaL_checkuint32(L, -1);
-		lua_pop(L, 1);
-
 		lua_getfield(L, 4, "field");
 		if (!lua_isnil(L, -1))
 			c = (*get_user_class<L_Field>(L, -1))->coords();
@@ -344,7 +338,6 @@ int L_Player::send_message(lua_State * L) {
 			 *new Message
 			 	(sender,
 			 	 game.get_gametime(),
-			 	 d,
 			 	 title,
 			 	 body,
 				 c,
@@ -1065,7 +1058,6 @@ const PropertyType<L_Message> L_Message::Properties[] = {
 	PROP_RO(L_Message, title),
 	PROP_RO(L_Message, body),
 	PROP_RO(L_Message, sent),
-	PROP_RO(L_Message, duration),
 	PROP_RO(L_Message, field),
 	PROP_RW(L_Message, status),
 	{nullptr, nullptr, nullptr},
@@ -1127,20 +1119,6 @@ int L_Message::get_body(lua_State * L) {
 */
 int L_Message::get_sent(lua_State * L) {
 	lua_pushuint32(L, get(L, get_game(L)).sent());
-	return 1;
-}
-
-/* RST
-	.. attribute:: duration
-
-		(RO) The time in milliseconds before this message is invalidated or nil if
-		this message has an endless duration.
-*/
-int L_Message::get_duration(lua_State * L) {
-	uint32_t d = get(L, get_game(L)).duration();
-	if (d == Forever())
-		return 0;
-	lua_pushuint32(L, d);
 	return 1;
 }
 

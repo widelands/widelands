@@ -910,8 +910,8 @@ void Building::send_message
 	rt_description += "</p></rt>";
 
 	Message * msg = new Message
-		(msgsender, game.get_gametime(), 60 * 60 * 1000,
-		 title, rt_description, get_position(), (link_to_building_lifetime ? m_serial : 0));
+		(msgsender, game.get_gametime(), title, rt_description,
+		 get_position(), (link_to_building_lifetime ? m_serial : 0));
 
 	if (throttle_time)
 		owner().add_message_with_timeout

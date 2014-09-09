@@ -56,7 +56,7 @@ void Map_Players_Messages_Data_Packet::Read
 				if (begin != messages.end()) {
 					log
 						("ERROR: The message queue for player %u contains a message "
-						 "before any messages have been loade into it. This is a bug "
+						 "before any messages have been loaded into it. This is a bug "
 						 "in the savegame loading code. It created a new message and "
 						 "added it to the queue. This is only allowed during "
 						 "simulation, not at load. The following messge will be "
@@ -64,7 +64,6 @@ void Map_Players_Messages_Data_Packet::Read
 						 "\tsender  : %s\n"
 						 "\ttitle   : %s\n"
 						 "\tsent    : %u\n"
-						 "\tduration: %u\n"
 						 "\tposition: (%i, %i)\n"
 						 "\tstatus  : %u\n"
 						 "\tbody    : %s\n",
@@ -72,7 +71,6 @@ void Map_Players_Messages_Data_Packet::Read
 						 begin->second->sender  ().c_str(),
 						 begin->second->title   ().c_str(),
 						 begin->second->sent    (),
-						 begin->second->duration(),
 						 begin->second->position().x, begin->second->position().y,
 						 begin->second->status  (),
 						 begin->second->body    ().c_str());
@@ -96,30 +94,7 @@ void Map_Players_Messages_Data_Packet::Read
 							 "message is sent in the future: sent at %u but "
 							 "gametime is only %u",
 							 sent, gametime);
-					uint32_t duration = Forever(); //  default duration
-					if (Section::Value const * const dv = s->get_val("duration")) {
-						duration = dv->get_positive();
-						if (duration == Forever())
-							throw game_data_error
-								(
-								 "the value %u is not allowed as duration; it is "
-								 "a special value meaning forever, which is the "
-								 "default; omit the duration key to make the "
-								 "message exist forever",
-								 Forever());
-						if (sent + duration < sent)
-							throw game_data_error
-								(
-								 "duration %u is too large; causes numeric "
-								 "overflow when added to sent time %u",
-								 duration, sent);
-						if (sent + duration < gametime)
-							throw game_data_error
-								(
-								 "message should have expired at %u; sent at %u "
-								 "with duration %u but gametime is already %u",
-								 sent + duration, sent, duration, gametime);
-					}
+
 					Message::Status status = Message::Archived; //  default status
 					if (char const * const status_string = s->get_string("status")) {
 						try {
@@ -147,15 +122,12 @@ void Map_Players_Messages_Data_Packet::Read
 						(*new Message
 						 	(s->get_string     ("sender", ""),
 						 	 sent,
-						 	 duration,
 						 	 s->get_name       (),
 						 	 s->get_safe_string("body"),
 							 get_coords("position", extent, Coords::Null(), s),
 							 serial,
 						 	 status));
-					//  Expiration is scheduled for all messages (with finite
-					//  duration) after the command queue has been loaded (in
-					//  Game_Loader::load_game).
+
 					previous_message_sent = sent;
 				} catch (const _wexception & e) {
 					throw game_data_error
@@ -183,44 +155,11 @@ void Map_Players_Messages_Data_Packet::Write
 			message_saver.add         (temp_message.first);
 			const Message & message = *temp_message.second;
 			assert(message.sent() <= static_cast<uint32_t>(egbase.get_gametime()));
-			assert
-				(message.duration() == Forever() ||
-				 message.sent() < message.sent() + message.duration());
-			if
-				(message.duration() != Forever() &&
-				 message.sent() + message.duration()
-				 <
-				 static_cast<uint32_t>(egbase.get_gametime()))
-				log
-					("ERROR: Trying to save a message that should have expired:\n"
-					 "\tsent = %u, duration = %u, expiry = %u, gametime = %u\n"
-					 "\tsender = \"%s\"\n"
-					 "\ttitle: %s\n"
-					 "\tbody: %s\n"
-					 "\tposition: (%i, %i)\n"
-					 "\tstatus: %s\n",
-					 message.sent(), message.duration(),
-					 message.sent() + message.duration(), egbase.get_gametime(),
-					 message.sender().c_str(), message.title().c_str(),
-					 message.body().c_str(),
-					 message.position().x, message.position().y,
-					 message.status() == Message::New      ? "new"      :
-					 message.status() == Message::Read     ? "read"     :
-					 message.status() == Message::Archived ? "archived" : "ERROR");
-			assert
-				(message.duration() == Forever() ||
-				 static_cast<uint32_t>(egbase.get_gametime())
-				 <=
-				 message.sent() + message.duration());
+
 			Section & s = prof.create_section_duplicate(message.title().c_str());
 			if (message.sender().size())
 				s.set_string("sender",    message.sender  ());
 			s.set_int      ("sent",      message.sent    ());
-			{
-				Duration const duration = message.duration();
-				if (duration != Forever()) //  The default duration. Do not write.
-					s.set_int("duration",  duration);
-			}
 			s.set_string   ("body",      message.body    ());
 			if (Coords const c =         message.position())
 				set_coords("position",  c, &s);

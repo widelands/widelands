@@ -121,12 +121,11 @@ struct MessageQueue : private std::map<Message_Id, Message *> {
 
 	/// Expire the message with the given id so that it no longer exists.
 	/// Assumes that a message with the given id exists.
-	void expire_message(const Message_Id& id) {
+	void delete_message(const Message_Id& id) {
 		assert_counts();
 		iterator const it = find(id);
 		if (it == end()) {
-			// Messages can be expired when the timeout runs out, or when the linked
-			// MapObject is removed, or both. In this later case, two expire commands
+			// Messages can be expired when the linked MapObject is removed. Two expire commands
 			// will be executed, and the message will not be present for the second one.
 			// So we assume here that the message was removed from an earlier expire cmd.
 			return;

@@ -947,7 +947,7 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 				(game,
 				 *new Message
 				 	("geologist " + rdescr->name(), // e.g. "geologist gold"
-				 	 game.get_gametime(), 60 * 60 * 1000,
+					 game.get_gametime(),
 				 	 rdescr->descname(),
 				 	 message,
 				 	 position,
@@ -1845,7 +1845,7 @@ void Worker::return_update(Game & game, State & state)
 			(game,
 			 *new Message
 			 	("game engine",
-			 	 game.get_gametime(), Forever(),
+				 game.get_gametime(),
 			 	 _("Worker got lost!"),
 			 	 buffer,
 			 	 get_position()),

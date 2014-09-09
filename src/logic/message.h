@@ -46,7 +46,6 @@ struct Message {
 	Message
 		(const std::string &       msgsender,
 		 uint32_t                  sent_time,
-		 Duration                  d,
 		 const std::string &       t,
 		 const std::string &       b,
 		 Widelands::Coords   const c = Coords::Null(),
@@ -57,7 +56,6 @@ struct Message {
 		m_title(t),
 		m_body    (b),
 		m_sent    (sent_time),
-		m_duration(d),
 		m_position(c),
 		m_serial  (ser),
 		m_status  (s)
@@ -65,7 +63,6 @@ struct Message {
 
 	const std::string & sender() const     {return m_sender;}
 	uint32_t            sent    () const            {return m_sent;}
-	Duration            duration() const            {return m_duration;}
 	const std::string & title() const      {return m_title;}
 	const std::string & body () const               {return m_body;}
 	Widelands::Coords   position() const            {return m_position;}
@@ -78,7 +75,6 @@ private:
 	std::string m_title;
 	std::string       m_body;
 	uint32_t          m_sent;
-	Duration          m_duration; /// will expire after this duration
 	Widelands::Coords m_position;
 	Widelands::Serial m_serial; // serial to map object
 	Status            m_status;
