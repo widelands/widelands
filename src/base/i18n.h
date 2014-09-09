@@ -25,6 +25,7 @@
 #include <vector>
 
 #include <libintl.h>  // for ngettext.
+// NOCOM(GunChleoc) we need to replace libintl.h with gettext.h #include "gettext.h" // for ngettext, pgettext.
 
 #include "base/macros.h"
 #include "config.h"

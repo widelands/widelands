@@ -166,7 +166,8 @@ Fullscreen_Menu_Internet_Lobby::Fullscreen_Menu_Internet_Lobby
 		% _("Unregistered")
 		%  "</p></rt>").str();
 	clientsonline .add_column(22, "*", t_tip);
-	clientsonline .add_column((m_lisw - 22) * 3 / 8, _("Name"));
+	/** TRANSLATORS: Player Name */
+	clientsonline .add_column((m_lisw - 22) * 3 / 8, pgettext("player", "Name"));
 	clientsonline .add_column((m_lisw - 22) * 2 / 8, _("Points"));
 	clientsonline .add_column((m_lisw - 22) * 3 / 8, _("Game"));
 	clientsonline.set_column_compare

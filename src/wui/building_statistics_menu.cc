@@ -107,7 +107,8 @@ Building_Statistics_Menu::Building_Statistics_Menu
 	m_last_table_index   (0)
 {
 	//  building list
-	m_table.add_column(310, _("Name"));
+	/** TRANSLATORS: Building Name */
+	m_table.add_column(310, pgettext("building", "Name"));
 	m_table.add_column (70, _("Type"), "",     UI::Align_HCenter);
 	m_table.add_column (70, _("Prod"), "",     UI::Align_Right);
 	m_table.add_column (70, _("Owned"), "",    UI::Align_Right);
