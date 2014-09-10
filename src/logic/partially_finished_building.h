@@ -35,8 +35,8 @@ This class is the base for constructionsites and
 dismantlesites.
 */
 class Partially_Finished_Building : public Building {
-	friend class Map_Buildingdata_Data_Packet;
-	friend struct Map_Building_Data_Packet;
+	friend class MapBuildingdataPacket;
+	friend struct MapBuildingPacket;
 
 public:
 	Partially_Finished_Building(const BuildingDescr & building_descr);

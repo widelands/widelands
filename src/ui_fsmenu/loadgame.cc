@@ -28,7 +28,7 @@
 #include "base/log.h"
 #include "base/time_string.h"
 #include "game_io/game_loader.h"
-#include "game_io/game_preload_data_packet.h"
+#include "game_io/game_preload_packet.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
 #include "graphic/image_transformations.h"
@@ -202,8 +202,8 @@ void Fullscreen_Menu_LoadGame::map_selected(uint32_t selected)
 		return;
 	}
 
-	Widelands::Game_Preload_Data_Packet gpdp;
-	Widelands::Game_Loader gl(name, m_game);
+	Widelands::GamePreloadPacket gpdp;
+	Widelands::GameLoader gl(name, m_game);
 
 	try {
 		gl.preload_game(gpdp);
@@ -301,14 +301,14 @@ void Fullscreen_Menu_LoadGame::fill_list() {
 		// Fill it with all files we find.
 		m_gamefiles = g_fs->ListDirectory("save");
 
-		Widelands::Game_Preload_Data_Packet gpdp;
+		Widelands::GamePreloadPacket gpdp;
 
 		const filenameset_t & gamefiles = m_gamefiles;
 		for (const std::string& gamefile : gamefiles) {
 			char const * const name = gamefile.c_str();
 
 			try {
-				Widelands::Game_Loader gl(name, m_game);
+				Widelands::GameLoader gl(name, m_game);
 				gl.preload_game(gpdp);
 
 				m_list.add(FileSystem::FS_FilenameWoExt(name).c_str(), name);

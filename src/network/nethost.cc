@@ -36,7 +36,7 @@
 #include "build_info.h"
 #include "chat/chat.h"
 #include "game_io/game_loader.h"
-#include "game_io/game_preload_data_packet.h"
+#include "game_io/game_preload_packet.h"
 #include "helper.h"
 #include "io/dedicated_log.h"
 #include "io/fileread.h"
@@ -830,8 +830,8 @@ void NetHost::run(bool const autorun)
 
 			if (d->settings.savegame) {
 				// Read and broadcast original win condition
-				Widelands::Game_Loader gl(d->settings.mapfilename, game);
-				Widelands::Game_Preload_Data_Packet gpdp;
+				Widelands::GameLoader gl(d->settings.mapfilename, game);
+				Widelands::GamePreloadPacket gpdp;
 				gl.preload_game(gpdp);
 
 				setWinConditionScript(gpdp.get_win_condition());
@@ -855,8 +855,8 @@ void NetHost::run(bool const autorun)
 
 			if (d->settings.savegame) {
 				// Read and broadcast original win condition
-				Widelands::Game_Loader gl(d->settings.mapfilename, game);
-				Widelands::Game_Preload_Data_Packet gpdp;
+				Widelands::GameLoader gl(d->settings.mapfilename, game);
+				Widelands::GamePreloadPacket gpdp;
 				gl.preload_game(gpdp);
 
 				setWinConditionScript(gpdp.get_win_condition());
@@ -1316,7 +1316,7 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 			const filenameset_t & gamefiles = files;
 			for (const std::string& temp_filenames : gamefiles) {
 				char const * const name = temp_filenames.c_str();
-				std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(name);
+				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(name);
 				if (ml) {
 					map.set_filename(name);
 					ml->preload_map(true);
@@ -1344,12 +1344,12 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 		// Read in saved games
 		filenameset_t files = g_fs->ListDirectory("save");
 		Widelands::Game game;
-		Widelands::Game_Preload_Data_Packet gpdp;
+		Widelands::GamePreloadPacket gpdp;
 		const filenameset_t & gamefiles = files;
 		for (const std::string& temp_filenames : gamefiles) {
 			char const * const name = temp_filenames.c_str();
 			try {
-				Widelands::Game_Loader gl(name, game);
+				Widelands::GameLoader gl(name, game);
 				gl.preload_game(gpdp);
 
 				// If we are here, the saved game is valid
@@ -2640,8 +2640,8 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 					// Check if file is a saved game and if yes read out the needed data
 					try {
 						Widelands::Game game;
-						Widelands::Game_Preload_Data_Packet gpdp;
-						Widelands::Game_Loader gl(path, game);
+						Widelands::GamePreloadPacket gpdp;
+						Widelands::GameLoader gl(path, game);
 						gl.preload_game(gpdp);
 
 						// If we are here, it is a saved game file :)
@@ -2661,7 +2661,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 					// Check if file is a map and if yes read out the needed data
 					Widelands::Map   map;
 					i18n::Textdomain td("maps");
-					std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(path);
+					std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(path);
 					if (ml.get() != nullptr) {
 						// Yes it is a map file :)
 						map.set_filename(path.c_str());

@@ -25,8 +25,8 @@
 #include "io/filewrite.h"
 #include "logic/game.h"
 #include "logic/player.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 
 namespace Widelands {
 
@@ -54,7 +54,7 @@ void CmdCallEconomyBalance::execute(Game & game)
  * Read and write
  */
 void CmdCallEconomyBalance::Read
-	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -91,7 +91,7 @@ void CmdCallEconomyBalance::Read
 	}
 }
 void CmdCallEconomyBalance::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapObjectSaver & mos)
 {
 	fw.Unsigned16(CURRENT_CMD_CALL_ECONOMY_VERSION);
 

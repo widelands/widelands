@@ -400,7 +400,7 @@ const BobProgramBase * Critter::Loader::get_program
 }
 
 MapObject::Loader* Critter::load(Editor_Game_Base& egbase,
-												  MapMapObjectLoader& mol,
+												  MapObjectLoader& mol,
                                       FileRead& fr,
                                       const OneWorldLegacyLookupTable& lookup_table) {
 	std::unique_ptr<Loader> loader(new Loader);
@@ -442,7 +442,7 @@ MapObject::Loader* Critter::load(Editor_Game_Base& egbase,
 }
 
 void Critter::save
-	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
+	(Editor_Game_Base & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(HeaderCritter);
 	fw.Unsigned8(CRITTER_SAVEGAME_VERSION);

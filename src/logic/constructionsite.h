@@ -64,7 +64,7 @@ private:
 };
 
 class ConstructionSite : public Partially_Finished_Building {
-	friend class Map_Buildingdata_Data_Packet;
+	friend class MapBuildingdataPacket;
 
 	static const uint32_t CONSTRUCTIONSITE_STEP_TIME = 30000;
 

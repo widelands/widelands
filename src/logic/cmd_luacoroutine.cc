@@ -59,7 +59,7 @@ void CmdLuaCoroutine::execute (Game & game) {
 }
 
 #define CMD_LUACOROUTINE_VERSION 3
-void CmdLuaCoroutine::Read(FileRead& fr, Editor_Game_Base& egbase, MapMapObjectLoader& mol) {
+void CmdLuaCoroutine::Read(FileRead& fr, Editor_Game_Base& egbase, MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CMD_LUACOROUTINE_VERSION) {
@@ -79,7 +79,7 @@ void CmdLuaCoroutine::Read(FileRead& fr, Editor_Game_Base& egbase, MapMapObjectL
 	}
 }
 void CmdLuaCoroutine::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapObjectSaver & mos)
 {
 	fw.Unsigned16(CMD_LUACOROUTINE_VERSION);
 	GameLogicCommand::Write(fw, egbase, mos);

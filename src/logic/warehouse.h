@@ -72,7 +72,7 @@ private:
 
 class Warehouse : public Building, public Attackable, public SoldierControl {
 	friend class PortDock;
-	friend class Map_Buildingdata_Data_Packet;
+	friend class MapBuildingdataPacket;
 
 	MO_DESCR(WarehouseDescr)
 

@@ -43,7 +43,7 @@
 #include "ui_basic/textarea.h"
 #include "wui/overlay_manager.h"
 
-using Widelands::WL_Map_Loader;
+using Widelands::WidelandsMapLoader;
 
 /**
  * Create all the buttons etc...
@@ -136,7 +136,7 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive & parent)
 void Main_Menu_Load_Map::clicked_ok() {
 	const char * const filename(m_ls->get_selected());
 
-	if (g_fs->IsDirectory(filename) && !WL_Map_Loader::is_widelands_map(filename)) {
+	if (g_fs->IsDirectory(filename) && !WidelandsMapLoader::is_widelands_map(filename)) {
 		m_curdir = filename;
 		m_ls->clear();
 		m_mapfiles.clear();
@@ -155,10 +155,10 @@ void Main_Menu_Load_Map::selected(uint32_t) {
 
 	m_ok_btn->set_enabled(true);
 
-	if (!g_fs->IsDirectory(name) || WL_Map_Loader::is_widelands_map(name)) {
+	if (!g_fs->IsDirectory(name) || WidelandsMapLoader::is_widelands_map(name)) {
 		Widelands::Map map;
 		{
-			std::unique_ptr<Widelands::Map_Loader> map_loader = map.get_correct_loader(name);
+			std::unique_ptr<Widelands::MapLoader> map_loader = map.get_correct_loader(name);
 			map_loader->preload_map(true); //  This has worked before, no problem.
 		}
 
@@ -223,7 +223,7 @@ void Main_Menu_Load_Map::fill_list() {
 			(strcmp(FileSystem::FS_Filename(name), ".")    &&
 			 strcmp(FileSystem::FS_Filename(name), "..")   &&
 			 g_fs->IsDirectory(name)                       &&
-			 !WL_Map_Loader::is_widelands_map(name))
+			 !WidelandsMapLoader::is_widelands_map(name))
 
 		m_ls->add
 			(FileSystem::FS_Filename(name),
@@ -239,7 +239,7 @@ void Main_Menu_Load_Map::fill_list() {
 		 ++pname)
 	{
 		char const * const name = pname->c_str();
-		std::unique_ptr<Widelands::Map_Loader> map_loader = map.get_correct_loader(name);
+		std::unique_ptr<Widelands::MapLoader> map_loader = map.get_correct_loader(name);
 		if (map_loader.get() != nullptr) {
 			try {
 				map_loader->preload_map(true);
@@ -247,7 +247,7 @@ void Main_Menu_Load_Map::fill_list() {
 					(FileSystem::FS_Filename(name),
 					 name,
 					 g_gr->images().get
-						 (dynamic_cast<WL_Map_Loader*>(map_loader.get())
+						 (dynamic_cast<WidelandsMapLoader*>(map_loader.get())
 							? "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
 			} catch (const WException &) {} //  we simply skip illegal entries
 		}

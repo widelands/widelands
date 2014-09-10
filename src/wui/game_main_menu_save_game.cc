@@ -24,7 +24,7 @@
 #include "base/i18n.h"
 #include "base/time_string.h"
 #include "game_io/game_loader.h"
-#include "game_io/game_preload_data_packet.h"
+#include "game_io/game_preload_packet.h"
 #include "game_io/game_saver.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -152,8 +152,8 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 void Game_Main_Menu_Save_Game::selected(uint32_t) {
 	const std::string & name = m_ls.get_selected();
 
-	Widelands::Game_Loader gl(name, igbase().game());
-	Widelands::Game_Preload_Data_Packet gpdp;
+	Widelands::GameLoader gl(name, igbase().game());
+	Widelands::GamePreloadPacket gpdp;
 	gl.preload_game(gpdp); //  This has worked before, no problem
 
 	{
@@ -203,7 +203,7 @@ void Game_Main_Menu_Save_Game::fill_list() {
 	//  Fill it with all files we find.
 	gamefiles = g_fs->ListDirectory(m_curdir);
 
-	Widelands::Game_Preload_Data_Packet gpdp;
+	Widelands::GamePreloadPacket gpdp;
 
 	for
 		(filenameset_t::iterator pname = gamefiles.begin();
@@ -213,7 +213,7 @@ void Game_Main_Menu_Save_Game::fill_list() {
 		char const * const name = pname->c_str();
 
 		try {
-			Widelands::Game_Loader gl(name, igbase().game());
+			Widelands::GameLoader gl(name, igbase().game());
 			gl.preload_game(gpdp);
 			m_ls.add(FileSystem::FS_FilenameWoExt(name).c_str(), name);
 		} catch (const WException &) {} //  we simply skip illegal entries

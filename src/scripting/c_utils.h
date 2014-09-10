@@ -22,16 +22,16 @@
 
 
 #include "logic/game.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 #include "scripting/factory.h"
 #include "third_party/eris/lua.hpp"
 
 Factory & get_factory(lua_State *);
 Widelands::Game & get_game(lua_State *);
 Widelands::Editor_Game_Base & get_egbase(lua_State *);
-Widelands::MapMapObjectLoader * get_mol(lua_State *);
-Widelands::MapMapObjectSaver * get_mos(lua_State *);
+Widelands::MapObjectLoader * get_mol(lua_State *);
+Widelands::MapObjectSaver * get_mos(lua_State *);
 
 #ifdef __GNUC__
 void report_error(lua_State*, const char*, ...)

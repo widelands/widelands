@@ -42,8 +42,8 @@
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
 #include "logic/widelands_geometry_io.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 #include "profile/profile.h"
 #include "wui/interactive_gamebase.h"
 
@@ -1037,7 +1037,7 @@ void Ship::Loader::load_finish()
 
 
 MapObject::Loader * Ship::load
-	(Editor_Game_Base & egbase, MapMapObjectLoader & mol, FileRead & fr)
+	(Editor_Game_Base & egbase, MapObjectLoader & mol, FileRead & fr)
 {
 	std::unique_ptr<Loader> loader(new Loader);
 
@@ -1072,7 +1072,7 @@ MapObject::Loader * Ship::load
 }
 
 void Ship::save
-	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
+	(Editor_Game_Base & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(HeaderShip);
 	fw.Unsigned8(SHIP_SAVEGAME_VERSION);

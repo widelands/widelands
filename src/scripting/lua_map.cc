@@ -2008,7 +2008,7 @@ const PropertyType<L_MapObject> L_MapObject::Properties[] = {
 };
 
 void L_MapObject::__persist(lua_State * L) {
-	MapMapObjectSaver & mos = *get_mos(L);
+	MapObjectSaver & mos = *get_mos(L);
 	Game & game = get_game(L);
 
 	uint32_t idx = 0;
@@ -2024,7 +2024,7 @@ void L_MapObject::__unpersist(lua_State* L) {
 	if (!idx)
 		m_ptr = nullptr;
 	else {
-		MapMapObjectLoader& mol = *get_mol(L);
+		MapObjectLoader& mol = *get_mol(L);
 		m_ptr = &mol.get<MapObject>(idx);
 	}
 }

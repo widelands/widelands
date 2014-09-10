@@ -65,9 +65,9 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 
 	friend class Economy;
 	friend class FlagQueue;
-	friend class Map_Flagdata_Data_Packet; // has to read/write this to a file
-	friend struct Map_Ware_Data_Packet;     // has to look at pending wares
-	friend struct Map_Waredata_Data_Packet; // has to look at pending wares
+	friend class MapFlagdataPacket; // has to read/write this to a file
+	friend struct MapWarePacket;     // has to look at pending wares
+	friend struct MapWaredataPacket; // has to look at pending wares
 	friend struct Router;
 
 	const FlagDescr& descr() const;

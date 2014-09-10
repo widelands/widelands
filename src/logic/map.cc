@@ -1631,22 +1631,22 @@ void Map::get_neighbour
 	}
 }
 
-std::unique_ptr<Map_Loader> Map::get_correct_loader(const std::string& filename) {
-	std::unique_ptr<Map_Loader> result;
+std::unique_ptr<MapLoader> Map::get_correct_loader(const std::string& filename) {
+	std::unique_ptr<MapLoader> result;
 
 	std::string lower_filename = filename;
 	boost::algorithm::to_lower(lower_filename);
 
 	if (boost::algorithm::ends_with(lower_filename, WLMF_SUFFIX)) {
 		try {
-			result.reset(new WL_Map_Loader(g_fs->MakeSubFileSystem(filename), this));
+			result.reset(new WidelandsMapLoader(g_fs->MakeSubFileSystem(filename), this));
 		} catch (...) {
 			//  If this fails, it is an illegal file.
 			//  TODO(unknown): catchall hides real errors! Replace with more specific code
 		}
 	} else if (boost::algorithm::ends_with(lower_filename, S2MF_SUFFIX) ||
 	           boost::algorithm::ends_with(lower_filename, S2MF_SUFFIX2)) {
-		result.reset(new S2_Map_Loader(filename.c_str(), *this));
+		result.reset(new S2MapLoader(filename.c_str(), *this));
 	}
 	return result;
 }

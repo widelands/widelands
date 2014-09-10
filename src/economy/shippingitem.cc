@@ -25,8 +25,8 @@
 #include "io/filewrite.h"
 #include "logic/game_data_error.h"
 #include "logic/worker.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 
 namespace Widelands {
 
@@ -174,7 +174,7 @@ void ShippingItem::Loader::load(FileRead & fr)
 		throw GameDataError("unknown ShippingItem version %u", version);
 }
 
-ShippingItem ShippingItem::Loader::get(MapMapObjectLoader & mol)
+ShippingItem ShippingItem::Loader::get(MapObjectLoader & mol)
 {
 	ShippingItem it;
 	if (m_serial != 0)
@@ -182,7 +182,7 @@ ShippingItem ShippingItem::Loader::get(MapMapObjectLoader & mol)
 	return it;
 }
 
-void ShippingItem::save(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
+void ShippingItem::save(Editor_Game_Base & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(SHIPPINGITEM_SAVEGAME_VERSION);
 	fw.Unsigned32(mos.get_object_file_index_or_zero(m_object.get(egbase)));

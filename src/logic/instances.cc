@@ -32,8 +32,8 @@
 #include "logic/cmd_queue.h"
 #include "logic/game.h"
 #include "logic/queue_cmd_ids.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 
 namespace Widelands {
 
@@ -52,7 +52,7 @@ void CmdDestroyMapObject::execute(Game & game)
 
 #define CMD_DESTROY_MAP_OBJECT_VERSION 1
 void CmdDestroyMapObject::Read
-	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -74,7 +74,7 @@ void CmdDestroyMapObject::Read
 	}
 }
 void CmdDestroyMapObject::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(CMD_DESTROY_MAP_OBJECT_VERSION);
@@ -102,7 +102,7 @@ void CmdAct::execute(Game & game)
 
 #define CMD_ACT_VERSION 1
 void CmdAct::Read
-	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -126,7 +126,7 @@ void CmdAct::Read
 	}
 }
 void CmdAct::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(CMD_ACT_VERSION);
@@ -545,7 +545,7 @@ void MapObject::Loader::load_finish()
  * Save the MapObject to the given file.
  */
 void MapObject::save
-	(Editor_Game_Base &, MapMapObjectSaver & mos, FileWrite & fw)
+	(Editor_Game_Base &, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(HeaderMapObject);
 	fw.Unsigned8(CURRENT_SAVEGAME_VERSION);

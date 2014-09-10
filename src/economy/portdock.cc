@@ -34,8 +34,8 @@
 #include "logic/ship.h"
 #include "logic/warehouse.h"
 #include "logic/widelands_geometry_io.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 #include "wui/interactive_gamebase.h"
 
 namespace Widelands {
@@ -538,7 +538,7 @@ void PortDock::Loader::load_finish()
 }
 
 MapObject::Loader * PortDock::load
-	(Editor_Game_Base & egbase, MapMapObjectLoader & mol, FileRead & fr)
+	(Editor_Game_Base & egbase, MapObjectLoader & mol, FileRead & fr)
 {
 	std::unique_ptr<Loader> loader(new Loader);
 
@@ -558,7 +558,7 @@ MapObject::Loader * PortDock::load
 	return loader.release();
 }
 
-void PortDock::save(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
+void PortDock::save(Editor_Game_Base & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(HeaderPortDock);
 	fw.Unsigned8(PORTDOCK_SAVEGAME_VERSION);

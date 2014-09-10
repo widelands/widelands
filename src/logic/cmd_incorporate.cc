@@ -23,13 +23,13 @@
 #include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 
 namespace Widelands {
 
 void CmdIncorporate::Read
-	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
+	(FileRead & fr, Editor_Game_Base & egbase, MapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -51,7 +51,7 @@ void CmdIncorporate::Read
 
 
 void CmdIncorporate::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, MapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(CMD_INCORPORATE_VERSION);

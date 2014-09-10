@@ -102,7 +102,7 @@ private:
  *        contains soldiers!
  */
 class TrainingSite : public ProductionSite, public SoldierControl {
-	friend class Map_Buildingdata_Data_Packet;
+	friend class MapBuildingdataPacket;
 	MO_DESCR(TrainingSiteDescr)
 	friend struct ::TrainingSite_Window;
 

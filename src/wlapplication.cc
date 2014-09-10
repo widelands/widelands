@@ -433,7 +433,7 @@ void WLApplication::run()
 				Widelands::Map map;
 				i18n::Textdomain td("maps");
 				map.set_filename(m_filename.c_str());
-				std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(m_filename);
+				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(m_filename);
 				if (!ml) {
 					throw warning
 						(_("Unsupported format"),

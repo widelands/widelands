@@ -75,7 +75,7 @@ class Editor_Game_Base {
 public:
 	friend class Interactive_Base;
 	friend struct Fullscreen_Menu_LaunchGame;
-	friend struct Game_Game_Class_Data_Packet;
+	friend struct GameClassPacket;
 
 	Editor_Game_Base(LuaInterface* lua);
 	virtual ~Editor_Game_Base();

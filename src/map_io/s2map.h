@@ -27,14 +27,14 @@
 
 class FileRead;
 
-struct S2_Map_Loader : public Widelands::Map_Loader {
+struct S2MapLoader : public Widelands::MapLoader {
 	enum WorldType {
 		GREENLAND = 0,
 		BLACKLAND = 1,
 		WINTERLAND = 2,
 	};
 
-	S2_Map_Loader(const char *, Widelands::Map &);
+	S2MapLoader(const char *, Widelands::Map &);
 
 	int32_t preload_map(bool) override;
 	virtual int32_t load_map_complete

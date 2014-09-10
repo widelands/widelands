@@ -26,8 +26,8 @@
 #include "io/filewrite.h"
 #include "logic/player.h"
 #include "logic/warehouse.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 #include "wui/interactive_gamebase.h"
 
 namespace Widelands {
@@ -240,7 +240,7 @@ void ExpeditionBootstrap::get_waiting_workers_and_wares
 	cleanup(game);
 }
 
-void ExpeditionBootstrap::save(FileWrite& fw, Game& game, MapMapObjectSaver& mos) {
+void ExpeditionBootstrap::save(FileWrite& fw, Game& game, MapObjectSaver& mos) {
 	// Expedition workers
 	fw.Unsigned8(workers_.size());
 	for (std::unique_ptr<ExpeditionWorker>& ew : workers_) {
@@ -262,7 +262,7 @@ void ExpeditionBootstrap::save(FileWrite& fw, Game& game, MapMapObjectSaver& mos
 
 void ExpeditionBootstrap::load
 	(uint32_t warehouse_packet_version, Warehouse& warehouse, FileRead& fr,
-	 Game& game, MapMapObjectLoader& mol)
+	 Game& game, MapObjectLoader& mol)
 {
 	assert(warehouse_packet_version >= 6);
 

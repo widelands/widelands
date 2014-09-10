@@ -44,7 +44,7 @@ namespace UI {struct Tab_Panel;}
 namespace Widelands {
 
 class EditorCategory;
-class MapMapObjectLoader;
+class MapObjectLoader;
 class Player;
 struct Path;
 
@@ -290,7 +290,7 @@ public:
 	 */
 	struct Loader {
 		Editor_Game_Base      * m_egbase;
-		MapMapObjectLoader * m_mol;
+		MapObjectLoader * m_mol;
 		MapObject            * m_object;
 
 	protected:
@@ -300,7 +300,7 @@ public:
 		virtual ~Loader() {}
 
 		void init
-			(Editor_Game_Base & e, MapMapObjectLoader & m, MapObject & object)
+			(Editor_Game_Base & e, MapObjectLoader & m, MapObject & object)
 		{
 			m_egbase = &e;
 			m_mol    = &m;
@@ -308,7 +308,7 @@ public:
 		}
 
 		Editor_Game_Base      & egbase    () {return *m_egbase;}
-		MapMapObjectLoader & mol   () {return *m_mol;}
+		MapObjectLoader & mol   () {return *m_mol;}
 		MapObject            * get_object() {return m_object;}
 		template<typename T> T & get() {
 			return ref_cast<T, MapObject>(*m_object);
@@ -326,7 +326,7 @@ public:
 	/// to the new MapObject saving system
 	virtual bool has_new_save_support() {return false;}
 
-	virtual void save(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &);
+	virtual void save(Editor_Game_Base &, MapObjectSaver &, FileWrite &);
 	// Pure MapObjects cannot be loaded
 
 protected:
@@ -468,8 +468,8 @@ struct CmdDestroyMapObject : public GameLogicCommand {
 	CmdDestroyMapObject (int32_t t, MapObject &);
 	void execute (Game &) override;
 
-	void Write(FileWrite &, Editor_Game_Base &, MapMapObjectSaver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
+	void Write(FileWrite &, Editor_Game_Base &, MapObjectSaver  &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_DESTROY_MAPOBJECT;}
 
@@ -483,8 +483,8 @@ struct CmdAct : public GameLogicCommand {
 
 	void execute (Game &) override;
 
-	void Write(FileWrite &, Editor_Game_Base &, MapMapObjectSaver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
+	void Write(FileWrite &, Editor_Game_Base &, MapObjectSaver  &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_ACT;}
 

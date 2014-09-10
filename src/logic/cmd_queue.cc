@@ -153,7 +153,7 @@ void GameLogicCommand::Write
 #else
 	 Editor_Game_Base &,
 #endif
-	 MapMapObjectSaver &)
+	 MapObjectSaver &)
 {
 	// First version
 	fw.Unsigned16(BASE_CMD_VERSION);
@@ -169,7 +169,7 @@ void GameLogicCommand::Write
  * \note This function must be called by deriving objects that override it.
  */
 void GameLogicCommand::Read
-	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader &)
+	(FileRead & fr, Editor_Game_Base & egbase, MapObjectLoader &)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();

@@ -346,7 +346,7 @@ void Fullscreen_Menu_CampaignMapSelect::map_selected(uint32_t) {
 	campmapfile = m_list.get_selected();
 	Widelands::Map map;
 
-	std::unique_ptr<Widelands::Map_Loader> ml(map.get_correct_loader(campmapfile));
+	std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(campmapfile));
 	if (!ml) {
 		throw wexception
 			(_("Invalid path to file in cconfig: %s"), campmapfile.c_str());

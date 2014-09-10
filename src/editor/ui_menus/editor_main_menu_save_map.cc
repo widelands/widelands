@@ -35,8 +35,8 @@
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filesystem/zip_filesystem.h"
+#include "map_io/map_saver.h"
 #include "map_io/widelands_map_loader.h"
-#include "map_io/widelands_map_saver.h"
 #include "profile/profile.h"
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
@@ -164,7 +164,7 @@ void Main_Menu_Save_Map::clicked_ok() {
 	if
 		(g_fs->IsDirectory(filename.c_str())
 		 &&
-		 !Widelands::WL_Map_Loader::is_widelands_map(filename))
+		 !Widelands::WidelandsMapLoader::is_widelands_map(filename))
 	{
 		m_curdir = g_fs->FS_CanonicalizeName(filename);
 		m_ls->clear();
@@ -216,10 +216,10 @@ void Main_Menu_Save_Map::clicked_make_directory() {
 void Main_Menu_Save_Map::clicked_item(uint32_t) {
 	const char * const name = m_ls->get_selected();
 
-	if (Widelands::WL_Map_Loader::is_widelands_map(name)) {
+	if (Widelands::WidelandsMapLoader::is_widelands_map(name)) {
 		Widelands::Map map;
 		{
-			std::unique_ptr<Widelands::Map_Loader> const ml
+			std::unique_ptr<Widelands::MapLoader> const ml
 				(map.get_correct_loader(name));
 			ml->preload_map(true); // This has worked before, no problem
 		}
@@ -261,7 +261,7 @@ void Main_Menu_Save_Map::clicked_item(uint32_t) {
 void Main_Menu_Save_Map::double_clicked_item(uint32_t) {
 	const char * const name = m_ls->get_selected();
 
-	if (g_fs->IsDirectory(name) && !Widelands::WL_Map_Loader::is_widelands_map(name)) {
+	if (g_fs->IsDirectory(name) && !Widelands::WidelandsMapLoader::is_widelands_map(name)) {
 		m_curdir = name;
 		m_ls->clear();
 		m_mapfiles.clear();
@@ -304,7 +304,7 @@ void Main_Menu_Save_Map::fill_list() {
 			(strcmp(FileSystem::FS_Filename(name), ".")    &&
 			 strcmp(FileSystem::FS_Filename(name), "..")   &&
 			 g_fs->IsDirectory(name)                       &&
-			 !Widelands::WL_Map_Loader::is_widelands_map(name))
+			 !Widelands::WidelandsMapLoader::is_widelands_map(name))
 
 		m_ls->add
 			(FileSystem::FS_Filename(name),
@@ -322,8 +322,8 @@ void Main_Menu_Save_Map::fill_list() {
 		char const * const name = pname->c_str();
 
 		// we do not list S2 files since we only write wmf
-		std::unique_ptr<Widelands::Map_Loader> ml(map.get_correct_loader(name));
-		if (upcast(Widelands::WL_Map_Loader, wml, ml.get())) {
+		std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(name));
+		if (upcast(Widelands::WidelandsMapLoader, wml, ml.get())) {
 			try {
 				wml->preload_map(true);
 				m_ls->add
@@ -387,7 +387,7 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 
 	std::unique_ptr<FileSystem> fs
 			(g_fs->CreateSubFileSystem(complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR));
-	Widelands::Map_Saver wms(*fs, eia().egbase());
+	Widelands::MapSaver wms(*fs, eia().egbase());
 	try {
 		wms.save();
 		eia().set_need_save(false);

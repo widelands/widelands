@@ -44,7 +44,7 @@ class Building;
 class Worker : public Bob {
 	friend class Soldier; //  allow access to m_supply
 	friend struct WorkerProgram;
-	friend struct Map_Bobdata_Data_Packet;
+	friend struct MapBobdataPacket;
 
 	MO_DESCR(WorkerDescr)
 
@@ -272,12 +272,12 @@ protected:
 	virtual Loader * create_loader();
 
 public:
-	void save(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
+	void save(Editor_Game_Base &, MapObjectSaver &, FileWrite &) override;
 	virtual void do_save
-		(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &);
+		(Editor_Game_Base &, MapObjectSaver &, FileWrite &);
 
 	static MapObject::Loader * load
-		(Editor_Game_Base &, MapMapObjectLoader &, FileRead &);
+		(Editor_Game_Base &, MapObjectLoader &, FileRead &);
 };
 
 }

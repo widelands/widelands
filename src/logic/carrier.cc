@@ -617,7 +617,7 @@ Carrier::Loader * Carrier::create_loader()
 }
 
 void Carrier::do_save
-	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
+	(Editor_Game_Base & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	Worker::do_save(egbase, mos, fw);
 

@@ -162,10 +162,10 @@ protected:
 
 public:
 	bool has_new_save_support() override {return true;}
-	void save(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
+	void save(Editor_Game_Base &, MapObjectSaver &, FileWrite &) override;
 
 	static MapObject::Loader * load
-		(Editor_Game_Base &, MapMapObjectLoader &, FileRead &);
+		(Editor_Game_Base &, MapObjectLoader &, FileRead &);
 };
 
 extern PortdockDescr g_portdock_descr;

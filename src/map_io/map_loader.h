@@ -34,11 +34,11 @@ class Editor_Game_Base;
 /// selected, the Map is completely filled with objects and information. When
 /// now the player selects another map, this Map must be destroyed, a new one
 /// must be selected.
-class Map_Loader {
+class MapLoader {
 public:
-	Map_Loader(char const * const filename, Map & M)
+	MapLoader(char const * const filename, Map & M)
 		: m_map(M), m_s(STATE_INIT) {m_map.set_filename(filename);}
-	virtual ~Map_Loader() {}
+	virtual ~MapLoader() {}
 
 	virtual int32_t preload_map(bool as_scenario) = 0;
 	virtual int32_t load_map_complete(Editor_Game_Base &, bool as_scenario) = 0;

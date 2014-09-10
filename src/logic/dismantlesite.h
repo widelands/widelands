@@ -58,7 +58,7 @@ private:
 };
 
 class DismantleSite : public Partially_Finished_Building {
-	friend class Map_Buildingdata_Data_Packet;
+	friend class MapBuildingdataPacket;
 
 	static const uint32_t DISMANTLESITE_STEP_TIME = 45000;
 

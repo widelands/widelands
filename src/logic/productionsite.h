@@ -112,7 +112,7 @@ private:
 };
 
 class ProductionSite : public Building {
-	friend class Map_Buildingdata_Data_Packet;
+	friend class MapBuildingdataPacket;
 	friend struct ProductionProgram::ActReturn;
 	friend struct ProductionProgram::ActReturn::Workers_Need_Experience;
 	friend struct ProductionProgram::ActCall;

@@ -41,11 +41,11 @@
 class FileSystem;
 class Image;
 struct OverlayManager;
-struct S2_Map_Loader;
+struct S2MapLoader;
 
 namespace Widelands {
 
-class Map_Loader;
+class MapLoader;
 class Objective;
 class World;
 struct BaseImmovable;
@@ -131,14 +131,14 @@ class Map : public ITransportCostCalculator {
 public:
 	friend class Editor;
 	friend class Editor_Game_Base;
-	friend class Map_Loader;
-	friend class Map_Version_Data_Packet;
-	friend struct ::S2_Map_Loader;
+	friend class MapLoader;
+	friend class MapVersionPacket;
+	friend struct ::S2MapLoader;
 	friend struct Main_Menu_New_Map;
 	friend struct MapAStarBase;
 	friend struct MapGenerator;
-	friend struct Map_Elemental_Data_Packet;
-	friend struct WL_Map_Loader;
+	friend struct MapElementalPacket;
+	friend struct WidelandsMapLoader;
 
 	typedef std::set<Coords, Coords::ordering_functor> PortSpacesSet;
 	typedef std::map<std::string, std::unique_ptr<Objective>> Objectives;
@@ -166,7 +166,7 @@ public:
 	OverlayManager       & overlay_manager()       {return *m_overlay_manager;}
 
 	/// Returns the correct initialized loader for the given mapfile
-	std::unique_ptr<Map_Loader> get_correct_loader(const std::string& filename);
+	std::unique_ptr<MapLoader> get_correct_loader(const std::string& filename);
 
 	void cleanup();
 

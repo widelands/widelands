@@ -28,8 +28,8 @@
 #include "logic/game.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 
 namespace Widelands {
 
@@ -235,7 +235,7 @@ void WaresQueue::set_consume_interval(const uint32_t time)
  * Read and write
  */
 #define WARES_QUEUE_DATA_PACKET_VERSION 2
-void WaresQueue::Write(FileWrite & fw, Game & game, MapMapObjectSaver & mos)
+void WaresQueue::Write(FileWrite & fw, Game & game, MapObjectSaver & mos)
 {
 	fw.Unsigned16(WARES_QUEUE_DATA_PACKET_VERSION);
 
@@ -254,7 +254,7 @@ void WaresQueue::Write(FileWrite & fw, Game & game, MapMapObjectSaver & mos)
 }
 
 
-void WaresQueue::Read(FileRead & fr, Game & game, MapMapObjectLoader & mol)
+void WaresQueue::Read(FileRead & fr, Game & game, MapObjectLoader & mol)
 {
 	uint16_t const packet_version = fr.Unsigned16();
 	try {

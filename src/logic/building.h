@@ -161,7 +161,7 @@ private:
 
 class Building : public PlayerImmovable {
 	friend struct BuildingDescr;
-	friend class Map_Buildingdata_Data_Packet;
+	friend class MapBuildingdataPacket;
 
 	MO_DESCR(BuildingDescr)
 

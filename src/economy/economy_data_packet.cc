@@ -24,8 +24,8 @@
 #include "io/filewrite.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 
 #define CURRENT_ECONOMY_VERSION 3
 

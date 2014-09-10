@@ -36,8 +36,8 @@
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 
 namespace Widelands {
 
@@ -596,7 +596,7 @@ void WareInstance::Loader::load_finish()
 
 
 void WareInstance::save
-	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
+	(Editor_Game_Base & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(HeaderWareInstance);
 	fw.Unsigned8(WAREINSTANCE_SAVEGAME_VERSION);
@@ -617,7 +617,7 @@ void WareInstance::save
 }
 
 MapObject::Loader * WareInstance::load
-	(Editor_Game_Base & egbase, MapMapObjectLoader & mol, FileRead & fr)
+	(Editor_Game_Base & egbase, MapObjectLoader & mol, FileRead & fr)
 {
 	try {
 		uint8_t version = fr.Unsigned8();

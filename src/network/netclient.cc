@@ -868,14 +868,14 @@ void NetClient::handle_packet(RecvPacket & packet)
 				// Saved game check - does Widelands recognize the file as saved game?
 				Widelands::Game game;
 				try {
-					Widelands::Game_Loader gl(file->filename, game);
+					Widelands::GameLoader gl(file->filename, game);
 				} catch (...) {
 					invalid = true;
 				}
 			} else {
 				// Map check - does Widelands recognize the file as map?
 				Widelands::Map map;
-				std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(file->filename);
+				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(file->filename);
 				if (!ml)
 					invalid = true;
 			}

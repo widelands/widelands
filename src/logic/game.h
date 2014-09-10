@@ -61,7 +61,7 @@ enum {
 };
 
 class Player;
-class Map_Loader;
+class MapLoader;
 class PlayerCommand;
 class ReplayReader;
 class ReplayWriter;
@@ -87,9 +87,9 @@ public:
 	typedef std::vector<General_Stats> General_Stats_vector;
 
 	friend class CmdQueue; // this class handles the commands
-	friend struct Game_Game_Class_Data_Packet;
-	friend struct Game_Player_Info_Data_Packet;
-	friend struct Game_Loader;
+	friend struct GameClassPacket;
+	friend struct GamePlayerInfoPacket;
+	friend struct GameLoader;
 	friend struct ::Game_Main_Menu_Load_Game;
 	friend struct ::WLApplication;
 

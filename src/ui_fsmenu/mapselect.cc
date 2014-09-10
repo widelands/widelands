@@ -39,7 +39,7 @@
 #include "wui/text_constants.h"
 
 
-using Widelands::WL_Map_Loader;
+using Widelands::WidelandsMapLoader;
 
 Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 		(GameSettingsProvider * const settings, GameController * const ctrl) :
@@ -351,7 +351,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				continue;
 			if (!g_fs->IsDirectory(name))
 				continue;
-			if (WL_Map_Loader::is_widelands_map(name))
+			if (WidelandsMapLoader::is_widelands_map(name))
 				continue;
 
 			MapData dir;
@@ -370,7 +370,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 
 		//Add map files(compressed maps) and directories(uncompressed)
 		{
-			Widelands::Map map; //  Map_Loader needs a place to put it's preload data
+			Widelands::Map map; //  MapLoader needs a place to put its preload data
 
 			for
 				(filenameset_t::iterator pname = files.begin();
@@ -379,7 +379,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 			{
 				char const * const name = pname->c_str();
 
-				std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(name);
+				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(name);
 				if (!ml)
 					continue;
 
@@ -418,7 +418,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 					i18n::Textdomain td("maps");
 					te.set_picture
 						(1,  g_gr->images().get
-						 (dynamic_cast<WL_Map_Loader*>(ml.get()) ?
+						 (dynamic_cast<WidelandsMapLoader*>(ml.get()) ?
 							  (mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png") :
 						"pics/ls_s2map.png"),
 						_(mapdata.name));
@@ -434,13 +434,13 @@ void Fullscreen_Menu_MapSelect::fill_list()
 	} else {
 		//client changing maps on dedicated server
 		for (uint16_t i = 0; i < m_settings->settings().maps.size(); ++i) {
-			Widelands::Map map; //  Map_Loader needs a place to put it's preload data
+			Widelands::Map map; //  MapLoader needs a place to put its preload data
 			i18n::Textdomain td("maps");
 			MapData mapdata;
 
 			const DedicatedMapInfos & dmap = m_settings->settings().maps.at(i);
 			char const * const name = dmap.path.c_str();
-			std::unique_ptr<Widelands::Map_Loader> ml(map.get_correct_loader(name));
+			std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(name));
 			try {
 				if (!ml)
 					throw wexception("Not useable!");

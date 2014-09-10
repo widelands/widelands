@@ -27,7 +27,7 @@
 namespace Widelands {
 class Economy;
 class Game;
-class MapMapObjectLoader;
+class MapObjectLoader;
 
 
 struct CmdCallEconomyBalance : public GameLogicCommand {
@@ -39,8 +39,8 @@ struct CmdCallEconomyBalance : public GameLogicCommand {
 
 	uint8_t id() const override {return QUEUE_CMD_CALL_ECONOMY_BALANCE;}
 
-	void Write(FileWrite &, Editor_Game_Base &, MapMapObjectSaver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
+	void Write(FileWrite &, Editor_Game_Base &, MapObjectSaver  &) override;
+	void Read (FileRead  &, Editor_Game_Base &, MapObjectLoader &) override;
 
 private:
 	OPtr<Flag> m_flag;

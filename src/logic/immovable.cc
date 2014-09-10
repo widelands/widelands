@@ -713,7 +713,7 @@ void Immovable::Loader::load_finish()
 }
 
 void Immovable::save
-	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
+	(Editor_Game_Base & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	// This is in front because it is required to obtain the description
 	// necessary to create the Immovable
@@ -757,7 +757,7 @@ void Immovable::save
 }
 
 MapObject::Loader * Immovable::load
-	(Editor_Game_Base & egbase, MapMapObjectLoader & mol,
+	(Editor_Game_Base & egbase, MapObjectLoader & mol,
 	 FileRead & fr, const OneWorldLegacyLookupTable& lookup_table)
 {
 	std::unique_ptr<Loader> loader(new Loader);
@@ -1484,7 +1484,7 @@ void PlayerImmovable::Loader::load(FileRead & fr)
 	}
 }
 
-void PlayerImmovable::save(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
+void PlayerImmovable::save(Editor_Game_Base & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	BaseImmovable::save(egbase, mos, fw);
 

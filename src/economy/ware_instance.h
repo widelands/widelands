@@ -53,7 +53,7 @@ struct Transfer;
  *     for seafaring
  */
 class WareInstance : public MapObject {
-	friend struct Map_Waredata_Data_Packet;
+	friend struct MapWaredataPacket;
 
 	MO_DESCR(WareDescr)
 
@@ -123,8 +123,8 @@ public:
 		return true;
 	}
 
-	void save(Editor_Game_Base&, MapMapObjectSaver&, FileWrite&) override;
-	static MapObject::Loader* load(Editor_Game_Base&, MapMapObjectLoader&, FileRead&);
+	void save(Editor_Game_Base&, MapObjectSaver&, FileWrite&) override;
+	static MapObject::Loader* load(Editor_Game_Base&, MapObjectLoader&, FileRead&);
 };
 }
 

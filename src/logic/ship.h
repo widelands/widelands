@@ -251,10 +251,10 @@ protected:
 	};
 
 public:
-	void save(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
+	void save(Editor_Game_Base &, MapObjectSaver &, FileWrite &) override;
 
 	static MapObject::Loader * load
-		(Editor_Game_Base &, MapMapObjectLoader &, FileRead &);
+		(Editor_Game_Base &, MapObjectLoader &, FileRead &);
 };
 
 } // namespace Widelands

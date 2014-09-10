@@ -34,8 +34,8 @@
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 
 
 namespace Widelands {
@@ -106,7 +106,7 @@ Request::~Request()
  * them through the data in the file
  */
 void Request::Read
-	(FileRead & fr, Game & game, MapMapObjectLoader & mol)
+	(FileRead & fr, Game & game, MapObjectLoader & mol)
 {
 	try {
 		uint16_t const version = fr.Unsigned16();
@@ -178,7 +178,7 @@ void Request::Read
  * Write this request to a file
  */
 void Request::Write
-	(FileWrite & fw, Game & game, MapMapObjectSaver & mos) const
+	(FileWrite & fw, Game & game, MapObjectSaver & mos) const
 {
 	fw.Unsigned16(REQUEST_VERSION);
 

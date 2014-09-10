@@ -37,7 +37,7 @@ namespace Widelands {
 class Editor_Game_Base;
 class Game;
 class Map;
-class Map_Loader;
+class MapLoader;
 }
 class Image;
 class RenderTarget;

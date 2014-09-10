@@ -29,8 +29,8 @@
 #include "logic/game.h"
 #include "logic/player.h"
 #include "logic/soldier.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 
 namespace Widelands {
 
@@ -380,7 +380,7 @@ void Battle::Loader::load_pointers()
 }
 
 void Battle::save
-	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
+	(Editor_Game_Base & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(HeaderBattle);
 	fw.Unsigned8(BATTLE_SAVEGAME_VERSION);
@@ -399,7 +399,7 @@ void Battle::save
 
 
 MapObject::Loader * Battle::load
-	(Editor_Game_Base & egbase, MapMapObjectLoader & mol, FileRead & fr)
+	(Editor_Game_Base & egbase, MapObjectLoader & mol, FileRead & fr)
 {
 	std::unique_ptr<Loader> loader(new Loader);
 

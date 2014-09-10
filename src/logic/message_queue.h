@@ -30,7 +30,7 @@
 namespace Widelands {
 
 struct MessageQueue : private std::map<Message_Id, Message *> {
-	friend class Map_Players_Messages_Data_Packet;
+	friend class MapPlayersMessagesPacket;
 	// Make typedefs public so that this looks like proper
 	// STL container to templated algorithms.
 	typedef std::map<Message_Id, Message *> _Mybase;

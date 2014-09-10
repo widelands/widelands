@@ -216,11 +216,11 @@ load_s2mf_section(FileRead& fr, int32_t const width, int32_t const height) {
 	return section;
 }
 
-std::string get_world_name(S2_Map_Loader::WorldType world) {
+std::string get_world_name(S2MapLoader::WorldType world) {
 	switch (world) {
-		case S2_Map_Loader::GREENLAND: return "greenland";
-		case S2_Map_Loader::BLACKLAND: return "blackland";
-		case S2_Map_Loader::WINTERLAND: return "winterland";
+		case S2MapLoader::GREENLAND: return "greenland";
+		case S2MapLoader::BLACKLAND: return "blackland";
+		case S2MapLoader::WINTERLAND: return "winterland";
 		default:
 			throw wexception("Unknown World in map file.");
 	}
@@ -232,12 +232,12 @@ std::string get_world_name(S2_Map_Loader::WorldType world) {
 class TerrainConverter {
 public:
 	TerrainConverter(const Widelands::World& world, const OneWorldLegacyLookupTable& lookup_table);
-	Widelands::Terrain_Index lookup(S2_Map_Loader::WorldType world, int8_t c) const;
+	Widelands::Terrain_Index lookup(S2MapLoader::WorldType world, int8_t c) const;
 
 protected:
 	const OneWorldLegacyLookupTable& one_world_legacy_lookup_table_;
 	const Widelands::World& world_;
-	const std::map<S2_Map_Loader::WorldType, std::vector<std::string>> table_;
+	const std::map<S2MapLoader::WorldType, std::vector<std::string>> table_;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(TerrainConverter);
@@ -249,19 +249,19 @@ TerrainConverter::TerrainConverter
 	world_(world),
 	table_
 	{
-	std::make_pair(S2_Map_Loader::GREENLAND, std::vector<std::string>
+	std::make_pair(S2MapLoader::GREENLAND, std::vector<std::string>
 		{
 			"steppe", "berg1", "schnee", "sumpf", "strand", "wasser", "wiese1",
 			"wiese2", "wiese3", "berg2", "berg3", "berg4", "steppe_kahl",
 			"wiese4", "lava", "bergwiese"
 		}),
-	std::make_pair(S2_Map_Loader::BLACKLAND, std::vector<std::string>
+	std::make_pair(S2MapLoader::BLACKLAND, std::vector<std::string>
 		{
 			"ashes", "mountain1", "lava-stone1", "lava-stone2", "strand", "water",
 			"hardground1", "hardground2", "hardground3", "mountain2", "mountain3",
 			"mountain4", "ashes2", "hardground4", "lava", "hardlava"
 		}),
-	std::make_pair(S2_Map_Loader::WINTERLAND, std::vector<std::string>
+	std::make_pair(S2MapLoader::WINTERLAND, std::vector<std::string>
 		{
 			"tundra", "mountain1", "ice_flows", "ice_flows2", "ice", "water",
 			"tundra_taiga", "tundra2", "tundra3", "mountain2", "mountain3",
@@ -270,7 +270,7 @@ TerrainConverter::TerrainConverter
 	}
 {}
 
-Widelands::Terrain_Index TerrainConverter::lookup(S2_Map_Loader::WorldType world, int8_t c) const {
+Widelands::Terrain_Index TerrainConverter::lookup(S2MapLoader::WorldType world, int8_t c) const {
 	switch (c) {
 	// the following comments are valid for greenland - blackland and winterland have equivalents
 	// source: http://bazaar.launchpad.net/~xaser/s25rttr/s25edit/view/head:/WLD_reference.txt
@@ -308,14 +308,14 @@ Widelands::Terrain_Index TerrainConverter::lookup(S2_Map_Loader::WorldType world
 
 }  // namespace
 
-S2_Map_Loader::S2_Map_Loader(const char * filename, Widelands::Map & M)
-: Widelands::Map_Loader(filename, M), m_filename(filename)
+S2MapLoader::S2MapLoader(const char * filename, Widelands::Map & M)
+: Widelands::MapLoader(filename, M), m_filename(filename)
 {
 }
 
 /// Load the header. The map will then return valid information when
 /// get_width(), get_nrplayers(), get_author() and so on are called.
-int32_t S2_Map_Loader::preload_map(bool const scenario) {
+int32_t S2MapLoader::preload_map(bool const scenario) {
 	assert(get_state() != STATE_LOADED);
 
 	m_map.cleanup();
@@ -359,10 +359,10 @@ int32_t S2_Map_Loader::preload_map(bool const scenario) {
  * Completely loads the map, loads the graphics and places all the objects.
  * From now on the Map* can't be set to another one.
  */
-int32_t S2_Map_Loader::load_map_complete
+int32_t S2MapLoader::load_map_complete
 	(Widelands::Editor_Game_Base & egbase, bool)
 {
-	ScopedTimer timer("S2_Map_Loader::load_map_complete() took %ums");
+	ScopedTimer timer("S2MapLoader::load_map_complete() took %ums");
 
 	load_s2mf(egbase);
 
@@ -380,7 +380,7 @@ int32_t S2_Map_Loader::load_map_complete
 /**
  * Load informational data of an S2 map
  */
-void S2_Map_Loader::load_s2mf_header(FileRead& fr)
+void S2MapLoader::load_s2mf_header(FileRead& fr)
 {
 	S2MapDescrHeader header;
 	memcpy(&header, fr.Data(sizeof(header)), sizeof(header));
@@ -409,7 +409,7 @@ void S2_Map_Loader::load_s2mf_header(FileRead& fr)
 /**
  * This loads a given file as a settlers 2 map file
  */
-void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
+void S2MapLoader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 {
 	uint8_t * pc;
 
@@ -792,10 +792,10 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 			case BOB_SKELETON3:        bobname = "skeleton3"; break;
 
 			case BOB_CACTUS1:
-				bobname = m_worldtype != S2_Map_Loader::WINTERLAND ? "cactus1" : "snowman";
+				bobname = m_worldtype != S2MapLoader::WINTERLAND ? "cactus1" : "snowman";
 				break;
 			case BOB_CACTUS2:
-				bobname = m_worldtype != S2_Map_Loader::WINTERLAND ? "cactus2" : "track";
+				bobname = m_worldtype != S2MapLoader::WINTERLAND ? "cactus2" : "track";
 				break;
 
 			case BOB_BUSH1:            bobname = "bush1";     break;
@@ -874,7 +874,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 
 
 /// Try to fix data, which is incompatible between S2 and Widelands
-void S2_Map_Loader::postload_fix_conversion(Widelands::Editor_Game_Base & egbase) {
+void S2MapLoader::postload_fix_conversion(Widelands::Editor_Game_Base & egbase) {
 
 /*
  * 1: Try to fix port spaces

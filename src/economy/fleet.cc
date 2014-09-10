@@ -35,8 +35,8 @@
 #include "logic/player.h"
 #include "logic/ship.h"
 #include "logic/warehouse.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 
 namespace Widelands {
 
@@ -750,7 +750,7 @@ void Fleet::Loader::load_finish()
 }
 
 MapObject::Loader * Fleet::load
-		(Editor_Game_Base & egbase, MapMapObjectLoader & mol, FileRead & fr)
+		(Editor_Game_Base & egbase, MapObjectLoader & mol, FileRead & fr)
 {
 	std::unique_ptr<Loader> loader(new Loader);
 
@@ -779,7 +779,7 @@ MapObject::Loader * Fleet::load
 	return loader.release();
 }
 
-void Fleet::save(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
+void Fleet::save(Editor_Game_Base & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(HeaderFleet);
 	fw.Unsigned8(FLEET_SAVEGAME_VERSION);

@@ -38,7 +38,7 @@
 #include "base/warning.h"
 #include "economy/economy.h"
 #include "game_io/game_loader.h"
-#include "game_io/game_preload_data_packet.h"
+#include "game_io/game_preload_packet.h"
 #include "graphic/graphic.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -220,7 +220,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 
 	set_map(new Map);
 
-	std::unique_ptr<Map_Loader> maploader(map().get_correct_loader(mapname));
+	std::unique_ptr<MapLoader> maploader(map().get_correct_loader(mapname));
 	if (!maploader)
 		throw wexception("could not load \"%s\"", mapname);
 	UI::ProgressWindow loaderUI;
@@ -282,7 +282,7 @@ void Game::init_newgame
 	assert(!get_map());
 	set_map(new Map);
 
-	std::unique_ptr<Map_Loader> maploader
+	std::unique_ptr<MapLoader> maploader
 		(map().get_correct_loader(settings.mapfilename));
 	maploader->preload_map(settings.scenario);
 	std::string const background = map().get_background();
@@ -359,8 +359,8 @@ void Game::init_savegame
 	assert(!get_map());
 	set_map(new Map);
 	try {
-		Game_Loader gl(settings.mapfilename, *this);
-		Widelands::Game_Preload_Data_Packet gpdp;
+		GameLoader gl(settings.mapfilename, *this);
+		Widelands::GamePreloadPacket gpdp;
 		gl.preload_game(gpdp);
 		m_win_condition_displayname = gpdp.get_win_condition();
 		if (loaderUI) {
@@ -388,9 +388,9 @@ bool Game::run_load_game(std::string filename, const std::string& script_to_run)
 	set_map(new Map);
 
 	{
-		Game_Loader gl(filename, *this);
+		GameLoader gl(filename, *this);
 
-		Widelands::Game_Preload_Data_Packet gpdp;
+		Widelands::GamePreloadPacket gpdp;
 		gl.preload_game(gpdp);
 		std::string background(gpdp.get_background());
 		loaderUI.set_background(background);

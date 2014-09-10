@@ -30,8 +30,8 @@ namespace Widelands {
 
 struct Flag;
 class Editor_Game_Base;
-struct MapMapObjectSaver;
-class MapMapObjectLoader;
+struct MapObjectSaver;
+class MapObjectLoader;
 struct RoutingNode;
 
 /**
@@ -58,8 +58,8 @@ struct Route : public IRoute {
 	};
 
 	void load(LoadData &, FileRead &);
-	void load_pointers(const LoadData &, MapMapObjectLoader &);
-	void save(FileWrite &, Editor_Game_Base &, MapMapObjectSaver &);
+	void load_pointers(const LoadData &, MapObjectLoader &);
+	void save(FileWrite &, Editor_Game_Base &, MapObjectSaver &);
 
 	void insert_as_first(RoutingNode * node) override;
 

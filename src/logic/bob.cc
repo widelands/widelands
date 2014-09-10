@@ -42,8 +42,8 @@
 #include "logic/soldier.h"
 #include "logic/tribe.h"
 #include "logic/widelands_geometry_io.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 #include "profile/profile.h"
 #include "wui/mapviewpixelconstants.h"
 
@@ -1194,7 +1194,7 @@ const BobProgramBase * Bob::Loader::get_program(const std::string & name)
 }
 
 void Bob::save
-	(Editor_Game_Base & eg, MapMapObjectSaver & mos, FileWrite & fw)
+	(Editor_Game_Base & eg, MapObjectSaver & mos, FileWrite & fw)
 {
 	MapObject::save(eg, mos, fw);
 

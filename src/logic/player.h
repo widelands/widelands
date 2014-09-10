@@ -68,11 +68,11 @@ public:
 	typedef std::vector<Building_Stats_vector> BuildingStats;
 
 	friend class Editor_Game_Base;
-	friend struct Game_Player_Info_Data_Packet;
-	friend struct Game_Player_Economies_Data_Packet;
-	friend class Map_Buildingdata_Data_Packet;
-	friend class Map_Players_View_Data_Packet;
-	friend class Map_Exploration_Data_Packet;
+	friend struct GamePlayerInfoPacket;
+	friend struct GamePlayerEconomiesPacket;
+	friend class MapBuildingdataPacket;
+	friend class MapPlayersViewPacket;
+	friend class MapExplorationPacket;
 
 	Player
 		(Editor_Game_Base &,

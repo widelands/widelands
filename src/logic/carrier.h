@@ -49,7 +49,7 @@ private:
  * Carrier is a worker who is employed by a Road.
  */
 struct Carrier : public Worker {
-	friend struct Map_Bobdata_Data_Packet;
+	friend struct MapBobdataPacket;
 
 	MO_DESCR(CarrierDescr)
 
@@ -110,7 +110,7 @@ protected:
 
 public:
 	virtual void do_save
-		(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
+		(Editor_Game_Base &, MapObjectSaver &, FileWrite &) override;
 };
 
 }

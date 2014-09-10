@@ -28,8 +28,8 @@ namespace Widelands {
 class Economy;
 class Editor_Game_Base;
 class Game;
-class MapMapObjectLoader;
-struct MapMapObjectSaver;
+class MapObjectLoader;
+struct MapObjectSaver;
 class Player;
 class Request;
 class Worker;
@@ -67,8 +67,8 @@ public:
 
 	Player & owner() const {return m_owner.owner();}
 
-	void Read (FileRead  &, Game &, MapMapObjectLoader &);
-	void Write(FileWrite &, Game &, MapMapObjectSaver  &);
+	void Read (FileRead  &, Game &, MapObjectLoader &);
+	void Write(FileWrite &, Game &, MapObjectSaver  &);
 
 private:
 	static void request_callback

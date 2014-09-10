@@ -68,7 +68,7 @@ private:
 class MilitarySite :
 	public ProductionSite, public SoldierControl, public Attackable
 {
-	friend class Map_Buildingdata_Data_Packet;
+	friend class MapBuildingdataPacket;
 	MO_DESCR(MilitarySiteDescr)
 
 public:

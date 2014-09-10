@@ -63,7 +63,7 @@ private:
 };
 
 class Critter : public Bob {
-	friend struct Map_Bobdata_Data_Packet;
+	friend struct MapBobdataPacket;
 	friend struct CritterProgram;
 
 	MO_DESCR(CritterDescr)
@@ -75,10 +75,10 @@ public:
 
 	void start_task_program(Game &, const std::string & name);
 
-	void save(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
+	void save(Editor_Game_Base &, MapObjectSaver &, FileWrite &) override;
 
 	static MapObject::Loader*
-	load(Editor_Game_Base&, MapMapObjectLoader&, FileRead&, const OneWorldLegacyLookupTable& lookup_table);
+	load(Editor_Game_Base&, MapObjectLoader&, FileRead&, const OneWorldLegacyLookupTable& lookup_table);
 
 protected:
 	struct Loader : Bob::Loader {

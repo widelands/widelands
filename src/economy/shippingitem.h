@@ -30,8 +30,8 @@ namespace Widelands {
 
 class Economy;
 class Game;
-class MapMapObjectLoader;
-struct MapMapObjectSaver;
+class MapObjectLoader;
+struct MapObjectSaver;
 class MapObject;
 class PortDock;
 class WareInstance;
@@ -59,13 +59,13 @@ struct ShippingItem {
 
 	struct Loader {
 		void load(FileRead & fr);
-		ShippingItem get(MapMapObjectLoader & mol);
+		ShippingItem get(MapObjectLoader & mol);
 
 	private:
 		uint32_t m_serial;
 	};
 
-	void save(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw);
+	void save(Editor_Game_Base & egbase, MapObjectSaver & mos, FileWrite & fw);
 
 private:
 	friend class PortDock;

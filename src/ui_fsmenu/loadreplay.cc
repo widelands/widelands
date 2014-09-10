@@ -26,7 +26,7 @@
 #include "base/log.h"
 #include "base/time_string.h"
 #include "game_io/game_loader.h"
-#include "game_io/game_preload_data_packet.h"
+#include "game_io/game_preload_packet.h"
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -177,10 +177,10 @@ void Fullscreen_Menu_LoadReplay::replay_selected(uint32_t const selected)
 
 	if (m_list.has_selection()) {
 		std::string name = m_list.get_selected() + WLGF_SUFFIX;
-		Widelands::Game_Preload_Data_Packet gpdp;
+		Widelands::GamePreloadPacket gpdp;
 
 		try {
-			Widelands::Game_Loader gl(name, m_game);
+			Widelands::GameLoader gl(name, m_game);
 			gl.preload_game(gpdp);
 		} catch (const WException & e) {
 			log("Replay '%s' must have changed from under us\nException: %s\n", name.c_str(), e.what());
@@ -221,7 +221,7 @@ void Fullscreen_Menu_LoadReplay::fill_list()
 	files = filter(g_fs->ListDirectory(REPLAY_DIR),
 	               [](const std::string& fn) {return boost::ends_with(fn, REPLAY_SUFFIX);});
 
-	Widelands::Game_Preload_Data_Packet gpdp;
+	Widelands::GamePreloadPacket gpdp;
 	for
 		(filenameset_t::iterator pname = files.begin();
 		 pname != files.end();
@@ -233,7 +233,7 @@ void Fullscreen_Menu_LoadReplay::fill_list()
 			continue;
 
 		try {
-			Widelands::Game_Loader gl(savename, m_game);
+			Widelands::GameLoader gl(savename, m_game);
 			gl.preload_game(gpdp);
 
 			m_list.add

@@ -35,7 +35,7 @@
 #include "profile/profile.h"
 #include "wui/text_constants.h"
 
-using Widelands::WL_Map_Loader;
+using Widelands::WidelandsMapLoader;
 
 Fullscreen_Menu_Editor_MapSelect::Fullscreen_Menu_Editor_MapSelect() :
 	Fullscreen_Menu_Base("choosemapmenu.jpg"),
@@ -138,7 +138,7 @@ void Fullscreen_Menu_Editor_MapSelect::ok()
 	if
 		(g_fs->IsDirectory(filename.c_str())
 		 &&
-		 !WL_Map_Loader::is_widelands_map(filename))
+		 !WidelandsMapLoader::is_widelands_map(filename))
 	{
 
 		m_curdir = filename;
@@ -161,10 +161,10 @@ void Fullscreen_Menu_Editor_MapSelect::map_selected(uint32_t)
 
 	m_ok.set_enabled(true);
 
-	if (!g_fs->IsDirectory(name) || WL_Map_Loader::is_widelands_map(name)) {
+	if (!g_fs->IsDirectory(name) || WidelandsMapLoader::is_widelands_map(name)) {
 		Widelands::Map map;
 		{
-			std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(name);
+			std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(name);
 			ml->preload_map(true); //  This has worked before, no problem.
 		}
 
@@ -231,7 +231,7 @@ void Fullscreen_Menu_Editor_MapSelect::fill_list()
 			 // Upsy, appeared again. ignore
 			 strcmp(FileSystem::FS_Filename(name), "..")   &&
 			 g_fs->IsDirectory(name)                       &&
-			 !WL_Map_Loader::is_widelands_map(name))
+			 !WidelandsMapLoader::is_widelands_map(name))
 
 		m_list.add
 			(FileSystem::FS_Filename(name),
@@ -247,7 +247,7 @@ void Fullscreen_Menu_Editor_MapSelect::fill_list()
 		 ++pname)
 	{
 		char const * const name = pname->c_str();
-		std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(name);
+		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(name);
 		if (ml.get() != nullptr) {
 			try {
 				ml->preload_map(true);
@@ -255,7 +255,7 @@ void Fullscreen_Menu_Editor_MapSelect::fill_list()
 					(FileSystem::FS_Filename(name),
 					 name,
 					 g_gr->images().get
-						 (dynamic_cast<WL_Map_Loader*>(ml.get()) ? "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
+						 (dynamic_cast<WidelandsMapLoader*>(ml.get()) ? "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
 			} catch (const WException &) {} //  we simply skip illegal entries
 		}
 	}

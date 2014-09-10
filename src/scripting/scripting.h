@@ -35,8 +35,8 @@ class FileWrite;
 namespace Widelands {
 	class Editor_Game_Base;
 	class Game;
-	class MapMapObjectLoader;
-	struct MapMapObjectSaver;
+	class MapObjectLoader;
+	struct MapObjectSaver;
 }
 
 class EditorFactory;
@@ -80,9 +80,9 @@ public:
 
 	// Input output for the global game state.
 	void read_global_env
-		(FileRead &, Widelands::MapMapObjectLoader &, uint32_t);
+		(FileRead &, Widelands::MapObjectLoader &, uint32_t);
 	uint32_t write_global_env
-		(FileWrite &, Widelands::MapMapObjectSaver &);
+		(FileWrite &, Widelands::MapObjectSaver &);
 
 private:
 	std::unique_ptr<GameFactory> m_factory;

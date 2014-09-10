@@ -53,7 +53,7 @@ class Bob;
 // Description for the Bob class.
 class BobDescr : public MapObjectDescr {
 public:
-	friend struct Map_Bobdata_Data_Packet;
+	friend struct MapBobdataPacket;
 
 	BobDescr(MapObjectType type,
 	         const std::string& init_name,
@@ -153,8 +153,8 @@ private:
 class Bob : public MapObject {
 public:
 	friend class Map;
-	friend struct Map_Bobdata_Data_Packet;
-	friend struct Map_Bob_Data_Packet;
+	friend struct MapBobdataPacket;
+	friend struct MapBobPacket;
 
 	struct State;
 	typedef void (Bob::*Ptr)(Game &, State &);
@@ -405,7 +405,7 @@ protected:
 public:
 	bool has_new_save_support() override {return true;}
 
-	void save(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
+	void save(Editor_Game_Base &, MapObjectSaver &, FileWrite &) override;
 	// Pure Bobs cannot be loaded
 };
 
