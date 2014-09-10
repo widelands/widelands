@@ -79,7 +79,7 @@ int check_return_value_for_errors(lua_State* L, int rv) {
 // so that it is available for all the other Lua functions.
 void setup_for_editor_and_game(lua_State* L, Widelands::EditorGameBase * g) {
 	LuaBases::luaopen_wlbases(L);
-	LuaMap::luaopen_wlmap(L);
+	LuaMaps::luaopen_wlmap(L);
 	LuaUi::luaopen_wlui(L);
 
 	// Push the editor game base

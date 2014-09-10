@@ -28,21 +28,21 @@ namespace LuaBases {
 /*
  * Base class for all classes in wl.base
  */
-class L_BasesModuleClass : public LunaClass {
+class LuaBasesModuleClass : public LunaClass {
 	public:
 		const char * get_modulename() override {return "bases";}
 };
 
 
-class L_EditorGameBase : public L_BasesModuleClass {
+class LuaEditorGameBase : public LuaBasesModuleClass {
 public:
-	LUNA_CLASS_HEAD(L_EditorGameBase);
+	LUNA_CLASS_HEAD(LuaEditorGameBase);
 
-	L_EditorGameBase() {}
-	L_EditorGameBase(lua_State* L) {
+	LuaEditorGameBase() {}
+	LuaEditorGameBase(lua_State* L) {
 		report_error(L, "Cannot instantiate a 'EditorGameBase' directly!");
 	}
-	virtual ~L_EditorGameBase() {}
+	virtual ~LuaEditorGameBase() {}
 
 	void __persist(lua_State * L) override;
 	void __unpersist(lua_State * L) override;
@@ -66,22 +66,22 @@ public:
 };
 
 
-class L_PlayerBase : public L_BasesModuleClass {
+class LuaPlayerBase : public LuaBasesModuleClass {
 	Widelands::PlayerNumber m_pl;
 	enum {NONE = -1};
 
 public:
-	LUNA_CLASS_HEAD(L_PlayerBase);
+	LUNA_CLASS_HEAD(LuaPlayerBase);
 
 
-	L_PlayerBase() : m_pl(NONE) {}
-	L_PlayerBase (lua_State * L) : m_pl(NONE) {
+	LuaPlayerBase() : m_pl(NONE) {}
+	LuaPlayerBase (lua_State * L) : m_pl(NONE) {
 		report_error(L, "Cannot instantiate a 'PlayerBase' directly!");
 	}
-	L_PlayerBase(Widelands::PlayerNumber n) {
+	LuaPlayerBase(Widelands::PlayerNumber n) {
 		m_pl = n;
 	}
-	virtual ~L_PlayerBase() {}
+	virtual ~LuaPlayerBase() {}
 
 	void __persist(lua_State * L) override;
 	void __unpersist(lua_State * L) override;

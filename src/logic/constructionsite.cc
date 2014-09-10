@@ -361,10 +361,10 @@ void ConstructionSite::draw
 	uint32_t cur_frame;
 	try {
 		anim_idx = building().get_animation("build");
-	} catch (MapObjectDescr::Animation_Nonexistent&) {
+	} catch (MapObjectDescr::AnimationNonexistent&) {
 		try {
 			anim_idx = building().get_animation("unoccupied");
-		} catch (MapObjectDescr::Animation_Nonexistent) {
+		} catch (MapObjectDescr::AnimationNonexistent) {
 			anim_idx = building().get_animation("idle");
 		}
 	}
@@ -394,7 +394,7 @@ void ConstructionSite::draw
 		uint32_t prev_building_anim_idx;
 		try {
 			prev_building_anim_idx = prev_building->get_animation("unoccupied");
-		} catch (MapObjectDescr::Animation_Nonexistent &) {
+		} catch (MapObjectDescr::AnimationNonexistent &) {
 			prev_building_anim_idx = prev_building->get_animation("idle");
 		}
 		const Animation& prev_building_anim = g_gr->animations().get_animation(prev_building_anim_idx);

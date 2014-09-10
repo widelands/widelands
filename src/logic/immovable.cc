@@ -636,7 +636,7 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 	char const * const animname = fr.CString();
 	try {
 		imm.m_anim = imm.descr().get_animation(animname);
-	} catch (const MapObjectDescr::Animation_Nonexistent &) {
+	} catch (const MapObjectDescr::AnimationNonexistent &) {
 		imm.m_anim = imm.descr().main_animation();
 		log
 			("Warning: (%s) Animation \"%s\" not found, using animation %s).\n",

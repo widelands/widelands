@@ -37,22 +37,22 @@ namespace LuaGame {
 /*
  * Base class for all classes in wl.game
  */
-class L_GameModuleClass : public LunaClass {
+class LuaGameModuleClass : public LunaClass {
 	public:
 		const char * get_modulename() override {return "game";}
 };
 
-class L_Player : public LuaBases::L_PlayerBase {
+class LuaPlayer : public LuaBases::LuaPlayerBase {
 public:
-	// Overwritten from L_PlayerBase, avoid ambiguity when deriving from
-	// L_GameModuleClass and L_PlayerBase
+	// Overwritten from LuaPlayerBase, avoid ambiguity when deriving from
+	// LuaGameModuleClass and LuaPlayerBase
 	const char * get_modulename() override {return "game";}
 
-	LUNA_CLASS_HEAD(L_Player);
+	LUNA_CLASS_HEAD(LuaPlayer);
 
-	L_Player() : LuaBases::L_PlayerBase() {}
-	L_Player(Widelands::PlayerNumber n) : LuaBases::L_PlayerBase(n)  {}
-	L_Player(lua_State * L) {
+	LuaPlayer() : LuaBases::LuaPlayerBase() {}
+	LuaPlayer(Widelands::PlayerNumber n) : LuaBases::LuaPlayerBase(n)  {}
+	LuaPlayer(lua_State * L) {
 		report_error(L, "Cannot instantiate a 'Player' directly!");
 	}
 
@@ -99,17 +99,17 @@ private:
 
 };
 
-class L_Objective : public L_GameModuleClass {
+class LuaObjective : public LuaGameModuleClass {
 	std::string m_name;
 
 public:
-	LUNA_CLASS_HEAD(L_Objective);
+	LUNA_CLASS_HEAD(LuaObjective);
 
-	virtual ~L_Objective() {}
+	virtual ~LuaObjective() {}
 
-	L_Objective(const Widelands::Objective& n);
-	L_Objective() : m_name("") {}
-	L_Objective(lua_State * L) {
+	LuaObjective(const Widelands::Objective& n);
+	LuaObjective() : m_name("") {}
+	LuaObjective(lua_State * L) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
 
@@ -141,17 +141,17 @@ public:
 	Widelands::Objective & get(lua_State *, Widelands::Game &);
 };
 
-class L_Message : public L_GameModuleClass {
+class LuaMessage : public LuaGameModuleClass {
 	uint32_t m_plr;
 	Widelands::MessageId m_mid;
 
 public:
-	LUNA_CLASS_HEAD(L_Message);
-	virtual ~L_Message() {}
+	LUNA_CLASS_HEAD(LuaMessage);
+	virtual ~LuaMessage() {}
 
-	L_Message(uint8_t, Widelands::MessageId);
-	L_Message() : m_plr(0), m_mid(0) {}
-	L_Message(lua_State * L) {
+	LuaMessage(uint8_t, Widelands::MessageId);
+	LuaMessage() : m_plr(0), m_mid(0) {}
+	LuaMessage(lua_State * L) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
 

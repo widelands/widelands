@@ -103,11 +103,11 @@ struct MapObjectDescr {
 	// Type of the MapObjectDescr.
 	MapObjectType type() const {return m_type;}
 
-	struct Animation_Nonexistent {};
+	struct AnimationNonexistent {};
 	uint32_t get_animation(char const * const anim) const {
 		std::map<std::string, uint32_t>::const_iterator it = m_anims.find(anim);
 		if (it == m_anims.end())
-			throw Animation_Nonexistent();
+			throw AnimationNonexistent();
 		return it->second;
 	}
 	uint32_t get_animation(const std::string & animname) const {
