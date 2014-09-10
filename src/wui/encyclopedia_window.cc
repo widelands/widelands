@@ -50,13 +50,13 @@
 
 using namespace Widelands;
 
-inline Interactive_Player & EncyclopediaWindow::iaplayer() const {
-	return ref_cast<Interactive_Player, UI::Panel>(*get_parent());
+inline InteractivePlayer & EncyclopediaWindow::iaplayer() const {
+	return ref_cast<InteractivePlayer, UI::Panel>(*get_parent());
 }
 
 
 EncyclopediaWindow::EncyclopediaWindow
-	(Interactive_Player & parent, UI::UniqueWindow::Registry & registry)
+	(InteractivePlayer & parent, UI::UniqueWindow::Registry & registry)
 :
 	UI::UniqueWindow
 		(&parent, "encyclopedia",

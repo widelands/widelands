@@ -115,7 +115,7 @@ void terminate(int) {
 /**
  * Sets the filelocators default searchpaths (partly OS specific)
  */
-// TODO(unknown): Handle exception FileType_error
+// TODO(unknown): Handle exception FileTypeError
 // TODO(unknown): Handle case when \e no data can be found
 void WLApplication::setup_searchpaths(std::string argv0)
 {
@@ -132,11 +132,11 @@ void WLApplication::setup_searchpaths(std::string argv0)
 			 	(std::string(INSTALL_PREFIX) + '/' + INSTALL_DATADIR));
 #endif
 	}
-	catch (FileNotFound_error &) {}
-	catch (FileAccessDenied_error & e) {
+	catch (FileNotFoundError &) {}
+	catch (FileAccessDeniedError & e) {
 		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 	}
-	catch (FileType_error &) {
+	catch (FileTypeError &) {
 		//TODO(unknown): handle me
 	}
 
@@ -147,11 +147,11 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		g_fs->AddFileSystem(&FileSystem::Create("/usr/share/games/widelands"));
 #endif
 	}
-	catch (FileNotFound_error &) {}
-	catch (FileAccessDenied_error & e) {
+	catch (FileNotFoundError &) {}
+	catch (FileAccessDeniedError & e) {
 		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 	}
-	catch (FileType_error &) {
+	catch (FileTypeError &) {
 		//TODO(unknown): handle me
 	}
 
@@ -165,11 +165,11 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		g_fs->AddFileSystem(&FileSystem::Create("."));
 #endif
 	}
-	catch (FileNotFound_error &) {}
-	catch (FileAccessDenied_error & e) {
+	catch (FileNotFoundError &) {}
+	catch (FileAccessDeniedError & e) {
 		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 	}
-	catch (FileType_error &) {
+	catch (FileTypeError &) {
 		//TODO(unknown): handle me
 	}
 
@@ -191,11 +191,11 @@ void WLApplication::setup_searchpaths(std::string argv0)
 				log ("Adding directory: %s\n", argv0.c_str());
 				g_fs->AddFileSystem(&FileSystem::Create(argv0));
 			}
-			catch (FileNotFound_error &) {}
-			catch (FileAccessDenied_error & e) {
+			catch (FileNotFoundError &) {}
+			catch (FileAccessDeniedError & e) {
 				log ("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 			}
-			catch (FileType_error &) {
+			catch (FileTypeError &) {
 				//TODO(unknown): handle me
 			}
 		}
@@ -275,7 +275,7 @@ m_redirected_stdio(false)
 {
 	g_fs = new LayeredFileSystem();
 
-	parse_commandline(argc, argv); //throws Parameter_error, handled by main.cc
+	parse_commandline(argc, argv); //throws ParameterError, handled by main.cc
 
 	if (m_commandline.count("homedir")) {
 		log ("Adding home directory: %s\n", m_commandline["homedir"].c_str());
@@ -415,7 +415,7 @@ void WLApplication::run()
 				bool name_valid = false;
 				while (!name_valid) {
 					name_valid = true;
-					const std::vector<INet_Game> & hosts = InternetGaming::ref().games();
+					const std::vector<InternetGame> & hosts = InternetGaming::ref().games();
 					for (uint32_t i = 0; i < hosts.size(); ++i) {
 						if (hosts.at(i).name == realservername)
 							name_valid = false;
@@ -1003,7 +1003,7 @@ void WLApplication::parse_commandline
 
 		//are we looking at an option at all?
 		if (opt.compare(0, 2, "--"))
-			throw Parameter_error();
+			throw ParameterError();
 		else
 			opt.erase(0, 2); //  yes. remove the leading "--", just for cosmetics
 
@@ -1034,7 +1034,7 @@ void WLApplication::parse_commandline
 void WLApplication::handle_commandline_parameters()
 {
 	if (m_commandline.count("help") || m_commandline.count("version")) {
-		throw Parameter_error(); //no message on purpose
+		throw ParameterError(); //no message on purpose
 	}
 	if (m_commandline.count("logfile")) {
 		m_logfile = m_commandline["logfile"];
@@ -1311,7 +1311,7 @@ void WLApplication::mainmenu()
 				break;
 			case Fullscreen_Menu_Main::mm_options: {
 				Section & s = g_options.pull_section("global");
-				Options_Ctrl om(s);
+				OptionsCtrl om(s);
 				break;
 			}
 			case Fullscreen_Menu_Main::mm_readme: {
@@ -1548,7 +1548,7 @@ bool WLApplication::new_game()
 			// Game controller needs the ibase pointer to init
 			// the chat
 			game.set_ibase
-				(new Interactive_Player
+				(new InteractivePlayer
 					(game, g_options.pull_section("global"), pn, false));
 			std::unique_ptr<GameController> ctrl
 				(new SinglePlayerGameController(game, true, pn));

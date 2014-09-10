@@ -32,8 +32,8 @@ static char const * pic_tab_military = "pics/menu_tab_military.png";
 /**
  * Status window for \ref TrainingSite
  */
-struct TrainingSite_Window : public ProductionSite_Window {
-	TrainingSite_Window
+struct TrainingSiteWindow : public ProductionSiteWindow {
+	TrainingSiteWindow
 		(InteractiveGameBase & parent, TrainingSite &, UI::Window * & registry);
 
 	TrainingSite & trainingsite() {
@@ -47,10 +47,10 @@ protected:
 /**
  * Create the \ref TrainingSite specific soldier list tab.
  */
-TrainingSite_Window::TrainingSite_Window
+TrainingSiteWindow::TrainingSiteWindow
 	(InteractiveGameBase & parent, TrainingSite & ts, UI::Window * & registry)
 :
-ProductionSite_Window  (parent, ts, registry)
+ProductionSiteWindow  (parent, ts, registry)
 {
 	get_tabs()->add
 		("soldiers", g_gr->images().get(pic_tab_military),
@@ -58,9 +58,9 @@ ProductionSite_Window  (parent, ts, registry)
 		 _("Soldiers in training"));
 }
 
-void TrainingSite_Window::create_capsbuttons(UI::Box * buttons)
+void TrainingSiteWindow::create_capsbuttons(UI::Box * buttons)
 {
-	ProductionSite_Window::create_capsbuttons(buttons);
+	ProductionSiteWindow::create_capsbuttons(buttons);
 }
 
 /*
@@ -71,5 +71,5 @@ Create the training site information window.
 void TrainingSite::create_options_window
 	(InteractiveGameBase & plr, UI::Window * & registry)
 {
-	new TrainingSite_Window(plr, *this, registry);
+	new TrainingSiteWindow(plr, *this, registry);
 }

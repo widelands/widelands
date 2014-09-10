@@ -32,7 +32,7 @@
 #include "wui/mapviewpixelfunctions.h"
 #include "wui/overlay_manager.h"
 
-Map_View::Map_View
+MapView::MapView
 	(UI::Panel * parent,
 	 int32_t x, int32_t y, uint32_t w, uint32_t h,
 	 InteractiveBase & player)
@@ -44,14 +44,14 @@ m_dragging              (false),
 m_complete_redraw_needed(true)
 {}
 
-Map_View::~Map_View()
+MapView::~MapView()
 {
 	// explicit destructor so that smart pointer destructors
 	// with forward-declared types are properly instantiated
 }
 
 /// Moves the mouse cursor so that it is directly above the given node
-void Map_View::warp_mouse_to_node(Widelands::Coords const c) {
+void MapView::warp_mouse_to_node(Widelands::Coords const c) {
 	const Widelands::Map & map = intbase().egbase().map();
 	Point p;
 	MapviewPixelFunctions::get_save_pix(map, c, p.x, p.y);
@@ -79,7 +79,7 @@ map the user can see. we spend a lot of time
 in this function
 ===============
 */
-void Map_View::draw(RenderTarget & dst)
+void MapView::draw(RenderTarget & dst)
 {
 	Widelands::EditorGameBase & egbase = intbase().egbase();
 
@@ -104,7 +104,7 @@ void Map_View::draw(RenderTarget & dst)
 			m_renderer.reset(new GameRendererSDL());
 		}
 	}
-	if (upcast(Interactive_Player const, interactive_player, &intbase())) {
+	if (upcast(InteractivePlayer const, interactive_player, &intbase())) {
 		m_renderer->rendermap(dst, egbase, interactive_player->player(), m_viewpoint);
 	} else {
 		m_renderer->rendermap(dst, egbase, m_viewpoint);
@@ -113,7 +113,7 @@ void Map_View::draw(RenderTarget & dst)
 	m_complete_redraw_needed = false;
 }
 
-void Map_View::set_changeview(const Map_View::ChangeViewFn & fn)
+void MapView::set_changeview(const MapView::ChangeViewFn & fn)
 {
 	m_changeview = fn;
 }
@@ -123,7 +123,7 @@ void Map_View::set_changeview(const Map_View::ChangeViewFn & fn)
 Set the viewpoint to the given pixel coordinates
 ===============
 */
-void Map_View::set_viewpoint(Point vp, bool jump)
+void MapView::set_viewpoint(Point vp, bool jump)
 {
 	if (vp == m_viewpoint)
 		return;
@@ -139,7 +139,7 @@ void Map_View::set_viewpoint(Point vp, bool jump)
 }
 
 
-void Map_View::stop_dragging() {
+void MapView::stop_dragging() {
 	WLApplication::get()->set_mouse_lock(false);
 	grab_mouse(false);
 	m_dragging = false;
@@ -151,7 +151,7 @@ void Map_View::stop_dragging() {
  * Right-release: disable dragging
  * Left-press:    field action window
  */
-bool Map_View::handle_mousepress
+bool MapView::handle_mousepress
 	(uint8_t const btn, int32_t const x, int32_t const y)
 {
 	if (btn == SDL_BUTTON_LEFT)
@@ -167,7 +167,7 @@ bool Map_View::handle_mousepress
 	}
 	return true;
 }
-bool Map_View::handle_mouserelease(const uint8_t btn, int32_t, int32_t)
+bool MapView::handle_mouserelease(const uint8_t btn, int32_t, int32_t)
 {
 	if (btn == SDL_BUTTON_RIGHT && m_dragging)
 		stop_dragging();
@@ -180,7 +180,7 @@ bool Map_View::handle_mouserelease(const uint8_t btn, int32_t, int32_t)
 Scroll the view according to mouse movement.
 ===============
 */
-bool Map_View::handle_mousemove
+bool MapView::handle_mousemove
 	(uint8_t const state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff)
 {
 	if (m_dragging) {
@@ -199,13 +199,13 @@ bool Map_View::handle_mousemove
 
 /*
 ===============
-Map_View::track_sel(int32_t mx, int32_t my)
+MapView::track_sel(int32_t mx, int32_t my)
 
 Move the sel to the given mouse position.
 Does not honour sel freeze.
 ===============
 */
-void Map_View::track_sel(Point m) {
+void MapView::track_sel(Point m) {
 	m += m_viewpoint;
 	m_intbase.set_sel_pos
 		(MapviewPixelFunctions::calc_node_and_triangle

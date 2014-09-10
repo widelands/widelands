@@ -143,7 +143,7 @@ void * LayeredFileSystem::Load(const std::string & fname, size_t & length) {
 		if ((*it)->FileExists(fname))
 			return (*it)->Load(fname, length);
 
-	throw FileNotFound_error("Could not find file", fname);
+	throw FileNotFoundError("Could not find file", fname);
 }
 
 /**
@@ -175,7 +175,7 @@ StreamRead  * LayeredFileSystem::OpenStreamRead (const std::string & fname) {
 		if ((*it)->FileExists(fname))
 			return (*it)->OpenStreamRead(fname);
 
-	throw FileNotFound_error("Could not find file", fname);
+	throw FileNotFoundError("Could not find file", fname);
 }
 
 /**

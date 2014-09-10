@@ -171,8 +171,8 @@ void WarehouseWaresPanel::set_policy(Warehouse::StockPolicy newpolicy) {
 /**
  * Status window for warehouses
  */
-struct Warehouse_Window : public Building_Window {
-	Warehouse_Window
+struct WarehouseWindow : public BuildingWindow {
+	WarehouseWindow
 		(InteractiveGameBase & parent, Warehouse &, UI::Window * & registry);
 
 	Warehouse & warehouse() {
@@ -183,11 +183,11 @@ struct Warehouse_Window : public Building_Window {
 /**
  * Create the tabs of a warehouse window.
  */
-Warehouse_Window::Warehouse_Window
+WarehouseWindow::WarehouseWindow
 	(InteractiveGameBase & parent,
 	 Warehouse            & wh,
 	 UI::Window *         & registry)
-	: Building_Window(parent, wh, registry)
+	: BuildingWindow(parent, wh, registry)
 {
 	get_tabs()->add
 		("wares",
@@ -237,5 +237,5 @@ Warehouse_Window::Warehouse_Window
 void Widelands::Warehouse::create_options_window
 	(InteractiveGameBase & parent, UI::Window * & registry)
 {
-	new Warehouse_Window(parent, *this, registry);
+	new WarehouseWindow(parent, *this, registry);
 }

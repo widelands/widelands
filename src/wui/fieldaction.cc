@@ -711,7 +711,7 @@ void FieldActionWindow::act_buildflag()
 	if (ibase().is_building_road())
 		ibase().finish_build_road();
 	else if (game)
-		ref_cast<Interactive_Player, InteractiveBase>(ibase())
+		ref_cast<InteractivePlayer, InteractiveBase>(ibase())
 			.set_flag_to_connect(m_node);
 
 	okdialog();
@@ -743,7 +743,7 @@ void FieldActionWindow::act_ripflag()
 				}
 				else {
 					show_bulldoze_confirm
-						(ref_cast<Interactive_Player, InteractiveBase>(ibase()),
+						(ref_cast<InteractivePlayer, InteractiveBase>(ibase()),
 						 *building,
 						 flag);
 				}
@@ -810,12 +810,12 @@ void FieldActionWindow::act_build(Widelands::BuildingIndex idx)
 {
 	Widelands::Game & game = ref_cast<Game, EditorGameBase>(ibase().egbase());
 	game.send_player_build
-		(ref_cast<Interactive_Player, InteractiveBase>(ibase()).player_number(),
+		(ref_cast<InteractivePlayer, InteractiveBase>(ibase()).player_number(),
 		 m_node,
 		 Widelands::BuildingIndex(idx));
 	ibase().reference_player_tribe
 		(m_plr->player_number(), &m_plr->tribe());
-	ref_cast<Interactive_Player, InteractiveBase>(ibase()).set_flag_to_connect
+	ref_cast<InteractivePlayer, InteractiveBase>(ibase()).set_flag_to_connect
 		(game.map().br_n(m_node));
 	okdialog();
 }
@@ -835,7 +835,7 @@ void FieldActionWindow::building_icon_mouse_in
 	(const Widelands::BuildingIndex idx)
 {
 	if (ibase().m_show_workarea_preview && !m_workarea_preview_job_id) {
-		const Workarea_Info & workarea_info =
+		const WorkareaInfo & workarea_info =
 			m_plr->tribe().get_building_descr(Widelands::BuildingIndex(idx))
 			->m_workarea_info;
 		m_workarea_preview_job_id = ibase().show_work_area(workarea_info, m_node);
@@ -872,7 +872,7 @@ void FieldActionWindow::act_attack ()
 		if (m_attack_box->soldiers() > 0)
 			game.send_player_enemyflagaction(
 			   building->base_flag(),
-			   ref_cast<const Interactive_Player, const InteractiveBase>(ibase()).player_number(),
+			   ref_cast<const InteractivePlayer, const InteractiveBase>(ibase()).player_number(),
 			   m_attack_box->soldiers() /*  number of soldiers */);
 	okdialog();
 }

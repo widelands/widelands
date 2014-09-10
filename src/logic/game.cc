@@ -167,13 +167,13 @@ bool Game::get_allow_cheats()
 
 
 /**
- * \return a pointer to the \ref Interactive_Player if any.
+ * \return a pointer to the \ref InteractivePlayer if any.
  * \note This function may return 0 (in particular, it will return 0 during
  * playback or if player is spectator)
  */
-Interactive_Player * Game::get_ipl()
+InteractivePlayer * Game::get_ipl()
 {
-	return dynamic_cast<Interactive_Player *>(get_ibase());
+	return dynamic_cast<InteractivePlayer *>(get_ibase());
 }
 
 void Game::set_game_controller(GameController * const ctrl)
@@ -246,7 +246,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 	m_win_condition_displayname = _("Scenario");
 
 	set_ibase
-		(new Interactive_Player
+		(new InteractivePlayer
 		 	(*this, g_options.pull_section("global"), 1, false));
 
 	loaderUI.step (_("Loading a map"));
@@ -396,7 +396,7 @@ bool Game::run_load_game(std::string filename, const std::string& script_to_run)
 		loaderUI.set_background(background);
 		player_nr = gpdp.get_player_nr();
 		set_ibase
-			(new Interactive_Player
+			(new InteractivePlayer
 			 	(*this, g_options.pull_section("global"), player_nr, false));
 
 		loaderUI.step(_("Loading..."));
@@ -424,7 +424,7 @@ bool Game::run_load_game(std::string filename, const std::string& script_to_run)
  * during single/multiplayer/scenario).
  *
  * Ensure that players and player controllers are setup properly (in particular
- * AI and the \ref Interactive_Player if any).
+ * AI and the \ref InteractivePlayer if any).
  */
 void Game::postload()
 {
@@ -458,7 +458,7 @@ void Game::postload()
  * \note loader_ui can be nullptr, if this is run as dedicated server.
  */
 bool Game::run
-	(UI::ProgressWindow * loader_ui, Start_Game_Type const start_game_type,
+	(UI::ProgressWindow * loader_ui, StartGameType const start_game_type,
 	 const std::string& script_to_run, bool replay)
 {
 	m_replay = replay;

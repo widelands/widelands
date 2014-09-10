@@ -179,7 +179,7 @@ void MapPlayersMessagesPacket::Write
 			("packet_version", CURRENT_PACKET_VERSION);
 		const MessageQueue & messages = player->messages();
 		MapMessageSaver & message_saver = mos.message_savers[p - 1];
-		for (const std::pair<Message_Id, Message *>& temp_message : messages) {
+		for (const std::pair<MessageId, Message *>& temp_message : messages) {
 			message_saver.add         (temp_message.first);
 			const Message & message = *temp_message.second;
 			assert(message.sent() <= static_cast<uint32_t>(egbase.get_gametime()));

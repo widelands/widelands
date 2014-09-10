@@ -74,7 +74,7 @@ void GameInteractivePlayerPacket::Read
 					(olddf & ~loaded_df) | (display_flags & loaded_df);
 				ibase->set_display_flags(realdf);
 			}
-			if (Interactive_Player * const ipl = game.get_ipl()) {
+			if (InteractivePlayer * const ipl = game.get_ipl()) {
 				ipl->set_player_number(player_number);
 			}
 		} else
@@ -97,7 +97,7 @@ void GameInteractivePlayerPacket::Write
 	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
 	InteractiveBase * const ibase = game.get_ibase();
-	Interactive_Player * const iplayer = game.get_ipl();
+	InteractivePlayer * const iplayer = game.get_ipl();
 
 	// Player number
 	fw.Unsigned8(iplayer ? iplayer->player_number() : 1);

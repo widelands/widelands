@@ -196,7 +196,7 @@ void Fullscreen_Menu_CampaignSelect::fill_list()
 	Section & s = prof.get_safe_section("global");
 
 	// Read in campvis-file
-	Campaign_visibility_save cvs;
+	CampaignVisibilitySave cvs;
 	Profile campvis(cvs.get_path().c_str());
 	Section & c = campvis.get_safe_section("campaigns");
 
@@ -384,7 +384,7 @@ void Fullscreen_Menu_CampaignMapSelect::fill_list()
 	Section & global_s = prof.get_safe_section("global");
 
 	// Read in campvis-file
-	Campaign_visibility_save cvs;
+	CampaignVisibilitySave cvs;
 	Profile campvis(cvs.get_path().c_str());
 	Section & c = campvis.get_safe_section("campmaps");
 

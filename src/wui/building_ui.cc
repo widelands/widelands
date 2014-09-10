@@ -39,7 +39,7 @@ void Building::show_options(InteractiveGameBase & igbase, bool avoid_fastclick, 
 		m_optionswindow->move_to_top();
 	} else {
 		create_options_window(igbase, m_optionswindow);
-		if (upcast(Building_Window, bw, m_optionswindow)) {
+		if (upcast(BuildingWindow, bw, m_optionswindow)) {
 			bw->set_avoid_fastclick(avoid_fastclick);
 		}
 		// Run a first think here so that certain things like caps buttons

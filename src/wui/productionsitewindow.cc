@@ -41,11 +41,11 @@ static char const * pic_tab_workers = "pics/menu_list_workers.png";
 Create the window and its panels, add it to the registry.
 ===============
 */
-ProductionSite_Window::ProductionSite_Window
+ProductionSiteWindow::ProductionSiteWindow
 	(InteractiveGameBase & parent,
 	 ProductionSite       & ps,
 	 UI::Window *         & registry)
-	: Building_Window(parent, ps, registry)
+	: BuildingWindow(parent, ps, registry)
 {
 	const std::vector<Widelands::WaresQueue*>& warequeues = ps.warequeues();
 
@@ -95,7 +95,7 @@ ProductionSite_Window::ProductionSite_Window
 							 g_gr->images().get("pics/menu_drop_soldier.png"),
 							 _("Terminate the employment of the selected worker"));
 			evict_button->sigclicked.connect
-					(boost::bind(&ProductionSite_Window::evict_worker, boost::ref(*this)));
+					(boost::bind(&ProductionSiteWindow::evict_worker, boost::ref(*this)));
 			m_worker_caps->add(evict_button, UI::Box::AlignCenter);
 		}
 
@@ -110,9 +110,9 @@ ProductionSite_Window::ProductionSite_Window
 	}
 }
 
-void ProductionSite_Window::think()
+void ProductionSiteWindow::think()
 {
-	Building_Window::think();
+	BuildingWindow::think();
 	// If we have pending requests, update table each tick.
 	// This is required to update from 'vacant' to 'coming'
 	for
@@ -135,14 +135,14 @@ Create the production site information window.
 void ProductionSite::create_options_window
 	(InteractiveGameBase & parent, UI::Window * & registry)
 {
-	ProductionSite_Window* win = new ProductionSite_Window(parent, *this, registry);
+	ProductionSiteWindow* win = new ProductionSiteWindow(parent, *this, registry);
 	Building::options_window_connections.push_back
 		(Building::workers_changed.connect(boost::bind
-			(&ProductionSite_Window::update_worker_table, boost::ref(*win))));
+			(&ProductionSiteWindow::update_worker_table, boost::ref(*win))));
 }
 
 
-void ProductionSite_Window::update_worker_table()
+void ProductionSiteWindow::update_worker_table()
 {
 	if (m_worker_table == nullptr) {
 		return;
@@ -206,7 +206,7 @@ void ProductionSite_Window::update_worker_table()
 	m_worker_table->update();
 }
 
-void ProductionSite_Window::evict_worker() {
+void ProductionSiteWindow::evict_worker() {
 	if (m_worker_table->has_selection()) {
 		Widelands::Worker * worker =
 			productionsite().working_positions()[m_worker_table->get_selected()].worker;

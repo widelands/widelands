@@ -28,7 +28,7 @@ class Player;
 struct PlayerImmovable;
 }
 class InteractiveBase;
-class Interactive_Player;
+class InteractivePlayer;
 
 // fieldaction.cc
 void show_field_action

@@ -183,7 +183,7 @@ void Interactive_Spectator::save_btn()
 	if (m_mainm_windows.savegame.window)
 		delete m_mainm_windows.savegame.window;
 	else {
-		new Game_Main_Menu_Save_Game(*this, m_mainm_windows.savegame);
+		new GameMainMenuSaveGame(*this, m_mainm_windows.savegame);
 	}
 }
 
@@ -203,7 +203,7 @@ void Interactive_Spectator::toggle_statistics() {
 	if (m_mainm_windows.general_stats.window)
 		delete m_mainm_windows.general_stats.window;
 	else
-		new General_Statistics_Menu(*this, m_mainm_windows.general_stats);
+		new GeneralStatisticsMenu(*this, m_mainm_windows.general_stats);
 }
 
 
@@ -257,7 +257,7 @@ bool Interactive_Spectator::handle_key(bool const down, SDL_keysym const code)
 
 		case SDLK_s:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
-				new Game_Main_Menu_Save_Game(*this, m_mainm_windows.savegame);
+				new GameMainMenuSaveGame(*this, m_mainm_windows.savegame);
 			} else
 				set_display_flag
 					(dfShowStatistics, !get_display_flag(dfShowStatistics));

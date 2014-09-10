@@ -202,7 +202,7 @@ int L_Player::get_inbox(lua_State * L) {
 
 	lua_newtable(L);
 	uint32_t cidx = 1;
-	for (const std::pair<Message_Id, Message *>& temp_message : p.messages()) {
+	for (const std::pair<MessageId, Message *>& temp_message : p.messages()) {
 		if (temp_message.second->status() == Message::Archived)
 			continue;
 
@@ -338,7 +338,7 @@ int L_Player::send_message(lua_State * L) {
 	Game & game = get_game(L);
 	Player & plr = get(L, game);
 
-	Message_Id const message =
+	MessageId const message =
 		plr.add_message
 			(game,
 			 *new Message
@@ -434,8 +434,8 @@ int L_Player::message_box(lua_State * L) {
 
 	game.save_handler().set_allow_saving(false);
 
-	Story_Message_Box * mb =
-		new Story_Message_Box
+	StoryMessageBox * mb =
+		new StoryMessageBox
 				(game.get_ipl(), luaL_checkstring(L, 2), luaL_checkstring(L, 3),
 				 button_text, posx, posy, w, h);
 
@@ -630,7 +630,7 @@ int L_Player::reveal_scenario(lua_State * L) {
 	if (get_game(L).get_ipl()->player_number() != player_number())
 		report_error(L, "Can only be called for interactive player!");
 
-	Campaign_visibility_save cvs;
+	CampaignVisibilitySave cvs;
 	cvs.set_map_visibility(luaL_checkstring(L, 2), true);
 
 	return 0;
@@ -650,7 +650,7 @@ int L_Player::reveal_campaign(lua_State * L) {
 	if (get_game(L).get_ipl()->player_number() != player_number())
 		report_error(L, "Can only be called for interactive player!");
 
-	Campaign_visibility_save cvs;
+	CampaignVisibilitySave cvs;
 	cvs.set_campaign_visibility(luaL_checkstring(L, 2), true);
 
 	return 0;
@@ -816,7 +816,7 @@ int L_Player::switchplayer(lua_State * L) {
 	Game & game = get_game(L);
 
 	uint8_t newplayer = luaL_checkinteger(L, -1);
-	Interactive_Player * ipl = game.get_ipl();
+	InteractivePlayer * ipl = game.get_ipl();
 	// only switch, if this is our player!
 	if (ipl->player_number() == player_number()) {
 		ipl->set_player_number(newplayer);
@@ -1071,7 +1071,7 @@ const PropertyType<L_Message> L_Message::Properties[] = {
 	{nullptr, nullptr, nullptr},
 };
 
-L_Message::L_Message(uint8_t plr, Message_Id id) {
+L_Message::L_Message(uint8_t plr, MessageId id) {
 	m_plr = plr;
 	m_mid = id;
 }
@@ -1084,7 +1084,7 @@ void L_Message::__unpersist(lua_State * L) {
 	UNPERS_UINT32("player", m_plr);
 	uint32_t midx = 0;
 	UNPERS_UINT32("msg_idx", midx);
-	m_mid = Message_Id(midx);
+	m_mid = MessageId(midx);
 }
 
 /*

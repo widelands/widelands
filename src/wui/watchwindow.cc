@@ -77,7 +77,7 @@ private:
 	void do_goto();
 	void setview(uint8_t index);
 
-	Map_View mapview;
+	MapView mapview;
 	uint32_t last_visit;
 	bool     single_window;
 	uint8_t  cur_index;
@@ -257,7 +257,7 @@ void WatchWindow::think()
 
 		Widelands::Map & map = game().map();
 		// Drop the tracking if it leaves our vision range
-		Interactive_Player* ipl = game().get_ipl();
+		InteractivePlayer* ipl = game().get_ipl();
 		if (ipl && 1 >= ipl->player().vision(map.get_index(bob->get_position(), map.get_width()))) {
 			// Not in sight
 			views[cur_index].tracking = nullptr;
@@ -329,7 +329,7 @@ void WatchWindow::do_follow()
 			p = bob->calc_drawpos(g, p);
 			int32_t const dist =
 				MapviewPixelFunctions::calc_pix_distance(map, p, pos);
-			Interactive_Player* ipl = game().get_ipl();
+			InteractivePlayer* ipl = game().get_ipl();
 			if
 				((!closest || closest_dist > dist)
 				 && (!ipl || 1 < ipl->player().vision(map.get_index(bob->get_position(), map.get_width()))))

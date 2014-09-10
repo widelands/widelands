@@ -116,7 +116,7 @@ namespace {
 	try {                                                                                           \
 		(file).Open(fs, filename);                                                                   \
 	}                                                                                               \
-	catch (const File_error&) {                                                                     \
+	catch (const FileError&) {                                                                     \
 		throw GameDataError("MapPlayersViewPacket::Read: player %u:Could not open "        \
 		                      "\"%s\" for reading. This file should exist when \"%s\" exists",       \
 		                      plnum,                                                                 \

@@ -36,22 +36,22 @@ namespace Widelands {
 /// Because of this renumbering, the code that saves a message must translate
 /// the id that it has to the sequence number in the savegame of that message.
 /// MapMessageSaver does that.
-struct Message_Id {
-	Message_Id() : id(0) {}
-	explicit Message_Id(uint32_t const _id) : id(_id) {}
+struct MessageId {
+	MessageId() : id(0) {}
+	explicit MessageId(uint32_t const _id) : id(_id) {}
 
 	/// Constant value for no message.
-	static Message_Id Null() {Message_Id result; result.id = 0; return result;}
+	static MessageId Null() {MessageId result; result.id = 0; return result;}
 
-	bool operator== (const Message_Id& other) const {return id == other.id;}
-	bool operator!= (const Message_Id& other) const {return id != other.id;}
-	bool operator<  (const Message_Id& other) const {return id <  other.id;}
+	bool operator== (const MessageId& other) const {return id == other.id;}
+	bool operator!= (const MessageId& other) const {return id != other.id;}
+	bool operator<  (const MessageId& other) const {return id <  other.id;}
 	operator bool     () const {return *this != Null();}
 	uint32_t value() const {return id;}
 
 private:
 	//  This is needed to prevent operator bool from being applied when someone
-	//  tries to use a Message_Id where a int*_t is needed. It will try to use
+	//  tries to use a MessageId where an int*_t is needed. It will try to use
 	//  this operator instead and fail because it is private. As an extra line
 	//  of defense, it is marked as deprectated. In any case, the linking will
 	//  fail because the function body is missing.
@@ -62,7 +62,7 @@ private:
 
 	friend struct MapMessageSaver;
 	friend struct MessageQueue;
-	Message_Id operator++() {++id; return *this;}
+	MessageId operator++() {++id; return *this;}
 	uint32_t id;
 };
 

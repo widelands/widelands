@@ -91,19 +91,19 @@ public:
 	/// that it has been allocated in a separate memory block (not as a
 	/// component of an array or struct) with operator new, so that it can be
 	/// deallocated with operator delete.
-	Message_Id add_message(Game &, Message &, bool popup = false);
+	MessageId add_message(Game &, Message &, bool popup = false);
 
 	/// Like add_message, but if there has been a message from the same sender
 	/// in the last timeout milliseconds in a radius r around the coordinates
 	/// of m, the message deallocated instead.
-	Message_Id add_message_with_timeout
+	MessageId add_message_with_timeout
 		(Game &, Message &, uint32_t timeout, uint32_t radius);
 
 	/// Indicates that the object linked to the message has been removed
 	/// from the game. This implementation expires the message.
-	void message_object_removed(Message_Id mid) const;
+	void message_object_removed(MessageId mid) const;
 
-	void set_message_status(const Message_Id& id, Message::Status const status) {
+	void set_message_status(const MessageId& id, Message::Status const status) {
 		messages().set_message_status(id, status);
 	}
 

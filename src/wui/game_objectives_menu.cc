@@ -30,8 +30,8 @@ using namespace Widelands;
 #define FULL_OBJECTIVE_TEXT 240
 
 
-inline Interactive_Player & GameObjectivesMenu::iplayer() const {
-	return ref_cast<Interactive_Player, UI::Panel>(*get_parent());
+inline InteractivePlayer & GameObjectivesMenu::iplayer() const {
+	return ref_cast<InteractivePlayer, UI::Panel>(*get_parent());
 }
 
 

@@ -203,7 +203,7 @@ void NetClient::run ()
 		InteractiveGameBase * igb;
 		if (pn > 0)
 			igb =
-				new Interactive_Player
+				new InteractivePlayer
 					(game, g_options.pull_section("global"),
 					 pn, true);
 		else
@@ -985,7 +985,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 			throw DisconnectException("SYNCREQUEST_WO_GAME");
 		int32_t const time = packet.Signed32();
 		d->time.recv(time);
-		d->game->enqueue_command(new Cmd_NetCheckSync(time, this));
+		d->game->enqueue_command(new CmdNetCheckSync(time, this));
 		break;
 	}
 	case NETCMD_CHAT: {

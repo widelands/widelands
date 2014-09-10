@@ -82,7 +82,7 @@ void GamePreloadPacket::Write
 	Profile prof;
 	Section & s = prof.create_section("global");
 
-	Interactive_Player const * const ipl = game.get_ipl();
+	InteractivePlayer const * const ipl = game.get_ipl();
 
 	s.set_int   ("packet_version", CURRENT_PACKET_VERSION);
 

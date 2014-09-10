@@ -107,8 +107,8 @@ CoordPath::CoordPath(const Map & map, const Path & path) {
 
 	Coords c = path.get_start();
 
-	Path::Step_Vector::size_type nr_steps = path.get_nsteps();
-	for (Path::Step_Vector::size_type i = 0; i < nr_steps; ++i) {
+	Path::StepVector::size_type nr_steps = path.get_nsteps();
+	for (Path::StepVector::size_type i = 0; i < nr_steps; ++i) {
 		const char dir = path[i];
 
 		m_path.push_back(dir);
@@ -179,8 +179,8 @@ void CoordPath::append(const Map & map, const Path & tail) {
 
 	Coords c = get_end();
 
-	const Path::Step_Vector::size_type nr_steps = tail.get_nsteps();
-	for (CoordPath::Step_Vector::size_type i = 0; i < nr_steps; ++i) {
+	const Path::StepVector::size_type nr_steps = tail.get_nsteps();
+	for (CoordPath::StepVector::size_type i = 0; i < nr_steps; ++i) {
 		const char dir = tail[i];
 
 		map.get_neighbour(c, dir, &c);

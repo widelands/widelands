@@ -99,9 +99,9 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	PlayerNumber const nr_players = m_game.map().get_nrplayers();
 	iterate_players_existing_const(p, nr_players, m_game, player) {
 		const MessageQueue & messages = player->messages();
-		for (std::pair<Message_Id, Message *> temp_message : messages) {
+		for (std::pair<MessageId, Message *> temp_message : messages) {
 			Message* m = temp_message.second;
-			Message_Id m_id = temp_message.first;
+			MessageId m_id = temp_message.first;
 
 			// Renew expire commands
 			Duration const duration = m->duration();

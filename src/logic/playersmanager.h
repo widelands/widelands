@@ -62,7 +62,7 @@ public:
 
 	/**
 	 * Create the player structure for the given plnum.
-	 * Note that AI player structures and the Interactive_Player are created when
+	 * Note that AI player structures and the InteractivePlayer are created when
 	 * the game starts. Similar for remote players.
 	*/
 	Player * add_player

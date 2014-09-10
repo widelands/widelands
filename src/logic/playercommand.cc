@@ -340,7 +340,7 @@ PlayerCommand (0, des.Unsigned8())
 	path = nullptr;
 	steps = new char[nsteps];
 
-	for (Path::Step_Vector::size_type i = 0; i < nsteps; ++i)
+	for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
 		steps[i] = des.Unsigned8();
 }
 
@@ -357,7 +357,7 @@ void CmdBuildRoad::execute (Game & game)
 		assert (steps);
 
 		path = new Path(start);
-		for (Path::Step_Vector::size_type i = 0; i < nsteps; ++i)
+		for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
 			path->append (game.map(), steps[i]);
 	}
 
@@ -373,7 +373,7 @@ void CmdBuildRoad::serialize (StreamWrite & ser)
 
 	assert (path || steps);
 
-	for (Path::Step_Vector::size_type i = 0; i < nsteps; ++i)
+	for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
 		ser.Unsigned8(path ? (*path)[i] : steps[i]);
 }
 #define PLAYER_CMD_BUILDROAD_VERSION 1
@@ -388,7 +388,7 @@ void CmdBuildRoad::Read
 			nsteps = fr.Unsigned16();
 			path = nullptr;
 			steps = new char[nsteps];
-			for (Path::Step_Vector::size_type i = 0; i < nsteps; ++i)
+			for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
 			steps[i] = fr.Unsigned8();
 		} else
 			throw GameDataError
@@ -406,7 +406,7 @@ void CmdBuildRoad::Write
 	PlayerCommand::Write(fw, egbase, mos);
 	WriteCoords32  (&fw, start);
 	fw.Unsigned16(nsteps);
-	for (Path::Step_Vector::size_type i = 0; i < nsteps; ++i)
+	for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
 		fw.Unsigned8(path ? (*path)[i] : steps[i]);
 }
 
@@ -1758,7 +1758,7 @@ void PlayerMessageCommand::Read
 		const uint16_t packet_version = fr.Unsigned16();
 		if (packet_version == PLAYER_MESSAGE_CMD_VERSION) {
 			PlayerCommand::Read(fr, egbase, mol);
-			m_message_id = Message_Id(fr.Unsigned32());
+			m_message_id = MessageId(fr.Unsigned32());
 			if (!m_message_id)
 				throw GameDataError
 					("(player %u): message id is null", sender());

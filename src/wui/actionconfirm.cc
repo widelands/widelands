@@ -35,19 +35,19 @@ using boost::format;
 
 struct ActionConfirm : public UI::Window {
 	ActionConfirm
-		(Interactive_Player & parent,
+		(InteractivePlayer & parent,
 		 const std::string & windowtitle,
 		 const std::string & message,
 		 Widelands::Building & building);
 
 	ActionConfirm
-		(Interactive_Player & parent,
+		(InteractivePlayer & parent,
 		 const std::string & windowtitle,
 		 const std::string & message,
 		 Widelands::Ship & ship);
 
-	Interactive_Player & iaplayer() const {
-		return ref_cast<Interactive_Player, UI::Panel>(*get_parent());
+	InteractivePlayer & iaplayer() const {
+		return ref_cast<InteractivePlayer, UI::Panel>(*get_parent());
 	}
 
 	virtual void think() = 0;
@@ -73,7 +73,7 @@ struct BulldozeConfirm : public ActionConfirm {
 	 * of \p building.
 	 */
 	BulldozeConfirm
-		(Interactive_Player & parent,
+		(InteractivePlayer & parent,
 		 Widelands::Building & building,
 		 Widelands::PlayerImmovable * todestroy = nullptr);
 
@@ -89,7 +89,7 @@ private:
  */
 struct DismantleConfirm : public ActionConfirm {
 	DismantleConfirm
-		(Interactive_Player & parent,
+		(InteractivePlayer & parent,
 		 Widelands::Building & building);
 
 	void think() override;
@@ -101,7 +101,7 @@ struct DismantleConfirm : public ActionConfirm {
  */
 struct EnhanceConfirm : public ActionConfirm {
 	EnhanceConfirm
-		(Interactive_Player & parent,
+		(InteractivePlayer & parent,
 		 Widelands::Building & building,
 		 const Widelands::BuildingIndex & id);
 
@@ -118,7 +118,7 @@ private:
  * Confirmation dialog box for the sink request for a ship.
  */
 struct ShipSinkConfirm : public ActionConfirm {
-	ShipSinkConfirm(Interactive_Player & parent, Widelands::Ship & ship);
+	ShipSinkConfirm(InteractivePlayer & parent, Widelands::Ship & ship);
 
 	void think() override;
 	void ok() override;
@@ -128,7 +128,7 @@ struct ShipSinkConfirm : public ActionConfirm {
  * Confirmation dialog box for the cancel expedition request for a ship.
  */
 struct ShipCancelExpeditionConfirm : public ActionConfirm {
-	ShipCancelExpeditionConfirm(Interactive_Player & parent, Widelands::Ship & ship);
+	ShipCancelExpeditionConfirm(InteractivePlayer & parent, Widelands::Ship & ship);
 
 	void think() override;
 	void ok() override;
@@ -136,7 +136,7 @@ struct ShipCancelExpeditionConfirm : public ActionConfirm {
 
 
 ActionConfirm::ActionConfirm
-	(Interactive_Player & parent,
+	(InteractivePlayer & parent,
 	 const std::string & windowtitle,
 	 const std::string & message,
 	 Widelands::Building & building)
@@ -173,7 +173,7 @@ ActionConfirm::ActionConfirm
 
 
 ActionConfirm::ActionConfirm
-	(Interactive_Player & parent,
+	(InteractivePlayer & parent,
 	 const std::string & windowtitle,
 	 const std::string & message,
 	 Widelands::Ship & ship)
@@ -214,7 +214,7 @@ Create the panels for bulldoze confirmation.
 ===============
 */
 BulldozeConfirm::BulldozeConfirm
-	(Interactive_Player & parent,
+	(InteractivePlayer & parent,
 	 Widelands::Building & building,
 	 Widelands::PlayerImmovable * todestroy)
 	:
@@ -280,7 +280,7 @@ Create the panels for dismantle confirmation.
 ===============
 */
 DismantleConfirm::DismantleConfirm
-	(Interactive_Player & parent,
+	(InteractivePlayer & parent,
 	 Widelands::Building & building)
 	:
 	ActionConfirm
@@ -340,7 +340,7 @@ Create the panels for enhancement confirmation.
 ===============
 */
 EnhanceConfirm::EnhanceConfirm
-	(Interactive_Player & parent,
+	(InteractivePlayer & parent,
 	 Widelands::Building & building,
 	 const Widelands::BuildingIndex & id)
 	:
@@ -397,7 +397,7 @@ void EnhanceConfirm::ok()
 /**
  * Create the panels for confirmation.
  */
-ShipSinkConfirm::ShipSinkConfirm(Interactive_Player & parent, Widelands::Ship & ship)
+ShipSinkConfirm::ShipSinkConfirm(InteractivePlayer & parent, Widelands::Ship & ship)
 	:
 	ActionConfirm(parent, _("Sink the ship?"), _("Do you really want to sink this ship?"), ship)
 {
@@ -438,7 +438,7 @@ void ShipSinkConfirm::ok()
 /**
  * Create the panels for confirmation.
  */
-ShipCancelExpeditionConfirm::ShipCancelExpeditionConfirm(Interactive_Player & parent, Widelands::Ship & ship)
+ShipCancelExpeditionConfirm::ShipCancelExpeditionConfirm(InteractivePlayer & parent, Widelands::Ship & ship)
 	:
 	ActionConfirm(parent, _("Sink the ship?"), _("Do you really want to cancel the active expedition?"), ship)
 {
@@ -496,7 +496,7 @@ void ShipCancelExpeditionConfirm::ok()
  * of \p building
  */
 void show_bulldoze_confirm
-	(Interactive_Player & player,
+	(InteractivePlayer & player,
 	 Widelands::Building & building,
 	 Widelands::PlayerImmovable * const todestroy)
 {
@@ -511,7 +511,7 @@ void show_bulldoze_confirm
  * \param building this is the building that the confirmation dialog displays.
  */
 void show_dismantle_confirm
-	(Interactive_Player & player,
+	(InteractivePlayer & player,
 	 Widelands::Building & building)
 {
 	new DismantleConfirm(player, building);
@@ -526,7 +526,7 @@ void show_dismantle_confirm
  * \param id building ID
  */
 void show_enhance_confirm
-	(Interactive_Player & player,
+	(InteractivePlayer & player,
 	 Widelands::Building & building,
 	 const Widelands::BuildingIndex & id)
 {
@@ -541,7 +541,7 @@ void show_enhance_confirm
  *
  * \param ship this is the ship that the confirmation dialog displays.
  */
-void show_ship_sink_confirm(Interactive_Player & player, Widelands::Ship & ship)
+void show_ship_sink_confirm(InteractivePlayer & player, Widelands::Ship & ship)
 {
 	new ShipSinkConfirm(player, ship);
 }
@@ -554,7 +554,7 @@ void show_ship_sink_confirm(Interactive_Player & player, Widelands::Ship & ship)
  *
  * \param ship this is the ship that the confirmation dialog displays.
  */
-void show_ship_cancel_expedition_confirm(Interactive_Player & player, Widelands::Ship & ship)
+void show_ship_cancel_expedition_confirm(InteractivePlayer & player, Widelands::Ship & ship)
 {
 	new ShipCancelExpeditionConfirm(player, ship);
 }

@@ -126,7 +126,7 @@ void GameSummaryScreen::fill_data()
 	bool local_won = false;
 	Widelands::Player* single_won = nullptr;
 	uint8_t team_won = 0;
-	Interactive_Player* ipl = m_game.get_ipl();
+	InteractivePlayer* ipl = m_game.get_ipl();
 
 	for (uintptr_t i = 0; i < players_status.size(); i++) {
 		Widelands::PlayerEndStatus pes = players_status.at(i);

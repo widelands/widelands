@@ -38,7 +38,7 @@ struct WareList;
 
 /**
  * Display wares or workers together with some string (typically a number)
- * in the style of the @ref Warehouse_Window.
+ * in the style of the @ref WarehouseWindow.
  *
  * For practical purposes, use one of the derived classes, e.g. @ref WaresDisplay.
  */

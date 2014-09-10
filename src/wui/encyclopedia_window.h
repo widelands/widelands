@@ -32,10 +32,10 @@ struct WareDescr;
 struct TribeDescr;
 }
 
-class Interactive_Player;
+class InteractivePlayer;
 
 struct EncyclopediaWindow : public UI::UniqueWindow {
-	EncyclopediaWindow(Interactive_Player &, UI::UniqueWindow::Registry &);
+	EncyclopediaWindow(InteractivePlayer &, UI::UniqueWindow::Registry &);
 private:
 	struct Ware {
 		Ware(Widelands::WareIndex i, const Widelands::WareDescr * descr)
@@ -51,7 +51,7 @@ private:
 		}
 	};
 
-	Interactive_Player & iaplayer() const;
+	InteractivePlayer & iaplayer() const;
 	UI::Listselect<Widelands::WareIndex> wares;
 	UI::Listselect<Widelands::BuildingIndex> prodSites;
 	UI::Table     <uintptr_t>                 condTable;

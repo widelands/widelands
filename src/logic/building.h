@@ -125,7 +125,7 @@ struct BuildingDescr : public MapObjectDescr {
 	std::string helptext_script() const {return m_helptext_script;}
 
 	const TribeDescr & tribe() const {return m_tribe;}
-	Workarea_Info m_workarea_info;
+	WorkareaInfo m_workarea_info;
 
 	virtual int32_t suitability(const Map &, FCoords) const;
 	const BuildingHints & hints() const {return m_hints;}

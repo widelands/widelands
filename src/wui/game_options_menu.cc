@@ -142,7 +142,7 @@ void GameOptionsMenu::clicked_sound() {
 }
 
 void GameOptionsMenu::clicked_save_game() {
-	new Game_Main_Menu_Save_Game(m_gb, m_windows.savegame);
+	new GameMainMenuSaveGame(m_gb, m_windows.savegame);
 	die();
 }
 

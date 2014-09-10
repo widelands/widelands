@@ -37,7 +37,7 @@ namespace Widelands {
 /// the savegame.
 struct CmdExpireMessage : public Command {
 	CmdExpireMessage
-		(int32_t const t, PlayerNumber const p, Message_Id const m)
+		(int32_t const t, PlayerNumber const p, MessageId const m)
 		: Command(t), player(p), message(m)
 	{}
 
@@ -46,7 +46,7 @@ struct CmdExpireMessage : public Command {
 
 private:
 	PlayerNumber player;
-	Message_Id    message;
+	MessageId    message;
 };
 
 }

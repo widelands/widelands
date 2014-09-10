@@ -553,7 +553,7 @@ int L_MapView::set_viewpoint_x(lua_State * L) {
 		return 0;
 	}
 
-	Map_View * mv = get();
+	MapView * mv = get();
 	Point p = mv->get_viewpoint();
 	p.x = luaL_checkuint32(L, -1);
 	mv->set_viewpoint(p, true);
@@ -570,7 +570,7 @@ int L_MapView::set_viewpoint_y(lua_State * L) {
 		return 0;
 	}
 
-	Map_View * mv = get();
+	MapView * mv = get();
 	Point p = mv->get_viewpoint();
 	p.y = luaL_checkuint32(L, -1);
 	mv->set_viewpoint(p, true);

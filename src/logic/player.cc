@@ -306,11 +306,11 @@ void Player::play_message_sound(const std::string & sender) {
 	}
 }
 
-Message_Id Player::add_message
+MessageId Player::add_message
 	(Game & game, Message & message, bool const popup)
 {
 	// Expire command
-	Message_Id id = messages().add_message(message);
+	MessageId id = messages().add_message(message);
 	Duration const duration = message.duration();
 	if (duration != Forever()) {
 		game.cmdqueue().enqueue
@@ -326,7 +326,7 @@ Message_Id Player::add_message
 	}
 
 	// Sound & popup
-	if (Interactive_Player * const iplayer = game.get_ipl()) {
+	if (InteractivePlayer * const iplayer = game.get_ipl()) {
 		if (&iplayer->player() == this) {
 			play_message_sound(message.sender());
 			if (popup)
@@ -338,26 +338,26 @@ Message_Id Player::add_message
 }
 
 
-Message_Id Player::add_message_with_timeout
+MessageId Player::add_message_with_timeout
 	(Game & game, Message & m, uint32_t const timeout, uint32_t const radius)
 {
 	const Map &       map      = game.map         ();
 	uint32_t    const gametime = game.get_gametime();
 	Coords      const position = m   .position    ();
-	for (std::pair<Message_Id, Message *>  tmp_message : messages()) {
+	for (std::pair<MessageId, Message *>  tmp_message : messages()) {
 		if
 			(tmp_message.second->sender() == m.sender()      &&
 			 gametime < tmp_message.second->sent() + timeout &&
 			 map.calc_distance(tmp_message.second->position(), position) <= radius)
 		{
 			delete &m;
-			return Message_Id::Null();
+			return MessageId::Null();
 		}
 	}
 	return add_message(game, m);
 }
 
-void Player::message_object_removed(Message_Id m_id) const
+void Player::message_object_removed(MessageId m_id) const
 {
 	// Send expire command
 	upcast(Game, game, &m_egbase);
@@ -486,8 +486,8 @@ Road & Player::force_road(const Path & path) {
 	Flag & start = force_flag(c);
 	Flag & end   = force_flag(map.get_fcoords(path.get_end()));
 
-	Path::Step_Vector::size_type const laststep = path.get_nsteps() - 1;
-	for (Path::Step_Vector::size_type i = 0; i < laststep; ++i) {
+	Path::StepVector::size_type const laststep = path.get_nsteps() - 1;
+	for (Path::StepVector::size_type i = 0; i < laststep; ++i) {
 		c = map.get_neighbour(c, path[i]);
 		log("Clearing for road at (%i, %i)\n", c.x, c.y);
 
@@ -1281,7 +1281,7 @@ void Player::update_building_statistics
 		}
 
 		throw wexception
-			("Interactive_Player::loose_immovable(): A building should be "
+			("InteractivePlayer::loose_immovable(): A building should be "
 			 "removed at (%i, %i), but nothing is known about this building!",
 			 building_position.x, building_position.y);
 	}

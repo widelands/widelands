@@ -36,7 +36,7 @@
 
 using boost::format;
 
-InteractiveGameBase & Game_Main_Menu_Save_Game::igbase() {
+InteractiveGameBase & GameMainMenuSaveGame::igbase() {
 	return ref_cast<InteractiveGameBase, UI::Panel>(*get_parent());
 }
 
@@ -56,7 +56,7 @@ InteractiveGameBase & Game_Main_Menu_Save_Game::igbase() {
 #define DELETE_Y                          (CANCEL_Y - BUTTON_HEIGHT - VSPACING)
 #define OK_Y                              (DELETE_Y - BUTTON_HEIGHT - VSPACING)
 
-Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
+GameMainMenuSaveGame::GameMainMenuSaveGame
 	(InteractiveGameBase & parent, UI::UniqueWindow::Registry & registry)
 :
 	UI::UniqueWindow
@@ -83,8 +83,8 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 		new UI::EditBox
 			(this, HSPACING, EDITBOX_Y, LIST_WIDTH, EDITBOX_HEIGHT,
 			 g_gr->images().get("pics/but1.png"));
-	m_editbox->changed.connect(boost::bind(&Game_Main_Menu_Save_Game::edit_box_changed, this));
-	m_editbox->ok.connect(boost::bind(&Game_Main_Menu_Save_Game::ok, this));
+	m_editbox->changed.connect(boost::bind(&GameMainMenuSaveGame::edit_box_changed, this));
+	m_editbox->ok.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
 
 	m_button_ok =
 		new UI::Button
@@ -94,7 +94,7 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 			 _("OK"),
 			 std::string(),
 			 false);
-	m_button_ok->sigclicked.connect(boost::bind(&Game_Main_Menu_Save_Game::ok, this));
+	m_button_ok->sigclicked.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
 
 	UI::Button * cancelbtn =
 		new UI::Button
@@ -102,7 +102,7 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 			 DESCRIPTION_X, CANCEL_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
 			 g_gr->images().get("pics/but4.png"),
 			 _("Cancel"));
-	cancelbtn->sigclicked.connect(boost::bind(&Game_Main_Menu_Save_Game::die, this));
+	cancelbtn->sigclicked.connect(boost::bind(&GameMainMenuSaveGame::die, this));
 
 	UI::Button * deletebtn =
 		new UI::Button
@@ -110,10 +110,10 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 			 DESCRIPTION_X, DELETE_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
 			 g_gr->images().get("pics/but4.png"),
 			 _("Delete"));
-	deletebtn->sigclicked.connect(boost::bind(&Game_Main_Menu_Save_Game::delete_clicked, this));
+	deletebtn->sigclicked.connect(boost::bind(&GameMainMenuSaveGame::delete_clicked, this));
 
-	m_ls.selected.connect(boost::bind(&Game_Main_Menu_Save_Game::selected, this, _1));
-	m_ls.double_clicked.connect(boost::bind(&Game_Main_Menu_Save_Game::double_clicked, this, _1));
+	m_ls.selected.connect(boost::bind(&GameMainMenuSaveGame::selected, this, _1));
+	m_ls.double_clicked.connect(boost::bind(&GameMainMenuSaveGame::double_clicked, this, _1));
 
 	fill_list();
 
@@ -149,7 +149,7 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 /**
  * called when a item is selected
  */
-void Game_Main_Menu_Save_Game::selected(uint32_t) {
+void GameMainMenuSaveGame::selected(uint32_t) {
 	const std::string & name = m_ls.get_selected();
 
 	Widelands::GameLoader gl(name, igbase().game());
@@ -189,14 +189,14 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 /**
  * An Item has been doubleclicked
  */
-void Game_Main_Menu_Save_Game::double_clicked(uint32_t) {
+void GameMainMenuSaveGame::double_clicked(uint32_t) {
 	ok();
 }
 
 /*
  * fill the file list
  */
-void Game_Main_Menu_Save_Game::fill_list() {
+void GameMainMenuSaveGame::fill_list() {
 	m_ls.clear();
 	filenameset_t gamefiles;
 
@@ -220,7 +220,7 @@ void Game_Main_Menu_Save_Game::fill_list() {
 	}
 }
 
-void Game_Main_Menu_Save_Game::select_by_name(std::string name)
+void GameMainMenuSaveGame::select_by_name(std::string name)
 {
 	for (uint32_t idx = 0; idx < m_ls.size(); idx++) {
 		const std::string val = m_ls[idx];
@@ -234,7 +234,7 @@ void Game_Main_Menu_Save_Game::select_by_name(std::string name)
 /*
  * The editbox was changed. Enable ok button
  */
-void Game_Main_Menu_Save_Game::edit_box_changed() {
+void GameMainMenuSaveGame::edit_box_changed() {
 	m_button_ok->set_enabled(m_editbox->text().size());
 }
 
@@ -259,7 +259,7 @@ static void dosave
 
 struct SaveWarnMessageBox : public UI::WLMessageBox {
 	SaveWarnMessageBox
-		(Game_Main_Menu_Save_Game & parent, const std::string & filename)
+		(GameMainMenuSaveGame & parent, const std::string & filename)
 		:
 		UI::WLMessageBox
 			(&parent,
@@ -270,8 +270,8 @@ struct SaveWarnMessageBox : public UI::WLMessageBox {
 		m_filename(filename)
 	{}
 
-	Game_Main_Menu_Save_Game & menu_save_game() {
-		return ref_cast<Game_Main_Menu_Save_Game, UI::Panel>(*get_parent());
+	GameMainMenuSaveGame & menu_save_game() {
+		return ref_cast<GameMainMenuSaveGame, UI::Panel>(*get_parent());
 	}
 
 
@@ -294,7 +294,7 @@ private:
 /**
  * Called when the Ok button is clicked or the Return key pressed in the edit box.
  */
-void Game_Main_Menu_Save_Game::ok()
+void GameMainMenuSaveGame::ok()
 {
 	if (m_editbox->text().empty())
 		return;
@@ -312,7 +312,7 @@ void Game_Main_Menu_Save_Game::ok()
 	}
 }
 
-void Game_Main_Menu_Save_Game::die()
+void GameMainMenuSaveGame::die()
 {
 	pause_game(false);
 	UI::UniqueWindow::die();
@@ -322,7 +322,7 @@ void Game_Main_Menu_Save_Game::die()
 
 struct DeletionMessageBox : public UI::WLMessageBox {
 	DeletionMessageBox
-		(Game_Main_Menu_Save_Game & parent, const std::string & filename)
+		(GameMainMenuSaveGame & parent, const std::string & filename)
 		:
 		UI::WLMessageBox
 			(&parent,
@@ -337,7 +337,7 @@ struct DeletionMessageBox : public UI::WLMessageBox {
 	void pressedYes() override
 	{
 		g_fs->Unlink(m_filename);
-		ref_cast<Game_Main_Menu_Save_Game, UI::Panel>(*get_parent()).fill_list();
+		ref_cast<GameMainMenuSaveGame, UI::Panel>(*get_parent()).fill_list();
 		die();
 	}
 
@@ -354,7 +354,7 @@ private:
 /**
  * Called when the delete button has been clicked
  */
-void Game_Main_Menu_Save_Game::delete_clicked()
+void GameMainMenuSaveGame::delete_clicked()
 {
 	std::string const complete_filename =
 		igbase().game().save_handler().create_file_name
@@ -365,7 +365,7 @@ void Game_Main_Menu_Save_Game::delete_clicked()
 		new DeletionMessageBox(*this, complete_filename);
 }
 
-void Game_Main_Menu_Save_Game::pause_game(bool paused)
+void GameMainMenuSaveGame::pause_game(bool paused)
 {
 	if (igbase().is_multiplayer()) {
 		return;

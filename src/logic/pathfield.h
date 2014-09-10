@@ -46,7 +46,7 @@ struct Pathfield {
 		}
 	};
 
-	typedef cookie_priority_queue<Pathfield, LessCost> Queue;
+	typedef CookiePriorityQueue<Pathfield, LessCost> Queue;
 
 	Queue::cookie heap_cookie;
 	int32_t real_cost;  //  true cost up to this field

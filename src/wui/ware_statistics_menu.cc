@@ -132,8 +132,8 @@ protected:
 	}
 };
 
-Ware_Statistics_Menu::Ware_Statistics_Menu
-	(Interactive_Player & parent, UI::UniqueWindow::Registry & registry)
+WareStatisticsMenu::WareStatisticsMenu
+	(InteractivePlayer & parent, UI::UniqueWindow::Registry & registry)
 :
 UI::UniqueWindow
 	(&parent, "ware_statistics", &registry, 400, 270, _("Ware Statistics")),
@@ -167,43 +167,43 @@ m_parent(&parent)
 
 
 	m_plot_production =
-		new WUIPlot_Area
+		new WuiPlotArea
 			(tabs,
 			 0, 0, plot_width, plot_height);
 	m_plot_production->set_sample_rate(STATISTICS_SAMPLE_TIME);
-	m_plot_production->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
+	m_plot_production->set_plotmode(WuiPlotArea::PLOTMODE_RELATIVE);
 
 	tabs->add
 		("production", g_gr->images().get(pic_tab_production),
 			m_plot_production, _("Production"));
 
 	m_plot_consumption =
-		new WUIPlot_Area
+		new WuiPlotArea
 			(tabs,
 			 0, 0, plot_width, plot_height);
 	m_plot_consumption->set_sample_rate(STATISTICS_SAMPLE_TIME);
-	m_plot_consumption->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
+	m_plot_consumption->set_plotmode(WuiPlotArea::PLOTMODE_RELATIVE);
 
 	tabs->add
 		("consumption", g_gr->images().get(pic_tab_consumption),
 			m_plot_consumption, _("Consumption"));
 
 	m_plot_economy =
-		new DifferentialPlot_Area
+		new DifferentialPlotArea
 			(tabs,
 			 0, 0, plot_width, plot_height);
 	m_plot_economy->set_sample_rate(STATISTICS_SAMPLE_TIME);
-	m_plot_economy->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
+	m_plot_economy->set_plotmode(WuiPlotArea::PLOTMODE_RELATIVE);
 
 	tabs->add
 		("economy_health", g_gr->images().get(pic_tab_economy),
 			m_plot_economy, _("Economy Health"));
 
-	m_plot_stock = new WUIPlot_Area
+	m_plot_stock = new WuiPlotArea
 			(tabs,
 			 0, 0, plot_width, plot_height);
 	m_plot_stock->set_sample_rate(STATISTICS_SAMPLE_TIME);
-	m_plot_stock->set_plotmode(WUIPlot_Area::PLOTMODE_ABSOLUTE);
+	m_plot_stock->set_plotmode(WuiPlotArea::PLOTMODE_ABSOLUTE);
 
 	tabs->add
 		("stock", g_gr->images().get(pic_tab_stock),
@@ -249,12 +249,12 @@ m_parent(&parent)
 	box->add
 		(new StatisticWaresDisplay
 			(box, 0, 0, parent.get_player()->tribe(),
-			 boost::bind(&Ware_Statistics_Menu::cb_changed_to, boost::ref(*this), _1, _2),
+			 boost::bind(&WareStatisticsMenu::cb_changed_to, boost::ref(*this), _1, _2),
 			 m_color_map),
 		 UI::Box::AlignLeft, true);
 
 	box->add
-		(new WUIPlot_Generic_Area_Slider
+		(new WuiPlotGenericAreaSlider
 			(this, *m_plot_production, this,
 			0, 0, 100, 45,
 			g_gr->images().get("pics/but1.png")),
@@ -266,7 +266,7 @@ m_parent(&parent)
  * Callback for the ware buttons. Change the state of all ware statistics
  * simultaneously.
  */
-void Ware_Statistics_Menu::cb_changed_to(Widelands::WareIndex id, bool what) {
+void WareStatisticsMenu::cb_changed_to(Widelands::WareIndex id, bool what) {
 	if (what) { //activate ware
 		//search lowest free color
 		uint8_t color_index = INACTIVE;
@@ -305,7 +305,7 @@ void Ware_Statistics_Menu::cb_changed_to(Widelands::WareIndex id, bool what) {
  * Callback for the time buttons. Change the time axis of all ware
  * statistics simultaneously.
  */
-void Ware_Statistics_Menu::set_time(int32_t timescale) {
+void WareStatisticsMenu::set_time(int32_t timescale) {
 	m_plot_production->set_time_id(timescale);
 	m_plot_consumption->set_time_id(timescale);
 	m_plot_economy->set_time_id(timescale);

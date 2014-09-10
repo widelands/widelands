@@ -63,12 +63,12 @@
 
 namespace Columns {enum {Name, Size, Prod, Owned, Build};}
 
-inline Interactive_Player & Building_Statistics_Menu::iplayer() const {
-	return ref_cast<Interactive_Player, UI::Panel>(*get_parent());
+inline InteractivePlayer & BuildingStatisticsMenu::iplayer() const {
+	return ref_cast<InteractivePlayer, UI::Panel>(*get_parent());
 }
 
-Building_Statistics_Menu::Building_Statistics_Menu
-	(Interactive_Player & parent, UI::UniqueWindow::Registry & registry)
+BuildingStatisticsMenu::BuildingStatisticsMenu
+	(InteractivePlayer & parent, UI::UniqueWindow::Registry & registry)
 :
 	UI::UniqueWindow
 		(&parent, "building_statistics",
@@ -112,16 +112,16 @@ Building_Statistics_Menu::Building_Statistics_Menu
 	m_table.add_column (70, _("Prod"), "",     UI::Align_Right);
 	m_table.add_column (70, _("Owned"), "",    UI::Align_Right);
 	m_table.add_column (70, _("Build"), "",    UI::Align_Right);
-	m_table.selected.connect(boost::bind(&Building_Statistics_Menu::table_changed, this, _1));
+	m_table.selected.connect(boost::bind(&BuildingStatisticsMenu::table_changed, this, _1));
 	m_table.set_column_compare
 		(Columns::Size,
 		 boost::bind
-		 	(&Building_Statistics_Menu::compare_building_size, this, _1, _2));
+		 	(&BuildingStatisticsMenu::compare_building_size, this, _1, _2));
 
 	//  toggle when to run button
 	m_progbar.set_total(100);
 
-	m_btn[Prev_Owned] =
+	m_btn[PrevOwned] =
 		new UI::Button
 			(this, "previous_owned",
 			 JUMP_PREV_BUTTON_X, OWNED_Y, 24, 24,
@@ -129,10 +129,10 @@ Building_Statistics_Menu::Building_Statistics_Menu
 			 g_gr->images().get("pics/scrollbar_left.png"),
 			 _("Show previous"),
 			 false);
-	m_btn[Prev_Owned]->sigclicked.connect
-		(boost::bind(&Building_Statistics_Menu::clicked_jump, boost::ref(*this), Prev_Owned));
+	m_btn[PrevOwned]->sigclicked.connect
+		(boost::bind(&BuildingStatisticsMenu::clicked_jump, boost::ref(*this), PrevOwned));
 
-	m_btn[Next_Owned] =
+	m_btn[NextOwned] =
 		new UI::Button
 			(this, "next_owned",
 			 JUMP_NEXT_BUTTON_X, OWNED_Y, 24, 24,
@@ -140,10 +140,10 @@ Building_Statistics_Menu::Building_Statistics_Menu
 			 g_gr->images().get("pics/scrollbar_right.png"),
 			 _("Show next"),
 			 false);
-	m_btn[Next_Owned]->sigclicked.connect
-		(boost::bind(&Building_Statistics_Menu::clicked_jump, boost::ref(*this), Next_Owned));
+	m_btn[NextOwned]->sigclicked.connect
+		(boost::bind(&BuildingStatisticsMenu::clicked_jump, boost::ref(*this), NextOwned));
 
-	m_btn[Prev_Construction] =
+	m_btn[PrevConstruction] =
 		new UI::Button
 			(this, "previous_constructed",
 			 JUMP_PREV_BUTTON_X, IN_BUILD_Y, 24, 24,
@@ -151,10 +151,10 @@ Building_Statistics_Menu::Building_Statistics_Menu
 			 g_gr->images().get("pics/scrollbar_left.png"),
 			 _("Show previous"),
 			 false);
-	m_btn[Prev_Construction]->sigclicked.connect
-		(boost::bind(&Building_Statistics_Menu::clicked_jump, boost::ref(*this), Prev_Construction));
+	m_btn[PrevConstruction]->sigclicked.connect
+		(boost::bind(&BuildingStatisticsMenu::clicked_jump, boost::ref(*this), PrevConstruction));
 
-	m_btn[Next_Construction] =
+	m_btn[NextConstruction] =
 		new UI::Button
 			(this, "next_constructed",
 			 JUMP_NEXT_BUTTON_X, IN_BUILD_Y, 24, 24,
@@ -162,10 +162,10 @@ Building_Statistics_Menu::Building_Statistics_Menu
 			 g_gr->images().get("pics/scrollbar_right.png"),
 			 _("Show next"),
 			 false);
-	m_btn[Next_Construction]->sigclicked.connect
-		(boost::bind(&Building_Statistics_Menu::clicked_jump, boost::ref(*this), Next_Construction));
+	m_btn[NextConstruction]->sigclicked.connect
+		(boost::bind(&BuildingStatisticsMenu::clicked_jump, boost::ref(*this), NextConstruction));
 
-	m_btn[Prev_Unproductive] =
+	m_btn[PrevUnproductive] =
 		new UI::Button
 			(this, "previous_unproductive",
 			 JUMP_PREV_BUTTON_X, UNPRODUCTIVE_Y, 24, 24,
@@ -173,10 +173,10 @@ Building_Statistics_Menu::Building_Statistics_Menu
 			 g_gr->images().get("pics/scrollbar_left.png"),
 			 _("Show previous"),
 			 false);
-	m_btn[Prev_Unproductive]->sigclicked.connect
-		(boost::bind(&Building_Statistics_Menu::clicked_jump, boost::ref(*this), Prev_Unproductive));
+	m_btn[PrevUnproductive]->sigclicked.connect
+		(boost::bind(&BuildingStatisticsMenu::clicked_jump, boost::ref(*this), PrevUnproductive));
 
-	m_btn[Next_Unproductive] =
+	m_btn[NextUnproductive] =
 		new UI::Button
 			(this, "next_unproductive",
 			 JUMP_NEXT_BUTTON_X, UNPRODUCTIVE_Y, 24, 24,
@@ -184,15 +184,15 @@ Building_Statistics_Menu::Building_Statistics_Menu
 			 g_gr->images().get("pics/scrollbar_right.png"),
 			 _("Show next"),
 			 false);
-	m_btn[Next_Unproductive]->sigclicked.connect
-		(boost::bind(&Building_Statistics_Menu::clicked_jump, boost::ref(*this), Next_Unproductive));
+	m_btn[NextUnproductive]->sigclicked.connect
+		(boost::bind(&BuildingStatisticsMenu::clicked_jump, boost::ref(*this), NextUnproductive));
 }
 
 
 /*
  * Update this statistic
  */
-void Building_Statistics_Menu::think() {
+void BuildingStatisticsMenu::think() {
 	const Widelands::Game & game = iplayer().game();
 	int32_t const gametime = game.get_gametime();
 
@@ -207,7 +207,7 @@ void Building_Statistics_Menu::think() {
  *
  * Draw this window
  */
-void Building_Statistics_Menu::draw(RenderTarget & dst) {
+void BuildingStatisticsMenu::draw(RenderTarget & dst) {
 	UI::Window::draw(dst);
 
 	const Widelands::Player & player = iplayer().player();
@@ -220,7 +220,7 @@ void Building_Statistics_Menu::draw(RenderTarget & dst) {
 /*
  * validate if this pointer is ok
  */
-int32_t Building_Statistics_Menu::validate_pointer
+int32_t BuildingStatisticsMenu::validate_pointer
 	(int32_t * const id, int32_t const size)
 {
 	if (*id < 0)
@@ -232,7 +232,7 @@ int32_t Building_Statistics_Menu::validate_pointer
 }
 
 
-void Building_Statistics_Menu::clicked_jump(Jump_Targets const id) {
+void BuildingStatisticsMenu::clicked_jump(JumpTargets const id) {
 	assert(m_table.has_selection());
 	if (m_last_table_index != m_table.selection_index())
 		m_last_building_index = 0;
@@ -246,13 +246,13 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets const id) {
 	bool found = true; //  we think, we always find a proper building
 
 	switch (id) {
-	case Prev_Owned:
+	case PrevOwned:
 		--m_last_building_index;
 		break;
-	case Next_Owned:
+	case NextOwned:
 		++m_last_building_index;
 		break;
-	case Prev_Construction: {
+	case PrevConstruction: {
 		int32_t const curindex = m_last_building_index;
 		while
 			(validate_pointer(&(--m_last_building_index), vec.size()) != curindex)
@@ -260,7 +260,7 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets const id) {
 				break;
 		break;
 	}
-	case Next_Construction: {
+	case NextConstruction: {
 		int32_t const curindex = m_last_building_index;
 		while
 			(validate_pointer(&(++m_last_building_index), vec.size()) != curindex)
@@ -268,7 +268,7 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets const id) {
 				break;
 		break;
 	}
-	case Prev_Unproductive: {
+	case PrevUnproductive: {
 		int32_t const curindex = m_last_building_index;
 		found = false;
 		while (validate_pointer(&(--m_last_building_index), vec.size()) != curindex)
@@ -293,7 +293,7 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets const id) {
 					found = true;
 		break;
 	}
-	case Next_Unproductive: {
+	case NextUnproductive: {
 		int32_t const curindex = m_last_building_index;
 		found = false;
 		while
@@ -333,12 +333,12 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets const id) {
 /*
  * The table has been selected
  */
-void Building_Statistics_Menu::table_changed(uint32_t) {update();}
+void BuildingStatisticsMenu::table_changed(uint32_t) {update();}
 
 /**
  * Callback to sort table based on building size.
  */
-bool Building_Statistics_Menu::compare_building_size
+bool BuildingStatisticsMenu::compare_building_size
 	(uint32_t const rowa, uint32_t const rowb)
 {
 	const Widelands::TribeDescr & tribe = iplayer().player().tribe();
@@ -364,7 +364,7 @@ bool Building_Statistics_Menu::compare_building_size
 /*
  * Update table
  */
-void Building_Statistics_Menu::update() {
+void BuildingStatisticsMenu::update() {
 	m_owned   .set_text("");
 	m_in_build.set_text("");
 	m_progbar .set_state(0);
@@ -429,10 +429,10 @@ void Building_Statistics_Menu::update() {
 
 		if (is_selected) {
 			m_anim = building.get_ui_anim();
-			m_btn[Prev_Owned]       ->set_enabled(nr_owned);
-			m_btn[Next_Owned]       ->set_enabled(nr_owned);
-			m_btn[Prev_Construction]->set_enabled(nr_build);
-			m_btn[Next_Construction]->set_enabled(nr_build);
+			m_btn[PrevOwned]       ->set_enabled(nr_owned);
+			m_btn[NextOwned]       ->set_enabled(nr_owned);
+			m_btn[PrevConstruction]->set_enabled(nr_build);
+			m_btn[NextConstruction]->set_enabled(nr_build);
 		}
 
 		//  add new Table Entry
@@ -471,14 +471,14 @@ void Building_Statistics_Menu::update() {
 			snprintf(buffer, sizeof(buffer), "%3u", percent);
 			if (is_selected)  {
 				m_progbar.set_state(percent);
-				m_btn[Prev_Unproductive]->set_enabled(true);
-				m_btn[Next_Unproductive]->set_enabled(true);
+				m_btn[PrevUnproductive]->set_enabled(true);
+				m_btn[NextUnproductive]->set_enabled(true);
 			}
 		} else {
 			snprintf(buffer, sizeof(buffer), " ");
 			if (is_selected) {
-				m_btn[Prev_Unproductive]->set_enabled(false);
-				m_btn[Next_Unproductive]->set_enabled(false);
+				m_btn[PrevUnproductive]->set_enabled(false);
+				m_btn[NextUnproductive]->set_enabled(false);
 			}
 		}
 		te->set_string(Columns::Prod, buffer);
@@ -498,11 +498,11 @@ void Building_Statistics_Menu::update() {
 
 	//  disable all buttons, if nothing to select
 	if (!m_table.has_selection()) {
-		m_btn[Prev_Owned]       ->set_enabled(false);
-		m_btn[Next_Owned]       ->set_enabled(false);
-		m_btn[Prev_Construction]->set_enabled(false);
-		m_btn[Next_Construction]->set_enabled(false);
-		m_btn[Prev_Unproductive]->set_enabled(false);
-		m_btn[Next_Unproductive]->set_enabled(false);
+		m_btn[PrevOwned]       ->set_enabled(false);
+		m_btn[NextOwned]       ->set_enabled(false);
+		m_btn[PrevConstruction]->set_enabled(false);
+		m_btn[NextConstruction]->set_enabled(false);
+		m_btn[PrevUnproductive]->set_enabled(false);
+		m_btn[NextUnproductive]->set_enabled(false);
 	}
 }

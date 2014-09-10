@@ -51,7 +51,7 @@ private:
 	bool m_paused;
 	uint32_t m_player_cmdserial;
 	Widelands::PlayerNumber m_local;
-	std::vector<Computer_Player *> m_computerplayers;
+	std::vector<ComputerPlayer *> m_computerplayers;
 };
 
 #endif  // end of include guard: WL_LOGIC_SINGLE_PLAYER_GAME_CONTROLLER_H

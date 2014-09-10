@@ -226,7 +226,7 @@ void Fullscreen_Menu_Internet_Lobby::connectToMetaserver()
 
 
 /// fills the server list
-void Fullscreen_Menu_Internet_Lobby::fillGamesList(const std::vector<INet_Game> & games)
+void Fullscreen_Menu_Internet_Lobby::fillGamesList(const std::vector<InternetGame> & games)
 {
 	// List and button cleanup
 	opengames.clear();
@@ -272,19 +272,19 @@ uint8_t Fullscreen_Menu_Internet_Lobby::convert_clienttype(const std::string & t
  */
 bool Fullscreen_Menu_Internet_Lobby::compare_clienttype(unsigned int rowa, unsigned int rowb)
 {
-	const INet_Client * playera = clientsonline[rowa];
-	const INet_Client * playerb = clientsonline[rowb];
+	const InternetClient * playera = clientsonline[rowa];
+	const InternetClient * playerb = clientsonline[rowb];
 
 	return convert_clienttype(playera->type) < convert_clienttype(playerb->type);
 }
 
 /// fills the client list
-void Fullscreen_Menu_Internet_Lobby::fillClientList(const std::vector<INet_Client> & clients)
+void Fullscreen_Menu_Internet_Lobby::fillClientList(const std::vector<InternetClient> & clients)
 {
 	clientsonline.clear();
 	for (uint32_t i = 0; i < clients.size(); ++i) {
-		const INet_Client & client(clients[i]);
-		UI::Table<const INet_Client * const>::Entry_Record & er = clientsonline.add(&client);
+		const InternetClient & client(clients[i]);
+		UI::Table<const InternetClient * const>::Entry_Record & er = clientsonline.add(&client);
 		er.set_string(1, client.name);
 		er.set_string(2, client.points);
 		er.set_string(3, client.game);
@@ -325,7 +325,7 @@ void Fullscreen_Menu_Internet_Lobby::client_doubleclicked (uint32_t i)
 {
 	// add a @clientname to the current edit text.
 	if (clientsonline.has_selection()) {
-		UI::Table<const INet_Client * const>::Entry_Record & er = clientsonline.get_record(i);
+		UI::Table<const InternetClient * const>::Entry_Record & er = clientsonline.get_record(i);
 
 		std::string temp("@");
 		temp += er.get_string(1);
@@ -350,7 +350,7 @@ void Fullscreen_Menu_Internet_Lobby::client_doubleclicked (uint32_t i)
 void Fullscreen_Menu_Internet_Lobby::server_selected (uint32_t)
 {
 	if (opengames.has_selection()) {
-		const INet_Game * game = &opengames.get_selected();
+		const InternetGame * game = &opengames.get_selected();
 		if (game->connectable)
 			joingame.set_enabled(true);
 		else
@@ -364,7 +364,7 @@ void Fullscreen_Menu_Internet_Lobby::server_doubleclicked (uint32_t)
 {
 	// if the game is open try to connect it, if not do nothing.
 	if (opengames.has_selection()) {
-		const INet_Game * game = &opengames.get_selected();
+		const InternetGame * game = &opengames.get_selected();
 		if (game->connectable)
 			clicked_joingame();
 	}
@@ -379,7 +379,7 @@ void Fullscreen_Menu_Internet_Lobby::change_servername()
 
 	// Check whether a server of that name is already open.
 	// And disable 'hostgame' button if yes.
-	const std::vector<INet_Game> & games = InternetGaming::ref().games();
+	const std::vector<InternetGame> & games = InternetGaming::ref().games();
 	for (uint32_t i = 0; i < games.size(); ++i) {
 		if (games.at(i).name == servername.text())
 			hostgame.set_enabled(false);

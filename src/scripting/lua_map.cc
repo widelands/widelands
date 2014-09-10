@@ -2582,8 +2582,8 @@ int L_Road::create_new_worker
 	Flag & start = r.get_flag(Road::FlagStart);
 	Coords idle_position = start.get_position();
 	const Path & path = r.get_path();
-	Path::Step_Vector::size_type idle_index = r.get_idle_index();
-	for (Path::Step_Vector::size_type i = 0; i < idle_index; ++i)
+	Path::StepVector::size_type idle_index = r.get_idle_index();
+	for (Path::StepVector::size_type i = 0; i < idle_index; ++i)
 		egbase.map().get_neighbour(idle_position, path[i], &idle_position);
 
 	Carrier & carrier = ref_cast<Carrier, Worker>

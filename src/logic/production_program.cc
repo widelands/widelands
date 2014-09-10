@@ -718,7 +718,7 @@ ProductionProgram::ActWorker::ActWorker(
 
 		//  This will fail unless the main worker has a program with the given
 		//  name, so it also validates the parameter.
-		const Workarea_Info & worker_workarea_info =
+		const WorkareaInfo & worker_workarea_info =
 			main_worker_descr.get_program(m_program)->get_workarea_info();
 
 		// local typedef for iterator

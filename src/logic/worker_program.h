@@ -57,10 +57,10 @@ struct WorkerProgram : public BobProgramBase {
 	}
 
 	void parse(WorkerDescr *, Parser *, char const * name);
-	const Workarea_Info & get_workarea_info() const {return m_workarea_info;}
+	const WorkareaInfo & get_workarea_info() const {return m_workarea_info;}
 
 private:
-	Workarea_Info m_workarea_info;
+	WorkareaInfo m_workarea_info;
 	struct ParseMap {
 		const char * name;
 		parse_t      function;

@@ -65,7 +65,7 @@ struct Flag;
 // - handling of trainingsites (if supply line is broken - send some soldiers
 //   out, to have some more forces. Reincrease the number of soldiers that
 //   should be trained if inputs_ get filled again.).
-struct DefaultAI : Computer_Player {
+struct DefaultAI : ComputerPlayer {
 	DefaultAI(Widelands::Game&, const Widelands::PlayerNumber, uint8_t);
 	~DefaultAI();
 	void think() override;
@@ -77,31 +77,31 @@ struct DefaultAI : Computer_Player {
 	};
 
 	/// Implementation for Aggressive
-	struct AggressiveImpl : public Computer_Player::Implementation {
+	struct AggressiveImpl : public ComputerPlayer::Implementation {
 		AggressiveImpl() {
 			name = _("Aggressive");
 		}
-		Computer_Player* instantiate(Widelands::Game& game,
+		ComputerPlayer* instantiate(Widelands::Game& game,
 		                             Widelands::PlayerNumber const p) const override {
 			return new DefaultAI(game, p, AGGRESSIVE);
 		}
 	};
 
-	struct NormalImpl : public Computer_Player::Implementation {
+	struct NormalImpl : public ComputerPlayer::Implementation {
 		NormalImpl() {
 			name = _("Normal");
 		}
-		Computer_Player* instantiate(Widelands::Game& game,
+		ComputerPlayer* instantiate(Widelands::Game& game,
 		                             Widelands::PlayerNumber const p) const override {
 			return new DefaultAI(game, p, NORMAL);
 		}
 	};
 
-	struct DefensiveImpl : public Computer_Player::Implementation {
+	struct DefensiveImpl : public ComputerPlayer::Implementation {
 		DefensiveImpl() {
 			name = _("Defensive");
 		}
-		Computer_Player* instantiate(Widelands::Game& game,
+		ComputerPlayer* instantiate(Widelands::Game& game,
 		                             Widelands::PlayerNumber const p) const override {
 			return new DefaultAI(game, p, DEFENSIVE);
 		}

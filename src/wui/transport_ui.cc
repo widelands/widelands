@@ -44,8 +44,8 @@ using Widelands::WorkerDescr;
 static const char pic_tab_wares[] = "pics/menu_tab_wares.png";
 static const char pic_tab_workers[] = "pics/menu_tab_workers.png";
 
-struct Economy_Options_Window : public UI::UniqueWindow {
-	Economy_Options_Window(InteractiveGameBase & parent, Economy & economy)
+struct EconomyOptionsWindow : public UI::UniqueWindow {
+	EconomyOptionsWindow(InteractiveGameBase & parent, Economy & economy)
 		:
 		UI::UniqueWindow
 			(&parent, "economy_options", &economy.optionswindow_registry(), 0, 0,
@@ -321,7 +321,7 @@ void Economy::show_options_window() {
 	if (m_optionswindow_registry.window)
 		m_optionswindow_registry.window->move_to_top();
 	else
-		new Economy_Options_Window
+		new EconomyOptionsWindow
 			(ref_cast<InteractiveGameBase, InteractiveBase>
 			 	(*owner().egbase().get_ibase()),
 			 *this);

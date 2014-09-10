@@ -25,7 +25,7 @@
 #include <SDL_mixer.h>
 
 
-class Sound_Handler;
+class SoundHandler;
 
 /// Predefined priorities for easy reading
 /// \warning DO NOT CHANGE !! The values have meaning beyond just being numbers
@@ -45,7 +45,7 @@ class Sound_Handler;
  * from the outside
  */
 struct FXset {
-	friend class Sound_Handler;
+	friend class SoundHandler;
 	FXset(uint8_t priority = PRIO_MEDIUM);
 	~FXset();
 

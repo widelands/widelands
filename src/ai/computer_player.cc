@@ -21,23 +21,23 @@
 
 #include "ai/defaultai.h"
 
-Computer_Player::Computer_Player
+ComputerPlayer::ComputerPlayer
 	(Widelands::Game & g, Widelands::PlayerNumber const pid)
 	: m_game(g), m_player_number(pid)
 {
 }
 
-Computer_Player::~Computer_Player() {}
+ComputerPlayer::~ComputerPlayer() {}
 
-struct EmptyAI : Computer_Player {
+struct EmptyAI : ComputerPlayer {
 	EmptyAI(Widelands::Game & g, const Widelands::PlayerNumber pid)
-	: Computer_Player(g, pid) {}
+	: ComputerPlayer(g, pid) {}
 
 	void think() override {}
 
 	struct EmptyAIImpl : Implementation {
 		EmptyAIImpl() {name = _("None");}
-		Computer_Player * instantiate
+		ComputerPlayer * instantiate
 			(Widelands::Game & g, Widelands::PlayerNumber const pid) const override
 		{
 			return new EmptyAI(g, pid);
@@ -49,10 +49,10 @@ struct EmptyAI : Computer_Player {
 
 EmptyAI::EmptyAIImpl EmptyAI::implementation;
 
-const Computer_Player::ImplementationVector &
-Computer_Player::getImplementations()
+const ComputerPlayer::ImplementationVector &
+ComputerPlayer::getImplementations()
 {
-	static std::vector<Computer_Player::Implementation const *> impls;
+	static std::vector<ComputerPlayer::Implementation const *> impls;
 
 	if (impls.empty()) {
 		impls.push_back(&DefaultAI::aggressiveImpl);
@@ -64,12 +64,12 @@ Computer_Player::getImplementations()
 	return impls;
 }
 
-const Computer_Player::Implementation * Computer_Player::getImplementation
+const ComputerPlayer::Implementation * ComputerPlayer::getImplementation
 	(const std::string & name)
 {
 	const ImplementationVector & vec = getImplementations();
 
-	for (const Computer_Player::Implementation* implementation : vec) {
+	for (const ComputerPlayer::Implementation* implementation : vec) {
 		if (implementation->name == name) {
 			return implementation;
 		}

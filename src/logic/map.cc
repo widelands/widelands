@@ -1586,8 +1586,8 @@ void Map::calc_cost
 	if (backward)
 		*backward = 0;
 
-	const Path::Step_Vector::size_type nr_steps = path.get_nsteps();
-	for (Path::Step_Vector::size_type i = 0; i < nr_steps; ++i) {
+	const Path::StepVector::size_type nr_steps = path.get_nsteps();
+	for (Path::StepVector::size_type i = 0; i < nr_steps; ++i) {
 		const Direction dir = path[i];
 
 		if (forward)

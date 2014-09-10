@@ -32,16 +32,16 @@ namespace Widelands {
 class Game;
 struct Message;
 }
-class Interactive_Player;
+class InteractivePlayer;
 
 ///  Shows the not already fulfilled objectives.
 struct GameMessageMenu : public UI::UniqueWindow {
-	GameMessageMenu(Interactive_Player &, UI::UniqueWindow::Registry &);
+	GameMessageMenu(InteractivePlayer &, UI::UniqueWindow::Registry &);
 
 	/// Shows a newly created message. Assumes that the message is not yet in
 	/// the list (the message was added to the queue after the last time think()
 	/// was executed.
-	void show_new_message(Widelands::Message_Id, const Widelands::Message &);
+	void show_new_message(Widelands::MessageId, const Widelands::Message &);
 
 	enum Mode {Inbox, Archive};
 	void think() override;
@@ -50,7 +50,7 @@ struct GameMessageMenu : public UI::UniqueWindow {
 private:
 	enum Cols {ColSelect, ColStatus, ColTitle, ColTimeSent};
 
-	Interactive_Player & iplayer() const;
+	InteractivePlayer & iplayer() const;
 	void selected(uint32_t);
 	void double_clicked(uint32_t);
 

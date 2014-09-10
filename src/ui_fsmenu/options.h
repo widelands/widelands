@@ -34,9 +34,9 @@
 class Fullscreen_Menu_Options;
 class Section;
 
-class Options_Ctrl {
+class OptionsCtrl {
 public:
-	struct Options_Struct {
+	struct OptionsStruct {
 		int32_t xres;
 		int32_t yres;
 		bool inputgrab;
@@ -64,10 +64,10 @@ public:
 		int32_t panel_snap_distance;
 	};
 
-	Options_Ctrl(Section &);
-	~Options_Ctrl();
+	OptionsCtrl(Section &);
+	~OptionsCtrl();
 	void handle_menu();
-	Options_Ctrl::Options_Struct options_struct();
+	OptionsCtrl::OptionsStruct options_struct();
 	void save_options();
 private:
 	Section & m_opt_section;
@@ -80,8 +80,8 @@ private:
 
 class Fullscreen_Menu_Options : public Fullscreen_Menu_Base {
 public:
-	Fullscreen_Menu_Options(Options_Ctrl::Options_Struct opt);
-	Options_Ctrl::Options_Struct get_values();
+	Fullscreen_Menu_Options(OptionsCtrl::OptionsStruct opt);
+	OptionsCtrl::OptionsStruct get_values();
 	enum {
 		om_cancel  = 0,
 		om_ok      = 1,
@@ -125,7 +125,7 @@ private:
 	UI::Textarea                      m_label_dock_windows_to_edges;
 	UI::Textarea                      m_label_autosave;
 	UI::Textarea                      m_label_remove_replays;
-	Options_Ctrl::Options_Struct os;
+	OptionsCtrl::OptionsStruct os;
 
 	void advanced_options();
 
@@ -145,8 +145,8 @@ private:
 
 class Fullscreen_Menu_Advanced_Options : public Fullscreen_Menu_Base {
 public:
-	Fullscreen_Menu_Advanced_Options(Options_Ctrl::Options_Struct opt);
-	Options_Ctrl::Options_Struct get_values();
+	Fullscreen_Menu_Advanced_Options(OptionsCtrl::OptionsStruct opt);
+	OptionsCtrl::OptionsStruct get_values();
 	enum {
 		om_cancel =   0,
 		om_ok     =   1
@@ -179,7 +179,7 @@ private:
 	UI::Checkbox                m_transparent_chat;
 	UI::Textarea                m_label_transparent_chat;
 
-	Options_Ctrl::Options_Struct os;
+	OptionsCtrl::OptionsStruct os;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_OPTIONS_H

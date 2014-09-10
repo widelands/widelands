@@ -29,8 +29,8 @@ static const char pic_tab_wares[] = "pics/menu_tab_wares.png";
 /**
  * Status window for dismantle sites.
  */
-struct DismantleSite_Window : public Building_Window {
-	DismantleSite_Window
+struct DismantleSiteWindow : public BuildingWindow {
+	DismantleSiteWindow
 		(InteractiveGameBase        & parent,
 		 Widelands::DismantleSite &,
 		 UI::Window *                & registry);
@@ -42,11 +42,11 @@ private:
 };
 
 
-DismantleSite_Window::DismantleSite_Window
+DismantleSiteWindow::DismantleSiteWindow
 	(InteractiveGameBase        & parent,
 	 Widelands::DismantleSite & cs,
 	 UI::Window *                & registry)
-	: Building_Window(parent, cs, registry)
+	: BuildingWindow(parent, cs, registry)
 {
 	UI::Box & box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
 
@@ -64,7 +64,7 @@ DismantleSite_Window::DismantleSite_Window
 
 	// Add the wares queue
 	for (uint32_t i = 0; i < cs.get_nrwaresqueues(); ++i)
-		Building_Window::create_ware_queue_panel(&box, cs, cs.get_waresqueue(i), true);
+		BuildingWindow::create_ware_queue_panel(&box, cs, cs.get_waresqueue(i), true);
 
 	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
 }
@@ -75,9 +75,9 @@ DismantleSite_Window::DismantleSite_Window
 Make sure the window is redrawn when necessary.
 ===============
 */
-void DismantleSite_Window::think()
+void DismantleSiteWindow::think()
 {
-	Building_Window::think();
+	BuildingWindow::think();
 
 	const Widelands::DismantleSite & ds =
 		ref_cast<Widelands::DismantleSite, Widelands::Building>(building());
@@ -94,5 +94,5 @@ Create the status window describing the site.
 void Widelands::DismantleSite::create_options_window
 	(InteractiveGameBase & parent, UI::Window * & registry)
 {
-	new DismantleSite_Window(parent, *this, registry);
+	new DismantleSiteWindow(parent, *this, registry);
 }

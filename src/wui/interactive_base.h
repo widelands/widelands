@@ -40,12 +40,12 @@ struct InteractiveBaseInternals;
 class UniqueWindowHandler;
 
 /**
- * This is used to represent the code that Interactive_Player and
+ * This is used to represent the code that InteractivePlayer and
  * Editor_Interactive share.
  */
-class InteractiveBase : public Map_View, public DebugConsole::Handler {
+class InteractiveBase : public MapView, public DebugConsole::Handler {
 public:
-	friend class Sound_Handler;
+	friend class SoundHandler;
 
 	enum {
 		dfShowCensus     = 1, ///< show census report on buildings
@@ -64,7 +64,7 @@ public:
 	virtual void reference_player_tribe(Widelands::PlayerNumber, const void * const) {}
 
 	bool m_show_workarea_preview;
-	OverlayManager::JobId show_work_area(const Workarea_Info & workarea_info, Widelands::Coords coords);
+	OverlayManager::JobId show_work_area(const WorkareaInfo & workarea_info, Widelands::Coords coords);
 	void hide_work_area(OverlayManager::JobId job_id);
 
 	//  point of view for drawing
@@ -155,8 +155,8 @@ private:
 	void cmdLua(const std::vector<std::string> & args);
 	void update_speedlabel();
 
-	struct Sel_Data {
-		Sel_Data
+	struct SelData {
+		SelData
 			(const bool Freeze = false, const bool Triangles = false,
 			 const Widelands::NodeAndTriangle<> Pos       =
 				Widelands::NodeAndTriangle<>

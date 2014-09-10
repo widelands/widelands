@@ -31,8 +31,8 @@ static char const * pic_tab_military = "pics/menu_tab_military.png";
 /**
  * Status window for \ref MilitarySite
  */
-struct MilitarySite_Window : public Building_Window {
-	MilitarySite_Window
+struct MilitarySiteWindow : public BuildingWindow {
+	MilitarySiteWindow
 		(InteractiveGameBase & parent,
 		 MilitarySite       &,
 		 UI::Window *       & registry);
@@ -46,12 +46,12 @@ protected:
 };
 
 
-MilitarySite_Window::MilitarySite_Window
+MilitarySiteWindow::MilitarySiteWindow
 	(InteractiveGameBase & parent,
 	 MilitarySite       & ms,
 	 UI::Window *       & registry)
 :
-Building_Window(parent, ms, registry)
+BuildingWindow(parent, ms, registry)
 {
 	get_tabs()->add
 		("soldiers", g_gr->images().get(pic_tab_military),
@@ -59,9 +59,9 @@ Building_Window(parent, ms, registry)
 		 _("Soldiers"));
 }
 
-void MilitarySite_Window::create_capsbuttons(UI::Box * buttons)
+void MilitarySiteWindow::create_capsbuttons(UI::Box * buttons)
 {
-	Building_Window::create_capsbuttons(buttons);
+	BuildingWindow::create_capsbuttons(buttons);
 }
 
 /**
@@ -70,5 +70,5 @@ void MilitarySite_Window::create_capsbuttons(UI::Box * buttons)
 void MilitarySite::create_options_window
 	(InteractiveGameBase & plr, UI::Window * & registry)
 {
-	new MilitarySite_Window(plr, *this, registry);
+	new MilitarySiteWindow(plr, *this, registry);
 }

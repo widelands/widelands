@@ -694,7 +694,7 @@ void Bob::movepath_update(Game & game, State & state)
 		return pop_task(game);
 
 	if
-		(static_cast<Path::Step_Vector::size_type>(state.ivar1)
+		(static_cast<Path::StepVector::size_type>(state.ivar1)
 		 >=
 		 path->get_nsteps())
 	{
@@ -712,7 +712,7 @@ void Bob::movepath_update(Game & game, State & state)
 	if
 		(state.ivar2
 		 &&
-		 static_cast<Path::Step_Vector::size_type>(state.ivar1) + 1
+		 static_cast<Path::StepVector::size_type>(state.ivar1) + 1
 		 ==
 		 path->get_nsteps())
 	{
@@ -1038,13 +1038,13 @@ void Bob::log_general_info(const EditorGameBase & egbase)
 		molog("\n* path: %p\n",  m_stack[i].path);
 		if (m_stack[i].path) {
 			const Path & path = *m_stack[i].path;
-			Path::Step_Vector::size_type nr_steps = path.get_nsteps();
+			Path::StepVector::size_type nr_steps = path.get_nsteps();
 			molog
 				("** Path length: %lu\n",
 				 static_cast<long unsigned int>(nr_steps));
 			molog("** Start: (%i, %i)\n", path.get_start().x, path.get_start().y);
 			molog("** End: (%i, %i)\n", path.get_end().x, path.get_end().y);
-			for (Path::Step_Vector::size_type j = 0; j < nr_steps; ++j)
+			for (Path::StepVector::size_type j = 0; j < nr_steps; ++j)
 				molog
 					("** Step %lu/%lu: %i\n",
 					 static_cast<long unsigned int>(j + 1),

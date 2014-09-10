@@ -41,15 +41,15 @@ struct Textarea;
  * to the player and draws the user interface,
  * cares for input and so on.
  */
-class Interactive_Player : public InteractiveGameBase {
+class InteractivePlayer : public InteractiveGameBase {
 public:
-	Interactive_Player
+	InteractivePlayer
 		(Widelands::Game &,
 		 Section         & global_s,
 		 Widelands::PlayerNumber,
 		 bool              multiplayer);
 
-	~Interactive_Player();
+	~InteractivePlayer();
 
 	void start() override;
 
@@ -83,7 +83,7 @@ public:
 		m_flag_to_connect = location;
 	}
 
-	void popup_message(Widelands::Message_Id, const Widelands::Message &);
+	void popup_message(Widelands::MessageId, const Widelands::Message &);
 
 private:
 	void cmdSwitchPlayer(const std::vector<std::string> & args);

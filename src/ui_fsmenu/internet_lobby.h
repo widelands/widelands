@@ -60,8 +60,8 @@ private:
 	UI::SpinBox maxclients;
 	UI::Button joingame, hostgame, back;
 	UI::EditBox servername;
-	UI::Table<const INet_Client * const> clientsonline;
-	UI::Listselect<INet_Game> opengames;
+	UI::Table<const InternetClient * const> clientsonline;
+	UI::Listselect<InternetGame> opengames;
 	GameChatPanel chat;
 
 	// Login information
@@ -69,8 +69,8 @@ private:
 	const char * password;
 	bool         reg;
 
-	void fillGamesList (const std::vector<INet_Game> &);
-	void fillClientList(const std::vector<INet_Client> &);
+	void fillGamesList (const std::vector<InternetGame> &);
+	void fillClientList(const std::vector<InternetClient> &);
 
 	void connectToMetaserver();
 

@@ -63,7 +63,7 @@ DefaultAI::DefensiveImpl DefaultAI::defensiveImpl;
 
 /// Constructor of DefaultAI
 DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
-   : Computer_Player(ggame, pid),
+   : ComputerPlayer(ggame, pid),
      type_(t),
      m_buildable_changed(true),
      m_mineable_changed(true),
@@ -1557,7 +1557,7 @@ bool DefaultAI::improve_roads(int32_t gametime) {
 			const Map& map = game().map();
 			CoordPath cp(map, path);
 			// try to split after two steps
-			CoordPath::Step_Vector::size_type i = cp.get_nsteps() - 1, j = 1;
+			CoordPath::StepVector::size_type i = cp.get_nsteps() - 1, j = 1;
 
 			for (; i >= j; --i, ++j) {
 				{
@@ -1813,8 +1813,8 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	}
 
 	// Get max radius of recursive workarea
-	Workarea_Info::size_type radius = 0;
-	const Workarea_Info& workarea_info = site.bo->desc->m_workarea_info;
+	WorkareaInfo::size_type radius = 0;
+	const WorkareaInfo& workarea_info = site.bo->desc->m_workarea_info;
 	for (const std::pair<uint32_t, std::set<std::string> > & temp_info : workarea_info) {
 		if (radius < temp_info.first) {
 			radius = temp_info.first;
@@ -2619,7 +2619,7 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 	iterate_players_existing_novar(p, nr_players, game())++ plr_in_game;
 
 	// receiving games statistics and parsing it (reading latest entry)
-	const Game::General_Stats_vector& genstats = game().get_general_statistics();
+	const Game::GeneralStatsVector& genstats = game().get_general_statistics();
 	for (uint8_t j = 1; j <= plr_in_game; ++j) {
 		if (pn == j) {
 			player_attackable[j - 1] = false;

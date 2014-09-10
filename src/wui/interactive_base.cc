@@ -79,7 +79,7 @@ struct InteractiveBaseInternals {
 };
 
 InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
-   : Map_View(nullptr,
+   : MapView(nullptr,
               0,
               0,
               global_s.get_int("xres", DEFAULT_RESOLUTION_W),
@@ -113,7 +113,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 		g_gr->images().get("pics/workarea2.png"), g_gr->images().get("pics/workarea1.png")} {
 	m_toolbar.set_layout_toplevel(true);
 	m->quicknavigation->set_setview
-		(boost::bind(&Map_View::set_viewpoint, this, _1, true));
+		(boost::bind(&MapView::set_viewpoint, this, _1, true));
 	set_changeview
 		(boost::bind(&QuickNavigation::view_changed,
 		 m->quicknavigation.get(), _1, _2));
@@ -195,7 +195,7 @@ void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center)
 				 	 productionsite,
 				 	 map[center.node].get_immovable()))
 			{
-				if (upcast(Interactive_Player const, iplayer, igbase)) {
+				if (upcast(InteractivePlayer const, iplayer, igbase)) {
 					const Widelands::Player & player = iplayer->player();
 					if
 						(!player.see_all()
@@ -250,10 +250,10 @@ void InteractiveBase::show_buildhelp(bool t) {
 
 // Show the given workareas at the given coords and returns the overlay job id associated
 OverlayManager::JobId InteractiveBase::show_work_area
-	(const Workarea_Info & workarea_info, Widelands::Coords coords)
+	(const WorkareaInfo & workarea_info, Widelands::Coords coords)
 {
 	uint8_t workareas_nrs = workarea_info.size();
-	Workarea_Info::size_type wa_index;
+	WorkareaInfo::size_type wa_index;
 	switch (workareas_nrs) {
 		case 0: return 0; // no workarea
 		case 1: wa_index = 5; break;
@@ -271,7 +271,7 @@ OverlayManager::JobId InteractiveBase::show_work_area
 	Widelands::HollowArea<> hollow_area(Widelands::Area<>(coords, 0), 0);
 
 	// Iterate through the work areas, from building to its enhancement
-	Workarea_Info::const_iterator it = workarea_info.begin();
+	WorkareaInfo::const_iterator it = workarea_info.begin();
 	for (; it != workarea_info.end(); ++it) {
 		hollow_area.radius = it->first;
 		Widelands::MapHollowRegion<> mr(map, hollow_area);
@@ -797,8 +797,8 @@ void InteractiveBase::roadb_add_overlay()
 	// preview of the road
 	assert(!m_jobid);
 	m_jobid = overlay_manager.get_a_job_id();
-	const CoordPath::Step_Vector::size_type nr_steps = m_buildroad->get_nsteps();
-	for (CoordPath::Step_Vector::size_type idx = 0; idx < nr_steps; ++idx) {
+	const CoordPath::StepVector::size_type nr_steps = m_buildroad->get_nsteps();
+	for (CoordPath::StepVector::size_type idx = 0; idx < nr_steps; ++idx) {
 		Widelands::Direction dir = (*m_buildroad)[idx];
 		Coords c = m_buildroad->get_coords()[idx];
 
@@ -958,7 +958,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_keysym const code)
 		break;
 	}
 
-	return Map_View::handle_key(down, code);
+	return MapView::handle_key(down, code);
 }
 
 void InteractiveBase::cmdLua(const std::vector<std::string> & args)

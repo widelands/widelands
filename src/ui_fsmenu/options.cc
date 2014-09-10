@@ -85,7 +85,7 @@ void add_languages_to_list(UI::Listselect<std::string>* list, const std::string&
 }  // namespace
 
 Fullscreen_Menu_Options::Fullscreen_Menu_Options
-		(Options_Ctrl::Options_Struct opt)
+		(OptionsCtrl::OptionsStruct opt)
 	:
 	Fullscreen_Menu_Base("optionsmenu.jpg"),
 
@@ -375,7 +375,7 @@ bool Fullscreen_Menu_Options::handle_key(bool down, SDL_keysym code)
 	return Fullscreen_Menu_Base::handle_key(down, code);
 }
 
-Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
+OptionsCtrl::OptionsStruct Fullscreen_Menu_Options::get_values() {
 	const uint32_t res_index = m_reslist.selection_index();
 
 	// Write all data from UI elements
@@ -405,7 +405,7 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
  * The advanced option menu
  */
 Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
-	(Options_Ctrl::Options_Struct const opt)
+	(OptionsCtrl::OptionsStruct const opt)
 	:
 	Fullscreen_Menu_Base("optionsmenu.jpg"),
 
@@ -594,7 +594,7 @@ bool Fullscreen_Menu_Advanced_Options::handle_key(bool down, SDL_keysym code)
 }
 
 
-Options_Ctrl::Options_Struct Fullscreen_Menu_Advanced_Options::get_values() {
+OptionsCtrl::OptionsStruct Fullscreen_Menu_Advanced_Options::get_values() {
 	// Write all remaining data from UI elements
 	os.message_sound        = m_message_sound.get_state();
 	os.nozip                = m_nozip.get_state();
@@ -611,17 +611,17 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Advanced_Options::get_values() {
 /**
  * Handles communication between window class and options
  */
-Options_Ctrl::Options_Ctrl(Section & s)
+OptionsCtrl::OptionsCtrl(Section & s)
 : m_opt_section(s), m_opt_dialog(new Fullscreen_Menu_Options(options_struct()))
 {
 	handle_menu();
 }
 
-Options_Ctrl::~Options_Ctrl() {
+OptionsCtrl::~OptionsCtrl() {
 	delete m_opt_dialog;
 }
 
-void Options_Ctrl::handle_menu()
+void OptionsCtrl::handle_menu()
 {
 	int32_t i = m_opt_dialog->run();
 	if (i != Fullscreen_Menu_Options::om_cancel)
@@ -633,8 +633,8 @@ void Options_Ctrl::handle_menu()
 	}
 }
 
-Options_Ctrl::Options_Struct Options_Ctrl::options_struct() {
-	Options_Struct opt;
+OptionsCtrl::OptionsStruct OptionsCtrl::options_struct() {
+	OptionsStruct opt;
 	opt.xres = m_opt_section.get_int("xres", DEFAULT_RESOLUTION_W);
 	opt.yres = m_opt_section.get_int("yres", DEFAULT_RESOLUTION_H);
 	opt.inputgrab = m_opt_section.get_bool("inputgrab", false);
@@ -663,8 +663,8 @@ Options_Ctrl::Options_Struct Options_Ctrl::options_struct() {
 	return opt;
 }
 
-void Options_Ctrl::save_options() {
-	Options_Ctrl::Options_Struct opt = m_opt_dialog->get_values();
+void OptionsCtrl::save_options() {
+	OptionsCtrl::OptionsStruct opt = m_opt_dialog->get_values();
 	m_opt_section.set_int ("xres",                  opt.xres);
 	m_opt_section.set_int ("yres",                  opt.yres);
 	m_opt_section.set_bool("fullscreen",            opt.fullscreen);

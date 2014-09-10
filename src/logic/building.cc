@@ -737,7 +737,7 @@ void Building::draw_help
 	}
 
 	if (dpyflags & InteractiveBase::dfShowStatistics) {
-		if (upcast(Interactive_Player const, iplayer, &igbase))
+		if (upcast(InteractivePlayer const, iplayer, &igbase))
 			if
 				(!iplayer->player().see_all() &&
 				 iplayer->player().is_hostile(*get_owner()))

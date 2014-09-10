@@ -148,7 +148,7 @@ bool Fullscreen_Menu_NetSetupLAN::get_host_address
 
 	const uint32_t opengames_size = opengames.size();
 	for (uint32_t i = 0; i < opengames_size; ++i) {
-		const Net_Open_Game & game = *opengames[i];
+		const NetOpenGame & game = *opengames[i];
 
 		if (!strcmp(game.info.hostname, host.c_str())) {
 			addr = game.address;
@@ -175,7 +175,7 @@ const std::string & Fullscreen_Menu_NetSetupLAN::get_playername()
 
 void Fullscreen_Menu_NetSetupLAN::game_selected (uint32_t) {
 	if (opengames.has_selection()) {
-		if (const Net_Open_Game * const game = opengames.get_selected()) {
+		if (const NetOpenGame * const game = opengames.get_selected()) {
 			hostname.setText(game->info.hostname);
 			joingame.set_enabled(true);
 		}
@@ -187,8 +187,8 @@ void Fullscreen_Menu_NetSetupLAN::game_doubleclicked (uint32_t) {
 }
 
 void Fullscreen_Menu_NetSetupLAN::update_game_info
-	(UI::Table<Net_Open_Game const * const>::Entry_Record & er,
-	 const Net_Game_Info & info)
+	(UI::Table<NetOpenGame const * const>::Entry_Record & er,
+	 const NetGameInfo & info)
 {
 	er.set_string (0, info.hostname);
 	er.set_string (1, info.map);
@@ -200,34 +200,34 @@ void Fullscreen_Menu_NetSetupLAN::update_game_info
 	};
 }
 
-void Fullscreen_Menu_NetSetupLAN::game_opened (const Net_Open_Game * game)
+void Fullscreen_Menu_NetSetupLAN::game_opened (const NetOpenGame * game)
 {
 	update_game_info(opengames.add(game), game->info);
 }
 
-void Fullscreen_Menu_NetSetupLAN::game_closed (const Net_Open_Game *) {}
+void Fullscreen_Menu_NetSetupLAN::game_closed (const NetOpenGame *) {}
 
-void Fullscreen_Menu_NetSetupLAN::game_updated (const Net_Open_Game * game)
+void Fullscreen_Menu_NetSetupLAN::game_updated (const NetOpenGame * game)
 {
 	if
-		(UI::Table<const Net_Open_Game * const>::Entry_Record * const er =
+		(UI::Table<const NetOpenGame * const>::Entry_Record * const er =
 		 opengames.find(game))
 		update_game_info(*er, game->info);
 }
 
 void Fullscreen_Menu_NetSetupLAN::discovery_callback
 	(int32_t               const type,
-	 Net_Open_Game const * const game,
+	 NetOpenGame const * const game,
 	 void                * const userdata)
 {
 	switch (type) {
-	case LAN_Game_Finder::GameOpened:
+	case LanGameFinder::GameOpened:
 		static_cast<Fullscreen_Menu_NetSetupLAN *>(userdata)->game_opened (game);
 		break;
-	case LAN_Game_Finder::GameClosed:
+	case LanGameFinder::GameClosed:
 		static_cast<Fullscreen_Menu_NetSetupLAN *>(userdata)->game_closed (game);
 		break;
-	case LAN_Game_Finder::GameUpdated:
+	case LanGameFinder::GameUpdated:
 		static_cast<Fullscreen_Menu_NetSetupLAN *>(userdata)->game_updated(game);
 		break;
 	default:

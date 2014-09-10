@@ -143,13 +143,13 @@ public:
 
 class L_Message : public L_GameModuleClass {
 	uint32_t m_plr;
-	Widelands::Message_Id m_mid;
+	Widelands::MessageId m_mid;
 
 public:
 	LUNA_CLASS_HEAD(L_Message);
 	virtual ~L_Message() {}
 
-	L_Message(uint8_t, Widelands::Message_Id);
+	L_Message(uint8_t, Widelands::MessageId);
 	L_Message() : m_plr(0), m_mid(0) {}
 	L_Message(lua_State * L) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);

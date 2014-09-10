@@ -25,7 +25,7 @@
 #include "logic/soldiercontrol.h"
 #include "logic/training_attribute.h"
 
-struct TrainingSite_Window;
+struct TrainingSiteWindow;
 
 namespace Widelands {
 
@@ -104,7 +104,7 @@ private:
 class TrainingSite : public ProductionSite, public SoldierControl {
 	friend class MapBuildingdataPacket;
 	MO_DESCR(TrainingSiteDescr)
-	friend struct ::TrainingSite_Window;
+	friend struct ::TrainingSiteWindow;
 
 	struct Upgrade {
 		TrainingAttribute attribute; // attribute for this upgrade

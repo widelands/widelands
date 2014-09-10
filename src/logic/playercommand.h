@@ -152,7 +152,7 @@ struct CmdBuildRoad:public PlayerCommand {
 private:
 	Path                       * path;
 	Coords                       start;
-	Path::Step_Vector::size_type nsteps;
+	Path::StepVector::size_type nsteps;
 	char                       * steps;
 };
 
@@ -681,7 +681,7 @@ private:
 struct PlayerMessageCommand : public PlayerCommand {
 	PlayerMessageCommand () : PlayerCommand() {} //  for savegames
 	PlayerMessageCommand
-		(const uint32_t t, const PlayerNumber p, const Message_Id i)
+		(const uint32_t t, const PlayerNumber p, const MessageId i)
 		: PlayerCommand(t, p), m_message_id(i)
 	{}
 
@@ -690,16 +690,16 @@ struct PlayerMessageCommand : public PlayerCommand {
 
 	PlayerMessageCommand(StreamRead &);
 
-	Message_Id message_id() const {return m_message_id;}
+	MessageId message_id() const {return m_message_id;}
 
 private:
-	Message_Id m_message_id;
+	MessageId m_message_id;
 };
 
 struct CmdMessageSetStatusRead : public PlayerMessageCommand {
 	CmdMessageSetStatusRead () : PlayerMessageCommand() {}
 	CmdMessageSetStatusRead
-		(const uint32_t t, const PlayerNumber p, const Message_Id i)
+		(const uint32_t t, const PlayerNumber p, const MessageId i)
 		: PlayerMessageCommand(t, p, i)
 	{}
 
@@ -714,7 +714,7 @@ struct CmdMessageSetStatusRead : public PlayerMessageCommand {
 struct CmdMessageSetStatusArchived : public PlayerMessageCommand {
 	CmdMessageSetStatusArchived () : PlayerMessageCommand() {}
 	CmdMessageSetStatusArchived
-		(const uint32_t t, const PlayerNumber p, const Message_Id i)
+		(const uint32_t t, const PlayerNumber p, const MessageId i)
 		: PlayerMessageCommand(t, p, i)
 	{}
 

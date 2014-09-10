@@ -28,9 +28,9 @@
 #include "random/random.h"
 
 namespace UI {struct ProgressWindow;}
-struct Computer_Player;
-class Interactive_Player;
-struct Game_Main_Menu_Load_Game;
+struct ComputerPlayer;
+class InteractivePlayer;
+struct GameMainMenuLoadGame;
 struct WLApplication;
 struct GameSettings;
 class GameController;
@@ -84,13 +84,13 @@ public:
 
 		std::vector< uint32_t > custom_statistic;
 	};
-	typedef std::vector<General_Stats> General_Stats_vector;
+	typedef std::vector<General_Stats> GeneralStatsVector;
 
 	friend class CmdQueue; // this class handles the commands
 	friend struct GameClassPacket;
 	friend struct GamePlayerInfoPacket;
 	friend struct GameLoader;
-	friend struct ::Game_Main_Menu_Load_Game;
+	friend struct ::GameMainMenuLoadGame;
 	friend struct ::WLApplication;
 
 	Game();
@@ -104,8 +104,8 @@ public:
 	void save_syncstream(bool save);
 	void init_newgame (UI::ProgressWindow *, const GameSettings &);
 	void init_savegame(UI::ProgressWindow *, const GameSettings &);
-	enum Start_Game_Type {NewSPScenario, NewNonScenario, Loaded, NewMPScenario};
-	bool run(UI::ProgressWindow * loader_ui, Start_Game_Type, const std::string& script_to_run, bool replay);
+	enum StartGameType {NewSPScenario, NewNonScenario, Loaded, NewMPScenario};
+	bool run(UI::ProgressWindow * loader_ui, StartGameType, const std::string& script_to_run, bool replay);
 
 	// Run a single player scenario directly via --scenario on the cmdline. Will
 	// run the 'script_to_run' after any init scripts of the map.
@@ -182,12 +182,12 @@ public:
 	void send_player_sink_ship(Ship &);
 	void send_player_cancel_expedition_ship(Ship &);
 
-	Interactive_Player * get_ipl();
+	InteractivePlayer * get_ipl();
 
 	SaveHandler & save_handler() {return m_savehandler;}
 
 	// Statistics
-	const General_Stats_vector & get_general_statistics() const {
+	const GeneralStatsVector & get_general_statistics() const {
 		return m_general_stats;
 	}
 
@@ -260,7 +260,7 @@ private:
 	ReplayReader       * m_replayreader;
 	ReplayWriter       * m_replaywriter;
 
-	General_Stats_vector m_general_stats;
+	GeneralStatsVector m_general_stats;
 
 	/// For save games and statistics generation
 	std::string          m_win_condition_displayname;

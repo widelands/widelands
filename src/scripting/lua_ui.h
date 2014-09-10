@@ -174,7 +174,7 @@ public:
 	LUNA_CLASS_HEAD(L_MapView);
 
 	L_MapView() : L_Panel() {}
-	L_MapView(Map_View * p) : L_Panel(p) {}
+	L_MapView(MapView * p) : L_Panel(p) {}
 	L_MapView(lua_State * L);
 	virtual ~L_MapView() {}
 

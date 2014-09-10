@@ -107,11 +107,11 @@ void MapRoaddataPacket::Read
 
 					road.m_cost[0] = fr.Unsigned32();
 					road.m_cost[1] = fr.Unsigned32();
-					Path::Step_Vector::size_type const nr_steps = fr.Unsigned16();
+					Path::StepVector::size_type const nr_steps = fr.Unsigned16();
 					if (!nr_steps)
 						throw GameDataError("nr_steps = 0");
 					Path p(road.m_flags[0]->get_position());
-					for (Path::Step_Vector::size_type i = nr_steps; i; --i)
+					for (Path::StepVector::size_type i = nr_steps; i; --i)
 						try {
 							p.append(egbase.map(), ReadDirection8(&fr));
 						} catch (const WException & e) {
@@ -253,9 +253,9 @@ void MapRoaddataPacket::Write
 				fw.Unsigned32(r->m_cost[1]);
 
 				const Path & path = r->m_path;
-				const Path::Step_Vector::size_type nr_steps = path.get_nsteps();
+				const Path::StepVector::size_type nr_steps = path.get_nsteps();
 				fw.Unsigned16(nr_steps);
-				for (Path::Step_Vector::size_type i = 0; i < nr_steps; ++i)
+				for (Path::StepVector::size_type i = 0; i < nr_steps; ++i)
 					fw.Unsigned8(path[i]);
 
 				fw.Unsigned32(r->m_idle_index); //  TODO(unknown): do not save this

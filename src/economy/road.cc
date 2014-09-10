@@ -127,8 +127,8 @@ BaseImmovable::PositionList Road::get_positions
 	Coords curf = map.get_fcoords(m_path.get_start());
 
 	PositionList rv;
-	const Path::Step_Vector::size_type nr_steps = m_path.get_nsteps();
-	for (Path::Step_Vector::size_type steps = 0; steps <  nr_steps + 1; ++steps)
+	const Path::StepVector::size_type nr_steps = m_path.get_nsteps();
+	for (Path::StepVector::size_type steps = 0; steps <  nr_steps + 1; ++steps)
 	{
 		if (steps > 0 && steps < m_path.get_nsteps())
 			rv.push_back(curf);
@@ -177,8 +177,8 @@ void Road::_mark_map(EditorGameBase & egbase)
 	Map & map = egbase.map();
 	FCoords curf = map.get_fcoords(m_path.get_start());
 
-	const Path::Step_Vector::size_type nr_steps = m_path.get_nsteps();
-	for (Path::Step_Vector::size_type steps = 0; steps <  nr_steps + 1; ++steps)
+	const Path::StepVector::size_type nr_steps = m_path.get_nsteps();
+	for (Path::StepVector::size_type steps = 0; steps <  nr_steps + 1; ++steps)
 	{
 		if (steps > 0 && steps < m_path.get_nsteps())
 			set_position(egbase, curf);
@@ -212,8 +212,8 @@ void Road::_unmark_map(EditorGameBase & egbase) {
 	Map & map = egbase.map();
 	FCoords curf(m_path.get_start(), &map[m_path.get_start()]);
 
-	const Path::Step_Vector::size_type nr_steps = m_path.get_nsteps();
-	for (Path::Step_Vector::size_type steps = 0; steps < nr_steps + 1; ++steps)
+	const Path::StepVector::size_type nr_steps = m_path.get_nsteps();
+	for (Path::StepVector::size_type steps = 0; steps < nr_steps + 1; ++steps)
 	{
 		if (steps > 0 && steps < m_path.get_nsteps())
 			unset_position(egbase, curf);

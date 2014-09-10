@@ -36,9 +36,9 @@ class Game;
  * Instances of actual AI implementation can be created via the
  * \ref Implementation interface.
  */
-struct Computer_Player {
-	Computer_Player(Widelands::Game &, const Widelands::PlayerNumber);
-	virtual ~Computer_Player();
+struct ComputerPlayer {
+	ComputerPlayer(Widelands::Game &, const Widelands::PlayerNumber);
+	virtual ~ComputerPlayer();
 
 	virtual void think () = 0;
 
@@ -53,11 +53,11 @@ struct Computer_Player {
 	struct Implementation {
 		std::string name;
 		virtual ~Implementation() {}
-		virtual Computer_Player * instantiate
+		virtual ComputerPlayer * instantiate
 			(Widelands::Game &, Widelands::PlayerNumber) const = 0;
 	};
 	typedef
-		std::vector<Computer_Player::Implementation const *>
+		std::vector<ComputerPlayer::Implementation const *>
 		ImplementationVector;
 
 	/**
@@ -74,7 +74,7 @@ private:
 	Widelands::Game & m_game;
 	Widelands::PlayerNumber const m_player_number;
 
-	DISALLOW_COPY_AND_ASSIGN(Computer_Player);
+	DISALLOW_COPY_AND_ASSIGN(ComputerPlayer);
 };
 
 #endif  // end of include guard: WL_AI_COMPUTER_PLAYER_H

@@ -32,17 +32,17 @@
  *
  * This class is sub-classed for all building types to provide something useful.
  */
-struct Building_Window : public UI::Window {
-	friend struct TrainingSite_Window;
-	friend struct MilitarySite_Window;
+struct BuildingWindow : public UI::Window {
+	friend struct TrainingSiteWindow;
+	friend struct MilitarySiteWindow;
 	enum {
 		Width = 4 * 34 //  4 normally sized buttons
 	};
 
-	Building_Window
+	BuildingWindow
 		(InteractiveGameBase & parent, Widelands::Building &, UI::Window * & registry);
 
-	virtual ~Building_Window();
+	virtual ~BuildingWindow();
 
 	Widelands::Building & building() {return m_building;}
 

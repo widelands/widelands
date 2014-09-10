@@ -151,9 +151,9 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			/* no break */
 		case PlayerSettings::stateComputer:
 			{
-				const Computer_Player::ImplementationVector & impls =
-					Computer_Player::getImplementations();
-				Computer_Player::ImplementationVector::const_iterator it =
+				const ComputerPlayer::ImplementationVector & impls =
+					ComputerPlayer::getImplementations();
+				ComputerPlayer::ImplementationVector::const_iterator it =
 					impls.begin();
 				if (h->settings().players.at(number).ai.empty()) {
 					setPlayerAI(number, (*it)->name);
@@ -550,7 +550,7 @@ struct NetHostImpl {
 	HostGameSettingsProvider hp;
 	NetworkPlayerSettingsBackend npsb;
 
-	LAN_Game_Promoter * promoter;
+	LanGamePromoter * promoter;
 	TCPsocket svsock;
 	SDLNet_SocketSet sockset;
 
@@ -588,7 +588,7 @@ struct NetHostImpl {
 
 	/// All currently running computer players, *NOT* in one-one correspondence
 	/// with \ref Player objects
-	std::vector<Computer_Player *> computerplayers;
+	std::vector<ComputerPlayer *> computerplayers;
 
 	/// \c true if a syncreport is currently in flight
 	bool syncreport_pending;
@@ -643,7 +643,7 @@ NetHost::NetHost (const std::string & playername, bool internet)
 	d->svsock = SDLNet_TCP_Open(&myaddr);
 
 	d->sockset = SDLNet_AllocSocketSet(16);
-	d->promoter = new LAN_Game_Promoter();
+	d->promoter = new LanGamePromoter();
 	d->game = nullptr;
 	d->pseudo_networktime = 0;
 	d->waiting = true;
@@ -704,7 +704,7 @@ void NetHost::clearComputerPlayers()
 void NetHost::initComputerPlayer(Widelands::PlayerNumber p)
 {
 	d->computerplayers.push_back
-		(Computer_Player::getImplementation(d->game->get_player(p)->getAI())->instantiate(*d->game, p));
+		(ComputerPlayer::getImplementation(d->game->get_player(p)->getAI())->instantiate(*d->game, p));
 }
 
 void NetHost::initComputerPlayers()
@@ -864,7 +864,7 @@ void NetHost::run(bool const autorun)
 
 			if ((pn > 0) && (pn <= UserSettings::highestPlayernum())) {
 				igb =
-					new Interactive_Player
+					new InteractivePlayer
 						(game, g_options.pull_section("global"),
 						pn, true);
 			} else
@@ -2417,7 +2417,7 @@ void NetHost::requestSyncReports()
 	s.Signed32(d->syncreport_time);
 	broadcast(s);
 
-	d->game->enqueue_command(new Cmd_NetCheckSync(d->syncreport_time, this));
+	d->game->enqueue_command(new CmdNetCheckSync(d->syncreport_time, this));
 
 	committedNetworkTime(d->syncreport_time);
 }

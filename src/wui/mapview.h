@@ -34,7 +34,7 @@ class InteractiveBase;
 /**
  * Implements a view of a map. It is used to render a valid map on the screen.
  */
-struct Map_View : public UI::Panel {
+struct MapView : public UI::Panel {
 	/**
 	 * Callback function type for when the view position changes.
 	 *
@@ -43,11 +43,11 @@ struct Map_View : public UI::Panel {
 	 */
 	typedef boost::function<void (Point, bool)> ChangeViewFn;
 
-	Map_View
+	MapView
 		(UI::Panel * const parent,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 InteractiveBase &);
-	virtual ~Map_View();
+	virtual ~MapView();
 
 	void set_changeview(const ChangeViewFn & fn);
 

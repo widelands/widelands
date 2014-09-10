@@ -41,7 +41,7 @@ public:
 		UI::UniqueWindow::Registry sound_options;
 
 		UI::UniqueWindow::Registry building_stats;
-		General_Statistics_Menu::Registry general_stats;
+		GeneralStatisticsMenu::Registry general_stats;
 		UI::UniqueWindow::Registry ware_stats;
 		UI::UniqueWindow::Registry stock;
 	};

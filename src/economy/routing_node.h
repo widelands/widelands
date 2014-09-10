@@ -65,7 +65,7 @@ struct RoutingNode {
 			return a.cost() < b.cost();
 		}
 	};
-	typedef cookie_priority_queue<RoutingNode, LessCost> Queue;
+	typedef CookiePriorityQueue<RoutingNode, LessCost> Queue;
 
 	uint32_t      mpf_cycle;
 	Queue::cookie mpf_cookie;

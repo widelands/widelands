@@ -32,9 +32,9 @@
 class InteractiveGameBase;
 
 struct SaveWarnMessageBox;
-struct Game_Main_Menu_Save_Game : public UI::UniqueWindow {
+struct GameMainMenuSaveGame : public UI::UniqueWindow {
 	friend struct SaveWarnMessageBox;
-	Game_Main_Menu_Save_Game
+	GameMainMenuSaveGame
 		(InteractiveGameBase &, UI::UniqueWindow::Registry & registry);
 
 	void fill_list();
