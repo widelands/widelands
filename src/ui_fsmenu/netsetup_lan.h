@@ -34,14 +34,14 @@
 struct NetOpenGame;
 struct NetGameInfo;
 
-struct Fullscreen_Menu_NetSetupLAN : public Fullscreen_Menu_Base {
+struct FullscreenMenuNetSetupLAN : public FullscreenMenuBase {
 	enum {
 		CANCEL = 0,
 		HOSTGAME,
 		JOINGAME,
 	};
 
-	Fullscreen_Menu_NetSetupLAN ();
+	FullscreenMenuNetSetupLAN ();
 
 	void think() override;
 

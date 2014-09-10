@@ -32,11 +32,11 @@
 #include "ui_basic/window.h"
 
 /// Show a window with information about the pointed at node and triangle.
-int32_t Editor_Info_Tool::handle_click_impl(Widelands::Map& map,
+int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
 					    const Widelands::World& world,
 					    Widelands::NodeAndTriangle<> center,
-					    Editor_Interactive& parent,
-					    Editor_Action_Args& /* args */) {
+					    EditorInteractive& parent,
+					    EditorActionArgs& /* args */) {
 	UI::Window * const w =
 	    new UI::Window
 	(&parent, "field_information", 30, 30, 400, 200,

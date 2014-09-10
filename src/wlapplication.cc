@@ -366,7 +366,7 @@ void WLApplication::run()
 {
 	if (m_game_type == EDITOR) {
 		g_sound_handler.start_music("ingame");
-		Editor_Interactive::run_editor(m_filename, m_script_to_run);
+		EditorInteractive::run_editor(m_filename, m_script_to_run);
 	} else if (m_game_type == REPLAY)   {
 		replay();
 	} else if (m_game_type == LOADGAME) {
@@ -470,7 +470,7 @@ void WLApplication::run()
 		g_sound_handler.start_music("intro");
 
 		{
-			Fullscreen_Menu_Intro intro;
+			FullscreenMenuIntro intro;
 			intro.run();
 		}
 
@@ -1269,7 +1269,7 @@ void WLApplication::mainmenu()
 		// Refresh graphics system in case we just changed resolution.
 		refresh_graphics();
 
-		Fullscreen_Menu_Main mm;
+		FullscreenMenuMain mm;
 
 		if (message.size()) {
 			log("\n%s\n%s\n", messagetitle.c_str(), message.c_str());
@@ -1288,7 +1288,7 @@ void WLApplication::mainmenu()
 
 		try {
 			switch (mm.run()) {
-			case Fullscreen_Menu_Main::mm_playtutorial:
+			case FullscreenMenuMain::mm_playtutorial:
 				{
 					Widelands::Game game;
 					try {
@@ -1300,35 +1300,35 @@ void WLApplication::mainmenu()
 					}
 				}
 				break;
-			case Fullscreen_Menu_Main::mm_singleplayer:
+			case FullscreenMenuMain::mm_singleplayer:
 				mainmenu_singleplayer();
 				break;
-			case Fullscreen_Menu_Main::mm_multiplayer:
+			case FullscreenMenuMain::mm_multiplayer:
 				mainmenu_multiplayer();
 				break;
-			case Fullscreen_Menu_Main::mm_replay:
+			case FullscreenMenuMain::mm_replay:
 				replay();
 				break;
-			case Fullscreen_Menu_Main::mm_options: {
+			case FullscreenMenuMain::mm_options: {
 				Section & s = g_options.pull_section("global");
 				OptionsCtrl om(s);
 				break;
 			}
-			case Fullscreen_Menu_Main::mm_readme: {
-				Fullscreen_Menu_FileView ff("txts/README.lua");
+			case FullscreenMenuMain::mm_readme: {
+				FullscreenMenuFileView ff("txts/README.lua");
 				ff.run();
 				break;
 			}
-			case Fullscreen_Menu_Main::mm_license: {
-				Fullscreen_Menu_FileView ff("txts/license");
+			case FullscreenMenuMain::mm_license: {
+				FullscreenMenuFileView ff("txts/license");
 				ff.run();
 				break;
 			}
-			case Fullscreen_Menu_Main::mm_editor:
+			case FullscreenMenuMain::mm_editor:
 				mainmenu_editor();
 				break;
 			default:
-			case Fullscreen_Menu_Main::mm_exit:
+			case FullscreenMenuMain::mm_exit:
 				return;
 			}
 		} catch (const warning & e) {
@@ -1369,26 +1369,26 @@ void WLApplication::mainmenu_singleplayer()
 	//  This is the code returned by UI::Panel::run() when the panel is dying.
 	//  Make sure that the program exits when the window manager says so.
 	static_assert
-		(Fullscreen_Menu_SinglePlayer::Back == UI::Panel::dying_code, "Panel should be dying.");
+		(FullscreenMenuSinglePlayer::Back == UI::Panel::dying_code, "Panel should be dying.");
 
 	for (;;) {
 		int32_t code;
 		{
-			Fullscreen_Menu_SinglePlayer single_player_menu;
+			FullscreenMenuSinglePlayer single_player_menu;
 			code = single_player_menu.run();
 		}
 		switch (code) {
-		case Fullscreen_Menu_SinglePlayer::Back:
+		case FullscreenMenuSinglePlayer::Back:
 			return;
-		case Fullscreen_Menu_SinglePlayer::New_Game:
+		case FullscreenMenuSinglePlayer::New_Game:
 			if (new_game())
 				return;
 			break;
-		case Fullscreen_Menu_SinglePlayer::Load_Game:
+		case FullscreenMenuSinglePlayer::Load_Game:
 			if (load_game())
 				return;
 			break;
-		case Fullscreen_Menu_SinglePlayer::Campaign:
+		case FullscreenMenuSinglePlayer::Campaign:
 			if (campaign_game())
 				return;
 			break;
@@ -1405,17 +1405,17 @@ void WLApplication::mainmenu_singleplayer()
  */
 void WLApplication::mainmenu_multiplayer()
 {
-	int32_t menu_result = Fullscreen_Menu_NetSetupLAN::JOINGAME; // dummy init;
+	int32_t menu_result = FullscreenMenuNetSetupLAN::JOINGAME; // dummy init;
 	for (;;) { // stay in menu until player clicks "back" button
 		bool internet = false;
-		Fullscreen_Menu_MultiPlayer mp;
+		FullscreenMenuMultiPlayer mp;
 		switch (mp.run()) {
-			case Fullscreen_Menu_MultiPlayer::Back:
+			case FullscreenMenuMultiPlayer::Back:
 				return;
-			case Fullscreen_Menu_MultiPlayer::Metaserver:
+			case FullscreenMenuMultiPlayer::Metaserver:
 				internet = true;
 				break;
-			case Fullscreen_Menu_MultiPlayer::Lan:
+			case FullscreenMenuMultiPlayer::Lan:
 				break;
 			default:
 				assert(false);
@@ -1434,7 +1434,7 @@ void WLApplication::mainmenu_multiplayer()
 				s.set_string("password", password);
 
 			// reinitalise in every run, else graphics look strange
-			Fullscreen_Menu_Internet_Lobby ns(playername.c_str(), password.c_str(), registered);
+			FullscreenMenuInternetLobby ns(playername.c_str(), password.c_str(), registered);
 			ns.run();
 
 			if (InternetGaming::ref().logged_in())
@@ -1445,7 +1445,7 @@ void WLApplication::mainmenu_multiplayer()
 				InternetGaming::ref().reset();
 		} else {
 			// reinitalise in every run, else graphics look strange
-			Fullscreen_Menu_NetSetupLAN ns;
+			FullscreenMenuNetSetupLAN ns;
 			menu_result = ns.run();
 			std::string playername = ns.get_playername();
 			uint32_t addr;
@@ -1453,12 +1453,12 @@ void WLApplication::mainmenu_multiplayer()
 			bool const host_address = ns.get_host_address(addr, port);
 
 			switch (menu_result) {
-				case Fullscreen_Menu_NetSetupLAN::HOSTGAME: {
+				case FullscreenMenuNetSetupLAN::HOSTGAME: {
 					NetHost netgame(playername);
 					netgame.run();
 					break;
 				}
-				case Fullscreen_Menu_NetSetupLAN::JOINGAME: {
+				case FullscreenMenuNetSetupLAN::JOINGAME: {
 					IPaddress peer;
 
 					if (!host_address)
@@ -1485,30 +1485,30 @@ void WLApplication::mainmenu_editor()
 	//  This is the code returned by UI::Panel::run() when the panel is dying.
 	//  Make sure that the program exits when the window manager says so.
 	static_assert
-		(Fullscreen_Menu_Editor::Back == UI::Panel::dying_code, "Editor should be dying.");
+		(FullscreenMenuEditor::Back == UI::Panel::dying_code, "Editor should be dying.");
 
 	for (;;) {
 		int32_t code;
 		{
-			Fullscreen_Menu_Editor editor_menu;
+			FullscreenMenuEditor editor_menu;
 			code = editor_menu.run();
 		}
 		switch (code) {
-		case Fullscreen_Menu_Editor::Back:
+		case FullscreenMenuEditor::Back:
 			return;
-		case Fullscreen_Menu_Editor::New_Map:
-			Editor_Interactive::run_editor(m_filename, m_script_to_run);
+		case FullscreenMenuEditor::New_Map:
+			EditorInteractive::run_editor(m_filename, m_script_to_run);
 			return;
-		case Fullscreen_Menu_Editor::Load_Map: {
+		case FullscreenMenuEditor::Load_Map: {
 			std::string filename;
 			{
-				Fullscreen_Menu_Editor_MapSelect emsm;
+				FullscreenMenuEditorMapSelect emsm;
 				if (emsm.run() <= 0)
 					break;
 
 				filename = emsm.get_map();
 			}
-			Editor_Interactive::run_editor(filename.c_str(), "");
+			EditorInteractive::run_editor(filename.c_str(), "");
 			return;
 		}
 		default:
@@ -1528,7 +1528,7 @@ void WLApplication::mainmenu_editor()
 bool WLApplication::new_game()
 {
 	SinglePlayerGameSettingsProvider sp;
-	Fullscreen_Menu_LaunchSPG lgm(&sp);
+	FullscreenMenuLaunchSPG lgm(&sp);
 	const int32_t code = lgm.run();
 	Widelands::Game game;
 
@@ -1589,7 +1589,7 @@ bool WLApplication::load_game()
 	Widelands::Game game;
 	std::string filename;
 
-	Fullscreen_Menu_LoadGame ssg(game);
+	FullscreenMenuLoadGame ssg(game);
 	if (ssg.run() > 0)
 		filename = ssg.filename();
 	else
@@ -1621,7 +1621,7 @@ bool WLApplication::campaign_game()
 	for (;;) { // Campaign UI - Loop
 		int32_t campaign;
 		{ //  First start UI for selecting the campaign.
-			Fullscreen_Menu_CampaignSelect select_campaign;
+			FullscreenMenuCampaignSelect select_campaign;
 			if (select_campaign.run() > 0)
 				campaign = select_campaign.get_campaign();
 			else { //  back was pressed
@@ -1630,7 +1630,7 @@ bool WLApplication::campaign_game()
 			}
 		}
 		//  Then start UI for the selected campaign.
-		Fullscreen_Menu_CampaignMapSelect select_campaignmap;
+		FullscreenMenuCampaignMapSelect select_campaignmap;
 		select_campaignmap.set_campaign(campaign);
 		if (select_campaignmap.run() > 0) {
 			filename = select_campaignmap.get_map();
@@ -1656,7 +1656,7 @@ void WLApplication::replay()
 {
 	Widelands::Game game;
 	if (m_filename.empty()) {
-		Fullscreen_Menu_LoadReplay rm(game);
+		FullscreenMenuLoadReplay rm(game);
 		if (rm.run() <= 0)
 			return;
 

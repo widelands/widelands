@@ -27,8 +27,8 @@
 #include "profile/profile.h"
 #include "wui/text_constants.h"
 
-Fullscreen_Menu_NetSetupLAN::Fullscreen_Menu_NetSetupLAN () :
-	Fullscreen_Menu_Base("singleplmenu.jpg"), //  TODO(unknown): change this
+FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN () :
+	FullscreenMenuBase("singleplmenu.jpg"), //  TODO(unknown): change this
 
 // Values for alignment and size
 	m_butx (get_w() * 13 / 40),
@@ -92,17 +92,17 @@ Fullscreen_Menu_NetSetupLAN::Fullscreen_Menu_NetSetupLAN () :
 {
 	joingame.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_NetSetupLAN::clicked_joingame, boost::ref(*this)));
+			 (&FullscreenMenuNetSetupLAN::clicked_joingame, boost::ref(*this)));
 	hostgame.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_NetSetupLAN::clicked_hostgame, boost::ref(*this)));
+			 (&FullscreenMenuNetSetupLAN::clicked_hostgame, boost::ref(*this)));
 	back.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_NetSetupLAN::end_modal, boost::ref(*this),
+			 (&FullscreenMenuNetSetupLAN::end_modal, boost::ref(*this),
 			  static_cast<int32_t>(CANCEL)));
 	loadlasthost.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_NetSetupLAN::clicked_lasthost, boost::ref(*this)));
+			 (&FullscreenMenuNetSetupLAN::clicked_lasthost, boost::ref(*this)));
 
 	Section & s = g_options.pull_section("global"); //  for playername
 
@@ -116,32 +116,32 @@ Fullscreen_Menu_NetSetupLAN::Fullscreen_Menu_NetSetupLAN () :
 	m_playername.set_textstyle(ts_small());
 	m_hostname  .set_textstyle(ts_small());
 	hostname    .changed.connect
-		(boost::bind(&Fullscreen_Menu_NetSetupLAN::change_hostname, this));
+		(boost::bind(&FullscreenMenuNetSetupLAN::change_hostname, this));
 	hostname    .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
 	playername  .setText  (s.get_string("nickname", (_("nobody"))));
 	playername  .changed.connect
-		(boost::bind(&Fullscreen_Menu_NetSetupLAN::change_playername, this));
+		(boost::bind(&FullscreenMenuNetSetupLAN::change_playername, this));
 	playername  .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
 	opengames   .set_font(ui_fn(), fs_small());
 	opengames   .add_column(m_lisw * 2 / 5, _("Host"));
 	opengames   .add_column(m_lisw * 2 / 5, _("Map"));
 	opengames   .add_column(m_lisw     / 5, _("State"));
-	opengames   .selected.connect(boost::bind(&Fullscreen_Menu_NetSetupLAN::game_selected, this, _1));
+	opengames   .selected.connect(boost::bind(&FullscreenMenuNetSetupLAN::game_selected, this, _1));
 	opengames   .double_clicked.connect
-		(boost::bind(&Fullscreen_Menu_NetSetupLAN::game_doubleclicked, this, _1));
+		(boost::bind(&FullscreenMenuNetSetupLAN::game_doubleclicked, this, _1));
 	discovery   .set_callback (discovery_callback, this);
 
 	joingame.set_enabled(false);
 }
 
-void Fullscreen_Menu_NetSetupLAN::think ()
+void FullscreenMenuNetSetupLAN::think ()
 {
-	Fullscreen_Menu_Base::think ();
+	FullscreenMenuBase::think ();
 
 	discovery.run();
 }
 
-bool Fullscreen_Menu_NetSetupLAN::get_host_address
+bool FullscreenMenuNetSetupLAN::get_host_address
 	(uint32_t & addr, uint16_t & port)
 {
 	const std::string & host = hostname.text();
@@ -167,13 +167,13 @@ DIAG_ON("-Wold-style-cast")
 		return false;
 }
 
-const std::string & Fullscreen_Menu_NetSetupLAN::get_playername()
+const std::string & FullscreenMenuNetSetupLAN::get_playername()
 {
 	return playername.text();
 }
 
 
-void Fullscreen_Menu_NetSetupLAN::game_selected (uint32_t) {
+void FullscreenMenuNetSetupLAN::game_selected (uint32_t) {
 	if (opengames.has_selection()) {
 		if (const NetOpenGame * const game = opengames.get_selected()) {
 			hostname.setText(game->info.hostname);
@@ -182,11 +182,11 @@ void Fullscreen_Menu_NetSetupLAN::game_selected (uint32_t) {
 	}
 }
 
-void Fullscreen_Menu_NetSetupLAN::game_doubleclicked (uint32_t) {
+void FullscreenMenuNetSetupLAN::game_doubleclicked (uint32_t) {
 	clicked_joingame();
 }
 
-void Fullscreen_Menu_NetSetupLAN::update_game_info
+void FullscreenMenuNetSetupLAN::update_game_info
 	(UI::Table<NetOpenGame const * const>::Entry_Record & er,
 	 const NetGameInfo & info)
 {
@@ -200,14 +200,14 @@ void Fullscreen_Menu_NetSetupLAN::update_game_info
 	};
 }
 
-void Fullscreen_Menu_NetSetupLAN::game_opened (const NetOpenGame * game)
+void FullscreenMenuNetSetupLAN::game_opened (const NetOpenGame * game)
 {
 	update_game_info(opengames.add(game), game->info);
 }
 
-void Fullscreen_Menu_NetSetupLAN::game_closed (const NetOpenGame *) {}
+void FullscreenMenuNetSetupLAN::game_closed (const NetOpenGame *) {}
 
-void Fullscreen_Menu_NetSetupLAN::game_updated (const NetOpenGame * game)
+void FullscreenMenuNetSetupLAN::game_updated (const NetOpenGame * game)
 {
 	if
 		(UI::Table<const NetOpenGame * const>::Entry_Record * const er =
@@ -215,50 +215,50 @@ void Fullscreen_Menu_NetSetupLAN::game_updated (const NetOpenGame * game)
 		update_game_info(*er, game->info);
 }
 
-void Fullscreen_Menu_NetSetupLAN::discovery_callback
+void FullscreenMenuNetSetupLAN::discovery_callback
 	(int32_t               const type,
 	 NetOpenGame const * const game,
 	 void                * const userdata)
 {
 	switch (type) {
 	case LanGameFinder::GameOpened:
-		static_cast<Fullscreen_Menu_NetSetupLAN *>(userdata)->game_opened (game);
+		static_cast<FullscreenMenuNetSetupLAN *>(userdata)->game_opened (game);
 		break;
 	case LanGameFinder::GameClosed:
-		static_cast<Fullscreen_Menu_NetSetupLAN *>(userdata)->game_closed (game);
+		static_cast<FullscreenMenuNetSetupLAN *>(userdata)->game_closed (game);
 		break;
 	case LanGameFinder::GameUpdated:
-		static_cast<Fullscreen_Menu_NetSetupLAN *>(userdata)->game_updated(game);
+		static_cast<FullscreenMenuNetSetupLAN *>(userdata)->game_updated(game);
 		break;
 	default:
 		abort ();
 	}
 }
 
-void Fullscreen_Menu_NetSetupLAN::change_hostname()
+void FullscreenMenuNetSetupLAN::change_hostname()
 {
 	// Allow user to enter a hostname manually
 	opengames.select(opengames.no_selection_index());
 	joingame.set_enabled(hostname.text().size());
 }
 
-void Fullscreen_Menu_NetSetupLAN::change_playername()
+void FullscreenMenuNetSetupLAN::change_playername()
 {
 	g_options.pull_section("global").set_string("nickname", playername.text());
 }
 
-void Fullscreen_Menu_NetSetupLAN::clicked_joingame() {
+void FullscreenMenuNetSetupLAN::clicked_joingame() {
 	// Save selected host so users can reload it for reconnection.
 	g_options.pull_section("global").set_string("lasthost", hostname.text());
 
 	end_modal(JOINGAME);
 }
 
-void Fullscreen_Menu_NetSetupLAN::clicked_hostgame() {
+void FullscreenMenuNetSetupLAN::clicked_hostgame() {
 	end_modal(HOSTGAME);
 }
 
-void Fullscreen_Menu_NetSetupLAN::clicked_lasthost() {
+void FullscreenMenuNetSetupLAN::clicked_lasthost() {
 	Section & s = g_options.get_safe_section("global");
 	std::string const host = s.get_string("lasthost", "");
 	hostname.setText(host);

@@ -34,8 +34,8 @@
  * UI 1 - Selection of Campaign
  *
  */
-struct Fullscreen_Menu_CampaignSelect : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_CampaignSelect();
+struct FullscreenMenuCampaignSelect : public FullscreenMenuBase {
+	FullscreenMenuCampaignSelect();
 	void clicked_back();
 	void clicked_ok();
 	void campaign_selected(uint32_t);
@@ -67,8 +67,8 @@ private:
  * UI 2 - Selection of a map
  *
  */
-struct Fullscreen_Menu_CampaignMapSelect : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_CampaignMapSelect();
+struct FullscreenMenuCampaignMapSelect : public FullscreenMenuBase {
+	FullscreenMenuCampaignMapSelect();
 	void clicked_back();
 	void clicked_ok();
 	void map_selected(uint32_t);

@@ -66,8 +66,8 @@ struct MapData {
  * Select a Map in Fullscreen Mode. It's a modal fullscreen menu
  */
 
-struct Fullscreen_Menu_MapSelect : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_MapSelect(GameSettingsProvider *, GameController *);
+struct FullscreenMenuMapSelect : public FullscreenMenuBase {
+	FullscreenMenuMapSelect(GameSettingsProvider *, GameController *);
 
 	bool is_scenario();
 	MapData const * get_map() const;

@@ -789,7 +789,7 @@ void NetHost::run(bool const autorun)
 		}
 		d->dedicated_start = false;
 	} else {
-		Fullscreen_Menu_LaunchMPG lm(&d->hp, this);
+		FullscreenMenuLaunchMPG lm(&d->hp, this);
 		lm.setChatProvider(d->chat);
 		const int32_t code = lm.run();
 		if (code <= 0) {

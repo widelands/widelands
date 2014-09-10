@@ -32,11 +32,11 @@
  * Choses an object to place randomly from all enabled
  * and places this on the current field
 */
-int32_t Editor_Place_Immovable_Tool::handle_click_impl(Widelands::Map& map,
+int32_t EditorPlaceImmovableTool::handle_click_impl(Widelands::Map& map,
                                                        const Widelands::World&,
                                                        Widelands::NodeAndTriangle<> const center,
-                                                       Editor_Interactive& parent,
-                                                       Editor_Action_Args& args) {
+                                                       EditorInteractive& parent,
+                                                       EditorActionArgs& args) {
 	const int32_t radius = args.sel_radius;
 	if (!get_nr_enabled())
 		return radius;
@@ -73,12 +73,12 @@ int32_t Editor_Place_Immovable_Tool::handle_click_impl(Widelands::Map& map,
 	return radius + 2;
 }
 
-int32_t Editor_Place_Immovable_Tool::handle_undo_impl(
+int32_t EditorPlaceImmovableTool::handle_undo_impl(
    Widelands::Map& map,
    const Widelands::World&,
    Widelands::NodeAndTriangle<Widelands::Coords> center,
-   Editor_Interactive& parent,
-   Editor_Action_Args& args) {
+   EditorInteractive& parent,
+   EditorActionArgs& args) {
 	const int32_t radius = args.sel_radius;
 	if (args.oimmov_types.empty())
 		return radius;
@@ -104,7 +104,7 @@ int32_t Editor_Place_Immovable_Tool::handle_undo_impl(
 	return radius + 2;
 }
 
-Editor_Action_Args Editor_Place_Immovable_Tool::format_args_impl(Editor_Interactive & parent)
+EditorActionArgs EditorPlaceImmovableTool::format_args_impl(EditorInteractive & parent)
 {
-	return Editor_Tool::format_args_impl(parent);
+	return EditorTool::format_args_impl(parent);
 }

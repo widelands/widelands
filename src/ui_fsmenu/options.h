@@ -31,7 +31,7 @@
 #include "ui_basic/spinbox.h"
 #include "ui_basic/textarea.h"
 
-class Fullscreen_Menu_Options;
+class FullscreenMenuOptions;
 class Section;
 
 class OptionsCtrl {
@@ -71,16 +71,16 @@ public:
 	void save_options();
 private:
 	Section & m_opt_section;
-	Fullscreen_Menu_Options * m_opt_dialog;
+	FullscreenMenuOptions * m_opt_dialog;
 };
 
 /**
  * Fullscreen Optionsmenu. A modal optionsmenu
  */
 
-class Fullscreen_Menu_Options : public Fullscreen_Menu_Base {
+class FullscreenMenuOptions : public FullscreenMenuBase {
 public:
-	Fullscreen_Menu_Options(OptionsCtrl::OptionsStruct opt);
+	FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt);
 	OptionsCtrl::OptionsStruct get_values();
 	enum {
 		om_cancel  = 0,
@@ -143,9 +143,9 @@ private:
  * Fullscreen Optionsmenu. A modal optionsmenu
  */
 
-class Fullscreen_Menu_Advanced_Options : public Fullscreen_Menu_Base {
+class FullscreenMenuAdvancedOptions : public FullscreenMenuBase {
 public:
-	Fullscreen_Menu_Advanced_Options(OptionsCtrl::OptionsStruct opt);
+	FullscreenMenuAdvancedOptions(OptionsCtrl::OptionsStruct opt);
 	OptionsCtrl::OptionsStruct get_values();
 	enum {
 		om_cancel =   0,

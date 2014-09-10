@@ -31,8 +31,8 @@ class EditorGameBase;
  * This places immovables on the map
  */
 // TODO(unknown):  Implement undo for this tool
-struct Editor_Make_Infrastructure_Tool : public Editor_Tool {
-	Editor_Make_Infrastructure_Tool() : Editor_Tool(*this, *this, false), m_player(0) {}
+struct EditorMakeInfrastructureTool : public EditorTool {
+	EditorMakeInfrastructureTool() : EditorTool(*this, *this, false), m_player(0) {}
 
 	void set_player(Widelands::PlayerNumber const n)
 		{m_player = n;}
@@ -42,8 +42,8 @@ struct Editor_Make_Infrastructure_Tool : public Editor_Tool {
 	int32_t handle_click_impl(Widelands::Map& map,
 	                          const Widelands::World& world,
 	                          Widelands::NodeAndTriangle<> center,
-	                          Editor_Interactive& parent,
-	                          Editor_Action_Args& args) override;
+	                          EditorInteractive& parent,
+	                          EditorActionArgs& args) override;
 
 	const char * get_sel_impl() const override
 		{return "pics/fsel.png";} //  Standard sel icon, most complex tool of all

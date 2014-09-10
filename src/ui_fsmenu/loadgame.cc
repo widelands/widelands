@@ -44,9 +44,9 @@
 
 
 
-Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame
+FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	(Widelands::Game & g, GameSettingsProvider * gsp, GameController * gc) :
-	Fullscreen_Menu_Base("choosemapmenu.jpg"),
+	FullscreenMenuBase("choosemapmenu.jpg"),
 
 // Values for alignment and size
 	m_butw (get_w() / 4),
@@ -113,11 +113,11 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame
 	m_settings(gsp),
 	m_ctrl(gc)
 {
-	m_back.sigclicked.connect(boost::bind(&Fullscreen_Menu_LoadGame::end_modal, boost::ref(*this), 0));
-	m_ok.sigclicked.connect(boost::bind(&Fullscreen_Menu_LoadGame::clicked_ok, boost::ref(*this)));
+	m_back.sigclicked.connect(boost::bind(&FullscreenMenuLoadGame::end_modal, boost::ref(*this), 0));
+	m_ok.sigclicked.connect(boost::bind(&FullscreenMenuLoadGame::clicked_ok, boost::ref(*this)));
 	m_delete.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_LoadGame::clicked_delete, boost::ref(*this)));
+			 (&FullscreenMenuLoadGame::clicked_delete, boost::ref(*this)));
 
 	m_back.set_font(font_small());
 	m_ok.set_font(font_small());
@@ -133,26 +133,26 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame
 	m_ta_win_condition.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_minimap_icon.set_visible(false);
 	m_list          .set_font(m_fn, m_fs);
-	m_list.selected.connect(boost::bind(&Fullscreen_Menu_LoadGame::map_selected, this, _1));
-	m_list.double_clicked.connect(boost::bind(&Fullscreen_Menu_LoadGame::double_clicked, this, _1));
+	m_list.selected.connect(boost::bind(&FullscreenMenuLoadGame::map_selected, this, _1));
+	m_list.double_clicked.connect(boost::bind(&FullscreenMenuLoadGame::double_clicked, this, _1));
 	m_list.focus();
 	fill_list();
 }
 
-void Fullscreen_Menu_LoadGame::think()
+void FullscreenMenuLoadGame::think()
 {
 	if (m_ctrl)
 		m_ctrl->think();
 }
 
 
-void Fullscreen_Menu_LoadGame::clicked_ok()
+void FullscreenMenuLoadGame::clicked_ok()
 {
 	m_filename = m_list.get_selected();
 	end_modal(1);
 }
 
-void Fullscreen_Menu_LoadGame::clicked_delete()
+void FullscreenMenuLoadGame::clicked_delete()
 {
 	std::string fname = m_list.get_selected();
 	UI::WLMessageBox confirmationBox
@@ -174,7 +174,7 @@ void Fullscreen_Menu_LoadGame::clicked_delete()
 /**
  * Update buttons and labels to reflect that no loadable game is selected.
  */
-void Fullscreen_Menu_LoadGame::no_selection()
+void FullscreenMenuLoadGame::no_selection()
 {
 	m_ok.set_enabled(false);
 	m_delete.set_enabled(false);
@@ -190,7 +190,7 @@ void Fullscreen_Menu_LoadGame::no_selection()
 }
 
 
-void Fullscreen_Menu_LoadGame::map_selected(uint32_t selected)
+void FullscreenMenuLoadGame::map_selected(uint32_t selected)
 {
 	if (!m_list.has_selection()) {
 		no_selection();
@@ -284,14 +284,14 @@ void Fullscreen_Menu_LoadGame::map_selected(uint32_t selected)
 /**
  * Listbox got double clicked
  */
-void Fullscreen_Menu_LoadGame::double_clicked(uint32_t) {
+void FullscreenMenuLoadGame::double_clicked(uint32_t) {
 	clicked_ok();
 }
 
 /**
  * Fill the file list
  */
-void Fullscreen_Menu_LoadGame::fill_list() {
+void FullscreenMenuLoadGame::fill_list() {
 	if (m_settings && !m_settings->settings().saved_games.empty()) {
 		for (uint32_t i = 0; i < m_settings->settings().saved_games.size(); ++i) {
 			const char * path = m_settings->settings().saved_games.at(i).path.c_str();
@@ -322,7 +322,7 @@ void Fullscreen_Menu_LoadGame::fill_list() {
 		m_list.select(0);
 }
 
-bool Fullscreen_Menu_LoadGame::handle_key(bool down, SDL_keysym code)
+bool FullscreenMenuLoadGame::handle_key(bool down, SDL_keysym code)
 {
 	if (!down)
 		return false;
@@ -359,5 +359,5 @@ bool Fullscreen_Menu_LoadGame::handle_key(bool down, SDL_keysym code)
 		break;
 	}
 
-	return Fullscreen_Menu_Base::handle_key(down, code);
+	return FullscreenMenuBase::handle_key(down, code);
 }

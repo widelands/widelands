@@ -30,7 +30,7 @@ namespace Widelands {
 	struct UniqueRandomMapInfo;
 }
 
-struct Editor_Interactive;
+struct EditorInteractive;
 namespace UI {
 template <typename T, typename ID> struct IDButton;
 struct Textarea;
@@ -41,8 +41,8 @@ struct Textarea;
  * the user to choose the new world and a few other
  * things like size, world ....
 */
-struct Main_Menu_New_Random_Map : public UI::Window {
-	Main_Menu_New_Random_Map(Editor_Interactive &);
+struct MainMenuNewRandomMap : public UI::Window {
+	MainMenuNewRandomMap(EditorInteractive &);
 
 	typedef enum {
 		MAP_W_PLUS,

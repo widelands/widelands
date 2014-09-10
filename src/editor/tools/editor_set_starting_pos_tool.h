@@ -31,14 +31,14 @@
 #define FSEL_PIC_FILENAME "pics/fsel_editor_set_player_00_pos.png"
 
 /// Sets the starting position of players.
-struct Editor_Set_Starting_Pos_Tool : public Editor_Tool {
-	Editor_Set_Starting_Pos_Tool();
+struct EditorSetStartingPosTool : public EditorTool {
+	EditorSetStartingPosTool();
 
 	int32_t handle_click_impl(Widelands::Map&,
 	                          const Widelands::World& world,
 	                          Widelands::NodeAndTriangle<>,
-	                          Editor_Interactive&,
-	                          Editor_Action_Args&) override;
+	                          EditorInteractive&,
+	                          EditorActionArgs&) override;
 	char const * get_sel_impl() const override
 		{return m_current_sel_pic;}
 

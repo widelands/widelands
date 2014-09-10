@@ -55,18 +55,18 @@ int32_t Editor_Tool_Set_Starting_Pos_Callback
 	return 0;
 }
 
-Editor_Set_Starting_Pos_Tool::Editor_Set_Starting_Pos_Tool()
-	: Editor_Tool(*this, *this, false), m_current_sel_pic(nullptr)
+EditorSetStartingPosTool::EditorSetStartingPosTool()
+	: EditorTool(*this, *this, false), m_current_sel_pic(nullptr)
 {
 	m_current_player = 0;
 	strcpy(fsel_picsname, FSEL_PIC_FILENAME);
 }
 
-int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl(Widelands::Map& map,
+int32_t EditorSetStartingPosTool::handle_click_impl(Widelands::Map& map,
                                                         const Widelands::World&,
                                                         Widelands::NodeAndTriangle<> const center,
-                                                        Editor_Interactive&,
-                                                        Editor_Action_Args&) {
+                                                        EditorInteractive&,
+                                                        EditorActionArgs&) {
 	assert(0 <= center.node.x);
 	assert(center.node.x < map.get_width());
 	assert(0 <= center.node.y);
@@ -105,14 +105,14 @@ int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl(Widelands::Map& map,
 	return 1;
 }
 
-Widelands::PlayerNumber Editor_Set_Starting_Pos_Tool::get_current_player
+Widelands::PlayerNumber EditorSetStartingPosTool::get_current_player
 () const
 {
 	return m_current_player;
 }
 
 
-void Editor_Set_Starting_Pos_Tool::set_current_player(int32_t const i) {
+void EditorSetStartingPosTool::set_current_player(int32_t const i) {
 	m_current_player = i;
 
 	fsel_picsname[28] = '0' + m_current_player / 10;

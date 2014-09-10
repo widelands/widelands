@@ -84,10 +84,10 @@ void add_languages_to_list(UI::Listselect<std::string>* list, const std::string&
 
 }  // namespace
 
-Fullscreen_Menu_Options::Fullscreen_Menu_Options
+FullscreenMenuOptions::FullscreenMenuOptions
 		(OptionsCtrl::OptionsStruct opt)
 	:
-	Fullscreen_Menu_Base("optionsmenu.jpg"),
+	FullscreenMenuBase("optionsmenu.jpg"),
 
 // Values for alignment and size
 	m_vbutw(get_h() * 333 / 10000),
@@ -238,11 +238,11 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	os(opt)
 {
 	m_advanced_options.sigclicked.connect
-		(boost::bind(&Fullscreen_Menu_Options::advanced_options, boost::ref(*this)));
+		(boost::bind(&FullscreenMenuOptions::advanced_options, boost::ref(*this)));
 	m_cancel.sigclicked.connect
-		(boost::bind(&Fullscreen_Menu_Options::end_modal, this, static_cast<int32_t>(om_cancel)));
+		(boost::bind(&FullscreenMenuOptions::end_modal, this, static_cast<int32_t>(om_cancel)));
 	m_apply.sigclicked.connect
-		(boost::bind(&Fullscreen_Menu_Options::end_modal, this, static_cast<int32_t>(om_ok)));
+		(boost::bind(&FullscreenMenuOptions::end_modal, this, static_cast<int32_t>(om_ok)));
 
 	m_advanced_options.set_font(font_small());
 	m_apply.set_font(font_small());
@@ -348,15 +348,15 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	add_languages_to_list(&m_language_list, opt.language);
 }
 
-void Fullscreen_Menu_Options::advanced_options() {
-	Fullscreen_Menu_Advanced_Options aom(os);
-	if (aom.run() == Fullscreen_Menu_Advanced_Options::om_ok) {
+void FullscreenMenuOptions::advanced_options() {
+	FullscreenMenuAdvancedOptions aom(os);
+	if (aom.run() == FullscreenMenuAdvancedOptions::om_ok) {
 		os = aom.get_values();
 		end_modal(om_restart);
 	}
 }
 
-bool Fullscreen_Menu_Options::handle_key(bool down, SDL_keysym code)
+bool FullscreenMenuOptions::handle_key(bool down, SDL_keysym code)
 {
 	if (down) {
 		switch (code.sym) {
@@ -372,10 +372,10 @@ bool Fullscreen_Menu_Options::handle_key(bool down, SDL_keysym code)
 		}
 	}
 
-	return Fullscreen_Menu_Base::handle_key(down, code);
+	return FullscreenMenuBase::handle_key(down, code);
 }
 
-OptionsCtrl::OptionsStruct Fullscreen_Menu_Options::get_values() {
+OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	const uint32_t res_index = m_reslist.selection_index();
 
 	// Write all data from UI elements
@@ -404,10 +404,10 @@ OptionsCtrl::OptionsStruct Fullscreen_Menu_Options::get_values() {
 /**
  * The advanced option menu
  */
-Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
+FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 	(OptionsCtrl::OptionsStruct const opt)
 	:
-	Fullscreen_Menu_Base("optionsmenu.jpg"),
+	FullscreenMenuBase("optionsmenu.jpg"),
 
 // Values for alignment and size
 	m_vbutw (get_h() * 333 / 10000),
@@ -499,12 +499,12 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 {
 	m_cancel.sigclicked.connect
 		(boost::bind
-			(&Fullscreen_Menu_Advanced_Options::end_modal,
+			(&FullscreenMenuAdvancedOptions::end_modal,
 			 boost::ref(*this),
 			 static_cast<int32_t>(om_cancel)));
 	m_apply.sigclicked.connect
 		(boost::bind
-			(&Fullscreen_Menu_Advanced_Options::end_modal,
+			(&FullscreenMenuAdvancedOptions::end_modal,
 			 boost::ref(*this),
 			 static_cast<int32_t>(om_ok)));
 
@@ -574,7 +574,7 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 	}
 }
 
-bool Fullscreen_Menu_Advanced_Options::handle_key(bool down, SDL_keysym code)
+bool FullscreenMenuAdvancedOptions::handle_key(bool down, SDL_keysym code)
 {
 	if (down) {
 		switch (code.sym) {
@@ -590,11 +590,11 @@ bool Fullscreen_Menu_Advanced_Options::handle_key(bool down, SDL_keysym code)
 		}
 	}
 
-	return Fullscreen_Menu_Base::handle_key(down, code);
+	return FullscreenMenuBase::handle_key(down, code);
 }
 
 
-OptionsCtrl::OptionsStruct Fullscreen_Menu_Advanced_Options::get_values() {
+OptionsCtrl::OptionsStruct FullscreenMenuAdvancedOptions::get_values() {
 	// Write all remaining data from UI elements
 	os.message_sound        = m_message_sound.get_state();
 	os.nozip                = m_nozip.get_state();
@@ -612,7 +612,7 @@ OptionsCtrl::OptionsStruct Fullscreen_Menu_Advanced_Options::get_values() {
  * Handles communication between window class and options
  */
 OptionsCtrl::OptionsCtrl(Section & s)
-: m_opt_section(s), m_opt_dialog(new Fullscreen_Menu_Options(options_struct()))
+: m_opt_section(s), m_opt_dialog(new FullscreenMenuOptions(options_struct()))
 {
 	handle_menu();
 }
@@ -624,11 +624,11 @@ OptionsCtrl::~OptionsCtrl() {
 void OptionsCtrl::handle_menu()
 {
 	int32_t i = m_opt_dialog->run();
-	if (i != Fullscreen_Menu_Options::om_cancel)
+	if (i != FullscreenMenuOptions::om_cancel)
 		save_options();
-	if (i == Fullscreen_Menu_Options::om_restart) {
+	if (i == FullscreenMenuOptions::om_restart) {
 		delete m_opt_dialog;
-		m_opt_dialog = new Fullscreen_Menu_Options(options_struct());
+		m_opt_dialog = new FullscreenMenuOptions(options_struct());
 		handle_menu(); // Restart general options menu
 	}
 }

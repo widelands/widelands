@@ -23,7 +23,7 @@
 #include "io/filesystem/filesystem.h"
 #include "ui_basic/window.h"
 
-struct Editor_Interactive;
+struct EditorInteractive;
 namespace UI {
 struct Button;
 struct EditBox;
@@ -35,11 +35,11 @@ struct Textarea;
 /**
  * Choose a filename and save your brand new created map
 */
-struct Main_Menu_Save_Map : public UI::Window {
-	Main_Menu_Save_Map(Editor_Interactive &);
+struct MainMenuSaveMap : public UI::Window {
+	MainMenuSaveMap(EditorInteractive &);
 
 private:
-	Editor_Interactive & eia();
+	EditorInteractive & eia();
 	void clicked_ok            ();
 	void clicked_make_directory();
 	void        clicked_item(uint32_t);

@@ -28,8 +28,8 @@
  * This runs the main menu. There, you can select
  * between different playmodes, exit and so on.
 */
-struct Fullscreen_Menu_Main : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_Main();
+struct FullscreenMenuMain : public FullscreenMenuBase {
+	FullscreenMenuMain();
 	enum {
 		mm_summary,
 		mm_playtutorial,

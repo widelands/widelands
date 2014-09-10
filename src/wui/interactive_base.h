@@ -41,7 +41,7 @@ class UniqueWindowHandler;
 
 /**
  * This is used to represent the code that InteractivePlayer and
- * Editor_Interactive share.
+ * EditorInteractive share.
  */
 class InteractiveBase : public MapView, public DebugConsole::Handler {
 public:

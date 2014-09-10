@@ -36,13 +36,13 @@
 const static int BUTTON_WIDTH = 20;
 const static int BUTTON_HEIGHT = 20;
 
-Editor_Tool_Change_Resources_Options_Menu::
-Editor_Tool_Change_Resources_Options_Menu
-		(Editor_Interactive             & parent,
-		 Editor_Increase_Resources_Tool & increase_tool,
+EditorToolChangeResourcesOptionsMenu::
+EditorToolChangeResourcesOptionsMenu
+		(EditorInteractive             & parent,
+		 EditorIncreaseResourcesTool & increase_tool,
 		 UI::UniqueWindow::Registry     & registry)
 	:
-	Editor_Tool_Options_Menu
+	EditorToolOptionsMenu
 		(parent, registry, 250, 120, _("Resources")),
 	m_change_by_label
 		(this,
@@ -102,22 +102,22 @@ Editor_Tool_Change_Resources_Options_Menu
 {
 	m_change_by_increase.sigclicked.connect
 		(boost::bind
-			(&Editor_Tool_Change_Resources_Options_Menu::clicked_button,
+			(&EditorToolChangeResourcesOptionsMenu::clicked_button,
 			 boost::ref(*this),
 			 Change_By_Increase));
 	m_change_by_decrease.sigclicked.connect
 		(boost::bind
-			(&Editor_Tool_Change_Resources_Options_Menu::clicked_button,
+			(&EditorToolChangeResourcesOptionsMenu::clicked_button,
 			 boost::ref(*this),
 			 Change_By_Decrease));
 	m_set_to_increase.sigclicked.connect
 		(boost::bind
-			(&Editor_Tool_Change_Resources_Options_Menu::clicked_button,
+			(&EditorToolChangeResourcesOptionsMenu::clicked_button,
 			 boost::ref(*this),
 			 Set_To_Increase));
 	m_set_to_decrease.sigclicked.connect
 		(boost::bind
-			(&Editor_Tool_Change_Resources_Options_Menu::clicked_button,
+			(&EditorToolChangeResourcesOptionsMenu::clicked_button,
 			 boost::ref(*this),
 			 Set_To_Decrease));
 
@@ -142,9 +142,9 @@ Editor_Tool_Change_Resources_Options_Menu
 		(resource_pic_max_width + spacing());
 
 	m_radiogroup.changed.connect
-		(boost::bind(&Editor_Tool_Change_Resources_Options_Menu::selected, this));
+		(boost::bind(&EditorToolChangeResourcesOptionsMenu::selected, this));
 	m_radiogroup.clicked.connect
-		(boost::bind(&Editor_Tool_Change_Resources_Options_Menu::selected, this));
+		(boost::bind(&EditorToolChangeResourcesOptionsMenu::selected, this));
 
 	uint16_t cur_x = 0;
 	Point pos
@@ -175,7 +175,7 @@ Editor_Tool_Change_Resources_Options_Menu
 }
 
 
-void Editor_Tool_Change_Resources_Options_Menu::clicked_button(Button const n)
+void EditorToolChangeResourcesOptionsMenu::clicked_button(Button const n)
 {
 	assert
 		(m_increase_tool.get_change_by()
@@ -205,14 +205,14 @@ void Editor_Tool_Change_Resources_Options_Menu::clicked_button(Button const n)
 /**
  * called when a resource has been selected
  */
-void Editor_Tool_Change_Resources_Options_Menu::selected() {
+void EditorToolChangeResourcesOptionsMenu::selected() {
 	const int32_t n = m_radiogroup.get_state();
 
 	m_increase_tool.set_tool().set_cur_res(n);
 	m_increase_tool.set_cur_res(n);
 	m_increase_tool.decrease_tool().set_cur_res(n);
 
-	Widelands::EditorGameBase& egbase = ref_cast<Editor_Interactive, UI::Panel>(*get_parent()).egbase();
+	Widelands::EditorGameBase& egbase = ref_cast<EditorInteractive, UI::Panel>(*get_parent()).egbase();
 	Widelands::Map & map = egbase.map();
 	map.overlay_manager().register_overlay_callback_function(
 	   boost::bind(&Editor_Change_Resource_Tool_Callback, _1, boost::ref(map), boost::ref(egbase.world()), n));
@@ -225,7 +225,7 @@ void Editor_Tool_Change_Resources_Options_Menu::selected() {
 /**
  * Update all the textareas, so that they represent the correct values
 */
-void Editor_Tool_Change_Resources_Options_Menu::update() {
+void EditorToolChangeResourcesOptionsMenu::update() {
 	char buf[250];
 	sprintf(buf, "%i", m_increase_tool.get_change_by());
 	m_change_by_value.set_text(buf);
@@ -233,7 +233,7 @@ void Editor_Tool_Change_Resources_Options_Menu::update() {
 	m_set_to_value.set_text(buf);
 
 	m_cur_selection.set_text
-		(ref_cast<Editor_Interactive, UI::Panel>(*get_parent()).egbase()
+		(ref_cast<EditorInteractive, UI::Panel>(*get_parent()).egbase()
 		 .world().get_resource(m_increase_tool.set_tool().get_cur_res())->descname());
 	m_cur_selection.set_pos
 		(Point

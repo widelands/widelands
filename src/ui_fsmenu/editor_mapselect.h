@@ -31,8 +31,8 @@
  * Select a Map in Fullscreen Mode. It's a modal fullscreen menu
  */
 
-struct Fullscreen_Menu_Editor_MapSelect : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_Editor_MapSelect();
+struct FullscreenMenuEditorMapSelect : public FullscreenMenuBase {
+	FullscreenMenuEditorMapSelect();
 
 	std::string get_map();
 

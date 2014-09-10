@@ -39,8 +39,8 @@
  * CampaignSelect UI
  * Loads a list of all visible campaigns
  */
-Fullscreen_Menu_CampaignSelect::Fullscreen_Menu_CampaignSelect() :
-	Fullscreen_Menu_Base("choosemapmenu.jpg"),
+FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
+	FullscreenMenuBase("choosemapmenu.jpg"),
 
 // Values for alignment and size
 	m_butw (get_w() / 4),
@@ -88,10 +88,10 @@ Fullscreen_Menu_CampaignSelect::Fullscreen_Menu_CampaignSelect() :
 {
 	b_ok.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_CampaignSelect::clicked_ok, boost::ref(*this)));
+			 (&FullscreenMenuCampaignSelect::clicked_ok, boost::ref(*this)));
 	back.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_CampaignSelect::end_modal, boost::ref(*this), 0));
+			 (&FullscreenMenuCampaignSelect::end_modal, boost::ref(*this), 0));
 
 	back.set_font(font_small());
 	b_ok.set_font(font_small());
@@ -105,9 +105,9 @@ Fullscreen_Menu_CampaignSelect::Fullscreen_Menu_CampaignSelect() :
 	tacampdescr     .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_list.set_font(m_fn, m_fs);
 	m_list.selected.connect
-		(boost::bind(&Fullscreen_Menu_CampaignSelect::campaign_selected, this, _1));
+		(boost::bind(&FullscreenMenuCampaignSelect::campaign_selected, this, _1));
 	m_list.double_clicked.connect
-		(boost::bind(&Fullscreen_Menu_CampaignSelect::double_clicked, this, _1));
+		(boost::bind(&FullscreenMenuCampaignSelect::double_clicked, this, _1));
 	fill_list();
 }
 
@@ -115,13 +115,13 @@ Fullscreen_Menu_CampaignSelect::Fullscreen_Menu_CampaignSelect() :
 /**
  * OK was clicked, after an entry of campaignlist got selected.
  */
-void Fullscreen_Menu_CampaignSelect::clicked_ok()
+void FullscreenMenuCampaignSelect::clicked_ok()
 {
 	get_campaign();
 	end_modal(1);
 }
 
-int32_t Fullscreen_Menu_CampaignSelect::get_campaign()
+int32_t FullscreenMenuCampaignSelect::get_campaign()
 {
 	return campaign;
 }
@@ -137,7 +137,7 @@ static char const * const dif_picture_filenames[] = {
 /**
  * an entry of campaignlist got selected.
  */
-void Fullscreen_Menu_CampaignSelect::campaign_selected(uint32_t const i)
+void FullscreenMenuCampaignSelect::campaign_selected(uint32_t const i)
 {
 	if (m_list.get_selected()) { //  false if the selected entry has no value
 		campaign = i;
@@ -180,7 +180,7 @@ void Fullscreen_Menu_CampaignSelect::campaign_selected(uint32_t const i)
 /**
  * listbox got double clicked
  */
-void Fullscreen_Menu_CampaignSelect::double_clicked(uint32_t)
+void FullscreenMenuCampaignSelect::double_clicked(uint32_t)
 {
 	clicked_ok();
 }
@@ -189,7 +189,7 @@ void Fullscreen_Menu_CampaignSelect::double_clicked(uint32_t)
 /**
  * fill the campaign list
  */
-void Fullscreen_Menu_CampaignSelect::fill_list()
+void FullscreenMenuCampaignSelect::fill_list()
 {
 	// Read in the campaign config
 	Profile prof("campaigns/cconfig", nullptr, "maps");
@@ -252,8 +252,8 @@ void Fullscreen_Menu_CampaignSelect::fill_list()
  * Loads a list of all visible maps of selected campaign and let's the user
  * choose one.
  */
-Fullscreen_Menu_CampaignMapSelect::Fullscreen_Menu_CampaignMapSelect() :
-	Fullscreen_Menu_Base("choosemapmenu.jpg"),
+FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect() :
+	FullscreenMenuBase("choosemapmenu.jpg"),
 
 // Values for alignment and size
 	m_butw (get_w() / 4),
@@ -295,10 +295,10 @@ Fullscreen_Menu_CampaignMapSelect::Fullscreen_Menu_CampaignMapSelect() :
 {
 	b_ok.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_CampaignMapSelect::clicked_ok, boost::ref(*this)));
+			 (&FullscreenMenuCampaignMapSelect::clicked_ok, boost::ref(*this)));
 	back.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_CampaignMapSelect::end_modal, boost::ref(*this), 0));
+			 (&FullscreenMenuCampaignMapSelect::end_modal, boost::ref(*this), 0));
 
 	b_ok.set_font(font_small());
 	back.set_font(font_small());
@@ -311,22 +311,22 @@ Fullscreen_Menu_CampaignMapSelect::Fullscreen_Menu_CampaignMapSelect() :
 	label_mapdescr.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	tamapdescr    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_list.set_font(m_fn, m_fs);
-	m_list.selected.connect(boost::bind(&Fullscreen_Menu_CampaignMapSelect::map_selected, this, _1));
+	m_list.selected.connect(boost::bind(&FullscreenMenuCampaignMapSelect::map_selected, this, _1));
 	m_list.double_clicked.connect
-		(boost::bind(&Fullscreen_Menu_CampaignMapSelect::double_clicked, this, _1));
+		(boost::bind(&FullscreenMenuCampaignMapSelect::double_clicked, this, _1));
 }
 
 
 /**
  * OK was clicked, after an entry of maplist got selected.
  */
-void Fullscreen_Menu_CampaignMapSelect::clicked_ok()
+void FullscreenMenuCampaignMapSelect::clicked_ok()
 {
 	end_modal(1);
 }
 
 
-std::string Fullscreen_Menu_CampaignMapSelect::get_map()
+std::string FullscreenMenuCampaignMapSelect::get_map()
 {
 	return campmapfile;
 }
@@ -334,7 +334,7 @@ std::string Fullscreen_Menu_CampaignMapSelect::get_map()
 
 //telling this class what campaign we have and since we know what campaign we
 //have, fill it.
-void Fullscreen_Menu_CampaignMapSelect::set_campaign(uint32_t const i) {
+void FullscreenMenuCampaignMapSelect::set_campaign(uint32_t const i) {
 	campaign = i;
 	fill_list();
 }
@@ -342,7 +342,7 @@ void Fullscreen_Menu_CampaignMapSelect::set_campaign(uint32_t const i) {
 /**
  * an entry of the maplist got selected.
  */
-void Fullscreen_Menu_CampaignMapSelect::map_selected(uint32_t) {
+void FullscreenMenuCampaignMapSelect::map_selected(uint32_t) {
 	campmapfile = m_list.get_selected();
 	Widelands::Map map;
 
@@ -368,7 +368,7 @@ void Fullscreen_Menu_CampaignMapSelect::map_selected(uint32_t) {
 /**
  * listbox got double clicked
  */
-void Fullscreen_Menu_CampaignMapSelect::double_clicked(uint32_t)
+void FullscreenMenuCampaignMapSelect::double_clicked(uint32_t)
 {
 	clicked_ok();
 }
@@ -377,7 +377,7 @@ void Fullscreen_Menu_CampaignMapSelect::double_clicked(uint32_t)
 /**
  * fill the campaign-map list
  */
-void Fullscreen_Menu_CampaignMapSelect::fill_list()
+void FullscreenMenuCampaignMapSelect::fill_list()
 {
 	// read in the campaign config
 	Profile prof("campaigns/cconfig", nullptr, "maps");

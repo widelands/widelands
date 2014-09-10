@@ -48,7 +48,7 @@ using Widelands::WidelandsMapLoader;
 /**
  * Create all the buttons etc...
 */
-Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive & parent)
+MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
 	: UI::Window(&parent, "load_map_menu", 0, 0, 500, 300, _("Load Map"))
 {
 	int32_t const spacing =  5;
@@ -61,8 +61,8 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive & parent)
 		(this,
 		 posx, posy,
 		 get_inner_w() / 2 - spacing, get_inner_h() - spacing - offsy - 40);
-	m_ls->selected.connect(boost::bind(&Main_Menu_Load_Map::selected, this, _1));
-	m_ls->double_clicked.connect(boost::bind(&Main_Menu_Load_Map::double_clicked, this, _1));
+	m_ls->selected.connect(boost::bind(&MainMenuLoadMap::selected, this, _1));
+	m_ls->double_clicked.connect(boost::bind(&MainMenuLoadMap::double_clicked, this, _1));
 
 	posx = get_inner_w() / 2 + spacing;
 	posy += 20;
@@ -114,14 +114,14 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive & parent)
 		 _("OK"),
 		 std::string(),
 		 false);
-	m_ok_btn->sigclicked.connect(boost::bind(&Main_Menu_Load_Map::clicked_ok, this));
+	m_ok_btn->sigclicked.connect(boost::bind(&MainMenuLoadMap::clicked_ok, this));
 
 	UI::Button * cancelbtn = new UI::Button
 		(this, "cancel",
 		 posx, posy, 80, 20,
 		 g_gr->images().get("pics/but1.png"),
 		 _("Cancel"));
-	cancelbtn->sigclicked.connect(boost::bind(&Main_Menu_Load_Map::die, this));
+	cancelbtn->sigclicked.connect(boost::bind(&MainMenuLoadMap::die, this));
 
 	m_basedir = "maps";
 	m_curdir  = "maps";
@@ -133,7 +133,7 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive & parent)
 }
 
 
-void Main_Menu_Load_Map::clicked_ok() {
+void MainMenuLoadMap::clicked_ok() {
 	const char * const filename(m_ls->get_selected());
 
 	if (g_fs->IsDirectory(filename) && !WidelandsMapLoader::is_widelands_map(filename)) {
@@ -142,7 +142,7 @@ void Main_Menu_Load_Map::clicked_ok() {
 		m_mapfiles.clear();
 		fill_list();
 	} else {
-		ref_cast<Editor_Interactive, UI::Panel>(*get_parent()).load(filename);
+		ref_cast<EditorInteractive, UI::Panel>(*get_parent()).load(filename);
 		die();
 	}
 }
@@ -150,7 +150,7 @@ void Main_Menu_Load_Map::clicked_ok() {
 /**
  * Called when a entry is selected
  */
-void Main_Menu_Load_Map::selected(uint32_t) {
+void MainMenuLoadMap::selected(uint32_t) {
 	const char * const name = m_ls->get_selected();
 
 	m_ok_btn->set_enabled(true);
@@ -187,12 +187,12 @@ void Main_Menu_Load_Map::selected(uint32_t) {
 /**
  * An entry has been doubleclicked
  */
-void Main_Menu_Load_Map::double_clicked(uint32_t) {clicked_ok();}
+void MainMenuLoadMap::double_clicked(uint32_t) {clicked_ok();}
 
 /**
  * fill the file list
  */
-void Main_Menu_Load_Map::fill_list() {
+void MainMenuLoadMap::fill_list() {
 	//  Fill it with all files we find.
 	m_mapfiles = g_fs->ListDirectory(m_curdir);
 

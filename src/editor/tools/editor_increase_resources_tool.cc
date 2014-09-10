@@ -78,18 +78,18 @@ int32_t Editor_Change_Resource_Tool_Callback
 
 /*
 ===========
-Editor_Increase_Resources_Tool::handle_click_impl()
+EditorIncreaseResourcesTool::handle_click_impl()
 
 increase the resources of the current field by one if
 there is not already another resource there.
 ===========
 */
 int32_t
-Editor_Increase_Resources_Tool::handle_click_impl(Widelands::Map& map,
+EditorIncreaseResourcesTool::handle_click_impl(Widelands::Map& map,
                                                   const Widelands::World& world,
                                                   Widelands::NodeAndTriangle<> const center,
-                                                  Editor_Interactive& /* parent */,
-                                                  Editor_Action_Args& args) {
+                                                  EditorInteractive& /* parent */,
+                                                  EditorActionArgs& args) {
 	OverlayManager & overlay_manager = map.overlay_manager();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,
@@ -137,18 +137,18 @@ Editor_Increase_Resources_Tool::handle_click_impl(Widelands::Map& map,
 	return mr.radius();
 }
 
-int32_t Editor_Increase_Resources_Tool::handle_undo_impl(
+int32_t EditorIncreaseResourcesTool::handle_undo_impl(
    Widelands::Map& map,
    const Widelands::World& world,
    Widelands::NodeAndTriangle<Widelands::Coords> center,
-   Editor_Interactive& parent,
-   Editor_Action_Args& args) {
+   EditorInteractive& parent,
+   EditorActionArgs& args) {
 	return m_set_tool.handle_undo_impl(map, world, center, parent, args);
 }
 
-Editor_Action_Args Editor_Increase_Resources_Tool::format_args_impl(Editor_Interactive & parent)
+EditorActionArgs EditorIncreaseResourcesTool::format_args_impl(EditorInteractive & parent)
 {
-	Editor_Action_Args a(parent);
+	EditorActionArgs a(parent);
 	a.change_by = m_change_by;
 	a.cur_res = m_cur_res;
 	return a;

@@ -45,12 +45,12 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 
-inline Editor_Interactive & Main_Menu_Save_Map::eia() {
-	return ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
+inline EditorInteractive & MainMenuSaveMap::eia() {
+	return ref_cast<EditorInteractive, UI::Panel>(*get_parent());
 }
 
 
-Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
+MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 	: UI::Window(&parent, "save_map_menu", 0, 0, 500, 330, _("Save Map"))
 {
 	int32_t const spacing =  5;
@@ -64,8 +64,8 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
 			(this,
 			 posx, posy,
 			 get_inner_w() / 2 - spacing, get_inner_h() - spacing - offsy - 60);
-	m_ls->clicked.connect(boost::bind(&Main_Menu_Save_Map::clicked_item, this, _1));
-	m_ls->double_clicked.connect(boost::bind(&Main_Menu_Save_Map::double_clicked_item, this, _1));
+	m_ls->clicked.connect(boost::bind(&MainMenuSaveMap::clicked_item, this, _1));
+	m_ls->double_clicked.connect(boost::bind(&MainMenuSaveMap::double_clicked_item, this, _1));
 	m_editbox =
 		new UI::EditBox
 			(this,
@@ -73,7 +73,7 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
 			 get_inner_w() / 2 - spacing, 20,
 			 g_gr->images().get("pics/but1.png"));
 	m_editbox->setText(parent.egbase().map().get_name());
-	m_editbox->changed.connect(boost::bind(&Main_Menu_Save_Map::edit_box_changed, this));
+	m_editbox->changed.connect(boost::bind(&MainMenuSaveMap::edit_box_changed, this));
 
 	posx = get_inner_w() / 2 + spacing;
 	posy += 20;
@@ -123,14 +123,14 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
 		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
 		 g_gr->images().get("pics/but0.png"),
 		 _("OK"));
-	m_ok_btn->sigclicked.connect(boost::bind(&Main_Menu_Save_Map::clicked_ok, boost::ref(*this)));
+	m_ok_btn->sigclicked.connect(boost::bind(&MainMenuSaveMap::clicked_ok, boost::ref(*this)));
 
 	UI::Button * cancelbtn = new UI::Button
 		(this, "cancel",
 		 posx, posy, 80, 20,
 		 g_gr->images().get("pics/but1.png"),
 		 _("Cancel"));
-	cancelbtn->sigclicked.connect(boost::bind(&Main_Menu_Save_Map::die, boost::ref(*this)));
+	cancelbtn->sigclicked.connect(boost::bind(&MainMenuSaveMap::die, boost::ref(*this)));
 
 	UI::Button * make_directorybtn = new UI::Button
 		(this, "make_directory",
@@ -138,7 +138,7 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
 		 g_gr->images().get("pics/but1.png"),
 		 _("Make Directory"));
 	make_directorybtn->sigclicked.connect
-		(boost::bind(&Main_Menu_Save_Map::clicked_make_directory, boost::ref(*this)));
+		(boost::bind(&MainMenuSaveMap::clicked_make_directory, boost::ref(*this)));
 
 
 	m_basedir = "maps";
@@ -154,7 +154,7 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
 /**
  * Called when the ok button was pressed or a file in list was double clicked.
  */
-void Main_Menu_Save_Map::clicked_ok() {
+void MainMenuSaveMap::clicked_ok() {
 	assert(m_ok_btn->enabled());
 	std::string filename = m_editbox->text();
 
@@ -195,8 +195,8 @@ void Main_Menu_Save_Map::clicked_ok() {
 /**
  * Called, when the make directory button was clicked.
  */
-void Main_Menu_Save_Map::clicked_make_directory() {
-	Main_Menu_Save_Map_Make_Directory md(this, _("unnamed"));
+void MainMenuSaveMap::clicked_make_directory() {
+	MainMenuSaveMapMakeDirectory md(this, _("unnamed"));
 	if (md.run()) {
 		g_fs->EnsureDirectoryExists(m_basedir);
 		//  create directory
@@ -213,7 +213,7 @@ void Main_Menu_Save_Map::clicked_make_directory() {
 /**
  * called when an item was selected
  */
-void Main_Menu_Save_Map::clicked_item(uint32_t) {
+void MainMenuSaveMap::clicked_item(uint32_t) {
 	const char * const name = m_ls->get_selected();
 
 	if (Widelands::WidelandsMapLoader::is_widelands_map(name)) {
@@ -258,7 +258,7 @@ void Main_Menu_Save_Map::clicked_item(uint32_t) {
 /**
  * An Item has been doubleclicked
  */
-void Main_Menu_Save_Map::double_clicked_item(uint32_t) {
+void MainMenuSaveMap::double_clicked_item(uint32_t) {
 	const char * const name = m_ls->get_selected();
 
 	if (g_fs->IsDirectory(name) && !Widelands::WidelandsMapLoader::is_widelands_map(name)) {
@@ -273,7 +273,7 @@ void Main_Menu_Save_Map::double_clicked_item(uint32_t) {
 /**
  * fill the file list
  */
-void Main_Menu_Save_Map::fill_list() {
+void MainMenuSaveMap::fill_list() {
 	// Fill it with all files we find.
 	m_mapfiles = g_fs->ListDirectory(m_curdir);
 
@@ -340,7 +340,7 @@ void Main_Menu_Save_Map::fill_list() {
 /**
  * The editbox was changed. Enable ok button
  */
-void Main_Menu_Save_Map::edit_box_changed() {
+void MainMenuSaveMap::edit_box_changed() {
 	m_ok_btn->set_enabled(m_editbox->text().size());
 }
 
@@ -351,7 +351,7 @@ void Main_Menu_Save_Map::edit_box_changed() {
  * returns true if dialog should close, false if it
  * should stay open
  */
-bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
+bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	//  Make sure that the base directory exists.
 	g_fs->EnsureDirectoryExists(m_basedir);
 

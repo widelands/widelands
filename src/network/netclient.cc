@@ -155,7 +155,7 @@ void NetClient::run ()
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
 	{
-		Fullscreen_Menu_LaunchMPG lgm(this, this);
+		FullscreenMenuLaunchMPG lgm(this, this);
 		lgm.setChatProvider(*this);
 		d->modal = &lgm;
 		int32_t code = lgm.run();

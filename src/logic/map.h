@@ -134,7 +134,7 @@ public:
 	friend class MapLoader;
 	friend class MapVersionPacket;
 	friend struct ::S2MapLoader;
-	friend struct Main_Menu_New_Map;
+	friend struct MainMenuNewMap;
 	friend struct MapAStarBase;
 	friend struct MapGenerator;
 	friend struct MapElementalPacket;

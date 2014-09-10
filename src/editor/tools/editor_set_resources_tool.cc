@@ -32,11 +32,11 @@
 /**
  * Sets the resources of the current to a fixed value
 */
-int32_t Editor_Set_Resources_Tool::handle_click_impl(Widelands::Map& map,
+int32_t EditorSetResourcesTool::handle_click_impl(Widelands::Map& map,
                                                      const Widelands::World& world,
                                                      Widelands::NodeAndTriangle<> const center,
-                                                     Editor_Interactive& /* parent */,
-                                                     Editor_Action_Args& args) {
+                                                     EditorInteractive& /* parent */,
+                                                     EditorActionArgs& args) {
 	OverlayManager & overlay_manager = map.overlay_manager();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 	(map,
@@ -79,11 +79,11 @@ int32_t Editor_Set_Resources_Tool::handle_click_impl(Widelands::Map& map,
 }
 
 int32_t
-Editor_Set_Resources_Tool::handle_undo_impl(Widelands::Map& map,
+EditorSetResourcesTool::handle_undo_impl(Widelands::Map& map,
                                             const Widelands::World& world,
                                             Widelands::NodeAndTriangle<Widelands::Coords> center,
-                                            Editor_Interactive& /* parent */,
-                                            Editor_Action_Args& args) {
+                                            EditorInteractive& /* parent */,
+                                            EditorActionArgs& args) {
 	OverlayManager & overlay_manager = map.overlay_manager();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 	(map,
@@ -124,9 +124,9 @@ Editor_Set_Resources_Tool::handle_undo_impl(Widelands::Map& map,
 	return mr.radius();
 }
 
-Editor_Action_Args Editor_Set_Resources_Tool::format_args_impl(Editor_Interactive & parent)
+EditorActionArgs EditorSetResourcesTool::format_args_impl(EditorInteractive & parent)
 {
-	Editor_Action_Args a(parent);
+	EditorActionArgs a(parent);
 	a.cur_res = m_cur_res;
 	a.set_to = m_set_to;
 	return a;

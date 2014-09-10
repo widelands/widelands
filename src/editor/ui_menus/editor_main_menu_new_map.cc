@@ -38,7 +38,7 @@
 
 using Widelands::NUMBER_OF_MAP_DIMENSIONS;
 
-Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive & parent)
+MainMenuNewMap::MainMenuNewMap(EditorInteractive & parent)
 	:
 	UI::Window
 		(&parent, "new_map_menu",
@@ -68,14 +68,14 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive & parent)
 		 get_inner_w() - spacing - 20, posy, 20, 20,
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_up.png"));
-	widthupbtn->sigclicked.connect(boost::bind(&Main_Menu_New_Map::button_clicked, this, 0));
+	widthupbtn->sigclicked.connect(boost::bind(&MainMenuNewMap::button_clicked, this, 0));
 
 	UI::Button * widthdownbtn = new UI::Button
 		(this, "width_down",
 		 posx, posy, 20, 20,
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_down.png"));
-	widthdownbtn->sigclicked.connect(boost::bind(&Main_Menu_New_Map::button_clicked, this, 1));
+	widthdownbtn->sigclicked.connect(boost::bind(&MainMenuNewMap::button_clicked, this, 1));
 
 	posy += 20 + spacing + spacing;
 
@@ -89,14 +89,14 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive & parent)
 		 get_inner_w() - spacing - 20, posy, 20, 20,
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_up.png"));
-	heightupbtn->sigclicked.connect(boost::bind(&Main_Menu_New_Map::button_clicked, this, 2));
+	heightupbtn->sigclicked.connect(boost::bind(&MainMenuNewMap::button_clicked, this, 2));
 
 	UI::Button * heightdownbtn = new UI::Button
 		(this, "height_down",
 		 posx, posy, 20, 20,
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_down.png"));
-	heightdownbtn->sigclicked.connect(boost::bind(&Main_Menu_New_Map::button_clicked, this, 3));
+	heightdownbtn->sigclicked.connect(boost::bind(&MainMenuNewMap::button_clicked, this, 3));
 
 	posy += 20 + spacing + spacing;
 
@@ -107,14 +107,14 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive & parent)
 		 posx, posy, width, height,
 		 g_gr->images().get("pics/but0.png"),
 		 _("Create Map"));
-	createbtn->sigclicked.connect(boost::bind(&Main_Menu_New_Map::clicked_create_map, this));
+	createbtn->sigclicked.connect(boost::bind(&MainMenuNewMap::clicked_create_map, this));
 }
 
 
 /**
  * Called, when button get clicked
 */
-void Main_Menu_New_Map::button_clicked(int32_t n) {
+void MainMenuNewMap::button_clicked(int32_t n) {
 	switch (n) {
 	case 0: ++m_w; break;
 	case 1: --m_w; break;
@@ -139,9 +139,9 @@ void Main_Menu_New_Map::button_clicked(int32_t n) {
 	m_height->set_text(buffer);
 }
 
-void Main_Menu_New_Map::clicked_create_map() {
-	Editor_Interactive & eia =
-		ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
+void MainMenuNewMap::clicked_create_map() {
+	EditorInteractive & eia =
+		ref_cast<EditorInteractive, UI::Panel>(*get_parent());
 	Widelands::EditorGameBase & egbase = eia.egbase();
 	Widelands::Map              & map    = egbase.map();
 	UI::ProgressWindow loader;

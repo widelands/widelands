@@ -34,10 +34,10 @@
 #include "ui_basic/messagebox.h"
 #include "wui/text_constants.h"
 
-Fullscreen_Menu_Internet_Lobby::Fullscreen_Menu_Internet_Lobby
+FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	(char const * const nick, char const * const pwd, bool registered)
 :
-	Fullscreen_Menu_Base("internetmenu.jpg"),
+	FullscreenMenuBase("internetmenu.jpg"),
 
 // Values for alignment and size
 	m_butx (get_w() * 13 / 40),
@@ -122,15 +122,15 @@ Fullscreen_Menu_Internet_Lobby::Fullscreen_Menu_Internet_Lobby
 {
 	joingame.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_Internet_Lobby::clicked_joingame,
+			 (&FullscreenMenuInternetLobby::clicked_joingame,
 			  boost::ref(*this)));
 	hostgame.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_Internet_Lobby::clicked_hostgame,
+			 (&FullscreenMenuInternetLobby::clicked_hostgame,
 			  boost::ref(*this)));
 	back.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_Internet_Lobby::clicked_back,
+			 (&FullscreenMenuInternetLobby::clicked_back,
 			  boost::ref(*this)));
 
 	back.set_font(font_small());
@@ -149,7 +149,7 @@ Fullscreen_Menu_Internet_Lobby::Fullscreen_Menu_Internet_Lobby
 	std::string server = s.get_string("servername", "");
 	servername  .setText (server);
 	servername  .changed.connect
-		(boost::bind(&Fullscreen_Menu_Internet_Lobby::change_servername, this));
+		(boost::bind(&FullscreenMenuInternetLobby::change_servername, this));
 	servername  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
 	// prepare the lists
@@ -170,14 +170,14 @@ Fullscreen_Menu_Internet_Lobby::Fullscreen_Menu_Internet_Lobby
 	clientsonline .add_column((m_lisw - 22) * 2 / 8, _("Points"));
 	clientsonline .add_column((m_lisw - 22) * 3 / 8, _("Game"));
 	clientsonline.set_column_compare
-		(0, boost::bind(&Fullscreen_Menu_Internet_Lobby::compare_clienttype, this, _1, _2));
+		(0, boost::bind(&FullscreenMenuInternetLobby::compare_clienttype, this, _1, _2));
 	clientsonline .double_clicked.connect
-		(boost::bind(&Fullscreen_Menu_Internet_Lobby::client_doubleclicked, this, _1));
+		(boost::bind(&FullscreenMenuInternetLobby::client_doubleclicked, this, _1));
 	opengames   .set_font(m_fn, m_fs);
 	opengames   .selected.connect
-		(boost::bind(&Fullscreen_Menu_Internet_Lobby::server_selected, this, _1));
+		(boost::bind(&FullscreenMenuInternetLobby::server_selected, this, _1));
 	opengames   .double_clicked.connect
-		(boost::bind(&Fullscreen_Menu_Internet_Lobby::server_doubleclicked, this, _1));
+		(boost::bind(&FullscreenMenuInternetLobby::server_doubleclicked, this, _1));
 
 	// try to connect to the metaserver
 	if (!InternetGaming::ref().error() && !InternetGaming::ref().logged_in())
@@ -186,9 +186,9 @@ Fullscreen_Menu_Internet_Lobby::Fullscreen_Menu_Internet_Lobby
 
 
 /// think function of the UI (main loop)
-void Fullscreen_Menu_Internet_Lobby::think ()
+void FullscreenMenuInternetLobby::think ()
 {
-	Fullscreen_Menu_Base::think();
+	FullscreenMenuBase::think();
 
 	if (!InternetGaming::ref().error()) {
 
@@ -210,7 +210,7 @@ void Fullscreen_Menu_Internet_Lobby::think ()
 
 
 /// connects Widelands with the metaserver
-void Fullscreen_Menu_Internet_Lobby::connectToMetaserver()
+void FullscreenMenuInternetLobby::connectToMetaserver()
 {
 	Section & s = g_options.pull_section("global");
 	const std::string & metaserver = s.get_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
@@ -226,7 +226,7 @@ void Fullscreen_Menu_Internet_Lobby::connectToMetaserver()
 
 
 /// fills the server list
-void Fullscreen_Menu_Internet_Lobby::fillGamesList(const std::vector<InternetGame> & games)
+void FullscreenMenuInternetLobby::fillGamesList(const std::vector<InternetGame> & games)
 {
 	// List and button cleanup
 	opengames.clear();
@@ -254,7 +254,7 @@ void Fullscreen_Menu_Internet_Lobby::fillGamesList(const std::vector<InternetGam
 }
 
 
-uint8_t Fullscreen_Menu_Internet_Lobby::convert_clienttype(const std::string & type) {
+uint8_t FullscreenMenuInternetLobby::convert_clienttype(const std::string & type) {
 	if (type == INTERNET_CLIENT_REGISTERED)
 		return 1;
 	if (type == INTERNET_CLIENT_SUPERUSER)
@@ -270,7 +270,7 @@ uint8_t Fullscreen_Menu_Internet_Lobby::convert_clienttype(const std::string & t
  * \return \c true if the client in row \p rowa should come before the client in
  * row \p rowb when sorted according to clienttype
  */
-bool Fullscreen_Menu_Internet_Lobby::compare_clienttype(unsigned int rowa, unsigned int rowb)
+bool FullscreenMenuInternetLobby::compare_clienttype(unsigned int rowa, unsigned int rowb)
 {
 	const InternetClient * playera = clientsonline[rowa];
 	const InternetClient * playerb = clientsonline[rowb];
@@ -279,7 +279,7 @@ bool Fullscreen_Menu_Internet_Lobby::compare_clienttype(unsigned int rowa, unsig
 }
 
 /// fills the client list
-void Fullscreen_Menu_Internet_Lobby::fillClientList(const std::vector<InternetClient> & clients)
+void FullscreenMenuInternetLobby::fillClientList(const std::vector<InternetClient> & clients)
 {
 	clientsonline.clear();
 	for (uint32_t i = 0; i < clients.size(); ++i) {
@@ -321,7 +321,7 @@ void Fullscreen_Menu_Internet_Lobby::fillClientList(const std::vector<InternetCl
 
 
 /// called when an entry of the client list was doubleclicked
-void Fullscreen_Menu_Internet_Lobby::client_doubleclicked (uint32_t i)
+void FullscreenMenuInternetLobby::client_doubleclicked (uint32_t i)
 {
 	// add a @clientname to the current edit text.
 	if (clientsonline.has_selection()) {
@@ -347,7 +347,7 @@ void Fullscreen_Menu_Internet_Lobby::client_doubleclicked (uint32_t i)
 
 
 /// called when an entry of the server list was selected
-void Fullscreen_Menu_Internet_Lobby::server_selected (uint32_t)
+void FullscreenMenuInternetLobby::server_selected (uint32_t)
 {
 	if (opengames.has_selection()) {
 		const InternetGame * game = &opengames.get_selected();
@@ -360,7 +360,7 @@ void Fullscreen_Menu_Internet_Lobby::server_selected (uint32_t)
 
 
 /// called when an entry of the server list was doubleclicked
-void Fullscreen_Menu_Internet_Lobby::server_doubleclicked (uint32_t)
+void FullscreenMenuInternetLobby::server_doubleclicked (uint32_t)
 {
 	// if the game is open try to connect it, if not do nothing.
 	if (opengames.has_selection()) {
@@ -372,7 +372,7 @@ void Fullscreen_Menu_Internet_Lobby::server_doubleclicked (uint32_t)
 
 
 /// called when the servername was changed
-void Fullscreen_Menu_Internet_Lobby::change_servername()
+void FullscreenMenuInternetLobby::change_servername()
 {
 	// Allow client to enter a servername manually
 	hostgame.set_enabled(true);
@@ -388,7 +388,7 @@ void Fullscreen_Menu_Internet_Lobby::change_servername()
 
 
 /// called when the 'join game' button was clicked
-void Fullscreen_Menu_Internet_Lobby::clicked_joingame()
+void FullscreenMenuInternetLobby::clicked_joingame()
 {
 	if (opengames.has_selection()) {
 		InternetGaming::ref().join_game(opengames.get_selected().name);
@@ -444,7 +444,7 @@ DIAG_ON("-Wold-style-cast")
 
 
 /// called when the 'host game' button was clicked
-void Fullscreen_Menu_Internet_Lobby::clicked_hostgame()
+void FullscreenMenuInternetLobby::clicked_hostgame()
 {
 	// Save selected servername as default for next time.
 	g_options.pull_section("global").set_string("servername", servername.text());
@@ -461,7 +461,7 @@ void Fullscreen_Menu_Internet_Lobby::clicked_hostgame()
 
 
 /// called when the 'back' button was clicked
-void Fullscreen_Menu_Internet_Lobby::clicked_back()
+void FullscreenMenuInternetLobby::clicked_back()
 {
 	// Close the lobby UI
 	end_modal(0);

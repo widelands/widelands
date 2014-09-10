@@ -23,7 +23,7 @@
 #include "io/filesystem/filesystem.h"
 #include "ui_basic/window.h"
 
-struct Editor_Interactive;
+struct EditorInteractive;
 namespace UI {
 struct Button;
 template <typename T> struct Listselect;
@@ -34,8 +34,8 @@ struct Multiline_Textarea;
 /**
  * Choose a filename and save your brand new created map
 */
-struct Main_Menu_Load_Map : public UI::Window {
-	Main_Menu_Load_Map(Editor_Interactive &);
+struct MainMenuLoadMap : public UI::Window {
+	MainMenuLoadMap(EditorInteractive &);
 
 private:
 	void clicked_ok();
