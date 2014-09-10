@@ -151,7 +151,8 @@ void Game_Preload_Data_Packet::Write
 // base/time_string.h doesn't make sense either, because we would have a reference to game_controller.h in there, which is even more ugly.
 std::string Game_Preload_Data_Packet::get_localized_display_title(std::string filename) {
 	std::string result;
-	if (m_saveyear > 0 && m_savemonth > 0 && m_saveday > 0) {
+
+	if ((is_timestring(filename) || filename == "wl_autosave") && m_saveyear > 0 && m_savemonth > 0 && m_saveday > 0) {
 
 		if (m_gametype == GameController::GameType::SINGLEPLAYER) {
 			/** TRANSLATORS: Gametype used in filenames for loading games */

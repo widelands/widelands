@@ -131,6 +131,12 @@ std::string localize_month(int8_t month) {
 	}
 }
 
+// Check if this is a string of the type "YYYY-MM-DDThh.mm.ss"
+bool is_timestring(const std::string& timestring) {
+	boost::regex re("\\d\\d\\d\\d-\\d\\d-\\d\\dT\\d\\d\\.\\d\\d\\.\\d\\d.*");
+	return boost::regex_match(timestring, re);
+}
+
 char * gametimestring_leading_zeros(uint32_t gametime)
 {
 	uint32_t time = gametime / 1000;
