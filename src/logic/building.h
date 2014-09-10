@@ -294,8 +294,8 @@ protected:
 	uint32_t m_anim;
 	int32_t  m_animstart;
 
-	typedef std::vector<OPtr<Worker> > Leave_Queue;
-	Leave_Queue m_leave_queue; //  FIFO queue of workers leaving the building
+	typedef std::vector<OPtr<Worker> > LeaveQueue;
+	LeaveQueue m_leave_queue; //  FIFO queue of workers leaving the building
 	uint32_t    m_leave_time;  //  when to wake the next one from leave queue
 	ObjectPointer  m_leave_allow; //  worker that is allowed to leave now
 

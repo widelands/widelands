@@ -81,7 +81,7 @@ public:
 		void set_string(char const *);
 	};
 
-	typedef std::vector<Value> Value_list;
+	typedef std::vector<Value> ValueList;
 
 	Section(Profile *, char const * name);
 	Section(const Section &);
@@ -170,7 +170,7 @@ private:
 	Profile  * m_profile;
 	bool       m_used;
 	std::string m_section_name;
-	Value_list m_values;
+	ValueList m_values;
 };
 
 /**
@@ -233,8 +233,8 @@ public:
 
 private:
 	std::string m_filename;
-	typedef std::vector<Section> Section_list;
-	Section_list m_sections;
+	typedef std::vector<Section> SectionList;
+	SectionList m_sections;
 	int32_t m_error_level;
 
 	DISALLOW_COPY_AND_ASSIGN(Profile);

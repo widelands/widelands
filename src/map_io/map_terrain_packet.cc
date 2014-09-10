@@ -49,12 +49,12 @@ void MapTerrainPacket::Read(FileSystem& fs,
 		if (packet_version == CURRENT_PACKET_VERSION) {
 			uint16_t const nr_terrains = fr.Unsigned16();
 
-			typedef std::map<const uint16_t, TerrainIndex> terrain_id_map;
-			terrain_id_map smap;
+			typedef std::map<const uint16_t, TerrainIndex> TerrainIdMap;
+			TerrainIdMap smap;
 			for (uint16_t i = 0; i < nr_terrains; ++i) {
 				const uint16_t id = fr.Unsigned16();
 				char const* const old_terrain_name = fr.CString();
-				terrain_id_map::const_iterator const it = smap.find(id);
+				TerrainIdMap::const_iterator const it = smap.find(id);
 				if (it != smap.end()) {
 					throw GameDataError(
 						"MapTerrainPacket::Read: WARNING: Found duplicate terrain id %i.", id);

@@ -630,7 +630,7 @@ bool Building::leave_check_and_wait(Game & game, Worker & w)
  */
 void Building::leave_skip(Game &, Worker & w)
 {
-	Leave_Queue::iterator const it =
+	LeaveQueue::iterator const it =
 		std::find(m_leave_queue.begin(), m_leave_queue.end(), &w);
 
 	if (it != m_leave_queue.end())

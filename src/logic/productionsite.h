@@ -178,8 +178,8 @@ public:
 
 	void set_economy(Economy *) override;
 
-	typedef std::vector<WaresQueue *> Input_Queues;
-	const Input_Queues & warequeues() const {return m_input_queues;}
+	typedef std::vector<WaresQueue *> InputQueues;
+	const InputQueues & warequeues() const {return m_input_queues;}
 	const std::vector<Worker *>& workers() const;
 
 	bool can_start_working() const;
@@ -258,8 +258,8 @@ protected:  // TrainingSite must have access to this stuff
 	/// name to game time. When a program ends with the result Skipped, its name
 	/// is added to this map, with the current game time. (When the program ends
 	/// with any other result, its name is removed from the map.)
-	typedef std::map<std::string, Time> Skipped_Programs;
-	Skipped_Programs m_skipped_programs;
+	typedef std::map<std::string, Time> SkippedPrograms;
+	SkippedPrograms m_skipped_programs;
 
 	typedef std::vector<State> Stack;
 	Stack        m_stack; ///<  program stack
@@ -269,7 +269,7 @@ protected:  // TrainingSite must have access to this stuff
 
 	ProductionProgram::ActProduce::Items m_produced_wares;
 	ProductionProgram::ActProduce::Items m_recruited_workers;
-	Input_Queues m_input_queues; ///< input queues for all inputs
+	InputQueues m_input_queues; ///< input queues for all inputs
 	std::vector<bool>        m_statistics;
 	uint8_t                  m_last_stat_percent;
 	uint32_t                 m_crude_percent; //integer0-10000000, to be shirink to range 0-10

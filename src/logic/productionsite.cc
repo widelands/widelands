@@ -842,7 +842,7 @@ void ProductionSite::program_start
 
 	m_program_timer = true;
 	uint32_t tdelta = 10;
-	Skipped_Programs::const_iterator i = m_skipped_programs.find(program_name);
+	SkippedPrograms::const_iterator i = m_skipped_programs.find(program_name);
 	if (i != m_skipped_programs.end()) {
 		uint32_t const gametime = game.get_gametime();
 		uint32_t const earliest_allowed_start_time = i->second + 10000;

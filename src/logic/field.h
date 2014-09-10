@@ -99,13 +99,13 @@ private:
 	 * The next highest bit is the border bit.
 	 * The low bits are the player number of the owner.
 	 */
-	typedef PlayerNumber Owner_Info_and_Selections_Type;
+	typedef PlayerNumber OwnerInfoAndSelectionsType;
 	static const uint8_t Border_Bit =
-		std::numeric_limits<Owner_Info_and_Selections_Type>::digits - 1;
-	static const Owner_Info_and_Selections_Type Border_Bitmask = 1 << Border_Bit;
-	static const Owner_Info_and_Selections_Type Player_Number_Bitmask =
+		std::numeric_limits<OwnerInfoAndSelectionsType>::digits - 1;
+	static const OwnerInfoAndSelectionsType Border_Bitmask = 1 << Border_Bit;
+	static const OwnerInfoAndSelectionsType Player_Number_Bitmask =
 		Border_Bitmask - 1;
-	static const Owner_Info_and_Selections_Type Owner_Info_Bitmask =
+	static const OwnerInfoAndSelectionsType Owner_Info_Bitmask =
 		Player_Number_Bitmask + Border_Bitmask;
 	static_assert(MAX_PLAYERS <= Player_Number_Bitmask, "Bitmask is too big.");
 
@@ -121,7 +121,7 @@ private:
 	Height height;
 	int8_t brightness;
 
-	Owner_Info_and_Selections_Type owner_info_and_selections;
+	OwnerInfoAndSelectionsType owner_info_and_selections;
 
 	ResourceIndex m_resources; ///< Resource type on this field, if any
 	uint8_t m_starting_res_amount; ///< Initial amount of m_resources

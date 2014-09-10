@@ -83,8 +83,8 @@ public:
 			set_port_space(unset_port_space)
 		{}
 		EditorTool & current() const {return *current_pointer;}
-		typedef std::vector<EditorTool *> Tool_Vector;
-		//Tool_Vector                     tools;
+		typedef std::vector<EditorTool *> ToolVector;
+		//ToolVector                     tools;
 		EditorTool          *          current_pointer;
 		EditorTool::ToolIndex         use_tool;
 		EditorInfoTool                info;

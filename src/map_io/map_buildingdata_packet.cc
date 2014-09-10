@@ -113,10 +113,10 @@ void MapBuildingdataPacket::Read
 					building.m_animstart = fr.Unsigned32();
 
 					{
-						Building::Leave_Queue & leave_queue = building.m_leave_queue;
+						Building::LeaveQueue & leave_queue = building.m_leave_queue;
 						leave_queue.resize(fr.Unsigned16());
 
-						for (Building::Leave_Queue::iterator queue_iter = leave_queue.begin();
+						for (Building::LeaveQueue::iterator queue_iter = leave_queue.begin();
 							  queue_iter != leave_queue.end();
 							  ++queue_iter) {
 
@@ -1158,7 +1158,7 @@ void MapBuildingdataPacket::Write
 			fw.Unsigned32(building->m_animstart);
 
 			{
-				const Building::Leave_Queue & leave_queue = building->m_leave_queue;
+				const Building::LeaveQueue & leave_queue = building->m_leave_queue;
 				fw.Unsigned16(leave_queue.size());
 				for (const OPtr<Worker >& temp_queue: leave_queue) {
 					assert(mos.is_object_known(*temp_queue.get(egbase)));
