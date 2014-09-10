@@ -56,6 +56,7 @@ constexpr int kIdleMineUpdateInterval = 22000;
 constexpr int kBusyMineUpdateInterval = 2000;
 // building of the same building can be started after 25s at earliest
 constexpr int kBuildingMinInterval = 25 * 1000;
+constexpr int kMinBFCheckInterval = 9 * 1000;
 
 using namespace Widelands;
 
@@ -83,6 +84,7 @@ DefaultAI::DefaultAI(Game& ggame, Player_Number const pid, uint8_t const t)
      next_militarysite_check_due_(0),
      next_attack_consideration_due_(300000),
      next_helpersites_check_due_(180000),
+     next_bf_check_due_(1000),
      inhibit_road_building_(0),
      time_of_last_construction_(0),
      enemy_last_seen_(-2 * 60 * 1000),
@@ -98,23 +100,38 @@ DefaultAI::DefaultAI(Game& ggame, Player_Number const pid, uint8_t const t)
 	   Notifications::subscribe<NoteFieldPossession>([this](const NoteFieldPossession& note) {
 			if (note.player != player_) {
 			   return;
-		   }
+			}
 			if (note.ownership == NoteFieldPossession::Ownership::GAINED) {
 			   unusable_fields.push_back(note.fc);
-		   }
+			}
 		});
 
 	// Subscribe to NoteImmovables.
 	immovable_subscriber_ =
 	   Notifications::subscribe<NoteImmovable>([this](const NoteImmovable& note) {
 			if (note.pi->owner().player_number() != player_->player_number()) {
-			   return;
-		   }
+				return;
+			}
 			if (note.ownership == NoteImmovable::Ownership::GAINED) {
-			   gain_immovable(*note.pi);
-		   } else {
+				gain_immovable(*note.pi);
+			} else {
 			   lose_immovable(*note.pi);
 		   }
+		});
+
+	// Subscribe to ProductionSiteOutOfResources.
+	outofresource_subscriber_ = Notifications::subscribe<NoteProductionSiteOutOfResources>(
+	   [this](const NoteProductionSiteOutOfResources& note) {
+		if (note.ps->owner().player_number() != player_->player_number()) {
+			return;
+		}
+
+		   out_of_resources_site(*note.ps);
+		   // if (note.ownership == NoteImmovable::Ownership::GAINED) {
+		   // gain_immovable(*note.pi);
+		   //} else {
+		   // lose_immovable(*note.pi);
+		   //}
 		});
 }
 
@@ -147,14 +164,15 @@ void DefaultAI::think() {
 
 	const int32_t gametime = game().get_gametime();
 
-	if (m_buildable_changed) {
+	if (m_buildable_changed || next_bf_check_due_ < gametime) {
 		// update statistics about buildable fields
 		update_all_buildable_fields(gametime);
+		next_bf_check_due_ = gametime + kMinBFCheckInterval;
 	}
 
 	m_buildable_changed = false;
 
-	// if there are more than one economy try to connect them with a road.
+	// perpetually tries to improve roads
 	if (next_road_due_ <= gametime) {
 		next_road_due_ = gametime + 1000;
 
@@ -163,7 +181,7 @@ void DefaultAI::think() {
 			return;
 		}
 	} else
-		// only go on, after defaultAI tried to connect all economies.
+		// only go on, after defaultAI tried to improve roads.
 		return;
 
 	// NOTE Because of the check above, the following parts of think() are used
@@ -195,6 +213,7 @@ void DefaultAI::think() {
 
 		if (construct_building(gametime)) {
 			time_of_last_construction_ = gametime;
+			m_buildable_changed = true;
 			return;
 		}
 	}
@@ -221,7 +240,6 @@ void DefaultAI::think() {
 		m_buildable_changed = true;
 		m_mineable_changed = true;
 		inhibit_road_building_ = gametime + 1000;
-		// NOCOM review inhibit_road_building_
 		return;
 	}
 }
@@ -390,7 +408,7 @@ void DefaultAI::update_all_buildable_fields(const int32_t gametime) {
 	uint16_t i = 0;
 
 	while (!buildable_fields.empty() && buildable_fields.front()->next_update_due_ <= gametime &&
-	       i < 50) {
+	       i < 25) {
 		BuildableField& bf = *buildable_fields.front();
 
 		//  check whether we lost ownership of the node
@@ -538,7 +556,6 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 	// (second is used in check_militarysites)
 	if (!military) {
 		int32_t const tree_attr = MapObjectDescr::get_attribute_id("tree");
-		field.reachable = false;
 		field.preferred_ = false;
 		field.enemy_nearby_ = false;
 		field.military_capacity_ = 0;
@@ -586,9 +603,6 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 
 		for (uint32_t i = 0; i < immovables.size(); ++i) {
 			const BaseImmovable& base_immovable = *immovables.at(i).object;
-
-			if (dynamic_cast<const Flag*>(&base_immovable))
-				field.reachable = true;
 
 			if (upcast(PlayerImmovable const, player_immovable, &base_immovable))
 
@@ -718,7 +732,6 @@ void DefaultAI::update_mineable_field(MineableField& field) {
 	std::vector<ImmovableFound> immovables;
 	Map& map = game().map();
 	map.find_immovables(Area<FCoords>(field.coords, 5), &immovables);
-	field.reachable = false;
 	field.preferred_ = false;
 	field.mines_nearby_ = 1;
 	FCoords fse;
@@ -730,9 +743,7 @@ void DefaultAI::update_mineable_field(MineableField& field) {
 			field.preferred_ = true;
 
 	for (const ImmovableFound& temp_immovable : immovables) {
-		if (dynamic_cast<Flag const*>(temp_immovable.object))
-			field.reachable = true;
-		else if (upcast(Building const, bld, temp_immovable.object)) {
+		if (upcast(Building const, bld, temp_immovable.object)) {
 			if (bld->descr().get_ismine()) {
 				++field.mines_nearby_;
 			} else if (upcast(ConstructionSite const, cs, bld)) {
@@ -903,13 +914,6 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 		// this will also speed up the game
 		// this way there should be allways more then 100 bf evaluated
 		if (bf->next_update_due_ < gametime - 8000)
-			continue;
-
-		if (!bf->reachable)
-			continue;
-
-		// add randomnes and ease AI
-		if (time(nullptr) % 5 == 0)
 			continue;
 
 		// Continue if field is blocked at the moment
@@ -1443,6 +1447,9 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 						continue;
 					}
 
+					// Prefer road side fields
+					prio += (*j)->preferred_ ? 1 : 0;
+
 					if (prio > proposed_priority) {
 						// proposed_building = bo.id;
 						best_building = &bo;
@@ -1929,16 +1936,15 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 		// Do not destruct the last few lumberjacks
 		if (site.bo->cnt_built_ <= site.bo->cnt_target_) {
 			return false;
-			}
+		}
 
 		if (site.site->get_statistics_percent() > 20)
 			return false;
 
-
 		const uint32_t remaining_trees =
-								map.find_immovables(Area<FCoords>(map.get_fcoords(site.site->get_position()), radius),
-		                        nullptr,
-		                        FindImmovableAttribute(MapObjectDescr::get_attribute_id("tree")));
+		   map.find_immovables(Area<FCoords>(map.get_fcoords(site.site->get_position()), radius),
+		                       nullptr,
+		                       FindImmovableAttribute(MapObjectDescr::get_attribute_id("tree")));
 
 		// do not dismantle if there are some trees remaining
 		if (remaining_trees > 5)
@@ -1947,13 +1953,13 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 		if (site.bo->stocklevel_time < game().get_gametime() - 30 * 1000) {
 			site.bo->stocklevel_ = get_stocklevel(*site.bo);
 			site.bo->stocklevel_time = game().get_gametime();
-			}
+		}
 
-		//if we need wood badly
+		// if we need wood badly
 		if (remaining_trees > 0 && site.bo->stocklevel_ <= 10)
 			return false;
 
-		//so finally we dismantle the lumberjac
+		// so finally we dismantle the lumberjac
 		site.bo->last_dismantle_time_ = game().get_gametime();
 		flags_to_be_removed.push_back(site.site->base_flag().get_position());
 		game().send_player_dismantle(*site.site);
@@ -2147,11 +2153,11 @@ bool DefaultAI::check_mines_(int32_t const gametime) {
 	}
 
 	// doing nothing when failed count is too low
-	if (site.site->get_no_res_count() < 6)
+	if (site.no_resources_count < 6)
 		return false;
 
 	// dismantling when the failed count is too high
-	if (site.site->get_no_res_count() > 14) {
+	if (site.no_resources_count > 14) {
 		flags_to_be_removed.push_back(site.site->base_flag().get_position());
 		game().send_player_dismantle(*site.site);
 		site.bo->construction_decision_time_ = gametime;
@@ -2530,6 +2536,17 @@ void DefaultAI::lose_immovable(const PlayerImmovable& pi) {
 		roads.remove(road);
 }
 
+// this is called when a mine reports "out of resources"
+void DefaultAI::out_of_resources_site(const ProductionSite& site) {
+
+	// we must identify which mine matches the productionsite a note reffers to
+	for (std::list<ProductionSiteObserver>::iterator i = mines_.begin(); i != mines_.end(); ++i)
+		if (i->site == &site) {
+			i->no_resources_count += 1;
+			break;
+		}
+}
+
 // this is called whenever we gain a new building
 void DefaultAI::gain_building(Building& b) {
 	BuildingObserver& bo = get_building_observer(b.descr().name().c_str());
@@ -2556,6 +2573,7 @@ void DefaultAI::gain_building(Building& b) {
 			productionsites.back().built_time_ = game().get_gametime();
 			productionsites.back().unoccupied_till_ = game().get_gametime();
 			productionsites.back().stats_zero_ = 0;
+			productionsites.back().no_resources_count = 0;
 
 			for (uint32_t i = 0; i < bo.outputs_.size(); ++i)
 				++wares.at(bo.outputs_.at(i)).producers_;
@@ -2755,7 +2773,6 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 		uint32_t defenders = 0;
 		uint32_t defend_ready_enemies = 0;  // enemy soldiers that can come to defend the attacked
 		                                    // building (one soldier has to stay)
-		// uint8_t retreat = ms->owner().get_retreat_percentage();
 
 		// skipping if based on  "enemies nearby" there are probably no enemies nearby
 		if (!mso->enemies_nearby && gametime % 8 > 0) {

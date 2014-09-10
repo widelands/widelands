@@ -200,7 +200,6 @@ ProductionSite::ProductionSite(const ProductionSiteDescr & ps_descr) :
 	m_statistics        (STATISTICS_VECTOR_LENGTH, false),
 	m_last_stat_percent (0),
 	m_crude_percent     (0),
-	m_no_resources_count(0),
 	m_is_stopped        (false),
 	m_default_anim      ("idle"),
 	m_production_result (""),
@@ -932,11 +931,10 @@ void ProductionSite::notify_player(Game & game, uint8_t minutes)
 				 true,
 				 minutes * 60000, 0);
 		}
-		// NOCOM(GunChleoc): Notify the AI that the ps is out of resources.
-		// The AI still needs to decide what to do depending on the type of production site.
-		// Use Notifications::subscribe to pick this up. If some notifications are tirggered too fast,
-		// e.g. for the Reed Yard, adjust the delay option in its conf file
-		Notifications::publish(NoteProductionSiteOutOfResources(this, get_owner()));
+		// following sends "out of resources" messages to be picked up by AI
+		// used as a information for dismantling and upgrading mines
+		if (descr().get_ismine())
+			Notifications::publish(NoteProductionSiteOutOfResources(this, get_owner()));
 	}
 	if (m_out_of_resource_delay_counter++ >=
 		 descr().out_of_resource_delay_attempts()) {

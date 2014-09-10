@@ -158,6 +158,7 @@ private:
 	void lose_immovable(const Widelands::PlayerImmovable&);
 	void gain_building(Widelands::Building&);
 	void lose_building(const Widelands::Building&);
+	void out_of_resources_site(const Widelands::ProductionSite&);
 
 	bool check_supply(const BuildingObserver&);
 
@@ -203,6 +204,7 @@ private:
 	int32_t next_militarysite_check_due_;
 	int32_t next_attack_consideration_due_;
 	int32_t next_helpersites_check_due_;
+	int32_t next_bf_check_due_;
 	int32_t inhibit_road_building_;
 	int32_t time_of_last_construction_;
 	int32_t enemy_last_seen_;
@@ -221,6 +223,8 @@ private:
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldPossession>>
 	   field_possession_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteImmovable>> immovable_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteProductionSiteOutOfResources>>
+	   outofresource_subscriber_;
 };
 
 #endif  // end of include guard: WL_AI_DEFAULTAI_H

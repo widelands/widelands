@@ -196,7 +196,6 @@ struct BuildableField {
 
 	int32_t next_update_due_;
 
-	bool reachable;
 	bool preferred_;
 	bool enemy_nearby_;
 
@@ -236,7 +235,6 @@ struct BuildableField {
 	BuildableField(const Widelands::FCoords& fc)
 	   : coords(fc),
 	     next_update_due_(0),
-	     reachable(false),
 	     preferred_(false),
 	     enemy_nearby_(0),
 	     unowned_land_nearby_(0),
@@ -268,13 +266,12 @@ struct MineableField {
 
 	int32_t next_update_due_;
 
-	bool reachable;
 	bool preferred_;
 
 	int32_t mines_nearby_;
 
 	MineableField(const Widelands::FCoords& fc)
-	   : coords(fc), next_update_due_(0), reachable(false), preferred_(false), mines_nearby_(0) {
+	   : coords(fc), next_update_due_(0), preferred_(false), mines_nearby_(0) {
 	}
 };
 
@@ -356,6 +353,7 @@ struct ProductionSiteObserver {
 	int32_t built_time_;
 	int32_t unoccupied_till_;
 	uint8_t stats_zero_;
+	uint8_t no_resources_count;
 	BuildingObserver* bo;
 };
 

@@ -154,7 +154,7 @@ public:
 	virtual bool has_workers(Building_Index targetSite, Game & game);
 	uint8_t get_statistics_percent() {return m_last_stat_percent;}
 	uint8_t get_crude_statistics() {return (m_crude_percent + 5000) / 10000;}
-	uint32_t get_no_res_count() {return m_no_resources_count;}
+
 
 	const std::string& production_result() const {return m_production_result;}
 
@@ -274,8 +274,6 @@ protected:  // TrainingSite must have access to this stuff
 	std::vector<bool>        m_statistics;
 	uint8_t                  m_last_stat_percent;
 	uint32_t                 m_crude_percent; //integer0-10000000, to be shirink to range 0-10
-	//used for mines to detect empty mine, it counts "out of resources" failures
-	uint32_t                 m_no_resources_count;
 	bool                     m_is_stopped;
 	std::string              m_default_anim; // normally "idle", "empty", if empty mine.
 
@@ -309,7 +307,7 @@ private:
 /**
  * Note to be published when a production site is out of resources
  */
-// NOCOM(GunChleoc): This is the new note we're using to notify the AI
+// A note we're using to notify the AI
 struct NoteProductionSiteOutOfResources {
 	CAN_BE_SEND_AS_NOTE(NoteId::ProductionSiteOutOfResources)
 
