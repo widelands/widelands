@@ -24,8 +24,8 @@
 
 #include "base/log.h"
 #include "base/scoped_timer.h"
-#include "game_io/game_cmd_queue_packet.h"
 #include "game_io/game_class_packet.h"
+#include "game_io/game_cmd_queue_packet.h"
 #include "game_io/game_interactive_player_packet.h"
 #include "game_io/game_map_packet.h"
 #include "game_io/game_player_economies_packet.h"

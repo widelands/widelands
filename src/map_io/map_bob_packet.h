@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_MAP_IO_WIDELANDS_MAP_BOB_DATA_PACKET_H
-#define WL_MAP_IO_WIDELANDS_MAP_BOB_DATA_PACKET_H
+#ifndef WL_MAP_IO_MAP_BOB_PACKET_H
+#define WL_MAP_IO_MAP_BOB_PACKET_H
 
 #include "logic/widelands_geometry.h"
 
@@ -48,4 +48,4 @@ private:
 };
 }
 
-#endif  // end of include guard: WL_MAP_IO_WIDELANDS_MAP_BOB_DATA_PACKET_H
+#endif  // end of include guard: WL_MAP_IO_MAP_BOB_PACKET_H

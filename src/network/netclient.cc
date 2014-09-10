@@ -192,7 +192,7 @@ void NetClient::run ()
 		tipstext.push_back("multiplayer");
 		try {
 			tipstext.push_back(getPlayersTribe());
-		} catch (No_Tribe) {}
+		} catch (NoTribe) {}
 		GameTips tips (*loaderUI, tipstext);
 
 		loaderUI->step(_("Preparing game"));
@@ -208,7 +208,7 @@ void NetClient::run ()
 					 pn, true);
 		else
 			igb =
-				new Interactive_Spectator
+				new InteractiveSpectator
 					(game, g_options.pull_section("global"), true);
 		game.set_ibase(igb);
 		igb->set_chat_provider(*this);

@@ -87,7 +87,7 @@ public:
 	/// The last_modified time is used to determine which setting to use when
 	/// economies are merged. The setting that was modified most recently will
 	/// be used for the merged economy.
-	struct Target_Quantity {
+	struct TargetQuantity {
 		uint32_t permanent;
 		Time     last_modified;
 	};
@@ -157,16 +157,16 @@ public:
 	/// ware type by overproducing a worker type from it.
 	bool needs_worker(WareIndex) const;
 
-	const Target_Quantity & ware_target_quantity  (WareIndex const i) const {
+	const TargetQuantity & ware_target_quantity  (WareIndex const i) const {
 		return m_ware_target_quantities[i];
 	}
-	Target_Quantity       & ware_target_quantity  (WareIndex const i)       {
+	TargetQuantity       & ware_target_quantity  (WareIndex const i)       {
 		return m_ware_target_quantities[i];
 	}
-	const Target_Quantity & worker_target_quantity(WareIndex const i) const {
+	const TargetQuantity & worker_target_quantity(WareIndex const i) const {
 		return m_worker_target_quantities[i];
 	}
-	Target_Quantity       & worker_target_quantity(WareIndex const i)       {
+	TargetQuantity       & worker_target_quantity(WareIndex const i)       {
 		return m_worker_target_quantities[i];
 	}
 
@@ -221,8 +221,8 @@ private:
 	RequestList m_requests; ///< requests
 	SupplyList m_supplies;
 
-	Target_Quantity        * m_ware_target_quantities;
-	Target_Quantity        * m_worker_target_quantities;
+	TargetQuantity        * m_ware_target_quantities;
+	TargetQuantity        * m_worker_target_quantities;
 	Router                 * m_router;
 
 	typedef std::pair<OPtr<Flag>, OPtr<Flag> > SplitPair;

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_MAP_IO_WIDELANDS_MAP_ALLOWED_WORKER_TYPES_DATA_PACKET_H
-#define WL_MAP_IO_WIDELANDS_MAP_ALLOWED_WORKER_TYPES_DATA_PACKET_H
+#ifndef WL_MAP_IO_MAP_ALLOWED_WORKER_TYPES_PACKET_H
+#define WL_MAP_IO_MAP_ALLOWED_WORKER_TYPES_PACKET_H
 
 #include "map_io/map_data_packet.h"
 
@@ -26,4 +26,4 @@
 /// by players. If absent, all worker types are allowed per default.
 MAP_DATA_PACKET(MapAllowedWorkerTypesPacket)
 
-#endif  // end of include guard: WL_MAP_IO_WIDELANDS_MAP_ALLOWED_WORKER_TYPES_DATA_PACKET_H
+#endif  // end of include guard: WL_MAP_IO_MAP_ALLOWED_WORKER_TYPES_PACKET_H

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_MAP_IO_WIDELANDS_MAP_DATA_PACKET_H
-#define WL_MAP_IO_WIDELANDS_MAP_DATA_PACKET_H
+#ifndef WL_MAP_IO_MAP_DATA_PACKET_H
+#define WL_MAP_IO_MAP_DATA_PACKET_H
 
 class FileSystem;
 
@@ -39,4 +39,4 @@ struct MapObjectSaver;
 	};                                                                               \
 	}
 
-#endif  // end of include guard: WL_MAP_IO_WIDELANDS_MAP_DATA_PACKET_H
+#endif  // end of include guard: WL_MAP_IO_MAP_DATA_PACKET_H

@@ -60,7 +60,7 @@ struct Field {
 	friend class Bob;
 	friend struct BaseImmovable;
 
-	enum Buildhelp_Index {
+	enum BuildhelpIndex {
 		Buildhelp_Flag   = 0,
 		Buildhelp_Small  = 1,
 		Buildhelp_Medium = 2,
@@ -192,7 +192,7 @@ public:
 	}
 
 	uint8_t get_buildhelp_overlay_index() const {return buildhelp_overlay_index;}
-	void set_buildhelp_overlay_index(Buildhelp_Index const i) {
+	void set_buildhelp_overlay_index(BuildhelpIndex const i) {
 		buildhelp_overlay_index = i;
 	}
 

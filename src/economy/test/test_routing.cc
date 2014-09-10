@@ -178,14 +178,14 @@ BOOST_AUTO_TEST_CASE(testingnode_creation) {
 	BOOST_CHECK_EQUAL(d0.get_position().x, 0);
 	BOOST_CHECK_EQUAL(d1.get_position().x, 15);
 }
-struct TestingNode_DefaultNodes_Fixture {
-	TestingNode_DefaultNodes_Fixture() {
+struct TestingNodeDefaultNodesFixture {
+	TestingNodeDefaultNodesFixture() {
 		d0 = new TestingRoutingNode();
 		d1 = new TestingRoutingNode(1, Coords(15, 0));
 		nodes.push_back(d0);
 		nodes.push_back(d1);
 	}
-	~TestingNode_DefaultNodes_Fixture() {
+	~TestingNodeDefaultNodesFixture() {
 		while (!nodes.empty()) {
 			TestingRoutingNode * n = nodes.back();
 			delete n;
@@ -197,14 +197,14 @@ struct TestingNode_DefaultNodes_Fixture {
 	TestingRoutingNode * d1;
 };
 BOOST_FIXTURE_TEST_CASE
-	(testingnode_neighbour_attaching, TestingNode_DefaultNodes_Fixture)
+	(testingnode_neighbour_attaching, TestingNodeDefaultNodesFixture)
 {
 	d0->add_neighbour(d1);
 
 	BOOST_CHECK_EQUAL(d0->get_neighbour(0), d1);
 }
 BOOST_FIXTURE_TEST_CASE
-	(testingnode_illegalneighbour_access, TestingNode_DefaultNodes_Fixture)
+	(testingnode_illegalneighbour_access, TestingNodeDefaultNodesFixture)
 {
 	try {
 		d0->get_neighbour(0);

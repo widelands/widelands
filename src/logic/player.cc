@@ -1263,11 +1263,11 @@ void Player::update_building_statistics
 	if (m_building_stats.size() < nr_buildings)
 		m_building_stats.resize(nr_buildings);
 
-	std::vector<Building_Stats> & stat =
+	std::vector<BuildingStats> & stat =
 		m_building_stats[tribe().building_index(building_name.c_str())];
 
 	if (ownership == NoteImmovable::Ownership::GAINED) {
-		Building_Stats new_building;
+		BuildingStats new_building;
 		new_building.is_constructionsite = constructionsite;
 		new_building.pos = building.get_position();
 		stat.push_back(new_building);

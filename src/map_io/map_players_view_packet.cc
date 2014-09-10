@@ -105,7 +105,7 @@ namespace Widelands {
 struct MapObjectData {
 	MapObjectData() : map_object_descr(nullptr) {}
 	const MapObjectDescr                     * map_object_descr;
-	Player::Constructionsite_Information         csi;
+	Player::ConstructionsiteInformation         csi;
 };
 
 namespace {
@@ -410,7 +410,7 @@ void MapPlayersViewPacket::Read
 			 UNSEEN_TIMES_FILENAME_TEMPLATE,
 			 plnum, UNSEEN_TIMES_CURRENT_PACKET_VERSION);
 		FileRead unseen_times_file;
-		struct Not_Found {};
+		struct NotFound {};
 
 		if (!unseen_times_file.TryOpen(fs, unseen_times_filename)) {
 			log
@@ -990,7 +990,7 @@ inline static void write_unseen_immovable
 	 FileWrite & immovable_kinds_file, FileWrite & immovables_file)
 {
 	MapObjectDescr const * const map_object_descr = map_object_data->map_object_descr;
-	const Player::Constructionsite_Information & csi = map_object_data->csi;
+	const Player::ConstructionsiteInformation & csi = map_object_data->csi;
 	assert(!Road::IsRoadDescr(map_object_descr));
 	uint8_t immovable_kind = 255;
 

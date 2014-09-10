@@ -155,7 +155,7 @@ void ProductionProgram::Action::building_work_failed(Game &, ProductionSite &, W
 
 void ProductionProgram::parse_ware_type_group
 	(char            * & parameters,
-	 Ware_Type_Group   & group,
+	 WareTypeGroup   & group,
 	 const TribeDescr & tribe,
 	 const BillOfMaterials  & inputs)
 {
@@ -257,12 +257,12 @@ std::string ProductionProgram::ActReturn::Negation::description_negation
 }
 
 
-bool ProductionProgram::ActReturn::Economy_Needs_Ware::evaluate
+bool ProductionProgram::ActReturn::EconomyNeedsWare::evaluate
 	(const ProductionSite & ps) const
 {
 	return ps.get_economy()->needs_ware(ware_type);
 }
-std::string ProductionProgram::ActReturn::Economy_Needs_Ware::description
+std::string ProductionProgram::ActReturn::EconomyNeedsWare::description
 	(const TribeDescr & tribe) const
 {
 	// TODO(GunChleoc): We can make this more elegant if we add another definition to the conf files,
@@ -271,7 +271,7 @@ std::string ProductionProgram::ActReturn::Economy_Needs_Ware::description
 	return (boost::format(_("the economy needs the ware ‘%s’"))
 			  % tribe.get_ware_descr(ware_type)->descname()).str();
 }
-std::string ProductionProgram::ActReturn::Economy_Needs_Ware::description_negation
+std::string ProductionProgram::ActReturn::EconomyNeedsWare::description_negation
 	(const TribeDescr & tribe) const
 {
 	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy doesn’t need the ware ‘%s’*/
@@ -279,12 +279,12 @@ std::string ProductionProgram::ActReturn::Economy_Needs_Ware::description_negati
 			  % tribe.get_ware_descr(ware_type)->descname()).str();
 }
 
-bool ProductionProgram::ActReturn::Economy_Needs_Worker::evaluate
+bool ProductionProgram::ActReturn::EconomyNeedsWorker::evaluate
 	(const ProductionSite & ps) const
 {
 	return ps.get_economy()->needs_worker(worker_type);
 }
-std::string ProductionProgram::ActReturn::Economy_Needs_Worker::description
+std::string ProductionProgram::ActReturn::EconomyNeedsWorker::description
 	(const TribeDescr & tribe) const
 {
 	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the worker ‘%s’*/
@@ -292,7 +292,7 @@ std::string ProductionProgram::ActReturn::Economy_Needs_Worker::description
 			  % tribe.get_worker_descr(worker_type)->descname()).str();
 }
 
-std::string ProductionProgram::ActReturn::Economy_Needs_Worker::description_negation
+std::string ProductionProgram::ActReturn::EconomyNeedsWorker::description_negation
 	(const TribeDescr & tribe) const
 {
 	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ...*/
@@ -302,7 +302,7 @@ std::string ProductionProgram::ActReturn::Economy_Needs_Worker::description_nega
 }
 
 
-ProductionProgram::ActReturn::Site_Has::Site_Has
+ProductionProgram::ActReturn::SiteHas::SiteHas
 	(char * & parameters, const ProductionSiteDescr & descr)
 {
 	try {
@@ -312,7 +312,7 @@ ProductionProgram::ActReturn::Site_Has::Site_Has
 			("has ware_type1[,ware_type2[,...]][:N]: %s", e.what());
 	}
 }
-bool ProductionProgram::ActReturn::Site_Has::evaluate
+bool ProductionProgram::ActReturn::SiteHas::evaluate
 	(const ProductionSite & ps) const
 {
 	uint8_t count = group.second;
@@ -328,7 +328,7 @@ bool ProductionProgram::ActReturn::Site_Has::evaluate
 }
 
 
-std::string ProductionProgram::ActReturn::Site_Has::description
+std::string ProductionProgram::ActReturn::SiteHas::description
 	(const TribeDescr & tribe) const
 {
 	std::vector<std::string> condition_list;
@@ -350,7 +350,7 @@ std::string ProductionProgram::ActReturn::Site_Has::description
 	return result;
 }
 
-std::string ProductionProgram::ActReturn::Site_Has::description_negation
+std::string ProductionProgram::ActReturn::SiteHas::description_negation
 	(const TribeDescr & tribe) const
 {
 	std::vector<std::string> condition_list;
@@ -373,23 +373,23 @@ std::string ProductionProgram::ActReturn::Site_Has::description_negation
 	return result;
 }
 
-bool ProductionProgram::ActReturn::Workers_Need_Experience::evaluate
+bool ProductionProgram::ActReturn::WorkersNeedExperience::evaluate
 	(const ProductionSite & ps) const
 {
-	ProductionSite::Working_Position const * const wp = ps.m_working_positions;
+	ProductionSite::WorkingPosition const * const wp = ps.m_working_positions;
 	for (uint32_t i = ps.descr().nr_working_positions(); i;)
 		if (wp[--i].worker->needs_experience())
 			return true;
 	return false;
 }
-std::string ProductionProgram::ActReturn::Workers_Need_Experience::description
+std::string ProductionProgram::ActReturn::WorkersNeedExperience::description
 	(const TribeDescr &) const
 {
 	/** TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs experience'. */
 	return _("a worker needs experience");
 }
 
-std::string ProductionProgram::ActReturn::Workers_Need_Experience::description_negation
+std::string ProductionProgram::ActReturn::WorkersNeedExperience::description_negation
 	(const TribeDescr &) const
 {
 	/** TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers need no experience'. */
@@ -409,12 +409,12 @@ ProductionProgram::ActReturn::Condition * create_economy_condition
 				if (index != INVALID_INDEX) {
 					tribe.set_ware_type_has_demand_check(index);
 					return
-						new ProductionProgram::ActReturn::Economy_Needs_Ware
+						new ProductionProgram::ActReturn::EconomyNeedsWare
 							(index);
 				} else if ((index = tribe.worker_index(type_name)) != INVALID_INDEX) {
 					tribe.set_worker_type_has_demand_check(index);
 					return
-						new ProductionProgram::ActReturn::Economy_Needs_Worker
+						new ProductionProgram::ActReturn::EconomyNeedsWorker
 							(index);
 				} else
 					throw GameDataError
@@ -438,7 +438,7 @@ ProductionProgram::ActReturn::Condition * create_site_condition
 	try {
 		if (match_force_skip(parameters, "has"))
 			return
-				new ProductionProgram::ActReturn::Site_Has(parameters, descr);
+				new ProductionProgram::ActReturn::SiteHas(parameters, descr);
 		else
 			throw GameDataError
 				("expected %s but found \"%s\"", "\"has\"", parameters);
@@ -453,7 +453,7 @@ ProductionProgram::ActReturn::Condition * create_workers_condition
 {
 	try {
 		if (match(parameters, "need experience"))
-			return new ProductionProgram::ActReturn::Workers_Need_Experience;
+			return new ProductionProgram::ActReturn::WorkersNeedExperience;
 		else
 			throw GameDataError
 				("expected %s but found \"%s\"",
@@ -792,7 +792,7 @@ void ProductionProgram::ActSleep::execute(Game & game, ProductionSite & ps) cons
 }
 
 
-ProductionProgram::ActCheck_Map::ActCheck_Map(char * parameters)
+ProductionProgram::ActCheckMap::ActCheckMap(char * parameters)
 {
 	try {
 		if (*parameters) {
@@ -807,7 +807,7 @@ ProductionProgram::ActCheck_Map::ActCheck_Map(char * parameters)
 	}
 }
 
-void ProductionProgram::ActCheck_Map::execute(Game & game, ProductionSite & ps) const
+void ProductionProgram::ActCheckMap::execute(Game & game, ProductionSite & ps) const
 {
 	switch (m_feature) {
 		case SEAFARING: {
@@ -927,7 +927,7 @@ void ProductionProgram::ActConsume::execute
 		const TribeDescr & tribe = ps.owner().tribe();
 
 		std::vector<std::string> group_list;
-		for (const Ware_Type_Group& group : l_groups) {
+		for (const WareTypeGroup& group : l_groups) {
 			assert(group.first.size());
 
 			std::vector<std::string> ware_list;
@@ -1350,7 +1350,7 @@ void ProductionProgram::ActMine::execute
 	return ps.program_step(game);
 }
 
-ProductionProgram::ActCheck_Soldier::ActCheck_Soldier(char* parameters) {
+ProductionProgram::ActCheckSoldier::ActCheckSoldier(char* parameters) {
 	//  TODO(unknown): This is currently hardcoded for "soldier", but should allow any
 	//  soldier type name.
 	if (!match_force_skip(parameters, "soldier"))
@@ -1381,7 +1381,7 @@ ProductionProgram::ActCheck_Soldier::ActCheck_Soldier(char* parameters) {
 	}
 }
 
-void ProductionProgram::ActCheck_Soldier::execute
+void ProductionProgram::ActCheckSoldier::execute
 	(Game & game, ProductionSite & ps) const
 {
 	SoldierControl & ctrl = dynamic_cast<SoldierControl &>(ps);
@@ -1727,7 +1727,7 @@ ProductionProgram::ProductionProgram(
 		else if (!strcmp(v->get_name(), "mine"))
 			action = new ActMine(v->get_string(), world, _name, building);
 		else if (!strcmp(v->get_name(), "check_soldier"))
-			action = new ActCheck_Soldier(v->get_string());
+			action = new ActCheckSoldier(v->get_string());
 		else if (!strcmp(v->get_name(), "train"))
 			action = new ActTrain(v->get_string());
 		else if (!strcmp(v->get_name(), "playFX"))
@@ -1735,7 +1735,7 @@ ProductionProgram::ProductionProgram(
 		else if (!strcmp(v->get_name(), "construct"))
 			action = new ActConstruct(v->get_string(), _name, building);
 		else if (!strcmp(v->get_name(), "check_map"))
-			action = new ActCheck_Map(v->get_string());
+			action = new ActCheckMap(v->get_string());
 		else
 			throw GameDataError("unknown command type \"%s\"", v->get_name());
 		m_actions.push_back(action);

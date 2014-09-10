@@ -695,7 +695,7 @@ int L_Player::get_buildings(lua_State * L) {
 
 	uint32_t cidx = 1;
 	for (const BuildingIndex& house : houses) {
-		const std::vector<Widelands::Player::Building_Stats> & vec =
+		const std::vector<Widelands::Player::BuildingStats> & vec =
 			p.get_building_statistics(house);
 
 		if (return_array) {

@@ -68,7 +68,7 @@ class ReplayWriter;
 
 class Game : public EditorGameBase {
 public:
-	struct General_Stats {
+	struct GeneralStats {
 		std::vector< uint32_t > land_size;
 		std::vector< uint32_t > nr_workers;
 		std::vector< uint32_t > nr_buildings;
@@ -84,7 +84,7 @@ public:
 
 		std::vector< uint32_t > custom_statistic;
 	};
-	typedef std::vector<General_Stats> GeneralStatsVector;
+	typedef std::vector<GeneralStats> GeneralStatsVector;
 
 	friend class CmdQueue; // this class handles the commands
 	friend struct GameClassPacket;
@@ -146,7 +146,7 @@ public:
 	void logic_rand_seed (uint32_t const seed) {rng().seed (seed);}
 
 	StreamWrite & syncstream();
-	md5_checksum get_sync_hash() const;
+	Md5Checksum get_sync_hash() const;
 
 	bool get_allow_cheats();
 

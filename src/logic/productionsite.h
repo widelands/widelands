@@ -114,17 +114,17 @@ private:
 class ProductionSite : public Building {
 	friend class MapBuildingdataPacket;
 	friend struct ProductionProgram::ActReturn;
-	friend struct ProductionProgram::ActReturn::Workers_Need_Experience;
+	friend struct ProductionProgram::ActReturn::WorkersNeedExperience;
 	friend struct ProductionProgram::ActCall;
 	friend struct ProductionProgram::ActWorker;
 	friend struct ProductionProgram::ActSleep;
-	friend struct ProductionProgram::ActCheck_Map;
+	friend struct ProductionProgram::ActCheckMap;
 	friend struct ProductionProgram::ActAnimate;
 	friend struct ProductionProgram::ActConsume;
 	friend struct ProductionProgram::ActProduce;
 	friend struct ProductionProgram::ActRecruit;
 	friend struct ProductionProgram::ActMine;
-	friend struct ProductionProgram::ActCheck_Soldier;
+	friend struct ProductionProgram::ActCheckSoldier;
 	friend struct ProductionProgram::ActTrain;
 	friend struct ProductionProgram::ActPlayFX;
 	friend struct ProductionProgram::ActConstruct;
@@ -139,15 +139,15 @@ public:
 	bool is_stopped() const {return m_is_stopped;}
 	void set_stopped(bool);
 
-	struct Working_Position {
-		Working_Position(Request * const wr = nullptr, Worker * const w = nullptr)
+	struct WorkingPosition {
+		WorkingPosition(Request * const wr = nullptr, Worker * const w = nullptr)
 			: worker_request(wr), worker(w)
 		{}
 		Request * worker_request;
 		Worker  * worker;
 	};
 
-	Working_Position const * working_positions() const {
+	WorkingPosition const * working_positions() const {
 		return m_working_positions;
 	}
 
@@ -249,7 +249,7 @@ protected:
 	void set_post_timer (int32_t const t) {m_post_timer = t;}
 
 protected:  // TrainingSite must have access to this stuff
-	Working_Position                   * m_working_positions;
+	WorkingPosition                   * m_working_positions;
 
 	int32_t m_fetchfromflag; ///< Number of wares to fetch from flag
 

@@ -52,17 +52,17 @@ Economy::Economy(Player & player) :
 
 	player.add_economy(*this);
 
-	m_ware_target_quantities   = new Target_Quantity[nr_wares];
+	m_ware_target_quantities   = new TargetQuantity[nr_wares];
 	for (WareIndex i = 0; i < nr_wares; ++i) {
-		Target_Quantity tq;
+		TargetQuantity tq;
 		tq.permanent =
 			tribe.get_ware_descr(i)->default_target_quantity();
 		tq.last_modified = 0;
 		m_ware_target_quantities[i] = tq;
 	}
-	m_worker_target_quantities = new Target_Quantity[nr_workers];
+	m_worker_target_quantities = new TargetQuantity[nr_workers];
 	for (WareIndex i = 0; i < nr_workers; ++i) {
-		Target_Quantity tq;
+		TargetQuantity tq;
 		tq.permanent =
 			tribe.get_worker_descr(i)->default_target_quantity();
 		tq.last_modified = 0;
@@ -331,7 +331,7 @@ void Economy::set_ware_target_quantity
 	 uint32_t   const permanent,
 	 Time       const mod_time)
 {
-	Target_Quantity & tq = m_ware_target_quantities[ware_type];
+	TargetQuantity & tq = m_ware_target_quantities[ware_type];
 	tq.permanent = permanent;
 	tq.last_modified = mod_time;
 }
@@ -342,7 +342,7 @@ void Economy::set_worker_target_quantity
 	 uint32_t   const permanent,
 	 Time       const mod_time)
 {
-	Target_Quantity & tq = m_worker_target_quantities[ware_type];
+	TargetQuantity & tq = m_worker_target_quantities[ware_type];
 	tq.permanent = permanent;
 	tq.last_modified = mod_time;
 }
@@ -533,15 +533,15 @@ void Economy::_merge(Economy & e)
 {
 	for (WareIndex i = m_owner.tribe().get_nrwares(); i;) {
 		--i;
-		Target_Quantity other_tq = e.m_ware_target_quantities[i];
-		Target_Quantity & this_tq = m_ware_target_quantities[i];
+		TargetQuantity other_tq = e.m_ware_target_quantities[i];
+		TargetQuantity & this_tq = m_ware_target_quantities[i];
 		if (this_tq.last_modified < other_tq.last_modified)
 			this_tq = other_tq;
 	}
 	for (WareIndex i = m_owner.tribe().get_nrworkers(); i;) {
 		--i;
-		Target_Quantity other_tq = e.m_worker_target_quantities[i];
-		Target_Quantity & this_tq = m_worker_target_quantities[i];
+		TargetQuantity other_tq = e.m_worker_target_quantities[i];
+		TargetQuantity & this_tq = m_worker_target_quantities[i];
 		if (this_tq.last_modified < other_tq.last_modified)
 			this_tq = other_tq;
 	}

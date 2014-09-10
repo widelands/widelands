@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_MAP_IO_WIDELANDS_MAP_TERRAIN_DATA_PACKET_H
-#define WL_MAP_IO_WIDELANDS_MAP_TERRAIN_DATA_PACKET_H
+#ifndef WL_MAP_IO_MAP_TERRAIN_PACKET_H
+#define WL_MAP_IO_MAP_TERRAIN_PACKET_H
 
 #include <string>
 
@@ -37,4 +37,4 @@ public:
 
 }
 
-#endif  // end of include guard: WL_MAP_IO_WIDELANDS_MAP_TERRAIN_DATA_PACKET_H
+#endif  // end of include guard: WL_MAP_IO_MAP_TERRAIN_PACKET_H

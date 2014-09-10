@@ -34,7 +34,7 @@
 GameOptionsMenu::GameOptionsMenu
 	(InteractiveGameBase                         & gb,
 	 UI::UniqueWindow::Registry                   & registry,
-	 InteractiveGameBase::Game_Main_Menu_Windows & windows)
+	 InteractiveGameBase::GameMainMenuWindows & windows)
 :
 	UI::UniqueWindow
 		(&gb, "options", &registry,

@@ -30,7 +30,7 @@ enum PlayerType {NONE, OBSERVER, PLAYING, VICTORIOUS, DEFEATED};
 
 class InteractiveGameBase : public InteractiveBase {
 public:
-	class Game_Main_Menu_Windows {
+	class GameMainMenuWindows {
 	public:
 		UI::UniqueWindow::Registry loadgame;
 		UI::UniqueWindow::Registry savegame;
@@ -84,7 +84,7 @@ public:
 	void show_game_summary();
 
 protected:
-	Game_Main_Menu_Windows m_mainm_windows;
+	GameMainMenuWindows m_mainm_windows;
 	ChatProvider           * m_chatProvider;
 	std::string              m_building_census_format;
 	std::string              m_building_statistics_format;

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_MAP_IO_WIDELANDS_MAP_OBJECT_PACKET_H
-#define WL_MAP_IO_WIDELANDS_MAP_OBJECT_PACKET_H
+#ifndef WL_MAP_IO_MAP_OBJECT_PACKET_H
+#define WL_MAP_IO_MAP_OBJECT_PACKET_H
 
 #include <set>
 
@@ -40,7 +40,7 @@ struct MapObjectSaver;
  * are in this packet.
  */
 struct MapObjectPacket {
-	struct loader_sorter {
+	struct LoaderSorter {
 		bool operator()
 			(MapObject::Loader * const a, MapObject::Loader * const b) const
 		{
@@ -49,7 +49,7 @@ struct MapObjectPacket {
 		}
 	};
 
-	typedef std::set<MapObject::Loader *, loader_sorter> LoaderSet;
+	typedef std::set<MapObject::Loader *, LoaderSorter> LoaderSet;
 	LoaderSet loaders;
 
 	~MapObjectPacket();
@@ -65,4 +65,4 @@ struct MapObjectPacket {
 
 }
 
-#endif  // end of include guard: WL_MAP_IO_WIDELANDS_MAP_OBJECT_PACKET_H
+#endif  // end of include guard: WL_MAP_IO_MAP_OBJECT_PACKET_H

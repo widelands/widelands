@@ -60,12 +60,12 @@ public:
 	// hard-coded playercolors
 	static const RGBColor Colors[MAX_PLAYERS];
 
-	struct Building_Stats {
+	struct BuildingStats {
 		bool is_constructionsite;
 		Coords pos;
 	};
-	typedef std::vector<Building_Stats> Building_Stats_vector;
-	typedef std::vector<Building_Stats_vector> BuildingStats;
+	typedef std::vector<BuildingStats> BuildingStatsVector;
+	typedef std::vector<BuildingStatsVector> PlayerBuildingStats;
 
 	friend class EditorGameBase;
 	friend struct GamePlayerInfoPacket;
@@ -129,8 +129,8 @@ public:
 	bool see_all() const {return m_see_all;}
 
 	/// Per-player and per-field constructionsite information
-	struct Constructionsite_Information {
-		Constructionsite_Information() : becomes(nullptr), was(nullptr), totaltime(0), completedtime(0) {}
+	struct ConstructionsiteInformation {
+		ConstructionsiteInformation() : becomes(nullptr), was(nullptr), totaltime(0), completedtime(0) {}
 		const BuildingDescr * becomes; // Also works as a marker telling whether there is a construction site.
 		const BuildingDescr * was; // only valid if "becomes" is an enhanced building.
 		uint32_t               totaltime;
@@ -317,7 +317,7 @@ public:
 
 		/// Information for constructionsite's animation.
 		/// only valid, if there is a constructionsite on this node
-		Constructionsite_Information constructionsite;
+		ConstructionsiteInformation constructionsite;
 
 		/// Save whether the player saw a border the last time (s)he saw the node.
 		bool border;
@@ -344,7 +344,7 @@ public:
 		//  map_object_descr[0]             0x0a0  0x20   0x0a0  0x40
 		//  map_object_descr[1]             0x0c0  0x20   0x0e0  0x40
 		//  map_object_descr[2]             0x0e0  0x20   0x120  0x40
-		//  Constructionsite_Information
+		//  ConstructionsiteInformation
 		//  border
 		//  border_r
 		//  border_br
@@ -489,7 +489,7 @@ public:
 	void count_civil_bld_defeated() {++m_civil_blds_defeated;}
 
 	// Statistics
-	const Building_Stats_vector & get_building_statistics
+	const BuildingStatsVector & get_building_statistics
 		(const BuildingIndex& i) const
 	{
 		return m_building_stats[i];
@@ -589,7 +589,7 @@ private:
 	 */
 	std::vector< std::vector<uint32_t> > m_ware_stocks;
 
-	BuildingStats m_building_stats;
+	PlayerBuildingStats m_building_stats;
 
 	DISALLOW_COPY_AND_ASSIGN(Player);
 };

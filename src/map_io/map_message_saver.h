@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_MAP_IO_WIDELANDS_MAP_MESSAGE_SAVER_H
-#define WL_MAP_IO_WIDELANDS_MAP_MESSAGE_SAVER_H
+#ifndef WL_MAP_IO_MAP_MESSAGE_SAVER_H
+#define WL_MAP_IO_MAP_MESSAGE_SAVER_H
 
 #include <cassert>
 #include <map>
@@ -54,4 +54,4 @@ private:
 
 }
 
-#endif  // end of include guard: WL_MAP_IO_WIDELANDS_MAP_MESSAGE_SAVER_H
+#endif  // end of include guard: WL_MAP_IO_MAP_MESSAGE_SAVER_H

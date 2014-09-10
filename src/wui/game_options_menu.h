@@ -30,11 +30,11 @@ struct GameOptionsMenu : public UI::UniqueWindow {
 	GameOptionsMenu
 		(InteractiveGameBase &,
 		 UI::UniqueWindow::Registry &,
-		 InteractiveGameBase::Game_Main_Menu_Windows &);
+		 InteractiveGameBase::GameMainMenuWindows &);
 
 private:
 	InteractiveGameBase                         & m_gb;
-	InteractiveGameBase::Game_Main_Menu_Windows & m_windows;
+	InteractiveGameBase::GameMainMenuWindows & m_windows;
 	UI::Button readme;
 	UI::Button license;
 	UI::Button authors;

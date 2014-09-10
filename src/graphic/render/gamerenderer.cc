@@ -165,7 +165,7 @@ void GameRenderer::draw_objects()
 					if
 						(f_pl.constructionsite.becomes)
 					{
-						const Player::Constructionsite_Information & csinf = f_pl.constructionsite;
+						const Player::ConstructionsiteInformation & csinf = f_pl.constructionsite;
 						// draw the partly finished constructionsite
 						uint32_t anim_idx;
 						try {
@@ -228,15 +228,15 @@ void GameRenderer::draw_objects()
 
 			{
 				// Render overlays on the node
-				OverlayManager::Overlay_Info overlay_info[MAX_OVERLAYS_PER_NODE];
+				OverlayManager::OverlayInfo overlay_info[MAX_OVERLAYS_PER_NODE];
 
-				const OverlayManager::Overlay_Info * const end =
+				const OverlayManager::OverlayInfo * const end =
 					overlay_info
 					+
 					map.overlay_manager().get_overlays(coords[F], overlay_info);
 
 				for
-					(const OverlayManager::Overlay_Info * it = overlay_info;
+					(const OverlayManager::OverlayInfo * it = overlay_info;
 					 it < end;
 					 ++it)
 					m_dst->blit(pos[F] - it->hotspot, it->pic);
@@ -244,8 +244,8 @@ void GameRenderer::draw_objects()
 
 			{
 				// Render overlays on the R triangle
-				OverlayManager::Overlay_Info overlay_info[MAX_OVERLAYS_PER_TRIANGLE];
-				OverlayManager::Overlay_Info const * end =
+				OverlayManager::OverlayInfo overlay_info[MAX_OVERLAYS_PER_TRIANGLE];
+				OverlayManager::OverlayInfo const * end =
 					overlay_info
 					+
 					map.overlay_manager().get_overlays
@@ -256,7 +256,7 @@ void GameRenderer::draw_objects()
 					 (pos[F].y + pos[R].y + pos[BR].y) / 3);
 
 				for
-					(OverlayManager::Overlay_Info const * it = overlay_info;
+					(OverlayManager::OverlayInfo const * it = overlay_info;
 					 it < end;
 					 ++it)
 					m_dst->blit(tripos - it->hotspot, it->pic);
@@ -264,8 +264,8 @@ void GameRenderer::draw_objects()
 
 			{
 				// Render overlays on the D triangle
-				OverlayManager::Overlay_Info overlay_info[MAX_OVERLAYS_PER_TRIANGLE];
-				OverlayManager::Overlay_Info const * end =
+				OverlayManager::OverlayInfo overlay_info[MAX_OVERLAYS_PER_TRIANGLE];
+				OverlayManager::OverlayInfo const * end =
 					overlay_info
 					+
 					map.overlay_manager().get_overlays
@@ -276,7 +276,7 @@ void GameRenderer::draw_objects()
 					 (pos[F].y + pos[BL].y + pos[BR].y) / 3);
 
 				for
-					(OverlayManager::Overlay_Info const * it = overlay_info;
+					(OverlayManager::OverlayInfo const * it = overlay_info;
 					 it < end;
 					 ++it)
 					m_dst->blit(tripos - it->hotspot, it->pic);

@@ -77,13 +77,13 @@ struct ProductionProgram {
 	};
 
 	/// A group of ware types with a count.
-	typedef std::pair<std::set<WareIndex>, uint8_t> Ware_Type_Group;
+	typedef std::pair<std::set<WareIndex>, uint8_t> WareTypeGroup;
 
 	/// Parse a group of ware types followed by an optional count and terminated
 	/// by a space or null. Example: "fish,meat:2".
 	static void parse_ware_type_group
 		(char            * & parameters,
-		 Ware_Type_Group   & group,
+		 WareTypeGroup   & group,
 		 const TribeDescr & tribe,
 		 const BillOfMaterials  & inputs);
 
@@ -164,8 +164,8 @@ struct ProductionProgram {
 		};
 
 		/// Tests whether the economy needs a ware of type ware_type.
-		struct Economy_Needs_Ware : public Condition {
-			Economy_Needs_Ware(const WareIndex& i) : ware_type(i) {}
+		struct EconomyNeedsWare : public Condition {
+			EconomyNeedsWare(const WareIndex& i) : ware_type(i) {}
 			bool evaluate(const ProductionSite &) const override;
 			std::string description(const TribeDescr &) const override;
 			std::string description_negation(const TribeDescr &) const override;
@@ -174,8 +174,8 @@ struct ProductionProgram {
 		};
 
 		/// Tests whether the economy needs a worker of type worker_type.
-		struct Economy_Needs_Worker : public Condition {
-			Economy_Needs_Worker(const WareIndex& i) : worker_type(i) {}
+		struct EconomyNeedsWorker : public Condition {
+			EconomyNeedsWorker(const WareIndex& i) : worker_type(i) {}
 			bool evaluate(const ProductionSite &) const override;
 			std::string description(const TribeDescr &) const override;
 			std::string description_negation(const TribeDescr &) const override;
@@ -186,18 +186,18 @@ struct ProductionProgram {
 		/// Tests whether the site has the specified (or implied) number of
 		/// wares, combining from any of the types specified, in its input
 		/// queues.
-		struct Site_Has : public Condition {
-			Site_Has(char * & parameters, const ProductionSiteDescr &);
+		struct SiteHas : public Condition {
+			SiteHas(char * & parameters, const ProductionSiteDescr &);
 			bool evaluate(const ProductionSite &) const override;
 			std::string description(const TribeDescr &) const override;
 			std::string description_negation(const TribeDescr &) const override;
 		private:
-			Ware_Type_Group group;
+			WareTypeGroup group;
 		};
 
 		/// Tests whether any of the workers at the site needs experience to
 		/// become upgraded.
-		struct Workers_Need_Experience : public Condition {
+		struct WorkersNeedExperience : public Condition {
 			bool evaluate(const ProductionSite &) const override;
 			std::string description(const TribeDescr &) const override;
 			std::string description_negation(const TribeDescr &) const override;
@@ -294,8 +294,8 @@ struct ProductionProgram {
 	///       * Seafaring : to check whether the map has at least two port build spaces
 	///
 	/// Ends the program if the feature is not enabled.
-	struct ActCheck_Map : public Action {
-		ActCheck_Map(char * parameters);
+	struct ActCheckMap : public Action {
+		ActCheckMap(char * parameters);
 		void execute(Game &, ProductionSite &) const override;
 	private:
 		 enum {
@@ -374,7 +374,7 @@ struct ProductionProgram {
 	struct ActConsume : public Action {
 		ActConsume(char * parameters, const ProductionSiteDescr &);
 		void execute(Game &, ProductionSite &) const override;
-		typedef std::vector<Ware_Type_Group> Groups;
+		typedef std::vector<WareTypeGroup> Groups;
 		const Groups & groups() const {return m_groups;}
 	private:
 		Groups m_groups;
@@ -445,8 +445,8 @@ struct ProductionProgram {
 		uint8_t        m_training; // probability of training in _empty_ mines
 	};
 
-	struct ActCheck_Soldier : public Action {
-		ActCheck_Soldier(char * parameters);
+	struct ActCheckSoldier : public Action {
+		ActCheckSoldier(char * parameters);
 		void execute(Game &, ProductionSite &) const override;
 	private:
 		TrainingAttribute attribute;

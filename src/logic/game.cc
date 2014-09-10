@@ -677,7 +677,7 @@ StreamWrite & Game::syncstream()
  *
  * \return the checksum
  */
-md5_checksum Game::get_sync_hash() const
+Md5Checksum Game::get_sync_hash() const
 {
 	MD5Checksum<StreamWrite> copy(m_synchash);
 

@@ -135,7 +135,8 @@ int main(int argc, char ** argv)
 			write_key_value_int("nr_players", map->get_nrplayers());
 			write_string(",\n  ");
 
-			const std::string world_name = static_cast<Widelands::WidelandsMapLoader*>(ml.get())->old_world_name();
+			const std::string world_name =
+					static_cast<Widelands::WidelandsMapLoader*>(ml.get())->old_world_name();
 			write_key_value_string("world_name", world_name);
 			write_string(",\n  ");
 			write_key_value_string("minimap", map_path + ".png");

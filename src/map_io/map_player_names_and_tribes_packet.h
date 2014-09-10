@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_MAP_IO_WIDELANDS_MAP_PLAYER_NAMES_AND_TRIBES_DATA_PACKET_H
-#define WL_MAP_IO_WIDELANDS_MAP_PLAYER_NAMES_AND_TRIBES_DATA_PACKET_H
+#ifndef WL_MAP_IO_MAP_PLAYER_NAMES_AND_TRIBES_PACKET_H
+#define WL_MAP_IO_MAP_PLAYER_NAMES_AND_TRIBES_PACKET_H
 
 #include "map_io/map_data_packet.h"
 
@@ -41,4 +41,4 @@ struct MapPlayerNamesAndTribesPacket {
 
 }
 
-#endif  // end of include guard: WL_MAP_IO_WIDELANDS_MAP_PLAYER_NAMES_AND_TRIBES_DATA_PACKET_H
+#endif  // end of include guard: WL_MAP_IO_MAP_PLAYER_NAMES_AND_TRIBES_PACKET_H

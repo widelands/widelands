@@ -863,7 +863,7 @@ void MapBuildingdataPacket::read_productionsite
 			(1 <= packet_version &&
 			 packet_version <= CURRENT_PRODUCTIONSITE_PACKET_VERSION)
 		{
-			ProductionSite::Working_Position & wp_begin =
+			ProductionSite::WorkingPosition & wp_begin =
 				*productionsite.m_working_positions;
 			const ProductionSiteDescr & pr_descr = productionsite.descr();
 			const BillOfMaterials & working_positions = pr_descr.working_positions();
@@ -880,7 +880,7 @@ void MapBuildingdataPacket::read_productionsite
 				WareIndex const worker_index = req.get_index();
 
 				//  Find a working position that matches this request.
-				ProductionSite::Working_Position * wp = &wp_begin;
+				ProductionSite::WorkingPosition * wp = &wp_begin;
 				bool found_working_position = false;
 				for (const WareAmount& working_position : working_positions) {
 					uint32_t count = working_position.second;
@@ -919,7 +919,7 @@ void MapBuildingdataPacket::read_productionsite
 
 				//  Find a working position that matches this worker.
 				const WorkerDescr & worker_descr = worker->descr();
-				ProductionSite::Working_Position * wp = &wp_begin;
+				ProductionSite::WorkingPosition * wp = &wp_begin;
 				bool found_working_position = false;
 				for (const WareAmount& working_position : working_positions) {
 					uint32_t count = working_position.second;
@@ -1454,23 +1454,23 @@ void MapBuildingdataPacket::write_productionsite
 
 	uint32_t const nr_working_positions =
 		productionsite.descr().nr_working_positions();
-	const ProductionSite::Working_Position & begin =
+	const ProductionSite::WorkingPosition & begin =
 		productionsite.m_working_positions[0];
-	const ProductionSite::Working_Position & end =
+	const ProductionSite::WorkingPosition & end =
 		(&begin)[nr_working_positions];
 	uint32_t nr_workers = 0;
-	for (ProductionSite::Working_Position const * i = &begin; i < &end; ++i)
+	for (ProductionSite::WorkingPosition const * i = &begin; i < &end; ++i)
 		nr_workers += i->worker ? 1 : 0;
 
 	//  worker requests
 	fw.Unsigned16(nr_working_positions - nr_workers);
-	for (ProductionSite::Working_Position const * i = &begin; i < &end; ++i)
+	for (ProductionSite::WorkingPosition const * i = &begin; i < &end; ++i)
 		if (Request const * const r = i->worker_request)
 			r->Write(fw, game, mos);
 
 	//  workers
 	fw.Unsigned16(nr_workers);
-	for (ProductionSite::Working_Position const * i = &begin; i < &end; ++i)
+	for (ProductionSite::WorkingPosition const * i = &begin; i < &end; ++i)
 		if (Worker const * const w = i->worker) {
 			assert(!i->worker_request);
 			assert(mos.is_object_known(*w));

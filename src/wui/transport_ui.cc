@@ -57,12 +57,12 @@ struct EconomyOptionsWindow : public UI::UniqueWindow {
 		m_tabpanel.add
 			("wares",
 			 g_gr->images().get(pic_tab_wares),
-			 new Economy_Options_Ware_Panel(&m_tabpanel, parent, economy),
+			 new EconomyOptionsWarePanel(&m_tabpanel, parent, economy),
 			 _("Wares"));
 		m_tabpanel.add
 			("workers",
 			 g_gr->images().get(pic_tab_workers),
-			 new Economy_Options_Worker_Panel(&m_tabpanel, parent, economy),
+			 new EconomyOptionsWorkerPanel(&m_tabpanel, parent, economy),
 			 _("Workers"));
 
 		// Until we can find a non-stupid way of automatically updating
@@ -118,12 +118,12 @@ private:
 	/**
 	 * Wraps the wares display together with some buttons
 	 */
-	struct Economy_Options_Ware_Panel : UI::Box {
+	struct EconomyOptionsWarePanel : UI::Box {
 		bool m_can_act;
 		TargetWaresDisplay m_display;
 		Economy & m_economy;
 
-		Economy_Options_Ware_Panel(UI::Panel * parent, InteractiveGameBase & igbase, Economy & economy) :
+		EconomyOptionsWarePanel(UI::Panel * parent, InteractiveGameBase & igbase, Economy & economy) :
 			UI::Box(parent, 0, 0, UI::Box::Vertical),
 			m_can_act(igbase.can_act(economy.owner().player_number())),
 			m_display(this, 0, 0, economy.owner().tribe(), Widelands::wwWARE, m_can_act, economy),
@@ -142,7 +142,7 @@ private:
 		  0, 0, 34, 34,                                             \
 		  g_gr->images().get("pics/but4.png"),            \
 		  text, tooltip, m_can_act);                                \
-	b->sigclicked.connect(boost::bind(&Economy_Options_Ware_Panel::callback, this)); \
+	b->sigclicked.connect(boost::bind(&EconomyOptionsWarePanel::callback, this)); \
 	buttons->add(b, UI::Box::AlignCenter);
 			ADD_WARE_BUTTON(decrease_target, "-", _("Decrease target"))
 			b->set_repeating(true);
@@ -160,7 +160,7 @@ private:
 				 id < nritems; ++id)
 			{
 				if (m_display.ware_selected(id)) {
-					const Economy::Target_Quantity & tq =
+					const Economy::TargetQuantity & tq =
 						m_economy.ware_target_quantity(id);
 					if (1 < tq.permanent) {
 						Widelands::Player & player = m_economy.owner();
@@ -183,7 +183,7 @@ private:
 				 id < nritems; ++id)
 			{
 				if (m_display.ware_selected(id)) {
-					const Economy::Target_Quantity & tq =
+					const Economy::TargetQuantity & tq =
 						m_economy.ware_target_quantity(id);
 					Widelands::Player & player = m_economy.owner();
 					Game & game = ref_cast<Game, EditorGameBase>(player.egbase());
@@ -214,12 +214,12 @@ private:
 			}
 		}
 	};
-	struct Economy_Options_Worker_Panel : UI::Box {
+	struct EconomyOptionsWorkerPanel : UI::Box {
 		bool m_can_act;
 		TargetWaresDisplay m_display;
 		Economy & m_economy;
 
-		Economy_Options_Worker_Panel(UI::Panel * parent, InteractiveGameBase & igbase, Economy & economy) :
+		EconomyOptionsWorkerPanel(UI::Panel * parent, InteractiveGameBase & igbase, Economy & economy) :
 			UI::Box(parent, 0, 0, UI::Box::Vertical),
 			m_can_act(igbase.can_act(economy.owner().player_number())),
 			m_display(this, 0, 0, economy.owner().tribe(), Widelands::wwWORKER, m_can_act, economy),
@@ -237,7 +237,7 @@ private:
 		  0, 0, 34, 34,                                               \
 		  g_gr->images().get("pics/but4.png"),              \
 		  text, tooltip, m_can_act);                                  \
-	b->sigclicked.connect(boost::bind(&Economy_Options_Worker_Panel::callback, this)); \
+	b->sigclicked.connect(boost::bind(&EconomyOptionsWorkerPanel::callback, this)); \
 	buttons->add(b, UI::Box::AlignCenter);
 
 			ADD_WORKER_BUTTON(decrease_target, "-", _("Decrease target"))
@@ -257,7 +257,7 @@ private:
 				 id < nritems; ++id)
 			{
 				if (m_display.ware_selected(id)) {
-					const Economy::Target_Quantity & tq =
+					const Economy::TargetQuantity & tq =
 						m_economy.worker_target_quantity(id);
 					if (1 < tq.permanent) {
 						Widelands::Player & player = m_economy.owner();
@@ -280,7 +280,7 @@ private:
 				 id < nritems; ++id)
 			{
 				if (m_display.ware_selected(id)) {
-					const Economy::Target_Quantity & tq =
+					const Economy::TargetQuantity & tq =
 						m_economy.worker_target_quantity(id);
 					Widelands::Player & player = m_economy.owner();
 					Game & game = ref_cast<Game, EditorGameBase>(player.egbase());

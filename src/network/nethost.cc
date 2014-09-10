@@ -531,7 +531,7 @@ struct Client {
 	uint8_t playernum;
 	int16_t usernum;
 	std::string build_id;
-	md5_checksum syncreport;
+	Md5Checksum syncreport;
 	bool syncreport_arrived;
 	int32_t time; // last time report
 	uint32_t desiredspeed;
@@ -593,7 +593,7 @@ struct NetHostImpl {
 	/// \c true if a syncreport is currently in flight
 	bool syncreport_pending;
 	int32_t syncreport_time;
-	md5_checksum syncreport;
+	Md5Checksum syncreport;
 	bool syncreport_arrived;
 
 	NetHostImpl(NetHost * const h) :
@@ -843,7 +843,7 @@ void NetHost::run(bool const autorun)
 			tipstext.push_back("multiplayer");
 			try {
 				tipstext.push_back(d->hp.getPlayersTribe());
-			} catch (GameSettingsProvider::No_Tribe) {}
+			} catch (GameSettingsProvider::NoTribe) {}
 			tips = new GameTips(*loaderUI, tipstext);
 
 			loaderUI->step(_("Preparing game"));
@@ -869,7 +869,7 @@ void NetHost::run(bool const autorun)
 						pn, true);
 			} else
 				igb =
-					new Interactive_Spectator
+					new InteractiveSpectator
 						(game, g_options.pull_section("global"), true);
 			igb->set_chat_provider(d->chat);
 			game.set_ibase(igb);

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_GAME_IO_GAME_GAME_CLASS_DATA_PACKET_H
-#define WL_GAME_IO_GAME_GAME_CLASS_DATA_PACKET_H
+#ifndef WL_GAME_IO_GAME_CLASS_PACKET_H
+#define WL_GAME_IO_GAME_CLASS_PACKET_H
 
 #include "game_io/game_data_packet.h"
 
@@ -35,4 +35,4 @@ struct GameClassPacket : public GameDataPacket {
 
 }
 
-#endif  // end of include guard: WL_GAME_IO_GAME_GAME_CLASS_DATA_PACKET_H
+#endif  // end of include guard: WL_GAME_IO_GAME_CLASS_PACKET_H

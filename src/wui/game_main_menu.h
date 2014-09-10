@@ -28,13 +28,13 @@ struct GameMainMenu : public UI::UniqueWindow {
 	GameMainMenu
 		(InteractivePlayer &,
 		 UI::UniqueWindow::Registry &,
-		 InteractivePlayer::Game_Main_Menu_Windows &);
+		 InteractivePlayer::GameMainMenuWindows &);
 
 	~GameMainMenu();
 
 private:
 	InteractivePlayer                         & m_player;
-	InteractivePlayer::Game_Main_Menu_Windows & m_windows;
+	InteractivePlayer::GameMainMenuWindows & m_windows;
 	UI::Button general_stats;
 	UI::Button ware_stats;
 	UI::Button building_stats;

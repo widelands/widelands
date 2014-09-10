@@ -39,6 +39,7 @@
 #include "map_io/map_heights_packet.h"
 #include "map_io/map_node_ownership_packet.h"
 #include "map_io/map_object_packet.h"
+#include "map_io/map_object_saver.h"
 #include "map_io/map_objective_packet.h"
 #include "map_io/map_player_names_and_tribes_packet.h"
 #include "map_io/map_player_position_packet.h"
@@ -48,10 +49,10 @@
 #include "map_io/map_resources_packet.h"
 #include "map_io/map_road_packet.h"
 #include "map_io/map_roaddata_packet.h"
-#include "map_io/map_object_saver.h"
 #include "map_io/map_scripting_packet.h"
 #include "map_io/map_terrain_packet.h"
 #include "map_io/map_version_packet.h"
+
 
 namespace Widelands {
 

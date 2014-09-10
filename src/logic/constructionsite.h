@@ -73,7 +73,7 @@ class ConstructionSite : public PartiallyFinishedBuilding {
 public:
 	ConstructionSite(const ConstructionSiteDescr & descr);
 
-	const Player::Constructionsite_Information & get_info() {return m_info;}
+	const Player::ConstructionsiteInformation & get_info() {return m_info;}
 
 	WaresQueue & waresqueue(WareIndex) override;
 
@@ -104,7 +104,7 @@ private:
 	int32_t     m_fetchfromflag;  // # of wares to fetch from flag
 
 	bool        m_builder_idle;   // used to determine whether the builder is idle
-	Player::Constructionsite_Information m_info; // asked for by player point of view for the gameview
+	Player::ConstructionsiteInformation m_info; // asked for by player point of view for the gameview
 };
 
 }

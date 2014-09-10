@@ -54,7 +54,7 @@ void EconomyDataPacket::Read(FileRead & fr)
 								    "ignoring\n",
 								    type_name);
 							else {
-								Economy::Target_Quantity & tq =
+								Economy::TargetQuantity & tq =
 									m_eco->m_ware_target_quantities[i];
 								if (tq.last_modified)
 									throw GameDataError
@@ -73,7 +73,7 @@ void EconomyDataPacket::Read(FileRead & fr)
 									 "ignoring\n",
 									 type_name);
 							else {
-								Economy::Target_Quantity & tq =
+								Economy::TargetQuantity & tq =
 									m_eco->m_worker_target_quantities[i];
 								if (tq.last_modified)
 									throw GameDataError
@@ -106,7 +106,7 @@ void EconomyDataPacket::Write(FileWrite & fw)
 	const TribeDescr & tribe = m_eco->owner().tribe();
 	for (WareIndex i = tribe.get_nrwares(); i;) {
 		--i;
-		const Economy::Target_Quantity & tq =
+		const Economy::TargetQuantity & tq =
 			m_eco->m_ware_target_quantities[i];
 		if (Time const last_modified = tq.last_modified) {
 			fw.Unsigned32(last_modified);
@@ -116,7 +116,7 @@ void EconomyDataPacket::Write(FileWrite & fw)
 	}
 	for (WareIndex i = tribe.get_nrworkers(); i;) {
 		--i;
-		const Economy::Target_Quantity & tq =
+		const Economy::TargetQuantity & tq =
 			m_eco->m_worker_target_quantities[i];
 		if (Time const last_modified = tq.last_modified) {
 			fw.Unsigned32(last_modified);

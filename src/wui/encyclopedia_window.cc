@@ -177,7 +177,7 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 				const ProductionProgram::ActConsume::Groups & groups =
 					action->groups();
 
-				for (const ProductionProgram::Ware_Type_Group& temp_group : groups) {
+				for (const ProductionProgram::WareTypeGroup& temp_group : groups) {
 					const std::set<WareIndex> & ware_types = temp_group.first;
 					assert(ware_types.size());
 					std::vector<std::string> ware_type_descnames;

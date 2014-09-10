@@ -192,7 +192,7 @@ IMPLEMENTATION
 
 ProductionSite::ProductionSite(const ProductionSiteDescr & ps_descr) :
 	Building            (ps_descr),
-	m_working_positions (new Working_Position[ps_descr.nr_working_positions()]),
+	m_working_positions (new WorkingPosition[ps_descr.nr_working_positions()]),
 	m_fetchfromflag     (0),
 	m_program_timer     (false),
 	m_program_time      (0),
@@ -357,7 +357,7 @@ void ProductionSite::init(EditorGameBase & egbase)
 			 i.current->second);
 
 	//  Request missing workers.
-	Working_Position * wp = m_working_positions;
+	WorkingPosition * wp = m_working_positions;
 	for (const WareAmount& temp_wp : descr().working_positions()) {
 		WareIndex const worker_index = temp_wp.first;
 		for (uint32_t j =  temp_wp.second; j; --j, ++wp)
@@ -435,9 +435,9 @@ int ProductionSite::warp_worker
 	(EditorGameBase & egbase, const WorkerDescr & wdes)
 {
 	bool assigned = false;
-	Working_Position * current = m_working_positions;
+	WorkingPosition * current = m_working_positions;
 	for
-		(Working_Position * const end = current + descr().nr_working_positions();
+		(WorkingPosition * const end = current + descr().nr_working_positions();
 		 current < end;
 		 ++current)
 	{
@@ -473,7 +473,7 @@ int ProductionSite::warp_worker
 void ProductionSite::remove_worker(Worker & w)
 {
 	molog("%s leaving\n", w.descr().descname().c_str());
-	Working_Position * wp = m_working_positions;
+	WorkingPosition * wp = m_working_positions;
 
 	for (const WareAmount& temp_wp : descr().working_positions()) {
 		WareIndex const worker_index = temp_wp.first;
@@ -482,8 +482,8 @@ void ProductionSite::remove_worker(Worker & w)
 			if (worker && worker == &w) {
 				// do not request the type of worker that is currently assigned - maybe a trained worker was
 				// evicted to make place for a level 0 worker.
-				// Therefore we again request the worker from the Working_Position of descr()
-				*wp = Working_Position(&request_worker(worker_index), nullptr);
+				// Therefore we again request the worker from the WorkingPosition of descr()
+				*wp = WorkingPosition(&request_worker(worker_index), nullptr);
 				Building::remove_worker(w);
 				return;
 			}
@@ -531,12 +531,12 @@ void ProductionSite::request_worker_callback
 	// placed on the slot that originally requested the arrived worker.
 	bool worker_placed = false;
 	WareIndex     idx = w->descr().worker_index();
-	for (Working_Position * wp = psite.m_working_positions;; ++wp) {
+	for (WorkingPosition * wp = psite.m_working_positions;; ++wp) {
 		if (wp->worker_request == &rq) {
 			if (wp->worker_request->get_index() == idx) {
 				// Place worker
 				delete &rq;
-				*wp = Working_Position(nullptr, w);
+				*wp = WorkingPosition(nullptr, w);
 				worker_placed = true;
 			} else {
 				// Set new request for this slot
@@ -551,13 +551,13 @@ void ProductionSite::request_worker_callback
 		{
 			uint8_t nwp = psite.descr().nr_working_positions();
 			uint8_t pos = 0;
-			Working_Position * wp = psite.m_working_positions;
+			WorkingPosition * wp = psite.m_working_positions;
 			for (; pos < nwp; ++wp, ++pos) {
 				// Find a fitting slot
 				if (!wp->worker && !worker_placed)
 					if (wp->worker_request->get_index() == idx) {
 						delete wp->worker_request;
-						*wp = Working_Position(nullptr, w);
+						*wp = WorkingPosition(nullptr, w);
 						worker_placed = true;
 						break;
 					}

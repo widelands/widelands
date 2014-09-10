@@ -1558,7 +1558,7 @@ bool WLApplication::new_game()
 			tipstext.push_back("singleplayer");
 			try {
 				tipstext.push_back(sp.getPlayersTribe());
-			} catch (GameSettingsProvider::No_Tribe) {
+			} catch (GameSettingsProvider::NoTribe) {
 			}
 			GameTips tips (loaderUI, tipstext);
 
@@ -1672,7 +1672,7 @@ void WLApplication::replay()
 		loaderUI.step(_("Loading..."));
 
 		game.set_ibase
-			(new Interactive_Spectator(game, g_options.pull_section("global")));
+			(new InteractiveSpectator(game, g_options.pull_section("global")));
 		game.set_write_replay(false);
 		ReplayGameController rgc(game, m_filename);
 

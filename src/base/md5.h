@@ -29,7 +29,7 @@
 #include <stdint.h>
 
 /* Structure to save state of computation between the single steps.  */
-struct md5_ctx {
+struct Md5Ctx {
 	uint32_t A;
 	uint32_t B;
 	uint32_t C;
@@ -43,24 +43,24 @@ struct md5_ctx {
 /**
  * One MD5 checksum is simply an array of 16 bytes.
  */
-struct md5_checksum {
+struct Md5Checksum {
 	uint8_t data[16];
 
 	std::string str() const;
 
-	bool operator== (const md5_checksum & o) const {
+	bool operator== (const Md5Checksum & o) const {
 		return memcmp(data, o.data, sizeof(data)) == 0;
 	}
 
-	bool operator!= (const md5_checksum & o) const {return !(*this == o);}
+	bool operator!= (const Md5Checksum & o) const {return !(*this == o);}
 };
 
 // Note that the implementation of MD5Checksum is basically just
 // a wrapper around these functions, which have been taken basically
 // verbatim (with some whitespace changes) from the GNU tools; see below.
-void * md5_finish_ctx (md5_ctx *, void * resbuf);
-void md5_process_bytes (void const * buffer, uint32_t len, md5_ctx *);
-void md5_process_block (void const * buffer, uint32_t len, md5_ctx *);
+void * md5_finish_ctx (Md5Ctx *, void * resbuf);
+void md5_process_bytes (void const * buffer, uint32_t len, Md5Ctx *);
+void md5_process_block (void const * buffer, uint32_t len, Md5Ctx *);
 
 /**
  * This class is responsible for creating a streaming md5 checksum.
@@ -110,15 +110,15 @@ public:
 	/// before this function.
 	///
 	/// \return a pointer to an array of 16 bytes containing the checksum.
-	const md5_checksum & GetChecksum() const {
+	const Md5Checksum & GetChecksum() const {
 		assert(!can_handle_data);
 		return sum;
 	}
 
 private:
 	bool can_handle_data;
-	md5_checksum sum;
-	md5_ctx ctx;
+	Md5Checksum sum;
+	Md5Ctx ctx;
 };
 
 class _DummyMD5Base {};

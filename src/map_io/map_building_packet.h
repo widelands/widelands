@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_MAP_IO_WIDELANDS_MAP_BUILDING_DATA_PACKET_H
-#define WL_MAP_IO_WIDELANDS_MAP_BUILDING_DATA_PACKET_H
+#ifndef WL_MAP_IO_MAP_BUILDING_PACKET_H
+#define WL_MAP_IO_MAP_BUILDING_PACKET_H
 
 #include "map_io/map_data_packet.h"
 
@@ -44,4 +44,4 @@ protected:
 
 }
 
-#endif  // end of include guard: WL_MAP_IO_WIDELANDS_MAP_BUILDING_DATA_PACKET_H
+#endif  // end of include guard: WL_MAP_IO_MAP_BUILDING_PACKET_H

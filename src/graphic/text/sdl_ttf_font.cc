@@ -35,17 +35,17 @@ static const SDL_Color SHADOW_CLR = {0, 0, 0, SDL_ALPHA_OPAQUE};
 
 namespace RT {
 
-SDLTTF_Font::SDLTTF_Font(TTF_Font * font, const string& face, int ptsize, string* ttf_memory_block) :
+SdlTtfFont::SdlTtfFont(TTF_Font * font, const string& face, int ptsize, string* ttf_memory_block) :
 	font_(font), style_(TTF_STYLE_NORMAL), font_name_(face), ptsize_(ptsize),
 	ttf_file_memory_block_(ttf_memory_block) {
 }
 
-SDLTTF_Font::~SDLTTF_Font() {
+SdlTtfFont::~SdlTtfFont() {
 	TTF_CloseFont(font_);
 	font_ = nullptr;
 }
 
-void SDLTTF_Font::dimensions(const string& txt, int style, uint16_t * gw, uint16_t * gh) {
+void SdlTtfFont::dimensions(const string& txt, int style, uint16_t * gw, uint16_t * gh) {
 	m_set_style(style);
 
 	int w, h;
@@ -57,7 +57,7 @@ void SDLTTF_Font::dimensions(const string& txt, int style, uint16_t * gw, uint16
 	*gw = w; *gh = h;
 }
 
-const Surface& SDLTTF_Font::render
+const Surface& SdlTtfFont::render
 	(const string& txt, const RGBColor& clr, int style, SurfaceCache* surface_cache) {
 	const string hash =
 		(boost::format("%s:%s:%i:%02x%02x%02x:%i") % font_name_ % ptsize_ % txt %
@@ -121,14 +121,14 @@ const Surface& SDLTTF_Font::render
 	return *surface_cache->insert(hash, Surface::create(text_surface), true);
 }
 
-uint16_t SDLTTF_Font::ascent(int style) const {
+uint16_t SdlTtfFont::ascent(int style) const {
 	uint16_t rv = TTF_FontAscent(font_);
 	if (style & SHADOW)
 		rv += SHADOW_OFFSET;
 	return rv;
 }
 
-void SDLTTF_Font::m_set_style(int style) {
+void SdlTtfFont::m_set_style(int style) {
 	// Those must have been handled by loading the correct font.
 	assert(!(style & BOLD));
 	assert(!(style & ITALIC));

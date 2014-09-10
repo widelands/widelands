@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_MAP_IO_WIDELANDS_MAP_ELEMENTAL_DATA_PACKET_H
-#define WL_MAP_IO_WIDELANDS_MAP_ELEMENTAL_DATA_PACKET_H
+#ifndef WL_MAP_IO_MAP_ELEMENTAL_PACKET_H
+#define WL_MAP_IO_MAP_ELEMENTAL_PACKET_H
 
 #include <string>
 
@@ -57,4 +57,4 @@ private:
 
 }
 
-#endif  // end of include guard: WL_MAP_IO_WIDELANDS_MAP_ELEMENTAL_DATA_PACKET_H
+#endif  // end of include guard: WL_MAP_IO_MAP_ELEMENTAL_PACKET_H

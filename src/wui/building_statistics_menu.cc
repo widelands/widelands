@@ -237,7 +237,7 @@ void BuildingStatisticsMenu::clicked_jump(JumpTargets const id) {
 	if (m_last_table_index != m_table.selection_index())
 		m_last_building_index = 0;
 	m_last_table_index = m_table.selection_index();
-	const std::vector<Widelands::Player::Building_Stats> & vec =
+	const std::vector<Widelands::Player::BuildingStats> & vec =
 		iplayer().get_player()->get_building_statistics
 			(Widelands::BuildingIndex
 				(static_cast<size_t>(m_table.get_selected())));
@@ -386,7 +386,7 @@ void BuildingStatisticsMenu::update() {
 			 || building.global()))
 			continue;
 
-		const std::vector<Widelands::Player::Building_Stats> & vec =
+		const std::vector<Widelands::Player::BuildingStats> & vec =
 			player.get_building_statistics(i);
 
 		//  walk all entries, add new ones if needed

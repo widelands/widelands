@@ -50,7 +50,7 @@ enum {
 
 class CmdReplaySyncRead : public Command {
 public:
-	CmdReplaySyncRead(const uint32_t _duetime, const md5_checksum & hash)
+	CmdReplaySyncRead(const uint32_t _duetime, const Md5Checksum & hash)
 		: Command(_duetime), m_hash(hash)
 	{}
 
@@ -58,7 +58,7 @@ public:
 
 	void execute(Game & game) override
 	{
-		const md5_checksum myhash = game.get_sync_hash();
+		const Md5Checksum myhash = game.get_sync_hash();
 
 		if (m_hash != myhash) {
 			log
@@ -76,7 +76,7 @@ public:
 	}
 
 private:
-	md5_checksum m_hash;
+	Md5Checksum m_hash;
 };
 
 
@@ -164,7 +164,7 @@ Command * ReplayReader::GetNextCommand(const uint32_t time)
 
 		case pkt_syncreport: {
 			uint32_t duetime = m_cmdlog->Unsigned32();
-			md5_checksum hash;
+			Md5Checksum hash;
 			m_cmdlog->Data(hash.data, sizeof(hash.data));
 
 			return new CmdReplaySyncRead(duetime, hash);
@@ -291,7 +291,7 @@ void ReplayWriter::SendPlayerCommand(PlayerCommand * cmd)
 /**
  * Store a synchronization hash for the current game time in the replay.
  */
-void ReplayWriter::SendSync(const md5_checksum & hash)
+void ReplayWriter::SendSync(const Md5Checksum & hash)
 {
 	m_cmdlog->Unsigned8(pkt_syncreport);
 	m_cmdlog->Unsigned32(m_game.get_gametime());

@@ -34,11 +34,11 @@ namespace Widelands {class Game;}
  *
  * This class provides the UI, runs the game logic, etc.
  */
-struct Interactive_Spectator : public InteractiveGameBase {
-	Interactive_Spectator
+struct InteractiveSpectator : public InteractiveGameBase {
+	InteractiveSpectator
 		(Widelands::Game &, Section & global_s, bool multiplayer = false);
 
-	~Interactive_Spectator();
+	~InteractiveSpectator();
 
 	void start() override;
 
