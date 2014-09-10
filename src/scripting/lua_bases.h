@@ -67,7 +67,7 @@ public:
 
 
 class L_PlayerBase : public L_BasesModuleClass {
-	Widelands::Player_Number m_pl;
+	Widelands::PlayerNumber m_pl;
 	enum {NONE = -1};
 
 public:
@@ -78,7 +78,7 @@ public:
 	L_PlayerBase (lua_State * L) : m_pl(NONE) {
 		report_error(L, "Cannot instantiate a 'PlayerBase' directly!");
 	}
-	L_PlayerBase(Widelands::Player_Number n) {
+	L_PlayerBase(Widelands::PlayerNumber n) {
 		m_pl = n;
 	}
 	virtual ~L_PlayerBase() {}
@@ -108,10 +108,10 @@ public:
 	/*
 	 * C methods
 	 */
-	Widelands::Player & get(lua_State * L, Widelands::Editor_Game_Base &);
+	Widelands::Player & get(lua_State * L, Widelands::EditorGameBase &);
 
 protected:
-	inline Widelands::Player_Number player_number() {return m_pl;}
+	inline Widelands::PlayerNumber player_number() {return m_pl;}
 };
 
 void luaopen_wlbases(lua_State *);

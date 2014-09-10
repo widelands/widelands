@@ -54,7 +54,7 @@ void Route::init(int32_t totalcost)
  * Every route has at least one flag.
 */
 Flag & Route::get_flag
-	(Editor_Game_Base & egbase, std::vector<Flag *>::size_type const idx)
+	(EditorGameBase & egbase, std::vector<Flag *>::size_type const idx)
 {
 	assert(idx < m_route.size());
 	return *m_route[idx].get(egbase);
@@ -118,7 +118,7 @@ void Route::load_pointers(const LoadData & data, MapObjectLoader & mol) {
  * Save the route to the given file.
  */
 void Route::save
-	(FileWrite & fw, Editor_Game_Base & egbase, MapObjectSaver & mos)
+	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	fw.Signed32(get_totalcost());
 	fw.Unsigned16(m_route.size());

@@ -137,7 +137,7 @@ void ExpeditionBootstrap::start() {
 	);
 
 	// Update the user interface
-	if (upcast(Interactive_GameBase, igb, warehouse->owner().egbase().get_ibase()))
+	if (upcast(InteractiveGameBase, igb, warehouse->owner().egbase().get_ibase()))
 		warehouse->refresh_options(*igb);
 }
 
@@ -159,11 +159,11 @@ void ExpeditionBootstrap::cancel(Game& game) {
 	workers_.clear();
 
 	// Update the user interface
-	if (upcast(Interactive_GameBase, igb, warehouse->owner().egbase().get_ibase()))
+	if (upcast(InteractiveGameBase, igb, warehouse->owner().egbase().get_ibase()))
 		warehouse->refresh_options(*igb);
 }
 
-void ExpeditionBootstrap::cleanup(Editor_Game_Base& /* egbase */) {
+void ExpeditionBootstrap::cleanup(EditorGameBase& /* egbase */) {
 	// This will delete all the requests. We do nothing with the workers as we
 	// do not own them.
 	workers_.clear();
@@ -216,7 +216,7 @@ void ExpeditionBootstrap::set_economy(Economy* new_economy) {
 }
 
 void ExpeditionBootstrap::get_waiting_workers_and_wares
-	(Game& game, const Tribe_Descr& tribe, std::vector<Worker*>* return_workers,
+	(Game& game, const TribeDescr& tribe, std::vector<Worker*>* return_workers,
 	 std::vector<WareInstance*>* return_wares)
 {
 	for (std::unique_ptr<WaresQueue>& wq : wares_) {

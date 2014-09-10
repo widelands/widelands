@@ -66,7 +66,7 @@ Editor_Player_Menu::Editor_Player_Menu
 	int32_t const width   = 20;
 	int32_t       posy    = 0;
 
-	m_tribes = Widelands::Tribe_Descr::get_all_tribenames();
+	m_tribes = Widelands::TribeDescr::get_all_tribenames();
 
 	set_inner_size(375, 135);
 
@@ -82,7 +82,7 @@ Editor_Player_Menu::Editor_Player_Menu
 
 	m_posy = posy;
 
-	for (Widelands::Player_Number i = 0; i < MAX_PLAYERS; ++i) {
+	for (Widelands::PlayerNumber i = 0; i < MAX_PLAYERS; ++i) {
 		m_plr_names          [i] = nullptr;
 		m_plr_set_pos_buts   [i] = nullptr;
 		m_plr_set_tribes_buts[i] = nullptr;
@@ -112,7 +112,7 @@ void Editor_Player_Menu::update() {
 	Widelands::Map & map =
 		ref_cast<Editor_Interactive const, UI::Panel const>(*get_parent())
 		.egbase().map();
-	Widelands::Player_Number const nr_players = map.get_nrplayers();
+	Widelands::PlayerNumber const nr_players = map.get_nrplayers();
 	{
 		assert(nr_players <= 99); //  2 decimal digits
 		char text[3];
@@ -128,7 +128,7 @@ void Editor_Player_Menu::update() {
 	}
 
 	//  Now remove all the unneeded stuff.
-	for (Widelands::Player_Number i = nr_players; i < MAX_PLAYERS; ++i) {
+	for (Widelands::PlayerNumber i = nr_players; i < MAX_PLAYERS; ++i) {
 		delete m_plr_names          [i]; m_plr_names          [i] = nullptr;
 		delete m_plr_set_pos_buts   [i]; m_plr_set_pos_buts   [i] = nullptr;
 		delete m_plr_set_tribes_buts[i]; m_plr_set_tribes_buts[i] = nullptr;
@@ -198,7 +198,7 @@ void Editor_Player_Menu::clicked_add_player() {
 	Editor_Interactive & menu =
 		ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
 	Widelands::Map & map = menu.egbase().map();
-	Widelands::Player_Number const nr_players = map.get_nrplayers() + 1;
+	Widelands::PlayerNumber const nr_players = map.get_nrplayers() + 1;
 	assert(nr_players <= MAX_PLAYERS);
 	map.set_nrplayers(nr_players);
 	{ //  register new default name for this players
@@ -223,8 +223,8 @@ void Editor_Player_Menu::clicked_remove_last_player() {
 	Editor_Interactive & menu =
 		ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
 	Widelands::Map & map = menu.egbase().map();
-	Widelands::Player_Number const old_nr_players = map.get_nrplayers();
-	Widelands::Player_Number const nr_players     = old_nr_players - 1;
+	Widelands::PlayerNumber const old_nr_players = map.get_nrplayers();
+	Widelands::PlayerNumber const nr_players     = old_nr_players - 1;
 	assert(1 <= nr_players);
 
 	if (!menu.is_player_tribe_referenced(old_nr_players)) {
@@ -256,7 +256,7 @@ called when a button is clicked
 //         Editor_Interactive & parent =
 //                 dynamic_cast<Editor_Interactive &>(*get_parent());
 //         Widelands::Map & map = parent.egbase().map();
-//         Widelands::Player_Number nr_players = map.get_nrplayers();
+//         Widelands::PlayerNumber nr_players = map.get_nrplayers();
 //    // Up down button
 //         nr_players += change;
 //    if (nr_players<1) nr_players=1;
@@ -311,7 +311,7 @@ void Editor_Player_Menu::player_tribe_clicked(uint8_t n) {
 		ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
 	if (!menu.is_player_tribe_referenced(n + 1)) {
 		std::string t = m_plr_set_tribes_buts[n]->get_title();
-		if (!Widelands::Tribe_Descr::exists_tribe(t))
+		if (!Widelands::TribeDescr::exists_tribe(t))
 			throw wexception
 				("Map defines tribe %s, but it does not exist!", t.c_str());
 		uint32_t i;
@@ -387,7 +387,7 @@ void Editor_Player_Menu::make_infrastructure_clicked(uint8_t n) {
 		dynamic_cast<Editor_Interactive &>(*get_parent());
    // Check if starting position is valid (was checked before
    // so must be true)
-	Widelands::Editor_Game_Base & egbase = parent.egbase();
+	Widelands::EditorGameBase & egbase = parent.egbase();
 	Widelands::Map & map = egbase.map();
 	OverlayManager & overlay_manager = map.overlay_manager();
 	const Widelands::Coords start_pos = map.get_starting_pos(n);
@@ -409,20 +409,20 @@ void Editor_Player_Menu::make_infrastructure_clicked(uint8_t n) {
    // If the player is already created in the editor, this means
    // that there might be already a hq placed somewhere. This needs to be
    // deleted before a starting position change can occure
-	const Widelands::Player_Number player_number = p->player_number();
+	const Widelands::PlayerNumber player_number = p->player_number();
 	const Widelands::Coords starting_pos = map.get_starting_pos(player_number);
 	Widelands::BaseImmovable * const imm = map[starting_pos].get_immovable();
 	if (!imm) {
       // place HQ
-		const Widelands::Tribe_Descr & tribe = p->tribe();
-		const Widelands::Building_Index idx =
+		const Widelands::TribeDescr & tribe = p->tribe();
+		const Widelands::BuildingIndex idx =
 			tribe.building_index("headquarters");
 		if (idx == Widelands::INVALID_INDEX)
 			throw wexception("Tribe %s lacks headquarters", tribe.name().c_str());
 		// Widelands::Warehouse & headquarter = dynamic_cast<Widelands::Warehouse &>
 		//         (egbase.warp_building(starting_pos, player_number, idx));
 		// egbase.conquer_area
-		//         (Player_Area
+		//         (PlayerArea
 		//          (player_number, Area(starting_pos, headquarter.get_conquers())));
 		// tribe.load_warehouse_with_start_wares(editor, headquarter);
 

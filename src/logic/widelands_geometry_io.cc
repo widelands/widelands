@@ -40,7 +40,7 @@ Direction ReadDirection8_allow_null(StreamRead* fr) {
 	return d;
 }
 
-Map_Index ReadMap_Index32(StreamRead* fr, const Map_Index max) {
+MapIndex ReadMap_Index32(StreamRead* fr, const MapIndex max) {
 	uint32_t const i = fr->Unsigned32();
 	if (max <= i)
 		throw ExceededMaxIndex(max, i);

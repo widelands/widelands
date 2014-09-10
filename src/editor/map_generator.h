@@ -30,7 +30,7 @@ struct RNG;
 namespace Widelands {
 
 class Map;
-class Editor_Game_Base;
+class EditorGameBase;
 
 /**
  * This helper class repesents the complete map initialization
@@ -59,7 +59,7 @@ struct UniqueRandomMapInfo {
 	double        waterRatio;     //  How much of the map is water?
 	double        landRatio;      //  How much of the map is land?
 	double        wastelandRatio; //  How much of the "land" is wasteland?
-	Player_Number numPlayers;     //  number of player to generate
+	PlayerNumber numPlayers;     //  number of player to generate
 	bool          islandMode;     //  whether the world will be an island
 
 	//  other stuff
@@ -79,7 +79,7 @@ struct MapGenerator {
 
 	MapGenerator
 		(Map & map, const UniqueRandomMapInfo & mapInfo,
-		 Editor_Game_Base & egbase);
+		 EditorGameBase & egbase);
 
 	void create_random_map();
 
@@ -116,7 +116,7 @@ private:
 	std::unique_ptr<const MapGenInfo> map_gen_info_;
 	Map& map_;
 	const UniqueRandomMapInfo& map_info_;
-	Editor_Game_Base& egbase_;
+	EditorGameBase& egbase_;
 };
 
 }

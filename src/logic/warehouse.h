@@ -33,12 +33,12 @@ class Profile;
 
 namespace Widelands {
 
-class Editor_Game_Base;
+class EditorGameBase;
 class PortDock;
 class Request;
 struct Requirements;
 class Soldier;
-struct Tribe_Descr;
+struct TribeDescr;
 class WareInstance;
 struct WareList;
 
@@ -52,7 +52,7 @@ struct WarehouseDescr : public BuildingDescr {
 	WarehouseDescr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
-		 const Tribe_Descr &);
+		 const TribeDescr &);
 	~WarehouseDescr() override {}
 
 	Building & create_object() const override;
@@ -114,7 +114,7 @@ public:
 	Warehouse(const WarehouseDescr &);
 	virtual ~Warehouse();
 
-	void load_finish(Editor_Game_Base &) override;
+	void load_finish(EditorGameBase &) override;
 
 	/// Called only when the oject is logically created in the simulation. If
 	/// called again, such as when the object is loaded from a savegame, it will
@@ -130,11 +130,11 @@ public:
 	/// * Conquers land if the the warehouse type is configured to do that.
 	/// * Sends a message to the player about the creation of this warehouse.
 	/// * Sets up @ref PortDock for ports
-	void init(Editor_Game_Base &) override;
+	void init(EditorGameBase &) override;
 
-	void cleanup(Editor_Game_Base &) override;
+	void cleanup(EditorGameBase &) override;
 
-	void destroy(Editor_Game_Base &) override;
+	void destroy(EditorGameBase &) override;
 
 	void act(Game & game, uint32_t data) override;
 
@@ -168,8 +168,8 @@ public:
 	void dropSoldier(Soldier &) override {
 		throw wexception("Not implemented for a Warehouse!");
 	}
-	int outcorporateSoldier(Editor_Game_Base &, Soldier &) override;
-	int incorporateSoldier(Editor_Game_Base &, Soldier& soldier) override;
+	int outcorporateSoldier(EditorGameBase &, Soldier &) override;
+	int incorporateSoldier(EditorGameBase &, Soldier& soldier) override;
 
 	bool fetch_from_flag(Game &) override;
 
@@ -178,13 +178,13 @@ public:
 
 	// Adds the worker to the inventory. Takes ownership and might delete
 	// 'worker'.
-	void incorporate_worker(Editor_Game_Base&, Worker* worker);
+	void incorporate_worker(EditorGameBase&, Worker* worker);
 
 	WareInstance & launch_ware(Game &, Ware_Index);
 	void do_launch_ware(Game &, WareInstance &);
 
 	// Adds the ware to our inventory. Takes ownership and might delete 'ware'.
-	void incorporate_ware(Editor_Game_Base&, WareInstance* ware);
+	void incorporate_ware(EditorGameBase&, WareInstance* ware);
 
 	bool can_create_worker(Game &, Ware_Index) const;
 	void     create_worker(Game &, Ware_Index);
@@ -220,15 +220,15 @@ public:
 	// assert(false) otherwise.
 	WaresQueue& waresqueue(Ware_Index) override;
 
-	void log_general_info(const Editor_Game_Base &) override;
+	void log_general_info(const EditorGameBase &) override;
 
 protected:
 	/// Create the warehouse information window.
 	virtual void create_options_window
-		(Interactive_GameBase &, UI::Window * & registry) override;
+		(InteractiveGameBase &, UI::Window * & registry) override;
 
 private:
-	void init_portdock(Editor_Game_Base & egbase);
+	void init_portdock(EditorGameBase & egbase);
 
 	/**
 	 * Plan to produce a certain worker type in this warehouse. This means

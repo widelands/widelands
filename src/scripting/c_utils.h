@@ -29,7 +29,7 @@
 
 Factory & get_factory(lua_State *);
 Widelands::Game & get_game(lua_State *);
-Widelands::Editor_Game_Base & get_egbase(lua_State *);
+Widelands::EditorGameBase & get_egbase(lua_State *);
 Widelands::MapObjectLoader * get_mol(lua_State *);
 Widelands::MapObjectSaver * get_mos(lua_State *);
 

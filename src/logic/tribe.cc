@@ -56,8 +56,8 @@ using namespace std;
 
 namespace Widelands {
 
-Tribe_Descr::Tribe_Descr
-	(const std::string & tribename, Editor_Game_Base & egbase)
+TribeDescr::TribeDescr
+	(const std::string & tribename, EditorGameBase & egbase)
 	: m_name(tribename)
 {
 	std::string path = "tribes/";
@@ -266,7 +266,7 @@ Tribe_Descr::Tribe_Descr
 Load all logic data
 ===============
 */
-void Tribe_Descr::postload(Editor_Game_Base &) {
+void TribeDescr::postload(EditorGameBase &) {
 	// TODO(unknown): move more loads to postload
 }
 
@@ -275,7 +275,7 @@ void Tribe_Descr::postload(Editor_Game_Base &) {
 Load tribe graphics
 ===============
 */
-void Tribe_Descr::load_graphics()
+void TribeDescr::load_graphics()
 {
 	for (Ware_Index i = 0; i < m_workers.get_nitems(); ++i)
 		m_workers.get(i)->load_graphics();
@@ -284,7 +284,7 @@ void Tribe_Descr::load_graphics()
 		m_wares.get(i)->load_graphics();
 
 	for
-		(Building_Index i = 0;
+		(BuildingIndex i = 0;
 		 i < m_buildings.get_nitems();
 		 ++i)
 		m_buildings.get(i)->load_graphics();
@@ -294,7 +294,7 @@ void Tribe_Descr::load_graphics()
 /*
  * does this tribe exist?
  */
-bool Tribe_Descr::exists_tribe
+bool TribeDescr::exists_tribe
 	(const std::string & name, TribeBasicInfo * const info)
 {
 	std::string buf = "tribes/";
@@ -339,7 +339,7 @@ struct TribeBasicComparator {
 /**
  * Fills the given string vector with the names of all tribes that exist.
  */
-std::vector<std::string> Tribe_Descr::get_all_tribenames() {
+std::vector<std::string> TribeDescr::get_all_tribenames() {
 	std::vector<std::string> tribenames;
 
 	//  get all tribes
@@ -351,7 +351,7 @@ std::vector<std::string> Tribe_Descr::get_all_tribenames() {
 		 ++pname)
 	{
 		TribeBasicInfo info;
-		if (Tribe_Descr::exists_tribe(pname->substr(7), &info))
+		if (TribeDescr::exists_tribe(pname->substr(7), &info))
 			tribes.push_back(info);
 	}
 
@@ -363,7 +363,7 @@ std::vector<std::string> Tribe_Descr::get_all_tribenames() {
 }
 
 
-std::vector<TribeBasicInfo> Tribe_Descr::get_all_tribe_infos() {
+std::vector<TribeBasicInfo> TribeDescr::get_all_tribe_infos() {
 	std::vector<TribeBasicInfo> tribes;
 
 	//  get all tribes
@@ -374,7 +374,7 @@ std::vector<TribeBasicInfo> Tribe_Descr::get_all_tribe_infos() {
 		 ++pname)
 	{
 		TribeBasicInfo info;
-		if (Tribe_Descr::exists_tribe(pname->substr(7), &info))
+		if (TribeDescr::exists_tribe(pname->substr(7), &info))
 			tribes.push_back(info);
 	}
 
@@ -388,7 +388,7 @@ std::vector<TribeBasicInfo> Tribe_Descr::get_all_tribe_infos() {
 Find the best matching indicator for the given amount.
 ==============
 */
-uint32_t Tribe_Descr::get_resource_indicator
+uint32_t TribeDescr::get_resource_indicator
 	(ResourceDescription const * const res, uint32_t const amount) const
 {
 	if (!res || !amount) {
@@ -446,7 +446,7 @@ uint32_t Tribe_Descr::get_resource_indicator
 /*
  * Return the given ware or die trying
  */
-Ware_Index Tribe_Descr::safe_ware_index(const std::string & warename) const {
+Ware_Index TribeDescr::safe_ware_index(const std::string & warename) const {
 	const Ware_Index result = ware_index(warename);
 	if (result == INVALID_INDEX) {
 		throw GameDataError("tribe %s does not define ware type \"%s\"", name().c_str(), warename.c_str());
@@ -454,7 +454,7 @@ Ware_Index Tribe_Descr::safe_ware_index(const std::string & warename) const {
 	return result;
 }
 
-Ware_Index Tribe_Descr::ware_index(const std::string & warename) const {
+Ware_Index TribeDescr::ware_index(const std::string & warename) const {
 	Ware_Index const wi = m_wares.get_index(warename);
 	return wi;
 }
@@ -462,7 +462,7 @@ Ware_Index Tribe_Descr::ware_index(const std::string & warename) const {
 /*
  * Return the given worker or die trying
  */
-Ware_Index Tribe_Descr::safe_worker_index(const std::string& workername) const {
+Ware_Index TribeDescr::safe_worker_index(const std::string& workername) const {
 const Ware_Index result = worker_index(workername);
 	if (result == INVALID_INDEX) {
 		throw GameDataError(
@@ -474,8 +474,8 @@ const Ware_Index result = worker_index(workername);
 /*
  * Return the given building or die trying
  */
-Building_Index Tribe_Descr::safe_building_index(char const* const buildingname) const {
-	const Building_Index result = building_index(buildingname);
+BuildingIndex TribeDescr::safe_building_index(char const* const buildingname) const {
+	const BuildingIndex result = building_index(buildingname);
 	if (result == INVALID_INDEX) {
 		throw GameDataError(
 		   "tribe %s does not define building type \"%s\"", name().c_str(), buildingname);
@@ -483,7 +483,7 @@ Building_Index Tribe_Descr::safe_building_index(char const* const buildingname) 
 	return result;
 }
 
-void Tribe_Descr::resize_ware_orders(size_t maxLength) {
+void TribeDescr::resize_ware_orders(size_t maxLength) {
 	bool need_resize = false;
 
 	//check if we actually need to resize

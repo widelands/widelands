@@ -29,7 +29,7 @@ namespace Widelands {
 
 class Building;
 class Economy;
-class Editor_Game_Base;
+class EditorGameBase;
 class Game;
 struct IdleWareSupply;
 class MapObject;
@@ -61,7 +61,7 @@ public:
 	WareInstance(Ware_Index, const WareDescr* const);
 	~WareInstance();
 
-	MapObject* get_location(Editor_Game_Base& egbase) {
+	MapObject* get_location(EditorGameBase& egbase) {
 		return m_location.get(egbase);
 	}
 	Economy* get_economy() const {
@@ -71,12 +71,12 @@ public:
 		return m_descr_index;
 	}
 
-	void init(Editor_Game_Base&) override;
-	void cleanup(Editor_Game_Base&) override;
+	void init(EditorGameBase&) override;
+	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 	void update(Game&);
 
-	void set_location(Editor_Game_Base&, MapObject* loc);
+	void set_location(EditorGameBase&, MapObject* loc);
 	void set_economy(Economy*);
 
 	void enter_building(Game&, Building& building);
@@ -92,7 +92,7 @@ public:
 		return m_transfer;
 	}
 
-	void log_general_info(const Editor_Game_Base& egbase) override;
+	void log_general_info(const EditorGameBase& egbase) override;
 
 private:
 	Object_Ptr m_location;
@@ -123,8 +123,8 @@ public:
 		return true;
 	}
 
-	void save(Editor_Game_Base&, MapObjectSaver&, FileWrite&) override;
-	static MapObject::Loader* load(Editor_Game_Base&, MapObjectLoader&, FileRead&);
+	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
+	static MapObject::Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&);
 };
 }
 

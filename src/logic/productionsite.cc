@@ -56,7 +56,7 @@ ProductionSite BUILDING
 ProductionSiteDescr::ProductionSiteDescr
 	(MapObjectType _type, char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
-	 const Tribe_Descr & _tribe, const World& world)
+	 const TribeDescr & _tribe, const World& world)
 	:
 	BuildingDescr(_type, _name, _descname, directory, prof, global_s, _tribe)
 {
@@ -246,7 +246,7 @@ void ProductionSite::update_statistics_string(std::string* s) {
  * Detect if the workers are experienced enough for an upgrade
  * @param idx Index of the enhancement
  */
-bool ProductionSite::has_workers(Building_Index targetSite, Game & /* game */)
+bool ProductionSite::has_workers(BuildingIndex targetSite, Game & /* game */)
 {
 	// bld holds the description of the building we want to have
 	if (upcast(ProductionSiteDescr const, bld, descr().tribe().get_building_descr(targetSite))) {
@@ -343,7 +343,7 @@ void ProductionSite::calc_statistics()
 /**
  * Initialize the production site.
  */
-void ProductionSite::init(Editor_Game_Base & egbase)
+void ProductionSite::init(EditorGameBase & egbase)
 {
 	Building::init(egbase);
 
@@ -399,7 +399,7 @@ void ProductionSite::set_economy(Economy * const e)
 /**
  * Cleanup after a production site is removed
  */
-void ProductionSite::cleanup(Editor_Game_Base & egbase)
+void ProductionSite::cleanup(EditorGameBase & egbase)
 {
 	for (uint32_t i = descr().nr_working_positions(); i;) {
 		--i;
@@ -432,7 +432,7 @@ void ProductionSite::cleanup(Editor_Game_Base & egbase)
  * returns 0 on success -1 if there is no room for this worker
  */
 int ProductionSite::warp_worker
-	(Editor_Game_Base & egbase, const WorkerDescr & wdes)
+	(EditorGameBase & egbase, const WorkerDescr & wdes)
 {
 	bool assigned = false;
 	Working_Position * current = m_working_positions;
@@ -670,7 +670,7 @@ bool ProductionSite::fetch_from_flag(Game & game)
 }
 
 
-void ProductionSite::log_general_info(const Editor_Game_Base & egbase) {
+void ProductionSite::log_general_info(const EditorGameBase & egbase) {
 	Building::log_general_info(egbase);
 
 	molog("m_is_stopped: %u\n", m_is_stopped);

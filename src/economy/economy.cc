@@ -44,7 +44,7 @@ Economy::Economy(Player & player) :
 	m_owner(player),
 	m_request_timerid(0)
 {
-	const Tribe_Descr & tribe = player.tribe();
+	const TribeDescr & tribe = player.tribe();
 	Ware_Index const nr_wares   = tribe.get_nrwares();
 	Ware_Index const nr_workers = tribe.get_nrworkers();
 	m_wares.set_nrwares(nr_wares);
@@ -139,7 +139,7 @@ void Economy::check_split(Flag & f1, Flag & f2)
 
 void Economy::_check_splits()
 {
-	Editor_Game_Base & egbase = owner().egbase();
+	EditorGameBase & egbase = owner().egbase();
 	Map & map = egbase.map();
 
 	while (m_split_checks.size()) {
@@ -812,7 +812,7 @@ void Economy::_create_requested_worker(Game & game, Ware_Index index)
 	unsigned demand = 0;
 
 	bool soldier_level_check;
-	const Tribe_Descr & tribe = owner().tribe();
+	const TribeDescr & tribe = owner().tribe();
 	const WorkerDescr & w_desc = *tribe.get_worker_descr(index);
 
 	// Make a dummy soldier, which should never be assigned to any economy
@@ -935,7 +935,7 @@ void Economy::_create_requested_workers(Game & game)
 	if (!warehouses().size())
 		return;
 
-	const Tribe_Descr & tribe = owner().tribe();
+	const TribeDescr & tribe = owner().tribe();
 	for
 		(Ware_Index index = 0;
 		 index < tribe.get_nrworkers(); ++index)
@@ -1041,7 +1041,7 @@ void Economy::balance(uint32_t const timerid)
 		return;
 	++m_request_timerid;
 
-	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
+	Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
 
 	_check_splits();
 

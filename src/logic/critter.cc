@@ -136,7 +136,7 @@ CritterDescr::CritterDescr(char const* const _name,
                                      const std::string& directory,
                                      Profile& prof,
                                      Section& global_s,
-												 Tribe_Descr & _tribe)
+												 TribeDescr & _tribe)
 	:
 	BobDescr(MapObjectType::CRITTER, _name, _descname, &_tribe)
 {
@@ -399,7 +399,7 @@ const BobProgramBase * Critter::Loader::get_program
 	return critter.descr().get_program(name);
 }
 
-MapObject::Loader* Critter::load(Editor_Game_Base& egbase,
+MapObject::Loader* Critter::load(EditorGameBase& egbase,
 												  MapObjectLoader& mol,
                                       FileRead& fr,
                                       const OneWorldLegacyLookupTable& lookup_table) {
@@ -421,7 +421,7 @@ MapObject::Loader* Critter::load(Editor_Game_Base& egbase,
 			} else {
 				egbase.manually_load_tribe(owner);
 
-				if (const Tribe_Descr * tribe = egbase.get_tribe(owner))
+				if (const TribeDescr * tribe = egbase.get_tribe(owner))
 					descr = dynamic_cast<const CritterDescr *>
 						(tribe->get_bob_descr(critter_name));
 			}
@@ -442,7 +442,7 @@ MapObject::Loader* Critter::load(Editor_Game_Base& egbase,
 }
 
 void Critter::save
-	(Editor_Game_Base & egbase, MapObjectSaver & mos, FileWrite & fw)
+	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(HeaderCritter);
 	fw.Unsigned8(CRITTER_SAVEGAME_VERSION);

@@ -207,7 +207,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	Interactive_Base * get() {return static_cast<Interactive_Base *>(m_panel);}
+	InteractiveBase * get() {return static_cast<InteractiveBase *>(m_panel);}
 };
 
 void luaopen_wlui(lua_State *);

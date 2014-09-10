@@ -131,7 +131,7 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 
 
 Game::Game() :
-	Editor_Game_Base(new LuaGameInterface(this)),
+	EditorGameBase(new LuaGameInterface(this)),
 	m_syncwrapper         (*this, m_synchash),
 	m_ctrl                (nullptr),
 	m_writereplay         (true),
@@ -233,7 +233,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 	}
 
 	// We have to create the players here.
-	Player_Number const nr_players = map().get_nrplayers();
+	PlayerNumber const nr_players = map().get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
 		loaderUI.stepf (_("Adding player %u"), p);
 		add_player
@@ -428,7 +428,7 @@ bool Game::run_load_game(std::string filename, const std::string& script_to_run)
  */
 void Game::postload()
 {
-	Editor_Game_Base::postload();
+	EditorGameBase::postload();
 
 	if (g_gr) {
 		assert(get_ibase() != nullptr);
@@ -465,7 +465,7 @@ bool Game::run
 	postload();
 
 	if (start_game_type != Loaded) {
-		Player_Number const nr_players = map().get_nrplayers();
+		PlayerNumber const nr_players = map().get_nrplayers();
 		if (start_game_type == NewNonScenario) {
 			std::string step_description = _("Creating player infrastructure");
 			iterate_players_existing(p, nr_players, *this, plr) {
@@ -640,9 +640,9 @@ void Game::cleanup_for_load()
 {
 	m_state = gs_notrunning;
 
-	Editor_Game_Base::cleanup_for_load();
+	EditorGameBase::cleanup_for_load();
 
-	for (Tribe_Descr* tribe : tribes_) {
+	for (TribeDescr* tribe : tribes_) {
 		delete tribe;
 	}
 
@@ -746,7 +746,7 @@ void Game::send_player_dismantle (PlayerImmovable & pi)
 
 
 void Game::send_player_build
-	(int32_t const pid, Coords const coords, Building_Index const id)
+	(int32_t const pid, Coords const coords, BuildingIndex const id)
 {
 	assert(id != INVALID_INDEX);
 	send_player_command (*new CmdBuild(get_gametime(), pid, coords, id));
@@ -791,7 +791,7 @@ void Game::send_player_start_or_cancel_expedition (Building & building)
 }
 
 void Game::send_player_enhance_building
-	(Building & building, Building_Index const id)
+	(Building & building, BuildingIndex const id)
 {
 	assert(id != INVALID_INDEX);
 
@@ -865,7 +865,7 @@ void Game::send_player_change_soldier_capacity
 /////////////////////// TESTING STUFF
 void Game::send_player_enemyflagaction
 	(const Flag  &       flag,
-	 Player_Number const who_attacks,
+	 PlayerNumber const who_attacks,
 	 uint32_t      const num_soldiers)
 {
 	if
@@ -920,7 +920,7 @@ void Game::send_player_cancel_expedition_ship(Ship & ship) {
 void Game::sample_statistics()
 {
 	// Update general stats
-	Player_Number const nr_plrs = map().get_nrplayers();
+	PlayerNumber const nr_plrs = map().get_nrplayers();
 	std::vector<uint32_t> land_size;
 	std::vector<uint32_t> nr_buildings;
 	std::vector<uint32_t> nr_casualties;
@@ -954,7 +954,7 @@ void Game::sample_statistics()
 	const Map &  themap = map();
 	Extent const extent = themap.extent();
 	iterate_Map_FCoords(themap, extent, fc) {
-		if (Player_Number const owner = fc.field->get_owned_by())
+		if (PlayerNumber const owner = fc.field->get_owned_by())
 			++land_size[owner - 1];
 
 			// Get the immovable
@@ -985,7 +985,7 @@ void Game::sample_statistics()
 
 		for (uint32_t j = 0; j < plr->get_nr_economies(); ++j) {
 			Economy * const eco = plr->get_economy_by_number(j);
-			const Tribe_Descr & tribe = plr->tribe();
+			const TribeDescr & tribe = plr->tribe();
 			Ware_Index const tribe_wares = tribe.get_nrwares();
 			for
 				(Ware_Index wareid = 0;
@@ -1056,7 +1056,7 @@ void Game::sample_statistics()
 
 
 	// Calculate statistics for the players
-	const Player_Number nr_players = map().get_nrplayers();
+	const PlayerNumber nr_players = map().get_nrplayers();
 	iterate_players_existing(p, nr_players, *this, plr)
 		plr->sample_statistics();
 }
@@ -1077,7 +1077,7 @@ void Game::ReadStatistics(FileRead & fr, uint32_t const version)
 
 		// Read general statistics
 		uint32_t entries = fr.Unsigned16();
-		const Player_Number nr_players = map().get_nrplayers();
+		const PlayerNumber nr_players = map().get_nrplayers();
 		m_general_stats.resize(nr_players);
 
 		iterate_players_existing_novar(p, nr_players, *this) {
@@ -1130,7 +1130,7 @@ void Game::WriteStatistics(FileWrite & fw)
 	// First, we write the size of the statistics arrays
 	uint32_t entries = 0;
 
-	const Player_Number nr_players = map().get_nrplayers();
+	const PlayerNumber nr_players = map().get_nrplayers();
 	iterate_players_existing_novar(p, nr_players, *this)
 		if (!m_general_stats.empty()) {
 			entries = m_general_stats[p - 1].land_size.size();

@@ -32,7 +32,7 @@ namespace Widelands {
 
 void MapAllowedWorkerTypesPacket::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      &       egbase,
+	 EditorGameBase      &       egbase,
 	 bool                    skip,
 	 MapObjectLoader &)
 {
@@ -54,7 +54,7 @@ void MapAllowedWorkerTypesPacket::Read
 			prof.get_safe_section("global").get_safe_int("packet_version");
 		if (packet_version == CURRENT_PACKET_VERSION) {
 			iterate_players_existing(p, egbase.map().get_nrplayers(), egbase, player) {
-				const Tribe_Descr & tribe = player->tribe();
+				const TribeDescr & tribe = player->tribe();
 				char buffer[10];
 				snprintf(buffer, sizeof(buffer), "player_%u", p);
 				try {
@@ -83,7 +83,7 @@ void MapAllowedWorkerTypesPacket::Read
 
 
 void MapAllowedWorkerTypesPacket::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, MapObjectSaver &)
+	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
 {
 	Profile prof;
 	prof.create_section("global").set_int
@@ -91,7 +91,7 @@ void MapAllowedWorkerTypesPacket::Write
 
 	bool forbidden_worker_seen = false;
 	iterate_players_existing_const(p, egbase.map().get_nrplayers(), egbase, player) {
-		const Tribe_Descr & tribe = player->tribe();
+		const TribeDescr & tribe = player->tribe();
 		char buffer[10];
 		snprintf(buffer, sizeof(buffer), "player_%u", p);
 		Section & section = prof.create_section(buffer);

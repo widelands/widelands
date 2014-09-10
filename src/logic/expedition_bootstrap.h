@@ -29,7 +29,7 @@
 namespace Widelands {
 
 class Economy;
-class Editor_Game_Base;
+class EditorGameBase;
 class Game;
 class MapObjectLoader;
 class PortDock;
@@ -58,7 +58,7 @@ public:
 	// expedition. Ownership is transferred and the object is in an undefined
 	// state after this and must be deleted.
 	void get_waiting_workers_and_wares
-		(Game&, const Tribe_Descr&, std::vector<Worker*>* return_workers,
+		(Game&, const TribeDescr&, std::vector<Worker*>* return_workers,
 		 std::vector<WareInstance*>* return_wares);
 
 	// Returns the wares currently in stock.
@@ -71,7 +71,7 @@ public:
 	WaresQueue& waresqueue(Ware_Index index) const;
 
 	// Delete all wares we currently handle.
-	void cleanup(Editor_Game_Base& egbase);
+	void cleanup(EditorGameBase& egbase);
 
 	// Save/Load this into a file. The actual data is stored in the buildingdata
 	// packet, and there in the warehouse data packet.

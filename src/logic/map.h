@@ -73,9 +73,9 @@ struct NoteFieldTransformed {
 	CAN_BE_SEND_AS_NOTE(NoteId::FieldTransformed)
 
 	FCoords fc;
-	Map_Index map_index;
+	MapIndex map_index;
 
-	NoteFieldTransformed(const FCoords& init_fc, const Map_Index init_map_index)
+	NoteFieldTransformed(const FCoords& init_fc, const MapIndex init_map_index)
 	   : fc(init_fc), map_index(init_map_index) {
 	}
 };
@@ -130,7 +130,7 @@ struct FindBobAlwaysTrue : public FindBob {
 class Map : public ITransportCostCalculator {
 public:
 	friend class Editor;
-	friend class Editor_Game_Base;
+	friend class EditorGameBase;
 	friend class MapLoader;
 	friend class MapVersionPacket;
 	friend struct ::S2MapLoader;
@@ -140,7 +140,7 @@ public:
 	friend struct MapElementalPacket;
 	friend struct WidelandsMapLoader;
 
-	typedef std::set<Coords, Coords::ordering_functor> PortSpacesSet;
+	typedef std::set<Coords, Coords::OrderingFunctor> PortSpacesSet;
 	typedef std::map<std::string, std::unique_ptr<Objective>> Objectives;
 
 	enum { // flags for findpath()
@@ -182,10 +182,10 @@ public:
 	virtual void recalc_for_field_area(const World& world, Area<FCoords>);
 	void recalc_default_resources(const World& world);
 
-	void set_nrplayers(Player_Number);
+	void set_nrplayers(PlayerNumber);
 
-	void set_starting_pos(Player_Number, Coords);
-	Coords get_starting_pos(Player_Number const p) const {
+	void set_starting_pos(PlayerNumber, Coords);
+	Coords get_starting_pos(PlayerNumber const p) const {
 		assert(1 <= p && p <= get_nrplayers());
 		return m_starting_pos[p - 1];
 	}
@@ -214,22 +214,22 @@ public:
 	const Tags & get_tags() const {return m_tags;}
 	bool has_tag(std::string & s) const {return m_tags.count(s);}
 
-	Player_Number get_nrplayers() const {return m_nrplayers;}
+	PlayerNumber get_nrplayers() const {return m_nrplayers;}
 	ScenarioTypes scenario_types() const {return m_scenario_types;}
 	Extent extent() const {return Extent(m_width, m_height);}
-	X_Coordinate get_width   () const {return m_width;}
-	Y_Coordinate get_height  () const {return m_height;}
+	XCoordinate get_width   () const {return m_width;}
+	YCoordinate get_height  () const {return m_height;}
 
 	//  The next few functions are only valid when the map is loaded as a
 	//  scenario.
-	const std::string & get_scenario_player_tribe    (Player_Number) const;
-	const std::string & get_scenario_player_name     (Player_Number) const;
-	const std::string & get_scenario_player_ai       (Player_Number) const;
-	bool                get_scenario_player_closeable(Player_Number) const;
-	void set_scenario_player_tribe    (Player_Number, const std::string &);
-	void set_scenario_player_name     (Player_Number, const std::string &);
-	void set_scenario_player_ai       (Player_Number, const std::string &);
-	void set_scenario_player_closeable(Player_Number, bool);
+	const std::string & get_scenario_player_tribe    (PlayerNumber) const;
+	const std::string & get_scenario_player_name     (PlayerNumber) const;
+	const std::string & get_scenario_player_ai       (PlayerNumber) const;
+	bool                get_scenario_player_closeable(PlayerNumber) const;
+	void set_scenario_player_tribe    (PlayerNumber, const std::string &);
+	void set_scenario_player_name     (PlayerNumber, const std::string &);
+	void set_scenario_player_ai       (PlayerNumber, const std::string &);
+	void set_scenario_player_closeable(PlayerNumber, bool);
 
 	/// \returns the maximum theoretical possible nodecaps (no blocking bobs, etc.)
 	NodeCaps get_max_nodecaps(const World& world, FCoords &);
@@ -269,9 +269,9 @@ public:
 		 const FindNode &);
 
 	// Field logic
-	static Map_Index get_index(const Coords &, X_Coordinate width);
-	Map_Index max_index() const {return m_width * m_height;}
-	Field & operator[](Map_Index) const;
+	static MapIndex get_index(const Coords &, XCoordinate width);
+	MapIndex max_index() const {return m_width * m_height;}
+	Field & operator[](MapIndex) const;
 	Field & operator[](const Coords &) const;
 	FCoords get_fcoords(const Coords &) const;
 	void normalize_coords(Coords &) const;
@@ -389,11 +389,11 @@ private:
 	void recalc_border(FCoords);
 
 	/// # of players this map supports (!= Game's number of players!)
-	Player_Number m_nrplayers;
+	PlayerNumber m_nrplayers;
 	ScenarioTypes m_scenario_types; // whether the map is playable as scenario
 
-	X_Coordinate m_width;
-	Y_Coordinate m_height;
+	XCoordinate m_width;
+	YCoordinate m_height;
 	char        m_filename    [256];
 	char        m_author       [61];
 	char        m_name         [61];
@@ -451,7 +451,7 @@ Field arithmetics
 ==============================================================================
 */
 
-inline Map_Index Map::get_index(const Coords & c, X_Coordinate const width) {
+inline MapIndex Map::get_index(const Coords & c, XCoordinate const width) {
 	assert(0 < width);
 	assert(0 <= c.x);
 	assert     (c.x < width);
@@ -459,7 +459,7 @@ inline Map_Index Map::get_index(const Coords & c, X_Coordinate const width) {
 	return c.y * width + c.x;
 }
 
-inline Field & Map::operator[](Map_Index const i) const {return m_fields[i];}
+inline Field & Map::operator[](MapIndex const i) const {return m_fields[i];}
 inline Field & Map::operator[](const Coords & c) const {
 	return operator[](get_index(c, m_width));
 }
@@ -1042,7 +1042,7 @@ inline FCoords Map::get_neighbour(const FCoords & f, const Direction dir) const
 	}
 }
 
-inline void move_r(const X_Coordinate mapwidth, FCoords & f) {
+inline void move_r(const XCoordinate mapwidth, FCoords & f) {
 	assert(f.x < mapwidth);
 	++f.x;
 	++f.field;
@@ -1050,7 +1050,7 @@ inline void move_r(const X_Coordinate mapwidth, FCoords & f) {
 	assert(f.x < mapwidth);
 }
 
-inline void move_r(X_Coordinate const mapwidth, FCoords & f, Map_Index & i) {
+inline void move_r(XCoordinate const mapwidth, FCoords & f, MapIndex & i) {
 	assert(f.x < mapwidth);
 	++f.x;
 	++f.field;
@@ -1063,11 +1063,11 @@ inline void move_r(X_Coordinate const mapwidth, FCoords & f, Map_Index & i) {
 #define iterate_Map_FCoords(map, extent, fc)                                  \
    for                                                                        \
       (Widelands::FCoords fc = (map).get_fcoords(Widelands::Coords(0, 0));    \
-       fc.y < static_cast<Widelands::Y_Coordinate>(extent.h);                 \
+		 fc.y < static_cast<Widelands::YCoordinate>(extent.h);                 \
        ++fc.y)                                                                \
       for                                                                     \
          (fc.x = 0;                                                           \
-          fc.x < static_cast<Widelands::X_Coordinate>(extent.w);              \
+			 fc.x < static_cast<Widelands::XCoordinate>(extent.w);              \
           ++fc.x, ++fc.field)                                                 \
 
 }

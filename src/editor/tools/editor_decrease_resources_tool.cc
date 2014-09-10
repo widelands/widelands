@@ -38,7 +38,7 @@
 int32_t
 Editor_Decrease_Resources_Tool::handle_click_impl(Widelands::Map& map,
                                                   const Widelands::World& world,
-                                                  Widelands::Node_and_Triangle<> const center,
+                                                  Widelands::NodeAndTriangle<> const center,
                                                   Editor_Interactive& /* parent */,
                                                   Editor_Action_Args& args) {
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
@@ -85,7 +85,7 @@ Editor_Decrease_Resources_Tool::handle_click_impl(Widelands::Map& map,
 int32_t Editor_Decrease_Resources_Tool::handle_undo_impl(
    Widelands::Map& map,
    const Widelands::World& world,
-   Widelands::Node_and_Triangle<Widelands::Coords> center,
+   Widelands::NodeAndTriangle<Widelands::Coords> center,
    Editor_Interactive& parent,
    Editor_Action_Args& args) {
 	return parent.tools.set_resources.handle_undo_impl(map, world, center, parent, args);

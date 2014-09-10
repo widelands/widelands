@@ -71,14 +71,14 @@ void MapElementalPacket::Pre_Read(FileSystem & fs, Map * map)
 
 
 void MapElementalPacket::Read
-	(FileSystem & fs, Editor_Game_Base & egbase, bool, MapObjectLoader &)
+	(FileSystem & fs, EditorGameBase & egbase, bool, MapObjectLoader &)
 {
 	Pre_Read(fs, &egbase.map());
 }
 
 
 void MapElementalPacket::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, MapObjectSaver &)
+	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
 {
 
 	Profile prof;

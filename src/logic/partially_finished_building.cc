@@ -52,7 +52,7 @@ void Partially_Finished_Building::set_building(const BuildingDescr & building_de
 	m_building = &building_descr;
 }
 
-void Partially_Finished_Building::cleanup(Editor_Game_Base & egbase) {
+void Partially_Finished_Building::cleanup(EditorGameBase & egbase) {
 	if (m_builder_request) {
 		delete m_builder_request;
 		m_builder_request = nullptr;
@@ -67,7 +67,7 @@ void Partially_Finished_Building::cleanup(Editor_Game_Base & egbase) {
 	Building::cleanup(egbase);
 }
 
-void Partially_Finished_Building::init(Editor_Game_Base & egbase) {
+void Partially_Finished_Building::init(EditorGameBase & egbase) {
 	Building::init(egbase);
 
 	if (upcast(Game, game, &egbase))

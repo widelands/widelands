@@ -42,7 +42,7 @@ void GameInteractivePlayerPacket::Read
 		fr.Open(fs, "binary/interactive_player");
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CURRENT_PACKET_VERSION) {
-			Player_Number player_number = fr.Unsigned8();
+			PlayerNumber player_number = fr.Unsigned8();
 			if (!(0 < player_number && player_number <= game.map().get_nrplayers())) {
 				throw GameDataError("Invalid player number: %i.", player_number);
 			}
@@ -52,7 +52,7 @@ void GameInteractivePlayerPacket::Read
 				// and the slot for player 1 was not used in the game.
 				// So now we try to create an InteractivePlayer object for another
 				// player instead.
-				const Player_Number max = game.map().get_nrplayers();
+				const PlayerNumber max = game.map().get_nrplayers();
 				for (player_number = 1; player_number <= max; ++player_number)
 					if (game.get_player(player_number))
 						break;
@@ -63,12 +63,12 @@ void GameInteractivePlayerPacket::Read
 			int32_t       const y             = fr.Unsigned16();
 			uint32_t      const display_flags = fr.Unsigned32();
 
-			if (Interactive_Base * const ibase = game.get_ibase()) {
+			if (InteractiveBase * const ibase = game.get_ibase()) {
 				ibase->set_viewpoint(Point(x, y), true);
 
 				uint32_t const loaded_df =
-					Interactive_Base::dfShowCensus |
-					Interactive_Base::dfShowStatistics;
+					InteractiveBase::dfShowCensus |
+					InteractiveBase::dfShowStatistics;
 				uint32_t const olddf = ibase->get_display_flags();
 				uint32_t const realdf =
 					(olddf & ~loaded_df) | (display_flags & loaded_df);
@@ -96,7 +96,7 @@ void GameInteractivePlayerPacket::Write
 	// Now packet version
 	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-	Interactive_Base * const ibase = game.get_ibase();
+	InteractiveBase * const ibase = game.get_ibase();
 	Interactive_Player * const iplayer = game.get_ipl();
 
 	// Player number

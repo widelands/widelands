@@ -40,7 +40,7 @@ namespace Widelands {
 
 void MapFlagPacket::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      &       egbase,
+	 EditorGameBase      &       egbase,
 	 bool                    const skip,
 	 MapObjectLoader &       mol)
 {
@@ -54,11 +54,11 @@ void MapFlagPacket::Read
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CURRENT_PACKET_VERSION) {
 			const Map & map = egbase.map();
-			Player_Number const nr_players = map.get_nrplayers();
+			PlayerNumber const nr_players = map.get_nrplayers();
 			Widelands::Extent const extent = map.extent();
 			iterate_Map_FCoords(map, extent, fc)
 				if (fr.Unsigned8()) {
-					Player_Number const owner  = fr.Unsigned8();
+					PlayerNumber const owner  = fr.Unsigned8();
 					if (!(0 < owner && owner <= nr_players)) {
 						throw GameDataError("Invalid player number: %i.", owner);
 					}
@@ -109,7 +109,7 @@ void MapFlagPacket::Read
 						mol.register_object<Flag>
 							(serial,
 							 *new Flag
-							 	(ref_cast<Game, Editor_Game_Base>(egbase),
+							 	(ref_cast<Game, EditorGameBase>(egbase),
 							 	 egbase.player(owner),
 							 	 fc));
 					} catch (const WException & e) {
@@ -128,7 +128,7 @@ void MapFlagPacket::Read
 
 
 void MapFlagPacket::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, MapObjectSaver & mos)
+	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	FileWrite fw;
 

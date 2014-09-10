@@ -35,7 +35,7 @@ namespace Widelands {
 
 
 void MapResourcesPacket::Read
-	(FileSystem & fs, Editor_Game_Base & egbase, const OneWorldLegacyLookupTable& lookup_table)
+	(FileSystem & fs, EditorGameBase & egbase, const OneWorldLegacyLookupTable& lookup_table)
 {
 	FileRead fr;
 	fr.Open(fs, "binary/resource");
@@ -103,7 +103,7 @@ void MapResourcesPacket::Read
  * in nearly all cases.
  */
 void MapResourcesPacket::Write
-	(FileSystem & fs, Editor_Game_Base & egbase)
+	(FileSystem & fs, EditorGameBase & egbase)
 {
 	FileWrite fw;
 

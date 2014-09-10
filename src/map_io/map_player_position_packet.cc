@@ -31,7 +31,7 @@ namespace Widelands {
 
 
 void MapPlayerPositionPacket::Read
-	(FileSystem & fs, Editor_Game_Base & egbase, bool, MapObjectLoader &)
+	(FileSystem & fs, EditorGameBase & egbase, bool, MapObjectLoader &)
 {
 	Profile prof;
 	prof.read("player_position", nullptr, fs);
@@ -45,7 +45,7 @@ void MapPlayerPositionPacket::Read
 			//  is possible in the editor), is also -1, -1.
 			Map               & map        = egbase.map();
 			Extent        const extent     = map.extent       ();
-			Player_Number const nr_players = map.get_nrplayers();
+			PlayerNumber const nr_players = map.get_nrplayers();
 			iterate_player_numbers(p, nr_players) {
 				try {
 					char buffer[10];
@@ -65,7 +65,7 @@ void MapPlayerPositionPacket::Read
 
 
 void MapPlayerPositionPacket::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, MapObjectSaver &)
+	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
 {
 	Profile prof;
 	Section & s = prof.create_section("global");
@@ -74,7 +74,7 @@ void MapPlayerPositionPacket::Write
 
 	// Now, all positions in order
 	const Map & map = egbase.map();
-	const Player_Number nr_players = map.get_nrplayers();
+	const PlayerNumber nr_players = map.get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
 		char buffer[10];
 		snprintf(buffer, sizeof(buffer), "player_%u", p);

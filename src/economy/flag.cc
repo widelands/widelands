@@ -80,7 +80,7 @@ Flag::~Flag()
 			log("Flag: ouch! road left\n");
 }
 
-void Flag::load_finish(Editor_Game_Base & egbase) {
+void Flag::load_finish(EditorGameBase & egbase) {
 	auto should_be_deleted = [&egbase, this](const OPtr<Worker>& r) {
 		Worker& worker = *r.get(egbase);
 		Bob::State const* const state = worker.get_state(Worker::taskWaitforcapacity);
@@ -112,7 +112,7 @@ void Flag::load_finish(Editor_Game_Base & egbase) {
  * Create a flag at the given location
 */
 Flag::Flag
-	(Editor_Game_Base & egbase, Player & owning_player, Coords const coords)
+	(EditorGameBase & egbase, Player & owning_player, Coords const coords)
 	:
 	PlayerImmovable       (g_flag_descr),
 	m_building            (nullptr),
@@ -196,7 +196,7 @@ void Flag::set_economy(Economy * const e)
 /**
  * Call this only from the Building init!
 */
-void Flag::attach_building(Editor_Game_Base & egbase, Building & building)
+void Flag::attach_building(EditorGameBase & egbase, Building & building)
 {
 	assert(!m_building || m_building == &building);
 
@@ -212,7 +212,7 @@ void Flag::attach_building(Editor_Game_Base & egbase, Building & building)
 /**
  * Call this only from the Building cleanup!
 */
-void Flag::detach_building(Editor_Game_Base & egbase)
+void Flag::detach_building(EditorGameBase & egbase)
 {
 	assert(m_building);
 
@@ -251,7 +251,7 @@ void Flag::detach_road(int32_t const dir)
  * Return all positions we occupy on the map. For a Flag, this is only one
 */
 BaseImmovable::PositionList Flag::get_positions
-	(const Editor_Game_Base &) const
+	(const EditorGameBase &) const
 {
 	PositionList rv;
 	rv.push_back(m_position);
@@ -368,7 +368,7 @@ void Flag::skip_wait_for_capacity(Game &, Worker & w)
 }
 
 
-void Flag::add_ware(Editor_Game_Base & egbase, WareInstance & ware)
+void Flag::add_ware(EditorGameBase & egbase, WareInstance & ware)
 {
 
 	assert(m_ware_filled < m_ware_capacity);
@@ -558,7 +558,7 @@ Flag::Wares Flag::get_wares() {
  * Force a removal of the given ware from this flag.
  * Called by \ref WareInstance::cleanup()
 */
-void Flag::remove_ware(Editor_Game_Base & egbase, WareInstance * const ware)
+void Flag::remove_ware(EditorGameBase & egbase, WareInstance * const ware)
 {
 	for (int32_t i = 0; i < m_ware_filled; ++i) {
 		if (m_wares[i].ware != ware)
@@ -694,7 +694,7 @@ void Flag::update_wares(Game & game, Flag * const other)
 	m_always_call_for_flag = nullptr;
 }
 
-void Flag::init(Editor_Game_Base & egbase)
+void Flag::init(EditorGameBase & egbase)
 {
 	PlayerImmovable::init(egbase);
 
@@ -706,7 +706,7 @@ void Flag::init(Editor_Game_Base & egbase)
 /**
  * Detach building and free roads.
 */
-void Flag::cleanup(Editor_Game_Base & egbase)
+void Flag::cleanup(EditorGameBase & egbase)
 {
 	//molog("Flag::cleanup\n");
 
@@ -753,7 +753,7 @@ void Flag::cleanup(Editor_Game_Base & egbase)
  * \ref Flag::cleanup(). This function is needed to ensure a fire is created
  * when a player removes a flag.
 */
-void Flag::destroy(Editor_Game_Base & egbase)
+void Flag::destroy(EditorGameBase & egbase)
 {
 	if (m_building) {
 		m_building->destroy(egbase);
@@ -811,7 +811,7 @@ void Flag::flag_job_request_callback
 	flag.molog("BUG: flag_job_request_callback: worker not found in list\n");
 }
 
-void Flag::log_general_info(const Widelands::Editor_Game_Base & egbase)
+void Flag::log_general_info(const Widelands::EditorGameBase & egbase)
 {
 	molog("Flag at %i,%i\n", m_position.x, m_position.y);
 

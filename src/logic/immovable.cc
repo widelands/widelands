@@ -91,7 +91,7 @@ static std::string const base_immovable_name = "unknown";
  *
  * \note this function will remove the immovable (if existing) currently connected to this position.
  */
-void BaseImmovable::set_position(Editor_Game_Base & egbase, Coords const c)
+void BaseImmovable::set_position(EditorGameBase & egbase, Coords const c)
 {
 	assert(c);
 
@@ -111,7 +111,7 @@ void BaseImmovable::set_position(Editor_Game_Base & egbase, Coords const c)
  *
  * Only call this during cleanup.
 */
-void BaseImmovable::unset_position(Editor_Game_Base & egbase, Coords const c)
+void BaseImmovable::unset_position(EditorGameBase & egbase, Coords const c)
 {
 	Map & map = egbase.map();
 	FCoords const f = map.get_fcoords(c);
@@ -225,7 +225,7 @@ ImmovableDescr IMPLEMENTATION
 ImmovableDescr::ImmovableDescr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
-	 Tribe_Descr const * const owner_tribe)
+	 TribeDescr const * const owner_tribe)
 :
 	MapObjectDescr(MapObjectType::IMMOVABLE, _name, _descname),
 	m_size          (BaseImmovable::NONE),
@@ -376,7 +376,7 @@ ImmovableProgram const * ImmovableDescr::get_program
  * Create an immovable of this type
 */
 Immovable & ImmovableDescr::create
-	(Editor_Game_Base & egbase, Coords const coords) const
+	(EditorGameBase & egbase, Coords const coords) const
 {
 	assert(this);
 	Immovable & result = *new Immovable(*this);
@@ -412,7 +412,7 @@ Immovable::~Immovable()
 }
 
 BaseImmovable::PositionList Immovable::get_positions
-	(const Editor_Game_Base &) const
+	(const EditorGameBase &) const
 {
 	PositionList rv;
 
@@ -436,7 +436,7 @@ void Immovable::set_owner(Player * player)
 }
 
 void Immovable::start_animation
-	(const Editor_Game_Base & egbase, uint32_t const anim)
+	(const EditorGameBase & egbase, uint32_t const anim)
 {
 	m_anim      = anim;
 	m_animstart = egbase.get_gametime();
@@ -454,7 +454,7 @@ void Immovable::increment_program_pointer()
 /**
  * Actually initialize the immovable.
 */
-void Immovable::init(Editor_Game_Base & egbase)
+void Immovable::init(EditorGameBase & egbase)
 {
 	BaseImmovable::init(egbase);
 
@@ -478,7 +478,7 @@ void Immovable::init(Editor_Game_Base & egbase)
 /**
  * Cleanup before destruction
 */
-void Immovable::cleanup(Editor_Game_Base & egbase)
+void Immovable::cleanup(EditorGameBase & egbase)
 {
 	unset_position(egbase, m_position);
 
@@ -513,7 +513,7 @@ void Immovable::act(Game & game, uint32_t const data)
 
 
 void Immovable::draw
-	(const Editor_Game_Base& game, RenderTarget& dst, const FCoords&, const Point& pos)
+	(const EditorGameBase& game, RenderTarget& dst, const FCoords&, const Point& pos)
 {
 	if (m_anim) {
 		if (!m_anim_construction_total)
@@ -524,7 +524,7 @@ void Immovable::draw
 }
 
 void Immovable::draw_construction
-	(const Editor_Game_Base & game, RenderTarget & dst, const Point pos)
+	(const EditorGameBase & game, RenderTarget & dst, const Point pos)
 {
 	const ImmovableProgram::ActConstruction * constructionact = nullptr;
 	if (m_program_ptr < m_program->size())
@@ -563,7 +563,7 @@ void Immovable::draw_construction
 		(pos, m_anim, current_frame * frametime, get_owner(), Rect(Point(0, curh - lines), curw, lines));
 
 	// Additionnaly, if statistics are enabled, draw a progression string
-	if (game.get_ibase()->get_display_flags() & Interactive_Base::dfShowStatistics) {
+	if (game.get_ibase()->get_display_flags() & InteractiveBase::dfShowStatistics) {
 		unsigned int percent = (100 * done / total);
 		m_construct_string =
 			(boost::format("<font color=%s>%s</font>")
@@ -619,7 +619,7 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 	Immovable & imm = ref_cast<Immovable, MapObject>(*get_object());
 
 	if (version >= 5) {
-		Player_Number pn = fr.Unsigned8();
+		PlayerNumber pn = fr.Unsigned8();
 		if (pn && pn <= MAX_PLAYERS) {
 			Player * plr = egbase().get_player(pn);
 			if (!plr)
@@ -713,14 +713,14 @@ void Immovable::Loader::load_finish()
 }
 
 void Immovable::save
-	(Editor_Game_Base & egbase, MapObjectSaver & mos, FileWrite & fw)
+	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	// This is in front because it is required to obtain the description
 	// necessary to create the Immovable
 	fw.Unsigned8(HeaderImmovable);
 	fw.Unsigned8(IMMOVABLE_SAVEGAME_VERSION);
 
-	if (const Tribe_Descr * const tribe = descr().get_owner_tribe())
+	if (const TribeDescr * const tribe = descr().get_owner_tribe())
 		fw.String(tribe->name());
 	else
 		fw.CString("world");
@@ -757,7 +757,7 @@ void Immovable::save
 }
 
 MapObject::Loader * Immovable::load
-	(Editor_Game_Base & egbase, MapObjectLoader & mol,
+	(EditorGameBase & egbase, MapObjectLoader & mol,
 	 FileRead & fr, const OneWorldLegacyLookupTable& lookup_table)
 {
 	std::unique_ptr<Loader> loader(new Loader);
@@ -774,7 +774,7 @@ MapObject::Loader * Immovable::load
 			if (owner_name != "world") { //  It is a tribe immovable.
 				egbase.manually_load_tribe(owner_name);
 
-				if (Tribe_Descr const * const tribe = egbase.get_tribe(owner_name)) {
+				if (TribeDescr const * const tribe = egbase.get_tribe(owner_name)) {
 					int32_t const idx = tribe->get_immovable_index(old_name);
 					if (idx != -1)
 						imm = new Immovable(*tribe->get_immovable_descr(idx));
@@ -938,7 +938,7 @@ void ImmovableProgram::ActTransform::execute
 	if (probability == 0 || game.logic_rand() % 256 < probability) {
 		Player * player = immovable.get_owner();
 		Coords const c = immovable.get_position();
-		Tribe_Descr const * const owner_tribe =
+		TribeDescr const * const owner_tribe =
 			tribe ? immovable.descr().get_owner_tribe() : nullptr;
 		immovable.remove(game); //  Now immovable is a dangling reference!
 
@@ -969,7 +969,7 @@ ImmovableProgram::ActGrow::ActGrow
 			case ':': {
 				*p = '\0';
 				++p;
-				Tribe_Descr const * const owner_tribe = descr.get_owner_tribe();
+				TribeDescr const * const owner_tribe = descr.get_owner_tribe();
 				if (!owner_tribe)
 					throw GameDataError
 						(
@@ -1006,7 +1006,7 @@ void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const 
 
 	if (logic_rand_as_double(&game) <
 	    probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains())) {
-		Tribe_Descr const* const owner_tribe = tribe ? descr.get_owner_tribe() : nullptr;
+		TribeDescr const* const owner_tribe = tribe ? descr.get_owner_tribe() : nullptr;
 		immovable.remove(game);  //  Now immovable is a dangling reference!
 		game.create_immovable(f, type_name, owner_tribe);
 	} else {
@@ -1054,7 +1054,7 @@ ImmovableProgram::ActSeed::ActSeed(char * parameters, ImmovableDescr & descr)
 			case ':': {
 				*p = '\0';
 				++p;
-				Tribe_Descr const * const owner_tribe = descr.get_owner_tribe();
+				TribeDescr const * const owner_tribe = descr.get_owner_tribe();
 				if (!owner_tribe)
 					throw GameDataError
 						(
@@ -1395,7 +1395,7 @@ void PlayerImmovable::set_owner(Player * const new_owner) {
 /**
  * Initialize the immovable.
 */
-void PlayerImmovable::init(Editor_Game_Base & egbase)
+void PlayerImmovable::init(EditorGameBase & egbase)
 {
 	BaseImmovable::init(egbase);
 }
@@ -1403,7 +1403,7 @@ void PlayerImmovable::init(Editor_Game_Base & egbase)
 /**
  * Release workers
 */
-void PlayerImmovable::cleanup(Editor_Game_Base & egbase)
+void PlayerImmovable::cleanup(EditorGameBase & egbase)
 {
 	while (!m_workers.empty())
 		m_workers[0]->set_location(nullptr);
@@ -1439,7 +1439,7 @@ void PlayerImmovable::receive_worker(Game &, Worker & worker)
 /**
  * Dump general information
  */
-void PlayerImmovable::log_general_info(const Editor_Game_Base & egbase)
+void PlayerImmovable::log_general_info(const EditorGameBase & egbase)
 {
 	BaseImmovable::log_general_info(egbase);
 
@@ -1465,7 +1465,7 @@ void PlayerImmovable::Loader::load(FileRead & fr)
 		uint8_t version = fr.Unsigned8();
 
 		if (1 <= version && version <= PLAYERIMMOVABLE_SAVEGAME_VERSION) {
-			Player_Number owner_number = fr.Unsigned8();
+			PlayerNumber owner_number = fr.Unsigned8();
 
 			if (!owner_number || owner_number > egbase().map().get_nrplayers())
 				throw GameDataError
@@ -1484,7 +1484,7 @@ void PlayerImmovable::Loader::load(FileRead & fr)
 	}
 }
 
-void PlayerImmovable::save(Editor_Game_Base & egbase, MapObjectSaver & mos, FileWrite & fw)
+void PlayerImmovable::save(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	BaseImmovable::save(egbase, mos, fw);
 

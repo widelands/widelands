@@ -39,7 +39,7 @@ GameRenderer::~GameRenderer()
 
 void GameRenderer::rendermap
 	(RenderTarget & dst,
-	 const Widelands::Editor_Game_Base &       egbase,
+	 const Widelands::EditorGameBase &       egbase,
 	 const Widelands::Player           &       player,
 	 const Point                       &       viewofs)
 {
@@ -53,7 +53,7 @@ void GameRenderer::rendermap
 
 void GameRenderer::rendermap
 	(RenderTarget & dst,
-	 const Widelands::Editor_Game_Base & egbase,
+	 const Widelands::EditorGameBase & egbase,
 	 const Point                       & viewofs)
 {
 	m_dst = &dst;
@@ -112,7 +112,7 @@ void GameRenderer::draw_objects()
 				pos[d] += m_dst_offset;
 			}
 
-			Player_Number owner_number[4];
+			PlayerNumber owner_number[4];
 			bool isborder[4];
 			Vision vision[4] = {2, 2, 2, 2};
 			for (uint32_t d = 0; d < 4; ++d)

@@ -35,14 +35,14 @@ struct Editor_Tool_Action {
 
 	uint32_t i;
 	Widelands::Map & map;
-	Widelands::Node_and_Triangle<> center;
+	Widelands::NodeAndTriangle<> center;
 	Editor_Interactive & parent;
 
 	Editor_Action_Args * args;
 
 	Editor_Tool_Action
 		(Editor_Tool & t, uint32_t ind,
-		Widelands::Map & m, Widelands::Node_and_Triangle<> c,
+		Widelands::Map & m, Widelands::NodeAndTriangle<> c,
 		Editor_Interactive & p, Editor_Action_Args nargs)
 			: tool(t), i(ind), map(m), center(c), parent(p)
 	{

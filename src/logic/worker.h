@@ -78,7 +78,7 @@ public:
 	virtual ~Worker();
 
 	Player & owner() const {assert(get_owner()); return *get_owner();}
-	PlayerImmovable * get_location(Editor_Game_Base & egbase) {
+	PlayerImmovable * get_location(EditorGameBase & egbase) {
 		return m_location.get(egbase);
 	}
 	OPtr<PlayerImmovable> get_location() const {return m_location;}
@@ -99,21 +99,21 @@ public:
 	void set_location(PlayerImmovable *);
 	void set_economy(Economy *);
 
-	WareInstance       * get_carried_ware(Editor_Game_Base       & egbase) {
+	WareInstance       * get_carried_ware(EditorGameBase       & egbase) {
 		return m_carried_ware.get(egbase);
 	}
-	WareInstance const * get_carried_ware(const Editor_Game_Base & egbase) const
+	WareInstance const * get_carried_ware(const EditorGameBase & egbase) const
 	{
 		return m_carried_ware.get(egbase);
 	}
-	void set_carried_ware(Editor_Game_Base &, WareInstance *);
-	WareInstance * fetch_carried_ware(Editor_Game_Base &);
+	void set_carried_ware(EditorGameBase &, WareInstance *);
+	WareInstance * fetch_carried_ware(EditorGameBase &);
 
 	void schedule_incorporate(Game &);
 	void incorporate(Game &);
 
-	void init(Editor_Game_Base &) override;
-	void cleanup(Editor_Game_Base &) override;
+	void init(EditorGameBase &) override;
+	void cleanup(EditorGameBase &) override;
 
 	bool wakeup_flag_capacity(Game &, Flag &);
 	bool wakeup_leave_building(Game &, Building &);
@@ -134,7 +134,7 @@ public:
 	bool needs_experience() const {return descr().get_needed_experience() != -1;}
 
 	// debug
-	void log_general_info(const Editor_Game_Base &) override;
+	void log_general_info(const EditorGameBase &) override;
 
 	// worker-specific tasks
 	void start_task_transfer(Game &, Transfer *);
@@ -170,8 +170,8 @@ public:
 
 protected:
 	virtual bool is_evict_allowed();
-	void draw_inner(const Editor_Game_Base &, RenderTarget &, const Point&) const;
-	void draw(const Editor_Game_Base &, RenderTarget &, const Point&) const override;
+	void draw_inner(const EditorGameBase &, RenderTarget &, const Point&) const;
+	void draw(const EditorGameBase &, RenderTarget &, const Point&) const override;
 	void init_auto_task(Game &) override;
 
 	bool does_carry_ware() {return m_carried_ware.is_set();}
@@ -272,12 +272,12 @@ protected:
 	virtual Loader * create_loader();
 
 public:
-	void save(Editor_Game_Base &, MapObjectSaver &, FileWrite &) override;
+	void save(EditorGameBase &, MapObjectSaver &, FileWrite &) override;
 	virtual void do_save
-		(Editor_Game_Base &, MapObjectSaver &, FileWrite &);
+		(EditorGameBase &, MapObjectSaver &, FileWrite &);
 
 	static MapObject::Loader * load
-		(Editor_Game_Base &, MapObjectLoader &, FileRead &);
+		(EditorGameBase &, MapObjectLoader &, FileRead &);
 };
 
 }

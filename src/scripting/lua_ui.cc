@@ -597,12 +597,12 @@ int L_MapView::set_buildhelp(lua_State * L) {
 		(RW) True if the census strings are shown on buildings, false otherwise
 */
 int L_MapView::get_census(lua_State * L) {
-	lua_pushboolean(L, get()->get_display_flag(Interactive_Base::dfShowCensus));
+	lua_pushboolean(L, get()->get_display_flag(InteractiveBase::dfShowCensus));
 	return 1;
 }
 int L_MapView::set_census(lua_State * L) {
 	get()->set_display_flag
-		(Interactive_Base::dfShowCensus, luaL_checkboolean(L, -1));
+		(InteractiveBase::dfShowCensus, luaL_checkboolean(L, -1));
 	return 0;
 }
 
@@ -614,12 +614,12 @@ int L_MapView::set_census(lua_State * L) {
 */
 int L_MapView::get_statistics(lua_State * L) {
 	lua_pushboolean
-		(L, get()->get_display_flag(Interactive_Base::dfShowStatistics));
+		(L, get()->get_display_flag(InteractiveBase::dfShowStatistics));
 	return 1;
 }
 int L_MapView::set_statistics(lua_State * L) {
 	get()->set_display_flag
-		(Interactive_Base::dfShowStatistics, luaL_checkboolean(L, -1));
+		(InteractiveBase::dfShowStatistics, luaL_checkboolean(L, -1));
 	return 0;
 }
 
@@ -666,7 +666,7 @@ int L_MapView::click(lua_State * L) {
 */
 // UNTESTED
 int L_MapView::start_road_building(lua_State * L) {
-	Interactive_Base * me = get();
+	InteractiveBase * me = get();
 	if (me->is_building_road())
 		report_error(L, "Already building road!");
 
@@ -688,7 +688,7 @@ int L_MapView::start_road_building(lua_State * L) {
 */
 // UNTESTED
 int L_MapView::abort_road_building(lua_State * /* L */) {
-	Interactive_Base * me = get();
+	InteractiveBase * me = get();
 	if (me->is_building_road())
 		me->abort_build_road();
 	return 0;

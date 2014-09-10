@@ -96,7 +96,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 
 	//  This must be after the command queue has been read.
 	log("Game: Parsing messages ... ");
-	Player_Number const nr_players = m_game.map().get_nrplayers();
+	PlayerNumber const nr_players = m_game.map().get_nrplayers();
 	iterate_players_existing_const(p, nr_players, m_game, player) {
 		const MessageQueue & messages = player->messages();
 		for (std::pair<Message_Id, Message *> temp_message : messages) {

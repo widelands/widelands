@@ -106,7 +106,7 @@ bool PortDock::get_passable() const
 }
 
 PortDock::PositionList PortDock::get_positions
-	(const Editor_Game_Base &) const
+	(const EditorGameBase &) const
 {
 	return m_dockpoints;
 }
@@ -154,12 +154,12 @@ void PortDock::set_economy(Economy * e)
 
 
 void PortDock::draw
-		(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&)
+		(const EditorGameBase &, RenderTarget &, const FCoords&, const Point&)
 {
 	// do nothing
 }
 
-void PortDock::init(Editor_Game_Base & egbase)
+void PortDock::init(EditorGameBase & egbase)
 {
 	PlayerImmovable::init(egbase);
 
@@ -174,7 +174,7 @@ void PortDock::init(Editor_Game_Base & egbase)
  * Create our initial singleton @ref Fleet. The fleet code ensures
  * that we merge with a larger fleet when possible.
  */
-void PortDock::init_fleet(Editor_Game_Base & egbase)
+void PortDock::init_fleet(EditorGameBase & egbase)
 {
 	Fleet * fleet = new Fleet(owner());
 	fleet->add_port(egbase, this);
@@ -182,7 +182,7 @@ void PortDock::init_fleet(Editor_Game_Base & egbase)
 	// Note: the Fleet calls our set_fleet automatically
 }
 
-void PortDock::cleanup(Editor_Game_Base & egbase)
+void PortDock::cleanup(EditorGameBase & egbase)
 {
 	if (egbase.objects().object_still_available(m_warehouse)) {
 		// Transfer all our wares into the warehouse.
@@ -344,7 +344,7 @@ void PortDock::ship_arrived(Game & game, Ship & ship)
 			// The expedition goods are now on the ship, so from now on it is independent from the port
 			// and thus we switch the port to normal, so we could even start a new expedition,
 			cancel_expedition(game);
-			if (upcast(Interactive_GameBase, igb, game.get_ibase()))
+			if (upcast(InteractiveGameBase, igb, game.get_ibase()))
 				ship.refresh_window(*igb);
 			return m_fleet->update(game);
 		}
@@ -446,7 +446,7 @@ void PortDock::cancel_expedition(Game & game) {
 }
 
 
-void PortDock::log_general_info(const Editor_Game_Base & egbase)
+void PortDock::log_general_info(const EditorGameBase & egbase)
 {
 	PlayerImmovable::log_general_info(egbase);
 
@@ -538,7 +538,7 @@ void PortDock::Loader::load_finish()
 }
 
 MapObject::Loader * PortDock::load
-	(Editor_Game_Base & egbase, MapObjectLoader & mol, FileRead & fr)
+	(EditorGameBase & egbase, MapObjectLoader & mol, FileRead & fr)
 {
 	std::unique_ptr<Loader> loader(new Loader);
 
@@ -558,7 +558,7 @@ MapObject::Loader * PortDock::load
 	return loader.release();
 }
 
-void PortDock::save(Editor_Game_Base & egbase, MapObjectSaver & mos, FileWrite & fw)
+void PortDock::save(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(HeaderPortDock);
 	fw.Unsigned8(PORTDOCK_SAVEGAME_VERSION);

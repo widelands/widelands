@@ -39,7 +39,7 @@
 #define PADDING 4
 
 GameSummaryScreen::GameSummaryScreen
-	(Interactive_GameBase * parent, UI::UniqueWindow::Registry * r)
+	(InteractiveGameBase * parent, UI::UniqueWindow::Registry * r)
 : UI::UniqueWindow(parent, "game_summary", r, 500, 400, _("Game over")),
 m_game(parent->game())
 {

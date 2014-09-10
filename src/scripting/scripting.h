@@ -33,7 +33,7 @@ class FileRead;
 class FileWrite;
 
 namespace Widelands {
-	class Editor_Game_Base;
+	class EditorGameBase;
 	class Game;
 	class MapObjectLoader;
 	struct MapObjectSaver;
@@ -62,7 +62,7 @@ protected:
 
 class LuaEditorInterface : public LuaInterface {
 public:
-	LuaEditorInterface(Widelands::Editor_Game_Base * g);
+	LuaEditorInterface(Widelands::EditorGameBase * g);
 	virtual ~LuaEditorInterface();
 
 private:

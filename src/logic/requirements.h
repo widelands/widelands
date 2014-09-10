@@ -34,7 +34,7 @@ class FileWrite;
 namespace Widelands {
 
 class MapObject;
-class Editor_Game_Base;
+class EditorGameBase;
 class MapObjectLoader;
 struct MapObjectSaver;
 
@@ -53,7 +53,7 @@ private:
 
 		virtual bool check(const MapObject &) const = 0;
 		virtual void write
-			(FileWrite &, Editor_Game_Base &, MapObjectSaver &) const
+			(FileWrite &, EditorGameBase &, MapObjectSaver &) const
 			= 0;
 		virtual const RequirementsStorage & storage() const = 0;
 	};
@@ -66,7 +66,7 @@ private:
 
 		void write
 			(FileWrite            & fw,
-			 Editor_Game_Base     & egbase,
+			 EditorGameBase     & egbase,
 			 MapObjectSaver & mos)
 			const override
 		{
@@ -89,8 +89,8 @@ public:
 	bool check(const MapObject &) const;
 
 	// For Save/Load Games
-	void Read (FileRead  &, Editor_Game_Base &, MapObjectLoader &);
-	void Write(FileWrite &, Editor_Game_Base &, MapObjectSaver  &) const;
+	void Read (FileRead  &, EditorGameBase &, MapObjectLoader &);
+	void Write(FileWrite &, EditorGameBase &, MapObjectSaver  &) const;
 
 private:
 	boost::shared_ptr<BaseCapsule> m;
@@ -114,13 +114,13 @@ enum {
 struct RequirementsStorage {
 	typedef
 		Requirements (*Reader)
-			(FileRead &, Editor_Game_Base &, MapObjectLoader &);
+			(FileRead &, EditorGameBase &, MapObjectLoader &);
 
 	RequirementsStorage(uint32_t _id, Reader reader);
 	uint32_t id() const;
 
 	static Requirements read
-		(FileRead &, Editor_Game_Base &, MapObjectLoader &);
+		(FileRead &, EditorGameBase &, MapObjectLoader &);
 
 private:
 	typedef std::map<uint32_t, RequirementsStorage *> StorageMap;
@@ -141,7 +141,7 @@ struct RequireOr {
 
 	bool check(const MapObject &) const;
 	void write
-		(FileWrite &, Editor_Game_Base & egbase, MapObjectSaver &) const;
+		(FileWrite &, EditorGameBase & egbase, MapObjectSaver &) const;
 
 	static const RequirementsStorage storage;
 
@@ -159,7 +159,7 @@ struct RequireAnd {
 
 	bool check(const MapObject &) const;
 	void write
-		(FileWrite &, Editor_Game_Base & egbase, MapObjectSaver &) const;
+		(FileWrite &, EditorGameBase & egbase, MapObjectSaver &) const;
 
 	static const RequirementsStorage storage;
 
@@ -179,7 +179,7 @@ struct RequireAttribute {
 	RequireAttribute() : at(atrTotal), min(SHRT_MIN), max(SHRT_MAX) {}
 	bool check(const MapObject &) const;
 	void write
-		(FileWrite &, Editor_Game_Base & egbase, MapObjectSaver &) const;
+		(FileWrite &, EditorGameBase & egbase, MapObjectSaver &) const;
 
 	static const RequirementsStorage storage;
 

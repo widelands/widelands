@@ -273,7 +273,7 @@ void GameMessageMenu::archive_or_restore()
 	Widelands::Game         &       game     = iplayer().game();
 	uint32_t                  const gametime = game.get_gametime();
 	Widelands::Player       &       player   = iplayer().player();
-	Widelands::Player_Number  const plnum    = player.player_number();
+	Widelands::PlayerNumber  const plnum    = player.player_number();
 	bool work_done = false;
 
 	switch (mode) {

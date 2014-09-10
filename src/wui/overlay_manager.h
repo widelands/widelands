@@ -149,13 +149,13 @@ private:
 
 	typedef std::map<const Widelands::Coords,
 	                 Registered_Road_Overlays,
-	                 Widelands::Coords::ordering_functor> Registered_Road_Overlays_Map;
+	                 Widelands::Coords::OrderingFunctor> Registered_Road_Overlays_Map;
 
 	Registered_Road_Overlays_Map m_road_overlays;
 
 	typedef std::multimap<const Widelands::Coords,
 	                      Registered_Overlays,
-	                      Widelands::Coords::ordering_functor> Registered_Overlays_Map;
+	                      Widelands::Coords::OrderingFunctor> Registered_Overlays_Map;
 
 	//  indexed by TCoords<>::TriangleIndex
 	Registered_Overlays_Map m_overlays[3];

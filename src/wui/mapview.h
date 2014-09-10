@@ -29,7 +29,7 @@
 #include "ui_basic/panel.h"
 
 class GameRenderer;
-class Interactive_Base;
+class InteractiveBase;
 
 /**
  * Implements a view of a map. It is used to render a valid map on the screen.
@@ -46,7 +46,7 @@ struct Map_View : public UI::Panel {
 	Map_View
 		(UI::Panel * const parent,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-		 Interactive_Base &);
+		 InteractiveBase &);
 	virtual ~Map_View();
 
 	void set_changeview(const ChangeViewFn & fn);
@@ -81,13 +81,13 @@ struct Map_View : public UI::Panel {
 	void need_complete_redraw() {m_complete_redraw_needed = true;}
 
 protected:
-	Interactive_Base & intbase() const {return m_intbase;}
+	InteractiveBase & intbase() const {return m_intbase;}
 
 private:
 	void stop_dragging();
 
 	std::unique_ptr<GameRenderer> m_renderer;
-	Interactive_Base & m_intbase;
+	InteractiveBase & m_intbase;
 	ChangeViewFn m_changeview;
 	Point              m_viewpoint;
 	bool               m_dragging;

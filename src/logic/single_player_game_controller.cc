@@ -31,7 +31,7 @@
 SinglePlayerGameController::SinglePlayerGameController
 	(Widelands::Game        &       game,
 	 bool                     const useai,
-	 Widelands::Player_Number const local)
+	 Widelands::PlayerNumber const local)
 	: m_game          (game),
 	m_useai           (useai),
 	m_lastframe       (WLApplication::get()->get_time()),
@@ -69,7 +69,7 @@ void SinglePlayerGameController::think()
 	m_time = m_game.get_gametime() + frametime;
 
 	if (m_useai && m_game.is_loaded()) {
-		const Widelands::Player_Number nr_players = m_game.map().get_nrplayers();
+		const Widelands::PlayerNumber nr_players = m_game.map().get_nrplayers();
 		iterate_players_existing(p, nr_players, m_game, plr)
 			if (p != m_local) {
 

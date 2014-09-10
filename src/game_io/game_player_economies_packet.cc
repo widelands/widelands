@@ -40,8 +40,8 @@ void GamePlayerEconomiesPacket::Read
 {
 	try {
 		const Map   &       map        = game.map();
-		Map_Index     const max_index  = map.max_index();
-		Player_Number const nr_players = map.get_nrplayers();
+		MapIndex     const max_index  = map.max_index();
+		PlayerNumber const nr_players = map.get_nrplayers();
 
 		FileRead fr;
 		fr.Open(fs, "binary/player_economies");
@@ -100,7 +100,7 @@ void GamePlayerEconomiesPacket::Write
 
 	const Map & map = game.map();
 	const Field & field_0 = map[0];
-	Player_Number const nr_players = map.get_nrplayers();
+	PlayerNumber const nr_players = map.get_nrplayers();
 	iterate_players_existing_const(p, nr_players, game, player) {
 		const Player::Economies & economies = player->m_economies;
 		for (Economy * temp_economy : economies) {

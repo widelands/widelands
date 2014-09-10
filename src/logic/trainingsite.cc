@@ -42,7 +42,7 @@ const uint32_t TrainingSite::training_state_multiplier = 12;
 TrainingSiteDescr::TrainingSiteDescr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
-	 const Tribe_Descr & _tribe, const World& world)
+	 const TribeDescr & _tribe, const World& world)
 	:
 	ProductionSiteDescr
 		(MapObjectType::TRAININGSITE, _name, _descname, directory, prof, global_s, _tribe, world),
@@ -188,7 +188,7 @@ TrainingSite::init_kick_state(const tAttribute & art, const TrainingSiteDescr & 
 /**
  * Setup the building and request soldiers
  */
-void TrainingSite::init(Editor_Game_Base & egbase)
+void TrainingSite::init(EditorGameBase & egbase)
 {
 	ProductionSite::init(egbase);
 
@@ -224,7 +224,7 @@ void TrainingSite::set_economy(Economy * e)
  *
  * Cancel all soldier requests and release all soldiers
  */
-void TrainingSite::cleanup(Editor_Game_Base & egbase)
+void TrainingSite::cleanup(EditorGameBase & egbase)
 {
 	delete m_soldier_request;
 	m_soldier_request = nullptr;
@@ -355,7 +355,7 @@ Takes one soldier and adds him to ours
 returns 0 on succes, -1 if there was no room for this soldier
 ===============
 */
-int TrainingSite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s) {
+int TrainingSite::incorporateSoldier(EditorGameBase & egbase, Soldier & s) {
 	if (s.get_location(egbase) != this) {
 		if (stationedSoldiers().size() + 1 > descr().get_max_number_of_soldiers())
 			return -1;
@@ -414,7 +414,7 @@ void TrainingSite::setSoldierCapacity(uint32_t const capacity) {
  */
 void TrainingSite::dropSoldier(Soldier & soldier)
 {
-	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
+	Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
 
 	std::vector<Soldier *>::iterator it =
 		std::find(m_soldiers.begin(), m_soldiers.end(), &soldier);

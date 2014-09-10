@@ -41,7 +41,7 @@ namespace Widelands {
 DismantleSiteDescr::DismantleSiteDescr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
-	 const Tribe_Descr & _tribe)
+	 const TribeDescr & _tribe)
 	:
 	BuildingDescr(MapObjectType::DISMANTLESITE, _name, _descname, directory, prof, global_s, _tribe)
 {
@@ -66,7 +66,7 @@ Partially_Finished_Building(gdescr)
 {}
 
 DismantleSite::DismantleSite
-	(const DismantleSiteDescr & gdescr, Editor_Game_Base & egbase, Coords const c,
+	(const DismantleSiteDescr & gdescr, EditorGameBase & egbase, Coords const c,
 	 Player & plr, bool loading, Building::FormerBuildings & former_buildings)
 :
 Partially_Finished_Building(gdescr)
@@ -75,7 +75,7 @@ Partially_Finished_Building(gdescr)
 	set_owner(&plr);
 
 	assert(!former_buildings.empty());
-	for (Building_Index former_idx : former_buildings) {
+	for (BuildingIndex former_idx : former_buildings) {
 		m_old_buildings.push_back(former_idx);
 	}
 	const BuildingDescr* cur_descr = owner().tribe().get_building_descr(m_old_buildings.back());
@@ -104,7 +104,7 @@ void DismantleSite::update_statistics_string(std::string* s)
 Initialize the construction site by starting orders
 ===============
 */
-void DismantleSite::init(Editor_Game_Base & egbase)
+void DismantleSite::init(EditorGameBase & egbase)
 {
 	Partially_Finished_Building::init(egbase);
 
@@ -132,7 +132,7 @@ void DismantleSite::count_returned_wares
 	(Building* building,
 	 std::map<Ware_Index, uint8_t>   & res)
 {
-	for (Building_Index former_idx : building->get_former_buildings()) {
+	for (BuildingIndex former_idx : building->get_former_buildings()) {
 		const std::map<Ware_Index, uint8_t> * return_wares;
 		const BuildingDescr* former_descr = building->descr().tribe().get_building_descr(former_idx);
 		if (former_idx != building->get_former_buildings().front()) {
@@ -233,7 +233,7 @@ Draw it.
 ===============
 */
 void DismantleSite::draw
-	(const Editor_Game_Base& game, RenderTarget& dst, const FCoords& coords, const Point& pos)
+	(const EditorGameBase& game, RenderTarget& dst, const FCoords& coords, const Point& pos)
 {
 	assert(0 <= game.get_gametime());
 	const uint32_t gametime = game.get_gametime();

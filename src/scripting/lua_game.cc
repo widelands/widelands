@@ -141,11 +141,11 @@ int L_Player::get_name(lua_State * L) {
 */
 int L_Player::get_allowed_buildings(lua_State * L) {
 	Player & p = get(L, get_egbase(L));
-	const Tribe_Descr & t = p.tribe();
+	const TribeDescr & t = p.tribe();
 
 	lua_newtable(L);
 	for
-		(Building_Index i = 0; i < t.get_nrbuildings(); ++i)
+		(BuildingIndex i = 0; i < t.get_nrbuildings(); ++i)
 	{
 		lua_pushstring(L, t.get_building_descr(i)->name().c_str());
 		lua_pushboolean(L, p.is_building_type_allowed(i));
@@ -462,9 +462,9 @@ int L_Player::message_box(lua_State * L) {
 		:rtype: :class:`bool`
 */
 int L_Player::sees_field(lua_State * L) {
-	Editor_Game_Base & egbase = get_egbase(L);
+	EditorGameBase & egbase = get_egbase(L);
 
-	Widelands::Map_Index const i =
+	Widelands::MapIndex const i =
 		(*get_user_class<L_Field>(L, 2))->fcoords(L).field - &egbase.map()[0];
 
 	lua_pushboolean(L, get(L, egbase).vision(i) > 1);
@@ -481,9 +481,9 @@ int L_Player::sees_field(lua_State * L) {
 		:rtype: :class:`bool`
 */
 int L_Player::seen_field(lua_State * L) {
-	Editor_Game_Base & egbase = get_egbase(L);
+	EditorGameBase & egbase = get_egbase(L);
 
-	Widelands::Map_Index const i =
+	Widelands::MapIndex const i =
 		(*get_user_class<L_Field>(L, 2))->fcoords(L).field - &egbase.map()[0];
 
 	lua_pushboolean(L, get(L, egbase).vision(i) >= 1);
@@ -570,7 +570,7 @@ int L_Player::add_objective(lua_State * L) {
 		:returns: :const:`nil`
 */
 int L_Player::reveal_fields(lua_State * L) {
-	Editor_Game_Base & egbase = get_egbase(L);
+	EditorGameBase & egbase = get_egbase(L);
 	Player & p = get(L, egbase);
 	Map & m = egbase.map();
 
@@ -599,7 +599,7 @@ int L_Player::reveal_fields(lua_State * L) {
 		:returns: :const:`nil`
 */
 int L_Player::hide_fields(lua_State * L) {
-	Editor_Game_Base & egbase = get_egbase(L);
+	EditorGameBase & egbase = get_egbase(L);
 	Player & p = get(L, egbase);
 	Map & m = egbase.map();
 
@@ -671,7 +671,7 @@ int L_Player::reveal_campaign(lua_State * L) {
 		:rtype: :class:`array` or :class:`table`
 */
 int L_Player::get_buildings(lua_State * L) {
-	Editor_Game_Base & egbase = get_egbase(L);
+	EditorGameBase & egbase = get_egbase(L);
 	Map * map = egbase.get_map();
 	Player & p = get(L, egbase);
 
@@ -688,13 +688,13 @@ int L_Player::get_buildings(lua_State * L) {
 		return_array = false;
 	}
 
-	std::vector<Building_Index> houses;
+	std::vector<BuildingIndex> houses;
 	m_parse_building_list(L, p.tribe(), houses);
 
 	lua_newtable(L);
 
 	uint32_t cidx = 1;
-	for (const Building_Index& house : houses) {
+	for (const BuildingIndex& house : houses) {
 		const std::vector<Widelands::Player::Building_Stats> & vec =
 			p.get_building_statistics(house);
 
@@ -737,10 +737,10 @@ int L_Player::get_buildings(lua_State * L) {
 // UNTESTED
 int L_Player::get_suitability(lua_State * L) {
 	Game & game = get_game(L);
-	const Tribe_Descr & tribe = get(L, game).tribe();
+	const TribeDescr & tribe = get(L, game).tribe();
 
 	const char * name = luaL_checkstring(L, 2);
-	Building_Index i = tribe.building_index(name);
+	BuildingIndex i = tribe.building_index(name);
 	if (i == INVALID_INDEX)
 		report_error(L, "Unknown building type: <%s>", name);
 
@@ -766,7 +766,7 @@ int L_Player::allow_workers(lua_State * L) {
 		report_error(L, "Argument must be <all>!");
 
 	Game & game = get_game(L);
-	const Tribe_Descr & tribe = get(L, game).tribe();
+	const TribeDescr & tribe = get(L, game).tribe();
 	Player & player = get(L, game);
 
 	const std::vector<Ware_Index> & worker_types_without_cost =
@@ -831,14 +831,14 @@ int L_Player::switchplayer(lua_State * L) {
  ==========================================================
  */
 void L_Player::m_parse_building_list
-	(lua_State * L, const Tribe_Descr & tribe, std::vector<Building_Index> & rv)
+	(lua_State * L, const TribeDescr & tribe, std::vector<BuildingIndex> & rv)
 {
 	if (lua_isstring(L, -1)) {
 		std::string opt = luaL_checkstring(L, -1);
 		if (opt != "all")
 			report_error(L, "'%s' was not understood as argument!", opt.c_str());
 		for
-			(Building_Index i = 0;
+			(BuildingIndex i = 0;
 			 i < tribe.get_nrbuildings(); ++i)
 				rv.push_back(i);
 	} else {
@@ -848,7 +848,7 @@ void L_Player::m_parse_building_list
 		lua_pushnil(L);
 		while (lua_next(L, -2) != 0) {
 			const char * name = luaL_checkstring(L, -1);
-			Building_Index i = tribe.building_index(name);
+			BuildingIndex i = tribe.building_index(name);
 			if (i == INVALID_INDEX)
 				report_error(L, "Unknown building type: '%s'", name);
 
@@ -862,10 +862,10 @@ int L_Player::m_allow_forbid_buildings(lua_State * L, bool allow)
 {
 	Player & p = get(L, get_egbase(L));
 
-	std::vector<Building_Index> houses;
+	std::vector<BuildingIndex> houses;
 	m_parse_building_list(L, p.tribe(), houses);
 
-	for (const Building_Index& house : houses) {
+	for (const BuildingIndex& house : houses) {
 		p.allow_building_type(house, allow);
 	}
 	return 0;

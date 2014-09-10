@@ -49,13 +49,13 @@ struct ShippingItem {
 	// Unboxes the item that is shipped which might be either a ware or a
 	// worker. It is safe to pass nullptr for 'ware' or 'worker' in case you are
 	// only interested in the ware if it is the one or the other.
-	void get(Editor_Game_Base& game, WareInstance** ware, Worker** worker) const;
+	void get(EditorGameBase& game, WareInstance** ware, Worker** worker) const;
 
 	void set_economy(Game &, Economy * e);
 	PortDock * get_destination(Game &);
 	void schedule_update(Game &, int32_t delay);
 
-	void remove(Editor_Game_Base &);
+	void remove(EditorGameBase &);
 
 	struct Loader {
 		void load(FileRead & fr);
@@ -65,7 +65,7 @@ struct ShippingItem {
 		uint32_t m_serial;
 	};
 
-	void save(Editor_Game_Base & egbase, MapObjectSaver & mos, FileWrite & fw);
+	void save(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw);
 
 private:
 	friend class PortDock;

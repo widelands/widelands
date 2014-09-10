@@ -47,14 +47,14 @@ struct MapObjectDebugPanel
 {
 	MapObjectDebugPanel
 		(UI::Panel                   & parent,
-		 const Widelands::Editor_Game_Base &,
+		 const Widelands::EditorGameBase &,
 		 Widelands::MapObject       &);
 	~MapObjectDebugPanel();
 
 	void log(std::string str) override;
 
 private:
-	const Widelands::Editor_Game_Base & m_egbase;
+	const Widelands::EditorGameBase & m_egbase;
 	Widelands::Object_Ptr         m_object;
 
 	UI::Multiline_Textarea        m_log;
@@ -63,7 +63,7 @@ private:
 
 MapObjectDebugPanel::MapObjectDebugPanel
 	(UI::Panel                   & parent,
-	 const Widelands::Editor_Game_Base & egbase,
+	 const Widelands::EditorGameBase & egbase,
 	 Widelands::MapObject       & obj)
 :
 UI::Panel(&parent, 0, 0, 350, 200),
@@ -105,7 +105,7 @@ building_ui.cc).
 ===============
 */
 void Widelands::MapObject::create_debug_panels
-	(const Widelands::Editor_Game_Base & egbase, UI::Tab_Panel & tabs)
+	(const Widelands::EditorGameBase & egbase, UI::Tab_Panel & tabs)
 {
 	tabs.add
 		("debug", g_gr->images().get("pics/menu_debug.png"),
@@ -129,10 +129,10 @@ that are provided by the map object itself via the virtual function
 collect_debug_tabs().
 */
 struct MapObjectDebugWindow : public UI::Window {
-	MapObjectDebugWindow(Interactive_Base & parent, Widelands::MapObject &);
+	MapObjectDebugWindow(InteractiveBase & parent, Widelands::MapObject &);
 
-	Interactive_Base & ibase() {
-		return ref_cast<Interactive_Base, UI::Panel>(*get_parent());
+	InteractiveBase & ibase() {
+		return ref_cast<InteractiveBase, UI::Panel>(*get_parent());
 	}
 
 	void think() override;
@@ -146,7 +146,7 @@ private:
 
 
 MapObjectDebugWindow::MapObjectDebugWindow
-	(Interactive_Base & parent, Widelands::MapObject & obj)
+	(InteractiveBase & parent, Widelands::MapObject & obj)
 	:
 	UI::Window        (&parent, "map_object_debug", 0, 0, 100, 100, ""),
 	m_log_general_info(true),
@@ -174,7 +174,7 @@ Remove self when the object disappears.
 */
 void MapObjectDebugWindow::think()
 {
-	Widelands::Editor_Game_Base & egbase = ibase().egbase();
+	Widelands::EditorGameBase & egbase = ibase().egbase();
 	if (Widelands::MapObject * const obj = m_object.get(egbase)) {
 		if (m_log_general_info)  {
 			obj->log_general_info(egbase);
@@ -199,7 +199,7 @@ Show debug window for a MapObject
 ===============
 */
 void show_mapobject_debug
-	(Interactive_Base & parent, Widelands::MapObject & obj)
+	(InteractiveBase & parent, Widelands::MapObject & obj)
 {
 	new MapObjectDebugWindow(parent, obj);
 }
@@ -214,10 +214,10 @@ FieldDebugWindow
 */
 
 struct FieldDebugWindow : public UI::Window {
-	FieldDebugWindow(Interactive_Base & parent, Widelands::Coords);
+	FieldDebugWindow(InteractiveBase & parent, Widelands::Coords);
 
-	Interactive_Base & ibase() {
-		return ref_cast<Interactive_Base, UI::Panel>(*get_parent());
+	InteractiveBase & ibase() {
+		return ref_cast<InteractiveBase, UI::Panel>(*get_parent());
 	}
 
 	void think() override;
@@ -236,7 +236,7 @@ private:
 
 
 FieldDebugWindow::FieldDebugWindow
-	(Interactive_Base & parent, Widelands::Coords const coords)
+	(InteractiveBase & parent, Widelands::Coords const coords)
 :
 	UI::Window(&parent, "field_debug", 0, 60, 214, 400, _("Debug Field")),
 	m_map     (parent.egbase().map()),
@@ -279,11 +279,11 @@ void FieldDebugWindow::think()
 	UI::Window::think();
 
 	// Select information about the field itself
-	const Widelands::Editor_Game_Base & egbase =
-		ref_cast<Interactive_Base const, UI::Panel const>(*get_parent())
+	const Widelands::EditorGameBase & egbase =
+		ref_cast<InteractiveBase const, UI::Panel const>(*get_parent())
 		.egbase();
 	{
-		Widelands::Player_Number const owner = m_coords.field->get_owned_by();
+		Widelands::PlayerNumber const owner = m_coords.field->get_owned_by();
 		snprintf
 			(buffer, sizeof(buffer), "(%i, %i)\nheight: %u\nowner: %u\n",
 			 m_coords.x, m_coords.y, m_coords.field->get_height(), owner);
@@ -309,8 +309,8 @@ void FieldDebugWindow::think()
 		str += "is walkable\n";
 	if (m_coords.field->nodecaps() & Widelands::MOVECAPS_SWIM)
 		str += "is swimable\n";
-	Widelands::Map_Index const i = m_coords.field - &m_map[0];
-	Widelands::Player_Number const nr_players = m_map.get_nrplayers();
+	Widelands::MapIndex const i = m_coords.field - &m_map[0];
+	Widelands::PlayerNumber const nr_players = m_map.get_nrplayers();
 	iterate_players_existing_const(plnum, nr_players, egbase, player) {
 		const Widelands::Player::Field & player_field = player->fields()[i];
 		snprintf(buffer, sizeof(buffer), "Player %u:\n", plnum);
@@ -479,7 +479,7 @@ Open a debug window for the given field.
 ===============
 */
 void show_field_debug
-	(Interactive_Base & parent, Widelands::Coords const coords)
+	(InteractiveBase & parent, Widelands::Coords const coords)
 {
 	new FieldDebugWindow(parent, coords);
 }

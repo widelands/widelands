@@ -42,7 +42,7 @@ MapPlayerNamesAndTribesPacket::
  */
 void MapPlayerNamesAndTribesPacket::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      &       egbase,
+	 EditorGameBase      &       egbase,
 	 bool                    const skip,
 	 MapObjectLoader &)
 {
@@ -63,7 +63,7 @@ void MapPlayerNamesAndTribesPacket::Pre_Read
 		int32_t const packet_version =
 			prof.get_safe_section("global").get_int("packet_version");
 		if (packet_version <= CURRENT_PACKET_VERSION) {
-			Player_Number const nr_players = map->get_nrplayers();
+			PlayerNumber const nr_players = map->get_nrplayers();
 			iterate_player_numbers(p, nr_players) {
 				char buffer[10];
 				snprintf(buffer, sizeof(buffer), "player_%u", p);
@@ -83,7 +83,7 @@ void MapPlayerNamesAndTribesPacket::Pre_Read
 
 
 void MapPlayerNamesAndTribesPacket::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, MapObjectSaver &)
+	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
 {
 	Profile prof;
 
@@ -91,7 +91,7 @@ void MapPlayerNamesAndTribesPacket::Write
 		("packet_version", CURRENT_PACKET_VERSION);
 
 	const Map & map = egbase.map();
-	Player_Number const nr_players = map.get_nrplayers();
+	PlayerNumber const nr_players = map.get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
 		char buffer[10];
 		snprintf(buffer, sizeof(buffer), "player_%u", p);

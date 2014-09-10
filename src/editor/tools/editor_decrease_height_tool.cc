@@ -29,7 +29,7 @@
 /// Decreases the heights by a value. Chages surrounding nodes if necessary.
 int32_t Editor_Decrease_Height_Tool::handle_click_impl(Widelands::Map& map,
                                                        const Widelands::World& world,
-                                                       Widelands::Node_and_Triangle<> center,
+                                                       Widelands::NodeAndTriangle<> center,
                                                        Editor_Interactive& /* parent */,
                                                        Editor_Action_Args& args) {
 	if (args.origHights.empty()) {
@@ -50,7 +50,7 @@ int32_t Editor_Decrease_Height_Tool::handle_click_impl(Widelands::Map& map,
 int32_t Editor_Decrease_Height_Tool::handle_undo_impl
 	(Widelands::Map & map,
 	 const Widelands::World& world,
-	Widelands::Node_and_Triangle<> center,
+	Widelands::NodeAndTriangle<> center,
 	Editor_Interactive & /* parent */,
 	Editor_Action_Args & args)
 {

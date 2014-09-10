@@ -68,7 +68,7 @@ namespace Widelands {
 
 void MapBuildingdataPacket::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      &       egbase,
+	 EditorGameBase      &       egbase,
 	 bool                    const skip,
 	 MapObjectLoader &       mol)
 {
@@ -158,7 +158,7 @@ void MapBuildingdataPacket::Read
 						// will be built after other data are loaded, see below.
 						// read_formerbuildings_v2()
 						while (fr.Unsigned8()) {
-							Building_Index oldidx = building.descr().tribe().safe_building_index(fr.CString());
+							BuildingIndex oldidx = building.descr().tribe().safe_building_index(fr.CString());
 							building.m_old_buildings.push_back(oldidx);
 						}
 						// Only construction sites may have an empty list
@@ -198,38 +198,38 @@ void MapBuildingdataPacket::Read
 						read_constructionsite
 							(*constructionsite,
 							 fr,
-							 ref_cast<Game, Editor_Game_Base>(egbase),
+							 ref_cast<Game, EditorGameBase>(egbase),
 							 mol);
 					} else if (upcast(DismantleSite, dms, &building)) {
 						read_dismantlesite
 							(*dms,
 							 fr,
-							 ref_cast<Game, Editor_Game_Base>(egbase),
+							 ref_cast<Game, EditorGameBase>(egbase),
 							 mol);
 					} else if (upcast(Warehouse, warehouse, &building)) {
 						read_warehouse
 							(*warehouse,
 							 fr,
-							 ref_cast<Game, Editor_Game_Base>(egbase),
+							 ref_cast<Game, EditorGameBase>(egbase),
 							 mol);
 					} else if (upcast(ProductionSite, productionsite, &building)) {
 						if (upcast(MilitarySite, militarysite, productionsite)) {
 							read_militarysite
 								(*militarysite,
 								 fr,
-								 ref_cast<Game, Editor_Game_Base>(egbase),
+								 ref_cast<Game, EditorGameBase>(egbase),
 								 mol);
 						} else if (upcast(TrainingSite, trainingsite, productionsite)) {
 							read_trainingsite
 								(*trainingsite,
 								 fr,
-								 ref_cast<Game, Editor_Game_Base>(egbase),
+								 ref_cast<Game, EditorGameBase>(egbase),
 								 mol);
 						} else {
 							read_productionsite
 								(*productionsite,
 								 fr,
-								 ref_cast<Game, Editor_Game_Base>(egbase),
+								 ref_cast<Game, EditorGameBase>(egbase),
 								 mol);
 						}
 					} else {
@@ -239,7 +239,7 @@ void MapBuildingdataPacket::Read
 					}
 					if (packet_version < 3) {
 						read_formerbuildings_v2
-							(building, fr, ref_cast<Game, Editor_Game_Base>(egbase), mol);
+							(building, fr, ref_cast<Game, EditorGameBase>(egbase), mol);
 					}
 
 					mol.mark_object_as_loaded(building);
@@ -258,8 +258,8 @@ void MapBuildingdataPacket::Read
 void MapBuildingdataPacket::read_formerbuildings_v2
 	(Building& b, FileRead&, Game&, MapObjectLoader&)
 {
-	const Tribe_Descr & t = b.descr().tribe();
-	Building_Index b_idx = t.building_index(b.descr().name());
+	const TribeDescr & t = b.descr().tribe();
+	BuildingIndex b_idx = t.building_index(b.descr().name());
 	if (is_a(ProductionSite, &b)) {
 		assert(b.m_old_buildings.empty());
 		b.m_old_buildings.push_back(b_idx);
@@ -279,12 +279,12 @@ void MapBuildingdataPacket::read_formerbuildings_v2
 
 	// iterate through all buildings to find first predecessor
 	for (;;) {
-		Building_Index former_idx = b.m_old_buildings.front();
+		BuildingIndex former_idx = b.m_old_buildings.front();
 		const BuildingDescr * oldest = t.get_building_descr(former_idx);
 		if (!oldest->is_enhanced()) {
 			break;
 		}
-		for (Building_Index i = 0; i < t.get_nrbuildings(); ++i) {
+		for (BuildingIndex i = 0; i < t.get_nrbuildings(); ++i) {
 			BuildingDescr const * ob = t.get_building_descr(i);
 			if (ob->enhancement() == former_idx) {
 				b.m_old_buildings.insert(b.m_old_buildings.begin(), i);
@@ -304,7 +304,7 @@ void MapBuildingdataPacket::read_partially_finished_building
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CURRENT_PARTIALLYFB_PACKET_VERSION) {
-			const Tribe_Descr & tribe = pfb.descr().tribe();
+			const TribeDescr & tribe = pfb.descr().tribe();
 			pfb.m_building =
 				tribe.get_building_descr(tribe.safe_building_index(fr.CString()));
 
@@ -370,7 +370,7 @@ void MapBuildingdataPacket::read_constructionsite
 		if (packet_version >= 2) {
 			read_partially_finished_building(constructionsite, fr, game, mol);
 
-			const Tribe_Descr & tribe = constructionsite.descr().tribe();
+			const TribeDescr & tribe = constructionsite.descr().tribe();
 
 			for (ConstructionSite::Wares::iterator wares_iter = constructionsite.m_wares.begin();
 				  wares_iter != constructionsite.m_wares.end();
@@ -382,7 +382,7 @@ void MapBuildingdataPacket::read_constructionsite
 
 			if (packet_version <= 2) {
 				if (fr.Unsigned8()) {
-					Building_Index idx = tribe.safe_building_index(fr.CString());
+					BuildingIndex idx = tribe.safe_building_index(fr.CString());
 					constructionsite.m_old_buildings.push_back(idx);
 				}
 			}
@@ -402,11 +402,11 @@ void MapBuildingdataPacket::read_constructionsite_v1
 	 Game                  & game,
 	 MapObjectLoader & mol)
 {
-	const Tribe_Descr & tribe = constructionsite.descr().tribe();
+	const TribeDescr & tribe = constructionsite.descr().tribe();
 	constructionsite.m_building =
 		tribe.get_building_descr(tribe.safe_building_index(fr.CString()));
 	if (fr.Unsigned8()) {
-		Building_Index bidx = tribe.safe_building_index(fr.CString());
+		BuildingIndex bidx = tribe.safe_building_index(fr.CString());
 		constructionsite.m_old_buildings.push_back(bidx);
 	}
 
@@ -498,7 +498,7 @@ void MapBuildingdataPacket::read_warehouse
 				(nr_tribe_workers, Warehouse::SP_Normal);
 			//log("Reading warehouse stuff for %p\n", &warehouse);
 			//  supply
-			const Tribe_Descr & tribe = warehouse.descr().tribe();
+			const TribeDescr & tribe = warehouse.descr().tribe();
 			while (fr.Unsigned8()) {
 				Ware_Index const id = tribe.ware_index(fr.CString());
 				if (packet_version >= 5) {
@@ -1126,7 +1126,7 @@ void MapBuildingdataPacket::read_trainingsite
 
 
 void MapBuildingdataPacket::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, MapObjectSaver & mos)
+	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	FileWrite fw;
 
@@ -1136,8 +1136,8 @@ void MapBuildingdataPacket::Write
 	// Walk the map again
 	Map & map = egbase.map();
 	const uint32_t mapwidth = map.get_width();
-	Map_Index const max_index = map.max_index();
-	for (Map_Index i = 0; i < max_index; ++i)
+	MapIndex const max_index = map.max_index();
+	for (MapIndex i = 0; i < max_index; ++i)
 		if (upcast(Building const, building, map[i].get_immovable())) {
 			assert(mos.is_object_known(*building));
 
@@ -1175,8 +1175,8 @@ void MapBuildingdataPacket::Write
 				fw.Unsigned32(0);
 			}
 			{
-				const Tribe_Descr& td = building->descr().tribe();
-				for (Building_Index b_idx : building->m_old_buildings) {
+				const TribeDescr& td = building->descr().tribe();
+				for (BuildingIndex b_idx : building->m_old_buildings) {
 					const BuildingDescr* b_descr = td.get_building_descr(b_idx);
 					fw.Unsigned8(1);
 					fw.String(b_descr->name());
@@ -1194,38 +1194,38 @@ void MapBuildingdataPacket::Write
 				write_constructionsite
 					(*constructionsite,
 					 fw,
-					 ref_cast<Game, Editor_Game_Base>(egbase),
+					 ref_cast<Game, EditorGameBase>(egbase),
 					 mos);
 			else if (upcast(DismantleSite const, dms, building))
 				write_dismantlesite
 					(*dms,
 					 fw,
-					 ref_cast<Game, Editor_Game_Base>(egbase),
+					 ref_cast<Game, EditorGameBase>(egbase),
 					 mos);
 			else if (upcast(Warehouse const, warehouse, building))
 				write_warehouse
 					(*warehouse,
 					 fw,
-					 ref_cast<Game, Editor_Game_Base>(egbase),
+					 ref_cast<Game, EditorGameBase>(egbase),
 					 mos);
 			else if (upcast(ProductionSite const, productionsite, building)) {
 				if (upcast(MilitarySite const, militarysite, productionsite))
 					write_militarysite
 						(*militarysite,
 						 fw,
-						 ref_cast<Game, Editor_Game_Base>(egbase),
+						 ref_cast<Game, EditorGameBase>(egbase),
 						 mos);
 				else if (upcast(TrainingSite const, trainingsite, productionsite))
 					write_trainingsite
 						(*trainingsite,
 						 fw,
-						 ref_cast<Game, Editor_Game_Base>(egbase),
+						 ref_cast<Game, EditorGameBase>(egbase),
 						 mos);
 				else
 					write_productionsite
 						(*productionsite,
 						 fw,
-						 ref_cast<Game, Editor_Game_Base>(egbase),
+						 ref_cast<Game, EditorGameBase>(egbase),
 						 mos);
 			} else {
 				assert(false);
@@ -1313,7 +1313,7 @@ void MapBuildingdataPacket::write_warehouse
 	fw.Unsigned16(CURRENT_WAREHOUSE_PACKET_VERSION);
 
 	//  supply
-	const Tribe_Descr & tribe = warehouse.descr().tribe();
+	const TribeDescr & tribe = warehouse.descr().tribe();
 	const WareList & wares = warehouse.m_supply->get_wares();
 	for (Ware_Index i = 0; i < wares.get_nrwareids  (); ++i) {
 		fw.Unsigned8(1);

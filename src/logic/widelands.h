@@ -36,10 +36,10 @@ typedef uint8_t Tribe_Index;
 
 typedef uint16_t Military_Influence;
 
-typedef uint8_t  Player_Number; /// 5 bits used, so 0 .. 31
-inline Player_Number Neutral() {return 0;}
+typedef uint8_t  PlayerNumber; /// 5 bits used, so 0 .. 31
+inline PlayerNumber Neutral() {return 0;}
 #define iterate_player_numbers(p, nr_players) \
-   for (Widelands::Player_Number p = 1; p < nr_players + 1; ++p)
+	for (Widelands::PlayerNumber p = 1; p < nr_players + 1; ++p)
 
 /**
  * Every player has a team number. Team number 0 is special,
@@ -65,7 +65,7 @@ typedef uint32_t Serial; /// Serial number for MapObject.
 
 constexpr uint8_t INVALID_INDEX = std::numeric_limits<uint8_t>::max();
 typedef uint8_t Ware_Index;
-typedef uint8_t Building_Index;
+typedef uint8_t BuildingIndex;
 typedef uint8_t Direction;
 
 struct Soldier_Strength {

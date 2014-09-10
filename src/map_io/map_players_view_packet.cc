@@ -234,7 +234,7 @@ struct BuildingNonexistent : public FileRead::DataError {
 //
 // \throws Immovable_Nonexistent if there is no imovable type with that
 // name in the tribe.
-const ImmovableDescr& ReadImmovable_Type(StreamRead* fr, const Tribe_Descr& tribe) {
+const ImmovableDescr& ReadImmovable_Type(StreamRead* fr, const TribeDescr& tribe) {
 	std::string name = fr->CString();
 	int32_t const index = tribe.get_immovable_index(name);
 	if (index == -1)
@@ -247,9 +247,9 @@ const ImmovableDescr& ReadImmovable_Type(StreamRead* fr, const Tribe_Descr& trib
 // \returns a pointer to the tribe description.
 //
 // \throws Tribe_Nonexistent if the there is no tribe with that name.
-const Tribe_Descr& ReadTribe(StreamRead* fr, const Editor_Game_Base& egbase) {
+const TribeDescr& ReadTribe(StreamRead* fr, const EditorGameBase& egbase) {
 	char const* const name = fr->CString();
-	if (Tribe_Descr const* const result = egbase.get_tribe(name))
+	if (TribeDescr const* const result = egbase.get_tribe(name))
 		return *result;
 	else
 		throw TribeNonexistent(name);
@@ -262,10 +262,10 @@ const Tribe_Descr& ReadTribe(StreamRead* fr, const Editor_Game_Base& egbase) {
 //
 // \throws Tribe_Nonexistent if the name is not empty and there is no tribe
 // with that name.
-Tribe_Descr const* ReadTribe_allow_null(StreamRead* fr, const Editor_Game_Base& egbase) {
+TribeDescr const* ReadTribe_allow_null(StreamRead* fr, const EditorGameBase& egbase) {
 	char const* const name = fr->CString();
 	if (*name)
-		if (Tribe_Descr const* const result = egbase.get_tribe(name))
+		if (TribeDescr const* const result = egbase.get_tribe(name))
 			return result;
 		else
 			throw TribeNonexistent(name);
@@ -287,12 +287,12 @@ const ImmovableDescr& ReadImmovable_Type(StreamRead* fr, const World& world) {
 	return *world.get_immovable_descr(index);
 }
 
-// Calls Tribe_allow_null(const Editor_Game_Base &). If it returns a tribe,
-// Immovable_Type(const Tribe_Descr &) is called with that tribe and the
+// Calls Tribe_allow_null(const EditorGameBase &). If it returns a tribe,
+// Immovable_Type(const TribeDescr &) is called with that tribe and the
 // result is returned. Otherwise Immovable_Type(const World &) is called
 // and the result is returned.
-const ImmovableDescr& ReadImmovable_Type(StreamRead* fr, const Editor_Game_Base& egbase) {
-	if (Tribe_Descr const* const tribe = ReadTribe_allow_null(fr, egbase))
+const ImmovableDescr& ReadImmovable_Type(StreamRead* fr, const EditorGameBase& egbase) {
+	if (TribeDescr const* const tribe = ReadTribe_allow_null(fr, egbase))
 		return ReadImmovable_Type(fr, *tribe);
 	else
 		return ReadImmovable_Type(fr, egbase.world());
@@ -303,29 +303,29 @@ const ImmovableDescr& ReadImmovable_Type(StreamRead* fr, const Editor_Game_Base&
 // \returns a reference to the building type description.
 //
 // \throws Building_Nonexistent if there is no building type with that
-const BuildingDescr& ReadBuilding_Type(StreamRead* fr, const Tribe_Descr& tribe) {
+const BuildingDescr& ReadBuilding_Type(StreamRead* fr, const TribeDescr& tribe) {
 	char const* const name = fr->CString();
-	Building_Index const index = tribe.building_index(name);
+	BuildingIndex const index = tribe.building_index(name);
 	if (index == INVALID_INDEX)
 		throw BuildingNonexistent(tribe.name(), name);
 	return *tribe.get_building_descr(index);
 }
 
-// Calls ReadTribe(const Editor_Game_Base &) to read a tribe and then reads a
+// Calls ReadTribe(const EditorGameBase &) to read a tribe and then reads a
 // CString and interprets it as the name of a building type in that tribe.
 //
 // \returns a reference to the building type description.
-const BuildingDescr& ReadBuilding_Type(StreamRead* fr, const Editor_Game_Base& egbase) {
+const BuildingDescr& ReadBuilding_Type(StreamRead* fr, const EditorGameBase& egbase) {
 	return ReadBuilding_Type(fr, ReadTribe(fr, egbase));
 }
 
 // Encode a tribe into 'wr'.
-void WriteTribe(StreamWrite* wr, const Tribe_Descr& tribe) {
+void WriteTribe(StreamWrite* wr, const TribeDescr& tribe) {
 	wr->String(tribe.name());
 }
 
 // Encode a tribe into 'wr'.
-void WriteTribe(StreamWrite* wr, Tribe_Descr const* tribe) {
+void WriteTribe(StreamWrite* wr, TribeDescr const* tribe) {
 	wr->CString(tribe ? tribe->name().c_str() : "");
 }
 
@@ -344,7 +344,7 @@ void WriteBuilding_Type(StreamWrite* wr, const BuildingDescr& building) {
 }  // namespace
 
 inline static MapObjectData read_unseen_immovable
-	(const Editor_Game_Base & egbase,
+	(const EditorGameBase & egbase,
 	 uint8_t                & immovable_kind,
 	 FileRead               & immovables_file,
 	 uint8_t                & version
@@ -387,7 +387,7 @@ inline static MapObjectData read_unseen_immovable
 
 void MapPlayersViewPacket::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      &       egbase,
+	 EditorGameBase      &       egbase,
 	 bool                    const skip,
 	 MapObjectLoader &)
 
@@ -396,10 +396,10 @@ void MapPlayersViewPacket::Read
 		return;
 
 	const Map & map = egbase.map();
-	const X_Coordinate mapwidth  = map.get_width ();
-	const Y_Coordinate mapheight = map.get_height();
+	const XCoordinate mapwidth  = map.get_width ();
+	const YCoordinate mapheight = map.get_height();
 	Field & first_field = map[0];
-	const Player_Number nr_players = map.get_nrplayers();
+	const PlayerNumber nr_players = map.get_nrplayers();
 	iterate_players_existing_const(plnum, nr_players, egbase, player) {
 		Player::Field * const player_fields = player->m_fields;
 		uint32_t const gametime = egbase.get_gametime();
@@ -427,8 +427,8 @@ void MapPlayersViewPacket::Read
 				 ++first_in_row.y, first_in_row.field += mapwidth)
 			{
 				FCoords  r = first_in_row, br = map.bl_n(r);
-				Map_Index  r_index =  r.field - &first_field;
-				Map_Index br_index = br.field - &first_field;
+				MapIndex  r_index =  r.field - &first_field;
+				MapIndex br_index = br.field - &first_field;
 				Player::Field *  r_player_field = player_fields +  r_index;
 				Player::Field * br_player_field = player_fields + br_index;
 				Vision  r_vision =  r_player_field->vision;
@@ -520,7 +520,7 @@ void MapPlayersViewPacket::Read
 				 ++first_in_row.y, first_in_row.field += mapwidth)
 			{
 				FCoords r = first_in_row;
-				Map_Index r_index = r.field - &first_field;
+				MapIndex r_index = r.field - &first_field;
 				Player::Field * r_player_field = player_fields + r_index;
 				do {
 					Player::Field & f_player_field = *r_player_field;
@@ -616,8 +616,8 @@ void MapPlayersViewPacket::Read
 			 ++first_in_row.y, first_in_row.field += mapwidth)
 		{
 			FCoords  r = first_in_row, br = map.bl_n(r);
-			Map_Index  r_index =  r.field - &first_field;
-			Map_Index br_index = br.field - &first_field;
+			MapIndex  r_index =  r.field - &first_field;
+			MapIndex br_index = br.field - &first_field;
 			Player::Field *  r_player_field = player_fields +  r_index;
 			Player::Field * br_player_field = player_fields + br_index;
 			Vision  r_vision =  r_player_field->vision;
@@ -641,7 +641,7 @@ void MapPlayersViewPacket::Read
 				//  Store the player's view of roads and ownership in these
 				//  temporary variables and save it in the player when set.
 				uint8_t         roads = 0;
-				Player_Number owner = 0;
+				PlayerNumber owner = 0;
 
 				switch (f_vision) { //  owner and map_object_descr
 				case 0:
@@ -1041,16 +1041,16 @@ inline static void write_unseen_immovable
    (file).Write(fs, filename);                                                \
 
 void MapPlayersViewPacket::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, MapObjectSaver &)
+	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
 {
 	fs.EnsureDirectoryExists("player");
 	const Map & map = egbase.map();
-	const X_Coordinate mapwidth  = map.get_width ();
-	const Y_Coordinate mapheight = map.get_height();
+	const XCoordinate mapwidth  = map.get_width ();
+	const YCoordinate mapheight = map.get_height();
 	// TODO(unknown): make first_field const when FCoords has been templatized so it can
 	// have "const Field * field;"
 	Field & first_field = map[0];
-	const Player_Number nr_players = map.get_nrplayers();
+	const PlayerNumber nr_players = map.get_nrplayers();
 	iterate_players_existing_const(plnum, nr_players, egbase, player)
 		if (const Player::Field * const player_fields = player->m_fields) {
 			FileWrite                   unseen_times_file;
@@ -1072,8 +1072,8 @@ void MapPlayersViewPacket::Write
 				 ++first_in_row.y, first_in_row.field += mapwidth)
 			{
 				FCoords  r = first_in_row, br = map.bl_n(r);
-				Map_Index  r_index =  r.field - &first_field;
-				Map_Index br_index = br.field - &first_field;
+				MapIndex  r_index =  r.field - &first_field;
+				MapIndex br_index = br.field - &first_field;
 				const Player::Field *  r_player_field = player_fields +  r_index;
 				const Player::Field * br_player_field = player_fields + br_index;
 				Vision  r_vision =  r_player_field->vision;

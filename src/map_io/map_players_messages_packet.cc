@@ -34,13 +34,13 @@ namespace Widelands {
 #define FILENAME_SIZE 19
 
 void MapPlayersMessagesPacket::Read
-	(FileSystem & fs, Editor_Game_Base & egbase, bool, MapObjectLoader & mol)
+	(FileSystem & fs, EditorGameBase & egbase, bool, MapObjectLoader & mol)
 
 {
 	uint32_t      const gametime   = egbase.get_gametime ();
 	const Map   &       map        = egbase.map          ();
 	Extent        const extent     = map   .extent       ();
-	Player_Number const nr_players = map   .get_nrplayers();
+	PlayerNumber const nr_players = map   .get_nrplayers();
 	iterate_players_existing(p, nr_players, egbase, player)
 		try {
 			char filename[FILENAME_SIZE];
@@ -169,10 +169,10 @@ void MapPlayersMessagesPacket::Read
 }
 
 void MapPlayersMessagesPacket::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, MapObjectSaver & mos)
+	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	fs.EnsureDirectoryExists("player");
-	Player_Number const nr_players = egbase.map().get_nrplayers();
+	PlayerNumber const nr_players = egbase.map().get_nrplayers();
 	iterate_players_existing_const(p, nr_players, egbase, player) {
 		Profile prof;
 		prof.create_section("global").set_int

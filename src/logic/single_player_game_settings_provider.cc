@@ -24,7 +24,7 @@
 
 
 SinglePlayerGameSettingsProvider::SinglePlayerGameSettingsProvider() {
-	s.tribes = Widelands::Tribe_Descr::get_all_tribe_infos();
+	s.tribes = Widelands::TribeDescr::get_all_tribe_infos();
 	s.scenario = false;
 	s.multiplayer = false;
 	s.playernum = 0;

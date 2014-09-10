@@ -43,7 +43,7 @@ namespace Widelands {
 
 void MapRoaddataPacket::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      &       egbase,
+	 EditorGameBase      &       egbase,
 	 bool                    const skip,
 	 MapObjectLoader &       mol)
 {
@@ -57,7 +57,7 @@ void MapRoaddataPacket::Read
 		uint16_t const packet_version = fr.Unsigned16();
 		if (1 <= packet_version && packet_version <= CURRENT_PACKET_VERSION) {
 			const Map   &       map        = egbase.map();
-			Player_Number const nr_players = map.get_nrplayers();
+			PlayerNumber const nr_players = map.get_nrplayers();
 			for (;;) {
 				if (2 <= packet_version && fr.EndOfFile())
 					break;
@@ -72,7 +72,7 @@ void MapRoaddataPacket::Read
 					Road & road = mol.get<Road>(serial);
 					if (mol.is_object_loaded(road))
 						throw GameDataError("already loaded");
-					Player_Number player_index = fr.Unsigned8();
+					PlayerNumber player_index = fr.Unsigned8();
 					if (!(0 < player_index && player_index <= nr_players)) {
 						throw GameDataError("Invalid player number: %i.", player_index);
 					}
@@ -124,7 +124,7 @@ void MapRoaddataPacket::Read
 
 					//  Now that all rudimentary data is set, init this road. Then
 					//  overwrite the initialization values.
-					road._link_into_flags(ref_cast<Game, Editor_Game_Base>(egbase));
+					road._link_into_flags(ref_cast<Game, EditorGameBase>(egbase));
 
 					road.m_idle_index      = fr.Unsigned32();
 
@@ -167,7 +167,7 @@ void MapRoaddataPacket::Read
 							 		 0,
 							 		 Road::_request_carrier_callback,
 							 		 wwWORKER))
-							->Read(fr, ref_cast<Game, Editor_Game_Base>(egbase), mol);
+							->Read(fr, ref_cast<Game, EditorGameBase>(egbase), mol);
 						} else {
 							carrier_request = nullptr;
 							//log("No request in this slot");
@@ -193,10 +193,10 @@ void MapRoaddataPacket::Read
 								//carrier->set_location (0);
 								carrier->reset_tasks
 									(ref_cast<Game,
-									 Editor_Game_Base>(egbase));
+									 EditorGameBase>(egbase));
 								//carrier->send_signal
 								//(ref_cast<Game,
-								//Editor_Game_Base>(egbase), "location");
+								//EditorGameBase>(egbase), "location");
 							}
 						}
 					}
@@ -216,7 +216,7 @@ void MapRoaddataPacket::Read
 
 
 void MapRoaddataPacket::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, MapObjectSaver & mos)
+	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	FileWrite fw;
 
@@ -276,7 +276,7 @@ void MapRoaddataPacket::Write
 					if (temp_slot.carrier_request) {
 						fw.Unsigned8(1);
 						temp_slot.carrier_request->Write
-							(fw, ref_cast<Game, Editor_Game_Base>(egbase), mos);
+							(fw, ref_cast<Game, EditorGameBase>(egbase), mos);
 					} else {
 						fw.Unsigned8(0);
 					}

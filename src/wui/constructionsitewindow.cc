@@ -34,7 +34,7 @@ static const char pic_tab_wares[] = "pics/menu_tab_wares.png";
  */
 struct ConstructionSite_Window : public Building_Window {
 	ConstructionSite_Window
-		(Interactive_GameBase        & parent,
+		(InteractiveGameBase        & parent,
 		 Widelands::ConstructionSite &,
 		 UI::Window *                & registry);
 
@@ -46,7 +46,7 @@ private:
 
 
 ConstructionSite_Window::ConstructionSite_Window
-	(Interactive_GameBase        & parent,
+	(InteractiveGameBase        & parent,
 	 Widelands::ConstructionSite & cs,
 	 UI::Window *                & registry)
 	: Building_Window(parent, cs, registry)
@@ -98,7 +98,7 @@ Create the status window describing the construction site.
 ===============
 */
 void Widelands::ConstructionSite::create_options_window
-	(Interactive_GameBase & parent, UI::Window * & registry)
+	(InteractiveGameBase & parent, UI::Window * & registry)
 {
 	new ConstructionSite_Window(parent, *this, registry);
 }

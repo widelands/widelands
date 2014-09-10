@@ -33,7 +33,7 @@ static char const * pic_tab_military = "pics/menu_tab_military.png";
  */
 struct MilitarySite_Window : public Building_Window {
 	MilitarySite_Window
-		(Interactive_GameBase & parent,
+		(InteractiveGameBase & parent,
 		 MilitarySite       &,
 		 UI::Window *       & registry);
 
@@ -47,7 +47,7 @@ protected:
 
 
 MilitarySite_Window::MilitarySite_Window
-	(Interactive_GameBase & parent,
+	(InteractiveGameBase & parent,
 	 MilitarySite       & ms,
 	 UI::Window *       & registry)
 :
@@ -68,7 +68,7 @@ void MilitarySite_Window::create_capsbuttons(UI::Box * buttons)
  * Create the  military site information window.
  */
 void MilitarySite::create_options_window
-	(Interactive_GameBase & plr, UI::Window * & registry)
+	(InteractiveGameBase & plr, UI::Window * & registry)
 {
 	new MilitarySite_Window(plr, *this, registry);
 }

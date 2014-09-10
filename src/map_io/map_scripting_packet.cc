@@ -47,7 +47,7 @@ const uint32_t SCRIPTING_DATA_PACKET_VERSION = 1;
  */
 void MapScriptingPacket::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      &       egbase,
+	 EditorGameBase      &       egbase,
 	 bool,
 	 MapObjectLoader &       mol)
 {
@@ -71,7 +71,7 @@ void MapScriptingPacket::Read
 
 
 void MapScriptingPacket::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, MapObjectSaver & mos)
+	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	fs.EnsureDirectoryExists("scripting");
 

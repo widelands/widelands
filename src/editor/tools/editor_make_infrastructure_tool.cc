@@ -33,7 +33,7 @@
 int32_t
 Editor_Make_Infrastructure_Tool_Callback
 	(const Widelands::TCoords<Widelands::FCoords>& c,
-	 Widelands::Editor_Game_Base& egbase,
+	 Widelands::EditorGameBase& egbase,
 	 int32_t const player)
 {
 	return egbase.player(player).get_buildcaps(c);
@@ -48,7 +48,7 @@ Editor_Make_Infrastructure_Tool_Callback
 */
 int32_t Editor_Make_Infrastructure_Tool::handle_click_impl(Widelands::Map&,
                                                            const Widelands::World&,
-                                                           Widelands::Node_and_Triangle<> const,
+                                                           Widelands::NodeAndTriangle<> const,
                                                            Editor_Interactive& parent,
                                                            Editor_Action_Args& /* args */) {
 	show_field_action

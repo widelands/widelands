@@ -103,14 +103,14 @@ struct EnhanceConfirm : public ActionConfirm {
 	EnhanceConfirm
 		(Interactive_Player & parent,
 		 Widelands::Building & building,
-		 const Widelands::Building_Index & id);
+		 const Widelands::BuildingIndex & id);
 
 	void think() override;
 	void ok() override;
 
 private:
     // Do not make this a reference - it is a stack variable in the caller
-	const Widelands::Building_Index m_id;
+	const Widelands::BuildingIndex m_id;
 };
 
 
@@ -236,7 +236,7 @@ Make sure the building still exists and can in fact be bulldozed.
 */
 void BulldozeConfirm::think()
 {
-	const Widelands::Editor_Game_Base & egbase = iaplayer().egbase();
+	const Widelands::EditorGameBase & egbase = iaplayer().egbase();
 	upcast(Widelands::Building, building, m_object .get(egbase));
 	upcast(Widelands::PlayerImmovable, todestroy, m_todestroy.get(egbase));
 
@@ -300,7 +300,7 @@ Make sure the building still exists and can in fact be dismantled.
 */
 void DismantleConfirm::think()
 {
-	const Widelands::Editor_Game_Base & egbase = iaplayer().egbase();
+	const Widelands::EditorGameBase & egbase = iaplayer().egbase();
 	upcast(Widelands::Building, building, m_object.get(egbase));
 
 	if
@@ -342,7 +342,7 @@ Create the panels for enhancement confirmation.
 EnhanceConfirm::EnhanceConfirm
 	(Interactive_Player & parent,
 	 Widelands::Building & building,
-	 const Widelands::Building_Index & id)
+	 const Widelands::BuildingIndex & id)
 	:
 	ActionConfirm
 		(parent,
@@ -362,7 +362,7 @@ Make sure the building still exists and can in fact be enhanced.
 */
 void EnhanceConfirm::think()
 {
-	const Widelands::Editor_Game_Base & egbase = iaplayer().egbase();
+	const Widelands::EditorGameBase & egbase = iaplayer().egbase();
 	upcast(Widelands::Building, building, m_object.get(egbase));
 
 	if
@@ -410,7 +410,7 @@ ShipSinkConfirm::ShipSinkConfirm(Interactive_Player & parent, Widelands::Ship & 
  */
 void ShipSinkConfirm::think()
 {
-	const Widelands::Editor_Game_Base & egbase = iaplayer().egbase();
+	const Widelands::EditorGameBase & egbase = iaplayer().egbase();
 	upcast(Widelands::Ship, ship, m_object.get(egbase));
 
 	if (!ship || !iaplayer().can_act(ship->get_owner()->player_number()))
@@ -450,7 +450,7 @@ ShipCancelExpeditionConfirm::ShipCancelExpeditionConfirm(Interactive_Player & pa
  * Make sure the ship still exists and that it is still in expedition mode and not colonizing.
  */
 void ShipCancelExpeditionConfirm::think() {
-	const Widelands::Editor_Game_Base& egbase = iaplayer().egbase();
+	const Widelands::EditorGameBase& egbase = iaplayer().egbase();
 	upcast(Widelands::Ship, ship, m_object.get(egbase));
 
 	if (!ship || !iaplayer().can_act(ship->get_owner()->player_number()) ||
@@ -528,7 +528,7 @@ void show_dismantle_confirm
 void show_enhance_confirm
 	(Interactive_Player & player,
 	 Widelands::Building & building,
-	 const Widelands::Building_Index & id)
+	 const Widelands::BuildingIndex & id)
 {
 	new EnhanceConfirm(player, building, id);
 }

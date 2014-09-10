@@ -106,7 +106,7 @@ void GamePlayerInfoPacket::Write
 	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
 	// Number of (potential) players
-	Player_Number const nr_players = game.map().get_nrplayers();
+	PlayerNumber const nr_players = game.map().get_nrplayers();
 	fw.Unsigned16(nr_players);
 	iterate_players_existing_const(p, nr_players, game, plr) {
 		fw.Unsigned8(1); // Player is in game.

@@ -46,7 +46,7 @@ void CmdLuaScript::execute (Game & game) {
 
 #define CMD_LUASCRIPT_VERSION 1
 void CmdLuaScript::Read
-	(FileRead & fr, Editor_Game_Base & egbase, MapObjectLoader & mol)
+	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -61,7 +61,7 @@ void CmdLuaScript::Read
 	}
 }
 void CmdLuaScript::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, MapObjectSaver & mos)
+	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	fw.Unsigned16(CMD_LUASCRIPT_VERSION);
 	GameLogicCommand::Write(fw, egbase, mos);

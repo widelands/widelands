@@ -99,7 +99,7 @@ private:
 	 * The next highest bit is the border bit.
 	 * The low bits are the player number of the owner.
 	 */
-	typedef Player_Number Owner_Info_and_Selections_Type;
+	typedef PlayerNumber Owner_Info_and_Selections_Type;
 	static const uint8_t Border_Bit =
 		std::numeric_limits<Owner_Info_and_Selections_Type>::digits - 1;
 	static const Owner_Info_and_Selections_Type Border_Bitmask = 1 << Border_Bit;
@@ -160,13 +160,13 @@ public:
 	 * Does not change the border bit of this or neighbouring fields. That must
 	 * be done separately.
 	 */
-	void set_owned_by(const Player_Number n) {
+	void set_owned_by(const PlayerNumber n) {
 		assert(n <= MAX_PLAYERS);
 		owner_info_and_selections =
 			n | (owner_info_and_selections & ~Player_Number_Bitmask);
 	}
 
-	Player_Number get_owned_by() const {
+	PlayerNumber get_owned_by() const {
 		assert
 			((owner_info_and_selections & Player_Number_Bitmask) <= MAX_PLAYERS);
 		return owner_info_and_selections & Player_Number_Bitmask;
@@ -180,7 +180,7 @@ public:
 	///
 	/// player_number must be in the range 1 .. Player_Number_Bitmask or the
 	/// behaviour is undefined.
-	bool is_interior(const Player_Number player_number) const {
+	bool is_interior(const PlayerNumber player_number) const {
 		assert(0 < player_number);
 		assert    (player_number <= Player_Number_Bitmask);
 		return player_number == (owner_info_and_selections & Owner_Info_Bitmask);

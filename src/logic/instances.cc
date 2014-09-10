@@ -52,7 +52,7 @@ void CmdDestroyMapObject::execute(Game & game)
 
 #define CMD_DESTROY_MAP_OBJECT_VERSION 1
 void CmdDestroyMapObject::Read
-	(FileRead & fr, Editor_Game_Base & egbase, MapObjectLoader & mol)
+	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -74,7 +74,7 @@ void CmdDestroyMapObject::Read
 	}
 }
 void CmdDestroyMapObject::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, MapObjectSaver & mos)
+	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(CMD_DESTROY_MAP_OBJECT_VERSION);
@@ -102,7 +102,7 @@ void CmdAct::execute(Game & game)
 
 #define CMD_ACT_VERSION 1
 void CmdAct::Read
-	(FileRead & fr, Editor_Game_Base & egbase, MapObjectLoader & mol)
+	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -126,7 +126,7 @@ void CmdAct::Read
 	}
 }
 void CmdAct::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, MapObjectSaver & mos)
+	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(CMD_ACT_VERSION);
@@ -142,11 +142,11 @@ void CmdAct::Write
 }
 
 
-Object_Manager::~Object_Manager()
+ObjectManager::~ObjectManager()
 {
 	// better not throw an exception in a destructor...
 	if (!m_objects.empty())
-		log("Object_Manager: ouch! remaining objects\n");
+		log("ObjectManager: ouch! remaining objects\n");
 
 	log("lastserial: %i\n", m_lastserial);
 }
@@ -154,7 +154,7 @@ Object_Manager::~Object_Manager()
 /**
  * Clear all objects
  */
-void Object_Manager::cleanup(Editor_Game_Base & egbase)
+void ObjectManager::cleanup(EditorGameBase & egbase)
 {
 	while (!m_objects.empty()) {
 		objmap_t::iterator it = m_objects.begin();
@@ -166,7 +166,7 @@ void Object_Manager::cleanup(Editor_Game_Base & egbase)
 /**
  * Insert the given MapObject into the object manager
  */
-void Object_Manager::insert(MapObject * obj)
+void ObjectManager::insert(MapObject * obj)
 {
 	++m_lastserial;
 	assert(m_lastserial);
@@ -177,7 +177,7 @@ void Object_Manager::insert(MapObject * obj)
 /**
  * Remove the MapObject from the manager
  */
-void Object_Manager::remove(MapObject & obj)
+void ObjectManager::remove(MapObject & obj)
 {
 	m_objects.erase(obj.m_serial);
 }
@@ -185,7 +185,7 @@ void Object_Manager::remove(MapObject & obj)
 /*
  * Return the list of all serials currently in use
  */
-std::vector<Serial> Object_Manager::all_object_serials_ordered () const {
+std::vector<Serial> ObjectManager::all_object_serials_ordered () const {
 	std::vector<Serial> rv;
 
 	for (const std::pair<Serial, MapObject *>& o : m_objects) {
@@ -197,7 +197,7 @@ std::vector<Serial> Object_Manager::all_object_serials_ordered () const {
 	return rv;
 }
 
-MapObject * Object_Ptr::get(const Editor_Game_Base & egbase)
+MapObject * Object_Ptr::get(const EditorGameBase & egbase)
 {
 	if (!m_serial)
 		return nullptr;
@@ -211,7 +211,7 @@ MapObject * Object_Ptr::get(const Editor_Game_Base & egbase)
 // because it is logically the pointer that is const, not the object
 // that is pointed to.
 // That is, a 'const Object_Ptr' behaves like a 'Object_Ptr * const'.
-MapObject * Object_Ptr::get(const Editor_Game_Base & egbase) const {
+MapObject * Object_Ptr::get(const EditorGameBase & egbase) const {
 	return m_serial ? egbase.objects().get_object(m_serial) : nullptr;
 }
 
@@ -363,7 +363,7 @@ m_descr(the_descr), m_serial(0), m_logsink(nullptr)
  * Call this function if you want to remove the object immediately, without
  * any effects.
  */
-void MapObject::remove(Editor_Game_Base & egbase)
+void MapObject::remove(EditorGameBase & egbase)
 {
 	removed(m_serial); // Signal call
 	cleanup(egbase);
@@ -381,7 +381,7 @@ void MapObject::remove(Editor_Game_Base & egbase)
  * the object. Therefore, it may be safer to call schedule_destroy()
  * instead.
  */
-void MapObject::destroy(Editor_Game_Base & egbase)
+void MapObject::destroy(EditorGameBase & egbase)
 {
 	remove(egbase);
 }
@@ -401,7 +401,7 @@ void MapObject::schedule_destroy(Game & game)
  *
  * \warning Make sure you call this from derived classes!
  */
-void MapObject::init(Editor_Game_Base & egbase)
+void MapObject::init(EditorGameBase & egbase)
 {
 	egbase.objects().insert(this);
 }
@@ -409,7 +409,7 @@ void MapObject::init(Editor_Game_Base & egbase)
 /**
  * \warning Make sure you call this from derived classes!
  */
-void MapObject::cleanup(Editor_Game_Base & egbase)
+void MapObject::cleanup(EditorGameBase & egbase)
 {
 	egbase.objects().remove(*this);
 }
@@ -457,7 +457,7 @@ void MapObject::set_logsink(LogSink * const sink)
 }
 
 
-void MapObject::log_general_info(const Editor_Game_Base &) {}
+void MapObject::log_general_info(const EditorGameBase &) {}
 
 /**
  * Prints a log message prepended by the object's serial number.
@@ -545,7 +545,7 @@ void MapObject::Loader::load_finish()
  * Save the MapObject to the given file.
  */
 void MapObject::save
-	(Editor_Game_Base &, MapObjectSaver & mos, FileWrite & fw)
+	(EditorGameBase &, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(HeaderMapObject);
 	fw.Unsigned8(CURRENT_SAVEGAME_VERSION);

@@ -25,7 +25,7 @@
 #include "logic/player.h"
 #include "logic/tribe.h"
 
-using Widelands::Building_Index;
+using Widelands::BuildingIndex;
 
 /**
  * Create all the buttons etc...
@@ -108,9 +108,9 @@ Editor_Player_Menu_Allowed_Buildings_Menu
 	m_forbidden.double_clicked.connect
 		(boost::bind(&Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_double_clicked, this, _1));
 
-	const Widelands::Tribe_Descr & tribe = player.tribe();
-	Building_Index const nr_buildings = tribe.get_nrbuildings();
-	for (Building_Index i = 0; i < nr_buildings; ++i) {
+	const Widelands::TribeDescr & tribe = player.tribe();
+	BuildingIndex const nr_buildings = tribe.get_nrbuildings();
+	for (BuildingIndex i = 0; i < nr_buildings; ++i) {
 		const Widelands::BuildingDescr & building =
 			*tribe.get_building_descr(i);
 		if (!building.is_enhanced() && !building.is_buildable())
@@ -143,15 +143,15 @@ Editor_Player_Menu_Allowed_Buildings_Menu::
  */
 
 void Editor_Player_Menu_Allowed_Buildings_Menu::clicked(const bool allow) {
-	UI::Listselect<Building_Index> & source = allow ? m_forbidden : m_allowed;
-	UI::Listselect<Building_Index> & target = allow ? m_allowed : m_forbidden;
+	UI::Listselect<BuildingIndex> & source = allow ? m_forbidden : m_allowed;
+	UI::Listselect<BuildingIndex> & target = allow ? m_allowed : m_forbidden;
 
 	assert //  The button should have been disabled if nothing is selected.
 		(source.selection_index()
 		 !=
 		 UI::Listselect<intptr_t>::no_selection_index());
 
-	Building_Index const building_index = source.get_selected();
+	BuildingIndex const building_index = source.get_selected();
 	source.remove_selected();
 	const Widelands::BuildingDescr & building =
 		*m_player.tribe().get_building_descr(building_index);

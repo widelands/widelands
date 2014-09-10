@@ -48,9 +48,9 @@ using Widelands::SoldierControl;
 struct SoldierPanel : UI::Panel {
 	typedef boost::function<void (const Soldier *)> SoldierFn;
 
-	SoldierPanel(UI::Panel & parent, Widelands::Editor_Game_Base & egbase, Widelands::Building & building);
+	SoldierPanel(UI::Panel & parent, Widelands::EditorGameBase & egbase, Widelands::Building & building);
 
-	Widelands::Editor_Game_Base & egbase() const {return m_egbase;}
+	Widelands::EditorGameBase & egbase() const {return m_egbase;}
 
 	void think() override;
 	void draw(RenderTarget &) override;
@@ -83,7 +83,7 @@ private:
 		/*@}*/
 	};
 
-	Widelands::Editor_Game_Base & m_egbase;
+	Widelands::EditorGameBase & m_egbase;
 	SoldierControl & m_soldiers;
 
 	SoldierFn m_mouseover_fn;
@@ -106,7 +106,7 @@ private:
 
 SoldierPanel::SoldierPanel
 	(UI::Panel & parent,
-	 Widelands::Editor_Game_Base & gegbase,
+	 Widelands::EditorGameBase & gegbase,
 	 Widelands::Building & building)
 :
 Panel(&parent, 0, 0, 0, 0),
@@ -362,7 +362,7 @@ bool SoldierPanel::handle_mousepress(uint8_t btn, int32_t x, int32_t y)
 struct SoldierList : UI::Box {
 	SoldierList
 		(UI::Panel & parent,
-		 Interactive_GameBase & igb,
+		 InteractiveGameBase & igb,
 		 Widelands::Building & building);
 
 	SoldierControl & soldiers() const;
@@ -373,7 +373,7 @@ private:
 	void set_soldier_preference(int32_t changed_to);
 	void think() override;
 
-	Interactive_GameBase & m_igb;
+	InteractiveGameBase & m_igb;
 	Widelands::Building & m_building;
 	SoldierPanel m_soldierpanel;
 	UI::Radiogroup m_soldier_preference;
@@ -382,7 +382,7 @@ private:
 
 SoldierList::SoldierList
 	(UI::Panel & parent,
-	 Interactive_GameBase & igb,
+	 InteractiveGameBase & igb,
 	 Widelands::Building & building)
 :
 UI::Box(&parent, 0, 0, UI::Box::Vertical),
@@ -507,7 +507,7 @@ void SoldierList::set_soldier_preference(int32_t changed_to) {
 
 UI::Panel * create_soldier_list
 	(UI::Panel & parent,
-	 Interactive_GameBase & igb,
+	 InteractiveGameBase & igb,
 	 Widelands::Building & building)
 {
 	return new SoldierList(parent, igb, building);

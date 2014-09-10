@@ -96,11 +96,11 @@ void WarehouseWaresDisplay::draw_ware(RenderTarget & dst, Widelands::Ware_Index 
 struct WarehouseWaresPanel : UI::Box {
 	WarehouseWaresPanel
 		(UI::Panel * parent, uint32_t width,
-		 Interactive_GameBase &, Warehouse &, Widelands::WareWorker type);
+		 InteractiveGameBase &, Warehouse &, Widelands::WareWorker type);
 
 	void set_policy(Warehouse::StockPolicy);
 private:
-	Interactive_GameBase & m_gb;
+	InteractiveGameBase & m_gb;
 	Warehouse & m_wh;
 	bool m_can_act;
 	Widelands::WareWorker m_type;
@@ -109,7 +109,7 @@ private:
 
 WarehouseWaresPanel::WarehouseWaresPanel
 	(UI::Panel * parent, uint32_t width,
-	 Interactive_GameBase & gb, Warehouse & wh, Widelands::WareWorker type)
+	 InteractiveGameBase & gb, Warehouse & wh, Widelands::WareWorker type)
 :
 	UI::Box(parent, 0, 0, UI::Box::Vertical),
 	m_gb(gb),
@@ -173,7 +173,7 @@ void WarehouseWaresPanel::set_policy(Warehouse::StockPolicy newpolicy) {
  */
 struct Warehouse_Window : public Building_Window {
 	Warehouse_Window
-		(Interactive_GameBase & parent, Warehouse &, UI::Window * & registry);
+		(InteractiveGameBase & parent, Warehouse &, UI::Window * & registry);
 
 	Warehouse & warehouse() {
 		return ref_cast<Warehouse, Widelands::Building>(building());
@@ -184,7 +184,7 @@ struct Warehouse_Window : public Building_Window {
  * Create the tabs of a warehouse window.
  */
 Warehouse_Window::Warehouse_Window
-	(Interactive_GameBase & parent,
+	(InteractiveGameBase & parent,
 	 Warehouse            & wh,
 	 UI::Window *         & registry)
 	: Building_Window(parent, wh, registry)
@@ -235,7 +235,7 @@ Warehouse_Window::Warehouse_Window
  * Create the status window describing the warehouse.
  */
 void Widelands::Warehouse::create_options_window
-	(Interactive_GameBase & parent, UI::Window * & registry)
+	(InteractiveGameBase & parent, UI::Window * & registry)
 {
 	new Warehouse_Window(parent, *this, registry);
 }

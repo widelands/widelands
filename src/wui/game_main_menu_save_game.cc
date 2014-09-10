@@ -36,8 +36,8 @@
 
 using boost::format;
 
-Interactive_GameBase & Game_Main_Menu_Save_Game::igbase() {
-	return ref_cast<Interactive_GameBase, UI::Panel>(*get_parent());
+InteractiveGameBase & Game_Main_Menu_Save_Game::igbase() {
+	return ref_cast<InteractiveGameBase, UI::Panel>(*get_parent());
 }
 
 #define WINDOW_WIDTH                                                        440
@@ -57,7 +57,7 @@ Interactive_GameBase & Game_Main_Menu_Save_Game::igbase() {
 #define OK_Y                              (DELETE_Y - BUTTON_HEIGHT - VSPACING)
 
 Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
-	(Interactive_GameBase & parent, UI::UniqueWindow::Registry & registry)
+	(InteractiveGameBase & parent, UI::UniqueWindow::Registry & registry)
 :
 	UI::UniqueWindow
 		(&parent, "save_game", &registry,
@@ -239,7 +239,7 @@ void Game_Main_Menu_Save_Game::edit_box_changed() {
 }
 
 static void dosave
-	(Interactive_GameBase & igbase, const std::string & complete_filename)
+	(InteractiveGameBase & igbase, const std::string & complete_filename)
 {
 	Widelands::Game & game = igbase.game();
 

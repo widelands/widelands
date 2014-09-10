@@ -101,7 +101,7 @@ void Fleet::set_economy(Economy * e)
  * Initialize the fleet, including a search through the map
  * to rejoin with the next other fleet we can find.
  */
-void Fleet::init(Editor_Game_Base & egbase)
+void Fleet::init(EditorGameBase & egbase)
 {
 	MapObject::init(egbase);
 
@@ -140,7 +140,7 @@ struct StepEvalFindFleet {
  * Search the map, starting at our ships and ports, for another fleet
  * of the same player.
  */
-void Fleet::find_other_fleet(Editor_Game_Base & egbase)
+void Fleet::find_other_fleet(EditorGameBase & egbase)
 {
 	Map & map = egbase.map();
 	MapAStar<StepEvalFindFleet> astar(map, StepEvalFindFleet());
@@ -192,7 +192,7 @@ void Fleet::find_other_fleet(Editor_Game_Base & egbase)
 /**
  * Merge the @p other fleet into this fleet, and remove the other fleet.
  */
-void Fleet::merge(Editor_Game_Base & egbase, Fleet * other)
+void Fleet::merge(EditorGameBase & egbase, Fleet * other)
 {
 	if (m_ports.empty() && !other->m_ports.empty()) {
 		other->merge(egbase, this);
@@ -244,7 +244,7 @@ void Fleet::check_merge_economy()
 	}
 }
 
-void Fleet::cleanup(Editor_Game_Base & egbase)
+void Fleet::cleanup(EditorGameBase & egbase)
 {
 	while (!m_ports.empty()) {
 		PortDock * pd = m_ports.back();
@@ -371,7 +371,7 @@ void Fleet::add_ship(Ship * ship)
 	}
 }
 
-void Fleet::remove_ship(Editor_Game_Base & egbase, Ship * ship)
+void Fleet::remove_ship(EditorGameBase & egbase, Ship * ship)
 {
 	std::vector<Ship *>::iterator it = std::find(m_ships.begin(), m_ships.end(), ship);
 	if (it != m_ships.end()) {
@@ -432,7 +432,7 @@ struct StepEvalFindPorts {
  * Note that this is done lazily, i.e. the first time a path is actually requested,
  * because path finding is flaky during map loading.
  */
-void Fleet::connect_port(Editor_Game_Base & egbase, uint32_t idx)
+void Fleet::connect_port(EditorGameBase & egbase, uint32_t idx)
 {
 	Map & map = egbase.map();
 	StepEvalFindPorts se;
@@ -508,7 +508,7 @@ void Fleet::connect_port(Editor_Game_Base & egbase, uint32_t idx)
 	}
 }
 
-void Fleet::add_port(Editor_Game_Base & /* egbase */, PortDock * port)
+void Fleet::add_port(EditorGameBase & /* egbase */, PortDock * port)
 {
 	m_ports.push_back(port);
 	port->set_fleet(this);
@@ -522,7 +522,7 @@ void Fleet::add_port(Editor_Game_Base & /* egbase */, PortDock * port)
 	m_portpaths.resize((m_ports.size() * (m_ports.size() - 1)) / 2);
 }
 
-void Fleet::remove_port(Editor_Game_Base & egbase, PortDock * port)
+void Fleet::remove_port(EditorGameBase & egbase, PortDock * port)
 {
 	std::vector<PortDock *>::iterator it = std::find(m_ports.begin(), m_ports.end(), port);
 	if (it != m_ports.end()) {
@@ -582,7 +582,7 @@ PortDock * Fleet::get_arbitrary_dock() const
 /**
  * Trigger an update of ship scheduling
  */
-void Fleet::update(Editor_Game_Base & egbase)
+void Fleet::update(EditorGameBase & egbase)
 {
 	if (m_act_pending)
 		return;
@@ -672,7 +672,7 @@ void Fleet::act(Game & game, uint32_t /* data */)
 	}
 }
 
-void Fleet::log_general_info(const Editor_Game_Base & egbase)
+void Fleet::log_general_info(const EditorGameBase & egbase)
 {
 	MapObject::log_general_info(egbase);
 
@@ -750,7 +750,7 @@ void Fleet::Loader::load_finish()
 }
 
 MapObject::Loader * Fleet::load
-		(Editor_Game_Base & egbase, MapObjectLoader & mol, FileRead & fr)
+		(EditorGameBase & egbase, MapObjectLoader & mol, FileRead & fr)
 {
 	std::unique_ptr<Loader> loader(new Loader);
 
@@ -758,7 +758,7 @@ MapObject::Loader * Fleet::load
 		// The header has been peeled away by the caller
 		uint8_t const version = fr.Unsigned8();
 		if (1 <= version && version <= FLEET_SAVEGAME_VERSION) {
-			Player_Number owner_number = fr.Unsigned8();
+			PlayerNumber owner_number = fr.Unsigned8();
 			if (!owner_number || owner_number > egbase.map().get_nrplayers())
 				throw GameDataError
 					("owner number is %u but there are only %u players",
@@ -779,7 +779,7 @@ MapObject::Loader * Fleet::load
 	return loader.release();
 }
 
-void Fleet::save(Editor_Game_Base & egbase, MapObjectSaver & mos, FileWrite & fw)
+void Fleet::save(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(HeaderFleet);
 	fw.Unsigned8(FLEET_SAVEGAME_VERSION);

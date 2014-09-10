@@ -66,7 +66,7 @@ struct Flag;
 //   out, to have some more forces. Reincrease the number of soldiers that
 //   should be trained if inputs_ get filled again.).
 struct DefaultAI : Computer_Player {
-	DefaultAI(Widelands::Game&, const Widelands::Player_Number, uint8_t);
+	DefaultAI(Widelands::Game&, const Widelands::PlayerNumber, uint8_t);
 	~DefaultAI();
 	void think() override;
 
@@ -82,7 +82,7 @@ struct DefaultAI : Computer_Player {
 			name = _("Aggressive");
 		}
 		Computer_Player* instantiate(Widelands::Game& game,
-		                             Widelands::Player_Number const p) const override {
+		                             Widelands::PlayerNumber const p) const override {
 			return new DefaultAI(game, p, AGGRESSIVE);
 		}
 	};
@@ -92,7 +92,7 @@ struct DefaultAI : Computer_Player {
 			name = _("Normal");
 		}
 		Computer_Player* instantiate(Widelands::Game& game,
-		                             Widelands::Player_Number const p) const override {
+		                             Widelands::PlayerNumber const p) const override {
 			return new DefaultAI(game, p, NORMAL);
 		}
 	};
@@ -102,7 +102,7 @@ struct DefaultAI : Computer_Player {
 			name = _("Defensive");
 		}
 		Computer_Player* instantiate(Widelands::Game& game,
-		                             Widelands::Player_Number const p) const override {
+		                             Widelands::PlayerNumber const p) const override {
 			return new DefaultAI(game, p, DEFENSIVE);
 		}
 	};
@@ -165,7 +165,7 @@ private:
 	bool m_mineable_changed;
 
 	Widelands::Player* player_;
-	Widelands::Tribe_Descr const* tribe_;
+	Widelands::TribeDescr const* tribe_;
 
 	std::vector<BuildingObserver> buildings_;
 	uint32_t num_constructionsites_;

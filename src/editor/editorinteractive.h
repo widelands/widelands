@@ -43,7 +43,7 @@ class Editor_Tool;
  * This is the EditorInteractive. It is like the InteractivePlayer class,
  * but for the Editor instead of the game
  */
-struct Editor_Interactive : public Interactive_Base {
+struct Editor_Interactive : public InteractiveBase {
 	friend struct Editor_Tool_Menu;
 
 	// Runs the Editor via the commandline --editor flag. Will load 'filename' as a
@@ -51,7 +51,7 @@ struct Editor_Interactive : public Interactive_Base {
 	static void run_editor(const std::string & filename, const std::string& script_to_run);
 
 private:
-	Editor_Interactive(Widelands::Editor_Game_Base &);
+	Editor_Interactive(Widelands::EditorGameBase &);
 
 public:
 	void register_overlays();
@@ -62,7 +62,7 @@ public:
 	void think() override;
 
 	void map_clicked(bool draw = false);
-	void set_sel_pos(Widelands::Node_and_Triangle<>) override;
+	void set_sel_pos(Widelands::NodeAndTriangle<>) override;
 	void set_sel_radius_and_update_menu(uint32_t);
 
 	//  Handle UI elements.
@@ -115,9 +115,9 @@ public:
 	void exit();
 
 	//  reference functions
-	void   reference_player_tribe(Widelands::Player_Number, void const * const) override;
-	void unreference_player_tribe(Widelands::Player_Number, void const * const);
-	bool is_player_tribe_referenced(Widelands::Player_Number);
+	void   reference_player_tribe(Widelands::PlayerNumber, void const * const) override;
+	void unreference_player_tribe(Widelands::PlayerNumber, void const * const);
+	bool is_player_tribe_referenced(Widelands::PlayerNumber);
 	void set_need_save(bool const t) {m_need_save = t;}
 
 private:

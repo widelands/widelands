@@ -28,20 +28,20 @@ class OneWorldLegacyLookupTable;
 
 namespace Widelands {
 
-class Editor_Game_Base;
+class EditorGameBase;
 class MapObjectLoader;
 
 // This data packet contains critters on old maps. These days, the bobs are saved in the map_objects
 // packet.
 struct MapBobPacket {
 	void Read(FileSystem&,
-	          Editor_Game_Base&,
+	          EditorGameBase&,
 				 MapObjectLoader&,
 	          const OneWorldLegacyLookupTable& lookup_table);
 
 private:
 	void ReadBob(FileRead&,
-	             Editor_Game_Base&,
+	             EditorGameBase&,
 					 MapObjectLoader&,
 	             Coords,
 	             const OneWorldLegacyLookupTable& lookup_table);

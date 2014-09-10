@@ -34,7 +34,7 @@
 #include "ui_basic/textarea.h"
 
 namespace Widelands {
-class Editor_Game_Base;
+class EditorGameBase;
 class Game;
 class Map;
 class MapLoader;

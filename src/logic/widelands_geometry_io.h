@@ -43,24 +43,24 @@ struct DirectionInvalid : public FileRead::DataError {
 	Direction direction;
 };
 struct ExceededMaxIndex : public FileRead::DataError {
-	ExceededMaxIndex(Map_Index const Max, Map_Index const I)
+	ExceededMaxIndex(MapIndex const Max, MapIndex const I)
 		: DataError("index is %u but max index is only %u", I, Max), max(Max), i(I) {
 	}
-	Map_Index const max, i;
+	MapIndex const max, i;
 };
 struct ExceededWidth : public FileRead::DataError {
-	ExceededWidth(uint16_t const W, const X_Coordinate X)
+	ExceededWidth(uint16_t const W, const XCoordinate X)
 		: DataError("x coordinate is %i but width is only %u", X, W), w(W), x(X) {
 	}
 	uint16_t const w;
-	X_Coordinate const x;
+	XCoordinate const x;
 };
 struct ExceededHeight : public FileRead::DataError {
-	ExceededHeight(uint16_t const H, const Y_Coordinate Y)
+	ExceededHeight(uint16_t const H, const YCoordinate Y)
 		: DataError("y coordinate is %i but height is only %u", Y, H), h(H), y(Y) {
 	}
 	uint16_t h;
-	Y_Coordinate y;
+	YCoordinate y;
 };
 
 /// Read a Direction from the file. Use this when the result can only be a
@@ -76,7 +76,7 @@ Direction ReadDirection8(StreamRead* fr);
 /// \throws direction_invalid if direction is > 6.
 Direction ReadDirection8_allow_null(StreamRead* fr);
 
-Map_Index ReadMap_Index32(StreamRead* fr, Map_Index max);
+MapIndex ReadMap_Index32(StreamRead* fr, MapIndex max);
 
 /// Read a Coords from the file. Use this when the result can only be a
 /// coordinate pair referring to a node.

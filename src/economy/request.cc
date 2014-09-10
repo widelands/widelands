@@ -111,7 +111,7 @@ void Request::Read
 	try {
 		uint16_t const version = fr.Unsigned16();
 		if (version == 6) {
-			const Tribe_Descr& tribe = m_target.owner().tribe();
+			const TribeDescr& tribe = m_target.owner().tribe();
 			char const* const type_name = fr.CString();
 			Ware_Index const wai = tribe.ware_index(type_name);
 			if (wai != INVALID_INDEX) {
@@ -185,7 +185,7 @@ void Request::Write
 	//  Target and econmy should be set. Same is true for callback stuff.
 
 	assert(m_type == wwWARE || m_type == wwWORKER);
-	const Tribe_Descr & tribe = m_target.owner().tribe();
+	const TribeDescr & tribe = m_target.owner().tribe();
 	assert(m_type != wwWARE   || m_index < tribe.get_nrwares  ());
 	assert(m_type != wwWORKER || m_index < tribe.get_nrworkers());
 	fw.CString
@@ -227,7 +227,7 @@ Flag & Request::target_flag() const
  * be delivered. nr is in the range [0..m_count[
 */
 int32_t Request::get_base_required_time
-	(Editor_Game_Base & egbase, uint32_t const nr) const
+	(EditorGameBase & egbase, uint32_t const nr) const
 {
 	if (m_count <= nr) {
 		if (!(m_count == 1 && nr == 1)) {

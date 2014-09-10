@@ -79,7 +79,7 @@ void GameClassPacket::Write
 	// Objects are loaded and saved by map
 
 	// Tribes and wares are handled by map
-	// Interactive_Base doesn't need saving
+	// InteractiveBase doesn't need saving
 
 	// Map is handled by map saving
 

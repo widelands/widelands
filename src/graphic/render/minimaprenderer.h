@@ -28,7 +28,7 @@ class StreamWrite;
 
 namespace Widelands {
 	class Player;
-	class Editor_Game_Base;
+	class EditorGameBase;
 }
 
 // Layers for selecting what do display on the minimap.
@@ -57,13 +57,13 @@ inline MiniMapLayer operator ^ (MiniMapLayer left, MiniMapLayer right) {
 /// point of view.
 /// \param viewpoint: top left corner in map coordinates
 std::unique_ptr<Surface> draw_minimap
-	(const Widelands::Editor_Game_Base& egbase, const Widelands::Player* player,
+	(const Widelands::EditorGameBase& egbase, const Widelands::Player* player,
 	 const Point& viewpoint, MiniMapLayer layers);
 
 /// Render the minimap to a file. 1 pixel will be used for each fields.
 /// \param viewpoint : The game point of view as returned by interactive_base.get_viewpoint();
 void write_minimap_image
-	(const Widelands::Editor_Game_Base& egbase, Widelands::Player const* player,
+	(const Widelands::EditorGameBase& egbase, Widelands::Player const* player,
 	 const Point& viewpoint, MiniMapLayer layers, StreamWrite* const streamwrite);
 
 #endif  // end of include guard: WL_GRAPHIC_RENDER_MINIMAPRENDERER_H

@@ -48,14 +48,14 @@ struct WatchWindowView {
 
 struct WatchWindow : public UI::Window {
 	WatchWindow
-		(Interactive_GameBase & parent,
+		(InteractiveGameBase & parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
 		 Widelands::Coords,
 		 bool single_window = false);
 	~WatchWindow();
 
 	Widelands::Game & game() const {
-		return ref_cast<Interactive_GameBase, UI::Panel>(*get_parent()).game();
+		return ref_cast<InteractiveGameBase, UI::Panel>(*get_parent()).game();
 	}
 
 	boost::signals2::signal<void (Point)> warp_mainview;
@@ -89,7 +89,7 @@ private:
 static WatchWindow * g_watch_window = nullptr;
 
 WatchWindow::WatchWindow
-	(Interactive_GameBase &       parent,
+	(InteractiveGameBase &       parent,
 	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
 	 Widelands::Coords    const coords,
 	 bool                   const _single_window)
@@ -140,9 +140,9 @@ WatchWindow::WatchWindow
 		closebtn->sigclicked.connect(boost::bind(&WatchWindow::close_cur_view, this));
 	}
 
-	mapview.fieldclicked.connect(boost::bind(&Interactive_GameBase::node_action, &parent));
+	mapview.fieldclicked.connect(boost::bind(&InteractiveGameBase::node_action, &parent));
 	mapview.changeview.connect(boost::bind(&WatchWindow::stop_tracking_by_drag, this, _1, _2));
-	warp_mainview.connect(boost::bind(&Interactive_Base::move_view_to_point, &parent, _1));
+	warp_mainview.connect(boost::bind(&InteractiveBase::move_view_to_point, &parent, _1));
 
 	add_view(coords);
 	next_view(true);
@@ -223,12 +223,12 @@ WatchWindow::~WatchWindow() {
 	g_watch_window = nullptr;
 
 	//  If we are destructed because our parent is destructed, our parent may
-	//  not be an Interactive_GameBase any more (it may just be an UI::Panel).
-	//  Then calling Interactive_GameBase::need_complete_redraw on our parent
+	//  not be an InteractiveGameBase any more (it may just be an UI::Panel).
+	//  Then calling InteractiveGameBase::need_complete_redraw on our parent
 	//  would be erroneous. Therefore this check is required. (As always, great
 	//  care is required when destructors are misused to do anything else than
 	//  releasing resources.)
-	if (upcast(Interactive_GameBase, igbase, get_parent()))
+	if (upcast(InteractiveGameBase, igbase, get_parent()))
 		igbase->need_complete_redraw();
 }
 
@@ -397,7 +397,7 @@ Open a watch window.
 ===============
 */
 void show_watch_window
-	(Interactive_GameBase & parent, Widelands::Coords const coords)
+	(InteractiveGameBase & parent, Widelands::Coords const coords)
 {
 	if (g_options.pull_section("global").get_bool("single_watchwin", false)) {
 		if (g_watch_window)

@@ -42,8 +42,8 @@ class Building;
  */
 class MapBuildingdataPacket {
 public:
-	void Read(FileSystem&, Editor_Game_Base&, bool, MapObjectLoader&);
-	void Write(FileSystem&, Editor_Game_Base&, MapObjectSaver&);
+	void Read(FileSystem&, EditorGameBase&, bool, MapObjectLoader&);
+	void Write(FileSystem&, EditorGameBase&, MapObjectSaver&);
 
 private:
 	void read_constructionsite

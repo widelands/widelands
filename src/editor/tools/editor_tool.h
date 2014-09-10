@@ -48,7 +48,7 @@ public:
 	enum Tool_Index {First, Second, Third};
 	int32_t handle_click
 		(const Tool_Index i,
-		Widelands::Map & map, const Widelands::World& world, Widelands::Node_and_Triangle<> const center,
+		Widelands::Map & map, const Widelands::World& world, Widelands::NodeAndTriangle<> const center,
 		Editor_Interactive & parent, Editor_Action_Args & args)
 	{
 		return
@@ -58,7 +58,7 @@ public:
 
 	int32_t handle_undo
 		(const Tool_Index i,
-		Widelands::Map & map, const Widelands::World& world, Widelands::Node_and_Triangle<> const center,
+		Widelands::Map & map, const Widelands::World& world, Widelands::NodeAndTriangle<> const center,
 		Editor_Interactive & parent, Editor_Action_Args & args)
 	{
 		return
@@ -85,12 +85,12 @@ public:
 	}
 	virtual int32_t handle_click_impl(Widelands::Map&,
 	                                  const Widelands::World& world,
-	                                  Widelands::Node_and_Triangle<>,
+	                                  Widelands::NodeAndTriangle<>,
 	                                  Editor_Interactive&,
 	                                  Editor_Action_Args&) = 0;
 	virtual int32_t handle_undo_impl(Widelands::Map&,
 	                                 const Widelands::World&,
-	                                 Widelands::Node_and_Triangle<>,
+	                                 Widelands::NodeAndTriangle<>,
 	                                 Editor_Interactive&,
 	                                 Editor_Action_Args&) {
 		return 0;

@@ -26,7 +26,7 @@
 namespace Widelands {
 
 class Economy;
-class Editor_Game_Base;
+class EditorGameBase;
 class Game;
 class MapObjectLoader;
 struct MapObjectSaver;

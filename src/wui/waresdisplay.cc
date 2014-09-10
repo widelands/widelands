@@ -41,7 +41,7 @@ const int WARE_MENU_INFO_SIZE = 12;
 AbstractWaresDisplay::AbstractWaresDisplay
 	(UI::Panel * const parent,
 	 int32_t x, int32_t y,
-	 const Widelands::Tribe_Descr & tribe,
+	 const Widelands::TribeDescr & tribe,
 	 Widelands::WareWorker type,
 	 bool selectable,
 	 boost::function<void(Widelands::Ware_Index, bool)> callback_function,
@@ -292,7 +292,7 @@ void AbstractWaresDisplay::draw(RenderTarget & dst)
 	}
 }
 
-const Widelands::Tribe_Descr::WaresOrder & AbstractWaresDisplay::icons_order() const
+const Widelands::TribeDescr::WaresOrder & AbstractWaresDisplay::icons_order() const
 {
 	switch (m_type) {
 	case Widelands::wwWARE:
@@ -304,7 +304,7 @@ const Widelands::Tribe_Descr::WaresOrder & AbstractWaresDisplay::icons_order() c
 	}
 }
 
-const Widelands::Tribe_Descr::WaresOrderCoords & AbstractWaresDisplay::icons_order_coords() const
+const Widelands::TribeDescr::WaresOrderCoords & AbstractWaresDisplay::icons_order_coords() const
 {
 	switch (m_type) {
 	case Widelands::wwWARE:
@@ -435,7 +435,7 @@ bool AbstractWaresDisplay::ware_hidden(Widelands::Ware_Index ware) {
 WaresDisplay::WaresDisplay
 	(UI::Panel * const parent,
 	 int32_t x, int32_t y,
-	 const Widelands::Tribe_Descr & tribe,
+	 const Widelands::TribeDescr & tribe,
 	 Widelands::WareWorker type,
 	 bool selectable)
 : AbstractWaresDisplay(parent, x, y, tribe, type, selectable)
@@ -474,16 +474,16 @@ void WaresDisplay::add_warelist
 
 
 std::string waremap_to_richtext
-		(const Widelands::Tribe_Descr & tribe,
+		(const Widelands::TribeDescr & tribe,
 		 const std::map<Widelands::Ware_Index, uint8_t> & map)
 {
 	std::string ret;
 
 	std::map<Widelands::Ware_Index, uint8_t>::const_iterator c;
 
-	Widelands::Tribe_Descr::WaresOrder::iterator i;
+	Widelands::TribeDescr::WaresOrder::iterator i;
 	std::vector<Widelands::Ware_Index>::iterator j;
-	Widelands::Tribe_Descr::WaresOrder order = tribe.wares_order();
+	Widelands::TribeDescr::WaresOrder order = tribe.wares_order();
 
 	for (i = order.begin(); i != order.end(); i++)
 		for (j = i->begin(); j != i->end(); ++j)

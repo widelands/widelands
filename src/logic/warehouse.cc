@@ -254,7 +254,7 @@ Warehouse Building
 /// Warehouse Descr
 WarehouseDescr::WarehouseDescr
 	(char const* const _name, char const* const _descname,
-	 const std::string& directory, Profile& prof, Section& global_s, const Tribe_Descr& _tribe)
+	 const std::string& directory, Profile& prof, Section& global_s, const TribeDescr& _tribe)
 	: BuildingDescr(MapObjectType::WAREHOUSE, _name, _descname, directory, prof, global_s, _tribe),
 	  m_conquers         (0),
 	  m_heal_per_second  (0)
@@ -363,7 +363,7 @@ bool Warehouse::_load_finish_planned_worker(PlannedWorkers & pw)
 	return true;
 }
 
-void Warehouse::load_finish(Editor_Game_Base & egbase) {
+void Warehouse::load_finish(EditorGameBase & egbase) {
 	Building::load_finish(egbase);
 
 	uint32_t next_spawn = Never();
@@ -378,7 +378,7 @@ void Warehouse::load_finish(Editor_Game_Base & egbase) {
 			if (next_spawn == static_cast<uint32_t>(Never()))
 				next_spawn =
 					schedule_act
-						(ref_cast<Game, Editor_Game_Base>(egbase),
+						(ref_cast<Game, EditorGameBase>(egbase),
 						 WORKER_WITHOUT_COST_SPAWN_INTERVAL);
 			m_next_worker_without_cost_spawn[i] = next_spawn;
 			log
@@ -406,7 +406,7 @@ void Warehouse::load_finish(Editor_Game_Base & egbase) {
 	}
 }
 
-void Warehouse::init(Editor_Game_Base & egbase)
+void Warehouse::init(EditorGameBase & egbase)
 {
 	Building::init(egbase);
 
@@ -444,11 +444,11 @@ void Warehouse::init(Editor_Game_Base & egbase)
 		// conquer_radius thing
 		m_next_military_act =
 			schedule_act
-				(ref_cast<Game, Editor_Game_Base>(egbase), 1000);
+				(ref_cast<Game, EditorGameBase>(egbase), 1000);
 
 		m_next_stock_remove_act =
 			schedule_act
-				(ref_cast<Game, Editor_Game_Base>(egbase), 4000);
+				(ref_cast<Game, EditorGameBase>(egbase), 4000);
 
 		log("Message: adding (wh) (%s) %i \n", to_string(descr().type()).c_str(), player.player_number());
 		char message[2048];
@@ -457,7 +457,7 @@ void Warehouse::init(Editor_Game_Base & egbase)
 			 _("A new %s was added to your economy."),
 			 descr().descname().c_str());
 		send_message
-			(ref_cast<Game, Editor_Game_Base>(egbase),
+			(ref_cast<Game, EditorGameBase>(egbase),
 			 "warehouse",
 			 descr().descname(),
 			 message,
@@ -466,7 +466,7 @@ void Warehouse::init(Editor_Game_Base & egbase)
 
 	if (uint32_t const conquer_radius = descr().get_conquers())
 		egbase.conquer_area
-			(Player_Area<Area<FCoords> >
+			(PlayerArea<Area<FCoords> >
 			 	(player.player_number(),
 			 	 Area<FCoords>
 			 	 	(egbase.map().get_fcoords(get_position()), conquer_radius)));
@@ -479,7 +479,7 @@ void Warehouse::init(Editor_Game_Base & egbase)
  * Find a contiguous set of water fields close to the port for docking
  * and initialize the @ref PortDock instance.
  */
-void Warehouse::init_portdock(Editor_Game_Base & egbase)
+void Warehouse::init_portdock(EditorGameBase & egbase)
 {
 	molog("Setting up port dock fields\n");
 
@@ -504,13 +504,13 @@ void Warehouse::init_portdock(Editor_Game_Base & egbase)
 		m_portdock->set_economy(get_economy());
 }
 
-void Warehouse::destroy(Editor_Game_Base & egbase)
+void Warehouse::destroy(EditorGameBase & egbase)
 {
 	Building::destroy(egbase);
 }
 
 /// Destroy the warehouse.
-void Warehouse::cleanup(Editor_Game_Base & egbase)
+void Warehouse::cleanup(EditorGameBase & egbase)
 {
 	if (egbase.objects().object_still_available(m_portdock)) {
 		m_portdock->remove(egbase);
@@ -539,7 +539,7 @@ void Warehouse::cleanup(Editor_Game_Base & egbase)
 	Map& map = egbase.map();
 	if (const uint32_t conquer_radius = descr().get_conquers())
 		egbase.unconquer_area
-			(Player_Area<Area<FCoords> >
+			(PlayerArea<Area<FCoords> >
 			 	(owner().player_number(),
 			 	 Area<FCoords>(map.get_fcoords(get_position()), conquer_radius)),
 			 m_defeating_player);
@@ -827,7 +827,7 @@ Worker & Warehouse::launch_worker
 }
 
 
-void Warehouse::incorporate_worker(Editor_Game_Base & egbase, Worker* w)
+void Warehouse::incorporate_worker(EditorGameBase & egbase, Worker* w)
 {
 	assert(w != nullptr);
 	assert(w->get_owner() == &owner());
@@ -898,7 +898,7 @@ void Warehouse::do_launch_ware(Game & game, WareInstance & ware)
 }
 
 
-void Warehouse::incorporate_ware(Editor_Game_Base & egbase, WareInstance* ware)
+void Warehouse::incorporate_ware(EditorGameBase & egbase, WareInstance* ware)
 {
 	m_supply->add_wares(ware->descr_index(), 1);
 	ware->destroy(egbase);
@@ -1200,7 +1200,7 @@ void Warehouse::aggressor(Soldier & enemy)
 	if (!descr().get_conquers())
 		return;
 
-	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
+	Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
 	Map  & map  = game.map();
 	if
 		(enemy.get_owner() == &owner() ||
@@ -1230,7 +1230,7 @@ void Warehouse::aggressor(Soldier & enemy)
 
 bool Warehouse::attack(Soldier & enemy)
 {
-	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
+	Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
 	Ware_Index const soldier_index = descr().tribe().worker_index("soldier");
 	Requirements noreq;
 
@@ -1343,12 +1343,12 @@ std::vector<Soldier *> Warehouse::presentSoldiers() const
 
 	return rv;
 }
-int Warehouse::incorporateSoldier(Editor_Game_Base & egbase, Soldier & soldier) {
+int Warehouse::incorporateSoldier(EditorGameBase & egbase, Soldier & soldier) {
 	incorporate_worker(egbase, &soldier);
 	return 0;
 }
 
-int Warehouse::outcorporateSoldier(Editor_Game_Base & /* egbase */, Soldier & soldier) {
+int Warehouse::outcorporateSoldier(EditorGameBase & /* egbase */, Soldier & soldier) {
 
 	Ware_Index const ware = descr().tribe().safe_worker_index("soldier");
 	if (m_incorporated_workers.count(ware)) {
@@ -1368,7 +1368,7 @@ int Warehouse::outcorporateSoldier(Editor_Game_Base & /* egbase */, Soldier & so
 	return 0;
 }
 
-void Warehouse::log_general_info(const Editor_Game_Base & egbase)
+void Warehouse::log_general_info(const EditorGameBase & egbase)
 {
 	Building::log_general_info(egbase);
 

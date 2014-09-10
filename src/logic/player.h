@@ -42,7 +42,7 @@ struct PlayerImmovable;
 class Soldier;
 class TrainingSite;
 struct Flag;
-struct Tribe_Descr;
+struct TribeDescr;
 struct Road;
 struct AttackController;
 
@@ -67,7 +67,7 @@ public:
 	typedef std::vector<Building_Stats> Building_Stats_vector;
 	typedef std::vector<Building_Stats_vector> BuildingStats;
 
-	friend class Editor_Game_Base;
+	friend class EditorGameBase;
 	friend struct GamePlayerInfoPacket;
 	friend struct GamePlayerEconomiesPacket;
 	friend class MapBuildingdataPacket;
@@ -75,10 +75,10 @@ public:
 	friend class MapExplorationPacket;
 
 	Player
-		(Editor_Game_Base &,
-		 Player_Number,
+		(EditorGameBase &,
+		 PlayerNumber,
 		 uint8_t initialization_index,
-		 const Tribe_Descr & tribe,
+		 const TribeDescr & tribe,
 		 const std::string & name);
 	~Player();
 
@@ -107,12 +107,12 @@ public:
 		messages().set_message_status(id, status);
 	}
 
-	const Editor_Game_Base & egbase() const {return m_egbase;}
-	Editor_Game_Base       & egbase()       {return m_egbase;}
-	Player_Number     player_number() const {return m_plnum;}
+	const EditorGameBase & egbase() const {return m_egbase;}
+	EditorGameBase       & egbase()       {return m_egbase;}
+	PlayerNumber     player_number() const {return m_plnum;}
 	TeamNumber team_number() const {return m_team_number;}
 	const RGBColor & get_playercolor() const {return Colors[m_plnum - 1];}
-	const Tribe_Descr & tribe() const {return m_tribe;}
+	const TribeDescr & tribe() const {return m_tribe;}
 
 	const std::string & get_name() const {return m_name;}
 	void set_name(const std::string & name) {m_name = name;}
@@ -231,7 +231,7 @@ public:
 		 * The owner of this node, as far as this player knows.
 		 * Only valid when this player has seen this node.
 		 */
-		Player_Number owner;
+		PlayerNumber owner;
 
 		/**
 		 * The amount of resource at each of the triangles, as far as this player
@@ -279,7 +279,7 @@ public:
 		 *     some neighbouring node has never been seen =>
 		 *         no geologic information about the triangle
 		 *
-		 * Is Editor_Game_Base::Never() when never surveyed.
+		 * Is EditorGameBase::Never() when never surveyed.
 		 */
 		Time time_triangle_last_surveyed[2];
 
@@ -358,7 +358,7 @@ public:
 	const Field * fields() const {return m_fields;}
 
 	// See area
-	Vision vision(Map_Index const i) const {
+	Vision vision(MapIndex const i) const {
 		// Node visible if > 1
 		return (m_see_all ? 2 : 0) + m_fields[i].vision;
 	}
@@ -383,7 +383,7 @@ public:
 
 	/// Decrement this player's vision for a node.
 	void unsee_node
-		(const Map_Index,
+		(const MapIndex,
 		 const Time,
 		 const bool forward = false)
 	;
@@ -411,11 +411,11 @@ public:
 		m_view_changed = true;
 	}
 
-	Military_Influence military_influence(Map_Index const i) const {
+	Military_Influence military_influence(MapIndex const i) const {
 		return m_fields[i].military_influence;
 	}
 
-	Military_Influence & military_influence(Map_Index const i) {
+	Military_Influence & military_influence(MapIndex const i) {
 		return m_fields[i].military_influence;
 	}
 
@@ -425,10 +425,10 @@ public:
 	void allow_worker_type(Ware_Index, bool allow);
 
 	// Allowed buildings
-	bool is_building_type_allowed(const Building_Index& i) const {
+	bool is_building_type_allowed(const BuildingIndex& i) const {
 		return m_allowed_building_types[i];
 	}
-	void allow_building_type(Building_Index, bool allow);
+	void allow_building_type(BuildingIndex, bool allow);
 
 	// Player commands
 	// Only to be called indirectly via CmdQueue
@@ -441,16 +441,16 @@ public:
 		 const Building::FormerBuildings &);
 	Building & force_csite
 		(const Coords,
-		 Building_Index,
+		 BuildingIndex,
 		 const Building::FormerBuildings & = Building::FormerBuildings());
-	Building * build(Coords, Building_Index, bool, Building::FormerBuildings &);
+	Building * build(Coords, BuildingIndex, bool, Building::FormerBuildings &);
 	void bulldoze(PlayerImmovable &, bool recurse = false);
 	void flagaction(Flag &);
 	void start_stop_building(PlayerImmovable &);
 	void military_site_set_soldier_preference(PlayerImmovable &, uint8_t m_soldier_preference);
 	void start_or_cancel_expedition(Warehouse &);
 	void enhance_building
-		(Building *, Building_Index index_of_new_building);
+		(Building *, BuildingIndex index_of_new_building);
 	void dismantle_building (Building *);
 
 	// Economy stuff
@@ -473,7 +473,7 @@ public:
 		 std::vector<Soldier *> * soldiers = nullptr,
 		 uint32_t                 max = std::numeric_limits<uint32_t>::max());
 	void enemyflagaction
-		(Flag &, Player_Number attacker, uint32_t count);
+		(Flag &, PlayerNumber attacker, uint32_t count);
 
 	uint32_t casualties() const {return m_casualties;}
 	uint32_t kills     () const {return m_kills;}
@@ -490,7 +490,7 @@ public:
 
 	// Statistics
 	const Building_Stats_vector & get_building_statistics
-		(const Building_Index& i) const
+		(const BuildingIndex& i) const
 	{
 		return m_building_stats[i];
 	}
@@ -526,7 +526,7 @@ private:
 	void update_team_players();
 	void play_message_sound(const std::string & sender);
 	void _enhance_or_dismantle
-		(Building *, Building_Index const index_of_new_building);
+		(Building *, BuildingIndex const index_of_new_building);
 
 	// Called when a node becomes seen or has changed.  Discovers the node and
 	// those of the 6 surrounding edges/triangles that are not seen from another
@@ -538,7 +538,7 @@ private:
 
 	MessageQueue           m_messages;
 
-	Editor_Game_Base     & m_egbase;
+	EditorGameBase     & m_egbase;
 	uint8_t                m_initialization_index;
 	std::vector<uint8_t>   m_further_initializations;    // used in shared kingdom mode
 	std::vector<uint8_t>   m_further_shared_in_player;   //  ''  ''   ''     ''     ''
@@ -547,8 +547,8 @@ private:
 	bool                   m_team_player_uptodate;
 	bool                   m_see_all;
 	bool                   m_view_changed;
-	const Player_Number    m_plnum;
-	const Tribe_Descr    & m_tribe; // buildings, wares, workers, sciences
+	const PlayerNumber    m_plnum;
+	const TribeDescr    & m_tribe; // buildings, wares, workers, sciences
 	uint32_t               m_casualties, m_kills;
 	uint32_t               m_msites_lost,     m_msites_defeated;
 	uint32_t               m_civil_blds_lost, m_civil_blds_defeated;
@@ -595,7 +595,7 @@ private:
 };
 
 void find_former_buildings
-	(const Tribe_Descr & tribe_descr, const Building_Index bi,
+	(const TribeDescr & tribe_descr, const BuildingIndex bi,
 	 Building::FormerBuildings* former_buildings);
 
 }

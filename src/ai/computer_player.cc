@@ -22,7 +22,7 @@
 #include "ai/defaultai.h"
 
 Computer_Player::Computer_Player
-	(Widelands::Game & g, Widelands::Player_Number const pid)
+	(Widelands::Game & g, Widelands::PlayerNumber const pid)
 	: m_game(g), m_player_number(pid)
 {
 }
@@ -30,7 +30,7 @@ Computer_Player::Computer_Player
 Computer_Player::~Computer_Player() {}
 
 struct EmptyAI : Computer_Player {
-	EmptyAI(Widelands::Game & g, const Widelands::Player_Number pid)
+	EmptyAI(Widelands::Game & g, const Widelands::PlayerNumber pid)
 	: Computer_Player(g, pid) {}
 
 	void think() override {}
@@ -38,7 +38,7 @@ struct EmptyAI : Computer_Player {
 	struct EmptyAIImpl : Implementation {
 		EmptyAIImpl() {name = _("None");}
 		Computer_Player * instantiate
-			(Widelands::Game & g, Widelands::Player_Number const pid) const override
+			(Widelands::Game & g, Widelands::PlayerNumber const pid) const override
 		{
 			return new EmptyAI(g, pid);
 		}

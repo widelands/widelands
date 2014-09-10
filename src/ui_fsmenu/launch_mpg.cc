@@ -522,7 +522,7 @@ void Fullscreen_Menu_LaunchMPG::set_scenario_values()
 	std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(settings.mapfilename));
 	map.set_filename(settings.mapfilename.c_str());
 	ml->preload_map(true);
-	Widelands::Player_Number const nrplayers = map.get_nrplayers();
+	Widelands::PlayerNumber const nrplayers = map.get_nrplayers();
 	for (uint8_t i = 0; i < nrplayers; ++i) {
 		m_settings->setPlayerTribe    (i, map.get_scenario_player_tribe    (i + 1));
 		m_settings->setPlayerCloseable(i, map.get_scenario_player_closeable(i + 1));

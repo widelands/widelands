@@ -77,7 +77,7 @@ int check_return_value_for_errors(lua_State* L, int rv) {
 
 // Setup the basic Widelands functions and pushes egbase into the Lua registry
 // so that it is available for all the other Lua functions.
-void setup_for_editor_and_game(lua_State* L, Widelands::Editor_Game_Base * g) {
+void setup_for_editor_and_game(lua_State* L, Widelands::EditorGameBase * g) {
 	LuaBases::luaopen_wlbases(L);
 	LuaMap::luaopen_wlmap(L);
 	LuaUi::luaopen_wlui(L);
@@ -232,7 +232,7 @@ std::unique_ptr<LuaTable> LuaInterface::get_hook(const std::string& name) {
  * LuaEditorInterface
  * ===========================
  */
-LuaEditorInterface::LuaEditorInterface(Widelands::Editor_Game_Base* g)
+LuaEditorInterface::LuaEditorInterface(Widelands::EditorGameBase* g)
 	: m_factory(new EditorFactory())
 {
 	setup_for_editor_and_game(m_L, g);

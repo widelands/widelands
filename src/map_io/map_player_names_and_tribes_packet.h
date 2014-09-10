@@ -33,8 +33,8 @@ class Map;
 struct MapPlayerNamesAndTribesPacket {
 	virtual ~MapPlayerNamesAndTribesPacket();
 
-	virtual void Read(FileSystem&, Editor_Game_Base&, bool, MapObjectLoader&);
-	void Write(FileSystem&, Editor_Game_Base&, MapObjectSaver&);
+	virtual void Read(FileSystem&, EditorGameBase&, bool, MapObjectLoader&);
+	void Write(FileSystem&, EditorGameBase&, MapObjectSaver&);
 
 	void Pre_Read(FileSystem &, Map *, bool skip);
 };

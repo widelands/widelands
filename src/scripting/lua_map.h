@@ -434,7 +434,7 @@ private:
 #undef CASTED_GET_DESCRIPTION
 
 #define CASTED_GET(klass) \
-Widelands:: klass * get(lua_State * L, Widelands::Editor_Game_Base & egbase) { \
+Widelands:: klass * get(lua_State * L, Widelands::EditorGameBase & egbase) { \
 	return static_cast<Widelands:: klass *> \
 		(L_MapObject::get(L, egbase, #klass)); \
 }
@@ -478,8 +478,8 @@ public:
 	 * C Methods
 	 */
 	Widelands::MapObject * get
-		(lua_State *, Widelands::Editor_Game_Base &, std::string = "MapObject");
-	Widelands::MapObject * m_get_or_zero(Widelands::Editor_Game_Base &);
+		(lua_State *, Widelands::EditorGameBase &, std::string = "MapObject");
+	Widelands::MapObject * m_get_or_zero(Widelands::EditorGameBase &);
 };
 
 
@@ -640,7 +640,7 @@ public:
 	CASTED_GET(Road)
 	static int create_new_worker
 			(Widelands::PlayerImmovable &,
-			 Widelands::Editor_Game_Base &, const Widelands::WorkerDescr *);
+			 Widelands::EditorGameBase &, const Widelands::WorkerDescr *);
 };
 
 
@@ -733,7 +733,7 @@ public:
 	 */
 	CASTED_GET(ProductionSite)
 	static int create_new_worker
-		(Widelands::PlayerImmovable &, Widelands::Editor_Game_Base &,
+		(Widelands::PlayerImmovable &, Widelands::EditorGameBase &,
 		 const Widelands::WorkerDescr *);
 };
 
@@ -965,13 +965,13 @@ private:
 };
 
 class L_PlayerSlot : public L_MapModuleClass {
-	Widelands::Player_Number m_plr;
+	Widelands::PlayerNumber m_plr;
 
 public:
 	LUNA_CLASS_HEAD(L_PlayerSlot);
 
 	L_PlayerSlot() : m_plr(0) {}
-	L_PlayerSlot(Widelands::Player_Number plr) : m_plr(plr) {}
+	L_PlayerSlot(Widelands::PlayerNumber plr) : m_plr(plr) {}
 	L_PlayerSlot(lua_State * L) : m_plr(0) {
 		report_error(L, "Cannot instantiate a 'PlayerSlot' directly!");
 	}

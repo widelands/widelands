@@ -569,7 +569,7 @@ bool Carrier::start_task_walktoflag
 			(game, path, idx, descr().get_right_walk_anims(does_carry_ware()));
 }
 
-void Carrier::log_general_info(const Widelands::Editor_Game_Base & egbase)
+void Carrier::log_general_info(const Widelands::EditorGameBase & egbase)
 {
 	molog("Carrier at %i,%i\n", get_position().x, get_position().y);
 
@@ -617,7 +617,7 @@ Carrier::Loader * Carrier::create_loader()
 }
 
 void Carrier::do_save
-	(Editor_Game_Base & egbase, MapObjectSaver & mos, FileWrite & fw)
+	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	Worker::do_save(egbase, mos, fw);
 

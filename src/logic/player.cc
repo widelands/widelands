@@ -60,7 +60,7 @@
 namespace {
 
 void terraform_for_building
-	(Widelands::Editor_Game_Base& egbase, const Widelands::Player_Number player_number,
+	(Widelands::EditorGameBase& egbase, const Widelands::PlayerNumber player_number,
 	 const Widelands::Coords location, const Widelands::BuildingDescr* descr)
 {
 	Widelands::Map & map = egbase.map();
@@ -81,7 +81,7 @@ void terraform_for_building
 		for (size_t i = 0; i < nr_locations; ++i) {
 			//  Make sure that the player owns the area around.
 			egbase.conquer_area_no_building
-				(Widelands::Player_Area<Widelands::Area<Widelands::FCoords> >
+				(Widelands::PlayerArea<Widelands::Area<Widelands::FCoords> >
 				 	(player_number, Widelands::Area<Widelands::FCoords>(c[i], 1)));
 
 			if (Widelands::BaseImmovable * const immovable = c[i].field->get_immovable())
@@ -113,20 +113,20 @@ const RGBColor Player::Colors[MAX_PLAYERS] = {
  * filled with the BuildingDescr.
  */
 void find_former_buildings
-	(const Widelands::Tribe_Descr & tribe_descr, const Widelands::Building_Index bi,
+	(const Widelands::TribeDescr & tribe_descr, const Widelands::BuildingIndex bi,
 	 Widelands::Building::FormerBuildings* former_buildings)
 {
 	assert(former_buildings && former_buildings->empty());
 	former_buildings->push_back(bi);
 
 	for (;;) {
-		Widelands::Building_Index oldest_idx = former_buildings->front();
+		Widelands::BuildingIndex oldest_idx = former_buildings->front();
 		const Widelands::BuildingDescr * oldest = tribe_descr.get_building_descr(oldest_idx);
 		if (!oldest->is_enhanced()) {
 			break;
 		}
 		for
-			(Widelands::Building_Index i = 0;
+			(Widelands::BuildingIndex i = 0;
 			 i < tribe_descr.get_nrbuildings();
 			 ++i)
 		{
@@ -140,10 +140,10 @@ void find_former_buildings
 }
 
 Player::Player
-	(Editor_Game_Base  & the_egbase,
-	 Player_Number         const plnum,
+	(EditorGameBase  & the_egbase,
+	 PlayerNumber         const plnum,
 	 uint8_t               const initialization_index,
-	 const Tribe_Descr   &       tribe_descr,
+	 const TribeDescr   &       tribe_descr,
 	 const std::string   &       name)
 	:
 	m_egbase              (the_egbase),
@@ -198,10 +198,10 @@ Player::~Player() {
 void Player::create_default_infrastructure() {
 	const Map & map = egbase().map();
 	if (map.get_starting_pos(m_plnum)) {
-		const Tribe_Descr::Initialization & initialization =
+		const TribeDescr::Initialization & initialization =
 			tribe().initialization(m_initialization_index);
 
-		Game & game = ref_cast<Game, Editor_Game_Base>(egbase());
+		Game & game = ref_cast<Game, EditorGameBase>(egbase());
 
 		// Run the corresponding script
 		std::unique_ptr<LuaTable> table(game.lua().run_script(initialization.script));
@@ -276,7 +276,7 @@ void Player::update_team_players() {
 	if (!m_team_number)
 		return;
 
-	for (Player_Number i = 1; i <= MAX_PLAYERS; ++i) {
+	for (PlayerNumber i = 1; i <= MAX_PLAYERS; ++i) {
 		Player * other = egbase().get_player(i);
 		if (!other)
 			continue;
@@ -437,7 +437,7 @@ Flag & Player::force_flag(FCoords const c) {
 
 	//  Make sure that the player owns the area around.
 	egbase().conquer_area_no_building
-		(Player_Area<Area<FCoords> >(player_number(), Area<FCoords>(c, 1)));
+		(PlayerArea<Area<FCoords> >(player_number(), Area<FCoords>(c, 1)));
 	return *new Flag(egbase(), *this, c);
 }
 
@@ -492,8 +492,8 @@ Road & Player::force_road(const Path & path) {
 		log("Clearing for road at (%i, %i)\n", c.x, c.y);
 
 		//  Make sure that the player owns the area around.
-		ref_cast<Game, Editor_Game_Base>(egbase()).conquer_area_no_building
-			(Player_Area<Area<FCoords> >(player_number(), Area<FCoords>(c, 1)));
+		ref_cast<Game, EditorGameBase>(egbase()).conquer_area_no_building
+			(PlayerArea<Area<FCoords> >(player_number(), Area<FCoords>(c, 1)));
 
 		if (BaseImmovable * const immovable = c.field->get_immovable()) {
 			assert(immovable != &start);
@@ -509,7 +509,7 @@ Building & Player::force_building
 	 const BuildingDescr::FormerBuildings & former_buildings)
 {
 	Map & map = egbase().map();
-	Building_Index idx = former_buildings.back();
+	BuildingIndex idx = former_buildings.back();
 	const BuildingDescr* descr = tribe().get_building_descr(idx);
 	terraform_for_building(egbase(), player_number(), location, descr);
 	FCoords flag_loc;
@@ -522,12 +522,12 @@ Building & Player::force_building
 }
 
 Building& Player::force_csite
-	(Coords const location, Building_Index b_idx,
+	(Coords const location, BuildingIndex b_idx,
 	 const BuildingDescr::FormerBuildings & former_buildings)
 {
 	Map & map = egbase().map();
 	if (!former_buildings.empty()) {
-		Building_Index idx = former_buildings.back();
+		BuildingIndex idx = former_buildings.back();
 		const BuildingDescr * descr = tribe().get_building_descr(idx);
 		terraform_for_building(egbase(), player_number(), location, descr);
 	}
@@ -548,7 +548,7 @@ Place a construction site or building, checking that it's legal to do so.
 ===============
 */
 Building * Player::build
-	(Coords c, Building_Index const idx, bool constructionsite,
+	(Coords c, BuildingIndex const idx, bool constructionsite,
 	 BuildingDescr::FormerBuildings & former_buildings)
 {
 	int32_t buildcaps;
@@ -717,7 +717,7 @@ void Player::military_site_set_soldier_preference(PlayerImmovable & imm, uint8_t
  * an idea of enhancing
  */
 void Player::enhance_building
-	(Building * building, Building_Index const index_of_new_building)
+	(Building * building, BuildingIndex const index_of_new_building)
 {
 	_enhance_or_dismantle(building, index_of_new_building);
 }
@@ -730,7 +730,7 @@ void Player::dismantle_building(Building * building) {
 	_enhance_or_dismantle(building, INVALID_INDEX);
 }
 void Player::_enhance_or_dismantle
-	(Building * building, Building_Index const index_of_new_building)
+	(Building * building, BuildingIndex const index_of_new_building)
 {
 	if (&building->owner() ==
 	    this && (index_of_new_building == INVALID_INDEX ||
@@ -783,7 +783,7 @@ void Player::flagaction(Flag & flag)
 {
 	if (&flag.owner() == this) //  Additional security check.
 		flag.add_flag_job
-			(ref_cast<Game, Editor_Game_Base>(egbase()),
+			(ref_cast<Game, EditorGameBase>(egbase()),
 			 tribe().worker_index("geologist"),
 			 "expedition");
 }
@@ -801,7 +801,7 @@ void Player::allow_worker_type(Ware_Index const i, bool const allow) {
  *
  * Disable or enable a building for a player
  */
-void Player::allow_building_type(Building_Index const i, bool const allow) {
+void Player::allow_building_type(BuildingIndex const i, bool const allow) {
 	assert(i < m_allowed_building_types.size());
 	m_allowed_building_types[i] = allow;
 }
@@ -939,7 +939,7 @@ uint32_t Player::findAttackSoldiers
 // TODO(unknown): Clean this mess up. The only action we really have right now is
 // to attack, so pretending we have more types is pointless.
 void Player::enemyflagaction
-	(Flag & flag, Player_Number const attacker, uint32_t const count)
+	(Flag & flag, PlayerNumber const attacker, uint32_t const count)
 {
 	if      (attacker != player_number())
 		log
@@ -993,28 +993,28 @@ void Player::rediscover_node
 		int32_t const mapwidth = map.get_width();
 		// right neighbour
 		FCoords        r = map.r_n(f);
-		Player_Number  r_owner_number = r.field->get_owned_by();
-		Map_Index      r_index        = map.get_index(r, mapwidth);
+		PlayerNumber  r_owner_number = r.field->get_owned_by();
+		MapIndex      r_index        = map.get_index(r, mapwidth);
 		Vision         r_vision       = vision(r_index);
 		// top right neighbour
 		FCoords       tr = map.tr_n(f);
-		Player_Number tr_owner_number = tr.field->get_owned_by();
-		//Map_Index     tr_index        = map.get_index(tr, mapwidth);
+		PlayerNumber tr_owner_number = tr.field->get_owned_by();
+		//MapIndex     tr_index        = map.get_index(tr, mapwidth);
 		//Vision        tr_vision       = vision(tr_index);
 		// bottom right neighbour
 		FCoords       br = map.br_n(f);
-		Player_Number br_owner_number = br.field->get_owned_by();
-		Map_Index     br_index        = map.get_index(br, mapwidth);
+		PlayerNumber br_owner_number = br.field->get_owned_by();
+		MapIndex     br_index        = map.get_index(br, mapwidth);
 		Vision        br_vision       = vision(br_index);
 		// bottom left neighbour
 		FCoords       bl = map.bl_n(f);
-		Player_Number bl_owner_number = bl.field->get_owned_by();
-		Map_Index     bl_index        = map.get_index(bl, mapwidth);
+		PlayerNumber bl_owner_number = bl.field->get_owned_by();
+		MapIndex     bl_index        = map.get_index(bl, mapwidth);
 		Vision        bl_vision       = vision(bl_index);
 		// left neighbour
 		FCoords        l = map.l_n(f);
-		Player_Number  l_owner_number = l.field->get_owned_by();
-		//Map_Index      l_index        = map.get_index(l, mapwidth);
+		PlayerNumber  l_owner_number = l.field->get_owned_by();
+		//MapIndex      l_index        = map.get_index(l, mapwidth);
 		//Vision         l_vision       = vision(l_index);
 
 
@@ -1121,7 +1121,7 @@ void Player::see_node
 }
 
 void Player::unsee_node
-	(Map_Index const i, Time const gametime, bool const forward)
+	(MapIndex const i, Time const gametime, bool const forward)
 {
 	Field & field = m_fields[i];
 	if (field.vision <= 1) //  Already does not see this
@@ -1257,7 +1257,7 @@ void Player::update_building_statistics
 		constructionsite ?
 		constructionsite->building().name() : building.descr().name();
 
-	Building_Index const nr_buildings = tribe().get_nrbuildings();
+	BuildingIndex const nr_buildings = tribe().get_nrbuildings();
 
 	// Get the valid vector for this
 	if (m_building_stats.size() < nr_buildings)

@@ -80,7 +80,7 @@ int main(int argc, char ** argv)
 		g_fs->AddFileSystem(in_out_filesystem);
 
 		Map* map = new Map();
-		Editor_Game_Base egbase(nullptr);
+		EditorGameBase egbase(nullptr);
 		egbase.set_map(map);
 		std::unique_ptr<Widelands::MapLoader> ml(map->get_correct_loader(map_file));
 

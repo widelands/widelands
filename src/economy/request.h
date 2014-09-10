@@ -31,7 +31,7 @@ class FileWrite;
 namespace Widelands {
 
 class Economy;
-class Editor_Game_Base;
+class EditorGameBase;
 struct Flag;
 class Game;
 class MapObjectLoader;
@@ -105,7 +105,7 @@ public:
 	const Requirements & get_requirements () const {return m_requirements;}
 
 private:
-	int32_t get_base_required_time(Editor_Game_Base &, uint32_t nr) const;
+	int32_t get_base_required_time(EditorGameBase &, uint32_t nr) const;
 public:
 	void cancel_transfer(uint32_t idx);
 private:

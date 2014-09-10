@@ -26,7 +26,7 @@
 
 struct ProductionSite_Window : public Building_Window {
 	ProductionSite_Window
-		(Interactive_GameBase & parent,
+		(InteractiveGameBase & parent,
 		 Widelands::ProductionSite &,
 		 UI::Window *         & registry);
 

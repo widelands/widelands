@@ -36,7 +36,7 @@ namespace Widelands {
 #define CURRENT_PACKET_VERSION 1
 
 void MapTerrainPacket::Read(FileSystem& fs,
-                                   Editor_Game_Base& egbase,
+                                   EditorGameBase& egbase,
                                    const OneWorldLegacyLookupTable& lookup_table) {
 	FileRead fr;
 	fr.Open(fs, "binary/terrain");
@@ -67,8 +67,8 @@ void MapTerrainPacket::Read(FileSystem& fs,
 				smap[id] = world.terrains().get_index(new_terrain_name.c_str());
 			}
 
-			Map_Index const max_index = map.max_index();
-			for (Map_Index i = 0; i < max_index; ++i) {
+			MapIndex const max_index = map.max_index();
+			for (MapIndex i = 0; i < max_index; ++i) {
 				Field & f = map[i];
 				f.set_terrain_r(smap[fr.Unsigned8()]);
 				f.set_terrain_d(smap[fr.Unsigned8()]);
@@ -83,7 +83,7 @@ void MapTerrainPacket::Read(FileSystem& fs,
 
 
 void MapTerrainPacket::Write
-	(FileSystem & fs, Editor_Game_Base & egbase)
+	(FileSystem & fs, EditorGameBase & egbase)
 {
 
 	FileWrite fw;
@@ -105,8 +105,8 @@ void MapTerrainPacket::Write
 		fw.CString(name);
 	}
 
-	Map_Index const max_index = map.max_index();
-	for (Map_Index i = 0; i < max_index; ++i) {
+	MapIndex const max_index = map.max_index();
+	for (MapIndex i = 0; i < max_index; ++i) {
 		Field & f = map[i];
 		fw.Unsigned8(smap[world.terrain_descr(f.terrain_r()).name().c_str()]);
 		fw.Unsigned8(smap[world.terrain_descr(f.terrain_d()).name().c_str()]);

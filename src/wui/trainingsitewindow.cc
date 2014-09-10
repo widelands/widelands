@@ -34,7 +34,7 @@ static char const * pic_tab_military = "pics/menu_tab_military.png";
  */
 struct TrainingSite_Window : public ProductionSite_Window {
 	TrainingSite_Window
-		(Interactive_GameBase & parent, TrainingSite &, UI::Window * & registry);
+		(InteractiveGameBase & parent, TrainingSite &, UI::Window * & registry);
 
 	TrainingSite & trainingsite() {
 		return ref_cast<TrainingSite, Widelands::Building>(building());
@@ -48,7 +48,7 @@ protected:
  * Create the \ref TrainingSite specific soldier list tab.
  */
 TrainingSite_Window::TrainingSite_Window
-	(Interactive_GameBase & parent, TrainingSite & ts, UI::Window * & registry)
+	(InteractiveGameBase & parent, TrainingSite & ts, UI::Window * & registry)
 :
 ProductionSite_Window  (parent, ts, registry)
 {
@@ -69,7 +69,7 @@ Create the training site information window.
 ===============
 */
 void TrainingSite::create_options_window
-	(Interactive_GameBase & plr, UI::Window * & registry)
+	(InteractiveGameBase & plr, UI::Window * & registry)
 {
 	new TrainingSite_Window(plr, *this, registry);
 }

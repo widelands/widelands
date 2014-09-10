@@ -34,7 +34,7 @@ class FileWrite;
 
 namespace Widelands {
 
-class Editor_Game_Base;
+class EditorGameBase;
 struct MapObjectSaver;
 class MapObjectLoader;
 
@@ -111,9 +111,9 @@ struct GameLogicCommand : public Command {
 
 	// Write these commands to a file (for savegames)
 	virtual void Write
-		(FileWrite &, Editor_Game_Base &, MapObjectSaver  &);
+		(FileWrite &, EditorGameBase &, MapObjectSaver  &);
 	virtual void Read
-		(FileRead  &, Editor_Game_Base &, MapObjectLoader &);
+		(FileRead  &, EditorGameBase &, MapObjectLoader &);
 };
 
 class CmdQueue {

@@ -40,7 +40,7 @@ constexpr uint32_t kMaxElevationHalf = 0x80000000;
 
 namespace Widelands {
 
-MapGenerator::MapGenerator(Map& map, const UniqueRandomMapInfo& mapInfo, Editor_Game_Base& egbase) :
+MapGenerator::MapGenerator(Map& map, const UniqueRandomMapInfo& mapInfo, EditorGameBase& egbase) :
 	map_(map),
 	map_info_(mapInfo),
 	egbase_(egbase)
@@ -227,8 +227,8 @@ uint8_t MapGenerator::make_node_elevation
 	if (map_info_.islandMode) {
 		int32_t const border_dist =
 			std::min
-				(std::min<X_Coordinate>(c.x, map_info_.w - c.x),
-				 std::min<Y_Coordinate>(c.y, map_info_.h - c.y));
+				(std::min<XCoordinate>(c.x, map_info_.w - c.x),
+				 std::min<YCoordinate>(c.y, map_info_.h - c.y));
 		if (border_dist <= kIslandBorder) {
 			res_h =
 				static_cast<uint8_t>
@@ -770,16 +770,16 @@ void MapGenerator::create_random_map()
 
 	// Random placement of starting positions
 	assert(map_info_.numPlayers);
-	std::vector<Player_Number> pn(map_info_.numPlayers);
-	for (Player_Number n = 1; n <= map_info_.numPlayers; ++n) {
+	std::vector<PlayerNumber> pn(map_info_.numPlayers);
+	for (PlayerNumber n = 1; n <= map_info_.numPlayers; ++n) {
 		bool okay = false;
 		// This is a kinda dump algorithm -> we generate a random number and increase it until it fits.
 		// However it's working and simple ;) - if you've got a better idea, feel free to fix it.
-		Player_Number x = rng.rand() % map_info_.numPlayers;
+		PlayerNumber x = rng.rand() % map_info_.numPlayers;
 		while (!okay) {
 			okay = true;
-			++x; // Player_Number begins at 1 not at 0
-			for (Player_Number p = 1; p < n; ++p) {
+			++x; // PlayerNumber begins at 1 not at 0
+			for (PlayerNumber p = 1; p < n; ++p) {
 				if (pn[p - 1] == x) {
 					okay = false;
 					x = x % map_info_.numPlayers;
@@ -790,7 +790,7 @@ void MapGenerator::create_random_map()
 		pn[n - 1] = x;
 	}
 
-	for (Player_Number n = 1; n <= map_info_.numPlayers; ++n) {
+	for (PlayerNumber n = 1; n <= map_info_.numPlayers; ++n) {
 		// Set scenario information - needed even if it's not a scenario
 		map_.set_scenario_player_name(n, "Random Player");
 		map_.set_scenario_player_tribe(n, tribe);

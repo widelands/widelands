@@ -35,7 +35,7 @@ namespace Widelands {
 
 void MapExplorationPacket::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      &       egbase,
+	 EditorGameBase      &       egbase,
 	 bool                    const skip,
 	 MapObjectLoader &)
 {
@@ -55,12 +55,12 @@ void MapExplorationPacket::Read
 
 	static_assert(MAX_PLAYERS < 32, "assert(MAX_PLAYERS < 32) failed.");
 	Map & map = egbase.map();
-	Player_Number const nr_players = map.get_nrplayers();
-	Map_Index const max_index = map.max_index();
+	PlayerNumber const nr_players = map.get_nrplayers();
+	MapIndex const max_index = map.max_index();
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == 1)
-			for (Map_Index i = 0; i < max_index; ++i) {
+			for (MapIndex i = 0; i < max_index; ++i) {
 				uint32_t const data = fr.Unsigned16();
 				for (uint8_t j = 0; j < nr_players; ++j) {
 					bool const see = data & (1 << j);
@@ -74,7 +74,7 @@ void MapExplorationPacket::Read
 				}
 			}
 		else if (packet_version == CURRENT_PACKET_VERSION)
-			for (Map_Index i = 0; i < max_index; ++i) {
+			for (MapIndex i = 0; i < max_index; ++i) {
 				uint32_t const data = fr.Unsigned32();
 				for (uint8_t j = 0; j < nr_players; ++j) {
 					bool see = data & (1 << j);
@@ -97,7 +97,7 @@ void MapExplorationPacket::Read
 
 
 void MapExplorationPacket::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, MapObjectSaver &)
+	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
 {
 	FileWrite fw;
 
@@ -105,9 +105,9 @@ void MapExplorationPacket::Write
 
 	static_assert(MAX_PLAYERS < 32, "assert(MAX_PLAYERS < 32) failed.");
 	Map & map = egbase.map();
-	Player_Number const nr_players = map.get_nrplayers();
-	Map_Index const max_index = map.max_index();
-	for (Map_Index i = 0; i < max_index; ++i) {
+	PlayerNumber const nr_players = map.get_nrplayers();
+	MapIndex const max_index = map.max_index();
+	for (MapIndex i = 0; i < max_index; ++i) {
 		uint32_t data = 0;
 		for (uint8_t j = 0; j < nr_players; ++j) {
 			uint8_t const player_index = j + 1;

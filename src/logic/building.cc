@@ -54,7 +54,7 @@ static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
 BuildingDescr::BuildingDescr
 	(const MapObjectType _type, char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
-	 const Tribe_Descr & _descr)
+	 const TribeDescr & _descr)
 	:
 	MapObjectDescr(_type, _name, _descname),
 	m_tribe         (_descr),
@@ -103,7 +103,7 @@ BuildingDescr::BuildingDescr
 		std::string const target_name = enVal->get_string();
 		if (target_name == name())
 			throw wexception("enhancement to same type");
-		Building_Index const en_i = tribe().building_index(target_name);
+		BuildingIndex const en_i = tribe().building_index(target_name);
 		if (en_i != INVALID_INDEX) {
 			m_enhancement = en_i;
 
@@ -175,7 +175,7 @@ BuildingDescr::BuildingDescr
 
 
 Building & BuildingDescr::create
-	(Editor_Game_Base     &       egbase,
+	(EditorGameBase     &       egbase,
 	 Player               &       owner,
 	 Coords                 const pos,
 	 bool                   const construct,
@@ -186,7 +186,7 @@ Building & BuildingDescr::create
 	Building & b = construct ? create_constructionsite() : create_object();
 	b.m_position = pos;
 	b.set_owner(&owner);
-	for (Building_Index idx : former_buildings) {
+	for (BuildingIndex idx : former_buildings) {
 		b.m_old_buildings.push_back(idx);
 	}
 	if (loading) {
@@ -277,7 +277,7 @@ Building::~Building()
 		hide_options();
 }
 
-void Building::load_finish(Editor_Game_Base & egbase) {
+void Building::load_finish(EditorGameBase & egbase) {
 	auto should_be_deleted = [&egbase, this](const OPtr<Worker>& optr) {
 		Worker & worker = *optr.get(egbase);
 		OPtr<PlayerImmovable> const worker_location = worker.get_location();
@@ -347,7 +347,7 @@ uint32_t Building::get_playercaps() const {
 	return caps;
 }
 
-void Building::start_animation(Editor_Game_Base & egbase, uint32_t const anim)
+void Building::start_animation(EditorGameBase & egbase, uint32_t const anim)
 {
 	m_anim = anim;
 	m_animstart = egbase.get_gametime();
@@ -359,7 +359,7 @@ Common building initialization code. You must call this from
 derived class' init.
 ===============
 */
-void Building::init(Editor_Game_Base & egbase)
+void Building::init(EditorGameBase & egbase)
 {
 	PlayerImmovable::init(egbase);
 
@@ -403,7 +403,7 @@ void Building::init(Editor_Game_Base & egbase)
 }
 
 
-void Building::cleanup(Editor_Game_Base & egbase)
+void Building::cleanup(EditorGameBase & egbase)
 {
 	if (m_defeating_player) {
 		Player & defeating_player = egbase.player(m_defeating_player);
@@ -461,7 +461,7 @@ bool Building::burn_on_destroy()
  * Return all positions on the map that we occupy
  */
 BaseImmovable::PositionList Building::get_positions
-	(const Editor_Game_Base & egbase) const
+	(const EditorGameBase & egbase) const
 {
 	PositionList rv;
 
@@ -489,11 +489,11 @@ Remove the building from the world now, and create a fire in its place if
 applicable.
 ===============
 */
-void Building::destroy(Editor_Game_Base & egbase)
+void Building::destroy(EditorGameBase & egbase)
 {
 	const bool fire           = burn_on_destroy();
 	const Coords pos          = m_position;
-	const Tribe_Descr & t     = descr().tribe();
+	const TribeDescr & t     = descr().tribe();
 	PlayerImmovable::destroy(egbase);
 	// We are deleted. Only use stack variables beyond this point
 	if (fire)
@@ -702,7 +702,7 @@ Draw the building.
 ===============
 */
 void Building::draw
-	(const Editor_Game_Base& game, RenderTarget& dst, const FCoords& coords, const Point& pos)
+	(const EditorGameBase& game, RenderTarget& dst, const FCoords& coords, const Point& pos)
 {
 	if (coords == m_position) { // draw big buildings only once
 		dst.drawanim
@@ -722,21 +722,21 @@ Draw overlay help strings when enabled.
 ===============
 */
 void Building::draw_help
-	(const Editor_Game_Base& game, RenderTarget& dst, const FCoords&, const Point& pos)
+	(const EditorGameBase& game, RenderTarget& dst, const FCoords&, const Point& pos)
 {
-	const Interactive_GameBase & igbase =
-		ref_cast<Interactive_GameBase const, Interactive_Base const>
+	const InteractiveGameBase & igbase =
+		ref_cast<InteractiveGameBase const, InteractiveBase const>
 			(*game.get_ibase());
 	uint32_t const dpyflags = igbase.get_display_flags();
 
-	if (dpyflags & Interactive_Base::dfShowCensus) {
+	if (dpyflags & InteractiveBase::dfShowCensus) {
 		const std::string info = info_string(igbase.building_census_format());
 		if (!info.empty()) {
 			dst.blit(pos - Point(0, 48), UI::g_fh1->render(info), CM_Normal, UI::Align_Center);
 		}
 	}
 
-	if (dpyflags & Interactive_Base::dfShowStatistics) {
+	if (dpyflags & InteractiveBase::dfShowStatistics) {
 		if (upcast(Interactive_Player const, iplayer, &igbase))
 			if
 				(!iplayer->player().see_all() &&
@@ -799,7 +799,7 @@ void Building::set_priority
 }
 
 
-void Building::log_general_info(const Editor_Game_Base & egbase) {
+void Building::log_general_info(const EditorGameBase & egbase) {
 	PlayerImmovable::log_general_info(egbase);
 
 	molog("m_position: (%i, %i)\n", m_position.x, m_position.y);

@@ -48,7 +48,7 @@ static const char * pic_debug              = "pics/menu_debug.png";
 
 
 Building_Window::Building_Window
-	(Interactive_GameBase & parent,
+	(InteractiveGameBase & parent,
 	 Widelands::Building  & b,
 	 UI::Window *         & registry)
 	:
@@ -164,7 +164,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 	m_capscache_player_number = igbase().player_number();
 
 	const Widelands::Player & owner = building().owner();
-	const Widelands::Player_Number owner_number = owner.player_number();
+	const Widelands::PlayerNumber owner_number = owner.player_number();
 	const bool can_see = igbase().can_see(owner_number);
 	const bool can_act = igbase().can_act(owner_number);
 
@@ -222,9 +222,9 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 		} // upcast to productionsite
 
 		if (m_capscache & Widelands::Building::PCap_Enhancable) {
-			const Widelands::Building_Index & enhancement =
+			const Widelands::BuildingIndex & enhancement =
 				m_building.descr().enhancement();
-			const Widelands::Tribe_Descr & tribe  = owner.tribe();
+			const Widelands::TribeDescr & tribe  = owner.tribe();
 			if (owner.is_building_type_allowed(enhancement)) {
 					const Widelands::BuildingDescr & building_descr =
 						*tribe.get_building_descr(enhancement);
@@ -313,7 +313,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 			set_fastclick_panel(m_toggle_workarea);
 		}
 
-		if (igbase().get_display_flag(Interactive_Base::dfDebug)) {
+		if (igbase().get_display_flag(InteractiveBase::dfDebug)) {
 			UI::Button * debugbtn =
 				new UI::Button
 					(capsbuttons, "debug", 0, 0, 34, 34,
@@ -375,7 +375,7 @@ void Building_Window::act_bulldoze()
 			igbase().game().send_player_bulldoze(m_building);
 	}
 	else {
-		show_bulldoze_confirm(ref_cast<Interactive_Player, Interactive_GameBase>(igbase()), m_building);
+		show_bulldoze_confirm(ref_cast<Interactive_Player, InteractiveGameBase>(igbase()), m_building);
 	}
 }
 
@@ -391,7 +391,7 @@ void Building_Window::act_dismantle()
 			igbase().game().send_player_dismantle(m_building);
 	}
 	else {
-		show_dismantle_confirm(ref_cast<Interactive_Player, Interactive_GameBase>(igbase()), m_building);
+		show_dismantle_confirm(ref_cast<Interactive_Player, InteractiveGameBase>(igbase()), m_building);
 	}
 }
 
@@ -427,7 +427,7 @@ void Building_Window::act_start_or_cancel_expedition() {
 Callback for enhancement request
 ===============
 */
-void Building_Window::act_enhance(Widelands::Building_Index id)
+void Building_Window::act_enhance(Widelands::BuildingIndex id)
 {
 	if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) {
 		if (m_building.get_playercaps() & Widelands::Building::PCap_Enhancable)
@@ -435,7 +435,7 @@ void Building_Window::act_enhance(Widelands::Building_Index id)
 	}
 	else {
 		show_enhance_confirm
-			(ref_cast<Interactive_Player, Interactive_GameBase>(igbase()),
+			(ref_cast<Interactive_Player, InteractiveGameBase>(igbase()),
 			 m_building,
 			 id);
 	}

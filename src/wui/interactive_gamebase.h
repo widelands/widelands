@@ -28,7 +28,7 @@ struct ChatProvider;
 
 enum PlayerType {NONE, OBSERVER, PLAYING, VICTORIOUS, DEFEATED};
 
-class Interactive_GameBase : public Interactive_Base {
+class InteractiveGameBase : public InteractiveBase {
 public:
 	class Game_Main_Menu_Windows {
 	public:
@@ -46,7 +46,7 @@ public:
 		UI::UniqueWindow::Registry stock;
 	};
 
-	Interactive_GameBase
+	InteractiveGameBase
 		(Widelands::Game &,
 		 Section         & global_s,
 		 PlayerType        pt          = NONE,
@@ -70,9 +70,9 @@ public:
 		return m_building_tooltip_format;
 	}
 
-	virtual bool can_see(Widelands::Player_Number) const = 0;
-	virtual bool can_act(Widelands::Player_Number) const = 0;
-	virtual Widelands::Player_Number player_number() const = 0;
+	virtual bool can_see(Widelands::PlayerNumber) const = 0;
+	virtual bool can_act(Widelands::PlayerNumber) const = 0;
+	virtual Widelands::PlayerNumber player_number() const = 0;
 
 	virtual void node_action() = 0;
 	const PlayerType & get_playertype()const {return m_playertype;}

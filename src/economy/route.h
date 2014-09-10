@@ -29,7 +29,7 @@
 namespace Widelands {
 
 struct Flag;
-class Editor_Game_Base;
+class EditorGameBase;
 struct MapObjectSaver;
 class MapObjectLoader;
 struct RoutingNode;
@@ -48,7 +48,7 @@ struct Route : public IRoute {
 
 	int32_t get_totalcost() const {return m_totalcost;}
 	int32_t get_nrsteps() const {return m_route.size() - 1;}
-	Flag & get_flag(Editor_Game_Base &, std::vector<Flag *>::size_type);
+	Flag & get_flag(EditorGameBase &, std::vector<Flag *>::size_type);
 
 	void starttrim(int32_t count);
 	void truncate(int32_t count);
@@ -59,7 +59,7 @@ struct Route : public IRoute {
 
 	void load(LoadData &, FileRead &);
 	void load_pointers(const LoadData &, MapObjectLoader &);
-	void save(FileWrite &, Editor_Game_Base &, MapObjectSaver &);
+	void save(FileWrite &, EditorGameBase &, MapObjectSaver &);
 
 	void insert_as_first(RoutingNode * node) override;
 

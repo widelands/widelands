@@ -57,7 +57,7 @@ Editor_Unset_Port_Space_Tool::Editor_Unset_Port_Space_Tool()
 
 int32_t Editor_Set_Port_Space_Tool::handle_click_impl(Map& map,
                                                       const Widelands::World& world,
-                                                      Widelands::Node_and_Triangle<> const center,
+                                                      Widelands::NodeAndTriangle<> const center,
                                                       Editor_Interactive&,
                                                       Editor_Action_Args& args) {
 	assert(0 <= center.node.x);
@@ -84,7 +84,7 @@ int32_t Editor_Set_Port_Space_Tool::handle_click_impl(Map& map,
 
 int32_t Editor_Set_Port_Space_Tool::handle_undo_impl(Map& map,
                                                      const Widelands::World& world,
-                                                     Node_and_Triangle<Coords> center,
+                                                     NodeAndTriangle<Coords> center,
                                                      Editor_Interactive& parent,
                                                      Editor_Action_Args& args) {
 	return parent.tools.unset_port_space.handle_click_impl(map, world, center, parent, args);
@@ -92,7 +92,7 @@ int32_t Editor_Set_Port_Space_Tool::handle_undo_impl(Map& map,
 
 int32_t Editor_Unset_Port_Space_Tool::handle_click_impl(Map& map,
                                                         const Widelands::World& world,
-                                                        Node_and_Triangle<> const center,
+                                                        NodeAndTriangle<> const center,
                                                         Editor_Interactive&,
                                                         Editor_Action_Args& args) {
 	assert(0 <= center.node.x);
@@ -119,7 +119,7 @@ int32_t Editor_Unset_Port_Space_Tool::handle_click_impl(Map& map,
 
 int32_t Editor_Unset_Port_Space_Tool::handle_undo_impl(Map& map,
                                                        const Widelands::World& world,
-                                                       Node_and_Triangle<Coords> center,
+                                                       NodeAndTriangle<Coords> center,
                                                        Editor_Interactive& parent,
                                                        Editor_Action_Args& args) {
 	return parent.tools.set_port_space.handle_click_impl(map, world, center, parent, args);

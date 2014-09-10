@@ -27,7 +27,7 @@
 #include "ui_basic/unique_window.h"
 #include "wui/plot_area.h"
 
-class Interactive_GameBase;
+class InteractiveGameBase;
 namespace UI {
 struct Radiogroup;
 }
@@ -49,7 +49,7 @@ struct General_Statistics_Menu : public UI::UniqueWindow {
 	};
 
 	General_Statistics_Menu
-		(Interactive_GameBase &, Registry &);
+		(InteractiveGameBase &, Registry &);
 	virtual ~General_Statistics_Menu();
 
 private:

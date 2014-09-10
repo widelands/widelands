@@ -33,13 +33,13 @@ public:
 
 	int32_t handle_click_impl(Widelands::Map& map,
 	                          const Widelands::World& world,
-	                          Widelands::Node_and_Triangle<> center,
+	                          Widelands::NodeAndTriangle<> center,
 	                          Editor_Interactive& parent,
 	                          Editor_Action_Args& args) override;
 
 	int32_t handle_undo_impl(Widelands::Map& map,
 	                         const Widelands::World& world,
-	                         Widelands::Node_and_Triangle<> center,
+	                         Widelands::NodeAndTriangle<> center,
 	                         Editor_Interactive& parent,
 	                         Editor_Action_Args& args) override;
 
@@ -54,13 +54,13 @@ public:
 
 	int32_t handle_click_impl(Widelands::Map& map,
 	                          const Widelands::World& world,
-	                          Widelands::Node_and_Triangle<> center,
+	                          Widelands::NodeAndTriangle<> center,
 	                          Editor_Interactive& parent,
 	                          Editor_Action_Args& args) override;
 
 	int32_t handle_undo_impl(Widelands::Map& map,
 	                         const Widelands::World& world,
-	                         Widelands::Node_and_Triangle<> center,
+	                         Widelands::NodeAndTriangle<> center,
 	                         Editor_Interactive& parent,
 	                         Editor_Action_Args& args) override;
 

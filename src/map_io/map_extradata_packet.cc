@@ -84,7 +84,7 @@ void MapExtradataPacket::Read(FileSystem& fs, bool const skip) {
 
 
 void MapExtradataPacket::Write
-	(FileSystem & fs, Editor_Game_Base & egbase)
+	(FileSystem & fs, EditorGameBase & egbase)
 {
 	Profile prof;
 	prof.create_section("global").set_int

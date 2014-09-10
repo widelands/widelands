@@ -39,7 +39,7 @@ void EconomyDataPacket::Read(FileRead & fr)
 		if (1 <= version && version <= CURRENT_ECONOMY_VERSION) {
 			if (2 <= version)
 				try {
-					const Tribe_Descr & tribe = m_eco->owner().tribe();
+					const TribeDescr & tribe = m_eco->owner().tribe();
 					while (Time const last_modified = fr.Unsigned32()) {
 						char const * const type_name = fr.CString();
 						uint32_t const permanent = fr.Unsigned32();
@@ -103,7 +103,7 @@ void EconomyDataPacket::Read(FileRead & fr)
 void EconomyDataPacket::Write(FileWrite & fw)
 {
 	fw.Unsigned16(CURRENT_ECONOMY_VERSION);
-	const Tribe_Descr & tribe = m_eco->owner().tribe();
+	const TribeDescr & tribe = m_eco->owner().tribe();
 	for (Ware_Index i = tribe.get_nrwares(); i;) {
 		--i;
 		const Economy::Target_Quantity & tq =

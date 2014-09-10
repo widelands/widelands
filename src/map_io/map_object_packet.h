@@ -29,7 +29,7 @@ class OneWorldLegacyLookupTable;
 
 namespace Widelands {
 
-class Editor_Game_Base;
+class EditorGameBase;
 class MapObjectLoader;
 struct MapObjectSaver;
 
@@ -55,12 +55,12 @@ struct MapObjectPacket {
 	~MapObjectPacket();
 
 	void Read
-		(FileSystem &, Editor_Game_Base &, MapObjectLoader &,
+		(FileSystem &, EditorGameBase &, MapObjectLoader &,
 		 const OneWorldLegacyLookupTable& lookup_table);
 
 	void LoadFinish();
 
-	void Write(FileSystem &, Editor_Game_Base &, MapObjectSaver  &);
+	void Write(FileSystem &, EditorGameBase &, MapObjectSaver  &);
 };
 
 }

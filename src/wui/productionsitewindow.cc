@@ -42,7 +42,7 @@ Create the window and its panels, add it to the registry.
 ===============
 */
 ProductionSite_Window::ProductionSite_Window
-	(Interactive_GameBase & parent,
+	(InteractiveGameBase & parent,
 	 ProductionSite       & ps,
 	 UI::Window *         & registry)
 	: Building_Window(parent, ps, registry)
@@ -133,7 +133,7 @@ Create the production site information window.
 ===============
 */
 void ProductionSite::create_options_window
-	(Interactive_GameBase & parent, UI::Window * & registry)
+	(InteractiveGameBase & parent, UI::Window * & registry)
 {
 	ProductionSite_Window* win = new ProductionSite_Window(parent, *this, registry);
 	Building::options_window_connections.push_back

@@ -36,8 +36,8 @@ int32_t Editor_Tool_Set_Starting_Pos_Callback
 	(const Widelands::TCoords<Widelands::FCoords>& c, Widelands::Map& map)
 {
 	// Area around already placed players
-	Widelands::Player_Number const nr_players = map.get_nrplayers();
-	for (Widelands::Player_Number p = 1, last = m_current_player - 1;; ++p) {
+	Widelands::PlayerNumber const nr_players = map.get_nrplayers();
+	for (Widelands::PlayerNumber p = 1, last = m_current_player - 1;; ++p) {
 		for (; p <= last; ++p)
 			if (Widelands::Coords const sp = map.get_starting_pos(p))
 				if (map.calc_distance(sp, c) < MIN_PLACE_AROUND_PLAYERS)
@@ -64,7 +64,7 @@ Editor_Set_Starting_Pos_Tool::Editor_Set_Starting_Pos_Tool()
 
 int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl(Widelands::Map& map,
                                                         const Widelands::World&,
-                                                        Widelands::Node_and_Triangle<> const center,
+                                                        Widelands::NodeAndTriangle<> const center,
                                                         Editor_Interactive&,
                                                         Editor_Action_Args&) {
 	assert(0 <= center.node.x);
@@ -105,7 +105,7 @@ int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl(Widelands::Map& map,
 	return 1;
 }
 
-Widelands::Player_Number Editor_Set_Starting_Pos_Tool::get_current_player
+Widelands::PlayerNumber Editor_Set_Starting_Pos_Tool::get_current_player
 () const
 {
 	return m_current_player;

@@ -41,12 +41,12 @@ struct Textarea;
  * to the player and draws the user interface,
  * cares for input and so on.
  */
-class Interactive_Player : public Interactive_GameBase {
+class Interactive_Player : public InteractiveGameBase {
 public:
 	Interactive_Player
 		(Widelands::Game &,
 		 Section         & global_s,
-		 Widelands::Player_Number,
+		 Widelands::PlayerNumber,
 		 bool              multiplayer);
 
 	~Interactive_Player();
@@ -55,9 +55,9 @@ public:
 
 	void toggle_chat        ();
 
-	bool can_see(Widelands::Player_Number) const override;
-	bool can_act(Widelands::Player_Number) const override;
-	Widelands::Player_Number player_number() const override;
+	bool can_see(Widelands::PlayerNumber) const override;
+	bool can_act(Widelands::PlayerNumber) const override;
+	Widelands::PlayerNumber player_number() const override;
 
 	void node_action() override;
 
@@ -88,7 +88,7 @@ public:
 private:
 	void cmdSwitchPlayer(const std::vector<std::string> & args);
 
-	Widelands::Player_Number m_player_number;
+	Widelands::PlayerNumber m_player_number;
 	bool                     m_auto_roadbuild_mode;
 	Widelands::Coords        m_flag_to_connect;
 

@@ -29,7 +29,7 @@
 namespace Widelands {
 
 void CmdIncorporate::Read
-	(FileRead & fr, Editor_Game_Base & egbase, MapObjectLoader & mol)
+	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -51,7 +51,7 @@ void CmdIncorporate::Read
 
 
 void CmdIncorporate::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, MapObjectSaver & mos)
+	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(CMD_INCORPORATE_VERSION);

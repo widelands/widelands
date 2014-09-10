@@ -33,8 +33,8 @@ struct CmdCalculateStatistics : public GameLogicCommand {
 		GameLogicCommand(_duetime) {}
 
 	// Write these commands to a file (for savegames)
-	void Write(FileWrite &, Editor_Game_Base &, MapObjectSaver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, MapObjectLoader &) override;
+	void Write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
+	void Read (FileRead  &, EditorGameBase &, MapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_CALCULATE_STATISTICS;}
 	void execute(Game &) override;

@@ -48,7 +48,7 @@ MapObjectPacket::~MapObjectPacket() {
 
 
 void MapObjectPacket::Read
-	(FileSystem & fs, Editor_Game_Base & egbase, MapObjectLoader & mol,
+	(FileSystem & fs, EditorGameBase & egbase, MapObjectLoader & mol,
 	 const OneWorldLegacyLookupTable& lookup_table)
 {
 	try {
@@ -133,7 +133,7 @@ void MapObjectPacket::LoadFinish() {
 
 
 void MapObjectPacket::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, MapObjectSaver & mos)
+	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	FileWrite fw;
 

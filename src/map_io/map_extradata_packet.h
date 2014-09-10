@@ -32,7 +32,7 @@ namespace Widelands {
 class MapExtradataPacket {
 public:
 	void Read(FileSystem&, bool);
-	void Write(FileSystem&, Editor_Game_Base&);
+	void Write(FileSystem&, EditorGameBase&);
 };
 
 }  // namespace Widelands

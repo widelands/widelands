@@ -32,7 +32,7 @@ namespace Widelands {
 
 
 void MapHeightsPacket::Read
-	(FileSystem & fs, Editor_Game_Base & egbase, bool, MapObjectLoader &)
+	(FileSystem & fs, EditorGameBase & egbase, bool, MapObjectLoader &)
 {
 
 	FileRead fr;
@@ -42,8 +42,8 @@ void MapHeightsPacket::Read
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CURRENT_PACKET_VERSION) {
 			Map & map = egbase.map();
-			Map_Index const max_index = map.max_index();
-			for (Map_Index i = 0; i < max_index; ++i)
+			MapIndex const max_index = map.max_index();
+			for (MapIndex i = 0; i < max_index; ++i)
 				map[i].set_height(fr.Unsigned8());
 		} else
 			throw GameDataError
@@ -58,7 +58,7 @@ void MapHeightsPacket::Read
  * Write Function
  */
 void MapHeightsPacket::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, MapObjectSaver &)
+	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
 
 {
 	FileWrite fw;
@@ -66,8 +66,8 @@ void MapHeightsPacket::Write
 	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
 	Map & map = egbase.map();
-	Map_Index const max_index = map.max_index();
-	for (Map_Index i = 0; i < max_index; ++i)
+	MapIndex const max_index = map.max_index();
+	for (MapIndex i = 0; i < max_index; ++i)
 		fw.Unsigned8(map[i].get_height());
 
 	fw.Write(fs,  "binary/heights");

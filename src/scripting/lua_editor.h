@@ -34,7 +34,7 @@ public:
 	LUNA_CLASS_HEAD(L_Player);
 
 	L_Player() : LuaBases::L_PlayerBase() {}
-	L_Player(Widelands::Player_Number n) : LuaBases::L_PlayerBase(n)  {}
+	L_Player(Widelands::PlayerNumber n) : LuaBases::L_PlayerBase(n)  {}
 	L_Player(lua_State * L) {
 		report_error(L, "Cannot instantiate a 'Player' directly!");
 	}

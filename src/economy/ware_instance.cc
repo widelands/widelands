@@ -200,12 +200,12 @@ WareInstance::~WareInstance()
 	}
 }
 
-void WareInstance::init(Editor_Game_Base & egbase)
+void WareInstance::init(EditorGameBase & egbase)
 {
 	MapObject::init(egbase);
 }
 
-void WareInstance::cleanup(Editor_Game_Base & egbase)
+void WareInstance::cleanup(EditorGameBase & egbase)
 {
 	// Unlink from our current location, if necessary
 	if (upcast(Flag, flag, m_location.get(egbase)))
@@ -244,7 +244,7 @@ void WareInstance::set_economy(Economy * const e)
  * Once you've assigned a ware to its new location, you usually have to call
  * \ref update() as well.
 */
-void WareInstance::set_location(Editor_Game_Base & egbase, MapObject * const location)
+void WareInstance::set_location(EditorGameBase & egbase, MapObject * const location)
 {
 	MapObject * const oldlocation = m_location.get(egbase);
 
@@ -527,7 +527,7 @@ PlayerImmovable * WareInstance::get_next_move_step(Game & game)
 		dynamic_cast<PlayerImmovable *>(m_transfer_nextstep.get(game)) : nullptr;
 }
 
-void WareInstance::log_general_info(const Editor_Game_Base & egbase)
+void WareInstance::log_general_info(const EditorGameBase & egbase)
 {
 	MapObject::log_general_info(egbase);
 
@@ -561,7 +561,7 @@ void WareInstance::Loader::load(FileRead & fr)
 	m_transfer_nextstep = fr.Unsigned32();
 	if (fr.Unsigned8()) {
 		ware.m_transfer =
-			new Transfer(ref_cast<Game, Editor_Game_Base>(egbase()), ware);
+			new Transfer(ref_cast<Game, EditorGameBase>(egbase()), ware);
 		ware.m_transfer->read(fr, m_transfer);
 	}
 }
@@ -596,7 +596,7 @@ void WareInstance::Loader::load_finish()
 
 
 void WareInstance::save
-	(Editor_Game_Base & egbase, MapObjectSaver & mos, FileWrite & fw)
+	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(HeaderWareInstance);
 	fw.Unsigned8(WAREINSTANCE_SAVEGAME_VERSION);
@@ -617,7 +617,7 @@ void WareInstance::save
 }
 
 MapObject::Loader * WareInstance::load
-	(Editor_Game_Base & egbase, MapObjectLoader & mol, FileRead & fr)
+	(EditorGameBase & egbase, MapObjectLoader & mol, FileRead & fr)
 {
 	try {
 		uint8_t version = fr.Unsigned8();
@@ -630,7 +630,7 @@ MapObject::Loader * WareInstance::load
 
 		egbase.manually_load_tribe(tribename);
 
-		const Tribe_Descr * tribe = egbase.get_tribe(tribename);
+		const TribeDescr * tribe = egbase.get_tribe(tribename);
 		if (!tribe)
 			throw wexception("unknown tribe '%s'", tribename.c_str());
 

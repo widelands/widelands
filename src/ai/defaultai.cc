@@ -62,7 +62,7 @@ DefaultAI::NormalImpl DefaultAI::normalImpl;
 DefaultAI::DefensiveImpl DefaultAI::defensiveImpl;
 
 /// Constructor of DefaultAI
-DefaultAI::DefaultAI(Game& ggame, Player_Number const pid, uint8_t const t)
+DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
    : Computer_Player(ggame, pid),
      type_(t),
      m_buildable_changed(true),
@@ -242,10 +242,10 @@ void DefaultAI::late_initialization() {
 	}
 
 	// collect information about the different buildings our tribe can construct
-	Building_Index const nr_buildings = tribe_->get_nrbuildings();
+	BuildingIndex const nr_buildings = tribe_->get_nrbuildings();
 	const World& world = game().world();
 
-	for (Building_Index i = 0; i < nr_buildings; ++i) {
+	for (BuildingIndex i = 0; i < nr_buildings; ++i) {
 		const BuildingDescr& bld = *tribe_->get_building_descr(i);
 		const std::string& building_name = bld.name();
 		const BuildingHints& bh = bld.hints();
@@ -354,8 +354,8 @@ void DefaultAI::late_initialization() {
 	Map& map = game().map();
 	std::set<OPtr<PlayerImmovable>> found_immovables;
 
-	for (Y_Coordinate y = 0; y < map.get_height(); ++y) {
-		for (X_Coordinate x = 0; x < map.get_width(); ++x) {
+	for (YCoordinate y = 0; y < map.get_height(); ++y) {
+		for (XCoordinate x = 0; x < map.get_width(); ++x) {
 			FCoords f = map.get_fcoords(Coords(x, y));
 
 			if (f.field->get_owned_by() != player_number())
@@ -483,7 +483,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 	Map& map = game().map();
 	FindNodeUnowned find_unowned(player_, game());
 	FindNodeUnownedMineable find_unowned_mines_pots(player_, game());
-	Player_Number const pn = player_->player_number();
+	PlayerNumber const pn = player_->player_number();
 	const World& world = game().world();
 	field.unowned_land_nearby_ =
 	   map.find_fields(Area<FCoords>(field.coords, range), nullptr, find_unowned);
@@ -841,7 +841,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 		military_boost = 200;
 	}
 
-	// Building_Index proposed_building = INVALID_INDEX; // I need BuildingObserver not index
+	// BuildingIndex proposed_building = INVALID_INDEX; // I need BuildingObserver not index
 	BuildingObserver* best_building = nullptr;
 	int32_t proposed_priority = 0;
 	Coords proposed_coords;
@@ -2012,8 +2012,8 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 
 	// Check whether building is enhanceable and if wares of the enhanced
 	// buildings are needed. If yes consider an upgrade.
-	const Building_Index enhancement = site.site->descr().enhancement();
-	Building_Index enbld = INVALID_INDEX;  // to get rid of this
+	const BuildingIndex enhancement = site.site->descr().enhancement();
+	BuildingIndex enbld = INVALID_INDEX;  // to get rid of this
 	BuildingObserver* bestbld = nullptr;
 
 	// Only enhance buildings that are allowed (scenario mode)
@@ -2118,8 +2118,8 @@ bool DefaultAI::check_mines_(int32_t const gametime) {
 	}
 
 	// Check whether building is enhanceable. If yes consider an upgrade.
-	const Building_Index enhancement = site.site->descr().enhancement();
-	Building_Index enbld = INVALID_INDEX;
+	const BuildingIndex enhancement = site.site->descr().enhancement();
+	BuildingIndex enbld = INVALID_INDEX;
 	BuildingObserver* bestbld = nullptr;
 	bool changed = false;
 	// Only enhance buildings that are allowed (scenario mode)
@@ -2603,7 +2603,7 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 	// counting players in game
 	uint32_t plr_in_game = 0;
 	std::vector<bool> player_attackable;
-	Player_Number const nr_players = game().map().get_nrplayers();
+	PlayerNumber const nr_players = game().map().get_nrplayers();
 	player_attackable.resize(nr_players);
 	bool any_attackable = false;
 	bool any_attacked = false;

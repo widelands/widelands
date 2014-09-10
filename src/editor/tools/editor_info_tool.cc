@@ -34,7 +34,7 @@
 /// Show a window with information about the pointed at node and triangle.
 int32_t Editor_Info_Tool::handle_click_impl(Widelands::Map& map,
 					    const Widelands::World& world,
-					    Widelands::Node_and_Triangle<> center,
+					    Widelands::NodeAndTriangle<> center,
 					    Editor_Interactive& parent,
 					    Editor_Action_Args& /* args */) {
 	UI::Window * const w =

@@ -108,7 +108,7 @@ public:
 	StatisticWaresDisplay
 		(UI::Panel * const parent,
 		 int32_t const x, int32_t const y,
-		 const Widelands::Tribe_Descr & tribe,
+		 const Widelands::TribeDescr & tribe,
 		 boost::function<void(Widelands::Ware_Index, bool)> callback_function,
 		 std::vector<uint8_t> & color_map)
 	:

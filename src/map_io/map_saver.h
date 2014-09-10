@@ -26,7 +26,7 @@ class FileSystem;
 
 namespace Widelands {
 
-class Editor_Game_Base;
+class EditorGameBase;
 struct MapObjectSaver;
 
 /*
@@ -42,14 +42,14 @@ debugability
 ===========================
 */
 struct MapSaver {
-	MapSaver(FileSystem &, Editor_Game_Base &);
+	MapSaver(FileSystem &, EditorGameBase &);
 	~MapSaver();
 
 	void save();
 	MapObjectSaver * get_map_object_saver() {return m_mos;}
 
 private:
-	Editor_Game_Base     & m_egbase;
+	EditorGameBase     & m_egbase;
 	FileSystem & m_fs;
 	MapObjectSaver * m_mos;
 };

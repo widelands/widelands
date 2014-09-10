@@ -120,12 +120,12 @@ int L_EditorGameBase::get_map(lua_State * L) {
 		The editor always creates all players that are defined by the map.
 */
 int L_EditorGameBase::get_players(lua_State * L) {
-	Editor_Game_Base & egbase = get_egbase(L);
+	EditorGameBase & egbase = get_egbase(L);
 
 	lua_newtable(L);
 
 	uint32_t idx = 1;
-	for (Player_Number i = 1; i <= MAX_PLAYERS; i++) {
+	for (PlayerNumber i = 1; i <= MAX_PLAYERS; i++) {
 		Player * rv = egbase.get_player(i);
 		if (!rv)
 			continue;
@@ -159,11 +159,11 @@ int L_EditorGameBase::get_building_description(lua_State* L) {
 	}
 	const std::string tribe_name = luaL_checkstring(L, 2);
 	const std::string building_name = luaL_checkstring(L, 3);
-	const Tribe_Descr* tribe_description = get_egbase(L).get_tribe(tribe_name);
+	const TribeDescr* tribe_description = get_egbase(L).get_tribe(tribe_name);
 	if (!tribe_description) {
 		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
 	}
-	const Building_Index building_index = tribe_description->building_index(building_name);
+	const BuildingIndex building_index = tribe_description->building_index(building_name);
 	if (building_index == INVALID_INDEX) {
 		report_error(L, "Building %s does not exist", building_name.c_str());
 	}
@@ -189,7 +189,7 @@ int L_EditorGameBase::get_ware_description(lua_State* L) {
 	}
 	const std::string tribe_name = luaL_checkstring(L, 2);
 	const std::string ware_name = luaL_checkstring(L, 3);
-	const Tribe_Descr* tribe_description = get_egbase(L).get_tribe(tribe_name);
+	const TribeDescr* tribe_description = get_egbase(L).get_tribe(tribe_name);
 	if (!tribe_description) {
 		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
 	}
@@ -218,7 +218,7 @@ int L_EditorGameBase::get_worker_description(lua_State* L) {
 	}
 	const std::string tribe_name = luaL_checkstring(L, 2);
 	const std::string worker_name = luaL_checkstring(L, 3);
-	const Tribe_Descr* tribe_description = get_egbase(L).get_tribe(tribe_name);
+	const TribeDescr* tribe_description = get_egbase(L).get_tribe(tribe_name);
 	if (!tribe_description) {
 		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
 	}
@@ -304,7 +304,7 @@ int L_PlayerBase::get_tribe_name(lua_State * L) {
  ==========================================================
  */
 int L_PlayerBase::__eq(lua_State * L) {
-	Editor_Game_Base & egbase = get_egbase(L);
+	EditorGameBase & egbase = get_egbase(L);
 	const Player & me = get(L, egbase);
 	const Player & you =
 		(*get_base_user_class<L_PlayerBase>(L, 2))->get(L, egbase);
@@ -379,7 +379,7 @@ int L_PlayerBase::place_flag(lua_State * L) {
 		:returns: the road created
 */
 int L_PlayerBase::place_road(lua_State * L) {
-	Editor_Game_Base & egbase = get_egbase(L);
+	EditorGameBase & egbase = get_egbase(L);
 	Map & map = egbase.map();
 
 	Flag * starting_flag =
@@ -484,8 +484,8 @@ int L_PlayerBase::place_building(lua_State * L) {
 	if (lua_gettop(L) >= 5)
 		force = luaL_checkboolean(L, 5);
 
-	const Tribe_Descr& td = get(L, get_egbase(L)).tribe();
-	Building_Index i = td.building_index(name);
+	const TribeDescr& td = get(L, get_egbase(L)).tribe();
+	BuildingIndex i = td.building_index(name);
 	if (i == INVALID_INDEX)
 		report_error(L, "Unknown Building: '%s'", name);
 
@@ -539,7 +539,7 @@ int L_PlayerBase::place_bob(lua_State * L) {
 	if (name != "ship")
 		report_error(L, "Can currently only place ships.");
 
-	Editor_Game_Base & egbase = get_egbase(L);
+	EditorGameBase & egbase = get_egbase(L);
 	Player& player = get(L, egbase);
 	Bob& bob = egbase.create_bob(c->coords(), name, &player.tribe(), &player);
 
@@ -568,7 +568,7 @@ int L_PlayerBase::conquer(lua_State * L) {
 		radius = luaL_checkuint32(L, 3);
 
 	get_egbase(L).conquer_area_no_building
-		(Player_Area<Area<FCoords> >
+		(PlayerArea<Area<FCoords> >
 			(m_pl, Area<FCoords>
 				((*get_user_class<LuaMap::L_Field>(L, 2))->fcoords(L), radius))
 	);
@@ -631,7 +631,7 @@ int L_PlayerBase::get_wares(lua_State * L) {
  ==========================================================
  */
 Player & L_PlayerBase::get
-		(lua_State * L, Widelands::Editor_Game_Base & egbase)
+		(lua_State * L, Widelands::EditorGameBase & egbase)
 {
 	if (m_pl > MAX_PLAYERS)
 		report_error(L, "Illegal player number %i",  m_pl);

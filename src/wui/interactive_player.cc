@@ -78,10 +78,10 @@ int32_t Int_Player_overlay_callback_function
 Interactive_Player::Interactive_Player
 	(Widelands::Game        &       _game,
 	 Section                &       global_s,
-	 Widelands::Player_Number const plyn,
+	 Widelands::PlayerNumber const plyn,
 	 bool                     const multiplayer)
 	:
-	Interactive_GameBase (_game, global_s, NONE, multiplayer, multiplayer),
+	InteractiveGameBase (_game, global_s, NONE, multiplayer, multiplayer),
 	m_auto_roadbuild_mode(global_s.get_bool("auto_roadbuild_mode", true)),
 	m_flag_to_connect(Widelands::Coords::Null()),
 
@@ -223,7 +223,7 @@ void Interactive_Player::start()
 
 void Interactive_Player::think()
 {
-	Interactive_Base::think();
+	InteractiveBase::think();
 
 	if (m_flag_to_connect) {
 		Widelands::Field & field = egbase().map()[m_flag_to_connect];
@@ -240,7 +240,7 @@ void Interactive_Player::think()
 					m_fieldaction.window = nullptr;
 					warp_mouse_to_node(m_flag_to_connect);
 					set_sel_pos
-						(Widelands::Node_and_Triangle<>
+						(Widelands::NodeAndTriangle<>
 						 	(m_flag_to_connect,
 						 	 Widelands::TCoords<>
 						 	 	(m_flag_to_connect, Widelands::TCoords<>::D)));
@@ -319,15 +319,15 @@ void Interactive_Player::toggle_chat() {
 		GameChatMenu::create_chat_console(this, m_chat, *m_chatProvider);
 }
 
-bool Interactive_Player::can_see(Widelands::Player_Number const p) const
+bool Interactive_Player::can_see(Widelands::PlayerNumber const p) const
 {
 	return p == player_number() || player().see_all();
 }
-bool Interactive_Player::can_act(Widelands::Player_Number const p) const
+bool Interactive_Player::can_act(Widelands::PlayerNumber const p) const
 {
 	return p == player_number();
 }
-Widelands::Player_Number Interactive_Player::player_number() const
+Widelands::PlayerNumber Interactive_Player::player_number() const
 {
 	return m_player_number;
 }
@@ -429,7 +429,7 @@ bool Interactive_Player::handle_key(bool const down, SDL_keysym const code)
 		}
 	}
 
-	return Interactive_GameBase::handle_key(down, code);
+	return InteractiveGameBase::handle_key(down, code);
 }
 
 /**
@@ -468,8 +468,8 @@ void Interactive_Player::cmdSwitchPlayer(const std::vector<std::string> & args)
 	Map              &       map             = egbase().map();
 	OverlayManager  &       overlay_manager = map.overlay_manager();
 	Widelands::Extent  const extent          = map.extent         ();
-	for (Widelands::Y_Coordinate y = 0; y < extent.h; ++y)
-		for (Widelands::X_Coordinate x = 0; x < extent.w; ++x)
+	for (Widelands::YCoordinate y = 0; y < extent.h; ++y)
+		for (Widelands::XCoordinate x = 0; x < extent.w; ++x)
 			overlay_manager.recalc_field_overlays
 				(map.get_fcoords(Widelands::Coords(x, y)));
 	if

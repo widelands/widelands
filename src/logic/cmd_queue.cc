@@ -149,9 +149,9 @@ Command::~Command () {}
 void GameLogicCommand::Write
 	(FileWrite & fw,
 #ifndef NDEBUG
-	 Editor_Game_Base & egbase,
+	 EditorGameBase & egbase,
 #else
-	 Editor_Game_Base &,
+	 EditorGameBase &,
 #endif
 	 MapObjectSaver &)
 {
@@ -169,7 +169,7 @@ void GameLogicCommand::Write
  * \note This function must be called by deriving objects that override it.
  */
 void GameLogicCommand::Read
-	(FileRead & fr, Editor_Game_Base & egbase, MapObjectLoader &)
+	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader &)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();

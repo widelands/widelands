@@ -37,13 +37,13 @@ class Game;
  * \ref Implementation interface.
  */
 struct Computer_Player {
-	Computer_Player(Widelands::Game &, const Widelands::Player_Number);
+	Computer_Player(Widelands::Game &, const Widelands::PlayerNumber);
 	virtual ~Computer_Player();
 
 	virtual void think () = 0;
 
 	Widelands::Game & game() const {return m_game;}
-	Widelands::Player_Number player_number() {return m_player_number;}
+	Widelands::PlayerNumber player_number() {return m_player_number;}
 
 	/**
 	 * Interface to a concrete implementation, used to instantiate AIs.
@@ -54,7 +54,7 @@ struct Computer_Player {
 		std::string name;
 		virtual ~Implementation() {}
 		virtual Computer_Player * instantiate
-			(Widelands::Game &, Widelands::Player_Number) const = 0;
+			(Widelands::Game &, Widelands::PlayerNumber) const = 0;
 	};
 	typedef
 		std::vector<Computer_Player::Implementation const *>
@@ -72,7 +72,7 @@ struct Computer_Player {
 
 private:
 	Widelands::Game & m_game;
-	Widelands::Player_Number const m_player_number;
+	Widelands::PlayerNumber const m_player_number;
 
 	DISALLOW_COPY_AND_ASSIGN(Computer_Player);
 };

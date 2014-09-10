@@ -60,7 +60,7 @@ using boost::format;
 using Widelands::Area;
 using Widelands::CoordPath;
 using Widelands::Coords;
-using Widelands::Editor_Game_Base;
+using Widelands::EditorGameBase;
 using Widelands::Game;
 using Widelands::Map;
 using Widelands::MapObject;
@@ -78,7 +78,7 @@ struct InteractiveBaseInternals {
 	{}
 };
 
-Interactive_Base::Interactive_Base(Editor_Game_Base& the_egbase, Section& global_s)
+InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
    : Map_View(nullptr,
               0,
               0,
@@ -118,7 +118,7 @@ Interactive_Base::Interactive_Base(Editor_Game_Base& the_egbase, Section& global
 		(boost::bind(&QuickNavigation::view_changed,
 		 m->quicknavigation.get(), _1, _2));
 
-	changeview.connect(boost::bind(&Interactive_Base::mainview_move, this, _1, _2));
+	changeview.connect(boost::bind(&InteractiveBase::mainview_move, this, _1, _2));
 
 	set_border_snap_distance(global_s.get_int("border_snap_distance", 0));
 	set_panel_snap_distance (global_s.get_int("panel_snap_distance", 10));
@@ -141,24 +141,24 @@ Interactive_Base::Interactive_Base(Editor_Game_Base& the_egbase, Section& global
 	style_shadow.fg = RGBColor(0, 0, 0);
 	m_label_speed_shadow.set_textstyle(style_shadow);
 
-	setDefaultCommand (boost::bind(&Interactive_Base::cmdLua, this, _1));
+	setDefaultCommand (boost::bind(&InteractiveBase::cmdLua, this, _1));
 	addCommand
-		("mapobject", boost::bind(&Interactive_Base::cmdMapObject, this, _1));
+		("mapobject", boost::bind(&InteractiveBase::cmdMapObject, this, _1));
 }
 
 
-Interactive_Base::~Interactive_Base()
+InteractiveBase::~InteractiveBase()
 {
 	if (m_buildroad)
 		abort_build_road();
 }
 
-UniqueWindowHandler& Interactive_Base::unique_windows() {
+UniqueWindowHandler& InteractiveBase::unique_windows() {
 	return *unique_window_handler_;
 }
 
 
-void Interactive_Base::set_sel_pos(Widelands::Node_and_Triangle<> const center)
+void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center)
 {
 	Map & map = egbase().map();
 	OverlayManager & overlay_manager = map.overlay_manager();
@@ -188,7 +188,7 @@ void Interactive_Base::set_sel_pos(Widelands::Node_and_Triangle<> const center)
 			overlay_manager.register_overlay
 				(mr.location(), m_sel.pic, 7, Point::invalid(), jobid);
 		while (mr.advance(map));
-		if (upcast(Interactive_GameBase const, igbase, this))
+		if (upcast(InteractiveGameBase const, igbase, this))
 			if
 				(upcast
 				 	(Widelands::ProductionSite,
@@ -219,7 +219,7 @@ void Interactive_Base::set_sel_pos(Widelands::Node_and_Triangle<> const center)
 /*
  * Set the current sel selection radius.
  */
-void Interactive_Base::set_sel_radius(const uint32_t n) {
+void InteractiveBase::set_sel_radius(const uint32_t n) {
 	if (n != m_sel.radius) {
 		m_sel.radius = n;
 		set_sel_pos(get_sel_pos()); //  redraw
@@ -229,27 +229,27 @@ void Interactive_Base::set_sel_radius(const uint32_t n) {
 /*
  * Set/Unset sel picture
  */
-void Interactive_Base::set_sel_picture(const char * const file) {
+void InteractiveBase::set_sel_picture(const char * const file) {
 	m_sel.pic = g_gr->images().get(file);
 	set_sel_pos(get_sel_pos()); //  redraw
 }
-void Interactive_Base::unset_sel_picture() {
+void InteractiveBase::unset_sel_picture() {
 	set_sel_picture("pics/fsel.png");
 }
 
 
-void Interactive_Base::toggle_buildhelp() {
+void InteractiveBase::toggle_buildhelp() {
 	egbase().map().overlay_manager().toggle_buildhelp();
 }
-bool Interactive_Base::buildhelp() {
+bool InteractiveBase::buildhelp() {
 	return egbase().map().overlay_manager().buildhelp();
 }
-void Interactive_Base::show_buildhelp(bool t) {
+void InteractiveBase::show_buildhelp(bool t) {
 	egbase().map().overlay_manager().show_buildhelp(t);
 }
 
 // Show the given workareas at the given coords and returns the overlay job id associated
-OverlayManager::JobId Interactive_Base::show_work_area
+OverlayManager::JobId InteractiveBase::show_work_area
 	(const Workarea_Info & workarea_info, Widelands::Coords coords)
 {
 	uint8_t workareas_nrs = workarea_info.size();
@@ -289,7 +289,7 @@ OverlayManager::JobId Interactive_Base::show_work_area
 	return job_id;
 }
 
-void Interactive_Base::hide_work_area(OverlayManager::JobId job_id) {
+void InteractiveBase::hide_work_area(OverlayManager::JobId job_id) {
 	Widelands::Map & map = m_egbase.map();
 	OverlayManager & overlay_manager = map.overlay_manager();
 	overlay_manager.remove_overlay(job_id);
@@ -302,7 +302,7 @@ void Interactive_Base::hide_work_area(OverlayManager::JobId job_id) {
  *
  * Default implementation does nothing.
  */
-void Interactive_Base::postload() {}
+void InteractiveBase::postload() {}
 
 static std::string speedString(uint32_t const speed)
 {
@@ -317,7 +317,7 @@ static std::string speedString(uint32_t const speed)
 /**
  * Bring the label that display in-game speed uptodate.
  */
-void Interactive_Base::update_speedlabel()
+void InteractiveBase::update_speedlabel()
 {
 	if (get_display_flag(dfSpeed)) {
 		upcast(Game, game, &m_egbase);
@@ -354,7 +354,7 @@ void Interactive_Base::update_speedlabel()
 Called once per frame by the UI code
 ===============
 */
-void Interactive_Base::think()
+void InteractiveBase::think()
 {
 	// Timing
 	uint32_t curframe = WLApplication::get()->get_time();
@@ -400,7 +400,7 @@ void Interactive_Base::think()
 Draw debug overlay when appropriate.
 ===============
 */
-void Interactive_Base::draw_overlay(RenderTarget& dst) {
+void InteractiveBase::draw_overlay(RenderTarget& dst) {
 
 	// Blit node information when in debug mode.
 	if (get_display_flag(dfDebug) || !dynamic_cast<const Game*>(&egbase())) {
@@ -427,12 +427,12 @@ void Interactive_Base::draw_overlay(RenderTarget& dst) {
 	}
 }
 
-/** Interactive_Base::mainview_move(int32_t x, int32_t y)
+/** InteractiveBase::mainview_move(int32_t x, int32_t y)
  *
  * Signal handler for the main view's warpview updates the mini map's
  * viewpos marker position
  */
-void Interactive_Base::mainview_move(int32_t x, int32_t y)
+void InteractiveBase::mainview_move(int32_t x, int32_t y)
 {
 	if (m->minimap.window) {
 		const Map & map = egbase().map();
@@ -458,7 +458,7 @@ Called whenever the player clicks on a location on the minimap.
 Warps the main mapview position to the clicked location.
 ===============
 */
-void Interactive_Base::minimap_warp(int32_t x, int32_t y)
+void InteractiveBase::minimap_warp(int32_t x, int32_t y)
 {
 	x -= get_w() >> 1;
 	y -= get_h() >> 1;
@@ -476,7 +476,7 @@ void Interactive_Base::minimap_warp(int32_t x, int32_t y)
 Move the mainview to the given position (in node coordinates)
 ===============
 */
-void Interactive_Base::move_view_to(const Coords c)
+void InteractiveBase::move_view_to(const Coords c)
 {
 	assert(0 <= c.x);
 	assert     (c.x < egbase().map().get_width ());
@@ -497,7 +497,7 @@ void Interactive_Base::move_view_to(const Coords c)
 Center the mainview on the given position (in pixels)
 ===============
 */
-void Interactive_Base::move_view_to_point(Point pos)
+void InteractiveBase::move_view_to_point(Point pos)
 {
 	if (m->minimap.window)
 		m->mm->set_view_pos(pos.x, pos.y);
@@ -508,18 +508,18 @@ void Interactive_Base::move_view_to_point(Point pos)
 
 /*
 ===========
-Interactive_Base::toggle_minimap()
+InteractiveBase::toggle_minimap()
 
 Open the minimap or close it if it's open
 ===========
 */
-void Interactive_Base::toggle_minimap() {
+void InteractiveBase::toggle_minimap() {
 	if (m->minimap.window) {
 		delete m->minimap.window;
 	}
 	else {
 		m->mm = new MiniMap(*this, &m->minimap);
-		m->mm->warpview.connect(boost::bind(&Interactive_Base::minimap_warp, this, _1, _2));
+		m->mm->warpview.connect(boost::bind(&InteractiveBase::minimap_warp, this, _1, _2));
 
 		// make sure the viewpos marker is at the right pos to start with
 		const Point p = get_viewpoint();
@@ -531,19 +531,19 @@ void Interactive_Base::toggle_minimap() {
 /**
  * Hide the minimap if it is currently shown; otherwise, do nothing.
  */
-void Interactive_Base::hide_minimap()
+void InteractiveBase::hide_minimap()
 {
 	delete m->minimap.window;
 }
 
 /**
 ===========
-Interactive_Base::minimap_registry()
+InteractiveBase::minimap_registry()
 
 Exposes the Registry object of the minimap to derived classes
 ===========
 */
-UI::UniqueWindow::Registry & Interactive_Base::minimap_registry() {
+UI::UniqueWindow::Registry & InteractiveBase::minimap_registry() {
 	return m->minimap;
 }
 
@@ -552,7 +552,7 @@ UI::UniqueWindow::Registry & Interactive_Base::minimap_registry() {
 Return display flags (dfXXX) that modify the view of the map.
 ===============
 */
-uint32_t Interactive_Base::get_display_flags() const
+uint32_t InteractiveBase::get_display_flags() const
 {
 	return m_display_flags;
 }
@@ -563,7 +563,7 @@ uint32_t Interactive_Base::get_display_flags() const
 Change the display flags that modify the view of the map.
 ===============
 */
-void Interactive_Base::set_display_flags(uint32_t flags)
+void InteractiveBase::set_display_flags(uint32_t flags)
 {
 	m_display_flags = flags;
 
@@ -576,12 +576,12 @@ void Interactive_Base::set_display_flags(uint32_t flags)
 Get and set one individual flag of the display flags.
 ===============
 */
-bool Interactive_Base::get_display_flag(uint32_t const flag)
+bool InteractiveBase::get_display_flag(uint32_t const flag)
 {
 	return m_display_flags & flag;
 }
 
-void Interactive_Base::set_display_flag(uint32_t const flag, bool const on)
+void InteractiveBase::set_display_flag(uint32_t const flag, bool const on)
 {
 	m_display_flags &= ~flag;
 
@@ -596,8 +596,8 @@ void Interactive_Base::set_display_flag(uint32_t const flag, bool const on)
 Begin building a road
 ===============
 */
-void Interactive_Base::start_build_road
-	(Coords _start, Widelands::Player_Number const player)
+void InteractiveBase::start_build_road
+	(Coords _start, Widelands::PlayerNumber const player)
 {
 	// create an empty path
 	assert(!m_buildroad);
@@ -615,7 +615,7 @@ void Interactive_Base::start_build_road
 Stop building the road
 ===============
 */
-void Interactive_Base::abort_build_road()
+void InteractiveBase::abort_build_road()
 {
 	assert(m_buildroad);
 
@@ -634,7 +634,7 @@ void Interactive_Base::abort_build_road()
 Finally build the road
 ===============
 */
-void Interactive_Base::finish_build_road()
+void InteractiveBase::finish_build_road()
 {
 	assert(m_buildroad);
 
@@ -703,7 +703,7 @@ If field is on the path, remove tail of path.
 Otherwise append if possible or return false.
 ===============
 */
-bool Interactive_Base::append_build_road(Coords const field) {
+bool InteractiveBase::append_build_road(Coords const field) {
 	assert(m_buildroad);
 
 	Map & map = egbase().map();
@@ -752,7 +752,7 @@ bool Interactive_Base::append_build_road(Coords const field) {
 Return the current road-building startpoint
 ===============
 */
-Coords Interactive_Base::get_build_road_start() const {
+Coords InteractiveBase::get_build_road_start() const {
 	assert(m_buildroad);
 
 	return m_buildroad->get_start();
@@ -763,13 +763,13 @@ Coords Interactive_Base::get_build_road_start() const {
 Return the current road-building endpoint
 ===============
 */
-Coords Interactive_Base::get_build_road_end() const {
+Coords InteractiveBase::get_build_road_end() const {
 	assert(m_buildroad);
 
 	return m_buildroad->get_end();
 }
 
-void Interactive_Base::log_message(const std::string& message) const
+void InteractiveBase::log_message(const std::string& message) const
 {
 	// Send to linked receivers
 	LogMessage lm;
@@ -785,7 +785,7 @@ void Interactive_Base::log_message(const std::string& message) const
 Add road building data to the road overlay
 ===============
 */
-void Interactive_Base::roadb_add_overlay()
+void InteractiveBase::roadb_add_overlay()
 {
 	assert(m_buildroad);
 
@@ -885,7 +885,7 @@ void Interactive_Base::roadb_add_overlay()
 Remove road building data from road overlay
 ===============
 */
-void Interactive_Base::roadb_remove_overlay()
+void InteractiveBase::roadb_remove_overlay()
 {
 	assert(m_buildroad);
 
@@ -904,7 +904,7 @@ void Interactive_Base::roadb_remove_overlay()
 }
 
 
-bool Interactive_Base::handle_key(bool const down, SDL_keysym const code)
+bool InteractiveBase::handle_key(bool const down, SDL_keysym const code)
 {
 	if (m->quicknavigation->handle_key(down, code))
 		return true;
@@ -961,7 +961,7 @@ bool Interactive_Base::handle_key(bool const down, SDL_keysym const code)
 	return Map_View::handle_key(down, code);
 }
 
-void Interactive_Base::cmdLua(const std::vector<std::string> & args)
+void InteractiveBase::cmdLua(const std::vector<std::string> & args)
 {
 	const std::string cmd = boost::algorithm::join(args, " ");
 
@@ -978,7 +978,7 @@ void Interactive_Base::cmdLua(const std::vector<std::string> & args)
 /**
  * Show a map object's debug window
  */
-void Interactive_Base::cmdMapObject(const std::vector<std::string>& args)
+void InteractiveBase::cmdMapObject(const std::vector<std::string>& args)
 {
 	if (args.size() != 2) {
 		DebugConsole::write("usage: mapobject <mapobject serial>");

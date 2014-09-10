@@ -35,7 +35,7 @@
 
 namespace Widelands {
 
-class Editor_Game_Base;
+class EditorGameBase;
 class ResourceDescription;
 class Warehouse;
 class WorkerDescr;
@@ -52,8 +52,8 @@ Every player chooses a tribe. A tribe has distinct properties such as the
 buildings it can build and the associated graphics.
 Two players can choose the same tribe.
 */
-struct Tribe_Descr {
-	Tribe_Descr(const std::string & name, Editor_Game_Base &);
+struct TribeDescr {
+	TribeDescr(const std::string & name, EditorGameBase &);
 
 	//  Static function to check for tribes.
 	static bool exists_tribe
@@ -92,18 +92,18 @@ struct Tribe_Descr {
 		m_workers.get(index)->set_has_demand_check();
 	}
 	Ware_Index safe_worker_index(const std::string & workername) const;
-	Building_Index get_nrbuildings() const {
+	BuildingIndex get_nrbuildings() const {
 		return m_buildings.get_nitems();
 	}
-	Building_Index safe_building_index(char const * name) const;
-	BuildingDescr const * get_building_descr(const Building_Index& index) const
+	BuildingIndex safe_building_index(char const * name) const;
+	BuildingDescr const * get_building_descr(const BuildingIndex& index) const
 	{
 		return m_buildings.get(index);
 	}
-	Building_Index building_index(const std::string & buildingname) const {
+	BuildingIndex building_index(const std::string & buildingname) const {
 		return m_buildings.get_index(buildingname);
 	}
-	Building_Index building_index(char const * const buildingname) const {
+	BuildingIndex building_index(char const * const buildingname) const {
 		return m_buildings.get_index(buildingname);
 	}
 	int32_t get_immovable_index(char const * const l) const {
@@ -145,7 +145,7 @@ struct Tribe_Descr {
 	uint32_t get_resource_indicator
 		(const ResourceDescription * const res, const uint32_t amount) const;
 
-	void postload(Editor_Game_Base &);
+	void postload(EditorGameBase &);
 	void load_graphics();
 
 	struct Initialization {
@@ -194,7 +194,7 @@ private:
 
 	std::vector<Initialization> m_initializations;
 
-	DISALLOW_COPY_AND_ASSIGN(Tribe_Descr);
+	DISALLOW_COPY_AND_ASSIGN(TribeDescr);
 };
 
 }

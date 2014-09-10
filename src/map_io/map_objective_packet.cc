@@ -34,7 +34,7 @@ namespace Widelands {
 
 void MapObjectivePacket::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      &       egbase,
+	 EditorGameBase      &       egbase,
 	 bool                    const skip,
 	 MapObjectLoader &)
 {
@@ -74,7 +74,7 @@ void MapObjectivePacket::Read
 
 
 void MapObjectivePacket::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, MapObjectSaver &)
+	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
 {
 	Profile prof;
 	prof.create_section("global").set_int

@@ -200,7 +200,7 @@ void NetClient::run ()
 		d->game = &game;
 		game.set_game_controller(this);
 		uint8_t const pn = d->settings.playernum + 1;
-		Interactive_GameBase * igb;
+		InteractiveGameBase * igb;
 		if (pn > 0)
 			igb =
 				new Interactive_Player

@@ -426,7 +426,7 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
 					else
 					{
 						Coords const coord = imm->get_position();
-						Map_Index mapidx = map.get_index(coord, map.get_width());
+						MapIndex mapidx = map.get_index(coord, map.get_width());
 						Vision const visible = owner().vision(mapidx);
 						if (!visible) {
 							list.erase(list.begin() + idx);
@@ -956,7 +956,7 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 				 300000, 8);
 		}
 
-		const Tribe_Descr & t = descr().tribe();
+		const TribeDescr & t = descr().tribe();
 		game.create_immovable
 			(position,
 			 t.get_resource_indicator
@@ -1044,7 +1044,7 @@ Worker::~Worker()
 
 
 /// Log basic information.
-void Worker::log_general_info(const Editor_Game_Base & egbase)
+void Worker::log_general_info(const EditorGameBase & egbase)
 {
 	Bob::log_general_info(egbase);
 
@@ -1116,7 +1116,7 @@ void Worker::set_location(PlayerImmovable * const location)
 			// Interrupt whatever we've been doing.
 			set_economy(nullptr);
 
-			Editor_Game_Base & egbase = owner().egbase();
+			EditorGameBase & egbase = owner().egbase();
 			if (upcast(Game, game, &egbase)) {
 				send_signal (*game, "location");
 			}
@@ -1154,7 +1154,7 @@ void Worker::set_economy(Economy * const economy)
 /**
  * Initialize the worker
  */
-void Worker::init(Editor_Game_Base & egbase)
+void Worker::init(EditorGameBase & egbase)
 {
 	Bob::init(egbase);
 
@@ -1171,7 +1171,7 @@ void Worker::init(Editor_Game_Base & egbase)
 /**
  * Remove the worker.
  */
-void Worker::cleanup(Editor_Game_Base & egbase)
+void Worker::cleanup(EditorGameBase & egbase)
 {
 	WareInstance * const ware = get_carried_ware(egbase);
 
@@ -1205,7 +1205,7 @@ void Worker::cleanup(Editor_Game_Base & egbase)
  * fetch_carried_ware()).
  */
 void Worker::set_carried_ware
-	(Editor_Game_Base & egbase, WareInstance * const ware)
+	(EditorGameBase & egbase, WareInstance * const ware)
 {
 	if (WareInstance * const oldware = get_carried_ware(egbase)) {
 		oldware->cleanup(egbase);
@@ -1222,7 +1222,7 @@ void Worker::set_carried_ware
 /**
  * Stop carrying the current ware, and return a pointer to it.
  */
-WareInstance * Worker::fetch_carried_ware(Editor_Game_Base & game)
+WareInstance * Worker::fetch_carried_ware(EditorGameBase & game)
 {
 	WareInstance * const ware = get_carried_ware(game);
 
@@ -1304,7 +1304,7 @@ Ware_Index Worker::level(Game & game) {
 	// worker and can fullfill the same jobs (which should be given in all
 	// circumstances)
 	assert(descr().becomes());
-	const Tribe_Descr & t = descr().tribe();
+	const TribeDescr & t = descr().tribe();
 	Ware_Index const old_index = t.worker_index(descr().name());
 	Ware_Index const new_index = descr().becomes();
 	m_descr = t.get_worker_descr(new_index);
@@ -2837,7 +2837,7 @@ void Worker::scout_update(Game & game, State & state)
 				const std::vector<Coords>::size_type lidx = game.logic_rand() % list.size();
 				Coords const coord = list[lidx];
 				list.erase(list.begin() + lidx);
-				Map_Index idx = map.get_index(coord, map.get_width());
+				MapIndex idx = map.get_index(coord, map.get_width());
 				Vision const visible = owner().vision(idx);
 
 				// If the field is not yet discovered, go there
@@ -2897,7 +2897,7 @@ void Worker::scout_update(Game & game, State & state)
 }
 
 void Worker::draw_inner
-	(const Editor_Game_Base& game, RenderTarget& dst, const Point& drawpos)
+	(const EditorGameBase& game, RenderTarget& dst, const Point& drawpos)
 	const
 {
 	dst.drawanim
@@ -2919,7 +2919,7 @@ void Worker::draw_inner
  * Draw the worker, taking the carried ware into account.
  */
 void Worker::draw
-	(const Editor_Game_Base & game, RenderTarget & dst, const Point& pos) const
+	(const EditorGameBase & game, RenderTarget & dst, const Point& pos) const
 {
 	if (get_current_anim())
 		draw_inner(game, dst, calc_drawpos(game, pos));
@@ -2957,7 +2957,7 @@ void Worker::Loader::load(FileRead & fr)
 	if (version >= 2) {
 		if (fr.Unsigned8()) {
 			worker.m_transfer =
-				new Transfer(ref_cast<Game, Editor_Game_Base>(egbase()), worker);
+				new Transfer(ref_cast<Game, EditorGameBase>(egbase()), worker);
 			worker.m_transfer->read(fr, m_transfer);
 		}
 	}
@@ -3031,7 +3031,7 @@ Worker::Loader * Worker::create_loader()
  * the appropriate actual load functions are called.
  */
 MapObject::Loader * Worker::load
-	(Editor_Game_Base & egbase, MapObjectLoader & mol, FileRead & fr)
+	(EditorGameBase & egbase, MapObjectLoader & mol, FileRead & fr)
 {
 	try {
 		// header has already been read by caller
@@ -3040,7 +3040,7 @@ MapObject::Loader * Worker::load
 
 		egbase.manually_load_tribe(tribename);
 
-		const Tribe_Descr * tribe = egbase.get_tribe(tribename);
+		const TribeDescr * tribe = egbase.get_tribe(tribename);
 		if (!tribe)
 			throw GameDataError("unknown tribe '%s'", tribename.c_str());
 
@@ -3063,7 +3063,7 @@ MapObject::Loader * Worker::load
  * \warning Do not override this function, override \ref do_save instead.
  */
 void Worker::save
-	(Editor_Game_Base & egbase, MapObjectSaver & mos, FileWrite & fw)
+	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(HeaderWorker);
 	fw.CString(descr().tribe().name());
@@ -3080,7 +3080,7 @@ void Worker::save
  * Override this function in derived classes.
  */
 void Worker::do_save
-	(Editor_Game_Base & egbase, MapObjectSaver & mos, FileWrite & fw)
+	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	Bob::save(egbase, mos, fw);
 

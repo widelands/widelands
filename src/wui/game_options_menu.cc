@@ -32,9 +32,9 @@
 #include "wui/game_options_sound_menu.h"
 
 GameOptionsMenu::GameOptionsMenu
-	(Interactive_GameBase                         & gb,
+	(InteractiveGameBase                         & gb,
 	 UI::UniqueWindow::Registry                   & registry,
-	 Interactive_GameBase::Game_Main_Menu_Windows & windows)
+	 InteractiveGameBase::Game_Main_Menu_Windows & windows)
 :
 	UI::UniqueWindow
 		(&gb, "options", &registry,

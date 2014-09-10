@@ -96,7 +96,7 @@ void GamePreloadPacket::Write
 		s.set_int("player_nr", ipl->player_number());
 	} else {
 		// Pretend that the first player saved the game
-		for (Widelands::Player_Number p = 1; p <= map.get_nrplayers(); ++p) {
+		for (Widelands::PlayerNumber p = 1; p <= map.get_nrplayers(); ++p) {
 			if (game.get_player(p)) {
 				s.set_int("player_nr", p);
 				break;

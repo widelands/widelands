@@ -32,7 +32,7 @@
 namespace UI {struct Textarea;}
 
 namespace Widelands {
-struct Tribe_Descr;
+struct TribeDescr;
 struct WareList;
 }
 
@@ -47,7 +47,7 @@ public:
 	AbstractWaresDisplay
 		(UI::Panel * const parent,
 		 int32_t x, int32_t y,
-		 const Widelands::Tribe_Descr &,
+		 const Widelands::TribeDescr &,
 		 Widelands::WareWorker type,
 		 bool selectable,
 		 boost::function<void(Widelands::Ware_Index, bool)> callback_function = 0,
@@ -78,8 +78,8 @@ protected:
 
 	virtual RGBColor info_color_for_ware(Widelands::Ware_Index);
 
-	const Widelands::Tribe_Descr::WaresOrder & icons_order() const;
-	const Widelands::Tribe_Descr::WaresOrderCoords & icons_order_coords() const;
+	const Widelands::TribeDescr::WaresOrder & icons_order() const;
+	const Widelands::TribeDescr::WaresOrderCoords & icons_order_coords() const;
 	virtual Point ware_position(Widelands::Ware_Index) const;
 	void draw(RenderTarget &) override;
 	virtual void draw_ware
@@ -100,7 +100,7 @@ private:
 	 */
 	void update_anchor_selection(int32_t x, int32_t y);
 
-	const Widelands::Tribe_Descr & m_tribe;
+	const Widelands::TribeDescr & m_tribe;
 	Widelands::WareWorker m_type;
 	UI::Textarea        m_curware;
 	selection_type      m_selected;
@@ -128,7 +128,7 @@ public:
 	WaresDisplay
 		(UI::Panel * const parent,
 		 int32_t x, int32_t y,
-		 const Widelands::Tribe_Descr &,
+		 const Widelands::TribeDescr &,
 		 Widelands::WareWorker type,
 		 bool selectable);
 
@@ -147,7 +147,7 @@ private:
 };
 
 std::string waremap_to_richtext
-		(const Widelands::Tribe_Descr & tribe,
+		(const Widelands::TribeDescr & tribe,
 		 const std::map<Widelands::Ware_Index, uint8_t> & map);
 
 #endif  // end of include guard: WL_WUI_WARESDISPLAY_H

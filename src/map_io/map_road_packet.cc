@@ -38,7 +38,7 @@ namespace Widelands {
 
 void MapRoadPacket::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      &       egbase,
+	 EditorGameBase      &       egbase,
 	 bool                    const skip,
 	 MapObjectLoader &       mol)
 {
@@ -71,7 +71,7 @@ void MapRoadPacket::Read
 
 
 void MapRoadPacket::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, MapObjectSaver & mos)
+	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	FileWrite fw;
 

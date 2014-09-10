@@ -156,7 +156,7 @@ void ProductionProgram::Action::building_work_failed(Game &, ProductionSite &, W
 void ProductionProgram::parse_ware_type_group
 	(char            * & parameters,
 	 Ware_Type_Group   & group,
-	 const Tribe_Descr & tribe,
+	 const TribeDescr & tribe,
 	 const BillOfMaterials  & inputs)
 {
 	std::set<Ware_Index>::iterator last_insert_pos = group.first.end();
@@ -244,14 +244,14 @@ bool ProductionProgram::ActReturn::Negation::evaluate
 
 // Just a dummy to satisfy the superclass interface. Do not use.
 std::string ProductionProgram::ActReturn::Negation::description
-	(const Tribe_Descr &) const
+	(const TribeDescr &) const
 {
 	throw wexception("Not implemented.");
 }
 
 // Just a dummy to satisfy the superclass interface. Do not use.
 std::string ProductionProgram::ActReturn::Negation::description_negation
-	(const Tribe_Descr &) const
+	(const TribeDescr &) const
 {
 	throw wexception("Not implemented.");
 }
@@ -263,7 +263,7 @@ bool ProductionProgram::ActReturn::Economy_Needs_Ware::evaluate
 	return ps.get_economy()->needs_ware(ware_type);
 }
 std::string ProductionProgram::ActReturn::Economy_Needs_Ware::description
-	(const Tribe_Descr & tribe) const
+	(const TribeDescr & tribe) const
 {
 	// TODO(GunChleoc): We can make this more elegant if we add another definition to the conf files,
 	// so for "Log"; we will also have "logs" (numberless plural)
@@ -272,7 +272,7 @@ std::string ProductionProgram::ActReturn::Economy_Needs_Ware::description
 			  % tribe.get_ware_descr(ware_type)->descname()).str();
 }
 std::string ProductionProgram::ActReturn::Economy_Needs_Ware::description_negation
-	(const Tribe_Descr & tribe) const
+	(const TribeDescr & tribe) const
 {
 	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy doesn’t need the ware ‘%s’*/
 	return (boost::format(_("the economy doesn’t need the ware ‘%s’"))
@@ -285,7 +285,7 @@ bool ProductionProgram::ActReturn::Economy_Needs_Worker::evaluate
 	return ps.get_economy()->needs_worker(worker_type);
 }
 std::string ProductionProgram::ActReturn::Economy_Needs_Worker::description
-	(const Tribe_Descr & tribe) const
+	(const TribeDescr & tribe) const
 {
 	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the worker ‘%s’*/
 	return (boost::format(_("the economy needs the worker ‘%s’"))
@@ -293,7 +293,7 @@ std::string ProductionProgram::ActReturn::Economy_Needs_Worker::description
 }
 
 std::string ProductionProgram::ActReturn::Economy_Needs_Worker::description_negation
-	(const Tribe_Descr & tribe) const
+	(const TribeDescr & tribe) const
 {
 	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ...*/
 	/** TRANSLATORS:      ... because the economy doesn’t need the worker ‘%s’*/
@@ -329,7 +329,7 @@ bool ProductionProgram::ActReturn::Site_Has::evaluate
 
 
 std::string ProductionProgram::ActReturn::Site_Has::description
-	(const Tribe_Descr & tribe) const
+	(const TribeDescr & tribe) const
 {
 	std::vector<std::string> condition_list;
 	for (const Ware_Index& temp_ware : group.first) {
@@ -351,7 +351,7 @@ std::string ProductionProgram::ActReturn::Site_Has::description
 }
 
 std::string ProductionProgram::ActReturn::Site_Has::description_negation
-	(const Tribe_Descr & tribe) const
+	(const TribeDescr & tribe) const
 {
 	std::vector<std::string> condition_list;
 	for (const Ware_Index& temp_ware : group.first) {
@@ -383,14 +383,14 @@ bool ProductionProgram::ActReturn::Workers_Need_Experience::evaluate
 	return false;
 }
 std::string ProductionProgram::ActReturn::Workers_Need_Experience::description
-	(const Tribe_Descr &) const
+	(const TribeDescr &) const
 {
 	/** TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs experience'. */
 	return _("a worker needs experience");
 }
 
 std::string ProductionProgram::ActReturn::Workers_Need_Experience::description_negation
-	(const Tribe_Descr &) const
+	(const TribeDescr &) const
 {
 	/** TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers need no experience'. */
 	return _("the workers need no experience");
@@ -398,7 +398,7 @@ std::string ProductionProgram::ActReturn::Workers_Need_Experience::description_n
 
 
 ProductionProgram::ActReturn::Condition * create_economy_condition
-	(char * & parameters, const Tribe_Descr & tribe)
+	(char * & parameters, const TribeDescr & tribe)
 {
 	try {
 		if (match_force_skip(parameters, "needs"))
@@ -866,7 +866,7 @@ ProductionProgram::ActConsume::ActConsume
 	(char * parameters, const ProductionSiteDescr & descr)
 {
 	try {
-		const Tribe_Descr & tribe = descr.tribe();
+		const TribeDescr & tribe = descr.tribe();
 		for (;;) {
 			m_groups.resize(m_groups.size() + 1);
 			parse_ware_type_group
@@ -924,7 +924,7 @@ void ProductionProgram::ActConsume::execute
 
 	// "Did not start working because .... is/are missing"
 	if (uint8_t const nr_missing_groups = l_groups.size()) {
-		const Tribe_Descr & tribe = ps.owner().tribe();
+		const TribeDescr & tribe = ps.owner().tribe();
 
 		std::vector<std::string> group_list;
 		for (const Ware_Type_Group& group : l_groups) {
@@ -989,7 +989,7 @@ ProductionProgram::ActProduce::ActProduce
 	(char * parameters, const ProductionSiteDescr & descr)
 {
 	try {
-		const Tribe_Descr & tribe = descr.tribe();
+		const TribeDescr & tribe = descr.tribe();
 		for (bool more = true; more; ++parameters) {
 			m_items.resize(m_items.size() + 1);
 			std::pair<Ware_Index, uint8_t> & item = *m_items.rbegin();
@@ -1048,7 +1048,7 @@ void ProductionProgram::ActProduce::execute
 	ps.m_produced_wares = m_items;
 	ps.m_working_positions[0].worker->update_task_buildingwork(game);
 
-	const Tribe_Descr & tribe = ps.owner().tribe();
+	const TribeDescr & tribe = ps.owner().tribe();
 	assert(m_items.size());
 
 	std::vector<std::string> ware_descnames;
@@ -1086,7 +1086,7 @@ ProductionProgram::ActRecruit::ActRecruit
 	(char * parameters, const ProductionSiteDescr & descr)
 {
 	try {
-		const Tribe_Descr & tribe = descr.tribe();
+		const TribeDescr & tribe = descr.tribe();
 		for (bool more = true; more; ++parameters) {
 			m_items.resize(m_items.size() + 1);
 			std::pair<Ware_Index, uint8_t> & item = *m_items.rbegin();
@@ -1144,7 +1144,7 @@ void ProductionProgram::ActRecruit::execute
 	ps.m_recruited_workers = m_items;
 	ps.m_working_positions[0].worker->update_task_buildingwork(game);
 
-	const Tribe_Descr & tribe = ps.owner().tribe();
+	const TribeDescr & tribe = ps.owner().tribe();
 	assert(m_items.size());
 	std::vector<std::string> worker_descnames;
 	for (const auto& item_pair : m_items) {

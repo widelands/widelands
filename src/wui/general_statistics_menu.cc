@@ -44,7 +44,7 @@ using namespace Widelands;
 #define NR_BASE_DATASETS 11
 
 General_Statistics_Menu::General_Statistics_Menu
-	(Interactive_GameBase & parent, General_Statistics_Menu::Registry & registry)
+	(InteractiveGameBase & parent, General_Statistics_Menu::Registry & registry)
 :
 UI::UniqueWindow
 	(&parent, "statistics_menu", &registry,
@@ -141,7 +141,7 @@ m_selected_information(0)
 	UI::Box * hbox1 = new UI::Box(&m_box, 0, 0, UI::Box::Horizontal, 0, 0, 1);
 
 	uint32_t plr_in_game = 0;
-	Player_Number const nr_players = game.map().get_nrplayers();
+	PlayerNumber const nr_players = game.map().get_nrplayers();
 	iterate_players_existing_novar(p, nr_players, game) ++plr_in_game;
 
 	iterate_players_existing_const(p, nr_players, game, player) {
@@ -284,12 +284,12 @@ m_selected_information(0)
 }
 
 General_Statistics_Menu::~General_Statistics_Menu() {
-	Game & game = ref_cast<Interactive_GameBase, UI::Panel>(*get_parent()).game();
+	Game & game = ref_cast<InteractiveGameBase, UI::Panel>(*get_parent()).game();
 	if (game.is_loaded()) {
 		// Save informations for recreation, if window is reopened
 		m_my_registry->selected_information = m_selected_information;
 		m_my_registry->time = m_plot.get_time();
-		Player_Number const nr_players = game.map().get_nrplayers();
+		PlayerNumber const nr_players = game.map().get_nrplayers();
 		iterate_players_existing_novar(p, nr_players, game) {
 			m_my_registry->selected_players[p - 1] = m_cbs[p - 1]->get_perm_pressed();
 		}
@@ -321,7 +321,7 @@ void General_Statistics_Menu::cb_changed_to(int32_t const id)
  */
 void General_Statistics_Menu::radiogroup_changed(int32_t const id) {
 	size_t const statistics_size =
-		ref_cast<Interactive_GameBase, UI::Panel>(*get_parent()).game()
+		ref_cast<InteractiveGameBase, UI::Panel>(*get_parent()).game()
 		.get_general_statistics().size();
 	for (uint32_t i = 0; i < statistics_size; ++i)
 		if (m_cbs[i]) {

@@ -33,7 +33,7 @@ namespace Widelands {
 
 void MapNodeOwnershipPacket::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      &       egbase,
+	 EditorGameBase      &       egbase,
 	 bool                    const skip,
 	 MapObjectLoader &)
 
@@ -54,8 +54,8 @@ void MapNodeOwnershipPacket::Read
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CURRENT_PACKET_VERSION) {
 			Map & map = egbase.map();
-			Map_Index const max_index = map.max_index();
-			for (Map_Index i = 0; i < max_index; ++i)
+			MapIndex const max_index = map.max_index();
+			for (MapIndex i = 0; i < max_index; ++i)
 				map[i].set_owned_by(fr.Unsigned8());
 		} else
 			throw GameDataError
@@ -67,15 +67,15 @@ void MapNodeOwnershipPacket::Read
 
 
 void MapNodeOwnershipPacket::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, MapObjectSaver &)
+	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
 {
 	FileWrite fw;
 
 	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
 	Map & map = egbase.map();
-	Map_Index const max_index = map.max_index();
-	for (Map_Index i = 0; i < max_index; ++i)
+	MapIndex const max_index = map.max_index();
+	for (MapIndex i = 0; i < max_index; ++i)
 		fw.Unsigned8(map[i].get_owned_by());
 
 	fw.Write(fs, "binary/node_ownership");

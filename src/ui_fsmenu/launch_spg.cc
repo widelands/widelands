@@ -372,7 +372,7 @@ void Fullscreen_Menu_LaunchSPG::set_scenario_values()
 	   map.get_correct_loader(m_settings->settings().mapfilename));
 	map.set_filename(m_settings->settings().mapfilename.c_str());
 	map_loader->preload_map(true);
-	Widelands::Player_Number const nrplayers = map.get_nrplayers();
+	Widelands::PlayerNumber const nrplayers = map.get_nrplayers();
 	for (uint8_t i = 0; i < nrplayers; ++i) {
 		m_settings->setPlayerName (i, map.get_scenario_player_name (i + 1));
 		m_settings->setPlayerTribe(i, map.get_scenario_player_tribe(i + 1));

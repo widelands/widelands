@@ -66,7 +66,7 @@ class PlayerCommand;
 class ReplayReader;
 class ReplayWriter;
 
-class Game : public Editor_Game_Base {
+class Game : public EditorGameBase {
 public:
 	struct General_Stats {
 		std::vector< uint32_t > land_size;
@@ -156,7 +156,7 @@ public:
 
 	void send_player_bulldoze   (PlayerImmovable &, bool recurse = false);
 	void send_player_dismantle  (PlayerImmovable &);
-	void send_player_build      (int32_t, Coords, Building_Index);
+	void send_player_build      (int32_t, Coords, BuildingIndex);
 	void send_player_build_flag (int32_t, Coords);
 	void send_player_build_road (int32_t, Path &);
 	void send_player_flagaction (Flag &);
@@ -164,7 +164,7 @@ public:
 	void send_player_militarysite_set_soldier_preference (Building &, uint8_t preference);
 	void send_player_start_or_cancel_expedition    (Building &);
 
-	void send_player_enhance_building (Building &, Building_Index);
+	void send_player_enhance_building (Building &, BuildingIndex);
 	void send_player_evict_worker (Worker &);
 	void send_player_set_ware_priority
 		(PlayerImmovable &, int32_t type, Ware_Index index, int32_t prio);
@@ -174,7 +174,7 @@ public:
 	void send_player_drop_soldier(Building &, int32_t);
 	void send_player_change_soldier_capacity(Building &, int32_t);
 	void send_player_enemyflagaction
-		(const Flag &, Player_Number, uint32_t count);
+		(const Flag &, PlayerNumber, uint32_t count);
 
 	void send_player_ship_scout_direction(Ship &, uint8_t);
 	void send_player_ship_construct_port(Ship &, Coords);

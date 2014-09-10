@@ -74,7 +74,7 @@ constexpr int kRetreatWhenHealthDropsBelowThisPercentage = 50;
 SoldierDescr::SoldierDescr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
-	 const Tribe_Descr & _tribe)
+	 const TribeDescr & _tribe)
 	:
 	WorkerDescr(MapObjectType::SOLDIER, _name, _descname, directory, prof, global_s, _tribe)
 {
@@ -347,7 +347,7 @@ Soldier::Soldier(const SoldierDescr & soldier_descr) : Worker(soldier_descr)
 }
 
 
-void Soldier::init(Editor_Game_Base & egbase)
+void Soldier::init(EditorGameBase & egbase)
 {
 	m_hp_level      = 0;
 	m_attack_level  = 0;
@@ -363,7 +363,7 @@ void Soldier::init(Editor_Game_Base & egbase)
 	Worker::init(egbase);
 }
 
-void Soldier::cleanup(Editor_Game_Base & egbase)
+void Soldier::cleanup(EditorGameBase & egbase)
 {
 	Worker::cleanup(egbase);
 }
@@ -510,7 +510,7 @@ void Soldier::damage (const uint32_t value)
 /// pos is the location, in pixels, of the node m_position (height is already
 /// taken into account).
 Point Soldier::calc_drawpos
-	(const Editor_Game_Base & game, const Point pos) const
+	(const EditorGameBase & game, const Point pos) const
 {
 	if (m_combat_walking == CD_NONE) {
 		return Bob::calc_drawpos(game, pos);
@@ -573,7 +573,7 @@ Point Soldier::calc_drawpos
  * Draw this soldier. This basically draws him as a worker, but add hitpoints
  */
 void Soldier::draw
-	(const Editor_Game_Base & game, RenderTarget & dst, const Point& pos) const
+	(const EditorGameBase & game, RenderTarget & dst, const Point& pos) const
 {
 	if (const uint32_t anim = get_current_anim()) {
 		const Point drawpos = calc_drawpos(game, pos);
@@ -655,7 +655,7 @@ void Soldier::draw_info_icon
  * the given tribe.
  */
 void Soldier::calc_info_icon_size
-	(const Tribe_Descr & tribe, uint32_t & w, uint32_t & h)
+	(const TribeDescr & tribe, uint32_t & w, uint32_t & h)
 {
 	const SoldierDescr * soldierdesc = static_cast<const SoldierDescr *>
 		(tribe.get_worker_descr(tribe.worker_index("soldier")));
@@ -692,16 +692,16 @@ void Soldier::pop_task_or_fight(Game& game) {
  *
  */
 void Soldier::start_animation
-	(Editor_Game_Base & egbase,
+	(EditorGameBase & egbase,
 	 char const * const animname,
 	 uint32_t const time)
 {
 	molog("[soldier] starting animation %s", animname);
 	return
 		start_task_idle
-			(ref_cast<Game, Editor_Game_Base>(egbase),
+			(ref_cast<Game, EditorGameBase>(egbase),
 			 descr().get_rand_anim
-			 	(ref_cast<Game, Editor_Game_Base>(egbase), animname),
+			 	(ref_cast<Game, EditorGameBase>(egbase), animname),
 			 time);
 }
 
@@ -752,7 +752,7 @@ bool Soldier::canBeChallenged()
 	if (!m_battle)
 		return true;
 	return
-		!m_battle->locked(ref_cast<Game, Editor_Game_Base>(owner().egbase()));
+		!m_battle->locked(ref_cast<Game, EditorGameBase>(owner().egbase()));
 }
 
 /**
@@ -781,13 +781,13 @@ void Soldier::init_auto_task(Game & game) {
 }
 
 struct FindNodeOwned {
-	FindNodeOwned(Player_Number owner) : m_owner(owner)
+	FindNodeOwned(PlayerNumber owner) : m_owner(owner)
 	{}
 	bool accept(const Map&, const FCoords& coords) const {
 		return (coords.field->get_owned_by() == m_owner);
 	}
 private:
-	Player_Number m_owner;
+	PlayerNumber m_owner;
 };
 
 /**
@@ -1792,7 +1792,7 @@ void Soldier::sendSpaceSignals(Game & game)
 		}
 	}
 
-	Player_Number const land_owner = get_position().field->get_owned_by();
+	PlayerNumber const land_owner = get_position().field->get_owned_by();
 	if (land_owner != owner().player_number()) {
 		std::vector<BaseImmovable *> attackables;
 		game.map().find_reachable_immovables_unique
@@ -1814,7 +1814,7 @@ void Soldier::sendSpaceSignals(Game & game)
 }
 
 
-void Soldier::log_general_info(const Editor_Game_Base & egbase)
+void Soldier::log_general_info(const EditorGameBase & egbase)
 {
 	Worker::log_general_info(egbase);
 	molog("[Soldier]\n");
@@ -1910,7 +1910,7 @@ Soldier::Loader * Soldier::create_loader()
 }
 
 void Soldier::do_save
-	(Editor_Game_Base & egbase, MapObjectSaver & mos, FileWrite & fw)
+	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	Worker::do_save(egbase, mos, fw);
 

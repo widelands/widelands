@@ -35,11 +35,11 @@ class Map;
  * like number of players, map size, world name, magic bytes and so on
  */
 struct MapElementalPacket {
-	void Read(FileSystem&, Editor_Game_Base&, bool, MapObjectLoader&);
-	void Write(FileSystem&, Editor_Game_Base&, MapObjectSaver&);
+	void Read(FileSystem&, EditorGameBase&, bool, MapObjectLoader&);
+	void Write(FileSystem&, EditorGameBase&, MapObjectSaver&);
 
 	/// The following function prereads a given map without the need of a
-	/// properly configured Editor_Game_Base object.
+	/// properly configured EditorGameBase object.
 	void Pre_Read(FileSystem &, Map *);
 
 	uint32_t get_version() {return m_version;}

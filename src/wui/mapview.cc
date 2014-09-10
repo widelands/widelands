@@ -35,7 +35,7 @@
 Map_View::Map_View
 	(UI::Panel * parent,
 	 int32_t x, int32_t y, uint32_t w, uint32_t h,
-	 Interactive_Base & player)
+	 InteractiveBase & player)
 :
 UI::Panel               (parent, x, y, w, h),
 m_intbase               (player),
@@ -81,7 +81,7 @@ in this function
 */
 void Map_View::draw(RenderTarget & dst)
 {
-	Widelands::Editor_Game_Base & egbase = intbase().egbase();
+	Widelands::EditorGameBase & egbase = intbase().egbase();
 
 	if (upcast(Widelands::Game, game, &egbase)) {
 		// Bail out if the game isn't actually loaded.

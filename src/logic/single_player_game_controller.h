@@ -27,7 +27,7 @@
 class SinglePlayerGameController : public GameController {
 public:
 	SinglePlayerGameController
-		(Widelands::Game &, bool useai, Widelands::Player_Number local);
+		(Widelands::Game &, bool useai, Widelands::PlayerNumber local);
 	~SinglePlayerGameController();
 
 	void think() override;
@@ -50,7 +50,7 @@ private:
 	uint32_t m_speed; ///< current game speed, in milliseconds per second
 	bool m_paused;
 	uint32_t m_player_cmdserial;
-	Widelands::Player_Number m_local;
+	Widelands::PlayerNumber m_local;
 	std::vector<Computer_Player *> m_computerplayers;
 };
 

@@ -40,7 +40,7 @@ ShippingItem::ShippingItem(Worker & worker) :
 {
 }
 
-void ShippingItem::get(Editor_Game_Base& game, WareInstance** ware, Worker** worker) const {
+void ShippingItem::get(EditorGameBase& game, WareInstance** ware, Worker** worker) const {
 	if (ware) {
 		*ware = nullptr;
 	}
@@ -154,7 +154,7 @@ void ShippingItem::schedule_update(Game & game, int32_t delay)
 /**
  * Remove the underlying item directly. This is used when ships are removed.
  */
-void ShippingItem::remove(Editor_Game_Base & egbase)
+void ShippingItem::remove(EditorGameBase & egbase)
 {
 	if (MapObject * obj = m_object.get(egbase)) {
 		obj->remove(egbase);
@@ -182,7 +182,7 @@ ShippingItem ShippingItem::Loader::get(MapObjectLoader & mol)
 	return it;
 }
 
-void ShippingItem::save(Editor_Game_Base & egbase, MapObjectSaver & mos, FileWrite & fw)
+void ShippingItem::save(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(SHIPPINGITEM_SAVEGAME_VERSION);
 	fw.Unsigned32(mos.get_object_file_index_or_zero(m_object.get(egbase)));

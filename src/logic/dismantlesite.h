@@ -48,7 +48,7 @@ struct DismantleSiteDescr : public BuildingDescr {
 	                    const std::string& directory,
 	                    Profile&,
 	                    Section& global_s,
-							  const Tribe_Descr& tribe);
+							  const TribeDescr& tribe);
 	~DismantleSiteDescr() override {}
 
 	Building& create_object() const override;
@@ -67,11 +67,11 @@ class DismantleSite : public Partially_Finished_Building {
 public:
 	DismantleSite(const DismantleSiteDescr & descr);
 	DismantleSite
-		(const DismantleSiteDescr & descr, Editor_Game_Base &,
+		(const DismantleSiteDescr & descr, EditorGameBase &,
 		 Coords const, Player &, bool, Building::FormerBuildings & former_buildings);
 
 	bool burn_on_destroy() override;
-	void init   (Editor_Game_Base &) override;
+	void init   (EditorGameBase &) override;
 
 	bool get_building_work(Game &, Worker &, bool success) override;
 
@@ -83,9 +83,9 @@ protected:
 	uint32_t build_step_time() const override {return DISMANTLESITE_STEP_TIME;}
 
 	virtual void create_options_window
-		(Interactive_GameBase &, UI::Window * & registry) override;
+		(InteractiveGameBase &, UI::Window * & registry) override;
 
-	void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) override;
+	void draw(const EditorGameBase &, RenderTarget &, const FCoords&, const Point&) override;
 };
 
 }

@@ -239,7 +239,7 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets const id) {
 	m_last_table_index = m_table.selection_index();
 	const std::vector<Widelands::Player::Building_Stats> & vec =
 		iplayer().get_player()->get_building_statistics
-			(Widelands::Building_Index
+			(Widelands::BuildingIndex
 				(static_cast<size_t>(m_table.get_selected())));
 	const Widelands::Map & map = iplayer().egbase().map();
 
@@ -341,9 +341,9 @@ void Building_Statistics_Menu::table_changed(uint32_t) {update();}
 bool Building_Statistics_Menu::compare_building_size
 	(uint32_t const rowa, uint32_t const rowb)
 {
-	const Widelands::Tribe_Descr & tribe = iplayer().player().tribe();
-	Widelands::Building_Index a = Widelands::Building_Index(m_table[rowa]);
-	Widelands::Building_Index b = Widelands::Building_Index(m_table[rowb]);
+	const Widelands::TribeDescr & tribe = iplayer().player().tribe();
+	Widelands::BuildingIndex a = Widelands::BuildingIndex(m_table[rowa]);
+	Widelands::BuildingIndex b = Widelands::BuildingIndex(m_table[rowb]);
 	const Widelands::BuildingDescr * descra = tribe.get_building_descr(a);
 	const Widelands::BuildingDescr * descrb = tribe.get_building_descr(b);
 
@@ -370,11 +370,11 @@ void Building_Statistics_Menu::update() {
 	m_progbar .set_state(0);
 
 	const Widelands::Player      & player = iplayer().player();
-	const Widelands::Tribe_Descr & tribe  = player.tribe();
+	const Widelands::TribeDescr & tribe  = player.tribe();
 	const Widelands::Map         & map   = iplayer().game().map();
-	Widelands::Building_Index      const nr_buildings = tribe.get_nrbuildings();
+	Widelands::BuildingIndex      const nr_buildings = tribe.get_nrbuildings();
 	for
-		(Widelands::Building_Index i = 0;
+		(Widelands::BuildingIndex i = 0;
 		 i < nr_buildings;
 		 ++i)
 	{

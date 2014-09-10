@@ -26,7 +26,7 @@ class LuaInterface;
 
 namespace Widelands {
 
-class Editor_Game_Base;
+class EditorGameBase;
 
 /// Loads a map from a file. It firsts only loads small chunks of information
 /// like size, nr of players for the map select dialog. For this loading
@@ -41,7 +41,7 @@ public:
 	virtual ~MapLoader() {}
 
 	virtual int32_t preload_map(bool as_scenario) = 0;
-	virtual int32_t load_map_complete(Editor_Game_Base &, bool as_scenario) = 0;
+	virtual int32_t load_map_complete(EditorGameBase &, bool as_scenario) = 0;
 
 	Map & map() {return m_map;}
 

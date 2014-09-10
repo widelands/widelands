@@ -44,7 +44,7 @@ class Worker;
 class World;
 struct Flag;
 struct PlayerImmovable;
-struct Tribe_Descr;
+struct TribeDescr;
 
 struct NoteImmovable {
 	CAN_BE_SEND_AS_NOTE(NoteId::Immovable)
@@ -89,14 +89,14 @@ struct BaseImmovable : public MapObject {
 	 * if one can be chosen as main.
 	 */
 	virtual PositionList get_positions
-		(const Editor_Game_Base &) const = 0;
+		(const EditorGameBase &) const = 0;
 	virtual void draw
-		(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&)
+		(const EditorGameBase &, RenderTarget &, const FCoords&, const Point&)
 		= 0;
 
 protected:
-	void set_position(Editor_Game_Base &, Coords);
-	void unset_position(Editor_Game_Base &, Coords);
+	void set_position(EditorGameBase &, Coords);
+	void unset_position(EditorGameBase &, Coords);
 };
 
 
@@ -114,16 +114,16 @@ struct ImmovableDescr : public MapObjectDescr {
 	ImmovableDescr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
-		 Tribe_Descr const * const);
+		 TribeDescr const * const);
 	ImmovableDescr(const LuaTable&, const World&);
 	~ImmovableDescr() override;
 
 	int32_t get_size() const {return m_size;}
 	ImmovableProgram const * get_program(const std::string &) const;
 
-	Immovable & create(Editor_Game_Base &, Coords) const;
+	Immovable & create(EditorGameBase &, Coords) const;
 
-	Tribe_Descr const * get_owner_tribe() const {return m_owner_tribe;}
+	TribeDescr const * get_owner_tribe() const {return m_owner_tribe;}
 
 	const Buildcost & buildcost() const {return m_buildcost;}
 
@@ -145,7 +145,7 @@ protected:
 
 	/// The tribe to which this ImmovableDescr belongs or 0 if it is a
 	/// world immovable
-	const Tribe_Descr * const m_owner_tribe;
+	const TribeDescr * const m_owner_tribe;
 
 	/// Buildcost for externally constructible immovables (for ship construction)
 	/// \see ActConstruction
@@ -175,11 +175,11 @@ public:
 	void set_owner(Player * player);
 
 	Coords get_position() const {return m_position;}
-	PositionList get_positions (const Editor_Game_Base &) const override;
+	PositionList get_positions (const EditorGameBase &) const override;
 
 	int32_t  get_size    () const override;
 	bool get_passable() const override;
-	void start_animation(const Editor_Game_Base &, uint32_t anim);
+	void start_animation(const EditorGameBase &, uint32_t anim);
 
 	void program_step(Game & game, uint32_t const delay = 1) {
 		if (delay)
@@ -187,11 +187,11 @@ public:
 		increment_program_pointer();
 	}
 
-	void init(Editor_Game_Base &) override;
-	void cleanup(Editor_Game_Base &) override;
+	void init(EditorGameBase &) override;
+	void cleanup(EditorGameBase &) override;
 	void act(Game &, uint32_t data) override;
 
-	void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) override;
+	void draw(const EditorGameBase &, RenderTarget &, const FCoords&, const Point&) override;
 
 	void switch_program(Game & game, const std::string & programname);
 	bool construct_ware(Game & game, Ware_Index index);
@@ -267,16 +267,16 @@ public:
 	// TODO(unknown): Remove as soon as we fully support the new system
 	bool has_new_save_support() override {return true;}
 
-	void save(Editor_Game_Base &, MapObjectSaver &, FileWrite &) override;
+	void save(EditorGameBase &, MapObjectSaver &, FileWrite &) override;
 	static MapObject::Loader * load
-		(Editor_Game_Base &, MapObjectLoader &, FileRead &,
+		(EditorGameBase &, MapObjectLoader &, FileRead &,
 		 const OneWorldLegacyLookupTable& lookup_table);
 
 private:
 	void increment_program_pointer();
 
 	void draw_construction
-		(const Editor_Game_Base &, RenderTarget &, const Point);
+		(const EditorGameBase &, RenderTarget &, const Point);
 };
 
 
@@ -313,7 +313,7 @@ struct PlayerImmovable : public BaseImmovable {
 	 */
 	const Workers & get_workers() const {return m_workers;}
 
-	void log_general_info(const Editor_Game_Base &) override;
+	void log_general_info(const EditorGameBase &) override;
 
 	/**
 	 * These functions are called when a ware or worker arrives at
@@ -333,8 +333,8 @@ struct PlayerImmovable : public BaseImmovable {
 	void set_owner(Player *);
 
 protected:
-	void init   (Editor_Game_Base &) override;
-	void cleanup(Editor_Game_Base &) override;
+	void init   (EditorGameBase &) override;
+	void cleanup(EditorGameBase &) override;
 
 private:
 	Player              * m_owner;
@@ -351,7 +351,7 @@ protected:
 	};
 
 public:
-	void save(Editor_Game_Base &, MapObjectSaver &, FileWrite &) override;
+	void save(EditorGameBase &, MapObjectSaver &, FileWrite &) override;
 };
 
 }

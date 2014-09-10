@@ -42,7 +42,7 @@ struct CritterDescr : BobDescr {
 		 const std::string& directory,
 		 Profile& prof,
 		 Section& global_s,
-		 Tribe_Descr & _tribe);
+		 TribeDescr & _tribe);
 	CritterDescr(const LuaTable&);
 	~CritterDescr() override;
 
@@ -75,10 +75,10 @@ public:
 
 	void start_task_program(Game &, const std::string & name);
 
-	void save(Editor_Game_Base &, MapObjectSaver &, FileWrite &) override;
+	void save(EditorGameBase &, MapObjectSaver &, FileWrite &) override;
 
 	static MapObject::Loader*
-	load(Editor_Game_Base&, MapObjectLoader&, FileRead&, const OneWorldLegacyLookupTable& lookup_table);
+	load(EditorGameBase&, MapObjectLoader&, FileRead&, const OneWorldLegacyLookupTable& lookup_table);
 
 protected:
 	struct Loader : Bob::Loader {

@@ -44,7 +44,7 @@ class Game;
 struct ImmovableDescr;
 struct ProductionSiteDescr;
 class ProductionSite;
-struct Tribe_Descr;
+struct TribeDescr;
 class Worker;
 class World;
 
@@ -84,7 +84,7 @@ struct ProductionProgram {
 	static void parse_ware_type_group
 		(char            * & parameters,
 		 Ware_Type_Group   & group,
-		 const Tribe_Descr & tribe,
+		 const TribeDescr & tribe,
 		 const BillOfMaterials  & inputs);
 
 	/// Returns from the program.
@@ -143,8 +143,8 @@ struct ProductionProgram {
 		struct Condition {
 			virtual ~Condition();
 			virtual bool evaluate(const ProductionSite &) const = 0;
-			virtual std::string description(const Tribe_Descr &) const = 0;
-			virtual std::string description_negation(const Tribe_Descr &) const = 0;
+			virtual std::string description(const TribeDescr &) const = 0;
+			virtual std::string description_negation(const TribeDescr &) const = 0;
 		};
 		static Condition * create_condition
 			(char * & parameters, const ProductionSiteDescr &);
@@ -156,9 +156,9 @@ struct ProductionProgram {
 			virtual ~Negation();
 			bool evaluate(const ProductionSite &) const override;
 			// Just a dummy to satisfy the superclass interface. Do not use.
-			std::string description(const Tribe_Descr &) const override;
+			std::string description(const TribeDescr &) const override;
 			// Just a dummy to satisfy the superclass interface. Do not use.
-			std::string description_negation(const Tribe_Descr &) const override;
+			std::string description_negation(const TribeDescr &) const override;
 		private:
 			Condition * const operand;
 		};
@@ -167,8 +167,8 @@ struct ProductionProgram {
 		struct Economy_Needs_Ware : public Condition {
 			Economy_Needs_Ware(const Ware_Index& i) : ware_type(i) {}
 			bool evaluate(const ProductionSite &) const override;
-			std::string description(const Tribe_Descr &) const override;
-			std::string description_negation(const Tribe_Descr &) const override;
+			std::string description(const TribeDescr &) const override;
+			std::string description_negation(const TribeDescr &) const override;
 		private:
 			Ware_Index ware_type;
 		};
@@ -177,8 +177,8 @@ struct ProductionProgram {
 		struct Economy_Needs_Worker : public Condition {
 			Economy_Needs_Worker(const Ware_Index& i) : worker_type(i) {}
 			bool evaluate(const ProductionSite &) const override;
-			std::string description(const Tribe_Descr &) const override;
-			std::string description_negation(const Tribe_Descr &) const override;
+			std::string description(const TribeDescr &) const override;
+			std::string description_negation(const TribeDescr &) const override;
 		private:
 			Ware_Index worker_type;
 		};
@@ -189,8 +189,8 @@ struct ProductionProgram {
 		struct Site_Has : public Condition {
 			Site_Has(char * & parameters, const ProductionSiteDescr &);
 			bool evaluate(const ProductionSite &) const override;
-			std::string description(const Tribe_Descr &) const override;
-			std::string description_negation(const Tribe_Descr &) const override;
+			std::string description(const TribeDescr &) const override;
+			std::string description_negation(const TribeDescr &) const override;
 		private:
 			Ware_Type_Group group;
 		};
@@ -199,8 +199,8 @@ struct ProductionProgram {
 		/// become upgraded.
 		struct Workers_Need_Experience : public Condition {
 			bool evaluate(const ProductionSite &) const override;
-			std::string description(const Tribe_Descr &) const override;
-			std::string description_negation(const Tribe_Descr &) const override;
+			std::string description(const TribeDescr &) const override;
+			std::string description_negation(const TribeDescr &) const override;
 		};
 
 		typedef std::vector<Condition *> Conditions;

@@ -35,7 +35,7 @@ struct TrainingSiteDescr : public ProductionSiteDescr {
 	TrainingSiteDescr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
-		 const Tribe_Descr & tribe, const World& world);
+		 const TribeDescr & tribe, const World& world);
 	~TrainingSiteDescr() override {}
 
 	Building & create_object() const override;
@@ -122,8 +122,8 @@ class TrainingSite : public ProductionSite, public SoldierControl {
 public:
 	TrainingSite(const TrainingSiteDescr &);
 
-	void init(Editor_Game_Base &) override;
-	void cleanup(Editor_Game_Base &) override;
+	void init(EditorGameBase &) override;
+	void cleanup(EditorGameBase &) override;
 	void act(Game &, uint32_t data) override;
 
 	void add_worker   (Worker &) override;
@@ -150,7 +150,7 @@ public:
 	uint32_t soldierCapacity() const override;
 	void setSoldierCapacity(uint32_t capacity) override;
 	void dropSoldier(Soldier &) override;
-	int incorporateSoldier(Editor_Game_Base &, Soldier &) override;
+	int incorporateSoldier(EditorGameBase &, Soldier &) override;
 	// End implementation of SoldierControl
 
 	int32_t get_pri(enum tAttribute atr);
@@ -164,7 +164,7 @@ public:
 
 protected:
 	virtual void create_options_window
-		(Interactive_GameBase &, UI::Window * & registry) override;
+		(InteractiveGameBase &, UI::Window * & registry) override;
 	void program_end(Game &, ProgramResult) override;
 
 private:

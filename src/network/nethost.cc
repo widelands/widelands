@@ -652,7 +652,7 @@ NetHost::NetHost (const std::string & playername, bool internet)
 	d->syncreport_pending = false;
 	d->syncreport_time = 0;
 
-	d->settings.tribes = Widelands::Tribe_Descr::get_all_tribe_infos();
+	d->settings.tribes = Widelands::TribeDescr::get_all_tribe_infos();
 	setMultiplayerGameSettings();
 	d->settings.playernum = UserSettings::none();
 	d->settings.usernum = 0;
@@ -701,7 +701,7 @@ void NetHost::clearComputerPlayers()
 	d->computerplayers.clear();
 }
 
-void NetHost::initComputerPlayer(Widelands::Player_Number p)
+void NetHost::initComputerPlayer(Widelands::PlayerNumber p)
 {
 	d->computerplayers.push_back
 		(Computer_Player::getImplementation(d->game->get_player(p)->getAI())->instantiate(*d->game, p));
@@ -709,7 +709,7 @@ void NetHost::initComputerPlayer(Widelands::Player_Number p)
 
 void NetHost::initComputerPlayers()
 {
-	const Widelands::Player_Number nr_players = d->game->map().get_nrplayers();
+	const Widelands::PlayerNumber nr_players = d->game->map().get_nrplayers();
 	iterate_players_existing_novar(p, nr_players, *d->game) {
 		if (p == d->settings.playernum + 1)
 			continue;
@@ -850,7 +850,7 @@ void NetHost::run(bool const autorun)
 
 			d->game = &game;
 			game.set_game_controller(this);
-			Interactive_GameBase * igb;
+			InteractiveGameBase * igb;
 			uint8_t pn = d->settings.playernum + 1;
 
 			if (d->settings.savegame) {

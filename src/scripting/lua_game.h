@@ -27,7 +27,7 @@
 #include "third_party/eris/lua.hpp"
 
 namespace Widelands {
-	struct Tribe_Descr;
+	struct TribeDescr;
 	class Objective;
 	struct Message;
 }
@@ -51,7 +51,7 @@ public:
 	LUNA_CLASS_HEAD(L_Player);
 
 	L_Player() : LuaBases::L_PlayerBase() {}
-	L_Player(Widelands::Player_Number n) : LuaBases::L_PlayerBase(n)  {}
+	L_Player(Widelands::PlayerNumber n) : LuaBases::L_PlayerBase(n)  {}
 	L_Player(lua_State * L) {
 		report_error(L, "Cannot instantiate a 'Player' directly!");
 	}
@@ -93,8 +93,8 @@ public:
 	 */
 private:
 	void m_parse_building_list
-		(lua_State *, const Widelands::Tribe_Descr &,
-		 std::vector<Widelands::Building_Index> &);
+		(lua_State *, const Widelands::TribeDescr &,
+		 std::vector<Widelands::BuildingIndex> &);
 	int m_allow_forbid_buildings(lua_State * L, bool);
 
 };

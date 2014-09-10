@@ -55,7 +55,7 @@
 
 namespace Widelands {
 
-MapSaver::MapSaver(FileSystem & fs, Editor_Game_Base & egbase)
+MapSaver::MapSaver(FileSystem & fs, EditorGameBase & egbase)
 	: m_egbase(egbase), m_fs(fs), m_mos(nullptr)
 {}
 
@@ -125,7 +125,7 @@ void MapSaver::save() {
 
 	const Map & map = m_egbase.map();
 
-	Player_Number const nr_players = map.get_nrplayers();
+	PlayerNumber const nr_players = map.get_nrplayers();
 
 	//  allowed worker types
 	log("Writing Allowed Worker Types Data ... ");
@@ -134,8 +134,8 @@ void MapSaver::save() {
 
  //  allowed building types
 	iterate_players_existing_const(plnum, nr_players, m_egbase, player) {
-		Building_Index const nr_buildings = player->tribe().get_nrbuildings();
-		for (Building_Index i = 0; i < nr_buildings; ++i)
+		BuildingIndex const nr_buildings = player->tribe().get_nrbuildings();
+		for (BuildingIndex i = 0; i < nr_buildings; ++i)
 			if (!player->is_building_type_allowed(i)) {
 				log("Writing Allowed Building Types Data ... ");
 				MapAllowedBuildingTypesPacket p;

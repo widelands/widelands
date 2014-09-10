@@ -42,7 +42,7 @@ namespace Widelands {
 
 void MapFlagdataPacket::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      &       egbase,
+	 EditorGameBase      &       egbase,
 	 bool                    const skip,
 	 MapObjectLoader &       mol)
 {
@@ -202,7 +202,7 @@ void MapFlagdataPacket::Read
 										 Flag::flag_job_request_callback,
 										 wwWORKER);
 								f.request->Read
-									(fr, ref_cast<Game, Editor_Game_Base>(egbase), mol);
+									(fr, ref_cast<Game, EditorGameBase>(egbase), mol);
 							} else {
 								f.request = nullptr;
 							}
@@ -226,7 +226,7 @@ void MapFlagdataPacket::Read
 
 
 void MapFlagdataPacket::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, MapObjectSaver & mos)
+	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver & mos)
 
 {
 	FileWrite fw;
@@ -302,7 +302,7 @@ void MapFlagdataPacket::Write
 				if (temp_job.request) {
 					fw.Unsigned8(1);
 					temp_job.request->Write
-						(fw, ref_cast<Game, Editor_Game_Base>(egbase), mos);
+						(fw, ref_cast<Game, EditorGameBase>(egbase), mos);
 				} else
 					fw.Unsigned8(0);
 

@@ -105,7 +105,7 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario) {
  * Load the complete map and make sure that it runs without problems
  */
 int32_t WidelandsMapLoader::load_map_complete
-	(Editor_Game_Base & egbase, bool const scenario)
+	(EditorGameBase & egbase, bool const scenario)
 {
 	ScopedTimer timer("WidelandsMapLoader::load_map_complete() took %ums");
 

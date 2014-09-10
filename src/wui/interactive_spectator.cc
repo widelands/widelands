@@ -40,7 +40,7 @@
 Interactive_Spectator::Interactive_Spectator
 	(Widelands::Game & _game, Section & global_s, bool const multiplayer)
 	:
-	Interactive_GameBase(_game, global_s, OBSERVER, multiplayer, multiplayer),
+	InteractiveGameBase(_game, global_s, OBSERVER, multiplayer, multiplayer),
 
 #define INIT_BTN(picture, name, tooltip)                            \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
@@ -207,15 +207,15 @@ void Interactive_Spectator::toggle_statistics() {
 }
 
 
-bool Interactive_Spectator::can_see(Widelands::Player_Number) const
+bool Interactive_Spectator::can_see(Widelands::PlayerNumber) const
 {
 	return true;
 }
-bool Interactive_Spectator::can_act(Widelands::Player_Number) const
+bool Interactive_Spectator::can_act(Widelands::PlayerNumber) const
 {
 	return false;
 }
-Widelands::Player_Number Interactive_Spectator::player_number() const
+Widelands::PlayerNumber Interactive_Spectator::player_number() const
 {
 	return 0;
 }
@@ -283,5 +283,5 @@ bool Interactive_Spectator::handle_key(bool const down, SDL_keysym const code)
 			break;
 		}
 
-	return Interactive_GameBase::handle_key(down, code);
+	return InteractiveGameBase::handle_key(down, code);
 }

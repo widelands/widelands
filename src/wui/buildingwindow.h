@@ -40,14 +40,14 @@ struct Building_Window : public UI::Window {
 	};
 
 	Building_Window
-		(Interactive_GameBase & parent, Widelands::Building &, UI::Window * & registry);
+		(InteractiveGameBase & parent, Widelands::Building &, UI::Window * & registry);
 
 	virtual ~Building_Window();
 
 	Widelands::Building & building() {return m_building;}
 
-	Interactive_GameBase & igbase() const {
-		return ref_cast<Interactive_GameBase, UI::Panel>(*get_parent());
+	InteractiveGameBase & igbase() const {
+		return ref_cast<InteractiveGameBase, UI::Panel>(*get_parent());
 	}
 
 	void draw(RenderTarget &) override;
@@ -66,7 +66,7 @@ protected:
 	void configure_workarea_button();
 	void act_start_stop();
 	void act_start_or_cancel_expedition();
-	void act_enhance(Widelands::Building_Index);
+	void act_enhance(Widelands::BuildingIndex);
 	void clicked_goto();
 
 	void create_ware_queue_panel
@@ -86,7 +86,7 @@ private:
 
 	//  capabilities that were last used in setting up the caps panel
 	uint32_t m_capscache;
-	Widelands::Player_Number m_capscache_player_number;
+	Widelands::PlayerNumber m_capscache_player_number;
 	bool m_caps_setup;
 
 	OverlayManager::JobId m_workarea_job_id;

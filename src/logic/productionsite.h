@@ -58,7 +58,7 @@ struct ProductionSiteDescr : public BuildingDescr {
 	ProductionSiteDescr
 		(MapObjectType type, char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
-		 const Tribe_Descr &, const World&);
+		 const TribeDescr &, const World&);
 	~ProductionSiteDescr() override;
 
 	Building & create_object() const override;
@@ -134,7 +134,7 @@ public:
 	ProductionSite(const ProductionSiteDescr & descr);
 	virtual ~ProductionSite();
 
-	void log_general_info(const Editor_Game_Base &) override;
+	void log_general_info(const EditorGameBase &) override;
 
 	bool is_stopped() const {return m_is_stopped;}
 	void set_stopped(bool);
@@ -151,7 +151,7 @@ public:
 		return m_working_positions;
 	}
 
-	virtual bool has_workers(Building_Index targetSite, Game & game);
+	virtual bool has_workers(BuildingIndex targetSite, Game & game);
 	uint8_t get_statistics_percent() {return m_last_stat_percent;}
 	uint8_t get_crude_statistics() {return (m_crude_percent + 5000) / 10000;}
 
@@ -166,12 +166,12 @@ public:
 
 	WaresQueue & waresqueue(Ware_Index) override;
 
-	void init(Editor_Game_Base &) override;
-	void cleanup(Editor_Game_Base &) override;
+	void init(EditorGameBase &) override;
+	void cleanup(EditorGameBase &) override;
 	void act(Game &, uint32_t data) override;
 
 	void remove_worker(Worker &) override;
-	int warp_worker(Editor_Game_Base &, const WorkerDescr & wd);
+	int warp_worker(EditorGameBase &, const WorkerDescr & wd);
 
 	bool fetch_from_flag(Game &) override;
 	bool get_building_work(Game &, Worker &, bool success) override;
@@ -194,7 +194,7 @@ protected:
 	void update_statistics_string(std::string* statistics) override;
 
 	void create_options_window
-		(Interactive_GameBase &, UI::Window * & registry) override;
+		(InteractiveGameBase &, UI::Window * & registry) override;
 
 protected:
 	struct State {

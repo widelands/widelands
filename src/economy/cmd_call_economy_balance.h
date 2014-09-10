@@ -39,8 +39,8 @@ struct CmdCallEconomyBalance : public GameLogicCommand {
 
 	uint8_t id() const override {return QUEUE_CMD_CALL_ECONOMY_BALANCE;}
 
-	void Write(FileWrite &, Editor_Game_Base &, MapObjectSaver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, MapObjectLoader &) override;
+	void Write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
+	void Read (FileRead  &, EditorGameBase &, MapObjectLoader &) override;
 
 private:
 	OPtr<Flag> m_flag;

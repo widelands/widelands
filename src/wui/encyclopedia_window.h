@@ -29,7 +29,7 @@
 
 namespace Widelands {
 struct WareDescr;
-struct Tribe_Descr;
+struct TribeDescr;
 }
 
 class Interactive_Player;
@@ -53,7 +53,7 @@ private:
 
 	Interactive_Player & iaplayer() const;
 	UI::Listselect<Widelands::Ware_Index> wares;
-	UI::Listselect<Widelands::Building_Index> prodSites;
+	UI::Listselect<Widelands::BuildingIndex> prodSites;
 	UI::Table     <uintptr_t>                 condTable;
 	UI::Multiline_Textarea    descrTxt;
 	Widelands::WareDescr const * selectedWare;

@@ -31,7 +31,7 @@ class LuaInterface;
 
 namespace Widelands {
 
-class Editor_Game_Base;
+class EditorGameBase;
 class MapObjectLoader;
 
 /// Takes ownership of the filesystem that is passed to it.
@@ -41,7 +41,7 @@ struct WidelandsMapLoader : public MapLoader {
 	virtual ~WidelandsMapLoader();
 
 	int32_t preload_map(bool) override;
-	int32_t load_map_complete(Editor_Game_Base &, bool) override;
+	int32_t load_map_complete(EditorGameBase &, bool) override;
 
 	MapObjectLoader * get_map_object_loader() {return m_mol.get();}
 

@@ -37,7 +37,7 @@ struct MilitarySiteDescr : public ProductionSiteDescr {
 	MilitarySiteDescr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &,  Section & global_s,
-		 const Tribe_Descr & tribe, const World& world);
+		 const TribeDescr & tribe, const World& world);
 	~MilitarySiteDescr() override {}
 
 	Building & create_object() const override;
@@ -82,8 +82,8 @@ public:
 	MilitarySite(const MilitarySiteDescr &);
 	virtual ~MilitarySite();
 
-	void init(Editor_Game_Base &) override;
-	void cleanup(Editor_Game_Base &) override;
+	void init(EditorGameBase &) override;
+	void cleanup(EditorGameBase &) override;
 	void act(Game &, uint32_t data) override;
 	void remove_worker(Worker &) override;
 
@@ -98,7 +98,7 @@ public:
 	uint32_t soldierCapacity() const override;
 	void setSoldierCapacity(uint32_t capacity) override;
 	void dropSoldier(Soldier &) override;
-	int incorporateSoldier(Editor_Game_Base & game, Soldier & s) override;
+	int incorporateSoldier(EditorGameBase & game, Soldier & s) override;
 
 	// Begin implementation of Attackable
 	Player & owner() const override {return Building::owner();}
@@ -128,10 +128,10 @@ public:
 	}
 
 protected:
-	void conquer_area(Editor_Game_Base &);
+	void conquer_area(EditorGameBase &);
 
 	virtual void create_options_window
-		(Interactive_GameBase &, UI::Window * & registry) override;
+		(InteractiveGameBase &, UI::Window * & registry) override;
 
 private:
 	void update_statistics_string(std::string*) override;
@@ -148,7 +148,7 @@ private:
 	bool update_upgrade_requirements();
 	void update_normal_soldier_request();
 	void update_upgrade_soldier_request();
-	bool incorporateUpgradedSoldier(Editor_Game_Base & game, Soldier & s);
+	bool incorporateUpgradedSoldier(EditorGameBase & game, Soldier & s);
 	Soldier * find_least_suited_soldier();
 	bool drop_least_suited_soldier(bool new_has_arrived, Soldier * s);
 

@@ -54,7 +54,7 @@ struct ConstructionSiteDescr : public BuildingDescr {
 	ConstructionSiteDescr
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
-		 const Tribe_Descr & tribe);
+		 const TribeDescr & tribe);
 	~ConstructionSiteDescr() override {}
 
 	Building & create_object() const override;
@@ -80,8 +80,8 @@ public:
 	void set_building(const BuildingDescr &) override;
 	const BuildingDescr & building() const {return *m_building;}
 
-	void init   (Editor_Game_Base &) override;
-	void cleanup(Editor_Game_Base &) override;
+	void init   (EditorGameBase &) override;
+	void cleanup(EditorGameBase &) override;
 
 	bool burn_on_destroy() override;
 
@@ -93,12 +93,12 @@ protected:
 
 	uint32_t build_step_time() const override {return CONSTRUCTIONSITE_STEP_TIME;}
 	virtual void create_options_window
-		(Interactive_GameBase &, UI::Window * & registry) override;
+		(InteractiveGameBase &, UI::Window * & registry) override;
 
 	static void wares_queue_callback
 		(Game &, WaresQueue *, Ware_Index, void * data);
 
-	void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) override;
+	void draw(const EditorGameBase &, RenderTarget &, const FCoords&, const Point&) override;
 
 private:
 	int32_t     m_fetchfromflag;  // # of wares to fetch from flag

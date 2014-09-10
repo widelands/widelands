@@ -58,8 +58,8 @@ namespace {
 using Widelands::Building;
 
 // Load all tribes from disk.
-void load_all_tribes(Widelands::Editor_Game_Base* egbase, UI::ProgressWindow* loader_ui) {
-	for (const std::string& tribename : Widelands::Tribe_Descr::get_all_tribenames()) {
+void load_all_tribes(Widelands::EditorGameBase* egbase, UI::ProgressWindow* loader_ui) {
+	for (const std::string& tribename : Widelands::TribeDescr::get_all_tribenames()) {
 		ScopedTimer timer((boost::format("Loading %s took %%ums.") % tribename).str());
 		loader_ui->stepf(_("Loading tribe: %s"), tribename.c_str());
 		egbase->manually_load_tribe(tribename);
@@ -68,8 +68,8 @@ void load_all_tribes(Widelands::Editor_Game_Base* egbase, UI::ProgressWindow* lo
 
 }  // namespace
 
-Editor_Interactive::Editor_Interactive(Widelands::Editor_Game_Base & e) :
-	Interactive_Base(e, g_options.pull_section("global")),
+Editor_Interactive::Editor_Interactive(Widelands::EditorGameBase & e) :
+	InteractiveBase(e, g_options.pull_section("global")),
 	m_need_save(false),
 	m_realtime(WLApplication::get()->get_time()),
 	m_left_mouse_button_is_down(false),
@@ -132,9 +132,9 @@ Editor_Interactive::Editor_Interactive(Widelands::Editor_Game_Base & e) :
 	m_redo.set_enabled(false);
 
 #ifndef NDEBUG
-	set_display_flag(Interactive_Base::dfDebug, true);
+	set_display_flag(InteractiveBase::dfDebug, true);
 #else
-	set_display_flag(Interactive_Base::dfDebug, false);
+	set_display_flag(InteractiveBase::dfDebug, false);
 #endif
 
 	fieldclicked.connect(boost::bind(&Editor_Interactive::map_clicked, this, false));
@@ -144,7 +144,7 @@ void Editor_Interactive::register_overlays() {
 	Widelands::Map & map = egbase().map();
 
 	//  Starting locations
-	Widelands::Player_Number const nr_players = map.get_nrplayers();
+	Widelands::PlayerNumber const nr_players = map.get_nrplayers();
 	assert(nr_players <= 99); //  2 decimal digits
 	char fname[] = "pics/editor_player_00_starting_pos.png";
 	iterate_player_numbers(p, nr_players) {
@@ -236,7 +236,7 @@ void Editor_Interactive::start() {
  * Advance the timecounter and animate textures.
  */
 void Editor_Interactive::think() {
-	Interactive_Base::think();
+	InteractiveBase::think();
 
 	int32_t lasttime = m_realtime;
 	int32_t frametime;
@@ -284,22 +284,22 @@ bool Editor_Interactive::handle_mouserelease(uint8_t btn, int32_t x, int32_t y) 
 	if (btn == SDL_BUTTON_LEFT) {
 		m_left_mouse_button_is_down = false;
 	}
-	return Interactive_Base::handle_mouserelease(btn, x, y);
+	return InteractiveBase::handle_mouserelease(btn, x, y);
 }
 
 bool Editor_Interactive::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
 		m_left_mouse_button_is_down = true;
 	}
-	return Interactive_Base::handle_mousepress(btn, x, y);
+	return InteractiveBase::handle_mousepress(btn, x, y);
 }
 
 /// Needed to get freehand painting tools (hold down mouse and move to edit).
-void Editor_Interactive::set_sel_pos(Widelands::Node_and_Triangle<> const sel) {
+void Editor_Interactive::set_sel_pos(Widelands::NodeAndTriangle<> const sel) {
 	bool const target_changed =
 	    tools.current().operates_on_triangles() ?
 	    sel.triangle != get_sel_pos().triangle : sel.node != get_sel_pos().node;
-	Interactive_Base::set_sel_pos(sel);
+	InteractiveBase::set_sel_pos(sel);
 	if (target_changed && m_left_mouse_button_is_down)
 		map_clicked(true);
 }
@@ -345,7 +345,7 @@ void Editor_Interactive::set_sel_radius_and_update_menu(uint32_t const val) {
 
 
 bool Editor_Interactive::handle_key(bool const down, SDL_keysym const code) {
-	bool handled = Interactive_Base::handle_key(down, code);
+	bool handled = InteractiveBase::handle_key(down, code);
 
 	if (down) {
 		// only on down events
@@ -415,8 +415,8 @@ bool Editor_Interactive::handle_key(bool const down, SDL_keysym const code) {
 
 		case SDLK_c:
 			set_display_flag
-			(Interactive_Base::dfShowCensus,
-			 !get_display_flag(Interactive_Base::dfShowCensus));
+			(InteractiveBase::dfShowCensus,
+			 !get_display_flag(InteractiveBase::dfShowCensus));
 			handled = true;
 			break;
 
@@ -525,7 +525,7 @@ void Editor_Interactive::select_tool
  *  data is a pointer to a tribe (for buildings)
  */
 void Editor_Interactive::reference_player_tribe
-(Widelands::Player_Number player, void const * const data) {
+(Widelands::PlayerNumber player, void const * const data) {
 	assert(0 < player);
 	assert(player <= egbase().map().get_nrplayers());
 
@@ -538,7 +538,7 @@ void Editor_Interactive::reference_player_tribe
 
 /// Unreference !once!, if referenced many times, this will leak a reference.
 void Editor_Interactive::unreference_player_tribe
-(Widelands::Player_Number const player, void const * const data) {
+(Widelands::PlayerNumber const player, void const * const data) {
 	assert(player <= egbase().map().get_nrplayers());
 	assert(data);
 
@@ -562,7 +562,7 @@ void Editor_Interactive::unreference_player_tribe
 }
 
 bool Editor_Interactive::is_player_tribe_referenced
-(Widelands::Player_Number const  player) {
+(Widelands::PlayerNumber const  player) {
 	assert(0 < player);
 	assert(player <= egbase().map().get_nrplayers());
 
@@ -574,7 +574,7 @@ bool Editor_Interactive::is_player_tribe_referenced
 }
 
 void Editor_Interactive::run_editor(const std::string& filename, const std::string& script_to_run) {
-	Widelands::Editor_Game_Base editor(nullptr);
+	Widelands::EditorGameBase editor(nullptr);
 	Editor_Interactive eia(editor);
 	editor.set_ibase(&eia); // TODO(unknown): get rid of this
 	{

@@ -33,7 +33,7 @@
 #include "random/random.h"
 #include "sound/fxset.h"
 
-namespace Widelands {class Editor_Game_Base;}
+namespace Widelands {class EditorGameBase;}
 struct Songset;
 struct SDL_mutex;
 class FileRead;
@@ -225,7 +225,7 @@ public:
 	/** The game logic where we can get a mapping from logical to screen
 	 * coordinates and vice vers
 	*/
-	Widelands::Editor_Game_Base * egbase_;
+	Widelands::EditorGameBase * egbase_;
 
 	/** Only for buffering the command line option --nosound until real initialization is done.
 	 *  And disabling sound on dedicated servers

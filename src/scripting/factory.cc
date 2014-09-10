@@ -22,11 +22,11 @@
 #include "scripting/lua_editor.h"
 #include "scripting/lua_game.h"
 
-void EditorFactory::push_player(lua_State * L, Widelands::Player_Number plr) {
+void EditorFactory::push_player(lua_State * L, Widelands::PlayerNumber plr) {
 	to_lua<LuaEditor::L_Player>(L, new LuaEditor::L_Player(plr));
 }
 
-void GameFactory::push_player(lua_State * L, Widelands::Player_Number plr) {
+void GameFactory::push_player(lua_State * L, Widelands::PlayerNumber plr) {
 		to_lua<LuaGame::L_Player>(L, new LuaGame::L_Player(plr));
 }
 

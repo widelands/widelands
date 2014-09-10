@@ -38,7 +38,7 @@
 
 namespace UI {class Window;}
 struct BuildingHints;
-class Interactive_GameBase;
+class InteractiveGameBase;
 class Profile;
 class Image;
 
@@ -46,7 +46,7 @@ namespace Widelands {
 
 struct Flag;
 struct Message;
-struct Tribe_Descr;
+struct TribeDescr;
 class WaresQueue;
 
 class Building;
@@ -59,12 +59,12 @@ class Building;
  * Common to all buildings!
  */
 struct BuildingDescr : public MapObjectDescr {
-	typedef std::vector<Building_Index> FormerBuildings;
+	typedef std::vector<BuildingIndex> FormerBuildings;
 
 	BuildingDescr
 		(MapObjectType type, char const * _name, char const * _descname,
 		 const std::string & directory, Profile &, Section & global_s,
-		 const Tribe_Descr &);
+		 const TribeDescr &);
 	~BuildingDescr() override {}
 
 	bool is_buildable   () const {return m_buildable;}
@@ -100,7 +100,7 @@ struct BuildingDescr : public MapObjectDescr {
 
 	// Returns the enhancement this building can become or
 	// INVALID_INDEX if it cannot be enhanced.
-	const Building_Index & enhancement() const {return m_enhancement;}
+	const BuildingIndex & enhancement() const {return m_enhancement;}
 
 	/// Create a building of this type in the game. Calls init, which does
 	/// different things for different types of buildings (such as conquering
@@ -110,7 +110,7 @@ struct BuildingDescr : public MapObjectDescr {
 	/// Does not perform any sanity checks.
 	/// If former_buildings is not empty this is an enhancing.
 	Building & create
-		(Editor_Game_Base &,
+		(EditorGameBase &,
 		 Player &,
 		 Coords,
 		 bool                   construct,
@@ -124,7 +124,7 @@ struct BuildingDescr : public MapObjectDescr {
 	bool has_help_text() const {return m_helptext_script != "";}
 	std::string helptext_script() const {return m_helptext_script;}
 
-	const Tribe_Descr & tribe() const {return m_tribe;}
+	const TribeDescr & tribe() const {return m_tribe;}
 	Workarea_Info m_workarea_info;
 
 	virtual int32_t suitability(const Map &, FCoords) const;
@@ -135,7 +135,7 @@ protected:
 	Building & create_constructionsite() const;
 
 private:
-	const Tribe_Descr & m_tribe;
+	const TribeDescr & m_tribe;
 	bool          m_buildable;       // the player can build this himself
 	bool          m_destructible;    // the player can destruct this himself
 	Buildcost     m_buildcost;
@@ -147,7 +147,7 @@ private:
 	int32_t       m_size;            // size of the building
 	bool          m_mine;
 	bool          m_port;
-	Building_Index  m_enhancement;
+	BuildingIndex  m_enhancement;
 	bool          m_enhanced_building; // if it is one, it is bulldozable
 	BuildingHints m_hints;             // hints (knowledge) for computer players
 	bool          m_global;            // whether this is a "global" building
@@ -173,13 +173,13 @@ public:
 		PCap_Enhancable = 1 << 2, // can be enhanced to something
 	};
 
-	typedef std::vector<Building_Index> FormerBuildings;
+	typedef std::vector<BuildingIndex> FormerBuildings;
 
 public:
 	Building(const BuildingDescr &);
 	virtual ~Building();
 
-	void load_finish(Editor_Game_Base &) override;
+	void load_finish(EditorGameBase &) override;
 
 	int32_t  get_size    () const override;
 	bool get_passable() const override;
@@ -192,7 +192,7 @@ public:
 	virtual uint32_t get_playercaps() const;
 
 	virtual Coords get_position() const {return m_position;}
-	PositionList get_positions (const Editor_Game_Base &) const override;
+	PositionList get_positions (const EditorGameBase &) const override;
 
 	std::string info_string(const std::string & format);
 
@@ -207,11 +207,11 @@ public:
 	virtual WaresQueue & waresqueue(Ware_Index);
 
 	virtual bool burn_on_destroy();
-	void destroy(Editor_Game_Base &) override;
+	void destroy(EditorGameBase &) override;
 
-	void show_options(Interactive_GameBase &, bool avoid_fastclick = false, Point pos = Point(- 1, - 1));
+	void show_options(InteractiveGameBase &, bool avoid_fastclick = false, Point pos = Point(- 1, - 1));
 	void hide_options();
-	void refresh_options(Interactive_GameBase &);
+	void refresh_options(InteractiveGameBase &);
 
 	virtual bool fetch_from_flag(Game &);
 	virtual bool get_building_work(Game &, Worker &, bool success);
@@ -242,14 +242,14 @@ public:
 		return m_old_buildings;
 	}
 
-	void log_general_info(const Editor_Game_Base &) override;
+	void log_general_info(const EditorGameBase &) override;
 
 	//  Use on training sites only.
 	virtual void change_train_priority(uint32_t, int32_t) {}
 	virtual void switch_train_mode () {}
 
-	///  Stores the Player_Number of the player who has defeated this building.
-	void set_defeating_player(Player_Number const player_number) {
+	///  Stores the PlayerNumber of the player who has defeated this building.
+	void set_defeating_player(PlayerNumber const player_number) {
 		m_defeating_player = player_number;
 	}
 
@@ -272,17 +272,17 @@ protected:
 	virtual void update_statistics_string(std::string*) {
 	}
 
-	void start_animation(Editor_Game_Base &, uint32_t anim);
+	void start_animation(EditorGameBase &, uint32_t anim);
 
-	void init(Editor_Game_Base &) override;
-	void cleanup(Editor_Game_Base &) override;
+	void init(EditorGameBase &) override;
+	void cleanup(EditorGameBase &) override;
 	void act(Game &, uint32_t data) override;
 
-	void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) override;
-	void draw_help(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
+	void draw(const EditorGameBase &, RenderTarget &, const FCoords&, const Point&) override;
+	void draw_help(const EditorGameBase &, RenderTarget &, const FCoords&, const Point&);
 
 	virtual void create_options_window
-		(Interactive_GameBase &, UI::Window * & registry)
+		(InteractiveGameBase &, UI::Window * & registry)
 		= 0;
 
 	void set_seeing(bool see);
@@ -300,7 +300,7 @@ protected:
 	Object_Ptr  m_leave_allow; //  worker that is allowed to leave now
 
 	//  The player who has defeated this building.
-	Player_Number           m_defeating_player;
+	PlayerNumber           m_defeating_player;
 
 	int32_t m_priority; // base priority
 	std::map<Ware_Index, int32_t> m_ware_priorities;

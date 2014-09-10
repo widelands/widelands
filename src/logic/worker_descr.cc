@@ -38,7 +38,7 @@ namespace Widelands {
 WorkerDescr::WorkerDescr
 	(const MapObjectType type, char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
-	 const Tribe_Descr & _tribe)
+	 const TribeDescr & _tribe)
 	:
 	BobDescr(type, _name, _descname, &_tribe),
 	m_helptext          (global_s.get_string("help", "")),
@@ -137,8 +137,8 @@ WorkerDescr::~WorkerDescr()
 	}
 }
 
-const Tribe_Descr& WorkerDescr::tribe() const {
-	const Tribe_Descr* owner_tribe = get_owner_tribe();
+const TribeDescr& WorkerDescr::tribe() const {
+	const TribeDescr* owner_tribe = get_owner_tribe();
 	assert(owner_tribe != nullptr);
 	return *owner_tribe;
 }
@@ -171,7 +171,7 @@ WorkerProgram const * WorkerDescr::get_program
  * Custom creation routing that accounts for the location.
  */
 Worker & WorkerDescr::create
-	(Editor_Game_Base &       egbase,
+	(EditorGameBase &       egbase,
 	 Player           &       owner,
 	 PlayerImmovable  * const location,
 	 Coords             const coords)

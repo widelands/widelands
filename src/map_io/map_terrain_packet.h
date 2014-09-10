@@ -27,12 +27,12 @@ class FileSystem;
 
 namespace Widelands {
 
-class Editor_Game_Base;
+class EditorGameBase;
 
 class MapTerrainPacket {
 public:
-	void Read(FileSystem&, Editor_Game_Base&, const OneWorldLegacyLookupTable& lookup_table);
-	void Write(FileSystem&, Editor_Game_Base&);
+	void Read(FileSystem&, EditorGameBase&, const OneWorldLegacyLookupTable& lookup_table);
+	void Write(FileSystem&, EditorGameBase&);
 };
 
 }

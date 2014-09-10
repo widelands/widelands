@@ -142,7 +142,7 @@ void Main_Menu_New_Map::button_clicked(int32_t n) {
 void Main_Menu_New_Map::clicked_create_map() {
 	Editor_Interactive & eia =
 		ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
-	Widelands::Editor_Game_Base & egbase = eia.egbase();
+	Widelands::EditorGameBase & egbase = eia.egbase();
 	Widelands::Map              & map    = egbase.map();
 	UI::ProgressWindow loader;
 

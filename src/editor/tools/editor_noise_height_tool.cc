@@ -29,7 +29,7 @@
 /// Sets the heights to random values. Changes surrounding nodes if necessary.
 int32_t Editor_Noise_Height_Tool::handle_click_impl(Widelands::Map& map,
                                                     const Widelands::World& world,
-                                                    Widelands::Node_and_Triangle<> const center,
+                                                    Widelands::NodeAndTriangle<> const center,
                                                     Editor_Interactive& /* parent */,
                                                     Editor_Action_Args& args) {
 	if (args.origHights.empty()) {
@@ -64,7 +64,7 @@ int32_t Editor_Noise_Height_Tool::handle_click_impl(Widelands::Map& map,
 int32_t
 Editor_Noise_Height_Tool::handle_undo_impl(Widelands::Map& map,
                                            const Widelands::World& world,
-                                           Widelands::Node_and_Triangle<Widelands::Coords> center,
+                                           Widelands::NodeAndTriangle<Widelands::Coords> center,
                                            Editor_Interactive& parent,
                                            Editor_Action_Args& args) {
 	return m_set_tool.handle_undo_impl(map, world, center, parent, args);

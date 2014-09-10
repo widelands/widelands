@@ -31,7 +31,7 @@ static const char pic_tab_wares[] = "pics/menu_tab_wares.png";
  */
 struct DismantleSite_Window : public Building_Window {
 	DismantleSite_Window
-		(Interactive_GameBase        & parent,
+		(InteractiveGameBase        & parent,
 		 Widelands::DismantleSite &,
 		 UI::Window *                & registry);
 
@@ -43,7 +43,7 @@ private:
 
 
 DismantleSite_Window::DismantleSite_Window
-	(Interactive_GameBase        & parent,
+	(InteractiveGameBase        & parent,
 	 Widelands::DismantleSite & cs,
 	 UI::Window *                & registry)
 	: Building_Window(parent, cs, registry)
@@ -92,7 +92,7 @@ Create the status window describing the site.
 ===============
 */
 void Widelands::DismantleSite::create_options_window
-	(Interactive_GameBase & parent, UI::Window * & registry)
+	(InteractiveGameBase & parent, UI::Window * & registry)
 {
 	new DismantleSite_Window(parent, *this, registry);
 }

@@ -27,7 +27,7 @@
 
 namespace Widelands {
 
-void Buildcost::parse(const Tribe_Descr & tribe, Section & buildcost_s)
+void Buildcost::parse(const TribeDescr & tribe, Section & buildcost_s)
 {
 	while (Section::Value const * const val = buildcost_s.get_next_val())
 		try {
@@ -62,7 +62,7 @@ uint32_t Buildcost::total() const
 	return sum;
 }
 
-void Buildcost::save(FileWrite& fw, const Widelands::Tribe_Descr& tribe) const {
+void Buildcost::save(FileWrite& fw, const Widelands::TribeDescr& tribe) const {
 	for (const_iterator it = begin(); it != end(); ++it) {
 		fw.CString(tribe.get_ware_descr(it->first)->name());
 		fw.Unsigned8(it->second);
@@ -70,7 +70,7 @@ void Buildcost::save(FileWrite& fw, const Widelands::Tribe_Descr& tribe) const {
 	fw.CString("");
 }
 
-void Buildcost::load(FileRead& fr, const Widelands::Tribe_Descr& tribe) {
+void Buildcost::load(FileRead& fr, const Widelands::TribeDescr& tribe) {
 	clear();
 
 	for (;;) {

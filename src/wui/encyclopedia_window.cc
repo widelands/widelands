@@ -86,7 +86,7 @@ EncyclopediaWindow::EncyclopediaWindow
 }
 
 void EncyclopediaWindow::fillWares() {
-	const Tribe_Descr & tribe = iaplayer().player().tribe();
+	const TribeDescr & tribe = iaplayer().player().tribe();
 	Ware_Index const nr_wares = tribe.get_nrwares();
 	std::vector<Ware> ware_vec;
 
@@ -105,7 +105,7 @@ void EncyclopediaWindow::fillWares() {
 }
 
 void EncyclopediaWindow::wareSelected(uint32_t) {
-	const Tribe_Descr & tribe = iaplayer().player().tribe();
+	const TribeDescr & tribe = iaplayer().player().tribe();
 	selectedWare = tribe.get_ware_descr(wares.get_selected());
 
 	descrTxt.set_text(selectedWare->helptext());
@@ -115,8 +115,8 @@ void EncyclopediaWindow::wareSelected(uint32_t) {
 
 	bool found = false;
 
-	Building_Index const nr_buildings = tribe.get_nrbuildings();
-	for (Building_Index i = 0; i < nr_buildings; ++i) {
+	BuildingIndex const nr_buildings = tribe.get_nrbuildings();
+	for (BuildingIndex i = 0; i < nr_buildings; ++i) {
 		const BuildingDescr & descr = *tribe.get_building_descr(i);
 		if (upcast(ProductionSiteDescr const, de, &descr)) {
 
@@ -138,7 +138,7 @@ void EncyclopediaWindow::wareSelected(uint32_t) {
 void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 	assert(prodSites.has_selection());
 	condTable.clear();
-	const Tribe_Descr & tribe = iaplayer().player().tribe();
+	const TribeDescr & tribe = iaplayer().player().tribe();
 
 	const ProductionSiteDescr::Programs & programs =
 		ref_cast<ProductionSiteDescr const, BuildingDescr const>

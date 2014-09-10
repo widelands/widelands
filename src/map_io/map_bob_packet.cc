@@ -32,7 +32,7 @@ namespace Widelands {
 #define CURRENT_PACKET_VERSION 1
 
 void MapBobPacket::ReadBob(FileRead& fr,
-                                  Editor_Game_Base& egbase,
+                                  EditorGameBase& egbase,
 											 MapObjectLoader&,
                                   Coords const coords,
                                   const OneWorldLegacyLookupTable& lookup_table) {
@@ -68,7 +68,7 @@ void MapBobPacket::ReadBob(FileRead& fr,
 }
 
 void MapBobPacket::Read(FileSystem& fs,
-                               Editor_Game_Base& egbase,
+                               EditorGameBase& egbase,
 										 MapObjectLoader& mol,
                                const OneWorldLegacyLookupTable& lookup_table) {
 	FileRead fr;

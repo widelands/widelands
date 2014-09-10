@@ -34,7 +34,7 @@ namespace Widelands {
 #define CURRENT_PACKET_VERSION 1
 
 void MapPortSpacesPacket::Read
-	(FileSystem & fs, Editor_Game_Base & egbase, bool, MapObjectLoader &)
+	(FileSystem & fs, EditorGameBase & egbase, bool, MapObjectLoader &)
 {
 	Profile prof;
 	prof.read("port_spaces", nullptr, fs);
@@ -65,7 +65,7 @@ void MapPortSpacesPacket::Read
 }
 
 
-void MapPortSpacesPacket::Write(FileSystem & fs, Editor_Game_Base & egbase, MapObjectSaver &)
+void MapPortSpacesPacket::Write(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
 
 {
 	Profile prof;

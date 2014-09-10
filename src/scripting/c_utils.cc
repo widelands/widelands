@@ -50,9 +50,9 @@ Widelands::Game & get_game(lua_State * const L) {
 	return *g;
 }
 
-Widelands::Editor_Game_Base & get_egbase(lua_State * const L) {
+Widelands::EditorGameBase & get_egbase(lua_State * const L) {
 	lua_getfield(L, LUA_REGISTRYINDEX, "egbase");
-	Widelands::Editor_Game_Base * g = static_cast<Widelands::Editor_Game_Base *>
+	Widelands::EditorGameBase * g = static_cast<Widelands::EditorGameBase *>
 		(lua_touserdata(L, -1));
 	lua_pop(L, 1); // pop this userdata
 
