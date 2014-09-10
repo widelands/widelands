@@ -107,7 +107,7 @@ struct FileViewWindow : public UI::UniqueWindow {
 		 UI::UniqueWindow::Registry & reg,
 		 const std::string          & filename);
 private:
-	UI::Multiline_Textarea textview;
+	UI::MultilineTextarea textview;
 };
 
 FileViewWindow::FileViewWindow

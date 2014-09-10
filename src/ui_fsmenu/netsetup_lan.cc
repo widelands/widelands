@@ -187,7 +187,7 @@ void FullscreenMenuNetSetupLAN::game_doubleclicked (uint32_t) {
 }
 
 void FullscreenMenuNetSetupLAN::update_game_info
-	(UI::Table<NetOpenGame const * const>::Entry_Record & er,
+	(UI::Table<NetOpenGame const * const>::EntryRecord & er,
 	 const NetGameInfo & info)
 {
 	er.set_string (0, info.hostname);
@@ -210,7 +210,7 @@ void FullscreenMenuNetSetupLAN::game_closed (const NetOpenGame *) {}
 void FullscreenMenuNetSetupLAN::game_updated (const NetOpenGame * game)
 {
 	if
-		(UI::Table<const NetOpenGame * const>::Entry_Record * const er =
+		(UI::Table<const NetOpenGame * const>::EntryRecord * const er =
 		 opengames.find(game))
 		update_game_info(*er, game->info);
 }

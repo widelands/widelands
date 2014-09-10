@@ -39,7 +39,7 @@
 class FileRead;
 class RenderTarget;
 struct DirAnimations;
-namespace UI {struct Tab_Panel;}
+namespace UI {struct TabPanel;}
 
 namespace Widelands {
 
@@ -254,7 +254,7 @@ public:
 
 	// implementation is in game_debug_ui.cc
 	virtual void create_debug_panels
-		(const EditorGameBase & egbase, UI::Tab_Panel & tabs);
+		(const EditorGameBase & egbase, UI::TabPanel & tabs);
 
 	LogSink * get_logsink() {return m_logsink;}
 	void set_logsink(LogSink *);

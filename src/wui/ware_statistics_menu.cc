@@ -161,8 +161,8 @@ m_parent(&parent)
 	uint8_t const plot_width = get_inner_w() - 2 * spacing;
 	uint8_t const plot_height = PLOT_HEIGHT + tab_offset + spacing;
 
-	UI::Tab_Panel * tabs =
-		 new UI::Tab_Panel
+	UI::TabPanel * tabs =
+		 new UI::TabPanel
 			 (box, spacing, 0, g_gr->images().get("pics/but1.png"));
 
 

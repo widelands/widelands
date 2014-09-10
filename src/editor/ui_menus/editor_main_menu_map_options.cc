@@ -82,7 +82,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent)
 	m_author->changed.connect(boost::bind(&MainMenuMapOptions::changed, this, 1));
 	posy += height + spacing;
 	m_descr =
-		new UI::Multiline_Editbox
+		new UI::MultilineEditbox
 			(this,
 			 posx, posy,
 			 get_inner_w() - spacing - posx, get_inner_h() - 25 - spacing - posy,

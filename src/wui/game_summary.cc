@@ -61,7 +61,7 @@ m_game(parent->game())
 	m_gametime_value = new UI::Textarea(infoBox);
 	infoBox->add(m_gametime_value, UI::Box::AlignRight);
 	infoBox->add_space(PADDING);
-	m_info_area = new UI::Multiline_Textarea(infoBox, 0, 0, 130, 130, "");
+	m_info_area = new UI::MultilineTextarea(infoBox, 0, 0, 130, 130, "");
 	infoBox->add(m_info_area, UI::Box::AlignLeft, true);
 	infoBox->add_space(PADDING);
 	hbox1->add(infoBox, UI::Box::AlignTop);
@@ -135,7 +135,7 @@ void GameSummaryScreen::fill_data()
 			local_won = pes.result == Widelands::PlayerEndResult::PLAYER_WON;
 		}
 		Widelands::Player* p = m_game.get_player(pes.player);
-		UI::Table<uintptr_t const>::Entry_Record & te
+		UI::Table<uintptr_t const>::EntryRecord & te
 			= m_players_table->add(i);
 		// Player name & pic
 		// Boost doesn't handle uint8_t as integers

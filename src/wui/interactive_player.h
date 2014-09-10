@@ -30,7 +30,7 @@
 #include "ui_basic/textarea.h"
 
 namespace UI {
-struct Multiline_Textarea;
+struct MultilineTextarea;
 struct Textarea;
 }
 

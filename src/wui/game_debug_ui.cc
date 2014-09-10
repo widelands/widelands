@@ -57,7 +57,7 @@ private:
 	const Widelands::EditorGameBase & m_egbase;
 	Widelands::ObjectPointer         m_object;
 
-	UI::Multiline_Textarea        m_log;
+	UI::MultilineTextarea        m_log;
 };
 
 
@@ -71,7 +71,7 @@ m_egbase (egbase),
 m_object (&obj),
 m_log    (this, 0, 0, 350, 200, "")
 {
-	m_log.set_scrollmode(UI::Multiline_Textarea::ScrollLog);
+	m_log.set_scrollmode(UI::MultilineTextarea::ScrollLog);
 	obj.set_logsink(this);
 }
 
@@ -105,7 +105,7 @@ building_ui.cc).
 ===============
 */
 void Widelands::MapObject::create_debug_panels
-	(const Widelands::EditorGameBase & egbase, UI::Tab_Panel & tabs)
+	(const Widelands::EditorGameBase & egbase, UI::TabPanel & tabs)
 {
 	tabs.add
 		("debug", g_gr->images().get("pics/menu_debug.png"),
@@ -141,7 +141,7 @@ private:
 	bool                  m_log_general_info;
 	Widelands::ObjectPointer m_object;
 	uint32_t              m_serial;
-	UI::Tab_Panel         m_tabs;
+	UI::TabPanel         m_tabs;
 };
 
 
@@ -229,7 +229,7 @@ private:
 	Widelands::Map             & m_map;
 	Widelands::FCoords const     m_coords;
 
-	UI::Multiline_Textarea       m_ui_field;
+	UI::MultilineTextarea       m_ui_field;
 	UI::Button m_ui_immovable;
 	UI::Listselect<intptr_t>    m_ui_bobs;
 };

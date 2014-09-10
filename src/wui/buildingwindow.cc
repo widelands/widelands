@@ -72,7 +72,7 @@ BuildingWindow::BuildingWindow
 
 	UI::Box * vbox = new UI::Box(this, 0, 0, UI::Box::Vertical);
 
-	m_tabs = new UI::Tab_Panel(vbox, 0, 0, nullptr);
+	m_tabs = new UI::TabPanel(vbox, 0, 0, nullptr);
 	vbox->add(m_tabs, UI::Box::AlignLeft, true);
 
 	m_capsbuttons = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);

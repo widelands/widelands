@@ -26,7 +26,7 @@
 struct EditorInteractive;
 namespace UI {
 struct EditBox;
-struct Multiline_Editbox;
+struct MultilineEditbox;
 struct Textarea;
 }
 
@@ -42,7 +42,7 @@ private:
 	EditorInteractive & eia();
 	void changed(int32_t);
 	void editbox_changed();
-	UI::Multiline_Editbox * m_descr;
+	UI::MultilineEditbox * m_descr;
 	UI::Textarea * m_nrplayers, * m_size;
 	UI::EditBox * m_name, * m_author;
 	void update();

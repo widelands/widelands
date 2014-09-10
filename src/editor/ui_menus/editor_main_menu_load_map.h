@@ -28,7 +28,7 @@ namespace UI {
 struct Button;
 template <typename T> struct Listselect;
 struct Textarea;
-struct Multiline_Textarea;
+struct MultilineTextarea;
 }
 
 /**
@@ -45,7 +45,7 @@ private:
 	void fill_list();
 
 	UI::Textarea * m_name, * m_author, * m_size, * m_nrplayers;
-	UI::Multiline_Textarea * m_descr;
+	UI::MultilineTextarea * m_descr;
 	UI::Listselect<const char *> * m_ls;
 	UI::Button * m_ok_btn;
 

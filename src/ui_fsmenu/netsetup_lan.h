@@ -81,7 +81,7 @@ private:
 	void game_updated (NetOpenGame const *);
 
 	void update_game_info
-		(UI::Table<const NetOpenGame * const>::Entry_Record &,
+		(UI::Table<const NetOpenGame * const>::EntryRecord &,
 		 const NetGameInfo &);
 
 	void change_hostname();

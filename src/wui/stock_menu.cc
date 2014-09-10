@@ -40,8 +40,8 @@ StockMenu::StockMenu
 UI::UniqueWindow(&plr, "stock_menu", &registry, 480, 640, _("Stock")),
 m_player(plr)
 {
-	UI::Tab_Panel * tabs =
-		 new UI::Tab_Panel
+	UI::TabPanel * tabs =
+		 new UI::TabPanel
 			 (this, 0, 0, g_gr->images().get("pics/but1.png"));
 	set_center_panel(tabs);
 

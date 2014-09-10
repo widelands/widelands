@@ -46,7 +46,7 @@ protected:
 
 private:
 	UI::Textarea                                title;
-	UI::Multiline_Textarea                      textview;
+	UI::MultilineTextarea                      textview;
 	UI::Button                     close_button;
 };
 

@@ -51,7 +51,7 @@ private:
 	UI::Textarea *  m_title_area;
 	UI::Textarea *  m_gametime_label;
 	UI::Textarea *  m_gametime_value;
-	UI::Multiline_Textarea *  m_info_area;
+	UI::MultilineTextarea *  m_info_area;
 	UI::Button *    m_continue_button;
 	UI::Button *    m_stop_button;
 	UI::Table<uintptr_t const> *     m_players_table;

@@ -55,7 +55,7 @@ struct BuildingWindow : public UI::Window {
 	void set_avoid_fastclick(bool afc) {m_avoid_fastclick = afc;}
 
 protected:
-	UI::Tab_Panel * get_tabs() {return m_tabs;}
+	UI::TabPanel * get_tabs() {return m_tabs;}
 
 	void act_bulldoze();
 	void act_dismantle();
@@ -79,7 +79,7 @@ protected:
 private:
 	Widelands::Building& m_building;
 
-	UI::Tab_Panel * m_tabs;
+	UI::TabPanel * m_tabs;
 
 	UI::Box * m_capsbuttons; ///< \ref UI::Box that contains capabilities buttons
 	UI::Button * m_toggle_workarea;

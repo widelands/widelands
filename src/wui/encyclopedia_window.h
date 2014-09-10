@@ -55,7 +55,7 @@ private:
 	UI::Listselect<Widelands::WareIndex> wares;
 	UI::Listselect<Widelands::BuildingIndex> prodSites;
 	UI::Table     <uintptr_t>                 condTable;
-	UI::Multiline_Textarea    descrTxt;
+	UI::MultilineTextarea    descrTxt;
 	Widelands::WareDescr const * selectedWare;
 	void fillWares();
 	void wareSelected(uint32_t);

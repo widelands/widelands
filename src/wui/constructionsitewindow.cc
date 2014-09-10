@@ -41,7 +41,7 @@ struct ConstructionSiteWindow : public BuildingWindow {
 	void think() override;
 
 private:
-	UI::Progress_Bar * m_progress;
+	UI::ProgressBar * m_progress;
 };
 
 
@@ -55,11 +55,11 @@ ConstructionSiteWindow::ConstructionSiteWindow
 
 	// Add the progress bar
 	m_progress =
-		new UI::Progress_Bar
+		new UI::ProgressBar
 			(&box,
 			 0, 0,
-			 UI::Progress_Bar::DefaultWidth, UI::Progress_Bar::DefaultHeight,
-			 UI::Progress_Bar::Horizontal);
+			 UI::ProgressBar::DefaultWidth, UI::ProgressBar::DefaultHeight,
+			 UI::ProgressBar::Horizontal);
 	m_progress->set_total(1 << 16);
 	box.add(m_progress, UI::Box::AlignCenter);
 

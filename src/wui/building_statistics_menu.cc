@@ -80,7 +80,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 	m_progbar
 		(this,
 		 LABEL_X, PROGRESS_BAR_Y, WINDOW_WIDTH - LABEL_X - HMARGIN, 20,
-		 UI::Progress_Bar::Horizontal),
+		 UI::ProgressBar::Horizontal),
 	m_total_productivity_label
 		(this,
 		 LABEL_X, TOTAL_PRODUCTIVITY_Y, LABEL_WIDTH, 24,
@@ -390,10 +390,10 @@ void BuildingStatisticsMenu::update() {
 			player.get_building_statistics(i);
 
 		//  walk all entries, add new ones if needed
-		UI::Table<uintptr_t const>::Entry_Record * te = nullptr;
+		UI::Table<uintptr_t const>::EntryRecord * te = nullptr;
 		const uint32_t table_size = m_table.size();
 		for (uint32_t l = 0; l < table_size; ++l) {
-			UI::Table<uintptr_t const>::Entry_Record & er = m_table.get_record(l);
+			UI::Table<uintptr_t const>::EntryRecord & er = m_table.get_record(l);
 			if (UI::Table<uintptr_t const>::get(er) == i) {
 				te = &er;
 				break;

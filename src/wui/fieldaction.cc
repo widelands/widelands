@@ -59,7 +59,7 @@ using Widelands::Game;
 #define BUILDMENU_IMAGE_SIZE 30. // used for width and height
 
 // The BuildGrid presents a selection of buildable buildings
-struct BuildGrid : public UI::Icon_Grid {
+struct BuildGrid : public UI::IconGrid {
 	BuildGrid(UI::Panel* parent,
 	          const RGBColor& player_color,
 	          const Widelands::TribeDescr& tribe,
@@ -86,7 +86,7 @@ private:
 BuildGrid::BuildGrid(
 		UI::Panel* parent, const RGBColor& player_color, const Widelands::TribeDescr& tribe,
 		int32_t x, int32_t y, int32_t cols) :
-	UI::Icon_Grid(parent, x, y, BG_CELL_WIDTH, BG_CELL_HEIGHT, cols),
+	UI::IconGrid(parent, x, y, BG_CELL_WIDTH, BG_CELL_HEIGHT, cols),
 	player_color_(player_color),
 	tribe_(tribe)
 {
@@ -110,7 +110,7 @@ void BuildGrid::add(Widelands::BuildingIndex id)
 	const uint16_t image_h = anim_frame.height();
 	double ratio = BUILDMENU_IMAGE_SIZE / std::max(image_w, image_h);
 	const Image* menu_image = ImageTransformations::resize(&anim_frame, image_w * ratio, image_h * ratio);
-	UI::Icon_Grid::add
+	UI::IconGrid::add
 		(descr.name(), menu_image,
 		 reinterpret_cast<void *>(id),
 		 descr.descname() + "<br><font size=11>" + _("Construction costs:") + "</font><br>" +
@@ -228,7 +228,7 @@ private:
 
 	Widelands::FCoords  m_node;
 
-	UI::Tab_Panel      m_tabpanel;
+	UI::TabPanel      m_tabpanel;
 	bool m_fastclick; // if true, put the mouse over first button in first tab
 	uint32_t m_best_tab;
 	OverlayManager::JobId m_workarea_preview_job_id;

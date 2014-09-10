@@ -108,7 +108,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 	new UI::Textarea
 		(this, posx, posy, 70, 20, _("Descr: "), UI::Align_CenterLeft);
 	m_descr =
-		new UI::Multiline_Textarea
+		new UI::MultilineTextarea
 			(this,
 			 posx + 70, posy,
 			 get_inner_w() - posx - spacing - 70,

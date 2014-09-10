@@ -35,7 +35,7 @@ struct EditorToolPlaceBobOptionsMenu : public EditorToolOptionsMenu {
 		 UI::UniqueWindow::Registry &);
 
 private:
-	UI::Tab_Panel               m_tabpanel;
+	UI::TabPanel               m_tabpanel;
 	std::vector<UI::Checkbox *> m_checkboxes;
 	EditorPlaceBobTool     & m_pit;
 	void clicked(int32_t, bool);

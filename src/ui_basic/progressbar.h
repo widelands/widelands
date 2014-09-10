@@ -30,7 +30,7 @@ namespace UI {
  *
  * The actual state of progress
 */
-struct Progress_Bar : public Panel {
+struct ProgressBar : public Panel {
 	enum {
 		Horizontal = 0, ///< from left to right
 		Vertical   = 1, ///< from bottom to top
@@ -40,7 +40,7 @@ struct Progress_Bar : public Panel {
 	};
 
 public:
-	Progress_Bar
+	ProgressBar
 		(Panel * parent,
 		 int32_t x, int32_t y, int32_t w, int32_t h,
 		 uint32_t orientation);

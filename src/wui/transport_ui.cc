@@ -72,7 +72,7 @@ struct EconomyOptionsWindow : public UI::UniqueWindow {
 	}
 
 private:
-	UI::Tab_Panel m_tabpanel;
+	UI::TabPanel m_tabpanel;
 
 	struct TargetWaresDisplay : public AbstractWaresDisplay {
 		TargetWaresDisplay

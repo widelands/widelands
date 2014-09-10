@@ -60,10 +60,10 @@ private:
 	void archive_or_restore();
 	void toggle_mode();
 	void center_view();
-	void update_record(UI::Table<uintptr_t>::Entry_Record & er, const Widelands::Message &);
+	void update_record(UI::Table<uintptr_t>::EntryRecord & er, const Widelands::Message &);
 
 	UI::Table<uintptr_t> * list;
-	UI::Multiline_Textarea message_body;
+	UI::MultilineTextarea message_body;
 	UI::Button * m_archivebtn;
 	UI::Button * m_togglemodebtn;
 	UI::Button * m_centerviewbtn;

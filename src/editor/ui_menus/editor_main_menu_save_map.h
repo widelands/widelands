@@ -28,7 +28,7 @@ namespace UI {
 struct Button;
 struct EditBox;
 template <typename T> struct Listselect;
-struct Multiline_Textarea;
+struct MultilineTextarea;
 struct Textarea;
 }
 
@@ -51,7 +51,7 @@ private:
 
 	UI::EditBox * m_editbox;
 	UI::Textarea * m_name, * m_author, * m_size, * m_nrplayers;
-	UI::Multiline_Textarea * m_descr;
+	UI::MultilineTextarea * m_descr;
 	UI::Listselect<const char *> * m_ls;
 	UI::Button * m_ok_btn;
 

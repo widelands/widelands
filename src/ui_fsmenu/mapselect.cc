@@ -324,7 +324,7 @@ void FullscreenMenuMapSelect::fill_list()
 			map.filename = m_curdir.substr(0, m_curdir.rfind('\\'));
 	#endif
 			m_maps_data.push_back(map);
-			UI::Table<uintptr_t const>::Entry_Record & te =
+			UI::Table<uintptr_t const>::EntryRecord & te =
 				m_table.add(m_maps_data.size() - 1);
 
 			te.set_string(0, "");
@@ -358,7 +358,7 @@ void FullscreenMenuMapSelect::fill_list()
 			dir.filename = name;
 
 			m_maps_data.push_back(dir);
-			UI::Table<uintptr_t const>::Entry_Record & te = m_table.add(m_maps_data.size() - 1);
+			UI::Table<uintptr_t const>::EntryRecord & te = m_table.add(m_maps_data.size() - 1);
 
 			te.set_string(0, "");
 			te.set_picture
@@ -410,7 +410,7 @@ void FullscreenMenuMapSelect::fill_list()
 
 
 					m_maps_data.push_back(mapdata);
-					UI::Table<uintptr_t const>::Entry_Record & te = m_table.add(m_maps_data.size() - 1);
+					UI::Table<uintptr_t const>::EntryRecord & te = m_table.add(m_maps_data.size() - 1);
 
 					char buf[256];
 					sprintf(buf, "(%i)", mapdata.nrplayers);
@@ -466,7 +466,7 @@ void FullscreenMenuMapSelect::fill_list()
 
 				// Finally write the entry to the list
 				m_maps_data.push_back(mapdata);
-				UI::Table<uintptr_t const>::Entry_Record & te = m_table.add(m_maps_data.size() - 1);
+				UI::Table<uintptr_t const>::EntryRecord & te = m_table.add(m_maps_data.size() - 1);
 
 				char buf[256];
 				sprintf(buf, "(%i)", mapdata.nrplayers);
@@ -492,7 +492,7 @@ void FullscreenMenuMapSelect::fill_list()
 
 				// Finally write the entry to the list
 				m_maps_data.push_back(mapdata);
-				UI::Table<uintptr_t const>::Entry_Record & te = m_table.add(m_maps_data.size() - 1);
+				UI::Table<uintptr_t const>::EntryRecord & te = m_table.add(m_maps_data.size() - 1);
 
 				char buf[256];
 				sprintf(buf, "(%i)", mapdata.nrplayers);

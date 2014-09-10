@@ -53,9 +53,9 @@ private:
 	UI::Textarea                             label_campname;
 	UI::Textarea                             tacampname;
 	UI::Textarea                             label_difficulty;
-	UI::Multiline_Textarea                   tadifficulty;
+	UI::MultilineTextarea                   tadifficulty;
 	UI::Textarea                             label_campdescr;
-	UI::Multiline_Textarea                   tacampdescr;
+	UI::MultilineTextarea                   tacampdescr;
 	UI::Button                               b_ok, back;
 	UI::Listselect<const char *>             m_list;
 
@@ -89,7 +89,7 @@ private:
 	UI::Textarea                            label_author;
 	UI::Textarea                            taauthor;
 	UI::Textarea                            label_mapdescr;
-	UI::Multiline_Textarea                  tamapdescr;
+	UI::MultilineTextarea                  tamapdescr;
 	UI::Button                              b_ok, back;
 	UI::Listselect<std::string>             m_list;
 	uint32_t                                campaign;

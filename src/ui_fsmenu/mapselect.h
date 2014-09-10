@@ -93,7 +93,7 @@ private:
 	UI::Textarea m_label_size,       m_size;
 	UI::Textarea m_label_nr_players, m_nr_players;
 	UI::Textarea m_label_descr;
-	UI::Multiline_Textarea m_descr;
+	UI::MultilineTextarea m_descr;
 	UI::Button m_back, m_ok;
 	UI::Checkbox                      m_load_map_as_scenario;
 	UI::Checkbox *                    m_show_all_maps;

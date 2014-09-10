@@ -146,7 +146,7 @@ void GameMessageMenu::show_new_message
 	Message::Status const status = message.status();
 	if ((mode == Archive) != (status == Message::Archived))
 		toggle_mode();
-	UI::Table<uintptr_t>::Entry_Record & te = list->add(id.value(), true);
+	UI::Table<uintptr_t>::EntryRecord & te = list->add(id.value(), true);
 	update_record(te, message);
 }
 
@@ -177,7 +177,7 @@ void GameMessageMenu::think()
 		if ((mode == Archive) != (status == Message::Archived))
 			continue;
 		if (!list->find(id.value())) {
-			UI::Table<uintptr_t>::Entry_Record & er = list->add(id.value());
+			UI::Table<uintptr_t>::EntryRecord & er = list->add(id.value());
 			update_record(er, message);
 			list->sort();
 		}
@@ -196,7 +196,7 @@ void GameMessageMenu::think()
 }
 
 void GameMessageMenu::update_record
-	(UI::Table<uintptr_t>::Entry_Record & er,
+	(UI::Table<uintptr_t>::EntryRecord & er,
 	 const Widelands::Message & message)
 {
 	er.set_picture

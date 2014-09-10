@@ -41,7 +41,7 @@ private:
 
 	typedef UI::Listselect<const Widelands::Objective&> list_type;
 	list_type              list;
-	UI::Multiline_Textarea objectivetext;
+	UI::MultilineTextarea objectivetext;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_OBJECTIVES_MENU_H

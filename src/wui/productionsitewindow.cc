@@ -159,7 +159,7 @@ void ProductionSiteWindow::update_worker_table()
 			productionsite().working_positions()[i].worker;
 		const Widelands::Request * request =
 			productionsite().working_positions()[i].worker_request;
-		UI::Table<uintptr_t>::Entry_Record & er =
+		UI::Table<uintptr_t>::EntryRecord & er =
 			m_worker_table->get_record(i);
 
 		if (worker) {

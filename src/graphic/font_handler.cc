@@ -60,8 +60,8 @@ void draw_caret
 
 }  // namespace
 
-/// The global unique \ref Font_Handler object
-Font_Handler * g_fh = nullptr;
+/// The global unique \ref FontHandler object
+FontHandler * g_fh = nullptr;
 
 /**
  * The line cache stores unprocessed rendered lines of text.
@@ -84,9 +84,9 @@ typedef std::list<LineCacheEntry> LineCache;
 static const unsigned MaxLineCacheSize = 500;
 
 /**
- * Internal data of the \ref Font_Handler.
+ * Internal data of the \ref FontHandler.
  */
-struct Font_Handler::Data {
+struct FontHandler::Data {
 	LineCache linecache;
 
 	const LineCacheEntry & get_line(const TextStyle & style, const std::string & text);
@@ -105,25 +105,25 @@ private:
 /**
  * Plain Constructor
  */
-Font_Handler::Font_Handler() :
+FontHandler::FontHandler() :
 	d(new Data)
 {
 }
 
 
-Font_Handler::~Font_Handler() {
+FontHandler::~FontHandler() {
 	flush();
 	Font::shutdown();
 }
 
-void Font_Handler::flush() {
+void FontHandler::flush() {
 	d.reset(new Data);
 }
 
 /*
  * Returns the height of the font, in pixels.
 */
-uint32_t Font_Handler::get_fontheight
+uint32_t FontHandler::get_fontheight
 	(const std::string & name, int32_t const size)
 {
 	TTF_Font * const f = Font::get(name, size)->get_ttf_font();
@@ -141,7 +141,7 @@ uint32_t Font_Handler::get_fontheight
  *
  * If there is no pre-existing cache entry, a new one is created.
  */
-const LineCacheEntry & Font_Handler::Data::get_line(const UI::TextStyle & style, const std::string & text)
+const LineCacheEntry & FontHandler::Data::get_line(const UI::TextStyle & style, const std::string & text)
 {
 	for (LineCache::iterator it = linecache.begin(); it != linecache.end(); ++it) {
 		if (it->style != style || it->text != text)
@@ -172,7 +172,7 @@ const LineCacheEntry & Font_Handler::Data::get_line(const UI::TextStyle & style,
  * Render the image of a \ref LineCacheEntry whose key data has
  * already been filled in.
  */
-void Font_Handler::Data::render_line(LineCacheEntry & lce)
+void FontHandler::Data::render_line(LineCacheEntry & lce)
 {
 	TTF_Font * font = lce.style.font->get_ttf_font();
 	SDL_Color sdl_fg = {lce.style.fg.r, lce.style.fg.g, lce.style.fg.b, 0};
@@ -191,7 +191,7 @@ void Font_Handler::Data::render_line(LineCacheEntry & lce)
 	SDL_Surface* text_surface = TTF_RenderUTF8_Blended(font, lce.text.c_str(), sdl_fg);
 	if (!text_surface) {
 		log
-			("Font_Handler::render_line, an error : %s\n",
+			("FontHandler::render_line, an error : %s\n",
 			 TTF_GetError());
 		log("Text was: '%s'\n", lce.text.c_str());
 		return;
@@ -205,7 +205,7 @@ void Font_Handler::Data::render_line(LineCacheEntry & lce)
 /**
  * Draw unwrapped, single-line text (i.e. no line breaks).
  */
-void Font_Handler::draw_text
+void FontHandler::draw_text
 	(RenderTarget & dst,
 	 const TextStyle & style,
 	 Point dstpoint,
@@ -230,7 +230,7 @@ void Font_Handler::draw_text
 /**
  * Draw unwrapped, un-aligned single-line text at the given point, and return the width of the text.
  */
-uint32_t Font_Handler::draw_text_raw
+uint32_t FontHandler::draw_text_raw
 	(RenderTarget & dst,
 	 const UI::TextStyle & style,
 	 Point dstpoint,
@@ -249,7 +249,7 @@ uint32_t Font_Handler::draw_text_raw
  * Compute the total size of the given text, when wrapped to the given
  * maximum width and rendered in the given text style.
  */
-void Font_Handler::get_size
+void FontHandler::get_size
 	(const TextStyle & textstyle,
 	 const std::string & text,
 	 uint32_t & w, uint32_t & h,
@@ -264,7 +264,7 @@ void Font_Handler::get_size
 /**
  * Calculates size of a given text.
  */
-void Font_Handler::get_size
+void FontHandler::get_size
 	(const std::string & fontname, int32_t const fontsize,
 	 const std::string & text,
 	 uint32_t & w, uint32_t & h,

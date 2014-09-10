@@ -284,7 +284,7 @@ void FullscreenMenuInternetLobby::fillClientList(const std::vector<InternetClien
 	clientsonline.clear();
 	for (uint32_t i = 0; i < clients.size(); ++i) {
 		const InternetClient & client(clients[i]);
-		UI::Table<const InternetClient * const>::Entry_Record & er = clientsonline.add(&client);
+		UI::Table<const InternetClient * const>::EntryRecord & er = clientsonline.add(&client);
 		er.set_string(1, client.name);
 		er.set_string(2, client.points);
 		er.set_string(3, client.game);
@@ -325,7 +325,7 @@ void FullscreenMenuInternetLobby::client_doubleclicked (uint32_t i)
 {
 	// add a @clientname to the current edit text.
 	if (clientsonline.has_selection()) {
-		UI::Table<const InternetClient * const>::Entry_Record & er = clientsonline.get_record(i);
+		UI::Table<const InternetClient * const>::EntryRecord & er = clientsonline.get_record(i);
 
 		std::string temp("@");
 		temp += er.get_string(1);

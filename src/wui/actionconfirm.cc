@@ -145,7 +145,7 @@ ActionConfirm::ActionConfirm
 		(&parent, "building_action_confirm", 0, 0, 200, 120, windowtitle),
 	m_object (&building)
 {
-	new UI::Multiline_Textarea
+	new UI::MultilineTextarea
 		(this,
 		 0, 0, 200, 74,
 		 (format(message) % building.descr().descname()).str(),
@@ -181,7 +181,7 @@ ActionConfirm::ActionConfirm
 	UI::Window(&parent, "ship_action_confirm", 0, 0, 200, 120, windowtitle),
 	m_object (&ship)
 {
-	new UI::Multiline_Textarea
+	new UI::MultilineTextarea
 		(this,
 		 0, 0, 200, 74,
 		 message,

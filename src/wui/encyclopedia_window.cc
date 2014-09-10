@@ -195,7 +195,7 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 					sprintf(amount_string, "%u", temp_group.second);
 
 					//  picture only of first ware type in group
-					UI::Table<uintptr_t>::Entry_Record & tableEntry =
+					UI::Table<uintptr_t>::EntryRecord & tableEntry =
 						condTable.add(0);
 					tableEntry.set_picture
 						(0, tribe.get_ware_descr(*ware_types.begin())->icon(), ware_type_names);

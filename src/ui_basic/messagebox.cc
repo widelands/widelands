@@ -30,7 +30,7 @@ namespace UI {
 
 
 struct WLMessageBoxImpl {
-	Multiline_Textarea * textarea;
+	MultilineTextarea * textarea;
 	WLMessageBox::MB_Type type;
 };
 
@@ -46,7 +46,7 @@ WLMessageBox::WLMessageBox
 	d(new WLMessageBoxImpl)
 {
 	d->type = type;
-	d->textarea = new Multiline_Textarea
+	d->textarea = new MultilineTextarea
 		(this,
 		 5, 5, 30, 30,
 		 text.c_str(), align);

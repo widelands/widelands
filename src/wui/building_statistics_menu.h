@@ -29,7 +29,7 @@ namespace Widelands {struct BuildingDescr;}
 class InteractivePlayer;
 namespace UI {
 struct Button;
-struct Progress_Bar;
+struct ProgressBar;
 struct Textarea;
 }
 
@@ -52,7 +52,7 @@ private:
 	};
 
 	UI::Table<uintptr_t const> m_table;
-	UI::Progress_Bar          m_progbar;
+	UI::ProgressBar          m_progbar;
 	UI::Textarea              m_total_productivity_label;
 	UI::Textarea              m_owned_label;
 	UI::Textarea              m_owned;

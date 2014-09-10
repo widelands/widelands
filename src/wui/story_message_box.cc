@@ -36,7 +36,7 @@ StoryMessageBox::StoryMessageBox
 	 uint32_t const w,     uint32_t const h)
 	: UI::Window(parent, "story_message_box", 0, 0, 600, 400, title.c_str())
 {
-	UI::Multiline_Textarea * m_text = nullptr;
+	UI::MultilineTextarea * m_text = nullptr;
 	int32_t const spacing = 5;
 	int32_t       offsy   = 5;
 	int32_t       offsx   = spacing;
@@ -45,7 +45,7 @@ StoryMessageBox::StoryMessageBox
 
 	set_inner_size(w, h);
 	m_text =
-		new UI::Multiline_Textarea
+		new UI::MultilineTextarea
 			(this,
 			 posx, posy,
 			 get_inner_w() - posx -     spacing,
