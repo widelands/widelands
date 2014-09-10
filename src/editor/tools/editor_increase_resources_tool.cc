@@ -33,7 +33,7 @@ using Widelands::TCoords;
 namespace  {
 
 int32_t resource_value(const Widelands::TerrainDescription& terrain,
-                       const Widelands::Resource_Index resource) {
+                       const Widelands::ResourceIndex resource) {
 	if (!terrain.is_resource_valid(resource)) {
 		return -1;
 	}

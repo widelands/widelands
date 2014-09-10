@@ -62,14 +62,14 @@ IMPLEMENTATION
 
 
 DismantleSite::DismantleSite(const DismantleSiteDescr & gdescr) :
-Partially_Finished_Building(gdescr)
+PartiallyFinishedBuilding(gdescr)
 {}
 
 DismantleSite::DismantleSite
 	(const DismantleSiteDescr & gdescr, EditorGameBase & egbase, Coords const c,
 	 Player & plr, bool loading, Building::FormerBuildings & former_buildings)
 :
-Partially_Finished_Building(gdescr)
+PartiallyFinishedBuilding(gdescr)
 {
 	m_position = c;
 	set_owner(&plr);
@@ -106,12 +106,12 @@ Initialize the construction site by starting orders
 */
 void DismantleSite::init(EditorGameBase & egbase)
 {
-	Partially_Finished_Building::init(egbase);
+	PartiallyFinishedBuilding::init(egbase);
 
-	std::map<Ware_Index, uint8_t> wares;
+	std::map<WareIndex, uint8_t> wares;
 	count_returned_wares(this, wares);
 
-	std::map<Ware_Index, uint8_t>::const_iterator it = wares.begin();
+	std::map<WareIndex, uint8_t>::const_iterator it = wares.begin();
 	m_wares.resize(wares.size());
 
 	for (size_t i = 0; i < wares.size(); ++i, ++it) {
@@ -130,10 +130,10 @@ Count wich wares you get back if you dismantle the given building
 */
 void DismantleSite::count_returned_wares
 	(Building* building,
-	 std::map<Ware_Index, uint8_t>   & res)
+	 std::map<WareIndex, uint8_t>   & res)
 {
 	for (BuildingIndex former_idx : building->get_former_buildings()) {
-		const std::map<Ware_Index, uint8_t> * return_wares;
+		const std::map<WareIndex, uint8_t> * return_wares;
 		const BuildingDescr* former_descr = building->descr().tribe().get_building_descr(former_idx);
 		if (former_idx != building->get_former_buildings().front()) {
 			return_wares = & former_descr->returned_wares_enhanced();
@@ -142,7 +142,7 @@ void DismantleSite::count_returned_wares
 		}
 		assert(return_wares != nullptr);
 
-		std::map<Ware_Index, uint8_t>::const_iterator i;
+		std::map<WareIndex, uint8_t>::const_iterator i;
 		for (i = return_wares->begin(); i != return_wares->end(); ++i) {
 			res[i->first] += i->second;
 		}

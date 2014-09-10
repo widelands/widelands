@@ -23,7 +23,7 @@
 #include "base/macros.h"
 #include "logic/productionsite.h"
 #include "logic/soldiercontrol.h"
-#include "logic/tattribute.h"
+#include "logic/training_attribute.h"
 
 struct TrainingSite_Window;
 
@@ -48,8 +48,8 @@ struct TrainingSiteDescr : public ProductionSiteDescr {
 	bool get_train_defense() const {return m_train_defense;}
 	bool get_train_evade  () const {return m_train_evade;}
 
-	int32_t get_min_level(tAttribute) const;
-	int32_t get_max_level(tAttribute) const;
+	int32_t get_min_level(TrainingAttribute) const;
+	int32_t get_max_level(TrainingAttribute) const;
 	int32_t get_max_stall() const;
 
 private:
@@ -107,7 +107,7 @@ class TrainingSite : public ProductionSite, public SoldierControl {
 	friend struct ::TrainingSite_Window;
 
 	struct Upgrade {
-		tAttribute attribute; // attribute for this upgrade
+		TrainingAttribute attribute; // attribute for this upgrade
 		std::string prefix; // prefix for programs
 		int32_t min, max; // minimum and maximum program number (inclusive)
 		uint32_t prio; // relative priority
@@ -153,8 +153,8 @@ public:
 	int incorporateSoldier(EditorGameBase &, Soldier &) override;
 	// End implementation of SoldierControl
 
-	int32_t get_pri(enum tAttribute atr);
-	void set_pri(enum tAttribute atr, int32_t prio);
+	int32_t get_pri(enum TrainingAttribute atr);
+	void set_pri(enum TrainingAttribute atr, int32_t prio);
 
 	// These are for premature soldier kick-out
 	void trainingAttempted(uint32_t type, uint32_t level);
@@ -170,16 +170,16 @@ protected:
 private:
 	void update_soldier_request();
 	static void request_soldier_callback
-		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
+		(Game &, Request &, WareIndex, Worker *, PlayerImmovable &);
 
 	void find_and_start_next_program(Game &) override;
 	void start_upgrade(Game &, Upgrade &);
-	void add_upgrade(tAttribute, const std::string & prefix);
+	void add_upgrade(TrainingAttribute, const std::string & prefix);
 	void calc_upgrades();
 
 	void drop_unupgradable_soldiers(Game &);
 	void drop_stalled_soldiers(Game &);
-	Upgrade * get_upgrade(tAttribute);
+	Upgrade * get_upgrade(TrainingAttribute);
 
 private:
 	/// Open requests for soldiers. The soldiers can be under way or unavailable
@@ -213,7 +213,7 @@ private:
 	typedef std::map<TypeAndLevel_t, FailAndPresence_t> TrainFailCount_t;
 	TrainFailCount_t training_failure_count;
 	uint32_t max_stall_val;
-	void init_kick_state(const tAttribute&, const TrainingSiteDescr&);
+	void init_kick_state(const TrainingAttribute&, const TrainingSiteDescr&);
 
 
 };

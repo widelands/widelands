@@ -174,7 +174,7 @@ public:
 		/// This is not saved/loaded. It is recalculated during the loading
 		/// process by adding influence values to the nodes surrounding a
 		/// building when the first soldier located in it is loaded.
-		Military_Influence military_influence;
+		MilitaryInfluence military_influence;
 
 		/// Indicates whether the player is currently seeing this node or has
 		/// has ever seen it.
@@ -240,7 +240,7 @@ public:
 		 * The r component is only valid when time_last_surveyed[1] != Never().
 		 */
 		// TODO(unknown): Check this on access, at least in debug builds
-		Widelands::Field::Resource_Amounts resource_amounts;
+		Widelands::Field::ResourceAmounts resource_amounts;
 
 		/// Whether there is a road between this node and the node to the
 		/// east, as far as this player knows.
@@ -411,18 +411,18 @@ public:
 		m_view_changed = true;
 	}
 
-	Military_Influence military_influence(MapIndex const i) const {
+	MilitaryInfluence military_influence(MapIndex const i) const {
 		return m_fields[i].military_influence;
 	}
 
-	Military_Influence & military_influence(MapIndex const i) {
+	MilitaryInfluence & military_influence(MapIndex const i) {
 		return m_fields[i].military_influence;
 	}
 
-	bool is_worker_type_allowed(const Ware_Index& i) const {
+	bool is_worker_type_allowed(const WareIndex& i) const {
 		return m_allowed_worker_types.at(i);
 	}
-	void allow_worker_type(Ware_Index, bool allow);
+	void allow_worker_type(WareIndex, bool allow);
 
 	// Allowed buildings
 	bool is_building_type_allowed(const BuildingIndex& i) const {
@@ -496,20 +496,20 @@ public:
 	}
 
 	std::vector<uint32_t> const * get_ware_production_statistics
-		(Ware_Index const) const;
+		(WareIndex const) const;
 
 	std::vector<uint32_t> const * get_ware_consumption_statistics
-		(Ware_Index const) const;
+		(WareIndex const) const;
 
 	std::vector<uint32_t> const * get_ware_stock_statistics
-		(Ware_Index const) const;
+		(WareIndex const) const;
 
 	void ReadStatistics(FileRead &, uint32_t version);
 	void WriteStatistics(FileWrite &) const;
 	void sample_statistics();
-	void ware_produced(Ware_Index);
+	void ware_produced(WareIndex);
 
-	void ware_consumed(Ware_Index, uint8_t);
+	void ware_consumed(WareIndex, uint8_t);
 	void next_ware_production_period();
 
 	void setAI(const std::string &);

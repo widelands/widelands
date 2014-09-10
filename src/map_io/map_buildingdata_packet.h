@@ -28,7 +28,7 @@ class FileWrite;
 namespace Widelands {
 
 class ConstructionSite;
-class Partially_Finished_Building;
+class PartiallyFinishedBuilding;
 class DismantleSite;
 class Game;
 class MilitarySite;
@@ -51,7 +51,7 @@ private:
 	void read_dismantlesite
 		(DismantleSite       &, FileRead  &, Game &, MapObjectLoader &);
 	void read_partially_finished_building
-		(Partially_Finished_Building   &, FileRead  &, Game &, MapObjectLoader &);
+		(PartiallyFinishedBuilding   &, FileRead  &, Game &, MapObjectLoader &);
 	void read_constructionsite_v1
 		(ConstructionSite       &, FileRead  &, Game &, MapObjectLoader &);
 	void read_warehouse
@@ -70,7 +70,7 @@ private:
 	void write_dismantlesite
 		(const DismantleSite &, FileWrite &, Game &, MapObjectSaver  &);
 	void write_partially_finished_building
-		(const Partially_Finished_Building &, FileWrite &, Game &, MapObjectSaver  &);
+		(const PartiallyFinishedBuilding &, FileWrite &, Game &, MapObjectSaver  &);
 	void write_warehouse
 		(const Warehouse        &, FileWrite &, Game &, MapObjectSaver  &);
 	void write_militarysite

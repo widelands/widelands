@@ -197,7 +197,7 @@ std::vector<Serial> ObjectManager::all_object_serials_ordered () const {
 	return rv;
 }
 
-MapObject * Object_Ptr::get(const EditorGameBase & egbase)
+MapObject * ObjectPointer::get(const EditorGameBase & egbase)
 {
 	if (!m_serial)
 		return nullptr;
@@ -210,8 +210,8 @@ MapObject * Object_Ptr::get(const EditorGameBase & egbase)
 // This version also returns a pointer to a non-const object,
 // because it is logically the pointer that is const, not the object
 // that is pointed to.
-// That is, a 'const Object_Ptr' behaves like a 'Object_Ptr * const'.
-MapObject * Object_Ptr::get(const EditorGameBase & egbase) const {
+// That is, a 'const ObjectPointer' behaves like a 'ObjectPointer * const'.
+MapObject * ObjectPointer::get(const EditorGameBase & egbase) const {
 	return m_serial ? egbase.objects().get_object(m_serial) : nullptr;
 }
 
@@ -417,7 +417,7 @@ void MapObject::cleanup(EditorGameBase & egbase)
 /**
  * Default implementation
  */
-int32_t MapObject::get_tattribute(uint32_t) const
+int32_t MapObject::get_training_attribute(uint32_t) const
 {
 	return -1;
 }

@@ -26,7 +26,7 @@
 
 #include <boost/shared_ptr.hpp>
 
-#include "logic/tattribute.h"
+#include "logic/training_attribute.h"
 
 class FileRead;
 class FileWrite;
@@ -43,8 +43,8 @@ struct RequirementsStorage;
 /**
  * Requirements can be attached to Requests.
  *
- * Requirements are matched to a \ref MapObject 's \ref tAttribute as
- * returned by \ref get_tattribute .
+ * Requirements are matched to a \ref MapObject 's \ref TrainingAttribute as
+ * returned by \ref get_training_attribute .
  */
 struct Requirements {
 private:
@@ -169,11 +169,11 @@ private:
 
 
 /**
- * Require that a \ref tAttribute lies in the given, inclusive, range.
+ * Require that a \ref TrainingAttribute lies in the given, inclusive, range.
  */
 struct RequireAttribute {
 	RequireAttribute
-		(tAttribute const _at, int32_t const _min, int32_t const _max)
+		(TrainingAttribute const _at, int32_t const _min, int32_t const _max)
 		: at(_at), min(_min), max(_max) {}
 
 	RequireAttribute() : at(atrTotal), min(SHRT_MIN), max(SHRT_MAX) {}
@@ -187,7 +187,7 @@ struct RequireAttribute {
 	int32_t getMax() const {return max; }
 
 private:
-	tAttribute at;
+	TrainingAttribute at;
 	int32_t min;
 	int32_t max;
 };

@@ -68,7 +68,7 @@ public:
 	void set_economy(Economy* economy);
 
 	// Returns the waresqueue for this ware.
-	WaresQueue& waresqueue(Ware_Index index) const;
+	WaresQueue& waresqueue(WareIndex index) const;
 
 	// Delete all wares we currently handle.
 	void cleanup(EditorGameBase& egbase);
@@ -84,8 +84,8 @@ private:
 	struct ExpeditionWorker;
 
 	// Handles arriving workers and wares.
-	static void worker_callback(Game&, Request& r, Ware_Index, Worker*, PlayerImmovable&);
-	static void ware_callback(Game& game, WaresQueue*, Ware_Index, void* const data);
+	static void worker_callback(Game&, Request& r, WareIndex, Worker*, PlayerImmovable&);
+	static void ware_callback(Game& game, WaresQueue*, WareIndex, void* const data);
 	void handle_worker_callback(Game &, Request &, Worker *);
 
 	// Tests if all wares for the expedition have arrived. If so, informs the portdock.

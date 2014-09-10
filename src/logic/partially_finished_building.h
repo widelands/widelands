@@ -28,18 +28,18 @@ class Request;
 class WaresQueue;
 
 /*
-Partially_Finished_Building
+PartiallyFinishedBuilding
 ---------------------------
 
 This class is the base for constructionsites and
 dismantlesites.
 */
-class Partially_Finished_Building : public Building {
+class PartiallyFinishedBuilding : public Building {
 	friend class MapBuildingdataPacket;
 	friend struct MapBuildingPacket;
 
 public:
-	Partially_Finished_Building(const BuildingDescr & building_descr);
+	PartiallyFinishedBuilding(const BuildingDescr & building_descr);
 
 	virtual void set_building         (const BuildingDescr &);
 
@@ -55,7 +55,7 @@ public:
 
 	uint32_t get_built_per64k() const;
 	Request * get_builder_request() {return m_builder_request;}
-	static void request_builder_callback(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
+	static void request_builder_callback(Game &, Request &, WareIndex, Worker *, PlayerImmovable &);
 
 private:
 	void request_builder(Game &);

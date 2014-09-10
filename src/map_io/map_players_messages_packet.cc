@@ -178,7 +178,7 @@ void MapPlayersMessagesPacket::Write
 		prof.create_section("global").set_int
 			("packet_version", CURRENT_PACKET_VERSION);
 		const MessageQueue & messages = player->messages();
-		Map_Message_Saver & message_saver = mos.message_savers[p - 1];
+		MapMessageSaver & message_saver = mos.message_savers[p - 1];
 		for (const std::pair<Message_Id, Message *>& temp_message : messages) {
 			message_saver.add         (temp_message.first);
 			const Message & message = *temp_message.second;

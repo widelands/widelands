@@ -194,7 +194,7 @@ public:
 	void draw(const EditorGameBase &, RenderTarget &, const FCoords&, const Point&) override;
 
 	void switch_program(Game & game, const std::string & programname);
-	bool construct_ware(Game & game, Ware_Index index);
+	bool construct_ware(Game & game, WareIndex index);
 	bool construct_remaining_buildcost(Game & game, Buildcost * buildcost);
 
 	bool is_reserved_by_worker() const;
@@ -326,7 +326,7 @@ struct PlayerImmovable : public BaseImmovable {
 	 * functionality, which has to do with setting up locations.
 	 */
 	/*@{*/
-	virtual void receive_ware(Game &, Ware_Index ware);
+	virtual void receive_ware(Game &, WareIndex ware);
 	virtual void receive_worker(Game &, Worker & worker);
 	/*@}*/
 

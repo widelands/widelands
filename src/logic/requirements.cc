@@ -204,17 +204,17 @@ bool RequireAttribute::check(const MapObject & obj) const
 {
 	if (atrTotal != at)
 	{
-		int32_t const value = obj.get_tattribute(at);
+		int32_t const value = obj.get_training_attribute(at);
 
 		return value >= min && value <= max;
 	}
 	else
 	{
 		int32_t value = 0;
-		value += obj.get_tattribute(atrHP);
-		value += obj.get_tattribute(atrAttack);
-		value += obj.get_tattribute(atrDefense);
-		value += obj.get_tattribute(atrEvade);
+		value += obj.get_training_attribute(atrHP);
+		value += obj.get_training_attribute(atrAttack);
+		value += obj.get_training_attribute(atrDefense);
+		value += obj.get_training_attribute(atrEvade);
 		return value >= min && value <= max;
 	}
 }
@@ -230,7 +230,7 @@ void RequireAttribute::write
 static Requirements readAttribute
 	(FileRead & fr, EditorGameBase &, MapObjectLoader &)
 {
-	tAttribute const at  = static_cast<tAttribute>(fr.Unsigned32());
+	TrainingAttribute const at  = static_cast<TrainingAttribute>(fr.Unsigned32());
 	if
 		(at != atrHP && at != atrAttack && at != atrDefense && at != atrEvade
 		 &&

@@ -57,7 +57,7 @@ int32_t Editor_Set_Terrain_Tool::handle_click_impl(Widelands::Map& map,
 		  (Widelands::FCoords(map.get_fcoords(center.triangle)),
 		   static_cast<TCoords<Widelands::FCoords>::TriangleIndex>(center.triangle.t)),
 		    radius));
-		std::list<Widelands::Terrain_Index>::iterator i = args.terrainType.begin();
+		std::list<Widelands::TerrainIndex>::iterator i = args.terrainType.begin();
 		do {
 			max = std::max
 			      (max, map.change_terrain(world, mr.location(), *i));
@@ -87,7 +87,7 @@ Editor_Set_Terrain_Tool::handle_undo_impl(Widelands::Map& map,
 		   (center.triangle.t)),
 		  radius));
 
-		std::list<Widelands::Terrain_Index>::iterator i = args.origTerrainType.begin();
+		std::list<Widelands::TerrainIndex>::iterator i = args.origTerrainType.begin();
 		do {
 			max = std::max
 			      (max, map.change_terrain(world, mr.location(), *i));

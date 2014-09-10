@@ -768,7 +768,7 @@ void Flag::destroy(EditorGameBase & egbase)
  * the given program once it's completed.
 */
 void Flag::add_flag_job
-	(Game &, Ware_Index const workerware, const std::string & programname)
+	(Game &, WareIndex const workerware, const std::string & programname)
 {
 	FlagJob j;
 
@@ -787,7 +787,7 @@ void Flag::add_flag_job
 void Flag::flag_job_request_callback
 	(Game            &       game,
 	 Request         &       rq,
-	 Ware_Index,
+	 WareIndex,
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {

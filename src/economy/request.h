@@ -64,13 +64,13 @@ public:
 	friend class RequestList;
 
 	typedef void (*callback_t)
-		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
+		(Game &, Request &, WareIndex, Worker *, PlayerImmovable &);
 
-	Request(PlayerImmovable & target, Ware_Index, callback_t, WareWorker);
+	Request(PlayerImmovable & target, WareIndex, callback_t, WareWorker);
 	~Request();
 
 	PlayerImmovable & target() const {return m_target;}
-	Ware_Index get_index() const {return m_index;}
+	WareIndex get_index() const {return m_index;}
 	WareWorker get_type() const {return m_type;}
 	uint32_t get_count() const {return m_count;}
 	uint32_t get_open_count() const {return m_count - m_transfers.size();}
@@ -126,7 +126,7 @@ private:
 	ConstructionSite * m_target_constructionsite;
 
 	Economy         * m_economy;
-	Ware_Index        m_index;             //  the index of the ware descr
+	WareIndex        m_index;             //  the index of the ware descr
 	uint32_t          m_count;             //  how many do we need in total
 
 	callback_t        m_callbackfn;        //  called on request success

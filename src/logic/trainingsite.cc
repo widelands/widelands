@@ -102,7 +102,7 @@ Building & TrainingSiteDescr::create_object() const {
  * \return  the minimum level to which this building can downgrade a
  * specified attribute
  */
-int32_t TrainingSiteDescr::get_min_level(const tAttribute at) const {
+int32_t TrainingSiteDescr::get_min_level(const TrainingAttribute at) const {
 	switch (at) {
 	case atrHP:
 		return m_min_hp;
@@ -123,7 +123,7 @@ int32_t TrainingSiteDescr::get_min_level(const tAttribute at) const {
  * \param at  the attribute to investigate
  * \return  the maximum level to be attained at this site
  */
-int32_t TrainingSiteDescr::get_max_level(const tAttribute at) const {
+int32_t TrainingSiteDescr::get_max_level(const TrainingAttribute at) const {
 	switch (at) {
 	case atrHP:
 		return m_max_hp;
@@ -177,7 +177,7 @@ m_result         (Failed)
 		init_kick_state(atrEvade, d);
 }
 void
-TrainingSite::init_kick_state(const tAttribute & art, const TrainingSiteDescr & d)
+TrainingSite::init_kick_state(const TrainingAttribute & art, const TrainingSiteDescr & d)
 {
 		// Now with kick-out state saving implemented, initializing is an overkill
 		for (int t = d.get_min_level(art); t <= d.get_max_level(art); t++)
@@ -335,7 +335,7 @@ void TrainingSite::request_soldier_callback
 #else
 	 Request         &,
 #endif
-	 Ware_Index,
+	 WareIndex,
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {
@@ -660,7 +660,7 @@ void TrainingSite::start_upgrade(Game & game, Upgrade & upgrade)
 	return program_start(game, buf);
 }
 
-TrainingSite::Upgrade * TrainingSite::get_upgrade(tAttribute const atr)
+TrainingSite::Upgrade * TrainingSite::get_upgrade(TrainingAttribute const atr)
 {
 	for (Upgrade& upgrade : m_upgrades) {
 		if (upgrade.attribute == atr) {
@@ -674,7 +674,7 @@ TrainingSite::Upgrade * TrainingSite::get_upgrade(tAttribute const atr)
 /**
  * Gets the priority of given attribute
  */
-int32_t TrainingSite::get_pri(tAttribute atr)
+int32_t TrainingSite::get_pri(TrainingAttribute atr)
 {
 	for (const Upgrade& upgrade : m_upgrades) {
 		if (upgrade.attribute == atr) {
@@ -687,7 +687,7 @@ int32_t TrainingSite::get_pri(tAttribute atr)
 /**
  * Sets the priority of given attribute
  */
-void TrainingSite::set_pri(tAttribute atr, int32_t prio)
+void TrainingSite::set_pri(TrainingAttribute atr, int32_t prio)
 {
 	if (prio < 0)
 		prio = 0;
@@ -704,7 +704,7 @@ void TrainingSite::set_pri(tAttribute atr, int32_t prio)
  * Only called from \ref calc_upgrades
  */
 void TrainingSite::add_upgrade
-	(tAttribute const atr, const std::string & prefix)
+	(TrainingAttribute const atr, const std::string & prefix)
 {
 	Upgrade u;
 	u.attribute = atr;

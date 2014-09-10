@@ -82,11 +82,11 @@ MapGenAreaInfo::MapGenAreaInfo(const LuaTable& table,
 	weight_ = get_positive_int(table, "weight");
 
 	const auto read_terrains = [this, &table, &world](
-	   const std::string& key, std::vector<Terrain_Index>* list) {
+	   const std::string& key, std::vector<TerrainIndex>* list) {
 		const std::vector<std::string> terrains = table.get_table(key)->array_entries<std::string>();
 
 		for (const std::string& terrain : terrains) {
-			const Terrain_Index tix = world.terrains().get_index(terrain);
+			const TerrainIndex tix = world.terrains().get_index(terrain);
 			list->push_back(tix);
 		}
 	};
@@ -149,7 +149,7 @@ size_t MapGenAreaInfo::getNumTerrains(MapGenTerrainType const terrType) const {
 	}
 }
 
-Terrain_Index MapGenAreaInfo::getTerrain(MapGenTerrainType const terrType,
+TerrainIndex MapGenAreaInfo::getTerrain(MapGenTerrainType const terrType,
                                          uint32_t const index) const {
 	switch (terrType) {
 	case ttWaterOcean:

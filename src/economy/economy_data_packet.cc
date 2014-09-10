@@ -45,7 +45,7 @@ void EconomyDataPacket::Read(FileRead & fr)
 						uint32_t const permanent = fr.Unsigned32();
 						if (version <= 2)
 							fr.Unsigned32();
-						Ware_Index i = tribe.ware_index(type_name);
+						WareIndex i = tribe.ware_index(type_name);
 						if (i != INVALID_INDEX) {
 							if (tribe.get_ware_descr(i)->default_target_quantity() ==
 							    std::numeric_limits<uint32_t>::max())
@@ -104,7 +104,7 @@ void EconomyDataPacket::Write(FileWrite & fw)
 {
 	fw.Unsigned16(CURRENT_ECONOMY_VERSION);
 	const TribeDescr & tribe = m_eco->owner().tribe();
-	for (Ware_Index i = tribe.get_nrwares(); i;) {
+	for (WareIndex i = tribe.get_nrwares(); i;) {
 		--i;
 		const Economy::Target_Quantity & tq =
 			m_eco->m_ware_target_quantities[i];
@@ -114,7 +114,7 @@ void EconomyDataPacket::Write(FileWrite & fw)
 			fw.Unsigned32(tq.permanent);
 		}
 	}
-	for (Ware_Index i = tribe.get_nrworkers(); i;) {
+	for (WareIndex i = tribe.get_nrworkers(); i;) {
 		--i;
 		const Economy::Target_Quantity & tq =
 			m_eco->m_worker_target_quantities[i];

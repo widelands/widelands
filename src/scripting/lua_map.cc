@@ -108,22 +108,22 @@ struct SoldierMapDescr {
 };
 
 typedef std::map<SoldierMapDescr, uint32_t> SoldiersMap;
-typedef std::map<Widelands::Ware_Index, uint32_t> WaresMap;
-typedef std::map<Widelands::Ware_Index, uint32_t> WorkersMap;
+typedef std::map<Widelands::WareIndex, uint32_t> WaresMap;
+typedef std::map<Widelands::WareIndex, uint32_t> WorkersMap;
 typedef std::pair<SoldierMapDescr, uint32_t> SoldierAmount;
-typedef std::pair<Widelands::Ware_Index, uint32_t> WorkerAmount;
+typedef std::pair<Widelands::WareIndex, uint32_t> WorkerAmount;
 typedef std::pair<uint8_t, uint32_t> PlrInfluence;
-typedef std::set<Widelands::Ware_Index> WaresSet;
-typedef std::set<Widelands::Ware_Index> WorkersSet;
+typedef std::set<Widelands::WareIndex> WaresSet;
+typedef std::set<Widelands::WareIndex> WorkersSet;
 typedef std::vector<Widelands::Soldier *> SoldiersList;
 
 // parses the get argument for all classes that can be asked for their
-// current wares. Returns a set with all Ware_Indexes that must be considered.
+// current wares. Returns a set with all WareIndexes that must be considered.
 #define GET_INDEX(type) \
-	Ware_Index m_get_ ## type ## _index \
+	WareIndex m_get_ ## type ## _index \
 		(lua_State * L, const TribeDescr & tribe,  const std::string & what) \
 	{ \
-		Ware_Index idx = tribe. type ## _index(what); \
+		WareIndex idx = tribe. type ## _index(what); \
 		if (idx == INVALID_INDEX) \
 			report_error(L, "Invalid " #type ": <%s>", what.c_str()); \
 		return idx; \
@@ -145,7 +145,7 @@ btype ##sSet m_parse_get_##type##s_arguments \
 	if (lua_isstring(L, 2)) { \
 		std::string what = luaL_checkstring(L, -1); \
 		if (what == "all") { \
-			for (Ware_Index i = 0; \
+			for (WareIndex i = 0; \
 					i < tribe.get_nr##type##s (); ++i) \
 				rv.insert(i); \
 		} else { \
@@ -200,7 +200,7 @@ WaresMap count_wares_on_flag_(Flag& f, const TribeDescr & tribe) {
 	WaresMap rv;
 
 	for (const WareInstance * ware : f.get_wares()) {
-		Ware_Index i = tribe.ware_index(ware->descr().name());
+		WareIndex i = tribe.ware_index(ware->descr().name());
 		if (!rv.count(i))
 			rv.insert(Widelands::WareAmount(i, 1));
 		else
@@ -255,7 +255,7 @@ int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WorkersMap& va
 
 	WorkersMap c_workers;
 	for (const Worker* w : pi.get_workers()) {
-		Ware_Index i = tribe.worker_index(w->descr().name());
+		WareIndex i = tribe.worker_index(w->descr().name());
 		if (!c_workers.count(i)) {
 			c_workers.insert(WorkerAmount(i, 1));
 		} else {
@@ -273,7 +273,7 @@ int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WorkersMap& va
 	if (!return_number)
 		lua_newtable(L);
 
-	for (const Ware_Index& i : set) {
+	for (const WareIndex& i : set) {
 		uint32_t cnt = 0;
 		if (c_workers.count(i))
 			cnt = c_workers[i];
@@ -299,7 +299,7 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WorkersMap& valid_wo
 
 	WorkersMap c_workers;
 	for (const Worker* w : pi->get_workers()) {
-		Ware_Index i = tribe.worker_index(w->descr().name());
+		WareIndex i = tribe.worker_index(w->descr().name());
 		if (!c_workers.count(i))
 			c_workers.insert(WorkerAmount(i, 1));
 		else
@@ -1753,7 +1753,7 @@ void L_WareDescription::__unpersist(lua_State* L) {
 	UNPERS_STRING("tribe", tribe_name);
 	UNPERS_STRING("name", name);
 	const TribeDescr* tribe = get_egbase(L).get_tribe(tribe_name);
-	Ware_Index idx = tribe->safe_ware_index(name.c_str());
+	WareIndex idx = tribe->safe_ware_index(name.c_str());
 	set_description_pointer(tribe->get_ware_descr(idx));
 }
 
@@ -1788,7 +1788,7 @@ int L_WareDescription::get_consumers(lua_State * L) {
 		const BuildingDescr & descr = *tribe.get_building_descr(i);
 
 		if (upcast(ProductionSiteDescr const, de, &descr)) {
-			// inputs() returns type WareAmount = std::pair<Ware_Index, uint32_t>
+			// inputs() returns type WareAmount = std::pair<WareIndex, uint32_t>
 			for (auto ware_amount : de->inputs()) {
 				if (std::string(get()->name()) ==
 					std::string(tribe.get_ware_descr(ware_amount.first)->name())) {
@@ -1887,7 +1887,7 @@ void L_WorkerDescription::__unpersist(lua_State* L) {
 	UNPERS_STRING("tribe", tribe_name);
 	UNPERS_STRING("name", name);
 	const TribeDescr* tribe = get_egbase(L).get_tribe(tribe_name);
-	Ware_Index idx = tribe->safe_worker_index(name.c_str());
+	WareIndex idx = tribe->safe_worker_index(name.c_str());
 	set_description_pointer(tribe->get_worker_descr(idx));
 }
 
@@ -1905,7 +1905,7 @@ void L_WorkerDescription::__unpersist(lua_State* L) {
 		to or :const:`nil` if it never levels up.
 */
 int L_WorkerDescription::get_becomes(lua_State * L) {
-	const Ware_Index becomes_index = get()->becomes();
+	const WareIndex becomes_index = get()->becomes();
 	if (becomes_index == INVALID_INDEX) {
 		lua_pushnil(L);
 		return 1;
@@ -2370,7 +2370,7 @@ int L_Flag::set_wares(lua_State * L)
 
 	uint32_t nwares = 0;
 
-	for (const std::pair<Widelands::Ware_Index, uint32_t>& ware : c_wares) {
+	for (const std::pair<Widelands::WareIndex, uint32_t>& ware : c_wares) {
 		// all wares currently on the flag without a setpoint should be removed
 		if (!setpoints.count(ware.first))
 			setpoints.insert(Widelands::WareAmount(ware.first, 0));
@@ -2378,7 +2378,7 @@ int L_Flag::set_wares(lua_State * L)
 	}
 
 	// The idea is to change as little as possible on this flag
-	for (const std::pair<Widelands::Ware_Index, uint32_t>& sp : setpoints) {
+	for (const std::pair<Widelands::WareIndex, uint32_t>& sp : setpoints) {
 		uint32_t cur = 0;
 		WaresMap::iterator i = c_wares.find(sp.first);
 		if (i != c_wares.end())
@@ -2426,7 +2426,7 @@ int L_Flag::get_wares(lua_State * L) {
 	if (wares_set.size() == tribe.get_nrwares()) { // Want all returned
 		wares_set.clear();
 
-		for (const std::pair<Widelands::Ware_Index, uint32_t>& ware : wares) {
+		for (const std::pair<Widelands::WareIndex, uint32_t>& ware : wares) {
 			wares_set.insert(ware.first);
 		}
 	}
@@ -2434,7 +2434,7 @@ int L_Flag::get_wares(lua_State * L) {
 	if (!return_number)
 		lua_newtable(L);
 
-	for (const Widelands::Ware_Index& ware : wares_set) {
+	for (const Widelands::WareIndex& ware : wares_set) {
 		uint32_t count = 0;
 		if (wares.count(ware))
 			count = wares[ware];
@@ -2919,7 +2919,7 @@ int L_ProductionSite::set_wares(lua_State * L) {
 	for (const WareAmount& input_ware : ps->descr().inputs()) {
 		valid_wares.insert(input_ware.first);
 	}
-	for (const std::pair<Widelands::Ware_Index, uint32_t>& sp : setpoints) {
+	for (const std::pair<Widelands::WareIndex, uint32_t>& sp : setpoints) {
 		if (!valid_wares.count(sp.first)) {
 			report_error(
 				L, "<%s> can't be stored here!", tribe.get_ware_descr(sp.first)->name().c_str());
@@ -2954,7 +2954,7 @@ int L_ProductionSite::get_wares(lua_State * L) {
 	if (!return_number)
 		lua_newtable(L);
 
-	for (const Widelands::Ware_Index& ware : wares_set) {
+	for (const Widelands::WareIndex& ware : wares_set) {
 		uint32_t cnt = 0;
 		if (valid_wares.count(ware))
 			cnt = ps->waresqueue(ware).get_filled();
@@ -3721,8 +3721,8 @@ int L_Field::set_terr(lua_State* L) {
 	const char* name = luaL_checkstring(L, -1);
 	EditorGameBase& egbase = get_egbase(L);
 	const World& world = egbase.world();
-	const Terrain_Index td = world.terrains().get_index(name);
-	if (td == static_cast<Terrain_Index>(-1))
+	const TerrainIndex td = world.terrains().get_index(name);
+	if (td == static_cast<TerrainIndex>(-1))
 		report_error(L, "Unknown terrain '%s'", name);
 
 	egbase.map().change_terrain(world, TCoords<FCoords>(fcoords(L), TCoords<FCoords>::R), td);
@@ -3742,9 +3742,9 @@ int L_Field::set_terd(lua_State * L) {
 	const char * name = luaL_checkstring(L, -1);
 	EditorGameBase& egbase = get_egbase(L);
 	const World& world = egbase.world();
-	const Terrain_Index td =
+	const TerrainIndex td =
 		world.terrains().get_index(name);
-	if (td == static_cast<Terrain_Index>(-1))
+	if (td == static_cast<TerrainIndex>(-1))
 		report_error(L, "Unknown terrain '%s'", name);
 
 	egbase.map().change_terrain

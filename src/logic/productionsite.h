@@ -73,14 +73,14 @@ struct ProductionSiteDescr : public BuildingDescr {
 	const BillOfMaterials & working_positions() const {
 		return m_working_positions;
 	}
-	bool is_output_ware_type  (const Ware_Index& i) const {
+	bool is_output_ware_type  (const WareIndex& i) const {
 		return m_output_ware_types  .count(i);
 	}
-	bool is_output_worker_type(const Ware_Index& i) const {
+	bool is_output_worker_type(const WareIndex& i) const {
 		return m_output_worker_types.count(i);
 	}
 	const BillOfMaterials & inputs() const {return m_inputs;}
-	typedef std::set<Ware_Index>                       Output;
+	typedef std::set<WareIndex>                       Output;
 	const Output   & output_ware_types  () const {return m_output_ware_types;}
 	const Output   & output_worker_types() const {return m_output_worker_types;}
 	const ProductionProgram * get_program(const std::string &) const;
@@ -164,7 +164,7 @@ public:
 		m_production_result = text;
 	}
 
-	WaresQueue & waresqueue(Ware_Index) override;
+	WaresQueue & waresqueue(WareIndex) override;
 
 	void init(EditorGameBase &) override;
 	void cleanup(EditorGameBase &) override;
@@ -207,7 +207,7 @@ protected:
 		 * Instruction-dependent additional data.
 		 */
 		/*@{*/
-		Object_Ptr objvar;
+		ObjectPointer objvar;
 		Coords coord;
 		/*@}*/
 
@@ -219,9 +219,9 @@ protected:
 			coord(Coords::Null()) {}
 	};
 
-	Request & request_worker(Ware_Index);
+	Request & request_worker(WareIndex);
 	static void request_worker_callback
-		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
+		(Game &, Request &, WareIndex, Worker *, PlayerImmovable &);
 
 	/**
 	 * Determine the next program to be run when the last program has finished.
@@ -291,15 +291,15 @@ private:
  * releasing some wares out of a building
 */
 struct Input {
-	Input(const Ware_Index& Ware, uint8_t const Max) : m_ware(Ware), m_max(Max)
+	Input(const WareIndex& Ware, uint8_t const Max) : m_ware(Ware), m_max(Max)
 	{}
 	~Input() {}
 
-	Ware_Index ware() const {return m_ware;}
+	WareIndex ware() const {return m_ware;}
 	uint8_t     max() const {return m_max;}
 
 private:
-	Ware_Index m_ware;
+	WareIndex m_ware;
 	uint8_t    m_max;
 };
 

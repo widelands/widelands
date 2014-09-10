@@ -440,7 +440,7 @@ Widelands:: klass * get(lua_State * L, Widelands::EditorGameBase & egbase) { \
 }
 
 class L_MapObject : public L_MapModuleClass {
-	Widelands::Object_Ptr m_ptr;
+	Widelands::ObjectPointer m_ptr;
 
 public:
 	LUNA_CLASS_HEAD(L_MapObject);

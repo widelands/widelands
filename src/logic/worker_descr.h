@@ -94,9 +94,9 @@ public:
 
 	// For leveling
 	int32_t get_needed_experience() const {return m_needed_experience;}
-	Ware_Index becomes() const {return m_becomes;}
-	Ware_Index worker_index() const;
-	bool can_act_as(Ware_Index) const;
+	WareIndex becomes() const {return m_becomes;}
+	WareIndex worker_index() const;
+	bool can_act_as(WareIndex) const;
 
 	Worker & create
 		(EditorGameBase &, Player &, PlayerImmovable *, Coords) const;
@@ -128,7 +128,7 @@ protected:
 	/**
 	 * Type that this worker can become, i.e. level up to (or Null).
 	 */
-	Ware_Index  m_becomes;
+	WareIndex  m_becomes;
 	Programs    m_programs;
 private:
 	DISALLOW_COPY_AND_ASSIGN(WorkerDescr);

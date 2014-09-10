@@ -372,7 +372,7 @@ Called when our soldier arrives.
 void MilitarySite::request_soldier_callback
 	(Game            &       game,
 	 Request         &,
-	 Ware_Index,
+	 WareIndex,
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {

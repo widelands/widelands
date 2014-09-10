@@ -64,34 +64,34 @@ struct TribeDescr {
 
 	const std::string & name() const {return m_name;}
 
-	Ware_Index get_nrworkers() const {return m_workers.get_nitems();}
-	WorkerDescr const * get_worker_descr(const Ware_Index& index) const {
+	WareIndex get_nrworkers() const {return m_workers.get_nitems();}
+	WorkerDescr const * get_worker_descr(const WareIndex& index) const {
 		return m_workers.get(index);
 	}
-	Ware_Index worker_index(const std::string & workername) const {
+	WareIndex worker_index(const std::string & workername) const {
 		return m_workers.get_index(workername);
 	}
-	Ware_Index worker_index(char const * const workername) const {
+	WareIndex worker_index(char const * const workername) const {
 		return m_workers.get_index(workername);
 	}
-	Ware_Index carrier2() const {
+	WareIndex carrier2() const {
 		if (m_carrier2.size())
 			return worker_index(m_carrier2);
 		return worker_index("carrier");
 	}
-	Ware_Index get_nrwares() const {return m_wares.get_nitems();}
-	Ware_Index safe_ware_index(const std::string & warename) const;
-	Ware_Index ware_index(const std::string & warename) const;
-	WareDescr const * get_ware_descr(const Ware_Index& index) const {
+	WareIndex get_nrwares() const {return m_wares.get_nitems();}
+	WareIndex safe_ware_index(const std::string & warename) const;
+	WareIndex ware_index(const std::string & warename) const;
+	WareDescr const * get_ware_descr(const WareIndex& index) const {
 		return m_wares.get(index);
 	}
-	void set_ware_type_has_demand_check(const Ware_Index& index) const {
+	void set_ware_type_has_demand_check(const WareIndex& index) const {
 		m_wares.get(index)->set_has_demand_check();
 	}
-	void set_worker_type_has_demand_check(const Ware_Index& index) const {
+	void set_worker_type_has_demand_check(const WareIndex& index) const {
 		m_workers.get(index)->set_has_demand_check();
 	}
-	Ware_Index safe_worker_index(const std::string & workername) const;
+	WareIndex safe_worker_index(const std::string & workername) const;
 	BuildingIndex get_nrbuildings() const {
 		return m_buildings.get_nitems();
 	}
@@ -128,7 +128,7 @@ struct TribeDescr {
 	}
 	int32_t get_nr_bobs() {return m_bobs.get_nitems();}
 
-	const std::vector<Ware_Index> & worker_types_without_cost() const {
+	const std::vector<WareIndex> & worker_types_without_cost() const {
 		return m_worker_types_without_cost;
 	}
 
@@ -158,7 +158,7 @@ struct TribeDescr {
 		return m_initializations.at(index);
 	}
 
-	typedef std::vector<std::vector<Widelands::Ware_Index> > WaresOrder;
+	typedef std::vector<std::vector<Widelands::WareIndex> > WaresOrder;
 	typedef std::vector<std::pair<uint32_t, uint32_t> > WaresOrderCoords;
 	const WaresOrder & wares_order() const {return m_wares_order;}
 	const WaresOrderCoords & wares_order_coords() const {
@@ -190,7 +190,7 @@ private:
 	WaresOrder                        m_workers_order;
 	WaresOrderCoords                  m_workers_order_coords;
 
-	std::vector<Ware_Index> m_worker_types_without_cost;
+	std::vector<WareIndex> m_worker_types_without_cost;
 
 	std::vector<Initialization> m_initializations;
 

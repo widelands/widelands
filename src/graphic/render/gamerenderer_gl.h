@@ -70,15 +70,15 @@ private:
 	void draw() override;
 	void prepare_terrain_base();
 	void collect_terrain_base(bool onlyscan);
-	void count_terrain_base(Widelands::Terrain_Index ter);
+	void count_terrain_base(Widelands::TerrainIndex ter);
 	void add_terrain_base_triangle
-		(Widelands::Terrain_Index ter,
+		(Widelands::TerrainIndex ter,
 		 const Widelands::Coords & p1, const Widelands::Coords & p2, const Widelands::Coords & p3);
 	void draw_terrain_base();
 	void prepare_terrain_dither();
 	void collect_terrain_dither(bool onlyscan);
 	void add_terrain_dither_triangle
-		(bool onlyscan, Widelands::Terrain_Index ter,
+		(bool onlyscan, Widelands::TerrainIndex ter,
 		 const Widelands::Coords & edge1, const Widelands::Coords & edge2,
 		 const Widelands::Coords & opposite);
 	void draw_terrain_dither();

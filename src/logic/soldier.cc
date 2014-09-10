@@ -417,7 +417,7 @@ void Soldier::set_evade_level(const uint32_t evade) {
 	m_evade_level = evade;
 }
 
-uint32_t Soldier::get_level(tAttribute const at) const {
+uint32_t Soldier::get_level(TrainingAttribute const at) const {
 	switch (at) {
 	case atrHP:      return m_hp_level;
 	case atrAttack:  return m_attack_level;
@@ -431,7 +431,7 @@ uint32_t Soldier::get_level(tAttribute const at) const {
 }
 
 
-int32_t Soldier::get_tattribute(uint32_t const attr) const
+int32_t Soldier::get_training_attribute(uint32_t const attr) const
 {
 	switch (attr) {
 	case atrHP: return m_hp_level;
@@ -441,7 +441,7 @@ int32_t Soldier::get_tattribute(uint32_t const attr) const
 	case atrTotal:
 		return m_hp_level + m_attack_level + m_defense_level + m_evade_level;
 	default:
-		return Worker::get_tattribute(attr);
+		return Worker::get_training_attribute(attr);
 	}
 }
 

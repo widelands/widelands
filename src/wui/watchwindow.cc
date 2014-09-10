@@ -43,7 +43,7 @@
 //Holds information for a view
 struct WatchWindowView {
 	Point view_point;
-	Widelands::Object_Ptr tracking; //  if non-null, we're tracking a Bob
+	Widelands::ObjectPointer tracking; //  if non-null, we're tracking a Bob
 };
 
 struct WatchWindow : public UI::Window {

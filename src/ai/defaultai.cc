@@ -232,10 +232,10 @@ void DefaultAI::late_initialization() {
 	player_ = game().get_player(player_number());
 	tribe_ = &player_->tribe();
 	log("ComputerPlayer(%d): initializing (%u)\n", player_number(), type_);
-	Ware_Index const nr_wares = tribe_->get_nrwares();
+	WareIndex const nr_wares = tribe_->get_nrwares();
 	wares.resize(nr_wares);
 
-	for (Ware_Index i = 0; i < nr_wares; ++i) {
+	for (WareIndex i = 0; i < nr_wares; ++i) {
 		wares.at(i).producers_ = 0;
 		wares.at(i).consumers_ = 0;
 		wares.at(i).preciousness_ = tribe_->get_ware_descr(i)->preciousness();
@@ -299,7 +299,7 @@ void DefaultAI::late_initialization() {
 			for (const WareAmount& temp_input : prod.inputs()) {
 				bo.inputs_.push_back(temp_input.first);
 			}
-			for (const Ware_Index& temp_output : prod.output_ware_types()) {
+			for (const WareIndex& temp_output : prod.output_ware_types()) {
 				bo.outputs_.push_back(temp_output);
 			}
 
@@ -925,7 +925,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 						continue;
 
 					for (uint32_t m = 0; m < bo.outputs_.size(); ++m) {
-						Ware_Index wt(static_cast<size_t>(bo.outputs_.at(m)));
+						WareIndex wt(static_cast<size_t>(bo.outputs_.at(m)));
 
 						if (observer->economy.needs_ware(wt)) {
 							output_is_needed = true;
@@ -2163,7 +2163,7 @@ bool DefaultAI::check_mines_(int32_t const gametime) {
 // this count ware as hints
 uint32_t DefaultAI::get_stocklevel_by_hint(size_t hintoutput) {
 	uint32_t count = 0;
-	Ware_Index wt(hintoutput);
+	WareIndex wt(hintoutput);
 	for (EconomyObserver* observer : economies) {
 		// Don't check if the economy has no warehouse.
 		if (observer->economy.warehouses().empty())
@@ -2186,7 +2186,7 @@ uint32_t DefaultAI::get_stocklevel(BuildingObserver& bo) {
 				continue;
 
 			for (uint32_t m = 0; m < bo.outputs_.size(); ++m) {
-				Ware_Index wt(static_cast<size_t>(bo.outputs_.at(m)));
+				WareIndex wt(static_cast<size_t>(bo.outputs_.at(m)));
 				count += observer->economy.stock_ware(wt);
 			}
 		}

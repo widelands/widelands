@@ -79,7 +79,7 @@ bool Worker::run_createware(Game & game, State & state, const Action & action)
 	}
 
 	Player & player = *get_owner();
-	Ware_Index const wareid(action.iparam1);
+	WareIndex const wareid(action.iparam1);
 	WareInstance & ware =
 		*new WareInstance(wareid, descr().tribe().get_ware_descr(wareid));
 	ware.init(game);
@@ -110,7 +110,7 @@ bool Worker::run_mine(Game & game, State & state, const Action & action)
 	Map & map = game.map();
 
 	//Make sure that the specified resource is available in this world
-	Resource_Index const res =
+	ResourceIndex const res =
 		game.world().get_resource(action.sparam1.c_str());
 	if (static_cast<int8_t>(res) == -1) //  TODO(unknown): ARGH!!
 		throw GameDataError
@@ -215,7 +215,7 @@ bool Worker::run_breed(Game & game, State & state, const Action & action)
 	Map & map = game.map();
 
 	//Make sure that the specified resource is available in this world
-	Resource_Index const res =
+	ResourceIndex const res =
 		game.world().get_resource(action.sparam1.c_str());
 	if (static_cast<int8_t>(res) == -1) //  TODO(unknown): ARGH!!
 		throw GameDataError
@@ -1006,7 +1006,7 @@ bool Worker::run_construct(Game & game, State & state, const Action & /* action 
 		return true;
 	}
 
-	Ware_Index wareindex = ware->descr_index();
+	WareIndex wareindex = ware->descr_index();
 	if (!imm->construct_ware(game, wareindex)) {
 		molog("run_construct: construct_ware failed");
 		send_signal(game, "fail");
@@ -1082,7 +1082,7 @@ void Worker::log_general_info(const EditorGameBase & egbase)
  */
 void Worker::set_location(PlayerImmovable * const location)
 {
-	assert(!location || Object_Ptr(location).get(owner().egbase()));
+	assert(!location || ObjectPointer(location).get(owner().egbase()));
 
 	PlayerImmovable * const oldlocation = get_location(owner().egbase());
 	if (oldlocation == location)
@@ -1284,7 +1284,7 @@ void Worker::create_needed_experience(Game & /* game */)
  * of the worker by one, if he reaches
  * needed_experience he levels
  */
-Ware_Index Worker::gain_experience(Game & game) {
+WareIndex Worker::gain_experience(Game & game) {
 	return descr().get_needed_experience() == -1 || ++m_current_exp < descr().get_needed_experience() ?
 	          INVALID_INDEX :
 	          level(game);
@@ -1295,7 +1295,7 @@ Ware_Index Worker::gain_experience(Game & game) {
  * Level this worker to the next higher level. this includes creating a
  * new worker with his propertys and removing this worker
  */
-Ware_Index Worker::level(Game & game) {
+WareIndex Worker::level(Game & game) {
 
 	// We do not really remove this worker, all we do
 	// is to overwrite his description with the new one and to
@@ -1305,8 +1305,8 @@ Ware_Index Worker::level(Game & game) {
 	// circumstances)
 	assert(descr().becomes());
 	const TribeDescr & t = descr().tribe();
-	Ware_Index const old_index = t.worker_index(descr().name());
-	Ware_Index const new_index = descr().becomes();
+	WareIndex const old_index = t.worker_index(descr().name());
+	WareIndex const new_index = descr().becomes();
 	m_descr = t.get_worker_descr(new_index);
 	assert(new_index != INVALID_INDEX);
 

@@ -126,12 +126,12 @@ void MapGenerator::generate_resources(uint32_t const* const random1,
 	// TODO(unknown): Check how the editor handles this...
 
 	const World& world = egbase_.world();
-	Terrain_Index const tix = fc.field->get_terrains().d;
+	TerrainIndex const tix = fc.field->get_terrains().d;
 	const TerrainDescription& terrain_description = egbase_.world().terrain_descr(tix);
 
 	const auto set_resource_helper = [this, &world, &terrain_description, &fc] (
 	   const uint32_t random_value, const int valid_resource_index) {
-		const Resource_Index  res_idx = terrain_description.get_valid_resource(valid_resource_index);
+		const ResourceIndex  res_idx = terrain_description.get_valid_resource(valid_resource_index);
 		const uint32_t max_amount = world.get_resource(res_idx)->max_amount();
 		uint8_t res_val = static_cast<uint8_t>(random_value / (kMaxElevation / max_amount));
 		res_val *= static_cast<uint8_t>(map_info_.resource_amount) + 1;
@@ -442,7 +442,7 @@ rng:         is the random number generator to be used.
 terrType:    Returns the terrain-Type fpor this triangle
 ===============
 */
-Terrain_Index MapGenerator::figure_out_terrain
+TerrainIndex MapGenerator::figure_out_terrain
 	(uint32_t                  * const random2,
 	 uint32_t                  * const random3,
 	 uint32_t                  * const random4,
@@ -1010,7 +1010,7 @@ bool UniqueRandomMapInfo::setFromIdString
 
 	// Convert amount of resources
 	mapInfo_out.resource_amount =
-		static_cast<Widelands::UniqueRandomMapInfo::Resource_Amount>
+		static_cast<Widelands::UniqueRandomMapInfo::ResourceAmount>
 			((nums[6] & 0xc) >> 2);
 
 	if

@@ -159,7 +159,7 @@ void ProductionProgram::parse_ware_type_group
 	 const TribeDescr & tribe,
 	 const BillOfMaterials  & inputs)
 {
-	std::set<Ware_Index>::iterator last_insert_pos = group.first.end();
+	std::set<WareIndex>::iterator last_insert_pos = group.first.end();
 	uint8_t count     = 1;
 	uint8_t count_max = 0;
 	for (;;) {
@@ -171,7 +171,7 @@ void ProductionProgram::parse_ware_type_group
 		char const terminator = *parameters;
 		*parameters = '\0';
 
-		Ware_Index const ware_index = tribe.safe_ware_index(ware);
+		WareIndex const ware_index = tribe.safe_ware_index(ware);
 
 		for (BillOfMaterials::const_iterator input_it = inputs.begin(); input_it != inputs.end(); ++input_it) {
 			if (input_it == inputs.end()) {
@@ -332,7 +332,7 @@ std::string ProductionProgram::ActReturn::Site_Has::description
 	(const TribeDescr & tribe) const
 {
 	std::vector<std::string> condition_list;
-	for (const Ware_Index& temp_ware : group.first) {
+	for (const WareIndex& temp_ware : group.first) {
 		condition_list.push_back(tribe.get_ware_descr(temp_ware)->descname());
 	}
 	std::string condition = i18n::localize_item_list(condition_list, i18n::ConcatenateWith::AND);
@@ -354,7 +354,7 @@ std::string ProductionProgram::ActReturn::Site_Has::description_negation
 	(const TribeDescr & tribe) const
 {
 	std::vector<std::string> condition_list;
-	for (const Ware_Index& temp_ware : group.first) {
+	for (const WareIndex& temp_ware : group.first) {
 		condition_list.push_back(tribe.get_ware_descr(temp_ware)->descname());
 	}
 	std::string condition = i18n::localize_item_list(condition_list, i18n::ConcatenateWith::AND);
@@ -405,7 +405,7 @@ ProductionProgram::ActReturn::Condition * create_economy_condition
 			try {
 				bool reached_end;
 				char const * const type_name = next_word(parameters, reached_end);
-				Ware_Index index = tribe.ware_index(type_name);
+				WareIndex index = tribe.ware_index(type_name);
 				if (index != INVALID_INDEX) {
 					tribe.set_ware_type_has_demand_check(index);
 					return
@@ -896,7 +896,7 @@ void ProductionProgram::ActConsume::execute
 	//  Iterate over all input queues and see how much we should consume from
 	//  each of them.
 	for (size_t i = 0; i < nr_warequeues; ++i) {
-		Ware_Index const ware_type = warequeues[i]->get_ware();
+		WareIndex const ware_type = warequeues[i]->get_ware();
 		uint8_t nr_available = warequeues[i]->get_filled();
 		consumption_quantities[i] = 0;
 
@@ -931,7 +931,7 @@ void ProductionProgram::ActConsume::execute
 			assert(group.first.size());
 
 			std::vector<std::string> ware_list;
-			for (const Ware_Index& ware : group.first) {
+			for (const WareIndex& ware : group.first) {
 				ware_list.push_back(tribe.get_ware_descr(ware)->descname());
 			}
 			std::string ware_string = i18n::localize_item_list(ware_list, i18n::ConcatenateWith::OR);
@@ -992,7 +992,7 @@ ProductionProgram::ActProduce::ActProduce
 		const TribeDescr & tribe = descr.tribe();
 		for (bool more = true; more; ++parameters) {
 			m_items.resize(m_items.size() + 1);
-			std::pair<Ware_Index, uint8_t> & item = *m_items.rbegin();
+			std::pair<WareIndex, uint8_t> & item = *m_items.rbegin();
 			skip(parameters);
 			char const * ware = parameters;
 			for (;; ++parameters) {
@@ -1089,7 +1089,7 @@ ProductionProgram::ActRecruit::ActRecruit
 		const TribeDescr & tribe = descr.tribe();
 		for (bool more = true; more; ++parameters) {
 			m_items.resize(m_items.size() + 1);
-			std::pair<Ware_Index, uint8_t> & item = *m_items.rbegin();
+			std::pair<WareIndex, uint8_t> & item = *m_items.rbegin();
 			skip(parameters);
 			char const * worker = parameters;
 			for (;; ++parameters) {
@@ -1593,7 +1593,7 @@ void ProductionProgram::ActConstruct::execute(Game & g, ProductionSite & psite) 
 
 	// Early check for no resources
 	const Buildcost & buildcost = descr.buildcost();
-	Ware_Index available_resource = INVALID_INDEX;
+	WareIndex available_resource = INVALID_INDEX;
 
 	for (Buildcost::const_iterator it = buildcost.begin(); it != buildcost.end(); ++it) {
 		if (psite.waresqueue(it->first).get_filled() > 0) {

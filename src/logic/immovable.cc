@@ -1264,7 +1264,7 @@ bool Immovable::construct_remaining_buildcost(Game & /* game */, Buildcost * bui
  *
  * If the immovable is not currently in construction mode, return \c false.
  */
-bool Immovable::construct_ware(Game & game, Ware_Index index)
+bool Immovable::construct_ware(Game & game, WareIndex index)
 {
 	ActConstructionData * d = get_action_data<ActConstructionData>();
 	if (!d)
@@ -1417,7 +1417,7 @@ void PlayerImmovable::cleanup(EditorGameBase & egbase)
  * We are the destination of the given ware's transfer, which is not associated
  * with any request.
  */
-void PlayerImmovable::receive_ware(Game &, Ware_Index ware)
+void PlayerImmovable::receive_ware(Game &, WareIndex ware)
 {
 	throw wexception
 		("MO(%u): Received a ware(%u), do not know what to do with it",

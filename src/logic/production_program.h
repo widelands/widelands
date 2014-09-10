@@ -33,7 +33,7 @@
 #include "base/macros.h"
 #include "logic/bill_of_materials.h"
 #include "logic/program_result.h"
-#include "logic/tattribute.h"
+#include "logic/training_attribute.h"
 #include "logic/widelands.h"
 
 class Profile;
@@ -77,7 +77,7 @@ struct ProductionProgram {
 	};
 
 	/// A group of ware types with a count.
-	typedef std::pair<std::set<Ware_Index>, uint8_t> Ware_Type_Group;
+	typedef std::pair<std::set<WareIndex>, uint8_t> Ware_Type_Group;
 
 	/// Parse a group of ware types followed by an optional count and terminated
 	/// by a space or null. Example: "fish,meat:2".
@@ -165,22 +165,22 @@ struct ProductionProgram {
 
 		/// Tests whether the economy needs a ware of type ware_type.
 		struct Economy_Needs_Ware : public Condition {
-			Economy_Needs_Ware(const Ware_Index& i) : ware_type(i) {}
+			Economy_Needs_Ware(const WareIndex& i) : ware_type(i) {}
 			bool evaluate(const ProductionSite &) const override;
 			std::string description(const TribeDescr &) const override;
 			std::string description_negation(const TribeDescr &) const override;
 		private:
-			Ware_Index ware_type;
+			WareIndex ware_type;
 		};
 
 		/// Tests whether the economy needs a worker of type worker_type.
 		struct Economy_Needs_Worker : public Condition {
-			Economy_Needs_Worker(const Ware_Index& i) : worker_type(i) {}
+			Economy_Needs_Worker(const WareIndex& i) : worker_type(i) {}
 			bool evaluate(const ProductionSite &) const override;
 			std::string description(const TribeDescr &) const override;
 			std::string description_negation(const TribeDescr &) const override;
 		private:
-			Ware_Index worker_type;
+			WareIndex worker_type;
 		};
 
 		/// Tests whether the site has the specified (or implied) number of
@@ -399,7 +399,7 @@ struct ProductionProgram {
 		ActProduce(char * parameters, const ProductionSiteDescr &);
 		void execute(Game &, ProductionSite &) const override;
 		bool get_building_work(Game &, ProductionSite &, Worker &) const override;
-		typedef std::vector<std::pair<Ware_Index, uint8_t> > Items;
+		typedef std::vector<std::pair<WareIndex, uint8_t> > Items;
 		const Items & items() const {return m_items;}
 	private:
 		Items m_items;
@@ -424,7 +424,7 @@ struct ProductionProgram {
 		ActRecruit(char * parameters, const ProductionSiteDescr &);
 		void execute(Game &, ProductionSite &) const override;
 		bool get_building_work(Game &, ProductionSite &, Worker &) const override;
-		typedef std::vector<std::pair<Ware_Index, uint8_t> > Items;
+		typedef std::vector<std::pair<WareIndex, uint8_t> > Items;
 		const Items & items() const {return m_items;}
 	private:
 		Items m_items;
@@ -438,7 +438,7 @@ struct ProductionProgram {
 		void execute(Game &, ProductionSite &) const override;
 
 	private:
-		Resource_Index m_resource;
+		ResourceIndex m_resource;
 		uint8_t        m_distance; // width/radius of mine
 		uint8_t        m_max;  // Can work up to this percent (of total mountain resources)
 		uint8_t        m_chance; // odds of finding resources from empty mine
@@ -449,7 +449,7 @@ struct ProductionProgram {
 		ActCheck_Soldier(char * parameters);
 		void execute(Game &, ProductionSite &) const override;
 	private:
-		tAttribute attribute;
+		TrainingAttribute attribute;
 		uint8_t level;
 	};
 
@@ -457,7 +457,7 @@ struct ProductionProgram {
 		ActTrain(char * parameters);
 		void execute(Game &, ProductionSite &) const override;
 	private:
-		tAttribute attribute;
+		TrainingAttribute attribute;
 		uint8_t level;
 		uint8_t target_level;
 	};

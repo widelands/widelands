@@ -32,9 +32,9 @@ namespace Widelands {
 
 //  Type definitions for the game logic.
 
-typedef uint8_t Tribe_Index;
+typedef uint8_t TribeIndex;
 
-typedef uint16_t Military_Influence;
+typedef uint16_t MilitaryInfluence;
 
 typedef uint8_t  PlayerNumber; /// 5 bits used, so 0 .. 31
 inline PlayerNumber Neutral() {return 0;}
@@ -49,9 +49,9 @@ inline PlayerNumber Neutral() {return 0;}
  */
 typedef uint8_t TeamNumber;
 
-typedef uint8_t  Terrain_Index;
-typedef uint8_t  Resource_Index;  /// 4 bits used, so 0 .. 15.
-typedef uint8_t  Resource_Amount; /// 4 bits used, so 0 .. 15.
+typedef uint8_t  TerrainIndex;
+typedef uint8_t  ResourceIndex;  /// 4 bits used, so 0 .. 15.
+typedef uint8_t  ResourceAmount; /// 4 bits used, so 0 .. 15.
 
 typedef uint16_t Vision;
 
@@ -64,20 +64,20 @@ inline Duration Forever() {return 0xffffffff;}
 typedef uint32_t Serial; /// Serial number for MapObject.
 
 constexpr uint8_t INVALID_INDEX = std::numeric_limits<uint8_t>::max();
-typedef uint8_t Ware_Index;
+typedef uint8_t WareIndex;
 typedef uint8_t BuildingIndex;
 typedef uint8_t Direction;
 
-struct Soldier_Strength {
+struct SoldierStrength {
 	uint8_t hp, attack, defense, evade;
-	bool operator== (const Soldier_Strength & other) const {
+	bool operator== (const SoldierStrength & other) const {
 		return
 			hp      == other.hp      &&
 			attack  == other.attack  &&
 			defense == other.defense &&
 			evade   == other.evade;
 	}
-	bool operator<  (const Soldier_Strength & other) const {
+	bool operator<  (const SoldierStrength & other) const {
 		return
 			hp      <  other.hp ||
 			(hp      == other.hp &&

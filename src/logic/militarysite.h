@@ -138,7 +138,7 @@ private:
 
 	bool isPresent(Soldier &) const;
 	static void request_soldier_callback
-		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
+		(Game &, Request &, WareIndex, Worker *, PlayerImmovable &);
 
 	MapObject * popSoldierJob
 		(Soldier *, bool * stayhome = nullptr);
@@ -168,7 +168,7 @@ private:
 
 	struct SoldierJob {
 		Soldier    * soldier;
-		Object_Ptr  enemy;
+		ObjectPointer  enemy;
 		bool        stayhome;
 	};
 	std::vector<SoldierJob> m_soldierjobs;

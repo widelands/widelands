@@ -376,7 +376,7 @@ void Road::_request_carrier(CarrierSlot & slot)
 void Road::_request_carrier_callback
 	(Game            &       game,
 	 Request         &       rq,
-	 Ware_Index,
+	 WareIndex,
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {

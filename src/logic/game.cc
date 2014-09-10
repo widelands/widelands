@@ -810,7 +810,7 @@ void Game::send_player_evict_worker(Worker & worker)
 void Game::send_player_set_ware_priority
 	(PlayerImmovable &       imm,
 	 int32_t           const type,
-	 Ware_Index        const index,
+	 WareIndex        const index,
 	 int32_t           const prio)
 {
 	send_player_command
@@ -825,7 +825,7 @@ void Game::send_player_set_ware_priority
 
 void Game::send_player_set_ware_max_fill
 	(PlayerImmovable &       imm,
-	 Ware_Index        const index,
+	 WareIndex        const index,
 	 uint32_t          const max_fill)
 {
 	send_player_command
@@ -986,15 +986,15 @@ void Game::sample_statistics()
 		for (uint32_t j = 0; j < plr->get_nr_economies(); ++j) {
 			Economy * const eco = plr->get_economy_by_number(j);
 			const TribeDescr & tribe = plr->tribe();
-			Ware_Index const tribe_wares = tribe.get_nrwares();
+			WareIndex const tribe_wares = tribe.get_nrwares();
 			for
-				(Ware_Index wareid = 0;
+				(WareIndex wareid = 0;
 				 wareid < tribe_wares;
 				 ++wareid)
 				wastock += eco->stock_ware(wareid);
-			Ware_Index const tribe_workers = tribe.get_nrworkers();
+			WareIndex const tribe_workers = tribe.get_nrworkers();
 			for
-				(Ware_Index workerid = 0;
+				(WareIndex workerid = 0;
 				 workerid < tribe_workers;
 				 ++workerid)
 				if

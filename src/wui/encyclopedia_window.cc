@@ -87,10 +87,10 @@ EncyclopediaWindow::EncyclopediaWindow
 
 void EncyclopediaWindow::fillWares() {
 	const TribeDescr & tribe = iaplayer().player().tribe();
-	Ware_Index const nr_wares = tribe.get_nrwares();
+	WareIndex const nr_wares = tribe.get_nrwares();
 	std::vector<Ware> ware_vec;
 
-	for (Ware_Index i = 0; i < nr_wares; ++i) {
+	for (WareIndex i = 0; i < nr_wares; ++i) {
 		WareDescr const * ware = tribe.get_ware_descr(i);
 		Ware w(i, ware);
 		ware_vec.push_back(w);
@@ -178,10 +178,10 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 					action->groups();
 
 				for (const ProductionProgram::Ware_Type_Group& temp_group : groups) {
-					const std::set<Ware_Index> & ware_types = temp_group.first;
+					const std::set<WareIndex> & ware_types = temp_group.first;
 					assert(ware_types.size());
 					std::vector<std::string> ware_type_descnames;
-					for (const Ware_Index& ware_index : ware_types) {
+					for (const WareIndex& ware_index : ware_types) {
 						ware_type_descnames.push_back(tribe.get_ware_descr(ware_index)->descname());
 					}
 

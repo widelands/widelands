@@ -149,10 +149,10 @@ public:
 	 */
 	Workers get_incorporated_workers();
 
-	void insert_wares  (Ware_Index, uint32_t count);
-	void remove_wares  (Ware_Index, uint32_t count);
-	void insert_workers(Ware_Index, uint32_t count);
-	void remove_workers(Ware_Index, uint32_t count);
+	void insert_wares  (WareIndex, uint32_t count);
+	void remove_wares  (WareIndex, uint32_t count);
+	void insert_workers(WareIndex, uint32_t count);
+	void remove_workers(WareIndex, uint32_t count);
 
 	/* SoldierControl implementation */
 	std::vector<Soldier *> presentSoldiers() const override;
@@ -173,26 +173,26 @@ public:
 
 	bool fetch_from_flag(Game &) override;
 
-	uint32_t count_workers(const Game &, Ware_Index, const Requirements &);
-	Worker & launch_worker(Game &, Ware_Index, const Requirements &);
+	uint32_t count_workers(const Game &, WareIndex, const Requirements &);
+	Worker & launch_worker(Game &, WareIndex, const Requirements &);
 
 	// Adds the worker to the inventory. Takes ownership and might delete
 	// 'worker'.
 	void incorporate_worker(EditorGameBase&, Worker* worker);
 
-	WareInstance & launch_ware(Game &, Ware_Index);
+	WareInstance & launch_ware(Game &, WareIndex);
 	void do_launch_ware(Game &, WareInstance &);
 
 	// Adds the ware to our inventory. Takes ownership and might delete 'ware'.
 	void incorporate_ware(EditorGameBase&, WareInstance* ware);
 
-	bool can_create_worker(Game &, Ware_Index) const;
-	void     create_worker(Game &, Ware_Index);
+	bool can_create_worker(Game &, WareIndex) const;
+	void     create_worker(Game &, WareIndex);
 
-	uint32_t get_planned_workers(Game &, Ware_Index index) const;
-	void plan_workers(Game &, Ware_Index index, uint32_t amount);
+	uint32_t get_planned_workers(Game &, WareIndex index) const;
+	void plan_workers(Game &, WareIndex index, uint32_t amount);
 	std::vector<uint32_t> calc_available_for_worker
-		(Game &, Ware_Index index) const;
+		(Game &, WareIndex index) const;
 
 	void enable_spawn(Game &, uint8_t worker_types_without_cost_index);
 	void disable_spawn(uint8_t worker_types_without_cost_index);
@@ -204,21 +204,21 @@ public:
 	bool attack   (Soldier &) override;
 	// End Attackable implementation
 
-	void receive_ware(Game &, Ware_Index ware) override;
+	void receive_ware(Game &, WareIndex ware) override;
 	void receive_worker(Game &, Worker & worker) override;
 
-	StockPolicy get_ware_policy(Ware_Index ware) const;
-	StockPolicy get_worker_policy(Ware_Index ware) const;
-	StockPolicy get_stock_policy(WareWorker waretype, Ware_Index wareindex) const;
-	void set_ware_policy(Ware_Index ware, StockPolicy policy);
-	void set_worker_policy(Ware_Index ware, StockPolicy policy);
+	StockPolicy get_ware_policy(WareIndex ware) const;
+	StockPolicy get_worker_policy(WareIndex ware) const;
+	StockPolicy get_stock_policy(WareWorker waretype, WareIndex wareindex) const;
+	void set_ware_policy(WareIndex ware, StockPolicy policy);
+	void set_worker_policy(WareIndex ware, StockPolicy policy);
 
 	// Get the portdock if this is a port.
 	PortDock * get_portdock() const {return m_portdock;}
 
 	// Returns the waresqueue of the expedition if this is a port. Will
 	// assert(false) otherwise.
-	WaresQueue& waresqueue(Ware_Index) override;
+	WaresQueue& waresqueue(WareIndex) override;
 
 	void log_general_info(const EditorGameBase &) override;
 
@@ -237,7 +237,7 @@ private:
 	 */
 	struct PlannedWorkers {
 		/// Index of the worker type we plan to create
-		Ware_Index index;
+		WareIndex index;
 
 		/// How many workers of this type are we supposed to create?
 		uint32_t amount;
@@ -249,7 +249,7 @@ private:
 	};
 
 	static void request_cb
-		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
+		(Game &, Request &, WareIndex, Worker *, PlayerImmovable &);
 	void check_remove_stock(Game &);
 
 	bool _load_finish_planned_worker(PlannedWorkers & pw);
@@ -263,7 +263,7 @@ private:
 
 	// Workers who live here at the moment
 	typedef std::vector<Worker *> WorkerList;
-	typedef std::map<Ware_Index, WorkerList> IncorporatedWorkers;
+	typedef std::map<WareIndex, WorkerList> IncorporatedWorkers;
 	IncorporatedWorkers        m_incorporated_workers;
 	uint32_t                 * m_next_worker_without_cost_spawn;
 	uint32_t                   m_next_military_act;

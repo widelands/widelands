@@ -75,7 +75,7 @@ IMPLEMENTATION
 
 
 ConstructionSite::ConstructionSite(const ConstructionSiteDescr & cs_descr) :
-Partially_Finished_Building (cs_descr),
+PartiallyFinishedBuilding (cs_descr),
 m_fetchfromflag     (0),
 m_builder_idle      (false)
 {}
@@ -93,7 +93,7 @@ void ConstructionSite::update_statistics_string(std::string* s)
 Access to the wares queues by id
 =======
 */
-WaresQueue & ConstructionSite::waresqueue(Ware_Index const wi) {
+WaresQueue & ConstructionSite::waresqueue(WareIndex const wi) {
 	for (WaresQueue * ware : m_wares) {
 		if (ware->get_ware() == wi) {
 			return *ware;
@@ -111,7 +111,7 @@ Set the type of building we're going to build
 ===============
 */
 void ConstructionSite::set_building(const BuildingDescr & building_descr) {
-	Partially_Finished_Building::set_building(building_descr);
+	PartiallyFinishedBuilding::set_building(building_descr);
 
 	m_info.becomes = &building_descr;
 }
@@ -123,9 +123,9 @@ Initialize the construction site by starting orders
 */
 void ConstructionSite::init(EditorGameBase & egbase)
 {
-	Partially_Finished_Building::init(egbase);
+	PartiallyFinishedBuilding::init(egbase);
 
-	const std::map<Ware_Index, uint8_t> * buildcost;
+	const std::map<WareIndex, uint8_t> * buildcost;
 	if (!m_old_buildings.empty()) {
 		// Enhancement
 		BuildingIndex was_index = m_old_buildings.back();
@@ -141,7 +141,7 @@ void ConstructionSite::init(EditorGameBase & egbase)
 	//  initialize the wares queues
 	size_t const buildcost_size = buildcost->size();
 	m_wares.resize(buildcost_size);
-	std::map<Ware_Index, uint8_t>::const_iterator it = buildcost->begin();
+	std::map<WareIndex, uint8_t>::const_iterator it = buildcost->begin();
 
 	for (size_t i = 0; i < buildcost_size; ++i, ++it) {
 		WaresQueue & wq =
@@ -163,7 +163,7 @@ If construction was finished successfully, place the building at our position.
 */
 void ConstructionSite::cleanup(EditorGameBase & egbase)
 {
-	Partially_Finished_Building::cleanup(egbase);
+	PartiallyFinishedBuilding::cleanup(egbase);
 
 	if (m_work_steps <= m_work_completed) {
 		// Put the real building in place
@@ -315,7 +315,7 @@ Called by WaresQueue code when an ware has arrived
 ===============
 */
 void ConstructionSite::wares_queue_callback
-	(Game & game, WaresQueue *, Ware_Index, void * const data)
+	(Game & game, WaresQueue *, WareIndex, void * const data)
 {
 	ConstructionSite & cs = *static_cast<ConstructionSite *>(data);
 

@@ -54,7 +54,7 @@ struct ActionConfirm : public UI::Window {
 	virtual void ok() = 0;
 
 protected:
-	Widelands::Object_Ptr m_object;
+	Widelands::ObjectPointer m_object;
 };
 
 /**
@@ -81,7 +81,7 @@ struct BulldozeConfirm : public ActionConfirm {
 	void ok() override;
 
 private:
-	Widelands::Object_Ptr m_todestroy;
+	Widelands::ObjectPointer m_todestroy;
 };
 
 /**

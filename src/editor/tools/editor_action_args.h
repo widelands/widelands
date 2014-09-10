@@ -56,7 +56,7 @@ struct Editor_Action_Args {
 	std::list<std::string> oimmov_types;                            // immovable change tools
 	std::list<int32_t> nimmov_types;                                // immovable change tools
 	Widelands::HeightInterval m_interval;                  // noise hight tool
-	std::list<Widelands::Terrain_Index> terrainType, origTerrainType; // set terrain tool
+	std::list<Widelands::TerrainIndex> terrainType, origTerrainType; // set terrain tool
 
 	std::list<Editor_Tool_Action *> draw_actions;                   // draw tool
 

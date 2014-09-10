@@ -80,7 +80,7 @@ private:
 	// Updates m_destination_dock.
 	void update_destination(Game &, PortDock &);
 
-	Object_Ptr m_object;
+	ObjectPointer m_object;
 	OPtr<PortDock> m_destination_dock;
 };
 

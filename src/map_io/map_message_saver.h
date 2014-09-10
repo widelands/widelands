@@ -39,8 +39,8 @@ namespace Widelands {
 /// Cmd_DeleteMessage) that refers to a message by id, use this map to
 /// translate from the id that is stored in the command to the sequence number
 /// that will be used as the id of the message when the game is loaded.
-struct Map_Message_Saver : private std::map<Message_Id, Message_Id> {
-	Map_Message_Saver() : counter(0) {}
+struct MapMessageSaver : private std::map<Message_Id, Message_Id> {
+	MapMessageSaver() : counter(0) {}
 	void add(Message_Id const id) {
 		assert(find(id) == end());
 		insert(std::pair<Message_Id, Message_Id>(id, ++counter));

@@ -55,7 +55,7 @@ struct MapObjectDebugPanel
 
 private:
 	const Widelands::EditorGameBase & m_egbase;
-	Widelands::Object_Ptr         m_object;
+	Widelands::ObjectPointer         m_object;
 
 	UI::Multiline_Textarea        m_log;
 };
@@ -139,7 +139,7 @@ struct MapObjectDebugWindow : public UI::Window {
 
 private:
 	bool                  m_log_general_info;
-	Widelands::Object_Ptr m_object;
+	Widelands::ObjectPointer m_object;
 	uint32_t              m_serial;
 	UI::Tab_Panel         m_tabs;
 };
@@ -371,7 +371,7 @@ void FieldDebugWindow::think()
 		}
 	}
 	{
-		Widelands::Resource_Index ridx = m_coords.field->get_resources();
+		Widelands::ResourceIndex ridx = m_coords.field->get_resources();
 		int ramount = m_coords.field->get_resources_amount();
 		int startingAmount = m_coords.field->get_starting_res_amount();
 		snprintf(buffer,

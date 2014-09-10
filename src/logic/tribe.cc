@@ -101,7 +101,7 @@ TribeDescr::TribeDescr
 #define PARSE_SPECIAL_WORKER_TYPES(name, descr_type)                                               \
 	PARSE_MAP_OBJECT_TYPES_BEGIN(name)                                                              \
 	auto& worker_descr = *new descr_type(_name, _descname, path, prof, global_s, *this);      \
-	Ware_Index const worker_idx = m_workers.add(&worker_descr);                                     \
+	WareIndex const worker_idx = m_workers.add(&worker_descr);                                     \
 	if (worker_descr.is_buildable() && worker_descr.buildcost().empty())                            \
 		m_worker_types_without_cost.push_back(worker_idx);                                           \
 	PARSE_MAP_OBJECT_TYPES_END;
@@ -113,7 +113,7 @@ TribeDescr::TribeDescr
 	PARSE_MAP_OBJECT_TYPES_BEGIN(name)                                                              \
 	auto& worker_descr =                                                                      \
 		*new WorkerDescr(MapObjectType::WORKER, _name, _descname, path, prof, global_s, *this);   \
-	Ware_Index const worker_idx = m_workers.add(&worker_descr);                                     \
+	WareIndex const worker_idx = m_workers.add(&worker_descr);                                     \
 	if (worker_descr.is_buildable() && worker_descr.buildcost().empty())                            \
 		m_worker_types_without_cost.push_back(worker_idx);                                           \
 	PARSE_MAP_OBJECT_TYPES_END;
@@ -198,7 +198,7 @@ TribeDescr::TribeDescr
 				(categories_s, boost::token_finder(boost::is_any_of(";"))); \
 			It1 != boost::split_iterator<string::iterator>(); \
 			++It1) { \
-			vector<Ware_Index> column; \
+			vector<WareIndex> column; \
 			std::string column_s = boost::copy_range<std::string>(*It1); \
 			for (boost::split_iterator<string::iterator> It2 = \
 				boost::make_split_iterator \
@@ -207,7 +207,7 @@ TribeDescr::TribeDescr
 				++It2) { \
 				std::string instance_name = boost::copy_range<std::string>(*It2); \
 				boost::trim(instance_name); \
-				Ware_Index id = safe_##w##_index(instance_name); \
+				WareIndex id = safe_##w##_index(instance_name); \
 				column.push_back(id); \
 				/* it has been added to the column, but the column not */ \
 				/* yet to the array */ \
@@ -219,7 +219,7 @@ TribeDescr::TribeDescr
 \
 		/* Check that every ##w## has been added */ \
 		for \
-			(Ware_Index id = 0; \
+			(WareIndex id = 0; \
 			 id < m_##w##s.get_nitems(); ++id) { \
 			if (id != m_ ## w ## s_order[m_ ## w ## s_order_coords[id].first] \
 					[m_##w##s_order_coords[id].second]) { \
@@ -277,10 +277,10 @@ Load tribe graphics
 */
 void TribeDescr::load_graphics()
 {
-	for (Ware_Index i = 0; i < m_workers.get_nitems(); ++i)
+	for (WareIndex i = 0; i < m_workers.get_nitems(); ++i)
 		m_workers.get(i)->load_graphics();
 
-	for (Ware_Index i = 0; i < m_wares.get_nitems  (); ++i)
+	for (WareIndex i = 0; i < m_wares.get_nitems  (); ++i)
 		m_wares.get(i)->load_graphics();
 
 	for
@@ -446,24 +446,24 @@ uint32_t TribeDescr::get_resource_indicator
 /*
  * Return the given ware or die trying
  */
-Ware_Index TribeDescr::safe_ware_index(const std::string & warename) const {
-	const Ware_Index result = ware_index(warename);
+WareIndex TribeDescr::safe_ware_index(const std::string & warename) const {
+	const WareIndex result = ware_index(warename);
 	if (result == INVALID_INDEX) {
 		throw GameDataError("tribe %s does not define ware type \"%s\"", name().c_str(), warename.c_str());
 	}
 	return result;
 }
 
-Ware_Index TribeDescr::ware_index(const std::string & warename) const {
-	Ware_Index const wi = m_wares.get_index(warename);
+WareIndex TribeDescr::ware_index(const std::string & warename) const {
+	WareIndex const wi = m_wares.get_index(warename);
 	return wi;
 }
 
 /*
  * Return the given worker or die trying
  */
-Ware_Index TribeDescr::safe_worker_index(const std::string& workername) const {
-const Ware_Index result = worker_index(workername);
+WareIndex TribeDescr::safe_worker_index(const std::string& workername) const {
+const WareIndex result = worker_index(workername);
 	if (result == INVALID_INDEX) {
 		throw GameDataError(
 		   "tribe %s does not define worker type \"%s\"", name().c_str(), workername.c_str());
@@ -499,10 +499,10 @@ void TribeDescr::resize_ware_orders(size_t maxLength) {
 		//build new smaller wares_order
 		WaresOrder new_wares_order;
 		for (WaresOrder::iterator it = m_wares_order.begin(); it != m_wares_order.end(); ++it) {
-			new_wares_order.push_back(std::vector<Widelands::Ware_Index>());
-			for (std::vector<Widelands::Ware_Index>::iterator it2 = it->begin(); it2 != it->end(); ++it2) {
+			new_wares_order.push_back(std::vector<Widelands::WareIndex>());
+			for (std::vector<Widelands::WareIndex>::iterator it2 = it->begin(); it2 != it->end(); ++it2) {
 				if (new_wares_order.rbegin()->size() >= maxLength) {
-					new_wares_order.push_back(std::vector<Widelands::Ware_Index>());
+					new_wares_order.push_back(std::vector<Widelands::WareIndex>());
 				}
 				new_wares_order.rbegin()->push_back(*it2);
 				m_wares_order_coords[*it2].first = new_wares_order.size() - 1;

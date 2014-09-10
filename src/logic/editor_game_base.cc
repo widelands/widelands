@@ -702,14 +702,14 @@ void EditorGameBase::do_conquer_area
 	MapRegion<Area<FCoords> > mr(map(), player_area);
 	do {
 		MapIndex const index = mr.location().field - &first_field;
-		Military_Influence const influence =
+		MilitaryInfluence const influence =
 			map().calc_influence
 				(mr.location(), Area<>(player_area, player_area.radius));
 
 		PlayerNumber const owner = mr.location().field->get_owned_by();
 		if (conquer) {
 			//  adds the influence
-			Military_Influence new_influence_modified = conquering_player.military_influence(index) +=
+			MilitaryInfluence new_influence_modified = conquering_player.military_influence(index) +=
 			   influence;
 			if (owner && !conquer_guarded_location_by_superior_influence)
 				new_influence_modified = 1;
@@ -730,11 +730,11 @@ void EditorGameBase::do_conquer_area
 			else {
 				best_player =
 					neutral_when_no_influence ? 0 : player_area.player_number;
-				Military_Influence highest_military_influence = 0;
+				MilitaryInfluence highest_military_influence = 0;
 				PlayerNumber const nr_players = map().get_nrplayers();
 				iterate_players_existing_const(p, nr_players, *this, plr) {
 					if
-						(Military_Influence const value =
+						(MilitaryInfluence const value =
 						 	plr->military_influence(index))
 					{
 						if        (value >  highest_military_influence) {

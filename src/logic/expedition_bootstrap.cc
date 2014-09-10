@@ -67,7 +67,7 @@ void ExpeditionBootstrap::is_ready(Game & game) {
 }
 
 // static
-void ExpeditionBootstrap::ware_callback(Game& game, WaresQueue*, Ware_Index, void* const data)
+void ExpeditionBootstrap::ware_callback(Game& game, WaresQueue*, WareIndex, void* const data)
 {
 	ExpeditionBootstrap* eb = static_cast<ExpeditionBootstrap *>(data);
 	eb->is_ready(game);
@@ -75,7 +75,7 @@ void ExpeditionBootstrap::ware_callback(Game& game, WaresQueue*, Ware_Index, voi
 
 // static
 void ExpeditionBootstrap::worker_callback
-	(Game& game, Request& r, Ware_Index, Worker* worker, PlayerImmovable& pi) {
+	(Game& game, Request& r, WareIndex, Worker* worker, PlayerImmovable& pi) {
 	Warehouse* warehouse = static_cast<Warehouse *>(&pi);
 
 	warehouse->get_portdock()->expedition_bootstrap()->handle_worker_callback(game, r, worker);
@@ -113,7 +113,7 @@ void ExpeditionBootstrap::start() {
 	// Load the buildcosts for the port building + builder
 	Warehouse* const warehouse = portdock_->get_warehouse();
 
-	const std::map<Ware_Index, uint8_t>& buildcost = warehouse->descr().buildcost();
+	const std::map<WareIndex, uint8_t>& buildcost = warehouse->descr().buildcost();
 	size_t const buildcost_size = buildcost.size();
 
 	// Issue request for wares for this expedition.
@@ -121,7 +121,7 @@ void ExpeditionBootstrap::start() {
 	// But this is really a premature optimization and should probably be
 	// handled in the economy code.
 	wares_.resize(buildcost_size);
-	std::map<Ware_Index, uint8_t>::const_iterator it = buildcost.begin();
+	std::map<WareIndex, uint8_t>::const_iterator it = buildcost.begin();
 	for (size_t i = 0; i < buildcost_size; ++i, ++it) {
 		WaresQueue* wq = new WaresQueue(*warehouse, it->first, it->second);
 		wq->set_callback(ware_callback, this);
@@ -174,7 +174,7 @@ void ExpeditionBootstrap::cleanup(EditorGameBase& /* egbase */) {
 	wares_.clear();
 }
 
-WaresQueue& ExpeditionBootstrap::waresqueue(Ware_Index index) const {
+WaresQueue& ExpeditionBootstrap::waresqueue(WareIndex index) const {
 	for (const std::unique_ptr<WaresQueue>& wq : wares_) {
 		if (wq->get_ware() == index) {
 			return *wq.get();
@@ -220,7 +220,7 @@ void ExpeditionBootstrap::get_waiting_workers_and_wares
 	 std::vector<WareInstance*>* return_wares)
 {
 	for (std::unique_ptr<WaresQueue>& wq : wares_) {
-		const Ware_Index ware_index = wq->get_ware();
+		const WareIndex ware_index = wq->get_ware();
 		for (uint32_t j = 0; j < wq->get_filled(); ++j) {
 			WareInstance* temp = new WareInstance(ware_index, tribe.get_ware_descr(ware_index));
 			temp->init(game);

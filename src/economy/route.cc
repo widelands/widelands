@@ -123,7 +123,7 @@ void Route::save
 	fw.Signed32(get_totalcost());
 	fw.Unsigned16(m_route.size());
 	for
-		(std::vector<Object_Ptr>::size_type idx = 0;
+		(std::vector<ObjectPointer>::size_type idx = 0;
 		 idx < m_route.size();
 		 ++idx)
 	{

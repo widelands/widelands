@@ -21,7 +21,7 @@
 #define WL_LOGIC_SOLDIER_H
 
 #include "base/macros.h"
-#include "logic/tattribute.h"
+#include "logic/training_attribute.h"
 #include "logic/worker.h"
 
 #define SOLDIER_HP_BAR_WIDTH 13
@@ -173,7 +173,7 @@ public:
 	void set_attack_level (uint32_t);
 	void set_defense_level(uint32_t);
 	void set_evade_level  (uint32_t);
-	uint32_t get_level (tAttribute) const;
+	uint32_t get_level (TrainingAttribute) const;
 	uint32_t get_hp_level     () const {return m_hp_level;}
 	uint32_t get_attack_level () const {return m_attack_level;}
 	uint32_t get_defense_level() const {return m_defense_level;}
@@ -211,7 +211,7 @@ public:
 		return descr().get_evade_level_pic  (m_evade_level);
 	}
 
-	int32_t get_tattribute(uint32_t attr) const override;
+	int32_t get_training_attribute(uint32_t attr) const override;
 
 	/// Sets a random animation of desired type and start playing it.
 	void start_animation

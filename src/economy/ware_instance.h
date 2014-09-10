@@ -58,7 +58,7 @@ class WareInstance : public MapObject {
 	MO_DESCR(WareDescr)
 
 public:
-	WareInstance(Ware_Index, const WareDescr* const);
+	WareInstance(WareIndex, const WareDescr* const);
 	~WareInstance();
 
 	MapObject* get_location(EditorGameBase& egbase) {
@@ -67,7 +67,7 @@ public:
 	Economy* get_economy() const {
 		return m_economy;
 	}
-	Ware_Index descr_index() const {
+	WareIndex descr_index() const {
 		return m_descr_index;
 	}
 
@@ -95,13 +95,13 @@ public:
 	void log_general_info(const EditorGameBase& egbase) override;
 
 private:
-	Object_Ptr m_location;
+	ObjectPointer m_location;
 	Economy* m_economy;
-	Ware_Index m_descr_index;
+	WareIndex m_descr_index;
 
 	IdleWareSupply* m_supply;
 	Transfer* m_transfer;
-	Object_Ptr m_transfer_nextstep;  ///< cached PlayerImmovable, can be 0
+	ObjectPointer m_transfer_nextstep;  ///< cached PlayerImmovable, can be 0
 
 	// loading and saving stuff
 protected:

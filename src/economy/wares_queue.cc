@@ -38,7 +38,7 @@ namespace Widelands {
 */
 WaresQueue::WaresQueue
 	(PlayerImmovable &       _owner,
-	 Ware_Index        const _ware,
+	 WareIndex        const _ware,
 	 uint8_t           const _max_size)
 	:
 	m_owner           (_owner),
@@ -122,7 +122,7 @@ void WaresQueue::set_callback(callback_t * const fn, void * const data)
 void WaresQueue::request_callback
 	(Game            &       game,
 	 Request         &,
-	 Ware_Index        const ware,
+	 WareIndex        const ware,
 #ifndef NDEBUG
 	 Worker          * const w,
 #else

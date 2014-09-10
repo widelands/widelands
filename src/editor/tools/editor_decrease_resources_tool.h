@@ -48,13 +48,13 @@ struct Editor_Decrease_Resources_Tool : public Editor_Tool {
 
 	int32_t get_change_by() const        {return m_change_by;}
 	void set_change_by(const int32_t n)  {m_change_by = n;}
-	Widelands::Resource_Index get_cur_res() const {return m_cur_res;}
-	void set_cur_res(Widelands::Resource_Index const res) {
+	Widelands::ResourceIndex get_cur_res() const {return m_cur_res;}
+	void set_cur_res(Widelands::ResourceIndex const res) {
 		m_cur_res = res;
 	}
 
 private:
-	Widelands::Resource_Index m_cur_res;
+	Widelands::ResourceIndex m_cur_res;
 	int32_t m_change_by;
 };
 

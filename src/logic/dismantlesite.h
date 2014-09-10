@@ -57,7 +57,7 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(DismantleSiteDescr);
 };
 
-class DismantleSite : public Partially_Finished_Building {
+class DismantleSite : public PartiallyFinishedBuilding {
 	friend class MapBuildingdataPacket;
 
 	static const uint32_t DISMANTLESITE_STEP_TIME = 45000;
@@ -75,7 +75,7 @@ public:
 
 	bool get_building_work(Game &, Worker &, bool success) override;
 
-	static void count_returned_wares(Building* building, std::map<Ware_Index, uint8_t> & res);
+	static void count_returned_wares(Building* building, std::map<WareIndex, uint8_t> & res);
 
 protected:
 	void update_statistics_string(std::string*) override;

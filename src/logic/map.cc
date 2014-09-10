@@ -1847,7 +1847,7 @@ returns the radius of changes (which are always 2)
 ===========
 */
 int32_t Map::change_terrain
-	(const World& world, TCoords<FCoords> const c, Terrain_Index const terrain)
+	(const World& world, TCoords<FCoords> const c, TerrainIndex const terrain)
 {
 	c.field->set_terrain(c.t, terrain);
 
@@ -1993,12 +1993,12 @@ void Map::check_neighbour_heights(FCoords coords, uint32_t & area)
 
 
 #define MAX_RADIUS 32
-Military_Influence Map::calc_influence
+MilitaryInfluence Map::calc_influence
 	(Coords const a, Area<> const area) const
 {
 	const XCoordinate w = get_width();
 	const YCoordinate h = get_height();
-	Military_Influence influence =
+	MilitaryInfluence influence =
 		std::max
 			(std::min
 			 	(std::min(abs(a.x - area.x), abs(a.x - area.x + w)),

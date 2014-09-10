@@ -140,7 +140,7 @@ void MapBuildingPacket::Write
 			fw.Unsigned8(building->owner().player_number());
 			fw.Unsigned32(mos.register_object(*building));
 
-			upcast(Partially_Finished_Building const, pfb, building);
+			upcast(PartiallyFinishedBuilding const, pfb, building);
 			fw.CString
 				((pfb ? *pfb->m_building : building->descr())
 				 .name().c_str());
@@ -170,8 +170,8 @@ void MapBuildingPacket::write_priorities
 	// Used to be base_priority which is no longer used. Remove after b20.
 	fw.Unsigned32(0);
 
-	std::map<int32_t, std::map<Ware_Index, int32_t> > type_to_priorities;
-	std::map<int32_t, std::map<Ware_Index, int32_t> >::iterator it;
+	std::map<int32_t, std::map<WareIndex, int32_t> > type_to_priorities;
+	std::map<int32_t, std::map<WareIndex, int32_t> >::iterator it;
 
 	const TribeDescr & tribe = building.descr().tribe();
 	building.collect_priorities(type_to_priorities);
@@ -185,11 +185,11 @@ void MapBuildingPacket::write_priorities
 		fw.Unsigned8(ware_type);
 		fw.Unsigned8(it->second.size());
 
-		std::map<Ware_Index, int32_t>::iterator it2;
+		std::map<WareIndex, int32_t>::iterator it2;
 		for (it2 = it->second.begin(); it2 != it->second.end(); ++it2)
 		{
 			std::string name;
-			Ware_Index const ware_index = it2->first;
+			WareIndex const ware_index = it2->first;
 			if (wwWARE == ware_type)
 				name = tribe.get_ware_descr(ware_index)->name();
 			else if (wwWORKER == ware_type)
@@ -220,7 +220,7 @@ void MapBuildingPacket::read_priorities
 		// read count of priorities assigned for this ware type
 		const uint8_t count = fr.Unsigned8();
 		for (uint8_t i = 0; i < count; ++i) {
-			Ware_Index idx;
+			WareIndex idx;
 			if (wwWARE == ware_type)
 				idx = tribe.safe_ware_index(fr.CString());
 			else if (wwWORKER == ware_type)

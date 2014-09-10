@@ -45,15 +45,15 @@ Economy::Economy(Player & player) :
 	m_request_timerid(0)
 {
 	const TribeDescr & tribe = player.tribe();
-	Ware_Index const nr_wares   = tribe.get_nrwares();
-	Ware_Index const nr_workers = tribe.get_nrworkers();
+	WareIndex const nr_wares   = tribe.get_nrwares();
+	WareIndex const nr_workers = tribe.get_nrworkers();
 	m_wares.set_nrwares(nr_wares);
 	m_workers.set_nrwares(nr_workers);
 
 	player.add_economy(*this);
 
 	m_ware_target_quantities   = new Target_Quantity[nr_wares];
-	for (Ware_Index i = 0; i < nr_wares; ++i) {
+	for (WareIndex i = 0; i < nr_wares; ++i) {
 		Target_Quantity tq;
 		tq.permanent =
 			tribe.get_ware_descr(i)->default_target_quantity();
@@ -61,7 +61,7 @@ Economy::Economy(Player & player) :
 		m_ware_target_quantities[i] = tq;
 	}
 	m_worker_target_quantities = new Target_Quantity[nr_workers];
-	for (Ware_Index i = 0; i < nr_workers; ++i) {
+	for (WareIndex i = 0; i < nr_workers; ++i) {
 		Target_Quantity tq;
 		tq.permanent =
 			tribe.get_worker_descr(i)->default_target_quantity();
@@ -320,14 +320,14 @@ void Economy::_reset_all_pathfinding_cycles()
 }
 
 /**
- * Set the target quantities for the given Ware_Index to the
+ * Set the target quantities for the given WareIndex to the
  * numbers given in permanent. Also update the last
  * modification time.
  *
  * This is called from Cmd_ResetTargetQuantity and Cmd_SetTargetQuantity
  */
 void Economy::set_ware_target_quantity
-	(Ware_Index const ware_type,
+	(WareIndex const ware_type,
 	 uint32_t   const permanent,
 	 Time       const mod_time)
 {
@@ -338,7 +338,7 @@ void Economy::set_ware_target_quantity
 
 
 void Economy::set_worker_target_quantity
-	(Ware_Index const ware_type,
+	(WareIndex const ware_type,
 	 uint32_t   const permanent,
 	 Time       const mod_time)
 {
@@ -354,7 +354,7 @@ void Economy::set_worker_target_quantity
  * This is also called when a ware is added to the economy through trade or
  * a merger.
 */
-void Economy::add_wares(Ware_Index const id, uint32_t const count)
+void Economy::add_wares(WareIndex const id, uint32_t const count)
 {
 	//log("%p: add(%i, %i)\n", this, id, count);
 
@@ -363,7 +363,7 @@ void Economy::add_wares(Ware_Index const id, uint32_t const count)
 
 	// TODO(unknown): add to global player inventory?
 }
-void Economy::add_workers(Ware_Index const id, uint32_t const count)
+void Economy::add_workers(WareIndex const id, uint32_t const count)
 {
 	//log("%p: add(%i, %i)\n", this, id, count);
 
@@ -379,7 +379,7 @@ void Economy::add_workers(Ware_Index const id, uint32_t const count)
  * This is also called when a ware is removed from the economy through trade or
  * a split of the Economy.
 */
-void Economy::remove_wares(Ware_Index const id, uint32_t const count)
+void Economy::remove_wares(WareIndex const id, uint32_t const count)
 {
 	assert(id < m_owner.tribe().get_nrwares());
 	//log("%p: remove(%i, %i) from %i\n", this, id, count, m_wares.stock(id));
@@ -394,7 +394,7 @@ void Economy::remove_wares(Ware_Index const id, uint32_t const count)
  * This is also called when a worker is removed from the economy through
  * a split of the Economy.
  */
-void Economy::remove_workers(Ware_Index const id, uint32_t const count)
+void Economy::remove_workers(WareIndex const id, uint32_t const count)
 {
 	//log("%p: remove(%i, %i) from %i\n", this, id, count, m_workers.stock(id));
 
@@ -499,7 +499,7 @@ void Economy::remove_supply(Supply & supply)
 }
 
 
-bool Economy::needs_ware(Ware_Index const ware_type) const {
+bool Economy::needs_ware(WareIndex const ware_type) const {
 	uint32_t const t = ware_target_quantity(ware_type).permanent;
 	uint32_t quantity = 0;
 	for (const Warehouse * wh : m_warehouses) {
@@ -511,7 +511,7 @@ bool Economy::needs_ware(Ware_Index const ware_type) const {
 }
 
 
-bool Economy::needs_worker(Ware_Index const worker_type) const {
+bool Economy::needs_worker(WareIndex const worker_type) const {
 	uint32_t const t = worker_target_quantity(worker_type).permanent;
 	uint32_t quantity = 0;
 	for (const Warehouse * wh : m_warehouses) {
@@ -531,14 +531,14 @@ bool Economy::needs_worker(Ware_Index const worker_type) const {
 */
 void Economy::_merge(Economy & e)
 {
-	for (Ware_Index i = m_owner.tribe().get_nrwares(); i;) {
+	for (WareIndex i = m_owner.tribe().get_nrwares(); i;) {
 		--i;
 		Target_Quantity other_tq = e.m_ware_target_quantities[i];
 		Target_Quantity & this_tq = m_ware_target_quantities[i];
 		if (this_tq.last_modified < other_tq.last_modified)
 			this_tq = other_tq;
 	}
-	for (Ware_Index i = m_owner.tribe().get_nrworkers(); i;) {
+	for (WareIndex i = m_owner.tribe().get_nrworkers(); i;) {
 		--i;
 		Target_Quantity other_tq = e.m_worker_target_quantities[i];
 		Target_Quantity & this_tq = m_worker_target_quantities[i];
@@ -584,11 +584,11 @@ void Economy::_split(const std::set<OPtr<Flag> > & flags)
 
 	Economy & e = *new Economy(m_owner);
 
-	for (Ware_Index i = m_owner.tribe().get_nrwares  (); i;) {
+	for (WareIndex i = m_owner.tribe().get_nrwares  (); i;) {
 		--i;
 		e.m_ware_target_quantities[i] = m_ware_target_quantities[i];
 	}
-	for (Ware_Index i = m_owner.tribe().get_nrworkers(); i;) {
+	for (WareIndex i = m_owner.tribe().get_nrworkers(); i;) {
 		--i;
 		e.m_worker_target_quantities[i] = m_worker_target_quantities[i];
 	}
@@ -807,7 +807,7 @@ std::unique_ptr<Soldier> Economy::m_soldier_prototype = nullptr; // minimal inva
  * Check whether there is a supply for the given request. If the request is a
  * worker request without supply, attempt to create a new worker in a warehouse.
  */
-void Economy::_create_requested_worker(Game & game, Ware_Index index)
+void Economy::_create_requested_worker(Game & game, WareIndex index)
 {
 	unsigned demand = 0;
 
@@ -937,7 +937,7 @@ void Economy::_create_requested_workers(Game & game)
 
 	const TribeDescr & tribe = owner().tribe();
 	for
-		(Ware_Index index = 0;
+		(WareIndex index = 0;
 		 index < tribe.get_nrworkers(); ++index)
 	{
 		if (!owner().is_worker_type_allowed(index))
@@ -954,7 +954,7 @@ void Economy::_create_requested_workers(Game & game)
  */
 static bool accept_warehouse_if_policy
 	(Warehouse & wh, WareWorker type,
-	 Ware_Index ware, Warehouse::StockPolicy policy)
+	 WareIndex ware, Warehouse::StockPolicy policy)
 {
 	return wh.get_stock_policy(type, ware) == policy;
 }
@@ -977,7 +977,7 @@ void Economy::_handle_active_supplies(Game & game)
 			continue;
 
 		WareWorker type;
-		Ware_Index ware;
+		WareIndex ware;
 		supply.get_ware_type(type, ware);
 
 		bool haveprefer = false;

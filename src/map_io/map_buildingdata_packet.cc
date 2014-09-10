@@ -296,7 +296,7 @@ void MapBuildingdataPacket::read_formerbuildings_v2
 
 
 void MapBuildingdataPacket::read_partially_finished_building
-	(Partially_Finished_Building  & pfb,
+	(PartiallyFinishedBuilding  & pfb,
 	 FileRead              & fr,
 	 Game                  & game,
 	 MapObjectLoader & mol)
@@ -314,7 +314,7 @@ void MapBuildingdataPacket::read_partially_finished_building
 					new Request
 					(pfb,
 					 0,
-					 Partially_Finished_Building::request_builder_callback,
+					 PartiallyFinishedBuilding::request_builder_callback,
 					 wwWORKER);
 				pfb.m_builder_request->Read(fr, game, mol);
 			} else
@@ -489,8 +489,8 @@ void MapBuildingdataPacket::read_warehouse
 			(1 <= packet_version &&
 			 packet_version <= CURRENT_WAREHOUSE_PACKET_VERSION)
 		{
-			Ware_Index const nr_wares   = warehouse.descr().tribe().get_nrwares();
-			Ware_Index const nr_tribe_workers = warehouse.descr().tribe().get_nrworkers();
+			WareIndex const nr_wares   = warehouse.descr().tribe().get_nrwares();
+			WareIndex const nr_tribe_workers = warehouse.descr().tribe().get_nrworkers();
 			warehouse.m_supply->set_nrwares  (nr_wares);
 			warehouse.m_supply->set_nrworkers(nr_tribe_workers);
 			warehouse.m_ware_policy.resize(nr_wares, Warehouse::SP_Normal);
@@ -500,7 +500,7 @@ void MapBuildingdataPacket::read_warehouse
 			//  supply
 			const TribeDescr & tribe = warehouse.descr().tribe();
 			while (fr.Unsigned8()) {
-				Ware_Index const id = tribe.ware_index(fr.CString());
+				WareIndex const id = tribe.ware_index(fr.CString());
 				if (packet_version >= 5) {
 					uint32_t amount = fr.Unsigned32();
 					Warehouse::StockPolicy policy =
@@ -518,7 +518,7 @@ void MapBuildingdataPacket::read_warehouse
 				}
 			}
 			while (fr.Unsigned8()) {
-				Ware_Index const id = tribe.worker_index(fr.CString());
+				WareIndex const id = tribe.worker_index(fr.CString());
 				if (packet_version >= 5) {
 					uint32_t amount = fr.Unsigned32();
 					Warehouse::StockPolicy policy =
@@ -565,7 +565,7 @@ void MapBuildingdataPacket::read_warehouse
 									("expected %s but found \"%s\"",
 									 worker.descr().name().c_str(), name);
 						}
-						Ware_Index worker_index = tribe.worker_index(worker.descr().name().c_str());
+						WareIndex worker_index = tribe.worker_index(worker.descr().name().c_str());
 						if (!warehouse.m_incorporated_workers.count(worker_index))
 							warehouse.m_incorporated_workers[worker_index] = std::vector<Worker *>();
 						warehouse.m_incorporated_workers[worker_index].push_back(&worker);
@@ -577,12 +577,12 @@ void MapBuildingdataPacket::read_warehouse
 				}
 			}
 
-			const std::vector<Ware_Index> & worker_types_without_cost =
+			const std::vector<WareIndex> & worker_types_without_cost =
 				tribe.worker_types_without_cost();
 
 			if (1 == packet_version) { //  a single next_spawn time for "carrier"
 				uint32_t const next_spawn = fr.Unsigned32();
-				Ware_Index const worker_index =
+				WareIndex const worker_index =
 					tribe.safe_worker_index("carrier");
 				if (worker_index == INVALID_INDEX) {
 					log
@@ -628,7 +628,7 @@ void MapBuildingdataPacket::read_warehouse
 					if (!*worker_typename) //  encountered the terminator ("")
 						break;
 					uint32_t     const next_spawn      = fr.Unsigned32();
-					Ware_Index   const worker_index    =
+					WareIndex   const worker_index    =
 						tribe.safe_worker_index(worker_typename);
 					if (worker_index == INVALID_INDEX) {
 						log
@@ -877,7 +877,7 @@ void MapBuildingdataPacket::read_productionsite
 						 ProductionSite::request_worker_callback,
 						 wwWORKER);
 				req.Read(fr, game, mol);
-				Ware_Index const worker_index = req.get_index();
+				WareIndex const worker_index = req.get_index();
 
 				//  Find a working position that matches this request.
 				ProductionSite::Working_Position * wp = &wp_begin;
@@ -1061,7 +1061,7 @@ void MapBuildingdataPacket::read_trainingsite
 
 			uint8_t const nr_upgrades = fr.Unsigned8();
 			for (uint8_t i = 0; i < nr_upgrades; ++i) {
-				tAttribute attribute = static_cast<tAttribute>(fr.Unsigned8());
+				TrainingAttribute attribute = static_cast<TrainingAttribute>(fr.Unsigned8());
 				if
 					(TrainingSite::Upgrade * const upgrade =
 					 	trainingsite.get_upgrade(attribute))
@@ -1240,7 +1240,7 @@ void MapBuildingdataPacket::Write
 }
 
 void MapBuildingdataPacket::write_partially_finished_building
-	(const Partially_Finished_Building & pfb,
+	(const PartiallyFinishedBuilding & pfb,
 	 FileWrite              & fw,
 	 Game                   & game,
 	 MapObjectSaver   & mos)
@@ -1315,7 +1315,7 @@ void MapBuildingdataPacket::write_warehouse
 	//  supply
 	const TribeDescr & tribe = warehouse.descr().tribe();
 	const WareList & wares = warehouse.m_supply->get_wares();
-	for (Ware_Index i = 0; i < wares.get_nrwareids  (); ++i) {
+	for (WareIndex i = 0; i < wares.get_nrwareids  (); ++i) {
 		fw.Unsigned8(1);
 		fw.String(tribe.get_ware_descr(i)->name());
 		fw.Unsigned32(wares.stock(i));
@@ -1323,7 +1323,7 @@ void MapBuildingdataPacket::write_warehouse
 	}
 	fw.Unsigned8(0);
 	const WareList & workers = warehouse.m_supply->get_workers();
-	for (Ware_Index i = 0; i < workers.get_nrwareids(); ++i) {
+	for (WareIndex i = 0; i < workers.get_nrwareids(); ++i) {
 		fw.Unsigned8(1);
 		fw.String(tribe.get_worker_descr(i)->name());
 		fw.Unsigned32(workers.stock(i));
@@ -1333,14 +1333,14 @@ void MapBuildingdataPacket::write_warehouse
 
 	//  Incorporated workers, write sorted after file-serial.
 	uint32_t nworkers = 0;
-	for (const std::pair<Ware_Index, Warehouse::WorkerList>& cwt: warehouse.m_incorporated_workers) {
+	for (const std::pair<WareIndex, Warehouse::WorkerList>& cwt: warehouse.m_incorporated_workers) {
 		nworkers += cwt.second.size();
 	}
 
 	fw.Unsigned16(nworkers);
 	typedef std::map<uint32_t, const Worker *> TWorkerMap;
 	TWorkerMap workermap;
-	for (const std::pair<Ware_Index, Warehouse::WorkerList>& cwt : warehouse.m_incorporated_workers) {
+	for (const std::pair<WareIndex, Warehouse::WorkerList>& cwt : warehouse.m_incorporated_workers) {
 		for (Worker * temp_worker : cwt.second) {
 			const Worker & w = *temp_worker;
 			assert(mos.is_object_known(w));
@@ -1357,7 +1357,7 @@ void MapBuildingdataPacket::write_warehouse
 	}
 
 	{
-		const std::vector<Ware_Index> & worker_types_without_cost =
+		const std::vector<WareIndex> & worker_types_without_cost =
 			tribe.worker_types_without_cost();
 		for (uint8_t i = worker_types_without_cost.size(); i;) {
 			uint32_t const next_spawn =

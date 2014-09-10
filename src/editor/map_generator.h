@@ -43,7 +43,7 @@ class EditorGameBase;
  */
 struct UniqueRandomMapInfo {
 
-	enum Resource_Amount
+	enum ResourceAmount
 	{
 		raLow    = 0,
 		raMedium = 1,
@@ -53,7 +53,7 @@ struct UniqueRandomMapInfo {
 	uint32_t mapNumber;
 	uint32_t w;
 	uint32_t h;
-	Resource_Amount resource_amount;
+	ResourceAmount resource_amount;
 	std::string world_name;
 
 	double        waterRatio;     //  How much of the map is water?
@@ -104,7 +104,7 @@ private:
 	static uint32_t * generate_random_value_map
 		(uint32_t w, uint32_t h, RNG & rng);
 
-	Terrain_Index figure_out_terrain
+	TerrainIndex figure_out_terrain
 		(uint32_t                  * const random2,
 		 uint32_t                  * const random3,
 		 uint32_t                  * const random4,

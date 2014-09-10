@@ -360,7 +360,7 @@ public:
 	uint32_t set_height(const World& world, Area<FCoords>, HeightInterval height_interval);
 
 	//  change terrain of a triangle, recalculate buildcaps
-	int32_t change_terrain(const World& world, TCoords<FCoords>, Terrain_Index);
+	int32_t change_terrain(const World& world, TCoords<FCoords>, TerrainIndex);
 
 	// The objectives that are defined in this map if it is a scenario.
 	const Objectives& objectives() const {
@@ -371,7 +371,7 @@ public:
 	}
 
 	/// Returns the military influence on a location from an area.
-	Military_Influence calc_influence(Coords, Area<>) const;
+	MilitaryInfluence calc_influence(Coords, Area<>) const;
 
 	/// Translate the whole map so that the given point becomes the new origin.
 	void set_origin(Coords);

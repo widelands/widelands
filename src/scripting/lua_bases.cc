@@ -193,7 +193,7 @@ int L_EditorGameBase::get_ware_description(lua_State* L) {
 	if (!tribe_description) {
 		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
 	}
-	Ware_Index ware_index = tribe_description->ware_index(ware_name);
+	WareIndex ware_index = tribe_description->ware_index(ware_name);
 	if (ware_index == INVALID_INDEX) {
 		report_error(L, "Ware %s does not exist", ware_name.c_str());
 	}
@@ -222,7 +222,7 @@ int L_EditorGameBase::get_worker_description(lua_State* L) {
 	if (!tribe_description) {
 		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
 	}
-	const Ware_Index worker_index = tribe_description->worker_index(worker_name);
+	const WareIndex worker_index = tribe_description->worker_index(worker_name);
 	if (worker_index == INVALID_INDEX) {
 		report_error(L, "Worker %s does not exist", worker_name.c_str());
 	}
@@ -590,7 +590,7 @@ int L_PlayerBase::get_workers(lua_State * L) {
 	Player& player = get(L, get_egbase(L));
 	const std::string workername = luaL_checkstring(L, -1);
 
-	const Ware_Index worker = player.tribe().worker_index(workername);
+	const WareIndex worker = player.tribe().worker_index(workername);
 
 	uint32_t nworkers = 0;
 	for (uint32_t i = 0; i < player.get_nr_economies(); ++i) {
@@ -615,7 +615,7 @@ int L_PlayerBase::get_wares(lua_State * L) {
 	Player& player = get(L, get_egbase(L));
 	const std::string warename = luaL_checkstring(L, -1);
 
-	const Ware_Index ware = player.tribe().ware_index(warename);
+	const WareIndex ware = player.tribe().ware_index(warename);
 
 	uint32_t nwares = 0;
 	for (uint32_t i = 0; i < player.get_nr_economies(); ++i) {

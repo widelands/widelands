@@ -569,7 +569,7 @@ void Main_Menu_New_Random_Map::set_map_info
 	mapInfo.islandMode = m_island_mode->get_state();
 	mapInfo.numPlayers = m_pn;
 	mapInfo.resource_amount = static_cast
-		<Widelands::UniqueRandomMapInfo::Resource_Amount>
+		<Widelands::UniqueRandomMapInfo::ResourceAmount>
 			(m_res_amount);
 	mapInfo.world_name = m_world_descriptions[m_current_world].name;
 }

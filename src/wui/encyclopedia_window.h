@@ -38,12 +38,12 @@ struct EncyclopediaWindow : public UI::UniqueWindow {
 	EncyclopediaWindow(Interactive_Player &, UI::UniqueWindow::Registry &);
 private:
 	struct Ware {
-		Ware(Widelands::Ware_Index i, const Widelands::WareDescr * descr)
+		Ware(Widelands::WareIndex i, const Widelands::WareDescr * descr)
 			:
 			m_i(i),
 			m_descr(descr)
 			{}
-		Widelands::Ware_Index m_i;
+		Widelands::WareIndex m_i;
 		const Widelands::WareDescr * m_descr;
 
 		bool operator<(const Ware o) const {
@@ -52,7 +52,7 @@ private:
 	};
 
 	Interactive_Player & iaplayer() const;
-	UI::Listselect<Widelands::Ware_Index> wares;
+	UI::Listselect<Widelands::WareIndex> wares;
 	UI::Listselect<Widelands::BuildingIndex> prodSites;
 	UI::Table     <uintptr_t>                 condTable;
 	UI::Multiline_Textarea    descrTxt;

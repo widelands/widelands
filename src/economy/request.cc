@@ -50,7 +50,7 @@ Request IMPLEMENTATION
 
 Request::Request
 	(PlayerImmovable & _target,
-	 Ware_Index const index,
+	 WareIndex const index,
 	 callback_t const cbfn,
 	 WareWorker const w)
 	:
@@ -113,12 +113,12 @@ void Request::Read
 		if (version == 6) {
 			const TribeDescr& tribe = m_target.owner().tribe();
 			char const* const type_name = fr.CString();
-			Ware_Index const wai = tribe.ware_index(type_name);
+			WareIndex const wai = tribe.ware_index(type_name);
 			if (wai != INVALID_INDEX) {
 				m_type = wwWARE;
 				m_index = wai;
 			} else {
-				Ware_Index const woi = tribe.worker_index(type_name);
+				WareIndex const woi = tribe.worker_index(type_name);
 				if (woi != INVALID_INDEX) {
 					m_type = wwWORKER;
 					m_index = woi;

@@ -563,7 +563,7 @@ std::string Building::info_string(const std::string & format) {
 }
 
 
-WaresQueue & Building::waresqueue(Ware_Index const wi) {
+WaresQueue & Building::waresqueue(WareIndex const wi) {
 	throw wexception("%s (%u) has no WaresQueue for %u", descr().name().c_str(), serial(), wi);
 }
 
@@ -750,13 +750,13 @@ void Building::draw_help
 }
 
 int32_t Building::get_priority
-	(WareWorker type, Ware_Index const ware_index, bool adjust) const
+	(WareWorker type, WareIndex const ware_index, bool adjust) const
 {
 	int32_t priority = DEFAULT_PRIORITY;
 	if (type == wwWARE) {
 		// if priority is defined for specific ware,
 		// combine base priority and ware priority
-		std::map<Ware_Index, int32_t>::const_iterator it =
+		std::map<WareIndex, int32_t>::const_iterator it =
 			m_ware_priorities.find(ware_index);
 		if (it != m_ware_priorities.end())
 			priority = adjust
@@ -772,12 +772,12 @@ int32_t Building::get_priority
 * priorities are identified by ware type and index
  */
 void Building::collect_priorities
-	(std::map<int32_t, std::map<Ware_Index, int32_t> > & p) const
+	(std::map<int32_t, std::map<WareIndex, int32_t> > & p) const
 {
 	if (m_ware_priorities.empty())
 		return;
-	std::map<Ware_Index, int32_t> & ware_priorities = p[wwWARE];
-	std::map<Ware_Index, int32_t>::const_iterator it;
+	std::map<WareIndex, int32_t> & ware_priorities = p[wwWARE];
+	std::map<WareIndex, int32_t>::const_iterator it;
 	for (it = m_ware_priorities.begin(); it != m_ware_priorities.end(); ++it) {
 		if (it->second == DEFAULT_PRIORITY)
 			continue;
@@ -790,7 +790,7 @@ void Building::collect_priorities
  */
 void Building::set_priority
 	(int32_t    const type,
-	 Ware_Index const ware_index,
+	 WareIndex const ware_index,
 	 int32_t    const new_priority)
 {
 	if (type == wwWARE) {

@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_LOGIC_TATTRIBUTE_H
-#define WL_LOGIC_TATTRIBUTE_H
+#ifndef WL_LOGIC_TRAINING_ATTRIBUTE_H
+#define WL_LOGIC_TRAINING_ATTRIBUTE_H
 
 namespace Widelands {
 
@@ -26,7 +26,7 @@ namespace Widelands {
  * Indices for specific, individual attributes that \ref MapObject instances
  * may have. Used in conjunction with \ref Requirements.
  */
-enum tAttribute {
+enum TrainingAttribute {
 	atrHP = 0,
 	atrAttack,
 	atrDefense,
@@ -36,4 +36,4 @@ enum tAttribute {
 
 }
 
-#endif  // end of include guard: WL_LOGIC_TATTRIBUTE_H
+#endif  // end of include guard: WL_LOGIC_TRAINING_ATTRIBUTE_H

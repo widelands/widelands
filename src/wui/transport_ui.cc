@@ -37,7 +37,7 @@ using Widelands::Economy;
 using Widelands::EditorGameBase;
 using Widelands::Game;
 using Widelands::WareDescr;
-using Widelands::Ware_Index;
+using Widelands::WareIndex;
 using Widelands::WorkerDescr;
 
 
@@ -87,15 +87,15 @@ private:
 			 m_economy(economy)
 		{
 			if (type == Widelands::wwWORKER) {
-				Ware_Index nr_wares = m_economy.owner().tribe().get_nrworkers();
-				for (Ware_Index i = 0; i < nr_wares; ++i) {
+				WareIndex nr_wares = m_economy.owner().tribe().get_nrworkers();
+				for (WareIndex i = 0; i < nr_wares; ++i) {
 					if (!m_economy.owner().tribe().get_worker_descr(i)->has_demand_check()) {
 						hide_ware(i);
 					}
 				}
 			} else {
-				Ware_Index nr_wares = m_economy.owner().tribe().get_nrwares();
-				for (Ware_Index i = 0; i < nr_wares; ++i) {
+				WareIndex nr_wares = m_economy.owner().tribe().get_nrwares();
+				for (WareIndex i = 0; i < nr_wares; ++i) {
 					if (!m_economy.owner().tribe().get_ware_descr(i)->has_demand_check()) {
 						hide_ware(i);
 					}
@@ -103,7 +103,7 @@ private:
 			}
 		}
 	protected:
-		std::string info_for_ware(Widelands::Ware_Index const ware) override {
+		std::string info_for_ware(Widelands::WareIndex const ware) override {
 			return
 				boost::lexical_cast<std::string>
 				(get_type() == Widelands::wwWORKER ?
@@ -153,10 +153,10 @@ private:
 		}
 
 		void decrease_target() {
-			Widelands::Ware_Index nritems = m_economy.owner().tribe().get_nrwares();
+			Widelands::WareIndex nritems = m_economy.owner().tribe().get_nrwares();
 
 			for
-				(Widelands::Ware_Index id = 0;
+				(Widelands::WareIndex id = 0;
 				 id < nritems; ++id)
 			{
 				if (m_display.ware_selected(id)) {
@@ -176,10 +176,10 @@ private:
 		}
 
 		void increase_target() {
-			Widelands::Ware_Index nritems = m_economy.owner().tribe().get_nrwares();
+			Widelands::WareIndex nritems = m_economy.owner().tribe().get_nrwares();
 
 			for
-				(Widelands::Ware_Index id = 0;
+				(Widelands::WareIndex id = 0;
 				 id < nritems; ++id)
 			{
 				if (m_display.ware_selected(id)) {
@@ -197,10 +197,10 @@ private:
 		}
 
 		void reset_target() {
-			Widelands::Ware_Index nritems = m_economy.owner().tribe().get_nrwares();
+			Widelands::WareIndex nritems = m_economy.owner().tribe().get_nrwares();
 
 			for
-				(Widelands::Ware_Index id = 0;
+				(Widelands::WareIndex id = 0;
 				 id < nritems; ++id)
 			{
 				if (m_display.ware_selected(id)) {
@@ -250,10 +250,10 @@ private:
 
 
 		void decrease_target() {
-			Widelands::Ware_Index nritems = m_economy.owner().tribe().get_nrworkers();
+			Widelands::WareIndex nritems = m_economy.owner().tribe().get_nrworkers();
 
 			for
-				(Widelands::Ware_Index id = 0;
+				(Widelands::WareIndex id = 0;
 				 id < nritems; ++id)
 			{
 				if (m_display.ware_selected(id)) {
@@ -273,10 +273,10 @@ private:
 		}
 
 		void increase_target() {
-			Widelands::Ware_Index nritems = m_economy.owner().tribe().get_nrworkers();
+			Widelands::WareIndex nritems = m_economy.owner().tribe().get_nrworkers();
 
 			for
-				(Widelands::Ware_Index id = 0;
+				(Widelands::WareIndex id = 0;
 				 id < nritems; ++id)
 			{
 				if (m_display.ware_selected(id)) {
@@ -294,9 +294,9 @@ private:
 		}
 
 		void reset_target() {
-			Widelands::Ware_Index nritems = m_economy.owner().tribe().get_nrworkers();
+			Widelands::WareIndex nritems = m_economy.owner().tribe().get_nrworkers();
 			for
-				(Widelands::Ware_Index id = 0;
+				(Widelands::WareIndex id = 0;
 				 id < nritems; ++id)
 			{
 				if (m_display.ware_selected(id)) {

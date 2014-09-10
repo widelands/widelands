@@ -31,7 +31,7 @@ void Buildcost::parse(const TribeDescr & tribe, Section & buildcost_s)
 {
 	while (Section::Value const * const val = buildcost_s.get_next_val())
 		try {
-			Ware_Index const idx = tribe.ware_index(val->get_name());
+			WareIndex const idx = tribe.ware_index(val->get_name());
 			if (idx != INVALID_INDEX) {
 				if (count(idx))
 					throw wexception
@@ -40,7 +40,7 @@ void Buildcost::parse(const TribeDescr & tribe, Section & buildcost_s)
 				int32_t const value = val->get_int();
 				if (value < 1 || 255 < value)
 					throw wexception("count is out of range 1 .. 255");
-				insert(std::pair<Ware_Index, uint8_t>(idx, value));
+				insert(std::pair<WareIndex, uint8_t>(idx, value));
 			} else
 				throw wexception
 					("tribe does not define a ware type with this name");
@@ -78,7 +78,7 @@ void Buildcost::load(FileRead& fr, const Widelands::TribeDescr& tribe) {
 		if (name.empty())
 			break;
 
-		Ware_Index index = tribe.ware_index(name);
+		WareIndex index = tribe.ware_index(name);
 		if (index == INVALID_INDEX) {
 			log("buildcost: tribe %s does not define ware %s", tribe.name().c_str(), name.c_str());
 			fr.Unsigned8();

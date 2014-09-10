@@ -120,14 +120,14 @@ public:
 	// (i.e. an Expedition ship).
 	Flag* get_arbitrary_flag();
 
-	void set_ware_target_quantity  (Ware_Index, uint32_t, Time);
-	void set_worker_target_quantity(Ware_Index, uint32_t, Time);
+	void set_ware_target_quantity  (WareIndex, uint32_t, Time);
+	void set_worker_target_quantity(WareIndex, uint32_t, Time);
 
-	void    add_wares  (Ware_Index, uint32_t count = 1);
-	void remove_wares  (Ware_Index, uint32_t count = 1);
+	void    add_wares  (WareIndex, uint32_t count = 1);
+	void remove_wares  (WareIndex, uint32_t count = 1);
 
-	void    add_workers(Ware_Index, uint32_t count = 1);
-	void remove_workers(Ware_Index, uint32_t count = 1);
+	void    add_workers(WareIndex, uint32_t count = 1);
+	void remove_workers(WareIndex, uint32_t count = 1);
 
 	void    add_warehouse(Warehouse &);
 	void remove_warehouse(Warehouse &);
@@ -140,33 +140,33 @@ public:
 	void remove_supply(Supply &);
 
 	/// information about this economy
-	WareList::count_type stock_ware  (Ware_Index const i) {
+	WareList::count_type stock_ware  (WareIndex const i) {
 		return m_wares  .stock(i);
 	}
-	WareList::count_type stock_worker(Ware_Index const i) {
+	WareList::count_type stock_worker(WareIndex const i) {
 		return m_workers.stock(i);
 	}
 
 	/// Whether the economy needs more of this ware type.
 	/// Productionsites may ask this before they produce, to avoid depleting a
 	/// ware type by overproducing another from it.
-	bool needs_ware(Ware_Index) const;
+	bool needs_ware(WareIndex) const;
 
 	/// Whether the economy needs more of this worker type.
 	/// Productionsites may ask this before they produce, to avoid depleting a
 	/// ware type by overproducing a worker type from it.
-	bool needs_worker(Ware_Index) const;
+	bool needs_worker(WareIndex) const;
 
-	const Target_Quantity & ware_target_quantity  (Ware_Index const i) const {
+	const Target_Quantity & ware_target_quantity  (WareIndex const i) const {
 		return m_ware_target_quantities[i];
 	}
-	Target_Quantity       & ware_target_quantity  (Ware_Index const i)       {
+	Target_Quantity       & ware_target_quantity  (WareIndex const i)       {
 		return m_ware_target_quantities[i];
 	}
-	const Target_Quantity & worker_target_quantity(Ware_Index const i) const {
+	const Target_Quantity & worker_target_quantity(WareIndex const i) const {
 		return m_worker_target_quantities[i];
 	}
-	Target_Quantity       & worker_target_quantity(Ware_Index const i)       {
+	Target_Quantity       & worker_target_quantity(WareIndex const i)       {
 		return m_worker_target_quantities[i];
 	}
 
@@ -201,7 +201,7 @@ private:
 	void _balance_requestsupply(Game &);
 	void _handle_active_supplies(Game &);
 	void _create_requested_workers(Game &);
-	void _create_requested_worker(Game &, Ware_Index);
+	void _create_requested_worker(Game &, WareIndex);
 
 	bool   _has_request(Request &);
 

@@ -429,7 +429,7 @@ struct CmdSetWarePriority : public PlayerCommand {
 	CmdSetWarePriority
 		(int32_t duetime, PlayerNumber sender,
 		 PlayerImmovable &,
-		 int32_t type, Ware_Index index, int32_t priority);
+		 int32_t type, WareIndex index, int32_t priority);
 
 	// Write these commands to a file (for savegames)
 	void Write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
@@ -445,7 +445,7 @@ struct CmdSetWarePriority : public PlayerCommand {
 private:
 	Serial m_serial;
 	int32_t m_type; ///< this is always WARE right now
-	Ware_Index m_index;
+	WareIndex m_index;
 	int32_t m_priority;
 };
 
@@ -454,7 +454,7 @@ struct CmdSetWareMaxFill : public PlayerCommand {
 	CmdSetWareMaxFill
 		(int32_t duetime, PlayerNumber,
 		 PlayerImmovable &,
-		 Ware_Index, uint32_t maxfill);
+		 WareIndex, uint32_t maxfill);
 
 	// Write these commands to a file (for savegames)
 	void Write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
@@ -469,7 +469,7 @@ struct CmdSetWareMaxFill : public PlayerCommand {
 
 private:
 	Serial m_serial;
-	Ware_Index m_index;
+	WareIndex m_index;
 	uint32_t m_max_fill;
 };
 
@@ -477,7 +477,7 @@ struct CmdChangeTargetQuantity : public PlayerCommand {
 	CmdChangeTargetQuantity() : PlayerCommand(), m_economy(0), m_ware_type() {} //  For savegame loading.
 	CmdChangeTargetQuantity
 		(int32_t duetime, PlayerNumber sender,
-		 uint32_t economy, Ware_Index index);
+		 uint32_t economy, WareIndex index);
 
 	//  Write/Read these commands to/from a file (for savegames).
 	void Write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
@@ -489,11 +489,11 @@ struct CmdChangeTargetQuantity : public PlayerCommand {
 
 protected:
 	uint32_t   economy  () const {return m_economy;}
-	Ware_Index ware_type() const {return m_ware_type;}
+	WareIndex ware_type() const {return m_ware_type;}
 
 private:
 	uint32_t   m_economy;
-	Ware_Index m_ware_type;
+	WareIndex m_ware_type;
 };
 
 
@@ -501,7 +501,7 @@ struct CmdSetWareTargetQuantity : public CmdChangeTargetQuantity {
 	CmdSetWareTargetQuantity() : CmdChangeTargetQuantity(), m_permanent(0) {}
 	CmdSetWareTargetQuantity
 		(int32_t duetime, PlayerNumber sender,
-		 uint32_t economy, Ware_Index index,
+		 uint32_t economy, WareIndex index,
 		 uint32_t permanent);
 
 	//  Write/Read these commands to/from a file (for savegames).
@@ -523,7 +523,7 @@ struct CmdResetWareTargetQuantity : public CmdChangeTargetQuantity {
 	CmdResetWareTargetQuantity() : CmdChangeTargetQuantity() {}
 	CmdResetWareTargetQuantity
 		(int32_t duetime, PlayerNumber sender,
-		 uint32_t economy, Ware_Index index);
+		 uint32_t economy, WareIndex index);
 
 	//  Write/Read these commands to/from a file (for savegames).
 	void Write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
@@ -541,7 +541,7 @@ struct CmdSetWorkerTargetQuantity : public CmdChangeTargetQuantity {
 	CmdSetWorkerTargetQuantity() : CmdChangeTargetQuantity(), m_permanent(0) {}
 	CmdSetWorkerTargetQuantity
 		(int32_t duetime, PlayerNumber sender,
-		 uint32_t economy, Ware_Index index,
+		 uint32_t economy, WareIndex index,
 		 uint32_t permanent);
 
 	//  Write/Read these commands to/from a file (for savegames).
@@ -563,7 +563,7 @@ struct CmdResetWorkerTargetQuantity : public CmdChangeTargetQuantity {
 	CmdResetWorkerTargetQuantity() : CmdChangeTargetQuantity() {}
 	CmdResetWorkerTargetQuantity
 		(int32_t duetime, PlayerNumber sender,
-		 uint32_t economy, Ware_Index index);
+		 uint32_t economy, WareIndex index);
 
 	//  Write/Read these commands to/from a file (for savegames).
 	void Write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
@@ -733,7 +733,7 @@ struct CmdMessageSetStatusArchived : public PlayerMessageCommand {
 struct CmdSetStockPolicy : PlayerCommand {
 	CmdSetStockPolicy
 		(int32_t time, PlayerNumber p,
-		 Warehouse & wh, bool isworker, Ware_Index ware,
+		 Warehouse & wh, bool isworker, WareIndex ware,
 		 Warehouse::StockPolicy policy);
 
 	uint8_t id() const override;
@@ -752,7 +752,7 @@ struct CmdSetStockPolicy : PlayerCommand {
 private:
 	Serial m_warehouse;
 	bool m_isworker;
-	Ware_Index m_ware;
+	WareIndex m_ware;
 	Warehouse::StockPolicy m_policy;
 };
 

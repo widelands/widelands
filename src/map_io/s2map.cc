@@ -232,7 +232,7 @@ std::string get_world_name(S2MapLoader::WorldType world) {
 class TerrainConverter {
 public:
 	TerrainConverter(const Widelands::World& world, const OneWorldLegacyLookupTable& lookup_table);
-	Widelands::Terrain_Index lookup(S2MapLoader::WorldType world, int8_t c) const;
+	Widelands::TerrainIndex lookup(S2MapLoader::WorldType world, int8_t c) const;
 
 protected:
 	const OneWorldLegacyLookupTable& one_world_legacy_lookup_table_;
@@ -270,7 +270,7 @@ TerrainConverter::TerrainConverter
 	}
 {}
 
-Widelands::Terrain_Index TerrainConverter::lookup(S2MapLoader::WorldType world, int8_t c) const {
+Widelands::TerrainIndex TerrainConverter::lookup(S2MapLoader::WorldType world, int8_t c) const {
 	switch (c) {
 	// the following comments are valid for greenland - blackland and winterland have equivalents
 	// source: http://bazaar.launchpad.net/~xaser/s25rttr/s25edit/view/head:/WLD_reference.txt

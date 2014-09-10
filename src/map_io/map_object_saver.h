@@ -62,7 +62,7 @@ struct MapObjectSaver {
 	bool is_object_saved(const MapObject &);
 
 	/// \note Indexed by player number - 1.
-	Map_Message_Saver message_savers[MAX_PLAYERS];
+	MapMessageSaver message_savers[MAX_PLAYERS];
 
 private:
 	struct MapObjectRec {

@@ -35,7 +35,7 @@ namespace Widelands {
 ///
 /// Because of this renumbering, the code that saves a message must translate
 /// the id that it has to the sequence number in the savegame of that message.
-/// Map_Message_Saver does that.
+/// MapMessageSaver does that.
 struct Message_Id {
 	Message_Id() : id(0) {}
 	explicit Message_Id(uint32_t const _id) : id(_id) {}
@@ -60,7 +60,7 @@ private:
 	operator int32_t  () const __attribute__((deprecated));
 	operator int64_t  () const __attribute__((deprecated));
 
-	friend struct Map_Message_Saver;
+	friend struct MapMessageSaver;
 	friend struct MessageQueue;
 	Message_Id operator++() {++id; return *this;}
 	uint32_t id;

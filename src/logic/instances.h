@@ -157,10 +157,10 @@ private:
  * deal with one of the derived classes, BaseImmovable or Bob.
  *
  * Every MapObject has a unique serial number. This serial number is used as
- * key in the ObjectManager map, and in the safe Object_Ptr.
+ * key in the ObjectManager map, and in the safe ObjectPointer.
  *
  * Unless you're perfectly sure about when an object can be destroyed you
- * should use an Object_Ptr or, better yet, the type safe OPtr template.
+ * should use an ObjectPointer or, better yet, the type safe OPtr template.
  * This is not necessary when the relationship and lifetime between objects
  * is well-defined, such as in the relationship between Building and Flag.
  *
@@ -188,7 +188,7 @@ public: const type & descr() const { \
 
 class MapObject {
 	friend struct ObjectManager;
-	friend struct Object_Ptr;
+	friend struct ObjectPointer;
 
 	MO_DESCR(MapObjectDescr)
 
@@ -238,11 +238,11 @@ public:
 	}
 
 	/**
-	 * \return the value of the given \ref tAttribute. -1 if this object
+	 * \return the value of the given \ref TrainingAttribute. -1 if this object
 	 * doesn't have this kind of attribute.
 	 * The default behaviour returns \c -1 for all attributes.
 	 */
-	virtual int32_t get_tattribute(uint32_t attr) const;
+	virtual int32_t get_training_attribute(uint32_t attr) const;
 
 	void remove(EditorGameBase &);
 	virtual void destroy(EditorGameBase &);
@@ -401,13 +401,13 @@ private:
 /**
  * Provides a safe pointer to a MapObject
  */
-struct Object_Ptr {
+struct ObjectPointer {
 	// Provide default constructor to shut up cppcheck.
-	Object_Ptr() {m_serial = 0;}
-	Object_Ptr(MapObject * const obj) {m_serial = obj ? obj->m_serial : 0;}
+	ObjectPointer() {m_serial = 0;}
+	ObjectPointer(MapObject * const obj) {m_serial = obj ? obj->m_serial : 0;}
 	// can use standard copy constructor and assignment operator
 
-	Object_Ptr & operator= (MapObject * const obj) {
+	ObjectPointer & operator= (MapObject * const obj) {
 		m_serial = obj ? obj->m_serial : 0;
 		return *this;
 	}
@@ -419,13 +419,13 @@ struct Object_Ptr {
 	MapObject * get(const EditorGameBase &);
 	MapObject * get(const EditorGameBase & egbase) const;
 
-	bool operator<  (const Object_Ptr & other) const {
+	bool operator<  (const ObjectPointer & other) const {
 		return m_serial < other.m_serial;
 	}
-	bool operator== (const Object_Ptr & other) const {
+	bool operator== (const ObjectPointer & other) const {
 		return m_serial == other.m_serial;
 	}
-	bool operator!= (const Object_Ptr & other) const {
+	bool operator!= (const ObjectPointer & other) const {
 		return m_serial != other.m_serial;
 	}
 
@@ -460,7 +460,7 @@ struct OPtr {
 	Serial serial() const {return m.serial();}
 
 private:
-	Object_Ptr m;
+	ObjectPointer m;
 };
 
 struct CmdDestroyMapObject : public GameLogicCommand {

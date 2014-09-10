@@ -45,15 +45,15 @@ struct WareList {
 	typedef vector_type::size_type size_type;
 
 	/// \return Highest possible ware id
-	Ware_Index get_nrwareids() const {return Ware_Index(m_wares.size());}
+	WareIndex get_nrwareids() const {return WareIndex(m_wares.size());}
 
-	void add   (Ware_Index, count_type = 1);
+	void add   (WareIndex, count_type = 1);
 	void add(const WareList &);
-	void remove(Ware_Index, count_type = 1);
+	void remove(WareIndex, count_type = 1);
 	void remove(const WareList & wl);
-	count_type stock(Ware_Index) const;
+	count_type stock(WareIndex) const;
 
-	void set_nrwares(Ware_Index const i) {
+	void set_nrwares(WareIndex const i) {
 		assert(m_wares.empty());
 		m_wares.resize(i, 0);
 	}
