@@ -1570,7 +1570,7 @@ void Soldier::battle_update(Game & game, State &)
 					owner().add_message
 						(game,
 						 *new Message
-						 	("game engine",
+							(Message::Type::gameLogic,
 							 game.get_gametime(),
 						 	 _("Logic error"),
 						 	 buffer,
@@ -1579,7 +1579,7 @@ void Soldier::battle_update(Game & game, State &)
 					opponent.owner().add_message
 						(game,
 						 *new Message
-						 	("game engine",
+							(Message::Type::gameLogic,
 							 game.get_gametime(),
 						 	 _("Logic error"),
 						 	 buffer,

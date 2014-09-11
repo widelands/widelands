@@ -30,9 +30,21 @@ namespace Widelands {
 
 struct Message {
 	enum Status {New, Read, Archived};
+	enum class Type: uint8_t {
+		gameLogic    = 0,
+		geologists,
+		scenario     = 10,
+		seafaring,
+		economy      = 20, // economy
+		siteOccupied,      // economy
+		siteDefeated = 30, // everything starting from here is military
+		siteLost,
+		underAttack
+	};
+
 	/**
 	 * A new message to be displayed to the player
-	 * \param msgsender The message sender
+	 * \param msgtype The type of message (economy, geologists, etc.)
 	 * \param sent_time The (game) time at which the message is sent
 	 * \param d The duration after which the message will expire
 	 * \param t The message title
@@ -44,7 +56,7 @@ struct Message {
 	 * \param s The message status. Defaults to Status::New
 	 */
 	Message
-		(const std::string &       msgsender,
+		(Message::Type             msgtype,
 		 uint32_t                  sent_time,
 		 const std::string &       t,
 		 const std::string &       b,
@@ -52,8 +64,8 @@ struct Message {
 		 Widelands::Serial         ser = 0,
 		 Status                    s = New)
 		:
-		m_sender(msgsender),
-		m_title(t),
+		m_type    (msgtype),
+		m_title   (t),
 		m_body    (b),
 		m_sent    (sent_time),
 		m_position(c),
@@ -61,18 +73,18 @@ struct Message {
 		m_status  (s)
 	{}
 
-	const std::string & sender() const     {return m_sender;}
-	uint32_t            sent    () const            {return m_sent;}
-	const std::string & title() const      {return m_title;}
-	const std::string & body () const               {return m_body;}
-	Widelands::Coords   position() const            {return m_position;}
-	Widelands::Serial   serial() const              {return m_serial;}
-	Status              status  () const {return m_status;}
-	Status set_status(Status const s) {return m_status = s;}
+	Message::Type         type    () const   {return m_type;}
+	uint32_t              sent    () const   {return m_sent;}
+	const std::string &   title   () const   {return m_title;}
+	const std::string &   body    () const   {return m_body;}
+	Widelands::Coords     position() const   {return m_position;}
+	Widelands::Serial     serial  () const   {return m_serial;}
+	Status                status  () const   {return m_status;}
+	Status set_status(Status const s)        {return m_status = s;}
 
 private:
-	std::string m_sender;
-	std::string m_title;
+	Message::Type     m_type;
+	std::string       m_title;
 	std::string       m_body;
 	uint32_t          m_sent;
 	Widelands::Coords m_position;

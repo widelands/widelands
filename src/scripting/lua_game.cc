@@ -29,6 +29,7 @@
 #include "logic/campaign_visibility.h"
 #include "logic/constants.h"
 #include "logic/game_controller.h"
+#include "logic/message.h"
 #include "logic/objective.h"
 #include "logic/path.h"
 #include "logic/player.h"
@@ -282,9 +283,6 @@ int L_Player::get_see_all(lua_State * const L) {
 			'archived'. Default: "new"
 		:type status: :class:`string`
 
-		:arg sender: sender name of this string. Default: "ScriptingEngine"
-		:type sender: :class:`string`
-
 		:arg popup: should the message window be opened for this message or not.
 			Default: :const:`false`
 		:type popup: :class:`boolean`
@@ -298,7 +296,6 @@ int L_Player::send_message(lua_State * L) {
 	std::string body = luaL_checkstring(L, 3);
 	Coords c = Coords::Null();
 	Message::Status st = Message::New;
-	std::string sender = "ScriptingEngine";
 	bool popup = false;
 
 	if (n == 4) {
@@ -318,11 +315,6 @@ int L_Player::send_message(lua_State * L) {
 		}
 		lua_pop(L, 1);
 
-		lua_getfield(L, 4, "sender");
-		if (!lua_isnil(L, -1))
-			sender = luaL_checkstring(L, -1);
-		lua_pop(L, 1);
-
 		lua_getfield(L, 4, "popup");
 		if (!lua_isnil(L, -1))
 			popup = luaL_checkboolean(L, -1);
@@ -336,7 +328,7 @@ int L_Player::send_message(lua_State * L) {
 		plr.add_message
 			(game,
 			 *new Message
-			 	(sender,
+				(Message::Type::scenario,
 			 	 game.get_gametime(),
 			 	 title,
 			 	 body,
@@ -1054,7 +1046,6 @@ const MethodType<L_Message> L_Message::Methods[] = {
 	{nullptr, nullptr},
 };
 const PropertyType<L_Message> L_Message::Properties[] = {
-	PROP_RO(L_Message, sender),
 	PROP_RO(L_Message, title),
 	PROP_RO(L_Message, body),
 	PROP_RO(L_Message, sent),
@@ -1084,15 +1075,7 @@ void L_Message::__unpersist(lua_State * L) {
  PROPERTIES
  ==========================================================
  */
-/* RST
-	.. attribute:: sender
 
-		(RO) The name of the sender of this message
-*/
-int L_Message::get_sender(lua_State * L) {
-	lua_pushstring(L, get(L, get_game(L)).sender());
-	return 1;
-}
 /* RST
 	.. attribute:: title
 

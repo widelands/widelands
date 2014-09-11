@@ -248,7 +248,7 @@ int MilitarySite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s)
 		if (upcast(Game, game, &egbase)) {
 			send_message
 				(*game,
-				 "site_occupied",
+				 Message::Type::siteOccupied,
 				 descr().descname(),
 				 descr().m_occupied_str,
 				 true);
@@ -845,7 +845,7 @@ bool MilitarySite::attack(Soldier & enemy)
 		{
 			send_message
 				(game,
-				 "site_lost",
+				 Message::Type::siteLost,
 				 _("Militarysite lost!"),
 				 descr().m_defeated_enemy_str,
 				 false);
@@ -899,7 +899,7 @@ bool MilitarySite::attack(Soldier & enemy)
 		// Of course we should inform the victorious player as well
 		newsite->send_message
 			(game,
-			 "site_defeated",
+			 Message::Type::siteDefeated,
 			 _("Enemy at site defeated!"),
 			 newsite->descr().m_defeated_you_str,
 			 true);
@@ -949,7 +949,7 @@ void MilitarySite::notify_player(Game & game, bool const discovered)
 	// radius <= 5 near the current location in the last 60 seconds
 	send_message
 		(game,
-		 "under_attack",
+		 Message::Type::underAttack,
 		 _("You are under attack"),
 		 discovered ? descr().m_aggressor_str : descr().m_attack_str,
 		 false,

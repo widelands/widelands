@@ -161,7 +161,6 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_sender(lua_State * L);
 	int get_sent(lua_State * L);
 	int get_title(lua_State * L);
 	int get_body(lua_State * L);

@@ -924,7 +924,7 @@ void ProductionSite::notify_player(Game & game, uint8_t minutes)
 			assert(!descr().out_of_resource_message().empty());
 			send_message
 				(game,
-					  "produce",
+				 Message::Type::economy,
 				 descr().out_of_resource_title(),
 				 descr().out_of_resource_message(),
 				 true,

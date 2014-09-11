@@ -946,7 +946,7 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 			owner().add_message_with_timeout
 				(game,
 				 *new Message
-				 	("geologist " + rdescr->name(), // e.g. "geologist gold"
+					(Message::Type::geologists,
 					 game.get_gametime(),
 				 	 rdescr->descname(),
 				 	 message,
@@ -1844,7 +1844,7 @@ void Worker::return_update(Game & game, State & state)
 		owner().add_message
 			(game,
 			 *new Message
-			 	("game engine",
+				(Message::Type::gameLogic,
 				 game.get_gametime(),
 			 	 _("Worker got lost!"),
 			 	 buffer,

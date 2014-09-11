@@ -459,7 +459,7 @@ void Ship::ship_update_expedition(Game & game, Bob::State &) {
 			// Send a message to the player, that a new port space was found
 			std::string msg_head = _("Port Space Found");
 			std::string msg_body = _("An expedition ship found a new port build space.");
-			send_message(game, "exp_port_space", msg_head, msg_body, "port.png");
+			send_message(game, msg_head, msg_body, "port.png");
 		}
 		m_expedition->seen_port_buildspaces.swap(temp_port_buildspaces);
 	}
@@ -568,7 +568,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 							std::string msg_head = _("Island Circumnavigated");
 							std::string msg_body = _("An expedition ship sailed around its"
 										 " island without any events.");
-							send_message(game, "exp_island", msg_head, msg_body,
+							send_message(game, msg_head, msg_body,
 								"ship_explore_island_cw.png");
 							m_ship_state = EXP_WAITING;
 							return start_task_idle(game, descr().main_animation(), 1500);
@@ -624,7 +624,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 				std::string msg_head = _("Coast Reached");
 				std::string msg_body =
 					_("An expedition ship reached a coast and is waiting for further commands.");
-				send_message(game, "exp_coast", msg_head, msg_body, "ship_explore_island_cw.png");
+				send_message(game, msg_head, msg_body, "ship_explore_island_cw.png");
 				return;
 			}
 		}
@@ -787,7 +787,7 @@ void Ship::start_task_expedition(Game & game) {
 	// Send a message to the player, that an expedition is ready to go
 	const std::string msg_head = _("Expedition Ready");
 	const std::string msg_body = _("An expedition ship is waiting for your commands.");
-	send_message(game, "exp_ready", msg_head, msg_body, "start_expedition.png");
+	send_message(game, msg_head, msg_body, "start_expedition.png");
 }
 
 /// Initializes / changes the direction of scouting to @arg direction
@@ -899,9 +899,7 @@ void Ship::log_general_info(const Editor_Game_Base & egbase)
  * \param picture picture name relative to the pics directory
  */
 void Ship::send_message
-	(Game & game, const std::string & msgsender,
-	 const std::string & title, const std::string & description,
-	 const std::string & picture)
+	(Game & game, const std::string & title, const std::string & description, const std::string & picture)
 {
 	std::string rt_description;
 	if (picture.size() > 3) {
@@ -914,7 +912,7 @@ void Ship::send_message
 	rt_description += "</p></rt>";
 
 	Message * msg = new Message
-		(msgsender, game.get_gametime(), title, rt_description, get_position(), m_serial);
+		(Message::Type::seafaring, game.get_gametime(), title, rt_description, get_position(), m_serial);
 
 	get_owner()->add_message(game, *msg);
 }

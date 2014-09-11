@@ -458,7 +458,7 @@ void Warehouse::init(Editor_Game_Base & egbase)
 			 descr().descname().c_str());
 		send_message
 			(ref_cast<Game, Editor_Game_Base>(egbase),
-			 "warehouse",
+			 Message::Type::economy,
 			 descr().descname(),
 			 message,
 			 true);
