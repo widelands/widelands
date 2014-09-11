@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_LOGIC_CMD_EXPIRE_MESSAGE_H
-#define WL_LOGIC_CMD_EXPIRE_MESSAGE_H
+#ifndef WL_LOGIC_CMD_DELETE_MESSAGE_H
+#define WL_LOGIC_CMD_DELETE_MESSAGE_H
 
 #include <memory>
 
@@ -51,4 +51,4 @@ private:
 
 }
 
-#endif  // end of include guard: WL_LOGIC_CMD_EXPIRE_MESSAGE_H
+#endif  // end of include guard: WL_LOGIC_CMD_DELETE_MESSAGE_H
