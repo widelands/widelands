@@ -46,11 +46,12 @@ GameMessageMenu::GameMessageMenu
 		(&plr, "messages", &registry, 580, 375, _("Messages: Inbox")),
 	message_body
 		(this,
-		 5, 150, 570, 220,
+		 5, 150 + 45, 570, 220 - 45, // TODO(GunChleoc): the 45 stuff can be removed eventually
 		 "", UI::Align_Left, 1),
 	mode(Inbox)
 {
-	list = new UI::Table<uintptr_t>(this, 5, 3 * 5 + 2 * 40, 570, 110);
+
+	list = new UI::Table<uintptr_t>(this, 5, message_body.get_y() - 115, 570, 110);
 	list->selected.connect(boost::bind(&GameMessageMenu::selected, this, _1));
 	list->double_clicked.connect(boost::bind(&GameMessageMenu::double_clicked, this, _1));
 	list->add_column (60, _("Select"), "", UI::Align_HCenter, true);
