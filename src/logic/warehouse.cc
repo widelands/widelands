@@ -451,18 +451,30 @@ void Warehouse::init(Editor_Game_Base & egbase)
 				(ref_cast<Game, Editor_Game_Base>(egbase), 4000);
 
 		log("Message: adding (wh) (%s) %i \n", to_string(descr().type()).c_str(), player.player_number());
-		char message[2048];
-		snprintf
-			(message, sizeof(message),
-			 _("A new %s was added to your economy."),
-			 descr().descname().c_str());
-		send_message
-			(ref_cast<Game, Editor_Game_Base>(egbase),
-			 Message::Type::economy,
-			 descr().descname(),
-			 message,
-			 true);
+
+		if(descr().name() == "port") {
+			send_message
+				(ref_cast<Game, Editor_Game_Base>(egbase),
+				 Message::Type::seafaring,
+				 descr().descname(),
+				 _("A new port was added to your economy."),
+				 true);
+		} else if(descr().name() == "headquarters") {
+			send_message
+				(ref_cast<Game, Editor_Game_Base>(egbase),
+				 Message::Type::economy,
+				 descr().descname(),
+				 _("A new headquarters was added to your economy."),
+				 true);
+		} else {
+			send_message
+				(ref_cast<Game, Editor_Game_Base>(egbase),
+				 Message::Type::economy,
+				 descr().descname(),
+				 _("A new warehouse was added to your economy."),
+				 true);
 		}
+	}
 
 	if (uint32_t const conquer_radius = descr().get_conquers())
 		egbase.conquer_area

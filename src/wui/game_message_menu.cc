@@ -243,6 +243,39 @@ void GameMessageMenu::think()
 		}
 	}
 
+	// Filter messages
+	if (m_message_filter != Widelands::Message::Type::allMessages) {
+		if (m_message_filter == Widelands::Message::Type::warfare) {
+			for (uint32_t j = list->size(); j; --j) {
+				Message_Id m_id((*list)[j - 1]);
+				if (Message const * const message = mq[m_id]) {
+					if (message->type() < Widelands::Message::Type::warfare) {
+						list->remove(j - 1);
+					}
+				}
+			}
+		} else if (m_message_filter == Widelands::Message::Type::economy) {
+			for (uint32_t j = list->size(); j; --j) {
+				Message_Id m_id((*list)[j - 1]);
+				if (Message const * const message = mq[m_id]) {
+					if ((message->type() < Widelands::Message::Type::economy) ||
+						 (message->type() > Widelands::Message::Type::siteOccupied)) {
+						list->remove(j - 1);
+					}
+				}
+			}
+		} else {
+			for (uint32_t j = list->size(); j; --j) {
+				Message_Id m_id((*list)[j - 1]);
+				if (Message const * const message = mq[m_id]) {
+					if (message->type() != m_message_filter) {
+						list->remove(j - 1);
+					}
+				}
+			}
+		}
+	}
+
 	if (list->size()) {
 		if (!list->has_selection())
 			list->select(0);
@@ -400,9 +433,6 @@ void GameMessageMenu::center_view()
  * @param msgtype the types of messages to show
  */
 void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
-
-	log("#gunchleoc message type: %u\n", msgtype);
-
 	switch (msgtype) {
 		case Widelands::Message::Type::geologists:
 			toggle_filter_messages_button(*m_geologistsbtn, msgtype);
@@ -422,10 +452,7 @@ void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
 		default:
 			m_message_filter = Widelands::Message::Type::allMessages;
 	}
-	// NOCOM(GunChleoc) This is only a dummy function. Do something!
-	// - filter the displayed messages.
-	//   Do this in GameMessageMenu::think(), with new member variable m_message_filter?
-
+	think();
 }
 
 void GameMessageMenu::toggle_filter_messages_button(UI::Button & button, Widelands::Message::Type msgtype) {
