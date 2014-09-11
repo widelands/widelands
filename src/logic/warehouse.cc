@@ -452,14 +452,14 @@ void Warehouse::init(Editor_Game_Base & egbase)
 
 		log("Message: adding (wh) (%s) %i \n", to_string(descr().type()).c_str(), player.player_number());
 
-		if(descr().name() == "port") {
+		if (descr().name() == "port") {
 			send_message
 				(ref_cast<Game, Editor_Game_Base>(egbase),
 				 Message::Type::seafaring,
 				 descr().descname(),
 				 _("A new port was added to your economy."),
 				 true);
-		} else if(descr().name() == "headquarters") {
+		} else if (descr().name() == "headquarters") {
 			send_message
 				(ref_cast<Game, Editor_Game_Base>(egbase),
 				 Message::Type::economy,
