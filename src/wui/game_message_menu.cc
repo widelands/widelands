@@ -50,7 +50,7 @@ GameMessageMenu::GameMessageMenu
 		 "", UI::Align_Left, 1),
 	mode(Inbox)
 {
-	list = new UI::Table<uintptr_t>(this, 5, 35, 570, 110);
+	list = new UI::Table<uintptr_t>(this, 5, 3 * 5 + 2 * 40, 570, 110);
 	list->selected.connect(boost::bind(&GameMessageMenu::selected, this, _1));
 	list->double_clicked.connect(boost::bind(&GameMessageMenu::double_clicked, this, _1));
 	list->add_column (60, _("Select"), "", UI::Align_HCenter, true);
@@ -101,9 +101,69 @@ GameMessageMenu::GameMessageMenu
 			 550, 5, 25, 25,
 			 g_gr->images().get("pics/but2.png"),
 			 g_gr->images().get("pics/menu_goto.png"),
-			 _("center main mapview on location"),
+			 _("Center main mapview on location"),
 			 false);
 	m_centerviewbtn->sigclicked.connect(boost::bind(&GameMessageMenu::center_view, this));
+
+	// Buttons for message types
+	m_geologistsbtn =
+			new UI::Button
+				(this, "filter_geologists_messages",
+				 5, 2 * 5 + 25, 40, 40,
+				 g_gr->images().get("pics/but0.png"),
+				 g_gr->images().get("pics/menu_geologist.png"),
+				 "",
+				 true);
+	m_geologistsbtn->sigclicked.connect
+			(boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::geologists));
+
+	m_economybtn =
+			new UI::Button
+				(this, "filter_economy_messages",
+				 2 * 5 + 40, 2 * 5 + 25, 40, 40,
+				 g_gr->images().get("pics/but0.png"),
+				 g_gr->images().get("pics/menu_build_flag.png"),
+				 "",
+				 true);
+	m_economybtn->sigclicked.connect
+			(boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::economy));
+
+	m_seafaringbtn =
+			new UI::Button
+				(this, "filter_seafaring_messages",
+				 3 * 5 + 2 * 40, 2 * 5 + 25, 40, 40,
+				 g_gr->images().get("pics/but0.png"),
+				 g_gr->images().get("pics/start_expedition.png"),
+				 "",
+				 true);
+	m_seafaringbtn->sigclicked.connect
+			(boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::seafaring));
+
+	m_warfarebtn =
+			new UI::Button
+				(this, "filter_warfare_messages",
+				 4 * 5 + 3 * 40, 2 * 5 + 25, 40, 40,
+				 g_gr->images().get("pics/but0.png"),
+				 g_gr->images().get("pics/menu_attack.png"),
+				 "",
+				 true);
+	m_warfarebtn->sigclicked.connect
+			(boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::warfare));
+
+	m_scenariobtn =
+			new UI::Button
+				(this, "filter_scenario_messages",
+				 5 * 5 + 4 * 40, 2 * 5 + 25, 40, 40,
+				 g_gr->images().get("pics/but0.png"),
+				 g_gr->images().get("pics/menu_objectives.png"),
+				 "",
+				 true);
+	m_scenariobtn->sigclicked.connect
+			(boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::scenario));
+
+	m_message_filter = Widelands::Message::Type::allMessages;
+	set_filter_messages_tooltips();
+	// End: Buttons for message types
 
 	if (get_usedefaultpos())
 		center_to_parent();
@@ -333,6 +393,64 @@ void GameMessageMenu::center_view()
 		assert(message->position());
 		iplayer().move_view_to(message->position());
 	}
+}
+
+/**
+ * Show only messages of a certain type
+ * @param msgtype the types of messages to show
+ */
+void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
+
+	log("#gunchleoc message type: %u\n", msgtype);
+
+	switch (msgtype) {
+		case Widelands::Message::Type::geologists:
+			toggle_filter_messages_button(*m_geologistsbtn, msgtype);
+			break;
+		case Widelands::Message::Type::economy:
+			toggle_filter_messages_button(*m_economybtn, msgtype);
+			break;
+		case Widelands::Message::Type::seafaring:
+			toggle_filter_messages_button(*m_seafaringbtn, msgtype);
+			break;
+		case Widelands::Message::Type::warfare:
+			toggle_filter_messages_button(*m_warfarebtn, msgtype);
+			break;
+		case Widelands::Message::Type::scenario:
+			toggle_filter_messages_button(*m_scenariobtn, msgtype);
+			break;
+		default:
+			m_message_filter = Widelands::Message::Type::allMessages;
+	}
+	// NOCOM(GunChleoc) This is only a dummy function. Do something!
+	// - filter the displayed messages.
+	//   Do this in GameMessageMenu::think(), with new member variable m_message_filter?
+
+}
+
+void GameMessageMenu::toggle_filter_messages_button(UI::Button & button, Widelands::Message::Type msgtype) {
+	set_filter_messages_tooltips();
+	if (button.get_perm_pressed()) {
+		button.set_perm_pressed(false);
+		m_message_filter = Widelands::Message::Type::allMessages;
+	} else {
+		m_geologistsbtn->set_perm_pressed(false);
+		m_economybtn->set_perm_pressed(false);
+		m_seafaringbtn->set_perm_pressed(false);
+		m_warfarebtn->set_perm_pressed(false);
+		m_scenariobtn->set_perm_pressed(false);
+		button.set_perm_pressed(true);
+		m_message_filter = msgtype;
+		button.set_tooltip(_("Show all messages"));
+	}
+}
+
+void GameMessageMenu::set_filter_messages_tooltips() {
+	m_geologistsbtn->set_tooltip(_("Show geologists' messages only"));
+	m_economybtn->set_tooltip(_("Show economy messages only"));
+	m_seafaringbtn->set_tooltip(_("Show seafaring messages only"));
+	m_warfarebtn->set_tooltip(_("Show warfare messages only"));
+	m_scenariobtn->set_tooltip(_("Show scenario messages only"));
 }
 
 /**

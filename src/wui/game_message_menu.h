@@ -22,6 +22,7 @@
 
 #include "base/deprecated.h"
 #include "base/i18n.h"
+#include "logic/message.h"
 #include "logic/message_queue.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
@@ -60,6 +61,9 @@ private:
 	void archive_or_restore();
 	void toggle_mode();
 	void center_view();
+	void filter_messages(Widelands::Message::Type);
+	void toggle_filter_messages_button(UI::Button &, Widelands::Message::Type);
+	void set_filter_messages_tooltips();
 	void update_record(UI::Table<uintptr_t>::Entry_Record & er, const Widelands::Message &);
 
 	UI::Table<uintptr_t> * list;
@@ -68,6 +72,13 @@ private:
 	UI::Button * m_togglemodebtn;
 	UI::Button * m_centerviewbtn;
 	Mode mode;
+	// Buttons for message types
+	UI::Button * m_geologistsbtn;
+	UI::Button * m_economybtn;
+	UI::Button * m_seafaringbtn;
+	UI::Button * m_warfarebtn;
+	UI::Button * m_scenariobtn;
+	Widelands::Message::Type m_message_filter;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_MESSAGE_MENU_H
