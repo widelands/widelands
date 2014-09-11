@@ -31,13 +31,13 @@ namespace Widelands {
 struct Message {
 	enum Status {New, Read, Archived};
 	enum class Type: uint8_t {
-		gameLogic    = 0,
-		geologists   = 10,
-		scenario     = 20,
-		seafaring    = 30,
-		economy      = 40, // economy
-		siteOccupied,      // economy
-		siteDefeated = 50, // everything starting from here is military
+		gameLogic,
+		geologists,
+		scenario,
+		seafaring,
+		economy,      // economy
+		siteOccupied, // economy
+		siteDefeated, // everything starting from here is military
 		siteLost,
 		underAttack
 	};

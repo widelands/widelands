@@ -118,7 +118,6 @@ function check_coroutine()
    assert_table(msg)
    assert_equal("hello nice", msg.title)
    assert_equal("World", msg.body)
-   assert_equal(20, msg.type)
    assert_equal(field, msg.field)
 
    assert_table(map)
