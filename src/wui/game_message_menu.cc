@@ -84,7 +84,10 @@ GameMessageMenu::GameMessageMenu
 			 295, 5, 25, 25,
 			 g_gr->images().get("pics/but2.png"),
 			 g_gr->images().get("pics/message_archive.png"),
-			 _("Archive selected messages"));
+			 /** TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey */
+			 (boost::format(_("Del: %s"))
+			  /** TRANSLATORS: Tooltip in the messages window */
+			  % _("Archive selected messages")).str());
 	m_archivebtn->sigclicked.connect
 		(boost::bind(&GameMessageMenu::archive_or_restore, this));
 
@@ -103,7 +106,10 @@ GameMessageMenu::GameMessageMenu
 			 550, 5, 25, 25,
 			 g_gr->images().get("pics/but2.png"),
 			 g_gr->images().get("pics/menu_goto.png"),
-			 _("Center main mapview on location"),
+			 /** TRANSLATORS: %s is a tooltip, g is the corresponding hotkey */
+			 (boost::format(_("g: %s"))
+			  /** TRANSLATORS: Tooltip in the messages window */
+			  % _("Center main mapview on location")).str(),
 			 false);
 	m_centerviewbtn->sigclicked.connect(boost::bind(&GameMessageMenu::center_view, this));
 
@@ -342,11 +348,11 @@ bool GameMessageMenu::handle_key(bool down, SDL_keysym code)
 {
 	if (down) {
 		switch (code.sym) {
+		// Don't forget to change the tooltips if any of these get reassigned
 		case SDLK_g:
 			if (m_centerviewbtn->enabled())
 				center_view();
 			return true;
-		// Don't forget to change the tooltips if any of these get reassigned
 		case SDLK_0:
 			filter_messages(Widelands::Message::Type::allMessages);
 			return true;
@@ -549,14 +555,20 @@ void GameMessageMenu::toggle_mode()
 		mode = Archive;
 		set_title(_("Messages: Archive"));
 		m_archivebtn->set_pic(g_gr->images().get("pics/message_restore.png"));
-		m_archivebtn->set_tooltip(_("Restore selected messages"));
+		/** TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey */
+		m_archivebtn->set_tooltip((boost::format(_("Del: %s"))
+											/** TRANSLATORS: Tooltip in the messages window */
+											% _("Restore selected messages")).str());
 		m_togglemodebtn->set_title(_("Show Inbox"));
 		break;
 	case Archive:
 		mode = Inbox;
 		set_title(_("Messages: Inbox"));
 		m_archivebtn->set_pic(g_gr->images().get("pics/message_archive.png"));
-		m_archivebtn->set_tooltip(_("Archive selected messages"));
+		/** TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey */
+		m_archivebtn->set_tooltip((boost::format(_("Del: %s"))
+											/** TRANSLATORS: Tooltip in the messages window */
+											% _("Archive selected messages")).str());
 		m_togglemodebtn->set_title(_("Show Archive"));
 		break;
 	default:
