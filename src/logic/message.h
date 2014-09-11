@@ -32,12 +32,12 @@ struct Message {
 	enum Status {New, Read, Archived};
 	enum class Type: uint8_t {
 		gameLogic    = 0,
-		geologists,
-		scenario     = 10,
-		seafaring,
-		economy      = 20, // economy
+		geologists   = 10,
+		scenario     = 20,
+		seafaring    = 30,
+		economy      = 40, // economy
 		siteOccupied,      // economy
-		siteDefeated = 30, // everything starting from here is military
+		siteDefeated = 50, // everything starting from here is military
 		siteLost,
 		underAttack
 	};
