@@ -47,12 +47,12 @@ GameMessageMenu::GameMessageMenu
 		(&plr, "messages", &registry, 580, 375, _("Messages: Inbox")),
 	message_body
 		(this,
-		 5, 150 + 45, 570, 220 - 45, // TODO(GunChleoc): the 45 stuff can be removed eventually
+		 5, 154, 570, 216,
 		 "", UI::Align_Left, 1),
 	mode(Inbox)
 {
 
-	list = new UI::Table<uintptr_t>(this, 5, message_body.get_y() - 115, 570, 110);
+	list = new UI::Table<uintptr_t>(this, 5, message_body.get_y() - 110, 570, 110);
 	list->selected.connect(boost::bind(&GameMessageMenu::selected, this, _1));
 	list->double_clicked.connect(boost::bind(&GameMessageMenu::double_clicked, this, _1));
 	list->add_column (60, _("Select"), "", UI::Align_HCenter, true);
@@ -60,28 +60,106 @@ GameMessageMenu::GameMessageMenu
 	list->add_column(330, _("Title"));
 	list->add_column(120, _("Time sent"));
 
+	// Buttons for message types
+	m_geologistsbtn =
+			new UI::Button
+				(this, "filter_geologists_messages",
+				 5, 5, 34, 34,
+				 g_gr->images().get("pics/but0.png"),
+				 g_gr->images().get("pics/menu_geologist.png"),
+				 "",
+				 true);
+	m_geologistsbtn->sigclicked.connect
+			(boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::geologists));
+
+	m_economybtn =
+			new UI::Button
+				(this, "filter_economy_messages",
+				 2 * 5 + 34, 5, 34, 34,
+				 g_gr->images().get("pics/but0.png"),
+				 g_gr->images().get("pics/menu_build_flag.png"),
+				 "",
+				 true);
+	m_economybtn->sigclicked.connect
+			(boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::economy));
+
+	m_seafaringbtn =
+			new UI::Button
+				(this, "filter_seafaring_messages",
+				 3 * 5 + 2 * 34, 5, 34, 34,
+				 g_gr->images().get("pics/but0.png"),
+				 g_gr->images().get("pics/start_expedition.png"),
+				 "",
+				 true);
+	m_seafaringbtn->sigclicked.connect
+			(boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::seafaring));
+
+	m_warfarebtn =
+			new UI::Button
+				(this, "filter_warfare_messages",
+				 4 * 5 + 3 * 34, 5, 34, 34,
+				 g_gr->images().get("pics/but0.png"),
+				 g_gr->images().get("pics/messages_warfare.png"),
+				 "",
+				 true);
+	m_warfarebtn->sigclicked.connect
+			(boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::warfare));
+
+	m_scenariobtn =
+			new UI::Button
+				(this, "filter_scenario_messages",
+				 5 * 5 + 4 * 34, 5, 34, 34,
+				 g_gr->images().get("pics/but0.png"),
+				 g_gr->images().get("pics/menu_objectives.png"),
+				 "",
+				 true);
+	m_scenariobtn->sigclicked.connect
+			(boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::scenario));
+
+	m_message_filter = Widelands::Message::Type::allMessages;
+	set_filter_messages_tooltips();
+	// End: Buttons for message types
+
+	m_cycleunreadmessagesbtn =
+			new UI::Button
+				(this, "cycle_unread_messages",
+				 9 * 5 + 5 * 34, 5, 34, 34,
+				 g_gr->images().get("pics/but0.png"),
+				 g_gr->images().get("pics/messages_new.png"),
+				 /** TRANSLATORS: %s is a tooltip, R is the corresponding hotkey */
+				 (boost::format(_("R: %s"))
+				  /** TRANSLATORS: Tooltip in the messages window */
+				  % _("Show unread messages only")).str(),
+
+				 true);
+	m_cycleunreadmessagesbtn->sigclicked.connect
+			(boost::bind(&GameMessageMenu::cycle_unread_messages, this));
+	read_unread_mode = ReadUnread::allMessages;
+
 	UI::Button * clearselectionbtn =
 		new UI::Button
 			(this, "clear_selection",
-			 5, 5, 140, 25,
-			 g_gr->images().get("pics/but0.png"),
-			 _("Clear"), _("Clear selection"));
+			 13 * 5 + 6 * 34, 5, 34, 34,
+			 g_gr->images().get("pics/but2.png"),
+			 g_gr->images().get("pics/message_clear_selection.png"),
+			 _("Clear selection"));
 	clearselectionbtn->sigclicked.connect
 		(boost::bind(&GameMessageMenu::do_clear_selection, this));
 
 	UI::Button * invertselectionbtn =
 		new UI::Button
 			(this, "invert_selection",
-			 150, 5, 140, 25,
-			 g_gr->images().get("pics/but0.png"),
-			 _("Invert"), _("Invert selection"));
+			 14 * 5 + 7 * 34, 5, 34, 34,
+			 g_gr->images().get("pics/but2.png"),
+			 g_gr->images().get("pics/message_selection_invert.png"),
+			 _("Invert selection"));
 	invertselectionbtn->sigclicked.connect
 		(boost::bind(&GameMessageMenu::do_invert_selection, this));
 
 	m_archivebtn =
 		new UI::Button
 			(this, "archive_or_restore_selected_messages",
-			 295, 5, 25, 25,
+			 15 * 5 + 8 * 34, 5, 34, 34,
 			 g_gr->images().get("pics/but2.png"),
 			 g_gr->images().get("pics/message_archive.png"),
 			 /** TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey */
@@ -94,8 +172,9 @@ GameMessageMenu::GameMessageMenu
 	m_togglemodebtn =
 		new UI::Button
 			(this, "toggle_between_inbox_or_archive",
-			 325, 5, 190, 25,
+			 16 * 5 + 9 * 34, 5, 34, 34,
 			 g_gr->images().get("pics/but2.png"),
+			 g_gr->images().get("pics/message_archived.png"),
 			 _("Show Archive"));
 	m_togglemodebtn->sigclicked.connect
 		(boost::bind(&GameMessageMenu::toggle_mode, this));
@@ -103,75 +182,15 @@ GameMessageMenu::GameMessageMenu
 	m_centerviewbtn =
 		new UI::Button
 			(this, "center_main_mapview_on_location",
-			 550, 5, 25, 25,
+			 580 - 5 - 34, 5, 34, 34,
 			 g_gr->images().get("pics/but2.png"),
 			 g_gr->images().get("pics/menu_goto.png"),
-			 /** TRANSLATORS: %s is a tooltip, g is the corresponding hotkey */
-			 (boost::format(_("g: %s"))
+			 /** TRANSLATORS: %s is a tooltip, G is the corresponding hotkey */
+			 (boost::format(_("G: %s"))
 			  /** TRANSLATORS: Tooltip in the messages window */
 			  % _("Center main mapview on location")).str(),
 			 false);
 	m_centerviewbtn->sigclicked.connect(boost::bind(&GameMessageMenu::center_view, this));
-
-	// Buttons for message types
-	m_geologistsbtn =
-			new UI::Button
-				(this, "filter_geologists_messages",
-				 5, 2 * 5 + 25, 40, 40,
-				 g_gr->images().get("pics/but0.png"),
-				 g_gr->images().get("pics/menu_geologist.png"),
-				 "",
-				 true);
-	m_geologistsbtn->sigclicked.connect
-			(boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::geologists));
-
-	m_economybtn =
-			new UI::Button
-				(this, "filter_economy_messages",
-				 2 * 5 + 40, 2 * 5 + 25, 40, 40,
-				 g_gr->images().get("pics/but0.png"),
-				 g_gr->images().get("pics/menu_build_flag.png"),
-				 "",
-				 true);
-	m_economybtn->sigclicked.connect
-			(boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::economy));
-
-	m_seafaringbtn =
-			new UI::Button
-				(this, "filter_seafaring_messages",
-				 3 * 5 + 2 * 40, 2 * 5 + 25, 40, 40,
-				 g_gr->images().get("pics/but0.png"),
-				 g_gr->images().get("pics/start_expedition.png"),
-				 "",
-				 true);
-	m_seafaringbtn->sigclicked.connect
-			(boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::seafaring));
-
-	m_warfarebtn =
-			new UI::Button
-				(this, "filter_warfare_messages",
-				 4 * 5 + 3 * 40, 2 * 5 + 25, 40, 40,
-				 g_gr->images().get("pics/but0.png"),
-				 g_gr->images().get("pics/menu_attack.png"),
-				 "",
-				 true);
-	m_warfarebtn->sigclicked.connect
-			(boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::warfare));
-
-	m_scenariobtn =
-			new UI::Button
-				(this, "filter_scenario_messages",
-				 5 * 5 + 4 * 40, 2 * 5 + 25, 40, 40,
-				 g_gr->images().get("pics/but0.png"),
-				 g_gr->images().get("pics/menu_objectives.png"),
-				 "",
-				 true);
-	m_scenariobtn->sigclicked.connect
-			(boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::scenario));
-
-	m_message_filter = Widelands::Message::Type::allMessages;
-	set_filter_messages_tooltips();
-	// End: Buttons for message types
 
 	if (get_usedefaultpos())
 		center_to_parent();
@@ -251,7 +270,31 @@ void GameMessageMenu::think()
 		}
 	}
 
-	// Filter messages
+
+	// Filter read/unread messages
+	if (mode == Mode::Inbox) {
+		if (read_unread_mode == ReadUnread::newMessages) {
+			for (uint32_t j = list->size(); j; --j) {
+				Message_Id m_id((*list)[j - 1]);
+				if (Message const * const message = mq[m_id]) {
+					if (message->status() != Widelands::Message::Status::New) {
+						list->remove(j - 1);
+					}
+				}
+			}
+		} else if (read_unread_mode == ReadUnread::readMessages) {
+			for (uint32_t j = list->size(); j; --j) {
+				Message_Id m_id((*list)[j - 1]);
+				if (Message const * const message = mq[m_id]) {
+					if (message->status() != Widelands::Message::Status::Read) {
+						list->remove(j - 1);
+					}
+				}
+			}
+		}
+	}
+
+	// Filter message type
 	if (m_message_filter != Widelands::Message::Type::allMessages) {
 		if (m_message_filter == Widelands::Message::Type::warfare) {
 			for (uint32_t j = list->size(); j; --j) {
@@ -371,8 +414,11 @@ bool GameMessageMenu::handle_key(bool down, SDL_keysym code)
 		case SDLK_5:
 			filter_messages(Widelands::Message::Type::scenario);
 			return true;
-
+		case SDLK_r:
+			cycle_unread_messages();
+			return true;
 		case SDLK_KP_PERIOD:
+
 			if (code.mod & KMOD_NUM)
 				break;
 			/* no break */
@@ -488,6 +534,9 @@ void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
 	think();
 }
 
+/**
+ * Helper for filter_messages
+ */
 void GameMessageMenu::toggle_filter_messages_button(UI::Button & button, Widelands::Message::Type msgtype) {
 	set_filter_messages_tooltips();
 	if (button.get_perm_pressed()) {
@@ -508,6 +557,9 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button & button, Widelan
 	}
 }
 
+/**
+ * Helper for filter_messages
+ */
 void GameMessageMenu::set_filter_messages_tooltips() {
 	/** TRANSLATORS: %s is a tooltip, 1 is the corresponding hotkey */
 	m_geologistsbtn->set_tooltip((boost::format(_("1: %s"))
@@ -529,6 +581,38 @@ void GameMessageMenu::set_filter_messages_tooltips() {
 	m_scenariobtn->set_tooltip((boost::format(_("5: %s"))
 										 /** TRANSLATORS: Tooltip in the messages window */
 										 % _("Show scenario messages only")).str());
+}
+
+/**
+ * Cycle through unread/read/all messages
+ */
+void GameMessageMenu::cycle_unread_messages() {
+	switch (read_unread_mode) {
+		case ReadUnread::allMessages:
+			read_unread_mode = ReadUnread::newMessages;
+			m_cycleunreadmessagesbtn->set_pic(g_gr->images().get("pics/messages_read.png"));
+			m_cycleunreadmessagesbtn->set_tooltip((boost::format(_("R: %s"))
+																/** TRANSLATORS: Tooltip in the messages window */
+																% _("Show unread messages only")).str());
+			break;
+		case ReadUnread::newMessages:
+			read_unread_mode = ReadUnread::readMessages;
+			m_cycleunreadmessagesbtn->set_pic(g_gr->images().get("pics/messages_new_read.png"));
+			m_cycleunreadmessagesbtn->set_tooltip((boost::format(_("R: %s"))
+																/** TRANSLATORS: Tooltip in the messages window */
+																% _("Show both new and read messages")).str());
+			break;
+		case ReadUnread::readMessages:
+			read_unread_mode = ReadUnread::allMessages;
+			m_cycleunreadmessagesbtn->set_pic(g_gr->images().get("pics/messages_new.png"));
+			m_cycleunreadmessagesbtn->set_tooltip((boost::format(_("R: %s"))
+																/** TRANSLATORS: Tooltip in the messages window */
+																% _("Show new messages only")).str());
+			break;
+		default:
+			assert(false); // there is nothing but all, read and new
+	}
+	think();
 }
 
 /**
@@ -559,7 +643,11 @@ void GameMessageMenu::toggle_mode()
 		m_archivebtn->set_tooltip((boost::format(_("Del: %s"))
 											/** TRANSLATORS: Tooltip in the messages window */
 											% _("Restore selected messages")).str());
-		m_togglemodebtn->set_title(_("Show Inbox"));
+		m_togglemodebtn->set_pic(g_gr->images().get("pics/message_new.png"));
+		m_togglemodebtn->set_tooltip(_("Show Inbox"));
+
+		// read/unread is now meaningless
+		m_cycleunreadmessagesbtn->set_enabled(false);
 		break;
 	case Archive:
 		mode = Inbox;
@@ -569,7 +657,10 @@ void GameMessageMenu::toggle_mode()
 		m_archivebtn->set_tooltip((boost::format(_("Del: %s"))
 											/** TRANSLATORS: Tooltip in the messages window */
 											% _("Archive selected messages")).str());
-		m_togglemodebtn->set_title(_("Show Archive"));
+		m_togglemodebtn->set_pic(g_gr->images().get("pics/message_archived.png"));
+		m_togglemodebtn->set_tooltip(_("Show Archive"));
+		// restore read/unread
+		m_cycleunreadmessagesbtn->set_enabled(true);
 		break;
 	default:
 		assert(false); // there is nothing but Archive and Inbox

@@ -50,6 +50,7 @@ struct GameMessageMenu : public UI::UniqueWindow {
 
 private:
 	enum Cols {ColSelect, ColStatus, ColTitle, ColTimeSent};
+	enum class ReadUnread: uint8_t {allMessages, readMessages, newMessages};
 
 	Interactive_Player & iplayer() const;
 	void selected(uint32_t);
@@ -62,6 +63,7 @@ private:
 	void toggle_mode();
 	void center_view();
 	void filter_messages(Widelands::Message::Type);
+	void cycle_unread_messages();
 	void toggle_filter_messages_button(UI::Button &, Widelands::Message::Type);
 	void set_filter_messages_tooltips();
 	void update_record(UI::Table<uintptr_t>::Entry_Record & er, const Widelands::Message &);
@@ -72,6 +74,8 @@ private:
 	UI::Button * m_togglemodebtn;
 	UI::Button * m_centerviewbtn;
 	Mode mode;
+	UI::Button * m_cycleunreadmessagesbtn;
+	ReadUnread read_unread_mode;
 	// Buttons for message types
 	UI::Button * m_geologistsbtn;
 	UI::Button * m_economybtn;
