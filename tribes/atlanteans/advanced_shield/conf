@@ -1,9 +1,0 @@
-help=_These advanced shields are used by the best soldiers of the Atlanteans. They are produced in the armor smithy and used in the labyrinth – together with food – to train soldiers from Defense level 1 to level 2.
-
-default_target_quantity=1
-preciousness=1
-
-# A golden shield with the sign of the Atlanteans
-[idle]
-pics=idle.png
-hotspot=10 17
