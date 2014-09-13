@@ -10,7 +10,7 @@ log=3
 blackwood=1
 raw_stone=1
 grout=1
-thatchreed=2
+thatch_reed=2
 
 [return_on_dismantle]
 log=1
@@ -21,8 +21,8 @@ raw_stone=1
 smelter=1
 
 [inputs]
-ironore=8
-goldore=8
+iron_ore=8
+gold_ore=8
 coal=8
 
 [programs]
@@ -36,14 +36,14 @@ work=_working
 [smelt_iron]
 return=skipped unless economy needs iron
 sleep=32000
-consume=coal ironore
+consume=coal iron_ore
 animate=working 35000
 produce=iron
 
 [smelt_gold]
 return=skipped unless economy needs gold
 sleep=32000
-consume=coal goldore
+consume=coal gold_ore
 animate=working 35000
 produce=gold
 

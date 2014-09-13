@@ -35,7 +35,7 @@ return {
             grout = 12,
             hammer = 11,
             hunting_spear = 2,
-            ironore = 5,
+            iron_ore = 5,
             kitchen_tools = 4,
             meal = 4,
             pick = 8,
@@ -44,7 +44,7 @@ return {
             scythe = 6,
             shovel = 4,
             snack = 3,
-            thatchreed = 24,
+            thatch_reed = 24,
             log = 79,
          },
          workers = {
@@ -67,7 +67,7 @@ return {
 
       place_building_in_region(plr, "battlearena", sf:region(12), {
          wares = {
-            pittabread = 8,
+            pitta_bread = 8,
             fish = 6,
             meat = 6,
          }

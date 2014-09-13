@@ -20,7 +20,7 @@ shovel=1
 2=animation harvesting 12000  #4sec animation cycle
 3=object harvest
 4=animation harvesting 1
-5=createware thatchreed
+5=createware thatch_reed
 6=return
 
 [idle]

@@ -3,8 +3,8 @@
 function init_human_player(player, f_hq, tribename)
 	player:allow_buildings("all")
 	if tribename == "barbarians" then
-			prefilled_buildings(player, 
-			{"headquarters_interim", f_hq.x, f_hq.y, 
+			prefilled_buildings(player,
+			{"headquarters_interim", f_hq.x, f_hq.y,
 				wares = {
 					 log = 3,
 				},
@@ -28,7 +28,7 @@ function init_human_player(player, f_hq, tribename)
 					 charcoal_burner = 1
 				},
 				soldiers = {
-					[{0,0,0,0}] = 3,		
+					[{0,0,0,0}] = 3,
 				}
 			}
 		)
@@ -65,7 +65,7 @@ function init_human_player(player, f_hq, tribename)
 		  }
 	   })
 
-	end		
+	end
 	if tribename == "atlanteans" then
 	    prefilled_buildings(player, { "headquarters", f_hq.x, f_hq.y,
 		    wares = {
@@ -74,7 +74,7 @@ function init_human_player(player, f_hq, tribename)
 				spidercloth = 1
 			},
 			workers = {
-				 baker = 1,          
+				 baker = 1,
 				 blackroot_farmer = 1,
 				 builder = 2,
 				 carrier = 10,
@@ -106,9 +106,9 @@ end
 function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 	if tribename == "barbarians" then
 		player:allow_buildings("all")
-		
-		prefilled_buildings(player, 
-			{ "port", f_hq.x, f_hq.y, 
+
+		prefilled_buildings(player,
+			{ "port", f_hq.x, f_hq.y,
 			   wares = {
 				  ax = 6,
 				  bread_paddle = 2,
@@ -119,18 +119,18 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 				  hammer = 12,
 				  hunting_spear = 2,
 				  iron = 12,
-				  ironore = 5,
+				  iron_ore = 5,
 				  kitchen_tools = 4,
 				  meal = 4,
 				  meat = 6,
 				  pick = 14,
-				  pittabread = 8,
+				  pitta_bread = 8,
 				  ration = 12,
 				  raw_stone = 80,
 				  scythe = 6,
 				  shovel = 4,
 				  snack = 3,
-				  thatchreed = 24,
+				  thatch_reed = 24,
 				  log = 150,
 			   },
 			   workers = {
@@ -146,7 +146,7 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 				  miner = 4,
 				  ranger = 1,
 				  stonemason = 2,
-				  ox = 20, 
+				  ox = 20,
 			   },
 			   soldiers = { [{0,0,0,0}] = 45 },
 			},
@@ -158,15 +158,15 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 			   },
 		 }
 		)
-	end	
-		
+	end
+
 	if tribename == "empire" then
 		player:allow_buildings("all")
 
-		prefilled_buildings(player, 
-			{ "port", f_hq.x, f_hq.y, 
+		prefilled_buildings(player,
+			{ "port", f_hq.x, f_hq.y,
 			   wares = {
-				 helm = 4,
+				 helmet = 4,
 				 wood_lance = 5,
 				 ax = 6,
 				 bread_paddle = 2,
@@ -183,7 +183,7 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 				 hammer = 14,
 				 hunting_spear = 2,
 				 iron = 12,
-				 ironore = 5,
+				 iron_ore = 5,
 				 kitchen_tools = 4,
 				 marble = 60,
 				 marblecolumn = 6,
@@ -220,7 +220,7 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 			   soldiers = { [{0,0,0,0}] = 45 },
 			},
 			{ "port", f_port.x, f_port.y},
-			{ "shipyard", f_shipyard.x, f_shipyard.y, 
+			{ "shipyard", f_shipyard.x, f_shipyard.y,
 			   wares = {
 				 cloth = 4,
 				 log = 2,
@@ -233,25 +233,25 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 	if tribename == "atlanteans" then
 		player:allow_buildings("all")
 
-		prefilled_buildings(player, { "port", f_hq.x, f_hq.y, 
+		prefilled_buildings(player, { "port", f_hq.x, f_hq.y,
 		   wares = {
 			 diamond = 7,
-			 ironore = 5,
+			 iron_ore = 5,
 			 quartz = 9,
 			 stone = 50,
 			 spideryarn = 9,
 			 log = 100,
 			 coal = 12,
 			 gold = 4,
-			 goldyarn = 6,
+			 gold_yarn = 6,
 			 iron = 8,
 			 planks = 50,
 			 spidercloth = 5,
 			 blackroot = 5,
-			 blackrootflour = 12,
+			 blackroot_flour = 12,
 			 bread = 8,
 			 corn = 5,
-			 cornflour = 12,
+			 corn_flour = 12,
 			 fish = 3,
 			 meat = 3,
 			 smoked_fish = 6,
@@ -297,7 +297,7 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 			  log = 2,
 		   }}
 		)
-	end	
+	end
 	return true
 end
 

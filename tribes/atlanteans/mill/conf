@@ -1,6 +1,6 @@
 size=medium
-output=cornflour
-output=blackrootflour
+output=corn_flour
+output=blackroot_flour
 
 [aihints]
 build_material=false
@@ -24,31 +24,31 @@ blackroot=6
 
 [programs]
 # TRANSLATORS: "Completed/Skipped/Did not start grinding corn because ...
-produce_cornflour=_grinding corn
+produce_corn_flour=_grinding corn
 # TRANSLATORS: "Completed/Skipped/Did not start grinding blackroot because ...
-produce_blackrootflour=_grinding blackroot
+produce_blackroot_flour=_grinding blackroot
 # TRANSLATORS: "Completed/Skipped/Did not start working because ...
 work=_working
 
-[produce_cornflour]
-return=skipped when site has blackroot and economy needs blackrootflour and not economy needs cornflour
-return=skipped unless economy needs cornflour
+[produce_corn_flour]
+return=skipped when site has blackroot and economy needs blackroot_flour and not economy needs corn_flour
+return=skipped unless economy needs corn_flour
 sleep=3500
 consume=corn
 animate=working 15000
-produce=cornflour
+produce=corn_flour
 
-[produce_blackrootflour]
-return=skipped when site has corn and economy needs cornflour and not economy needs blackrootflour
-# No check whether we need blackrootflour because blackroots cannot be used for anything else.
+[produce_blackroot_flour]
+return=skipped when site has corn and economy needs corn_flour and not economy needs blackroot_flour
+# No check whether we need blackroot_flour because blackroots cannot be used for anything else.
 sleep=3500
 consume=blackroot
 animate=working 15000
-produce=blackrootflour
+produce=blackroot_flour
 
 [work]
-call=produce_cornflour
-call=produce_blackrootflour
+call=produce_corn_flour
+call=produce_blackroot_flour
 return=skipped
 
 [idle]

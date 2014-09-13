@@ -1,5 +1,5 @@
 size=mine
-output=ironore
+output=iron_ore
 
 [aihints]
 build_material=false
@@ -28,17 +28,17 @@ work=_mining
 
 [work]
 sleep=45000
-return=skipped unless economy needs ironore
+return=skipped unless economy needs iron_ore
 consume=smoked_fish,smoked_meat:2 bread:2
 animate=working 20000
 mine=iron 4 100 5 2
-produce=ironore
+produce=iron_ore
 animate=working 20000
 mine=iron 4 100 5 2
-produce=ironore:2
+produce=iron_ore:2
 animate=working 20000
 mine=iron 4 100 5 2
-produce=ironore:2
+produce=iron_ore:2
 
 [out_of_resource_notification]
 title=_Main Iron Vein Exhausted

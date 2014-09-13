@@ -20,7 +20,7 @@ return {
 
    prefilled_buildings(p, { "headquarters", sf.x, sf.y,
       wares = {
-         helm = 4,
+         helmet = 4,
          wood_lance = 5,
          ax = 6,
          bread_paddle = 2,
@@ -37,7 +37,7 @@ return {
          hammer = 14,
          hunting_spear = 2,
          iron = 12,
-         ironore = 5,
+         iron_ore = 5,
          kitchen_tools = 4,
          marble = 25,
          marblecolumn = 6,

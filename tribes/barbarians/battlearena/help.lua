@@ -26,7 +26,7 @@ return {
 		"fulltrained-evade", "fulltrained") ..
 
 	rt(h3(_"Evade Training:")) ..
-	dependencies_training_food("barbarians", { {"fish", "meat"}, {"strongbeer"}, {"pittabread"}}) ..
+	dependencies_training_food("barbarians", { {"fish", "meat"}, {"stout"}, {"pitta_bread"}}) ..
 
 	--Workers Section
 	building_help_crew_string("barbarians", building_description) ..

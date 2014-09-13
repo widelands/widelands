@@ -1,8 +1,0 @@
-help=_Basic armor for Empire soldiers. It is produced in the armor smithy and used in the training camp – together with food – to train soldiers from health level 1 to level 2.
-
-default_target_quantity=1
-preciousness=0
-
-[idle]
-pics=idle.png
-hotspot=3 11

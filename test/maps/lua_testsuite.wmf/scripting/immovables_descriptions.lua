@@ -175,7 +175,7 @@ end
 
 function test_descr:test_output_ware_types()
 	local building_description = egbase:get_building_description("barbarians","bakery")
-	assert_equal("pittabread", building_description.output_ware_types[1].name)
+	assert_equal("pitta_bread", building_description.output_ware_types[1].name)
 	building_description = egbase:get_building_description("barbarians","gamekeepers_hut")
 	assert_equal(nil, building_description.output_ware_types[1])
 end
@@ -321,7 +321,7 @@ end
 --  =======================================================
 
 function test_descr:test_ware_descr()
-   assert_error("Wrong tribe", function() egbase:get_ware_description("XXX","thatchreed") end)
+   assert_error("Wrong tribe", function() egbase:get_ware_description("XXX","thatch_reed") end)
    assert_error("Wrong ware", function() egbase:get_ware_description("barbarians","XXX") end)
    assert_error("Wrong number of parameters: 1", function() egbase:get_ware_description("XXX") end)
    assert_error("Wrong number of parameters: 3", function() egbase:get_ware_description("XXX","YYY","ZZZ") end)
@@ -329,12 +329,12 @@ end
 
 -- This is actually a property of MapOjectDescription
 function test_descr:test_descname()
-   assert_equal(_"Thatch Reed", egbase:get_ware_description("barbarians","thatchreed").descname)
+   assert_equal(_"Thatch Reed", egbase:get_ware_description("barbarians","thatch_reed").descname)
 end
 
 -- This is actually a property of MapOjectDescription
 function test_descr:test_name()
-   assert_equal("thatchreed", egbase:get_ware_description("barbarians","thatchreed").name)
+   assert_equal("thatch_reed", egbase:get_ware_description("barbarians","thatch_reed").name)
 end
 
 function test_descr:test_consumers()

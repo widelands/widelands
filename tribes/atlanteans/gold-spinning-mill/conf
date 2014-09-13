@@ -1,5 +1,5 @@
 size=small
-output=goldyarn
+output=gold_yarn
 
 [aihints]
 build_material=false
@@ -25,10 +25,10 @@ work=_working
 
 [work]
 sleep=15000
-return=skipped unless economy needs goldyarn
+return=skipped unless economy needs gold_yarn
 consume=gold
 animate=working 25000
-produce=goldyarn
+produce=gold_yarn
 
 [idle]
 pics=gold-spinning-mill_i_??.png  # ???

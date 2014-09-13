@@ -1,9 +1,0 @@
-help=_This corn is processed in the mill into fine cornflour that every Atlantean baker needs for a good bread. Also horse and spider farms need to be provided with corn.
-
-default_target_quantity=25 # currently not used
-preciousness=12
-
-# Simply corn
-[idle]
-pics=idle.png
-hotspot=6 11

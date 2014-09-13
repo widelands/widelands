@@ -21,7 +21,7 @@ weaver=1
 
 [inputs]
 spideryarn=8
-goldyarn=4
+gold_yarn=4
 
 [programs]
 # TRANSLATORS: "Completed/Skipped/Did not start weaving spidercloth because ...
@@ -50,7 +50,7 @@ produce=tabard
 [produce_golden_tabard]
 return=skipped unless economy needs golden_tabard
 sleep=20000
-consume=spideryarn goldyarn
+consume=spideryarn gold_yarn
 animate=working 20000
 produce=golden_tabard
 

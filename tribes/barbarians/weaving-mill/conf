@@ -7,7 +7,7 @@ build_material=false
 [buildcost]
 log=5
 raw_stone=2
-thatchreed=2
+thatch_reed=2
 
 [return_on_dismantle]
 log=2
@@ -17,7 +17,7 @@ raw_stone=2
 weaver=1
 
 [inputs]
-thatchreed=8
+thatch_reed=8
 
 [programs]
 # TRANSLATORS: "Completed/Skipped/Did not start weaving because ...
@@ -26,7 +26,7 @@ work=_weaving
 [work]
 sleep=20000
 return=skipped unless economy needs cloth
-consume=thatchreed
+consume=thatch_reed
 animate=working 25000
 produce=cloth
 

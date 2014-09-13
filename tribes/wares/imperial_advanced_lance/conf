@@ -1,8 +1,0 @@
-help=_This is an advanced lance with a steel tip. It is produced in a weapon smithy and used in a training camp – together with food – to train soldiers from attack level 1 to level 2.
-
-default_target_quantity=1
-preciousness=1
-
-[idle]
-pics=idle.png
-hotspot=7 10

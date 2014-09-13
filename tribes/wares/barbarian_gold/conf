@@ -1,8 +1,0 @@
-help=_Gold is the most valuable of all metals; only very important things are embellished with it. It is obtained out of gold ore in a smelting works. It is used as a precious building material and to produce different axes (in the war mill) and different parts of armor (in the helm smithy).
-
-default_target_quantity=20
-preciousness=2
-
-[idle]
-pics=idle.png
-hotspot=4 10

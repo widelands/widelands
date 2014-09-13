@@ -243,7 +243,7 @@ function build_eastern_trainings_area(citadel_field)
             gold = 10,
             grout = 30,
             raw_stone = 30,
-            thatchreed = 40,
+            thatch_reed = 40,
          }
       },
       {"trainingcamp", 31, 56, soldiers = {} },

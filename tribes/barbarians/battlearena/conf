@@ -7,23 +7,23 @@ log=6
 raw_stone=4
 grout=6
 gold=4
-thatchreed=3
+thatch_reed=3
 
 [return_on_dismantle]
 log=3
 raw_stone=3
 grout=3
 gold=2
-thatchreed=1
+thatch_reed=1
 
 [working positions]
 trainer=1
 
 [inputs]
-pittabread=10
+pitta_bread=10
 fish=6
 meat=6
-strongbeer=6
+stout=6
 
 [soldier evade]
 min_level=0
@@ -45,7 +45,7 @@ check_soldier=soldier attack 9    # dummy check to get sleep rated as skipped - 
 check_soldier=soldier evade 0 # Fails when aren't any soldier of level 0 evade
 sleep=15000
 check_soldier=soldier evade 0 # Because the soldier can be expulsed by the player
-consume=pittabread fish,meat strongbeer
+consume=pitta_bread fish,meat stout
 animate=working 15000
 train=soldier evade 0 1
 
@@ -53,7 +53,7 @@ train=soldier evade 0 1
 check_soldier=soldier evade 1 # Fails when aren't any soldier of level 1 evade
 sleep=15000
 check_soldier=soldier evade 1 # Because the soldier can be expulsed by the player
-consume=pittabread:2 fish,meat strongbeer
+consume=pitta_bread:2 fish,meat stout
 animate=working 15000
 train=soldier evade 1 2
 

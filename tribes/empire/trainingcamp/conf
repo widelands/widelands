@@ -29,7 +29,7 @@ lance=2
 advanced_lance=2
 heavy_lance=2
 war_lance=2
-helm=2
+helmet=2
 armor=2
 chain_armor=2
 plate_armor=2
@@ -98,7 +98,7 @@ train=soldier attack 3 4
 check_soldier=soldier hp 0
 sleep=30000
 check_soldier=soldier hp 0
-consume=helm bread,fish,meat
+consume=helmet bread,fish,meat
 train=soldier hp 0 1
 
 [upgrade_soldier_hp_1]

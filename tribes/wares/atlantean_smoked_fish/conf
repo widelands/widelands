@@ -1,8 +1,0 @@
-help=_As no Atlantean likes raw fish, smoking it in a smokery is the most common way to make it edible.
-
-default_target_quantity=30
-preciousness=3
-
-[idle]
-pics=idle.png
-hotspot=9 16

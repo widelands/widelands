@@ -1,8 +1,0 @@
-help=_This is the medium trident. It is produced in the weapon smithy and used by advanced soldiers in the dungeon to train from attack level 1 to level 2 (together with food). 
-
-default_target_quantity=1
-preciousness=1
-
-[idle]
-pics=idle.png
-hotspot=10 17

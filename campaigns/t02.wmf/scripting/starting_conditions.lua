@@ -1,13 +1,13 @@
 -- =======================================================================
---                            Starting conditions                           
+--                            Starting conditions
 -- =======================================================================
 
 -- Allow some buildings
 plr:forbid_buildings("all")
 plr:allow_buildings{
    "lumberjacks_hut",
-   "quarry", 
-   "rangers_hut", 
+   "quarry",
+   "rangers_hut",
    "sentry",
    "barrier"
 }
@@ -26,18 +26,18 @@ hq:set_wares{
    hammer=12,
    hunting_spear=2,
    iron=12,
-   ironore=5,
+   iron_ore=5,
    kitchen_tools=4,
    meal=4,
    meat=6,
    pick=14,
-   pittabread=8,
+   pitta_bread=8,
    ration=12,
    raw_stone=40,
    scythe=6,
    shovel=4,
    snack=3,
-   thatchreed=24,
+   thatch_reed=24,
    log=80,
 }
 hq:set_workers{
@@ -58,7 +58,7 @@ hq:set_workers{
 hq:set_soldiers({0,0,0,0}, 45)
 
 -- ============
--- Build roads 
+-- Build roads
 -- ============
 connected_road(plr, hq_pos.brn.immovable, "r,r|br,r|r,r")
 connected_road(plr, hq_pos.brn.immovable, "l,l|l,bl,bl|br,r|br,r|r,tr|tr,tr,tr")
@@ -69,6 +69,6 @@ prefilled_buildings(plr,
    {"lumberjacks_hut", 12, 13},
    {"quarry", 8, 12},
    {"rangers_hut", 9, 13}
-) 
+)
 
 

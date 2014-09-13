@@ -1,8 +1,0 @@
-help=_A warhelm is an enhanced armor for barbarian warriors. It is produced in a helm smithy and used in a training camp – together with food – to train soldiers from health level 1 to level 2.
-
-default_target_quantity=1
-preciousness=2
-
-[idle]
-pics=idle.png
-hotspot=7 12

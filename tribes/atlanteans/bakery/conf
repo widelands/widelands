@@ -18,8 +18,8 @@ stone=2
 baker=1
 
 [inputs]
-blackrootflour=4
-cornflour=4
+blackroot_flour=4
+corn_flour=4
 water=8
 
 [programs]
@@ -29,7 +29,7 @@ work=_working
 [work]
 sleep=35000
 return=skipped unless economy needs bread
-consume=water:2 blackrootflour cornflour
+consume=water:2 blackroot_flour corn_flour
 animate=working 30000
 produce=bread:2
 

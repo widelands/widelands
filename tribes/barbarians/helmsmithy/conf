@@ -1,5 +1,5 @@
 size=big
-output=helm
+output=helmet
 output=mask
 output=warhelm
 
@@ -11,13 +11,13 @@ log=3
 blackwood=1
 raw_stone=2
 grout=2
-thatchreed=3
+thatch_reed=3
 
 [return_on_dismantle]
 log=1
 raw_stone=2
 grout=1
-thatchreed=1
+thatch_reed=1
 
 [working positions]
 helmsmith=1
@@ -28,8 +28,8 @@ gold=8
 coal=8
 
 [programs]
-# TRANSLATORS: "Completed/Skipped/Did not start forging a helm because ...
-produce_helm=_forging a helm
+# TRANSLATORS: "Completed/Skipped/Did not start forging a helmet because ...
+produce_helmet=_forging a helmet
 # TRANSLATORS: "Completed/Skipped/Did not start forging a mask because ...
 produce_mask=_forging a mask
 # TRANSLATORS: "Completed/Skipped/Did not start forging a warhelm because ...
@@ -37,12 +37,12 @@ produce_warhelm=_forging a warhelm
 # TRANSLATORS: "Completed/Skipped/Did not start working because ...
 work=_working
 
-[produce_helm]
-return=skipped unless economy needs helm
+[produce_helmet]
+return=skipped unless economy needs helmet
 sleep=32000
 consume=coal iron
 animate=working 35000
-produce=helm
+produce=helmet
 
 [produce_mask]
 return=skipped unless economy needs mask
@@ -59,7 +59,7 @@ animate=working 55000
 produce=warhelm
 
 [work]
-call=produce_helm
+call=produce_helmet
 call=produce_mask
 call=produce_warhelm
 return=skipped

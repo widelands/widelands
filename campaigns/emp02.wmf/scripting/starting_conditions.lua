@@ -1,5 +1,5 @@
 -- =======================================================================
---                                 Player 1                                 
+--                                 Player 1
 -- =======================================================================
 p1:forbid_buildings("all")
 p1:allow_buildings{
@@ -8,10 +8,10 @@ p1:allow_buildings{
    "quarry",
    "sawmill",
 }
-prefilled_buildings(p1, 
+prefilled_buildings(p1,
    {"headquarters", 16, 21,
       wares = {
-         helm = 4,
+         helmet = 4,
          wood_lance = 5,
          ax = 6,
          bread_paddle = 2,
@@ -28,7 +28,7 @@ prefilled_buildings(p1,
          hammer = 12,
          hunting_spear = 2,
          iron = 12,
-         ironore = 5,
+         iron_ore = 5,
          kitchen_tools = 4,
          marble = 25,
          marblecolumn = 6,
@@ -46,7 +46,7 @@ prefilled_buildings(p1,
          wine = 8,
          wood = 45,
          wool = 2,
-      }, 
+      },
       workers = {
          armorsmith = 1,
          brewer = 1,
@@ -68,7 +68,7 @@ prefilled_buildings(p1,
 )
 
 -- =======================================================================
---                                 Player 2                                 
+--                                 Player 2
 -- =======================================================================
 p2:forbid_buildings("all")
 p2:allow_buildings{
@@ -89,7 +89,7 @@ p2:allow_buildings{
 }
 
 prefilled_buildings(p2,
-   {"headquarters", 60, 65, 
+   {"headquarters", 60, 65,
    wares = {
       ax = 6,
       bread_paddle = 2,
@@ -104,18 +104,18 @@ prefilled_buildings(p2,
       hammer = 12,
       hunting_spear = 2,
       iron = 12,
-      ironore = 5,
+      iron_ore = 5,
       kitchen_tools = 4,
       meal = 4,
       meat = 6,
       pick = 14,
-      pittabread = 8,
+      pitta_bread = 8,
       ration = 12,
       raw_stone = 40,
       scythe = 6,
       shovel = 4,
       snack = 3,
-      thatchreed = 24,
+      thatch_reed = 24,
       log = 80,
    },
    workers = {

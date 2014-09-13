@@ -8,7 +8,7 @@ output=snack
 [enhancement_cost]
 log=2
 grout=2
-thatchreed=1
+thatch_reed=1
 
 [return_on_dismantle_on_enhanced]
 log=1
@@ -19,7 +19,7 @@ innkeeper=1
 
 [inputs]
 fish=4
-pittabread=4
+pitta_bread=4
 meat=4
 beer=4
 
@@ -34,14 +34,14 @@ work=_working
 [produce_ration]
 return=skipped unless economy needs ration
 sleep=14000
-consume=fish,pittabread,meat
+consume=fish,pitta_bread,meat
 animate=working 19000
 produce=ration
 
 [produce_snack]
 return=skipped unless economy needs snack
 sleep=15000
-consume=pittabread fish,meat beer
+consume=pitta_bread fish,meat beer
 animate=working 20000
 produce=snack
 

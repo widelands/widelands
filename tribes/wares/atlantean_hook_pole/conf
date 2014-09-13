@@ -1,8 +1,0 @@
-help=_This hook pole is used by the smoker to suspend all the meat and fish from the top of the smokery. It is created by the toolsmith.
-
-default_target_quantity=1
-
-# a pole with a hook
-[idle]
-pics=idle.png
-hotspot=9 14

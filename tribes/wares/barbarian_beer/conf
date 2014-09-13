@@ -1,8 +1,0 @@
-help=_Beer is produced in micro breweries used in inns and big inns to produce snacks.
-
-default_target_quantity=15
-preciousness=2
-
-[idle]
-pics=idle.png
-hotspot=5 9

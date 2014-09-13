@@ -1,8 +1,0 @@
-help=_The fishing net is used by the fisher and produced by the toolsmith.
-
-default_target_quantity=2
-
-# A simple fishing net
-[idle]
-pics=idle.png
-hotspot=10 17

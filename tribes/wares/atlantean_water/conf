@@ -1,8 +1,0 @@
-help=_Water is the essence of life! It is used in the bakery and the horse and spider farms.
-
-default_target_quantity=25 # currently not used
-preciousness=7
-
-[idle]
-pics=idle.png
-hotspot=4 8

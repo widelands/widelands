@@ -1,7 +1,0 @@
-help=_This spear is light enough to be thrown, but heavy enough to kill any animal in one blow. It is only used by hunters.
-
-default_target_quantity=1
-
-[idle]
-pics=idle.png
-hotspot=6 5

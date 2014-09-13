@@ -1,5 +1,5 @@
 size=medium
-output=pittabread
+output=pitta_bread
 
 [aihints]
 build_material=false
@@ -8,7 +8,7 @@ build_material=false
 log=2
 blackwood=2
 raw_stone=2
-thatchreed=2
+thatch_reed=2
 
 [return_on_dismantle]
 log=1
@@ -28,12 +28,12 @@ work=_working
 
 [work]
 sleep=20000
-return=skipped unless economy needs pittabread
+return=skipped unless economy needs pitta_bread
 consume=water:3 wheat:3
 animate=working 20000
-produce=pittabread
+produce=pitta_bread
 animate=working 20000
-produce=pittabread
+produce=pitta_bread
 
 [idle]
 pics=bakery_i_??.png  # ???

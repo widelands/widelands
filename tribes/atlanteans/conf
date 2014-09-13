@@ -10,7 +10,7 @@ carrier2=horse
 icon=pics/icon.png
 # Wares and workers positions in wares window. Columns are separated by ;,
 # Entries in the columns separated by ,
-wares_order=stone, log, planks, spideryarn, spidercloth; fish, smoked_fish, meat, smoked_meat, water, corn, cornflour, blackroot, blackrootflour, bread; quartz, diamond, coal, ironore, iron, goldore, gold; pick, saw, shovel, hammer, milking_tongs, fishing_net, bucket, hunting_bow, hook_pole, scythe, bread_paddle, fire_tongs; light_trident, long_trident, steel_trident, double_trident, heavy_double_trident,steel_shield, advanced_shield, tabard, goldyarn, golden_tabard
+wares_order=stone, log, planks, spideryarn, spidercloth; fish, smoked_fish, meat, smoked_meat, water, corn, corn_flour, blackroot, blackroot_flour, bread; quartz, diamond, coal, iron_ore, iron, gold_ore, gold; pick, saw, shovel, hammer, milking_tongs, fishing_net, bucket, hunting_bow, hook_pole, scythe, bread_paddle, fire_tongs; light_trident, long_trident, steel_trident, double_trident, heavy_double_trident,steel_shield, advanced_shield, tabard, gold_yarn, golden_tabard
 
 workers_order=carrier, horse, horsebreeder; stonecutter, woodcutter, sawyer, forester, builder, spiderbreeder, weaver, shipwright; fisher, fish_breeder, hunter, smoker, farmer, blackroot_farmer, miller, baker; geologist, miner, charcoal_burner, smelter; toolsmith; soldier, trainer, weaponsmith, armorsmith, scout
 
@@ -53,12 +53,12 @@ shipconstruction=_Ship Construction Site
 [ware types]
 advanced_shield=_Advanced Shield
 bread_paddle=_Bread Paddle
-blackrootflour=_Blackroot Flour
+blackroot_flour=_Blackroot Flour
 blackroot=_Blackroot
 bread=_Bread
 bucket=_Buckets
 coal=_Coal
-cornflour=_Cornflour
+corn_flour=_Cornflour
 corn=_Corn
 diamond=_Diamond
 double_trident=_Double Trident
@@ -66,14 +66,14 @@ fire_tongs=_Fire Tongs
 fishing_net=_Fishing Net
 fish=_Fish
 golden_tabard=_Golden Tabard
-goldore=_Gold Ore
+gold_ore=_Gold Ore
 gold=_Gold
-goldyarn=_Gold Yarn
+gold_yarn=_Gold Yarn
 hammer=_Hammer
 heavy_double_trident=_Heavy Double Trident
 hook_pole=_Hook pole
 hunting_bow=_Hunting Bow
-ironore=_Iron Ore
+iron_ore=_Iron Ore
 iron=_Iron
 light_trident=_Light Trident
 long_trident=_Long Trident

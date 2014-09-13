@@ -47,7 +47,7 @@ die_e=die_e
 # SOLDIER SPECIFIC STUFF ENDS HERE
 
 [buildcost]
-helm=1
+helmet=1
 wood_lance=1
 carrier=1
 

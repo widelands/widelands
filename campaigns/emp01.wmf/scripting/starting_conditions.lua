@@ -1,12 +1,12 @@
 -- =======================================================================
---                                 Player 1                                 
+--                                 Player 1
 -- =======================================================================
 p1:forbid_buildings("all")
 
 hq = p1:place_building("headquarters_shipwreck",
    wl.Game().map:get_field(6, 62), false, true)
 hq:set_wares{
-   helm = 4,
+   helmet = 4,
    wood_lance = 5,
    ax = 6,
    bread_paddle = 2,
@@ -23,7 +23,7 @@ hq:set_wares{
    hammer = 12,
    hunting_spear = 2,
    iron = 12,
-   ironore = 5,
+   iron_ore = 5,
    kitchen_tools = 4,
    marble = 25,
    marblecolumn = 6,

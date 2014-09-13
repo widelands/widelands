@@ -24,7 +24,7 @@ return {
    if not pcall(function()
       place_building_in_region(plr, "warehouse", sf:region(7), {
          wares = {
-            helm = 2,
+            helmet = 2,
             wood_lance = 5,
             ax = 6,
             bread_paddle = 2,
@@ -36,7 +36,7 @@ return {
             hammer = 14,
             hunting_spear = 2,
             iron = 4,
-            ironore = 5,
+            iron_ore = 5,
             kitchen_tools = 4,
             marble = 25,
             marblecolumn = 6,
@@ -83,7 +83,7 @@ return {
          wares = {
             fish = 2,
             meat = 2,
-            helm = 2,
+            helmet = 2,
          },
       })
 

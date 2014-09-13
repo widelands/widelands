@@ -1,7 +1,0 @@
-help=_The Scythe is the tool of the farmer. It is produced by the toolsmith.
-
-default_target_quantity=1
-
-[idle]
-pics=idle.png
-hotspot=6 2

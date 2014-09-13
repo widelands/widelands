@@ -1,12 +1,12 @@
 size=medium
 buildable=no
 enhanced_building=yes
-output=strongbeer
+output=stout
 
 [enhancement_cost]
 log=3
 raw_stone=1
-thatchreed=1
+thatch_reed=1
 
 [return_on_dismantle_on_enhanced]
 log=1
@@ -26,10 +26,10 @@ work=_brewing
 
 [work]
 sleep=30000
-return=skipped unless economy needs strongbeer
+return=skipped unless economy needs stout
 consume=water wheat
 animate=working 30000
-produce=strongbeer
+produce=stout
 
 [idle]
 pics=brewery_i_??.png  # ???

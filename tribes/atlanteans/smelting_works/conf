@@ -18,8 +18,8 @@ stone=3
 smelter=1
 
 [inputs]
-ironore=8
-goldore=8
+iron_ore=8
+gold_ore=8
 coal=8
 
 [programs]
@@ -33,14 +33,14 @@ work=_working
 [smelt_iron]
 return=skipped unless economy needs iron
 sleep=25000
-consume=ironore coal
+consume=iron_ore coal
 animate=working 35000
 produce=iron
 
 [smelt_gold]
 return=skipped unless economy needs gold
 sleep=25000
-consume=goldore coal
+consume=gold_ore coal
 animate=working 35000
 produce=gold
 

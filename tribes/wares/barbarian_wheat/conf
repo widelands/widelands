@@ -1,8 +1,0 @@
-help=_Wheat is essential for surviving. It is produced in farms and consumed by bakeries, micro breweries and breweries. Also Cattle farms need to be supplied with wheat.
-
-default_target_quantity=25 # currently not used
-preciousness=12
-
-[idle]
-pics=wheat_idle.png
-hotspot=-1 6

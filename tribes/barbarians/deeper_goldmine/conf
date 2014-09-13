@@ -1,7 +1,7 @@
 size=mine
 buildable=no
 enhanced_building=yes
-output=goldore
+output=gold_ore
 
 [aihints]
 mines=gold
@@ -28,14 +28,14 @@ work=_mining
 
 [work]
 sleep=40000
-return=skipped unless economy needs goldore
+return=skipped unless economy needs gold_ore
 consume=meal
 animate=working 16000
 mine=gold 2 100 10 2
-produce=goldore:2
+produce=gold_ore:2
 animate=working 18000
 mine=gold 2 100 10 2
-produce=goldore:2
+produce=gold_ore:2
 
 [out_of_resource_notification]
 title=_Main Gold Vein Exhausted

@@ -1,8 +1,0 @@
-help=_The chain armor is a medium armor for Empire soldiers. It is produced in an armor smithy and used in a training camp – together with food – to train soldiers from health level 2 to level 3.
-
-default_target_quantity=1
-preciousness=0
-
-[idle]
-pics=idle.png
-hotspot=3 11

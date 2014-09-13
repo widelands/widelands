@@ -1,9 +1,9 @@
 -- =======================================================================
---                                 Player 1                                 
+--                                 Player 1
 -- =======================================================================
 p1:allow_buildings("all")
 
-prefilled_buildings(p1, { "headquarters_interim", 65, 6, 
+prefilled_buildings(p1, { "headquarters_interim", 65, 6,
    wares = {
       ax = 6,
       bread_paddle = 2,
@@ -15,18 +15,18 @@ prefilled_buildings(p1, { "headquarters_interim", 65, 6,
       hammer = 12,
       hunting_spear = 2,
       iron = 12,
-      ironore = 5,
+      iron_ore = 5,
       kitchen_tools = 4,
       meal = 4,
       meat = 6,
       pick = 14,
-      pittabread = 8,
+      pitta_bread = 8,
       ration = 12,
       raw_stone = 40,
       scythe = 6,
       shovel = 4,
       snack = 3,
-      thatchreed = 24,
+      thatch_reed = 24,
       log = 80,
    },
    workers = {
@@ -42,13 +42,13 @@ prefilled_buildings(p1, { "headquarters_interim", 65, 6,
       miner = 4,
       ranger = 1,
       stonemason = 2,
-      ox = 20, 
+      ox = 20,
    },
    soldiers = { [{0,0,0,0}] = 45 },
 })
 
 -- =======================================================================
---                                 Player 2                                 
+--                                 Player 2
 -- =======================================================================
 p2:forbid_buildings("all")
 p2:allow_buildings{ "lumberjacks_hut" }
@@ -129,7 +129,7 @@ prefilled_buildings(p2,
    }}
 )
 -- =======================================================================
---                                 Player 3                                 
+--                                 Player 3
 -- =======================================================================
 p3:forbid_buildings("all")
 p3:allow_buildings{
@@ -151,7 +151,7 @@ p3:allow_buildings{
    "sentry",
 }
 
-prefilled_buildings(p3, 
+prefilled_buildings(p3,
    { "warehouse", 6, 44, wares = {
          log = 200,
          kitchen_tools = 4,
@@ -159,9 +159,9 @@ prefilled_buildings(p3,
          raw_stone = 40,
          scythe = 6,
          shovel = 4,
-         thatchreed = 24,
+         thatch_reed = 24,
          coal = 40,
-      }, 
+      },
       workers = {
          carrier = 40,
          builder = 4,
@@ -196,10 +196,10 @@ prefilled_buildings(p3,
 )
 
 -- =======================================================================
---                                 Player 4                                 
+--                                 Player 4
 -- =======================================================================
 p4:forbid_buildings("all")
-prefilled_buildings(p4, 
+prefilled_buildings(p4,
    { "castle.atlanteans", 23, 19, soldiers = {
       [{0,0,0,0}] = 2,
       [{2,0,0,0}] = 2,

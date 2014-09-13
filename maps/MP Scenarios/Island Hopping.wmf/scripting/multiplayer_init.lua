@@ -73,16 +73,16 @@ _finish_rewards = {
    },
    { -- Island 2
       { -- 1st to finish
-         coal = 20, ironore = 10, goldore = 10,
+         coal = 20, iron_ore = 10, gold_ore = 10,
       },
       { -- 2st to finish
-         coal = 30, ironore = 15, goldore = 15,
+         coal = 30, iron_ore = 15, gold_ore = 15,
       },
       { -- 3rd to finish
-         coal = 40, ironore = 20, goldore = 20,
+         coal = 40, iron_ore = 20, gold_ore = 20,
       },
       { -- 4th to finish
-         coal = 50, ironore = 25, goldore = 25,
+         coal = 50, iron_ore = 25, gold_ore = 25,
       }
    }
 }
@@ -124,9 +124,9 @@ function getplural(count, resource)
       return ngettext("%s Corn","%s Corn",count):bformat(count)
    elseif  resource == "coal" then
       return ngettext("%s Coal","%s Coal",count):bformat(count)
-   elseif  resource == "ironore" then
+   elseif  resource == "iron_ore" then
       return ngettext("%s Iron Ore","%s Iron Ore",count):bformat(count)
-   elseif  resource == "goldore" then
+   elseif  resource == "gold_ore" then
       return ngettext("%s Gold Ore","%s Gold Ore",count):bformat(count)
    else
       -- TRANSLATORS: number + resource name, e.g. '1 stone'
@@ -166,22 +166,22 @@ function place_headquarters()
       prefilled_buildings(plr, {"headquarters", sf.x, sf.y,
          wares = {
             diamond = 7,
-            ironore = 5,
+            iron_ore = 5,
             quartz = 9,
             stone = 50,
             spideryarn = 9,
             log = 20,
             coal = 12,
             gold = 4,
-            goldyarn = 6,
+            gold_yarn = 6,
             iron = 8,
             planks = 45,
             spidercloth = 5,
             blackroot = 5,
-            blackrootflour = 12,
+            blackroot_flour = 12,
             bread = 8,
             corn = 5,
-            cornflour = 12,
+            corn_flour = 12,
             fish = 3,
             meat = 3,
             smoked_fish = 6,

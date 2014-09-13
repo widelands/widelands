@@ -7,7 +7,7 @@ build_material=false
 [buildcost]
 log=3
 grout=2
-thatchreed=2
+thatch_reed=2
 
 [return_on_dismantle]
 log=2

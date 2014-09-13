@@ -1,8 +1,0 @@
-help=_Besides bread and meat, fish is also a foodstuff for the Empire. Fish are used in taverns, inns and training sites (arena, colosseum, training camp).
-
-default_target_quantity=20 # currently not used
-preciousness=3
-
-[idle]
-pics=idle.png
-hotspot=8 6

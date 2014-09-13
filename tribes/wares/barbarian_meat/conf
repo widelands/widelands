@@ -1,8 +1,0 @@
-help=_Meat contains a lot of energy. It is produced by hunters and used in the taverns, inns and big inns to prepare rations, snacks and meals for the miners. It is also consumed in the training sites (training camp and battle arena).
-
-default_target_quantity=20 # currently not used
-preciousness=3
-
-[idle]
-pics=meat_idle.png
-hotspot=5 6

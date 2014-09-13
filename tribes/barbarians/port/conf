@@ -8,7 +8,7 @@ blackwood=3
 raw_stone=5
 grout=2
 iron=2
-thatchreed=4
+thatch_reed=4
 gold=2
 
 [return_on_dismantle]
@@ -17,7 +17,7 @@ blackwood=2
 raw_stone=3
 grout=1
 iron=1
-thatchreed=1
+thatch_reed=1
 gold=1
 
 [idle]

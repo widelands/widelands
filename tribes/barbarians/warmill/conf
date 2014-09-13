@@ -16,7 +16,7 @@ log=1
 blackwood=1
 raw_stone=2
 grout=1
-thatchreed=1
+thatch_reed=1
 
 [return_on_dismantle_on_enhanced]
 blackwood=1

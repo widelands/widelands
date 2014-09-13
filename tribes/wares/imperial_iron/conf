@@ -1,8 +1,0 @@
-help=_Weapons, armor and tools are made of iron. It is extracted from iron ore in the smelting works.
-
-default_target_quantity=20
-preciousness=4
-
-[idle]
-pics=idle.png
-hotspot=5 8

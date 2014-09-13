@@ -1,8 +1,0 @@
-help=_Wheat is essential for surviving. It is produced by farms and used by mills and breweries. Donkey farms, sheep farms and piggeries also need to be supplied with wheat.
-
-default_target_quantity=25 # currently not used
-preciousness=12
-
-[idle]
-pics=wheat_idle.png
-hotspot=-1 6

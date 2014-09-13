@@ -1,7 +1,7 @@
 size=mine
 buildable=no
 enhanced_building=yes
-output=ironore
+output=iron_ore
 
 [aihints]
 mines=iron
@@ -28,17 +28,17 @@ work=_mining
 
 [work]
 sleep=40000
-return=skipped unless economy needs ironore
+return=skipped unless economy needs iron_ore
 consume=meal
 animate=working 16000
 mine=iron 2 100 10 2
-produce=ironore
+produce=iron_ore
 animate=working 16000
 mine=iron 2 100 10 2
-produce=ironore:2
+produce=iron_ore:2
 animate=working 16000
 mine=iron 2 100 10 2
-produce=ironore:2
+produce=iron_ore:2
 
 [out_of_resource_notification]
 title=_Main Iron Vein Exhausted

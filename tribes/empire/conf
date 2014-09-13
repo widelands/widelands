@@ -10,7 +10,7 @@ carrier2=donkey
 icon=pics/icon.png
 # Wares and workers positions in wares window. Columns are separated by ;,
 # Entries in the columns separated by ,
-wares_order=stone, log, wood, wool,cloth;   fish,meat, water, wheat, flour, bread, beer, grape, wine, ration, meal;  marble, marblecolumn, coal, ironore, iron, goldore, gold;    pick, ax, saw, shovel, hammer, fishing_rod, hunting_spear, scythe, bread_paddle, basket, kitchen_tools, fire_tongs;   wood_lance, lance, advanced_lance, heavy_lance, war_lance, helm, armor, chain_armor, plate_armor
+wares_order=stone, log, wood, wool,cloth;   fish,meat, water, wheat, flour, bread, beer, grape, wine, ration, meal;  marble, marblecolumn, coal, iron_ore, iron, gold_ore, gold;    pick, ax, saw, shovel, hammer, fishing_rod, hunting_spear, scythe, bread_paddle, basket, kitchen_tools, fire_tongs;   wood_lance, lance, advanced_lance, heavy_lance, war_lance, helmet, armor, chain_armor, plate_armor
 
 workers_order=carrier, donkey, donkeybreeder;   stonemason, carpenter, lumberjack, forester, builder, shepherd, weaver, shipwright; fisher, hunter, farmer, miller, baker, brewer, pig-breeder, vinefarmer, innkeeper; geologist, miner, master-miner, charcoal_burner, smelter; toolsmith; soldier, trainer, weaponsmith, armorsmith, scout
 
@@ -65,14 +65,14 @@ fish=_Fish
 fishing_rod=_Fishing Rod
 flour=_Flour
 gold=_Gold
-goldore=_Gold Ore
+gold_ore=_Gold Ore
 grape=_Grape
 hammer=_Hammer
 heavy_lance=_Heavy Lance
-helm=_Helmet
+helmet=_Helmet
 hunting_spear=_Hunting Spear
 iron=_Iron
-ironore=_Iron Ore
+iron_ore=_Iron Ore
 kitchen_tools=_Kitchen Tools
 lance=_Lance
 marblecolumn=_Marble Column

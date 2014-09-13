@@ -1,5 +1,5 @@
 size=mine
-output=goldore
+output=gold_ore
 
 [aihints]
 build_material=false
@@ -28,17 +28,17 @@ work=_mining
 
 [work]
 sleep=45000
-return=skipped unless economy needs goldore
+return=skipped unless economy needs gold_ore
 consume=smoked_fish,smoked_meat:2 bread:2
 animate=working 20000
 mine=gold 4 100 5 2
-produce=goldore
+produce=gold_ore
 animate=working 20000
 mine=gold 4 100 5 2
-produce=goldore
+produce=gold_ore
 animate=working 20000
 mine=gold 4 100 5 2
-produce=goldore
+produce=gold_ore
 
 [out_of_resource_notification]
 title=_Main Gold Vein Exhausted

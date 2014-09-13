@@ -10,7 +10,7 @@ is_food_basic=true
 log=3
 blackwood=2
 raw_stone=1
-thatchreed=1
+thatch_reed=1
 
 [return_on_dismantle]
 log=1
@@ -22,7 +22,7 @@ innkeeper=1
 
 [inputs]
 fish=4
-pittabread=4
+pitta_bread=4
 meat=4
 
 [programs]
@@ -32,7 +32,7 @@ work=_preparing a ration
 [work]
 sleep=14000
 return=skipped unless economy needs ration
-consume=fish,pittabread,meat
+consume=fish,pitta_bread,meat
 animate=working 19000
 produce=ration
 

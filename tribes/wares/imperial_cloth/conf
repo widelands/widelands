@@ -1,8 +1,0 @@
-help=_Cloth is needed to build several buildings. It is also consumed in the armor smithy.
-
-default_target_quantity=15
-preciousness=1
-
-[idle]
-pics=idle.png
-hotspot=6 9

@@ -43,13 +43,13 @@ return {
          bronzeax = 4,
          battleax = 6,
          warriorsax = 10,
-         helm = 2,
+         helmet = 2,
          mask = 3,
          warhelm = 6,
       },
       barbarians_order = {
          "gold", "ax", "sharpax", "broadax", "bronzeax", "battleax",
-         "warriorsax", "helm", "mask", "warhelm",
+         "warriorsax", "helmet", "mask", "warhelm",
       },
 
       empire = {
@@ -59,14 +59,14 @@ return {
          advanced_lance = 4,
          heavy_lance = 7,
          war_lance = 8,
-         helm = 2,
+         helmet = 2,
          armor = 3,
          chain_armor = 4,
          plate_armor = 8,
       },
       empire_order = {
          "gold", "wood_lance", "lance", "advanced_lance", "heavy_lance",
-         "war_lance", "helm", "armor", "chain_armor", "plate_armor"
+         "war_lance", "helmet", "armor", "chain_armor", "plate_armor"
       },
 
       atlanteans = {

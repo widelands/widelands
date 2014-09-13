@@ -1,8 +1,0 @@
-help=_These transparent quartz’ are used to build some exclusive buildings. They are produced in a crystal mine.
-
-default_target_quantity=5
-preciousness=1
-
-[idle]
-pics=idle.png
-hotspot=7 13
