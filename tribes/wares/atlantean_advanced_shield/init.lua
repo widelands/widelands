@@ -2,7 +2,9 @@ dirname = path.dirname(__file__)
 
 tribes:new_ware_type{
    name = "atlantean_advanced_shield",
-   descname = _ "Advanced Shield",
+   descname = _"Advanced Shield",
+   -- TRANSLATORS: generic description, e.g. 'The economy needs ...'
+   genericname = _"advanced shields",
    tribe = "atlanteans",
    default_target_quantity = 1,
    preciousness = 1,
