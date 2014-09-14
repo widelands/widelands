@@ -475,7 +475,7 @@ struct BlockedTracker {
 			       std::forward_as_tuple(b.coord.y, b.coord.x);
 		}
 	};
-	typedef std::map<CoordData, bool, CoordOrdering> Cache;
+	using Cache = std::map<CoordData, bool, CoordOrdering>;
 
 	BlockedTracker(Game & game, Bob & bob, const Coords & finaldest)
 		: m_game(game), m_bob(bob), m_map(game.map()), m_finaldest(finaldest)

@@ -94,5 +94,5 @@ void GameObjectivesMenu::think() {
  */
 void GameObjectivesMenu::selected(uint32_t const t) {
 	objectivetext.set_text
-		(t == list_type::no_selection_index() ? std::string() : list[t].descr());
+		(t == ListType::no_selection_index() ? std::string() : list[t].descr());
 }

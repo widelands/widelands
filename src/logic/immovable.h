@@ -82,7 +82,7 @@ struct BaseImmovable : public MapObject {
 	virtual int32_t  get_size    () const = 0;
 	virtual bool get_passable() const = 0;
 
-	typedef std::vector<Coords> PositionList;
+	using PositionList = std::vector<Coords>;
 	/**
 	 * Return all coordinates occupied by this Immovable. We gurantee that the
 	 * list always contains one entry and the first one is the main position
@@ -109,7 +109,7 @@ struct ImmovableActionData;
  * Immovable represents a standard immovable such as trees or stones.
  */
 struct ImmovableDescr : public MapObjectDescr {
-	typedef std::map<std::string, ImmovableProgram *> Programs;
+	using Programs = std::map<std::string, ImmovableProgram *>;
 
 	ImmovableDescr
 		(char const * name, char const * descname,
@@ -304,7 +304,7 @@ struct PlayerImmovable : public BaseImmovable {
 	virtual void    add_worker(Worker &);
 	virtual void remove_worker(Worker &);
 
-	typedef std::vector<Worker *> Workers;
+	using Workers = std::vector<Worker *>;
 
 	/**
 	 * \return a list of workers that are currently located at this

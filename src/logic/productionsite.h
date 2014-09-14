@@ -80,11 +80,11 @@ struct ProductionSiteDescr : public BuildingDescr {
 		return m_output_worker_types.count(i);
 	}
 	const BillOfMaterials & inputs() const {return m_inputs;}
-	typedef std::set<WareIndex>                       Output;
+	using Output = std::set<WareIndex>;
 	const Output   & output_ware_types  () const {return m_output_ware_types;}
 	const Output   & output_worker_types() const {return m_output_worker_types;}
 	const ProductionProgram * get_program(const std::string &) const;
-	typedef std::map<std::string, ProductionProgram *> Programs;
+	using Programs = std::map<std::string, ProductionProgram *>;
 	const Programs & programs() const {return m_programs;}
 
 	const std::string& out_of_resource_title() const {
@@ -178,7 +178,7 @@ public:
 
 	void set_economy(Economy *) override;
 
-	typedef std::vector<WaresQueue *> InputQueues;
+	using InputQueues = std::vector<WaresQueue *>;
 	const InputQueues & warequeues() const {return m_input_queues;}
 	const std::vector<Worker *>& workers() const;
 
@@ -258,10 +258,10 @@ protected:  // TrainingSite must have access to this stuff
 	/// name to game time. When a program ends with the result Skipped, its name
 	/// is added to this map, with the current game time. (When the program ends
 	/// with any other result, its name is removed from the map.)
-	typedef std::map<std::string, Time> SkippedPrograms;
+	using SkippedPrograms = std::map<std::string, Time>;
 	SkippedPrograms m_skipped_programs;
 
-	typedef std::vector<State> Stack;
+	using Stack = std::vector<State>;
 	Stack        m_stack; ///<  program stack
 	bool         m_program_timer; ///< execute next instruction based on pointer
 	int32_t      m_program_time; ///< timer time

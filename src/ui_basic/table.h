@@ -153,7 +153,7 @@ public:
 	 *
 	 * \return \c true if the first item is strictly less than the second
 	 */
-	typedef boost::function<bool (uint32_t, uint32_t)> CompareFn;
+	using CompareFn = boost::function<bool (uint32_t, uint32_t)>;
 
 	Table
 		(Panel * parent,
@@ -251,7 +251,7 @@ private:
 	bool sort_helper(uint32_t a, uint32_t b);
 
 	struct Column;
-	typedef std::vector<Column> Columns;
+	using Columns = std::vector<Column>;
 	struct Column {
 		Button                 * btn;
 		uint32_t                              width;
@@ -277,7 +277,7 @@ private:
 	bool               m_sort_descending;
 
 	void header_button_clicked(Columns::size_type);
-	typedef std::vector<EntryRecord *> EntryRecordVector;
+	using EntryRecordVector = std::vector<EntryRecord *>;
 	EntryRecordVector m_entry_records;
 	void set_scrollpos(int32_t pos);
 };
@@ -287,7 +287,7 @@ template <typename Entry>
 {
 public:
 
-	typedef Table<void *> Base;
+	using Base = Table<void *>;
 	Table
 		(Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
@@ -316,7 +316,7 @@ public:
 
 template <typename Entry> class Table<Entry * const> : public Table<void *> {
 public:
-	typedef Table<void *> Base;
+	using Base = Table<void *>;
 	Table
 		(Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
@@ -344,7 +344,7 @@ public:
 
 template <typename Entry> class Table<const Entry &> : public Table<void *> {
 public:
-	typedef Table<void *> Base;
+	using Base = Table<void *>;
 	Table
 		(Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
@@ -375,7 +375,7 @@ public:
 
 template <typename Entry> class Table<Entry &> : public Table<void *> {
 public:
-	typedef Table<void *> Base;
+	using Base = Table<void *>;
 	Table
 		(Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
@@ -405,7 +405,7 @@ public:
 static_assert(sizeof(void *) == sizeof(uintptr_t), "assert(sizeof(void *) == sizeof(uintptr_t)) failed.");
 template <> class Table<uintptr_t> : public Table<void *> {
 public:
-	typedef Table<void *> Base;
+	using Base = Table<void *>;
 	Table
 		(Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
@@ -434,7 +434,7 @@ public:
 };
 template <> class Table<uintptr_t const> : public Table<uintptr_t> {
 public:
-	typedef Table<uintptr_t> Base;
+	using Base = Table<uintptr_t>;
 	Table
 		(Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,

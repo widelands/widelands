@@ -25,8 +25,8 @@
 #include "logic/widelands.h"
 
 namespace Widelands {
-typedef std::pair<WareIndex, uint32_t> WareAmount;
-typedef std::vector<WareAmount> BillOfMaterials;
+using WareAmount = std::pair<WareIndex, uint32_t>;
+using BillOfMaterials = std::vector<WareAmount>;
 
 // range structure for iterating ware range with index
 struct WareRange

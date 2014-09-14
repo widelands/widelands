@@ -64,8 +64,8 @@ public:
 		bool is_constructionsite;
 		Coords pos;
 	};
-	typedef std::vector<BuildingStats> BuildingStatsVector;
-	typedef std::vector<BuildingStatsVector> PlayerBuildingStats;
+	using BuildingStatsVector = std::vector<BuildingStats>;
+	using PlayerBuildingStats = std::vector<BuildingStatsVector>;
 
 	friend class EditorGameBase;
 	friend struct GamePlayerInfoPacket;
@@ -457,7 +457,7 @@ public:
 	void    add_economy(Economy &);
 	void remove_economy(Economy &);
 	bool    has_economy(Economy &) const;
-	typedef std::vector<Economy *> Economies;
+	using Economies = std::vector<Economy *>;
 	Economies::size_type get_economy_number(Economy const *) const;
 	Economy * get_economy_by_number(Economies::size_type const i) const {
 		return m_economies[i];

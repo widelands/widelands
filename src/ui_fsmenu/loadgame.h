@@ -86,7 +86,7 @@ private:
 	UI::Icon                                        m_minimap_icon;
 	std::string                                     m_filename;
 
-	filenameset_t                                   m_gamefiles;
+	FilenameSet                                   m_gamefiles;
 
 	GameSettingsProvider                          * m_settings;
 	GameController                                * m_ctrl;

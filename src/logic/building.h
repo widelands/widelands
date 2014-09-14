@@ -59,7 +59,7 @@ class Building;
  * Common to all buildings!
  */
 struct BuildingDescr : public MapObjectDescr {
-	typedef std::vector<BuildingIndex> FormerBuildings;
+	using FormerBuildings = std::vector<BuildingIndex>;
 
 	BuildingDescr
 		(MapObjectType type, char const * _name, char const * _descname,
@@ -173,7 +173,7 @@ public:
 		PCap_Enhancable = 1 << 2, // can be enhanced to something
 	};
 
-	typedef std::vector<BuildingIndex> FormerBuildings;
+	using FormerBuildings = std::vector<BuildingIndex>;
 
 public:
 	Building(const BuildingDescr &);
@@ -294,7 +294,7 @@ protected:
 	uint32_t m_anim;
 	int32_t  m_animstart;
 
-	typedef std::vector<OPtr<Worker> > LeaveQueue;
+	using LeaveQueue = std::vector<OPtr<Worker>>;
 	LeaveQueue m_leave_queue; //  FIFO queue of workers leaving the building
 	uint32_t    m_leave_time;  //  when to wake the next one from leave queue
 	ObjectPointer  m_leave_allow; //  worker that is allowed to leave now

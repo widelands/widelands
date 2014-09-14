@@ -266,16 +266,16 @@ protected:
 	bool random_order_;
 
 	/// A collection of songsets
-	typedef std::map<std::string, Songset *> SongsetMap;
+	using SongsetMap = std::map<std::string, Songset *>;
 	SongsetMap songs_;
 
 	/// A collection of effect sets
-	typedef std::map<std::string, FXset *> FXsetMap;
+	using FXsetMap = std::map<std::string, FXset *>;
 	FXsetMap fxs_;
 
 	/// List of currently playing effects, and the channel each one is on
 	/// Access to this variable is protected through fx_lock_ mutex.
-	typedef std::map<uint32_t, std::string> ActivefxMap;
+	using ActivefxMap = std::map<uint32_t, std::string>;
 	ActivefxMap active_fx_;
 
 	/** Which songset we are currently selecting songs from - not regarding

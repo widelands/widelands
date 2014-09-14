@@ -56,9 +56,7 @@ struct ComputerPlayer {
 		virtual ComputerPlayer * instantiate
 			(Widelands::Game &, Widelands::PlayerNumber) const = 0;
 	};
-	typedef
-		std::vector<ComputerPlayer::Implementation const *>
-		ImplementationVector;
+	using ImplementationVector = std::vector<ComputerPlayer::Implementation const *>;
 
 	/**
 	 * Get a list of available AI implementations.

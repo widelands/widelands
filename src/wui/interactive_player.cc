@@ -468,8 +468,8 @@ void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string> & args)
 	Map              &       map             = egbase().map();
 	OverlayManager  &       overlay_manager = map.overlay_manager();
 	Widelands::Extent  const extent          = map.extent         ();
-	for (Widelands::YCoordinate y = 0; y < extent.h; ++y)
-		for (Widelands::XCoordinate x = 0; x < extent.w; ++x)
+	for (uint16_t y = 0; y < extent.h; ++y)
+		for (uint16_t x = 0; x < extent.w; ++x)
 			overlay_manager.recalc_field_overlays
 				(map.get_fcoords(Widelands::Coords(x, y)));
 	if

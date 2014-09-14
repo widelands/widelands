@@ -57,7 +57,7 @@ struct CritterDescr : BobDescr {
 
 private:
 	DirAnimations m_walk_anims;
-	typedef std::map<std::string, CritterProgram *> Programs;
+	using Programs = std::map<std::string, CritterProgram *>;
 	Programs      m_programs;
 	DISALLOW_COPY_AND_ASSIGN(CritterDescr);
 };

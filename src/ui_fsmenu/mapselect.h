@@ -44,7 +44,7 @@ namespace UI {
  * Data about a map that we're interested in.
  */
 struct MapData {
-	typedef std::set<std::string> Tags;
+	using Tags = std::set<std::string>;
 
 	std::string filename;
 	std::string name;

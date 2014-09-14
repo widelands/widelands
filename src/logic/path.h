@@ -50,7 +50,7 @@ struct Path {
 	Coords get_start() const {return m_start;}
 	Coords get_end  () const {return m_end;}
 
-	typedef std::vector<Direction> StepVector;
+	using StepVector = std::vector<Direction>;
 	StepVector::size_type get_nsteps() const {return m_path.size();}
 	Direction operator[](StepVector::size_type const i) const {
 		assert(i < m_path.size());
@@ -83,7 +83,7 @@ struct CoordPath {
 	Coords get_end  () const {return m_coords.back ();}
 	const std::vector<Coords> &get_coords() const {return m_coords;}
 
-	typedef std::vector<Direction> StepVector;
+	using StepVector = std::vector<Direction>;
 	StepVector::size_type get_nsteps() const {return m_path.size();}
 	Direction operator[](StepVector::size_type const i) const {
 		assert(i < m_path.size());

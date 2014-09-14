@@ -61,7 +61,7 @@ private:
  * WALK_xx in all "direction" parameters.
  */
 struct Flag : public PlayerImmovable, public RoutingNode {
-	typedef std::vector<const WareInstance *> Wares;
+	using Wares = std::vector<const WareInstance *>;
 
 	friend class Economy;
 	friend class FlagQueue;
@@ -169,10 +169,10 @@ private:
 	/// the given flag
 	Flag        * m_always_call_for_flag;
 
-	typedef std::vector<OPtr<Worker> > CapacityWaitQueue;
+	using CapacityWaitQueue = std::vector<OPtr<Worker>>;
 	CapacityWaitQueue m_capacity_wait; ///< workers waiting for capacity
 
-	typedef std::list<FlagJob> FlagJobs;
+	using FlagJobs = std::list<FlagJob>;
 	FlagJobs m_flag_jobs;
 };
 

@@ -133,17 +133,17 @@ protected:
 	void add_attribute(uint32_t attr);
 
 private:
-	typedef std::map<std::string, uint32_t> Anims;
-	typedef std::map<std::string, uint32_t> AttribMap;
-	typedef std::vector<uint32_t>           Attributes;
+	using Anims = std::map<std::string, uint32_t>;
+	using AttribMap = std::map<std::string, uint32_t>;
+	using Attributes = std::vector<uint32_t>;
 
-	const MapObjectType   m_type;           /// Subclasses pick from the enum above
-	std::string const m_name;           /// The name for internal reference
-	std::string const m_descname;       /// A localized Descriptive name
-	Attributes        m_attributes;
-	Anims             m_anims;
-	static uint32_t   s_dyn_attribhigh; ///< highest attribute ID used
-	static AttribMap  s_dyn_attribs;
+	const MapObjectType m_type;           /// Subclasses pick from the enum above
+	std::string const   m_name;           /// The name for internal reference
+	std::string const   m_descname;       /// A localized Descriptive name
+	Attributes          m_attributes;
+	Anims               m_anims;
+	static uint32_t     s_dyn_attribhigh; ///< highest attribute ID used
+	static AttribMap    s_dyn_attribs;
 
 	DISALLOW_COPY_AND_ASSIGN(MapObjectDescr);
 };
@@ -358,7 +358,7 @@ inline int32_t get_reverse_dir(int32_t const dir) {
  * Keeps the list of all objects currently in the game.
  */
 struct ObjectManager  {
-	typedef boost::unordered_map<Serial, MapObject *> objmap_t;
+	using MapObjectMap = boost::unordered_map<Serial, MapObject *>;
 
 	ObjectManager() {m_lastserial = 0;}
 	~ObjectManager();
@@ -366,7 +366,7 @@ struct ObjectManager  {
 	void cleanup(EditorGameBase &);
 
 	MapObject * get_object(Serial const serial) const {
-		const objmap_t::const_iterator it = m_objects.find(serial);
+		const MapObjectMap::const_iterator it = m_objects.find(serial);
 		return it != m_objects.end() ? it->second : nullptr;
 	}
 
@@ -376,7 +376,7 @@ struct ObjectManager  {
 	bool object_still_available(const MapObject * const t) const {
 		if (!t)
 			return false;
-		objmap_t::const_iterator it = m_objects.begin();
+		MapObjectMap::const_iterator it = m_objects.begin();
 		while (it != m_objects.end()) {
 			if (it->second == t)
 				return true;
@@ -393,7 +393,7 @@ struct ObjectManager  {
 
 private:
 	Serial   m_lastserial;
-	objmap_t m_objects;
+	MapObjectMap m_objects;
 
 	DISALLOW_COPY_AND_ASSIGN(ObjectManager);
 };

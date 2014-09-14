@@ -58,7 +58,7 @@ private:
 	std::string   m_basedir;
 	std::string   m_curdir;
 	std::string   m_parentdir;
-	filenameset_t m_mapfiles;
+	FilenameSet m_mapfiles;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_SAVE_MAP_H

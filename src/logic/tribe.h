@@ -158,8 +158,8 @@ struct TribeDescr {
 		return m_initializations.at(index);
 	}
 
-	typedef std::vector<std::vector<Widelands::WareIndex> > WaresOrder;
-	typedef std::vector<std::pair<uint32_t, uint32_t> > WaresOrderCoords;
+	using WaresOrder = std::vector<std::vector<Widelands::WareIndex>>;
+	using WaresOrderCoords = std::vector<std::pair<uint32_t, uint32_t>>;
 	const WaresOrder & wares_order() const {return m_wares_order;}
 	const WaresOrderCoords & wares_order_coords() const {
 		return m_wares_order_coords;

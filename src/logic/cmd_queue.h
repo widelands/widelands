@@ -166,7 +166,7 @@ private:
 	Game                       & m_game;
 	uint32_t                     nextserial;
 	uint32_t m_ncmds;
-	typedef std::vector<std::priority_queue<cmditem> > CommandsContainer;
+	using CommandsContainer = std::vector<std::priority_queue<cmditem>>;
 	CommandsContainer m_cmds;
 };
 

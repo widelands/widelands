@@ -54,7 +54,7 @@ m_lastserial   (0)
 MapObjectSaver::MapObjectRec &
 MapObjectSaver::get_object_record(const MapObject & obj)
 {
-	MapObjectMap::iterator it = m_objects.find(&obj);
+	MapObjectRecordMap::iterator it = m_objects.find(&obj);
 
 	if (it != m_objects.end())
 		return it->second;
@@ -81,7 +81,7 @@ MapObjectSaver::get_object_record(const MapObject & obj)
  */
 bool MapObjectSaver::is_object_known(const MapObject & obj) const
 {
-	MapObjectMap::const_iterator it = m_objects.find(&obj);
+	MapObjectRecordMap::const_iterator it = m_objects.find(&obj);
 
 	if (it == m_objects.end())
 		return false;

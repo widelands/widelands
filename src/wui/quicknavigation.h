@@ -39,7 +39,7 @@ class EditorGameBase;
  * but it is moved in its own structure to avoid overloading that class.
  */
 struct QuickNavigation {
-	typedef boost::function<void (Point)> SetViewFn;
+	using SetViewFn = boost::function<void (Point)>;
 
 	QuickNavigation(const Widelands::EditorGameBase & egbase, uint32_t screenwidth, uint32_t screenheight);
 

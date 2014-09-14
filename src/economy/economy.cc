@@ -694,12 +694,9 @@ struct RequestSupplyPair {
 	};
 };
 
-typedef
-	std::priority_queue
-	<RequestSupplyPair,
+using RSPairQueue = std::priority_queue<RequestSupplyPair,
 	std::vector<RequestSupplyPair>,
-	RequestSupplyPair::Compare>
-	RSPairQueue;
+	RequestSupplyPair::Compare>;
 
 struct RSPairStruct {
 	RSPairQueue queue;
@@ -968,7 +965,7 @@ void Economy::_handle_active_supplies(Game & game)
 	if (!warehouses().size())
 		return;
 
-	typedef std::vector<std::pair<Supply *, Warehouse *> > Assignments;
+	using Assignments = std::vector<std::pair<Supply *, Warehouse *>>;
 	Assignments assignments;
 
 	for (uint32_t idx = 0; idx < m_supplies.get_nrsupplies(); ++idx) {

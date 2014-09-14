@@ -79,12 +79,12 @@ void LayeredFileSystem::RemoveFileSystem(const FileSystem & fs)
  */
 std::set<std::string> LayeredFileSystem::ListDirectory(const std::string& path) {
 	std::set<std::string> results;
-	filenameset_t files;
+	FilenameSet files;
 	//check home system first
 	if (m_home) {
 		files = m_home->ListDirectory(path);
 		for
-			(filenameset_t::iterator fnit = files.begin();
+			(FilenameSet::iterator fnit = files.begin();
 			 fnit != files.end();
 			 ++fnit)
 				results.insert(*fnit);
@@ -93,7 +93,7 @@ std::set<std::string> LayeredFileSystem::ListDirectory(const std::string& path) 
 	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it) {
 		files = (*it)->ListDirectory(path);
 
-		for (filenameset_t::iterator fnit = files.begin(); fnit != files.end(); ++fnit)
+		for (FilenameSet::iterator fnit = files.begin(); fnit != files.end(); ++fnit)
 			   results.insert(*fnit);
 	}
 	return results;

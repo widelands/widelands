@@ -57,8 +57,8 @@ void MapBuildingPacket::Read
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version >= LOWEST_SUPPORTED_VERSION) {
 			Map & map = egbase.map();
-			XCoordinate const width  = map.get_width ();
-			YCoordinate const height = map.get_height();
+			uint16_t const width  = map.get_width ();
+			uint16_t const height = map.get_height();
 			FCoords c;
 			for (c.y = 0; c.y < height; ++c.y) {
 				for (c.x = 0; c.x < width; ++c.x) {

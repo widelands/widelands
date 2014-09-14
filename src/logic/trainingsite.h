@@ -207,11 +207,11 @@ private:
 	// These are used for kicking out soldiers prematurely
 	static const uint32_t training_state_multiplier;
 	// Unuque key to address each training level of each war art
-	typedef std::pair<uint16_t, uint16_t> TypeAndLevel_t;
+	using TypeAndLevel = std::pair<uint16_t, uint16_t>;
 	// First entry is the "stallness", second is a bool
-	typedef std::pair<uint16_t, uint8_t> FailAndPresence_t; // first might wrap in a long play..
-	typedef std::map<TypeAndLevel_t, FailAndPresence_t> TrainFailCount_t;
-	TrainFailCount_t training_failure_count;
+	using FailAndPresence = std::pair<uint16_t, uint8_t>; // first might wrap in a long play..
+	using TrainFailCount = std::map<TypeAndLevel, FailAndPresence>;
+	TrainFailCount training_failure_count;
 	uint32_t max_stall_val;
 	void init_kick_state(const TrainingAttribute&, const TrainingSiteDescr&);
 

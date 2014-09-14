@@ -106,7 +106,7 @@ public:
 		 WareWorker type,
 		 int32_t cost_cutoff = -1);
 
-	typedef boost::function<bool (Warehouse &)> WarehouseAcceptFn;
+	using WarehouseAcceptFn = boost::function<bool (Warehouse &)>;
 	Warehouse * find_closest_warehouse
 		(Flag & start, WareWorker type = wwWORKER, Route * route = nullptr,
 		 uint32_t cost_cutoff = 0,
@@ -140,10 +140,10 @@ public:
 	void remove_supply(Supply &);
 
 	/// information about this economy
-	WareList::count_type stock_ware  (WareIndex const i) {
+	WareList::WaresCount stock_ware  (WareIndex const i) {
 		return m_wares  .stock(i);
 	}
-	WareList::count_type stock_worker(WareIndex const i) {
+	WareList::WaresCount stock_worker(WareIndex const i) {
 		return m_workers.stock(i);
 	}
 
@@ -208,11 +208,11 @@ private:
 /*************/
 /* Variables */
 /*************/
-	typedef std::vector<Request *> RequestList;
+	using RequestList = std::vector<Request *>;
 
 	Player & m_owner;
 
-	typedef std::vector<Flag *> Flags;
+	using Flags = std::vector<Flag *>;
 	Flags m_flags;
 	WareList m_wares;     ///< virtual storage with all wares in this Economy
 	WareList m_workers;   ///< virtual storage with all workers in this Economy
@@ -225,7 +225,7 @@ private:
 	TargetQuantity        * m_worker_target_quantities;
 	Router                 * m_router;
 
-	typedef std::pair<OPtr<Flag>, OPtr<Flag> > SplitPair;
+	using SplitPair = std::pair<OPtr<Flag>, OPtr<Flag>>;
 	std::vector<SplitPair> m_split_checks;
 
 	/**

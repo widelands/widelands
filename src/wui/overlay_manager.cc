@@ -295,7 +295,7 @@ void OverlayManager::load_graphics() {
 	m_are_graphics_loaded = true;
 }
 
-void OverlayManager::register_overlay_callback_function(CallbackFunction function) {
+void OverlayManager::register_overlay_callback_function(CallbackFn function) {
 	m_callback = function;
 }
 

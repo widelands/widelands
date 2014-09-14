@@ -396,8 +396,8 @@ void MapPlayersViewPacket::Read
 		return;
 
 	const Map & map = egbase.map();
-	const XCoordinate mapwidth  = map.get_width ();
-	const YCoordinate mapheight = map.get_height();
+	const uint16_t mapwidth  = map.get_width ();
+	const uint16_t mapheight = map.get_height();
 	Field & first_field = map[0];
 	const PlayerNumber nr_players = map.get_nrplayers();
 	iterate_players_existing_const(plnum, nr_players, egbase, player) {
@@ -1045,8 +1045,8 @@ void MapPlayersViewPacket::Write
 {
 	fs.EnsureDirectoryExists("player");
 	const Map & map = egbase.map();
-	const XCoordinate mapwidth  = map.get_width ();
-	const YCoordinate mapheight = map.get_height();
+	const uint16_t mapwidth  = map.get_width ();
+	const uint16_t mapheight = map.get_height();
 	// TODO(unknown): make first_field const when FCoords has been templatized so it can
 	// have "const Field * field;"
 	Field & first_field = map[0];

@@ -69,7 +69,7 @@ protected:
 	Request * m_builder_request;
 	OPtr<Worker> m_builder;
 
-	typedef std::vector<WaresQueue *> Wares;
+	using Wares = std::vector<WaresQueue *>;
 	Wares m_wares;
 
 	bool     m_working;        // true if the builder is currently working

@@ -344,9 +344,9 @@ std::vector<std::string> TribeDescr::get_all_tribenames() {
 
 	//  get all tribes
 	std::vector<TribeBasicInfo> tribes;
-	filenameset_t m_tribes = g_fs->ListDirectory("tribes");
+	FilenameSet m_tribes = g_fs->ListDirectory("tribes");
 	for
-		(filenameset_t::iterator pname = m_tribes.begin();
+		(FilenameSet::iterator pname = m_tribes.begin();
 		 pname != m_tribes.end();
 		 ++pname)
 	{
@@ -367,9 +367,9 @@ std::vector<TribeBasicInfo> TribeDescr::get_all_tribe_infos() {
 	std::vector<TribeBasicInfo> tribes;
 
 	//  get all tribes
-	filenameset_t m_tribes = g_fs->ListDirectory("tribes");
+	FilenameSet m_tribes = g_fs->ListDirectory("tribes");
 	for
-		(filenameset_t::iterator pname = m_tribes.begin();
+		(FilenameSet::iterator pname = m_tribes.begin();
 		 pname != m_tribes.end();
 		 ++pname)
 	{

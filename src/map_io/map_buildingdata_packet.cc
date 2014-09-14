@@ -1338,7 +1338,7 @@ void MapBuildingdataPacket::write_warehouse
 	}
 
 	fw.Unsigned16(nworkers);
-	typedef std::map<uint32_t, const Worker *> TWorkerMap;
+	using TWorkerMap = std::map<uint32_t, const Worker *>;
 	TWorkerMap workermap;
 	for (const std::pair<WareIndex, Warehouse::WorkerList>& cwt : warehouse.m_incorporated_workers) {
 		for (Worker * temp_worker : cwt.second) {
@@ -1559,7 +1559,7 @@ void MapBuildingdataPacket::write_trainingsite
 			 static_cast<uint16_t>(trainingsite.training_failure_count.size()));
 	fw.Unsigned16(static_cast<uint16_t> (trainingsite.training_failure_count.size()));
 	for
-		(TrainingSite::TrainFailCount_t::const_iterator i = trainingsite.training_failure_count.begin();
+		(TrainingSite::TrainFailCount::const_iterator i = trainingsite.training_failure_count.begin();
 		 i != trainingsite.training_failure_count.end(); i++)
 	{
 		fw.Unsigned16(i->first.first);

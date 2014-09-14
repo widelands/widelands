@@ -77,7 +77,7 @@ struct ProductionProgram {
 	};
 
 	/// A group of ware types with a count.
-	typedef std::pair<std::set<WareIndex>, uint8_t> WareTypeGroup;
+	using WareTypeGroup = std::pair<std::set<WareIndex>, uint8_t>;
 
 	/// Parse a group of ware types followed by an optional count and terminated
 	/// by a space or null. Example: "fish,meat:2".
@@ -203,7 +203,7 @@ struct ProductionProgram {
 			std::string description_negation(const TribeDescr &) const override;
 		};
 
-		typedef std::vector<Condition *> Conditions;
+		using Conditions = std::vector<Condition *>;
 		ProgramResult m_result;
 		bool       m_is_when; //  otherwise it is "unless"
 		Conditions m_conditions;
@@ -374,7 +374,7 @@ struct ProductionProgram {
 	struct ActConsume : public Action {
 		ActConsume(char * parameters, const ProductionSiteDescr &);
 		void execute(Game &, ProductionSite &) const override;
-		typedef std::vector<WareTypeGroup> Groups;
+		using Groups = std::vector<WareTypeGroup>;
 		const Groups & groups() const {return m_groups;}
 	private:
 		Groups m_groups;
@@ -399,7 +399,7 @@ struct ProductionProgram {
 		ActProduce(char * parameters, const ProductionSiteDescr &);
 		void execute(Game &, ProductionSite &) const override;
 		bool get_building_work(Game &, ProductionSite &, Worker &) const override;
-		typedef std::vector<std::pair<WareIndex, uint8_t> > Items;
+		using Items = std::vector<std::pair<WareIndex, uint8_t>>;
 		const Items & items() const {return m_items;}
 	private:
 		Items m_items;
@@ -424,7 +424,7 @@ struct ProductionProgram {
 		ActRecruit(char * parameters, const ProductionSiteDescr &);
 		void execute(Game &, ProductionSite &) const override;
 		bool get_building_work(Game &, ProductionSite &, Worker &) const override;
-		typedef std::vector<std::pair<WareIndex, uint8_t> > Items;
+		using Items = std::vector<std::pair<WareIndex, uint8_t>>;
 		const Items & items() const {return m_items;}
 	private:
 		Items m_items;
@@ -533,7 +533,7 @@ struct ProductionProgram {
 		return *m_actions[idx];
 	}
 
-	typedef std::vector<Action *> Actions;
+	using Actions = std::vector<Action *>;
 	const Actions & actions() const {return m_actions;}
 
 

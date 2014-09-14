@@ -157,7 +157,7 @@ ObjectManager::~ObjectManager()
 void ObjectManager::cleanup(EditorGameBase & egbase)
 {
 	while (!m_objects.empty()) {
-		objmap_t::iterator it = m_objects.begin();
+		MapObjectMap::iterator it = m_objects.begin();
 		it->second->remove(egbase);
 	}
 	m_lastserial = 0;

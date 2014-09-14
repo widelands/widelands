@@ -198,7 +198,7 @@ void GameMainMenuSaveGame::double_clicked(uint32_t) {
  */
 void GameMainMenuSaveGame::fill_list() {
 	m_ls.clear();
-	filenameset_t gamefiles;
+	FilenameSet gamefiles;
 
 	//  Fill it with all files we find.
 	gamefiles = g_fs->ListDirectory(m_curdir);
@@ -206,7 +206,7 @@ void GameMainMenuSaveGame::fill_list() {
 	Widelands::GamePreloadPacket gpdp;
 
 	for
-		(filenameset_t::iterator pname = gamefiles.begin();
+		(FilenameSet::iterator pname = gamefiles.begin();
 		 pname != gamefiles.end();
 		 ++pname)
 	{

@@ -310,7 +310,7 @@ void FullscreenMenuMapSelect::fill_list()
 		// This is the normal case
 
 		//  Fill it with all files we find in all directories.
-		filenameset_t files = g_fs->ListDirectory(m_curdir);
+		FilenameSet files = g_fs->ListDirectory(m_curdir);
 
 		int32_t ndirs = 0;
 
@@ -339,7 +339,7 @@ void FullscreenMenuMapSelect::fill_list()
 
 		//Add subdirectories to the list (except for uncompressed maps)
 		for
-			(filenameset_t::iterator pname = files.begin();
+			(FilenameSet::iterator pname = files.begin();
 			pname != files.end();
 			++pname)
 		{
@@ -373,7 +373,7 @@ void FullscreenMenuMapSelect::fill_list()
 			Widelands::Map map; //  MapLoader needs a place to put its preload data
 
 			for
-				(filenameset_t::iterator pname = files.begin();
+				(FilenameSet::iterator pname = files.begin();
 				pname != files.end();
 				++pname)
 			{

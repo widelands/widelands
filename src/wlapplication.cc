@@ -1720,7 +1720,7 @@ void WLApplication::emergency_save(Widelands::Game & game) {
  */
 void WLApplication::cleanup_replays()
 {
-	filenameset_t files;
+	FilenameSet files;
 
 	Section & s = g_options.pull_section("global");
 
@@ -1730,7 +1730,7 @@ void WLApplication::cleanup_replays()
 		          [](const std::string& fn) {return boost::ends_with(fn, REPLAY_SUFFIX ".wss");});
 
 		for
-			(filenameset_t::iterator filename = files.begin();
+			(FilenameSet::iterator filename = files.begin();
 			 filename != files.end();
 			 ++filename)
 		{
@@ -1747,7 +1747,7 @@ void WLApplication::cleanup_replays()
 		          [](const std::string& fn) {return boost::ends_with(fn, REPLAY_SUFFIX);});
 
 		for
-			(filenameset_t::iterator filename = files.begin();
+			(FilenameSet::iterator filename = files.begin();
 			 filename != files.end();
 			 ++filename)
 		{

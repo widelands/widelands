@@ -354,8 +354,8 @@ void DefaultAI::late_initialization() {
 	Map& map = game().map();
 	std::set<OPtr<PlayerImmovable>> found_immovables;
 
-	for (YCoordinate y = 0; y < map.get_height(); ++y) {
-		for (XCoordinate x = 0; x < map.get_width(); ++x) {
+	for (int16_t y = 0; y < map.get_height(); ++y) {
+		for (int16_t x = 0; x < map.get_width(); ++x) {
 			FCoords f = map.get_fcoords(Coords(x, y));
 
 			if (f.field->get_owned_by() != player_number())

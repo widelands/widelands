@@ -70,8 +70,8 @@ struct Field {
 		Buildhelp_None   = 6
 	};
 
-	typedef uint8_t Height;
-	typedef uint8_t ResourceAmount;
+	using Height = uint8_t;
+	using ResourceAmount = uint8_t;
 
 	struct Terrains {
 		TerrainIndex d, r;
@@ -99,7 +99,7 @@ private:
 	 * The next highest bit is the border bit.
 	 * The low bits are the player number of the owner.
 	 */
-	typedef PlayerNumber OwnerInfoAndSelectionsType;
+	using OwnerInfoAndSelectionsType = PlayerNumber;
 	static const uint8_t Border_Bit =
 		std::numeric_limits<OwnerInfoAndSelectionsType>::digits - 1;
 	static const OwnerInfoAndSelectionsType Border_Bitmask = 1 << Border_Bit;

@@ -252,9 +252,9 @@ void RealFSImpl::m_unlink_directory(const std::string & file) {
 	assert(fspath.m_exists);  //TODO(unknown): throw an exception instead
 	assert(fspath.m_isDirectory);  //TODO(unknown): throw an exception instead
 
-	filenameset_t files = ListDirectory(file);
+	FilenameSet files = ListDirectory(file);
 	for
-		(filenameset_t::iterator pname = files.begin();
+		(FilenameSet::iterator pname = files.begin();
 		 pname != files.end();
 		 ++pname)
 	{

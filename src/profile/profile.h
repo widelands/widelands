@@ -81,7 +81,7 @@ public:
 		void set_string(char const *);
 	};
 
-	typedef std::vector<Value> ValueList;
+	using ValueList = std::vector<Value>;
 
 	Section(Profile *, char const * name);
 	Section(const Section &);
@@ -233,7 +233,7 @@ public:
 
 private:
 	std::string m_filename;
-	typedef std::vector<Section> SectionList;
+	using SectionList = std::vector<Section>;
 	SectionList m_sections;
 	int32_t m_error_level;
 

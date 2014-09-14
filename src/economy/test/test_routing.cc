@@ -67,7 +67,7 @@ public:
 	bool all_members_zeroed();
 
 private:
-	typedef std::vector<TestingRoutingNode *> Neigbours;
+	using Neigbours = std::vector<TestingRoutingNode *>;
 
 	Neigbours _neighbours;
 	int32_t _waitcost;
@@ -100,7 +100,7 @@ class TestingTransportCostCalculator : public ITransportCostCalculator {
 };
 class TestingRoute : public IRoute {
 public:
-	typedef std::vector<RoutingNode *> Nodes;
+	using Nodes = std::vector<RoutingNode *>;
 
 	void init(int32_t) override {
 		nodes.clear();
@@ -391,7 +391,7 @@ BOOST_FIXTURE_TEST_CASE
 }
 
 struct ComplexRouterFixture {
-	typedef std::vector<RoutingNode *> Nodes;
+	using Nodes = std::vector<RoutingNode *>;
 
 	ComplexRouterFixture() : r(boost::bind(&ComplexRouterFixture::reset, this)) {
 		d0 = new TestingRoutingNode();

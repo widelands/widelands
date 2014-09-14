@@ -421,8 +421,8 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 
 	//  The header must already have been processed.
 	assert(m_map.m_fields.get());
-	Widelands::XCoordinate const mapwidth  = m_map.get_width ();
-	Widelands::YCoordinate const mapheight = m_map.get_height();
+	int16_t const mapwidth  = m_map.get_width ();
+	int16_t const mapheight = m_map.get_height();
 	assert(mapwidth > 0 && mapheight > 0);
 	egbase.allocate_player_maps(); //  initializes player_fields.vision
 
@@ -433,8 +433,8 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 
 	Widelands::Field * f = m_map.m_fields.get();
 	pc = section.get();
-	for (Widelands::YCoordinate y = 0; y < mapheight; ++y)
-		for (Widelands::XCoordinate x = 0; x < mapwidth; ++x, ++f, ++pc)
+	for (int16_t y = 0; y < mapheight; ++y)
+		for (int16_t x = 0; x < mapwidth; ++x, ++f, ++pc)
 			f->set_height(*pc);
 
 	//  SWD-SECTION 2: Terrain 1
@@ -450,8 +450,8 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 
 	f = m_map.m_fields.get();
 	pc = section.get();
-	for (Widelands::YCoordinate y = 0; y < mapheight; ++y)
-		for (Widelands::XCoordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
+	for (int16_t y = 0; y < mapheight; ++y)
+		for (int16_t x = 0; x < mapwidth; ++x, ++f, ++pc) {
 			uint8_t c = *pc;
 			// Harbour buildspace & textures - Information taken from:
 			if (c & 0x40)
@@ -466,8 +466,8 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 
 	f = m_map.m_fields.get();
 	pc = section.get();
-	for (Widelands::YCoordinate y = 0; y < mapheight; ++y)
-		for (Widelands::XCoordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
+	for (int16_t y = 0; y < mapheight; ++y)
+		for (int16_t x = 0; x < mapwidth; ++x, ++f, ++pc) {
 			uint8_t c = *pc;
 			// Harbour buildspace & textures - Information taken from:
 			// http://bazaar.launchpad.net/~xaser/s25rttr/s25edit/view/head:/WLD_reference.txt
@@ -506,9 +506,9 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 	if (!section)
 		throw wexception("Section 6 (Ways) not found");
 
-	for (Widelands::YCoordinate y = 0; y < mapheight; ++y) {
+	for (int16_t y = 0; y < mapheight; ++y) {
 		uint32_t i = y * mapwidth;
-		for (Widelands::XCoordinate x = 0; x < mapwidth; ++x, ++i) {
+		for (int16_t x = 0; x < mapwidth; ++x, ++i) {
 			// ignore everything but HQs
 			if (section[i] == 0x80) {
 				if (bobs[i] < m_map.get_nrplayers())
@@ -531,9 +531,9 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 	if (!section)
 		throw wexception("Section 7 (Animals) not found");
 
-	for (Widelands::YCoordinate y = 0; y < mapheight; ++y) {
+	for (uint16_t y = 0; y < mapheight; ++y) {
 		uint32_t i = y * mapwidth;
-		for (Widelands::XCoordinate x = 0; x < mapwidth; ++x, ++i) {
+		for (uint16_t x = 0; x < mapwidth; ++x, ++i) {
 			std::string bobname;
 
 			switch (section[i]) {
@@ -621,8 +621,8 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 	pc = section.get();
 	char const * res;
 	int32_t amount = 0;
-	for (Widelands::YCoordinate y = 0; y < mapheight; ++y)
-		for (Widelands::XCoordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
+	for (uint16_t y = 0; y < mapheight; ++y)
+		for (uint16_t x = 0; x < mapwidth; ++x, ++f, ++pc) {
 			uint8_t c = *pc;
 
 			switch (c & 0xF8) {
@@ -692,8 +692,8 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 	};
 
 	uint8_t c;
-	for (Widelands::YCoordinate y = 0; y < mapheight; ++y)
-		for (Widelands::XCoordinate x = 0; x < mapwidth; ++x) {
+	for (uint16_t y = 0; y < mapheight; ++y)
+		for (uint16_t x = 0; x < mapwidth; ++x) {
 			const Widelands::Coords location(x, y);
 			Widelands::MapIndex const index =
 				Widelands::Map::get_index(location, mapwidth);

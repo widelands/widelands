@@ -123,7 +123,7 @@ struct RequirementsStorage {
 		(FileRead &, EditorGameBase &, MapObjectLoader &);
 
 private:
-	typedef std::map<uint32_t, RequirementsStorage *> StorageMap;
+	using StorageMap = std::map<uint32_t, RequirementsStorage *>;
 
 	uint32_t m_id;
 	Reader m_reader;

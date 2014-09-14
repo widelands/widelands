@@ -93,7 +93,7 @@ public:
 	void load_finish_game(Game & g);
 
 private:
-	typedef std::map<Serial, MapObject *> ReverseMapObjectMap;
+	using ReverseMapObjectMap = std::map<Serial, MapObject *>;
 
 	std::map<MapObject *, bool> m_loaded_obj;
 	ReverseMapObjectMap m_objects;

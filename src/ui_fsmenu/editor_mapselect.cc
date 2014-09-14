@@ -219,9 +219,9 @@ void FullscreenMenuEditorMapSelect::fill_list()
 			 g_gr->images().get("pics/ls_dir.png"));
 	}
 
-	const filenameset_t::const_iterator mapfiles_end = m_mapfiles.end();
+	const FilenameSet::const_iterator mapfiles_end = m_mapfiles.end();
 	for
-		(filenameset_t::const_iterator pname = m_mapfiles.begin();
+		(FilenameSet::const_iterator pname = m_mapfiles.begin();
 		 pname != mapfiles_end;
 		 ++pname)
 	{
@@ -242,7 +242,7 @@ void FullscreenMenuEditorMapSelect::fill_list()
 	Widelands::Map map;
 
 	for
-		(filenameset_t::const_iterator pname = m_mapfiles.begin();
+		(FilenameSet::const_iterator pname = m_mapfiles.begin();
 		 pname != mapfiles_end;
 		 ++pname)
 	{

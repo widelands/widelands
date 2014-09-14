@@ -42,7 +42,7 @@ class WorkerDescr : public BobDescr
 	friend struct WorkerProgram;
 
 public:
-	typedef std::map<std::string, uint8_t> Buildcost;
+	using Buildcost = std::map<std::string, uint8_t>;
 
 	WorkerDescr
 		(MapObjectType type, char const * const name, char const * const descname,
@@ -101,10 +101,9 @@ public:
 	Worker & create
 		(EditorGameBase &, Player &, PlayerImmovable *, Coords) const;
 
-	typedef std::map<WorkerDescr const *, std::string> becomes_map_t;
 	uint32_t movecaps() const override;
 
-	typedef std::map<std::string, WorkerProgram *> Programs;
+	using Programs = std::map<std::string, WorkerProgram *>;
 	const Programs & programs() const {return m_programs;}
 
 protected:

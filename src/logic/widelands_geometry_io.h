@@ -49,18 +49,18 @@ struct ExceededMaxIndex : public FileRead::DataError {
 	MapIndex const max, i;
 };
 struct ExceededWidth : public FileRead::DataError {
-	ExceededWidth(uint16_t const W, const XCoordinate X)
+	ExceededWidth(uint16_t const W, const uint16_t X)
 		: DataError("x coordinate is %i but width is only %u", X, W), w(W), x(X) {
 	}
 	uint16_t const w;
-	XCoordinate const x;
+	uint16_t const x;
 };
 struct ExceededHeight : public FileRead::DataError {
-	ExceededHeight(uint16_t const H, const YCoordinate Y)
+	ExceededHeight(uint16_t const H, const int16_t Y)
 		: DataError("y coordinate is %i but height is only %u", Y, H), h(H), y(Y) {
 	}
 	uint16_t h;
-	YCoordinate y;
+	int16_t y;
 };
 
 /// Read a Direction from the file. Use this when the result can only be a

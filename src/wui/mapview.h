@@ -41,7 +41,7 @@ struct MapView : public UI::Panel {
 	 * Parameters are x/y screen coordinates and whether the change should
 	 * be considered a "jump" or a smooth scrolling event.
 	 */
-	typedef boost::function<void (Point, bool)> ChangeViewFn;
+	using ChangeViewFn = boost::function<void (Point, bool)>;
 
 	MapView
 		(UI::Panel * const parent,

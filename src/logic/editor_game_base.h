@@ -207,7 +207,7 @@ public:
 	World* mutable_world();
 
 protected:
-	typedef std::vector<TribeDescr*> TribeVector;
+	using TribeVector = std::vector<TribeDescr*>;
 	TribeVector tribes_;
 
 private:

@@ -33,7 +33,7 @@ struct MessageQueue : private std::map<MessageId, Message *> {
 	friend class MapPlayersMessagesPacket;
 	// Make typedefs public so that this looks like proper
 	// STL container to templated algorithms.
-	typedef std::map<MessageId, Message *> _Mybase;
+	using _Mybase = std::map<MessageId, Message *>;
 	typedef _Mybase::pointer pointer;
 	typedef _Mybase::const_pointer const_pointer;
 	typedef _Mybase::reference reference;

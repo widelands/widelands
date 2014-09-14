@@ -303,7 +303,7 @@ void FullscreenMenuLoadGame::fill_list() {
 
 		Widelands::GamePreloadPacket gpdp;
 
-		const filenameset_t & gamefiles = m_gamefiles;
+		const FilenameSet & gamefiles = m_gamefiles;
 		for (const std::string& gamefile : gamefiles) {
 			char const * const name = gamefile.c_str();
 

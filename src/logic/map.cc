@@ -155,8 +155,8 @@ void Map::recalc_whole_map(const World& world)
 	//  brightness and building caps
 	FCoords f;
 
-	for (YCoordinate y = 0; y < m_height; ++y)
-		for (XCoordinate x = 0; x < m_width; ++x) {
+	for (int16_t y = 0; y < m_height; ++y)
+		for (int16_t x = 0; x < m_width; ++x) {
 			f = get_fcoords(Coords(x, y));
 			uint32_t radius;
 			check_neighbour_heights(f, radius);
@@ -165,15 +165,15 @@ void Map::recalc_whole_map(const World& world)
 			recalc_nodecaps_pass1  (world, f);
 		}
 
-	for (YCoordinate y = 0; y < m_height; ++y)
-		for (XCoordinate x = 0; x < m_width; ++x) {
+	for (int16_t y = 0; y < m_height; ++y)
+		for (int16_t x = 0; x < m_width; ++x) {
 			f = get_fcoords(Coords(x, y));
 			recalc_nodecaps_pass2(world, f);
 		}
 
 	//  Now only recaluclate the overlays.
-	for (YCoordinate y = 0; y < m_height; ++y)
-		for (XCoordinate x = 0; x < m_width; ++x)
+	for (int16_t y = 0; y < m_height; ++y)
+		for (int16_t x = 0; x < m_width; ++x)
 			overlay_manager().recalc_field_overlays(get_fcoords(Coords(x, y)));
 }
 
@@ -185,8 +185,8 @@ void Map::recalc_whole_map(const World& world)
  * are not shown.
  */
 void Map::recalc_default_resources(const World& world) {
-	for (YCoordinate y = 0; y < m_height; ++y)
-		for (XCoordinate x = 0; x < m_width; ++x) {
+	for (int16_t y = 0; y < m_height; ++y)
+		for (int16_t x = 0; x < m_width; ++x) {
 			FCoords f, f1;
 			f = get_fcoords(Coords(x, y));
 			//  only on unset nodes
@@ -1409,7 +1409,7 @@ uint32_t Map::calc_distance(const Coords a, const Coords b) const
 
 	dist = abs(dy);
 
-	if (static_cast<XCoordinate>(dist) >= m_width)
+	if (static_cast<int16_t>(dist) >= m_width)
 		// no need to worry about x movement at all
 		return dist;
 
@@ -1996,8 +1996,8 @@ void Map::check_neighbour_heights(FCoords coords, uint32_t & area)
 MilitaryInfluence Map::calc_influence
 	(Coords const a, Area<> const area) const
 {
-	const XCoordinate w = get_width();
-	const YCoordinate h = get_height();
+	const int16_t w = get_width();
+	const int16_t h = get_height();
 	MilitaryInfluence influence =
 		std::max
 			(std::min

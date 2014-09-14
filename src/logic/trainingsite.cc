@@ -497,8 +497,8 @@ void TrainingSite::drop_stalled_soldiers(Game &)
 					break;
 				}
 
-				TypeAndLevel_t train_tl(it->attribute, level);
-				TrainFailCount_t::iterator tstep = training_failure_count.find(train_tl);
+				TypeAndLevel train_tl(it->attribute, level);
+				TrainFailCount::iterator tstep = training_failure_count.find(train_tl);
 				if (tstep ==  training_failure_count.end())
 					{
 						log("\nTrainingSite::drop_stalled_soldiers: ");
@@ -741,7 +741,7 @@ void TrainingSite::calc_upgrades() {
 void
 TrainingSite::trainingAttempted(uint32_t type, uint32_t level)
 	{
-	        TypeAndLevel_t key(type, level);
+	        TypeAndLevel key(type, level);
 		if (training_failure_count.find(key) == training_failure_count.end())
 			training_failure_count[key]  = std::make_pair(training_state_multiplier, 0);
 		else
@@ -755,7 +755,7 @@ TrainingSite::trainingAttempted(uint32_t type, uint32_t level)
 void
 TrainingSite::trainingSuccessful(uint32_t type, uint32_t level)
 {
-	TypeAndLevel_t key(type, level);
+	TypeAndLevel key(type, level);
 	// Here I assume that key exists: training has been attempted before it can succeed.
 	training_failure_count[key].first = 0;
 }
@@ -763,7 +763,7 @@ TrainingSite::trainingSuccessful(uint32_t type, uint32_t level)
 void
 TrainingSite::trainingDone()
 {
-	TrainFailCount_t::iterator it;
+	TrainFailCount::iterator it;
 	for (it = training_failure_count.begin(); it != training_failure_count.end(); it++)
 	{
 		// If a soldier is present at this training level, deteoriate

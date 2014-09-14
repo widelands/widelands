@@ -112,7 +112,7 @@ private:
 	void remove_transfer(uint32_t idx);
 	uint32_t find_transfer(Transfer &);
 
-	typedef std::vector<Transfer *> TransferList;
+	using TransferList = std::vector<Transfer *>;
 
 	WareWorker m_type;
 

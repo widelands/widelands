@@ -39,8 +39,8 @@ private:
 	InteractivePlayer & iplayer() const;
 	void                 selected(uint32_t);
 
-	typedef UI::Listselect<const Widelands::Objective&> list_type;
-	list_type              list;
+	using ListType = UI::Listselect<const Widelands::Objective&>;
+	ListType              list;
 	UI::MultilineTextarea objectivetext;
 };
 

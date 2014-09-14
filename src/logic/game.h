@@ -84,7 +84,7 @@ public:
 
 		std::vector< uint32_t > custom_statistic;
 	};
-	typedef std::vector<GeneralStats> GeneralStatsVector;
+	using GeneralStatsVector = std::vector<GeneralStats>;
 
 	friend class CmdQueue; // this class handles the commands
 	friend struct GameClassPacket;

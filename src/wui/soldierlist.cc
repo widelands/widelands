@@ -46,7 +46,7 @@ using Widelands::SoldierControl;
  * Iconic representation of soldiers, including their levels and current HP.
  */
 struct SoldierPanel : UI::Panel {
-	typedef boost::function<void (const Soldier *)> SoldierFn;
+	using SoldierFn = boost::function<void (const Soldier *)>;
 
 	SoldierPanel(UI::Panel & parent, Widelands::EditorGameBase & egbase, Widelands::Building & building);
 

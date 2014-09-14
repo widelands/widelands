@@ -49,7 +49,7 @@ struct MapObjectPacket {
 		}
 	};
 
-	typedef std::set<MapObject::Loader *, LoaderSorter> LoaderSet;
+	using LoaderSet = std::set<MapObject::Loader *, LoaderSorter>;
 	LoaderSet loaders;
 
 	~MapObjectPacket();

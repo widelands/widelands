@@ -122,6 +122,6 @@ private:
 };
 
 class _DummyMD5Base {};
-typedef MD5Checksum<_DummyMD5Base> SimpleMD5Checksum;
+using SimpleMD5Checksum = MD5Checksum<_DummyMD5Base>;
 
 #endif  // end of include guard: WL_BASE_MD5_H

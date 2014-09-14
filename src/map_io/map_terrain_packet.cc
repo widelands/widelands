@@ -49,7 +49,7 @@ void MapTerrainPacket::Read(FileSystem& fs,
 		if (packet_version == CURRENT_PACKET_VERSION) {
 			uint16_t const nr_terrains = fr.Unsigned16();
 
-			typedef std::map<const uint16_t, TerrainIndex> TerrainIdMap;
+			using TerrainIdMap = std::map<const uint16_t, TerrainIndex>;
 			TerrainIdMap smap;
 			for (uint16_t i = 0; i < nr_terrains; ++i) {
 				const uint16_t id = fr.Unsigned16();

@@ -262,8 +262,8 @@ private:
 	std::vector<StockPolicy> m_worker_policy;
 
 	// Workers who live here at the moment
-	typedef std::vector<Worker *> WorkerList;
-	typedef std::map<WareIndex, WorkerList> IncorporatedWorkers;
+	using WorkerList = std::vector<Worker *>;
+	using IncorporatedWorkers = std::map<WareIndex, WorkerList>;
 	IncorporatedWorkers        m_incorporated_workers;
 	uint32_t                 * m_next_worker_without_cost_spawn;
 	uint32_t                   m_next_military_act;

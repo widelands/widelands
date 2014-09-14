@@ -140,8 +140,8 @@ public:
 	friend struct MapElementalPacket;
 	friend struct WidelandsMapLoader;
 
-	typedef std::set<Coords, Coords::OrderingFunctor> PortSpacesSet;
-	typedef std::map<std::string, std::unique_ptr<Objective>> Objectives;
+	using PortSpacesSet = std::set<Coords, Coords::OrderingFunctor>;
+	using Objectives = std::map<std::string, std::unique_ptr<Objective>>;
 
 	enum { // flags for findpath()
 
@@ -151,7 +151,7 @@ public:
 	};
 
 	// ORed bits for scenario types
-	typedef size_t ScenarioTypes;
+	using ScenarioTypes = size_t;
 	enum {
 		NO_SCENARIO = 0,
 		SP_SCENARIO = 1,
@@ -210,15 +210,15 @@ public:
 	const char * get_description() const {return m_description;}
 	std::string  get_hint()        const {return m_hint;}
 	const std::string & get_background() const {return m_background;}
-	typedef std::set<std::string> Tags;
+	using Tags = std::set<std::string>;
 	const Tags & get_tags() const {return m_tags;}
 	bool has_tag(std::string & s) const {return m_tags.count(s);}
 
 	PlayerNumber get_nrplayers() const {return m_nrplayers;}
 	ScenarioTypes scenario_types() const {return m_scenario_types;}
 	Extent extent() const {return Extent(m_width, m_height);}
-	XCoordinate get_width   () const {return m_width;}
-	YCoordinate get_height  () const {return m_height;}
+	int16_t get_width   () const {return m_width;}
+	int16_t get_height  () const {return m_height;}
 
 	//  The next few functions are only valid when the map is loaded as a
 	//  scenario.
@@ -269,7 +269,7 @@ public:
 		 const FindNode &);
 
 	// Field logic
-	static MapIndex get_index(const Coords &, XCoordinate width);
+	static MapIndex get_index(const Coords &, int16_t width);
 	MapIndex max_index() const {return m_width * m_height;}
 	Field & operator[](MapIndex) const;
 	Field & operator[](const Coords &) const;
@@ -392,8 +392,8 @@ private:
 	PlayerNumber m_nrplayers;
 	ScenarioTypes m_scenario_types; // whether the map is playable as scenario
 
-	XCoordinate m_width;
-	YCoordinate m_height;
+	int16_t m_width;
+	int16_t m_height;
 	char        m_filename    [256];
 	char        m_author       [61];
 	char        m_name         [61];
@@ -451,7 +451,7 @@ Field arithmetics
 ==============================================================================
 */
 
-inline MapIndex Map::get_index(const Coords & c, XCoordinate const width) {
+inline MapIndex Map::get_index(const Coords & c, int16_t const width) {
 	assert(0 < width);
 	assert(0 <= c.x);
 	assert     (c.x < width);
@@ -1042,7 +1042,7 @@ inline FCoords Map::get_neighbour(const FCoords & f, const Direction dir) const
 	}
 }
 
-inline void move_r(const XCoordinate mapwidth, FCoords & f) {
+inline void move_r(const int16_t mapwidth, FCoords & f) {
 	assert(f.x < mapwidth);
 	++f.x;
 	++f.field;
@@ -1050,7 +1050,7 @@ inline void move_r(const XCoordinate mapwidth, FCoords & f) {
 	assert(f.x < mapwidth);
 }
 
-inline void move_r(XCoordinate const mapwidth, FCoords & f, MapIndex & i) {
+inline void move_r(int16_t const mapwidth, FCoords & f, MapIndex & i) {
 	assert(f.x < mapwidth);
 	++f.x;
 	++f.field;
@@ -1063,11 +1063,11 @@ inline void move_r(XCoordinate const mapwidth, FCoords & f, MapIndex & i) {
 #define iterate_Map_FCoords(map, extent, fc)                                  \
    for                                                                        \
       (Widelands::FCoords fc = (map).get_fcoords(Widelands::Coords(0, 0));    \
-		 fc.y < static_cast<Widelands::YCoordinate>(extent.h);                 \
+		 fc.y < static_cast<int16_t>(extent.h);                 \
        ++fc.y)                                                                \
       for                                                                     \
          (fc.x = 0;                                                           \
-			 fc.x < static_cast<Widelands::XCoordinate>(extent.w);              \
+			 fc.x < static_cast<int16_t>(extent.w);              \
           ++fc.x, ++fc.field)                                                 \
 
 }

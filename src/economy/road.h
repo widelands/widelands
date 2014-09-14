@@ -147,7 +147,7 @@ private:
 	Path       m_path;       ///< path goes from start to end
 	uint32_t   m_idle_index; ///< index into path where carriers should idle
 
-	typedef std::vector<CarrierSlot> SlotVector;
+	using SlotVector = std::vector<CarrierSlot>;
 	SlotVector m_carrier_slots;
 };
 

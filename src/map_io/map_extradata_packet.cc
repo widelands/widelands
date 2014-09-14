@@ -48,9 +48,9 @@ void MapExtradataPacket::Read(FileSystem& fs, bool const skip) {
 		if (packet_version == CURRENT_PACKET_VERSION) {
 			// Read all pics.
 			if (fs.FileExists("pics") && fs.IsDirectory("pics")) {
-				filenameset_t pictures = fs.ListDirectory("pics");
+				FilenameSet pictures = fs.ListDirectory("pics");
 				for
-					(filenameset_t::iterator pname = pictures.begin();
+					(FilenameSet::iterator pname = pictures.begin();
 					 pname != pictures.end();
 					 ++pname)
 				{

@@ -216,14 +216,14 @@ void FullscreenMenuLoadReplay::replay_selected(uint32_t const selected)
  */
 void FullscreenMenuLoadReplay::fill_list()
 {
-	filenameset_t files;
+	FilenameSet files;
 
 	files = filter(g_fs->ListDirectory(REPLAY_DIR),
 	               [](const std::string& fn) {return boost::ends_with(fn, REPLAY_SUFFIX);});
 
 	Widelands::GamePreloadPacket gpdp;
 	for
-		(filenameset_t::iterator pname = files.begin();
+		(FilenameSet::iterator pname = files.begin();
 		 pname != files.end();
 		 ++pname)
 	{

@@ -1310,10 +1310,10 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 		std::vector<std::string> directories;
 		directories.push_back("maps");
 		while (!directories.empty()) {
-			filenameset_t files = g_fs->ListDirectory(directories.at(directories.size() - 1).c_str());
+			FilenameSet files = g_fs->ListDirectory(directories.at(directories.size() - 1).c_str());
 			directories.resize(directories.size() - 1);
 			Widelands::Map map;
-			const filenameset_t & gamefiles = files;
+			const FilenameSet & gamefiles = files;
 			for (const std::string& temp_filenames : gamefiles) {
 				char const * const name = temp_filenames.c_str();
 				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(name);
@@ -1342,10 +1342,10 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 
 	if (d->settings.saved_games.empty()) {
 		// Read in saved games
-		filenameset_t files = g_fs->ListDirectory("save");
+		FilenameSet files = g_fs->ListDirectory("save");
 		Widelands::Game game;
 		Widelands::GamePreloadPacket gpdp;
-		const filenameset_t & gamefiles = files;
+		const FilenameSet & gamefiles = files;
 		for (const std::string& temp_filenames : gamefiles) {
 			char const * const name = temp_filenames.c_str();
 			try {

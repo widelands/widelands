@@ -42,7 +42,7 @@ WareList::~WareList()
 /**
  * Add the given number of items (default = 1) to the storage.
  */
-void WareList::add(WareIndex const i, const count_type count) {
+void WareList::add(WareIndex const i, const WareCount count) {
 	if (!count)
 		return;
 
@@ -69,7 +69,7 @@ void WareList::add(const WareList & wl)
 /**
  * Remove the given number of items (default = 1) from the storage.
  */
-void WareList::remove(WareIndex const i, const count_type count) {
+void WareList::remove(WareIndex const i, const WareCount count) {
 	if (!count)
 		return;
 
@@ -92,7 +92,7 @@ void WareList::remove(const WareList & wl)
 /**
  * Return the number of wares of a given type stored in this storage.
  */
-WareList::count_type WareList::stock(WareIndex const id) const {
+WareList::WareCount WareList::stock(WareIndex const id) const {
 	return id < m_wares.size() ? m_wares[id] : 0;
 }
 
@@ -106,7 +106,7 @@ bool WareList::operator== (const WareList & wl) const
 	uint32_t i = 0;
 
 	while (i < wl.m_wares.size()) {
-		const count_type count = wl.m_wares[i];
+		const WareCount count = wl.m_wares[i];
 		if (i < m_wares.size()) {
 			if (count != m_wares[i])
 				return false;

@@ -77,7 +77,7 @@ public:
  * This is the rendering engine. The returned images are not owned by the
  * caller.
  */
-typedef std::set<std::string> TagSet;
+using TagSet = std::set<std::string>;
 class Renderer {
 public:
 	// Ownership is not taken.

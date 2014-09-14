@@ -225,15 +225,15 @@ void GameSummaryScreen::player_selected(uint32_t idx)
 
 std::string GameSummaryScreen::parse_player_info(std::string& info)
 {
-	typedef boost::split_iterator<std::string::iterator> string_split_iterator;
+	using StringSplitIterator = boost::split_iterator<std::string::iterator>;
 	std::string info_str;
 	if (info.empty()) {
 		return info_str;
 	}
 	// Iterate through all key=value pairs
-	string_split_iterator substring_it = boost::make_split_iterator
+	StringSplitIterator substring_it = boost::make_split_iterator
 		(info, boost::first_finder(";", boost::is_equal()));
-	while (substring_it != string_split_iterator()) {
+	while (substring_it != StringSplitIterator()) {
 		std::string substring = boost::copy_range<std::string>(*substring_it);
 		std::vector<std::string> pair;
 		boost::split(pair, substring, boost::is_any_of("="));

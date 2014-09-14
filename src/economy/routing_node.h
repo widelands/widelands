@@ -50,7 +50,7 @@ private:
 	RoutingNode * m_nb;
 	int32_t m_cost; /// Cost to get from me to the neighbour (Cost for road)
 };
-typedef std::vector<RoutingNodeNeighbour> RoutingNodeNeighbours;
+using RoutingNodeNeighbours = std::vector<RoutingNodeNeighbour>;
 
 /**
  * A routing node is a field with a cost attached to it
@@ -65,7 +65,7 @@ struct RoutingNode {
 			return a.cost() < b.cost();
 		}
 	};
-	typedef CookiePriorityQueue<RoutingNode, LessCost> Queue;
+	using Queue = CookiePriorityQueue<RoutingNode, LessCost>;
 
 	uint32_t      mpf_cycle;
 	Queue::cookie mpf_cookie;

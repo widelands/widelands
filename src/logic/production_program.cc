@@ -721,7 +721,6 @@ ProductionProgram::ActWorker::ActWorker(
 		const WorkareaInfo & worker_workarea_info =
 			main_worker_descr.get_program(m_program)->get_workarea_info();
 
-		// local typedef for iterator
 		for (const std::pair<uint32_t, std::set<std::string> >& area_info : worker_workarea_info) {
 			std::set<std::string> & building_radius_infos =
 				descr->m_workarea_info[area_info.first];

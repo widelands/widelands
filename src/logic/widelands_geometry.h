@@ -27,24 +27,19 @@
 
 namespace Widelands {
 
-typedef uint32_t MapIndex;
+using MapIndex = uint32_t;
 
 struct Extent {
 	Extent(uint16_t const W, uint16_t const H) : w(W), h(H) {}
 	uint16_t w, h;
 };
 
-// TODO(sirver): Remove these typedefs.
-typedef int16_t Coordinate;
-typedef Coordinate XCoordinate;
-typedef Coordinate YCoordinate;
-
 /**
  * Structure used to store map coordinates
  */
 struct Coords {
 	Coords();
-	Coords(XCoordinate nx, YCoordinate ny);
+	Coords(int16_t nx, int16_t ny);
 
 	/// Returns a special value indicating invalidity.
 	static Coords Null();
@@ -63,16 +58,16 @@ struct Coords {
 	// Move the coords to the 'new_origin'.
 	void reorigin(Coords new_origin, const Extent & extent);
 
-	XCoordinate x;
-	YCoordinate y;
+	int16_t x;
+	int16_t y;
 };
 static_assert(sizeof(Coords) == 4, "assert(sizeof(Coords) == 4) failed.");
 
 template <typename _CoordsType = Coords, typename _RadiusType = uint16_t>
 struct Area : public _CoordsType
 {
-	typedef _CoordsType CoordsType;
-	typedef _RadiusType RadiusType;
+	using CoordsType = _CoordsType;
+	using RadiusType = _RadiusType;
 	Area() {}
 	Area(const CoordsType center, const RadiusType Radius)
 		: CoordsType(center), radius(Radius)

@@ -56,7 +56,7 @@ private:
 	UI::Button             m_back,             m_ok;
 	UI::Listselect<std::string>                             m_list;
 	std::string     m_parentdir,        m_curdir,           m_basedir;
-	filenameset_t   m_mapfiles;
+	FilenameSet   m_mapfiles;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_EDITOR_MAPSELECT_H

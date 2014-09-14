@@ -107,15 +107,15 @@ struct SoldierMapDescr {
 	}
 };
 
-typedef std::map<SoldierMapDescr, uint32_t> SoldiersMap;
-typedef std::map<Widelands::WareIndex, uint32_t> WaresMap;
-typedef std::map<Widelands::WareIndex, uint32_t> WorkersMap;
-typedef std::pair<SoldierMapDescr, uint32_t> SoldierAmount;
-typedef std::pair<Widelands::WareIndex, uint32_t> WorkerAmount;
-typedef std::pair<uint8_t, uint32_t> PlrInfluence;
-typedef std::set<Widelands::WareIndex> WaresSet;
-typedef std::set<Widelands::WareIndex> WorkersSet;
-typedef std::vector<Widelands::Soldier *> SoldiersList;
+using SoldiersMap = std::map<SoldierMapDescr, uint32_t>;
+using WaresMap = std::map<Widelands::WareIndex, uint32_t>;
+using WorkersMap = std::map<Widelands::WareIndex, uint32_t>;
+using SoldierAmount = std::pair<SoldierMapDescr, uint32_t>;
+using WorkerAmount = std::pair<Widelands::WareIndex, uint32_t>;
+using PlrInfluence = std::pair<uint8_t, uint32_t>;
+using WaresSet = std::set<Widelands::WareIndex>;
+using WorkersSet = std::set<Widelands::WareIndex>;
+using SoldiersList = std::vector<Widelands::Soldier *>;
 
 // parses the get argument for all classes that can be asked for their
 // current wares. Returns a set with all WareIndexes that must be considered.

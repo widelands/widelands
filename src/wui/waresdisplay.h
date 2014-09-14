@@ -87,8 +87,8 @@ protected:
 		 Widelands::WareIndex);
 
 private:
-	typedef std::vector<const Widelands::WareList *> vector_type;
-	typedef std::vector<bool> selection_type;
+	using WareListVector = std::vector<const Widelands::WareList *>;
+	using WareListSelectionType = std::vector<bool>;
 
 	/**
 	 * Update the anchored selection. When first mouse button is pressed on a
@@ -103,9 +103,9 @@ private:
 	const Widelands::TribeDescr & m_tribe;
 	Widelands::WareWorker m_type;
 	UI::Textarea        m_curware;
-	selection_type      m_selected;
-	selection_type      m_hidden;
-	selection_type      m_in_selection;  //Wares in temporary anchored selection
+	WareListSelectionType      m_selected;
+	WareListSelectionType      m_hidden;
+	WareListSelectionType      m_in_selection;  //Wares in temporary anchored selection
 	bool                m_selectable;
 	bool                m_horizontal;
 
@@ -141,8 +141,8 @@ protected:
 	std::string info_for_ware(Widelands::WareIndex) override;
 
 private:
-	typedef std::vector<const Widelands::WareList *> vector_type;
-	vector_type         m_warelists;
+	using WareListVector = std::vector<const Widelands::WareList *>;
+	WareListVector         m_warelists;
 	std::vector<boost::signals2::connection> connections_;
 };
 

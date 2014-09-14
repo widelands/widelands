@@ -79,7 +79,7 @@ struct LineCacheEntry {
 	/*@}*/
 };
 
-typedef std::list<LineCacheEntry> LineCache;
+using LineCache = std::list<LineCacheEntry>;
 
 static const unsigned MaxLineCacheSize = 500;
 

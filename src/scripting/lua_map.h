@@ -903,7 +903,7 @@ public:
 	LUNA_CLASS_HEAD(LuaField);
 
 	LuaField() {}
-	LuaField (Widelands::Coordinate x, Widelands::Coordinate y) :
+	LuaField (int16_t x, int16_t y) :
 		m_c(Widelands::Coords(x, y)) {}
 	LuaField (Widelands::Coords c) : m_c(c) {}
 	LuaField(lua_State * L) {

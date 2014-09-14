@@ -81,7 +81,7 @@ struct TabPanel : public Panel {
 		 Panel             * panel,
 		 const std::string & tooltip = std::string());
 
-	typedef std::vector<Tab *> TabList;
+	using TabList = std::vector<Tab *>;
 
 	const TabList & tabs();
 	void activate(uint32_t idx);

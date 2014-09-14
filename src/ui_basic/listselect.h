@@ -135,7 +135,7 @@ private:
 		std::string name;
 		std::string tooltip;
 	};
-	typedef std::deque<EntryRecord *> EntryRecordDeque;
+	using EntryRecordDeque = std::deque<EntryRecord *>;
 
 	uint32_t m_max_pic_width;
 	uint32_t m_lineheight;
@@ -209,7 +209,7 @@ private:
  */
 template<typename Entry>
 struct Listselect<Entry &> : public Listselect<Entry *> {
-	typedef Listselect<Entry *> Base;
+	using Base = Listselect<Entry *>;
 
 	Listselect
 		(Panel * parent,
