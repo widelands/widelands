@@ -1,25 +1,21 @@
 #!/usr/bin/python
 
-# CamelCase names for class, struct, enum
-# NOCOM(GunChleoc) Do we want to check typedef as well?
-# |(typedef.*>\s*\S+_) works for typedef std::pair<uint16_t, uint16_t> TypeAndLevel_t;
-# If this is OK, we can't have a rule: typedef boost::split_iterator<std::string::iterator> string_split_iterator;
-# Still need a rule for declarations like typedef Est_ Estimator; in any case
+# CamelCase names for class, struct, enum, using
 
-error_msg="Use CamelCase when naming a class, struct, or enum."
+error_msg="Use CamelCase when naming a class, struct, using, or enum."
 
-regexp=r"""(^\s*((class|struct|enum)\s*\S+_.*{).*$)"""
+regexp=r"""(^\s*((class|struct|enum)\s*\S+_.*{)|((using)\s*\S+_.*=).*$)"""
 
 forbidden = [
     "class my_class",
     "struct my_struct",
-    "typedef my_typedef",
+    "using my_typedef",
     "enum my_enum"
 ]
 
 allowed = [
     "class MyClass",
     "struct MyStruct",
-    "typedef MyTypedef",
+    "using MyTypedef",
     "enum MyEnum"
 ]
