@@ -63,10 +63,10 @@ public:
 	friend class Economy;
 	friend class RequestList;
 
-	typedef void (*callback_t)
+	using CallbackFn = void (*)
 		(Game &, Request &, WareIndex, Worker *, PlayerImmovable &);
 
-	Request(PlayerImmovable & target, WareIndex, callback_t, WareWorker);
+	Request(PlayerImmovable & target, WareIndex, CallbackFn, WareWorker);
 	~Request();
 
 	PlayerImmovable & target() const {return m_target;}
@@ -129,7 +129,7 @@ private:
 	WareIndex        m_index;             //  the index of the ware descr
 	uint32_t          m_count;             //  how many do we need in total
 
-	callback_t        m_callbackfn;        //  called on request success
+	CallbackFn        m_callbackfn;        //  called on request success
 
 	//  when do we need the first ware (can be in the past)
 	int32_t           m_required_time;

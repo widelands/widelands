@@ -140,10 +140,10 @@ public:
 	void remove_supply(Supply &);
 
 	/// information about this economy
-	WareList::WaresCount stock_ware  (WareIndex const i) {
+	WareList::WareCount stock_ware  (WareIndex const i) {
 		return m_wares  .stock(i);
 	}
-	WareList::WaresCount stock_worker(WareIndex const i) {
+	WareList::WareCount stock_worker(WareIndex const i) {
 		return m_workers.stock(i);
 	}
 

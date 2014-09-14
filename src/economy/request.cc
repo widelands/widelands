@@ -51,7 +51,7 @@ Request IMPLEMENTATION
 Request::Request
 	(PlayerImmovable & _target,
 	 WareIndex const index,
-	 callback_t const cbfn,
+	 CallbackFn const cbfn,
 	 WareWorker const w)
 	:
 	m_type             (w),

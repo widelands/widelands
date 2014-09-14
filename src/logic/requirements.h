@@ -112,8 +112,8 @@ enum {
  * Factory-like system for requirement loading from files.
  */
 struct RequirementsStorage {
-	typedef
-		Requirements (*Reader)
+	using Reader =
+		Requirements (*)
 			(FileRead &, EditorGameBase &, MapObjectLoader &);
 
 	RequirementsStorage(uint32_t _id, Reader reader);

@@ -110,7 +110,7 @@ void WaresQueue::update() {
 /**
  * Set the callback function that is called when an item has arrived.
 */
-void WaresQueue::set_callback(callback_t * const fn, void * const data)
+void WaresQueue::set_callback(CallbackFn * const fn, void * const data)
 {
 	m_callback_fn = fn;
 	m_callback_data = data;
