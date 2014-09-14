@@ -435,7 +435,7 @@ void WLApplication::run()
 				map.set_filename(m_filename.c_str());
 				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(m_filename);
 				if (!ml) {
-					throw warning
+					throw WLWarning
 						(_("Unsupported format"),
 						 _("Widelands could not load the file \"%s\". The file format seems to be incompatible."),
 						 m_filename.c_str());
@@ -1331,7 +1331,7 @@ void WLApplication::mainmenu()
 			case FullscreenMenuMain::mm_exit:
 				return;
 			}
-		} catch (const warning & e) {
+		} catch (const WLWarning & e) {
 			messagetitle = (boost::format(_("Warning: %s")) % e.title()).str();
 			message = e.what();
 		} catch (const Widelands::GameDataError & e) {
@@ -1462,7 +1462,7 @@ void WLApplication::mainmenu_multiplayer()
 					IPaddress peer;
 
 					if (!host_address)
-						throw warning
+						throw WLWarning
 							("Invalid Address", "%s",
 							 _("The address of the game server is invalid"));
 

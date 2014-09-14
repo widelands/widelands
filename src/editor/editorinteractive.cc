@@ -186,7 +186,7 @@ void EditorInteractive::load(const std::string & filename) {
 
 	std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(filename));
 	if (!ml.get())
-		throw warning
+		throw WLWarning
 			(_("Unsupported format"),
 			 _("Widelands could not load the file \"%s\". The file format seems to be incompatible."),
 			 filename.c_str());

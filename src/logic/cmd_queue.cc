@@ -40,7 +40,7 @@ CmdQueue::CmdQueue(Game & game) :
 	m_game(game),
 	nextserial(0),
 	m_ncmds(0),
-	m_cmds(CMD_QUEUE_BUCKET_SIZE, std::priority_queue<cmditem>()) {}
+	m_cmds(CMD_QUEUE_BUCKET_SIZE, std::priority_queue<CmdItem>()) {}
 
 CmdQueue::~CmdQueue()
 {
@@ -56,7 +56,7 @@ CmdQueue::~CmdQueue()
 void CmdQueue::flush() {
 	uint32_t cbucket = 0;
 	while (m_ncmds && cbucket < CMD_QUEUE_BUCKET_SIZE) {
-		std::priority_queue<cmditem> & current_cmds = m_cmds[cbucket];
+		std::priority_queue<CmdItem> & current_cmds = m_cmds[cbucket];
 
 		while (!current_cmds.empty()) {
 			Command * cmd = current_cmds.top().cmd;
@@ -76,7 +76,7 @@ Insert a new command into the queue; it will be executed at the given time
 */
 void CmdQueue::enqueue (Command * const cmd)
 {
-	cmditem ci;
+	CmdItem ci;
 
 	ci.cmd = cmd;
 	if (upcast(PlayerCommand, plcmd, cmd)) {
@@ -103,7 +103,7 @@ int32_t CmdQueue::run_queue(int32_t const interval, int32_t & game_time_var) {
 	int32_t cnt = 0;
 
 	while (game_time_var < final) {
-		std::priority_queue<cmditem> & current_cmds = m_cmds[game_time_var % CMD_QUEUE_BUCKET_SIZE];
+		std::priority_queue<CmdItem> & current_cmds = m_cmds[game_time_var % CMD_QUEUE_BUCKET_SIZE];
 
 		while (!current_cmds.empty()) {
 			Command & c = *current_cmds.top().cmd;

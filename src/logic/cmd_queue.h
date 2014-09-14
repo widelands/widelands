@@ -125,7 +125,7 @@ class CmdQueue {
 		cat_playercommand
 	};
 
-	struct cmditem {
+	struct CmdItem {
 		Command * cmd;
 
 		/**
@@ -136,7 +136,7 @@ class CmdQueue {
 		int32_t category;
 		uint32_t serial;
 
-		bool operator< (const cmditem & c) const
+		bool operator< (const CmdItem & c) const
 		{
 			if (cmd->duetime() != c.cmd->duetime())
 				return cmd->duetime() > c.cmd->duetime();
@@ -166,7 +166,7 @@ private:
 	Game                       & m_game;
 	uint32_t                     nextserial;
 	uint32_t m_ncmds;
-	using CommandsContainer = std::vector<std::priority_queue<cmditem>>;
+	using CommandsContainer = std::vector<std::priority_queue<CmdItem>>;
 	CommandsContainer m_cmds;
 };
 

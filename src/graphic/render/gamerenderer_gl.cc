@@ -233,14 +233,14 @@ void GameRendererGL::collect_terrain_base(bool onlyscan)
 
 void GameRendererGL::prepare_terrain_base()
 {
-	static_assert(sizeof(basevertex) == 32, "assert(sizeof(basevertex) == 32) failed.");
+	static_assert(sizeof(BaseVertex) == 32, "assert(sizeof(basevertex) == 32) failed.");
 
 	uint32_t reqsize = m_patch_size.w * m_patch_size.h;
 	if (reqsize > 0x10000)
 		throw wexception("Too many vertices; decrease screen resolution");
 
 	if (reqsize > m_patch_vertices_size) {
-		m_patch_vertices.reset(new basevertex[reqsize]);
+		m_patch_vertices.reset(new BaseVertex[reqsize]);
 		m_patch_vertices_size = reqsize;
 	}
 
@@ -278,9 +278,9 @@ void GameRendererGL::draw_terrain_base()
 	glMatrixMode(GL_TEXTURE);
 	glLoadIdentity();
 
-	glVertexPointer(2, GL_FLOAT, sizeof(basevertex), &m_patch_vertices[0].x);
-	glTexCoordPointer(2, GL_FLOAT, sizeof(basevertex), &m_patch_vertices[0].tcx);
-	glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(basevertex), &m_patch_vertices[0].color);
+	glVertexPointer(2, GL_FLOAT, sizeof(BaseVertex), &m_patch_vertices[0].x);
+	glTexCoordPointer(2, GL_FLOAT, sizeof(BaseVertex), &m_patch_vertices[0].tcx);
+	glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(BaseVertex), &m_patch_vertices[0].color);
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glEnableClientState(GL_COLOR_ARRAY);
@@ -404,7 +404,7 @@ void GameRendererGL::collect_terrain_dither(bool onlyscan)
  */
 void GameRendererGL::prepare_terrain_dither()
 {
-	static_assert(sizeof(dithervertex) == 32, "assert(sizeof(dithervertex) == 32) failed.");
+	static_assert(sizeof(DitherVertex) == 32, "assert(sizeof(dithervertex) == 32) failed.");
 
 	m_terrain_edge_freq.assign(m_terrain_edge_freq.size(), 0);
 
@@ -418,7 +418,7 @@ void GameRendererGL::prepare_terrain_dither()
 	}
 
 	if (3 * nrtriangles > m_edge_vertices_size) {
-		m_edge_vertices.reset(new dithervertex[3 * nrtriangles]);
+		m_edge_vertices.reset(new DitherVertex[3 * nrtriangles]);
 		m_edge_vertices_size = 3 * nrtriangles;
 	}
 
@@ -438,16 +438,16 @@ void GameRendererGL::draw_terrain_dither()
 	if (m_edge_vertices_size == 0)
 		return;
 
-	glVertexPointer(2, GL_FLOAT, sizeof(dithervertex), &m_edge_vertices[0].x);
-	glTexCoordPointer(2, GL_FLOAT, sizeof(dithervertex), &m_edge_vertices[0].tcx);
-	glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(dithervertex), &m_edge_vertices[0].color);
+	glVertexPointer(2, GL_FLOAT, sizeof(DitherVertex), &m_edge_vertices[0].x);
+	glTexCoordPointer(2, GL_FLOAT, sizeof(DitherVertex), &m_edge_vertices[0].tcx);
+	glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(DitherVertex), &m_edge_vertices[0].color);
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glEnableClientState(GL_COLOR_ARRAY);
 
 	glActiveTextureARB(GL_TEXTURE1_ARB);
 	glClientActiveTextureARB(GL_TEXTURE1_ARB);
-	glTexCoordPointer(2, GL_FLOAT, sizeof(dithervertex), &m_edge_vertices[0].edgex);
+	glTexCoordPointer(2, GL_FLOAT, sizeof(DitherVertex), &m_edge_vertices[0].edgex);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	GLuint edge = get_dither_edge_texture()->get_gl_texture();
 	glBindTexture(GL_TEXTURE_2D, edge);
@@ -528,7 +528,7 @@ void GameRendererGL::prepare_roads()
 
 	uint32_t nrquads = m_road_freq[0] + m_road_freq[1];
 	if (4 * nrquads > m_road_vertices_size) {
-		m_road_vertices.reset(new basevertex[4 * nrquads]);
+		m_road_vertices.reset(new BaseVertex[4 * nrquads]);
 		m_road_vertices_size = 4 * nrquads;
 	}
 
@@ -546,7 +546,7 @@ void GameRendererGL::prepare_roads()
 			uint8_t road = (roads >> Road_East) & Road_Mask;
 			if (road >= Road_Normal && road <= Road_Busy) {
 				uint32_t index = indexs[road - Road_Normal];
-				basevertex start, end;
+				BaseVertex start, end;
 				compute_basevertex(Coords(fx, fy), start);
 				compute_basevertex(Coords(fx + 1, fy), end);
 				m_road_vertices[index] = start;
@@ -571,7 +571,7 @@ void GameRendererGL::prepare_roads()
 			road = (roads >> Road_SouthEast) & Road_Mask;
 			if (road >= Road_Normal && road <= Road_Busy) {
 				uint32_t index = indexs[road - Road_Normal];
-				basevertex start, end;
+				BaseVertex start, end;
 				compute_basevertex(Coords(fx, fy), start);
 				compute_basevertex(Coords(fx + (fy & 1), fy + 1), end);
 				m_road_vertices[index] = start;
@@ -596,7 +596,7 @@ void GameRendererGL::prepare_roads()
 			road = (roads >> Road_SouthWest) & Road_Mask;
 			if (road >= Road_Normal && road <= Road_Busy) {
 				uint32_t index = indexs[road - Road_Normal];
-				basevertex start, end;
+				BaseVertex start, end;
 				compute_basevertex(Coords(fx, fy), start);
 				compute_basevertex(Coords(fx + (fy & 1) - 1, fy + 1), end);
 				m_road_vertices[index] = start;
@@ -636,9 +636,9 @@ void GameRendererGL::draw_roads()
 		dynamic_cast<const GLSurfaceTexture &>
 		(g_gr->get_road_texture(Widelands::Road_Busy)).get_gl_texture();
 
-	glVertexPointer(2, GL_FLOAT, sizeof(basevertex), &m_road_vertices[0].x);
-	glTexCoordPointer(2, GL_FLOAT, sizeof(basevertex), &m_road_vertices[0].tcx);
-	glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(basevertex), &m_road_vertices[0].color);
+	glVertexPointer(2, GL_FLOAT, sizeof(BaseVertex), &m_road_vertices[0].x);
+	glTexCoordPointer(2, GL_FLOAT, sizeof(BaseVertex), &m_road_vertices[0].tcx);
+	glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(BaseVertex), &m_road_vertices[0].color);
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glEnableClientState(GL_COLOR_ARRAY);

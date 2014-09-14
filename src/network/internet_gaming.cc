@@ -113,13 +113,13 @@ DIAG_OFF("-Wold-style-cast")
 		peer.port = htons(m_port);
 DIAG_ON("-Wold-style-cast")
 	} else
-		throw warning
+		throw WLWarning
 			(_("Connection problem"), "%s", _("Widelands could not connect to the metaserver."));
 
 	SDLNet_ResolveHost (&peer, m_meta.c_str(), m_port);
 	m_sock = SDLNet_TCP_Open(&peer);
 	if (m_sock == nullptr)
-		throw warning
+		throw WLWarning
 			(_("Could not establish connection to host"),
 			 _
 			 	("Widelands could not establish a connection to the given address.\n"
@@ -397,7 +397,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 			std::string errortype = packet.String();
 			if (errortype != "LOGIN" && errortype != "RELOGIN") {
 				dedicatedlog("InternetGaming: Strange ERROR in connecting state: %s\n", errortype.c_str());
-				throw warning(_("Mixed up"), _("The metaserver sent a strange ERROR during connection"));
+				throw WLWarning(_("Mixed up"), _("The metaserver sent a strange ERROR during connection"));
 			}
 			// Clients login request got rejected
 			logout(packet.String());
@@ -407,7 +407,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 		} else {
 			logout();
 			setError();
-			throw warning
+			throw WLWarning
 				(_("Unexpected packet"),
 				 _
 				 	("Expected a LOGIN, RELOGIN or REJECTED packet from server, but received command "
@@ -461,7 +461,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 			std::string type     = packet.String();
 
 			if (type != "public" && type != "private" && type != "system")
-				throw warning(_("Invalid message type"), _("Invalid chat message type \"%s\"."), type.c_str());
+				throw WLWarning(_("Invalid message type"), _("Invalid chat message type \"%s\"."), type.c_str());
 
 			bool        personal = type == "private";
 			bool        system   = type == "system";
@@ -611,7 +611,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 				(boost::format(_("Received an unknown command from the metaserver: %s")) % cmd).str()
 			);
 
-	} catch (warning & e) {
+	} catch (WLWarning & e) {
 		formatAndAddChat("", "", true, e.what());
 	}
 
@@ -826,7 +826,7 @@ void InternetGaming::send(const std::string & msg) {
  */
 bool InternetGaming::str2bool(std::string str) {
 	if ((str != "true") && (str != "false"))
-		throw warning
+		throw WLWarning
 			(_("Conversion error"),
 			_("Conversion from std::string to bool failed. String was \"%s\""), str.c_str());
 

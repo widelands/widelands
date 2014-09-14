@@ -479,7 +479,7 @@ bool Game::run
 			// Is a scenario!
 			iterate_players_existing_novar(p, nr_players, *this) {
 				if (!map().get_starting_pos(p))
-				throw warning
+				throw WLWarning
 					(_("Missing starting position"),
 					 _
 					 	("Widelands could not start the game, because player %u has "

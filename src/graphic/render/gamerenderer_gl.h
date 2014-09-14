@@ -45,7 +45,7 @@ public:
 	virtual ~GameRendererGL();
 
 private:
-	struct basevertex {
+	struct BaseVertex {
 		float x;
 		float y;
 		float tcx;
@@ -54,7 +54,7 @@ private:
 		uint32_t pad[3];
 	};
 
-	struct dithervertex {
+	struct DitherVertex {
 		float x;
 		float y;
 		float tcx;
@@ -106,21 +106,21 @@ private:
 	Point m_surface_offset;
 
 	Rect m_patch_size;
-	std::unique_ptr<basevertex[]> m_patch_vertices;
+	std::unique_ptr<BaseVertex[]> m_patch_vertices;
 	uint32_t m_patch_vertices_size;
 	std::unique_ptr<uint16_t[]> m_patch_indices;
 	uint32_t m_patch_indices_size;
 	std::vector<uint32_t> m_patch_indices_indexs;
 	std::vector<uint32_t> m_terrain_freq;
 	std::vector<uint32_t> m_terrain_freq_cum;
-	std::unique_ptr<dithervertex[]> m_edge_vertices;
+	std::unique_ptr<DitherVertex[]> m_edge_vertices;
 	uint32_t m_edge_vertices_size;
 	std::vector<uint32_t> m_terrain_edge_freq;
 	std::vector<uint32_t> m_terrain_edge_freq_cum;
 	std::vector<uint32_t> m_terrain_edge_indexs;
 
 	uint32_t m_road_freq[2];
-	std::unique_ptr<basevertex[]> m_road_vertices;
+	std::unique_ptr<BaseVertex[]> m_road_vertices;
 	uint32_t m_road_vertices_size;
 	/*@}*/
 };

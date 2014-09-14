@@ -103,7 +103,7 @@ NetClient::NetClient
 {
 	d->sock = SDLNet_TCP_Open(svaddr);
 	if (d->sock == nullptr)
-		throw warning
+		throw WLWarning
 			(_("Could not establish connection to host"),
 			 _
 			 	("Widelands could not establish a connection to the given "

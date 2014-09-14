@@ -263,7 +263,7 @@ void FullscreenMenuLaunchSPG::win_condition_update() {
 void FullscreenMenuLaunchSPG::start_clicked()
 {
 	if (!g_fs->FileExists(m_filename))
-		throw warning
+		throw WLWarning
 			(_("File not found"),
 			 _
 			 	("Widelands tried to start a game with a file that could not be "

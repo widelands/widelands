@@ -30,9 +30,9 @@ struct MapObjectSaver;
 
 }
 
-#define MAP_DATA_PACKET(name)                                                            \
+#define MAP_DATA_PACKET(Name)                                                            \
 	namespace Widelands {                                                            \
-	class name {                                                                     \
+	class Name {                                                                     \
 	public:                                                                          \
 		void Read(FileSystem&, EditorGameBase&, bool, MapObjectLoader&); \
 		void Write(FileSystem&, EditorGameBase&, MapObjectSaver&);       \

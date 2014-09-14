@@ -56,7 +56,7 @@ void GameCmdQueuePacket::Read
 				if (!packet_id)
 					break;
 
-				CmdQueue::cmditem item;
+				CmdQueue::CmdItem item;
 				item.category = fr.Signed32();
 				item.serial = fr.Unsigned32();
 
@@ -111,10 +111,10 @@ void GameCmdQueuePacket::Write
 
 	while (nhandled < cmdq.m_ncmds) {
 		// Make a copy, so we can pop stuff
-		std::priority_queue<CmdQueue::cmditem> p = cmdq.m_cmds[time % CMD_QUEUE_BUCKET_SIZE];
+		std::priority_queue<CmdQueue::CmdItem> p = cmdq.m_cmds[time % CMD_QUEUE_BUCKET_SIZE];
 
 		while (!p.empty()) {
-			const CmdQueue::cmditem & it = p.top();
+			const CmdQueue::CmdItem & it = p.top();
 			if (it.cmd->duetime() == time) {
 				if (upcast(GameLogicCommand, cmd, it.cmd)) {
 					// The id (aka command type)

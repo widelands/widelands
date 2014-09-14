@@ -224,7 +224,7 @@ void Player::create_default_infrastructure() {
 			game.enqueue_command(new CmdLuaCoroutine(game.get_gametime(), ncr.release()));
 		}
 	} else
-		throw warning
+		throw WLWarning
 			(_("Missing starting position"),
 			 _
 			 	("Widelands could not start the game, because player %u has no "
