@@ -2,6 +2,8 @@
 
 import re
 
+strip_comments_and_strings = True
+
 def evaluate_matches(lines, fn):
    errors = []
 

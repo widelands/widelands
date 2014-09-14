@@ -2,20 +2,27 @@
 
 # CamelCase names for class, struct, enum, using
 
-error_msg="Use CamelCase when naming a class, struct, using, or enum."
+error_msg="Use CapitalLetterWithCamelCase when naming an enum class, struct, or \"using\"."
 
-regexp=r"""(^\s*((class|struct|enum)\s*\S+_.*{)|((using)\s*\S+_.*=).*$)"""
+regexp=r"""(^\s*((class|struct)\s+((\S+_)|([a-z]\S+)).*{)|((enum)\s+((\S+_)|(([abd-z])|(c(?!lass))\S+)).*{)|((using)\s+((\S+_)|([a-z]\S+)).*=).*$)"""
 
 forbidden = [
     "class my_class",
+    "class myClass",
     "struct my_struct",
+    "struct myStruct",
     "using my_typedef",
-    "enum my_enum"
+    "using myTypedef",
+    "enum class my_enum",
+    "enum class myEnum"
+    "enum my_enum",
+    "enum myEnum"
 ]
 
 allowed = [
     "class MyClass",
     "struct MyStruct",
     "using MyTypedef",
+    "enum class MyEnum",
     "enum MyEnum"
 ]
