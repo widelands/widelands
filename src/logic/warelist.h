@@ -42,7 +42,6 @@ struct WareList {
 
 	using WareCount = uint32_t;
 	using WareCountVector = std::vector<WareCount>;
-	// NOCOM(GunChleoc) using size_type = CountTypeVector::size_type;
 
 	/// \return Highest possible ware id
 	WareIndex get_nrwareids() const {return WareIndex(m_wares.size());}

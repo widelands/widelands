@@ -157,8 +157,8 @@ public:
 	friend struct MapBobPacket;
 
 	struct State;
-	typedef void (Bob::*Ptr)(Game &, State &);
-	typedef void (Bob::*PtrSignal)(Game &, State &, const std::string &);
+	using Ptr = void (Bob::*)(Game &, State &);
+	using PtrSignal = void (Bob::*)(Game &, State &, const std::string &);
 
 	/// \see struct Bob for in-depth explanation
 	struct Task {

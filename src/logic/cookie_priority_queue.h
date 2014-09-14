@@ -32,13 +32,13 @@ struct DefaultCookieAccessor;
 
 template<typename _Type>
 struct CookiePriorityQueueBase {
-	typedef _Type type;
-	typedef std::vector<type *> container;
-	typedef typename container::size_type size_type;
+	using CookieType = _Type;
+	using CookieTypeVector = std::vector<CookieType*>;
+	using CookieSizeType = typename CookieTypeVector::size_type;
 
-	struct cookie {
-		cookie() : pos(bad_pos()) {}
-		~cookie() {}
+	struct Cookie {
+		Cookie() : pos(bad_pos()) {}
+		~Cookie() {}
 
 		/** Returns \c true if the cookie is currently managed by a queue */
 		bool is_active() const {return pos != bad_pos();}
@@ -46,14 +46,14 @@ struct CookiePriorityQueueBase {
 	private:
 		friend struct CookiePriorityQueueBase<_Type>;
 
-		size_type pos;
+		CookieSizeType pos;
 
-		DISALLOW_COPY_AND_ASSIGN(cookie);
+		DISALLOW_COPY_AND_ASSIGN(Cookie);
 	};
 
 protected:
-	static size_type & cookie_pos(cookie & cookie) {return cookie.pos;}
-	static size_type bad_pos() {return std::numeric_limits<size_type>::max();}
+	static CookieSizeType & cookie_pos(Cookie & cookie) {return cookie.pos;}
+	static CookieSizeType bad_pos() {return std::numeric_limits<CookieSizeType>::max();}
 };
 
 /**
@@ -78,47 +78,47 @@ template
 	 typename _Compare = std::less<_Type>,
 	 typename _CookieAccessor = DefaultCookieAccessor<_Type> >
 struct CookiePriorityQueue : CookiePriorityQueueBase<_Type> {
-	typedef typename CookiePriorityQueueBase<_Type>::type type;
-	typedef typename CookiePriorityQueueBase<_Type>::container container;
-	typedef typename CookiePriorityQueueBase<_Type>::size_type size_type;
-	typedef typename CookiePriorityQueueBase<_Type>::cookie cookie;
+	using CookieType = typename CookiePriorityQueueBase<_Type>::CookieType;
+	using CookieTypeVector = typename CookiePriorityQueueBase<_Type>::CookieTypeVector;
+	using CookieSizeType = typename CookiePriorityQueueBase<_Type>::CookieSizeType;
+	using Cookie = typename CookiePriorityQueueBase<_Type>::Cookie;
 
-	typedef CookiePriorityQueueBase<_Type> base_type;
-	typedef _Compare compare;
-	typedef _CookieAccessor cookie_accessor;
+	using BaseType = CookiePriorityQueueBase<_Type>;
+	using Compare = _Compare;
+	using CookieAccessor = _CookieAccessor;
 
-	CookiePriorityQueue(const compare & _c = compare(), const cookie_accessor & _a = cookie_accessor());
+	CookiePriorityQueue(const Compare & _c = Compare(), const CookieAccessor & _a = CookieAccessor());
 	~CookiePriorityQueue();
 
-	size_type size() const;
+	CookieSizeType size() const;
 	bool empty() const;
-	type * top() const;
+	CookieType * top() const;
 
-	void push(type * elt);
-	void pop(type * elt);
-	void decrease_key(type * elt);
-	void increase_key(type * elt);
+	void push(CookieType * elt);
+	void pop(CookieType * elt);
+	void decrease_key(CookieType * elt);
+	void increase_key(CookieType * elt);
 
 private:
-	container d;
-	compare c;
-	cookie_accessor ca;
+	CookieTypeVector d;
+	Compare c;
+	CookieAccessor ca;
 
-	void swap(cookie & a, cookie & b);
+	void swap(Cookie & a, Cookie & b);
 	void selftest();
 
-	static size_type & cookie_pos(cookie & c) {return base_type::cookie_pos(c);}
-	static size_type bad_pos() {return base_type::bad_pos();}
-	static size_type parent_pos(size_type pos) {return (pos - 1) / 2;}
-	static size_type left_child_pos(size_type pos) {return (2 * pos) + 1;}
-	static size_type right_child_pos(size_type pos) {return (2 * pos) + 2;}
+	static CookieSizeType & cookie_pos(Cookie & c) {return BaseType::cookie_pos(c);}
+	static CookieSizeType bad_pos() {return BaseType::bad_pos();}
+	static CookieSizeType parent_pos(CookieSizeType pos) {return (pos - 1) / 2;}
+	static CookieSizeType left_child_pos(CookieSizeType pos) {return (2 * pos) + 1;}
+	static CookieSizeType right_child_pos(CookieSizeType pos) {return (2 * pos) + 2;}
 };
 
 template<typename _Type>
 struct DefaultCookieAccessor {
-	typedef typename CookiePriorityQueueBase<_Type>::cookie cookie;
+	using Cookie = typename CookiePriorityQueueBase<_Type>::Cookie;
 
-	cookie & operator()(_Type * t) {
+	Cookie & operator()(_Type * t) {
 		return t->cookie();
 	}
 };
@@ -126,8 +126,8 @@ struct DefaultCookieAccessor {
 
 template<typename _T, typename _Cw, typename _CA>
 CookiePriorityQueue<_T, _Cw, _CA>::CookiePriorityQueue
-	(const typename CookiePriorityQueue<_T, _Cw, _CA>::compare & _c,
-	 const typename CookiePriorityQueue<_T, _Cw, _CA>::cookie_accessor & _a)
+	(const typename CookiePriorityQueue<_T, _Cw, _CA>::Compare & _c,
+	 const typename CookiePriorityQueue<_T, _Cw, _CA>::CookieAccessor & _a)
 : c(_c), ca(_a)
 {
 }
@@ -135,12 +135,12 @@ CookiePriorityQueue<_T, _Cw, _CA>::CookiePriorityQueue
 template<typename _T, typename _Cw, typename _CA>
 CookiePriorityQueue<_T, _Cw, _CA>::~CookiePriorityQueue()
 {
-	for (typename container::iterator it = d.begin(); it != d.end(); ++it)
+	for (typename CookieTypeVector::iterator it = d.begin(); it != d.end(); ++it)
 		cookie_pos(ca(*it)) = bad_pos();
 }
 
 template<typename _T, typename _Cw, typename _CA>
-typename CookiePriorityQueue<_T, _Cw, _CA>::size_type CookiePriorityQueue<_T, _Cw, _CA>::size() const
+typename CookiePriorityQueue<_T, _Cw, _CA>::CookieSizeType CookiePriorityQueue<_T, _Cw, _CA>::size() const
 {
 	return d.size();
 }
@@ -152,18 +152,18 @@ bool CookiePriorityQueue<_T, _Cw, _CA>::empty() const
 }
 
 template<typename _T, typename _Cw, typename _CA>
-typename CookiePriorityQueue<_T, _Cw, _CA>::type * CookiePriorityQueue<_T, _Cw, _CA>::top() const
+typename CookiePriorityQueue<_T, _Cw, _CA>::CookieType * CookiePriorityQueue<_T, _Cw, _CA>::top() const
 {
 	return *d.begin();
 }
 
 template<typename _T, typename _Cw, typename _CA>
 void CookiePriorityQueue<_T, _Cw, _CA>::push
-	(typename CookiePriorityQueue<_T, _Cw, _CA>::type * elt)
+	(typename CookiePriorityQueue<_T, _Cw, _CA>::CookieType * elt)
 {
-	cookie & elt_cookie(ca(elt));
+	Cookie & elt_cookie(ca(elt));
 
-	assert(cookie_pos(elt_cookie) == base_type::bad_pos());
+	assert(cookie_pos(elt_cookie) == BaseType::bad_pos());
 
 	d.push_back(elt);
 	cookie_pos(elt_cookie) = d.size() - 1;
@@ -173,14 +173,14 @@ void CookiePriorityQueue<_T, _Cw, _CA>::push
 
 template<typename _T, typename _Cw, typename _CA>
 void CookiePriorityQueue<_T, _Cw, _CA>::pop
-	(typename CookiePriorityQueue<_T, _Cw, _CA>::type * elt)
+	(typename CookiePriorityQueue<_T, _Cw, _CA>::CookieType * elt)
 {
-	cookie & elt_cookie(ca(elt));
+	Cookie & elt_cookie(ca(elt));
 
 	assert(cookie_pos(elt_cookie) < d.size());
 
 	while (cookie_pos(elt_cookie) > 0) {
-		cookie & parent_cookie = ca(*(d.begin() + parent_pos(cookie_pos(elt_cookie))));
+		Cookie & parent_cookie = ca(*(d.begin() + parent_pos(cookie_pos(elt_cookie))));
 
 		assert(cookie_pos(parent_cookie) == parent_pos(cookie_pos(elt_cookie)));
 
@@ -189,7 +189,7 @@ void CookiePriorityQueue<_T, _Cw, _CA>::pop
 
 	swap(elt_cookie, ca(d.back()));
 	d.pop_back();
-	cookie_pos(elt_cookie) = base_type::bad_pos();
+	cookie_pos(elt_cookie) = BaseType::bad_pos();
 
 	if (!d.empty())
 		increase_key(*d.begin());
@@ -197,19 +197,19 @@ void CookiePriorityQueue<_T, _Cw, _CA>::pop
 
 template<typename _T, typename _Cw, typename _CA>
 void CookiePriorityQueue<_T, _Cw, _CA>::decrease_key
-	(typename CookiePriorityQueue<_T, _Cw, _CA>::type * elt)
+	(typename CookiePriorityQueue<_T, _Cw, _CA>::CookieType * elt)
 {
-	cookie & elt_cookie(ca(elt));
+	Cookie & elt_cookie(ca(elt));
 
 	assert(cookie_pos(elt_cookie) < d.size());
 
 	while (cookie_pos(elt_cookie) != 0) {
-		size_type parent = parent_pos(cookie_pos(elt_cookie));
+		CookieSizeType parent = parent_pos(cookie_pos(elt_cookie));
 
 		if (!c(*elt, *d[parent]))
 			break;
 
-		cookie & parent_cookie(ca(d[parent]));
+		Cookie & parent_cookie(ca(d[parent]));
 
 		assert(cookie_pos(parent_cookie) == parent);
 
@@ -221,20 +221,20 @@ void CookiePriorityQueue<_T, _Cw, _CA>::decrease_key
 
 template<typename _T, typename _Cw, typename _CA>
 void CookiePriorityQueue<_T, _Cw, _CA>::increase_key
-	(typename CookiePriorityQueue<_T, _Cw, _CA>::type * elt)
+	(typename CookiePriorityQueue<_T, _Cw, _CA>::CookieType * elt)
 {
-	cookie & elt_cookie(ca(elt));
+	Cookie & elt_cookie(ca(elt));
 
 	assert(cookie_pos(elt_cookie) < d.size());
 
 	for (;;) {
-		size_type left_child = left_child_pos(cookie_pos(elt_cookie));
-		size_type right_child = right_child_pos(cookie_pos(elt_cookie));
+		CookieSizeType left_child = left_child_pos(cookie_pos(elt_cookie));
+		CookieSizeType right_child = right_child_pos(cookie_pos(elt_cookie));
 
 		if (left_child >= d.size())
 			break;
 
-		cookie & left_cookie(ca(d[left_child]));
+		Cookie & left_cookie(ca(d[left_child]));
 
 		assert(cookie_pos(left_cookie) == left_child);
 
@@ -248,7 +248,7 @@ void CookiePriorityQueue<_T, _Cw, _CA>::increase_key
 		if (right_child >= d.size())
 			break;
 
-		cookie & right_cookie(ca(d[right_child]));
+		Cookie & right_cookie(ca(d[right_child]));
 
 		assert(cookie_pos(right_cookie) == right_child);
 
@@ -265,8 +265,8 @@ void CookiePriorityQueue<_T, _Cw, _CA>::increase_key
 
 template<typename _T, typename _Cw, typename _CA>
 void CookiePriorityQueue<_T, _Cw, _CA>::swap
-	(typename CookiePriorityQueue<_T, _Cw, _CA>::cookie & a,
-	 typename CookiePriorityQueue<_T, _Cw, _CA>::cookie & b)
+	(typename CookiePriorityQueue<_T, _Cw, _CA>::Cookie & a,
+	 typename CookiePriorityQueue<_T, _Cw, _CA>::Cookie & b)
 {
 	std::swap(d[cookie_pos(a)], d[cookie_pos(b)]);
 	std::swap(cookie_pos(a), cookie_pos(b));
@@ -276,13 +276,13 @@ void CookiePriorityQueue<_T, _Cw, _CA>::swap
 template<typename _T, typename _Cw, typename _CA>
 void CookiePriorityQueue<_T, _Cw, _CA>::selftest()
 {
-	for (size_type pos = 0; pos < d.size(); ++pos) {
-		cookie & elt_cookie(ca(d[pos]));
+	for (CookieSizeType pos = 0; pos < d.size(); ++pos) {
+		Cookie & elt_cookie(ca(d[pos]));
 
 		assert(cookie_pos(elt_cookie) == pos);
 
-		size_type left_child = left_child_pos(pos);
-		size_type right_child = right_child_pos(pos);
+		CookieSizeType left_child = left_child_pos(pos);
+		CookieSizeType right_child = right_child_pos(pos);
 
 		if (left_child < d.size()) {
 			assert(!c(*d[left_child], *d[pos]));

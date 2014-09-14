@@ -37,7 +37,7 @@ struct WorkerProgram : public BobProgramBase {
 		Profile          * prof;
 	};
 
-	typedef void (WorkerProgram::*ParseWorkerProgramFn)
+	using ParseWorkerProgramFn = void (WorkerProgram::*)
 		(WorkerDescr                   *,
 		 Worker::Action                 *,
 		 Parser                         *,

@@ -25,8 +25,8 @@
 namespace Widelands {
 
 struct CritterAction {
-	typedef
-		bool (Critter::*CritterExecuteActionFn)
+	using CritterExecuteActionFn =
+		bool (Critter::*)
 			(Game &, Bob::State &, const CritterAction &);
 
 	enum {

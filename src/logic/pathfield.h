@@ -48,14 +48,14 @@ struct Pathfield {
 
 	using Queue = CookiePriorityQueue<Pathfield, LessCost>;
 
-	Queue::cookie heap_cookie;
+	Queue::Cookie heap_cookie;
 	int32_t real_cost;  //  true cost up to this field
 	int32_t estim_cost; //  estimated cost till goal
 	uint16_t cycle;
 	uint8_t  backlink;   //  how we got here (WALK_*)
 
 	int32_t cost() const {return real_cost + estim_cost;}
-	Queue::cookie & cookie() {return heap_cookie;}
+	Queue::Cookie & cookie() {return heap_cookie;}
 };
 
 struct Pathfields {

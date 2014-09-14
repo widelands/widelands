@@ -49,7 +49,7 @@ class Worker : public Bob {
 	MO_DESCR(WorkerDescr)
 
 	struct Action {
-		typedef bool (Worker::*WorkerExecuteActionFn)(Game &, Bob::State &, const Action &);
+		using WorkerExecuteActionFn = bool (Worker::*)(Game &, Bob::State &, const Action &);
 
 		enum {
 			walkObject = 1, //  walk to objvar1
