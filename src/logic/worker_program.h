@@ -37,7 +37,7 @@ struct WorkerProgram : public BobProgramBase {
 		Profile          * prof;
 	};
 
-	typedef void (WorkerProgram::*parse_t)
+	typedef void (WorkerProgram::*ParseWorkerProgramFn)
 		(WorkerDescr                   *,
 		 Worker::Action                 *,
 		 Parser                         *,
@@ -63,7 +63,7 @@ private:
 	WorkareaInfo m_workarea_info;
 	struct ParseMap {
 		const char * name;
-		parse_t      function;
+		ParseWorkerProgramFn function;
 	};
 
 	void parse_mine

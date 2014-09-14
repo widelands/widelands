@@ -31,16 +31,8 @@ namespace Widelands {
 
 struct MessageQueue : private std::map<MessageId, Message *> {
 	friend class MapPlayersMessagesPacket;
-	// Make typedefs public so that this looks like proper
-	// STL container to templated algorithms.
-	using _Mybase = std::map<MessageId, Message *>;
-	typedef _Mybase::pointer pointer;
-	typedef _Mybase::const_pointer const_pointer;
-	typedef _Mybase::reference reference;
-	typedef _Mybase::const_reference const_reference;
-	typedef _Mybase::iterator iterator;
-	typedef _Mybase::const_iterator const_iterator;
-	MessageQueue() { //  C++0x: MessageQueue() : m_counts({}) {}
+
+	MessageQueue() {
 		m_counts[Message::New]      = 0; //  C++0x:
 		m_counts[Message::Read]     = 0; //  C++0x:
 		m_counts[Message::Archived] = 0; //  C++0x:
@@ -49,15 +41,15 @@ struct MessageQueue : private std::map<MessageId, Message *> {
 	~MessageQueue() {
 		while (size()) {
 			delete begin()->second;
-			erase(std::map<MessageId, Message *>::begin());
+			erase(begin());
 		}
 	}
 
 	//  Make some selected inherited members public.
-	const_iterator begin() const {
+	MessageQueue::const_iterator begin() const {
 		return std::map<MessageId, Message *>::begin();
 	}
-	const_iterator end() const {
+	MessageQueue::const_iterator end() const {
 		return std::map<MessageId, Message *>::end();
 	}
 	size_type count(uint32_t const i) const {
@@ -68,7 +60,7 @@ struct MessageQueue : private std::map<MessageId, Message *> {
 	/// \returns a pointer to the message if it exists, otherwise 0.
 	Message const * operator[](const MessageId& id) const {
 		assert_counts();
-		const_iterator const it = find(MessageId(id));
+		MessageQueue::const_iterator const it = find(MessageId(id));
 		return it != end() ? it->second : nullptr;
 	}
 
@@ -108,7 +100,7 @@ struct MessageQueue : private std::map<MessageId, Message *> {
 	void set_message_status(const MessageId& id, Message::Status const status) {
 		assert_counts();
 		assert(status < 3);
-		iterator const it = find(id);
+		MessageQueue::iterator const it = find(id);
 		if (it != end()) {
 			Message & message = *it->second;
 			assert(it->second->status() < 3);
@@ -123,7 +115,7 @@ struct MessageQueue : private std::map<MessageId, Message *> {
 	/// Assumes that a message with the given id exists.
 	void expire_message(const MessageId& id) {
 		assert_counts();
-		iterator const it = find(id);
+		MessageQueue::iterator const it = find(id);
 		if (it == end()) {
 			// Messages can be expired when the timeout runs out, or when the linked
 			// MapObject is removed, or both. In this later case, two expire commands

@@ -49,7 +49,7 @@ class Worker : public Bob {
 	MO_DESCR(WorkerDescr)
 
 	struct Action {
-		typedef bool (Worker::*execute_t)(Game &, Bob::State &, const Action &);
+		typedef bool (Worker::*WorkerExecuteActionFn)(Game &, Bob::State &, const Action &);
 
 		enum {
 			walkObject = 1, //  walk to objvar1
@@ -61,7 +61,7 @@ class Worker : public Bob {
 			plantUnlessObject
 		};
 
-		execute_t function;
+		WorkerExecuteActionFn function;
 		int32_t iparam1;
 		int32_t iparam2;
 		int32_t iparam3;
