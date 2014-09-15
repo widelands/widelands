@@ -8,7 +8,6 @@ def evaluate_matches(lines, fn):
    errors = []
 
    for lineno, line in enumerate(lines):
-      errorfound = False
 
       if line.count("typedef"):
          errors.append((fn, lineno+1, "Do not use \"typedef\". Use \"using\" instead."))
