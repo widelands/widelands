@@ -176,6 +176,14 @@ GameMessageMenu::GameMessageMenu
 			 false);
 	m_centerviewbtn->sigclicked.connect(boost::bind(&GameMessageMenu::center_view, this));
 
+
+	m_display_message_type_label =
+		new UI::Multiline_Textarea
+			(this,
+			 5, 375 - 5 - 34, 5 * 34, 40,
+			 "<rt image=pics/message_new.png></rt>",
+			 UI::Align::Align_BottomLeft, false);
+
 	if (get_usedefaultpos())
 		center_to_parent();
 
@@ -255,33 +263,13 @@ void GameMessageMenu::think()
 	}
 
 	// Filter message type
-	if (m_message_filter != Widelands::Message::Type::allMessages) {
-		if (m_message_filter == Widelands::Message::Type::warfare) {
-			for (uint32_t j = list->size(); j; --j) {
-				Message_Id m_id((*list)[j - 1]);
-				if (Message const * const message = mq[m_id]) {
-					if (message->type() < Widelands::Message::Type::warfare) {
-						list->remove(j - 1);
-					}
-				}
-			}
-		} else if (m_message_filter == Widelands::Message::Type::economy) {
-			for (uint32_t j = list->size(); j; --j) {
-				Message_Id m_id((*list)[j - 1]);
-				if (Message const * const message = mq[m_id]) {
-					if ((message->type() < Widelands::Message::Type::economy) ||
-						 (message->type() > Widelands::Message::Type::siteOccupied)) {
-						list->remove(j - 1);
-					}
-				}
-			}
-		} else {
-			for (uint32_t j = list->size(); j; --j) {
-				Message_Id m_id((*list)[j - 1]);
-				if (Message const * const message = mq[m_id]) {
-					if (message->type() != m_message_filter) {
-						list->remove(j - 1);
-					}
+	if (m_message_filter != Message::Type::allMessages) {
+		set_display_message_type_label(m_message_filter);
+		for (uint32_t j = list->size(); j; --j) {
+			Message_Id m_id((*list)[j - 1]);
+			if (Message const * const message = mq[m_id]) {
+				if (message->message_type_category() != m_message_filter) {
+					list->remove(j - 1);
 				}
 			}
 		}
@@ -330,6 +318,7 @@ void GameMessageMenu::selected(uint32_t const t) {
 			}
 			m_centerviewbtn->set_enabled(message->position());
 			message_body.set_text(message->body    ());
+			set_display_message_type_label(message->message_type_category());
 			return;
 		}
 	}
@@ -538,6 +527,53 @@ void GameMessageMenu::set_filter_messages_tooltips() {
 	m_scenariobtn->set_tooltip((boost::format(_("5: %s"))
 										 /** TRANSLATORS: Tooltip in the messages window */
 										 % _("Show scenario messages only")).str());
+}
+
+/**
+ * Update image and tooltip for message category label
+ */
+void GameMessageMenu::set_display_message_type_label(Widelands::Message::Type msgtype) {
+	std::string message_type_tooltip = "";
+	std::string message_type_image = "";
+
+	switch (msgtype) {
+		case Widelands::Message::Type::geologists:
+			/** TRANSLATORS: This is a message's type */
+			message_type_tooltip =  _("Geologists");
+			message_type_image =  "<rt image=pics/menu_geologist.png></rt>";
+			break;
+		case Widelands::Message::Type::economy:
+			/** TRANSLATORS: This is a message's type */
+			message_type_tooltip =  _("Economy");
+			message_type_image =  "<rt image=pics/menu_build_flag.png></rt>";
+			break;
+		case Widelands::Message::Type::seafaring:
+			/** TRANSLATORS: This is a message's type */
+			message_type_tooltip =  _("Seafaring");
+			message_type_image =  "<rt image=pics/start_expedition.png></rt>";
+			break;
+		case Widelands::Message::Type::warfare:
+			/** TRANSLATORS: This is a message's type */
+			message_type_tooltip =  _("Warfare");
+			message_type_image =  "<rt image=pics/messages_warfare.png></rt>";
+			break;
+		case Widelands::Message::Type::scenario:
+			/** TRANSLATORS: This is a message's type */
+			message_type_tooltip =  _("Scenario");
+			message_type_image =  "<rt image=pics/menu_objectives.png></rt>";
+			break;
+		default:
+			/** TRANSLATORS: This is the default message type */
+			message_type_tooltip = _("General");
+			message_type_image =  "<rt image=pics/message_new.png></rt>";
+	}
+
+	m_display_message_type_label->set_tooltip(
+				 /** TRANSLATORS: %s is a message's type */
+				 (boost::format(_("Message type: %s"))
+				  /** TRANSLATORS: Tooltip in the messages window */
+				  % message_type_tooltip).str());
+	m_display_message_type_label->set_text(message_type_image);
 }
 
 

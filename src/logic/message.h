@@ -84,6 +84,20 @@ struct Message {
 	Status                status  () const   {return m_status;}
 	Status set_status(Status const s)        {return m_status = s;}
 
+	/**
+	 * Returns the main type for the message's sub type
+	 */
+	Message::Type message_type_category() const {
+		if (m_type >=  Widelands::Message::Type::warfare) {
+			return Widelands::Message::Type::warfare;
+
+		} else if (m_type >= Widelands::Message::Type::economy &&
+					  m_type <= Widelands::Message::Type::siteOccupied) {
+			return Widelands::Message::Type::economy;
+		}
+		return m_type;
+	}
+
 private:
 	Message::Type     m_type;
 	std::string       m_title;

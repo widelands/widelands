@@ -65,6 +65,7 @@ private:
 	void filter_messages(Widelands::Message::Type);
 	void toggle_filter_messages_button(UI::Button &, Widelands::Message::Type);
 	void set_filter_messages_tooltips();
+	void set_display_message_type_label(Widelands::Message::Type);
 	void update_record(UI::Table<uintptr_t>::Entry_Record & er, const Widelands::Message &);
 
 	UI::Table<uintptr_t> * list;
@@ -80,6 +81,7 @@ private:
 	UI::Button * m_warfarebtn;
 	UI::Button * m_scenariobtn;
 	Widelands::Message::Type m_message_filter;
+	UI::Multiline_Textarea * m_display_message_type_label;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_MESSAGE_MENU_H
