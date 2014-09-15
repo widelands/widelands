@@ -668,16 +668,14 @@ function building_help_crew_string(tribename, building_description)
 		local becomes_description = nil
 		local number_of_workers = 0
 		local toolnames = {}
-		local number_of_tools = 0
 
 		for i, worker_description in ipairs(building_description.working_positions) do
 
-			-- get the tool for the workers. This assumes that each building only uses 1 tool
+			-- get the tools for the workers
 			if(worker_description.buildable) then
 				for j, buildcost in ipairs(worker_description.buildcost) do
 					if( not (buildcost == "carrier" or buildcost == "none" or buildcost == nil)) then
-						number_of_tools = number_of_tools + 1
-						toolnames[number_of_tools] = buildcost
+						toolnames[#toolnames + 1] = buildcost
 					end
 				end
 			end
@@ -694,7 +692,7 @@ function building_help_crew_string(tribename, building_description)
 			end
 		end
 
-		if(number_of_tools > 0) then
+		if(#toolnames + 1 > 0) then
 			result = result .. building_help_tool_string(tribename, toolnames, number_of_workers)
 		end
 
@@ -736,8 +734,9 @@ end
 --
 function building_help_tool_string(tribename, toolnames, no_of_workers)
 	local result = rt(h3(ngettext("Worker uses:","Workers use:", no_of_workers)))
+	local game  = wl.Game();
 	for i, toolname in ipairs(toolnames) do
-		local ware_description = wl.Game():get_ware_description(tribename, toolname)
+		local ware_description = game:get_ware_description(tribename, toolname)
 		result = result .. image_line(ware_description.icon_name, 1, p(ware_description.descname))
 	end
 	return result
