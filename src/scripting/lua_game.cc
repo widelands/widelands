@@ -269,11 +269,6 @@ int L_Player::get_see_all(lua_State * const L) {
 		Opts is a table of optional arguments and can be omitted. If it
 		exist it must contain string/value pairs of the following type:
 
-		:arg duration: if this is given, the message will be removed
-			from the players inbox after this many ms. Default:
-			message never expires.
-		:type duration: :class:`integer`
-
 		:arg field: the field connected to this message. Default:
 			no field connected to message
 		:type field: :class:`wl.map.Field`

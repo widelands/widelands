@@ -871,7 +871,7 @@ void Building::set_seeing(bool see)
  * \param title user-visible title of the message
  * \param description user-visible message body, will be placed in an
  *   appropriate rich-text paragraph
- * \param link_to_building_lifetime if true, the message will expire when this
+ * \param link_to_building_lifetime if true, the message will be deleted when this
  *   building is removed from the game. Default is true
  * \param throttle_time if non-zero, the minimum time delay in milliseconds
  *   between messages of this type (see \p msgsender) within the

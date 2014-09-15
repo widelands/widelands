@@ -34,12 +34,11 @@ struct Message {
 	 * A new message to be displayed to the player
 	 * \param msgsender The message sender
 	 * \param sent_time The (game) time at which the message is sent
-	 * \param d The duration after which the message will expire
 	 * \param t The message title
 	 * \param b The message body
 	 * \param c The message coords. The player will be able to taken there.
 	 * Defaults to Coords::Null()
-	 * \param ser A MapObject serial. If non null, the message will expire once
+	 * \param ser A MapObject serial. If non null, the message will be deleted once
 	 * the object is removed from the game. Defaults to 0
 	 * \param s The message status. Defaults to Status::New
 	 */

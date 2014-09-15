@@ -100,7 +100,7 @@ public:
 		(Game &, Message &, uint32_t timeout, uint32_t radius);
 
 	/// Indicates that the object linked to the message has been removed
-	/// from the game. This implementation expires the message.
+	/// from the game. This implementation deletes the message.
 	void message_object_removed(Message_Id mid) const;
 
 	void set_message_status(const Message_Id& id, Message::Status const status) {
