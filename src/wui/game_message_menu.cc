@@ -120,26 +120,10 @@ GameMessageMenu::GameMessageMenu
 	set_filter_messages_tooltips();
 	// End: Buttons for message types
 
-	m_cycleunreadmessagesbtn =
-			new UI::Button
-				(this, "cycle_unread_messages",
-				 9 * 5 + 5 * 34, 5, 34, 34,
-				 g_gr->images().get("pics/but0.png"),
-				 g_gr->images().get("pics/messages_new.png"),
-				 /** TRANSLATORS: %s is a tooltip, R is the corresponding hotkey */
-				 (boost::format(_("R: %s"))
-				  /** TRANSLATORS: Tooltip in the messages window */
-				  % _("Show unread messages only")).str(),
-
-				 true);
-	m_cycleunreadmessagesbtn->sigclicked.connect
-			(boost::bind(&GameMessageMenu::cycle_unread_messages, this));
-	read_unread_mode = ReadUnread::allMessages;
-
 	UI::Button * clearselectionbtn =
 		new UI::Button
 			(this, "clear_selection",
-			 13 * 5 + 6 * 34, 5, 34, 34,
+			 5 * 5 + 6 * 34 + 17, 5, 34, 34,
 			 g_gr->images().get("pics/but2.png"),
 			 g_gr->images().get("pics/message_clear_selection.png"),
 			 _("Clear selection"));
@@ -149,7 +133,7 @@ GameMessageMenu::GameMessageMenu
 	UI::Button * invertselectionbtn =
 		new UI::Button
 			(this, "invert_selection",
-			 14 * 5 + 7 * 34, 5, 34, 34,
+			 6 * 5 + 7 * 34 + 17, 5, 34, 34,
 			 g_gr->images().get("pics/but2.png"),
 			 g_gr->images().get("pics/message_selection_invert.png"),
 			 _("Invert selection"));
@@ -159,7 +143,7 @@ GameMessageMenu::GameMessageMenu
 	m_archivebtn =
 		new UI::Button
 			(this, "archive_or_restore_selected_messages",
-			 15 * 5 + 8 * 34, 5, 34, 34,
+			 6 * 5 + 9 * 34 + 34, 5, 34, 34,
 			 g_gr->images().get("pics/but2.png"),
 			 g_gr->images().get("pics/message_archive.png"),
 			 /** TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey */
@@ -172,7 +156,7 @@ GameMessageMenu::GameMessageMenu
 	m_togglemodebtn =
 		new UI::Button
 			(this, "toggle_between_inbox_or_archive",
-			 16 * 5 + 9 * 34, 5, 34, 34,
+			 7 * 5 + 10 * 34 + 34, 5, 34, 34,
 			 g_gr->images().get("pics/but2.png"),
 			 g_gr->images().get("pics/message_archived.png"),
 			 _("Show Archive"));
@@ -267,30 +251,6 @@ void GameMessageMenu::think()
 			UI::Table<uintptr_t>::Entry_Record & er = list->add(id.value());
 			update_record(er, message);
 			list->sort();
-		}
-	}
-
-
-	// Filter read/unread messages
-	if (mode == Mode::Inbox) {
-		if (read_unread_mode == ReadUnread::newMessages) {
-			for (uint32_t j = list->size(); j; --j) {
-				Message_Id m_id((*list)[j - 1]);
-				if (Message const * const message = mq[m_id]) {
-					if (message->status() != Widelands::Message::Status::New) {
-						list->remove(j - 1);
-					}
-				}
-			}
-		} else if (read_unread_mode == ReadUnread::readMessages) {
-			for (uint32_t j = list->size(); j; --j) {
-				Message_Id m_id((*list)[j - 1]);
-				if (Message const * const message = mq[m_id]) {
-					if (message->status() != Widelands::Message::Status::Read) {
-						list->remove(j - 1);
-					}
-				}
-			}
 		}
 	}
 
@@ -413,9 +373,6 @@ bool GameMessageMenu::handle_key(bool down, SDL_keysym code)
 			return true;
 		case SDLK_5:
 			filter_messages(Widelands::Message::Type::scenario);
-			return true;
-		case SDLK_r:
-			cycle_unread_messages();
 			return true;
 		case SDLK_KP_PERIOD:
 
@@ -583,37 +540,6 @@ void GameMessageMenu::set_filter_messages_tooltips() {
 										 % _("Show scenario messages only")).str());
 }
 
-/**
- * Cycle through unread/read/all messages
- */
-void GameMessageMenu::cycle_unread_messages() {
-	switch (read_unread_mode) {
-		case ReadUnread::allMessages:
-			read_unread_mode = ReadUnread::newMessages;
-			m_cycleunreadmessagesbtn->set_pic(g_gr->images().get("pics/messages_read.png"));
-			m_cycleunreadmessagesbtn->set_tooltip((boost::format(_("R: %s"))
-																/** TRANSLATORS: Tooltip in the messages window */
-																% _("Show unread messages only")).str());
-			break;
-		case ReadUnread::newMessages:
-			read_unread_mode = ReadUnread::readMessages;
-			m_cycleunreadmessagesbtn->set_pic(g_gr->images().get("pics/messages_new_read.png"));
-			m_cycleunreadmessagesbtn->set_tooltip((boost::format(_("R: %s"))
-																/** TRANSLATORS: Tooltip in the messages window */
-																% _("Show both new and read messages")).str());
-			break;
-		case ReadUnread::readMessages:
-			read_unread_mode = ReadUnread::allMessages;
-			m_cycleunreadmessagesbtn->set_pic(g_gr->images().get("pics/messages_new.png"));
-			m_cycleunreadmessagesbtn->set_tooltip((boost::format(_("R: %s"))
-																/** TRANSLATORS: Tooltip in the messages window */
-																% _("Show new messages only")).str());
-			break;
-		default:
-			assert(false); // there is nothing but all, read and new
-	}
-	think();
-}
 
 /**
  * Clear the current selection of messages.
@@ -645,9 +571,6 @@ void GameMessageMenu::toggle_mode()
 											% _("Restore selected messages")).str());
 		m_togglemodebtn->set_pic(g_gr->images().get("pics/message_new.png"));
 		m_togglemodebtn->set_tooltip(_("Show Inbox"));
-
-		// read/unread is now meaningless
-		m_cycleunreadmessagesbtn->set_enabled(false);
 		break;
 	case Archive:
 		mode = Inbox;
@@ -659,8 +582,6 @@ void GameMessageMenu::toggle_mode()
 											% _("Archive selected messages")).str());
 		m_togglemodebtn->set_pic(g_gr->images().get("pics/message_archived.png"));
 		m_togglemodebtn->set_tooltip(_("Show Archive"));
-		// restore read/unread
-		m_cycleunreadmessagesbtn->set_enabled(true);
 		break;
 	default:
 		assert(false); // there is nothing but Archive and Inbox
