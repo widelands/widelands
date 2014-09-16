@@ -36,12 +36,16 @@ MAINPOTS = [
                   "../../txts/editor_readme",
                   "../../txts/tips/*.tip"] ),
     ( "widelands/widelands", [
-                    "../../src/*.cc",
+                    "../../src/wlapplication.cc",
                     "../../src/*/*.cc",
                     "../../src/*/*/*.cc",
-                    "../../src/*.h",
+                    "../../src/wlapplication.h",
                     "../../src/*/*.h",
                     "../../src/*/*/*.h",
+    ] ),
+    ( "widelands_console/widelands_console", [
+                    "../../src/wlapplication_messages.cc",
+                    "../../src/wlapplication_messages.h",
     ] ),
     ( "win_conditions/win_conditions", [
         "../../scripting/win_conditions/*.lua",
@@ -258,7 +262,7 @@ def do_update_potfiles():
             oldcwd = os.getcwd()
             os.chdir(path)
             potfile = os.path.basename(pot) + '.pot'
-            if pot.endswith('widelands'):
+            if pot.startswith('widelands'):
                 # This catalogs can be built with xgettext
                 do_compile_src(potfile , srcfiles )
                 succ = True
@@ -271,7 +275,6 @@ def do_update_potfiles():
                 print("\tpo/%s.pot" % pot)
             else:
                 os.rmdir(path)
-
 
         print("")
 

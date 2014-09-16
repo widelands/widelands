@@ -633,7 +633,7 @@ void Fullscreen_Menu_LaunchMPG::load_map_info()
 	char const * const name = m_settings->settings().mapfilename.c_str();
 	std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(name);
 	if (!ml) {
-		throw warning(_("There was an error!"), _("The map file seems to be invalid!"));
+		throw warning("There was an error!", "The map file seems to be invalid!");
 	}
 
 	map.set_filename(name);

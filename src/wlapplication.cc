@@ -86,6 +86,7 @@
 #include "ui_fsmenu/netsetup_lan.h"
 #include "ui_fsmenu/options.h"
 #include "ui_fsmenu/singleplayer.h"
+#include "wlapplication_messages.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
@@ -93,17 +94,14 @@
 #define MINIMUM_DISK_SPACE 250000000lu
 #define SCREENSHOT_DIR "screenshots"
 
-//Always specifying namespaces is good, but let's not go too far ;-)
-using std::endl;
-
 namespace {
 
 /**
  * Shut the hardware down: stop graphics mode, stop sound handler
  */
 void terminate(int) {
-	log(_("Waited 5 seconds to close audio. There are some problems here, so killing Widelands."
-	      " Update your sound driver and/or SDL to fix this problem\n"));
+	log("Waited 5 seconds to close audio. There are some problems here, so killing Widelands."
+			" Update your sound driver and/or SDL to fix this problem\n");
 #ifndef _WIN32
 	raise(SIGKILL);
 #endif
@@ -408,7 +406,7 @@ void WLApplication::run()
 			uint32_t            maxcl  = s.get_natural("maxclients",     8);
 			for (;;) { // endless loop
 				if (!InternetGaming::ref().login(name, pwd, registered, meta, port)) {
-					dedicatedlog(_("ERROR: Could not connect to metaserver (reason above)!\n"));
+					dedicatedlog("ERROR: Could not connect to metaserver (reason above)!\n");
 					return;
 				}
 				std::string realservername(server);
@@ -436,8 +434,8 @@ void WLApplication::run()
 				std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(m_filename);
 				if (!ml) {
 					throw warning
-						(_("Unsupported format"),
-						 _("Widelands could not load the file \"%s\". The file format seems to be incompatible."),
+						("Unsupported format",
+						 "Widelands could not load the file \"%s\". The file format seems to be incompatible.",
 						 m_filename.c_str());
 				}
 				ml->preload_map(true);
@@ -834,7 +832,7 @@ std::string WLApplication::get_executable_path()
 	std::unique_ptr<char []> buffer(new char[buffersize]);
 	int32_t check = _NSGetExecutablePath(buffer.get(), &buffersize);
 	if (check != 0) {
-		throw wexception (_("could not find the path of the main executable"));
+		throw wexception ("could not find the path of the main executable");
 	}
 	executabledir = std::string(buffer.get());
 	executabledir.resize(executabledir.rfind('/') + 1);
@@ -843,7 +841,7 @@ std::string WLApplication::get_executable_path()
 	char buffer[PATH_MAX];
 	size_t size = readlink("/proc/self/exe", buffer, PATH_MAX);
 	if (size <= 0) {
-		throw wexception (_("could not find the path of the main executable"));
+		throw wexception ("could not find the path of the main executable");
 	}
 	executabledir = std::string(buffer, size);
 	executabledir.resize(executabledir.rfind('/') + 1);
@@ -964,7 +962,7 @@ void WLApplication::shutdown_hardware()
 			<<
 			"WARNING: Hardware shutting down although graphics system is still "
 			"alive!"
-			<< endl;
+			<< std::endl;
 
 	init_graphics(0, 0, false, false);
 	SDL_QuitSubSystem
@@ -1164,91 +1162,6 @@ void WLApplication::handle_commandline_parameters()
 	}
 }
 
-/**
- * Print usage information
- */
-void WLApplication::show_usage()
-{
-	i18n::Textdomain textdomain("widelands"); //  uses system standard language
-
-	wout << _("This is Widelands-") << build_id() << '(' << build_type();
-	wout << ")\n\n";
-	wout << _("Usage: widelands <option0>=<value0> ... <optionN>=<valueN>") << "\n\n";
-	wout << _("Options:") << "\n\n";
-	wout
-		<< _(" --<config-entry-name>=value overwrites any config file setting") << "\n\n"
-		<< _(" --logfile=FILENAME   Log output to file FILENAME instead of \n"
-			  "                      terminal output") << "\n"
-		<< _(" --datadir=DIRNAME    Use specified directory for the widelands\n"
-			  "                      data files") << "\n"
-		<< _(" --homedir=DIRNAME    Use specified directory for widelands config\n"
-			  "                      files, savegames and replays") << "\n"
-#ifdef __linux__
-		<< _("                      Default is ~/.widelands") << "\n"
-#endif
-		<< "\n"
-		<< _(" --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
-			  "                      of using the SDL") << "\n"
-		<< _(" --language=[de_DE|sv_SE|...]\n"
-			  "                      The locale to use.") << "\n"
-		<< _(" --localedir=DIRNAME  Use DIRNAME as location for the locale") << "\n"
-		<< _(" --remove_syncstreams=[true|false]\n"
-			  "                      Remove syncstream files on startup") << "\n"
-		<< _(" --remove_replays=[...]\n"
-		     "                      Remove replays after this number of days.\n"
-		     "                      If this is 0, replays are not deleted.") << "\n\n"
-
-		<< _("Sound options:") << "\n"
-		<< _(" --nosound            Starts the game with sound disabled.") << "\n"
-		<< _(" --disable_fx         Disable sound effects.") << "\n"
-		<< _(" --disable_music      Disable music.") << "\n\n"
-		<< _(" --nozip              Do not save files as binary zip archives.") << "\n\n"
-		<< _(" --editor             Directly starts the Widelands editor.\n"
-		     "                      You can add a =FILENAME to directly load\n"
-		     "                      the map FILENAME in editor.") << "\n"
-		<< _(" --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
-			  "                      map.") << "\n"
-		<< _(" --loadgame=FILENAME  Directly loads the savegame FILENAME.") << "\n"
-		<< _(" --script=FILENAME    Run the given Lua script after initialization.\n"
-		     "                      Only valid with --scenario, --loadgame, or --editor.") << "\n"
-		<< _(" --dedicated=FILENAME Starts a dedicated server with FILENAME as map") << "\n"
-		<< _(" --auto_roadbuild_mode=[yes|no]\n"
-		     "                      Whether to enter roadbuilding mode\n"
-		     "                      automatically after placing a flag that is\n"
-		     "                      not connected to a road.") << "\n\n"
-		<< _("Graphic options:") << "\n"
-		<< _(" --fullscreen=[yes|no]\n"
-		     "                      Whether to use the whole display for the\n"
-		     "                      game screen.") << "\n"
-		<< _(" --xres=[...]         Width of the window in pixel.") << "\n"
-		<< _(" --yres=[...]         Height of the window in pixel.") << "\n"
-		<< _(" --opengl=[0|1]       Enables OpenGL rendering") << "\n\n"
-		<< _("Options for the internal window manager:") << "\n"
-		<< _(" --border_snap_distance=[0 ...]\n"
-		     "                      Move a window to the edge of the screen\n"
-		     "                      when the edge of the window comes within\n"
-		     "                      this distance from the edge of the screen.") << "\n"
-		<< _(" --dock_windows_to_edges=[yes|no]\n"
-		     "                      Eliminate a window's border towards the\n"
-		     "                      edge of the screen when the edge of the\n"
-		     "                      window is next to the edge of the screen.") << "\n"
-		<< _(" --panel_snap_distance=[0 ...]\n"
-		     "                      Move a window to the edge of the panel when\n"
-		     "                      the edge of the window comes within this\n"
-		     "                      distance from the edge of the panel.") << "\n"
-		<< _(" --snap_windows_only_when_overlapping=[yes|no]\n"
-		     "                      Only move a window to the edge of a panel\n"
-		     "                      if the window is overlapping with the\n"
-		     "                      panel.") << "\n\n";
-	wout
-		<< _(" --verbose            Enable verbose debug messages") << "\n" << endl;
-	wout
-		<< _(" --help               Show this help") << "\n" << endl;
-	wout
-		<< _("Bug reports? Suggestions? Check out the project website:\n"
-		    "        https://launchpad.net/widelands\n\n"
-		    "Hope you enjoy this game!") << "\n\n";
-}
 
 /**
  * Run the main menu
@@ -1260,7 +1173,7 @@ void WLApplication::mainmenu()
 
 	if (g_gr->check_fallback_settings_in_effect())
 	{
-		messagetitle = _("Fallback settings in effect");
+		messagetitle = "Fallback settings in effect";
 		message = _
 			("Your video settings could not be enabled, and fallback settings are in effect. "
 				"Please check the graphics options!");
@@ -1333,15 +1246,15 @@ void WLApplication::mainmenu()
 				return;
 			}
 		} catch (const warning & e) {
-			messagetitle = (boost::format(_("Warning: %s")) % e.title()).str();
+			messagetitle = (boost::format("Warning: %s") % e.title()).str();
 			message = e.what();
 		} catch (const Widelands::game_data_error & e) {
-			messagetitle = _("Game data error");
+			messagetitle = "Game data error";
 			message = e.what();
 		}
 #ifdef NDEBUG
 		catch (const std::exception & e) {
-			messagetitle = _("Unexpected error during the game");
+			messagetitle = "Unexpected error during the game";
 			message = e.what();
 			message +=
 
@@ -1465,7 +1378,7 @@ void WLApplication::mainmenu_multiplayer()
 					if (!host_address)
 						throw warning
 							("Invalid Address", "%s",
-							 _("The address of the game server is invalid"));
+							 "The address of the game server is invalid");
 
 					peer.host = addr;
 					peer.port = port;
