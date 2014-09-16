@@ -1208,7 +1208,7 @@ void WLApplication::mainmenu()
 					try {
 						game.run_splayer_scenario_direct("campaigns/tutorial01.wmf", "");
 					} catch (const std::exception & e) {
-						log("Fata exception: %s\n", e.what());
+						log("Fatal exception: %s\n", e.what());
 						emergency_save(game);
 						throw;
 					}
@@ -1482,7 +1482,7 @@ bool WLApplication::new_game()
 			game.init_newgame(&loaderUI, sp.settings());
 			game.run(&loaderUI, Widelands::Game::NewNonScenario, "", false);
 		} catch (const std::exception & e) {
-			log("Fata exception: %s\n", e.what());
+			log("Fatal exception: %s\n", e.what());
 			emergency_save(game);
 			throw;
 		}
@@ -1513,7 +1513,7 @@ bool WLApplication::load_game()
 		if (game.run_load_game(filename, ""))
 			return true;
 	} catch (const std::exception & e) {
-		log("Fata exception: %s\n", e.what());
+		log("Fatal exception: %s\n", e.what());
 		emergency_save(game);
 		throw;
 	}
@@ -1556,7 +1556,7 @@ bool WLApplication::campaign_game()
 		if (filename.size())
 			return game.run_splayer_scenario_direct(filename.c_str(), "");
 	} catch (const std::exception & e) {
-		log("Fata exception: %s\n", e.what());
+		log("Fatal exception: %s\n", e.what());
 		emergency_save(game);
 		throw;
 	}
