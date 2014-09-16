@@ -1034,6 +1034,7 @@ void WLApplication::parse_commandline
 void WLApplication::handle_commandline_parameters()
 {
 	if (m_commandline.count("help") || m_commandline.count("version")) {
+		init_language();
 		throw Parameter_error(); //no message on purpose
 	}
 	if (m_commandline.count("logfile")) {
