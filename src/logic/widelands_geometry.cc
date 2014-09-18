@@ -23,7 +23,7 @@ namespace Widelands {
 
 Coords::Coords() {}
 
-Coords::Coords(const X_Coordinate nx, const Y_Coordinate ny)
+Coords::Coords(const int16_t nx, const int16_t ny)
 		: x(nx), y(ny)
 	{}
 

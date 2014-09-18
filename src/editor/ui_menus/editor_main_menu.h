@@ -23,16 +23,16 @@
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
 
-struct Editor_Interactive;
+struct EditorInteractive;
 
 /**
  * This represents the main menu
 */
-struct Editor_Main_Menu : public UI::UniqueWindow {
-	Editor_Main_Menu(Editor_Interactive &, UI::UniqueWindow::Registry &);
+struct EditorMainMenu : public UI::UniqueWindow {
+	EditorMainMenu(EditorInteractive &, UI::UniqueWindow::Registry &);
 
 private:
-	Editor_Interactive & eia();
+	EditorInteractive & eia();
 	UI::Button m_button_new_map;
 	UI::Button m_button_new_random_map;
 	UI::Button m_button_load_map;

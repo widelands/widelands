@@ -27,30 +27,30 @@
 
 namespace Widelands {
 
-void Cmd_CalculateStatistics::execute (Game & game) {
+void CmdCalculateStatistics::execute (Game & game) {
 	game.sample_statistics();
 	game.enqueue_command
-		(new Cmd_CalculateStatistics
+		(new CmdCalculateStatistics
 		 (game.get_gametime() + STATISTICS_SAMPLE_TIME));
 }
 
 #define CMD_CALCULATE_STATISTICS_VERSION 1
-void Cmd_CalculateStatistics::Read
-	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
+void CmdCalculateStatistics::Read
+	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CMD_CALCULATE_STATISTICS_VERSION) {
 			GameLogicCommand::Read(fr, egbase, mol);
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
-		throw game_data_error("calculate statistics function: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("calculate statistics function: %s", e.what());
 	}
 }
-void Cmd_CalculateStatistics::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
+void CmdCalculateStatistics::Write
+	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	fw.Unsigned16(CMD_CALCULATE_STATISTICS_VERSION);
 	GameLogicCommand::Write(fw, egbase, mos);

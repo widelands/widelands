@@ -266,7 +266,7 @@ void RenderTarget::tile(const Rect& rect, const Image* image, const Point& gofs,
 
 /**
  * Draws a frame of an animation at the given location
- * Plays sound effect that is registered with this frame (the Sound_Handler
+ * Plays sound effect that is registered with this frame (the SoundHandler
  * decides if the fx really does get played)
  *
  * \param dstx, dsty the on-screen location of the animation hot spot
@@ -291,7 +291,7 @@ void RenderTarget::drawanim
 		anim.blit(time, dstpt, srcrc, player ? &player->get_playercolor() : NULL, m_surface);
 
 	//  Look if there is a sound effect registered for this frame and trigger
-	//  the effect (see Sound_Handler::stereo_position).
+	//  the effect (see SoundHandler::stereo_position).
 	anim.trigger_soundfx(time, 128);
 }
 

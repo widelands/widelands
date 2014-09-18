@@ -31,12 +31,12 @@ namespace UI {
  * offer the Panel interface for tabs so that the scripting interface
  * stays the same for all elements
  */
-struct Tab_Panel;
+struct TabPanel;
 struct Tab : public NamedPanel {
-	friend struct Tab_Panel;
+	friend struct TabPanel;
 
 	Tab
-		(Tab_Panel * parent,
+		(TabPanel * parent,
 		 uint32_t,
 		 const std::string & name,
 		 const Image*,
@@ -47,7 +47,7 @@ struct Tab : public NamedPanel {
 	void activate();
 
 private:
-	Tab_Panel * m_parent;
+	TabPanel * m_parent;
 	uint32_t    m_id;
 
 	const Image* pic;
@@ -57,20 +57,20 @@ private:
 
 /**
  * Provides a tab view; every tab is a panel that can contain any number of
- * sub-panels (such as buttons, other Tab_Panels, etc..) and an associated
+ * sub-panels (such as buttons, other TabPanels, etc..) and an associated
  * picture.
  * The picture is displayed as a button the user can click to bring the panel
  * to the top.
  *
- * The Panels you add() to the Tab_Panel must be children of the Tab_Panel.
+ * The Panels you add() to the TabPanel must be children of the TabPanel.
  *
  */
-struct Tab_Panel : public Panel {
+struct TabPanel : public Panel {
 	friend struct Tab;
 
-	Tab_Panel(Panel * parent, int32_t x, int32_t y, const Image* background);
+	TabPanel(Panel * parent, int32_t x, int32_t y, const Image* background);
 	// For Fullscreen menus
-	Tab_Panel
+	TabPanel
 		(Panel * parent,
 		 int32_t x, int32_t y, int32_t w, int32_t h,
 		 const Image* background);
@@ -81,7 +81,7 @@ struct Tab_Panel : public Panel {
 		 Panel             * panel,
 		 const std::string & tooltip = std::string());
 
-	typedef std::vector<Tab *> TabList;
+	using TabList = std::vector<Tab *>;
 
 	const TabList & tabs();
 	void activate(uint32_t idx);

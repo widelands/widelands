@@ -29,18 +29,10 @@
 
 namespace Widelands {
 
-struct MessageQueue : private std::map<Message_Id, Message *> {
-	friend class Map_Players_Messages_Data_Packet;
-	// Make typedefs public so that this looks like proper
-	// STL container to templated algorithms.
-	typedef std::map<Message_Id, Message *> _Mybase;
-	typedef _Mybase::pointer pointer;
-	typedef _Mybase::const_pointer const_pointer;
-	typedef _Mybase::reference reference;
-	typedef _Mybase::const_reference const_reference;
-	typedef _Mybase::iterator iterator;
-	typedef _Mybase::const_iterator const_iterator;
-	MessageQueue() { //  C++0x: MessageQueue() : m_counts({}) {}
+struct MessageQueue : private std::map<MessageId, Message *> {
+	friend class MapPlayersMessagesPacket;
+
+	MessageQueue() {
 		m_counts[Message::New]      = 0; //  C++0x:
 		m_counts[Message::Read]     = 0; //  C++0x:
 		m_counts[Message::Archived] = 0; //  C++0x:
@@ -49,26 +41,26 @@ struct MessageQueue : private std::map<Message_Id, Message *> {
 	~MessageQueue() {
 		while (size()) {
 			delete begin()->second;
-			erase(std::map<Message_Id, Message *>::begin());
+			erase(begin());
 		}
 	}
 
 	//  Make some selected inherited members public.
-	const_iterator begin() const {
-		return std::map<Message_Id, Message *>::begin();
+	MessageQueue::const_iterator begin() const {
+		return std::map<MessageId, Message *>::begin();
 	}
-	const_iterator end() const {
-		return std::map<Message_Id, Message *>::end();
+	MessageQueue::const_iterator end() const {
+		return std::map<MessageId, Message *>::end();
 	}
 	size_type count(uint32_t const i) const {
 		assert_counts();
-		return std::map<Message_Id, Message *>::count(Message_Id(i));
+		return std::map<MessageId, Message *>::count(MessageId(i));
 	}
 
 	/// \returns a pointer to the message if it exists, otherwise 0.
-	Message const * operator[](const Message_Id& id) const {
+	Message const * operator[](const MessageId& id) const {
 		assert_counts();
-		const_iterator const it = find(Message_Id(id));
+		MessageQueue::const_iterator const it = find(MessageId(id));
 		return it != end() ? it->second : nullptr;
 	}
 
@@ -93,22 +85,22 @@ struct MessageQueue : private std::map<Message_Id, Message *> {
 	/// The loading code calls this function to add messages form the map file.
 	/// The commands to expire messages are not saved with the map. Therefore
 	/// the loading code must create them.
-	Message_Id add_message(Message & message) {
+	MessageId add_message(Message & message) {
 		assert_counts();
 		assert(message.status() < 3);
 		++m_counts[message.status()];
 		insert
-			(std::map<Message_Id, Message *>::end(),
-			 std::pair<Message_Id, Message *>(++m_current_message_id, &message));
+			(std::map<MessageId, Message *>::end(),
+			 std::pair<MessageId, Message *>(++m_current_message_id, &message));
 		assert_counts();
 		return m_current_message_id;
 	}
 
 	/// Sets the status of the message with the given id, if it exists.
-	void set_message_status(const Message_Id& id, Message::Status const status) {
+	void set_message_status(const MessageId& id, Message::Status const status) {
 		assert_counts();
 		assert(status < 3);
-		iterator const it = find(id);
+		MessageQueue::iterator const it = find(id);
 		if (it != end()) {
 			Message & message = *it->second;
 			assert(it->second->status() < 3);
@@ -121,9 +113,9 @@ struct MessageQueue : private std::map<Message_Id, Message *> {
 
 	/// Expire the message with the given id so that it no longer exists.
 	/// Assumes that a message with the given id exists.
-	void expire_message(const Message_Id& id) {
+	void expire_message(const MessageId& id) {
 		assert_counts();
-		iterator const it = find(id);
+		MessageQueue::iterator const it = find(id);
 		if (it == end()) {
 			// Messages can be expired when the timeout runs out, or when the linked
 			// MapObject is removed, or both. In this later case, two expire commands
@@ -140,7 +132,7 @@ struct MessageQueue : private std::map<Message_Id, Message *> {
 		assert_counts();
 	}
 
-	Message_Id current_message_id() const {return m_current_message_id;}
+	MessageId current_message_id() const {return m_current_message_id;}
 
 	/// \returns whether all messages with id 1, 2, 3, ..., current_message_id
 	/// exist. This should be the case when messages have been loaded from a map
@@ -157,17 +149,17 @@ private:
 	/// it.
 	void clear() {
 		assert_counts();
-		m_current_message_id        = Message_Id::Null();
+		m_current_message_id        = MessageId::Null();
 		m_counts[Message::New]      = 0;
 		m_counts[Message::Read]     = 0;
 		m_counts[Message::Archived] = 0;
-		std::map<Message_Id, Message *>::clear();
+		std::map<MessageId, Message *>::clear();
 		assert_counts();
 	}
 
 	/// The id of the most recently added message, or null if none has been
 	/// added yet.
-	Message_Id m_current_message_id;
+	MessageId m_current_message_id;
 
 	/// Number of messages with each status (new, read, deleted).
 	/// Indexed by Message::Status.

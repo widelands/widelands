@@ -24,7 +24,7 @@
 
 namespace Widelands {
 
-void Cmd_ExpireMessage::execute(Game & game) {
+void CmdExpireMessage::execute(Game & game) {
 	game.player(player).messages().expire_message(message);
 }
 

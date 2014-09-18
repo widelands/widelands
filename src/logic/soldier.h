@@ -21,7 +21,7 @@
 #define WL_LOGIC_SOLDIER_H
 
 #include "base/macros.h"
-#include "logic/tattribute.h"
+#include "logic/training_attribute.h"
 #include "logic/worker.h"
 
 #define SOLDIER_HP_BAR_WIDTH 13
@@ -34,7 +34,7 @@ namespace Widelands {
 #define WEAKEST   0
 #define STRONGEST 1
 
-class Editor_Game_Base;
+class EditorGameBase;
 class Battle;
 
 #define HP_FRAMECOLOR RGBColor(255, 255, 255)
@@ -44,7 +44,7 @@ struct SoldierDescr : public WorkerDescr {
 	SoldierDescr
 		(char const * const _name, char const * const _descname,
 		 const std::string & directory, Profile &, Section & global_s,
-		 const Tribe_Descr &);
+		 const TribeDescr &);
 	~SoldierDescr() override {}
 
 	void load_graphics() override;
@@ -158,14 +158,14 @@ enum CombatFlags {
 
 
 class Soldier : public Worker {
-	friend struct Map_Bobdata_Data_Packet;
+	friend struct MapBobdataPacket;
 	MO_DESCR(SoldierDescr)
 
 public:
 	Soldier(const SoldierDescr &);
 
-	void init(Editor_Game_Base &) override;
-	void cleanup(Editor_Game_Base &) override;
+	void init(EditorGameBase &) override;
+	void cleanup(EditorGameBase &) override;
 
 	void set_level
 		(uint32_t hp, uint32_t attack, uint32_t defense, uint32_t evade);
@@ -173,7 +173,7 @@ public:
 	void set_attack_level (uint32_t);
 	void set_defense_level(uint32_t);
 	void set_evade_level  (uint32_t);
-	uint32_t get_level (tAttribute) const;
+	uint32_t get_level (TrainingAttribute) const;
 	uint32_t get_hp_level     () const {return m_hp_level;}
 	uint32_t get_attack_level () const {return m_attack_level;}
 	uint32_t get_defense_level() const {return m_defense_level;}
@@ -182,13 +182,13 @@ public:
 	/// Automatically select a task.
 	void init_auto_task(Game &) override;
 
-	Point calc_drawpos(const Editor_Game_Base &, Point) const;
+	Point calc_drawpos(const EditorGameBase &, Point) const;
 	/// Draw this soldier
 	virtual void draw
-		(const Editor_Game_Base &, RenderTarget &, const Point&) const override;
+		(const EditorGameBase &, RenderTarget &, const Point&) const override;
 
 	static void calc_info_icon_size
-		(const Tribe_Descr &, uint32_t & w, uint32_t & h);
+		(const TribeDescr &, uint32_t & w, uint32_t & h);
 	void draw_info_icon(RenderTarget &, Point, bool anchor_below) const;
 
 	uint32_t get_current_hitpoints() const {return m_hp_current;}
@@ -211,17 +211,17 @@ public:
 		return descr().get_evade_level_pic  (m_evade_level);
 	}
 
-	int32_t get_tattribute(uint32_t attr) const override;
+	int32_t get_training_attribute(uint32_t attr) const override;
 
 	/// Sets a random animation of desired type and start playing it.
 	void start_animation
-		(Editor_Game_Base &, char const * animname, uint32_t time);
+		(EditorGameBase &, char const * animname, uint32_t time);
 
 	/// Heal quantity of hit points instantly
 	void heal (uint32_t);
 	void damage (uint32_t); /// Damage quantity of hit points
 
-	void log_general_info(const Editor_Game_Base &) override;
+	void log_general_info(const EditorGameBase &) override;
 
 	bool isOnBattlefield();
 	bool is_attacking_player(Game &, Player &);
@@ -307,7 +307,7 @@ protected:
 
 public:
 	virtual void do_save
-		(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
+		(EditorGameBase &, MapObjectSaver &, FileWrite &) override;
 };
 
 }

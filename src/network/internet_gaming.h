@@ -36,7 +36,7 @@
 
 
 /// A simple network client struct
-struct INet_Client {
+struct InternetClient {
 	std::string   name;
 	std::string   build_id;
 	std::string   game;
@@ -45,7 +45,7 @@ struct INet_Client {
 };
 
 /// A simple network game struct
-struct INet_Game {
+struct InternetGame {
 	std::string   name;
 	std::string   build_id;
 	bool          connectable;
@@ -86,9 +86,9 @@ struct InternetGaming : public ChatProvider {
 
 	// Informative functions for lobby
 	bool updateForGames();
-	const std::vector<INet_Game>   & games();
+	const std::vector<InternetGame>   & games();
 	bool updateForClients();
-	const std::vector<INet_Client> & clients();
+	const std::vector<InternetClient> & clients();
 
 	/// \returns the maximum allowed number of clients in a game (players + spectators)
 	uint32_t max_clients() {return INTERNET_GAMING_MAX_CLIENTS_PER_GAME;}
@@ -181,8 +181,8 @@ private:
 	bool                     gameupdateonmetaserver;
 	bool                     clientupdate;
 	bool                     gameupdate;
-	std::vector<INet_Client> clientlist;
-	std::vector<INet_Game>   gamelist;
+	std::vector<InternetClient> clientlist;
+	std::vector<InternetGame>   gamelist;
 	int32_t                  time_offset;
 
 	/// ChatProvider: chat messages

@@ -48,9 +48,9 @@ class LuaInterface;
  *    3  - multi player savegame
  *    4  - multi player scenario savegame <- not yet implemented
  */
-struct Fullscreen_Menu_LaunchMPG : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_LaunchMPG(GameSettingsProvider *, GameController *);
-	~Fullscreen_Menu_LaunchMPG();
+struct FullscreenMenuLaunchMPG : public FullscreenMenuBase {
+	FullscreenMenuLaunchMPG(GameSettingsProvider *, GameController *);
+	~FullscreenMenuLaunchMPG();
 
 	void setChatProvider(ChatProvider &);
 
@@ -81,7 +81,7 @@ private:
 	UI::Button       m_change_map_or_save, m_ok, m_back, m_wincondition;
 	UI::Button       m_help_button;
 	UI::Textarea              m_title, m_mapname, m_clients, m_players, m_map, m_wincondition_type;
-	UI::Multiline_Textarea    m_map_info, m_client_info;
+	UI::MultilineTextarea    m_map_info, m_client_info;
 	UI::HelpWindow          * m_help;
 	GameSettingsProvider    * m_settings;
 	GameController          * m_ctrl;

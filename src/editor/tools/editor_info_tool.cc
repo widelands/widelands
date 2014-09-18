@@ -32,17 +32,17 @@
 #include "ui_basic/window.h"
 
 /// Show a window with information about the pointed at node and triangle.
-int32_t Editor_Info_Tool::handle_click_impl(Widelands::Map& map,
+int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
 					    const Widelands::World& world,
-					    Widelands::Node_and_Triangle<> center,
-					    Editor_Interactive& parent,
-					    Editor_Action_Args& /* args */) {
+					    Widelands::NodeAndTriangle<> center,
+					    EditorInteractive& parent,
+					    EditorActionArgs& /* args */) {
 	UI::Window * const w =
 	    new UI::Window
 	(&parent, "field_information", 30, 30, 400, 200,
 	 _("Field Information"));
-	UI::Multiline_Textarea * const multiline_textarea =
-	    new UI::Multiline_Textarea
+	UI::MultilineTextarea * const multiline_textarea =
+	    new UI::MultilineTextarea
 	(w, 0, 0, w->get_inner_w(), w->get_inner_h());
 
 	Widelands::Field & f = map[center.node];
@@ -105,7 +105,7 @@ int32_t Editor_Info_Tool::handle_click_impl(Widelands::Map& map,
 	// *** Resources info
 	buf += std::string("\n") + _("Resources:") + "\n";
 
-	Widelands::Resource_Index ridx = f.get_resources();
+	Widelands::ResourceIndex ridx = f.get_resources();
 	int ramount = f.get_resources_amount();
 
 	if (ramount > 0) {

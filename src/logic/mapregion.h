@@ -29,19 +29,19 @@ namespace Widelands {
  *
  * Note that the order in which fields are returned is not guaranteed.
  */
-template <typename Area_type = Area<> > struct MapRegion {
-	MapRegion(const Map & map, Area_type area) :
+template <typename AreaType = Area<> > struct MapRegion {
+	MapRegion(const Map & map, AreaType area) :
 		m_area            (area),
 		m_rowwidth        (area.radius + 1),
 		m_remaining_in_row(m_rowwidth),
 		m_remaining_rows  (m_rowwidth + area.radius)
 	{
-		for (typename Area_type::Radius_type r = area.radius; r; --r)
+		for (typename AreaType::RadiusType r = area.radius; r; --r)
 			map.get_tln(m_area, &m_area);
 		m_left = m_area;
 	}
 
-	const typename Area_type::Coords_type & location() const {return m_area;}
+	const typename AreaType::CoordsType & location() const {return m_area;}
 
 	/// Moves on to the next location. The return value indicates whether the
 	/// new location has not yet been reached during this iteration. Note that
@@ -62,13 +62,13 @@ template <typename Area_type = Area<> > struct MapRegion {
 		return true;
 	}
 
-	typename Area_type::Radius_type radius() const {return m_area.radius;}
+	typename AreaType::RadiusType radius() const {return m_area.radius;}
 private:
-	Area_type                       m_area;
-	typename Area_type::Coords_type m_left;
-	typename Area_type::Radius_type m_rowwidth;
-	typename Area_type::Radius_type m_remaining_in_row;
-	typename Area_type::Radius_type m_remaining_rows;
+	AreaType                      m_area;
+	typename AreaType::CoordsType m_left;
+	typename AreaType::RadiusType m_rowwidth;
+	typename AreaType::RadiusType m_remaining_in_row;
+	typename AreaType::RadiusType m_remaining_rows;
 };
 
 }

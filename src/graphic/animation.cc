@@ -58,7 +58,6 @@ namespace  {
 /// A class that makes iteration over filename_?.png templates easy.
 class NumberGlob {
 public:
-	typedef uint32_t type;
 	NumberGlob(const std::string& pictmp);
 
 	/// If there is a next filename, puts it in 's' and returns true.

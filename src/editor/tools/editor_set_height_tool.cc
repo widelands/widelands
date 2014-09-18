@@ -26,11 +26,11 @@
 #include "logic/map.h"
 #include "logic/mapregion.h"
 
-int32_t Editor_Set_Height_Tool::handle_click_impl(Widelands::Map& map,
+int32_t EditorSetHeightTool::handle_click_impl(Widelands::Map& map,
                                                   const Widelands::World& world,
-                                                  Widelands::Node_and_Triangle<> const center,
-                                                  Editor_Interactive& /* parent */,
-                                                  Editor_Action_Args& args) {
+                                                  Widelands::NodeAndTriangle<> const center,
+                                                  EditorInteractive& /* parent */,
+                                                  EditorActionArgs& args) {
 	if (args.origHights.empty())
 	{
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
@@ -47,11 +47,11 @@ int32_t Editor_Set_Height_Tool::handle_click_impl(Widelands::Map& map,
 }
 
 int32_t
-Editor_Set_Height_Tool::handle_undo_impl(Widelands::Map& map,
+EditorSetHeightTool::handle_undo_impl(Widelands::Map& map,
                                          const Widelands::World& world,
-                                         Widelands::Node_and_Triangle<Widelands::Coords> center,
-                                         Editor_Interactive& /* parent */,
-                                         Editor_Action_Args& args) {
+                                         Widelands::NodeAndTriangle<Widelands::Coords> center,
+                                         EditorInteractive& /* parent */,
+                                         EditorActionArgs& args) {
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 	(map,
 	Widelands::Area<Widelands::FCoords>
@@ -72,9 +72,9 @@ Editor_Set_Height_Tool::handle_undo_impl(Widelands::Map& map,
 	return mr.radius() + 1;
 }
 
-Editor_Action_Args Editor_Set_Height_Tool::format_args_impl(Editor_Interactive & parent)
+EditorActionArgs EditorSetHeightTool::format_args_impl(EditorInteractive & parent)
 {
-	Editor_Action_Args a(parent);
+	EditorActionArgs a(parent);
 	a.m_interval = m_interval;
 	return a;
 }

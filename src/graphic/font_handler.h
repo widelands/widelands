@@ -36,9 +36,9 @@ struct TextStyle;
 /**
  * Main class for string rendering. Manages the cache of pre-rendered strings.
  */
-struct Font_Handler {
-	Font_Handler();
-	~Font_Handler();
+struct FontHandler {
+	FontHandler();
+	~FontHandler();
 
 	void draw_text
 		(RenderTarget &,
@@ -69,7 +69,7 @@ private:
 	std::unique_ptr<Data> d;
 };
 
-extern Font_Handler * g_fh;
+extern FontHandler * g_fh;
 
 }
 
