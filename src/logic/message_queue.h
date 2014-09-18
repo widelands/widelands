@@ -78,13 +78,7 @@ struct MessageQueue : private std::map<MessageId, Message *> {
 	///
 	/// \returns the id of the added message.
 	///
-	/// \Note The caller must make sure that a command is scheduled to expire
-	/// the message. Player::add_message does this and should be used for adding
-	/// messages to a player during the simulation.
-	///
 	/// The loading code calls this function to add messages form the map file.
-	/// The commands to expire messages are not saved with the map. Therefore
-	/// the loading code must create them.
 	MessageId add_message(Message & message) {
 		assert_counts();
 		assert(message.status() < 3);
@@ -111,16 +105,15 @@ struct MessageQueue : private std::map<MessageId, Message *> {
 		assert_counts();
 	}
 
-	/// Expire the message with the given id so that it no longer exists.
+	/// Delete the message with the given id so that it no longer exists.
 	/// Assumes that a message with the given id exists.
-	void expire_message(const MessageId& id) {
+	void delete_message(const MessageId& id) {
 		assert_counts();
 		MessageQueue::iterator const it = find(id);
 		if (it == end()) {
-			// Messages can be expired when the timeout runs out, or when the linked
-			// MapObject is removed, or both. In this later case, two expire commands
+			// Messages can be deleted when the linked MapObject is removed. Two delete commands
 			// will be executed, and the message will not be present for the second one.
-			// So we assume here that the message was removed from an earlier expire cmd.
+			// So we assume here that the message was removed from an earlier delete cmd.
 			return;
 		}
 		Message & message = *it->second;

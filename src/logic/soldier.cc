@@ -1571,7 +1571,7 @@ void Soldier::battle_update(Game & game, State &)
 						(game,
 						 *new Message
 						 	("game engine",
-						 	 game.get_gametime(), Forever(),
+							 game.get_gametime(),
 						 	 _("Logic error"),
 						 	 buffer,
 						 	 get_position(),
@@ -1580,7 +1580,7 @@ void Soldier::battle_update(Game & game, State &)
 						(game,
 						 *new Message
 						 	("game engine",
-						 	 game.get_gametime(), Forever(),
+							 game.get_gametime(),
 						 	 _("Logic error"),
 						 	 buffer,
 						 	 opponent.get_position(),

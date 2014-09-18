@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_LOGIC_CMD_EXPIRE_MESSAGE_H
-#define WL_LOGIC_CMD_EXPIRE_MESSAGE_H
+#ifndef WL_LOGIC_CMD_DELETE_MESSAGE_H
+#define WL_LOGIC_CMD_DELETE_MESSAGE_H
 
 #include <memory>
 
@@ -27,7 +27,7 @@
 
 namespace Widelands {
 
-/// Expires the player's message.
+/// Delete the player's message.
 ///
 /// \note This is not a GameLogicCommand because it should not be saved.
 /// Instead, the commands are recreated separately on load (when both command
@@ -35,14 +35,14 @@ namespace Widelands {
 /// command and then when loading, checking that one exists for each message
 /// and if not, warn and recreate it. Such redundancy would also waste space in
 /// the savegame.
-struct CmdExpireMessage : public Command {
-	CmdExpireMessage
+struct CmdDeleteMessage : public Command {
+	CmdDeleteMessage
 		(int32_t const t, PlayerNumber const p, MessageId const m)
 		: Command(t), player(p), message(m)
 	{}
 
 	void execute (Game & game) override;
-	uint8_t id() const override {return QUEUE_CMD_EXPIREMESSAGE;}
+	uint8_t id() const override {return QUEUE_CMD_DELETEMESSAGE;}
 
 private:
 	PlayerNumber player;
@@ -51,4 +51,4 @@ private:
 
 }
 
-#endif  // end of include guard: WL_LOGIC_CMD_EXPIRE_MESSAGE_H
+#endif  // end of include guard: WL_LOGIC_CMD_DELETE_MESSAGE_H

@@ -32,7 +32,6 @@
 #include "game_io/game_player_info_packet.h"
 #include "game_io/game_preload_packet.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/cmd_expire_message.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
@@ -103,13 +102,6 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 			Message* m = temp_message.second;
 			MessageId m_id = temp_message.first;
 
-			// Renew expire commands
-			Duration const duration = m->duration();
-			if (duration != Forever()) {
-				m_game.cmdqueue().enqueue
-					(new CmdExpireMessage
-					 	(m->sent() + duration, p, m_id));
-			}
 			// Renew MapObject connections
 			if (m->serial() > 0) {
 				MapObject* mo = m_game.objects().get_object(m->serial());

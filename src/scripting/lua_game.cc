@@ -269,11 +269,6 @@ int LuaPlayer::get_see_all(lua_State * const L) {
 		Opts is a table of optional arguments and can be omitted. If it
 		exist it must contain string/value pairs of the following type:
 
-		:arg duration: if this is given, the message will be removed
-			from the players inbox after this many ms. Default:
-			message never expires.
-		:type duration: :class:`integer`
-
 		:arg field: the field connected to this message. Default:
 			no field connected to message
 		:type field: :class:`wl.map.Field`
@@ -297,18 +292,12 @@ int LuaPlayer::send_message(lua_State * L) {
 	std::string title = luaL_checkstring(L, 2);
 	std::string body = luaL_checkstring(L, 3);
 	Coords c = Coords::Null();
-	Duration d = Forever();
 	Message::Status st = Message::New;
 	std::string sender = "ScriptingEngine";
 	bool popup = false;
 
 	if (n == 4) {
 		// Optional arguments
-		lua_getfield(L, 4, "duration");
-		if (!lua_isnil(L, -1))
-			d = luaL_checkuint32(L, -1);
-		lua_pop(L, 1);
-
 		lua_getfield(L, 4, "field");
 		if (!lua_isnil(L, -1))
 			c = (*get_user_class<LuaField>(L, -1))->coords();
@@ -344,7 +333,6 @@ int LuaPlayer::send_message(lua_State * L) {
 			 *new Message
 			 	(sender,
 			 	 game.get_gametime(),
-			 	 d,
 			 	 title,
 			 	 body,
 				 c,
@@ -1065,7 +1053,6 @@ const PropertyType<LuaMessage> LuaMessage::Properties[] = {
 	PROP_RO(LuaMessage, title),
 	PROP_RO(LuaMessage, body),
 	PROP_RO(LuaMessage, sent),
-	PROP_RO(LuaMessage, duration),
 	PROP_RO(LuaMessage, field),
 	PROP_RW(LuaMessage, status),
 	{nullptr, nullptr, nullptr},
@@ -1130,21 +1117,9 @@ int LuaMessage::get_sent(lua_State * L) {
 	return 1;
 }
 
-/* RST
-	.. attribute:: duration
-
-		(RO) The time in milliseconds before this message is invalidated or nil if
-		this message has an endless duration.
-*/
-int LuaMessage::get_duration(lua_State * L) {
-	uint32_t d = get(L, get_game(L)).duration();
-	if (d == Forever())
-		return 0;
-	lua_pushuint32(L, d);
-	return 1;
-}
 
 /* RST
+>>>>>>> MERGE-SOURCE
 	.. attribute:: field
 
 		(RO) The field that corresponds to this Message.

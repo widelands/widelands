@@ -35,8 +35,8 @@ namespace Widelands {
 /// file obviously has continuous numbers.) When the game is loaded, each
 /// message will get its sequence number as id.
 ///
-/// When saving a PlayerMessageCommand (Cmd_MarkMessageAsRead or
-/// Cmd_DeleteMessage) that refers to a message by id, use this map to
+/// When saving a PlayerMessageCommand (CmdMarkMessageAsRead or
+/// CmdDeleteMessage) that refers to a message by id, use this map to
 /// translate from the id that is stored in the command to the sequence number
 /// that will be used as the id of the message when the game is loaded.
 struct MapMessageSaver : private std::map<MessageId, MessageId> {

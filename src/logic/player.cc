@@ -36,7 +36,7 @@
 #include "io/filewrite.h"
 #include "logic/building.h"
 #include "logic/checkstep.h"
-#include "logic/cmd_expire_message.h"
+#include "logic/cmd_delete_message.h"
 #include "logic/cmd_luacoroutine.h"
 #include "logic/constants.h"
 #include "logic/constructionsite.h"
@@ -309,14 +309,7 @@ void Player::play_message_sound(const std::string & sender) {
 MessageId Player::add_message
 	(Game & game, Message & message, bool const popup)
 {
-	// Expire command
 	MessageId id = messages().add_message(message);
-	Duration const duration = message.duration();
-	if (duration != Forever()) {
-		game.cmdqueue().enqueue
-			(new CmdExpireMessage
-			 	(game.get_gametime() + duration, player_number(), id));
-	}
 
 	// MapObject connection
 	if (message.serial() > 0) {
@@ -359,14 +352,14 @@ MessageId Player::add_message_with_timeout
 
 void Player::message_object_removed(MessageId m_id) const
 {
-	// Send expire command
+	// Send delete command
 	upcast(Game, game, &m_egbase);
 	if (!game) {
 		return;
 	}
 
 	game->cmdqueue().enqueue
-		(new CmdExpireMessage
+		(new CmdDeleteMessage
 			(game->get_gametime(), m_plnum, m_id));
 }
 
