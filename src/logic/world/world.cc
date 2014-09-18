@@ -98,11 +98,11 @@ int32_t World::safe_resource_index(const char* const resourcename) const {
 	int32_t const result = get_resource(resourcename);
 
 	if (result == INVALID_INDEX)
-		throw game_data_error("world does not define resource type \"%s\"", resourcename);
+		throw GameDataError("world does not define resource type \"%s\"", resourcename);
 	return result;
 }
 
-TerrainDescription& World::terrain_descr(Terrain_Index const i) const {
+TerrainDescription& World::terrain_descr(TerrainIndex const i) const {
 	return *terrains_->get(i);
 }
 
@@ -143,7 +143,7 @@ int32_t World::get_resource(const char* const name) const {
 	return resources_->get_index(name);
 }
 
-ResourceDescription const* World::get_resource(Resource_Index const res) const {
+ResourceDescription const* World::get_resource(ResourceIndex const res) const {
 	assert(res < resources_->get_nitems());
 	return resources_->get(res);
 }

@@ -103,7 +103,7 @@ NetClient::NetClient
 {
 	d->sock = SDLNet_TCP_Open(svaddr);
 	if (d->sock == nullptr)
-		throw warning
+		throw WLWarning
 			(_("Could not establish connection to host"),
 			 _
 			 	("Widelands could not establish a connection to the given "
@@ -155,7 +155,7 @@ void NetClient::run ()
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
 	{
-		Fullscreen_Menu_LaunchMPG lgm(this, this);
+		FullscreenMenuLaunchMPG lgm(this, this);
 		lgm.setChatProvider(*this);
 		d->modal = &lgm;
 		int32_t code = lgm.run();
@@ -192,7 +192,7 @@ void NetClient::run ()
 		tipstext.push_back("multiplayer");
 		try {
 			tipstext.push_back(getPlayersTribe());
-		} catch (No_Tribe) {}
+		} catch (NoTribe) {}
 		GameTips tips (*loaderUI, tipstext);
 
 		loaderUI->step(_("Preparing game"));
@@ -200,15 +200,15 @@ void NetClient::run ()
 		d->game = &game;
 		game.set_game_controller(this);
 		uint8_t const pn = d->settings.playernum + 1;
-		Interactive_GameBase * igb;
+		InteractiveGameBase * igb;
 		if (pn > 0)
 			igb =
-				new Interactive_Player
+				new InteractivePlayer
 					(game, g_options.pull_section("global"),
 					 pn, true);
 		else
 			igb =
-				new Interactive_Spectator
+				new InteractiveSpectator
 					(game, g_options.pull_section("global"), true);
 		game.set_ibase(igb);
 		igb->set_chat_provider(*this);
@@ -866,14 +866,14 @@ void NetClient::handle_packet(RecvPacket & packet)
 				// Saved game check - does Widelands recognize the file as saved game?
 				Widelands::Game game;
 				try {
-					Widelands::Game_Loader gl(file->filename, game);
+					Widelands::GameLoader gl(file->filename, game);
 				} catch (...) {
 					invalid = true;
 				}
 			} else {
 				// Map check - does Widelands recognize the file as map?
 				Widelands::Map map;
-				std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(file->filename);
+				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(file->filename);
 				if (!ml)
 					invalid = true;
 			}
@@ -983,7 +983,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 			throw DisconnectException("SYNCREQUEST_WO_GAME");
 		int32_t const time = packet.Signed32();
 		d->time.recv(time);
-		d->game->enqueue_command(new Cmd_NetCheckSync(time, this));
+		d->game->enqueue_command(new CmdNetCheckSync(time, this));
 		break;
 	}
 	case NETCMD_CHAT: {

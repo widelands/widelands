@@ -74,12 +74,12 @@ struct TagConstraint {
 	bool text_allowed;
 	bool has_closing_tag;
 };
-typedef std::unordered_map<std::string, TagConstraint> TagConstraints;
-typedef std::set<std::string> TagSet;
+using TagConstraints = std::unordered_map<std::string, TagConstraint>;
+using TagSet = std::set<std::string>;
 
 class Tag {
 public:
-	typedef std::vector<Child*> ChildList;
+	using ChildList = std::vector<Child*>;
 
 	~Tag();
 

@@ -24,8 +24,8 @@
 #include "io/filewrite.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 
 #define CURRENT_ECONOMY_VERSION 3
 
@@ -39,13 +39,13 @@ void EconomyDataPacket::Read(FileRead & fr)
 		if (1 <= version && version <= CURRENT_ECONOMY_VERSION) {
 			if (2 <= version)
 				try {
-					const Tribe_Descr & tribe = m_eco->owner().tribe();
+					const TribeDescr & tribe = m_eco->owner().tribe();
 					while (Time const last_modified = fr.Unsigned32()) {
 						char const * const type_name = fr.CString();
 						uint32_t const permanent = fr.Unsigned32();
 						if (version <= 2)
 							fr.Unsigned32();
-						Ware_Index i = tribe.ware_index(type_name);
+						WareIndex i = tribe.ware_index(type_name);
 						if (i != INVALID_INDEX) {
 							if (tribe.get_ware_descr(i)->default_target_quantity() ==
 							    std::numeric_limits<uint32_t>::max())
@@ -54,10 +54,10 @@ void EconomyDataPacket::Read(FileRead & fr)
 								    "ignoring\n",
 								    type_name);
 							else {
-								Economy::Target_Quantity & tq =
+								Economy::TargetQuantity & tq =
 									m_eco->m_ware_target_quantities[i];
 								if (tq.last_modified)
-									throw game_data_error
+									throw GameDataError
 										("duplicated entry for %s", type_name);
 								tq.permanent         = permanent;
 								tq.last_modified     = last_modified;
@@ -73,10 +73,10 @@ void EconomyDataPacket::Read(FileRead & fr)
 									 "ignoring\n",
 									 type_name);
 							else {
-								Economy::Target_Quantity & tq =
+								Economy::TargetQuantity & tq =
 									m_eco->m_worker_target_quantities[i];
 								if (tq.last_modified)
-									throw game_data_error
+									throw GameDataError
 										("duplicated entry for %s", type_name);
 								tq.permanent         = permanent;
 								tq.last_modified     = last_modified;
@@ -88,25 +88,25 @@ void EconomyDataPacket::Read(FileRead & fr)
 								 "%s, ignoring\n",
 								 type_name, tribe.name().c_str());
 					}
-				} catch (const _wexception & e) {
-					throw game_data_error("target quantities: %s", e.what());
+				} catch (const WException & e) {
+					throw GameDataError("target quantities: %s", e.what());
 				}
 			m_eco->m_request_timerid = fr.Unsigned32();
 		} else {
-			throw game_data_error("unknown version %u", version);
+			throw GameDataError("unknown version %u", version);
 		}
 	} catch (const std::exception & e) {
-		throw game_data_error("economy: %s", e.what());
+		throw GameDataError("economy: %s", e.what());
 	}
 }
 
 void EconomyDataPacket::Write(FileWrite & fw)
 {
 	fw.Unsigned16(CURRENT_ECONOMY_VERSION);
-	const Tribe_Descr & tribe = m_eco->owner().tribe();
-	for (Ware_Index i = tribe.get_nrwares(); i;) {
+	const TribeDescr & tribe = m_eco->owner().tribe();
+	for (WareIndex i = tribe.get_nrwares(); i;) {
 		--i;
-		const Economy::Target_Quantity & tq =
+		const Economy::TargetQuantity & tq =
 			m_eco->m_ware_target_quantities[i];
 		if (Time const last_modified = tq.last_modified) {
 			fw.Unsigned32(last_modified);
@@ -114,9 +114,9 @@ void EconomyDataPacket::Write(FileWrite & fw)
 			fw.Unsigned32(tq.permanent);
 		}
 	}
-	for (Ware_Index i = tribe.get_nrworkers(); i;) {
+	for (WareIndex i = tribe.get_nrworkers(); i;) {
 		--i;
-		const Economy::Target_Quantity & tq =
+		const Economy::TargetQuantity & tq =
 			m_eco->m_worker_target_quantities[i];
 		if (Time const last_modified = tq.last_modified) {
 			fw.Unsigned32(last_modified);

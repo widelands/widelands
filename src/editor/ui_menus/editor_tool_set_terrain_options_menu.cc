@@ -114,12 +114,12 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 
 }  // namespace
 
-Editor_Tool_Set_Terrain_Options_Menu::Editor_Tool_Set_Terrain_Options_Menu(
-   Editor_Interactive& parent, Editor_Set_Terrain_Tool& tool, UI::UniqueWindow::Registry& registry)
-   : Editor_Tool_Options_Menu(parent, registry, 0, 0, _("Terrain Select")) {
+EditorToolSetTerrainOptionsMenu::EditorToolSetTerrainOptionsMenu(
+   EditorInteractive& parent, EditorSetTerrainTool& tool, UI::UniqueWindow::Registry& registry)
+   : EditorToolOptionsMenu(parent, registry, 0, 0, _("Terrain Select")) {
 	const Widelands::World& world = parent.egbase().world();
 	multi_select_menu_.reset(
-	   new CategorizedItemSelectionMenu<Widelands::TerrainDescription, Editor_Set_Terrain_Tool>(
+	   new CategorizedItemSelectionMenu<Widelands::TerrainDescription, EditorSetTerrainTool>(
 	      this,
 	      world.editor_terrain_categories(),
 	      world.terrains(),
@@ -131,5 +131,5 @@ Editor_Tool_Set_Terrain_Options_Menu::Editor_Tool_Set_Terrain_Options_Menu(
 	set_center_panel(multi_select_menu_.get());
 }
 
-Editor_Tool_Set_Terrain_Options_Menu::~Editor_Tool_Set_Terrain_Options_Menu() {
+EditorToolSetTerrainOptionsMenu::~EditorToolSetTerrainOptionsMenu() {
 }

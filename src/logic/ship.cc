@@ -42,8 +42,8 @@
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
 #include "logic/widelands_geometry_io.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 #include "profile/profile.h"
 #include "wui/interactive_gamebase.h"
 
@@ -52,7 +52,7 @@ namespace Widelands {
 ShipDescr::ShipDescr
 	(const char * given_name, const char * gdescname,
 	 const std::string & directory, Profile & prof, Section & global_s,
-	 const Tribe_Descr & gtribe)
+	 const TribeDescr & gtribe)
 	:
 	BobDescr(MapObjectType::SHIP, given_name, gdescname, &gtribe)
 {
@@ -92,11 +92,11 @@ Ship::~Ship() {
 	close_window();
 }
 
-PortDock* Ship::get_destination(Editor_Game_Base& egbase) const {
+PortDock* Ship::get_destination(EditorGameBase& egbase) const {
 	return m_destination.get(egbase);
 }
 
-PortDock* Ship::get_lastdock(Editor_Game_Base& egbase) const {
+PortDock* Ship::get_lastdock(EditorGameBase& egbase) const {
 	return m_lastdock.get(egbase);
 }
 
@@ -108,7 +108,7 @@ void Ship::init_auto_task(Game & game) {
 	start_task_ship(game);
 }
 
-void Ship::init(Editor_Game_Base & egbase) {
+void Ship::init(EditorGameBase & egbase) {
 	Bob::init(egbase);
 	init_fleet(egbase);
 }
@@ -118,7 +118,7 @@ void Ship::init(Editor_Game_Base & egbase) {
  * The fleet code will automatically merge us into a larger
  * fleet, if one is reachable.
  */
-void Ship::init_fleet(Editor_Game_Base & egbase) {
+void Ship::init_fleet(EditorGameBase & egbase) {
 	assert(get_owner() != nullptr);
 	Fleet * fleet = new Fleet(*get_owner());
 	fleet->add_ship(this);
@@ -126,7 +126,7 @@ void Ship::init_fleet(Editor_Game_Base & egbase) {
 	// fleet calls the set_fleet function appropriately
 }
 
-void Ship::cleanup(Editor_Game_Base & egbase) {
+void Ship::cleanup(EditorGameBase & egbase) {
 	if (m_fleet) {
 		m_fleet->remove_ship(egbase, this);
 	}
@@ -370,7 +370,7 @@ void Ship::ship_update_expedition(Game & game, Bob::State &) {
 				// NOTE territory, as "clearing" is not yet implemented.
 				// NOTE further it checks, whether there is a Player_immovable on one of the fields.
 				// TODO(unknown): handle this more gracefully concering opposing players
-				Player_Number pn = get_owner()->player_number();
+				PlayerNumber pn = get_owner()->player_number();
 				FCoords coord = fc;
 				bool invalid = false;
 				for (uint8_t step = 0; !invalid && step < 5; ++step) {
@@ -654,7 +654,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 					worker->set_location(cs);
 					worker->set_position(game, cs->get_position());
 					worker->reset_tasks(game);
-					Partially_Finished_Building::request_builder_callback
+					PartiallyFinishedBuilding::request_builder_callback
 						(game, *cs->get_builder_request(), worker->descr().worker_index(), worker, *cs);
 					m_items.resize(i);
 				}
@@ -665,7 +665,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 				init_fleet(game);
 				m_expedition.reset(nullptr);
 
-				if (upcast(Interactive_GameBase, igb, game.get_ibase()))
+				if (upcast(InteractiveGameBase, igb, game.get_ibase()))
 					refresh_window(*igb);
 			}
 			return start_task_idle(game, descr().main_animation(), 1500); // unload the next item
@@ -803,7 +803,7 @@ void Ship::exp_scout_direction(Game &, uint8_t direction) {
 /// @note only called via player command
 void Ship::exp_construct_port (Game &, const Coords& c) {
 	assert(m_expedition);
-	Building_Index port_idx = get_owner()->tribe().safe_building_index("port");
+	BuildingIndex port_idx = get_owner()->tribe().safe_building_index("port");
 	get_owner()->force_csite(c, port_idx);
 	m_ship_state = EXP_COLONIZING;
 }
@@ -853,7 +853,7 @@ void Ship::exp_cancel (Game & game) {
 	m_expedition.reset(nullptr);
 
 	// And finally update our ship window
-	if (upcast(Interactive_GameBase, igb, game.get_ibase()))
+	if (upcast(InteractiveGameBase, igb, game.get_ibase()))
 		refresh_window(*igb);
 }
 
@@ -869,7 +869,7 @@ void Ship::sink_ship (Game & game) {
 	close_window();
 }
 
-void Ship::log_general_info(const Editor_Game_Base & egbase)
+void Ship::log_general_info(const EditorGameBase & egbase)
 {
 	Bob::log_general_info(egbase);
 
@@ -1037,7 +1037,7 @@ void Ship::Loader::load_finish()
 
 
 MapObject::Loader * Ship::load
-	(Editor_Game_Base & egbase, MapMapObjectLoader & mol, FileRead & fr)
+	(EditorGameBase & egbase, MapObjectLoader & mol, FileRead & fr)
 {
 	std::unique_ptr<Loader> loader(new Loader);
 
@@ -1052,18 +1052,18 @@ MapObject::Loader * Ship::load
 
 			egbase.manually_load_tribe(owner);
 
-			if (const Tribe_Descr * tribe = egbase.get_tribe(owner))
+			if (const TribeDescr * tribe = egbase.get_tribe(owner))
 				descr = dynamic_cast<const ShipDescr *>
 					(tribe->get_bob_descr(name));
 
 			if (!descr)
-				throw game_data_error
+				throw GameDataError
 					("undefined ship %s/%s", owner.c_str(), name.c_str());
 
 			loader->init(egbase, mol, descr->create_object());
 			loader->load(fr, version);
 		} else
-			throw game_data_error("unknown/unhandled version %u", version);
+			throw GameDataError("unknown/unhandled version %u", version);
 	} catch (const std::exception & e) {
 		throw wexception("loading ship: %s", e.what());
 	}
@@ -1072,7 +1072,7 @@ MapObject::Loader * Ship::load
 }
 
 void Ship::save
-	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
+	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(HeaderShip);
 	fw.Unsigned8(SHIP_SAVEGAME_VERSION);

@@ -27,16 +27,16 @@
 #include "editor/ui_menus/editor_tool_options_menu.h"
 #include "editor/tools/editor_place_immovable_tool.h"
 
-struct Editor_Interactive;
+struct EditorInteractive;
 
-struct Editor_Tool_Place_Immovable_Options_Menu : public Editor_Tool_Options_Menu {
-	Editor_Tool_Place_Immovable_Options_Menu(Editor_Interactive&,
-	                                         Editor_Place_Immovable_Tool&,
+struct EditorToolPlaceImmovableOptionsMenu : public EditorToolOptionsMenu {
+	EditorToolPlaceImmovableOptionsMenu(EditorInteractive&,
+	                                         EditorPlaceImmovableTool&,
 	                                         UI::UniqueWindow::Registry&);
-	virtual ~Editor_Tool_Place_Immovable_Options_Menu();
+	virtual ~EditorToolPlaceImmovableOptionsMenu();
 
 private:
-	std::unique_ptr<CategorizedItemSelectionMenu<Widelands::ImmovableDescr, Editor_Place_Immovable_Tool>>
+	std::unique_ptr<CategorizedItemSelectionMenu<Widelands::ImmovableDescr, EditorPlaceImmovableTool>>
 	multi_select_menu_;
 };
 

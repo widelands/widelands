@@ -34,14 +34,14 @@ static const char pic_tab_wares_warehouse[] =
 static const char pic_tab_workers_warehouse[] =
 	 "pics/menu_tab_workers_warehouse.png";
 
-Stock_Menu::Stock_Menu
-	(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
+StockMenu::StockMenu
+	(InteractivePlayer & plr, UI::UniqueWindow::Registry & registry)
 :
 UI::UniqueWindow(&plr, "stock_menu", &registry, 480, 640, _("Stock")),
 m_player(plr)
 {
-	UI::Tab_Panel * tabs =
-		 new UI::Tab_Panel
+	UI::TabPanel * tabs =
+		 new UI::TabPanel
 			 (this, 0, 0, g_gr->images().get("pics/but1.png"));
 	set_center_panel(tabs);
 
@@ -75,7 +75,7 @@ m_player(plr)
 Push the current wares status to the WaresDisplay.
 ===============
 */
-void Stock_Menu::think()
+void StockMenu::think()
 {
 	UI::UniqueWindow::think();
 
@@ -89,7 +89,7 @@ void Stock_Menu::think()
  * Keep the list of wares repositories up-to-date (honoring that the set of
  * \ref Economy of a player may change)
  */
-void Stock_Menu::fill_total_waresdisplay
+void StockMenu::fill_total_waresdisplay
 	(WaresDisplay * waresdisplay, Widelands::WareWorker type)
 {
 	waresdisplay->remove_all_warelists();
@@ -106,7 +106,7 @@ void Stock_Menu::fill_total_waresdisplay
  * Keep the list of wares repositories up-to-date (consider that the available
  * \ref Warehouse may change)
  */
-void Stock_Menu::fill_warehouse_waresdisplay
+void StockMenu::fill_warehouse_waresdisplay
 	(WaresDisplay * waresdisplay, Widelands::WareWorker type)
 {
 	waresdisplay->remove_all_warelists();

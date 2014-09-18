@@ -23,10 +23,10 @@
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
 
-struct Editor_Interactive;
+struct EditorInteractive;
 namespace UI {
 struct EditBox;
-struct Multiline_Editbox;
+struct MultilineEditbox;
 struct Textarea;
 }
 
@@ -35,14 +35,14 @@ struct Textarea;
  * about the current map are displayed and you can change
  * author, name and description
 */
-struct Main_Menu_Map_Options : public UI::Window {
-	Main_Menu_Map_Options(Editor_Interactive &);
+struct MainMenuMapOptions : public UI::Window {
+	MainMenuMapOptions(EditorInteractive &);
 
 private:
-	Editor_Interactive & eia();
+	EditorInteractive & eia();
 	void changed(int32_t);
 	void editbox_changed();
-	UI::Multiline_Editbox * m_descr;
+	UI::MultilineEditbox * m_descr;
 	UI::Textarea * m_nrplayers, * m_size;
 	UI::EditBox * m_name, * m_author;
 	void update();

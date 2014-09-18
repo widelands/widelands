@@ -47,7 +47,7 @@ private:
 	UI::Textarea * ta_password;
 	UI::Textarea * ta_register;
 	UI::Textarea * ta_auto_log;
-	UI::Multiline_Textarea * pwd_warning;
+	UI::MultilineTextarea * pwd_warning;
 };
 
 #endif  // end of include guard: WL_WUI_LOGIN_BOX_H

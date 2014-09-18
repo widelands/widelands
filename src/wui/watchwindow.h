@@ -22,8 +22,8 @@
 
 #include "logic/widelands_geometry.h"
 
-class Interactive_GameBase;
+class InteractiveGameBase;
 
-void show_watch_window(Interactive_GameBase &, Widelands::Coords);
+void show_watch_window(InteractiveGameBase &, Widelands::Coords);
 
 #endif  // end of include guard: WL_WUI_WATCHWINDOW_H

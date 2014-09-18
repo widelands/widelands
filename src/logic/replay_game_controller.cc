@@ -64,7 +64,7 @@ void ReplayGameController::think() {
 		if (m_replayreader->EndOfReplay()) {
 			m_replayreader.reset(nullptr);
 			m_game.enqueue_command
-				(new Cmd_ReplayEnd(m_time = m_game.get_gametime()));
+				(new CmdReplayEnd(m_time = m_game.get_gametime()));
 		}
 	}
 }
@@ -101,7 +101,7 @@ void ReplayGameController::setPaused(bool const paused) {
 	m_paused = paused;
 }
 
-void ReplayGameController::Cmd_ReplayEnd::execute (Widelands::Game & game) {
+void ReplayGameController::CmdReplayEnd::execute (Widelands::Game & game) {
 	game.gameController()->setDesiredSpeed(0);
 	UI::WLMessageBox mmb
 		(game.get_ibase(),
@@ -113,6 +113,6 @@ void ReplayGameController::Cmd_ReplayEnd::execute (Widelands::Game & game) {
 	mmb.run();
 }
 
-uint8_t ReplayGameController::Cmd_ReplayEnd::id() const {
+uint8_t ReplayGameController::CmdReplayEnd::id() const {
 	return QUEUE_CMD_REPLAYEND;
 }

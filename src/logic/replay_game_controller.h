@@ -45,8 +45,8 @@ public:
 	void setPaused(bool const paused) override;
 
 private:
-	struct Cmd_ReplayEnd : public Widelands::Command {
-		Cmd_ReplayEnd (int32_t const _duetime) : Widelands::Command(_duetime) {}
+	struct CmdReplayEnd : public Widelands::Command {
+		CmdReplayEnd (int32_t const _duetime) : Widelands::Command(_duetime) {}
 		virtual void execute (Widelands::Game & game);
 		virtual uint8_t id() const;
 	};

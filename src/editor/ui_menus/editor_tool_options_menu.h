@@ -23,9 +23,9 @@
 #include "editor/editorinteractive.h"
 #include "ui_basic/unique_window.h"
 
-struct Editor_Tool_Options_Menu : public UI::UniqueWindow {
-	Editor_Tool_Options_Menu
-		(Editor_Interactive         & parent,
+struct EditorToolOptionsMenu : public UI::UniqueWindow {
+	EditorToolOptionsMenu
+		(EditorInteractive         & parent,
 		 UI::UniqueWindow::Registry &,
 		 const uint32_t widht, const uint32_t height,
 		 char const                 * title);
@@ -43,7 +43,7 @@ struct Editor_Tool_Options_Menu : public UI::UniqueWindow {
 	uint32_t vmargin () const {return spacing();}
 
 private:
-	Editor_Tool * m_current_pointer;
+	EditorTool * m_current_pointer;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_TOOL_OPTIONS_MENU_H

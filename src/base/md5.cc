@@ -32,7 +32,7 @@ using namespace std;
 /**
  * Create a hex string out of the MD5 checksum.
  */
-string md5_checksum::str() const
+string Md5Checksum::str() const
 {
 	string s;
 
@@ -60,7 +60,7 @@ static const uint8_t fillbuf[64] = {0x80, 0 /*, 0, 0, ... 0 */};
 
    IMPORTANT: On some systems it is required that RESBUF is correctly
    aligned for a 32 bits value.  */
-void * md5_finish_ctx (md5_ctx * const ctx, void * const resbuf)
+void * md5_finish_ctx (Md5Ctx * const ctx, void * const resbuf)
 {
 	/* Take yet unprocessed bytes into account.  */
 	uint32_t bytes = ctx->buflen;
@@ -95,7 +95,7 @@ GCC_DIAG_ON("-Wstrict-aliasing");
 
 /* Processes some bytes in the internal buffer */
 void md5_process_bytes
-	(void const * buffer, uint32_t len, struct md5_ctx * const ctx)
+	(void const * buffer, uint32_t len, struct Md5Ctx * const ctx)
 {
 	/* When we already have some bits in our internal buffer concatenate
 		both inputs first.  */
@@ -151,7 +151,7 @@ void md5_process_bytes
    It is assumed that LEN % 64 == 0.  */
 
 void md5_process_block
-	(void const * const buffer, uint32_t const len, md5_ctx * const ctx)
+	(void const * const buffer, uint32_t const len, Md5Ctx * const ctx)
 {
 	uint32_t correct_words[16];
 	uint32_t const *       words  = static_cast<uint32_t const *>(buffer);

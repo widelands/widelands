@@ -72,7 +72,7 @@ Table<void *>::Table
 */
 Table<void *>::~Table()
 {
-	for (const Entry_Record * entry : m_entry_records) {
+	for (const EntryRecord * entry : m_entry_records) {
 		delete entry;
 	}
 }
@@ -178,7 +178,7 @@ void Table<void *>::set_column_compare
 	column.compare = fn;
 }
 
-void Table<void *>::Entry_Record::set_checked
+void Table<void *>::EntryRecord::set_checked
 	(uint8_t const col, bool const checked)
 {
 	_data & cell = m_data.at(col);
@@ -188,23 +188,23 @@ void Table<void *>::Entry_Record::set_checked
 		g_gr->images().get(checked ? "pics/checkbox_checked.png" : "pics/checkbox_empty.png");
 }
 
-void Table<void *>::Entry_Record::toggle(uint8_t const col)
+void Table<void *>::EntryRecord::toggle(uint8_t const col)
 {
 	set_checked(col, !is_checked(col));
 }
 
 
-bool Table<void *>::Entry_Record::is_checked(uint8_t const col) const {
+bool Table<void *>::EntryRecord::is_checked(uint8_t const col) const {
 	const _data & cell = m_data.at(col);
 
 	return cell.d_checked;
 }
 
-Table<void *>::Entry_Record * Table<void *>::find
+Table<void *>::EntryRecord * Table<void *>::find
 	(const void * const entry) const
 
 {
-	for (Entry_Record * temp_entry : m_entry_records) {
+	for (EntryRecord * temp_entry : m_entry_records) {
 		if (temp_entry->entry() == entry) {
 			return temp_entry;
 		}
@@ -233,7 +233,7 @@ void Table<void *>::header_button_clicked(Columns::size_type const n) {
 */
 void Table<void *>::clear()
 {
-	for (const Entry_Record * entry : m_entry_records) {
+	for (const EntryRecord * entry : m_entry_records) {
 		delete entry;
 	}
 	m_entry_records.clear();
@@ -262,7 +262,7 @@ void Table<void *>::draw(RenderTarget & dst)
 		if (y >= static_cast<int32_t>(get_h()))
 			return;
 
-		const Entry_Record & er = *m_entry_records[idx];
+		const EntryRecord & er = *m_entry_records[idx];
 
 		if (idx == m_selection) {
 			assert(2 <= get_eff_w());
@@ -463,14 +463,14 @@ void Table<void *>::select(const uint32_t i)
 /**
  * Add a new entry to the table.
 */
-Table<void *>::Entry_Record & Table<void *>::add
+Table<void *>::EntryRecord & Table<void *>::add
 	(void * const entry, const bool do_select)
 {
 	int32_t entry_height = g_fh->get_fontheight(m_fontname, m_fontsize);
 	if (entry_height > m_lineheight)
 		m_lineheight = entry_height;
 
-	Entry_Record & result = *new Entry_Record(entry);
+	EntryRecord & result = *new EntryRecord(entry);
 	m_entry_records.push_back(&result);
 	result.m_data.resize(m_columns.size());
 	for (size_t i = 0; i < m_columns.size(); ++i)
@@ -509,7 +509,7 @@ void Table<void *>::set_scrollpos(int32_t const i)
 void Table<void *>::remove(const uint32_t i) {
 	assert(i < m_entry_records.size());
 
-	const Entry_Record_vector::iterator it = m_entry_records.begin() + i;
+	const EntryRecordVector::iterator it = m_entry_records.begin() + i;
 	delete *it;
 	m_entry_records.erase(it);
 	if (m_selection == i)
@@ -547,7 +547,7 @@ void Table<void *>::sort(const uint32_t Begin, uint32_t End)
 		End = size();
 
 	std::vector<uint32_t> indices;
-	std::vector<Entry_Record *> copy;
+	std::vector<EntryRecord *> copy;
 
 	indices.reserve(End - Begin);
 	copy.reserve(End - Begin);
@@ -579,24 +579,24 @@ void Table<void *>::sort(const uint32_t Begin, uint32_t End)
 bool Table<void *>::default_compare_checkbox
 	(uint32_t column, uint32_t a, uint32_t b)
 {
-	Entry_Record & ea = get_record(a);
-	Entry_Record & eb = get_record(b);
+	EntryRecord & ea = get_record(a);
+	EntryRecord & eb = get_record(b);
 	return ea.is_checked(column) && !eb.is_checked(column);
 }
 
 bool Table<void *>::default_compare_string
 	(uint32_t column, uint32_t a, uint32_t b)
 {
-	Entry_Record & ea = get_record(a);
-	Entry_Record & eb = get_record(b);
+	EntryRecord & ea = get_record(a);
+	EntryRecord & eb = get_record(b);
 	return ea.get_string(column) < eb.get_string(column);
 }
 
-Table<void *>::Entry_Record::Entry_Record(void * const e)
+Table<void *>::EntryRecord::EntryRecord(void * const e)
 	: m_entry(e), use_clr(false)
 {}
 
-void Table<void *>::Entry_Record::set_picture
+void Table<void *>::EntryRecord::set_picture
 	(uint8_t const col, const Image* pic, const std::string & str)
 {
 	assert(col < m_data.size());
@@ -604,7 +604,7 @@ void Table<void *>::Entry_Record::set_picture
 	m_data.at(col).d_picture = pic;
 	m_data.at(col).d_string  = str;
 }
-void Table<void *>::Entry_Record::set_string
+void Table<void *>::EntryRecord::set_string
 	(uint8_t const col, const std::string & str)
 {
 	assert(col < m_data.size());
@@ -612,13 +612,13 @@ void Table<void *>::Entry_Record::set_string
 	m_data.at(col).d_picture = nullptr;
 	m_data.at(col).d_string  = str;
 }
-const Image* Table<void *>::Entry_Record::get_picture(uint8_t const col) const
+const Image* Table<void *>::EntryRecord::get_picture(uint8_t const col) const
 {
 	assert(col < m_data.size());
 
 	return m_data.at(col).d_picture;
 }
-const std::string & Table<void *>::Entry_Record::get_string
+const std::string & Table<void *>::EntryRecord::get_string
 	(uint8_t const col) const
 {
 	assert(col < m_data.size());

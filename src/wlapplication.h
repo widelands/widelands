@@ -41,9 +41,9 @@
 namespace Widelands {class Game;}
 
 ///Thrown if a commandline parameter is faulty
-struct Parameter_error : public std::runtime_error {
-	explicit Parameter_error() : std::runtime_error("") {}
-	explicit Parameter_error(std::string text)
+struct ParameterError : public std::runtime_error {
+	explicit ParameterError() : std::runtime_error("") {}
+	explicit ParameterError(std::string text)
 		: std::runtime_error(text)
 	{}
 };
