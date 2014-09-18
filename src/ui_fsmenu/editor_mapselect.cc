@@ -36,10 +36,10 @@
 #include "profile/profile.h"
 #include "wui/text_constants.h"
 
-using Widelands::WL_Map_Loader;
+using Widelands::WidelandsMapLoader;
 
-Fullscreen_Menu_Editor_MapSelect::Fullscreen_Menu_Editor_MapSelect() :
-	Fullscreen_Menu_Base("choosemapmenu.jpg"),
+FullscreenMenuEditorMapSelect::FullscreenMenuEditorMapSelect() :
+	FullscreenMenuBase("choosemapmenu.jpg"),
 
 // Values for alignment and size
 	m_butw (get_w() / 4),
@@ -101,8 +101,8 @@ Fullscreen_Menu_Editor_MapSelect::Fullscreen_Menu_Editor_MapSelect() :
 // Runtime variables
 	m_curdir("maps"), m_basedir("maps")
 {
-	m_back.sigclicked.connect(boost::bind(&Fullscreen_Menu_Editor_MapSelect::end_modal, boost::ref(*this), 0));
-	m_ok.sigclicked.connect(boost::bind(&Fullscreen_Menu_Editor_MapSelect::ok, boost::ref(*this)));
+	m_back.sigclicked.connect(boost::bind(&FullscreenMenuEditorMapSelect::end_modal, boost::ref(*this), 0));
+	m_ok.sigclicked.connect(boost::bind(&FullscreenMenuEditorMapSelect::ok, boost::ref(*this)));
 
 	m_back.set_font(font_small());
 	m_ok.set_font(font_small());
@@ -120,26 +120,26 @@ Fullscreen_Menu_Editor_MapSelect::Fullscreen_Menu_Editor_MapSelect() :
 	m_descr           .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_list            .set_font(m_fn, m_fs);
 
-	m_list.selected.connect(boost::bind(&Fullscreen_Menu_Editor_MapSelect::map_selected, this, _1));
+	m_list.selected.connect(boost::bind(&FullscreenMenuEditorMapSelect::map_selected, this, _1));
 	m_list.double_clicked.connect
-		(boost::bind(&Fullscreen_Menu_Editor_MapSelect::double_clicked, this, _1));
+		(boost::bind(&FullscreenMenuEditorMapSelect::double_clicked, this, _1));
 
 	fill_list();
 }
 
-std::string Fullscreen_Menu_Editor_MapSelect::get_map()
+std::string FullscreenMenuEditorMapSelect::get_map()
 {
 	return m_list.has_selection() ? m_list.get_selected() : nullptr;
 }
 
-void Fullscreen_Menu_Editor_MapSelect::ok()
+void FullscreenMenuEditorMapSelect::ok()
 {
 	std::string filename(m_list.get_selected());
 
 	if
 		(g_fs->IsDirectory(filename.c_str())
 		 &&
-		 !WL_Map_Loader::is_widelands_map(filename))
+		 !WidelandsMapLoader::is_widelands_map(filename))
 	{
 
 		m_curdir = filename;
@@ -156,16 +156,16 @@ void Fullscreen_Menu_Editor_MapSelect::ok()
  * When this happens, the information display at the right needs to be
  * refreshed.
  */
-void Fullscreen_Menu_Editor_MapSelect::map_selected(uint32_t)
+void FullscreenMenuEditorMapSelect::map_selected(uint32_t)
 {
 	std::string name = m_list.get_selected();
 
 	m_ok.set_enabled(true);
 
-	if (!g_fs->IsDirectory(name) || WL_Map_Loader::is_widelands_map(name)) {
+	if (!g_fs->IsDirectory(name) || WidelandsMapLoader::is_widelands_map(name)) {
 		Widelands::Map map;
 		{
-			std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(name);
+			std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(name);
 			ml->preload_map(true); //  This has worked before, no problem.
 		}
 
@@ -192,12 +192,12 @@ void Fullscreen_Menu_Editor_MapSelect::map_selected(uint32_t)
 /**
  * listbox got double clicked
  */
-void Fullscreen_Menu_Editor_MapSelect::double_clicked(uint32_t) {ok();}
+void FullscreenMenuEditorMapSelect::double_clicked(uint32_t) {ok();}
 
 /**
  * fill the file list
  */
-void Fullscreen_Menu_Editor_MapSelect::fill_list()
+void FullscreenMenuEditorMapSelect::fill_list()
 {
 	//  Fill it with all files we find.
 	m_mapfiles = g_fs->ListDirectory(m_curdir);
@@ -218,9 +218,9 @@ void Fullscreen_Menu_Editor_MapSelect::fill_list()
 			 g_gr->images().get("pics/ls_dir.png"));
 	}
 
-	const filenameset_t::const_iterator mapfiles_end = m_mapfiles.end();
+	const FilenameSet::const_iterator mapfiles_end = m_mapfiles.end();
 	for
-		(filenameset_t::const_iterator pname = m_mapfiles.begin();
+		(FilenameSet::const_iterator pname = m_mapfiles.begin();
 		 pname != mapfiles_end;
 		 ++pname)
 	{
@@ -230,7 +230,7 @@ void Fullscreen_Menu_Editor_MapSelect::fill_list()
 			 // Upsy, appeared again. ignore
 			 strcmp(FileSystem::FS_Filename(name), "..")   &&
 			 g_fs->IsDirectory(name)                       &&
-			 !WL_Map_Loader::is_widelands_map(name))
+			 !WidelandsMapLoader::is_widelands_map(name))
 
 		m_list.add
 			(FileSystem::FS_Filename(name),
@@ -241,12 +241,12 @@ void Fullscreen_Menu_Editor_MapSelect::fill_list()
 	Widelands::Map map;
 
 	for
-		(filenameset_t::const_iterator pname = m_mapfiles.begin();
+		(FilenameSet::const_iterator pname = m_mapfiles.begin();
 		 pname != mapfiles_end;
 		 ++pname)
 	{
 		char const * const name = pname->c_str();
-		std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(name);
+		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(name);
 		if (ml.get() != nullptr) {
 			try {
 				ml->preload_map(true);
@@ -254,8 +254,8 @@ void Fullscreen_Menu_Editor_MapSelect::fill_list()
 					(FileSystem::FS_Filename(name),
 					 name,
 					 g_gr->images().get
-						 (dynamic_cast<WL_Map_Loader*>(ml.get()) ? "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
-			} catch (const _wexception &) {} //  we simply skip illegal entries
+						 (dynamic_cast<WidelandsMapLoader*>(ml.get()) ? "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
+			} catch (const WException &) {} //  we simply skip illegal entries
 		}
 	}
 

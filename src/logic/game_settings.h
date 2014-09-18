@@ -164,10 +164,10 @@ struct GameSettingsProvider {
 	virtual void nextWinCondition      () = 0;
 	virtual std::string getWinConditionScript() = 0;
 
-	struct No_Tribe {};
+	struct NoTribe {};
 	const std::string & getPlayersTribe() {
 		if (UserSettings::highestPlayernum() < settings().playernum)
-			throw No_Tribe();
+			throw NoTribe();
 		return settings().players[settings().playernum].tribe;
 	}
 };

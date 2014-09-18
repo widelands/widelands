@@ -35,15 +35,15 @@
 #include "ui_basic/textarea.h"
 
 
-inline Editor_Interactive & Main_Menu_Map_Options::eia() {
-	return ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
+inline EditorInteractive & MainMenuMapOptions::eia() {
+	return ref_cast<EditorInteractive, UI::Panel>(*get_parent());
 }
 
 
 /**
  * Create all the buttons etc...
 */
-Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive & parent)
+MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent)
 	:
 	UI::Window
 		(&parent, "map_options",
@@ -64,7 +64,7 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive & parent)
 			 posx + ta->get_w() + spacing, posy,
 			 get_inner_w() - (posx + ta->get_w() + spacing) - spacing, 20,
 			 g_gr->images().get("pics/but1.png"));
-	m_name->changed.connect(boost::bind(&Main_Menu_Map_Options::changed, this, 0));
+	m_name->changed.connect(boost::bind(&MainMenuMapOptions::changed, this, 0));
 	posy += height + spacing;
 	ta = new UI::Textarea(this, posx, posy - 2, _("Size:"));
 	m_size =
@@ -82,15 +82,15 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive & parent)
 			 posx + ta->get_w() + spacing, posy,
 			 get_inner_w() - (posx + ta->get_w() + spacing) - spacing, 20,
 			 g_gr->images().get("pics/but1.png"));
-	m_author->changed.connect(boost::bind(&Main_Menu_Map_Options::changed, this, 1));
+	m_author->changed.connect(boost::bind(&MainMenuMapOptions::changed, this, 1));
 	posy += height + spacing;
 	m_descr =
-		new UI::Multiline_Editbox
+		new UI::MultilineEditbox
 			(this,
 			 posx, posy,
 			 get_inner_w() - spacing - posx, get_inner_h() - 25 - spacing - posy,
 			 parent.egbase().map().get_description());
-	m_descr->changed.connect(boost::bind(&Main_Menu_Map_Options::editbox_changed, this));
+	m_descr->changed.connect(boost::bind(&MainMenuMapOptions::editbox_changed, this));
 
 	UI::Button * btn =
 		new UI::Button
@@ -103,8 +103,8 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive & parent)
 				 "be the top-left corner of a generated minimap."));
 	btn->sigclicked.connect
 		(boost::bind
-		 (&Editor_Interactive::select_tool, &parent,
-		  boost::ref(parent.tools.set_origin), Editor_Tool::First));
+		 (&EditorInteractive::select_tool, &parent,
+		  boost::ref(parent.tools.set_origin), EditorTool::First));
 
 	update();
 }
@@ -113,7 +113,7 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive & parent)
  * Updates all UI::Textareas in the UI::Window to represent currently
  * set values
 */
-void Main_Menu_Map_Options::update() {
+void MainMenuMapOptions::update() {
 	const Widelands::Map & map = eia().egbase().map();
 
 	m_size     ->set_text((boost::format(_("%1$ix%2$i"))
@@ -129,7 +129,7 @@ void Main_Menu_Map_Options::update() {
 /**
  * Called when one of the editboxes are changed
 */
-void Main_Menu_Map_Options::changed(int32_t const id) {
+void MainMenuMapOptions::changed(int32_t const id) {
 	if        (id == 0) {
 		eia().egbase().map().set_name(m_name->text().c_str());
 	} else if (id == 1) {
@@ -143,6 +143,6 @@ void Main_Menu_Map_Options::changed(int32_t const id) {
 /**
  * Called when the editbox has changed
  */
-void Main_Menu_Map_Options::editbox_changed() {
+void MainMenuMapOptions::editbox_changed() {
 	eia().egbase().map().set_description(m_descr->get_text().c_str());
 }

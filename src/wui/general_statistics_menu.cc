@@ -45,8 +45,8 @@ using namespace Widelands;
 #define PLOT_HEIGHT 130
 #define NR_BASE_DATASETS 11
 
-General_Statistics_Menu::General_Statistics_Menu
-	(Interactive_GameBase & parent, General_Statistics_Menu::Registry & registry)
+GeneralStatisticsMenu::GeneralStatisticsMenu
+	(InteractiveGameBase & parent, GeneralStatisticsMenu::Registry & registry)
 :
 UI::UniqueWindow
 	(&parent, "statistics_menu", &registry,
@@ -67,11 +67,11 @@ m_selected_information(0)
 
 	// Setup plot data
 	m_plot.set_sample_rate(STATISTICS_SAMPLE_TIME);
-	m_plot.set_plotmode(WUIPlot_Area::PLOTMODE_ABSOLUTE);
+	m_plot.set_plotmode(WuiPlotArea::PLOTMODE_ABSOLUTE);
 	Game & game = *parent.get_game();
-	const Game::General_Stats_vector & genstats =
+	const Game::GeneralStatsVector & genstats =
 		game.get_general_statistics();
-	const Game::General_Stats_vector::size_type
+	const Game::GeneralStatsVector::size_type
 		general_statistics_size = genstats.size();
 
 	// Is there a hook dataset?
@@ -86,7 +86,7 @@ m_selected_information(0)
 	}
 
 	for
-		(Game::General_Stats_vector::size_type i = 0;
+		(Game::GeneralStatsVector::size_type i = 0;
 		 i < general_statistics_size;
 		 ++i)
 	{
@@ -143,7 +143,7 @@ m_selected_information(0)
 	UI::Box * hbox1 = new UI::Box(&m_box, 0, 0, UI::Box::Horizontal, 0, 0, 1);
 
 	uint32_t plr_in_game = 0;
-	Player_Number const nr_players = game.map().get_nrplayers();
+	PlayerNumber const nr_players = game.map().get_nrplayers();
 	iterate_players_existing_novar(p, nr_players, game) ++plr_in_game;
 
 	iterate_players_existing_const(p, nr_players, game, player) {
@@ -157,7 +157,7 @@ m_selected_information(0)
 				 g_gr->images().get(pic),
 				 player->get_name().c_str());
 		cb.sigclicked.connect
-			(boost::bind(&General_Statistics_Menu::cb_changed_to, this, p));
+			(boost::bind(&GeneralStatisticsMenu::cb_changed_to, this, p));
 		cb.set_perm_pressed(m_my_registry->selected_players[p - 1]);
 
 		m_cbs[p - 1] = &cb;
@@ -272,12 +272,12 @@ m_selected_information(0)
 
 	m_radiogroup.set_state(m_selected_information);
 	m_radiogroup.changedto.connect
-		(boost::bind(&General_Statistics_Menu::radiogroup_changed, this, _1));
+		(boost::bind(&GeneralStatisticsMenu::radiogroup_changed, this, _1));
 
 	m_box.add(hbox2, UI::Box::AlignTop, true);
 
 	m_box.add
-		(new WUIPlot_Area_Slider
+		(new WuiPlotAreaSlider
 			(&m_box, m_plot, 0, 0, 100, 45,
 			 g_gr->images().get("pics/but1.png"))
 		, UI::Box::AlignTop
@@ -285,13 +285,13 @@ m_selected_information(0)
 
 }
 
-General_Statistics_Menu::~General_Statistics_Menu() {
-	Game & game = ref_cast<Interactive_GameBase, UI::Panel>(*get_parent()).game();
+GeneralStatisticsMenu::~GeneralStatisticsMenu() {
+	Game & game = ref_cast<InteractiveGameBase, UI::Panel>(*get_parent()).game();
 	if (game.is_loaded()) {
 		// Save informations for recreation, if window is reopened
 		m_my_registry->selected_information = m_selected_information;
 		m_my_registry->time = m_plot.get_time();
-		Player_Number const nr_players = game.map().get_nrplayers();
+		PlayerNumber const nr_players = game.map().get_nrplayers();
 		iterate_players_existing_novar(p, nr_players, game) {
 			m_my_registry->selected_players[p - 1] = m_cbs[p - 1]->get_perm_pressed();
 		}
@@ -302,13 +302,13 @@ General_Statistics_Menu::~General_Statistics_Menu() {
  * called when the help button was clicked
  */
 // TODO(unknown): Implement help
-void General_Statistics_Menu::clicked_help() {}
+void GeneralStatisticsMenu::clicked_help() {}
 
 
 /*
  * Cb has been changed to this state
  */
-void General_Statistics_Menu::cb_changed_to(int32_t const id)
+void GeneralStatisticsMenu::cb_changed_to(int32_t const id)
 {
 	// This represents our player number
 	m_cbs[id - 1]->set_perm_pressed(!m_cbs[id - 1]->get_perm_pressed());
@@ -321,9 +321,9 @@ void General_Statistics_Menu::cb_changed_to(int32_t const id)
 /*
  * The radiogroup has changed
  */
-void General_Statistics_Menu::radiogroup_changed(int32_t const id) {
+void GeneralStatisticsMenu::radiogroup_changed(int32_t const id) {
 	size_t const statistics_size =
-		ref_cast<Interactive_GameBase, UI::Panel>(*get_parent()).game()
+		ref_cast<InteractiveGameBase, UI::Panel>(*get_parent()).game()
 		.get_general_statistics().size();
 	for (uint32_t i = 0; i < statistics_size; ++i)
 		if (m_cbs[i]) {

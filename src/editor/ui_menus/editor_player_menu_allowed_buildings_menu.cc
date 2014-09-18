@@ -25,7 +25,7 @@
 #include "logic/player.h"
 #include "logic/tribe.h"
 
-using Widelands::Building_Index;
+using Widelands::BuildingIndex;
 
 /**
  * Create all the buttons etc...
@@ -41,8 +41,8 @@ using Widelands::Building_Index;
 #define middle_button_width  40
 #define middle_button_height 20
 #define label_height         20
-Editor_Player_Menu_Allowed_Buildings_Menu::
-Editor_Player_Menu_Allowed_Buildings_Menu
+EditorPlayerMenuAllowedBuildingsMenu::
+EditorPlayerMenuAllowedBuildingsMenu
 		(UI::Panel                  * parent,
 		 Widelands::Player          & player,
 		 UI::UniqueWindow::Registry * registry)
@@ -95,22 +95,22 @@ Editor_Player_Menu_Allowed_Buildings_Menu
 		 false)
 {
 	m_forbid_button.sigclicked.connect
-		(boost::bind(&Editor_Player_Menu_Allowed_Buildings_Menu::clicked, boost::ref(*this), false));
+		(boost::bind(&EditorPlayerMenuAllowedBuildingsMenu::clicked, boost::ref(*this), false));
 	m_allow_button.sigclicked.connect
-		(boost::bind(&Editor_Player_Menu_Allowed_Buildings_Menu::clicked, boost::ref(*this), true));
+		(boost::bind(&EditorPlayerMenuAllowedBuildingsMenu::clicked, boost::ref(*this), true));
 
 	m_allowed.selected.connect
-		(boost::bind(&Editor_Player_Menu_Allowed_Buildings_Menu::allowed_selected, this, _1));
+		(boost::bind(&EditorPlayerMenuAllowedBuildingsMenu::allowed_selected, this, _1));
 	m_allowed.double_clicked.connect
-		(boost::bind(&Editor_Player_Menu_Allowed_Buildings_Menu::allowed_double_clicked, this, _1));
+		(boost::bind(&EditorPlayerMenuAllowedBuildingsMenu::allowed_double_clicked, this, _1));
 	m_forbidden.selected.connect
-		(boost::bind(&Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_selected, this, _1));
+		(boost::bind(&EditorPlayerMenuAllowedBuildingsMenu::forbidden_selected, this, _1));
 	m_forbidden.double_clicked.connect
-		(boost::bind(&Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_double_clicked, this, _1));
+		(boost::bind(&EditorPlayerMenuAllowedBuildingsMenu::forbidden_double_clicked, this, _1));
 
-	const Widelands::Tribe_Descr & tribe = player.tribe();
-	Building_Index const nr_buildings = tribe.get_nrbuildings();
-	for (Building_Index i = 0; i < nr_buildings; ++i) {
+	const Widelands::TribeDescr & tribe = player.tribe();
+	BuildingIndex const nr_buildings = tribe.get_nrbuildings();
+	for (BuildingIndex i = 0; i < nr_buildings; ++i) {
 		const Widelands::BuildingDescr & building =
 			*tribe.get_building_descr(i);
 		if (!building.is_enhanced() && !building.is_buildable())
@@ -127,13 +127,13 @@ Editor_Player_Menu_Allowed_Buildings_Menu
  * Updates all UI::Textareas in the UI::Window to represent currently
  * set values
 */
-void Editor_Player_Menu_Allowed_Buildings_Menu::update() {}
+void EditorPlayerMenuAllowedBuildingsMenu::update() {}
 
 /**
  * Unregister from the registry pointer
 */
-Editor_Player_Menu_Allowed_Buildings_Menu::
-~Editor_Player_Menu_Allowed_Buildings_Menu
+EditorPlayerMenuAllowedBuildingsMenu::
+~EditorPlayerMenuAllowedBuildingsMenu
 	()
 {}
 
@@ -142,16 +142,16 @@ Editor_Player_Menu_Allowed_Buildings_Menu::
  * UI Action callback functions
  */
 
-void Editor_Player_Menu_Allowed_Buildings_Menu::clicked(const bool allow) {
-	UI::Listselect<Building_Index> & source = allow ? m_forbidden : m_allowed;
-	UI::Listselect<Building_Index> & target = allow ? m_allowed : m_forbidden;
+void EditorPlayerMenuAllowedBuildingsMenu::clicked(const bool allow) {
+	UI::Listselect<BuildingIndex> & source = allow ? m_forbidden : m_allowed;
+	UI::Listselect<BuildingIndex> & target = allow ? m_allowed : m_forbidden;
 
 	assert //  The button should have been disabled if nothing is selected.
 		(source.selection_index()
 		 !=
 		 UI::Listselect<intptr_t>::no_selection_index());
 
-	Building_Index const building_index = source.get_selected();
+	BuildingIndex const building_index = source.get_selected();
 	source.remove_selected();
 	const Widelands::BuildingDescr & building =
 		*m_player.tribe().get_building_descr(building_index);
@@ -163,26 +163,26 @@ void Editor_Player_Menu_Allowed_Buildings_Menu::clicked(const bool allow) {
 	m_player.allow_building_type(building_index, allow);
 }
 
-void Editor_Player_Menu_Allowed_Buildings_Menu::
+void EditorPlayerMenuAllowedBuildingsMenu::
 	allowed_selected(uint32_t index)
 {
 	m_forbid_button.set_enabled
 		(index != UI::Listselect<intptr_t>::no_selection_index());
 }
 
-void Editor_Player_Menu_Allowed_Buildings_Menu::
+void EditorPlayerMenuAllowedBuildingsMenu::
 	forbidden_selected(uint32_t index)
 {
 	m_allow_button.set_enabled
 		(index != UI::Listselect<intptr_t>::no_selection_index());
 }
 
-void Editor_Player_Menu_Allowed_Buildings_Menu::allowed_double_clicked(uint32_t)
+void EditorPlayerMenuAllowedBuildingsMenu::allowed_double_clicked(uint32_t)
 {
 	clicked(false);
 }
 
-void Editor_Player_Menu_Allowed_Buildings_Menu::
+void EditorPlayerMenuAllowedBuildingsMenu::
 	forbidden_double_clicked(uint32_t)
 {
 	clicked(true);

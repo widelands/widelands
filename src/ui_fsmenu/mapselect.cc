@@ -40,11 +40,11 @@
 #include "wui/text_constants.h"
 
 
-using Widelands::WL_Map_Loader;
+using Widelands::WidelandsMapLoader;
 
-Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
+FullscreenMenuMapSelect::FullscreenMenuMapSelect
 		(GameSettingsProvider * const settings, GameController * const ctrl) :
-	Fullscreen_Menu_Base("choosemapmenu.jpg"),
+	FullscreenMenuBase("choosemapmenu.jpg"),
 
 // Values for alignment and size
 	m_butw (get_w() / 4),
@@ -120,8 +120,8 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	m_settings(settings),
 	m_ctrl(ctrl)
 {
-	m_back.sigclicked.connect(boost::bind(&Fullscreen_Menu_MapSelect::end_modal, boost::ref(*this), 0));
-	m_ok.sigclicked.connect(boost::bind(&Fullscreen_Menu_MapSelect::ok, boost::ref(*this)));
+	m_back.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::end_modal, boost::ref(*this), 0));
+	m_ok.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::ok, boost::ref(*this)));
 
 	m_title.set_textstyle(ts_big());
 	m_label_load_map_as_scenario.set_textstyle(ts_small());
@@ -148,13 +148,13 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	m_table.set_column_compare
 		(1,
 		 boost::bind
-		 (&Fullscreen_Menu_MapSelect::compare_maprows, this, _1, _2));
+		 (&FullscreenMenuMapSelect::compare_maprows, this, _1, _2));
 	m_table.set_sort_column(0);
 	m_load_map_as_scenario.set_state(false);
 	m_load_map_as_scenario.set_enabled(false);
 
-	m_table.selected.connect(boost::bind(&Fullscreen_Menu_MapSelect::map_selected, this, _1));
-	m_table.double_clicked.connect(boost::bind(&Fullscreen_Menu_MapSelect::double_clicked, this, _1));
+	m_table.selected.connect(boost::bind(&FullscreenMenuMapSelect::map_selected, this, _1));
+	m_table.double_clicked.connect(boost::bind(&FullscreenMenuMapSelect::double_clicked, this, _1));
 
 	UI::Box* vbox = new UI::Box(
 	   this, m_table.get_x(), m_table.get_y() - 120, UI::Box::Horizontal, m_table.get_w());
@@ -193,14 +193,14 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	fill_list();
 }
 
-void Fullscreen_Menu_MapSelect::think()
+void FullscreenMenuMapSelect::think()
 {
 	if (m_ctrl)
 		m_ctrl->think();
 }
 
 
-bool Fullscreen_Menu_MapSelect::compare_maprows
+bool FullscreenMenuMapSelect::compare_maprows
 	(uint32_t rowa, uint32_t rowb)
 {
 	const MapData & r1 = m_maps_data[m_table[rowa]];
@@ -216,12 +216,12 @@ bool Fullscreen_Menu_MapSelect::compare_maprows
 	return r1.name < r2.name;
 }
 
-bool Fullscreen_Menu_MapSelect::is_scenario()
+bool FullscreenMenuMapSelect::is_scenario()
 {
 	return m_load_map_as_scenario.get_state();
 }
 
-MapData const * Fullscreen_Menu_MapSelect::get_map() const
+MapData const * FullscreenMenuMapSelect::get_map() const
 {
 	if (!m_table.has_selection())
 		return nullptr;
@@ -229,7 +229,7 @@ MapData const * Fullscreen_Menu_MapSelect::get_map() const
 }
 
 
-void Fullscreen_Menu_MapSelect::ok()
+void FullscreenMenuMapSelect::ok()
 {
 	const MapData & mapdata = m_maps_data[m_table.get_selected()];
 
@@ -246,7 +246,7 @@ void Fullscreen_Menu_MapSelect::ok()
  * When this happens, the information display at the right needs to be
  * refreshed.
  */
-void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
+void FullscreenMenuMapSelect::map_selected(uint32_t)
 {
 	const MapData & map = m_maps_data[m_table.get_selected()];
 
@@ -275,7 +275,7 @@ void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
 /**
  * listbox got double clicked
  */
-void Fullscreen_Menu_MapSelect::double_clicked(uint32_t) {
+void FullscreenMenuMapSelect::double_clicked(uint32_t) {
 	ok();
 }
 
@@ -298,7 +298,7 @@ void Fullscreen_Menu_MapSelect::double_clicked(uint32_t) {
  * \note special case is, if this is a multiplayer game on a dedicated server and
  * the client wants to change the map - in that case the maps available on the server are shown.
  */
-void Fullscreen_Menu_MapSelect::fill_list()
+void FullscreenMenuMapSelect::fill_list()
 {
 	m_maps_data.clear();
 	m_table.clear();
@@ -307,7 +307,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 		// This is the normal case
 
 		//  Fill it with all files we find in all directories.
-		filenameset_t files = g_fs->ListDirectory(m_curdir);
+		FilenameSet files = g_fs->ListDirectory(m_curdir);
 
 		int32_t ndirs = 0;
 
@@ -321,7 +321,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 			map.filename = m_curdir.substr(0, m_curdir.rfind('\\'));
 	#endif
 			m_maps_data.push_back(map);
-			UI::Table<uintptr_t const>::Entry_Record & te =
+			UI::Table<uintptr_t const>::EntryRecord & te =
 				m_table.add(m_maps_data.size() - 1);
 
 			te.set_string(0, "");
@@ -336,7 +336,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 
 		//Add subdirectories to the list (except for uncompressed maps)
 		for
-			(filenameset_t::iterator pname = files.begin();
+			(FilenameSet::iterator pname = files.begin();
 			pname != files.end();
 			++pname)
 		{
@@ -348,14 +348,14 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				continue;
 			if (!g_fs->IsDirectory(name))
 				continue;
-			if (WL_Map_Loader::is_widelands_map(name))
+			if (WidelandsMapLoader::is_widelands_map(name))
 				continue;
 
 			MapData dir;
 			dir.filename = name;
 
 			m_maps_data.push_back(dir);
-			UI::Table<uintptr_t const>::Entry_Record & te = m_table.add(m_maps_data.size() - 1);
+			UI::Table<uintptr_t const>::EntryRecord & te = m_table.add(m_maps_data.size() - 1);
 
 			te.set_string(0, "");
 			te.set_picture
@@ -367,16 +367,16 @@ void Fullscreen_Menu_MapSelect::fill_list()
 
 		//Add map files(compressed maps) and directories(uncompressed)
 		{
-			Widelands::Map map; //  Map_Loader needs a place to put it's preload data
+			Widelands::Map map; //  MapLoader needs a place to put its preload data
 
 			for
-				(filenameset_t::iterator pname = files.begin();
+				(FilenameSet::iterator pname = files.begin();
 				pname != files.end();
 				++pname)
 			{
 				char const * const name = pname->c_str();
 
-				std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(name);
+				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(name);
 				if (!ml)
 					continue;
 
@@ -407,7 +407,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 
 
 					m_maps_data.push_back(mapdata);
-					UI::Table<uintptr_t const>::Entry_Record & te = m_table.add(m_maps_data.size() - 1);
+					UI::Table<uintptr_t const>::EntryRecord & te = m_table.add(m_maps_data.size() - 1);
 
 					char buf[256];
 					sprintf(buf, "(%i)", mapdata.nrplayers);
@@ -415,7 +415,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 					i18n::Textdomain td("maps");
 					te.set_picture
 						(1,  g_gr->images().get
-						 (dynamic_cast<WL_Map_Loader*>(ml.get()) ?
+						 (dynamic_cast<WidelandsMapLoader*>(ml.get()) ?
 							  (mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png") :
 						"pics/ls_s2map.png"),
 						_(mapdata.name));
@@ -431,13 +431,13 @@ void Fullscreen_Menu_MapSelect::fill_list()
 	} else {
 		//client changing maps on dedicated server
 		for (uint16_t i = 0; i < m_settings->settings().maps.size(); ++i) {
-			Widelands::Map map; //  Map_Loader needs a place to put it's preload data
+			Widelands::Map map; //  MapLoader needs a place to put its preload data
 			i18n::Textdomain td("maps");
 			MapData mapdata;
 
 			const DedicatedMapInfos & dmap = m_settings->settings().maps.at(i);
 			char const * const name = dmap.path.c_str();
-			std::unique_ptr<Widelands::Map_Loader> ml(map.get_correct_loader(name));
+			std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(name));
 			try {
 				if (!ml)
 					throw wexception("Not useable!");
@@ -463,7 +463,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 
 				// Finally write the entry to the list
 				m_maps_data.push_back(mapdata);
-				UI::Table<uintptr_t const>::Entry_Record & te = m_table.add(m_maps_data.size() - 1);
+				UI::Table<uintptr_t const>::EntryRecord & te = m_table.add(m_maps_data.size() - 1);
 
 				char buf[256];
 				sprintf(buf, "(%i)", mapdata.nrplayers);
@@ -489,7 +489,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 
 				// Finally write the entry to the list
 				m_maps_data.push_back(mapdata);
-				UI::Table<uintptr_t const>::Entry_Record & te = m_table.add(m_maps_data.size() - 1);
+				UI::Table<uintptr_t const>::EntryRecord & te = m_table.add(m_maps_data.size() - 1);
 
 				char buf[256];
 				sprintf(buf, "(%i)", mapdata.nrplayers);
@@ -510,7 +510,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 /*
  * Add a tag to the checkboxes
  */
-UI::Checkbox * Fullscreen_Menu_MapSelect::_add_tag_checkbox
+UI::Checkbox * FullscreenMenuMapSelect::_add_tag_checkbox
 	(UI::Box * box, std::string tag, std::string displ_name)
 {
 	int32_t id = m_tags_ordered.size();
@@ -518,7 +518,7 @@ UI::Checkbox * Fullscreen_Menu_MapSelect::_add_tag_checkbox
 
 	UI::Checkbox * cb = new UI::Checkbox(box, Point(0, 0));
 	cb->changedto.connect
-		(boost::bind(&Fullscreen_Menu_MapSelect::_tagbox_changed, this, id, _1));
+		(boost::bind(&FullscreenMenuMapSelect::_tagbox_changed, this, id, _1));
 
 	box->add(cb, UI::Box::AlignLeft, true);
 	UI::Textarea * ta = new UI::Textarea(box, displ_name, UI::Align_CenterLeft);
@@ -533,7 +533,7 @@ UI::Checkbox * Fullscreen_Menu_MapSelect::_add_tag_checkbox
 /*
  * One of the tagboxes has changed
  */
-void Fullscreen_Menu_MapSelect::_tagbox_changed(int32_t id, bool to) {
+void FullscreenMenuMapSelect::_tagbox_changed(int32_t id, bool to) {
 	if (id == 0) { // Show all maps checbox
 		if (to) {
 			for (UI::Checkbox * checkbox : m_tags_checkboxes) {

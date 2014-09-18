@@ -29,7 +29,7 @@
 namespace DebugConsole {
 
 struct Console : public ChatProvider, public Handler {
-	typedef std::map<std::string, Handler::HandlerFn> CommandMap;
+	using CommandMap = std::map<std::string, Handler::HandlerFn>;
 
 	std::vector<ChatMessage> messages;
 	CommandMap commands;

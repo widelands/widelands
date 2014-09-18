@@ -136,7 +136,7 @@ CritterDescr::CritterDescr(char const* const _name,
                                      const std::string& directory,
                                      Profile& prof,
                                      Section& global_s,
-												 Tribe_Descr & _tribe)
+												 TribeDescr & _tribe)
 	:
 	BobDescr(MapObjectType::CRITTER, _name, _descname, &_tribe)
 {
@@ -398,8 +398,8 @@ const BobProgramBase * Critter::Loader::get_program
 	return critter.descr().get_program(name);
 }
 
-MapObject::Loader* Critter::load(Editor_Game_Base& egbase,
-												  MapMapObjectLoader& mol,
+MapObject::Loader* Critter::load(EditorGameBase& egbase,
+												  MapObjectLoader& mol,
                                       FileRead& fr,
                                       const OneWorldLegacyLookupTable& lookup_table) {
 	std::unique_ptr<Loader> loader(new Loader);
@@ -420,19 +420,19 @@ MapObject::Loader* Critter::load(Editor_Game_Base& egbase,
 			} else {
 				egbase.manually_load_tribe(owner);
 
-				if (const Tribe_Descr * tribe = egbase.get_tribe(owner))
+				if (const TribeDescr * tribe = egbase.get_tribe(owner))
 					descr = dynamic_cast<const CritterDescr *>
 						(tribe->get_bob_descr(critter_name));
 			}
 
 			if (!descr)
-				throw game_data_error
+				throw GameDataError
 					("undefined critter %s/%s", owner.c_str(), critter_name.c_str());
 
 			loader->init(egbase, mol, descr->create_object());
 			loader->load(fr);
 		} else
-			throw game_data_error("unknown/unhandled version %u", version);
+			throw GameDataError("unknown/unhandled version %u", version);
 	} catch (const std::exception & e) {
 		throw wexception("loading critter: %s", e.what());
 	}
@@ -441,7 +441,7 @@ MapObject::Loader* Critter::load(Editor_Game_Base& egbase,
 }
 
 void Critter::save
-	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
+	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(HeaderCritter);
 	fw.Unsigned8(CRITTER_SAVEGAME_VERSION);

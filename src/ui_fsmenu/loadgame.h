@@ -34,10 +34,10 @@
 #include "ui_basic/textarea.h"
 
 namespace Widelands {
-class Editor_Game_Base;
+class EditorGameBase;
 class Game;
 class Map;
-class Map_Loader;
+class MapLoader;
 }
 class Image;
 class RenderTarget;
@@ -45,8 +45,8 @@ class GameController;
 struct GameSettingsProvider;
 
 /// Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu.
-struct Fullscreen_Menu_LoadGame : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_LoadGame
+struct FullscreenMenuLoadGame : public FullscreenMenuBase {
+	FullscreenMenuLoadGame
 		(Widelands::Game &, GameSettingsProvider * gsp = nullptr, GameController * gc = nullptr);
 
 	const std::string & filename() {return m_filename;}
@@ -86,7 +86,7 @@ private:
 	UI::Icon                                        m_minimap_icon;
 	std::string                                     m_filename;
 
-	filenameset_t                                   m_gamefiles;
+	FilenameSet                                   m_gamefiles;
 
 	GameSettingsProvider                          * m_settings;
 	GameController                                * m_ctrl;

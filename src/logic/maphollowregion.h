@@ -31,10 +31,10 @@ namespace Widelands {
  *
  * \note The order in which fields are returned is not guarantueed.
  */
-template <typename Area_type = Area<> > struct MapHollowRegion {
-	MapHollowRegion(const Map & map, const HollowArea<Area_type> hollow_area);
+template <typename AreaType = Area<> > struct MapHollowRegion {
+	MapHollowRegion(const Map & map, const HollowArea<AreaType> hollow_area);
 
-	const typename Area_type::Coords_type& location() const {
+	const typename AreaType::CoordsType& location() const {
 		return m_hollow_area;
 	}
 
@@ -64,13 +64,13 @@ private:
 		Bottom = 8, // below the hole
 	};
 
-	HollowArea<Area_type> m_hollow_area;
+	HollowArea<AreaType> m_hollow_area;
 	Phase m_phase;
 	const uint32_t m_delta_radius;
 	uint32_t m_row; // # of rows completed in this phase
 	uint32_t m_rowwidth; // # of fields to return per row
 	uint32_t m_rowpos; // # of fields we have returned in this row
-	typename Area_type::Coords_type m_left; //  left-most node of current row
+	typename AreaType::CoordsType m_left; //  left-most node of current row
 };
 
 }

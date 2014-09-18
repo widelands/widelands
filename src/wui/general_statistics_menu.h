@@ -27,12 +27,12 @@
 #include "ui_basic/unique_window.h"
 #include "wui/plot_area.h"
 
-class Interactive_GameBase;
+class InteractiveGameBase;
 namespace UI {
 struct Radiogroup;
 }
 
-struct General_Statistics_Menu : public UI::UniqueWindow {
+struct GeneralStatisticsMenu : public UI::UniqueWindow {
 
 	// Custom registry, to store the selected_information as well.
 	struct Registry : public UI::UniqueWindow::Registry {
@@ -40,22 +40,22 @@ struct General_Statistics_Menu : public UI::UniqueWindow {
 			UI::UniqueWindow::Registry(),
 			selected_information(0),
 			selected_players(true, MAX_PLAYERS),
-			time(WUIPlot_Area::TIME_GAME)
+			time(WuiPlotArea::TIME_GAME)
 		{}
 
 		int32_t selected_information;
 		std::vector<bool> selected_players;
-		WUIPlot_Area::TIME time;
+		WuiPlotArea::TIME time;
 	};
 
-	General_Statistics_Menu
-		(Interactive_GameBase &, Registry &);
-	virtual ~General_Statistics_Menu();
+	GeneralStatisticsMenu
+		(InteractiveGameBase &, Registry &);
+	virtual ~GeneralStatisticsMenu();
 
 private:
 	Registry           * m_my_registry;
 	UI::Box              m_box;
-	WUIPlot_Area         m_plot;
+	WuiPlotArea         m_plot;
 	UI::Radiogroup       m_radiogroup;
 	int32_t              m_selected_information;
 	UI::Button         * m_cbs[MAX_PLAYERS];

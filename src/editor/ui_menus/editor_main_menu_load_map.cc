@@ -44,12 +44,12 @@
 #include "ui_basic/textarea.h"
 #include "wui/overlay_manager.h"
 
-using Widelands::WL_Map_Loader;
+using Widelands::WidelandsMapLoader;
 
 /**
  * Create all the buttons etc...
 */
-Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive & parent)
+MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
 	: UI::Window(&parent, "load_map_menu", 0, 0, 500, 300, _("Load Map"))
 {
 	int32_t const spacing =  5;
@@ -62,8 +62,8 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive & parent)
 		(this,
 		 posx, posy,
 		 get_inner_w() / 2 - spacing, get_inner_h() - spacing - offsy - 40);
-	m_ls->selected.connect(boost::bind(&Main_Menu_Load_Map::selected, this, _1));
-	m_ls->double_clicked.connect(boost::bind(&Main_Menu_Load_Map::double_clicked, this, _1));
+	m_ls->selected.connect(boost::bind(&MainMenuLoadMap::selected, this, _1));
+	m_ls->double_clicked.connect(boost::bind(&MainMenuLoadMap::double_clicked, this, _1));
 
 	posx = get_inner_w() / 2 + spacing;
 	posy += 20;
@@ -99,7 +99,7 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive & parent)
 	new UI::Textarea
 		(this, posx, posy, 70, 20, _("Descr:"), UI::Align_CenterLeft);
 	m_descr =
-		new UI::Multiline_Textarea
+		new UI::MultilineTextarea
 			(this,
 			 posx + 70, posy,
 			 get_inner_w() - posx - spacing - 70,
@@ -115,14 +115,14 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive & parent)
 		 _("OK"),
 		 std::string(),
 		 false);
-	m_ok_btn->sigclicked.connect(boost::bind(&Main_Menu_Load_Map::clicked_ok, this));
+	m_ok_btn->sigclicked.connect(boost::bind(&MainMenuLoadMap::clicked_ok, this));
 
 	UI::Button * cancelbtn = new UI::Button
 		(this, "cancel",
 		 posx, posy, 80, 20,
 		 g_gr->images().get("pics/but1.png"),
 		 _("Cancel"));
-	cancelbtn->sigclicked.connect(boost::bind(&Main_Menu_Load_Map::die, this));
+	cancelbtn->sigclicked.connect(boost::bind(&MainMenuLoadMap::die, this));
 
 	m_basedir = "maps";
 	m_curdir  = "maps";
@@ -134,16 +134,16 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive & parent)
 }
 
 
-void Main_Menu_Load_Map::clicked_ok() {
+void MainMenuLoadMap::clicked_ok() {
 	const char * const filename(m_ls->get_selected());
 
-	if (g_fs->IsDirectory(filename) && !WL_Map_Loader::is_widelands_map(filename)) {
+	if (g_fs->IsDirectory(filename) && !WidelandsMapLoader::is_widelands_map(filename)) {
 		m_curdir = filename;
 		m_ls->clear();
 		m_mapfiles.clear();
 		fill_list();
 	} else {
-		ref_cast<Editor_Interactive, UI::Panel>(*get_parent()).load(filename);
+		ref_cast<EditorInteractive, UI::Panel>(*get_parent()).load(filename);
 		die();
 	}
 }
@@ -151,15 +151,15 @@ void Main_Menu_Load_Map::clicked_ok() {
 /**
  * Called when a entry is selected
  */
-void Main_Menu_Load_Map::selected(uint32_t) {
+void MainMenuLoadMap::selected(uint32_t) {
 	const char * const name = m_ls->get_selected();
 
 	m_ok_btn->set_enabled(true);
 
-	if (!g_fs->IsDirectory(name) || WL_Map_Loader::is_widelands_map(name)) {
+	if (!g_fs->IsDirectory(name) || WidelandsMapLoader::is_widelands_map(name)) {
 		Widelands::Map map;
 		{
-			std::unique_ptr<Widelands::Map_Loader> map_loader = map.get_correct_loader(name);
+			std::unique_ptr<Widelands::MapLoader> map_loader = map.get_correct_loader(name);
 			map_loader->preload_map(true); //  This has worked before, no problem.
 		}
 
@@ -187,12 +187,12 @@ void Main_Menu_Load_Map::selected(uint32_t) {
 /**
  * An entry has been doubleclicked
  */
-void Main_Menu_Load_Map::double_clicked(uint32_t) {clicked_ok();}
+void MainMenuLoadMap::double_clicked(uint32_t) {clicked_ok();}
 
 /**
  * fill the file list
  */
-void Main_Menu_Load_Map::fill_list() {
+void MainMenuLoadMap::fill_list() {
 	//  Fill it with all files we find.
 	m_mapfiles = g_fs->ListDirectory(m_curdir);
 
@@ -212,9 +212,9 @@ void Main_Menu_Load_Map::fill_list() {
 			 g_gr->images().get("pics/ls_dir.png"));
 	}
 
-	const filenameset_t::const_iterator mapfiles_end = m_mapfiles.end();
+	const FilenameSet::const_iterator mapfiles_end = m_mapfiles.end();
 	for
-		(filenameset_t::const_iterator pname = m_mapfiles.begin();
+		(FilenameSet::const_iterator pname = m_mapfiles.begin();
 		 pname != mapfiles_end;
 		 ++pname)
 	{
@@ -223,7 +223,7 @@ void Main_Menu_Load_Map::fill_list() {
 			(strcmp(FileSystem::FS_Filename(name), ".")    &&
 			 strcmp(FileSystem::FS_Filename(name), "..")   &&
 			 g_fs->IsDirectory(name)                       &&
-			 !WL_Map_Loader::is_widelands_map(name))
+			 !WidelandsMapLoader::is_widelands_map(name))
 
 		m_ls->add
 			(FileSystem::FS_Filename(name),
@@ -234,12 +234,12 @@ void Main_Menu_Load_Map::fill_list() {
 	Widelands::Map map;
 
 	for
-		(filenameset_t::const_iterator pname = m_mapfiles.begin();
+		(FilenameSet::const_iterator pname = m_mapfiles.begin();
 		 pname != mapfiles_end;
 		 ++pname)
 	{
 		char const * const name = pname->c_str();
-		std::unique_ptr<Widelands::Map_Loader> map_loader = map.get_correct_loader(name);
+		std::unique_ptr<Widelands::MapLoader> map_loader = map.get_correct_loader(name);
 		if (map_loader.get() != nullptr) {
 			try {
 				map_loader->preload_map(true);
@@ -247,9 +247,9 @@ void Main_Menu_Load_Map::fill_list() {
 					(FileSystem::FS_Filename(name),
 					 name,
 					 g_gr->images().get
-						 (dynamic_cast<WL_Map_Loader*>(map_loader.get())
+						 (dynamic_cast<WidelandsMapLoader*>(map_loader.get())
 							? "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
-			} catch (const _wexception &) {} //  we simply skip illegal entries
+			} catch (const WException &) {} //  we simply skip illegal entries
 		}
 	}
 

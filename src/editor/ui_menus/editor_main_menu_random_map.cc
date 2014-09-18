@@ -43,7 +43,7 @@
 
 using namespace Widelands;
 
-Main_Menu_New_Random_Map::Main_Menu_New_Random_Map(Editor_Interactive& parent) :
+MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	UI::Window(&parent,
                 "random_map_menu",
                 (parent.get_w() - 260) / 2,
@@ -84,7 +84,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map(Editor_Interactive& parent) :
 			 width, 20,
 			 g_gr->images().get("pics/but1.png"));
 	m_nrEditbox->changed.connect
-		(boost::bind(&Main_Menu_New_Random_Map::nr_edit_box_changed, this));
+		(boost::bind(&MainMenuNewRandomMap::nr_edit_box_changed, this));
 	RNG rng;
 	rng.seed(clock());
 	rng.rand();
@@ -110,7 +110,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map(Editor_Interactive& parent) :
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_up.png"));
 	widthupbtn->sigclicked.connect
-		(boost::bind(&Main_Menu_New_Random_Map::button_clicked, this, MAP_W_PLUS));
+		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::MAP_W_PLUS));
 
 	UI::Button * widthdownbtn = new UI::Button
 		(this, "width_down",
@@ -118,7 +118,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map(Editor_Interactive& parent) :
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_down.png"));
 	widthdownbtn->sigclicked.connect
-		(boost::bind(&Main_Menu_New_Random_Map::button_clicked, this, MAP_W_MINUS));
+		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::MAP_W_MINUS));
 
 	m_width = new UI::Textarea(this, posx + spacing + 20, posy,
 										(boost::format(_("Width: %u"))
@@ -138,7 +138,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map(Editor_Interactive& parent) :
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_up.png"));
 	heightupbtn->sigclicked.connect
-		(boost::bind(&Main_Menu_New_Random_Map::button_clicked, this, MAP_H_PLUS));
+		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::MAP_H_PLUS));
 
 	UI::Button * heightdownbtn = new UI::Button
 		(this, "height_down",
@@ -146,7 +146,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map(Editor_Interactive& parent) :
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_down.png"));
 	heightdownbtn->sigclicked.connect
-		(boost::bind(&Main_Menu_New_Random_Map::button_clicked, this, MAP_H_MINUS));
+		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::MAP_H_MINUS));
 
 	posy += 20 + spacing + spacing;
 
@@ -159,7 +159,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map(Editor_Interactive& parent) :
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_up.png"));
 	waterupbtn->sigclicked.connect
-		(boost::bind(&Main_Menu_New_Random_Map::button_clicked, this, WATER_PLUS));
+		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::WATER_PLUS));
 
 	UI::Button * waterdownbtn = new UI::Button
 		(this, "water_down",
@@ -167,7 +167,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map(Editor_Interactive& parent) :
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_down.png"));
 	waterdownbtn->sigclicked.connect
-		(boost::bind(&Main_Menu_New_Random_Map::button_clicked, this, WATER_MINUS));
+		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::WATER_MINUS));
 
 	m_water = new UI::Textarea(this, posx + spacing + 20, posy,
 										(boost::format(_("Water: %i %%")) % m_waterval).str().c_str());
@@ -184,7 +184,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map(Editor_Interactive& parent) :
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_up.png"));
 	landupbtn->sigclicked.connect
-		(boost::bind(&Main_Menu_New_Random_Map::button_clicked, this, LAND_PLUS));
+		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::LAND_PLUS));
 
 	UI::Button * landdownbtn = new UI::Button
 		(this, "land_down",
@@ -192,7 +192,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map(Editor_Interactive& parent) :
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_down.png"));
 	landdownbtn->sigclicked.connect
-		(boost::bind(&Main_Menu_New_Random_Map::button_clicked, this, LAND_MINUS));
+		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::LAND_MINUS));
 
 	m_land = new UI::Textarea(this, posx + spacing + 20, posy,
 									  (boost::format(_("Land: %i %%")) % m_landval).str().c_str());
@@ -209,7 +209,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map(Editor_Interactive& parent) :
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_up.png"));
 	wastelandupbtn->sigclicked.connect
-		(boost::bind(&Main_Menu_New_Random_Map::button_clicked, this, WASTE_PLUS));
+		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::WASTE_PLUS));
 
 	UI::Button * wastelanddownbtn = new UI::Button
 		(this, "wasteland_down",
@@ -217,7 +217,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map(Editor_Interactive& parent) :
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_down.png"));
 	wastelanddownbtn->sigclicked.connect
-		(boost::bind(&Main_Menu_New_Random_Map::button_clicked, this, WASTE_MINUS));
+		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::WASTE_MINUS));
 
 	m_wasteland = new UI::Textarea(this, posx + spacing + 20, posy,
 											 (boost::format(_("Wasteland: %i %%")) % m_wastelandval).str().c_str());
@@ -242,7 +242,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map(Editor_Interactive& parent) :
 	m_island_mode = new UI::Checkbox(this, pos);
 	m_island_mode->set_state(true);
 	m_island_mode->changed.connect
-		(boost::bind(&Main_Menu_New_Random_Map::button_clicked, this, SWITCH_ISLAND_MODE));
+		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::SWITCH_ISLAND_MODE));
 
 	new UI::Textarea(this, posx, posy, _("Island mode:"));
 	posy += height + spacing;
@@ -265,7 +265,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map(Editor_Interactive& parent) :
 		 posx, posy, width, height,
 		 g_gr->images().get("pics/but1.png"),
 		 m_res_amounts[m_res_amount].c_str());
-	m_res->sigclicked.connect(boost::bind(&Main_Menu_New_Random_Map::button_clicked, this, SWITCH_RES));
+	m_res->sigclicked.connect(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::SWITCH_RES));
 
 	posy += height + spacing + spacing + spacing;
 
@@ -276,7 +276,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map(Editor_Interactive& parent) :
 		 g_gr->images().get("pics/but1.png"),
 		 m_world_descriptions[m_current_world].descrname);
 	m_world->sigclicked.connect
-		(boost::bind(&Main_Menu_New_Random_Map::button_clicked, this, SWITCH_WORLD));
+		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::SWITCH_WORLD));
 
 	posy += height + spacing + spacing + spacing;
 
@@ -293,7 +293,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map(Editor_Interactive& parent) :
 			 g_gr->images().get("pics/but1.png"));
 	m_idEditbox->setText("abcd-efgh-ijkl-mnop");
 	m_idEditbox->changed.connect
-		(boost::bind(&Main_Menu_New_Random_Map::id_edit_box_changed, this));
+		(boost::bind(&MainMenuNewRandomMap::id_edit_box_changed, this));
 	posy += height + spacing + spacing + spacing;
 
 
@@ -306,7 +306,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map(Editor_Interactive& parent) :
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_up.png"));
 	playerupbtn->sigclicked.connect
-		(boost::bind(&Main_Menu_New_Random_Map::button_clicked, this, PLAYER_PLUS));
+		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::PLAYER_PLUS));
 
 	UI::Button * playerdownbtn = new UI::Button
 		(this, "player_down",
@@ -314,7 +314,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map(Editor_Interactive& parent) :
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_down.png"));
 	playerdownbtn->sigclicked.connect
-		(boost::bind(&Main_Menu_New_Random_Map::button_clicked, this, PLAYER_MINUS));
+		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::PLAYER_MINUS));
 
 	m_players = new UI::Textarea(this, posx + spacing + 20, posy,
 										  (boost::format(_("Players: %u"))
@@ -331,7 +331,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map(Editor_Interactive& parent) :
 		 posx, posy, width, height,
 		 g_gr->images().get("pics/but0.png"),
 		 _("Generate Map"));
-	m_goButton->sigclicked.connect(boost::bind(&Main_Menu_New_Random_Map::clicked_create_map, this));
+	m_goButton->sigclicked.connect(boost::bind(&MainMenuNewRandomMap::clicked_create_map, this));
 	posy += height + spacing;
 
 	set_inner_size(get_inner_w(), posy);
@@ -344,65 +344,65 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map(Editor_Interactive& parent) :
 /**
  * Called, when button get clicked
 */
-void Main_Menu_New_Random_Map::button_clicked(Main_Menu_New_Random_Map::ButtonID n) {
+void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 	switch (n) {
-	case MAP_W_PLUS: ++m_w; break;
-	case MAP_W_MINUS:
+	case ButtonId::MAP_W_PLUS: ++m_w; break;
+	case ButtonId::MAP_W_MINUS:
 		--m_w;
 		if (m_w >= 0 && m_pn > m_w + 2)
 			--m_pn;
 		break;
-	case MAP_H_PLUS: ++m_h; break;
-	case MAP_H_MINUS:
+	case ButtonId::MAP_H_PLUS: ++m_h; break;
+	case ButtonId::MAP_H_MINUS:
 		--m_h;
 		if (m_h >= 0 && m_pn > m_h + 2)
 			--m_pn;
 		break;
-	case PLAYER_PLUS:
+	case ButtonId::PLAYER_PLUS:
 		// Only higher the player number, if there is enough space
 		if (m_pn < MAX_PLAYERS && m_pn < m_w + 2 && m_pn < m_h + 2)
 			++m_pn;
 		break;
-	case PLAYER_MINUS:
+	case ButtonId::PLAYER_MINUS:
 		if (m_pn > 1)
 			--m_pn;
 		break;
-	case WATER_PLUS:
+	case ButtonId::WATER_PLUS:
 		if (m_waterval < 60)
 			m_waterval += 5;
 		if (m_landval + m_waterval > 100)
 			m_landval -= 5;
 		break;
-	case WATER_MINUS:
+	case ButtonId::WATER_MINUS:
 		if (m_waterval > 0)
 			m_waterval -= 5;
 		break;
-	case LAND_PLUS:
+	case ButtonId::LAND_PLUS:
 		if (m_landval < 100)
 			m_landval += 5;
 		if (m_waterval + m_landval > 100)
 			m_waterval -= 5;
 		break;
-	case LAND_MINUS:
+	case ButtonId::LAND_MINUS:
 		if (m_landval > 0)
 			m_landval -= 5;
 		break;
-	case SWITCH_WORLD:
+	case ButtonId::SWITCH_WORLD:
 		++ m_current_world;
 		m_current_world %= m_world_descriptions.size();
 		m_world->set_title(m_world_descriptions[m_current_world].descrname);
 		break;
-	case SWITCH_ISLAND_MODE:
+	case ButtonId::SWITCH_ISLAND_MODE:
 		break;
-	case WASTE_PLUS:
+	case ButtonId::WASTE_PLUS:
 		if (m_wastelandval < 70)
 			m_wastelandval += 10;
 		break;
-	case WASTE_MINUS:
+	case ButtonId::WASTE_MINUS:
 		if (m_wastelandval > 0)
 			m_wastelandval -= 10;
 		break;
-	case SWITCH_RES:
+	case ButtonId::SWITCH_RES:
 		++ m_res_amount;
 		if (m_res_amount == m_res_amounts.size())
 			m_res_amount = 0;
@@ -436,10 +436,10 @@ void Main_Menu_New_Random_Map::button_clicked(Main_Menu_New_Random_Map::ButtonID
 	nr_edit_box_changed();  // Update ID String
 }
 
-void Main_Menu_New_Random_Map::clicked_create_map() {
-	Editor_Interactive & eia =
-		ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
-	Widelands::Editor_Game_Base & egbase = eia.egbase();
+void MainMenuNewRandomMap::clicked_create_map() {
+	EditorInteractive & eia =
+		ref_cast<EditorInteractive, UI::Panel>(*get_parent());
+	Widelands::EditorGameBase & egbase = eia.egbase();
 	Widelands::Map              & map    = egbase.map();
 	UI::ProgressWindow loader;
 
@@ -479,7 +479,7 @@ void Main_Menu_New_Random_Map::clicked_create_map() {
 	die();
 }
 
-void Main_Menu_New_Random_Map::id_edit_box_changed()
+void MainMenuNewRandomMap::id_edit_box_changed()
 {
 	UniqueRandomMapInfo mapInfo;
 
@@ -509,13 +509,13 @@ void Main_Menu_New_Random_Map::id_edit_box_changed()
 		m_res->set_title(m_res_amounts[m_res_amount].c_str());
 
 		// Update other values in UI as well
-		button_clicked(static_cast<ButtonID>(-1));
+		button_clicked(static_cast<ButtonId>(-1));
 
 		m_goButton->set_enabled(true);
 	}
 }
 
-void Main_Menu_New_Random_Map::nr_edit_box_changed()
+void MainMenuNewRandomMap::nr_edit_box_changed()
 {
 
 	try {
@@ -543,7 +543,7 @@ void Main_Menu_New_Random_Map::nr_edit_box_changed()
 	}
 }
 
-void Main_Menu_New_Random_Map::set_map_info
+void MainMenuNewRandomMap::set_map_info
 	(Widelands::UniqueRandomMapInfo & mapInfo) const
 {
 	mapInfo.h = Widelands::MAP_DIMENSIONS[m_h];
@@ -555,7 +555,7 @@ void Main_Menu_New_Random_Map::set_map_info
 	mapInfo.islandMode = m_island_mode->get_state();
 	mapInfo.numPlayers = m_pn;
 	mapInfo.resource_amount = static_cast
-		<Widelands::UniqueRandomMapInfo::Resource_Amount>
+		<Widelands::UniqueRandomMapInfo::ResourceAmount>
 			(m_res_amount);
 	mapInfo.world_name = m_world_descriptions[m_current_world].name;
 }

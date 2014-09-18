@@ -37,8 +37,8 @@ class Game;
  * so little to save, that everything is done by this class
  */
 
-struct Game_Saver {
-	Game_Saver(FileSystem &, Game &);
+struct GameSaver {
+	GameSaver(FileSystem &, Game &);
 
 	void save();
 

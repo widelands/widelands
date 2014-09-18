@@ -33,8 +33,8 @@
 #include "logic/player.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 
 namespace Widelands {
 
@@ -324,13 +324,13 @@ void Transfer::read(FileRead & fr, Transfer::ReadData & rd)
 }
 
 void Transfer::read_pointers
-	(MapMapObjectLoader & mol, const Widelands::Transfer::ReadData & rd)
+	(MapObjectLoader & mol, const Widelands::Transfer::ReadData & rd)
 {
 	if (rd.destination)
 		m_destination = &mol.get<PlayerImmovable>(rd.destination);
 }
 
-void Transfer::write(MapMapObjectSaver & mos, FileWrite & fw)
+void Transfer::write(MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(TRANSFER_SAVEGAME_VERSION);
 	fw.Unsigned32(mos.get_object_file_index_or_zero(m_destination.get(m_game)));

@@ -35,7 +35,7 @@ namespace UI {
  * =================
  */
 Tab::Tab
-	(Tab_Panel         * const parent,
+	(TabPanel         * const parent,
 	 uint32_t            const id,
 	 const std::string &       name,
 	 const Image* gpic,
@@ -65,13 +65,13 @@ void Tab::activate() {
 
 /*
  * =================
- * class Tab_Panel
+ * class TabPanel
  * =================
  */
 /**
- * Initialize an empty Tab_Panel
+ * Initialize an empty TabPanel
 */
-Tab_Panel::Tab_Panel
+TabPanel::TabPanel
 	(Panel * const parent,
 	 int32_t const x, int32_t const y,
 	 const Image* background)
@@ -81,7 +81,7 @@ Tab_Panel::Tab_Panel
 	m_highlight      (-1),
 	m_pic_background (background)
 {}
-Tab_Panel::Tab_Panel
+TabPanel::TabPanel
 	(Panel * const parent,
 	 int32_t const x, int32_t const y, int32_t const w, int32_t const h,
 	 const Image* background)
@@ -95,7 +95,7 @@ Tab_Panel::Tab_Panel
 /**
  * Resize the visible tab based on our actual size.
  */
-void Tab_Panel::layout()
+void TabPanel::layout()
 {
 	if (m_active < m_tabs.size()) {
 		Panel * const panel = m_tabs[m_active]->panel;
@@ -110,7 +110,7 @@ void Tab_Panel::layout()
 /**
  * Compute our desired size based on the currently selected tab.
  */
-void Tab_Panel::update_desired_size()
+void TabPanel::update_desired_size()
 {
 	uint32_t w;
 	uint32_t h;
@@ -144,7 +144,7 @@ void Tab_Panel::update_desired_size()
 /**
  * Add a new tab
 */
-uint32_t Tab_Panel::add
+uint32_t TabPanel::add
 	(const std::string & name,
 	 const Image* pic,
 	 Panel             * const panel,
@@ -167,7 +167,7 @@ uint32_t Tab_Panel::add
 /**
  * Make a different tab the currently active tab.
 */
-void Tab_Panel::activate(uint32_t idx)
+void TabPanel::activate(uint32_t idx)
 {
 	if (m_active < m_tabs.size())
 		m_tabs[m_active]->panel->set_visible(false);
@@ -179,7 +179,7 @@ void Tab_Panel::activate(uint32_t idx)
 	update_desired_size();
 }
 
-void Tab_Panel::activate(const std::string & name)
+void TabPanel::activate(const std::string & name)
 {
 	for (uint32_t t = 0; t < m_tabs.size(); ++t)
 		if (m_tabs[t]->get_name() == name)
@@ -189,14 +189,14 @@ void Tab_Panel::activate(const std::string & name)
 /**
  * Return the tab names in order
  */
-const Tab_Panel::TabList & Tab_Panel::tabs() {
+const TabPanel::TabList & TabPanel::tabs() {
 	return m_tabs;
 }
 
 /**
  * Draw the buttons and the tab
 */
-void Tab_Panel::draw(RenderTarget & dst)
+void TabPanel::draw(RenderTarget & dst)
 {
 	uint32_t idx;
 	uint32_t x;
@@ -281,7 +281,7 @@ void Tab_Panel::draw(RenderTarget & dst)
 /**
  * Cancel all highlights when the mouse leaves the panel
 */
-void Tab_Panel::handle_mousein(bool inside)
+void TabPanel::handle_mousein(bool inside)
 {
 	if (!inside && m_highlight >= 0) {
 		update
@@ -295,7 +295,7 @@ void Tab_Panel::handle_mousein(bool inside)
 /**
  * Update highlighting
 */
-bool Tab_Panel::handle_mousemove
+bool TabPanel::handle_mousemove
 	(uint8_t, int32_t const x, int32_t const y, int32_t, int32_t)
 {
 	int32_t hl;
@@ -331,7 +331,7 @@ bool Tab_Panel::handle_mousemove
 /**
  * Change the active tab if a tab button has been clicked
 */
-bool Tab_Panel::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
+bool TabPanel::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
 		int32_t id;
 
@@ -349,7 +349,7 @@ bool Tab_Panel::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 
 	return false;
 }
-bool Tab_Panel::handle_mouserelease(uint8_t, int32_t, int32_t)
+bool TabPanel::handle_mouserelease(uint8_t, int32_t, int32_t)
 {
 	return false;
 }

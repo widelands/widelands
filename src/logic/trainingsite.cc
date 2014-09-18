@@ -44,7 +44,7 @@ const uint32_t TrainingSite::training_state_multiplier = 12;
 TrainingSiteDescr::TrainingSiteDescr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
-	 const Tribe_Descr & _tribe, const World& world)
+	 const TribeDescr & _tribe, const World& world)
 	:
 	ProductionSiteDescr
 		(MapObjectType::TRAININGSITE, _name, _descname, directory, prof, global_s, _tribe, world),
@@ -104,7 +104,7 @@ Building & TrainingSiteDescr::create_object() const {
  * \return  the minimum level to which this building can downgrade a
  * specified attribute
  */
-int32_t TrainingSiteDescr::get_min_level(const tAttribute at) const {
+int32_t TrainingSiteDescr::get_min_level(const TrainingAttribute at) const {
 	switch (at) {
 	case atrHP:
 		return m_min_hp;
@@ -125,7 +125,7 @@ int32_t TrainingSiteDescr::get_min_level(const tAttribute at) const {
  * \param at  the attribute to investigate
  * \return  the maximum level to be attained at this site
  */
-int32_t TrainingSiteDescr::get_max_level(const tAttribute at) const {
+int32_t TrainingSiteDescr::get_max_level(const TrainingAttribute at) const {
 	switch (at) {
 	case atrHP:
 		return m_max_hp;
@@ -179,7 +179,7 @@ m_result         (Failed)
 		init_kick_state(atrEvade, d);
 }
 void
-TrainingSite::init_kick_state(const tAttribute & art, const TrainingSiteDescr & d)
+TrainingSite::init_kick_state(const TrainingAttribute & art, const TrainingSiteDescr & d)
 {
 		// Now with kick-out state saving implemented, initializing is an overkill
 		for (int t = d.get_min_level(art); t <= d.get_max_level(art); t++)
@@ -190,7 +190,7 @@ TrainingSite::init_kick_state(const tAttribute & art, const TrainingSiteDescr & 
 /**
  * Setup the building and request soldiers
  */
-void TrainingSite::init(Editor_Game_Base & egbase)
+void TrainingSite::init(EditorGameBase & egbase)
 {
 	ProductionSite::init(egbase);
 
@@ -226,7 +226,7 @@ void TrainingSite::set_economy(Economy * e)
  *
  * Cancel all soldier requests and release all soldiers
  */
-void TrainingSite::cleanup(Editor_Game_Base & egbase)
+void TrainingSite::cleanup(EditorGameBase & egbase)
 {
 	delete m_soldier_request;
 	m_soldier_request = nullptr;
@@ -337,7 +337,7 @@ void TrainingSite::request_soldier_callback
 #else
 	 Request         &,
 #endif
-	 Ware_Index,
+	 WareIndex,
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {
@@ -357,7 +357,7 @@ Takes one soldier and adds him to ours
 returns 0 on succes, -1 if there was no room for this soldier
 ===============
 */
-int TrainingSite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s) {
+int TrainingSite::incorporateSoldier(EditorGameBase & egbase, Soldier & s) {
 	if (s.get_location(egbase) != this) {
 		if (stationedSoldiers().size() + 1 > descr().get_max_number_of_soldiers())
 			return -1;
@@ -416,7 +416,7 @@ void TrainingSite::setSoldierCapacity(uint32_t const capacity) {
  */
 void TrainingSite::dropSoldier(Soldier & soldier)
 {
-	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
+	Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
 
 	std::vector<Soldier *>::iterator it =
 		std::find(m_soldiers.begin(), m_soldiers.end(), &soldier);
@@ -499,8 +499,8 @@ void TrainingSite::drop_stalled_soldiers(Game &)
 					break;
 				}
 
-				TypeAndLevel_t train_tl(it->attribute, level);
-				TrainFailCount_t::iterator tstep = training_failure_count.find(train_tl);
+				TypeAndLevel train_tl(it->attribute, level);
+				TrainFailCount::iterator tstep = training_failure_count.find(train_tl);
 				if (tstep ==  training_failure_count.end())
 					{
 						log("\nTrainingSite::drop_stalled_soldiers: ");
@@ -548,7 +548,7 @@ void TrainingSite::act(Game & game, uint32_t const data)
 }
 
 
-void TrainingSite::program_end(Game & game, Program_Result const result)
+void TrainingSite::program_end(Game & game, ProgramResult const result)
 {
 	m_result = result;
 	ProductionSite::program_end(game, result);
@@ -662,7 +662,7 @@ void TrainingSite::start_upgrade(Game & game, Upgrade & upgrade)
 										 % level).str().c_str());
 }
 
-TrainingSite::Upgrade * TrainingSite::get_upgrade(tAttribute const atr)
+TrainingSite::Upgrade * TrainingSite::get_upgrade(TrainingAttribute const atr)
 {
 	for (Upgrade& upgrade : m_upgrades) {
 		if (upgrade.attribute == atr) {
@@ -676,7 +676,7 @@ TrainingSite::Upgrade * TrainingSite::get_upgrade(tAttribute const atr)
 /**
  * Gets the priority of given attribute
  */
-int32_t TrainingSite::get_pri(tAttribute atr)
+int32_t TrainingSite::get_pri(TrainingAttribute atr)
 {
 	for (const Upgrade& upgrade : m_upgrades) {
 		if (upgrade.attribute == atr) {
@@ -689,7 +689,7 @@ int32_t TrainingSite::get_pri(tAttribute atr)
 /**
  * Sets the priority of given attribute
  */
-void TrainingSite::set_pri(tAttribute atr, int32_t prio)
+void TrainingSite::set_pri(TrainingAttribute atr, int32_t prio)
 {
 	if (prio < 0)
 		prio = 0;
@@ -706,7 +706,7 @@ void TrainingSite::set_pri(tAttribute atr, int32_t prio)
  * Only called from \ref calc_upgrades
  */
 void TrainingSite::add_upgrade
-	(tAttribute const atr, const std::string & prefix)
+	(TrainingAttribute const atr, const std::string & prefix)
 {
 	Upgrade u;
 	u.attribute = atr;
@@ -743,7 +743,7 @@ void TrainingSite::calc_upgrades() {
 void
 TrainingSite::trainingAttempted(uint32_t type, uint32_t level)
 	{
-	        TypeAndLevel_t key(type, level);
+	        TypeAndLevel key(type, level);
 		if (training_failure_count.find(key) == training_failure_count.end())
 			training_failure_count[key]  = std::make_pair(training_state_multiplier, 0);
 		else
@@ -757,7 +757,7 @@ TrainingSite::trainingAttempted(uint32_t type, uint32_t level)
 void
 TrainingSite::trainingSuccessful(uint32_t type, uint32_t level)
 {
-	TypeAndLevel_t key(type, level);
+	TypeAndLevel key(type, level);
 	// Here I assume that key exists: training has been attempted before it can succeed.
 	training_failure_count[key].first = 0;
 }
@@ -765,7 +765,7 @@ TrainingSite::trainingSuccessful(uint32_t type, uint32_t level)
 void
 TrainingSite::trainingDone()
 {
-	TrainFailCount_t::iterator it;
+	TrainFailCount::iterator it;
 	for (it = training_failure_count.begin(); it != training_failure_count.end(); it++)
 	{
 		// If a soldier is present at this training level, deteoriate

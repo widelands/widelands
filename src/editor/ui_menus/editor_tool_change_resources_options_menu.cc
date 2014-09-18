@@ -37,13 +37,13 @@
 const static int BUTTON_WIDTH = 20;
 const static int BUTTON_HEIGHT = 20;
 
-Editor_Tool_Change_Resources_Options_Menu::
-Editor_Tool_Change_Resources_Options_Menu
-		(Editor_Interactive             & parent,
-		 Editor_Increase_Resources_Tool & increase_tool,
+EditorToolChangeResourcesOptionsMenu::
+EditorToolChangeResourcesOptionsMenu
+		(EditorInteractive             & parent,
+		 EditorIncreaseResourcesTool & increase_tool,
 		 UI::UniqueWindow::Registry     & registry)
 	:
-	Editor_Tool_Options_Menu
+	EditorToolOptionsMenu
 		(parent, registry, 250, 120, _("Resources")),
 	m_change_by_label
 		(this,
@@ -103,22 +103,22 @@ Editor_Tool_Change_Resources_Options_Menu
 {
 	m_change_by_increase.sigclicked.connect
 		(boost::bind
-			(&Editor_Tool_Change_Resources_Options_Menu::clicked_button,
+			(&EditorToolChangeResourcesOptionsMenu::clicked_button,
 			 boost::ref(*this),
 			 Change_By_Increase));
 	m_change_by_decrease.sigclicked.connect
 		(boost::bind
-			(&Editor_Tool_Change_Resources_Options_Menu::clicked_button,
+			(&EditorToolChangeResourcesOptionsMenu::clicked_button,
 			 boost::ref(*this),
 			 Change_By_Decrease));
 	m_set_to_increase.sigclicked.connect
 		(boost::bind
-			(&Editor_Tool_Change_Resources_Options_Menu::clicked_button,
+			(&EditorToolChangeResourcesOptionsMenu::clicked_button,
 			 boost::ref(*this),
 			 Set_To_Increase));
 	m_set_to_decrease.sigclicked.connect
 		(boost::bind
-			(&Editor_Tool_Change_Resources_Options_Menu::clicked_button,
+			(&EditorToolChangeResourcesOptionsMenu::clicked_button,
 			 boost::ref(*this),
 			 Set_To_Decrease));
 
@@ -127,11 +127,11 @@ Editor_Tool_Change_Resources_Options_Menu
 	m_set_to_increase   .set_repeating(true);
 	m_set_to_decrease   .set_repeating(true);
 	const Widelands::World & world = parent.egbase().world();
-	Widelands::Resource_Index const nr_resources = world.get_nr_resources();
+	Widelands::ResourceIndex const nr_resources = world.get_nr_resources();
 
 	//  Find the maximal width and height for the resource pictures.
 	uint16_t resource_pic_max_width = 0, resource_pic_max_height = 0;
-	for (Widelands::Resource_Index i = 0; i < nr_resources; ++i) {
+	for (Widelands::ResourceIndex i = 0; i < nr_resources; ++i) {
 		const Image* pic = g_gr->images().get(world.get_resource(i)->get_editor_pic(100000));
 		resource_pic_max_width  = std::max(resource_pic_max_width,  pic->width());
 		resource_pic_max_height = std::max(resource_pic_max_height, pic->height());
@@ -143,15 +143,15 @@ Editor_Tool_Change_Resources_Options_Menu
 		(resource_pic_max_width + spacing());
 
 	m_radiogroup.changed.connect
-		(boost::bind(&Editor_Tool_Change_Resources_Options_Menu::selected, this));
+		(boost::bind(&EditorToolChangeResourcesOptionsMenu::selected, this));
 	m_radiogroup.clicked.connect
-		(boost::bind(&Editor_Tool_Change_Resources_Options_Menu::selected, this));
+		(boost::bind(&EditorToolChangeResourcesOptionsMenu::selected, this));
 
 	uint16_t cur_x = 0;
 	Point pos
 		(hmargin(), m_set_to_value.get_y() + m_set_to_value.get_h() + vspacing());
 	for
-		(Widelands::Resource_Index i = 0;
+		(Widelands::ResourceIndex i = 0;
 		 i < nr_resources;
 		 pos.x += resource_pic_max_width + hspacing(), ++cur_x, ++i)
 	{
@@ -176,7 +176,7 @@ Editor_Tool_Change_Resources_Options_Menu
 }
 
 
-void Editor_Tool_Change_Resources_Options_Menu::clicked_button(Button const n)
+void EditorToolChangeResourcesOptionsMenu::clicked_button(Button const n)
 {
 	assert
 		(m_increase_tool.get_change_by()
@@ -206,14 +206,14 @@ void Editor_Tool_Change_Resources_Options_Menu::clicked_button(Button const n)
 /**
  * called when a resource has been selected
  */
-void Editor_Tool_Change_Resources_Options_Menu::selected() {
+void EditorToolChangeResourcesOptionsMenu::selected() {
 	const int32_t n = m_radiogroup.get_state();
 
 	m_increase_tool.set_tool().set_cur_res(n);
 	m_increase_tool.set_cur_res(n);
 	m_increase_tool.decrease_tool().set_cur_res(n);
 
-	Widelands::Editor_Game_Base& egbase = ref_cast<Editor_Interactive, UI::Panel>(*get_parent()).egbase();
+	Widelands::EditorGameBase& egbase = ref_cast<EditorInteractive, UI::Panel>(*get_parent()).egbase();
 	Widelands::Map & map = egbase.map();
 	map.overlay_manager().register_overlay_callback_function(
 	   boost::bind(&Editor_Change_Resource_Tool_Callback, _1, boost::ref(map), boost::ref(egbase.world()), n));
@@ -226,7 +226,7 @@ void Editor_Tool_Change_Resources_Options_Menu::selected() {
 /**
  * Update all the textareas, so that they represent the correct values
 */
-void Editor_Tool_Change_Resources_Options_Menu::update() {
+void EditorToolChangeResourcesOptionsMenu::update() {
 
 	m_change_by_value.set_text(std::to_string(m_increase_tool.get_change_by()));
 
@@ -234,7 +234,7 @@ void Editor_Tool_Change_Resources_Options_Menu::update() {
 										static_cast<unsigned int>(m_increase_tool.set_tool().get_set_to())));
 
 	m_cur_selection.set_text
-		(ref_cast<Editor_Interactive, UI::Panel>(*get_parent()).egbase()
+		(ref_cast<EditorInteractive, UI::Panel>(*get_parent()).egbase()
 		 .world().get_resource(m_increase_tool.set_tool().get_cur_res())->descname());
 	m_cur_selection.set_pos
 		(Point

@@ -145,7 +145,7 @@ std::string FileSystem::getWorkingDirectory() const {
 	char cwd[PATH_MAX + 1];
 	char * const result = getcwd(cwd, PATH_MAX);
 	if (! result)
-		throw File_error("FileSystem::getWorkingDirectory()", "widelands", "can not run getcwd");
+		throw FileError("FileSystem::getWorkingDirectory()", "widelands", "can not run getcwd");
 
 	return std::string(cwd);
 }
@@ -352,13 +352,13 @@ std::string FileSystem::FS_FilenameWoExt(const char * const p)
 }
 
 /// Create a filesystem from a zipfile or a real directory
-/// \throw FileNotFound_error if root does not exist, is some kind of special
+/// \throw FileNotFoundError if root does not exist, is some kind of special
 /// file, loops around (via symlinks) or is too long for the OS/filesystem.
-/// \throw FileAccessDenied_error if the OS denies access (of course ;-)
+/// \throw FileAccessDeniedError if the OS denies access (of course ;-)
 /// \throw FileTypeError if root is neither a directory or regular file
-// TODO(unknown): Catch FileType_error in all users
+// TODO(unknown): Catch FileTypeError in all users
 // TODO(unknown): Check for existence before doing anything with the file/dir
-// TODO(unknown): Catch FileNotFound_error in all users
+// TODO(unknown): Catch FileNotFoundError in all users
 // TODO(unknown): throw FileTypeError if root is not a zipfile (exception from
 // ZipFilesystem)
 FileSystem & FileSystem::Create(const std::string & root)
@@ -375,10 +375,10 @@ FileSystem & FileSystem::Create(const std::string & root)
 #endif
 			 errno == ENAMETOOLONG)
 		{
-			throw FileNotFound_error("FileSystem::Create", root);
+			throw FileNotFoundError("FileSystem::Create", root);
 		}
 		if (errno == EACCES)
-			throw FileAccessDenied_error("FileSystem::Create", root);
+			throw FileAccessDeniedError("FileSystem::Create", root);
 	}
 
 	if (S_ISDIR(statinfo.st_mode)) {
@@ -388,7 +388,7 @@ FileSystem & FileSystem::Create(const std::string & root)
 		return *new ZipFilesystem(root);
 	}
 
-	throw FileType_error
+	throw FileTypeError
 		("FileSystem::Create", root,
 		 "cannot create virtual filesystem from file or directory");
 }

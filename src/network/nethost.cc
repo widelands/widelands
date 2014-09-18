@@ -37,7 +37,7 @@
 #include "build_info.h"
 #include "chat/chat.h"
 #include "game_io/game_loader.h"
-#include "game_io/game_preload_data_packet.h"
+#include "game_io/game_preload_packet.h"
 #include "helper.h"
 #include "io/dedicated_log.h"
 #include "io/fileread.h"
@@ -152,9 +152,9 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			/* no break */
 		case PlayerSettings::stateComputer:
 			{
-				const Computer_Player::ImplementationVector & impls =
-					Computer_Player::getImplementations();
-				Computer_Player::ImplementationVector::const_iterator it =
+				const ComputerPlayer::ImplementationVector & impls =
+					ComputerPlayer::getImplementations();
+				ComputerPlayer::ImplementationVector::const_iterator it =
 					impls.begin();
 				if (h->settings().players.at(number).ai.empty()) {
 					setPlayerAI(number, (*it)->name);
@@ -532,7 +532,7 @@ struct Client {
 	uint8_t playernum;
 	int16_t usernum;
 	std::string build_id;
-	md5_checksum syncreport;
+	Md5Checksum syncreport;
 	bool syncreport_arrived;
 	int32_t time; // last time report
 	uint32_t desiredspeed;
@@ -551,7 +551,7 @@ struct NetHostImpl {
 	HostGameSettingsProvider hp;
 	NetworkPlayerSettingsBackend npsb;
 
-	LAN_Game_Promoter * promoter;
+	LanGamePromoter * promoter;
 	TCPsocket svsock;
 	SDLNet_SocketSet sockset;
 
@@ -589,12 +589,12 @@ struct NetHostImpl {
 
 	/// All currently running computer players, *NOT* in one-one correspondence
 	/// with \ref Player objects
-	std::vector<Computer_Player *> computerplayers;
+	std::vector<ComputerPlayer *> computerplayers;
 
 	/// \c true if a syncreport is currently in flight
 	bool syncreport_pending;
 	int32_t syncreport_time;
-	md5_checksum syncreport;
+	Md5Checksum syncreport;
 	bool syncreport_arrived;
 
 	NetHostImpl(NetHost * const h) :
@@ -644,7 +644,7 @@ NetHost::NetHost (const std::string & playername, bool internet)
 	d->svsock = SDLNet_TCP_Open(&myaddr);
 
 	d->sockset = SDLNet_AllocSocketSet(16);
-	d->promoter = new LAN_Game_Promoter();
+	d->promoter = new LanGamePromoter();
 	d->game = nullptr;
 	d->pseudo_networktime = 0;
 	d->waiting = true;
@@ -653,7 +653,7 @@ NetHost::NetHost (const std::string & playername, bool internet)
 	d->syncreport_pending = false;
 	d->syncreport_time = 0;
 
-	d->settings.tribes = Widelands::Tribe_Descr::get_all_tribe_infos();
+	d->settings.tribes = Widelands::TribeDescr::get_all_tribe_infos();
 	setMultiplayerGameSettings();
 	d->settings.playernum = UserSettings::none();
 	d->settings.usernum = 0;
@@ -702,15 +702,15 @@ void NetHost::clearComputerPlayers()
 	d->computerplayers.clear();
 }
 
-void NetHost::initComputerPlayer(Widelands::Player_Number p)
+void NetHost::initComputerPlayer(Widelands::PlayerNumber p)
 {
 	d->computerplayers.push_back
-		(Computer_Player::getImplementation(d->game->get_player(p)->getAI())->instantiate(*d->game, p));
+		(ComputerPlayer::getImplementation(d->game->get_player(p)->getAI())->instantiate(*d->game, p));
 }
 
 void NetHost::initComputerPlayers()
 {
-	const Widelands::Player_Number nr_players = d->game->map().get_nrplayers();
+	const Widelands::PlayerNumber nr_players = d->game->map().get_nrplayers();
 	iterate_players_existing_novar(p, nr_players, *d->game) {
 		if (p == d->settings.playernum + 1)
 			continue;
@@ -790,7 +790,7 @@ void NetHost::run(bool const autorun)
 		}
 		d->dedicated_start = false;
 	} else {
-		Fullscreen_Menu_LaunchMPG lm(&d->hp, this);
+		FullscreenMenuLaunchMPG lm(&d->hp, this);
 		lm.setChatProvider(d->chat);
 		const int32_t code = lm.run();
 		if (code <= 0) {
@@ -831,8 +831,8 @@ void NetHost::run(bool const autorun)
 
 			if (d->settings.savegame) {
 				// Read and broadcast original win condition
-				Widelands::Game_Loader gl(d->settings.mapfilename, game);
-				Widelands::Game_Preload_Data_Packet gpdp;
+				Widelands::GameLoader gl(d->settings.mapfilename, game);
+				Widelands::GamePreloadPacket gpdp;
 				gl.preload_game(gpdp);
 
 				setWinConditionScript(gpdp.get_win_condition());
@@ -844,20 +844,20 @@ void NetHost::run(bool const autorun)
 			tipstext.push_back("multiplayer");
 			try {
 				tipstext.push_back(d->hp.getPlayersTribe());
-			} catch (GameSettingsProvider::No_Tribe) {}
+			} catch (GameSettingsProvider::NoTribe) {}
 			tips = new GameTips(*loaderUI, tipstext);
 
 			loaderUI->step(_("Preparing game"));
 
 			d->game = &game;
 			game.set_game_controller(this);
-			Interactive_GameBase * igb;
+			InteractiveGameBase * igb;
 			uint8_t pn = d->settings.playernum + 1;
 
 			if (d->settings.savegame) {
 				// Read and broadcast original win condition
-				Widelands::Game_Loader gl(d->settings.mapfilename, game);
-				Widelands::Game_Preload_Data_Packet gpdp;
+				Widelands::GameLoader gl(d->settings.mapfilename, game);
+				Widelands::GamePreloadPacket gpdp;
 				gl.preload_game(gpdp);
 
 				setWinConditionScript(gpdp.get_win_condition());
@@ -865,12 +865,12 @@ void NetHost::run(bool const autorun)
 
 			if ((pn > 0) && (pn <= UserSettings::highestPlayernum())) {
 				igb =
-					new Interactive_Player
+					new InteractivePlayer
 						(game, g_options.pull_section("global"),
 						pn, true);
 			} else
 				igb =
-					new Interactive_Spectator
+					new InteractiveSpectator
 						(game, g_options.pull_section("global"), true);
 			igb->set_chat_provider(d->chat);
 			game.set_ibase(igb);
@@ -1311,13 +1311,13 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 		std::vector<std::string> directories;
 		directories.push_back("maps");
 		while (!directories.empty()) {
-			filenameset_t files = g_fs->ListDirectory(directories.at(directories.size() - 1).c_str());
+			FilenameSet files = g_fs->ListDirectory(directories.at(directories.size() - 1).c_str());
 			directories.resize(directories.size() - 1);
 			Widelands::Map map;
-			const filenameset_t & gamefiles = files;
+			const FilenameSet & gamefiles = files;
 			for (const std::string& temp_filenames : gamefiles) {
 				char const * const name = temp_filenames.c_str();
-				std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(name);
+				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(name);
 				if (ml) {
 					map.set_filename(name);
 					ml->preload_map(true);
@@ -1343,14 +1343,14 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 
 	if (d->settings.saved_games.empty()) {
 		// Read in saved games
-		filenameset_t files = g_fs->ListDirectory("save");
+		FilenameSet files = g_fs->ListDirectory("save");
 		Widelands::Game game;
-		Widelands::Game_Preload_Data_Packet gpdp;
-		const filenameset_t & gamefiles = files;
+		Widelands::GamePreloadPacket gpdp;
+		const FilenameSet & gamefiles = files;
 		for (const std::string& temp_filenames : gamefiles) {
 			char const * const name = temp_filenames.c_str();
 			try {
-				Widelands::Game_Loader gl(name, game);
+				Widelands::GameLoader gl(name, game);
 				gl.preload_game(gpdp);
 
 				// If we are here, the saved game is valid
@@ -1363,7 +1363,7 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 				info.path     = name;
 				info.players  = static_cast<uint8_t>(s.get_safe_int("nr_players"));
 				d->settings.saved_games.push_back(info);
-			} catch (const _wexception &) {}
+			} catch (const WException &) {}
 		}
 	}
 
@@ -1998,8 +1998,9 @@ bool NetHost::writeMapTransferInfo(SendPacket & s, std::string mapfilename) {
 std::string NetHost::getComputerPlayerName(uint8_t const playernum)
 {
 	std::string name;
+	uint32_t suffix = playernum;
 	do {
-		name = (boost::format(_("Computer %u")) % static_cast<unsigned int>(++playernum)).str();
+		name = (boost::format(_("Computer %u")) % static_cast<unsigned int>(++suffix)).str();
 	} while (haveUserName(name, playernum));
 	return name;
 }
@@ -2414,7 +2415,7 @@ void NetHost::requestSyncReports()
 	s.Signed32(d->syncreport_time);
 	broadcast(s);
 
-	d->game->enqueue_command(new Cmd_NetCheckSync(d->syncreport_time, this));
+	d->game->enqueue_command(new CmdNetCheckSync(d->syncreport_time, this));
 
 	committedNetworkTime(d->syncreport_time);
 }
@@ -2637,8 +2638,8 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 					// Check if file is a saved game and if yes read out the needed data
 					try {
 						Widelands::Game game;
-						Widelands::Game_Preload_Data_Packet gpdp;
-						Widelands::Game_Loader gl(path, game);
+						Widelands::GamePreloadPacket gpdp;
+						Widelands::GameLoader gl(path, game);
 						gl.preload_game(gpdp);
 
 						// If we are here, it is a saved game file :)
@@ -2651,14 +2652,14 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 
 						d->settings.scenario = false;
 						d->hp.setMap(gpdp.get_mapname(), path, nr_players, true);
-					} catch (const _wexception &) {}
+					} catch (const WException &) {}
 				}
 			} else {
 				if (g_fs->FileExists(path)) {
 					// Check if file is a map and if yes read out the needed data
 					Widelands::Map   map;
 					i18n::Textdomain td("maps");
-					std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(path);
+					std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(path);
 					if (ml.get() != nullptr) {
 						// Yes it is a map file :)
 						map.set_filename(path.c_str());

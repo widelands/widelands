@@ -40,20 +40,19 @@ struct WareList {
 
 	void clear() {m_wares.clear();} /// Clear the storage
 
-	typedef uint32_t count_type;
-	typedef std::vector<count_type> vector_type;
-	typedef vector_type::size_type size_type;
+	using WareCount = uint32_t;
+	using WareCountVector = std::vector<WareCount>;
 
 	/// \return Highest possible ware id
-	Ware_Index get_nrwareids() const {return Ware_Index(m_wares.size());}
+	WareIndex get_nrwareids() const {return WareIndex(m_wares.size());}
 
-	void add   (Ware_Index, count_type = 1);
+	void add   (WareIndex, WareCount = 1);
 	void add(const WareList &);
-	void remove(Ware_Index, count_type = 1);
+	void remove(WareIndex, WareCount = 1);
 	void remove(const WareList & wl);
-	count_type stock(Ware_Index) const;
+	WareCount stock(WareIndex) const;
 
-	void set_nrwares(Ware_Index const i) {
+	void set_nrwares(WareIndex const i) {
 		assert(m_wares.empty());
 		m_wares.resize(i, 0);
 	}
@@ -64,7 +63,7 @@ struct WareList {
 	mutable boost::signals2::signal<void ()> changed;
 
 private:
-	vector_type m_wares;
+	WareCountVector m_wares;
 };
 
 }

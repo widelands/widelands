@@ -26,15 +26,15 @@
 // The GameMainMenu is a rather dumb window with lots of buttons
 struct GameMainMenu : public UI::UniqueWindow {
 	GameMainMenu
-		(Interactive_Player &,
+		(InteractivePlayer &,
 		 UI::UniqueWindow::Registry &,
-		 Interactive_Player::Game_Main_Menu_Windows &);
+		 InteractivePlayer::GameMainMenuWindows &);
 
 	~GameMainMenu();
 
 private:
-	Interactive_Player                         & m_player;
-	Interactive_Player::Game_Main_Menu_Windows & m_windows;
+	InteractivePlayer                         & m_player;
+	InteractivePlayer::GameMainMenuWindows & m_windows;
 	UI::Button general_stats;
 	UI::Button ware_stats;
 	UI::Button building_stats;

@@ -25,19 +25,19 @@
 #include "editor/ui_menus/editor_tool_options_menu.h"
 #include "ui_basic/tabpanel.h"
 
-struct Editor_Place_Bob_Tool;
+struct EditorPlaceBobTool;
 namespace UI {struct Checkbox;}
 
-struct Editor_Tool_Place_Bob_Options_Menu : public Editor_Tool_Options_Menu {
-	Editor_Tool_Place_Bob_Options_Menu
-		(Editor_Interactive         &,
-		 Editor_Place_Bob_Tool      &,
+struct EditorToolPlaceBobOptionsMenu : public EditorToolOptionsMenu {
+	EditorToolPlaceBobOptionsMenu
+		(EditorInteractive         &,
+		 EditorPlaceBobTool      &,
 		 UI::UniqueWindow::Registry &);
 
 private:
-	UI::Tab_Panel               m_tabpanel;
+	UI::TabPanel               m_tabpanel;
 	std::vector<UI::Checkbox *> m_checkboxes;
-	Editor_Place_Bob_Tool     & m_pit;
+	EditorPlaceBobTool     & m_pit;
 	void clicked(int32_t, bool);
 	bool m_click_recursion_protect;
 };

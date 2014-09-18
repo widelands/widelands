@@ -93,12 +93,12 @@ public:
 
 	Flag & base_flag() override;
 	PositionList get_positions
-		(const Editor_Game_Base &) const override;
+		(const EditorGameBase &) const override;
 	void draw
-		(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) override;
+		(const EditorGameBase &, RenderTarget &, const FCoords&, const Point&) override;
 
-	void init(Editor_Game_Base &) override;
-	void cleanup(Editor_Game_Base &) override;
+	void init(EditorGameBase &) override;
+	void cleanup(EditorGameBase &) override;
 
 	void add_neighbours(std::vector<RoutingNodeNeighbour> & neighbours);
 
@@ -110,9 +110,9 @@ public:
 
 	void ship_arrived(Game &, Ship &);
 
-	void log_general_info(const Editor_Game_Base &) override;
+	void log_general_info(const EditorGameBase &) override;
 
-	uint32_t count_waiting(WareWorker waretype, Ware_Index wareindex);
+	uint32_t count_waiting(WareWorker waretype, WareIndex wareindex);
 
 	// Returns true if a expedition is started or ready to be send out.
 	bool expedition_started();
@@ -131,7 +131,7 @@ public:
 private:
 	friend struct Fleet;
 
-	void init_fleet(Editor_Game_Base & egbase);
+	void init_fleet(EditorGameBase & egbase);
 	void set_fleet(Fleet * fleet);
 	void _update_shippingitem(Game &, std::vector<ShippingItem>::iterator);
 	void set_need_ship(Game &, bool need);
@@ -162,10 +162,10 @@ protected:
 
 public:
 	bool has_new_save_support() override {return true;}
-	void save(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
+	void save(EditorGameBase &, MapObjectSaver &, FileWrite &) override;
 
 	static MapObject::Loader * load
-		(Editor_Game_Base &, MapMapObjectLoader &, FileRead &);
+		(EditorGameBase &, MapObjectLoader &, FileRead &);
 };
 
 extern PortdockDescr g_portdock_descr;

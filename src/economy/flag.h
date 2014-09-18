@@ -61,23 +61,23 @@ private:
  * WALK_xx in all "direction" parameters.
  */
 struct Flag : public PlayerImmovable, public RoutingNode {
-	typedef std::vector<const WareInstance *> Wares;
+	using Wares = std::vector<const WareInstance *>;
 
 	friend class Economy;
 	friend class FlagQueue;
-	friend class Map_Flagdata_Data_Packet; // has to read/write this to a file
-	friend struct Map_Ware_Data_Packet;     // has to look at pending wares
-	friend struct Map_Waredata_Data_Packet; // has to look at pending wares
+	friend class MapFlagdataPacket; // has to read/write this to a file
+	friend struct MapWarePacket;     // has to look at pending wares
+	friend struct MapWaredataPacket; // has to look at pending wares
 	friend struct Router;
 
 	const FlagDescr& descr() const;
 
 	Flag(); /// empty flag for savegame loading
-	Flag(Editor_Game_Base &, Player & owner, Coords); /// create a new flag
+	Flag(EditorGameBase &, Player & owner, Coords); /// create a new flag
 	~Flag() override;
 
-	void load_finish(Editor_Game_Base &) override;
-	void destroy(Editor_Game_Base &) override;
+	void load_finish(EditorGameBase &) override;
+	void destroy(EditorGameBase &) override;
 
 	int32_t  get_size    () const override;
 	bool get_passable() const override;
@@ -85,15 +85,15 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	Flag & base_flag() override;
 
 	const Coords & get_position() const override {return m_position;}
-	PositionList get_positions (const Editor_Game_Base &) const override;
+	PositionList get_positions (const EditorGameBase &) const override;
 	void get_neighbours(WareWorker type, RoutingNodeNeighbours &) override;
 	int32_t get_waitcost() const {return m_ware_filled;}
 
 	void set_economy(Economy *) override;
 
 	Building * get_building() const {return m_building;}
-	void attach_building(Editor_Game_Base &, Building &);
-	void detach_building(Editor_Game_Base &);
+	void attach_building(EditorGameBase &, Building &);
+	void detach_building(EditorGameBase &);
 
 	bool has_road() const {
 		return
@@ -114,7 +114,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	uint32_t current_wares() const {return m_ware_filled;}
 	void wait_for_capacity(Game &, Worker &);
 	void skip_wait_for_capacity(Game &, Worker &);
-	void add_ware(Editor_Game_Base &, WareInstance &);
+	void add_ware(EditorGameBase &, WareInstance &);
 	bool has_pending_ware(Game &, Flag & destflag);
 	bool ack_pickup(Game &, Flag & destflag);
 	bool cancel_pickup(Game &, Flag & destflag);
@@ -124,21 +124,21 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	void call_carrier(Game &, WareInstance &, PlayerImmovable * nextstep);
 	void update_wares(Game &, Flag * other);
 
-	void remove_ware(Editor_Game_Base &, WareInstance * const);
+	void remove_ware(EditorGameBase &, WareInstance * const);
 
-	void add_flag_job(Game &, Ware_Index workerware, const std::string & programname);
+	void add_flag_job(Game &, WareIndex workerware, const std::string & programname);
 
-	void log_general_info(const Editor_Game_Base &) override;
+	void log_general_info(const EditorGameBase &) override;
 
 protected:
-	void init(Editor_Game_Base &) override;
-	void cleanup(Editor_Game_Base &) override;
+	void init(EditorGameBase &) override;
+	void cleanup(EditorGameBase &) override;
 
-	void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) override;
+	void draw(const EditorGameBase &, RenderTarget &, const FCoords&, const Point&) override;
 
 	void wake_up_capacity_queue(Game &);
 
-	static void flag_job_request_callback(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
+	static void flag_job_request_callback(Game &, Request &, WareIndex, Worker *, PlayerImmovable &);
 
 	void set_flag_position(Coords coords);
 
@@ -169,10 +169,10 @@ private:
 	/// the given flag
 	Flag        * m_always_call_for_flag;
 
-	typedef std::vector<OPtr<Worker> > CapacityWaitQueue;
+	using CapacityWaitQueue = std::vector<OPtr<Worker>>;
 	CapacityWaitQueue m_capacity_wait; ///< workers waiting for capacity
 
-	typedef std::list<FlagJob> FlagJobs;
+	using FlagJobs = std::list<FlagJob>;
 	FlagJobs m_flag_jobs;
 };
 

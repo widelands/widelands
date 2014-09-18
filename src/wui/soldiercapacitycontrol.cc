@@ -34,7 +34,7 @@ using Widelands::SoldierControl;
  */
 struct SoldierCapacityControl : UI::Box {
 	SoldierCapacityControl
-		(UI::Panel * parent, Interactive_GameBase & igb,
+		(UI::Panel * parent, InteractiveGameBase & igb,
 		 Widelands::Building & building);
 
 protected:
@@ -45,7 +45,7 @@ private:
 	void click_decrease();
 	void click_increase();
 
-	Interactive_GameBase & m_igb;
+	InteractiveGameBase & m_igb;
 	Widelands::Building & m_building;
 
 	UI::Button m_decrease;
@@ -54,7 +54,7 @@ private:
 };
 
 SoldierCapacityControl::SoldierCapacityControl
-	(UI::Panel * parent, Interactive_GameBase & igb,
+	(UI::Panel * parent, InteractiveGameBase & igb,
 	 Widelands::Building & building)
 :
 Box(parent, 0, 0, Horizontal),
@@ -114,7 +114,7 @@ void SoldierCapacityControl::click_increase()
 }
 
 UI::Panel * create_soldier_capacity_control
-	(UI::Panel & parent, Interactive_GameBase & igb,
+	(UI::Panel & parent, InteractiveGameBase & igb,
 	 Widelands::Building & building)
 {
 	return new SoldierCapacityControl(&parent, igb, building);

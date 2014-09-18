@@ -29,7 +29,7 @@
 namespace Widelands {
 
 class EditorCategory;
-class Editor_Game_Base;
+class EditorGameBase;
 class ResourceDescription;
 class TerrainDescription;
 struct CritterDescr;
@@ -45,7 +45,7 @@ public:
 	// TODO(sirver): Refactor these to only return the description_maintainer so that world
 	// becomes a pure container.
 	const DescriptionMaintainer<TerrainDescription>& terrains() const;
-	TerrainDescription& terrain_descr(Terrain_Index i) const;
+	TerrainDescription& terrain_descr(TerrainIndex i) const;
 	TerrainDescription const* get_ter(char const* const name) const;
 
 	int32_t get_bob(char const* const l) const;
@@ -59,7 +59,7 @@ public:
 	ImmovableDescr const* get_immovable_descr(int32_t index) const;
 
 	int32_t get_resource(const char* const name) const;
-	ResourceDescription const* get_resource(Resource_Index res) const;
+	ResourceDescription const* get_resource(ResourceIndex res) const;
 	int32_t get_nr_resources() const;
 	int32_t safe_resource_index(const char* const warename) const;
 

@@ -30,8 +30,8 @@ namespace Widelands {
 
 class Economy;
 class Game;
-class MapMapObjectLoader;
-struct MapMapObjectSaver;
+class MapObjectLoader;
+struct MapObjectSaver;
 class MapObject;
 class PortDock;
 class WareInstance;
@@ -49,23 +49,23 @@ struct ShippingItem {
 	// Unboxes the item that is shipped which might be either a ware or a
 	// worker. It is safe to pass nullptr for 'ware' or 'worker' in case you are
 	// only interested in the ware if it is the one or the other.
-	void get(Editor_Game_Base& game, WareInstance** ware, Worker** worker) const;
+	void get(EditorGameBase& game, WareInstance** ware, Worker** worker) const;
 
 	void set_economy(Game &, Economy * e);
 	PortDock * get_destination(Game &);
 	void schedule_update(Game &, int32_t delay);
 
-	void remove(Editor_Game_Base &);
+	void remove(EditorGameBase &);
 
 	struct Loader {
 		void load(FileRead & fr);
-		ShippingItem get(MapMapObjectLoader & mol);
+		ShippingItem get(MapObjectLoader & mol);
 
 	private:
 		uint32_t m_serial;
 	};
 
-	void save(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw);
+	void save(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw);
 
 private:
 	friend class PortDock;
@@ -80,7 +80,7 @@ private:
 	// Updates m_destination_dock.
 	void update_destination(Game &, PortDock &);
 
-	Object_Ptr m_object;
+	ObjectPointer m_object;
 	OPtr<PortDock> m_destination_dock;
 };
 

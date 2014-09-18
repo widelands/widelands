@@ -50,13 +50,13 @@
 
 using namespace Widelands;
 
-inline Interactive_Player & EncyclopediaWindow::iaplayer() const {
-	return ref_cast<Interactive_Player, UI::Panel>(*get_parent());
+inline InteractivePlayer & EncyclopediaWindow::iaplayer() const {
+	return ref_cast<InteractivePlayer, UI::Panel>(*get_parent());
 }
 
 
 EncyclopediaWindow::EncyclopediaWindow
-	(Interactive_Player & parent, UI::UniqueWindow::Registry & registry)
+	(InteractivePlayer & parent, UI::UniqueWindow::Registry & registry)
 :
 	UI::UniqueWindow
 		(&parent, "encyclopedia",
@@ -86,11 +86,11 @@ EncyclopediaWindow::EncyclopediaWindow
 }
 
 void EncyclopediaWindow::fillWares() {
-	const Tribe_Descr & tribe = iaplayer().player().tribe();
-	Ware_Index const nr_wares = tribe.get_nrwares();
+	const TribeDescr & tribe = iaplayer().player().tribe();
+	WareIndex const nr_wares = tribe.get_nrwares();
 	std::vector<Ware> ware_vec;
 
-	for (Ware_Index i = 0; i < nr_wares; ++i) {
+	for (WareIndex i = 0; i < nr_wares; ++i) {
 		WareDescr const * ware = tribe.get_ware_descr(i);
 		Ware w(i, ware);
 		ware_vec.push_back(w);
@@ -105,7 +105,7 @@ void EncyclopediaWindow::fillWares() {
 }
 
 void EncyclopediaWindow::wareSelected(uint32_t) {
-	const Tribe_Descr & tribe = iaplayer().player().tribe();
+	const TribeDescr & tribe = iaplayer().player().tribe();
 	selectedWare = tribe.get_ware_descr(wares.get_selected());
 
 	descrTxt.set_text(selectedWare->helptext());
@@ -115,8 +115,8 @@ void EncyclopediaWindow::wareSelected(uint32_t) {
 
 	bool found = false;
 
-	Building_Index const nr_buildings = tribe.get_nrbuildings();
-	for (Building_Index i = 0; i < nr_buildings; ++i) {
+	BuildingIndex const nr_buildings = tribe.get_nrbuildings();
+	for (BuildingIndex i = 0; i < nr_buildings; ++i) {
 		const BuildingDescr & descr = *tribe.get_building_descr(i);
 		if (upcast(ProductionSiteDescr const, de, &descr)) {
 
@@ -138,7 +138,7 @@ void EncyclopediaWindow::wareSelected(uint32_t) {
 void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 	assert(prodSites.has_selection());
 	condTable.clear();
-	const Tribe_Descr & tribe = iaplayer().player().tribe();
+	const TribeDescr & tribe = iaplayer().player().tribe();
 
 	const ProductionSiteDescr::Programs & programs =
 		ref_cast<ProductionSiteDescr const, BuildingDescr const>
@@ -177,11 +177,11 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 				const ProductionProgram::ActConsume::Groups & groups =
 					action->groups();
 
-				for (const ProductionProgram::Ware_Type_Group& temp_group : groups) {
-					const std::set<Ware_Index> & ware_types = temp_group.first;
+				for (const ProductionProgram::WareTypeGroup& temp_group : groups) {
+					const std::set<WareIndex> & ware_types = temp_group.first;
 					assert(ware_types.size());
 					std::vector<std::string> ware_type_descnames;
-					for (const Ware_Index& ware_index : ware_types) {
+					for (const WareIndex& ware_index : ware_types) {
 						ware_type_descnames.push_back(tribe.get_ware_descr(ware_index)->descname());
 					}
 
@@ -193,7 +193,7 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 					static_assert(sizeof(temp_group.second) == 1, "Number is too big for 3 char string.");
 
 					//  picture only of first ware type in group
-					UI::Table<uintptr_t>::Entry_Record & tableEntry =
+					UI::Table<uintptr_t>::EntryRecord & tableEntry =
 						condTable.add(0);
 					tableEntry.set_picture
 						(0, tribe.get_ware_descr(*ware_types.begin())->icon(), ware_type_names);

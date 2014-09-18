@@ -115,7 +115,7 @@ void terminate(int) {
 /**
  * Sets the filelocators default searchpaths (partly OS specific)
  */
-// TODO(unknown): Handle exception FileType_error
+// TODO(unknown): Handle exception FileTypeError
 // TODO(unknown): Handle case when \e no data can be found
 void WLApplication::setup_searchpaths(std::string argv0)
 {
@@ -132,11 +132,11 @@ void WLApplication::setup_searchpaths(std::string argv0)
 			 	(std::string(INSTALL_PREFIX) + '/' + INSTALL_DATADIR));
 #endif
 	}
-	catch (FileNotFound_error &) {}
-	catch (FileAccessDenied_error & e) {
+	catch (FileNotFoundError &) {}
+	catch (FileAccessDeniedError & e) {
 		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 	}
-	catch (FileType_error &) {
+	catch (FileTypeError &) {
 		//TODO(unknown): handle me
 	}
 
@@ -147,11 +147,11 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		g_fs->AddFileSystem(&FileSystem::Create("/usr/share/games/widelands"));
 #endif
 	}
-	catch (FileNotFound_error &) {}
-	catch (FileAccessDenied_error & e) {
+	catch (FileNotFoundError &) {}
+	catch (FileAccessDeniedError & e) {
 		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 	}
-	catch (FileType_error &) {
+	catch (FileTypeError &) {
 		//TODO(unknown): handle me
 	}
 
@@ -165,11 +165,11 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		g_fs->AddFileSystem(&FileSystem::Create("."));
 #endif
 	}
-	catch (FileNotFound_error &) {}
-	catch (FileAccessDenied_error & e) {
+	catch (FileNotFoundError &) {}
+	catch (FileAccessDeniedError & e) {
 		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 	}
-	catch (FileType_error &) {
+	catch (FileTypeError &) {
 		//TODO(unknown): handle me
 	}
 
@@ -191,11 +191,11 @@ void WLApplication::setup_searchpaths(std::string argv0)
 				log ("Adding directory: %s\n", argv0.c_str());
 				g_fs->AddFileSystem(&FileSystem::Create(argv0));
 			}
-			catch (FileNotFound_error &) {}
-			catch (FileAccessDenied_error & e) {
+			catch (FileNotFoundError &) {}
+			catch (FileAccessDeniedError & e) {
 				log ("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 			}
-			catch (FileType_error &) {
+			catch (FileTypeError &) {
 				//TODO(unknown): handle me
 			}
 		}
@@ -275,7 +275,7 @@ m_redirected_stdio(false)
 {
 	g_fs = new LayeredFileSystem();
 
-	parse_commandline(argc, argv); //throws Parameter_error, handled by main.cc
+	parse_commandline(argc, argv); //throws ParameterError, handled by main.cc
 
 	if (m_commandline.count("homedir")) {
 		log ("Adding home directory: %s\n", m_commandline["homedir"].c_str());
@@ -303,7 +303,7 @@ m_redirected_stdio(false)
 			throw wexception
 				("True Type library did not initialize: %s\n", TTF_GetError());
 
-		UI::g_fh = new UI::Font_Handler();
+		UI::g_fh = new UI::FontHandler();
 		UI::g_fh1 = UI::create_fonthandler(g_gr);
 	} else
 		g_gr = nullptr;
@@ -366,14 +366,14 @@ void WLApplication::run()
 {
 	if (m_game_type == EDITOR) {
 		g_sound_handler.start_music("ingame");
-		Editor_Interactive::run_editor(m_filename, m_script_to_run);
+		EditorInteractive::run_editor(m_filename, m_script_to_run);
 	} else if (m_game_type == REPLAY)   {
 		replay();
 	} else if (m_game_type == LOADGAME) {
 		Widelands::Game game;
 		try {
 			game.run_load_game(m_filename.c_str(), m_script_to_run);
-		} catch (const Widelands::game_data_error & e) {
+		} catch (const Widelands::GameDataError & e) {
 			log("Game not loaded: Game data error: %s\n", e.what());
 		} catch (const std::exception & e) {
 			log("Fatal exception: %s\n", e.what());
@@ -384,7 +384,7 @@ void WLApplication::run()
 		Widelands::Game game;
 		try {
 			game.run_splayer_scenario_direct(m_filename.c_str(), m_script_to_run);
-		} catch (const Widelands::game_data_error & e) {
+		} catch (const Widelands::GameDataError & e) {
 			log("Scenario not started: Game data error: %s\n", e.what());
 		} catch (const std::exception & e) {
 			log("Fatal exception: %s\n", e.what());
@@ -415,7 +415,7 @@ void WLApplication::run()
 				bool name_valid = false;
 				while (!name_valid) {
 					name_valid = true;
-					const std::vector<INet_Game> & hosts = InternetGaming::ref().games();
+					const std::vector<InternetGame> & hosts = InternetGaming::ref().games();
 					for (uint32_t i = 0; i < hosts.size(); ++i) {
 						if (hosts.at(i).name == realservername)
 							name_valid = false;
@@ -433,9 +433,9 @@ void WLApplication::run()
 				Widelands::Map map;
 				i18n::Textdomain td("maps");
 				map.set_filename(m_filename.c_str());
-				std::unique_ptr<Widelands::Map_Loader> ml = map.get_correct_loader(m_filename);
+				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(m_filename);
 				if (!ml) {
-					throw warning
+					throw WLWarning
 						(_("Unsupported format"),
 						 _("Widelands could not load the file \"%s\". The file format seems to be incompatible."),
 						 m_filename.c_str());
@@ -470,7 +470,7 @@ void WLApplication::run()
 		g_sound_handler.start_music("intro");
 
 		{
-			Fullscreen_Menu_Intro intro;
+			FullscreenMenuIntro intro;
 			intro.run();
 		}
 
@@ -1003,7 +1003,7 @@ void WLApplication::parse_commandline
 
 		//are we looking at an option at all?
 		if (opt.compare(0, 2, "--"))
-			throw Parameter_error();
+			throw ParameterError();
 		else
 			opt.erase(0, 2); //  yes. remove the leading "--", just for cosmetics
 
@@ -1034,7 +1034,7 @@ void WLApplication::parse_commandline
 void WLApplication::handle_commandline_parameters()
 {
 	if (m_commandline.count("help") || m_commandline.count("version")) {
-		throw Parameter_error(); //no message on purpose
+		throw ParameterError(); //no message on purpose
 	}
 	if (m_commandline.count("logfile")) {
 		m_logfile = m_commandline["logfile"];
@@ -1269,7 +1269,7 @@ void WLApplication::mainmenu()
 		// Refresh graphics system in case we just changed resolution.
 		refresh_graphics();
 
-		Fullscreen_Menu_Main mm;
+		FullscreenMenuMain mm;
 
 		if (message.size()) {
 			log("\n%s\n%s\n", messagetitle.c_str(), message.c_str());
@@ -1288,7 +1288,7 @@ void WLApplication::mainmenu()
 
 		try {
 			switch (mm.run()) {
-			case Fullscreen_Menu_Main::mm_playtutorial:
+			case FullscreenMenuMain::mm_playtutorial:
 				{
 					Widelands::Game game;
 					try {
@@ -1300,41 +1300,41 @@ void WLApplication::mainmenu()
 					}
 				}
 				break;
-			case Fullscreen_Menu_Main::mm_singleplayer:
+			case FullscreenMenuMain::mm_singleplayer:
 				mainmenu_singleplayer();
 				break;
-			case Fullscreen_Menu_Main::mm_multiplayer:
+			case FullscreenMenuMain::mm_multiplayer:
 				mainmenu_multiplayer();
 				break;
-			case Fullscreen_Menu_Main::mm_replay:
+			case FullscreenMenuMain::mm_replay:
 				replay();
 				break;
-			case Fullscreen_Menu_Main::mm_options: {
+			case FullscreenMenuMain::mm_options: {
 				Section & s = g_options.pull_section("global");
-				Options_Ctrl om(s);
+				OptionsCtrl om(s);
 				break;
 			}
-			case Fullscreen_Menu_Main::mm_readme: {
-				Fullscreen_Menu_FileView ff("txts/README.lua");
+			case FullscreenMenuMain::mm_readme: {
+				FullscreenMenuFileView ff("txts/README.lua");
 				ff.run();
 				break;
 			}
-			case Fullscreen_Menu_Main::mm_license: {
-				Fullscreen_Menu_FileView ff("txts/license");
+			case FullscreenMenuMain::mm_license: {
+				FullscreenMenuFileView ff("txts/license");
 				ff.run();
 				break;
 			}
-			case Fullscreen_Menu_Main::mm_editor:
+			case FullscreenMenuMain::mm_editor:
 				mainmenu_editor();
 				break;
 			default:
-			case Fullscreen_Menu_Main::mm_exit:
+			case FullscreenMenuMain::mm_exit:
 				return;
 			}
-		} catch (const warning & e) {
+		} catch (const WLWarning & e) {
 			messagetitle = (boost::format(_("Warning: %s")) % e.title()).str();
 			message = e.what();
-		} catch (const Widelands::game_data_error & e) {
+		} catch (const Widelands::GameDataError & e) {
 			messagetitle = _("Game data error");
 			message = e.what();
 		}
@@ -1369,26 +1369,26 @@ void WLApplication::mainmenu_singleplayer()
 	//  This is the code returned by UI::Panel::run() when the panel is dying.
 	//  Make sure that the program exits when the window manager says so.
 	static_assert
-		(Fullscreen_Menu_SinglePlayer::Back == UI::Panel::dying_code, "Panel should be dying.");
+		(FullscreenMenuSinglePlayer::Back == UI::Panel::dying_code, "Panel should be dying.");
 
 	for (;;) {
 		int32_t code;
 		{
-			Fullscreen_Menu_SinglePlayer single_player_menu;
+			FullscreenMenuSinglePlayer single_player_menu;
 			code = single_player_menu.run();
 		}
 		switch (code) {
-		case Fullscreen_Menu_SinglePlayer::Back:
+		case FullscreenMenuSinglePlayer::Back:
 			return;
-		case Fullscreen_Menu_SinglePlayer::New_Game:
+		case FullscreenMenuSinglePlayer::New_Game:
 			if (new_game())
 				return;
 			break;
-		case Fullscreen_Menu_SinglePlayer::Load_Game:
+		case FullscreenMenuSinglePlayer::Load_Game:
 			if (load_game())
 				return;
 			break;
-		case Fullscreen_Menu_SinglePlayer::Campaign:
+		case FullscreenMenuSinglePlayer::Campaign:
 			if (campaign_game())
 				return;
 			break;
@@ -1405,17 +1405,17 @@ void WLApplication::mainmenu_singleplayer()
  */
 void WLApplication::mainmenu_multiplayer()
 {
-	int32_t menu_result = Fullscreen_Menu_NetSetupLAN::JOINGAME; // dummy init;
+	int32_t menu_result = FullscreenMenuNetSetupLAN::JOINGAME; // dummy init;
 	for (;;) { // stay in menu until player clicks "back" button
 		bool internet = false;
-		Fullscreen_Menu_MultiPlayer mp;
+		FullscreenMenuMultiPlayer mp;
 		switch (mp.run()) {
-			case Fullscreen_Menu_MultiPlayer::Back:
+			case FullscreenMenuMultiPlayer::Back:
 				return;
-			case Fullscreen_Menu_MultiPlayer::Metaserver:
+			case FullscreenMenuMultiPlayer::Metaserver:
 				internet = true;
 				break;
-			case Fullscreen_Menu_MultiPlayer::Lan:
+			case FullscreenMenuMultiPlayer::Lan:
 				break;
 			default:
 				assert(false);
@@ -1434,7 +1434,7 @@ void WLApplication::mainmenu_multiplayer()
 				s.set_string("password", password);
 
 			// reinitalise in every run, else graphics look strange
-			Fullscreen_Menu_Internet_Lobby ns(playername.c_str(), password.c_str(), registered);
+			FullscreenMenuInternetLobby ns(playername.c_str(), password.c_str(), registered);
 			ns.run();
 
 			if (InternetGaming::ref().logged_in())
@@ -1445,7 +1445,7 @@ void WLApplication::mainmenu_multiplayer()
 				InternetGaming::ref().reset();
 		} else {
 			// reinitalise in every run, else graphics look strange
-			Fullscreen_Menu_NetSetupLAN ns;
+			FullscreenMenuNetSetupLAN ns;
 			menu_result = ns.run();
 			std::string playername = ns.get_playername();
 			uint32_t addr;
@@ -1453,16 +1453,16 @@ void WLApplication::mainmenu_multiplayer()
 			bool const host_address = ns.get_host_address(addr, port);
 
 			switch (menu_result) {
-				case Fullscreen_Menu_NetSetupLAN::HOSTGAME: {
+				case FullscreenMenuNetSetupLAN::HOSTGAME: {
 					NetHost netgame(playername);
 					netgame.run();
 					break;
 				}
-				case Fullscreen_Menu_NetSetupLAN::JOINGAME: {
+				case FullscreenMenuNetSetupLAN::JOINGAME: {
 					IPaddress peer;
 
 					if (!host_address)
-						throw warning
+						throw WLWarning
 							("Invalid Address", "%s",
 							 _("The address of the game server is invalid"));
 
@@ -1485,30 +1485,30 @@ void WLApplication::mainmenu_editor()
 	//  This is the code returned by UI::Panel::run() when the panel is dying.
 	//  Make sure that the program exits when the window manager says so.
 	static_assert
-		(Fullscreen_Menu_Editor::Back == UI::Panel::dying_code, "Editor should be dying.");
+		(FullscreenMenuEditor::Back == UI::Panel::dying_code, "Editor should be dying.");
 
 	for (;;) {
 		int32_t code;
 		{
-			Fullscreen_Menu_Editor editor_menu;
+			FullscreenMenuEditor editor_menu;
 			code = editor_menu.run();
 		}
 		switch (code) {
-		case Fullscreen_Menu_Editor::Back:
+		case FullscreenMenuEditor::Back:
 			return;
-		case Fullscreen_Menu_Editor::New_Map:
-			Editor_Interactive::run_editor(m_filename, m_script_to_run);
+		case FullscreenMenuEditor::New_Map:
+			EditorInteractive::run_editor(m_filename, m_script_to_run);
 			return;
-		case Fullscreen_Menu_Editor::Load_Map: {
+		case FullscreenMenuEditor::Load_Map: {
 			std::string filename;
 			{
-				Fullscreen_Menu_Editor_MapSelect emsm;
+				FullscreenMenuEditorMapSelect emsm;
 				if (emsm.run() <= 0)
 					break;
 
 				filename = emsm.get_map();
 			}
-			Editor_Interactive::run_editor(filename.c_str(), "");
+			EditorInteractive::run_editor(filename.c_str(), "");
 			return;
 		}
 		default:
@@ -1528,7 +1528,7 @@ void WLApplication::mainmenu_editor()
 bool WLApplication::new_game()
 {
 	SinglePlayerGameSettingsProvider sp;
-	Fullscreen_Menu_LaunchSPG lgm(&sp);
+	FullscreenMenuLaunchSPG lgm(&sp);
 	const int32_t code = lgm.run();
 	Widelands::Game game;
 
@@ -1548,7 +1548,7 @@ bool WLApplication::new_game()
 			// Game controller needs the ibase pointer to init
 			// the chat
 			game.set_ibase
-				(new Interactive_Player
+				(new InteractivePlayer
 					(game, g_options.pull_section("global"), pn, false));
 			std::unique_ptr<GameController> ctrl
 				(new SinglePlayerGameController(game, true, pn));
@@ -1558,7 +1558,7 @@ bool WLApplication::new_game()
 			tipstext.push_back("singleplayer");
 			try {
 				tipstext.push_back(sp.getPlayersTribe());
-			} catch (GameSettingsProvider::No_Tribe) {
+			} catch (GameSettingsProvider::NoTribe) {
 			}
 			GameTips tips (loaderUI, tipstext);
 
@@ -1589,7 +1589,7 @@ bool WLApplication::load_game()
 	Widelands::Game game;
 	std::string filename;
 
-	Fullscreen_Menu_LoadGame ssg(game);
+	FullscreenMenuLoadGame ssg(game);
 	if (ssg.run() > 0)
 		filename = ssg.filename();
 	else
@@ -1621,7 +1621,7 @@ bool WLApplication::campaign_game()
 	for (;;) { // Campaign UI - Loop
 		int32_t campaign;
 		{ //  First start UI for selecting the campaign.
-			Fullscreen_Menu_CampaignSelect select_campaign;
+			FullscreenMenuCampaignSelect select_campaign;
 			if (select_campaign.run() > 0)
 				campaign = select_campaign.get_campaign();
 			else { //  back was pressed
@@ -1630,7 +1630,7 @@ bool WLApplication::campaign_game()
 			}
 		}
 		//  Then start UI for the selected campaign.
-		Fullscreen_Menu_CampaignMapSelect select_campaignmap;
+		FullscreenMenuCampaignMapSelect select_campaignmap;
 		select_campaignmap.set_campaign(campaign);
 		if (select_campaignmap.run() > 0) {
 			filename = select_campaignmap.get_map();
@@ -1656,7 +1656,7 @@ void WLApplication::replay()
 {
 	Widelands::Game game;
 	if (m_filename.empty()) {
-		Fullscreen_Menu_LoadReplay rm(game);
+		FullscreenMenuLoadReplay rm(game);
 		if (rm.run() <= 0)
 			return;
 
@@ -1672,7 +1672,7 @@ void WLApplication::replay()
 		loaderUI.step(_("Loading..."));
 
 		game.set_ibase
-			(new Interactive_Spectator(game, g_options.pull_section("global")));
+			(new InteractiveSpectator(game, g_options.pull_section("global")));
 		game.set_write_replay(false);
 		ReplayGameController rgc(game, m_filename);
 
@@ -1720,7 +1720,7 @@ void WLApplication::emergency_save(Widelands::Game & game) {
  */
 void WLApplication::cleanup_replays()
 {
-	filenameset_t files;
+	FilenameSet files;
 
 	Section & s = g_options.pull_section("global");
 
@@ -1730,7 +1730,7 @@ void WLApplication::cleanup_replays()
 		          [](const std::string& fn) {return boost::ends_with(fn, REPLAY_SUFFIX ".wss");});
 
 		for
-			(filenameset_t::iterator filename = files.begin();
+			(FilenameSet::iterator filename = files.begin();
 			 filename != files.end();
 			 ++filename)
 		{
@@ -1747,7 +1747,7 @@ void WLApplication::cleanup_replays()
 		          [](const std::string& fn) {return boost::ends_with(fn, REPLAY_SUFFIX);});
 
 		for
-			(filenameset_t::iterator filename = files.begin();
+			(FilenameSet::iterator filename = files.begin();
 			 filename != files.end();
 			 ++filename)
 		{
