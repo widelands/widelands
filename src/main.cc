@@ -110,7 +110,7 @@ int main(int argc, char * argv[])
 	} catch (const Parameter_error & e) {
 		//  handle wrong commandline parameters
 		cerr<<endl<<e.what()<<endl<<endl;
-		WLApplicationMessages::show_usage(build_id().c_str(), build_type().c_str());
+		show_usage(build_id(), build_type());
 		delete g_app;
 
 		return 0;

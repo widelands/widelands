@@ -32,7 +32,7 @@ using std::endl;
 /**
  * Print usage information
  */
-void WLApplicationMessages::show_usage(const char * build_id, const char * build_type)
+void show_usage(const std::string& build_id, const std::string& build_type)
 {
 	i18n::Textdomain textdomain("widelands_console"); //  uses system standard language
 

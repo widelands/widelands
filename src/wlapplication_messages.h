@@ -20,9 +20,8 @@
 #ifndef WL_WLAPPLICATION_MESSAGES_H
 #define WL_WLAPPLICATION_MESSAGES_H
 
-struct WLApplicationMessages {
-public:
-	static void show_usage(const char * build_id, const char * build_type);
-};
+#include <string>
+
+void show_usage(const std::string&, const std::string&);
 
 #endif  // end of include guard: WL_WLAPPLICATION_MESSAGES_H
