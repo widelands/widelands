@@ -25,7 +25,7 @@
 
 #include <stdint.h>
 
-struct Campaign_visibility_save {
+struct CampaignVisibilitySave {
 	std::string get_path();
 	void set_campaign_visibility(const std::string &, bool);
 	void set_map_visibility     (const std::string &, bool);

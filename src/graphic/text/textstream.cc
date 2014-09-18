@@ -28,9 +28,9 @@ using namespace boost;
 
 namespace RT {
 
-struct EOT_Impl : public EOT {
-	EOT_Impl(size_t pos, string text)
-		: EOT((format("Unexpected End of Text, starting at %1%. Text is: '%2%'") % pos % text).str())
+struct EndOfTextImpl : public EndOfText {
+	EndOfTextImpl(size_t pos, string text)
+		: EndOfText((format("Unexpected End of Text, starting at %1%. Text is: '%2%'") % pos % text).str())
 	{}
 };
 
@@ -77,7 +77,7 @@ void TextStream::expect(string n, bool skip_whitespace) {
 		skip_ws();
 
 	if (peek(n.size()) != n)
-		throw SyntaxError_Impl(m_lineno, m_col, (format("'%s'") % n).str(), peek(n.size()), peek(100));
+		throw SyntaxErrorImpl(m_lineno, m_col, (format("'%s'") % n).str(), peek(n.size()), peek(100));
 	m_consume(n.size());
 }
 
@@ -108,7 +108,7 @@ string TextStream::till_any(string chars) {
 		++j;
 	}
 	if (!found)
-		throw EOT_Impl(started_at, peek(100, started_at));
+		throw EndOfTextImpl(started_at, peek(100, started_at));
 	m_consume(j - started_at);
 
 	return rv;
@@ -121,7 +121,7 @@ string TextStream::till_any_or_end(string chars) {
 	string rv;
 	try {
 		rv = till_any(chars);
-	} catch (EOT_Impl &) {
+	} catch (EndOfTextImpl &) {
 		rv = m_t.substr(m_i, m_end - m_i);
 		m_consume(m_end + 1 - m_i);
 	}

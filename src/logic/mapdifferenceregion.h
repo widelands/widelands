@@ -37,9 +37,9 @@ namespace Widelands {
 /// nodes that are in A but not in B again, and so on.)
 ///
 /// \note The order in which nodes are returned is not guarantueed.
-template <typename Area_type = Area<> > struct MapDifferenceRegion {
+template <typename AreaType = Area<> > struct MapDifferenceRegion {
 	MapDifferenceRegion
-		(const Map & map, Area_type area, Direction direction)
+		(const Map & map, AreaType area, Direction direction)
 		: m_area(area), m_remaining_in_edge(area.radius), m_passed_corner(false)
 	{
 		assert(1 <= direction);
@@ -66,7 +66,7 @@ template <typename Area_type = Area<> > struct MapDifferenceRegion {
 		m_direction = direction;
 	}
 
-	typename Area_type::Coords_type & location() const {return m_area;}
+	typename AreaType::CoordsType & location() const {return m_area;}
 
 	/**
 	 * Moves on to the next location. The return value indicates whether the new
@@ -80,10 +80,10 @@ template <typename Area_type = Area<> > struct MapDifferenceRegion {
 
 	void move_to_other_side(const Map & map);
 
-	typename Area_type::Radius_type radius() const {return m_area.radius;}
+	typename AreaType::RadiusType radius() const {return m_area.radius;}
 private:
-	Area_type                       m_area;
-	typename Area_type::Radius_type m_remaining_in_edge;
+	AreaType                       m_area;
+	typename AreaType::RadiusType m_remaining_in_edge;
 	bool                            m_passed_corner;
 	Direction                       m_direction;
 };

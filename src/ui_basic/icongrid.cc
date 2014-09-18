@@ -29,7 +29,7 @@ namespace UI {
 
 struct IconGridButton : public Button {
 	IconGridButton
-		(Icon_Grid         & parent,
+		(IconGrid         & parent,
 		 const std::string & name,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
 		 const Image* background_pictute_id,
@@ -46,7 +46,7 @@ struct IconGridButton : public Button {
 		{}
 
 private:
-	Icon_Grid & m_icongrid;
+	IconGrid & m_icongrid;
 	const uint32_t _callback_argument_id;
 
 	void handle_mousein(bool inside) override {
@@ -62,7 +62,7 @@ private:
 /**
  * Initialize the grid
 */
-Icon_Grid::Icon_Grid
+IconGrid::IconGrid
 	(Panel  * const parent,
 	 int32_t x, int32_t y, int32_t cellw, int32_t cellh,
 	 int32_t cols)
@@ -78,7 +78,7 @@ Icon_Grid::Icon_Grid
  * Add a new icon to the list and resize appropriately.
  * Returns the index of the newly added icon.
 */
-int32_t Icon_Grid::add
+int32_t IconGrid::add
 	(const std::string & name, const Image* pic,
 	 void * data, const std::string & tooltip_text)
 {
@@ -107,12 +107,12 @@ int32_t Icon_Grid::add
 		 x, y, m_cell_width, m_cell_height,
 		 nullptr, pic,
 		 idx, tooltip_text);
-	btn->sigclicked.connect(boost::bind(&Icon_Grid::clicked_button, this, idx));
+	btn->sigclicked.connect(boost::bind(&IconGrid::clicked_button, this, idx));
 
 	return idx;
 }
 
-void Icon_Grid::clicked_button(uint32_t idx) {
+void IconGrid::clicked_button(uint32_t idx) {
 	clicked(idx);
 	play_click();
 }
@@ -120,7 +120,7 @@ void Icon_Grid::clicked_button(uint32_t idx) {
 /**
  * Returns the user-defined data of the icon with the given index.
 */
-void * Icon_Grid::get_data(int32_t idx)
+void * IconGrid::get_data(int32_t idx)
 {
 	assert(static_cast<uint32_t>(idx) < m_items.size());
 

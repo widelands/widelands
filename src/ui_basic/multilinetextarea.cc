@@ -30,7 +30,7 @@ namespace UI {
 
 static const uint32_t RICHTEXT_MARGIN = 2;
 
-struct Multiline_Textarea::Impl {
+struct MultilineTextarea::Impl {
 	bool isrichtext;
 	WordWrap ww;
 	RichText rt;
@@ -38,7 +38,7 @@ struct Multiline_Textarea::Impl {
 	Impl() : isrichtext(false) {}
 };
 
-Multiline_Textarea::Multiline_Textarea
+MultilineTextarea::MultilineTextarea
 	(Panel * const parent,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 	 const std::string & text,
@@ -57,7 +57,7 @@ Multiline_Textarea::Multiline_Textarea
 	//  do not allow vertical alignment as it does not make sense
 	m_align = static_cast<Align>(align & Align_Horizontal);
 
-	m_scrollbar.moved.connect(boost::bind(&Multiline_Textarea::scrollpos_changed, this, _1));
+	m_scrollbar.moved.connect(boost::bind(&MultilineTextarea::scrollpos_changed, this, _1));
 
 	m_scrollbar.set_singlestepsize(g_fh->get_fontheight(UI_FONT_SMALL));
 	m_scrollbar.set_pagesize(h - 2 * g_fh->get_fontheight(UI_FONT_BIG));
@@ -73,14 +73,14 @@ Multiline_Textarea::Multiline_Textarea
 /**
  * Free allocated resources
 */
-Multiline_Textarea::~Multiline_Textarea()
+MultilineTextarea::~MultilineTextarea()
 {
 }
 
 /**
  * Change the font used for non-richtext text.
  */
-void Multiline_Textarea::set_font(std::string name, int32_t size, RGBColor fg)
+void MultilineTextarea::set_font(std::string name, int32_t size, RGBColor fg)
 {
 	m_fontname = name;
 	m_fontsize = size;
@@ -99,7 +99,7 @@ void Multiline_Textarea::set_font(std::string name, int32_t size, RGBColor fg)
  * Replace the current text with a new one.
  * Fix up scrolling state if necessary.
  */
-void Multiline_Textarea::set_text(const std::string & text)
+void MultilineTextarea::set_text(const std::string & text)
 {
 	m_text = text;
 	recompute();
@@ -109,7 +109,7 @@ void Multiline_Textarea::set_text(const std::string & text)
  * Recompute the word wrapping or rich-text layouting,
  * and adjust scrollbar settings accordingly.
  */
-void Multiline_Textarea::recompute()
+void MultilineTextarea::recompute()
 {
 	uint32_t height;
 
@@ -141,7 +141,7 @@ void Multiline_Textarea::recompute()
 /**
  * Callback from the scrollbar.
  */
-void Multiline_Textarea::scrollpos_changed(int32_t const /* pixels */)
+void MultilineTextarea::scrollpos_changed(int32_t const /* pixels */)
 {
 	update(0, 0, get_eff_w(), get_h());
 }
@@ -150,14 +150,14 @@ void Multiline_Textarea::scrollpos_changed(int32_t const /* pixels */)
  * Change the scroll mode. This will not change the current scroll position;
  * it only affects the behaviour of set_text().
  */
-void Multiline_Textarea::set_scrollmode(ScrollMode mode)
+void MultilineTextarea::set_scrollmode(ScrollMode mode)
 {
 	m_scrollmode = mode;
 }
 
 
 /// Take care about scrollbar on resize
-void Multiline_Textarea::layout()
+void MultilineTextarea::layout()
 {
 	recompute();
 
@@ -169,7 +169,7 @@ void Multiline_Textarea::layout()
 /**
  * Redraw the textarea
  */
-void Multiline_Textarea::draw(RenderTarget & dst)
+void MultilineTextarea::draw(RenderTarget & dst)
 {
 	if (m->isrichtext) {
 		m->rt.draw(dst, Point(RICHTEXT_MARGIN, RICHTEXT_MARGIN - m_scrollbar.get_scrollpos()));
@@ -190,7 +190,7 @@ void Multiline_Textarea::draw(RenderTarget & dst)
 	}
 }
 
-bool Multiline_Textarea::handle_mousepress
+bool MultilineTextarea::handle_mousepress
 	(uint8_t const btn, int32_t const x, int32_t const y)
 {
 	return

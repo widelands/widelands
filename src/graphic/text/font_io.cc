@@ -57,6 +57,6 @@ IFont* load_font(const std::string& face, int ptsize) {
 		throw BadFont((boost::format("Font loading error for %s, %i pts: %s") % face % ptsize %
 		               TTF_GetError()).str());
 
-	return new SDLTTF_Font(font, face, ptsize, memory.release());
+	return new SdlTtfFont(font, face, ptsize, memory.release());
 }
 }

@@ -26,16 +26,16 @@
 #include "ui_basic/unique_window.h"
 
 namespace Widelands {struct BuildingDescr;}
-class Interactive_Player;
+class InteractivePlayer;
 namespace UI {
 struct Button;
-struct Progress_Bar;
+struct ProgressBar;
 struct Textarea;
 }
 
-struct Building_Statistics_Menu : public UI::UniqueWindow {
-	Building_Statistics_Menu
-		(Interactive_Player &, UI::UniqueWindow::Registry &);
+struct BuildingStatisticsMenu : public UI::UniqueWindow {
+	BuildingStatisticsMenu
+		(InteractivePlayer &, UI::UniqueWindow::Registry &);
 
 	void think() override;
 	void draw(RenderTarget &) override;
@@ -44,15 +44,15 @@ struct Building_Statistics_Menu : public UI::UniqueWindow {
 private:
 	bool compare_building_size(uint32_t rowa, uint32_t rowb);
 
-	Interactive_Player & iplayer() const;
-	enum Jump_Targets {
-		Prev_Owned,        Next_Owned,
-		Prev_Construction, Next_Construction,
-		Prev_Unproductive, Next_Unproductive
+	InteractivePlayer & iplayer() const;
+	enum JumpTargets {
+		PrevOwned,        NextOwned,
+		PrevConstruction, NextConstruction,
+		PrevUnproductive, NextUnproductive
 	};
 
 	UI::Table<uintptr_t const> m_table;
-	UI::Progress_Bar          m_progbar;
+	UI::ProgressBar          m_progbar;
 	UI::Textarea              m_total_productivity_label;
 	UI::Textarea              m_owned_label;
 	UI::Textarea              m_owned;
@@ -67,7 +67,7 @@ private:
 	uint32_t                  m_last_table_index;
 
 	void clicked_help();
-	void clicked_jump(Jump_Targets);
+	void clicked_jump(JumpTargets);
 	void table_changed(uint32_t);
 	int32_t validate_pointer(int32_t *, int32_t);
 };

@@ -33,8 +33,8 @@ struct TribeBasicInfo {
 	/// Relative position of this tribe in a list of tribes.
 	uint8_t uiposition;
 
-	typedef std::pair<std::string, std::string> Initialization;
-	typedef std::vector<Initialization> Initializations;
+	using Initialization = std::pair<std::string, std::string>;
+	using Initializations = std::vector<Initialization>;
 	Initializations initializations;
 };
 

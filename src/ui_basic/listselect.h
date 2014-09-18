@@ -103,7 +103,7 @@ struct BaseListselect : public Panel {
 	void select(uint32_t i);
 	bool has_selection() const;
 
-	struct No_Selection {};
+	struct NoSelection {};
 	uint32_t get_selected() const;
 	void remove_selected();
 
@@ -127,7 +127,7 @@ private:
 private:
 	static const int32_t ms_darken_value = -20;
 
-	struct Entry_Record {
+	struct EntryRecord {
 		uint32_t m_entry;
 		bool use_clr;
 		RGBColor clr;
@@ -135,12 +135,12 @@ private:
 		std::string name;
 		std::string tooltip;
 	};
-	typedef std::deque<Entry_Record *> Entry_Record_deque;
+	using EntryRecordDeque = std::deque<EntryRecord *>;
 
 	uint32_t m_max_pic_width;
 	uint32_t m_lineheight;
 	Align m_align;
-	Entry_Record_deque m_entry_records;
+	EntryRecordDeque m_entry_records;
 	Scrollbar m_scrollbar;
 	uint32_t m_scrollpos;         //  in pixels
 	uint32_t m_selection;
@@ -209,7 +209,7 @@ private:
  */
 template<typename Entry>
 struct Listselect<Entry &> : public Listselect<Entry *> {
-	typedef Listselect<Entry *> Base;
+	using Base = Listselect<Entry *>;
 
 	Listselect
 		(Panel * parent,

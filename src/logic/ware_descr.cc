@@ -28,7 +28,7 @@
 namespace Widelands {
 
 WareDescr::WareDescr
-	(const Tribe_Descr & gtribe, char const * const _name,
+	(const TribeDescr & gtribe, char const * const _name,
 	 char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s)
 	:

@@ -62,7 +62,7 @@ public:
 	};
 
 	struct Exception {};
-	struct Buffer_Overflow : public Exception {};
+	struct BufferOverflow : public Exception {};
 
 	/// Set the buffer to empty.
 	FileWrite();

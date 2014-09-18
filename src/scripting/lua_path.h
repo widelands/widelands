@@ -27,7 +27,7 @@ namespace LuaPath {
 /**
  * Base class for all classes in path.
  */
-class L_PathModuleClass : public LunaClass {
+class LuaPathModuleClass : public LunaClass {
 	public:
 		const char * get_modulename() override {return "path";}
 };

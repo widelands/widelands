@@ -43,7 +43,7 @@ public: \
 
 DEF_ERR(AttributeNotFound)
 DEF_ERR(BadFont)
-DEF_ERR(EOT)
+DEF_ERR(EndOfText)
 DEF_ERR(InvalidColor)
 DEF_ERR(RenderError)
 DEF_ERR(SyntaxError)

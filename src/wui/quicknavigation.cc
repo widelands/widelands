@@ -26,7 +26,7 @@
 static const uint32_t MaxHistorySize = 32;
 
 QuickNavigation::QuickNavigation
-	(const Widelands::Editor_Game_Base & egbase,
+	(const Widelands::EditorGameBase & egbase,
 	 uint32_t screenwidth, uint32_t screenheight)
 : m_egbase(egbase)
 {

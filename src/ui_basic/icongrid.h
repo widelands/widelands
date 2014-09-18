@@ -35,8 +35,8 @@ namespace UI {
  * Arrangement is horizontal (pictures fill the grid from left to right, top to
  * bottom).
 */
-struct Icon_Grid : public Panel {
-	Icon_Grid
+struct IconGrid : public Panel {
+	IconGrid
 		(Panel  * parent,
 		 int32_t x, int32_t y, int32_t cellw, int32_t cellh,
 		 int32_t  cols);

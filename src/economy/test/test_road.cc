@@ -38,7 +38,7 @@ using namespace Widelands;
 /* Helper classes */
 /******************/
 struct TestingFlag : public Flag {
-	TestingFlag(Editor_Game_Base &, Coords const c) : Flag() {
+	TestingFlag(EditorGameBase &, Coords const c) : Flag() {
 		set_flag_position(c);
 	}
 
@@ -77,11 +77,11 @@ struct SimpleRoadTestsFixture : public WlTestFixture {
 	~SimpleRoadTestsFixture() {
 		delete start;
 		delete end;
-		// Map is deleted by Editor_Game_Base
+		// Map is deleted by EditorGameBase
 	}
 
 	TestingMap * map;
-	Editor_Game_Base g;
+	EditorGameBase g;
 	Road r;
 	Path path;
 	TestingFlag * start;

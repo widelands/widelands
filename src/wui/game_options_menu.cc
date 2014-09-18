@@ -32,9 +32,9 @@
 #include "wui/game_options_sound_menu.h"
 
 GameOptionsMenu::GameOptionsMenu
-	(Interactive_GameBase                         & gb,
+	(InteractiveGameBase                         & gb,
 	 UI::UniqueWindow::Registry                   & registry,
-	 Interactive_GameBase::Game_Main_Menu_Windows & windows)
+	 InteractiveGameBase::GameMainMenuWindows & windows)
 :
 	UI::UniqueWindow
 		(&gb, "options", &registry,
@@ -142,7 +142,7 @@ void GameOptionsMenu::clicked_sound() {
 }
 
 void GameOptionsMenu::clicked_save_game() {
-	new Game_Main_Menu_Save_Game(m_gb, m_windows.savegame);
+	new GameMainMenuSaveGame(m_gb, m_windows.savegame);
 	die();
 }
 

@@ -85,11 +85,11 @@ namespace UI {
 // Utility class to render a rich text string. The returned string is cached in
 // the ImageCache, so repeated calls to render with the same arguments should not
 // be a problem.
-class Font_Handler1 : public IFont_Handler1 {
+class FontHandler1 : public IFontHandler1 {
 public:
-	Font_Handler1(ImageCache* image_cache, SurfaceCache* surface_cache, RT::Renderer* renderer) :
+	FontHandler1(ImageCache* image_cache, SurfaceCache* surface_cache, RT::Renderer* renderer) :
 		surface_cache_(surface_cache), image_cache_(image_cache), renderer_(renderer) {}
-	virtual ~Font_Handler1() {}
+	virtual ~FontHandler1() {}
 
 	const Image* render(const string& text, uint16_t w = 0) override {
 		const string hash = boost::lexical_cast<string>(w) + text;
@@ -109,11 +109,11 @@ private:
 	std::unique_ptr<RT::Renderer> renderer_;
 };
 
-IFont_Handler1 * create_fonthandler(Graphic* gr) {
-	return new Font_Handler1(
+IFontHandler1 * create_fonthandler(Graphic* gr) {
+	return new FontHandler1(
 	   &gr->images(), &gr->surfaces(), new RT::Renderer(&gr->images(), &gr->surfaces()));
 }
 
-IFont_Handler1 * g_fh1 = nullptr;
+IFontHandler1 * g_fh1 = nullptr;
 
 } // namespace UI

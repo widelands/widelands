@@ -28,12 +28,12 @@
  * Deletes the bob at the given location
 */
 int32_t
-Editor_Delete_Bob_Tool::handle_click_impl(Widelands::Map& map,
+EditorDeleteBobTool::handle_click_impl(Widelands::Map& map,
                                           const Widelands::World&,
-                                          Widelands::Node_and_Triangle<Widelands::Coords> center,
-                                          Editor_Interactive& parent,
-                                          Editor_Action_Args& args) {
-	Widelands::Editor_Game_Base & egbase = parent.egbase();
+                                          Widelands::NodeAndTriangle<Widelands::Coords> center,
+                                          EditorInteractive& parent,
+                                          EditorActionArgs& args) {
+	Widelands::EditorGameBase & egbase = parent.egbase();
 	const int32_t radius = args.sel_radius;
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 	(map,
@@ -51,18 +51,18 @@ Editor_Delete_Bob_Tool::handle_click_impl(Widelands::Map& map,
 }
 
 int32_t
-Editor_Delete_Bob_Tool::handle_undo_impl(Widelands::Map& map,
+EditorDeleteBobTool::handle_undo_impl(Widelands::Map& map,
                                          const Widelands::World& world,
-                                         Widelands::Node_and_Triangle<Widelands::Coords> center,
-                                         Editor_Interactive& parent,
-                                         Editor_Action_Args& args) {
+                                         Widelands::NodeAndTriangle<Widelands::Coords> center,
+                                         EditorInteractive& parent,
+                                         EditorActionArgs& args) {
 
 	uint32_t ret = parent.tools.place_bob.handle_undo_impl(map, world, center, parent, args);
 	args.obob_type.clear();
 	return ret;
 }
 
-Editor_Action_Args Editor_Delete_Bob_Tool::format_args_impl(Editor_Interactive & parent)
+EditorActionArgs EditorDeleteBobTool::format_args_impl(EditorInteractive & parent)
 {
-	return Editor_Tool::format_args_impl(parent);
+	return EditorTool::format_args_impl(parent);
 }

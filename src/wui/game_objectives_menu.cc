@@ -30,8 +30,8 @@ using namespace Widelands;
 #define FULL_OBJECTIVE_TEXT 240
 
 
-inline Interactive_Player & GameObjectivesMenu::iplayer() const {
-	return ref_cast<Interactive_Player, UI::Panel>(*get_parent());
+inline InteractivePlayer & GameObjectivesMenu::iplayer() const {
+	return ref_cast<InteractivePlayer, UI::Panel>(*get_parent());
 }
 
 
@@ -94,5 +94,5 @@ void GameObjectivesMenu::think() {
  */
 void GameObjectivesMenu::selected(uint32_t const t) {
 	objectivetext.set_text
-		(t == list_type::no_selection_index() ? std::string() : list[t].descr());
+		(t == ListType::no_selection_index() ? std::string() : list[t].descr());
 }

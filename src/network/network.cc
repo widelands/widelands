@@ -24,12 +24,12 @@
 
 
 
-Cmd_NetCheckSync::Cmd_NetCheckSync(int32_t const dt, SyncCallback * const cb) :
+CmdNetCheckSync::CmdNetCheckSync(int32_t const dt, SyncCallback * const cb) :
 Command (dt), m_callback(cb)
 {}
 
 
-void Cmd_NetCheckSync::execute (Widelands::Game &) {
+void CmdNetCheckSync::execute (Widelands::Game &) {
 	m_callback->syncreport();
 }
 
