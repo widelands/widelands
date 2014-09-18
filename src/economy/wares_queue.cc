@@ -28,8 +28,8 @@
 #include "logic/game.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 
 namespace Widelands {
 
@@ -38,7 +38,7 @@ namespace Widelands {
 */
 WaresQueue::WaresQueue
 	(PlayerImmovable &       _owner,
-	 Ware_Index        const _ware,
+	 WareIndex        const _ware,
 	 uint8_t           const _max_size)
 	:
 	m_owner           (_owner),
@@ -110,7 +110,7 @@ void WaresQueue::update() {
 /**
  * Set the callback function that is called when an item has arrived.
 */
-void WaresQueue::set_callback(callback_t * const fn, void * const data)
+void WaresQueue::set_callback(CallbackFn * const fn, void * const data)
 {
 	m_callback_fn = fn;
 	m_callback_data = data;
@@ -122,7 +122,7 @@ void WaresQueue::set_callback(callback_t * const fn, void * const data)
 void WaresQueue::request_callback
 	(Game            &       game,
 	 Request         &,
-	 Ware_Index        const ware,
+	 WareIndex        const ware,
 #ifndef NDEBUG
 	 Worker          * const w,
 #else
@@ -235,7 +235,7 @@ void WaresQueue::set_consume_interval(const uint32_t time)
  * Read and write
  */
 #define WARES_QUEUE_DATA_PACKET_VERSION 2
-void WaresQueue::Write(FileWrite & fw, Game & game, MapMapObjectSaver & mos)
+void WaresQueue::Write(FileWrite & fw, Game & game, MapObjectSaver & mos)
 {
 	fw.Unsigned16(WARES_QUEUE_DATA_PACKET_VERSION);
 
@@ -254,7 +254,7 @@ void WaresQueue::Write(FileWrite & fw, Game & game, MapMapObjectSaver & mos)
 }
 
 
-void WaresQueue::Read(FileRead & fr, Game & game, MapMapObjectLoader & mol)
+void WaresQueue::Read(FileRead & fr, Game & game, MapObjectLoader & mol)
 {
 	uint16_t const packet_version = fr.Unsigned16();
 	try {
@@ -283,10 +283,10 @@ void WaresQueue::Read(FileRead & fr, Game & game, MapMapObjectLoader & mol)
 			if (m_owner.get_economy())
 				add_to_economy(*m_owner.get_economy());
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const game_data_error & e) {
-		throw game_data_error("waresqueue: %s", e.what());
+	} catch (const GameDataError & e) {
+		throw GameDataError("waresqueue: %s", e.what());
 	}
 }
 

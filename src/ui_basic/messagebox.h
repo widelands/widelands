@@ -51,7 +51,7 @@ struct WLMessageBoxImpl;
  *       not work.
 */
 struct WLMessageBox : public Window {
-	enum MB_Type {
+	enum MBoxType {
 		OK,
 		YESNO
 	};
@@ -59,7 +59,7 @@ struct WLMessageBox : public Window {
 		(Panel * parent,
 		 const std::string & caption,
 		 const std::string & text,
-		 MB_Type,
+		 MBoxType,
 		 Align = Align_Center);
 	~WLMessageBox();
 

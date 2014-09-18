@@ -24,11 +24,11 @@
 #include "wui/mapviewpixelconstants.h"
 #include "wui/overlay_manager.h"
 
-int32_t Editor_Set_Origin_Tool::handle_click_impl(Widelands::Map& map,
+int32_t EditorSetOriginTool::handle_click_impl(Widelands::Map& map,
                                                   const Widelands::World&,
-                                                  Widelands::Node_and_Triangle<> const center,
-                                                  Editor_Interactive& eia,
-                                                  Editor_Action_Args& /* args */) {
+                                                  Widelands::NodeAndTriangle<> const center,
+                                                  EditorInteractive& eia,
+                                                  EditorActionArgs& /* args */) {
 	map.set_origin(center.node);
 	eia.register_overlays();
 	eia.set_rel_viewpoint
@@ -40,11 +40,11 @@ int32_t Editor_Set_Origin_Tool::handle_click_impl(Widelands::Map& map,
 }
 
 int32_t
-Editor_Set_Origin_Tool::handle_undo_impl(Widelands::Map& map,
+EditorSetOriginTool::handle_undo_impl(Widelands::Map& map,
                                          const Widelands::World&,
-                                         Widelands::Node_and_Triangle<Widelands::Coords> center,
-                                         Editor_Interactive& parent,
-                                         Editor_Action_Args& /* args */) {
+                                         Widelands::NodeAndTriangle<Widelands::Coords> center,
+                                         EditorInteractive& parent,
+                                         EditorActionArgs& /* args */) {
 	Widelands::Coords nc
 		(map.get_width()  - center.node.x,
 		 map.get_height() - center.node.y);
@@ -58,7 +58,7 @@ Editor_Set_Origin_Tool::handle_undo_impl(Widelands::Map& map,
 	return 0;
 }
 
-Editor_Action_Args Editor_Set_Origin_Tool::format_args_impl(Editor_Interactive & parent)
+EditorActionArgs EditorSetOriginTool::format_args_impl(EditorInteractive & parent)
 {
-	return Editor_Tool::format_args_impl(parent);
+	return EditorTool::format_args_impl(parent);
 }

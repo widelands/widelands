@@ -65,7 +65,7 @@ template <typename T> struct DescriptionMaintainer {
 	}
 
 private:
-	typedef std::map<std::string, int> NameToIndexMap;
+	using NameToIndexMap = std::map<std::string, int>;
 	std::vector<std::unique_ptr<T>> items_;
 	NameToIndexMap name_to_index_;
 };

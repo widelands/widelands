@@ -36,11 +36,11 @@
  * there is not already another resource there.
 */
 int32_t
-Editor_Decrease_Resources_Tool::handle_click_impl(Widelands::Map& map,
+EditorDecreaseResourcesTool::handle_click_impl(Widelands::Map& map,
                                                   const Widelands::World& world,
-                                                  Widelands::Node_and_Triangle<> const center,
-                                                  Editor_Interactive& /* parent */,
-                                                  Editor_Action_Args& args) {
+                                                  Widelands::NodeAndTriangle<> const center,
+                                                  EditorInteractive& /* parent */,
+                                                  EditorActionArgs& args) {
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 	(map,
 	Widelands::Area<Widelands::FCoords>
@@ -82,18 +82,18 @@ Editor_Decrease_Resources_Tool::handle_click_impl(Widelands::Map& map,
 	return mr.radius();
 }
 
-int32_t Editor_Decrease_Resources_Tool::handle_undo_impl(
+int32_t EditorDecreaseResourcesTool::handle_undo_impl(
    Widelands::Map& map,
    const Widelands::World& world,
-   Widelands::Node_and_Triangle<Widelands::Coords> center,
-   Editor_Interactive& parent,
-   Editor_Action_Args& args) {
+   Widelands::NodeAndTriangle<Widelands::Coords> center,
+   EditorInteractive& parent,
+   EditorActionArgs& args) {
 	return parent.tools.set_resources.handle_undo_impl(map, world, center, parent, args);
 }
 
-Editor_Action_Args Editor_Decrease_Resources_Tool::format_args_impl(Editor_Interactive & parent)
+EditorActionArgs EditorDecreaseResourcesTool::format_args_impl(EditorInteractive & parent)
 {
-	Editor_Action_Args a(parent);
+	EditorActionArgs a(parent);
 	a.change_by = m_change_by;
 	a.cur_res = m_cur_res;
 	return a;

@@ -113,13 +113,13 @@ DIAG_OFF("-Wold-style-cast")
 		peer.port = htons(m_port);
 DIAG_ON("-Wold-style-cast")
 	} else
-		throw warning
+		throw WLWarning
 			(_("Connection problem"), "%s", _("Widelands could not connect to the metaserver."));
 
 	SDLNet_ResolveHost (&peer, m_meta.c_str(), m_port);
 	m_sock = SDLNet_TCP_Open(&peer);
 	if (m_sock == nullptr)
-		throw warning
+		throw WLWarning
 			(_("Could not establish connection to host"),
 			 _
 			 	("Widelands could not establish a connection to the given address.\n"
@@ -397,7 +397,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 			std::string errortype = packet.String();
 			if (errortype != "LOGIN" && errortype != "RELOGIN") {
 				dedicatedlog("InternetGaming: Strange ERROR in connecting state: %s\n", errortype.c_str());
-				throw warning(_("Mixed up"), _("The metaserver sent a strange ERROR during connection"));
+				throw WLWarning(_("Mixed up"), _("The metaserver sent a strange ERROR during connection"));
 			}
 			// Clients login request got rejected
 			logout(packet.String());
@@ -407,7 +407,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 		} else {
 			logout();
 			setError();
-			throw warning
+			throw WLWarning
 				(_("Unexpected packet"),
 				 _
 				 	("Expected a LOGIN, RELOGIN or REJECTED packet from server, but received command "
@@ -461,7 +461,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 			std::string type     = packet.String();
 
 			if (type != "public" && type != "private" && type != "system")
-				throw warning(_("Invalid message type"), _("Invalid chat message type \"%s\"."), type.c_str());
+				throw WLWarning(_("Invalid message type"), _("Invalid chat message type \"%s\"."), type.c_str());
 
 			bool        personal = type == "private";
 			bool        system   = type == "system";
@@ -478,18 +478,18 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 		else if (cmd == IGPCMD_GAMES) {
 			// Client received the new list of games
 			uint8_t number = boost::lexical_cast<int>(packet.String()) & 0xff;
-			std::vector<INet_Game> old = gamelist;
+			std::vector<InternetGame> old = gamelist;
 			gamelist.clear();
 			dedicatedlog("InternetGaming: Received a game list update with %u items.\n", number);
 			for (uint8_t i = 0; i < number; ++i) {
-				INet_Game * ing  = new INet_Game();
+				InternetGame * ing  = new InternetGame();
 				ing->name        = packet.String();
 				ing->build_id    = packet.String();
 				ing->connectable = str2bool(packet.String());
 				gamelist.push_back(*ing);
 
 				bool found = false;
-				for (std::vector<INet_Game>::size_type j = 0; j < old.size(); ++j)
+				for (std::vector<InternetGame>::size_type j = 0; j < old.size(); ++j)
 					if (old[j].name == ing->name) {
 						found = true;
 						old[j].name = "";
@@ -503,7 +503,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 				ing = nullptr;
 			}
 
-			for (std::vector<INet_Game>::size_type i = 0; i < old.size(); ++i)
+			for (std::vector<InternetGame>::size_type i = 0; i < old.size(); ++i)
 				if (old[i].name.size())
 					formatAndAddChat
 						("", "", true, (boost::format(_("The game %s has been closed")) % old[i].name).str());
@@ -520,11 +520,11 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 		else if (cmd == IGPCMD_CLIENTS) {
 			// Client received the new list of clients
 			uint8_t number = boost::lexical_cast<int>(packet.String()) & 0xff;
-			std::vector<INet_Client> old = clientlist;
+			std::vector<InternetClient> old = clientlist;
 			clientlist.clear();
 			dedicatedlog("InternetGaming: Received a client list update with %u items.\n", number);
 			for (uint8_t i = 0; i < number; ++i) {
-				INet_Client * inc  = new INet_Client();
+				InternetClient * inc  = new InternetClient();
 				inc->name        = packet.String();
 				inc->build_id    = packet.String();
 				inc->game        = packet.String();
@@ -533,7 +533,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 				clientlist.push_back(*inc);
 
 				bool found = old.empty(); // do not show all clients, if this instance is the actual change
-				for (std::vector<INet_Client>::size_type j = 0; j < old.size(); ++j)
+				for (std::vector<InternetClient>::size_type j = 0; j < old.size(); ++j)
 					if (old[j].name == inc->name) {
 						found = true;
 						old[j].name = "";
@@ -547,7 +547,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 				inc = nullptr;
 			}
 
-			for (std::vector<INet_Client>::size_type i = 0; i < old.size(); ++i)
+			for (std::vector<InternetClient>::size_type i = 0; i < old.size(); ++i)
 				if (old[i].name.size())
 					formatAndAddChat
 						("", "", true, (boost::format(_("%s left the lobby")) % old[i].name).str());
@@ -611,7 +611,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 				(boost::format(_("Received an unknown command from the metaserver: %s")) % cmd).str()
 			);
 
-	} catch (warning & e) {
+	} catch (WLWarning & e) {
 		formatAndAddChat("", "", true, e.what());
 	}
 
@@ -714,8 +714,8 @@ bool InternetGaming::updateForGames() {
 
 
 /// \returns the tables in the room, if no error occured
-const std::vector<INet_Game> & InternetGaming::games() {
-	return error() ? * (new std::vector<INet_Game>()) : gamelist;
+const std::vector<InternetGame> & InternetGaming::games() {
+	return error() ? * (new std::vector<InternetGame>()) : gamelist;
 }
 
 
@@ -731,8 +731,8 @@ bool InternetGaming::updateForClients() {
 
 
 /// \returns the players in the room, if no error occured
-const std::vector<INet_Client> & InternetGaming::clients() {
-	return error() ? * (new std::vector<INet_Client>()) : clientlist;
+const std::vector<InternetClient> & InternetGaming::clients() {
+	return error() ? * (new std::vector<InternetClient>()) : clientlist;
 }
 
 
@@ -826,7 +826,7 @@ void InternetGaming::send(const std::string & msg) {
  */
 bool InternetGaming::str2bool(std::string str) {
 	if ((str != "true") && (str != "false"))
-		throw warning
+		throw WLWarning
 			(_("Conversion error"),
 			_("Conversion from std::string to bool failed. String was \"%s\""), str.c_str());
 

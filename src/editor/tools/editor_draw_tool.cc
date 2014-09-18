@@ -27,50 +27,50 @@
 // TODO(unknown): Saving every action in a list isn't very efficient.
 // A long list can take several seconds to undo/redo every action.
 // If someone has a better idea how to do this, implement it!
-void Editor_Draw_Tool::add_action
-(Editor_Tool_Action ac, Editor_Action_Args & args)
+void EditorDrawTool::add_action
+(EditorToolAction ac, EditorActionArgs & args)
 {
-	args.draw_actions.push_back(new Editor_Tool_Action(ac));
+	args.draw_actions.push_back(new EditorToolAction(ac));
 }
 
 int32_t
-Editor_Draw_Tool::handle_click_impl(Widelands::Map& /* map */,
+EditorDrawTool::handle_click_impl(Widelands::Map& /* map */,
                                     const Widelands::World& world,
-                                    Widelands::Node_and_Triangle<Widelands::Coords> /* center */,
-                                    Editor_Interactive& /* parent */,
-                                    Editor_Action_Args& args) {
+                                    Widelands::NodeAndTriangle<Widelands::Coords> /* center */,
+                                    EditorInteractive& /* parent */,
+                                    EditorActionArgs& args) {
 
 	for
-		(std::list<Editor_Tool_Action *>::iterator i = args.draw_actions.begin();
+		(std::list<EditorToolAction *>::iterator i = args.draw_actions.begin();
 	        i != args.draw_actions.end();
 	        ++i)
 	{
 		(*i)->tool.handle_click
-			(static_cast<Editor_Tool::Tool_Index>((*i)->i),
+			(static_cast<EditorTool::ToolIndex>((*i)->i),
 				(*i)->map, world, (*i)->center, (*i)->parent, *((*i)->args));
 	}
 	return args.draw_actions.size();
 }
 
 int32_t
-Editor_Draw_Tool::handle_undo_impl(Widelands::Map& /* map */,
+EditorDrawTool::handle_undo_impl(Widelands::Map& /* map */,
                                    const Widelands::World& world,
-                                   Widelands::Node_and_Triangle<Widelands::Coords> /* center */,
-                                   Editor_Interactive& /* parent */,
-                                   Editor_Action_Args& args) {
+                                   Widelands::NodeAndTriangle<Widelands::Coords> /* center */,
+                                   EditorInteractive& /* parent */,
+                                   EditorActionArgs& args) {
 	for
-		(std::list<Editor_Tool_Action *>::reverse_iterator i = args.draw_actions.rbegin();
+		(std::list<EditorToolAction *>::reverse_iterator i = args.draw_actions.rbegin();
 	        i != args.draw_actions.rend();
 	        ++i)
 	{
 		(*i)->tool.handle_undo
-		(static_cast<Editor_Tool::Tool_Index>((*i)->i),
+		(static_cast<EditorTool::ToolIndex>((*i)->i),
 			(*i)->map, world, (*i)->center, (*i)->parent, *((*i)->args));
 	}
 	return args.draw_actions.size();
 }
 
-Editor_Action_Args Editor_Draw_Tool::format_args_impl(Editor_Interactive & parent)
+EditorActionArgs EditorDrawTool::format_args_impl(EditorInteractive & parent)
 {
-	return Editor_Tool::format_args_impl(parent);
+	return EditorTool::format_args_impl(parent);
 }

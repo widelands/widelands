@@ -829,7 +829,7 @@ void Panel::die()
 }
 
 /**
- * Wrapper around Sound_Handler::play_fx() to prevent having to include
+ * Wrapper around SoundHandler::play_fx() to prevent having to include
  * sound_handler.h in every UI subclass just for playing a 'click'
  */
 void Panel::play_click()

@@ -63,13 +63,13 @@ struct MapGenAreaInfo {
 	MapGenAreaInfo(const LuaTable& table, const World& world, MapGenAreaType areaType);
 
 	size_t getNumTerrains(MapGenTerrainType) const;
-	Terrain_Index getTerrain(MapGenTerrainType terrType, uint32_t index) const;
+	TerrainIndex getTerrain(MapGenTerrainType terrType, uint32_t index) const;
 	uint32_t getWeight() const {return weight_;}
 
 private:
-	std::vector<Terrain_Index>  terrains1_; //  ocean, coast, inner or foot
-	std::vector<Terrain_Index>  terrains2_; //  shelf, land, outer or mountain
-	std::vector<Terrain_Index>  terrains3_; //  shallow, upper, snow
+	std::vector<TerrainIndex>  terrains1_; //  ocean, coast, inner or foot
+	std::vector<TerrainIndex>  terrains2_; //  shelf, land, outer or mountain
+	std::vector<TerrainIndex>  terrains3_; //  shallow, upper, snow
 
 	uint32_t weight_;
 	MapGenAreaType areaType_;

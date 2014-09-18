@@ -57,7 +57,7 @@ public:
 	bool has(const std::string& hash) const;
 
 private:
-	typedef std::map<std::string, const Image*> ImageMap;
+	using ImageMap = std::map<std::string, const Image*>;
 
 	ImageMap images_;  /// hash of cached filename/image pairs
 	SurfaceCache* const surface_cache_;  // Not owned.

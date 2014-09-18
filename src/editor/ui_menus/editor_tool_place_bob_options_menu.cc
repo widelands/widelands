@@ -37,12 +37,12 @@
 #include "wlapplication.h"
 
 
-Editor_Tool_Place_Bob_Options_Menu::Editor_Tool_Place_Bob_Options_Menu
-	(Editor_Interactive         & parent,
-	 Editor_Place_Bob_Tool      & pit,
+EditorToolPlaceBobOptionsMenu::EditorToolPlaceBobOptionsMenu
+	(EditorInteractive         & parent,
+	 EditorPlaceBobTool      & pit,
 	 UI::UniqueWindow::Registry & registry)
 :
-Editor_Tool_Options_Menu(parent, registry, 100, 100, _("Animals")),
+EditorToolOptionsMenu(parent, registry, 100, 100, _("Animals")),
 
 m_tabpanel          (this, 0, 0, g_gr->images().get("pics/but1.png")),
 m_pit               (pit),
@@ -98,7 +98,7 @@ m_click_recursion_protect(false)
 
 		cb.set_desired_size(width, height);
 		cb.set_state(m_pit.is_enabled(i));
-		cb.changedto.connect(boost::bind(&Editor_Tool_Place_Bob_Options_Menu::clicked, this, i, _1));
+		cb.changedto.connect(boost::bind(&EditorToolPlaceBobOptionsMenu::clicked, this, i, _1));
 		m_checkboxes.push_back(&cb);
 		box->add(&cb, UI::Align_Left);
 		box->add_space(space);
@@ -114,7 +114,7 @@ m_click_recursion_protect(false)
 /**
  * This is called when one of the state boxes is toggled
 */
-void Editor_Tool_Place_Bob_Options_Menu::clicked
+void EditorToolPlaceBobOptionsMenu::clicked
 	(int32_t const n, bool const t)
 {
 	if (m_click_recursion_protect)

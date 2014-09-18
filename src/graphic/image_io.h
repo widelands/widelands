@@ -29,13 +29,13 @@ class StreamWrite;
 class Surface;
 struct SDL_Surface;
 
-class ImageNotFound : public _wexception {
+class ImageNotFound : public WException {
 public:
 	ImageNotFound(const std::string& fn) : wexception("Image not found: %s", fn.c_str()) {
 	}
 };
 
-class ImageLoadingError : public _wexception {
+class ImageLoadingError : public WException {
 public:
 	ImageLoadingError(const std::string& fn, const std::string& reason)
 	   : wexception("Error loading %s: %s", fn.c_str(), reason.c_str()) {

@@ -101,14 +101,14 @@ struct SoldierControl {
 	 * Add a new soldier into this site. Returns -1 if there is no space
 	 * for him, 0 on success
 	 */
-	virtual int incorporateSoldier(Editor_Game_Base &, Soldier &) = 0;
+	virtual int incorporateSoldier(EditorGameBase &, Soldier &) = 0;
 
 	/**
 	 * Remove a soldier from the internal list. Most SoldierControls will be
 	 * informed by the soldier when it is removed, but WareHouses for example
 	 * will not.
 	 */
-	virtual int outcorporateSoldier(Editor_Game_Base &, Soldier &) {return 0;}
+	virtual int outcorporateSoldier(EditorGameBase &, Soldier &) {return 0;}
 
 protected:
 	virtual ~SoldierControl() {}

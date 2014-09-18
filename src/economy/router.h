@@ -36,7 +36,7 @@ struct RoutingNode;
  * The functionality was split from Economy
  */
 struct Router {
-	typedef boost::function<void ()> ResetCycleFn;
+	using ResetCycleFn = boost::function<void ()>;
 
 	Router(const ResetCycleFn & reset);
 

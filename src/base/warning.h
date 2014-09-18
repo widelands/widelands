@@ -38,8 +38,8 @@
 
 /// Similar exception type as wexception, but without the debug output.
 /// Intended for normal warnings like "map could not be found".
-struct warning : public std::exception {
-	explicit warning (char const * title, char const * message, ...)
+struct WLWarning : public std::exception {
+	explicit WLWarning (char const * title, char const * message, ...)
 	 PRINTF_FORMAT(3, 4);
 
 	/// The target of the returned pointer remains valid during the lifetime of
@@ -48,7 +48,7 @@ struct warning : public std::exception {
 	const char * what() const noexcept override;
 
 protected:
-	warning() {}
+	WLWarning() {}
 	std::string m_what;
 	std::string m_title;
 };

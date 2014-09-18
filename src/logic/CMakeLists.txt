@@ -176,7 +176,7 @@ wl_library(logic
     soldier.h
     soldier_counts.h
     soldiercontrol.h
-    tattribute.h
+    training_attribute.h
     trainingsite.cc
     trainingsite.h
     tribe.cc

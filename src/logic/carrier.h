@@ -31,7 +31,7 @@ struct CarrierDescr : public WorkerDescr {
 	              const std::string& directory,
 	              Profile& prof,
 	              Section& global_s,
-	              const Tribe_Descr& _tribe)
+	              const TribeDescr& _tribe)
 		:
 		WorkerDescr(MapObjectType::CARRIER, _name, _descname, directory, prof, global_s, _tribe)
 	{
@@ -49,7 +49,7 @@ private:
  * Carrier is a worker who is employed by a Road.
  */
 struct Carrier : public Worker {
-	friend struct Map_Bobdata_Data_Packet;
+	friend struct MapBobdataPacket;
 
 	MO_DESCR(CarrierDescr)
 
@@ -65,7 +65,7 @@ struct Carrier : public Worker {
 	void start_task_transport(Game &, int32_t fromflag);
 	bool start_task_walktoflag(Game &, int32_t flag, bool offset = false);
 
-	void log_general_info(const Editor_Game_Base &) override;
+	void log_general_info(const EditorGameBase &) override;
 
 	static Task const taskRoad;
 
@@ -110,7 +110,7 @@ protected:
 
 public:
 	virtual void do_save
-		(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
+		(EditorGameBase &, MapObjectSaver &, FileWrite &) override;
 };
 
 }
