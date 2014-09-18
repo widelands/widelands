@@ -25,9 +25,9 @@
 #include "editor/tools/editor_action_args.h"
 #include "editor/tools/editor_tool_action.h"
 
-// === Editor_Action_Args === //
+// === EditorActionArgs === //
 
-Editor_Action_Args::Editor_Action_Args(Editor_Interactive & base):
+EditorActionArgs::EditorActionArgs(EditorInteractive & base):
 	sel_radius(base.get_sel_radius()),
 	change_by(0),
 	cur_res(0),
@@ -36,7 +36,7 @@ Editor_Action_Args::Editor_Action_Args(Editor_Interactive & base):
 	refcount(0)
 {}
 
-Editor_Action_Args::~Editor_Action_Args()
+EditorActionArgs::~EditorActionArgs()
 {
 	while (!draw_actions.empty()) {
 		delete draw_actions.back();
@@ -53,20 +53,20 @@ Editor_Action_Args::~Editor_Action_Args()
 	terrainType.clear();
 }
 
-// === Editor_History === //
+// === EditorHistory === //
 
-uint32_t Editor_History::undo_action(const Widelands::World& world) {
+uint32_t EditorHistory::undo_action(const Widelands::World& world) {
 	if (undo_stack.empty())
 		return 0;
 
-	Editor_Tool_Action uac = undo_stack.front();
+	EditorToolAction uac = undo_stack.front();
 	undo_stack.pop_front();
 	redo_stack.push_front(uac);
 
 	m_undo_button.set_enabled(!undo_stack.empty());
 	m_redo_button.set_enabled(true);
 
-	return uac.tool.handle_undo(static_cast<Editor_Tool::Tool_Index>(uac.i),
+	return uac.tool.handle_undo(static_cast<EditorTool::ToolIndex>(uac.i),
 	                            uac.map,
 	                            world,
 	                            uac.center,
@@ -74,18 +74,18 @@ uint32_t Editor_History::undo_action(const Widelands::World& world) {
 	                            *uac.args);
 }
 
-uint32_t Editor_History::redo_action(const Widelands::World& world) {
+uint32_t EditorHistory::redo_action(const Widelands::World& world) {
 	if (redo_stack.empty())
 		return 0;
 
-	Editor_Tool_Action rac = redo_stack.front();
+	EditorToolAction rac = redo_stack.front();
 	redo_stack.pop_front();
 	undo_stack.push_front(rac);
 
 	m_undo_button.set_enabled(true);
 	m_redo_button.set_enabled(!redo_stack.empty());
 
-	return rac.tool.handle_click(static_cast<Editor_Tool::Tool_Index>(rac.i),
+	return rac.tool.handle_click(static_cast<EditorTool::ToolIndex>(rac.i),
 	                             rac.map,
 	                             world,
 	                             rac.center,
@@ -93,14 +93,14 @@ uint32_t Editor_History::redo_action(const Widelands::World& world) {
 	                             *rac.args);
 }
 
-uint32_t Editor_History::do_action(Editor_Tool& tool,
-                                   Editor_Tool::Tool_Index ind,
+uint32_t EditorHistory::do_action(EditorTool& tool,
+											  EditorTool::ToolIndex ind,
                                    Widelands::Map& map,
                                    const Widelands::World& world,
-                                   const Widelands::Node_and_Triangle<Widelands::Coords> center,
-                                   Editor_Interactive& parent,
+                                   const Widelands::NodeAndTriangle<Widelands::Coords> center,
+											  EditorInteractive& parent,
                                    bool draw) {
-	Editor_Tool_Action ac
+	EditorToolAction ac
 		(tool, static_cast<uint32_t>(ind),
 		 map, center, parent, tool.format_args(ind, parent));
 	if (draw && tool.is_unduable()) {
@@ -108,10 +108,10 @@ uint32_t Editor_History::do_action(Editor_Tool& tool,
 			(undo_stack.empty() ||
 			 undo_stack.front().tool.get_sel_impl() != std::string(m_draw_tool.get_sel_impl()))
 		{
-			Editor_Tool_Action da
-				(m_draw_tool, Editor_Tool::First,
+			EditorToolAction da
+				(m_draw_tool, EditorTool::First,
 				 map, center, parent,
-				 m_draw_tool.format_args(Editor_Tool::First, parent));
+				 m_draw_tool.format_args(EditorTool::First, parent));
 
 			if (!undo_stack.empty()) {
 				m_draw_tool.add_action(undo_stack.front(), *da.args);
@@ -123,7 +123,7 @@ uint32_t Editor_History::do_action(Editor_Tool& tool,
 			m_undo_button.set_enabled(true);
 			m_redo_button.set_enabled(false);
 		}
-		dynamic_cast<Editor_Draw_Tool *>
+		dynamic_cast<EditorDrawTool *>
 			(&(undo_stack.front().tool))->add_action(ac, *undo_stack.front().args);
 	} else if (tool.is_unduable()) {
 		redo_stack.clear();
@@ -135,7 +135,7 @@ uint32_t Editor_History::do_action(Editor_Tool& tool,
 }
 
 
-void Editor_History::reset()
+void EditorHistory::reset()
 {
 	undo_stack.clear();
 	redo_stack.clear();

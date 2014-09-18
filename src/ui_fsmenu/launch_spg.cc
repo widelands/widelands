@@ -44,11 +44,11 @@
 #include "wui/playerdescrgroup.h"
 #include "wui/text_constants.h"
 
-Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
+FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG
 	(GameSettingsProvider * const settings, GameController * const ctrl,
 	 bool /* autolaunch */)
 	:
-	Fullscreen_Menu_Base("launchgamemenu.jpg"),
+	FullscreenMenuBase("launchgamemenu.jpg"),
 
 // Values for alignment and size
 	m_butw (get_w() / 4),
@@ -116,15 +116,15 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 	m_ctrl         (ctrl),
 	m_is_scenario  (false)
 {
-	m_select_map.sigclicked.connect(boost::bind(&Fullscreen_Menu_LaunchSPG::select_map, boost::ref(*this)));
+	m_select_map.sigclicked.connect(boost::bind(&FullscreenMenuLaunchSPG::select_map, boost::ref(*this)));
 	m_wincondition.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_LaunchSPG::win_condition_clicked,
+			 (&FullscreenMenuLaunchSPG::win_condition_clicked,
 			  boost::ref(*this)));
-	m_back.sigclicked.connect(boost::bind(&Fullscreen_Menu_LaunchSPG::back_clicked, boost::ref(*this)));
+	m_back.sigclicked.connect(boost::bind(&FullscreenMenuLaunchSPG::back_clicked, boost::ref(*this)));
 	m_ok.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_LaunchSPG::start_clicked, boost::ref(*this)));
+			 (&FullscreenMenuLaunchSPG::start_clicked, boost::ref(*this)));
 
 
 	m_lua = new LuaInterface();
@@ -168,7 +168,7 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 				 g_gr->images().get(posIco),
 				 _("Switch to position"), false);
 		m_pos[i]->sigclicked.connect
-			(boost::bind(&Fullscreen_Menu_LaunchSPG::switch_to_position, boost::ref(*this), i));
+			(boost::bind(&FullscreenMenuLaunchSPG::switch_to_position, boost::ref(*this), i));
 		m_players[i] =
 			new PlayerDescriptionGroup
 				(this,
@@ -178,7 +178,7 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 	}
 }
 
-Fullscreen_Menu_LaunchSPG::~Fullscreen_Menu_LaunchSPG() {
+FullscreenMenuLaunchSPG::~FullscreenMenuLaunchSPG() {
 	delete m_lua;
 }
 
@@ -186,7 +186,7 @@ Fullscreen_Menu_LaunchSPG::~Fullscreen_Menu_LaunchSPG() {
  * Select a map as a first step in launching a game, before
  * showing the actual setup menu.
  */
-void Fullscreen_Menu_LaunchSPG::start()
+void FullscreenMenuLaunchSPG::start()
 {
 	select_map();
 	if (m_settings->settings().mapname.empty())
@@ -194,7 +194,7 @@ void Fullscreen_Menu_LaunchSPG::start()
 }
 
 
-void Fullscreen_Menu_LaunchSPG::think()
+void FullscreenMenuLaunchSPG::think()
 {
 	if (m_ctrl)
 		m_ctrl->think();
@@ -206,7 +206,7 @@ void Fullscreen_Menu_LaunchSPG::think()
 /**
  * back-button has been pressed
  */
-void Fullscreen_Menu_LaunchSPG::back_clicked()
+void FullscreenMenuLaunchSPG::back_clicked()
 {
 	//  The following behaviour might look strange at first view, but for the
 	//  user it seems as if the launchgame-menu is a child of mapselect and
@@ -222,7 +222,7 @@ void Fullscreen_Menu_LaunchSPG::back_clicked()
 /**
  * WinCondition button has been pressed
  */
-void Fullscreen_Menu_LaunchSPG::win_condition_clicked()
+void FullscreenMenuLaunchSPG::win_condition_clicked()
 {
 	if (m_settings->canChangeMap()) {
 		m_cur_wincondition++;
@@ -236,7 +236,7 @@ void Fullscreen_Menu_LaunchSPG::win_condition_clicked()
 /**
  * update win conditions information
  */
-void Fullscreen_Menu_LaunchSPG::win_condition_update() {
+void FullscreenMenuLaunchSPG::win_condition_update() {
 	if (m_settings->settings().scenario) {
 		m_wincondition.set_title(_("Scenario"));
 		m_wincondition.set_tooltip
@@ -260,10 +260,10 @@ void Fullscreen_Menu_LaunchSPG::win_condition_update() {
 /**
  * start-button has been pressed
  */
-void Fullscreen_Menu_LaunchSPG::start_clicked()
+void FullscreenMenuLaunchSPG::start_clicked()
 {
 	if (!g_fs->FileExists(m_filename))
-		throw warning
+		throw WLWarning
 			(_("File not found"),
 			 _
 			 	("Widelands tried to start a game with a file that could not be "
@@ -284,7 +284,7 @@ void Fullscreen_Menu_LaunchSPG::start_clicked()
  * update the user interface and take care about the visibility of
  * buttons and text.
  */
-void Fullscreen_Menu_LaunchSPG::refresh()
+void FullscreenMenuLaunchSPG::refresh()
 {
 	const GameSettings & settings = m_settings->settings();
 
@@ -332,12 +332,12 @@ void Fullscreen_Menu_LaunchSPG::refresh()
 /**
  * Select a map and send all information to the user interface.
  */
-void Fullscreen_Menu_LaunchSPG::select_map()
+void FullscreenMenuLaunchSPG::select_map()
 {
 	if (!m_settings->canChangeMap())
 		return;
 
-	Fullscreen_Menu_MapSelect msm(m_settings, nullptr);
+	FullscreenMenuMapSelect msm(m_settings, nullptr);
 	int code = msm.run();
 
 	if (code <= 0) {
@@ -362,17 +362,17 @@ void Fullscreen_Menu_LaunchSPG::select_map()
  * player names and player tribes and take care about visibility
  * and usability of all the parts of the UI.
  */
-void Fullscreen_Menu_LaunchSPG::set_scenario_values()
+void FullscreenMenuLaunchSPG::set_scenario_values()
 {
 	if (m_settings->settings().mapfilename.empty())
 		throw wexception
 				("settings()->scenario was set to true, but no map is available");
-	Widelands::Map map; //  Map_Loader needs a place to put it's preload data
-	std::unique_ptr<Widelands::Map_Loader> map_loader(
+	Widelands::Map map; //  MapLoader needs a place to put its preload data
+	std::unique_ptr<Widelands::MapLoader> map_loader(
 	   map.get_correct_loader(m_settings->settings().mapfilename));
 	map.set_filename(m_settings->settings().mapfilename.c_str());
 	map_loader->preload_map(true);
-	Widelands::Player_Number const nrplayers = map.get_nrplayers();
+	Widelands::PlayerNumber const nrplayers = map.get_nrplayers();
 	for (uint8_t i = 0; i < nrplayers; ++i) {
 		m_settings->setPlayerName (i, map.get_scenario_player_name (i + 1));
 		m_settings->setPlayerTribe(i, map.get_scenario_player_tribe(i + 1));
@@ -382,7 +382,7 @@ void Fullscreen_Menu_LaunchSPG::set_scenario_values()
 /**
  * Called when a position-button was clicked.
  */
-void Fullscreen_Menu_LaunchSPG::switch_to_position(uint8_t const pos)
+void FullscreenMenuLaunchSPG::switch_to_position(uint8_t const pos)
 {
 	m_settings->setPlayerNumber(pos);
 }
@@ -392,7 +392,7 @@ void Fullscreen_Menu_LaunchSPG::switch_to_position(uint8_t const pos)
  * Check to avoid segfaults, if the player changes a map with less player
  * positions while being on a later invalid position.
  */
-void Fullscreen_Menu_LaunchSPG::safe_place_for_host
+void FullscreenMenuLaunchSPG::safe_place_for_host
 	(uint8_t const newplayernumber)
 {
 	GameSettings settings = m_settings->settings();

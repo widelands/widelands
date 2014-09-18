@@ -32,7 +32,7 @@
 #include "wlapplication.h"
 #include "wui/interactive_base.h"
 
-using Widelands::Game_Saver;
+using Widelands::GameSaver;
 
 /**
 * Check if autosave is not needed.
@@ -178,7 +178,7 @@ bool SaveHandler::save_game
 	}
 
 	bool result = true;
-	Game_Saver gs(*fs, game);
+	GameSaver gs(*fs, game);
 	try {
 		gs.save();
 	} catch (const std::exception & e) {

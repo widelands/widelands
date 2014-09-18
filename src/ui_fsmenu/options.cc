@@ -53,7 +53,7 @@ struct LanguageEntry {
 void add_languages_to_list(UI::Listselect<std::string>* list, const std::string& language) {
 
 	Section* s = &g_options.pull_section("global");
-	filenameset_t files = g_fs->ListDirectory(s->get_string("localedir", INSTALL_LOCALEDIR));
+	FilenameSet files = g_fs->ListDirectory(s->get_string("localedir", INSTALL_LOCALEDIR));
 	Profile ln("txts/languages");
 	s = &ln.pull_section("languages");
 	bool own_selected = "" == language || "en" == language;
@@ -84,10 +84,10 @@ void add_languages_to_list(UI::Listselect<std::string>* list, const std::string&
 
 }  // namespace
 
-Fullscreen_Menu_Options::Fullscreen_Menu_Options
-		(Options_Ctrl::Options_Struct opt)
+FullscreenMenuOptions::FullscreenMenuOptions
+		(OptionsCtrl::OptionsStruct opt)
 	:
-	Fullscreen_Menu_Base("optionsmenu.jpg"),
+	FullscreenMenuBase("optionsmenu.jpg"),
 
 // Values for alignment and size
 	m_vbutw(get_h() * 333 / 10000),
@@ -238,11 +238,11 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	os(opt)
 {
 	m_advanced_options.sigclicked.connect
-		(boost::bind(&Fullscreen_Menu_Options::advanced_options, boost::ref(*this)));
+		(boost::bind(&FullscreenMenuOptions::advanced_options, boost::ref(*this)));
 	m_cancel.sigclicked.connect
-		(boost::bind(&Fullscreen_Menu_Options::end_modal, this, static_cast<int32_t>(om_cancel)));
+		(boost::bind(&FullscreenMenuOptions::end_modal, this, static_cast<int32_t>(om_cancel)));
 	m_apply.sigclicked.connect
-		(boost::bind(&Fullscreen_Menu_Options::end_modal, this, static_cast<int32_t>(om_ok)));
+		(boost::bind(&FullscreenMenuOptions::end_modal, this, static_cast<int32_t>(om_ok)));
 
 	m_advanced_options.set_font(font_small());
 	m_apply.set_font(font_small());
@@ -348,15 +348,15 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	add_languages_to_list(&m_language_list, opt.language);
 }
 
-void Fullscreen_Menu_Options::advanced_options() {
-	Fullscreen_Menu_Advanced_Options aom(os);
-	if (aom.run() == Fullscreen_Menu_Advanced_Options::om_ok) {
+void FullscreenMenuOptions::advanced_options() {
+	FullscreenMenuAdvancedOptions aom(os);
+	if (aom.run() == FullscreenMenuAdvancedOptions::om_ok) {
 		os = aom.get_values();
 		end_modal(om_restart);
 	}
 }
 
-bool Fullscreen_Menu_Options::handle_key(bool down, SDL_keysym code)
+bool FullscreenMenuOptions::handle_key(bool down, SDL_keysym code)
 {
 	if (down) {
 		switch (code.sym) {
@@ -372,10 +372,10 @@ bool Fullscreen_Menu_Options::handle_key(bool down, SDL_keysym code)
 		}
 	}
 
-	return Fullscreen_Menu_Base::handle_key(down, code);
+	return FullscreenMenuBase::handle_key(down, code);
 }
 
-Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
+OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	const uint32_t res_index = m_reslist.selection_index();
 
 	// Write all data from UI elements
@@ -404,10 +404,10 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
 /**
  * The advanced option menu
  */
-Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
-	(Options_Ctrl::Options_Struct const opt)
+FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
+	(OptionsCtrl::OptionsStruct const opt)
 	:
-	Fullscreen_Menu_Base("optionsmenu.jpg"),
+	FullscreenMenuBase("optionsmenu.jpg"),
 
 // Values for alignment and size
 	m_vbutw (get_h() * 333 / 10000),
@@ -499,12 +499,12 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 {
 	m_cancel.sigclicked.connect
 		(boost::bind
-			(&Fullscreen_Menu_Advanced_Options::end_modal,
+			(&FullscreenMenuAdvancedOptions::end_modal,
 			 boost::ref(*this),
 			 static_cast<int32_t>(om_cancel)));
 	m_apply.sigclicked.connect
 		(boost::bind
-			(&Fullscreen_Menu_Advanced_Options::end_modal,
+			(&FullscreenMenuAdvancedOptions::end_modal,
 			 boost::ref(*this),
 			 static_cast<int32_t>(om_ok)));
 
@@ -546,12 +546,12 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 			("Widelands", UI_FONT_NAME_WIDELANDS, nullptr, cmpbool);
 
 		// Fill with all left *.ttf files we find in fonts
-		filenameset_t files =
+		FilenameSet files =
 		   filter(g_fs->ListDirectory("fonts"),
 		          [](const std::string& fn) {return boost::ends_with(fn, ".ttf");});
 
 		for
-			(filenameset_t::iterator pname = files.begin();
+			(FilenameSet::iterator pname = files.begin();
 			 pname != files.end();
 			 ++pname)
 		{
@@ -574,7 +574,7 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 	}
 }
 
-bool Fullscreen_Menu_Advanced_Options::handle_key(bool down, SDL_keysym code)
+bool FullscreenMenuAdvancedOptions::handle_key(bool down, SDL_keysym code)
 {
 	if (down) {
 		switch (code.sym) {
@@ -590,11 +590,11 @@ bool Fullscreen_Menu_Advanced_Options::handle_key(bool down, SDL_keysym code)
 		}
 	}
 
-	return Fullscreen_Menu_Base::handle_key(down, code);
+	return FullscreenMenuBase::handle_key(down, code);
 }
 
 
-Options_Ctrl::Options_Struct Fullscreen_Menu_Advanced_Options::get_values() {
+OptionsCtrl::OptionsStruct FullscreenMenuAdvancedOptions::get_values() {
 	// Write all remaining data from UI elements
 	os.message_sound        = m_message_sound.get_state();
 	os.nozip                = m_nozip.get_state();
@@ -611,30 +611,30 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Advanced_Options::get_values() {
 /**
  * Handles communication between window class and options
  */
-Options_Ctrl::Options_Ctrl(Section & s)
-: m_opt_section(s), m_opt_dialog(new Fullscreen_Menu_Options(options_struct()))
+OptionsCtrl::OptionsCtrl(Section & s)
+: m_opt_section(s), m_opt_dialog(new FullscreenMenuOptions(options_struct()))
 {
 	handle_menu();
 }
 
-Options_Ctrl::~Options_Ctrl() {
+OptionsCtrl::~OptionsCtrl() {
 	delete m_opt_dialog;
 }
 
-void Options_Ctrl::handle_menu()
+void OptionsCtrl::handle_menu()
 {
 	int32_t i = m_opt_dialog->run();
-	if (i != Fullscreen_Menu_Options::om_cancel)
+	if (i != FullscreenMenuOptions::om_cancel)
 		save_options();
-	if (i == Fullscreen_Menu_Options::om_restart) {
+	if (i == FullscreenMenuOptions::om_restart) {
 		delete m_opt_dialog;
-		m_opt_dialog = new Fullscreen_Menu_Options(options_struct());
+		m_opt_dialog = new FullscreenMenuOptions(options_struct());
 		handle_menu(); // Restart general options menu
 	}
 }
 
-Options_Ctrl::Options_Struct Options_Ctrl::options_struct() {
-	Options_Struct opt;
+OptionsCtrl::OptionsStruct OptionsCtrl::options_struct() {
+	OptionsStruct opt;
 	opt.xres = m_opt_section.get_int("xres", DEFAULT_RESOLUTION_W);
 	opt.yres = m_opt_section.get_int("yres", DEFAULT_RESOLUTION_H);
 	opt.inputgrab = m_opt_section.get_bool("inputgrab", false);
@@ -663,8 +663,8 @@ Options_Ctrl::Options_Struct Options_Ctrl::options_struct() {
 	return opt;
 }
 
-void Options_Ctrl::save_options() {
-	Options_Ctrl::Options_Struct opt = m_opt_dialog->get_values();
+void OptionsCtrl::save_options() {
+	OptionsCtrl::OptionsStruct opt = m_opt_dialog->get_values();
 	m_opt_section.set_int ("xres",                  opt.xres);
 	m_opt_section.set_int ("yres",                  opt.yres);
 	m_opt_section.set_bool("fullscreen",            opt.fullscreen);

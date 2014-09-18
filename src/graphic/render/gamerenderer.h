@@ -27,7 +27,7 @@
 
 namespace Widelands {
 	class Player;
-	class Editor_Game_Base;
+	class EditorGameBase;
 }
 
 class RenderTarget;
@@ -56,7 +56,7 @@ public:
 	 */
 	void rendermap
 		(RenderTarget & dst,
-		 const Widelands::Editor_Game_Base &       egbase,
+		 const Widelands::EditorGameBase &       egbase,
 		 const Widelands::Player           &       player,
 		 const Point                       &       viewofs);
 
@@ -66,7 +66,7 @@ public:
 	 */
 	void rendermap
 		(RenderTarget & dst,
-		 const Widelands::Editor_Game_Base & egbase,
+		 const Widelands::EditorGameBase & egbase,
 		 const Point                       & viewofs);
 
 protected:
@@ -81,7 +81,7 @@ protected:
 	 */
 	/*@{*/
 	RenderTarget * m_dst;
-	Widelands::Editor_Game_Base const * m_egbase;
+	Widelands::EditorGameBase const * m_egbase;
 	Widelands::Player const * m_player;
 
 	/// Translation from map pixel coordinates to @ref m_dst pixel coordinates

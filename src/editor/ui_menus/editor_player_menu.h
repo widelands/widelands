@@ -30,18 +30,18 @@
 #include "ui_basic/unique_window.h"
 
 
-struct Editor_Interactive;
+struct EditorInteractive;
 namespace UI {
 struct Textarea;
 struct EditBox;
 struct Button;
 }
 
-class Editor_Player_Menu : public UI::UniqueWindow {
+class EditorPlayerMenu : public UI::UniqueWindow {
 public:
-	Editor_Player_Menu
-		(Editor_Interactive &, UI::UniqueWindow::Registry &);
-	virtual ~Editor_Player_Menu() {}
+	EditorPlayerMenu
+		(EditorInteractive &, UI::UniqueWindow::Registry &);
+	virtual ~EditorPlayerMenu() {}
 
 private:
 	UI::UniqueWindow::Registry m_allow_buildings_menu;

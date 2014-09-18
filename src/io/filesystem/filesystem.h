@@ -31,7 +31,7 @@
 
 #include "io/filesystem/filesystem_exceptions.h"
 
-typedef std::set<std::string> filenameset_t;
+using FilenameSet = std::set<std::string>;
 
 class StreamRead;
 class StreamWrite;

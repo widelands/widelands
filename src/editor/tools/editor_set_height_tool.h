@@ -25,24 +25,24 @@
 #include "logic/field.h"
 
 ///  Ensures that the height of a node is within an interval.
-struct Editor_Set_Height_Tool : public Editor_Tool {
-	Editor_Set_Height_Tool()
-		: Editor_Tool(*this, *this), m_interval(10, 10)
+struct EditorSetHeightTool : public EditorTool {
+	EditorSetHeightTool()
+		: EditorTool(*this, *this), m_interval(10, 10)
 	{}
 
 	int32_t handle_click_impl(Widelands::Map& map,
 	                          const Widelands::World& world,
-	                          Widelands::Node_and_Triangle<> center,
-	                          Editor_Interactive& parent,
-	                          Editor_Action_Args& args) override;
+	                          Widelands::NodeAndTriangle<> center,
+	                          EditorInteractive& parent,
+	                          EditorActionArgs& args) override;
 
 	int32_t handle_undo_impl(Widelands::Map& map,
 	                         const Widelands::World& world,
-	                         Widelands::Node_and_Triangle<> center,
-	                         Editor_Interactive& parent,
-	                         Editor_Action_Args& args) override;
+	                         Widelands::NodeAndTriangle<> center,
+	                         EditorInteractive& parent,
+	                         EditorActionArgs& args) override;
 
-	Editor_Action_Args format_args_impl(Editor_Interactive & parent) override;
+	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
 
 	char const * get_sel_impl() const override {
 		return "pics/fsel_editor_set_height.png";

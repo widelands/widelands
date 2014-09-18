@@ -34,8 +34,8 @@
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 
 
 namespace Widelands {
@@ -50,8 +50,8 @@ Request IMPLEMENTATION
 
 Request::Request
 	(PlayerImmovable & _target,
-	 Ware_Index const index,
-	 callback_t const cbfn,
+	 WareIndex const index,
+	 CallbackFn const cbfn,
 	 WareWorker const w)
 	:
 	m_type             (w),
@@ -106,19 +106,19 @@ Request::~Request()
  * them through the data in the file
  */
 void Request::Read
-	(FileRead & fr, Game & game, MapMapObjectLoader & mol)
+	(FileRead & fr, Game & game, MapObjectLoader & mol)
 {
 	try {
 		uint16_t const version = fr.Unsigned16();
 		if (version == 6) {
-			const Tribe_Descr& tribe = m_target.owner().tribe();
+			const TribeDescr& tribe = m_target.owner().tribe();
 			char const* const type_name = fr.CString();
-			Ware_Index const wai = tribe.ware_index(type_name);
+			WareIndex const wai = tribe.ware_index(type_name);
 			if (wai != INVALID_INDEX) {
 				m_type = wwWARE;
 				m_index = wai;
 			} else {
-				Ware_Index const woi = tribe.worker_index(type_name);
+				WareIndex const woi = tribe.worker_index(type_name);
 				if (woi != INVALID_INDEX) {
 					m_type = wwWORKER;
 					m_index = woi;
@@ -161,15 +161,15 @@ void Request::Read
 						transfer->set_request(this);
 						m_transfers.push_back(transfer);
 					}
-				} catch (const _wexception& e) {
+				} catch (const WException& e) {
 				   throw wexception("transfer %u: %s", i, e.what());
 				}
 			m_requirements.Read (fr, game, mol);
 			if (!is_open() && m_economy)
 				m_economy->remove_request(*this);
 		} else
-			throw game_data_error("unknown/unhandled version %u", version);
-	} catch (const _wexception & e) {
+			throw GameDataError("unknown/unhandled version %u", version);
+	} catch (const WException & e) {
 		throw wexception("request: %s", e.what());
 	}
 }
@@ -178,14 +178,14 @@ void Request::Read
  * Write this request to a file
  */
 void Request::Write
-	(FileWrite & fw, Game & game, MapMapObjectSaver & mos) const
+	(FileWrite & fw, Game & game, MapObjectSaver & mos) const
 {
 	fw.Unsigned16(REQUEST_VERSION);
 
 	//  Target and econmy should be set. Same is true for callback stuff.
 
 	assert(m_type == wwWARE || m_type == wwWORKER);
-	const Tribe_Descr & tribe = m_target.owner().tribe();
+	const TribeDescr & tribe = m_target.owner().tribe();
 	assert(m_type != wwWARE   || m_index < tribe.get_nrwares  ());
 	assert(m_type != wwWORKER || m_index < tribe.get_nrworkers());
 	fw.CString
@@ -227,7 +227,7 @@ Flag & Request::target_flag() const
  * be delivered. nr is in the range [0..m_count[
 */
 int32_t Request::get_base_required_time
-	(Editor_Game_Base & egbase, uint32_t const nr) const
+	(EditorGameBase & egbase, uint32_t const nr) const
 {
 	if (m_count <= nr) {
 		if (!(m_count == 1 && nr == 1)) {

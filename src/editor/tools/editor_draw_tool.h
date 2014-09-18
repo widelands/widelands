@@ -25,28 +25,28 @@
 
 ///  This is not a real editor tool. It serves to combine 'hold down mouse and move'
 ///  tool actions in one class.
-struct Editor_Draw_Tool : public Editor_Tool {
-	Editor_Draw_Tool() : Editor_Tool(*this, *this) {}
+struct EditorDrawTool : public EditorTool {
+	EditorDrawTool() : EditorTool(*this, *this) {}
 
 	int32_t handle_click_impl(Widelands::Map& map,
 	                          const Widelands::World& world,
-	                          Widelands::Node_and_Triangle<> center,
-	                          Editor_Interactive& parent,
-	                          Editor_Action_Args& args) override;
+	                          Widelands::NodeAndTriangle<> center,
+	                          EditorInteractive& parent,
+	                          EditorActionArgs& args) override;
 
 	int32_t handle_undo_impl(Widelands::Map& map,
 	                         const Widelands::World& world,
-	                         Widelands::Node_and_Triangle<> center,
-	                         Editor_Interactive& parent,
-	                         Editor_Action_Args& args) override;
+	                         Widelands::NodeAndTriangle<> center,
+	                         EditorInteractive& parent,
+	                         EditorActionArgs& args) override;
 
-	Editor_Action_Args format_args_impl(Editor_Interactive & parent) override;
+	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
 
 	char const * get_sel_impl() const override {
 		return "EDITOR_DRAW_TOOL";
 	}
 
-	void add_action(Editor_Tool_Action ac, Editor_Action_Args & args);
+	void add_action(EditorToolAction ac, EditorActionArgs & args);
 
 };
 

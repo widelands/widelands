@@ -40,7 +40,7 @@ constexpr uint32_t kMaxElevationHalf = 0x80000000;
 
 namespace Widelands {
 
-MapGenerator::MapGenerator(Map& map, const UniqueRandomMapInfo& mapInfo, Editor_Game_Base& egbase) :
+MapGenerator::MapGenerator(Map& map, const UniqueRandomMapInfo& mapInfo, EditorGameBase& egbase) :
 	map_(map),
 	map_info_(mapInfo),
 	egbase_(egbase)
@@ -126,12 +126,12 @@ void MapGenerator::generate_resources(uint32_t const* const random1,
 	// TODO(unknown): Check how the editor handles this...
 
 	const World& world = egbase_.world();
-	Terrain_Index const tix = fc.field->get_terrains().d;
+	TerrainIndex const tix = fc.field->get_terrains().d;
 	const TerrainDescription& terrain_description = egbase_.world().terrain_descr(tix);
 
 	const auto set_resource_helper = [this, &world, &terrain_description, &fc] (
 	   const uint32_t random_value, const int valid_resource_index) {
-		const Resource_Index  res_idx = terrain_description.get_valid_resource(valid_resource_index);
+		const ResourceIndex  res_idx = terrain_description.get_valid_resource(valid_resource_index);
 		const uint32_t max_amount = world.get_resource(res_idx)->max_amount();
 		uint8_t res_val = static_cast<uint8_t>(random_value / (kMaxElevation / max_amount));
 		res_val *= static_cast<uint8_t>(map_info_.resource_amount) + 1;
@@ -227,8 +227,8 @@ uint8_t MapGenerator::make_node_elevation
 	if (map_info_.islandMode) {
 		int32_t const border_dist =
 			std::min
-				(std::min<X_Coordinate>(c.x, map_info_.w - c.x),
-				 std::min<Y_Coordinate>(c.y, map_info_.h - c.y));
+				(std::min<int16_t>(c.x, map_info_.w - c.x),
+				 std::min<int16_t>(c.y, map_info_.h - c.y));
 		if (border_dist <= kIslandBorder) {
 			res_h =
 				static_cast<uint8_t>
@@ -442,7 +442,7 @@ rng:         is the random number generator to be used.
 terrType:    Returns the terrain-Type fpor this triangle
 ===============
 */
-Terrain_Index MapGenerator::figure_out_terrain
+TerrainIndex MapGenerator::figure_out_terrain
 	(uint32_t                  * const random2,
 	 uint32_t                  * const random3,
 	 uint32_t                  * const random4,
@@ -770,16 +770,16 @@ void MapGenerator::create_random_map()
 
 	// Random placement of starting positions
 	assert(map_info_.numPlayers);
-	std::vector<Player_Number> pn(map_info_.numPlayers);
-	for (Player_Number n = 1; n <= map_info_.numPlayers; ++n) {
+	std::vector<PlayerNumber> pn(map_info_.numPlayers);
+	for (PlayerNumber n = 1; n <= map_info_.numPlayers; ++n) {
 		bool okay = false;
 		// This is a kinda dump algorithm -> we generate a random number and increase it until it fits.
 		// However it's working and simple ;) - if you've got a better idea, feel free to fix it.
-		Player_Number x = rng.rand() % map_info_.numPlayers;
+		PlayerNumber x = rng.rand() % map_info_.numPlayers;
 		while (!okay) {
 			okay = true;
-			++x; // Player_Number begins at 1 not at 0
-			for (Player_Number p = 1; p < n; ++p) {
+			++x; // PlayerNumber begins at 1 not at 0
+			for (PlayerNumber p = 1; p < n; ++p) {
 				if (pn[p - 1] == x) {
 					okay = false;
 					x = x % map_info_.numPlayers;
@@ -790,7 +790,7 @@ void MapGenerator::create_random_map()
 		pn[n - 1] = x;
 	}
 
-	for (Player_Number n = 1; n <= map_info_.numPlayers; ++n) {
+	for (PlayerNumber n = 1; n <= map_info_.numPlayers; ++n) {
 		// Set scenario information - needed even if it's not a scenario
 		map_.set_scenario_player_name(n, "Random Player");
 		map_.set_scenario_player_tribe(n, tribe);
@@ -1010,7 +1010,7 @@ bool UniqueRandomMapInfo::setFromIdString
 
 	// Convert amount of resources
 	mapInfo_out.resource_amount =
-		static_cast<Widelands::UniqueRandomMapInfo::Resource_Amount>
+		static_cast<Widelands::UniqueRandomMapInfo::ResourceAmount>
 			((nums[6] & 0xc) >> 2);
 
 	if

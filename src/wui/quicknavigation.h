@@ -29,19 +29,19 @@
 #include "base/point.h"
 
 namespace Widelands {
-class Editor_Game_Base;
+class EditorGameBase;
 }
 
 /**
  * Provide quick navigation shortcuts.
  *
- * \note This functionality is really only used by \ref Interactive_Base,
+ * \note This functionality is really only used by \ref InteractiveBase,
  * but it is moved in its own structure to avoid overloading that class.
  */
 struct QuickNavigation {
-	typedef boost::function<void (Point)> SetViewFn;
+	using SetViewFn = boost::function<void (Point)>;
 
-	QuickNavigation(const Widelands::Editor_Game_Base & egbase, uint32_t screenwidth, uint32_t screenheight);
+	QuickNavigation(const Widelands::EditorGameBase & egbase, uint32_t screenwidth, uint32_t screenheight);
 
 	void set_setview(const SetViewFn & fn);
 
@@ -52,7 +52,7 @@ struct QuickNavigation {
 private:
 	void setview(Point where);
 
-	const Widelands::Editor_Game_Base & m_egbase;
+	const Widelands::EditorGameBase & m_egbase;
 	uint32_t m_screenwidth;
 	uint32_t m_screenheight;
 

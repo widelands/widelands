@@ -27,7 +27,7 @@
 namespace Widelands {
 class Objective;
 }
-class Interactive_Player;
+class InteractivePlayer;
 
 ///  Shows the not already fulfilled objectives.
 class GameObjectivesMenu : public UI::UniqueWindow {
@@ -36,12 +36,12 @@ public:
 	void think() override;
 
 private:
-	Interactive_Player & iplayer() const;
+	InteractivePlayer & iplayer() const;
 	void                 selected(uint32_t);
 
-	typedef UI::Listselect<const Widelands::Objective&> list_type;
-	list_type              list;
-	UI::Multiline_Textarea objectivetext;
+	using ListType = UI::Listselect<const Widelands::Objective&>;
+	ListType              list;
+	UI::MultilineTextarea objectivetext;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_OBJECTIVES_MENU_H

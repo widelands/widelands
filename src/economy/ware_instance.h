@@ -29,7 +29,7 @@ namespace Widelands {
 
 class Building;
 class Economy;
-class Editor_Game_Base;
+class EditorGameBase;
 class Game;
 struct IdleWareSupply;
 class MapObject;
@@ -53,30 +53,30 @@ struct Transfer;
  *     for seafaring
  */
 class WareInstance : public MapObject {
-	friend struct Map_Waredata_Data_Packet;
+	friend struct MapWaredataPacket;
 
 	MO_DESCR(WareDescr)
 
 public:
-	WareInstance(Ware_Index, const WareDescr* const);
+	WareInstance(WareIndex, const WareDescr* const);
 	~WareInstance();
 
-	MapObject* get_location(Editor_Game_Base& egbase) {
+	MapObject* get_location(EditorGameBase& egbase) {
 		return m_location.get(egbase);
 	}
 	Economy* get_economy() const {
 		return m_economy;
 	}
-	Ware_Index descr_index() const {
+	WareIndex descr_index() const {
 		return m_descr_index;
 	}
 
-	void init(Editor_Game_Base&) override;
-	void cleanup(Editor_Game_Base&) override;
+	void init(EditorGameBase&) override;
+	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 	void update(Game&);
 
-	void set_location(Editor_Game_Base&, MapObject* loc);
+	void set_location(EditorGameBase&, MapObject* loc);
 	void set_economy(Economy*);
 
 	void enter_building(Game&, Building& building);
@@ -92,16 +92,16 @@ public:
 		return m_transfer;
 	}
 
-	void log_general_info(const Editor_Game_Base& egbase) override;
+	void log_general_info(const EditorGameBase& egbase) override;
 
 private:
-	Object_Ptr m_location;
+	ObjectPointer m_location;
 	Economy* m_economy;
-	Ware_Index m_descr_index;
+	WareIndex m_descr_index;
 
 	IdleWareSupply* m_supply;
 	Transfer* m_transfer;
-	Object_Ptr m_transfer_nextstep;  ///< cached PlayerImmovable, can be 0
+	ObjectPointer m_transfer_nextstep;  ///< cached PlayerImmovable, can be 0
 
 	// loading and saving stuff
 protected:
@@ -123,8 +123,8 @@ public:
 		return true;
 	}
 
-	void save(Editor_Game_Base&, MapMapObjectSaver&, FileWrite&) override;
-	static MapObject::Loader* load(Editor_Game_Base&, MapMapObjectLoader&, FileRead&);
+	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
+	static MapObject::Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&);
 };
 }
 

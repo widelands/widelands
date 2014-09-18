@@ -50,7 +50,7 @@ struct Handler {
 	 * The passed array contains a list of all (space-separated) components
 	 * of the command, including the command name itself.
 	 */
-	typedef boost::function<void (const std::vector<std::string> &)> HandlerFn;
+	using HandlerFn = boost::function<void (const std::vector<std::string> &)>;
 
 	Handler();
 	virtual ~Handler();

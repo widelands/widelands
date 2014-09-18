@@ -35,7 +35,7 @@
 MiniMap::View::View
 	(UI::Panel & parent, MiniMapLayer * flags,
 	 int32_t const x, int32_t const y, uint32_t const, uint32_t const,
-	 Interactive_Base & ibase)
+	 InteractiveBase & ibase)
 :
 	UI::Panel       (&parent, x, y, 10, 10),
 	m_ibase       (ibase),
@@ -137,7 +137,7 @@ inline uint32_t MiniMap::but_w                    () const {
 	return m_view.get_w() / number_of_buttons_per_row();
 }
 inline uint32_t MiniMap::but_h                    () const {return 20;}
-MiniMap::MiniMap(Interactive_Base & ibase, Registry * const registry)
+MiniMap::MiniMap(InteractiveBase & ibase, Registry * const registry)
 :
 	UI::UniqueWindow(&ibase, "minimap", registry, 0, 0, _("Map")),
 	m_view(*this, &registry->flags, 0, 0, 0, 0, ibase),

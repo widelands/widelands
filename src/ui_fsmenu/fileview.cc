@@ -56,10 +56,10 @@ bool read_text(const std::string& filename, std::string* title, std::string* con
 }
 
 }  // namespace
-Fullscreen_Menu_TextView::Fullscreen_Menu_TextView
+FullscreenMenuTextView::FullscreenMenuTextView
 	(const std::string & filename)
 	:
-	Fullscreen_Menu_Base("fileviewmenu.jpg"),
+	FullscreenMenuBase("fileviewmenu.jpg"),
 
 	title (this, get_w() * 3 / 50, get_h() / 10),
 
@@ -74,7 +74,7 @@ Fullscreen_Menu_TextView::Fullscreen_Menu_TextView
 		 g_gr->images().get("pics/but0.png"),
 		 _("Close"), std::string(), true, false)
 {
-	close_button.sigclicked.connect(boost::bind(&Fullscreen_Menu_TextView::end_modal, boost::ref(*this), 0));
+	close_button.sigclicked.connect(boost::bind(&FullscreenMenuTextView::end_modal, boost::ref(*this), 0));
 
 	close_button.set_font(font_small());
 
@@ -91,13 +91,13 @@ Fullscreen_Menu_TextView::Fullscreen_Menu_TextView
 	textview.set_font(PROSA_FONT, PROSA_FONT_CLR_FG);
 }
 
-void Fullscreen_Menu_TextView::set_text(const std::string & text)
+void FullscreenMenuTextView::set_text(const std::string & text)
 {
 	textview.set_text(text);
 }
 
-Fullscreen_Menu_FileView::Fullscreen_Menu_FileView(const std::string & filename)
-: Fullscreen_Menu_TextView(filename)
+FullscreenMenuFileView::FullscreenMenuFileView(const std::string & filename)
+: FullscreenMenuTextView(filename)
 {}
 
 
@@ -107,7 +107,7 @@ struct FileViewWindow : public UI::UniqueWindow {
 		 UI::UniqueWindow::Registry & reg,
 		 const std::string          & filename);
 private:
-	UI::Multiline_Textarea textview;
+	UI::MultilineTextarea textview;
 };
 
 FileViewWindow::FileViewWindow

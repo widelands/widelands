@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-08-05 09:15+0000\n"
-"PO-Revision-Date: 2014-08-30 18:51+0000\n"
-"Last-Translator: bouchard renaud <Unknown>\n"
+"POT-Creation-Date: 2014-09-07 20:39+0000\n"
+"PO-Revision-Date: 2014-09-16 12:55+0000\n"
+"Last-Translator: AGuechoum <a.guechoum@gmail.com>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-31 05:42+0000\n"
-"X-Generator: Launchpad (build 17176)\n"
+"X-Launchpad-Export-Date: 2014-09-17 05:59+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 "Language: fr\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -1488,6 +1488,8 @@ msgid ""
 "The fisher working in this fisher’s house can’t find any fish in his working "
 "radius."
 msgstr ""
+"Le pêcheur travaillant à cette cabane de pêche ne trouve plus de poisson "
+"dans son rayon d'action."
 
 #: ../../tribes/empire/fishers_house/help.lua:17
 msgid "Fishes on the coast near the house."
@@ -1497,6 +1499,8 @@ msgstr "Pêchez sur la côte près de la maison."
 msgid ""
 "The fisher’s house needs water full of fish within the working radius."
 msgstr ""
+"La cabane de pêche nécessite un point d'eau rempli de poissons dans son "
+"rayon d'action."
 
 #: ../../tribes/empire/fishing_rod/conf:1
 msgid ""
@@ -1526,6 +1530,8 @@ msgid ""
 "The foresters’s house needs free space within the working radius to plant "
 "the trees."
 msgstr ""
+"La cabane du forestier nécessite de l'espace disponible dans son rayon "
+"d'action pour planter des arbres."
 
 #: ../../tribes/empire/fortress/conf:7
 msgid "Your soldiers have occupied your fortress."
@@ -1736,6 +1742,7 @@ msgstr "Abattez les arbres dans les alentours et transformez les en troncs."
 #: ../../tribes/empire/lumberjacks_house/help.lua:17
 msgid "The lumberjack's house needs trees to fell within the working radius."
 msgstr ""
+"La cabane de bûcheron nécessite des arbres à abattre dans son rayon d'action."
 
 #: ../../tribes/empire/marble/conf:1
 msgid ""

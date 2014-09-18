@@ -55,7 +55,7 @@ private:
 	void keyEscape();
 
 	ChatProvider & m_chat;
-	UI::Multiline_Textarea chatbox;
+	UI::MultilineTextarea chatbox;
 	UI::EditBox editbox;
 	uint32_t chat_message_counter;
 	std::unique_ptr<Notifications::Subscriber<ChatMessage>> chat_message_subscriber_;

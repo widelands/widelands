@@ -60,7 +60,7 @@ bool FileRead::EndOfFile() const {
 void FileRead::SetFilePos(Pos const pos) {
 	assert(data_);
 	if (pos >= length_)
-		throw File_Boundary_Exceeded();
+		throw FileBoundaryExceeded();
 	filepos_ = pos;
 }
 
@@ -85,7 +85,7 @@ char* FileRead::Data(uint32_t const bytes, const Pos pos) {
 		filepos_ += bytes;
 	}
 	if (length_ < i + bytes)
-		throw File_Boundary_Exceeded();
+		throw FileBoundaryExceeded();
 	return data_ + i;
 }
 
@@ -94,13 +94,13 @@ char* FileRead::CString(Pos const pos) {
 
 	Pos i = pos.isNull() ? filepos_ : pos;
 	if (i >= length_)
-		throw File_Boundary_Exceeded();
+		throw FileBoundaryExceeded();
 	char* const result = data_ + i;
 	for (char* p = result; *p; ++p, ++i) {
 	}
 	++i;                   //  beyond the null
 	if (i > (length_ + 1))  // allow EOF as end marker for string
-		throw File_Boundary_Exceeded();
+		throw FileBoundaryExceeded();
 	if (pos.isNull())
 		filepos_ = i;
 	return result;
@@ -121,7 +121,7 @@ char* FileRead::ReadLine() {
 			if (data_[filepos_] == '\n')
 				break;
 			else
-				throw typename StreamRead::_data_error("CR not immediately followed by LF");
+				throw typename StreamRead::DataError("CR not immediately followed by LF");
 		}
 	data_[filepos_] = '\0';
 	++filepos_;

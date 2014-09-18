@@ -25,8 +25,8 @@
 #include "editor/tools/editor_draw_tool.h"
 #include "editor/tools/editor_tool.h"
 
-//struct Editor_Action_Args;
-struct Editor_Interactive;
+//struct EditorActionArgs;
+struct EditorInteractive;
 namespace UI {struct Button;}
 
 /**
@@ -34,17 +34,17 @@ namespace UI {struct Button;}
  * provide undo / redo functionality.
  * Do all tool action you want to make "undoable" using this class.
  */
-struct Editor_History {
+struct EditorHistory {
 
-	Editor_History(UI::Button & undo, UI::Button & redo):
+	EditorHistory(UI::Button & undo, UI::Button & redo):
 		m_undo_button(undo), m_redo_button(redo) {}
 
-	uint32_t do_action(Editor_Tool& tool,
-	                   Editor_Tool::Tool_Index ind,
+	uint32_t do_action(EditorTool& tool,
+							 EditorTool::ToolIndex ind,
 	                   Widelands::Map& map,
 	                   const Widelands::World& world,
-	                   Widelands::Node_and_Triangle<> const center,
-	                   Editor_Interactive& parent,
+	                   Widelands::NodeAndTriangle<> const center,
+							 EditorInteractive& parent,
 	                   bool draw = false);
 	uint32_t undo_action(const Widelands::World& world);
 	uint32_t redo_action(const Widelands::World& world);
@@ -57,10 +57,10 @@ private:
 	UI::Button & m_undo_button;
 	UI::Button & m_redo_button;
 
-	Editor_Draw_Tool m_draw_tool;
+	EditorDrawTool m_draw_tool;
 
-	std::deque<Editor_Tool_Action> undo_stack;
-	std::deque<Editor_Tool_Action> redo_stack;
+	std::deque<EditorToolAction> undo_stack;
+	std::deque<EditorToolAction> redo_stack;
 
 };
 

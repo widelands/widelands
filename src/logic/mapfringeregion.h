@@ -32,18 +32,18 @@ namespace Widelands {
  * the current implementation begins at the top left node and then moves around
  * clockwise when advance is called repeatedly).
  */
-template <typename Area_type = Area<> > struct MapFringeRegion {
-	MapFringeRegion(const Map & map, Area_type area) :
+template <typename AreaType = Area<> > struct MapFringeRegion {
+	MapFringeRegion(const Map & map, AreaType area) :
 		m_area              (area),
 		m_remaining_in_phase(area.radius),
 		m_phase             (area.radius ? 6 : 0)
 	{
-		for (typename Area_type::Radius_type r = area.radius; r; --r)
+		for (typename AreaType::RadiusType r = area.radius; r; --r)
 			map.get_tln(m_area, &m_area);
 	}
 
 
-	const typename Area_type::Coords_type & location() const {return m_area;}
+	const typename AreaType::CoordsType & location() const {return m_area;}
 
 	/**
 	 * Moves on to the next location. The return value indicates whether the new
@@ -70,10 +70,10 @@ template <typename Area_type = Area<> > struct MapFringeRegion {
 		m_phase = 6;
 	}
 
-	typename Area_type::Radius_type radius() const {return m_area.radius;}
+	typename AreaType::RadiusType radius() const {return m_area.radius;}
 private:
-	Area_type                       m_area;
-	typename Area_type::Radius_type m_remaining_in_phase;
+	AreaType                       m_area;
+	typename AreaType::RadiusType m_remaining_in_phase;
 	uint8_t   m_phase;
 };
 

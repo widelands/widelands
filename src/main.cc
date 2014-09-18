@@ -107,7 +107,7 @@ int main(int argc, char * argv[])
 		delete g_app;
 
 		return 0;
-	} catch (const Parameter_error & e) {
+	} catch (const ParameterError & e) {
 		//  handle wrong commandline parameters
 		cerr<<endl<<e.what()<<endl<<endl;
 		show_usage(build_id(), build_type());
@@ -116,7 +116,7 @@ int main(int argc, char * argv[])
 		return 0;
 	}
 #ifdef NDEBUG
-	catch (const _wexception & e) {
+	catch (const WException & e) {
 		cerr
 			<< "\nCaught exception (of type '" << typeid(e).name()
 			<< "') in outermost handler!\nThe exception said: " << e.what()

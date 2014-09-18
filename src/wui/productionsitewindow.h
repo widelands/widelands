@@ -24,9 +24,9 @@
 #include "logic/productionsite.h"
 #include "ui_basic/table.h"
 
-struct ProductionSite_Window : public Building_Window {
-	ProductionSite_Window
-		(Interactive_GameBase & parent,
+struct ProductionSiteWindow : public BuildingWindow {
+	ProductionSiteWindow
+		(InteractiveGameBase & parent,
 		 Widelands::ProductionSite &,
 		 UI::Window *         & registry);
 

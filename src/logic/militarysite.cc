@@ -46,7 +46,7 @@ MilitarySiteDescr::MilitarySiteDescr
 	(char        const * const _name,
 	 char        const * const _descname,
 	 const std::string & directory, Profile & prof,  Section & global_s,
-	 const Tribe_Descr & _tribe,
+	 const TribeDescr & _tribe,
 	 const World& world)
 	:
 	ProductionSiteDescr
@@ -148,7 +148,7 @@ void MilitarySite::update_statistics_string(std::string* s)
 }
 
 
-void MilitarySite::init(Editor_Game_Base & egbase)
+void MilitarySite::init(EditorGameBase & egbase)
 {
 	ProductionSite::init(egbase);
 
@@ -192,12 +192,12 @@ void MilitarySite::set_economy(Economy * const e)
 Cleanup after a military site is removed
 ===============
 */
-void MilitarySite::cleanup(Editor_Game_Base & egbase)
+void MilitarySite::cleanup(EditorGameBase & egbase)
 {
 	// unconquer land
 	if (m_didconquer)
 		egbase.unconquer_area
-			(Player_Area<Area<FCoords> >
+			(PlayerArea<Area<FCoords> >
 			 	(owner().player_number(),
 			 	 Area<FCoords>
 			 	 	(egbase.map().get_fcoords(get_position()), descr().get_conquers())),
@@ -219,7 +219,7 @@ Takes one soldier and adds him to ours
 returns 0 on succes, -1 if there was no room for this soldier
 ===============
 */
-int MilitarySite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s)
+int MilitarySite::incorporateSoldier(EditorGameBase & egbase, Soldier & s)
 {
 
 	if (s.get_location(egbase) != this)
@@ -335,7 +335,7 @@ MilitarySite::drop_least_suited_soldier(bool new_soldier_has_arrived, Soldier * 
 		// Now I know that the new guy is worthy.
 		if (nullptr != kickoutCandidate)
 		{
-			Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
+			Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
 			kickoutCandidate->reset_tasks(game);
 			kickoutCandidate->start_task_leavebuilding(game, true);
 			return true;
@@ -350,12 +350,12 @@ MilitarySite::drop_least_suited_soldier(bool new_soldier_has_arrived, Soldier * 
  * Returns false if the soldier was not incorporated.
  */
 bool
-MilitarySite::incorporateUpgradedSoldier(Editor_Game_Base & egbase, Soldier & s)
+MilitarySite::incorporateUpgradedSoldier(EditorGameBase & egbase, Soldier & s)
 {
 	// Call to drop_least routine has side effects: it tries to drop a soldier. Order is important!
 	if (stationedSoldiers().size() < m_capacity || drop_least_suited_soldier(true, &s))
 	{
-		Game & game = ref_cast<Game, Editor_Game_Base>(egbase);
+		Game & game = ref_cast<Game, EditorGameBase>(egbase);
 		s.set_location(this);
 		s.reset_tasks(game);
 		s.start_task_buildingwork(game);
@@ -372,7 +372,7 @@ Called when our soldier arrives.
 void MilitarySite::request_soldier_callback
 	(Game            &       game,
 	 Request         &,
-	 Ware_Index,
+	 WareIndex,
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {
@@ -409,7 +409,7 @@ void MilitarySite::update_normal_soldier_request()
 	}
 
 	if (m_capacity < present.size()) {
-		Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
+		Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
 		for (uint32_t i = 0; i < present.size() - m_capacity; ++i) {
 			Soldier & soldier = *present[i];
 			soldier.reset_tasks(game);
@@ -716,7 +716,7 @@ void MilitarySite::setSoldierCapacity(uint32_t const capacity) {
 
 void MilitarySite::dropSoldier(Soldier & soldier)
 {
-	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
+	Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
 
 	if (!isPresent(soldier)) {
 		// This can happen when the "drop soldier" player command is delayed
@@ -736,10 +736,10 @@ void MilitarySite::dropSoldier(Soldier & soldier)
 }
 
 
-void MilitarySite::conquer_area(Editor_Game_Base & egbase) {
+void MilitarySite::conquer_area(EditorGameBase & egbase) {
 	assert(!m_didconquer);
 	egbase.conquer_area
-		(Player_Area<Area<FCoords> >
+		(PlayerArea<Area<FCoords> >
 		 	(owner().player_number(),
 		 	 Area<FCoords>
 		 	 	(egbase.map().get_fcoords(get_position()), descr().get_conquers())));
@@ -754,7 +754,7 @@ bool MilitarySite::canAttack()
 
 void MilitarySite::aggressor(Soldier & enemy)
 {
-	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
+	Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
 	Map  & map  = game.map();
 	if
 		(enemy.get_owner() == &owner() ||
@@ -797,7 +797,7 @@ void MilitarySite::aggressor(Soldier & enemy)
 
 bool MilitarySite::attack(Soldier & enemy)
 {
-	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
+	Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
 
 	std::vector<Soldier *> present = presentSoldiers();
 	Soldier * defender = nullptr;
@@ -867,12 +867,12 @@ bool MilitarySite::attack(Soldier & enemy)
 		// In fact we do not conquer it, but place a new building of same type at
 		// the old location.
 		Player            * enemyplayer = enemy.get_owner();
-		const Tribe_Descr & enemytribe  = enemyplayer->tribe();
+		const TribeDescr & enemytribe  = enemyplayer->tribe();
 
 		// Add suffix to all descr in former buildings in cases
 		// the new owner comes from another tribe
 		Building::FormerBuildings former_buildings;
-		for (Building_Index former_idx : m_old_buildings) {
+		for (BuildingIndex former_idx : m_old_buildings) {
 			const BuildingDescr * old_descr = descr().tribe().get_building_descr(former_idx);
 			std::string bldname = old_descr->name();
 			// Has this building already a suffix? == conquered building?
@@ -883,7 +883,7 @@ bool MilitarySite::attack(Soldier & enemy)
 					bldname += "." + owner().tribe().name();
 			} else if (enemytribe.name() == bldname.substr(dot + 1, bldname.size()))
 				bldname = bldname.substr(0, dot);
-			Building_Index bldi = enemytribe.safe_building_index(bldname.c_str());
+			BuildingIndex bldi = enemytribe.safe_building_index(bldname.c_str());
 			former_buildings.push_back(bldi);
 		}
 
@@ -992,7 +992,7 @@ void MilitarySite::sendAttacker
 	m_soldierjobs.push_back(sj);
 
 	soldier.update_task_buildingwork
-		(ref_cast<Game, Editor_Game_Base>(owner().egbase()));
+		(ref_cast<Game, EditorGameBase>(owner().egbase()));
 }
 
 

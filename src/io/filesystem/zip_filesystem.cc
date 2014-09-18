@@ -198,7 +198,7 @@ FileSystem * ZipFilesystem::MakeSubFileSystem(const std::string & path) {
 
 /**
  * Make a new Subfilesystem in this
- * \throw ZipOperation_error
+ * \throw ZipOperationError
  */
 // TODO(unknown): type should be recognized automatically,
 // see Filesystem::Create
@@ -207,7 +207,7 @@ FileSystem * ZipFilesystem::CreateSubFileSystem(const std::string & path, Type c
 	assert(!FileExists(path));
 
 	if (type != FileSystem::DIR)
-		throw ZipOperation_error
+		throw ZipOperationError
 			("ZipFilesystem::CreateSubFileSystem",
 			 path, m_zipfilename,
 			 "can not create ZipFilesystem inside another ZipFilesystem");
@@ -229,10 +229,10 @@ FileSystem * ZipFilesystem::CreateSubFileSystem(const std::string & path, Type c
 }
 /**
  * Remove a number of files
- * kthrow ZipOperation_error
+ * \throw ZipOperationError
  */
 void ZipFilesystem::Unlink(const std::string & filename) {
-	throw ZipOperation_error
+	throw ZipOperationError
 		("ZipFilesystem::Unlink",
 		 filename,
 		 m_zipfilename,
@@ -295,10 +295,10 @@ void ZipFilesystem::MakeDirectory(const std::string & dirname) {
 	case ZIP_OK:
 		break;
 	case ZIP_ERRNO:
-		throw File_error
+		throw FileError
 			("ZipFilesystem::MakeDirectory", complete_filename, strerror(errno));
 	default:
-		throw File_error
+		throw FileError
 			("ZipFilesystem::MakeDirectory", complete_filename);
 	}
 
@@ -307,11 +307,11 @@ void ZipFilesystem::MakeDirectory(const std::string & dirname) {
 
 /**
  * Read the given file into alloced memory; called by FileRead::Open.
- * \throw FileNotFound_error if the file couldn't be opened.
+ * \throw FileNotFoundError if the file couldn't be opened.
  */
 void * ZipFilesystem::Load(const std::string & fname, size_t & length) {
 	if (!FileExists(fname.c_str()) || IsDirectory(fname.c_str()))
-		throw ZipOperation_error
+		throw ZipOperationError
 			("ZipFilesystem::Load",
 			 fname,
 			 m_zipfilename,
@@ -329,7 +329,7 @@ void * ZipFilesystem::Load(const std::string & fname, size_t & length) {
 			unzCloseCurrentFile(m_unzipfile);
 			char buf[200];
 			snprintf(buf, sizeof(buf), "read error %i", len);
-			throw ZipOperation_error
+			throw ZipOperationError
 				("ZipFilesystem::Load",
 				 fname,
 				 m_zipfilename,
@@ -388,7 +388,7 @@ void ZipFilesystem::Write
 	case ZIP_OK:
 		break;
 	default:
-		throw ZipOperation_error
+		throw ZipOperationError
 			("ZipFilesystem::Write", complete_filename, m_zipfilename);
 	}
 
@@ -396,10 +396,10 @@ void ZipFilesystem::Write
 	case ZIP_OK:
 		break;
 	case ZIP_ERRNO:
-		throw File_error
+		throw FileError
 			("ZipFilesystem::Write", complete_filename, strerror(errno));
 	default:
-		throw File_error
+		throw FileError
 			("ZipFilesystem::Write", complete_filename);
 	}
 
@@ -420,10 +420,10 @@ size_t ZipFilesystem::ZipStreamRead::Data(void* data, size_t bufsize)
 {
 	int copied = unzReadCurrentFile(m_unzipfile, data, bufsize);
 	if (copied < 0) {
-		throw new _data_error("Failed to read from zip file");
+		throw new DataError("Failed to read from zip file");
 	}
 	if (copied == 0) {
-		throw new _data_error("End of file reaced while reading zip");
+		throw new DataError("End of file reaced while reading zip");
 	}
 	return copied;
 }
@@ -434,7 +434,7 @@ bool ZipFilesystem::ZipStreamRead::EndOfFile() const
 
 StreamRead* ZipFilesystem::OpenStreamRead(const std::string& fname) {
 	if (!FileExists(fname.c_str()) || IsDirectory(fname.c_str()))
-		throw ZipOperation_error
+		throw ZipOperationError
 			("ZipFilesystem::Load",
 			 fname,
 			 m_zipfilename,
@@ -447,7 +447,7 @@ StreamRead* ZipFilesystem::OpenStreamRead(const std::string& fname) {
 		case ZIP_OK:
 			break;
 		default:
-			throw ZipOperation_error
+			throw ZipOperationError
 				("ZipFilesystem: Failed to open streamwrite", fname, m_zipfilename);
 	}
 	return new ZipStreamRead(m_unzipfile, this);
@@ -500,7 +500,7 @@ StreamWrite * ZipFilesystem::OpenStreamWrite(const std::string & fname) {
 	case ZIP_OK:
 		break;
 	default:
-		throw ZipOperation_error
+		throw ZipOperationError
 			("ZipFilesystem: Failed to open streamwrite", complete_filename, m_zipfilename);
 	}
 	return new ZipStreamWrite(m_zipfile, this);
@@ -539,7 +539,7 @@ void ZipFilesystem::m_OpenZip() {
 
 /**
  * Open a zipfile for extraction
- * \throw FileType_error
+ * \throw FileTypeError
  */
 void ZipFilesystem::m_OpenUnzip() {
 	if (m_state == STATE_UNZIPPPING)
@@ -549,7 +549,7 @@ void ZipFilesystem::m_OpenUnzip() {
 
 	m_unzipfile = unzOpen(m_zipfilename.c_str());
 	if (!m_unzipfile)
-		throw FileType_error
+		throw FileTypeError
 			("ZipFilesystem::m_OpenUnzip", m_zipfilename, "not a .zip file");
 
 	m_state = STATE_UNZIPPPING;

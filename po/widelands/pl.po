@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-08-05 10:15+0100\n"
-"PO-Revision-Date: 2014-08-24 18:13+0000\n"
+"POT-Creation-Date: 2014-09-07 13:39-0700\n"
+"PO-Revision-Date: 2014-09-13 16:49+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-08-25 06:12+0000\n"
-"X-Generator: Launchpad (build 17163)\n"
+"X-Launchpad-Export-Date: 2014-09-14 05:57+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 
 #: ../../src/ai/computer_player.cc:39
 msgid "None"
@@ -751,7 +751,7 @@ msgstr "Zbudowano %i%%"
 #: ../../src/logic/dismantlesite.cc:99
 #, c-format
 msgid "%u%% dismantled"
-msgstr "%u%% rozebrany"
+msgstr "Rozebrano %u%%"
 
 #: ../../src/logic/editor_game_base.cc:276
 msgid "Loading world data"
@@ -973,13 +973,13 @@ msgstr "Nie zostało rozpoczęte %1$s, ponieważ %2$s"
 #: ../../src/logic/production_program.cc:584
 #, c-format
 msgid "Completed %1$s because %2$s"
-msgstr "Ukończono %1$s, ponieważ %2$s"
+msgstr "Ukończono: %1$s, ponieważ %2$s"
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware ‘%s’"
 #: ../../src/logic/production_program.cc:591
 #, c-format
 msgid "Skipped %1$s because %2$s"
-msgstr "Pominięto %1$s, gdyż %2$s"
+msgstr "Pominięto: %1$s, gdyż %2$s"
 
 #. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
 #. * TRANSLATORS: For this example, this is what's in the place holders:
@@ -989,7 +989,7 @@ msgstr "Pominięto %1$s, gdyż %2$s"
 #: ../../src/logic/production_program.cc:960
 #, c-format
 msgid "Did not start %1$s because %2$s %3$s"
-msgstr "Nie zostało rozpoczęte %1$s, ponieważ %3$s %2$s"
+msgstr "Nie rozpoczęto: %1$s, ponieważ %3$s %2$s"
 
 #. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta bread is missing'
@@ -1119,7 +1119,7 @@ msgstr "Błąd logiki"
 #: ../../src/logic/warehouse.cc:457
 #, c-format
 msgid "A new %s was added to your economy."
-msgstr "Nowy %s został dodany do twojej ekonomii."
+msgstr "Nowy budynek: %s został dodany do twojej ekonomii."
 
 #: ../../src/logic/worker.cc:118
 #, c-format
@@ -1139,16 +1139,16 @@ msgstr ""
 "powinno się hodować surowiec %s, który nie jest dostępny w tym świecie; "
 "plemię jest niekompatybilne z tym światem"
 
-#: ../../src/logic/worker.cc:944
+#: ../../src/logic/worker.cc:942
 msgid "A geologist found resources."
 msgstr "Geolog znalazł surowce."
 
-#: ../../src/logic/worker.cc:1844
+#: ../../src/logic/worker.cc:1842
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr "Twój osadnik: %s nie może znaleźć drogi do domu i najpewniej umrze."
 
-#: ../../src/logic/worker.cc:1851
+#: ../../src/logic/worker.cc:1849
 msgid "Worker got lost!"
 msgstr "Zaginął robotnik!"
 
@@ -1828,11 +1828,11 @@ msgstr "Zmniejsz wartość"
 
 #: ../../src/ui_basic/spinbox.cc:135
 msgid "Increase the value by 10"
-msgstr "Zwiększa wartość o 10"
+msgstr "Zwiększ wartość o 10"
 
 #: ../../src/ui_basic/spinbox.cc:143
 msgid "Decrease the value by 10"
-msgstr "Zmniejsza wartość o 10"
+msgstr "Zmniejsz wartość o 10"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:55
 msgid "Select a campaign"
@@ -2553,7 +2553,7 @@ msgstr "Włącz dźwięk"
 
 #: ../../src/ui_fsmenu/options.cc:168
 msgid "Maximum FPS:"
-msgstr "Klatki na sekundę:"
+msgstr "Klatki/s:"
 
 #: ../../src/ui_fsmenu/options.cc:178
 msgid "In-game resolution"
@@ -2577,7 +2577,7 @@ msgstr "Zacznij budowę drogi po umieszczeniu flagi"
 
 #: ../../src/ui_fsmenu/options.cc:214
 msgid "Show buildings area preview"
-msgstr "Pokaż widok obszarów budynków"
+msgstr "Pokaż obszar pracy budynków przed budową"
 
 #: ../../src/ui_fsmenu/options.cc:221
 msgid "Snap windows only when overlapping"
@@ -2598,7 +2598,7 @@ msgstr "Usuwaj powtórki starsze niż:"
 #. * TRANSLATORS Options: Remove Replays older than:
 #: ../../src/ui_fsmenu/options.cc:252
 msgid "Off"
-msgstr "Wyłączony"
+msgstr "Wył."
 
 #. * TRANSLATORS Options: Remove Replays older than:
 #: ../../src/ui_fsmenu/options.cc:254
@@ -3018,7 +3018,7 @@ msgstr "Ulepszyć budynek?"
 #: ../../src/wui/actionconfirm.cc:350
 #, c-format
 msgid "Do you really want to enhance this %s?"
-msgstr "Czy na pewno chcesz ulepszyć %s?"
+msgstr "Czy na pewno chcesz ulepszyć: %s?"
 
 #: ../../src/wui/actionconfirm.cc:402
 msgid "Do you really want to sink this ship?"
@@ -3032,19 +3032,19 @@ msgstr "Zatopić statek?"
 msgid "Do you really want to cancel the active expedition?"
 msgstr "Czy na pewno chcesz przerwać trwającą ekspedycję?"
 
-#: ../../src/wui/attack_box.cc:148
+#: ../../src/wui/attack_box.cc:147
 msgid "Soldiers:"
 msgstr "Żołnierze:"
 
-#: ../../src/wui/attack_box.cc:156
+#: ../../src/wui/attack_box.cc:155
 msgid "Send less soldiers"
 msgstr "Wyślij mniej żołnierzy"
 
-#: ../../src/wui/attack_box.cc:173
+#: ../../src/wui/attack_box.cc:172
 msgid "Number of soldiers"
 msgstr "Liczba żołnierzy"
 
-#: ../../src/wui/attack_box.cc:183
+#: ../../src/wui/attack_box.cc:182
 msgid "Send more soldiers"
 msgstr "Wyślij więcej żołnierzy"
 

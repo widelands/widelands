@@ -87,7 +87,7 @@ public:
 	/// The last_modified time is used to determine which setting to use when
 	/// economies are merged. The setting that was modified most recently will
 	/// be used for the merged economy.
-	struct Target_Quantity {
+	struct TargetQuantity {
 		uint32_t permanent;
 		Time     last_modified;
 	};
@@ -106,7 +106,7 @@ public:
 		 WareWorker type,
 		 int32_t cost_cutoff = -1);
 
-	typedef boost::function<bool (Warehouse &)> WarehouseAcceptFn;
+	using WarehouseAcceptFn = boost::function<bool (Warehouse &)>;
 	Warehouse * find_closest_warehouse
 		(Flag & start, WareWorker type = wwWORKER, Route * route = nullptr,
 		 uint32_t cost_cutoff = 0,
@@ -120,14 +120,14 @@ public:
 	// (i.e. an Expedition ship).
 	Flag* get_arbitrary_flag();
 
-	void set_ware_target_quantity  (Ware_Index, uint32_t, Time);
-	void set_worker_target_quantity(Ware_Index, uint32_t, Time);
+	void set_ware_target_quantity  (WareIndex, uint32_t, Time);
+	void set_worker_target_quantity(WareIndex, uint32_t, Time);
 
-	void    add_wares  (Ware_Index, uint32_t count = 1);
-	void remove_wares  (Ware_Index, uint32_t count = 1);
+	void    add_wares  (WareIndex, uint32_t count = 1);
+	void remove_wares  (WareIndex, uint32_t count = 1);
 
-	void    add_workers(Ware_Index, uint32_t count = 1);
-	void remove_workers(Ware_Index, uint32_t count = 1);
+	void    add_workers(WareIndex, uint32_t count = 1);
+	void remove_workers(WareIndex, uint32_t count = 1);
 
 	void    add_warehouse(Warehouse &);
 	void remove_warehouse(Warehouse &);
@@ -140,33 +140,33 @@ public:
 	void remove_supply(Supply &);
 
 	/// information about this economy
-	WareList::count_type stock_ware  (Ware_Index const i) {
+	WareList::WareCount stock_ware  (WareIndex const i) {
 		return m_wares  .stock(i);
 	}
-	WareList::count_type stock_worker(Ware_Index const i) {
+	WareList::WareCount stock_worker(WareIndex const i) {
 		return m_workers.stock(i);
 	}
 
 	/// Whether the economy needs more of this ware type.
 	/// Productionsites may ask this before they produce, to avoid depleting a
 	/// ware type by overproducing another from it.
-	bool needs_ware(Ware_Index) const;
+	bool needs_ware(WareIndex) const;
 
 	/// Whether the economy needs more of this worker type.
 	/// Productionsites may ask this before they produce, to avoid depleting a
 	/// ware type by overproducing a worker type from it.
-	bool needs_worker(Ware_Index) const;
+	bool needs_worker(WareIndex) const;
 
-	const Target_Quantity & ware_target_quantity  (Ware_Index const i) const {
+	const TargetQuantity & ware_target_quantity  (WareIndex const i) const {
 		return m_ware_target_quantities[i];
 	}
-	Target_Quantity       & ware_target_quantity  (Ware_Index const i)       {
+	TargetQuantity       & ware_target_quantity  (WareIndex const i)       {
 		return m_ware_target_quantities[i];
 	}
-	const Target_Quantity & worker_target_quantity(Ware_Index const i) const {
+	const TargetQuantity & worker_target_quantity(WareIndex const i) const {
 		return m_worker_target_quantities[i];
 	}
-	Target_Quantity       & worker_target_quantity(Ware_Index const i)       {
+	TargetQuantity       & worker_target_quantity(WareIndex const i)       {
 		return m_worker_target_quantities[i];
 	}
 
@@ -201,18 +201,18 @@ private:
 	void _balance_requestsupply(Game &);
 	void _handle_active_supplies(Game &);
 	void _create_requested_workers(Game &);
-	void _create_requested_worker(Game &, Ware_Index);
+	void _create_requested_worker(Game &, WareIndex);
 
 	bool   _has_request(Request &);
 
 /*************/
 /* Variables */
 /*************/
-	typedef std::vector<Request *> RequestList;
+	using RequestList = std::vector<Request *>;
 
 	Player & m_owner;
 
-	typedef std::vector<Flag *> Flags;
+	using Flags = std::vector<Flag *>;
 	Flags m_flags;
 	WareList m_wares;     ///< virtual storage with all wares in this Economy
 	WareList m_workers;   ///< virtual storage with all workers in this Economy
@@ -221,11 +221,11 @@ private:
 	RequestList m_requests; ///< requests
 	SupplyList m_supplies;
 
-	Target_Quantity        * m_ware_target_quantities;
-	Target_Quantity        * m_worker_target_quantities;
+	TargetQuantity        * m_ware_target_quantities;
+	TargetQuantity        * m_worker_target_quantities;
 	Router                 * m_router;
 
-	typedef std::pair<OPtr<Flag>, OPtr<Flag> > SplitPair;
+	using SplitPair = std::pair<OPtr<Flag>, OPtr<Flag>>;
 	std::vector<SplitPair> m_split_checks;
 
 	/**

@@ -70,7 +70,7 @@ void Songset::add_song(const std::string & filename) {
 }
 
 /** Get a song from the songset. Depending on
- * \ref Sound_Handler::sound_random_order, the selection will either be random
+ * \ref SoundHandler::sound_random_order, the selection will either be random
  * or linear (after last song, will start again with first).
  * \return  a pointer to the chosen song; 0 if none was found, music is disabled
  *          or an error occurred
@@ -118,10 +118,10 @@ Mix_Music * Songset::get_song()
 		m_ = Mix_LoadMUS_RW(rwops_);
 
 	if (m_)
-		log("Sound_Handler: loaded song \"%s\"\n", filename.c_str());
+		log("SoundHandler: loaded song \"%s\"\n", filename.c_str());
 	else {
-		log("Sound_Handler: loading song \"%s\" failed!\n", filename.c_str());
-		log("Sound_Handler: %s\n", Mix_GetError());
+		log("SoundHandler: loading song \"%s\" failed!\n", filename.c_str());
+		log("SoundHandler: %s\n", Mix_GetError());
 	}
 
 	return m_;

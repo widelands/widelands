@@ -41,23 +41,23 @@
  * Stupid, simple exception class. It has the nice bonus that you can give it
  * sprintf()-style format strings
  */
-struct _wexception : public std::exception {
-	explicit _wexception
+struct WException : public std::exception {
+	explicit WException
 		(const char * file, uint32_t line, const char * fmt, ...)
 	 PRINTF_FORMAT(4, 5);
 
 	/**
     * The target of the returned pointer remains valid during the lifetime of
-	 * the _wexception object.
+	 * the WException object.
 	 */
 	const char * what() const noexcept override;
 
 protected:
-	_wexception() {}
+	WException() {}
 	std::string m_what;
 };
 
-#define wexception(...) _wexception(__FILE__, __LINE__, __VA_ARGS__)
+#define wexception(...) WException(__FILE__, __LINE__, __VA_ARGS__)
 
 
 #endif  // end of include guard: WL_BASE_WEXCEPTION_H

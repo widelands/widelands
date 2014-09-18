@@ -24,7 +24,7 @@
 
 #include "ui_basic/window.h"
 
-struct Editor_Interactive;
+struct EditorInteractive;
 namespace UI {
 struct Button;
 struct Textarea;
@@ -35,8 +35,8 @@ struct Textarea;
  * the user to choose the new world and a few other
  * things like size, world ....
 */
-struct Main_Menu_New_Map : public UI::Window {
-	Main_Menu_New_Map(Editor_Interactive &);
+struct MainMenuNewMap : public UI::Window {
+	MainMenuNewMap(EditorInteractive &);
 
 private:
 	UI::Textarea * m_width, * m_height;

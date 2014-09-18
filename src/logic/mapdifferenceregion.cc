@@ -47,7 +47,7 @@ void MapDifferenceRegion<Area<FCoords> >::move_to_other_side(const Map & map)
 	assert     (m_direction <= 6);
 	assert(m_passed_corner);
 	--m_direction; if (!m_direction) m_direction = 6;
-	Area<FCoords>::Radius_type steps_left = m_area.radius + 1;
+	Area<FCoords>::RadiusType steps_left = m_area.radius + 1;
 	switch (m_direction) {
 #define DIRECTION_CASE(dir, neighbour_function)                               \
    case dir:                                                                  \

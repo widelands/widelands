@@ -40,12 +40,12 @@ namespace Widelands {
  * (TCoords<>::D or TCoords<>::R). Use MapRegion instead for nodes
  * (TCoords<>::None).
  */
-template <typename Coords_type = TCoords<>, typename Radius_type = uint16_t>
+template <typename CoordsType = TCoords<>, typename RadiusType = uint16_t>
 struct MapTriangleRegion
 {
-	MapTriangleRegion(const Map &, Coords_type, uint16_t radius);
+	MapTriangleRegion(const Map &, CoordsType, uint16_t radius);
 
-	const Coords_type & location() const;
+	const CoordsType & location() const;
 
 	/**
 	 * Moves on to the next location, traversing the region by row.
@@ -103,11 +103,11 @@ private:
 	uint16_t                m_remaining_in_row;
 	uint16_t                m_remaining_rows;
 };
-template <typename Coords_type> struct MapTriangleRegion<TCoords<Coords_type> >
+template <typename CoordsType> struct MapTriangleRegion<TCoords<CoordsType> >
 {
-	MapTriangleRegion(const Map &, Area<TCoords<Coords_type>, uint16_t>);
+	MapTriangleRegion(const Map &, Area<TCoords<CoordsType>, uint16_t>);
 
-	const TCoords<Coords_type> & location() const {return m_location;}
+	const TCoords<CoordsType> & location() const {return m_location;}
 
 	bool advance(const Map &);
 
@@ -117,8 +117,8 @@ private:
 	uint16_t m_remaining_rows_in_upper_phase;
 	uint16_t m_remaining_rows_in_lower_phase;
 	uint16_t m_row_length, m_remaining_in_row;
-	Coords_type          m_left;
-	TCoords<Coords_type> m_location;
+	CoordsType          m_left;
+	TCoords<CoordsType> m_location;
 };
 
 }
