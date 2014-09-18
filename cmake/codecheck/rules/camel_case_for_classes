@@ -10,11 +10,12 @@ def evaluate_matches(lines, fn):
    for lineno, line in enumerate(lines):
 
       # Exception for Microsoft fix in src/network/network_system.h
-      if not line.count("in_port_t = uint16_t") and not line.count("in_addr_t = uint32_t"):
+      if line.count("in_port_t = uint16_t") or line.count("in_addr_t = uint32_t"):
+         continue
 
-         if re.match("(^\s*((class|struct)\s+((\S+_)|([a-z]\S+)).*{)|((enum)\s+((\S+_)|(([abd-z])|(c(?!lass))\S+)).*{)|((using)\s+((\S+_)|([a-z]\S+)).*=).*$)", line):
+      if re.match("(^\s*((class|struct)\s+((\S+_)|([a-z]\S+)).*{)|((enum)\s+((\S+_)|(([abd-z])|(c(?!lass))\S+)).*{)|((using)\s+((\S+_)|([a-z]\S+)).*=).*$)", line):
 
-            errors.append((fn, lineno+1, "Use CapitalLetterWithCamelCase when naming an enum class, struct, or \"using\"."))
+         errors.append((fn, lineno+1, "Use CapitalLetterWithCamelCase when naming an enum class, struct, or \"using\"."))
 
    return errors
 # /end evaluate_matches
