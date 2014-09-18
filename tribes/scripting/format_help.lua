@@ -671,7 +671,7 @@ function building_help_crew_string(tribename, building_description)
 
 		for i, worker_description in ipairs(building_description.working_positions) do
 
-			-- get the tools for the workers
+			-- Get the tools for the workers.
 			if(worker_description.buildable) then
 				for j, buildcost in ipairs(worker_description.buildcost) do
 					if( not (buildcost == "carrier" or buildcost == "none" or buildcost == nil)) then
@@ -692,7 +692,7 @@ function building_help_crew_string(tribename, building_description)
 			end
 		end
 
-		if(#toolnames + 1 > 0) then
+		if(#toolnames > 0) then
 			result = result .. building_help_tool_string(tribename, toolnames, number_of_workers)
 		end
 
