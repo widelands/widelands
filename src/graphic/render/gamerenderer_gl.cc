@@ -297,32 +297,20 @@ void GameRendererGL::draw_terrain_triangles() {
 	glBufferData(
 		GL_ARRAY_BUFFER, sizeof(TerrainProgramData) * vertices.size(), vertices.data(), GL_STREAM_DRAW);
 
-	// Setup vertex position.
-	glEnableVertexAttribArray(kAttribVertexPosition);
-	glVertexAttribPointer(kAttribVertexPosition,
-	                      2,
-	                      GL_FLOAT,
-	                      GL_FALSE,
-	                      sizeof(TerrainProgramData),
-	                      reinterpret_cast<void*>(offsetof(TerrainProgramData, x)));
+	const auto set_attrib_pointer = [](const int vertex_index, int num_items, int offset) {
+		glEnableVertexAttribArray(vertex_index);
+		glVertexAttribPointer(vertex_index,
+		                      num_items,
+		                      GL_FLOAT,
+		                      GL_FALSE,
+		                      sizeof(TerrainProgramData),
+		                      reinterpret_cast<void*>(offset));
+	};
 
-	// Color.
-	glEnableVertexAttribArray(kAttribVertexColor);
-	glVertexAttribPointer(kAttribVertexColor,
-	                      3,
-	                      GL_FLOAT,
-	                      GL_FALSE,
-	                      sizeof(TerrainProgramData),
-	                      reinterpret_cast<void*>(offsetof(TerrainProgramData, r)));
-
-	// Height.
-	glEnableVertexAttribArray(kAttribVertexHeight);
-	glVertexAttribPointer(kAttribVertexHeight,
-	                      1,
-	                      GL_FLOAT,
-	                      GL_FALSE,
-	                      sizeof(TerrainProgramData),
-	                      reinterpret_cast<void*>(offsetof(TerrainProgramData, height)));
+	// Setup vertex attribute pointers.
+	set_attrib_pointer(kAttribVertexPosition, 2, offsetof(TerrainProgramData, x));
+	set_attrib_pointer(kAttribVertexColor, 3, offsetof(TerrainProgramData, r));
+	set_attrib_pointer(kAttribVertexHeight, 1, offsetof(TerrainProgramData, height));
 
 	// Which triangles to draw?
 	handle_glerror();
