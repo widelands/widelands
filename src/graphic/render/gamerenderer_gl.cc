@@ -235,25 +235,19 @@ uint8_t GameRendererGL::field_brightness(const FCoords & coords) const
 
 void GameRendererGL::initialize() {
 	// Setup Buffers;
-	handle_glerror();
 	glGenBuffers(1, &terrain_program_data_);
-	handle_glerror();
 	glGenBuffers(1, &indices_buffer_);
-	handle_glerror();
 
 	terrain_program_ = compile_gl_program(kTerrainVertexShader, kTerrainFragmentShader);
 
-	handle_glerror();
 	glBindAttribLocation(terrain_program_, kAttribVertexPosition, "in_position");
-	handle_glerror();
+	glEnableVertexAttribArray(kAttribVertexPosition);
 	glBindAttribLocation(terrain_program_, kAttribVertexTexturePosition, "in_texture_position");
-	handle_glerror();
+	glEnableVertexAttribArray(kAttribVertexTexturePosition);
 
 	link_gl_program(terrain_program_);
-	handle_glerror();
 
 	texture_location_ = glGetUniformLocation(terrain_program_, "tex");
-	handle_glerror();
 
 	do_initialize_ = false;
 }
@@ -318,12 +312,10 @@ void GameRendererGL::draw_terrain_triangles() {
 	glUseProgram(terrain_program_);
 
 	glBindBuffer(GL_ARRAY_BUFFER, terrain_program_data_);
-	handle_glerror();
 	glBufferData(
 		GL_ARRAY_BUFFER, sizeof(TerrainProgramData) * vertices.size(), vertices.data(), GL_STREAM_DRAW);
 
 	const auto set_attrib_pointer = [](const int vertex_index, int num_items, int offset, int normalized) {
-		glEnableVertexAttribArray(vertex_index);
 		glVertexAttribPointer(vertex_index,
 		                      num_items,
 		                      GL_FLOAT,
@@ -345,17 +337,13 @@ void GameRendererGL::draw_terrain_triangles() {
 		// Set the sampler texture unit to 0
 		glUniform1i(texture_location_, 0);
 
-		handle_glerror();
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indices_buffer_);
-		handle_glerror();
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER,
 						 sizeof(GL_UNSIGNED_SHORT) * pair.second.size(),
 						 pair.second.data(),
 						 GL_STREAM_DRAW);
-		handle_glerror();
 
 		glDrawElements(GL_TRIANGLES, pair.second.size(), GL_UNSIGNED_SHORT, 0 /* offset */);
-		handle_glerror();
 	}
 
 	// Release Program object.
@@ -400,10 +388,10 @@ void GameRendererGL::draw() {
 		 m_rect.w, m_rect.h);
 	glEnable(GL_SCISSOR_TEST);
 
-	// draw_terrain_triangles();
+	draw_terrain_triangles();
 
-	prepare_terrain_base();
-	draw_terrain_base();
+	// prepare_terrain_base();
+	// draw_terrain_base();
 
 	// if (g_gr->caps().gl.multitexture && g_gr->caps().gl.max_tex_combined >= 2) {
 		// prepare_terrain_dither();
