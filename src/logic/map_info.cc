@@ -106,7 +106,7 @@ int main(int argc, char ** argv)
 			FileWrite fw;
 
 			const auto write_string = [&fw] (const std::string& s) {
-				fw.Data(s.c_str(), s.size());
+				fw.data(s.c_str(), s.size());
 			};
 			const auto write_key_value =
 			   [&write_string](const std::string& key, const std::string& quoted_value) {

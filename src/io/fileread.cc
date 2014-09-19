@@ -53,7 +53,7 @@ size_t FileRead::GetSize() const {
 	return length_;
 }
 
-bool FileRead::EndOfFile() const {
+bool FileRead::end_of_file() const {
 	return length_ <= filepos_;
 }
 
@@ -68,7 +68,7 @@ FileRead::Pos FileRead::GetPos() const {
 	return filepos_;
 }
 
-size_t FileRead::Data(void* dst, size_t bufsize) {
+size_t FileRead::data(void* dst, size_t bufsize) {
 	assert(data_);
 	size_t read = 0;
 	for (; read < bufsize && filepos_ < length_; ++read, ++filepos_) {
@@ -77,7 +77,7 @@ size_t FileRead::Data(void* dst, size_t bufsize) {
 	return read;
 }
 
-char* FileRead::Data(uint32_t const bytes, const Pos pos) {
+char* FileRead::data(uint32_t const bytes, const Pos pos) {
 	assert(data_);
 	Pos i = pos;
 	if (pos.isNull()) {
@@ -111,7 +111,7 @@ char const* FileRead::CString() {
 }
 
 char* FileRead::ReadLine() {
-	if (EndOfFile())
+	if (end_of_file())
 		return nullptr;
 	char* result = data_ + filepos_;
 	for (; data_[filepos_] && data_[filepos_] != '\n'; ++filepos_)

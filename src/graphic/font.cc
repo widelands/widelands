@@ -60,7 +60,7 @@ Font::Font(const std::string & name, int size)
 	//  crashing. do not know why...
 	m_fontfile.Open(*g_fs, filename);
 
-	SDL_RWops * const ops = SDL_RWFromMem(m_fontfile.Data(0), m_fontfile.GetSize());
+	SDL_RWops * const ops = SDL_RWFromMem(m_fontfile.data(0), m_fontfile.GetSize());
 	if (!ops)
 		throw wexception("could not load font!: RWops Pointer invalid");
 

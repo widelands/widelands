@@ -165,7 +165,7 @@ Command * ReplayReader::GetNextCommand(const uint32_t time)
 		case pkt_syncreport: {
 			uint32_t duetime = m_cmdlog->Unsigned32();
 			Md5Checksum hash;
-			m_cmdlog->Data(hash.data, sizeof(hash.data));
+			m_cmdlog->data(hash.data, sizeof(hash.data));
 
 			return new CmdReplaySyncRead(duetime, hash);
 		}
@@ -284,7 +284,7 @@ void ReplayWriter::SendPlayerCommand(PlayerCommand * cmd)
 	m_cmdlog->Unsigned32(cmd->cmdserial());
 	cmd->serialize(*m_cmdlog);
 
-	m_cmdlog->Flush();
+	m_cmdlog->flush();
 }
 
 
@@ -295,8 +295,8 @@ void ReplayWriter::SendSync(const Md5Checksum & hash)
 {
 	m_cmdlog->Unsigned8(pkt_syncreport);
 	m_cmdlog->Unsigned32(m_game.get_gametime());
-	m_cmdlog->Data(hash.data, sizeof(hash.data));
-	m_cmdlog->Flush();
+	m_cmdlog->data(hash.data, sizeof(hash.data));
+	m_cmdlog->flush();
 }
 
 }

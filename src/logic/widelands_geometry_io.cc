@@ -85,12 +85,12 @@ Area<Coords, uint16_t> ReadArea48(StreamRead* fr, const Extent& extent) {
 void WriteDirection8(StreamWrite* wr, Direction const d) {
 	assert(0 < d);
 	assert(d <= 6);
-	wr->Data(&d, 1);
+	wr->data(&d, 1);
 }
 
 void WriteDirection8_allow_null(StreamWrite* wr, Direction const d) {
 	assert(d <= 6);
-	wr->Data(&d, 1);
+	wr->data(&d, 1);
 }
 
 void WriteCoords32(StreamWrite* wr, const Coords& c) {

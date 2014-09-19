@@ -34,10 +34,10 @@
  * data from disk.
  *
  * This is not intended for pipes or pipe-like operations, and all reads
- * are "blocking". Once \ref Data returns 0, or any number less than the
+ * are "blocking". Once \ref data returns 0, or any number less than the
  * requested number of bytes, the stream is at its end.
  *
- * All implementations need to implement \ref Data and \ref EndOfFile .
+ * All implementations need to implement \ref data and \ref end_of_file .
  *
  * Convenience functions are provided for many data types.
  */
@@ -52,14 +52,14 @@ public:
 	 * \return the number of bytes that were actually read. Will return 0 at
 	 * end of stream.
 	 */
-	virtual size_t Data(void * data, size_t bufsize) = 0;
+	virtual size_t data(void * read_data, size_t bufsize) = 0;
 
 	/**
 	 * \return \c true if the end of file / end of stream has been reached.
 	 */
-	virtual bool EndOfFile() const = 0;
+	virtual bool end_of_file() const = 0;
 
-	void DataComplete(void * data, size_t size);
+	void data_complete(void * data, size_t size);
 
 	int8_t Signed8();
 	uint8_t Unsigned8();

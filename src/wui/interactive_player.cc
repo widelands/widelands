@@ -66,7 +66,7 @@ using boost::format;
 namespace  {
 
 // This function is the callback for recalculation of field overlays
-int32_t Int_Player_overlay_callback_function
+int32_t int_player_overlay_callback_function
 	(Widelands::TCoords<Widelands::FCoords> const c, InteractivePlayer& iap)
 {
 	assert(iap.get_player());
@@ -281,7 +281,7 @@ void InteractivePlayer::postload()
 	OverlayManager & overlay_manager = map.overlay_manager();
 	overlay_manager.show_buildhelp(false);
 	overlay_manager.register_overlay_callback_function
-			(boost::bind(&Int_Player_overlay_callback_function, _1, boost::ref(*this)));
+			(boost::bind(&int_player_overlay_callback_function, _1, boost::ref(*this)));
 
 	// Connect buildhelp button to reflect build help state. Needs to be
 	// done here rather than in the constructor as the map is not present then.

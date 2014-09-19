@@ -172,7 +172,7 @@ load_s2mf_section(FileRead& fr, int32_t const width, int32_t const height) {
 	char buffer[256];
 
 	std::unique_ptr<uint8_t[]> section;
-	memcpy(buffer, fr.Data(6), 6);
+	memcpy(buffer, fr.data(6), 6);
 	if
 		(buffer[0] != 0x10 ||
 		 buffer[1] != 0x27 ||
@@ -205,12 +205,12 @@ load_s2mf_section(FileRead& fr, int32_t const width, int32_t const height) {
 	section.reset(new uint8_t[size]);
 	int32_t y = 0;
 	for (; y < height; ++y) {
-		uint8_t const* const ptr = reinterpret_cast<uint8_t*>(fr.Data(width));
+		uint8_t const* const ptr = reinterpret_cast<uint8_t*>(fr.data(width));
 		memcpy(section.get() + y * width, ptr, width);
-		fr.Data(dw - width);  // skip the alignment junk
+		fr.data(dw - width);  // skip the alignment junk
 	}
 	while (y < dh) {
-		fr.Data(dw);  // more alignment junk++ y;
+		fr.data(dw);  // more alignment junk++ y;
 	}
 
 	return section;
@@ -383,7 +383,7 @@ int32_t S2MapLoader::load_map_complete
 void S2MapLoader::load_s2mf_header(FileRead& fr)
 {
 	S2MapDescrHeader header;
-	memcpy(&header, fr.Data(sizeof(header)), sizeof(header));
+	memcpy(&header, fr.data(sizeof(header)), sizeof(header));
 
 	//  Header must be swapped for big-endian Systems, works at the moment only
 	//  for PowerPC architecture

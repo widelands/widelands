@@ -223,9 +223,9 @@ private:
 		/// \ref m_syncstreamsave has been set.
 		void StartDump(const std::string & fname);
 
-		void Data(void const * data, size_t size) override;
+		void data(void const * data, size_t size) override;
 
-		void Flush() override {m_target.Flush();}
+		void flush() override {m_target.flush();}
 
 	public:
 		Game        &   m_game;

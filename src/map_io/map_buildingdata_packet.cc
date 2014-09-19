@@ -82,11 +82,11 @@ void MapBuildingdataPacket::Read
 		uint16_t const packet_version = fr.Unsigned16();
 		if (1 <= packet_version && packet_version <= CURRENT_PACKET_VERSION) {
 			for (;;) {
-				if (2 <= packet_version && fr.EndOfFile())
+				if (2 <= packet_version && fr.end_of_file())
 					break;
 				Serial const serial = fr.Unsigned32();
 				if (packet_version < 2 && serial == 0xffffffff) {
-					if (!fr.EndOfFile())
+					if (!fr.end_of_file())
 						throw GameDataError
 							("expected end of file after serial 0xffffffff");
 					break;

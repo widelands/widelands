@@ -788,9 +788,9 @@ void InternetGaming::send(const std::string & msg) {
 					// Read in the file
 					FileRead fr;
 					fr.Open(*g_fs, temp);
-					if (!fr.EndOfFile()) {
+					if (!fr.end_of_file()) {
 						arg = fr.ReadLine();
-						while (!fr.EndOfFile()) {
+						while (!fr.end_of_file()) {
 							arg += fr.ReadLine();
 						}
 					}

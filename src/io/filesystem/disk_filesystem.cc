@@ -452,11 +452,11 @@ struct RealFSStreamRead : public StreamRead {
 		fclose(m_file);
 	}
 
-	size_t Data(void * data, size_t const bufsize) override {
-		return fread(data, 1, bufsize, m_file);
+	size_t data(void * read_data, size_t const bufsize) override {
+		return fread(read_data, 1, bufsize, m_file);
 	}
 
-	bool EndOfFile() const override
+	bool end_of_file() const override
 	{
 		return feof(m_file);
 	}
@@ -493,7 +493,7 @@ struct RealFSStreamWrite : public StreamWrite {
 
 	~RealFSStreamWrite() {fclose(m_file);}
 
-	void Data(const void * const data, const size_t size) override
+	void data(const void * const data, const size_t size) override
 	{
 		size_t ret = fwrite(data, 1, size, m_file);
 
@@ -501,7 +501,7 @@ struct RealFSStreamWrite : public StreamWrite {
 			throw wexception("Write to %s failed", m_filename.c_str());
 	}
 
-	void Flush() override
+	void flush() override
 	{
 		fflush(m_file);
 	}

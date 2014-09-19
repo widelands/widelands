@@ -59,11 +59,11 @@ void MapRoaddataPacket::Read
 			const Map   &       map        = egbase.map();
 			PlayerNumber const nr_players = map.get_nrplayers();
 			for (;;) {
-				if (2 <= packet_version && fr.EndOfFile())
+				if (2 <= packet_version && fr.end_of_file())
 					break;
 				Serial const serial = fr.Unsigned32();
 				if (packet_version < 2 && serial == 0xffffffff) {
-					if (!fr.EndOfFile())
+					if (!fr.end_of_file())
 						throw GameDataError
 							("expected end of file after serial 0xffffffff");
 					break;

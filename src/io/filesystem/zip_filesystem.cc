@@ -416,9 +416,9 @@ ZipFilesystem::ZipStreamRead::~ZipStreamRead() {
 	m_zipfs->m_Close();
 }
 
-size_t ZipFilesystem::ZipStreamRead::Data(void* data, size_t bufsize)
+size_t ZipFilesystem::ZipStreamRead::data(void* read_data, size_t bufsize)
 {
-	int copied = unzReadCurrentFile(m_unzipfile, data, bufsize);
+	int copied = unzReadCurrentFile(m_unzipfile, read_data, bufsize);
 	if (copied < 0) {
 		throw new DataError("Failed to read from zip file");
 	}
@@ -427,7 +427,7 @@ size_t ZipFilesystem::ZipStreamRead::Data(void* data, size_t bufsize)
 	}
 	return copied;
 }
-bool ZipFilesystem::ZipStreamRead::EndOfFile() const
+bool ZipFilesystem::ZipStreamRead::end_of_file() const
 {
 	return unzReadCurrentFile(m_unzipfile, nullptr, 1) == 0;
 }
@@ -464,9 +464,9 @@ ZipFilesystem::ZipStreamWrite::~ZipStreamWrite()
 	m_zipfs->m_Close();
 }
 
-void ZipFilesystem::ZipStreamWrite::Data(const void* const data, const size_t size)
+void ZipFilesystem::ZipStreamWrite::data(const void* const write_data, const size_t size)
 {
-	int result = zipWriteInFileInZip(m_zipfile, data, size);
+	int result = zipWriteInFileInZip(m_zipfile, write_data, size);
 	switch (result) {
 		case ZIP_OK:
 			break;

@@ -1546,15 +1546,15 @@ void NetHost::setMap
 		while (leftparts > 0) {
 			uint32_t readout = (leftparts > NETFILEPARTSIZE) ? NETFILEPARTSIZE : leftparts;
 			FilePart fp;
-			memcpy(fp.part, fr.Data(readout), readout);
+			memcpy(fp.part, fr.data(readout), readout);
 			file->parts.push_back(fp);
 			leftparts -= readout;
 		}
 		std::vector<char> complete(file->bytes);
 		fr.SetFilePos(0);
-		fr.DataComplete(&complete[0], file->bytes);
+		fr.data_complete(&complete[0], file->bytes);
 		SimpleMD5Checksum md5sum;
-		md5sum.Data(&complete[0], file->bytes);
+		md5sum.data(&complete[0], file->bytes);
 		md5sum.FinishChecksum();
 		file->md5sum = md5sum.GetChecksum().str();
 	} else {
@@ -2784,7 +2784,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		if (!d->game || !d->syncreport_pending || client.syncreport_arrived)
 			throw DisconnectException("UNEXPECTED_SYNC_REP");
 		int32_t time = r.Signed32();
-		r.Data(client.syncreport.data, 16);
+		r.data(client.syncreport.data, 16);
 		client.syncreport_arrived = true;
 		recvClientTime(i, time);
 		checkSyncReports();
@@ -2879,7 +2879,7 @@ void NetHost::sendFilePart(TCPsocket csock, uint32_t part) {
 	s.Unsigned8(NETCMD_FILE_PART);
 	s.Unsigned32(part);
 	s.Unsigned32(size);
-	s.Data(file->parts[part].part, size);
+	s.data(file->parts[part].part, size);
 	s.send(csock);
 }
 

@@ -99,7 +99,7 @@ void MapScriptingPacket::Write
 
 		upcast(LuaGameInterface, lgi, &g->lua());
 		uint32_t nwritten = Little32(lgi->write_global_env(fw, mos));
-		fw.Data(&nwritten, 4, pos);
+		fw.data(&nwritten, 4, pos);
 
 		fw.Write(fs, "scripting/globals.dump");
 	}

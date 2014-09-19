@@ -72,8 +72,8 @@ public:
 	~FileRead() override;
 
 	// See base class.
-	size_t Data(void* dst, size_t bufsize) override;
-	bool EndOfFile() const override;
+	size_t data(void* dst, size_t bufsize) override;
+	bool end_of_file() const override;
 	char const* CString() override;
 
 	/// Loads a file into memory. Reserves one additional byte which is zeroed,
@@ -104,7 +104,7 @@ public:
 
 	// Returns the next 'bytes' starting at 'pos' in the file. Can throw
 	// File_Boundary_Exceeded.
-	char* Data(uint32_t bytes, Pos pos = Pos::Null());
+	char* data(uint32_t bytes, Pos pos = Pos::Null());
 
 	// Returns the whole file as a string starting from 'pos'.
 	char* CString(Pos pos);

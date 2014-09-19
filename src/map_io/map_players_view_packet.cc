@@ -162,7 +162,7 @@ namespace {
 	}
 
 #define CHECK_TRAILING_BYTES(file, filename)                                                       \
-	if (!(file).EndOfFile())                                                                      \
+	if (!(file).end_of_file())                                                                      \
 		throw GameDataError("MapPlayersViewPacket::Read: player %u:"                       \
 		                      "Found %lu trailing bytes in \"%s\"",                                  \
 		                      plnum,                                                                 \

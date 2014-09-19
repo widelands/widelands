@@ -289,7 +289,7 @@ void SoundHandler::load_one_fx
 
 	if
 		(Mix_Chunk * const m =
-		 Mix_LoadWAV_RW(SDL_RWFromMem(fr.Data(fr.GetSize(), 0), fr.GetSize()), 1))
+		 Mix_LoadWAV_RW(SDL_RWFromMem(fr.data(fr.GetSize(), 0), fr.GetSize()), 1))
 	{
 		//make sure that requested FXset exists
 

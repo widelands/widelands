@@ -119,7 +119,7 @@ void GamePreloadPacket::Write
 		std::unique_ptr< ::StreamWrite> sw(fs.OpenStreamWrite(MINIMAP_FILENAME));
 		if (sw.get() != nullptr) {
 			write_minimap_image(game, &ipl->player(), vp, flags, sw.get());
-			sw->Flush();
+			sw->flush();
 		}
 	}
 }

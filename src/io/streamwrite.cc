@@ -25,7 +25,7 @@
 
 StreamWrite::~StreamWrite() {}
 
-void StreamWrite::Flush()
+void StreamWrite::flush()
 {
 	// no-op as default implementation
 }
@@ -42,7 +42,7 @@ void StreamWrite::Printf(char const * const fmt, ...)
 	va_end(va);
 
 	if (static_cast<uint32_t>(i) < sizeof(buffer)) {
-		Data(buffer, i);
+		data(buffer, i);
 	} else {
 		uint32_t size = sizeof(buffer);
 		char * heapbuf = nullptr;
@@ -61,7 +61,7 @@ void StreamWrite::Printf(char const * const fmt, ...)
 			va_end(va);
 		} while (static_cast<uint32_t>(i) >= size);
 
-		Data(heapbuf, i);
+		data(heapbuf, i);
 
 		delete[] heapbuf;
 	}

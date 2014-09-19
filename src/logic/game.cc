@@ -90,12 +90,12 @@ void Game::SyncWrapper::StartDump(const std::string & fname) {
 
 static const unsigned long long MINIMUM_DISK_SPACE = 256 * 1024 * 1024;
 
-void Game::SyncWrapper::Data(void const * const data, size_t const size) {
+void Game::SyncWrapper::data(void const * const sync_data, size_t const size) {
 #ifdef SYNC_DEBUG
 	uint32_t time = m_game.get_gametime();
 	log("[sync:%08u t=%6u]", m_counter, time);
 	for (size_t i = 0; i < size; ++i)
-		log(" %02x", (static_cast<uint8_t const *>(data))[i]);
+		log(" %02x", (static_cast<uint8_t const *>(sync_data))[i]);
 	log("\n");
 #endif
 
@@ -114,7 +114,7 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 
 	if (m_dump) {
 		try {
-			m_dump->Data(data, size);
+			m_dump->data(sync_data, size);
 		} catch (const WException &) {
 			log
 				("Writing to syncstream file %s failed. Stop synctream dump.\n",
@@ -125,7 +125,7 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 		}
 	}
 
-	m_target.Data(data, size);
+	m_target.data(sync_data, size);
 	m_counter += size;
 }
 

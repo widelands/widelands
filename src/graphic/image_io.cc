@@ -35,14 +35,14 @@ namespace {
 
 // A helper function for save_surface_to_png. Writes the compressed data to
 // the StreamWrite.
-void png_write_function(png_structp png_ptr, png_bytep data, png_size_t length) {
-	static_cast<StreamWrite*>(png_get_io_ptr(png_ptr))->Data(data, length);
+void png_write_function(png_structp png_ptr, png_bytep png_data, png_size_t length) {
+	static_cast<StreamWrite*>(png_get_io_ptr(png_ptr))->data(png_data, length);
 }
 
 // A helper function for save_surface_to_png.
 // Flush function to avoid crashes with default libpng flush function
 void png_flush_function(png_structp png_ptr) {
-	static_cast<StreamWrite*>(png_get_io_ptr(png_ptr))->Flush();
+	static_cast<StreamWrite*>(png_get_io_ptr(png_ptr))->flush();
 }
 
 }  // namespace
@@ -64,7 +64,7 @@ SDL_Surface* load_image_as_sdl_surface(const std::string& fname, FileSystem* fs)
 		throw ImageNotFound(fname);
 	}
 
-	SDL_Surface* sdlsurf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
+	SDL_Surface* sdlsurf = IMG_Load_RW(SDL_RWFromMem(fr.data(0), fr.GetSize()), 1);
 	if (!sdlsurf) {
 		throw ImageLoadingError(fname.c_str(), IMG_GetError());
 	}

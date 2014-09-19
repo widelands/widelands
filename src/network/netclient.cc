@@ -664,7 +664,7 @@ void NetClient::syncreport()
 		SendPacket s;
 		s.Unsigned8(NETCMD_SYNCREPORT);
 		s.Signed32(d->game->get_gametime());
-		s.Data(d->game->get_sync_hash().data, 16);
+		s.data(d->game->get_sync_hash().data, 16);
 		s.send(d->sock);
 	}
 }
@@ -760,9 +760,9 @@ void NetClient::handle_packet(RecvPacket & packet)
 					std::unique_ptr<char[]> complete(new char[bytes]);
 					if (!complete) throw wexception("Out of memory");
 
-					fr.DataComplete(complete.get(), bytes);
+					fr.data_complete(complete.get(), bytes);
 					SimpleMD5Checksum md5sum;
-					md5sum.Data(complete.get(), bytes);
+					md5sum.data(complete.get(), bytes);
 					md5sum.FinishChecksum();
 					std::string localmd5 = md5sum.GetChecksum().str();
 					if (localmd5 == md5)
@@ -816,7 +816,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 		char buf[NETFILEPARTSIZE];
 		assert(size <= NETFILEPARTSIZE);
 
-		if (packet.Data(buf, size) != size)
+		if (packet.data(buf, size) != size)
 			log("Readproblem. Will try to go on anyways\n");
 		memcpy(fp.part, &buf[0], size);
 		file->parts.push_back(fp);
@@ -831,7 +831,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 			while (left > 0) {
 				uint32_t writeout
 					= (left > NETFILEPARTSIZE) ? NETFILEPARTSIZE : left;
-				fw.Data(file->parts[i].part, writeout, FileWrite::Pos::Null());
+				fw.data(file->parts[i].part, writeout, FileWrite::Pos::Null());
 				left -= writeout;
 				++i;
 			}
@@ -845,9 +845,9 @@ void NetClient::handle_packet(RecvPacket & packet)
 			std::unique_ptr<char[]> complete(new char[file->bytes]);
 			if (!complete) throw wexception("Out of memory");
 
-			fr.DataComplete(complete.get(), file->bytes);
+			fr.data_complete(complete.get(), file->bytes);
 			SimpleMD5Checksum md5sum;
-			md5sum.Data(complete.get(), file->bytes);
+			md5sum.data(complete.get(), file->bytes);
 			md5sum.FinishChecksum();
 			std::string localmd5 = md5sum.GetChecksum().str();
 			if (localmd5 != file->md5sum) {

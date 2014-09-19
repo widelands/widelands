@@ -54,7 +54,7 @@ void FileWrite::SetPos(const Pos pos) {
 	filepos_ = pos;
 }
 
-void FileWrite::Data(const void* const src, const size_t size, Pos const pos = Pos::Null()) {
+void FileWrite::data(const void* const src, const size_t size, Pos const pos = Pos::Null()) {
 	assert(data_ || !length_);
 
 	Pos i = pos;
@@ -76,10 +76,10 @@ void FileWrite::Data(const void* const src, const size_t size, Pos const pos = P
 	memcpy(data_ + i, src, size);
 }
 
-void FileWrite::Data(void const* const src, size_t const size) {
-	Data(src, size, Pos::Null());
+void FileWrite::data(void const* const src, size_t const size) {
+	data(src, size, Pos::Null());
 }
 
-std::string FileWrite::GetData() const {
+std::string FileWrite::get_data() const {
 	return std::string(data_, length_);
 }

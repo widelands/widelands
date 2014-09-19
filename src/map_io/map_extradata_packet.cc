@@ -64,7 +64,7 @@ void MapExtradataPacket::Read(FileSystem& fs, bool const skip) {
 
 						fr.Open(fs, *pname);
 						SDL_Surface * const surf =
-							IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
+							IMG_Load_RW(SDL_RWFromMem(fr.data(0), fr.GetSize()), 1);
 						if (!surf)
 							continue; //  Illegal pic. Skip it.
 						image = g_gr->images().insert(new_in_memory_image(hash, Surface::create(surf)));

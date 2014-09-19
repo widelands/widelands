@@ -93,7 +93,7 @@ public:
 	///
 	/// \param data data to compute chksum for
 	/// \param size size of data
-	void Data(const void * const newdata, const size_t size) {
+	void data(const void * const newdata, const size_t size) {
 		assert(can_handle_data);
 		md5_process_bytes(newdata, size, &ctx);
 	}

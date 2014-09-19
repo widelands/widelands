@@ -98,7 +98,7 @@ struct SendPacket : public StreamWrite {
 	void send (TCPsocket);
 	void reset ();
 
-	void Data(void const * data, size_t size) override;
+	void data(void const * data, size_t size) override;
 
 private:
 	std::vector<uint8_t> buffer;
@@ -112,8 +112,8 @@ struct RecvPacket : public StreamRead {
 public:
 	RecvPacket(Deserializer &);
 
-	size_t Data(void * data, size_t bufsize) override;
-	bool EndOfFile() const override;
+	size_t data(void * data, size_t bufsize) override;
+	bool end_of_file() const override;
 
 private:
 	std::vector<uint8_t> buffer;

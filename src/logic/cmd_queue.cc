@@ -117,7 +117,7 @@ int32_t CmdQueue::run_queue(int32_t const interval, int32_t & game_time_var) {
 			if (dynamic_cast<GameLogicCommand *>(&c)) {
 				StreamWrite & ss = m_game.syncstream();
 				static uint8_t const tag[] = {0xde, 0xad, 0x00};
-				ss.Data(tag, 3); // provide an easy-to-find pattern as debugging aid
+				ss.data(tag, 3); // provide an easy-to-find pattern as debugging aid
 				ss.Unsigned32(c.duetime());
 				ss.Unsigned32(c.id());
 			}

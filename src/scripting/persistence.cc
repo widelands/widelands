@@ -41,10 +41,10 @@ struct LuaReaderHelper {
 	size_t data_len;
 };
 
-int LuaWriter(lua_State* /* L */, const void* data, size_t len, void* userdata) {
+int LuaWriter(lua_State* /* L */, const void* write_data, size_t len, void* userdata) {
 	FileWrite* fw = static_cast<FileWrite*>(userdata);
 
-	fw->Data(data, len, FileWrite::Pos::Null());
+	fw->data(write_data, len, FileWrite::Pos::Null());
 	return 0;
 }
 
@@ -251,7 +251,7 @@ void unpersist_object
 	LuaReaderHelper helper;
 	helper.data_len = size;
 	helper.data.reset(new char[size]);
-	fr.Data(helper.data.get(), size);
+	fr.data(helper.data.get(), size);
 
 	eris_undump(L, &LuaReader, &helper);
 

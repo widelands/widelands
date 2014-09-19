@@ -91,13 +91,13 @@ public:
 	void SetPos(Pos pos);
 
 	/// Write data at the given location.
-	void Data(const void* src, size_t size, Pos pos);
+	void data(const void* src, size_t size, Pos pos);
 
 	/// Write data at the current file pointer and advance it.
-	void Data(void const* src, size_t size) override;
+	void data(void const* src, size_t size) override;
 
 	/// Returns the current buffer. Use this for in_memory operations.
-	std::string GetData() const;
+	std::string get_data() const;
 
 private:
 	char* data_;

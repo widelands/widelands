@@ -90,8 +90,8 @@ protected:
 	struct ZipStreamRead : StreamRead {
 		explicit ZipStreamRead(zipFile file, ZipFilesystem* zipfs);
 		virtual ~ZipStreamRead();
-		size_t Data(void* data, size_t bufsize) override;
-		bool EndOfFile() const override;
+		size_t data(void* data, size_t bufsize) override;
+		bool end_of_file() const override;
 	private:
 		zipFile m_unzipfile;
 		ZipFilesystem* m_zipfs;
@@ -99,7 +99,7 @@ protected:
 	struct ZipStreamWrite : StreamWrite {
 		explicit ZipStreamWrite(zipFile file, ZipFilesystem* zipfs);
 		virtual ~ZipStreamWrite();
-		void Data(const void* const data, size_t size) override;
+		void data(const void* const data, size_t size) override;
 	private:
 		zipFile m_zipfile;
 		ZipFilesystem* m_zipfs;
