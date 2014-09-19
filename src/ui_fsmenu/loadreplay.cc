@@ -26,7 +26,7 @@
 #include "base/log.h"
 #include "base/time_string.h"
 #include "game_io/game_loader.h"
-#include "game_io/game_preload_data_packet.h"
+#include "game_io/game_preload_packet.h"
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -35,8 +35,8 @@
 #include "ui_basic/messagebox.h"
 #include "wui/text_constants.h"
 
-Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay(Widelands::Game & g) :
-	Fullscreen_Menu_Base("choosemapmenu.jpg"),
+FullscreenMenuLoadReplay::FullscreenMenuLoadReplay(Widelands::Game & g) :
+	FullscreenMenuBase("choosemapmenu.jpg"),
 
 // Values for alignment and size
 	m_butw (get_w() / 4),
@@ -90,16 +90,16 @@ Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay(Widelands::Game & g) :
 		(this, get_w() * 71 / 100, get_h() * 9 / 20),
 	m_game(g)
 {
-	m_back.sigclicked.connect(boost::bind(&Fullscreen_Menu_LoadReplay::end_modal, boost::ref(*this), 0));
-	m_ok.sigclicked.connect(boost::bind(&Fullscreen_Menu_LoadReplay::clicked_ok, boost::ref(*this)));
+	m_back.sigclicked.connect(boost::bind(&FullscreenMenuLoadReplay::end_modal, boost::ref(*this), 0));
+	m_ok.sigclicked.connect(boost::bind(&FullscreenMenuLoadReplay::clicked_ok, boost::ref(*this)));
 	m_delete.sigclicked.connect
 		(boost::bind
-		 	 (&Fullscreen_Menu_LoadReplay::clicked_delete, boost::ref(*this)));
+		 	 (&FullscreenMenuLoadReplay::clicked_delete, boost::ref(*this)));
 
 	m_list.set_font(ui_fn(), fs_small());
-	m_list.selected.connect(boost::bind(&Fullscreen_Menu_LoadReplay::replay_selected, this, _1));
+	m_list.selected.connect(boost::bind(&FullscreenMenuLoadReplay::replay_selected, this, _1));
 	m_list.double_clicked.connect
-		(boost::bind(&Fullscreen_Menu_LoadReplay::double_clicked, this, _1));
+		(boost::bind(&FullscreenMenuLoadReplay::double_clicked, this, _1));
 
 	m_title         .set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
 	m_label_mapname .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
@@ -118,7 +118,7 @@ Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay(Widelands::Game & g) :
 }
 
 
-void Fullscreen_Menu_LoadReplay::clicked_ok()
+void FullscreenMenuLoadReplay::clicked_ok()
 {
 	if (!m_list.has_selection())
 		return;
@@ -127,12 +127,12 @@ void Fullscreen_Menu_LoadReplay::clicked_ok()
 	end_modal(1);
 }
 
-void Fullscreen_Menu_LoadReplay::double_clicked(uint32_t)
+void FullscreenMenuLoadReplay::double_clicked(uint32_t)
 {
 	clicked_ok();
 }
 
-void Fullscreen_Menu_LoadReplay::clicked_delete()
+void FullscreenMenuLoadReplay::clicked_delete()
 {
 	if (!m_list.has_selection())
 		return;
@@ -158,7 +158,7 @@ void Fullscreen_Menu_LoadReplay::clicked_delete()
 /**
  * Update buttons and labels to reflect that no loadable replay is selected.
  */
-void Fullscreen_Menu_LoadReplay::no_selection()
+void FullscreenMenuLoadReplay::no_selection()
 {
 	m_ok.set_enabled(false);
 	m_delete.set_enabled(false);
@@ -167,7 +167,7 @@ void Fullscreen_Menu_LoadReplay::no_selection()
 	m_tagametime.set_text(std::string());
 }
 
-void Fullscreen_Menu_LoadReplay::replay_selected(uint32_t const selected)
+void FullscreenMenuLoadReplay::replay_selected(uint32_t const selected)
 {
 	if (!m_list.has_selection()) {
 		no_selection();
@@ -177,12 +177,12 @@ void Fullscreen_Menu_LoadReplay::replay_selected(uint32_t const selected)
 
 	if (m_list.has_selection()) {
 		std::string name = m_list.get_selected() + WLGF_SUFFIX;
-		Widelands::Game_Preload_Data_Packet gpdp;
+		Widelands::GamePreloadPacket gpdp;
 
 		try {
-			Widelands::Game_Loader gl(name, m_game);
+			Widelands::GameLoader gl(name, m_game);
 			gl.preload_game(gpdp);
-		} catch (const _wexception & e) {
+		} catch (const WException & e) {
 			log("Replay '%s' must have changed from under us\nException: %s\n", name.c_str(), e.what());
 			m_list.remove(selected);
 			return;
@@ -214,16 +214,16 @@ void Fullscreen_Menu_LoadReplay::replay_selected(uint32_t const selected)
  * Fill the file list by simply fetching all files that end with the
  * replay suffix and have a valid associated savegame.
  */
-void Fullscreen_Menu_LoadReplay::fill_list()
+void FullscreenMenuLoadReplay::fill_list()
 {
-	filenameset_t files;
+	FilenameSet files;
 
 	files = filter(g_fs->ListDirectory(REPLAY_DIR),
 	               [](const std::string& fn) {return boost::ends_with(fn, REPLAY_SUFFIX);});
 
-	Widelands::Game_Preload_Data_Packet gpdp;
+	Widelands::GamePreloadPacket gpdp;
 	for
-		(filenameset_t::iterator pname = files.begin();
+		(FilenameSet::iterator pname = files.begin();
 		 pname != files.end();
 		 ++pname)
 	{
@@ -233,19 +233,19 @@ void Fullscreen_Menu_LoadReplay::fill_list()
 			continue;
 
 		try {
-			Widelands::Game_Loader gl(savename, m_game);
+			Widelands::GameLoader gl(savename, m_game);
 			gl.preload_game(gpdp);
 
 			m_list.add
 				(FileSystem::FS_FilenameWoExt(pname->c_str()).c_str(), *pname);
-		} catch (const _wexception &) {} //  we simply skip illegal entries
+		} catch (const WException &) {} //  we simply skip illegal entries
 	}
 
 	if (m_list.size())
 		m_list.select(0);
 }
 
-bool Fullscreen_Menu_LoadReplay::handle_key(bool down, SDL_keysym code)
+bool FullscreenMenuLoadReplay::handle_key(bool down, SDL_keysym code)
 {
 	if (!down)
 		return false;
@@ -282,5 +282,5 @@ bool Fullscreen_Menu_LoadReplay::handle_key(bool down, SDL_keysym code)
 		break; // not handled
 	}
 
-	return Fullscreen_Menu_Base::handle_key(down, code);
+	return FullscreenMenuBase::handle_key(down, code);
 }

@@ -36,7 +36,7 @@
 #define REPLAY_DIR "replays"
 #define REPLAY_SUFFIX ".wrpl"
 
-struct md5_checksum;
+struct Md5Checksum;
 
 class StreamRead;
 class StreamWrite;
@@ -72,7 +72,7 @@ public:
 	~ReplayWriter();
 
 	void SendPlayerCommand(PlayerCommand *);
-	void SendSync(const md5_checksum &);
+	void SendSync(const Md5Checksum &);
 
 private:
 	Game        & m_game;

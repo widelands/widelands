@@ -56,7 +56,7 @@ private:
 	GLuint terrain_program_;
 
 
-	struct basevertex {
+	struct BaseVertex {
 		float x;
 		float y;
 		float tcx;
@@ -65,7 +65,7 @@ private:
 		uint32_t pad[3];
 	};
 
-	struct dithervertex {
+	struct DitherVertex {
 		float x;
 		float y;
 		float tcx;
@@ -81,15 +81,15 @@ private:
 	void draw() override;
 	void prepare_terrain_base();
 	void collect_terrain_base(bool onlyscan);
-	void count_terrain_base(Widelands::Terrain_Index ter);
+	void count_terrain_base(Widelands::TerrainIndex ter);
 	void add_terrain_base_triangle
-		(Widelands::Terrain_Index ter,
+		(Widelands::TerrainIndex ter,
 		 const Widelands::Coords & p1, const Widelands::Coords & p2, const Widelands::Coords & p3);
 	void draw_terrain_base();
 	void prepare_terrain_dither();
 	void collect_terrain_dither(bool onlyscan);
 	void add_terrain_dither_triangle
-		(bool onlyscan, Widelands::Terrain_Index ter,
+		(bool onlyscan, Widelands::TerrainIndex ter,
 		 const Widelands::Coords & edge1, const Widelands::Coords & edge2,
 		 const Widelands::Coords & opposite);
 	void draw_terrain_dither();
@@ -117,21 +117,21 @@ private:
 	Point m_surface_offset;
 
 	Rect m_patch_size;
-	std::unique_ptr<basevertex[]> m_patch_vertices;
+	std::unique_ptr<BaseVertex[]> m_patch_vertices;
 	uint32_t m_patch_vertices_size;
 	std::unique_ptr<uint16_t[]> m_patch_indices;
 	uint32_t m_patch_indices_size;
 	std::vector<uint32_t> m_patch_indices_indexs;
 	std::vector<uint32_t> m_terrain_freq;
 	std::vector<uint32_t> m_terrain_freq_cum;
-	std::unique_ptr<dithervertex[]> m_edge_vertices;
+	std::unique_ptr<DitherVertex[]> m_edge_vertices;
 	uint32_t m_edge_vertices_size;
 	std::vector<uint32_t> m_terrain_edge_freq;
 	std::vector<uint32_t> m_terrain_edge_freq_cum;
 	std::vector<uint32_t> m_terrain_edge_indexs;
 
 	uint32_t m_road_freq[2];
-	std::unique_ptr<basevertex[]> m_road_vertices;
+	std::unique_ptr<BaseVertex[]> m_road_vertices;
 	uint32_t m_road_vertices_size;
 	/*@}*/
 };

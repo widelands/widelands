@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-08-05 09:15+0000\n"
-"PO-Revision-Date: 2014-08-26 12:29+0000\n"
+"POT-Creation-Date: 2014-09-07 20:39+0000\n"
+"PO-Revision-Date: 2014-09-13 13:56+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-08-27 06:08+0000\n"
-"X-Generator: Launchpad (build 17174)\n"
+"X-Launchpad-Export-Date: 2014-09-14 05:56+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 "Language: pl\n"
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:15
@@ -25,7 +25,7 @@ msgstr "Początek"
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:16
 msgid "Thron sighs..."
-msgstr "Tron wzdycha..."
+msgstr "Thron wzdycha..."
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:17
 msgid ""

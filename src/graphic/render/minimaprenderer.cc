@@ -54,8 +54,8 @@ inline uint32_t blend_color
 
 // Returns the color to be used in the minimap for the given field.
 inline uint32_t calc_minimap_color
-	(const SDL_PixelFormat& format, const Widelands::Editor_Game_Base& egbase,
-	 const Widelands::FCoords& f, MiniMapLayer layers, Widelands::Player_Number owner,
+	(const SDL_PixelFormat& format, const Widelands::EditorGameBase& egbase,
+	 const Widelands::FCoords& f, MiniMapLayer layers, Widelands::PlayerNumber owner,
 	 bool see_details)
 {
 	uint32_t pixelcolor = 0;
@@ -154,7 +154,7 @@ bool is_minimap_frameborder
 
 // Does the actual work of drawing the minimap.
 void draw_minimap_int
-	(Surface* surface, const Widelands::Editor_Game_Base& egbase,
+	(Surface* surface, const Widelands::EditorGameBase& egbase,
 	 const Widelands::Player* player, const Point& viewpoint, MiniMapLayer layers)
 {
 	const Widelands::Map & map = egbase.map();
@@ -195,7 +195,7 @@ void draw_minimap_int
 					(viewpoint.x, viewpoint.y + (layers & MiniMapLayer::Zoom2 ? y / 2 : y)));
 			map.normalize_coords(f);
 			f.field = &map[f];
-			Widelands::Map_Index i = Widelands::Map::get_index(f, mapwidth);
+			Widelands::MapIndex i = Widelands::Map::get_index(f, mapwidth);
 			for (uint32_t x = 0; x < surface_w; ++x, pix += sizeof(uint32_t)) {
 				if (x % 2 || !(layers & MiniMapLayer::Zoom2))
 					move_r(mapwidth, f, i);
@@ -222,7 +222,7 @@ void draw_minimap_int
 			 		 (layers & MiniMapLayer::Zoom2 ? y / 2 : y)));
 			map.normalize_coords(f);
 			f.field = &map[f];
-			Widelands::Map_Index i = Widelands::Map::get_index(f, mapwidth);
+			Widelands::MapIndex i = Widelands::Map::get_index(f, mapwidth);
 			for (uint32_t x = 0; x < surface_w; ++x, pix += sizeof(uint32_t)) {
 				if (x % 2 || !(layers & MiniMapLayer::Zoom2))
 					move_r(mapwidth, f, i);
@@ -258,7 +258,7 @@ void draw_minimap_int
 
 }  // namespace
 
-std::unique_ptr<Surface> draw_minimap(const Editor_Game_Base& egbase,
+std::unique_ptr<Surface> draw_minimap(const EditorGameBase& egbase,
                                       const Player* player,
                                       const Point& viewpoint,
                                       MiniMapLayer layers) {
@@ -284,7 +284,7 @@ std::unique_ptr<Surface> draw_minimap(const Editor_Game_Base& egbase,
 }
 
 void write_minimap_image
-	(const Editor_Game_Base& egbase, const Player* player, const Point& gviewpoint, MiniMapLayer layers,
+	(const EditorGameBase& egbase, const Player* player, const Point& gviewpoint, MiniMapLayer layers,
 	 ::StreamWrite* const streamwrite)
 {
 	assert(streamwrite != nullptr);

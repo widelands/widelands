@@ -28,7 +28,7 @@
 
 namespace Widelands {
 
-class Editor_Game_Base;
+class EditorGameBase;
 class Player;
 class Player;
 
@@ -45,28 +45,28 @@ enum class PlayerEndResult : uint8_t
  * \e resign_reason : The reason for resigning (forfeit, disconnection, ..) (string)
  */
 struct PlayerEndStatus {
-	Player_Number player;
+	PlayerNumber player;
 	PlayerEndResult result;
 	uint32_t time;
 	std::string info;
 };
 
-class Players_Manager {
+class PlayersManager {
 public:
-	Players_Manager(Editor_Game_Base & egbase);
-	virtual ~Players_Manager();
+	PlayersManager(EditorGameBase & egbase);
+	virtual ~PlayersManager();
 
 	void cleanup();
 
-	void remove_player(Player_Number);
+	void remove_player(PlayerNumber);
 
 	/**
 	 * Create the player structure for the given plnum.
-	 * Note that AI player structures and the Interactive_Player are created when
+	 * Note that AI player structures and the InteractivePlayer are created when
 	 * the game starts. Similar for remote players.
 	*/
 	Player * add_player
-		(Player_Number,
+		(PlayerNumber,
 		 uint8_t             initialization_index,
 		 const std::string & tribe,
 		 const std::string & name,
@@ -96,7 +96,7 @@ public:
 
 private:
 	Player                 * m_players[MAX_PLAYERS];
-	Editor_Game_Base       & m_egbase;
+	EditorGameBase       & m_egbase;
 	uint8_t                  m_number_of_players;
 	std::vector<PlayerEndStatus> m_players_end_status;
 };

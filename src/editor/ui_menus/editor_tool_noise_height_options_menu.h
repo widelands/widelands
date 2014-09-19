@@ -24,17 +24,17 @@
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
 
-struct Editor_Interactive;
-struct Editor_Noise_Height_Tool;
+struct EditorInteractive;
+struct EditorNoiseHeightTool;
 
-struct Editor_Tool_Noise_Height_Options_Menu : public Editor_Tool_Options_Menu {
-	Editor_Tool_Noise_Height_Options_Menu
-		(Editor_Interactive         &,
-		 Editor_Noise_Height_Tool   &,
+struct EditorToolNoiseHeightOptionsMenu : public EditorToolOptionsMenu {
+	EditorToolNoiseHeightOptionsMenu
+		(EditorInteractive         &,
+		 EditorNoiseHeightTool   &,
 		 UI::UniqueWindow::Registry &);
 
 private:
-	Editor_Noise_Height_Tool & m_noise_tool;
+	EditorNoiseHeightTool & m_noise_tool;
 	UI::Textarea m_lower_label, m_upper_label;
 	UI::Button m_lower_decrease, m_lower_increase, m_upper_decrease, m_upper_increase;
 	UI::Textarea m_set_label;

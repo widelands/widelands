@@ -3,21 +3,22 @@
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
 # GunChleoc <fios@foramnagaidhlig.net>, 2013, 2014.
+# bratzbert <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-08-05 10:15+0100\n"
-"PO-Revision-Date: 2014-08-05 10:07+0000\n"
+"POT-Creation-Date: 2014-09-07 13:39-0700\n"
+"PO-Revision-Date: 2014-09-16 08:16+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
-"Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
+"Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-08-06 05:50+0000\n"
-"X-Generator: Launchpad (build 17147)\n"
+"X-Launchpad-Export-Date: 2014-09-17 05:59+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 "Language: gd\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -1155,18 +1156,18 @@ msgstr ""
 "bu chòir dha stòras %s a thàrmachadh nach eil air an t-saoghal seo; mar sin "
 "chan eil an treubh co-chòrdail ris an t-saoghal seo"
 
-#: ../../src/logic/worker.cc:944
+#: ../../src/logic/worker.cc:942
 msgid "A geologist found resources."
 msgstr "Tha clach-eòlaiche air stòras a lorg."
 
-#: ../../src/logic/worker.cc:1844
+#: ../../src/logic/worker.cc:1842
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr ""
 "Chan urrainn dhan %s agad slighe dhachaigh a lorg is feumaidh gum faigh e "
 "bàs."
 
-#: ../../src/logic/worker.cc:1851
+#: ../../src/logic/worker.cc:1849
 msgid "Worker got lost!"
 msgstr "Chaidh obraiche air chall!"
 
@@ -2784,8 +2785,8 @@ msgstr "Roghainnean:"
 #: ../../src/wlapplication.cc:1178
 msgid " --<config-entry-name>=value overwrites any config file setting"
 msgstr ""
-" Sgrìobhaidh --<ainm-innteirt-config>=luach thairis air gach roghainn san "
-"fhaidhle config"
+" Sgrìobhaidh --<ainm-innteirt-config>=luach thairis air gach roghainn\n"
+"san fhaidhle config"
 
 #: ../../src/wlapplication.cc:1179
 msgid ""
@@ -2817,7 +2818,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1186
 msgid "                      Default is ~/.widelands"
-msgstr "                      ~/.widelands gu tùsail"
+msgstr "                      ~/.widelands a ghnàth"
 
 #: ../../src/wlapplication.cc:1189
 msgid ""
@@ -2857,9 +2858,8 @@ msgid ""
 "                      If this is 0, replays are not deleted."
 msgstr ""
 " --remove_replays=[...]    Thoir air falbh na h-ath-chluichean às dèidh an\n"
-"                           àireimh de làithean seo.\n"
-"                           Cha tèid faidhlichean a sguabadh às mas e 0 a th' "
-"ann."
+"                           àireimh de làithean seo. Cha tèid faidhlichean\n"
+"                           a sguabadh às mas e 0 a th' ann."
 
 #: ../../src/wlapplication.cc:1200
 msgid "Sound options:"
@@ -2881,8 +2881,8 @@ msgstr " --disable_music           Cuir an ceòl à comas."
 #: ../../src/wlapplication.cc:1204
 msgid " --nozip              Do not save files as binary zip archives."
 msgstr ""
-" --nozip                   Na sàbhail faidhlichean nan tasglannan bìnearaidh "
-"zip."
+" --nozip                   Na sàbhail faidhlichean nan tasglannan\n"
+"                           bìnearaidh zip."
 
 #: ../../src/wlapplication.cc:1205
 msgid ""
@@ -2906,9 +2906,8 @@ msgstr ""
 #: ../../src/wlapplication.cc:1210
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
 msgstr ""
-" --loadgame=FILENAME       Luchdaichidh seo an geama air a shàbhaladh AINM-"
-"FAIDHLE\n"
-"                           sa bhad."
+" --loadgame=FILENAME       Luchdaichidh seo an geama air a shàbhaladh\n"
+"                           AINM-FAIDHLE sa bhad."
 
 #: ../../src/wlapplication.cc:1211
 msgid ""
@@ -2916,16 +2915,16 @@ msgid ""
 "                      Only valid with --scenario, --loadgame, or --editor."
 msgstr ""
 " --script=FILENAME         Ruith an sgriobt Lua seo às dèidh an "
-"tòiseachaidh. Chan eil\n"
-"                           e dligheach ach le --scenario, --loadgame, no --"
-"editor."
+"tòiseachaidh.\n"
+"                           Chan eil e dligheach ach le --scenario, --"
+"loadgame\n"
+"                           no --editor."
 
 #: ../../src/wlapplication.cc:1213
 msgid " --dedicated=FILENAME Starts a dedicated server with FILENAME as map"
 msgstr ""
-" --dedicated=FILENAME      Tòisichidh seo frithealaiche sònraichte le AINM-"
-"FAIDHLE\n"
-"                           mar mhapa"
+" --dedicated=FILENAME      Tòisichidh seo frithealaiche sònraichte le\n"
+"                           AINM-FAIDHLE mar mhapa"
 
 #: ../../src/wlapplication.cc:1214
 msgid ""
@@ -2990,10 +2989,9 @@ msgid ""
 "                      window is next to the edge of the screen."
 msgstr ""
 " --dock_windows_to_edges=[yes|no]\n"
-"                           Thoir oir na h-uinneige ri taobh oir na sgrìn "
-"air\n"
-"                           falbh nuair a bhios oir na h-uinneige ri oir na "
-"sgrìn."
+"                           Thoir oir na h-uinneige ri taobh oir na sgrìn\n"
+"                           air falbh nuair a bhios oir na h-uinneige ri oir\n"
+"                          na  sgrìn."
 
 #: ../../src/wlapplication.cc:1234
 msgid ""
@@ -3020,8 +3018,8 @@ msgstr ""
 #: ../../src/wlapplication.cc:1243
 msgid " --verbose            Enable verbose debug messages"
 msgstr ""
-" --verbose                 Cuir teachdaireachdan dì-bhugachaidh briathrach "
-"an comas"
+" --verbose                 Cuir teachdaireachdan dì-bhugachaidh briathrach\n"
+"                           an comas"
 
 #: ../../src/wlapplication.cc:1245
 msgid " --help               Show this help"
@@ -3138,19 +3136,19 @@ msgstr "An cuir sinn an long fodha?"
 msgid "Do you really want to cancel the active expedition?"
 msgstr "A bheil thu airson sgur dhen triall gnìomhach?"
 
-#: ../../src/wui/attack_box.cc:148
+#: ../../src/wui/attack_box.cc:147
 msgid "Soldiers:"
 msgstr "Saighdearan:"
 
-#: ../../src/wui/attack_box.cc:156
+#: ../../src/wui/attack_box.cc:155
 msgid "Send less soldiers"
 msgstr "Cuir nas lugha dhe shaighdearan"
 
-#: ../../src/wui/attack_box.cc:173
+#: ../../src/wui/attack_box.cc:172
 msgid "Number of soldiers"
 msgstr "Àireamh de shaighdearan"
 
-#: ../../src/wui/attack_box.cc:183
+#: ../../src/wui/attack_box.cc:182
 msgid "Send more soldiers"
 msgstr "Cuir barrachd shaighdearan"
 

@@ -32,8 +32,8 @@
 #include "logic/cmd_queue.h"
 #include "logic/game.h"
 #include "logic/queue_cmd_ids.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 
 namespace Widelands {
 
@@ -52,7 +52,7 @@ void CmdDestroyMapObject::execute(Game & game)
 
 #define CMD_DESTROY_MAP_OBJECT_VERSION 1
 void CmdDestroyMapObject::Read
-	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
+	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -61,20 +61,20 @@ void CmdDestroyMapObject::Read
 			if (Serial const serial = fr.Unsigned32())
 				try {
 					obj_serial = mol.get<MapObject>(serial).serial();
-				} catch (const _wexception & e) {
-					throw game_data_error("%u: %s", serial, e.what());
+				} catch (const WException & e) {
+					throw GameDataError("%u: %s", serial, e.what());
 				}
 			else
 				obj_serial = 0;
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
-		throw game_data_error("destroy map object: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("destroy map object: %s", e.what());
 	}
 }
 void CmdDestroyMapObject::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
+	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(CMD_DESTROY_MAP_OBJECT_VERSION);
@@ -86,12 +86,12 @@ void CmdDestroyMapObject::Write
 	fw.Unsigned32(mos.get_object_file_index_or_zero(egbase.objects().get_object(obj_serial)));
 }
 
-Cmd_Act::Cmd_Act(int32_t const t, MapObject & o, int32_t const a) :
+CmdAct::CmdAct(int32_t const t, MapObject & o, int32_t const a) :
 	GameLogicCommand(t), obj_serial(o.serial()), arg(a)
 {}
 
 
-void Cmd_Act::execute(Game & game)
+void CmdAct::execute(Game & game)
 {
 	game.syncstream().Unsigned32(obj_serial);
 
@@ -101,8 +101,8 @@ void Cmd_Act::execute(Game & game)
 }
 
 #define CMD_ACT_VERSION 1
-void Cmd_Act::Read
-	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
+void CmdAct::Read
+	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -111,22 +111,22 @@ void Cmd_Act::Read
 			if (Serial const object_serial = fr.Unsigned32())
 				try {
 					obj_serial = mol.get<MapObject>(object_serial).serial();
-				} catch (const _wexception & e) {
-					throw game_data_error
+				} catch (const WException & e) {
+					throw GameDataError
 						("object %u: %s", object_serial, e.what());
 				}
 			else
 				obj_serial = 0;
 			arg = fr.Unsigned32();
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
+	} catch (const WException & e) {
 		throw wexception("act: %s", e.what());
 	}
 }
-void Cmd_Act::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
+void CmdAct::Write
+	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(CMD_ACT_VERSION);
@@ -142,11 +142,11 @@ void Cmd_Act::Write
 }
 
 
-Object_Manager::~Object_Manager()
+ObjectManager::~ObjectManager()
 {
 	// better not throw an exception in a destructor...
 	if (!m_objects.empty())
-		log("Object_Manager: ouch! remaining objects\n");
+		log("ObjectManager: ouch! remaining objects\n");
 
 	log("lastserial: %i\n", m_lastserial);
 }
@@ -154,10 +154,10 @@ Object_Manager::~Object_Manager()
 /**
  * Clear all objects
  */
-void Object_Manager::cleanup(Editor_Game_Base & egbase)
+void ObjectManager::cleanup(EditorGameBase & egbase)
 {
 	while (!m_objects.empty()) {
-		objmap_t::iterator it = m_objects.begin();
+		MapObjectMap::iterator it = m_objects.begin();
 		it->second->remove(egbase);
 	}
 	m_lastserial = 0;
@@ -166,7 +166,7 @@ void Object_Manager::cleanup(Editor_Game_Base & egbase)
 /**
  * Insert the given MapObject into the object manager
  */
-void Object_Manager::insert(MapObject * obj)
+void ObjectManager::insert(MapObject * obj)
 {
 	++m_lastserial;
 	assert(m_lastserial);
@@ -177,7 +177,7 @@ void Object_Manager::insert(MapObject * obj)
 /**
  * Remove the MapObject from the manager
  */
-void Object_Manager::remove(MapObject & obj)
+void ObjectManager::remove(MapObject & obj)
 {
 	m_objects.erase(obj.m_serial);
 }
@@ -185,7 +185,7 @@ void Object_Manager::remove(MapObject & obj)
 /*
  * Return the list of all serials currently in use
  */
-std::vector<Serial> Object_Manager::all_object_serials_ordered () const {
+std::vector<Serial> ObjectManager::all_object_serials_ordered () const {
 	std::vector<Serial> rv;
 
 	for (const std::pair<Serial, MapObject *>& o : m_objects) {
@@ -197,7 +197,7 @@ std::vector<Serial> Object_Manager::all_object_serials_ordered () const {
 	return rv;
 }
 
-MapObject * Object_Ptr::get(const Editor_Game_Base & egbase)
+MapObject * ObjectPointer::get(const EditorGameBase & egbase)
 {
 	if (!m_serial)
 		return nullptr;
@@ -210,8 +210,8 @@ MapObject * Object_Ptr::get(const Editor_Game_Base & egbase)
 // This version also returns a pointer to a non-const object,
 // because it is logically the pointer that is const, not the object
 // that is pointed to.
-// That is, a 'const Object_Ptr' behaves like a 'Object_Ptr * const'.
-MapObject * Object_Ptr::get(const Editor_Game_Base & egbase) const {
+// That is, a 'const ObjectPointer' behaves like a 'ObjectPointer * const'.
+MapObject * ObjectPointer::get(const EditorGameBase & egbase) const {
 	return m_serial ? egbase.objects().get_object(m_serial) : nullptr;
 }
 
@@ -298,7 +298,7 @@ void MapObjectDescr::add_attributes(const std::vector<std::string>& attributes,
 		uint32_t const attrib = get_attribute_id(attribute);
 		if (attrib < MapObject::HIGHEST_FIXED_ATTRIBUTE) {
 			if (!allowed_special.count(attrib)) {
-				throw game_data_error("bad attribute \"%s\"", attribute.c_str());
+				throw GameDataError("bad attribute \"%s\"", attribute.c_str());
 			}
 		}
 		add_attribute(attrib);
@@ -363,7 +363,7 @@ m_descr(the_descr), m_serial(0), m_logsink(nullptr)
  * Call this function if you want to remove the object immediately, without
  * any effects.
  */
-void MapObject::remove(Editor_Game_Base & egbase)
+void MapObject::remove(EditorGameBase & egbase)
 {
 	removed(m_serial); // Signal call
 	cleanup(egbase);
@@ -381,7 +381,7 @@ void MapObject::remove(Editor_Game_Base & egbase)
  * the object. Therefore, it may be safer to call schedule_destroy()
  * instead.
  */
-void MapObject::destroy(Editor_Game_Base & egbase)
+void MapObject::destroy(EditorGameBase & egbase)
 {
 	remove(egbase);
 }
@@ -401,7 +401,7 @@ void MapObject::schedule_destroy(Game & game)
  *
  * \warning Make sure you call this from derived classes!
  */
-void MapObject::init(Editor_Game_Base & egbase)
+void MapObject::init(EditorGameBase & egbase)
 {
 	egbase.objects().insert(this);
 }
@@ -409,7 +409,7 @@ void MapObject::init(Editor_Game_Base & egbase)
 /**
  * \warning Make sure you call this from derived classes!
  */
-void MapObject::cleanup(Editor_Game_Base & egbase)
+void MapObject::cleanup(EditorGameBase & egbase)
 {
 	egbase.objects().remove(*this);
 }
@@ -417,7 +417,7 @@ void MapObject::cleanup(Editor_Game_Base & egbase)
 /**
  * Default implementation
  */
-int32_t MapObject::get_tattribute(uint32_t) const
+int32_t MapObject::get_training_attribute(uint32_t) const
 {
 	return -1;
 }
@@ -434,7 +434,7 @@ uint32_t MapObject::schedule_act
 	if (tdelta < Forever()) {
 		uint32_t const time = game.get_gametime() + tdelta;
 
-		game.cmdqueue().enqueue (new Cmd_Act(time, *this, data));
+		game.cmdqueue().enqueue (new CmdAct(time, *this, data));
 
 		return time;
 	} else
@@ -457,7 +457,7 @@ void MapObject::set_logsink(LogSink * const sink)
 }
 
 
-void MapObject::log_general_info(const Editor_Game_Base &) {}
+void MapObject::log_general_info(const EditorGameBase &) {}
 
 /**
  * Prints a log message prepended by the object's serial number.
@@ -502,15 +502,15 @@ void MapObject::Loader::load(FileRead & fr)
 
 		uint8_t const version = fr.Unsigned8();
 		if (version != CURRENT_SAVEGAME_VERSION)
-			throw game_data_error("unknown/unhandled version %u", version);
+			throw GameDataError("unknown/unhandled version %u", version);
 
 		Serial const serial = fr.Unsigned32();
 		try {
 			mol().register_object<MapObject>(serial, *get_object());
-		} catch (const _wexception & e) {
+		} catch (const WException & e) {
 			throw wexception("%u: %s", serial, e.what());
 		}
-	} catch (const _wexception & e) {
+	} catch (const WException & e) {
 		throw wexception("map object: %s", e.what());
 	}
 
@@ -545,7 +545,7 @@ void MapObject::Loader::load_finish()
  * Save the MapObject to the given file.
  */
 void MapObject::save
-	(Editor_Game_Base &, MapMapObjectSaver & mos, FileWrite & fw)
+	(EditorGameBase &, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(HeaderMapObject);
 	fw.Unsigned8(CURRENT_SAVEGAME_VERSION);

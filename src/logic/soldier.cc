@@ -47,8 +47,8 @@
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 #include "profile/profile.h"
 #include "wui/mapviewpixelconstants.h"
 
@@ -74,7 +74,7 @@ constexpr int kRetreatWhenHealthDropsBelowThisPercentage = 50;
 SoldierDescr::SoldierDescr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
-	 const Tribe_Descr & _tribe)
+	 const TribeDescr & _tribe)
 	:
 	WorkerDescr(MapObjectType::SOLDIER, _name, _descname, directory, prof, global_s, _tribe)
 {
@@ -86,7 +86,7 @@ SoldierDescr::SoldierDescr
 		const char * const attack = global_s.get_safe_string("attack");
 		std::vector<std::string> list(split_string(attack, "-"));
 		if (list.size() != 2)
-			throw game_data_error
+			throw GameDataError
 				("expected %s but found \"%s\"", "\"min-max\"", attack);
 		for (std::string& temp_str : list) {
 			remove_spaces(temp_str);
@@ -94,16 +94,16 @@ SoldierDescr::SoldierDescr
 		char * endp;
 		m_min_attack = strtol(list[0].c_str(), &endp, 0);
 		if (*endp || 0 == m_min_attack)
-			throw game_data_error
+			throw GameDataError
 				("expected %s but found \"%s\"",
 				 "positive integer", list[0].c_str());
 		m_max_attack = strtol(list[1].c_str(), &endp, 0);
 		if (*endp || m_max_attack < m_min_attack)
-			throw game_data_error
+			throw GameDataError
 				("expected positive integer >= %u but found \"%s\"",
 				 m_min_attack, list[1].c_str());
-	} catch (const _wexception & e) {
-		throw game_data_error("attack: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("attack: %s", e.what());
 	}
 
 	// Parse defend
@@ -202,7 +202,7 @@ std::vector<std::string> SoldierDescr::load_animations_from_string
 		const char * anim_string = global_s.get_safe_string(anim_name);
 		list = split_string(anim_string, ",");
 		if (list.size() < 1)
-			throw game_data_error
+			throw GameDataError
 				("expected %s but found \"%s\"",
 				 "\"anim_name[,another_anim,...]\"", anim_string);
 
@@ -217,8 +217,8 @@ std::vector<std::string> SoldierDescr::load_animations_from_string
 			add_animation
 				(temp_str.c_str(), g_gr->animations().load(directory, anim_s));
 		}
-	} catch (const _wexception & e) {
-		throw game_data_error("%s : %s", anim_name, e.what());
+	} catch (const WException & e) {
+		throw GameDataError("%s : %s", anim_name, e.what());
 	}
 
 	return list;
@@ -347,7 +347,7 @@ Soldier::Soldier(const SoldierDescr & soldier_descr) : Worker(soldier_descr)
 }
 
 
-void Soldier::init(Editor_Game_Base & egbase)
+void Soldier::init(EditorGameBase & egbase)
 {
 	m_hp_level      = 0;
 	m_attack_level  = 0;
@@ -363,7 +363,7 @@ void Soldier::init(Editor_Game_Base & egbase)
 	Worker::init(egbase);
 }
 
-void Soldier::cleanup(Editor_Game_Base & egbase)
+void Soldier::cleanup(EditorGameBase & egbase)
 {
 	Worker::cleanup(egbase);
 }
@@ -417,7 +417,7 @@ void Soldier::set_evade_level(const uint32_t evade) {
 	m_evade_level = evade;
 }
 
-uint32_t Soldier::get_level(tAttribute const at) const {
+uint32_t Soldier::get_level(TrainingAttribute const at) const {
 	switch (at) {
 	case atrHP:      return m_hp_level;
 	case atrAttack:  return m_attack_level;
@@ -431,7 +431,7 @@ uint32_t Soldier::get_level(tAttribute const at) const {
 }
 
 
-int32_t Soldier::get_tattribute(uint32_t const attr) const
+int32_t Soldier::get_training_attribute(uint32_t const attr) const
 {
 	switch (attr) {
 	case atrHP: return m_hp_level;
@@ -441,7 +441,7 @@ int32_t Soldier::get_tattribute(uint32_t const attr) const
 	case atrTotal:
 		return m_hp_level + m_attack_level + m_defense_level + m_evade_level;
 	default:
-		return Worker::get_tattribute(attr);
+		return Worker::get_training_attribute(attr);
 	}
 }
 
@@ -510,7 +510,7 @@ void Soldier::damage (const uint32_t value)
 /// pos is the location, in pixels, of the node m_position (height is already
 /// taken into account).
 Point Soldier::calc_drawpos
-	(const Editor_Game_Base & game, const Point pos) const
+	(const EditorGameBase & game, const Point pos) const
 {
 	if (m_combat_walking == CD_NONE) {
 		return Bob::calc_drawpos(game, pos);
@@ -573,7 +573,7 @@ Point Soldier::calc_drawpos
  * Draw this soldier. This basically draws him as a worker, but add hitpoints
  */
 void Soldier::draw
-	(const Editor_Game_Base & game, RenderTarget & dst, const Point& pos) const
+	(const EditorGameBase & game, RenderTarget & dst, const Point& pos) const
 {
 	if (const uint32_t anim = get_current_anim()) {
 		const Point drawpos = calc_drawpos(game, pos);
@@ -655,7 +655,7 @@ void Soldier::draw_info_icon
  * the given tribe.
  */
 void Soldier::calc_info_icon_size
-	(const Tribe_Descr & tribe, uint32_t & w, uint32_t & h)
+	(const TribeDescr & tribe, uint32_t & w, uint32_t & h)
 {
 	const SoldierDescr * soldierdesc = static_cast<const SoldierDescr *>
 		(tribe.get_worker_descr(tribe.worker_index("soldier")));
@@ -692,16 +692,16 @@ void Soldier::pop_task_or_fight(Game& game) {
  *
  */
 void Soldier::start_animation
-	(Editor_Game_Base & egbase,
+	(EditorGameBase & egbase,
 	 char const * const animname,
 	 uint32_t const time)
 {
 	molog("[soldier] starting animation %s", animname);
 	return
 		start_task_idle
-			(ref_cast<Game, Editor_Game_Base>(egbase),
+			(ref_cast<Game, EditorGameBase>(egbase),
 			 descr().get_rand_anim
-			 	(ref_cast<Game, Editor_Game_Base>(egbase), animname),
+			 	(ref_cast<Game, EditorGameBase>(egbase), animname),
 			 time);
 }
 
@@ -752,7 +752,7 @@ bool Soldier::canBeChallenged()
 	if (!m_battle)
 		return true;
 	return
-		!m_battle->locked(ref_cast<Game, Editor_Game_Base>(owner().egbase()));
+		!m_battle->locked(ref_cast<Game, EditorGameBase>(owner().egbase()));
 }
 
 /**
@@ -781,13 +781,13 @@ void Soldier::init_auto_task(Game & game) {
 }
 
 struct FindNodeOwned {
-	FindNodeOwned(Player_Number owner) : m_owner(owner)
+	FindNodeOwned(PlayerNumber owner) : m_owner(owner)
 	{}
 	bool accept(const Map&, const FCoords& coords) const {
 		return (coords.field->get_owned_by() == m_owner);
 	}
 private:
-	Player_Number m_owner;
+	PlayerNumber m_owner;
 };
 
 /**
@@ -1369,7 +1369,7 @@ void Soldier::start_task_move_in_battle(Game & game, CombatWalkingDir dir)
 			mapdir = WALK_E;
 			break;
 		default:
-			throw game_data_error("bad direction '%d'", dir);
+			throw GameDataError("bad direction '%d'", dir);
 	}
 
 	Map & map = game.map();
@@ -1571,7 +1571,7 @@ void Soldier::battle_update(Game & game, State &)
 						(game,
 						 *new Message
 						 	("game engine",
-						 	 game.get_gametime(), Forever(),
+							 game.get_gametime(),
 						 	 _("Logic error"),
 						 	 buffer,
 						 	 get_position(),
@@ -1580,7 +1580,7 @@ void Soldier::battle_update(Game & game, State &)
 						(game,
 						 *new Message
 						 	("game engine",
-						 	 game.get_gametime(), Forever(),
+							 game.get_gametime(),
 						 	 _("Logic error"),
 						 	 buffer,
 						 	 opponent.get_position(),
@@ -1792,7 +1792,7 @@ void Soldier::sendSpaceSignals(Game & game)
 		}
 	}
 
-	Player_Number const land_owner = get_position().field->get_owned_by();
+	PlayerNumber const land_owner = get_position().field->get_owned_by();
 	if (land_owner != owner().player_number()) {
 		std::vector<BaseImmovable *> attackables;
 		game.map().find_reachable_immovables_unique
@@ -1814,7 +1814,7 @@ void Soldier::sendSpaceSignals(Game & game)
 }
 
 
-void Soldier::log_general_info(const Editor_Game_Base & egbase)
+void Soldier::log_general_info(const EditorGameBase & egbase)
 {
 	Worker::log_general_info(egbase);
 	molog("[Soldier]\n");
@@ -1856,7 +1856,7 @@ void Soldier::Loader::load(FileRead & fr)
 
 	uint8_t version = fr.Unsigned8();
 	if (version > SOLDIER_SAVEGAME_VERSION)
-		throw game_data_error("unknown/unhandled version %u", version);
+		throw GameDataError("unknown/unhandled version %u", version);
 
 	Soldier & soldier = get<Soldier>();
 	soldier.m_hp_current = fr.Unsigned32();
@@ -1910,7 +1910,7 @@ Soldier::Loader * Soldier::create_loader()
 }
 
 void Soldier::do_save
-	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
+	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	Worker::do_save(egbase, mos, fw);
 

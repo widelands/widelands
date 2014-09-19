@@ -42,7 +42,7 @@ struct CritterDescr : BobDescr {
 		 const std::string& directory,
 		 Profile& prof,
 		 Section& global_s,
-		 Tribe_Descr & _tribe);
+		 TribeDescr & _tribe);
 	CritterDescr(const LuaTable&);
 	~CritterDescr() override;
 
@@ -57,13 +57,13 @@ struct CritterDescr : BobDescr {
 
 private:
 	DirAnimations m_walk_anims;
-	typedef std::map<std::string, CritterProgram *> Programs;
+	using Programs = std::map<std::string, CritterProgram *>;
 	Programs      m_programs;
 	DISALLOW_COPY_AND_ASSIGN(CritterDescr);
 };
 
 class Critter : public Bob {
-	friend struct Map_Bobdata_Data_Packet;
+	friend struct MapBobdataPacket;
 	friend struct CritterProgram;
 
 	MO_DESCR(CritterDescr)
@@ -75,10 +75,10 @@ public:
 
 	void start_task_program(Game &, const std::string & name);
 
-	void save(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
+	void save(EditorGameBase &, MapObjectSaver &, FileWrite &) override;
 
 	static MapObject::Loader*
-	load(Editor_Game_Base&, MapMapObjectLoader&, FileRead&, const OneWorldLegacyLookupTable& lookup_table);
+	load(EditorGameBase&, MapObjectLoader&, FileRead&, const OneWorldLegacyLookupTable& lookup_table);
 
 protected:
 	struct Loader : Bob::Loader {

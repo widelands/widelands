@@ -31,8 +31,8 @@
  * Select a Map in Fullscreen Mode. It's a modal fullscreen menu
  */
 
-struct Fullscreen_Menu_Editor_MapSelect : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_Editor_MapSelect();
+struct FullscreenMenuEditorMapSelect : public FullscreenMenuBase {
+	FullscreenMenuEditorMapSelect();
 
 	std::string get_map();
 
@@ -52,11 +52,11 @@ private:
 	UI::Textarea    m_label_author,     m_author,           m_label_size;
 	UI::Textarea    m_size;
 	UI::Textarea    m_label_nr_players, m_nr_players,       m_label_descr;
-	UI::Multiline_Textarea              m_descr;
+	UI::MultilineTextarea              m_descr;
 	UI::Button             m_back,             m_ok;
 	UI::Listselect<std::string>                             m_list;
 	std::string     m_parentdir,        m_curdir,           m_basedir;
-	filenameset_t   m_mapfiles;
+	FilenameSet   m_mapfiles;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_EDITOR_MAPSELECT_H

@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-08-05 09:15+0000\n"
-"PO-Revision-Date: 2014-08-19 16:12+0000\n"
-"Last-Translator: Yves MATHIEU <MisterY_vonvon@hotmail.com>\n"
+"POT-Creation-Date: 2014-09-07 20:39+0000\n"
+"PO-Revision-Date: 2014-09-16 12:55+0000\n"
+"Last-Translator: AGuechoum <a.guechoum@gmail.com>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-20 05:36+0000\n"
-"X-Generator: Launchpad (build 17163)\n"
+"X-Launchpad-Export-Date: 2014-09-17 05:59+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 "Language: fr\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -389,6 +389,8 @@ msgid ""
 "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the "
 "level with which they came."
 msgstr ""
+"Les soldats impériaux ne peuvent êtres entraînés en 'défense' et resterons à "
+"leur niveau initial."
 
 #: ../../tribes/empire/arena/help.lua:28
 #: ../../tribes/empire/colosseum/help.lua:28
@@ -461,11 +463,11 @@ msgstr "Forge une armure"
 
 #: ../../tribes/empire/armorsmithy/conf:36
 msgid "forging a chain armor"
-msgstr ""
+msgstr "Forge une cotte de mailles"
 
 #: ../../tribes/empire/armorsmithy/conf:38
 msgid "forging a plate armor"
-msgstr ""
+msgstr "Forge une armure de plaques"
 
 #: ../../tribes/empire/armorsmithy/conf:40
 #: ../../tribes/empire/bakery/conf:25
@@ -1417,7 +1419,7 @@ msgstr "Elève des ânes mignons et utiles"
 
 #: ../../tribes/empire/donkeyfarm/conf:26
 msgid "rearing donkeys"
-msgstr ""
+msgstr "Charge les mules"
 
 #: ../../tribes/empire/donkeyfarm/help.lua:17
 msgid "Breeds donkeys for adding them to the transportation system."
@@ -1486,15 +1488,19 @@ msgid ""
 "The fisher working in this fisher’s house can’t find any fish in his working "
 "radius."
 msgstr ""
+"Le pêcheur travaillant à cette cabane de pêche ne trouve plus de poisson "
+"dans son rayon d'action."
 
 #: ../../tribes/empire/fishers_house/help.lua:17
 msgid "Fishes on the coast near the house."
-msgstr ""
+msgstr "Pêchez sur la côte près de la maison."
 
 #: ../../tribes/empire/fishers_house/help.lua:18
 msgid ""
 "The fisher’s house needs water full of fish within the working radius."
 msgstr ""
+"La cabane de pêche nécessite un point d'eau rempli de poissons dans son "
+"rayon d'action."
 
 #: ../../tribes/empire/fishing_rod/conf:1
 msgid ""
@@ -1524,6 +1530,8 @@ msgid ""
 "The foresters’s house needs free space within the working radius to plant "
 "the trees."
 msgstr ""
+"La cabane du forestier nécessite de l'espace disponible dans son rayon "
+"d'action pour planter des arbres."
 
 #: ../../tribes/empire/fortress/conf:7
 msgid "Your soldiers have occupied your fortress."
@@ -1548,6 +1556,9 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
 msgstr ""
+"La veine d'Or principale de cette mine est épuisée. Attendez vous à des "
+"retours sur investissement fortement diminués. Vous devriez penser à "
+"l'améliorer, la démanteler ou la détruire."
 
 #: ../../tribes/empire/goldore/conf:1
 msgid ""
@@ -1726,11 +1737,12 @@ msgstr ""
 
 #: ../../tribes/empire/lumberjacks_house/help.lua:16
 msgid "Fell trees in the surrounding area and process them into logs."
-msgstr ""
+msgstr "Abattez les arbres dans les alentours et transformez les en troncs."
 
 #: ../../tribes/empire/lumberjacks_house/help.lua:17
 msgid "The lumberjack's house needs trees to fell within the working radius."
 msgstr ""
+"La cabane de bûcheron nécessite des arbres à abattre dans son rayon d'action."
 
 #: ../../tribes/empire/marble/conf:1
 msgid ""
@@ -1754,11 +1766,11 @@ msgstr ""
 
 #: ../../tribes/empire/marblemine/conf:28
 msgid "mining marble"
-msgstr ""
+msgstr "Mine du marbre"
 
 #: ../../tribes/empire/marblemine/conf:30
 msgid "mining stone"
-msgstr ""
+msgstr "Mine de la pierre"
 
 #: ../../tribes/empire/marblemine/conf:58
 msgid ""
@@ -1801,7 +1813,7 @@ msgstr ""
 
 #: ../../tribes/empire/mill/conf:25
 msgid "grinding wheat"
-msgstr ""
+msgstr "Mouds le blé"
 
 #: ../../tribes/empire/miller/conf:1
 msgid "Mills the wheat to produce flour."
@@ -1834,7 +1846,7 @@ msgstr "Élève des cochons."
 
 #: ../../tribes/empire/piggery/conf:26
 msgid "raising pigs"
-msgstr ""
+msgstr "Élève des cochons"
 
 #: ../../tribes/empire/plate_armor/conf:1
 msgid ""

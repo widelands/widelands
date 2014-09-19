@@ -26,7 +26,7 @@
          char const * const     _name = v->get_name  ();                      \
          char const * const _descname = v->get_string();                      \
          if (names.count(_name))                                              \
-            throw game_data_error                                             \
+				throw GameDataError                                             \
                ("object name \"%s\" is already used", _name);                 \
          names.insert(_name);                                                 \
          path += _name;                                                       \
@@ -39,7 +39,7 @@
 #define PARSE_MAP_OBJECT_TYPES_END                                            \
             prof.check_used();                                                \
          } catch (const std::exception & e) {                                 \
-            throw game_data_error                                             \
+				throw GameDataError                                             \
                ("%s=\"%s\": %s", _name, _descname, e.what());                 \
          }                                                                    \
          path.resize(base_path_size);                                         \

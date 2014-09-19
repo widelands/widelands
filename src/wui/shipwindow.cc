@@ -52,7 +52,7 @@ namespace Widelands {
  * Display information about a ship.
  */
 struct ShipWindow : UI::Window {
-	ShipWindow(Interactive_GameBase & igb, Ship & ship);
+	ShipWindow(InteractiveGameBase & igb, Ship & ship);
 	virtual ~ShipWindow();
 
 	void think() override;
@@ -73,7 +73,7 @@ struct ShipWindow : UI::Window {
 	void act_explore_island(bool);
 
 private:
-	Interactive_GameBase & m_igbase;
+	InteractiveGameBase & m_igbase;
 	Ship & m_ship;
 
 	UI::Button * m_btn_goto;
@@ -87,7 +87,7 @@ private:
 	ItemWaresDisplay * m_display;
 };
 
-ShipWindow::ShipWindow(Interactive_GameBase & igb, Ship & ship) :
+ShipWindow::ShipWindow(InteractiveGameBase & igb, Ship & ship) :
 	Window(&igb, "shipwindow", 0, 0, 0, 0, _("Ship")),
 	m_igbase(igb),
 	m_ship(ship)
@@ -211,9 +211,9 @@ ShipWindow::~ShipWindow()
 void ShipWindow::think()
 {
 	UI::Window::think();
-	Interactive_Base * ib = m_ship.get_owner()->egbase().get_ibase();
+	InteractiveBase * ib = m_ship.get_owner()->egbase().get_ibase();
 	bool can_act = false;
-	if (upcast(Interactive_GameBase, igb, ib))
+	if (upcast(InteractiveGameBase, igb, ib))
 		can_act = igb->can_act(m_ship.get_owner()->player_number());
 
 	m_btn_destination->set_enabled(m_ship.get_destination(m_igbase.egbase()));
@@ -295,7 +295,7 @@ void ShipWindow::act_sink()
 		m_igbase.game().send_player_sink_ship(m_ship);
 	}
 	else {
-		show_ship_sink_confirm(ref_cast<Interactive_Player, Interactive_GameBase>(m_igbase), m_ship);
+		show_ship_sink_confirm(ref_cast<InteractivePlayer, InteractiveGameBase>(m_igbase), m_ship);
 	}
 }
 
@@ -307,7 +307,7 @@ void ShipWindow::act_cancel_expedition()
 	}
 	else {
 		show_ship_cancel_expedition_confirm
-			(ref_cast<Interactive_Player, Interactive_GameBase>(m_igbase), m_ship);
+			(ref_cast<InteractivePlayer, InteractiveGameBase>(m_igbase), m_ship);
 	}
 }
 
@@ -346,7 +346,7 @@ void ShipWindow::act_explore_island(bool cw) {
  * Show the window for this ship as long as it is not sinking:
  * either bring it to the front, or create it.
  */
-void Ship::show_window(Interactive_GameBase & igb, bool avoid_fastclick)
+void Ship::show_window(InteractiveGameBase & igb, bool avoid_fastclick)
 {
 	// No window, if ship is sinking
 	if (m_ship_state == SINK_REQUEST || m_ship_state == SINK_ANIMATION)
@@ -377,7 +377,7 @@ void Ship::close_window()
 /**
  * refreshes the window of this ship - useful if some ui elements have to be removed or added
  */
-void Ship::refresh_window(Interactive_GameBase & igb) {
+void Ship::refresh_window(InteractiveGameBase & igb) {
 	// Only do something if there is actually a window
 	if (m_window) {
 		Point window_position = m_window->get_pos();

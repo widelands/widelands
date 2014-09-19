@@ -31,7 +31,7 @@
 /**
  * Get the path of campaign visibility save-file
  */
-std::string Campaign_visibility_save::get_path()
+std::string CampaignVisibilitySave::get_path()
 {
 	std::string savepath = "save";
 	g_fs->EnsureDirectoryExists(savepath); // Make sure save directory exists
@@ -62,7 +62,7 @@ std::string Campaign_visibility_save::get_path()
 /**
  * Create the campaign visibility save-file of the user
  */
-void Campaign_visibility_save::make_campvis(const std::string & savepath)
+void CampaignVisibilitySave::make_campvis(const std::string & savepath)
 {
 	// Only prepare campvis-file -> data will be written via update_campvis
 	Profile campvis(savepath.c_str());
@@ -78,7 +78,7 @@ void Campaign_visibility_save::make_campvis(const std::string & savepath)
 /**
  * Update the campaign visibility save-file of the user
  */
-void Campaign_visibility_save::update_campvis(const std::string & savepath)
+void CampaignVisibilitySave::update_campvis(const std::string & savepath)
 {
 	// Variable declaration
 	int32_t i = 0;
@@ -163,7 +163,7 @@ void Campaign_visibility_save::update_campvis(const std::string & savepath)
  * \param entry entry to be changed
  * \param visible should the map be visible?
  */
-void Campaign_visibility_save::set_campaign_visibility
+void CampaignVisibilitySave::set_campaign_visibility
 	(const std::string & entry, bool visible)
 {
 	std::string savepath = get_path();
@@ -181,7 +181,7 @@ void Campaign_visibility_save::set_campaign_visibility
  * \param entry entry to be changed
  * \param visible should the map be visible?
  */
-void Campaign_visibility_save::set_map_visibility
+void CampaignVisibilitySave::set_map_visibility
 	(const std::string & entry, bool visible)
 {
 	std::string savepath = get_path();

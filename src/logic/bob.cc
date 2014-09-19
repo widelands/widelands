@@ -42,8 +42,8 @@
 #include "logic/soldier.h"
 #include "logic/tribe.h"
 #include "logic/widelands_geometry_io.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 #include "profile/profile.h"
 #include "wui/mapviewpixelconstants.h"
 
@@ -52,7 +52,7 @@ namespace Widelands {
 
 BobDescr::BobDescr(MapObjectType type, const std::string& init_name,
                   const std::string& init_descname,
-                  Tribe_Descr const* tribe)
+                  TribeDescr const* tribe)
 	:
 	MapObjectDescr(type, init_name, init_descname),
 	owner_tribe_    (tribe)
@@ -82,7 +82,7 @@ uint32_t BobDescr::vision_range() const
  * Create a bob of this type
  */
 Bob & BobDescr::create
-	(Editor_Game_Base & egbase,
+	(EditorGameBase & egbase,
 	 Player * const owner,
 	 const Coords & coords)
 	const
@@ -132,7 +132,7 @@ Bob::~Bob()
  *
  * \note Make sure you call this from derived classes!
  */
-void Bob::init(Editor_Game_Base & egbase)
+void Bob::init(EditorGameBase & egbase)
 {
 	MapObject::init(egbase);
 
@@ -147,10 +147,10 @@ void Bob::init(Editor_Game_Base & egbase)
 /**
  * Perform independent cleanup as necessary.
  */
-void Bob::cleanup(Editor_Game_Base & egbase)
+void Bob::cleanup(EditorGameBase & egbase)
 {
 	while (!m_stack.empty()) //  bobs in the editor do not have tasks
-		do_pop_task(ref_cast<Game, Editor_Game_Base>(egbase));
+		do_pop_task(ref_cast<Game, EditorGameBase>(egbase));
 
 	set_owner(nullptr); // implicitly remove ourselves from owner's map
 
@@ -475,7 +475,7 @@ struct BlockedTracker {
 			       std::forward_as_tuple(b.coord.y, b.coord.x);
 		}
 	};
-	typedef std::map<CoordData, bool, CoordOrdering> Cache;
+	using Cache = std::map<CoordData, bool, CoordOrdering>;
 
 	BlockedTracker(Game & game, Bob & bob, const Coords & finaldest)
 		: m_game(game), m_bob(bob), m_map(game.map()), m_finaldest(finaldest)
@@ -694,7 +694,7 @@ void Bob::movepath_update(Game & game, State & state)
 		return pop_task(game);
 
 	if
-		(static_cast<Path::Step_Vector::size_type>(state.ivar1)
+		(static_cast<Path::StepVector::size_type>(state.ivar1)
 		 >=
 		 path->get_nsteps())
 	{
@@ -712,7 +712,7 @@ void Bob::movepath_update(Game & game, State & state)
 	if
 		(state.ivar2
 		 &&
-		 static_cast<Path::Step_Vector::size_type>(state.ivar1) + 1
+		 static_cast<Path::StepVector::size_type>(state.ivar1) + 1
 		 ==
 		 path->get_nsteps())
 	{
@@ -777,7 +777,7 @@ void Bob::move_update(Game & game, State &)
 ///
 /// pos is the location, in pixels, of the node m_position (height is already
 /// taken into account).
-Point Bob::calc_drawpos(const Editor_Game_Base & game, const Point pos) const
+Point Bob::calc_drawpos(const EditorGameBase & game, const Point pos) const
 {
 	const Map & map = game.get_map();
 	const FCoords end = m_position;
@@ -848,7 +848,7 @@ Point Bob::calc_drawpos(const Editor_Game_Base & game, const Point pos) const
 /// Note that the current node is actually the node that we are walking to, not
 /// the the one that we start from.
 void Bob::draw
-	(const Editor_Game_Base & egbase, RenderTarget & dst, const Point& pos) const
+	(const EditorGameBase & egbase, RenderTarget & dst, const Point& pos) const
 {
 	if (m_anim)
 		dst.drawanim
@@ -862,7 +862,7 @@ void Bob::draw
 /**
  * Set a looping animation, starting now.
  */
-void Bob::set_animation(Editor_Game_Base & egbase, uint32_t const anim)
+void Bob::set_animation(EditorGameBase & egbase, uint32_t const anim)
 {
 	m_anim = anim;
 	m_animstart = egbase.get_gametime();
@@ -955,7 +955,7 @@ void Bob::set_owner(Player * const player)
  * Performs the necessary (un)linking in the \ref Field structures and
  * updates the owner's viewing area, if the bob has an owner.
  */
-void Bob::set_position(Editor_Game_Base & egbase, const Coords & coords)
+void Bob::set_position(EditorGameBase & egbase, const Coords & coords)
 {
 	FCoords oldposition = m_position;
 
@@ -996,7 +996,7 @@ void Bob::set_position(Editor_Game_Base & egbase, const Coords & coords)
 }
 
 /// Give debug information.
-void Bob::log_general_info(const Editor_Game_Base & egbase)
+void Bob::log_general_info(const EditorGameBase & egbase)
 {
 	molog("Owner: %p\n", m_owner);
 	molog("Postition: (%i, %i)\n", m_position.x, m_position.y);
@@ -1038,13 +1038,13 @@ void Bob::log_general_info(const Editor_Game_Base & egbase)
 		molog("\n* path: %p\n",  m_stack[i].path);
 		if (m_stack[i].path) {
 			const Path & path = *m_stack[i].path;
-			Path::Step_Vector::size_type nr_steps = path.get_nsteps();
+			Path::StepVector::size_type nr_steps = path.get_nsteps();
 			molog
 				("** Path length: %lu\n",
 				 static_cast<long unsigned int>(nr_steps));
 			molog("** Start: (%i, %i)\n", path.get_start().x, path.get_start().y);
 			molog("** End: (%i, %i)\n", path.get_end().x, path.get_end().y);
-			for (Path::Step_Vector::size_type j = 0; j < nr_steps; ++j)
+			for (Path::StepVector::size_type j = 0; j < nr_steps; ++j)
 				molog
 					("** Step %lu/%lu: %i\n",
 					 static_cast<long unsigned int>(j + 1),
@@ -1077,19 +1077,19 @@ void Bob::Loader::load(FileRead & fr)
 
 	uint8_t version = fr.Unsigned8();
 	if (version != BOB_SAVEGAME_VERSION)
-		throw game_data_error("unknown/unhandled version: %u", version);
+		throw GameDataError("unknown/unhandled version: %u", version);
 
 	Bob & bob = get<Bob>();
 
-	if (Player_Number owner_number = fr.Unsigned8()) {
+	if (PlayerNumber owner_number = fr.Unsigned8()) {
 		if (owner_number > egbase().map().get_nrplayers())
-			throw game_data_error
+			throw GameDataError
 				("owner number is %u but there are only %u players",
 				 owner_number, egbase().map().get_nrplayers());
 
 		Player * owner = egbase().get_player(owner_number);
 		if (!owner)
-			throw game_data_error("owning player %u does not exist", owner_number);
+			throw GameDataError("owning player %u does not exist", owner_number);
 
 		bob.set_owner(owner);
 	}
@@ -1185,16 +1185,16 @@ const Bob::Task * Bob::Loader::get_task(const std::string & name)
 	if (name == "movepath") return &taskMovepath;
 	if (name == "idle") return &taskIdle;
 
-	throw game_data_error("unknown bob task '%s'", name.c_str());
+	throw GameDataError("unknown bob task '%s'", name.c_str());
 }
 
 const BobProgramBase * Bob::Loader::get_program(const std::string & name)
 {
-	throw game_data_error("unknown bob program '%s'", name.c_str());
+	throw GameDataError("unknown bob program '%s'", name.c_str());
 }
 
 void Bob::save
-	(Editor_Game_Base & eg, MapMapObjectSaver & mos, FileWrite & fw)
+	(EditorGameBase & eg, MapObjectSaver & mos, FileWrite & fw)
 {
 	MapObject::save(eg, mos, fw);
 

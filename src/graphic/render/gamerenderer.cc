@@ -39,7 +39,7 @@ GameRenderer::~GameRenderer()
 
 void GameRenderer::rendermap
 	(RenderTarget & dst,
-	 const Widelands::Editor_Game_Base &       egbase,
+	 const Widelands::EditorGameBase &       egbase,
 	 const Widelands::Player           &       player,
 	 const Point                       &       viewofs)
 {
@@ -53,7 +53,7 @@ void GameRenderer::rendermap
 
 void GameRenderer::rendermap
 	(RenderTarget & dst,
-	 const Widelands::Editor_Game_Base & egbase,
+	 const Widelands::EditorGameBase & egbase,
 	 const Point                       & viewofs)
 {
 	m_dst = &dst;
@@ -112,7 +112,7 @@ void GameRenderer::draw_objects()
 				pos[d] += m_dst_offset;
 			}
 
-			Player_Number owner_number[4];
+			PlayerNumber owner_number[4];
 			bool isborder[4];
 			Vision vision[4] = {2, 2, 2, 2};
 			for (uint32_t d = 0; d < 4; ++d)
@@ -165,15 +165,15 @@ void GameRenderer::draw_objects()
 					if
 						(f_pl.constructionsite.becomes)
 					{
-						const Player::Constructionsite_Information & csinf = f_pl.constructionsite;
+						const Player::ConstructionsiteInformation & csinf = f_pl.constructionsite;
 						// draw the partly finished constructionsite
 						uint32_t anim_idx;
 						try {
 							anim_idx = csinf.becomes->get_animation("build");
-						} catch (MapObjectDescr::Animation_Nonexistent &) {
+						} catch (MapObjectDescr::AnimationNonexistent &) {
 							try {
 								anim_idx = csinf.becomes->get_animation("unoccupied");
-							} catch (MapObjectDescr::Animation_Nonexistent) {
+							} catch (MapObjectDescr::AnimationNonexistent) {
 								anim_idx = csinf.becomes->get_animation("idle");
 							}
 						}
@@ -201,7 +201,7 @@ void GameRenderer::draw_objects()
 							uint32_t a;
 							try {
 								a = csinf.was->get_animation("unoccupied");
-							} catch (MapObjectDescr::Animation_Nonexistent &) {
+							} catch (MapObjectDescr::AnimationNonexistent &) {
 								a = csinf.was->get_animation("idle");
 							}
 							m_dst->drawanimrect
@@ -214,7 +214,7 @@ void GameRenderer::draw_objects()
 						uint32_t pic;
 						try {
 							pic = building->get_animation("unoccupied");
-						} catch (MapObjectDescr::Animation_Nonexistent &) {
+						} catch (MapObjectDescr::AnimationNonexistent &) {
 							pic = building->get_animation("idle");
 						}
 						m_dst->drawanim(pos[F], pic, 0, owner);
@@ -228,15 +228,15 @@ void GameRenderer::draw_objects()
 
 			{
 				// Render overlays on the node
-				OverlayManager::Overlay_Info overlay_info[MAX_OVERLAYS_PER_NODE];
+				OverlayManager::OverlayInfo overlay_info[MAX_OVERLAYS_PER_NODE];
 
-				const OverlayManager::Overlay_Info * const end =
+				const OverlayManager::OverlayInfo * const end =
 					overlay_info
 					+
 					map.overlay_manager().get_overlays(coords[F], overlay_info);
 
 				for
-					(const OverlayManager::Overlay_Info * it = overlay_info;
+					(const OverlayManager::OverlayInfo * it = overlay_info;
 					 it < end;
 					 ++it)
 					m_dst->blit(pos[F] - it->hotspot, it->pic);
@@ -244,8 +244,8 @@ void GameRenderer::draw_objects()
 
 			{
 				// Render overlays on the R triangle
-				OverlayManager::Overlay_Info overlay_info[MAX_OVERLAYS_PER_TRIANGLE];
-				OverlayManager::Overlay_Info const * end =
+				OverlayManager::OverlayInfo overlay_info[MAX_OVERLAYS_PER_TRIANGLE];
+				OverlayManager::OverlayInfo const * end =
 					overlay_info
 					+
 					map.overlay_manager().get_overlays
@@ -256,7 +256,7 @@ void GameRenderer::draw_objects()
 					 (pos[F].y + pos[R].y + pos[BR].y) / 3);
 
 				for
-					(OverlayManager::Overlay_Info const * it = overlay_info;
+					(OverlayManager::OverlayInfo const * it = overlay_info;
 					 it < end;
 					 ++it)
 					m_dst->blit(tripos - it->hotspot, it->pic);
@@ -264,8 +264,8 @@ void GameRenderer::draw_objects()
 
 			{
 				// Render overlays on the D triangle
-				OverlayManager::Overlay_Info overlay_info[MAX_OVERLAYS_PER_TRIANGLE];
-				OverlayManager::Overlay_Info const * end =
+				OverlayManager::OverlayInfo overlay_info[MAX_OVERLAYS_PER_TRIANGLE];
+				OverlayManager::OverlayInfo const * end =
 					overlay_info
 					+
 					map.overlay_manager().get_overlays
@@ -276,7 +276,7 @@ void GameRenderer::draw_objects()
 					 (pos[F].y + pos[BL].y + pos[BR].y) / 3);
 
 				for
-					(OverlayManager::Overlay_Info const * it = overlay_info;
+					(OverlayManager::OverlayInfo const * it = overlay_info;
 					 it < end;
 					 ++it)
 					m_dst->blit(tripos - it->hotspot, it->pic);
