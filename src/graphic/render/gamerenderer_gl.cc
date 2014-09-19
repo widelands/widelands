@@ -252,40 +252,56 @@ void GameRendererGL::initialize() {
 	do_initialize_ = false;
 }
 
-void GameRendererGL::draw_terrain_triangles() {
-	const Map & map = m_egbase->map();
-	const World& world = m_egbase->world();
+struct RenderData {
+	void reset(int nterrains) {
+		terrains_to_indices.resize(nterrains);
+		for (auto& container : terrains_to_indices) {
+			container.clear();
+		}
+		vertices.clear();
+	}
 
 	std::vector<TerrainProgramData> vertices;
+	std::vector<std::vector<uint16_t>> terrains_to_indices;
+};
 
-	std::map<int, std::vector<uint16_t>> terrains_to_indices;
-	int current_index = 0;
-	const auto add_vertex = [this, &vertices, &terrains_to_indices, &map, &current_index](
-	   int fx, int fy, int terrain_index) {
-		Coords coords(fx, fy);
+// NOCOM(#sirver): make static? or member
+void add_vertex(const FCoords& normalized_coords,
+                int fx,
+                int fy,
+                int terrain_index,
+                const Point& surface_offset,
+                RenderData* render_data) {
+	Coords coords(fx, fy);
 
-		TerrainProgramData v;
-		int x, y;
-		MapviewPixelFunctions::get_basepix(coords, x, y);
-		v.texture_x = float(x) / TEXTURE_WIDTH;
-		v.texture_y = float(y) / TEXTURE_HEIGHT;
-		v.x = x + m_surface_offset.x;
-		v.y = y + m_surface_offset.y;
+	TerrainProgramData v;
+	int x, y;
+	MapviewPixelFunctions::get_basepix(coords, x, y);
+	v.texture_x = float(x) / TEXTURE_WIDTH;
+	v.texture_y = float(y) / TEXTURE_HEIGHT;
+	v.x = x + surface_offset.x;
+	v.y = y + surface_offset.y;
 
-		map.normalize_coords(coords);
-		const FCoords fcoords = map.get_fcoords(coords);
+	// Correct for the height of the field.
+	v.y -= normalized_coords.field->get_height() * HEIGHT_FACTOR;
 
-		// Correct for the height of the field.
-		v.y -= fcoords.field->get_height() * HEIGHT_FACTOR;
+	// NOCOM(#sirver): incorporate brightness.
+	// uint8_t brightness = field_brightness(normalized_coords);
+	// vtx.color[0] = vtx.color[1] = vtx.color[2] = brightness;
+	// vtx.color[3] = 255;
 
-		// NOCOM(#sirver): incorporate brightness.
-		// uint8_t brightness = field_brightness(fcoords);
-		// vtx.color[0] = vtx.color[1] = vtx.color[2] = brightness;
-		// vtx.color[3] = 255;
+	render_data->terrains_to_indices[terrain_index].push_back(render_data->vertices.size());
+	render_data->vertices.push_back(v);
+};
 
-		terrains_to_indices[terrain_index].push_back(current_index++);
-		vertices.push_back(v);
-	};
+void GameRendererGL::draw_terrain_triangles() {
+	static RenderData render_data; // // NOCOM(#sirver): ugly
+
+	const Map & map = m_egbase->map();
+	const auto& terrains = m_egbase->world().terrains();
+
+	render_data.reset(terrains.size());
+
 
 	for (int32_t fy = m_minfy; fy <= m_maxfy; ++fy) {
 		for (int32_t fx = m_minfx; fx <= m_maxfx; ++fx) {
@@ -295,16 +311,30 @@ void GameRendererGL::draw_terrain_triangles() {
 
 			// Bottom triangle.
 			const int terrain_d = fcoords.field->terrain_d();
-			add_vertex(fx, fy, terrain_d);
-			add_vertex(fx + (fy & 1), fy + 1, terrain_d); // bottom right neighbor
-			add_vertex(fx + (fy & 1) - 1, fy + 1, terrain_d); // bottom left neighbor
+			add_vertex(fcoords, fx, fy, terrain_d, m_surface_offset, &render_data);
+			add_vertex(fcoords,
+			           fx + (fy & 1),
+			           fy + 1,
+			           terrain_d,
+			           m_surface_offset,
+			           &render_data);  // bottom right neighbor
+			add_vertex(fcoords,
+			           fx + (fy & 1) - 1,
+			           fy + 1,
+			           terrain_d,
+			           m_surface_offset,
+			           &render_data);  // bottom left neighbor
 
 			// Right triangle.
 			const int terrain_r = fcoords.field->terrain_r();
-			add_vertex(fx, fy, terrain_r);
-			add_vertex(fx + (fy & 1), fy + 1, terrain_r); // bottom right neighbor
-			add_vertex(fx + 1, fy, terrain_r); // right neighbor
-
+			add_vertex(fcoords, fx, fy, terrain_r, m_surface_offset, &render_data);
+			add_vertex(fcoords,
+			           fx + (fy & 1),
+			           fy + 1,
+			           terrain_r,
+			           m_surface_offset,
+			           &render_data);  // bottom right neighbor
+			add_vertex(fcoords, fx + 1, fy, terrain_r, m_surface_offset, &render_data);  // right neighbor
 		}
 	}
 
@@ -312,8 +342,10 @@ void GameRendererGL::draw_terrain_triangles() {
 	glUseProgram(terrain_program_);
 
 	glBindBuffer(GL_ARRAY_BUFFER, terrain_program_data_);
-	glBufferData(
-		GL_ARRAY_BUFFER, sizeof(TerrainProgramData) * vertices.size(), vertices.data(), GL_STREAM_DRAW);
+	glBufferData(GL_ARRAY_BUFFER,
+	             sizeof(TerrainProgramData) * render_data.vertices.size(),
+	             render_data.vertices.data(),
+	             GL_STREAM_DRAW);
 
 	const auto set_attrib_pointer = [](const int vertex_index, int num_items, int offset, int normalized) {
 		glVertexAttribPointer(vertex_index,
@@ -327,23 +359,25 @@ void GameRendererGL::draw_terrain_triangles() {
 	// Setup vertex attribute pointers.
 	set_attrib_pointer(kAttribVertexPosition, 2, offsetof(TerrainProgramData, x), GL_FALSE);
 	set_attrib_pointer(kAttribVertexTexturePosition, 2, offsetof(TerrainProgramData, texture_x), GL_TRUE);
+	glActiveTexture(GL_TEXTURE0);
+	// Set the sampler texture unit to 0
+	glUniform1i(texture_location_, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indices_buffer_);
 
 	// Which triangles to draw?
-	for (const auto& pair : terrains_to_indices) {
-		glActiveTexture(GL_TEXTURE0);
+	for (size_t i = 0; i < render_data.terrains_to_indices.size(); ++i) {
+		const auto& indices = render_data.terrains_to_indices[i];
+		if (indices.empty()) {
+			continue;
+		}
 		glBindTexture(
 		   GL_TEXTURE_2D,
-		   g_gr->get_maptexture_data(world.terrain_descr(pair.first).get_texture())->getTexture());
-		// Set the sampler texture unit to 0
-		glUniform1i(texture_location_, 0);
-
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indices_buffer_);
+		   g_gr->get_maptexture_data(terrains.get_unmutable(i).get_texture())->getTexture());
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER,
-						 sizeof(GL_UNSIGNED_SHORT) * pair.second.size(),
-						 pair.second.data(),
-						 GL_STREAM_DRAW);
-
-		glDrawElements(GL_TRIANGLES, pair.second.size(), GL_UNSIGNED_SHORT, 0 /* offset */);
+		             sizeof(GL_UNSIGNED_SHORT) * indices.size(),
+		             indices.data(),
+		             GL_STREAM_DRAW);
+		glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, 0 /* offset */);
 	}
 
 	// Release Program object.
@@ -357,7 +391,9 @@ void GameRendererGL::draw() {
 	}
 
 	// NOCOM(#sirver): Use this quantity to draw as many triangles as possible.
+	// int texture_units;
 	// glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &texture_units);
+	// log("#sirver texture_units: %d\n", texture_units);
 
 	const World& world = m_egbase->world();
 	if (m_terrain_freq.size() < world.terrains().get_nitems()) {
