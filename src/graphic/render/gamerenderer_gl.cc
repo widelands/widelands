@@ -266,16 +266,15 @@ struct RenderData {
 };
 
 // NOCOM(#sirver): make static? or member
-void add_vertex(const FCoords& normalized_coords,
-                int fx,
+void add_vertex(int fx,
                 int fy,
                 int terrain_index,
                 const Point& surface_offset,
+					 const Map& map,
                 RenderData* render_data) {
-	Coords coords(fx, fy);
-
 	TerrainProgramData v;
 	int x, y;
+	Coords coords(fx, fy);
 	MapviewPixelFunctions::get_basepix(coords, x, y);
 	v.texture_x = float(x) / TEXTURE_WIDTH;
 	v.texture_y = float(y) / TEXTURE_HEIGHT;
@@ -283,7 +282,9 @@ void add_vertex(const FCoords& normalized_coords,
 	v.y = y + surface_offset.y;
 
 	// Correct for the height of the field.
-	v.y -= normalized_coords.field->get_height() * HEIGHT_FACTOR;
+	map.normalize_coords(coords);
+	const FCoords fcoords = map.get_fcoords(coords);
+	v.y -= fcoords.field->get_height() * HEIGHT_FACTOR;
 
 	// NOCOM(#sirver): incorporate brightness.
 	// uint8_t brightness = field_brightness(normalized_coords);
@@ -311,30 +312,30 @@ void GameRendererGL::draw_terrain_triangles() {
 
 			// Bottom triangle.
 			const int terrain_d = fcoords.field->terrain_d();
-			add_vertex(fcoords, fx, fy, terrain_d, m_surface_offset, &render_data);
-			add_vertex(fcoords,
-			           fx + (fy & 1),
+			add_vertex(fx, fy, terrain_d, m_surface_offset, map, &render_data);
+			add_vertex(fx + (fy & 1),
 			           fy + 1,
 			           terrain_d,
 			           m_surface_offset,
+						  map,
 			           &render_data);  // bottom right neighbor
-			add_vertex(fcoords,
-			           fx + (fy & 1) - 1,
+			add_vertex(fx + (fy & 1) - 1,
 			           fy + 1,
 			           terrain_d,
 			           m_surface_offset,
+						  map,
 			           &render_data);  // bottom left neighbor
 
 			// Right triangle.
 			const int terrain_r = fcoords.field->terrain_r();
-			add_vertex(fcoords, fx, fy, terrain_r, m_surface_offset, &render_data);
-			add_vertex(fcoords,
-			           fx + (fy & 1),
+			add_vertex(fx, fy, terrain_r, m_surface_offset, map, &render_data);
+			add_vertex(fx + (fy & 1),
 			           fy + 1,
 			           terrain_r,
 			           m_surface_offset,
+						  map,
 			           &render_data);  // bottom right neighbor
-			add_vertex(fcoords, fx + 1, fy, terrain_r, m_surface_offset, &render_data);  // right neighbor
+			add_vertex(fx + 1, fy, terrain_r, m_surface_offset, map, &render_data);  // right neighbor
 		}
 	}
 
