@@ -55,25 +55,59 @@ struct TerrainProgramData {
 	float texture_x;
 	float texture_y;
 };
-
 static_assert(sizeof(TerrainProgramData) == 20, "Wrong padding.");
 
-// NOCOM(#sirver): should not load from a file
-GLuint load_shader(GLenum type, const std::string& source_file) {
-	std::string source;
-	{
-		FileRead fr;
-		fr.Open(*g_fs, source_file);
-		source = fr.CString();
-	}
 
+// Useful: http://www.cs.unh.edu/~cs770/docs/glsl-1.20-quickref.pdf
+
+const char kTerrainVertexShader[] = R"(
+#version 120
+
+attribute vec2 in_position;
+attribute vec2 in_texture_position;
+attribute float height;
+
+varying vec2 o_texture_position;
+
+#define HEIGHT_FACTOR 5
+
+void main() {
+	o_texture_position = in_texture_position;
+	vec4 p = vec4(in_position, 0., 1.);
+	p.y -= height * HEIGHT_FACTOR;
+	gl_Position = gl_ProjectionMatrix * p;
+}
+)";
+
+const char kTerrainFragmentShader[] = R"(
+#version 120
+
+uniform sampler2D tex;
+
+varying vec2 o_texture_position;
+
+void main() {
+	gl_FragColor = texture2D(tex, o_texture_position);
+}
+)";
+
+std::string shader_to_string(GLenum type) {
+	if (type == GL_VERTEX_SHADER) {
+		return "vertex";
+	}
+	if (type == GL_FRAGMENT_SHADER) {
+		return "fragment";
+	}
+	return "unknown";
+}
+
+GLuint compile_shader(GLenum type, const char* source) {
 	const GLuint shader = glCreateShader(type);
 	if (!shader) {
-		throw wexception("Could not create shader from %s.", source_file.c_str());
+		throw wexception("Could not create %s shader.", shader_to_string(type).c_str());
 	}
 
-	const char* source_ptr = source.c_str();
-	glShaderSource(shader, 1, &source_ptr, nullptr);
+	glShaderSource(shader, 1, &source, nullptr);
 
 	glCompileShader(shader);
 	GLint compiled;
@@ -85,7 +119,7 @@ GLuint load_shader(GLenum type, const std::string& source_file) {
 		if (infoLen > 1) {
 			std::unique_ptr<char[]> infoLog(new char[infoLen]);
 			glGetShaderInfoLog(shader, infoLen, NULL, infoLog.get());
-			throw wexception("Error compiling shader %s:\n%s", source_file.c_str(), infoLog.get());
+			throw wexception("Error compiling %s shader:\n%s", shader_to_string(type).c_str(), infoLog.get());
 		}
 		// NOCOM(#sirver): cleanup in any case.
 		// glDeleteShader(shader);
@@ -96,17 +130,17 @@ GLuint load_shader(GLenum type, const std::string& source_file) {
 	return shader;
 }
 
-GLuint compile_gl_program(const std::string& vertex_shader_file,
-                          const std::string& fragment_shader_file) {
+GLuint compile_gl_program(const char* vertex_shader_source,
+                          const char* fragment_shader_source) {
 	const GLuint program_object = glCreateProgram();
 	if (!program_object) {
 		throw wexception("Could not create GL program.");
 	}
 
-	const GLuint vertex_shader = load_shader(GL_VERTEX_SHADER, vertex_shader_file);
+	const GLuint vertex_shader = compile_shader(GL_VERTEX_SHADER, vertex_shader_source);
 	glAttachShader(program_object, vertex_shader);
 
-	const GLuint fragment_shader = load_shader(GL_FRAGMENT_SHADER, fragment_shader_file);
+	const GLuint fragment_shader = compile_shader(GL_FRAGMENT_SHADER, fragment_shader_source);
 	glAttachShader(program_object, fragment_shader);
 	return program_object;
 }
@@ -213,13 +247,12 @@ void GameRendererGL::initialize() {
 	glGenBuffers(1, &indices_buffer_);
 	handle_glerror();
 
-	terrain_program_ =
-	   compile_gl_program("src/graphic/render/terrain.vs", "src/graphic/render/terrain.fs");
+	terrain_program_ = compile_gl_program(kTerrainVertexShader, kTerrainFragmentShader);
 
 	handle_glerror();
-	glBindAttribLocation(terrain_program_, kAttribVertexPosition, "position");
+	glBindAttribLocation(terrain_program_, kAttribVertexPosition, "in_position");
 	handle_glerror();
-	glBindAttribLocation(terrain_program_, kAttribVertexTexturePosition, "texture_position");
+	glBindAttribLocation(terrain_program_, kAttribVertexTexturePosition, "in_texture_position");
 	handle_glerror();
 	glBindAttribLocation(terrain_program_, kAttribVertexHeight, "height");
 	handle_glerror();
