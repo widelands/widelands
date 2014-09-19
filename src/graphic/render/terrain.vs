@@ -6,8 +6,6 @@ attribute vec2 position;
 attribute vec2 texture_position;
 attribute float height;
 
-uniform sampler2D tex;
-
 varying vec2 o_texture_position;
 
 #define HEIGHT_FACTOR 5
