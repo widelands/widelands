@@ -40,12 +40,12 @@ public:
 		Pos(size_t const p = 0) : pos(p) {
 		}
 		/// Returns a special value indicating invalidity.
-		static Pos Null() {
+		static Pos null() {
 			return std::numeric_limits<size_t>::max();
 		}
 
-		bool isNull() const {
-			return *this == Null();
+		bool is_null() const {
+			return *this == null();
 		}
 		operator size_t() const {
 			return pos;
@@ -100,11 +100,11 @@ public:
 
 	/// Get the position that will be read from in the next read operation that
 	/// does not specify a position.
-	Pos GetPos() const;
+	Pos get_pos() const;
 
 	// Returns the next 'bytes' starting at 'pos' in the file. Can throw
 	// File_Boundary_Exceeded.
-	char* data(uint32_t bytes, Pos pos = Pos::Null());
+	char* data(uint32_t bytes, Pos pos = Pos::null());
 
 	// Returns the whole file as a string starting from 'pos'.
 	char* CString(Pos pos);

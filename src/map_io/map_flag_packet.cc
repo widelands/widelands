@@ -38,7 +38,7 @@ namespace Widelands {
 #define CURRENT_PACKET_VERSION 1
 
 
-void MapFlagPacket::Read
+void MapFlagPacket::read
 	(FileSystem            &       fs,
 	 EditorGameBase      &       egbase,
 	 bool                    const skip,
@@ -127,7 +127,7 @@ void MapFlagPacket::Read
 }
 
 
-void MapFlagPacket::Write
+void MapFlagPacket::write
 	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	FileWrite fw;
@@ -152,7 +152,7 @@ void MapFlagPacket::Write
 		} else //  no existence, no owner
 			fw.Unsigned8(0);
 
-	fw.Write(fs, "binary/flag");
+	fw.write(fs, "binary/flag");
 }
 
 }

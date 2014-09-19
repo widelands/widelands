@@ -370,5 +370,5 @@ void GameMainMenuSaveGame::pause_game(bool paused)
 	if (igbase().is_multiplayer()) {
 		return;
 	}
-	igbase().game().gameController()->setPaused(paused);
+	igbase().game().game_controller()->setPaused(paused);
 }

@@ -98,7 +98,7 @@ public:
 
 	// life cycle
 	void set_game_controller(GameController *);
-	GameController * gameController();
+	GameController * game_controller();
 	void set_write_replay(bool wr);
 	void set_write_syncstream(bool wr);
 	void save_syncstream(bool save);
@@ -191,8 +191,8 @@ public:
 		return m_general_stats;
 	}
 
-	void ReadStatistics(FileRead &, uint32_t version);
-	void WriteStatistics(FileWrite &);
+	void read_statistics(FileRead &, uint32_t version);
+	void write_statistics(FileWrite &);
 
 	void sample_statistics();
 
@@ -201,7 +201,7 @@ public:
 	bool is_replay() const {return m_replay;}
 
 private:
-	void SyncReset();
+	void sync_reset();
 
 	MD5Checksum<StreamWrite> m_synchash;
 
@@ -221,7 +221,7 @@ private:
 		///
 		/// Note that this file is deleted at the end of the game, unless
 		/// \ref m_syncstreamsave has been set.
-		void StartDump(const std::string & fname);
+		void start_dump(const std::string & fname);
 
 		void data(void const * data, size_t size) override;
 

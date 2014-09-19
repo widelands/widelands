@@ -344,7 +344,7 @@ MessageId Player::add_message_with_timeout
 			 map.calc_distance(tmp_message.second->position(), position) <= radius)
 		{
 			delete &m;
-			return MessageId::Null();
+			return MessageId::null();
 		}
 	}
 	return add_message(game, m);
@@ -869,7 +869,7 @@ void Player::drop_soldier(PlayerImmovable & imm, Soldier & soldier) {
 	if (soldier.descr().type() != MapObjectType::SOLDIER)
 		return;
 	if (upcast(SoldierControl, ctrl, &imm))
-		ctrl->dropSoldier(soldier);
+		ctrl->drop_soldier(soldier);
 }
 
 /*
@@ -878,14 +878,14 @@ void Player::drop_soldier(PlayerImmovable & imm, Soldier & soldier) {
 */
 
 /**
- * Get a list of soldiers that this player can be used to attack the
+ * Get a list of soldiers that this player can use to attack the
  * building at the given flag.
  *
  * The default attack should just take the first N soldiers of the
  * returned array.
  */
 // TODO(unknown): Perform a meaningful sort on the soldiers array.
-uint32_t Player::findAttackSoldiers
+uint32_t Player::find_attack_soldiers
 	(Flag & flag, std::vector<Soldier *> * soldiers, uint32_t nr_wanted)
 {
 	uint32_t count = 0;
@@ -908,8 +908,8 @@ uint32_t Player::findAttackSoldiers
 	for (BaseImmovable * temp_flag : flags) {
 		upcast(Flag, attackerflag, temp_flag);
 		upcast(MilitarySite, ms, attackerflag->get_building());
-		std::vector<Soldier *> const present = ms->presentSoldiers();
-		uint32_t const nr_staying = ms->minSoldierCapacity();
+		std::vector<Soldier *> const present = ms->present_soldiers();
+		uint32_t const nr_staying = ms->min_soldier_capacity();
 		uint32_t const nr_present = present.size();
 		if (nr_staying < nr_present) {
 			uint32_t const nr_taken =
@@ -943,14 +943,14 @@ void Player::enemyflagaction
 	else if (is_hostile(flag.owner())) {
 		if (Building * const building = flag.get_building()) {
 			if (upcast(Attackable, attackable, building)) {
-				if (attackable->canAttack()) {
+				if (attackable->can_attack()) {
 					std::vector<Soldier *> attackers;
-					findAttackSoldiers(flag, &attackers, count);
+					find_attack_soldiers(flag, &attackers, count);
 					assert(attackers.size() <= count);
 
 					for (Soldier * temp_attacker : attackers) {
 						upcast(MilitarySite, ms, temp_attacker->get_location(egbase()));
-						ms->sendAttacker(*temp_attacker, *building);
+						ms->send_attacker(*temp_attacker, *building);
 					}
 				}
 			}
@@ -1032,7 +1032,7 @@ void Player::rediscover_node
 			if (const BaseImmovable * base_immovable = f.field->get_immovable()) {
 				map_object_descr = &base_immovable->descr();
 
-				if (Road::IsRoadDescr(map_object_descr))
+				if (Road::is_road_descr(map_object_descr))
 					map_object_descr = nullptr;
 				else if (upcast(Building const, building, base_immovable)) {
 					if (building->get_position() != f)
@@ -1280,12 +1280,12 @@ void Player::update_building_statistics
 	}
 }
 
-void Player::setAI(const std::string & ai)
+void Player::set_ai(const std::string & ai)
 {
 	m_ai = ai;
 }
 
-const std::string & Player::getAI() const
+const std::string & Player::get_ai() const
 {
 	return m_ai;
 }
@@ -1300,7 +1300,7 @@ const std::string & Player::getAI() const
  *   2 - with consumption statistics
  *   3 - with stock statistics
  */
-void Player::ReadStatistics(FileRead & fr, uint32_t const version)
+void Player::read_statistics(FileRead & fr, uint32_t const version)
 {
 	 //version 1, 2 and 3 only differs in an additional statistic.
 	 //Use version 1 code for all of them
@@ -1446,7 +1446,7 @@ void Player::ReadStatistics(FileRead & fr, uint32_t const version)
 /**
  * Write statistics data to the give file
  */
-void Player::WriteStatistics(FileWrite & fw) const {
+void Player::write_statistics(FileWrite & fw) const {
 	//write produce statistics
 	fw.Unsigned16(m_current_produced_statistics.size());
 	fw.Unsigned16(m_ware_productions[0].size());

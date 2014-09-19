@@ -59,13 +59,13 @@ void MapGenerator::generate_bobs
 	 MapGenAreaInfo::MapGenTerrainType const terrType)
 {
 	//  Figure out which bob area is due here...
-	size_t num = map_gen_info_->getNumLandResources();
+	size_t num = map_gen_info_->get_num_land_resources();
 	size_t found = num;
-	uint32_t sum_weight = map_gen_info_->getSumLandResourceWeight();
+	uint32_t sum_weight = map_gen_info_->get_sum_land_resource_weight();
 	uint32_t max_val = 0;
 	for (size_t ix = 0; ix < num; ++ix) {
 		uint32_t val = random_bobs[ix][fc.x + map_info_.w * fc.y];
-		val = (val / sum_weight) * map_gen_info_->getLandResource(ix).getWeight();
+		val = (val / sum_weight) * map_gen_info_->get_land_resource(ix).get_weight();
 		if (val >= max_val) {
 			found = ix;
 			max_val = val;
@@ -76,15 +76,15 @@ void MapGenerator::generate_bobs
 
 	// Figure out if we really need to set a bob here...
 
-	const MapGenLandResource & landResource = map_gen_info_->getLandResource(found);
+	const MapGenLandResource & landResource = map_gen_info_->get_land_resource(found);
 
-	const MapGenBobCategory * bobCategory = landResource.getBobCategory(terrType);
+	const MapGenBobCategory * bobCategory = landResource.get_bob_category(terrType);
 
 	if (!bobCategory) //  no bobs defined here...
 		return;
 
-	uint32_t immovDens = landResource.getImmovableDensity();
-	uint32_t movDens   = landResource.getMoveableDensity();
+	uint32_t immovDens = landResource.get_immovable_density();
+	uint32_t movDens   = landResource.get_moveable_density();
 
 	immovDens *= max_val / 100;
 	movDens   *= max_val / 100;
@@ -205,9 +205,9 @@ uint8_t MapGenerator::make_node_elevation
 	(double                      const elevation,
 	 Coords                      const c)
 {
-	int32_t const water_h  = map_gen_info_->getWaterShallowHeight();
-	int32_t const mount_h  = map_gen_info_->getMountainFootHeight();
-	int32_t const summit_h = map_gen_info_->getSummitHeight      ();
+	int32_t const water_h  = map_gen_info_->get_water_shallow_height();
+	int32_t const mount_h  = map_gen_info_->get_mountain_foot_height();
+	int32_t const summit_h = map_gen_info_->get_summit_height       ();
 
 	double const water_fac = map_info_.waterRatio;
 	double const land_fac  = map_info_.landRatio;
@@ -452,9 +452,9 @@ TerrainIndex MapGenerator::figure_out_terrain
 	 MapGenAreaInfo::MapGenTerrainType & terrType)
 {
 	uint32_t       numLandAreas      =
-		map_gen_info_->getNumAreas(MapGenAreaInfo::atLand);
+		map_gen_info_->get_num_areas(MapGenAreaInfo::atLand);
 	uint32_t const numWasteLandAreas =
-		map_gen_info_->getNumAreas(MapGenAreaInfo::atWasteland);
+		map_gen_info_->get_num_areas(MapGenAreaInfo::atWasteland);
 
 	bool isDesert  = false;
 	bool isDesertOuter = false;
@@ -516,10 +516,10 @@ TerrainIndex MapGenerator::figure_out_terrain
 			landAreaIndex = 0;
 		else if (numLandAreas == 2) {
 			uint32_t const weight1 =
-				map_gen_info_->getArea(MapGenAreaInfo::atLand, 0).getWeight();
+				map_gen_info_->get_area(MapGenAreaInfo::atLand, 0).get_weight();
 			uint32_t const weight2 =
-				map_gen_info_->getArea(MapGenAreaInfo::atLand, 1).getWeight();
-			uint32_t const sum     = map_gen_info_->getSumLandWeight();
+				map_gen_info_->get_area(MapGenAreaInfo::atLand, 1).get_weight();
+			uint32_t const sum     = map_gen_info_->get_sum_land_weight();
 			if
 				(weight1 * (random2[c0.x + map_info_.w * c0.y] / sum)
 				 >=
@@ -529,12 +529,12 @@ TerrainIndex MapGenerator::figure_out_terrain
 				landAreaIndex = 1;
 		} else {
 			uint32_t const weight1 =
-				map_gen_info_->getArea(MapGenAreaInfo::atLand, 0).getWeight();
+				map_gen_info_->get_area(MapGenAreaInfo::atLand, 0).get_weight();
 			uint32_t const weight2 =
-				map_gen_info_->getArea(MapGenAreaInfo::atLand, 1).getWeight();
+				map_gen_info_->get_area(MapGenAreaInfo::atLand, 1).get_weight();
 			uint32_t const weight3 =
-				map_gen_info_->getArea(MapGenAreaInfo::atLand, 2).getWeight();
-			uint32_t const sum     = map_gen_info_->getSumLandWeight();
+				map_gen_info_->get_area(MapGenAreaInfo::atLand, 2).get_weight();
+			uint32_t const sum     = map_gen_info_->get_sum_land_weight();
 			uint32_t const randomX = (rand2 + rand3) / 2;
 			if
 				(weight1 * (rand2 / sum) > weight2 * (rand3   / sum) &&
@@ -557,14 +557,14 @@ TerrainIndex MapGenerator::figure_out_terrain
 
 	//  see whether it is water
 
-	uint32_t const coast_h   = map_gen_info_->getLandCoastHeight();
+	uint32_t const coast_h   = map_gen_info_->get_land_coast_height();
 	if (h1 <= coast_h && h2 <= coast_h && h3 <= coast_h) { //  water or coast...
 		atp = MapGenAreaInfo::atLand;
 		ttp = MapGenAreaInfo::ttLandCoast;
 
-		uint32_t const ocean_h   = map_gen_info_->getWaterOceanHeight();
-		uint32_t const shelf_h   = map_gen_info_->getWaterShelfHeight();
-		uint32_t const shallow_h = map_gen_info_->getWaterShallowHeight();
+		uint32_t const ocean_h   = map_gen_info_->get_water_ocean_height();
+		uint32_t const shelf_h   = map_gen_info_->get_water_shelf_height();
+		uint32_t const shallow_h = map_gen_info_->get_water_shallow_height();
 
 		//  TODO(unknown): The heights can not be lower than water-Shallow --
 		//  there will never be an ocean yet
@@ -580,10 +580,10 @@ TerrainIndex MapGenerator::figure_out_terrain
 			ttp = MapGenAreaInfo::ttWaterShallow;
 		}
 	} else { //  it is not water
-		uint32_t const upper_h = map_gen_info_->getLandUpperHeight   ();
-		uint32_t const foot_h  = map_gen_info_->getMountainFootHeight();
-		uint32_t const mount_h = map_gen_info_->getMountainHeight    ();
-		uint32_t const snow_h  = map_gen_info_->getSnowHeight        ();
+		uint32_t const upper_h = map_gen_info_->get_land_upper_height   ();
+		uint32_t const foot_h  = map_gen_info_->get_mountain_foot_height();
+		uint32_t const mount_h = map_gen_info_->get_mountain_height     ();
+		uint32_t const snow_h  = map_gen_info_->get_snow_height         ();
 		if        (h1 >= snow_h  && h2 >= snow_h  && h3 >= snow_h)  {
 			atp = MapGenAreaInfo::atMountains;
 			ttp = MapGenAreaInfo::ttMountainsSnow;
@@ -616,11 +616,11 @@ TerrainIndex MapGenerator::figure_out_terrain
 
 	//  Figure out which terrain to use at this point in the map...
 	return
-		map_gen_info_->getArea(atp, usedLandIndex).getTerrain
+		map_gen_info_->get_area(atp, usedLandIndex).get_terrain
 			(ttp,
 			 rng.rand()
 			 %
-			 map_gen_info_->getArea(atp, usedLandIndex).getNumTerrains(ttp));
+			 map_gen_info_->get_area(atp, usedLandIndex).get_num_terrains(ttp));
 
 }
 
@@ -663,9 +663,9 @@ void MapGenerator::create_random_map()
 
 	// for bobs
 	std::unique_ptr<std::unique_ptr<uint32_t[]> []> random_bobs
-		(new std::unique_ptr<uint32_t[]> [map_gen_info_->getNumLandResources()]);
+		(new std::unique_ptr<uint32_t[]> [map_gen_info_->get_num_land_resources()]);
 
-	for (size_t ix = 0; ix < map_gen_info_->getNumLandResources(); ++ix)
+	for (size_t ix = 0; ix < map_gen_info_->get_num_land_resources(); ++ix)
 		random_bobs[ix].reset
 			(generate_random_value_map(map_info_.w, map_info_.h, rng));
 
@@ -871,7 +871,7 @@ Return value: The resulting number (0-31) or -1 if the character
 ===============
 */
 
-int  UniqueRandomMapInfo::mapIdCharToNumber(char ch)
+int  UniqueRandomMapInfo::map_id_char_to_number(char ch)
 {
 	if ((ch == '0') || (ch == 'o') || (ch == 'O'))
 		return 22;
@@ -917,7 +917,7 @@ num:          Number to convert
 Return value: The converted value as a character
 ===============
 */
-char UniqueRandomMapInfo::mapIdNumberToChar(int32_t const num)
+char UniqueRandomMapInfo::map_id_number_to_char(int32_t const num)
 {
 	if (num == 22)
 		return '0';
@@ -950,7 +950,7 @@ Return value: true if the map-id-string was valid, false otherwise
 ===============
 */
 
-bool UniqueRandomMapInfo::setFromIdString
+bool UniqueRandomMapInfo::set_from_id_string
 	(UniqueRandomMapInfo & mapInfo_out, const std::string & mapIdString)
 {
 	//  check string
@@ -967,7 +967,7 @@ bool UniqueRandomMapInfo::setFromIdString
 	int32_t nums[kMapIdDigits];
 
 	for (uint32_t ix = 0; ix < kMapIdDigits; ++ix) {
-		int const num = mapIdCharToNumber(mapIdString[ix + (ix / 4)]);
+		int const num = map_id_char_to_number(mapIdString[ix + (ix / 4)]);
 		if (num < 0)
 			return false;
 		nums[ix] = num;
@@ -1050,7 +1050,7 @@ mapInfo:     Information about the random map currently
              begin created (map specific info)
 ===============
 */
-void UniqueRandomMapInfo::generateIdString
+void UniqueRandomMapInfo::generate_id_string
 	(std::string & mapIdsString_out, const UniqueRandomMapInfo & mapInfo)
 {
 	//  Init
@@ -1070,7 +1070,7 @@ void UniqueRandomMapInfo::generateIdString
 		nums[ix] = 0;
 
 	// Generate world name hash
-	uint16_t nameHash = generateWorldNameHash(mapInfo.world_name);
+	uint16_t nameHash = generate_world_name_hash(mapInfo.world_name);
 
 	//  Convert map random number
 	nums [0] =  mapInfo.mapNumber        & 31;
@@ -1134,14 +1134,14 @@ void UniqueRandomMapInfo::generateIdString
 
 	//  translate it to ASCII
 	for (uint32_t ix = 0; ix < kMapIdDigits; ++ix) {
-		mapIdsString_out += mapIdNumberToChar(nums[ix]);
+		mapIdsString_out += map_id_number_to_char(nums[ix]);
 		if (ix % 4 == 3 && ix != kMapIdDigits - 1)
 			mapIdsString_out += "-";
 	}
 }
 
 
-uint16_t Widelands::UniqueRandomMapInfo::generateWorldNameHash
+uint16_t Widelands::UniqueRandomMapInfo::generate_world_name_hash
 	(const std::string & name)
 {
 	// This is only a simple digest algorithm. Thats enough for our purposes.

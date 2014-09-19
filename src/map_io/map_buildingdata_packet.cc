@@ -66,7 +66,7 @@ namespace Widelands {
 #define CURRENT_TRAININGSITE_PACKET_VERSION     4
 
 
-void MapBuildingdataPacket::Read
+void MapBuildingdataPacket::read
 	(FileSystem            &       fs,
 	 EditorGameBase      &       egbase,
 	 bool                    const skip,
@@ -316,7 +316,7 @@ void MapBuildingdataPacket::read_partially_finished_building
 					 0,
 					 PartiallyFinishedBuilding::request_builder_callback,
 					 wwWORKER);
-				pfb.m_builder_request->Read(fr, game, mol);
+				pfb.m_builder_request->read(fr, game, mol);
 			} else
 				pfb.m_builder_request = nullptr;
 
@@ -338,7 +338,7 @@ void MapBuildingdataPacket::read_partially_finished_building
 					pfb.m_wares[i] =
 						new WaresQueue
 						(pfb, INVALID_INDEX, 0);
-					pfb.m_wares[i]->Read(fr, game, mol);
+					pfb.m_wares[i]->read(fr, game, mol);
 				}
 			} catch (const WException & e) {
 				throw GameDataError("wares: %s", e.what());
@@ -418,7 +418,7 @@ void MapBuildingdataPacket::read_constructionsite_v1
 			 0,
 			 ConstructionSite::request_builder_callback,
 			 wwWORKER);
-		constructionsite.m_builder_request->Read(fr, game, mol);
+		constructionsite.m_builder_request->read(fr, game, mol);
 	} else
 		constructionsite.m_builder_request = nullptr;
 
@@ -442,7 +442,7 @@ void MapBuildingdataPacket::read_constructionsite_v1
 				(constructionsite, INVALID_INDEX, 0);
 			constructionsite.m_wares[i]->set_callback
 				(ConstructionSite::wares_queue_callback, &constructionsite);
-			constructionsite.m_wares[i]->Read(fr, game, mol);
+			constructionsite.m_wares[i]->read(fr, game, mol);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("wares: %s", e.what());
@@ -546,7 +546,7 @@ void MapBuildingdataPacket::read_warehouse
 						 	 0,
 						 	 &Warehouse::request_cb,
 						 	 wwWORKER));
-					req->Read(fr, game, mol);
+					req->read(fr, game, mol);
 				}
 			}
 
@@ -606,7 +606,7 @@ void MapBuildingdataPacket::read_warehouse
 							if
 								(warehouse.m_next_worker_without_cost_spawn[i]
 								 !=
-								 static_cast<uint32_t>(Never()))
+								 static_cast<uint32_t>(never()))
 							{
 								warehouse.molog
 									("read_warehouse: "
@@ -616,7 +616,7 @@ void MapBuildingdataPacket::read_warehouse
 							assert
 								(warehouse.m_next_worker_without_cost_spawn[i]
 								 ==
-								 static_cast<uint32_t>(Never()));
+								 static_cast<uint32_t>(never()));
 							warehouse.m_next_worker_without_cost_spawn[i] =
 								next_spawn;
 							break;
@@ -653,7 +653,7 @@ void MapBuildingdataPacket::read_warehouse
 							if
 								(warehouse.m_next_worker_without_cost_spawn[i]
 								 !=
-								 static_cast<uint32_t>(Never()))
+								 static_cast<uint32_t>(never()))
 								throw GameDataError
 									(
 									 "%s %u has a next_spawn time for worker type "
@@ -692,7 +692,7 @@ void MapBuildingdataPacket::read_warehouse
 							 	 0,
 							 	 &Warehouse::request_cb,
 							 	 wwWORKER));
-						pw.requests.back()->Read(fr, game, mol);
+						pw.requests.back()->read(fr, game, mol);
 					}
 				}
 			}
@@ -767,7 +767,7 @@ void MapBuildingdataPacket::read_militarysite
 						 0,
 						 MilitarySite::request_soldier_callback,
 						 wwWORKER));
-				militarysite.m_normal_soldier_request->Read(fr, game, mol);
+				militarysite.m_normal_soldier_request->read(fr, game, mol);
 			}
 			else
 				militarysite.m_normal_soldier_request.reset();
@@ -781,7 +781,7 @@ void MapBuildingdataPacket::read_militarysite
 						: militarysite.descr().tribe().safe_worker_index("soldier"),
 						MilitarySite::request_soldier_callback,
 						wwWORKER));
-				militarysite.m_upgrade_soldier_request->Read(fr, game, mol);
+				militarysite.m_upgrade_soldier_request->read(fr, game, mol);
 			}
 			else
 				militarysite.m_upgrade_soldier_request.reset();
@@ -829,22 +829,22 @@ void MapBuildingdataPacket::read_militarysite
 		//  Cmd_ChangeSoldierCapacity to the beginning of the game's command
 		//  queue. But that would not work because the command queue is not read
 		//  yet and will be cleared before it is read.
-		if        (militarysite.m_capacity < militarysite.minSoldierCapacity()) {
+		if        (militarysite.m_capacity < militarysite.min_soldier_capacity()) {
 			log
 				("WARNING: militarysite %u of player %u at (%i, %i) has capacity "
 				 "set to %u but it must be at least %u. Changing to that value.\n",
 				 militarysite.serial(), militarysite.owner().player_number(),
 				 militarysite.get_position().x, militarysite.get_position().y,
-				 militarysite.m_capacity, militarysite.minSoldierCapacity());
-			militarysite.m_capacity = militarysite.minSoldierCapacity();
-		} else if (militarysite.maxSoldierCapacity() < militarysite.m_capacity) {
+				 militarysite.m_capacity, militarysite.min_soldier_capacity());
+			militarysite.m_capacity = militarysite.min_soldier_capacity();
+		} else if (militarysite.max_soldier_capacity() < militarysite.m_capacity) {
 			log
 				("WARNING: militarysite %u of player %u at (%i, %i) has capacity "
 				 "set to %u but it can be at most %u. Changing to that value.\n",
 				 militarysite.serial(), militarysite.owner().player_number(),
 				 militarysite.get_position().x, militarysite.get_position().y,
-				 militarysite.m_capacity, militarysite.maxSoldierCapacity());
-			militarysite.m_capacity = militarysite.maxSoldierCapacity();
+				 militarysite.m_capacity, militarysite.max_soldier_capacity());
+			militarysite.m_capacity = militarysite.max_soldier_capacity();
 		}
 	} catch (const WException & e) {
 		throw GameDataError("militarysite: %s", e.what());
@@ -876,7 +876,7 @@ void MapBuildingdataPacket::read_productionsite
 						 0,
 						 ProductionSite::request_worker_callback,
 						 wwWORKER);
-				req.Read(fr, game, mol);
+				req.read(fr, game, mol);
 				WareIndex const worker_index = req.get_index();
 
 				//  Find a working position that matches this request.
@@ -995,7 +995,7 @@ void MapBuildingdataPacket::read_productionsite
 					uint32_t serial = fr.Unsigned32();
 					if (serial)
 						productionsite.m_stack[i].objvar = &mol.get<MapObject>(serial);
-					productionsite.m_stack[i].coord = ReadCoords32_allow_null(&fr, game.map().extent());
+					productionsite.m_stack[i].coord = read_coords_32_allow_null(&fr, game.map().extent());
 				}
 			}
 			productionsite.m_program_timer = fr.Unsigned8();
@@ -1005,7 +1005,7 @@ void MapBuildingdataPacket::read_productionsite
 			assert(!productionsite.m_input_queues.size());
 			for (uint16_t i = 0; i < nr_queues; ++i) {
 				WaresQueue * wq = new WaresQueue(productionsite, INVALID_INDEX, 0);
-				wq->Read(fr, game, mol);
+				wq->read(fr, game, mol);
 
 				if (wq->get_ware() == INVALID_INDEX) {
 					delete wq;
@@ -1053,7 +1053,7 @@ void MapBuildingdataPacket::read_trainingsite
 						 0,
 						 TrainingSite::request_soldier_callback,
 						 wwWORKER);
-				trainingsite.m_soldier_request->Read(fr, game, mol);
+				trainingsite.m_soldier_request->read(fr, game, mol);
 			}
 
 			trainingsite.m_capacity = fr.Unsigned8();
@@ -1102,22 +1102,22 @@ void MapBuildingdataPacket::read_trainingsite
 		//  Cmd_ChangeSoldierCapacity to the beginning of the game's command
 		//  queue. But that would not work because the command queue is not read
 		//  yet and will be cleared before it is read.
-		if        (trainingsite.m_capacity < trainingsite.minSoldierCapacity()) {
+		if        (trainingsite.m_capacity < trainingsite.min_soldier_capacity()) {
 			log
 				("WARNING: trainingsite %u of player %u at (%i, %i) has capacity "
 				 "set to %u but it must be at least %u. Changing to that value.\n",
 				 trainingsite.serial(), trainingsite.owner().player_number(),
 				 trainingsite.get_position().x, trainingsite.get_position().y,
-				 trainingsite.m_capacity, trainingsite.minSoldierCapacity());
-			trainingsite.m_capacity = trainingsite.minSoldierCapacity();
-		} else if (trainingsite.maxSoldierCapacity() < trainingsite.m_capacity) {
+				 trainingsite.m_capacity, trainingsite.min_soldier_capacity());
+			trainingsite.m_capacity = trainingsite.min_soldier_capacity();
+		} else if (trainingsite.max_soldier_capacity() < trainingsite.m_capacity) {
 			log
 				("WARNING: trainingsite %u of player %u at (%i, %i) has capacity "
 				 "set to %u but it can be at most %u. Changing to that value.\n",
 				 trainingsite.serial(), trainingsite.owner().player_number(),
 				 trainingsite.get_position().x, trainingsite.get_position().y,
-				 trainingsite.m_capacity, trainingsite.maxSoldierCapacity());
-			trainingsite.m_capacity = trainingsite.maxSoldierCapacity();
+				 trainingsite.m_capacity, trainingsite.max_soldier_capacity());
+			trainingsite.m_capacity = trainingsite.max_soldier_capacity();
 		}
 	} catch (const WException & e) {
 		throw GameDataError("trainingsite: %s", e.what());
@@ -1125,7 +1125,7 @@ void MapBuildingdataPacket::read_trainingsite
 }
 
 
-void MapBuildingdataPacket::Write
+void MapBuildingdataPacket::write
 	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	FileWrite fw;
@@ -1236,7 +1236,7 @@ void MapBuildingdataPacket::Write
 			mos.mark_object_as_saved(*building);
 		}
 
-	fw.Write(fs, "binary/building_data");
+	fw.write(fs, "binary/building_data");
 }
 
 void MapBuildingdataPacket::write_partially_finished_building
@@ -1253,7 +1253,7 @@ void MapBuildingdataPacket::write_partially_finished_building
 	// builder request
 	if (pfb.m_builder_request) {
 		fw.Unsigned8(1);
-		pfb.m_builder_request->Write(fw, game, mos);
+		pfb.m_builder_request->write(fw, game, mos);
 	} else
 		fw.Unsigned8(0);
 
@@ -1267,7 +1267,7 @@ void MapBuildingdataPacket::write_partially_finished_building
 	const uint16_t wares_size = pfb.m_wares.size();
 	fw.Unsigned16(wares_size);
 	for (uint16_t i = 0; i < wares_size; ++i)
-		pfb.m_wares[i]->Write(fw, game, mos);
+		pfb.m_wares[i]->write(fw, game, mos);
 
 	fw.Unsigned8 (pfb.m_working);
 	fw.Unsigned32(pfb.m_work_steptime);
@@ -1362,7 +1362,7 @@ void MapBuildingdataPacket::write_warehouse
 		for (uint8_t i = worker_types_without_cost.size(); i;) {
 			uint32_t const next_spawn =
 				warehouse.m_next_worker_without_cost_spawn[--i];
-			if (next_spawn != static_cast<uint32_t>(Never())) {
+			if (next_spawn != static_cast<uint32_t>(never())) {
 				fw.String
 					(tribe.get_worker_descr(tribe.worker_types_without_cost().at(i))
 					 ->name());
@@ -1380,7 +1380,7 @@ void MapBuildingdataPacket::write_warehouse
 		fw.Unsigned32(temp_worker.requests.size());
 
 		for (Request * temp_request : temp_worker.requests) {
-			temp_request->Write(fw, game, mos);
+			temp_request->write(fw, game, mos);
 		}
 	}
 
@@ -1408,7 +1408,7 @@ void MapBuildingdataPacket::write_militarysite
 
 	if (militarysite.m_normal_soldier_request) {
 		fw.Unsigned8(1);
-		militarysite.m_normal_soldier_request->Write(fw, game, mos);
+		militarysite.m_normal_soldier_request->write(fw, game, mos);
 	} else {
 		fw.Unsigned8(0);
 	}
@@ -1416,7 +1416,7 @@ void MapBuildingdataPacket::write_militarysite
 	if (militarysite.m_upgrade_soldier_request)
 	{
 		fw.Unsigned8(1);
-		militarysite.m_upgrade_soldier_request->Write(fw, game, mos);
+		militarysite.m_upgrade_soldier_request->write(fw, game, mos);
 	}
 	else
 		fw.Unsigned8(0);
@@ -1434,8 +1434,8 @@ void MapBuildingdataPacket::write_militarysite
 				("Internal error in a MilitarySite -- cannot continue. Use previous autosave.");
 			}
 	}
-	fw.Unsigned16(militarysite.m_soldier_upgrade_requirements.getMin());
-	fw.Unsigned16(militarysite.m_soldier_upgrade_requirements.getMax());
+	fw.Unsigned16(militarysite.m_soldier_upgrade_requirements.get_min());
+	fw.Unsigned16(militarysite.m_soldier_upgrade_requirements.get_max());
 	fw.Unsigned8(militarysite.m_soldier_preference);
 	fw.Signed32(militarysite.m_next_swap_soldiers_time);
 	fw.Unsigned8(militarysite.m_soldier_upgrade_try ? 1 : 0);
@@ -1466,7 +1466,7 @@ void MapBuildingdataPacket::write_productionsite
 	fw.Unsigned16(nr_working_positions - nr_workers);
 	for (ProductionSite::WorkingPosition const * i = &begin; i < &end; ++i)
 		if (Request const * const r = i->worker_request)
-			r->Write(fw, game, mos);
+			r->write(fw, game, mos);
 
 	//  workers
 	fw.Unsigned16(nr_workers);
@@ -1500,7 +1500,7 @@ void MapBuildingdataPacket::write_productionsite
 		fw.  Signed32(productionsite.m_stack[i].phase);
 		fw.Unsigned32(productionsite.m_stack[i].flags);
 		fw.Unsigned32(mos.get_object_file_index_or_zero(productionsite.m_stack[i].objvar.get(game)));
-		WriteCoords32(&fw, productionsite.m_stack[i].coord);
+		write_coords_32(&fw, productionsite.m_stack[i].coord);
 	}
 	fw.Unsigned8(productionsite.m_program_timer);
 	fw. Signed32(productionsite.m_program_time);
@@ -1508,7 +1508,7 @@ void MapBuildingdataPacket::write_productionsite
 	const uint16_t input_queues_size = productionsite.m_input_queues.size();
 	fw.Unsigned16(input_queues_size);
 	for (uint16_t i = 0; i < input_queues_size; ++i)
-		productionsite.m_input_queues[i]->Write(fw, game, mos);
+		productionsite.m_input_queues[i]->write(fw, game, mos);
 
 	const uint16_t statistics_size = productionsite.m_statistics.size();
 	fw.Unsigned16(statistics_size);
@@ -1535,7 +1535,7 @@ void MapBuildingdataPacket::write_trainingsite
 
 	if (trainingsite.m_soldier_request) {
 		fw.Unsigned8(1);
-		trainingsite.m_soldier_request->Write(fw, game, mos);
+		trainingsite.m_soldier_request->write(fw, game, mos);
 	} else {
 		fw.Unsigned8(0);
 	}

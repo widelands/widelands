@@ -35,7 +35,7 @@ namespace Widelands {
 #define CURRENT_PACKET_VERSION 3
 
 
-void GamePlayerEconomiesPacket::Read
+void GamePlayerEconomiesPacket::read
 	(FileSystem & fs, Game & game, MapObjectLoader *)
 {
 	try {
@@ -55,19 +55,19 @@ void GamePlayerEconomiesPacket::Read
 						if (value < 0xffffffff) {
 							if (upcast(Flag const, flag, map[value].get_immovable())) {
 								EconomyDataPacket d(flag->get_economy());
-								d.Read(fr);
+								d.read(fr);
 							} else {
 								throw GameDataError("there is no flag at the specified location");
 							}
 						} else {
 							bool read_this_economy = false;
 
-							Bob* bob = map[ReadMap_Index32(&fr, max_index)].get_first_bob();
+							Bob* bob = map[read_map_index_32(&fr, max_index)].get_first_bob();
 							while (bob) {
 								if (upcast(Ship const, ship, bob)) {
 									assert(ship->get_economy());
 									EconomyDataPacket d(ship->get_economy());
-									d.Read(fr);
+									d.read(fr);
 									read_this_economy = true;
 								}
 								bob = bob->get_next_bob();
@@ -91,7 +91,7 @@ void GamePlayerEconomiesPacket::Read
 /*
  * Write Function
  */
-void GamePlayerEconomiesPacket::Write
+void GamePlayerEconomiesPacket::write
 	(FileSystem & fs, Game & game, MapObjectSaver * const)
 {
 	FileWrite fw;
@@ -113,7 +113,7 @@ void GamePlayerEconomiesPacket::Write
 						fw.Unsigned32(field - &field_0);
 
 						EconomyDataPacket d(flag->get_economy());
-						d.Write(fw);
+						d.write(fw);
 						wrote_this_economy = true;
 						break;
 					}
@@ -135,7 +135,7 @@ void GamePlayerEconomiesPacket::Write
 								fw.Unsigned32(field - &field_0);
 
 								EconomyDataPacket d(ship->get_economy());
-								d.Write(fw);
+								d.write(fw);
 								wrote_this_economy = true;
 							}
 						}
@@ -149,7 +149,7 @@ void GamePlayerEconomiesPacket::Write
 		}
 	}
 
-	fw.Write(fs, "binary/player_economies");
+	fw.write(fs, "binary/player_economies");
 }
 
 }

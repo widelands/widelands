@@ -473,7 +473,7 @@ void FieldActionWindow::add_buttons_attack ()
 	{
 		if
 			(m_plr && m_plr->is_hostile(attackable->owner()) &&
-			 attackable->canAttack())
+			 attackable->can_attack())
 		{
 			m_attack_box = new AttackBox(&a_box, m_plr, &m_node, 0, 0);
 			a_box.add(m_attack_box, UI::Box::AlignTop);

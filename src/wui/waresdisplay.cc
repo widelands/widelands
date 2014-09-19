@@ -170,7 +170,7 @@ bool AbstractWaresDisplay::handle_mouserelease(uint8_t btn, int32_t x, int32_t y
 
 /**
  * Returns the index of the ware under the given coordinates, or
- * WareIndex::Null() if the given point is outside the range.
+ * WareIndex::null() if the given point is outside the range.
  */
 Widelands::WareIndex AbstractWaresDisplay::ware_at_point(int32_t x, int32_t y) const
 {

@@ -629,7 +629,7 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 	}
 
 	// Position
-	imm.m_position = ReadCoords32(&fr, egbase().map().extent());
+	imm.m_position = read_coords_32(&fr, egbase().map().extent());
 	imm.set_position(egbase(), imm.m_position);
 
 	// Animation
@@ -731,7 +731,7 @@ void Immovable::save
 	BaseImmovable::save(egbase, mos, fw);
 
 	fw.Unsigned8(get_owner() ? get_owner()->player_number() : 0);
-	WriteCoords32(&fw, m_position);
+	write_coords_32(&fw, m_position);
 
 	// Animations
 	fw.String(descr().get_animation_name(m_anim));

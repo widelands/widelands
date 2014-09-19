@@ -33,7 +33,7 @@ namespace Widelands {
 #define FILENAME_TEMPLATE PLAYERDIRNAME_TEMPLATE "/messages"
 #define FILENAME_SIZE 19
 
-void MapPlayersMessagesPacket::Read
+void MapPlayersMessagesPacket::read
 	(FileSystem & fs, EditorGameBase & egbase, bool, MapObjectLoader & mol)
 
 {
@@ -124,7 +124,7 @@ void MapPlayersMessagesPacket::Read
 						 	 sent,
 						 	 s->get_name       (),
 						 	 s->get_safe_string("body"),
-							 get_coords("position", extent, Coords::Null(), s),
+							 get_coords("position", extent, Coords::null(), s),
 							 serial,
 						 	 status));
 					previous_message_sent = sent;
@@ -139,7 +139,7 @@ void MapPlayersMessagesPacket::Read
 		}
 }
 
-void MapPlayersMessagesPacket::Write
+void MapPlayersMessagesPacket::write
 	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	fs.EnsureDirectoryExists("player");

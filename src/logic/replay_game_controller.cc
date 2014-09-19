@@ -58,10 +58,10 @@ void ReplayGameController::think() {
 	if (m_replayreader) {
 		while
 			(Widelands::Command * const cmd =
-				m_replayreader->GetNextCommand(m_time))
+				m_replayreader->get_next_command(m_time))
 			m_game.enqueue_command(cmd);
 
-		if (m_replayreader->EndOfReplay()) {
+		if (m_replayreader->end_of_replay()) {
 			m_replayreader.reset(nullptr);
 			m_game.enqueue_command
 				(new CmdReplayEnd(m_time = m_game.get_gametime()));
@@ -102,7 +102,7 @@ void ReplayGameController::setPaused(bool const paused) {
 }
 
 void ReplayGameController::CmdReplayEnd::execute (Widelands::Game & game) {
-	game.gameController()->setDesiredSpeed(0);
+	game.game_controller()->setDesiredSpeed(0);
 	UI::WLMessageBox mmb
 		(game.get_ibase(),
 		 _("End of replay"),

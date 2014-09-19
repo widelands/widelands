@@ -32,7 +32,7 @@ class FileSystem;
 class RealFSImpl;
 
 /// Mirror of \ref FileRead : all writes are first stored in a block of memory
-/// and finally written out when Write() is called.
+/// and finally written out when write() is called.
 class FileWrite : public StreamWrite {
 public:
 	struct Pos {
@@ -40,12 +40,12 @@ public:
 		}
 
 		/// Returns a special value indicating invalidity.
-		static Pos Null() {
+		static Pos null() {
 			return std::numeric_limits<size_t>::max();
 		}
 
-		bool isNull() const {
-			return *this == Null();
+		bool is_null() const {
+			return *this == null();
 		}
 		operator size_t() const {
 			return pos;
@@ -71,24 +71,24 @@ public:
 	~FileWrite() override;
 
 	/// Clears the object's buffer.
-	void Clear();
+	void clear();
 
 	/// Write the file out to disk. If successful, this clears the buffers.
 	/// Otherwise, an exception is thrown but the buffer remains intact (don't
 	/// worry, it will be cleared by the destructor).
-	void Write(FileSystem& fs, char const* const filename);
+	void write(FileSystem& fs, char const* const filename);
 
 	/// Same as above, just that the data is appended to the file
 	/// NOTE RealFSImpl is used by purpose - zip filesystems do not support appending
-	void WriteAppend(RealFSImpl& fs, char const* const filename);
+	void write_append(RealFSImpl& fs, char const* const filename);
 
 	/// Get the position that will be written to in the next write operation that
 	/// does not specify a position.
-	Pos GetPos() const;
+	Pos get_pos() const;
 
 	/// Set the file pointer to a new location. The position can be beyond the
 	/// current end of file.
-	void SetPos(Pos pos);
+	void set_pos(Pos pos);
 
 	/// Write data at the given location.
 	void data(const void* src, size_t size, Pos pos);

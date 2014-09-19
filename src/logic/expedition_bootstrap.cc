@@ -246,7 +246,7 @@ void ExpeditionBootstrap::save(FileWrite& fw, Game& game, MapObjectSaver& mos) {
 	for (std::unique_ptr<ExpeditionWorker>& ew : workers_) {
 		fw.Unsigned8(ew->request.get() != nullptr);
 		if (ew->request.get() != nullptr) {
-			ew->request->Write(fw, game, mos);
+			ew->request->write(fw, game, mos);
 		} else {
 			assert(mos.is_object_known(*ew->worker));
 			fw.Unsigned32(mos.get_object_file_index(*ew->worker));
@@ -256,7 +256,7 @@ void ExpeditionBootstrap::save(FileWrite& fw, Game& game, MapObjectSaver& mos) {
 	// Expedition WaresQueues
 	fw.Unsigned8(wares_.size());
 	for (std::unique_ptr<WaresQueue>& wq : wares_) {
-		wq->Write(fw, game, mos);
+		wq->write(fw, game, mos);
 	}
 }
 
@@ -274,7 +274,7 @@ void ExpeditionBootstrap::load
 			Request* worker_request = new Request
 			  (warehouse, 0, ExpeditionBootstrap::worker_callback, wwWORKER);
 			workers_.back()->request.reset(worker_request);
-			worker_request->Read(fr, game, mol);
+			worker_request->read(fr, game, mol);
 			workers_.back()->worker = nullptr;
 		} else {
 			workers_.back()->worker = &mol.get<Worker>(fr.Unsigned32());
@@ -286,7 +286,7 @@ void ExpeditionBootstrap::load
 	const uint8_t num_wares = fr.Unsigned8();
 	for (uint8_t i = 0; i < num_wares; ++i) {
 		WaresQueue * wq = new WaresQueue(warehouse, INVALID_INDEX, 0);
-		wq->Read(fr, game, mol);
+		wq->read(fr, game, mol);
 		wq->set_callback(ware_callback, this);
 
 		if (wq->get_ware() == INVALID_INDEX) {

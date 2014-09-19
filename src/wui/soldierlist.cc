@@ -118,7 +118,7 @@ m_last_animate_time(0)
 	m_icon_width += 2 * IconBorder;
 	m_icon_height += 2 * IconBorder;
 
-	uint32_t maxcapacity = m_soldiers.maxSoldierCapacity();
+	uint32_t maxcapacity = m_soldiers.max_soldier_capacity();
 	if (maxcapacity <= MaxColumns) {
 		m_cols = maxcapacity;
 		m_rows = 1;
@@ -134,7 +134,7 @@ m_last_animate_time(0)
 	// Initialize the icons
 	uint32_t row = 0;
 	uint32_t col = 0;
-	for (Soldier * soldier : m_soldiers.presentSoldiers()) {
+	for (Soldier * soldier : m_soldiers.present_soldiers()) {
 		Icon icon;
 		icon.soldier = soldier;
 		icon.row = row;
@@ -168,10 +168,10 @@ void SoldierPanel::set_click(const SoldierPanel::SoldierFn & fn)
 void SoldierPanel::think()
 {
 	bool changes = false;
-	uint32_t capacity = m_soldiers.soldierCapacity();
+	uint32_t capacity = m_soldiers.soldier_capacity();
 
 	// Update soldier list and target row/col:
-	std::vector<Soldier *> soldierlist = m_soldiers.presentSoldiers();
+	std::vector<Soldier *> soldierlist = m_soldiers.present_soldiers();
 	std::vector<uint32_t> row_occupancy;
 	row_occupancy.resize(m_rows);
 
@@ -280,7 +280,7 @@ void SoldierPanel::think()
 void SoldierPanel::draw(RenderTarget & dst)
 {
 	// Fill a region matching the current site capacity with black
-	uint32_t capacity = m_soldiers.soldierCapacity();
+	uint32_t capacity = m_soldiers.soldier_capacity();
 	uint32_t fullrows = capacity / MaxColumns;
 
 	if (fullrows)
@@ -488,9 +488,9 @@ void SoldierList::mouseover(const Soldier * soldier)
 
 void SoldierList::eject(const Soldier * soldier)
 {
-	uint32_t const capacity_min = soldiers().minSoldierCapacity();
+	uint32_t const capacity_min = soldiers().min_soldier_capacity();
 	bool can_act = m_igb.can_act(m_building.owner().player_number());
-	bool over_min = capacity_min < soldiers().presentSoldiers().size();
+	bool over_min = capacity_min < soldiers().present_soldiers().size();
 
 	if (can_act && over_min)
 		m_igb.game().send_player_drop_soldier(m_building, soldier->serial());

@@ -34,8 +34,8 @@ class Building;
  * on the map, the data is parsed somewhere else
  */
 struct MapBuildingPacket {
-	void Read(FileSystem&, EditorGameBase&, bool, MapObjectLoader&);
-	void Write(FileSystem&, EditorGameBase&, MapObjectSaver&);
+	void read(FileSystem&, EditorGameBase&, bool, MapObjectLoader&);
+	void write(FileSystem&, EditorGameBase&, MapObjectSaver&);
 
 protected:
 	void read_priorities (Building       &, FileRead  &);

@@ -704,7 +704,7 @@ void NetHost::clearComputerPlayers()
 void NetHost::initComputerPlayer(Widelands::PlayerNumber p)
 {
 	d->computerplayers.push_back
-		(ComputerPlayer::getImplementation(d->game->get_player(p)->getAI())->instantiate(*d->game, p));
+		(ComputerPlayer::getImplementation(d->game->get_player(p)->get_ai())->instantiate(*d->game, p));
 }
 
 void NetHost::initComputerPlayers()

@@ -71,7 +71,7 @@ public:
 			game.save_syncstream(true);
 
 			// There has to be a better way to do this.
-			game.gameController()->setDesiredSpeed(0);
+			game.game_controller()->setDesiredSpeed(0);
 		}
 	}
 
@@ -138,7 +138,7 @@ ReplayReader::~ReplayReader()
  * \return a \ref Command that should be enqueued in the command queue
  * or 0 if there are no remaining commands before the given time.
  */
-Command * ReplayReader::GetNextCommand(const uint32_t time)
+Command * ReplayReader::get_next_command(const uint32_t time)
 {
 	if (!m_cmdlog)
 		return nullptr;
@@ -194,7 +194,7 @@ Command * ReplayReader::GetNextCommand(const uint32_t time)
 /**
  * \return \c true if the end of the replay was reached
  */
-bool ReplayReader::EndOfReplay()
+bool ReplayReader::end_of_replay()
 {
 	return m_cmdlog == nullptr;
 }
@@ -212,7 +212,7 @@ public:
 
 	void execute(Game & game) override {
 		if (ReplayWriter * const rw = game.get_replaywriter()) {
-			rw->SendSync (game.get_sync_hash());
+			rw->send_sync (game.get_sync_hash());
 
 			game.enqueue_command
 				(new CmdReplaySyncWrite(duetime() + SYNC_INTERVAL));
@@ -273,7 +273,7 @@ ReplayWriter::~ReplayWriter()
 /**
  * Call this whenever a new player command has entered the command queue.
  */
-void ReplayWriter::SendPlayerCommand(PlayerCommand * cmd)
+void ReplayWriter::send_player_command(PlayerCommand * cmd)
 {
 	m_cmdlog->Unsigned8(pkt_playercommand);
 	// The semantics of the timestamp is
@@ -291,7 +291,7 @@ void ReplayWriter::SendPlayerCommand(PlayerCommand * cmd)
 /**
  * Store a synchronization hash for the current game time in the replay.
  */
-void ReplayWriter::SendSync(const Md5Checksum & hash)
+void ReplayWriter::send_sync(const Md5Checksum & hash)
 {
 	m_cmdlog->Unsigned8(pkt_syncreport);
 	m_cmdlog->Unsigned32(m_game.get_gametime());

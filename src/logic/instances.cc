@@ -51,13 +51,13 @@ void CmdDestroyMapObject::execute(Game & game)
 }
 
 #define CMD_DESTROY_MAP_OBJECT_VERSION 1
-void CmdDestroyMapObject::Read
+void CmdDestroyMapObject::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CMD_DESTROY_MAP_OBJECT_VERSION) {
-			GameLogicCommand::Read(fr, egbase, mol);
+			GameLogicCommand::read(fr, egbase, mol);
 			if (Serial const serial = fr.Unsigned32())
 				try {
 					obj_serial = mol.get<MapObject>(serial).serial();
@@ -73,14 +73,14 @@ void CmdDestroyMapObject::Read
 		throw GameDataError("destroy map object: %s", e.what());
 	}
 }
-void CmdDestroyMapObject::Write
+void CmdDestroyMapObject::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(CMD_DESTROY_MAP_OBJECT_VERSION);
 
 	// Write base classes
-	GameLogicCommand::Write(fw, egbase, mos);
+	GameLogicCommand::write(fw, egbase, mos);
 
 	// Now serial
 	fw.Unsigned32(mos.get_object_file_index_or_zero(egbase.objects().get_object(obj_serial)));
@@ -101,13 +101,13 @@ void CmdAct::execute(Game & game)
 }
 
 #define CMD_ACT_VERSION 1
-void CmdAct::Read
+void CmdAct::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CMD_ACT_VERSION) {
-			GameLogicCommand::Read(fr, egbase, mol);
+			GameLogicCommand::read(fr, egbase, mol);
 			if (Serial const object_serial = fr.Unsigned32())
 				try {
 					obj_serial = mol.get<MapObject>(object_serial).serial();
@@ -125,14 +125,14 @@ void CmdAct::Read
 		throw wexception("act: %s", e.what());
 	}
 }
-void CmdAct::Write
+void CmdAct::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(CMD_ACT_VERSION);
 
 	// Write base classes
-	GameLogicCommand::Write(fw, egbase, mos);
+	GameLogicCommand::write(fw, egbase, mos);
 
 	// Now serial
 	fw.Unsigned32(mos.get_object_file_index_or_zero(egbase.objects().get_object(obj_serial)));
@@ -431,14 +431,14 @@ int32_t MapObject::get_training_attribute(uint32_t) const
 uint32_t MapObject::schedule_act
 	(Game & game, uint32_t const tdelta, uint32_t const data)
 {
-	if (tdelta < Forever()) {
+	if (tdelta < endless()) {
 		uint32_t const time = game.get_gametime() + tdelta;
 
 		game.cmdqueue().enqueue (new CmdAct(time, *this, data));
 
 		return time;
 	} else
-		return Never();
+		return never();
 }
 
 

@@ -36,7 +36,7 @@ MapGenBobCategory::MapGenBobCategory(const LuaTable& table) {
 }
 
 const MapGenBobCategory*
-MapGenLandResource::getBobCategory(MapGenAreaInfo::MapGenTerrainType terrType) const {
+MapGenLandResource::get_bob_category(MapGenAreaInfo::MapGenTerrainType terrType) const {
 	switch (terrType) {
 	case MapGenAreaInfo::ttLandCoast:
 		return land_coast_bob_category_;
@@ -66,7 +66,7 @@ MapGenLandResource::MapGenLandResource(const LuaTable& table, MapGenInfo& mapGen
 			*our_pointer = nullptr;
 			return;
 		}
-		*our_pointer = mapGenInfo.getBobCategory(value);
+		*our_pointer = mapGenInfo.get_bob_category(value);
 	};
 
 	do_assign("land_coast_bobs", &land_coast_bob_category_);
@@ -116,7 +116,7 @@ MapGenAreaInfo::MapGenAreaInfo(const LuaTable& table,
 	}
 }
 
-size_t MapGenAreaInfo::getNumTerrains(MapGenTerrainType const terrType) const {
+size_t MapGenAreaInfo::get_num_terrains(MapGenTerrainType const terrType) const {
 	switch (terrType) {
 	case ttWaterOcean:
 		return terrains1_.size();
@@ -149,7 +149,7 @@ size_t MapGenAreaInfo::getNumTerrains(MapGenTerrainType const terrType) const {
 	}
 }
 
-TerrainIndex MapGenAreaInfo::getTerrain(MapGenTerrainType const terrType,
+TerrainIndex MapGenAreaInfo::get_terrain(MapGenTerrainType const terrType,
                                          uint32_t const index) const {
 	switch (terrType) {
 	case ttWaterOcean:
@@ -183,41 +183,41 @@ TerrainIndex MapGenAreaInfo::getTerrain(MapGenTerrainType const terrType,
 	}
 }
 
-uint32_t MapGenInfo::getSumLandWeight() const {
+uint32_t MapGenInfo::get_sum_land_weight() const {
 	if (land_weight_valid_)
 		return land_weight_;
 
 	uint32_t sum = 0;
-	for (uint32_t ix = 0; ix < getNumAreas(MapGenAreaInfo::atLand); ++ix)
-		sum += getArea(MapGenAreaInfo::atLand, ix).getWeight();
+	for (uint32_t ix = 0; ix < get_num_areas(MapGenAreaInfo::atLand); ++ix)
+		sum += get_area(MapGenAreaInfo::atLand, ix).get_weight();
 	land_weight_ = sum;
 	land_weight_valid_ = true;
 
 	return land_weight_;
 }
 
-const MapGenLandResource& MapGenInfo::getLandResource(size_t index) const {
+const MapGenLandResource& MapGenInfo::get_land_resource(size_t index) const {
 	return land_resources_[index];
 }
 
-size_t MapGenInfo::getNumLandResources() const {
+size_t MapGenInfo::get_num_land_resources() const {
 	return land_resources_.size();
 }
 
-uint32_t MapGenInfo::getSumLandResourceWeight() const {
+uint32_t MapGenInfo::get_sum_land_resource_weight() const {
 	if (sum_bob_area_weights_valid_)
 		return sum_bob_area_weights_;
 
 	uint32_t sum = 0;
 	for (uint32_t ix = 0; ix < land_resources_.size(); ++ix)
-		sum += land_resources_[ix].getWeight();
+		sum += land_resources_[ix].get_weight();
 	sum_bob_area_weights_ = sum;
 	sum_bob_area_weights_valid_ = true;
 
 	return sum_bob_area_weights_;
 }
 
-size_t MapGenInfo::getNumAreas(MapGenAreaInfo::MapGenAreaType const areaType) const {
+size_t MapGenInfo::get_num_areas(MapGenAreaInfo::MapGenAreaType const areaType) const {
 	switch (areaType) {
 	case MapGenAreaInfo::atWater:
 		return water_areas_.size();
@@ -232,7 +232,7 @@ size_t MapGenInfo::getNumAreas(MapGenAreaInfo::MapGenAreaType const areaType) co
 	}
 }
 
-const MapGenAreaInfo& MapGenInfo::getArea(MapGenAreaInfo::MapGenAreaType const areaType,
+const MapGenAreaInfo& MapGenInfo::get_area(MapGenAreaInfo::MapGenAreaType const areaType,
                                           uint32_t const index) const {
 	switch (areaType) {
 	case MapGenAreaInfo::atWater:
@@ -248,7 +248,7 @@ const MapGenAreaInfo& MapGenInfo::getArea(MapGenAreaInfo::MapGenAreaType const a
 	}
 }
 
-const MapGenBobCategory* MapGenInfo::getBobCategory(const std::string& bobCategory) const {
+const MapGenBobCategory* MapGenInfo::get_bob_category(const std::string& bobCategory) const {
 	if (bob_categories_.find(bobCategory) == bob_categories_.end())
 		throw wexception("invalid MapGenBobCategory %s", bobCategory.c_str());
 	// Ugly workaround because at is not defined for some systems
@@ -327,59 +327,59 @@ MapGenInfo::MapGenInfo(const LuaTable& table, const World& world) {
 		}
 	}
 
-	if (getNumAreas(MapGenAreaInfo::atWater) < 1)
+	if (get_num_areas(MapGenAreaInfo::atWater) < 1)
 		throw GameDataError("missing a water area");
 
-	if (getNumAreas(MapGenAreaInfo::atWater) > 3)
+	if (get_num_areas(MapGenAreaInfo::atWater) > 3)
 		throw GameDataError("too many water areas (>3)");
 
-	if (getNumAreas(MapGenAreaInfo::atLand) < 1)
+	if (get_num_areas(MapGenAreaInfo::atLand) < 1)
 		throw GameDataError("missing a land area");
 
-	if (getNumAreas(MapGenAreaInfo::atLand) > 3)
+	if (get_num_areas(MapGenAreaInfo::atLand) > 3)
 		throw GameDataError("too many land areas (>3)");
 
-	if (getNumAreas(MapGenAreaInfo::atWasteland) < 1)
+	if (get_num_areas(MapGenAreaInfo::atWasteland) < 1)
 		throw GameDataError("missing a wasteland area");
 
-	if (getNumAreas(MapGenAreaInfo::atWasteland) > 2)
+	if (get_num_areas(MapGenAreaInfo::atWasteland) > 2)
 		throw GameDataError("too many wasteland areas (>2)");
 
-	if (getNumAreas(MapGenAreaInfo::atMountains) < 1)
+	if (get_num_areas(MapGenAreaInfo::atMountains) < 1)
 		throw GameDataError("missing a mountain area");
 
-	if (getNumAreas(MapGenAreaInfo::atMountains) > 1)
+	if (get_num_areas(MapGenAreaInfo::atMountains) > 1)
 		throw GameDataError("too many mountain areas (>1)");
 
-	if (getArea(MapGenAreaInfo::atWater, 0).getNumTerrains(MapGenAreaInfo::ttWaterOcean) < 1)
+	if (get_area(MapGenAreaInfo::atWater, 0).get_num_terrains(MapGenAreaInfo::ttWaterOcean) < 1)
 		throw GameDataError("missing a water/ocean terrain type");
 
-	if (getArea(MapGenAreaInfo::atWater, 0).getNumTerrains(MapGenAreaInfo::ttWaterShelf) < 1)
+	if (get_area(MapGenAreaInfo::atWater, 0).get_num_terrains(MapGenAreaInfo::ttWaterShelf) < 1)
 		throw GameDataError("missing a water/shelf terrain type");
 
-	if (getArea(MapGenAreaInfo::atWater, 0).getNumTerrains(MapGenAreaInfo::ttWaterShallow) < 1)
+	if (get_area(MapGenAreaInfo::atWater, 0).get_num_terrains(MapGenAreaInfo::ttWaterShallow) < 1)
 		throw GameDataError("is missing a water/shallow terrain type");
 
-	if (getArea(MapGenAreaInfo::atLand, 0).getNumTerrains(MapGenAreaInfo::ttLandCoast) < 1)
+	if (get_area(MapGenAreaInfo::atLand, 0).get_num_terrains(MapGenAreaInfo::ttLandCoast) < 1)
 		throw GameDataError("missing a land/coast terrain type");
 
-	if (getArea(MapGenAreaInfo::atLand, 0).getNumTerrains(MapGenAreaInfo::ttLandLand) < 1)
+	if (get_area(MapGenAreaInfo::atLand, 0).get_num_terrains(MapGenAreaInfo::ttLandLand) < 1)
 		throw GameDataError("missing a land/land terrain type");
 
-	if (getArea(MapGenAreaInfo::atMountains, 0).getNumTerrains(MapGenAreaInfo::ttMountainsFoot) < 1)
+	if (get_area(MapGenAreaInfo::atMountains, 0).get_num_terrains(MapGenAreaInfo::ttMountainsFoot) < 1)
 		throw GameDataError("missing a mountain/foot terrain type");
 
-	if (getArea(MapGenAreaInfo::atMountains, 0).getNumTerrains(MapGenAreaInfo::ttMountainsMountain) <
+	if (get_area(MapGenAreaInfo::atMountains, 0).get_num_terrains(MapGenAreaInfo::ttMountainsMountain) <
 	    1)
 		throw GameDataError("missing a monutain/mountain terrain type");
 
-	if (getArea(MapGenAreaInfo::atMountains, 0).getNumTerrains(MapGenAreaInfo::ttMountainsSnow) < 1)
+	if (get_area(MapGenAreaInfo::atMountains, 0).get_num_terrains(MapGenAreaInfo::ttMountainsSnow) < 1)
 		throw GameDataError("missing a mountain/snow terrain type");
 
-	if (getArea(MapGenAreaInfo::atWasteland, 0).getNumTerrains(MapGenAreaInfo::ttWastelandInner) < 1)
+	if (get_area(MapGenAreaInfo::atWasteland, 0).get_num_terrains(MapGenAreaInfo::ttWastelandInner) < 1)
 		throw GameDataError("missing a land/coast terrain type");
 
-	if (getArea(MapGenAreaInfo::atWasteland, 0).getNumTerrains(MapGenAreaInfo::ttWastelandOuter) < 1)
+	if (get_area(MapGenAreaInfo::atWasteland, 0).get_num_terrains(MapGenAreaInfo::ttWastelandOuter) < 1)
 		throw GameDataError("missing a land/land terrain type");
 }
 

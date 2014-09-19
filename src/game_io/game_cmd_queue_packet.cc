@@ -32,7 +32,7 @@ namespace Widelands {
 #define CURRENT_PACKET_VERSION 2
 
 
-void GameCmdQueuePacket::Read
+void GameCmdQueuePacket::read
 	(FileSystem & fs, Game & game, MapObjectLoader * const ol)
 {
 	try {
@@ -72,7 +72,7 @@ void GameCmdQueuePacket::Read
 
 				GameLogicCommand & cmd =
 					QueueCmdFactory::create_correct_queue_command(packet_id);
-				cmd.Read(fr, game, *ol);
+				cmd.read(fr, game, *ol);
 
 				item.cmd = &cmd;
 
@@ -88,7 +88,7 @@ void GameCmdQueuePacket::Read
 }
 
 
-void GameCmdQueuePacket::Write
+void GameCmdQueuePacket::write
 	(FileSystem & fs, Game & game, MapObjectSaver * const os)
 {
 	FileWrite fw;
@@ -125,7 +125,7 @@ void GameCmdQueuePacket::Write
 					fw.Unsigned32(it.serial);
 
 					// Now the command itself
-					cmd->Write(fw, game, *os);
+					cmd->write(fw, game, *os);
 				}
 				++ nhandled;
 			}
@@ -139,7 +139,7 @@ void GameCmdQueuePacket::Write
 
 	fw.Unsigned16(0); // end of command queue
 
-	fw.Write(fs, "binary/cmd_queue");
+	fw.write(fs, "binary/cmd_queue");
 }
 
 }

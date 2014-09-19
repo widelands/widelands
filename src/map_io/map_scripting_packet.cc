@@ -45,7 +45,7 @@ const uint32_t SCRIPTING_DATA_PACKET_VERSION = 1;
  *            PUBLIC IMPLEMENTATION
  * ========================================================================
  */
-void MapScriptingPacket::Read
+void MapScriptingPacket::read
 	(FileSystem            &       fs,
 	 EditorGameBase      &       egbase,
 	 bool,
@@ -70,7 +70,7 @@ void MapScriptingPacket::Read
 }
 
 
-void MapScriptingPacket::Write
+void MapScriptingPacket::write
 	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	fs.EnsureDirectoryExists("scripting");
@@ -84,7 +84,7 @@ void MapScriptingPacket::Write
 						})) {
 			size_t length;
 			void* input_data = map_fs->Load(script, length);
-			fs.Write(script, input_data, length);
+			fs.write(script, input_data, length);
 			free(input_data);
 		}
 	}
@@ -94,14 +94,14 @@ void MapScriptingPacket::Write
 		FileWrite fw;
 		fw.Unsigned32(0xDEADBEEF);  // Sentinel, because there was no packet version.
 		fw.Unsigned32(SCRIPTING_DATA_PACKET_VERSION);
-		const FileWrite::Pos pos = fw.GetPos();
+		const FileWrite::Pos pos = fw.get_pos();
 		fw.Unsigned32(0); // N bytes written, follows below
 
 		upcast(LuaGameInterface, lgi, &g->lua());
 		uint32_t nwritten = Little32(lgi->write_global_env(fw, mos));
 		fw.data(&nwritten, 4, pos);
 
-		fw.Write(fs, "scripting/globals.dump");
+		fw.write(fs, "scripting/globals.dump");
 	}
 }
 

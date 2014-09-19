@@ -914,5 +914,5 @@ void Profile::write
 		}
 	}
 
-	fw.Write(fs, filename);
+	fw.write(fs, filename);
 }

@@ -235,7 +235,7 @@ void WaresQueue::set_consume_interval(const uint32_t time)
  * Read and write
  */
 #define WARES_QUEUE_DATA_PACKET_VERSION 2
-void WaresQueue::Write(FileWrite & fw, Game & game, MapObjectSaver & mos)
+void WaresQueue::write(FileWrite & fw, Game & game, MapObjectSaver & mos)
 {
 	fw.Unsigned16(WARES_QUEUE_DATA_PACKET_VERSION);
 
@@ -248,13 +248,13 @@ void WaresQueue::Write(FileWrite & fw, Game & game, MapObjectSaver & mos)
 	fw.Signed32(m_consume_interval);
 	if (m_request) {
 		fw.Unsigned8(1);
-		m_request->Write(fw, game, mos);
+		m_request->write(fw, game, mos);
 	} else
 		fw.Unsigned8(0);
 }
 
 
-void WaresQueue::Read(FileRead & fr, Game & game, MapObjectLoader & mol)
+void WaresQueue::read(FileRead & fr, Game & game, MapObjectLoader & mol)
 {
 	uint16_t const packet_version = fr.Unsigned16();
 	try {
@@ -269,13 +269,13 @@ void WaresQueue::Read(FileRead & fr, Game & game, MapObjectLoader & mol)
 			m_filled           =                            fr.Unsigned32();
 			m_consume_interval =                            fr.Unsigned32();
 			if                                             (fr.Unsigned8 ()) {
-				m_request =                          //  TODO(unknown): Change Request::Read
+				m_request =                          //  TODO(unknown): Change Request::read
 					new Request                       //  to a constructor.
 						(m_owner,
 						 0,
 						 WaresQueue::request_callback,
 						 wwWORKER);
-				m_request->Read(fr, game, mol);
+				m_request->read(fr, game, mol);
 			} else
 				m_request = nullptr;
 

@@ -483,7 +483,7 @@ void PortDock::Loader::load(FileRead & fr, uint8_t version)
 
 	pd.m_dockpoints.resize(nrdockpoints);
 	for (uint16_t i = 0; i < nrdockpoints; ++i) {
-		pd.m_dockpoints[i] = ReadCoords32(&fr, egbase().map().extent());
+		pd.m_dockpoints[i] = read_coords_32(&fr, egbase().map().extent());
 		pd.set_position(egbase(), pd.m_dockpoints[i]);
 	}
 
@@ -568,7 +568,7 @@ void PortDock::save(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & f
 	fw.Unsigned32(mos.get_object_file_index(*m_warehouse));
 	fw.Unsigned16(m_dockpoints.size());
 	for (const Coords& coords: m_dockpoints) {
-		WriteCoords32(&fw, coords);
+		write_coords_32(&fw, coords);
 	}
 
 	fw.Unsigned8(m_need_ship);

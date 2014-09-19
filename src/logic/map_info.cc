@@ -98,7 +98,7 @@ int main(int argc, char ** argv)
 		{
 			FileWrite fw;
 			save_surface_to_png(minimap.get(), &fw);
-			fw.Write(*in_out_filesystem, (map_file + ".png").c_str());
+			fw.write(*in_out_filesystem, (map_file + ".png").c_str());
 		}
 
 		// Write JSON.
@@ -143,7 +143,7 @@ int main(int argc, char ** argv)
 			write_string("\n");
 
 			write_string("}\n");
-			fw.Write(*in_out_filesystem, (map_file + ".json").c_str());
+			fw.write(*in_out_filesystem, (map_file + ".json").c_str());
 		}
 	}
 	catch (std::exception& e) {

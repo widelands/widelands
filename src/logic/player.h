@@ -155,8 +155,8 @@ public:
 			//  darkening that actually hides the ground from the user).
 			terrains.d = terrains.r = 0;
 
-			time_triangle_last_surveyed[0] = Never();
-			time_triangle_last_surveyed[1] = Never();
+			time_triangle_last_surveyed[0] = never();
+			time_triangle_last_surveyed[1] = never();
 
 			//  Initialized for debug purposes only.
 			map_object_descr[0] = map_object_descr[1] = map_object_descr[2] = nullptr;
@@ -468,7 +468,7 @@ public:
 	void drop_soldier(PlayerImmovable &, Soldier &);
 	void change_training_options(TrainingSite &, int32_t atr, int32_t val);
 
-	uint32_t findAttackSoldiers
+	uint32_t find_attack_soldiers
 		(Flag                   &,
 		 std::vector<Soldier *> * soldiers = nullptr,
 		 uint32_t                 max = std::numeric_limits<uint32_t>::max());
@@ -504,16 +504,16 @@ public:
 	std::vector<uint32_t> const * get_ware_stock_statistics
 		(WareIndex const) const;
 
-	void ReadStatistics(FileRead &, uint32_t version);
-	void WriteStatistics(FileWrite &) const;
+	void read_statistics(FileRead &, uint32_t version);
+	void write_statistics(FileWrite &) const;
 	void sample_statistics();
 	void ware_produced(WareIndex);
 
 	void ware_consumed(WareIndex, uint8_t);
 	void next_ware_production_period();
 
-	void setAI(const std::string &);
-	const std::string & getAI() const;
+	void set_ai(const std::string &);
+	const std::string & get_ai() const;
 
 	// used in shared kingdom mode
 	void add_further_starting_position(uint8_t plr, uint8_t init) {

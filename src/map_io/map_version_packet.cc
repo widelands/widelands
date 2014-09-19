@@ -32,7 +32,7 @@ namespace Widelands {
 #define CURRENT_PACKET_VERSION 1
 
 
-void MapVersionPacket::Read
+void MapVersionPacket::read
 	(FileSystem            &       fs,
 	 EditorGameBase      &       egbase,
 	 bool                    const skip,
@@ -77,7 +77,7 @@ void MapVersionPacket::Read
 }
 
 
-void MapVersionPacket::Write
+void MapVersionPacket::write
 	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
 {
 	Profile prof;

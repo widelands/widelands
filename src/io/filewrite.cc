@@ -26,39 +26,39 @@ FileWrite::FileWrite() : data_(nullptr), length_(0), max_size_(0), filepos_(0) {
 }
 
 FileWrite::~FileWrite() {
-	Clear();
+	clear();
 }
 
-void FileWrite::Clear() {
+void FileWrite::clear() {
 	free(data_);
 	data_ = nullptr;
 	length_ = max_size_ = 0;
 	filepos_ = 0;
 }
 
-void FileWrite::Write(FileSystem& fs, char const* const filename) {
-	fs.Write(filename, data_, length_);
-	Clear();
+void FileWrite::write(FileSystem& fs, char const* const filename) {
+	fs.write(filename, data_, length_);
+	clear();
 }
 
-void FileWrite::WriteAppend(RealFSImpl& fs, char const* const filename) {
-	fs.Write(filename, data_, length_, true);
-	Clear();
+void FileWrite::write_append(RealFSImpl& fs, char const* const filename) {
+	fs.write(filename, data_, length_, true);
+	clear();
 }
 
-FileWrite::Pos FileWrite::GetPos() const {
+FileWrite::Pos FileWrite::get_pos() const {
 	return filepos_;
 }
 
-void FileWrite::SetPos(const Pos pos) {
+void FileWrite::set_pos(const Pos pos) {
 	filepos_ = pos;
 }
 
-void FileWrite::data(const void* const src, const size_t size, Pos const pos = Pos::Null()) {
+void FileWrite::data(const void* const src, const size_t size, Pos const pos = Pos::null()) {
 	assert(data_ || !length_);
 
 	Pos i = pos;
-	if (pos.isNull()) {
+	if (pos.is_null()) {
 		i = filepos_;
 		filepos_ += size;
 	}
@@ -77,7 +77,7 @@ void FileWrite::data(const void* const src, const size_t size, Pos const pos = P
 }
 
 void FileWrite::data(void const* const src, size_t const size) {
-	data(src, size, Pos::Null());
+	data(src, size, Pos::null());
 }
 
 std::string FileWrite::get_data() const {

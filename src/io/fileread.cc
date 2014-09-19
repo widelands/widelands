@@ -64,7 +64,7 @@ void FileRead::SetFilePos(Pos const pos) {
 	filepos_ = pos;
 }
 
-FileRead::Pos FileRead::GetPos() const {
+FileRead::Pos FileRead::get_pos() const {
 	return filepos_;
 }
 
@@ -80,7 +80,7 @@ size_t FileRead::data(void* dst, size_t bufsize) {
 char* FileRead::data(uint32_t const bytes, const Pos pos) {
 	assert(data_);
 	Pos i = pos;
-	if (pos.isNull()) {
+	if (pos.is_null()) {
 		i = filepos_;
 		filepos_ += bytes;
 	}
@@ -92,7 +92,7 @@ char* FileRead::data(uint32_t const bytes, const Pos pos) {
 char* FileRead::CString(Pos const pos) {
 	assert(data_);
 
-	Pos i = pos.isNull() ? filepos_ : pos;
+	Pos i = pos.is_null() ? filepos_ : pos;
 	if (i >= length_)
 		throw FileBoundaryExceeded();
 	char* const result = data_ + i;
@@ -101,13 +101,13 @@ char* FileRead::CString(Pos const pos) {
 	++i;                   //  beyond the null
 	if (i > (length_ + 1))  // allow EOF as end marker for string
 		throw FileBoundaryExceeded();
-	if (pos.isNull())
+	if (pos.is_null())
 		filepos_ = i;
 	return result;
 }
 
 char const* FileRead::CString() {
-	return CString(Pos::Null());
+	return CString(Pos::null());
 }
 
 char* FileRead::ReadLine() {

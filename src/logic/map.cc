@@ -433,7 +433,7 @@ void Map::set_size(const uint32_t w, const uint32_t h)
 	m_fields.reset(new Field[w * h]);
 	memset(m_fields.get(), 0, sizeof(Field) * w * h);
 
-	m_pathfieldmgr->setSize(w * h);
+	m_pathfieldmgr->set_size(w * h);
 
 	m_overlay_manager.reset(new OverlayManager());
 }
@@ -843,7 +843,7 @@ uint32_t Map::find_reachable_immovables_unique
 	 const FindImmovable & functor)
 {
 	std::vector<ImmovableFound> duplist;
-	FindImmovablesCallback cb(&duplist, FindImmovableAlwaysTrue());
+	FindImmovablesCallback cb(&duplist, find_immovable_always_true());
 
 	find_reachable(area, checkstep, cb);
 
@@ -1704,7 +1704,7 @@ int32_t Map::findpath
 		return 0; // duh...
 	}
 
-	if (!checkstep.reachabledest(*this, end))
+	if (!checkstep.reachable_dest(*this, end))
 		return -1;
 
 	if (!persist)

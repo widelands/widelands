@@ -41,7 +41,7 @@ namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 4
 
-void MapRoaddataPacket::Read
+void MapRoaddataPacket::read
 	(FileSystem            &       fs,
 	 EditorGameBase      &       egbase,
 	 bool                    const skip,
@@ -113,7 +113,7 @@ void MapRoaddataPacket::Read
 					Path p(road.m_flags[0]->get_position());
 					for (Path::StepVector::size_type i = nr_steps; i; --i)
 						try {
-							p.append(egbase.map(), ReadDirection8(&fr));
+							p.append(egbase.map(), read_direction_8(&fr));
 						} catch (const WException & e) {
 							throw GameDataError
 								("step #%lu: %s",
@@ -167,7 +167,7 @@ void MapRoaddataPacket::Read
 							 		 0,
 							 		 Road::_request_carrier_callback,
 							 		 wwWORKER))
-							->Read(fr, ref_cast<Game, EditorGameBase>(egbase), mol);
+							->read(fr, ref_cast<Game, EditorGameBase>(egbase), mol);
 						} else {
 							carrier_request = nullptr;
 							//log("No request in this slot");
@@ -215,7 +215,7 @@ void MapRoaddataPacket::Read
 }
 
 
-void MapRoaddataPacket::Write
+void MapRoaddataPacket::write
 	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	FileWrite fw;
@@ -275,7 +275,7 @@ void MapRoaddataPacket::Write
 
 					if (temp_slot.carrier_request) {
 						fw.Unsigned8(1);
-						temp_slot.carrier_request->Write
+						temp_slot.carrier_request->write
 							(fw, ref_cast<Game, EditorGameBase>(egbase), mos);
 					} else {
 						fw.Unsigned8(0);
@@ -285,6 +285,6 @@ void MapRoaddataPacket::Write
 				mos.mark_object_as_saved(*r);
 			}
 
-	fw.Write(fs, "binary/road_data");
+	fw.write(fs, "binary/road_data");
 }
 }

@@ -150,15 +150,15 @@ void * LayeredFileSystem::Load(const std::string & fname, size_t & length) {
  * Write the given block of memory out as a file to the first writable sub-FS.
  * Throws an exception if it fails.
  */
-void LayeredFileSystem::Write
+void LayeredFileSystem::write
 	(const std::string & fname, void const * const data, int32_t const length)
 {
 	if (m_home && m_home->IsWritable())
-		return m_home->Write(fname, data, length);
+		return m_home->write(fname, data, length);
 
 	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
 		if ((*it)->IsWritable())
-			return (*it)->Write(fname, data, length);
+			return (*it)->write(fname, data, length);
 
 	throw wexception("LayeredFileSystem: No writable filesystem!");
 }

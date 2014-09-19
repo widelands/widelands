@@ -40,17 +40,17 @@ MapPlayerNamesAndTribesPacket::
  *
  * this is a scenario packet, it might be that we have to skip it
  */
-void MapPlayerNamesAndTribesPacket::Read
+void MapPlayerNamesAndTribesPacket::read
 	(FileSystem            &       fs,
 	 EditorGameBase      &       egbase,
 	 bool                    const skip,
 	 MapObjectLoader &)
 {
-	Pre_Read(fs, egbase.get_map(), skip);
+	pre_read(fs, egbase.get_map(), skip);
 }
 
 
-void MapPlayerNamesAndTribesPacket::Pre_Read
+void MapPlayerNamesAndTribesPacket::pre_read
 	(FileSystem & fs, Map * const map, bool const skip)
 {
 	if (skip)
@@ -82,7 +82,7 @@ void MapPlayerNamesAndTribesPacket::Pre_Read
 }
 
 
-void MapPlayerNamesAndTribesPacket::Write
+void MapPlayerNamesAndTribesPacket::write
 	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
 {
 	Profile prof;

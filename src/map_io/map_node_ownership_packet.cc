@@ -31,7 +31,7 @@ namespace Widelands {
 #define CURRENT_PACKET_VERSION 1
 
 
-void MapNodeOwnershipPacket::Read
+void MapNodeOwnershipPacket::read
 	(FileSystem            &       fs,
 	 EditorGameBase      &       egbase,
 	 bool                    const skip,
@@ -66,7 +66,7 @@ void MapNodeOwnershipPacket::Read
 }
 
 
-void MapNodeOwnershipPacket::Write
+void MapNodeOwnershipPacket::write
 	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
 {
 	FileWrite fw;
@@ -78,7 +78,7 @@ void MapNodeOwnershipPacket::Write
 	for (MapIndex i = 0; i < max_index; ++i)
 		fw.Unsigned8(map[i].get_owned_by());
 
-	fw.Write(fs, "binary/node_ownership");
+	fw.write(fs, "binary/node_ownership");
 }
 
 }

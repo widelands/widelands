@@ -53,19 +53,19 @@ void CmdCallEconomyBalance::execute(Game & game)
 /**
  * Read and write
  */
-void CmdCallEconomyBalance::Read
+void CmdCallEconomyBalance::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CURRENT_CMD_CALL_ECONOMY_VERSION) {
-			GameLogicCommand::Read(fr, egbase, mol);
+			GameLogicCommand::read(fr, egbase, mol);
 			uint32_t serial = fr.Unsigned32();
 			if (serial)
 				m_flag = &mol.get<Flag>(serial);
 			m_timerid = fr.Unsigned32();
 		} else if (packet_version == 1 || packet_version == 2) {
-			GameLogicCommand::Read(fr, egbase, mol);
+			GameLogicCommand::read(fr, egbase, mol);
 			uint8_t const player_number = fr.Unsigned8();
 			if (Player * const player = egbase.get_player(player_number)) {
 				if (!fr.Unsigned8())
@@ -90,13 +90,13 @@ void CmdCallEconomyBalance::Read
 		throw wexception("call economy balance: %s", e.what());
 	}
 }
-void CmdCallEconomyBalance::Write
+void CmdCallEconomyBalance::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	fw.Unsigned16(CURRENT_CMD_CALL_ECONOMY_VERSION);
 
 	// Write Base Commands
-	GameLogicCommand::Write(fw, egbase, mos);
+	GameLogicCommand::write(fw, egbase, mos);
 	if (Flag * const flag = m_flag.get(egbase))
 		fw.Unsigned32(mos.get_object_file_index(*flag));
 	else

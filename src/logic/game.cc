@@ -83,7 +83,7 @@ Game::SyncWrapper::~SyncWrapper() {
 	}
 }
 
-void Game::SyncWrapper::StartDump(const std::string & fname) {
+void Game::SyncWrapper::start_dump(const std::string & fname) {
 	m_dumpfname = fname + ".wss";
 	m_dump = g_fs->OpenStreamWrite(m_dumpfname);
 }
@@ -149,7 +149,7 @@ Game::~Game()
 }
 
 
-void Game::SyncReset() {
+void Game::sync_reset() {
 	m_syncwrapper.m_counter = 0;
 
 	m_synchash.Reset();
@@ -181,7 +181,7 @@ void Game::set_game_controller(GameController * const ctrl)
 	m_ctrl = ctrl;
 }
 
-GameController * Game::gameController()
+GameController * Game::game_controller()
 {
 	return m_ctrl;
 }
@@ -241,7 +241,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 			 0,
 			 map().get_scenario_player_tribe(p),
 			 map().get_scenario_player_name (p));
-		get_player(p)->setAI(map().get_scenario_player_ai(p));
+		get_player(p)->set_ai(map().get_scenario_player_ai(p));
 	}
 	m_win_condition_displayname = _("Scenario");
 
@@ -313,7 +313,7 @@ void Game::init_newgame
 			 playersettings.tribe,
 			 playersettings.name,
 			 playersettings.team);
-		get_player(i + 1)->setAI(playersettings.ai);
+		get_player(i + 1)->set_ai(playersettings.ai);
 	}
 
 	// Add shared in starting positions
@@ -504,7 +504,7 @@ bool Game::run
 			const std::string                                              no_name;
 			const std::string & player_tribe = plr ? plr->tribe().name() : no_name;
 			const std::string & player_name  = plr ? plr->    get_name() : no_name;
-			const std::string & player_ai    = plr ? plr->    getAI()    : no_name;
+			const std::string & player_ai    = plr ? plr->    get_ai()    : no_name;
 			map().set_scenario_player_tribe    (p, player_tribe);
 			map().set_scenario_player_name     (p, player_name);
 			map().set_scenario_player_ai       (p, player_ai);
@@ -547,10 +547,10 @@ bool Game::run
 		}
 
 		if (m_writesyncstream)
-			m_syncwrapper.StartDump(fname);
+			m_syncwrapper.start_dump(fname);
 	}
 
-	SyncReset();
+	sync_reset();
 
 	if (loader_ui) {
 		load_graphics(*loader_ui);
@@ -614,7 +614,7 @@ void Game::think()
 		// computer and the fps if and when the game is saved - this is very bad
 		// for scenarios and even worse for the regression suite (which relies on
 		// the timings of savings.
-		cmdqueue().run_queue(m_ctrl->getFrametime(), get_game_time_pointer());
+		cmdqueue().run_queue(m_ctrl->getFrametime(), get_gametime_pointer());
 
 		if (g_gr) // not in dedicated server mode
 			g_gr->animate_maptextures(get_gametime());
@@ -723,7 +723,7 @@ void Game::enqueue_command (Command * const cmd)
 {
 	if (m_writereplay && m_replaywriter) {
 		if (upcast(PlayerCommand, plcmd, cmd)) {
-			m_replaywriter->SendPlayerCommand(plcmd);
+			m_replaywriter->send_player_command(plcmd);
 		}
 	}
 	cmdqueue().enqueue(cmd);
@@ -1070,7 +1070,7 @@ void Game::sample_statistics()
  *   is 4, support for older versions (used in widelands build <= 12) was
  *   dropped after the release of build 15
  */
-void Game::ReadStatistics(FileRead & fr, uint32_t const version)
+void Game::read_statistics(FileRead & fr, uint32_t const version)
 {
 	if (version >= 3) {
 		fr.Unsigned32(); // used to be last stats update time
@@ -1122,7 +1122,7 @@ void Game::ReadStatistics(FileRead & fr, uint32_t const version)
 /**
  * Write general statistics to the given file.
  */
-void Game::WriteStatistics(FileWrite & fw)
+void Game::write_statistics(FileWrite & fw)
 {
 	fw.Unsigned32(0); // Used to be last stats update time. No longer needed
 

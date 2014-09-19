@@ -36,7 +36,7 @@ namespace Widelands {
 #define CURRENT_PACKET_VERSION 1
 
 
-void MapRoadPacket::Read
+void MapRoadPacket::read
 	(FileSystem            &       fs,
 	 EditorGameBase      &       egbase,
 	 bool                    const skip,
@@ -70,7 +70,7 @@ void MapRoadPacket::Read
 }
 
 
-void MapRoadPacket::Write
+void MapRoadPacket::write
 	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	FileWrite fw;
@@ -89,7 +89,7 @@ void MapRoadPacket::Write
 				fw.Unsigned32(mos.register_object(*road));
 	fw.Unsigned32(0xffffffff);
 
-	fw.Write(fs, "binary/road");
+	fw.write(fs, "binary/road");
 }
 
 }

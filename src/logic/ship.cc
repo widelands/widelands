@@ -285,7 +285,7 @@ bool Ship::ship_update_transport(Game & game, Bob::State &) {
 		if (m_fleet->get_path(*lastdock, *dst, path)) {
 			uint32_t closest_idx = std::numeric_limits<uint32_t>::max();
 			uint32_t closest_dist = std::numeric_limits<uint32_t>::max();
-			Coords closest_target(Coords::Null());
+			Coords closest_target(Coords::null());
 
 			Coords cur(path.get_start());
 			for (uint32_t idx = 0; idx <= path.get_nsteps(); ++idx) {
@@ -374,7 +374,7 @@ void Ship::ship_update_expedition(Game & game, Bob::State &) {
 				FCoords coord = fc;
 				bool invalid = false;
 				for (uint8_t step = 0; !invalid && step < 5; ++step) {
-					if (coord.field->get_owned_by() != Neutral() && coord.field->get_owned_by() != pn) {
+					if (coord.field->get_owned_by() != neutral() && coord.field->get_owned_by() != pn) {
 						invalid = true;
 						continue;
 					}
@@ -966,7 +966,7 @@ void Ship::Loader::load(FileRead & fr, uint8_t version)
 				m_expedition->seen_port_buildspaces.reset(new std::list<Coords>());
 				uint8_t numofports = fr.Unsigned8();
 				for (uint8_t i = 0; i < numofports; ++i)
-					m_expedition->seen_port_buildspaces->push_back(ReadCoords32(&fr));
+					m_expedition->seen_port_buildspaces->push_back(read_coords_32(&fr));
 				// Swimability of the directions
 				for (uint8_t i = 0; i < LAST_DIRECTION; ++i)
 					m_expedition->swimable[i] = (fr.Unsigned8() == 1);
@@ -975,7 +975,7 @@ void Ship::Loader::load(FileRead & fr, uint8_t version)
 				// current direction
 				m_expedition->direction = fr.Unsigned8();
 				// Start coordinates of an island exploration
-				m_expedition->exploration_start = ReadCoords32(&fr);
+				m_expedition->exploration_start = read_coords_32(&fr);
 				// Whether the exploration is done clockwise or counter clockwise
 				m_expedition->clockwise = fr.Unsigned8() == 1;
 			}
@@ -1094,7 +1094,7 @@ void Ship::save
 			 it != m_expedition->seen_port_buildspaces->end();
 			 ++it)
 		{
-			WriteCoords32(&fw, *it);
+			write_coords_32(&fw, *it);
 		}
 		// swimability of the directions
 		for (uint8_t i = 0; i < LAST_DIRECTION; ++i)
@@ -1104,7 +1104,7 @@ void Ship::save
 		// current direction
 		fw.Unsigned8(m_expedition->direction);
 		// Start coordinates of an island exploration
-		WriteCoords32(&fw, m_expedition->exploration_start);
+		write_coords_32(&fw, m_expedition->exploration_start);
 		// Whether the exploration is done clockwise or counter clockwise
 		fw.Unsigned8(m_expedition->clockwise ? 1 : 0);
 	}

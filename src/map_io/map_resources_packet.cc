@@ -34,7 +34,7 @@ namespace Widelands {
 #define CURRENT_PACKET_VERSION 1
 
 
-void MapResourcesPacket::Read
+void MapResourcesPacket::read
 	(FileSystem & fs, EditorGameBase & egbase, const OneWorldLegacyLookupTable& lookup_table)
 {
 	FileRead fr;
@@ -102,7 +102,7 @@ void MapResourcesPacket::Read
  * which is also ok. But this is one reason why save game != saved map
  * in nearly all cases.
  */
-void MapResourcesPacket::Write
+void MapResourcesPacket::write
 	(FileSystem & fs, EditorGameBase & egbase)
 {
 	FileWrite fw;
@@ -142,7 +142,7 @@ void MapResourcesPacket::Write
 		}
 	}
 
-	fw.Write(fs, "binary/resource");
+	fw.write(fs, "binary/resource");
 }
 
 }

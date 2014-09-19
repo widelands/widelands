@@ -80,13 +80,13 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario) {
 
 	{
 		MapElementalPacket mp;
-		mp.Pre_Read(*m_fs, &m_map);
+		mp.pre_read(*m_fs, &m_map);
 		m_old_world_name = mp.old_world_name();
 	}
 
 	{
 		MapPlayerNamesAndTribesPacket p;
-		p.Pre_Read(*m_fs, &m_map, !scenario);
+		p.pre_read(*m_fs, &m_map, !scenario);
 	}
 	// No scripting/init.lua file -> not playable as scenario
 	Map::ScenarioTypes m = Map::NO_SCENARIO;
@@ -117,7 +117,7 @@ int32_t WidelandsMapLoader::load_map_complete
 	// PRELOAD DATA BEGIN
 	log("Reading Elemental Data ... ");
 	MapElementalPacket elemental_data_packet;
-	elemental_data_packet.Read(*m_fs, egbase, !scenario, *m_mol);
+	elemental_data_packet.read(*m_fs, egbase, !scenario, *m_mol);
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	egbase.allocate_player_maps(); //  Can do this now that map size is known.
@@ -126,7 +126,7 @@ int32_t WidelandsMapLoader::load_map_complete
 	log("Reading Player Names And Tribe Data ... ");
 	{
 		MapPlayerNamesAndTribesPacket p;
-		p.Read(*m_fs, egbase, !scenario, *m_mol);
+		p.read(*m_fs, egbase, !scenario, *m_mol);
 	}
 	log("took %ums\n ", timer.ms_since_last_query());
 	// PRELOAD DATA END
@@ -135,31 +135,31 @@ int32_t WidelandsMapLoader::load_map_complete
 		log("Reading Port Spaces Data ... ");
 
 		MapPortSpacesPacket p;
-		p.Read(*m_fs, egbase, !scenario, *m_mol);
+		p.read(*m_fs, egbase, !scenario, *m_mol);
 
 		log("took %ums\n ", timer.ms_since_last_query());
 	}
 
 	log("Reading Heights Data ... ");
-	{MapHeightsPacket        p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{MapHeightsPacket        p; p.read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	std::unique_ptr<OneWorldLegacyLookupTable> lookup_table
 		(create_one_world_legacy_lookup_table(m_old_world_name));
 	log("Reading Terrain Data ... ");
-	{MapTerrainPacket p; p.Read(*m_fs, egbase, *lookup_table);}
+	{MapTerrainPacket p; p.read(*m_fs, egbase, *lookup_table);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	MapObjectPacket mapobjects;
 
 	log("Reading Map Objects ... ");
-	mapobjects.Read(*m_fs, egbase, *m_mol, *lookup_table);
+	mapobjects.read(*m_fs, egbase, *m_mol, *lookup_table);
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Player Start Position Data ... ");
 	{
 		MapPlayerPositionPacket p;
-		p.Read(*m_fs, egbase, !scenario, *m_mol);
+		p.read(*m_fs, egbase, !scenario, *m_mol);
 	}
 	log("took %ums\n ", timer.ms_since_last_query());
 
@@ -170,45 +170,45 @@ int32_t WidelandsMapLoader::load_map_complete
 		log("Reading (legacy) Bob Data ... ");
 		{
 			MapBobPacket p;
-			p.Read(*m_fs, egbase, *m_mol, *lookup_table);
+			p.read(*m_fs, egbase, *m_mol, *lookup_table);
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 	}
 
 	log("Reading Resources Data ... ");
-	{MapResourcesPacket      p; p.Read(*m_fs, egbase, *lookup_table);}
+	{MapResourcesPacket      p; p.read(*m_fs, egbase, *lookup_table);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	//  NON MANDATORY PACKETS BELOW THIS POINT
 	log("Reading Map Extra Data ... ");
-	{MapExtradataPacket      p; p.Read(*m_fs, !scenario);}
+	{MapExtradataPacket      p; p.read(*m_fs, !scenario);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Map Version Data ... ");
-	{MapVersionPacket      p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{MapVersionPacket      p; p.read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 
 	log("Reading Allowed Worker Types Data ... ");
 	{
 		MapAllowedWorkerTypesPacket p;
-		p.Read(*m_fs, egbase, !scenario, *m_mol);
+		p.read(*m_fs, egbase, !scenario, *m_mol);
 	}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Allowed Building Types Data ... ");
 	{
 		MapAllowedBuildingTypesPacket p;
-		p.Read(*m_fs, egbase, !scenario, *m_mol);
+		p.read(*m_fs, egbase, !scenario, *m_mol);
 	}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Node Ownership Data ... ");
-	{MapNodeOwnershipPacket p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{MapNodeOwnershipPacket p; p.read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Exploration Data ... ");
-	{MapExplorationPacket    p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{MapExplorationPacket    p; p.read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	//  !!!!!!!!!! NOTE
@@ -216,32 +216,32 @@ int32_t WidelandsMapLoader::load_map_complete
 	//  this order without knowing what you do
 	//  EXISTENT PACKETS
 	log("Reading Flag Data ... ");
-	{MapFlagPacket           p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{MapFlagPacket           p; p.read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Road Data ... ");
-	{MapRoadPacket           p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{MapRoadPacket           p; p.read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Building Data ... ");
-	{MapBuildingPacket       p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{MapBuildingPacket       p; p.read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	//  DATA PACKETS
 	log("Reading Flagdata Data ... ");
-	{MapFlagdataPacket       p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{MapFlagdataPacket       p; p.read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Roaddata Data ... ");
-	{MapRoaddataPacket       p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{MapRoaddataPacket       p; p.read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Buildingdata Data ... ");
-	{MapBuildingdataPacket   p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{MapBuildingdataPacket   p; p.read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Second and third phase loading Map Objects ... ");
-	mapobjects.LoadFinish();
+	mapobjects.load_finish();
 	{
 		const Field & fields_end = map()[map().max_index()];
 		for (Field * field = &map()[0]; field < &fields_end; ++field)
@@ -258,7 +258,7 @@ int32_t WidelandsMapLoader::load_map_complete
 	//  NOTE DO NOT CHANGE THE PLACE UNLESS YOU KNOW WHAT ARE YOU DOING
 	//  Must be loaded after every kind of object that can see.
 	log("Reading Players View Data ... ");
-	{MapPlayersViewPacket   p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{MapPlayersViewPacket   p; p.read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	//  This must come before anything that references messages, such as:
@@ -267,17 +267,17 @@ int32_t WidelandsMapLoader::load_map_complete
 	log("Reading Player Message Data ... ");
 	{
 		MapPlayersMessagesPacket p;
-		p.Read(*m_fs, egbase, !scenario, *m_mol);
+		p.read(*m_fs, egbase, !scenario, *m_mol);
 	}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	//  Objectives
 	log("Reading Objective Data ... ");
-	{MapObjectivePacket      p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{MapObjectivePacket      p; p.read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Scripting Data ... ");
-	{MapScriptingPacket      p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{MapScriptingPacket      p; p.read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	if (m_mol->get_nr_unloaded_objects())

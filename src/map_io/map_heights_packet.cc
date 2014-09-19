@@ -31,7 +31,7 @@ namespace Widelands {
 #define CURRENT_PACKET_VERSION 1
 
 
-void MapHeightsPacket::Read
+void MapHeightsPacket::read
 	(FileSystem & fs, EditorGameBase & egbase, bool, MapObjectLoader &)
 {
 
@@ -57,7 +57,7 @@ void MapHeightsPacket::Read
 /*
  * Write Function
  */
-void MapHeightsPacket::Write
+void MapHeightsPacket::write
 	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
 
 {
@@ -70,7 +70,7 @@ void MapHeightsPacket::Write
 	for (MapIndex i = 0; i < max_index; ++i)
 		fw.Unsigned8(map[i].get_height());
 
-	fw.Write(fs,  "binary/heights");
+	fw.write(fs,  "binary/heights");
 }
 
 }

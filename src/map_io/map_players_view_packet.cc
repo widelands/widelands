@@ -117,7 +117,7 @@ namespace {
 		(file).Open(fs, filename);                                                                   \
 	}                                                                                               \
 	catch (const FileError&) {                                                                     \
-		throw GameDataError("MapPlayersViewPacket::Read: player %u:Could not open "        \
+		throw GameDataError("MapPlayersViewPacket::read: player %u:Could not open "        \
 		                      "\"%s\" for reading. This file should exist when \"%s\" exists",       \
 		                      plnum,                                                                 \
 		                      filename,                                                              \
@@ -138,7 +138,7 @@ namespace {
 		}                                                                                            \
 		catch (...) {                                                                                \
 			if (fileversion == 0)                                                                     \
-				throw GameDataError("MapPlayersViewPacket::Read: player %u:Could not open "  \
+				throw GameDataError("MapPlayersViewPacket::read: player %u:Could not open "  \
 				                      "\"%s\" for reading. This file should exist when \"%s\" exists", \
 				                      plnum,                                                           \
 				                      filename,                                                        \
@@ -163,10 +163,10 @@ namespace {
 
 #define CHECK_TRAILING_BYTES(file, filename)                                                       \
 	if (!(file).end_of_file())                                                                      \
-		throw GameDataError("MapPlayersViewPacket::Read: player %u:"                       \
+		throw GameDataError("MapPlayersViewPacket::read: player %u:"                       \
 		                      "Found %lu trailing bytes in \"%s\"",                                  \
 		                      plnum,                                                                 \
-		                      static_cast<long unsigned int>((file).GetSize() - (file).GetPos()),    \
+									 static_cast<long unsigned int>((file).GetSize() - (file).get_pos()),    \
 		                      filename);
 
 // TODO(unknown): Legacy code deprecated since build18
@@ -234,7 +234,7 @@ struct BuildingNonexistent : public FileRead::DataError {
 //
 // \throws Immovable_Nonexistent if there is no imovable type with that
 // name in the tribe.
-const ImmovableDescr& ReadImmovable_Type(StreamRead* fr, const TribeDescr& tribe) {
+const ImmovableDescr& read_immovable_type(StreamRead* fr, const TribeDescr& tribe) {
 	std::string name = fr->CString();
 	int32_t const index = tribe.get_immovable_index(name);
 	if (index == -1)
@@ -247,7 +247,7 @@ const ImmovableDescr& ReadImmovable_Type(StreamRead* fr, const TribeDescr& tribe
 // \returns a pointer to the tribe description.
 //
 // \throws Tribe_Nonexistent if the there is no tribe with that name.
-const TribeDescr& ReadTribe(StreamRead* fr, const EditorGameBase& egbase) {
+const TribeDescr& read_tribe(StreamRead* fr, const EditorGameBase& egbase) {
 	char const* const name = fr->CString();
 	if (TribeDescr const* const result = egbase.get_tribe(name))
 		return *result;
@@ -262,7 +262,7 @@ const TribeDescr& ReadTribe(StreamRead* fr, const EditorGameBase& egbase) {
 //
 // \throws Tribe_Nonexistent if the name is not empty and there is no tribe
 // with that name.
-TribeDescr const* ReadTribe_allow_null(StreamRead* fr, const EditorGameBase& egbase) {
+TribeDescr const* read_tribe_allow_null(StreamRead* fr, const EditorGameBase& egbase) {
 	char const* const name = fr->CString();
 	if (*name)
 		if (TribeDescr const* const result = egbase.get_tribe(name))
@@ -279,7 +279,7 @@ TribeDescr const* ReadTribe_allow_null(StreamRead* fr, const EditorGameBase& egb
 //
 // \throws Immovable_Nonexistent if there is no imovable type with that
 // name in the World.
-const ImmovableDescr& ReadImmovable_Type(StreamRead* fr, const World& world) {
+const ImmovableDescr& read_immovable_type(StreamRead* fr, const World& world) {
 	char const* const name = fr->CString();
 	int32_t const index = world.get_immovable_index(name);
 	if (index == -1)
@@ -291,11 +291,11 @@ const ImmovableDescr& ReadImmovable_Type(StreamRead* fr, const World& world) {
 // Immovable_Type(const TribeDescr &) is called with that tribe and the
 // result is returned. Otherwise Immovable_Type(const World &) is called
 // and the result is returned.
-const ImmovableDescr& ReadImmovable_Type(StreamRead* fr, const EditorGameBase& egbase) {
-	if (TribeDescr const* const tribe = ReadTribe_allow_null(fr, egbase))
-		return ReadImmovable_Type(fr, *tribe);
+const ImmovableDescr& read_immovable_type(StreamRead* fr, const EditorGameBase& egbase) {
+	if (TribeDescr const* const tribe = read_tribe_allow_null(fr, egbase))
+		return read_immovable_type(fr, *tribe);
 	else
-		return ReadImmovable_Type(fr, egbase.world());
+		return read_immovable_type(fr, egbase.world());
 }
 
 // Reads a CString and interprets t as the name of an immovable type.
@@ -303,7 +303,7 @@ const ImmovableDescr& ReadImmovable_Type(StreamRead* fr, const EditorGameBase& e
 // \returns a reference to the building type description.
 //
 // \throws Building_Nonexistent if there is no building type with that
-const BuildingDescr& ReadBuilding_Type(StreamRead* fr, const TribeDescr& tribe) {
+const BuildingDescr& read_building_type(StreamRead* fr, const TribeDescr& tribe) {
 	char const* const name = fr->CString();
 	BuildingIndex const index = tribe.building_index(name);
 	if (index == INVALID_INDEX)
@@ -311,33 +311,33 @@ const BuildingDescr& ReadBuilding_Type(StreamRead* fr, const TribeDescr& tribe) 
 	return *tribe.get_building_descr(index);
 }
 
-// Calls ReadTribe(const EditorGameBase &) to read a tribe and then reads a
+// Calls read_tribe(const EditorGameBase &) to read a tribe and then reads a
 // CString and interprets it as the name of a building type in that tribe.
 //
 // \returns a reference to the building type description.
-const BuildingDescr& ReadBuilding_Type(StreamRead* fr, const EditorGameBase& egbase) {
-	return ReadBuilding_Type(fr, ReadTribe(fr, egbase));
+const BuildingDescr& read_building_type(StreamRead* fr, const EditorGameBase& egbase) {
+	return read_building_type(fr, read_tribe(fr, egbase));
 }
 
 // Encode a tribe into 'wr'.
-void WriteTribe(StreamWrite* wr, const TribeDescr& tribe) {
+void write_tribe(StreamWrite* wr, const TribeDescr& tribe) {
 	wr->String(tribe.name());
 }
 
 // Encode a tribe into 'wr'.
-void WriteTribe(StreamWrite* wr, TribeDescr const* tribe) {
+void write_tribe(StreamWrite* wr, TribeDescr const* tribe) {
 	wr->CString(tribe ? tribe->name().c_str() : "");
 }
 
 // Encode a Immovable_Type into 'wr'.
-void WriteImmovable_Type(StreamWrite* wr, const ImmovableDescr& immovable) {
-	WriteTribe(wr, immovable.get_owner_tribe());
+void write_immovable_type(StreamWrite* wr, const ImmovableDescr& immovable) {
+	write_tribe(wr, immovable.get_owner_tribe());
 	wr->String(immovable.name());
 }
 
 // Encode a Building_Type into 'wr'.
-void WriteBuilding_Type(StreamWrite* wr, const BuildingDescr& building) {
-	WriteTribe(wr, building.tribe());
+void write_building_type(StreamWrite* wr, const BuildingDescr& building) {
+	write_tribe(wr, building.tribe());
 	wr->String(building.name());
 }
 
@@ -356,17 +356,17 @@ inline static MapObjectData read_unseen_immovable
 		case 0:  //  The player sees no immovable.
 			m.map_object_descr = nullptr;                                       break;
 		case 1: //  The player sees a tribe or world immovable.
-			m.map_object_descr = &ReadImmovable_Type(&immovables_file, egbase); break;
+			m.map_object_descr = &read_immovable_type(&immovables_file, egbase); break;
 		case 2:  //  The player sees a flag.
 			m.map_object_descr = &g_flag_descr;                           break;
 		case 3: //  The player sees a building.
-			m.map_object_descr = &ReadBuilding_Type(&immovables_file, egbase);
+			m.map_object_descr = &read_building_type(&immovables_file, egbase);
 			if (version > 1) {
 				// Read data from immovables file
 				if (immovables_file.Unsigned8() == 1) { // the building is a constructionsite
-					m.csi.becomes       = &ReadBuilding_Type(&immovables_file, egbase);
+					m.csi.becomes       = &read_building_type(&immovables_file, egbase);
 					if (immovables_file.Unsigned8() == 1)
-						m.csi.was        = &ReadBuilding_Type(&immovables_file, egbase);
+						m.csi.was        = &read_building_type(&immovables_file, egbase);
 					m.csi.totaltime     =  immovables_file.Unsigned32();
 					m.csi.completedtime =  immovables_file.Unsigned32();
 				}
@@ -385,7 +385,7 @@ inline static MapObjectData read_unseen_immovable
 
 
 
-void MapPlayersViewPacket::Read
+void MapPlayersViewPacket::read
 	(FileSystem            &       fs,
 	 EditorGameBase      &       egbase,
 	 bool                    const skip,
@@ -414,7 +414,7 @@ void MapPlayersViewPacket::Read
 
 		if (!unseen_times_file.TryOpen(fs, unseen_times_filename)) {
 			log
-				("MapPlayersViewPacket::Read: WARNING: Could not open "
+				("MapPlayersViewPacket::read: WARNING: Could not open "
 				 "\"%s\" for reading. Assuming that the game is from an old "
 				 "version without player point of view. Will give player %u "
 				 "knowledge of unseen nodes, edges and triangles (but not "
@@ -454,7 +454,7 @@ void MapPlayersViewPacket::Read
 						const MapObjectDescr * map_object_descr;
 						if (const BaseImmovable * base_immovable = f.field->get_immovable()) {
 							map_object_descr = &base_immovable->descr();
-							if (Road::IsRoadDescr(map_object_descr))
+							if (Road::is_road_descr(map_object_descr))
 								map_object_descr = nullptr;
 							else if (upcast(Building const, building, base_immovable))
 								if (building->get_position() != f)
@@ -656,35 +656,35 @@ void MapPlayersViewPacket::Read
 						f_player_field.time_node_last_unseen = unseen_times_file.Unsigned32();
 					} catch (const FileRead::FileBoundaryExceeded &) {
 						throw GameDataError
-							("MapPlayersViewPacket::Read: player %u: in "
+							("MapPlayersViewPacket::read: player %u: in "
 							 "\"%s\":%lu: node (%i, %i): unexpected end of file "
 							 "while reading time_node_last_unseen",
 							 plnum,
 							 unseen_times_filename,
-							 static_cast<long unsigned int>(unseen_times_file.GetPos() - 4),
+							 static_cast<long unsigned int>(unseen_times_file.get_pos() - 4),
 							 f.x, f.y);
 					}
 
 					try {owner = owners_file.Unsigned8();}
 					catch (const FileRead::FileBoundaryExceeded &) {
 						throw GameDataError
-							("MapPlayersViewPacket::Read: player %u: in "
+							("MapPlayersViewPacket::read: player %u: in "
 							 "\"%s\":%lu: node (%i, %i): unexpected end of file "
 							 "while reading owner",
 							 plnum,
 							 unseen_times_filename,
 							 static_cast<long unsigned int>
-							 	(unseen_times_file.GetPos() - 1),
+								(unseen_times_file.get_pos() - 1),
 							 f.x, f.y);
 					}
 					if (nr_players < owner) {
 						throw GameDataError
-							("MapPlayersViewPacket::Read: player %u: in "
+							("MapPlayersViewPacket::read: player %u: in "
 							 "\"%s\":%lu & 0xf: node (%i, %i): Player thinks that "
 							 "this node is owned by player %u, but there are only %u "
 							 "players",
 							 plnum, owners_filename,
-							 static_cast<long unsigned int>(owners_file.GetPos() - 1),
+							 static_cast<long unsigned int>(owners_file.get_pos() - 1),
 							 f.x, f.y, owner, nr_players);
 					}
 					uint8_t imm_kind = 0;
@@ -731,7 +731,7 @@ void MapPlayersViewPacket::Read
 					const MapObjectDescr * map_object_descr;
 					if (const BaseImmovable * base_immovable = f.field->get_immovable()) {
 						map_object_descr = &base_immovable->descr();
-						if (Road::IsRoadDescr(map_object_descr))
+						if (Road::is_road_descr(map_object_descr))
 							map_object_descr = nullptr;
 						else if (upcast(Building const, building, base_immovable))
 							if (building->get_position() != f)
@@ -758,7 +758,7 @@ void MapPlayersViewPacket::Read
 						try {f_player_field.terrains.d = legacy_terrains_bitbuffer.get();}
 						catch (const FileRead::FileBoundaryExceeded &) {
 							throw GameDataError
-								("MapPlayersViewPacket::Read: player %u: in "
+								("MapPlayersViewPacket::read: player %u: in "
 								"\"%s\": node (%i, %i) t = D: unexpected end of file "
 								"while reading terrain",
 								plnum, terrains_filename, f.x, f.y);
@@ -791,7 +791,7 @@ void MapPlayersViewPacket::Read
 						try {f_player_field.terrains.r = legacy_terrains_bitbuffer.get();}
 						catch (const FileRead::FileBoundaryExceeded &) {
 							throw GameDataError
-								("MapPlayersViewPacket::Read: player %u: in "
+								("MapPlayersViewPacket::read: player %u: in "
 								"\"%s\": node (%i, %i) t = R: unexpected end of file "
 								"while reading terrain",
 								plnum, terrains_filename, f.x, f.y);
@@ -822,7 +822,7 @@ void MapPlayersViewPacket::Read
 							try {roads  = legacy_road_bitbuffer.get() << Road_SouthWest;}
 							catch (const FileRead::FileBoundaryExceeded &) {
 								throw GameDataError
-									("MapPlayersViewPacket::Read: player %u: in "
+									("MapPlayersViewPacket::read: player %u: in "
 									"\"%s\": node (%i, %i): unexpected end of file while "
 									"reading Road_SouthWest",
 									plnum, roads_filename, f.x, f.y);
@@ -840,7 +840,7 @@ void MapPlayersViewPacket::Read
 							try {roads |= legacy_road_bitbuffer.get() << Road_SouthEast;}
 							catch (const FileRead::FileBoundaryExceeded &) {
 								throw GameDataError
-									("MapPlayersViewPacket::Read: player %u: in "
+									("MapPlayersViewPacket::read: player %u: in "
 										"\"%s\": node (%i, %i): unexpected end of file while "
 										"reading Road_SouthEast",
 										plnum, roads_filename, f.x, f.y);
@@ -858,7 +858,7 @@ void MapPlayersViewPacket::Read
 							try {roads |= legacy_road_bitbuffer.get() << Road_East;}
 							catch (const FileRead::FileBoundaryExceeded &) {
 								throw GameDataError
-									("MapPlayersViewPacket::Read: player %u: in "
+									("MapPlayersViewPacket::read: player %u: in "
 										"\"%s\": node (%i, %i): unexpected end of file while "
 										"reading Road_East",
 										plnum, roads_filename, f.x, f.y);
@@ -891,7 +891,7 @@ void MapPlayersViewPacket::Read
 									legacy_surveys_amount_bitbuffer.get();
 							} catch (const FileRead::FileBoundaryExceeded &) {
 								throw GameDataError
-									("MapPlayersViewPacket::Read: player %u: in "
+									("MapPlayersViewPacket::read: player %u: in "
 										"\"%s\": node (%i, %i) t = D: unexpected end of file "
 										"while reading resource amount of surveyed triangle",
 										plnum, survey_amounts_filename, f.x, f.y);
@@ -904,18 +904,18 @@ void MapPlayersViewPacket::Read
 								survey_times_file.Unsigned32();
 						} catch (const FileRead::FileBoundaryExceeded &) {
 							throw GameDataError
-								("MapPlayersViewPacket::Read: player %u: in "
+								("MapPlayersViewPacket::read: player %u: in "
 								 "\"%s\":%lu: node (%i, %i) t = D: unexpected end of "
 								 "file while reading time_triangle_last_surveyed",
 								 plnum, survey_times_filename,
 								 static_cast<long unsigned int>
-								 	(survey_times_file.GetPos() - 4),
+									(survey_times_file.get_pos() - 4),
 								 f.x, f.y);
 						}
 					}
 				} catch (const FileRead::FileBoundaryExceeded &) {
 					throw GameDataError
-						("MapPlayersViewPacket::Read: player %u: in \"%s\": "
+						("MapPlayersViewPacket::read: player %u: in \"%s\": "
 						 "node (%i, %i) t = D: unexpected end of file while reading "
 						 "survey bit",
 						 plnum, surveys_filename, f.x, f.y);
@@ -936,7 +936,7 @@ void MapPlayersViewPacket::Read
 									legacy_surveys_amount_bitbuffer.get();
 							} catch (const FileRead::FileBoundaryExceeded &) {
 								throw GameDataError
-									("MapPlayersViewPacket::Read: player %u: in "
+									("MapPlayersViewPacket::read: player %u: in "
 									"\"%s\": node (%i, %i) t = R: unexpected end of file "
 									"while reading resource amount of surveyed triangle",
 									plnum, survey_amounts_filename, f.x, f.y);
@@ -949,18 +949,18 @@ void MapPlayersViewPacket::Read
 								survey_times_file.Unsigned32();
 						} catch (const FileRead::FileBoundaryExceeded &) {
 							throw GameDataError
-								("MapPlayersViewPacket::Read: player %u: in "
+								("MapPlayersViewPacket::read: player %u: in "
 								 "\"%s\":%lu: node (%i, %i) t = R: unexpected end of "
 								 "file while reading time_triangle_last_surveyed",
 								 plnum, survey_times_filename,
 								 static_cast<long unsigned int>
-								 	(survey_times_file.GetPos() - 4),
+									(survey_times_file.get_pos() - 4),
 								 f.x, f.y);
 						}
 					}
 				} catch (const FileRead::FileBoundaryExceeded &) {
 					throw GameDataError
-						("MapPlayersViewPacket::Read: player %u: in \"%s\": "
+						("MapPlayersViewPacket::read: player %u: in \"%s\": "
 						 "node (%i, %i) t = R: unexpected end of file while reading "
 						 "survey bit",
 						 plnum, surveys_filename, f.x, f.y);
@@ -991,31 +991,31 @@ inline static void write_unseen_immovable
 {
 	MapObjectDescr const * const map_object_descr = map_object_data->map_object_descr;
 	const Player::ConstructionsiteInformation & csi = map_object_data->csi;
-	assert(!Road::IsRoadDescr(map_object_descr));
+	assert(!Road::is_road_descr(map_object_descr));
 	uint8_t immovable_kind = 255;
 
 	if (!map_object_descr)
 		immovable_kind = 0;
 	else if (upcast(ImmovableDescr const, immovable_descr, map_object_descr)) {
 		immovable_kind = 1;
-		WriteImmovable_Type(&immovables_file, *immovable_descr);
+		write_immovable_type(&immovables_file, *immovable_descr);
 	} else if (map_object_descr->type() == MapObjectType::FLAG)
 		immovable_kind = 2;
 	else if (upcast(BuildingDescr const, building_descr, map_object_descr)) {
 		immovable_kind = 3;
-		WriteBuilding_Type(&immovables_file, *building_descr);
+		write_building_type(&immovables_file, *building_descr);
 		if (!csi.becomes)
 			immovables_file.Unsigned8(0);
 		else {
 			// the building is a constructionsite
 			immovables_file.Unsigned8(1);
-			WriteBuilding_Type(&immovables_file, *csi.becomes);
+			write_building_type(&immovables_file, *csi.becomes);
 			if (!csi.was)
 				immovables_file.Unsigned8(0);
 			else {
 				// constructionsite is an enhancement, therefor we write down the enhancement
 				immovables_file.Unsigned8(1);
-				WriteBuilding_Type(&immovables_file, *csi.was);
+				write_building_type(&immovables_file, *csi.was);
 			}
 			immovables_file.Unsigned32(csi.totaltime);
 			immovables_file.Unsigned32(csi.completedtime);
@@ -1038,9 +1038,9 @@ inline static void write_unseen_immovable
 
 #define WRITE(file, filename_template, version)                               \
    snprintf(filename, sizeof(filename), filename_template, plnum, version);   \
-   (file).Write(fs, filename);                                                \
+	(file).write(fs, filename);                                                \
 
-void MapPlayersViewPacket::Write
+void MapPlayersViewPacket::write
 	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
 {
 	fs.EnsureDirectoryExists("player");

@@ -34,7 +34,7 @@ namespace Widelands {
 #define CURRENT_PACKET_VERSION 2
 
 
-void GameInteractivePlayerPacket::Read
+void GameInteractivePlayerPacket::read
 	(FileSystem & fs, Game & game, MapObjectLoader *)
 {
 	try {
@@ -88,7 +88,7 @@ void GameInteractivePlayerPacket::Read
 /*
  * Write Function
  */
-void GameInteractivePlayerPacket::Write
+void GameInteractivePlayerPacket::write
 	(FileSystem & fs, Game & game, MapObjectSaver * const)
 {
 	FileWrite fw;
@@ -113,7 +113,7 @@ void GameInteractivePlayerPacket::Write
 	// Display flags
 	fw.Unsigned32(ibase ? ibase->get_display_flags() : 0);
 
-	fw.Write(fs, "binary/interactive_player");
+	fw.write(fs, "binary/interactive_player");
 }
 
 }

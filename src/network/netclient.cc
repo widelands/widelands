@@ -831,12 +831,12 @@ void NetClient::handle_packet(RecvPacket & packet)
 			while (left > 0) {
 				uint32_t writeout
 					= (left > NETFILEPARTSIZE) ? NETFILEPARTSIZE : left;
-				fw.data(file->parts[i].part, writeout, FileWrite::Pos::Null());
+				fw.data(file->parts[i].part, writeout, FileWrite::Pos::null());
 				left -= writeout;
 				++i;
 			}
 			// Now really write the file
-			fw.Write(*g_fs, file->filename.c_str());
+			fw.write(*g_fs, file->filename.c_str());
 
 			// Check for consistence
 			FileRead fr;

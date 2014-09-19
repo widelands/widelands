@@ -34,7 +34,7 @@ GameMapPacket::~GameMapPacket() {
 	delete m_wml;
 }
 
-void GameMapPacket::Read
+void GameMapPacket::read
 	(FileSystem & fs, Game & game, MapObjectLoader * const)
 {
 	if (!fs.FileExists("map") || !fs.IsDirectory("map"))
@@ -53,13 +53,13 @@ void GameMapPacket::Read
 }
 
 
-void GameMapPacket::Read_Complete(Game & game) {
+void GameMapPacket::read_complete(Game & game) {
 	m_wml->load_map_complete(game, true);
 	m_mol = m_wml->get_map_object_loader();
 }
 
 
-void GameMapPacket::Write
+void GameMapPacket::write
 	(FileSystem & fs, Game & game, MapObjectSaver * const)
 {
 

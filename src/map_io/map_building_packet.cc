@@ -42,7 +42,7 @@ namespace Widelands {
 #define CURRENT_PACKET_VERSION             3
 
 
-void MapBuildingPacket::Read
+void MapBuildingPacket::read
 	(FileSystem            &       fs,
 	 EditorGameBase      &       egbase,
 	 bool                    const skip,
@@ -117,7 +117,7 @@ void MapBuildingPacket::Read
 /*
  * Write Function
  */
-void MapBuildingPacket::Write
+void MapBuildingPacket::write
 	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	FileWrite fw;
@@ -159,7 +159,7 @@ void MapBuildingPacket::Write
 			fw.Unsigned8(0);
 	}
 
-	fw.Write(fs, "binary/building");
+	fw.write(fs, "binary/building");
 	// DONE
 }
 

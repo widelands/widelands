@@ -31,7 +31,7 @@
 
 namespace Widelands {
 
-void EconomyDataPacket::Read(FileRead & fr)
+void EconomyDataPacket::read(FileRead & fr)
 {
 	uint16_t const version = fr.Unsigned16();
 
@@ -100,7 +100,7 @@ void EconomyDataPacket::Read(FileRead & fr)
 	}
 }
 
-void EconomyDataPacket::Write(FileWrite & fw)
+void EconomyDataPacket::write(FileWrite & fw)
 {
 	fw.Unsigned16(CURRENT_ECONOMY_VERSION);
 	const TribeDescr & tribe = m_eco->owner().tribe();

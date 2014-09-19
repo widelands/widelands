@@ -33,7 +33,7 @@ namespace Widelands {
 #define CURRENT_PACKET_VERSION 15
 
 
-void GamePlayerInfoPacket::Read
+void GamePlayerInfoPacket::read
 	(FileSystem & fs, Game & game, MapObjectLoader *)
 {
 	try {
@@ -64,16 +64,16 @@ void GamePlayerInfoPacket::Read
 					Player & player = game.player(plnum);
 					player.set_see_all(see_all);
 
-					player.setAI(fr.CString());
+					player.set_ai(fr.CString());
 
 					if (packet_version >= 15)
-						player.ReadStatistics(fr, 3);
+						player.read_statistics(fr, 3);
 					else if (packet_version >= 14)
-						player.ReadStatistics(fr, 2);
+						player.read_statistics(fr, 2);
 					else if (packet_version >= 12)
-						player.ReadStatistics(fr, 1);
+						player.read_statistics(fr, 1);
 					else
-						player.ReadStatistics(fr, 0);
+						player.read_statistics(fr, 0);
 
 					player.m_casualties = fr.Unsigned32();
 					player.m_kills      = fr.Unsigned32();
@@ -85,9 +85,9 @@ void GamePlayerInfoPacket::Read
 			}
 
 			if (packet_version <= 10)
-				game.ReadStatistics(fr, 3);
+				game.read_statistics(fr, 3);
 			else
-				game.ReadStatistics(fr, 4);
+				game.read_statistics(fr, 4);
 		} else
 			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
@@ -97,7 +97,7 @@ void GamePlayerInfoPacket::Read
 }
 
 
-void GamePlayerInfoPacket::Write
+void GamePlayerInfoPacket::write
 	(FileSystem & fs, Game & game, MapObjectSaver *)
 {
 	FileWrite fw;
@@ -126,7 +126,7 @@ void GamePlayerInfoPacket::Write
 		fw.CString(plr->m_name.c_str());
 		fw.CString(plr->m_ai.c_str());
 
-		plr->WriteStatistics(fw);
+		plr->write_statistics(fw);
 		fw.Unsigned32(plr->casualties());
 		fw.Unsigned32(plr->kills     ());
 		fw.Unsigned32(plr->msites_lost        ());
@@ -136,9 +136,9 @@ void GamePlayerInfoPacket::Write
 	} else
 		fw.Unsigned8(0); //  Player is NOT in game.
 
-	game.WriteStatistics(fw);
+	game.write_statistics(fw);
 
-	fw.Write(fs, "binary/player_info");
+	fw.write(fs, "binary/player_info");
 }
 
 }

@@ -35,13 +35,13 @@ void CmdCalculateStatistics::execute (Game & game) {
 }
 
 #define CMD_CALCULATE_STATISTICS_VERSION 1
-void CmdCalculateStatistics::Read
+void CmdCalculateStatistics::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CMD_CALCULATE_STATISTICS_VERSION) {
-			GameLogicCommand::Read(fr, egbase, mol);
+			GameLogicCommand::read(fr, egbase, mol);
 		} else
 			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
@@ -49,11 +49,11 @@ void CmdCalculateStatistics::Read
 		throw GameDataError("calculate statistics function: %s", e.what());
 	}
 }
-void CmdCalculateStatistics::Write
+void CmdCalculateStatistics::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	fw.Unsigned16(CMD_CALCULATE_STATISTICS_VERSION);
-	GameLogicCommand::Write(fw, egbase, mos);
+	GameLogicCommand::write(fw, egbase, mos);
 
 }
 

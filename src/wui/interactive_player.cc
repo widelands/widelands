@@ -83,7 +83,7 @@ InteractivePlayer::InteractivePlayer
 	:
 	InteractiveGameBase (_game, global_s, NONE, multiplayer, multiplayer),
 	m_auto_roadbuild_mode(global_s.get_bool("auto_roadbuild_mode", true)),
-	m_flag_to_connect(Widelands::Coords::Null()),
+	m_flag_to_connect(Widelands::Coords::null()),
 
 // Chat is different, as m_chatProvider needs to be checked when toggling
 // Buildhelp is different as it does not toggle a UniqueWindow
@@ -246,7 +246,7 @@ void InteractivePlayer::think()
 						 	 	(m_flag_to_connect, Widelands::TCoords<>::D)));
 					start_build_road(m_flag_to_connect, field.get_owned_by());
 				}
-			m_flag_to_connect = Widelands::Coords::Null();
+			m_flag_to_connect = Widelands::Coords::null();
 		}
 	}
 	if (is_multiplayer()) {

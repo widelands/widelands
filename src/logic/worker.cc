@@ -611,7 +611,7 @@ bool Worker::run_findspace(Game & game, State & state, const Action & action)
 bool Worker::run_walk(Game & game, State & state, const Action & action)
 {
 	BaseImmovable const * const imm = game.map()[get_position()].get_immovable();
-	Coords dest(Coords::Null());
+	Coords dest(Coords::null());
 	bool forceonlast = false;
 	int32_t max_steps = -1;
 
@@ -975,7 +975,7 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
  * Demand from the g_sound_handler to play a certain sound effect.
  * Whether the effect actually gets played is decided only by the sound server.
  */
-bool Worker::run_playFX(Game & game, State & state, const Action & action)
+bool Worker::run_playfx(Game & game, State & state, const Action & action)
 {
 	g_sound_handler.play_fx(action.sparam1, get_position(), action.iparam1);
 

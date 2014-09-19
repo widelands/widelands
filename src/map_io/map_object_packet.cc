@@ -47,7 +47,7 @@ MapObjectPacket::~MapObjectPacket() {
 }
 
 
-void MapObjectPacket::Read
+void MapObjectPacket::read
 	(FileSystem & fs, EditorGameBase & egbase, MapObjectLoader & mol,
 	 const OneWorldLegacyLookupTable& lookup_table)
 {
@@ -106,7 +106,7 @@ void MapObjectPacket::Read
 }
 
 
-void MapObjectPacket::LoadFinish() {
+void MapObjectPacket::load_finish() {
 	// load_pointer stage
 	for (MapObject::Loader* temp_loader : loaders) {
 		try {
@@ -132,7 +132,7 @@ void MapObjectPacket::LoadFinish() {
 }
 
 
-void MapObjectPacket::Write
+void MapObjectPacket::write
 	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	FileWrite fw;
@@ -167,7 +167,7 @@ void MapObjectPacket::Write
 
 	fw.Unsigned8(0);
 
-	fw.Write(fs, "binary/mapobjects");
+	fw.write(fs, "binary/mapobjects");
 }
 
 }

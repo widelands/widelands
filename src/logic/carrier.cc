@@ -532,7 +532,7 @@ int32_t Carrier::find_closest_flag(Game & game)
 	startpath.truncate(curidx);
 	startpath.reverse();
 
-	endpath.starttrim(curidx);
+	endpath.trim_start(curidx);
 
 	map.calc_cost(startpath, &startcost, nullptr);
 	map.calc_cost(endpath,   &endcost,   nullptr);

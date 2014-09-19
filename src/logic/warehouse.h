@@ -155,21 +155,21 @@ public:
 	void remove_workers(WareIndex, uint32_t count);
 
 	/* SoldierControl implementation */
-	std::vector<Soldier *> presentSoldiers() const override;
-	std::vector<Soldier *> stationedSoldiers() const override {
-		return presentSoldiers();
+	std::vector<Soldier *> present_soldiers() const override;
+	std::vector<Soldier *> stationed_soldiers() const override {
+		return present_soldiers();
 	}
-	uint32_t minSoldierCapacity() const override {return 0;}
-	uint32_t maxSoldierCapacity() const override {return 4294967295U;}
-	uint32_t soldierCapacity() const override {return maxSoldierCapacity();}
-	void setSoldierCapacity(uint32_t /* capacity */) override {
+	uint32_t min_soldier_capacity() const override {return 0;}
+	uint32_t max_soldier_capacity() const override {return 4294967295U;}
+	uint32_t soldier_capacity() const override {return max_soldier_capacity();}
+	void set_soldier_capacity(uint32_t /* capacity */) override {
 		throw wexception("Not implemented for a Warehouse!");
 	}
-	void dropSoldier(Soldier &) override {
+	void drop_soldier(Soldier &) override {
 		throw wexception("Not implemented for a Warehouse!");
 	}
-	int outcorporateSoldier(EditorGameBase &, Soldier &) override;
-	int incorporateSoldier(EditorGameBase &, Soldier& soldier) override;
+	int outcorporate_soldier(EditorGameBase &, Soldier &) override;
+	int incorporate_soldier(EditorGameBase &, Soldier& soldier) override;
 
 	bool fetch_from_flag(Game &) override;
 
@@ -199,7 +199,7 @@ public:
 
 	// Begin Attackable implementation
 	Player & owner() const override {return Building::owner();}
-	bool canAttack() override;
+	bool can_attack() override;
 	void aggressor(Soldier &) override;
 	bool attack   (Soldier &) override;
 	// End Attackable implementation

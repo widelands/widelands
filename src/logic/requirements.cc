@@ -38,7 +38,7 @@ bool Requirements::check(const MapObject & obj) const
 /**
  * Read this requirement from a file
  */
-void Requirements::Read
+void Requirements::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
@@ -53,7 +53,7 @@ void Requirements::Read
 	}
 }
 
-void Requirements::Write
+void Requirements::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 	const
 {
@@ -133,11 +133,11 @@ void RequireOr::write
 	fw.Unsigned16(m.size());
 
 	for (const Requirements& req : m) {
-		req.Write(fw, egbase, mos);
+		req.write(fw, egbase, mos);
 	}
 }
 
-static Requirements readOr
+static Requirements read_or
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	uint32_t const count = fr.Unsigned16();
@@ -145,14 +145,14 @@ static Requirements readOr
 
 	for (uint32_t i = 0; i < count; ++i) {
 		Requirements sub;
-		sub.Read(fr, egbase, mol);
+		sub.read(fr, egbase, mol);
 		req.add(sub);
 	}
 
 	return req;
 }
 
-const RequirementsStorage RequireOr::storage(requirementIdOr, readOr);
+const RequirementsStorage RequireOr::storage(requirementIdOr, read_or);
 
 
 void RequireAnd::add(const Requirements & req)
@@ -178,11 +178,11 @@ void RequireAnd::write
 	fw.Unsigned16(m.size());
 
 	for (const Requirements& req : m) {
-		req.Write(fw, egbase, mos);
+		req.write(fw, egbase, mos);
 	}
 }
 
-static Requirements readAnd
+static Requirements read_and
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	uint32_t const count = fr.Unsigned16();
@@ -190,14 +190,14 @@ static Requirements readAnd
 
 	for (uint32_t i = 0; i < count; ++i) {
 		Requirements sub;
-		sub.Read(fr, egbase, mol);
+		sub.read(fr, egbase, mol);
 		req.add(sub);
 	}
 
 	return req;
 }
 
-const RequirementsStorage RequireAnd::storage(requirementIdAnd, readAnd);
+const RequirementsStorage RequireAnd::storage(requirementIdAnd, read_and);
 
 
 bool RequireAttribute::check(const MapObject & obj) const
@@ -227,7 +227,7 @@ void RequireAttribute::write
 	fw.Signed32(max);
 }
 
-static Requirements readAttribute
+static Requirements read_attribute
 	(FileRead & fr, EditorGameBase &, MapObjectLoader &)
 {
 	TrainingAttribute const at  = static_cast<TrainingAttribute>(fr.Unsigned32());
@@ -247,5 +247,5 @@ static Requirements readAttribute
 }
 
 const RequirementsStorage RequireAttribute::
-	storage(requirementIdAttribute, readAttribute);
+	storage(requirementIdAttribute, read_attribute);
 }

@@ -402,7 +402,7 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
  * that file.
  * Throws an exception if it fails.
  */
-void RealFSImpl::Write(const std::string & fname, void const * const data, int32_t const length, bool append)
+void RealFSImpl::write(const std::string & fname, void const * const data, int32_t const length, bool append)
 {
 	std::string fullname;
 

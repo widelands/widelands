@@ -1384,7 +1384,7 @@ void ProductionProgram::ActCheckSoldier::execute
 	(Game & game, ProductionSite & ps) const
 {
 	SoldierControl & ctrl = dynamic_cast<SoldierControl &>(ps);
-	const std::vector<Soldier *> soldiers = ctrl.presentSoldiers();
+	const std::vector<Soldier *> soldiers = ctrl.present_soldiers();
 	if (soldiers.empty()) {
 		ps.set_production_result(_("No soldier to train!"));
 		return ps.program_end(game, Skipped);
@@ -1414,7 +1414,7 @@ void ProductionProgram::ActCheckSoldier::execute
 	ps.molog("    okay\n"); // okay, do nothing
 
 	upcast(TrainingSite, ts, &ps);
-	ts->trainingAttempted(attribute, level);
+	ts->training_attempted(attribute, level);
 
 	ps.molog("  Check done!\n");
 
@@ -1468,7 +1468,7 @@ void ProductionProgram::ActTrain::execute
 	(Game & game, ProductionSite & ps) const
 {
 	SoldierControl & ctrl = dynamic_cast<SoldierControl &>(ps);
-	const std::vector<Soldier *> soldiers = ctrl.presentSoldiers();
+	const std::vector<Soldier *> soldiers = ctrl.present_soldiers();
 	const std::vector<Soldier *>::const_iterator soldiers_end =
 		soldiers.end();
 	std::vector<Soldier *>::const_iterator it = soldiers.begin();
@@ -1515,7 +1515,7 @@ void ProductionProgram::ActTrain::execute
 		ps.molog("  Training done!\n");
 
 	upcast(TrainingSite, ts, &ps);
-	ts->trainingSuccessful(attribute, level);
+	ts->training_successful(attribute, level);
 
 
 	return ps.program_step(game);

@@ -29,7 +29,7 @@ namespace Widelands {
 #define CURRENT_PACKET_VERSION 2
 
 
-void GameClassPacket::Read
+void GameClassPacket::read
 	(FileSystem & fs, Game & game, MapObjectLoader *)
 {
 	try {
@@ -50,7 +50,7 @@ void GameClassPacket::Read
 /*
  * Write Function
  */
-void GameClassPacket::Write
+void GameClassPacket::write
 	(FileSystem & fs, Game & game, MapObjectSaver * const)
 {
 	FileWrite fw;
@@ -85,7 +85,7 @@ void GameClassPacket::Write
 
 	// Track pointers are not saved in save games
 
-	fw.Write(fs, "binary/game_class");
+	fw.write(fs, "binary/game_class");
 }
 
 }

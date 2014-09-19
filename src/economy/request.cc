@@ -105,7 +105,7 @@ Request::~Request()
  * might have been initialized. We have to kill them and replace
  * them through the data in the file
  */
-void Request::Read
+void Request::read
 	(FileRead & fr, Game & game, MapObjectLoader & mol)
 {
 	try {
@@ -123,7 +123,7 @@ void Request::Read
 					m_type = wwWORKER;
 					m_index = woi;
 				} else {
-					throw wexception("Request::Read: unknown type '%s'.\n", type_name);
+					throw wexception("Request::read: unknown type '%s'.\n", type_name);
 				}
 			}
 			m_count             = fr.Unsigned32();
@@ -143,12 +143,12 @@ void Request::Read
 					if (upcast(Worker, worker, obj)) {
 						transfer = worker->get_transfer();
 						if (m_type != wwWORKER || !worker->descr().can_act_as(m_index)) {
-							throw wexception("Request::Read: incompatible transfer type");
+							throw wexception("Request::read: incompatible transfer type");
 						}
 					} else if (upcast(WareInstance, ware, obj)) {
 						transfer = ware->get_transfer();
 						if (m_type != wwWARE || ware->descr_index() != m_index) {
-							throw wexception("Request::Read: incompatible transfer type");
+							throw wexception("Request::read: incompatible transfer type");
 						}
 					} else {
 						throw wexception("transfer target %u is neither ware nor worker", obj->serial());
@@ -164,7 +164,7 @@ void Request::Read
 				} catch (const WException& e) {
 				   throw wexception("transfer %u: %s", i, e.what());
 				}
-			m_requirements.Read (fr, game, mol);
+			m_requirements.read (fr, game, mol);
 			if (!is_open() && m_economy)
 				m_economy->remove_request(*this);
 		} else
@@ -177,7 +177,7 @@ void Request::Read
 /**
  * Write this request to a file
  */
-void Request::Write
+void Request::write
 	(FileWrite & fw, Game & game, MapObjectSaver & mos) const
 {
 	fw.Unsigned16(REQUEST_VERSION);
@@ -211,7 +211,7 @@ void Request::Write
 			fw.Unsigned32(mos.get_object_file_index(*trans.m_worker));
 		}
 	}
-	m_requirements.Write (fw, game, mos);
+	m_requirements.write (fw, game, mos);
 }
 
 /**

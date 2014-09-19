@@ -52,7 +52,7 @@ GameLoader::~GameLoader() {
  */
 int32_t GameLoader::preload_game(GamePreloadPacket & mp) {
 	// Load elemental data block
-	mp.Read(m_fs, m_game, nullptr);
+	mp.read(m_fs, m_game, nullptr);
 
 	return 0;
 }
@@ -64,33 +64,33 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	ScopedTimer timer("GameLoader::load() took %ums");
 
 	log("Game: Reading Preload Data ... ");
-	{GamePreloadPacket                     p; p.Read(m_fs, m_game);}
+	{GamePreloadPacket                     p; p.read(m_fs, m_game);}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Reading Game Class Data ... ");
-	{GameClassPacket                  p; p.Read(m_fs, m_game);}
+	{GameClassPacket                  p; p.read(m_fs, m_game);}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Reading Map Data ... ");
-	GameMapPacket M;                          M.Read(m_fs, m_game);
+	GameMapPacket M;                          M.read(m_fs, m_game);
 	log("Game: Reading Map Data took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Reading Player Info ... ");
-	{GamePlayerInfoPacket                 p; p.Read(m_fs, m_game);}
+	{GamePlayerInfoPacket                 p; p.read(m_fs, m_game);}
 	log("Game: Reading Player Info took %ums\n", timer.ms_since_last_query());
 
-	log("Game: Calling Read_Complete()\n");
-	M.Read_Complete(m_game);
-	log("Game: Read_Complete took: %ums\n", timer.ms_since_last_query());
+	log("Game: Calling read_complete()\n");
+	M.read_complete(m_game);
+	log("Game: read_complete took: %ums\n", timer.ms_since_last_query());
 
 	MapObjectLoader * const mol = M.get_map_object_loader();
 
 	log("Game: Reading Player Economies Info ... ");
-	{GamePlayerEconomiesPacket            p; p.Read(m_fs, m_game, mol);}
+	{GamePlayerEconomiesPacket            p; p.read(m_fs, m_game, mol);}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Reading Command Queue Data ... ");
-	{GameCmdQueuePacket                   p; p.Read(m_fs, m_game, mol);}
+	{GameCmdQueuePacket                   p; p.read(m_fs, m_game, mol);}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	//  This must be after the command queue has been read.
@@ -120,7 +120,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	// player.
 	if (!multiplayer) {
 		log("Game: Reading Interactive Player Data ... ");
-		{GameInteractivePlayerPacket       p; p.Read(m_fs, m_game, mol);}
+		{GameInteractivePlayerPacket       p; p.read(m_fs, m_game, mol);}
 		log("took %ums\n", timer.ms_since_last_query());
 	}
 

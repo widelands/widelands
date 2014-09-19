@@ -45,7 +45,7 @@ namespace Widelands {
 #define MINIMAP_FILENAME "minimap.png"
 
 
-void GamePreloadPacket::Read
+void GamePreloadPacket::read
 	(FileSystem & fs, Game &, MapObjectLoader * const)
 {
 	try {
@@ -75,7 +75,7 @@ void GamePreloadPacket::Read
 }
 
 
-void GamePreloadPacket::Write
+void GamePreloadPacket::write
 	(FileSystem & fs, Game & game, MapObjectSaver * const)
 {
 

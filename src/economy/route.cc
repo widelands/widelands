@@ -63,7 +63,7 @@ Flag & Route::get_flag
 /**
  * Remove the first count steps from the route.
 */
-void Route::starttrim(int32_t count)
+void Route::trim_start(int32_t count)
 {
 	assert(count < static_cast<int32_t>(m_route.size()));
 

@@ -61,7 +61,7 @@ public:
 
 	virtual void * Load(const std::string & fname, size_t & length) = 0;
 
-	virtual void Write
+	virtual void write
 		(const std::string & fname, void const * data, int32_t length)
 		= 0;
 	virtual void EnsureDirectoryExists(const std::string & dirname) = 0;

@@ -98,7 +98,7 @@ void DedicatedLog::chat(ChatMessage & c) {
 	temp += "</td><td class=\"recipient\"> ->" + c.recipient + "</td><td class=\"message\">";
 	temp += c.msg + "</td></tr>\n";
 	m_chat.Printf("%s", temp.c_str());
-	m_chat.WriteAppend(*root, m_chat_file_path.c_str());
+	m_chat.write_append(*root, m_chat_file_path.c_str());
 }
 
 /// Add's a spacer to the chat log
@@ -108,7 +108,7 @@ void DedicatedLog::chatAddSpacer() {
 
 	m_chat.Printf("<tr><td class=\"space\"></td><td class=\"space\"></td>");
 	m_chat.Printf("<td class=\"space\"></td><td class=\"space\"></td></tr>\n");
-	m_chat.WriteAppend(*root, m_chat_file_path.c_str());
+	m_chat.write_append(*root, m_chat_file_path.c_str());
 }
 
 
@@ -207,7 +207,7 @@ void DedicatedLog::info_update() {
 	}
 	temp += "</table>\n";
 	m_chat.Printf("%s", temp.c_str());
-	m_chat.Write(*root, m_info_file_path.c_str());
+	m_chat.write(*root, m_info_file_path.c_str());
 }
 
 /// Appends the String \arg msg to the log file
@@ -225,7 +225,7 @@ void DedicatedLog::dlog(std::string msg) {
 	temp += msg;
 	temp += "</td></tr>\n";
 	m_chat.Printf("%s", temp.c_str());
-	m_chat.WriteAppend(*root, m_log_file_path.c_str());
+	m_chat.write_append(*root, m_log_file_path.c_str());
 }
 
 
@@ -253,7 +253,7 @@ bool DedicatedLog::set_chat_file_path(std::string path) {
 
 	// Initialize the chat file
 	m_chat.Printf("<tr><th>Time</th><th>Sender</th><th>Recipient</th><th>Message</th></tr>");
-	m_chat.Write(*root, m_chat_file_path.c_str()); // Not WriteAppend, to make sure the file is cleared
+	m_chat.write(*root, m_chat_file_path.c_str()); // Not write_append, to make sure the file is cleared
 	return true;
 }
 
@@ -308,7 +308,7 @@ bool DedicatedLog::set_log_file_path (std::string path) {
 
 	// Initialize the log file
 	m_chat.Printf("<tr><th></th><th>Widelands dedicated server log:</th></tr>\n");
-	m_chat.Write(*root, m_log_file_path.c_str()); // Not WriteAppend, to make sure the file is cleared
+	m_chat.write(*root, m_log_file_path.c_str()); // Not write_append, to make sure the file is cleared
 	return true;
 }
 

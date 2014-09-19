@@ -146,7 +146,7 @@ Command::~Command () {}
  *
  * \note This function must be called by deriving objects that override it.
  */
-void GameLogicCommand::Write
+void GameLogicCommand::write
 	(FileWrite & fw,
 #ifndef NDEBUG
 	 EditorGameBase & egbase,
@@ -168,7 +168,7 @@ void GameLogicCommand::Write
  *
  * \note This function must be called by deriving objects that override it.
  */
-void GameLogicCommand::Read
+void GameLogicCommand::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader &)
 {
 	try {

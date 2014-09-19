@@ -31,7 +31,7 @@ namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 1
 
-void MapBobPacket::ReadBob(FileRead& fr,
+void MapBobPacket::read_bob(FileRead& fr,
                                   EditorGameBase& egbase,
 											 MapObjectLoader&,
                                   Coords const coords,
@@ -67,7 +67,7 @@ void MapBobPacket::ReadBob(FileRead& fr,
 	}
 }
 
-void MapBobPacket::Read(FileSystem& fs,
+void MapBobPacket::read(FileSystem& fs,
                                EditorGameBase& egbase,
 										 MapObjectLoader& mol,
                                const OneWorldLegacyLookupTable& lookup_table) {
@@ -83,7 +83,7 @@ void MapBobPacket::Read(FileSystem& fs,
 				for (uint16_t x = 0; x < map.get_width(); ++x) {
 					uint32_t const nr_bobs = fr.Unsigned32();
 					for (uint32_t i = 0; i < nr_bobs; ++i)
-						ReadBob(fr, egbase, mol, Coords(x, y), lookup_table);
+						read_bob(fr, egbase, mol, Coords(x, y), lookup_table);
 				}
 			}
 		else

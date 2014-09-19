@@ -42,9 +42,9 @@ public:
 	void * Load(const std::string & fname, size_t & length) override;
 
 
-	void Write(const std::string & fname, void const * data, int32_t length, bool append);
-	void Write(const std::string & fname, void const * data, int32_t length) override
-		{Write(fname, data, length, false);}
+	void write(const std::string & fname, void const * data, int32_t length, bool append);
+	void write(const std::string & fname, void const * data, int32_t length) override
+		{write(fname, data, length, false);}
 
 	StreamRead  * OpenStreamRead (const std::string & fname) override;
 	StreamWrite * OpenStreamWrite(const std::string & fname) override;

@@ -46,33 +46,33 @@ void GameSaver::save() {
 	m_fs.EnsureDirectoryExists("binary");
 
 	log("Game: Writing Preload Data ... ");
-	{GamePreloadPacket                    p; p.Write(m_fs, m_game, nullptr);}
+	{GamePreloadPacket                    p; p.write(m_fs, m_game, nullptr);}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing Game Class Data ... ");
-	{GameClassPacket                 p; p.Write(m_fs, m_game, nullptr);}
+	{GameClassPacket                 p; p.write(m_fs, m_game, nullptr);}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing Player Info ... ");
-	{GamePlayerInfoPacket                p; p.Write(m_fs, m_game, nullptr);}
+	{GamePlayerInfoPacket                p; p.write(m_fs, m_game, nullptr);}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing Map Data!\n");
-	GameMapPacket                         M; M.Write(m_fs, m_game, nullptr);
+	GameMapPacket                         M; M.write(m_fs, m_game, nullptr);
 	log("Game: Writing Map Data took %ums\n", timer.ms_since_last_query());
 
 	MapObjectSaver * const mos = M.get_map_object_saver();
 
 	log("Game: Writing Player Economies Info ... ");
-	{GamePlayerEconomiesPacket           p; p.Write(m_fs, m_game, mos);}
+	{GamePlayerEconomiesPacket           p; p.write(m_fs, m_game, mos);}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing Command Queue Data ... ");
-	{GameCmdQueuePacket                  p; p.Write(m_fs, m_game, mos);}
+	{GameCmdQueuePacket                  p; p.write(m_fs, m_game, mos);}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing Interactive Player Data ... ");
-	{GameInteractivePlayerPacket         p; p.Write(m_fs, m_game, mos);}
+	{GameInteractivePlayerPacket         p; p.write(m_fs, m_game, mos);}
 	log("took %ums\n", timer.ms_since_last_query());
 }
 

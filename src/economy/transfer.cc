@@ -178,7 +178,7 @@ PlayerImmovable * Transfer::get_next_step
 	if (m_route.get_nrsteps() >= 1)
 		if (upcast(Road const, road, location))
 			if (&road->get_flag(Road::FlagEnd) == &m_route.get_flag(m_game, 1))
-				m_route.starttrim(1);
+				m_route.trim_start(1);
 
 	if (m_route.get_nrsteps() >= 1)
 		if (upcast(Road const, road, destination))

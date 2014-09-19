@@ -499,7 +499,7 @@ void MainMenuNewRandomMap::id_edit_box_changed()
 
 	std::string str = m_idEditbox->text();
 
-	if (!UniqueRandomMapInfo::setFromIdString(mapInfo, str))
+	if (!UniqueRandomMapInfo::set_from_id_string(mapInfo, str))
 		m_goButton->set_enabled(false);
 	else {
 		std::stringstream sstrm;
@@ -545,7 +545,7 @@ void MainMenuNewRandomMap::nr_edit_box_changed()
 			set_map_info(mapInfo);
 
 			std::string idStr;
-			Widelands::UniqueRandomMapInfo::generateIdString(idStr, mapInfo);
+			Widelands::UniqueRandomMapInfo::generate_id_string(idStr, mapInfo);
 
 			m_idEditbox->set_text(idStr);
 

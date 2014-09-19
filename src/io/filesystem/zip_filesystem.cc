@@ -357,7 +357,7 @@ void * ZipFilesystem::Load(const std::string & fname, size_t & length) {
  * Write the given block of memory to the repository.
  * Throws an exception if it fails.
  */
-void ZipFilesystem::Write
+void ZipFilesystem::write
 	(const std::string & fname, void const * const data, int32_t const length)
 {
 	std::string filename = fname;
@@ -389,7 +389,7 @@ void ZipFilesystem::Write
 		break;
 	default:
 		throw ZipOperationError
-			("ZipFilesystem::Write", complete_filename, m_zipfilename);
+			("ZipFilesystem::write", complete_filename, m_zipfilename);
 	}
 
 	switch (zipWriteInFileInZip (m_zipfile, data, length)) {
@@ -397,10 +397,10 @@ void ZipFilesystem::Write
 		break;
 	case ZIP_ERRNO:
 		throw FileError
-			("ZipFilesystem::Write", complete_filename, strerror(errno));
+			("ZipFilesystem::write", complete_filename, strerror(errno));
 	default:
 		throw FileError
-			("ZipFilesystem::Write", complete_filename);
+			("ZipFilesystem::write", complete_filename);
 	}
 
 	zipCloseFileInZip(m_zipfile);

@@ -33,7 +33,7 @@ namespace Widelands {
 #define CURRENT_PACKET_VERSION 2
 
 
-void MapExplorationPacket::Read
+void MapExplorationPacket::read
 	(FileSystem            &       fs,
 	 EditorGameBase      &       egbase,
 	 bool                    const skip,
@@ -68,7 +68,7 @@ void MapExplorationPacket::Read
 						player->m_fields[i].vision = see ? 1 : 0;
 					else if (see)
 						log
-							("MapExplorationPacket::Read: WARNING: Player %u, "
+							("MapExplorationPacket::read: WARNING: Player %u, "
 							 "which does not exist, sees field %u.\n",
 							 j + 1, i);
 				}
@@ -82,7 +82,7 @@ void MapExplorationPacket::Read
 						player->m_fields[i].vision = see ? 1 : 0;
 					else if (see)
 					log
-						("MapExplorationPacket::Read: WARNING: Player %u, "
+						("MapExplorationPacket::read: WARNING: Player %u, "
 						 "which does not exist, sees field %u.\n",
 						 j + 1, i);
 				}
@@ -96,7 +96,7 @@ void MapExplorationPacket::Read
 }
 
 
-void MapExplorationPacket::Write
+void MapExplorationPacket::write
 	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
 {
 	FileWrite fw;
@@ -117,7 +117,7 @@ void MapExplorationPacket::Write
 		fw.Unsigned32(data);
 	}
 
-	fw.Write(fs, "binary/exploration");
+	fw.write(fs, "binary/exploration");
 }
 
 }

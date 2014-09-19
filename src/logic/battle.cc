@@ -83,23 +83,23 @@ void Battle::init (EditorGameBase & egbase)
 
 	m_creationtime = egbase.get_gametime();
 
-	if (Battle* battle = m_first ->getBattle())
+	if (Battle* battle = m_first ->get_battle())
 		battle->cancel(ref_cast<Game, EditorGameBase>(egbase), *m_first);
-	m_first->setBattle(ref_cast<Game, EditorGameBase>(egbase), this);
-	if (Battle* battle = m_second->getBattle())
+	m_first->set_battle(ref_cast<Game, EditorGameBase>(egbase), this);
+	if (Battle* battle = m_second->get_battle())
 		battle->cancel(ref_cast<Game, EditorGameBase>(egbase), *m_second);
-	m_second->setBattle(ref_cast<Game, EditorGameBase>(egbase), this);
+	m_second->set_battle(ref_cast<Game, EditorGameBase>(egbase), this);
 }
 
 
 void Battle::cleanup (EditorGameBase & egbase)
 {
 	if (m_first) {
-		m_first ->setBattle(ref_cast<Game, EditorGameBase>(egbase), nullptr);
+		m_first ->set_battle(ref_cast<Game, EditorGameBase>(egbase), nullptr);
 		m_first  = nullptr;
 	}
 	if (m_second) {
-		m_second->setBattle(ref_cast<Game, EditorGameBase>(egbase), nullptr);
+		m_second->set_battle(ref_cast<Game, EditorGameBase>(egbase), nullptr);
 		m_second = nullptr;
 	}
 
@@ -114,10 +114,10 @@ void Battle::cancel(Game & game, Soldier & soldier)
 {
 	if (&soldier == m_first)  {
 		m_first = nullptr;
-		soldier.setBattle(game, nullptr);
+		soldier.set_battle(game, nullptr);
 	} else if (&soldier == m_second) {
 		m_second = nullptr;
-		soldier.setBattle(game, nullptr);
+		soldier.set_battle(game, nullptr);
 	} else
 		return;
 
@@ -146,12 +146,12 @@ Soldier * Battle::opponent(Soldier& soldier)
 //  Could be, but we need to be able change the animations of the soldiers
 //  easily without unneeded hacks, and this code is not so difficult, only it
 //  had some translations errors
-void Battle::getBattleWork(Game & game, Soldier & soldier)
+void Battle::get_battle_work(Game & game, Soldier & soldier)
 {
 	// Identify what soldier is calling the routine
 	uint8_t const this_soldier_is = &soldier == m_first ? 1 : 2;
 
-	assert(m_first->getBattle() == this || m_second->getBattle() == this);
+	assert(m_first->get_battle() == this || m_second->get_battle() == this);
 
 	//  Created this three 'states' of the battle:
 	// *First time entered, one enters :
@@ -217,7 +217,7 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 	if (bothReadyToFight) {
 		//  Our opponent is waiting for us to fight.
 		// Time for one of us to hurt the other. Which one is on turn is decided
-		// by calculateRound.
+		// by calculate_round.
 		assert
 			((m_readyflags == 1 && this_soldier_is == 2) ||
 			 (m_readyflags == 2 && this_soldier_is == 1));
@@ -227,7 +227,7 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 		assert(m_readyflags == 3);
 
 		// Resolve combat turn
-		calculateRound(game);
+		calculate_round(game);
 
 		// Wake up opponent, so he could update his animation
 		opponent(soldier)->send_signal(game, "wakeup");
@@ -239,7 +239,7 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 		m_readyflags = 0;
 	}
 
-	// The function calculateRound inverts value of m_first_strikes, so
+	// The function calculate_round inverts value of m_first_strikes, so
 	// attacker will be the m_first when m_first_strikes = false and
 	// attacker will be m_second when m_first_strikes = true
 	molog
@@ -293,7 +293,7 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 		(game, soldier.descr().get_rand_anim(game, what_anim.c_str()), 1000);
 }
 
-void Battle::calculateRound(Game & game)
+void Battle::calculate_round(Game & game)
 {
 	assert(!m_damage);
 

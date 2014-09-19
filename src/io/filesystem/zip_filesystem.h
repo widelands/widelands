@@ -44,7 +44,7 @@ public:
 
 	void * Load(const std::string & fname, size_t & length) override;
 
-	virtual void Write
+	virtual void write
 		(const std::string & fname, void const * data, int32_t length) override;
 	void EnsureDirectoryExists(const std::string & dirname) override;
 	void   MakeDirectory      (const std::string & dirname) override;

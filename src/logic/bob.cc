@@ -510,7 +510,7 @@ struct BlockedTracker {
 		}
 	}
 
-	bool isBlocked(const FCoords & field) {
+	bool is_blocked(const FCoords & field) {
 		if (disabled)
 			return false;
 
@@ -522,7 +522,7 @@ struct BlockedTracker {
 		if (it != nodes.end())
 			return it->second;
 
-		bool const blocked = m_bob.checkNodeBlocked(m_game, field, false);
+		bool const blocked = m_bob.check_node_blocked(m_game, field, false);
 		nodes.insert(std::make_pair(cd, blocked));
 		if (blocked)
 			++nrblocked;
@@ -546,9 +546,9 @@ struct CheckStepBlocked {
 		if (end == m_tracker.m_finaldest)
 			return true;
 
-		return !m_tracker.isBlocked(end);
+		return !m_tracker.is_blocked(end);
 	}
-	bool reachabledest(Map &, FCoords) const {return true;}
+	bool reachable_dest(Map &, FCoords) const {return true;}
 
 	BlockedTracker & m_tracker;
 };
@@ -665,10 +665,10 @@ bool Bob::start_task_movepath
 	if (curidx != index) {
 		if (curidx < index) {
 			path.truncate(index);
-			path.starttrim(curidx);
+			path.trim_start(curidx);
 		} else {
 			path.truncate(curidx);
-			path.starttrim(index);
+			path.trim_start(index);
 			path.reverse();
 		}
 		start_task_movepath(game, path, anims, forceonlast, only_step);
@@ -893,9 +893,9 @@ int32_t Bob::start_walk
 			return -1;
 	}
 
-	//  Always call checkNodeBlocked, because it might communicate with other
+	//  Always call check_node_blocked, because it might communicate with other
 	//  bobs (as is the case for soldiers on the battlefield).
-	if (checkNodeBlocked(game, newnode, true) && !force)
+	if (check_node_blocked(game, newnode, true) && !force)
 		return -2;
 
 	// Move is go
@@ -913,7 +913,7 @@ int32_t Bob::start_walk
 }
 
 
-bool Bob::checkNodeBlocked(Game & game, const FCoords & field, bool)
+bool Bob::check_node_blocked(Game & game, const FCoords & field, bool)
 {
 	// Battles always block movement!
 	std::vector<Bob *> soldiers;
@@ -923,7 +923,7 @@ bool Bob::checkNodeBlocked(Game & game, const FCoords & field, bool)
 	if (!soldiers.empty()) {
 		for (Bob * temp_bob : soldiers) {
 			upcast(Soldier, soldier, temp_bob);
-			if (soldier->getBattle())
+			if (soldier->get_battle())
 				return true;
 		}
 	}
@@ -1094,12 +1094,12 @@ void Bob::Loader::load(FileRead & fr)
 		bob.set_owner(owner);
 	}
 
-	bob.set_position(egbase(), ReadCoords32(&fr));
+	bob.set_position(egbase(), read_coords_32(&fr));
 
 	std::string animname = fr.CString();
 	bob.m_anim = animname.size() ? bob.descr().get_animation(animname) : 0;
 	bob.m_animstart = fr.Signed32();
-	bob.m_walking = static_cast<WalkingDir>(ReadDirection8_allow_null(&fr));
+	bob.m_walking = static_cast<WalkingDir>(read_direction_8_allow_null(&fr));
 	if (bob.m_walking) {
 		bob.m_walkstart = fr.Signed32();
 		bob.m_walkend = fr.Signed32();
@@ -1121,7 +1121,7 @@ void Bob::Loader::load(FileRead & fr)
 		state.ivar3 = fr.Signed32();
 		loadstate.objvar1 = fr.Unsigned32();
 		state.svar1 = fr.CString();
-		state.coords = ReadCoords32_allow_null(&fr, egbase().map().extent());
+		state.coords = read_coords_32_allow_null(&fr, egbase().map().extent());
 
 		if (fr.Unsigned8()) {
 			uint32_t anims[6];
@@ -1201,13 +1201,13 @@ void Bob::save
 	fw.Unsigned8(BOB_SAVEGAME_VERSION);
 
 	fw.Unsigned8(m_owner ? m_owner->player_number() : 0);
-	WriteCoords32(&fw, m_position);
+	write_coords_32(&fw, m_position);
 
 	// m_linkpprev and m_linknext are recreated automatically
 
 	fw.CString(m_anim ? descr().get_animation_name(m_anim) : "");
 	fw.Signed32(m_animstart);
-	WriteDirection8_allow_null(&fw, m_walking);
+	write_direction_8_allow_null(&fw, m_walking);
 	if (m_walking) {
 		fw.Signed32(m_walkstart);
 		fw.Signed32(m_walkend);
@@ -1231,7 +1231,7 @@ void Bob::save
 		}
 		fw.CString(state.svar1);
 
-		WriteCoords32(&fw, state.coords);
+		write_coords_32(&fw, state.coords);
 
 		if (state.diranims) {
 			fw.Unsigned8(1);

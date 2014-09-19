@@ -78,7 +78,7 @@ void SinglePlayerGameController::think()
 				if (!m_computerplayers[p - 1])
 					m_computerplayers[p - 1] =
 						ComputerPlayer::getImplementation
-							(plr->getAI())->instantiate(m_game, p);
+							(plr->get_ai())->instantiate(m_game, p);
 				m_computerplayers[p - 1]->think();
 			}
 	}

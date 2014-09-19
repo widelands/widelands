@@ -35,7 +35,7 @@ namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 1
 
-void MapExtradataPacket::Read(FileSystem& fs, bool const skip) {
+void MapExtradataPacket::read(FileSystem& fs, bool const skip) {
 	if (skip)
 		return;
 
@@ -83,7 +83,7 @@ void MapExtradataPacket::Read(FileSystem& fs, bool const skip) {
 }
 
 
-void MapExtradataPacket::Write
+void MapExtradataPacket::write
 	(FileSystem & fs, EditorGameBase & egbase)
 {
 	Profile prof;
@@ -97,7 +97,7 @@ void MapExtradataPacket::Write
 		for (const std::string& picture : map_fs->ListDirectory("pics")) {
 			size_t length;
 			void* input_data = map_fs->Load(picture, length);
-			fs.Write(picture, input_data, length);
+			fs.write(picture, input_data, length);
 			free(input_data);
 		}
 	}
