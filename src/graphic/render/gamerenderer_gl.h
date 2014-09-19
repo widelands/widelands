@@ -54,6 +54,7 @@ private:
 	GLuint indices_buffer_;
 	GLuint terrain_program_data_;
 	GLuint terrain_program_;
+	GLint texture_location_;
 
 
 	struct BaseVertex {

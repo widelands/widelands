@@ -45,19 +45,18 @@ using namespace Widelands;
 namespace  {
 
 constexpr int kAttribVertexPosition = 0;
-constexpr int kAttribVertexColor = 1;
+constexpr int kAttribVertexTexturePosition = 1;
 constexpr int kAttribVertexHeight = 2;
 
 struct TerrainProgramData {
 	float x;
 	float y;
 	float height;
-	float r;
-	float g;
-	float b;
+	float texture_x;
+	float texture_y;
 };
 
-static_assert(sizeof(TerrainProgramData) == 24, "Wrong padding.");
+static_assert(sizeof(TerrainProgramData) == 20, "Wrong padding.");
 
 // NOCOM(#sirver): should not load from a file
 GLuint load_shader(GLenum type, const std::string& source_file) {
@@ -104,11 +103,9 @@ GLuint compile_gl_program(const std::string& vertex_shader_file,
 		throw wexception("Could not create GL program.");
 	}
 
-	log("#sirver Compiling vertex_shader\n");
 	const GLuint vertex_shader = load_shader(GL_VERTEX_SHADER, vertex_shader_file);
 	glAttachShader(program_object, vertex_shader);
 
-	log("#sirver Compiling fragment_shader\n");
 	const GLuint fragment_shader = load_shader(GL_FRAGMENT_SHADER, fragment_shader_file);
 	glAttachShader(program_object, fragment_shader);
 	return program_object;
@@ -221,12 +218,16 @@ void GameRendererGL::initialize() {
 
 	handle_glerror();
 	glBindAttribLocation(terrain_program_, kAttribVertexPosition, "position");
-	glBindAttribLocation(terrain_program_, kAttribVertexColor, "color");
+	handle_glerror();
+	glBindAttribLocation(terrain_program_, kAttribVertexTexturePosition, "texture_position");
+	handle_glerror();
 	glBindAttribLocation(terrain_program_, kAttribVertexHeight, "height");
 	handle_glerror();
 
 	link_gl_program(terrain_program_);
+	handle_glerror();
 
+	texture_location_ = glGetUniformLocation(terrain_program_, "tex");
 	handle_glerror();
 
 	do_initialize_ = false;
@@ -237,27 +238,31 @@ void GameRendererGL::draw_terrain_triangles() {
 	const World& world = m_egbase->world();
 
 	std::vector<TerrainProgramData> vertices;
-	std::vector<uint16_t> indices;
 
+	std::map<int, std::vector<uint16_t>> terrains_to_indices;
 	int current_index = 0;
-	const auto add_vertex = [this, &vertices, &indices, &map, &current_index](
-	   int fx, int fy, const RGBColor& vertex_color) {
+	const auto add_vertex = [this, &vertices, &terrains_to_indices, &map, &current_index](
+	   int fx, int fy, int terrain_index) {
 		Coords coords(fx, fy);
 
 		TerrainProgramData v;
 		int x, y;
 		MapviewPixelFunctions::get_basepix(coords, x, y);
+		v.texture_x = float(x) / TEXTURE_WIDTH;
+		v.texture_y = float(y) / TEXTURE_HEIGHT;
 		v.x = x + m_surface_offset.x;
 		v.y = y + m_surface_offset.y;
 
 		map.normalize_coords(coords);
 		const FCoords fcoords = map.get_fcoords(coords);
 		v.height = fcoords.field->get_height();
-		v.r = vertex_color.r / 255.;
-		v.g = vertex_color.g / 255.;
-		v.b = vertex_color.b / 255.;
 
-		indices.push_back(current_index++);
+		// NOCOM(#sirver): incorporate brightness.
+		// uint8_t brightness = field_brightness(fcoords);
+		// vtx.color[0] = vtx.color[1] = vtx.color[2] = brightness;
+		// vtx.color[3] = 255;
+
+		terrains_to_indices[terrain_index].push_back(current_index++);
 		vertices.push_back(v);
 	};
 
@@ -267,63 +272,65 @@ void GameRendererGL::draw_terrain_triangles() {
 			map.normalize_coords(ncoords);
 			const FCoords fcoords = map.get_fcoords(ncoords);
 
-			const int8_t brightness = fcoords.field->get_brightness();
+			// Bottom triangle.
+			const int terrain_d = fcoords.field->terrain_d();
+			add_vertex(fx, fy, terrain_d);
+			add_vertex(fx + (fy & 1), fy + 1, terrain_d); // bottom right neighbor
+			add_vertex(fx + (fy & 1) - 1, fy + 1, terrain_d); // bottom left neighbor
 
 			// Right triangle.
-			const RGBColor color_r =
-			   g_gr->get_maptexture_data(world.terrain_descr(fcoords.field->terrain_r()).get_texture())
-			      ->get_minimap_color(brightness);
-			add_vertex(fx, fy, color_r);
-			add_vertex(fx + 1, fy, color_r); // right neighbor
-			add_vertex(fx + (fy & 1), fy + 1, color_r); // bottom right neighbor
+			const int terrain_r = fcoords.field->terrain_r();
+			add_vertex(fx, fy, terrain_r);
+			add_vertex(fx + (fy & 1), fy + 1, terrain_r); // bottom right neighbor
+			add_vertex(fx + 1, fy, terrain_r); // right neighbor
 
-			// Bottom triangle.
-			const RGBColor color_d =
-			   g_gr->get_maptexture_data(world.terrain_descr(fcoords.field->terrain_d()).get_texture())
-			      ->get_minimap_color(brightness);
-			add_vertex(fx, fy, color_d);
-			add_vertex(fx + (fy & 1), fy + 1, color_d); // bottom right neighbor
-			add_vertex(fx + (fy & 1) - 1, fy + 1, color_d); // bottom left neighbor
 		}
 	}
 
 	// Use the program object
 	glUseProgram(terrain_program_);
 
-	assert(vertices.size() == indices.size());
-
 	glBindBuffer(GL_ARRAY_BUFFER, terrain_program_data_);
 	handle_glerror();
 	glBufferData(
 		GL_ARRAY_BUFFER, sizeof(TerrainProgramData) * vertices.size(), vertices.data(), GL_STREAM_DRAW);
 
-	const auto set_attrib_pointer = [](const int vertex_index, int num_items, int offset) {
+	const auto set_attrib_pointer = [](const int vertex_index, int num_items, int offset, int normalized) {
 		glEnableVertexAttribArray(vertex_index);
 		glVertexAttribPointer(vertex_index,
 		                      num_items,
 		                      GL_FLOAT,
-		                      GL_FALSE,
+		                      normalized,
 		                      sizeof(TerrainProgramData),
 		                      reinterpret_cast<void*>(offset));
 	};
 
 	// Setup vertex attribute pointers.
-	set_attrib_pointer(kAttribVertexPosition, 2, offsetof(TerrainProgramData, x));
-	set_attrib_pointer(kAttribVertexColor, 3, offsetof(TerrainProgramData, r));
-	set_attrib_pointer(kAttribVertexHeight, 1, offsetof(TerrainProgramData, height));
+	set_attrib_pointer(kAttribVertexPosition, 2, offsetof(TerrainProgramData, x), GL_FALSE);
+	set_attrib_pointer(kAttribVertexTexturePosition, 2, offsetof(TerrainProgramData, texture_x), GL_TRUE);
+	set_attrib_pointer(kAttribVertexHeight, 1, offsetof(TerrainProgramData, height), GL_FALSE);
 
 	// Which triangles to draw?
-	handle_glerror();
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indices_buffer_);
-	handle_glerror();
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER,
-					 sizeof(GL_UNSIGNED_SHORT) * indices.size(),
-					 indices.data(),
-					 GL_STREAM_DRAW);
-	handle_glerror();
+	for (const auto& pair : terrains_to_indices) {
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(
+		   GL_TEXTURE_2D,
+		   g_gr->get_maptexture_data(world.terrain_descr(pair.first).get_texture())->getTexture());
+		// Set the sampler texture unit to 0
+		glUniform1i(texture_location_, 0);
 
-	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, 0 /* offset */);
-	handle_glerror();
+		handle_glerror();
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indices_buffer_);
+		handle_glerror();
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER,
+						 sizeof(GL_UNSIGNED_SHORT) * pair.second.size(),
+						 pair.second.data(),
+						 GL_STREAM_DRAW);
+		handle_glerror();
+
+		glDrawElements(GL_TRIANGLES, pair.second.size(), GL_UNSIGNED_SHORT, 0 /* offset */);
+		handle_glerror();
+	}
 
 	// Release Program object.
 	glUseProgram(0);
@@ -367,10 +374,10 @@ void GameRendererGL::draw() {
 		 m_rect.w, m_rect.h);
 	glEnable(GL_SCISSOR_TEST);
 
-	draw_terrain_triangles();
+	// draw_terrain_triangles();
 
-	// prepare_terrain_base();
-	// draw_terrain_base();
+	prepare_terrain_base();
+	draw_terrain_base();
 
 	// if (g_gr->caps().gl.multitexture && g_gr->caps().gl.max_tex_combined >= 2) {
 		// prepare_terrain_dither();
@@ -389,20 +396,24 @@ void GameRendererGL::compute_basevertex(const Coords & coords, vertex & vtx) con
 	const Map & map = m_egbase->map();
 	Coords ncoords(coords);
 	map.normalize_coords(ncoords);
-	FCoords fcoords = map.get_fcoords(ncoords);
+	const FCoords fcoords = map.get_fcoords(ncoords);
 	Point pix;
 	MapviewPixelFunctions::get_basepix(coords, pix.x, pix.y);
-	pix.y -= fcoords.field->get_height() * HEIGHT_FACTOR;
-	pix += m_surface_offset;
-	vtx.x = pix.x;
-	vtx.y = pix.y;
-	Point tex;
-	MapviewPixelFunctions::get_basepix(coords, tex.x, tex.y);
-	vtx.tcx = float(tex.x) / TEXTURE_WIDTH;
-	vtx.tcy = float(tex.y) / TEXTURE_HEIGHT;
-	uint8_t brightness = field_brightness(fcoords);
-	vtx.color[0] = vtx.color[1] = vtx.color[2] = brightness;
-	vtx.color[3] = 255;
+	{
+		vtx.tcx = float(pix.x) / TEXTURE_WIDTH;
+		vtx.tcy = float(pix.y) / TEXTURE_HEIGHT;
+	}
+	{
+		pix.y -= fcoords.field->get_height() * HEIGHT_FACTOR;
+		pix += m_surface_offset;
+		vtx.x = pix.x;
+		vtx.y = pix.y;
+	}
+	{
+		uint8_t brightness = field_brightness(fcoords);
+		vtx.color[0] = vtx.color[1] = vtx.color[2] = brightness;
+		vtx.color[3] = 255;
+	}
 }
 
 void GameRendererGL::count_terrain_base(TerrainIndex ter)

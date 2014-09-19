@@ -3,8 +3,12 @@
 #version 120
 
 attribute vec2 position;
-attribute vec3 color;
+attribute vec2 texture_position;
 attribute float height;
+
+uniform sampler2D tex;
+
+varying vec2 o_texture_position;
 
 #define HEIGHT_FACTOR 5
 
@@ -12,10 +16,9 @@ attribute float height;
 
 /* uniform float scale; */
 /* uniform mat3 model_matrix; */
-varying vec4 output_color;
 
 void main() {
-	output_color = vec4(color, 1.);
+	o_texture_position = texture_position;
 	vec4 p = vec4(position, 0., 1.);
 	p.y -= height * HEIGHT_FACTOR;
 	gl_Position = gl_ProjectionMatrix * p;
