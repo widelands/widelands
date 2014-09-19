@@ -29,6 +29,21 @@ GLuint GLSurfaceTexture::gl_framebuffer_id_;
 
 static bool use_arb_;
 
+namespace  {
+
+// Return the smallest power of two greater than or equal to \p x.
+uint32_t next_power_of_two(uint32_t x)
+{
+	uint32_t pot = 1;
+
+	while (pot < x)
+		pot *= 2;
+
+	return pot;
+}
+
+}  // namespace
+
 /**
  * Initial global resources needed for fast offscreen rendering.
  */

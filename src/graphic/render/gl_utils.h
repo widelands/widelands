@@ -27,7 +27,6 @@
 
 struct SDL_PixelFormat;
 
-uint32_t next_power_of_two(uint32_t x);
 const SDL_PixelFormat & gl_rgba_format();
 GLenum _handle_glerror(const char * file, unsigned int line);
 

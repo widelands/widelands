@@ -23,19 +23,6 @@
 #include "base/log.h"
 
 /**
- * Return the smallest power of two greater than or equal to \p x.
- */
-uint32_t next_power_of_two(uint32_t x)
-{
-	uint32_t pot = 1;
-
-	while (pot < x)
-		pot *= 2;
-
-	return pot;
-}
-
-/**
  * \return the standard 32-bit RGBA format that we use in OpenGL
  */
 const SDL_PixelFormat & gl_rgba_format()
