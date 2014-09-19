@@ -157,7 +157,7 @@ void GameMainMenuSaveGame::selected(uint32_t) {
 	gl.preload_game(gpdp); //  This has worked before, no problem
 
 	{
-		m_editbox->setText(FileSystem::FS_FilenameWoExt(name.c_str()));
+		m_editbox->set_text(FileSystem::FS_FilenameWoExt(name.c_str()));
 	}
 	m_button_ok->set_enabled(true);
 
@@ -275,14 +275,14 @@ struct SaveWarnMessageBox : public UI::WLMessageBox {
 	}
 
 
-	void pressedYes() override
+	void pressed_yes() override
 	{
 		g_fs->Unlink(m_filename);
 		dosave(menu_save_game().igbase(), m_filename);
 		menu_save_game().die();
 	}
 
-	void pressedNo() override
+	void pressed_no() override
 	{
 		die();
 	}
@@ -334,14 +334,14 @@ struct DeletionMessageBox : public UI::WLMessageBox {
 		m_filename(filename)
 	{}
 
-	void pressedYes() override
+	void pressed_yes() override
 	{
 		g_fs->Unlink(m_filename);
 		ref_cast<GameMainMenuSaveGame, UI::Panel>(*get_parent()).fill_list();
 		die();
 	}
 
-	void pressedNo() override
+	void pressed_no() override
 	{
 		die();
 	}

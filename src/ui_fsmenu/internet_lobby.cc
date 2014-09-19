@@ -147,7 +147,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	m_maxclients.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	maxclients  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	std::string server = s.get_string("servername", "");
-	servername  .setText (server);
+	servername  .set_text (server);
 	servername  .changed.connect
 		(boost::bind(&FullscreenMenuInternetLobby::change_servername, this));
 	servername  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
@@ -220,7 +220,7 @@ void FullscreenMenuInternetLobby::connectToMetaserver()
 	if (InternetGaming::ref().login(nickname, password, reg, metaserver, port))
 	{
 		// Update of server spinbox
-		maxclients.setInterval(1, InternetGaming::ref().max_clients());
+		maxclients.set_interval(1, InternetGaming::ref().max_clients());
 	}
 }
 

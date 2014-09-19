@@ -147,7 +147,7 @@ void EditorPlayerMenu::update() {
 			m_plr_names[p - 1]->changed.connect
 				(boost::bind(&EditorPlayerMenu::name_changed, this, p - 1));
 			posx += 140 + spacing;
-			m_plr_names[p - 1]->setText(map.get_scenario_player_name(p));
+			m_plr_names[p - 1]->set_text(map.get_scenario_player_name(p));
 		}
 
 		if (!m_plr_set_tribes_buts[p - 1]) {
@@ -372,10 +372,10 @@ void EditorPlayerMenu::name_changed(int32_t m) {
 	Widelands::Map & map = menu.egbase().map();
 	if (text == "") {
 		text = map.get_scenario_player_name(m + 1);
-		m_plr_names[m]->setText(text);
+		m_plr_names[m]->set_text(text);
 	}
 	map.set_scenario_player_name(m + 1, text);
-	m_plr_names[m]->setText(map.get_scenario_player_name(m + 1));
+	m_plr_names[m]->set_text(map.get_scenario_player_name(m + 1));
 	menu.set_need_save(true);
 }
 

@@ -72,7 +72,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 			 posx, posy + get_inner_h() - spacing - offsy - 60 + 3,
 			 get_inner_w() / 2 - spacing, 20,
 			 g_gr->images().get("pics/but1.png"));
-	m_editbox->setText(parent.egbase().map().get_name());
+	m_editbox->set_text(parent.egbase().map().get_name());
 	m_editbox->changed.connect(boost::bind(&MainMenuSaveMap::edit_box_changed, this));
 
 	posx = get_inner_w() / 2 + spacing;
@@ -224,7 +224,7 @@ void MainMenuSaveMap::clicked_item(uint32_t) {
 			ml->preload_map(true); // This has worked before, no problem
 		}
 
-		m_editbox->setText(FileSystem::FS_Filename(name));
+		m_editbox->set_text(FileSystem::FS_Filename(name));
 
 		m_name  ->set_text(map.get_name       ());
 		m_author->set_text(map.get_author     ());

@@ -41,7 +41,7 @@ GameChatPanel::GameChatPanel
 	chatbox.set_scrollmode(UI::MultilineTextarea::ScrollLog);
 	editbox.ok.connect(boost::bind(&GameChatPanel::keyEnter, this));
 	editbox.cancel.connect(boost::bind(&GameChatPanel::keyEscape, this));
-	editbox.setAlign(UI::Align_Left);
+	editbox.set_align(UI::Align_Left);
 	editbox.activate_history(true);
 
 	set_handle_mouse(true);
@@ -106,12 +106,12 @@ void GameChatPanel::keyEnter()
 	if (str.size())
 		m_chat.send(str);
 
-	editbox.setText("");
+	editbox.set_text("");
 	sent();
 }
 
 void GameChatPanel::keyEscape()
 {
-	editbox.setText("");
+	editbox.set_text("");
 	aborted();
 }

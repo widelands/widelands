@@ -43,7 +43,7 @@ struct FullscreenMenuInternetLobby : public FullscreenMenuBase {
 
 	/// \returns the maximum number of clients that may connect
 	int32_t get_maxclients() {
-		return maxclients.getValue();
+		return maxclients.get_value();
 	}
 
 private:

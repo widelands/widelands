@@ -69,7 +69,7 @@ private:
  * the given command string, and the log of messages contains a log
  * of console messages.
  */
-ChatProvider * getChatProvider();
+ChatProvider * get_chat_provider();
 
 /**
  * Write some output on the console.
@@ -78,7 +78,7 @@ ChatProvider * getChatProvider();
  * The newline is appended automatically.
  *
  * \note This is not the same as sending a message via
- * \ref getChatProvider(). Sending a message via \ref getChatProvider()
+ * \ref get_chat_provider(). Sending a message via \ref get_chat_provider()
  * executes a command, while this function writes to the console.
  */
 void write(const std::string & text);

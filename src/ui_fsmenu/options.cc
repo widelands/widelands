@@ -393,9 +393,9 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	os.fx                    = m_fx.get_state();
 	if (m_language_list.has_selection())
 		os.language      = m_language_list.get_selected();
-	os.autosave              = m_sb_autosave.getValue();
-	os.maxfps                = m_sb_maxfps.getValue();
-	os.remove_replays        = m_sb_remove_replays.getValue();
+	os.autosave              = m_sb_autosave.get_value();
+	os.maxfps                = m_sb_maxfps.get_value();
+	os.remove_replays        = m_sb_remove_replays.get_value();
 
 	return os;
 }
@@ -599,8 +599,8 @@ OptionsCtrl::OptionsStruct FullscreenMenuAdvancedOptions::get_values() {
 	os.message_sound        = m_message_sound.get_state();
 	os.nozip                = m_nozip.get_state();
 	os.ui_font              = m_ui_font_list.get_selected();
-	os.panel_snap_distance  = m_sb_dis_panel.getValue();
-	os.border_snap_distance = m_sb_dis_border.getValue();
+	os.panel_snap_distance  = m_sb_dis_panel.get_value();
+	os.border_snap_distance = m_sb_dis_border.get_value();
 	os.remove_syncstreams   = m_remove_syncstreams.get_state();
 	os.opengl               = m_opengl.get_state();
 	os.transparent_chat     = m_transparent_chat.get_state();

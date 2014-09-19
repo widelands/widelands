@@ -950,7 +950,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_keysym const code)
 		case SDLK_F6:
 			if (get_display_flag(dfDebug)) {
 				GameChatMenu::create_script_console(
-					this, m_debugconsole, *DebugConsole::getChatProvider());
+					this, m_debugconsole, *DebugConsole::get_chat_provider());
 			}
 			return true;
 #endif

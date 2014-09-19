@@ -45,13 +45,13 @@ struct SpinBox : public Panel {
 		 Align align = Align_Center);
 	~SpinBox();
 
-	void setValue(int32_t);
-	void setInterval(int32_t min, int32_t max);
-	void setUnit(const std::string &);
-	int32_t getValue();
-	std::string getUnit();
+	void set_value(int32_t);
+	void set_interval(int32_t min, int32_t max);
+	void set_unit(const std::string &);
+	int32_t get_value();
+	std::string get_unit();
 	Align align() const;
-	void setAlign(Align);
+	void set_align(Align);
 	void set_font(const std::string &, int32_t, RGBColor);
 	void set_textstyle(const TextStyle & style);
 	void add_replacement(int32_t, std::string);
@@ -60,8 +60,8 @@ struct SpinBox : public Panel {
 
 private:
 	void update();
-	void changeValue(int32_t);
-	int32_t findReplacement(int32_t value);
+	void change_value(int32_t);
+	int32_t find_replacement(int32_t value);
 
 	const bool  m_big;
 

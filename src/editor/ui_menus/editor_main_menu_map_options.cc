@@ -116,8 +116,8 @@ void MainMenuMapOptions::update() {
 	char buf[200];
 	sprintf(buf, "%ix%i", map.get_width(), map.get_height());
 	m_size->set_text(buf);
-	m_author->setText(map.get_author());
-	m_name  ->setText(map.get_name());
+	m_author->set_text(map.get_author());
+	m_name  ->set_text(map.get_name());
 	sprintf(buf, "%i", map.get_nrplayers());
 	m_nrplayers->set_text(buf);
 	m_descr ->set_text(map.get_description());

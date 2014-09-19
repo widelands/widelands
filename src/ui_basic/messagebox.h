@@ -72,9 +72,9 @@ struct WLMessageBox : public Window {
 	bool handle_key(bool down, SDL_keysym code) override;
 
 protected:
-	virtual void pressedOk();
-	virtual void pressedYes();
-	virtual void pressedNo();
+	virtual void pressed_ok();
+	virtual void pressed_yes();
+	virtual void pressed_no();
 
 private:
 	std::unique_ptr<WLMessageBoxImpl> d;

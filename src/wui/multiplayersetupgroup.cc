@@ -129,7 +129,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 					type->set_tooltip(buf2);
 					type->set_visible(true);
 				} else {
-					type_icon->setIcon(g_gr->images().get(buf));
+					type_icon->set_icon(g_gr->images().get(buf));
 					type_icon->set_tooltip(buf2);
 					type_icon->set_visible(true);
 				}

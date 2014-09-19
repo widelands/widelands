@@ -71,8 +71,8 @@ Window(&parent, "login_box", 0, 0, 500, 210, _("Metaserver login"))
 	cancelbtn->sigclicked.connect(boost::bind(&LoginBox::pressedCancel, boost::ref(*this)));
 
 	Section & s = g_options.pull_section("global");
-	eb_nickname->setText(s.get_string("nickname", _("nobody")));
-	eb_password->setText(s.get_string("password", ""));
+	eb_nickname->set_text(s.get_string("nickname", _("nobody")));
+	eb_password->set_text(s.get_string("password", ""));
 	cb_register->set_state(s.get_bool("registered", false));
 }
 

@@ -183,9 +183,9 @@ void FullscreenMenuLoadGame::no_selection()
 	m_tagametime.set_text(std::string());
 	m_ta_players.set_text(std::string());
 	m_ta_win_condition.set_text(std::string());
-	m_minimap_icon.setIcon(nullptr);
+	m_minimap_icon.set_icon(nullptr);
 	m_minimap_icon.set_visible(false);
-	m_minimap_icon.setNoFrame();
+	m_minimap_icon.set_no_frame();
 	m_minimap_image.reset();
 }
 
@@ -248,9 +248,9 @@ void FullscreenMenuLoadGame::map_selected(uint32_t selected)
 
 	std::string minimap_path = gpdp.get_minimap_path();
 	// Delete former image
-	m_minimap_icon.setIcon(nullptr);
+	m_minimap_icon.set_icon(nullptr);
 	m_minimap_icon.set_visible(false);
-	m_minimap_icon.setNoFrame();
+	m_minimap_icon.set_no_frame();
 	m_minimap_image.reset();
 	// Load the new one
 	if (!minimap_path.empty()) {
@@ -272,9 +272,9 @@ void FullscreenMenuLoadGame::map_selected(uint32_t selected)
 			// from resize that is handled by the cache. It is still linked to our
 			// surface
 			m_minimap_icon.set_size(w, h);
-			m_minimap_icon.setFrame(UI_FONT_CLR_FG);
+			m_minimap_icon.set_frame(UI_FONT_CLR_FG);
 			m_minimap_icon.set_visible(true);
-			m_minimap_icon.setIcon(resized);
+			m_minimap_icon.set_icon(resized);
 		} catch (const std::exception & e) {
 			log("Failed to load the minimap image : %s\n", e.what());
 		}
