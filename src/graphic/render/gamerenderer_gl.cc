@@ -46,16 +46,14 @@ namespace  {
 
 constexpr int kAttribVertexPosition = 0;
 constexpr int kAttribVertexTexturePosition = 1;
-constexpr int kAttribVertexHeight = 2;
 
 struct TerrainProgramData {
 	float x;
 	float y;
-	float height;
 	float texture_x;
 	float texture_y;
 };
-static_assert(sizeof(TerrainProgramData) == 20, "Wrong padding.");
+static_assert(sizeof(TerrainProgramData) == 16, "Wrong padding.");
 
 
 // Useful: http://www.cs.unh.edu/~cs770/docs/glsl-1.20-quickref.pdf
@@ -65,16 +63,12 @@ const char kTerrainVertexShader[] = R"(
 
 attribute vec2 in_position;
 attribute vec2 in_texture_position;
-attribute float height;
 
 varying vec2 o_texture_position;
-
-#define HEIGHT_FACTOR 5
 
 void main() {
 	o_texture_position = in_texture_position;
 	vec4 p = vec4(in_position, 0., 1.);
-	p.y -= height * HEIGHT_FACTOR;
 	gl_Position = gl_ProjectionMatrix * p;
 }
 )";
@@ -254,8 +248,6 @@ void GameRendererGL::initialize() {
 	handle_glerror();
 	glBindAttribLocation(terrain_program_, kAttribVertexTexturePosition, "in_texture_position");
 	handle_glerror();
-	glBindAttribLocation(terrain_program_, kAttribVertexHeight, "height");
-	handle_glerror();
 
 	link_gl_program(terrain_program_);
 	handle_glerror();
@@ -288,7 +280,9 @@ void GameRendererGL::draw_terrain_triangles() {
 
 		map.normalize_coords(coords);
 		const FCoords fcoords = map.get_fcoords(coords);
-		v.height = fcoords.field->get_height();
+
+		// Correct for the height of the field.
+		v.y -= fcoords.field->get_height() * HEIGHT_FACTOR;
 
 		// NOCOM(#sirver): incorporate brightness.
 		// uint8_t brightness = field_brightness(fcoords);
@@ -341,7 +335,6 @@ void GameRendererGL::draw_terrain_triangles() {
 	// Setup vertex attribute pointers.
 	set_attrib_pointer(kAttribVertexPosition, 2, offsetof(TerrainProgramData, x), GL_FALSE);
 	set_attrib_pointer(kAttribVertexTexturePosition, 2, offsetof(TerrainProgramData, texture_x), GL_TRUE);
-	set_attrib_pointer(kAttribVertexHeight, 1, offsetof(TerrainProgramData, height), GL_FALSE);
 
 	// Which triangles to draw?
 	for (const auto& pair : terrains_to_indices) {
