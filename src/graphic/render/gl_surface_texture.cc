@@ -209,7 +209,7 @@ void GLSurfaceTexture::init(uint16_t w, uint16_t h)
 }
 
 const SDL_PixelFormat & GLSurfaceTexture::format() const {
-	return gl_rgba_format();
+	return Gl::gl_rgba_format();
 }
 
 void GLSurfaceTexture::lock(LockMode mode) {

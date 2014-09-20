@@ -18,9 +18,37 @@
 
 #include "graphic/render/gl_utils.h"
 
+#include <memory>
+#include <string>
+
 #include <SDL_video.h>
 
 #include "base/log.h"
+#include "base/wexception.h"
+
+namespace Gl {
+
+namespace {
+
+// Returns a readable string for a GL_*_SHADER 'type' for debug output.
+std::string shader_to_string(GLenum type) {
+	if (type == GL_VERTEX_SHADER) {
+		return "vertex";
+	}
+	if (type == GL_FRAGMENT_SHADER) {
+		return "fragment";
+	}
+	return "unknown";
+}
+
+// Creates one OpenGL buffer.
+GLuint create_buffer() {
+	GLuint buffer = 0;
+	glGenBuffers(1, &buffer);
+	return buffer;
+}
+
+}  // namespace
 
 /**
  * \return the standard 32-bit RGBA format that we use in OpenGL
@@ -85,3 +113,108 @@ GLenum _handle_glerror(const char * file, unsigned int line)
 #endif
 	return err;
 }
+
+// Thin wrapper around a Shader object to ensure proper cleanup.
+class Shader {
+public:
+	Shader(GLenum type);
+	~Shader();
+
+	GLuint object() const {
+		return shader_object_;
+	}
+
+	// Compiles 'source'. Throws an exception on error.
+	void compile(const char* source);
+
+private:
+	const GLenum type_;
+	const GLuint shader_object_;
+
+	DISALLOW_COPY_AND_ASSIGN(Shader);
+};
+
+Shader::Shader(GLenum type) : type_(type), shader_object_(glCreateShader(type)) {
+	if (!shader_object_) {
+		throw wexception("Could not create %s shader.", shader_to_string(type).c_str());
+	}
+}
+
+Shader::~Shader() {
+	if (shader_object_) {
+		glDeleteShader(shader_object_);
+	}
+}
+
+void Shader::compile(const char* source) {
+	glShaderSource(shader_object_, 1, &source, nullptr);
+
+	glCompileShader(shader_object_);
+	GLint compiled;
+	glGetShaderiv(shader_object_, GL_COMPILE_STATUS, &compiled);
+	if (!compiled) {
+		GLint infoLen = 0;
+		glGetShaderiv(shader_object_, GL_INFO_LOG_LENGTH, &infoLen);
+		if (infoLen > 1) {
+			std::unique_ptr<char[]> infoLog(new char[infoLen]);
+			glGetShaderInfoLog(shader_object_, infoLen, NULL, infoLog.get());
+			throw wexception(
+			   "Error compiling %s shader:\n%s", shader_to_string(type_).c_str(), infoLog.get());
+		}
+	}
+}
+
+Buffer::Buffer() : buffer_object_(create_buffer()) {
+	if (!buffer_object_) {
+		throw wexception("Could not create GL program.");
+	}
+}
+
+Buffer::~Buffer() {
+	if (buffer_object_) {
+		glDeleteBuffers(1, &buffer_object_);
+	}
+}
+
+Program::Program() : program_object_(glCreateProgram()) {
+	if (!program_object_) {
+		throw wexception("Could not create GL program.");
+	}
+}
+
+Program::~Program() {
+	if (program_object_) {
+		glDeleteProgram(program_object_);
+	}
+}
+
+void Program::compile(const char* vertex_shader_source, const char* fragment_shader_source) {
+	vertex_shader_.reset(new Shader(GL_VERTEX_SHADER));
+	vertex_shader_->compile(vertex_shader_source);
+	glAttachShader(program_object_, vertex_shader_->object());
+
+	fragment_shader_.reset(new Shader(GL_FRAGMENT_SHADER));
+	fragment_shader_->compile(fragment_shader_source);
+	glAttachShader(program_object_, fragment_shader_->object());
+}
+
+void Program::link() {
+	glLinkProgram(program_object_);
+
+	// Check the link status
+	GLint linked;
+	glGetProgramiv(program_object_, GL_LINK_STATUS, &linked);
+	if (!linked) {
+		GLint infoLen = 0;
+		glGetProgramiv(program_object_, GL_INFO_LOG_LENGTH, &infoLen);
+
+		if (infoLen > 1) {
+			std::unique_ptr<char[]> infoLog(new char[infoLen]);
+			glGetProgramInfoLog(program_object_, infoLen, NULL, infoLog.get());
+			throw wexception("Error linking:\n%s", infoLog.get());
+		}
+	}
+}
+
+
+}  // namespace Gl
