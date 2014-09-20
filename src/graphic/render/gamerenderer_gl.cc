@@ -253,7 +253,8 @@ TerrainProgram::draw_terrain_triangles(const Map& map,
 		glBindTexture(
 		   GL_TEXTURE_2D,
 		   g_gr->get_maptexture_data(terrains.get_unmutable(i).get_texture())->getTexture());
-		glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, indices.data() /* offset */);
+		glDrawRangeElements(
+		   GL_TRIANGLES, 0, vertices_.size(), indices.size(), GL_UNSIGNED_SHORT, indices.data());
 	}
 
 	// Release Program object.
