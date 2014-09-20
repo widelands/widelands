@@ -258,7 +258,6 @@ struct RenderData {
 		for (auto& container : terrains_to_indices) {
 			container.clear();
 		}
-		vertices.clear();
 	}
 
 	std::vector<TerrainProgramData> vertices;
@@ -268,31 +267,28 @@ struct RenderData {
 // NOCOM(#sirver): make static? or member
 void add_vertex(int fx,
                 int fy,
-                int terrain_index,
                 const Point& surface_offset,
 					 const Map& map,
-                RenderData* render_data) {
-	TerrainProgramData v;
+                TerrainProgramData* v) {
+
 	int x, y;
 	Coords coords(fx, fy);
 	MapviewPixelFunctions::get_basepix(coords, x, y);
-	v.texture_x = float(x) / TEXTURE_WIDTH;
-	v.texture_y = float(y) / TEXTURE_HEIGHT;
-	v.x = x + surface_offset.x;
-	v.y = y + surface_offset.y;
+	v->texture_x = float(x) / TEXTURE_WIDTH;
+	v->texture_y = float(y) / TEXTURE_HEIGHT;
+	v->x = x + surface_offset.x;
+	v->y = y + surface_offset.y;
 
 	// Correct for the height of the field.
 	map.normalize_coords(coords);
 	const FCoords fcoords = map.get_fcoords(coords);
-	v.y -= fcoords.field->get_height() * HEIGHT_FACTOR;
+	v->y -= fcoords.field->get_height() * HEIGHT_FACTOR;
 
 	// NOCOM(#sirver): incorporate brightness.
 	// uint8_t brightness = field_brightness(normalized_coords);
 	// vtx.color[0] = vtx.color[1] = vtx.color[2] = brightness;
 	// vtx.color[3] = 255;
 
-	render_data->terrains_to_indices[terrain_index].push_back(render_data->vertices.size());
-	render_data->vertices.push_back(v);
 };
 
 void GameRendererGL::draw_terrain_triangles() {
@@ -302,8 +298,9 @@ void GameRendererGL::draw_terrain_triangles() {
 	const auto& terrains = m_egbase->world().terrains();
 
 	render_data.reset(terrains.size());
+	render_data.vertices.resize(6 * (m_maxfx - m_minfx + 1) * (m_maxfy - m_minfy + 1));
 
-
+	int current_vertex = 0;
 	for (int32_t fy = m_minfy; fy <= m_maxfy; ++fy) {
 		for (int32_t fx = m_minfx; fx <= m_maxfx; ++fx) {
 			Coords ncoords(fx, fy);
@@ -312,30 +309,33 @@ void GameRendererGL::draw_terrain_triangles() {
 
 			// Bottom triangle.
 			const int terrain_d = fcoords.field->terrain_d();
-			add_vertex(fx, fy, terrain_d, m_surface_offset, map, &render_data);
+			render_data.terrains_to_indices[terrain_d].push_back(current_vertex);
+			add_vertex(fx, fy, m_surface_offset, map, &render_data.vertices[current_vertex++]);
+			render_data.terrains_to_indices[terrain_d].push_back(current_vertex);
 			add_vertex(fx + (fy & 1),
 			           fy + 1,
-			           terrain_d,
 			           m_surface_offset,
 						  map,
-			           &render_data);  // bottom right neighbor
+			           &render_data.vertices[current_vertex++]);  // bottom right neighbor
+			render_data.terrains_to_indices[terrain_d].push_back(current_vertex);
 			add_vertex(fx + (fy & 1) - 1,
 			           fy + 1,
-			           terrain_d,
 			           m_surface_offset,
 						  map,
-			           &render_data);  // bottom left neighbor
+			           &render_data.vertices[current_vertex++]);  // bottom left neighbor
 
 			// Right triangle.
 			const int terrain_r = fcoords.field->terrain_r();
-			add_vertex(fx, fy, terrain_r, m_surface_offset, map, &render_data);
+			render_data.terrains_to_indices[terrain_r].push_back(current_vertex);
+			add_vertex(fx, fy, m_surface_offset, map, &render_data.vertices[current_vertex++]);
+			render_data.terrains_to_indices[terrain_r].push_back(current_vertex);
 			add_vertex(fx + (fy & 1),
 			           fy + 1,
-			           terrain_r,
 			           m_surface_offset,
-						  map,
-			           &render_data);  // bottom right neighbor
-			add_vertex(fx + 1, fy, terrain_r, m_surface_offset, map, &render_data);  // right neighbor
+			           map,
+			           &render_data.vertices[current_vertex++]);  // bottom right neighbor
+			render_data.terrains_to_indices[terrain_r].push_back(current_vertex);
+			add_vertex(fx + 1, fy, m_surface_offset, map, &render_data.vertices[current_vertex++]);  // right neighbor
 		}
 	}
 
