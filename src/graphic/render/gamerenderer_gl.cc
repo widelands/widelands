@@ -44,31 +44,20 @@ using namespace Widelands;
 
 namespace  {
 
-constexpr int kAttribVertexPosition = 0;
-constexpr int kAttribVertexTexturePosition = 1;
-
-struct TerrainProgramData {
-	float x;
-	float y;
-	float texture_x;
-	float texture_y;
-};
-static_assert(sizeof(TerrainProgramData) == 16, "Wrong padding.");
-
-
 // Useful: http://www.cs.unh.edu/~cs770/docs/glsl-1.20-quickref.pdf
-
 const char kTerrainVertexShader[] = R"(
 #version 120
 
-attribute vec2 in_position;
-attribute vec2 in_texture_position;
+// Attributes.
+attribute vec2 attr_position;
+attribute vec2 attr_texture_position;
 
-varying vec2 o_texture_position;
+// Output of vertex shader.
+varying vec2 var_texture_position;
 
 void main() {
-	o_texture_position = in_texture_position;
-	vec4 p = vec4(in_position, 0., 1.);
+	var_texture_position = attr_texture_position;
+	vec4 p = vec4(attr_position, 0., 1.);
 	gl_Position = gl_ProjectionMatrix * p;
 }
 )";
@@ -76,92 +65,204 @@ void main() {
 const char kTerrainFragmentShader[] = R"(
 #version 120
 
-uniform sampler2D tex;
+uniform sampler2D u_terrain_texture;
 
-varying vec2 o_texture_position;
+varying vec2 var_texture_position;
 
 void main() {
-	gl_FragColor = texture2D(tex, o_texture_position);
+	gl_FragColor = texture2D(u_terrain_texture, var_texture_position);
 }
 )";
 
-std::string shader_to_string(GLenum type) {
-	if (type == GL_VERTEX_SHADER) {
-		return "vertex";
-	}
-	if (type == GL_FRAGMENT_SHADER) {
-		return "fragment";
-	}
-	return "unknown";
-}
-
-GLuint compile_shader(GLenum type, const char* source) {
-	const GLuint shader = glCreateShader(type);
-	if (!shader) {
-		throw wexception("Could not create %s shader.", shader_to_string(type).c_str());
-	}
-
-	glShaderSource(shader, 1, &source, nullptr);
-
-	glCompileShader(shader);
-	GLint compiled;
-	glGetShaderiv(shader, GL_COMPILE_STATUS, &compiled);
-	if (!compiled) {
-		GLint infoLen = 0;
-		glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &infoLen);
-
-		if (infoLen > 1) {
-			std::unique_ptr<char[]> infoLog(new char[infoLen]);
-			glGetShaderInfoLog(shader, infoLen, NULL, infoLog.get());
-			throw wexception("Error compiling %s shader:\n%s", shader_to_string(type).c_str(), infoLog.get());
-		}
-		// NOCOM(#sirver): cleanup in any case.
-		// glDeleteShader(shader);
-		// exit(EXIT_FAILURE);
-		// return 0;
-	}
-
-	return shader;
-}
-
-GLuint compile_gl_program(const char* vertex_shader_source,
-                          const char* fragment_shader_source) {
-	const GLuint program_object = glCreateProgram();
-	if (!program_object) {
-		throw wexception("Could not create GL program.");
-	}
-
-	const GLuint vertex_shader = compile_shader(GL_VERTEX_SHADER, vertex_shader_source);
-	glAttachShader(program_object, vertex_shader);
-
-	const GLuint fragment_shader = compile_shader(GL_FRAGMENT_SHADER, fragment_shader_source);
-	glAttachShader(program_object, fragment_shader);
-	return program_object;
-}
-
-void link_gl_program(const GLuint program_object) {
-	glLinkProgram(program_object);
-
-	// Check the link status
-	GLint linked;
-	glGetProgramiv(program_object, GL_LINK_STATUS, &linked);
-	if (!linked) {
-		GLint infoLen = 0;
-		glGetProgramiv(program_object, GL_INFO_LOG_LENGTH, &infoLen);
-
-		if (infoLen > 1) {
-			std::unique_ptr<char[]> infoLog(new char[infoLen]);
-			glGetProgramInfoLog(program_object, infoLen, NULL, infoLog.get());
-			throw wexception("Error linking:\n%s", infoLog.get());
-		}
-		// NOCOM(#sirver): cleanup in any case.
-		// glDeleteProgram(program_object);
-		// return 0;
-	}
-}
 }  // namespace
 
+// Everything related to the glProgram rendering the terrain.
+class TerrainProgram {
+	public:
+	// Compiles the program. Throws on errors.
+	TerrainProgram();
+
+	// Draws the terrain triangles.
+	void draw_terrain_triangles(const Map& map,
+	                            const DescriptionMaintainer<TerrainDescription>& terrains,
+	                            int minfx,
+	                            int maxfx,
+	                            int minfy,
+	                            int maxfy,
+	                            const Point& surface_offset);
+
+private:
+	static constexpr int kAttribVertexPosition = 0;
+	static constexpr int kAttribVertexTexturePosition = 1;
+	struct PerVertexData {
+		float x;
+		float y;
+		float texture_x;
+		float texture_y;
+	};
+	static_assert(sizeof(PerVertexData) == 16, "Wrong padding.");
+
+	// Fills 'v' with the data of the vertex at the geometric location ('fx', 'fy').
+	void fill_vertex(int fx, int fy, const Point& surface_offset, const Map& map, PerVertexData* v);
+
+	// The program used for drawing the terrain.
+	Gl::Program gl_program_;
+
+	// The buffer that will contain 'vertices_' for rendering.
+	Gl::Buffer gl_program_data_buffer_;
+
+	// Uniforms.
+	GLint u_terrain_texture_;
+
+	// Objects below are kept around to avoid memory allocations on each frame.
+	// They could theoretically also be recreated.
+
+	// All vertices that are going to get rendered this frame.
+	std::vector<TerrainProgram::PerVertexData> vertices_;
+
+	// A map from terrain index in world.terrains() to indices in 'vertices_'
+	// that have this terrain type.
+	std::vector<std::vector<uint16_t>> terrains_to_indices_;
+
+	DISALLOW_COPY_AND_ASSIGN(TerrainProgram);
+};
+
+TerrainProgram::TerrainProgram() {
+	gl_program_.compile(kTerrainVertexShader, kTerrainFragmentShader);
+
+	glBindAttribLocation(gl_program_.object(), kAttribVertexPosition, "attr_position");
+	glBindAttribLocation(gl_program_.object(), kAttribVertexTexturePosition, "attr_texture_position");
+
+	gl_program_.link();
+
+	glEnableVertexAttribArray(kAttribVertexTexturePosition);
+	glEnableVertexAttribArray(kAttribVertexPosition);
+
+	u_terrain_texture_ = glGetUniformLocation(gl_program_.object(), "u_terrain_texture");
+}
+
+void TerrainProgram::fill_vertex(
+   int fx, int fy, const Point& surface_offset, const Map& map, TerrainProgram::PerVertexData* v) {
+	int x, y;
+	Coords coords(fx, fy);
+	MapviewPixelFunctions::get_basepix(coords, x, y);
+	v->texture_x = float(x) / TEXTURE_WIDTH;
+	v->texture_y = float(y) / TEXTURE_HEIGHT;
+	v->x = x + surface_offset.x;
+	v->y = y + surface_offset.y;
+
+	// Correct for the height of the field.
+	map.normalize_coords(coords);
+	const FCoords fcoords = map.get_fcoords(coords);
+	v->y -= fcoords.field->get_height() * HEIGHT_FACTOR;
+
+	// NOCOM(#sirver): incorporate brightness.
+	// uint8_t brightness = field_brightness(normalized_coords);
+	// vtx.color[0] = vtx.color[1] = vtx.color[2] = brightness;
+	// vtx.color[3] = 255;
+};
+
+
+void
+TerrainProgram::draw_terrain_triangles(const Map& map,
+                                       const DescriptionMaintainer<TerrainDescription>& terrains,
+                                       int minfx,
+                                       int maxfx,
+                                       int minfy,
+                                       int maxfy,
+                                       const Point& surface_offset) {
+	terrains_to_indices_.resize(terrains.size());
+	for (auto& container : terrains_to_indices_) {
+		container.clear();
+	}
+	vertices_.resize(6 * (maxfx - minfx + 1) * (maxfy - minfy + 1));
+
+	int current_vertex = 0;
+	for (int32_t fy = minfy; fy <= maxfy; ++fy) {
+		for (int32_t fx = minfx; fx <= maxfx; ++fx) {
+			Coords ncoords(fx, fy);
+			map.normalize_coords(ncoords);
+			const FCoords fcoords = map.get_fcoords(ncoords);
+
+			// Bottom triangle.
+			const int terrain_d = fcoords.field->terrain_d();
+			terrains_to_indices_[terrain_d].push_back(current_vertex);
+			fill_vertex(fx, fy, surface_offset, map, &vertices_[current_vertex++]);
+			terrains_to_indices_[terrain_d].push_back(current_vertex);
+			fill_vertex(fx + (fy & 1),
+			           fy + 1,
+			           surface_offset,
+			           map,
+			           &vertices_[current_vertex++]);  // bottom right neighbor
+			terrains_to_indices_[terrain_d].push_back(current_vertex);
+			fill_vertex(fx + (fy & 1) - 1,
+			           fy + 1,
+			           surface_offset,
+			           map,
+			           &vertices_[current_vertex++]);  // bottom left neighbor
+
+			// Right triangle.
+			const int terrain_r = fcoords.field->terrain_r();
+			terrains_to_indices_[terrain_r].push_back(current_vertex);
+			fill_vertex(fx, fy, surface_offset, map, &vertices_[current_vertex++]);
+			terrains_to_indices_[terrain_r].push_back(current_vertex);
+			fill_vertex(fx + (fy & 1),
+			           fy + 1,
+			           surface_offset,
+			           map,
+			           &vertices_[current_vertex++]);  // bottom right neighbor
+			terrains_to_indices_[terrain_r].push_back(current_vertex);
+			fill_vertex(fx + 1,
+			           fy,
+			           surface_offset,
+			           map,
+			           &vertices_[current_vertex++]);  // right neighbor
+		}
+	}
+
+	// Use the program object
+	glUseProgram(gl_program_.object());
+
+	glBindBuffer(GL_ARRAY_BUFFER, gl_program_data_buffer_.object());
+	glBufferData(GL_ARRAY_BUFFER,
+	             sizeof(TerrainProgram::PerVertexData) * vertices_.size(),
+	             vertices_.data(),
+	             GL_STREAM_DRAW);
+
+	const auto set_attrib_pointer = [](const int vertex_index, int num_items, int offset) {
+		glVertexAttribPointer(vertex_index,
+		                      num_items,
+		                      GL_FLOAT,
+		                      GL_FALSE,
+		                      sizeof(TerrainProgram::PerVertexData),
+		                      reinterpret_cast<void*>(offset));
+	};
+	set_attrib_pointer(kAttribVertexPosition, 2, offsetof(PerVertexData, x));
+	set_attrib_pointer(kAttribVertexTexturePosition, 2, offsetof(PerVertexData, texture_x));
+
+	// Set the sampler texture unit to 0
+	glActiveTexture(GL_TEXTURE0);
+	glUniform1i(u_terrain_texture_, 0);
+
+	// Which triangles to draw?
+	for (size_t i = 0; i < terrains_to_indices_.size(); ++i) {
+		const auto& indices = terrains_to_indices_[i];
+		if (indices.empty()) {
+			continue;
+		}
+		glBindTexture(
+		   GL_TEXTURE_2D,
+		   g_gr->get_maptexture_data(terrains.get_unmutable(i).get_texture())->getTexture());
+		glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, indices.data() /* offset */);
+	}
+
+	// Release Program object.
+	glUseProgram(0);
+}
+
 static const uint32_t PatchSize = 4;
+
+std::unique_ptr<TerrainProgram> GameRendererGL::terrain_program_;
 
 GameRendererGL::GameRendererGL() :
 	m_patch_vertices_size(0),
@@ -233,168 +334,11 @@ uint8_t GameRendererGL::field_brightness(const FCoords & coords) const
 	return brightness;
 }
 
-void GameRendererGL::initialize() {
-	// Setup Buffers;
-	glGenBuffers(1, &terrain_program_data_);
-	glGenBuffers(1, &indices_buffer_);
-
-	terrain_program_ = compile_gl_program(kTerrainVertexShader, kTerrainFragmentShader);
-
-	glBindAttribLocation(terrain_program_, kAttribVertexPosition, "in_position");
-	glEnableVertexAttribArray(kAttribVertexPosition);
-	glBindAttribLocation(terrain_program_, kAttribVertexTexturePosition, "in_texture_position");
-	glEnableVertexAttribArray(kAttribVertexTexturePosition);
-
-	link_gl_program(terrain_program_);
-
-	texture_location_ = glGetUniformLocation(terrain_program_, "tex");
-
-	do_initialize_ = false;
-}
-
-struct RenderData {
-	void reset(int nterrains) {
-		terrains_to_indices.resize(nterrains);
-		for (auto& container : terrains_to_indices) {
-			container.clear();
-		}
-	}
-
-	std::vector<TerrainProgramData> vertices;
-	std::vector<std::vector<uint16_t>> terrains_to_indices;
-};
-
-// NOCOM(#sirver): make static? or member
-void add_vertex(int fx,
-                int fy,
-                const Point& surface_offset,
-					 const Map& map,
-                TerrainProgramData* v) {
-
-	int x, y;
-	Coords coords(fx, fy);
-	MapviewPixelFunctions::get_basepix(coords, x, y);
-	v->texture_x = float(x) / TEXTURE_WIDTH;
-	v->texture_y = float(y) / TEXTURE_HEIGHT;
-	v->x = x + surface_offset.x;
-	v->y = y + surface_offset.y;
-
-	// Correct for the height of the field.
-	map.normalize_coords(coords);
-	const FCoords fcoords = map.get_fcoords(coords);
-	v->y -= fcoords.field->get_height() * HEIGHT_FACTOR;
-
-	// NOCOM(#sirver): incorporate brightness.
-	// uint8_t brightness = field_brightness(normalized_coords);
-	// vtx.color[0] = vtx.color[1] = vtx.color[2] = brightness;
-	// vtx.color[3] = 255;
-
-};
-
-void GameRendererGL::draw_terrain_triangles() {
-	static RenderData render_data; // // NOCOM(#sirver): ugly
-
-	const Map & map = m_egbase->map();
-	const auto& terrains = m_egbase->world().terrains();
-
-	render_data.reset(terrains.size());
-	render_data.vertices.resize(6 * (m_maxfx - m_minfx + 1) * (m_maxfy - m_minfy + 1));
-
-	int current_vertex = 0;
-	for (int32_t fy = m_minfy; fy <= m_maxfy; ++fy) {
-		for (int32_t fx = m_minfx; fx <= m_maxfx; ++fx) {
-			Coords ncoords(fx, fy);
-			map.normalize_coords(ncoords);
-			const FCoords fcoords = map.get_fcoords(ncoords);
-
-			// Bottom triangle.
-			const int terrain_d = fcoords.field->terrain_d();
-			render_data.terrains_to_indices[terrain_d].push_back(current_vertex);
-			add_vertex(fx, fy, m_surface_offset, map, &render_data.vertices[current_vertex++]);
-			render_data.terrains_to_indices[terrain_d].push_back(current_vertex);
-			add_vertex(fx + (fy & 1),
-			           fy + 1,
-			           m_surface_offset,
-						  map,
-			           &render_data.vertices[current_vertex++]);  // bottom right neighbor
-			render_data.terrains_to_indices[terrain_d].push_back(current_vertex);
-			add_vertex(fx + (fy & 1) - 1,
-			           fy + 1,
-			           m_surface_offset,
-						  map,
-			           &render_data.vertices[current_vertex++]);  // bottom left neighbor
-
-			// Right triangle.
-			const int terrain_r = fcoords.field->terrain_r();
-			render_data.terrains_to_indices[terrain_r].push_back(current_vertex);
-			add_vertex(fx, fy, m_surface_offset, map, &render_data.vertices[current_vertex++]);
-			render_data.terrains_to_indices[terrain_r].push_back(current_vertex);
-			add_vertex(fx + (fy & 1),
-			           fy + 1,
-			           m_surface_offset,
-			           map,
-			           &render_data.vertices[current_vertex++]);  // bottom right neighbor
-			render_data.terrains_to_indices[terrain_r].push_back(current_vertex);
-			add_vertex(fx + 1, fy, m_surface_offset, map, &render_data.vertices[current_vertex++]);  // right neighbor
-		}
-	}
-
-	// Use the program object
-	glUseProgram(terrain_program_);
-
-	glBindBuffer(GL_ARRAY_BUFFER, terrain_program_data_);
-	glBufferData(GL_ARRAY_BUFFER,
-	             sizeof(TerrainProgramData) * render_data.vertices.size(),
-	             render_data.vertices.data(),
-	             GL_STREAM_DRAW);
-
-	const auto set_attrib_pointer = [](const int vertex_index, int num_items, int offset, int normalized) {
-		glVertexAttribPointer(vertex_index,
-		                      num_items,
-		                      GL_FLOAT,
-		                      normalized,
-		                      sizeof(TerrainProgramData),
-		                      reinterpret_cast<void*>(offset));
-	};
-
-	// Setup vertex attribute pointers.
-	set_attrib_pointer(kAttribVertexPosition, 2, offsetof(TerrainProgramData, x), GL_FALSE);
-	set_attrib_pointer(kAttribVertexTexturePosition, 2, offsetof(TerrainProgramData, texture_x), GL_TRUE);
-	glActiveTexture(GL_TEXTURE0);
-	// Set the sampler texture unit to 0
-	glUniform1i(texture_location_, 0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indices_buffer_);
-
-	// Which triangles to draw?
-	for (size_t i = 0; i < render_data.terrains_to_indices.size(); ++i) {
-		const auto& indices = render_data.terrains_to_indices[i];
-		if (indices.empty()) {
-			continue;
-		}
-		glBindTexture(
-		   GL_TEXTURE_2D,
-		   g_gr->get_maptexture_data(terrains.get_unmutable(i).get_texture())->getTexture());
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER,
-		             sizeof(GL_UNSIGNED_SHORT) * indices.size(),
-		             indices.data(),
-		             GL_STREAM_DRAW);
-		glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, 0 /* offset */);
-	}
-
-	// Release Program object.
-	glUseProgram(0);
-}
 
 void GameRendererGL::draw() {
-	if (do_initialize_) {
-		// NOCOM(#sirver): this is done for each gamerenderer. This is not really necessary.
-		initialize();
+	if (terrain_program_ == nullptr) {
+		terrain_program_.reset(new TerrainProgram());
 	}
-
-	// NOCOM(#sirver): Use this quantity to draw as many triangles as possible.
-	// int texture_units;
-	// glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &texture_units);
-	// log("#sirver texture_units: %d\n", texture_units);
 
 	const World& world = m_egbase->world();
 	if (m_terrain_freq.size() < world.terrains().get_nitems()) {
@@ -408,13 +352,6 @@ void GameRendererGL::draw() {
 	m_rect = m_dst->get_rect();
 	m_surface_offset = m_dst_offset + m_rect.top_left() + m_dst->get_offset();
 
-	// NOCOM(#sirver): maiyb?
-	// glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	// Clear the color buffer
-	// glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	//
-
-
 	m_patch_size.x = m_minfx - 1;
 	m_patch_size.y = m_minfy;
 	m_patch_size.w = ((m_maxfx - m_minfx + 2 + PatchSize) / PatchSize) * PatchSize;
@@ -425,7 +362,8 @@ void GameRendererGL::draw() {
 		 m_rect.w, m_rect.h);
 	glEnable(GL_SCISSOR_TEST);
 
-	draw_terrain_triangles();
+	terrain_program_->draw_terrain_triangles(
+	   m_egbase->map(), world.terrains(), m_minfx, m_maxfx, m_minfy, m_maxfy, m_surface_offset);
 
 	// prepare_terrain_base();
 	// draw_terrain_base();

@@ -37,6 +37,8 @@ class World;
 class GLSurface;
 class GLSurfaceTexture;
 
+class TerrainProgram;
+
 /**
  * OpenGL implementation of @ref GameRenderer.
  */
@@ -46,16 +48,9 @@ public:
 	virtual ~GameRendererGL();
 
 private:
-	// NOCOM(#sirver): document
-	void initialize();
+	static std::unique_ptr<TerrainProgram> terrain_program_;
+
 	void draw_terrain_triangles();
-
-	bool do_initialize_ = true;
-	GLuint indices_buffer_;
-	GLuint terrain_program_data_;
-	GLuint terrain_program_;
-	GLint texture_location_;
-
 
 	struct BaseVertex {
 		float x;
