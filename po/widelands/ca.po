@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-19 05:55+0000\n"
+"X-Launchpad-Export-Date: 2014-09-20 05:45+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -3530,12 +3530,3 @@ msgstr ""
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "ERROR: Could not connect to metaserver (reason above)!\n"
-#~ msgstr "ERROR: No ha estat possible connectar amb metaserver (raó a dalt)\n"
-
-#~ msgid "could not find the path of the main executable"
-#~ msgstr "No s'ha pogut trobar el camí de l'executable principal"
-
-#~ msgid "This is Widelands-"
-#~ msgstr "Això és Widelands-"

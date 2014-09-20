@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-19 05:59+0000\n"
+"X-Launchpad-Export-Date: 2014-09-20 05:47+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -3568,27 +3568,3 @@ msgstr "Follow"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "The map file seems to be invalid!"
-#~ msgstr "The map file seems to be invalid!"
-
-#~ msgid "There was an error!"
-#~ msgstr "There was an error!"
-
-#~ msgid "ERROR: Could not connect to metaserver (reason above)!\n"
-#~ msgstr "ERROR: Could not connect to metaserver (reason above)!\n"
-
-#~ msgid "could not find the path of the main executable"
-#~ msgstr "could not find the path of the main executable"
-
-#~ msgid "This is Widelands-"
-#~ msgstr "This is Widelands-"
-
-#~ msgid "Fallback settings in effect"
-#~ msgstr "Fallback settings in effect"
-
-#~ msgid "Unexpected error during the game"
-#~ msgstr "Unexpected error during the game"
-
-#~ msgid "The address of the game server is invalid"
-#~ msgstr "The address of the game server is invalid"

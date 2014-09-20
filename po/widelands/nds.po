@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-19 05:57+0000\n"
+"X-Launchpad-Export-Date: 2014-09-20 05:46+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: nds\n"
 
@@ -3538,22 +3538,3 @@ msgstr ""
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "ERROR: Could not connect to metaserver (reason above)!\n"
-#~ msgstr ""
-#~ "FEHLER: Verbindung zum Meta-Server nicht möglich (Grund siehe oben).\n"
-
-#~ msgid "could not find the path of the main executable"
-#~ msgstr "Der Dateipfad zum Hauptprogramm wurde nicht gefunden."
-
-#~ msgid "This is Widelands-"
-#~ msgstr "Dies ist Widelands -"
-
-#~ msgid "Fallback settings in effect"
-#~ msgstr "Notfalleinstellungen aktiviert."
-
-#~ msgid "Unexpected error during the game"
-#~ msgstr "Unerwarteter Fehler bei der Spielausführung"
-
-#~ msgid "The address of the game server is invalid"
-#~ msgstr "Die Adresse des Spiel-Servers ist nicht korrekt."

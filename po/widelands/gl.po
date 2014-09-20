@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-19 05:56+0000\n"
+"X-Launchpad-Export-Date: 2014-09-20 05:45+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Galician\n"
@@ -3564,19 +3564,3 @@ msgstr "Seguir"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "ERROR: Could not connect to metaserver (reason above)!\n"
-#~ msgstr ""
-#~ "ERRO: non se puido conectar ao metaservidor (o motivo a continuación)!\n"
-
-#~ msgid "could not find the path of the main executable"
-#~ msgstr "non se puido atopar a ruta do executable principal"
-
-#~ msgid "This is Widelands-"
-#~ msgstr "Isto é o Widelands-"
-
-#~ msgid "Unexpected error during the game"
-#~ msgstr "Houbo un erro inesperado"
-
-#~ msgid "The address of the game server is invalid"
-#~ msgstr "O enderezo do servidor é incorrecto"

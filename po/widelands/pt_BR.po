@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-09-19 05:59+0000\n"
+"X-Launchpad-Export-Date: 2014-09-20 05:47+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -3566,27 +3566,3 @@ msgstr "Segue"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "The map file seems to be invalid!"
-#~ msgstr "O mapa parece ser inválido!"
-
-#~ msgid "There was an error!"
-#~ msgstr "Houve um erro!"
-
-#~ msgid "ERROR: Could not connect to metaserver (reason above)!\n"
-#~ msgstr "ERRO: não foi possível conectar ao metaserver (motivo acima)\n"
-
-#~ msgid "could not find the path of the main executable"
-#~ msgstr "não foi possível encontrar o caminho do executável principal"
-
-#~ msgid "This is Widelands-"
-#~ msgstr "Este é Widelands-"
-
-#~ msgid "Options:"
-#~ msgstr "Opções:"
-
-#~ msgid "Unexpected error during the game"
-#~ msgstr "Erro inesperado durante o jogo"
-
-#~ msgid "The address of the game server is invalid"
-#~ msgstr "O endereço do servidor é inválido"

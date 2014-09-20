@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-19 05:59+0000\n"
+"X-Launchpad-Export-Date: 2014-09-20 05:47+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: es_ES\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -3582,27 +3582,3 @@ msgstr "Seguir"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "The map file seems to be invalid!"
-#~ msgstr "Parece que el archivo de mapa no es válido."
-
-#~ msgid "There was an error!"
-#~ msgstr "¡Ha ocurrido un error!"
-
-#~ msgid "ERROR: Could not connect to metaserver (reason above)!\n"
-#~ msgstr "ERROR: ¡No se pudo conectar con el metaservidor (razón arriba)!\n"
-
-#~ msgid "could not find the path of the main executable"
-#~ msgstr "No se ha podido encontrar la ruta del ejecutable principal"
-
-#~ msgid "This is Widelands-"
-#~ msgstr "Esto es Widelands-"
-
-#~ msgid "Fallback settings in effect"
-#~ msgstr "Configuración alternativa en vigor"
-
-#~ msgid "Unexpected error during the game"
-#~ msgstr "Error inesperado durante el juego"
-
-#~ msgid "The address of the game server is invalid"
-#~ msgstr "La dirección del servidor del juego no es válida."

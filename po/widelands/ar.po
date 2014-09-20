@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n % 100 >= "
 "3 && n % 100 <= 10 ? 3 : n % 100 >= 11 && n % 100 <= 99 ? 4 : 5;\n"
-"X-Launchpad-Export-Date: 2014-09-19 05:55+0000\n"
+"X-Launchpad-Export-Date: 2014-09-20 05:44+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: ar\n"
 
@@ -3537,36 +3537,3 @@ msgstr ""
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "The map file seems to be invalid!"
-#~ msgstr "هذه الخريطه غير صالحه!"
-
-#~ msgid "There was an error!"
-#~ msgstr "حدث خطأ!"
-
-#~ msgid "could not find the path of the main executable"
-#~ msgstr "غير قادر على ايجاد مسار الملف التنفيذي الرئيسي"
-
-#~ msgid "This is Widelands-"
-#~ msgstr "هذه وايد لاندس-"
-
-#~ msgid "Options:"
-#~ msgstr "إعدادات:"
-
-#~ msgid ""
-#~ "Bug reports? Suggestions? Check out the project website:\n"
-#~ "        https://launchpad.net/widelands\n"
-#~ "\n"
-#~ "Hope you enjoy this game!"
-#~ msgstr ""
-#~ "اترغب بالإبلاغ عن علل؟او تقديم إقتراحات؟تفضل بزياره موقعنا على الشبكه "
-#~ "العنكبوتيه\n"
-#~ "        https://launchpad.net/widelands\n"
-#~ "\n"
-#~ "نتمنى لك لعباً ممتعاً"
-
-#~ msgid "Warning: %s"
-#~ msgstr "تحذير: %s"
-
-#~ msgid "Unexpected error during the game"
-#~ msgstr "حدث خطأ غير متوقع"

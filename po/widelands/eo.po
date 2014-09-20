@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-19 05:56+0000\n"
+"X-Launchpad-Export-Date: 2014-09-20 05:45+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: eo\n"
 
@@ -3533,64 +3533,3 @@ msgstr ""
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "There was an error!"
-#~ msgstr "Estis eraro!"
-
-#~ msgid "ERROR: Could not connect to metaserver (reason above)!\n"
-#~ msgstr ""
-#~ "ERARE: Ne eblis konektiĝi al la metaservilo (La kialo troviĝas sube)!\n"
-
-#~ msgid "This is Widelands-"
-#~ msgstr "Tio estas Widelands-"
-
-#~ msgid "Options:"
-#~ msgstr "Opcioj:"
-
-#~ msgid " --<config-entry-name>=value overwrites any config file setting"
-#~ msgstr ""
-#~ " --<config-entry-name>=valoro anstataûigas ĉiun konfigurdatenaran "
-#~ "konfiguraĵon"
-
-#~ msgid ""
-#~ " --logfile=FILENAME   Log output to file FILENAME instead of \n"
-#~ "                      terminal output"
-#~ msgstr ""
-#~ " --logfile=DATENARO-NOMO protokolu eligon al datenaro DATENARNOMO anstataû \n"
-#~ "                      terminaleligado"
-
-#~ msgid ""
-#~ " --datadir=DIRNAME    Use specified directory for the widelands\n"
-#~ "                      data files"
-#~ msgstr ""
-#~ " --datadir=DATENARUJO-NOMO uzu precizigitan datenarujon por la \"larĝaj-"
-#~ "teroj\"(widelands)-\n"
-#~ "                      datenoj- datenaroj"
-
-#~ msgid ""
-#~ " --homedir=DIRNAME    Use specified directory for widelands config\n"
-#~ "                      files, savegames and replays"
-#~ msgstr ""
-#~ " --homedir=DATENARUJO-NOMO uzu precizigitan datenarujon por la \"larĝaj-"
-#~ "teroj\"(widelands)-\n"
-#~ "                      konfigurdatenaroj, storitaj maĉoj kaj ripetadoj"
-
-#~ msgid "                      Default is ~/.widelands"
-#~ msgstr "                      defaûlte estas ~/.widelands"
-
-#~ msgid ""
-#~ "Bug reports? Suggestions? Check out the project website:\n"
-#~ "        https://launchpad.net/widelands\n"
-#~ "\n"
-#~ "Hope you enjoy this game!"
-#~ msgstr ""
-#~ "Ĉu cimraportoj? Sugestoj? Rigardu la retejon pri la projekto:\n"
-#~ "        https://launchpad.net/widelands\n"
-#~ "\n"
-#~ "Ni esperas ke al vi ŝatus ĉi tiun ludon!"
-
-#~ msgid "Warning: %s"
-#~ msgstr "Averto: %s"
-
-#~ msgid "The address of the game server is invalid"
-#~ msgstr "La adreso de la luda servilo estas nevalida"

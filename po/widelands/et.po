@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-19 05:56+0000\n"
+"X-Launchpad-Export-Date: 2014-09-20 05:45+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: et\n"
 
@@ -3531,15 +3531,3 @@ msgstr ""
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "There was an error!"
-#~ msgstr "Esines viga!"
-
-#~ msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
-#~ msgstr "Kasutus: widelands <valik0>=<väärtus0> ... <valikN>=<väärtusN>"
-
-#~ msgid "Options:"
-#~ msgstr "Valikud:"
-
-#~ msgid "Warning: %s"
-#~ msgstr "Hoiatus: %s"
