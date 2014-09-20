@@ -48,22 +48,22 @@ void MapFlagPacket::read
 		return;
 
 	FileRead fr;
-	try {fr.Open(fs, "binary/flag");} catch (...) {return;}
+	try {fr.open(fs, "binary/flag");} catch (...) {return;}
 
 	try {
-		uint16_t const packet_version = fr.Unsigned16();
+		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == CURRENT_PACKET_VERSION) {
 			const Map & map = egbase.map();
 			PlayerNumber const nr_players = map.get_nrplayers();
 			Widelands::Extent const extent = map.extent();
 			iterate_Map_FCoords(map, extent, fc)
-				if (fr.Unsigned8()) {
-					PlayerNumber const owner  = fr.Unsigned8();
+				if (fr.unsigned_8()) {
+					PlayerNumber const owner  = fr.unsigned_8();
 					if (!(0 < owner && owner <= nr_players)) {
 						throw GameDataError("Invalid player number: %i.", owner);
 					}
 
-					Serial        const serial = fr.Unsigned32();
+					Serial        const serial = fr.unsigned_32();
 
 					try {
 						if (fc.field->get_owned_by() != owner)
@@ -132,7 +132,7 @@ void MapFlagPacket::write
 {
 	FileWrite fw;
 
-	fw.Unsigned16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(CURRENT_PACKET_VERSION);
 
 	//  Write flags and owner, register this with the map_object_saver so that
 	//  it's data can be saved later.
@@ -146,11 +146,11 @@ void MapFlagPacket::write
 			assert(!mos.is_object_known(*flag));
 			assert(field->get_owned_by() == flag->owner().player_number());
 
-			fw.Unsigned8(1);
-			fw.Unsigned8(flag->owner().player_number());
-			fw.Unsigned32(mos.register_object(*flag));
+			fw.unsigned_8(1);
+			fw.unsigned_8(flag->owner().player_number());
+			fw.unsigned_32(mos.register_object(*flag));
 		} else //  no existence, no owner
-			fw.Unsigned8(0);
+			fw.unsigned_8(0);
 
 	fw.write(fs, "binary/flag");
 }

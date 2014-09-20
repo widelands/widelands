@@ -1639,7 +1639,7 @@ std::unique_ptr<MapLoader> Map::get_correct_loader(const std::string& filename) 
 
 	if (boost::algorithm::ends_with(lower_filename, WLMF_SUFFIX)) {
 		try {
-			result.reset(new WidelandsMapLoader(g_fs->MakeSubFileSystem(filename), this));
+			result.reset(new WidelandsMapLoader(g_fs->make_sub_file_system(filename), this));
 		} catch (...) {
 			//  If this fails, it is an illegal file.
 			//  TODO(unknown): catchall hides real errors! Replace with more specific code

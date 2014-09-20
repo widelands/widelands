@@ -42,21 +42,21 @@ void MapNodeOwnershipPacket::read
 		return;
 	FileRead fr;
 	try {
-		fr.Open(fs, "binary/node_ownership");
+		fr.open(fs, "binary/node_ownership");
 	} catch (...) {
 		try {
-			fr.Open(fs, "binary/owned_fields");
+			fr.open(fs, "binary/owned_fields");
 		} catch (...) {
 			return;
 		}
 	}
 	try {
-		uint16_t const packet_version = fr.Unsigned16();
+		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == CURRENT_PACKET_VERSION) {
 			Map & map = egbase.map();
 			MapIndex const max_index = map.max_index();
 			for (MapIndex i = 0; i < max_index; ++i)
-				map[i].set_owned_by(fr.Unsigned8());
+				map[i].set_owned_by(fr.unsigned_8());
 		} else
 			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
@@ -71,12 +71,12 @@ void MapNodeOwnershipPacket::write
 {
 	FileWrite fw;
 
-	fw.Unsigned16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(CURRENT_PACKET_VERSION);
 
 	Map & map = egbase.map();
 	MapIndex const max_index = map.max_index();
 	for (MapIndex i = 0; i < max_index; ++i)
-		fw.Unsigned8(map[i].get_owned_by());
+		fw.unsigned_8(map[i].get_owned_by());
 
 	fw.write(fs, "binary/node_ownership");
 }

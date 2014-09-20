@@ -44,10 +44,10 @@ void MapExplorationPacket::read
 
 	FileRead fr;
 	try {
-		fr.Open(fs, "binary/exploration");
+		fr.open(fs, "binary/exploration");
 	} catch (...) {
 		try {
-			fr.Open(fs, "binary/seen_fields");
+			fr.open(fs, "binary/seen_fields");
 		} catch (...) {
 			return;
 		}
@@ -58,10 +58,10 @@ void MapExplorationPacket::read
 	PlayerNumber const nr_players = map.get_nrplayers();
 	MapIndex const max_index = map.max_index();
 	try {
-		uint16_t const packet_version = fr.Unsigned16();
+		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == 1)
 			for (MapIndex i = 0; i < max_index; ++i) {
-				uint32_t const data = fr.Unsigned16();
+				uint32_t const data = fr.unsigned_16();
 				for (uint8_t j = 0; j < nr_players; ++j) {
 					bool const see = data & (1 << j);
 					if (Player * const player = egbase.get_player(j + 1))
@@ -75,7 +75,7 @@ void MapExplorationPacket::read
 			}
 		else if (packet_version == CURRENT_PACKET_VERSION)
 			for (MapIndex i = 0; i < max_index; ++i) {
-				uint32_t const data = fr.Unsigned32();
+				uint32_t const data = fr.unsigned_32();
 				for (uint8_t j = 0; j < nr_players; ++j) {
 					bool see = data & (1 << j);
 					if (Player * const player = egbase.get_player(j + 1))
@@ -101,7 +101,7 @@ void MapExplorationPacket::write
 {
 	FileWrite fw;
 
-	fw.Unsigned16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(CURRENT_PACKET_VERSION);
 
 	static_assert(MAX_PLAYERS < 32, "assert(MAX_PLAYERS < 32) failed.");
 	Map & map = egbase.map();
@@ -114,7 +114,7 @@ void MapExplorationPacket::write
 			if (Player const * const player = egbase.get_player(player_index))
 				data |= ((0 < player->vision(i)) << j);
 		}
-		fw.Unsigned32(data);
+		fw.unsigned_32(data);
 	}
 
 	fw.write(fs, "binary/exploration");

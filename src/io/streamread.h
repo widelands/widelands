@@ -61,14 +61,14 @@ public:
 
 	void data_complete(void * data, size_t size);
 
-	int8_t Signed8();
-	uint8_t Unsigned8();
-	int16_t Signed16();
-	uint16_t Unsigned16();
-	int32_t Signed32();
-	uint32_t Unsigned32();
-	std::string String();
-	virtual char const * CString() {throw;}
+	int8_t signed_8();
+	uint8_t unsigned_8();
+	int16_t signed_16();
+	uint16_t unsigned_16();
+	int32_t signed_32();
+	uint32_t unsigned_32();
+	std::string string();
+	virtual char const * c_string() {throw;}
 
 	///  Base of all exceptions that are caused by errors in the data that is
 	///  read.

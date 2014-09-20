@@ -38,33 +38,33 @@ void GamePlayerInfoPacket::read
 {
 	try {
 		FileRead fr;
-		fr.Open(fs, "binary/player_info");
-		uint16_t const packet_version = fr.Unsigned16();
+		fr.open(fs, "binary/player_info");
+		uint16_t const packet_version = fr.unsigned_16();
 		if (5 <= packet_version && packet_version <= CURRENT_PACKET_VERSION) {
-			uint32_t const max_players = fr.Unsigned16();
+			uint32_t const max_players = fr.unsigned_16();
 			for (uint32_t i = 1; i < max_players + 1; ++i) {
 				game.remove_player(i);
-				if (fr.Unsigned8()) {
-					bool const see_all = fr.Unsigned8();
+				if (fr.unsigned_8()) {
+					bool const see_all = fr.unsigned_8();
 
-					int32_t const plnum = fr.Unsigned8();
+					int32_t const plnum = fr.unsigned_8();
 					if (plnum < 1 || MAX_PLAYERS < plnum)
 						throw GameDataError
 							("player number (%i) is out of range (1 .. %u)",
 							 plnum, MAX_PLAYERS);
 					Widelands::TeamNumber team = 0;
 					if (packet_version >= 9)
-						team = fr.Unsigned8();
+						team = fr.unsigned_8();
 
-					char const * const tribe_name = fr.CString();
+					char const * const tribe_name = fr.c_string();
 
-					std::string const name = fr.CString();
+					std::string const name = fr.c_string();
 
 					game.add_player(plnum, 0, tribe_name, name, team);
 					Player & player = game.player(plnum);
 					player.set_see_all(see_all);
 
-					player.set_ai(fr.CString());
+					player.set_ai(fr.c_string());
 
 					if (packet_version >= 15)
 						player.read_statistics(fr, 3);
@@ -75,12 +75,12 @@ void GamePlayerInfoPacket::read
 					else
 						player.read_statistics(fr, 0);
 
-					player.m_casualties = fr.Unsigned32();
-					player.m_kills      = fr.Unsigned32();
-					player.m_msites_lost         = fr.Unsigned32();
-					player.m_msites_defeated     = fr.Unsigned32();
-					player.m_civil_blds_lost     = fr.Unsigned32();
-					player.m_civil_blds_defeated = fr.Unsigned32();
+					player.m_casualties = fr.unsigned_32();
+					player.m_kills      = fr.unsigned_32();
+					player.m_msites_lost         = fr.unsigned_32();
+					player.m_msites_defeated     = fr.unsigned_32();
+					player.m_civil_blds_lost     = fr.unsigned_32();
+					player.m_civil_blds_defeated = fr.unsigned_32();
 				}
 			}
 
@@ -103,38 +103,38 @@ void GamePlayerInfoPacket::write
 	FileWrite fw;
 
 	// Now packet version
-	fw.Unsigned16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(CURRENT_PACKET_VERSION);
 
 	// Number of (potential) players
 	PlayerNumber const nr_players = game.map().get_nrplayers();
-	fw.Unsigned16(nr_players);
+	fw.unsigned_16(nr_players);
 	iterate_players_existing_const(p, nr_players, game, plr) {
-		fw.Unsigned8(1); // Player is in game.
+		fw.unsigned_8(1); // Player is in game.
 
-		fw.Unsigned8(plr->m_see_all);
+		fw.unsigned_8(plr->m_see_all);
 
-		fw.Unsigned8(plr->m_plnum);
-		fw.Unsigned8(plr->team_number());
+		fw.unsigned_8(plr->m_plnum);
+		fw.unsigned_8(plr->team_number());
 
-		fw.CString(plr->tribe().name().c_str());
+		fw.c_string(plr->tribe().name().c_str());
 
 		// Seen fields is in a map packet
 		// Allowed buildings is in a map packet
 
 		// Economies are in a packet after map loading
 
-		fw.CString(plr->m_name.c_str());
-		fw.CString(plr->m_ai.c_str());
+		fw.c_string(plr->m_name.c_str());
+		fw.c_string(plr->m_ai.c_str());
 
 		plr->write_statistics(fw);
-		fw.Unsigned32(plr->casualties());
-		fw.Unsigned32(plr->kills     ());
-		fw.Unsigned32(plr->msites_lost        ());
-		fw.Unsigned32(plr->msites_defeated    ());
-		fw.Unsigned32(plr->civil_blds_lost    ());
-		fw.Unsigned32(plr->civil_blds_defeated());
+		fw.unsigned_32(plr->casualties());
+		fw.unsigned_32(plr->kills     ());
+		fw.unsigned_32(plr->msites_lost        ());
+		fw.unsigned_32(plr->msites_defeated    ());
+		fw.unsigned_32(plr->civil_blds_lost    ());
+		fw.unsigned_32(plr->civil_blds_defeated());
 	} else
-		fw.Unsigned8(0); //  Player is NOT in game.
+		fw.unsigned_8(0); //  Player is NOT in game.
 
 	game.write_statistics(fw);
 

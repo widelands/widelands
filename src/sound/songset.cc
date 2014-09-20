@@ -54,7 +54,7 @@ Songset::~Songset()
 	if (rwops_) {
 		if (have_to_free_rw())
 			SDL_FreeRW(rwops_);
-		fr_.Close();
+		fr_.close();
 	}
 }
 
@@ -101,13 +101,13 @@ Mix_Music * Songset::get_song()
 		if (have_to_free_rw())
 			SDL_FreeRW(rwops_);
 		rwops_ = nullptr;
-		fr_.Close();
+		fr_.close();
 	}
 
 	//then open the new song
-	if (fr_.TryOpen(*g_fs, filename)) {
-		if (!(rwops_ = SDL_RWFromMem(fr_.data(0), fr_.GetSize()))) {
-			fr_.Close();  // fr_ should be Open iff rwops_ != 0
+	if (fr_.try_open(*g_fs, filename)) {
+		if (!(rwops_ = SDL_RWFromMem(fr_.data(0), fr_.get_size()))) {
+			fr_.close();  // fr_ should be Open iff rwops_ != 0
 			return nullptr;
 		}
 	}

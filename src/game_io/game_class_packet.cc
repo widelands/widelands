@@ -34,11 +34,11 @@ void GameClassPacket::read
 {
 	try {
 		FileRead fr;
-		fr.Open(fs, "binary/game_class");
-		uint16_t const packet_version = fr.Unsigned16();
+		fr.open(fs, "binary/game_class");
+		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version <= CURRENT_PACKET_VERSION) {
-			fr.Signed16(); // This used to be game speed
-			game.gametime_ = fr.Unsigned32();
+			fr.signed_16(); // This used to be game speed
+			game.gametime_ = fr.unsigned_32();
 		} else
 			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
@@ -56,11 +56,11 @@ void GameClassPacket::write
 	FileWrite fw;
 
 	// Packet version
-	fw.Unsigned16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(CURRENT_PACKET_VERSION);
 
 	// State is running, we do not need to save this
 	// Save speed
-	fw.Signed16(1000);
+	fw.signed_16(1000);
 
 	// From the interactive player, is saved somewhere else
 	// Computer players are saved somewhere else
@@ -70,7 +70,7 @@ void GameClassPacket::write
 
 	// EDITOR GAME CLASS
 	// Write gametime
-	fw.Unsigned32(game.gametime_);
+	fw.unsigned_32(game.gametime_);
 
 	// We do not care for players, since they were set
 	// on game initialization to match Map::scenario_player_[names|tribes]

@@ -382,7 +382,7 @@ int LuaPlayer::send_message(lua_State * L) {
 int LuaPlayer::message_box(lua_State * L) {
 	Game & game = get_game(L);
 	// don't show message boxes in replays, cause they crash the game
-	if (game.game_controller()->getGameDescription() == "replay") {
+	if (game.game_controller()->get_game_description() == "replay") {
 		return 1;
 	}
 
@@ -417,8 +417,8 @@ int LuaPlayer::message_box(lua_State * L) {
 	std::string title = luaL_checkstring(L, 2);
 	std::string body =  luaL_checkstring(L, 3);
 
-	uint32_t cspeed = game.game_controller()->desiredSpeed();
-	game.game_controller()->setDesiredSpeed(0);
+	uint32_t cspeed = game.game_controller()->desired_speed();
+	game.game_controller()->set_desired_speed(0);
 
 	game.save_handler().set_allow_saving(false);
 
@@ -434,7 +434,7 @@ int LuaPlayer::message_box(lua_State * L) {
 	// especially time information.
 	game.game_controller()->think();
 
-	game.game_controller()->setDesiredSpeed(cspeed);
+	game.game_controller()->set_desired_speed(cspeed);
 
 	game.save_handler().set_allow_saving(true);
 

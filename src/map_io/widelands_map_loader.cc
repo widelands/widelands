@@ -90,9 +90,9 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario) {
 	}
 	// No scripting/init.lua file -> not playable as scenario
 	Map::ScenarioTypes m = Map::NO_SCENARIO;
-	if (m_fs->FileExists("scripting/init.lua"))
+	if (m_fs->file_exists("scripting/init.lua"))
 		m |= Map::SP_SCENARIO;
-	if (m_fs->FileExists("scripting/multiplayer_init.lua"))
+	if (m_fs->file_exists("scripting/multiplayer_init.lua"))
 		m |= Map::MP_SCENARIO;
 	m_map.set_scenario_types(m);
 
@@ -131,7 +131,7 @@ int32_t WidelandsMapLoader::load_map_complete
 	log("took %ums\n ", timer.ms_since_last_query());
 	// PRELOAD DATA END
 
-	if (m_fs->FileExists("port_spaces")) {
+	if (m_fs->file_exists("port_spaces")) {
 		log("Reading Port Spaces Data ... ");
 
 		MapPortSpacesPacket p;
@@ -166,7 +166,7 @@ int32_t WidelandsMapLoader::load_map_complete
 	// This call must stay around forever since this was the way critters have
 	// been saved into the map before 2010. Most of the maps we ship are still
 	// old in that sense and most maps on the homepage too.
-	if (m_fs->FileExists("binary/bob")) {
+	if (m_fs->file_exists("binary/bob")) {
 		log("Reading (legacy) Bob Data ... ");
 		{
 			MapBobPacket p;

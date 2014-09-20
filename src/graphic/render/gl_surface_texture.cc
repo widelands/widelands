@@ -32,7 +32,7 @@ static bool use_arb_;
 /**
  * Initial global resources needed for fast offscreen rendering.
  */
-void GLSurfaceTexture::Initialize(bool use_arb) {
+void GLSurfaceTexture::initialize(bool use_arb) {
 	use_arb_ = use_arb;
 
 	// Generate the framebuffer for Offscreen rendering.
@@ -48,7 +48,7 @@ void GLSurfaceTexture::Initialize(bool use_arb) {
 /**
  * Free global resources.
  */
-void GLSurfaceTexture::Cleanup() {
+void GLSurfaceTexture::cleanup() {
 	if (use_arb_)
 		glDeleteFramebuffers(1, &gl_framebuffer_id_);
 	else

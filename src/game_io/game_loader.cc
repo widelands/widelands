@@ -39,7 +39,7 @@
 namespace Widelands {
 
 GameLoader::GameLoader(const std::string & path, Game & game) :
-	m_fs(*g_fs->MakeSubFileSystem(path)), m_game(game)
+	m_fs(*g_fs->make_sub_file_system(path)), m_game(game)
 {}
 
 

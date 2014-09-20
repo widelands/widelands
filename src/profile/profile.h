@@ -76,7 +76,7 @@ public:
 		bool get_bool() const;
 		char const * get_string() const {return m_value;}
 		char       * get_string()       {return m_value;}
-		Point  get_Point () const;
+		Point  get_point () const;
 
 		void set_string(char const *);
 	};
@@ -119,7 +119,7 @@ public:
 	const char *             get_string
 		(char             const * name,
 		 char             const * def = nullptr);
-	Point                    get_Point
+	Point                    get_point
 		(char             const * name,
 		 Point                    def = Point (0, 0));
 

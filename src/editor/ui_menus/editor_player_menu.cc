@@ -356,7 +356,7 @@ void EditorPlayerMenu::set_starting_pos_clicked(uint8_t n) {
 	//  Register callback function to make sure that only valid locations are
 	//  selected.
 	map.overlay_manager().register_overlay_callback_function(
-	   boost::bind(&Editor_Tool_Set_Starting_Pos_Callback, _1, boost::ref(map)));
+	   boost::bind(&editor_tool_set_starting_pos_callback, _1, boost::ref(map)));
 	map.recalc_whole_map(menu.egbase().world());
 	update();
 }
@@ -441,6 +441,6 @@ void EditorPlayerMenu::make_infrastructure_clicked(uint8_t n) {
 	parent.select_tool(parent.tools.make_infrastructure, EditorTool::First);
 	parent.tools.make_infrastructure.set_player(n);
 	overlay_manager.register_overlay_callback_function(
-	   boost::bind(&Editor_Make_Infrastructure_Tool_Callback, _1, boost::ref(egbase), n));
+	   boost::bind(&editor_make_infrastructure_tool_callback, _1, boost::ref(egbase), n));
 	map.recalc_whole_map(egbase.world());
 }

@@ -30,7 +30,7 @@ void StreamWrite::flush()
 	// no-op as default implementation
 }
 
-void StreamWrite::Printf(char const * const fmt, ...)
+void StreamWrite::print_f(char const * const fmt, ...)
 {
 	//  Try to do formatting on the stack first, but fallback to heap
 	//  allocations to accommodate strings of arbitrary length.

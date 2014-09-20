@@ -51,17 +51,17 @@ void MapRoaddataPacket::read
 		return;
 
 	FileRead fr;
-	try {fr.Open(fs, "binary/road_data");} catch (...) {return;}
+	try {fr.open(fs, "binary/road_data");} catch (...) {return;}
 
 	try {
-		uint16_t const packet_version = fr.Unsigned16();
+		uint16_t const packet_version = fr.unsigned_16();
 		if (1 <= packet_version && packet_version <= CURRENT_PACKET_VERSION) {
 			const Map   &       map        = egbase.map();
 			PlayerNumber const nr_players = map.get_nrplayers();
 			for (;;) {
 				if (2 <= packet_version && fr.end_of_file())
 					break;
-				Serial const serial = fr.Unsigned32();
+				Serial const serial = fr.unsigned_32();
 				if (packet_version < 2 && serial == 0xffffffff) {
 					if (!fr.end_of_file())
 						throw GameDataError
@@ -72,7 +72,7 @@ void MapRoaddataPacket::read
 					Road & road = mol.get<Road>(serial);
 					if (mol.is_object_loaded(road))
 						throw GameDataError("already loaded");
-					PlayerNumber player_index = fr.Unsigned8();
+					PlayerNumber player_index = fr.unsigned_8();
 					if (!(0 < player_index && player_index <= nr_players)) {
 						throw GameDataError("Invalid player number: %i.", player_index);
 					}
@@ -80,12 +80,12 @@ void MapRoaddataPacket::read
 
 					road.set_owner(&plr);
 					if (4 <= packet_version) {
-						road.m_busyness             = fr.Unsigned32();
-						road.m_busyness_last_update = fr.Unsigned32();
+						road.m_busyness             = fr.unsigned_32();
+						road.m_busyness_last_update = fr.unsigned_32();
 					}
-					road.m_type = fr.Unsigned32();
+					road.m_type = fr.unsigned_32();
 					{
-						uint32_t const flag_0_serial = fr.Unsigned32();
+						uint32_t const flag_0_serial = fr.unsigned_32();
 						try {
 							road.m_flags[0] = &mol.get<Flag>(flag_0_serial);
 						} catch (const WException & e) {
@@ -94,7 +94,7 @@ void MapRoaddataPacket::read
 						}
 					}
 					{
-						uint32_t const flag_1_serial = fr.Unsigned32();
+						uint32_t const flag_1_serial = fr.unsigned_32();
 						try {
 							road.m_flags[1] = &mol.get<Flag>(flag_1_serial);
 						} catch (const WException & e) {
@@ -102,12 +102,12 @@ void MapRoaddataPacket::read
 								("flag 1 (%u): %s", flag_1_serial, e.what());
 						}
 					}
-					road.m_flagidx[0] = fr.Unsigned32();
-					road.m_flagidx[1] = fr.Unsigned32();
+					road.m_flagidx[0] = fr.unsigned_32();
+					road.m_flagidx[1] = fr.unsigned_32();
 
-					road.m_cost[0] = fr.Unsigned32();
-					road.m_cost[1] = fr.Unsigned32();
-					Path::StepVector::size_type const nr_steps = fr.Unsigned16();
+					road.m_cost[0] = fr.unsigned_32();
+					road.m_cost[1] = fr.unsigned_32();
+					Path::StepVector::size_type const nr_steps = fr.unsigned_16();
 					if (!nr_steps)
 						throw GameDataError("nr_steps = 0");
 					Path p(road.m_flags[0]->get_position());
@@ -126,9 +126,9 @@ void MapRoaddataPacket::read
 					//  overwrite the initialization values.
 					road._link_into_flags(ref_cast<Game, EditorGameBase>(egbase));
 
-					road.m_idle_index      = fr.Unsigned32();
+					road.m_idle_index      = fr.unsigned_32();
 
-					uint32_t const count = fr.Unsigned32();
+					uint32_t const count = fr.unsigned_32();
 					if (!count)
 						throw GameDataError("no carrier slot");
 					if (packet_version <= 2 && 1 < count)
@@ -143,7 +143,7 @@ void MapRoaddataPacket::read
 						Request * carrier_request = nullptr;
 
 
-						if (uint32_t const carrier_serial = fr.Unsigned32())
+						if (uint32_t const carrier_serial = fr.unsigned_32())
 							try {
 								//log("Read carrier serial %u", carrier_serial);
 								carrier = &mol.get<Carrier>(carrier_serial);
@@ -159,7 +159,7 @@ void MapRoaddataPacket::read
 						//delete road.m_carrier_slots[i].carrier_request;
 						//carrier_request = 0;
 
-						if (fr.Unsigned8()) {
+						if (fr.unsigned_8()) {
 							//log("Reading request");
 							(carrier_request =
 							 	new Request
@@ -173,7 +173,7 @@ void MapRoaddataPacket::read
 							//log("No request in this slot");
 						}
 						uint8_t const carrier_type =
-							packet_version < 3 ? 1 : fr.Unsigned32();
+							packet_version < 3 ? 1 : fr.unsigned_32();
 
 						if
 							(i < road.m_carrier_slots.size() &&
@@ -220,7 +220,7 @@ void MapRoaddataPacket::write
 {
 	FileWrite fw;
 
-	fw.Unsigned16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(CURRENT_PACKET_VERSION);
 
 	const Map   & map        = egbase.map();
 	const Field & fields_end = map[map.max_index()];
@@ -229,58 +229,58 @@ void MapRoaddataPacket::write
 			if (!mos.is_object_saved(*r)) {
 				assert(mos.is_object_known(*r));
 
-				fw.Unsigned32(mos.get_object_file_index(*r));
+				fw.unsigned_32(mos.get_object_file_index(*r));
 
 				//  First, write PlayerImmovable Stuff
 				//  Theres only the owner
-				fw.Unsigned8(r->owner().player_number());
+				fw.unsigned_8(r->owner().player_number());
 
-				fw.Unsigned32(r->m_busyness);
-				fw.Unsigned32(r->m_busyness_last_update);
+				fw.unsigned_32(r->m_busyness);
+				fw.unsigned_32(r->m_busyness_last_update);
 
-				fw.Unsigned32(r->m_type);
+				fw.unsigned_32(r->m_type);
 
 				//  serial of flags
 				assert(mos.is_object_known(*r->m_flags[0]));
 				assert(mos.is_object_known(*r->m_flags[1]));
-				fw.Unsigned32(mos.get_object_file_index(*r->m_flags[0]));
-				fw.Unsigned32(mos.get_object_file_index(*r->m_flags[1]));
+				fw.unsigned_32(mos.get_object_file_index(*r->m_flags[0]));
+				fw.unsigned_32(mos.get_object_file_index(*r->m_flags[1]));
 
-				fw.Unsigned32(r->m_flagidx[0]);
-				fw.Unsigned32(r->m_flagidx[1]);
+				fw.unsigned_32(r->m_flagidx[0]);
+				fw.unsigned_32(r->m_flagidx[1]);
 
-				fw.Unsigned32(r->m_cost[0]);
-				fw.Unsigned32(r->m_cost[1]);
+				fw.unsigned_32(r->m_cost[0]);
+				fw.unsigned_32(r->m_cost[1]);
 
 				const Path & path = r->m_path;
 				const Path::StepVector::size_type nr_steps = path.get_nsteps();
-				fw.Unsigned16(nr_steps);
+				fw.unsigned_16(nr_steps);
 				for (Path::StepVector::size_type i = 0; i < nr_steps; ++i)
-					fw.Unsigned8(path[i]);
+					fw.unsigned_8(path[i]);
 
-				fw.Unsigned32(r->m_idle_index); //  TODO(unknown): do not save this
+				fw.unsigned_32(r->m_idle_index); //  TODO(unknown): do not save this
 
 
-				fw.Unsigned32(r->m_carrier_slots.size());
+				fw.unsigned_32(r->m_carrier_slots.size());
 
 				for (const Road::CarrierSlot& temp_slot : r->m_carrier_slots) {
 					if
 						(Carrier const * const carrier =
 						 temp_slot.carrier.get(egbase)) {
 						assert(mos.is_object_known(*carrier));
-						fw.Unsigned32(mos.get_object_file_index(*carrier));
+						fw.unsigned_32(mos.get_object_file_index(*carrier));
 					} else {
-						fw.Unsigned32(0);
+						fw.unsigned_32(0);
 					}
 
 					if (temp_slot.carrier_request) {
-						fw.Unsigned8(1);
+						fw.unsigned_8(1);
 						temp_slot.carrier_request->write
 							(fw, ref_cast<Game, EditorGameBase>(egbase), mos);
 					} else {
-						fw.Unsigned8(0);
+						fw.unsigned_8(0);
 					}
-					fw.Unsigned32(temp_slot.carrier_type);
+					fw.unsigned_32(temp_slot.carrier_type);
 				}
 				mos.mark_object_as_saved(*r);
 			}

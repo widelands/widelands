@@ -549,7 +549,7 @@ int LuaMapView::get_viewpoint_x(lua_State * L) {
 int LuaMapView::set_viewpoint_x(lua_State * L) {
 	Widelands::Game & game = get_game(L);
 	// don't move view in replays
-	if (game.game_controller()->getGameDescription() == "replay") {
+	if (game.game_controller()->get_game_description() == "replay") {
 		return 0;
 	}
 
@@ -566,7 +566,7 @@ int LuaMapView::get_viewpoint_y(lua_State * L) {
 int LuaMapView::set_viewpoint_y(lua_State * L) {
 	Widelands::Game & game = get_game(L);
 	// don't move view in replays
-	if (game.game_controller()->getGameDescription() == "replay") {
+	if (game.game_controller()->get_game_description() == "replay") {
 		return 0;
 	}
 

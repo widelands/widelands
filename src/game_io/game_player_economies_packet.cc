@@ -44,14 +44,14 @@ void GamePlayerEconomiesPacket::read
 		PlayerNumber const nr_players = map.get_nrplayers();
 
 		FileRead fr;
-		fr.Open(fs, "binary/player_economies");
-		uint16_t const packet_version = fr.Unsigned16();
+		fr.open(fs, "binary/player_economies");
+		uint16_t const packet_version = fr.unsigned_16();
 		if (3 <= packet_version && packet_version <= CURRENT_PACKET_VERSION) {
 			iterate_players_existing(p, nr_players, game, player)
 				try {
 					Player::Economies & economies = player->m_economies;
 					for (uint32_t i = 0; i < economies.size(); ++i) {
-						uint32_t value = fr.Unsigned32();
+						uint32_t value = fr.unsigned_32();
 						if (value < 0xffffffff) {
 							if (upcast(Flag const, flag, map[value].get_immovable())) {
 								EconomyDataPacket d(flag->get_economy());
@@ -96,7 +96,7 @@ void GamePlayerEconomiesPacket::write
 {
 	FileWrite fw;
 
-	fw.Unsigned16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(CURRENT_PACKET_VERSION);
 
 	const Map & map = game.map();
 	const Field & field_0 = map[0];
@@ -110,7 +110,7 @@ void GamePlayerEconomiesPacket::write
 			for (Field const * field = &field_0; field < &map[map.max_index()]; ++field) {
 				if (upcast(Flag const, flag, field->get_immovable())) {
 					if (flag->get_economy() == temp_economy) {
-						fw.Unsigned32(field - &field_0);
+						fw.unsigned_32(field - &field_0);
 
 						EconomyDataPacket d(flag->get_economy());
 						d.write(fw);
@@ -131,8 +131,8 @@ void GamePlayerEconomiesPacket::write
 						if (upcast(Ship const, ship, bob)) {
 							if (ship->get_economy() == temp_economy) {
 								// TODO(sirver): the 0xffffffff is ugly and fragile.
-								fw.Unsigned32(0xffffffff); // Sentinel value.
-								fw.Unsigned32(field - &field_0);
+								fw.unsigned_32(0xffffffff); // Sentinel value.
+								fw.unsigned_32(field - &field_0);
 
 								EconomyDataPacket d(ship->get_economy());
 								d.write(fw);

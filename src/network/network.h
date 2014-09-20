@@ -59,7 +59,7 @@ private:
 /**
  * Keeping track of network time: This class answers the question of how
  * far the local simulation time should proceed, given the history of network
- * time messages forwarded to the \ref recv() method.
+ * time messages forwarded to the \ref receive() method.
  *
  * In general, the time progresses as fast as given by the speed, but we
  * introduce some elasticity to catch up with the network time if necessary,
@@ -75,7 +75,7 @@ public:
 	void think(uint32_t speed);
 	int32_t time() const;
 	int32_t networktime() const;
-	void recv(int32_t ntime);
+	void receive(int32_t ntime);
 
 private:
 	int32_t m_networktime;

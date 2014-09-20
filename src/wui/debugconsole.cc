@@ -86,7 +86,7 @@ struct Console : public ChatProvider, public Handler {
 		it->second(arg);
 	}
 
-	const std::vector<ChatMessage> & getMessages() const override
+	const std::vector<ChatMessage> & get_messages() const override
 	{
 		return messages;
 	}

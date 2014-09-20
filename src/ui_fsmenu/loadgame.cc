@@ -161,7 +161,7 @@ void FullscreenMenuLoadGame::clicked_delete()
 		 (boost::format(_("Do you really want to delete %s?")) % fname).str(),
 		 UI::WLMessageBox::YESNO);
 	if (confirmationBox.run()) {
-		g_fs->Unlink(m_list.get_selected());
+		g_fs->fs_unlink(m_list.get_selected());
 		m_list.clear();
 		fill_list();
 		if (m_list.empty()) {
@@ -257,7 +257,7 @@ void FullscreenMenuLoadGame::map_selected(uint32_t selected)
 		try {
 			// Load the image
 			std::unique_ptr<Surface> surface(load_image(
-			   minimap_path, std::unique_ptr<FileSystem>(g_fs->MakeSubFileSystem(name)).get()));
+			   minimap_path, std::unique_ptr<FileSystem>(g_fs->make_sub_file_system(name)).get()));
 			m_minimap_image.reset(new_in_memory_image(std::string(name + minimap_path), surface.release()));
 			// Scale it
 			double scale = double(m_minimap_max_size) / m_minimap_image->width();
@@ -295,11 +295,11 @@ void FullscreenMenuLoadGame::fill_list() {
 	if (m_settings && !m_settings->settings().saved_games.empty()) {
 		for (uint32_t i = 0; i < m_settings->settings().saved_games.size(); ++i) {
 			const char * path = m_settings->settings().saved_games.at(i).path.c_str();
-			m_list.add(FileSystem::FS_FilenameWoExt(path).c_str(), path);
+			m_list.add(FileSystem::filename_without_ext(path).c_str(), path);
 		}
 	} else { // Normal case
 		// Fill it with all files we find.
-		m_gamefiles = g_fs->ListDirectory("save");
+		m_gamefiles = g_fs->list_directory("save");
 
 		Widelands::GamePreloadPacket gpdp;
 
@@ -311,7 +311,7 @@ void FullscreenMenuLoadGame::fill_list() {
 				Widelands::GameLoader gl(name, m_game);
 				gl.preload_game(gpdp);
 
-				m_list.add(FileSystem::FS_FilenameWoExt(name).c_str(), name);
+				m_list.add(FileSystem::filename_without_ext(name).c_str(), name);
 			} catch (const WException &) {
 				//  we simply skip illegal entries
 			}

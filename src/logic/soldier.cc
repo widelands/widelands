@@ -1585,7 +1585,7 @@ void Soldier::battle_update(Game & game, State &)
 						 	 buffer,
 						 	 opponent.get_position(),
 							 m_serial));
-					game.game_controller()->setDesiredSpeed(0);
+					game.game_controller()->set_desired_speed(0);
 					return pop_task(game);
 				}
 			}
@@ -1854,34 +1854,34 @@ void Soldier::Loader::load(FileRead & fr)
 {
 	Worker::Loader::load(fr);
 
-	uint8_t version = fr.Unsigned8();
+	uint8_t version = fr.unsigned_8();
 	if (version > SOLDIER_SAVEGAME_VERSION)
 		throw GameDataError("unknown/unhandled version %u", version);
 
 	Soldier & soldier = get<Soldier>();
-	soldier.m_hp_current = fr.Unsigned32();
+	soldier.m_hp_current = fr.unsigned_32();
 	if (SOLDIER_SAVEGAME_VERSION < 2) // Hitpoints multiplied to make balance easier
 		soldier.m_hp_current *= 100;
 
 	soldier.m_hp_level =
-		std::min(fr.Unsigned32(), soldier.descr().get_max_hp_level());
+		std::min(fr.unsigned_32(), soldier.descr().get_max_hp_level());
 	soldier.m_attack_level =
-		std::min(fr.Unsigned32(), soldier.descr().get_max_attack_level());
+		std::min(fr.unsigned_32(), soldier.descr().get_max_attack_level());
 	soldier.m_defense_level =
-		std::min(fr.Unsigned32(), soldier.descr().get_max_defense_level());
+		std::min(fr.unsigned_32(), soldier.descr().get_max_defense_level());
 	soldier.m_evade_level =
-		std::min(fr.Unsigned32(), soldier.descr().get_max_evade_level());
+		std::min(fr.unsigned_32(), soldier.descr().get_max_evade_level());
 
 	if (soldier.m_hp_current > soldier.get_max_hitpoints())
 		soldier.m_hp_current = soldier.get_max_hitpoints();
 
-	soldier.m_combat_walking = static_cast<CombatWalkingDir>(fr.Unsigned8());
+	soldier.m_combat_walking = static_cast<CombatWalkingDir>(fr.unsigned_8());
 	if (soldier.m_combat_walking != CD_NONE) {
-		soldier.m_combat_walkstart = fr.Signed32();
-		soldier.m_combat_walkend = fr.Signed32();
+		soldier.m_combat_walkstart = fr.signed_32();
+		soldier.m_combat_walkend = fr.signed_32();
 	}
 
-	m_battle = fr.Unsigned32();
+	m_battle = fr.unsigned_32();
 }
 
 void Soldier::Loader::load_pointers()
@@ -1914,20 +1914,20 @@ void Soldier::do_save
 {
 	Worker::do_save(egbase, mos, fw);
 
-	fw.Unsigned8(SOLDIER_SAVEGAME_VERSION);
-	fw.Unsigned32(m_hp_current);
-	fw.Unsigned32(m_hp_level);
-	fw.Unsigned32(m_attack_level);
-	fw.Unsigned32(m_defense_level);
-	fw.Unsigned32(m_evade_level);
+	fw.unsigned_8(SOLDIER_SAVEGAME_VERSION);
+	fw.unsigned_32(m_hp_current);
+	fw.unsigned_32(m_hp_level);
+	fw.unsigned_32(m_attack_level);
+	fw.unsigned_32(m_defense_level);
+	fw.unsigned_32(m_evade_level);
 
-	fw.Unsigned8(m_combat_walking);
+	fw.unsigned_8(m_combat_walking);
 	if (m_combat_walking != CD_NONE) {
-		fw.Signed32(m_combat_walkstart);
-		fw.Signed32(m_combat_walkend);
+		fw.signed_32(m_combat_walkstart);
+		fw.signed_32(m_combat_walkend);
 	}
 
-	fw.Unsigned32(mos.get_object_file_index_or_zero(m_battle));
+	fw.unsigned_32(mos.get_object_file_index_or_zero(m_battle));
 }
 
 }

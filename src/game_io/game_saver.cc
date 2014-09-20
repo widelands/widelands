@@ -43,7 +43,7 @@ GameSaver::GameSaver(FileSystem & fs, Game & game) : m_fs(fs), m_game(game) {
 void GameSaver::save() {
 	ScopedTimer timer("GameSaver::save() took %ums");
 
-	m_fs.EnsureDirectoryExists("binary");
+	m_fs.ensure_directory_exists("binary");
 
 	log("Game: Writing Preload Data ... ");
 	{GamePreloadPacket                    p; p.write(m_fs, m_game, nullptr);}

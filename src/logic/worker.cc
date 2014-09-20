@@ -2945,17 +2945,17 @@ void Worker::Loader::load(FileRead & fr)
 {
 	Bob::Loader::load(fr);
 
-	uint8_t version = fr.Unsigned8();
+	uint8_t version = fr.unsigned_8();
 	if (!(1 <= version && version <= WORKER_SAVEGAME_VERSION))
 		throw GameDataError("unknown/unhandled version %u", version);
 
 	Worker & worker = get<Worker>();
-	m_location = fr.Unsigned32();
-	m_carried_ware = fr.Unsigned32();
-	worker.m_current_exp = fr.Signed32();
+	m_location = fr.unsigned_32();
+	m_carried_ware = fr.unsigned_32();
+	worker.m_current_exp = fr.signed_32();
 
 	if (version >= 2) {
-		if (fr.Unsigned8()) {
+		if (fr.unsigned_8()) {
 			worker.m_transfer =
 				new Transfer(ref_cast<Game, EditorGameBase>(egbase()), worker);
 			worker.m_transfer->read(fr, m_transfer);
@@ -3035,8 +3035,8 @@ MapObject::Loader * Worker::load
 {
 	try {
 		// header has already been read by caller
-		std::string tribename = fr.CString();
-		std::string name = fr.CString();
+		std::string tribename = fr.c_string();
+		std::string name = fr.c_string();
 
 		egbase.manually_load_tribe(tribename);
 
@@ -3065,9 +3065,9 @@ MapObject::Loader * Worker::load
 void Worker::save
 	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(HeaderWorker);
-	fw.CString(descr().tribe().name());
-	fw.CString(descr().name());
+	fw.unsigned_8(HeaderWorker);
+	fw.c_string(descr().tribe().name());
+	fw.c_string(descr().name());
 
 	do_save(egbase, mos, fw);
 }
@@ -3084,16 +3084,16 @@ void Worker::do_save
 {
 	Bob::save(egbase, mos, fw);
 
-	fw.Unsigned8(WORKER_SAVEGAME_VERSION);
-	fw.Unsigned32(mos.get_object_file_index_or_zero(m_location.get(egbase)));
-	fw.Unsigned32(mos.get_object_file_index_or_zero(m_carried_ware.get(egbase)));
-	fw.Signed32(m_current_exp);
+	fw.unsigned_8(WORKER_SAVEGAME_VERSION);
+	fw.unsigned_32(mos.get_object_file_index_or_zero(m_location.get(egbase)));
+	fw.unsigned_32(mos.get_object_file_index_or_zero(m_carried_ware.get(egbase)));
+	fw.signed_32(m_current_exp);
 
 	if (m_transfer) {
-		fw.Unsigned8(1);
+		fw.unsigned_8(1);
 		m_transfer->write(mos, fw);
 	} else {
-		fw.Unsigned8(0);
+		fw.unsigned_8(0);
 	}
 }
 

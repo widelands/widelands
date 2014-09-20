@@ -181,7 +181,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 
 	// try to connect to the metaserver
 	if (!InternetGaming::ref().error() && !InternetGaming::ref().logged_in())
-		connectToMetaserver();
+		connect_to_metaserver();
 }
 
 
@@ -194,23 +194,23 @@ void FullscreenMenuInternetLobby::think ()
 
 		// If we have no connection try to connect
 		if (!InternetGaming::ref().logged_in()) {
-			connectToMetaserver();
+			connect_to_metaserver();
 		}
 
 		// Check whether metaserver send some data
 		InternetGaming::ref().handle_metaserver_communication();
 	}
 
-	if (InternetGaming::ref().updateForClients())
-		fillClientList(InternetGaming::ref().clients());
+	if (InternetGaming::ref().update_for_clients())
+		fill_client_list(InternetGaming::ref().clients());
 
-	if (InternetGaming::ref().updateForGames())
-		fillGamesList(InternetGaming::ref().games());
+	if (InternetGaming::ref().update_for_games())
+		fill_games_list(InternetGaming::ref().games());
 }
 
 
 /// connects Widelands with the metaserver
-void FullscreenMenuInternetLobby::connectToMetaserver()
+void FullscreenMenuInternetLobby::connect_to_metaserver()
 {
 	Section & s = g_options.pull_section("global");
 	const std::string & metaserver = s.get_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
@@ -226,7 +226,7 @@ void FullscreenMenuInternetLobby::connectToMetaserver()
 
 
 /// fills the server list
-void FullscreenMenuInternetLobby::fillGamesList(const std::vector<InternetGame> & games)
+void FullscreenMenuInternetLobby::fill_games_list(const std::vector<InternetGame> & games)
 {
 	// List and button cleanup
 	opengames.clear();
@@ -279,7 +279,7 @@ bool FullscreenMenuInternetLobby::compare_clienttype(unsigned int rowa, unsigned
 }
 
 /// fills the client list
-void FullscreenMenuInternetLobby::fillClientList(const std::vector<InternetClient> & clients)
+void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetClient> & clients)
 {
 	clientsonline.clear();
 	for (uint32_t i = 0; i < clients.size(); ++i) {
@@ -407,7 +407,7 @@ void FullscreenMenuInternetLobby::clicked_joingame()
 						 "of the server.\n"));
 				UI::WLMessageBox mmb(this, warningheader, warning, UI::WLMessageBox::OK, UI::Align_Left);
 				mmb.run();
-				return InternetGaming::ref().setError();
+				return InternetGaming::ref().set_error();
 			}
 		}
 		std::string ip = InternetGaming::ref().ip();

@@ -51,10 +51,10 @@ void MapBuildingPacket::read
 	if (skip)
 		return;
 	FileRead fr;
-	try {fr.Open(fs, "binary/building");} catch (...) {return;}
+	try {fr.open(fs, "binary/building");} catch (...) {return;}
 	InteractiveBase & ibase = *egbase.get_ibase();
 	try {
-		uint16_t const packet_version = fr.Unsigned16();
+		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version >= LOWEST_SUPPORTED_VERSION) {
 			Map & map = egbase.map();
 			uint16_t const width  = map.get_width ();
@@ -62,11 +62,11 @@ void MapBuildingPacket::read
 			FCoords c;
 			for (c.y = 0; c.y < height; ++c.y) {
 				for (c.x = 0; c.x < width; ++c.x) {
-					if (fr.Unsigned8()) {
-						PlayerNumber const p                   = fr.Unsigned8 ();
-						Serial        const serial              = fr.Unsigned32();
-						char  const * const name                = fr.CString   ();
-						uint8_t       const special_type        = fr.Unsigned8 ();
+					if (fr.unsigned_8()) {
+						PlayerNumber const p                   = fr.unsigned_8 ();
+						Serial        const serial              = fr.unsigned_32();
+						char  const * const name                = fr.c_string   ();
+						uint8_t       const special_type        = fr.unsigned_8 ();
 
 						//  No building lives on more than one main place.
 
@@ -123,7 +123,7 @@ void MapBuildingPacket::write
 	FileWrite fw;
 
 	// now packet version
-	fw.Unsigned16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(CURRENT_PACKET_VERSION);
 
 	// Write buildings and owner, register this with the map_object_saver so that
 	// it's data can be saved later.
@@ -136,27 +136,27 @@ void MapBuildingPacket::write
 			//  Buildings can life on only one main position.
 			assert(!mos.is_object_known(*building));
 
-			fw.Unsigned8(1);
-			fw.Unsigned8(building->owner().player_number());
-			fw.Unsigned32(mos.register_object(*building));
+			fw.unsigned_8(1);
+			fw.unsigned_8(building->owner().player_number());
+			fw.unsigned_32(mos.register_object(*building));
 
 			upcast(PartiallyFinishedBuilding const, pfb, building);
-			fw.CString
+			fw.c_string
 				((pfb ? *pfb->m_building : building->descr())
 				 .name().c_str());
 
 			if (!pfb)
-				fw.Unsigned8(0);
+				fw.unsigned_8(0);
 			else {
 				if (is_a(ConstructionSite, pfb))
-					fw.Unsigned8(1);
+					fw.unsigned_8(1);
 				else // DismantleSite
-					fw.Unsigned8(2);
+					fw.unsigned_8(2);
 			}
 
 			write_priorities(*building, fw);
 		} else
-			fw.Unsigned8(0);
+			fw.unsigned_8(0);
 	}
 
 	fw.write(fs, "binary/building");
@@ -168,7 +168,7 @@ void MapBuildingPacket::write_priorities
 	(const Building & building, FileWrite & fw)
 {
 	// Used to be base_priority which is no longer used. Remove after b20.
-	fw.Unsigned32(0);
+	fw.unsigned_32(0);
 
 	std::map<int32_t, std::map<WareIndex, int32_t> > type_to_priorities;
 	std::map<int32_t, std::map<WareIndex, int32_t> >::iterator it;
@@ -182,8 +182,8 @@ void MapBuildingPacket::write_priorities
 
 		// write ware type and priority count
 		const int32_t ware_type = it->first;
-		fw.Unsigned8(ware_type);
-		fw.Unsigned8(it->second.size());
+		fw.unsigned_8(ware_type);
+		fw.unsigned_8(it->second.size());
 
 		std::map<WareIndex, int32_t>::iterator it2;
 		for (it2 = it->second.begin(); it2 != it->second.end(); ++it2)
@@ -199,38 +199,38 @@ void MapBuildingPacket::write_priorities
 						("unrecognized ware type %d while writing priorities",
 						 ware_type);
 
-			fw.CString(name.c_str());
-			fw.Unsigned32(it2->second);
+			fw.c_string(name.c_str());
+			fw.unsigned_32(it2->second);
 		}
 	}
 
 	// write 0xff so the end can be easily identified
-	fw.Unsigned8(0xff);
+	fw.unsigned_8(0xff);
 }
 
 void MapBuildingPacket::read_priorities
 	(Building & building, FileRead & fr)
 {
-	fr.Unsigned32(); // unused, was base_priority which is unused. Remove after b20.
+	fr.unsigned_32(); // unused, was base_priority which is unused. Remove after b20.
 
 	const TribeDescr & tribe = building.descr().tribe();
 	int32_t ware_type = -1;
 	// read ware type
-	while (0xff != (ware_type = fr.Unsigned8())) {
+	while (0xff != (ware_type = fr.unsigned_8())) {
 		// read count of priorities assigned for this ware type
-		const uint8_t count = fr.Unsigned8();
+		const uint8_t count = fr.unsigned_8();
 		for (uint8_t i = 0; i < count; ++i) {
 			WareIndex idx;
 			if (wwWARE == ware_type)
-				idx = tribe.safe_ware_index(fr.CString());
+				idx = tribe.safe_ware_index(fr.c_string());
 			else if (wwWORKER == ware_type)
-				idx = tribe.safe_worker_index(fr.CString());
+				idx = tribe.safe_worker_index(fr.c_string());
 			else
 				throw GameDataError
 						("unrecognized ware type %d while reading priorities",
 						 ware_type);
 
-			building.set_priority(ware_type, idx, fr.Unsigned32());
+			building.set_priority(ware_type, idx, fr.unsigned_32());
 		}
 	}
 }

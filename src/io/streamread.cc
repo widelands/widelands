@@ -55,43 +55,43 @@ void StreamRead::data_complete(void * const read_data, const size_t size)
 			 static_cast<long unsigned int>(size));
 }
 
-int8_t StreamRead::Signed8() {
+int8_t StreamRead::signed_8() {
 	int8_t x;
 	data_complete(&x, 1);
 	return x;
 }
 
-uint8_t StreamRead::Unsigned8() {
+uint8_t StreamRead::unsigned_8() {
 	uint8_t x;
 	data_complete(&x, 1);
 	return x;
 }
 
-int16_t StreamRead::Signed16() {
+int16_t StreamRead::signed_16() {
 	int16_t x;
 	data_complete(&x, 2);
-	return Little16(x);
+	return little_16(x);
 }
 
-uint16_t StreamRead::Unsigned16() {
+uint16_t StreamRead::unsigned_16() {
 	uint16_t x;
 	data_complete(&x, 2);
-	return Little16(x);
+	return little_16(x);
 }
 
-int32_t StreamRead::Signed32() {
+int32_t StreamRead::signed_32() {
 	int32_t x;
 	data_complete(&x, 4);
-	return Little32(x);
+	return little_32(x);
 }
 
-uint32_t StreamRead::Unsigned32() {
+uint32_t StreamRead::unsigned_32() {
 	uint32_t x;
 	data_complete(&x, 4);
-	return Little32(x);
+	return little_32(x);
 }
 
-std::string StreamRead::String()
+std::string StreamRead::string()
 {
 	std::string x;
 	char ch;

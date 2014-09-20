@@ -596,12 +596,12 @@ void Carrier::Loader::load(FileRead & fr)
 {
 	Worker::Loader::load(fr);
 
-	uint8_t version = fr.Unsigned8();
+	uint8_t version = fr.unsigned_8();
 	if (version != CARRIER_SAVEGAME_VERSION)
 		throw GameDataError("unknown/unhandled version %u", version);
 
 	Carrier & carrier = get<Carrier>();
-	carrier.m_promised_pickup_to = fr.Signed32();
+	carrier.m_promised_pickup_to = fr.signed_32();
 }
 
 const Bob::Task * Carrier::Loader::get_task(const std::string & name)
@@ -621,8 +621,8 @@ void Carrier::do_save
 {
 	Worker::do_save(egbase, mos, fw);
 
-	fw.Unsigned8(CARRIER_SAVEGAME_VERSION);
-	fw.Signed32(m_promised_pickup_to);
+	fw.unsigned_8(CARRIER_SAVEGAME_VERSION);
+	fw.signed_32(m_promised_pickup_to);
 }
 
 /**

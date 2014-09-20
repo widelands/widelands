@@ -185,15 +185,15 @@ load_s2mf_section(FileRead& fr, int32_t const width, int32_t const height) {
 		return section;
 	}
 
-	uint16_t const dw = fr.Unsigned16();
-	uint16_t const dh = fr.Unsigned16();
+	uint16_t const dw = fr.unsigned_16();
+	uint16_t const dh = fr.unsigned_16();
 
 	{
-		uint16_t const one = fr.Unsigned16();
+		uint16_t const one = fr.unsigned_16();
 		if (one != 1)
 			throw wexception("expected 1 but found %u", one);
 	}
-	int32_t const size = fr.Signed32();
+	int32_t const size = fr.signed_32();
 	if (size != dw * dh)
 		throw wexception("expected %u but found %u", dw * dh, size);
 
@@ -321,7 +321,7 @@ int32_t S2MapLoader::preload_map(bool const scenario) {
 	m_map.cleanup();
 
 	FileRead fr;
-	fr.Open(*g_fs, m_filename.c_str());
+	fr.open(*g_fs, m_filename.c_str());
 
 	load_s2mf_header(fr);
 
@@ -389,8 +389,8 @@ void S2MapLoader::load_s2mf_header(FileRead& fr)
 	//  for PowerPC architecture
 	//  TODO(unknown): Generalize this
 #if defined(__ppc__)
-	header.w = Swap16(header.w);
-	header.h = Swap16(header.h);
+	header.w = swap_16(header.w);
+	header.h = swap_16(header.h);
 #endif
 
 	//  don't really set size, but make the structures valid
@@ -414,7 +414,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 	uint8_t * pc;
 
 	FileRead fr;
-	fr.Open(*g_fs, m_filename.c_str());
+	fr.open(*g_fs, m_filename.c_str());
 
 	load_s2mf_header(fr);
 	m_map.set_size(m_map.m_width, m_map.m_height);
@@ -673,7 +673,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 	if (!section)
 		throw wexception("Section 14 (Island id) not found");
 
-	fr.Close();
+	fr.close();
 
 	//  Map is completely read into memory.
 	//  Now try to convert the remaining stuff to Widelands-format. This will

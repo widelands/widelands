@@ -35,8 +35,8 @@ struct LoginBox : public UI::Window {
 	bool set_automaticlog()    {return cb_auto_log->get_state();}
 
 private:
-	void pressedLogin();
-	void pressedCancel();
+	void pressed_login();
+	void pressed_cancel();
 
 private:
 	UI::EditBox  * eb_nickname;

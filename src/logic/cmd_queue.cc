@@ -118,8 +118,8 @@ int32_t CmdQueue::run_queue(int32_t const interval, int32_t & game_time_var) {
 				StreamWrite & ss = m_game.syncstream();
 				static uint8_t const tag[] = {0xde, 0xad, 0x00};
 				ss.data(tag, 3); // provide an easy-to-find pattern as debugging aid
-				ss.Unsigned32(c.duetime());
-				ss.Unsigned32(c.id());
+				ss.unsigned_32(c.duetime());
+				ss.unsigned_32(c.id());
 			}
 
 			c.execute (m_game);
@@ -156,11 +156,11 @@ void GameLogicCommand::write
 	 MapObjectSaver &)
 {
 	// First version
-	fw.Unsigned16(BASE_CMD_VERSION);
+	fw.unsigned_16(BASE_CMD_VERSION);
 
 	// Write duetime
 	assert(egbase.get_gametime() <= duetime());
-	fw.Unsigned32(duetime());
+	fw.unsigned_32(duetime());
 }
 
 /**
@@ -172,9 +172,9 @@ void GameLogicCommand::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader &)
 {
 	try {
-		uint16_t const packet_version = fr.Unsigned16();
+		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == BASE_CMD_VERSION) {
-			set_duetime(fr.Unsigned32());
+			set_duetime(fr.unsigned_32());
 			int32_t const gametime = egbase.get_gametime();
 			if (duetime() < gametime)
 				throw GameDataError

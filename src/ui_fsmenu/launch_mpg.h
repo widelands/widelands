@@ -52,7 +52,7 @@ struct FullscreenMenuLaunchMPG : public FullscreenMenuBase {
 	FullscreenMenuLaunchMPG(GameSettingsProvider *, GameController *);
 	~FullscreenMenuLaunchMPG();
 
-	void setChatProvider(ChatProvider &);
+	void set_chat_provider(ChatProvider &);
 
 	void think() override;
 

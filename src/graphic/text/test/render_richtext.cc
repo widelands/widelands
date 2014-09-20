@@ -123,8 +123,8 @@ int main(int argc, char** argv) {
 		std::unique_ptr<SDLSurface> surf(
 		   static_cast<SDLSurface*>(standalone_renderer.renderer()->render(txt, w, allowed_tags)));
 
-		std::unique_ptr<FileSystem> fs(&FileSystem::Create("."));
-		std::unique_ptr<StreamWrite> sw(fs->OpenStreamWrite(outname));
+		std::unique_ptr<FileSystem> fs(&FileSystem::create("."));
+		std::unique_ptr<StreamWrite> sw(fs->open_stream_write(outname));
 		if (!save_surface_to_png(surf.get(), sw.get())) {
 			std::cout << "Could not encode PNG." << std::endl;
 		}

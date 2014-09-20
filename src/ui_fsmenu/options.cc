@@ -53,7 +53,7 @@ struct LanguageEntry {
 void add_languages_to_list(UI::Listselect<std::string>* list, const std::string& language) {
 
 	Section* s = &g_options.pull_section("global");
-	FilenameSet files = g_fs->ListDirectory(s->get_string("localedir", INSTALL_LOCALEDIR));
+	FilenameSet files = g_fs->list_directory(s->get_string("localedir", INSTALL_LOCALEDIR));
 	Profile ln("txts/languages");
 	s = &ln.pull_section("languages");
 	bool own_selected = "" == language || "en" == language;
@@ -62,12 +62,12 @@ void add_languages_to_list(UI::Listselect<std::string>* list, const std::string&
 	std::vector<LanguageEntry> entries;
 	for (const std::string& filename : files) {
 		char const* const path = filename.c_str();
-		if (!strcmp(FileSystem::FS_Filename(path), ".") ||
-		    !strcmp(FileSystem::FS_Filename(path), "..") || !g_fs->IsDirectory(path)) {
+		if (!strcmp(FileSystem::fs_filename(path), ".") ||
+		    !strcmp(FileSystem::fs_filename(path), "..") || !g_fs->is_directory(path)) {
 			continue;
 		}
 
-		char const* const abbreviation = FileSystem::FS_Filename(path);
+		char const* const abbreviation = FileSystem::fs_filename(path);
 		entries.emplace_back(abbreviation, s->get_string(abbreviation, abbreviation));
 		own_selected |= abbreviation == language;
 	}
@@ -547,7 +547,7 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 
 		// Fill with all left *.ttf files we find in fonts
 		FilenameSet files =
-		   filter(g_fs->ListDirectory("fonts"),
+		   filter(g_fs->list_directory("fonts"),
 		          [](const std::string& fn) {return boost::ends_with(fn, ".ttf");});
 
 		for
@@ -556,12 +556,12 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 			 ++pname)
 		{
 			char const * const path = pname->c_str();
-			char const * const name = FileSystem::FS_Filename(path);
+			char const * const name = FileSystem::fs_filename(path);
 			if (!strcmp(name, UI_FONT_NAME_SERIF))
 				continue;
 			if (!strcmp(name, UI_FONT_NAME_SANS))
 				continue;
-			if (g_fs->IsDirectory(name))
+			if (g_fs->is_directory(name))
 				continue;
 			cmpbool = !strcmp(name, opt.ui_font.c_str());
 			did_select_a_font |= cmpbool;

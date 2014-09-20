@@ -125,12 +125,12 @@ int LuaGame::get_time(lua_State * L) {
 */
 // UNTESTED
 int LuaGame::set_desired_speed(lua_State * L) {
-	get_game(L).game_controller()->setDesiredSpeed(luaL_checkuint32(L, -1));
+	get_game(L).game_controller()->set_desired_speed(luaL_checkuint32(L, -1));
 	return 1;
 }
 // UNTESTED
 int LuaGame::get_desired_speed(lua_State * L) {
-	lua_pushuint32(L, get_game(L).game_controller()->desiredSpeed());
+	lua_pushuint32(L, get_game(L).game_controller()->desired_speed());
 	return 1;
 }
 

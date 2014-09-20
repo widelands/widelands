@@ -47,12 +47,12 @@ struct GameChatPanel : public UI::Panel {
 	const std::string & get_edit_text() const {return editbox.text();}
 	void set_edit_text(const std::string & text) {editbox.set_text(text);}
 
-	void focusEdit();
+	void focus_edit();
 
 private:
 	void recalculate();
-	void keyEnter();
-	void keyEscape();
+	void key_enter();
+	void key_escape();
 
 	ChatProvider & m_chat;
 	UI::MultilineTextarea chatbox;

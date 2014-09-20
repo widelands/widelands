@@ -42,7 +42,7 @@ WorkerDescr::WorkerDescr
 	:
 	BobDescr(object_type, _name, _descname, &_tribe),
 	m_helptext          (global_s.get_string("help", "")),
-	m_ware_hotspot      (global_s.get_Point("ware_hotspot", Point(0, 15))),
+	m_ware_hotspot      (global_s.get_point("ware_hotspot", Point(0, 15))),
 	m_icon_fname        (directory + "/menu.png"),
 	m_icon              (nullptr),
 	m_buildable         (false),

@@ -42,7 +42,7 @@ void Requirements::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
-		uint16_t const packet_version = fr.Unsigned16();
+		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == REQUIREMENTS_VERSION) {
 			*this = RequirementsStorage::read(fr, egbase, mol);
 		} else
@@ -57,12 +57,12 @@ void Requirements::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 	const
 {
-	fw.Unsigned16(REQUIREMENTS_VERSION);
+	fw.unsigned_16(REQUIREMENTS_VERSION);
 
 	if (!m) {
-		fw.Unsigned16(0);
+		fw.unsigned_16(0);
 	} else {
-		fw.Unsigned16(m->storage().id());
+		fw.unsigned_16(m->storage().id());
 		m->write(fw, egbase, mos);
 	}
 }
@@ -88,7 +88,7 @@ uint32_t RequirementsStorage::id() const
 Requirements RequirementsStorage::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
-	uint32_t const id = fr.Unsigned16();
+	uint32_t const id = fr.unsigned_16();
 
 	if (id == 0)
 		return Requirements();
@@ -130,7 +130,7 @@ void RequireOr::write
 	const
 {
 	assert(m.size() == static_cast<uint16_t>(m.size()));
-	fw.Unsigned16(m.size());
+	fw.unsigned_16(m.size());
 
 	for (const Requirements& req : m) {
 		req.write(fw, egbase, mos);
@@ -140,7 +140,7 @@ void RequireOr::write
 static Requirements read_or
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
-	uint32_t const count = fr.Unsigned16();
+	uint32_t const count = fr.unsigned_16();
 	RequireOr req;
 
 	for (uint32_t i = 0; i < count; ++i) {
@@ -175,7 +175,7 @@ void RequireAnd::write
 	const
 {
 	assert(m.size() == static_cast<uint16_t>(m.size()));
-	fw.Unsigned16(m.size());
+	fw.unsigned_16(m.size());
 
 	for (const Requirements& req : m) {
 		req.write(fw, egbase, mos);
@@ -185,7 +185,7 @@ void RequireAnd::write
 static Requirements read_and
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
-	uint32_t const count = fr.Unsigned16();
+	uint32_t const count = fr.unsigned_16();
 	RequireAnd req;
 
 	for (uint32_t i = 0; i < count; ++i) {
@@ -222,15 +222,15 @@ bool RequireAttribute::check(const MapObject & obj) const
 void RequireAttribute::write
 	(FileWrite & fw, EditorGameBase &, MapObjectSaver &) const
 {
-	fw.Unsigned32(at);
-	fw.Signed32(min);
-	fw.Signed32(max);
+	fw.unsigned_32(at);
+	fw.signed_32(min);
+	fw.signed_32(max);
 }
 
 static Requirements read_attribute
 	(FileRead & fr, EditorGameBase &, MapObjectLoader &)
 {
-	TrainingAttribute const at  = static_cast<TrainingAttribute>(fr.Unsigned32());
+	TrainingAttribute const at  = static_cast<TrainingAttribute>(fr.unsigned_32());
 	if
 		(at != atrHP && at != atrAttack && at != atrDefense && at != atrEvade
 		 &&
@@ -240,8 +240,8 @@ static Requirements read_attribute
 			 "expected atrHP (%u), atrAttack (%u), atrDefense (%u), atrEvade "
 			 "(%u) or atrTotal (%u) but found unknown attribute value (%u)",
 			 atrHP, atrAttack, atrDefense, atrEvade, atrTotal, at);
-	int32_t const min = fr.Signed32();
-	int32_t const max = fr.Signed32();
+	int32_t const min = fr.signed_32();
+	int32_t const max = fr.signed_32();
 
 	return RequireAttribute(at, min, max);
 }

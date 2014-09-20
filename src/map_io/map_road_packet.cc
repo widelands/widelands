@@ -46,13 +46,13 @@ void MapRoadPacket::read
 		return;
 
 	FileRead fr;
-	try {fr.Open(fs, "binary/road");} catch (...) {return;}
+	try {fr.open(fs, "binary/road");} catch (...) {return;}
 
 	try {
-		uint16_t const packet_version = fr.Unsigned16();
+		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == CURRENT_PACKET_VERSION) {
 			Serial serial;
-			while ((serial = fr.Unsigned32()) != 0xffffffff) {
+			while ((serial = fr.unsigned_32()) != 0xffffffff) {
 				try {
 					//  If this is already known, get it.
 					//  Road data is read somewhere else
@@ -75,7 +75,7 @@ void MapRoadPacket::write
 {
 	FileWrite fw;
 
-	fw.Unsigned16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(CURRENT_PACKET_VERSION);
 
 	//  Write roads. Register this with the map_object_saver so that its data
 	//  can be saved later.
@@ -86,8 +86,8 @@ void MapRoadPacket::write
 		if (upcast(Road const, road, field->get_immovable())) // only roads
 			//  Roads can life on multiple positions.
 			if (!mos.is_object_known(*road))
-				fw.Unsigned32(mos.register_object(*road));
-	fw.Unsigned32(0xffffffff);
+				fw.unsigned_32(mos.register_object(*road));
+	fw.unsigned_32(0xffffffff);
 
 	fw.write(fs, "binary/road");
 }

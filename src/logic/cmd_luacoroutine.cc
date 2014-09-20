@@ -53,14 +53,14 @@ void CmdLuaCoroutine::execute (Game & game) {
 				("Game Logic", game.get_gametime(), "Lua Coroutine Failed", e.what());
 			game.player(i).add_message(game, msg, true);
 		}
-		game.game_controller()->setDesiredSpeed(0);
+		game.game_controller()->set_desired_speed(0);
 	}
 }
 
 #define CMD_LUACOROUTINE_VERSION 3
 void CmdLuaCoroutine::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
-		uint16_t const packet_version = fr.Unsigned16();
+		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == CMD_LUACOROUTINE_VERSION) {
 			GameLogicCommand::read(fr, egbase, mol);
 
@@ -80,7 +80,7 @@ void CmdLuaCoroutine::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader
 void CmdLuaCoroutine::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
-	fw.Unsigned16(CMD_LUACOROUTINE_VERSION);
+	fw.unsigned_16(CMD_LUACOROUTINE_VERSION);
 	GameLogicCommand::write(fw, egbase, mos);
 
 	// This function is only called when saving/loading savegames. So save to

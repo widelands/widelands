@@ -237,38 +237,38 @@ void WaresQueue::set_consume_interval(const uint32_t time)
 #define WARES_QUEUE_DATA_PACKET_VERSION 2
 void WaresQueue::write(FileWrite & fw, Game & game, MapObjectSaver & mos)
 {
-	fw.Unsigned16(WARES_QUEUE_DATA_PACKET_VERSION);
+	fw.unsigned_16(WARES_QUEUE_DATA_PACKET_VERSION);
 
 	//  Owner and callback is not saved, but this should be obvious on load.
-	fw.CString
+	fw.c_string
 		(owner().tribe().get_ware_descr(m_ware)->name().c_str());
-	fw.Signed32(m_max_size);
-	fw.Signed32(m_max_fill);
-	fw.Signed32(m_filled);
-	fw.Signed32(m_consume_interval);
+	fw.signed_32(m_max_size);
+	fw.signed_32(m_max_fill);
+	fw.signed_32(m_filled);
+	fw.signed_32(m_consume_interval);
 	if (m_request) {
-		fw.Unsigned8(1);
+		fw.unsigned_8(1);
 		m_request->write(fw, game, mos);
 	} else
-		fw.Unsigned8(0);
+		fw.unsigned_8(0);
 }
 
 
 void WaresQueue::read(FileRead & fr, Game & game, MapObjectLoader & mol)
 {
-	uint16_t const packet_version = fr.Unsigned16();
+	uint16_t const packet_version = fr.unsigned_16();
 	try {
 		if (packet_version == WARES_QUEUE_DATA_PACKET_VERSION || packet_version == 1) {
 			delete m_request;
-			m_ware             = owner().tribe().ware_index(fr.CString  ());
-			m_max_size         =                            fr.Unsigned32();
+			m_ware             = owner().tribe().ware_index(fr.c_string  ());
+			m_max_size         =                            fr.unsigned_32();
 			if (packet_version == 1)
 				m_max_fill = m_max_size;
 			else
-				m_max_fill = fr.Signed32();
-			m_filled           =                            fr.Unsigned32();
-			m_consume_interval =                            fr.Unsigned32();
-			if                                             (fr.Unsigned8 ()) {
+				m_max_fill = fr.signed_32();
+			m_filled           =                            fr.unsigned_32();
+			m_consume_interval =                            fr.unsigned_32();
+			if                                             (fr.unsigned_8 ()) {
 				m_request =                          //  TODO(unknown): Change Request::read
 					new Request                       //  to a constructor.
 						(m_owner,

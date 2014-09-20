@@ -81,13 +81,13 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 	std::string backup_filename;
 
 	// always overwrite a file
-	if (g_fs->FileExists(complete_filename)) {
+	if (g_fs->file_exists(complete_filename)) {
 		filename += "2";
 		backup_filename = create_file_name (get_base_dir(), filename);
-		if (g_fs->FileExists(backup_filename)) {
-			g_fs->Unlink(backup_filename);
+		if (g_fs->file_exists(backup_filename)) {
+			g_fs->fs_unlink(backup_filename);
 		}
-		g_fs->Rename(complete_filename, backup_filename);
+		g_fs->rename(complete_filename, backup_filename);
 	}
 
 	std::string error;
@@ -97,18 +97,18 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 
 		// if backup file was created, move it back
 		if (backup_filename.length() > 0) {
-			if (g_fs->FileExists(complete_filename)) {
-				g_fs->Unlink(complete_filename);
+			if (g_fs->file_exists(complete_filename)) {
+				g_fs->fs_unlink(complete_filename);
 			}
-			g_fs->Rename(backup_filename, complete_filename);
+			g_fs->rename(backup_filename, complete_filename);
 		}
 		// Wait 30 seconds until next save try
 		m_last_saved_time = m_last_saved_time + 30000;
 		return;
 	} else {
 		// if backup file was created, time to remove it
-		if (backup_filename.length() > 0 && g_fs->FileExists(backup_filename))
-			g_fs->Unlink(backup_filename);
+		if (backup_filename.length() > 0 && g_fs->file_exists(backup_filename))
+			g_fs->fs_unlink(backup_filename);
 	}
 
 	log("Autosave: save took %d ms\n", m_last_saved_time - realtime);
@@ -167,14 +167,14 @@ bool SaveHandler::save_game
 	bool const binary =
 		!g_options.pull_section("global").get_bool("nozip", false);
 	// Make sure that the base directory exists
-	g_fs->EnsureDirectoryExists(get_base_dir());
+	g_fs->ensure_directory_exists(get_base_dir());
 
 	// Make a filesystem out of this
 	std::unique_ptr<FileSystem> fs;
 	if (!binary) {
-		fs.reset(g_fs->CreateSubFileSystem(complete_filename, FileSystem::DIR));
+		fs.reset(g_fs->create_sub_file_system(complete_filename, FileSystem::DIR));
 	} else {
-		fs.reset(g_fs->CreateSubFileSystem(complete_filename, FileSystem::ZIP));
+		fs.reset(g_fs->create_sub_file_system(complete_filename, FileSystem::ZIP));
 	}
 
 	bool result = true;

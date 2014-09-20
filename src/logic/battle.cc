@@ -65,9 +65,9 @@ Battle::Battle(Game & game, Soldier & First, Soldier & Second) :
 	assert(First.get_owner() != Second.get_owner());
 	{
 		StreamWrite & ss = game.syncstream();
-		ss.Unsigned32(0x00e111ba); // appears as ba111e00 in a hexdump
-		ss.Unsigned32(First .serial());
-		ss.Unsigned32(Second.serial());
+		ss.unsigned_32(0x00e111ba); // appears as ba111e00 in a hexdump
+		ss.unsigned_32(First .serial());
+		ss.unsigned_32(Second.serial());
 	}
 
 	// Ensures only live soldiers eganges in a battle
@@ -346,15 +346,15 @@ void Battle::Loader::load(FileRead & fr, uint8_t const version)
 
 	Battle & battle = get<Battle>();
 
-	battle.m_creationtime  = fr.Signed32();
-	battle.m_readyflags    = fr.Unsigned8();
-	battle.m_first_strikes = fr.Unsigned8();
+	battle.m_creationtime  = fr.signed_32();
+	battle.m_readyflags    = fr.unsigned_8();
+	battle.m_first_strikes = fr.unsigned_8();
 
 	if (version == BATTLE_SAVEGAME_VERSION)
-		battle.m_damage     = fr.Unsigned32();
+		battle.m_damage     = fr.unsigned_32();
 
-	m_first                = fr.Unsigned32();
-	m_second               = fr.Unsigned32();
+	m_first                = fr.unsigned_32();
+	m_second               = fr.unsigned_32();
 }
 
 void Battle::Loader::load_pointers()
@@ -382,19 +382,19 @@ void Battle::Loader::load_pointers()
 void Battle::save
 	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(HeaderBattle);
-	fw.Unsigned8(BATTLE_SAVEGAME_VERSION);
+	fw.unsigned_8(HeaderBattle);
+	fw.unsigned_8(BATTLE_SAVEGAME_VERSION);
 
 	MapObject::save(egbase, mos, fw);
 
-	fw.Signed32(m_creationtime);
-	fw.Unsigned8(m_readyflags);
-	fw.Unsigned8(m_first_strikes);
-	fw.Unsigned32(m_damage);
+	fw.signed_32(m_creationtime);
+	fw.unsigned_8(m_readyflags);
+	fw.unsigned_8(m_first_strikes);
+	fw.unsigned_32(m_damage);
 
 	// And now, the serials of the soldiers !
-	fw.Unsigned32(m_first  ? mos.get_object_file_index(*m_first)  : 0);
-	fw.Unsigned32(m_second ? mos.get_object_file_index(*m_second) : 0);
+	fw.unsigned_32(m_first  ? mos.get_object_file_index(*m_first)  : 0);
+	fw.unsigned_32(m_second ? mos.get_object_file_index(*m_second) : 0);
 }
 
 
@@ -406,7 +406,7 @@ MapObject::Loader * Battle::load
 	try {
 		// Header has been peeled away by caller
 
-		uint8_t const version = fr.Unsigned8();
+		uint8_t const version = fr.unsigned_8();
 		if (version <= BATTLE_SAVEGAME_VERSION) {
 			loader->init(egbase, mol, *new Battle);
 			loader->load(fr, version);

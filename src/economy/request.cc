@@ -109,10 +109,10 @@ void Request::read
 	(FileRead & fr, Game & game, MapObjectLoader & mol)
 {
 	try {
-		uint16_t const version = fr.Unsigned16();
+		uint16_t const version = fr.unsigned_16();
 		if (version == 6) {
 			const TribeDescr& tribe = m_target.owner().tribe();
-			char const* const type_name = fr.CString();
+			char const* const type_name = fr.c_string();
 			WareIndex const wai = tribe.ware_index(type_name);
 			if (wai != INVALID_INDEX) {
 				m_type = wwWARE;
@@ -126,18 +126,18 @@ void Request::read
 					throw wexception("Request::read: unknown type '%s'.\n", type_name);
 				}
 			}
-			m_count             = fr.Unsigned32();
-			m_required_time     = fr.Unsigned32();
-			m_required_interval = fr.Unsigned32();
+			m_count             = fr.unsigned_32();
+			m_required_time     = fr.unsigned_32();
+			m_required_interval = fr.unsigned_32();
 
-			m_last_request_time = fr.Unsigned32();
+			m_last_request_time = fr.unsigned_32();
 
 			assert(m_transfers.empty());
 
-			uint16_t const nr_transfers = fr.Unsigned16();
+			uint16_t const nr_transfers = fr.unsigned_16();
 			for (uint16_t i = 0; i < nr_transfers; ++i)
 				try {
-					MapObject* obj = &mol.get<MapObject>(fr.Unsigned32());
+					MapObject* obj = &mol.get<MapObject>(fr.unsigned_32());
 					Transfer* transfer;
 
 					if (upcast(Worker, worker, obj)) {
@@ -180,7 +180,7 @@ void Request::read
 void Request::write
 	(FileWrite & fw, Game & game, MapObjectSaver & mos) const
 {
-	fw.Unsigned16(REQUEST_VERSION);
+	fw.unsigned_16(REQUEST_VERSION);
 
 	//  Target and econmy should be set. Same is true for callback stuff.
 
@@ -188,27 +188,27 @@ void Request::write
 	const TribeDescr & tribe = m_target.owner().tribe();
 	assert(m_type != wwWARE   || m_index < tribe.get_nrwares  ());
 	assert(m_type != wwWORKER || m_index < tribe.get_nrworkers());
-	fw.CString
+	fw.c_string
 		(m_type == wwWARE                        ?
 		 tribe.get_ware_descr  (m_index)->name() :
 		 tribe.get_worker_descr(m_index)->name());
 
-	fw.Unsigned32(m_count);
+	fw.unsigned_32(m_count);
 
-	fw.Unsigned32(m_required_time);
-	fw.Unsigned32(m_required_interval);
+	fw.unsigned_32(m_required_time);
+	fw.unsigned_32(m_required_interval);
 
-	fw.Unsigned32(m_last_request_time);
+	fw.unsigned_32(m_last_request_time);
 
-	fw.Unsigned16(m_transfers.size()); //  Write number of current transfers.
+	fw.unsigned_16(m_transfers.size()); //  Write number of current transfers.
 	for (uint32_t i = 0; i < m_transfers.size(); ++i) {
 		Transfer & trans = *m_transfers[i];
 		if (trans.m_ware) { //  write ware/worker
 			assert(mos.is_object_known(*trans.m_ware));
-			fw.Unsigned32(mos.get_object_file_index(*trans.m_ware));
+			fw.unsigned_32(mos.get_object_file_index(*trans.m_ware));
 		} else if (trans.m_worker) {
 			assert(mos.is_object_known(*trans.m_worker));
-			fw.Unsigned32(mos.get_object_file_index(*trans.m_worker));
+			fw.unsigned_32(mos.get_object_file_index(*trans.m_worker));
 		}
 	}
 	m_requirements.write (fw, game, mos);
@@ -407,16 +407,16 @@ void Request::start_transfer(Game & game, Supply & supp)
 	assert(is_open());
 
 	::StreamWrite & ss = game.syncstream();
-	ss.Unsigned32(0x01decafa); // appears as facade01 in sync stream
-	ss.Unsigned32(target().serial());
-	ss.Unsigned32(supp.get_position(game)->serial());
+	ss.unsigned_32(0x01decafa); // appears as facade01 in sync stream
+	ss.unsigned_32(target().serial());
+	ss.unsigned_32(supp.get_position(game)->serial());
 
 	Transfer * t;
 	if (get_type() == wwWORKER) {
 		//  Begin the transfer of a soldier or worker.
 		//  launch_worker() creates or starts the worker
 		Worker & s = supp.launch_worker(game, *this);
-		ss.Unsigned32(s.serial());
+		ss.unsigned_32(s.serial());
 		t = new Transfer(game, *this, s);
 	} else {
 		//  Begin the transfer of an ware. The ware itself is passive.
@@ -424,7 +424,7 @@ void Request::start_transfer(Game & game, Supply & supp)
 		//  warehouse. Once it's on the flag, the flag code will decide what to
 		//  do with it.
 		WareInstance & ware = supp.launch_ware(game, *this);
-		ss.Unsigned32(ware.serial());
+		ss.unsigned_32(ware.serial());
 		t = new Transfer(game, *this, ware);
 	}
 

@@ -53,16 +53,16 @@ void MapObjectPacket::read
 {
 	try {
 		FileRead fr;
-		fr.Open(fs, "binary/mapobjects");
+		fr.open(fs, "binary/mapobjects");
 
-		const uint8_t packet_version = fr.Unsigned8();
+		const uint8_t packet_version = fr.unsigned_8();
 		if (packet_version != CURRENT_PACKET_VERSION)
 			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
 
 		// Initial loading stage
 		for (;;)
-			switch (uint8_t const header = fr.Unsigned8()) {
+			switch (uint8_t const header = fr.unsigned_8()) {
 			case 0:
 				return;
 			case MapObject::HeaderImmovable:
@@ -137,7 +137,7 @@ void MapObjectPacket::write
 {
 	FileWrite fw;
 
-	fw.Unsigned8(CURRENT_PACKET_VERSION);
+	fw.unsigned_8(CURRENT_PACKET_VERSION);
 
 	std::vector<Serial> obj_serials = egbase.objects().all_object_serials_ordered();
 	for
@@ -165,7 +165,7 @@ void MapObjectPacket::write
 		mos.mark_object_as_saved(obj);
 	}
 
-	fw.Unsigned8(0);
+	fw.unsigned_8(0);
 
 	fw.write(fs, "binary/mapobjects");
 }

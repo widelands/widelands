@@ -62,7 +62,7 @@ void GamePreloadPacket::read
 			m_player_nr = s.get_safe_int("player_nr");
 			m_win_condition = s.get_safe_string("win_condition");
 			m_number_of_players = s.get_safe_int(PLAYERS_AMOUNT_KEY_V4);
-			if (fs.FileExists(MINIMAP_FILENAME)) {
+			if (fs.file_exists(MINIMAP_FILENAME)) {
 				m_minimap_path = MINIMAP_FILENAME;
 			}
 		} else {
@@ -116,7 +116,7 @@ void GamePreloadPacket::write
 	if (ipl != nullptr) {
 		const MiniMapLayer flags = MiniMapLayer::Owner | MiniMapLayer::Building | MiniMapLayer::Terrain;
 		const Point& vp = ipl->get_viewpoint();
-		std::unique_ptr< ::StreamWrite> sw(fs.OpenStreamWrite(MINIMAP_FILENAME));
+		std::unique_ptr< ::StreamWrite> sw(fs.open_stream_write(MINIMAP_FILENAME));
 		if (sw.get() != nullptr) {
 			write_minimap_image(game, &ipl->player(), vp, flags, sw.get());
 			sw->flush();

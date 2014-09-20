@@ -25,7 +25,7 @@
 namespace Widelands {
 
 Direction read_direction_8(StreamRead* fr) {
-	uint8_t const d = fr->Unsigned8();
+	uint8_t const d = fr->unsigned_8();
 	if (d == 0)
 		throw DirectionIsNull();
 	if (6 < d)
@@ -34,28 +34,28 @@ Direction read_direction_8(StreamRead* fr) {
 }
 
 Direction read_direction_8_allow_null(StreamRead* fr) {
-	uint8_t const d = fr->Unsigned8();
+	uint8_t const d = fr->unsigned_8();
 	if (6 < d)
 		throw DirectionInvalid(d);
 	return d;
 }
 
 MapIndex read_map_index_32(StreamRead* fr, const MapIndex max) {
-	uint32_t const i = fr->Unsigned32();
+	uint32_t const i = fr->unsigned_32();
 	if (max <= i)
 		throw ExceededMaxIndex(max, i);
 	return i;
 }
 
 Coords read_coords_32(StreamRead* stream_read) {
-	uint16_t const x = stream_read->Unsigned16();
-	uint16_t const y = stream_read->Unsigned16();
+	uint16_t const x = stream_read->unsigned_16();
+	uint16_t const y = stream_read->unsigned_16();
 	return Coords(x, y);
 }
 
 Coords read_coords_32(StreamRead* stream_read, const Extent& extent) {
-	uint16_t const x = stream_read->Unsigned16();
-	uint16_t const y = stream_read->Unsigned16();
+	uint16_t const x = stream_read->unsigned_16();
+	uint16_t const y = stream_read->unsigned_16();
 	if (extent.w <= x)
 		throw ExceededWidth(extent.w, x);
 	if (extent.h <= y)
@@ -64,8 +64,8 @@ Coords read_coords_32(StreamRead* stream_read, const Extent& extent) {
 }
 
 Coords read_coords_32_allow_null(StreamRead* fr, const Extent& extent) {
-	uint16_t const x = fr->Unsigned16();
-	uint16_t const y = fr->Unsigned16();
+	uint16_t const x = fr->unsigned_16();
+	uint16_t const y = fr->unsigned_16();
 	const Coords result(x, y);
 	if (result) {
 		if (extent.w <= x)
@@ -78,7 +78,7 @@ Coords read_coords_32_allow_null(StreamRead* fr, const Extent& extent) {
 
 Area<Coords, uint16_t> read_area_48(StreamRead* fr, const Extent& extent) {
 	Coords const c = read_coords_32(fr, extent);
-	uint16_t const r = fr->Unsigned16();
+	uint16_t const r = fr->unsigned_16();
 	return Area<Coords, uint16_t>(c, r);
 }
 
@@ -96,13 +96,13 @@ void write_direction_8_allow_null(StreamWrite* wr, Direction const d) {
 void write_coords_32(StreamWrite* wr, const Coords& c) {
 	assert(static_cast<uint16_t>(c.x) < 0x8000 || c.x == -1);
 	assert(static_cast<uint16_t>(c.y) < 0x8000 || c.y == -1);
-	wr->Unsigned16(c.x);
-	wr->Unsigned16(c.y);
+	wr->unsigned_16(c.x);
+	wr->unsigned_16(c.y);
 }
 
 void write_area_48(StreamWrite* wr, Area<Coords, uint16_t> const area) {
 	write_coords_32(wr, area);
-	wr->Unsigned16(area.radius);
+	wr->unsigned_16(area.radius);
 }
 
 }  // namespace Widelands

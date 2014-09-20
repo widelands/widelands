@@ -72,7 +72,7 @@ void MapSaver::save() {
 
 	// The binary data is saved in an own directory
 	// to keep it hidden from the poor debuggers
-	m_fs.EnsureDirectoryExists("binary");
+	m_fs.ensure_directory_exists("binary");
 
 	// MANDATORY PACKETS
 	// Start with writing the map out, first Elemental data

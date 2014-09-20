@@ -39,7 +39,7 @@ void CmdCalculateStatistics::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
-		uint16_t const packet_version = fr.Unsigned16();
+		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == CMD_CALCULATE_STATISTICS_VERSION) {
 			GameLogicCommand::read(fr, egbase, mol);
 		} else
@@ -52,7 +52,7 @@ void CmdCalculateStatistics::read
 void CmdCalculateStatistics::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
-	fw.Unsigned16(CMD_CALCULATE_STATISTICS_VERSION);
+	fw.unsigned_16(CMD_CALCULATE_STATISTICS_VERSION);
 	GameLogicCommand::write(fw, egbase, mos);
 
 }

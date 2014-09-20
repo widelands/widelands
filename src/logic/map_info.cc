@@ -47,7 +47,7 @@ void initialize() {
 	SDL_Init(SDL_INIT_VIDEO);
 
 	g_fs = new LayeredFileSystem();
-	g_fs->AddFileSystem(&FileSystem::Create(INSTALL_PREFIX + std::string("/") + INSTALL_DATADIR));
+	g_fs->add_file_system(&FileSystem::create(INSTALL_PREFIX + std::string("/") + INSTALL_DATADIR));
 
 #ifdef HAS_GETENV
 	char dummy_video_env[] = "SDL_VIDEODRIVER=dummy";
@@ -71,13 +71,13 @@ int main(int argc, char ** argv)
 	try {
 		initialize();
 
-		std::string map_dir = FileSystem::FS_Dirname(map_path);
+		std::string map_dir = FileSystem::fs_dirname(map_path);
 		if (map_dir.empty()) {
 			map_dir = ".";
 		}
-		const std::string map_file = FileSystem::FS_Filename(map_path.c_str());
-		FileSystem* in_out_filesystem = &FileSystem::Create(map_dir);
-		g_fs->AddFileSystem(in_out_filesystem);
+		const std::string map_file = FileSystem::fs_filename(map_path.c_str());
+		FileSystem* in_out_filesystem = &FileSystem::create(map_dir);
+		g_fs->add_file_system(in_out_filesystem);
 
 		Map* map = new Map();
 		EditorGameBase egbase(nullptr);

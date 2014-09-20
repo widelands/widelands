@@ -47,24 +47,24 @@ void MapExtradataPacket::read(FileSystem& fs, bool const skip) {
 			prof.get_safe_section("global").get_safe_int("packet_version");
 		if (packet_version == CURRENT_PACKET_VERSION) {
 			// Read all pics.
-			if (fs.FileExists("pics") && fs.IsDirectory("pics")) {
-				FilenameSet pictures = fs.ListDirectory("pics");
+			if (fs.file_exists("pics") && fs.is_directory("pics")) {
+				FilenameSet pictures = fs.list_directory("pics");
 				for
 					(FilenameSet::iterator pname = pictures.begin();
 					 pname != pictures.end();
 					 ++pname)
 				{
-					if (fs.IsDirectory(pname->c_str())) // Might be a dir, maybe CVS
+					if (fs.is_directory(pname->c_str())) // Might be a dir, maybe CVS
 						continue;
 
-					const std::string hash = std::string("map:") + FileSystem::FS_Filename(pname->c_str());
+					const std::string hash = std::string("map:") + FileSystem::fs_filename(pname->c_str());
 					const Image* image = nullptr;
 					if (!g_gr->images().has(hash)) {
 						FileRead fr;
 
-						fr.Open(fs, *pname);
+						fr.open(fs, *pname);
 						SDL_Surface * const surf =
-							IMG_Load_RW(SDL_RWFromMem(fr.data(0), fr.GetSize()), 1);
+							IMG_Load_RW(SDL_RWFromMem(fr.data(0), fr.get_size()), 1);
 						if (!surf)
 							continue; //  Illegal pic. Skip it.
 						image = g_gr->images().insert(new_in_memory_image(hash, Surface::create(surf)));
@@ -92,11 +92,11 @@ void MapExtradataPacket::write
 
 	// Copy all files from pics/ from the old map to the new.
 	FileSystem* map_fs = egbase.map().filesystem();
-	if (map_fs && map_fs->FileExists("pics") && map_fs->IsDirectory("pics")) {
-		fs.EnsureDirectoryExists("pics");
-		for (const std::string& picture : map_fs->ListDirectory("pics")) {
+	if (map_fs && map_fs->file_exists("pics") && map_fs->is_directory("pics")) {
+		fs.ensure_directory_exists("pics");
+		for (const std::string& picture : map_fs->list_directory("pics")) {
 			size_t length;
-			void* input_data = map_fs->Load(picture, length);
+			void* input_data = map_fs->load(picture, length);
 			fs.write(picture, input_data, length);
 			free(input_data);
 		}

@@ -51,7 +51,7 @@ void ReplayGameController::think() {
 	else if (frametime > 1000)
 		frametime = 1000;
 
-	frametime = frametime * realSpeed() / 1000;
+	frametime = frametime * real_speed() / 1000;
 
 	m_time = m_game.get_gametime() + frametime;
 
@@ -69,40 +69,40 @@ void ReplayGameController::think() {
 	}
 }
 
-void ReplayGameController::sendPlayerCommand(Widelands::PlayerCommand &) {
+void ReplayGameController::send_player_command(Widelands::PlayerCommand &) {
 	throw wexception("Trying to send a player command during replay");
 }
 
-int32_t ReplayGameController::getFrametime() {
+int32_t ReplayGameController::get_frametime() {
 	return m_time - m_game.get_gametime();
 }
 
-std::string ReplayGameController::getGameDescription() {
+std::string ReplayGameController::get_game_description() {
 	return "replay";
 }
 
-uint32_t ReplayGameController::realSpeed() {
+uint32_t ReplayGameController::real_speed() {
 	return m_paused ? 0 : m_speed;
 }
 
-uint32_t ReplayGameController::desiredSpeed() {
+uint32_t ReplayGameController::desired_speed() {
 	return m_speed;
 }
 
-void ReplayGameController::setDesiredSpeed(uint32_t const speed) {
+void ReplayGameController::set_desired_speed(uint32_t const speed) {
 	m_speed = speed;
 }
 
-bool ReplayGameController::isPaused() {
+bool ReplayGameController::is_paused() {
 	return m_paused;
 }
 
-void ReplayGameController::setPaused(bool const paused) {
+void ReplayGameController::set_paused(bool const paused) {
 	m_paused = paused;
 }
 
 void ReplayGameController::CmdReplayEnd::execute (Widelands::Game & game) {
-	game.game_controller()->setDesiredSpeed(0);
+	game.game_controller()->set_desired_speed(0);
 	UI::WLMessageBox mmb
 		(game.get_ibase(),
 		 _("End of replay"),

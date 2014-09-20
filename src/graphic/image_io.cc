@@ -55,16 +55,16 @@ SDL_Surface* load_image_as_sdl_surface(const std::string& fname, FileSystem* fs)
 	FileRead fr;
 	bool found;
 	if (fs) {
-		found = fr.TryOpen(*fs, fname);
+		found = fr.try_open(*fs, fname);
 	} else {
-		found = fr.TryOpen(*g_fs, fname);
+		found = fr.try_open(*g_fs, fname);
 	}
 
 	if (!found) {
 		throw ImageNotFound(fname);
 	}
 
-	SDL_Surface* sdlsurf = IMG_Load_RW(SDL_RWFromMem(fr.data(0), fr.GetSize()), 1);
+	SDL_Surface* sdlsurf = IMG_Load_RW(SDL_RWFromMem(fr.data(0), fr.get_size()), 1);
 	if (!sdlsurf) {
 		throw ImageLoadingError(fname.c_str(), IMG_GetError());
 	}

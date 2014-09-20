@@ -142,7 +142,7 @@ void MapPlayersMessagesPacket::read
 void MapPlayersMessagesPacket::write
 	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver & mos)
 {
-	fs.EnsureDirectoryExists("player");
+	fs.ensure_directory_exists("player");
 	PlayerNumber const nr_players = egbase.map().get_nrplayers();
 	iterate_players_existing_const(p, nr_players, egbase, player) {
 		Profile prof;
@@ -182,7 +182,7 @@ void MapPlayersMessagesPacket::write
 		}
 		char filename[FILENAME_SIZE];
 		snprintf(filename, sizeof(filename), PLAYERDIRNAME_TEMPLATE, p);
-		fs.EnsureDirectoryExists(filename);
+		fs.ensure_directory_exists(filename);
 		snprintf(filename, sizeof(filename),      FILENAME_TEMPLATE, p);
 		prof.write(filename, false, fs);
 	}

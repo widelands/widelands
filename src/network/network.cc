@@ -99,7 +99,7 @@ int32_t NetworkTime::networktime() const
 	return m_networktime;
 }
 
-void NetworkTime::recv(int32_t const ntime)
+void NetworkTime::receive(int32_t const ntime)
 {
 	if (ntime < m_networktime)
 		throw wexception("NetworkTime: Time appears to be running backwards.");
