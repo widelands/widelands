@@ -74,6 +74,41 @@ void main() {
 }
 )";
 
+// Helper struct that contains the minimum and maximum fields for rendering.
+struct Patch {
+	Patch(int init_minfx, int init_maxfx, int init_minfy, int init_maxfy) {
+		minfx = init_minfx;
+		maxfx = init_maxfx;
+		minfy = init_minfy;
+		maxfy = init_maxfy;
+		w = (maxfx - minfx + 1);
+		h = (maxfy - minfy + 1);
+	}
+
+	// Calculates the index of the given field with (x, y) being geometric
+	// coordinates in the map. Returns -1 if this field is not in the patch.
+	inline int calculate_index(int x, int y) const {
+		uint16_t xidx = x - minfx;
+		if (xidx >= w) {
+			return -1;
+		}
+		uint16_t yidx = y - minfy;
+		if (yidx >= h) {
+			return -1;
+		}
+		return yidx * w + xidx;
+	}
+
+	// Minimum and maximum field coordinates (geometric) to render. Can be negative.
+	int minfx;
+	int maxfx;
+	int minfy;
+	int maxfy;
+
+	// Width and height in number of fields.
+	int w, h;
+};
+
 }  // namespace
 
 // Everything related to the glProgram rendering the terrain.
@@ -85,10 +120,7 @@ class TerrainProgram {
 	// Draws the terrain triangles.
 	void draw_terrain_triangles(const Map& map,
 	                            const DescriptionMaintainer<TerrainDescription>& terrains,
-	                            int minfx,
-	                            int maxfx,
-	                            int minfy,
-	                            int maxfy,
+										 const Patch& patch,
 	                            const Point& surface_offset);
 
 private:
@@ -103,7 +135,11 @@ private:
 	static_assert(sizeof(PerVertexData) == 16, "Wrong padding.");
 
 	// Fills 'v' with the data of the vertex at the geometric location ('fx', 'fy').
-	void fill_vertex(int fx, int fy, const Point& surface_offset, const Map& map, PerVertexData* v);
+	inline void fill_vertex(const Coords& geometric_coords,
+	                        const FCoords& fcoords,
+	                        const Point& surface_offset,
+	                        const Map& map,
+	                        PerVertexData* v);
 
 	// The program used for drawing the terrain.
 	Gl::Program gl_program_;
@@ -141,19 +177,19 @@ TerrainProgram::TerrainProgram() {
 	u_terrain_texture_ = glGetUniformLocation(gl_program_.object(), "u_terrain_texture");
 }
 
-void TerrainProgram::fill_vertex(
-   int fx, int fy, const Point& surface_offset, const Map& map, TerrainProgram::PerVertexData* v) {
+inline void TerrainProgram::fill_vertex(const Coords& geometric_coords,
+                                        const FCoords& fcoords,
+                                        const Point& surface_offset,
+                                        const Map& map,
+                                        TerrainProgram::PerVertexData* v) {
 	int x, y;
-	Coords coords(fx, fy);
-	MapviewPixelFunctions::get_basepix(coords, x, y);
+	MapviewPixelFunctions::get_basepix(geometric_coords, x, y);
 	v->texture_x = float(x) / TEXTURE_WIDTH;
 	v->texture_y = float(y) / TEXTURE_HEIGHT;
 	v->x = x + surface_offset.x;
 	v->y = y + surface_offset.y;
 
 	// Correct for the height of the field.
-	map.normalize_coords(coords);
-	const FCoords fcoords = map.get_fcoords(coords);
 	v->y -= fcoords.field->get_height() * HEIGHT_FACTOR;
 
 	// NOCOM(#sirver): incorporate brightness.
@@ -162,70 +198,68 @@ void TerrainProgram::fill_vertex(
 	// vtx.color[3] = 255;
 };
 
-
 void
 TerrainProgram::draw_terrain_triangles(const Map& map,
                                        const DescriptionMaintainer<TerrainDescription>& terrains,
-                                       int minfx,
-                                       int maxfx,
-                                       int minfy,
-                                       int maxfy,
+													const Patch& patch,
                                        const Point& surface_offset) {
-	terrains_to_indices_.resize(terrains.size());
+	const int num_vertices = patch.w * patch.h;
+	if (vertices_.size() < num_vertices) {
+		vertices_.resize(num_vertices);
+		terrains_to_indices_.resize(terrains.size());
+	}
 	for (auto& container : terrains_to_indices_) {
 		container.clear();
+		container.reserve(num_vertices);
 	}
-	vertices_.resize(6 * (maxfx - minfx + 1) * (maxfy - minfy + 1));
 
-	int current_vertex = 0;
-	for (int32_t fy = minfy; fy <= maxfy; ++fy) {
-		for (int32_t fx = minfx; fx <= maxfx; ++fx) {
-			Coords ncoords(fx, fy);
-			map.normalize_coords(ncoords);
-			const FCoords fcoords = map.get_fcoords(ncoords);
+	int current_index = 0;
+	Coords geometric_coords;
+	for (geometric_coords.y = patch.minfy; geometric_coords.y <= patch.maxfy; ++geometric_coords.y) {
+		for (geometric_coords.x = patch.minfx; geometric_coords.x <= patch.maxfx;
+		     ++geometric_coords.x, ++current_index) {
+			Coords normalized_coords(geometric_coords);
+			map.normalize_coords(normalized_coords);
+			const FCoords fcoords = map.get_fcoords(normalized_coords);
 
-			// Bottom triangle.
-			const int terrain_d = fcoords.field->terrain_d();
-			terrains_to_indices_[terrain_d].push_back(current_vertex);
-			fill_vertex(fx, fy, surface_offset, map, &vertices_[current_vertex++]);
-			terrains_to_indices_[terrain_d].push_back(current_vertex);
-			fill_vertex(fx + (fy & 1),
-			           fy + 1,
-			           surface_offset,
-			           map,
-			           &vertices_[current_vertex++]);  // bottom right neighbor
-			terrains_to_indices_[terrain_d].push_back(current_vertex);
-			fill_vertex(fx + (fy & 1) - 1,
-			           fy + 1,
-			           surface_offset,
-			           map,
-			           &vertices_[current_vertex++]);  // bottom left neighbor
+			fill_vertex(
+			   geometric_coords, fcoords, surface_offset, map, &vertices_[current_index]);
+
+			// The bottom right neighbor patch is needed for both triangles
+			// associated with this field. If it is not in patch, there is no need
+			// to draw any triangles.
+			int brn_index = patch.calculate_index(
+			   geometric_coords.x + (geometric_coords.y & 1), geometric_coords.y + 1);
+			if (brn_index == -1) {
+				continue;
+			}
+
+			// Down triangle.
+			int bln_index = patch.calculate_index(
+			   geometric_coords.x + (geometric_coords.y & 1) - 1, geometric_coords.y + 1);
+			if (bln_index != -1) {
+				const int terrain_d = fcoords.field->terrain_d();
+				terrains_to_indices_[terrain_d].push_back(current_index);
+				terrains_to_indices_[terrain_d].push_back(brn_index);
+				terrains_to_indices_[terrain_d].push_back(bln_index);
+			}
 
 			// Right triangle.
-			const int terrain_r = fcoords.field->terrain_r();
-			terrains_to_indices_[terrain_r].push_back(current_vertex);
-			fill_vertex(fx, fy, surface_offset, map, &vertices_[current_vertex++]);
-			terrains_to_indices_[terrain_r].push_back(current_vertex);
-			fill_vertex(fx + (fy & 1),
-			           fy + 1,
-			           surface_offset,
-			           map,
-			           &vertices_[current_vertex++]);  // bottom right neighbor
-			terrains_to_indices_[terrain_r].push_back(current_vertex);
-			fill_vertex(fx + 1,
-			           fy,
-			           surface_offset,
-			           map,
-			           &vertices_[current_vertex++]);  // right neighbor
+			int rn_index = patch.calculate_index(geometric_coords.x + 1, geometric_coords.y);
+			if (rn_index != -1) {
+				const int terrain_r = fcoords.field->terrain_r();
+				terrains_to_indices_[terrain_r].push_back(current_index);
+				terrains_to_indices_[terrain_r].push_back(rn_index);
+				terrains_to_indices_[terrain_r].push_back(brn_index);
+			}
 		}
 	}
 
-	// Use the program object
 	glUseProgram(gl_program_.object());
 
 	glBindBuffer(GL_ARRAY_BUFFER, gl_program_data_buffer_.object());
 	glBufferData(GL_ARRAY_BUFFER,
-	             sizeof(TerrainProgram::PerVertexData) * vertices_.size(),
+	             sizeof(TerrainProgram::PerVertexData) * num_vertices,
 	             vertices_.data(),
 	             GL_STREAM_DRAW);
 
@@ -253,8 +287,7 @@ TerrainProgram::draw_terrain_triangles(const Map& map,
 		glBindTexture(
 		   GL_TEXTURE_2D,
 		   g_gr->get_maptexture_data(terrains.get_unmutable(i).get_texture())->getTexture());
-		glDrawRangeElements(
-		   GL_TRIANGLES, 0, vertices_.size(), indices.size(), GL_UNSIGNED_SHORT, indices.data());
+		glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, indices.data());
 	}
 
 	// Release Program object.
@@ -363,8 +396,9 @@ void GameRendererGL::draw() {
 		 m_rect.w, m_rect.h);
 	glEnable(GL_SCISSOR_TEST);
 
+	const Patch patch(m_minfx, m_maxfx, m_minfy, m_maxfy);
 	terrain_program_->draw_terrain_triangles(
-	   m_egbase->map(), world.terrains(), m_minfx, m_maxfx, m_minfy, m_maxfy, m_surface_offset);
+	   m_egbase->map(), world.terrains(), patch, m_surface_offset);
 
 	// prepare_terrain_base();
 	// draw_terrain_base();
