@@ -50,13 +50,16 @@ const char kTerrainVertexShader[] = R"(
 
 // Attributes.
 attribute vec2 attr_position;
+attribute float attr_brightness;
 attribute vec2 attr_texture_position;
 
 // Output of vertex shader.
+varying float var_brightness;
 varying vec2 var_texture_position;
 
 void main() {
 	var_texture_position = attr_texture_position;
+	var_brightness = attr_brightness;
 	vec4 p = vec4(attr_position, 0., 1.);
 	gl_Position = gl_ProjectionMatrix * p;
 }
@@ -67,10 +70,11 @@ const char kTerrainFragmentShader[] = R"(
 
 uniform sampler2D u_terrain_texture;
 
+varying float var_brightness;
 varying vec2 var_texture_position;
 
 void main() {
-	gl_FragColor = texture2D(u_terrain_texture, var_texture_position);
+	gl_FragColor = texture2D(u_terrain_texture, var_texture_position) * var_brightness;
 }
 )";
 
@@ -118,28 +122,32 @@ class TerrainProgram {
 	TerrainProgram();
 
 	// Draws the terrain triangles.
-	void draw_terrain_triangles(const Map& map,
+	void draw_terrain_triangles(const uint32_t gametime,
+	                            const Map& map,
+	                            const Player* player,
 	                            const DescriptionMaintainer<TerrainDescription>& terrains,
-										 const Patch& patch,
+	                            const Patch& patch,
 	                            const Point& surface_offset);
 
 private:
 	static constexpr int kAttribVertexPosition = 0;
-	static constexpr int kAttribVertexTexturePosition = 1;
+	static constexpr int kAttribVertexBrightness = 1;
+	static constexpr int kAttribVertexTexturePosition = 2;
 	struct PerVertexData {
 		float x;
 		float y;
+		float brightness;
 		float texture_x;
 		float texture_y;
 	};
-	static_assert(sizeof(PerVertexData) == 16, "Wrong padding.");
+	static_assert(sizeof(PerVertexData) == 20, "Wrong padding.");
 
-	// Fills 'v' with the data of the vertex at the geometric location ('fx', 'fy').
-	inline void fill_vertex(const Coords& geometric_coords,
-	                        const FCoords& fcoords,
-	                        const Point& surface_offset,
-	                        const Map& map,
-	                        PerVertexData* v);
+	// Returns the brightness value in [0, 1.] for 'fcoords' at 'gametime' for
+	// 'player' (which can be nullptr).
+	float field_brightness(const FCoords& fcoords,
+	                         const uint32_t gametime,
+	                         const Map& map,
+	                         const Player* player) const;
 
 	// The program used for drawing the terrain.
 	Gl::Program gl_program_;
@@ -167,43 +175,50 @@ TerrainProgram::TerrainProgram() {
 	gl_program_.compile(kTerrainVertexShader, kTerrainFragmentShader);
 
 	glBindAttribLocation(gl_program_.object(), kAttribVertexPosition, "attr_position");
+	glBindAttribLocation(gl_program_.object(), kAttribVertexBrightness, "attr_brightness");
 	glBindAttribLocation(gl_program_.object(), kAttribVertexTexturePosition, "attr_texture_position");
 
 	gl_program_.link();
 
-	glEnableVertexAttribArray(kAttribVertexTexturePosition);
 	glEnableVertexAttribArray(kAttribVertexPosition);
+	glEnableVertexAttribArray(kAttribVertexBrightness);
+	glEnableVertexAttribArray(kAttribVertexTexturePosition);
 
 	u_terrain_texture_ = glGetUniformLocation(gl_program_.object(), "u_terrain_texture");
 }
 
-inline void TerrainProgram::fill_vertex(const Coords& geometric_coords,
-                                        const FCoords& fcoords,
-                                        const Point& surface_offset,
-                                        const Map& map,
-                                        TerrainProgram::PerVertexData* v) {
-	int x, y;
-	MapviewPixelFunctions::get_basepix(geometric_coords, x, y);
-	v->texture_x = float(x) / TEXTURE_WIDTH;
-	v->texture_y = float(y) / TEXTURE_HEIGHT;
-	v->x = x + surface_offset.x;
-	v->y = y + surface_offset.y;
+float TerrainProgram::field_brightness(const FCoords& fcoords,
+                                       const uint32_t gametime,
+                                       const Map& map,
+                                       const Player* const player) const {
+	uint32_t brightness = 144 + fcoords.field->get_brightness();
+	brightness = std::min<uint32_t>(255, (brightness * 255) / 160);
 
-	// Correct for the height of the field.
-	v->y -= fcoords.field->get_height() * HEIGHT_FACTOR;
-
-	// NOCOM(#sirver): incorporate brightness.
-	// uint8_t brightness = field_brightness(normalized_coords);
-	// vtx.color[0] = vtx.color[1] = vtx.color[2] = brightness;
-	// vtx.color[3] = 255;
-};
+	if (player && !player->see_all()) {
+		const Player::Field& pf = player->fields()[Map::get_index(fcoords, map.get_width())];
+		if (pf.vision == 0) {
+			return 0.;
+		} else if (pf.vision == 1) {
+			static const uint32_t kDecayTimeInMs = 20000;
+			const Duration time_ago = gametime - pf.time_node_last_unseen;
+			if (time_ago < kDecayTimeInMs) {
+				brightness = (brightness * (2 * kDecayTimeInMs - time_ago)) / (2 * kDecayTimeInMs);
+			} else {
+				brightness = brightness / 2;
+			}
+		}
+	}
+	return brightness / 255.;
+}
 
 void
-TerrainProgram::draw_terrain_triangles(const Map& map,
+TerrainProgram::draw_terrain_triangles(const uint32_t gametime,
+                                       const Map& map,
+                                       const Player* player,
                                        const DescriptionMaintainer<TerrainDescription>& terrains,
-													const Patch& patch,
+                                       const Patch& patch,
                                        const Point& surface_offset) {
-	const int num_vertices = patch.w * patch.h;
+	const size_t num_vertices = patch.w * patch.h;
 	if (vertices_.size() < num_vertices) {
 		vertices_.resize(num_vertices);
 		terrains_to_indices_.resize(terrains.size());
@@ -222,8 +237,21 @@ TerrainProgram::draw_terrain_triangles(const Map& map,
 			map.normalize_coords(normalized_coords);
 			const FCoords fcoords = map.get_fcoords(normalized_coords);
 
-			fill_vertex(
-			   geometric_coords, fcoords, surface_offset, map, &vertices_[current_index]);
+			{
+				PerVertexData& vertex = vertices_[current_index];
+				int x, y;
+				MapviewPixelFunctions::get_basepix(geometric_coords, x, y);
+				vertex.texture_x = float(x) / TEXTURE_WIDTH;
+				vertex.texture_y = float(y) / TEXTURE_HEIGHT;
+				vertex.x = x + surface_offset.x;
+				vertex.y = y + surface_offset.y;
+
+				// Correct for the height of the field.
+				vertex.y -= fcoords.field->get_height() * HEIGHT_FACTOR;
+
+				// Figure out the brightness of the field.
+				vertex.brightness = field_brightness(fcoords, gametime, map, player);
+			}
 
 			// The bottom right neighbor patch is needed for both triangles
 			// associated with this field. If it is not in patch, there is no need
@@ -272,6 +300,7 @@ TerrainProgram::draw_terrain_triangles(const Map& map,
 		                      reinterpret_cast<void*>(offset));
 	};
 	set_attrib_pointer(kAttribVertexPosition, 2, offsetof(PerVertexData, x));
+	set_attrib_pointer(kAttribVertexBrightness, 1, offsetof(PerVertexData, brightness));
 	set_attrib_pointer(kAttribVertexTexturePosition, 2, offsetof(PerVertexData, texture_x));
 
 	// Set the sampler texture unit to 0
@@ -344,11 +373,8 @@ uint32_t GameRendererGL::patch_index(const Coords & f) const
 
 uint8_t GameRendererGL::field_brightness(const FCoords & coords) const
 {
-	uint32_t brightness;
-	brightness = 144 + coords.field->get_brightness();
-	brightness = (brightness * 255) / 160;
-	if (brightness > 255)
-		brightness = 255;
+	uint32_t brightness = 144 + coords.field->get_brightness();
+	brightness = std::min<uint32_t>(255, (brightness * 255) / 160);
 
 	if (m_player && !m_player->see_all()) {
 		const Map & map = m_egbase->map();
@@ -391,14 +417,17 @@ void GameRendererGL::draw() {
 	m_patch_size.w = ((m_maxfx - m_minfx + 2 + PatchSize) / PatchSize) * PatchSize;
 	m_patch_size.h = ((m_maxfy - m_minfy + 1 + PatchSize) / PatchSize) * PatchSize;
 
+	glClear(GL_COLOR_BUFFER_BIT);
+
 	glScissor
 		(m_rect.x, m_surface->height() - m_rect.y - m_rect.h,
 		 m_rect.w, m_rect.h);
 	glEnable(GL_SCISSOR_TEST);
 
+	const uint32_t gametime = m_egbase->get_gametime();
 	const Patch patch(m_minfx, m_maxfx, m_minfy, m_maxfy);
 	terrain_program_->draw_terrain_triangles(
-	   m_egbase->map(), world.terrains(), patch, m_surface_offset);
+	   gametime, m_egbase->map(), m_player, world.terrains(), patch, m_surface_offset);
 
 	// prepare_terrain_base();
 	// draw_terrain_base();
