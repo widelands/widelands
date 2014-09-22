@@ -51,13 +51,14 @@ inline EditorInteractive & MainMenuSaveMap::eia() {
 
 
 MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
-	: UI::Window(&parent, "save_map_menu", 0, 0, 500, 330, _("Save Map"))
+	: UI::Window(&parent, "save_map_menu", 0, 0, 550, 330, _("Save Map"))
 {
 	int32_t const spacing =  5;
 	int32_t const offsx   = spacing;
-	int32_t const offsy   = 30;
+	int32_t const offsy   = 10;
 	int32_t posx          = offsx;
 	int32_t posy          = offsy;
+	int32_t descr_label_w = 90;
 
 	m_ls =
 		new UI::Listselect<const char *>
@@ -76,42 +77,41 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 	m_editbox->changed.connect(boost::bind(&MainMenuSaveMap::edit_box_changed, this));
 
 	posx = get_inner_w() / 2 + spacing;
-	posy += 20;
 	new UI::Textarea
-		(this, posx, posy, 150, 20, _("Name:"), UI::Align_CenterLeft);
+		(this, posx, posy, descr_label_w, 20, _("Name:"), UI::Align_CenterLeft);
 	m_name =
 		new UI::Textarea
-			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
+			(this, posx + descr_label_w, posy, 200, 20, "---", UI::Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, 150, 20, _("Author:"), UI::Align_CenterLeft);
+		(this, posx, posy, descr_label_w, 20, _("Author:"), UI::Align_CenterLeft);
 	m_author =
 		new UI::Textarea
-			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
+			(this, posx + descr_label_w, posy, 200, 20, "---", UI::Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, 70, 20, _("Size:"), UI::Align_CenterLeft);
+		(this, posx, posy, descr_label_w, 20, _("Size:"), UI::Align_CenterLeft);
 	m_size =
 		new UI::Textarea
-			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
+			(this, posx + descr_label_w, posy, 200, 20, "---", UI::Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, 70, 20, _("Players:"), UI::Align_CenterLeft);
+		(this, posx, posy, descr_label_w, 20, _("Players:"), UI::Align_CenterLeft);
 	m_nrplayers =
 		new UI::Textarea
-			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
+			(this, posx + descr_label_w, posy, 200, 20, "---", UI::Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, 70, 20, _("Descr: "), UI::Align_CenterLeft);
+		(this, posx, posy, descr_label_w, 20, _("Descr: "), UI::Align_CenterLeft);
 	m_descr =
 		new UI::MultilineTextarea
 			(this,
-			 posx + 70, posy,
-			 get_inner_w() - posx - spacing - 70,
+			 posx + descr_label_w, posy,
+			 get_inner_w() - posx - spacing - descr_label_w,
 			 get_inner_h() - posy - spacing - 40,
 			 "---", UI::Align_CenterLeft);
 
@@ -120,21 +120,23 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 
 	m_ok_btn = new UI::Button
 		(this, "ok",
-		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
+		 posx, posy,
+		 get_inner_w() / 4 - 1.5 * spacing, 20,
 		 g_gr->images().get("pics/but0.png"),
 		 _("OK"));
 	m_ok_btn->sigclicked.connect(boost::bind(&MainMenuSaveMap::clicked_ok, boost::ref(*this)));
 
 	UI::Button * cancelbtn = new UI::Button
 		(this, "cancel",
-		 posx, posy, 80, 20,
+		 posx + get_inner_w() / 4 - spacing / 2, posy,
+		 get_inner_w() / 4 - 1.5 * spacing, 20,
 		 g_gr->images().get("pics/but1.png"),
 		 _("Cancel"));
 	cancelbtn->sigclicked.connect(boost::bind(&MainMenuSaveMap::die, boost::ref(*this)));
 
 	UI::Button * make_directorybtn = new UI::Button
 		(this, "make_directory",
-		 spacing, posy, 120, 20,
+		 spacing, posy, 185, 20,
 		 g_gr->images().get("pics/but1.png"),
 		 _("Make Directory"));
 	make_directorybtn->sigclicked.connect
