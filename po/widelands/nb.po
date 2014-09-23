@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-07 13:39-0700\n"
-"PO-Revision-Date: 2014-07-27 17:02+0000\n"
+"POT-Creation-Date: 2014-09-18 19:55+0100\n"
+"PO-Revision-Date: 2014-09-19 07:38+0000\n"
 "Last-Translator: SirVer <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-08 06:17+0000\n"
+"X-Launchpad-Export-Date: 2014-09-20 05:46+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -98,11 +98,11 @@ msgstr "Angre"
 msgid "Redo"
 msgstr "Gjør om"
 
-#: ../../src/editor/editorinteractive.cc:190 ../../src/wlapplication.cc:439
+#: ../../src/editor/editorinteractive.cc:190
 msgid "Unsupported format"
 msgstr "Ikke-støttet format"
 
-#: ../../src/editor/editorinteractive.cc:191 ../../src/wlapplication.cc:440
+#: ../../src/editor/editorinteractive.cc:191
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -798,7 +798,7 @@ msgid "Loading map"
 msgstr "Laster kart"
 
 #: ../../src/logic/game.cc:369 ../../src/logic/game.cc:402
-#: ../../src/wlapplication.cc:1672
+#: ../../src/wlapplication.cc:1586
 msgid "Loading..."
 msgstr "Laster…"
 
@@ -930,9 +930,9 @@ msgstr ""
 #. * TRANSLATORS:    %2$s = "Ox"
 #: ../../src/logic/production_program.cc:343
 #: ../../src/logic/production_program.cc:365
-#: ../../src/logic/production_program.cc:946
-#: ../../src/logic/production_program.cc:1063
-#: ../../src/logic/production_program.cc:1158
+#: ../../src/logic/production_program.cc:945
+#: ../../src/logic/production_program.cc:1062
+#: ../../src/logic/production_program.cc:1157
 #, c-format
 msgid "%1$ix %2$s"
 msgstr ""
@@ -982,7 +982,7 @@ msgstr ""
 #. * TRANSLATORS:    %1$s = "work"
 #. * TRANSLATORS:    %2$s = "water and wheat (2) "
 #. * TRANSLATORS:    %3$s = "are missing"
-#: ../../src/logic/production_program.cc:960
+#: ../../src/logic/production_program.cc:959
 #, c-format
 msgid "Did not start %1$s because %2$s %3$s"
 msgstr ""
@@ -993,36 +993,36 @@ msgstr ""
 #. * TRANSLATORS: This appears in the hover text on buildings. Please test these in context
 #. * TRANSLATORS: on a development build if you can, and let us know if there are any issues
 #. * TRANSLATORS: we need to address for your language.
-#: ../../src/logic/production_program.cc:969
+#: ../../src/logic/production_program.cc:968
 msgid " is missing"
 msgid_plural " are missing"
 msgstr[0] " mangler"
 msgstr[1] " mangler"
 
 #. * TRANSLATORS: %s is a list of wares
-#: ../../src/logic/production_program.cc:1073
+#: ../../src/logic/production_program.cc:1072
 #, c-format
 msgid "Produced %s"
 msgstr "Produserte %s"
 
 #. * TRANSLATORS: %s is a list of workers
-#: ../../src/logic/production_program.cc:1167
+#: ../../src/logic/production_program.cc:1166
 #, c-format
 msgid "Recruited %s"
 msgstr "Rekruttert %s"
 
 #. * TRANSLATORS: %1$s = production site name, %2$s = production program name, %3$s = resource
-#: ../../src/logic/production_program.cc:1228
+#: ../../src/logic/production_program.cc:1227
 #, c-format
 msgid "%1$s %2$s mine %3$s"
 msgstr "%1$s %2$s graver %3$s"
 
-#: ../../src/logic/production_program.cc:1390
+#: ../../src/logic/production_program.cc:1389
 msgid "No soldier to train!"
 msgstr "Ingen soldater å trene!"
 
-#: ../../src/logic/production_program.cc:1398
-#: ../../src/logic/production_program.cc:1483
+#: ../../src/logic/production_program.cc:1397
+#: ../../src/logic/production_program.cc:1482
 msgid "No soldier found for this training level!"
 msgstr "Fant ingen soldater for dette treningsnivået!"
 
@@ -1360,7 +1360,7 @@ msgstr ""
 "så ble tjeneren slått av mens du forsøkte å koble deg til."
 
 #: ../../src/network/netclient.cc:198 ../../src/network/nethost.cc:849
-#: ../../src/wlapplication.cc:1565
+#: ../../src/wlapplication.cc:1479
 msgid "Preparing game"
 msgstr "Klargjør spill"
 
@@ -2098,14 +2098,6 @@ msgstr "Spiller %u"
 msgid "closed"
 msgstr "lukket"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:636
-msgid "The map file seems to be invalid!"
-msgstr "Kartfilen ser ut til å være ugyldig!"
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:636
-msgid "There was an error!"
-msgstr "Det var en feil!"
-
 #: ../../src/ui_fsmenu/launch_mpg.cc:646
 msgid "Map details:"
 msgstr "Kart detaljer:"
@@ -2625,268 +2617,17 @@ msgstr "Kampanjer"
 msgid "Load Game"
 msgstr "Last spill"
 
-#: ../../src/wlapplication.cc:105
-msgid ""
-"Waited 5 seconds to close audio. There are some problems here, so killing "
-"Widelands. Update your sound driver and/or SDL to fix this problem\n"
-msgstr ""
-"Ventet 5 sekunder på å avslutte lyden. Det er noen problemer her, så "
-"Widelands blir drept. Oppdater lyddriveren din og/eller SDL for å løse "
-"problemet\n"
-
-#: ../../src/wlapplication.cc:411
-msgid "ERROR: Could not connect to metaserver (reason above)!\n"
-msgstr "FEIL: Kunne ikke koble til metatjener (se årsak over)!\n"
-
-#: ../../src/wlapplication.cc:837 ../../src/wlapplication.cc:846
-msgid "could not find the path of the main executable"
-msgstr "kunne ikke finne stien til programfilen"
-
-#: ../../src/wlapplication.cc:1173
-msgid "This is Widelands-"
-msgstr "Dette er Widelands-"
-
-#: ../../src/wlapplication.cc:1175
-msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
-msgstr "Bruk: widelands <valg0>=<verdi0> ... <valgN>=<verdiN>"
-
-#: ../../src/wlapplication.cc:1176
-msgid "Options:"
-msgstr "Valg:"
-
 #: ../../src/wlapplication.cc:1178
-msgid " --<config-entry-name>=value overwrites any config file setting"
-msgstr ""
-
-#: ../../src/wlapplication.cc:1179
-msgid ""
-" --logfile=FILENAME   Log output to file FILENAME instead of \n"
-"                      terminal output"
-msgstr ""
-" --logfile=FILNAVN   Logger utdata til FILNAVN istedenfor\n"
-"                      terminal-utdata"
-
-#: ../../src/wlapplication.cc:1181
-msgid ""
-" --datadir=DIRNAME    Use specified directory for the widelands\n"
-"                      data files"
-msgstr ""
-" --datadir=MAPPE   bruker oppgitt mappe for Widelands\n"
-"                      datafiler"
-
-#: ../../src/wlapplication.cc:1183
-msgid ""
-" --homedir=DIRNAME    Use specified directory for widelands config\n"
-"                      files, savegames and replays"
-msgstr ""
-" --homedir=MAPPENAVN    Bruk angitt mappe for Widelands konfigurasjons-\n"
-"                      filer, lagrede spill og repriser"
-
-#: ../../src/wlapplication.cc:1186
-msgid "                      Default is ~/.widelands"
-msgstr "                      Standard er ~/.widelands"
-
-#: ../../src/wlapplication.cc:1189
-msgid ""
-" --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
-"                      of using the SDL"
-msgstr ""
-" --coredump=[yes|no]  Lager en kjernedump ved minnepekerfeil istedenfor\n"
-"                      å bruke SDL"
-
-#: ../../src/wlapplication.cc:1191
-msgid ""
-" --language=[de_DE|sv_SE|...]\n"
-"                      The locale to use."
-msgstr ""
-" --language=[de_DE|sv_SE|...]\n"
-"                      Hvilken lokale som skal benyttes."
-
-#: ../../src/wlapplication.cc:1193
-msgid " --localedir=DIRNAME  Use DIRNAME as location for the locale"
-msgstr " --localedir=MAPPE  Bruk MAPPE som plassering for lokale"
-
-#: ../../src/wlapplication.cc:1194
-msgid ""
-" --remove_syncstreams=[true|false]\n"
-"                      Remove syncstream files on startup"
-msgstr ""
-
-#: ../../src/wlapplication.cc:1196
-msgid ""
-" --remove_replays=[...]\n"
-"                      Remove replays after this number of days.\n"
-"                      If this is 0, replays are not deleted."
-msgstr ""
-" --remove_replays=[...]\n"
-"                      Fjern repriser etter angitt antall dager.\n"
-"                      Hvis tallet er 0, blir de ikke fjernet."
-
-#: ../../src/wlapplication.cc:1200
-msgid "Sound options:"
-msgstr "Lydvalg:"
-
-#: ../../src/wlapplication.cc:1201
-msgid " --nosound            Starts the game with sound disabled."
-msgstr " --nosound            Starter spillet med lyd avslått."
-
-#: ../../src/wlapplication.cc:1202
-msgid " --disable_fx         Disable sound effects."
-msgstr " --disable_fx         Slår av lydeffekter."
-
-#: ../../src/wlapplication.cc:1203
-msgid " --disable_music      Disable music."
-msgstr " --disable_music      Slår av musikk."
-
-#: ../../src/wlapplication.cc:1204
-msgid " --nozip              Do not save files as binary zip archives."
-msgstr ""
-
-#: ../../src/wlapplication.cc:1205
-msgid ""
-" --editor             Directly starts the Widelands editor.\n"
-"                      You can add a =FILENAME to directly load\n"
-"                      the map FILENAME in editor."
-msgstr ""
-
-#: ../../src/wlapplication.cc:1208
-msgid ""
-" --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
-"                      map."
-msgstr ""
-" --scenario=FILNAVN  Starter kartet FILNAVN direkte som et\n"
-"                      scenario."
-
-#: ../../src/wlapplication.cc:1210
-msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
-msgstr " --loadgame=FILNAVN  Laster det lagrede spillet FILNAVN direkte."
-
-#: ../../src/wlapplication.cc:1211
-msgid ""
-" --script=FILENAME    Run the given Lua script after initialization.\n"
-"                      Only valid with --scenario, --loadgame, or --editor."
-msgstr ""
-" --script=FILNAVN    Kjør følgende Lua-skript etter oppstart.\n"
-"                      Kun gyldig sammen med --scenario, --loadgame, eller --"
-"editor."
-
-#: ../../src/wlapplication.cc:1213
-msgid " --dedicated=FILENAME Starts a dedicated server with FILENAME as map"
-msgstr " --dedicated=FILNAVN Starter en dedikert tjener med FILNAVN som kart"
-
-#: ../../src/wlapplication.cc:1214
-msgid ""
-" --auto_roadbuild_mode=[yes|no]\n"
-"                      Whether to enter roadbuilding mode\n"
-"                      automatically after placing a flag that is\n"
-"                      not connected to a road."
-msgstr ""
-
-#: ../../src/wlapplication.cc:1218
-msgid "Graphic options:"
-msgstr "Innstillinger for grafikk:"
-
-#: ../../src/wlapplication.cc:1219
-msgid ""
-" --fullscreen=[yes|no]\n"
-"                      Whether to use the whole display for the\n"
-"                      game screen."
-msgstr ""
-" --fullscreen=[yes|no]\n"
-"                      Om spillet skal vises i fullskjerm eller ikke"
-
-#: ../../src/wlapplication.cc:1222
-msgid " --xres=[...]         Width of the window in pixel."
-msgstr " --xres=[...]         Vinduets bredde i piksler."
-
-#: ../../src/wlapplication.cc:1223
-msgid " --yres=[...]         Height of the window in pixel."
-msgstr " --yres=[...]         Vinduets høyde i piksler."
-
-#: ../../src/wlapplication.cc:1224
-msgid " --opengl=[0|1]       Enables OpenGL rendering"
-msgstr " --opengl=[0|1]       Slår på opptegning med OpenGL"
-
-#: ../../src/wlapplication.cc:1225
-msgid "Options for the internal window manager:"
-msgstr ""
-
-#: ../../src/wlapplication.cc:1226
-msgid ""
-" --border_snap_distance=[0 ...]\n"
-"                      Move a window to the edge of the screen\n"
-"                      when the edge of the window comes within\n"
-"                      this distance from the edge of the screen."
-msgstr ""
-
-#: ../../src/wlapplication.cc:1230
-msgid ""
-" --dock_windows_to_edges=[yes|no]\n"
-"                      Eliminate a window's border towards the\n"
-"                      edge of the screen when the edge of the\n"
-"                      window is next to the edge of the screen."
-msgstr ""
-
-#: ../../src/wlapplication.cc:1234
-msgid ""
-" --panel_snap_distance=[0 ...]\n"
-"                      Move a window to the edge of the panel when\n"
-"                      the edge of the window comes within this\n"
-"                      distance from the edge of the panel."
-msgstr ""
-
-#: ../../src/wlapplication.cc:1238
-msgid ""
-" --snap_windows_only_when_overlapping=[yes|no]\n"
-"                      Only move a window to the edge of a panel\n"
-"                      if the window is overlapping with the\n"
-"                      panel."
-msgstr ""
-
-#: ../../src/wlapplication.cc:1243
-msgid " --verbose            Enable verbose debug messages"
-msgstr " --verbose            Slå på utdypende feilsøkingsmeldinger"
-
-#: ../../src/wlapplication.cc:1245
-msgid " --help               Show this help"
-msgstr " --help               Viser denne hjelpen"
-
-#: ../../src/wlapplication.cc:1247
-msgid ""
-"Bug reports? Suggestions? Check out the project website:\n"
-"        https://launchpad.net/widelands\n"
-"\n"
-"Hope you enjoy this game!"
-msgstr ""
-"Feilrapporter? Forslag til forbedringer? Sjekk ut prosjektets hjemmeside:\n"
-"        https://launchpad.net/widelands\n"
-"\n"
-"Vi håper du liker Widelands!"
-
-#: ../../src/wlapplication.cc:1262
-msgid "Fallback settings in effect"
-msgstr ""
-
-#: ../../src/wlapplication.cc:1264
 msgid ""
 "Your video settings could not be enabled, and fallback settings are in "
 "effect. Please check the graphics options!"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1335
-#, c-format
-msgid "Warning: %s"
-msgstr "Advarsel: %s"
-
-#: ../../src/wlapplication.cc:1338
+#: ../../src/wlapplication.cc:1252
 msgid "Game data error"
 msgstr "Spilldatafeil"
 
-#: ../../src/wlapplication.cc:1343
-msgid "Unexpected error during the game"
-msgstr "Uventet feil under spilling"
-
-#: ../../src/wlapplication.cc:1348
+#: ../../src/wlapplication.cc:1262
 #, c-format
 msgid ""
 "\n"
@@ -2901,7 +2642,7 @@ msgstr ""
 "kan finne relaterte meldinger i standard utdata (stdout.txt på Windows). Du "
 "bruker bygg %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1355
+#: ../../src/wlapplication.cc:1269
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -2912,10 +2653,6 @@ msgstr ""
 "\n"
 "Widelands prøver å lagre spillet når feil oppstår under spilling. Det er "
 "ofte – men ikke alltid – mulig å laste det og fortsette å spille.\n"
-
-#: ../../src/wlapplication.cc:1467
-msgid "The address of the game server is invalid"
-msgstr "Adressen til spilltjener er ikke gyldig"
 
 #: ../../src/wui/actionconfirm.cc:223
 msgid "Destroy building?"
