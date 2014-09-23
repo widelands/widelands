@@ -242,7 +242,6 @@ public:
 	bool lock_audio_disabling_;
 
 protected:
-	Mix_Chunk * RWopsify_MixLoadWAV(FileRead &);
 	void load_one_fx(const char * filename, const std::string & fx_name);
 	int32_t stereo_position(Widelands::Coords position);
 	bool play_or_not
