@@ -58,7 +58,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 	int32_t const offsy   = 10;
 	int32_t posx          = offsx;
 	int32_t posy          = offsy;
-	int32_t descr_label_w = 90;
+	int32_t const descr_label_w = 90;
 
 	m_ls =
 		new UI::Listselect<const char *>
