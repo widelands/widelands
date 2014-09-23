@@ -44,7 +44,11 @@ using namespace Widelands;
 
 namespace  {
 
-// Useful: http://www.cs.unh.edu/~cs770/docs/glsl-1.20-quickref.pdf
+// QuickRef:
+// http://www.cs.unh.edu/~cs770/docs/glsl-1.20-quickref.pdf
+// Full specification:
+// http://www.opengl.org/registry/doc/GLSLangSpec.Full.1.20.8.pdf
+// We target OpenGL 2.1 for the desktop here.
 const char kTerrainVertexShader[] = R"(
 #version 120
 
@@ -267,6 +271,7 @@ TerrainProgram::TerrainProgram() {
 	{  // terrain program
 		terrain_gl_program_.compile(kTerrainVertexShader, kTerrainFragmentShader);
 
+		// NOCOM(#sirver): instead of bind, use glGetAttribLocation after linking.
 		glBindAttribLocation(terrain_gl_program_.object(), kAttribVertexPosition, "attr_position");
 		glBindAttribLocation(
 		   terrain_gl_program_.object(), kAttribVertexBrightness, "attr_brightness");
