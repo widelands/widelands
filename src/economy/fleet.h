@@ -84,16 +84,16 @@ struct Fleet : MapObject {
 
 	bool active() const;
 
-	void init(Editor_Game_Base &) override;
-	void cleanup(Editor_Game_Base &) override;
-	void update(Editor_Game_Base &);
+	void init(EditorGameBase &) override;
+	void cleanup(EditorGameBase &) override;
+	void update(EditorGameBase &);
 
 	void add_ship(Ship * ship);
-	void remove_ship(Editor_Game_Base & egbase, Ship * ship);
-	void add_port(Editor_Game_Base & egbase, PortDock * port);
-	void remove_port(Editor_Game_Base & egbase, PortDock * port);
+	void remove_ship(EditorGameBase & egbase, Ship * ship);
+	void add_port(EditorGameBase & egbase, PortDock * port);
+	void remove_port(EditorGameBase & egbase, PortDock * port);
 
-	void log_general_info(const Editor_Game_Base &) override;
+	void log_general_info(const EditorGameBase &) override;
 
 	bool get_path(PortDock & start, PortDock & end, Path & path);
 	void add_neighbours(PortDock & pd, std::vector<RoutingNodeNeighbour> & neighbours);
@@ -102,10 +102,10 @@ protected:
 	void act(Game &, uint32_t data) override;
 
 private:
-	void find_other_fleet(Editor_Game_Base & egbase);
-	void merge(Editor_Game_Base & egbase, Fleet * other);
+	void find_other_fleet(EditorGameBase & egbase);
+	void merge(EditorGameBase & egbase, Fleet * other);
 	void check_merge_economy();
-	void connect_port(Editor_Game_Base & egbase, uint32_t idx);
+	void connect_port(EditorGameBase & egbase, uint32_t idx);
 
 	PortPath & portpath(uint32_t i, uint32_t j);
 	const PortPath & portpath(uint32_t i, uint32_t j) const;
@@ -142,10 +142,10 @@ protected:
 
 public:
 	bool has_new_save_support() override {return true;}
-	void save(Editor_Game_Base &, MapMapObjectSaver &, FileWrite &) override;
+	void save(EditorGameBase &, MapObjectSaver &, FileWrite &) override;
 
 	static MapObject::Loader * load
-		(Editor_Game_Base &, MapMapObjectLoader &, FileRead &);
+		(EditorGameBase &, MapObjectLoader &, FileRead &);
 };
 
 } // namespace Widelands

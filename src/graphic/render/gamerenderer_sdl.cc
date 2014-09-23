@@ -98,13 +98,13 @@ void GameRendererSDL::draw_terrain()
 		// Calculate safe (bounded) field coordinates and get field pointers
 		map.normalize_coords(r);
 		map.normalize_coords(br);
-		Map_Index  r_index = Map::get_index (r, mapwidth);
+		MapIndex  r_index = Map::get_index (r, mapwidth);
 		r.field = &map[r_index];
-		Map_Index br_index = Map::get_index(br, mapwidth);
+		MapIndex br_index = Map::get_index(br, mapwidth);
 		br.field = &map[br_index];
 		FCoords tr;
 		map.get_tln(r, &tr);
-		Map_Index tr_index = tr.field - &map[0];
+		MapIndex tr_index = tr.field - &map[0];
 
 		const Texture * f_r_texture;
 
@@ -122,8 +122,8 @@ void GameRendererSDL::draw_terrain()
 			const FCoords f = r;
 			const int32_t f_posx = r_posx;
 			const int32_t bl_posx = br_posx;
-			Map_Index f_index = r_index;
-			Map_Index bl_index = br_index;
+			MapIndex f_index = r_index;
+			MapIndex bl_index = br_index;
 			move_r(mapwidth, tr, tr_index);
 			move_r(mapwidth,  r,  r_index);
 			move_r(mapwidth, br, br_index);

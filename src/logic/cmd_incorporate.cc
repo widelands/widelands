@@ -23,13 +23,13 @@
 #include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 
 namespace Widelands {
 
-void Cmd_Incorporate::Read
-	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
+void CmdIncorporate::Read
+	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -38,20 +38,20 @@ void Cmd_Incorporate::Read
 			uint32_t const worker_serial = fr.Unsigned32();
 			try {
 				worker = &mol.get<Worker>(worker_serial);
-			} catch (const _wexception & e) {
+			} catch (const WException & e) {
 				throw wexception("worker %u: %s", worker_serial, e.what());
 			}
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
+	} catch (const WException & e) {
 		throw wexception("incorporate: %s", e.what());
 	}
 }
 
 
-void Cmd_Incorporate::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
+void CmdIncorporate::Write
+	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
 	fw.Unsigned16(CMD_INCORPORATE_VERSION);

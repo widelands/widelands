@@ -27,11 +27,11 @@
 #include "profile/profile.h"
 #include "wui/game_summary.h"
 
-Interactive_GameBase::Interactive_GameBase
+InteractiveGameBase::InteractiveGameBase
 	(Widelands::Game & _game, Section & global_s,
 	 PlayerType pt, bool const chatenabled, bool const multiplayer)
 	:
-	Interactive_Base(_game, global_s),
+	InteractiveBase(_game, global_s),
 	m_chatProvider(nullptr),
 	m_building_census_format
 		(global_s.get_string("building_census_format",       "%N")),
@@ -45,18 +45,18 @@ Interactive_GameBase::Interactive_GameBase
 {}
 
 /// \return a pointer to the running \ref Game instance.
-Widelands::Game * Interactive_GameBase::get_game() const
+Widelands::Game * InteractiveGameBase::get_game() const
 {
 	return dynamic_cast<Widelands::Game *>(&egbase());
 }
 
 
-Widelands::Game & Interactive_GameBase::    game() const
+Widelands::Game & InteractiveGameBase::    game() const
 {
-	return ref_cast<Widelands::Game, Widelands::Editor_Game_Base>(egbase());
+	return ref_cast<Widelands::Game, Widelands::EditorGameBase>(egbase());
 }
 
-void Interactive_GameBase::set_chat_provider(ChatProvider & chat)
+void InteractiveGameBase::set_chat_provider(ChatProvider & chat)
 {
 	m_chatProvider = &chat;
 	m_chatOverlay->setChatProvider(chat);
@@ -64,7 +64,7 @@ void Interactive_GameBase::set_chat_provider(ChatProvider & chat)
 	m_chatenabled = true;
 }
 
-ChatProvider * Interactive_GameBase::get_chat_provider()
+ChatProvider * InteractiveGameBase::get_chat_provider()
 {
 	return m_chatProvider;
 }
@@ -73,7 +73,7 @@ ChatProvider * Interactive_GameBase::get_chat_provider()
  * See if we can reasonably open a ship window at the current selection position.
  * If so, do it and return true; otherwise, return false.
  */
-bool Interactive_GameBase::try_show_ship_window()
+bool InteractiveGameBase::try_show_ship_window()
 {
 	Widelands::Map & map(game().map());
 	Widelands::Area<Widelands::FCoords> area(map.get_fcoords(get_sel_pos().node), 1);
@@ -97,7 +97,7 @@ bool Interactive_GameBase::try_show_ship_window()
 	return false;
 }
 
-void Interactive_GameBase::show_game_summary()
+void InteractiveGameBase::show_game_summary()
 {
 	if (m_game_summary.window) {
 		m_game_summary.window->set_visible(true);

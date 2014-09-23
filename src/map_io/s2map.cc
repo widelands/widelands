@@ -216,11 +216,11 @@ load_s2mf_section(FileRead& fr, int32_t const width, int32_t const height) {
 	return section;
 }
 
-std::string get_world_name(S2_Map_Loader::WorldType world) {
+std::string get_world_name(S2MapLoader::WorldType world) {
 	switch (world) {
-		case S2_Map_Loader::GREENLAND: return "greenland";
-		case S2_Map_Loader::BLACKLAND: return "blackland";
-		case S2_Map_Loader::WINTERLAND: return "winterland";
+		case S2MapLoader::GREENLAND: return "greenland";
+		case S2MapLoader::BLACKLAND: return "blackland";
+		case S2MapLoader::WINTERLAND: return "winterland";
 		default:
 			throw wexception("Unknown World in map file.");
 	}
@@ -232,12 +232,12 @@ std::string get_world_name(S2_Map_Loader::WorldType world) {
 class TerrainConverter {
 public:
 	TerrainConverter(const Widelands::World& world, const OneWorldLegacyLookupTable& lookup_table);
-	Widelands::Terrain_Index lookup(S2_Map_Loader::WorldType world, int8_t c) const;
+	Widelands::TerrainIndex lookup(S2MapLoader::WorldType world, int8_t c) const;
 
 protected:
 	const OneWorldLegacyLookupTable& one_world_legacy_lookup_table_;
 	const Widelands::World& world_;
-	const std::map<S2_Map_Loader::WorldType, std::vector<std::string>> table_;
+	const std::map<S2MapLoader::WorldType, std::vector<std::string>> table_;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(TerrainConverter);
@@ -249,19 +249,19 @@ TerrainConverter::TerrainConverter
 	world_(world),
 	table_
 	{
-	std::make_pair(S2_Map_Loader::GREENLAND, std::vector<std::string>
+	std::make_pair(S2MapLoader::GREENLAND, std::vector<std::string>
 		{
 			"steppe", "berg1", "schnee", "sumpf", "strand", "wasser", "wiese1",
 			"wiese2", "wiese3", "berg2", "berg3", "berg4", "steppe_kahl",
 			"wiese4", "lava", "bergwiese"
 		}),
-	std::make_pair(S2_Map_Loader::BLACKLAND, std::vector<std::string>
+	std::make_pair(S2MapLoader::BLACKLAND, std::vector<std::string>
 		{
 			"ashes", "mountain1", "lava-stone1", "lava-stone2", "strand", "water",
 			"hardground1", "hardground2", "hardground3", "mountain2", "mountain3",
 			"mountain4", "ashes2", "hardground4", "lava", "hardlava"
 		}),
-	std::make_pair(S2_Map_Loader::WINTERLAND, std::vector<std::string>
+	std::make_pair(S2MapLoader::WINTERLAND, std::vector<std::string>
 		{
 			"tundra", "mountain1", "ice_flows", "ice_flows2", "ice", "water",
 			"tundra_taiga", "tundra2", "tundra3", "mountain2", "mountain3",
@@ -270,7 +270,7 @@ TerrainConverter::TerrainConverter
 	}
 {}
 
-Widelands::Terrain_Index TerrainConverter::lookup(S2_Map_Loader::WorldType world, int8_t c) const {
+Widelands::TerrainIndex TerrainConverter::lookup(S2MapLoader::WorldType world, int8_t c) const {
 	switch (c) {
 	// the following comments are valid for greenland - blackland and winterland have equivalents
 	// source: http://bazaar.launchpad.net/~xaser/s25rttr/s25edit/view/head:/WLD_reference.txt
@@ -308,14 +308,14 @@ Widelands::Terrain_Index TerrainConverter::lookup(S2_Map_Loader::WorldType world
 
 }  // namespace
 
-S2_Map_Loader::S2_Map_Loader(const char * filename, Widelands::Map & M)
-: Widelands::Map_Loader(filename, M), m_filename(filename)
+S2MapLoader::S2MapLoader(const char * filename, Widelands::Map & M)
+: Widelands::MapLoader(filename, M), m_filename(filename)
 {
 }
 
 /// Load the header. The map will then return valid information when
 /// get_width(), get_nrplayers(), get_author() and so on are called.
-int32_t S2_Map_Loader::preload_map(bool const scenario) {
+int32_t S2MapLoader::preload_map(bool const scenario) {
 	assert(get_state() != STATE_LOADED);
 
 	m_map.cleanup();
@@ -340,7 +340,7 @@ int32_t S2_Map_Loader::preload_map(bool const scenario) {
 			"Rufus",
 		};
 
-		Widelands::Player_Number const nr_players = m_map.get_nrplayers();
+		Widelands::PlayerNumber const nr_players = m_map.get_nrplayers();
 		iterate_player_numbers(i, nr_players) {
 			m_map.set_scenario_player_tribe(i, "empire");
 			m_map.set_scenario_player_name(i, names[i - 1]);
@@ -359,10 +359,10 @@ int32_t S2_Map_Loader::preload_map(bool const scenario) {
  * Completely loads the map, loads the graphics and places all the objects.
  * From now on the Map* can't be set to another one.
  */
-int32_t S2_Map_Loader::load_map_complete
-	(Widelands::Editor_Game_Base & egbase, bool)
+int32_t S2MapLoader::load_map_complete
+	(Widelands::EditorGameBase & egbase, bool)
 {
-	ScopedTimer timer("S2_Map_Loader::load_map_complete() took %ums");
+	ScopedTimer timer("S2MapLoader::load_map_complete() took %ums");
 
 	load_s2mf(egbase);
 
@@ -380,7 +380,7 @@ int32_t S2_Map_Loader::load_map_complete
 /**
  * Load informational data of an S2 map
  */
-void S2_Map_Loader::load_s2mf_header(FileRead& fr)
+void S2MapLoader::load_s2mf_header(FileRead& fr)
 {
 	S2MapDescrHeader header;
 	memcpy(&header, fr.Data(sizeof(header)), sizeof(header));
@@ -409,7 +409,7 @@ void S2_Map_Loader::load_s2mf_header(FileRead& fr)
 /**
  * This loads a given file as a settlers 2 map file
  */
-void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
+void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 {
 	uint8_t * pc;
 
@@ -421,8 +421,8 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 
 	//  The header must already have been processed.
 	assert(m_map.m_fields.get());
-	Widelands::X_Coordinate const mapwidth  = m_map.get_width ();
-	Widelands::Y_Coordinate const mapheight = m_map.get_height();
+	int16_t const mapwidth  = m_map.get_width ();
+	int16_t const mapheight = m_map.get_height();
 	assert(mapwidth > 0 && mapheight > 0);
 	egbase.allocate_player_maps(); //  initializes player_fields.vision
 
@@ -433,8 +433,8 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 
 	Widelands::Field * f = m_map.m_fields.get();
 	pc = section.get();
-	for (Widelands::Y_Coordinate y = 0; y < mapheight; ++y)
-		for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc)
+	for (int16_t y = 0; y < mapheight; ++y)
+		for (int16_t x = 0; x < mapwidth; ++x, ++f, ++pc)
 			f->set_height(*pc);
 
 	//  SWD-SECTION 2: Terrain 1
@@ -450,8 +450,8 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 
 	f = m_map.m_fields.get();
 	pc = section.get();
-	for (Widelands::Y_Coordinate y = 0; y < mapheight; ++y)
-		for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
+	for (int16_t y = 0; y < mapheight; ++y)
+		for (int16_t x = 0; x < mapwidth; ++x, ++f, ++pc) {
 			uint8_t c = *pc;
 			// Harbour buildspace & textures - Information taken from:
 			if (c & 0x40)
@@ -466,8 +466,8 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 
 	f = m_map.m_fields.get();
 	pc = section.get();
-	for (Widelands::Y_Coordinate y = 0; y < mapheight; ++y)
-		for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
+	for (int16_t y = 0; y < mapheight; ++y)
+		for (int16_t x = 0; x < mapwidth; ++x, ++f, ++pc) {
 			uint8_t c = *pc;
 			// Harbour buildspace & textures - Information taken from:
 			// http://bazaar.launchpad.net/~xaser/s25rttr/s25edit/view/head:/WLD_reference.txt
@@ -506,9 +506,9 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 	if (!section)
 		throw wexception("Section 6 (Ways) not found");
 
-	for (Widelands::Y_Coordinate y = 0; y < mapheight; ++y) {
+	for (int16_t y = 0; y < mapheight; ++y) {
 		uint32_t i = y * mapwidth;
-		for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x, ++i) {
+		for (int16_t x = 0; x < mapwidth; ++x, ++i) {
 			// ignore everything but HQs
 			if (section[i] == 0x80) {
 				if (bobs[i] < m_map.get_nrplayers())
@@ -531,9 +531,9 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 	if (!section)
 		throw wexception("Section 7 (Animals) not found");
 
-	for (Widelands::Y_Coordinate y = 0; y < mapheight; ++y) {
+	for (uint16_t y = 0; y < mapheight; ++y) {
 		uint32_t i = y * mapwidth;
-		for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x, ++i) {
+		for (uint16_t x = 0; x < mapwidth; ++x, ++i) {
 			std::string bobname;
 
 			switch (section[i]) {
@@ -621,8 +621,8 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 	pc = section.get();
 	char const * res;
 	int32_t amount = 0;
-	for (Widelands::Y_Coordinate y = 0; y < mapheight; ++y)
-		for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
+	for (uint16_t y = 0; y < mapheight; ++y)
+		for (uint16_t x = 0; x < mapwidth; ++x, ++f, ++pc) {
 			uint8_t c = *pc;
 
 			switch (c & 0xF8) {
@@ -692,10 +692,10 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 	};
 
 	uint8_t c;
-	for (Widelands::Y_Coordinate y = 0; y < mapheight; ++y)
-		for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x) {
+	for (uint16_t y = 0; y < mapheight; ++y)
+		for (uint16_t x = 0; x < mapwidth; ++x) {
 			const Widelands::Coords location(x, y);
-			Widelands::Map_Index const index =
+			Widelands::MapIndex const index =
 				Widelands::Map::get_index(location, mapwidth);
 			c = bobs[index];
 			std::string bobname;
@@ -792,10 +792,10 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 			case BOB_SKELETON3:        bobname = "skeleton3"; break;
 
 			case BOB_CACTUS1:
-				bobname = m_worldtype != S2_Map_Loader::WINTERLAND ? "cactus1" : "snowman";
+				bobname = m_worldtype != S2MapLoader::WINTERLAND ? "cactus1" : "snowman";
 				break;
 			case BOB_CACTUS2:
-				bobname = m_worldtype != S2_Map_Loader::WINTERLAND ? "cactus2" : "track";
+				bobname = m_worldtype != S2MapLoader::WINTERLAND ? "cactus2" : "track";
 				break;
 
 			case BOB_BUSH1:            bobname = "bush1";     break;
@@ -822,7 +822,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 	//  size is too small.
 	m_map.recalc_whole_map(world); //  to initialize buildcaps
 
-	const Widelands::Player_Number nr_players = m_map.get_nrplayers();
+	const Widelands::PlayerNumber nr_players = m_map.get_nrplayers();
 	log("Checking starting position for all %u players:\n", nr_players);
 	iterate_player_numbers(p, nr_players) {
 		log("-> Player %u: ", p);
@@ -874,7 +874,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 
 
 /// Try to fix data, which is incompatible between S2 and Widelands
-void S2_Map_Loader::postload_fix_conversion(Widelands::Editor_Game_Base & egbase) {
+void S2MapLoader::postload_fix_conversion(Widelands::EditorGameBase & egbase) {
 
 /*
  * 1: Try to fix port spaces

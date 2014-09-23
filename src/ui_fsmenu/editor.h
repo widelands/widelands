@@ -28,8 +28,8 @@
  * Fullscreen Menu for Editor.
  * Here you select what game you want to play.
  */
-struct Fullscreen_Menu_Editor : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_Editor();
+struct FullscreenMenuEditor : public FullscreenMenuBase {
+	FullscreenMenuEditor();
 
 	enum {Back = dying_code, New_Map, Load_Map};
 

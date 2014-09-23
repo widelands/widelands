@@ -28,26 +28,26 @@ class Request;
 class WaresQueue;
 
 /*
-Partially_Finished_Building
+PartiallyFinishedBuilding
 ---------------------------
 
 This class is the base for constructionsites and
 dismantlesites.
 */
-class Partially_Finished_Building : public Building {
-	friend class Map_Buildingdata_Data_Packet;
-	friend struct Map_Building_Data_Packet;
+class PartiallyFinishedBuilding : public Building {
+	friend class MapBuildingdataPacket;
+	friend struct MapBuildingPacket;
 
 public:
-	Partially_Finished_Building(const BuildingDescr & building_descr);
+	PartiallyFinishedBuilding(const BuildingDescr & building_descr);
 
 	virtual void set_building         (const BuildingDescr &);
 
 	int32_t get_size() const override;
 	uint32_t get_playercaps() const override;
 	uint32_t get_ui_anim() const override;
-	void cleanup(Editor_Game_Base &) override;
-	void init   (Editor_Game_Base &) override;
+	void cleanup(EditorGameBase &) override;
+	void init   (EditorGameBase &) override;
 	void set_economy(Economy *) override;
 
 	uint32_t get_nrwaresqueues() {return m_wares.size();}
@@ -55,7 +55,7 @@ public:
 
 	uint32_t get_built_per64k() const;
 	Request * get_builder_request() {return m_builder_request;}
-	static void request_builder_callback(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
+	static void request_builder_callback(Game &, Request &, WareIndex, Worker *, PlayerImmovable &);
 
 private:
 	void request_builder(Game &);
@@ -69,14 +69,14 @@ protected:
 	Request * m_builder_request;
 	OPtr<Worker> m_builder;
 
-	typedef std::vector<WaresQueue *> Wares;
+	using Wares = std::vector<WaresQueue *>;
 	Wares m_wares;
 
 	bool     m_working;        // true if the builder is currently working
 	uint32_t m_work_steptime;  // time when next step is completed
 	uint32_t m_work_completed; // how many steps have we done so far?
 	uint32_t m_work_steps;     // how many steps (= wares) until we're done?
-	//Player::Constructionsite_Information * m_info; // asked for by player point of view for the gameview
+	//Player::ConstructionsiteInformation * m_info; // asked for by player point of view for the gameview
 };
 
 }

@@ -27,12 +27,12 @@ class Building;
 class Player;
 struct PlayerImmovable;
 }
-class Interactive_Base;
-class Interactive_Player;
+class InteractiveBase;
+class InteractivePlayer;
 
 // fieldaction.cc
 void show_field_action
-	(Interactive_Base           * parent,
+	(InteractiveBase           * parent,
 	 Widelands::Player          * player,
 	 UI::UniqueWindow::Registry * registry);
 

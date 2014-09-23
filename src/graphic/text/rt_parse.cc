@@ -120,7 +120,7 @@ void Tag::m_parse_closing_tag(TextStream & ts) {
 void Tag::m_parse_attribute(TextStream & ts, std::unordered_set<std::string> & allowed_attrs) {
 	std::string aname = ts.till_any("=");
 	if (!allowed_attrs.count(aname))
-		throw SyntaxError_Impl(ts.line(), ts.col(), "an allowed attribute", aname, ts.peek(100));
+		throw SyntaxErrorImpl(ts.line(), ts.col(), "an allowed attribute", aname, ts.peek(100));
 
 	ts.skip(1);
 
@@ -139,7 +139,7 @@ void Tag::m_parse_content(TextStream & ts, TagConstraints & tcs, const TagSet & 
 		std::string text = ts.till_any("<");
 		if (text != "") {
 			if (!tc.text_allowed)
-				throw SyntaxError_Impl(line, col, "no text, as only tags are allowed here", text, ts.peek(100));
+				throw SyntaxErrorImpl(line, col, "no text, as only tags are allowed here", text, ts.peek(100));
 			m_childs.push_back(new Child(text));
 		}
 
@@ -150,9 +150,9 @@ void Tag::m_parse_content(TextStream & ts, TagConstraints & tcs, const TagSet & 
 		line = ts.line(); col = ts.col(); size_t cpos = ts.pos();
 		child->parse(ts, tcs, allowed_tags);
 		if (!tc.allowed_childs.count(child->name()))
-			throw SyntaxError_Impl(line, col, "an allowed tag", child->name(), ts.peek(100, cpos));
+			throw SyntaxErrorImpl(line, col, "an allowed tag", child->name(), ts.peek(100, cpos));
 		if (!allowed_tags.empty() && !allowed_tags.count(child->name()))
-			throw SyntaxError_Impl(line, col, "an allowed tag", child->name(), ts.peek(100, cpos));
+			throw SyntaxErrorImpl(line, col, "an allowed tag", child->name(), ts.peek(100, cpos));
 
 		m_childs.push_back(new Child(child));
 	}

@@ -43,23 +43,23 @@ int32_t Editor_Tool_Set_Port_Space_Callback
 }
 
 
-Editor_Set_Port_Space_Tool::Editor_Set_Port_Space_Tool
-(Editor_Unset_Port_Space_Tool & the_unset_tool)
+EditorSetPortSpaceTool::EditorSetPortSpaceTool
+(EditorUnsetPortSpaceTool & the_unset_tool)
 	:
-	Editor_Tool(the_unset_tool, *this)
+	EditorTool(the_unset_tool, *this)
 {}
 
 
-Editor_Unset_Port_Space_Tool::Editor_Unset_Port_Space_Tool()
+EditorUnsetPortSpaceTool::EditorUnsetPortSpaceTool()
 	:
-	Editor_Tool(*this, *this)
+	EditorTool(*this, *this)
 {}
 
-int32_t Editor_Set_Port_Space_Tool::handle_click_impl(Map& map,
+int32_t EditorSetPortSpaceTool::handle_click_impl(Map& map,
                                                       const Widelands::World& world,
-                                                      Widelands::Node_and_Triangle<> const center,
-                                                      Editor_Interactive&,
-                                                      Editor_Action_Args& args) {
+                                                      Widelands::NodeAndTriangle<> const center,
+                                                      EditorInteractive&,
+                                                      EditorActionArgs& args) {
 	assert(0 <= center.node.x);
 	assert(center.node.x < map.get_width());
 	assert(0 <= center.node.y);
@@ -82,19 +82,19 @@ int32_t Editor_Set_Port_Space_Tool::handle_click_impl(Map& map,
 	return nr;
 }
 
-int32_t Editor_Set_Port_Space_Tool::handle_undo_impl(Map& map,
+int32_t EditorSetPortSpaceTool::handle_undo_impl(Map& map,
                                                      const Widelands::World& world,
-                                                     Node_and_Triangle<Coords> center,
-                                                     Editor_Interactive& parent,
-                                                     Editor_Action_Args& args) {
+                                                     NodeAndTriangle<Coords> center,
+                                                     EditorInteractive& parent,
+                                                     EditorActionArgs& args) {
 	return parent.tools.unset_port_space.handle_click_impl(map, world, center, parent, args);
 }
 
-int32_t Editor_Unset_Port_Space_Tool::handle_click_impl(Map& map,
+int32_t EditorUnsetPortSpaceTool::handle_click_impl(Map& map,
                                                         const Widelands::World& world,
-                                                        Node_and_Triangle<> const center,
-                                                        Editor_Interactive&,
-                                                        Editor_Action_Args& args) {
+                                                        NodeAndTriangle<> const center,
+                                                        EditorInteractive&,
+                                                        EditorActionArgs& args) {
 	assert(0 <= center.node.x);
 	assert(center.node.x < map.get_width());
 	assert(0 <= center.node.y);
@@ -117,10 +117,10 @@ int32_t Editor_Unset_Port_Space_Tool::handle_click_impl(Map& map,
 	return nr;
 }
 
-int32_t Editor_Unset_Port_Space_Tool::handle_undo_impl(Map& map,
+int32_t EditorUnsetPortSpaceTool::handle_undo_impl(Map& map,
                                                        const Widelands::World& world,
-                                                       Node_and_Triangle<Coords> center,
-                                                       Editor_Interactive& parent,
-                                                       Editor_Action_Args& args) {
+                                                       NodeAndTriangle<Coords> center,
+                                                       EditorInteractive& parent,
+                                                       EditorActionArgs& args) {
 	return parent.tools.set_port_space.handle_click_impl(map, world, center, parent, args);
 }

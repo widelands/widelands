@@ -75,7 +75,7 @@ protected:
  */
 template<typename Est_>
 struct RouteAStar : BaseRouteAStar {
-	typedef Est_ Estimator;
+	using Estimator = Est_;
 
 	RouteAStar(Router & router, WareWorker type, const Estimator & est = Estimator());
 

@@ -207,7 +207,7 @@ struct ImmovableProgram {
 		return *m_actions[idx];
 	}
 
-	typedef std::vector<Action *> Actions;
+	using Actions = std::vector<Action *>;
 	const Actions & actions() const {return m_actions;}
 
 private:

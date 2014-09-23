@@ -24,8 +24,8 @@
 
 #include "ui_basic/window.h"
 
-struct Story_Message_Box : public UI::Window {
-	Story_Message_Box
+struct StoryMessageBox : public UI::Window {
+	StoryMessageBox
 		(UI::Panel *,
 		 const std::string &, const std::string &, const std::string &,
 		 int32_t gposx, int32_t gposy, uint32_t w, uint32_t h);

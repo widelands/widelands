@@ -29,8 +29,8 @@
  * Fullscreen Menu for MultiPlayer.
  * Here you select what game you want to play.
  */
-struct Fullscreen_Menu_MultiPlayer : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_MultiPlayer();
+struct FullscreenMenuMultiPlayer : public FullscreenMenuBase {
+	FullscreenMenuMultiPlayer();
 
 	enum {Back = dying_code, Metaserver, Lan};
 

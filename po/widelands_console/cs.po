@@ -7,23 +7,24 @@ msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-09-18 19:55+0100\n"
-"PO-Revision-Date: 2014-09-19 11:27+0000\n"
+"PO-Revision-Date: 2014-07-27 16:59+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Widelands fixxer upper\n"
+"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-09-20 05:47+0000\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Launchpad-Export-Date: 2014-09-08 06:14+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
-"Language: cs\n"
 "X-Poedit-Language: Czech\n"
 
 #. * TRANSLATORS: %s = version information
 #: ../../src/wlapplication_messages.cc:40
-#, c-format
+#, fuzzy, c-format
 msgid "This is Widelands Build %s"
-msgstr ""
+msgstr "Toto jsou Widelands-"
 
 #: ../../src/wlapplication_messages.cc:43
 msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
@@ -243,3 +244,2306 @@ msgstr ""
 "https://launchpad.net/widelands\n"
 "\n"
 "Doufáme, že si užívate naší hry!"
+
+#~ msgid "None"
+#~ msgstr "Není"
+
+#~ msgid "Aggressive"
+#~ msgstr "Agresivní"
+
+#~ msgid "Normal"
+#~ msgstr "Normální"
+
+#~ msgid "Defensive"
+#~ msgstr "Obranná"
+
+#~ msgid "Loading tribe: %s"
+#~ msgstr "Nahrávání kmene: %s"
+
+#~ msgid "Menu"
+#~ msgstr "Nabídka"
+
+#~ msgid "Tools"
+#~ msgstr "Nástroje"
+
+#~ msgid "Tool Size"
+#~ msgstr "Velikost nástroje"
+
+#~ msgid "Minimap"
+#~ msgstr "Minimapa"
+
+#~ msgid "Show Building Spaces (on/off)"
+#~ msgstr "Zobrazit místa pro stavbu (zap/vyp)"
+
+#~ msgid "Players"
+#~ msgstr "Hráči"
+
+#~ msgid "Undo"
+#~ msgstr "Zpět"
+
+#~ msgid "Redo"
+#~ msgstr "Provést znovu"
+
+#~ msgid "Unsupported format"
+#~ msgstr "Nepodporovaný formát"
+
+#~ msgid ""
+#~ "Widelands could not load the file \"%s\". The file format seems to be "
+#~ "incompatible."
+#~ msgstr ""
+#~ "Widelands nemohly nahrát soubor \"%s\". Formát souboru není kompatibilní."
+
+#~ msgid "Creating players"
+#~ msgstr "Vytvoř hráče"
+
+#~ msgid "Loading graphics..."
+#~ msgstr "Nahrávání grafiky..."
+
+#~ msgid "Unsaved Map"
+#~ msgstr "Neuložená mapa"
+
+#~ msgid "The map has not been saved, do you really want to quit?"
+#~ msgstr "Mapa nebyla uložena, opravdu chcete hru vypnout?"
+
+#~ msgid "No Name"
+#~ msgstr "Beze jména"
+
+#~ msgid "Unknown"
+#~ msgstr "Neznámý"
+
+#~ msgid "Field Information"
+#~ msgstr "Informace o poli"
+
+#~ msgid "Node:"
+#~ msgstr "Uzel:"
+
+#~ msgid "Coordinates: (%1$i, %2$i)"
+#~ msgstr "Souřadnice: (%1$i, %2$i)"
+
+#~ msgid " small"
+#~ msgstr " malý"
+
+#~ msgid " medium"
+#~ msgstr " střední"
+
+#~ msgid " big"
+#~ msgstr " velký"
+
+#~ msgid " flag"
+#~ msgstr " vlajka"
+
+#~ msgid " mine"
+#~ msgstr " důl"
+
+#~ msgid " port"
+#~ msgstr " přístav"
+
+#~ msgid " walk"
+#~ msgstr " chůze"
+
+#~ msgid " swim"
+#~ msgstr " plavání"
+
+#~ msgid "Terrain:"
+#~ msgstr "Terén:"
+
+#~ msgid "Name: %s"
+#~ msgstr "Jméno: %s"
+
+#~ msgid "Texture Number: %i"
+#~ msgstr "Číslo textury: %i"
+
+#~ msgid "Resources:"
+#~ msgstr "Zdroje:"
+
+#~ msgid "Resource name: %s"
+#~ msgstr "Jméno zdroje: %s"
+
+#~ msgid "Resource amount: %i"
+#~ msgstr "Množství zdroje: %i"
+
+#~ msgid "No resources"
+#~ msgstr "Došly zdroje"
+
+#~ msgid "Map:"
+#~ msgstr "Mapa:"
+
+#~ msgid "Size: %1$ix%2$i"
+#~ msgstr "Velikost: %1$ix%2$i"
+
+#~ msgid "Author: %s"
+#~ msgstr "Autor: %s"
+
+#~ msgid "Descr: %s"
+#~ msgstr "Popis: %s"
+
+#~ msgid "Current:"
+#~ msgstr "Současný:"
+
+#~ msgid "Main Menu"
+#~ msgstr "Hlavní menu"
+
+#~ msgid "New Map"
+#~ msgstr "Nová mapa"
+
+#~ msgid "New Random Map"
+#~ msgstr "Nová náhodná mapa"
+
+#~ msgid "Load Map"
+#~ msgstr "Nahrát mapu"
+
+#~ msgid "Save Map"
+#~ msgstr "Uložit mapu"
+
+#~ msgid "Map Options"
+#~ msgstr "Volby mapy"
+
+#~ msgid "View Readme"
+#~ msgstr "Zobrazit Čtimě"
+
+#~ msgid "Exit Editor"
+#~ msgstr "Opustit editor"
+
+#~ msgid "Name:"
+#~ msgstr "Jméno:"
+
+#~ msgid "Author:"
+#~ msgstr "Autor:"
+
+#~ msgid "Size:"
+#~ msgstr "Velikost:"
+
+#~ msgid "Players:"
+#~ msgstr "Hráči:"
+
+#~ msgid "Descr:"
+#~ msgstr "Popis:"
+
+#~ msgid "OK"
+#~ msgstr "OK"
+
+#~ msgid "Cancel"
+#~ msgstr "Zrušit"
+
+#~ msgid "parent"
+#~ msgstr "rodič"
+
+#~ msgid "Map Name:"
+#~ msgstr "Jméno mapy:"
+
+#~ msgid "Nr Players:"
+#~ msgstr "Počet hráčů:"
+
+#~ msgid "Set origin"
+#~ msgstr "Nastavit počátek"
+
+#~ msgid ""
+#~ "Set the position that will have the coordinates (0, 0). This will be the "
+#~ "top-left corner of a generated minimap."
+#~ msgstr ""
+#~ "Určit pozici, která bude mít souřadnice (0, 0). Ta bude levým horním "
+#~ "rohem vygenerované minimapy."
+
+#~ msgid "Width: %u"
+#~ msgstr "Šířka: %u"
+
+#~ msgid "Height: %u"
+#~ msgstr "Výška: %u"
+
+#~ msgid "Create Map"
+#~ msgstr "Vytvoř mapu"
+
+#~ msgid "Random Number:"
+#~ msgstr "Náhodné číslo:"
+
+#~ msgid "Water: %u %%"
+#~ msgstr "Voda: %u %%"
+
+#~ msgid "Land: %u %%"
+#~ msgstr "Země: %u %%"
+
+#~ msgid "Wasteland: %u %%"
+#~ msgstr "Pustina: %u %%"
+
+#~ msgid "Mountains: %u %%"
+#~ msgstr "Hory: %u %%"
+
+#~ msgid "Island mode:"
+#~ msgstr "Ostrovní mód:"
+
+#~ msgid "Low"
+#~ msgstr "Nízká"
+
+#~ msgid "Medium"
+#~ msgstr "Střední"
+
+#~ msgid "High"
+#~ msgstr "Vysoká"
+
+#~ msgid "Map ID:"
+#~ msgstr "ID mapy:"
+
+#~ msgid "Players: %u"
+#~ msgstr "Hráči: %u"
+
+#~ msgid "Generate Map"
+#~ msgstr "Vytvořit mapu"
+
+#~ msgid "Generating random map..."
+#~ msgstr "Generování náhodné mapy..."
+
+#~ msgid "Descr: "
+#~ msgstr "Popis: "
+
+#~ msgid "Make Directory"
+#~ msgstr "Vytvoř adresář"
+
+#~ msgid "unnamed"
+#~ msgstr "nepojmenovaný"
+
+#~ msgid "directory"
+#~ msgstr "adresář"
+
+#~ msgid "Not a map file"
+#~ msgstr "Není souborem mapy"
+
+#~ msgid "A file with the name ‘%s’ already exists. Overwrite?"
+#~ msgstr "Soubor s názvem '%s' již existuje. Chcete ho přepsat?"
+
+#~ msgid "Error Saving Map!"
+#~ msgstr "Chyba při ukládání mapy!"
+
+#~ msgid ""
+#~ "Error Saving Map!\n"
+#~ "Saved map file may be corrupt!\n"
+#~ "\n"
+#~ "Reason given:\n"
+#~ msgstr ""
+#~ "Chyba při ukládání mapy!\n"
+#~ "Uložený soubor mapy může být poškozen!\n"
+#~ "\n"
+#~ "Důvod:\n"
+
+#~ msgid "Enter Directory Name: "
+#~ msgstr "Vlož název adresáře: "
+
+#~ msgid "Player Options"
+#~ msgstr "Volby hráče"
+
+#~ msgid "Add player"
+#~ msgstr "Přidat hráče"
+
+#~ msgid "Remove last player"
+#~ msgstr "Odebrat posledního hráče"
+
+#~ msgid "Number of Players"
+#~ msgstr "Počet hráčů"
+
+#~ msgid "Player %s"
+#~ msgstr "Hráč %s"
+
+#~ msgid "Error!"
+#~ msgstr "Chyba!"
+
+#~ msgid "Allowed Buildings"
+#~ msgstr "Povolené budovy"
+
+#~ msgid "Allowed Buildings:"
+#~ msgstr "Povolené budovy:"
+
+#~ msgid "Forbidden Buildings:"
+#~ msgstr "Zakázané budovy:"
+
+#~ msgid "Forbid"
+#~ msgstr "Zakázat"
+
+#~ msgid "Allow"
+#~ msgstr "Povolit"
+
+#~ msgid "Height Tools Options"
+#~ msgstr "Volby výškových nástrojů"
+
+#~ msgid "Increase/Decrease Value"
+#~ msgstr "Zvýšit/snížit hodnotu"
+
+#~ msgid "Set Value"
+#~ msgstr "Nastavit hodnotu"
+
+#~ msgid "Resources"
+#~ msgstr "Zdroje"
+
+#~ msgid "Current Selection"
+#~ msgstr "Současná volba"
+
+#~ msgid "Change height"
+#~ msgstr "Změnit výšku"
+
+#~ msgid "Noise height"
+#~ msgstr "Výška zvuků"
+
+#~ msgid "Terrain"
+#~ msgstr "Terén"
+
+#~ msgid "Set port space"
+#~ msgstr "Nastav místo pro přístav"
+
+#~ msgid "Noise Height Options"
+#~ msgstr "Volby výšky zvuků"
+
+#~ msgid "Minimum: %u"
+#~ msgstr "Minimum: %u"
+
+#~ msgid "Maximum: %u"
+#~ msgstr "Maximum: %u"
+
+#~ msgid "Set value: %u"
+#~ msgstr "Nastavit hodnotu: %u"
+
+#~ msgid "Terrain Select"
+#~ msgstr "Výběr terénu"
+
+#~ msgid "Current Size: %u"
+#~ msgstr "Současná velikost: %u"
+
+#~ msgid "unknown"
+#~ msgstr "neznámý"
+
+#~ msgid "mine"
+#~ msgstr "těžit"
+
+#~ msgid "small"
+#~ msgstr "malá"
+
+#~ msgid "big"
+#~ msgstr "velká"
+
+#~ msgid "medium"
+#~ msgstr "střední"
+
+#~ msgid "Mine"
+#~ msgstr "Důl"
+
+#~ msgid "Small"
+#~ msgstr "Malý"
+
+#~ msgid "Big"
+#~ msgstr "Velký"
+
+#~ msgid "%u%% dismantled"
+#~ msgstr "%u%% rozebráno"
+
+#~ msgid "Loading world data"
+#~ msgstr "Nahrávání dat světa"
+
+#~ msgid "Loading tribes"
+#~ msgstr "Nahrávám kmeny"
+
+#~ msgid "Not set"
+#~ msgstr "Nenastaveno"
+
+#~ msgid "Preloading a map"
+#~ msgstr "Přednahrání mapy"
+
+#~ msgid "Adding player %u"
+#~ msgstr "Přidání hráče %u"
+
+#~ msgid "Scenario"
+#~ msgstr "Scénář"
+
+#~ msgid "Loading a map"
+#~ msgstr "Nahrávání mapy"
+
+#~ msgid "Preloading map"
+#~ msgstr "Přednahrání mapy"
+
+#~ msgid "Configuring players"
+#~ msgstr "Konfigurace hráčů"
+
+#~ msgid "Loading map"
+#~ msgstr "Nahrávání mapy"
+
+#~ msgid "Loading..."
+#~ msgstr "Nahrávání..."
+
+#~ msgid "Creating player infrastructure"
+#~ msgstr "Vytváření infrastructury hráčů"
+
+#~ msgid "Missing starting position"
+#~ msgstr "Chybí startovací pozice"
+
+#~ msgid ""
+#~ "Widelands could not start the game, because player %u has no starting "
+#~ "position.\n"
+#~ "You can manually add a starting position with the Widelands Editor to fix "
+#~ "this problem."
+#~ msgstr ""
+#~ "Widelands nemůže zahájit hru, protože hráč %u nemá startovací pozici.\n"
+#~ "Pro vyřešení problému můžete ručně přidat startovací pozici v editoru "
+#~ "Widelands."
+
+#~ msgid "Player 1"
+#~ msgstr "Hráč 1"
+
+#~ msgid "no description defined"
+#~ msgstr "popis není definovaný"
+
+#~ msgid "%u soldier"
+#~ msgid_plural "%u soldiers"
+#~ msgstr[0] "%u voják"
+#~ msgstr[1] "%u vojáci"
+#~ msgstr[2] "%u vojáků"
+
+#~ msgid "Militarysite lost!"
+#~ msgstr "Vojenská budova ztracena!"
+
+#~ msgid "Enemy at site defeated!"
+#~ msgstr "Nepřátelská budova dobyta!"
+
+#~ msgid "You are under attack"
+#~ msgstr "Nepřítel na tebe útočí"
+
+#~ msgid "no descr"
+#~ msgstr "bez popisu"
+
+#~ msgid ""
+#~ "Widelands could not start the game, because player %u has no starting "
+#~ "position.\n"
+#~ "You can manually add a starting position with Widelands Editor, to fix "
+#~ "this problem."
+#~ msgstr ""
+#~ "Widelands nemůže zahájit hru, protože hráč %u nemá startovací pozici.\n"
+#~ "Pro vyřešení problému můžete ručně přidat startovací pozici v editoru "
+#~ "Widelands."
+
+#~ msgid " is missing"
+#~ msgid_plural " are missing"
+#~ msgstr[0] " chybí"
+#~ msgstr[1] " chybí"
+#~ msgstr[2] " chybí"
+
+#~ msgid "Produced %s"
+#~ msgstr "Vyrobeno %s"
+
+#~ msgid "Recruited %s"
+#~ msgstr "Přijat %s"
+
+#~ msgid "No soldier to train!"
+#~ msgstr "Žádný voják k tréninku!"
+
+#~ msgid "No soldier found for this training level!"
+#~ msgstr "Nebyl nalezen voják pro tuto úroveň tréninku!"
+
+#~ msgid "(not occupied)"
+#~ msgstr "(neobydleno)"
+
+#~ msgid "Worker missing"
+#~ msgid_plural "Workers missing"
+#~ msgstr[0] "Pracovník chybí"
+#~ msgstr[1] "Pracovníci chybí"
+
+#~ msgid "(stopped)"
+#~ msgstr "(zastaveno)"
+
+#~ msgid "Can’t find any more resources!"
+#~ msgstr "Nelze najít další suroviny!"
+
+#~ msgid "End of replay"
+#~ msgstr "Konec záznamu"
+
+#~ msgid ""
+#~ "The end of the replay has been reached and the game has been paused. You "
+#~ "may unpause the game and continue watching if you want to."
+#~ msgstr ""
+#~ "Byl dosažen konec záznamu a hra byla pozastavena. Pokud chcete, můžete "
+#~ "hru odpauzovat a pokračovat ve sledování."
+
+#~ msgid "Saving game..."
+#~ msgstr "Ukládám hru..."
+
+#~ msgid "Saving failed!"
+#~ msgstr "Ukládání selhalo!"
+
+#~ msgid "Game saved"
+#~ msgstr "Hra uložena"
+
+#~ msgid "Port Space Found"
+#~ msgstr "Nalezeno místo pro přístav"
+
+#~ msgid "An expedition ship found a new port build space."
+#~ msgstr "Loď expedice nalezla nové místo pro stavbu přístavu."
+
+#~ msgid "Island Circumnavigated"
+#~ msgstr "Ostrov obeplut"
+
+#~ msgid "An expedition ship sailed around its island without any events."
+#~ msgstr "Loď expedice obeplula ostrov bez jakýchkoliv problémů."
+
+#~ msgid "Coast Reached"
+#~ msgstr "Pobřeží dosaženo"
+
+#~ msgid ""
+#~ "An expedition ship reached a coast and is waiting for further commands."
+#~ msgstr "Loď expedice dosáhla přístavu a čeká na další rozkazy."
+
+#~ msgid "Expedition Ready"
+#~ msgstr "Expedice je připravena"
+
+#~ msgid "An expedition ship is waiting for your commands."
+#~ msgstr "Loď expedice čeká na tvé rozkazy."
+
+#~ msgid "Player"
+#~ msgstr "Hráč"
+
+#~ msgid "Logic error"
+#~ msgstr "Logická chyba"
+
+#~ msgid "A new %s was added to your economy."
+#~ msgstr "Nové %s přibylo do tvojí ekonomiky."
+
+#~ msgid ""
+#~ "should mine resource %s, which does not exist in world; tribe is not "
+#~ "compatible with world"
+#~ msgstr ""
+#~ "má těžit zdroj %s, který se v tomto světě nevyskytuje; kmen není "
+#~ "kompatibilní s tímto světem"
+
+#~ msgid ""
+#~ "should breed resource type %s, which does not exist in world; tribe is "
+#~ "not compatible with world"
+#~ msgstr ""
+#~ "má chovat zdroj %s, který se v tomto světě nevyskytuje; kmen není "
+#~ "kompatibilní s tímto světem"
+
+#~ msgid "A geologist found resources."
+#~ msgstr "Geolog objevil zdroje."
+
+#~ msgid "Worker got lost!"
+#~ msgstr "Pracovník se ztratil!"
+
+#~ msgid "Bluebyte Settlers II Map. No comment defined!"
+#~ msgstr "Bluebyte Settlers II Map. Komentář není definován!"
+
+#~ msgid "Connection problem"
+#~ msgstr "Problém při připojení"
+
+#~ msgid "Widelands could not connect to the metaserver."
+#~ msgstr "Widelands se nedaří spojit s metaserverem."
+
+#~ msgid "Could not establish connection to host"
+#~ msgstr "Nepodařilo se navázat spojení s hostitelem"
+
+#~ msgid ""
+#~ "Widelands could not establish a connection to the given address.\n"
+#~ "Either there was no metaserver running at the supposed port or\n"
+#~ "your network setup is broken."
+#~ msgstr ""
+#~ "Widelands nemohly navázat spojení se zadanou adresou.\n"
+#~ "Buď na udaném portu neběží žádný metaserver \n"
+#~ "nebo máš chybné síťové nastavení."
+
+#~ msgid "For hosting a game, please take a look at the notes at:"
+#~ msgstr "Pro hostování hry se prosím podívej na poznámky na:"
+
+#~ msgid "Something went wrong: "
+#~ msgstr "Něco se pokazilo: "
+
+#~ msgid "Successfully reconnected to the metaserver!"
+#~ msgstr "Úspěšné znovupřipojení k metaserveru!"
+
+#~ msgid "Mixed up"
+#~ msgstr "Zmatené"
+
+#~ msgid "The metaserver sent a strange ERROR during connection"
+#~ msgstr "Metaserver poslal během připojení podivnou CHYBU"
+
+#~ msgid "Unexpected packet"
+#~ msgstr "Neočekávaný paket"
+
+#~ msgid ""
+#~ "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
+#~ "command %s. Maybe the metaserver is using a different protocol version ?"
+#~ msgstr ""
+#~ "Očekávám od serveru paket LOGIN, RELOGIN nebo REJECTED, ale přišel příkaz "
+#~ "%s. Možná metaserver používá jinou verzi protokolu?"
+
+#~ msgid ""
+#~ "WARNING: Received a %s command although we are not in CONNECTING state."
+#~ msgstr ""
+#~ "UOPZORNĚNÍ: byl přijatý příkaz %s přestože nejsme ve stavu CONNECTING."
+
+#~ msgid "InternetGaming: Server time offset is %u second."
+#~ msgid_plural "InternetGaming: Server time offset is %u seconds."
+#~ msgstr[0] "InternetGaming: Offset serveru je %u sekunda."
+#~ msgstr[1] "InternetGaming: Offset serveru je %u sekundy."
+#~ msgstr[2] "InternetGaming: Offset serveru je %u sekund."
+
+#~ msgid "Server time offset is %u second."
+#~ msgid_plural "Server time offset is %u seconds."
+#~ msgstr[0] "Offset serveru je %u sekunda."
+#~ msgstr[1] "Offset serveru je %u sekundy."
+#~ msgstr[2] "Offset serveru je %u sekund."
+
+#~ msgid "Invalid chat message type \"%s\"."
+#~ msgstr "Neplatný typ zprávy chatu \"%s\"."
+
+#~ msgid "Invalid message type"
+#~ msgstr "Neplatný typ zprávy"
+
+#~ msgid "The game %s is now available"
+#~ msgstr "Hra %s je nyní dostupná"
+
+#~ msgid "The game %s has been closed"
+#~ msgstr "Hra %s byla uzavřena"
+
+#~ msgid "%s joined the lobby"
+#~ msgstr "%s se připojil do lobby"
+
+#~ msgid "%s left the lobby"
+#~ msgstr "%s odešel z lobby"
+
+#~ msgid "Chat message could not be sent. "
+#~ msgstr "Zpráva chatu nemohla být odeslána. "
+
+#~ msgid "ERROR: %s"
+#~ msgstr "CHYBA: %s"
+
+#~ msgid "Received an unknown command from the metaserver: %s"
+#~ msgstr "Byl přijat neznámý příkaz od metaserveru: %s"
+
+#~ msgid "Message could not be sent: You are not connected to the metaserver!"
+#~ msgstr "Zpráva nemohla být odeslána: Nejsi připojen k metaserveru!"
+
+#~ msgid ""
+#~ "Message could not be sent: Was this supposed to be a private message?"
+#~ msgstr "Zpráva nemohla být odeslána: Měla to být privátní zpráva?"
+
+#~ msgid "Conversion error"
+#~ msgstr "Chyba převodu"
+
+#~ msgid "Conversion from std::string to bool failed. String was \"%s\""
+#~ msgstr "Konverze z std::string na bool selhala. String byl \"%s\""
+
+#~ msgid "There is no user with the name %s logged in!"
+#~ msgstr "Uživatel jménem %s není přihlášen!"
+
+#~ msgid "The sent password was incorrect!"
+#~ msgstr "Odeslané heslo je chybné!"
+
+#~ msgid "The protocol version you are using is not supported!"
+#~ msgstr "Verze protokolu kterou používáš není podporovaná!"
+
+#~ msgid "You are already logged in!"
+#~ msgstr "Už jsi přihlášen!"
+
+#~ msgid ""
+#~ "You got disconnected, as you sent a superuser command without superuser "
+#~ "permission. This incident will be logged and reported to the "
+#~ "administrator."
+#~ msgstr ""
+#~ "Byl jsi odpojen, protože jsi poslal superuser příkaz bez superuser "
+#~ "oprávnění. Tento incident bude zalogován a nahlášen administrátorovi."
+
+#~ msgid "You got disconnected, as the metaserver is currently restarting."
+#~ msgstr "Byl jsi odhlášen, protože se metaserver právě restartuje."
+
+#~ msgid "Connection was closed by the client normally."
+#~ msgstr "Spojení bylo klientem normálně ukončeno."
+
+#~ msgid "The connection to the metaserver was lost."
+#~ msgstr "Připojení k metaserveru bylo ztraceno."
+
+#~ msgid "Metaserver did not answer"
+#~ msgstr "Metaserver neodpověděl"
+
+#~ msgid "Your game can’t be connected to from the internet"
+#~ msgstr "Ke tvé hře se  z internetu nedá připojit"
+
+#~ msgid ""
+#~ "You got disconnected from the metaserver, as you did not answer a PING "
+#~ "request in time."
+#~ msgstr ""
+#~ "Byl jsi odhlášen z metaserveru, protože jsi včas neodpověděl na žádost o "
+#~ "PING."
+
+#~ msgid ""
+#~ "The metaserver was unable to connect to your game. Most likely it can’t "
+#~ "be connected to from the internet! Please take a look at http://wl."
+#~ "widelands.org/wiki/InternetGaming to learn how to set up your internet "
+#~ "connection for hosting a game online."
+#~ msgstr ""
+#~ "Metaserver nebyl schopen připojit se k tvojí hře. Nejpravděpodobnější je, "
+#~ "že se k tvojí hře nedá připojit z internetu!  prosím podívej se na http://"
+#~ "wl.widelands.org/wiki/InternetGaming ohledně nastavení internetového "
+#~ "připojení pro hostování hry online."
+
+#~ msgid ""
+#~ "You tried to log back in, but the server has no knowledge of your "
+#~ "previous state anymore."
+#~ msgstr ""
+#~ "Zkusil ses znovu připojit, ale server už nemá informace o tvém předchozím "
+#~ "stavu."
+
+#~ msgid ""
+#~ "Widelands could not establish a connection to the given address.\n"
+#~ "Either no Widelands server was running at the supposed port or\n"
+#~ "the server shut down as you tried to connect."
+#~ msgstr ""
+#~ "Widelands nemohly navázat spojení se zadanou adresou.\n"
+#~ "Buď na zadaném portu neběží žádný server Widelands nebo\n"
+#~ "se server vypnul když ses snažil připojit."
+
+#~ msgid "Preparing game"
+#~ msgstr "Připravuji hru"
+
+#~ msgid "/me 's file failed md5 checksumming."
+#~ msgstr "/me - chyba v md5 kontrolním součtu souboru."
+
+#~ msgid ""
+#~ "/me checked the received file. Although md5 check summing succeeded, I "
+#~ "can not handle the file."
+#~ msgstr ""
+#~ "/me zkontroloval jsem přijatý soubor. Přestože kontrolní součet md5 "
+#~ "souhlasí, nemohu se souborem pracovat."
+
+#~ msgid " An automatic savegame will be created."
+#~ msgstr " Hra bude automaticky uložena."
+
+#~ msgid "Disconnected from Host"
+#~ msgstr "Odhlášeno od hostitele"
+
+#~ msgid "Available host commands are:"
+#~ msgstr "Příkazy k dispozici jsou:"
+
+#~ msgid "/help  -  Shows this help"
+#~ msgstr "/help  -  zobrazí tento help"
+
+#~ msgid "/announce <msg>  -  Send a chatmessage as announcement (system chat)"
+#~ msgstr ""
+#~ "/announce <msg>  -  pošle zprávu přes chat jako oznámení (systémový chat)"
+
+#~ msgid "/warn <name> <reason>  -  Warn the user <name> because of <reason>"
+#~ msgstr ""
+#~ "/warn <jméno> <důvod>  -  varování uživatele <jméno> z důvodu <důvod>"
+
+#~ msgid "/kick <name> <reason>  -  Kick the user <name> because of <reason>"
+#~ msgstr ""
+#~ "/kick <jméno> <důvod>  -  vyhození uživatele <jméno> z důvodu <důvod>"
+
+#~ msgid "/forcePause            -  Force the game to pause."
+#~ msgstr "/forcePause            -  vynutí pozastavení hry."
+
+#~ msgid "/endForcedPause        -  Return game to normal speed."
+#~ msgstr "/endForcedPause        -  znovu nastaví normální rychlost hry."
+
+#~ msgid "Wrong use, should be: /announce <message>"
+#~ msgstr "Špatné použití, mělo by být: /announce <zpráva>"
+
+#~ msgid "Wrong use, should be: /warn <name> <reason>"
+#~ msgstr "Špatné použití, mělo by být: /warn <jméno> <důvod>"
+
+#~ msgid "Why would you warn yourself?"
+#~ msgstr "Proč chceš varovat sám sebe?"
+
+#~ msgid "Why would you want to warn the dedicated server?"
+#~ msgstr "Proč chceš varovat dedikovaný server?"
+
+#~ msgid "The client %s could not be found."
+#~ msgstr "Klient %s nebyl nalezen."
+
+#~ msgid "Wrong use, should be: /kick <name> <reason>"
+#~ msgstr "Špatné použití, mělo by být: /kick <jméno> <důvod>"
+
+#~ msgid "You can not kick yourself!"
+#~ msgstr "Nemůžeš vyhodit sám sebe!"
+
+#~ msgid "You can not kick the dedicated server"
+#~ msgstr "Nemůžeš vyhodit dedikovaný server"
+
+#~ msgid "Are you sure you want to kick %s?"
+#~ msgstr "Jsi si jistý, že chceš vyhodit ze hry %s?"
+
+#~ msgid "If yes, type: /ack_kick %s"
+#~ msgstr "Pokud ano, napiš: /ack_kick %s"
+
+#~ msgid "kick acknowledgement cancelled: No name given!"
+#~ msgstr "potvrzení vyhození zrušeno: Nebylo zadáno jméno!"
+
+#~ msgid "Wrong use, should be: /ack_kick <name>"
+#~ msgstr "Špatné použití, mělo by být: /ack_kick <jméno>"
+
+#~ msgid "kick acknowledgement cancelled: Wrong name given!"
+#~ msgstr "potvrzení vyhození zrušeno: Bylo zadáno chybné jméno!"
+
+#~ msgid "Pause was already forced - game should be paused."
+#~ msgstr "Pozastavení bylo již vnuceno - hra by měla být pozastavena."
+
+#~ msgid "There is no forced pause - nothing to end."
+#~ msgstr "Není zde vynucené pozastavení - není co ukončit."
+
+#~ msgid "Invalid command! Type /help for a list of commands."
+#~ msgstr "Neplatný příkaz! Použij /help pro seznam příkazů."
+
+#~ msgid ""
+#~ "This is a dedicated server. Send \"@%s help\" to get a full list of "
+#~ "available commands."
+#~ msgstr ""
+#~ "Toto je dedikovaný server. Pošli \"@%s help\" aby se ti zobrazil úplný "
+#~ "seznam příkazů."
+
+#~ msgid "host $ - Tries to run the host command $"
+#~ msgstr "host $ - zkusí spustit hostitelský příkaz $"
+
+#~ msgid "save $ - Saves the current game state as $.wgf"
+#~ msgstr "save $ - uloží stav probíhající hry jako $.wgf"
+
+#~ msgid "pwd $  - Sends the password $ to the host"
+#~ msgstr "pwd $ - odešle hostiteli heslo $"
+
+#~ msgid ""
+#~ "Access to host commands denied. To gain access, send the password with "
+#~ "pwd command."
+#~ msgstr ""
+#~ "Přístup k hostitelským příkazům byl odepřen. K získání přístupu pošli "
+#~ "pomocí příkazu pwd heslo."
+
+#~ msgid "%1$s told me to run the command: \"%2$s\""
+#~ msgstr "%1$s mi přikázal provedení příkazu: \"%2$s\""
+
+#~ msgid "Sorry! Saving was deactivated on this dedicated server!"
+#~ msgstr "Sorry! Ukládání bylo na tomto dedikovaném serveru deaktivováno!"
+
+#~ msgid "Cannot save while there is no game running!"
+#~ msgstr "Nelze provést uložení, protože neběží žádná hra!"
+
+#~ msgid "Game successfully saved!"
+#~ msgstr "Hra úspěšně uložena!"
+
+#~ msgid "Could not save the game to the file \"%1$s\"! (%2$s)"
+#~ msgstr "Nepodařilo se uložit hru do souboru \"%1$s\"! (%2$s)"
+
+#~ msgid "This server is not password protected!"
+#~ msgstr "Tento server není chráněný heslem!"
+
+#~ msgid "The password was correct, access was granted!"
+#~ msgstr "Heslo je správné, přístup byl povolen!"
+
+#~ msgid "Unknown dedicated server command \"%s\"!"
+#~ msgstr "Neznámý příkaz \"%s\"! pro dedikovaný server!"
+
+#~ msgid "Computer %u"
+#~ msgstr "Počítač %u"
+
+#~ msgid ""
+#~ "This server is password protected. You can send the password with: \"@%s "
+#~ "pwd PASSWORD\""
+#~ msgstr ""
+#~ "Tento server je chráněný heslem. Heslo můžeš poslat příkazem: \"@%s pwd "
+#~ "HESLO\""
+
+#~ msgid "%li second"
+#~ msgid_plural "%li seconds"
+#~ msgstr[0] "%li sekunda"
+#~ msgstr[1] "%li sekundy"
+#~ msgstr[2] "%li sekund"
+
+#~ msgid "Client has left the game."
+#~ msgstr "Klient opustil hru."
+
+#~ msgid "Client crashed and performed an emergency save."
+#~ msgstr "Klient havaroval a provedl nouzové uložení hry."
+
+#~ msgid "Connection was lost."
+#~ msgstr "Připojení bylo ztraceno"
+
+#~ msgid "Server has left the game."
+#~ msgstr "Server opustil hru."
+
+#~ msgid "The game has started just after you tried to connect."
+#~ msgstr "Hra začala hned poté, co jste se snažili připojit."
+
+#~ msgid "Server has crashed and performed an emergency save."
+#~ msgstr "Server havaroval a provedl nouzové uložení hry."
+
+#~ msgid "Connection to client timed out: no response for 10 minutes!"
+#~ msgstr "Připojení klienta vypršelo: žádná odpověď během 10 minut!"
+
+#~ msgid "Client and host have become desynchronized."
+#~ msgstr "Mezi klientem a hostitelel došlo k desynchronizaci."
+
+#~ msgid "Kicked by the host: %s"
+#~ msgstr "Vyhozen hostitelem: %s"
+
+#~ msgid "Client sent malformed commands: %s"
+#~ msgstr "Klient poslal poškozené příkazy: %s"
+
+#~ msgid "Something went wrong: %s"
+#~ msgstr "Něco se pokazilo: %s"
+
+#~ msgid "%1$s has left the game (%2$s)"
+#~ msgstr "%1$s opustil hru (%2$s)"
+
+#~ msgid "Unknown user has left the game (%s)"
+#~ msgstr "Neznámý uživatel opustil hru (%s)"
+
+#~ msgid "Server sent a SYNCREQUEST even though no game is running."
+#~ msgstr "Server poslal SYNCREQUEST přestože neběží žádná hra."
+
+#~ msgid "Received a PLAYERCOMMAND even though no game is running."
+#~ msgstr "Přišel PLAYERCOMMAND přestože žádná hra neběží."
+
+#~ msgid "Unexpectedly received LAUNCH command from server."
+#~ msgstr "Přišel neočekávaný příkaz LAUNCH od serveru."
+
+#~ msgid "Server sent a player update for a player that does not exist."
+#~ msgstr "Server poslal aktualizaci pro hráče který neexistuje."
+
+#~ msgid "Server sent a user update for a user that does not exist."
+#~ msgstr "Server poslal uživatelskou aktualizaci uživateli, který neexistuje."
+
+#~ msgid "Server uses a different protocol version"
+#~ msgstr "Server používá jinou verzi protokolu"
+
+#~ msgid "Received command number %s, which is not allowed in this state."
+#~ msgstr "Přišel příkaz číslo %s, který je v tomto stavu zakázán."
+
+#~ msgid "Client reports time to host that is running backwards."
+#~ msgstr "Klient ohlásil hostiteli čas, který běží pozpátku."
+
+#~ msgid "Client simulates beyond the game time allowed by the host."
+#~ msgstr "Klient simuluje hru déle, než po čas povolený hostitelem."
+
+#~ msgid "Client did not submit sync report in time."
+#~ msgstr "Klient neposlal synchronizační zprávu v limitu."
+
+#~ msgid "The game has already started."
+#~ msgstr "Hra již začala."
+
+#~ msgid "Client has no access to other player’s settings."
+#~ msgstr "Klient nemá přístup k nastavením ostatních hráčů."
+
+#~ msgid "Client has no access to server settings."
+#~ msgstr "Klient nemá přístup k nastavením serveru."
+
+#~ msgid "Client sent start command, although server is not yet ready."
+#~ msgstr "Klient odeslal příkaz start, přestože server ještě není připraven."
+
+#~ msgid "Client sent TIME command even though game is not running."
+#~ msgstr "Klient poslal příkaz TIME přestože hra neběží."
+
+#~ msgid "Client sent a PLAYERCOMMAND for another player."
+#~ msgstr "Klient odeslal playercommand za jiného hráče."
+
+#~ msgid "Client sent unexpected synchronization report."
+#~ msgstr "Klient poslal neočekávanou synchronizační zprávu."
+
+#~ msgid "Client requests file although none is available to send."
+#~ msgstr "Klient požaduje soubor, přestože žádný není k dispozici."
+
+#~ msgid "Client requests file part that does not exist."
+#~ msgstr "Klient požaduje část souboru která neexistuje."
+
+#~ msgid "Host sent player %s to the lobby!"
+#~ msgstr "Hostitel poslal hráče %s do lobby!"
+
+#~ msgid "WARNING: %1$s uses version: %2$s, while Host uses version: %3$s"
+#~ msgstr ""
+#~ "VAROVÁNÍ: %1$s používá verzi: %2$s, zatímco Hostitel používá verzi: %3$s"
+
+#~ msgid "%s has joined the game"
+#~ msgstr "%s se připojil ke hře"
+
+#~ msgid "Game was saved as %s."
+#~ msgstr "Hra byla uložena jako %s."
+
+#~ msgid "Started to send file %1$s to %2$s!"
+#~ msgstr "Začalo odesílání souboru %1$s k %2$s!"
+
+#~ msgid "Completed transfer of file %1$s to %2$s"
+#~ msgstr "Ukončen přesun souboru %1$s k %2$s"
+
+#~ msgid "Sending part %1$s of file %2$s to %3$s"
+#~ msgstr "Odesílám část %1$s souboru %2$s pro %3$s"
+
+#~ msgid "The player ‘%s’ was defeated and became a spectator."
+#~ msgstr "Hráč \"%s\" byl poražen a pokračuje jako divák."
+
+#~ msgid "Client %1$s did not answer for more than %2$s."
+#~ msgstr "Klient %1$s neodpověděl více než %2$s."
+
+#~ msgid ""
+#~ "Client %1$s will automatically be kicked, if no answer is received within "
+#~ "%2$s."
+#~ msgstr ""
+#~ "Klient %1$s bude automaticky odpojen, pokud nepříde odpověď do %2$s."
+
+#~ msgid "%1$s (achieved %2$s)"
+#~ msgstr "%1$s (dosaženo %2$s)"
+
+#~ msgid "Help: %s"
+#~ msgstr "Nápověda: %s"
+
+#~ msgid "Yes"
+#~ msgstr "Ano"
+
+#~ msgid "No"
+#~ msgstr "Ne"
+
+#~ msgid "Preparing..."
+#~ msgstr "Příprava"
+
+#~ msgid "Increase the value"
+#~ msgstr "Zvýšit hodnotu"
+
+#~ msgid "Decrease the value"
+#~ msgstr "Snížit hodnotu"
+
+#~ msgid "Increase the value by 10"
+#~ msgstr "Zvýšit hodnotu o 10"
+
+#~ msgid "Decrease the value by 10"
+#~ msgstr "Snížit hodnotu o 10"
+
+#~ msgid "Select a campaign"
+#~ msgstr "Vyber kampaň"
+
+#~ msgid "Campaign:"
+#~ msgstr "Kampaň:"
+
+#~ msgid "Difficulty:"
+#~ msgstr "Obtížnost:"
+
+#~ msgid "Description:"
+#~ msgstr "Popis:"
+
+#~ msgid "Back"
+#~ msgstr "Zpět"
+
+#~ msgid "[No value found]"
+#~ msgstr "[Hodnota nenalezena]"
+
+#~ msgid "[Invalid entry]"
+#~ msgstr "[Chybný záznam]"
+
+#~ msgid "Choose a map"
+#~ msgstr "Vyber mapu"
+
+#~ msgid "Invalid path to file in cconfig: %s"
+#~ msgstr "Neplatná cesta k souboru v cconfig: %s"
+
+#~ msgid "Editor"
+#~ msgstr "Editor"
+
+#~ msgid "Close"
+#~ msgstr "Zavřít"
+
+#~ msgid "Metaserver Lobby"
+#~ msgstr "Lobby metaserveru"
+
+#~ msgid "Clients online:"
+#~ msgstr "Klienti online:"
+
+#~ msgid "List of games:"
+#~ msgstr "Seznam her:"
+
+#~ msgid "Name of your server:"
+#~ msgstr "Název tvého serveru"
+
+#~ msgid "Maximum of players:"
+#~ msgstr "Maximální počet hráčů:"
+
+#~ msgid "Join this game"
+#~ msgstr "Připojit se ke hře"
+
+#~ msgid "Open a new game"
+#~ msgstr "Otevřít novou hru"
+
+#~ msgid "User Status"
+#~ msgstr "Uživatelův stav"
+
+#~ msgid "Registered"
+#~ msgstr "Registrován"
+
+#~ msgid "Administrator"
+#~ msgstr "Administrátor"
+
+#~ msgid "Unregistered"
+#~ msgstr "Neregistrován"
+
+#~ msgid "Name"
+#~ msgstr "Jméno"
+
+#~ msgid "Points"
+#~ msgstr "Body"
+
+#~ msgid "Game"
+#~ msgstr "Hra"
+
+#~ msgid "Connection timed out"
+#~ msgstr "Čas spojení vypršel"
+
+#~ msgid ""
+#~ "Widelands was unable to get the IP address of the server in time.\n"
+#~ "There seems to be a network problem, either on your side or on the side\n"
+#~ "of the server.\n"
+#~ msgstr ""
+#~ "Widelands nebyly schopné získat včas IP adresu serveru.\n"
+#~ "Vypadá to na problém v síti a to buď na tvé straně, nebo na straně\n"
+#~ "serveru.\n"
+
+#~ msgid "Widelands was unable to connect to the host."
+#~ msgstr "Widelands se nepodařilo připojit k hostiteli."
+
+#~ msgid "Press ESC or click to continue ..."
+#~ msgstr "Pro pokračování klikni nebo stiskni ESC..."
+
+#~ msgid "Please select"
+#~ msgstr "Prosím vyberte"
+
+#~ msgid "Map"
+#~ msgstr "Mapa"
+
+#~ msgid "Select a map"
+#~ msgstr "Vyberte mapu"
+
+#~ msgid "Saved game"
+#~ msgstr "Uložená hra"
+
+#~ msgid "Select a saved game"
+#~ msgstr "Vyberte uloženou hru"
+
+#~ msgid "Cancel selection"
+#~ msgstr "Zrušit výběr"
+
+#~ msgid "Change map or saved game"
+#~ msgstr "Změnit mapu ,nebo uloženou hru"
+
+#~ msgid "Start game"
+#~ msgstr "Začni hrát"
+
+#~ msgid "Show the help window"
+#~ msgstr "Zobrazit pomocné okno"
+
+#~ msgid "Multiplayer Game Setup"
+#~ msgstr "Nastavení hry více hráčů"
+
+#~ msgid "Clients"
+#~ msgstr "Klienti"
+
+#~ msgid "Type of game"
+#~ msgstr "Typ hry"
+
+#~ msgid "(no map)"
+#~ msgstr "(žádná mapa)"
+
+#~ msgid "The host has not yet selected a map or saved game."
+#~ msgstr "Hostitel ještě nevybral mapu ani uloženou hru."
+
+#~ msgid "Win condition is set through the scenario"
+#~ msgstr "Podmínky pro vítězství jsou nastaveny přes scénář"
+
+#~ msgid "Savegame"
+#~ msgstr "Uložithru"
+
+#~ msgid "The game is a saved game – the win condition was set before."
+#~ msgstr ""
+#~ "Tato hra je z uložené hry - podmínky vítězství už byly nastaveny dříve."
+
+#~ msgid "Saved game is directory"
+#~ msgstr "Uložená hra je adresář"
+
+#~ msgid ""
+#~ "WARNING:\n"
+#~ "The saved game you selected is a directory. This happens if you set the "
+#~ "option ‘nozip’ to true or manually unzipped the saved game.\n"
+#~ "Widelands is not able to transfer directory structures to the clients, "
+#~ "please select another saved game or zip the directories’ content."
+#~ msgstr ""
+#~ "VAROVÁNÍ:\n"
+#~ "Vybraná uložená hra je adresář. Toto nastane, pokud nastavíš volbu \"nozip"
+#~ "\" na true nebo ručně rozbalíš uloženou hru.\n"
+#~ "Widelands neumí přenášet rozbalené adresářové struktury ke klientům, "
+#~ "prosím zvol jinou uloženou hru nebo obsah adresáře zabal."
+
+#~ msgid "File not found"
+#~ msgstr "Soubor nenalezen"
+
+#~ msgid ""
+#~ "Widelands tried to start a game with a file that could not be found at "
+#~ "the given path.\n"
+#~ "The file was: %s\n"
+#~ "If this happens, the host might have selected a file that you do not own. "
+#~ "Normally, such a file should be sent from the host to you, but perhaps "
+#~ "the transfer was not yet finished!?!"
+#~ msgstr ""
+#~ "Widelands zkusily zahájit hru se souborem, který nebyl na uvedené cestě k "
+#~ "nalezen.\n"
+#~ "Soubor byl: %s\n"
+#~ "Pokud se toto stalo, hostitel zřejmě zvolil soubor, který nemáš. Za "
+#~ "normálních okolností by se soubor měl stáhnout z hostitele, ale třeba "
+#~ "stahování ještě nedoběhlo do konce!?!"
+
+#~ msgid ""
+#~ "The selected file can not be found. If it is not automatically "
+#~ "transferred to you, please write to the host about this problem."
+#~ msgstr ""
+#~ "Zvolený soubor nebyl nalezen. Pokud ti automaticky nedorazí, prosím napiš "
+#~ "o tomto problému hostiteli hry."
+
+#~ msgid "Player %i"
+#~ msgstr "Hráč%i"
+
+#~ msgid "Spectator"
+#~ msgstr "Divák"
+
+#~ msgid "At the moment you are %s"
+#~ msgstr "V tomto okamžiku jsi %s"
+
+#~ msgid "Click on the ‘?’ in the top right corner to get help."
+#~ msgstr "Pokud potřebuješ nápovědu, klikni na \"?\" v pravém horním rohu."
+
+#~ msgid "Saved players are:"
+#~ msgstr "Uložení hráči jsou:"
+
+#~ msgid "Player %u"
+#~ msgstr "Hráč %u"
+
+#~ msgid "closed"
+#~ msgstr "uzavřen"
+
+#~ msgid "The map file seems to be invalid!"
+#~ msgstr "Soubor s mapou vypadá neplatně!"
+
+#~ msgid "There was an error!"
+#~ msgstr "Nastala chyba!"
+
+#~ msgid "Map details:"
+#~ msgstr "Podrobnosti mapy:"
+
+#~ msgid "Size: %1$u x %2$u"
+#~ msgstr "Velikost: %1$u x %2$u"
+
+#~ msgid "%u Player"
+#~ msgid_plural "%u Players"
+#~ msgstr[0] "%u Hráč"
+#~ msgstr[1] "%u Hráči"
+#~ msgstr[2] "%u Hráčů"
+
+#~ msgid "Scenario mode selected"
+#~ msgstr "Byl zvolen mód Scénář"
+
+#~ msgid "You are in the multiplayer launch game menu."
+#~ msgstr "Jsi v menu spuštění víceuživatelské hry."
+
+#~ msgid "Client settings"
+#~ msgstr "Nastavení klienta"
+
+#~ msgid ""
+#~ "The player with the color of the flag. If more than one client selected "
+#~ "the same color, these share control over the player (‘shared kingdom "
+#~ "mode’)."
+#~ msgstr ""
+#~ "Hráč a barva jeho vlajky. Pokud si více hráčů zvolí stejnou barvu, sdílí "
+#~ "společně ovládání (\"mód sdíleného království\")."
+
+#~ msgid ""
+#~ "Spectator mode, meaning you can see everything, but cannot control any "
+#~ "player"
+#~ msgstr ""
+#~ "A mód diváka znamená, že vidíš vše, ale nemůžeš ovládat žádného hráče."
+
+#~ msgid "Player settings"
+#~ msgstr "Nastavení hráče"
+
+#~ msgid ""
+#~ "In the middle are the settings for the players. To start a game, each "
+#~ "player must be one of the following:"
+#~ msgstr ""
+#~ "Uprostřed jsou nastavení pro hráče. Pro zahájení hry, každý z hráčů musí "
+#~ "být jeden z následujících:"
+
+#~ msgid "Connected to one or more clients (see ‘Client settings’)."
+#~ msgstr "Připojeno k jednomu nebo více klientům (viz \"Nastavení klientů\")."
+
+#~ msgid ""
+#~ "Connected to a computer player (the face in the picture as well as the "
+#~ "mouse hover texts indicate the strength of the currently selected "
+#~ "computer player)."
+#~ msgstr ""
+#~ "Připojeno k počítačovému hráči (obličej na obrázku stejně jako text při "
+#~ "přejetí myši vyjadřují sílu aktuálně vybraného počítačového hráče)."
+
+#~ msgid "Set as shared in starting position for another player."
+#~ msgstr "Nastaveno jako sdílená počáteční pozice s jiným hráčem."
+
+#~ msgid "Closed."
+#~ msgstr "Zavřeno."
+
+#~ msgid ""
+#~ "The latter three can only be set by the hosting client by left-clicking "
+#~ "the ‘type’ button of a player. Hosting players can also set the "
+#~ "initialization of each player (the set of buildings, wares and workers "
+#~ "the player starts with) and the tribe and team for computer players"
+#~ msgstr ""
+#~ "Poslední tři může nastavit pouze hostitelský klient levým kliknutím na "
+#~ "tlačítko \"typ\" hráče. Hostitelský klient může také nastavit "
+#~ "inicializaci každého hráče (budovy, zboží a pracovníci, které hráč "
+#~ "dostane do začátku) a kmen a tým počítačových hráčů"
+
+#~ msgid ""
+#~ "Every client connected to a player (the set ‘role’ player) can set the "
+#~ "tribe and the team for that player"
+#~ msgstr ""
+#~ "Každý klient připojený k hráči (nastavená role hráč) může pro zvoleného "
+#~ "hráče nastavit kmen a tým"
+
+#~ msgid "Map details"
+#~ msgstr "Podrobnosti mapy"
+
+#~ msgid ""
+#~ "You can see information about the selected map or savegame on the right-"
+#~ "hand side. A button next to the map name allows the host to change to a "
+#~ "different map. Furthermore, the host is able to set a specific win "
+#~ "condition, and finally can start the game as soon as all players are set "
+#~ "up."
+#~ msgstr ""
+#~ "Na pravé straně jsou informace o zvolené mapě nebo uložené hře. Tlačítko "
+#~ "napravo od mapy umožňuje změnit mapu na jinou. Dále hostitel  může "
+#~ "nastavit specifické podmínky vítězství a samozřejmě také zahájit hru "
+#~ "jakmile jsou všichni hráči nastaveni."
+
+#~ msgid "Select map"
+#~ msgstr "Vyber mapu"
+
+#~ msgid "Launch Game"
+#~ msgstr "Spusť hru"
+
+#~ msgid "Player’s name"
+#~ msgstr "Jméno hráče"
+
+#~ msgid "Player’s type"
+#~ msgstr "Typ hráče"
+
+#~ msgid "Team"
+#~ msgstr "Tým"
+
+#~ msgid "Player’s tribe"
+#~ msgstr "Kmen hráče"
+
+#~ msgid "Start type"
+#~ msgstr "Typ startu"
+
+#~ msgid "Switch to position"
+#~ msgstr "Přepnout na pozici"
+
+#~ msgid ""
+#~ "Widelands tried to start a game with a file that could not be found at "
+#~ "the given path.\n"
+#~ "The file was: %s\n"
+#~ "If this happens in a network game, the host might have selected a file "
+#~ "that you do not own. Normally, such a file should be sent from the host "
+#~ "to you, but perhaps the transfer was not yet finished!?!"
+#~ msgstr ""
+#~ "Widelands zkusily zahájit hru se souborem, který nebyl na uvedené cestě k "
+#~ "nalezen.\n"
+#~ "Soubor byl: %s\n"
+#~ "Pokud se toto stalo ve hře po síti, hostitel zřejmě zvolil mapu kterou "
+#~ "nemáš. Za normálních okolností by se soubor měl stáhnout z hostitele, ale "
+#~ "třeba stahování ještě nedoběhlo do konce!?!"
+
+#~ msgid "Delete"
+#~ msgstr "Smazat"
+
+#~ msgid "Choose saved game"
+#~ msgstr "Vyber uloženou hru"
+
+#~ msgid "Gametime:"
+#~ msgstr "Herní čas:"
+
+#~ msgid "Minimap:"
+#~ msgstr "Minimapa:"
+
+#~ msgid "Delete file"
+#~ msgstr "Smazat soubor"
+
+#~ msgid "Do you really want to delete %s?"
+#~ msgstr "Opravdu chcete odstranit %s?"
+
+#~ msgid "Savegame from dedicated server"
+#~ msgstr "Uložená hra z dedikovaného serveru"
+
+#~ msgid "Unknown gametime"
+#~ msgstr "Neznámý čas hry"
+
+#~ msgid "Play Tutorial"
+#~ msgstr "Hrej tutoriál"
+
+#~ msgid "Single Player"
+#~ msgstr "Jeden hráč"
+
+#~ msgid "Multiplayer"
+#~ msgstr "Síťová hra"
+
+#~ msgid "Watch Replay"
+#~ msgstr "Sledovat záznam"
+
+#~ msgid "Options"
+#~ msgstr "Volby"
+
+#~ msgid "License"
+#~ msgstr "Licence"
+
+#~ msgid "Exit Game"
+#~ msgstr "Ukončit hru"
+
+#~ msgid "Version "
+#~ msgstr "Verze "
+
+#~ msgid "by the Widelands Development Team"
+#~ msgstr "Vývojový tým Widelands"
+
+#~ msgid "Licensed under the GNU General Public License V2.0"
+#~ msgstr "Licencováno GNU General Public License V2.0"
+
+#~ msgid "#"
+#~ msgstr "#"
+
+#~ msgid "Map Name"
+#~ msgstr "Název mapy"
+
+#~ msgid "Show all maps"
+#~ msgstr "Zobrazit všechny mapy"
+
+#~ msgid "Official Map"
+#~ msgstr "Oficiální mapa"
+
+#~ msgid "Seafaring Map"
+#~ msgstr "Námořní mapa"
+
+#~ msgid "1v1"
+#~ msgstr "1v1"
+
+#~ msgid "Teams of 2"
+#~ msgstr "Týmy po 2"
+
+#~ msgid "Teams of 3"
+#~ msgstr "Týmy po 3"
+
+#~ msgid "Teams of 4"
+#~ msgstr "Týmy po 4"
+
+#~ msgid "Free for all"
+#~ msgstr "Free for all"
+
+#~ msgid "Unbalanced"
+#~ msgstr "Nevyvážený"
+
+#~ msgid "(directory)"
+#~ msgstr "(adresář)"
+
+#~ msgid ""
+#~ "This map file is not present in your filesystem. The data shown here was "
+#~ "sent by the server."
+#~ msgstr ""
+#~ "Tato mapa není přítomna na vašem systému. Zobrazená data byla poskytnuta "
+#~ "serverem."
+
+#~ msgid "Choose game type"
+#~ msgstr "Zvolit typ hry"
+
+#~ msgid "Internet game"
+#~ msgstr "Hra po internetu"
+
+#~ msgid "LAN / Direct IP"
+#~ msgstr "LAN / Přímá IP"
+
+#~ msgid "Show login dialog"
+#~ msgstr "Zobrazit přihlašovací dialog"
+
+#~ msgid "nobody"
+#~ msgstr "nikdo"
+
+#~ msgid "Begin Network Game"
+#~ msgstr "Začni síťovou hru"
+
+#~ msgid "List of games in your local network:"
+#~ msgstr "Seznam her na tvé lokální síti:"
+
+#~ msgid "Your nickname:"
+#~ msgstr "Tvoje přezdívka:"
+
+#~ msgid "Host to connect:"
+#~ msgstr "Připojit se k hostiteli:"
+
+#~ msgid "Host a new game"
+#~ msgstr "Hostovat novou hru"
+
+#~ msgid "Load previous host"
+#~ msgstr "Nahrát předchozího hostitele"
+
+#~ msgid "Host"
+#~ msgstr "Host"
+
+#~ msgid "State"
+#~ msgstr "Status"
+
+#~ msgid "Open"
+#~ msgstr "Otevřené"
+
+#~ msgid "Closed"
+#~ msgstr "Zavřené"
+
+#~ msgid "Advanced Options"
+#~ msgstr "Pokročilé volby"
+
+#~ msgid "Apply"
+#~ msgstr "Použít"
+
+#~ msgid "min."
+#~ msgstr "min."
+
+#~ msgid "General Options"
+#~ msgstr "Obecné volby"
+
+#~ msgid "Fullscreen"
+#~ msgstr "Celá obrazovka"
+
+#~ msgid "Grab Input"
+#~ msgstr "Přivlastnit si vstup"
+
+#~ msgid "Enable Music"
+#~ msgstr "Povolit hudbu"
+
+#~ msgid "Enable Sound"
+#~ msgstr "Povolit zvuk"
+
+#~ msgid "Maximum FPS:"
+#~ msgstr "Maximální FPS:"
+
+#~ msgid "In-game resolution"
+#~ msgstr "Rozlišení hry"
+
+#~ msgid "Language"
+#~ msgstr "Jazyk"
+
+#~ msgid "In-game Options"
+#~ msgstr "Volby hry"
+
+#~ msgid "Use single Watchwindow Mode"
+#~ msgstr "Použít mód jediného hlídacího okna"
+
+#~ msgid "Start building road after placing a flag"
+#~ msgstr "Začít budovat cestu po umístění vlajky"
+
+#~ msgid "Show buildings area preview"
+#~ msgstr "Zobrazit náhled oblasti budov"
+
+#~ msgid "Snap windows only when overlapping"
+#~ msgstr "Přichytit okna pouze při překryvu"
+
+#~ msgid "Dock windows to edges"
+#~ msgstr "Přichytit okna k okrajům"
+
+#~ msgid "Save game automatically every"
+#~ msgstr "Uložit hru automaticky každých"
+
+#~ msgid "Remove Replays older than:"
+#~ msgstr "Odstranit záznamy starší než:"
+
+#~ msgid "Off"
+#~ msgstr "Vypnuto"
+
+#~ msgid "Never"
+#~ msgstr "Nikdy"
+
+#~ msgid "1 day"
+#~ msgstr "1 den"
+
+#~ msgid "%1$i x %2$i"
+#~ msgstr "%1$i x %2$i"
+
+#~ msgid "Try system language"
+#~ msgstr "Zkus jazyk systému"
+
+#~ msgid "px."
+#~ msgstr "px."
+
+#~ msgid "Main menu font:"
+#~ msgstr "Písmo hlavní nabídky:"
+
+#~ msgid "Play a sound at message arrival."
+#~ msgstr "Přehrát zvuk při příchodu zprávy."
+
+#~ msgid "Do not zip widelands data files (maps, replays and savegames)."
+#~ msgstr "Nezipovat datové soubory widelands (mapy, záznamy a uložené hry)."
+
+#~ msgid "Distance for windows to snap to other panels:"
+#~ msgstr "Vzdálenost pro přichycení oken k jiným panelům:"
+
+#~ msgid "Distance for windows to snap to borders:"
+#~ msgstr "Vzdálenost pro přichycení oken k okrajům:"
+
+#~ msgid "Remove Syncstream dumps on startup"
+#~ msgstr "Odstranit synchronizační výpisy při startu"
+
+#~ msgid "OpenGL rendering"
+#~ msgstr "OpenGL renderování"
+
+#~ msgid "Show in-game chat with transparent background"
+#~ msgstr "Zobrazit ve hře chat s průhledným pozadím"
+
+#~ msgid "DejaVuSerif (Default)"
+#~ msgstr "DejaVuSerif (výchozí)"
+
+#~ msgid "New Game"
+#~ msgstr "Nová hra"
+
+#~ msgid "Campaigns"
+#~ msgstr "Kampaně"
+
+#~ msgid "Load Game"
+#~ msgstr "Nahrát hru"
+
+#~ msgid ""
+#~ "Waited 5 seconds to close audio. There are some problems here, so killing "
+#~ "Widelands. Update your sound driver and/or SDL to fix this problem\n"
+#~ msgstr ""
+#~ "Počkejte vteřin pro ukončení audia. Problémy způsobují pád Widelands. "
+#~ "Stáhněte si nejnovější ovladače k zvukové kartě a /nebo SDL pro vyřešení "
+#~ "tohoto problému\n"
+
+#~ msgid "ERROR: Could not connect to metaserver (reason above)!\n"
+#~ msgstr "CHYBA: Připojení k metaserveru se nezdařilo (viz. důvod nahoře)!\n"
+
+#~ msgid "could not find the path of the main executable"
+#~ msgstr "Nelze nalézt cestu k hlavnímu příkazu"
+
+#~ msgid "Fallback settings in effect"
+#~ msgstr "Zapnuto záložní nastavení"
+
+#~ msgid ""
+#~ "Your video settings could not be enabled, and fallback settings are in "
+#~ "effect. Please check the graphics options!"
+#~ msgstr ""
+#~ "Zvolené nastavení grafiky nelze zapnout, proto zapínám záložní. Prosím "
+#~ "zkontrolujte nastavení grafiky."
+
+#~ msgid "Warning: %s"
+#~ msgstr "Varování: %s"
+
+#~ msgid "Game data error"
+#~ msgstr "Chyba herních dat"
+
+#~ msgid "Unexpected error during the game"
+#~ msgstr "Neočekávaná chyba v průběhu hry"
+
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "Please report this problem to help us improve Widelands. You will find "
+#~ "related messages in the standard output (stdout.txt on Windows). You are "
+#~ "using build %1$s (%2$s). "
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "Prosíme reportuj nám tento problém, abychom mohli Widelands dále "
+#~ "zlepšovat. Další podrobnosti najdeš ve standardním výstupu (stdout.txt na "
+#~ "Windows). Používáš verzi %1$s (%2$s). "
+
+#~ msgid ""
+#~ "Please add this information to your report.\n"
+#~ "\n"
+#~ "Widelands attempts to create a savegame when errors occur during the "
+#~ "game. It is often – though not always – possible to load it and continue "
+#~ "playing.\n"
+#~ msgstr ""
+#~ "Prosíme uveď tuto informaci v hlášení chyby.\n"
+#~ "\n"
+#~ "Widelands se pokouší uložit hru, pokud při hře dojde k chybě. Často - ale "
+#~ "bohužel ne vždy - je možné uloženou hru nahrát a pokračovat ve hraní.\n"
+
+#~ msgid "The address of the game server is invalid"
+#~ msgstr "Adresa herního serveru není platná"
+
+#~ msgid "Destroy building?"
+#~ msgstr "Zničit budovu?"
+
+#~ msgid "Do you really want to destroy this %s?"
+#~ msgstr "Opravdu chceš zničit tuto budovu (%s)?"
+
+#~ msgid "Dismantle building?"
+#~ msgstr "Rozebrat budovu?"
+
+#~ msgid "Do you really want to dismantle this %s?"
+#~ msgstr "Opravdu chcete rozebrat %s?"
+
+#~ msgid "Enhance building?"
+#~ msgstr "Vylepšit budovu?"
+
+#~ msgid "Do you really want to enhance this %s?"
+#~ msgstr "Opravdu chcete vylepšit %s?"
+
+#~ msgid "Do you really want to sink this ship?"
+#~ msgstr "Opravdu chcete potopit tuto loď?"
+
+#~ msgid "Sink the ship?"
+#~ msgstr "Potopit loď?"
+
+#~ msgid "Do you really want to cancel the active expedition?"
+#~ msgstr "Opravdu chcete zrušit probíhající expedici?"
+
+#~ msgid "Soldiers:"
+#~ msgstr "Vojáci:"
+
+#~ msgid "Send less soldiers"
+#~ msgstr "Poslat méně vojáků"
+
+#~ msgid "Number of soldiers"
+#~ msgstr "Počet vojáků"
+
+#~ msgid "Send more soldiers"
+#~ msgstr "Poslat více vojáků"
+
+#~ msgid "Building Statistics"
+#~ msgstr "Statistika budov"
+
+#~ msgid "Total Productivity:"
+#~ msgstr "Celková produktivita:"
+
+#~ msgid "Owned:"
+#~ msgstr "Vlastněno:"
+
+#~ msgid "Being built:"
+#~ msgstr "Staví se:"
+
+#~ msgid "Jump to unproductive"
+#~ msgstr "Skok na neproduktivní"
+
+#~ msgid "Type"
+#~ msgstr "Typ"
+
+#~ msgid "Prod"
+#~ msgstr "Prod."
+
+#~ msgid "Owned"
+#~ msgstr "Vlastn."
+
+#~ msgid "Build"
+#~ msgstr "Staví"
+
+#~ msgid "Show previous"
+#~ msgstr "Ukázat předchozí"
+
+#~ msgid "Show next"
+#~ msgstr "Ukázat následující"
+
+#~ msgid "Cancel the expedition"
+#~ msgstr "Zrušit expedici"
+
+#~ msgid "Start an expedition"
+#~ msgstr "Zahájit expedici"
+
+#~ msgid "Continue"
+#~ msgstr "Pokračovat"
+
+#~ msgid "Stop"
+#~ msgstr "Zastavit"
+
+#~ msgid "Enhance to %s"
+#~ msgstr "Vylepšit na %s"
+
+#~ msgid "Construction costs:"
+#~ msgstr "Stavební náklady:"
+
+#~ msgid "Destroy"
+#~ msgstr "Zničit"
+
+#~ msgid "Dismantle"
+#~ msgstr "Rozebrat"
+
+#~ msgid "Returns:"
+#~ msgstr "Výnosy:"
+
+#~ msgid "Hide work area"
+#~ msgstr "Skrýt pracovní oblast"
+
+#~ msgid "Debug"
+#~ msgstr "Ladění"
+
+#~ msgid "Center view on this"
+#~ msgstr "Vycentrovat pohled"
+
+#~ msgid "Help"
+#~ msgstr "Nápověda"
+
+#~ msgid "Show work area"
+#~ msgstr "Zobrazit pracovní oblast"
+
+#~ msgid "Building materials"
+#~ msgstr "Stavební materiály"
+
+#~ msgid "Tribal Ware Encyclopedia"
+#~ msgstr "Encyklopedie zboží klanu"
+
+#~ msgid "Consumed ware type(s)"
+#~ msgstr "Spotřebované typy zboží"
+
+#~ msgid "Quantity"
+#~ msgstr "Množství"
+
+#~ msgid "Build small building"
+#~ msgstr "Postavit malou budovu"
+
+#~ msgid "Build medium building"
+#~ msgstr "Postavit střední budovu"
+
+#~ msgid "Build large building"
+#~ msgstr "Postavit velkou budovu"
+
+#~ msgid "Build port building"
+#~ msgstr "Postavit budovu přístavu"
+
+#~ msgid "Action"
+#~ msgstr "Akce"
+
+#~ msgid "Build road"
+#~ msgstr "Postavit cestu"
+
+#~ msgid "Destroy this flag"
+#~ msgstr "Zničit tuto vlajku?"
+
+#~ msgid "Configure economy"
+#~ msgstr "Nastavit ekonomiku"
+
+#~ msgid "Send geologist to explore site"
+#~ msgstr "Poslat geologa na průzkum"
+
+#~ msgid "Place a flag"
+#~ msgstr "Umístit vlajku"
+
+#~ msgid "Destroy a road"
+#~ msgstr "Zničit cestu"
+
+#~ msgid "Watch field in a separate window"
+#~ msgstr "Sledovat ve vlastním okně"
+
+#~ msgid "Toggle building statistics display"
+#~ msgstr "Přepnout zobrazení statistiky budov"
+
+#~ msgid "Toggle building label display"
+#~ msgstr "Přepnout zobrazení popisků budov"
+
+#~ msgid "Debug window"
+#~ msgstr "Okno ladění"
+
+#~ msgid "Watch"
+#~ msgstr "Sledovat"
+
+#~ msgid "Start attack"
+#~ msgstr "Zahájit útok"
+
+#~ msgid "Attack"
+#~ msgstr "Útok"
+
+#~ msgid "Build mines"
+#~ msgstr "Postavit doly"
+
+#~ msgid "Build flag"
+#~ msgstr "Postavit vlajku"
+
+#~ msgid "Cancel road"
+#~ msgstr "Zrušit cestu"
+
+#~ msgid "Build roads"
+#~ msgstr "Stavět cesty"
+
+#~ msgid "Chat"
+#~ msgstr "Chat"
+
+#~ msgid "Debug Field"
+#~ msgstr "Ladicí políčko"
+
+#~ msgid "General Statistics"
+#~ msgstr "Obecná statistika"
+
+#~ msgid "Ware Statistics"
+#~ msgstr "Statistika zboží"
+
+#~ msgid "Stock"
+#~ msgstr "Zásoby"
+
+#~ msgid "Save Game"
+#~ msgstr "Uložit hru"
+
+#~ msgid "Game Time:"
+#~ msgstr "Herní čas:"
+
+#~ msgid "Win condition:"
+#~ msgstr "Podmínky vítězství:"
+
+#~ msgid "%i player"
+#~ msgid_plural "%i players"
+#~ msgstr[0] "%i hráč"
+#~ msgstr[1] "%i hráči"
+#~ msgstr[2] "%i hráčů"
+
+#~ msgid "player"
+#~ msgid_plural "players"
+#~ msgstr[0] "hráč"
+#~ msgstr[1] "hráči"
+#~ msgstr[2] "hráčů"
+
+#~ msgid ""
+#~ "Game Saving Error!\n"
+#~ "Saved game file may be corrupt!\n"
+#~ "\n"
+#~ "Reason given:\n"
+#~ msgstr ""
+#~ "Chyba při ukládání hry!\n"
+#~ "Uložená hra může být poškozena!\n"
+#~ "\n"
+#~ "Důvod:\n"
+
+#~ msgid "Save Game Error!"
+#~ msgstr "Chyba při ukládání hry!"
+
+#~ msgid "File deletion"
+#~ msgstr "Smazání souboru"
+
+#~ msgid "Do you really want to delete the file %s?"
+#~ msgstr "Opravu chcete smazat soubor %s?"
+
+#~ msgid "Messages: Inbox"
+#~ msgstr "Zprávy: Doručená pošta"
+
+#~ msgid "Select"
+#~ msgstr "Vybrat"
+
+#~ msgid "Status"
+#~ msgstr "Status"
+
+#~ msgid "Title"
+#~ msgstr "Název"
+
+#~ msgid "Time sent"
+#~ msgstr "Čas odeslání"
+
+#~ msgid "Clear"
+#~ msgstr "Vymazat"
+
+#~ msgid "Clear selection"
+#~ msgstr "Vymazat výběr"
+
+#~ msgid "Invert"
+#~ msgstr "Přepnout"
+
+#~ msgid "Invert selection"
+#~ msgstr "Přepnout výběr"
+
+#~ msgid "Archive selected messages"
+#~ msgstr "Archivovat vybrané zprávy"
+
+#~ msgid "Show Archive"
+#~ msgstr "Zobrazit archiv"
+
+#~ msgid "center main mapview on location"
+#~ msgstr "vycentrovat pohled hlavní mapy na lokaci"
+
+#~ msgid "Messages: Archive"
+#~ msgstr "Zprávy: Archiv"
+
+#~ msgid "Restore selected messages"
+#~ msgstr "Obnovit vybrané zprávy"
+
+#~ msgid "Show Inbox"
+#~ msgstr "Zobrazit Doručenou poštu"
+
+#~ msgid "Objectives"
+#~ msgstr "Úkoly"
+
+#~ msgid "README"
+#~ msgstr "ČTIMĚ"
+
+#~ msgid "Authors"
+#~ msgstr "Autoři"
+
+#~ msgid "Sound Options"
+#~ msgstr "Volby zvuku"
+
+#~ msgid "Ingame Music"
+#~ msgstr "Hudba"
+
+#~ msgid "Sound FX"
+#~ msgstr "Zvuk"
+
+#~ msgid "Ingame Music Volume"
+#~ msgstr "Hlasitost hudby"
+
+#~ msgid "Sound FX Volume"
+#~ msgstr "Hlasitost zvuku"
+
+#~ msgid "Game over"
+#~ msgstr "Konec hry"
+
+#~ msgid "Elapsed time:"
+#~ msgstr "Uplynulý čas:"
+
+#~ msgid "Continue playing"
+#~ msgstr "Pokračovat ve hře"
+
+#~ msgid "Land"
+#~ msgstr "Země"
+
+#~ msgid "Workers"
+#~ msgstr "Pracovníci"
+
+#~ msgid "Buildings"
+#~ msgstr "Budovy"
+
+#~ msgid "Wares"
+#~ msgstr "Zboží"
+
+#~ msgid "Productivity"
+#~ msgstr "Produktivita"
+
+#~ msgid "Casualties"
+#~ msgstr "Ztráty"
+
+#~ msgid "Kills"
+#~ msgstr "Zabití"
+
+#~ msgid "Military buildings lost"
+#~ msgstr "Ztracené vojenské budovy"
+
+#~ msgid "Military buildings defeated"
+#~ msgstr "Dobyté vojenské budovy"
+
+#~ msgid "Civilian buildings lost"
+#~ msgstr "Ztracené civilní budovy"
+
+#~ msgid "Military"
+#~ msgstr "Armáda"
+
+#~ msgid "PAUSE"
+#~ msgstr "Pauza"
+
+#~ msgid "%1$s (%2$s)"
+#~ msgstr "%1$s (%2$s)"
+
+#~ msgid "NO GAME CONTROLLER"
+#~ msgstr "ŽÁDNÝ OVLADAČ HRY"
+
+#~ msgid "Statistics"
+#~ msgstr "Statistiky"
+
+#~ msgid "Messages"
+#~ msgstr "Zprávy"
+
+#~ msgid "%u new message"
+#~ msgid_plural "%u new messages"
+#~ msgstr[0] "%u nová zpráva"
+#~ msgstr[1] "%u nové zprávy"
+#~ msgstr[2] "%u nových zpráv"
+
+#~ msgid "Exit Replay"
+#~ msgstr "Ukončit přehrávání"
+
+#~ msgid "Metaserver login"
+#~ msgstr "Přihlašovací jméno metaserveru"
+
+#~ msgid "Nickname:"
+#~ msgstr "Přezdívka:"
+
+#~ msgid "Password:"
+#~ msgstr "Heslo:"
+
+#~ msgid "WARNING: Password will be shown and saved readable!"
+#~ msgstr "POZOR: Heslo bude zobrazeno a uloženo v čitelném formátu!"
+
+#~ msgid "Log in to a registered account"
+#~ msgstr "Přihlaš se na zaregistrovaný účet"
+
+#~ msgid "Automatically use this login information from now on."
+#~ msgstr "Příště automaticky použít tyto přihlašovací informace."
+
+#~ msgid "Login"
+#~ msgstr "Login"
+
+#~ msgid "Empty Nickname"
+#~ msgstr "Prázdná přezdívka"
+
+#~ msgid "Please enter a nickname!"
+#~ msgstr "Prosím zadejte přezdívku!"
+
+#~ msgid "Space in Nickname"
+#~ msgstr "Mezera v přezdívce"
+
+#~ msgid "Sorry, but spaces are not allowed in nicknames!"
+#~ msgstr "Litujeme, ale v přezdívce nejsou povoleny mezery!"
+
+#~ msgid "Empty Password"
+#~ msgstr "Prázdné heslo"
+
+#~ msgid "Please enter your password!"
+#~ msgstr "Prosím,  napište Vaše heslo!"
+
+#~ msgid "Soldiers"
+#~ msgstr "Vojáci"
+
+#~ msgid "Owner"
+#~ msgstr "Vlastník"
+
+#~ msgid "Flags"
+#~ msgstr "Vlajky"
+
+#~ msgid "Roads"
+#~ msgstr "Cesty"
+
+#~ msgid "Zoom"
+#~ msgstr "Lupa"
+
+#~ msgid "Shared in"
+#~ msgstr "Sdíleno v"
+
+#~ msgid "Computer"
+#~ msgstr "Počítač"
+
+#~ msgid "Random"
+#~ msgstr "Náhodný"
+
+#~ msgid "Human"
+#~ msgstr "Člověk"
+
+#~ msgid "Client name"
+#~ msgstr "Název klienta"
+
+#~ msgid "Role"
+#~ msgstr "Role"
+
+#~ msgid "Start"
+#~ msgstr "Spustit"
+
+#~ msgid "Tribe"
+#~ msgstr "Kmen"
+
+#~ msgid "Initialization"
+#~ msgstr "Inicializace"
+
+#~ msgid "d"
+#~ msgstr "d"
+
+#~ msgid "h"
+#~ msgstr "h"
+
+#~ msgid "min"
+#~ msgstr "min"
+
+#~ msgid "game"
+#~ msgstr "hra"
+
+#~ msgid "Exp"
+#~ msgstr "Zkušenost"
+
+#~ msgid "Next Level"
+#~ msgstr "Další úroveň"
+
+#~ msgid "(coming)"
+#~ msgstr "(na cestě)"
+
+#~ msgid "(vacant)"
+#~ msgstr "(neobsazeno)"
+
+#~ msgid "Ship"
+#~ msgstr "Loď"
+
+#~ msgid "Go to ship"
+#~ msgstr "Jít k lodi"
+
+#~ msgid "Go to destination"
+#~ msgstr "Jít k cíli"
+
+#~ msgid "Decrease capacity"
+#~ msgstr "Snížit kapacitu"
+
+#~ msgid "Increase capacity"
+#~ msgstr "Zvýšit kapacitu"
+
+#~ msgid "Capacity"
+#~ msgstr "Kapacita"
+
+#~ msgid "Click soldier to send away"
+#~ msgstr "Klikni na vojáka, abys ho poslal pryč"
+
+#~ msgid "Wares (total)"
+#~ msgstr "Zboží (celkem)"
+
+#~ msgid "Workers (total)"
+#~ msgstr "Dělníci (celkem)"
+
+#~ msgid "Wares in warehouses"
+#~ msgstr "Zboží v skladišti"
+
+#~ msgid "Workers in warehouses"
+#~ msgstr "Dělníci v skladišti"
+
+#~ msgid "Soldiers in training"
+#~ msgstr "Vojáci ve výcviku"
+
+#~ msgid "Economy options"
+#~ msgstr "Volby ekonomiky"
+
+#~ msgid "Decrease target"
+#~ msgstr "Snížit cíl"
+
+#~ msgid "Increase target"
+#~ msgstr "Zvýšit cíl"
+
+#~ msgid "Reset to default"
+#~ msgstr "Obnovit výchozí"
+
+#~ msgid "Production"
+#~ msgstr "Výroba"
+
+#~ msgid "Consumption"
+#~ msgstr "Spotřeba"
+
+#~ msgid "Economy Health"
+#~ msgstr "Zdraví ekonomiky"
+
+#~ msgid "Normal policy"
+#~ msgstr "Normální politika"
+
+#~ msgid "Preferably store selected wares here"
+#~ msgstr "Přednostně zde uskladnit vybrané zboží"
+
+#~ msgid "Do not store selected wares here"
+#~ msgstr "Neskladovat zde vybrané zboží"
+
+#~ msgid "Remove selected wares from here"
+#~ msgstr "Vystěhovat odsud označené zboží"
+
+#~ msgid "Wares in dock"
+#~ msgstr "Zboží v přístavu"
+
+#~ msgid "Workers in dock"
+#~ msgstr "Pracovníci v přístavu"
+
+#~ msgid "Highest priority"
+#~ msgstr "Nejvyšší priorita"
+
+#~ msgid "Normal priority"
+#~ msgstr "Normální priorita"
+
+#~ msgid "Lowest priority"
+#~ msgstr "Nejnižší priorita"
+
+#~ msgid "Decrease the number of wares you want to be stored here."
+#~ msgstr "Snížit počet zboží, které zde chceš uskladnit"
+
+#~ msgid "Increase the number of wares you want to be stored here."
+#~ msgstr "Zvýšit počet zboží, které zde chceš uskladnit"
+
+#~ msgid "Follow"
+#~ msgstr "Následovat"
+
+#~ msgid "Center the main view on this"
+#~ msgstr "Vycentrovat hlavní pohled"

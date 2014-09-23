@@ -76,8 +76,8 @@ wl_library(logic
     checkstep.h
     cmd_calculate_statistics.cc
     cmd_calculate_statistics.h
-    cmd_expire_message.cc
-    cmd_expire_message.h
+    cmd_delete_message.cc
+    cmd_delete_message.h
     cmd_incorporate.cc
     cmd_incorporate.h
     cmd_luacoroutine.cc
@@ -176,7 +176,7 @@ wl_library(logic
     soldier.h
     soldier_counts.h
     soldiercontrol.h
-    tattribute.h
+    training_attribute.h
     trainingsite.cc
     trainingsite.h
     tribe.cc

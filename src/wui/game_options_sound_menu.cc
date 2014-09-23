@@ -23,7 +23,7 @@
 #include "sound/sound_handler.h"
 
 GameOptionsSoundMenu::GameOptionsSoundMenu
-	(Interactive_GameBase & gb, UI::UniqueWindow::Registry & registry)
+	(InteractiveGameBase & gb, UI::UniqueWindow::Registry & registry)
 :
 UI::UniqueWindow
 	(&gb, "sound_options_menu", &registry, 160, 160, _("Sound Options")),

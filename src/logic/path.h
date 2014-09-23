@@ -50,9 +50,9 @@ struct Path {
 	Coords get_start() const {return m_start;}
 	Coords get_end  () const {return m_end;}
 
-	typedef std::vector<Direction> Step_Vector;
-	Step_Vector::size_type get_nsteps() const {return m_path.size();}
-	Direction operator[](Step_Vector::size_type const i) const {
+	using StepVector = std::vector<Direction>;
+	StepVector::size_type get_nsteps() const {return m_path.size();}
+	Direction operator[](StepVector::size_type const i) const {
 		assert(i < m_path.size());
 		return m_path[m_path.size() - i - 1];
 	}
@@ -70,7 +70,7 @@ struct Path {
 private:
 	Coords m_start;
 	Coords m_end;
-	Step_Vector m_path;
+	StepVector m_path;
 };
 
 // CoordPath is an extended path that also caches related Coords
@@ -83,13 +83,13 @@ struct CoordPath {
 	Coords get_end  () const {return m_coords.back ();}
 	const std::vector<Coords> &get_coords() const {return m_coords;}
 
-	typedef std::vector<Direction> Step_Vector;
-	Step_Vector::size_type get_nsteps() const {return m_path.size();}
-	Direction operator[](Step_Vector::size_type const i) const {
+	using StepVector = std::vector<Direction>;
+	StepVector::size_type get_nsteps() const {return m_path.size();}
+	Direction operator[](StepVector::size_type const i) const {
 		assert(i < m_path.size());
 		return m_path[i];
 	}
-	const Step_Vector & steps() const {return m_path;}
+	const StepVector & steps() const {return m_path;}
 
 	int32_t get_index(Coords field) const;
 
@@ -100,7 +100,7 @@ struct CoordPath {
 	void append(const CoordPath & tail);
 
 private:
-	Step_Vector          m_path;   //  directions
+	StepVector          m_path;   //  directions
 	std::vector<Coords>  m_coords; //  m_coords.size() == m_path.size() + 1
 };
 

@@ -31,7 +31,7 @@ using Widelands::Building;
  * Create the building's options window if necessary and bring it to
  * the top to be seen by the player.
  */
-void Building::show_options(Interactive_GameBase & igbase, bool avoid_fastclick, Point pos)
+void Building::show_options(InteractiveGameBase & igbase, bool avoid_fastclick, Point pos)
 {
 	if (m_optionswindow) {
 		if (m_optionswindow->is_minimal())
@@ -39,7 +39,7 @@ void Building::show_options(Interactive_GameBase & igbase, bool avoid_fastclick,
 		m_optionswindow->move_to_top();
 	} else {
 		create_options_window(igbase, m_optionswindow);
-		if (upcast(Building_Window, bw, m_optionswindow)) {
+		if (upcast(BuildingWindow, bw, m_optionswindow)) {
 			bw->set_avoid_fastclick(avoid_fastclick);
 		}
 		// Run a first think here so that certain things like caps buttons
@@ -65,7 +65,7 @@ void Building::hide_options()
 /**
  * refreshs the option window of a building - useful if some ui elements have to be removed or added
  */
-void Building::refresh_options(Interactive_GameBase & igb) {
+void Building::refresh_options(InteractiveGameBase & igb) {
 	// Only do something if there is actually a window
 	if (m_optionswindow) {
 		Point window_position = m_optionswindow->get_pos();

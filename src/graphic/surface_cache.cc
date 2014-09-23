@@ -47,7 +47,7 @@ public:
 private:
 	void drop();
 
-	typedef list<string> AccessHistory;
+	using AccessHistory = list<string>;
 	struct Entry {
 		Entry(Surface* gs, const AccessHistory::iterator& it, bool transient) :
 			surface(gs), is_transient(transient), last_access(SDL_GetTicks()), list_iterator(it) {}
@@ -57,7 +57,7 @@ private:
 		uint32_t last_access;  // Mainly for debugging and analysis.
 		const AccessHistory::iterator list_iterator;  // Only valid if is_transient is true.
 	};
-	typedef map<string, Entry*> Container;
+	using Container = map<string, Entry*>;
 
 	uint32_t max_transient_memory_;
 	uint32_t used_transient_memory_;

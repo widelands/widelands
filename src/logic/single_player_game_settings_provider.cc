@@ -24,7 +24,7 @@
 
 
 SinglePlayerGameSettingsProvider::SinglePlayerGameSettingsProvider() {
-	s.tribes = Widelands::Tribe_Descr::get_all_tribe_infos();
+	s.tribes = Widelands::TribeDescr::get_all_tribe_infos();
 	s.scenario = false;
 	s.multiplayer = false;
 	s.playernum = 0;
@@ -88,8 +88,8 @@ void SinglePlayerGameSettingsProvider::setMap (const std::string & mapname, cons
 		player.team = 0;
 		// Set default computerplayer ai type
 		if (player.state == PlayerSettings::stateComputer) {
-			const Computer_Player::ImplementationVector & impls =
-				Computer_Player::getImplementations();
+			const ComputerPlayer::ImplementationVector & impls =
+				ComputerPlayer::getImplementations();
 			if (impls.size() > 1) {
 				player.ai = impls.at(0)->name;
 				player.random_ai = false;
@@ -124,10 +124,10 @@ void SinglePlayerGameSettingsProvider::nextPlayerState(uint8_t const number) {
 	if (number == s.playernum || number >= s.players.size())
 		return;
 
-	const Computer_Player::ImplementationVector & impls =
-		Computer_Player::getImplementations();
+	const ComputerPlayer::ImplementationVector & impls =
+		ComputerPlayer::getImplementations();
 	if (impls.size() > 1) {
-		Computer_Player::ImplementationVector::const_iterator it =
+		ComputerPlayer::ImplementationVector::const_iterator it =
 			impls.begin();
 		do {
 			++it;

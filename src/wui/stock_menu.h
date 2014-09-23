@@ -23,19 +23,19 @@
 #include "ui_basic/unique_window.h"
 #include "wui/waresdisplay.h"
 
-class Interactive_Player;
+class InteractivePlayer;
 
 /*
  * Shows statistics about all stocks currently in the game of
  * one player
  */
-struct Stock_Menu : public UI::UniqueWindow {
-	Stock_Menu(Interactive_Player &, UI::UniqueWindow::Registry &);
+struct StockMenu : public UI::UniqueWindow {
+	StockMenu(InteractivePlayer &, UI::UniqueWindow::Registry &);
 
 	void think() override;
 
 private:
-	Interactive_Player &  m_player;
+	InteractivePlayer &  m_player;
 	WaresDisplay * m_all_wares;
 	WaresDisplay * m_all_workers;
 	WaresDisplay * m_warehouse_wares;

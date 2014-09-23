@@ -32,10 +32,10 @@ struct TextStyle;
 
 /**
  * A panel that allows entering multi-line string, i.e. like a hybrid between
- * @ref Editbox and @ref Multiline_Textarea
+ * @ref Editbox and @ref MultilineTextarea
  */
-struct Multiline_Editbox : public Panel {
-	Multiline_Editbox
+struct MultilineEditbox : public Panel {
+	MultilineEditbox
 		(Panel *, int32_t x, int32_t y, uint32_t w, uint32_t h, const std::string & text);
 
 	boost::signals2::signal<void ()> changed;

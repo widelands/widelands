@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-09-18 19:55+0100\n"
-"PO-Revision-Date: 2014-09-19 11:34+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"PO-Revision-Date: 2014-06-18 06:04+0000\n"
+"Last-Translator: SirVer <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
+"Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-09-20 05:48+0000\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Launchpad-Export-Date: 2014-09-08 06:17+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
-"Language: fa\n"
 
 #. * TRANSLATORS: %s = version information
 #: ../../src/wlapplication_messages.cc:40
@@ -216,3 +217,318 @@ msgid ""
 "\n"
 "Hope you enjoy this game!"
 msgstr ""
+
+#~ msgid "None"
+#~ msgstr "هیچ‌کدام"
+
+#~ msgid "Normal"
+#~ msgstr "عادی"
+
+#~ msgid "Menu"
+#~ msgstr "منو"
+
+#~ msgid "Tools"
+#~ msgstr "ابزار"
+
+#~ msgid "Players"
+#~ msgstr "بازیکنان"
+
+#~ msgid "Unknown"
+#~ msgstr "ناشناخته"
+
+#~ msgid " small"
+#~ msgstr " کوچک"
+
+#~ msgid " medium"
+#~ msgstr " متوسط"
+
+#~ msgid " big"
+#~ msgstr " بزرگ"
+
+#~ msgid " flag"
+#~ msgstr " پرچم"
+
+#~ msgid " port"
+#~ msgstr " درگاه"
+
+#~ msgid "Name: %s"
+#~ msgstr "نام: %s"
+
+#~ msgid "Resources:"
+#~ msgstr "منابع‌:"
+
+#~ msgid "Map:"
+#~ msgstr "نقشه:"
+
+#~ msgid "Author: %s"
+#~ msgstr "نویسنده: %s"
+
+#~ msgid "Current:"
+#~ msgstr "جاری:"
+
+#~ msgid "Main Menu"
+#~ msgstr "منوی اصلی"
+
+#~ msgid "Name:"
+#~ msgstr "نام:"
+
+#~ msgid "Author:"
+#~ msgstr "مؤلف:"
+
+#~ msgid "Size:"
+#~ msgstr "اندازه:"
+
+#~ msgid "Players:"
+#~ msgstr "بازیکنان:"
+
+#~ msgid "Width: %u"
+#~ msgstr "عرض: %u"
+
+#~ msgid "Low"
+#~ msgstr "کم"
+
+#~ msgid "High"
+#~ msgstr "بالا"
+
+#~ msgid "Players: %u"
+#~ msgstr "بازیکنان: %u"
+
+#~ msgid "Add player"
+#~ msgstr "افزودن بازیکن"
+
+#~ msgid "Number of Players"
+#~ msgstr "تعداد بازیکن‌ها"
+
+#~ msgid "Player %s"
+#~ msgstr "بازیکن %s"
+
+#~ msgid "Error!"
+#~ msgstr "خطا!"
+
+#~ msgid "Set Value"
+#~ msgstr "تنظیم مقدار"
+
+#~ msgid "Resources"
+#~ msgstr "منابع"
+
+#~ msgid "Current Selection"
+#~ msgstr "انتخاب فعلی"
+
+#~ msgid "small"
+#~ msgstr "کوچک"
+
+#~ msgid "big"
+#~ msgstr "بزرگ"
+
+#~ msgid "medium"
+#~ msgstr "متوسط"
+
+#~ msgid "Small"
+#~ msgstr "کوچک"
+
+#~ msgid "Big"
+#~ msgstr "بزرگ"
+
+#~ msgid "Scenario"
+#~ msgstr "سناریو"
+
+#~ msgid "Loading..."
+#~ msgstr "بارگیری..."
+
+#~ msgid "(stopped)"
+#~ msgstr "(متوقف شد)"
+
+#~ msgid "Player"
+#~ msgstr "بازیکن"
+
+#~ msgid "Bluebyte Settlers II Map. No comment defined!"
+#~ msgstr "Bluebyte Settlers II نقشه. بدون شرح"
+
+#~ msgid "Connection problem"
+#~ msgstr "مشکل اتصال"
+
+#~ msgid "Something went wrong: "
+#~ msgstr "یک جایی یک اشتباهی پیش آمد: "
+
+#~ msgid "ERROR: %s"
+#~ msgstr "خطا: %s"
+
+#~ msgid "You are already logged in!"
+#~ msgstr "شما قبلا وارد شده اید!"
+
+#~ msgid "Something went wrong: %s"
+#~ msgstr "یک جایی یک اشتباهی پیش آمد: %s"
+
+#~ msgid "Yes"
+#~ msgstr "بله"
+
+#~ msgid "Description:"
+#~ msgstr "شرح:"
+
+#~ msgid "Name"
+#~ msgstr "نام"
+
+#~ msgid "Game"
+#~ msgstr "بازی"
+
+#~ msgid "Player %i"
+#~ msgstr "بازیکن %i"
+
+#~ msgid "Player %u"
+#~ msgstr "بازیکن %u"
+
+#~ msgid "There was an error!"
+#~ msgstr "خطایی رخ داد!"
+
+#~ msgid "Player settings"
+#~ msgstr "تنظیمات پخش‌کننده‌"
+
+#~ msgid "Team"
+#~ msgstr "تیم"
+
+#~ msgid "Delete"
+#~ msgstr "حذف"
+
+#~ msgid "Do you really want to delete %s?"
+#~ msgstr "واقعاً می‌خواهید %s را حذف کنید؟"
+
+#~ msgid "Options"
+#~ msgstr "گزینه ها"
+
+#~ msgid "Exit Game"
+#~ msgstr "خروج از بازی"
+
+#~ msgid "Version "
+#~ msgstr "نسخه "
+
+#~ msgid "#"
+#~ msgstr "#"
+
+#~ msgid "Choose game type"
+#~ msgstr "انتخاب نوع بازی‌"
+
+#~ msgid "Your nickname:"
+#~ msgstr "لقب شما:"
+
+#~ msgid "Host"
+#~ msgstr "میزبان"
+
+#~ msgid "Open"
+#~ msgstr "باز"
+
+#~ msgid "Advanced Options"
+#~ msgstr "گزینه‌های پیشرفته"
+
+#~ msgid "General Options"
+#~ msgstr "گزینه‌های عمومی"
+
+#~ msgid "Fullscreen"
+#~ msgstr "تمام صفحه"
+
+#~ msgid "Enable Sound"
+#~ msgstr "به کار انداختن صدا"
+
+#~ msgid "Language"
+#~ msgstr "زبان"
+
+#~ msgid "Snap windows only when overlapping"
+#~ msgstr "پرش پنجره‌ها فقط هنگام هم‌پوشانی‌"
+
+#~ msgid "New Game"
+#~ msgstr "بازی جدید"
+
+#~ msgid "Load Game"
+#~ msgstr "بار کردن بازی"
+
+#~ msgid "ERROR: Could not connect to metaserver (reason above)!\n"
+#~ msgstr "خطا : نمیتوان  به سرور متا وصل شد.(دلیل بالا)!\n"
+
+#~ msgid "Type"
+#~ msgstr "نوع"
+
+#~ msgid "Continue"
+#~ msgstr "ادامه"
+
+#~ msgid "Destroy"
+#~ msgstr "تخریب"
+
+#~ msgid "Help"
+#~ msgstr "راهنما"
+
+#~ msgid "Quantity"
+#~ msgstr "کیفیت"
+
+#~ msgid "Action"
+#~ msgstr "اقدام"
+
+#~ msgid "Select"
+#~ msgstr "انتخاب"
+
+#~ msgid "Status"
+#~ msgstr "وضعیت"
+
+#~ msgid "Title"
+#~ msgstr "عنوان"
+
+#~ msgid "Clear"
+#~ msgstr "واضح"
+
+#~ msgid "Clear selection"
+#~ msgstr "پاک کردن گزینش"
+
+#~ msgid "Sound Options"
+#~ msgstr "گزینه‌های صدا"
+
+#~ msgid "Game over"
+#~ msgstr "بازی تمام شد"
+
+#~ msgid "Elapsed time:"
+#~ msgstr "زمان سپری‌شده"
+
+#~ msgid "Continue playing"
+#~ msgstr "ادامه‌ی بازی"
+
+#~ msgid "Score"
+#~ msgstr "امتیاز"
+
+#~ msgid "Buildings"
+#~ msgstr "ساختمان‌ها"
+
+#~ msgid "Productivity"
+#~ msgstr "فراورش"
+
+#~ msgid "Statistics"
+#~ msgstr "آمار‌"
+
+#~ msgid "Nickname:"
+#~ msgstr "لقب:"
+
+#~ msgid "Login"
+#~ msgstr "ورود"
+
+#~ msgid "Zoom"
+#~ msgstr "زوم"
+
+#~ msgid "Computer"
+#~ msgstr "کامپیوتر"
+
+#~ msgid "Random"
+#~ msgstr "تصادفی"
+
+#~ msgid "Human"
+#~ msgstr "انسان"
+
+#~ msgid "Client name"
+#~ msgstr "نام کارگیر"
+
+#~ msgid "Role"
+#~ msgstr "نقش"
+
+#~ msgid "Start"
+#~ msgstr "شروع"
+
+#~ msgid "Reset to default"
+#~ msgstr "‌بازگرداندن به پیش‌‌فرض"
+
+#~ msgid "Production"
+#~ msgstr "تولید"

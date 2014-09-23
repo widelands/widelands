@@ -34,12 +34,12 @@ using Widelands::Field;
 
 #define width  20
 #define height 20
-Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
-	(Editor_Interactive         & parent,
-	 Editor_Noise_Height_Tool   & noise_tool,
+EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu
+	(EditorInteractive         & parent,
+	 EditorNoiseHeightTool   & noise_tool,
 	 UI::UniqueWindow::Registry & registry)
 	:
-	Editor_Tool_Options_Menu
+	EditorToolOptionsMenu
 		(parent, registry, 250, 3 * height + 4 * vspacing() + 2 * vmargin(), _("Noise Height Options")),
 	m_noise_tool(noise_tool),
 	m_lower_label
@@ -116,17 +116,17 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
 		 noise_tool.set_tool().get_interval().max < MAX_FIELD_HEIGHT)
 {
 	m_lower_increase.sigclicked.connect
-		(boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_lower_increase, boost::ref(*this)));
+		(boost::bind(&EditorToolNoiseHeightOptionsMenu::clicked_lower_increase, boost::ref(*this)));
 	m_lower_decrease.sigclicked.connect
-		(boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_lower_decrease, boost::ref(*this)));
+		(boost::bind(&EditorToolNoiseHeightOptionsMenu::clicked_lower_decrease, boost::ref(*this)));
 	m_upper_increase.sigclicked.connect
-		(boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_upper_increase, boost::ref(*this)));
+		(boost::bind(&EditorToolNoiseHeightOptionsMenu::clicked_upper_increase, boost::ref(*this)));
 	m_upper_decrease.sigclicked.connect
-		(boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_upper_decrease, boost::ref(*this)));
+		(boost::bind(&EditorToolNoiseHeightOptionsMenu::clicked_upper_decrease, boost::ref(*this)));
 	m_setto_increase.sigclicked.connect
-		(boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_setto_increase, boost::ref(*this)));
+		(boost::bind(&EditorToolNoiseHeightOptionsMenu::clicked_setto_increase, boost::ref(*this)));
 	m_setto_decrease.sigclicked.connect
-		(boost::bind(&Editor_Tool_Noise_Height_Options_Menu::clicked_setto_decrease, boost::ref(*this)));
+		(boost::bind(&EditorToolNoiseHeightOptionsMenu::clicked_setto_decrease, boost::ref(*this)));
 
 	m_lower_increase.set_repeating(true);
 	m_lower_decrease.set_repeating(true);
@@ -140,7 +140,7 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
 /**
  * Update all textareas
 */
-void Editor_Tool_Noise_Height_Options_Menu::update() {
+void EditorToolNoiseHeightOptionsMenu::update() {
 	char buffer[200];
 	const Widelands::HeightInterval height_interval = m_noise_tool.get_interval();
 	snprintf(buffer, sizeof(buffer), _("Minimum: %u"), height_interval.min);
@@ -157,7 +157,7 @@ void Editor_Tool_Noise_Height_Options_Menu::update() {
 }
 
 
-void Editor_Tool_Noise_Height_Options_Menu::clicked_lower_decrease() {
+void EditorToolNoiseHeightOptionsMenu::clicked_lower_decrease() {
 	Widelands::HeightInterval height_interval = m_noise_tool.get_interval();
 
 	assert(height_interval.valid());
@@ -174,7 +174,7 @@ void Editor_Tool_Noise_Height_Options_Menu::clicked_lower_decrease() {
 }
 
 
-void Editor_Tool_Noise_Height_Options_Menu::clicked_lower_increase() {
+void EditorToolNoiseHeightOptionsMenu::clicked_lower_increase() {
 	Widelands::HeightInterval height_interval = m_noise_tool.get_interval();
 
 	assert(height_interval.valid());
@@ -195,7 +195,7 @@ void Editor_Tool_Noise_Height_Options_Menu::clicked_lower_increase() {
 }
 
 
-void Editor_Tool_Noise_Height_Options_Menu::clicked_upper_decrease() {
+void EditorToolNoiseHeightOptionsMenu::clicked_upper_decrease() {
 	Widelands::HeightInterval height_interval = m_noise_tool.get_interval();
 
 	assert(height_interval.valid());
@@ -215,7 +215,7 @@ void Editor_Tool_Noise_Height_Options_Menu::clicked_upper_decrease() {
 }
 
 
-void Editor_Tool_Noise_Height_Options_Menu::clicked_upper_increase() {
+void EditorToolNoiseHeightOptionsMenu::clicked_upper_increase() {
 	Widelands::HeightInterval height_interval = m_noise_tool.get_interval();
 
 	assert(m_noise_tool.get_interval().valid());
@@ -232,8 +232,8 @@ void Editor_Tool_Noise_Height_Options_Menu::clicked_upper_increase() {
 }
 
 
-void Editor_Tool_Noise_Height_Options_Menu::clicked_setto_decrease() {
-	Editor_Set_Height_Tool & set_tool = m_noise_tool.set_tool();
+void EditorToolNoiseHeightOptionsMenu::clicked_setto_decrease() {
+	EditorSetHeightTool & set_tool = m_noise_tool.set_tool();
 	Field::Height h = set_tool.get_interval().min;
 
 	assert(h == set_tool.get_interval().max);
@@ -248,8 +248,8 @@ void Editor_Tool_Noise_Height_Options_Menu::clicked_setto_decrease() {
 }
 
 
-void Editor_Tool_Noise_Height_Options_Menu::clicked_setto_increase() {
-	Editor_Set_Height_Tool & set_tool = m_noise_tool.set_tool();
+void EditorToolNoiseHeightOptionsMenu::clicked_setto_increase() {
+	EditorSetHeightTool & set_tool = m_noise_tool.set_tool();
 	Field::Height h = set_tool.get_interval().min;
 
 	assert(h == set_tool.get_interval().max);
