@@ -119,6 +119,9 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 			}
 		}
 
+		/** TRANSLATORS: %1% = terrain name, %2% = list of terrain types  */
+		tooltip = ((boost::format("%1%: %2%")) % terrain_descr.descname() % tooltip).str();
+
 		// Make sure we delete this later on.
 		offscreen_images->emplace_back(new_in_memory_image("dummy_hash", surf));
 		break;
