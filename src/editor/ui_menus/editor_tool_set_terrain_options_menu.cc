@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include <boost/format.hpp>
 #include <SDL_keysym.h>
 
 #include "base/i18n.h"
@@ -66,6 +67,9 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 
 	constexpr int kSmallPicHeight = 20;
 	constexpr int kSmallPicWidth = 20;
+
+	std::string tooltip;
+
 	for (size_t checkfor = 0; check[checkfor] >= 0; ++checkfor) {
 		const TerrainDescription::Type ter_is = terrain_descr.get_is();
 		if (ter_is != check[checkfor])
@@ -80,34 +84,48 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 		if (ter_is == TerrainDescription::GREEN) {
 			surf->blit(pt, green->surface(), Rect(0, 0, green->width(), green->height()));
 			pt.x += kSmallPicWidth + 1;
+			/** TRANSLATORS: This is a terrain type tooltip in the editor */
+			tooltip = _("Green");
 		} else {
 			if (ter_is & TerrainDescription::WATER) {
 				surf->blit(pt, water->surface(), Rect(0, 0, water->width(), water->height()));
 				pt.x += kSmallPicWidth + 1;
+				/** TRANSLATORS: This is a terrain type tooltip in the editor */
+				tooltip = _("Water");
 			}
-			if (ter_is & TerrainDescription::MOUNTAIN) {
+			else if (ter_is & TerrainDescription::MOUNTAIN) {
 				surf->blit(pt, mountain->surface(), Rect(0, 0, mountain->width(), mountain->height()));
 				pt.x += kSmallPicWidth + 1;
+				/** TRANSLATORS: This is a terrain type tooltip in the editor */
+				tooltip = _("Mountains");
 			}
 			if (ter_is & TerrainDescription::ACID) {
 				surf->blit(pt, dead->surface(), Rect(0, 0, dead->width(), dead->height()));
 				pt.x += kSmallPicWidth + 1;
+				/** TRANSLATORS: This is a terrain type tooltip in the editor */
+				tooltip = ((boost::format("%s %s")) % tooltip % _("Dead")).str();
 			}
 			if (ter_is & TerrainDescription::UNPASSABLE) {
 				surf->blit(
 				   pt, unpassable->surface(), Rect(0, 0, unpassable->width(), unpassable->height()));
 				pt.x += kSmallPicWidth + 1;
+				/** TRANSLATORS: This is a terrain type tooltip in the editor */
+				tooltip = ((boost::format("%s %s")) % tooltip % _("Unpassable")).str();
 			}
-			if (ter_is & TerrainDescription::DRY)
+			if (ter_is & TerrainDescription::DRY) {
 				surf->blit(pt, dry->surface(), Rect(0, 0, dry->width(), dry->height()));
+				/** TRANSLATORS: This is a terrain type tooltip in the editor */
+				 tooltip = ((boost::format("%s %s")) % tooltip % _("Treeless")).str();
+			}
 		}
+
 		// Make sure we delete this later on.
 		offscreen_images->emplace_back(new_in_memory_image("dummy_hash", surf));
 		break;
 	}
 
 	std::unique_ptr<const Image>& image = offscreen_images->back();
-	UI::Checkbox* cb = new UI::Checkbox(parent, Point(0, 0), image.get());
+	UI::Checkbox* cb = new UI::Checkbox(parent, Point(0, 0), image.get(), tooltip);
 	cb->set_desired_size(image->width() + 1, image->height() + 1);
 	return cb;
 }
