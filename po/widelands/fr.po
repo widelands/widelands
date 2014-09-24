@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-09-18 19:55+0100\n"
+"POT-Creation-Date: 2014-09-23 09:36+0200\n"
 "PO-Revision-Date: 2014-09-19 03:41+0000\n"
 "Last-Translator: SirVer <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-09-20 05:45+0000\n"
+"X-Launchpad-Export-Date: 2014-09-24 05:52+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: fr\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -378,7 +378,7 @@ msgstr "Descr :"
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:114
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:125
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:56
-#: ../../src/scripting/lua_game.cc:405 ../../src/ui_basic/helpwindow.cc:86
+#: ../../src/scripting/lua_game.cc:393 ../../src/ui_basic/helpwindow.cc:86
 #: ../../src/ui_basic/messagebox.cc:90
 #: ../../src/ui_fsmenu/campaign_select.cc:76
 #: ../../src/ui_fsmenu/campaign_select.cc:283
@@ -1804,7 +1804,7 @@ msgstr ""
 "Le client %1$s sera automatiquement expulsé, si aucune réponse n'est reçue "
 "dans les %2$s."
 
-#: ../../src/scripting/lua_game.cc:1000
+#: ../../src/scripting/lua_game.cc:988
 #, c-format
 msgid "%1$s (achieved %2$s)"
 msgstr "%1$s (achevé %2$s)"
