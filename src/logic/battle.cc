@@ -29,8 +29,8 @@
 #include "logic/game.h"
 #include "logic/player.h"
 #include "logic/soldier.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 
 namespace Widelands {
 
@@ -77,29 +77,29 @@ Battle::Battle(Game & game, Soldier & First, Soldier & Second) :
 }
 
 
-void Battle::init (Editor_Game_Base & egbase)
+void Battle::init (EditorGameBase & egbase)
 {
 	MapObject::init(egbase);
 
 	m_creationtime = egbase.get_gametime();
 
 	if (Battle* battle = m_first ->getBattle())
-		battle->cancel(ref_cast<Game, Editor_Game_Base>(egbase), *m_first);
-	m_first->setBattle(ref_cast<Game, Editor_Game_Base>(egbase), this);
+		battle->cancel(ref_cast<Game, EditorGameBase>(egbase), *m_first);
+	m_first->setBattle(ref_cast<Game, EditorGameBase>(egbase), this);
 	if (Battle* battle = m_second->getBattle())
-		battle->cancel(ref_cast<Game, Editor_Game_Base>(egbase), *m_second);
-	m_second->setBattle(ref_cast<Game, Editor_Game_Base>(egbase), this);
+		battle->cancel(ref_cast<Game, EditorGameBase>(egbase), *m_second);
+	m_second->setBattle(ref_cast<Game, EditorGameBase>(egbase), this);
 }
 
 
-void Battle::cleanup (Editor_Game_Base & egbase)
+void Battle::cleanup (EditorGameBase & egbase)
 {
 	if (m_first) {
-		m_first ->setBattle(ref_cast<Game, Editor_Game_Base>(egbase), nullptr);
+		m_first ->setBattle(ref_cast<Game, EditorGameBase>(egbase), nullptr);
 		m_first  = nullptr;
 	}
 	if (m_second) {
-		m_second->setBattle(ref_cast<Game, Editor_Game_Base>(egbase), nullptr);
+		m_second->setBattle(ref_cast<Game, EditorGameBase>(egbase), nullptr);
 		m_second = nullptr;
 	}
 
@@ -365,22 +365,22 @@ void Battle::Loader::load_pointers()
 		if (m_first)
 			try {
 				battle.m_first = &mol().get<Soldier>(m_first);
-			} catch (const _wexception & e) {
+			} catch (const WException & e) {
 				throw wexception("soldier 1 (%u): %s", m_first, e.what());
 			}
 		if (m_second)
 			try {
 				battle.m_second = &mol().get<Soldier>(m_second);
-			} catch (const _wexception & e) {
+			} catch (const WException & e) {
 				throw wexception("soldier 2 (%u): %s", m_second, e.what());
 			}
-	} catch (const _wexception & e) {
+	} catch (const WException & e) {
 		throw wexception("battle: %s", e.what());
 	}
 }
 
 void Battle::save
-	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
+	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(HeaderBattle);
 	fw.Unsigned8(BATTLE_SAVEGAME_VERSION);
@@ -399,7 +399,7 @@ void Battle::save
 
 
 MapObject::Loader * Battle::load
-	(Editor_Game_Base & egbase, MapMapObjectLoader & mol, FileRead & fr)
+	(EditorGameBase & egbase, MapObjectLoader & mol, FileRead & fr)
 {
 	std::unique_ptr<Loader> loader(new Loader);
 
@@ -411,7 +411,7 @@ MapObject::Loader * Battle::load
 			loader->init(egbase, mol, *new Battle);
 			loader->load(fr, version);
 		} else
-			throw game_data_error("unknown/unhandled version %u", version);
+			throw GameDataError("unknown/unhandled version %u", version);
 	} catch (const std::exception & e) {
 		throw wexception("Loading Battle: %s", e.what());
 	}

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-07-16 06:11+0000\n"
-"PO-Revision-Date: 2014-07-21 13:18+0000\n"
+"POT-Creation-Date: 2014-09-18 18:55+0000\n"
+"PO-Revision-Date: 2014-08-05 11:09+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-22 05:43+0000\n"
-"X-Generator: Launchpad (build 17114)\n"
+"X-Launchpad-Export-Date: 2014-09-19 05:54+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 "Language: gd\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -284,18 +284,19 @@ msgstr ""
 "i is thèid a cleachdadh sa champa trèanaidh – le biadh – gus ionnsaigh nan "
 "saighdearan a thrèanadh o leibheil 1 gu leibheil 2."
 
-#: ../../tribes/empire/arena/conf:29
-#: ../../tribes/empire/colosseum/conf:35
-#: ../../tribes/empire/trainingcamp/conf:46
-msgid "Sleep"
-msgstr "'Na chadal"
-
 #: ../../tribes/empire/arena/conf:30
 #: ../../tribes/empire/colosseum/conf:36
-msgid "Upgrade soldier evade from level 0 to level 1"
-msgstr "àrdachadh teàrnadh saighdeir o leibheil 0 gu leibheil 1"
+#: ../../tribes/empire/trainingcamp/conf:47
+msgid "sleeping"
+msgstr "cadal"
+
+#: ../../tribes/empire/arena/conf:32
+#: ../../tribes/empire/colosseum/conf:38
+msgid "upgrading soldier evade from level 0 to level 1"
+msgstr "teàrnadh saighdeir àrdachadh o leibheil 0 gu leibheil 1"
 
 #: ../../tribes/empire/arena/help.lua:15
+#: ../../tribes/empire/armorsmithy/help.lua:13
 #: ../../tribes/empire/armorsmithy/help.lua:17
 #: ../../tribes/empire/bakery/help.lua:13
 #: ../../tribes/empire/bakery/help.lua:17
@@ -303,9 +304,9 @@ msgstr "àrdachadh teàrnadh saighdeir o leibheil 0 gu leibheil 1"
 #: ../../tribes/empire/barrier/help.lua:13
 #: ../../tribes/empire/brewery/help.lua:13
 #: ../../tribes/empire/brewery/help.lua:17
-#: ../../tribes/empire/burners_house/help.lua:13
-#: ../../tribes/empire/burners_house/help.lua:17
 #: ../../tribes/empire/castle/help.lua:13
+#: ../../tribes/empire/charcoal_kiln/help.lua:13
+#: ../../tribes/empire/charcoal_kiln/help.lua:17
 #: ../../tribes/empire/coalmine/help.lua:13
 #: ../../tribes/empire/colosseum/help.lua:15
 #: ../../tribes/empire/deep_coalmine/help.lua:13
@@ -322,21 +323,22 @@ msgstr "àrdachadh teàrnadh saighdeir o leibheil 0 gu leibheil 1"
 #: ../../tribes/empire/fortress/help.lua:13
 #: ../../tribes/empire/goldmine/help.lua:13
 #: ../../tribes/empire/headquarters/help.lua:13
-#: ../../tribes/empire/headquarters/help.lua:17
+#: ../../tribes/empire/headquarters/help.lua:18
 #: ../../tribes/empire/headquarters_shipwreck/help.lua:13
-#: ../../tribes/empire/headquarters_shipwreck/help.lua:17
+#: ../../tribes/empire/headquarters_shipwreck/help.lua:18
 #: ../../tribes/empire/hunters_house/help.lua:13
 #: ../../tribes/empire/inn/help.lua:13
 #: ../../tribes/empire/inn/help.lua:17
 #: ../../tribes/empire/lumberjacks_house/help.lua:13
 #: ../../tribes/empire/marblemine/help.lua:13
+#: ../../tribes/empire/mill/help.lua:13
 #: ../../tribes/empire/mill/help.lua:17
 #: ../../tribes/empire/oremine/help.lua:13
 #: ../../tribes/empire/outpost/help.lua:13
 #: ../../tribes/empire/piggery/help.lua:13
 #: ../../tribes/empire/piggery/help.lua:17
 #: ../../tribes/empire/port/help.lua:13
-#: ../../tribes/empire/port/help.lua:18
+#: ../../tribes/empire/port/help.lua:17
 #: ../../tribes/empire/quarry/help.lua:13
 #: ../../tribes/empire/sawmill/help.lua:13
 #: ../../tribes/empire/sawmill/help.lua:17
@@ -345,7 +347,8 @@ msgstr "àrdachadh teàrnadh saighdeir o leibheil 0 gu leibheil 1"
 #: ../../tribes/empire/sentry/help.lua:13
 #: ../../tribes/empire/sheepfarm/help.lua:13
 #: ../../tribes/empire/sheepfarm/help.lua:17
-#: ../../tribes/empire/shipyard/help.lua:18
+#: ../../tribes/empire/shipyard/help.lua:13
+#: ../../tribes/empire/shipyard/help.lua:17
 #: ../../tribes/empire/smelting_works/help.lua:13
 #: ../../tribes/empire/stonemasons_house/help.lua:13
 #: ../../tribes/empire/stonemasons_house/help.lua:17
@@ -357,7 +360,9 @@ msgstr "àrdachadh teàrnadh saighdeir o leibheil 0 gu leibheil 1"
 #: ../../tribes/empire/trainingcamp/help.lua:15
 #: ../../tribes/empire/vineyard/help.lua:13
 #: ../../tribes/empire/warehouse/help.lua:13
+#: ../../tribes/empire/weaponsmithy/help.lua:13
 #: ../../tribes/empire/weaponsmithy/help.lua:17
+#: ../../tribes/empire/weaving-mill/help.lua:13
 #: ../../tribes/empire/well/help.lua:13
 #: ../../tribes/empire/winery/help.lua:13
 #: ../../tribes/empire/winery/help.lua:17
@@ -388,25 +393,26 @@ msgstr ""
 "Cha ghabh saighdearan na h-impireachd trèanadh ann an \"Dìon\" agus bidh an "
 "leibheil tùsail aca gu buan."
 
-#: ../../tribes/empire/arena/help.lua:27
-#: ../../tribes/empire/colosseum/help.lua:27
+#: ../../tribes/empire/arena/help.lua:28
+#: ../../tribes/empire/colosseum/help.lua:28
 msgid "Evade Training:"
 msgstr "Trèanadh teàrnaidh:"
 
-#: ../../tribes/empire/arena/help.lua:37
+#: ../../tribes/empire/arena/help.lua:38
 #: ../../tribes/empire/armorsmithy/help.lua:29
 #: ../../tribes/empire/bakery/help.lua:30
 #: ../../tribes/empire/brewery/help.lua:29
-#: ../../tribes/empire/burners_house/help.lua:29
+#: ../../tribes/empire/charcoal_kiln/help.lua:29
 #: ../../tribes/empire/coalmine/help.lua:30
-#: ../../tribes/empire/colosseum/help.lua:37
+#: ../../tribes/empire/colosseum/help.lua:38
 #: ../../tribes/empire/deep_coalmine/help.lua:30
 #: ../../tribes/empire/deep_goldmine/help.lua:29
 #: ../../tribes/empire/deep_marblemine/help.lua:29
 #: ../../tribes/empire/deep_oremine/help.lua:29
-#: ../../tribes/empire/donkeyfarm/help.lua:30
+#: ../../tribes/empire/donkeyfarm/help.lua:29
 #: ../../tribes/empire/farm/help.lua:29
 #: ../../tribes/empire/fishers_house/help.lua:30
+#: ../../tribes/empire/foresters_house/help.lua:30
 #: ../../tribes/empire/goldmine/help.lua:30
 #: ../../tribes/empire/hunters_house/help.lua:30
 #: ../../tribes/empire/inn/help.lua:29
@@ -415,17 +421,17 @@ msgstr "Trèanadh teàrnaidh:"
 #: ../../tribes/empire/mill/help.lua:30
 #: ../../tribes/empire/oremine/help.lua:30
 #: ../../tribes/empire/piggery/help.lua:29
-#: ../../tribes/empire/port/help.lua:27
+#: ../../tribes/empire/port/help.lua:26
 #: ../../tribes/empire/quarry/help.lua:29
 #: ../../tribes/empire/sawmill/help.lua:29
 #: ../../tribes/empire/scouts_house/help.lua:29
 #: ../../tribes/empire/sheepfarm/help.lua:29
-#: ../../tribes/empire/shipyard/help.lua:30
+#: ../../tribes/empire/shipyard/help.lua:29
 #: ../../tribes/empire/smelting_works/help.lua:29
 #: ../../tribes/empire/stonemasons_house/help.lua:29
 #: ../../tribes/empire/tavern/help.lua:29
 #: ../../tribes/empire/toolsmithy/help.lua:29
-#: ../../tribes/empire/trainingcamp/help.lua:44
+#: ../../tribes/empire/trainingcamp/help.lua:46
 #: ../../tribes/empire/vineyard/help.lua:29
 #: ../../tribes/empire/weaponsmithy/help.lua:29
 #: ../../tribes/empire/weaving-mill/help.lua:29
@@ -448,75 +454,50 @@ msgstr ""
 msgid "Produces armor for the soldiers."
 msgstr "Nì e armachd airson nan saighdearan."
 
-#: ../../tribes/empire/armorsmithy/conf:31
-msgid "Produce helm"
-msgstr "dèanamh clogaide"
-
 #: ../../tribes/empire/armorsmithy/conf:32
-msgid "Produce armor"
-msgstr "dèanamh armachd"
-
-#: ../../tribes/empire/armorsmithy/conf:33
-msgid "Produce chain armor"
-msgstr "dèanamh màillich"
+msgid "forging a helm"
+msgstr "clogaid a dhèanamh"
 
 #: ../../tribes/empire/armorsmithy/conf:34
-msgid "Produce plate armor"
-msgstr "dèanamh lùirich meatailt"
+msgid "forging an armor"
+msgstr "armachd a dhèanamh"
 
-#: ../../tribes/empire/armorsmithy/conf:35
-#: ../../tribes/empire/bakery/conf:24
-#: ../../tribes/empire/brewery/conf:25
-#: ../../tribes/empire/burners_house/conf:24
-#: ../../tribes/empire/coalmine/conf:25
-#: ../../tribes/empire/deep_coalmine/conf:26
-#: ../../tribes/empire/deep_goldmine/conf:26
-#: ../../tribes/empire/deep_marblemine/conf:27
-#: ../../tribes/empire/deep_oremine/conf:26
-#: ../../tribes/empire/donkeyfarm/conf:25
-#: ../../tribes/empire/farm/conf:26
-#: ../../tribes/empire/fishers_house/conf:20
-#: ../../tribes/empire/foresters_house/conf:20
-#: ../../tribes/empire/goldmine/conf:26
-#: ../../tribes/empire/hunters_house/conf:19
-#: ../../tribes/empire/inn/conf:27
-#: ../../tribes/empire/lumberjacks_house/conf:20
-#: ../../tribes/empire/marblemine/conf:29
-#: ../../tribes/empire/mill/conf:24
-#: ../../tribes/empire/oremine/conf:26
-#: ../../tribes/empire/piggery/conf:25
-#: ../../tribes/empire/quarry/conf:22
-#: ../../tribes/empire/sawmill/conf:23
-#: ../../tribes/empire/scouts_house/conf:20
-#: ../../tribes/empire/sheepfarm/conf:24
-#: ../../tribes/empire/shipyard/conf:28
-#: ../../tribes/empire/smelting_works/conf:28
-#: ../../tribes/empire/stonemasons_house/conf:24
-#: ../../tribes/empire/tavern/conf:28
-#: ../../tribes/empire/toolsmithy/conf:49
-#: ../../tribes/empire/vineyard/conf:26
-#: ../../tribes/empire/weaponsmithy/conf:38
-#: ../../tribes/empire/weaving-mill/conf:20
-#: ../../tribes/empire/well/conf:21
-#: ../../tribes/empire/winery/conf:26
-msgid "Work"
+#: ../../tribes/empire/armorsmithy/conf:36
+msgid "forging a chain armor"
+msgstr "màilleach a dhèanamh"
+
+#: ../../tribes/empire/armorsmithy/conf:38
+msgid "forging a plate armor"
+msgstr "lùireach mheatailt a dhèanamh"
+
+#: ../../tribes/empire/armorsmithy/conf:40
+#: ../../tribes/empire/bakery/conf:25
+#: ../../tribes/empire/charcoal_kiln/conf:25
+#: ../../tribes/empire/farm/conf:29
+#: ../../tribes/empire/foresters_house/conf:21
+#: ../../tribes/empire/inn/conf:30
+#: ../../tribes/empire/lumberjacks_house/conf:21
+#: ../../tribes/empire/marblemine/conf:32
+#: ../../tribes/empire/quarry/conf:25
+#: ../../tribes/empire/sawmill/conf:24
+#: ../../tribes/empire/shipyard/conf:30
+#: ../../tribes/empire/smelting_works/conf:31
+#: ../../tribes/empire/stonemasons_house/conf:25
+#: ../../tribes/empire/toolsmithy/conf:62
+#: ../../tribes/empire/vineyard/conf:29
+#: ../../tribes/empire/weaponsmithy/conf:44
+#: ../../tribes/empire/well/conf:22
+#: ../../tribes/empire/winery/conf:27
+msgid "working"
 msgstr "obair"
 
-#: ../../tribes/empire/ax/conf:1
-msgid ""
-"The ax is the tool for the lumberjack. It is produced by the toolsmith."
-msgstr "Tha coilltearan feumach air an tuagh seo. Nì an gobha acainnean e."
-
-#: ../../tribes/empire/baker/conf:1
-msgid "Bakes bread for workers."
-msgstr "Fuinidh e aran airson nan obraichean."
-
+#: ../../tribes/empire/armorsmithy/help.lua:13
 #: ../../tribes/empire/bakery/help.lua:13
 #: ../../tribes/empire/barracks/help.lua:13
 #: ../../tribes/empire/barrier/help.lua:13
 #: ../../tribes/empire/brewery/help.lua:13
-#: ../../tribes/empire/burners_house/help.lua:13
 #: ../../tribes/empire/castle/help.lua:13
+#: ../../tribes/empire/charcoal_kiln/help.lua:13
 #: ../../tribes/empire/donkeyfarm/help.lua:13
 #: ../../tribes/empire/farm/help.lua:13
 #: ../../tribes/empire/fishers_house/help.lua:13
@@ -529,6 +510,7 @@ msgstr "Fuinidh e aran airson nan obraichean."
 #: ../../tribes/empire/inn/help.lua:13
 #: ../../tribes/empire/lumberjacks_house/help.lua:13
 #: ../../tribes/empire/marblemine/help.lua:13
+#: ../../tribes/empire/mill/help.lua:13
 #: ../../tribes/empire/oremine/help.lua:13
 #: ../../tribes/empire/outpost/help.lua:13
 #: ../../tribes/empire/piggery/help.lua:13
@@ -538,6 +520,7 @@ msgstr "Fuinidh e aran airson nan obraichean."
 #: ../../tribes/empire/scouts_house/help.lua:13
 #: ../../tribes/empire/sentry/help.lua:13
 #: ../../tribes/empire/sheepfarm/help.lua:13
+#: ../../tribes/empire/shipyard/help.lua:13
 #: ../../tribes/empire/smelting_works/help.lua:13
 #: ../../tribes/empire/stonemasons_house/help.lua:13
 #: ../../tribes/empire/tavern/help.lua:13
@@ -546,10 +529,21 @@ msgstr "Fuinidh e aran airson nan obraichean."
 #: ../../tribes/empire/trainingcamp/help.lua:15
 #: ../../tribes/empire/vineyard/help.lua:13
 #: ../../tribes/empire/warehouse/help.lua:13
+#: ../../tribes/empire/weaponsmithy/help.lua:13
+#: ../../tribes/empire/weaving-mill/help.lua:13
 #: ../../tribes/empire/well/help.lua:13
 #: ../../tribes/empire/winery/help.lua:13
 msgid "Source needed"
 msgstr "Tha tùs a dhìth"
+
+#: ../../tribes/empire/ax/conf:1
+msgid ""
+"The ax is the tool for the lumberjack. It is produced by the toolsmith."
+msgstr "Tha coilltearan feumach air an tuagh seo. Nì an gobha acainnean e."
+
+#: ../../tribes/empire/baker/conf:1
+msgid "Bakes bread for workers."
+msgstr "Fuinidh e aran airson nan obraichean."
 
 #: ../../tribes/empire/barracks/conf:7
 msgid "Your soldiers have occupied your barracks."
@@ -625,13 +619,13 @@ msgstr ""
 msgid "Produces beer or wine."
 msgstr "Nì e leann no fìon."
 
+#: ../../tribes/empire/brewery/conf:26
+msgid "brewing"
+msgstr "togail grùdaireachd"
+
 #: ../../tribes/empire/builder/conf:1
 msgid "Works at construction sites to raise new buildings."
 msgstr "Obraichidh e aig làraichean-thogail gus togalaichean ùra a thogail."
-
-#: ../../tribes/empire/burner/conf:1
-msgid "Burns coal."
-msgstr "Loisgidh e gual."
 
 #: ../../tribes/empire/carpenter/conf:1
 msgid "Works in the sawmill."
@@ -656,6 +650,10 @@ msgstr ""
 "sa champa trèanaidh – le biadh – gus saighdearan a thrèanadh o shlàinte "
 "leibheil 2 gu slàinte leibheil 3."
 
+#: ../../tribes/empire/charcoal_burner/conf:1
+msgid "Burns coal."
+msgstr "Loisgidh e gual."
+
 #: ../../tribes/empire/cloth/conf:1
 msgid ""
 "Cloth is needed to build several buildings. It is also consumed in the armor "
@@ -668,20 +666,44 @@ msgstr ""
 msgid ""
 "The fires of the Empire smelting works, armor smithies and weapon smithies "
 "are usually fed with coal. It is mined in coal mines or produced by a "
-"charcoal burner out of logs."
+"charcoal kiln out of logs."
 msgstr ""
 "Thèid teintean aig ceàrdach leaghadair, ceàrdach armachd is ceàrdach arm na "
 "h-Impireachd a bhiadhadh le gual mar as trice. Tochlaidh thu gual à mèinn "
-"guail no nì thu de dh'fhiodh e ann an sloc gual-fhiodha."
+"guail no nì thu de dh'fhiodh e ann an àth-ghuail."
+
+#: ../../tribes/empire/coalmine/conf:26
+#: ../../tribes/empire/deep_coalmine/conf:27
+#: ../../tribes/empire/deep_goldmine/conf:27
+#: ../../tribes/empire/deep_marblemine/conf:28
+#: ../../tribes/empire/deep_oremine/conf:27
+#: ../../tribes/empire/goldmine/conf:27
+#: ../../tribes/empire/oremine/conf:27
+msgid "mining"
+msgstr "stòras a thogail"
+
+#: ../../tribes/empire/coalmine/conf:40
+#: ../../tribes/empire/deep_coalmine/conf:41
+msgid "Main Coal Vein Exhausted"
+msgstr "Tha prìomh-chuisle guail air a caitheamh"
+
+#: ../../tribes/empire/coalmine/conf:41
+msgid ""
+"This coal mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr ""
+"Tha cuisle na mèinne guail seo air a caitheamh. Bi an dùil gum faigh thu "
+"mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a leasachadh, a thoirt às "
+"a chèile no a mhilleadh."
 
 #: ../../tribes/empire/coalmine/help.lua:17
 #: ../../tribes/empire/deep_coalmine/help.lua:18
 msgid "Digs coal out of the ground in mountain terrain."
 msgstr "Tochlaidh i gual às na beanntan."
 
-#: ../../tribes/empire/colosseum/conf:37
-msgid "Upgrade soldier evade from level 1 to level 2"
-msgstr "àrdachadh teàrnadh saighdeir o leibheil 1 gu leibheil 2"
+#: ../../tribes/empire/colosseum/conf:40
+msgid "upgrading soldier evade from level 1 to level 2"
+msgstr "teàrnadh saighdeir àrdachadh o leibheil 1 gu leibheil 2"
 
 #: ../../tribes/empire/conf:4
 msgid "The Widelands Development Team"
@@ -988,8 +1010,8 @@ msgid "Builder"
 msgstr "Togalaiche"
 
 #: ../../tribes/empire/conf:110
-msgid "Burner"
-msgstr "Loisgeadair"
+msgid "Charcoal Burner"
+msgstr "Loisgeadair fiodha"
 
 #: ../../tribes/empire/conf:111
 msgid "Carpenter"
@@ -1145,6 +1167,7 @@ msgid "Sentry"
 msgstr "Freiceadan"
 
 #: ../../tribes/empire/conf:158
+#: ../../tribes/empire/scripting/sc00_headquarters.lua:10
 msgid "Headquarters"
 msgstr "Prìomh-àras"
 
@@ -1225,8 +1248,8 @@ msgid "Tavern"
 msgstr "Taigh-tàrn"
 
 #: ../../tribes/empire/conf:180
-msgid "Charcoal Burner"
-msgstr "Loisgeadair fiodha"
+msgid "Charcoal Kiln"
+msgstr "Àth-ghuail"
 
 #: ../../tribes/empire/conf:181
 msgid "Smelting Works"
@@ -1320,22 +1343,69 @@ msgstr "Raon spòrs"
 msgid "Training Camp"
 msgstr "Campa trèanaidh"
 
-#: ../../tribes/empire/conf:217
-msgid "Headquarters Medium"
-msgstr "Prìomh-àras meadhanach"
+#: ../../tribes/empire/deep_coalmine/conf:42
+msgid ""
+"This coal mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
+msgstr ""
+"Tha prìomh-chuisle na mèinne guail seo air a caitheamh. Bi an dùil gum faigh "
+"thu mòran nas lugha a-mach aiste a-nis. Cha ghabh a leasachadh tuilleadh, "
+"mar sin bu chòir dhut a thoirt às a chèile no a mhilleadh."
 
-#: ../../tribes/empire/conf:218
-msgid "Castle Village"
-msgstr "Baile caisteil"
+#: ../../tribes/empire/deep_goldmine/conf:41
+#: ../../tribes/empire/goldmine/conf:41
+msgid "Main Gold Vein Exhausted"
+msgstr "Tha prìomh-chuisle òir air a caitheamh"
+
+#: ../../tribes/empire/deep_goldmine/conf:42
+msgid ""
+"This gold mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
+msgstr ""
+"Tha prìomh-chuisle na mèinne òir seo air a caitheamh. Bi an dùil gum faigh "
+"thu mòran nas lugha a-mach aiste a-nis. Cha ghabh a leasachadh tuilleadh, "
+"mar sin bu chòir dhut a thoirt às a chèile no a mhilleadh."
 
 #: ../../tribes/empire/deep_goldmine/help.lua:17
 #: ../../tribes/empire/goldmine/help.lua:17
 msgid "Digs gold ore out of the ground in mountain terrain."
 msgstr "Tochlaidh i clach-òir às na beanntan."
 
+#: ../../tribes/empire/deep_marblemine/conf:42
+#: ../../tribes/empire/marblemine/conf:57
+msgid "Main Marble Vein Exhausted"
+msgstr "Tha prìomh-chuisle marmoir air a caitheamh"
+
+#: ../../tribes/empire/deep_marblemine/conf:43
+msgid ""
+"This marble mine’s main vein is exhausted. Expect strongly diminished "
+"returns on investment. This mine can’t be enhanced any further, so you "
+"should consider dismantling or destroying it."
+msgstr ""
+"Tha prìomh-chuisle na mèinne marmoir seo air a caitheamh. Bi an dùil gum "
+"faigh thu mòran nas lugha a-mach aiste a-nis. Cha ghabh a leasachadh "
+"tuilleadh, mar sin bu chòir dhut a thoirt às a chèile no a mhilleadh."
+
 #: ../../tribes/empire/deep_marblemine/help.lua:17
 msgid "Digs marble and stones out of the ground in mountain terrain."
 msgstr "Tochlaidh i clachan 's marmor às na beanntan."
+
+#: ../../tribes/empire/deep_oremine/conf:41
+#: ../../tribes/empire/oremine/conf:41
+msgid "Main Iron Vein Exhausted"
+msgstr "Tha prìomh-chuisle iarainn air a caitheamh"
+
+#: ../../tribes/empire/deep_oremine/conf:42
+msgid ""
+"This iron mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. This mine can’t be enhanced any further, so you should "
+"consider dismantling or destroying it."
+msgstr ""
+"Tha prìomh-chuisle na mèinne iarainn seo air a caitheamh. Bi an dùil gum "
+"faigh thu mòran nas lugha a-mach aiste a-nis. Cha ghabh a leasachadh "
+"tuilleadh, mar sin bu chòir dhut a thoirt às a chèile no a mhilleadh."
 
 #: ../../tribes/empire/deep_oremine/help.lua:17
 #: ../../tribes/empire/oremine/help.lua:17
@@ -1354,17 +1424,33 @@ msgstr ""
 msgid "Breeds cute and helpful donkeys"
 msgstr "Tàrmaichidh e asalan stampa cuideachail"
 
+#: ../../tribes/empire/donkeyfarm/conf:26
+msgid "rearing donkeys"
+msgstr "asal àrachadh"
+
 #: ../../tribes/empire/donkeyfarm/help.lua:17
 msgid "Breeds donkeys for adding them to the transportation system."
 msgstr "Togaidh e asalan ach an cuidich iad thu gus bathar a ghiùlan."
 
-#: ../../tribes/empire/farm/conf:24
-msgid "Plant wheat"
-msgstr "Cuir cruithneachd"
-
 #: ../../tribes/empire/farm/conf:25
-msgid "Harvest wheat"
-msgstr "Buain cruithneachd"
+msgid "planting wheat"
+msgstr "cruithneachd a chur"
+
+#: ../../tribes/empire/farm/conf:27
+msgid "harvesting wheat"
+msgstr "cruithneachd a bhuain"
+
+#: ../../tribes/empire/farm/conf:46
+#: ../../tribes/empire/vineyard/conf:45
+msgid "Out of Fields"
+msgstr "Chan eil achadh ann"
+
+#: ../../tribes/empire/farm/conf:47
+msgid ""
+"The farmer working at this farm has no cleared soil to plant his seeds."
+msgstr ""
+"Chan eil tìr fosgailte ann ach an cuireadh an tuathanach a tha ag obair aig "
+"an tuathanas seo sìol."
 
 #: ../../tribes/empire/farm/help.lua:17
 #: ../../tribes/empire/vineyard/help.lua:17
@@ -1396,6 +1482,22 @@ msgstr ""
 #: ../../tribes/empire/fisher/conf:1
 msgid "Catches fish in the sea."
 msgstr "Togaidh e iasg on mhuir."
+
+#: ../../tribes/empire/fishers_house/conf:21
+msgid "fishing"
+msgstr "dol a dh'iasgach"
+
+#: ../../tribes/empire/fishers_house/conf:28
+msgid "Out of Fish"
+msgstr "Chan eil iasg ann"
+
+#: ../../tribes/empire/fishers_house/conf:29
+msgid ""
+"The fisher working in this fisher’s house can’t find any fish in his working "
+"radius."
+msgstr ""
+"Cha do lorg an t-iasgair a tha ag obair aig an taigh-iasgair seo iasg sam "
+"bith taobh a-staigh an raoin-obrach tuilleadh."
 
 #: ../../tribes/empire/fishers_house/help.lua:17
 msgid "Fishes on the coast near the house."
@@ -1439,10 +1541,6 @@ msgstr ""
 "Bidh an taigh planntair-choille feumach air rum shaor am broinn an raoin "
 "obrach aige gus na craobhan a chur ann."
 
-#: ../../tribes/empire/foresters_house/help.lua:30
-msgid "Calculaiton needed"
-msgstr ""
-
 #: ../../tribes/empire/fortress/conf:7
 msgid "Your soldiers have occupied your fortress."
 msgstr "Ghabh na saighdearan agad còmhnaidh san dùn agad."
@@ -1460,6 +1558,15 @@ msgstr ""
 "Is òr a' mheatailt as uasail; thèid armachd is airm a sgeadachadh leis. "
 "Thèid a shaothrachadh ann an ceàrdach leaghadair à chlach-òir is a giullachd "
 "ann an ceàrdach armachd is ann an ceàrdach arm."
+
+#: ../../tribes/empire/goldmine/conf:42
+msgid ""
+"This gold mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr ""
+"Tha cuisle na mèinne òir seo air a caitheamh. Bi an dùil gum faigh thu mòran "
+"nas lugha a-mach aiste a-nis. Bu chòir dhut a leasachadh, a thoirt às a "
+"chèile no a mhilleadh."
 
 #: ../../tribes/empire/goldore/conf:1
 msgid ""
@@ -1489,21 +1596,25 @@ msgstr ""
 "togalaiche, gobha armachd is gobha arm fear. Dèan cinnteach gu bheil cuid "
 "air fhàgail dhut an-còmhnaidh! Nì an gobha acainnean iad."
 
-#: ../../tribes/empire/headquarters/help.lua:16
-msgid "Accomodation for your people. Also stores your wares and tools."
-msgstr ""
-
 #: ../../tribes/empire/headquarters/help.lua:17
+msgid "Accommodation for your people. Also stores your wares and tools."
+msgstr ""
+"Seo àite-fuirich do mhuinntir. Cumaidh tu am bathar 's na acainnean agad ann "
+"cuideachd."
+
+#: ../../tribes/empire/headquarters/help.lua:18
 msgid "The headquarters is your main building."
 msgstr "'S e am prìomh togalach agad a th' anns a' phrìomh-àras."
 
-#: ../../tribes/empire/headquarters_shipwreck/help.lua:16
+#: ../../tribes/empire/headquarters_shipwreck/help.lua:17
 msgid ""
-"Although this ship ran aground, it still serves as accomodation for your "
+"Although this ship ran aground, it still serves as accommodation for your "
 "people. It also stores your wares and tools."
 msgstr ""
+"Ged a bhuail an long seo ri tìr, 's urrainn do mhuinntir fuireach ann "
+"fhathast. Cumaidh tu am bathar 's na h-acainnean agad ann cuideachd."
 
-#: ../../tribes/empire/headquarters_shipwreck/help.lua:17
+#: ../../tribes/empire/headquarters_shipwreck/help.lua:18
 msgid "The headquarters shipwreck is your main building."
 msgstr "'S e am prìomh togalach agad a th' anns an long bhriste seo."
 
@@ -1534,6 +1645,22 @@ msgstr ""
 msgid "The Hunter brings good meat to the colonists."
 msgstr "Bheir an sealgair feòil mhath dha na tuinichean."
 
+#: ../../tribes/empire/hunters_house/conf:20
+msgid "hunting"
+msgstr "dol a shealg"
+
+#: ../../tribes/empire/hunters_house/conf:28
+msgid "Out of Game"
+msgstr "Chan eil sitheann ann"
+
+#: ../../tribes/empire/hunters_house/conf:29
+msgid ""
+"The hunter working out of this hunter’s house can’t find any game in his "
+"working radius."
+msgstr ""
+"Cha do lorg an sealgair a tha a' fuireach san taigh-sealgair seo sitheann "
+"taobh a-staigh a raoin-obrach tuilleadh."
+
 #: ../../tribes/empire/hunters_house/help.lua:17
 msgid "Hunts animals to produce meat."
 msgstr "Sealgaidh e beathaichean gus feòil a dhèanamh."
@@ -1553,13 +1680,14 @@ msgstr ""
 "am marbh thu beathach sam bith leatha le aon bhuille. Cha chleachd ach "
 "sealgairean i."
 
-#: ../../tribes/empire/inn/conf:25
-msgid "Produce ration"
-msgstr "dèanamh greimeige"
-
 #: ../../tribes/empire/inn/conf:26
-msgid "Produce meal"
-msgstr "dèanamh mèis"
+#: ../../tribes/empire/tavern/conf:29
+msgid "preparing a ration"
+msgstr "ullachadh greimeige"
+
+#: ../../tribes/empire/inn/conf:28
+msgid "preparing a meal"
+msgstr "ullachadh mèis"
 
 #: ../../tribes/empire/innkeeper/conf:1
 msgid "Produces food for miners."
@@ -1604,16 +1732,30 @@ msgstr ""
 msgid ""
 "Logs are an important building material for the Empire. The lumberjacks fell "
 "the trees; foresters care for the supply of trees. Logs are also used by the "
-"charcoal burner, the toolsmithy and the sawmill."
+"charcoal kiln, the toolsmithy and the sawmill."
 msgstr ""
 "'S e stuth togail cudromach airson na h-Impireachd a th' ann am fiodh. Thèid "
 "na craobhan a leagail le coilltearan is gabhaidh planntairean-coille cùram "
-"dhe na craobhan. Cleachdaich an loisgeadair fiodha, a' cheàrdach acainnean "
-"is am muileann sàbhaidh fiodh cuideachd."
+"dhe na craobhan. Cleachdaich an àth-ghuail, a' cheàrdach acainnean is am "
+"muileann sàbhaidh fiodh cuideachd."
 
 #: ../../tribes/empire/lumberjack/conf:1
 msgid "Fells trees."
 msgstr "Leagaidh e craobhan."
+
+#: ../../tribes/empire/lumberjacks_house/conf:28
+msgid "Out of Trees"
+msgstr "Chan eil craobhan ann"
+
+#: ../../tribes/empire/lumberjacks_house/conf:29
+msgid ""
+"The lumberjack working at this lumberjack’s house can’t find any trees in "
+"his working radius. You should consider dismantling or destroying the "
+"building or building a forester’s house."
+msgstr ""
+"Cha do lorg an coilltear a tha ag obair aig an taigh coillteir seo craobh "
+"taobh a-staigh an raoin-obrach. Bu chòir dhut an togalach a thoirt às a "
+"chèile no a mhilleadh no taigh planntair-choille a thogail."
 
 #: ../../tribes/empire/lumberjacks_house/help.lua:16
 msgid "Fell trees in the surrounding area and process them into logs."
@@ -1645,15 +1787,23 @@ msgstr ""
 "orra airson a' mhòrchuid de thogalaichean mòra. Thèid an saothrachadh à "
 "marmor ann an taigh clachair."
 
-#: ../../tribes/empire/marblemine/conf:27
-#: ../../tribes/empire/quarry/conf:21
-msgid "Mine marble"
-msgstr "Tochail marmor"
-
 #: ../../tribes/empire/marblemine/conf:28
-#: ../../tribes/empire/quarry/conf:20
-msgid "Mine stone"
-msgstr "Tochail clachan"
+msgid "mining marble"
+msgstr "marmor a thogail"
+
+#: ../../tribes/empire/marblemine/conf:30
+msgid "mining stone"
+msgstr "clach a thogail"
+
+#: ../../tribes/empire/marblemine/conf:58
+msgid ""
+"This marble mine’s main vein is exhausted. Expect strongly diminished "
+"returns on investment. You should consider enhancing, dismantling or "
+"destroying it."
+msgstr ""
+"Tha cuisle na mèinne marmoir seo air a caitheamh. Bi an dùil gum faigh thu "
+"mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a leasachadh, a thoirt às "
+"a chèile no a mhilleadh."
 
 #: ../../tribes/empire/marblemine/help.lua:17
 msgid "Carve marble and stones out of the rock in mountain terrain."
@@ -1685,9 +1835,22 @@ msgstr ""
 "Tha dà thùs feòla ann: feòil-muice à failean is sitheann a shealgas an "
 "sealgair."
 
+#: ../../tribes/empire/mill/conf:25
+msgid "grinding wheat"
+msgstr "cruithneachd a bhleith"
+
 #: ../../tribes/empire/miller/conf:1
 msgid "Mills the wheat to produce flour."
 msgstr "Bleithidh seo a' chruithneachd gus flùr a shaothrachadh."
+
+#: ../../tribes/empire/oremine/conf:42
+msgid ""
+"This iron mine’s main vein is exhausted. Expect strongly diminished returns "
+"on investment. You should consider enhancing, dismantling or destroying it."
+msgstr ""
+"Tha cuisle na mèinne iarainn seo air a caitheamh. Bi an dùil gum faigh thu "
+"mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a leasachadh, a thoirt às "
+"a chèile no a mhilleadh."
 
 #: ../../tribes/empire/outpost/conf:7
 msgid "Your soldiers have occupied your outpost."
@@ -1705,6 +1868,10 @@ msgstr ""
 msgid "Breeds pigs."
 msgstr "Tàrmaichidh e mucan."
 
+#: ../../tribes/empire/piggery/conf:26
+msgid "raising pigs"
+msgstr "mucan àrachadh"
+
 #: ../../tribes/empire/plate_armor/conf:1
 msgid ""
 "The plate armor is the strongest armor an Empire soldier can have. It is "
@@ -1715,6 +1882,26 @@ msgstr ""
 "lùireach mheatailt. Saothraichidh tu ann an ceàrdach armachd i is thèid a "
 "cleachdadh sa champa trèanaidh – le biadh – gus saighdearan a thrèanadh o "
 "shlàinte leibheil 3 gu slàinte leibheil 4."
+
+#: ../../tribes/empire/quarry/conf:21
+msgid "quarrying stone"
+msgstr "clach a thochladh"
+
+#: ../../tribes/empire/quarry/conf:23
+msgid "quarrying marble"
+msgstr "marmor a thochladh"
+
+#: ../../tribes/empire/quarry/conf:46
+msgid "Out of Rocks"
+msgstr "Chan eil creagan ann"
+
+#: ../../tribes/empire/quarry/conf:47
+msgid ""
+"The stonemason working at this quarry can’t find any rocks in his working "
+"radius."
+msgstr ""
+"Chan urrainn dhan chlachair a tha ag obair aig a' choireall seo creag a lorg "
+"taobh a-staigh an raoin-obrach tuilleadh."
 
 #: ../../tribes/empire/quarry/help.lua:17
 msgid "Carves marble and stone out of rocks in the vicinity."
@@ -1747,19 +1934,19 @@ msgstr ""
 "An rabhadair a rabhas mun aineol mar a bheachdaicheas am beachdadair air "
 "nach eil fios no fàth air."
 
-#: ../../tribes/empire/scripting/sc00_headquarters_medium.lua:10
-msgid "Headquarters medium"
-msgstr "Prìomh-àras meadhanach"
+#: ../../tribes/empire/scouts_house/conf:21
+msgid "scouting"
+msgstr "rùrachadh"
 
-#: ../../tribes/empire/scripting/sc01_castle_village.lua:10
-msgid "Castle village"
-msgstr "Baile caisteil"
+#: ../../tribes/empire/scripting/sc01_fortified_village.lua:10
+msgid "Fortified Village"
+msgstr "Baile daingnichte"
 
-#: ../../tribes/empire/scripting/sc01_castle_village.lua:119
+#: ../../tribes/empire/scripting/sc01_fortified_village.lua:119
 msgid "Not enough space"
 msgstr "Chan eil rum gu leòr ann"
 
-#: ../../tribes/empire/scripting/sc01_castle_village.lua:120
+#: ../../tribes/empire/scripting/sc01_fortified_village.lua:120
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
@@ -1778,6 +1965,10 @@ msgstr "Tha tuathanaich feumach air an fhàl seo. Nì an gobha acainnean e."
 msgid "Your soldiers have occupied your sentry."
 msgstr "Ghabh na saighdearan agad còmhnaidh san fhreiceadan agad."
 
+#: ../../tribes/empire/sheepfarm/conf:25
+msgid "breeding sheep"
+msgstr "caora àrachadh"
+
 #: ../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheep."
 msgstr "A' cumail caoraich."
@@ -1790,9 +1981,9 @@ msgstr "Long muir-acainneach"
 msgid "Works at the shipyard and constructs new ships."
 msgstr "Obraichidh e aig a' chala is togaidh e longan ùra."
 
-#: ../../tribes/empire/shipyard/conf:27
-msgid "Constructing ship"
-msgstr "A' togail long"
+#: ../../tribes/empire/shipyard/conf:28
+msgid "constructing a ship"
+msgstr "long a thogail"
 
 #: ../../tribes/empire/shovel/conf:1
 msgid ""
@@ -1807,13 +1998,13 @@ msgstr ""
 msgid "Smelts iron."
 msgstr "Leaghaidh e iarann."
 
-#: ../../tribes/empire/smelting_works/conf:26
-msgid "Smelt iron"
-msgstr "Iarann air a leaghadh"
-
 #: ../../tribes/empire/smelting_works/conf:27
-msgid "Smelt gold"
-msgstr "Òr air a leaghadh"
+msgid "smelting iron"
+msgstr "iarann a leaghadh"
+
+#: ../../tribes/empire/smelting_works/conf:29
+msgid "smelting gold"
+msgstr "òr a leaghadh"
 
 #: ../../tribes/empire/smelting_works/help.lua:17
 msgid "Smelts iron ore into iron and gold ore into gold."
@@ -1841,53 +2032,53 @@ msgstr "Gearraidh e pìosan de ghraineal is marmor à chlachan."
 msgid "Produces tools for the workers."
 msgstr "Nì e acainnean airson nan obraichean."
 
-#: ../../tribes/empire/toolsmithy/conf:37
-msgid "Produce bread paddle"
-msgstr "dèanamh crainn-arain"
-
 #: ../../tribes/empire/toolsmithy/conf:38
-msgid "Produce fire tongs"
-msgstr "dèanamh clobha theine"
-
-#: ../../tribes/empire/toolsmithy/conf:39
-msgid "Produce fishing rod"
-msgstr "dèanamh slaite-iasgaich"
+msgid "making an ax"
+msgstr "tuagh a dhèanamh"
 
 #: ../../tribes/empire/toolsmithy/conf:40
-msgid "Produce hammer"
-msgstr "dèanamh ùird"
-
-#: ../../tribes/empire/toolsmithy/conf:41
-msgid "Produce kitchen tools"
-msgstr "dèanamh acainnean cidsin"
+msgid "making a basket"
+msgstr "basgaid a dhèanamh"
 
 #: ../../tribes/empire/toolsmithy/conf:42
-msgid "Produce pick"
-msgstr "dèanamh piocaide"
-
-#: ../../tribes/empire/toolsmithy/conf:43
-msgid "Produce scythe"
-msgstr "dèanamh fàil"
+msgid "making a bread paddle"
+msgstr "crann-arain a dhèanamh"
 
 #: ../../tribes/empire/toolsmithy/conf:44
-msgid "Produce shovel"
-msgstr "dèanamh sluasaide"
-
-#: ../../tribes/empire/toolsmithy/conf:45
-msgid "Produce hunting spear"
-msgstr "dèanamh slèigh seilg"
+msgid "making fire tongs"
+msgstr "clobha teine a dhèanamh"
 
 #: ../../tribes/empire/toolsmithy/conf:46
-msgid "Produce basket"
-msgstr "dèanamh basgaide"
-
-#: ../../tribes/empire/toolsmithy/conf:47
-msgid "Produce saw"
-msgstr "dèanamh sàibh"
+msgid "making a fishing rod"
+msgstr "slat-iasgaich a dhèanamh"
 
 #: ../../tribes/empire/toolsmithy/conf:48
-msgid "Produce ax"
-msgstr "dèanamh tuaighe"
+msgid "making a hammer"
+msgstr "òrd a dhèanamh"
+
+#: ../../tribes/empire/toolsmithy/conf:50
+msgid "making a hunting spear"
+msgstr "sleagh seilg a dhèanamh"
+
+#: ../../tribes/empire/toolsmithy/conf:52
+msgid "making kitchen tools"
+msgstr "acainnean cidsin a dhèanamh"
+
+#: ../../tribes/empire/toolsmithy/conf:54
+msgid "making a pick"
+msgstr "piocaid a dhèanamh"
+
+#: ../../tribes/empire/toolsmithy/conf:56
+msgid "making a saw"
+msgstr "sàbh a dhèanamh"
+
+#: ../../tribes/empire/toolsmithy/conf:58
+msgid "making a scythe"
+msgstr "fàl a dhèanamh"
+
+#: ../../tribes/empire/toolsmithy/conf:60
+msgid "making a shovel"
+msgstr "sluasaid a dhèanamh"
 
 #: ../../tribes/empire/tower/conf:7
 msgid "Your soldiers have occupied your tower."
@@ -1897,47 +2088,47 @@ msgstr "Ghabh na saighdearan agad còmhnaidh san tùr agad."
 msgid "Trains the soldiers."
 msgstr "Trèanaidh e na saighdearan."
 
-#: ../../tribes/empire/trainingcamp/conf:47
-msgid "Upgrade soldier attack from level 0 to level 1"
-msgstr "àrdachadh ionnsaigh saighdeir o leibheil 0 gu leibheil 1"
-
-#: ../../tribes/empire/trainingcamp/conf:48
-msgid "Upgrade soldier attack from level 1 to level 2"
-msgstr "àrdachadh ionnsaigh saighdeir o leibheil 1 gu leibheil 2"
-
 #: ../../tribes/empire/trainingcamp/conf:49
-msgid "Upgrade soldier attack from level 2 to level 3"
-msgstr "àrdachadh ionnsaigh saighdeir o leibheil 2 gu leibheil 3"
-
-#: ../../tribes/empire/trainingcamp/conf:50
-msgid "Upgrade soldier attack from level 3 to level 4"
-msgstr "àrdachadh ionnsaigh saighdeir o leibheil 3 gu leibheil 4"
+msgid "upgrading soldier attack from level 0 to level 1"
+msgstr "ionnsaigh saighdeir àrdachadh o leibheil 0 gu leibheil 1"
 
 #: ../../tribes/empire/trainingcamp/conf:51
-msgid "Upgrade soldier health from level 0 to level 1"
-msgstr "àrdachadh slàinte saighdeir o leibheil 0 gu leibheil 1"
-
-#: ../../tribes/empire/trainingcamp/conf:52
-msgid "Upgrade soldier health from level 1 to level 2"
-msgstr "àrdachadh slàinte saighdeir o leibheil 1 gu leibheil 2"
+msgid "upgrading soldier attack from level 1 to level 2"
+msgstr "ionnsaigh saighdeir àrdachadh o leibheil 1 gu leibheil 2"
 
 #: ../../tribes/empire/trainingcamp/conf:53
-msgid "Upgrade soldier health from level 2 to level 3"
-msgstr "àrdachadh slàinte saighdeir o leibheil 2 gu leibheil 3"
+msgid "upgrading soldier attack from level 2 to level 3"
+msgstr "ionnsaigh saighdeir àrdachadh o leibheil 2 gu leibheil 3"
 
-#: ../../tribes/empire/trainingcamp/conf:54
-msgid "Upgrade soldier health from level 3 to level 4"
-msgstr "àrdachadh slàinte saighdeir o leibheil 3 gu leibheil 4"
+#: ../../tribes/empire/trainingcamp/conf:55
+msgid "upgrading soldier attack from level 3 to level 4"
+msgstr "ionnsaigh saighdeir àrdachadh o leibheil 3 gu leibheil 4"
+
+#: ../../tribes/empire/trainingcamp/conf:57
+msgid "upgrading soldier health from level 0 to level 1"
+msgstr "slàinte saighdeir àrdachadh o leibheil 0 gu leibheil 1"
+
+#: ../../tribes/empire/trainingcamp/conf:59
+msgid "upgrading soldier health from level 1 to level 2"
+msgstr "slàinte saighdeir àrdachadh o leibheil 1 gu leibheil 2"
+
+#: ../../tribes/empire/trainingcamp/conf:61
+msgid "upgrading soldier health from level 2 to level 3"
+msgstr "slàinte saighdeir àrdachadh o leibheil 2 gu leibheil 3"
+
+#: ../../tribes/empire/trainingcamp/conf:63
+msgid "upgrading soldier health from level 3 to level 4"
+msgstr "slàinte saighdeir àrdachadh o leibheil 3 gu leibheil 4"
 
 #: ../../tribes/empire/trainingcamp/help.lua:19
 msgid "Trains soldiers in ‘Attack’ and in ‘Health’."
 msgstr "Trèanaidh e \"Ionnsaigh\" 's \"Slàinte\" nan saighdearan."
 
-#: ../../tribes/empire/trainingcamp/help.lua:27
+#: ../../tribes/empire/trainingcamp/help.lua:29
 msgid "Attack Training:"
 msgstr "Trèanadh ionnsaigh:"
 
-#: ../../tribes/empire/trainingcamp/help.lua:32
+#: ../../tribes/empire/trainingcamp/help.lua:34
 msgid "Health Training:"
 msgstr "Trèanadh slàinte:"
 
@@ -1945,13 +2136,20 @@ msgstr "Trèanadh slàinte:"
 msgid "Grows vine."
 msgstr "Fàsaidh e fìonan."
 
-#: ../../tribes/empire/vineyard/conf:24
-msgid "Plant vine"
-msgstr "Cuir fìonan"
-
 #: ../../tribes/empire/vineyard/conf:25
-msgid "Harvest vine"
-msgstr "Buain fìonan"
+msgid "planting grapevines"
+msgstr "crann-fìona a chur"
+
+#: ../../tribes/empire/vineyard/conf:27
+msgid "harvesting grapes"
+msgstr "dearcan-fìona a bhuain"
+
+#: ../../tribes/empire/vineyard/conf:46
+msgid ""
+"The farmer working at this vineyard has no cleared soil to plant his seeds."
+msgstr ""
+"Chan eil tìr fosgailte ann ach an cuireadh an tuathanach a tha ag obair aig "
+"an fhìon-lios seo sìol."
 
 #: ../../tribes/empire/war_lance/conf:1
 msgid ""
@@ -1981,33 +2179,48 @@ msgstr ""
 msgid "Produces weapons for the soldiers."
 msgstr "Nì e airm airson nan saighdearan."
 
-#: ../../tribes/empire/weaponsmithy/conf:33
-msgid "Produce wood lance"
-msgstr "dèanamh lannsa fiodha"
-
 #: ../../tribes/empire/weaponsmithy/conf:34
-msgid "Produce lance"
-msgstr "dèanamh lannsa"
-
-#: ../../tribes/empire/weaponsmithy/conf:35
-msgid "Produce advanced lance"
-msgstr "dèanamh lannsa adhartaich"
+msgid "forging a wood lance"
+msgstr "lannsa fiodha a dhèanamh"
 
 #: ../../tribes/empire/weaponsmithy/conf:36
-msgid "Produce heavy lance"
-msgstr "dèanamh lannsa truime"
+msgid "forging a lance"
+msgstr "lannsa a dhèanamh"
 
-#: ../../tribes/empire/weaponsmithy/conf:37
-msgid "Produce war lance"
-msgstr "dèanamh lannsa-cogaidh"
+#: ../../tribes/empire/weaponsmithy/conf:38
+msgid "forging an advanced lance"
+msgstr "lannsa adhartach a dhèanamh"
+
+#: ../../tribes/empire/weaponsmithy/conf:40
+msgid "forging a heavy lance"
+msgstr "lannsa throm a dhèanamh"
+
+#: ../../tribes/empire/weaponsmithy/conf:42
+msgid "forging a war lance"
+msgstr "lannsa-cogaidh a dhèanamh"
 
 #: ../../tribes/empire/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."
 msgstr "Nì e clò airson longan is saighdearan."
 
+#: ../../tribes/empire/weaving-mill/conf:21
+msgid "weaving"
+msgstr "fighe a dhèanamh"
+
 #: ../../tribes/empire/weaving-mill/help.lua:17
 msgid "Weaves cloth out of wool."
 msgstr "Fighidh e clò de chlòimh."
+
+#: ../../tribes/empire/well/conf:31
+msgid "Out of Water"
+msgstr "Chan eil uisge ann"
+
+#: ../../tribes/empire/well/conf:32
+msgid ""
+"The carrier working at this well can’t find any water in his working radius."
+msgstr ""
+"Chan urrainn dhan ghiùlanair a tha ag obair aig an tobar seo uisge a lorg "
+"taobh a-staigh an raoin-obrach tuilleadh."
 
 #: ../../tribes/empire/well/help.lua:18
 msgid "Draws water out of the deep."

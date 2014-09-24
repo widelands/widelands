@@ -22,7 +22,7 @@
 
 #include "logic/widelands.h"
 
-class Interactive_Player;
+class InteractivePlayer;
 
 namespace Widelands {
 class Building;
@@ -32,26 +32,26 @@ struct Ship;
 
 // Building confirm windows
 void show_bulldoze_confirm
-	(Interactive_Player & player,
+	(InteractivePlayer & player,
 	 Widelands::Building & building,
 	 Widelands::PlayerImmovable * const todestroy = nullptr);
 
 void show_dismantle_confirm
-	(Interactive_Player & player,
+	(InteractivePlayer & player,
 	 Widelands::Building & building);
 
 void show_enhance_confirm
-	(Interactive_Player & player,
+	(InteractivePlayer & player,
 	 Widelands::Building & building,
-	 const Widelands::Building_Index & id);
+	 const Widelands::BuildingIndex & id);
 
 // Ship confirm windows
 void show_ship_sink_confirm
-	(Interactive_Player & player,
+	(InteractivePlayer & player,
 	 Widelands::Ship & ship);
 
 void show_ship_cancel_expedition_confirm
-	(Interactive_Player & player,
+	(InteractivePlayer & player,
 	 Widelands::Ship & ship);
 
 #endif  // end of include guard: WL_WUI_ACTIONCONFIRM_H

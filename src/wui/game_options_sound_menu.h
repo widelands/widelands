@@ -29,7 +29,7 @@
  * A window with all sound options.
  */
 struct GameOptionsSoundMenu : public UI::UniqueWindow {
-	GameOptionsSoundMenu(Interactive_GameBase &, UI::UniqueWindow::Registry &);
+	GameOptionsSoundMenu(InteractiveGameBase &, UI::UniqueWindow::Registry &);
 
 private:
 	UI::Checkbox         ingame_music;

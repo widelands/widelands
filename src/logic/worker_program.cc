@@ -523,11 +523,11 @@ void WorkerProgram::parse_plant
 		if (i >= 2 && cmd[i] == "unless") {
 			++i;
 			if (i >= cmd.size())
-				throw game_data_error("plant: something expected after unless");
+				throw GameDataError("plant: something expected after unless");
 			if (cmd[i] == "object")
 				act->iparam1 = Worker::Action::plantUnlessObject;
 			else
-				throw game_data_error("plant: 'unless %s' not understood", cmd[i].c_str());
+				throw GameDataError("plant: 'unless %s' not understood", cmd[i].c_str());
 
 			continue;
 		}

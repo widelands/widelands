@@ -39,7 +39,7 @@
 #define PADDING 4
 
 GameSummaryScreen::GameSummaryScreen
-	(Interactive_GameBase * parent, UI::UniqueWindow::Registry * r)
+	(InteractiveGameBase * parent, UI::UniqueWindow::Registry * r)
 : UI::UniqueWindow(parent, "game_summary", r, 500, 400, _("Game over")),
 m_game(parent->game())
 {
@@ -61,7 +61,7 @@ m_game(parent->game())
 	m_gametime_value = new UI::Textarea(infoBox);
 	infoBox->add(m_gametime_value, UI::Box::AlignRight);
 	infoBox->add_space(PADDING);
-	m_info_area = new UI::Multiline_Textarea(infoBox, 0, 0, 130, 130, "");
+	m_info_area = new UI::MultilineTextarea(infoBox, 0, 0, 130, 130, "");
 	infoBox->add(m_info_area, UI::Box::AlignLeft, true);
 	infoBox->add_space(PADDING);
 	hbox1->add(infoBox, UI::Box::AlignTop);
@@ -126,7 +126,7 @@ void GameSummaryScreen::fill_data()
 	bool local_won = false;
 	Widelands::Player* single_won = nullptr;
 	uint8_t team_won = 0;
-	Interactive_Player* ipl = m_game.get_ipl();
+	InteractivePlayer* ipl = m_game.get_ipl();
 
 	for (uintptr_t i = 0; i < players_status.size(); i++) {
 		Widelands::PlayerEndStatus pes = players_status.at(i);
@@ -135,7 +135,7 @@ void GameSummaryScreen::fill_data()
 			local_won = pes.result == Widelands::PlayerEndResult::PLAYER_WON;
 		}
 		Widelands::Player* p = m_game.get_player(pes.player);
-		UI::Table<uintptr_t const>::Entry_Record & te
+		UI::Table<uintptr_t const>::EntryRecord & te
 			= m_players_table->add(i);
 		// Player name & pic
 		// Boost doesn't handle uint8_t as integers
@@ -225,15 +225,15 @@ void GameSummaryScreen::player_selected(uint32_t idx)
 
 std::string GameSummaryScreen::parse_player_info(std::string& info)
 {
-	typedef boost::split_iterator<std::string::iterator> string_split_iterator;
+	using StringSplitIterator = boost::split_iterator<std::string::iterator>;
 	std::string info_str;
 	if (info.empty()) {
 		return info_str;
 	}
 	// Iterate through all key=value pairs
-	string_split_iterator substring_it = boost::make_split_iterator
+	StringSplitIterator substring_it = boost::make_split_iterator
 		(info, boost::first_finder(";", boost::is_equal()));
-	while (substring_it != string_split_iterator()) {
+	while (substring_it != StringSplitIterator()) {
 		std::string substring = boost::copy_range<std::string>(*substring_it);
 		std::vector<std::string> pair;
 		boost::split(pair, substring, boost::is_any_of("="));

@@ -30,11 +30,11 @@
 namespace RT {
 
 // Implementation of a Font object using SDL_ttf.
-class SDLTTF_Font : public IFont {
+class SdlTtfFont : public IFont {
 public:
-	SDLTTF_Font
+	SdlTtfFont
 		(TTF_Font* ttf, const std::string& face, int ptsize, std::string* ttf_memory_block);
-	virtual ~SDLTTF_Font();
+	virtual ~SdlTtfFont();
 
 	void dimensions(const std::string&, int, uint16_t * w, uint16_t * h) override;
 	const Surface& render(const std::string&, const RGBColor& clr, int, SurfaceCache*) override;

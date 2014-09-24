@@ -58,20 +58,20 @@ class Image;
 
 
 struct OverlayManager {
-	typedef uint32_t JobId;
+	using JobId = uint32_t;
 
-	struct Overlay_Info {
+	struct OverlayInfo {
 		const Image* pic;
 		Point hotspot;
 	};
 
-	typedef boost::function<int32_t(const Widelands::TCoords<Widelands::FCoords>& coordinates)>
-	CallbackFunction;
+	using CallbackFn =
+		boost::function<int32_t(const Widelands::TCoords<Widelands::FCoords>& coordinates)>;
 
 	OverlayManager();
 
 	//  register callback function (see data below for description)
-	void register_overlay_callback_function(CallbackFunction function);
+	void register_overlay_callback_function(CallbackFn function);
 	void remove_overlay_callback_function();
 
 	/// Get a unique, unused job id.
@@ -93,8 +93,8 @@ struct OverlayManager {
 	void remove_overlay(Widelands::TCoords<>, const Image* pic);
 	void remove_overlay(JobId jobid);
 
-	uint8_t get_overlays(Widelands::FCoords c, Overlay_Info *) const;
-	uint8_t get_overlays(Widelands::TCoords<>, Overlay_Info *) const;
+	uint8_t get_overlays(Widelands::FCoords c, OverlayInfo *) const;
+	uint8_t get_overlays(Widelands::TCoords<>, OverlayInfo *) const;
 
 	boost::function<void(bool)> onBuildHelpToggle;
 	bool buildhelp() {return m_showbuildhelp;}
@@ -120,7 +120,7 @@ struct OverlayManager {
 	void remove_road_overlay(Widelands::Coords);
 	void remove_road_overlay(JobId jobid);
 	uint8_t get_road_overlay(const Widelands::Coords c) const {
-		Registered_Road_Overlays_Map::const_iterator const it =
+		RegisteredRoadOverlaysMap::const_iterator const it =
 			m_road_overlays.find(c);
 		if (it != m_road_overlays.end())
 			return it->second.where;
@@ -128,8 +128,8 @@ struct OverlayManager {
 	}
 
 private:
-	struct Registered_Overlays {
-		Registered_Overlays(const JobId init_jobid,
+	struct RegisteredOverlays {
+		RegisteredOverlays(const JobId init_jobid,
 		                    const Image* init_pic,
 		                    const Point init_hotspot,
 		                    const int init_level)
@@ -142,30 +142,28 @@ private:
 		int level;
 	};
 
-	struct Registered_Road_Overlays {
+	struct RegisteredRoadOverlays {
 		JobId jobid;
 		uint8_t where;
 	};
 
-	typedef std::map<const Widelands::Coords,
-	                 Registered_Road_Overlays,
-	                 Widelands::Coords::ordering_functor> Registered_Road_Overlays_Map;
+	using RegisteredRoadOverlaysMap =
+		std::map<const Widelands::Coords, RegisteredRoadOverlays, Widelands::Coords::OrderingFunctor>;
 
-	Registered_Road_Overlays_Map m_road_overlays;
+	RegisteredRoadOverlaysMap m_road_overlays;
 
-	typedef std::multimap<const Widelands::Coords,
-	                      Registered_Overlays,
-	                      Widelands::Coords::ordering_functor> Registered_Overlays_Map;
+	using RegisteredOverlaysMap =
+		std::multimap<const Widelands::Coords, RegisteredOverlays, Widelands::Coords::OrderingFunctor>;
 
 	//  indexed by TCoords<>::TriangleIndex
-	Registered_Overlays_Map m_overlays[3];
+	RegisteredOverlaysMap m_overlays[3];
 
-	Overlay_Info m_buildhelp_infos[Widelands::Field::Buildhelp_None];
+	OverlayInfo m_buildhelp_infos[Widelands::Field::Buildhelp_None];
 	bool m_are_graphics_loaded;
 	bool m_showbuildhelp;
 
 	// this callback is used to define where overlays are drawn.
-	CallbackFunction m_callback;
+	CallbackFn m_callback;
 	uint32_t m_current_job_id;
 };
 

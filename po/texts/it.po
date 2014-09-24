@@ -7,34 +7,34 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-07-16 06:11+0000\n"
-"PO-Revision-Date: 2014-07-17 05:24+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"POT-Creation-Date: 2014-09-18 18:55+0000\n"
+"PO-Revision-Date: 2014-09-18 20:49+0000\n"
+"Last-Translator: Davidus <davide97@gmail.com>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-18 04:35+0000\n"
-"X-Generator: Launchpad (build 17114)\n"
+"X-Launchpad-Export-Date: 2014-09-19 05:49+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 "X-Poedit-Country: ITALY\n"
 "Language: it\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../../txts/README.lua:7
+#: ../../txts/README.lua:6
 msgid "README"
 msgstr "LEGGIMI"
 
-#: ../../txts/README.lua:14
+#: ../../txts/README.lua:13
 msgid "an open source strategy game"
 msgstr "un gioco di strategia open source"
 
-#: ../../txts/README.lua:18
+#: ../../txts/README.lua:17
 #: ../../txts/editor_readme:7
 msgid "Introduction"
 msgstr "Introduzione"
 
-#: ../../txts/README.lua:20
+#: ../../txts/README.lua:19
 msgid ""
 "Widelands is a free, open source real-time strategy game with singleplayer\n"
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
@@ -51,7 +51,7 @@ msgstr ""
 "giocare\n"
 "tramite tutorial giocabili."
 
-#: ../../txts/README.lua:25
+#: ../../txts/README.lua:24
 msgid ""
 "In this game, you start out on a small piece of land with just a few\n"
 "resources. Using these, you’ll create an empire with many thousands of\n"
@@ -66,11 +66,11 @@ msgstr ""
 "economica,\n"
 "esplorare il terreno intorno a te e fronteggiare tribù rivali."
 
-#: ../../txts/README.lua:31
+#: ../../txts/README.lua:30
 msgid "Check out the Widelands project homepage:"
 msgstr "Visita la pagina iniziale del progetto Widelands:"
 
-#: ../../txts/README.lua:35
+#: ../../txts/README.lua:34
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more\n"
 "information, see the file ‘COPYING’."
@@ -79,11 +79,11 @@ msgstr ""
 "Per maggiori\n"
 "informazioni, dai un'occhiata al file 'COPYING'"
 
-#: ../../txts/README.lua:38
+#: ../../txts/README.lua:37
 msgid "Status"
 msgstr "Stato"
 
-#: ../../txts/README.lua:40
+#: ../../txts/README.lua:39
 msgid ""
 "Widelands is nearly feature complete and is much fun to play alone and even\n"
 "more in multiplayer with others. Still, there is always more work to be done "
@@ -102,11 +102,11 @@ msgstr ""
 "tua lingua o\n"
 "creando nuove mappe - mettiti in contatto consultando la nostra homepage."
 
-#: ../../txts/README.lua:46
+#: ../../txts/README.lua:45
 msgid "General game control"
 msgstr "Controlli generali di gioco"
 
-#: ../../txts/README.lua:48
+#: ../../txts/README.lua:47
 msgid ""
 "To close an open window, right-click on it. To minimize/maximize a window, "
 "click\n"
@@ -120,7 +120,7 @@ msgstr ""
 "con il tasto\n"
 "sinistro del mouse + CTRL."
 
-#: ../../txts/README.lua:52
+#: ../../txts/README.lua:51
 msgid ""
 "If you hold CTRL while building a road, flags will be placed automatically.\n"
 "If you hold CTRL while removing a road, all flags up to the first junction "
@@ -133,7 +133,7 @@ msgstr ""
 "bandiere fino\n"
 "al primo incrocio."
 
-#: ../../txts/README.lua:56
+#: ../../txts/README.lua:55
 msgid ""
 "You can skip confirmation windows for irreversible actions if you hold CTRL\n"
 "while clicking on the action button."
@@ -142,107 +142,107 @@ msgstr ""
 "premuto CTRL\n"
 "mentre clicchi il pulsante dell'azione."
 
-#: ../../txts/README.lua:59
+#: ../../txts/README.lua:58
 msgid "Keyboard shortcuts (in-game)"
 msgstr "Scorciatoie da tastiera (durante il gioco)"
 
-#: ../../txts/README.lua:61
+#: ../../txts/README.lua:60
 msgid "PAGEUP: increases game speed"
 msgstr "PAGEUP: aumenta la velocità di gioco"
 
-#: ../../txts/README.lua:62
+#: ../../txts/README.lua:61
 msgid "PAGEDOWN: decreases game speed"
 msgstr "PAGEDOWN: diminuisce la velocità di gioco"
 
-#: ../../txts/README.lua:63
+#: ../../txts/README.lua:62
 msgid "PAUSE: pauses the game"
 msgstr "PAUSA: metti il gioco in pausa"
 
-#: ../../txts/README.lua:64
+#: ../../txts/README.lua:63
 #: ../../txts/editor_readme:21
 msgid "SPACE: toggles if building spaces are shown"
 msgstr "SPACE: mostra o toglie gli spazi per la costruzione"
 
-#: ../../txts/README.lua:65
+#: ../../txts/README.lua:64
 #: ../../txts/editor_readme:29
 msgid "M: toggles minimap"
 msgstr "M: attiva/disattiva minimappa"
 
-#: ../../txts/README.lua:66
+#: ../../txts/README.lua:65
 msgid "N: toggles messages (‘news’)"
 msgstr "N: attiva/disattiva messaggi ('notizie')"
 
-#: ../../txts/README.lua:67
+#: ../../txts/README.lua:66
 #: ../../txts/editor_readme:23
 msgid "C: toggles census"
 msgstr "C: attiva/disattiva censo"
 
-#: ../../txts/README.lua:68
+#: ../../txts/README.lua:67
 msgid "S: toggles statistics"
 msgstr "S: attiva/disattiva statistiche"
 
-#: ../../txts/README.lua:69
+#: ../../txts/README.lua:68
 msgid "I: toggles stock inventory"
 msgstr "I: attiva/disattiva inventario merci"
 
-#: ../../txts/README.lua:70
+#: ../../txts/README.lua:69
 msgid "O: toggles objectives"
 msgstr "O: attiva/disattiva obbiettivi"
 
-#: ../../txts/README.lua:71
+#: ../../txts/README.lua:70
 msgid "F: toggles fullscreen (if supported by the OS)"
 msgstr ""
 "F: attiva/disattiva schermo intero (se supportato dal sistema operativo)"
 
-#: ../../txts/README.lua:72
+#: ../../txts/README.lua:71
 msgid "Home: centers main mapview on starting location"
 msgstr "Home: centra la visuale della mappa sulla posizione di partenza"
 
-#: ../../txts/README.lua:73
+#: ../../txts/README.lua:72
 msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
 msgstr ""
 "(CTRL+) 0-9: Memorizza e vai alle posizioni precedentemente memorizzate"
 
-#: ../../txts/README.lua:74
+#: ../../txts/README.lua:73
 msgid ",: goes to the previous location"
 msgstr ",: vai alla posizione precedente"
 
-#: ../../txts/README.lua:75
+#: ../../txts/README.lua:74
 msgid ".: goes to the next location"
 msgstr ".: vai alla posizione seguente"
 
-#: ../../txts/README.lua:76
+#: ../../txts/README.lua:75
 msgid "F6: shows the debug console (only in debug-builds)"
 msgstr "F6: mostra la console debug (solamente nelle build di debug)"
 
-#: ../../txts/README.lua:77
+#: ../../txts/README.lua:76
 msgid "CTRL+F10: quits the game immediately"
 msgstr "CTRL+F10: esci immediatamente dal gioco"
 
-#: ../../txts/README.lua:78
+#: ../../txts/README.lua:77
 msgid "F11: takes a screenshot"
 msgstr "F11: cattura uno screenshot"
 
-#: ../../txts/README.lua:80
+#: ../../txts/README.lua:79
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr ""
 "Nella finestra del messaggio, sono disponibili i seguenti collegamenti "
 "aggiuntivi:"
 
-#: ../../txts/README.lua:82
+#: ../../txts/README.lua:81
 msgid "G: jumps to the location corresponding to the current message"
 msgstr "G: vai alla posizione collegata al messaggio corrente"
 
-#: ../../txts/README.lua:83
+#: ../../txts/README.lua:82
 msgid "DELETE: archives the current message"
 msgstr "DELETE: archivia il messaggio corrente"
 
-#: ../../txts/README.lua:85
+#: ../../txts/README.lua:84
 msgid "Online Help"
 msgstr "Aiuto in linea"
 
-#: ../../txts/README.lua:87
+#: ../../txts/README.lua:86
 msgid ""
 "If you need documentation or help for Widelands or the Widelands Editor, be\n"
 "sure to visit our homepage. You can find an up to date online help in our "
@@ -254,23 +254,23 @@ msgstr ""
 "aggiornata e nell'enciclopedia online una descrizione dettagliata "
 "dell'economia delle tribù."
 
-#: ../../txts/README.lua:91
+#: ../../txts/README.lua:90
 msgid "Reporting Bugs"
 msgstr "Segnalazione Bug"
 
-#: ../../txts/README.lua:93
+#: ../../txts/README.lua:92
 msgid "If you encounter a bug, please report it to our bugtracker:"
 msgstr "Se trovi un bug, per favore segnalalo sul nostro bugtracker:"
 
-#: ../../txts/README.lua:97
+#: ../../txts/README.lua:96
 msgid "Please provide enough background information. Tell us:"
 msgstr "Si prega di fornire sufficienti informazioni. Diteci:"
 
-#: ../../txts/README.lua:99
+#: ../../txts/README.lua:98
 msgid "- Detailed steps on how to trigger the bug, if possible."
 msgstr "- Passaggi dettagliati su come riprodurre il bug, se possibile."
 
-#: ../../txts/README.lua:101
+#: ../../txts/README.lua:100
 msgid ""
 "- What you expected to happen when performing the steps and what actually "
 "happened."
@@ -278,7 +278,7 @@ msgstr ""
 "- Cosa ti aspettavi avvenisse quando hai eseguito i passaggi e cosa invece è "
 "accaduto."
 
-#: ../../txts/README.lua:103
+#: ../../txts/README.lua:102
 msgid ""
 "- Which version of Widelands you are running (i.e. either the build number "
 "or\n"
@@ -286,7 +286,7 @@ msgid ""
 "build.)"
 msgstr ""
 
-#: ../../txts/README.lua:106
+#: ../../txts/README.lua:105
 msgid ""
 "- Please also include which operating system you are running Widelands on "
 "as\n"
@@ -295,11 +295,11 @@ msgstr ""
 "- Per favore indica anche su quale sistema operativo sta girando Widelands\n"
 "in quanto alcuni bug possono dipendere dalla piattaforma."
 
-#: ../../txts/README.lua:109
+#: ../../txts/README.lua:108
 msgid "- Which map you were playing when the bug occurred."
 msgstr "- Su quale mappa stavi giocando quando è avvenuto il problema."
 
-#: ../../txts/README.lua:111
+#: ../../txts/README.lua:110
 msgid ""
 "- If the bug concerns something not being displayed correctly or if it "
 "helps\n"
@@ -309,7 +309,7 @@ msgstr ""
 "o se può aiutare\n"
 "a dimostrare il problema, per favore includi uno o più screenshot."
 
-#: ../../txts/README.lua:114
+#: ../../txts/README.lua:113
 msgid ""
 "- If you have a save game or replay demonstrating the issue (for instance\n"
 "crashes where it can be hard to tell exactly what is triggering it), please\n"
@@ -321,11 +321,11 @@ msgstr ""
 "includi anch'essi. Per più informazioni, dai un'occhiata alla sezione Replay "
 "sotto."
 
-#: ../../txts/README.lua:118
+#: ../../txts/README.lua:117
 msgid "Replays"
 msgstr "Replay"
 
-#: ../../txts/README.lua:120
+#: ../../txts/README.lua:119
 msgid ""
 "Widelands records every game you play in two files. One of these files has "
 "a\n"
@@ -344,7 +344,7 @@ msgstr ""
 "indica\n"
 "quando hai avviato il gioco."
 
-#: ../../txts/README.lua:126
+#: ../../txts/README.lua:125
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game "
 "will\n"
@@ -369,7 +369,7 @@ msgstr ""
 "possiede\n"
 "una versione di gioco differente."
 
-#: ../../txts/README.lua:133
+#: ../../txts/README.lua:132
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic, so they\n"
 "can be useful as attachments to bug reports. The replay files are saved in "
@@ -418,7 +418,7 @@ msgstr "Suono"
 
 #: ../../txts/developers:33
 msgid "Tongues"
-msgstr ""
+msgstr "Lingue"
 
 #: ../../txts/developers:38
 msgid "Coders"
@@ -632,11 +632,11 @@ msgstr "I: attiva lo strumento per le informazioni"
 
 #: ../../txts/editor_readme:37
 msgid "CTRL+L: load map"
-msgstr ""
+msgstr "CTRL+L: carica mappa"
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+S: save map"
-msgstr ""
+msgstr "CTRL+S: salva maèèa"
 
 #: ../../txts/editor_readme:41
 msgid "1-0: changes tool size"
@@ -827,6 +827,8 @@ msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Barracks, etc."
 msgstr ""
+"Il tuo territorio può essere espanso da vari edifici militari - Sentinelle, "
+"Fortezze, Caserme, ecc."
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will work only if supplied with food."
@@ -845,6 +847,8 @@ msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found at www.widelands.org."
 msgstr ""
+"Qualche domanda? La nostra FAQ, la wiki e ovviamente il nostra community "
+"forum possono essere trovati nel sito www.widelands.org."
 
 #: ../../txts/tips/general_game.tip:26
 msgid ""
@@ -927,17 +931,23 @@ msgid ""
 "You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed "
 "– the real speed is then democratically set."
 msgstr ""
+"Puoi usare i tasti ‘Page up’ e ‘Page down’ per aggiustare la velocità "
+"desiderata - la velocità reale è democraticamente impostata."
 
 #: ../../txts/tips/multiplayer.tip:6
 msgid ""
 "You can use ‘/me’ at the beginning of a chatmessage: ‘/me is tired’ will be "
 "printed as ‘-> Nickname is tired’."
 msgstr ""
+"Tu puoi usare ‘/me’ all' inizio di una conversazione: ‘/me è stanco’ "
+"saràstampato come ‘-> Nickname è stanco’."
 
 #: ../../txts/tips/multiplayer.tip:10
 msgid ""
 "Use ‘@name’ at the beginning of a chat message to send it to only one player."
 msgstr ""
+"Usa ‘@name’ all' inizio di una conversazione per mandare un messaggio solo "
+"ad un giocaore."
 
 #: ../../txts/tips/singleplayer.tip:2
 msgid ""

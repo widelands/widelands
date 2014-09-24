@@ -28,8 +28,8 @@
  * This simply waits modal for a click and in the meantime
  * shows the splash screen
  */
-struct Fullscreen_Menu_Intro : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_Intro();
+struct FullscreenMenuIntro : public FullscreenMenuBase {
+	FullscreenMenuIntro();
 
 protected:
 	bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y) override;

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-07-16 06:11+0000\n"
-"PO-Revision-Date: 2014-07-21 13:45+0000\n"
+"POT-Creation-Date: 2014-09-18 18:55+0000\n"
+"PO-Revision-Date: 2014-09-15 17:12+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-07-22 05:42+0000\n"
-"X-Generator: Launchpad (build 17114)\n"
+"X-Launchpad-Export-Date: 2014-09-19 05:48+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 "Language: gd\n"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:23
@@ -255,8 +255,8 @@ msgstr "Tog àth-aoil is eaconamaidh guail"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:108
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:114
-msgid "Build a lime kiln, a well and a charcoal burner, or a coal mine"
-msgstr "Togh àth-aoil, tobar is loisgeadair fiodha no mèinn guail"
+msgid "Build a lime kiln, a well and a charcoal kiln, or a coal mine"
+msgstr "Tog àth-aoil, tobar’s àth-ghuail no mèinn guail"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:109
 msgid ""
@@ -272,11 +272,11 @@ msgstr ""
 msgid ""
 "You can obtain water by building a well upon a water source, which your "
 "geologists can discover when you send them to any flag that is not on a "
-"mountain. Coal can be obtained by building a charcoal burner or a coal mine."
+"mountain. Coal can be obtained by building a charcoal kiln or a coal mine."
 msgstr ""
 "Tog tobair ann an àite far a bheil uisge san talamh. Lorgaidh clach-eòlaiche "
-"uisge dhut nuair a chuireas tu gu bratach nach eil air beinn e. Tog sloc "
-"gual-fhiodha no mèinn guail gus gual fhaighinn."
+"uisge dhut nuair a chuireas tu gu bratach nach eil air beinn e. Tog àth-"
+"ghuail no mèinn guail gus gual fhaighinn."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:120
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:122
@@ -345,6 +345,11 @@ msgid ""
 "flames. The Throne Among the Trees, the symbol of unity and peace among our "
 "kin, became the wedge that drives us apart."
 msgstr ""
+"Tha na dh’innseas an seanchas dhuinn mu na gnìomhan a rinn ar cinneadh "
+"truagh. Thug mi seachad iomadh oidhche gun tàmh no cadal is nas sgìthe na "
+"chreideadh tu. Ach nuair a dhùineas mi mo dhà shùil, chì mi an dùn a thog m’ "
+"athair ’na theine. Thug a’ chathair am measg nan craobh a bhiodh ’na samhla "
+"dhen aonta ’s sìth eadarainn a-mach à chèile sinn a-nis."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:161
 msgid ""
@@ -356,12 +361,22 @@ msgid ""
 "tribes will be strong enough to subdue the other. There will be no end to "
 "this slaughter, unless... is this it? As father told me?"
 msgstr ""
+"Thug na sealgairean agam daoine, boireannaich ’s pàistean òga thugam an-"
+"diugh a bha air am falach sa choille, a’ feuchainn ri teicheadh on chogadh, "
+"ghràin ’s dìoghaltas am measg nan treubhan a tha a’ toirt ionnsaigh air càch "
+"a chèile mar a rinneadh iad o chionn fhada nuair nach robh sinn ach ’nar "
+"beathaichean fiadhaich fo bhuaidh ’s smachd an nàdair. Cha ghabh gin dhe mo "
+"bhràithrean a’ chathair fhiodha os làimh gu bràth tuilleadh o nach eil gin "
+"dhe na treubhan làidir gu leòr gus càch a cheannsachadh. Cha bhi againn ach "
+"milleadh gun chrìch ach... an e sin a th’ ann? Na dh’innis m’ athair dhomh?"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:167
 msgid ""
 "To rise against whoever threatens our very existence, even tough it may be "
 "one of your own blood or mind?"
 msgstr ""
+"An tàinig an t-àm gus èirigh an aghaidh an fheadhainn a chuireas ar beatha "
+"fo chunnart, ge b’ e dhen cinneadh againn fhìn a th’ annta?"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:175
 msgid ""

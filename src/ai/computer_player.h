@@ -36,19 +36,14 @@ class Game;
  * Instances of actual AI implementation can be created via the
  * \ref Implementation interface.
  */
+struct ComputerPlayer {
+	ComputerPlayer(Widelands::Game &, const Widelands::PlayerNumber);
+	virtual ~ComputerPlayer();
 
-struct Computer_Player {
-	Computer_Player(Widelands::Game&, const Widelands::Player_Number);
-	virtual ~Computer_Player();
+	virtual void think () = 0;
 
-	virtual void think() = 0;
-
-	Widelands::Game& game() const {
-		return m_game;
-	}
-	Widelands::Player_Number player_number() {
-		return m_player_number;
-	}
+	Widelands::Game & game() const {return m_game;}
+	Widelands::PlayerNumber player_number() {return m_player_number;}
 
 	/**
 	 * Interface to a concrete implementation, used to instantiate AIs.
@@ -57,27 +52,27 @@ struct Computer_Player {
 	 */
 	struct Implementation {
 		std::string name;
-		virtual ~Implementation() {
-		}
-		virtual Computer_Player* instantiate(Widelands::Game&, Widelands::Player_Number) const = 0;
+		virtual ~Implementation() {}
+		virtual ComputerPlayer * instantiate
+			(Widelands::Game &, Widelands::PlayerNumber) const = 0;
 	};
-	typedef std::vector<Computer_Player::Implementation const*> ImplementationVector;
+	using ImplementationVector = std::vector<ComputerPlayer::Implementation const *>;
 
 	/**
 	 * Get a list of available AI implementations.
 	 */
-	static const ImplementationVector& getImplementations();
+	static const ImplementationVector & getImplementations();
 
 	/**
 	 * Get the best matching implementation for this name.
 	 */
-	static const Implementation* getImplementation(const std::string& name);
+	static const Implementation * getImplementation(const std::string & name);
 
 private:
-	Widelands::Game& m_game;
-	Widelands::Player_Number const m_player_number;
+	Widelands::Game & m_game;
+	Widelands::PlayerNumber const m_player_number;
 
-	DISALLOW_COPY_AND_ASSIGN(Computer_Player);
+	DISALLOW_COPY_AND_ASSIGN(ComputerPlayer);
 };
 
 #endif  // end of include guard: WL_AI_COMPUTER_PLAYER_H

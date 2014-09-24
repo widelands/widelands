@@ -36,27 +36,27 @@ struct WarehouseSupply : public Supply {
 
 	void set_economy(Economy *);
 
-	void set_nrworkers(Ware_Index);
-	void set_nrwares  (Ware_Index);
+	void set_nrworkers(WareIndex);
+	void set_nrwares  (WareIndex);
 
 	const WareList & get_wares  () const {return m_wares;}
 	const WareList & get_workers() const {return m_workers;}
-	uint32_t stock_wares  (Ware_Index const i) const {
+	uint32_t stock_wares  (WareIndex const i) const {
 		return m_wares  .stock(i);
 	}
-	uint32_t stock_workers(Ware_Index const i) const {
+	uint32_t stock_workers(WareIndex const i) const {
 		return m_workers.stock(i);
 	}
-	void add_wares     (Ware_Index, uint32_t count);
-	void remove_wares  (Ware_Index, uint32_t count);
-	void add_workers   (Ware_Index, uint32_t count);
-	void remove_workers(Ware_Index, uint32_t count);
+	void add_wares     (WareIndex, uint32_t count);
+	void remove_wares  (WareIndex, uint32_t count);
+	void add_workers   (WareIndex, uint32_t count);
+	void remove_workers(WareIndex, uint32_t count);
 
 	// Supply implementation
 	PlayerImmovable * get_position(Game &) override;
 	bool is_active() const override;
 	bool has_storage() const override;
-	void get_ware_type(WareWorker & type, Ware_Index & ware) const override;
+	void get_ware_type(WareWorker & type, WareIndex & ware) const override;
 
 	void send_to_storage(Game &, Warehouse * wh) override;
 	uint32_t nr_supplies(const Game &, const Request &) const override;

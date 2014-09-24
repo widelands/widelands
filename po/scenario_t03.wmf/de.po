@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-07-16 06:11+0000\n"
-"PO-Revision-Date: 2014-07-16 11:36+0000\n"
-"Last-Translator: wl-zocker <Unknown>\n"
+"POT-Creation-Date: 2014-09-18 18:55+0000\n"
+"PO-Revision-Date: 2014-07-27 16:51+0000\n"
+"Last-Translator: SirVer <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-17 05:41+0000\n"
-"X-Generator: Launchpad (build 17114)\n"
+"X-Launchpad-Export-Date: 2014-09-19 05:49+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:21
 #: ../../campaigns/t03.wmf/scripting/texts.lua:23
@@ -53,20 +53,18 @@ msgid "Build a cattle farm"
 msgstr "Baue eine Rinderzucht"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:37
+#: ../../campaigns/t03.wmf/scripting/texts.lua:39
 msgid "Remember to build a cattle farm"
 msgstr "Denke daran, eine Rinderzucht zu bauen"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:38
 msgid ""
 "As your roads grow longer and your economy bigger, you should make good use "
-"of your oxen to help transport wares more quickly.)"
+"of your oxen to help transport wares more quickly."
 msgstr ""
 "Da deine Straßen länger werden und deine Wirtschaft wächst, solltest du "
-"Ochsen benutzen. Sie helfen dir dabei, die Waren schneller zu transportieren."
-
-#: ../../campaigns/t03.wmf/scripting/texts.lua:39
-msgid "Remember to build a cattle farm!"
-msgstr "Denke daran, eine Rinderzucht zu bauen!"
+"mithilfe deiner Ochsen dafür sorgen, dass die Waren schneller transportiert "
+"werden."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:45
 #: ../../campaigns/t03.wmf/scripting/texts.lua:47
@@ -104,11 +102,11 @@ msgstr "Baue einen Mineninfrastruktur"
 msgid ""
 "Expand your territory to the mountains, send geologists to search for ore "
 "and coal and build a mining economy with mines, taverns, smelting works and "
-"metalworks."
+"metal workshop."
 msgstr ""
-"Erweitere dein Territorium zu den Bergen, sende Geologen aus, um nach "
-"Eisenerz und Kohle zu suchen, und baue eine Minenwirtschaft mit Minen, "
-"Tavernen, Hochöfen und Schmieden."
+"Erweitere dein Gebiet bis zu den Bergen, sende Geologen aus, um nach Erzen "
+"und Kohle zu suchen und baue eine Minenwirtschaft mit Minen, Tavernen, "
+"Hochöfen und einer Werkzeugschmiede."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:72
 #: ../../campaigns/t03.wmf/scripting/texts.lua:74
@@ -191,9 +189,9 @@ msgstr ""
 "Chance, einen Kampf zu gewinnen."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:109
-msgid "The attributes are: health points, attack, defense and evade."
+msgid "The attributes are: health, attack, defense and evade."
 msgstr ""
-"Die Eigenschaften sind Lebenspunkte, Angriff, Verteidigung und Ausweichen."
+"Die Eigenschaften sind Lebenspunkte, Angriff, Verteidugung und Ausweichen."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:115
 #: ../../campaigns/t03.wmf/scripting/texts.lua:117

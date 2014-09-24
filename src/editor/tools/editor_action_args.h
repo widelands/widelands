@@ -30,21 +30,21 @@ namespace Widelands {
 class BobDescr;
 }  // namespace Widelands
 
-struct Editor_Interactive;
-struct Editor_Tool_Action;
+struct EditorInteractive;
+struct EditorToolAction;
 
 /// Class to save important and changeable properties of classes needed for actions
 // Implementations in editor_history.cc
-struct Editor_Action_Args {
-	Editor_Action_Args(Editor_Interactive & base);
+struct EditorActionArgs {
+	EditorActionArgs(EditorInteractive & base);
 
 	// TODO(sirver): This class does its own reference counting. This design is
 	// brittle and on a quick overview I have a feeling that it might not be
 	// correct.
-	Editor_Action_Args(const Editor_Action_Args&) = default;
-	Editor_Action_Args& operator = (const Editor_Action_Args&) = default;
+	EditorActionArgs(const EditorActionArgs&) = default;
+	EditorActionArgs& operator = (const EditorActionArgs&) = default;
 
-	~Editor_Action_Args();
+	~EditorActionArgs();
 
 	uint32_t sel_radius;
 
@@ -56,9 +56,9 @@ struct Editor_Action_Args {
 	std::list<std::string> oimmov_types;                            // immovable change tools
 	std::list<int32_t> nimmov_types;                                // immovable change tools
 	Widelands::HeightInterval m_interval;                  // noise hight tool
-	std::list<Widelands::Terrain_Index> terrainType, origTerrainType; // set terrain tool
+	std::list<Widelands::TerrainIndex> terrainType, origTerrainType; // set terrain tool
 
-	std::list<Editor_Tool_Action *> draw_actions;                   // draw tool
+	std::list<EditorToolAction *> draw_actions;                   // draw tool
 
 	uint32_t refcount;
 };

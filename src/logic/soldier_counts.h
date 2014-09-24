@@ -25,7 +25,7 @@
 #include "logic/widelands.h"
 
 namespace Widelands {
-typedef std::map<Soldier_Strength, uint32_t> Soldier_Counts;
+using SoldierCounts = std::map<SoldierStrength, uint32_t>;
 }
 
 #endif  // end of include guard: WL_LOGIC_SOLDIER_COUNTS_H

@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-07-16 06:11+0000\n"
-"PO-Revision-Date: 2014-07-17 05:02+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"POT-Creation-Date: 2014-09-18 18:55+0000\n"
+"PO-Revision-Date: 2014-08-31 12:31+0000\n"
+"Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-18 04:34+0000\n"
-"X-Generator: Launchpad (build 17114)\n"
+"X-Launchpad-Export-Date: 2014-09-19 05:47+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 "Language: it\n"
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:76
@@ -25,7 +25,7 @@ msgstr "Edificio perso!"
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:78
 msgid "We lost a building to the ocean!"
-msgstr ""
+msgstr "Abbiamo perso un edificio per colpa dell'oceano!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Ensure the supply of building wares"
@@ -46,11 +46,11 @@ msgstr "Costruisci una cava"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:37
 msgid "Build two woodcutter’s houses"
-msgstr "Costruisci due case di taglialegna"
+msgstr "Costruisci due capanne del taglialegna"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:38
 msgid "Build two forester’s houses"
-msgstr ""
+msgstr "Costruisci due case del guardiacaccia"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:39
 msgid "Build a sawmill"
@@ -62,7 +62,7 @@ msgstr "Espandi il tuo territorio ed esplora l'isola"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:47
 msgid "Expand and Explore"
-msgstr "Espandi ed Esplora"
+msgstr "Espandi ed esplora"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:48
 msgid ""
@@ -127,7 +127,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a well"
-msgstr "Costruisci un pozzo."
+msgstr "Costruisci un pozzo"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:63
 msgid ""
@@ -276,7 +276,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:108
 msgid "Warehouse and Horse Farm"
-msgstr ""
+msgstr "Magazzino e allevamento di cavalli"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:109
 msgid "Build a warehouse"
@@ -284,11 +284,11 @@ msgstr "Costruisci un magazzino"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:110
 msgid "Build a horse farm"
-msgstr ""
+msgstr "Costruisci un allevamento di cavalli"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:116
 msgid "Build 3 ships to escape from the island"
-msgstr "Costruisci 3 navi per fuggire dall'isola"
+msgstr "Costruisci tre navi per fuggire dall'isola"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:118
 msgid "Escape From the Island"
@@ -300,7 +300,7 @@ msgid ""
 "and you might be able to rescue your people before the island is swallowed "
 "completely by the ocean."
 msgstr ""
-"C'è un lago sulla cima dell'isola. Costruisci 3 navi in queste acque e "
+"C'è un lago sulla cima dell'isola. Costruisci tre navi in queste acque e "
 "potresti essere in grado di salvare il tuo popolo quando l'isola sprofonderà "
 "completamente nell'oceano."
 
@@ -662,7 +662,7 @@ msgstr "Jundlina concorda"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:285
 msgid "Your words sound wise to me, Colionder. So be it then."
-msgstr "Le tue parole mi sembrano sagge, Colionder. Cosi sia."
+msgstr "Le tue parole mi sembrano sagge, Colionder. Così sia."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:293
 msgid "Jundlina is Reviewing the Reports"

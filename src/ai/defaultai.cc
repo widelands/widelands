@@ -65,8 +65,8 @@ DefaultAI::NormalImpl DefaultAI::normalImpl;
 DefaultAI::DefensiveImpl DefaultAI::defensiveImpl;
 
 /// Constructor of DefaultAI
-DefaultAI::DefaultAI(Game& ggame, Player_Number const pid, uint8_t const t)
-   : Computer_Player(ggame, pid),
+DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
+   : ComputerPlayer(ggame, pid),
      type_(t),
      m_buildable_changed(true),
      m_mineable_changed(true),
@@ -254,20 +254,20 @@ void DefaultAI::late_initialization() {
 	player_ = game().get_player(player_number());
 	tribe_ = &player_->tribe();
 	log("ComputerPlayer(%d): initializing (%u)\n", player_number(), type_);
-	Ware_Index const nr_wares = tribe_->get_nrwares();
+	WareIndex const nr_wares = tribe_->get_nrwares();
 	wares.resize(nr_wares);
 
-	for (Ware_Index i = 0; i < nr_wares; ++i) {
+	for (WareIndex i = 0; i < nr_wares; ++i) {
 		wares.at(i).producers_ = 0;
 		wares.at(i).consumers_ = 0;
 		wares.at(i).preciousness_ = tribe_->get_ware_descr(i)->preciousness();
 	}
 
 	// collect information about the different buildings our tribe can construct
-	Building_Index const nr_buildings = tribe_->get_nrbuildings();
+	BuildingIndex const nr_buildings = tribe_->get_nrbuildings();
 	const World& world = game().world();
 
-	for (Building_Index i = 0; i < nr_buildings; ++i) {
+	for (BuildingIndex i = 0; i < nr_buildings; ++i) {
 		const BuildingDescr& bld = *tribe_->get_building_descr(i);
 		const std::string& building_name = bld.name();
 		const BuildingHints& bh = bld.hints();
@@ -319,7 +319,7 @@ void DefaultAI::late_initialization() {
 			for (const WareAmount& temp_input : prod.inputs()) {
 				bo.inputs_.push_back(temp_input.first);
 			}
-			for (const Ware_Index& temp_output : prod.output_ware_types()) {
+			for (const WareIndex& temp_output : prod.output_ware_types()) {
 				bo.outputs_.push_back(temp_output);
 			}
 
@@ -377,8 +377,8 @@ void DefaultAI::late_initialization() {
 	Map& map = game().map();
 	std::set<OPtr<PlayerImmovable>> found_immovables;
 
-	for (Y_Coordinate y = 0; y < map.get_height(); ++y) {
-		for (X_Coordinate x = 0; x < map.get_width(); ++x) {
+	for (int16_t y = 0; y < map.get_height(); ++y) {
+		for (int16_t x = 0; x < map.get_width(); ++x) {
 			FCoords f = map.get_fcoords(Coords(x, y));
 
 			if (f.field->get_owned_by() != player_number())
@@ -518,7 +518,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 	Map& map = game().map();
 	FindNodeUnowned find_unowned(player_, game());
 	FindNodeUnownedMineable find_unowned_mines_pots(player_, game());
-	Player_Number const pn = player_->player_number();
+	PlayerNumber const pn = player_->player_number();
 	const World& world = game().world();
 	field.unowned_land_nearby_ =
 	   map.find_fields(Area<FCoords>(field.coords, range), nullptr, find_unowned);
@@ -1527,7 +1527,7 @@ bool DefaultAI::improve_roads(int32_t gametime) {
 			const Map& map = game().map();
 			CoordPath cp(map, path);
 			// try to split after two steps
-			CoordPath::Step_Vector::size_type i = cp.get_nsteps() - 1, j = 1;
+			CoordPath::StepVector::size_type i = cp.get_nsteps() - 1, j = 1;
 
 			for (; i >= j; --i, ++j) {
 				{
@@ -1864,8 +1864,8 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 		return false;
 
 	// Get max radius of recursive workarea
-	Workarea_Info::size_type radius = 0;
-	const Workarea_Info& workarea_info = site.bo->desc->m_workarea_info;
+	WorkareaInfo::size_type radius = 0;
+	const WorkareaInfo& workarea_info = site.bo->desc->m_workarea_info;
 	for (const std::pair<uint32_t, std::set<std::string>>& temp_info : workarea_info) {
 		if (radius < temp_info.first) {
 			radius = temp_info.first;
@@ -1880,10 +1880,10 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	// available, one is to be enhanced
 	// b) if there are two buildings
 	// statistics percents are decisive
-	const Building_Index enhancement = site.site->descr().enhancement();
+	const BuildingIndex enhancement = site.site->descr().enhancement();
 	if (enhancement != INVALID_INDEX && (site.bo->cnt_built_ - site.bo->unoccupied_) > 1) {
 
-		Building_Index enbld = INVALID_INDEX;  // to get rid of this
+		BuildingIndex enbld = INVALID_INDEX;  // to get rid of this
 		BuildingObserver* bestbld = nullptr;
 
 		// Only enhance buildings that are allowed (scenario mode)
@@ -2175,7 +2175,7 @@ bool DefaultAI::check_mines_(int32_t const gametime) {
 		return false;
 
 	// Check whether building is enhanceable. If yes consider an upgrade.
-	const Building_Index enhancement = site.site->descr().enhancement();
+	const BuildingIndex enhancement = site.site->descr().enhancement();
 
 	// if no enhancement is possible
 	if (enhancement == INVALID_INDEX) {
@@ -2208,7 +2208,7 @@ bool DefaultAI::check_mines_(int32_t const gametime) {
 // this count ware as hints
 uint32_t DefaultAI::get_stocklevel_by_hint(size_t hintoutput) {
 	uint32_t count = 0;
-	Ware_Index wt(hintoutput);
+	WareIndex wt(hintoutput);
 	for (EconomyObserver* observer : economies) {
 		// Don't check if the economy has no warehouse.
 		if (observer->economy.warehouses().empty())
@@ -2238,7 +2238,7 @@ void DefaultAI::check_ware_needeness(BuildingObserver& bo,
 			continue;
 
 		for (uint32_t m = 0; m < bo.outputs_.size(); ++m) {
-			Ware_Index wt(static_cast<size_t>(bo.outputs_.at(m)));
+			WareIndex wt(static_cast<size_t>(bo.outputs_.at(m)));
 
 			if (observer->economy.needs_ware(wt)) {
 				*output_is_needed = true;
@@ -2265,7 +2265,7 @@ uint32_t DefaultAI::get_stocklevel(BuildingObserver& bo) {
 				continue;
 
 			for (uint32_t m = 0; m < bo.outputs_.size(); ++m) {
-				Ware_Index wt(static_cast<size_t>(bo.outputs_.at(m)));
+				WareIndex wt(static_cast<size_t>(bo.outputs_.at(m)));
 				if (count > observer->economy.stock_ware(wt))
 					count = observer->economy.stock_ware(wt);
 			}
@@ -2706,7 +2706,7 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 	// counting players in game
 	uint32_t plr_in_game = 0;
 	std::vector<bool> player_attackable;
-	Player_Number const nr_players = game().map().get_nrplayers();
+	PlayerNumber const nr_players = game().map().get_nrplayers();
 	player_attackable.resize(nr_players);
 	bool any_attackable = false;
 	bool any_attacked = false;
@@ -2722,7 +2722,7 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 	iterate_players_existing_novar(p, nr_players, game())++ plr_in_game;
 
 	// receiving games statistics and parsing it (reading latest entry)
-	const Game::General_Stats_vector& genstats = game().get_general_statistics();
+	const Game::GeneralStatsVector& genstats = game().get_general_statistics();
 	for (uint8_t j = 1; j <= plr_in_game; ++j) {
 		if (pn == j) {
 			player_attackable[j - 1] = false;
@@ -2889,9 +2889,9 @@ void DefaultAI::print_land_stats() {
 	uint32_t count_l = 0;
 	uint32_t sum_m = 0;
 	uint32_t count_m = 0;
-	Player_Number const nr_players = game().map().get_nrplayers();
+	PlayerNumber const nr_players = game().map().get_nrplayers();
 	iterate_players_existing_novar(p, nr_players, game())++ plr_in_game;
-	const Game::General_Stats_vector& genstats = game().get_general_statistics();
+	const Game::GeneralStatsVector& genstats = game().get_general_statistics();
 
 	for (uint8_t j = 1; j <= plr_in_game; ++j) {
 		log(" player: %1d, landsize: %5d, military strength: %3d\n",

@@ -92,19 +92,19 @@ int LuaCoroutine::resume()
 }
 
 void LuaCoroutine::push_arg(const Widelands::Player * plr) {
-	to_lua<LuaGame::L_Player>(m_L, new LuaGame::L_Player(plr->player_number()));
+	to_lua<LuaGame::LuaPlayer>(m_L, new LuaGame::LuaPlayer(plr->player_number()));
 	m_ninput_args++;
 }
 
 void LuaCoroutine::push_arg(const Widelands::Coords & coords) {
-	to_lua<LuaMap::L_Field>(m_L, new LuaMap::L_Field(coords));
+	to_lua<LuaMaps::LuaField>(m_L, new LuaMaps::LuaField(coords));
 	++m_nargs;
 	++m_ninput_args;
 }
 
 void LuaCoroutine::push_arg(const Widelands::BuildingDescr* building_descr) {
 	assert(building_descr != nullptr);
-	to_lua<LuaMap::L_BuildingDescription>(m_L, new LuaMap::L_BuildingDescription(building_descr));
+	to_lua<LuaMaps::LuaBuildingDescription>(m_L, new LuaMaps::LuaBuildingDescription(building_descr));
 	++m_ninput_args;
 }
 

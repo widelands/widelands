@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4435\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-07-16 06:11+0000\n"
-"PO-Revision-Date: 2014-03-11 23:11+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"POT-Creation-Date: 2014-09-18 18:55+0000\n"
+"PO-Revision-Date: 2014-08-31 12:10+0000\n"
+"Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-07-17 05:41+0000\n"
-"X-Generator: Launchpad (build 17114)\n"
+"X-Launchpad-Export-Date: 2014-09-19 05:49+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 "Language: it\n"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:23
 msgid "Expand north-east and build a quarry"
-msgstr "Espandi a nord est e costruisci una cava"
+msgstr "Espanditi a nord-est e costruisci una cava"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:25
 msgid "Expand north-east to the stones"
@@ -61,19 +61,19 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:38
 msgid "Black – coal"
-msgstr "Nero - Carbone"
+msgstr "Nero - carbone"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:39
 msgid "Red – iron ore"
-msgstr "Rosso - Ferro"
+msgstr "Rosso - ferro grezzo"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:40
 msgid "Yellow – gold"
-msgstr "Giallo - Oro"
+msgstr "Giallo - oro"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:41
 msgid "Grey – granite"
-msgstr "Grigio - Granito"
+msgstr "Grigio - granito"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:42
 msgid ""
@@ -83,11 +83,13 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:48
 msgid "Provide your miners with food"
-msgstr "Provvedi ai tuoi minatori con del cibo"
+msgstr "Fornisci del cibo ai tuoi minatori"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:50
 msgid "Build a hunter, a gamekeeper and a tavern"
-msgstr "Costruisci un cacciatore, un guardiacaccia e una taverna"
+msgstr ""
+"Costruisci una capanna del cacciatore, una capanna del guardiacaccia e una "
+"taverna"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:51
 msgid "In order to work, your miners need food."
@@ -113,7 +115,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:60
 msgid "Bake bread"
-msgstr "Cuoci pane"
+msgstr "Prepara del pane"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:62
 msgid "Build a well, a farm and a bakery"
@@ -138,7 +140,7 @@ msgstr "Raffina le tue risorse minerarie"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:73
 msgid "Build a smelting works"
-msgstr "Costruisci un centro di fusione"
+msgstr "Costruisci una fonderia."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:74
 msgid ""
@@ -164,7 +166,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:84
 msgid "Also build a micro brewery."
-msgstr ""
+msgstr "Costruisci anche una piccola birreria."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:85
 msgid ""
@@ -233,8 +235,10 @@ msgstr "Costruisci una calchera e l'economia del carbone"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:108
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:114
-msgid "Build a lime kiln, a well and a charcoal burner, or a coal mine"
+msgid "Build a lime kiln, a well and a charcoal kiln, or a coal mine"
 msgstr ""
+"Costruisci una calchera, un pozzo e una carbonaia, oppure una miniera di "
+"carbone"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:109
 msgid ""
@@ -250,18 +254,14 @@ msgstr ""
 msgid ""
 "You can obtain water by building a well upon a water source, which your "
 "geologists can discover when you send them to any flag that is not on a "
-"mountain. Coal can be obtained by building a charcoal burner or a coal mine."
+"mountain. Coal can be obtained by building a charcoal kiln or a coal mine."
 msgstr ""
-"Potrai ottenere l'acqua costruendo un pozzo al di sopra di una fonte "
-"d'acqua, che potrà essere scoperta dai geologi quando li mandi verso una "
-"qualsiasi bandiera che non è su una montagna. Il carbone può essere ottenuto "
-"costruendo una carbonaia o una miniera di carbone."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:120
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:122
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:125
 msgid "Build a reed yard"
-msgstr ""
+msgstr "Costruisci una serra per le felci"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:123
 msgid ""
@@ -274,7 +274,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:133
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:138
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "Costruisci una fattoria da bestiame"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:134
 msgid ""
@@ -391,7 +391,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:326
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:335
 msgid "Your Loyal Companion"
-msgstr "Il vostro leale compagno"
+msgstr "Il tuo leale compagno"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:188
 msgid "Brave Boldreth steps to your side..."
@@ -489,7 +489,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:244
 msgid "Boldreth laughs..."
-msgstr "Boldreth ridendo..."
+msgstr "Boldreth ride..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:245
 msgid ""
@@ -554,7 +554,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:280
 msgid "Boldreth cheers up..."
-msgstr "Boldreth alla salute..."
+msgstr "Boldreth si rallegra..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:281
 msgid "Our hunters are out in the forests, Thron."
@@ -670,7 +670,7 @@ msgstr "Ci serve un indurente per il legno, e ci serve ora!"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:336
 msgid "Boldreth smiles..."
-msgstr "Boldreth sorridendo..."
+msgstr "Boldreth sorride..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:337
 msgid ""
@@ -693,7 +693,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:346
 msgid "Khantrukh steps in..."
-msgstr "Khantrukh procede..."
+msgstr "Khantrukh interviene..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:347
 msgid ""
@@ -711,24 +711,24 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:352
 msgid "Now this is a problem we should do something about!"
-msgstr "È un problema che dobbiamo risolvere!"
+msgstr "Adesso questo è un problema che dobbiamo risolvere!"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:358
 msgid "Khantrukh seems relieved..."
-msgstr "Khantrukh sembra di essere sollevato..."
+msgstr "Khantrukh sembra essere sollevato..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:359
 msgid ""
 "Wonderful! Our roofs are not dripping anymore, and we have all the material "
 "we need for, well, whichever monumental building we see fit!"
 msgstr ""
-"Meraviglioso! I nostri tetti non gocciolano più, e abbiamo tutto il "
+"Meraviglioso! I nostri tetti non sgocciolano più, e abbiamo tutto il "
 "materiale di cui abbiamo bisogno per qualsiasi edificio monumentale lo "
 "ritenga necessario!"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:365
 msgid "Mission Complete"
-msgstr "Missione Completa"
+msgstr "Missione completata"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:367
 msgid ""
@@ -736,7 +736,7 @@ msgid ""
 "cheer me up, he said."
 msgstr ""
 "L'altro giorno Boldreth mi ha chiesto di accompagnarlo alla nuova locanda. "
-"Ti dovrebbe tirare su di morale, ha detto."
+"Mi dovrebbe tirare su di morale, ha detto."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:369
 msgid ""
@@ -764,8 +764,8 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
-"Hai completato questa missione. Puoi continuare a giocare se vuoi, "
-"altrimenti continua con la prossima missione."
+"Hai completato questa missione. Puoi continuare a giocare, se lo desideri, "
+"altrimenti passa alla prossima missione."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:379
 msgid "We Need Oxen!"
@@ -806,7 +806,8 @@ msgid ""
 "One night, when the moon shone brightly, I climbed to the peak of "
 "Kal’mavrath."
 msgstr ""
-"Una notte, quando la luna luminosa, sono salito al picco di Kal'mavrath."
+"Una notte, quando la luna brillava luminosa, sono salito al picco di "
+"Kal'mavrath."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:393
 msgid ""
@@ -816,7 +817,7 @@ msgid ""
 "ashes and wasted ruins left of our once beautiful capital when we get there?"
 msgstr ""
 "Quando ho guardato l'orizzonte, Ho visto ancora luci cremisi di lampade in "
-"lontananza. E' incredibile con quanta passione i miei fratelli combattono "
+"lontananza. È incredibile con quanta passione i miei fratelli combattono "
 "questa guerra. Temo il momento in qui vedrò di nuovo Al'thunran - quando ci "
 "arriveremo ci sarà qualcosa oltre alle ceneri e alle rovine devastate della "
 "nostra capitale una volta bella?"
@@ -827,7 +828,7 @@ msgstr "Un altro freddo giorno"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:402
 msgid "Thron looks worried..."
-msgstr "Thron guarda dispiaciuto..."
+msgstr "Thron sembra preoccupato..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:403
 msgid ""
@@ -845,7 +846,7 @@ msgid ""
 "finally come to an end."
 msgstr ""
 "Ho pregato affinché facesse più caldo, come ho pregato che la guerra "
-"arrivasse finalmente alla fine."
+"giungesse finalmente alla fine."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:407
 msgid "So far, it seems that neither prayer was fulfilled."
@@ -869,10 +870,10 @@ msgstr "Hanno deciso di unirsi a noi!"
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../scripting/format_scenario.lua:129
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] "Nuovo Obiettivo"
-msgstr[1] "Nuovi Obiettivi"
+msgstr[0] "Nuovo obiettivo"
+msgstr[1] "Nuovi obiettivi"

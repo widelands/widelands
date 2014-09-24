@@ -53,7 +53,7 @@ uint32_t get_map_end_screen_y(const Widelands::Map &);
  * the point is in. But this should be fully correct for all but the most
  * bizarre triangle shapes, and acceptable even for them.
  */
-Widelands::Node_and_Triangle<> calc_node_and_triangle
+Widelands::NodeAndTriangle<> calc_node_and_triangle
 	(const Widelands::Map &, uint32_t x, uint32_t y);
 
 void normalize_pix(const Widelands::Map &, Point & p);

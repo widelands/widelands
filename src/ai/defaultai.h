@@ -65,8 +65,8 @@ struct Flag;
 // - handling of trainingsites (if supply line is broken - send some soldiers
 //   out, to have some more forces. Reincrease the number of soldiers that
 //   should be trained if inputs_ get filled again.).
-struct DefaultAI : Computer_Player {
-	DefaultAI(Widelands::Game&, const Widelands::Player_Number, uint8_t);
+struct DefaultAI : ComputerPlayer {
+	DefaultAI(Widelands::Game&, const Widelands::PlayerNumber, uint8_t);
 	~DefaultAI();
 	void think() override;
 
@@ -77,32 +77,32 @@ struct DefaultAI : Computer_Player {
 	};
 
 	/// Implementation for Aggressive
-	struct AggressiveImpl : public Computer_Player::Implementation {
+	struct AggressiveImpl : public ComputerPlayer::Implementation {
 		AggressiveImpl() {
 			name = _("Aggressive");
 		}
-		Computer_Player* instantiate(Widelands::Game& game,
-		                             Widelands::Player_Number const p) const override {
+		ComputerPlayer* instantiate(Widelands::Game& game,
+		                             Widelands::PlayerNumber const p) const override {
 			return new DefaultAI(game, p, AGGRESSIVE);
 		}
 	};
 
-	struct NormalImpl : public Computer_Player::Implementation {
+	struct NormalImpl : public ComputerPlayer::Implementation {
 		NormalImpl() {
 			name = _("Normal");
 		}
-		Computer_Player* instantiate(Widelands::Game& game,
-		                             Widelands::Player_Number const p) const override {
+		ComputerPlayer* instantiate(Widelands::Game& game,
+		                             Widelands::PlayerNumber const p) const override {
 			return new DefaultAI(game, p, NORMAL);
 		}
 	};
 
-	struct DefensiveImpl : public Computer_Player::Implementation {
+	struct DefensiveImpl : public ComputerPlayer::Implementation {
 		DefensiveImpl() {
 			name = _("Defensive");
 		}
-		Computer_Player* instantiate(Widelands::Game& game,
-		                             Widelands::Player_Number const p) const override {
+		ComputerPlayer* instantiate(Widelands::Game& game,
+		                             Widelands::PlayerNumber const p) const override {
 			return new DefaultAI(game, p, DEFENSIVE);
 		}
 	};
@@ -174,7 +174,7 @@ private:
 	bool m_mineable_changed;
 
 	Widelands::Player* player_;
-	Widelands::Tribe_Descr const* tribe_;
+	Widelands::TribeDescr const* tribe_;
 
 	std::vector<BuildingObserver> buildings_;
 	uint32_t num_constructionsites_;

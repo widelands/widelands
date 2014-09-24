@@ -40,12 +40,12 @@ struct InteractiveBaseInternals;
 class UniqueWindowHandler;
 
 /**
- * This is used to represent the code that Interactive_Player and
- * Editor_Interactive share.
+ * This is used to represent the code that InteractivePlayer and
+ * EditorInteractive share.
  */
-class Interactive_Base : public Map_View, public DebugConsole::Handler {
+class InteractiveBase : public MapView, public DebugConsole::Handler {
 public:
-	friend class Sound_Handler;
+	friend class SoundHandler;
 
 	enum {
 		dfShowCensus     = 1, ///< show census report on buildings
@@ -57,14 +57,14 @@ public:
 	// Manages all UniqueWindows.
 	UniqueWindowHandler& unique_windows();
 
-	Interactive_Base(Widelands::Editor_Game_Base &, Section & global_s);
-	virtual ~Interactive_Base();
+	InteractiveBase(Widelands::EditorGameBase &, Section & global_s);
+	virtual ~InteractiveBase();
 
-	Widelands::Editor_Game_Base & egbase() const {return m_egbase;}
-	virtual void reference_player_tribe(Widelands::Player_Number, const void * const) {}
+	Widelands::EditorGameBase & egbase() const {return m_egbase;}
+	virtual void reference_player_tribe(Widelands::PlayerNumber, const void * const) {}
 
 	bool m_show_workarea_preview;
-	OverlayManager::JobId show_work_area(const Workarea_Info & workarea_info, Widelands::Coords coords);
+	OverlayManager::JobId show_work_area(const WorkareaInfo & workarea_info, Widelands::Coords coords);
 	void hide_work_area(OverlayManager::JobId job_id);
 
 	//  point of view for drawing
@@ -73,7 +73,7 @@ public:
 	void think() override;
 	virtual void postload();
 
-	const Widelands::Node_and_Triangle<> & get_sel_pos() const {
+	const Widelands::NodeAndTriangle<> & get_sel_pos() const {
 		return m_sel.pos;
 	}
 	bool get_sel_freeze() const {return m_sel.freeze;}
@@ -90,7 +90,7 @@ public:
 	void set_sel_triangles(const bool yes) {m_sel.triangles = yes;}
 
 	uint32_t get_sel_radius() const {return m_sel.radius;}
-	virtual void set_sel_pos(Widelands::Node_and_Triangle<>);
+	virtual void set_sel_pos(Widelands::NodeAndTriangle<>);
 	void set_sel_freeze(const bool yes) {m_sel.freeze = yes;}
 	void set_sel_radius(uint32_t);
 
@@ -109,7 +109,7 @@ public:
 	bool is_building_road() const {return m_buildroad;}
 	Widelands::CoordPath * get_build_road() {return m_buildroad;}
 	void start_build_road
-		(Widelands::Coords start, Widelands::Player_Number player);
+		(Widelands::Coords start, Widelands::PlayerNumber player);
 		void abort_build_road();
 		void finish_build_road();
 		bool append_build_road(Widelands::Coords field);
@@ -155,11 +155,11 @@ private:
 	void cmdLua(const std::vector<std::string> & args);
 	void update_speedlabel();
 
-	struct Sel_Data {
-		Sel_Data
+	struct SelData {
+		SelData
 			(const bool Freeze = false, const bool Triangles = false,
-			 const Widelands::Node_and_Triangle<> Pos       =
-			 	Widelands::Node_and_Triangle<>
+			 const Widelands::NodeAndTriangle<> Pos       =
+				Widelands::NodeAndTriangle<>
 			 		(Widelands::Coords(0, 0),
 			 		 Widelands::TCoords<>
 			 		 	(Widelands::Coords(0, 0), Widelands::TCoords<>::D)),
@@ -172,14 +172,14 @@ private:
 		{}
 		bool              freeze; // don't change m_sel even if mouse moves
 		bool              triangles; //  otherwise nodes
-		Widelands::Node_and_Triangle<>     pos;
+		Widelands::NodeAndTriangle<>     pos;
 		uint32_t              radius;
 		const Image* pic;
 		OverlayManager::JobId jobid;
 	} m_sel;
 
 	std::unique_ptr<InteractiveBaseInternals> m;
-	Widelands::Editor_Game_Base & m_egbase;
+	Widelands::EditorGameBase & m_egbase;
 	uint32_t m_display_flags;
 	uint32_t          m_lastframe;         //  system time (milliseconds)
 	uint32_t          m_frametime;         //  in millseconds
@@ -188,7 +188,7 @@ private:
 	OverlayManager::JobId m_jobid;
 	OverlayManager::JobId m_road_buildhelp_overlay_jobid;
 	Widelands::CoordPath  * m_buildroad;         //  path for the new road
-	Widelands::Player_Number m_road_build_player;
+	Widelands::PlayerNumber m_road_build_player;
 
 	UI::Textarea m_label_speed_shadow;
 	UI::Textarea m_label_speed;

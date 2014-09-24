@@ -45,7 +45,7 @@ namespace UI {
  * Finally, there is static mode, which does not change desired or actual
  * size in any way based on the text.
  *
- * A multiline Textarea differs from a \ref Multiline_Textarea in that
+ * A multiline Textarea differs from a \ref MultilineTextarea in that
  * the latter provides scrollbars.
  */
 struct Textarea : public Panel {
