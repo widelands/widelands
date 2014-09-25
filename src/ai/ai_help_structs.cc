@@ -35,8 +35,13 @@ bool FindNodeWithFlagOrRoad::accept(const Map&, FCoords fc) const {
 // CheckStepRoadAI
 
 bool CheckStepRoadAI::allowed(
-   Map& map, FCoords, FCoords end, int32_t, CheckStep::StepId const id) const {
+   Map& map, FCoords start, FCoords end, int32_t, CheckStep::StepId const id) const {
 	uint8_t endcaps = player_->get_buildcaps(end);
+
+	// we should not cross fields with road or flags (or any other immovable)
+	if ((map.get_immovable(start)) && !(id == CheckStep::stepFirst)) {
+		return false;
+	}
 
 	// Calculate cost and passability
 	if (!(endcaps & movecaps_))

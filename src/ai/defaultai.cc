@@ -23,6 +23,7 @@
 #include <ctime>
 #include <queue>
 #include <typeinfo>
+#include <unordered_set>
 
 #include "ai/ai_hints.h"
 #include "base/log.h"
@@ -56,7 +57,7 @@ constexpr int kIdleMineUpdateInterval = 22000;
 constexpr int kBusyMineUpdateInterval = 2000;
 // building of the same building can be started after 25s at earliest
 constexpr int kBuildingMinInterval = 25 * 1000;
-constexpr int kMinBFCheckInterval = 9 * 1000;
+constexpr int kMinBFCheckInterval = 6 * 1000;
 
 using namespace Widelands;
 
@@ -100,21 +101,21 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 	   Notifications::subscribe<NoteFieldPossession>([this](const NoteFieldPossession& note) {
 			if (note.player != player_) {
 			   return;
-			}
-			if (note.ownership == NoteFieldPossession::Ownership::GAINED) {
-			   unusable_fields.push_back(note.fc);
-			}
+		   	}
+		   	if (note.ownership == NoteFieldPossession::Ownership::GAINED) {
+				unusable_fields.push_back(note.fc);
+		   }
 		});
 
 	// Subscribe to NoteImmovables.
 	immovable_subscriber_ =
 	   Notifications::subscribe<NoteImmovable>([this](const NoteImmovable& note) {
-			if (note.pi->owner().player_number() != player_->player_number()) {
-				return;
-			}
-			if (note.ownership == NoteImmovable::Ownership::GAINED) {
-				gain_immovable(*note.pi);
-			} else {
+		   	if (note.pi->owner().player_number() != player_->player_number()) {
+			   return;
+		   }
+		   	if (note.ownership == NoteImmovable::Ownership::GAINED) {
+			   gain_immovable(*note.pi);
+		   } else {
 			   lose_immovable(*note.pi);
 		   }
 		});
@@ -122,16 +123,12 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 	// Subscribe to ProductionSiteOutOfResources.
 	outofresource_subscriber_ = Notifications::subscribe<NoteProductionSiteOutOfResources>(
 	   [this](const NoteProductionSiteOutOfResources& note) {
-		if (note.ps->owner().player_number() != player_->player_number()) {
-			return;
-		}
+		   	if (note.ps->owner().player_number() != player_->player_number()) {
+			   return;
+		   }
 
 		   out_of_resources_site(*note.ps);
-		   // if (note.ownership == NoteImmovable::Ownership::GAINED) {
-		   // gain_immovable(*note.pi);
-		   //} else {
-		   // lose_immovable(*note.pi);
-		   //}
+
 		});
 }
 
@@ -232,10 +229,8 @@ void DefaultAI::think() {
 		return;
 
 	// improve existing roads!
-	// This sounds important, but actually is not as important as the other
-	// actions are. Reasons are the following:
-	//    * The "donkey feature" made economies more stable, even with stupid
-	//      roads.
+	// main part of this improvment is creation 'shortcut roads'
+	//this includes also connection of new buildings
 	if (improve_roads(gametime)) {
 		m_buildable_changed = true;
 		m_mineable_changed = true;
@@ -1586,7 +1581,7 @@ bool DefaultAI::improve_roads(int32_t gametime) {
 	}
 
 	// for "normal" flags it is not much usefull to test them every time
-	if (flag.nr_of_roads() > 1 && flag.current_wares() <= 4 && gametime % 15 > 0) {
+	if (flag.nr_of_roads() > 1 && flag.current_wares() <= 6 && gametime % 200 > 0) {
 		return false;
 	}
 
@@ -1598,8 +1593,8 @@ bool DefaultAI::improve_roads(int32_t gametime) {
 // or other economy
 bool DefaultAI::create_shortcut_road(const Flag& flag) {
 
-	// increasing failed_connection_tries counter
-	// in fact it counts a time when an economy is without warehouse
+	// Increasing the failed_connection_tries counter
+	// At the same time it indicates a time an economy is without a warehouse
 	EconomyObserver* eco = get_economy_observer(flag.economy());
 	if (flag.get_economy()->warehouses().empty()) {
 		eco->failed_connection_tries += 1;
@@ -1627,65 +1622,28 @@ bool DefaultAI::create_shortcut_road(const Flag& flag) {
 		return true;
 	}
 
-	// we collect flags in radius 'checkradius' in two ways
-	// 1) first via "walking on roads" and all reached flags get "distance on roads"
-	std::priority_queue<NearFlag> queue;
-	std::vector<NearFlag> nearflags;
-	std::vector<int32_t> hashtable;
-	queue.push(NearFlag(flag, 0, 0));
 	Map& map = game().map();
 	// shortcut is made (attempted) if  (current_road - possible_shortcut)>minred
 	uint16_t minred = 20;
 	// when testing flags do not go farer (as crow fly) from starting flag then:
 	uint16_t checkradius = 10;
 
-	// now iterate (=walk) over roads and collect info on all flags within checkradius
-	while (!queue.empty()) {
-		std::vector<NearFlag>::iterator f =
-		   find(nearflags.begin(), nearflags.end(), queue.top().flag);
+	// 1. first we collect all reachange points
+	std::vector<NearFlag> nearflags;
+	std::unordered_set<int32_t> lookuptable;
 
-		if (f != nearflags.end()) {
-			queue.pop();
-			continue;
-		}
-
-		nearflags.push_back(queue.top());
-		queue.pop();
-		NearFlag& nf = nearflags.back();
-
-		for (uint8_t i = 1; i <= 6; ++i) {
-			Road* const road = nf.flag->get_road(i);
-
-			if (!road)
-				continue;
-
-			Flag* endflag = &road->get_flag(Road::FlagStart);
-
-			if (endflag == nf.flag)
-				endflag = &road->get_flag(Road::FlagEnd);
-
-			int32_t dist = map.calc_distance(flag.get_position(), endflag->get_position());
-
-			if (dist > checkradius)  //  out of range
-				continue;
-
-			queue.push(NearFlag(*endflag, nf.cost_ + road->get_path().get_nsteps(), dist));
-			hashtable.push_back(endflag->get_position().x * 1234 + endflag->get_position().y);
-		}
-	}
-
-	// 2) BUT there can be another flags, that were not accessed via walking on roads
-	// typically other economies and flags belonging to hives that branched too far away from here
 	FindNodeWithFlagOrRoad functor;
 	CheckStepRoadAI check(player_, MOVECAPS_WALK, true);
 	std::vector<Coords> reachable;
 
-	// first look for possible destinations
+	// vector reachable now contains all suitable fields
 	map.find_reachable_fields(
 	   Area<FCoords>(map.get_fcoords(flag.get_position()), checkradius), &reachable, check, functor);
 
-	if (reachable.empty())
+	// Does this make sense?
+	if (reachable.empty()) {
 		return false;
+	}
 
 	for (const Coords& reachable_coords : reachable) {
 
@@ -1703,23 +1661,22 @@ bool DefaultAI::create_shortcut_road(const Flag& flag) {
 			// testing if a flag/road's economy has a warehouse, if not we are not
 			// interested to connect to it
 			if (player_immovable->economy().warehouses().size() == 0) {
-
 				continue;
 			}
 
 			// now make sure that this field has not been processed yet
 			const int32_t hash = reachable_coords.x * 1234 + reachable_coords.y;
-			if (std::find(hashtable.begin(), hashtable.end(), hash) == hashtable.end()) {
-				// not in hashtable yet, adding it now
-				hashtable.push_back(reachable_coords.x * 1234 + reachable_coords.y);
+			if (lookuptable.count(hash) == 0) {
+				lookuptable.insert(hash);
 
 				// adding flag into NearFlags if road is possible
 				Path* path2 = new Path();
+
 				if (map.findpath(flag.get_position(), reachable_coords, 0, *path2, check) >= 0) {
 
-					// path is possible, but we need 'current road distance'
-					// but as the flags are not connected via roads, at least not in vicinit
-					// we assign 'virtual distance'
+					// path is possible, but for now we presume connection
+					//'walking on existing roads' is not possible
+					// so we assign 'virtual distance'
 					int32_t virtual_distance = 0;
 					// the same economy, but connection not spotted above via "walking on roads"
 					// algorithm
@@ -1741,7 +1698,68 @@ bool DefaultAI::create_shortcut_road(const Flag& flag) {
 		}
 	}
 
-	// Now we have collected all candidate flags
+	// now we walk over roads and if field is reachable by roads, we change distance asigned before
+	std::priority_queue<NearFlag> queue;
+	std::vector<NearFlag> nearflags_tmp;  // only used to collect flags reachable walk over roads
+	queue.push(NearFlag(flag, 0, 0));
+
+	// algorithm to walk on roads
+	while (!queue.empty()) {
+		std::vector<NearFlag>::iterator f =
+		   find(nearflags_tmp.begin(), nearflags_tmp.end(), queue.top().flag);
+
+		if (f != nearflags_tmp.end()) {
+			queue.pop();
+			continue;
+		}
+
+		nearflags_tmp.push_back(queue.top());
+		queue.pop();
+		NearFlag& nf = nearflags_tmp.back();
+
+		for (uint8_t i = 1; i <= 6; ++i) {
+			Road* const road = nf.flag->get_road(i);
+
+			if (!road)
+				continue;
+
+			Flag* endflag = &road->get_flag(Road::FlagStart);
+
+			if (endflag == nf.flag)
+				endflag = &road->get_flag(Road::FlagEnd);
+
+			int32_t dist = map.calc_distance(flag.get_position(), endflag->get_position());
+
+			if (dist > checkradius)  //  out of range of interest
+				continue;
+
+			queue.push(NearFlag(*endflag, nf.cost_ + road->get_path().get_nsteps(), dist));
+		}
+	}
+
+	// iterating over nearflags_tmp, each item in nearflags_tmp should be contained also in nearflags
+	// so for each corresponding field in nearflags we update "cost" (distance on existing roads)
+	// to actual value
+	for (std::vector<NearFlag>::iterator nf_walk_it = nearflags_tmp.begin();
+	     nf_walk_it != nearflags_tmp.end();
+	     ++nf_walk_it) {
+		int32_t const hash_walk =
+		   nf_walk_it->flag->get_position().x * 1234 + nf_walk_it->flag->get_position().y;
+		if (lookuptable.count(hash_walk) > 0) {
+			// iterting over nearflags
+			for (std::vector<NearFlag>::iterator nf_it = nearflags.begin(); nf_it != nearflags.end();
+			     ++nf_it) {
+				int32_t const hash =
+				   nf_it->flag->get_position().x * 1234 + nf_it->flag->get_position().y;
+				if (hash == hash_walk) {
+					// decreasing "cost" (of walking via roads)
+					if (nf_it->cost_ > nf_walk_it->cost_) {
+						nf_it->cost_ = nf_walk_it->cost_;
+					}
+				}
+			}
+		}
+	}
 
 	// ordering nearflags
 	std::sort(nearflags.begin(), nearflags.end(), CompareShortening());
@@ -1757,17 +1775,22 @@ bool DefaultAI::create_shortcut_road(const Flag& flag) {
 	for (uint32_t i = 0; i < nearflags.size() && i < 10; ++i) {
 		NearFlag& nf = nearflags.at(i);
 
+		// terminating looping if reduction is too low (nearflags are sorted by reduction)
+		if ((nf.cost_ - nf.distance_) < minred) {
+			return false;
+		}
+
 		// testing the nearflag
-		if ((nf.cost_ - nf.distance_) > minred && nf.distance_ >= 2) {
+		// usually we allow connecting only if both flags are closer then 'checkradius-2'
+		// with exeption the flag belongs to a small economy (typically a new building not connected
+		// yet)
+		if ((nf.cost_ - nf.distance_) >= minred && nf.distance_ >= 2 &&
+		    (nf.distance_ < checkradius - 2 || eco->flags.size() < 4)) {
 
 			// sometimes the shortest road is not the buildable, even if map.findpath claims so
 			// best so we add some randomness
-			random_gametime /= 2;
-			if (random_gametime % 2 > 0 && eco->failed_connection_tries > 1) {
-				continue;
-			}
-			// we skipp also by first attempt
-			if (random_gametime % 5 == 0) {
+			random_gametime /= 3;
+			if (random_gametime % 3 > 1) {  
 				continue;
 			}
 
@@ -1779,20 +1802,16 @@ bool DefaultAI::create_shortcut_road(const Flag& flag) {
 
 			if (pathcost >= 0) {
 				if (static_cast<int32_t>(nf.cost_ - path.get_nsteps()) > minred) {
-
 					game().send_player_build_road(player_number(), path);
 					return true;
 				}
 			}
-
 			delete &path;
-		} else {
-			return false;
 		}
 	}
 
+	// if all possible roads skipped
 	return false;
-	;
 }
 
 /**
