@@ -51,14 +51,14 @@ inline EditorInteractive & MainMenuSaveMap::eia() {
 
 
 MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
-	: UI::Window(&parent, "save_map_menu", 0, 0, 550, 330, _("Save Map"))
+	: UI::Window(&parent, "save_map_menu", 0, 0, 560, 330, _("Save Map"))
 {
 	int32_t const spacing =  5;
 	int32_t const offsx   = spacing;
 	int32_t const offsy   = 10;
 	int32_t posx          = offsx;
 	int32_t posy          = offsy;
-	int32_t const descr_label_w = 90;
+	int32_t const descr_label_w = 100;
 
 	m_ls =
 		new UI::Listselect<const char *>
@@ -72,7 +72,8 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 			(this,
 			 posx, posy + get_inner_h() - spacing - offsy - 60 + 3,
 			 get_inner_w() / 2 - spacing, 20,
-			 g_gr->images().get("pics/but1.png"));
+			 g_gr->images().get("pics/but1.png"),
+			 UI::Align::Align_Left);
 	m_editbox->setText(parent.egbase().map().get_name());
 	m_editbox->changed.connect(boost::bind(&MainMenuSaveMap::edit_box_changed, this));
 
@@ -80,9 +81,9 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 	new UI::Textarea
 		(this, posx, posy, descr_label_w, 20, _("Name:"), UI::Align_CenterLeft);
 	m_name =
-		new UI::Textarea
-			(this, posx + descr_label_w, posy, 200, 20, "---", UI::Align_CenterLeft);
-	posy += 20 + spacing;
+		new UI::MultilineTextarea
+			(this, posx + descr_label_w, posy, 200, 40, "---", UI::Align_CenterLeft);
+	posy += 40 + spacing;
 
 	new UI::Textarea
 		(this, posx, posy, descr_label_w, 20, _("Author:"), UI::Align_CenterLeft);
@@ -229,6 +230,7 @@ void MainMenuSaveMap::clicked_item(uint32_t) {
 		m_editbox->setText(FileSystem::FS_Filename(name));
 
 		m_name  ->set_text(map.get_name       ());
+		m_name  ->set_tooltip(map.get_name    ());
 		m_author->set_text(map.get_author     ());
 		m_descr ->set_text(map.get_description());
 
@@ -240,17 +242,18 @@ void MainMenuSaveMap::clicked_item(uint32_t) {
 		m_size->set_text(buf);
 	} else {
 		m_name     ->set_text(FileSystem::FS_Filename(name));
+		m_name     ->set_tooltip("");
 		m_author   ->set_text("");
 		m_nrplayers->set_text("");
 		m_size     ->set_text("");
 		if (g_fs->IsDirectory(name)) {
-			std::string dir_string =
-				(boost::format("\\<%s\\>") % _("directory")).str();
-			m_descr    ->set_text(dir_string);
+			m_name->set_tooltip((boost::format(_("Directory: %s"))
+										% FileSystem::FS_Filename(name)).str());
+			m_descr->set_text((boost::format("\\<%s\\>") % _("directory")).str());
 		} else {
-			std::string not_map_string =
-				(boost::format("\\<%s\\>") % _("Not a map file")).str();
-			m_descr    ->set_text(not_map_string);
+			std::string not_map_string = _("Not a map file");
+			m_name->set_tooltip(not_map_string);
+			m_descr->set_text((boost::format("\\<%s\\>") % not_map_string).str());
 		}
 
 	}
@@ -329,7 +332,7 @@ void MainMenuSaveMap::fill_list() {
 			try {
 				wml->preload_map(true);
 				m_ls->add
-					(FileSystem::FS_Filename(name),
+					(FileSystem::FS_FilenameWoExt(name).c_str(),
 					 name,
 					 g_gr->images().get("pics/ls_wlmap.png"));
 			} catch (const WException &) {} //  we simply skip illegal entries
