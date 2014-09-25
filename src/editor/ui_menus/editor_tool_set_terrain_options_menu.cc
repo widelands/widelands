@@ -69,6 +69,7 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 	constexpr int kSmallPicWidth = 20;
 
 	std::string tooltip;
+	std::vector<std::string> tooltips;
 
 	for (size_t checkfor = 0; check[checkfor] >= 0; ++checkfor) {
 		const TerrainDescription::Type ter_is = terrain_descr.get_is();
@@ -85,42 +86,46 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 			surf->blit(pt, green->surface(), Rect(0, 0, green->width(), green->height()));
 			pt.x += kSmallPicWidth + 1;
 			/** TRANSLATORS: This is a terrain type tooltip in the editor */
-			tooltip = _("Green");
+			tooltips.push_back(_("Green"));
 		} else {
 			if (ter_is & TerrainDescription::WATER) {
 				surf->blit(pt, water->surface(), Rect(0, 0, water->width(), water->height()));
 				pt.x += kSmallPicWidth + 1;
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
-				tooltip = _("Water");
+				tooltips.push_back(_("Water"));
 			}
 			else if (ter_is & TerrainDescription::MOUNTAIN) {
 				surf->blit(pt, mountain->surface(), Rect(0, 0, mountain->width(), mountain->height()));
 				pt.x += kSmallPicWidth + 1;
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
-				tooltip = _("Mountains");
+				tooltips.push_back(_("Mountains"));
 			}
 			if (ter_is & TerrainDescription::ACID) {
 				surf->blit(pt, dead->surface(), Rect(0, 0, dead->width(), dead->height()));
 				pt.x += kSmallPicWidth + 1;
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
-				tooltip = ((boost::format("%s %s")) % tooltip % _("Dead")).str();
+				tooltips.push_back(_("Dead"));
 			}
 			if (ter_is & TerrainDescription::UNPASSABLE) {
 				surf->blit(
 				   pt, unpassable->surface(), Rect(0, 0, unpassable->width(), unpassable->height()));
 				pt.x += kSmallPicWidth + 1;
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
-				tooltip = ((boost::format("%s %s")) % tooltip % _("Unpassable")).str();
+				tooltips.push_back(_("Unpassable"));
 			}
 			if (ter_is & TerrainDescription::DRY) {
 				surf->blit(pt, dry->surface(), Rect(0, 0, dry->width(), dry->height()));
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
-				 tooltip = ((boost::format("%s %s")) % tooltip % _("Treeless")).str();
+				 tooltips.push_back(_("Treeless"));
 			}
 		}
 
+		for (const std::string& temp_tooltip : tooltips) {
+			tooltip = ((boost::format("%s %s")) % tooltip % temp_tooltip).str();
+		}
+
 		/** TRANSLATORS: %1% = terrain name, %2% = list of terrain types  */
-		tooltip = ((boost::format("%1%: %2%")) % terrain_descr.descname() % tooltip).str();
+		tooltip = ((boost::format("%1%: %2%")) % terrain_descr.descname() % tooltip.substr(1)).str();
 
 		// Make sure we delete this later on.
 		offscreen_images->emplace_back(new_in_memory_image("dummy_hash", surf));
