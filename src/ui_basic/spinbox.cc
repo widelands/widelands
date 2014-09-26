@@ -159,7 +159,12 @@ SpinBox::SpinBox
 		sbi->butTenMinus->sigclicked.connect(boost::bind(&SpinBox::changeValue, boost::ref(*this), -10));
 		sbi->butTenPlus->set_repeating(true);
 		sbi->butTenMinus->set_repeating(true);
+		m_buttons.push_back(sbi->butTenMinus);
+		m_buttons.push_back(sbi->butTenPlus);
 	}
+
+	m_buttons.push_back(sbi->butMinus);
+	m_buttons.push_back(sbi->butPlus);
 
 	set_font(UI_FONT_NAME, UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG);
 }
