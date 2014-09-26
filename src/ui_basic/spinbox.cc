@@ -106,12 +106,26 @@ SpinBox::SpinBox
 	char buf[64];
 	snprintf(buf, sizeof(buf), "%i %s", sbi->value, sbi->unit.c_str());
 
+	int32_t but_plus_x;
+	int32_t but_minus_x;
+	int32_t text_x = butw * 16 / 5;
+
+	if (m_big) {
+		but_plus_x = w - butw * 31 / 10;
+		but_minus_x = butw * 21 / 10;
+	} else {
+		but_plus_x = w - butw;
+		but_minus_x = 0;
+		textw = textw + 4 * butw;
+		text_x = text_x - 2 * butw;
+	}
+
 	sbi->text = new UI::Textarea
-		(this, butw * 16 / 5, 0, textw, h, buf, Align_Center);
+		(this, text_x, 0, textw, h, buf, Align_Center);
 	sbi->butPlus =
 		new Button
 			(this, "+",
-			 w - butw * 31 / 10, 0, butw, butw,
+			 but_plus_x, 0, butw, butw,
 			 sbi->background,
 			 "+", _("Increase the value"),
 			 true, false);
@@ -119,7 +133,7 @@ SpinBox::SpinBox
 	sbi->butMinus =
 		new Button
 			(this, "-",
-			 butw * 21 / 10, 0, butw, butw,
+			 but_minus_x, 0, butw, butw,
 			 sbi->background,
 			 "-", _("Decrease the value"),
 			 true, false);
