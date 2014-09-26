@@ -134,7 +134,7 @@ private:
 	// if needed it calls create_shortcut_road() with a flag from which
 	// new road should be considered (or is needed)
 	bool improve_roads(int32_t);
-	bool create_shortcut_road(const Widelands::Flag&);
+	bool create_shortcut_road(const Widelands::Flag&, uint16_t maxcheckradius, uint16_t minred);
 
 	bool check_economies();
 	bool check_productionsites(int32_t);

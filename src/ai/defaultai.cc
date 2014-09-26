@@ -98,23 +98,23 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 
 	// Subscribe to NoteFieldPossession.
 	field_possession_subscriber_ =
-	   Notifications::subscribe<NoteFieldPossession>([this](const NoteFieldPossession& note) {
+		Notifications::subscribe<NoteFieldPossession>([this](const NoteFieldPossession& note) {
 			if (note.player != player_) {
 			   return;
 		   	}
 		   	if (note.ownership == NoteFieldPossession::Ownership::GAINED) {
-				unusable_fields.push_back(note.fc);
-		   }
+			   unusable_fields.push_back(note.fc);
+		   	}
 		});
 
 	// Subscribe to NoteImmovables.
 	immovable_subscriber_ =
 	   Notifications::subscribe<NoteImmovable>([this](const NoteImmovable& note) {
 		   	if (note.pi->owner().player_number() != player_->player_number()) {
-			   return;
+				return;
 		   }
-		   	if (note.ownership == NoteImmovable::Ownership::GAINED) {
-			   gain_immovable(*note.pi);
+		  	if (note.ownership == NoteImmovable::Ownership::GAINED) {
+				gain_immovable(*note.pi);
 		   } else {
 			   lose_immovable(*note.pi);
 		   }
@@ -230,11 +230,11 @@ void DefaultAI::think() {
 
 	// improve existing roads!
 	// main part of this improvment is creation 'shortcut roads'
-	//this includes also connection of new buildings
+	// this includes also connection of new buildings
 	if (improve_roads(gametime)) {
 		m_buildable_changed = true;
 		m_mineable_changed = true;
-		inhibit_road_building_ = gametime + 1000;
+		// inhibit_road_building_ = gametime + 1000;
 		return;
 	}
 }
@@ -1580,18 +1580,23 @@ bool DefaultAI::improve_roads(int32_t gametime) {
 		return true;
 	}
 
-	// for "normal" flags it is not much usefull to test them every time
-	if (flag.nr_of_roads() > 1 && flag.current_wares() <= 6 && gametime % 200 > 0) {
-		return false;
+	// if this is end flag (or sole building) or just randomly
+	if (flag.nr_of_roads() <= 1 || gametime % 200 == 0) {
+		create_shortcut_road(flag, 13, 20);
+		inhibit_road_building_ = gametime + 800;
+	}
+	// this is when a flag is full
+	else if (flag.current_wares() > 6 && gametime % 10 == 0) {
+		create_shortcut_road(flag, 9, 0);
+		inhibit_road_building_ = gametime + 400;
 	}
 
-	// and finally we try to create "shortcut" from a flag
-	return (create_shortcut_road(flag));
+	return false;
 }
 
 // trying to connect the flag to another one, be it from own economy
 // or other economy
-bool DefaultAI::create_shortcut_road(const Flag& flag) {
+bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uint16_t minred) {
 
 	// Increasing the failed_connection_tries counter
 	// At the same time it indicates a time an economy is without a warehouse
@@ -1623,10 +1628,6 @@ bool DefaultAI::create_shortcut_road(const Flag& flag) {
 	}
 
 	Map& map = game().map();
-	// shortcut is made (attempted) if  (current_road - possible_shortcut)>minred
-	uint16_t minred = 20;
-	// when testing flags do not go farer (as crow fly) from starting flag then:
-	uint16_t checkradius = 10;
 
 	// 1. first we collect all reachange points
 	std::vector<NearFlag> nearflags;
@@ -1785,12 +1786,12 @@ bool DefaultAI::create_shortcut_road(const Flag& flag) {
 		// with exeption the flag belongs to a small economy (typically a new building not connected
 		// yet)
 		if ((nf.cost_ - nf.distance_) >= minred && nf.distance_ >= 2 &&
-		    (nf.distance_ < checkradius - 2 || eco->flags.size() < 4)) {
+		    nf.distance_ < checkradius - 2) {
 
 			// sometimes the shortest road is not the buildable, even if map.findpath claims so
 			// best so we add some randomness
 			random_gametime /= 3;
-			if (random_gametime % 3 > 1) {  
+			if (random_gametime % 3 > 1) {
 				continue;
 			}
 
