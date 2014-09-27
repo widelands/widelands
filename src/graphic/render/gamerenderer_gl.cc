@@ -356,6 +356,8 @@ TerrainProgram::gl_draw(int num_vertices,
 	set_attrib_pointer(attr_brightness_, 1, offsetof(PerVertexData, brightness));
 	set_attrib_pointer(attr_texture_position_, 2, offsetof(PerVertexData, texture_x));
 
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
 	// Set the sampler texture unit to 0
 	glActiveTexture(GL_TEXTURE0);
 	glUniform1i(u_terrain_texture_, 0);
@@ -372,7 +374,6 @@ TerrainProgram::gl_draw(int num_vertices,
 		glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, indices.data());
 	}
 
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glDisableVertexAttribArray(attr_position_);
 	glDisableVertexAttribArray(attr_texture_position_);
 	glDisableVertexAttribArray(attr_brightness_);
@@ -664,6 +665,7 @@ void DitherProgram::draw(const uint32_t gametime,
 
 		glDrawArrays(GL_TRIANGLES, 0, current_data.size());
 	}
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	glDisableVertexAttribArray(attr_brightness_);
 	glDisableVertexAttribArray(attr_dither_texture_position_);
