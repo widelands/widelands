@@ -314,7 +314,7 @@ void RealFSImpl::ensure_directory_exists(const std::string & dirname)
  * if a file is in the way or if the creation fails.
  *
  * Pleas note, this function does not honor parents,
- * MakeDirectory("onedir/otherdir/onemoredir") will fail
+ * make_directory("onedir/otherdir/onemoredir") will fail
  * if either onedir or otherdir is missing
  */
 void RealFSImpl::make_directory(const std::string & dirname) {
@@ -339,13 +339,13 @@ void RealFSImpl::make_directory(const std::string & dirname) {
 }
 
 /**
- * Read the given file into alloced memory; called by FileRead::Open.
+ * Read the given file into alloced memory; called by FileRead::open.
  * Throws an exception if the file couldn't be opened.
  */
 void * RealFSImpl::load(const std::string & fname, size_t & length) {
 	const std::string fullname = canonicalize_name(fname);
 	if (is_directory(fullname)) {
-		throw FileError("RealFSImpl::Load", fullname.c_str());
+		throw FileError("RealFSImpl::load", fullname.c_str());
 	}
 
 	FILE * file = nullptr;
@@ -354,7 +354,7 @@ void * RealFSImpl::load(const std::string & fname, size_t & length) {
 	try {
 		file = fopen(fullname.c_str(), "rb");
 		if (!file)
-			throw FileError("RealFSImpl::Load", fullname.c_str());
+			throw FileError("RealFSImpl::load", fullname.c_str());
 
 		// determine the size of the file (rather quirky, but it doesn't require
 		// potentially unportable functions)

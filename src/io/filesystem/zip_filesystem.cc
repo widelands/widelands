@@ -312,7 +312,7 @@ void ZipFilesystem::make_directory(const std::string & dirname) {
 void * ZipFilesystem::load(const std::string & fname, size_t & length) {
 	if (!file_exists(fname.c_str()) || is_directory(fname.c_str()))
 		throw ZipOperationError
-			("ZipFilesystem::Load",
+			("ZipFilesystem::load",
 			 fname,
 			 m_zipfilename,
 			 "could not open file from zipfile");
@@ -330,7 +330,7 @@ void * ZipFilesystem::load(const std::string & fname, size_t & length) {
 			char buf[200];
 			snprintf(buf, sizeof(buf), "read error %i", len);
 			throw ZipOperationError
-				("ZipFilesystem::Load",
+				("ZipFilesystem::load",
 				 fname,
 				 m_zipfilename,
 				 buf);
@@ -435,7 +435,7 @@ bool ZipFilesystem::ZipStreamRead::end_of_file() const
 StreamRead* ZipFilesystem::open_stream_read(const std::string& fname) {
 	if (!file_exists(fname.c_str()) || is_directory(fname.c_str()))
 		throw ZipOperationError
-			("ZipFilesystem::Load",
+			("ZipFilesystem::load",
 			 fname,
 			 m_zipfilename,
 			 "could not open file from zipfile");
@@ -550,7 +550,7 @@ void ZipFilesystem::m_open_unzip() {
 	m_unzipfile = unzOpen(m_zipfilename.c_str());
 	if (!m_unzipfile)
 		throw FileTypeError
-			("ZipFilesystem::m_OpenUnzip", m_zipfilename, "not a .zip file");
+			("ZipFilesystem::m_open_unzip", m_zipfilename, "not a .zip file");
 
 	m_state = STATE_UNZIPPPING;
 }
