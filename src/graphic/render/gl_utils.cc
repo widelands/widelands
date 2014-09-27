@@ -78,7 +78,6 @@ const SDL_PixelFormat & gl_rgba_format()
 GLenum _handle_glerror(const char * file, unsigned int line)
 {
 	GLenum err = glGetError();
-#ifndef NDEBUG
 	if (err == GL_NO_ERROR)
 		return err;
 
@@ -110,7 +109,6 @@ GLenum _handle_glerror(const char * file, unsigned int line)
 	default:
 		log("unknown\n");
 	}
-#endif
 	return err;
 }
 
@@ -188,7 +186,7 @@ Program::~Program() {
 	}
 }
 
-void Program::compile(const char* vertex_shader_source, const char* fragment_shader_source) {
+void Program::build(const char* vertex_shader_source, const char* fragment_shader_source) {
 	vertex_shader_.reset(new Shader(GL_VERTEX_SHADER));
 	vertex_shader_->compile(vertex_shader_source);
 	glAttachShader(program_object_, vertex_shader_->object());
@@ -196,9 +194,7 @@ void Program::compile(const char* vertex_shader_source, const char* fragment_sha
 	fragment_shader_.reset(new Shader(GL_FRAGMENT_SHADER));
 	fragment_shader_->compile(fragment_shader_source);
 	glAttachShader(program_object_, fragment_shader_->object());
-}
 
-void Program::link() {
 	glLinkProgram(program_object_);
 
 	// Check the link status
@@ -215,6 +211,5 @@ void Program::link() {
 		}
 	}
 }
-
 
 }  // namespace Gl

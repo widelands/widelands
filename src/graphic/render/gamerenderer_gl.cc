@@ -161,7 +161,9 @@ public:
 	}
 
 	// The number of fields to draw.
-	inline size_t size() const { return fields_.size(); }
+	inline size_t size() const {
+		return fields_.size();
+	}
 
 	// Get the field at 'index' which must be in bound.
 	inline const Field& at(const int index) const {
@@ -299,7 +301,6 @@ public:
 private:
 	void gl_draw(int num_vertices, const DescriptionMaintainer<TerrainDescription>& terrains);
 
-	// NOCOM(#sirver): split into more arrays to not copy unneded information.
 	struct PerVertexData {
 		float x;
 		float y;
@@ -337,9 +338,7 @@ private:
 };
 
 TerrainProgram::TerrainProgram() {
-	// NOCOM(#sirver): merge compile & link
-	terrain_gl_program_.compile(kTerrainVertexShader, kTerrainFragmentShader);
-	terrain_gl_program_.link();
+	terrain_gl_program_.build(kTerrainVertexShader, kTerrainFragmentShader);
 
 	attr_position_ = glGetAttribLocation(terrain_gl_program_.object(), "attr_position");
 	attr_texture_position_ =
@@ -424,8 +423,7 @@ void TerrainProgram::draw(const DescriptionMaintainer<TerrainDescription>& terra
 		// The bottom right neighbor fields_to_draw is needed for both triangles
 		// associated with this field. If it is not in fields_to_draw, there is no need to
 		// draw any triangles.
-		const int brn_index =
-		   fields_to_draw.calculate_index(field.fx + (field.fy & 1), field.fy + 1);
+		const int brn_index = fields_to_draw.calculate_index(field.fx + (field.fy & 1), field.fy + 1);
 		if (brn_index == -1) {
 			continue;
 		}
@@ -463,8 +461,7 @@ struct DitherData {
 };
 
 DitherProgram::DitherProgram() {
-	dither_gl_program_.compile(kDitherVertexShader, kDitherFragmentShader);
-	dither_gl_program_.link();
+	dither_gl_program_.build(kDitherVertexShader, kDitherFragmentShader);
 
 	attr_brightness_ = glGetAttribLocation(dither_gl_program_.object(), "attr_brightness");
 	attr_dither_texture_position_ =
@@ -537,8 +534,7 @@ void DitherProgram::draw(const DescriptionMaintainer<TerrainDescription>& terrai
 		// The bottom right neighbor fields_to_draw is needed for both triangles
 		// associated with this field. If it is not in fields_to_draw, there is no need to
 		// draw any triangles.
-		const int brn_index =
-		   fields_to_draw.calculate_index(field.fx + (field.fy & 1), field.fy + 1);
+		const int brn_index = fields_to_draw.calculate_index(field.fx + (field.fy & 1), field.fy + 1);
 		if (brn_index == -1) {
 			continue;
 		}

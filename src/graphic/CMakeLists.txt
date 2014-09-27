@@ -82,12 +82,6 @@ wl_library(graphic
     font_handler.h
     font_handler1.cc
     font_handler1.h
-    graphic.cc
-    graphic.h
-    image_transformations.cc
-    image_transformations.h
-    in_memory_image.cc
-    in_memory_image.h
     render/gamerenderer.cc
     render/gamerenderer.h
     render/gamerenderer_gl.cc
@@ -99,6 +93,12 @@ wl_library(graphic
     render/terrain_sdl.cc
     render/terrain_sdl.h
     render/vertex.h
+    graphic.cc
+    graphic.h
+    image_transformations.cc
+    image_transformations.h
+    in_memory_image.cc
+    in_memory_image.h
     rendertarget.cc
     rendertarget.h
     richtext.cc
