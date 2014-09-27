@@ -261,6 +261,7 @@ float field_brightness(const FCoords& fcoords,
 // d). Example: if r and d have different textures and r.dither_layer >
 // d.dither_layer, then we will repaint d with the dither texture as mask.
 
+// NOCOM(#sirver): Move the programs into their own files in graphic/gl/.
 class DitherProgram {
 public:
 	DitherProgram();
