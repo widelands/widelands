@@ -150,6 +150,11 @@ struct Patch {
 		return yidx * w + xidx;
 	}
 
+	// Returns true if the geometric coordinates (x, y) are inside this field.
+	inline int contains(int x, int y) const {
+		return calculate_index(x, y) != -1;
+	}
+
 	// Minimum and maximum field coordinates (geometric) to render. Can be negative.
 	int minfx;
 	int maxfx;
@@ -158,6 +163,15 @@ struct Patch {
 
 	// Width and height in number of fields.
 	int w, h;
+
+	struct Field {
+		Coords geometric_coords;
+		FCoords fcoords;
+		float x, y;  // Pixel relative to top left.
+		float texture_x, texture_y;  // Texture coordinates.
+		float brightness; // brightness of the pixel
+	};
+	std::vector<Field> fields;
 };
 
 // NOCOM(#sirver): only do this once.
@@ -269,12 +283,7 @@ class TerrainProgram {
 	TerrainProgram();
 
 	// Draws the terrain.
-	void draw(const uint32_t gametime,
-	                  const Map& map,
-	                  const Player* player,
-	                  const DescriptionMaintainer<TerrainDescription>& terrains,
-	                  const Patch& patch,
-	                  const Point& surface_offset);
+	void draw(const DescriptionMaintainer<TerrainDescription>& terrains, const Patch& patch);
 
 private:
 	void gl_draw(int num_vertices,
@@ -381,12 +390,8 @@ TerrainProgram::gl_draw(int num_vertices,
 	glUseProgram(0);
 }
 
-void TerrainProgram::draw(const uint32_t gametime,
-                                  const Map& map,
-                                  const Player* player,
-                                  const DescriptionMaintainer<TerrainDescription>& terrains,
-                                  const Patch& patch,
-                                  const Point& surface_offset) {
+void TerrainProgram::draw(const DescriptionMaintainer<TerrainDescription>& terrains,
+                          const Patch& patch) {
 	const size_t num_vertices = patch.w * patch.h;
 	if (vertices_.size() < num_vertices) {
 		vertices_.resize(num_vertices);
@@ -397,58 +402,43 @@ void TerrainProgram::draw(const uint32_t gametime,
 		container.reserve(num_vertices);
 	}
 
-	int current_index = 0;
-	Coords geometric_coords;
-	for (geometric_coords.y = patch.minfy; geometric_coords.y <= patch.maxfy; ++geometric_coords.y) {
-		for (geometric_coords.x = patch.minfx; geometric_coords.x <= patch.maxfx;
-		     ++geometric_coords.x, ++current_index) {
-			Coords normalized_coords(geometric_coords);
-			map.normalize_coords(normalized_coords);
-			const FCoords fcoords = map.get_fcoords(normalized_coords);
+	for (size_t current_index = 0; current_index < num_vertices; ++current_index) {
+		const Patch::Field& field = patch.fields[current_index];
 
-			{
-				PerVertexData& vertex = vertices_[current_index];
-				int x, y;
-				MapviewPixelFunctions::get_basepix(geometric_coords, x, y);
-				vertex.texture_x = float(x) / TEXTURE_WIDTH;
-				vertex.texture_y = float(y) / TEXTURE_HEIGHT;
-				vertex.x = x + surface_offset.x;
-				vertex.y = y + surface_offset.y;
+		PerVertexData& vertex = vertices_[current_index];
+		vertex.texture_x = field.texture_x;
+		vertex.texture_y = field.texture_y;
+		vertex.x = field.x;
+		vertex.y = field.y;
+		vertex.brightness = field.brightness;
 
-				// Correct for the height of the field.
-				vertex.y -= fcoords.field->get_height() * HEIGHT_FACTOR;
+		// The bottom right neighbor patch is needed for both triangles
+		// associated with this field. If it is not in patch, there is no need to
+		// draw any triangles.
+		int brn_index = patch.calculate_index(
+		   field.geometric_coords.x + (field.geometric_coords.y & 1), field.geometric_coords.y + 1);
+		if (brn_index == -1) {
+			continue;
+		}
 
-				// Figure out the brightness of the field.
-				vertex.brightness = field_brightness(fcoords, gametime, map, player);
-			}
+		// Down triangle.
+		int bln_index =
+		   patch.calculate_index(field.geometric_coords.x + (field.geometric_coords.y & 1) - 1,
+		                         field.geometric_coords.y + 1);
+		const int terrain_d = field.fcoords.field->terrain_d();
+		if (bln_index != -1) {
+			terrains_to_indices_[terrain_d].push_back(current_index);
+			terrains_to_indices_[terrain_d].push_back(bln_index);
+			terrains_to_indices_[terrain_d].push_back(brn_index);
+		}
 
-			// The bottom right neighbor patch is needed for both triangles
-			// associated with this field. If it is not in patch, there is no need
-			// to draw any triangles.
-			int brn_index = patch.calculate_index(
-			   geometric_coords.x + (geometric_coords.y & 1), geometric_coords.y + 1);
-			if (brn_index == -1) {
-				continue;
-			}
-
-			// Down triangle.
-			int bln_index = patch.calculate_index(
-			   geometric_coords.x + (geometric_coords.y & 1) - 1, geometric_coords.y + 1);
-			const int terrain_d = fcoords.field->terrain_d();
-			if (bln_index != -1) {
-				terrains_to_indices_[terrain_d].push_back(current_index);
-				terrains_to_indices_[terrain_d].push_back(bln_index);
-				terrains_to_indices_[terrain_d].push_back(brn_index);
-			}
-
-			// Right triangle.
-			int rn_index = patch.calculate_index(geometric_coords.x + 1, geometric_coords.y);
-			const int terrain_r = fcoords.field->terrain_r();
-			if (rn_index != -1) {
-				terrains_to_indices_[terrain_r].push_back(current_index);
-				terrains_to_indices_[terrain_r].push_back(brn_index);
-				terrains_to_indices_[terrain_r].push_back(rn_index);
-			}
+		// Right triangle.
+		int rn_index = patch.calculate_index(field.geometric_coords.x + 1, field.geometric_coords.y);
+		const int terrain_r = field.fcoords.field->terrain_r();
+		if (rn_index != -1) {
+			terrains_to_indices_[terrain_r].push_back(current_index);
+			terrains_to_indices_[terrain_r].push_back(brn_index);
+			terrains_to_indices_[terrain_r].push_back(rn_index);
 		}
 	}
 
@@ -468,7 +458,7 @@ struct DitherData {
 
 struct Vertex {
 	Coords geometric_coords;
-	FCoords f;
+	FCoords fcoords;
 	int patch_index;
 };
 
@@ -530,10 +520,10 @@ void DitherProgram::draw(const uint32_t gametime,
 		back.y = y + surface_offset.y;
 
 		// Figure out the brightness of the field.
-		back.brightness = field_brightness(v.f, gametime, map, player);
+		back.brightness = field_brightness(v.fcoords, gametime, map, player);
 
 		// Correct for the height of the field.
-		back.y -= v.f.field->get_height() * HEIGHT_FACTOR;
+		back.y -= v.fcoords.field->get_height() * HEIGHT_FACTOR;
 		switch (order_index) {
 		case 0:
 			back.dither_texture_x = 0.;
@@ -573,7 +563,7 @@ void DitherProgram::draw(const uint32_t gametime,
 
 		Coords normalized_coords(geometric_coords);
 		map.normalize_coords(normalized_coords);
-		vertex.f = map.get_fcoords(normalized_coords);
+		vertex.fcoords = map.get_fcoords(normalized_coords);
 
 		vertex.patch_index = patch.calculate_index(geometric_coords.x, geometric_coords.y);
 	};
@@ -597,27 +587,27 @@ void DitherProgram::draw(const uint32_t gametime,
 			            Coords(geometric_coords.x + (geometric_coords.y & 1), geometric_coords.y - 1));
 
 			// Dithering triangles for Right triangle.
-			const int terrain_r = verts[kThis].f.field->terrain_r();
-			const int terrain_d = verts[kThis].f.field->terrain_d();
+			const int terrain_r = verts[kThis].fcoords.field->terrain_r();
+			const int terrain_d = verts[kThis].fcoords.field->terrain_d();
 			potentially_add_dithering_triangle(kThis, kBottomRight, kRight, terrain_r, terrain_d);
 			if (verts[kTopRight].patch_index != -1) {
-				int terrain_u = verts[kTopRight].f.field->terrain_d();
+				int terrain_u = verts[kTopRight].fcoords.field->terrain_d();
 				potentially_add_dithering_triangle(kRight, kThis, kBottomRight, terrain_r, terrain_u);
 			}
 			if (verts[kRight].patch_index != -1) {
-				int terrain_rr = verts[kRight].f.field->terrain_d();
+				int terrain_rr = verts[kRight].fcoords.field->terrain_d();
 				potentially_add_dithering_triangle(kBottomRight, kRight, kThis, terrain_r, terrain_rr);
 			}
 
 			// Dithering triangles for Down triangle.
 			potentially_add_dithering_triangle(kBottomRight, kThis, kBottomLeft, terrain_d, terrain_r);
 			if (verts[kBottomLeft].patch_index != -1) {
-				const int terrain_dd = verts[kBottomLeft].f.field->terrain_r();
+				const int terrain_dd = verts[kBottomLeft].fcoords.field->terrain_r();
 				potentially_add_dithering_triangle(
 				   kBottomLeft, kBottomRight, kThis, terrain_d, terrain_dd);
 			}
 			if (verts[kLeft].patch_index != -1) {
-				const int terrain_l = verts[kLeft].f.field->terrain_r();
+				const int terrain_l = verts[kLeft].fcoords.field->terrain_r();
 				potentially_add_dithering_triangle(
 				   kThis, kBottomLeft, kBottomRight, terrain_d, terrain_l);
 			}
@@ -735,13 +725,42 @@ void GameRendererGL::draw() {
 		 m_rect.w, m_rect.h);
 	glEnable(GL_SCISSOR_TEST);
 
+	Map& map = m_egbase->map();
 	const uint32_t gametime = m_egbase->get_gametime();
-	const Patch patch(m_minfx, m_maxfx, m_minfy, m_maxfy);
+
+	Patch patch(m_minfx, m_maxfx, m_minfy, m_maxfy);
+	for (int32_t fy = m_minfy; fy <= m_maxfy; ++fy) {
+		for (int32_t fx = m_minfx; fx <= m_maxfx; ++fx) {
+			patch.fields.emplace_back();
+			Patch::Field& f = patch.fields.back();
+
+			f.geometric_coords = Coords(fx, fy);
+
+			Coords ncoords(f.geometric_coords);
+			map.normalize_coords(ncoords);
+			f.fcoords = map.get_fcoords(ncoords);
+
+			int x, y;
+			MapviewPixelFunctions::get_basepix(f.geometric_coords, x, y);
+
+			f.texture_x = float(x) / TEXTURE_WIDTH;
+			f.texture_y = float(y) / TEXTURE_HEIGHT;
+			f.x = x + m_surface_offset.x;
+			f.y = y + m_surface_offset.y;
+
+			// Correct for the height of the field.
+			// NOCOM(#sirver): how often is fcoords needed after this?
+			f.y -= f.fcoords.field->get_height() * HEIGHT_FACTOR;
+
+			// Figure out the brightness of the field.
+			f.brightness = ::field_brightness(f.fcoords, gametime, map, m_player);
+		}
+	}
+
 	const World& world = m_egbase->world();
-	terrain_program_->draw(
-		gametime, m_egbase->map(), m_player, world.terrains(), patch, m_surface_offset);
-	dither_program_->draw(
-		gametime, m_egbase->map(), m_player, world.terrains(), patch, m_surface_offset);
+	terrain_program_->draw(world.terrains(), patch);
+	// dither_program_->draw(
+		// gametime, map, m_player, world.terrains(), patch, m_surface_offset);
 
 	// prepare_roads();
 	// draw_roads();
