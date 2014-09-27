@@ -166,7 +166,7 @@ void MainMenuLoadMap::selected(uint32_t) {
 
 		// Translate the map data
 		i18n::Textdomain td("maps");
-		m_name  ->set_text(_(map.get_name()));
+		m_name  ->set_text(map.get_name());
 		m_name  ->set_tooltip(map.get_name());
 		m_author->set_text(map.get_author());
 		m_descr ->set_text

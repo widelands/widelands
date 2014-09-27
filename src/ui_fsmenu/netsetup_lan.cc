@@ -28,7 +28,7 @@
 #include "wui/text_constants.h"
 
 FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN () :
-	FullscreenMenuBase("singleplmenu.jpg"), //  TODO(unknown): change this
+	FullscreenMenuBase("ui_fsmenu.jpg"), //  TODO(unknown): change this
 
 // Values for alignment and size
 	m_butx (get_w() * 13 / 40),
