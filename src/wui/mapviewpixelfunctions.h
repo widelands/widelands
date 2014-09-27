@@ -30,12 +30,7 @@ namespace Widelands {class Map;}
 
 namespace MapviewPixelFunctions {
 
-float calc_brightness(int32_t const l,
-                      int32_t const r,
-                      int32_t const tl,
-                      int32_t const tr,
-                      int32_t const bl,
-                      int32_t const br);
+float calc_brightness(int32_t l, int32_t r, int32_t tl, int32_t tr, int32_t bl, int32_t br);
 
 Point calc_pix_difference(const Widelands::Map&, Point, Point);
 uint32_t calc_pix_distance(const Widelands::Map&, Point, Point);
