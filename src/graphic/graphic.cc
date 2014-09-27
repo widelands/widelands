@@ -213,10 +213,6 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 		log("Graphics: OpenGL: Number of stencil buffer bits: %u\n", glInt);
 		m_caps.gl.stencil_buffer_bits = glInt;
 
-		glGetIntegerv(GL_MAX_TEXTURE_UNITS, &glInt);
-		log("Graphics: OpenGL: Maximum number of textures for multitextures: %u\n", glInt);
-		m_caps.gl.max_tex_combined = glInt;
-
 		const char * str = reinterpret_cast<const char *>(glGetString(GL_VERSION));
 		m_caps.gl.major_version = atoi(str);
 		m_caps.gl.minor_version = strstr(str, ".")?atoi(strstr(str, ".") + 1):0;
@@ -232,12 +228,6 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 		log
 			(m_caps.gl.tex_power_of_two?"must have a size power of two\n":
 			 "may have any size\n");
-
-		m_caps.gl.multitexture =
-			 ((strstr(extensions, "GL_ARB_multitexture") != nullptr) &&
-			  (strstr(extensions, "GL_ARB_texture_env_combine") != nullptr));
-		log("Graphics: OpenGL: Multitexture capabilities ");
-		log(m_caps.gl.multitexture ? "sufficient\n" : "insufficient, only basic terrain rendering possible\n");
 
 DIAG_OFF("-Wold-style-cast")
 		m_caps.gl.blendequation = GLEW_VERSION_1_4 || GLEW_ARB_imaging;
