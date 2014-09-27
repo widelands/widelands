@@ -78,8 +78,13 @@ _"PAGEUP: increases game speed" .. "<br>"
    ) .. p(_
 [[In the message window, the following additional shortcuts are available:]]
    ) .. p(
-_ "G: jumps to the location corresponding to the current message" .. "<br>"
-.. _"DELETE: archives the current message"
+_ "1: shows geologists' messages only" .. "<br>"
+.. _ "2: shows economy messages only" .. "<br>"
+.. _ "3: shows seafaring messages only" .. "<br>"
+.. _ "4: shows warfare messages only" .. "<br>"
+.. _ "5: shows scenario messages only" .. "<br>"
+.. _ "G: jumps to the location corresponding to the current message" .. "<br>"
+.. _"DELETE: archives/restores the current message"
    ) .. h2(_
 [[Online Help]]
    ) .. p( _
