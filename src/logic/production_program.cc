@@ -950,23 +950,24 @@ void ProductionProgram::ActConsume::execute
 			group_list.push_back(ware_string);
 		}
 
+		std::string is_missing_string =
+				/** TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing' */
+				/** TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta bread is missing' */
+				(boost::format(ngettext("%s is missing", "%s are missing", nr_missing_groups))
+				 % i18n::localize_item_list(group_list, i18n::ConcatenateWith::AND))
+				 .str();
+
 		std::string result_string =
 			/** TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing' */
 			/** TRANSLATORS: For this example, this is what's in the place holders: */
-			/** TRANSLATORS:    %1$s = "work" */
-			/** TRANSLATORS:    %2$s = "water and wheat (2) " */
-			/** TRANSLATORS:    %3$s = "are missing" */
-			(boost::format(_("Did not start %1$s because %2$s %3$s"))
-			 % ps.top_state().program->descname()
-			 % i18n::localize_item_list(group_list, i18n::ConcatenateWith::AND)
-			/** TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing' */
-			/** TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta bread is missing' */
-			 /** TRANSLATORS: */
+			/** TRANSLATORS:    %1$s = "working" */
+			/** TRANSLATORS:    %2$s = "3x water and 3x wheat are missing" */
 			/** TRANSLATORS: This appears in the hover text on buildings. Please test these in context*/
 			/** TRANSLATORS: on a development build if you can, and let us know if there are any issues */
 			/** TRANSLATORS: we need to address for your language. */
-			 % ngettext(" is missing", " are missing", nr_missing_groups))
-			 .str();
+			(boost::format(_("Did not start %1$s because %2$s"))
+			 % ps.top_state().program->descname()
+			 % is_missing_string).str();
 
 		ps.set_production_result(result_string);
 		return ps.program_end(game, Failed);
