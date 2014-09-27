@@ -45,8 +45,9 @@
 #define WINDOW_WIDTH  std::min(700, g_gr->get_xres() - 40)
 #define WINDOW_HEIGHT std::min(550, g_gr->get_yres() - 40)
 
-#define QUANTITY_COLUMN_WIDTH 74
-#define WARE_GROUPS_TABLE_WIDTH (WINDOW_WIDTH * 1 / 2 - 5)
+#define QUANTITY_COLUMN_WIDTH 100
+#define WARE_COLUMN_WIDTH     250
+#define PRODSITE_GROUPS_WIDTH (WINDOW_WIDTH - WARE_COLUMN_WIDTH - QUANTITY_COLUMN_WIDTH - 10)
 
 using namespace Widelands;
 
@@ -64,19 +65,18 @@ EncyclopediaWindow::EncyclopediaWindow
 		 WINDOW_WIDTH, WINDOW_HEIGHT,
 		 _("Tribal Ware Encyclopedia")),
 	wares            (this, 5, 5, WINDOW_WIDTH - 10, WINDOW_HEIGHT - 250),
-	prodSites        (this, 5, WINDOW_HEIGHT - 150, WINDOW_WIDTH - WARE_GROUPS_TABLE_WIDTH - 10, 145),
+	prodSites        (this, 5, WINDOW_HEIGHT - 150, PRODSITE_GROUPS_WIDTH, 145),
 	condTable
 		(this,
-		 WINDOW_WIDTH - WARE_GROUPS_TABLE_WIDTH - 5, WINDOW_HEIGHT - 150, WARE_GROUPS_TABLE_WIDTH, 145),
+		 PRODSITE_GROUPS_WIDTH + 5, WINDOW_HEIGHT - 150, WINDOW_WIDTH - PRODSITE_GROUPS_WIDTH - 5, 145),
 	descrTxt         (this, 5, WINDOW_HEIGHT - 240, WINDOW_WIDTH - 10, 80, "")
 {
 	wares.selected.connect(boost::bind(&EncyclopediaWindow::wareSelected, this, _1));
 
 	prodSites.selected.connect(boost::bind(&EncyclopediaWindow::prodSiteSelected, this, _1));
 	condTable.add_column
-		(WARE_GROUPS_TABLE_WIDTH
-		 - QUANTITY_COLUMN_WIDTH,
-		 _("Consumed ware type(s)"));
+			/** TRANSLATORS: Column title in the Tribal Wares Encyclopedia */
+			(WARE_COLUMN_WIDTH, ngettext("Consumed Ware Type", "Consumed Ware Types", 0));
 	condTable.add_column (QUANTITY_COLUMN_WIDTH, _("Quantity"));
 
 	fillWares();
@@ -137,6 +137,7 @@ void EncyclopediaWindow::wareSelected(uint32_t) {
 
 void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 	assert(prodSites.has_selection());
+	size_t no_of_wares = 0;
 	condTable.clear();
 	const TribeDescr & tribe = iaplayer().player().tribe();
 
@@ -184,6 +185,7 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 					for (const WareIndex& ware_index : ware_types) {
 						ware_type_descnames.push_back(tribe.get_ware_descr(ware_index)->descname());
 					}
+					no_of_wares = no_of_wares + ware_types.size();
 
 					std::string ware_type_names =
 							i18n::localize_item_list(ware_type_descnames, i18n::ConcatenateWith::OR);
@@ -206,4 +208,5 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 			}
 		}
 	}
+	condTable.set_column_title(0,	ngettext("Consumed Ware Type", "Consumed Ware Types", no_of_wares));
 }
