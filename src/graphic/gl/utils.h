@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef WL_GRAPHIC_RENDER_GL_UTILS_H
-#define WL_GRAPHIC_RENDER_GL_UTILS_H
+#ifndef WL_GRAPHIC_GL_UTILS_H
+#define WL_GRAPHIC_GL_UTILS_H
 
 #define NO_SDL_GLEXT
 
@@ -86,4 +86,4 @@ private:
  */
 #define handle_glerror() Gl::_handle_glerror(__FILE__, __LINE__)
 
-#endif  // end of include guard: WL_GRAPHIC_RENDER_GL_UTILS_H
+#endif  // end of include guard: WL_GRAPHIC_GL_UTILS_H

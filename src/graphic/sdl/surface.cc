@@ -17,7 +17,7 @@
  *
  */
 
-#include "graphic/render/sdl_surface.h"
+#include "graphic/sdl/surface.h"
 
 #include <cassert>
 

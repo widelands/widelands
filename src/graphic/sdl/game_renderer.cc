@@ -17,10 +17,10 @@
  *
  */
 
-#include "graphic/render/gamerenderer_sdl.h"
+#include "graphic/sdl/game_renderer.h"
 
-#include "graphic/render/terrain_sdl.h"
 #include "graphic/rendertarget.h"
+#include "graphic/sdl/terrain.h"
 #include "logic/field.h"
 #include "logic/map.h"
 #include "logic/player.h"
@@ -56,13 +56,13 @@ inline static int8_t node_brightness
 }
 
 
-void GameRendererSDL::draw()
+void SdlGameRenderer::draw()
 {
 	draw_terrain();
 	draw_objects();
 }
 
-void GameRendererSDL::draw_terrain()
+void SdlGameRenderer::draw_terrain()
 {
 	if (m_player && !m_player->see_all())
 		m_dst->get_surface()->fill_rect(m_dst->get_rect(), RGBAColor(0, 0, 0, 255));
@@ -239,7 +239,7 @@ void GameRendererSDL::draw_terrain()
  *        /  d  \/
  *  (bl) *------* (br)
  */
-void GameRendererSDL::draw_field
+void SdlGameRenderer::draw_field
 	(RenderTarget & dst,
 	 const Vertex  &  f_vert,
 	 const Vertex  &  r_vert,

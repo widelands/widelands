@@ -39,18 +39,18 @@ wl_library(graphic_image
 wl_library(graphic_surface
   SRCS
     compositemode.h
-    render/gl_surface.cc
-    render/gl_surface.h
-    render/gl_surface_screen.cc
-    render/gl_surface_screen.h
-    render/gl_surface_texture.cc
-    render/gl_surface_texture.h
-    render/gl_utils.cc
-    render/gl_utils.h
-    render/sdl_helper.cc
-    render/sdl_helper.h
-    render/sdl_surface.cc
-    render/sdl_surface.h
+    gl/surface.cc
+    gl/surface.h
+    gl/surface_screen.cc
+    gl/surface_screen.h
+    gl/surface_texture.cc
+    gl/surface_texture.h
+    gl/utils.cc
+    gl/utils.h
+    sdl/surface.cc
+    sdl/surface.h
+    sdl/utils.cc
+    sdl/utils.h
     surface.cc
     surface.h
     surface_cache.cc
@@ -82,27 +82,27 @@ wl_library(graphic
     font_handler.h
     font_handler1.cc
     font_handler1.h
-    render/gamerenderer.cc
-    render/gamerenderer.h
-    render/gamerenderer_gl.cc
-    render/gamerenderer_gl.h
-    render/gamerenderer_sdl.cc
-    render/gamerenderer_sdl.h
-    render/minimaprenderer.cc
-    render/minimaprenderer.h
-    render/terrain_sdl.cc
-    render/terrain_sdl.h
-    render/vertex.h
+    game_renderer.cc
+    game_renderer.h
+    gl/game_renderer.cc
+    gl/game_renderer.h
     graphic.cc
     graphic.h
     image_transformations.cc
     image_transformations.h
     in_memory_image.cc
     in_memory_image.h
+    minimap_renderer.cc
+    minimap_renderer.h
     rendertarget.cc
     rendertarget.h
     richtext.cc
     richtext.h
+    sdl/game_renderer.cc
+    sdl/game_renderer.h
+    sdl/terrain.cc
+    sdl/terrain.h
+    sdl/vertex.h
     text_parser.cc
     text_parser.h
     texture.cc

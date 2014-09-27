@@ -17,15 +17,15 @@
  *
  */
 
-#ifndef WL_GRAPHIC_RENDER_GAMERENDERER_GL_H
-#define WL_GRAPHIC_RENDER_GAMERENDERER_GL_H
+#ifndef WL_GRAPHIC_GL_GAME_RENDERER_H
+#define WL_GRAPHIC_GL_GAME_RENDERER_H
 
 #include <memory>
 #include <vector>
 
 #include "base/rect.h"
-#include "graphic/render/gamerenderer.h"
-#include "graphic/render/gl_utils.h"
+#include "graphic/game_renderer.h"
+#include "graphic/gl/utils.h"
 #include "logic/widelands.h"
 
 namespace Widelands {
@@ -43,10 +43,10 @@ class DitherProgram;
 /**
  * OpenGL implementation of @ref GameRenderer.
  */
-class GameRendererGL : public GameRenderer {
+class GlGameRenderer : public GameRenderer {
 public:
-	GameRendererGL();
-	virtual ~GameRendererGL();
+	GlGameRenderer();
+	virtual ~GlGameRenderer();
 
 private:
 	static std::unique_ptr<TerrainProgram> terrain_program_;
@@ -103,4 +103,4 @@ private:
 	/*@}*/
 };
 
-#endif  // end of include guard: WL_GRAPHIC_RENDER_GAMERENDERER_GL_H
+#endif  // end of include guard: WL_GRAPHIC_GL_GAME_RENDERER_H

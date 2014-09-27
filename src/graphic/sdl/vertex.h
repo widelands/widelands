@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -14,29 +14,26 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
  */
 
-#ifndef WL_GRAPHIC_RENDER_GL_SURFACE_SCREEN_H
-#define WL_GRAPHIC_RENDER_GL_SURFACE_SCREEN_H
+#ifndef WL_GRAPHIC_SDL_VERTEX_H
+#define WL_GRAPHIC_SDL_VERTEX_H
 
-#include "graphic/render/gl_surface.h"
+#include "base/point.h"
 
-/**
- * This surface represents the screen in OpenGL mode.
- */
-class GLSurfaceScreen : public GLSurface {
-public:
-	GLSurfaceScreen(uint16_t w, uint16_t h);
-	virtual ~GLSurfaceScreen() {}
+/// Like a point but with an additional bright factor and texture coordinates.
+struct Vertex:public Point {
+	Vertex() : Point (0, 0), b(0), tx(0), ty(0) {}
+	Vertex
+		(const int32_t vx,  const int32_t vy,
+		 const int32_t vb,
+		 const int32_t vtx, const int32_t vty)
 
-	/// Interface implementations
-	void lock(LockMode) override;
-	void unlock(UnlockMode) override;
-	uint16_t get_pitch() const override;
-	const SDL_PixelFormat & format() const override;
+		: Point(vx, vy), b(vb), tx(vtx), ty(vty)
+	{}
 
-private:
-	void swap_rows();
+	int32_t b, tx, ty;
 };
 
-#endif  // end of include guard: WL_GRAPHIC_RENDER_GL_SURFACE_SCREEN_H
+#endif  // end of include guard: WL_GRAPHIC_SDL_VERTEX_H

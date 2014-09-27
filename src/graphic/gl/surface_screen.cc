@@ -16,12 +16,12 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "graphic/render/gl_surface_screen.h"
+#include "graphic/gl/surface_screen.h"
 
 #include <algorithm>
 #include <cassert>
 
-#include "graphic/render/gl_utils.h"
+#include "graphic/gl/utils.h"
 
 GLSurfaceScreen::GLSurfaceScreen(uint16_t w, uint16_t h)
 {

@@ -16,14 +16,14 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "graphic/render/gl_surface_texture.h"
+#include "graphic/gl/surface_texture.h"
 
 #include <cassert>
 
 #include "base/wexception.h"
-#include "gl_surface.h"  // for glew.h
+#include "graphic/gl/surface.h"
+#include "graphic/gl/utils.h"
 #include "graphic/graphic.h"
-#include "graphic/render/gl_utils.h"
 
 GLuint GLSurfaceTexture::gl_framebuffer_id_;
 

@@ -17,10 +17,10 @@
  *
  */
 
-#ifndef WL_GRAPHIC_RENDER_GAMERENDERER_SDL_H
-#define WL_GRAPHIC_RENDER_GAMERENDERER_SDL_H
+#ifndef WL_GRAPHIC_SDL_GAME_RENDERER_H
+#define WL_GRAPHIC_SDL_GAME_RENDERER_H
 
-#include "graphic/render/gamerenderer.h"
+#include "graphic/game_renderer.h"
 
 struct Texture;
 struct Vertex;
@@ -28,7 +28,7 @@ struct Vertex;
 /**
  * Software-rendering implementation of @ref GameRenderer.
  */
-class GameRendererSDL : public GameRenderer {
+class SdlGameRenderer : public GameRenderer {
 protected:
 	void draw() override;
 
@@ -52,4 +52,4 @@ private:
 		 const Texture &  f_r_texture);
 };
 
-#endif  // end of include guard: WL_GRAPHIC_RENDER_GAMERENDERER_SDL_H
+#endif  // end of include guard: WL_GRAPHIC_SDL_GAME_RENDERER_H

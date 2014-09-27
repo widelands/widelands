@@ -27,7 +27,7 @@
 #include <stdint.h>
 
 #include "graphic/colormap.h"
-#include "graphic/render/gl_surface_texture.h"
+#include "graphic/gl/surface_texture.h"
 
 /// Textures have a fixed size and are squares.
 /// TEXTURE_HEIGHT is just defined for easier understanding of the code.

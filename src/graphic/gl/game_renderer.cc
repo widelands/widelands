@@ -17,16 +17,16 @@
  *
  */
 
-#include "graphic/render/gamerenderer_gl.h"
+#include "graphic/gl/game_renderer.h"
 
 #include <memory>
 
 #include <SDL_image.h>
 
+#include "graphic/gl/surface.h"
+#include "graphic/gl/utils.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
-#include "graphic/render/gl_surface.h"
-#include "graphic/render/gl_utils.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface_cache.h"
 #include "graphic/texture.h"
@@ -176,8 +176,6 @@ public:
 	}
 
 private:
-	friend class GameRendererGL;
-
 	// Minimum and maximum field coordinates (geometric) to render. Can be negative.
 	const int min_fx_;
 	const int max_fx_;
@@ -631,18 +629,18 @@ void DitherProgram::draw(const DescriptionMaintainer<TerrainDescription>& terrai
 	glUseProgram(0);
 }
 
-std::unique_ptr<TerrainProgram> GameRendererGL::terrain_program_;
-std::unique_ptr<DitherProgram> GameRendererGL::dither_program_;
+std::unique_ptr<TerrainProgram> GlGameRenderer::terrain_program_;
+std::unique_ptr<DitherProgram> GlGameRenderer::dither_program_;
 
-GameRendererGL::GameRendererGL() : m_road_vertices_size(0) {
+GlGameRenderer::GlGameRenderer() : m_road_vertices_size(0) {
 }
 
-GameRendererGL::~GameRendererGL() {
+GlGameRenderer::~GlGameRenderer() {
 }
 
 // Returns the brightness value in [0, 1.] for 'fcoords' at 'gametime' for
 // 'player' (which can be nullptr).
-uint8_t GameRendererGL::field_brightness(const FCoords& coords) const {
+uint8_t GlGameRenderer::field_brightness(const FCoords& coords) const {
 	uint32_t brightness = 144 + coords.field->get_brightness();
 	brightness = std::min<uint32_t>(255, (brightness * 255) / 160);
 
@@ -664,7 +662,7 @@ uint8_t GameRendererGL::field_brightness(const FCoords& coords) const {
 	return brightness;
 }
 
-void GameRendererGL::draw() {
+void GlGameRenderer::draw() {
 	if (terrain_program_ == nullptr) {
 		terrain_program_.reset(new TerrainProgram());
 		dither_program_.reset(new DitherProgram());
@@ -724,7 +722,7 @@ void GameRendererGL::draw() {
 }
 
 template <typename vertex>
-void GameRendererGL::compute_basevertex(const Coords& coords, vertex& vtx) const {
+void GlGameRenderer::compute_basevertex(const Coords& coords, vertex& vtx) const {
 	const Map& map = m_egbase->map();
 	Coords ncoords(coords);
 	map.normalize_coords(ncoords);
@@ -748,7 +746,7 @@ void GameRendererGL::compute_basevertex(const Coords& coords, vertex& vtx) const
 	}
 }
 
-uint8_t GameRendererGL::field_roads(const FCoords& coords) const {
+uint8_t GlGameRenderer::field_roads(const FCoords& coords) const {
 	uint8_t roads;
 	const Map& map = m_egbase->map();
 	if (m_player && !m_player->see_all()) {
@@ -761,7 +759,7 @@ uint8_t GameRendererGL::field_roads(const FCoords& coords) const {
 	return roads;
 }
 
-void GameRendererGL::prepare_roads() {
+void GlGameRenderer::prepare_roads() {
 	const Map& map = m_egbase->map();
 
 	m_road_freq[0] = 0;
@@ -881,7 +879,7 @@ void GameRendererGL::prepare_roads() {
 	assert(indexs[1] == 4 * nrquads);
 }
 
-void GameRendererGL::draw_roads() {
+void GlGameRenderer::draw_roads() {
 	if (!m_road_freq[0] && !m_road_freq[1])
 		return;
 

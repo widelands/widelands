@@ -17,7 +17,7 @@
  *
  */
 
-#include "graphic/render/minimaprenderer.h"
+#include "graphic/minimap_renderer.h"
 
 #include <memory>
 

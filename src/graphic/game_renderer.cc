@@ -17,7 +17,7 @@
  *
  */
 
-#include "graphic/render/gamerenderer.h"
+#include "graphic/game_renderer.h"
 
 #include "base/macros.h"
 #include "graphic/graphic.h"

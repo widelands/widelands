@@ -24,7 +24,7 @@
 #include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "graphic/in_memory_image.h"
-#include "graphic/render/minimaprenderer.h"
+#include "graphic/minimap_renderer.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"
 #include "logic/map.h"

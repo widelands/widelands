@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_GRAPHIC_RENDER_MINIMAPRENDERER_H
-#define WL_GRAPHIC_RENDER_MINIMAPRENDERER_H
+#ifndef WL_GRAPHIC_MINIMAP_RENDERER_H
+#define WL_GRAPHIC_MINIMAP_RENDERER_H
 
 #include <memory>
 
@@ -66,4 +66,4 @@ void write_minimap_image
 	(const Widelands::EditorGameBase& egbase, Widelands::Player const* player,
 	 const Point& viewpoint, MiniMapLayer layers, StreamWrite* const streamwrite);
 
-#endif  // end of include guard: WL_GRAPHIC_RENDER_MINIMAPRENDERER_H
+#endif  // end of include guard: WL_GRAPHIC_MINIMAP_RENDERER_H
