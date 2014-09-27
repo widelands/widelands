@@ -44,7 +44,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent)
 	:
 	UI::Window
 		(&parent, "map_options",
-		 250, (parent.get_h() - 300) / 2, 200, 305,
+		 250, (parent.get_h() - 300) / 2, 305, 305,
 		 _("Map Options"))
 {
 

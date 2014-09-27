@@ -46,7 +46,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
                 "random_map_menu",
                 (parent.get_w() - 260) / 2,
                 (parent.get_h() - 450) / 2,
-                260,
+					 305,
                 490,
                 _("New Random Map")),
    // TRANSLATORS: The next are world names for the random map generator.
