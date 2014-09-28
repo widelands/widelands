@@ -31,6 +31,7 @@ namespace Widelands {
 struct Message {
 	enum Status {New, Read, Archived};
 	enum class Type: uint8_t {
+		noMessages,
 		allMessages,
 		gameLogic,
 		geologists,

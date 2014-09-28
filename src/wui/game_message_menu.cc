@@ -284,6 +284,7 @@ void GameMessageMenu::think()
 	} else {
 		m_centerviewbtn->set_enabled(false);
 		message_body.set_text(std::string());
+		set_display_message_type_label(Widelands::Message::Type::noMessages);
 	}
 }
 
@@ -562,6 +563,10 @@ void GameMessageMenu::set_display_message_type_label(Widelands::Message::Type ms
 			message_type_tooltip =  _("Scenario");
 			message_type_image =  "<rt image=pics/menu_objectives.png></rt>";
 			break;
+		case Widelands::Message::Type::noMessages:
+			/** TRANSLATORS: This show up instead of a message's type when there are no messages found */
+			message_type_tooltip =  _("No message found");
+			break;
 		default:
 			/** TRANSLATORS: This is the default message type */
 			message_type_tooltip = _("General");
@@ -570,7 +575,7 @@ void GameMessageMenu::set_display_message_type_label(Widelands::Message::Type ms
 
 	m_display_message_type_label->set_tooltip(
 				 /** TRANSLATORS: %s is a message's type */
-				 (boost::format(_("Message type: %s"))
+				 (boost::format(_("Type of this message: %s"))
 				  /** TRANSLATORS: Tooltip in the messages window */
 				  % message_type_tooltip).str());
 	m_display_message_type_label->set_text(message_type_image);
