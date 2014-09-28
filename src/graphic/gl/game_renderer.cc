@@ -39,7 +39,8 @@ namespace {
 
 using namespace Widelands;
 
-// NOCOM(#sirver): comment
+// Returns the brightness value in [0, 1.] for 'fcoords' at 'gametime' for
+// 'player' (which can be nullptr).
 float field_brightness(const FCoords& fcoords,
                        const uint32_t gametime,
                        const Map& map,
@@ -98,7 +99,6 @@ float field_brightness(const FCoords& fcoords,
 // d.dither_layer, then we will repaint d with the dither texture as mask.
 
 
-// NOCOM(#sirver): move into program.
 std::unique_ptr<TerrainProgram> GlGameRenderer::terrain_program_;
 std::unique_ptr<DitherProgram> GlGameRenderer::dither_program_;
 

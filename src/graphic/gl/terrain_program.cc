@@ -70,25 +70,25 @@ void main() {
 }  // namespace
 
 TerrainProgram::TerrainProgram() {
-	terrain_gl_program_.build(kTerrainVertexShader, kTerrainFragmentShader);
+	gl_program_.build(kTerrainVertexShader, kTerrainFragmentShader);
 
-	attr_position_ = glGetAttribLocation(terrain_gl_program_.object(), "attr_position");
+	attr_position_ = glGetAttribLocation(gl_program_.object(), "attr_position");
 	attr_texture_position_ =
-	   glGetAttribLocation(terrain_gl_program_.object(), "attr_texture_position");
-	attr_brightness_ = glGetAttribLocation(terrain_gl_program_.object(), "attr_brightness");
+	   glGetAttribLocation(gl_program_.object(), "attr_texture_position");
+	attr_brightness_ = glGetAttribLocation(gl_program_.object(), "attr_brightness");
 
-	u_terrain_texture_ = glGetUniformLocation(terrain_gl_program_.object(), "u_terrain_texture");
+	u_terrain_texture_ = glGetUniformLocation(gl_program_.object(), "u_terrain_texture");
 }
 
 void TerrainProgram::gl_draw(int num_vertices,
                              const DescriptionMaintainer<TerrainDescription>& terrains) {
-	glUseProgram(terrain_gl_program_.object());
+	glUseProgram(gl_program_.object());
 
 	glEnableVertexAttribArray(attr_position_);
 	glEnableVertexAttribArray(attr_texture_position_);
 	glEnableVertexAttribArray(attr_brightness_);
 
-	glBindBuffer(GL_ARRAY_BUFFER, gl_program_data_buffer_.object());
+	glBindBuffer(GL_ARRAY_BUFFER, gl_array_buffer_.object());
 	glBufferData(GL_ARRAY_BUFFER,
 	             sizeof(TerrainProgram::PerVertexData) * num_vertices,
 	             vertices_.data(),

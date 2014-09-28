@@ -38,9 +38,6 @@ public:
 	          const FieldsToDraw& fields_to_draw);
 
 private:
-	void gl_draw(int num_vertices,
-	             const DescriptionMaintainer<Widelands::TerrainDescription>& terrains);
-
 	struct PerVertexData {
 		float x;
 		float y;
@@ -50,11 +47,14 @@ private:
 	};
 	static_assert(sizeof(PerVertexData) == 20, "Wrong padding.");
 
+	void gl_draw(int num_vertices,
+	             const DescriptionMaintainer<Widelands::TerrainDescription>& terrains);
+
 	// The buffer that will contain 'vertices_' for rendering.
-	Gl::Buffer gl_program_data_buffer_;
+	Gl::Buffer gl_array_buffer_;
 
 	// The program used for drawing the terrain.
-	Gl::Program terrain_gl_program_;
+	Gl::Program gl_program_;
 
 	// Attributes.
 	GLint attr_position_;

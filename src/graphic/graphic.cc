@@ -101,7 +101,8 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 	if (opengl) {
 		log("Graphics: Trying opengl\n");
 
-		// NOCOM(#sirver): we should request a core context here.
+		// TODO(sirver): We should explicitly request an OpenGL 2.? core context
+		// here instead of relying on SDL to give us whatever.
 
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 		flags |= SDL_OPENGL;

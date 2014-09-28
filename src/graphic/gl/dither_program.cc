@@ -73,64 +73,58 @@ void main() {
 }
 )";
 
-struct DitherData {
-	float x;
-	float y;
-	float texture_x;
-	float texture_y;
-	float brightness;
-	float dither_texture_x;
-	float dither_texture_y;
-};
-
-// NOCOM(#sirver): only do this once.
+// Returns the texture mask for the dithering step.
 const GLSurfaceTexture* get_dither_edge_texture() {
-	const std::string fname = "world/pics/edge.png";
-	const std::string cachename = std::string("gltex#") + fname;
+	constexpr char kFilename[] = "world/pics/edge.png";
+	constexpr char kCacheName[] =  "gltex#world/pics/edge.png";
 
-	if (Surface* surface = g_gr->surfaces().get(cachename))
+	if (Surface* surface = g_gr->surfaces().get(kCacheName))
 		return dynamic_cast<GLSurfaceTexture*>(surface);
 
-	SDL_Surface* sdlsurf = load_image_as_sdl_surface(fname, g_fs);
+	SDL_Surface* sdlsurf = load_image_as_sdl_surface(kFilename, g_fs);
 	GLSurfaceTexture* edgetexture = new GLSurfaceTexture(sdlsurf, true);
-	g_gr->surfaces().insert(cachename, edgetexture, false);
+	g_gr->surfaces().insert(kCacheName, edgetexture, false);
 	return edgetexture;
 }
 
 }  // namespace
 
 DitherProgram::DitherProgram() {
-	dither_gl_program_.build(kDitherVertexShader, kDitherFragmentShader);
+	gl_program_.build(kDitherVertexShader, kDitherFragmentShader);
 
-	attr_brightness_ = glGetAttribLocation(dither_gl_program_.object(), "attr_brightness");
+	attr_brightness_ = glGetAttribLocation(gl_program_.object(), "attr_brightness");
 	attr_dither_texture_position_ =
-	   glGetAttribLocation(dither_gl_program_.object(), "attr_dither_texture_position");
-	attr_position_ = glGetAttribLocation(dither_gl_program_.object(), "attr_position");
+	   glGetAttribLocation(gl_program_.object(), "attr_dither_texture_position");
+	attr_position_ = glGetAttribLocation(gl_program_.object(), "attr_position");
 	attr_texture_position_ =
-	   glGetAttribLocation(dither_gl_program_.object(), "attr_texture_position");
+	   glGetAttribLocation(gl_program_.object(), "attr_texture_position");
 
-	u_dither_texture_ = glGetUniformLocation(dither_gl_program_.object(), "u_dither_texture");
-	u_terrain_texture_ = glGetUniformLocation(dither_gl_program_.object(), "u_terrain_texture");
+	u_dither_texture_ = glGetUniformLocation(gl_program_.object(), "u_dither_texture");
+	u_terrain_texture_ = glGetUniformLocation(gl_program_.object(), "u_terrain_texture");
 }
 
 void DitherProgram::draw(const DescriptionMaintainer<TerrainDescription>& terrains,
                          const FieldsToDraw& fields_to_draw) {
-	glUseProgram(dither_gl_program_.object());
+	glUseProgram(gl_program_.object());
 
 	glEnableVertexAttribArray(attr_brightness_);
 	glEnableVertexAttribArray(attr_dither_texture_position_);
 	glEnableVertexAttribArray(attr_position_);
 	glEnableVertexAttribArray(attr_texture_position_);
 
-	// NOCOM(#sirver): do not recreate everytime.
-	std::vector<std::vector<DitherData>> data;
-	data.resize(terrains.size());
+	if (vertices_.size() != terrains.size()) {
+		vertices_.resize(terrains.size());
+	}
+	for (auto& container : vertices_) {
+		container.clear();
+	}
 
-	const auto add_vertex = [&fields_to_draw, &data](int index, int order_index, int terrain) {
+	// NOCOM(#sirver): pull out into methods.
+	const auto add_vertex = [this, &fields_to_draw](int index, int order_index, int terrain) {
 		const FieldsToDraw::Field& field = fields_to_draw.at(index);
 
-		data[terrain].emplace_back();
-		DitherData& back = data[terrain].back();
+		vertices_[terrain].emplace_back();
+		PerVertexData& back = vertices_[terrain].back();
 
 		back.x = field.x;
 		back.y = field.y;
@@ -228,8 +222,8 @@ void DitherProgram::draw(const DescriptionMaintainer<TerrainDescription>& terrai
 
 	// Which triangles to draw?
 	glBindBuffer(GL_ARRAY_BUFFER, gl_array_buffer_.object());
-	for (size_t i = 0; i < data.size(); ++i) {
-		const auto& current_data = data[i];
+	for (size_t i = 0; i < vertices_.size(); ++i) {
+		const auto& current_data = vertices_[i];
 		if (current_data.empty()) {
 			continue;
 		}
@@ -238,7 +232,7 @@ void DitherProgram::draw(const DescriptionMaintainer<TerrainDescription>& terrai
 		   g_gr->get_maptexture_data(terrains.get_unmutable(i).get_texture())->getTexture());
 
 		glBufferData(GL_ARRAY_BUFFER,
-		             sizeof(DitherData) * current_data.size(),
+		             sizeof(PerVertexData) * current_data.size(),
 		             current_data.data(),
 		             GL_STREAM_DRAW);
 
@@ -247,13 +241,13 @@ void DitherProgram::draw(const DescriptionMaintainer<TerrainDescription>& terrai
 			                      num_items,
 			                      GL_FLOAT,
 			                      GL_FALSE,
-			                      sizeof(DitherData),
+			                      sizeof(PerVertexData),
 			                      reinterpret_cast<void*>(offset));
 		};
-		set_attrib_pointer(attr_brightness_, 1, offsetof(DitherData, brightness));
-		set_attrib_pointer(attr_dither_texture_position_, 2, offsetof(DitherData, dither_texture_x));
-		set_attrib_pointer(attr_position_, 2, offsetof(DitherData, x));
-		set_attrib_pointer(attr_texture_position_, 2, offsetof(DitherData, texture_x));
+		set_attrib_pointer(attr_brightness_, 1, offsetof(PerVertexData, brightness));
+		set_attrib_pointer(attr_dither_texture_position_, 2, offsetof(PerVertexData, dither_texture_x));
+		set_attrib_pointer(attr_position_, 2, offsetof(PerVertexData, x));
+		set_attrib_pointer(attr_texture_position_, 2, offsetof(PerVertexData, texture_x));
 
 		glDrawArrays(GL_TRIANGLES, 0, current_data.size());
 	}

@@ -35,11 +35,21 @@ public:
 	          const FieldsToDraw& fields_to_draw);
 
 private:
-	// NOCOM(#sirver): comment
-	Gl::Buffer gl_array_buffer_;
+	struct PerVertexData {
+		float x;
+		float y;
+		float texture_x;
+		float texture_y;
+		float brightness;
+		float dither_texture_x;
+		float dither_texture_y;
+	};
 
 	// The program used for drawing the terrain.
-	Gl::Program dither_gl_program_;
+	Gl::Program gl_program_;
+
+	// The buffer that contains the data to be rendered.
+	Gl::Buffer gl_array_buffer_;
 
 	// Attributes.
 	GLint attr_position_;
@@ -50,6 +60,10 @@ private:
 	// Uniforms.
 	GLint u_terrain_texture_;
 	GLint u_dither_texture_;
+
+	// Objects below are here to avoid memory allocations on each frame, they
+	// could theoretically also always be recreated.
+	std::vector<std::vector<PerVertexData>> vertices_;
 };
 
 #endif  // end of include guard: WL_GRAPHIC_GL_DITHER_PROGRAM_H
