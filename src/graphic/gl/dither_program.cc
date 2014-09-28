@@ -103,6 +103,53 @@ DitherProgram::DitherProgram() {
 	u_terrain_texture_ = glGetUniformLocation(gl_program_.object(), "u_terrain_texture");
 }
 
+void DitherProgram::add_vertex(const FieldsToDraw::Field& field,
+                               const int order_index,
+                               const int terrain) {
+	vertices_[terrain].emplace_back();
+	PerVertexData& back = vertices_[terrain].back();
+
+	back.x = field.x;
+	back.y = field.y;
+	back.texture_x = field.texture_x;
+	back.texture_y = field.texture_y;
+	back.brightness = field.brightness;
+
+	switch (order_index) {
+	case 0:
+		back.dither_texture_x = 0.;
+		back.dither_texture_y = 0.;
+		break;
+	case 1:
+		back.dither_texture_x = 1.;
+		back.dither_texture_y = 0.;
+		break;
+	case 2:
+		back.dither_texture_x = 0.5;
+		back.dither_texture_y = 1.;
+		break;
+	}
+}
+
+void DitherProgram::maybe_add_dithering_triangle(
+   const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
+   const FieldsToDraw& fields_to_draw,
+   const int idx1,
+   const int idx2,
+   const int idx3,
+   const int my_terrain,
+   const int other_terrain) {
+	if (my_terrain == other_terrain) {
+		return;
+	}
+	if (terrains.get_unmutable(my_terrain).dither_layer() <
+	    terrains.get_unmutable(other_terrain).dither_layer()) {
+		add_vertex(fields_to_draw.at(idx1), 0, other_terrain);
+		add_vertex(fields_to_draw.at(idx2), 1, other_terrain);
+		add_vertex(fields_to_draw.at(idx3), 2, other_terrain);
+	}
+}
+
 void DitherProgram::draw(const DescriptionMaintainer<TerrainDescription>& terrains,
                          const FieldsToDraw& fields_to_draw) {
 	glUseProgram(gl_program_.object());
@@ -119,48 +166,6 @@ void DitherProgram::draw(const DescriptionMaintainer<TerrainDescription>& terrai
 		container.clear();
 	}
 
-	// NOCOM(#sirver): pull out into methods.
-	const auto add_vertex = [this, &fields_to_draw](int index, int order_index, int terrain) {
-		const FieldsToDraw::Field& field = fields_to_draw.at(index);
-
-		vertices_[terrain].emplace_back();
-		PerVertexData& back = vertices_[terrain].back();
-
-		back.x = field.x;
-		back.y = field.y;
-		back.texture_x = field.texture_x;
-		back.texture_y = field.texture_y;
-		back.brightness = field.brightness;
-
-		switch (order_index) {
-		case 0:
-			back.dither_texture_x = 0.;
-			back.dither_texture_y = 0.;
-			break;
-		case 1:
-			back.dither_texture_x = 1.;
-			back.dither_texture_y = 0.;
-			break;
-		case 2:
-			back.dither_texture_x = 0.5;
-			back.dither_texture_y = 1.;
-			break;
-		}
-	};
-
-	const auto potentially_add_dithering_triangle = [&terrains, &add_vertex, &fields_to_draw](
-	   int idx1, int idx2, int idx3, int my_terrain, int other_terrain) {
-		if (my_terrain == other_terrain) {
-			return;
-		}
-		if (terrains.get_unmutable(my_terrain).dither_layer() <
-		    terrains.get_unmutable(other_terrain).dither_layer()) {
-			add_vertex(idx1, 0, other_terrain);
-			add_vertex(idx2, 1, other_terrain);
-			add_vertex(idx3, 2, other_terrain);
-		}
-	};
-
 	for (size_t current_index = 0; current_index < fields_to_draw.size(); ++current_index) {
 		const FieldsToDraw::Field& field = fields_to_draw.at(current_index);
 
@@ -176,17 +181,17 @@ void DitherProgram::draw(const DescriptionMaintainer<TerrainDescription>& terrai
 		const int bln_index =
 		   fields_to_draw.calculate_index(field.fx + (field.fy & 1) - 1, field.fy + 1);
 		if (bln_index != -1) {
-			potentially_add_dithering_triangle(
+			maybe_add_dithering_triangle(terrains, fields_to_draw,
 			   brn_index, current_index, bln_index, field.ter_d, field.ter_r);
 
 			const int terrain_dd = fields_to_draw.at(bln_index).ter_r;
-			potentially_add_dithering_triangle(
+			maybe_add_dithering_triangle(terrains, fields_to_draw,
 			   bln_index, brn_index, current_index, field.ter_d, terrain_dd);
 
 			const int ln_index = fields_to_draw.calculate_index(field.fx - 1, field.fy);
 			if (ln_index != -1) {
 				const int terrain_l = fields_to_draw.at(ln_index).ter_r;
-				potentially_add_dithering_triangle(
+				maybe_add_dithering_triangle(terrains, fields_to_draw,
 				   current_index, bln_index, brn_index, field.ter_d, terrain_l);
 			}
 		}
@@ -194,17 +199,17 @@ void DitherProgram::draw(const DescriptionMaintainer<TerrainDescription>& terrai
 		// Dithering for right triangle.
 		const int rn_index = fields_to_draw.calculate_index(field.fx + 1, field.fy);
 		if (rn_index != -1) {
-			potentially_add_dithering_triangle(
+			maybe_add_dithering_triangle(terrains, fields_to_draw,
 			   current_index, brn_index, rn_index, field.ter_r, field.ter_d);
 			int terrain_rr = fields_to_draw.at(rn_index).ter_d;
-			potentially_add_dithering_triangle(
+			maybe_add_dithering_triangle(terrains, fields_to_draw,
 			   brn_index, rn_index, current_index, field.ter_r, terrain_rr);
 
 			const int trn_index =
 			   fields_to_draw.calculate_index(field.fx + (field.fy & 1), field.fy - 1);
 			if (trn_index != -1) {
 				const int terrain_u = fields_to_draw.at(trn_index).ter_d;
-				potentially_add_dithering_triangle(
+				maybe_add_dithering_triangle(terrains, fields_to_draw,
 				   rn_index, current_index, brn_index, field.ter_r, terrain_u);
 			}
 		}

@@ -20,6 +20,10 @@
 #ifndef WL_GRAPHIC_GL_FIELDS_TO_DRAW_H
 #define WL_GRAPHIC_GL_FIELDS_TO_DRAW_H
 
+#include <vector>
+
+#include <stdint.h>
+
 // Helper struct that contains the data needed for drawing all fields. All
 // methods are inlined for performance reasons.
 class FieldsToDraw {

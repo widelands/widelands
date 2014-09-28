@@ -20,11 +20,10 @@
 #ifndef WL_GRAPHIC_GL_DITHER_PROGRAM_H
 #define WL_GRAPHIC_GL_DITHER_PROGRAM_H
 
+#include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
 #include "logic/description_maintainer.h"
 #include "logic/world/terrain_description.h"
-
-class FieldsToDraw;
 
 class DitherProgram {
 public:
@@ -35,6 +34,23 @@ public:
 	          const FieldsToDraw& fields_to_draw);
 
 private:
+	// Adds the triangle between the indexes (which index 'fields_to_draw' to
+	// vertices_ if the my_terrain != other_terrain and the dither_layer()
+	// agree.
+	void maybe_add_dithering_triangle(
+	   const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
+	   const FieldsToDraw& fields_to_draw,
+	   int idx1,
+	   int idx2,
+	   int idx3,
+	   int my_terrain,
+	   int other_terrain);
+
+	// Adds the 'field' as an vertex to the 'vertices_' entry for 'terrain'. The
+	// 'order_index' defines which texture position will be used for this
+	// vertcx.
+	void add_vertex(const FieldsToDraw::Field& field, int order_index, int terrain);
+
 	struct PerVertexData {
 		float x;
 		float y;
