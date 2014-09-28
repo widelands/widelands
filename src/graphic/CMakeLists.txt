@@ -86,6 +86,11 @@ wl_library(graphic
     game_renderer.h
     gl/game_renderer.cc
     gl/game_renderer.h
+    gl/dither_program.cc
+    gl/dither_program.h
+    gl/terrain_program.cc
+    gl/terrain_program.h
+    gl/fields_to_draw.h
     graphic.cc
     graphic.h
     image_transformations.cc
