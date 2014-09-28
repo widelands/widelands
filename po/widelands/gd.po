@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-23 09:36+0200\n"
-"PO-Revision-Date: 2014-09-22 11:03+0000\n"
+"PO-Revision-Date: 2014-09-27 10:35+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-09-24 05:52+0000\n"
+"X-Launchpad-Export-Date: 2014-09-28 05:39+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: gd\n"
 
@@ -2623,7 +2623,7 @@ msgstr "FPS as motha:"
 
 #: ../../src/ui_fsmenu/options.cc:178
 msgid "In-game resolution"
-msgstr "Dùmhlachd-bhreacaidh am broinn a' gheama"
+msgstr "Dùmhlachd-bhreacaidh sa gheama"
 
 #: ../../src/ui_fsmenu/options.cc:183
 msgid "Language"
