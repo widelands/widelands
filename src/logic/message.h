@@ -35,6 +35,11 @@ struct Message {
 		allMessages,
 		gameLogic,
 		geologists,
+		geologistsCoal,
+		geologistsGold,
+		geologistsGranite,
+		geologistsIron,
+		geologistsWater,
 		scenario,
 		seafaring,
 		economy,      // economy
@@ -94,7 +99,10 @@ struct Message {
 		} else if (m_type >= Widelands::Message::Type::economy &&
 					  m_type <= Widelands::Message::Type::siteOccupied) {
 			return Widelands::Message::Type::economy;
-		}
+		} else if (m_type >= Widelands::Message::Type::geologists &&
+					 m_type <= Widelands::Message::Type::geologistsWater) {
+		  return Widelands::Message::Type::geologists;
+	  }
 		return m_type;
 	}
 
