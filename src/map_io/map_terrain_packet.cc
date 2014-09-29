@@ -35,29 +35,29 @@ namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 1
 
-void MapTerrainPacket::Read(FileSystem& fs,
+void MapTerrainPacket::read(FileSystem& fs,
                                    EditorGameBase& egbase,
                                    const OneWorldLegacyLookupTable& lookup_table) {
 	FileRead fr;
-	fr.Open(fs, "binary/terrain");
+	fr.open(fs, "binary/terrain");
 
 	Map & map = egbase.map();
 	const World & world = egbase.world();
 
 	try {
-		uint16_t const packet_version = fr.Unsigned16();
+		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == CURRENT_PACKET_VERSION) {
-			uint16_t const nr_terrains = fr.Unsigned16();
+			uint16_t const nr_terrains = fr.unsigned_16();
 
 			using TerrainIdMap = std::map<const uint16_t, TerrainIndex>;
 			TerrainIdMap smap;
 			for (uint16_t i = 0; i < nr_terrains; ++i) {
-				const uint16_t id = fr.Unsigned16();
-				char const* const old_terrain_name = fr.CString();
+				const uint16_t id = fr.unsigned_16();
+				char const* const old_terrain_name = fr.c_string();
 				TerrainIdMap::const_iterator const it = smap.find(id);
 				if (it != smap.end()) {
 					throw GameDataError(
-						"MapTerrainPacket::Read: WARNING: Found duplicate terrain id %i.", id);
+						"MapTerrainPacket::read: WARNING: Found duplicate terrain id %i.", id);
 				}
 				const std::string new_terrain_name =
 				   lookup_table.lookup_terrain(old_terrain_name);
@@ -70,8 +70,8 @@ void MapTerrainPacket::Read(FileSystem& fs,
 			MapIndex const max_index = map.max_index();
 			for (MapIndex i = 0; i < max_index; ++i) {
 				Field & f = map[i];
-				f.set_terrain_r(smap[fr.Unsigned8()]);
-				f.set_terrain_d(smap[fr.Unsigned8()]);
+				f.set_terrain_r(smap[fr.unsigned_8()]);
+				f.set_terrain_d(smap[fr.unsigned_8()]);
 			}
 		} else {
 			throw GameDataError("unknown/unhandled version %u", packet_version);
@@ -82,37 +82,37 @@ void MapTerrainPacket::Read(FileSystem& fs,
 }
 
 
-void MapTerrainPacket::Write
+void MapTerrainPacket::write
 	(FileSystem & fs, EditorGameBase & egbase)
 {
 
 	FileWrite fw;
 
-	fw.Unsigned16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(CURRENT_PACKET_VERSION);
 
 	//  This is a bit more complicated saved so that the order of loading of the
 	//  terrains at run time does not matter. This is slow like hell.
 	const Map & map = egbase.map();
 	const World & world = egbase.world();
 	TerrainIndex const nr_terrains = world.terrains().get_nitems();
-	fw.Unsigned16(nr_terrains);
+	fw.unsigned_16(nr_terrains);
 
 	std::map<const char * const, TerrainIndex> smap;
 	for (TerrainIndex i = 0; i < nr_terrains; ++i) {
 		const char * const name = world.terrain_descr(i).name().c_str();
 		smap[name] = i;
-		fw.Unsigned16(i);
-		fw.CString(name);
+		fw.unsigned_16(i);
+		fw.c_string(name);
 	}
 
 	MapIndex const max_index = map.max_index();
 	for (MapIndex i = 0; i < max_index; ++i) {
 		Field & f = map[i];
-		fw.Unsigned8(smap[world.terrain_descr(f.terrain_r()).name().c_str()]);
-		fw.Unsigned8(smap[world.terrain_descr(f.terrain_d()).name().c_str()]);
+		fw.unsigned_8(smap[world.terrain_descr(f.terrain_r()).name().c_str()]);
+		fw.unsigned_8(smap[world.terrain_descr(f.terrain_d()).name().c_str()]);
 	}
 
-	fw.Write(fs, "binary/terrain");
+	fw.write(fs, "binary/terrain");
 }
 
 }

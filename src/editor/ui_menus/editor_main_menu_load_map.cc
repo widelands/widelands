@@ -138,7 +138,7 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
 void MainMenuLoadMap::clicked_ok() {
 	const char * const filename(m_ls->get_selected());
 
-	if (g_fs->IsDirectory(filename) && !WidelandsMapLoader::is_widelands_map(filename)) {
+	if (g_fs->is_directory(filename) && !WidelandsMapLoader::is_widelands_map(filename)) {
 		m_curdir = filename;
 		m_ls->clear();
 		m_mapfiles.clear();
@@ -157,7 +157,7 @@ void MainMenuLoadMap::selected(uint32_t) {
 
 	m_ok_btn->set_enabled(true);
 
-	if (!g_fs->IsDirectory(name) || WidelandsMapLoader::is_widelands_map(name)) {
+	if (!g_fs->is_directory(name) || WidelandsMapLoader::is_widelands_map(name)) {
 		Widelands::Map map;
 		{
 			std::unique_ptr<Widelands::MapLoader> map_loader = map.get_correct_loader(name);
@@ -198,7 +198,7 @@ void MainMenuLoadMap::double_clicked(uint32_t) {clicked_ok();}
  */
 void MainMenuLoadMap::fill_list() {
 	//  Fill it with all files we find.
-	m_mapfiles = g_fs->ListDirectory(m_curdir);
+	m_mapfiles = g_fs->list_directory(m_curdir);
 
 	//  First, we add all directories. We manually add the parent directory.
 	if (m_curdir != m_basedir) {
@@ -224,13 +224,13 @@ void MainMenuLoadMap::fill_list() {
 	{
 		const char * const name = pname->c_str();
 		if
-			(strcmp(FileSystem::FS_Filename(name), ".")    &&
-			 strcmp(FileSystem::FS_Filename(name), "..")   &&
-			 g_fs->IsDirectory(name)                       &&
+			(strcmp(FileSystem::fs_filename(name), ".")    &&
+			 strcmp(FileSystem::fs_filename(name), "..")   &&
+			 g_fs->is_directory(name)                       &&
 			 !WidelandsMapLoader::is_widelands_map(name))
 
 		m_ls->add
-			(FileSystem::FS_Filename(name),
+			(FileSystem::fs_filename(name),
 			 name,
 			 g_gr->images().get("pics/ls_dir.png"));
 	}
@@ -248,7 +248,7 @@ void MainMenuLoadMap::fill_list() {
 			try {
 				map_loader->preload_map(true);
 				m_ls->add
-					(FileSystem::FS_FilenameWoExt(name).c_str(),
+					(FileSystem::filename_without_ext(name).c_str(),
 					 name,
 					 g_gr->images().get
 						 (dynamic_cast<WidelandsMapLoader*>(map_loader.get())

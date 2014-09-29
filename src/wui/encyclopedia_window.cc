@@ -70,21 +70,21 @@ EncyclopediaWindow::EncyclopediaWindow
 		 PRODSITE_GROUPS_WIDTH + 5, WINDOW_HEIGHT - 150, WINDOW_WIDTH - PRODSITE_GROUPS_WIDTH - 5, 145),
 	descrTxt         (this, 5, WINDOW_HEIGHT - 240, WINDOW_WIDTH - 10, 80, "")
 {
-	wares.selected.connect(boost::bind(&EncyclopediaWindow::wareSelected, this, _1));
+	wares.selected.connect(boost::bind(&EncyclopediaWindow::ware_selected, this, _1));
 
-	prodSites.selected.connect(boost::bind(&EncyclopediaWindow::prodSiteSelected, this, _1));
+	prodSites.selected.connect(boost::bind(&EncyclopediaWindow::prod_site_selected, this, _1));
 	condTable.add_column
 			/** TRANSLATORS: Column title in the Tribal Wares Encyclopedia */
 			(wareColumnWidth, ngettext("Consumed Ware Type", "Consumed Ware Types", 0));
 	condTable.add_column (quantityColumnWidth, _("Quantity"));
 
-	fillWares();
+	fill_wares();
 
 	if (get_usedefaultpos())
 		center_to_parent();
 }
 
-void EncyclopediaWindow::fillWares() {
+void EncyclopediaWindow::fill_wares() {
 	const TribeDescr & tribe = iaplayer().player().tribe();
 	WareIndex const nr_wares = tribe.get_nrwares();
 	std::vector<Ware> ware_vec;
@@ -103,7 +103,7 @@ void EncyclopediaWindow::fillWares() {
 	}
 }
 
-void EncyclopediaWindow::wareSelected(uint32_t) {
+void EncyclopediaWindow::ware_selected(uint32_t) {
 	const TribeDescr & tribe = iaplayer().player().tribe();
 	selectedWare = tribe.get_ware_descr(wares.get_selected());
 
@@ -134,7 +134,7 @@ void EncyclopediaWindow::wareSelected(uint32_t) {
 
 }
 
-void EncyclopediaWindow::prodSiteSelected(uint32_t) {
+void EncyclopediaWindow::prod_site_selected(uint32_t) {
 	assert(prodSites.has_selection());
 	size_t no_of_wares = 0;
 	condTable.clear();

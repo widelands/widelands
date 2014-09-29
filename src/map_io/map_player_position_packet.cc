@@ -30,7 +30,7 @@ namespace Widelands {
 #define CURRENT_PACKET_VERSION 2
 
 
-void MapPlayerPositionPacket::Read
+void MapPlayerPositionPacket::read
 	(FileSystem & fs, EditorGameBase & egbase, bool, MapObjectLoader &)
 {
 	Profile prof;
@@ -64,7 +64,7 @@ void MapPlayerPositionPacket::Read
 }
 
 
-void MapPlayerPositionPacket::Write
+void MapPlayerPositionPacket::write
 	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
 {
 	Profile prof;

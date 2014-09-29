@@ -141,9 +141,9 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 	style_shadow.fg = RGBColor(0, 0, 0);
 	m_label_speed_shadow.set_textstyle(style_shadow);
 
-	setDefaultCommand (boost::bind(&InteractiveBase::cmdLua, this, _1));
+	setDefaultCommand (boost::bind(&InteractiveBase::cmd_lua, this, _1));
 	addCommand
-		("mapobject", boost::bind(&InteractiveBase::cmdMapObject, this, _1));
+		("mapobject", boost::bind(&InteractiveBase::cmd_map_object, this, _1));
 }
 
 
@@ -304,7 +304,7 @@ void InteractiveBase::hide_work_area(OverlayManager::JobId job_id) {
  */
 void InteractiveBase::postload() {}
 
-static std::string speedString(uint32_t const speed)
+static std::string speed_string(uint32_t const speed)
 {
 	if (speed) {
 		char buffer[32];
@@ -321,19 +321,19 @@ void InteractiveBase::update_speedlabel()
 {
 	if (get_display_flag(dfSpeed)) {
 		upcast(Game, game, &m_egbase);
-		if (game && game->gameController()) {
-			uint32_t const real    = game->gameController()->realSpeed   ();
-			uint32_t const desired = game->gameController()->desiredSpeed();
+		if (game && game->game_controller()) {
+			uint32_t const real    = game->game_controller()->real_speed   ();
+			uint32_t const desired = game->game_controller()->desired_speed();
 			if (real == desired)
 				m_label_speed.set_text
-					(real == 1000 ? std::string() : speedString(real));
+					(real == 1000 ? std::string() : speed_string(real));
 			else {
 				m_label_speed.set_text(
 					(format
 						 /** TRANSLATORS: actual_speed (desired_speed) */
 						(_("%1$s (%2$s)"))
-						% speedString(real).c_str()
-						% speedString(desired).c_str()
+						% speed_string(real).c_str()
+						% speed_string(desired).c_str()
 					).str().c_str()
 				);
 			}
@@ -920,15 +920,15 @@ bool InteractiveBase::handle_key(bool const down, SDL_keysym const code)
 
 		if (down)
 			if (upcast(Game, game, &m_egbase))
-				if (GameController * const ctrl = game->gameController())
-					ctrl->setDesiredSpeed(ctrl->desiredSpeed() + 1000);
+				if (GameController * const ctrl = game->game_controller())
+					ctrl->set_desired_speed(ctrl->desired_speed() + 1000);
 		return true;
 
 	case SDLK_PAUSE:
 		if (down)
 			if (upcast(Game, game, &m_egbase))
-				if (GameController * const ctrl = game->gameController())
-					ctrl->togglePaused();
+				if (GameController * const ctrl = game->game_controller())
+					ctrl->toggle_paused();
 		return true;
 
 	case SDLK_KP3:
@@ -941,16 +941,16 @@ bool InteractiveBase::handle_key(bool const down, SDL_keysym const code)
 
 		if (down)
 			if (upcast(Widelands::Game, game, &m_egbase))
-				if (GameController * const ctrl = game->gameController()) {
-					uint32_t const speed = ctrl->desiredSpeed();
-					ctrl->setDesiredSpeed(1000 < speed ? speed - 1000 : 0);
+				if (GameController * const ctrl = game->game_controller()) {
+					uint32_t const speed = ctrl->desired_speed();
+					ctrl->set_desired_speed(1000 < speed ? speed - 1000 : 0);
 				}
 		return true;
 #ifndef NDEBUG //  only in debug builds
 		case SDLK_F6:
 			if (get_display_flag(dfDebug)) {
 				GameChatMenu::create_script_console(
-					this, m_debugconsole, *DebugConsole::getChatProvider());
+					this, m_debugconsole, *DebugConsole::get_chat_provider());
 			}
 			return true;
 #endif
@@ -961,7 +961,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_keysym const code)
 	return MapView::handle_key(down, code);
 }
 
-void InteractiveBase::cmdLua(const std::vector<std::string> & args)
+void InteractiveBase::cmd_lua(const std::vector<std::string> & args)
 {
 	const std::string cmd = boost::algorithm::join(args, " ");
 
@@ -978,7 +978,7 @@ void InteractiveBase::cmdLua(const std::vector<std::string> & args)
 /**
  * Show a map object's debug window
  */
-void InteractiveBase::cmdMapObject(const std::vector<std::string>& args)
+void InteractiveBase::cmd_map_object(const std::vector<std::string>& args)
 {
 	if (args.size() != 2) {
 		DebugConsole::write("usage: mapobject <mapobject serial>");

@@ -54,13 +54,13 @@ struct MapObjectPacket {
 
 	~MapObjectPacket();
 
-	void Read
+	void read
 		(FileSystem &, EditorGameBase &, MapObjectLoader &,
 		 const OneWorldLegacyLookupTable& lookup_table);
 
-	void LoadFinish();
+	void load_finish();
 
-	void Write(FileSystem &, EditorGameBase &, MapObjectSaver  &);
+	void write(FileSystem &, EditorGameBase &, MapObjectSaver  &);
 };
 
 }

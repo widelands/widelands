@@ -72,9 +72,8 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 			(this,
 			 posx, posy + get_inner_h() - spacing - offsy - 60 + 3,
 			 get_inner_w() / 2 - spacing, 20,
-			 g_gr->images().get("pics/but1.png"),
-			 UI::Align::Align_Left);
-	m_editbox->setText(parent.egbase().map().get_name());
+			 g_gr->images().get("pics/but1.png"), UI::Align::Align_Left);
+	m_editbox->set_text(parent.egbase().map().get_name());
 	m_editbox->changed.connect(boost::bind(&MainMenuSaveMap::edit_box_changed, this));
 
 	posx = get_inner_w() / 2 + spacing;
@@ -165,11 +164,11 @@ void MainMenuSaveMap::clicked_ok() {
 		filename = m_ls->get_selected();
 
 	if
-		(g_fs->IsDirectory(filename.c_str())
+		(g_fs->is_directory(filename.c_str())
 		 &&
 		 !Widelands::WidelandsMapLoader::is_widelands_map(filename))
 	{
-		m_curdir = g_fs->FS_CanonicalizeName(filename);
+		m_curdir = g_fs->canonicalize_name(filename);
 		m_ls->clear();
 		m_mapfiles.clear();
 		fill_list();
@@ -201,12 +200,12 @@ void MainMenuSaveMap::clicked_ok() {
 void MainMenuSaveMap::clicked_make_directory() {
 	MainMenuSaveMapMakeDirectory md(this, _("unnamed"));
 	if (md.run()) {
-		g_fs->EnsureDirectoryExists(m_basedir);
+		g_fs->ensure_directory_exists(m_basedir);
 		//  create directory
 		std::string fullname = m_curdir;
 		fullname            += "/";
 		fullname            += md.get_dirname();
-		g_fs->MakeDirectory(fullname);
+		g_fs->make_directory(fullname);
 		m_ls->clear();
 		m_mapfiles.clear();
 		fill_list();
@@ -227,7 +226,7 @@ void MainMenuSaveMap::clicked_item(uint32_t) {
 			ml->preload_map(true); // This has worked before, no problem
 		}
 
-		m_editbox->setText(FileSystem::FS_Filename(name));
+		m_editbox->set_text(FileSystem::fs_filename(name));
 
 		m_name  ->set_text(map.get_name       ());
 		m_name  ->set_tooltip(map.get_name    ());
@@ -241,14 +240,14 @@ void MainMenuSaveMap::clicked_item(uint32_t) {
 		sprintf(buf, "%ix%i", map.get_width(), map.get_height());
 		m_size->set_text(buf);
 	} else {
-		m_name     ->set_text(FileSystem::FS_Filename(name));
+		m_name     ->set_text(FileSystem::fs_filename(name));
 		m_name     ->set_tooltip("");
 		m_author   ->set_text("");
 		m_nrplayers->set_text("");
 		m_size     ->set_text("");
-		if (g_fs->IsDirectory(name)) {
+		if (g_fs->is_directory(name)) {
 			m_name->set_tooltip((boost::format(_("Directory: %s"))
-										% FileSystem::FS_Filename(name)).str());
+										% FileSystem::fs_filename(name)).str());
 			m_descr->set_text((boost::format("\\<%s\\>") % _("directory")).str());
 		} else {
 			const std::string not_map_string = _("Not a map file");
@@ -266,7 +265,7 @@ void MainMenuSaveMap::clicked_item(uint32_t) {
 void MainMenuSaveMap::double_clicked_item(uint32_t) {
 	const char * const name = m_ls->get_selected();
 
-	if (g_fs->IsDirectory(name) && !Widelands::WidelandsMapLoader::is_widelands_map(name)) {
+	if (g_fs->is_directory(name) && !Widelands::WidelandsMapLoader::is_widelands_map(name)) {
 		m_curdir = name;
 		m_ls->clear();
 		m_mapfiles.clear();
@@ -280,7 +279,7 @@ void MainMenuSaveMap::double_clicked_item(uint32_t) {
  */
 void MainMenuSaveMap::fill_list() {
 	// Fill it with all files we find.
-	m_mapfiles = g_fs->ListDirectory(m_curdir);
+	m_mapfiles = g_fs->list_directory(m_curdir);
 
 	// First, we add all directories. We manually add the parent directory
 	if (m_curdir != m_basedir) {
@@ -306,13 +305,13 @@ void MainMenuSaveMap::fill_list() {
 	{
 		const char * const name = pname->c_str();
 		if
-			(strcmp(FileSystem::FS_Filename(name), ".")    &&
-			 strcmp(FileSystem::FS_Filename(name), "..")   &&
-			 g_fs->IsDirectory(name)                       &&
+			(strcmp(FileSystem::fs_filename(name), ".")    &&
+			 strcmp(FileSystem::fs_filename(name), "..")   &&
+			 g_fs->is_directory(name)                       &&
 			 !Widelands::WidelandsMapLoader::is_widelands_map(name))
 
 		m_ls->add
-			(FileSystem::FS_Filename(name),
+			(FileSystem::fs_filename(name),
 			 name,
 			 g_gr->images().get("pics/ls_dir.png"));
 	}
@@ -332,7 +331,7 @@ void MainMenuSaveMap::fill_list() {
 			try {
 				wml->preload_map(true);
 				m_ls->add
-					(FileSystem::FS_FilenameWoExt(name).c_str(),
+					(FileSystem::filename_without_ext(name).c_str(),
 					 name,
 					 g_gr->images().get("pics/ls_wlmap.png"));
 			} catch (const WException &) {} //  we simply skip illegal entries
@@ -358,7 +357,7 @@ void MainMenuSaveMap::edit_box_changed() {
  */
 bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	//  Make sure that the base directory exists.
-	g_fs->EnsureDirectoryExists(m_basedir);
+	g_fs->ensure_directory_exists(m_basedir);
 
 	//  OK, first check if the extension matches (ignoring case).
 	bool assign_extension = true;
@@ -378,20 +377,20 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	complete_filename            += filename;
 
 	//  Check if file exists. If so, show a warning.
-	if (g_fs->FileExists(complete_filename)) {
+	if (g_fs->file_exists(complete_filename)) {
 		std::string s =
 			(boost::format(_("A file with the name ‘%s’ already exists. Overwrite?"))
-				% FileSystem::FS_Filename(filename.c_str())).str();
+				% FileSystem::fs_filename(filename.c_str())).str();
 		UI::WLMessageBox mbox
 			(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::YESNO);
 		if (!mbox.run())
 			return false;
 
-		g_fs->Unlink(complete_filename);
+		g_fs->fs_unlink(complete_filename);
 	}
 
 	std::unique_ptr<FileSystem> fs
-			(g_fs->CreateSubFileSystem(complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR));
+			(g_fs->create_sub_file_system(complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR));
 	Widelands::MapSaver wms(*fs, eia().egbase());
 	try {
 		wms.save();

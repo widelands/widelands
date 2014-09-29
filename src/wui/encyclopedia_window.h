@@ -57,9 +57,9 @@ private:
 	UI::Table     <uintptr_t>                 condTable;
 	UI::MultilineTextarea    descrTxt;
 	Widelands::WareDescr const * selectedWare;
-	void fillWares();
-	void wareSelected(uint32_t);
-	void prodSiteSelected(uint32_t);
+	void fill_wares();
+	void ware_selected(uint32_t);
+	void prod_site_selected(uint32_t);
 };
 
 #endif  // end of include guard: WL_WUI_ENCYCLOPEDIA_WINDOW_H

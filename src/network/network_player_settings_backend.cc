@@ -32,7 +32,7 @@ void NetworkPlayerSettingsBackend::toggle_type(uint8_t id) {
 	if (id >= s->settings().players.size())
 		return;
 
-	s->nextPlayerState(id);
+	s->next_player_state(id);
 }
 
 /// Toggle through the tribes + handle shared in players
@@ -63,7 +63,7 @@ void NetworkPlayerSettingsBackend::toggle_tribe(uint8_t id) {
 			}
 		}
 
-		s->setPlayerTribe(id, nexttribe, random_tribe);
+		s->set_player_tribe(id, nexttribe, random_tribe);
 	} else {
 		// This button is temporarily used to select the player that uses this starting position
 		uint8_t sharedplr = settings.players.at(id).shared_in;
@@ -76,7 +76,7 @@ void NetworkPlayerSettingsBackend::toggle_tribe(uint8_t id) {
 		}
 		if (sharedplr < settings.players.size()) {
 			// We have already found the next player
-			s->setPlayerShared(id, sharedplr + 1);
+			s->set_player_shared(id, sharedplr + 1);
 			return;
 		}
 		sharedplr = 0;
@@ -89,7 +89,7 @@ void NetworkPlayerSettingsBackend::toggle_tribe(uint8_t id) {
 		}
 		if (sharedplr < settings.players.at(id).shared_in) {
 			// We have found the next player
-			s->setPlayerShared(id, sharedplr + 1);
+			s->set_player_shared(id, sharedplr + 1);
 			return;
 		} else {
 			// No fitting player found
@@ -109,7 +109,7 @@ void NetworkPlayerSettingsBackend::toggle_init(uint8_t id) {
 	for (const TribeBasicInfo& temp_tribeinfo : settings.tribes) {
 		if (temp_tribeinfo.name == player.tribe) {
 			return
-				s->setPlayerInit
+				s->set_player_init
 					(id,
 					 (player.initialization_index + 1)
 					 %
@@ -135,7 +135,7 @@ void NetworkPlayerSettingsBackend::toggle_team(uint8_t id) {
 	else
 		newteam = currentteam + 1;
 
-	s->setPlayerTeam(id, newteam);
+	s->set_player_team(id, newteam);
 }
 
 /// Check if all settings for the player are still valid
@@ -158,7 +158,7 @@ void NetworkPlayerSettingsBackend::refresh(uint8_t id) {
 			toggle_tribe(id);
 
 		if (shared_in_tribe[id] != settings.players.at(player.shared_in - 1).tribe) {
-			s->setPlayerTribe
+			s->set_player_tribe
 				(id, settings.players.at(player.shared_in - 1).tribe,
 				 settings.players.at(player.shared_in - 1).random_tribe);
 			shared_in_tribe[id] = settings.players.at(id).tribe;

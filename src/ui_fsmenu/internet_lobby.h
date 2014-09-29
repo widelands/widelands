@@ -43,7 +43,7 @@ struct FullscreenMenuInternetLobby : public FullscreenMenuBase {
 
 	/// \returns the maximum number of clients that may connect
 	int32_t get_maxclients() {
-		return maxclients.getValue();
+		return maxclients.get_value();
 	}
 
 private:
@@ -69,10 +69,10 @@ private:
 	const char * password;
 	bool         reg;
 
-	void fillGamesList (const std::vector<InternetGame> &);
-	void fillClientList(const std::vector<InternetClient> &);
+	void fill_games_list (const std::vector<InternetGame> &);
+	void fill_client_list(const std::vector<InternetClient> &);
 
-	void connectToMetaserver();
+	void connect_to_metaserver();
 
 	void client_doubleclicked (uint32_t);
 	void server_selected (uint32_t);

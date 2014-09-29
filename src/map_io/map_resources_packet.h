@@ -28,8 +28,8 @@ namespace Widelands {
 
 class MapResourcesPacket {
 public:
-	void Read(FileSystem&, EditorGameBase&, const OneWorldLegacyLookupTable&);
-	void Write(FileSystem&, EditorGameBase&);
+	void read(FileSystem&, EditorGameBase&, const OneWorldLegacyLookupTable&);
+	void write(FileSystem&, EditorGameBase&);
 };
 
 }

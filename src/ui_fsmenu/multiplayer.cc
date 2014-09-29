@@ -57,7 +57,7 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer() :
 		 g_gr->images().get("pics/but0.png"),
 		 _("Back"), std::string(), true, false)
 {
-	metaserver.sigclicked.connect(boost::bind(&FullscreenMenuMultiPlayer::internetLogin, boost::ref(*this)));
+	metaserver.sigclicked.connect(boost::bind(&FullscreenMenuMultiPlayer::internet_login, boost::ref(*this)));
 	metaserver.set_font(font_small());
 	lan.set_font(font_small());
 	lan.sigclicked.connect
@@ -84,16 +84,16 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer() :
 				 _("Show login dialog"), true, false);
 		showloginbox->sigclicked.connect
 			(boost::bind
-				(&FullscreenMenuMultiPlayer::showInternetLogin, boost::ref(*this)));
+				(&FullscreenMenuMultiPlayer::show_internet_login, boost::ref(*this)));
 		showloginbox->set_font(font_small());
 	}
 }
 
 
 /// called if the showloginbox button was pressed
-void FullscreenMenuMultiPlayer::showInternetLogin() {
+void FullscreenMenuMultiPlayer::show_internet_login() {
 	m_auto_log = false;
-	internetLogin();
+	internet_login();
 }
 
 
@@ -109,7 +109,7 @@ void FullscreenMenuMultiPlayer::showInternetLogin() {
  *
  * In both cases this fullscreen menu ends it's modality.
  */
-void FullscreenMenuMultiPlayer::internetLogin() {
+void FullscreenMenuMultiPlayer::internet_login() {
 	Section & s = g_options.pull_section("global");
 	if (m_auto_log) {
 		m_nickname = s.get_string("nickname", _("nobody"));

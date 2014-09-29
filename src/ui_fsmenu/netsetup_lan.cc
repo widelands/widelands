@@ -118,7 +118,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN () :
 	hostname    .changed.connect
 		(boost::bind(&FullscreenMenuNetSetupLAN::change_hostname, this));
 	hostname    .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
-	playername  .setText  (s.get_string("nickname", (_("nobody"))));
+	playername  .set_text  (s.get_string("nickname", (_("nobody"))));
 	playername  .changed.connect
 		(boost::bind(&FullscreenMenuNetSetupLAN::change_playername, this));
 	playername  .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
@@ -176,7 +176,7 @@ const std::string & FullscreenMenuNetSetupLAN::get_playername()
 void FullscreenMenuNetSetupLAN::game_selected (uint32_t) {
 	if (opengames.has_selection()) {
 		if (const NetOpenGame * const game = opengames.get_selected()) {
-			hostname.setText(game->info.hostname);
+			hostname.set_text(game->info.hostname);
 			joingame.set_enabled(true);
 		}
 	}
@@ -261,7 +261,7 @@ void FullscreenMenuNetSetupLAN::clicked_hostgame() {
 void FullscreenMenuNetSetupLAN::clicked_lasthost() {
 	Section & s = g_options.get_safe_section("global");
 	std::string const host = s.get_string("lasthost", "");
-	hostname.setText(host);
+	hostname.set_text(host);
 	if (host.size())
 		joingame.set_enabled(true);
 	opengames.select(opengames.no_selection_index());

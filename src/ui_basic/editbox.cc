@@ -122,7 +122,7 @@ void EditBox::set_font(const std::string & name, int32_t size, RGBColor color)
  * The text is truncated if it is longer than the maximum length set by
  * \ref setMaxLength().
  */
-void EditBox::setText(const std::string & t)
+void EditBox::set_text(const std::string & t)
 {
 	if (t == m->text)
 		return;
@@ -142,7 +142,7 @@ void EditBox::setText(const std::string & t)
 /**
  * \return the maximum length of the input string
  */
-uint32_t EditBox::maxLength() const
+uint32_t EditBox::max_length() const
 {
 	return m->maxLength;
 }
@@ -154,7 +154,7 @@ uint32_t EditBox::maxLength() const
  * If the current string is longer than the new maximum length,
  * its end is cut off to fit into the maximum length.
  */
-void EditBox::setMaxLength(uint32_t const n)
+void EditBox::set_max_length(uint32_t const n)
 {
 	m->maxLength = n;
 
@@ -184,7 +184,7 @@ Align EditBox::align() const
  * Note that vertical alignment is always centered, independent of what
  * you select here.
  */
-void EditBox::setAlign(Align _align)
+void EditBox::set_align(Align _align)
 {
 	_align = static_cast<Align>((_align & Align_Horizontal) | Align_VCenter);
 	if (_align != m->align) {

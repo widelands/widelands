@@ -57,7 +57,7 @@ EditorDecreaseResourcesTool::handle_click_impl(Widelands::Map& map,
 		args.orgRes.push_back(mr.location().field->get_resources_amount());
 
 		if (res == args.cur_res &&
-		    Editor_Change_Resource_Tool_Callback(mr.location(), map, world, args.cur_res)) {
+		    editor_change_resource_tool_callback(mr.location(), map, world, args.cur_res)) {
 			//  Ok, we're doing something. First remove the current overlays.
 			std::string str =
 			    world.get_resource(res)->get_editor_pic

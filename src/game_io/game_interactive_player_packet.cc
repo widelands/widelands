@@ -34,15 +34,15 @@ namespace Widelands {
 #define CURRENT_PACKET_VERSION 2
 
 
-void GameInteractivePlayerPacket::Read
+void GameInteractivePlayerPacket::read
 	(FileSystem & fs, Game & game, MapObjectLoader *)
 {
 	try {
 		FileRead fr;
-		fr.Open(fs, "binary/interactive_player");
-		uint16_t const packet_version = fr.Unsigned16();
+		fr.open(fs, "binary/interactive_player");
+		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == CURRENT_PACKET_VERSION) {
-			PlayerNumber player_number = fr.Unsigned8();
+			PlayerNumber player_number = fr.unsigned_8();
 			if (!(0 < player_number && player_number <= game.map().get_nrplayers())) {
 				throw GameDataError("Invalid player number: %i.", player_number);
 			}
@@ -59,9 +59,9 @@ void GameInteractivePlayerPacket::Read
 				if (player_number > max)
 					throw GameDataError("The game has no players!");
 			}
-			int32_t       const x             = fr.Unsigned16();
-			int32_t       const y             = fr.Unsigned16();
-			uint32_t      const display_flags = fr.Unsigned32();
+			int32_t       const x             = fr.unsigned_16();
+			int32_t       const y             = fr.unsigned_16();
+			uint32_t      const display_flags = fr.unsigned_32();
 
 			if (InteractiveBase * const ibase = game.get_ibase()) {
 				ibase->set_viewpoint(Point(x, y), true);
@@ -88,32 +88,32 @@ void GameInteractivePlayerPacket::Read
 /*
  * Write Function
  */
-void GameInteractivePlayerPacket::Write
+void GameInteractivePlayerPacket::write
 	(FileSystem & fs, Game & game, MapObjectSaver * const)
 {
 	FileWrite fw;
 
 	// Now packet version
-	fw.Unsigned16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(CURRENT_PACKET_VERSION);
 
 	InteractiveBase * const ibase = game.get_ibase();
 	InteractivePlayer * const iplayer = game.get_ipl();
 
 	// Player number
-	fw.Unsigned8(iplayer ? iplayer->player_number() : 1);
+	fw.unsigned_8(iplayer ? iplayer->player_number() : 1);
 
 	// Map Position
 	if (ibase) {
 		assert(0 <= ibase->get_viewpoint().x);
 		assert(0 <= ibase->get_viewpoint().y);
 	}
-	fw.Unsigned16(ibase ? ibase->get_viewpoint().x : 0);
-	fw.Unsigned16(ibase ? ibase->get_viewpoint().y : 0);
+	fw.unsigned_16(ibase ? ibase->get_viewpoint().x : 0);
+	fw.unsigned_16(ibase ? ibase->get_viewpoint().y : 0);
 
 	// Display flags
-	fw.Unsigned32(ibase ? ibase->get_display_flags() : 0);
+	fw.unsigned_32(ibase ? ibase->get_display_flags() : 0);
 
-	fw.Write(fs, "binary/interactive_player");
+	fw.write(fs, "binary/interactive_player");
 }
 
 }

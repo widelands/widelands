@@ -50,7 +50,7 @@ struct EmptyAI : ComputerPlayer {
 EmptyAI::EmptyAIImpl EmptyAI::implementation;
 
 const ComputerPlayer::ImplementationVector &
-ComputerPlayer::getImplementations()
+ComputerPlayer::get_implementations()
 {
 	static std::vector<ComputerPlayer::Implementation const *> impls;
 
@@ -64,10 +64,10 @@ ComputerPlayer::getImplementations()
 	return impls;
 }
 
-const ComputerPlayer::Implementation * ComputerPlayer::getImplementation
+const ComputerPlayer::Implementation * ComputerPlayer::get_implementation
 	(const std::string & name)
 {
-	const ImplementationVector & vec = getImplementations();
+	const ImplementationVector & vec = get_implementations();
 
 	for (const ComputerPlayer::Implementation* implementation : vec) {
 		if (implementation->name == name) {

@@ -241,7 +241,7 @@ TribeDescr::TribeDescr
 			{
 				// Read initializations -- all scripts are initializations currently
 				for (const std::string& script :
-				     filter(g_fs->ListDirectory(path + "scripting"),
+					  filter(g_fs->list_directory(path + "scripting"),
 				            [](const string& fn) {return boost::ends_with(fn, ".lua");})) {
 					std::unique_ptr<LuaTable> t = egbase.lua().run_script(script);
 					t->do_not_warn_about_unaccessed_keys();
@@ -303,7 +303,7 @@ bool TribeDescr::exists_tribe
 
 	LuaInterface lua;
 	FileRead f;
-	if (f.TryOpen(*g_fs, buf)) {
+	if (f.try_open(*g_fs, buf)) {
 		if (info)
 			try {
 				Profile prof(buf.c_str());
@@ -313,7 +313,7 @@ bool TribeDescr::exists_tribe
 
 				std::string path = "tribes/" + name + "/scripting";
 				for (const std::string& script :
-				     filter(g_fs->ListDirectory(path),
+					  filter(g_fs->list_directory(path),
 				            [](const string& fn) {return boost::ends_with(fn, ".lua");})) {
 					std::unique_ptr<LuaTable> t = lua.run_script(script);
 					t->do_not_warn_about_unaccessed_keys();
@@ -344,7 +344,7 @@ std::vector<std::string> TribeDescr::get_all_tribenames() {
 
 	//  get all tribes
 	std::vector<TribeBasicInfo> tribes;
-	FilenameSet m_tribes = g_fs->ListDirectory("tribes");
+	FilenameSet m_tribes = g_fs->list_directory("tribes");
 	for
 		(FilenameSet::iterator pname = m_tribes.begin();
 		 pname != m_tribes.end();
@@ -367,7 +367,7 @@ std::vector<TribeBasicInfo> TribeDescr::get_all_tribe_infos() {
 	std::vector<TribeBasicInfo> tribes;
 
 	//  get all tribes
-	FilenameSet m_tribes = g_fs->ListDirectory("tribes");
+	FilenameSet m_tribes = g_fs->list_directory("tribes");
 	for
 		(FilenameSet::iterator pname = m_tribes.begin();
 		 pname != m_tribes.end();

@@ -202,7 +202,7 @@ public:
 			ivar1   (0),
 			ivar2   (0),
 			ivar3   (0),
-			coords  (Coords::Null()),
+			coords  (Coords::null()),
 			path    (nullptr),
 			route   (nullptr),
 			program (nullptr)
@@ -245,7 +245,7 @@ public:
 	/// \param commit indicates whether this function is called from the
 	///    \ref start_walk function, i.e. whether the bob will actually move
 	///    onto the \p to node if this function allows it to.
-	virtual bool checkNodeBlocked(Game &, const FCoords &, bool commit);
+	virtual bool check_node_blocked(Game &, const FCoords &, bool commit);
 
 	virtual void draw
 		(const EditorGameBase &, RenderTarget &, const Point&) const;

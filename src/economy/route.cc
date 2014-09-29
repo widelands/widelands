@@ -63,7 +63,7 @@ Flag & Route::get_flag
 /**
  * Remove the first count steps from the route.
 */
-void Route::starttrim(int32_t count)
+void Route::trim_start(int32_t count)
 {
 	assert(count < static_cast<int32_t>(m_route.size()));
 
@@ -91,10 +91,10 @@ void Route::load(LoadData & data, FileRead & fr)
 {
 	m_route.clear();
 
-	m_totalcost = fr.Signed32();
-	uint32_t nsteps = fr.Unsigned16();
+	m_totalcost = fr.signed_32();
+	uint32_t nsteps = fr.unsigned_16();
 	for (uint32_t step = 0; step < nsteps; ++step)
-		data.flags.push_back(fr.Unsigned32());
+		data.flags.push_back(fr.unsigned_32());
 }
 
 
@@ -120,8 +120,8 @@ void Route::load_pointers(const LoadData & data, MapObjectLoader & mol) {
 void Route::save
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
-	fw.Signed32(get_totalcost());
-	fw.Unsigned16(m_route.size());
+	fw.signed_32(get_totalcost());
+	fw.unsigned_16(m_route.size());
 	for
 		(std::vector<ObjectPointer>::size_type idx = 0;
 		 idx < m_route.size();
@@ -129,7 +129,7 @@ void Route::save
 	{
 		Flag & flag = get_flag(egbase, idx);
 		assert(mos.is_object_known(flag));
-		fw.Unsigned32(mos.get_object_file_index(flag));
+		fw.unsigned_32(mos.get_object_file_index(flag));
 	}
 }
 

@@ -41,12 +41,12 @@ struct MessageId {
 	explicit MessageId(uint32_t const _id) : id(_id) {}
 
 	/// Constant value for no message.
-	static MessageId Null() {MessageId result; result.id = 0; return result;}
+	static MessageId null() {MessageId result; result.id = 0; return result;}
 
 	bool operator== (const MessageId& other) const {return id == other.id;}
 	bool operator!= (const MessageId& other) const {return id != other.id;}
 	bool operator<  (const MessageId& other) const {return id <  other.id;}
-	operator bool     () const {return *this != Null();}
+	operator bool     () const {return *this != null();}
 	uint32_t value() const {return id;}
 
 private:
