@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-23 07:36+0000\n"
-"PO-Revision-Date: 2014-09-14 17:39+0000\n"
+"PO-Revision-Date: 2014-09-28 16:57+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-24 05:57+0000\n"
+"X-Launchpad-Export-Date: 2014-09-29 04:33+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ../../tribes/scripting/format_help.lua:150
@@ -38,25 +38,25 @@ msgstr "%s og"
 #: TRANSLATORS: This is a headline, you can see it in the building help for trainingsites, in the dependencies section
 #: ../../tribes/scripting/format_help.lua:219
 msgid "Equipment from"
-msgstr ""
+msgstr "Utstyr fra"
 
 #: TRANSLATORS: This is a headline, you can see it in the building help for trainingsites, in the dependencies section
 #: ../../tribes/scripting/format_help.lua:221
 msgid "and equipment from"
-msgstr ""
+msgstr "og utstyr fra"
 
 #: TRANSLATORS: This is a headline, you can see it in the building help for trainingsites, in the dependencies section
 #: ../../tribes/scripting/format_help.lua:223
 msgid "or equipment from"
-msgstr ""
+msgstr "eller utstyr fra"
 
 #: ../../tribes/scripting/format_help.lua:270
 msgid "General"
-msgstr ""
+msgstr "Generelt"
 
 #: ../../tribes/scripting/format_help.lua:271
 msgid "Purpose:"
-msgstr ""
+msgstr "Formål:"
 
 #: ../../tribes/scripting/format_help.lua:277
 #: ../../tribes/scripting/format_help.lua:504
@@ -65,17 +65,17 @@ msgstr "Merk:"
 
 #: ../../tribes/scripting/format_help.lua:281
 msgid "Working radius:"
-msgstr ""
+msgstr "Arbeidsområde:"
 
 #: ../../tribes/scripting/format_help.lua:285
 #: ../../tribes/scripting/format_help.lua:290
 msgid "Healing:"
-msgstr ""
+msgstr "Leging:"
 
 #: ../../tribes/scripting/format_help.lua:286
 #: ../../tribes/scripting/format_help.lua:291
 msgid "Garrisoned soldiers heal %s per second"
-msgstr ""
+msgstr "Stasjonerte soldater leges %s per sekund"
 
 #: ../../tribes/scripting/format_help.lua:287
 #: ../../tribes/scripting/format_help.lua:293
@@ -89,7 +89,7 @@ msgstr "Kapasitet:"
 
 #: ../../tribes/scripting/format_help.lua:296
 msgid "Training:"
-msgstr ""
+msgstr "Trening:"
 
 #: TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are numbers.
 #: ../../tribes/scripting/format_help.lua:299
@@ -97,19 +97,19 @@ msgstr ""
 #: ../../tribes/scripting/format_help.lua:307
 #: ../../tribes/scripting/format_help.lua:311
 msgid "Trains ‘%1$s’ from %2$s up to %3$s"
-msgstr ""
+msgstr "Trener «%1$s» fra %2$s opp til %3$s"
 
 #: ../../tribes/scripting/format_help.lua:300
 msgid "Attack"
-msgstr ""
+msgstr "Angrep"
 
 #: ../../tribes/scripting/format_help.lua:304
 msgid "Defense"
-msgstr ""
+msgstr "Forsvar"
 
 #: ../../tribes/scripting/format_help.lua:308
 msgid "Evade"
-msgstr ""
+msgstr "Unnvik"
 
 #: ../../tribes/scripting/format_help.lua:312
 msgid "Health"
@@ -155,11 +155,11 @@ msgstr "Ingen"
 #: TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
 #: ../../tribes/scripting/format_help.lua:459
 msgid "%1$dx %2$s"
-msgstr ""
+msgstr "%1$d stk. %2$s"
 
 #: ../../tribes/scripting/format_help.lua:481
 msgid "Building"
-msgstr ""
+msgstr "Bygning"
 
 #: ../../tribes/scripting/format_help.lua:485
 msgid "Mine plot"
@@ -202,44 +202,46 @@ msgid ""
 "This building can either be built directly or obtained by enhancing another "
 "building."
 msgstr ""
+"Denne bygningen kan ente bygges direkte eller oppgraderes til fra en annen "
+"bygning."
 
 #: ../../tribes/scripting/format_help.lua:511
 msgid "Direct build cost:"
-msgstr ""
+msgstr "Direkte byggekostnad:"
 
 #: ../../tribes/scripting/format_help.lua:513
 msgid "Build cost:"
-msgstr ""
+msgstr "Byggekostnad:"
 
 #: ../../tribes/scripting/format_help.lua:525
 msgid "Or enhanced from:"
-msgstr ""
+msgstr "Eller oppgradert fra:"
 
 #: ../../tribes/scripting/format_help.lua:527
 #: ../../tribes/scripting/format_help.lua:530
 msgid "Enhanced from:"
-msgstr ""
+msgstr "Oppgradert fra:"
 
 #: ../../tribes/scripting/format_help.lua:539
 msgid "Cumulative cost:"
-msgstr ""
+msgstr "Samlet kostnad:"
 
 #: ../../tribes/scripting/format_help.lua:580
 msgid "If built directly, dismantle yields:"
-msgstr ""
+msgstr "Hvis bygget direkte, gir demontering:"
 
 #: ../../tribes/scripting/format_help.lua:585
 msgid "If enhanced, dismantle yields:"
-msgstr ""
+msgstr "Hvis oppgradert, gir demontering:"
 
 #: ../../tribes/scripting/format_help.lua:587
 #: ../../tribes/scripting/format_help.lua:628
 msgid "Dismantle yields:"
-msgstr ""
+msgstr "Demontering gir:"
 
 #: ../../tribes/scripting/format_help.lua:637
 msgid "Can be enhanced to:"
-msgstr ""
+msgstr "Kan oppgraderes til:"
 
 #: ../../tribes/scripting/format_help.lua:665
 msgid "Crew required:"
@@ -251,7 +253,7 @@ msgstr "Arbeidere"
 
 #: ../../tribes/scripting/format_help.lua:688
 msgid "%s or better"
-msgstr ""
+msgstr "%s eller bedre"
 
 #: ../../tribes/scripting/format_help.lua:699
 msgid "Experience levels:"

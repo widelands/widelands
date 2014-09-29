@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-09-23 09:36+0200\n"
-"PO-Revision-Date: 2014-09-19 02:52+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2014-09-28 16:36+0000\n"
+"Last-Translator: wl-zocker <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-24 05:52+0000\n"
+"X-Launchpad-Export-Date: 2014-09-29 04:33+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: de\n"
 
@@ -2963,7 +2963,7 @@ msgstr "Sende einen Geologen, um die Fläche zu untersuchen"
 
 #: ../../src/wui/fieldaction.cc:413
 msgid "Place a flag"
-msgstr "Setzte eine Flagge"
+msgstr "Setze eine Flagge"
 
 #: ../../src/wui/fieldaction.cc:420
 msgid "Destroy a road"
