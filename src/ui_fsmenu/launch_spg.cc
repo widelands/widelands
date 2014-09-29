@@ -48,7 +48,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG
 	(GameSettingsProvider * const settings, GameController * const ctrl,
 	 bool /* autolaunch */)
 	:
-	FullscreenMenuBase("launchgamemenu.jpg"),
+	FullscreenMenuBase("ui_fsmenu.jpg"),
 
 // Values for alignment and size
 	m_butw (get_w() / 4),

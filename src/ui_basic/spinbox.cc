@@ -21,6 +21,8 @@
 
 #include <vector>
 
+#include <boost/format.hpp>
+
 #include "base/deprecated.h"
 #include "base/i18n.h"
 #include "base/wexception.h"
@@ -98,20 +100,38 @@ SpinBox::SpinBox
 		throw wexception("Not enough space to draw spinbox");
 	int32_t butw = h;
 	int32_t textw = w - butw * 32 / 5;
+
+	int32_t but_plus_x;
+	int32_t but_minus_x;
+	int32_t text_x;
+
+	if (m_big) {
+		but_plus_x = w - butw * 31 / 10;
+		but_minus_x = butw * 21 / 10;
+
+	} else {
+		but_plus_x = w - butw;
+		but_minus_x = 0;
+		textw = textw + 4 * butw;
+	}
 	while (textw <= 0) {
 		butw = butw * 3 / 4;
 		textw = w - butw * 32 / 5;
 	}
+	text_x = (w - textw) / 2;
 
-	char buf[64];
-	snprintf(buf, sizeof(buf), "%i %s", sbi->value, sbi->unit.c_str());
+	std::string unit_text = std::to_string(sbi->value);
+	if (! sbi->unit.empty()) {
+		/** TRANSLATORS: %i = number, %s = unit, e.g. "5 pixels" in the advanced options */
+		unit_text = (boost::format(_("%i %s")) % sbi->value % sbi->unit.c_str()).str();
+	}
 
 	sbi->text = new UI::Textarea
-		(this, butw * 16 / 5, 0, textw, h, buf, Align_Center);
+		(this, text_x, 0, textw, h, unit_text, Align_Center);
 	sbi->butPlus =
 		new Button
 			(this, "+",
-			 w - butw * 31 / 10, 0, butw, butw,
+			 but_plus_x, 0, butw, butw,
 			 sbi->background,
 			 "+", _("Increase the value"),
 			 true, false);
@@ -119,7 +139,7 @@ SpinBox::SpinBox
 	sbi->butMinus =
 		new Button
 			(this, "-",
-			 butw * 21 / 10, 0, butw, butw,
+			 but_minus_x, 0, butw, butw,
 			 sbi->background,
 			 "-", _("Decrease the value"),
 			 true, false);
@@ -145,7 +165,12 @@ SpinBox::SpinBox
 		sbi->butTenMinus->sigclicked.connect(boost::bind(&SpinBox::changeValue, boost::ref(*this), -10));
 		sbi->butTenPlus->set_repeating(true);
 		sbi->butTenMinus->set_repeating(true);
+		m_buttons.push_back(sbi->butTenMinus);
+		m_buttons.push_back(sbi->butTenPlus);
 	}
+
+	m_buttons.push_back(sbi->butMinus);
+	m_buttons.push_back(sbi->butPlus);
 
 	set_font(UI_FONT_NAME, UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG);
 }

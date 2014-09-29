@@ -49,14 +49,14 @@ using Widelands::WidelandsMapLoader;
  * Create all the buttons etc...
 */
 MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
-	: UI::Window(&parent, "load_map_menu", 0, 0, 550, 300, _("Load Map"))
+	: UI::Window(&parent, "load_map_menu", 0, 0, 560, 300, _("Load Map"))
 {
 	int32_t const spacing =  5;
 	int32_t const offsx   = spacing;
 	int32_t const offsy   = 10;
 	int32_t       posx    = offsx;
 	int32_t       posy    = offsy;
-	int32_t const descr_label_w = 90;
+	int32_t const descr_label_w = 100;
 
 	m_ls = new UI::Listselect<const char *>
 		(this,
@@ -69,9 +69,9 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
 	new UI::Textarea
 		(this, posx, posy, descr_label_w, 20, _("Name:"), UI::Align_CenterLeft);
 	m_name =
-		new UI::Textarea
-			(this, posx + descr_label_w, posy, 200, 20, "---", UI::Align_CenterLeft);
-	posy += 20 + spacing;
+		new UI::MultilineTextarea
+			(this, posx + descr_label_w, posy, 200, 40, "---", UI::Align_CenterLeft);
+	posy += 40 + spacing;
 
 	new UI::Textarea
 		(this, posx, posy, 150, 20, _("Author:"), UI::Align_CenterLeft);
@@ -166,7 +166,8 @@ void MainMenuLoadMap::selected(uint32_t) {
 
 		// Translate the map data
 		i18n::Textdomain td("maps");
-		m_name  ->set_text(_(map.get_name()));
+		m_name  ->set_text(map.get_name());
+		m_name  ->set_tooltip(map.get_name());
 		m_author->set_text(map.get_author());
 		m_descr ->set_text
 			(_(map.get_description()) + (map.get_hint().empty() ? "" : (std::string("\n") + _(map.get_hint()))));
@@ -179,6 +180,7 @@ void MainMenuLoadMap::selected(uint32_t) {
 		m_size     ->set_text(buf);
 	} else {
 		m_name     ->set_text("");
+		m_name     ->set_tooltip("");
 		m_author   ->set_text("");
 		m_descr    ->set_text("");
 		m_nrplayers->set_text("");
@@ -246,7 +248,7 @@ void MainMenuLoadMap::fill_list() {
 			try {
 				map_loader->preload_map(true);
 				m_ls->add
-					(FileSystem::FS_Filename(name),
+					(FileSystem::FS_FilenameWoExt(name).c_str(),
 					 name,
 					 g_gr->images().get
 						 (dynamic_cast<WidelandsMapLoader*>(map_loader.get())

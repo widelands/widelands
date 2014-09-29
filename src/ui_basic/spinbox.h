@@ -21,6 +21,7 @@
 #define WL_UI_BASIC_SPINBOX_H
 
 #include <cstring>
+#include <list>
 
 #include "graphic/align.h"
 #include "ui_basic/button.h"
@@ -57,6 +58,7 @@ struct SpinBox : public Panel {
 	void add_replacement(int32_t, std::string);
 	void remove_replacement(int32_t);
 	bool has_replacement(int32_t);
+	const std::vector<UI::Button*> & get_buttons() {return m_buttons;}
 
 private:
 	void update();
@@ -66,6 +68,8 @@ private:
 	const bool  m_big;
 
 	SpinBoxImpl * sbi;
+
+	std::vector<UI::Button*> m_buttons;
 };
 
 }

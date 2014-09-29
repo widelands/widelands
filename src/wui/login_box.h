@@ -46,7 +46,7 @@ private:
 	UI::Textarea * ta_nickname;
 	UI::Textarea * ta_password;
 	UI::Textarea * ta_register;
-	UI::Textarea * ta_auto_log;
+	UI::MultilineTextarea * ta_auto_log;
 	UI::MultilineTextarea * pwd_warning;
 };
 

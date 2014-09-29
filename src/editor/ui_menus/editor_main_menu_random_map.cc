@@ -43,12 +43,12 @@ using namespace Widelands;
 
 MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	UI::Window(&parent,
-                "random_map_menu",
-                (parent.get_w() - 260) / 2,
-                (parent.get_h() - 450) / 2,
-                260,
-                490,
-                _("New Random Map")),
+				  "random_map_menu",
+				  (parent.get_w() - 260) / 2,
+				  (parent.get_h() - 450) / 2,
+				  305,
+				  490,
+				  _("New Random Map")),
    // TRANSLATORS: The next are world names for the random map generator.
 	m_world_descriptions(
 	{
