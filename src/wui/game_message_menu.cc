@@ -346,22 +346,22 @@ bool GameMessageMenu::handle_key(bool down, SDL_keysym code)
 			if (m_centerviewbtn->enabled())
 				center_view();
 			return true;
-		case SDLK_0:
+		case SDLK_a:
 			filter_messages(Widelands::Message::Type::allMessages);
 			return true;
-		case SDLK_1:
+		case SDLK_l:
 			filter_messages(Widelands::Message::Type::geologists);
 			return true;
-		case SDLK_2:
+		case SDLK_e:
 			filter_messages(Widelands::Message::Type::economy);
 			return true;
-		case SDLK_3:
+		case SDLK_f:
 			filter_messages(Widelands::Message::Type::seafaring);
 			return true;
-		case SDLK_4:
+		case SDLK_w:
 			filter_messages(Widelands::Message::Type::warfare);
 			return true;
-		case SDLK_5:
+		case SDLK_r:
 			filter_messages(Widelands::Message::Type::scenario);
 			return true;
 		case SDLK_KP_PERIOD:
@@ -497,8 +497,8 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button & button, Widelan
 		m_scenariobtn->set_perm_pressed(false);
 		button.set_perm_pressed(true);
 		m_message_filter = msgtype;
-		/** TRANSLATORS: %s is a tooltip, 0 is the corresponding hotkey */
-		button.set_tooltip((boost::format(_("0: %s"))
+		/** TRANSLATORS: %s is a tooltip, A is the corresponding hotkey */
+		button.set_tooltip((boost::format(_("A: %s"))
 								  /** TRANSLATORS: Tooltip in the messages window */
 								  % _("Show all messages")).str());
 	}
@@ -508,24 +508,24 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button & button, Widelan
  * Helper for filter_messages
  */
 void GameMessageMenu::set_filter_messages_tooltips() {
-	/** TRANSLATORS: %s is a tooltip, 1 is the corresponding hotkey */
-	m_geologistsbtn->set_tooltip((boost::format(_("1: %s"))
+	/** TRANSLATORS: %s is a tooltip, L is the corresponding hotkey */
+	m_geologistsbtn->set_tooltip((boost::format(_("L: %s"))
 											/** TRANSLATORS: Tooltip in the messages window */
 											% _("Show geologists' messages only")).str());
-	/** TRANSLATORS: %s is a tooltip, 2 is the corresponding hotkey */
-	m_economybtn->set_tooltip((boost::format(_("2: %s"))
+	/** TRANSLATORS: %s is a tooltip, E is the corresponding hotkey */
+	m_economybtn->set_tooltip((boost::format(_("E: %s"))
 										/** TRANSLATORS: Tooltip in the messages window */
 										% _("Show economy messages only")).str());
-	/** TRANSLATORS: %s is a tooltip, 3 is the corresponding hotkey */
-	m_seafaringbtn->set_tooltip((boost::format(_("3: %s)"))
+	/** TRANSLATORS: %s is a tooltip, F is the corresponding hotkey */
+	m_seafaringbtn->set_tooltip((boost::format(_("F: %s)"))
 										  /** TRANSLATORS: Tooltip in the messages window */
 										  % _("Show seafaring messages only")).str());
-	/** TRANSLATORS: %s is a tooltip, 4 is the corresponding hotkey */
-	m_warfarebtn->set_tooltip((boost::format(_("4: %s"))
+	/** TRANSLATORS: %s is a tooltip, W is the corresponding hotkey */
+	m_warfarebtn->set_tooltip((boost::format(_("W: %s"))
 										/** TRANSLATORS: Tooltip in the messages window */
 										% _("Show warfare messages only")).str());
-	/** TRANSLATORS: %s is a tooltip, 5 is the corresponding hotkey */
-	m_scenariobtn->set_tooltip((boost::format(_("5: %s"))
+	/** TRANSLATORS: %s is a tooltip, R is the corresponding hotkey */
+	m_scenariobtn->set_tooltip((boost::format(_("R: %s"))
 										 /** TRANSLATORS: Tooltip in the messages window */
 										 % _("Show scenario messages only")).str());
 }
