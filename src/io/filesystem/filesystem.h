@@ -100,7 +100,7 @@ public:
 	 */
 	virtual FileSystem * create_sub_file_system(const std::string & fs_dirname, Type) = 0;
 	virtual void fs_unlink(const std::string &) = 0;
-	virtual void rename(const std::string &, const std::string &) = 0;
+	virtual void fs_rename(const std::string &, const std::string &) = 0;
 
 	static FileSystem & create(const std::string & root)
 ;

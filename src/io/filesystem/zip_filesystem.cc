@@ -555,7 +555,7 @@ void ZipFilesystem::m_open_unzip() {
 	m_state = STATE_UNZIPPPING;
 }
 
-void ZipFilesystem::rename(const std::string &, const std::string &) {
+void ZipFilesystem::fs_rename(const std::string &, const std::string &) {
 	throw wexception("rename inside zip FS is not implemented yet");
 }
 

@@ -269,18 +269,18 @@ void LayeredFileSystem::fs_unlink(const std::string & file) {
 		}
 }
 
-void LayeredFileSystem::rename
+void LayeredFileSystem::fs_rename
 	(const std::string & old_name, const std::string & new_name)
 {
 	if (!file_exists(old_name))
 		return;
 	if (m_home && m_home->is_writable() && m_home->file_exists(old_name)) {
-		m_home->rename(old_name, new_name);
+		m_home->fs_rename(old_name, new_name);
 		return;
 	}
 	for (auto it = m_filesystems.rbegin(); it != m_filesystems.rend(); ++it)
 		if ((*it)->is_writable() && (*it)->file_exists(old_name)) {
-			(*it)->rename(old_name, new_name);
+			(*it)->fs_rename(old_name, new_name);
 			return;
 		}
 }

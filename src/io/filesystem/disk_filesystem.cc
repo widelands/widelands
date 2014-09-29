@@ -422,7 +422,7 @@ void RealFSImpl::write(const std::string & fname, void const * const data, int32
 }
 
 // rename a file or directory
-void RealFSImpl::rename
+void RealFSImpl::fs_rename
 	(const std::string & old_name, const std::string & new_name)
 {
 	const std::string fullname1 = canonicalize_name(old_name);

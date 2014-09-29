@@ -87,7 +87,7 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 		if (g_fs->file_exists(backup_filename)) {
 			g_fs->fs_unlink(backup_filename);
 		}
-		g_fs->rename(complete_filename, backup_filename);
+		g_fs->fs_rename(complete_filename, backup_filename);
 	}
 
 	std::string error;
@@ -100,7 +100,7 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 			if (g_fs->file_exists(complete_filename)) {
 				g_fs->fs_unlink(complete_filename);
 			}
-			g_fs->rename(backup_filename, complete_filename);
+			g_fs->fs_rename(backup_filename, complete_filename);
 		}
 		// Wait 30 seconds until next save try
 		m_last_saved_time = m_last_saved_time + 30000;

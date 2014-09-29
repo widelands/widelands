@@ -76,7 +76,7 @@ public:
 	FileSystem * make_sub_file_system(const std::string & fs_dirname) override;
 	FileSystem * create_sub_file_system(const std::string & fs_dirname, Type) override;
 	void fs_unlink(const std::string & file) override;
-	void rename(const std::string &, const std::string &) override;
+	void fs_rename(const std::string &, const std::string &) override;
 
 	std::string get_basename() override {return std::string();}
 

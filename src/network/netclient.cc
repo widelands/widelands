@@ -771,7 +771,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 				}
 			}
 			// Don't overwrite the file, better rename the original one
-			g_fs->rename(path, backup_file_name(path));
+			g_fs->fs_rename(path, backup_file_name(path));
 		}
 
 		// Yes we need the file!
@@ -883,7 +883,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 				g_fs->fs_unlink(file->filename);
 				// Restore original file, if there was one before
 				if (g_fs->file_exists(backup_file_name(file->filename)))
-					g_fs->rename(backup_file_name(file->filename), file->filename);
+					g_fs->fs_rename(backup_file_name(file->filename), file->filename);
 				s.reset();
 				s.unsigned_8(NETCMD_CHAT);
 				s.string

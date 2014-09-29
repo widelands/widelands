@@ -330,7 +330,7 @@ bool DedicatedLog::check_file_writeable(std::string & path) {
 		if (existing) {
 			std::string rnpath(path + '~');
 			if (root->file_is_writeable(rnpath))
-				root->rename(path, rnpath);
+				root->fs_rename(path, rnpath);
 			else
 				log("Note: original file %s could not be backuped\n", path.c_str());
 		}
