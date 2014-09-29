@@ -251,7 +251,7 @@ void MainMenuSaveMap::clicked_item(uint32_t) {
 										% FileSystem::FS_Filename(name)).str());
 			m_descr->set_text((boost::format("\\<%s\\>") % _("directory")).str());
 		} else {
-			std::string not_map_string = _("Not a map file");
+			const std::string not_map_string = _("Not a map file");
 			m_name->set_tooltip(not_map_string);
 			m_descr->set_text((boost::format("\\<%s\\>") % not_map_string).str());
 		}
