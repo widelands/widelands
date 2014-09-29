@@ -42,12 +42,11 @@
 #include "ui_basic/window.h"
 #include "wui/interactive_player.h"
 
-#define WINDOW_WIDTH  std::min(700, g_gr->get_xres() - 40)
+#define WINDOW_WIDTH std::min(700, g_gr->get_xres() - 40)
 #define WINDOW_HEIGHT std::min(550, g_gr->get_yres() - 40)
-
-#define QUANTITY_COLUMN_WIDTH 100
-#define WARE_COLUMN_WIDTH     250
-#define PRODSITE_GROUPS_WIDTH (WINDOW_WIDTH - WARE_COLUMN_WIDTH - QUANTITY_COLUMN_WIDTH - 10)
+constexpr uint32_t quantityColumnWidth = 100;
+constexpr uint32_t wareColumnWidth = 250;
+#define PRODSITE_GROUPS_WIDTH (WINDOW_WIDTH - wareColumnWidth - quantityColumnWidth - 10)
 
 using namespace Widelands;
 
@@ -76,8 +75,8 @@ EncyclopediaWindow::EncyclopediaWindow
 	prodSites.selected.connect(boost::bind(&EncyclopediaWindow::prodSiteSelected, this, _1));
 	condTable.add_column
 			/** TRANSLATORS: Column title in the Tribal Wares Encyclopedia */
-			(WARE_COLUMN_WIDTH, ngettext("Consumed Ware Type", "Consumed Ware Types", 0));
-	condTable.add_column (QUANTITY_COLUMN_WIDTH, _("Quantity"));
+			(wareColumnWidth, ngettext("Consumed Ware Type", "Consumed Ware Types", 0));
+	condTable.add_column (quantityColumnWidth, _("Quantity"));
 
 	fillWares();
 
