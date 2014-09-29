@@ -180,7 +180,7 @@ void MainMenuLoadMap::selected(uint32_t) {
 		m_size     ->set_text(buf);
 	} else {
 		m_name     ->set_text("");
-		m_name  ->set_tooltip("");
+		m_name     ->set_tooltip("");
 		m_author   ->set_text("");
 		m_descr    ->set_text("");
 		m_nrplayers->set_text("");
