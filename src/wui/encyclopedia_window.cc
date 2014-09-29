@@ -207,5 +207,5 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 			}
 		}
 	}
-	condTable.set_column_title(0,	ngettext("Consumed Ware Type", "Consumed Ware Types", no_of_wares));
+	condTable.set_column_title(0, ngettext("Consumed Ware Type", "Consumed Ware Types", no_of_wares));
 }

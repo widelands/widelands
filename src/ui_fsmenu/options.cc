@@ -305,8 +305,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 
 	/** TRANSLATORS Options: Save game automatically every: */
 	m_sb_autosave     .add_replacement(0, _("Off"));
-	std::vector<UI::Button*> temp_buttons = m_sb_autosave.get_buttons();
-	for (UI::Button* temp_button : temp_buttons) {
+	for (UI::Button* temp_button : m_sb_autosave.get_buttons()) {
 		temp_button->sigclicked.connect
 				(boost::bind
 					(&FullscreenMenuOptions::update_sb_autosave_unit,
@@ -314,8 +313,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	}
 	/** TRANSLATORS Options: Remove Replays older than: */
 	m_sb_remove_replays.add_replacement(0, _("Never"));
-	temp_buttons = m_sb_remove_replays.get_buttons();
-	for (UI::Button* temp_button : temp_buttons) {
+	for (UI::Button* temp_button : m_sb_remove_replays.get_buttons()) {
 		temp_button->sigclicked.connect
 				(boost::bind
 					(&FullscreenMenuOptions::update_sb_remove_replays_unit,
@@ -574,16 +572,14 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 		 _("OpenGL rendering"), UI::Align_VCenter),
 	os(opt)
 {
-	std::vector<UI::Button*> temp_buttons = m_sb_dis_panel.get_buttons();
-	for (UI::Button* temp_button : temp_buttons) {
+	for (UI::Button* temp_button : m_sb_dis_panel.get_buttons()) {
 		temp_button->sigclicked.connect
 				(boost::bind
 					(&FullscreenMenuAdvancedOptions::update_sb_dis_panel_unit,
 					 boost::ref(*this)));
 	}
 
-	temp_buttons = m_sb_dis_border.get_buttons();
-	for (UI::Button* temp_button : temp_buttons) {
+	for (UI::Button* temp_button : m_sb_dis_border.get_buttons()) {
 		temp_button->sigclicked.connect
 				(boost::bind
 					(&FullscreenMenuAdvancedOptions::update_sb_dis_border_unit,
