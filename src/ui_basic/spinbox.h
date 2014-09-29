@@ -58,7 +58,7 @@ struct SpinBox : public Panel {
 	void add_replacement(int32_t, std::string);
 	void remove_replacement(int32_t);
 	bool has_replacement(int32_t);
-	std::vector<UI::Button*> get_buttons() {return m_buttons;}
+	const std::vector<UI::Button*> & get_buttons() {return m_buttons;}
 
 private:
 	void update();
