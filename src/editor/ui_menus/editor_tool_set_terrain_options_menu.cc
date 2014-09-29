@@ -68,7 +68,6 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 	constexpr int kSmallPicHeight = 20;
 	constexpr int kSmallPicWidth = 20;
 
-	std::string tooltip;
 	std::vector<std::string> tooltips;
 
 	for (size_t checkfor = 0; check[checkfor] >= 0; ++checkfor) {
@@ -120,15 +119,14 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 			}
 		}
 
-		/** TRANSLATORS: %1% = terrain name, %2% = list of terrain types  */
-		tooltip = ((boost::format("%1%: %2%"))
-						% terrain_descr.descname()
-						% i18n::localize_item_list(tooltips, i18n::ConcatenateWith::AND)).str();
-
 		// Make sure we delete this later on.
 		offscreen_images->emplace_back(new_in_memory_image("dummy_hash", surf));
 		break;
 	}
+	/** TRANSLATORS: %1% = terrain name, %2% = list of terrain types  */
+	const std::string tooltip = ((boost::format("%1%: %2%"))
+								  % terrain_descr.descname()
+								  % i18n::localize_item_list(tooltips, i18n::ConcatenateWith::AND)).str().c_str();
 
 	std::unique_ptr<const Image>& image = offscreen_images->back();
 	UI::Checkbox* cb = new UI::Checkbox(parent, Point(0, 0), image.get(), tooltip);
