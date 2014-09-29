@@ -497,10 +497,11 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button & button, Widelan
 		m_scenariobtn->set_perm_pressed(false);
 		button.set_perm_pressed(true);
 		m_message_filter = msgtype;
-		/** TRANSLATORS: %s is a tooltip, A is the corresponding hotkey */
-		button.set_tooltip((boost::format(_("A: %s"))
+		/** TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey */
+		button.set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 								  /** TRANSLATORS: Tooltip in the messages window */
-								  % _("Show all messages")).str());
+								  % _("Show all messages")
+								  % "A").str());
 	}
 }
 
@@ -508,26 +509,26 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button & button, Widelan
  * Helper for filter_messages
  */
 void GameMessageMenu::set_filter_messages_tooltips() {
-	/** TRANSLATORS: %s is a tooltip, L is the corresponding hotkey */
-	m_geologistsbtn->set_tooltip((boost::format(_("L: %s"))
+	m_geologistsbtn->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 											/** TRANSLATORS: Tooltip in the messages window */
-											% _("Show geologists' messages only")).str());
-	/** TRANSLATORS: %s is a tooltip, E is the corresponding hotkey */
-	m_economybtn->set_tooltip((boost::format(_("E: %s"))
+											% _("Show geologists' messages only")
+											% "L").str());
+	m_economybtn->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 										/** TRANSLATORS: Tooltip in the messages window */
-										% _("Show economy messages only")).str());
-	/** TRANSLATORS: %s is a tooltip, F is the corresponding hotkey */
-	m_seafaringbtn->set_tooltip((boost::format(_("F: %s)"))
+										% _("Show economy messages only")
+										% "E").str());
+	m_seafaringbtn->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 										  /** TRANSLATORS: Tooltip in the messages window */
-										  % _("Show seafaring messages only")).str());
-	/** TRANSLATORS: %s is a tooltip, W is the corresponding hotkey */
-	m_warfarebtn->set_tooltip((boost::format(_("W: %s"))
+										  % _("Show seafaring messages only")
+										  % "F").str());
+	m_warfarebtn->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 										/** TRANSLATORS: Tooltip in the messages window */
-										% _("Show warfare messages only")).str());
-	/** TRANSLATORS: %s is a tooltip, R is the corresponding hotkey */
-	m_scenariobtn->set_tooltip((boost::format(_("R: %s"))
+										% _("Show warfare messages only")
+										% "W").str());
+	m_scenariobtn->set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
 										 /** TRANSLATORS: Tooltip in the messages window */
-										 % _("Show scenario messages only")).str());
+										 % _("Show scenario messages only")
+										 % "R").str());
 }
 
 /**
