@@ -16,9 +16,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
 "X-Launchpad-Export-Date: 2014-09-19 05:49+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
-"X-Poedit-Country: czech republic\n"
 "Language: sk\n"
-"X-Poedit-Language: czech\n"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:23
 msgid "Expand north-east and build a quarry"
