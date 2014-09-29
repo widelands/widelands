@@ -21,8 +21,8 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
 #include <SDL_keysym.h>
+#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
@@ -86,46 +86,44 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 			surf->blit(pt, green->surface(), Rect(0, 0, green->width(), green->height()));
 			pt.x += kSmallPicWidth + 1;
 			/** TRANSLATORS: This is a terrain type tooltip in the editor */
-			tooltips.push_back(_("Green"));
+			tooltips.push_back(_("arable"));
 		} else {
 			if (ter_is & TerrainDescription::WATER) {
 				surf->blit(pt, water->surface(), Rect(0, 0, water->width(), water->height()));
 				pt.x += kSmallPicWidth + 1;
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
-				tooltips.push_back(_("Water"));
+				tooltips.push_back(_("aquatic"));
 			}
 			else if (ter_is & TerrainDescription::MOUNTAIN) {
 				surf->blit(pt, mountain->surface(), Rect(0, 0, mountain->width(), mountain->height()));
 				pt.x += kSmallPicWidth + 1;
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
-				tooltips.push_back(_("Mountains"));
+				tooltips.push_back(_("mountainous"));
 			}
 			if (ter_is & TerrainDescription::ACID) {
 				surf->blit(pt, dead->surface(), Rect(0, 0, dead->width(), dead->height()));
 				pt.x += kSmallPicWidth + 1;
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
-				tooltips.push_back(_("Dead"));
+				tooltips.push_back(_("dead"));
 			}
 			if (ter_is & TerrainDescription::UNPASSABLE) {
 				surf->blit(
 				   pt, unpassable->surface(), Rect(0, 0, unpassable->width(), unpassable->height()));
 				pt.x += kSmallPicWidth + 1;
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
-				tooltips.push_back(_("Unpassable"));
+				tooltips.push_back(_("unpassable"));
 			}
 			if (ter_is & TerrainDescription::DRY) {
 				surf->blit(pt, dry->surface(), Rect(0, 0, dry->width(), dry->height()));
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
-				 tooltips.push_back(_("Treeless"));
+				 tooltips.push_back(_("treeless"));
 			}
 		}
 
-		for (const std::string& temp_tooltip : tooltips) {
-			tooltip = ((boost::format("%s %s")) % tooltip % temp_tooltip).str();
-		}
-
 		/** TRANSLATORS: %1% = terrain name, %2% = list of terrain types  */
-		tooltip = ((boost::format("%1%: %2%")) % terrain_descr.descname() % tooltip.substr(1)).str();
+		tooltip = ((boost::format("%1%: %2%"))
+						% terrain_descr.descname()
+						% i18n::localize_item_list(tooltips, i18n::ConcatenateWith::AND)).str();
 
 		// Make sure we delete this later on.
 		offscreen_images->emplace_back(new_in_memory_image("dummy_hash", surf));
