@@ -242,18 +242,18 @@ bool ProductionProgram::ActReturn::Negation::evaluate
 	return !operand->evaluate(ps);
 }
 
-// Just a dummy to satisfy the superclass interface. Do not use.
+// Just a dummy to satisfy the superclass interface. Returns an empty string.
 std::string ProductionProgram::ActReturn::Negation::description
 	(const TribeDescr &) const
 {
-	throw wexception("Not implemented.");
+	return "";
 }
 
-// Just a dummy to satisfy the superclass interface. Do not use.
+// Just a dummy to satisfy the superclass interface. Returns an empty string.
 std::string ProductionProgram::ActReturn::Negation::description_negation
 	(const TribeDescr &) const
 {
-	throw wexception("Not implemented.");
+	return "";
 }
 
 
