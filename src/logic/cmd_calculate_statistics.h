@@ -27,14 +27,14 @@
 
 namespace Widelands {
 
-struct Cmd_CalculateStatistics : public GameLogicCommand {
-	Cmd_CalculateStatistics() : GameLogicCommand(0) {} // For savegame loading
-	Cmd_CalculateStatistics(int32_t const _duetime) :
+struct CmdCalculateStatistics : public GameLogicCommand {
+	CmdCalculateStatistics() : GameLogicCommand(0) {} // For savegame loading
+	CmdCalculateStatistics(int32_t const _duetime) :
 		GameLogicCommand(_duetime) {}
 
 	// Write these commands to a file (for savegames)
-	void Write(FileWrite &, Editor_Game_Base &, MapMapObjectSaver  &) override;
-	void Read (FileRead  &, Editor_Game_Base &, MapMapObjectLoader &) override;
+	void Write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
+	void Read (FileRead  &, EditorGameBase &, MapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_CALCULATE_STATISTICS;}
 	void execute(Game &) override;

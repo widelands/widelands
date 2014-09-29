@@ -30,8 +30,8 @@ namespace Widelands
 /**
  * Select a replay from a list of replays.
  */
-struct Fullscreen_Menu_LoadReplay : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_LoadReplay(Widelands::Game &);
+struct FullscreenMenuLoadReplay : public FullscreenMenuBase {
+	FullscreenMenuLoadReplay(Widelands::Game &);
 
 	const std::string & filename() {return m_filename;}
 

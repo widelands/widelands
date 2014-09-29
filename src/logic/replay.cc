@@ -48,9 +48,9 @@ enum {
 #define SYNC_INTERVAL 200
 
 
-class Cmd_ReplaySyncRead : public Command {
+class CmdReplaySyncRead : public Command {
 public:
-	Cmd_ReplaySyncRead(const uint32_t _duetime, const md5_checksum & hash)
+	CmdReplaySyncRead(const uint32_t _duetime, const Md5Checksum & hash)
 		: Command(_duetime), m_hash(hash)
 	{}
 
@@ -58,7 +58,7 @@ public:
 
 	void execute(Game & game) override
 	{
-		const md5_checksum myhash = game.get_sync_hash();
+		const Md5Checksum myhash = game.get_sync_hash();
 
 		if (m_hash != myhash) {
 			log
@@ -76,7 +76,7 @@ public:
 	}
 
 private:
-	md5_checksum m_hash;
+	Md5Checksum m_hash;
 };
 
 
@@ -88,7 +88,7 @@ ReplayReader::ReplayReader(Game & game, const std::string & filename)
 	m_replaytime = 0;
 
 	{
-		Game_Loader gl(filename + WLGF_SUFFIX, game);
+		GameLoader gl(filename + WLGF_SUFFIX, game);
 		gl.load_game();
 	}
 
@@ -111,7 +111,7 @@ ReplayReader::ReplayReader(Game & game, const std::string & filename)
 			throw wexception
 				("Replay of version %u is known to have desync problems", version);
 		if (version != REPLAY_VERSION)
-			throw game_data_error("unknown/unhandled version %u", version);
+			throw GameDataError("unknown/unhandled version %u", version);
 
 		game.rng().ReadState(*m_cmdlog);
 	}
@@ -164,10 +164,10 @@ Command * ReplayReader::GetNextCommand(const uint32_t time)
 
 		case pkt_syncreport: {
 			uint32_t duetime = m_cmdlog->Unsigned32();
-			md5_checksum hash;
+			Md5Checksum hash;
 			m_cmdlog->Data(hash.data, sizeof(hash.data));
 
-			return new Cmd_ReplaySyncRead(duetime, hash);
+			return new CmdReplaySyncRead(duetime, hash);
 		}
 
 		case pkt_end: {
@@ -181,7 +181,7 @@ Command * ReplayReader::GetNextCommand(const uint32_t time)
 		default:
 			throw wexception("Unknown packet %u", pkt);
 		}
-	} catch (const _wexception & e) {
+	} catch (const WException & e) {
 		log("REPLAY: Caught exception %s\n", e.what());
 		delete m_cmdlog;
 		m_cmdlog = nullptr;
@@ -204,9 +204,9 @@ bool ReplayReader::EndOfReplay()
  * Command / timer that regularly inserts synchronization hashes into
  * the replay.
  */
-class Cmd_ReplaySyncWrite : public Command {
+class CmdReplaySyncWrite : public Command {
 public:
-	Cmd_ReplaySyncWrite(const uint32_t _duetime) : Command(_duetime) {}
+	CmdReplaySyncWrite(const uint32_t _duetime) : Command(_duetime) {}
 
 	uint8_t id() const override {return QUEUE_CMD_REPLAYSYNCWRITE;}
 
@@ -215,7 +215,7 @@ public:
 			rw->SendSync (game.get_sync_hash());
 
 			game.enqueue_command
-				(new Cmd_ReplaySyncWrite(duetime() + SYNC_INTERVAL));
+				(new CmdReplaySyncWrite(duetime() + SYNC_INTERVAL));
 		}
 	}
 };
@@ -241,14 +241,14 @@ ReplayWriter::ReplayWriter(Game & game, const std::string & filename)
 	log("Reloading the game from replay\n");
 	game.cleanup_for_load();
 	{
-		Game_Loader gl(m_filename + WLGF_SUFFIX, game);
+		GameLoader gl(m_filename + WLGF_SUFFIX, game);
 		gl.load_game();
 	}
 	game.postload();
 	log("Done reloading the game from replay\n");
 
 	game.enqueue_command
-		(new Cmd_ReplaySyncWrite(game.get_gametime() + SYNC_INTERVAL));
+		(new CmdReplaySyncWrite(game.get_gametime() + SYNC_INTERVAL));
 
 	m_cmdlog = g_fs->OpenStreamWrite(filename);
 	m_cmdlog->Unsigned32(REPLAY_MAGIC);
@@ -291,7 +291,7 @@ void ReplayWriter::SendPlayerCommand(PlayerCommand * cmd)
 /**
  * Store a synchronization hash for the current game time in the replay.
  */
-void ReplayWriter::SendSync(const md5_checksum & hash)
+void ReplayWriter::SendSync(const Md5Checksum & hash)
 {
 	m_cmdlog->Unsigned8(pkt_syncreport);
 	m_cmdlog->Unsigned32(m_game.get_gametime());

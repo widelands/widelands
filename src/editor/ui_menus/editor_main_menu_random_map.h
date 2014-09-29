@@ -30,7 +30,7 @@ namespace Widelands {
 	struct UniqueRandomMapInfo;
 }
 
-struct Editor_Interactive;
+struct EditorInteractive;
 namespace UI {
 template <typename T, typename ID> struct IDButton;
 struct Textarea;
@@ -41,10 +41,10 @@ struct Textarea;
  * the user to choose the new world and a few other
  * things like size, world ....
 */
-struct Main_Menu_New_Random_Map : public UI::Window {
-	Main_Menu_New_Random_Map(Editor_Interactive &);
+struct MainMenuNewRandomMap : public UI::Window {
+	MainMenuNewRandomMap(EditorInteractive &);
 
-	typedef enum {
+	enum class ButtonId: uint8_t {
 		MAP_W_PLUS,
 		MAP_W_MINUS,
 		MAP_H_PLUS,
@@ -60,7 +60,7 @@ struct Main_Menu_New_Random_Map : public UI::Window {
 		SWITCH_ISLAND_MODE,
 		SWITCH_RES,
 		SWITCH_WORLD
-	} ButtonID;
+	};
 
 private:
 	struct WorldDescription {
@@ -85,7 +85,7 @@ private:
 	UI::EditBox * m_nrEditbox;
 	UI::EditBox * m_idEditbox;
 
-	void button_clicked(ButtonID);
+	void button_clicked(ButtonId);
 	void clicked_create_map();
 	void id_edit_box_changed();
 	void nr_edit_box_changed();

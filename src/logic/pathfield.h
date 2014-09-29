@@ -46,16 +46,16 @@ struct Pathfield {
 		}
 	};
 
-	typedef cookie_priority_queue<Pathfield, LessCost> Queue;
+	using Queue = CookiePriorityQueue<Pathfield, LessCost>;
 
-	Queue::cookie heap_cookie;
+	Queue::Cookie heap_cookie;
 	int32_t real_cost;  //  true cost up to this field
 	int32_t estim_cost; //  estimated cost till goal
 	uint16_t cycle;
 	uint8_t  backlink;   //  how we got here (WALK_*)
 
 	int32_t cost() const {return real_cost + estim_cost;}
-	Queue::cookie & cookie() {return heap_cookie;}
+	Queue::Cookie & cookie() {return heap_cookie;}
 };
 
 struct Pathfields {
@@ -80,7 +80,7 @@ struct PathfieldManager {
 private:
 	void clear(const boost::shared_ptr<Pathfields> & pf);
 
-	typedef std::vector<boost::shared_ptr<Pathfields> > List;
+	using List = std::vector<boost::shared_ptr<Pathfields>>;
 
 	uint32_t m_nrfields;
 	List m_list;

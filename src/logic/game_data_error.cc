@@ -24,7 +24,7 @@
 
 namespace Widelands {
 
-game_data_error::game_data_error(char const * const fmt, ...)
+GameDataError::GameDataError(char const * const fmt, ...)
 {
 	char buffer[512];
 	{

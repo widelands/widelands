@@ -23,8 +23,8 @@
 #include "build_info.h"
 #include "graphic/graphic.h"
 
-Fullscreen_Menu_Main::Fullscreen_Menu_Main() :
-	Fullscreen_Menu_Base("mainmenu.jpg"),
+FullscreenMenuMain::FullscreenMenuMain() :
+	FullscreenMenuBase("mainmenu.jpg"),
 
 // Values for alignment and size
 	m_butx (get_w() * 13 / 40),
@@ -98,39 +98,39 @@ Fullscreen_Menu_Main::Fullscreen_Menu_Main() :
 {
 	playtutorial.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_Main::end_modal, boost::ref(*this),
+			 (&FullscreenMenuMain::end_modal, boost::ref(*this),
 			  static_cast<int32_t>(mm_playtutorial)));
 	singleplayer.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_Main::end_modal, boost::ref(*this),
+			 (&FullscreenMenuMain::end_modal, boost::ref(*this),
 			  static_cast<int32_t>(mm_singleplayer)));
 	multiplayer.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_Main::end_modal, boost::ref(*this),
+			 (&FullscreenMenuMain::end_modal, boost::ref(*this),
 			  static_cast<int32_t>(mm_multiplayer)));
 	replay.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_Main::end_modal, boost::ref(*this),
+			 (&FullscreenMenuMain::end_modal, boost::ref(*this),
 			  static_cast<int32_t>(mm_replay)));
 	editor.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_Main::end_modal, boost::ref(*this),
+			 (&FullscreenMenuMain::end_modal, boost::ref(*this),
 			  static_cast<int32_t>(mm_editor)));
 	options.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_Main::end_modal, boost::ref(*this),
+			 (&FullscreenMenuMain::end_modal, boost::ref(*this),
 			  static_cast<int32_t>(mm_options)));
 	readme.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_Main::end_modal, boost::ref(*this),
+			 (&FullscreenMenuMain::end_modal, boost::ref(*this),
 			  static_cast<int32_t>(mm_readme)));
 	license.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_Main::end_modal, boost::ref(*this),
+			 (&FullscreenMenuMain::end_modal, boost::ref(*this),
 			  static_cast<int32_t>(mm_license)));
 	exit.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_Main::end_modal, boost::ref(*this),
+			 (&FullscreenMenuMain::end_modal, boost::ref(*this),
 			  static_cast<int32_t>(mm_exit)));
 
 	playtutorial.set_font(font_small());

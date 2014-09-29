@@ -25,12 +25,12 @@
 #include "io/filewrite.h"
 #include "logic/game.h"
 #include "logic/player.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 
 namespace Widelands {
 
-Cmd_Call_Economy_Balance::Cmd_Call_Economy_Balance
+CmdCallEconomyBalance::CmdCallEconomyBalance
 	(int32_t const starttime, Economy * const economy, uint32_t const timerid)
 	: GameLogicCommand(starttime)
 {
@@ -42,7 +42,7 @@ Cmd_Call_Economy_Balance::Cmd_Call_Economy_Balance
  * Called by Cmd_Queue as requested by start_request_timer().
  * Call economy functions to balance supply and request.
  */
-void Cmd_Call_Economy_Balance::execute(Game & game)
+void CmdCallEconomyBalance::execute(Game & game)
 {
 	if (Flag * const flag = m_flag.get(game))
 		flag->get_economy()->balance(m_timerid);
@@ -53,8 +53,8 @@ void Cmd_Call_Economy_Balance::execute(Game & game)
 /**
  * Read and write
  */
-void Cmd_Call_Economy_Balance::Read
-	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader & mol)
+void CmdCallEconomyBalance::Read
+	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -84,14 +84,14 @@ void Cmd_Call_Economy_Balance::Read
 			else
 				m_timerid = 0;
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
+	} catch (const WException & e) {
 		throw wexception("call economy balance: %s", e.what());
 	}
 }
-void Cmd_Call_Economy_Balance::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
+void CmdCallEconomyBalance::Write
+	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	fw.Unsigned16(CURRENT_CMD_CALL_ECONOMY_VERSION);
 

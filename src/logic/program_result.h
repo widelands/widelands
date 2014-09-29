@@ -21,8 +21,8 @@
 #define WL_LOGIC_PROGRAM_RESULT_H
 
 namespace Widelands {
-enum Program_Result {None = 0, Failed = 1, Completed = 2, Skipped = 3};
-enum Program_Result_Handling_Method {Fail, Complete, Skip, Continue, Repeat};
+enum ProgramResult {None = 0, Failed = 1, Completed = 2, Skipped = 3};
+enum ProgramResultHandlingMethod {Fail, Complete, Skip, Continue, Repeat};
 }
 
 #endif  // end of include guard: WL_LOGIC_PROGRAM_RESULT_H

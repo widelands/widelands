@@ -120,7 +120,7 @@ private:
 	void syncreport() override;
 
 	void clearComputerPlayers();
-	void initComputerPlayer(Widelands::Player_Number p);
+	void initComputerPlayer(Widelands::PlayerNumber p);
 	void initComputerPlayers();
 
 	void handle_packet(uint32_t i, RecvPacket &);

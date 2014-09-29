@@ -29,17 +29,17 @@
 #include "logic/world/terrain_description.h"
 #include "ui_basic/textarea.h"
 
-struct Editor_Interactive;
-struct Editor_Set_Terrain_Tool;
+struct EditorInteractive;
+struct EditorSetTerrainTool;
 
-struct Editor_Tool_Set_Terrain_Options_Menu : public Editor_Tool_Options_Menu {
-	Editor_Tool_Set_Terrain_Options_Menu(Editor_Interactive&,
-	                                     Editor_Set_Terrain_Tool&,
+struct EditorToolSetTerrainOptionsMenu : public EditorToolOptionsMenu {
+	EditorToolSetTerrainOptionsMenu(EditorInteractive&,
+	                                     EditorSetTerrainTool&,
 	                                     UI::UniqueWindow::Registry&);
-	virtual ~Editor_Tool_Set_Terrain_Options_Menu();
+	virtual ~EditorToolSetTerrainOptionsMenu();
 
 private:
-	std::unique_ptr<CategorizedItemSelectionMenu<Widelands::TerrainDescription, Editor_Set_Terrain_Tool>>
+	std::unique_ptr<CategorizedItemSelectionMenu<Widelands::TerrainDescription, EditorSetTerrainTool>>
 	multi_select_menu_;
 	std::vector<std::unique_ptr<const Image>>  offscreen_images_;
 };

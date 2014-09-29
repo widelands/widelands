@@ -32,16 +32,16 @@
 #include "wui/interactive_player.h"
 
 using Widelands::Message;
-using Widelands::Message_Id;
+using Widelands::MessageId;
 using Widelands::MessageQueue;
 
-inline Interactive_Player & GameMessageMenu::iplayer() const {
-	return ref_cast<Interactive_Player, UI::Panel>(*get_parent());
+inline InteractivePlayer & GameMessageMenu::iplayer() const {
+	return ref_cast<InteractivePlayer, UI::Panel>(*get_parent());
 }
 
 
 GameMessageMenu::GameMessageMenu
-	(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
+	(InteractivePlayer & plr, UI::UniqueWindow::Registry & registry)
 	:
 	UI::UniqueWindow
 		(&plr, "messages", &registry, 580, 375, _("Messages: Inbox")),
@@ -178,7 +178,7 @@ GameMessageMenu::GameMessageMenu
 
 
 	m_display_message_type_label =
-		new UI::Multiline_Textarea
+		new UI::MultilineTextarea
 			(this,
 			 5, 375 - 5 - 34, 5 * 34, 40,
 			 "<rt image=pics/message_new.png></rt>",
@@ -202,8 +202,8 @@ GameMessageMenu::GameMessageMenu
 bool GameMessageMenu::status_compare(uint32_t a, uint32_t b)
 {
 	MessageQueue & mq = iplayer().player().messages();
-	const Message * msga = mq[Message_Id((*list)[a])];
-	const Message * msgb = mq[Message_Id((*list)[b])];
+	const Message * msga = mq[MessageId((*list)[a])];
+	const Message * msgb = mq[MessageId((*list)[b])];
 
 	if (msga && msgb) {
 		return msga->status() == Message::New && msgb->status() != Message::New;
@@ -218,14 +218,14 @@ static char const * const status_picture_filename[] = {
 };
 
 void GameMessageMenu::show_new_message
-	(Message_Id const id, const Widelands::Message & message)
+	(MessageId const id, const Widelands::Message & message)
 {
 	assert(iplayer().player().messages()[id] == &message);
 	assert(!list->find(id.value()));
 	Message::Status const status = message.status();
 	if ((mode == Archive) != (status == Message::Archived))
 		toggle_mode();
-	UI::Table<uintptr_t>::Entry_Record & te = list->add(id.value(), true);
+	UI::Table<uintptr_t>::EntryRecord & te = list->add(id.value(), true);
 	update_record(te, message);
 }
 
@@ -236,7 +236,7 @@ void GameMessageMenu::think()
 	// Update messages in the list and remove messages
 	// that should no longer be shown
 	for (uint32_t j = list->size(); j; --j) {
-		Message_Id m_id((*list)[j - 1]);
+		MessageId m_id((*list)[j - 1]);
 		if (Message const * const message = mq[m_id]) {
 			if ((mode == Archive) != (message->status() == Message::Archived)) {
 				list->remove(j - 1);
@@ -249,14 +249,14 @@ void GameMessageMenu::think()
 	}
 
 	// Add new messages to the list
-	for (const std::pair<Message_Id, Message *>& temp_message : mq) {
-		Message_Id      const id      =  temp_message.first;
+	for (const std::pair<MessageId, Message *>& temp_message : mq) {
+		MessageId      const id      =  temp_message.first;
 		const Message &       message = *temp_message.second;
 		Message::Status const status  = message.status();
 		if ((mode == Archive) != (status == Message::Archived))
 			continue;
 		if (!list->find(id.value())) {
-			UI::Table<uintptr_t>::Entry_Record & er = list->add(id.value());
+			UI::Table<uintptr_t>::EntryRecord & er = list->add(id.value());
 			update_record(er, message);
 			list->sort();
 		}
@@ -266,7 +266,7 @@ void GameMessageMenu::think()
 	if (m_message_filter != Message::Type::allMessages) {
 		set_display_message_type_label(m_message_filter);
 		for (uint32_t j = list->size(); j; --j) {
-			Message_Id m_id((*list)[j - 1]);
+			MessageId m_id((*list)[j - 1]);
 			if (Message const * const message = mq[m_id]) {
 				if (message->message_type_category() != m_message_filter) {
 					list->remove(j - 1);
@@ -289,7 +289,7 @@ void GameMessageMenu::think()
 }
 
 void GameMessageMenu::update_record
-	(UI::Table<uintptr_t>::Entry_Record & er,
+	(UI::Table<uintptr_t>::EntryRecord & er,
 	 const Widelands::Message & message)
 {
 	er.set_picture
@@ -308,13 +308,13 @@ void GameMessageMenu::selected(uint32_t const t) {
 	Widelands::Player & player = iplayer().player  ();
 	MessageQueue      & mq     = player   .messages();
 	if (t != UI::Table<uintptr_t>::no_selection_index()) {
-		Message_Id const id = Message_Id((*list)[t]);
+		MessageId const id = MessageId((*list)[t]);
 		if (Message const * const message = mq[id]) {
 			//  Maybe the message was removed since think?
 			if (message->status() == Message::New) {
 				Widelands::Game & game = iplayer().game();
 				game.send_player_command
-					(*new Widelands::Cmd_MessageSetStatusRead
+					(*new Widelands::CmdMessageSetStatusRead
 					 	(game.get_gametime(), player.player_number(), id));
 			}
 			m_centerviewbtn->set_enabled(message->position());
@@ -386,7 +386,7 @@ void GameMessageMenu::archive_or_restore()
 	Widelands::Game         &       game     = iplayer().game();
 	uint32_t                  const gametime = game.get_gametime();
 	Widelands::Player       &       player   = iplayer().player();
-	Widelands::Player_Number  const plnum    = player.player_number();
+	Widelands::PlayerNumber  const plnum    = player.player_number();
 	bool work_done = false;
 
 	switch (mode) {
@@ -397,8 +397,8 @@ void GameMessageMenu::archive_or_restore()
 			{
 				work_done = true;
 				game.send_player_command
-					(*new Widelands::Cmd_MessageSetStatusArchived
-					 	(gametime, plnum, Message_Id((*list)[i])));
+					(*new Widelands::CmdMessageSetStatusArchived
+					 	(gametime, plnum, MessageId((*list)[i])));
 			}
 
 		//archive highlighted message, if nothing was selected
@@ -406,8 +406,8 @@ void GameMessageMenu::archive_or_restore()
 			if (!list->has_selection()) return;
 
 			game.send_player_command
-				(*new Widelands::Cmd_MessageSetStatusArchived
-					(gametime, plnum, Message_Id(list->get_selected())));
+				(*new Widelands::CmdMessageSetStatusArchived
+					(gametime, plnum, MessageId(list->get_selected())));
 		}
 		break;
 	case Archive:
@@ -417,8 +417,8 @@ void GameMessageMenu::archive_or_restore()
 			{
 				work_done = true;
 				game.send_player_command
-					(*new Widelands::Cmd_MessageSetStatusRead
-					 	(gametime, plnum, Message_Id((*list)[i])));
+					(*new Widelands::CmdMessageSetStatusRead
+					 	(gametime, plnum, MessageId((*list)[i])));
 			}
 
 		//restore highlighted message, if nothing was selected
@@ -426,8 +426,8 @@ void GameMessageMenu::archive_or_restore()
 			if (!list->has_selection()) return;
 
 			game.send_player_command
-				(*new Widelands::Cmd_MessageSetStatusRead
-					(gametime, plnum, Message_Id(list->get_selected())));
+				(*new Widelands::CmdMessageSetStatusRead
+					(gametime, plnum, MessageId(list->get_selected())));
 		}
 		break;
 	default:
@@ -441,7 +441,7 @@ void GameMessageMenu::center_view()
 	assert(selection < list->size());
 	if
 		(Message const * const message =
-		 	iplayer().player().messages()[Message_Id((*list)[selection])])
+		 	iplayer().player().messages()[MessageId((*list)[selection])])
 	{
 		assert(message->position());
 		iplayer().move_view_to(message->position());

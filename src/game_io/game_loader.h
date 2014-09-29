@@ -29,17 +29,17 @@ class FileSystem;
 namespace Widelands {
 
 class Game;
-struct Game_Preload_Data_Packet;
+struct GamePreloadPacket;
 
 /*
  * This class reads a complete state
  * of a game out to a file.
  */
-struct Game_Loader {
-	Game_Loader(const std::string & path, Game &);
-	~Game_Loader();
+struct GameLoader {
+	GameLoader(const std::string & path, Game &);
+	~GameLoader();
 
-	int32_t preload_game(Game_Preload_Data_Packet &);
+	int32_t preload_game(GamePreloadPacket &);
 	int32_t    load_game(bool multiplayer = false);
 
 private:

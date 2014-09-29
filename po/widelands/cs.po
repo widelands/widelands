@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-08-05 10:15+0100\n"
+"POT-Creation-Date: 2014-09-18 19:55+0100\n"
 "PO-Revision-Date: 2014-07-27 16:59+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Widelands fixxer upper\n"
@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-08-06 05:49+0000\n"
-"X-Generator: Launchpad (build 17147)\n"
+"X-Launchpad-Export-Date: 2014-09-19 05:55+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "Language: cs\n"
 "X-Poedit-Language: Czech\n"
@@ -100,11 +100,11 @@ msgstr "Zpět"
 msgid "Redo"
 msgstr "Provést znovu"
 
-#: ../../src/editor/editorinteractive.cc:190 ../../src/wlapplication.cc:439
+#: ../../src/editor/editorinteractive.cc:190
 msgid "Unsupported format"
 msgstr "Nepodporovaný formát"
 
-#: ../../src/editor/editorinteractive.cc:191 ../../src/wlapplication.cc:440
+#: ../../src/editor/editorinteractive.cc:191
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -797,7 +797,7 @@ msgid "Loading map"
 msgstr "Nahrávání mapy"
 
 #: ../../src/logic/game.cc:369 ../../src/logic/game.cc:402
-#: ../../src/wlapplication.cc:1672
+#: ../../src/wlapplication.cc:1586
 msgid "Loading..."
 msgstr "Nahrávání..."
 
@@ -930,9 +930,9 @@ msgstr ""
 #. * TRANSLATORS:    %2$s = "Ox"
 #: ../../src/logic/production_program.cc:343
 #: ../../src/logic/production_program.cc:365
-#: ../../src/logic/production_program.cc:946
-#: ../../src/logic/production_program.cc:1063
-#: ../../src/logic/production_program.cc:1158
+#: ../../src/logic/production_program.cc:945
+#: ../../src/logic/production_program.cc:1062
+#: ../../src/logic/production_program.cc:1157
 #, c-format
 msgid "%1$ix %2$s"
 msgstr ""
@@ -982,7 +982,7 @@ msgstr ""
 #. * TRANSLATORS:    %1$s = "work"
 #. * TRANSLATORS:    %2$s = "water and wheat (2) "
 #. * TRANSLATORS:    %3$s = "are missing"
-#: ../../src/logic/production_program.cc:960
+#: ../../src/logic/production_program.cc:959
 #, c-format
 msgid "Did not start %1$s because %2$s %3$s"
 msgstr ""
@@ -993,7 +993,7 @@ msgstr ""
 #. * TRANSLATORS: This appears in the hover text on buildings. Please test these in context
 #. * TRANSLATORS: on a development build if you can, and let us know if there are any issues
 #. * TRANSLATORS: we need to address for your language.
-#: ../../src/logic/production_program.cc:969
+#: ../../src/logic/production_program.cc:968
 msgid " is missing"
 msgid_plural " are missing"
 msgstr[0] " chybí"
@@ -1001,29 +1001,29 @@ msgstr[1] " chybí"
 msgstr[2] " chybí"
 
 #. * TRANSLATORS: %s is a list of wares
-#: ../../src/logic/production_program.cc:1073
+#: ../../src/logic/production_program.cc:1072
 #, c-format
 msgid "Produced %s"
 msgstr "Vyrobeno %s"
 
 #. * TRANSLATORS: %s is a list of workers
-#: ../../src/logic/production_program.cc:1167
+#: ../../src/logic/production_program.cc:1166
 #, c-format
 msgid "Recruited %s"
 msgstr "Přijat %s"
 
 #. * TRANSLATORS: %1$s = production site name, %2$s = production program name, %3$s = resource
-#: ../../src/logic/production_program.cc:1228
+#: ../../src/logic/production_program.cc:1227
 #, c-format
 msgid "%1$s %2$s mine %3$s"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1390
+#: ../../src/logic/production_program.cc:1389
 msgid "No soldier to train!"
 msgstr "Žádný voják k tréninku!"
 
-#: ../../src/logic/production_program.cc:1398
-#: ../../src/logic/production_program.cc:1483
+#: ../../src/logic/production_program.cc:1397
+#: ../../src/logic/production_program.cc:1482
 msgid "No soldier found for this training level!"
 msgstr "Nebyl nalezen voják pro tuto úroveň tréninku!"
 
@@ -1134,16 +1134,16 @@ msgstr ""
 "má chovat zdroj %s, který se v tomto světě nevyskytuje; kmen není "
 "kompatibilní s tímto světem"
 
-#: ../../src/logic/worker.cc:944
+#: ../../src/logic/worker.cc:942
 msgid "A geologist found resources."
 msgstr "Geolog objevil zdroje."
 
-#: ../../src/logic/worker.cc:1844
+#: ../../src/logic/worker.cc:1842
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr ""
 
-#: ../../src/logic/worker.cc:1851
+#: ../../src/logic/worker.cc:1849
 msgid "Worker got lost!"
 msgstr "Pracovník se ztratil!"
 
@@ -1375,7 +1375,7 @@ msgstr ""
 "se server vypnul když ses snažil připojit."
 
 #: ../../src/network/netclient.cc:198 ../../src/network/nethost.cc:849
-#: ../../src/wlapplication.cc:1565
+#: ../../src/wlapplication.cc:1479
 msgid "Preparing game"
 msgstr "Připravuji hru"
 
@@ -2117,14 +2117,6 @@ msgstr "Hráč %u"
 msgid "closed"
 msgstr "uzavřen"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:636
-msgid "The map file seems to be invalid!"
-msgstr "Soubor s mapou vypadá neplatně!"
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:636
-msgid "There was an error!"
-msgstr "Nastala chyba!"
-
 #: ../../src/ui_fsmenu/launch_mpg.cc:646
 msgid "Map details:"
 msgstr "Podrobnosti mapy:"
@@ -2658,251 +2650,7 @@ msgstr "Kampaně"
 msgid "Load Game"
 msgstr "Nahrát hru"
 
-#: ../../src/wlapplication.cc:105
-msgid ""
-"Waited 5 seconds to close audio. There are some problems here, so killing "
-"Widelands. Update your sound driver and/or SDL to fix this problem\n"
-msgstr ""
-"Počkejte vteřin pro ukončení audia. Problémy způsobují pád Widelands. "
-"Stáhněte si nejnovější ovladače k zvukové kartě a /nebo SDL pro vyřešení "
-"tohoto problému\n"
-
-#: ../../src/wlapplication.cc:411
-msgid "ERROR: Could not connect to metaserver (reason above)!\n"
-msgstr "CHYBA: Připojení k metaserveru se nezdařilo (viz. důvod nahoře)!\n"
-
-#: ../../src/wlapplication.cc:837 ../../src/wlapplication.cc:846
-msgid "could not find the path of the main executable"
-msgstr "Nelze nalézt cestu k hlavnímu příkazu"
-
-#: ../../src/wlapplication.cc:1173
-msgid "This is Widelands-"
-msgstr "Toto jsou Widelands-"
-
-#: ../../src/wlapplication.cc:1175
-msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
-msgstr "Použití: widelands <přepínač0>=<hodnota0> ... <přepínačN>=<hodnotaN>"
-
-#: ../../src/wlapplication.cc:1176
-msgid "Options:"
-msgstr "Volby:"
-
 #: ../../src/wlapplication.cc:1178
-msgid " --<config-entry-name>=value overwrites any config file setting"
-msgstr ""
-
-#: ../../src/wlapplication.cc:1179
-msgid ""
-" --logfile=FILENAME   Log output to file FILENAME instead of \n"
-"                      terminal output"
-msgstr ""
-
-#: ../../src/wlapplication.cc:1181
-msgid ""
-" --datadir=DIRNAME    Use specified directory for the widelands\n"
-"                      data files"
-msgstr ""
-
-#: ../../src/wlapplication.cc:1183
-msgid ""
-" --homedir=DIRNAME    Use specified directory for widelands config\n"
-"                      files, savegames and replays"
-msgstr ""
-
-#: ../../src/wlapplication.cc:1186
-msgid "                      Default is ~/.widelands"
-msgstr ""
-
-#: ../../src/wlapplication.cc:1189
-msgid ""
-" --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
-"                      of using the SDL"
-msgstr ""
-
-#: ../../src/wlapplication.cc:1191
-msgid ""
-" --language=[de_DE|sv_SE|...]\n"
-"                      The locale to use."
-msgstr ""
-
-#: ../../src/wlapplication.cc:1193
-msgid " --localedir=DIRNAME  Use DIRNAME as location for the locale"
-msgstr ""
-
-#: ../../src/wlapplication.cc:1194
-msgid ""
-" --remove_syncstreams=[true|false]\n"
-"                      Remove syncstream files on startup"
-msgstr ""
-
-#: ../../src/wlapplication.cc:1196
-msgid ""
-" --remove_replays=[...]\n"
-"                      Remove replays after this number of days.\n"
-"                      If this is 0, replays are not deleted."
-msgstr ""
-
-#: ../../src/wlapplication.cc:1200
-msgid "Sound options:"
-msgstr "Volby zvuku:"
-
-#: ../../src/wlapplication.cc:1201
-msgid " --nosound            Starts the game with sound disabled."
-msgstr " --nosound            Spustí hru bez zvuku."
-
-#: ../../src/wlapplication.cc:1202
-msgid " --disable_fx         Disable sound effects."
-msgstr " --disable_fx         Vypne zvukové efekty."
-
-#: ../../src/wlapplication.cc:1203
-msgid " --disable_music      Disable music."
-msgstr " --disable_music      Vypne hudbu."
-
-#: ../../src/wlapplication.cc:1204
-msgid " --nozip              Do not save files as binary zip archives."
-msgstr " --nozip              Neukládat soubory jako binární zip archivy."
-
-#: ../../src/wlapplication.cc:1205
-msgid ""
-" --editor             Directly starts the Widelands editor.\n"
-"                      You can add a =FILENAME to directly load\n"
-"                      the map FILENAME in editor."
-msgstr ""
-" --editor             Přímo spustí editor Widelands.\n"
-"                      Můžeš přidat =SOUBOR který přímo nahraje\n"
-"                      mapu SOUBOR do editoru."
-
-#: ../../src/wlapplication.cc:1208
-msgid ""
-" --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
-"                      map."
-msgstr ""
-" --scenario=SOUBOR    Přímo spustí mapu SOUBOR jako mapu\n"
-"                      scénáře."
-
-#: ../../src/wlapplication.cc:1210
-msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
-msgstr " --loadgame=SOUBOR    Přímo nahraje uloženou hru SOUBOR."
-
-#: ../../src/wlapplication.cc:1211
-msgid ""
-" --script=FILENAME    Run the given Lua script after initialization.\n"
-"                      Only valid with --scenario, --loadgame, or --editor."
-msgstr ""
-
-#: ../../src/wlapplication.cc:1213
-msgid " --dedicated=FILENAME Starts a dedicated server with FILENAME as map"
-msgstr ""
-" --dedicated=NÁZEVSOUBORU Spustí dedikovaný server s mapou ze souboru "
-"NÁZEVSOUBORU"
-
-#: ../../src/wlapplication.cc:1214
-msgid ""
-" --auto_roadbuild_mode=[yes|no]\n"
-"                      Whether to enter roadbuilding mode\n"
-"                      automatically after placing a flag that is\n"
-"                      not connected to a road."
-msgstr ""
-
-#: ../../src/wlapplication.cc:1218
-msgid "Graphic options:"
-msgstr ""
-
-#: ../../src/wlapplication.cc:1219
-msgid ""
-" --fullscreen=[yes|no]\n"
-"                      Whether to use the whole display for the\n"
-"                      game screen."
-msgstr ""
-
-#: ../../src/wlapplication.cc:1222
-msgid " --xres=[...]         Width of the window in pixel."
-msgstr ""
-
-#: ../../src/wlapplication.cc:1223
-msgid " --yres=[...]         Height of the window in pixel."
-msgstr ""
-
-#: ../../src/wlapplication.cc:1224
-msgid " --opengl=[0|1]       Enables OpenGL rendering"
-msgstr " --opengl=[0|1]       Povolí rendering v OpenGL"
-
-#: ../../src/wlapplication.cc:1225
-msgid "Options for the internal window manager:"
-msgstr "Volby pro interního správce oken:"
-
-#: ../../src/wlapplication.cc:1226
-msgid ""
-" --border_snap_distance=[0 ...]\n"
-"                      Move a window to the edge of the screen\n"
-"                      when the edge of the window comes within\n"
-"                      this distance from the edge of the screen."
-msgstr ""
-" --border_snap_distance=[0 ...]\n"
-"                      Přichytit okno k okraji obrazovky jakmile\n"
-"                      se okraj okna dostane do této vzdálenosti\n"
-"                      od okraje obrazovky."
-
-#: ../../src/wlapplication.cc:1230
-msgid ""
-" --dock_windows_to_edges=[yes|no]\n"
-"                      Eliminate a window's border towards the\n"
-"                      edge of the screen when the edge of the\n"
-"                      window is next to the edge of the screen."
-msgstr ""
-" --dock_windows_to_edges=[yes|no]\n"
-"                      Zrušit okraj okna u okraje obrazovky,\n"
-"                      pokud se okno a okraj obrazovky dotýkají."
-
-#: ../../src/wlapplication.cc:1234
-msgid ""
-" --panel_snap_distance=[0 ...]\n"
-"                      Move a window to the edge of the panel when\n"
-"                      the edge of the window comes within this\n"
-"                      distance from the edge of the panel."
-msgstr ""
-" --panel_snap_distance=[0 ...]\n"
-"                      Přichytit okno k okraji panelu jakmile se\n"
-"                      okraj okna dostane do této vzdálenosti\n"
-"                      od okraje jiného panelu."
-
-#: ../../src/wlapplication.cc:1238
-msgid ""
-" --snap_windows_only_when_overlapping=[yes|no]\n"
-"                      Only move a window to the edge of a panel\n"
-"                      if the window is overlapping with the\n"
-"                      panel."
-msgstr ""
-" --snap_windows_only_when_overlapping=[yes|no]\n"
-"                      Přichytit okno k okraji panelu pouze\n"
-"                      pokud se okno a panel překrývají."
-
-#: ../../src/wlapplication.cc:1243
-msgid " --verbose            Enable verbose debug messages"
-msgstr " --verbose povolí verbose ladící zprávy"
-
-#: ../../src/wlapplication.cc:1245
-msgid " --help               Show this help"
-msgstr " --help               Zobrazí tuto nápovědu"
-
-#: ../../src/wlapplication.cc:1247
-msgid ""
-"Bug reports? Suggestions? Check out the project website:\n"
-"        https://launchpad.net/widelands\n"
-"\n"
-"Hope you enjoy this game!"
-msgstr ""
-"Nalezli jste nějaký herní bug? Máte nějaké návrhy? Navštivte stránky "
-"projektu:\n"
-"https://launchpad.net/widelands\n"
-"\n"
-"Doufáme, že si užívate naší hry!"
-
-#: ../../src/wlapplication.cc:1262
-msgid "Fallback settings in effect"
-msgstr "Zapnuto záložní nastavení"
-
-#: ../../src/wlapplication.cc:1264
 msgid ""
 "Your video settings could not be enabled, and fallback settings are in "
 "effect. Please check the graphics options!"
@@ -2910,20 +2658,11 @@ msgstr ""
 "Zvolené nastavení grafiky nelze zapnout, proto zapínám záložní. Prosím "
 "zkontrolujte nastavení grafiky."
 
-#: ../../src/wlapplication.cc:1335
-#, c-format
-msgid "Warning: %s"
-msgstr "Varování: %s"
-
-#: ../../src/wlapplication.cc:1338
+#: ../../src/wlapplication.cc:1252
 msgid "Game data error"
 msgstr "Chyba herních dat"
 
-#: ../../src/wlapplication.cc:1343
-msgid "Unexpected error during the game"
-msgstr "Neočekávaná chyba v průběhu hry"
-
-#: ../../src/wlapplication.cc:1348
+#: ../../src/wlapplication.cc:1262
 #, c-format
 msgid ""
 "\n"
@@ -2938,7 +2677,7 @@ msgstr ""
 "Další podrobnosti najdeš ve standardním výstupu (stdout.txt na Windows). "
 "Používáš verzi %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1355
+#: ../../src/wlapplication.cc:1269
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -2949,10 +2688,6 @@ msgstr ""
 "\n"
 "Widelands se pokouší uložit hru, pokud při hře dojde k chybě. Často - ale "
 "bohužel ne vždy - je možné uloženou hru nahrát a pokračovat ve hraní.\n"
-
-#: ../../src/wlapplication.cc:1467
-msgid "The address of the game server is invalid"
-msgstr "Adresa herního serveru není platná"
 
 #: ../../src/wui/actionconfirm.cc:223
 msgid "Destroy building?"
@@ -2993,19 +2728,19 @@ msgstr "Potopit loď?"
 msgid "Do you really want to cancel the active expedition?"
 msgstr "Opravdu chcete zrušit probíhající expedici?"
 
-#: ../../src/wui/attack_box.cc:148
+#: ../../src/wui/attack_box.cc:147
 msgid "Soldiers:"
 msgstr "Vojáci:"
 
-#: ../../src/wui/attack_box.cc:156
+#: ../../src/wui/attack_box.cc:155
 msgid "Send less soldiers"
 msgstr "Poslat méně vojáků"
 
-#: ../../src/wui/attack_box.cc:173
+#: ../../src/wui/attack_box.cc:172
 msgid "Number of soldiers"
 msgstr "Počet vojáků"
 
-#: ../../src/wui/attack_box.cc:183
+#: ../../src/wui/attack_box.cc:182
 msgid "Send more soldiers"
 msgstr "Poslat více vojáků"
 

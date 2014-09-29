@@ -24,7 +24,7 @@
 
 #include "base/wexception.h"
 
-class LuaError : public _wexception {
+class LuaError : public WException {
 public:
 	LuaError(const std::string& reason) : wexception("%s", reason.c_str()) {
 	}

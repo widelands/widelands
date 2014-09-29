@@ -38,7 +38,7 @@ struct FontDescr {
 	}
 };
 
-typedef std::map<FontDescr, UI::Font *> FontMap;
+using FontMap = std::map<FontDescr, UI::Font *>;
 
 FontMap g_fontmap;
 

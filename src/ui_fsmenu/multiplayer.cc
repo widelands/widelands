@@ -24,8 +24,8 @@
 #include "wui/login_box.h"
 #include "wui/text_constants.h"
 
-Fullscreen_Menu_MultiPlayer::Fullscreen_Menu_MultiPlayer() :
-	Fullscreen_Menu_Base("singleplmenu.jpg"),
+FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer() :
+	FullscreenMenuBase("singleplmenu.jpg"),
 
 // Values for alignment and size
 	m_butw (get_w() * 7 / 20),
@@ -57,17 +57,17 @@ Fullscreen_Menu_MultiPlayer::Fullscreen_Menu_MultiPlayer() :
 		 g_gr->images().get("pics/but0.png"),
 		 _("Back"), std::string(), true, false)
 {
-	metaserver.sigclicked.connect(boost::bind(&Fullscreen_Menu_MultiPlayer::internetLogin, boost::ref(*this)));
+	metaserver.sigclicked.connect(boost::bind(&FullscreenMenuMultiPlayer::internetLogin, boost::ref(*this)));
 	metaserver.set_font(font_small());
 	lan.set_font(font_small());
 	lan.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_MultiPlayer::end_modal, boost::ref(*this),
+			 (&FullscreenMenuMultiPlayer::end_modal, boost::ref(*this),
 			  static_cast<int32_t>(Lan)));
 	back.set_font(font_small());
 	back.sigclicked.connect
 		(boost::bind
-			 (&Fullscreen_Menu_MultiPlayer::end_modal, boost::ref(*this),
+			 (&FullscreenMenuMultiPlayer::end_modal, boost::ref(*this),
 			  static_cast<int32_t>(Back)));
 
 	title.set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
@@ -84,14 +84,14 @@ Fullscreen_Menu_MultiPlayer::Fullscreen_Menu_MultiPlayer() :
 				 _("Show login dialog"), true, false);
 		showloginbox->sigclicked.connect
 			(boost::bind
-				(&Fullscreen_Menu_MultiPlayer::showInternetLogin, boost::ref(*this)));
+				(&FullscreenMenuMultiPlayer::showInternetLogin, boost::ref(*this)));
 		showloginbox->set_font(font_small());
 	}
 }
 
 
 /// called if the showloginbox button was pressed
-void Fullscreen_Menu_MultiPlayer::showInternetLogin() {
+void FullscreenMenuMultiPlayer::showInternetLogin() {
 	m_auto_log = false;
 	internetLogin();
 }
@@ -109,7 +109,7 @@ void Fullscreen_Menu_MultiPlayer::showInternetLogin() {
  *
  * In both cases this fullscreen menu ends it's modality.
  */
-void Fullscreen_Menu_MultiPlayer::internetLogin() {
+void FullscreenMenuMultiPlayer::internetLogin() {
 	Section & s = g_options.pull_section("global");
 	if (m_auto_log) {
 		m_nickname = s.get_string("nickname", _("nobody"));

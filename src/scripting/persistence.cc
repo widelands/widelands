@@ -176,7 +176,7 @@ static const char * m_persistent_globals[] = {
  */
 uint32_t persist_object
 	(lua_State * L,
-	 FileWrite & fw, Widelands::MapMapObjectSaver & mos)
+	 FileWrite & fw, Widelands::MapObjectSaver & mos)
 {
 	assert(lua_gettop(L) == 2); // S: globals_table object
 
@@ -223,7 +223,7 @@ uint32_t persist_object
 
 void unpersist_object
 	(lua_State * L,
-	 FileRead & fr, Widelands::MapMapObjectLoader & mol,
+	 FileRead & fr, Widelands::MapObjectLoader & mol,
 	 uint32_t size)
 {
 	assert(lua_gettop(L) == 0); // S:

@@ -1,0 +1,951 @@
+# Bulgarian translation for widelands
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"POT-Creation-Date: 2014-09-18 19:55+0100\n"
+"PO-Revision-Date: 2014-06-18 07:39+0000\n"
+"Last-Translator: SirVer <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Launchpad-Export-Date: 2014-09-08 06:14+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
+
+#. * TRANSLATORS: %s = version information
+#: ../../src/wlapplication_messages.cc:40
+#, fuzzy, c-format
+msgid "This is Widelands Build %s"
+msgstr "Това е Widelands-"
+
+#: ../../src/wlapplication_messages.cc:43
+msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
+msgstr "Използване: widelands <опция0>=<значение0> ... <опцияN>=<значениеN>"
+
+#: ../../src/wlapplication_messages.cc:44
+msgid "Options:"
+msgstr "Опции:"
+
+#: ../../src/wlapplication_messages.cc:46
+msgid " --<config-entry-name>=value overwrites any config file setting"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:47
+msgid ""
+" --logfile=FILENAME   Log output to file FILENAME instead of \n"
+"                      terminal output"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:49
+msgid ""
+" --datadir=DIRNAME    Use specified directory for the widelands\n"
+"                      data files"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:51
+msgid ""
+" --homedir=DIRNAME    Use specified directory for widelands config\n"
+"                      files, savegames and replays"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:54
+msgid "                      Default is ~/.widelands"
+msgstr "                      По подразбиране ~/.widelands"
+
+#: ../../src/wlapplication_messages.cc:57
+msgid ""
+" --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
+"                      of using the SDL"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:59
+msgid ""
+" --language=[de_DE|sv_SE|...]\n"
+"                      The locale to use."
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:61
+msgid " --localedir=DIRNAME  Use DIRNAME as location for the locale"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:62
+msgid ""
+" --remove_syncstreams=[true|false]\n"
+"                      Remove syncstream files on startup"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:64
+msgid ""
+" --remove_replays=[...]\n"
+"                      Remove replays after this number of days.\n"
+"                      If this is 0, replays are not deleted."
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:68
+msgid "Sound options:"
+msgstr "Настройки на звука:"
+
+#: ../../src/wlapplication_messages.cc:69
+msgid " --nosound            Starts the game with sound disabled."
+msgstr " --nosound            Стартиране на играта без звук."
+
+#: ../../src/wlapplication_messages.cc:70
+msgid " --disable_fx         Disable sound effects."
+msgstr " --disable_fx         Изключване на звуковите ефекти."
+
+#: ../../src/wlapplication_messages.cc:71
+msgid " --disable_music      Disable music."
+msgstr " --disable_music      Изключване на музиката."
+
+#: ../../src/wlapplication_messages.cc:72
+msgid " --nozip              Do not save files as binary zip archives."
+msgstr " --nozip              Не запазва файлове в zip формат."
+
+#: ../../src/wlapplication_messages.cc:73
+msgid ""
+" --editor             Directly starts the Widelands editor.\n"
+"                      You can add a =FILENAME to directly load\n"
+"                      the map FILENAME in editor."
+msgstr ""
+" --editor             Запустить редактор карт Widelands.\n"
+"                      Вы можете добавить =FILENAME для открытия\n"
+"                      карты FILENAME в редакторе."
+
+#: ../../src/wlapplication_messages.cc:76
+msgid ""
+" --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
+"                      map."
+msgstr " --scenario=FILENAME  Запустить игру на карте FILENAME."
+
+#: ../../src/wlapplication_messages.cc:78
+msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
+msgstr " --loadgame=FILENAME  Загрузить игру из сохранения FILENAME."
+
+#: ../../src/wlapplication_messages.cc:79
+msgid ""
+" --script=FILENAME    Run the given Lua script after initialization.\n"
+"                      Only valid with --scenario, --loadgame, or --editor."
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:81
+msgid " --dedicated=FILENAME Starts a dedicated server with FILENAME as map"
+msgstr " --dedicated=FILENAME Стартира dedicated сървър с карта  FILENAME"
+
+#: ../../src/wlapplication_messages.cc:82
+msgid ""
+" --auto_roadbuild_mode=[yes|no]\n"
+"                      Whether to enter roadbuilding mode\n"
+"                      automatically after placing a flag that is\n"
+"                      not connected to a road."
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:86
+msgid "Graphic options:"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:87
+msgid ""
+" --fullscreen=[yes|no]\n"
+"                      Whether to use the whole display for the\n"
+"                      game screen."
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:90
+msgid " --xres=[...]         Width of the window in pixel."
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:91
+msgid " --yres=[...]         Height of the window in pixel."
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:92
+msgid " --opengl=[0|1]       Enables OpenGL rendering"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:93
+msgid "Options for the internal window manager:"
+msgstr "Параметри на вътрешния мениджър на прозореца:"
+
+#: ../../src/wlapplication_messages.cc:94
+msgid ""
+" --border_snap_distance=[0 ...]\n"
+"                      Move a window to the edge of the screen\n"
+"                      when the edge of the window comes within\n"
+"                      this distance from the edge of the screen."
+msgstr ""
+" --border_snap_distance=[0 ...]\n"
+"                      Придвижва прозореца към края на екрана в случай,\n"
+"                      че края на прозореца се окаже в указаната дистанция\n"
+"                      от края на екрана."
+
+#: ../../src/wlapplication_messages.cc:98
+msgid ""
+" --dock_windows_to_edges=[yes|no]\n"
+"                      Eliminate a window's border towards the\n"
+"                      edge of the screen when the edge of the\n"
+"                      window is next to the edge of the screen."
+msgstr ""
+" --dock_windows_to_edges=[yes|no]\n"
+"                      Скрива рамката на прозореца от страната,\n"
+"                      от която тя се допира с края на екрана."
+
+#: ../../src/wlapplication_messages.cc:102
+msgid ""
+" --panel_snap_distance=[0 ...]\n"
+"                      Move a window to the edge of the panel when\n"
+"                      the edge of the window comes within this\n"
+"                      distance from the edge of the panel."
+msgstr ""
+" --panel_snap_distance=[0 ...]\n"
+"                      Придвижва прозореца към края на панела в случай,\n"
+"                      че края на прозореца се окаже в указаната дистанция\n"
+"                      от края на панела."
+
+#: ../../src/wlapplication_messages.cc:106
+msgid ""
+" --snap_windows_only_when_overlapping=[yes|no]\n"
+"                      Only move a window to the edge of a panel\n"
+"                      if the window is overlapping with the\n"
+"                      panel."
+msgstr ""
+" --snap_windows_only_when_overlapping=[yes|no]\n"
+"                      Придвижва прозореца в края на панела,\n"
+"                      само ако прозореца се припокрива с панела."
+
+#: ../../src/wlapplication_messages.cc:111
+msgid " --verbose            Enable verbose debug messages"
+msgstr " --verbose Включва подробни дебъг съобщения"
+
+#: ../../src/wlapplication_messages.cc:113
+msgid " --help               Show this help"
+msgstr " --help Показва тази информация"
+
+#: ../../src/wlapplication_messages.cc:115
+msgid ""
+"Bug reports? Suggestions? Check out the project website:\n"
+"        https://launchpad.net/widelands\n"
+"\n"
+"Hope you enjoy this game!"
+msgstr ""
+"Докладване за грешки? Предложения? Посетете сайта на проекта:\n"
+"        https://launchpad.net/widelands\n"
+"\n"
+"Надяваме се играта да ви хареса!"
+
+#~ msgid "None"
+#~ msgstr "Липсва"
+
+#~ msgid "Aggressive"
+#~ msgstr "Агресивно"
+
+#~ msgid "Loading tribe: %s"
+#~ msgstr "Зареждане на племето: %s"
+
+#~ msgid "Menu"
+#~ msgstr "Меню"
+
+#~ msgid "Tools"
+#~ msgstr "Инструменти"
+
+#~ msgid "Tool Size"
+#~ msgstr "Размер на инструментите"
+
+#~ msgid "Minimap"
+#~ msgstr "Миникарта"
+
+#~ msgid "Players"
+#~ msgstr "Играчи"
+
+#~ msgid "Undo"
+#~ msgstr "Отмени"
+
+#~ msgid "Redo"
+#~ msgstr "Възстанови"
+
+#~ msgid "Unsupported format"
+#~ msgstr "Неподдържан формат"
+
+#~ msgid ""
+#~ "Widelands could not load the file \"%s\". The file format seems to be "
+#~ "incompatible."
+#~ msgstr ""
+#~ "Widelands не успя да зареди файл \"%s\". Възможно е формата на файла да е "
+#~ "несъвместим."
+
+#~ msgid "Creating players"
+#~ msgstr "Създаване на играчи"
+
+#~ msgid "Loading graphics..."
+#~ msgstr "Зареждане на графиките"
+
+#~ msgid "No Name"
+#~ msgstr "Без име"
+
+#~ msgid "Unknown"
+#~ msgstr "Неизвестно"
+
+#~ msgid "Field Information"
+#~ msgstr "Информация за поле"
+
+#~ msgid "Node:"
+#~ msgstr "Възел:"
+
+#~ msgid " small"
+#~ msgstr " малък"
+
+#~ msgid " medium"
+#~ msgstr " среден"
+
+#~ msgid " big"
+#~ msgstr " Голям"
+
+#~ msgid " flag"
+#~ msgstr " флаг"
+
+#~ msgid "Name: %s"
+#~ msgstr "Име: %s"
+
+#~ msgid "Resources:"
+#~ msgstr "Ресурси:"
+
+#~ msgid "Map:"
+#~ msgstr "Подредба:"
+
+#~ msgid "Author: %s"
+#~ msgstr "Автор: %s"
+
+#~ msgid "Main Menu"
+#~ msgstr "Главно меню"
+
+#~ msgid "Name:"
+#~ msgstr "Име:"
+
+#~ msgid "Author:"
+#~ msgstr "Автор:"
+
+#~ msgid "OK"
+#~ msgstr "ОК"
+
+#~ msgid "Map Name:"
+#~ msgstr "Име на картата:"
+
+#~ msgid "Width: %u"
+#~ msgstr "Ширина: %u"
+
+#~ msgid "Height: %u"
+#~ msgstr "Височина: %u"
+
+#~ msgid "Medium"
+#~ msgstr "Средни"
+
+#~ msgid "Add player"
+#~ msgstr "Добавяне на играч"
+
+#~ msgid "Number of Players"
+#~ msgstr "Брой играчи"
+
+#~ msgid "Player %s"
+#~ msgstr "Играч %s"
+
+#~ msgid "Error!"
+#~ msgstr "Грешка!"
+
+#~ msgid "Set Value"
+#~ msgstr "Задаване на стойност"
+
+#~ msgid "Resources"
+#~ msgstr "Ресурси"
+
+#~ msgid "Current Size: %u"
+#~ msgstr "Текущ размер: %u"
+
+#~ msgid "small"
+#~ msgstr "малък"
+
+#~ msgid "big"
+#~ msgstr "Голям"
+
+#~ msgid "medium"
+#~ msgstr "среден"
+
+#~ msgid "Mine"
+#~ msgstr "Мина"
+
+#~ msgid "Small"
+#~ msgstr "Малки"
+
+#~ msgid "Big"
+#~ msgstr "Големи"
+
+#~ msgid "Loading world data"
+#~ msgstr "Зареждане на данни за света"
+
+#~ msgid "Scenario"
+#~ msgstr "Сценарий"
+
+#~ msgid "Loading..."
+#~ msgstr "Зареждане…"
+
+#~ msgid "Player 1"
+#~ msgstr "Играч 1"
+
+#~ msgid "(stopped)"
+#~ msgstr "(спрян)"
+
+#~ msgid "End of replay"
+#~ msgstr "Край на повторението"
+
+#~ msgid ""
+#~ "The end of the replay has been reached and the game has been paused. You "
+#~ "may unpause the game and continue watching if you want to."
+#~ msgstr ""
+#~ "Края на повторението е достигнат и играта е на пауза. Можете да "
+#~ "активирате играта и да продължите да гледате, ако искате."
+
+#~ msgid "Saving failed!"
+#~ msgstr "Записът беше неуспешен!"
+
+#~ msgid "Player"
+#~ msgstr "Играч"
+
+#~ msgid "Bluebyte Settlers II Map. No comment defined!"
+#~ msgstr "Карта Bluebyte Settlers II. Няма коментари!"
+
+#~ msgid "Connection problem"
+#~ msgstr "Проблем с връзката"
+
+#~ msgid "Something went wrong: "
+#~ msgstr "Има някаква грешка: "
+
+#~ msgid "ERROR: %s"
+#~ msgstr "ГРЕШКА: %s"
+
+#~ msgid "Preparing game"
+#~ msgstr "Подготовка на играта"
+
+#~ msgid "Something went wrong: %s"
+#~ msgstr "Има някаква грешка: %s"
+
+#~ msgid "Help: %s"
+#~ msgstr "Помощ: %s"
+
+#~ msgid "Yes"
+#~ msgstr "Да"
+
+#~ msgid "No"
+#~ msgstr "Не"
+
+#~ msgid "Preparing..."
+#~ msgstr "Подготвяне…"
+
+#~ msgid "Increase the value"
+#~ msgstr "Увеличаване на стойността"
+
+#~ msgid "Decrease the value"
+#~ msgstr "Намаляване на стойността"
+
+#~ msgid "Increase the value by 10"
+#~ msgstr "Увеличаване на стойността с 10"
+
+#~ msgid "Decrease the value by 10"
+#~ msgstr "Намаляване на стойността с 10"
+
+#~ msgid "Description:"
+#~ msgstr "Описание:"
+
+#~ msgid "[Invalid entry]"
+#~ msgstr "[Невалиден запис]"
+
+#~ msgid "Name"
+#~ msgstr "Име"
+
+#~ msgid "Points"
+#~ msgstr "Точки"
+
+#~ msgid "Connection timed out"
+#~ msgstr "просрочено време за връзка"
+
+#~ msgid "Please select"
+#~ msgstr "Моля, изберете"
+
+#~ msgid "Clients"
+#~ msgstr "Клиенти"
+
+#~ msgid "Savegame"
+#~ msgstr "Записване"
+
+#~ msgid "Player %i"
+#~ msgstr "Играч %i"
+
+#~ msgid "Spectator"
+#~ msgstr "Наблюдател"
+
+#~ msgid "Player %u"
+#~ msgstr "Играч %u"
+
+#~ msgid "Client settings"
+#~ msgstr "Настройки на клиента"
+
+#~ msgid "Player settings"
+#~ msgstr "Настройки на плеъра"
+
+#~ msgid "Team"
+#~ msgstr "Отбор"
+
+#~ msgid "Start type"
+#~ msgstr "Тип на началото"
+
+#~ msgid "Minimap:"
+#~ msgstr "Миникарта:"
+
+#~ msgid "Single Player"
+#~ msgstr "Единична игра"
+
+#~ msgid "Options"
+#~ msgstr "Настройки"
+
+#~ msgid "License"
+#~ msgstr "Лиценз"
+
+#~ msgid "Exit Game"
+#~ msgstr "Изход от играта"
+
+#~ msgid "Map Name"
+#~ msgstr "Име на картата"
+
+#~ msgid "Choose game type"
+#~ msgstr "Избор на ниво"
+
+#~ msgid "nobody"
+#~ msgstr "Никой"
+
+#~ msgid "Your nickname:"
+#~ msgstr "Вашият псевдоним:"
+
+#~ msgid "Open"
+#~ msgstr "Отворен"
+
+#~ msgid "Closed"
+#~ msgstr "Приключен"
+
+#~ msgid "Enable Sound"
+#~ msgstr "Включване на звука"
+
+#~ msgid "Language"
+#~ msgstr "Език"
+
+#~ msgid "Snap windows only when overlapping"
+#~ msgstr "Прилепване на прозорците само когато се препокриват"
+
+#~ msgid "Never"
+#~ msgstr "Никога"
+
+#~ msgid "%1$i x %2$i"
+#~ msgstr "%1$i x %2$i"
+
+#~ msgid "Load Game"
+#~ msgstr "Зареждане на игра"
+
+#~ msgid ""
+#~ "Waited 5 seconds to close audio. There are some problems here, so killing "
+#~ "Widelands. Update your sound driver and/or SDL to fix this problem\n"
+#~ msgstr ""
+#~ "5 секунди не бяха достатъчни за да се спре звука. Това предизвика "
+#~ "аварийното затваряне на Widelands. Обновете драйвера за звука и/или SDL, "
+#~ "за да разрешите този проблем.\n"
+
+#~ msgid "ERROR: Could not connect to metaserver (reason above)!\n"
+#~ msgstr ""
+#~ "ГРЕШКА: Немога да се свържа с метасървъра (поради причината по-горе)!\n"
+
+#~ msgid "could not find the path of the main executable"
+#~ msgstr "не е намерен пътя към главния изпълним файл"
+
+#~ msgid "Game data error"
+#~ msgstr "Грешка в данните за играта"
+
+#~ msgid "Unexpected error during the game"
+#~ msgstr "Неочаквана грешка по време на игра"
+
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "Please report this problem to help us improve Widelands. You will find "
+#~ "related messages in the standard output (stdout.txt on Windows). You are "
+#~ "using build %1$s (%2$s). "
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "Моля съобщете за този проблем за да ни помогнете да подобрим Widelands. "
+#~ "Ще намерите релевантна информация на стандартния изход (stdout.txt в "
+#~ "Windows). Използвате билд на играта %1$s (%2$s). "
+
+#~ msgid ""
+#~ "Please add this information to your report.\n"
+#~ "\n"
+#~ "Widelands attempts to create a savegame when errors occur during the "
+#~ "game. It is often – though not always – possible to load it and continue "
+#~ "playing.\n"
+#~ msgstr ""
+#~ "Моля добавете тази информация, когато съобщавате за грешка.\n"
+#~ "\n"
+#~ "Widelands се опитва да запише статуса на играта в случай, че се появи "
+#~ "грешка по време на игра. Въпреки че не винаги, но в повечето случаи, е "
+#~ "възможно да заредите играта на ново и да продължите.\n"
+
+#~ msgid "The address of the game server is invalid"
+#~ msgstr "Адреса на сървъра е невалиден"
+
+#~ msgid "Soldiers:"
+#~ msgstr "Войници:"
+
+#~ msgid "Send less soldiers"
+#~ msgstr "Изпращане на по-малко войници"
+
+#~ msgid "Number of soldiers"
+#~ msgstr "Брой войници"
+
+#~ msgid "Send more soldiers"
+#~ msgstr "Изпращане на повече войници"
+
+#~ msgid "Building Statistics"
+#~ msgstr "Статистика на строителството"
+
+#~ msgid "Total Productivity:"
+#~ msgstr "Обща производителност:"
+
+#~ msgid "Owned:"
+#~ msgstr "Собственост:"
+
+#~ msgid "Jump to unproductive"
+#~ msgstr "Отиди при непродуктивните"
+
+#~ msgid "Type"
+#~ msgstr "Вид"
+
+#~ msgid "Prod"
+#~ msgstr "Продукция"
+
+#~ msgid "Owned"
+#~ msgstr "Собственост"
+
+#~ msgid "Build"
+#~ msgstr "Билд"
+
+#~ msgid "Show previous"
+#~ msgstr "Показване на предишното"
+
+#~ msgid "Show next"
+#~ msgstr "Показване на следващото"
+
+#~ msgid "Continue"
+#~ msgstr "Напред"
+
+#~ msgid "Stop"
+#~ msgstr "Спиране"
+
+#~ msgid "Help"
+#~ msgstr "Помощ"
+
+#~ msgid "Building materials"
+#~ msgstr "Строителни материали"
+
+#~ msgid "Action"
+#~ msgstr "Действиe"
+
+#~ msgid "Build road"
+#~ msgstr "Строеж на път"
+
+#~ msgid "Destroy this flag"
+#~ msgstr "Унищожи това байряче"
+
+#~ msgid "Configure economy"
+#~ msgstr "Настройки на икономиката"
+
+#~ msgid "Send geologist to explore site"
+#~ msgstr "Изпрати геолог да проучи района"
+
+#~ msgid "Destroy a road"
+#~ msgstr "Разруши пътя"
+
+#~ msgid "Watch field in a separate window"
+#~ msgstr "Наблюдавай полето в отделен прозорец"
+
+#~ msgid "Toggle building statistics display"
+#~ msgstr "Превключване на показването на статистика за строежите"
+
+#~ msgid "Toggle building label display"
+#~ msgstr "Превключване на показването на наименованията на сградите"
+
+#~ msgid "Debug window"
+#~ msgstr "Прозорец за дебъгване"
+
+#~ msgid "Watch"
+#~ msgstr "Наблюдение"
+
+#~ msgid "Start attack"
+#~ msgstr "Започни атака"
+
+#~ msgid "Attack"
+#~ msgstr "Атакуване"
+
+#~ msgid "Build mines"
+#~ msgstr "Строеж на мини"
+
+#~ msgid "Build flag"
+#~ msgstr "Поставяне на байряче"
+
+#~ msgid "Cancel road"
+#~ msgstr "Отмяна на пътя"
+
+#~ msgid "Build roads"
+#~ msgstr "Строеж на пътища"
+
+#~ msgid "Chat"
+#~ msgstr "Разговор"
+
+#~ msgid "Debug Field"
+#~ msgstr "Дебъг поле"
+
+#~ msgid "General Statistics"
+#~ msgstr "Обща статистика"
+
+#~ msgid "Ware Statistics"
+#~ msgstr "Статистика на стоките"
+
+#~ msgid "Stock"
+#~ msgstr "Запаси"
+
+#~ msgid "Save Game"
+#~ msgstr "Запис на играта"
+
+#~ msgid "File deletion"
+#~ msgstr "Изтриване на файл"
+
+#~ msgid "Select"
+#~ msgstr "Избиране"
+
+#~ msgid "Status"
+#~ msgstr "Състояние"
+
+#~ msgid "Title"
+#~ msgstr "Заглавие"
+
+#~ msgid "Time sent"
+#~ msgstr "Време"
+
+#~ msgid "Clear"
+#~ msgstr "Безоблачно"
+
+#~ msgid "Clear selection"
+#~ msgstr "Изчистване на избора"
+
+#~ msgid "Invert"
+#~ msgstr "Обръщане"
+
+#~ msgid "Invert selection"
+#~ msgstr "Обръщане на избраното"
+
+#~ msgid "Archive selected messages"
+#~ msgstr "Архивиране на избраните съобщения"
+
+#~ msgid "Show Archive"
+#~ msgstr "Архив"
+
+#~ msgid "center main mapview on location"
+#~ msgstr "Центриране на местоположението на екрана"
+
+#~ msgid "Restore selected messages"
+#~ msgstr "Възстанови избраните съобщения"
+
+#~ msgid "Show Inbox"
+#~ msgstr "Входящи"
+
+#~ msgid "Objectives"
+#~ msgstr "Задачи"
+
+#~ msgid "README"
+#~ msgstr "ПРОЧЕТИ МЕ"
+
+#~ msgid "Authors"
+#~ msgstr "Автори"
+
+#~ msgid "Sound Options"
+#~ msgstr "Настройки на звука"
+
+#~ msgid "Game over"
+#~ msgstr "Край на играта"
+
+#~ msgid "Elapsed time:"
+#~ msgstr "Изминало време:"
+
+#~ msgid "Continue playing"
+#~ msgstr "Продължаване на играта"
+
+#~ msgid "%s won!"
+#~ msgstr "%s спечели!"
+
+#~ msgid "Land"
+#~ msgstr "Територия"
+
+#~ msgid "Workers"
+#~ msgstr "Работници"
+
+#~ msgid "Buildings"
+#~ msgstr "Сгради"
+
+#~ msgid "Wares"
+#~ msgstr "Стоки"
+
+#~ msgid "Productivity"
+#~ msgstr "Производителност"
+
+#~ msgid "Casualties"
+#~ msgstr "Загуби в жива сила"
+
+#~ msgid "Kills"
+#~ msgstr "Убити"
+
+#~ msgid "Military buildings lost"
+#~ msgstr "Загубени военни съоръжения"
+
+#~ msgid "Military buildings defeated"
+#~ msgstr "Превзети военни съоръжения"
+
+#~ msgid "Civilian buildings lost"
+#~ msgstr "Загубени обществени сгради"
+
+#~ msgid "Military"
+#~ msgstr "Войска"
+
+#~ msgid "%1$s (%2$s)"
+#~ msgstr "%1$s (%2$s)"
+
+#~ msgid "Statistics"
+#~ msgstr "Статистики"
+
+#~ msgid "Messages"
+#~ msgstr "Съобщения"
+
+#~ msgid "%u new message"
+#~ msgid_plural "%u new messages"
+#~ msgstr[0] "%u ново съобщение"
+#~ msgstr[1] "%u нови съобщения"
+
+#~ msgid "Password:"
+#~ msgstr "Парола:"
+
+#~ msgid "Soldiers"
+#~ msgstr "Войници"
+
+#~ msgid "Shared in"
+#~ msgstr "Споделени в"
+
+#~ msgid "Computer"
+#~ msgstr "Компютър"
+
+#~ msgid "Random"
+#~ msgstr "Произволно"
+
+#~ msgid "Human"
+#~ msgstr "Човек"
+
+#~ msgid "Client name"
+#~ msgstr "Име на клиента"
+
+#~ msgid "Role"
+#~ msgstr "Длъжност"
+
+#~ msgid "Start"
+#~ msgstr "Стартиране"
+
+#~ msgid "Tribe"
+#~ msgstr "Племе"
+
+#~ msgid "Initialization"
+#~ msgstr "Инициализация"
+
+#~ msgid "Exp"
+#~ msgstr "Опит"
+
+#~ msgid "Next Level"
+#~ msgstr "Следващо ниво"
+
+#~ msgid "(coming)"
+#~ msgstr "(идва)"
+
+#~ msgid "(vacant)"
+#~ msgstr "(вакантно)"
+
+#~ msgid "Ship"
+#~ msgstr "Кораб"
+
+#~ msgid "Go to ship"
+#~ msgstr "Качване на кораба"
+
+#~ msgid "Go to destination"
+#~ msgstr "Отиди в"
+
+#~ msgid "Decrease capacity"
+#~ msgstr "Намаляне на капацитета"
+
+#~ msgid "Increase capacity"
+#~ msgstr "Увеличаване на капацитета"
+
+#~ msgid "Capacity"
+#~ msgstr "Капацитет"
+
+#~ msgid "Click soldier to send away"
+#~ msgstr "Кликнете за да освободите войника"
+
+#~ msgid "Wares (total)"
+#~ msgstr "Стоки (всичко)"
+
+#~ msgid "Workers (total)"
+#~ msgstr "Работници (всичко)"
+
+#~ msgid "Wares in warehouses"
+#~ msgstr "Стоки на склад"
+
+#~ msgid "Workers in warehouses"
+#~ msgstr "Работници в складовете"
+
+#~ msgid "Soldiers in training"
+#~ msgstr "Обучаващи се войници"
+
+#~ msgid "Economy options"
+#~ msgstr "Настройки на икономиката"
+
+#~ msgid "Decrease target"
+#~ msgstr "Намаляне на поставената цел"
+
+#~ msgid "Increase target"
+#~ msgstr "Увеличаване на поставената цел"
+
+#~ msgid "Reset to default"
+#~ msgstr "По подразбиране"
+
+#~ msgid "Production"
+#~ msgstr "Производство"
+
+#~ msgid "Highest priority"
+#~ msgstr "Най-висок приоритет"
+
+#~ msgid "Normal priority"
+#~ msgstr "Нормален приоритет"
+
+#~ msgid "Lowest priority"
+#~ msgstr "Най-нисък приоритет"
+
+#~ msgid "Decrease the number of wares you want to be stored here."
+#~ msgstr "Намаляване количеството стоки, складирани тук."
+
+#~ msgid "Increase the number of wares you want to be stored here."
+#~ msgstr "Увеличаване количеството стоки, складирани тук."

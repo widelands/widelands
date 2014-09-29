@@ -36,8 +36,8 @@ struct Button;
  *
  */
 // TODO(unknown): This should be moved to src/ui, it's not specific to the editor
-struct Main_Menu_Save_Map_Make_Directory : public UI::Window {
-	Main_Menu_Save_Map_Make_Directory(UI::Panel *, char const *);
+struct MainMenuSaveMapMakeDirectory : public UI::Window {
+	MainMenuSaveMapMakeDirectory(UI::Panel *, char const *);
 
 	char const * get_dirname() {return m_dirname.c_str();}
 

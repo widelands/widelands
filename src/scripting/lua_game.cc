@@ -43,7 +43,7 @@
 #include "wui/story_message_box.h"
 
 using namespace Widelands;
-using namespace LuaMap;
+using namespace LuaMaps;
 
 namespace LuaGame {
 
@@ -85,33 +85,33 @@ Player
 	instantiate a class of this type directly, use the :attr:`wl.Game.players`
 	insteadl
 */
-const char L_Player::className[] = "Player";
-const MethodType<L_Player> L_Player::Methods[] = {
-	METHOD(L_Player, send_message),
-	METHOD(L_Player, message_box),
-	METHOD(L_Player, sees_field),
-	METHOD(L_Player, seen_field),
-	METHOD(L_Player, allow_buildings),
-	METHOD(L_Player, forbid_buildings),
-	METHOD(L_Player, add_objective),
-	METHOD(L_Player, reveal_fields),
-	METHOD(L_Player, hide_fields),
-	METHOD(L_Player, reveal_scenario),
-	METHOD(L_Player, reveal_campaign),
-	METHOD(L_Player, get_buildings),
-	METHOD(L_Player, get_suitability),
-	METHOD(L_Player, allow_workers),
-	METHOD(L_Player, switchplayer),
+const char LuaPlayer::className[] = "Player";
+const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
+	METHOD(LuaPlayer, send_message),
+	METHOD(LuaPlayer, message_box),
+	METHOD(LuaPlayer, sees_field),
+	METHOD(LuaPlayer, seen_field),
+	METHOD(LuaPlayer, allow_buildings),
+	METHOD(LuaPlayer, forbid_buildings),
+	METHOD(LuaPlayer, add_objective),
+	METHOD(LuaPlayer, reveal_fields),
+	METHOD(LuaPlayer, hide_fields),
+	METHOD(LuaPlayer, reveal_scenario),
+	METHOD(LuaPlayer, reveal_campaign),
+	METHOD(LuaPlayer, get_buildings),
+	METHOD(LuaPlayer, get_suitability),
+	METHOD(LuaPlayer, allow_workers),
+	METHOD(LuaPlayer, switchplayer),
 	{nullptr, nullptr},
 };
-const PropertyType<L_Player> L_Player::Properties[] = {
-	PROP_RO(L_Player, name),
-	PROP_RO(L_Player, allowed_buildings),
-	PROP_RO(L_Player, objectives),
-	PROP_RO(L_Player, defeated),
-	PROP_RO(L_Player, inbox),
-	PROP_RW(L_Player, team),
-	PROP_RW(L_Player, see_all),
+const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
+	PROP_RO(LuaPlayer, name),
+	PROP_RO(LuaPlayer, allowed_buildings),
+	PROP_RO(LuaPlayer, objectives),
+	PROP_RO(LuaPlayer, defeated),
+	PROP_RO(LuaPlayer, inbox),
+	PROP_RW(LuaPlayer, team),
+	PROP_RW(LuaPlayer, see_all),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -125,7 +125,7 @@ const PropertyType<L_Player> L_Player::Properties[] = {
 
 			(RO) The name of this Player.
 */
-int L_Player::get_name(lua_State * L) {
+int LuaPlayer::get_name(lua_State * L) {
 	Game & game = get_game(L);
 	Player & p = get(L, game);
 	lua_pushstring(L, p.get_name());
@@ -140,13 +140,13 @@ int L_Player::get_name(lua_State * L) {
 		you can not enable/forbid a building by setting the value. Use
 		:meth:`allow_buildings` or :meth:`forbid_buildings` for that.
 */
-int L_Player::get_allowed_buildings(lua_State * L) {
+int LuaPlayer::get_allowed_buildings(lua_State * L) {
 	Player & p = get(L, get_egbase(L));
-	const Tribe_Descr & t = p.tribe();
+	const TribeDescr & t = p.tribe();
 
 	lua_newtable(L);
 	for
-		(Building_Index i = 0; i < t.get_nrbuildings(); ++i)
+		(BuildingIndex i = 0; i < t.get_nrbuildings(); ++i)
 	{
 		lua_pushstring(L, t.get_building_descr(i)->name().c_str());
 		lua_pushboolean(L, p.is_building_type_allowed(i));
@@ -162,11 +162,11 @@ int L_Player::get_allowed_buildings(lua_State * L) {
 		the objectives in this table and it will be reflected in the game. To add
 		a new item, use :meth:`add_objective`.
 */
-int L_Player::get_objectives(lua_State * L) {
+int LuaPlayer::get_objectives(lua_State * L) {
 	lua_newtable(L);
 	for (const auto& pair : get_egbase(L).map().objectives()) {
 		lua_pushstring(L, pair.second->name());
-		to_lua<L_Objective>(L, new L_Objective(*pair.second));
+		to_lua<LuaObjective>(L, new LuaObjective(*pair.second));
 		lua_settable(L, -3);
 	}
 	return 1;
@@ -177,7 +177,7 @@ int L_Player::get_objectives(lua_State * L) {
 
 		(RO) :const:`true` if this player was defeated, :const:`false` otherwise
 */
-int L_Player::get_defeated(lua_State * L) {
+int LuaPlayer::get_defeated(lua_State * L) {
 	Player & p = get(L, get_egbase(L));
 	bool have_warehouses = false;
 
@@ -198,17 +198,17 @@ int L_Player::get_defeated(lua_State * L) {
 		(RO) An array of the message that are either read or new. Note that you
 		can't add messages to this array, use :meth:`send_message` for that.
 */
-int L_Player::get_inbox(lua_State * L) {
+int LuaPlayer::get_inbox(lua_State * L) {
 	Player & p = get(L, get_egbase(L));
 
 	lua_newtable(L);
 	uint32_t cidx = 1;
-	for (const std::pair<Message_Id, Message *>& temp_message : p.messages()) {
+	for (const std::pair<MessageId, Message *>& temp_message : p.messages()) {
 		if (temp_message.second->status() == Message::Archived)
 			continue;
 
 		lua_pushuint32(L, cidx ++);
-		to_lua<L_Message>(L, new L_Message(player_number(), temp_message.first));
+		to_lua<LuaMessage>(L, new LuaMessage(player_number(), temp_message.first));
 		lua_rawset(L, -3);
 	}
 
@@ -223,11 +223,11 @@ int L_Player::get_inbox(lua_State * L) {
 		normally only reading should be enough, however it's a nice idea to have
 		a modular scenario, where teams form during the game.
 */
-int L_Player::set_team(lua_State * L) {
+int LuaPlayer::set_team(lua_State * L) {
 	get(L, get_egbase(L)).set_team_number(luaL_checkinteger(L, -1));
 	return 0;
 }
-int L_Player::get_team(lua_State * L) {
+int LuaPlayer::get_team(lua_State * L) {
 	lua_pushinteger(L, get(L, get_egbase(L)).team_number());
 	return 1;
 }
@@ -239,11 +239,11 @@ int L_Player::get_team(lua_State * L) {
 		(RW) If you set this to true, the map will be completely visible for this
 		player.
 */
-int L_Player::set_see_all(lua_State * const L) {
+int LuaPlayer::set_see_all(lua_State * const L) {
 	get(L, get_egbase(L)).set_see_all(luaL_checkboolean(L, -1));
 	return 0;
 }
-int L_Player::get_see_all(lua_State * const L) {
+int LuaPlayer::get_see_all(lua_State * const L) {
 	lua_pushboolean(L, get(L, get_egbase(L)).see_all());
 	return 1;
 }
@@ -270,11 +270,6 @@ int L_Player::get_see_all(lua_State * const L) {
 		Opts is a table of optional arguments and can be omitted. If it
 		exist it must contain string/value pairs of the following type:
 
-		:arg duration: if this is given, the message will be removed
-			from the players inbox after this many ms. Default:
-			message never expires.
-		:type duration: :class:`integer`
-
 		:arg field: the field connected to this message. Default:
 			no field connected to message
 		:type field: :class:`wl.map.Field`
@@ -290,7 +285,7 @@ int L_Player::get_see_all(lua_State * const L) {
 		:returns: the message created
 		:rtype: :class:`wl.game.Message`
 */
-int L_Player::send_message(lua_State * L) {
+int LuaPlayer::send_message(lua_State * L) {
 	uint32_t n = lua_gettop(L);
 	std::string title = luaL_checkstring(L, 2);
 	std::string body = luaL_checkstring(L, 3);
@@ -302,7 +297,7 @@ int L_Player::send_message(lua_State * L) {
 		// Optional arguments
 		lua_getfield(L, 4, "field");
 		if (!lua_isnil(L, -1))
-			c = (*get_user_class<L_Field>(L, -1))->coords();
+			c = (*get_user_class<LuaField>(L, -1))->coords();
 		lua_pop(L, 1);
 
 		lua_getfield(L, 4, "status");
@@ -324,7 +319,7 @@ int L_Player::send_message(lua_State * L) {
 	Game & game = get_game(L);
 	Player & plr = get(L, game);
 
-	Message_Id const message =
+	MessageId const message =
 		plr.add_message
 			(game,
 			 *new Message
@@ -337,7 +332,7 @@ int L_Player::send_message(lua_State * L) {
 				 st),
 			popup);
 
-	return to_lua<L_Message>(L, new L_Message(player_number(), message));
+	return to_lua<LuaMessage>(L, new LuaMessage(player_number(), message));
 }
 
 /* RST
@@ -376,7 +371,7 @@ int L_Player::send_message(lua_State * L) {
 		:returns: :const:`nil`
 */
 // UNTESTED
-int L_Player::message_box(lua_State * L) {
+int LuaPlayer::message_box(lua_State * L) {
 	Game & game = get_game(L);
 	// don't show message boxes in replays, cause they crash the game
 	if (game.gameController()->getGameDescription() == "replay") {
@@ -404,7 +399,7 @@ int L_Player::message_box(lua_State * L) {
 		// This must be done manually
 		lua_getfield(L, 4, "field");
 		if (!lua_isnil(L, -1)) {
-			Coords c = (*get_user_class<L_Field>(L, -1))->coords();
+			Coords c = (*get_user_class<LuaField>(L, -1))->coords();
 			game.get_ipl()->move_view_to(c);
 		}
 		lua_pop(L, 1);
@@ -419,8 +414,8 @@ int L_Player::message_box(lua_State * L) {
 
 	game.save_handler().set_allow_saving(false);
 
-	Story_Message_Box * mb =
-		new Story_Message_Box
+	StoryMessageBox * mb =
+		new StoryMessageBox
 				(game.get_ipl(), luaL_checkstring(L, 2), luaL_checkstring(L, 3),
 				 button_text, posx, posy, w, h);
 
@@ -446,11 +441,11 @@ int L_Player::message_box(lua_State * L) {
 		:returns: :const:`true` or :const:`false`
 		:rtype: :class:`bool`
 */
-int L_Player::sees_field(lua_State * L) {
-	Editor_Game_Base & egbase = get_egbase(L);
+int LuaPlayer::sees_field(lua_State * L) {
+	EditorGameBase & egbase = get_egbase(L);
 
-	Widelands::Map_Index const i =
-		(*get_user_class<L_Field>(L, 2))->fcoords(L).field - &egbase.map()[0];
+	Widelands::MapIndex const i =
+		(*get_user_class<LuaField>(L, 2))->fcoords(L).field - &egbase.map()[0];
 
 	lua_pushboolean(L, get(L, egbase).vision(i) > 1);
 	return 1;
@@ -465,11 +460,11 @@ int L_Player::sees_field(lua_State * L) {
 		:returns: :const:`true` or :const:`false`
 		:rtype: :class:`bool`
 */
-int L_Player::seen_field(lua_State * L) {
-	Editor_Game_Base & egbase = get_egbase(L);
+int LuaPlayer::seen_field(lua_State * L) {
+	EditorGameBase & egbase = get_egbase(L);
 
-	Widelands::Map_Index const i =
-		(*get_user_class<L_Field>(L, 2))->fcoords(L).field - &egbase.map()[0];
+	Widelands::MapIndex const i =
+		(*get_user_class<LuaField>(L, 2))->fcoords(L).field - &egbase.map()[0];
 
 	lua_pushboolean(L, get(L, egbase).vision(i) >= 1);
 	return 1;
@@ -488,7 +483,7 @@ int L_Player::seen_field(lua_State * L) {
 			buildings
 		:returns: :const:`nil`
 */
-int L_Player::allow_buildings(lua_State * L) {
+int LuaPlayer::allow_buildings(lua_State * L) {
 	return m_allow_forbid_buildings(L, true);
 }
 
@@ -501,7 +496,7 @@ int L_Player::allow_buildings(lua_State * L) {
 			buildings
 		:returns: :const:`nil`
 */
-int L_Player::forbid_buildings(lua_State * L) {
+int LuaPlayer::forbid_buildings(lua_State * L) {
 	return m_allow_forbid_buildings(L, false);
 }
 
@@ -523,7 +518,7 @@ int L_Player::forbid_buildings(lua_State * L) {
 		:returns: The objective class created
 		:rtype: :class:`wl.game.Objective`
 */
-int L_Player::add_objective(lua_State * L) {
+int LuaPlayer::add_objective(lua_State * L) {
 	Game & game = get_game(L);
 
 	Map * map = game.get_map();
@@ -540,7 +535,7 @@ int L_Player::add_objective(lua_State * L) {
 	o->set_visible(true);
 
 	objectives->insert(std::make_pair(name, std::unique_ptr<Objective>(o)));
-	return to_lua<L_Objective>(L, new L_Objective(*o));
+	return to_lua<LuaObjective>(L, new LuaObjective(*o));
 }
 
 /* RST
@@ -554,8 +549,8 @@ int L_Player::add_objective(lua_State * L) {
 
 		:returns: :const:`nil`
 */
-int L_Player::reveal_fields(lua_State * L) {
-	Editor_Game_Base & egbase = get_egbase(L);
+int LuaPlayer::reveal_fields(lua_State * L) {
+	EditorGameBase & egbase = get_egbase(L);
 	Player & p = get(L, egbase);
 	Map & m = egbase.map();
 
@@ -564,7 +559,7 @@ int L_Player::reveal_fields(lua_State * L) {
 	lua_pushnil(L);  /* first key */
 	while (lua_next(L, 2) != 0) {
 		p.see_node
-			(m, m[0], (*get_user_class<L_Field>(L, -1))->fcoords(L),
+			(m, m[0], (*get_user_class<LuaField>(L, -1))->fcoords(L),
 			egbase.get_gametime());
 		lua_pop(L, 1);
 	}
@@ -583,8 +578,8 @@ int L_Player::reveal_fields(lua_State * L) {
 
 		:returns: :const:`nil`
 */
-int L_Player::hide_fields(lua_State * L) {
-	Editor_Game_Base & egbase = get_egbase(L);
+int LuaPlayer::hide_fields(lua_State * L) {
+	EditorGameBase & egbase = get_egbase(L);
 	Player & p = get(L, egbase);
 	Map & m = egbase.map();
 
@@ -593,7 +588,7 @@ int L_Player::hide_fields(lua_State * L) {
 	lua_pushnil(L);  /* first key */
 	while (lua_next(L, 2) != 0) {
 		p.unsee_node
-			((*get_user_class<L_Field>(L, -1))->fcoords(L).field - &m[0],
+			((*get_user_class<LuaField>(L, -1))->fcoords(L).field - &m[0],
 			egbase.get_gametime());
 		lua_pop(L, 1);
 	}
@@ -611,11 +606,11 @@ int L_Player::hide_fields(lua_State * L) {
 		:type name: :class:`string`
 */
 // UNTESTED
-int L_Player::reveal_scenario(lua_State * L) {
+int LuaPlayer::reveal_scenario(lua_State * L) {
 	if (get_game(L).get_ipl()->player_number() != player_number())
 		report_error(L, "Can only be called for interactive player!");
 
-	Campaign_visibility_save cvs;
+	CampaignVisibilitySave cvs;
 	cvs.set_map_visibility(luaL_checkstring(L, 2), true);
 
 	return 0;
@@ -631,11 +626,11 @@ int L_Player::reveal_scenario(lua_State * L) {
 		:type name: :class:`string`
 */
 // UNTESTED
-int L_Player::reveal_campaign(lua_State * L) {
+int LuaPlayer::reveal_campaign(lua_State * L) {
 	if (get_game(L).get_ipl()->player_number() != player_number())
 		report_error(L, "Can only be called for interactive player!");
 
-	Campaign_visibility_save cvs;
+	CampaignVisibilitySave cvs;
 	cvs.set_campaign_visibility(luaL_checkstring(L, 2), true);
 
 	return 0;
@@ -655,8 +650,8 @@ int L_Player::reveal_campaign(lua_State * L) {
 		:returns: information about the players buildings
 		:rtype: :class:`array` or :class:`table`
 */
-int L_Player::get_buildings(lua_State * L) {
-	Editor_Game_Base & egbase = get_egbase(L);
+int LuaPlayer::get_buildings(lua_State * L) {
+	EditorGameBase & egbase = get_egbase(L);
 	Map * map = egbase.get_map();
 	Player & p = get(L, egbase);
 
@@ -673,14 +668,14 @@ int L_Player::get_buildings(lua_State * L) {
 		return_array = false;
 	}
 
-	std::vector<Building_Index> houses;
+	std::vector<BuildingIndex> houses;
 	m_parse_building_list(L, p.tribe(), houses);
 
 	lua_newtable(L);
 
 	uint32_t cidx = 1;
-	for (const Building_Index& house : houses) {
-		const std::vector<Widelands::Player::Building_Stats> & vec =
+	for (const BuildingIndex& house : houses) {
+		const std::vector<Widelands::Player::BuildingStats> & vec =
 			p.get_building_statistics(house);
 
 		if (return_array) {
@@ -720,18 +715,18 @@ int L_Player::get_buildings(lua_State * L) {
 		:rtype: :class:`integer`
 */
 // UNTESTED
-int L_Player::get_suitability(lua_State * L) {
+int LuaPlayer::get_suitability(lua_State * L) {
 	Game & game = get_game(L);
-	const Tribe_Descr & tribe = get(L, game).tribe();
+	const TribeDescr & tribe = get(L, game).tribe();
 
 	const char * name = luaL_checkstring(L, 2);
-	Building_Index i = tribe.building_index(name);
+	BuildingIndex i = tribe.building_index(name);
 	if (i == INVALID_INDEX)
 		report_error(L, "Unknown building type: <%s>", name);
 
 	lua_pushint32
 		(L, tribe.get_building_descr(i)->suitability
-		 (game.map(), (*get_user_class<L_Field>(L, 3))->fcoords(L))
+		 (game.map(), (*get_user_class<LuaField>(L, 3))->fcoords(L))
 		);
 	return 1;
 }
@@ -745,19 +740,19 @@ int L_Player::get_suitability(lua_State * L) {
 		argument. It then activates all workers for the player, that means all
 		workers are allowed to spawn in all warehouses.
 */
-int L_Player::allow_workers(lua_State * L) {
+int LuaPlayer::allow_workers(lua_State * L) {
 
 	if (luaL_checkstring(L, 2) != std::string("all"))
 		report_error(L, "Argument must be <all>!");
 
 	Game & game = get_game(L);
-	const Tribe_Descr & tribe = get(L, game).tribe();
+	const TribeDescr & tribe = get(L, game).tribe();
 	Player & player = get(L, game);
 
-	const std::vector<Ware_Index> & worker_types_without_cost =
+	const std::vector<WareIndex> & worker_types_without_cost =
 		tribe.worker_types_without_cost();
 
-	for (Ware_Index i = 0; i < tribe.get_nrworkers(); ++i) {
+	for (WareIndex i = 0; i < tribe.get_nrworkers(); ++i) {
 		const WorkerDescr & worker_descr = *tribe.get_worker_descr(i);
 		if (!worker_descr.is_buildable())
 			continue;
@@ -797,11 +792,11 @@ int L_Player::allow_workers(lua_State * L) {
 		If *this* is the local player (the player set in interactive player)
 		switch to the player with playernumber
 */
-int L_Player::switchplayer(lua_State * L) {
+int LuaPlayer::switchplayer(lua_State * L) {
 	Game & game = get_game(L);
 
 	uint8_t newplayer = luaL_checkinteger(L, -1);
-	Interactive_Player * ipl = game.get_ipl();
+	InteractivePlayer * ipl = game.get_ipl();
 	// only switch, if this is our player!
 	if (ipl->player_number() == player_number()) {
 		ipl->set_player_number(newplayer);
@@ -815,15 +810,15 @@ int L_Player::switchplayer(lua_State * L) {
  C METHODS
  ==========================================================
  */
-void L_Player::m_parse_building_list
-	(lua_State * L, const Tribe_Descr & tribe, std::vector<Building_Index> & rv)
+void LuaPlayer::m_parse_building_list
+	(lua_State * L, const TribeDescr & tribe, std::vector<BuildingIndex> & rv)
 {
 	if (lua_isstring(L, -1)) {
 		std::string opt = luaL_checkstring(L, -1);
 		if (opt != "all")
 			report_error(L, "'%s' was not understood as argument!", opt.c_str());
 		for
-			(Building_Index i = 0;
+			(BuildingIndex i = 0;
 			 i < tribe.get_nrbuildings(); ++i)
 				rv.push_back(i);
 	} else {
@@ -833,7 +828,7 @@ void L_Player::m_parse_building_list
 		lua_pushnil(L);
 		while (lua_next(L, -2) != 0) {
 			const char * name = luaL_checkstring(L, -1);
-			Building_Index i = tribe.building_index(name);
+			BuildingIndex i = tribe.building_index(name);
 			if (i == INVALID_INDEX)
 				report_error(L, "Unknown building type: '%s'", name);
 
@@ -843,14 +838,14 @@ void L_Player::m_parse_building_list
 		}
 	}
 }
-int L_Player::m_allow_forbid_buildings(lua_State * L, bool allow)
+int LuaPlayer::m_allow_forbid_buildings(lua_State * L, bool allow)
 {
 	Player & p = get(L, get_egbase(L));
 
-	std::vector<Building_Index> houses;
+	std::vector<BuildingIndex> houses;
 	m_parse_building_list(L, p.tribe(), houses);
 
-	for (const Building_Index& house : houses) {
+	for (const BuildingIndex& house : houses) {
 		p.allow_building_type(house, allow);
 	}
 	return 0;
@@ -867,29 +862,29 @@ Objective
 	:attr:`done` which can be set by the scripter to define if this is done. Use
 	:attr:`visible` to hide it from the user.
 */
-const char L_Objective::className[] = "Objective";
-const MethodType<L_Objective> L_Objective::Methods[] = {
-	METHOD(L_Objective, remove),
-	METHOD(L_Objective, __eq),
+const char LuaObjective::className[] = "Objective";
+const MethodType<LuaObjective> LuaObjective::Methods[] = {
+	METHOD(LuaObjective, remove),
+	METHOD(LuaObjective, __eq),
 	{nullptr, nullptr},
 };
-const PropertyType<L_Objective> L_Objective::Properties[] = {
-	PROP_RO(L_Objective, name),
-	PROP_RW(L_Objective, title),
-	PROP_RW(L_Objective, body),
-	PROP_RW(L_Objective, visible),
-	PROP_RW(L_Objective, done),
+const PropertyType<LuaObjective> LuaObjective::Properties[] = {
+	PROP_RO(LuaObjective, name),
+	PROP_RW(LuaObjective, title),
+	PROP_RW(LuaObjective, body),
+	PROP_RW(LuaObjective, visible),
+	PROP_RW(LuaObjective, done),
 	{nullptr, nullptr, nullptr},
 };
 
-L_Objective::L_Objective(const Widelands::Objective& o) {
+LuaObjective::LuaObjective(const Widelands::Objective& o) {
 	m_name = o.name();
 }
 
-void L_Objective::__persist(lua_State * L) {
+void LuaObjective::__persist(lua_State * L) {
 	PERS_STRING("name", m_name);
 }
-void L_Objective::__unpersist(lua_State * L) {
+void LuaObjective::__unpersist(lua_State * L) {
 	UNPERS_STRING("name", m_name);
 }
 
@@ -905,7 +900,7 @@ void L_Objective::__unpersist(lua_State * L) {
 		(RO) the internal name. You can reference this object via
 		:attr:`wl.game.Player.objectives` with :attr:`name` as key.
 */
-int L_Objective::get_name(lua_State * L) {
+int LuaObjective::get_name(lua_State * L) {
 	Objective & o = get(L, get_game(L));
 	lua_pushstring(L, o.name().c_str());
 	return 1;
@@ -915,12 +910,12 @@ int L_Objective::get_name(lua_State * L) {
 
 		(RW) The line that is shown in the objectives menu
 */
-int L_Objective::get_title(lua_State * L) {
+int LuaObjective::get_title(lua_State * L) {
 	Objective & o = get(L, get_game(L));
 	lua_pushstring(L, o.descname().c_str());
 	return 1;
 }
-int L_Objective::set_title(lua_State * L) {
+int LuaObjective::set_title(lua_State * L) {
 	Objective & o = get(L, get_game(L));
 	o.set_descname(luaL_checkstring(L, -1));
 	return 0;
@@ -930,12 +925,12 @@ int L_Objective::set_title(lua_State * L) {
 
 		(RW) The complete text of this objective. Can be Widelands Richtext.
 */
-int L_Objective::get_body(lua_State * L) {
+int LuaObjective::get_body(lua_State * L) {
 	Objective & o = get(L, get_game(L));
 	lua_pushstring(L, o.descr().c_str());
 	return 1;
 }
-int L_Objective::set_body(lua_State * L) {
+int LuaObjective::set_body(lua_State * L) {
 	Objective & o = get(L, get_game(L));
 	o.set_descr(luaL_checkstring(L, -1));
 	return 0;
@@ -945,12 +940,12 @@ int L_Objective::set_body(lua_State * L) {
 
 		(RW) is this objective shown in the objectives menu
 */
-int L_Objective::get_visible(lua_State * L) {
+int LuaObjective::get_visible(lua_State * L) {
 	Objective & o = get(L, get_game(L));
 	lua_pushboolean(L, o.visible());
 	return 1;
 }
-int L_Objective::set_visible(lua_State * L) {
+int LuaObjective::set_visible(lua_State * L) {
 	Objective & o = get(L, get_game(L));
 	o.set_visible(luaL_checkboolean(L, -1));
 	return 0;
@@ -964,12 +959,12 @@ int L_Objective::set_visible(lua_State * L) {
 		is changed to :const`true`.
 
 */
-int L_Objective::get_done(lua_State * L) {
+int LuaObjective::get_done(lua_State * L) {
 	Objective & o = get(L, get_game(L));
 	lua_pushboolean(L, o.done());
 	return 1;
 }
-int L_Objective::set_done(lua_State * L) {
+int LuaObjective::set_done(lua_State * L) {
 	Objective & o = get(L, get_game(L));
 	o.set_done(luaL_checkboolean(L, -1));
 
@@ -996,7 +991,7 @@ int L_Objective::set_done(lua_State * L) {
  LUA METHODS
  ==========================================================
  */
-int L_Objective::remove(lua_State * L) {
+int LuaObjective::remove(lua_State * L) {
 	Game & g = get_game(L);
 	// The next call checks if the Objective still exists
 	get(L, g);
@@ -1004,12 +999,12 @@ int L_Objective::remove(lua_State * L) {
 	return 0;
 }
 
-int L_Objective::__eq(lua_State * L) {
+int LuaObjective::__eq(lua_State * L) {
 	const Map::Objectives& objectives = get_game(L).map().objectives();
 
 	const Map::Objectives::const_iterator me = objectives.find(m_name);
 	const Map::Objectives::const_iterator other =
-	   objectives.find((*get_user_class<L_Objective>(L, 2))->m_name);
+		objectives.find((*get_user_class<LuaObjective>(L, 2))->m_name);
 
 	lua_pushboolean(L,
 	                (me != objectives.end() && other != objectives.end()) &&
@@ -1022,7 +1017,7 @@ int L_Objective::__eq(lua_State * L) {
  C METHODS
  ==========================================================
  */
-Objective & L_Objective::get(lua_State * L, Widelands::Game & g) {
+Objective & LuaObjective::get(lua_State * L, Widelands::Game & g) {
 	Map::Objectives* objectives = g.map().mutable_objectives();
 	Map::Objectives::iterator i = objectives->find(m_name);
 	if (i == objectives->end()) {
@@ -1040,34 +1035,34 @@ Message
 
 	This represents a message in the Message Box of a given user.
 */
-const char L_Message::className[] = "Message";
-const MethodType<L_Message> L_Message::Methods[] = {
-	METHOD(L_Message, __eq),
+const char LuaMessage::className[] = "Message";
+const MethodType<LuaMessage> LuaMessage::Methods[] = {
+	METHOD(LuaMessage, __eq),
 	{nullptr, nullptr},
 };
-const PropertyType<L_Message> L_Message::Properties[] = {
-	PROP_RO(L_Message, title),
-	PROP_RO(L_Message, body),
-	PROP_RO(L_Message, sent),
-	PROP_RO(L_Message, field),
-	PROP_RW(L_Message, status),
+const PropertyType<LuaMessage> LuaMessage::Properties[] = {
+	PROP_RO(LuaMessage, title),
+	PROP_RO(LuaMessage, body),
+	PROP_RO(LuaMessage, sent),
+	PROP_RO(LuaMessage, field),
+	PROP_RW(LuaMessage, status),
 	{nullptr, nullptr, nullptr},
 };
 
-L_Message::L_Message(uint8_t plr, Message_Id id) {
+LuaMessage::LuaMessage(uint8_t plr, MessageId id) {
 	m_plr = plr;
 	m_mid = id;
 }
 
-void L_Message::__persist(lua_State * L) {
+void LuaMessage::__persist(lua_State * L) {
 	PERS_UINT32("player", m_plr);
 	PERS_UINT32("msg_idx", get_mos(L)->message_savers[m_plr - 1][m_mid].value());
 }
-void L_Message::__unpersist(lua_State * L) {
+void LuaMessage::__unpersist(lua_State * L) {
 	UNPERS_UINT32("player", m_plr);
 	uint32_t midx = 0;
 	UNPERS_UINT32("msg_idx", midx);
-	m_mid = Message_Id(midx);
+	m_mid = MessageId(midx);
 }
 
 /*
@@ -1081,7 +1076,7 @@ void L_Message::__unpersist(lua_State * L) {
 
 		(RO) The title of this message
 */
-int L_Message::get_title(lua_State * L) {
+int LuaMessage::get_title(lua_State * L) {
 	lua_pushstring(L, get(L, get_game(L)).title());
 	return 1;
 }
@@ -1090,7 +1085,7 @@ int L_Message::get_title(lua_State * L) {
 
 		(RO) The body of this message
 */
-int L_Message::get_body(lua_State * L) {
+int LuaMessage::get_body(lua_State * L) {
 	lua_pushstring(L, get(L, get_game(L)).body());
 	return 1;
 }
@@ -1100,21 +1095,23 @@ int L_Message::get_body(lua_State * L) {
 
 		(RO) The game time in milliseconds when this message was sent
 */
-int L_Message::get_sent(lua_State * L) {
+int LuaMessage::get_sent(lua_State * L) {
 	lua_pushuint32(L, get(L, get_game(L)).sent());
 	return 1;
 }
 
+
 /* RST
+>>>>>>> MERGE-SOURCE
 	.. attribute:: field
 
 		(RO) The field that corresponds to this Message.
 */
-int L_Message::get_field(lua_State * L) {
+int LuaMessage::get_field(lua_State * L) {
 	Coords c = get(L, get_game(L)).position();
 	if (c == Coords::Null())
 		return 0;
-	return to_lua<L_Field>(L, new L_Field(c));
+	return to_lua<LuaField>(L, new LuaField(c));
 }
 
 /* RST
@@ -1126,7 +1123,7 @@ int L_Message::get_field(lua_State * L) {
 			* read
 			* archived
 */
-int L_Message::get_status(lua_State * L) {
+int LuaMessage::get_status(lua_State * L) {
 	switch (get(L, get_game(L)).status()) {
 		case Message::New: lua_pushstring(L, "new"); break;
 		case Message::Read: lua_pushstring(L, "read"); break;
@@ -1135,7 +1132,7 @@ int L_Message::get_status(lua_State * L) {
 	}
 	return 1;
 }
-int L_Message::set_status(lua_State * L) {
+int LuaMessage::set_status(lua_State * L) {
 	Message::Status status = Message::New;
 	std::string s = luaL_checkstring(L, -1);
 	if (s == "new") status = Message::New;
@@ -1153,8 +1150,8 @@ int L_Message::set_status(lua_State * L) {
  LUA METHODS
  ==========================================================
  */
-int L_Message::__eq(lua_State * L) {
-	lua_pushboolean(L, m_mid == (*get_user_class<L_Message>(L, 2))->m_mid);
+int LuaMessage::__eq(lua_State * L) {
+	lua_pushboolean(L, m_mid == (*get_user_class<LuaMessage>(L, 2))->m_mid);
 	return 1;
 }
 
@@ -1163,7 +1160,7 @@ int L_Message::__eq(lua_State * L) {
  C METHODS
  ==========================================================
  */
-Player & L_Message::get_plr(lua_State * L, Widelands::Game & game) {
+Player & LuaMessage::get_plr(lua_State * L, Widelands::Game & game) {
 	if (m_plr > MAX_PLAYERS)
 		report_error(L, "Illegal player number %i",  m_plr);
 	Player * rv = game.get_player(m_plr);
@@ -1171,7 +1168,7 @@ Player & L_Message::get_plr(lua_State * L, Widelands::Game & game) {
 		report_error(L, "Player with the number %i does not exist", m_plr);
 	return *rv;
 }
-const Message & L_Message::get(lua_State * L, Widelands::Game & game) {
+const Message & LuaMessage::get(lua_State * L, Widelands::Game & game) {
 	const Message * rv = get_plr(L, game).messages()[m_mid];
 	if (!rv)
 		report_error(L, "This message has been deleted!");
@@ -1205,7 +1202,7 @@ static int L_report_result(lua_State * L) {
 		(luaL_checknumber(L, 2));
 
 	get_game(L).gameController()->report_result
-		((*get_user_class<L_Player>(L, 1))->get(L, get_game(L)).player_number(),
+		((*get_user_class<LuaPlayer>(L, 1))->get(L, get_game(L)).player_number(),
 		 result, info);
 	return 0;
 }
@@ -1227,12 +1224,12 @@ void luaopen_wlgame(lua_State * L) {
 	lua_settable(L, -3); // S: wl_table
 	lua_pop(L, 1); // S:
 
-	register_class<L_Player>(L, "game", true);
-	add_parent<L_Player, LuaBases::L_PlayerBase>(L);
+	register_class<LuaPlayer>(L, "game", true);
+	add_parent<LuaPlayer, LuaBases::LuaPlayerBase>(L);
 	lua_pop(L, 1); // Pop the meta table
 
-	register_class<L_Objective>(L, "game");
-	register_class<L_Message>(L, "game");
+	register_class<LuaObjective>(L, "game");
+	register_class<LuaMessage>(L, "game");
 }
 
 }

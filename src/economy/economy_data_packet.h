@@ -26,8 +26,8 @@ class FileWrite;
 namespace Widelands {
 class Economy;
 class Game;
-class MapMapObjectLoader;
-struct MapMapObjectSaver;
+class MapObjectLoader;
+struct MapObjectSaver;
 
 class EconomyDataPacket {
 	public:

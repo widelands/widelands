@@ -27,7 +27,7 @@
 /**
  * The message box itself
  */
-Story_Message_Box::Story_Message_Box
+StoryMessageBox::StoryMessageBox
 	(UI::Panel * const parent,
 	 const std::string & title,
 	 const std::string & body,
@@ -36,7 +36,7 @@ Story_Message_Box::Story_Message_Box
 	 uint32_t const w,     uint32_t const h)
 	: UI::Window(parent, "story_message_box", 0, 0, 600, 400, title.c_str())
 {
-	UI::Multiline_Textarea * m_text = nullptr;
+	UI::MultilineTextarea * m_text = nullptr;
 	int32_t const spacing = 5;
 	int32_t       offsy   = 5;
 	int32_t       offsx   = spacing;
@@ -45,7 +45,7 @@ Story_Message_Box::Story_Message_Box
 
 	set_inner_size(w, h);
 	m_text =
-		new UI::Multiline_Textarea
+		new UI::MultilineTextarea
 			(this,
 			 posx, posy,
 			 get_inner_w() - posx -     spacing,
@@ -66,7 +66,7 @@ Story_Message_Box::Story_Message_Box
 		 posx, posy, but_width, 20,
 		 g_gr->images().get("pics/but0.png"),
 		 button_text);
-	okbtn->sigclicked.connect(boost::bind(&Story_Message_Box::clicked_ok, boost::ref(*this)));
+	okbtn->sigclicked.connect(boost::bind(&StoryMessageBox::clicked_ok, boost::ref(*this)));
 
 	center_to_parent();
 
@@ -81,7 +81,7 @@ Story_Message_Box::Story_Message_Box
 /**
  * Clicked
  */
-void Story_Message_Box::clicked_ok() {
+void StoryMessageBox::clicked_ok() {
 	end_modal(0);
 	return;
 }
@@ -89,7 +89,7 @@ void Story_Message_Box::clicked_ok() {
 /*
  * Avoid being closed by right click
  */
-bool Story_Message_Box::handle_mousepress
+bool StoryMessageBox::handle_mousepress
 	(const uint8_t btn, int32_t mx, int32_t my)
 {
 	if (btn == SDL_BUTTON_RIGHT)

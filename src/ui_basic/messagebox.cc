@@ -30,8 +30,8 @@ namespace UI {
 
 
 struct WLMessageBoxImpl {
-	Multiline_Textarea * textarea;
-	WLMessageBox::MB_Type type;
+	MultilineTextarea * textarea;
+	WLMessageBox::MBoxType type;
 };
 
 
@@ -39,14 +39,14 @@ WLMessageBox::WLMessageBox
 	(Panel * const parent,
 	 const std::string & caption,
 	 const std::string & text,
-	 const MB_Type type,
+	 const MBoxType type,
 	 Align align)
 	:
 	Window(parent, "message_box", 0, 0, 20, 20, caption.c_str()),
 	d(new WLMessageBoxImpl)
 {
 	d->type = type;
-	d->textarea = new Multiline_Textarea
+	d->textarea = new MultilineTextarea
 		(this,
 		 5, 5, 30, 30,
 		 text.c_str(), align);

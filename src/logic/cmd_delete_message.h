@@ -35,18 +35,18 @@ namespace Widelands {
 /// command and then when loading, checking that one exists for each message
 /// and if not, warn and recreate it. Such redundancy would also waste space in
 /// the savegame.
-struct Cmd_DeleteMessage : public Command {
-	Cmd_DeleteMessage
-		(int32_t const t, Player_Number const p, Message_Id const m)
+struct CmdDeleteMessage : public Command {
+	CmdDeleteMessage
+		(int32_t const t, PlayerNumber const p, MessageId const m)
 		: Command(t), player(p), message(m)
 	{}
 
 	void execute (Game & game) override;
-	uint8_t id() const override {return QUEUE_CMD_EXPIREMESSAGE;}
+	uint8_t id() const override {return QUEUE_CMD_DELETEMESSAGE;}
 
 private:
-	Player_Number player;
-	Message_Id    message;
+	PlayerNumber player;
+	MessageId    message;
 };
 
 }

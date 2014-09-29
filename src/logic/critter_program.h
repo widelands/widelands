@@ -25,8 +25,8 @@
 namespace Widelands {
 
 struct CritterAction {
-	typedef
-		bool (Critter::*execute_t)
+	using CritterExecuteActionFn =
+		bool (Critter::*)
 			(Game &, Bob::State &, const CritterAction &);
 
 	enum {
@@ -34,7 +34,7 @@ struct CritterAction {
 		walkCoords, //  walk to coords
 	};
 
-	execute_t                function;
+	CritterExecuteActionFn       function;
 	int32_t                      iparam1;
 	int32_t                      iparam2;
 	std::string              sparam1;

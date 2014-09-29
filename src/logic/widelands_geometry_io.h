@@ -26,41 +26,41 @@
 
 namespace Widelands {
 
-struct direction_is_null : public FileRead::_data_error {
-	direction_is_null()
-	   : _data_error("direction is 0 but must be one of {1 (northeast), 2 (east), 3 "
+struct DirectionIsNull : public FileRead::DataError {
+	DirectionIsNull()
+		: DataError("direction is 0 but must be one of {1 (northeast), 2 (east), 3 "
 	                 "(southeast), 4 (southwest), 5 (west), 6 (northwest)}") {
 	}
 };
 
-struct direction_invalid : public FileRead::_data_error {
-	direction_invalid(Direction const D)
-	   : _data_error("direction is %u but must be one of {0 (idle), 1 (northeast), 2 "
+struct DirectionInvalid : public FileRead::DataError {
+	DirectionInvalid(Direction const D)
+		: DataError("direction is %u but must be one of {0 (idle), 1 (northeast), 2 "
 	                 "(east), 3 (southeast), 4 (southwest), 5 (west), 6 (northwest)}",
 	                 D),
 	     direction(D) {
 	}
 	Direction direction;
 };
-struct exceeded_max_index : public FileRead::_data_error {
-	exceeded_max_index(Map_Index const Max, Map_Index const I)
-	   : _data_error("index is %u but max index is only %u", I, Max), max(Max), i(I) {
+struct ExceededMaxIndex : public FileRead::DataError {
+	ExceededMaxIndex(MapIndex const Max, MapIndex const I)
+		: DataError("index is %u but max index is only %u", I, Max), max(Max), i(I) {
 	}
-	Map_Index const max, i;
+	MapIndex const max, i;
 };
-struct exceeded_width : public FileRead::_data_error {
-	exceeded_width(uint16_t const W, const X_Coordinate X)
-	   : _data_error("x coordinate is %i but width is only %u", X, W), w(W), x(X) {
+struct ExceededWidth : public FileRead::DataError {
+	ExceededWidth(uint16_t const W, const uint16_t X)
+		: DataError("x coordinate is %i but width is only %u", X, W), w(W), x(X) {
 	}
 	uint16_t const w;
-	X_Coordinate const x;
+	uint16_t const x;
 };
-struct exceeded_height : public FileRead::_data_error {
-	exceeded_height(uint16_t const H, const Y_Coordinate Y)
-	   : _data_error("y coordinate is %i but height is only %u", Y, H), h(H), y(Y) {
+struct ExceededHeight : public FileRead::DataError {
+	ExceededHeight(uint16_t const H, const int16_t Y)
+		: DataError("y coordinate is %i but height is only %u", Y, H), h(H), y(Y) {
 	}
 	uint16_t h;
-	Y_Coordinate y;
+	int16_t y;
 };
 
 /// Read a Direction from the file. Use this when the result can only be a
@@ -76,7 +76,7 @@ Direction ReadDirection8(StreamRead* fr);
 /// \throws direction_invalid if direction is > 6.
 Direction ReadDirection8_allow_null(StreamRead* fr);
 
-Map_Index ReadMap_Index32(StreamRead* fr, Map_Index max);
+MapIndex ReadMap_Index32(StreamRead* fr, MapIndex max);
 
 /// Read a Coords from the file. Use this when the result can only be a
 /// coordinate pair referring to a node.

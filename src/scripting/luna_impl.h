@@ -143,7 +143,7 @@ int m_property_dispatch(lua_State * const L) {
 	// Check for invalid: obj.method(plainOldDatatype)
 	luaL_checktype(L, 1, LUA_TTABLE);
 
-	typedef int (PT::* const * ConstMethodPtr)(lua_State *);
+	using ConstMethodPtr = int (PT::* const *)(lua_State *);
 	ConstMethodPtr pfunc = reinterpret_cast<ConstMethodPtr>
 		(lua_touserdata(L, -1));
 	lua_pop(L, 1);
@@ -175,7 +175,7 @@ int m_method_dispatch(lua_State * const L) {
 	luaL_checktype(L, 1, LUA_TTABLE);
 
 	// Get the method pointer from the closure
-	typedef int (PT::* const * ConstMethod)(lua_State *);
+	using ConstMethod = int (PT::* const *)(lua_State *);
 	ConstMethod func = reinterpret_cast<ConstMethod>
 		(lua_touserdata(L, lua_upvalueindex(1)));
 

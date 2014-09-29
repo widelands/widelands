@@ -580,8 +580,8 @@ private:
 			return size < o.size || (size == o.size && face < o.face);
 		}
 	};
-	typedef map<FontDescr, IFont*> FontMap;
-	typedef pair<const FontDescr, IFont*> FontMapPair;
+	using FontMap = map<FontDescr, IFont*>;
+	using FontMapPair = pair<const FontDescr, IFont*>;
 
 	FontMap m_fontmap;
 };
@@ -925,8 +925,9 @@ template<typename T> TagHandler* create_taghandler
 {
 	return new T(tag, fc, ns, image_cache);
 }
-typedef map<const string, TagHandler* (*)
-	(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache)> TagHandlerMap;
+using TagHandlerMap = map<const string, TagHandler* (*)
+	(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache)>;
+
 TagHandler* create_taghandler(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache* image_cache) {
 	static TagHandlerMap map;
 	if (map.empty()) {

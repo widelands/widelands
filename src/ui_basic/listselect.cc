@@ -98,7 +98,7 @@ BaseListselect::~BaseListselect()
  * Remove all entries from the listselect
 */
 void BaseListselect::clear() {
-	for (Entry_Record * entry : m_entry_records) {
+	for (EntryRecord * entry : m_entry_records) {
 		delete entry;
 	}
 	m_entry_records.clear();
@@ -125,7 +125,7 @@ void BaseListselect::add
 	 bool         const   sel,
 	 const std::string  & tooltip_text)
 {
-	Entry_Record * er = new Entry_Record();
+	EntryRecord * er = new EntryRecord();
 
 	er->m_entry = entry;
 	er->pic   = pic;
@@ -163,10 +163,10 @@ void BaseListselect::add_front
 	 bool         const   sel,
 	 const std::string  & tooltip_text)
 {
-	Entry_Record * er = new Entry_Record();
+	EntryRecord * er = new EntryRecord();
 
 	er->m_entry = 0;
-	for (Entry_Record * temp_entry : m_entry_records) {
+	for (EntryRecord * temp_entry : m_entry_records) {
 		++(temp_entry)->m_entry;
 	}
 
@@ -232,8 +232,8 @@ void BaseListselect::sort(const uint32_t Begin, uint32_t End)
 		End = size();
 	for (uint32_t i = Begin; i < End; ++i)
 		for (uint32_t j = i + 1; j < End; ++j) {
-			Entry_Record * const eri = m_entry_records[i];
-			Entry_Record * const erj = m_entry_records[j];
+			EntryRecord * const eri = m_entry_records[i];
+			EntryRecord * const erj = m_entry_records[j];
 			if (strcmp(eri->name.c_str(), erj->name.c_str()) > 0) {
 				if      (m_selection == i)
 					m_selection = j;
@@ -313,7 +313,7 @@ bool BaseListselect::has_selection() const
 uint32_t BaseListselect::get_selected() const
 {
 	if (m_selection == no_selection_index())
-		throw No_Selection();
+		throw NoSelection();
 
 	return m_entry_records[m_selection]->m_entry;
 }
@@ -326,7 +326,7 @@ uint32_t BaseListselect::get_selected() const
 void BaseListselect::remove_selected()
 {
 	if (m_selection == no_selection_index())
-		throw No_Selection();
+		throw NoSelection();
 
 	remove(m_selection);
 }
@@ -363,7 +363,7 @@ void BaseListselect::draw(RenderTarget & dst)
 		if (y >= static_cast<int32_t>(get_h()))
 			break;
 
-		const Entry_Record & er = *m_entry_records[idx];
+		const EntryRecord & er = *m_entry_records[idx];
 
 		// Highlight the current selected entry
 		if (idx == m_selection) {
