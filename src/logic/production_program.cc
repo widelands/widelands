@@ -950,12 +950,12 @@ void ProductionProgram::ActConsume::execute
 			group_list.push_back(ware_string);
 		}
 
-		std::string is_missing_string =
+		const std::string is_missing_string =
 				/** TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing' */
 				/** TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta bread is missing' */
 				(boost::format(ngettext("%s is missing", "%s are missing", nr_missing_groups))
 				 % i18n::localize_item_list(group_list, i18n::ConcatenateWith::AND))
-				 .str();
+				 .str().c_str();
 
 		std::string result_string =
 			/** TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing' */
