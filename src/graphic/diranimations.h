@@ -52,7 +52,7 @@ struct DirAnimations {
 		m_animations[dir - 1] = anim;
 	}
 
-	static DirAnimations Null() {
+	static DirAnimations null() {
 		return DirAnimations(0); // Since real animation IDs are positive, this is safe
 	}
 

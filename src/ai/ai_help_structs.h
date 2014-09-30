@@ -48,7 +48,7 @@ struct CheckStepRoadAI {
 	}
 
 	bool allowed(Map&, FCoords start, FCoords end, int32_t dir, CheckStep::StepId) const;
-	bool reachabledest(Map&, FCoords dest) const;
+	bool reachable_dest(Map&, FCoords dest) const;
 
 	Player* player_;
 	uint8_t movecaps_;

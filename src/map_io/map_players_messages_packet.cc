@@ -33,7 +33,7 @@ namespace Widelands {
 #define FILENAME_TEMPLATE PLAYERDIRNAME_TEMPLATE "/messages"
 #define FILENAME_SIZE 19
 
-void MapPlayersMessagesPacket::Read
+void MapPlayersMessagesPacket::read
 	(FileSystem & fs, EditorGameBase & egbase, bool, MapObjectLoader & mol)
 
 {
@@ -124,7 +124,7 @@ void MapPlayersMessagesPacket::Read
 						 	 sent,
 						 	 s->get_name       (),
 						 	 s->get_safe_string("body"),
-							 get_coords("position", extent, Coords::Null(), s),
+							 get_coords("position", extent, Coords::null(), s),
 							 serial,
 						 	 status));
 					previous_message_sent = sent;
@@ -139,10 +139,10 @@ void MapPlayersMessagesPacket::Read
 		}
 }
 
-void MapPlayersMessagesPacket::Write
+void MapPlayersMessagesPacket::write
 	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver & mos)
 {
-	fs.EnsureDirectoryExists("player");
+	fs.ensure_directory_exists("player");
 	PlayerNumber const nr_players = egbase.map().get_nrplayers();
 	iterate_players_existing_const(p, nr_players, egbase, player) {
 		Profile prof;
@@ -182,7 +182,7 @@ void MapPlayersMessagesPacket::Write
 		}
 		char filename[FILENAME_SIZE];
 		snprintf(filename, sizeof(filename), PLAYERDIRNAME_TEMPLATE, p);
-		fs.EnsureDirectoryExists(filename);
+		fs.ensure_directory_exists(filename);
 		snprintf(filename, sizeof(filename),      FILENAME_TEMPLATE, p);
 		prof.write(filename, false, fs);
 	}

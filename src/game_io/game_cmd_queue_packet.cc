@@ -32,47 +32,47 @@ namespace Widelands {
 #define CURRENT_PACKET_VERSION 2
 
 
-void GameCmdQueuePacket::Read
+void GameCmdQueuePacket::read
 	(FileSystem & fs, Game & game, MapObjectLoader * const ol)
 {
 	try {
 		FileRead fr;
-		fr.Open(fs, "binary/cmd_queue");
-		uint16_t const packet_version = fr.Unsigned16();
+		fr.open(fs, "binary/cmd_queue");
+		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == CURRENT_PACKET_VERSION) {
 			CmdQueue & cmdq = game.cmdqueue();
 
 			// nothing to be done for m_game
 
 			// Next serial
-			cmdq.nextserial = fr.Unsigned32();
+			cmdq.nextserial = fr.unsigned_32();
 
 			// Erase all currently pending commands in the queue
 			cmdq.flush();
 
 			for (;;) {
-				uint32_t const packet_id = fr.Unsigned16();
+				uint32_t const packet_id = fr.unsigned_16();
 
 				if (!packet_id)
 					break;
 
 				CmdQueue::CmdItem item;
-				item.category = fr.Signed32();
-				item.serial = fr.Unsigned32();
+				item.category = fr.signed_32();
+				item.serial = fr.unsigned_32();
 
 				if (packet_id == 129) {
 					// For backwards compatibility with savegames up to build15:
 					// Discard old CheckEventChain commands
-					fr.Unsigned16(); // CheckEventChain version
-					fr.Unsigned16(); // GameLogicCommand version
-					fr.Unsigned32(); // GameLogicCommand duetime
-					fr.Unsigned16(); // CheckEventChain ID
+					fr.unsigned_16(); // CheckEventChain version
+					fr.unsigned_16(); // GameLogicCommand version
+					fr.unsigned_32(); // GameLogicCommand duetime
+					fr.unsigned_16(); // CheckEventChain ID
 					continue;
 				}
 
 				GameLogicCommand & cmd =
 					QueueCmdFactory::create_correct_queue_command(packet_id);
-				cmd.Read(fr, game, *ol);
+				cmd.read(fr, game, *ol);
 
 				item.cmd = &cmd;
 
@@ -88,20 +88,20 @@ void GameCmdQueuePacket::Read
 }
 
 
-void GameCmdQueuePacket::Write
+void GameCmdQueuePacket::write
 	(FileSystem & fs, Game & game, MapObjectSaver * const os)
 {
 	FileWrite fw;
 
 	// Now packet version
-	fw.Unsigned16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(CURRENT_PACKET_VERSION);
 
 	const CmdQueue & cmdq = game.cmdqueue();
 
 	// nothing to be done for m_game
 
 	// Next serial
-	fw.Unsigned32(cmdq.nextserial);
+	fw.unsigned_32(cmdq.nextserial);
 
 	// Write all commands
 
@@ -118,14 +118,14 @@ void GameCmdQueuePacket::Write
 			if (it.cmd->duetime() == time) {
 				if (upcast(GameLogicCommand, cmd, it.cmd)) {
 					// The id (aka command type)
-					fw.Unsigned16(cmd->id());
+					fw.unsigned_16(cmd->id());
 
 					// Serial number
-					fw.Signed32(it.category);
-					fw.Unsigned32(it.serial);
+					fw.signed_32(it.category);
+					fw.unsigned_32(it.serial);
 
 					// Now the command itself
-					cmd->Write(fw, game, *os);
+					cmd->write(fw, game, *os);
 				}
 				++ nhandled;
 			}
@@ -137,9 +137,9 @@ void GameCmdQueuePacket::Write
 	}
 
 
-	fw.Unsigned16(0); // end of command queue
+	fw.unsigned_16(0); // end of command queue
 
-	fw.Write(fs, "binary/cmd_queue");
+	fw.write(fs, "binary/cmd_queue");
 }
 
 }

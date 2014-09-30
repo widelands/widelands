@@ -309,7 +309,7 @@ DIAG_ON ("-Wold-style-cast")
 		SDL_GL_SwapBuffers();
 		glEnable(GL_TEXTURE_2D);
 
-		GLSurfaceTexture::Initialize(use_arb);
+		GLSurfaceTexture::initialize(use_arb);
 	}
 
 	if (g_opengl)
@@ -341,7 +341,7 @@ void Graphic::cleanup() {
 		UI::g_fh->flush();
 
 	if (g_opengl)
-		GLSurfaceTexture::Cleanup();
+		GLSurfaceTexture::cleanup();
 }
 
 Graphic::~Graphic()
@@ -487,7 +487,7 @@ void Graphic::animate_maptextures(uint32_t time)
 void Graphic::screenshot(const string& fname) const
 {
 	log("Save screenshot to %s\n", fname.c_str());
-	StreamWrite * sw = g_fs->OpenStreamWrite(fname);
+	StreamWrite * sw = g_fs->open_stream_write(fname);
 	save_surface_to_png(screen_.get(), sw);
 	delete sw;
 }

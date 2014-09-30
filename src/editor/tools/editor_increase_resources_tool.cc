@@ -46,7 +46,7 @@ int32_t resource_value(const Widelands::TerrainDescription& terrain,
 }  // namespace
 
 
-int32_t Editor_Change_Resource_Tool_Callback
+int32_t editor_change_resource_tool_callback
 	(const TCoords<Widelands::FCoords>& c, Widelands::Map& map,
 	 const Widelands::World& world, int32_t const curres)
 {
@@ -110,7 +110,7 @@ EditorIncreaseResourcesTool::handle_click_impl(Widelands::Map& map,
 		if
 		((res == args.cur_res || !mr.location().field->get_resources_amount())
 		        &&
-		        Editor_Change_Resource_Tool_Callback(mr.location(), map, world, args.cur_res))
+				  editor_change_resource_tool_callback(mr.location(), map, world, args.cur_res))
 		{
 			//  Ok, we're doing something. First remove the current overlays.
 			const Image* pic =

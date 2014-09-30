@@ -32,7 +32,7 @@ namespace Widelands {
  * on all checks.
  */
 CheckStep::CheckStep()
-	: capsule(alwaysfalse().capsule)
+	: capsule(always_false().capsule)
 {
 }
 
@@ -43,10 +43,10 @@ struct CheckStepAlwaysFalse {
 	{
 		return false;
 	}
-	bool reachabledest(Map &, const FCoords &) const {return false;}
+	bool reachable_dest(Map &, const FCoords &) const {return false;}
 };
 
-const CheckStep & CheckStep::alwaysfalse()
+const CheckStep & CheckStep::always_false()
 {
 	static const CheckStep cstep = CheckStep(CheckStepAlwaysFalse());
 	return cstep;
@@ -71,10 +71,10 @@ bool CheckStepAnd::allowed
 	return true;
 }
 
-bool CheckStepAnd::reachabledest(Map & map, FCoords const dest) const
+bool CheckStepAnd::reachable_dest(Map & map, FCoords const dest) const
 {
 	for (const CheckStep& checkstep : subs) {
-		if (!checkstep.reachabledest(map, dest)) {
+		if (!checkstep.reachable_dest(map, dest)) {
 			return false;
 		}
 	}
@@ -103,7 +103,7 @@ bool CheckStepDefault::allowed
 	return false;
 }
 
-bool CheckStepDefault::reachabledest(Map & map, FCoords const dest) const
+bool CheckStepDefault::reachable_dest(Map & map, FCoords const dest) const
 {
 	NodeCaps const caps = dest.field->nodecaps();
 
@@ -155,7 +155,7 @@ bool CheckStepWalkOn::allowed
 	return false;
 }
 
-bool CheckStepWalkOn::reachabledest(Map &, FCoords) const {
+bool CheckStepWalkOn::reachable_dest(Map &, FCoords) const {
 	// Don't bother solving this.
 	return true;
 }
@@ -193,7 +193,7 @@ bool CheckStepRoad::allowed
 	return true;
 }
 
-bool CheckStepRoad::reachabledest(Map & map, FCoords const dest) const
+bool CheckStepRoad::reachable_dest(Map & map, FCoords const dest) const
 {
 	NodeCaps const caps = dest.field->nodecaps();
 
@@ -215,7 +215,7 @@ bool CheckStepLimited::allowed
 	return m_allowed_locations.find(end) != m_allowed_locations.end();
 }
 
-bool CheckStepLimited::reachabledest(Map &, FCoords) const {
+bool CheckStepLimited::reachable_dest(Map &, FCoords) const {
 	return true;
 }
 

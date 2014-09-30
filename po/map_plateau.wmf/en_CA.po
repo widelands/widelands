@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2014-09-19 06:00+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
-"Language: en\n"
+"Language: en_CA\n"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:28
 #: ../../maps/Plateau.wmf/scripting/texts.lua:85

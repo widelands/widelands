@@ -32,7 +32,7 @@ static int32_t m_current_player;
 /*
  * static callback function for overlay calculation
  */
-int32_t Editor_Tool_Set_Starting_Pos_Callback
+int32_t editor_tool_set_starting_pos_callback
 	(const Widelands::TCoords<Widelands::FCoords>& c, Widelands::Map& map)
 {
 	// Area around already placed players
@@ -88,7 +88,7 @@ int32_t EditorSetStartingPosTool::handle_click_impl(Widelands::Map& map,
 		const Image* pic = g_gr->images().get(picname);
 
 		//  check if field is valid
-		if (Editor_Tool_Set_Starting_Pos_Callback(map.get_fcoords(center.node), map)) {
+		if (editor_tool_set_starting_pos_callback(map.get_fcoords(center.node), map)) {
 			OverlayManager & overlay_manager = map.overlay_manager();
 			//  remove old overlay if any
 			overlay_manager.remove_overlay(old_sp, pic);

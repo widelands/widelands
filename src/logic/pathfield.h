@@ -74,7 +74,7 @@ struct Pathfields {
 struct PathfieldManager {
 	PathfieldManager();
 
-	void setSize(uint32_t nrfields);
+	void set_size(uint32_t nrfields);
 	boost::shared_ptr<Pathfields> allocate();
 
 private:

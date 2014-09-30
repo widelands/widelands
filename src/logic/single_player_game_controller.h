@@ -31,15 +31,15 @@ public:
 	~SinglePlayerGameController();
 
 	void think() override;
-	void sendPlayerCommand(Widelands::PlayerCommand &) override;
-	int32_t getFrametime() override;
-	std::string getGameDescription() override;
+	void send_player_command(Widelands::PlayerCommand &) override;
+	int32_t get_frametime() override;
+	std::string get_game_description() override;
 
-	uint32_t realSpeed() override;
-	uint32_t desiredSpeed() override;
-	void setDesiredSpeed(uint32_t speed) override;
-	bool isPaused() override;
-	void setPaused(bool paused) override;
+	uint32_t real_speed() override;
+	uint32_t desired_speed() override;
+	void set_desired_speed(uint32_t speed) override;
+	bool is_paused() override;
+	void set_paused(bool paused) override;
 	void report_result(uint8_t player, Widelands::PlayerEndResult result, const std::string & info) override;
 
 private:

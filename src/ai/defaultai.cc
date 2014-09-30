@@ -705,10 +705,10 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 
 				if (v > 0 && dist > 0) {
 
-					field.military_capacity_ += militarysite->maxSoldierCapacity();
-					field.military_presence_ += militarysite->stationedSoldiers().size();
+					field.military_capacity_ += militarysite->max_soldier_capacity();
+					field.military_presence_ += militarysite->stationed_soldiers().size();
 
-					if (!militarysite->stationedSoldiers().empty()) {
+					if (!militarysite->stationed_soldiers().empty()) {
 						field.military_stationed_ += 1;
 					} else
 						// the name does not match much
@@ -2395,7 +2395,7 @@ bool DefaultAI::check_militarysites(int32_t gametime) {
 	for (std::list<MilitarySiteObserver>::iterator it = militarysites.begin();
 	     it != militarysites.end();
 	     ++it)
-		if (it->site->stationedSoldiers().size() == 0)
+		if (it->site->stationed_soldiers().size() == 0)
 			unstationed_milit_buildings_ += 1;
 
 	// Only useable, if defaultAI owns at least one militarysite
@@ -2418,7 +2418,7 @@ bool DefaultAI::check_militarysites(int32_t gametime) {
 		// same economy where the thrown out soldiers can go to.
 
 		if (ms->economy().warehouses().size()) {
-			uint32_t const j = ms->soldierCapacity();
+			uint32_t const j = ms->soldier_capacity();
 
 			if (MilitarySite::kPrefersRookies != ms->get_soldier_preference()) {
 				game().send_player_militarysite_set_soldier_preference(
@@ -2439,7 +2439,7 @@ bool DefaultAI::check_militarysites(int32_t gametime) {
 				score += (bf.military_presence_ > 3);
 				score += (bf.military_loneliness_ < 180);
 				score += (bf.military_stationed_ > (2 + size_penalty));
-				score -= (ms->soldierCapacity() * 2 > static_cast<uint32_t>(bf.military_capacity_));
+				score -= (ms->soldier_capacity() * 2 > static_cast<uint32_t>(bf.military_capacity_));
 				score += (bf.unowned_land_nearby_ < 10);
 
 				if (score >= 4) {
@@ -2458,8 +2458,8 @@ bool DefaultAI::check_militarysites(int32_t gametime) {
 
 		// If an enemy is in sight and the number of stationed soldier is not
 		// at maximum - set it to maximum.
-		uint32_t const j = ms->maxSoldierCapacity();
-		uint32_t const k = ms->soldierCapacity();
+		uint32_t const j = ms->max_soldier_capacity();
+		uint32_t const k = ms->soldier_capacity();
 
 		if (j > k) {
 			game().send_player_change_soldier_capacity(*ms, j - k);
@@ -2897,11 +2897,11 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 					continue;
 				}
 
-				if (bld->canAttack()) {
+				if (bld->can_attack()) {
 
 					// any_attackable_building=true;
 
-					int32_t ta = player_->findAttackSoldiers(bld->base_flag());
+					int32_t ta = player_->find_attack_soldiers(bld->base_flag());
 
 					if (type_ == NORMAL)
 						ta = ta * 2 / 3;
@@ -2909,24 +2909,24 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 					if (ta < 1)
 						continue;
 
-					int32_t const tc = ta - bld->presentSoldiers().size();
+					int32_t const tc = ta - bld->present_soldiers().size();
 
-					if (bld->presentSoldiers().size() > 1)
-						defend_ready_enemies += bld->presentSoldiers().size() - 1;
+					if (bld->present_soldiers().size() > 1)
+						defend_ready_enemies += bld->present_soldiers().size() - 1;
 
 					if (tc > chance) {
 						target = bld;
 						chance = tc;
 						attackers = ta;
-						defenders = bld->presentSoldiers().size();
+						defenders = bld->present_soldiers().size();
 					}
 				}
 			} else if (upcast(Warehouse, wh, immovables.at(j).object)) {
 				if (!player_->is_hostile(wh->owner()))
 					continue;
 
-				if (wh->canAttack()) {
-					int32_t ta = player_->findAttackSoldiers(wh->base_flag());
+				if (wh->can_attack()) {
+					int32_t ta = player_->find_attack_soldiers(wh->base_flag());
 
 					if (ta < 1)
 						continue;

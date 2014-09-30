@@ -65,8 +65,8 @@ void md5_process_block (void const * buffer, uint32_t len, Md5Ctx *);
 /**
  * This class is responsible for creating a streaming md5 checksum.
  * You simply pass it the data using stream operations, and if you want
- * to read the checksum, first call FinishChecksum(), followed by
- * GetChecksum().
+ * to read the checksum, first call finish_checksum(), followed by
+ * get_checksum().
  *
  * Instances of this class can be copied.
  */
@@ -93,24 +93,24 @@ public:
 	///
 	/// \param data data to compute chksum for
 	/// \param size size of data
-	void Data(const void * const newdata, const size_t size) {
+	void data(const void * const newdata, const size_t size) {
 		assert(can_handle_data);
 		md5_process_bytes(newdata, size, &ctx);
 	}
 
 	/// This function finishes the checksum calculation.
 	/// After this, no more data may be written to the checksum.
-	void FinishChecksum() {
+	void finish_checksum() {
 		assert(can_handle_data);
 		can_handle_data = 0;
 		md5_finish_ctx(&ctx, sum.data);
 	}
 
-	/// Retrieve the checksum. Note that \ref FinishChecksum must be called
+	/// Retrieve the checksum. Note that \ref finish_checksum must be called
 	/// before this function.
 	///
 	/// \return a pointer to an array of 16 bytes containing the checksum.
-	const Md5Checksum & GetChecksum() const {
+	const Md5Checksum & get_checksum() const {
 		assert(!can_handle_data);
 		return sum;
 	}

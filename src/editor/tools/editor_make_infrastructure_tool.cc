@@ -31,7 +31,7 @@
  * Callback function to calculate correct overlays
  */
 int32_t
-Editor_Make_Infrastructure_Tool_Callback
+editor_make_infrastructure_tool_callback
 	(const Widelands::TCoords<Widelands::FCoords>& c,
 	 Widelands::EditorGameBase& egbase,
 	 int32_t const player)

@@ -344,7 +344,7 @@ MessageId Player::add_message_with_timeout
 			 map.calc_distance(tmp_message.second->position(), position) <= radius)
 		{
 			delete &m;
-			return MessageId::Null();
+			return MessageId::null();
 		}
 	}
 	return add_message(game, m);
@@ -869,7 +869,7 @@ void Player::drop_soldier(PlayerImmovable & imm, Soldier & soldier) {
 	if (soldier.descr().type() != MapObjectType::SOLDIER)
 		return;
 	if (upcast(SoldierControl, ctrl, &imm))
-		ctrl->dropSoldier(soldier);
+		ctrl->drop_soldier(soldier);
 }
 
 /*
@@ -878,14 +878,14 @@ void Player::drop_soldier(PlayerImmovable & imm, Soldier & soldier) {
 */
 
 /**
- * Get a list of soldiers that this player can be used to attack the
+ * Get a list of soldiers that this player can use to attack the
  * building at the given flag.
  *
  * The default attack should just take the first N soldiers of the
  * returned array.
  */
 // TODO(unknown): Perform a meaningful sort on the soldiers array.
-uint32_t Player::findAttackSoldiers
+uint32_t Player::find_attack_soldiers
 	(Flag & flag, std::vector<Soldier *> * soldiers, uint32_t nr_wanted)
 {
 	uint32_t count = 0;
@@ -908,8 +908,8 @@ uint32_t Player::findAttackSoldiers
 	for (BaseImmovable * temp_flag : flags) {
 		upcast(Flag, attackerflag, temp_flag);
 		upcast(MilitarySite, ms, attackerflag->get_building());
-		std::vector<Soldier *> const present = ms->presentSoldiers();
-		uint32_t const nr_staying = ms->minSoldierCapacity();
+		std::vector<Soldier *> const present = ms->present_soldiers();
+		uint32_t const nr_staying = ms->min_soldier_capacity();
 		uint32_t const nr_present = present.size();
 		if (nr_staying < nr_present) {
 			uint32_t const nr_taken =
@@ -943,14 +943,14 @@ void Player::enemyflagaction
 	else if (is_hostile(flag.owner())) {
 		if (Building * const building = flag.get_building()) {
 			if (upcast(Attackable, attackable, building)) {
-				if (attackable->canAttack()) {
+				if (attackable->can_attack()) {
 					std::vector<Soldier *> attackers;
-					findAttackSoldiers(flag, &attackers, count);
+					find_attack_soldiers(flag, &attackers, count);
 					assert(attackers.size() <= count);
 
 					for (Soldier * temp_attacker : attackers) {
 						upcast(MilitarySite, ms, temp_attacker->get_location(egbase()));
-						ms->sendAttacker(*temp_attacker, *building);
+						ms->send_attacker(*temp_attacker, *building);
 					}
 				}
 			}
@@ -1032,7 +1032,7 @@ void Player::rediscover_node
 			if (const BaseImmovable * base_immovable = f.field->get_immovable()) {
 				map_object_descr = &base_immovable->descr();
 
-				if (Road::IsRoadDescr(map_object_descr))
+				if (Road::is_road_descr(map_object_descr))
 					map_object_descr = nullptr;
 				else if (upcast(Building const, building, base_immovable)) {
 					if (building->get_position() != f)
@@ -1280,12 +1280,12 @@ void Player::update_building_statistics
 	}
 }
 
-void Player::setAI(const std::string & ai)
+void Player::set_ai(const std::string & ai)
 {
 	m_ai = ai;
 }
 
-const std::string & Player::getAI() const
+const std::string & Player::get_ai() const
 {
 	return m_ai;
 }
@@ -1300,19 +1300,19 @@ const std::string & Player::getAI() const
  *   2 - with consumption statistics
  *   3 - with stock statistics
  */
-void Player::ReadStatistics(FileRead & fr, uint32_t const version)
+void Player::read_statistics(FileRead & fr, uint32_t const version)
 {
 	 //version 1, 2 and 3 only differs in an additional statistic.
 	 //Use version 1 code for all of them
 	if ((version == 2) || (version == 1) || (version == 3)) {
-		uint16_t nr_wares = fr.Unsigned16();
-		uint16_t nr_entries = fr.Unsigned16();
+		uint16_t nr_wares = fr.unsigned_16();
+		uint16_t nr_entries = fr.unsigned_16();
 
 		for (uint32_t i = 0; i < m_current_produced_statistics.size(); ++i)
 			m_ware_productions[i].resize(nr_entries);
 
 		for (uint16_t i = 0; i < nr_wares; ++i) {
-			std::string name = fr.CString();
+			std::string name = fr.c_string();
 			WareIndex idx = tribe().ware_index(name);
 			if (idx == INVALID_INDEX) {
 				log
@@ -1321,22 +1321,22 @@ void Player::ReadStatistics(FileRead & fr, uint32_t const version)
 				continue;
 			}
 
-			m_current_produced_statistics[idx] = fr.Unsigned32();
+			m_current_produced_statistics[idx] = fr.unsigned_32();
 
 			for (uint32_t j = 0; j < nr_entries; ++j)
-				m_ware_productions[idx][j] = fr.Unsigned32();
+				m_ware_productions[idx][j] = fr.unsigned_32();
 		}
 
 		//read consumption statistics if it exists
 		if ((version == 2) || (version == 3)) {
-			nr_wares = fr.Unsigned16();
-			nr_entries = fr.Unsigned16();
+			nr_wares = fr.unsigned_16();
+			nr_entries = fr.unsigned_16();
 
 			for (uint32_t i = 0; i < m_current_consumed_statistics.size(); ++i)
 				m_ware_consumptions[i].resize(nr_entries);
 
 			for (uint16_t i = 0; i < nr_wares; ++i) {
-				std::string name = fr.CString();
+				std::string name = fr.c_string();
 				WareIndex idx = tribe().ware_index(name);
 				if (idx == INVALID_INDEX) {
 					log
@@ -1345,22 +1345,22 @@ void Player::ReadStatistics(FileRead & fr, uint32_t const version)
 					continue;
 				}
 
-				m_current_consumed_statistics[idx] = fr.Unsigned32();
+				m_current_consumed_statistics[idx] = fr.unsigned_32();
 
 				for (uint32_t j = 0; j < nr_entries; ++j)
-					m_ware_consumptions[idx][j] = fr.Unsigned32();
+					m_ware_consumptions[idx][j] = fr.unsigned_32();
 			}
 
 			//read stock statistics if it exists
 			if (version == 3) {
-				nr_wares = fr.Unsigned16();
-				nr_entries = fr.Unsigned16();
+				nr_wares = fr.unsigned_16();
+				nr_entries = fr.unsigned_16();
 
 				for (uint32_t i = 0; i < m_ware_stocks.size(); ++i)
 					m_ware_stocks[i].resize(nr_entries);
 
 				for (uint16_t i = 0; i < nr_wares; ++i) {
-					std::string name = fr.CString();
+					std::string name = fr.c_string();
 					WareIndex idx = tribe().ware_index(name);
 					if (idx == INVALID_INDEX) {
 						log
@@ -1370,13 +1370,13 @@ void Player::ReadStatistics(FileRead & fr, uint32_t const version)
 					}
 
 					for (uint32_t j = 0; j < nr_entries; ++j)
-						m_ware_stocks[idx][j] = fr.Unsigned32();
+						m_ware_stocks[idx][j] = fr.unsigned_32();
 				}
 			}
 		}
 	} else if (version == 0) {
-		uint16_t nr_wares = fr.Unsigned16();
-		uint16_t nr_entries = fr.Unsigned16();
+		uint16_t nr_wares = fr.unsigned_16();
+		uint16_t nr_entries = fr.unsigned_16();
 
 		if (nr_wares > 0) {
 			if (nr_wares == tribe().get_nrwares()) {
@@ -1384,11 +1384,11 @@ void Player::ReadStatistics(FileRead & fr, uint32_t const version)
 				assert(m_current_produced_statistics.size() == nr_wares);
 
 				for (uint32_t i = 0; i < m_current_produced_statistics.size(); ++i) {
-					m_current_produced_statistics[i] = fr.Unsigned32();
+					m_current_produced_statistics[i] = fr.unsigned_32();
 					m_ware_productions[i].resize(nr_entries);
 
 					for (uint32_t j = 0; j < m_ware_productions[i].size(); ++j)
-						m_ware_productions[i][j] = fr.Unsigned32();
+						m_ware_productions[i][j] = fr.unsigned_32();
 				}
 			} else {
 				log
@@ -1399,10 +1399,10 @@ void Player::ReadStatistics(FileRead & fr, uint32_t const version)
 
 				// Eat and discard all data
 				for (uint32_t i = 0; i < nr_wares; ++i) {
-					fr.Unsigned32();
+					fr.unsigned_32();
 
 					for (uint32_t j = 0; j < nr_entries; ++j)
-						fr.Unsigned32();
+						fr.unsigned_32();
 				}
 			}
 		}
@@ -1446,39 +1446,39 @@ void Player::ReadStatistics(FileRead & fr, uint32_t const version)
 /**
  * Write statistics data to the give file
  */
-void Player::WriteStatistics(FileWrite & fw) const {
+void Player::write_statistics(FileWrite & fw) const {
 	//write produce statistics
-	fw.Unsigned16(m_current_produced_statistics.size());
-	fw.Unsigned16(m_ware_productions[0].size());
+	fw.unsigned_16(m_current_produced_statistics.size());
+	fw.unsigned_16(m_ware_productions[0].size());
 
 	for (uint8_t i = 0; i < m_current_produced_statistics.size(); ++i) {
-		fw.CString
+		fw.c_string
 			(tribe().get_ware_descr(i)->name());
-		fw.Unsigned32(m_current_produced_statistics[i]);
+		fw.unsigned_32(m_current_produced_statistics[i]);
 		for (uint32_t j = 0; j < m_ware_productions[i].size(); ++j)
-			fw.Unsigned32(m_ware_productions[i][j]);
+			fw.unsigned_32(m_ware_productions[i][j]);
 	}
 
 	//write consume statistics
-	fw.Unsigned16(m_current_consumed_statistics.size());
-	fw.Unsigned16(m_ware_consumptions[0].size());
+	fw.unsigned_16(m_current_consumed_statistics.size());
+	fw.unsigned_16(m_ware_consumptions[0].size());
 
 	for (uint8_t i = 0; i < m_current_consumed_statistics.size(); ++i) {
-		fw.CString
+		fw.c_string
 			(tribe().get_ware_descr(i)->name());
-		fw.Unsigned32(m_current_consumed_statistics[i]);
+		fw.unsigned_32(m_current_consumed_statistics[i]);
 		for (uint32_t j = 0; j < m_ware_consumptions[i].size(); ++j)
-			fw.Unsigned32(m_ware_consumptions[i][j]);
+			fw.unsigned_32(m_ware_consumptions[i][j]);
 	}
 
 	//write stock statistics
-	fw.Unsigned16(m_ware_stocks.size());
-	fw.Unsigned16(m_ware_stocks[0].size());
+	fw.unsigned_16(m_ware_stocks.size());
+	fw.unsigned_16(m_ware_stocks[0].size());
 
 	for (uint8_t i = 0; i < m_ware_stocks.size(); ++i) {
-		fw.CString(tribe().get_ware_descr(i)->name());
+		fw.c_string(tribe().get_ware_descr(i)->name());
 		for (uint32_t j = 0; j < m_ware_stocks[i].size(); ++j)
-			fw.Unsigned32(m_ware_stocks[i][j]);
+			fw.unsigned_32(m_ware_stocks[i][j]);
 	}
 }
 

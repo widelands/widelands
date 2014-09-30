@@ -63,7 +63,7 @@ bool CheckStepRoadAI::allowed(
 	return true;
 }
 
-bool CheckStepRoadAI::reachabledest(Map& map, FCoords const dest) const {
+bool CheckStepRoadAI::reachable_dest(Map& map, FCoords const dest) const {
 	NodeCaps const caps = dest.field->nodecaps();
 
 	if (!(caps & movecaps_)) {

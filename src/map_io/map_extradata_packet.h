@@ -31,8 +31,8 @@ namespace Widelands {
  */
 class MapExtradataPacket {
 public:
-	void Read(FileSystem&, bool);
-	void Write(FileSystem&, EditorGameBase&);
+	void read(FileSystem&, bool);
+	void write(FileSystem&, EditorGameBase&);
 };
 
 }  // namespace Widelands

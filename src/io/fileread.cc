@@ -23,19 +23,19 @@ FileRead::FileRead() : data_(nullptr), length_(0) {}
 
 FileRead::~FileRead() {
 	if (data_) {
-		Close();
+		close();
 	}
 }
 
-void FileRead::Open(FileSystem& fs, const std::string& filename) {
+void FileRead::open(FileSystem& fs, const std::string& filename) {
 	assert(!data_);
-	data_ = static_cast<char*>(fs.Load(filename, length_));
+	data_ = static_cast<char*>(fs.load(filename, length_));
 	filepos_ = 0;
 }
 
-bool FileRead::TryOpen(FileSystem& fs, const std::string& filename) {
+bool FileRead::try_open(FileSystem& fs, const std::string& filename) {
 	try {
-		Open(fs, filename);
+		open(fs, filename);
 	}
 	catch (const std::exception&) {
 		return false;
@@ -43,32 +43,32 @@ bool FileRead::TryOpen(FileSystem& fs, const std::string& filename) {
 	return true;
 }
 
-void FileRead::Close() {
+void FileRead::close() {
 	assert(data_);
 	free(data_);
 	data_ = nullptr;
 }
 
-size_t FileRead::GetSize() const {
+size_t FileRead::get_size() const {
 	return length_;
 }
 
-bool FileRead::EndOfFile() const {
+bool FileRead::end_of_file() const {
 	return length_ <= filepos_;
 }
 
-void FileRead::SetFilePos(Pos const pos) {
+void FileRead::set_file_pos(Pos const pos) {
 	assert(data_);
 	if (pos >= length_)
 		throw FileBoundaryExceeded();
 	filepos_ = pos;
 }
 
-FileRead::Pos FileRead::GetPos() const {
+FileRead::Pos FileRead::get_pos() const {
 	return filepos_;
 }
 
-size_t FileRead::Data(void* dst, size_t bufsize) {
+size_t FileRead::data(void* dst, size_t bufsize) {
 	assert(data_);
 	size_t read = 0;
 	for (; read < bufsize && filepos_ < length_; ++read, ++filepos_) {
@@ -77,10 +77,10 @@ size_t FileRead::Data(void* dst, size_t bufsize) {
 	return read;
 }
 
-char* FileRead::Data(uint32_t const bytes, const Pos pos) {
+char* FileRead::data(uint32_t const bytes, const Pos pos) {
 	assert(data_);
 	Pos i = pos;
-	if (pos.isNull()) {
+	if (pos.is_null()) {
 		i = filepos_;
 		filepos_ += bytes;
 	}
@@ -89,10 +89,10 @@ char* FileRead::Data(uint32_t const bytes, const Pos pos) {
 	return data_ + i;
 }
 
-char* FileRead::CString(Pos const pos) {
+char* FileRead::c_string(Pos const pos) {
 	assert(data_);
 
-	Pos i = pos.isNull() ? filepos_ : pos;
+	Pos i = pos.is_null() ? filepos_ : pos;
 	if (i >= length_)
 		throw FileBoundaryExceeded();
 	char* const result = data_ + i;
@@ -101,17 +101,17 @@ char* FileRead::CString(Pos const pos) {
 	++i;                   //  beyond the null
 	if (i > (length_ + 1))  // allow EOF as end marker for string
 		throw FileBoundaryExceeded();
-	if (pos.isNull())
+	if (pos.is_null())
 		filepos_ = i;
 	return result;
 }
 
-char const* FileRead::CString() {
-	return CString(Pos::Null());
+char const* FileRead::c_string() {
+	return c_string(Pos::null());
 }
 
-char* FileRead::ReadLine() {
-	if (EndOfFile())
+char* FileRead::read_line() {
+	if (end_of_file())
 		return nullptr;
 	char* result = data_ + filepos_;
 	for (; data_[filepos_] && data_[filepos_] != '\n'; ++filepos_)

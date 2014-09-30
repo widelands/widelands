@@ -40,7 +40,7 @@ namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 4
 
-void MapFlagdataPacket::Read
+void MapFlagdataPacket::read
 	(FileSystem            &       fs,
 	 EditorGameBase      &       egbase,
 	 bool                    const skip,
@@ -50,19 +50,19 @@ void MapFlagdataPacket::Read
 		return;
 
 	FileRead fr;
-	try {fr.Open(fs, "binary/flag_data");} catch (...) {return;}
+	try {fr.open(fs, "binary/flag_data");} catch (...) {return;}
 
 	try {
-		uint16_t const packet_version = fr.Unsigned16();
+		uint16_t const packet_version = fr.unsigned_16();
 		if (1 <= packet_version && packet_version <= CURRENT_PACKET_VERSION) {
 			const Map  & map    = egbase.map();
 			Extent const extent = map.extent();
 			for (;;) {
-				if (2 <= packet_version && fr.EndOfFile())
+				if (2 <= packet_version && fr.end_of_file())
 					break;
-				Serial const serial = fr.Unsigned32();
+				Serial const serial = fr.unsigned_32();
 				if (packet_version < 2 && serial == 0xffffffff) {
-					if (!fr.EndOfFile())
+					if (!fr.end_of_file())
 						throw GameDataError
 							("expected end of file after serial 0xffffffff");
 					break;
@@ -77,7 +77,7 @@ void MapFlagdataPacket::Read
 							(upcast
 							 	(Flag const,
 							 	 mf,
-							 	 map[flag.m_position = ReadCoords32(&fr, extent)]
+							 	 map[flag.m_position = read_coords_32(&fr, extent)]
 							 	 .get_immovable()))
 						{
 							if (mf != &flag)
@@ -90,7 +90,7 @@ void MapFlagdataPacket::Read
 								("no flag at given position (%i, %i)",
 								 flag.m_position.x, flag.m_position.y);
 					}
-					flag.m_animstart = fr.Unsigned16();
+					flag.m_animstart = fr.unsigned_16();
 
 					{
 						FCoords building_position = map.get_fcoords(flag.m_position);
@@ -100,7 +100,7 @@ void MapFlagdataPacket::Read
 								(building_position.field->get_immovable());
 					}
 					if (packet_version < 3) {
-						if (uint32_t const building_serial = fr.Unsigned32())
+						if (uint32_t const building_serial = fr.unsigned_32())
 							try {
 								const Building & building =
 									mol.get<Building>(building_serial);
@@ -125,25 +125,25 @@ void MapFlagdataPacket::Read
 					// Compatibility stuff: Read 6 bytes of attic stuff
 					// that is no longer used (was m_wares_pending)
 					for (uint32_t i = 0; i < 6; ++i)
-						fr.Unsigned32();
+						fr.unsigned_32();
 
-					flag.m_ware_capacity = fr.Unsigned32();
+					flag.m_ware_capacity = fr.unsigned_32();
 
 					{
-						uint32_t const wares_filled = fr.Unsigned32();
+						uint32_t const wares_filled = fr.unsigned_32();
 						flag.m_ware_filled = wares_filled;
 						for (uint32_t i = 0; i < wares_filled; ++i) {
-							flag.m_wares[i].pending = fr.Unsigned8();
+							flag.m_wares[i].pending = fr.unsigned_8();
 							if (packet_version < 4)
 								flag.m_wares[i].priority = 0;
 							else
-								flag.m_wares[i].priority = fr.Signed32();
-							uint32_t const ware_serial = fr.Unsigned32();
+								flag.m_wares[i].priority = fr.signed_32();
+							uint32_t const ware_serial = fr.unsigned_32();
 							try {
 								flag.m_wares[i].ware =
 									&mol.get<WareInstance>(ware_serial);
 
-								if (uint32_t const nextstep_serial = fr.Unsigned32()) {
+								if (uint32_t const nextstep_serial = fr.unsigned_32()) {
 									try {
 										flag.m_wares[i].nextstep =
 											&mol.get<PlayerImmovable>(nextstep_serial);
@@ -160,7 +160,7 @@ void MapFlagdataPacket::Read
 							}
 						}
 
-						if (uint32_t const always_call_serial = fr.Unsigned32())
+						if (uint32_t const always_call_serial = fr.unsigned_32())
 							try {
 								flag.m_always_call_for_flag =
 									&mol.get<Flag>(always_call_serial);
@@ -173,9 +173,9 @@ void MapFlagdataPacket::Read
 							flag.m_always_call_for_flag = nullptr;
 
 						//  workers waiting
-						uint16_t const nr_workers = fr.Unsigned16();
+						uint16_t const nr_workers = fr.unsigned_16();
 						for (uint32_t i = 0; i < nr_workers; ++i) {
-							uint32_t const worker_serial = fr.Unsigned32();
+							uint32_t const worker_serial = fr.unsigned_32();
 							try {
 								//  The check that this worker actually has a
 								//  waitforcapacity task for this flag is in
@@ -190,23 +190,23 @@ void MapFlagdataPacket::Read
 						}
 
 						//  flag jobs
-						uint16_t const nr_jobs = fr.Unsigned16();
+						uint16_t const nr_jobs = fr.unsigned_16();
 						assert(flag.m_flag_jobs.empty());
 						for (uint16_t i = 0; i < nr_jobs; ++i) {
 							Flag::FlagJob f;
-							if (fr.Unsigned8()) {
+							if (fr.unsigned_8()) {
 								f.request =
 									new Request
 										(flag,
 										 0,
 										 Flag::flag_job_request_callback,
 										 wwWORKER);
-								f.request->Read
+								f.request->read
 									(fr, ref_cast<Game, EditorGameBase>(egbase), mol);
 							} else {
 								f.request = nullptr;
 							}
-							f.program = fr.CString();
+							f.program = fr.c_string();
 							flag.m_flag_jobs.push_back(f);
 						}
 
@@ -225,13 +225,13 @@ void MapFlagdataPacket::Read
 }
 
 
-void MapFlagdataPacket::Write
+void MapFlagdataPacket::write
 	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver & mos)
 
 {
 	FileWrite fw;
 
-	fw.Unsigned16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(CURRENT_PACKET_VERSION);
 
 	const Map & map = egbase.map();
 	const Field & fields_end = map[map.max_index()];
@@ -240,48 +240,48 @@ void MapFlagdataPacket::Write
 			assert(mos.is_object_known(*flag));
 			assert(!mos.is_object_saved(*flag));
 
-			fw.Unsigned32(mos.get_object_file_index(*flag));
+			fw.unsigned_32(mos.get_object_file_index(*flag));
 
 			//  Owner is already written in the existanz packet.
 
 			//  Animation is set by creator.
-			fw.Unsigned16(flag->m_animstart);
+			fw.unsigned_16(flag->m_animstart);
 
 			//  Roads are not saved, they are set on load.
 
 			// Compatibility stuff: Write 6 bytes of attic stuff that is
 			// no longer used (was m_wares_pending)
 			for (uint32_t i = 0; i < 6; ++i)
-				fw.Unsigned32(0);
+				fw.unsigned_32(0);
 
-			fw.Unsigned32(flag->m_ware_capacity);
+			fw.unsigned_32(flag->m_ware_capacity);
 
-			fw.Unsigned32(flag->m_ware_filled);
+			fw.unsigned_32(flag->m_ware_filled);
 
 			for (int32_t i = 0; i < flag->m_ware_filled; ++i) {
-				fw.Unsigned8(flag->m_wares[i].pending);
-				fw.Signed32(flag->m_wares[i].priority);
+				fw.unsigned_8(flag->m_wares[i].pending);
+				fw.signed_32(flag->m_wares[i].priority);
 				assert(mos.is_object_known(*flag->m_wares[i].ware));
-				fw.Unsigned32(mos.get_object_file_index(*flag->m_wares[i].ware));
+				fw.unsigned_32(mos.get_object_file_index(*flag->m_wares[i].ware));
 				if
 					(PlayerImmovable const * const nextstep =
 					 	flag->m_wares[i].nextstep.get(egbase))
-					fw.Unsigned32(mos.get_object_file_index(*nextstep));
+					fw.unsigned_32(mos.get_object_file_index(*nextstep));
 				else
-					fw.Unsigned32(0);
+					fw.unsigned_32(0);
 			}
 
 			if (Flag const * const always_call_for = flag->m_always_call_for_flag)
 			{
 				assert(mos.is_object_known(*always_call_for));
-				fw.Unsigned32(mos.get_object_file_index(*always_call_for));
+				fw.unsigned_32(mos.get_object_file_index(*always_call_for));
 			} else
-				fw.Unsigned32(0);
+				fw.unsigned_32(0);
 
 			//  worker waiting for capacity
 			const Flag::CapacityWaitQueue & capacity_wait =
 				flag->m_capacity_wait;
-			fw.Unsigned16(capacity_wait.size());
+			fw.unsigned_16(capacity_wait.size());
 			for (const OPtr<Worker >&  temp_worker : capacity_wait) {
 				Worker const * const obj = temp_worker.get(egbase);
 				assert
@@ -293,27 +293,27 @@ void MapFlagdataPacket::Write
 					 ==
 					 flag                                               ->serial());
 				assert(mos.is_object_known(*obj));
-				fw.Unsigned32(mos.get_object_file_index(*obj));
+				fw.unsigned_32(mos.get_object_file_index(*obj));
 			}
 			const Flag::FlagJobs & flag_jobs = flag->m_flag_jobs;
-			fw.Unsigned16(flag_jobs.size());
+			fw.unsigned_16(flag_jobs.size());
 
 			for (const Flag::FlagJob& temp_job : flag_jobs) {
 				if (temp_job.request) {
-					fw.Unsigned8(1);
-					temp_job.request->Write
+					fw.unsigned_8(1);
+					temp_job.request->write
 						(fw, ref_cast<Game, EditorGameBase>(egbase), mos);
 				} else
-					fw.Unsigned8(0);
+					fw.unsigned_8(0);
 
-				fw.String(temp_job.program);
+				fw.string(temp_job.program);
 			}
 
 			mos.mark_object_as_saved(*flag);
 
 		}
 
-	fw.Write(fs, "binary/flag_data");
+	fw.write(fs, "binary/flag_data");
 }
 
 }

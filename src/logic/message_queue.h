@@ -142,7 +142,7 @@ private:
 	/// it.
 	void clear() {
 		assert_counts();
-		m_current_message_id        = MessageId::Null();
+		m_current_message_id        = MessageId::null();
 		m_counts[Message::New]      = 0;
 		m_counts[Message::Read]     = 0;
 		m_counts[Message::Archived] = 0;

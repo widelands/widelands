@@ -34,13 +34,13 @@ class MapObjectLoader;
 // This data packet contains critters on old maps. These days, the bobs are saved in the map_objects
 // packet.
 struct MapBobPacket {
-	void Read(FileSystem&,
+	void read(FileSystem&,
 	          EditorGameBase&,
 				 MapObjectLoader&,
 	          const OneWorldLegacyLookupTable& lookup_table);
 
 private:
-	void ReadBob(FileRead&,
+	void read_bob(FileRead&,
 	             EditorGameBase&,
 					 MapObjectLoader&,
 	             Coords,

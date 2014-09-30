@@ -217,7 +217,7 @@ protected:
 			ip(0),
 			phase(0),
 			flags(0),
-			coord(Coords::Null()) {}
+			coord(Coords::null()) {}
 	};
 
 	Request & request_worker(WareIndex);

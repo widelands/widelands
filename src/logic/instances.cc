@@ -44,21 +44,21 @@ CmdDestroyMapObject::CmdDestroyMapObject
 
 void CmdDestroyMapObject::execute(Game & game)
 {
-	game.syncstream().Unsigned32(obj_serial);
+	game.syncstream().unsigned_32(obj_serial);
 
 	if (MapObject * obj = game.objects().get_object(obj_serial))
 		obj->destroy (game);
 }
 
 #define CMD_DESTROY_MAP_OBJECT_VERSION 1
-void CmdDestroyMapObject::Read
+void CmdDestroyMapObject::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
-		uint16_t const packet_version = fr.Unsigned16();
+		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == CMD_DESTROY_MAP_OBJECT_VERSION) {
-			GameLogicCommand::Read(fr, egbase, mol);
-			if (Serial const serial = fr.Unsigned32())
+			GameLogicCommand::read(fr, egbase, mol);
+			if (Serial const serial = fr.unsigned_32())
 				try {
 					obj_serial = mol.get<MapObject>(serial).serial();
 				} catch (const WException & e) {
@@ -73,17 +73,17 @@ void CmdDestroyMapObject::Read
 		throw GameDataError("destroy map object: %s", e.what());
 	}
 }
-void CmdDestroyMapObject::Write
+void CmdDestroyMapObject::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
-	fw.Unsigned16(CMD_DESTROY_MAP_OBJECT_VERSION);
+	fw.unsigned_16(CMD_DESTROY_MAP_OBJECT_VERSION);
 
 	// Write base classes
-	GameLogicCommand::Write(fw, egbase, mos);
+	GameLogicCommand::write(fw, egbase, mos);
 
 	// Now serial
-	fw.Unsigned32(mos.get_object_file_index_or_zero(egbase.objects().get_object(obj_serial)));
+	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(obj_serial)));
 }
 
 CmdAct::CmdAct(int32_t const t, MapObject & o, int32_t const a) :
@@ -93,7 +93,7 @@ CmdAct::CmdAct(int32_t const t, MapObject & o, int32_t const a) :
 
 void CmdAct::execute(Game & game)
 {
-	game.syncstream().Unsigned32(obj_serial);
+	game.syncstream().unsigned_32(obj_serial);
 
 	if (MapObject * const obj = game.objects().get_object(obj_serial))
 		obj->act(game, arg);
@@ -101,14 +101,14 @@ void CmdAct::execute(Game & game)
 }
 
 #define CMD_ACT_VERSION 1
-void CmdAct::Read
+void CmdAct::read
 	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader & mol)
 {
 	try {
-		uint16_t const packet_version = fr.Unsigned16();
+		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == CMD_ACT_VERSION) {
-			GameLogicCommand::Read(fr, egbase, mol);
-			if (Serial const object_serial = fr.Unsigned32())
+			GameLogicCommand::read(fr, egbase, mol);
+			if (Serial const object_serial = fr.unsigned_32())
 				try {
 					obj_serial = mol.get<MapObject>(object_serial).serial();
 				} catch (const WException & e) {
@@ -117,7 +117,7 @@ void CmdAct::Read
 				}
 			else
 				obj_serial = 0;
-			arg = fr.Unsigned32();
+			arg = fr.unsigned_32();
 		} else
 			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
@@ -125,20 +125,20 @@ void CmdAct::Read
 		throw wexception("act: %s", e.what());
 	}
 }
-void CmdAct::Write
+void CmdAct::write
 	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
 	// First, write version
-	fw.Unsigned16(CMD_ACT_VERSION);
+	fw.unsigned_16(CMD_ACT_VERSION);
 
 	// Write base classes
-	GameLogicCommand::Write(fw, egbase, mos);
+	GameLogicCommand::write(fw, egbase, mos);
 
 	// Now serial
-	fw.Unsigned32(mos.get_object_file_index_or_zero(egbase.objects().get_object(obj_serial)));
+	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(obj_serial)));
 
 	// And arg
-	fw.Unsigned32(arg);
+	fw.unsigned_32(arg);
 }
 
 
@@ -431,14 +431,14 @@ int32_t MapObject::get_training_attribute(uint32_t) const
 uint32_t MapObject::schedule_act
 	(Game & game, uint32_t const tdelta, uint32_t const data)
 {
-	if (tdelta < Forever()) {
+	if (tdelta < endless()) {
 		uint32_t const time = game.get_gametime() + tdelta;
 
 		game.cmdqueue().enqueue (new CmdAct(time, *this, data));
 
 		return time;
 	} else
-		return Never();
+		return never();
 }
 
 
@@ -495,16 +495,16 @@ void MapObject::molog(char const * fmt, ...) const
 void MapObject::Loader::load(FileRead & fr)
 {
 	try {
-		uint8_t const header = fr.Unsigned8();
+		uint8_t const header = fr.unsigned_8();
 		if (header != HeaderMapObject)
 			throw wexception
 				("header is %u, expected %u", header, HeaderMapObject);
 
-		uint8_t const version = fr.Unsigned8();
+		uint8_t const version = fr.unsigned_8();
 		if (version != CURRENT_SAVEGAME_VERSION)
 			throw GameDataError("unknown/unhandled version %u", version);
 
-		Serial const serial = fr.Unsigned32();
+		Serial const serial = fr.unsigned_32();
 		try {
 			mol().register_object<MapObject>(serial, *get_object());
 		} catch (const WException & e) {
@@ -547,10 +547,10 @@ void MapObject::Loader::load_finish()
 void MapObject::save
 	(EditorGameBase &, MapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(HeaderMapObject);
-	fw.Unsigned8(CURRENT_SAVEGAME_VERSION);
+	fw.unsigned_8(HeaderMapObject);
+	fw.unsigned_8(CURRENT_SAVEGAME_VERSION);
 
-	fw.Unsigned32(mos.get_object_file_index(*this));
+	fw.unsigned_32(mos.get_object_file_index(*this));
 }
 
 std::string to_string(const MapObjectType type) {

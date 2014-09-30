@@ -31,7 +31,7 @@ namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 1
 
-void MapElementalPacket::Pre_Read(FileSystem & fs, Map * map)
+void MapElementalPacket::pre_read(FileSystem & fs, Map * map)
 {
 	Profile prof;
 	prof.read("elemental", nullptr, fs);
@@ -70,14 +70,14 @@ void MapElementalPacket::Pre_Read(FileSystem & fs, Map * map)
 }
 
 
-void MapElementalPacket::Read
+void MapElementalPacket::read
 	(FileSystem & fs, EditorGameBase & egbase, bool, MapObjectLoader &)
 {
-	Pre_Read(fs, &egbase.map());
+	pre_read(fs, &egbase.map());
 }
 
 
-void MapElementalPacket::Write
+void MapElementalPacket::write
 	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
 {
 

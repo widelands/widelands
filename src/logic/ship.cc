@@ -285,7 +285,7 @@ bool Ship::ship_update_transport(Game & game, Bob::State &) {
 		if (m_fleet->get_path(*lastdock, *dst, path)) {
 			uint32_t closest_idx = std::numeric_limits<uint32_t>::max();
 			uint32_t closest_dist = std::numeric_limits<uint32_t>::max();
-			Coords closest_target(Coords::Null());
+			Coords closest_target(Coords::null());
 
 			Coords cur(path.get_start());
 			for (uint32_t idx = 0; idx <= path.get_nsteps(); ++idx) {
@@ -374,7 +374,7 @@ void Ship::ship_update_expedition(Game & game, Bob::State &) {
 				FCoords coord = fc;
 				bool invalid = false;
 				for (uint8_t step = 0; !invalid && step < 5; ++step) {
-					if (coord.field->get_owned_by() != Neutral() && coord.field->get_owned_by() != pn) {
+					if (coord.field->get_owned_by() != neutral() && coord.field->get_owned_by() != pn) {
 						invalid = true;
 						continue;
 					}
@@ -949,7 +949,7 @@ void Ship::Loader::load(FileRead & fr, uint8_t version)
 	if (version >= 2) {
 		// The state the ship is in
 		if (version >= 3) {
-			m_ship_state = fr.Unsigned8();
+			m_ship_state = fr.unsigned_8();
 
 			// Expedition specific data
 			if
@@ -964,28 +964,28 @@ void Ship::Loader::load(FileRead & fr, uint8_t version)
 				m_expedition.reset(new Expedition());
 				// Currently seen port build spaces
 				m_expedition->seen_port_buildspaces.reset(new std::list<Coords>());
-				uint8_t numofports = fr.Unsigned8();
+				uint8_t numofports = fr.unsigned_8();
 				for (uint8_t i = 0; i < numofports; ++i)
-					m_expedition->seen_port_buildspaces->push_back(ReadCoords32(&fr));
+					m_expedition->seen_port_buildspaces->push_back(read_coords_32(&fr));
 				// Swimability of the directions
 				for (uint8_t i = 0; i < LAST_DIRECTION; ++i)
-					m_expedition->swimable[i] = (fr.Unsigned8() == 1);
+					m_expedition->swimable[i] = (fr.unsigned_8() == 1);
 				// whether scouting or exploring
-				m_expedition->island_exploration = fr.Unsigned8() == 1;
+				m_expedition->island_exploration = fr.unsigned_8() == 1;
 				// current direction
-				m_expedition->direction = fr.Unsigned8();
+				m_expedition->direction = fr.unsigned_8();
 				// Start coordinates of an island exploration
-				m_expedition->exploration_start = ReadCoords32(&fr);
+				m_expedition->exploration_start = read_coords_32(&fr);
 				// Whether the exploration is done clockwise or counter clockwise
-				m_expedition->clockwise = fr.Unsigned8() == 1;
+				m_expedition->clockwise = fr.unsigned_8() == 1;
 			}
 		} else
 			m_ship_state = TRANSPORT;
 
-		m_lastdock = fr.Unsigned32();
-		m_destination = fr.Unsigned32();
+		m_lastdock = fr.unsigned_32();
+		m_destination = fr.unsigned_32();
 
-		m_items.resize(fr.Unsigned32());
+		m_items.resize(fr.unsigned_32());
 		for (ShippingItem::Loader& item_loader : m_items) {
 			item_loader.load(fr);
 		}
@@ -1043,10 +1043,10 @@ MapObject::Loader * Ship::load
 	try {
 		// The header has been peeled away by the caller
 
-		uint8_t const version = fr.Unsigned8();
+		uint8_t const version = fr.unsigned_8();
 		if (1 <= version && version <= SHIP_SAVEGAME_VERSION) {
-			std::string owner = fr.CString();
-			std::string name = fr.CString();
+			std::string owner = fr.c_string();
+			std::string name = fr.c_string();
 			const ShipDescr * descr = nullptr;
 
 			egbase.manually_load_tribe(owner);
@@ -1073,46 +1073,46 @@ MapObject::Loader * Ship::load
 void Ship::save
 	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(HeaderShip);
-	fw.Unsigned8(SHIP_SAVEGAME_VERSION);
+	fw.unsigned_8(HeaderShip);
+	fw.unsigned_8(SHIP_SAVEGAME_VERSION);
 
-	fw.CString(descr().get_owner_tribe()->name());
-	fw.CString(descr().name());
+	fw.c_string(descr().get_owner_tribe()->name());
+	fw.c_string(descr().name());
 
 	Bob::save(egbase, mos, fw);
 
 	// state the ship is in
-	fw.Unsigned8(m_ship_state);
+	fw.unsigned_8(m_ship_state);
 
 	// expedition specific data
 	if (state_is_expedition()) {
 		// currently seen port buildspaces
 		assert(m_expedition->seen_port_buildspaces);
-		fw.Unsigned8(m_expedition->seen_port_buildspaces->size());
+		fw.unsigned_8(m_expedition->seen_port_buildspaces->size());
 		for
 			(std::list<Coords>::const_iterator it = m_expedition->seen_port_buildspaces->begin();
 			 it != m_expedition->seen_port_buildspaces->end();
 			 ++it)
 		{
-			WriteCoords32(&fw, *it);
+			write_coords_32(&fw, *it);
 		}
 		// swimability of the directions
 		for (uint8_t i = 0; i < LAST_DIRECTION; ++i)
-			fw.Unsigned8(m_expedition->swimable[i] ? 1 : 0);
+			fw.unsigned_8(m_expedition->swimable[i] ? 1 : 0);
 		// whether scouting or exploring
-		fw.Unsigned8(m_expedition->island_exploration ? 1 : 0);
+		fw.unsigned_8(m_expedition->island_exploration ? 1 : 0);
 		// current direction
-		fw.Unsigned8(m_expedition->direction);
+		fw.unsigned_8(m_expedition->direction);
 		// Start coordinates of an island exploration
-		WriteCoords32(&fw, m_expedition->exploration_start);
+		write_coords_32(&fw, m_expedition->exploration_start);
 		// Whether the exploration is done clockwise or counter clockwise
-		fw.Unsigned8(m_expedition->clockwise ? 1 : 0);
+		fw.unsigned_8(m_expedition->clockwise ? 1 : 0);
 	}
 
-	fw.Unsigned32(mos.get_object_file_index_or_zero(m_lastdock.get(egbase)));
-	fw.Unsigned32(mos.get_object_file_index_or_zero(m_destination.get(egbase)));
+	fw.unsigned_32(mos.get_object_file_index_or_zero(m_lastdock.get(egbase)));
+	fw.unsigned_32(mos.get_object_file_index_or_zero(m_destination.get(egbase)));
 
-	fw.Unsigned32(m_items.size());
+	fw.unsigned_32(m_items.size());
 	for (ShippingItem& shipping_item : m_items) {
 		shipping_item.save(egbase, mos, fw);
 	}
