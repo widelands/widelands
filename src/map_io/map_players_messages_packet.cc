@@ -96,13 +96,13 @@ void MapPlayersMessagesPacket::read
 							 "gametime is only %u",
 							 sent, gametime);
 
-					Message::Status status = Message::Archived; //  default status
+					Message::Status status = Message::Status::kArchived; //  default status
 					if (char const * const status_string = s->get_string("status")) {
 						try {
 							if      (!strcmp(status_string, "new"))
-								status = Message::New;
+								status = Message::Status::kNew;
 							else if (!strcmp(status_string, "read"))
-								status = Message::Read;
+								status = Message::Status::kRead;
 							else
 								throw GameDataError
 									("expected %s but found \"%s\"",
@@ -163,13 +163,13 @@ void MapPlayersMessagesPacket::write
 			if (Coords const c =       message.position())
 				set_coords("position",  c, &s);
 			switch (message.status()) {
-			case Message::New:
+			case Message::Status::kNew:
 				s.set_string("status",    "new");
 				break;
-			case Message::Read:
+			case Message::Status::kRead:
 				s.set_string("status",    "read");
 				break;
-			case Message::Archived: //  The default status. Do not write.
+			case Message::Status::kArchived: //  The default status. Do not write.
 				break;
 			default:
 				assert(false);

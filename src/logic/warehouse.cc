@@ -455,21 +455,21 @@ void Warehouse::init(EditorGameBase & egbase)
 		if (descr().name() == "port") {
 			send_message
 				(ref_cast<Game, EditorGameBase>(egbase),
-				 Message::Type::seafaring,
+				 Message::Type::kSeafaring,
 				 descr().descname(),
 				 _("A new port was added to your economy."),
 				 true);
 		} else if (descr().name() == "headquarters") {
 			send_message
 				(ref_cast<Game, EditorGameBase>(egbase),
-				 Message::Type::economy,
+				 Message::Type::kEconomy,
 				 descr().descname(),
 				 _("A new headquarters was added to your economy."),
 				 true);
 		} else {
 			send_message
 				(ref_cast<Game, EditorGameBase>(egbase),
-				 Message::Type::economy,
+				 Message::Type::kEconomy,
 				 descr().descname(),
 				 _("A new warehouse was added to your economy."),
 				 true);

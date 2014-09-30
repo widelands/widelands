@@ -70,7 +70,7 @@ GameMessageMenu::GameMessageMenu
 				 "",
 				 true);
 	m_geologistsbtn->sigclicked.connect
-			(boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::geologists));
+			(boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::kGeologists));
 
 	m_economybtn =
 			new UI::Button
@@ -81,7 +81,7 @@ GameMessageMenu::GameMessageMenu
 				 "",
 				 true);
 	m_economybtn->sigclicked.connect
-			(boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::economy));
+			(boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::kEconomy));
 
 	m_seafaringbtn =
 			new UI::Button
@@ -92,7 +92,7 @@ GameMessageMenu::GameMessageMenu
 				 "",
 				 true);
 	m_seafaringbtn->sigclicked.connect
-			(boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::seafaring));
+			(boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::kSeafaring));
 
 	m_warfarebtn =
 			new UI::Button
@@ -103,7 +103,7 @@ GameMessageMenu::GameMessageMenu
 				 "",
 				 true);
 	m_warfarebtn->sigclicked.connect
-			(boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::warfare));
+			(boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::kWarfare));
 
 	m_scenariobtn =
 			new UI::Button
@@ -114,9 +114,9 @@ GameMessageMenu::GameMessageMenu
 				 "",
 				 true);
 	m_scenariobtn->sigclicked.connect
-			(boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::scenario));
+			(boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::kScenario));
 
-	m_message_filter = Widelands::Message::Type::allMessages;
+	m_message_filter = Widelands::Message::Type::kAllMessages;
 	set_filter_messages_tooltips();
 	// End: Buttons for message types
 
@@ -206,7 +206,7 @@ bool GameMessageMenu::status_compare(uint32_t a, uint32_t b)
 	const Message * msgb = mq[MessageId((*list)[b])];
 
 	if (msga && msgb) {
-		return msga->status() == Message::New && msgb->status() != Message::New;
+		return msga->status() == Message::Status::kNew && msgb->status() != Message::Status::kNew;
 	}
 	return false; // shouldn't happen
 }
@@ -223,7 +223,7 @@ void GameMessageMenu::show_new_message
 	assert(iplayer().player().messages()[id] == &message);
 	assert(!list->find(id.value()));
 	Message::Status const status = message.status();
-	if ((mode == Archive) != (status == Message::Archived))
+	if ((mode == Archive) != (status == Message::Status::kArchived))
 		toggle_mode();
 	UI::Table<uintptr_t>::EntryRecord & te = list->add(id.value(), true);
 	update_record(te, message);
@@ -238,7 +238,7 @@ void GameMessageMenu::think()
 	for (uint32_t j = list->size(); j; --j) {
 		MessageId m_id((*list)[j - 1]);
 		if (Message const * const message = mq[m_id]) {
-			if ((mode == Archive) != (message->status() == Message::Archived)) {
+			if ((mode == Archive) != (message->status() == Message::Status::kArchived)) {
 				list->remove(j - 1);
 			} else {
 				update_record(list->get_record(j - 1), *message);
@@ -253,7 +253,7 @@ void GameMessageMenu::think()
 		MessageId      const id      =  temp_message.first;
 		const Message &       message = *temp_message.second;
 		Message::Status const status  = message.status();
-		if ((mode == Archive) != (status == Message::Archived))
+		if ((mode == Archive) != (status == Message::Status::kArchived))
 			continue;
 		if (!list->find(id.value())) {
 			UI::Table<uintptr_t>::EntryRecord & er = list->add(id.value());
@@ -263,7 +263,7 @@ void GameMessageMenu::think()
 	}
 
 	// Filter message type
-	if (m_message_filter != Message::Type::allMessages) {
+	if (m_message_filter != Message::Type::kAllMessages) {
 		set_display_message_type_label(m_message_filter);
 		for (uint32_t j = list->size(); j; --j) {
 			MessageId m_id((*list)[j - 1]);
@@ -284,7 +284,7 @@ void GameMessageMenu::think()
 	} else {
 		m_centerviewbtn->set_enabled(false);
 		message_body.set_text(std::string());
-		set_display_message_type_label(Widelands::Message::Type::noMessages);
+		set_display_message_type_label(Widelands::Message::Type::kNoMessages);
 	}
 }
 
@@ -294,7 +294,7 @@ void GameMessageMenu::update_record
 {
 	er.set_picture
 		(ColStatus,
-		 g_gr->images().get(status_picture_filename[message.status()]));
+		 g_gr->images().get(status_picture_filename[static_cast<int>(message.status())]));
 	er.set_string(ColTitle, message.title());
 
 	const uint32_t time = message.sent();
@@ -311,7 +311,7 @@ void GameMessageMenu::selected(uint32_t const t) {
 		MessageId const id = MessageId((*list)[t]);
 		if (Message const * const message = mq[id]) {
 			//  Maybe the message was removed since think?
-			if (message->status() == Message::New) {
+			if (message->status() == Message::Status::kNew) {
 				Widelands::Game & game = iplayer().game();
 				game.send_player_command
 					(*new Widelands::CmdMessageSetStatusRead
@@ -347,22 +347,22 @@ bool GameMessageMenu::handle_key(bool down, SDL_keysym code)
 				center_view();
 			return true;
 		case SDLK_0:
-			filter_messages(Widelands::Message::Type::allMessages);
+			filter_messages(Widelands::Message::Type::kAllMessages);
 			return true;
 		case SDLK_1:
-			filter_messages(Widelands::Message::Type::geologists);
+			filter_messages(Widelands::Message::Type::kGeologists);
 			return true;
 		case SDLK_2:
-			filter_messages(Widelands::Message::Type::economy);
+			filter_messages(Widelands::Message::Type::kEconomy);
 			return true;
 		case SDLK_3:
-			filter_messages(Widelands::Message::Type::seafaring);
+			filter_messages(Widelands::Message::Type::kSeafaring);
 			return true;
 		case SDLK_4:
-			filter_messages(Widelands::Message::Type::warfare);
+			filter_messages(Widelands::Message::Type::kWarfare);
 			return true;
 		case SDLK_5:
-			filter_messages(Widelands::Message::Type::scenario);
+			filter_messages(Widelands::Message::Type::kScenario);
 			return true;
 		case SDLK_KP_PERIOD:
 
@@ -454,24 +454,24 @@ void GameMessageMenu::center_view()
  */
 void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
 	switch (msgtype) {
-		case Widelands::Message::Type::geologists:
+		case Widelands::Message::Type::kGeologists:
 			toggle_filter_messages_button(*m_geologistsbtn, msgtype);
 			break;
-		case Widelands::Message::Type::economy:
+		case Widelands::Message::Type::kEconomy:
 			toggle_filter_messages_button(*m_economybtn, msgtype);
 			break;
-		case Widelands::Message::Type::seafaring:
+		case Widelands::Message::Type::kSeafaring:
 			toggle_filter_messages_button(*m_seafaringbtn, msgtype);
 			break;
-		case Widelands::Message::Type::warfare:
+		case Widelands::Message::Type::kWarfare:
 			toggle_filter_messages_button(*m_warfarebtn, msgtype);
 			break;
-		case Widelands::Message::Type::scenario:
+		case Widelands::Message::Type::kScenario:
 			toggle_filter_messages_button(*m_scenariobtn, msgtype);
 			break;
 		default:
 			set_filter_messages_tooltips();
-			m_message_filter = Widelands::Message::Type::allMessages;
+			m_message_filter = Widelands::Message::Type::kAllMessages;
 			m_geologistsbtn->set_perm_pressed(false);
 			m_economybtn->set_perm_pressed(false);
 			m_seafaringbtn->set_perm_pressed(false);
@@ -488,7 +488,7 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button & button, Widelan
 	set_filter_messages_tooltips();
 	if (button.get_perm_pressed()) {
 		button.set_perm_pressed(false);
-		m_message_filter = Widelands::Message::Type::allMessages;
+		m_message_filter = Widelands::Message::Type::kAllMessages;
 	} else {
 		m_geologistsbtn->set_perm_pressed(false);
 		m_economybtn->set_perm_pressed(false);
@@ -539,32 +539,32 @@ void GameMessageMenu::set_display_message_type_label(Widelands::Message::Type ms
 	std::string message_type_image = "";
 
 	switch (msgtype) {
-		case Widelands::Message::Type::geologists:
+		case Widelands::Message::Type::kGeologists:
 			/** TRANSLATORS: This is a message's type */
 			message_type_tooltip =  _("Geologists");
 			message_type_image =  "<rt image=pics/menu_geologist.png></rt>";
 			break;
-		case Widelands::Message::Type::economy:
+		case Widelands::Message::Type::kEconomy:
 			/** TRANSLATORS: This is a message's type */
 			message_type_tooltip =  _("Economy");
 			message_type_image =  "<rt image=pics/menu_build_flag.png></rt>";
 			break;
-		case Widelands::Message::Type::seafaring:
+		case Widelands::Message::Type::kSeafaring:
 			/** TRANSLATORS: This is a message's type */
 			message_type_tooltip =  _("Seafaring");
 			message_type_image =  "<rt image=pics/start_expedition.png></rt>";
 			break;
-		case Widelands::Message::Type::warfare:
+		case Widelands::Message::Type::kWarfare:
 			/** TRANSLATORS: This is a message's type */
 			message_type_tooltip =  _("Warfare");
 			message_type_image =  "<rt image=pics/messages_warfare.png></rt>";
 			break;
-		case Widelands::Message::Type::scenario:
+		case Widelands::Message::Type::kScenario:
 			/** TRANSLATORS: This is a message's type */
 			message_type_tooltip =  _("Scenario");
 			message_type_image =  "<rt image=pics/menu_objectives.png></rt>";
 			break;
-		case Widelands::Message::Type::noMessages:
+		case Widelands::Message::Type::kNoMessages:
 			/** TRANSLATORS: This show up instead of a message's type when there are no messages found */
 			message_type_tooltip =  _("No message found");
 			break;

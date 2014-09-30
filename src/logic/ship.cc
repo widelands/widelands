@@ -912,7 +912,7 @@ void Ship::send_message
 	rt_description += "</p></rt>";
 
 	Message * msg = new Message
-		(Message::Type::seafaring, game.get_gametime(), title, rt_description, get_position(), m_serial);
+		(Message::Type::kSeafaring, game.get_gametime(), title, rt_description, get_position(), m_serial);
 
 	get_owner()->add_message(game, *msg);
 }

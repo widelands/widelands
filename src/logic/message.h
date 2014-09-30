@@ -29,25 +29,25 @@
 namespace Widelands {
 
 struct Message {
-	enum Status {New, Read, Archived};
+	enum class Status: uint8_t {kNew, kRead, kArchived};
 	enum class Type: uint8_t {
-		noMessages,
-		allMessages,
-		gameLogic,
-		geologists,
-		geologistsCoal,
-		geologistsGold,
-		geologistsGranite,
-		geologistsIron,
-		geologistsWater,
-		scenario,
-		seafaring,
-		economy,      // economy
-		siteOccupied, // economy
-		warfare,     // everything starting from here is warfare
-		siteDefeated,
-		siteLost,
-		underAttack
+		kNoMessages,
+		kAllMessages,
+		kGameLogic,
+		kGeologists,
+		kGeologistsCoal,
+		kGeologistsGold,
+		kGeologistsGranite,
+		kGeologistsIron,
+		kGeologistsWater,
+		kScenario,
+		kSeafaring,
+		kEconomy,      // economy
+		kEconomySiteOccupied, // economy
+		kWarfare,     // everything starting from here is warfare
+		kWarfareSiteDefeated,
+		kWarfareSiteLost,
+		kWarfareUnderAttack
 	};
 
 	/**
@@ -69,7 +69,7 @@ struct Message {
 		 const std::string &       b,
 		 Widelands::Coords   const c = Coords::null(),
 		 Widelands::Serial         ser = 0,
-		 Status                    s = New)
+		 Status                    s = Status::kNew)
 		:
 		m_type    (msgtype),
 		m_title   (t),
@@ -93,15 +93,15 @@ struct Message {
 	 * Returns the main type for the message's sub type
 	 */
 	Message::Type message_type_category() const {
-		if (m_type >=  Widelands::Message::Type::warfare) {
-			return Widelands::Message::Type::warfare;
+		if (m_type >=  Widelands::Message::Type::kWarfare) {
+			return Widelands::Message::Type::kWarfare;
 
-		} else if (m_type >= Widelands::Message::Type::economy &&
-					  m_type <= Widelands::Message::Type::siteOccupied) {
-			return Widelands::Message::Type::economy;
-		} else if (m_type >= Widelands::Message::Type::geologists &&
-					 m_type <= Widelands::Message::Type::geologistsWater) {
-		  return Widelands::Message::Type::geologists;
+		} else if (m_type >= Widelands::Message::Type::kEconomy &&
+					  m_type <= Widelands::Message::Type::kEconomySiteOccupied) {
+			return Widelands::Message::Type::kEconomy;
+		} else if (m_type >= Widelands::Message::Type::kGeologists &&
+					 m_type <= Widelands::Message::Type::kGeologistsWater) {
+		  return Widelands::Message::Type::kGeologists;
 	  }
 		return m_type;
 	}

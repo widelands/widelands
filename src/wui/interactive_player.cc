@@ -258,7 +258,7 @@ void InteractivePlayer::think()
 		std::string msg_tooltip = _("Messages");
 		if
 			(uint32_t const nr_new_messages =
-			 	player().messages().nr_messages(Widelands::Message::New))
+				player().messages().nr_messages(Widelands::Message::Status::kNew))
 		{
 			msg_icon    = "pics/menu_toggle_newmessage_menu.png";
 			msg_tooltip =

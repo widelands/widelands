@@ -1784,7 +1784,7 @@ void PlayerMessageCommand::write
 void CmdMessageSetStatusRead::execute (Game & game)
 {
 	game.player(sender()).messages().set_message_status
-		(message_id(), Message::Read);
+		(message_id(), Message::Status::kRead);
 }
 
 void CmdMessageSetStatusRead::serialize (StreamWrite & ser)
@@ -1800,7 +1800,7 @@ void CmdMessageSetStatusRead::serialize (StreamWrite & ser)
 void CmdMessageSetStatusArchived::execute (Game & game)
 {
 	game.player(sender()).messages().set_message_status
-		(message_id(), Message::Archived);
+		(message_id(), Message::Status::kArchived);
 }
 
 void CmdMessageSetStatusArchived::serialize (StreamWrite & ser)
