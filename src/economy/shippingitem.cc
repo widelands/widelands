@@ -167,9 +167,9 @@ void ShippingItem::remove(EditorGameBase & egbase)
 
 void ShippingItem::Loader::load(FileRead & fr)
 {
-	uint8_t version = fr.Unsigned8();
+	uint8_t version = fr.unsigned_8();
 	if (1 <= version && version <= SHIPPINGITEM_SAVEGAME_VERSION) {
-		m_serial = fr.Unsigned32();
+		m_serial = fr.unsigned_32();
 	} else
 		throw GameDataError("unknown ShippingItem version %u", version);
 }
@@ -184,8 +184,8 @@ ShippingItem ShippingItem::Loader::get(MapObjectLoader & mol)
 
 void ShippingItem::save(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(SHIPPINGITEM_SAVEGAME_VERSION);
-	fw.Unsigned32(mos.get_object_file_index_or_zero(m_object.get(egbase)));
+	fw.unsigned_8(SHIPPINGITEM_SAVEGAME_VERSION);
+	fw.unsigned_32(mos.get_object_file_index_or_zero(m_object.get(egbase)));
 }
 
 } // namespace Widelands

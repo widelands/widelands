@@ -129,11 +129,11 @@ run_string_as_script(lua_State* L, const std::string& identifier, const std::str
 
 // Reads the 'filename' from the 'fs' and returns its content.
 std::string get_file_content(FileSystem* fs, const std::string& filename) {
-	if (!fs || !fs->FileExists(filename)) {
+	if (!fs || !fs->file_exists(filename)) {
 		throw LuaScriptNotExistingError(filename);
 	}
 	size_t length;
-	void* input_data = fs->Load(filename, length);
+	void* input_data = fs->load(filename, length);
 	const std::string data(static_cast<char*>(input_data));
 	// make sure the input_data is freed
 	free(input_data);

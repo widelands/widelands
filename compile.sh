@@ -79,7 +79,6 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
     fi
 
     $buildtool
-    $buildtool lang
     return 0
   }
 
@@ -119,7 +118,6 @@ bzr pull
 cd build
 cmake ..
 $buildtool
-$buildtool lang
 rm  ../VERSION || true
 rm  ../widelands || true
 mv VERSION ../VERSION

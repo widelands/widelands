@@ -63,15 +63,15 @@ struct UniqueRandomMapInfo {
 	bool          islandMode;     //  whether the world will be an island
 
 	//  other stuff
-	static bool setFromIdString
+	static bool set_from_id_string
 		(UniqueRandomMapInfo & mapInfo_out, const std::string & mapIdString);
-	static void generateIdString
+	static void generate_id_string
 		(std::string & mapIdsString_out, const UniqueRandomMapInfo & mapInfo);
 
 private:
-	static int  mapIdCharToNumber(char);
-	static char mapIdNumberToChar(int32_t);
-	static uint16_t generateWorldNameHash(const std::string &);
+	static int  map_id_char_to_number(char);
+	static char map_id_number_to_char(int32_t);
+	static uint16_t generate_world_name_hash(const std::string &);
 };
 
 

@@ -59,7 +59,7 @@ protected:
 
 	bool avail ();
 
-	ssize_t recv (void *, size_t, sockaddr_in *);
+	ssize_t receive (void *, size_t, sockaddr_in *);
 
 	void send (void const *, size_t, sockaddr_in const *);
 	void broadcast (void const *, size_t, uint16_t);

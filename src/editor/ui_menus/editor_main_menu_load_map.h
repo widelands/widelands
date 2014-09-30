@@ -44,7 +44,8 @@ private:
 
 	void fill_list();
 
-	UI::Textarea * m_name, * m_author, * m_size, * m_nrplayers;
+	UI::MultilineTextarea * m_name;
+	UI::Textarea * m_author, * m_size, * m_nrplayers;
 	UI::MultilineTextarea * m_descr;
 	UI::Listselect<const char *> * m_ls;
 	UI::Button * m_ok_btn;

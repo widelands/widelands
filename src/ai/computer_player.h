@@ -48,7 +48,7 @@ struct ComputerPlayer {
 	/**
 	 * Interface to a concrete implementation, used to instantiate AIs.
 	 *
-	 * \see getImplementations()
+	 * \see get_implementations()
 	 */
 	struct Implementation {
 		std::string name;
@@ -61,12 +61,12 @@ struct ComputerPlayer {
 	/**
 	 * Get a list of available AI implementations.
 	 */
-	static const ImplementationVector & getImplementations();
+	static const ImplementationVector & get_implementations();
 
 	/**
 	 * Get the best matching implementation for this name.
 	 */
-	static const Implementation * getImplementation(const std::string & name);
+	static const Implementation * get_implementation(const std::string & name);
 
 private:
 	Widelands::Game & m_game;

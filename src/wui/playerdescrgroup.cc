@@ -134,10 +134,10 @@ void PlayerDescriptionGroup::refresh()
 	set_visible(true);
 
 	const PlayerSettings & player = settings.players[d->plnum];
-	bool stateaccess = d->settings->canChangePlayerState(d->plnum);
-	bool tribeaccess = d->settings->canChangePlayerTribe(d->plnum);
-	bool const initaccess  = d->settings->canChangePlayerInit(d->plnum);
-	bool teamaccess = d->settings->canChangePlayerTeam(d->plnum);
+	bool stateaccess = d->settings->can_change_player_state(d->plnum);
+	bool tribeaccess = d->settings->can_change_player_tribe(d->plnum);
+	bool const initaccess  = d->settings->can_change_player_init(d->plnum);
+	bool teamaccess = d->settings->can_change_player_team(d->plnum);
 
 	d->btnEnablePlayer->set_enabled(stateaccess);
 
@@ -242,17 +242,17 @@ void PlayerDescriptionGroup::enable_player(bool on)
 
 	if (on) {
 		if (settings.players[d->plnum].state == PlayerSettings::stateClosed)
-			d->settings->nextPlayerState(d->plnum);
+			d->settings->next_player_state(d->plnum);
 	} else {
 		if (settings.players[d->plnum].state != PlayerSettings::stateClosed)
-			d->settings->setPlayerState(d->plnum, PlayerSettings::stateClosed);
+			d->settings->set_player_state(d->plnum, PlayerSettings::stateClosed);
 	}
 }
 
 
 void PlayerDescriptionGroup::toggle_playertype()
 {
-	d->settings->nextPlayerState(d->plnum);
+	d->settings->next_player_state(d->plnum);
 }
 
 /**
@@ -285,7 +285,7 @@ void PlayerDescriptionGroup::toggle_playertribe()
 		}
 	}
 
-	d->settings->setPlayerTribe(d->plnum, nexttribe, random_tribe);
+	d->settings->set_player_tribe(d->plnum, nexttribe, random_tribe);
 }
 
 /**
@@ -311,7 +311,7 @@ void PlayerDescriptionGroup::toggle_playerteam()
 	else
 		newteam = currentteam + 1;
 
-	d->settings->setPlayerTeam(d->plnum, newteam);
+	d->settings->set_player_team(d->plnum, newteam);
 }
 
 /// Cycle through available initializations for the player's tribe.
@@ -327,7 +327,7 @@ void PlayerDescriptionGroup::toggle_playerinit()
 	for (const TribeBasicInfo& tribeinfo : settings.tribes) {
 		if (tribeinfo.name == player.tribe) {
 			return
-				d->settings->setPlayerInit
+				d->settings->set_player_init
 					(d->plnum,
 					 (player.initialization_index + 1)
 					 %

@@ -30,12 +30,12 @@ class Map;
 
 /// The port data packet contains all port build spaces
 struct MapPortSpacesPacket {
-	void Read(FileSystem&, EditorGameBase&, bool, MapObjectLoader&);
-	void Write(FileSystem&, EditorGameBase&, MapObjectSaver&);
+	void read(FileSystem&, EditorGameBase&, bool, MapObjectLoader&);
+	void write(FileSystem&, EditorGameBase&, MapObjectSaver&);
 
 	//  The following function prereads a given map without the need of a
 	//  properly configured EditorGameBase object.
-	void Pre_Read(FileSystem &, Map*);
+	void pre_read(FileSystem &, Map*);
 
 	uint32_t get_version() {return m_version;}
 

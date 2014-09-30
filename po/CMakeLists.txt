@@ -1,17 +1,6 @@
-if (${CMAKE_BUILD_TYPE} STREQUAL Release)
-  add_custom_target (
+add_custom_target (
     lang ALL
-  )
-else (${CMAKE_BUILD_TYPE} STREQUAL Release)
-  add_custom_target (
-    lang_dummy ALL
-    COMMAND ${CMAKE_COMMAND}  -E make_directory ${CMAKE_BINARY_DIR}/locale
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-  )
-  add_custom_target (
-    lang
-  )
-endif (${CMAKE_BUILD_TYPE} STREQUAL Release)
+)
 
 macro(CreateLocale locale_name)
   set (commands "")

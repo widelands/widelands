@@ -67,8 +67,8 @@ public:
 
 	Player & owner() const {return m_owner.owner();}
 
-	void Read (FileRead  &, Game &, MapObjectLoader &);
-	void Write(FileWrite &, Game &, MapObjectSaver  &);
+	void read (FileRead  &, Game &, MapObjectLoader &);
+	void write(FileWrite &, Game &, MapObjectSaver  &);
 
 private:
 	static void request_callback

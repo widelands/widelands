@@ -7,30 +7,30 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-08-05 09:15+0000\n"
+"POT-Creation-Date: 2014-09-18 18:55+0000\n"
 "PO-Revision-Date: 2014-07-17 05:21+0000\n"
 "Last-Translator: Midori <midori.tj@gmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-06 05:43+0000\n"
-"X-Generator: Launchpad (build 17147)\n"
+"X-Launchpad-Export-Date: 2014-09-19 05:49+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 
-#: ../../txts/README.lua:7
+#: ../../txts/README.lua:6
 msgid "README"
 msgstr "README"
 
-#: ../../txts/README.lua:14
+#: ../../txts/README.lua:13
 msgid "an open source strategy game"
 msgstr "オープンソースのストラテジーゲーム"
 
-#: ../../txts/README.lua:18
+#: ../../txts/README.lua:17
 #: ../../txts/editor_readme:7
 msgid "Introduction"
 msgstr "はじめに"
 
-#: ../../txts/README.lua:20
+#: ../../txts/README.lua:19
 msgid ""
 "Widelands is a free, open source real-time strategy game with singleplayer\n"
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
@@ -45,7 +45,7 @@ msgstr ""
 "よりかなり多くの多様性と深さを持ちます。\n"
 "しかしプレイ可能なチュートリアルを始めることは簡単です。"
 
-#: ../../txts/README.lua:25
+#: ../../txts/README.lua:24
 msgid ""
 "In this game, you start out on a small piece of land with just a few\n"
 "resources. Using these, you’ll create an empire with many thousands of\n"
@@ -58,11 +58,11 @@ msgstr ""
 "この目標を達成するには、経済基盤を確立し、あなたの周りの土地を探検し、\n"
 "敵対する部族に対抗する必要があります。"
 
-#: ../../txts/README.lua:31
+#: ../../txts/README.lua:30
 msgid "Check out the Widelands project homepage:"
 msgstr "Widelandsプロジェクトのホームページを確認してください。"
 
-#: ../../txts/README.lua:35
+#: ../../txts/README.lua:34
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more\n"
 "information, see the file ‘COPYING’."
@@ -70,11 +70,11 @@ msgstr ""
 "WidelandsはGNU General Public License（GPL）の下でライセンスされています。\n"
 "詳細についてはファイル「COPYING」を参照してください。"
 
-#: ../../txts/README.lua:38
+#: ../../txts/README.lua:37
 msgid "Status"
 msgstr "現状"
 
-#: ../../txts/README.lua:40
+#: ../../txts/README.lua:39
 msgid ""
 "Widelands is nearly feature complete and is much fun to play alone and even\n"
 "more in multiplayer with others. Still, there is always more work to be done "
@@ -93,11 +93,11 @@ msgstr ""
 "に興味を持っている場合は、\n"
 "わたしたちのホームページに連絡を取ってください。"
 
-#: ../../txts/README.lua:46
+#: ../../txts/README.lua:45
 msgid "General game control"
 msgstr "基本ゲーム操作"
 
-#: ../../txts/README.lua:48
+#: ../../txts/README.lua:47
 msgid ""
 "To close an open window, right-click on it. To minimize/maximize a window, "
 "click\n"
@@ -110,7 +110,7 @@ msgstr ""
 "Ctrlキーを押しながらマウスの中央ボタンか左ボタンのどちらかで\n"
 "そのウィンドウのタイトルバーをクリックしてください。"
 
-#: ../../txts/README.lua:52
+#: ../../txts/README.lua:51
 msgid ""
 "If you hold CTRL while building a road, flags will be placed automatically.\n"
 "If you hold CTRL while removing a road, all flags up to the first junction "
@@ -121,7 +121,7 @@ msgstr ""
 "道路を削除しているときにCtrlキーを押したままにすると、\n"
 "一つめの分岐点までのすべての旗が削除されます。"
 
-#: ../../txts/README.lua:56
+#: ../../txts/README.lua:55
 msgid ""
 "You can skip confirmation windows for irreversible actions if you hold CTRL\n"
 "while clicking on the action button."
@@ -129,103 +129,103 @@ msgstr ""
 "アクションボタンをクリックするときにCtrlキーを押したままにすると、\n"
 "不可逆アクションについての確認ウィンドウをスキップすることができます。"
 
-#: ../../txts/README.lua:59
+#: ../../txts/README.lua:58
 msgid "Keyboard shortcuts (in-game)"
 msgstr "キーボードショートカット（ゲーム内）"
 
-#: ../../txts/README.lua:61
+#: ../../txts/README.lua:60
 msgid "PAGEUP: increases game speed"
 msgstr "PageUp ゲーム速度アップ"
 
-#: ../../txts/README.lua:62
+#: ../../txts/README.lua:61
 msgid "PAGEDOWN: decreases game speed"
 msgstr "PageDown ゲーム速度ダウン"
 
-#: ../../txts/README.lua:63
+#: ../../txts/README.lua:62
 msgid "PAUSE: pauses the game"
 msgstr "Pause ゲームの一時停止"
 
-#: ../../txts/README.lua:64
+#: ../../txts/README.lua:63
 #: ../../txts/editor_readme:21
 msgid "SPACE: toggles if building spaces are shown"
 msgstr "Space 建設スペースの切替"
 
-#: ../../txts/README.lua:65
+#: ../../txts/README.lua:64
 #: ../../txts/editor_readme:29
 msgid "M: toggles minimap"
 msgstr "M ミニマップの切替"
 
-#: ../../txts/README.lua:66
+#: ../../txts/README.lua:65
 msgid "N: toggles messages (‘news’)"
 msgstr "N （新規）メッセージの切替"
 
-#: ../../txts/README.lua:67
+#: ../../txts/README.lua:66
 #: ../../txts/editor_readme:23
 msgid "C: toggles census"
 msgstr "C センサスの切替"
 
-#: ../../txts/README.lua:68
+#: ../../txts/README.lua:67
 msgid "S: toggles statistics"
 msgstr "S 統計の切替"
 
-#: ../../txts/README.lua:69
+#: ../../txts/README.lua:68
 msgid "I: toggles stock inventory"
 msgstr "E イベントメニューの切替"
 
-#: ../../txts/README.lua:70
+#: ../../txts/README.lua:69
 msgid "O: toggles objectives"
 msgstr "O 目的メニューの切替"
 
-#: ../../txts/README.lua:71
+#: ../../txts/README.lua:70
 msgid "F: toggles fullscreen (if supported by the OS)"
 msgstr "F フルスクリーンの切替（OSがサポートしている場合）"
 
-#: ../../txts/README.lua:72
+#: ../../txts/README.lua:71
 msgid "Home: centers main mapview on starting location"
 msgstr "Home メインマップの視点を開始位置に移動"
 
-#: ../../txts/README.lua:73
+#: ../../txts/README.lua:72
 msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
 msgstr "（Ctrl+） 0〜9 （位置の記憶）前回記憶した位置に移動"
 
-#: ../../txts/README.lua:74
+#: ../../txts/README.lua:73
 msgid ",: goes to the previous location"
 msgstr ", 前の位置へ"
 
-#: ../../txts/README.lua:75
+#: ../../txts/README.lua:74
 msgid ".: goes to the next location"
 msgstr ". 次の位置へ"
 
-#: ../../txts/README.lua:76
+#: ../../txts/README.lua:75
 msgid "F6: shows the debug console (only in debug-builds)"
 msgstr "F6 デバッグコンソールの表示（debug-buildsのみ）"
 
-#: ../../txts/README.lua:77
+#: ../../txts/README.lua:76
 msgid "CTRL+F10: quits the game immediately"
 msgstr "Ctrl+F10 ゲームの強制終了"
 
-#: ../../txts/README.lua:78
+#: ../../txts/README.lua:77
 msgid "F11: takes a screenshot"
 msgstr "F11 スクリーンショットの撮影"
 
-#: ../../txts/README.lua:80
+#: ../../txts/README.lua:79
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr "メッセージウィンドウでは、つぎの追加ショートカットを使用できます。"
 
-#: ../../txts/README.lua:82
+#: ../../txts/README.lua:81
 msgid "G: jumps to the location corresponding to the current message"
 msgstr "G 選択したメッセージが対応する位置に移動"
 
-#: ../../txts/README.lua:83
+#: ../../txts/README.lua:82
 msgid "DELETE: archives the current message"
 msgstr "Delete 選択したメッセージの保管"
 
-#: ../../txts/README.lua:85
+#: ../../txts/README.lua:84
 msgid "Online Help"
 msgstr "オンラインヘルプ"
 
-#: ../../txts/README.lua:87
+#: ../../txts/README.lua:86
 msgid ""
 "If you need documentation or help for Widelands or the Widelands Editor, be\n"
 "sure to visit our homepage. You can find an up to date online help in our "
@@ -237,29 +237,29 @@ msgstr ""
 "Wikiでは最新のオンラインヘルプを、\n"
 "またオンライン事典では部族経済の詳細な説明を閲覧できます。"
 
-#: ../../txts/README.lua:91
+#: ../../txts/README.lua:90
 msgid "Reporting Bugs"
 msgstr "バグ報告"
 
-#: ../../txts/README.lua:93
+#: ../../txts/README.lua:92
 msgid "If you encounter a bug, please report it to our bugtracker:"
 msgstr "バグが発生した場合は、バグトラッカーに報告してください。"
 
-#: ../../txts/README.lua:97
+#: ../../txts/README.lua:96
 msgid "Please provide enough background information. Tell us:"
 msgstr "どうか十分なバックグラウンド情報を提供してください。内容は、"
 
-#: ../../txts/README.lua:99
+#: ../../txts/README.lua:98
 msgid "- Detailed steps on how to trigger the bug, if possible."
 msgstr "・バグを発生させる方法の詳しい手順。"
 
-#: ../../txts/README.lua:101
+#: ../../txts/README.lua:100
 msgid ""
 "- What you expected to happen when performing the steps and what actually "
 "happened."
 msgstr "・その手順を実行するときに起こると予想されることと、実際に起こったこと。"
 
-#: ../../txts/README.lua:103
+#: ../../txts/README.lua:102
 msgid ""
 "- Which version of Widelands you are running (i.e. either the build number "
 "or\n"
@@ -269,7 +269,7 @@ msgstr ""
 "・実行していたWidelandsのバージョン\n"
 "（つまりビルド番号。  また、開発バージョンやデイリービルドを実行している場合はリビジョン番号）。"
 
-#: ../../txts/README.lua:106
+#: ../../txts/README.lua:105
 msgid ""
 "- Please also include which operating system you are running Widelands on "
 "as\n"
@@ -278,11 +278,11 @@ msgstr ""
 "・バグによっては特定のプラットフォームで発生しますので、\n"
 "   Widelandsを実行しているオペレーティングシステムも記載してください。"
 
-#: ../../txts/README.lua:109
+#: ../../txts/README.lua:108
 msgid "- Which map you were playing when the bug occurred."
 msgstr "・バグが発生したときにプレイしていたマップ。"
 
-#: ../../txts/README.lua:111
+#: ../../txts/README.lua:110
 msgid ""
 "- If the bug concerns something not being displayed correctly or if it "
 "helps\n"
@@ -292,7 +292,7 @@ msgstr ""
 "またはスクリーンショットが問題を説明する手助けになるならば、\n"
 "一枚以上のスクリーンショットを添付してください。"
 
-#: ../../txts/README.lua:114
+#: ../../txts/README.lua:113
 msgid ""
 "- If you have a save game or replay demonstrating the issue (for instance\n"
 "crashes where it can be hard to tell exactly what is triggering it), please\n"
@@ -302,11 +302,11 @@ msgstr ""
 "（たとえばクラッシュなどの、どこが切っ掛けになるかを正確に伝えるのが難しいもの）。\n"
 "  詳細については下記のリプレイの項目を参照してください。"
 
-#: ../../txts/README.lua:118
+#: ../../txts/README.lua:117
 msgid "Replays"
 msgstr "リプレイ"
 
-#: ../../txts/README.lua:120
+#: ../../txts/README.lua:119
 msgid ""
 "Widelands records every game you play in two files. One of these files has "
 "a\n"
@@ -324,7 +324,7 @@ msgstr ""
 "プレイヤーの入力したコマンドをすべて含みます。\n"
 "ファイル名の残り部分はゲーム開始時刻を教えてくれます。"
 
-#: ../../txts/README.lua:126
+#: ../../txts/README.lua:125
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game "
 "will\n"
@@ -344,7 +344,7 @@ msgstr ""
 "これはネットワークゲームで別バージョンのプレイヤーがいるときに、\n"
 "非同期問題に悩まされる理由に近いです。"
 
-#: ../../txts/README.lua:133
+#: ../../txts/README.lua:132
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic, so they\n"
 "can be useful as attachments to bug reports. The replay files are saved in "

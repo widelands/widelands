@@ -34,18 +34,18 @@ namespace Widelands {
 #define CURRENT_PACKET_VERSION 1
 
 
-void MapResourcesPacket::Read
+void MapResourcesPacket::read
 	(FileSystem & fs, EditorGameBase & egbase, const OneWorldLegacyLookupTable& lookup_table)
 {
 	FileRead fr;
-	fr.Open(fs, "binary/resource");
+	fr.open(fs, "binary/resource");
 
 	Map   & map   = egbase.map();
 	const World & world = egbase.world();
 
-	const uint16_t packet_version = fr.Unsigned16();
+	const uint16_t packet_version = fr.unsigned_16();
 	if (packet_version == CURRENT_PACKET_VERSION) {
-		int32_t const nr_res = fr.Unsigned16();
+		int32_t const nr_res = fr.unsigned_16();
 		if (world.get_nr_resources() < nr_res)
 			log
 				("WARNING: Number of resources in map (%i) is bigger than in world "
@@ -55,8 +55,8 @@ void MapResourcesPacket::Read
 		// construct ids and map
 		std::map<uint8_t, uint8_t> smap;
 		for (uint8_t i = 0; i < nr_res; ++i) {
-			uint8_t const id = fr.Unsigned16();
-			const std::string resource_name = lookup_table.lookup_resource(fr.CString());
+			uint8_t const id = fr.unsigned_16();
+			const std::string resource_name = lookup_table.lookup_resource(fr.c_string());
 			int32_t const res = world.get_resource(resource_name.c_str());
 			if (res == -1)
 				throw GameDataError
@@ -66,10 +66,10 @@ void MapResourcesPacket::Read
 
 		for (uint16_t y = 0; y < map.get_height(); ++y) {
 			for (uint16_t x = 0; x < map.get_width(); ++x) {
-				uint8_t const id           = fr.Unsigned8();
-				uint8_t const found_amount = fr.Unsigned8();
+				uint8_t const id           = fr.unsigned_8();
+				uint8_t const found_amount = fr.unsigned_8();
 				uint8_t const amount       = found_amount;
-				uint8_t const start_amount = fr.Unsigned8();
+				uint8_t const start_amount = fr.unsigned_8();
 
 				uint8_t set_id, set_amount, set_start_amount;
 				//  if amount is zero, theres nothing here
@@ -102,12 +102,12 @@ void MapResourcesPacket::Read
  * which is also ok. But this is one reason why save game != saved map
  * in nearly all cases.
  */
-void MapResourcesPacket::Write
+void MapResourcesPacket::write
 	(FileSystem & fs, EditorGameBase & egbase)
 {
 	FileWrite fw;
 
-	fw.Unsigned16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(CURRENT_PACKET_VERSION);
 
 	// This is a bit more complicated saved so that the order of loading
 	// of the resources at run time doesn't matter.
@@ -116,13 +116,13 @@ void MapResourcesPacket::Write
 	const Map   & map   = egbase.map  ();
 	const World& world = egbase.world();
 	uint8_t const nr_res = world.get_nr_resources();
-	fw.Unsigned16(nr_res);
+	fw.unsigned_16(nr_res);
 
 	//  write all resources names and their id's
 	for (int32_t i = 0; i < nr_res; ++i) {
 		const ResourceDescription & res = *world.get_resource(i);
-		fw.Unsigned16(i);
-		fw.CString(res.name().c_str());
+		fw.unsigned_16(i);
+		fw.c_string(res.name().c_str());
 	}
 
 	//  Now, all resouces as uint8_ts in order
@@ -136,13 +136,13 @@ void MapResourcesPacket::Write
 			int32_t const start_amount = f.get_starting_res_amount();
 			if (!amount)
 				res = 0;
-			fw.Unsigned8(res);
-			fw.Unsigned8(amount);
-			fw.Unsigned8(start_amount);
+			fw.unsigned_8(res);
+			fw.unsigned_8(amount);
+			fw.unsigned_8(start_amount);
 		}
 	}
 
-	fw.Write(fs, "binary/resource");
+	fw.write(fs, "binary/resource");
 }
 
 }

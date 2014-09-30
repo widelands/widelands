@@ -58,7 +58,7 @@ uint32_t AttackBox::get_max_attackers() {
 	assert(m_pl);
 
 	if (upcast(Building, building, m_map->get_immovable(*m_node)))
-		return m_pl->findAttackSoldiers(building->base_flag());
+		return m_pl->find_attack_soldiers(building->base_flag());
 	return 0;
 }
 

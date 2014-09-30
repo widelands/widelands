@@ -74,9 +74,9 @@ struct BuildGrid : public UI::IconGrid {
 	void add(Widelands::BuildingIndex);
 
 private:
-	void clickslot(int32_t idx);
-	void mouseoutslot(int32_t idx);
-	void mouseinslot(int32_t idx);
+	void click_slot(int32_t idx);
+	void mouseout_slot(int32_t idx);
+	void mousein_slot(int32_t idx);
 
 private:
 	const RGBColor player_color_;
@@ -90,9 +90,9 @@ BuildGrid::BuildGrid(
 	player_color_(player_color),
 	tribe_(tribe)
 {
-	clicked.connect(boost::bind(&BuildGrid::clickslot, this, _1));
-	mouseout.connect(boost::bind(&BuildGrid::mouseoutslot, this, _1));
-	mousein.connect(boost::bind(&BuildGrid::mouseinslot, this, _1));
+	clicked.connect(boost::bind(&BuildGrid::click_slot, this, _1));
+	mouseout.connect(boost::bind(&BuildGrid::mouseout_slot, this, _1));
+	mousein.connect(boost::bind(&BuildGrid::mousein_slot, this, _1));
 }
 
 /*
@@ -120,13 +120,13 @@ void BuildGrid::add(Widelands::BuildingIndex id)
 
 /*
 ===============
-BuildGrid::clickslot [private]
+BuildGrid::click_slot [private]
 
 The icon with the given index has been clicked. Figure out which building it
 belongs to and trigger signal buildclicked.
 ===============
 */
-void BuildGrid::clickslot(int32_t idx)
+void BuildGrid::click_slot(int32_t idx)
 {
 	buildclicked(static_cast<int32_t>(reinterpret_cast<intptr_t>(get_data(idx))));
 }
@@ -134,13 +134,13 @@ void BuildGrid::clickslot(int32_t idx)
 
 /*
 ===============
-BuildGrid::mouseoutslot [private]
+BuildGrid::mouseout_slot [private]
 
 The mouse pointer has left the icon with the given index. Figure out which
 building it belongs to and trigger signal buildmouseout.
 ===============
 */
-void BuildGrid::mouseoutslot(int32_t idx)
+void BuildGrid::mouseout_slot(int32_t idx)
 {
 	buildmouseout(static_cast<int32_t>(reinterpret_cast<intptr_t>(get_data(idx))));
 }
@@ -148,13 +148,13 @@ void BuildGrid::mouseoutslot(int32_t idx)
 
 /*
 ===============
-BuildGrid::mouseinslot [private]
+BuildGrid::mousein_slot [private]
 
 The mouse pointer has entered the icon with the given index. Figure out which
 building it belongs to and trigger signal buildmousein.
 ===============
 */
-void BuildGrid::mouseinslot(int32_t idx)
+void BuildGrid::mousein_slot(int32_t idx)
 {
 	buildmousein(static_cast<int32_t>(reinterpret_cast<intptr_t>(get_data(idx))));
 }
@@ -473,7 +473,7 @@ void FieldActionWindow::add_buttons_attack ()
 	{
 		if
 			(m_plr && m_plr->is_hostile(attackable->owner()) &&
-			 attackable->canAttack())
+			 attackable->can_attack())
 		{
 			m_attack_box = new AttackBox(&a_box, m_plr, &m_node, 0, 0);
 			a_box.add(m_attack_box, UI::Box::AlignTop);

@@ -151,7 +151,7 @@ private:
 		 Worker::Action                 *,
 		 Parser                         *,
 		 const std::vector<std::string> & cmd);
-	void parse_playFX
+	void parse_play_fx
 		(WorkerDescr                   *,
 		 Worker::Action                 *,
 		 Parser                         *,

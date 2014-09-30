@@ -200,7 +200,7 @@ void EditorGameBase::inform_players_about_ownership
 void EditorGameBase::inform_players_about_immovable
 	(MapIndex const i, MapObjectDescr const * const descr)
 {
-	if (!Road::IsRoadDescr(descr))
+	if (!Road::is_road_descr(descr))
 		iterate_players_existing_const(plnum, MAX_PLAYERS, *this, p) {
 			Player::Field & player_field = p->m_fields[i];
 			if (1 < player_field.vision) {

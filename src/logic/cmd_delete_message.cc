@@ -17,15 +17,15 @@
  *
  */
 
-#include "logic/cmd_expire_message.h"
+#include "logic/cmd_delete_message.h"
 
 #include "logic/game.h"
 #include "logic/player.h"
 
 namespace Widelands {
 
-void CmdExpireMessage::execute(Game & game) {
-	game.player(player).messages().expire_message(message);
+void CmdDeleteMessage::execute(Game & game) {
+	game.player(player).messages().delete_message(message);
 }
 
 }

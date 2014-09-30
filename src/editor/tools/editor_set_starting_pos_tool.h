@@ -51,7 +51,7 @@ private:
 	char const * m_current_sel_pic;
 };
 
-int32_t Editor_Tool_Set_Starting_Pos_Callback
+int32_t editor_tool_set_starting_pos_callback
 	(const Widelands::TCoords<Widelands::FCoords>& c, Widelands::Map& map);
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_SET_STARTING_POS_TOOL_H

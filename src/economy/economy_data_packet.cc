@@ -31,20 +31,20 @@
 
 namespace Widelands {
 
-void EconomyDataPacket::Read(FileRead & fr)
+void EconomyDataPacket::read(FileRead & fr)
 {
-	uint16_t const version = fr.Unsigned16();
+	uint16_t const version = fr.unsigned_16();
 
 	try {
 		if (1 <= version && version <= CURRENT_ECONOMY_VERSION) {
 			if (2 <= version)
 				try {
 					const TribeDescr & tribe = m_eco->owner().tribe();
-					while (Time const last_modified = fr.Unsigned32()) {
-						char const * const type_name = fr.CString();
-						uint32_t const permanent = fr.Unsigned32();
+					while (Time const last_modified = fr.unsigned_32()) {
+						char const * const type_name = fr.c_string();
+						uint32_t const permanent = fr.unsigned_32();
 						if (version <= 2)
-							fr.Unsigned32();
+							fr.unsigned_32();
 						WareIndex i = tribe.ware_index(type_name);
 						if (i != INVALID_INDEX) {
 							if (tribe.get_ware_descr(i)->default_target_quantity() ==
@@ -91,7 +91,7 @@ void EconomyDataPacket::Read(FileRead & fr)
 				} catch (const WException & e) {
 					throw GameDataError("target quantities: %s", e.what());
 				}
-			m_eco->m_request_timerid = fr.Unsigned32();
+			m_eco->m_request_timerid = fr.unsigned_32();
 		} else {
 			throw GameDataError("unknown version %u", version);
 		}
@@ -100,18 +100,18 @@ void EconomyDataPacket::Read(FileRead & fr)
 	}
 }
 
-void EconomyDataPacket::Write(FileWrite & fw)
+void EconomyDataPacket::write(FileWrite & fw)
 {
-	fw.Unsigned16(CURRENT_ECONOMY_VERSION);
+	fw.unsigned_16(CURRENT_ECONOMY_VERSION);
 	const TribeDescr & tribe = m_eco->owner().tribe();
 	for (WareIndex i = tribe.get_nrwares(); i;) {
 		--i;
 		const Economy::TargetQuantity & tq =
 			m_eco->m_ware_target_quantities[i];
 		if (Time const last_modified = tq.last_modified) {
-			fw.Unsigned32(last_modified);
-			fw.CString(tribe.get_ware_descr(i)->name());
-			fw.Unsigned32(tq.permanent);
+			fw.unsigned_32(last_modified);
+			fw.c_string(tribe.get_ware_descr(i)->name());
+			fw.unsigned_32(tq.permanent);
 		}
 	}
 	for (WareIndex i = tribe.get_nrworkers(); i;) {
@@ -119,13 +119,13 @@ void EconomyDataPacket::Write(FileWrite & fw)
 		const Economy::TargetQuantity & tq =
 			m_eco->m_worker_target_quantities[i];
 		if (Time const last_modified = tq.last_modified) {
-			fw.Unsigned32(last_modified);
-			fw.CString(tribe.get_worker_descr(i)->name());
-			fw.Unsigned32(tq.permanent);
+			fw.unsigned_32(last_modified);
+			fw.c_string(tribe.get_worker_descr(i)->name());
+			fw.unsigned_32(tq.permanent);
 		}
 	}
-	fw.Unsigned32(0); //  terminator
-	fw.Unsigned32(m_eco->m_request_timerid);
+	fw.unsigned_32(0); //  terminator
+	fw.unsigned_32(m_eco->m_request_timerid);
 }
 
 }

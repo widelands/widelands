@@ -223,13 +223,13 @@ public:
 
 	void log_general_info(const EditorGameBase &) override;
 
-	bool isOnBattlefield();
+	bool is_on_battlefield();
 	bool is_attacking_player(Game &, Player &);
-	Battle * getBattle();
-	bool canBeChallenged();
-	bool checkNodeBlocked(Game &, const FCoords &, bool commit) override;
+	Battle * get_battle();
+	bool can_be_challenged();
+	bool check_node_blocked(Game &, const FCoords &, bool commit) override;
 
-	void setBattle(Game &, Battle *);
+	void set_battle(Game &, Battle *);
 
 	void start_task_attack(Game & game, Building &);
 	void start_task_defense(Game & game, bool stayhome);
@@ -248,8 +248,8 @@ private:
 	void die_update(Game &, State &);
 	void die_pop(Game &, State &);
 
-	void sendSpaceSignals(Game &);
-	bool stayHome();
+	void send_space_signals(Game &);
+	bool stay_home();
 
 	// Pop the current task or, if challenged, start the fighting task.
 	void pop_task_or_fight(Game &);

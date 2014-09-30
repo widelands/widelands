@@ -31,20 +31,20 @@ namespace Widelands {
 #define CURRENT_PACKET_VERSION 1
 
 
-void MapHeightsPacket::Read
+void MapHeightsPacket::read
 	(FileSystem & fs, EditorGameBase & egbase, bool, MapObjectLoader &)
 {
 
 	FileRead fr;
-	fr.Open(fs, "binary/heights");
+	fr.open(fs, "binary/heights");
 
 	try {
-		uint16_t const packet_version = fr.Unsigned16();
+		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == CURRENT_PACKET_VERSION) {
 			Map & map = egbase.map();
 			MapIndex const max_index = map.max_index();
 			for (MapIndex i = 0; i < max_index; ++i)
-				map[i].set_height(fr.Unsigned8());
+				map[i].set_height(fr.unsigned_8());
 		} else
 			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
@@ -57,20 +57,20 @@ void MapHeightsPacket::Read
 /*
  * Write Function
  */
-void MapHeightsPacket::Write
+void MapHeightsPacket::write
 	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
 
 {
 	FileWrite fw;
 
-	fw.Unsigned16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(CURRENT_PACKET_VERSION);
 
 	Map & map = egbase.map();
 	MapIndex const max_index = map.max_index();
 	for (MapIndex i = 0; i < max_index; ++i)
-		fw.Unsigned8(map[i].get_height());
+		fw.unsigned_8(map[i].get_height());
 
-	fw.Write(fs,  "binary/heights");
+	fw.write(fs,  "binary/heights");
 }
 
 }

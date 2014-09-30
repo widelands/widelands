@@ -44,7 +44,7 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive & parent)
 	:
 	UI::Window
 		(&parent, "new_map_menu",
-		 (parent.get_w() - 140) / 2, (parent.get_h() - 150) / 2, 140, 150,
+		 (parent.get_w() - 180) / 2, (parent.get_h() - 150) / 2, 180, 150,
 		 _("New Map"))
 {
 	int32_t const offsx   =  5;

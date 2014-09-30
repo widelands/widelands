@@ -33,6 +33,7 @@
 #include "build_info.h"
 #include "config.h"
 #include "wlapplication.h"
+#include "wlapplication_messages.h"
 
 using std::cout;
 using std::cerr;
@@ -109,7 +110,7 @@ int main(int argc, char * argv[])
 	} catch (const ParameterError & e) {
 		//  handle wrong commandline parameters
 		cerr<<endl<<e.what()<<endl<<endl;
-		WLApplication::show_usage();
+		show_usage(build_id(), build_type());
 		delete g_app;
 
 		return 0;

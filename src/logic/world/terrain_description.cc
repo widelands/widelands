@@ -33,7 +33,7 @@ namespace Widelands {
 namespace  {
 
 // Parse a terrain type from the giving string.
-TerrainDescription::Type TerrainTypeFromString(const std::string& type) {
+TerrainDescription::Type terrain_type_from_string(const std::string& type) {
 	if (type == "green") {
 		return TerrainDescription::GREEN;
 	}
@@ -68,7 +68,7 @@ TerrainDescription::Type TerrainTypeFromString(const std::string& type) {
 TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::World& world)
    : name_(table.get_string("name")),
      descname_(table.get_string("descname")),
-     is_(TerrainTypeFromString(table.get_string("is"))),
+	  is_(terrain_type_from_string(table.get_string("is"))),
      default_resource_index_(world.get_resource(table.get_string("default_resource").c_str())),
      default_resource_amount_(table.get_int("default_resource_amount")),
      dither_layer_(table.get_int("dither_layer")),

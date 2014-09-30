@@ -91,25 +91,25 @@ public:
 	bool get_building_work(Game &, Worker &, bool success) override;
 
 	// Begin implementation of SoldierControl
-	std::vector<Soldier *> presentSoldiers() const override;
-	std::vector<Soldier *> stationedSoldiers() const override;
-	uint32_t minSoldierCapacity() const override;
-	uint32_t maxSoldierCapacity() const override;
-	uint32_t soldierCapacity() const override;
-	void setSoldierCapacity(uint32_t capacity) override;
-	void dropSoldier(Soldier &) override;
-	int incorporateSoldier(EditorGameBase & game, Soldier & s) override;
+	std::vector<Soldier *> present_soldiers() const override;
+	std::vector<Soldier *> stationed_soldiers() const override;
+	uint32_t min_soldier_capacity() const override;
+	uint32_t max_soldier_capacity() const override;
+	uint32_t soldier_capacity() const override;
+	void set_soldier_capacity(uint32_t capacity) override;
+	void drop_soldier(Soldier &) override;
+	int incorporate_soldier(EditorGameBase & game, Soldier & s) override;
 
 	// Begin implementation of Attackable
 	Player & owner() const override {return Building::owner();}
-	bool canAttack() override;
+	bool can_attack() override;
 	void aggressor(Soldier &) override;
 	bool attack   (Soldier &) override;
 	// End implementation of Attackable
 
 	/// Launch the given soldier on an attack towards the given
 	/// target building.
-	void sendAttacker(Soldier &, Building &);
+	void send_attacker(Soldier &, Building &);
 
 	/// This methods are helper for use at configure this site.
 	void set_requirements  (const Requirements &);
@@ -136,19 +136,19 @@ protected:
 private:
 	void update_statistics_string(std::string*) override;
 
-	bool isPresent(Soldier &) const;
+	bool is_present(Soldier &) const;
 	static void request_soldier_callback
 		(Game &, Request &, WareIndex, Worker *, PlayerImmovable &);
 
-	MapObject * popSoldierJob
+	MapObject * pop_soldier_job
 		(Soldier *, bool * stayhome = nullptr);
-	bool haveSoldierJob(Soldier &);
+	bool has_soldier_job(Soldier &);
 	bool military_presence_kept(Game &);
 	void notify_player(Game &, bool discovered = false);
 	bool update_upgrade_requirements();
 	void update_normal_soldier_request();
 	void update_upgrade_soldier_request();
-	bool incorporateUpgradedSoldier(EditorGameBase & game, Soldier & s);
+	bool incorporate_upgraded_soldier(EditorGameBase & game, Soldier & s);
 	Soldier * find_least_suited_soldier();
 	bool drop_least_suited_soldier(bool new_has_arrived, Soldier * s);
 

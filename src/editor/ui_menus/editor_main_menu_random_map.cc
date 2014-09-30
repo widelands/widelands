@@ -45,12 +45,12 @@ using namespace Widelands;
 
 MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	UI::Window(&parent,
-                "random_map_menu",
-                (parent.get_w() - 260) / 2,
-                (parent.get_h() - 450) / 2,
-                260,
-                490,
-                _("New Random Map")),
+				  "random_map_menu",
+				  (parent.get_w() - 260) / 2,
+				  (parent.get_h() - 450) / 2,
+				  305,
+				  490,
+				  _("New Random Map")),
    // TRANSLATORS: The next are world names for the random map generator.
 	m_world_descriptions(
 	{
@@ -89,7 +89,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	rng.seed(clock());
 	rng.rand();
 	m_mapNumber = rng.rand();
-	m_nrEditbox->setText(std::to_string(static_cast<unsigned int>(m_mapNumber)));
+	m_nrEditbox->set_text(std::to_string(static_cast<unsigned int>(m_mapNumber)));
 	posy += height + spacing + spacing + spacing;
 
 
@@ -291,7 +291,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 			 posx, posy,
 			 width, 20,
 			 g_gr->images().get("pics/but1.png"));
-	m_idEditbox->setText("abcd-efgh-ijkl-mnop");
+	m_idEditbox->set_text("abcd-efgh-ijkl-mnop");
 	m_idEditbox->changed.connect
 		(boost::bind(&MainMenuNewRandomMap::id_edit_box_changed, this));
 	posy += height + spacing + spacing + spacing;
@@ -485,12 +485,12 @@ void MainMenuNewRandomMap::id_edit_box_changed()
 
 	std::string str = m_idEditbox->text();
 
-	if (!UniqueRandomMapInfo::setFromIdString(mapInfo, str))
+	if (!UniqueRandomMapInfo::set_from_id_string(mapInfo, str))
 		m_goButton->set_enabled(false);
 	else {
 		std::stringstream sstrm;
 		sstrm << mapInfo.mapNumber;
-		m_nrEditbox->setText(sstrm.str());
+		m_nrEditbox->set_text(sstrm.str());
 
 		m_h = 0;
 		for (uint32_t ix = 0; ix < NUMBER_OF_MAP_DIMENSIONS; ++ix)
@@ -531,9 +531,9 @@ void MainMenuNewRandomMap::nr_edit_box_changed()
 			set_map_info(mapInfo);
 
 			std::string idStr;
-			Widelands::UniqueRandomMapInfo::generateIdString(idStr, mapInfo);
+			Widelands::UniqueRandomMapInfo::generate_id_string(idStr, mapInfo);
 
-			m_idEditbox->setText(idStr);
+			m_idEditbox->set_text(idStr);
 
 			m_goButton->set_enabled(true);
 		} else

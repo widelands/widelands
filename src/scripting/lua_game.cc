@@ -269,11 +269,6 @@ int LuaPlayer::get_see_all(lua_State * const L) {
 		Opts is a table of optional arguments and can be omitted. If it
 		exist it must contain string/value pairs of the following type:
 
-		:arg duration: if this is given, the message will be removed
-			from the players inbox after this many ms. Default:
-			message never expires.
-		:type duration: :class:`integer`
-
 		:arg field: the field connected to this message. Default:
 			no field connected to message
 		:type field: :class:`wl.map.Field`
@@ -296,19 +291,13 @@ int LuaPlayer::send_message(lua_State * L) {
 	uint32_t n = lua_gettop(L);
 	std::string title = luaL_checkstring(L, 2);
 	std::string body = luaL_checkstring(L, 3);
-	Coords c = Coords::Null();
-	Duration d = Forever();
+	Coords c = Coords::null();
 	Message::Status st = Message::New;
 	std::string sender = "ScriptingEngine";
 	bool popup = false;
 
 	if (n == 4) {
 		// Optional arguments
-		lua_getfield(L, 4, "duration");
-		if (!lua_isnil(L, -1))
-			d = luaL_checkuint32(L, -1);
-		lua_pop(L, 1);
-
 		lua_getfield(L, 4, "field");
 		if (!lua_isnil(L, -1))
 			c = (*get_user_class<LuaField>(L, -1))->coords();
@@ -344,7 +333,6 @@ int LuaPlayer::send_message(lua_State * L) {
 			 *new Message
 			 	(sender,
 			 	 game.get_gametime(),
-			 	 d,
 			 	 title,
 			 	 body,
 				 c,
@@ -394,7 +382,7 @@ int LuaPlayer::send_message(lua_State * L) {
 int LuaPlayer::message_box(lua_State * L) {
 	Game & game = get_game(L);
 	// don't show message boxes in replays, cause they crash the game
-	if (game.gameController()->getGameDescription() == "replay") {
+	if (game.game_controller()->get_game_description() == "replay") {
 		return 1;
 	}
 
@@ -429,8 +417,8 @@ int LuaPlayer::message_box(lua_State * L) {
 	std::string title = luaL_checkstring(L, 2);
 	std::string body =  luaL_checkstring(L, 3);
 
-	uint32_t cspeed = game.gameController()->desiredSpeed();
-	game.gameController()->setDesiredSpeed(0);
+	uint32_t cspeed = game.game_controller()->desired_speed();
+	game.game_controller()->set_desired_speed(0);
 
 	game.save_handler().set_allow_saving(false);
 
@@ -444,9 +432,9 @@ int LuaPlayer::message_box(lua_State * L) {
 
 	// Manually force the game to reevaluate it's current state,
 	// especially time information.
-	game.gameController()->think();
+	game.game_controller()->think();
 
-	game.gameController()->setDesiredSpeed(cspeed);
+	game.game_controller()->set_desired_speed(cspeed);
 
 	game.save_handler().set_allow_saving(true);
 
@@ -1065,7 +1053,6 @@ const PropertyType<LuaMessage> LuaMessage::Properties[] = {
 	PROP_RO(LuaMessage, title),
 	PROP_RO(LuaMessage, body),
 	PROP_RO(LuaMessage, sent),
-	PROP_RO(LuaMessage, duration),
 	PROP_RO(LuaMessage, field),
 	PROP_RW(LuaMessage, status),
 	{nullptr, nullptr, nullptr},
@@ -1130,28 +1117,16 @@ int LuaMessage::get_sent(lua_State * L) {
 	return 1;
 }
 
-/* RST
-	.. attribute:: duration
-
-		(RO) The time in milliseconds before this message is invalidated or nil if
-		this message has an endless duration.
-*/
-int LuaMessage::get_duration(lua_State * L) {
-	uint32_t d = get(L, get_game(L)).duration();
-	if (d == Forever())
-		return 0;
-	lua_pushuint32(L, d);
-	return 1;
-}
 
 /* RST
+>>>>>>> MERGE-SOURCE
 	.. attribute:: field
 
 		(RO) The field that corresponds to this Message.
 */
 int LuaMessage::get_field(lua_State * L) {
 	Coords c = get(L, get_game(L)).position();
-	if (c == Coords::Null())
+	if (c == Coords::null())
 		return 0;
 	return to_lua<LuaField>(L, new LuaField(c));
 }
@@ -1243,7 +1218,7 @@ static int L_report_result(lua_State * L) {
 	Widelands::PlayerEndResult result = static_cast<Widelands::PlayerEndResult>
 		(luaL_checknumber(L, 2));
 
-	get_game(L).gameController()->report_result
+	get_game(L).game_controller()->report_result
 		((*get_user_class<LuaPlayer>(L, 1))->get(L, get_game(L)).player_number(),
 		 result, info);
 	return 0;

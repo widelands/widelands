@@ -183,8 +183,6 @@ struct WLApplication {
 	bool campaign_game();
 	void replay();
 
-	static void show_usage();
-
 	static void emergency_save(Widelands::Game &);
 
 protected:
