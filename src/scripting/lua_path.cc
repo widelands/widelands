@@ -56,7 +56,7 @@ Module Functions
    :returns: The basename.
 */
 static int L_basename(lua_State * L) {
-	lua_pushstring(L, FileSystem::FS_Filename(luaL_checkstring(L, -1)));
+	lua_pushstring(L, FileSystem::fs_filename(luaL_checkstring(L, -1)));
 	return 1;
 }
 
@@ -72,7 +72,7 @@ static int L_basename(lua_State * L) {
    :returns: The dirname.
 */
 static int L_dirname(lua_State * L) {
-	lua_pushstring(L, FileSystem::FS_Dirname(luaL_checkstring(L, -1)));
+	lua_pushstring(L, FileSystem::fs_dirname(luaL_checkstring(L, -1)));
 	return 1;
 }
 
@@ -93,12 +93,12 @@ static int L_dirname(lua_State * L) {
 */
 static int L_list_directory(lua_State * L) {
 	const std::string dir = luaL_checkstring(L, 1);
-	std::set<std::string> files = g_fs->ListDirectory(dir);
+	std::set<std::string> files = g_fs->list_directory(dir);
 
 	if (lua_gettop(L) > 1) {
 		boost::regex re(luaL_checkstring(L, 2));
 		files = filter(files, [&re](const std::string& filename) {
-			return boost::regex_match(FileSystem::FS_Filename(filename.c_str()), re);
+			return boost::regex_match(FileSystem::fs_filename(filename.c_str()), re);
 		});
 	}
 

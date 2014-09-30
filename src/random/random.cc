@@ -119,21 +119,21 @@ const uint32_t rng_sbox[256] = {
 
 #define RNG_SAVE_MAGIC 0xf0057763
 
-void RNG::ReadState(StreamRead & sr)
+void RNG::read_state(StreamRead & sr)
 {
-	uint32_t const magic = sr.Unsigned32();
+	uint32_t const magic = sr.unsigned_32();
 	if (magic != RNG_SAVE_MAGIC)
 		throw wexception
 				("Different RNG version (magic = %08x, expected %08x)",
 				 magic, RNG_SAVE_MAGIC);
 
-	state0 = sr.Unsigned32();
-	state1 = sr.Unsigned32();
+	state0 = sr.unsigned_32();
+	state1 = sr.unsigned_32();
 }
 
-void RNG::WriteState(StreamWrite & sw)
+void RNG::write_state(StreamWrite & sw)
 {
-	sw.Unsigned32(RNG_SAVE_MAGIC);
-	sw.Unsigned32(state0);
-	sw.Unsigned32(state1);
+	sw.unsigned_32(RNG_SAVE_MAGIC);
+	sw.unsigned_32(state0);
+	sw.unsigned_32(state1);
 }

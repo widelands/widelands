@@ -33,8 +33,8 @@
  * It is intended for serializing network packets and for writing log-type
  * data to disk.
  *
- * All implementations need to implement \ref Data . Some implementations
- * may need to implement \ref Flush .
+ * All implementations need to implement \ref data . Some implementations
+ * may need to implement \ref flush .
  *
  * Convenience functions are provided for many data types.
  */
@@ -46,7 +46,7 @@ public:
 	/**
 	 * Write a number of bytes to the stream.
 	 */
-	virtual void Data(const void * const data, const size_t size) = 0;
+	virtual void data(const void * const write_data, const size_t size) = 0;
 
 	/**
 	 * Make sure all data submitted so far is written to disk.
@@ -54,40 +54,40 @@ public:
 	 * The default implementation is a no-op. Implementations may want
 	 * to override this if they're buffered internally.
 	 */
-	virtual void Flush();
+	virtual void flush();
 
 	//TODO(unknown): implement an overloaded method that accepts fmt as std::string
-	void Printf(char const *, ...) __attribute__((format(printf, 2, 3)));
+	void print_f(char const *, ...) __attribute__((format(printf, 2, 3)));
 
-	void   Signed8  (int8_t const x) {Data(&x, 1);}
-	void Unsigned8 (uint8_t const x) {Data(&x, 1);}
-	void   Signed16(int16_t const x) {
-		int16_t const y = Little16(x);
-		Data(&y, 2);
+	void signed_8  (int8_t const x) {data(&x, 1);}
+	void unsigned_8(uint8_t const x) {data(&x, 1);}
+	void signed_16 (int16_t const x) {
+		int16_t const y = little_16(x);
+		data(&y, 2);
 	}
-	void Unsigned16(uint16_t const x) {
-		uint16_t const y = Little16(x);
-		Data(&y, 2);
+	void unsigned_16(uint16_t const x) {
+		uint16_t const y = little_16(x);
+		data(&y, 2);
 	}
-	void   Signed32(int32_t const x) {
-		uint32_t const y = Little32(x);
-		Data(&y, 4);
+	void   signed_32(int32_t const x) {
+		uint32_t const y = little_32(x);
+		data(&y, 4);
 	}
-	void Unsigned32(uint32_t const x) {
-		uint32_t const y = Little32(x);
-		Data(&y, 4);
+	void unsigned_32(uint32_t const x) {
+		uint32_t const y = little_32(x);
+		data(&y, 4);
 	}
-	void String(const std::string & str) {
-		Data(str.c_str(), str.size() + 1);
+	void string(const std::string & str) {
+		data(str.c_str(), str.size() + 1);
 	}
 
 	//  Write strings with    null terminator.
-	void CString(char        const * const x) {Data(x,         strlen(x) + 1);}
-	void CString(const std::string &       x) {Data(x.c_str(), x.size()  + 1);}
+	void c_string(char        const * const x) {data(x,         strlen(x) + 1);}
+	void c_string(const std::string &       x) {data(x.c_str(), x.size()  + 1);}
 
 	//  Write strings without null terminator.
-	void Text   (char        const * const x) {Data(x,         strlen(x));}
-	void Text   (const std::string &       x) {Data(x.c_str(), x.size());}
+	void text   (char        const * const x) {data(x,         strlen(x));}
+	void text   (const std::string &       x) {data(x.c_str(), x.size());}
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(StreamWrite);

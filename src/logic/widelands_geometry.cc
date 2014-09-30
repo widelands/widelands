@@ -36,7 +36,7 @@ bool Coords::operator!= (const Coords & other) const {
 }
 
 Coords::operator bool() const {
-	return *this != Null();
+	return *this != null();
 }
 
 void Coords::reorigin(Coords new_origin, const Extent& extent) {
@@ -53,7 +53,7 @@ void Coords::reorigin(Coords new_origin, const Extent& extent) {
 }
 
 // static
-Coords Coords::Null() {
+Coords Coords::null() {
 	return Coords(-1, -1);
 }
 

@@ -57,7 +57,7 @@ struct Message {
 	 * \param t The message title
 	 * \param b The message body
 	 * \param c The message coords. The player will be able to taken there.
-	 * Defaults to Coords::Null()
+	 * Defaults to Coords::null()
 	 * \param ser A MapObject serial. If non null, the message will be deleted once
 	 * the object is removed from the game. Defaults to 0
 	 * \param s The message status. Defaults to Status::New
@@ -67,7 +67,7 @@ struct Message {
 		 uint32_t                  sent_time,
 		 const std::string &       t,
 		 const std::string &       b,
-		 Widelands::Coords   const c = Coords::Null(),
+		 Widelands::Coords   const c = Coords::null(),
 		 Widelands::Serial         ser = 0,
 		 Status                    s = New)
 		:

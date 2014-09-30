@@ -93,8 +93,8 @@ public:
 
 	void start_transfer(Game &, Supply &);
 
-	void Read (FileRead  &, Game &, MapObjectLoader &);
-	void Write(FileWrite &, Game &, MapObjectSaver  &) const;
+	void read (FileRead  &, Game &, MapObjectLoader &);
+	void write(FileWrite &, Game &, MapObjectSaver  &) const;
 	Worker * get_transfer_worker();
 
 	//  callbacks for WareInstance/Worker code

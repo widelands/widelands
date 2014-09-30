@@ -144,7 +144,7 @@ XGETTEXTOPTS ="-k_ --from-code=UTF-8"
 XGETTEXTOPTS+=" -F -c\"* TRANSLATORS\""
 # escaped double quotes are necessary for windows, as it ignores single quotes
 XGETTEXTOPTS+=" --copyright-holder=\"Widelands Development Team\""
-XGETTEXTOPTS+=" --msgid-bugs-address=\"widelands-public@lists.sourceforge.net\""
+XGETTEXTOPTS+=" --msgid-bugs-address=\"https://bugs.launchpad.net/widelands\""
 
 MSGMERGEOPTS="-q --no-wrap"
 

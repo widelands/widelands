@@ -29,8 +29,8 @@ namespace Widelands {
  * player number and so on
  */
 struct GameInteractivePlayerPacket : public GameDataPacket {
-	void Read (FileSystem &, Game &, MapObjectLoader * = nullptr) override;
-	void Write(FileSystem &, Game &, MapObjectSaver  * = nullptr) override;
+	void read (FileSystem &, Game &, MapObjectLoader * = nullptr) override;
+	void write(FileSystem &, Game &, MapObjectSaver  * = nullptr) override;
 };
 
 }

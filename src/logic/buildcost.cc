@@ -64,26 +64,26 @@ uint32_t Buildcost::total() const
 
 void Buildcost::save(FileWrite& fw, const Widelands::TribeDescr& tribe) const {
 	for (const_iterator it = begin(); it != end(); ++it) {
-		fw.CString(tribe.get_ware_descr(it->first)->name());
-		fw.Unsigned8(it->second);
+		fw.c_string(tribe.get_ware_descr(it->first)->name());
+		fw.unsigned_8(it->second);
 	}
-	fw.CString("");
+	fw.c_string("");
 }
 
 void Buildcost::load(FileRead& fr, const Widelands::TribeDescr& tribe) {
 	clear();
 
 	for (;;) {
-		std::string name = fr.CString();
+		std::string name = fr.c_string();
 		if (name.empty())
 			break;
 
 		WareIndex index = tribe.ware_index(name);
 		if (index == INVALID_INDEX) {
 			log("buildcost: tribe %s does not define ware %s", tribe.name().c_str(), name.c_str());
-			fr.Unsigned8();
+			fr.unsigned_8();
 		} else {
-			(*this)[index] = fr.Unsigned8();
+			(*this)[index] = fr.unsigned_8();
 		}
 	}
 }

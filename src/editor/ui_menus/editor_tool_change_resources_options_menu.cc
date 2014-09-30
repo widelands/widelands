@@ -215,7 +215,7 @@ void EditorToolChangeResourcesOptionsMenu::selected() {
 	Widelands::EditorGameBase& egbase = ref_cast<EditorInteractive, UI::Panel>(*get_parent()).egbase();
 	Widelands::Map & map = egbase.map();
 	map.overlay_manager().register_overlay_callback_function(
-	   boost::bind(&Editor_Change_Resource_Tool_Callback, _1, boost::ref(map), boost::ref(egbase.world()), n));
+	   boost::bind(&editor_change_resource_tool_callback, _1, boost::ref(map), boost::ref(egbase.world()), n));
 	map.recalc_whole_map(egbase.world());
 	select_correct_tool();
 

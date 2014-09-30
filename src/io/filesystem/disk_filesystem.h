@@ -30,32 +30,32 @@ class RealFSImpl : public FileSystem {
 public:
 	RealFSImpl(const std::string & Directory);
 
-	std::set<std::string> ListDirectory(const std::string& path) override;
+	std::set<std::string> list_directory(const std::string& path) override;
 
-	bool IsWritable() const override;
-	bool FileIsWriteable(const std::string & path);
-	bool FileExists (const std::string & path) override;
-	bool IsDirectory(const std::string & path) override;
-	void EnsureDirectoryExists(const std::string & dirname) override;
-	void MakeDirectory        (const std::string & dirname) override;
+	bool is_writable() const override;
+	bool file_is_writeable(const std::string & path);
+	bool file_exists (const std::string & path) override;
+	bool is_directory(const std::string & path) override;
+	void ensure_directory_exists(const std::string & fs_dirname) override;
+	void make_directory        (const std::string & fs_dirname) override;
 
-	void * Load(const std::string & fname, size_t & length) override;
+	void * load(const std::string & fname, size_t & length) override;
 
 
-	void Write(const std::string & fname, void const * data, int32_t length, bool append);
-	void Write(const std::string & fname, void const * data, int32_t length) override
-		{Write(fname, data, length, false);}
+	void write(const std::string & fname, void const * data, int32_t length, bool append);
+	void write(const std::string & fname, void const * data, int32_t length) override
+		{write(fname, data, length, false);}
 
-	StreamRead  * OpenStreamRead (const std::string & fname) override;
-	StreamWrite * OpenStreamWrite(const std::string & fname) override;
+	StreamRead  * open_stream_read (const std::string & fname) override;
+	StreamWrite * open_stream_write(const std::string & fname) override;
 
-	FileSystem * MakeSubFileSystem(const std::string & dirname) override;
-	FileSystem * CreateSubFileSystem(const std::string & dirname, Type) override;
-	void Unlink(const std::string & file) override;
-	void Rename(const std::string & old_name, const std::string & new_name) override;
+	FileSystem * make_sub_file_system(const std::string & fs_dirname) override;
+	FileSystem * create_sub_file_system(const std::string & fs_dirname, Type) override;
+	void fs_unlink(const std::string & file) override;
+	void fs_rename(const std::string & old_name, const std::string & new_name) override;
 
-	std::string getBasename() override {return m_directory;}
-	unsigned long long DiskSpace() override;
+	std::string get_basename() override {return m_directory;}
+	unsigned long long disk_space() override;
 
 private:
 	void m_unlink_directory(const std::string & file);

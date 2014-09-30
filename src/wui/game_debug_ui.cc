@@ -325,7 +325,7 @@ void FieldDebugWindow::think()
 		{
 			Widelands::Time const time_last_surveyed =
 				player_field.time_triangle_last_surveyed[Widelands::TCoords<>::D];
-			if (time_last_surveyed != Widelands::Never()) {
+			if (time_last_surveyed != Widelands::never()) {
 				snprintf
 					(buffer, sizeof(buffer),
 					 "  D triangle last surveyed at %u: amount %u\n",
@@ -336,7 +336,7 @@ void FieldDebugWindow::think()
 		{
 			Widelands::Time const time_last_surveyed =
 				player_field.time_triangle_last_surveyed[Widelands::TCoords<>::R];
-			if (time_last_surveyed != Widelands::Never()) {
+			if (time_last_surveyed != Widelands::never()) {
 				snprintf
 					(buffer, sizeof(buffer),
 					 "  R triangle last surveyed at %u: amount %u\n",

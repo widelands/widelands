@@ -84,7 +84,7 @@ HelpWindow::HelpWindow
 		 in_width / 3, but_height,
 		 g_gr->images().get("pics/but0.png"),
 		 _("OK"), std::string(), true, false);
-	btn->sigclicked.connect(boost::bind(&HelpWindow::pressedOk, boost::ref(*this)));
+	btn->sigclicked.connect(boost::bind(&HelpWindow::pressed_ok, boost::ref(*this)));
 	btn->set_font(Font::get(UI_FONT_NAME, (fontsize < 12 ? 12 : fontsize)));
 
 	textarea->set_size(in_width - 10, in_height - 10 - (2 * but_height));
@@ -156,7 +156,7 @@ bool HelpWindow::handle_mousepress(const uint8_t btn, int32_t, int32_t)
 {
 	if (btn == SDL_BUTTON_RIGHT) {
 		play_click();
-		pressedOk();
+		pressed_ok();
 	}
 	return true;
 }
@@ -166,7 +166,7 @@ bool HelpWindow::handle_mouserelease(const uint8_t, int32_t, int32_t)
 	return true;
 }
 
-void HelpWindow::pressedOk()
+void HelpWindow::pressed_ok()
 {
 	if (is_modal())
 		end_modal(0);

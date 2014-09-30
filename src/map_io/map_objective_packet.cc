@@ -32,7 +32,7 @@ namespace Widelands {
 #define CURRENT_PACKET_VERSION 2
 
 
-void MapObjectivePacket::Read
+void MapObjectivePacket::read
 	(FileSystem            &       fs,
 	 EditorGameBase      &       egbase,
 	 bool                    const skip,
@@ -73,7 +73,7 @@ void MapObjectivePacket::Read
 }
 
 
-void MapObjectivePacket::Write
+void MapObjectivePacket::write
 	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
 {
 	Profile prof;

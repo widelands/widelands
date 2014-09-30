@@ -40,8 +40,8 @@ saved game file. it is an abstract base class
 */
 struct GameDataPacket {
 	virtual ~GameDataPacket() {}
-	virtual void Read (FileSystem &, Game &, MapObjectLoader * = nullptr) = 0;
-	virtual void Write(FileSystem &, Game &, MapObjectSaver  * = nullptr) = 0;
+	virtual void read (FileSystem &, Game &, MapObjectLoader * = nullptr) = 0;
+	virtual void write(FileSystem &, Game &, MapObjectSaver  * = nullptr) = 0;
 };
 
 }

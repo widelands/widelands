@@ -63,7 +63,7 @@ struct Road : public PlayerImmovable {
 
 	const RoadDescr& descr() const;
 
-	static bool IsRoadDescr(MapObjectDescr const *);
+	static bool is_road_descr(MapObjectDescr const *);
 
 	enum FlagId {
 		FlagStart = 0,

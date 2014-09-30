@@ -91,17 +91,17 @@ struct MultiPlayerClientGroup : public UI::Box {
 				 ||
 				 s->settings().players.at(p).state == PlayerSettings::stateOpen)
 			{
-				s->setPlayerNumber(p);
+				s->set_player_number(p);
 				return;
 			}
 		}
-		s->setPlayerNumber(UserSettings::none());
+		s->set_player_number(UserSettings::none());
 	}
 
 	/// Care about visibility and current values
 	void refresh() {
 		UserSettings us = s->settings().users.at(m_id);
-		if (us.position == UserSettings::notConnected()) {
+		if (us.position == UserSettings::not_connected()) {
 			std::string free_i18n = _("free");
 			std::string free_text =
 				(boost::format("\\<%s\\>") % free_i18n).str();
@@ -115,7 +115,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 			if (m_save != us.position) {
 				char buf[42] = "pics/menu_tab_watch.png";
 				char buf2[128];
-				if (us.position < UserSettings::highestPlayernum()) {
+				if (us.position < UserSettings::highest_playernum()) {
 					snprintf
 						(buf, sizeof(buf),
 						 "pics/genstats_enable_plr_0%i.png", us.position + 1);
@@ -129,7 +129,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 					type->set_tooltip(buf2);
 					type->set_visible(true);
 				} else {
-					type_icon->setIcon(g_gr->images().get(buf));
+					type_icon->set_icon(g_gr->images().get(buf));
 					type_icon->set_tooltip(buf2);
 					type_icon->set_visible(true);
 				}
@@ -251,10 +251,10 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		set_visible(true);
 
 		const PlayerSettings & player_setting = settings.players[m_id];
-		bool typeaccess       = s->canChangePlayerState(m_id);
-		bool tribeaccess      = s->canChangePlayerTribe(m_id);
-		bool const initaccess = s->canChangePlayerInit(m_id);
-		bool teamaccess       = s->canChangePlayerTeam(m_id);
+		bool typeaccess       = s->can_change_player_state(m_id);
+		bool tribeaccess      = s->can_change_player_tribe(m_id);
+		bool const initaccess = s->can_change_player_init(m_id);
+		bool teamaccess       = s->can_change_player_team(m_id);
 
 		type->set_enabled(typeaccess);
 		if (player_setting.state == PlayerSettings::stateClosed) {

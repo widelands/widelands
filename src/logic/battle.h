@@ -76,7 +76,7 @@ public:
 
 	// Called by the battling soldiers once they've met on a common node and are
 	// idle.
-	void getBattleWork(Game &, Soldier &);
+	void get_battle_work(Game &, Soldier &);
 
 private:
 	struct Loader : public MapObject::Loader {
@@ -87,7 +87,7 @@ private:
 		Serial m_second;
 	};
 
-	void calculateRound(Game &);
+	void calculate_round(Game &);
 
 	Soldier * m_first;
 	Soldier * m_second;

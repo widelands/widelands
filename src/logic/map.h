@@ -95,7 +95,7 @@ CheckStep
 Predicates used in path finding and find functions.
 */
 struct FindImmovable;
-const FindImmovable & FindImmovableAlwaysTrue();
+const FindImmovable & find_immovable_always_true();
 
 struct FindBob {
 	//  Return true if this bob should be returned by find_bobs.
@@ -247,17 +247,17 @@ public:
 	uint32_t find_immovables
 		(const Area<FCoords>,
 		 std::vector<ImmovableFound> * list,
-		 const FindImmovable & = FindImmovableAlwaysTrue());
+		 const FindImmovable & = find_immovable_always_true());
 	uint32_t find_reachable_immovables
 		(const Area<FCoords>,
 		 std::vector<ImmovableFound> * list,
 		 const CheckStep &,
-		 const FindImmovable & = FindImmovableAlwaysTrue());
+		 const FindImmovable & = find_immovable_always_true());
 	uint32_t find_reachable_immovables_unique
 		(const Area<FCoords>,
 		 std::vector<BaseImmovable *> & list,
 		 const CheckStep &,
-		 const FindImmovable & = FindImmovableAlwaysTrue());
+		 const FindImmovable & = find_immovable_always_true());
 	uint32_t find_fields
 		(const Area<FCoords>,
 		 std::vector<Coords> * list,

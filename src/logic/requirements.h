@@ -89,8 +89,8 @@ public:
 	bool check(const MapObject &) const;
 
 	// For Save/Load Games
-	void Read (FileRead  &, EditorGameBase &, MapObjectLoader &);
-	void Write(FileWrite &, EditorGameBase &, MapObjectSaver  &) const;
+	void read (FileRead  &, EditorGameBase &, MapObjectLoader &);
+	void write(FileWrite &, EditorGameBase &, MapObjectSaver  &) const;
 
 private:
 	boost::shared_ptr<BaseCapsule> m;
@@ -183,8 +183,8 @@ struct RequireAttribute {
 
 	static const RequirementsStorage storage;
 
-	int32_t getMin() const {return min; }
-	int32_t getMax() const {return max; }
+	int32_t get_min() const {return min; }
+	int32_t get_max() const {return max; }
 
 private:
 	TrainingAttribute at;

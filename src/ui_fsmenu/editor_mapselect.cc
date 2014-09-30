@@ -136,7 +136,7 @@ void FullscreenMenuEditorMapSelect::ok()
 	std::string filename(m_list.get_selected());
 
 	if
-		(g_fs->IsDirectory(filename.c_str())
+		(g_fs->is_directory(filename.c_str())
 		 &&
 		 !WidelandsMapLoader::is_widelands_map(filename))
 	{
@@ -161,7 +161,7 @@ void FullscreenMenuEditorMapSelect::map_selected(uint32_t)
 
 	m_ok.set_enabled(true);
 
-	if (!g_fs->IsDirectory(name) || WidelandsMapLoader::is_widelands_map(name)) {
+	if (!g_fs->is_directory(name) || WidelandsMapLoader::is_widelands_map(name)) {
 		Widelands::Map map;
 		{
 			std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(name);
@@ -201,7 +201,7 @@ void FullscreenMenuEditorMapSelect::double_clicked(uint32_t) {ok();}
 void FullscreenMenuEditorMapSelect::fill_list()
 {
 	//  Fill it with all files we find.
-	m_mapfiles = g_fs->ListDirectory(m_curdir);
+	m_mapfiles = g_fs->list_directory(m_curdir);
 
 	//  First, we add all directories. We manually add the parent directory.
 	if (m_curdir != m_basedir) {
@@ -227,14 +227,14 @@ void FullscreenMenuEditorMapSelect::fill_list()
 	{
 		const char * const name = pname->c_str();
 		if
-			(strcmp(FileSystem::FS_Filename(name), ".")    &&
+			(strcmp(FileSystem::fs_filename(name), ".")    &&
 			 // Upsy, appeared again. ignore
-			 strcmp(FileSystem::FS_Filename(name), "..")   &&
-			 g_fs->IsDirectory(name)                       &&
+			 strcmp(FileSystem::fs_filename(name), "..")   &&
+			 g_fs->is_directory(name)                       &&
 			 !WidelandsMapLoader::is_widelands_map(name))
 
 		m_list.add
-			(FileSystem::FS_Filename(name),
+			(FileSystem::fs_filename(name),
 			 name,
 			 g_gr->images().get("pics/ls_dir.png"));
 	}
@@ -252,7 +252,7 @@ void FullscreenMenuEditorMapSelect::fill_list()
 			try {
 				ml->preload_map(true);
 				m_list.add
-					(FileSystem::FS_Filename(name),
+					(FileSystem::fs_filename(name),
 					 name,
 					 g_gr->images().get
 						 (dynamic_cast<WidelandsMapLoader*>(ml.get()) ? "pics/ls_wlmap.png" : "pics/ls_s2map.png"));

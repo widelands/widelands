@@ -468,8 +468,8 @@ struct CmdDestroyMapObject : public GameLogicCommand {
 	CmdDestroyMapObject (int32_t t, MapObject &);
 	void execute (Game &) override;
 
-	void Write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
-	void Read (FileRead  &, EditorGameBase &, MapObjectLoader &) override;
+	void write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
+	void read (FileRead  &, EditorGameBase &, MapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_DESTROY_MAPOBJECT;}
 
@@ -483,8 +483,8 @@ struct CmdAct : public GameLogicCommand {
 
 	void execute (Game &) override;
 
-	void Write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
-	void Read (FileRead  &, EditorGameBase &, MapObjectLoader &) override;
+	void write(FileWrite &, EditorGameBase &, MapObjectSaver  &) override;
+	void read (FileRead  &, EditorGameBase &, MapObjectLoader &) override;
 
 	uint8_t id() const override {return QUEUE_CMD_ACT;}
 
