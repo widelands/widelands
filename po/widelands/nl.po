@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-09-23 09:36+0200\n"
+"POT-Creation-Date: 2014-09-29 20:36+0100\n"
 "PO-Revision-Date: 2014-07-27 17:12+0000\n"
 "Last-Translator: SirVer <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-24 05:51+0000\n"
+"X-Launchpad-Export-Date: 2014-09-30 05:58+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -132,7 +132,7 @@ msgstr "Deze kaart is niet opgeslagen, weet je zeker dat je wilt afsluiten?"
 #: ../../src/editor/editorinteractive.cc:595
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:154
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:478
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:175
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:177
 #: ../../src/logic/map.h:177
 msgid "No Name"
 msgstr "Geen naam"
@@ -375,8 +375,8 @@ msgstr "Spelers:"
 msgid "Descr:"
 msgstr "Beschr:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:114
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:125
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:115
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:126
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:56
 #: ../../src/scripting/lua_game.cc:393 ../../src/ui_basic/helpwindow.cc:86
 #: ../../src/ui_basic/messagebox.cc:90
@@ -389,18 +389,18 @@ msgstr "Beschr:"
 msgid "OK"
 msgstr "OK"
 
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:123
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:132
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:125
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:134
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:66
-#: ../../src/ui_fsmenu/launch_mpg.cc:90 ../../src/ui_fsmenu/options.cc:107
-#: ../../src/ui_fsmenu/options.cc:422
-#: ../../src/wui/game_main_menu_save_game.cc:104 ../../src/wui/login_box.cc:70
+#: ../../src/ui_fsmenu/launch_mpg.cc:90 ../../src/ui_fsmenu/options.cc:113
+#: ../../src/ui_fsmenu/options.cc:478
+#: ../../src/wui/game_main_menu_save_game.cc:104 ../../src/wui/login_box.cc:73
 msgid "Cancel"
 msgstr "Annuleren"
 
 #. * TRANSLATORS: Parent directory
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:208
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:289
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:212
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:293
 #: ../../src/ui_fsmenu/editor_mapselect.cc:215
 #: ../../src/ui_fsmenu/mapselect.cc:332
 msgid "parent"
@@ -531,35 +531,40 @@ msgstr "willekeurige kaart aan het genereren..."
 msgid "Descr: "
 msgstr "Beschr: "
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:139
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:141
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:32
 msgid "Make Directory"
 msgstr "Maak map"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:199
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:201
 msgid "unnamed"
 msgstr "naamloos"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:246
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:249
+#, c-format
+msgid "Directory: %s"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:251
 msgid "directory"
 msgstr "map"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:250
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:253
 msgid "Not a map file"
 msgstr "Geen mapbestand"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:378
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:382
 #: ../../src/wui/game_main_menu_save_game.cc:267
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Een bestand met de naam '%s' bestaat al. Overschrijven?"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:381
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:401
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:385
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:405
 msgid "Error Saving Map!"
 msgstr "Fout bij het opslaan van de map!!"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:397
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:401
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -700,7 +705,37 @@ msgstr "Zet waarde: %u"
 msgid "Immovable Select"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:119
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:88
+msgid "arable"
+msgstr ""
+
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:94
+msgid "aquatic"
+msgstr ""
+
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:100
+msgid "mountainous"
+msgstr ""
+
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:106
+msgid "dead"
+msgstr ""
+
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:113
+msgid "unpassable"
+msgstr ""
+
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:118
+msgid "treeless"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:141
 msgid "Terrain Select"
 msgstr "Selecteer terrein"
 
@@ -932,8 +967,8 @@ msgstr ""
 #: ../../src/logic/production_program.cc:343
 #: ../../src/logic/production_program.cc:365
 #: ../../src/logic/production_program.cc:945
-#: ../../src/logic/production_program.cc:1062
-#: ../../src/logic/production_program.cc:1157
+#: ../../src/logic/production_program.cc:1063
+#: ../../src/logic/production_program.cc:1158
 #, c-format
 msgid "%1$ix %2$s"
 msgstr ""
@@ -961,7 +996,15 @@ msgid "the workers need no experience"
 msgstr ""
 
 #. * TRANSLATORS: "Did not start working because the economy needs the ware ‘%s’"
+#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
+#. * TRANSLATORS: For this example, this is what's in the place holders:
+#. * TRANSLATORS:    %1$s = "working"
+#. * TRANSLATORS:    %2$s = "3x water and 3x wheat are missing"
+#. * TRANSLATORS: This appears in the hover text on buildings. Please test these in context
+#. * TRANSLATORS: on a development build if you can, and let us know if there are any issues
+#. * TRANSLATORS: we need to address for your language.
 #: ../../src/logic/production_program.cc:577
+#: ../../src/logic/production_program.cc:968
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr ""
@@ -979,51 +1022,38 @@ msgid "Skipped %1$s because %2$s"
 msgstr ""
 
 #. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
-#. * TRANSLATORS: For this example, this is what's in the place holders:
-#. * TRANSLATORS:    %1$s = "work"
-#. * TRANSLATORS:    %2$s = "water and wheat (2) "
-#. * TRANSLATORS:    %3$s = "are missing"
-#: ../../src/logic/production_program.cc:959
-#, c-format
-msgid "Did not start %1$s because %2$s %3$s"
-msgstr ""
-
-#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta bread is missing'
-#. * TRANSLATORS:
-#. * TRANSLATORS: This appears in the hover text on buildings. Please test these in context
-#. * TRANSLATORS: on a development build if you can, and let us know if there are any issues
-#. * TRANSLATORS: we need to address for your language.
-#: ../../src/logic/production_program.cc:968
-msgid " is missing"
-msgid_plural " are missing"
-msgstr[0] " ontbreekt"
-msgstr[1] " ontbreken"
+#: ../../src/logic/production_program.cc:956
+#, c-format
+msgid "%s is missing"
+msgid_plural "%s are missing"
+msgstr[0] ""
+msgstr[1] ""
 
 #. * TRANSLATORS: %s is a list of wares
-#: ../../src/logic/production_program.cc:1072
+#: ../../src/logic/production_program.cc:1073
 #, c-format
 msgid "Produced %s"
 msgstr "%s geproduceerd"
 
 #. * TRANSLATORS: %s is a list of workers
-#: ../../src/logic/production_program.cc:1166
+#: ../../src/logic/production_program.cc:1167
 #, c-format
 msgid "Recruited %s"
 msgstr "Gerecruteerd %s"
 
 #. * TRANSLATORS: %1$s = production site name, %2$s = production program name, %3$s = resource
-#: ../../src/logic/production_program.cc:1227
+#: ../../src/logic/production_program.cc:1228
 #, c-format
 msgid "%1$s %2$s mine %3$s"
 msgstr "%1$s %2$s mijn %3$s"
 
-#: ../../src/logic/production_program.cc:1389
+#: ../../src/logic/production_program.cc:1390
 msgid "No soldier to train!"
 msgstr "Geen soldaten om te trainen!"
 
-#: ../../src/logic/production_program.cc:1397
-#: ../../src/logic/production_program.cc:1482
+#: ../../src/logic/production_program.cc:1398
+#: ../../src/logic/production_program.cc:1483
 msgid "No soldier found for this training level!"
 msgstr "Geen soldaat gevonden voor dit trainingsniveau!"
 
@@ -1816,19 +1846,25 @@ msgstr "Nee"
 msgid "Preparing..."
 msgstr "Voorbereiden..."
 
-#: ../../src/ui_basic/spinbox.cc:116
+#. * TRANSLATORS: %i = number, %s = unit, e.g. "5 pixels" in the advanced options
+#: ../../src/ui_basic/spinbox.cc:126
+#, c-format
+msgid "%i %s"
+msgstr ""
+
+#: ../../src/ui_basic/spinbox.cc:136
 msgid "Increase the value"
 msgstr "Verhoog de waarde"
 
-#: ../../src/ui_basic/spinbox.cc:124
+#: ../../src/ui_basic/spinbox.cc:144
 msgid "Decrease the value"
 msgstr "Verlaag de waarde"
 
-#: ../../src/ui_basic/spinbox.cc:135
+#: ../../src/ui_basic/spinbox.cc:155
 msgid "Increase the value by 10"
 msgstr "Verhoog de waarde met 10"
 
-#: ../../src/ui_basic/spinbox.cc:143
+#: ../../src/ui_basic/spinbox.cc:163
 msgid "Decrease the value by 10"
 msgstr "Verlaag de waarde met 10"
 
@@ -2454,7 +2490,7 @@ msgid "Show login dialog"
 msgstr "Geef login-dialoog weer"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:115
-#: ../../src/ui_fsmenu/netsetup_lan.cc:121 ../../src/wui/login_box.cc:74
+#: ../../src/ui_fsmenu/netsetup_lan.cc:121 ../../src/wui/login_box.cc:77
 msgid "nobody"
 msgstr "niemand"
 
@@ -2501,154 +2537,155 @@ msgstr "Open"
 msgid "Closed"
 msgstr "Gesloten"
 
-#: ../../src/ui_fsmenu/options.cc:102 ../../src/ui_fsmenu/options.cc:446
+#: ../../src/ui_fsmenu/options.cc:108 ../../src/ui_fsmenu/options.cc:489
 msgid "Advanced Options"
 msgstr "Gevorderde Opties"
 
-#: ../../src/ui_fsmenu/options.cc:112 ../../src/ui_fsmenu/options.cc:427
+#: ../../src/ui_fsmenu/options.cc:118 ../../src/ui_fsmenu/options.cc:483
 msgid "Apply"
 msgstr "Toepassen"
 
-#: ../../src/ui_fsmenu/options.cc:123
-msgid "min."
-msgstr "min."
+#: ../../src/ui_fsmenu/options.cc:124
+msgid "General Options"
+msgstr "Algemene opties"
+
+#: ../../src/ui_fsmenu/options.cc:130
+msgid "In-game resolution"
+msgstr "Spelresolutie"
+
+#: ../../src/ui_fsmenu/options.cc:146
+msgid "Fullscreen"
+msgstr "Volledig scherm"
+
+#: ../../src/ui_fsmenu/options.cc:157
+msgid "Grab Input"
+msgstr "Pak invoer"
+
+#: ../../src/ui_fsmenu/options.cc:164
+msgid "Maximum FPS:"
+msgstr "Maximum FPS:"
+
+#: ../../src/ui_fsmenu/options.cc:177
+msgid "Language"
+msgstr "Taal"
+
+#: ../../src/ui_fsmenu/options.cc:193
+msgid "Enable Music"
+msgstr "Zet muziek aan"
+
+#: ../../src/ui_fsmenu/options.cc:203
+msgid "Enable Sound"
+msgstr "Zet geluid aan"
+
+#: ../../src/ui_fsmenu/options.cc:210
+msgid "In-game Options"
+msgstr "Spelopties"
+
+#: ../../src/ui_fsmenu/options.cc:218
+msgid "Use single watchwindow mode"
+msgstr ""
+
+#: ../../src/ui_fsmenu/options.cc:228
+msgid "Start building road after placing a flag"
+msgstr "Start met wegenaanleg na het plaatsen van een vlag"
+
+#: ../../src/ui_fsmenu/options.cc:239
+msgid "Show buildings area preview"
+msgstr "Werkgebied van gebouw tonen"
+
+#: ../../src/ui_fsmenu/options.cc:250
+msgid "Snap windows only when overlapping"
+msgstr "Haak schermen alleen bij overlappen"
+
+#: ../../src/ui_fsmenu/options.cc:260
+msgid "Dock windows to edges"
+msgstr "Zet schermen vast aan de randen"
+
+#. * TRANSLATORS: Options: Save game automatically every:
+#. * TRANSLATORS: This will have a number added in front of it
+#: ../../src/ui_fsmenu/options.cc:269 ../../src/ui_fsmenu/options.cc:397
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../src/ui_fsmenu/options.cc:277
+msgid "Save game automatically every"
+msgstr "Sla spel automatisch op elke"
 
 #. * TRANSLATORS: Options: Remove Replays older than:
 #. * TRANSLATORS: This will have a number added in front of it
-#: ../../src/ui_fsmenu/options.cc:131
+#: ../../src/ui_fsmenu/options.cc:287 ../../src/ui_fsmenu/options.cc:401
 msgid "day"
 msgid_plural "days"
 msgstr[0] "dag"
 msgstr[1] "dagen"
 
-#: ../../src/ui_fsmenu/options.cc:138
-msgid "General Options"
-msgstr "Algemene opties"
+#: ../../src/ui_fsmenu/options.cc:295
+msgid "Remove replays older than:"
+msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:145
-msgid "Fullscreen"
-msgstr "Volledig scherm"
-
-#: ../../src/ui_fsmenu/options.cc:151
-msgid "Grab Input"
-msgstr "Pak invoer"
-
-#: ../../src/ui_fsmenu/options.cc:157
-msgid "Enable Music"
-msgstr "Zet muziek aan"
-
-#: ../../src/ui_fsmenu/options.cc:163
-msgid "Enable Sound"
-msgstr "Zet geluid aan"
-
-#: ../../src/ui_fsmenu/options.cc:168
-msgid "Maximum FPS:"
-msgstr "Maximum FPS:"
-
-#: ../../src/ui_fsmenu/options.cc:178
-msgid "In-game resolution"
-msgstr "Spelresolutie"
-
-#: ../../src/ui_fsmenu/options.cc:183
-msgid "Language"
-msgstr "Taal"
-
-#: ../../src/ui_fsmenu/options.cc:194
-msgid "In-game Options"
-msgstr "Spelopties"
-
-#: ../../src/ui_fsmenu/options.cc:201
-msgid "Use single Watchwindow Mode"
-msgstr "Gebruik een enkel detailscherm"
-
-#: ../../src/ui_fsmenu/options.cc:207
-msgid "Start building road after placing a flag"
-msgstr "Start met wegenaanleg na het plaatsen van een vlag"
-
-#: ../../src/ui_fsmenu/options.cc:214
-msgid "Show buildings area preview"
-msgstr "Werkgebied van gebouw tonen"
-
-#: ../../src/ui_fsmenu/options.cc:221
-msgid "Snap windows only when overlapping"
-msgstr "Haak schermen alleen bij overlappen"
-
-#: ../../src/ui_fsmenu/options.cc:227
-msgid "Dock windows to edges"
-msgstr "Zet schermen vast aan de randen"
-
-#: ../../src/ui_fsmenu/options.cc:232
-msgid "Save game automatically every"
-msgstr "Sla spel automatisch op elke"
-
-#: ../../src/ui_fsmenu/options.cc:236
-msgid "Remove Replays older than:"
-msgstr "Verwijder Herhalingen ouder dan:"
-
-#. * TRANSLATORS Options: Remove Replays older than:
-#: ../../src/ui_fsmenu/options.cc:252
+#. * TRANSLATORS Options: Save game automatically every:
+#: ../../src/ui_fsmenu/options.cc:307
 msgid "Off"
 msgstr "Uit"
 
 #. * TRANSLATORS Options: Remove Replays older than:
-#: ../../src/ui_fsmenu/options.cc:254
+#: ../../src/ui_fsmenu/options.cc:315
 msgid "Never"
 msgstr "Nooit"
 
-#. * TRANSLATORS Options: Remove Replays older than:
-#: ../../src/ui_fsmenu/options.cc:256
-msgid "1 day"
-msgstr "1 dag"
-
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
-#: ../../src/ui_fsmenu/options.cc:321
-#, c-format
-msgid "%1$i x %2$i"
-msgstr "%1$i x %2$i"
+#: ../../src/ui_fsmenu/options.cc:368 ../../src/ui_fsmenu/options.cc:374
+msgid "%1% x %2%"
+msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:341
+#: ../../src/ui_fsmenu/options.cc:386
 msgid "Try system language"
 msgstr "Probeer systeemtaal"
 
-#: ../../src/ui_fsmenu/options.cc:433 ../../src/ui_fsmenu/options.cc:438
-msgid "px."
-msgstr "px."
-
-#: ../../src/ui_fsmenu/options.cc:457
+#: ../../src/ui_fsmenu/options.cc:495
 msgid "Main menu font:"
 msgstr "Hoofdmenu lettertype:"
 
-#: ../../src/ui_fsmenu/options.cc:463
+#: ../../src/ui_fsmenu/options.cc:505
+msgid "Distance for windows to snap to other panels:"
+msgstr "Afstand voor vensters om aan te haken aan andere panelen:"
+
+#: ../../src/ui_fsmenu/options.cc:509
+msgid "Distance for windows to snap to borders:"
+msgstr "Afstand voor vensters om aan kaders aan te haken:"
+
+#: ../../src/ui_fsmenu/options.cc:516 ../../src/ui_fsmenu/options.cc:523
+#: ../../src/ui_fsmenu/options.cc:671 ../../src/ui_fsmenu/options.cc:675
+msgid "pixel"
+msgid_plural "pixels"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../src/ui_fsmenu/options.cc:533
+msgid "Show in-game chat with transparent background"
+msgstr "Toon chat tijdens het spel met doorzichtige achtergrond"
+
+#: ../../src/ui_fsmenu/options.cc:543
 msgid "Play a sound at message arrival."
 msgstr "Speel een geluid af als er een bericht aankomt."
 
-#: ../../src/ui_fsmenu/options.cc:471
+#: ../../src/ui_fsmenu/options.cc:553
 msgid "Do not zip widelands data files (maps, replays and savegames)."
 msgstr ""
 "Comprimeer widelands gegevenbestand niet (kaarten, herhalingen en opgeslagen "
 "spellen)."
 
-#: ../../src/ui_fsmenu/options.cc:476
-msgid "Distance for windows to snap to other panels:"
-msgstr "Afstand voor vensters om aan te haken aan andere panelen:"
-
-#: ../../src/ui_fsmenu/options.cc:480
-msgid "Distance for windows to snap to borders:"
-msgstr "Afstand voor vensters om aan kaders aan te haken:"
-
-#: ../../src/ui_fsmenu/options.cc:486
+#: ../../src/ui_fsmenu/options.cc:563
 msgid "Remove Syncstream dumps on startup"
 msgstr "Verwijder Syncstream dumps bij het opstarten"
 
-#: ../../src/ui_fsmenu/options.cc:492
+#: ../../src/ui_fsmenu/options.cc:572
 msgid "OpenGL rendering"
 msgstr "OpenGL weergave"
 
-#: ../../src/ui_fsmenu/options.cc:497
-msgid "Show in-game chat with transparent background"
-msgstr "Toon chat tijdens het spel met doorzichtige achtergrond"
-
-#: ../../src/ui_fsmenu/options.cc:538
+#: ../../src/ui_fsmenu/options.cc:612
 msgid "DejaVuSerif (Default)"
 msgstr "DejaVuSerif (Standaard)"
 
@@ -2877,11 +2914,15 @@ msgstr "Bouwmaterialen"
 msgid "Tribal Ware Encyclopedia"
 msgstr "Stam goederen encyclopedie"
 
-#: ../../src/wui/encyclopedia_window.cc:79
-msgid "Consumed ware type(s)"
-msgstr "Gebruikte goederensoort(en)"
+#. * TRANSLATORS: Column title in the Tribal Wares Encyclopedia
+#: ../../src/wui/encyclopedia_window.cc:78
+#: ../../src/wui/encyclopedia_window.cc:210
+msgid "Consumed Ware Type"
+msgid_plural "Consumed Ware Types"
+msgstr[0] ""
+msgstr[1] ""
 
-#: ../../src/wui/encyclopedia_window.cc:80
+#: ../../src/wui/encyclopedia_window.cc:79
 msgid "Quantity"
 msgstr "Aantal"
 
@@ -3299,53 +3340,53 @@ msgstr "Verlaat herhaling"
 msgid "Metaserver login"
 msgstr "Metaserver login"
 
-#: ../../src/wui/login_box.cc:33
+#: ../../src/wui/login_box.cc:35
 msgid "Nickname:"
 msgstr "Bijnaam:"
 
-#: ../../src/wui/login_box.cc:39
+#: ../../src/wui/login_box.cc:41
 msgid "Password:"
 msgstr "Wachtwoord:"
 
-#: ../../src/wui/login_box.cc:48
+#: ../../src/wui/login_box.cc:50
 msgid "WARNING: Password will be shown and saved readable!"
 msgstr ""
 "WAARSCHUWING: Het wachtwoord zal worden getoond en leesbaar worden "
 "opgeslagen!"
 
-#: ../../src/wui/login_box.cc:53
+#: ../../src/wui/login_box.cc:55
 msgid "Log in to a registered account"
 msgstr "Inloggen bij een geregistreerd profiel"
 
-#: ../../src/wui/login_box.cc:58
+#: ../../src/wui/login_box.cc:60
 msgid "Automatically use this login information from now on."
 msgstr "Gebruik vanaf nu automatisch deze inlog informatie."
 
-#: ../../src/wui/login_box.cc:64
+#: ../../src/wui/login_box.cc:67
 msgid "Login"
 msgstr "Log in"
 
-#: ../../src/wui/login_box.cc:86
+#: ../../src/wui/login_box.cc:89
 msgid "Empty Nickname"
 msgstr "Lege Bijnaam"
 
-#: ../../src/wui/login_box.cc:86
+#: ../../src/wui/login_box.cc:89
 msgid "Please enter a nickname!"
 msgstr "Vul alsjeblieft een bijnaam in!"
 
-#: ../../src/wui/login_box.cc:93
+#: ../../src/wui/login_box.cc:96
 msgid "Space in Nickname"
 msgstr "Spatie in Bijnaam"
 
-#: ../../src/wui/login_box.cc:94
+#: ../../src/wui/login_box.cc:97
 msgid "Sorry, but spaces are not allowed in nicknames!"
 msgstr "Sorry, maar spaties zijn niet toegestaan in bijnamen"
 
-#: ../../src/wui/login_box.cc:101
+#: ../../src/wui/login_box.cc:104
 msgid "Empty Password"
 msgstr "Leeg wachtwoord"
 
-#: ../../src/wui/login_box.cc:101
+#: ../../src/wui/login_box.cc:104
 msgid "Please enter your password!"
 msgstr "Voer alsjeblieft je wachtwoord in!"
 
@@ -3663,3 +3704,23 @@ msgstr "Volg"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "Beeld centreren"
+
+#~ msgid "Consumed ware type(s)"
+#~ msgstr "Gebruikte goederensoort(en)"
+
+#~ msgid "min."
+#~ msgstr "min."
+
+#~ msgid "px."
+#~ msgstr "px."
+
+#~ msgid "Remove Replays older than:"
+#~ msgstr "Verwijder Herhalingen ouder dan:"
+
+#~ msgid "Use single Watchwindow Mode"
+#~ msgstr "Gebruik een enkel detailscherm"
+
+#~ msgid " is missing"
+#~ msgid_plural " are missing"
+#~ msgstr[0] " ontbreekt"
+#~ msgstr[1] " ontbreken"
