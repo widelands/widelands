@@ -46,7 +46,7 @@ void GamePlayerEconomiesPacket::read
 		FileRead fr;
 		fr.open(fs, "binary/player_economies");
 		uint16_t const packet_version = fr.unsigned_16();
-		if (3 <= packet_version && packet_version <= CURRENT_PACKET_VERSION) {
+		if (packet_version == CURRENT_PACKET_VERSION) {
 			iterate_players_existing(p, nr_players, game, player)
 				try {
 					Player::Economies & economies = player->m_economies;

@@ -60,16 +60,6 @@ void GameCmdQueuePacket::read
 				item.category = fr.signed_32();
 				item.serial = fr.unsigned_32();
 
-				if (packet_id == 129) {
-					// For backwards compatibility with savegames up to build15:
-					// Discard old CheckEventChain commands
-					fr.unsigned_16(); // CheckEventChain version
-					fr.unsigned_16(); // GameLogicCommand version
-					fr.unsigned_32(); // GameLogicCommand duetime
-					fr.unsigned_16(); // CheckEventChain ID
-					continue;
-				}
-
 				GameLogicCommand & cmd =
 					QueueCmdFactory::create_correct_queue_command(packet_id);
 				cmd.read(fr, game, *ol);

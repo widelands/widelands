@@ -40,7 +40,7 @@ void GamePlayerInfoPacket::read
 		FileRead fr;
 		fr.open(fs, "binary/player_info");
 		uint16_t const packet_version = fr.unsigned_16();
-		if (5 <= packet_version && packet_version <= CURRENT_PACKET_VERSION) {
+		if (10 <= packet_version && packet_version <= CURRENT_PACKET_VERSION) {
 			uint32_t const max_players = fr.unsigned_16();
 			for (uint32_t i = 1; i < max_players + 1; ++i) {
 				game.remove_player(i);
@@ -83,11 +83,7 @@ void GamePlayerInfoPacket::read
 					player.m_civil_blds_defeated = fr.unsigned_32();
 				}
 			}
-
-			if (packet_version <= 10)
-				game.read_statistics(fr, 3);
-			else
-				game.read_statistics(fr, 4);
+			game.read_statistics(fr, 4);
 		} else
 			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
