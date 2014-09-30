@@ -125,7 +125,7 @@ protected:
 	int32_t m_needed_experience;
 
 	/**
-	 * Type that this worker can become, i.e. level up to (or Null).
+	 * Type that this worker can become, i.e. level up to (or null).
 	 */
 	WareIndex  m_becomes;
 	Programs    m_programs;

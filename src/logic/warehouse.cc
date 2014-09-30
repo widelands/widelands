@@ -281,7 +281,7 @@ Warehouse::Warehouse(const WarehouseDescr & warehouse_descr) :
 	m_next_worker_without_cost_spawn =
 		new uint32_t[nr_worker_types_without_cost];
 	for (int i = 0; i < nr_worker_types_without_cost; ++i) {
-		m_next_worker_without_cost_spawn[i] = Never();
+		m_next_worker_without_cost_spawn[i] = never();
 	}
 	m_next_stock_remove_act = 0;
 }
@@ -366,16 +366,16 @@ bool Warehouse::_load_finish_planned_worker(PlannedWorkers & pw)
 void Warehouse::load_finish(EditorGameBase & egbase) {
 	Building::load_finish(egbase);
 
-	uint32_t next_spawn = Never();
+	uint32_t next_spawn = never();
 	const std::vector<WareIndex> & worker_types_without_cost =
 		descr().tribe().worker_types_without_cost();
 	for (uint8_t i = worker_types_without_cost.size(); i;) {
 		WareIndex const worker_index = worker_types_without_cost.at(--i);
 		if
 			(owner().is_worker_type_allowed(worker_index) &&
-			 m_next_worker_without_cost_spawn[i] == static_cast<uint32_t>(Never()))
+			 m_next_worker_without_cost_spawn[i] == static_cast<uint32_t>(never()))
 		{
-			if (next_spawn == static_cast<uint32_t>(Never()))
+			if (next_spawn == static_cast<uint32_t>(never()))
 				next_spawn =
 					schedule_act
 						(ref_cast<Game, EditorGameBase>(egbase),
@@ -586,7 +586,7 @@ void Warehouse::act(Game & game, uint32_t const data)
 					m_next_worker_without_cost_spawn[i] =
 						schedule_act(game, tdelta);
 				} else
-					m_next_worker_without_cost_spawn[i] = Never();
+					m_next_worker_without_cost_spawn[i] = never();
 			}
 	}
 
@@ -1176,7 +1176,7 @@ void Warehouse::enable_spawn
 	assert
 		(m_next_worker_without_cost_spawn[worker_types_without_cost_index]
 		 ==
-		 static_cast<uint32_t>(Never()));
+		 static_cast<uint32_t>(never()));
 	m_next_worker_without_cost_spawn[worker_types_without_cost_index] =
 		schedule_act(game, WORKER_WITHOUT_COST_SPAWN_INTERVAL);
 }
@@ -1185,12 +1185,12 @@ void Warehouse::disable_spawn(uint8_t const worker_types_without_cost_index)
 	assert
 		(m_next_worker_without_cost_spawn[worker_types_without_cost_index]
 		 !=
-		 static_cast<uint32_t>(Never()));
-	m_next_worker_without_cost_spawn[worker_types_without_cost_index] = Never();
+		 static_cast<uint32_t>(never()));
+	m_next_worker_without_cost_spawn[worker_types_without_cost_index] = never();
 }
 
 
-bool Warehouse::canAttack()
+bool Warehouse::can_attack()
 {
 	return descr().get_conquers() > 0;
 }
@@ -1204,7 +1204,7 @@ void Warehouse::aggressor(Soldier & enemy)
 	Map  & map  = game.map();
 	if
 		(enemy.get_owner() == &owner() ||
-		 enemy.getBattle() ||
+		 enemy.get_battle() ||
 		 descr().get_conquers()
 		 <=
 		 map.calc_distance(enemy.get_position(), get_position()))
@@ -1326,7 +1326,7 @@ WaresQueue& Warehouse::waresqueue(WareIndex index) {
 /*
  * SoldierControl implementations
  */
-std::vector<Soldier *> Warehouse::presentSoldiers() const
+std::vector<Soldier *> Warehouse::present_soldiers() const
 {
 	std::vector<Soldier *> rv;
 
@@ -1343,12 +1343,12 @@ std::vector<Soldier *> Warehouse::presentSoldiers() const
 
 	return rv;
 }
-int Warehouse::incorporateSoldier(EditorGameBase & egbase, Soldier & soldier) {
+int Warehouse::incorporate_soldier(EditorGameBase & egbase, Soldier & soldier) {
 	incorporate_worker(egbase, &soldier);
 	return 0;
 }
 
-int Warehouse::outcorporateSoldier(EditorGameBase & /* egbase */, Soldier & soldier) {
+int Warehouse::outcorporate_soldier(EditorGameBase & /* egbase */, Soldier & soldier) {
 
 	WareIndex const ware = descr().tribe().safe_worker_index("soldier");
 	if (m_incorporated_workers.count(ware)) {
@@ -1362,7 +1362,7 @@ int Warehouse::outcorporateSoldier(EditorGameBase & /* egbase */, Soldier & sold
 	}
 #ifndef NDEBUG
 	else
-		throw wexception("outcorporateSoldier: soldier not in this warehouse!");
+		throw wexception("outcorporate_soldier: soldier not in this warehouse!");
 #endif
 
 	return 0;

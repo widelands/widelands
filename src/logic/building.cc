@@ -90,7 +90,7 @@ BuildingDescr::BuildingDescr
 	}
 
 	m_helptext_script = directory + "/help.lua";
-	if (!g_fs->FileExists(m_helptext_script))
+	if (!g_fs->file_exists(m_helptext_script))
 		m_helptext_script = "";
 
 	// Parse build options
@@ -871,7 +871,7 @@ void Building::set_seeing(bool see)
  * \param title user-visible title of the message
  * \param description user-visible message body, will be placed in an
  *   appropriate rich-text paragraph
- * \param link_to_building_lifetime if true, the message will expire when this
+ * \param link_to_building_lifetime if true, the message will be deleted when this
  *   building is removed from the game. Default is true
  * \param throttle_time if non-zero, the minimum time delay in milliseconds
  *   between messages of this type (see \p msgsender) within the
@@ -910,8 +910,8 @@ void Building::send_message
 	rt_description += "</p></rt>";
 
 	Message * msg = new Message
-		(msgsender, game.get_gametime(), 60 * 60 * 1000,
-		 title, rt_description, get_position(), (link_to_building_lifetime ? m_serial : 0));
+		(msgsender, game.get_gametime(), title, rt_description,
+		 get_position(), (link_to_building_lifetime ? m_serial : 0));
 
 	if (throttle_time)
 		owner().add_message_with_timeout

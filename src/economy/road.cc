@@ -41,7 +41,7 @@ const RoadDescr& Road::descr() const {
 	return g_road_descr;
 }
 
-bool Road::IsRoadDescr(MapObjectDescr const * const descr)
+bool Road::is_road_descr(MapObjectDescr const * const descr)
 {
 	return descr == &g_road_descr;
 }
@@ -480,7 +480,7 @@ void Road::postsplit(Game & game, Flag & flag)
 	assert(static_cast<uint32_t>(index) < path.get_nsteps() - 1);
 
 	path.truncate(index);
-	secondpath.starttrim(index);
+	secondpath.trim_start(index);
 
 	molog("splitting road: first part:\n");
 	for (const Coords& coords : path.get_coords()) {

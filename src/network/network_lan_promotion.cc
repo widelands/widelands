@@ -108,7 +108,7 @@ DIAG_ON("-Wold-style-cast")
 	return select(sock + 1, &fds, nullptr, nullptr, &tv) == 1;
 }
 
-ssize_t LanBase::recv
+ssize_t LanBase::receive
 	(void * const buf, size_t const len, sockaddr_in * const addr)
 {
 	socklen_t addrlen = sizeof(sockaddr_in);
@@ -194,7 +194,7 @@ void LanGamePromoter::run ()
 		char magic[8];
 		sockaddr_in addr;
 
-		if (recv(magic, 8, &addr) < 8)
+		if (receive(magic, 8, &addr) < 8)
 			continue;
 
 		log ("Received %s packet\n", magic);
@@ -244,7 +244,7 @@ void LanGameFinder::run ()
 		sockaddr_in addr;
 
 		if
-			(recv
+			(receive
 			 	(&info, sizeof(info), &addr) < static_cast<int32_t>(sizeof(info)))
 			continue;
 

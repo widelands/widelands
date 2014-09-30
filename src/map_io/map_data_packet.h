@@ -34,8 +34,8 @@ struct MapObjectSaver;
 	namespace Widelands {                                                            \
 	class Name {                                                                     \
 	public:                                                                          \
-		void Read(FileSystem&, EditorGameBase&, bool, MapObjectLoader&); \
-		void Write(FileSystem&, EditorGameBase&, MapObjectSaver&);       \
+		void read(FileSystem&, EditorGameBase&, bool, MapObjectLoader&); \
+		void write(FileSystem&, EditorGameBase&, MapObjectSaver&);       \
 	};                                                                               \
 	}
 

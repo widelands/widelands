@@ -34,22 +34,20 @@ struct Message {
 	 * A new message to be displayed to the player
 	 * \param msgsender The message sender
 	 * \param sent_time The (game) time at which the message is sent
-	 * \param d The duration after which the message will expire
 	 * \param t The message title
 	 * \param b The message body
 	 * \param c The message coords. The player will be able to taken there.
-	 * Defaults to Coords::Null()
-	 * \param ser A MapObject serial. If non null, the message will expire once
+	 * Defaults to Coords::null()
+	 * \param ser A MapObject serial. If non null, the message will be deleted once
 	 * the object is removed from the game. Defaults to 0
 	 * \param s The message status. Defaults to Status::New
 	 */
 	Message
 		(const std::string &       msgsender,
 		 uint32_t                  sent_time,
-		 Duration                  d,
 		 const std::string &       t,
 		 const std::string &       b,
-		 Widelands::Coords   const c = Coords::Null(),
+		 Widelands::Coords   const c = Coords::null(),
 		 Widelands::Serial         ser = 0,
 		 Status                    s = New)
 		:
@@ -57,7 +55,6 @@ struct Message {
 		m_title(t),
 		m_body    (b),
 		m_sent    (sent_time),
-		m_duration(d),
 		m_position(c),
 		m_serial  (ser),
 		m_status  (s)
@@ -65,7 +62,6 @@ struct Message {
 
 	const std::string & sender() const     {return m_sender;}
 	uint32_t            sent    () const            {return m_sent;}
-	Duration            duration() const            {return m_duration;}
 	const std::string & title() const      {return m_title;}
 	const std::string & body () const               {return m_body;}
 	Widelands::Coords   position() const            {return m_position;}
@@ -78,7 +74,6 @@ private:
 	std::string m_title;
 	std::string       m_body;
 	uint32_t          m_sent;
-	Duration          m_duration; /// will expire after this duration
 	Widelands::Coords m_position;
 	Widelands::Serial m_serial; // serial to map object
 	Status            m_status;

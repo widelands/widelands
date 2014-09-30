@@ -72,7 +72,7 @@ private:
 	Widelands::ResourceIndex m_cur_res;
 };
 
-int32_t Editor_Change_Resource_Tool_Callback
+int32_t editor_change_resource_tool_callback
 	(const Widelands::TCoords<Widelands::FCoords>& c, Widelands::Map& map,
 	 const Widelands::World& world, int32_t const curres);
 

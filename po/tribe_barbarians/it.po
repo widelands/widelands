@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-08-05 11:10+0000\n"
-"PO-Revision-Date: 2014-08-31 12:20+0000\n"
-"Last-Translator: Guybrush88 <Unknown>\n"
+"POT-Creation-Date: 2014-09-18 18:55+0000\n"
+"PO-Revision-Date: 2014-09-17 18:06+0000\n"
+"Last-Translator: Davidus <davide97@gmail.com>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-01 05:48+0000\n"
-"X-Generator: Launchpad (build 17176)\n"
+"X-Launchpad-Export-Date: 2014-09-19 05:52+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 "Language: it\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -38,25 +38,25 @@ msgstr "I tuoi soldati hanno sconfitto il nemico nella caserma."
 #: ../../global/militarysites/barrier.empire/conf:8
 #: ../../tribes/barbarians/barrier/conf:7
 msgid "Your barrier discovered an aggressor."
-msgstr ""
+msgstr "La tua barriera ha scoperto un aggressore."
 
 #: ../../global/militarysites/barrier.barbarians/conf:9
 #: ../../global/militarysites/barrier.empire/conf:9
 #: ../../tribes/barbarians/barrier/conf:8
 msgid "Your barrier is under attack."
-msgstr ""
+msgstr "La tua barriera è sotto attacco"
 
 #: ../../global/militarysites/barrier.barbarians/conf:10
 #: ../../global/militarysites/barrier.empire/conf:10
 #: ../../tribes/barbarians/barrier/conf:9
 msgid "The enemy defeated your soldiers at the barrier."
-msgstr ""
+msgstr "Il nemico ha sconfitto i tuoi soldati nella barriera"
 
 #: ../../global/militarysites/barrier.barbarians/conf:11
 #: ../../global/militarysites/barrier.empire/conf:11
 #: ../../tribes/barbarians/barrier/conf:10
 msgid "Your soldiers defeated the enemy at the barrier."
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto il nemico nella barriera."
 
 #: ../../global/militarysites/castle.atlanteans/conf:8
 #: ../../global/militarysites/castle.empire/conf:8
@@ -101,22 +101,22 @@ msgstr "I tuoi soldati hanno sconfitto il nemico nella cittadella."
 #: ../../global/militarysites/donjon.barbarians/conf:9
 #: ../../tribes/barbarians/donjon/conf:8
 msgid "Your donjon discovered an aggressor."
-msgstr "Il tuo mastio ha scoperto un aggressore."
+msgstr "Il tuo dongione ha scoperto un aggressore."
 
 #: ../../global/militarysites/donjon.barbarians/conf:10
 #: ../../tribes/barbarians/donjon/conf:9
 msgid "Your donjon is under attack."
-msgstr "Il tuo mastio è sotto attacco."
+msgstr "Il tuo dongione è sotto attacco."
 
 #: ../../global/militarysites/donjon.barbarians/conf:11
 #: ../../tribes/barbarians/donjon/conf:10
 msgid "The enemy defeated your soldiers at the donjon."
-msgstr "Il nemico ha sconfitto i tuoi soldati nel mastio."
+msgstr "Il nemico ha sconfitto i tuoi soldati nel dongione."
 
 #: ../../global/militarysites/donjon.barbarians/conf:12
 #: ../../tribes/barbarians/donjon/conf:11
 msgid "Your soldiers defeated the enemy at the donjon."
-msgstr "I tuoi soldati hanno sconfitto il nemico nel mastio."
+msgstr "I tuoi soldati hanno sconfitto il nemico nel dongione."
 
 #: ../../global/militarysites/fortress.barbarians/conf:8
 #: ../../global/militarysites/fortress.empire/conf:8
@@ -192,19 +192,19 @@ msgstr "I tuoi soldati hanno sconfitto il nemico nella torre alta."
 
 #: ../../global/militarysites/outpost.empire/conf:8
 msgid "Your outpost discovered an aggressor."
-msgstr ""
+msgstr "Il tuo avamposto ha scoperto un aggressore."
 
 #: ../../global/militarysites/outpost.empire/conf:9
 msgid "Your outpost is under attack."
-msgstr ""
+msgstr "Il tuo avamposto è sotto attacco"
 
 #: ../../global/militarysites/outpost.empire/conf:10
 msgid "The enemy defeated your soldiers at the outpost."
-msgstr ""
+msgstr "Il nemico ha sconfitto i tuoi soldati nell' avamposto"
 
 #: ../../global/militarysites/outpost.empire/conf:11
 msgid "Your soldiers defeated the enemy at the outpost."
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto i nemici nell' avamposto"
 
 #: ../../global/militarysites/sentry.barbarians/conf:8
 #: ../../global/militarysites/sentry.empire/conf:8

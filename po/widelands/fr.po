@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-08-05 10:15+0100\n"
-"PO-Revision-Date: 2014-08-17 12:51+0000\n"
-"Last-Translator: bouchard renaud <Unknown>\n"
+"POT-Creation-Date: 2014-09-18 19:55+0100\n"
+"PO-Revision-Date: 2014-09-19 03:41+0000\n"
+"Last-Translator: SirVer <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-08-18 05:47+0000\n"
-"X-Generator: Launchpad (build 17156)\n"
+"X-Launchpad-Export-Date: 2014-09-20 05:45+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 "Language: fr\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -99,11 +99,11 @@ msgstr "Défaire"
 msgid "Redo"
 msgstr "Refaire"
 
-#: ../../src/editor/editorinteractive.cc:190 ../../src/wlapplication.cc:439
+#: ../../src/editor/editorinteractive.cc:190
 msgid "Unsupported format"
 msgstr "Format non géré"
 
-#: ../../src/editor/editorinteractive.cc:191 ../../src/wlapplication.cc:440
+#: ../../src/editor/editorinteractive.cc:191
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -799,7 +799,7 @@ msgid "Loading map"
 msgstr "Chargement de la carte"
 
 #: ../../src/logic/game.cc:369 ../../src/logic/game.cc:402
-#: ../../src/wlapplication.cc:1672
+#: ../../src/wlapplication.cc:1586
 msgid "Loading..."
 msgstr "Chargement..."
 
@@ -933,9 +933,9 @@ msgstr "l'économie n'à pas besoin d'un '%s'"
 #. * TRANSLATORS:    %2$s = "Ox"
 #: ../../src/logic/production_program.cc:343
 #: ../../src/logic/production_program.cc:365
-#: ../../src/logic/production_program.cc:946
-#: ../../src/logic/production_program.cc:1063
-#: ../../src/logic/production_program.cc:1158
+#: ../../src/logic/production_program.cc:945
+#: ../../src/logic/production_program.cc:1062
+#: ../../src/logic/production_program.cc:1157
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$ix %2$s"
@@ -985,7 +985,7 @@ msgstr "N'a pas fait %1$s parce que %2$s"
 #. * TRANSLATORS:    %1$s = "work"
 #. * TRANSLATORS:    %2$s = "water and wheat (2) "
 #. * TRANSLATORS:    %3$s = "are missing"
-#: ../../src/logic/production_program.cc:960
+#: ../../src/logic/production_program.cc:959
 #, c-format
 msgid "Did not start %1$s because %2$s %3$s"
 msgstr "N'a pas commencé à %1$s parce que %2$s %3$s"
@@ -996,36 +996,36 @@ msgstr "N'a pas commencé à %1$s parce que %2$s %3$s"
 #. * TRANSLATORS: This appears in the hover text on buildings. Please test these in context
 #. * TRANSLATORS: on a development build if you can, and let us know if there are any issues
 #. * TRANSLATORS: we need to address for your language.
-#: ../../src/logic/production_program.cc:969
+#: ../../src/logic/production_program.cc:968
 msgid " is missing"
 msgid_plural " are missing"
 msgstr[0] " est manquant"
 msgstr[1] " sont manquants"
 
 #. * TRANSLATORS: %s is a list of wares
-#: ../../src/logic/production_program.cc:1073
+#: ../../src/logic/production_program.cc:1072
 #, c-format
 msgid "Produced %s"
 msgstr "Produit %s"
 
 #. * TRANSLATORS: %s is a list of workers
-#: ../../src/logic/production_program.cc:1167
+#: ../../src/logic/production_program.cc:1166
 #, c-format
 msgid "Recruited %s"
 msgstr "recruté %s"
 
 #. * TRANSLATORS: %1$s = production site name, %2$s = production program name, %3$s = resource
-#: ../../src/logic/production_program.cc:1228
+#: ../../src/logic/production_program.cc:1227
 #, c-format
 msgid "%1$s %2$s mine %3$s"
 msgstr "%1$s %2$s mine %3$s"
 
-#: ../../src/logic/production_program.cc:1390
+#: ../../src/logic/production_program.cc:1389
 msgid "No soldier to train!"
 msgstr "Pas de soldat à entraîner!"
 
-#: ../../src/logic/production_program.cc:1398
-#: ../../src/logic/production_program.cc:1483
+#: ../../src/logic/production_program.cc:1397
+#: ../../src/logic/production_program.cc:1482
 msgid "No soldier found for this training level!"
 msgstr "Pas de soldats trouvé pour ce niveau d'entrainement!"
 
@@ -1137,18 +1137,18 @@ msgstr ""
 "devrait produire la ressource du type %s qui n'existe pas dans ce monde. La "
 "tribu n'est pas compatible avec le monde"
 
-#: ../../src/logic/worker.cc:944
+#: ../../src/logic/worker.cc:942
 msgid "A geologist found resources."
 msgstr "Un géologue a trouvé des ressources."
 
-#: ../../src/logic/worker.cc:1844
+#: ../../src/logic/worker.cc:1842
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr ""
 "Vos %s ne peuvent trouver de chemin pour rentrer et vont probablement "
 "mourrir."
 
-#: ../../src/logic/worker.cc:1851
+#: ../../src/logic/worker.cc:1849
 msgid "Worker got lost!"
 msgstr "Un ouvrier s'est perdu!"
 
@@ -1387,7 +1387,7 @@ msgstr ""
 "ou bien le serveur a été éteint pendant que vous tentiez de vous y connecter."
 
 #: ../../src/network/netclient.cc:198 ../../src/network/nethost.cc:849
-#: ../../src/wlapplication.cc:1565
+#: ../../src/wlapplication.cc:1479
 msgid "Preparing game"
 msgstr "Préparation de la partie"
 
@@ -2140,14 +2140,6 @@ msgstr "Joueur %u"
 msgid "closed"
 msgstr "fermé"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:636
-msgid "The map file seems to be invalid!"
-msgstr "Le fichier de carte semble invalide!"
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:636
-msgid "There was an error!"
-msgstr "Il y a eu une erreur!"
-
 #: ../../src/ui_fsmenu/launch_mpg.cc:646
 msgid "Map details:"
 msgstr "Détails de la carte:"
@@ -2692,283 +2684,7 @@ msgstr "Campagnes"
 msgid "Load Game"
 msgstr "Charger une partie"
 
-#: ../../src/wlapplication.cc:105
-msgid ""
-"Waited 5 seconds to close audio. There are some problems here, so killing "
-"Widelands. Update your sound driver and/or SDL to fix this problem\n"
-msgstr ""
-"Attendus 5 secondes pour fermer le son. Il y a des problèmes de ce coté, "
-"alors fermez Widelands. Mettez à jour votre pilote sonore et/ou SDL pour "
-"réparer ce problème.\n"
-
-#: ../../src/wlapplication.cc:411
-msgid "ERROR: Could not connect to metaserver (reason above)!\n"
-msgstr ""
-"ERREUR : Impossible de se connecter au méta-serveur (raison ci-dessus)!\n"
-
-#: ../../src/wlapplication.cc:837 ../../src/wlapplication.cc:846
-msgid "could not find the path of the main executable"
-msgstr "le chemin d'accès du programme principal est introuvable"
-
-#: ../../src/wlapplication.cc:1173
-msgid "This is Widelands-"
-msgstr "Voici Widelands-"
-
-#: ../../src/wlapplication.cc:1175
-msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
-msgstr "Utilisation: widelands <option0>=<value0> ... <optionN>=<valueN>"
-
-#: ../../src/wlapplication.cc:1176
-msgid "Options:"
-msgstr "Options:"
-
 #: ../../src/wlapplication.cc:1178
-msgid " --<config-entry-name>=value overwrites any config file setting"
-msgstr ""
-" --<config-entry-name>=value Ré-écris tous les paramètres des fichiers de "
-"configuration"
-
-#: ../../src/wlapplication.cc:1179
-msgid ""
-" --logfile=FILENAME   Log output to file FILENAME instead of \n"
-"                      terminal output"
-msgstr ""
-" --logfile=FILENAME   Ecrire une sortie vers le fichier FILENAME plutôt que\n"
-"                      dans la sortie terminal"
-
-#: ../../src/wlapplication.cc:1181
-msgid ""
-" --datadir=DIRNAME    Use specified directory for the widelands\n"
-"                      data files"
-msgstr ""
-" --datadir=DIRNAME    Utilise le dossier spécifié pour les données\n"
-"                      de Widelands"
-
-#: ../../src/wlapplication.cc:1183
-msgid ""
-" --homedir=DIRNAME    Use specified directory for widelands config\n"
-"                      files, savegames and replays"
-msgstr ""
-" --homedir=DIRNAME    Utilise le dossier spécifié pour la sauvegarde\n"
-"                      des fichiers de configuration de Widelands, "
-"sauvegardes et replays"
-
-#: ../../src/wlapplication.cc:1186
-msgid "                      Default is ~/.widelands"
-msgstr "                      Par défaut est ~/.widelands"
-
-#: ../../src/wlapplication.cc:1189
-msgid ""
-" --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
-"                      of using the SDL"
-msgstr ""
-" --coredump=[yes|no]  Génère un dump du noyau sur une faute de segmentation "
-"plutot\n"
-"                      que d'utiliser SDL"
-
-#: ../../src/wlapplication.cc:1191
-msgid ""
-" --language=[de_DE|sv_SE|...]\n"
-"                      The locale to use."
-msgstr ""
-" --language=[de_DE|sv_SE|...]\n"
-"                      Locales à utiliser."
-
-#: ../../src/wlapplication.cc:1193
-msgid " --localedir=DIRNAME  Use DIRNAME as location for the locale"
-msgstr " --localedir=DIRNAME  Utilise DIRNAME comme endroit pour les locales"
-
-#: ../../src/wlapplication.cc:1194
-msgid ""
-" --remove_syncstreams=[true|false]\n"
-"                      Remove syncstream files on startup"
-msgstr ""
-" --remove_syncstreams=[true|false]\n"
-"                      Enlève les fichiers syncstream au démarrage"
-
-#: ../../src/wlapplication.cc:1196
-msgid ""
-" --remove_replays=[...]\n"
-"                      Remove replays after this number of days.\n"
-"                      If this is 0, replays are not deleted."
-msgstr ""
-" --remove_replays=[...]\n"
-"                      Enlève le replay après ce nombre de jours.\n"
-"                      Si ceci est 0, les replays ne seront pas effacés."
-
-#: ../../src/wlapplication.cc:1200
-msgid "Sound options:"
-msgstr "Options sonores:"
-
-#: ../../src/wlapplication.cc:1201
-msgid " --nosound            Starts the game with sound disabled."
-msgstr " --nosound            Démarre le jeu avec le son désactivé."
-
-#: ../../src/wlapplication.cc:1202
-msgid " --disable_fx         Disable sound effects."
-msgstr " --disable_fx         Désactive les effets sonores."
-
-#: ../../src/wlapplication.cc:1203
-msgid " --disable_music      Disable music."
-msgstr " --disable_music      Désactive la musique."
-
-#: ../../src/wlapplication.cc:1204
-msgid " --nozip              Do not save files as binary zip archives."
-msgstr ""
-" --nozip              Ne pas sauver les fichiers en archives zip binaires."
-
-#: ../../src/wlapplication.cc:1205
-msgid ""
-" --editor             Directly starts the Widelands editor.\n"
-"                      You can add a =FILENAME to directly load\n"
-"                      the map FILENAME in editor."
-msgstr ""
-" --editor             Démarre directement l'éditeur de Widelands.\n"
-"                      Vous pouvez ajouter =FILENAME pour charger "
-"directement\n"
-"                      la carte FILENAME dans l'éditeur."
-
-#: ../../src/wlapplication.cc:1208
-msgid ""
-" --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
-"                      map."
-msgstr ""
-" --scenario=FILENAME  Démarre directement la carte FILENAME comme carte de\n"
-"                      scénario."
-
-#: ../../src/wlapplication.cc:1210
-msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
-msgstr " --loadgame=FILENAME  Charge directement la sauvegarde FILENAME."
-
-#: ../../src/wlapplication.cc:1211
-msgid ""
-" --script=FILENAME    Run the given Lua script after initialization.\n"
-"                      Only valid with --scenario, --loadgame, or --editor."
-msgstr ""
-" --script=FILENAME    Exécute le script LUA donné après l'initialisation.\n"
-"                      Seulement valide avec --scenario, --loadgame, ou --"
-"editor."
-
-#: ../../src/wlapplication.cc:1213
-msgid " --dedicated=FILENAME Starts a dedicated server with FILENAME as map"
-msgstr ""
-" --dedicated=FILENAME Démarre un serveur dédié avec FILENAME comme carte"
-
-#: ../../src/wlapplication.cc:1214
-msgid ""
-" --auto_roadbuild_mode=[yes|no]\n"
-"                      Whether to enter roadbuilding mode\n"
-"                      automatically after placing a flag that is\n"
-"                      not connected to a road."
-msgstr ""
-" --auto_roadbuild_mode=[yes|no]\n"
-"                      Si vous voulez passer en mode construction de route\n"
-"                      automatiquement après avoir placé un drapeau qui\n"
-"                      n'est pas connecté à une route."
-
-#: ../../src/wlapplication.cc:1218
-msgid "Graphic options:"
-msgstr "Options graphiques:"
-
-#: ../../src/wlapplication.cc:1219
-msgid ""
-" --fullscreen=[yes|no]\n"
-"                      Whether to use the whole display for the\n"
-"                      game screen."
-msgstr ""
-" --fullscreen=[yes|no]\n"
-"                      Si vous utilisez tout l'affichage pour\n"
-"                      l'écran de jeu."
-
-#: ../../src/wlapplication.cc:1222
-msgid " --xres=[...]         Width of the window in pixel."
-msgstr " --xres=[...]         Largeur de la fenêtre en pixels."
-
-#: ../../src/wlapplication.cc:1223
-msgid " --yres=[...]         Height of the window in pixel."
-msgstr " --yres=[...]         Hauteur de la fenêtre en pixels."
-
-#: ../../src/wlapplication.cc:1224
-msgid " --opengl=[0|1]       Enables OpenGL rendering"
-msgstr " --opengl=[0|1]       Active le rendu OpenGL"
-
-#: ../../src/wlapplication.cc:1225
-msgid "Options for the internal window manager:"
-msgstr "Options pour le gestionnaire de fenêtre interne:"
-
-#: ../../src/wlapplication.cc:1226
-msgid ""
-" --border_snap_distance=[0 ...]\n"
-"                      Move a window to the edge of the screen\n"
-"                      when the edge of the window comes within\n"
-"                      this distance from the edge of the screen."
-msgstr ""
-" --border_snap_distance=[0 ...]\n"
-"                      Bouge une fenêtre vers le bord de l'écran\n"
-"                      Quand le bord de la fenêtre rentre dans\n"
-"                      cette distance du bord de l'écran."
-
-#: ../../src/wlapplication.cc:1230
-msgid ""
-" --dock_windows_to_edges=[yes|no]\n"
-"                      Eliminate a window's border towards the\n"
-"                      edge of the screen when the edge of the\n"
-"                      window is next to the edge of the screen."
-msgstr ""
-" --dock_windows_to_edges=[yes|no]\n"
-"                      Supprime la bordure de fenêtre vers le\n"
-"                      bord de l'écran quand le bord de la\n"
-"                      fenêtre est à coté du bord de l'écran."
-
-#: ../../src/wlapplication.cc:1234
-msgid ""
-" --panel_snap_distance=[0 ...]\n"
-"                      Move a window to the edge of the panel when\n"
-"                      the edge of the window comes within this\n"
-"                      distance from the edge of the panel."
-msgstr ""
-" --panel_snap_distance=[0 ...]\n"
-"                      Bouge une fenêtre vers le bord du panneau quand\n"
-"                      le bord de la fenêtre entre dans cette\n"
-"                      distance du bord du panneau."
-
-#: ../../src/wlapplication.cc:1238
-msgid ""
-" --snap_windows_only_when_overlapping=[yes|no]\n"
-"                      Only move a window to the edge of a panel\n"
-"                      if the window is overlapping with the\n"
-"                      panel."
-msgstr ""
-" --snap_windows_only_when_overlapping=[yes|no]\n"
-"                      Bouge seulement la fenêtre vers le bord du panneau\n"
-"                      si la fenêtre est au dessus du\n"
-"                      panneau."
-
-#: ../../src/wlapplication.cc:1243
-msgid " --verbose            Enable verbose debug messages"
-msgstr " --verbose            Active les messages verbeux de debogage"
-
-#: ../../src/wlapplication.cc:1245
-msgid " --help               Show this help"
-msgstr " --help               Montre cette aide"
-
-#: ../../src/wlapplication.cc:1247
-msgid ""
-"Bug reports? Suggestions? Check out the project website:\n"
-"        https://launchpad.net/widelands\n"
-"\n"
-"Hope you enjoy this game!"
-msgstr ""
-"Rapport de bug ? Suggestions ? Visitez le site web de notre projet:\n"
-"        https://launchpad.net/widelands\n"
-"\n"
-"Nous espérons que vous avez aimez ce jeu!"
-
-#: ../../src/wlapplication.cc:1262
-msgid "Fallback settings in effect"
-msgstr "Paramètres de secours effectifs"
-
-#: ../../src/wlapplication.cc:1264
 msgid ""
 "Your video settings could not be enabled, and fallback settings are in "
 "effect. Please check the graphics options!"
@@ -2976,20 +2692,11 @@ msgstr ""
 "Vos paramètres vidéo n'ont pas pu être activés, et les paramètres de secours "
 "sont effectifs. Veuillez vérifier les options graphiques !"
 
-#: ../../src/wlapplication.cc:1335
-#, c-format
-msgid "Warning: %s"
-msgstr "AVERTISSEMENT: %s"
-
-#: ../../src/wlapplication.cc:1338
+#: ../../src/wlapplication.cc:1252
 msgid "Game data error"
 msgstr "Erreur de données du jeu"
 
-#: ../../src/wlapplication.cc:1343
-msgid "Unexpected error during the game"
-msgstr "Erreur inattendue pendant le jeu"
-
-#: ../../src/wlapplication.cc:1348
+#: ../../src/wlapplication.cc:1262
 #, c-format
 msgid ""
 "\n"
@@ -3004,7 +2711,7 @@ msgstr ""
 "Widelands, Vous trouverez les messages relatifs dans la sortie standard "
 "(stdout.txt sur windows). Vous utilisez la version %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1355
+#: ../../src/wlapplication.cc:1269
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -3016,10 +2723,6 @@ msgstr ""
 "Widelands a essayé de sauvegarder pendant le jeu quand une erreur est "
 "survenue. Si ce n'est souvent - mais pas toujours - il est possible de "
 "charger et de continuer de jouer.\n"
-
-#: ../../src/wlapplication.cc:1467
-msgid "The address of the game server is invalid"
-msgstr "L'adresse du serveur du jeu est incorrecte"
 
 #: ../../src/wui/actionconfirm.cc:223
 msgid "Destroy building?"
@@ -3060,19 +2763,19 @@ msgstr "Couler le bateau?"
 msgid "Do you really want to cancel the active expedition?"
 msgstr "Voulez-vous vraiment annuler l'expédition active?"
 
-#: ../../src/wui/attack_box.cc:148
+#: ../../src/wui/attack_box.cc:147
 msgid "Soldiers:"
 msgstr "Soldats:"
 
-#: ../../src/wui/attack_box.cc:156
+#: ../../src/wui/attack_box.cc:155
 msgid "Send less soldiers"
 msgstr "Envoyer moins de soldats"
 
-#: ../../src/wui/attack_box.cc:173
+#: ../../src/wui/attack_box.cc:172
 msgid "Number of soldiers"
 msgstr "Nombre de soldats"
 
-#: ../../src/wui/attack_box.cc:183
+#: ../../src/wui/attack_box.cc:182
 msgid "Send more soldiers"
 msgstr "Envoyer plus de soldats"
 

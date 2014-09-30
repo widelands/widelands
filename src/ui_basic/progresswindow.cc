@@ -93,7 +93,7 @@ void ProgressWindow::draw_background
 /// Set a picture to render in the background
 void ProgressWindow::set_background(const std::string & file_name) {
 	RenderTarget & rt = *g_gr->get_render_target();
-	if (!file_name.empty() && g_fs->FileExists(file_name)) {
+	if (!file_name.empty() && g_fs->file_exists(file_name)) {
 		m_background = file_name;
 	} else {
 		m_background = "pics/progress.png";

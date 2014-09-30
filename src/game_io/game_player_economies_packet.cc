@@ -35,7 +35,7 @@ namespace Widelands {
 #define CURRENT_PACKET_VERSION 3
 
 
-void GamePlayerEconomiesPacket::Read
+void GamePlayerEconomiesPacket::read
 	(FileSystem & fs, Game & game, MapObjectLoader *)
 {
 	try {
@@ -44,30 +44,30 @@ void GamePlayerEconomiesPacket::Read
 		PlayerNumber const nr_players = map.get_nrplayers();
 
 		FileRead fr;
-		fr.Open(fs, "binary/player_economies");
-		uint16_t const packet_version = fr.Unsigned16();
+		fr.open(fs, "binary/player_economies");
+		uint16_t const packet_version = fr.unsigned_16();
 		if (3 <= packet_version && packet_version <= CURRENT_PACKET_VERSION) {
 			iterate_players_existing(p, nr_players, game, player)
 				try {
 					Player::Economies & economies = player->m_economies;
 					for (uint32_t i = 0; i < economies.size(); ++i) {
-						uint32_t value = fr.Unsigned32();
+						uint32_t value = fr.unsigned_32();
 						if (value < 0xffffffff) {
 							if (upcast(Flag const, flag, map[value].get_immovable())) {
 								EconomyDataPacket d(flag->get_economy());
-								d.Read(fr);
+								d.read(fr);
 							} else {
 								throw GameDataError("there is no flag at the specified location");
 							}
 						} else {
 							bool read_this_economy = false;
 
-							Bob* bob = map[ReadMap_Index32(&fr, max_index)].get_first_bob();
+							Bob* bob = map[read_map_index_32(&fr, max_index)].get_first_bob();
 							while (bob) {
 								if (upcast(Ship const, ship, bob)) {
 									assert(ship->get_economy());
 									EconomyDataPacket d(ship->get_economy());
-									d.Read(fr);
+									d.read(fr);
 									read_this_economy = true;
 								}
 								bob = bob->get_next_bob();
@@ -91,12 +91,12 @@ void GamePlayerEconomiesPacket::Read
 /*
  * Write Function
  */
-void GamePlayerEconomiesPacket::Write
+void GamePlayerEconomiesPacket::write
 	(FileSystem & fs, Game & game, MapObjectSaver * const)
 {
 	FileWrite fw;
 
-	fw.Unsigned16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(CURRENT_PACKET_VERSION);
 
 	const Map & map = game.map();
 	const Field & field_0 = map[0];
@@ -110,10 +110,10 @@ void GamePlayerEconomiesPacket::Write
 			for (Field const * field = &field_0; field < &map[map.max_index()]; ++field) {
 				if (upcast(Flag const, flag, field->get_immovable())) {
 					if (flag->get_economy() == temp_economy) {
-						fw.Unsigned32(field - &field_0);
+						fw.unsigned_32(field - &field_0);
 
 						EconomyDataPacket d(flag->get_economy());
-						d.Write(fw);
+						d.write(fw);
 						wrote_this_economy = true;
 						break;
 					}
@@ -131,11 +131,11 @@ void GamePlayerEconomiesPacket::Write
 						if (upcast(Ship const, ship, bob)) {
 							if (ship->get_economy() == temp_economy) {
 								// TODO(sirver): the 0xffffffff is ugly and fragile.
-								fw.Unsigned32(0xffffffff); // Sentinel value.
-								fw.Unsigned32(field - &field_0);
+								fw.unsigned_32(0xffffffff); // Sentinel value.
+								fw.unsigned_32(field - &field_0);
 
 								EconomyDataPacket d(ship->get_economy());
-								d.Write(fw);
+								d.write(fw);
 								wrote_this_economy = true;
 							}
 						}
@@ -149,7 +149,7 @@ void GamePlayerEconomiesPacket::Write
 		}
 	}
 
-	fw.Write(fs, "binary/player_economies");
+	fw.write(fs, "binary/player_economies");
 }
 
 }

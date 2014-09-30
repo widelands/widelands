@@ -408,10 +408,10 @@ MapObject::Loader* Critter::load(EditorGameBase& egbase,
 	try {
 		// The header has been peeled away by the caller
 
-		uint8_t const version = fr.Unsigned8();
+		uint8_t const version = fr.unsigned_8();
 		if (1 <= version && version <= CRITTER_SAVEGAME_VERSION) {
-			const std::string owner = fr.CString();
-			std::string critter_name = fr.CString();
+			const std::string owner = fr.c_string();
+			std::string critter_name = fr.c_string();
 			const CritterDescr * descr = nullptr;
 
 			if (owner == "world") {
@@ -444,13 +444,13 @@ MapObject::Loader* Critter::load(EditorGameBase& egbase,
 void Critter::save
 	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(HeaderCritter);
-	fw.Unsigned8(CRITTER_SAVEGAME_VERSION);
+	fw.unsigned_8(HeaderCritter);
+	fw.unsigned_8(CRITTER_SAVEGAME_VERSION);
 
 	std::string owner =
 		descr().get_owner_tribe() ? descr().get_owner_tribe()->name() : "world";
-	fw.CString(owner);
-	fw.CString(descr().name());
+	fw.c_string(owner);
+	fw.c_string(descr().name());
 
 	Bob::save(egbase, mos, fw);
 }

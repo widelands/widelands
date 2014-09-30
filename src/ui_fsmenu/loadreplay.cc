@@ -144,8 +144,8 @@ void FullscreenMenuLoadReplay::clicked_delete()
 		 (boost::format(_("Do you really want to delete %s?")) % fname).str(),
 		 UI::WLMessageBox::YESNO);
 	if (confirmationBox.run()) {
-		g_fs->Unlink(m_list.get_selected());
-		g_fs->Unlink(m_list.get_selected() + WLGF_SUFFIX);
+		g_fs->fs_unlink(m_list.get_selected());
+		g_fs->fs_unlink(m_list.get_selected() + WLGF_SUFFIX);
 		m_list.clear();
 		fill_list();
 		if (m_list.empty()) {
@@ -218,7 +218,7 @@ void FullscreenMenuLoadReplay::fill_list()
 {
 	FilenameSet files;
 
-	files = filter(g_fs->ListDirectory(REPLAY_DIR),
+	files = filter(g_fs->list_directory(REPLAY_DIR),
 	               [](const std::string& fn) {return boost::ends_with(fn, REPLAY_SUFFIX);});
 
 	Widelands::GamePreloadPacket gpdp;
@@ -229,7 +229,7 @@ void FullscreenMenuLoadReplay::fill_list()
 	{
 		std::string savename = *pname + WLGF_SUFFIX;
 
-		if (!g_fs->FileExists(savename))
+		if (!g_fs->file_exists(savename))
 			continue;
 
 		try {
@@ -237,7 +237,7 @@ void FullscreenMenuLoadReplay::fill_list()
 			gl.preload_game(gpdp);
 
 			// NOCOM move localization from data packet somewhere else
-			std::string displaytitle = FileSystem::FS_FilenameWoExt(pname->c_str());
+			std::string displaytitle = FileSystem::filename_without_ext(pname->c_str());
 			m_list.add(gpdp.get_localized_display_title(displaytitle).c_str(), *pname);
 		} catch (const WException &) {} //  we simply skip illegal entries
 	}

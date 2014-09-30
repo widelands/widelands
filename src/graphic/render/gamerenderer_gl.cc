@@ -295,7 +295,7 @@ void GameRendererGL::draw_terrain_base()
 		const Texture & texture =
 				*g_gr->get_maptexture_data
 					(world.terrain_descr(ter).get_texture());
-		glBindTexture(GL_TEXTURE_2D, texture.getTexture());
+		glBindTexture(GL_TEXTURE_2D, texture.get_texture());
 		glDrawRangeElements
 			(GL_TRIANGLES,
 			 0, m_patch_size.w * m_patch_size.h - 1,
@@ -472,7 +472,7 @@ void GameRendererGL::draw_terrain_dither()
 		const Texture & texture =
 				*g_gr->get_maptexture_data
 					(m_egbase->world().terrain_descr(ter).get_texture());
-		glBindTexture(GL_TEXTURE_2D, texture.getTexture());
+		glBindTexture(GL_TEXTURE_2D, texture.get_texture());
 		glDrawArrays
 			(GL_TRIANGLES,
 			 3 * m_terrain_edge_freq_cum[ter], 3 * m_terrain_edge_freq[ter]);

@@ -29,36 +29,36 @@
 struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	SinglePlayerGameSettingsProvider();
 
-	void setScenario(bool const set) override;
+	void set_scenario(bool const set) override;
 
 	const GameSettings & settings() override;
 
-	bool canChangeMap() override;
-	bool canChangePlayerState(uint8_t number) override;
-	bool canChangePlayerTribe(uint8_t) override;
-	bool canChangePlayerInit (uint8_t) override;
-	bool canChangePlayerTeam(uint8_t) override;
-	bool canLaunch() override;
+	bool can_change_map() override;
+	bool can_change_player_state(uint8_t number) override;
+	bool can_change_player_tribe(uint8_t) override;
+	bool can_change_player_init (uint8_t) override;
+	bool can_change_player_team(uint8_t) override;
+	bool can_launch() override;
 
-	virtual std::string getMap();
-	virtual void setMap(const std::string & mapname, const std::string & mapfilename,
+	virtual std::string get_map();
+	virtual void set_map(const std::string & mapname, const std::string & mapfilename,
 		uint32_t const maxplayers, bool const savegame) override;
 
-	void setPlayerState(uint8_t const number, PlayerSettings::State state) override;
-	void setPlayerAI(uint8_t const number, const std::string & ai, bool const random_ai) override;
-	void nextPlayerState(uint8_t const number) override;
-	void setPlayerTribe(uint8_t const number, const std::string & tribe, bool random_tribe) override;
-	void setPlayerInit(uint8_t const number, uint8_t const index) override;
-	void setPlayerTeam(uint8_t number, Widelands::TeamNumber team) override;
-	void setPlayerCloseable(uint8_t, bool) override;
-	void setPlayerShared(uint8_t, uint8_t) override;
-	void setPlayerName(uint8_t const number, const std::string & name) override;
-	void setPlayer(uint8_t const number, PlayerSettings const ps) override;
-	void setPlayerNumber(uint8_t const number) override;
+	void set_player_state(uint8_t const number, PlayerSettings::State state) override;
+	void set_player_ai(uint8_t const number, const std::string & ai, bool const random_ai) override;
+	void next_player_state(uint8_t const number) override;
+	void set_player_tribe(uint8_t const number, const std::string & tribe, bool random_tribe) override;
+	void set_player_init(uint8_t const number, uint8_t const index) override;
+	void set_player_team(uint8_t number, Widelands::TeamNumber team) override;
+	void set_player_closeable(uint8_t, bool) override;
+	void set_player_shared(uint8_t, uint8_t) override;
+	void set_player_name(uint8_t const number, const std::string & name) override;
+	void set_player(uint8_t const number, PlayerSettings const ps) override;
+	void set_player_number(uint8_t const number) override;
 
-	std::string getWinConditionScript() override;
-	void setWinConditionScript(std::string wc) override;
-	void nextWinCondition() override;
+	std::string get_win_condition_script() override;
+	void set_win_condition_script(std::string wc) override;
+	void next_win_condition() override;
 
 private:
 	GameSettings s;

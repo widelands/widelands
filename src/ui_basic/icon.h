@@ -34,9 +34,9 @@ struct Icon : public Panel {
 		 int32_t x, int32_t y, int32_t w, int32_t h,
 		 const Image* picture_id);
 
-	void setIcon(const Image* picture_id);
-	void setFrame(const RGBColor& color);
-	void setNoFrame();
+	void set_icon(const Image* picture_id);
+	void set_frame(const RGBColor& color);
+	void set_no_frame();
 
 	void draw(RenderTarget &) override;
 

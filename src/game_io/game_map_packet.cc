@@ -34,16 +34,16 @@ GameMapPacket::~GameMapPacket() {
 	delete m_wml;
 }
 
-void GameMapPacket::Read
+void GameMapPacket::read
 	(FileSystem & fs, Game & game, MapObjectLoader * const)
 {
-	if (!fs.FileExists("map") || !fs.IsDirectory("map"))
+	if (!fs.file_exists("map") || !fs.is_directory("map"))
 		throw GameDataError("no map");
 
 	//  Now Load the map as it would be a normal map saving.
 	delete m_wml;
 
-	m_wml = new WidelandsMapLoader(fs.MakeSubFileSystem("map"), &game.map());
+	m_wml = new WidelandsMapLoader(fs.make_sub_file_system("map"), &game.map());
 
 	m_wml->preload_map(true);
 
@@ -53,18 +53,18 @@ void GameMapPacket::Read
 }
 
 
-void GameMapPacket::Read_Complete(Game & game) {
+void GameMapPacket::read_complete(Game & game) {
 	m_wml->load_map_complete(game, true);
 	m_mol = m_wml->get_map_object_loader();
 }
 
 
-void GameMapPacket::Write
+void GameMapPacket::write
 	(FileSystem & fs, Game & game, MapObjectSaver * const)
 {
 
 	std::unique_ptr<FileSystem> mapfs
-		(fs.CreateSubFileSystem("map", FileSystem::DIR));
+		(fs.create_sub_file_system("map", FileSystem::DIR));
 
 	//  Now Write the map as it would be a normal map saving.
 	delete m_wms;

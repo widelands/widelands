@@ -161,7 +161,7 @@ void FullscreenMenuLoadGame::clicked_delete()
 		 (boost::format(_("Do you really want to delete %s?")) % fname).str(),
 		 UI::WLMessageBox::YESNO);
 	if (confirmationBox.run()) {
-		g_fs->Unlink(m_list.get_selected());
+		g_fs->fs_unlink(m_list.get_selected());
 		m_list.clear();
 		fill_list();
 		if (m_list.empty()) {
@@ -183,9 +183,9 @@ void FullscreenMenuLoadGame::no_selection()
 	m_tagametime.set_text(std::string());
 	m_ta_players.set_text(std::string());
 	m_ta_win_condition.set_text(std::string());
-	m_minimap_icon.setIcon(nullptr);
+	m_minimap_icon.set_icon(nullptr);
 	m_minimap_icon.set_visible(false);
-	m_minimap_icon.setNoFrame();
+	m_minimap_icon.set_no_frame();
 	m_minimap_image.reset();
 }
 
@@ -248,16 +248,16 @@ void FullscreenMenuLoadGame::map_selected(uint32_t selected)
 
 	std::string minimap_path = gpdp.get_minimap_path();
 	// Delete former image
-	m_minimap_icon.setIcon(nullptr);
+	m_minimap_icon.set_icon(nullptr);
 	m_minimap_icon.set_visible(false);
-	m_minimap_icon.setNoFrame();
+	m_minimap_icon.set_no_frame();
 	m_minimap_image.reset();
 	// Load the new one
 	if (!minimap_path.empty()) {
 		try {
 			// Load the image
 			std::unique_ptr<Surface> surface(load_image(
-			   minimap_path, std::unique_ptr<FileSystem>(g_fs->MakeSubFileSystem(name)).get()));
+			   minimap_path, std::unique_ptr<FileSystem>(g_fs->make_sub_file_system(name)).get()));
 			m_minimap_image.reset(new_in_memory_image(std::string(name + minimap_path), surface.release()));
 			// Scale it
 			double scale = double(m_minimap_max_size) / m_minimap_image->width();
@@ -272,9 +272,9 @@ void FullscreenMenuLoadGame::map_selected(uint32_t selected)
 			// from resize that is handled by the cache. It is still linked to our
 			// surface
 			m_minimap_icon.set_size(w, h);
-			m_minimap_icon.setFrame(UI_FONT_CLR_FG);
+			m_minimap_icon.set_frame(UI_FONT_CLR_FG);
 			m_minimap_icon.set_visible(true);
-			m_minimap_icon.setIcon(resized);
+			m_minimap_icon.set_icon(resized);
 		} catch (const std::exception & e) {
 			log("Failed to load the minimap image : %s\n", e.what());
 		}
@@ -295,11 +295,11 @@ void FullscreenMenuLoadGame::fill_list() {
 	if (m_settings && !m_settings->settings().saved_games.empty()) {
 		for (uint32_t i = 0; i < m_settings->settings().saved_games.size(); ++i) {
 			const char * path = m_settings->settings().saved_games.at(i).path.c_str();
-			m_list.add(FileSystem::FS_FilenameWoExt(path).c_str(), path);
+			m_list.add(FileSystem::filename_without_ext(path).c_str(), path);
 		}
 	} else { // Normal case
 		// Fill it with all files we find.
-		m_gamefiles = g_fs->ListDirectory("save");
+		m_gamefiles = g_fs->list_directory("save");
 
 		Widelands::GamePreloadPacket gpdp;
 
@@ -312,7 +312,7 @@ void FullscreenMenuLoadGame::fill_list() {
 				gl.preload_game(gpdp);
 
 				// NOCOM move localization from data packet somewhere else
-				std::string displaytitle = FileSystem::FS_FilenameWoExt(name);
+				std::string displaytitle = FileSystem::filename_without_ext(name);
 				m_list.add(gpdp.get_localized_display_title(displaytitle).c_str(), name);
 			} catch (const WException &) {
 				//  we simply skip illegal entries

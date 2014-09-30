@@ -62,7 +62,7 @@ void PlayersManager::remove_player(PlayerNumber plnum)
 	if (p) {
 		delete p;
 		p = nullptr;
-		if (plnum <= UserSettings::highestPlayernum()) {
+		if (plnum <= UserSettings::highest_playernum()) {
 			m_number_of_players--;
 		}
 	}
@@ -81,7 +81,7 @@ Player* PlayersManager::add_player
 	Player * & p = m_players[player_number - 1];
 	if (p) {
 		delete p;
-		if (player_number <= UserSettings::highestPlayernum()) {
+		if (player_number <= UserSettings::highest_playernum()) {
 			m_number_of_players--;
 		}
 	}
@@ -92,7 +92,7 @@ Player* PlayersManager::add_player
 		 m_egbase.manually_load_tribe(tribe),
 		 name);
 	p->set_team_number(team);
-	if (player_number <= UserSettings::highestPlayernum()) {
+	if (player_number <= UserSettings::highest_playernum()) {
 		m_number_of_players++;
 	}
 	return p;

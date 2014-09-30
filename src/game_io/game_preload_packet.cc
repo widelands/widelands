@@ -49,7 +49,7 @@ namespace Widelands {
 #define MINIMAP_FILENAME "minimap.png"
 
 
-void GamePreloadPacket::Read
+void GamePreloadPacket::read
 	(FileSystem & fs, Game &, MapObjectLoader * const)
 {
 	try {
@@ -66,7 +66,7 @@ void GamePreloadPacket::Read
 			m_player_nr = s.get_safe_int("player_nr");
 			m_win_condition = s.get_safe_string("win_condition");
 			m_number_of_players = s.get_safe_int(PLAYERS_AMOUNT_KEY_V4);
-			if (fs.FileExists(MINIMAP_FILENAME)) {
+			if (fs.file_exists(MINIMAP_FILENAME)) {
 				m_minimap_path = MINIMAP_FILENAME;
 			}
 			m_saveyear = s.get_int("saveyear");
@@ -85,7 +85,7 @@ void GamePreloadPacket::Read
 }
 
 
-void GamePreloadPacket::Write
+void GamePreloadPacket::write
 	(FileSystem & fs, Game & game, MapObjectSaver * const)
 {
 
@@ -126,7 +126,7 @@ void GamePreloadPacket::Write
 	s.set_int("saveday", datetime->tm_mday);
 	s.set_int("savehour", datetime->tm_hour);
 	s.set_int("saveminute", datetime->tm_min);
-	s.set_int("gametype", static_cast<int32_t>(game.gameController()->getGameType()));
+	s.set_int("gametype", static_cast<int32_t>(game.game_controller()->get_game_type()));
 
 	prof.write("preload", false, fs);
 
@@ -137,10 +137,10 @@ void GamePreloadPacket::Write
 	if (ipl != nullptr) {
 		const MiniMapLayer flags = MiniMapLayer::Owner | MiniMapLayer::Building | MiniMapLayer::Terrain;
 		const Point& vp = ipl->get_viewpoint();
-		std::unique_ptr< ::StreamWrite> sw(fs.OpenStreamWrite(MINIMAP_FILENAME));
+		std::unique_ptr< ::StreamWrite> sw(fs.open_stream_write(MINIMAP_FILENAME));
 		if (sw.get() != nullptr) {
 			write_minimap_image(game, &ipl->player(), vp, flags, sw.get());
-			sw->Flush();
+			sw->flush();
 		}
 	}
 

@@ -45,7 +45,7 @@ const uint32_t SCRIPTING_DATA_PACKET_VERSION = 1;
  *            PUBLIC IMPLEMENTATION
  * ========================================================================
  */
-void MapScriptingPacket::Read
+void MapScriptingPacket::read
 	(FileSystem            &       fs,
 	 EditorGameBase      &       egbase,
 	 bool,
@@ -56,35 +56,35 @@ void MapScriptingPacket::Read
 	// wise this makes no sense.
 	upcast(Game, g, &egbase);
 	FileRead fr;
-	if (g && fr.TryOpen(fs, "scripting/globals.dump"))
+	if (g && fr.try_open(fs, "scripting/globals.dump"))
 	{
-		const uint32_t sentinel = fr.Unsigned32();
-		const uint32_t packet_version = fr.Unsigned32();
+		const uint32_t sentinel = fr.unsigned_32();
+		const uint32_t packet_version = fr.unsigned_32();
 		if (sentinel != 0xDEADBEEF && packet_version != SCRIPTING_DATA_PACKET_VERSION) {
 			throw GameDataError(
 			   "This savegame is from an older version of Widelands and can not be loaded any more.");
 		}
 		upcast(LuaGameInterface, lgi, &g->lua());
-		lgi->read_global_env(fr, mol, fr.Unsigned32());
+		lgi->read_global_env(fr, mol, fr.unsigned_32());
 	}
 }
 
 
-void MapScriptingPacket::Write
+void MapScriptingPacket::write
 	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver & mos)
 {
-	fs.EnsureDirectoryExists("scripting");
+	fs.ensure_directory_exists("scripting");
 
 	FileSystem* map_fs = egbase.map().filesystem();
 	if (map_fs) {
 		for (const std::string& script :
-		     filter(map_fs->ListDirectory("scripting"),
+			  filter(map_fs->list_directory("scripting"),
 		            [](const std::string& fn) {
 							return boost::ends_with(fn, ".lua");
 						})) {
 			size_t length;
-			void* input_data = map_fs->Load(script, length);
-			fs.Write(script, input_data, length);
+			void* input_data = map_fs->load(script, length);
+			fs.write(script, input_data, length);
 			free(input_data);
 		}
 	}
@@ -92,16 +92,16 @@ void MapScriptingPacket::Write
 	// Dump the global environment if this is a game and not in the editor
 	if (upcast(Game, g, &egbase)) {
 		FileWrite fw;
-		fw.Unsigned32(0xDEADBEEF);  // Sentinel, because there was no packet version.
-		fw.Unsigned32(SCRIPTING_DATA_PACKET_VERSION);
-		const FileWrite::Pos pos = fw.GetPos();
-		fw.Unsigned32(0); // N bytes written, follows below
+		fw.unsigned_32(0xDEADBEEF);  // Sentinel, because there was no packet version.
+		fw.unsigned_32(SCRIPTING_DATA_PACKET_VERSION);
+		const FileWrite::Pos pos = fw.get_pos();
+		fw.unsigned_32(0); // N bytes written, follows below
 
 		upcast(LuaGameInterface, lgi, &g->lua());
-		uint32_t nwritten = Little32(lgi->write_global_env(fw, mos));
-		fw.Data(&nwritten, 4, pos);
+		uint32_t nwritten = little_32(lgi->write_global_env(fw, mos));
+		fw.data(&nwritten, 4, pos);
 
-		fw.Write(fs, "scripting/globals.dump");
+		fw.write(fs, "scripting/globals.dump");
 	}
 }
 

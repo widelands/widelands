@@ -41,8 +41,8 @@ struct ItemWaresDisplay : UI::Panel {
 	uint32_t capacity() const {return m_capacity;}
 	void set_capacity(uint32_t cap);
 
-	uint32_t itemsperrow() const {return m_itemsperrow;}
-	void set_itemsperrow(uint32_t nr);
+	uint32_t items_per_row() const {return m_items_per_row;}
+	void set_items_per_row(uint32_t nr);
 
 	void clear();
 	void add(bool worker, Widelands::WareIndex index);
@@ -59,7 +59,7 @@ private:
 
 	const Widelands::Player & m_player;
 	uint32_t m_capacity;
-	uint32_t m_itemsperrow;
+	uint32_t m_items_per_row;
 	std::vector<Item> m_items;
 };
 

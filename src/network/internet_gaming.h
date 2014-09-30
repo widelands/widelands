@@ -62,7 +62,7 @@ struct InternetGaming : public ChatProvider {
 	void reset();
 
 	// Login and logout
-	void initialiseConnection();
+	void initialize_connection();
 	bool login
 		(const std::string & nick, const std::string & pwd, bool registered,
 		 const std::string & metaserver, uint32_t port);
@@ -72,7 +72,7 @@ struct InternetGaming : public ChatProvider {
 	/// \returns whether the client is logged in
 	bool logged_in() {return (m_state == LOBBY) || (m_state == CONNECTING) || (m_state == IN_GAME);}
 	bool error()     {return (m_state == COMMUNICATION_ERROR);}
-	void setError()  {m_state = COMMUNICATION_ERROR; gameupdate = true; clientupdate = true;}
+	void set_error()  {m_state = COMMUNICATION_ERROR; gameupdate = true; clientupdate = true;}
 
 	void handle_metaserver_communication();
 
@@ -85,9 +85,9 @@ struct InternetGaming : public ChatProvider {
 
 
 	// Informative functions for lobby
-	bool updateForGames();
+	bool update_for_games();
 	const std::vector<InternetGame>   & games();
-	bool updateForClients();
+	bool update_for_clients();
 	const std::vector<InternetClient> & clients();
 
 	/// \returns the maximum allowed number of clients in a game (players + spectators)
@@ -120,13 +120,13 @@ struct InternetGaming : public ChatProvider {
 	}
 
 	/// ChatProvider: returns the list of chatmessages.
-	const std::vector<ChatMessage> & getMessages() const override {return messages;}
+	const std::vector<ChatMessage> & get_messages() const override {return messages;}
 
 	/// Silence the internet lobby chat if we are in game as we do not see the messages anyways
 	bool sound_off() override {return m_state == IN_GAME;}
 
 	/// writes the ingame_system_chat messages to \arg msg and resets it afterwards
-	void getIngameSystemMessages(std::vector<ChatMessage> & msg) {
+	void get_ingame_system_messages(std::vector<ChatMessage> & msg) {
 		msg = ingame_system_chat;
 		ingame_system_chat.clear();
 	}
@@ -140,7 +140,7 @@ private:
 	bool str2bool(std::string);
 	std::string bool2str(bool);
 
-	void formatAndAddChat(std::string from, std::string to, bool system, std::string msg);
+	void format_and_add_chat(std::string from, std::string to, bool system, std::string msg);
 
 
 	/// The socket that connects us to the host

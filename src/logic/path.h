@@ -95,7 +95,7 @@ struct CoordPath {
 
 	void reverse();
 	void truncate (const std::vector<char>::size_type after);
-	void starttrim(const std::vector<char>::size_type before);
+	void trim_start(const std::vector<char>::size_type before);
 	void append(const Map & map, const Path & tail);
 	void append(const CoordPath & tail);
 

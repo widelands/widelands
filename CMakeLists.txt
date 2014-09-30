@@ -10,17 +10,12 @@ endif (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
 
 # Define the directory structure for installation - will be hardcoded in WL bin
 # (through config.h).
-if(WIN32 OR APPLE OR WL_PORTABLE)
-  wl_set_if_unset(WL_INSTALL_PREFIX ".")
-  wl_set_if_unset(WL_INSTALL_DATADIR ".")
-  wl_set_if_unset(WL_INSTALL_LOCALEDIR "locale")
-  wl_set_if_unset(WL_INSTALL_BINDIR ".")
-else()
-  wl_set_if_unset(WL_INSTALL_PREFIX "/usr/local")
-  wl_set_if_unset(WL_INSTALL_DATADIR "share/games/widelands")
-  wl_set_if_unset(WL_INSTALL_LOCALEDIR "${WL_INSTALL_PREFIX}/${WL_INSTALL_DATADIR}/locale")
-  wl_set_if_unset(WL_INSTALL_BINDIR "games")
-endif()
+# If not specified, we are going to use the current directory. Also on Linux.
+# Packagers (or people using make install) have to set those variables.
+wl_set_if_unset(WL_INSTALL_PREFIX ".")
+wl_set_if_unset(WL_INSTALL_DATADIR ".")
+wl_set_if_unset(WL_INSTALL_LOCALEDIR "locale")
+wl_set_if_unset(WL_INSTALL_BINDIR ".")
 
 if (CMAKE_INSTALL_PREFIX STREQUAL CMAKE_BINARY_DIR)
   message(FATAL_ERROR "Build directory and install directory must not be the same.")
