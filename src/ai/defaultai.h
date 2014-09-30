@@ -135,7 +135,8 @@ private:
 	// new road should be considered (or is needed)
 	bool improve_roads(int32_t);
 	bool create_shortcut_road(const Widelands::Flag&, uint16_t maxcheckradius, uint16_t minred);
-
+	// trying to identify roads that might be removed
+	bool abundant_road_test(const Widelands::Road&);
 	bool check_economies();
 	bool check_productionsites(int32_t);
 	bool check_mines_(int32_t);

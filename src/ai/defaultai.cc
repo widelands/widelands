@@ -98,23 +98,23 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 
 	// Subscribe to NoteFieldPossession.
 	field_possession_subscriber_ =
-		Notifications::subscribe<NoteFieldPossession>([this](const NoteFieldPossession& note) {
-			if (note.player != player_) {
+	   Notifications::subscribe<NoteFieldPossession>([this](const NoteFieldPossession& note) {
+		   	if (note.player != player_) {
 			   return;
-		   	}
+		   }
 		   	if (note.ownership == NoteFieldPossession::Ownership::GAINED) {
 			   unusable_fields.push_back(note.fc);
-		   	}
+		   }
 		});
 
 	// Subscribe to NoteImmovables.
 	immovable_subscriber_ =
 	   Notifications::subscribe<NoteImmovable>([this](const NoteImmovable& note) {
 		   	if (note.pi->owner().player_number() != player_->player_number()) {
-				return;
-		   }
-		  	if (note.ownership == NoteImmovable::Ownership::GAINED) {
-				gain_immovable(*note.pi);
+			   return;
+		   	}
+		   	if (note.ownership == NoteImmovable::Ownership::GAINED) {
+			   gain_immovable(*note.pi);
 		   } else {
 			   lose_immovable(*note.pi);
 		   }
@@ -979,8 +979,8 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 						continue;
 
 					prio = 0;
-					// one well has an axemption from the stop - if forced
-					if (bo.forced_after_ < gametime && bo.total_count() == 0)
+					// one well is forced
+					if (bo.total_count() == 0)
 						prio = 200;  // boost for first/only well
 					else if (new_buildings_stop_)
 						continue;
@@ -991,7 +991,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 						bo.stocklevel_ = get_stocklevel(bo);
 						bo.stocklevel_time = game().get_gametime();
 					}
-					if (bo.stocklevel_ > 30)
+					if (bo.stocklevel_ > 40)
 						continue;
 					prio += bf->ground_water_ - 2;
 					prio = recalc_with_border_range(*bf, prio);
@@ -1549,6 +1549,15 @@ bool DefaultAI::improve_roads(int32_t gametime) {
 
 		roads.push_back(roads.front());
 		roads.pop_front();
+
+		// occasionaly we test if the road can be dismounted
+		if (gametime % 25 == 0) {
+			const Road& road = *roads.front();
+			if (abundant_road_test(*const_cast<Road*>(&road))) {
+				game().send_player_bulldoze(*const_cast<Road*>(&road));
+				return true;
+			}
+		}
 	}
 
 	if (inhibit_road_building_ >= gametime)
@@ -1591,6 +1600,76 @@ bool DefaultAI::improve_roads(int32_t gametime) {
 		inhibit_road_building_ = gametime + 400;
 	}
 
+	return false;
+}
+
+// identifying roads where wares are not intensively transported
+// and that have bypasses not much longer
+bool DefaultAI::abundant_road_test(const Road& road) {
+
+	Flag& roadstartflag = road.get_flag(Road::FlagStart);
+	Flag& roadendflag = road.get_flag(Road::FlagEnd);
+
+	if (roadstartflag.current_wares() > 0 || roadendflag.current_wares() > 0)
+		return false;
+
+	std::priority_queue<NearFlag> queue;
+	// only used to collect flags reachable walking over roads
+	std::vector<NearFlag> reachableflags;
+	queue.push(NearFlag(roadstartflag, 0, 0));
+	uint8_t pathcounts = 0;
+	uint8_t checkradius = 8;
+	Map& map = game().map();
+
+	// algorithm to walk on roads
+	while (!queue.empty()) {
+
+		// testing if we stand on the roadendflag
+		// if is is for first time, just go on,
+		// if second time, the goal is met, function returns true
+		// NOCOM: what is the right way to compare the flags?
+		if (roadendflag.get_position().x == queue.top().flag->get_position().x &&
+		    roadendflag.get_position().y == queue.top().flag->get_position().y) {
+			pathcounts += 1;
+			if (pathcounts > 1) {
+				// OK, this is a second route how to get to roadendflag
+				return true;
+			}
+			queue.pop();
+			continue;
+		}
+
+		std::vector<NearFlag>::iterator f =
+		   find(reachableflags.begin(), reachableflags.end(), queue.top().flag);
+
+		if (f != reachableflags.end()) {
+			queue.pop();
+			continue;
+		}
+
+		reachableflags.push_back(queue.top());
+		queue.pop();
+		NearFlag& nf = reachableflags.back();
+
+		for (uint8_t i = 1; i <= 6; ++i) {
+			Road* const near_road = nf.flag->get_road(i);
+
+			if (!near_road)
+				continue;
+
+			Flag* endflag = &near_road->get_flag(Road::FlagStart);
+
+			if (endflag == nf.flag)
+				endflag = &near_road->get_flag(Road::FlagEnd);
+
+			int32_t dist = map.calc_distance(roadstartflag.get_position(), endflag->get_position());
+
+			if (dist > checkradius)  //  out of range of interest
+				continue;
+
+			queue.push(NearFlag(*endflag, 0, dist));
+		}
+	}
 	return false;
 }
 
