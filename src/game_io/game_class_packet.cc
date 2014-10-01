@@ -26,8 +26,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 2
-
+constexpr uint16_t kCurrentPacketVersion = 2;
 
 void GameClassPacket::read
 	(FileSystem & fs, Game & game, MapObjectLoader *)
@@ -36,7 +35,7 @@ void GameClassPacket::read
 		FileRead fr;
 		fr.open(fs, "binary/game_class");
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version <= CURRENT_PACKET_VERSION) {
+		if (packet_version <= kCurrentPacketVersion) {
 			fr.signed_16(); // This used to be game speed
 			game.gametime_ = fr.unsigned_32();
 		} else
@@ -56,7 +55,7 @@ void GameClassPacket::write
 	FileWrite fw;
 
 	// Packet version
-	fw.unsigned_16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(kCurrentPacketVersion);
 
 	// State is running, we do not need to save this
 	// Save speed

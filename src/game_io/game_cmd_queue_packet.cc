@@ -29,8 +29,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 2
-
+constexpr uint16_t kCurrentPacketVersion = 2;
 
 void GameCmdQueuePacket::read
 	(FileSystem & fs, Game & game, MapObjectLoader * const ol)
@@ -39,7 +38,7 @@ void GameCmdQueuePacket::read
 		FileRead fr;
 		fr.open(fs, "binary/cmd_queue");
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == CURRENT_PACKET_VERSION) {
+		if (packet_version == kCurrentPacketVersion) {
 			CmdQueue & cmdq = game.cmdqueue();
 
 			// nothing to be done for m_game
@@ -84,7 +83,7 @@ void GameCmdQueuePacket::write
 	FileWrite fw;
 
 	// Now packet version
-	fw.unsigned_16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(kCurrentPacketVersion);
 
 	const CmdQueue & cmdq = game.cmdqueue();
 

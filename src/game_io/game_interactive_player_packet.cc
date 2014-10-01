@@ -31,8 +31,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 2
-
+constexpr uint16_t kCurrentPacketVersion = 2;
 
 void GameInteractivePlayerPacket::read
 	(FileSystem & fs, Game & game, MapObjectLoader *)
@@ -41,7 +40,7 @@ void GameInteractivePlayerPacket::read
 		FileRead fr;
 		fr.open(fs, "binary/interactive_player");
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == CURRENT_PACKET_VERSION) {
+		if (packet_version == kCurrentPacketVersion) {
 			PlayerNumber player_number = fr.unsigned_8();
 			if (!(0 < player_number && player_number <= game.map().get_nrplayers())) {
 				throw GameDataError("Invalid player number: %i.", player_number);
@@ -94,7 +93,7 @@ void GameInteractivePlayerPacket::write
 	FileWrite fw;
 
 	// Now packet version
-	fw.unsigned_16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(kCurrentPacketVersion);
 
 	InteractiveBase * const ibase = game.get_ibase();
 	InteractivePlayer * const iplayer = game.get_ipl();
