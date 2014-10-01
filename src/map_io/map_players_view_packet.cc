@@ -22,6 +22,8 @@
 #include <iostream>
 #include <typeinfo>
 
+#include <boost/format.hpp>
+
 #include "base/log.h"
 #include "base/macros.h"
 #include "economy/flag.h"
@@ -1036,9 +1038,10 @@ inline static void write_unseen_immovable
 	immovable_kinds_file.unsigned_8(immovable_kind);
 }
 
-#define WRITE(file, filename_template, version)                               \
-   snprintf(filename, sizeof(filename), filename_template, plnum, version);   \
-	(file).write(fs, filename);                                                \
+#define WRITE(file, filename_template, version)       \
+	file.write(fs, (boost::format(filename_template)   \
+						 % static_cast<unsigned int>(plnum) \
+						 % version).str().c_str());         \
 
 void MapPlayersViewPacket::write
 	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
@@ -1174,12 +1177,10 @@ void MapPlayersViewPacket::write
 				} while (r.x);
 			}
 
-			char filename[FILENAME_SIZE];
-
-			snprintf(filename, sizeof(filename), PLAYERDIRNAME_TEMPLATE, plnum);
-			fs.ensure_directory_exists(filename);
-			snprintf(filename, sizeof(filename),       DIRNAME_TEMPLATE, plnum);
-			fs.ensure_directory_exists(filename);
+			fs.ensure_directory_exists((boost::format(PLAYERDIRNAME_TEMPLATE)
+												 % static_cast<unsigned int>(plnum)).str().c_str());
+			fs.ensure_directory_exists((boost::format(DIRNAME_TEMPLATE)
+												 % static_cast<unsigned int>(plnum)).str().c_str());
 
 			WRITE
 				(unseen_times_file,
