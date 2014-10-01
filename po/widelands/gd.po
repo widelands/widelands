@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-29 20:36+0100\n"
-"PO-Revision-Date: 2014-09-27 10:35+0000\n"
+"PO-Revision-Date: 2014-09-30 10:54+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-09-30 05:59+0000\n"
+"X-Launchpad-Export-Date: 2014-10-01 05:33+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: gd\n"
 
@@ -547,7 +547,7 @@ msgstr "gun ainm"
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:249
 #, c-format
 msgid "Directory: %s"
-msgstr ""
+msgstr "Pasgan: %s"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:251
 msgid "directory"
@@ -717,32 +717,32 @@ msgstr "Tagh nì neo-ghluasadach"
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:88
 msgid "arable"
-msgstr ""
+msgstr "talamh-àitich"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:94
 msgid "aquatic"
-msgstr ""
+msgstr "uisge"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:100
 msgid "mountainous"
-msgstr ""
+msgstr "monadh"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:106
 msgid "dead"
-msgstr ""
+msgstr "marbh"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:113
 msgid "unpassable"
-msgstr ""
+msgstr "do-choiseach"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:118
 msgid "treeless"
-msgstr ""
+msgstr "gun chraobhan"
 
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:141
 msgid "Terrain Select"
@@ -1044,8 +1044,10 @@ msgstr "Leig sinn seachad %1$s air sgàth 's %2$s"
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "gu bheil %s a dhìth"
+msgstr[1] "gu bheil %s a dhìth"
+msgstr[2] "gu bheil %s a dhìth"
+msgstr[3] "gu bheil %s a dhìth"
 
 #. * TRANSLATORS: %s is a list of wares
 #: ../../src/logic/production_program.cc:1073
@@ -1911,7 +1913,7 @@ msgstr "'Ga ullachadh..."
 #: ../../src/ui_basic/spinbox.cc:126
 #, c-format
 msgid "%i %s"
-msgstr ""
+msgstr "%i %s"
 
 #: ../../src/ui_basic/spinbox.cc:136
 msgid "Increase the value"
@@ -2655,7 +2657,7 @@ msgstr "Roghainnean am broinn a' gheama"
 
 #: ../../src/ui_fsmenu/options.cc:218
 msgid "Use single watchwindow mode"
-msgstr ""
+msgstr "Cleachd modh uinneag cumail sùil air singilte"
 
 #: ../../src/ui_fsmenu/options.cc:228
 msgid "Start building road after placing a flag"
@@ -2678,8 +2680,10 @@ msgstr "Docaich uinneagan ris na h-oirean"
 #: ../../src/ui_fsmenu/options.cc:269 ../../src/ui_fsmenu/options.cc:397
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "mhionaid"
+msgstr[1] "mhionaid"
+msgstr[2] "mionaidean"
+msgstr[3] "mionaid"
 
 #: ../../src/ui_fsmenu/options.cc:277
 msgid "Save game automatically every"
@@ -2697,7 +2701,7 @@ msgstr[3] "latha"
 
 #: ../../src/ui_fsmenu/options.cc:295
 msgid "Remove replays older than:"
-msgstr ""
+msgstr "Thoir ath-chluichean air falbh a tha nas sine na:"
 
 #. * TRANSLATORS Options: Save game automatically every:
 #: ../../src/ui_fsmenu/options.cc:307
@@ -2712,7 +2716,7 @@ msgstr "Chan ann idir"
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
 #: ../../src/ui_fsmenu/options.cc:368 ../../src/ui_fsmenu/options.cc:374
 msgid "%1% x %2%"
-msgstr ""
+msgstr "%1% x %2%"
 
 #: ../../src/ui_fsmenu/options.cc:386
 msgid "Try system language"
@@ -2734,8 +2738,10 @@ msgstr "Astar nan uinneagan a ghreimicheas ris na crìochan:"
 #: ../../src/ui_fsmenu/options.cc:671 ../../src/ui_fsmenu/options.cc:675
 msgid "pixel"
 msgid_plural "pixels"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "phiogsail"
+msgstr[1] "phiogsail"
+msgstr[2] "piogsailean"
+msgstr[3] "piogsail"
 
 #: ../../src/ui_fsmenu/options.cc:533
 msgid "Show in-game chat with transparent background"
@@ -2995,8 +3001,10 @@ msgstr "Leabhar-eòlais bathar na treubha"
 #: ../../src/wui/encyclopedia_window.cc:210
 msgid "Consumed Ware Type"
 msgid_plural "Consumed Ware Types"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Seòrsa de bhathar air a bheil feum"
+msgstr[1] "Seòrsaichean de bhathar air a bheil feum"
+msgstr[2] "Seòrsaichean de bhathar air a bheil feum"
+msgstr[3] "Seòrsaichean de bhathar air a bheil feum"
 
 #: ../../src/wui/encyclopedia_window.cc:79
 msgid "Quantity"
@@ -3791,25 +3799,3 @@ msgstr "Lean air"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "Meadhanaich am prìomh shealladh air seo"
-
-#~ msgid "Remove Replays older than:"
-#~ msgstr "Thoir ath-chluichean air falbh a bhios nas sine na:"
-
-#~ msgid " is missing"
-#~ msgid_plural " are missing"
-#~ msgstr[0] " a dhìth"
-#~ msgstr[1] " a dhìth"
-#~ msgstr[2] " a dhìth"
-#~ msgstr[3] " a dhìth"
-
-#~ msgid "px."
-#~ msgstr "puing"
-
-#~ msgid "min."
-#~ msgstr "m."
-
-#~ msgid "Use single Watchwindow Mode"
-#~ msgstr "Cleachd modh uinneag cumail sùil air singilte"
-
-#~ msgid "Consumed ware type(s)"
-#~ msgstr "Bathar air a bheil feum"

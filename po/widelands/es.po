@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-30 06:02+0000\n"
+"X-Launchpad-Export-Date: 2014-10-01 05:33+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: es\n"
 
@@ -3622,26 +3622,3 @@ msgstr "Seguir"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "Use single Watchwindow Mode"
-#~ msgstr "Usar ventana de inspección única"
-
-#~ msgid " is missing"
-#~ msgid_plural " are missing"
-#~ msgstr[0] " está perdido"
-#~ msgstr[1] " están perdidos"
-
-#~ msgid "Remove Replays older than:"
-#~ msgstr "Eliminar replays anteriores a:"
-
-#~ msgid "min."
-#~ msgstr "min."
-
-#~ msgid "Consumed ware type(s)"
-#~ msgstr "Tipo(s) de mercancías consumidas"
-
-#~ msgid "px."
-#~ msgstr "px."
-
-#~ msgid "1 day"
-#~ msgstr "1 día"
