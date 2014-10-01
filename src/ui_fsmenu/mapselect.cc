@@ -46,73 +46,80 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	FullscreenMenuBase("choosemapmenu.jpg"),
 
 // Values for alignment and size
+	m_butx (get_w() * 71 / 100),
 	m_butw (get_w() / 4),
 	m_buth (get_h() * 9 / 200),
+	m_margin_left(get_w() *  47 / 2500),
+	m_margin_right(get_w() - m_butx - m_butw),
+	m_maplisty(get_h() * 17 / 50),
+	m_maplistw(get_w() * 711 / 1250),
+	m_nr_players_width(35),
+	m_padding (5),
+	m_space   (25),
+	m_description_column_x(get_w() * 75 / 100),
 
 // Text labels
 	m_title
 		(this,
-		 get_w() / 2, get_h() / 10,
+		 get_w() / 2, get_h() / 25,
 		 _("Choose a map"),
 		 UI::Align_HCenter),
 	m_label_load_map_as_scenario
 		(this,
-		 get_w() * 23 / 25, get_h() * 11 / 40,
+		 m_margin_left + 25, m_maplisty - 30,
 		 _("Load map as scenario"),
-		 UI::Align_Right),
+		 UI::Align_Left),
 	m_label_name
 		(this,
-		 get_w() * 7 / 10, get_h() * 17 / 50,
+		 m_description_column_x - m_padding, m_maplisty,
 		 _("Name:"),
 		 UI::Align_Right),
-	m_name (this, get_w() * 71 / 100, get_h() * 17 / 50),
+	m_name (this, m_description_column_x, m_maplisty, get_w() - m_description_column_x - m_margin_right, 35),
 	m_label_author
 		(this,
-		 get_w() * 7 / 10, get_h() * 3 / 8,
+		 m_description_column_x - m_padding, m_name.get_y() + m_name.get_h() + m_padding,
 		 _("Author:"),
 		 UI::Align_Right),
-	m_author (this, get_w() * 71 / 100, get_h() * 3 / 8),
+	m_author (this, m_description_column_x, m_label_author.get_y()),
 	m_label_size
 		(this,
-		 get_w() * 7 / 10, get_h() * 41 / 100,
+		 m_description_column_x - m_padding, m_author.get_y() + m_author.get_h() + m_padding,
 		 _("Size:"),
 		 UI::Align_Right),
-	m_size (this, get_w() * 71 / 100, get_h() * 41 / 100),
+	m_size (this, m_description_column_x, m_label_size.get_y()),
 	m_label_nr_players
 		(this,
-		 get_w() * 7 / 10, get_h() * 12 / 25,
+		 m_description_column_x - m_padding, m_size.get_y() + m_size.get_h() + m_padding,
 		 _("Players:"),
 		 UI::Align_Right),
-	m_nr_players (this, get_w() * 71 / 100, get_h() * 12 / 25),
-	m_label_descr
-		(this,
-		 get_w() * 7 / 10, get_h() * 103 / 200,
-		 _("Descr:"),
-		 UI::Align_Right),
+	m_nr_players (this, m_description_column_x, m_label_nr_players.get_y()),
 	m_descr
 		(this,
-		 get_w() * 71 / 100, get_h() * 13 / 25, get_w() / 4, get_h() * 63 / 200),
+		 m_margin_left + m_maplistw + 15,
+		 m_nr_players.get_y() + m_nr_players.get_h() + 2 * m_padding,
+		 get_w() - m_margin_left - m_maplistw - m_margin_right - 15,
+		 get_h() * 6 / 20),
 
 // Buttons
 	m_back
 		(this, "back",
-		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
+		 m_butx, get_h() * 17 / 20, m_butw, m_buth,
 		 g_gr->images().get("pics/but0.png"),
 		 _("Back"), std::string(), true, false),
 	m_ok
 		(this, "ok",
-		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
+		 m_butx, get_h() * 9 / 10, m_butw, m_buth,
 		 g_gr->images().get("pics/but2.png"),
 		 _("OK"), std::string(), false, false),
 
 // Checkbox
-	m_load_map_as_scenario (this, Point (get_w() * 187 / 200, get_h() * 7 / 25)),
+	m_load_map_as_scenario (this, Point (m_margin_left, m_maplisty - 30)),
 
 // Map table
 	m_table
 		(this,
-		 get_w() *  47 / 2500, get_h() * 3417 / 10000,
-		 get_w() * 711 / 1250, get_h() * 6083 / 10000),
+		 m_margin_left, m_maplisty,
+		 m_maplistw, get_h() * 6083 / 10000),
 	m_curdir("maps"),
 	m_basedir("maps"),
 
@@ -123,27 +130,11 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	m_ok.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::ok, boost::ref(*this)));
 
 	m_title.set_textstyle(ts_big());
-	m_label_load_map_as_scenario.set_textstyle(ts_small());
-	m_label_name                .set_textstyle(ts_small());
-	m_name                      .set_textstyle(ts_small());
-	m_label_author              .set_textstyle(ts_small());
-	m_author                    .set_textstyle(ts_small());
-	m_label_size                .set_textstyle(ts_small());
-	m_size                      .set_textstyle(ts_small());
-	m_label_nr_players          .set_textstyle(ts_small());
-	m_nr_players                .set_textstyle(ts_small());
-	m_label_descr               .set_textstyle(ts_small());
-	m_descr                     .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
-	m_table                     .set_font(ui_fn(), fs_small());
 
-	m_back.set_font(font_small());
-	m_ok.set_font(font_small());
-
-#define NR_PLAYERS_WIDTH 35
 	/** TRANSLATORS: Column title for number of players in map list */
-	m_table.add_column(NR_PLAYERS_WIDTH, _("#"), "", UI::Align_HCenter);
+	m_table.add_column(m_nr_players_width, _("Pl."), "", UI::Align_HCenter);
 	m_table.add_column
-		(m_table.get_w() - NR_PLAYERS_WIDTH, _("Map Name"), "", UI::Align_Left);
+		(m_table.get_w() - m_nr_players_width, _("Map Name"), "", UI::Align_Left);
 	m_table.set_column_compare
 		(1,
 		 boost::bind
@@ -155,29 +146,34 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	m_table.selected.connect(boost::bind(&FullscreenMenuMapSelect::map_selected, this, _1));
 	m_table.double_clicked.connect(boost::bind(&FullscreenMenuMapSelect::double_clicked, this, _1));
 
-	UI::Box* vbox = new UI::Box(
-	   this, m_table.get_x(), m_table.get_y() - 120, UI::Box::Horizontal, m_table.get_w());
+	UI::Box* vbox = new UI::Box(this, m_margin_left, m_maplisty - 150, UI::Box::Horizontal, 25, get_w());
 	m_show_all_maps = _add_tag_checkbox(vbox, "blumba", _("Show all maps"));
 	m_tags_checkboxes.clear(); // Remove this again, it is a special tag checkbox
 	m_show_all_maps->set_state(true);
-	vbox->set_size(get_w(), 25);
+	vbox->set_size(get_w() - 2 * m_margin_left, 25);
 
-	vbox = new UI::Box(this, m_table.get_x(), m_table.get_y() - 90, UI::Box::Horizontal, m_table.get_w());
+	vbox = new UI::Box(this,
+							 m_margin_left, vbox->get_y() + vbox->get_h() + m_padding,
+							 UI::Box::Horizontal, 25, get_w());
 	_add_tag_checkbox(vbox, "official", _("Official Map"));
 	_add_tag_checkbox(vbox, "seafaring", _("Seafaring Map"));
-	vbox->set_size(get_w(), 25);
+	_add_tag_checkbox(vbox, "unbalanced", _("Unbalanced"));
+	vbox->set_size(get_w() - 2 * m_margin_left, 25);
 
-	vbox = new UI::Box(this, m_table.get_x(), m_table.get_y() - 60, UI::Box::Horizontal, m_table.get_w());
+	vbox = new UI::Box(this,
+							 m_margin_left, vbox->get_y() + vbox->get_h() + m_padding,
+							 UI::Box::Horizontal, 25, get_w());
+	_add_tag_checkbox(vbox, "ffa", _("Free for all"));
 	_add_tag_checkbox(vbox, "1v1", _("1v1"));
+	vbox->set_size(get_w() - 2 * m_margin_left, 25);
+
+	vbox = new UI::Box(this,
+							 m_margin_left, vbox->get_y() + vbox->get_h() + m_padding,
+							 UI::Box::Horizontal, 25, get_w());
 	_add_tag_checkbox(vbox, "2teams", _("Teams of 2"));
 	_add_tag_checkbox(vbox, "3teams", _("Teams of 3"));
-	vbox->set_size(get_w(), 25);
-
-	vbox = new UI::Box(this, m_table.get_x(), m_table.get_y() - 30, UI::Box::Horizontal, m_table.get_w());
 	_add_tag_checkbox(vbox, "4teams", _("Teams of 4"));
-	_add_tag_checkbox(vbox, "ffa", _("Free for all"));
-	_add_tag_checkbox(vbox, "unbalanced", _("Unbalanced"));
-	vbox->set_size(get_w(), 25);
+	vbox->set_size(get_w() - 2 * m_margin_left, 25);
 
 	m_scenario_types = m_settings->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO;
 	if (m_scenario_types) {
@@ -525,8 +521,9 @@ UI::Checkbox * FullscreenMenuMapSelect::_add_tag_checkbox
 
 	box->add(cb, UI::Box::AlignLeft, true);
 	UI::Textarea * ta = new UI::Textarea(box, displ_name, UI::Align_CenterLeft);
+	box->add_space(m_padding);
 	box->add(ta, UI::Box::AlignLeft);
-	box->add_space(25);
+	box->add_space(m_space);
 
 	m_tags_checkboxes.push_back(cb);
 
