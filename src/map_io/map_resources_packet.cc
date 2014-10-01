@@ -31,8 +31,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
-
+constexpr uint16_t kCurrentPacketVersion = 1;
 
 void MapResourcesPacket::read
 	(FileSystem & fs, EditorGameBase & egbase, const OneWorldLegacyLookupTable& lookup_table)
@@ -44,7 +43,7 @@ void MapResourcesPacket::read
 	const World & world = egbase.world();
 
 	const uint16_t packet_version = fr.unsigned_16();
-	if (packet_version == CURRENT_PACKET_VERSION) {
+	if (packet_version == kCurrentPacketVersion) {
 		int32_t const nr_res = fr.unsigned_16();
 		if (world.get_nr_resources() < nr_res)
 			log
@@ -107,7 +106,7 @@ void MapResourcesPacket::write
 {
 	FileWrite fw;
 
-	fw.unsigned_16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(kCurrentPacketVersion);
 
 	// This is a bit more complicated saved so that the order of loading
 	// of the resources at run time doesn't matter.
