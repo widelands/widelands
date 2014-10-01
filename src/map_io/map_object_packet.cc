@@ -36,8 +36,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
-
+constexpr uint8_t kCurrentPacketVersion = 1;
 
 MapObjectPacket::~MapObjectPacket() {
 	while (loaders.size()) {
@@ -56,7 +55,7 @@ void MapObjectPacket::read
 		fr.open(fs, "binary/mapobjects");
 
 		const uint8_t packet_version = fr.unsigned_8();
-		if (packet_version != CURRENT_PACKET_VERSION)
+		if (packet_version != kCurrentPacketVersion)
 			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
 
@@ -137,7 +136,7 @@ void MapObjectPacket::write
 {
 	FileWrite fw;
 
-	fw.unsigned_8(CURRENT_PACKET_VERSION);
+	fw.unsigned_8(kCurrentPacketVersion);
 
 	std::vector<Serial> obj_serials = egbase.objects().all_object_serials_ordered();
 	for

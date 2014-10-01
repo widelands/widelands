@@ -19,6 +19,8 @@
 
 #include "map_io/map_players_messages_packet.h"
 
+#include <boost/format.hpp>
+
 #include "logic/game_data_error.h"
 #include "logic/player.h"
 #include "map_io/coords_profile.h"
@@ -28,10 +30,10 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
-#define PLAYERDIRNAME_TEMPLATE "player/%u"
-#define FILENAME_TEMPLATE PLAYERDIRNAME_TEMPLATE "/messages"
-#define FILENAME_SIZE 19
+constexpr uint32_t kCurrentPacketVersion = 1;
+
+constexpr const char* kPlayerDirnameTemplate = "player/%u";
+constexpr const char* kFilenameTemplate = "player/%u/messages";
 
 void MapPlayersMessagesPacket::read
 	(FileSystem & fs, EditorGameBase & egbase, bool, MapObjectLoader & mol)
@@ -43,12 +45,13 @@ void MapPlayersMessagesPacket::read
 	PlayerNumber const nr_players = map   .get_nrplayers();
 	iterate_players_existing(p, nr_players, egbase, player)
 		try {
-			char filename[FILENAME_SIZE];
-			snprintf(filename, sizeof(filename), FILENAME_TEMPLATE, p);
 			Profile prof;
-			try {prof.read(filename, nullptr, fs);} catch (...) {continue;}
+			try {
+				prof.read((boost::format(kFilenameTemplate) % static_cast<unsigned int>(p)).str().c_str(),
+							 nullptr, fs);
+			} catch (...) {continue;}
 			prof.get_safe_section("global").get_positive
-				("packet_version", CURRENT_PACKET_VERSION);
+				("packet_version", kCurrentPacketVersion);
 			MessageQueue & messages = player->messages();
 
 			{
@@ -147,7 +150,7 @@ void MapPlayersMessagesPacket::write
 	iterate_players_existing_const(p, nr_players, egbase, player) {
 		Profile prof;
 		prof.create_section("global").set_int
-			("packet_version", CURRENT_PACKET_VERSION);
+			("packet_version", kCurrentPacketVersion);
 		const MessageQueue & messages = player->messages();
 		MapMessageSaver & message_saver = mos.message_savers[p - 1];
 		for (const std::pair<MessageId, Message *>& temp_message : messages) {
@@ -180,11 +183,10 @@ void MapPlayersMessagesPacket::write
 				s.set_int       ("serial",    fileindex);
 			}
 		}
-		char filename[FILENAME_SIZE];
-		snprintf(filename, sizeof(filename), PLAYERDIRNAME_TEMPLATE, p);
-		fs.ensure_directory_exists(filename);
-		snprintf(filename, sizeof(filename),      FILENAME_TEMPLATE, p);
-		prof.write(filename, false, fs);
+		fs.ensure_directory_exists((boost::format(kPlayerDirnameTemplate)
+										  % static_cast<unsigned int>(p)).str().c_str());
+		prof.write((boost::format(kFilenameTemplate)
+						% static_cast<unsigned int>(p)).str().c_str(), false, fs);
 	}
 }
 
