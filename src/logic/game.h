@@ -191,7 +191,7 @@ public:
 		return m_general_stats;
 	}
 
-	void read_statistics(FileRead &, uint32_t version);
+	void read_statistics(FileRead &);
 	void write_statistics(FileWrite &);
 
 	void sample_statistics();
