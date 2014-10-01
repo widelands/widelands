@@ -112,7 +112,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 	   Notifications::subscribe<NoteImmovable>([this](const NoteImmovable& note) {
 		   	if (note.pi->owner().player_number() != player_->player_number()) {
 			   return;
-		   	}
+		   }
 		   	if (note.ownership == NoteImmovable::Ownership::GAINED) {
 			   gain_immovable(*note.pi);
 		   } else {
@@ -274,7 +274,7 @@ void DefaultAI::late_initialization() {
 		bo.type = BuildingObserver::BORING;
 		bo.cnt_built_ = 0;
 		bo.cnt_under_construction_ = 0;
-		bo.cnt_target_ = 0;
+		bo.cnt_target_ = 1;  // default for everything
 		bo.stocklevel_ = 0;
 		bo.stocklevel_time = 0;
 		bo.last_dismantle_time_ = 0;
@@ -574,7 +574,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		}
 
 		// counting fields with fish
-		if (field.water_nearby_ > 0 && game().get_gametime() % 10 == 0) {
+		if (field.water_nearby_ > 0 && (field.fish_nearby_ = -1 || game().get_gametime() % 10 == 0)) {
 			map.find_fields(Area<FCoords>(field.coords, 6),
 			                &resource_list,
 			                FindNodeResource(world.get_resource("fish")));
@@ -1065,10 +1065,20 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 					   (bf->critters_nearby_ * 2) - 8 - 5 * bf->producers_nearby_.at(bo.outputs_.at(0));
 
 				} else if (bo.is_fisher_) {  // fisher
+
+					// ~are fishes needed?
+					if (max_needed_preciousness == 0)
+						continue;
+
+					if (bo.cnt_under_construction_ + bo.unoccupied_ > 0)
+						continue;
+
 					if (bf->water_nearby_ < 5)
 						continue;
 
-					if (new_buildings_stop_)
+					// we use preciousness to allow atlanteans to build the fishers huts
+					// atlanteans have preciousness 4, other tribes 3
+					if (max_needed_preciousness < 4 && new_buildings_stop_)
 						continue;
 
 					if (bo.stocklevel_time < game().get_gametime() - 5 * 1000) {
@@ -1076,13 +1086,13 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 						bo.stocklevel_time = game().get_gametime();
 					}
 
-					if (bo.stocklevel_ > 50 && !output_is_needed)
+					if (bo.stocklevel_ > 50)
 						continue;
 
 					if (bf->producers_nearby_.at(bo.outputs_.at(0)) >= 1)
 						continue;
 
-					prio = bf->fish_nearby_;
+					prio = bf->fish_nearby_ - new_buildings_stop_ * 15 * bo.total_count();
 
 				} else if (bo.production_hint_ >= 0) {
 					// first setting targets (needed also for dismantling)
@@ -1094,11 +1104,6 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 						   1 + static_cast<int32_t>(mines_.size() + productionsites.size()) / 20;
 
 					if ((bo.cnt_under_construction_ + bo.unoccupied_) > 1)
-						continue;
-
-					// production hint (f.e. associate forester with logs)
-
-					if (bo.need_water_ && bf->water_nearby_ < 5)  // probably some of them needs water
 						continue;
 
 					if (bo.plants_trees_) {  // RANGERS
@@ -1133,30 +1138,38 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 						// considering space consumers nearby
 						prio -= bf->space_consumers_nearby_ * 5;
 
-					} else if (!new_buildings_stop_) {  // gamekeepers or so
+					} else {  // FISH BREEDERS and GAME KEEPERS
+						if (new_buildings_stop_ && bo.total_count() > 0)
+							continue;
+
+						// especially for fish breeders
+						if (bo.need_water_ && bf->water_nearby_ < 8)
+							continue;
+						if (bo.need_water_)
+							prio += bf->water_nearby_ / 5;
+
+						if (bo.total_count() > bo.cnt_target_)
+							continue;
+
 						if (bo.stocklevel_time < game().get_gametime() - 5 * 1000) {
 							bo.stocklevel_ =
 							   get_stocklevel_by_hint(static_cast<size_t>(bo.production_hint_));
 							bo.stocklevel_time = game().get_gametime();
 						}
-
 						if (bo.stocklevel_ > 50)
 							continue;
 
-						// especially for fish breeders
-						if (bo.need_water_ && bf->water_nearby_ < 5)
+						if (bo.total_count() == 0 && gametime > 45 * 1000)
+							prio += 100 + bf->producers_nearby_.at(bo.production_hint_) * 10;
+						else if (bf->producers_nearby_.at(bo.production_hint_) == 0)
 							continue;
-						prio = bf->water_nearby_;
+						else
+							prio += bf->producers_nearby_.at(bo.production_hint_) * 10;
 
-						if (bo.total_count() > bo.cnt_target_)
-							continue;
-
-						prio += bf->producers_nearby_.at(bo.production_hint_) * 10;
-						prio += recalc_with_border_range(*bf, prio);
+						if (bf->enemy_nearby_)
+							prio -= 10;
 					}
 
-					if (prio <= 0)
-						continue;
 				} else if (bo.recruitment_ && !new_buildings_stop_) {
 					// this will depend on number of mines_ and productionsites
 					if (static_cast<int32_t>((productionsites.size() + mines_.size()) / 30) >
@@ -2155,7 +2168,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 		}
 
 		// a building can be dismanteld if it performs too bad, if it is not the last one
-		if (site.site->get_statistics_percent() <= 10 && site.bo->total_count() > 1) {
+		if (site.site->get_statistics_percent() <= 10 && site.bo->cnt_built_ > 1) {
 
 			flags_to_be_removed.push_back(site.site->base_flag().get_position());
 			game().send_player_dismantle(*site.site);
@@ -2203,7 +2216,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 
 		uint16_t score = site.bo->stocklevel_;
 
-		if (score > 150 && site.bo->cnt_built_ > site.bo->cnt_target_) {
+		if (score > 200 && site.bo->cnt_built_ > site.bo->cnt_target_) {
 
 			site.bo->last_dismantle_time_ = game().get_gametime();
 			flags_to_be_removed.push_back(site.site->base_flag().get_position());
@@ -2211,12 +2224,12 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 			return true;
 		}
 
-		if (score > 100 && !site.site->is_stopped()) {
+		if (score > 120 && !site.site->is_stopped()) {
 
 			game().send_player_start_stop_building(*site.site);
 		}
 
-		if (score < 50 && site.site->is_stopped()) {
+		if (score < 80 && site.site->is_stopped()) {
 
 			game().send_player_start_stop_building(*site.site);
 		}
