@@ -319,7 +319,7 @@ void Map::create_empty_map
 	(const World& world, uint32_t const w, uint32_t const h,
 	 char const * const name,
 	 char const * const author,
-	 char const * const description)
+	 const std::string& description)
 {
 	set_size(w, h);
 	set_name       (name);
@@ -558,9 +558,9 @@ void Map::set_name(char const * const string)
 	snprintf(m_name, sizeof(m_name), "%s", string);
 }
 
-void Map::set_description(char const * const string)
+void Map::set_description(const std::string& description)
 {
-	snprintf(m_description, sizeof(m_description), "%s", string);
+	m_description = description;
 }
 
 void Map::set_hint(std::string string)

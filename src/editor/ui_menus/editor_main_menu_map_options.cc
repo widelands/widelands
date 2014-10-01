@@ -142,5 +142,5 @@ void MainMenuMapOptions::changed(int32_t const id) {
  * Called when the editbox has changed
  */
 void MainMenuMapOptions::editbox_changed() {
-	eia().egbase().map().set_description(m_descr->get_text().c_str());
+	eia().egbase().map().set_description(m_descr->get_text());
 }

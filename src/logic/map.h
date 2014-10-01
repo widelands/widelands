@@ -176,7 +176,7 @@ public:
 	    uint32_t h = 64,
 	    char const* name = _("No Name"),
 	    char const* author = _("Unknown"),
-	    char const* description = _("no description defined"));
+		 const std::string& description = _("No description defined"));
 
 	void recalc_whole_map(const World& world);
 	virtual void recalc_for_field_area(const World& world, Area<FCoords>);
@@ -193,7 +193,7 @@ public:
 	void set_filename   (char const *);
 	void set_author     (char const *);
 	void set_name       (char const *);
-	void set_description(char const *);
+	void set_description(const std::string& description);
 	void set_hint       (std::string);
 	void set_background (char const *);
 	void add_tag        (std::string);
@@ -207,7 +207,7 @@ public:
 	const char * get_filename()    const {return m_filename;}
 	const char * get_author()      const {return m_author;}
 	const char * get_name()        const {return m_name;}
-	const char * get_description() const {return m_description;}
+	const std::string& get_description() const {return m_description;}
 	std::string  get_hint()        const {return m_hint;}
 	const std::string & get_background() const {return m_background;}
 	using Tags = std::set<std::string>;
@@ -397,7 +397,7 @@ private:
 	char        m_filename    [256];
 	char        m_author       [61];
 	char        m_name         [61];
-	char        m_description[1024];
+	std::string m_description;
 	std::string m_hint;
 	std::string m_background;
 	Tags        m_tags;
