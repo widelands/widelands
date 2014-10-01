@@ -174,7 +174,7 @@ void MainMenuSaveMap::clicked_ok() {
 		fill_list();
 	} else { //  Ok, save this map
 		Widelands::Map & map = eia().egbase().map();
-		if (!strcmp(map.get_name(), _("No Name"))) {
+		if (map.get_name() != _("No Name")) {
 			std::string::size_type const filename_size = filename.size();
 			map.set_name
 				((4 <= filename_size

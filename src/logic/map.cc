@@ -317,8 +317,8 @@ the given data
 */
 void Map::create_empty_map
 	(const World& world, uint32_t const w, uint32_t const h,
-	 char const * const name,
-	 char const * const author,
+	 const std::string& name,
+	 const std::string& author,
 	 const std::string& description)
 {
 	set_size(w, h);
@@ -548,14 +548,14 @@ void Map::set_filename(char const * const string)
 	snprintf(m_filename, sizeof(m_filename), "%s", string);
 }
 
-void Map::set_author(char const * const string)
+void Map::set_author(const std::string&  author)
 {
-	snprintf(m_author, sizeof(m_author), "%s", string);
+	m_author = author;
 }
 
-void Map::set_name(char const * const string)
+void Map::set_name(const std::string& name)
 {
-	snprintf(m_name, sizeof(m_name), "%s", string);
+	m_name = name;
 }
 
 void Map::set_description(const std::string& description)

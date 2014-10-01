@@ -174,8 +174,8 @@ public:
 	   (const World& world,
 	    uint32_t w = 64,
 	    uint32_t h = 64,
-	    char const* name = _("No Name"),
-	    char const* author = _("Unknown"),
+		 const std::string& name = _("No Name"),
+		 const std::string& author = _("Unknown"),
 		 const std::string& description = _("No description defined"));
 
 	void recalc_whole_map(const World& world);
@@ -191,8 +191,8 @@ public:
 	}
 
 	void set_filename   (char const *);
-	void set_author     (char const *);
-	void set_name       (char const *);
+	void set_author     (const std::string& author);
+	void set_name       (const std::string& name);
 	void set_description(const std::string& description);
 	void set_hint       (std::string);
 	void set_background (char const *);
@@ -205,8 +205,8 @@ public:
 
 	// informational functions
 	const char * get_filename()    const {return m_filename;}
-	const char * get_author()      const {return m_author;}
-	const char * get_name()        const {return m_name;}
+	const std::string& get_author()      const {return m_author;}
+	const std::string& get_name()        const {return m_name;}
 	const std::string& get_description() const {return m_description;}
 	std::string  get_hint()        const {return m_hint;}
 	const std::string & get_background() const {return m_background;}
@@ -395,8 +395,8 @@ private:
 	int16_t m_width;
 	int16_t m_height;
 	char        m_filename    [256];
-	char        m_author       [61];
-	char        m_name         [61];
+	std::string m_author;
+	std::string m_name;
 	std::string m_description;
 	std::string m_hint;
 	std::string m_background;

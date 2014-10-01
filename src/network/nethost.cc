@@ -900,7 +900,7 @@ void NetHost::run(bool const autorun)
 				if (d->settings.users.at(i).position != UserSettings::not_connected())
 					if (d->settings.users.at(i).name != d->localplayername) // all names, but the dedicated server
 						clients.push_back(d->settings.users.at(i).name);
-			DedicatedLog::get()->game_start(clients, game.map().get_name());
+			DedicatedLog::get()->game_start(clients, game.map().get_name().c_str());
 		}
 		game.run
 			(loaderUI.get(),

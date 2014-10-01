@@ -129,9 +129,9 @@ void MainMenuMapOptions::update() {
 */
 void MainMenuMapOptions::changed(int32_t const id) {
 	if        (id == 0) {
-		eia().egbase().map().set_name(m_name->text().c_str());
+		eia().egbase().map().set_name(m_name->text());
 	} else if (id == 1) {
-		eia().egbase().map().set_author(m_author->text().c_str());
+		eia().egbase().map().set_author(m_author->text());
 		g_options.pull_section("global").set_string
 			("realname", m_author->text());
 	}

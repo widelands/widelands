@@ -986,7 +986,7 @@ int LuaObjective::set_done(lua_State * L) {
 		/** TRANSLATORS: %1$s = map name. %2$s = achievement name */
 		std::string filename = (boost::format
 			(_("%1$s (achieved %2$s)"))
-			% get_egbase(L).get_map()->get_name()
+			% get_egbase(L).get_map()->get_name().c_str()
 			% o.descname().c_str()
 		).str();
 		get_game(L).save_handler().request_save(filename);
