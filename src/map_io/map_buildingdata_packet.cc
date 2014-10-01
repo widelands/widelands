@@ -373,7 +373,7 @@ void MapBuildingdataPacket::read_warehouse
 {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if	(packet_version == kCurrentPacketVersionWarehouse) {
+		if (packet_version == kCurrentPacketVersionWarehouse) {
 			WareIndex const nr_wares   = warehouse.descr().tribe().get_nrwares();
 			WareIndex const nr_tribe_workers = warehouse.descr().tribe().get_nrworkers();
 			warehouse.m_supply->set_nrwares  (nr_wares);

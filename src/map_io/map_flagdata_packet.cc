@@ -38,7 +38,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 4
+constexpr uint16_t kCurrentPacketVersion = 4;
 
 void MapFlagdataPacket::read
 	(FileSystem            &       fs,
@@ -54,42 +54,16 @@ void MapFlagdataPacket::read
 
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (1 <= packet_version && packet_version <= CURRENT_PACKET_VERSION) {
+		if (packet_version == kCurrentPacketVersion) {
 			const Map  & map    = egbase.map();
 			Extent const extent = map.extent();
-			for (;;) {
-				if (2 <= packet_version && fr.end_of_file())
-					break;
+			while (! fr.end_of_file()) {
 				Serial const serial = fr.unsigned_32();
-				if (packet_version < 2 && serial == 0xffffffff) {
-					if (!fr.end_of_file())
-						throw GameDataError
-							("expected end of file after serial 0xffffffff");
-					break;
-				}
 				try {
 					Flag & flag = mol.get<Flag>(serial);
 
 					//  Owner is already set, nothing to do from PlayerImmovable.
 
-					if (packet_version < 3) {
-						if
-							(upcast
-							 	(Flag const,
-							 	 mf,
-							 	 map[flag.m_position = read_coords_32(&fr, extent)]
-							 	 .get_immovable()))
-						{
-							if (mf != &flag)
-								throw GameDataError
-									("wrong flag (%u) at given position (%i, %i)",
-									 mf->serial(),
-									 flag.m_position.x, flag.m_position.y);
-						} else
-							throw GameDataError
-								("no flag at given position (%i, %i)",
-								 flag.m_position.x, flag.m_position.y);
-					}
 					flag.m_animstart = fr.unsigned_16();
 
 					{
@@ -98,26 +72,6 @@ void MapFlagdataPacket::read
 						flag.m_building =
 							dynamic_cast<Building *>
 								(building_position.field->get_immovable());
-					}
-					if (packet_version < 3) {
-						if (uint32_t const building_serial = fr.unsigned_32())
-							try {
-								const Building & building =
-									mol.get<Building>(building_serial);
-								if (flag.m_building != &building)
-									throw GameDataError
-										(
-									 	 "has building %u at (%i, %i), which is not "
-									 	 "at the top left node",
-										 building_serial,
-										 building.get_position().x,
-										 building.get_position().y);
-							} catch (const WException & e) {
-								throw GameDataError
-									("building (%u): %s", building_serial, e.what());
-							}
-						else
-							flag.m_building = nullptr;
 					}
 
 					//  Roads are set somewhere else.
@@ -160,7 +114,7 @@ void MapFlagdataPacket::read
 							}
 						}
 
-						if (uint32_t const always_call_serial = fr.unsigned_32())
+						if (uint32_t const always_call_serial = fr.unsigned_32()) {
 							try {
 								flag.m_always_call_for_flag =
 									&mol.get<Flag>(always_call_serial);
@@ -169,7 +123,7 @@ void MapFlagdataPacket::read
 									("always_call (%u): %s",
 									 always_call_serial, e.what());
 							}
-						else
+						} else
 							flag.m_always_call_for_flag = nullptr;
 
 						//  workers waiting
@@ -231,7 +185,7 @@ void MapFlagdataPacket::write
 {
 	FileWrite fw;
 
-	fw.unsigned_16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(kCurrentPacketVersion);
 
 	const Map & map = egbase.map();
 	const Field & fields_end = map[map.max_index()];

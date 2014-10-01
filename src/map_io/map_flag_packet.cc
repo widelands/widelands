@@ -35,8 +35,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
-
+constexpr uint16_t kCurrentPacketVersion = 1;
 
 void MapFlagPacket::read
 	(FileSystem            &       fs,
@@ -52,7 +51,7 @@ void MapFlagPacket::read
 
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == CURRENT_PACKET_VERSION) {
+		if (packet_version == kCurrentPacketVersion) {
 			const Map & map = egbase.map();
 			PlayerNumber const nr_players = map.get_nrplayers();
 			Widelands::Extent const extent = map.extent();
@@ -132,7 +131,7 @@ void MapFlagPacket::write
 {
 	FileWrite fw;
 
-	fw.unsigned_16(CURRENT_PACKET_VERSION);
+	fw.unsigned_16(kCurrentPacketVersion);
 
 	//  Write flags and owner, register this with the map_object_saver so that
 	//  it's data can be saved later.
