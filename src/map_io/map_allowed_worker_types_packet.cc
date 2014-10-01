@@ -28,13 +28,13 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
+constexpr int32_t kCurrentPacketVersion = 1;
 
 void MapAllowedWorkerTypesPacket::read
-	(FileSystem            &       fs,
-	 EditorGameBase      &       egbase,
-	 bool                    skip,
-	 MapObjectLoader &)
+	(FileSystem& fs,
+	 EditorGameBase& egbase,
+	 bool skip,
+	 MapObjectLoader&)
 {
 	if (skip)
 		return;
@@ -52,7 +52,7 @@ void MapAllowedWorkerTypesPacket::read
 	try {
 		const int32_t packet_version =
 			prof.get_safe_section("global").get_safe_int("packet_version");
-		if (packet_version == CURRENT_PACKET_VERSION) {
+		if (packet_version == kCurrentPacketVersion) {
 			iterate_players_existing(p, egbase.map().get_nrplayers(), egbase, player) {
 				const TribeDescr & tribe = player->tribe();
 				char buffer[10];
@@ -87,7 +87,7 @@ void MapAllowedWorkerTypesPacket::write
 {
 	Profile prof;
 	prof.create_section("global").set_int
-		("packet_version", CURRENT_PACKET_VERSION);
+		("packet_version", kCurrentPacketVersion);
 
 	bool forbidden_worker_seen = false;
 	iterate_players_existing_const(p, egbase.map().get_nrplayers(), egbase, player) {

@@ -28,7 +28,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
+constexpr int32_t kCurrentPacketVersion = 1;
 
 void MapAllowedBuildingTypesPacket::read
 	(FileSystem            &       fs,
@@ -54,7 +54,7 @@ void MapAllowedBuildingTypesPacket::read
 	try {
 		int32_t const packet_version =
 			prof.get_safe_section("global").get_safe_int("packet_version");
-		if (packet_version == CURRENT_PACKET_VERSION) {
+		if (packet_version == kCurrentPacketVersion) {
 			PlayerNumber const nr_players = egbase.map().get_nrplayers();
 			upcast(Game const, game, &egbase);
 
@@ -102,7 +102,7 @@ void MapAllowedBuildingTypesPacket::write
 {
 	Profile prof;
 	prof.create_section("global").set_int
-		("packet_version", CURRENT_PACKET_VERSION);
+		("packet_version", kCurrentPacketVersion);
 
 	PlayerNumber const nr_players = egbase.map().get_nrplayers();
 	iterate_players_existing_const(p, nr_players, egbase, player) {
