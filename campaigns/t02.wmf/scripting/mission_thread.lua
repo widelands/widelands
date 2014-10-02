@@ -3,23 +3,14 @@
 -- =======================================================================
 
 include "map:scripting/mission_thread_texts.lua"
-include "scripting/ui.lua"
+include "scripting/messages.lua"
 include "scripting/table.lua"
+include "scripting/ui.lua"
 
 quarry_done = false
 enhance_buildings_done = false
 build_materials_done = false
 cattle_farm_done = false
-
-function send_msg(t)
-   t.h = 400
-   plr:message_box(t.title, t.body, t)
-end
-
-function add_obj(t)
-   return plr:add_objective(t.name, t.title, t.body)
-end
-
 
 -- ==============================================
 -- First messages player at beginning of mission
@@ -27,15 +18,15 @@ end
 function introduction_thread()
    sleep(2000)
 
-   send_msg(briefing_msg_1)
-   send_msg(briefing_msg_2)
-   send_msg(briefing_msg_3)
+   campaign_message_box(briefing_msg_1)
+   campaign_message_box(briefing_msg_2)
+   campaign_message_box(briefing_msg_3)
 
-   send_msg(order_msg_1)
-   send_msg(order_msg_2)
+   campaign_message_box(order_msg_1)
+   campaign_message_box(order_msg_2)
 
    -- Reveal the rocks
-   local obj = add_obj(obj_claim_northeastern_rocks)
+   local obj = add_campaign_objective(obj_claim_northeastern_rocks)
 
    local rocks = wl.Game().map:get_field(27, 48)
    local intermediate_point = wl.Game().map:get_field(31,12)
@@ -43,8 +34,8 @@ function introduction_thread()
    local way1 = scroll_smoothly_to(intermediate_point, 1500)
    local way2 = scroll_smoothly_to(rocks, 1500)
 
-   send_msg(order_msg_3)
-   send_msg(order_msg_4)
+   campaign_message_box(order_msg_3)
+   campaign_message_box(order_msg_4)
 
    -- Move back to HQ
    timed_scroll(array_reverse(way2), 10)
@@ -57,7 +48,7 @@ function introduction_thread()
    end
    obj.done = true
 
-   send_msg(order_msg_5_quarry)
+   campaign_message_box(order_msg_5_quarry)
 
    quarry_done = true
 end
@@ -75,8 +66,8 @@ function mines_and_food_thread()
    end
 
    -- Send a msg and add the objective
-   send_msg(order_msg_6_geologist)
-   o = add_obj(obj_build_mines)
+   campaign_message_box(order_msg_6_geologist)
+   o = add_campaign_objective(obj_build_mines)
    plr:allow_buildings{
       "coalmine",
       "oremine",
@@ -89,12 +80,12 @@ function mines_and_food_thread()
       sleep(5000)
    end
    o.done = true
-   send_msg(order_msg_7_mines_up)
-   send_msg(order_msg_8_mines_up)
-   send_msg(order_msg_9_hunter)
-   send_msg(order_msg_10_bread)
+   campaign_message_box(order_msg_7_mines_up)
+   campaign_message_box(order_msg_8_mines_up)
+   campaign_message_box(order_msg_9_hunter)
+   campaign_message_box(order_msg_10_bread)
 
-   local obj_bf = add_obj(obj_basic_food)
+   local obj_bf = add_campaign_objective(obj_basic_food)
    -- The function to check for completeness
    run(function()
       local tavern_msg_done = nil
@@ -104,11 +95,11 @@ function mines_and_food_thread()
             "hunters_hut", "gamekeepers_hut", "tavern"
          }
          if #rv.hunters_hut >= 1 and not hunter_msg_done then
-            send_msg(order_msg_11_basic_food_began)
+            campaign_message_box(order_msg_11_basic_food_began)
             hunter_msg_done = true
          end
          if #rv.tavern >= 1 and not tavern_msg_done then
-            send_msg(order_msg_13_tavern)
+            campaign_message_box(order_msg_13_tavern)
             tavern_msg_done = true
          end
          if #rv.hunters_hut >= 1 and #rv.gamekeepers_hut >= 1
@@ -118,7 +109,7 @@ function mines_and_food_thread()
       obj_bf.done = true
    end)
 
-   local obj_farming = add_obj(obj_begin_farming)
+   local obj_farming = add_campaign_objective(obj_begin_farming)
 
    -- Start the cattlefarm thread
    run(cattle_farm)
@@ -131,7 +122,7 @@ function mines_and_food_thread()
          end
          sleep(4234)
       end
-      send_msg(order_msg_12_farming_began)
+      campaign_message_box(order_msg_12_farming_began)
       obj_farming.done = true
    end)
 
@@ -151,19 +142,19 @@ function mines_and_food_thread()
    end
 
    -- Ready to build refiner stuff
-   send_msg(order_msg_14_refine_ore)
+   campaign_message_box(order_msg_14_refine_ore)
    plr:allow_buildings{"smelting_works"}
-   o = add_obj(obj_refine_ores)
+   o = add_campaign_objective(obj_refine_ores)
    while #plr:get_buildings("smelting_works") < 1 do
       sleep(6223)
    end
    o.done = true
 
    -- Information about making mines deeper
-   send_msg(order_msg_15_mines_exhausted)
+   campaign_message_box(order_msg_15_mines_exhausted)
    plr:allow_buildings{ "deep_coalmine", "inn", "micro-brewery" }
    -- objective.check will make sure that this i finished
-   local obj = add_obj(obj_enhance_buildings)
+   local obj = add_campaign_objective(obj_enhance_buildings)
 
    run(function()
       while not check_for_buildings(plr,
@@ -192,15 +183,15 @@ function build_materials_thread()
       sleep(5421)
    end
 
-   send_msg(order_msg_16_blackwood)
+   campaign_message_box(order_msg_16_blackwood)
    plr:allow_buildings{"hardener"}
-   local o = add_obj(obj_better_material_1)
+   local o = add_campaign_objective(obj_better_material_1)
    while #plr:get_buildings("hardener") < 1 do sleep(5421) end
    o.done = true
 
-   send_msg(order_msg_17_grindstone)
+   campaign_message_box(order_msg_17_grindstone)
    plr:allow_buildings{"lime_kiln", "well", "charcoal_kiln"}
-   o = add_obj(obj_better_material_2)
+   o = add_campaign_objective(obj_better_material_2)
    -- Wait for the buildings to be build
    while true do
       local rv = plr:get_buildings{"lime_kiln", "well",
@@ -213,12 +204,12 @@ function build_materials_thread()
    end
    o.done = true
 
-   send_msg(order_msg_18_reed_yard)
+   campaign_message_box(order_msg_18_reed_yard)
    plr:allow_buildings{"reed_yard"}
-   o = add_obj(obj_better_material_3)
+   o = add_campaign_objective(obj_better_material_3)
    while #plr:get_buildings("reed_yard") < 1 do sleep(5421) end
 
-   send_msg(order_msg_19_all_material)
+   campaign_message_box(order_msg_19_all_material)
    o.done = true
 
    build_materials_done = true
@@ -232,9 +223,9 @@ function cattle_farm()
       sleep(7834)
    end
 
-   send_msg(msg_cattlefarm_00)
+   campaign_message_box(msg_cattlefarm_00)
 
-   local o = add_obj(obj_build_cattlefarm)
+   local o = add_campaign_objective(obj_build_cattlefarm)
    plr:allow_buildings{"cattlefarm"}
 
    while not check_for_buildings(plr, { cattlefarm = 1 }) do
@@ -251,10 +242,10 @@ end
 -- ======================
 function story_messages_thread()
    wake_me(180 * 1000)
-   send_msg(msg_story_2)
+   campaign_message_box(msg_story_2)
 
    wake_me(600 * 1000)
-   send_msg(msg_story_1)
+   campaign_message_box(msg_story_1)
 end
 
 -- =================
@@ -266,7 +257,7 @@ function mission_complete_thread()
          sleep(10000)
    end
 
-   send_msg(msg_mission_complete)
+   campaign_message_box(msg_mission_complete)
    plr:reveal_scenario("barbariantut02")
 end
 
@@ -284,7 +275,7 @@ function village_thread()
 
    pts = scroll_smoothly_to(wl.Game().map:get_field(55, 25), 3000)
 
-   send_msg(msg_village)
+   campaign_message_box(msg_village)
 
    timed_scroll(array_reverse(pts), 10)
    sleep(1500)
