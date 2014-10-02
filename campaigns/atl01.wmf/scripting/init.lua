@@ -53,11 +53,6 @@ function msg_boxes(boxes_descr)
    end
 end
 
--- Add an objective
-function add_obj(o)
-   return p1:add_objective(o.name, o.title, o.body)
-end
-
 -- Return the total number of items in warehouses of the given
 -- ware.
 function count_in_warehouses(ware)
@@ -73,9 +68,8 @@ function count_in_warehouses(ware)
 end
 
 function send_building_lost_message(f)
--- TODO: replace menu.png with representative_image as soon as this has been wrapped
    send_message(p1, _"Building lost!",
-      rt("image=tribes/atlanteans/".. f.immovable.descr.name .."/menu.png",
+      rt("image=".. f.immovable.descr.representative_image,
          p(_"We lost a building to the ocean!")
       ), { field = f, popup = false }
    )
@@ -145,7 +139,7 @@ function build_warehouse_and_horsefarm()
    scroll_smoothly_to(fowned)
    msg_boxes(horsefarm_and_warehouse_story)
 
-   local o = add_obj(obj_horsefarm_and_warehouse)
+   local o = add_campaign_objective(obj_horsefarm_and_warehouse)
    while not check_for_buildings(p1, {
       horsefarm = 1, warehouse = 1,
    }) do sleep(2384) end
@@ -155,7 +149,7 @@ end
 function build_training()
    msg_boxes(training_story)
 
-   local o = add_obj(obj_make_training_buildings)
+   local o = add_campaign_objective(obj_make_training_buildings)
    while not check_for_buildings(p1, {
       dungeon = 1, labyrinth = 1
    }) do sleep(3874) end
@@ -167,7 +161,7 @@ end
 function build_heavy_industrys_and_mining()
    msg_boxes(heavy_industry_story)
 
-   local o = add_obj(obj_make_heavy_industry_and_mining)
+   local o = add_campaign_objective(obj_make_heavy_industry_and_mining)
    while not check_for_buildings(p1, {
       coalmine = 1, ironmine = 1, goldmine = 1, crystalmine = 1,
       smelting_works = 1, weaponsmithy = 1, armorsmithy = 1,
@@ -187,7 +181,7 @@ function build_food_environment()
       run(build_heavy_industrys_and_mining)
    end)
 
-   local o = add_obj(obj_make_food_infrastructure)
+   local o = add_campaign_objective(obj_make_food_infrastructure)
    while not check_for_buildings(p1, {
       farm = 1, blackroot_farm = 1,
       sawmill = 1, well = 1, bakery = 1,
@@ -204,7 +198,7 @@ function make_spidercloth_production()
 
    -- There is no spidercloth in any warehouse!
    msg_boxes(spidercloth_messages)
-   local o = add_obj(obj_spidercloth_production)
+   local o = add_campaign_objective(obj_spidercloth_production)
 
    while not check_for_buildings(p1, {
       spiderfarm = 1, ["gold-spinning-mill"] = 1, ["weaving-mill"] = 1
@@ -217,9 +211,9 @@ end
 
 function build_environment()
    msg_boxes(first_briefing_messages)
-   local o = add_obj(obj_ensure_build_wares_production)
+   local o = add_campaign_objective(obj_ensure_build_wares_production)
 
-   expand_objective = add_obj(obj_expand)
+   expand_objective = add_campaign_objective(obj_expand)
 
    while not check_for_buildings(p1, {
       woodcutters_house = 2,
@@ -315,7 +309,7 @@ function water_rising()
             sleep(200)
             scroll_smoothly_to(f)
             msg_boxes(field_flooded_msg)
-            add_obj(obj_build_ships)
+            add_campaign_objective(obj_build_ships)
             p1:allow_buildings{"shipyard"}
             run(check_for_ships)
          end)
