@@ -4,6 +4,7 @@
 
 include "map:scripting/texts.lua"
 include "scripting/coroutine.lua"
+include "scripting/messages.lua"
 include "scripting/objective_utils.lua"
 
 function check_quarries()
@@ -20,9 +21,9 @@ end
 
 function tutorial_thread()
    p = wl.Game().players[1]
-   show_story_box(_"Somebody Comes up to You", khantrukh_1)
+   show_story_box(_"Somebody approaches you", khantrukh_1)
    show_story_box(_"The Advisor", khantrukh_2, nil, 80, 80)
-   local o = add_obj(start_lumberjack_01, p)
+   local o = add_campaign_objective(start_lumberjack_01)
 
    -- Wait till the hut is build.
    while not check_for_buildings(p, {constructionsite = 1},
@@ -37,7 +38,7 @@ function tutorial_thread()
 
    p:message_box(_"The Advisor", khantrukh_4, { h = 400 })
    p:message_box(_"The Advisor", khantrukh_5, { h = 400 })
-   local o = add_obj(start_lumberjack_02, p)
+   local o = add_campaign_objective(start_lumberjack_02)
 
    -- Wait till the hut is build.
    while not check_for_buildings(p, {lumberjacks_hut = 1},
@@ -46,8 +47,8 @@ function tutorial_thread()
 
    p:message_box(_"The Advisor", khantrukh_6, { h = 400 })
    p:allow_buildings{"rangers_hut", "quarry"}
-   objq = add_obj(start_quarries, p)
-   objr = add_obj(start_ranger, p)
+   objq = add_campaign_objective(start_quarries)
+   objr = add_campaign_objective(start_ranger)
    run(check_ranger)
    run(check_quarries)
 
