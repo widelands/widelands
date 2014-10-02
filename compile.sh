@@ -73,9 +73,9 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
     echo "for instructions on how to adjust options and build with CMake."
 
     if [ $buildtool = "ninja" ] || [ $buildtool = "ninja-build" ] ; then
-      cmake -G Ninja -DWL_PORTABLE=true .. -DCMAKE_BUILD_TYPE="Debug"
+      cmake -G Ninja .. -DCMAKE_BUILD_TYPE="Debug"
     else
-      cmake -DWL_PORTABLE=true .. -DCMAKE_BUILD_TYPE="Debug"
+      cmake .. -DCMAKE_BUILD_TYPE="Debug"
     fi
 
     $buildtool
