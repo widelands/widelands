@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-09-29 20:36+0100\n"
-"PO-Revision-Date: 2014-09-19 03:41+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2014-10-01 21:40+0000\n"
+"Last-Translator: François Rousselet <francoisrouslt@gmail.com>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-09-30 05:59+0000\n"
+"X-Launchpad-Export-Date: 2014-10-02 05:34+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: fr\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -2626,8 +2626,8 @@ msgstr "Ranger les fenêtres contre les bords"
 #: ../../src/ui_fsmenu/options.cc:269 ../../src/ui_fsmenu/options.cc:397
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "minute"
+msgstr[1] "minutes"
 
 #: ../../src/ui_fsmenu/options.cc:277
 msgid "Save game automatically every"
@@ -3725,23 +3725,3 @@ msgstr "Suivre"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "Centrer la vue principale sur ceci"
-
-#~ msgid "Consumed ware type(s)"
-#~ msgstr "Type(s) de biens consommés"
-
-#~ msgid "min."
-#~ msgstr "min."
-
-#~ msgid "Use single Watchwindow Mode"
-#~ msgstr "Utiliser le mode simple fenêtre"
-
-#~ msgid "px."
-#~ msgstr "px."
-
-#~ msgid " is missing"
-#~ msgid_plural " are missing"
-#~ msgstr[0] " est manquant"
-#~ msgstr[1] " sont manquants"
-
-#~ msgid "Remove Replays older than:"
-#~ msgstr "Enlever les replays plus vieux que:"
