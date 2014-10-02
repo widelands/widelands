@@ -3,9 +3,10 @@
 -- =======================================================================
 
 include "scripting/coroutine.lua"
-include "scripting/table.lua"
 include "scripting/infrastructure.lua"
+include "scripting/messages.lua"
 include "scripting/objective_utils.lua"
+include "scripting/table.lua"
 include "scripting/ui.lua"
 
 include "map:scripting/water_rising.lua"
@@ -38,7 +39,7 @@ function msg_box(i)
 
    if not i.h then i.h = 400 end
 
-   p1:message_box(i.title, i.body, i)
+   message_box(p1, i.title, i.body, i)
 
    if i.post_func then i.post_func() end
 
@@ -73,10 +74,10 @@ end
 
 function send_building_lost_message(f)
 -- TODO: replace menu.png with representative_image as soon as this has been wrapped
-   p1:send_message(_"Building lost!",
+   send_message(p1, _"Building lost!",
       rt("image=tribes/atlanteans/".. f.immovable.descr.name .."/menu.png",
          p(_"We lost a building to the ocean!")
-      ), { field = f, popup = true }
+      ), { field = f, popup = false }
    )
 end
 
