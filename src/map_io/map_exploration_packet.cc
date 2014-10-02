@@ -72,9 +72,10 @@ void MapExplorationPacket::read
 						 j + 1, i);
 				}
 			}
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
+									  "MapExplorationPacket", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("seen: %s", e.what());
 	}

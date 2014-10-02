@@ -117,9 +117,10 @@ void MapFlagPacket::read
 							 serial, fc.x, fc.y, owner, e.what());
 					}
 				}
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
+									  "MapFlagPacket", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("flags: %s", e.what());
 	}

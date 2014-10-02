@@ -73,9 +73,10 @@ void MapAllowedWorkerTypesPacket::read
 						("player %u (%s): %s", p, tribe.name().c_str(), e.what());
 				}
 			}
-		} else
-			throw GameDataError
-				("unknown/unhandled version %i", packet_version);
+		} else {
+			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
+									  "MapAllowedWorkerTypesPacket", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("allowed worker types: %s", e.what());
 	}

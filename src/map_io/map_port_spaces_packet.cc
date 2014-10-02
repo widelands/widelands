@@ -56,9 +56,10 @@ void MapPortSpacesPacket::read
 				snprintf(buf, sizeof(buf), "%u", i);
 				map.set_port_space(get_safe_coords(buf, ext, &s2), true);
 			}
-		} else
-			throw GameDataError
-				("unknown/unhandled version %i", packet_version);
+		} else {
+			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
+									  "MapPortSpacesPacket", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("port_spaces data: %s", e.what());
 	}

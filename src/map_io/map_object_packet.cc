@@ -55,9 +55,7 @@ void MapObjectPacket::read
 		fr.open(fs, "binary/mapobjects");
 
 		const uint8_t packet_version = fr.unsigned_8();
-		if (packet_version != kCurrentPacketVersion)
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		if (packet_version == kCurrentPacketVersion) {
 
 		// Initial loading stage
 		for (;;)
@@ -99,6 +97,10 @@ void MapObjectPacket::read
 			default:
 				throw GameDataError("unknown object header %u", header);
 			}
+		} else {
+			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
+									  "MapObjectPacket", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const std::exception & e) {
 		throw GameDataError("map objects: %s", e.what());
 	}

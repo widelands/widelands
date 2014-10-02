@@ -104,9 +104,10 @@ void MapBuildingPacket::read(FileSystem& fs,
 					}
 				}
 			}
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
+									  "MapBuildingPacket", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("buildings: %s", e.what());
 	}

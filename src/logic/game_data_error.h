@@ -24,7 +24,13 @@
 
 namespace Widelands {
 
-/// Exceptiont that is thrown when game data (world/tribe definitions, maps,
+// Use these two constants when old savegame versions cause an error.
+// localize the message, but not the format.
+constexpr const char* kUnknownVersionErrorFormat = "%s\n\nObject: %s\nSaved Version: %i\nCurrent Version: %i";
+constexpr const char* kUnknownVersionErrorMessage =
+		"This game was saved using an older version of Widelands and cannot be loaded anymore.";
+
+/// Exception that is thrown when game data (world/tribe definitions, maps,
 /// savegames or replays) are erroneous.
 struct GameDataError : public WException {
 	explicit GameDataError(char const * fmt, ...) PRINTF_FORMAT(2, 3);

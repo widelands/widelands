@@ -61,9 +61,10 @@ void MapElementalPacket::pre_read(FileSystem & fs, Map * map)
 					map->add_tag(tn);
 				}
 			}
-		} else
-			throw GameDataError
-				("unknown/unhandled version %i", packet_version);
+		} else {
+			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
+									  "MapElementalPacket", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("elemental data: %s", e.what());
 	}

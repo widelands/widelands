@@ -178,9 +178,10 @@ void MapRoaddataPacket::read
 					throw GameDataError("road %u: %s", serial, e.what());
 				}
 			}
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
+									  "MapRoaddataPacket", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("roaddata: %s", e.what());
 	}

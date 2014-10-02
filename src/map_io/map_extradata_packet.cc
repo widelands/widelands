@@ -74,9 +74,10 @@ void MapExtradataPacket::read(FileSystem& fs, bool const skip) {
 					assert(image);
 				}
 			}
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
+									  "MapExtradataPacket", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("extradata: %s", e.what());
 	}

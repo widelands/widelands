@@ -68,9 +68,10 @@ void GameCmdQueuePacket::read
 				cmdq.m_cmds[cmd.duetime() % CMD_QUEUE_BUCKET_SIZE].push(item);
 				++ cmdq.m_ncmds;
 			}
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
+									  "GameCmdQueuePacket", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("command queue: %s", e.what());
 	}

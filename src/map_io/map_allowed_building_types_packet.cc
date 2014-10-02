@@ -88,9 +88,10 @@ void MapAllowedBuildingTypesPacket::read
 						("player %u (%s): %s", p, tribe.name().c_str(), e.what());
 				}
 			}
-		} else
-			throw GameDataError
-				("unknown/unhandled version %i", packet_version);
+		} else {
+			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
+									  "MapAllowedBuildingTypesPacket", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("allowed buildings: %s", e.what());
 	}

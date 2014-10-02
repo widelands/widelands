@@ -63,9 +63,10 @@ void MapObjectivePacket::read
 					throw GameDataError("%s: %s", name, e.what());
 				}
 			}
-		} else
-			throw GameDataError
-				("unknown/unhandled version %i", packet_version);
+		} else {
+			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
+									  "MapObjectPacket", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("Objectives: %s", e.what());
 	}

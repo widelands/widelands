@@ -76,9 +76,10 @@ void GameInteractivePlayerPacket::read
 			if (InteractivePlayer * const ipl = game.get_ipl()) {
 				ipl->set_player_number(player_number);
 			}
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
+									  "GameInteractivePlayerPacket", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("interactive player: %s", e.what());
 	}

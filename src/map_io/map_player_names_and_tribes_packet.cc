@@ -72,9 +72,10 @@ void MapPlayerNamesAndTribesPacket::pre_read
 				map->set_scenario_player_ai       (p, s.get_string("ai",    ""));
 				map->set_scenario_player_closeable(p, s.get_bool  ("closeable", false));
 			}
-		} else
-			throw GameDataError
-				("unknown/unhandled version %i", packet_version);
+		} else {
+			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
+									  "MapPlayerNamesAndTribesPacket", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("player names and tribes: %s", e.what());
 	}

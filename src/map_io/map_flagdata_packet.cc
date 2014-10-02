@@ -56,7 +56,6 @@ void MapFlagdataPacket::read
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
 			const Map  & map    = egbase.map();
-			Extent const extent = map.extent();
 			while (! fr.end_of_file()) {
 				Serial const serial = fr.unsigned_32();
 				try {
@@ -170,9 +169,10 @@ void MapFlagdataPacket::read
 					throw GameDataError("%u: %s", serial, e.what());
 				}
 			}
-		} else
-			throw GameDataError
-				("unknown/unhandled version %u", packet_version);
+		} else {
+			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
+									  "MapFlagdataPacket", packet_version, kCurrentPacketVersion);
+		}
 	} catch (const WException & e) {
 		throw GameDataError("flagdata: %s", e.what());
 	}
