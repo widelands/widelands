@@ -21,10 +21,11 @@ include "scripting/coroutine.lua"
 --    :type body: :class:`string`
 --    :arg parameters: Array of message parameters as defined in the Lua interface,
 --                     for wl.game.Player, e.g. { field = f, popup = true }.
+--                     The popup parameter must be set.
 --
 function send_message(player, title, body, parameters)
-   if (parameters["popup"]) then
-      while (wl.ui.MapView().is_building_road) do sleep(2000) end
+	if (parameters["popup"]) then
+		while (wl.ui.MapView().is_building_road) do sleep(2000) end
    end
    player:send_message(title, body, parameters)
 end

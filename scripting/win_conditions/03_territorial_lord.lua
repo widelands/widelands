@@ -3,6 +3,7 @@
 -- =======================================================================
 
 include "scripting/coroutine.lua" -- for sleep
+include "scripting/messages.lua"
 include "scripting/table.lua"
 include "scripting/win_condition_functions.lua"
 
@@ -167,9 +168,9 @@ return {
 			for idx, p in ipairs(plrs) do
 				if candidateisteam and currentcandidate == p.team
 					or not candidateisteam and currentcandidate == p.name then
-					p:send_message(game_status.title, msg2)
+					send_message(p, game_status.title, msg2, {popup = true})
 				else
-					p:send_message(game_status.title, msg1)
+					send_message(p, game_status.title, msg1, {popup = true})
 				end
 			end
 		end
