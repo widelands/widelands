@@ -55,7 +55,8 @@ void MapBuildingPacket::read(FileSystem& fs,
 	InteractiveBase & ibase = *egbase.get_ibase();
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersion) {
+		// Supporting older versions for scenario loading
+		if (2 <= packet_version && packet_version <= kCurrentPacketVersion) {
 			Map & map = egbase.map();
 			uint16_t const width  = map.get_width ();
 			uint16_t const height = map.get_height();
