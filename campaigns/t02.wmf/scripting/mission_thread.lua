@@ -2,7 +2,7 @@
 --                            Main mission thread
 -- =======================================================================
 
-include "map:scripting/mission_thread_texts.lua"
+include "map:scripting/texts.lua"
 include "scripting/messages.lua"
 include "scripting/table.lua"
 include "scripting/ui.lua"
