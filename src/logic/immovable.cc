@@ -610,15 +610,16 @@ Load/save support
 ==============================
 */
 
-#define IMMOVABLE_SAVEGAME_VERSION 5
+constexpr uint8_t kCurrentPacketVersionImmovable = 5;
 
-void Immovable::Loader::load(FileRead & fr, uint8_t const version)
+// Supporting older versions for map loading
+void Immovable::Loader::load(FileRead & fr, uint8_t const packet_version)
 {
 	BaseImmovable::Loader::load(fr);
 
 	Immovable & imm = ref_cast<Immovable, MapObject>(*get_object());
 
-	if (version >= 5) {
+	if (packet_version >= 5) {
 		PlayerNumber pn = fr.unsigned_8();
 		if (pn && pn <= MAX_PLAYERS) {
 			Player * plr = egbase().get_player(pn);
@@ -643,7 +644,7 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 			 imm.descr().name().c_str(), animname, imm.descr().get_animation_name(imm.m_anim).c_str());
 	}
 	imm.m_animstart = fr.signed_32();
-	if (version >= 4) {
+	if (packet_version >= 4) {
 		imm.m_anim_construction_total = fr.unsigned_32();
 		if (imm.m_anim_construction_total)
 			imm.m_anim_construction_done = fr.unsigned_32();
@@ -651,7 +652,7 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 
 	{ //  program
 		std::string program_name;
-		if (1 == version) {
+		if (1 == packet_version) {
 			program_name = fr.unsigned_8() ? fr.c_string() : "program";
 			std::transform
 				(program_name.begin(), program_name.end(), program_name.begin(),
@@ -683,10 +684,10 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 
 	imm.m_program_step = fr.signed_32();
 
-	if (version >= 3)
+	if (packet_version >= 3)
 		imm.m_reserved_by_worker = fr.unsigned_8();
 
-	if (version >= 4) {
+	if (packet_version >= 4) {
 		std::string dataname = fr.c_string();
 		if (!dataname.empty()) {
 			imm.set_action_data(ImmovableActionData::load(fr, imm, dataname));
@@ -718,7 +719,7 @@ void Immovable::save
 	// This is in front because it is required to obtain the description
 	// necessary to create the Immovable
 	fw.unsigned_8(HeaderImmovable);
-	fw.unsigned_8(IMMOVABLE_SAVEGAME_VERSION);
+	fw.unsigned_8(kCurrentPacketVersionImmovable);
 
 	if (const TribeDescr * const tribe = descr().get_owner_tribe())
 		fw.string(tribe->name());
@@ -764,8 +765,9 @@ MapObject::Loader * Immovable::load
 
 	try {
 		// The header has been peeled away by the caller
-		uint8_t const version = fr.unsigned_8();
-		if (1 <= version && version <= IMMOVABLE_SAVEGAME_VERSION) {
+		uint8_t const packet_version = fr.unsigned_8();
+		// Supporting older versions for map loading
+		if (1 <= packet_version && packet_version <= kCurrentPacketVersionImmovable) {
 
 			const std::string owner_name = fr.c_string();
 			const std::string old_name = fr.c_string();
@@ -796,11 +798,12 @@ MapObject::Loader * Immovable::load
 			}
 
 			loader->init(egbase, mol, *imm);
-			loader->load(fr, version);
-		} else
-			throw GameDataError("unknown/unhandled version %u", version);
+			loader->load(fr, packet_version);
+		} else {
+			throw OldVersionError(packet_version, kCurrentPacketVersionImmovable);
+		}
 	} catch (const std::exception & e) {
-		throw wexception("immovable type %s", e.what());
+		throw wexception("immovable type: %s", e.what());
 	}
 
 	return loader.release();
@@ -1161,12 +1164,12 @@ ImmovableProgram::ActConstruction::ActConstruction
 	}
 }
 
-#define CONSTRUCTION_DATA_VERSION 1
+constexpr uint8_t kCurrentPacketVersionConstructionData = 1;
 
 struct ActConstructionData : ImmovableActionData {
 	const char * name() const override {return "construction";}
 	void save(FileWrite & fw, Immovable & imm) override {
-		fw.unsigned_8(CONSTRUCTION_DATA_VERSION);
+		fw.unsigned_8(kCurrentPacketVersionConstructionData);
 		delivered.save(fw, *imm.descr().get_owner_tribe());
 	}
 
@@ -1174,11 +1177,12 @@ struct ActConstructionData : ImmovableActionData {
 		ActConstructionData * d = new ActConstructionData;
 
 		try {
-			uint8_t version = fr.unsigned_8();
-			if (version == CONSTRUCTION_DATA_VERSION) {
+			uint8_t packet_version = fr.unsigned_8();
+			if (packet_version == kCurrentPacketVersionConstructionData) {
 				d->delivered.load(fr, *imm.descr().get_owner_tribe());
-			} else
-				throw GameDataError("unknown version %u", version);
+			} else {
+				throw OldVersionError(packet_version, kCurrentPacketVersionConstructionData);
+			}
 		} catch (const WException & e) {
 			delete d;
 			d = nullptr;
@@ -1449,7 +1453,7 @@ void PlayerImmovable::log_general_info(const EditorGameBase & egbase)
 	molog("m_economy: %p\n", m_economy);
 }
 
-#define PLAYERIMMOVABLE_SAVEGAME_VERSION 1
+constexpr uint8_t kCurrentPacketVersionPlayerImmovable = 1;
 
 PlayerImmovable::Loader::Loader()
 {
@@ -1462,9 +1466,9 @@ void PlayerImmovable::Loader::load(FileRead & fr)
 	PlayerImmovable & imm = get<PlayerImmovable>();
 
 	try {
-		uint8_t version = fr.unsigned_8();
-
-		if (1 <= version && version <= PLAYERIMMOVABLE_SAVEGAME_VERSION) {
+		uint8_t packet_version = fr.unsigned_8();
+		// Supporting older versions for map loading
+		if (1 <= packet_version && packet_version <= kCurrentPacketVersionPlayerImmovable) {
 			PlayerNumber owner_number = fr.unsigned_8();
 
 			if (!owner_number || owner_number > egbase().map().get_nrplayers())
@@ -1477,8 +1481,9 @@ void PlayerImmovable::Loader::load(FileRead & fr)
 				throw GameDataError("owning player %u does not exist", owner_number);
 
 			imm.m_owner = owner;
-		} else
-			throw GameDataError("unknown/unhandled version %u", version);
+		} else {
+			throw OldVersionError(packet_version, kCurrentPacketVersionPlayerImmovable);
+		}
 	} catch (const std::exception & e) {
 		throw wexception("loading player immovable: %s", e.what());
 	}
@@ -1488,7 +1493,7 @@ void PlayerImmovable::save(EditorGameBase & egbase, MapObjectSaver & mos, FileWr
 {
 	BaseImmovable::save(egbase, mos, fw);
 
-	fw.unsigned_8(PLAYERIMMOVABLE_SAVEGAME_VERSION);
+	fw.unsigned_8(kCurrentPacketVersionPlayerImmovable);
 	fw.unsigned_8(owner().player_number());
 }
 

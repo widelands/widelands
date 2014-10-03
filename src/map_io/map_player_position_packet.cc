@@ -55,8 +55,7 @@ void MapPlayerPositionPacket::read
 				}
 			}
 		} else {
-			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
-									  "MapPlayerPositionPacket", packet_version, kCurrentPacketVersion);
+			throw OldVersionError(packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("player positions: %s", e.what());

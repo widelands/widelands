@@ -2933,7 +2933,7 @@ Load/save support
 ==============================
 */
 
-#define WORKER_SAVEGAME_VERSION 2
+constexpr uint8_t kCurrentPacketVersion = 2;
 
 Worker::Loader::Loader() :
 	m_location(0),
@@ -2944,22 +2944,28 @@ Worker::Loader::Loader() :
 void Worker::Loader::load(FileRead & fr)
 {
 	Bob::Loader::load(fr);
+	try {
+		uint8_t packet_version = fr.unsigned_8();
+		// Supporting older versions for map loading
+		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
 
-	uint8_t version = fr.unsigned_8();
-	if (!(1 <= version && version <= WORKER_SAVEGAME_VERSION))
-		throw GameDataError("unknown/unhandled version %u", version);
+			Worker & worker = get<Worker>();
+			m_location = fr.unsigned_32();
+			m_carried_ware = fr.unsigned_32();
+			worker.m_current_exp = fr.signed_32();
 
-	Worker & worker = get<Worker>();
-	m_location = fr.unsigned_32();
-	m_carried_ware = fr.unsigned_32();
-	worker.m_current_exp = fr.signed_32();
-
-	if (version >= 2) {
-		if (fr.unsigned_8()) {
-			worker.m_transfer =
-				new Transfer(ref_cast<Game, EditorGameBase>(egbase()), worker);
-			worker.m_transfer->read(fr, m_transfer);
+			if (packet_version >= 2) {
+				if (fr.unsigned_8()) {
+					worker.m_transfer =
+						new Transfer(ref_cast<Game, EditorGameBase>(egbase()), worker);
+					worker.m_transfer->read(fr, m_transfer);
+				}
+			}
+		} else {
+			throw OldVersionError(packet_version, kCurrentPacketVersion);
 		}
+	} catch (const std::exception & e) {
+		throw wexception("loading player immovable: %s", e.what());
 	}
 }
 
@@ -3084,7 +3090,7 @@ void Worker::do_save
 {
 	Bob::save(egbase, mos, fw);
 
-	fw.unsigned_8(WORKER_SAVEGAME_VERSION);
+	fw.unsigned_8(kCurrentPacketVersion);
 	fw.unsigned_32(mos.get_object_file_index_or_zero(m_location.get(egbase)));
 	fw.unsigned_32(mos.get_object_file_index_or_zero(m_carried_ware.get(egbase)));
 	fw.signed_32(m_current_exp);

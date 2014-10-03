@@ -87,10 +87,7 @@ void MapFlagdataPacket::read
 						flag.m_ware_filled = wares_filled;
 						for (uint32_t i = 0; i < wares_filled; ++i) {
 							flag.m_wares[i].pending = fr.unsigned_8();
-							if (packet_version < 4)
-								flag.m_wares[i].priority = 0;
-							else
-								flag.m_wares[i].priority = fr.signed_32();
+							flag.m_wares[i].priority = fr.signed_32();
 							uint32_t const ware_serial = fr.unsigned_32();
 							try {
 								flag.m_wares[i].ware =
@@ -170,8 +167,7 @@ void MapFlagdataPacket::read
 				}
 			}
 		} else {
-			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
-									  "MapFlagdataPacket", packet_version, kCurrentPacketVersion);
+			throw OldVersionError(packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("flagdata: %s", e.what());

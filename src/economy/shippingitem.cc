@@ -163,15 +163,21 @@ void ShippingItem::remove(EditorGameBase & egbase)
 }
 
 
-#define SHIPPINGITEM_SAVEGAME_VERSION 1
+constexpr uint16_t kCurrentPacketVersion = 1;
 
 void ShippingItem::Loader::load(FileRead & fr)
 {
-	uint8_t version = fr.unsigned_8();
-	if (1 <= version && version <= SHIPPINGITEM_SAVEGAME_VERSION) {
-		m_serial = fr.unsigned_32();
-	} else
-		throw GameDataError("unknown ShippingItem version %u", version);
+	try {
+		uint8_t packet_version = fr.unsigned_8();
+		// Supporting older versions for map loading
+		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
+			m_serial = fr.unsigned_32();
+		} else {
+			throw OldVersionError(packet_version, kCurrentPacketVersion);
+		}
+	} catch (const WException & e) {
+		throw GameDataError("shipping item: %s", e.what());
+	}
 }
 
 ShippingItem ShippingItem::Loader::get(MapObjectLoader & mol)
@@ -184,7 +190,7 @@ ShippingItem ShippingItem::Loader::get(MapObjectLoader & mol)
 
 void ShippingItem::save(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
-	fw.unsigned_8(SHIPPINGITEM_SAVEGAME_VERSION);
+	fw.unsigned_8(kCurrentPacketVersion);
 	fw.unsigned_32(mos.get_object_file_index_or_zero(m_object.get(egbase)));
 }
 

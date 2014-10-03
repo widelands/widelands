@@ -64,8 +64,7 @@ void GamePreloadPacket::read
 				m_minimap_path = kMinimapFilename;
 			}
 		} else {
-			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
-									  "GamePreloadPacket", packet_version, kCurrentPacketVersion);
+			throw OldVersionError(packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("preload: %s", e.what());

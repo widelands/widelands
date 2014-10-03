@@ -69,8 +69,7 @@ void GameCmdQueuePacket::read
 				++ cmdq.m_ncmds;
 			}
 		} else {
-			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
-									  "GameCmdQueuePacket", packet_version, kCurrentPacketVersion);
+			throw OldVersionError(packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("command queue: %s", e.what());
@@ -83,7 +82,6 @@ void GameCmdQueuePacket::write
 {
 	FileWrite fw;
 
-	// Now packet version
 	fw.unsigned_16(kCurrentPacketVersion);
 
 	const CmdQueue & cmdq = game.cmdqueue();

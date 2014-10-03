@@ -80,8 +80,7 @@ void GamePlayerEconomiesPacket::read
 					throw GameDataError("player %u: %s", p, e.what());
 				}
 		} else {
-			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
-									  "GamePlayerEconomiesPacket", packet_version, kCurrentPacketVersion);
+			throw OldVersionError(packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("economies: %s", e.what());

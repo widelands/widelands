@@ -74,8 +74,7 @@ void MapTerrainPacket::read(FileSystem& fs,
 				f.set_terrain_d(smap[fr.unsigned_8()]);
 			}
 		} else {
-			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
-									  "MapTerrainPacket", packet_version, kCurrentPacketVersion);
+			throw OldVersionError(packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("terrain: %s", e.what());

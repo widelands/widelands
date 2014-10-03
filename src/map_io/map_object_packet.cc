@@ -98,8 +98,7 @@ void MapObjectPacket::read
 				throw GameDataError("unknown object header %u", header);
 			}
 		} else {
-			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
-									  "MapObjectPacket", packet_version, kCurrentPacketVersion);
+			throw OldVersionError(packet_version, kCurrentPacketVersion);
 		}
 	} catch (const std::exception & e) {
 		throw GameDataError("map objects: %s", e.what());

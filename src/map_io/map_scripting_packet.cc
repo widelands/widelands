@@ -38,7 +38,7 @@
 namespace Widelands {
 
 namespace {
-constexpr uint16_t kCurrentPacketVersion = 2;
+constexpr uint32_t kCurrentPacketVersion = 2;
 }  // namespace
 /*
  * ========================================================================
@@ -64,8 +64,7 @@ void MapScriptingPacket::read
 				upcast(LuaGameInterface, lgi, &g->lua());
 				lgi->read_global_env(fr, mol, fr.unsigned_32());
 			} else {
-				throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
-										  "MapScriptingPacket", packet_version, kCurrentPacketVersion);
+				throw OldVersionError(packet_version, kCurrentPacketVersion);
 			}
 		} catch (const WException & e) {
 			throw GameDataError("scripting: %s", e.what());

@@ -39,8 +39,7 @@ void GameClassPacket::read
 			fr.signed_16(); // This used to be game speed
 			game.gametime_ = fr.unsigned_32();
 		} else {
-			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
-									  "GameClassPacket", packet_version, kCurrentPacketVersion);
+			throw OldVersionError(packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("game class: %s", e.what());
@@ -55,7 +54,6 @@ void GameClassPacket::write
 {
 	FileWrite fw;
 
-	// Packet version
 	fw.unsigned_16(kCurrentPacketVersion);
 
 	// State is running, we do not need to save this

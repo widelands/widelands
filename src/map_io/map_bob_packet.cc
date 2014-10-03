@@ -87,8 +87,7 @@ void MapBobPacket::read(FileSystem& fs,
 				}
 			}
 		else {
-			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
-									  "MapBobPacket", packet_version, kCurrentPacketVersion);
+			throw OldVersionError(packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException& e) {
 		throw GameDataError("bobs: %s", e.what());

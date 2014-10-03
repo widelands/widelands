@@ -928,7 +928,7 @@ Load / Save implementation
 ==============================
 */
 
-#define SHIP_SAVEGAME_VERSION 4
+constexpr uint8_t kCurrentPacketVersion = 4;
 
 Ship::Loader::Loader() :
 	m_lastdock(0),
@@ -942,13 +942,14 @@ const Bob::Task * Ship::Loader::get_task(const std::string & name)
 	return Bob::Loader::get_task(name);
 }
 
-void Ship::Loader::load(FileRead & fr, uint8_t version)
+// Supporting older versions for map loading
+void Ship::Loader::load(FileRead & fr, uint8_t packet_version)
 {
 	Bob::Loader::load(fr);
 
-	if (version >= 2) {
+	if (packet_version >= 2) {
 		// The state the ship is in
-		if (version >= 3) {
+		if (packet_version >= 3) {
 			m_ship_state = fr.unsigned_8();
 
 			// Expedition specific data
@@ -1043,8 +1044,9 @@ MapObject::Loader * Ship::load
 	try {
 		// The header has been peeled away by the caller
 
-		uint8_t const version = fr.unsigned_8();
-		if (1 <= version && version <= SHIP_SAVEGAME_VERSION) {
+		uint8_t const packet_version = fr.unsigned_8();
+		// Supporting older versions for map loading
+		if (1 <= packet_version && packet_version  <= kCurrentPacketVersion) {
 			std::string owner = fr.c_string();
 			std::string name = fr.c_string();
 			const ShipDescr * descr = nullptr;
@@ -1060,9 +1062,10 @@ MapObject::Loader * Ship::load
 					("undefined ship %s/%s", owner.c_str(), name.c_str());
 
 			loader->init(egbase, mol, descr->create_object());
-			loader->load(fr, version);
-		} else
-			throw GameDataError("unknown/unhandled version %u", version);
+			loader->load(fr, packet_version);
+		} else {
+			throw OldVersionError(packet_version, kCurrentPacketVersion);
+		}
 	} catch (const std::exception & e) {
 		throw wexception("loading ship: %s", e.what());
 	}
@@ -1074,7 +1077,7 @@ void Ship::save
 	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.unsigned_8(HeaderShip);
-	fw.unsigned_8(SHIP_SAVEGAME_VERSION);
+	fw.unsigned_8(kCurrentPacketVersion);
 
 	fw.c_string(descr().get_owner_tribe()->name());
 	fw.c_string(descr().name());

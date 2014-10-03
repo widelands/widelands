@@ -148,8 +148,7 @@ void MapRoaddataPacket::read
 						} else {
 							carrier_request = nullptr;
 						}
-						uint8_t const carrier_type =
-							packet_version < 3 ? 1 : fr.unsigned_32();
+						uint8_t const carrier_type = fr.unsigned_32();
 
 						if
 							(i < road.m_carrier_slots.size() &&
@@ -179,8 +178,7 @@ void MapRoaddataPacket::read
 				}
 			}
 		} else {
-			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
-									  "MapRoaddataPacket", packet_version, kCurrentPacketVersion);
+			throw OldVersionError(packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("roaddata: %s", e.what());

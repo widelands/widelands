@@ -68,8 +68,7 @@ void MapVersionPacket::read
 			uint32_t ts = static_cast<uint32_t>(globv.get_safe_int("map_version_timestamp"));
 			map.m_map_version.m_map_version_timestamp = ts;
 		} else {
-			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
-									  "MapVersionPacket", packet_version, kCurrentPacketVersion);
+			throw OldVersionError(packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("version: %s", e.what());

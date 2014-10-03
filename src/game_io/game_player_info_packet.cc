@@ -72,8 +72,7 @@ void GamePlayerInfoPacket::read
 			}
 			game.read_statistics(fr);
 		} else {
-			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
-									  "GamePlayerInfoPacket", packet_version, kCurrentPacketVersion);
+			throw OldVersionError(packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("player info: %s", e.what());
@@ -86,7 +85,6 @@ void GamePlayerInfoPacket::write
 {
 	FileWrite fw;
 
-	// Now packet version
 	fw.unsigned_16(kCurrentPacketVersion);
 
 	// Number of (potential) players

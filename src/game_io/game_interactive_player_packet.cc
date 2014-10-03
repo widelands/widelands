@@ -77,8 +77,7 @@ void GameInteractivePlayerPacket::read
 				ipl->set_player_number(player_number);
 			}
 		} else {
-			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
-									  "GameInteractivePlayerPacket", packet_version, kCurrentPacketVersion);
+			throw OldVersionError(packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("interactive player: %s", e.what());
@@ -93,7 +92,6 @@ void GameInteractivePlayerPacket::write
 {
 	FileWrite fw;
 
-	// Now packet version
 	fw.unsigned_16(kCurrentPacketVersion);
 
 	InteractiveBase * const ibase = game.get_ibase();

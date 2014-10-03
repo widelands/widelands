@@ -24,12 +24,6 @@
 
 namespace Widelands {
 
-// Use these two constants when old savegame versions cause an error.
-// localize the message, but not the format.
-constexpr const char* kUnknownVersionErrorFormat = "%s\n\nObject: %s\nSaved Version: %i\nCurrent Version: %i";
-constexpr const char* kUnknownVersionErrorMessage =
-		"This game was saved using an older version of Widelands and cannot be loaded anymore.";
-
 /// Exception that is thrown when game data (world/tribe definitions, maps,
 /// savegames or replays) are erroneous.
 struct GameDataError : public WException {
@@ -38,6 +32,20 @@ struct GameDataError : public WException {
 	char const * what() const noexcept override {return m_what.c_str();}
 protected:
 	GameDataError() {}
+};
+
+/// This exception's message compiles information for the user when an old savegame could not be
+/// loaded due to packet version mismatch.
+/// The main message is localizeable, the technical information is not.
+/// \param packet_version:         The version of the packet that Widelands is trying to load.
+/// \param current_packet_version: The packet version that Widelands is currently using.
+struct OldVersionError : public GameDataError {
+	explicit OldVersionError(int32_t packet_version,
+									 int32_t current_packet_version);
+
+	char const * what() const noexcept override {return m_what.c_str();}
+protected:
+	OldVersionError() {}
 };
 
 }

@@ -248,8 +248,7 @@ void MapBuildingdataPacket::read
 				}
 			}
 		} else {
-			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
-									  "MapBuildingdataPacket", packet_version, kCurrentPacketVersion);
+			throw OldVersionError(packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("buildingdata: %s", e.what());
@@ -310,8 +309,7 @@ void MapBuildingdataPacket::read_partially_finished_building
 			pfb.m_work_completed = fr.unsigned_32();
 			pfb.m_work_steps     = fr.unsigned_32();
 		} else {
-			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
-									  "Partially Finished Building", packet_version, kCurrentPacketPFBuilding);
+			throw OldVersionError(packet_version, kCurrentPacketPFBuilding);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("partially_constructed_buildings: %s", e.what());
@@ -339,8 +337,7 @@ void MapBuildingdataPacket::read_constructionsite
 
 			constructionsite.m_fetchfromflag  = fr.  signed_32();
 		} else {
-			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
-									  "Constructionsite", packet_version, kCurrentPacketVersionConstructionsite);
+			throw OldVersionError(packet_version, kCurrentPacketVersionConstructionsite);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("constructionsite: %s", e.what());
@@ -360,8 +357,7 @@ void MapBuildingdataPacket::read_dismantlesite
 
 			// Nothing to do
 		} else {
-			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
-									  "Dismantlesite", packet_version, kCurrentPacketVersionDismantlesite);
+			throw OldVersionError(packet_version, kCurrentPacketVersionDismantlesite);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("dismantlesite: %s", e.what());
@@ -390,20 +386,13 @@ void MapBuildingdataPacket::read_warehouse
 			const TribeDescr & tribe = warehouse.descr().tribe();
 			while (fr.unsigned_8()) {
 				WareIndex const id = tribe.ware_index(fr.c_string());
-				if (packet_version >= 5) {
-					uint32_t amount = fr.unsigned_32();
-					Warehouse::StockPolicy policy =
-						static_cast<Warehouse::StockPolicy>(fr.unsigned_8());
+				uint32_t amount = fr.unsigned_32();
+				Warehouse::StockPolicy policy =
+					static_cast<Warehouse::StockPolicy>(fr.unsigned_8());
 
-					if (id != INVALID_INDEX) {
-						warehouse.insert_wares(id, amount);
-						warehouse.set_ware_policy(id, policy);
-					}
-				} else {
-					uint16_t amount = fr.unsigned_16();
-
-					if (id != INVALID_INDEX)
-						warehouse.insert_wares(id, amount);
+				if (id != INVALID_INDEX) {
+					warehouse.insert_wares(id, amount);
+					warehouse.set_ware_policy(id, policy);
 				}
 			}
 			while (fr.unsigned_8()) {
@@ -524,7 +513,7 @@ void MapBuildingdataPacket::read_warehouse
 					// doesn't lend itself to request and other stuff.
 					if (warehouse.m_portdock->expedition_started()) {
 						warehouse.m_portdock->expedition_bootstrap()->load
-							(packet_version, warehouse, fr, game, mol);
+								(packet_version, warehouse, fr, game, mol);
 					}
 				}
 			}
@@ -551,8 +540,7 @@ void MapBuildingdataPacket::read_warehouse
 			warehouse.m_next_military_act = game.get_gametime();
 			//log("Read warehouse stuff for %p\n", &warehouse);
 		} else {
-			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
-									  "Warehouse", packet_version, kCurrentPacketVersionWarehouse);
+			throw OldVersionError(packet_version, kCurrentPacketVersionWarehouse);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("warehouse: %s", e.what());
@@ -630,8 +618,7 @@ void MapBuildingdataPacket::read_militarysite
 			militarysite.m_doing_upgrade_request = 0 != fr.unsigned_8() ? true : false;
 
 		} else {
-			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
-									  "Militarysite", packet_version, kCurrentPacketVersionMilitarysite);
+			throw OldVersionError(packet_version, kCurrentPacketVersionMilitarysite);
 		}
 
 		//  If the site's capacity is outside the allowed range (can happen if
@@ -831,8 +818,7 @@ void MapBuildingdataPacket::read_productionsite
 			productionsite.m_statistics_string_on_changed_statistics = fr.c_string();
 			productionsite.m_production_result = fr.c_string();
 		} else {
-			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
-									  "Productionsite", packet_version, kCurrentPacketVersionProductionsite);
+			throw OldVersionError(packet_version, kCurrentPacketVersionProductionsite);
 		}
 
 	} catch (const WException & e) {
@@ -900,8 +886,7 @@ void MapBuildingdataPacket::read_trainingsite
 				trainingsite.training_failure_count[std::make_pair(traintype, trainlevel)] = t;
 			}
 		} else {
-			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
-									  "Trainingsite", packet_version, kCurrentPacketVersionTrainingsite);
+			throw OldVersionError(packet_version, kCurrentPacketVersionTrainingsite);
 		}
 
 		//  If the site's capacity is outside the allowed range (can happen if

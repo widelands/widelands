@@ -466,13 +466,14 @@ void PortDock::log_general_info(const EditorGameBase & egbase)
 	}
 }
 
-#define PORTDOCK_SAVEGAME_VERSION 3
+constexpr uint8_t kCurrentPacketVersion = 3;
 
 PortDock::Loader::Loader() : m_warehouse(0)
 {
 }
 
-void PortDock::Loader::load(FileRead & fr, uint8_t version)
+// Supporting older versions for map loading
+void PortDock::Loader::load(FileRead & fr, uint8_t packet_version)
 {
 	PlayerImmovable::Loader::load(fr);
 
@@ -487,7 +488,7 @@ void PortDock::Loader::load(FileRead & fr, uint8_t version)
 		pd.set_position(egbase(), pd.m_dockpoints[i]);
 	}
 
-	if (version >= 2) {
+	if (packet_version >= 2) {
 		pd.m_need_ship = fr.unsigned_8();
 
 		m_waiting.resize(fr.unsigned_32());
@@ -495,7 +496,7 @@ void PortDock::Loader::load(FileRead & fr, uint8_t version)
 			shipping_loader.load(fr);
 		}
 
-		if (version >= 3) {
+		if (packet_version >= 3) {
 			// All the other expedition specific stuff is saved in the warehouse.
 			if (fr.unsigned_8()) {  // Do we have an expedition?
 				pd.m_expedition_bootstrap.reset(new ExpeditionBootstrap(&pd));
@@ -545,12 +546,14 @@ MapObject::Loader * PortDock::load
 	try {
 		// The header has been peeled away by the caller
 
-		uint8_t const version = fr.unsigned_8();
-		if (1 <= version && version <= PORTDOCK_SAVEGAME_VERSION) {
+		uint8_t const packet_version = fr.unsigned_8();
+		// Supporting older versions for map loading
+		if (1 <= packet_version && packet_version  <= kCurrentPacketVersion) {
 			loader->init(egbase, mol, *new PortDock(nullptr));
-			loader->load(fr, version);
-		} else
-			throw GameDataError("unknown/unhandled version %u", version);
+			loader->load(fr, packet_version);
+		} else {
+			throw OldVersionError(packet_version, kCurrentPacketVersion);
+		}
 	} catch (const std::exception & e) {
 		throw wexception("loading portdock: %s", e.what());
 	}
@@ -561,7 +564,7 @@ MapObject::Loader * PortDock::load
 void PortDock::save(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	fw.unsigned_8(HeaderPortDock);
-	fw.unsigned_8(PORTDOCK_SAVEGAME_VERSION);
+	fw.unsigned_8(kCurrentPacketVersion);
 
 	PlayerImmovable::save(egbase, mos, fw);
 

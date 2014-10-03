@@ -61,7 +61,8 @@ void MapPlayerNamesAndTribesPacket::pre_read
 	try {
 		int32_t const packet_version =
 			prof.get_safe_section("global").get_int("packet_version");
-		if (packet_version == kCurrentPacketVersion) {
+		// Supporting older versions for map loading
+		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
 			PlayerNumber const nr_players = map->get_nrplayers();
 			iterate_player_numbers(p, nr_players) {
 				char buffer[10];
@@ -73,8 +74,7 @@ void MapPlayerNamesAndTribesPacket::pre_read
 				map->set_scenario_player_closeable(p, s.get_bool  ("closeable", false));
 			}
 		} else {
-			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
-									  "MapPlayerNamesAndTribesPacket", packet_version, kCurrentPacketVersion);
+			throw OldVersionError(packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("player names and tribes: %s", e.what());

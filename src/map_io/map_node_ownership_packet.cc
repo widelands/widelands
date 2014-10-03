@@ -57,8 +57,7 @@ void MapNodeOwnershipPacket::read
 			for (MapIndex i = 0; i < max_index; ++i)
 				map[i].set_owned_by(fr.unsigned_8());
 		} else {
-			throw GameDataError(Widelands::kUnknownVersionErrorFormat, _(Widelands::kUnknownVersionErrorMessage),
-									  "MapNodeOwnershipPacket", packet_version, kCurrentPacketVersion);
+			throw OldVersionError(packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("ownership: %s", e.what());
