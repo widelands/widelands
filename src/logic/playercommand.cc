@@ -200,8 +200,7 @@ void CmdBulldoze::read
 {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		// Supporting older versions for map loading
-		if (1 <= packet_version && packet_version <= kCurrentPacketVersionCmdBulldoze) {
+		if (packet_version == kCurrentPacketVersionCmdBulldoze) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<PlayerImmovable>(fr.unsigned_32(), mol);
 			recurse = 2 <= packet_version ? fr.unsigned_8() : false;

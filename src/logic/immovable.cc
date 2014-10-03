@@ -1467,8 +1467,7 @@ void PlayerImmovable::Loader::load(FileRead & fr)
 
 	try {
 		uint8_t packet_version = fr.unsigned_8();
-		// Supporting older versions for map loading
-		if (1 <= packet_version && packet_version <= kCurrentPacketVersionPlayerImmovable) {
+		if (packet_version == kCurrentPacketVersionPlayerImmovable) {
 			PlayerNumber owner_number = fr.unsigned_8();
 
 			if (!owner_number || owner_number > egbase().map().get_nrplayers())

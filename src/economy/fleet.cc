@@ -686,8 +686,7 @@ Fleet::Loader::Loader()
 {
 }
 
-// Supporting older versions for map loading
-void Fleet::Loader::load(FileRead & fr, uint8_t packet_version)
+void Fleet::Loader::load(FileRead & fr)
 {
 	MapObject::Loader::load(fr);
 
@@ -703,13 +702,7 @@ void Fleet::Loader::load(FileRead & fr, uint8_t packet_version)
 	for (uint32_t i = 0; i < nrports; ++i)
 		m_ports[i] = fr.unsigned_32();
 
-	if (packet_version >= 2) {
-		fleet.m_act_pending = fr.unsigned_8();
-		if (packet_version < 3)
-			fleet.m_act_pending = false;
-		if (packet_version < 4)
-			fr.unsigned_32(); // m_roundrobin
-	}
+	fleet.m_act_pending = fr.unsigned_8();
 }
 
 void Fleet::Loader::load_pointers()
@@ -770,7 +763,7 @@ MapObject::Loader * Fleet::load
 				throw GameDataError("owning player %u does not exist", owner_number);
 
 			loader->init(egbase, mol, *(new Fleet(*owner)));
-			loader->load(fr, packet_version);
+			loader->load(fr);
 		} else {
 			throw OldVersionError(packet_version, kCurrentPacketVersion);
 		}

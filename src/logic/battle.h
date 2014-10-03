@@ -80,7 +80,7 @@ public:
 
 private:
 	struct Loader : public MapObject::Loader {
-		virtual void load(FileRead &, uint8_t packet_version);
+		virtual void load(FileRead &);
 		void load_pointers() override;
 
 		Serial m_first;

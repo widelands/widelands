@@ -472,8 +472,7 @@ PortDock::Loader::Loader() : m_warehouse(0)
 {
 }
 
-// Supporting older versions for map loading
-void PortDock::Loader::load(FileRead & fr, uint8_t packet_version)
+void PortDock::Loader::load(FileRead & fr)
 {
 	PlayerImmovable::Loader::load(fr);
 
@@ -488,24 +487,18 @@ void PortDock::Loader::load(FileRead & fr, uint8_t packet_version)
 		pd.set_position(egbase(), pd.m_dockpoints[i]);
 	}
 
-	if (packet_version >= 2) {
-		pd.m_need_ship = fr.unsigned_8();
+	pd.m_need_ship = fr.unsigned_8();
 
-		m_waiting.resize(fr.unsigned_32());
-		for (ShippingItem::Loader& shipping_loader : m_waiting) {
-			shipping_loader.load(fr);
-		}
-
-		if (packet_version >= 3) {
-			// All the other expedition specific stuff is saved in the warehouse.
-			if (fr.unsigned_8()) {  // Do we have an expedition?
-				pd.m_expedition_bootstrap.reset(new ExpeditionBootstrap(&pd));
-			}
-			pd.m_expedition_ready = (fr.unsigned_8() == 1) ? true : false;
-		} else {
-			pd.m_expedition_ready = false;
-		}
+	m_waiting.resize(fr.unsigned_32());
+	for (ShippingItem::Loader& shipping_loader : m_waiting) {
+		shipping_loader.load(fr);
 	}
+
+	// All the other expedition specific stuff is saved in the warehouse.
+	if (fr.unsigned_8()) {  // Do we have an expedition?
+		pd.m_expedition_bootstrap.reset(new ExpeditionBootstrap(&pd));
+	}
+	pd.m_expedition_ready = (fr.unsigned_8() == 1) ? true : false;
 }
 
 void PortDock::Loader::load_pointers()
@@ -550,7 +543,7 @@ MapObject::Loader * PortDock::load
 		// Supporting older versions for map loading
 		if (1 <= packet_version && packet_version  <= kCurrentPacketVersion) {
 			loader->init(egbase, mol, *new PortDock(nullptr));
-			loader->load(fr, packet_version);
+			loader->load(fr);
 		} else {
 			throw OldVersionError(packet_version, kCurrentPacketVersion);
 		}

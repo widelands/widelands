@@ -942,54 +942,48 @@ const Bob::Task * Ship::Loader::get_task(const std::string & name)
 	return Bob::Loader::get_task(name);
 }
 
-// Supporting older versions for map loading
-void Ship::Loader::load(FileRead & fr, uint8_t packet_version)
+void Ship::Loader::load(FileRead & fr)
 {
 	Bob::Loader::load(fr);
 
-	if (packet_version >= 2) {
-		// The state the ship is in
-		if (packet_version >= 3) {
-			m_ship_state = fr.unsigned_8();
+	// The state the ship is in
+	m_ship_state = fr.unsigned_8();
 
-			// Expedition specific data
-			if
-				(m_ship_state == EXP_SCOUTING
-				 ||
-				 m_ship_state == EXP_WAITING
-				 ||
-				 m_ship_state == EXP_FOUNDPORTSPACE
-				 ||
-				 m_ship_state == EXP_COLONIZING)
-			{
-				m_expedition.reset(new Expedition());
-				// Currently seen port build spaces
-				m_expedition->seen_port_buildspaces.reset(new std::list<Coords>());
-				uint8_t numofports = fr.unsigned_8();
-				for (uint8_t i = 0; i < numofports; ++i)
-					m_expedition->seen_port_buildspaces->push_back(read_coords_32(&fr));
-				// Swimability of the directions
-				for (uint8_t i = 0; i < LAST_DIRECTION; ++i)
-					m_expedition->swimable[i] = (fr.unsigned_8() == 1);
-				// whether scouting or exploring
-				m_expedition->island_exploration = fr.unsigned_8() == 1;
-				// current direction
-				m_expedition->direction = fr.unsigned_8();
-				// Start coordinates of an island exploration
-				m_expedition->exploration_start = read_coords_32(&fr);
-				// Whether the exploration is done clockwise or counter clockwise
-				m_expedition->clockwise = fr.unsigned_8() == 1;
-			}
-		} else
-			m_ship_state = TRANSPORT;
+	// Expedition specific data
+	if
+		(m_ship_state == EXP_SCOUTING
+		 ||
+		 m_ship_state == EXP_WAITING
+		 ||
+		 m_ship_state == EXP_FOUNDPORTSPACE
+		 ||
+		 m_ship_state == EXP_COLONIZING)
+	{
+		m_expedition.reset(new Expedition());
+		// Currently seen port build spaces
+		m_expedition->seen_port_buildspaces.reset(new std::list<Coords>());
+		uint8_t numofports = fr.unsigned_8();
+		for (uint8_t i = 0; i < numofports; ++i)
+			m_expedition->seen_port_buildspaces->push_back(read_coords_32(&fr));
+		// Swimability of the directions
+		for (uint8_t i = 0; i < LAST_DIRECTION; ++i)
+			m_expedition->swimable[i] = (fr.unsigned_8() == 1);
+		// whether scouting or exploring
+		m_expedition->island_exploration = fr.unsigned_8() == 1;
+		// current direction
+		m_expedition->direction = fr.unsigned_8();
+		// Start coordinates of an island exploration
+		m_expedition->exploration_start = read_coords_32(&fr);
+		// Whether the exploration is done clockwise or counter clockwise
+		m_expedition->clockwise = fr.unsigned_8() == 1;
+	}
 
-		m_lastdock = fr.unsigned_32();
-		m_destination = fr.unsigned_32();
+	m_lastdock = fr.unsigned_32();
+	m_destination = fr.unsigned_32();
 
-		m_items.resize(fr.unsigned_32());
-		for (ShippingItem::Loader& item_loader : m_items) {
-			item_loader.load(fr);
-		}
+	m_items.resize(fr.unsigned_32());
+	for (ShippingItem::Loader& item_loader : m_items) {
+		item_loader.load(fr);
 	}
 }
 
@@ -1062,7 +1056,7 @@ MapObject::Loader * Ship::load
 					("undefined ship %s/%s", owner.c_str(), name.c_str());
 
 			loader->init(egbase, mol, descr->create_object());
-			loader->load(fr, packet_version);
+			loader->load(fr);
 		} else {
 			throw OldVersionError(packet_version, kCurrentPacketVersion);
 		}

@@ -340,19 +340,16 @@ Load/Save support
 
 constexpr uint8_t kCurrentPacketVersion = 2;
 
-// Supporting older versions for map loading
-void Battle::Loader::load(FileRead & fr, uint8_t packet_version)
+void Battle::Loader::load(FileRead & fr)
 {
 	MapObject::Loader::load(fr);
 
 	Battle & battle = get<Battle>();
 
-
 	battle.m_creationtime  = fr.signed_32();
 	battle.m_readyflags    = fr.unsigned_8();
 	battle.m_first_strikes = fr.unsigned_8();
-	if (packet_version == kCurrentPacketVersion)
-		battle.m_damage     = fr.unsigned_32();
+	battle.m_damage     = fr.unsigned_32();
 	m_first                = fr.unsigned_32();
 	m_second               = fr.unsigned_32();
 }
@@ -407,10 +404,9 @@ MapObject::Loader * Battle::load
 		// Header has been peeled away by caller
 
 		uint8_t const packet_version = fr.unsigned_8();
-		// Supporting older versions for map loading
-		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
+		if (packet_version == kCurrentPacketVersion) {
 			loader->init(egbase, mol, *new Battle);
-			loader->load(fr, packet_version);
+			loader->load(fr);
 		} else {
 			throw OldVersionError(packet_version, kCurrentPacketVersion);
 		}

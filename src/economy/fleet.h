@@ -131,7 +131,7 @@ protected:
 	struct Loader : MapObject::Loader {
 		Loader();
 
-		void load(FileRead &, uint8_t packet_version);
+		void load(FileRead &);
 		void load_pointers() override;
 		void load_finish() override;
 

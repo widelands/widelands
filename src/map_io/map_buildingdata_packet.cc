@@ -754,8 +754,7 @@ void MapBuildingdataPacket::read_productionsite
 
 			//  skipped programs
 			uint32_t const gametime = game.get_gametime();
-			// NOCOM(GunChleoc): huh?
-			for (uint8_t i = 3 <= packet_version ? fr.unsigned_8() : 0; i; --i) {
+			for (uint8_t i = fr.unsigned_8(); i; --i) {
 				char const * const program_name = fr.c_string();
 				if (pr_descr.programs().count(program_name)) {
 					uint32_t const skip_time = fr.unsigned_32();

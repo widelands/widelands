@@ -2946,20 +2946,17 @@ void Worker::Loader::load(FileRead & fr)
 	Bob::Loader::load(fr);
 	try {
 		uint8_t packet_version = fr.unsigned_8();
-		// Supporting older versions for map loading
-		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
+		if (packet_version == kCurrentPacketVersion) {
 
 			Worker & worker = get<Worker>();
 			m_location = fr.unsigned_32();
 			m_carried_ware = fr.unsigned_32();
 			worker.m_current_exp = fr.signed_32();
 
-			if (packet_version >= 2) {
-				if (fr.unsigned_8()) {
-					worker.m_transfer =
-						new Transfer(ref_cast<Game, EditorGameBase>(egbase()), worker);
-					worker.m_transfer->read(fr, m_transfer);
-				}
+			if (fr.unsigned_8()) {
+				worker.m_transfer =
+					new Transfer(ref_cast<Game, EditorGameBase>(egbase()), worker);
+				worker.m_transfer->read(fr, m_transfer);
 			}
 		} else {
 			throw OldVersionError(packet_version, kCurrentPacketVersion);
