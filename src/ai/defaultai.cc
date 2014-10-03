@@ -91,6 +91,9 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
      enemy_last_seen_(-2 * 60 * 1000),
      numof_warehouses_(0),
      new_buildings_stop_(false),
+     water_is_important_(false),
+     mines_need_intensity_ (10),
+     water_need_intensity_ (4),
      unstationed_milit_buildings_(0),
      military_last_dismantle_(0),
      military_last_build_(-60 * 1000),
@@ -368,6 +371,10 @@ void DefaultAI::late_initialization() {
 	next_road_due_ = 1000;
 	next_productionsite_check_due_ = 0;
 	inhibit_road_building_ = 0;
+	// if atlanteans they consider water as a resource
+	//(together with mines, stones and wood)
+	if (tribe_->name() == "atlanteans")
+		water_is_important_ = true;
 	// Add all fields that we own
 	Map& map = game().map();
 	std::set<OPtr<PlayerImmovable>> found_immovables;
@@ -528,18 +535,12 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 	if ((mines_.size() > 8 && game().get_gametime() % 3 > 0) || field.unowned_land_nearby_ == 0)
 		field.unowned_mines_pots_nearby_ = 0;
 	else {
-		field.unowned_mines_pots_nearby_ =
-		   map.find_fields(Area<FCoords>(field.coords, range), nullptr, find_unowned_mines_pots);
-
-		// well, there can be mines beyond 'range' so
-		if (field.unowned_mines_pots_nearby_ == 0) {
-			field.unowned_mines_pots_nearby_ = map.find_fields(
-			   Area<FCoords>(field.coords, range + 6), nullptr, find_unowned_mines_pots);
-			// it preffered to stay far from mountains so we need
-			// to reduce calculated number
-			if (field.unowned_mines_pots_nearby_ > 0)
-				field.unowned_mines_pots_nearby_ = 1 + field.unowned_mines_pots_nearby_ / 10;
-		}
+		uint32_t close_mines =
+		   map.find_fields(Area<FCoords>(field.coords, 4), nullptr, find_unowned_mines_pots);
+		uint32_t distant_mines =
+		   map.find_fields(Area<FCoords>(field.coords, range + 6), nullptr, find_unowned_mines_pots);
+		distant_mines = distant_mines - close_mines;
+		field.unowned_mines_pots_nearby_ = 6 * close_mines + distant_mines;
 	}
 
 	// collect information about resources in the area
@@ -753,6 +754,7 @@ void DefaultAI::update_mineable_field(MineableField& field) {
 void DefaultAI::update_productionsite_stats(int32_t const gametime) {
 	// Updating the stats every 10 seconds should be enough
 	next_stats_update_due_ = gametime + 10000;
+	uint16_t fishers_count=0; //used for atlanteans only
 
 	// Reset statistics for all buildings
 	for (uint32_t i = 0; i < buildings_.size(); ++i) {
@@ -771,6 +773,10 @@ void DefaultAI::update_productionsite_stats(int32_t const gametime) {
 		// Add statistics value
 		productionsites.front().bo->current_stats_ +=
 		   productionsites.front().site->get_crude_statistics();
+		   
+		//counting fishers
+		if (productionsites.front().bo->is_fisher_)
+			 fishers_count+=1;
 
 		// Check whether this building is completely occupied
 		productionsites.front().bo->unoccupied_ |= !productionsites.front().site->can_start_working();
@@ -780,8 +786,14 @@ void DefaultAI::update_productionsite_stats(int32_t const gametime) {
 		productionsites.pop_front();
 	}
 
+	if (fishers_count >4)
+		water_need_intensity_ = 0;
+	else 
+		water_need_intensity_ = 4-fishers_count;
+	//printf (" %2d: water need intensity: %3d%%/ %2d fishers\n",player_number(),100*water_need_intensity_/4,fishers_count);
+
 	// for mines_ also
-	// Check all available productionsites
+	// Check all available mines
 	for (uint32_t i = 0; i < mines_.size(); ++i) {
 		assert(mines_.front().bo->cnt_built_ > 0);
 		// Add statistics value
@@ -850,7 +862,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 	// there are couple of reasons why to stop building production buildings
 	//(note there are numberous exemptions to this stop)
 	// 1. to not have too many constructionsites
-	if (num_prod_constructionsites > productionsites.size() / 8 + 5) {
+	if (num_prod_constructionsites > productionsites.size() / 7 + 2) {
 		new_buildings_stop_ = true;
 	}
 	// 2. to not exhaust all free spots
@@ -872,7 +884,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 
 	// sometimes there is too many military buildings in construction, so we must
 	// prevent initialization of further buildings start
-	const uint32_t treshold = militarysites.size() / 30 + 3;
+	const uint32_t treshold = militarysites.size() / 40 + 2;
 
 	if (unstationed_milit_buildings_ + num_milit_constructionsites > 3 * treshold)
 		expansion_mode = kNoNewMilitary;
@@ -883,6 +895,23 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 	else
 		expansion_mode = kFreeExpansion;
 
+	// slowing down the expansion also because of new_buildings_stop_
+	if (new_buildings_stop_ && unstationed_milit_buildings_ + num_milit_constructionsites > 0 &&
+	    spots_avail.at(BUILDCAPS_BIG) > 3)
+		expansion_mode += 1;
+	if (expansion_mode > kNoNewMilitary)
+		expansion_mode = kNoNewMilitary;
+
+	//we must consider need for mines
+	const int32_t virtual_mines = mines_.size()+ mineable_fields.size()/10;
+	if (virtual_mines<4)
+		mines_need_intensity_ = 10;
+	else if (virtual_mines>14) 
+			mines_need_intensity_ = 0;
+	else
+		mines_need_intensity_ = 14-virtual_mines;
+	//printf (" %1d: mines need intensity: %3d%% / %2d mines\n",player_number(),100*mines_need_intensity_/10,mines_.size());
+	
 	BuildingObserver* best_building = nullptr;
 	int32_t proposed_priority = 0;
 	Coords proposed_coords;
@@ -999,7 +1028,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 				} else if (bo.need_trees_) {  // LUMBERJACS
 
 					bo.cnt_target_ =
-					   2 + static_cast<int32_t>(mines_.size() + productionsites.size()) / 15;
+					   3 + static_cast<int32_t>(mines_.size() + productionsites.size()) / 15;
 
 					if (bo.total_count() == 0)
 						prio = 500 + bf->trees_nearby_;
@@ -1257,7 +1286,8 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 					continue;
 
 				if (expansion_mode == kResourcesOrDefense &&
-				    !(bf->enemy_nearby_ || bf->unowned_mines_pots_nearby_ || bf->stones_nearby_))
+				    !(bf->enemy_nearby_ || bf->unowned_mines_pots_nearby_ || bf->stones_nearby_ ||
+				      (water_is_important_ && bf->water_nearby_)))
 					continue;
 
 				if (bf->enemy_nearby_ && bo.fighting_type_)
@@ -1286,15 +1316,6 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 				if (!bf->enemy_nearby_ && bf->military_in_constr_nearby_ > 0)
 					continue;
 
-				// here is to consider unowned potential mines
-				int32_t mines_spots_score = 0;
-				mines_spots_score = bf->unowned_mines_pots_nearby_;
-
-				if (mines_spots_score > 0) {
-					mines_spots_score *= 4;
-					mines_spots_score += 8;
-				}
-
 				// a boost to prevent an expansion halt
 				int32_t local_boost = 0;
 				if (num_milit_constructionsites == 1)
@@ -1302,8 +1323,17 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 				if (num_milit_constructionsites == 0)
 					local_boost = 200;
 
-				prio = (bf->unowned_land_nearby_ - 4 + mines_spots_score + bf->stones_nearby_ / 2 +
-				        bf->military_loneliness_ / 5 - 100 + local_boost);  // * (1 + type);
+				// if going after resources we do not consider unowned land
+				if (expansion_mode == kResourcesOrDefense && !bf->enemy_nearby_)
+					prio = (bf->unowned_mines_pots_nearby_ * mines_need_intensity_ / 10
+						+ bf->stones_nearby_ / 2 +
+				        bf->military_loneliness_ / 5 - 100 + local_boost +
+				        water_is_important_ * bf->water_nearby_ * water_need_intensity_ / 12);
+				else
+					prio = (bf->unowned_land_nearby_ - 4 + 
+						bf->unowned_mines_pots_nearby_ * mines_need_intensity_ / 10 +
+				        bf->stones_nearby_ / 2 + bf->military_loneliness_ / 5 - 100 + local_boost +
+				        water_is_important_ * bf->water_nearby_  * water_need_intensity_ / 12);
 
 				if (bo.desc->get_size() < maxsize)
 					prio = prio - 5;  // penalty
@@ -2062,13 +2092,13 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 		if (remaining_trees > 5)
 			return false;
 
-		if (site.bo->stocklevel_time < game().get_gametime() - 30 * 1000) {
+		if (site.bo->stocklevel_time < game().get_gametime() - 10 * 1000) {
 			site.bo->stocklevel_ = get_stocklevel(*site.bo);
 			site.bo->stocklevel_time = game().get_gametime();
 		}
 
 		// if we need wood badly
-		if (remaining_trees > 0 && site.bo->stocklevel_ <= 10)
+		if (remaining_trees > 0 && site.bo->stocklevel_ <= 50)
 			return false;
 
 		// so finally we dismantle the lumberjac

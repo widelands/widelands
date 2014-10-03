@@ -213,6 +213,11 @@ private:
 	uint16_t numof_warehouses_;
 
 	bool new_buildings_stop_;
+	bool water_is_important_;				//for atlanteans, water is on pair with mines and so on
+	uint16_t mines_need_intensity_;			// when we have enough mines weight of possible mines spots
+											// is decreased (range 0-10)
+	uint16_t water_need_intensity_;			// when we have enough fishers weight of water nearby
+											// is decreased (range 0-5)
 	uint16_t unstationed_milit_buildings_;  // counts empty military buildings (ones where no soldier
 	                                        // is belogning to)
 	uint16_t military_under_constr_;
