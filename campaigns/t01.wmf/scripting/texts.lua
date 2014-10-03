@@ -57,9 +57,9 @@ start_lumberjack_02 = {
 
 start_lumberjack_02_01 = {
    name = "start_lumberjack_02_01",
-   title = _"Build a second lumberjack’s hut",
+   title = _"Build a crossroads",
    number = 1,
-   body = objective_text(_"Build a second lumberjack’s hut",
+   body = objective_text(_"Build a crossroads",
       listitem_bullet(_"Place a flag in the middle of the road. There is a flag symbol in the middle of the road you just built. You create a flag there by clicking on the symbol and then choosing the flag button in the menu that opens up. This will divide the road the wood is transported into two parts with one carrier each.") ..
       listitem_arrow(_"When many wares are being transported between two points, additional flags in between make them arrive at their destination faster, thus improving your infrastructure."))
 }

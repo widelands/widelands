@@ -38,6 +38,7 @@ grave = wl.Game().map:get_field(25,22)
 
 -- This function can move to a place, display a modal message box and return
 function show_story_box(t, m, pos, gposx, gposy)
+	while (wl.ui.MapView().is_building_road) do sleep(2000) end
    plr = wl.Game().players[1]
    posx = gposx
    posy = gposy
