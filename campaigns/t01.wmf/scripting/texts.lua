@@ -140,6 +140,39 @@ khantrukh_8 = khantrukh(_"Khantrukh is satisfied...",
 -- =======================================================================
 --                  General story texts by the chieftain
 -- =======================================================================
+
+initial_msg1 = {
+	title = _"The Story Begins",
+	msg = thron(_"Thron sighs...",
+		_[[It’s been months, and we are still hiding where the forests are old and dark.]]
+		.. paragraphdivider() ..
+		_[[My warriors hunt at day and lie awake at night – listening to the sounds of the cruel slaughter echoing from afar amongst the ancient trees.]])
+}
+
+initial_msg2 = {
+	field = al_thunran,
+	title = _"The Story Begins",
+	msg = thron(_"Thron continues...",
+		_[[We can see the raging flames that swallow Al’thunran from here, miles away.]]
+		.. paragraphdivider() ..
+		_[[The red lights flash in the darkness and dance to the rhythm of the war drums that haunt me even in my nightmares.]])
+}
+
+initial_msg3 = {
+	field = grave,
+	title = _"The Story Begins",
+	msg = thron(_"Thron says...",
+		_[[My father’s bones rest peacefully in the ground on which he once ended the senseless spilling of blood that had arisen amongst us. It pains me that his peace only endured for one generation.]]
+	.. paragraphdivider() ..
+	_[[Boldreth, my loyal companion and friend is a source of peace and comfort to me in these dark times. He keeps my spirits high and those of my warriors awake, preventing greed or despair from destroying the bonds between us as well.]])
+}
+
+initial_msg4 =  {
+	title = _"The Story Begins",
+	msg =thron(_"Thron says...",
+		_[[As father told me, there are times to fight and times to lie and wait, trying not to fall asleep or die before the right time comes. And so I do... wait.]])
+}
+
 story_msg1 = {
 	field = al_thunran,
    title = _"In the Night",

@@ -63,5 +63,5 @@ include "scripting/table.lua"
 
 include "map:scripting/texts.lua"
 
-include "map:scripting/initial_messages.lua"
+include "map:scripting/mission_thread.lua"
 include "map:scripting/story_messages.lua"

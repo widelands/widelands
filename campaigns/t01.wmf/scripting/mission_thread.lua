@@ -21,7 +21,14 @@ function check_ranger()
    objr.done = true
 end
 
-function tutorial_thread()
+function mission_thread()
+	-- Briefing message
+	show_story_box(initial_msg1.title, initial_msg1.msg)
+	show_story_box(initial_msg2.title, initial_msg2.msg, initial_msg2.field)
+	show_story_box(initial_msg3.title, initial_msg3.msg, initial_msg3.field)
+	show_story_box(initial_msg4.title, initial_msg4.msg)
+	sleep(2000)
+
    p = wl.Game().players[1]
    crossroads = map:get_field(14,11)
 
@@ -71,4 +78,4 @@ function tutorial_thread()
    p:message_box(_"Mission Complete", khantrukh_8, { h = 400 })
 end
 
-run(tutorial_thread)
+run(mission_thread)
