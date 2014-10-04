@@ -47,7 +47,7 @@ void MapElementalPacket::pre_read(FileSystem & fs, Map * map)
 			map->set_author     (s.get_string("author"));
 			map->set_description(s.get_string("descr"));
 			map->set_hint       (s.get_string("hint", ""));
-			map->set_background (s.get_string("background"));
+			map->set_background (s.get_string("background", ""));
 			old_world_name_ = s.get_string("world", "");
 
 			std::string t = s.get_string("tags", "");
@@ -93,6 +93,8 @@ void MapElementalPacket::write
 	s.set_string("author",         map.get_author     ());
 	s.set_string("descr",          map.get_description());
 	s.set_string("hint",           map.get_hint       ());
+	if (!map.get_background().empty())
+		s.set_string("background",  map.get_background ());
 	s.set_string("tags", boost::algorithm::join(map.get_tags(), ","));
 
 	prof.write("elemental", false, fs);

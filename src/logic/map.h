@@ -194,9 +194,9 @@ public:
 	void set_author     (const std::string& author);
 	void set_name       (const std::string& name);
 	void set_description(const std::string& description);
-	void set_hint       (std::string);
-	void set_background (char const *);
-	void add_tag        (std::string);
+	void set_hint       (const std::string& hint);
+	void set_background (const std::string& image_path);
+	void add_tag        (const std::string& tag);
 	void set_scenario_types(ScenarioTypes t) {m_scenario_types = t;}
 
 	// Allows access to the filesystem of the map to access auxiliary files.
@@ -208,8 +208,8 @@ public:
 	const std::string& get_author()      const {return m_author;}
 	const std::string& get_name()        const {return m_name;}
 	const std::string& get_description() const {return m_description;}
-	std::string  get_hint()        const {return m_hint;}
-	const std::string & get_background() const {return m_background;}
+	const std::string& get_hint()        const {return m_hint;}
+	const std::string& get_background()  const {return m_background;}
 	using Tags = std::set<std::string>;
 	const Tags & get_tags() const {return m_tags;}
 	bool has_tag(std::string & s) const {return m_tags.count(s);}

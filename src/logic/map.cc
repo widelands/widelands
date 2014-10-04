@@ -563,20 +563,20 @@ void Map::set_description(const std::string& description)
 	m_description = description;
 }
 
-void Map::set_hint(std::string string)
+void Map::set_hint(const std::string& hint)
 {
-	m_hint = string;
+	m_hint = hint;
 }
 
-void Map::set_background(char const * const string)
+void Map::set_background(const std::string& image_path)
 {
-	if (string)
-		m_background = string;
-	else
+	if (image_path.empty())
 		m_background.clear();
+	else
+		m_background = image_path;
 }
 
-void Map::add_tag(std::string tag) {
+void Map::add_tag(const std::string&  tag) {
 	m_tags.insert(tag);
 }
 
