@@ -368,23 +368,18 @@ void FullscreenMenuMapSelect::fill_list()
 		{
 			Widelands::Map map; //  MapLoader needs a place to put its preload data
 
-			for
-				(FilenameSet::iterator pname = files.begin();
-				pname != files.end();
-				++pname)
-			{
-				char const * const name = pname->c_str();
+			for (const std::string& filename : files) {
 
-				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(name);
+				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(filename);
 				if (!ml)
 					continue;
 
 				try {
-					map.set_filename(name);
+					map.set_filename(filename);
 					ml->preload_map(true);
 
 					MapData mapdata;
-					mapdata.filename    = name;
+					mapdata.filename    = filename;
 					mapdata.name        = map.get_name();
 					mapdata.author      = map.get_author();
 					mapdata.description = map.get_description();
@@ -421,9 +416,9 @@ void FullscreenMenuMapSelect::fill_list()
 				} catch (const std::exception & e) {
 					log
 						("Mapselect: Skip %s due to preload error: %s\n",
-						name, e.what());
+						filename.c_str(), e.what());
 				} catch (...) {
-					log("Mapselect: Skip %s due to unknown exception\n", name);
+					log("Mapselect: Skip %s due to unknown exception\n", filename.c_str());
 				}
 			}
 		}
@@ -435,16 +430,16 @@ void FullscreenMenuMapSelect::fill_list()
 			MapData mapdata;
 
 			const DedicatedMapInfos & dmap = m_settings->settings().maps.at(i);
-			char const * const name = dmap.path.c_str();
-			std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(name));
+			const std::string& filename = dmap.path;
+			std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(filename));
 			try {
 				if (!ml)
 					throw wexception("Not useable!");
 
-				map.set_filename(name);
+				map.set_filename(filename);
 				ml->preload_map(true);
 
-				mapdata.filename    = name;
+				mapdata.filename    = filename;
 				mapdata.name        = map.get_name();
 				mapdata.author      = map.get_author();
 				mapdata.description = map.get_description();
@@ -472,11 +467,11 @@ void FullscreenMenuMapSelect::fill_list()
 					 mapdata.name.c_str());
 
 			} catch (...) {
-				log("Mapselect: Skipped reading locale data for file %s - not valid.\n", name);
+				log("Mapselect: Skipped reading locale data for file %s - not valid.\n", filename.c_str());
 
 				// Fill in the data we got from the dedicated server
-				mapdata.filename    = name;
-				mapdata.name        = dmap.path.substr(5, dmap.path.size() - 1);
+				mapdata.filename    = filename;
+				mapdata.name        = filename.substr(5, filename.size() - 1);
 				mapdata.author      = _("unknown");
 				mapdata.description = _("This map file is not present in your filesystem."
 							" The data shown here was sent by the server.");

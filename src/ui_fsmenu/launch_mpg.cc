@@ -520,7 +520,7 @@ void FullscreenMenuLaunchMPG::set_scenario_values()
 			("settings()->scenario was set to true, but no map is available");
 	Widelands::Map map; //  MapLoader needs a place to put its preload data
 	std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(settings.mapfilename));
-	map.set_filename(settings.mapfilename.c_str());
+	map.set_filename(settings.mapfilename);
 	ml->preload_map(true);
 	Widelands::PlayerNumber const nrplayers = map.get_nrplayers();
 	for (uint8_t i = 0; i < nrplayers; ++i) {
@@ -630,13 +630,12 @@ void FullscreenMenuLaunchMPG::load_map_info()
 {
 	Widelands::Map map; //  MapLoader needs a place to put its preload data
 
-	char const * const name = m_settings->settings().mapfilename.c_str();
-	std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(name);
+	std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(m_settings->settings().mapfilename);
 	if (!ml) {
 		throw WLWarning("There was an error!", "The map file seems to be invalid!");
 	}
 
-	map.set_filename(name);
+	map.set_filename(m_settings->settings().mapfilename);
 	{
 		i18n::Textdomain td("maps");
 		ml->preload_map(true);

@@ -352,7 +352,7 @@ void FullscreenMenuCampaignMapSelect::map_selected(uint32_t) {
 			(_("Invalid path to file in cconfig: %s"), campmapfile.c_str());
 	}
 
-	map.set_filename(campmapfile.c_str());
+	map.set_filename(campmapfile);
 	ml->preload_map(true);
 
 	i18n::Textdomain td("maps");

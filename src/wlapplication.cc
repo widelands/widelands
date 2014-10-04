@@ -430,7 +430,7 @@ void WLApplication::run()
 				// Load the requested map
 				Widelands::Map map;
 				i18n::Textdomain td("maps");
-				map.set_filename(m_filename.c_str());
+				map.set_filename(m_filename);
 				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(m_filename);
 				if (!ml) {
 					throw WLWarning

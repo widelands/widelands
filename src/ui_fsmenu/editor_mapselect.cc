@@ -157,14 +157,14 @@ void FullscreenMenuEditorMapSelect::ok()
  */
 void FullscreenMenuEditorMapSelect::map_selected(uint32_t)
 {
-	std::string name = m_list.get_selected();
+	std::string filename = m_list.get_selected();
 
 	m_ok.set_enabled(true);
 
-	if (!g_fs->is_directory(name) || WidelandsMapLoader::is_widelands_map(name)) {
+	if (!g_fs->is_directory(filename) || WidelandsMapLoader::is_widelands_map(filename)) {
 		Widelands::Map map;
 		{
-			std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(name);
+			std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(filename);
 			ml->preload_map(true); //  This has worked before, no problem.
 		}
 

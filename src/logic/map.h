@@ -190,7 +190,7 @@ public:
 		return m_starting_pos[p - 1];
 	}
 
-	void set_filename   (char const *);
+	void set_filename   (const std::string& filename);
 	void set_author     (const std::string& author);
 	void set_name       (const std::string& name);
 	void set_description(const std::string& description);
@@ -204,7 +204,7 @@ public:
 	FileSystem* filesystem() const;
 
 	// informational functions
-	const char * get_filename()    const {return m_filename;}
+	const std::string& get_filename()    const {return m_filename;}
 	const std::string& get_author()      const {return m_author;}
 	const std::string& get_name()        const {return m_name;}
 	const std::string& get_description() const {return m_description;}
@@ -394,7 +394,7 @@ private:
 
 	int16_t m_width;
 	int16_t m_height;
-	char        m_filename    [256];
+	std::string m_filename;
 	std::string m_author;
 	std::string m_name;
 	std::string m_description;

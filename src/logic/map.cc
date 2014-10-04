@@ -543,12 +543,12 @@ void Map::set_starting_pos(PlayerNumber const plnum, Coords const c)
 }
 
 
-void Map::set_filename(char const * const string)
+void Map::set_filename(const std::string& filename)
 {
-	snprintf(m_filename, sizeof(m_filename), "%s", string);
+	m_filename = filename;
 }
 
-void Map::set_author(const std::string&  author)
+void Map::set_author(const std::string& author)
 {
 	m_author = author;
 }
@@ -576,7 +576,7 @@ void Map::set_background(const std::string& image_path)
 		m_background = image_path;
 }
 
-void Map::add_tag(const std::string&  tag) {
+void Map::add_tag(const std::string& tag) {
 	m_tags.insert(tag);
 }
 
@@ -1646,7 +1646,7 @@ std::unique_ptr<MapLoader> Map::get_correct_loader(const std::string& filename) 
 		}
 	} else if (boost::algorithm::ends_with(lower_filename, S2MF_SUFFIX) ||
 	           boost::algorithm::ends_with(lower_filename, S2MF_SUFFIX2)) {
-		result.reset(new S2MapLoader(filename.c_str(), *this));
+		result.reset(new S2MapLoader(filename, *this));
 	}
 	return result;
 }

@@ -1313,27 +1313,25 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 			FilenameSet files = g_fs->list_directory(directories.at(directories.size() - 1).c_str());
 			directories.resize(directories.size() - 1);
 			Widelands::Map map;
-			const FilenameSet & gamefiles = files;
-			for (const std::string& temp_filenames : gamefiles) {
-				char const * const name = temp_filenames.c_str();
-				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(name);
+			for (const std::string& filename : files) {
+				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(filename);
 				if (ml) {
-					map.set_filename(name);
+					map.set_filename(filename);
 					ml->preload_map(true);
 					DedicatedMapInfos info;
-					info.path     = name;
+					info.path     = filename;
 					info.players  = map.get_nrplayers();
 					info.scenario = map.scenario_types() & Widelands::Map::MP_SCENARIO;
 					d->settings.maps.push_back(info);
 				} else {
 					if
-						(g_fs->is_directory(name)
+						(g_fs->is_directory(filename)
 						&&
-						strcmp(FileSystem::fs_filename(name), ".")
+						strcmp(FileSystem::fs_filename(filename.c_str()), ".")
 						&&
-						strcmp(FileSystem::fs_filename(name), ".."))
+						strcmp(FileSystem::fs_filename(filename.c_str()), ".."))
 					{
-						directories.push_back(name);
+						directories.push_back(filename);
 					}
 				}
 			}
@@ -2664,7 +2662,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 					std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(path);
 					if (ml.get() != nullptr) {
 						// Yes it is a map file :)
-						map.set_filename(path.c_str());
+						map.set_filename(path);
 						ml->preload_map(true);
 						d->settings.scenario = scenario;
 						d->hp.set_map(map.get_name(), path, map.get_nrplayers(), false);

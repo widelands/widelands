@@ -308,7 +308,7 @@ Widelands::TerrainIndex TerrainConverter::lookup(S2MapLoader::WorldType world, i
 
 }  // namespace
 
-S2MapLoader::S2MapLoader(const char * filename, Widelands::Map & M)
+S2MapLoader::S2MapLoader(const std::string& filename, Widelands::Map& M)
 : Widelands::MapLoader(filename, M), m_filename(filename)
 {
 }
