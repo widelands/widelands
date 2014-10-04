@@ -773,7 +773,7 @@ void DefaultAI::update_productionsite_stats(int32_t const gametime) {
 		// Add statistics value
 		productionsites.front().bo->current_stats_ +=
 		   productionsites.front().site->get_crude_statistics();
-		   
+
 		//counting fishers
 		if (productionsites.front().bo->is_fisher_)
 			 fishers_count+=1;
@@ -788,7 +788,7 @@ void DefaultAI::update_productionsite_stats(int32_t const gametime) {
 
 	if (fishers_count >4)
 		water_need_intensity_ = 0;
-	else 
+	else
 		water_need_intensity_ = 4-fishers_count;
 	//printf (" %2d: water need intensity: %3d%%/ %2d fishers\n",player_number(),100*water_need_intensity_/4,fishers_count);
 
@@ -838,6 +838,8 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 	bool field_blocked = false;
 	uint32_t consumers_nearby_count = 0;
 	// this is to increase score so also building near borders can be built
+	// NOCOM(#codereview): What is this? the name sure is strange. If it is a constant, it should also be
+	// constexpr int kBulgarianConstant = 12; Please document and explain what it is doing though.
 	int32_t bulgarian_constant = 12;
 	std::vector<int32_t> spots_avail;
 	spots_avail.resize(4);
@@ -859,8 +861,8 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 	new_buildings_stop_ = false;
 	uint8_t expansion_mode = kFreeExpansion;
 
-	// there are couple of reasons why to stop building production buildings
-	//(note there are numberous exemptions to this stop)
+	// there are many reasons why to stop building production buildings
+	// (note there are numerous exceptions)
 	// 1. to not have too many constructionsites
 	if (num_prod_constructionsites > productionsites.size() / 7 + 2) {
 		new_buildings_stop_ = true;
@@ -875,8 +877,12 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 		new_buildings_stop_ = true;
 	}
 	// 4. if we do not have 3 mines at least
-	if (mines_.size() < 3)
+	// NOCOM(#codereview): Please, when optional,  always use {}. Remember the
+	// heartbleed bug? It was a missing optional brace :/. I did not fix all
+	// occurences that are in this diff, but please make an effort to do so.
+	if (mines_.size() < 3) {
 		new_buildings_stop_ = true;
+	}
 	// BUT if enemy is nearby, we cancel above stop
 	if (new_buildings_stop_ && enemy_last_seen_ + 2 * 60 * 1000 > gametime) {
 		new_buildings_stop_ = false;
@@ -886,14 +892,15 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 	// prevent initialization of further buildings start
 	const uint32_t treshold = militarysites.size() / 40 + 2;
 
-	if (unstationed_milit_buildings_ + num_milit_constructionsites > 3 * treshold)
+	if (unstationed_milit_buildings_ + num_milit_constructionsites > 3 * treshold) {
 		expansion_mode = kNoNewMilitary;
-	else if (unstationed_milit_buildings_ + num_milit_constructionsites > 2 * treshold)
+	} else if (unstationed_milit_buildings_ + num_milit_constructionsites > 2 * treshold) {
 		expansion_mode = kDefenseOnly;
-	else if (unstationed_milit_buildings_ + num_milit_constructionsites > 1 * treshold)
+	} else if (unstationed_milit_buildings_ + num_milit_constructionsites > 1 * treshold) {
 		expansion_mode = kResourcesOrDefense;
-	else
+	} else {
 		expansion_mode = kFreeExpansion;
+	}
 
 	// slowing down the expansion also because of new_buildings_stop_
 	if (new_buildings_stop_ && unstationed_milit_buildings_ + num_milit_constructionsites > 0 &&
@@ -906,12 +913,12 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 	const int32_t virtual_mines = mines_.size()+ mineable_fields.size()/10;
 	if (virtual_mines<4)
 		mines_need_intensity_ = 10;
-	else if (virtual_mines>14) 
+	else if (virtual_mines>14)
 			mines_need_intensity_ = 0;
 	else
 		mines_need_intensity_ = 14-virtual_mines;
 	//printf (" %1d: mines need intensity: %3d%% / %2d mines\n",player_number(),100*mines_need_intensity_/10,mines_.size());
-	
+
 	BuildingObserver* best_building = nullptr;
 	int32_t proposed_priority = 0;
 	Coords proposed_coords;
@@ -934,9 +941,10 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 	     ++i) {
 		BuildableField* const bf = *i;
 
+		// NOCOM(#codereview): What is bf in this comment?
 		// if bf update is overdue for more then 8 seconds
 		// this will also speed up the game
-		// this way there should be allways more then 100 bf evaluated
+		// this way there should be always more then 100 bf evaluated
 		if (bf->next_update_due_ < gametime - 8000)
 			continue;
 
@@ -970,13 +978,18 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 			if (bo.desc->get_size() > maxsize)
 				continue;
 
+			// NOCOM(#codereview): Have you tested this in network code? I think
+			// that the AI only runs on the server, not on the clients. But if the
+			// AI logic is also paralleled on all machines, not using the
+			// designated random generator that is synchronized will break the
+			// game.
 			if (time(nullptr) % 3 == 0 && bo.total_count() > 0)
 				continue;  // add randomnes and ease AI
 
 			if (bo.type == BuildingObserver::MINE)
 				continue;
 
-			// here we do an exemption for lumberjacs, mainly in early stages of game
+			// here we do an exemption for lumberjacks, mainly in early stages of game
 			// sometimes the first one is not built and AI waits too long for second attempt
 			if (gametime - bo.construction_decision_time_ < kBuildingMinInterval && !bo.need_trees_)
 				continue;
@@ -1330,7 +1343,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 				        bf->military_loneliness_ / 5 - 100 + local_boost +
 				        water_is_important_ * bf->water_nearby_ * water_need_intensity_ / 12);
 				else
-					prio = (bf->unowned_land_nearby_ - 4 + 
+					prio = (bf->unowned_land_nearby_ - 4 +
 						bf->unowned_mines_pots_nearby_ * mines_need_intensity_ / 10 +
 				        bf->stones_nearby_ / 2 + bf->military_loneliness_ / 5 - 100 + local_boost +
 				        water_is_important_ * bf->water_nearby_  * water_need_intensity_ / 12);
@@ -1648,6 +1661,9 @@ bool DefaultAI::improve_roads(int32_t gametime) {
 
 // identifying roads where wares are not intensively transported
 // and that have bypasses not much longer
+// NOCOM(#codereview): I think this is a typo? abundant means "there is lots of it", abandoned means "no longer in use".
+// NOCOM(#codereview): what are you doing in this traversal? I cannot quite follow the code. Please document in a sentence or
+// two what the function actually checks.
 bool DefaultAI::abundant_road_test(const Road& road) {
 
 	Flag& roadstartflag = road.get_flag(Road::FlagStart);
@@ -1788,11 +1804,14 @@ bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uin
 			}
 
 			// now make sure that this field has not been processed yet
+			// NOCOM(#codereview): A stable hash would be (x << 16 | y). Your hash can collide. Also, when you want to use
+			// coordinates in containers you can just do so.
 			const int32_t hash = reachable_coords.x * 1234 + reachable_coords.y;
 			if (lookuptable.count(hash) == 0) {
 				lookuptable.insert(hash);
 
 				// adding flag into NearFlags if road is possible
+				// NOCOM(#codereview): use a std::unique_ptr() so that delete is always called. Your code is correct for now, but can easily break if somebody changes stuff around here.
 				Path* path2 = new Path();
 
 				if (map.findpath(flag.get_position(), reachable_coords, 0, *path2, check) >= 0) {
@@ -2398,6 +2417,7 @@ void DefaultAI::check_ware_needeness(BuildingObserver& bo,
 // counts produced output on stock
 // if multiple outputs, it returns lowest value
 uint32_t DefaultAI::get_stocklevel(BuildingObserver& bo) {
+	// NOCOM(#codereview): use std::numeric_limits<uint32_t>::max(). That will convey to readers better what you want with this value.
 	uint32_t count = 10000;
 
 	if (!bo.outputs_.empty()) {
