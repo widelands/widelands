@@ -202,7 +202,7 @@ m_redirected_stdio(false)
 		const std::string default_datadir =
 		   std::string(INSTALL_PREFIX) + "/" + std::string(INSTALL_DATADIR);
 		log("Adding directory: %s\n", default_datadir.c_str());
-		g_fs->AddFileSystem(&FileSystem::Create(default_datadir));
+		g_fs->add_file_system(&FileSystem::create(default_datadir));
 	}
 	init_language(); // search paths must already be set up
 	cleanup_replays();
