@@ -20,6 +20,7 @@ wl_library(ui_fsmenu
     launch_spg.h
     loadgame.cc
     loadgame.h
+    load_map_or_game.h
     loadreplay.cc
     loadreplay.h
     main.cc

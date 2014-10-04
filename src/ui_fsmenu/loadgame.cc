@@ -47,40 +47,7 @@
 
 FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	(Widelands::Game & g, GameSettingsProvider * gsp, GameController * gc) :
-	FullscreenMenuBase("choosemapmenu.jpg"),
-
-	// Values for alignment and size
-	m_padding (5),
-	m_space   (25),
-	m_margin_right(15),
-	m_maplistx(get_w() *  47 / 2500),
-	m_maplisty(get_h() * 17 / 50),
-	m_maplistw(get_w() * 711 / 1250),
-	m_maplisth(get_h() * 6083 / 10000),
-	m_butx (m_maplistx + m_maplistw + m_margin_right),
-	m_buty (get_h() * 9 / 10),
-	m_butw ((get_w() - m_butx - m_margin_right) / 2 - m_padding),
-	m_buth (get_h() * 9 / 200),
-	m_nr_players_width(35),
-	m_description_column_tab(get_w() - m_margin_right - m_butw),
-
-// "Data holder" for the savegame information
-	m_game(g),
-
-// Main buttons
-	m_back
-		(this, "back",
-		 m_butx, m_buty, m_butw, m_buth,
-		 g_gr->images().get("pics/but0.png"),
-		 _("Back"), std::string(), true, false),
-	m_ok
-		(this, "ok",
-		 get_w() - m_margin_right - m_butw, m_buty, m_butw, m_buth,
-		 g_gr->images().get("pics/but2.png"),
-		 _("Load"), std::string(), false, false),
-
-// Savegame list
-	m_list(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth),
+	FullscreenMenuLoadMapOrGame(),
 
 // Text areas
 	m_title
@@ -134,6 +101,8 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 		(this, m_butx,  m_delete.get_y() + m_delete.get_h() + 2 * m_padding,
 		 m_minimap_max_width, m_minimap_max_height, nullptr),
 
+	// "Data container" for the savegame information
+	m_game(g),
 	m_settings(gsp),
 	m_ctrl(gc)
 {
@@ -141,9 +110,9 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	m_title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
 
 	m_back.set_tooltip(_("Return to the single player menu"));
-	m_ok.set_tooltip(_("Load the selected game"));
+	m_ok.set_tooltip(_("Load this game"));
 	m_tamapname.set_tooltip(_("The map that this game is based on"));
-	m_tagametime.set_tooltip(_("The time that elapsed inside the game"));
+	m_tagametime.set_tooltip(_("The time that elapsed inside this game"));
 	m_ta_players.set_tooltip(_("The number of players"));
 	m_ta_win_condition.set_tooltip(_("The win condition that was set for this game"));
 	m_delete.set_tooltip(_("Delete this game"));
@@ -397,5 +366,5 @@ bool FullscreenMenuLoadGame::handle_key(bool down, SDL_keysym code)
 		break;
 	}
 
-	return FullscreenMenuBase::handle_key(down, code);
+	return FullscreenMenuLoadMapOrGame::handle_key(down, code);
 }

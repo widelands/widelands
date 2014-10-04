@@ -32,6 +32,7 @@
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
+#include "ui_fsmenu/load_map_or_game.h"
 
 namespace Widelands {
 class EditorGameBase;
@@ -45,36 +46,22 @@ class GameController;
 struct GameSettingsProvider;
 
 /// Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu.
-struct FullscreenMenuLoadGame : public FullscreenMenuBase {
+struct FullscreenMenuLoadGame : public FullscreenMenuLoadMapOrGame {
 	FullscreenMenuLoadGame
 		(Widelands::Game &, GameSettingsProvider * gsp = nullptr, GameController * gc = nullptr);
 
-	const std::string & filename() {return m_filename;}
-
-	void clicked_ok    ();
+	void clicked_ok();
 	void clicked_delete();
-	void map_selected  (uint32_t);
+	void map_selected(uint32_t);
 	void double_clicked(uint32_t);
-	void fill_list     ();
-	void think() override;
+	void fill_list();
+	void think();
 
 	bool handle_key(bool down, SDL_keysym code) override;
 
 private:
 	void no_selection();
 
-	int32_t const    m_padding;
-	int32_t const    m_space;
-	int32_t const    m_margin_right;
-	int32_t const    m_maplistx, m_maplisty, m_maplistw, m_maplisth;
-	int32_t const    m_butx, m_buty, m_butw, m_buth;
-	int32_t const    m_nr_players_width;
-	int32_t const    m_description_column_tab;
-
-	Widelands::Game &             m_game;
-	UI::Button                    m_back;
-	UI::Button                    m_ok;
-	UI::Listselect<const char *>  m_list;
 	UI::Textarea                  m_title;
 	UI::Textarea                  m_label_mapname;
 	UI::MultilineTextarea         m_tamapname; // Multiline for long names
@@ -88,13 +75,12 @@ private:
 	int32_t const                 m_minimap_max_width;
 	int32_t const                 m_minimap_max_height;
 	UI::Icon                      m_minimap_icon;
-	std::string                   m_filename;
 
-	FilenameSet                            m_gamefiles;
+	std::unique_ptr<const Image>  m_minimap_image;
 
-	GameSettingsProvider                   * m_settings;
-	GameController                         * m_ctrl;
-	std::unique_ptr<const Image>           m_minimap_image;
+	Widelands::Game &             m_game;
+	GameSettingsProvider          * m_settings;
+	GameController                * m_ctrl;
 };
 
 
