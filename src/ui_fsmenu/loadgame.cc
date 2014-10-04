@@ -19,6 +19,7 @@
 
 #include "ui_fsmenu/loadgame.h"
 
+#include <algorithm>
 #include <cstdio>
 #include <memory>
 
@@ -48,94 +49,116 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	(Widelands::Game & g, GameSettingsProvider * gsp, GameController * gc) :
 	FullscreenMenuBase("choosemapmenu.jpg"),
 
-// Values for alignment and size
-	m_butw (get_w() / 4),
+	// Values for alignment and size
+	m_padding (5),
+	m_space   (25),
+	m_margin_right(15),
+	m_maplistx(get_w() *  47 / 2500),
+	m_maplisty(get_h() * 17 / 50),
+	m_maplistw(get_w() * 711 / 1250),
+	m_maplisth(get_h() * 6083 / 10000),
+	m_butx (m_maplistx + m_maplistw + m_margin_right),
+	m_buty (get_h() * 9 / 10),
+	m_butw ((get_w() - m_butx - m_margin_right) / 2 - m_padding),
 	m_buth (get_h() * 9 / 200),
-	m_fs   (fs_small()),
-	m_fn   (ui_fn()),
-	m_minimap_max_size(get_w() * 15 / 100),
+	m_nr_players_width(35),
+	m_description_column_tab(get_w() - m_margin_right - m_butw),
 
 // "Data holder" for the savegame information
 	m_game(g),
 
-// Buttons
+// Main buttons
 	m_back
 		(this, "back",
-		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
+		 m_butx, m_buty, m_butw, m_buth,
 		 g_gr->images().get("pics/but0.png"),
 		 _("Back"), std::string(), true, false),
 	m_ok
 		(this, "ok",
-		 get_w() * 71 / 100, get_h() * 31 / 40, m_butw, m_buth,
+		 get_w() - m_margin_right - m_butw, m_buty, m_butw, m_buth,
 		 g_gr->images().get("pics/but2.png"),
-		 _("OK"), std::string(), false, false),
-	m_delete
-		(this, "delete",
-		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
-		 g_gr->images().get("pics/but0.png"),
-		 _("Delete"), std::string(), false, false),
+		 _("Load"), std::string(), false, false),
 
 // Savegame list
-	m_list
-		(this, get_w() * 47 / 2500, get_h() * 3417 / 10000,
-		 get_w() * 711 / 1250, get_h() * 6083 / 10000),
+	m_list(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth),
 
 // Text areas
 	m_title
 		(this,
 		 get_w() / 2, get_h() * 3 / 20,
 		 _("Choose saved game"), UI::Align_HCenter),
+
+	// Savegame description
 	m_label_mapname
 		(this,
-		 get_w() * 7 / 10,  get_h() * 17 / 50,
-		 _("Map Name:"), UI::Align_Right),
-	m_tamapname(this, get_w() * 71 / 100, get_h() * 17 / 50),
+		 m_butx, m_maplisty,
+		 _("Map Name:"),
+		 UI::Align_Left),
+	m_tamapname(this, m_butx, m_label_mapname.get_y() + m_label_mapname.get_h(),
+					get_w() - m_butx - m_margin_right, 35),
+
 	m_label_gametime
 		(this,
-		 get_w() * 7 / 10,  get_h() * 3 / 8,
-		 _("Gametime:"), UI::Align_Right),
-	m_tagametime(this, get_w() * 71 / 100, get_h() * 3 / 8),
+		 m_butx, m_tamapname.get_y() + m_tamapname.get_h() + m_padding,
+		 _("Gametime:"),
+		 UI::Align_Left),
+	m_tagametime(this, m_description_column_tab, m_label_gametime.get_y(),
+					 get_w() - m_butx - m_margin_right, 20),
+
 	m_label_players
 		(this,
-		 get_w() * 7 / 10,  get_h() * 41 / 100,
-		 _("Players:"), UI::Align_Right),
-	m_ta_players
-		(this, get_w() * 71 / 100, get_h() * 41 / 100),
-	m_ta_win_condition
-		(this, get_w() * 71 / 100, get_h() * 9 / 20),
-	m_label_minimap
+		 m_butx, m_tagametime.get_y() + m_tagametime.get_h() + m_padding,
+		 _("Players:"),
+		 UI::Align_Left),
+	m_ta_players(this, m_description_column_tab, m_label_players.get_y(),
+					 get_w() - m_butx - m_margin_right, 20),
+
+	m_label_win_condition
 		(this,
-		 get_w() * 7 / 10,  get_h() * 10 / 20,
-		 _("Minimap:"), UI::Align_Right),
+		 m_butx, m_ta_players.get_y() + m_ta_players.get_h() + m_padding,
+		 _("Win Condition:"),
+		 UI::Align_Left),
+	m_ta_win_condition(this, m_description_column_tab, m_label_win_condition.get_y(),
+							 get_w() - m_butx - m_margin_right, 20),
+
+	m_delete
+		(this, "delete",
+		 m_butx, m_ta_win_condition.get_y() + m_ta_win_condition.get_h() + m_padding,
+		 m_butw, m_buth,
+		 g_gr->images().get("pics/but0.png"),
+		 _("Delete"), std::string(), false, false),
+
+	m_minimap_max_width(get_w() - m_butx - m_margin_right),
+	m_minimap_max_height(m_buty - m_delete.get_h() - m_delete.get_y() - 4 * m_padding),
 	m_minimap_icon
-		(this, get_w() * 71 / 100, get_h() * 10 / 20,
-		 m_minimap_max_size, m_minimap_max_size, nullptr),
+		(this, m_butx,  m_delete.get_y() + m_delete.get_h() + 2 * m_padding,
+		 m_minimap_max_width, m_minimap_max_height, nullptr),
+
 	m_settings(gsp),
 	m_ctrl(gc)
 {
+
+	m_title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
+
+	m_back.set_tooltip(_("Return to the single player menu"));
+	m_ok.set_tooltip(_("Load the selected game"));
+	m_tamapname.set_tooltip(_("The map that this game is based on"));
+	m_tagametime.set_tooltip(_("The time that elapsed inside the game"));
+	m_ta_players.set_tooltip(_("The number of players"));
+	m_ta_win_condition.set_tooltip(_("The win condition that was set for this game"));
+	m_delete.set_tooltip(_("Delete this game"));
+
 	m_back.sigclicked.connect(boost::bind(&FullscreenMenuLoadGame::end_modal, boost::ref(*this), 0));
 	m_ok.sigclicked.connect(boost::bind(&FullscreenMenuLoadGame::clicked_ok, boost::ref(*this)));
 	m_delete.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuLoadGame::clicked_delete, boost::ref(*this)));
 
-	m_back.set_font(font_small());
-	m_ok.set_font(font_small());
-	m_delete.set_font(font_small());
-
-	m_title         .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
-	m_label_mapname .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_tamapname     .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_label_gametime.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_tagametime    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_label_players .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_ta_players    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_ta_win_condition.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_minimap_icon.set_visible(false);
-	m_list          .set_font(m_fn, m_fs);
 	m_list.selected.connect(boost::bind(&FullscreenMenuLoadGame::map_selected, this, _1));
 	m_list.double_clicked.connect(boost::bind(&FullscreenMenuLoadGame::double_clicked, this, _1));
 	m_list.focus();
+
 	fill_list();
 }
 
@@ -234,16 +257,17 @@ void FullscreenMenuLoadGame::map_selected(uint32_t selected)
 		m_tamapname.set_text(_(gpdp.get_mapname()));
 	}
 
-	char buf[20];
 	uint32_t gametime = gpdp.get_gametime();
 	m_tagametime.set_text(gametimestring(gametime));
 
-	if (gpdp.get_number_of_players() > 0) {
-		sprintf(buf, "%i", gpdp.get_number_of_players());
+	uint8_t number_of_players = gpdp.get_number_of_players();
+	if (number_of_players > 0) {
+		m_ta_players.set_text((boost::format(ngettext("%u Player", "%u Players", number_of_players))
+				% static_cast<unsigned int>(number_of_players)).str());
 	} else {
-		sprintf(buf, "%s", _("Unknown"));
+		m_ta_players.set_text(_("Unknown"));
 	}
-	m_ta_players.set_text(buf);
+
 	m_ta_win_condition.set_text(gpdp.get_win_condition());
 
 	std::string minimap_path = gpdp.get_minimap_path();
@@ -260,11 +284,12 @@ void FullscreenMenuLoadGame::map_selected(uint32_t selected)
 			   minimap_path, std::unique_ptr<FileSystem>(g_fs->make_sub_file_system(name)).get()));
 			m_minimap_image.reset(new_in_memory_image(std::string(name + minimap_path), surface.release()));
 			// Scale it
-			double scale = double(m_minimap_max_size) / m_minimap_image->width();
-			double scaleY = double(m_minimap_max_size) / m_minimap_image->height();
+			double scale = double(m_minimap_max_width) / m_minimap_image->width();
+			double scaleY = double(m_minimap_max_height) / m_minimap_image->height();
 			if (scaleY < scale) {
 				scale = scaleY;
 			}
+			if (scale > 1.0) scale = 1.0; // Don't make the image too big; fuzziness will result
 			uint16_t w = scale * m_minimap_image->width();
 			uint16_t h = scale * m_minimap_image->height();
 			const Image* resized = ImageTransformations::resize(m_minimap_image.get(), w, h);
@@ -272,6 +297,19 @@ void FullscreenMenuLoadGame::map_selected(uint32_t selected)
 			// from resize that is handled by the cache. It is still linked to our
 			// surface
 			m_minimap_icon.set_size(w, h);
+
+			// Center the minimap in the available space
+			int32_t xpos = m_butx + (get_w() - m_butx - m_margin_right - w) / 2;
+			int32_t ypos = m_delete.get_y() + m_delete.get_h() + 2 * m_padding;
+
+			// Set small minimaps higher up for a more harmonious look
+			if (h < m_minimap_max_height * 2 / 3) {
+				ypos += (m_minimap_max_height - h) / 3;
+			} else {
+				ypos += (m_minimap_max_height - h) / 2;
+			}
+
+			m_minimap_icon.set_pos(Point(xpos, ypos));
 			m_minimap_icon.set_frame(UI_FONT_CLR_FG);
 			m_minimap_icon.set_visible(true);
 			m_minimap_icon.set_icon(resized);

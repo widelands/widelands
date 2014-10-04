@@ -63,34 +63,38 @@ struct FullscreenMenuLoadGame : public FullscreenMenuBase {
 private:
 	void no_selection();
 
-	uint32_t    m_butw;
-	uint32_t    m_buth;
-	uint32_t    m_fs;
-	std::string m_fn;
-	uint16_t    m_minimap_max_size;
+	int32_t const    m_padding;
+	int32_t const    m_space;
+	int32_t const    m_margin_right;
+	int32_t const    m_maplistx, m_maplisty, m_maplistw, m_maplisth;
+	int32_t const    m_butx, m_buty, m_butw, m_buth;
+	int32_t const    m_nr_players_width;
+	int32_t const    m_description_column_tab;
 
-	Widelands::Game &                               m_game;
-	UI::Button                             m_back;
-	UI::Button                             m_ok;
-	UI::Button                             m_delete;
-	UI::Listselect<const char *>                    m_list;
-	UI::Textarea                                    m_title;
-	UI::Textarea                                    m_label_mapname;
-	UI::Textarea                                    m_tamapname;
-	UI::Textarea                                    m_label_gametime;
-	UI::Textarea                                    m_tagametime;
-	UI::Textarea                                    m_label_players;
-	UI::Textarea                                    m_ta_players;
-	UI::Textarea                                    m_ta_win_condition;
-	UI::Textarea                                    m_label_minimap;
-	UI::Icon                                        m_minimap_icon;
-	std::string                                     m_filename;
+	Widelands::Game &             m_game;
+	UI::Button                    m_back;
+	UI::Button                    m_ok;
+	UI::Listselect<const char *>  m_list;
+	UI::Textarea                  m_title;
+	UI::Textarea                  m_label_mapname;
+	UI::MultilineTextarea         m_tamapname; // Multiline for long names
+	UI::Textarea                  m_label_gametime;
+	UI::MultilineTextarea         m_tagametime; // Multiline because we want tooltips
+	UI::Textarea                  m_label_players;
+	UI::MultilineTextarea         m_ta_players;
+	UI::Textarea                  m_label_win_condition;
+	UI::MultilineTextarea         m_ta_win_condition;
+	UI::Button                    m_delete;
+	int32_t const                 m_minimap_max_width;
+	int32_t const                 m_minimap_max_height;
+	UI::Icon                      m_minimap_icon;
+	std::string                   m_filename;
 
-	FilenameSet                                   m_gamefiles;
+	FilenameSet                            m_gamefiles;
 
-	GameSettingsProvider                          * m_settings;
-	GameController                                * m_ctrl;
-	std::unique_ptr<const Image>                    m_minimap_image;
+	GameSettingsProvider                   * m_settings;
+	GameController                         * m_ctrl;
+	std::unique_ptr<const Image>           m_minimap_image;
 };
 
 
