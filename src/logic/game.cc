@@ -139,6 +139,7 @@ Game::Game() :
 	m_state               (gs_notrunning),
 	m_cmdqueue            (*this),
 	m_replaywriter        (nullptr),
+	/** TRANSLATORS: Win condition for this game has not been set. */
 	m_win_condition_displayname(_("Not set"))
 {
 }
