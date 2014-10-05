@@ -38,86 +38,75 @@
 using Widelands::WidelandsMapLoader;
 
 FullscreenMenuEditorMapSelect::FullscreenMenuEditorMapSelect() :
-	FullscreenMenuBase("choosemapmenu.jpg"),
+	FullscreenMenuLoadMapOrGame(),
 
-// Values for alignment and size
-	m_butw (get_w() / 4),
-	m_buth (get_h() * 9 / 200),
-	m_fs   (fs_small()),
-	m_fn   (ui_fn()),
-
-// Text labels
+	// Main title
 	m_title
 		(this,
 		 get_w() / 2, get_h() * 9 / 50,
 		 _("Choose a map"), UI::Align_HCenter),
-	m_label_name
+
+	// Map description
+	m_label_mapname
 		(this,
-		 get_w() * 7 / 10, get_h() * 17 / 50,
-		 _("Name:"), UI::Align_Right),
-	m_name (this, get_w() * 71 / 100, get_h() * 17 / 50, std::string()),
+		 m_butx, m_maplisty,
+		 _("Map Name:"),
+		 UI::Align_Left),
+	m_ta_mapname(this, m_butx, m_label_mapname.get_y() + m_label_mapname.get_h(),
+					get_w() - m_butx - m_margin_right, 35),
+
 	m_label_author
 		(this,
-		 get_w() * 7 / 10, get_h() * 3 / 8,
-		 _("Author:"), UI::Align_Right),
-	m_author (this, get_w() * 71 / 100, get_h() * 3 / 8, std::string()),
+		 m_butx, m_ta_mapname.get_y() + m_ta_mapname.get_h() + m_padding,
+		 _("Author:"),
+		 UI::Align_Left),
+	m_ta_author(this, m_description_column_tab, m_label_author.get_y(),
+				get_w() - m_butx - m_margin_right, 20),
+
 	m_label_size
 		(this,
-		 get_w() * 7 / 10, get_h() * 41 / 100,
-		 _("Size:"), UI::Align_Right),
-	m_size (this, get_w() * 71 / 100, get_h() * 41 / 100, std::string()),
-	m_label_nr_players
-		(this,
-		 get_w() * 7 / 10, get_h() * 12 / 25,
-		 _("Players:"), UI::Align_Right),
-	m_nr_players (this, get_w() * 71 / 100, get_h() * 12 / 25, std::string()),
-	m_label_descr
-		(this,
-		 get_w() * 7 / 10, get_h() * 103 / 200,
-		 _("Descr:"), UI::Align_Right),
-	m_descr
-		(this,
-		 get_w() * 71 / 100, get_h() * 13 / 25, get_w() / 4, get_h() * 63 / 200),
+		 m_butx, m_ta_author.get_y() + m_ta_author.get_h() + m_padding,
+		 _("Size:"),
+		 UI::Align_Left),
+	m_ta_size(this, m_description_column_tab, m_label_size.get_y(),
+				 get_w() - m_butx - m_margin_right, 20),
 
-// Buttons
-	m_back
-		(this, "back",
-		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
-		 g_gr->images().get("pics/but0.png"),
-		 _("Back"), std::string(), true, false),
-	m_ok
-		(this, "ok",
-		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
-		 g_gr->images().get("pics/but2.png"),
-		 _("OK"), std::string(), false, false),
+	m_label_players
+		(this,
+		 m_butx, m_ta_size.get_y() + m_ta_size.get_h() + m_padding,
+		 _("Players:"),
+		 UI::Align_Left),
+	m_ta_players(this, m_description_column_tab, m_label_players.get_y(),
+					 get_w() - m_butx - m_margin_right, 20),
 
-// Map list
+	m_ta_description
+		(this,
+		 m_maplistx + m_maplistw + 15,
+		 m_ta_players.get_y() + m_ta_players.get_h() + 2 * m_padding,
+		 get_w() - m_maplistx - m_maplistw - m_margin_right - 15,
+		 m_buty - m_ta_players.get_y() - m_ta_players.get_h()  - 4 * m_padding),
+
+	// Map table
 	m_list
 		(this,
-		 get_w() *  47 / 2500, get_h() * 3417 / 10000,
-		 get_w() * 711 / 1250, get_h() * 6083 / 10000),
+		 m_maplistx, m_maplisty,
+		 m_maplistw, get_h() * 6083 / 10000),
 
-// Runtime variables
+	// Runtime variables
 	m_curdir("maps"), m_basedir("maps")
 {
+	m_back.set_tooltip(_("Return to the main editor menu"));
+	m_ok.set_tooltip(_("Edit this map"));
+	m_ta_mapname.set_tooltip(_("The name of this map"));
+	m_ta_author.set_tooltip(_("Who made this map"));
+	m_ta_players.set_tooltip(_("The number of players"));
+	m_ta_size.set_tooltip(_("The size of this map (Width x Height)"));
+	m_ta_description.set_tooltip(_("Story and hints"));
+
 	m_back.sigclicked.connect(boost::bind(&FullscreenMenuEditorMapSelect::end_modal, boost::ref(*this), 0));
 	m_ok.sigclicked.connect(boost::bind(&FullscreenMenuEditorMapSelect::ok, boost::ref(*this)));
 
-	m_back.set_font(font_small());
-	m_ok.set_font(font_small());
-
-	m_title           .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
-	m_label_name      .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_name            .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_label_author    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_author          .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_label_size      .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_size            .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_label_nr_players.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_nr_players      .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_label_descr     .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_descr           .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_list            .set_font(m_fn, m_fs);
+	m_title.set_textstyle(ts_big());
 
 	m_list.selected.connect(boost::bind(&FullscreenMenuEditorMapSelect::map_selected, this, _1));
 	m_list.double_clicked.connect
@@ -133,15 +122,15 @@ std::string FullscreenMenuEditorMapSelect::get_map()
 
 void FullscreenMenuEditorMapSelect::ok()
 {
-	std::string filename(m_list.get_selected());
+	std::string mapfilename(m_list.get_selected());
 
 	if
-		(g_fs->is_directory(filename.c_str())
+		(g_fs->is_directory(mapfilename.c_str())
 		 &&
-		 !WidelandsMapLoader::is_widelands_map(filename))
+		 !WidelandsMapLoader::is_widelands_map(mapfilename))
 	{
 
-		m_curdir = filename;
+		m_curdir = mapfilename;
 		m_list.clear();
 		m_mapfiles.clear();
 		fill_list();
@@ -157,36 +146,34 @@ void FullscreenMenuEditorMapSelect::ok()
  */
 void FullscreenMenuEditorMapSelect::map_selected(uint32_t)
 {
-	std::string filename = m_list.get_selected();
+	std::string mapfilename = m_list.get_selected();
 
 	m_ok.set_enabled(true);
 
-	if (!g_fs->is_directory(filename) || WidelandsMapLoader::is_widelands_map(filename)) {
+	if (!g_fs->is_directory(mapfilename) || WidelandsMapLoader::is_widelands_map(mapfilename)) {
 		Widelands::Map map;
 		{
-			std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(filename);
+			std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(mapfilename);
 			ml->preload_map(true); //  This has worked before, no problem.
 		}
 
 		// Translate the map data
 		i18n::Textdomain td("maps");
-		m_name  .set_text(_(map.get_name()));
-		m_author.set_text(map.get_author());
-		m_descr .set_text
+		m_ta_mapname.set_text(_(map.get_name()));
+		m_ta_author.set_text(map.get_author());
+		m_ta_description.set_text
 			(_(map.get_description()) + (map.get_hint().empty() ? "" : (std::string("\n") + _(map.get_hint()))));
 
-		char buf[200];
-		sprintf(buf, "%i", map.get_nrplayers());
-		m_nr_players.set_text(buf);
+		m_ta_players.set_text((boost::format(ngettext("%u Player", "%u Players", map.get_nrplayers()))
+				% static_cast<unsigned int>(map.get_nrplayers())).str());
+		m_ta_size.set_text((boost::format("%i  x  %i") % map.get_width() % map.get_height()).str());
 
-		sprintf(buf, "%ix%i", map.get_width(), map.get_height());
-		m_size      .set_text(buf);
 	} else {
-		m_name      .set_text(std::string());
-		m_author    .set_text(std::string());
-		m_descr     .set_text(std::string());
-		m_nr_players.set_text(std::string());
-		m_size      .set_text(std::string());
+		m_ta_mapname.set_text(std::string());
+		m_ta_author.set_text(std::string());
+		m_ta_description.set_text(std::string());
+		m_ta_players.set_text(std::string());
+		m_ta_size.set_text(std::string());
 	}
 }
 

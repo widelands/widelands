@@ -109,7 +109,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	m_settings(gsp),
 	m_ctrl(gc)
 {
-	m_title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
+	m_title.set_textstyle(ts_big());
 
 	m_back.set_tooltip(_("Return to the single player menu"));
 	m_ok.set_tooltip(_("Load this game"));

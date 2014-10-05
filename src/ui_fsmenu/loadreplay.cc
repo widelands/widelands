@@ -90,7 +90,7 @@ FullscreenMenuLoadReplay::FullscreenMenuLoadReplay(Widelands::Game & g) :
 	// "Data container" for the replay information
 	m_game(g)
 {
-	m_title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
+	m_title.set_textstyle(ts_big());
 
 	m_back.set_tooltip(_("Return to the main menu"));
 	m_ok.set_tooltip(_("Load this replay"));

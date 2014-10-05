@@ -26,12 +26,12 @@
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
+#include "ui_fsmenu/load_map_or_game.h"
 
 /**
  * Select a Map in Fullscreen Mode. It's a modal fullscreen menu
  */
-
-struct FullscreenMenuEditorMapSelect : public FullscreenMenuBase {
+struct FullscreenMenuEditorMapSelect : public FullscreenMenuLoadMapOrGame {
 	FullscreenMenuEditorMapSelect();
 
 	std::string get_map();
@@ -43,20 +43,23 @@ private:
 	void double_clicked(uint32_t);
 	void fill_list();
 
-	uint32_t    m_butw;
-	uint32_t    m_buth;
-	uint32_t    m_fs;
-	std::string m_fn;
+	UI::Textarea                  m_title;
+	UI::Textarea                  m_label_mapname;
+	UI::MultilineTextarea         m_ta_mapname;
+	UI::Textarea                  m_label_author;
+	UI::MultilineTextarea         m_ta_author;
+	UI::Textarea                  m_label_size;
+	UI::MultilineTextarea         m_ta_size;
+	UI::Textarea                  m_label_players;
+	UI::MultilineTextarea         m_ta_players;
+	UI::MultilineTextarea         m_ta_description;
 
-	UI::Textarea    m_title,            m_label_name,       m_name;
-	UI::Textarea    m_label_author,     m_author,           m_label_size;
-	UI::Textarea    m_size;
-	UI::Textarea    m_label_nr_players, m_nr_players,       m_label_descr;
-	UI::MultilineTextarea              m_descr;
-	UI::Button             m_back,             m_ok;
-	UI::Listselect<std::string>                             m_list;
-	std::string     m_parentdir,        m_curdir,           m_basedir;
-	FilenameSet   m_mapfiles;
+	UI::Listselect<std::string>   m_list;
+	std::string                   m_parentdir;
+	std::string                   m_curdir;
+	std::string                   m_basedir;
+
+	FilenameSet                   m_mapfiles;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_EDITOR_MAPSELECT_H
