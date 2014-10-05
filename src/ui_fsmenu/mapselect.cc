@@ -116,7 +116,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	m_settings(settings),
 	m_ctrl(ctrl)
 {
-	m_back.set_tooltip(_("Return to the main menu"));
+	m_title.set_textstyle(ts_big());
+	m_back.set_tooltip(_("Return to the previous menu"));
 	m_ok.set_tooltip(_("Play this map"));
 	m_ta_mapname.set_tooltip(_("The name of this map"));
 	m_ta_author.set_tooltip(_("The designers of this map"));
@@ -126,8 +127,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 
 	m_back.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::end_modal, boost::ref(*this), 0));
 	m_ok.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_ok, boost::ref(*this)));
-
-	m_title.set_textstyle(ts_big());
+	m_list.selected.connect(boost::bind(&FullscreenMenuMapSelect::map_selected, this, _1));
+	m_list.double_clicked.connect(boost::bind(&FullscreenMenuMapSelect::double_clicked, this, _1));
 
 	/** TRANSLATORS: Column title for number of players in map list */
 	m_list.add_column(m_nr_players_width, _("Pl."), "", UI::Align_HCenter);
@@ -140,9 +141,6 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	m_list.set_sort_column(0);
 	m_cb_load_map_as_scenario.set_state(false);
 	m_cb_load_map_as_scenario.set_enabled(false);
-
-	m_list.selected.connect(boost::bind(&FullscreenMenuMapSelect::map_selected, this, _1));
-	m_list.double_clicked.connect(boost::bind(&FullscreenMenuMapSelect::double_clicked, this, _1));
 
 	UI::Box* vbox = new UI::Box(this, m_maplistx, m_maplisty - 150,
 										 UI::Box::Horizontal, m_checkbox_space, get_w());

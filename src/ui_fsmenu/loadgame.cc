@@ -109,7 +109,6 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	m_ctrl(gc)
 {
 	m_title.set_textstyle(ts_big());
-
 	m_back.set_tooltip(_("Return to the single player menu"));
 	m_ok.set_tooltip(_("Load this game"));
 	m_ta_mapname.set_tooltip(_("The map that this game is based on"));
@@ -117,18 +116,17 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	m_ta_players.set_tooltip(_("The number of players"));
 	m_ta_win_condition.set_tooltip(_("The win condition that was set for this game"));
 	m_delete.set_tooltip(_("Delete this game"));
+	m_minimap_icon.set_visible(false);
 
 	m_back.sigclicked.connect(boost::bind(&FullscreenMenuLoadGame::end_modal, boost::ref(*this), 0));
 	m_ok.sigclicked.connect(boost::bind(&FullscreenMenuLoadGame::clicked_ok, boost::ref(*this)));
 	m_delete.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuLoadGame::clicked_delete, boost::ref(*this)));
-
-	m_minimap_icon.set_visible(false);
 	m_list.selected.connect(boost::bind(&FullscreenMenuLoadGame::map_selected, this, _1));
 	m_list.double_clicked.connect(boost::bind(&FullscreenMenuLoadGame::double_clicked, this, _1));
-	m_list.focus();
 
+	m_list.focus();
 	fill_list();
 }
 

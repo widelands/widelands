@@ -84,6 +84,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 	// Campaign list
 	m_list(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth)
 {
+	m_title.set_textstyle(ts_big());
 	m_back.set_tooltip(_("Return to the main menu"));
 	m_ok.set_tooltip(_("Play this campaign"));
 	m_ta_mapname.set_tooltip(_("The name of this campaign"));
@@ -96,13 +97,12 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 	m_back.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuCampaignSelect::end_modal, boost::ref(*this), 0));
-
-	m_title.set_textstyle(ts_big());
-
 	m_list.selected.connect
 		(boost::bind(&FullscreenMenuCampaignSelect::campaign_selected, this, _1));
 	m_list.double_clicked.connect
 		(boost::bind(&FullscreenMenuCampaignSelect::double_clicked, this, _1));
+
+	m_list.focus();
 	fill_list();
 }
 
@@ -288,6 +288,7 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect() :
 	// Campaign map list
 	m_list(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth)
 {
+	m_title.set_textstyle(ts_big());
 	m_back.set_tooltip(_("Return to the main menu"));
 	m_ok.set_tooltip(_("Play this scenario"));
 	m_ta_mapname.set_tooltip(_("The name of this scenario"));
@@ -300,12 +301,12 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect() :
 	m_back.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuCampaignMapSelect::end_modal, boost::ref(*this), 0));
-
-	m_title.set_textstyle(ts_big());
-
 	m_list.selected.connect(boost::bind(&FullscreenMenuCampaignMapSelect::map_selected, this, _1));
 	m_list.double_clicked.connect
 		(boost::bind(&FullscreenMenuCampaignMapSelect::double_clicked, this, _1));
+
+	m_list.focus();
+	fill_list();
 }
 
 

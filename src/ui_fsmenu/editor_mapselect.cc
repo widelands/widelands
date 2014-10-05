@@ -97,6 +97,7 @@ FullscreenMenuEditorMapSelect::FullscreenMenuEditorMapSelect() :
 	// Runtime variables
 	m_curdir("maps"), m_basedir("maps")
 {
+	m_title.set_textstyle(ts_big());
 	m_back.set_tooltip(_("Return to the main editor menu"));
 	m_ok.set_tooltip(_("Edit this map"));
 	m_ta_mapname.set_tooltip(_("The name of this map"));
@@ -107,13 +108,11 @@ FullscreenMenuEditorMapSelect::FullscreenMenuEditorMapSelect() :
 
 	m_back.sigclicked.connect(boost::bind(&FullscreenMenuEditorMapSelect::end_modal, boost::ref(*this), 0));
 	m_ok.sigclicked.connect(boost::bind(&FullscreenMenuEditorMapSelect::clicked_ok, boost::ref(*this)));
-
-	m_title.set_textstyle(ts_big());
-
 	m_list.selected.connect(boost::bind(&FullscreenMenuEditorMapSelect::map_selected, this, _1));
 	m_list.double_clicked.connect
 		(boost::bind(&FullscreenMenuEditorMapSelect::double_clicked, this, _1));
 
+	m_list.focus();
 	fill_list();
 }
 

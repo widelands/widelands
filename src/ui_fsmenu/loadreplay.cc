@@ -91,7 +91,6 @@ FullscreenMenuLoadReplay::FullscreenMenuLoadReplay(Widelands::Game & g) :
 	m_game(g)
 {
 	m_title.set_textstyle(ts_big());
-
 	m_back.set_tooltip(_("Return to the main menu"));
 	m_ok.set_tooltip(_("Load this replay"));
 	m_ta_mapname.set_tooltip(_("The map that this replay is based on"));
@@ -105,11 +104,11 @@ FullscreenMenuLoadReplay::FullscreenMenuLoadReplay(Widelands::Game & g) :
 	m_delete.sigclicked.connect
 		(boost::bind
 		 	 (&FullscreenMenuLoadReplay::clicked_delete, boost::ref(*this)));
-
 	m_list.selected.connect(boost::bind(&FullscreenMenuLoadReplay::replay_selected, this, _1));
 	m_list.double_clicked.connect
 		(boost::bind(&FullscreenMenuLoadReplay::double_clicked, this, _1));
 
+	m_list.focus();
 	fill_list();
 }
 
