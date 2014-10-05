@@ -62,6 +62,7 @@ private:
 
 	UI::Listselect<std::string>   m_list;
 	Widelands::Game&              m_game;
+	std::string                   m_filename;
 };
 
 

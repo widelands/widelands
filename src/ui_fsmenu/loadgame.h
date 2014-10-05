@@ -50,6 +50,8 @@ struct FullscreenMenuLoadGame : public FullscreenMenuLoadMapOrGame {
 	FullscreenMenuLoadGame
 		(Widelands::Game&, GameSettingsProvider* gsp = nullptr, GameController* gc = nullptr);
 
+	const std::string & filename() {return m_filename;}
+
 	void clicked_ok();
 	void clicked_delete();
 	void map_selected(uint32_t);
@@ -84,6 +86,7 @@ private:
 	GameController*               m_ctrl;
 
 	FilenameSet                   m_gamefiles;
+	std::string                   m_filename;
 };
 
 

@@ -72,7 +72,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent)
 	m_nrplayers =
 		new UI::Textarea(this, posx + ta->get_w() + spacing, posy - 2, "1");
 	posy += height + spacing;
-	ta = new UI::Textarea(this, posx, posy - 2, _("Author:"));
+	ta = new UI::Textarea(this, posx, posy - 2, _("Authors:"));
 	m_author =
 		new UI::EditBox
 			(this,

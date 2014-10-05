@@ -52,6 +52,7 @@ private:
 	UI::MultilineTextarea         m_ta_size;
 	UI::Textarea                  m_label_players;
 	UI::MultilineTextarea         m_ta_players;
+	UI::Textarea                  m_label_description;
 	UI::MultilineTextarea         m_ta_description;
 
 	UI::Listselect<std::string>   m_list;

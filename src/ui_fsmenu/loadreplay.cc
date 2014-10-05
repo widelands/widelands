@@ -50,12 +50,12 @@ FullscreenMenuLoadReplay::FullscreenMenuLoadReplay(Widelands::Game & g) :
 		 m_butx, m_maplisty,
 		 _("Map Name:"),
 		 UI::Align_Left),
-	m_ta_mapname(this, m_butx, m_label_mapname.get_y() + m_label_mapname.get_h(),
-					get_w() - m_butx - m_margin_right, 35),
+	m_ta_mapname(this, m_butx + m_indent, m_label_mapname.get_y() + m_label_mapname.get_h() + m_padding,
+					get_w() - m_butx - m_indent - m_margin_right, 35),
 
 	m_label_gametime
 		(this,
-		 m_butx, m_ta_mapname.get_y() + m_ta_mapname.get_h() + m_padding,
+		 m_butx, m_ta_mapname.get_y() + m_ta_mapname.get_h() + 3 * m_padding,
 		 _("Gametime:"),
 		 UI::Align_Left),
 	m_ta_gametime(this, m_description_column_tab, m_label_gametime.get_y(),
@@ -63,7 +63,7 @@ FullscreenMenuLoadReplay::FullscreenMenuLoadReplay(Widelands::Game & g) :
 
 	m_label_players
 		(this,
-		 m_butx, m_ta_gametime.get_y() + m_ta_gametime.get_h() + m_padding,
+		 m_butx, m_ta_gametime.get_y() + m_ta_gametime.get_h(),
 		 _("Players:"),
 		 UI::Align_Left),
 	m_ta_players(this, m_description_column_tab, m_label_players.get_y(),
@@ -71,7 +71,7 @@ FullscreenMenuLoadReplay::FullscreenMenuLoadReplay(Widelands::Game & g) :
 
 	m_label_win_condition
 		(this,
-		 m_butx, m_ta_players.get_y() + m_ta_players.get_h() + m_padding,
+		 m_butx, m_ta_players.get_y() + m_ta_players.get_h(),
 		 _("Win Condition:"),
 		 UI::Align_Left),
 	m_ta_win_condition(this, m_description_column_tab, m_label_win_condition.get_y(),
@@ -79,7 +79,7 @@ FullscreenMenuLoadReplay::FullscreenMenuLoadReplay(Widelands::Game & g) :
 
 	m_delete
 		(this, "delete",
-		 m_butx, m_ta_win_condition.get_y() + m_ta_win_condition.get_h() + m_padding,
+		 m_butx, m_ta_win_condition.get_y() + m_ta_win_condition.get_h() + 3 * m_padding,
 		 m_butw, m_buth,
 		 g_gr->images().get("pics/but0.png"),
 		 _("Delete"), std::string(), false, false),

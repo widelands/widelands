@@ -49,8 +49,8 @@ struct FullscreenMenuLoadMapOrGame : public FullscreenMenuBase {
 		FullscreenMenuBase("choosemapmenu.jpg"),
 
 		// Values for alignment and size
-		m_padding (5),
-		m_space   (25),
+		m_padding(4),
+		m_indent(10),
 		m_margin_right(15),
 		m_maplistx(get_w() *  47 / 2500),
 		m_maplisty(get_h() * 17 / 50),
@@ -73,26 +73,22 @@ struct FullscreenMenuLoadMapOrGame : public FullscreenMenuBase {
 		  (this, "ok",
 			get_w() - m_margin_right - m_butw, m_buty, m_butw, m_buth,
 			g_gr->images().get("pics/but2.png"),
-			_("Load"), std::string(), false, false)
+			_("OK"), std::string(), false, false)
 	{}
-
-	const std::string & filename() {return m_filename;}
 
 	bool handle_key(bool down, SDL_keysym code) override {return FullscreenMenuBase::handle_key(down, code);}
 
 protected:
-	int32_t const    m_padding;
-	int32_t const    m_space;
-	int32_t const    m_margin_right;
-	int32_t const    m_maplistx, m_maplisty, m_maplistw, m_maplisth;
-	int32_t const    m_butx, m_buty, m_butw, m_buth;
-	int32_t const    m_nr_players_width;
-	int32_t const    m_description_column_tab;
+	int32_t const m_padding;
+	int32_t const m_indent;
+	int32_t const m_margin_right;
+	int32_t const m_maplistx, m_maplisty, m_maplistw, m_maplisth;
+	int32_t const m_butx, m_buty, m_butw, m_buth;
+	int32_t const m_nr_players_width;
+	int32_t const m_description_column_tab;
 
-	UI::Button                    m_back;
-	UI::Button                    m_ok;
-
-	std::string                   m_filename;
+	UI::Button    m_back;
+	UI::Button    m_ok;
 };
 
 

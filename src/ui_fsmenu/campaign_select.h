@@ -25,6 +25,7 @@
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
+#include "ui_fsmenu/load_map_or_game.h"
 
 /*
  * Fullscreen Menu for all Campaigns
@@ -34,7 +35,7 @@
  * UI 1 - Selection of Campaign
  *
  */
-struct FullscreenMenuCampaignSelect : public FullscreenMenuBase {
+struct FullscreenMenuCampaignSelect : public FullscreenMenuLoadMapOrGame {
 	FullscreenMenuCampaignSelect();
 	void clicked_back();
 	void clicked_ok();
@@ -44,30 +45,25 @@ struct FullscreenMenuCampaignSelect : public FullscreenMenuBase {
 	int32_t get_campaign();
 
 private:
-	uint32_t    m_butw;
-	uint32_t    m_buth;
-	uint32_t    m_fs;
-	std::string m_fn;
+	UI::Textarea                  m_title;
+	UI::Textarea                  m_label_mapname;
+	UI::MultilineTextarea         m_ta_mapname;
+	UI::Textarea                  m_label_difficulty;
+	UI::MultilineTextarea         m_ta_difficulty;
+	UI::Textarea                  m_label_description;
+	UI::MultilineTextarea         m_ta_description;
 
-	UI::Textarea                             title;
-	UI::Textarea                             label_campname;
-	UI::Textarea                             tacampname;
-	UI::Textarea                             label_difficulty;
-	UI::MultilineTextarea                   tadifficulty;
-	UI::Textarea                             label_campdescr;
-	UI::MultilineTextarea                   tacampdescr;
-	UI::Button                               b_ok, back;
-	UI::Listselect<const char *>             m_list;
+	UI::Listselect<const char *>  m_list;
 
 	/// Variables used for exchange between the two Campaign UIs and
 	/// Game::run_campaign
-	int32_t                                           campaign;
+	int32_t                       campaign;
 };
 /*
  * UI 2 - Selection of a map
  *
  */
-struct FullscreenMenuCampaignMapSelect : public FullscreenMenuBase {
+struct FullscreenMenuCampaignMapSelect : public FullscreenMenuLoadMapOrGame {
 	FullscreenMenuCampaignMapSelect();
 	void clicked_back();
 	void clicked_ok();
@@ -78,23 +74,17 @@ struct FullscreenMenuCampaignMapSelect : public FullscreenMenuBase {
 	void set_campaign(uint32_t);
 
 private:
-	uint32_t    m_butw;
-	uint32_t    m_buth;
-	uint32_t    m_fs;
-	std::string m_fn;
+	UI::Textarea                  m_title;
+	UI::Textarea                  m_label_mapname;
+	UI::MultilineTextarea         m_ta_mapname;
+	UI::Textarea                  m_label_author;
+	UI::MultilineTextarea         m_ta_author;
+	UI::Textarea                  m_label_description;
+	UI::MultilineTextarea         m_ta_description;
 
-	UI::Textarea                            title;
-	UI::Textarea                            label_mapname;
-	UI::Textarea                            tamapname;
-	UI::Textarea                            label_author;
-	UI::Textarea                            taauthor;
-	UI::Textarea                            label_mapdescr;
-	UI::MultilineTextarea                  tamapdescr;
-	UI::Button                              b_ok, back;
-	UI::Listselect<std::string>             m_list;
-	uint32_t                                campaign;
-	std::string                             campmapfile;
-
+	UI::Listselect<std::string>   m_list;
+	uint32_t                      campaign;
+	std::string                   campmapfile;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_CAMPAIGN_SELECT_H

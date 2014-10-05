@@ -84,6 +84,8 @@ private:
 	UI::Checkbox* _add_tag_checkbox(UI::Box*, std::string, std::string);
 	void _tagbox_changed(int32_t, bool);
 
+	int32_t const                 m_checkbox_space;
+
 	UI::Textarea                  m_title;
 	UI::Textarea                  m_label_mapname;
 	UI::MultilineTextarea         m_ta_mapname;
@@ -93,6 +95,7 @@ private:
 	UI::MultilineTextarea         m_ta_size;
 	UI::Textarea                  m_label_players;
 	UI::MultilineTextarea         m_ta_players;
+	UI::Textarea                  m_label_description;
 	UI::MultilineTextarea         m_ta_description;
 
 	UI::Textarea                  m_label_load_map_as_scenario;
@@ -100,7 +103,7 @@ private:
 	UI::Checkbox*                 m_cb_show_all_maps;
 	std::vector<UI::Checkbox*>    m_tags_checkboxes;
 
-	UI::Table<uintptr_t const>    m_table;
+	UI::Table<uintptr_t const>    m_list;
 	std::string                   m_curdir, m_basedir;
 	Map::ScenarioTypes            m_scenario_types;
 

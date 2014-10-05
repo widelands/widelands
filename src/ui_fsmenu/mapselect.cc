@@ -45,6 +45,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 		(GameSettingsProvider* const settings, GameController* const ctrl) :
 	FullscreenMenuLoadMapOrGame(),
 
+	m_checkbox_space(25),
+
 	// Main title
 	m_title
 		(this,
@@ -58,20 +60,20 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 		 m_butx, m_maplisty,
 		 _("Map Name:"),
 		 UI::Align_Left),
-	m_ta_mapname(this, m_butx, m_label_mapname.get_y() + m_label_mapname.get_h(),
-					get_w() - m_butx - m_margin_right, 35),
+	m_ta_mapname(this, m_butx + m_indent, m_label_mapname.get_y() + m_label_mapname.get_h() + m_padding,
+					get_w() - m_butx - m_indent - m_margin_right, 35),
 
 	m_label_author
 		(this,
 		 m_butx, m_ta_mapname.get_y() + m_ta_mapname.get_h() + m_padding,
-		 _("Author:"),
+		 _("Authors:"),
 		 UI::Align_Left),
 	m_ta_author(this, m_description_column_tab, m_label_author.get_y(),
 				get_w() - m_butx - m_margin_right, 20),
 
 	m_label_size
 		(this,
-		 m_butx, m_ta_author.get_y() + m_ta_author.get_h() + m_padding,
+		 m_butx, m_ta_author.get_y() + m_ta_author.get_h(),
 		 _("Size:"),
 		 UI::Align_Left),
 	m_ta_size(this, m_description_column_tab, m_label_size.get_y(),
@@ -79,43 +81,45 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 
 	m_label_players
 		(this,
-		 m_butx, m_ta_size.get_y() + m_ta_size.get_h() + m_padding,
+		 m_butx, m_ta_size.get_y() + m_ta_size.get_h(),
 		 _("Players:"),
 		 UI::Align_Left),
 	m_ta_players(this, m_description_column_tab, m_label_players.get_y(),
 					 get_w() - m_butx - m_margin_right, 20),
 
+	m_label_description
+		(this,
+		 m_butx, m_ta_players.get_y() + m_ta_players.get_h() + 3 * m_padding,
+		 _("Description:"),
+		 UI::Align_Left),
 	m_ta_description
 		(this,
-		 m_maplistx + m_maplistw + 15,
-		 m_ta_players.get_y() + m_ta_players.get_h() + 2 * m_padding,
-		 get_w() - m_maplistx - m_maplistw - m_margin_right - 15,
-		 m_buty - m_ta_players.get_y() - m_ta_players.get_h()  - 4 * m_padding),
+		 m_butx + m_indent,
+		 m_label_description.get_y() + m_label_description.get_h() + m_padding,
+		 get_w() - m_butx - m_indent - m_margin_right,
+		 m_buty - m_label_description.get_y() - m_label_description.get_h()  - 4 * m_padding),
 
 	// Scenario checkbox
 	m_label_load_map_as_scenario
 		(this,
-		 m_maplistx + 25, m_maplisty - 30,
+		 m_maplistx + m_checkbox_space, m_maplisty - 35,
 		 _("Load map as scenario"),
 		 UI::Align_Left),
-	m_cb_load_map_as_scenario (this, Point (m_maplistx, m_maplisty - 30)),
+	m_cb_load_map_as_scenario (this, Point (m_maplistx, m_maplisty - 35)),
 
 	// Map table
-	m_table
-		(this,
-		 m_maplistx, m_maplisty,
-		 m_maplistw, get_h() * 6083 / 10000),
-	m_curdir("maps"),
-	m_basedir("maps"),
+	m_list(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth),
+
+	// Runtime variables
+	m_curdir("maps"), m_basedir("maps"),
 
 	m_settings(settings),
 	m_ctrl(ctrl)
 {
-
 	m_back.set_tooltip(_("Return to the main menu"));
 	m_ok.set_tooltip(_("Play this map"));
 	m_ta_mapname.set_tooltip(_("The name of this map"));
-	m_ta_author.set_tooltip(_("Who made this map"));
+	m_ta_author.set_tooltip(_("The designers of this map"));
 	m_ta_players.set_tooltip(_("The number of players"));
 	m_ta_size.set_tooltip(_("The size of this map (Width x Height)"));
 	m_ta_description.set_tooltip(_("Story and hints"));
@@ -126,48 +130,49 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	m_title.set_textstyle(ts_big());
 
 	/** TRANSLATORS: Column title for number of players in map list */
-	m_table.add_column(m_nr_players_width, _("Pl."), "", UI::Align_HCenter);
-	m_table.add_column
-		(m_table.get_w() - m_nr_players_width, _("Map Name"), "", UI::Align_Left);
-	m_table.set_column_compare
+	m_list.add_column(m_nr_players_width, _("Pl."), "", UI::Align_HCenter);
+	m_list.add_column
+		(m_list.get_w() - m_nr_players_width, _("Map Name"), "", UI::Align_Left);
+	m_list.set_column_compare
 		(1,
 		 boost::bind
 		 (&FullscreenMenuMapSelect::compare_maprows, this, _1, _2));
-	m_table.set_sort_column(0);
+	m_list.set_sort_column(0);
 	m_cb_load_map_as_scenario.set_state(false);
 	m_cb_load_map_as_scenario.set_enabled(false);
 
-	m_table.selected.connect(boost::bind(&FullscreenMenuMapSelect::map_selected, this, _1));
-	m_table.double_clicked.connect(boost::bind(&FullscreenMenuMapSelect::double_clicked, this, _1));
+	m_list.selected.connect(boost::bind(&FullscreenMenuMapSelect::map_selected, this, _1));
+	m_list.double_clicked.connect(boost::bind(&FullscreenMenuMapSelect::double_clicked, this, _1));
 
-	UI::Box* vbox = new UI::Box(this, m_maplistx, m_maplisty - 150, UI::Box::Horizontal, 25, get_w());
+	UI::Box* vbox = new UI::Box(this, m_maplistx, m_maplisty - 150,
+										 UI::Box::Horizontal, m_checkbox_space, get_w());
 	m_cb_show_all_maps = _add_tag_checkbox(vbox, "blumba", _("Show all maps"));
 	m_tags_checkboxes.clear(); // Remove this again, it is a special tag checkbox
 	m_cb_show_all_maps->set_state(true);
-	vbox->set_size(get_w() - 2 * m_maplistx, 25);
+	vbox->set_size(get_w() - 2 * m_maplistx, m_checkbox_space);
 
 	vbox = new UI::Box(this,
 							 m_maplistx, vbox->get_y() + vbox->get_h() + m_padding,
-							 UI::Box::Horizontal, 25, get_w());
+							 UI::Box::Horizontal, m_checkbox_space, get_w());
 	_add_tag_checkbox(vbox, "official", _("Official Map"));
 	_add_tag_checkbox(vbox, "seafaring", _("Seafaring Map"));
 	_add_tag_checkbox(vbox, "unbalanced", _("Unbalanced"));
-	vbox->set_size(get_w() - 2 * m_maplistx, 25);
+	vbox->set_size(get_w() - 2 * m_maplistx, m_checkbox_space);
 
 	vbox = new UI::Box(this,
 							 m_maplistx, vbox->get_y() + vbox->get_h() + m_padding,
-							 UI::Box::Horizontal, 25, get_w());
+							 UI::Box::Horizontal, m_checkbox_space, get_w());
 	_add_tag_checkbox(vbox, "ffa", _("Free for all"));
 	_add_tag_checkbox(vbox, "1v1", _("1v1"));
-	vbox->set_size(get_w() - 2 * m_maplistx, 25);
+	vbox->set_size(get_w() - 2 * m_maplistx, m_checkbox_space);
 
 	vbox = new UI::Box(this,
 							 m_maplistx, vbox->get_y() + vbox->get_h() + m_padding,
-							 UI::Box::Horizontal, 25, get_w());
+							 UI::Box::Horizontal, m_checkbox_space, get_w());
 	_add_tag_checkbox(vbox, "2teams", _("Teams of 2"));
 	_add_tag_checkbox(vbox, "3teams", _("Teams of 3"));
 	_add_tag_checkbox(vbox, "4teams", _("Teams of 4"));
-	vbox->set_size(get_w() - 2 * m_maplistx, 25);
+	vbox->set_size(get_w() - 2 * m_maplistx, m_checkbox_space);
 
 	m_scenario_types = m_settings->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO;
 	if (m_scenario_types) {
@@ -178,7 +183,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 		m_label_load_map_as_scenario.set_visible(false);
 	}
 
-	m_table.focus();
+	m_list.focus();
 	fill_list();
 }
 
@@ -192,8 +197,8 @@ void FullscreenMenuMapSelect::think()
 bool FullscreenMenuMapSelect::compare_maprows
 	(uint32_t rowa, uint32_t rowb)
 {
-	const MapData & r1 = m_maps_data[m_table[rowa]];
-	const MapData & r2 = m_maps_data[m_table[rowb]];
+	const MapData & r1 = m_maps_data[m_list[rowa]];
+	const MapData & r2 = m_maps_data[m_list[rowb]];
 
 	if (!r1.width && !r2.width) {
 		return r1.name < r2.name;
@@ -212,15 +217,15 @@ bool FullscreenMenuMapSelect::is_scenario()
 
 MapData const * FullscreenMenuMapSelect::get_map() const
 {
-	if (!m_table.has_selection())
+	if (!m_list.has_selection())
 		return nullptr;
-	return &m_maps_data[m_table.get_selected()];
+	return &m_maps_data[m_list.get_selected()];
 }
 
 
 void FullscreenMenuMapSelect::ok()
 {
-	const MapData & mapdata = m_maps_data[m_table.get_selected()];
+	const MapData & mapdata = m_maps_data[m_list.get_selected()];
 
 	if (!mapdata.width) {
 		m_curdir = mapdata.filename;
@@ -237,7 +242,7 @@ void FullscreenMenuMapSelect::ok()
  */
 void FullscreenMenuMapSelect::map_selected(uint32_t)
 {
-	const MapData & map = m_maps_data[m_table.get_selected()];
+	const MapData & map = m_maps_data[m_list.get_selected()];
 
 	if (map.width) {
 		// Translate the map data
@@ -245,7 +250,8 @@ void FullscreenMenuMapSelect::map_selected(uint32_t)
 		m_ta_mapname.set_text(_(map.name));
 		m_ta_author.set_text(map.author);
 		m_ta_size.set_text((boost::format("%u  x  %u") % map.width % map.height).str());
-		m_ta_players.set_text(std::to_string(static_cast<unsigned int>(map.nrplayers)));
+		m_ta_players.set_text((boost::format(ngettext("%u Player", "%u Players", map.nrplayers))
+				% map.nrplayers).str());
 		m_ta_description.set_text(_(map.description) +
 										  (map.hint.empty() ? "" : (std::string("\n") + _(map.hint))));
 		m_cb_load_map_as_scenario.set_enabled(map.scenario);
@@ -291,7 +297,7 @@ void FullscreenMenuMapSelect::double_clicked(uint32_t) {
 void FullscreenMenuMapSelect::fill_list()
 {
 	m_maps_data.clear();
-	m_table.clear();
+	m_list.clear();
 
 	if (m_settings->settings().maps.empty()) {
 		// This is the normal case
@@ -312,7 +318,7 @@ void FullscreenMenuMapSelect::fill_list()
 	#endif
 			m_maps_data.push_back(map);
 			UI::Table<uintptr_t const>::EntryRecord & te =
-				m_table.add(m_maps_data.size() - 1);
+				m_list.add(m_maps_data.size() - 1);
 
 			te.set_string(0, "");
 			std::string parent_string =
@@ -345,7 +351,7 @@ void FullscreenMenuMapSelect::fill_list()
 			dir.filename = name;
 
 			m_maps_data.push_back(dir);
-			UI::Table<uintptr_t const>::EntryRecord & te = m_table.add(m_maps_data.size() - 1);
+			UI::Table<uintptr_t const>::EntryRecord & te = m_list.add(m_maps_data.size() - 1);
 
 			te.set_string(0, "");
 			te.set_picture
@@ -392,7 +398,7 @@ void FullscreenMenuMapSelect::fill_list()
 
 
 					m_maps_data.push_back(mapdata);
-					UI::Table<uintptr_t const>::EntryRecord & te = m_table.add(m_maps_data.size() - 1);
+					UI::Table<uintptr_t const>::EntryRecord & te = m_list.add(m_maps_data.size() - 1);
 
 					te.set_string(0, (boost::format("(%i)") % mapdata.nrplayers).str());
 
@@ -447,7 +453,7 @@ void FullscreenMenuMapSelect::fill_list()
 
 				// Finally write the entry to the list
 				m_maps_data.push_back(mapdata);
-				UI::Table<uintptr_t const>::EntryRecord & te = m_table.add(m_maps_data.size() - 1);
+				UI::Table<uintptr_t const>::EntryRecord & te = m_list.add(m_maps_data.size() - 1);
 
 				te.set_string(0, (boost::format("(%i)") % mapdata.nrplayers).str());
 				te.set_picture
@@ -471,7 +477,7 @@ void FullscreenMenuMapSelect::fill_list()
 
 				// Finally write the entry to the list
 				m_maps_data.push_back(mapdata);
-				UI::Table<uintptr_t const>::EntryRecord & te = m_table.add(m_maps_data.size() - 1);
+				UI::Table<uintptr_t const>::EntryRecord & te = m_list.add(m_maps_data.size() - 1);
 
 				te.set_string(0, (boost::format("(%i)") % mapdata.nrplayers).str());
 				te.set_picture
@@ -481,10 +487,10 @@ void FullscreenMenuMapSelect::fill_list()
 		}
 	}
 
-	m_table.sort();
+	m_list.sort();
 
-	if (m_table.size())
-		m_table.select(0);
+	if (m_list.size())
+		m_list.select(0);
 }
 
 /*
@@ -504,7 +510,7 @@ UI::Checkbox * FullscreenMenuMapSelect::_add_tag_checkbox
 	UI::Textarea * ta = new UI::Textarea(box, displ_name, UI::Align_CenterLeft);
 	box->add_space(m_padding);
 	box->add(ta, UI::Box::AlignLeft);
-	box->add_space(m_space);
+	box->add_space(m_checkbox_space);
 
 	m_tags_checkboxes.push_back(cb);
 

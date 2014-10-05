@@ -85,7 +85,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 	posy += 40 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, descr_label_w, 20, _("Author:"), UI::Align_CenterLeft);
+		(this, posx, posy, descr_label_w, 20, _("Authors:"), UI::Align_CenterLeft);
 	m_author =
 		new UI::Textarea
 			(this, posx + descr_label_w, posy, 200, 20, "---", UI::Align_CenterLeft);

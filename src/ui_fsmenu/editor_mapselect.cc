@@ -52,20 +52,20 @@ FullscreenMenuEditorMapSelect::FullscreenMenuEditorMapSelect() :
 		 m_butx, m_maplisty,
 		 _("Map Name:"),
 		 UI::Align_Left),
-	m_ta_mapname(this, m_butx, m_label_mapname.get_y() + m_label_mapname.get_h(),
-					get_w() - m_butx - m_margin_right, 35),
+	m_ta_mapname(this, m_butx + m_indent, m_label_mapname.get_y() + m_label_mapname.get_h() + m_padding,
+					get_w() - m_butx - m_indent - m_margin_right, 35),
 
 	m_label_author
 		(this,
 		 m_butx, m_ta_mapname.get_y() + m_ta_mapname.get_h() + m_padding,
-		 _("Author:"),
+		 _("Authors:"),
 		 UI::Align_Left),
 	m_ta_author(this, m_description_column_tab, m_label_author.get_y(),
 				get_w() - m_butx - m_margin_right, 20),
 
 	m_label_size
 		(this,
-		 m_butx, m_ta_author.get_y() + m_ta_author.get_h() + m_padding,
+		 m_butx, m_ta_author.get_y() + m_ta_author.get_h(),
 		 _("Size:"),
 		 UI::Align_Left),
 	m_ta_size(this, m_description_column_tab, m_label_size.get_y(),
@@ -73,24 +73,26 @@ FullscreenMenuEditorMapSelect::FullscreenMenuEditorMapSelect() :
 
 	m_label_players
 		(this,
-		 m_butx, m_ta_size.get_y() + m_ta_size.get_h() + m_padding,
+		 m_butx, m_ta_size.get_y() + m_ta_size.get_h(),
 		 _("Players:"),
 		 UI::Align_Left),
 	m_ta_players(this, m_description_column_tab, m_label_players.get_y(),
 					 get_w() - m_butx - m_margin_right, 20),
 
+	m_label_description
+		(this,
+		 m_butx, m_ta_players.get_y() + m_ta_players.get_h() + 3 * m_padding,
+		 _("Description:"),
+		 UI::Align_Left),
 	m_ta_description
 		(this,
-		 m_maplistx + m_maplistw + 15,
-		 m_ta_players.get_y() + m_ta_players.get_h() + 2 * m_padding,
-		 get_w() - m_maplistx - m_maplistw - m_margin_right - 15,
-		 m_buty - m_ta_players.get_y() - m_ta_players.get_h()  - 4 * m_padding),
+		 m_butx + m_indent,
+		 m_label_description.get_y() + m_label_description.get_h() + m_padding,
+		 get_w() - m_butx - m_indent - m_margin_right,
+		 m_buty - m_label_description.get_y() - m_label_description.get_h()  - 4 * m_padding),
 
 	// Map table
-	m_list
-		(this,
-		 m_maplistx, m_maplisty,
-		 m_maplistw, get_h() * 6083 / 10000),
+	m_list(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth),
 
 	// Runtime variables
 	m_curdir("maps"), m_basedir("maps")
@@ -98,7 +100,7 @@ FullscreenMenuEditorMapSelect::FullscreenMenuEditorMapSelect() :
 	m_back.set_tooltip(_("Return to the main editor menu"));
 	m_ok.set_tooltip(_("Edit this map"));
 	m_ta_mapname.set_tooltip(_("The name of this map"));
-	m_ta_author.set_tooltip(_("Who made this map"));
+	m_ta_author.set_tooltip(_("The designers of this map"));
 	m_ta_players.set_tooltip(_("The number of players"));
 	m_ta_size.set_tooltip(_("The size of this map (Width x Height)"));
 	m_ta_description.set_tooltip(_("Story and hints"));
