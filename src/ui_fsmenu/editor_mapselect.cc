@@ -126,18 +126,17 @@ void FullscreenMenuEditorMapSelect::ok()
 {
 	std::string mapfilename(m_list.get_selected());
 
-	if
-		(g_fs->is_directory(mapfilename.c_str())
+	if (g_fs->is_directory(mapfilename.c_str())
 		 &&
-		 !WidelandsMapLoader::is_widelands_map(mapfilename))
-	{
+		 !WidelandsMapLoader::is_widelands_map(mapfilename)) {
 
 		m_curdir = mapfilename;
 		m_list.clear();
 		m_mapfiles.clear();
 		fill_list();
-	} else
+	} else {
 		end_modal(1);
+	}
 }
 
 
@@ -208,35 +207,30 @@ void FullscreenMenuEditorMapSelect::fill_list()
 			 g_gr->images().get("pics/ls_dir.png"));
 	}
 
-	const FilenameSet::const_iterator mapfiles_end = m_mapfiles.end();
-	for
-		(FilenameSet::const_iterator pname = m_mapfiles.begin();
-		 pname != mapfiles_end;
-		 ++pname)
-	{
-		const char * const name = pname->c_str();
-		if
-			(strcmp(FileSystem::fs_filename(name), ".")    &&
-			 // Upsy, appeared again. ignore
-			 strcmp(FileSystem::fs_filename(name), "..")   &&
-			 g_fs->is_directory(name)                       &&
-			 !WidelandsMapLoader::is_widelands_map(name))
+	// Now we add the other directories
+	for (const std::string& dirfilename : m_mapfiles) {
+		const char * const name = dirfilename.c_str();
 
-		m_list.add
-			(FileSystem::fs_filename(name),
-			 name,
-			 g_gr->images().get("pics/ls_dir.png"));
+		if (strcmp(FileSystem::fs_filename(name), ".")  &&
+			 // Upsy, appeared again. ignore
+			 strcmp(FileSystem::fs_filename(name), "..") &&
+			 g_fs->is_directory(name)                    &&
+			 !WidelandsMapLoader::is_widelands_map(name)) {
+
+			m_list.add
+				(FileSystem::fs_filename(name),
+				 name,
+				 g_gr->images().get("pics/ls_dir.png"));
+		}
 	}
 
+	// Finally, we add the maps
 	Widelands::Map map;
 
-	for
-		(FilenameSet::const_iterator pname = m_mapfiles.begin();
-		 pname != mapfiles_end;
-		 ++pname)
-	{
-		char const * const name = pname->c_str();
+	for (const std::string& mapfilename : m_mapfiles) {
+		char const * const name = mapfilename.c_str();
 		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(name);
+
 		if (ml.get() != nullptr) {
 			try {
 				ml->preload_map(true);
@@ -249,6 +243,7 @@ void FullscreenMenuEditorMapSelect::fill_list()
 		}
 	}
 
-	if (m_list.size())
+	if (m_list.size()) {
 		m_list.select(0);
+	}
 }
