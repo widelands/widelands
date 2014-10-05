@@ -43,7 +43,7 @@ FullscreenMenuEditorMapSelect::FullscreenMenuEditorMapSelect() :
 	// Main title
 	m_title
 		(this,
-		 get_w() / 2, get_h() * 9 / 50,
+		 get_w() / 2, m_maplisty / 3,
 		 _("Choose a map"), UI::Align_HCenter),
 
 	// Map description
@@ -53,7 +53,7 @@ FullscreenMenuEditorMapSelect::FullscreenMenuEditorMapSelect() :
 		 _("Map Name:"),
 		 UI::Align_Left),
 	m_ta_mapname(this, m_butx + m_indent, m_label_mapname.get_y() + m_label_mapname.get_h() + m_padding,
-					get_w() - m_butx - m_indent - m_margin_right, 35),
+					get_w() - m_butx - m_indent - m_margin_right, 2 * m_label_height - m_padding),
 
 	m_label_author
 		(this,
@@ -61,7 +61,7 @@ FullscreenMenuEditorMapSelect::FullscreenMenuEditorMapSelect() :
 		 _("Authors:"),
 		 UI::Align_Left),
 	m_ta_author(this, m_description_column_tab, m_label_author.get_y(),
-				get_w() - m_butx - m_margin_right, 20),
+				get_w() - m_butx - m_margin_right, m_label_height),
 
 	m_label_size
 		(this,
@@ -69,7 +69,7 @@ FullscreenMenuEditorMapSelect::FullscreenMenuEditorMapSelect() :
 		 _("Size:"),
 		 UI::Align_Left),
 	m_ta_size(this, m_description_column_tab, m_label_size.get_y(),
-				 get_w() - m_butx - m_margin_right, 20),
+				 get_w() - m_butx - m_margin_right, m_label_height),
 
 	m_label_players
 		(this,
@@ -77,7 +77,7 @@ FullscreenMenuEditorMapSelect::FullscreenMenuEditorMapSelect() :
 		 _("Players:"),
 		 UI::Align_Left),
 	m_ta_players(this, m_description_column_tab, m_label_players.get_y(),
-					 get_w() - m_butx - m_margin_right, 20),
+					 get_w() - m_butx - m_margin_right, m_label_height),
 
 	m_label_description
 		(this,

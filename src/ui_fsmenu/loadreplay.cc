@@ -41,7 +41,7 @@ FullscreenMenuLoadReplay::FullscreenMenuLoadReplay(Widelands::Game & g) :
 	// Main title
 	m_title
 		(this,
-		 get_w() / 2, get_h() * 3 / 20,
+		 get_w() / 2, m_maplisty / 3,
 		 _("Choose a replay"), UI::Align_HCenter),
 
 	// Replay description
@@ -51,7 +51,7 @@ FullscreenMenuLoadReplay::FullscreenMenuLoadReplay(Widelands::Game & g) :
 		 _("Map Name:"),
 		 UI::Align_Left),
 	m_ta_mapname(this, m_butx + m_indent, m_label_mapname.get_y() + m_label_mapname.get_h() + m_padding,
-					get_w() - m_butx - m_indent - m_margin_right, 35),
+					get_w() - m_butx - m_indent - m_margin_right, 2 * m_label_height - m_padding),
 
 	m_label_gametime
 		(this,
@@ -59,7 +59,7 @@ FullscreenMenuLoadReplay::FullscreenMenuLoadReplay(Widelands::Game & g) :
 		 _("Gametime:"),
 		 UI::Align_Left),
 	m_ta_gametime(this, m_description_column_tab, m_label_gametime.get_y(),
-					 get_w() - m_butx - m_margin_right, 20),
+					 get_w() - m_butx - m_margin_right, m_label_height),
 
 	m_label_players
 		(this,
@@ -67,7 +67,7 @@ FullscreenMenuLoadReplay::FullscreenMenuLoadReplay(Widelands::Game & g) :
 		 _("Players:"),
 		 UI::Align_Left),
 	m_ta_players(this, m_description_column_tab, m_label_players.get_y(),
-					 get_w() - m_butx - m_margin_right, 20),
+					 get_w() - m_butx - m_margin_right, m_label_height),
 
 	m_label_win_condition
 		(this,
@@ -75,7 +75,7 @@ FullscreenMenuLoadReplay::FullscreenMenuLoadReplay(Widelands::Game & g) :
 		 _("Win Condition:"),
 		 UI::Align_Left),
 	m_ta_win_condition(this, m_description_column_tab, m_label_win_condition.get_y(),
-							 get_w() - m_butx - m_margin_right, 20),
+							 get_w() - m_butx - m_margin_right, m_label_height),
 
 	m_delete
 		(this, "delete",

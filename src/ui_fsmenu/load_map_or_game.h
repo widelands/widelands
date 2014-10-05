@@ -51,6 +51,7 @@ struct FullscreenMenuLoadMapOrGame : public FullscreenMenuBase {
 		// Values for alignment and size
 		m_padding(4),
 		m_indent(10),
+		m_label_height(20),
 		m_margin_right(15),
 		m_maplistx(get_w() *  47 / 2500),
 		m_maplisty(get_h() * 17 / 50),
@@ -81,6 +82,7 @@ struct FullscreenMenuLoadMapOrGame : public FullscreenMenuBase {
 protected:
 	int32_t const m_padding;
 	int32_t const m_indent;
+	int32_t const m_label_height;
 	int32_t const m_margin_right;
 	int32_t const m_maplistx, m_maplisty, m_maplistw, m_maplisth;
 	int32_t const m_butx, m_buty, m_butw, m_buth;

@@ -21,6 +21,8 @@
 
 #include <memory>
 
+#include <boost/format.hpp>
+
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
@@ -45,7 +47,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 	// Main Title
 	m_title
 		(this,
-		 get_w() / 2, get_h() / 25,
+		 get_w() / 2, m_maplisty / 3,
 		 _("Choose a campaign"),
 		 UI::Align_HCenter),
 
@@ -56,7 +58,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 		 _("Campaign:"),
 		 UI::Align_Left),
 	m_ta_mapname(this, m_butx + m_indent, m_label_mapname.get_y() + m_label_mapname.get_h() + m_padding,
-					get_w() - m_butx - m_indent - m_margin_right, 35),
+					get_w() - m_butx - m_indent - m_margin_right, 2 * m_label_height - m_padding),
 
 	m_label_difficulty
 		(this,
@@ -65,7 +67,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 		 UI::Align_Left),
 	m_ta_difficulty(this, m_butx + m_indent,
 						 m_label_difficulty.get_y() + m_label_difficulty.get_h() + m_padding,
-						 get_w() - m_butx - m_indent - m_margin_right, 35),
+						 get_w() - m_butx - m_indent - m_margin_right, 2 * m_label_height - m_padding),
 
 	m_label_description
 		(this,
@@ -80,10 +82,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 		 m_buty - m_label_description.get_y() - m_label_description.get_h()  - 4 * m_padding),
 
 	// Campaign list
-	m_list
-		(this,
-		 m_maplistx, m_maplisty,
-		 m_maplistw, get_h() * 6083 / 10000)
+	m_list(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth)
 {
 	m_back.set_tooltip(_("Return to the main menu"));
 	m_ok.set_tooltip(_("Play this campaign"));
@@ -123,7 +122,7 @@ int32_t FullscreenMenuCampaignSelect::get_campaign()
 }
 
 /// Pictorial descriptions of difficulty levels.
-static char const * const dif_picture_filenames[] = {
+static char const * const difficulty_picture_filenames[] = {
 	"pics/novalue.png",
 	"pics/easy.png",
 	"pics/challenging.png",
@@ -141,29 +140,22 @@ void FullscreenMenuCampaignSelect::campaign_selected(uint32_t const i)
 		// enable OK button
 		m_ok.set_enabled(true);
 
-		// predefine the used variables
-		char cname       [sizeof("campname4294967296")];
-		char cdifficulty [sizeof("campdiff4294967296")];
-		char cdif_descr[sizeof("campdiffdescr4294967296")];
-		char cdescription[sizeof("campdesc4294967296")];
-
 		Profile prof("campaigns/cconfig", nullptr, "maps");
 		Section & s = prof.get_safe_section("global");
 
-		// add I to basic section name
-		sprintf(cname,        "campname%u", i);
-		sprintf(cdifficulty,  "campdiff%u", i);
-		sprintf(cdescription, "campdesc%u", i);
-		sprintf(cdif_descr, "campdiffdescr%u", i);
+		const std::string cname = (boost::format("campname%u") % i).str();
+		const std::string cdifficulty = (boost::format("campdiff%u") % i).str();
+		const std::string cdif_descr = (boost::format("campdiffdescr%u") % i).str();
+		const std::string cdescription = (boost::format("campdesc%u") % i).str();
 
-		s.get_natural(cdifficulty);
+		s.get_natural(cdifficulty.c_str());
 
 		std::string dif_description = s.get_string
-			(cdif_descr, _("[No value found]"));
+			(cdif_descr.c_str(), _("[No value found]"));
 
-		m_ta_mapname .set_text(s.get_string(cname,   _("[No value found]")));
-		m_ta_difficulty.set_text(dif_description);
-		m_ta_description.set_text(s.get_string(cdescription, _("[No value found]")));
+		m_ta_mapname .set_text(s.get_string(cname.c_str(), _("[No value found]")));
+		m_ta_difficulty.set_text(dif_description.c_str());
+		m_ta_description.set_text(s.get_string(cdescription.c_str(), _("[No value found]")));
 	} else { // normally never here
 		m_ok.set_enabled(false);
 		m_ta_mapname  .set_text(_("[Invalid entry]"));
@@ -196,45 +188,44 @@ void FullscreenMenuCampaignSelect::fill_list()
 	Profile campvis(cvs.get_path().c_str());
 	Section & c = campvis.get_safe_section("campaigns");
 
+	// Predefine variables, used in while-loop
 	uint32_t i = 0;
+	std::string csection = (boost::format("campsect%u") % i).str();
+	std::string cname;
+	std::string cdifficulty;
 
-	// predefine variables, used in while-loop
-	char cname      [sizeof("campname4294967296")];
-	char csection   [sizeof("campsect4294967296")];
-	char cdifficulty[sizeof("campdiff4294967296")];
+	while (s.get_string(csection.c_str())) {
 
-	sprintf(csection, "campsect%u", i);
-	while (s.get_string(csection)) {
-		// add i to the other strings the UI will search for
-		sprintf(cname,       "campname%u", i);
-		sprintf(cdifficulty, "campdiff%u", i);
+		cname = (boost::format("campname%u") % i).str();
+		cdifficulty = (boost::format("campdiff%u") % i).str();
 
 		// Only list visible campaigns
-		if (c.get_bool(csection)) {
+		if (c.get_bool(csection.c_str())) {
 
-			uint32_t dif = s.get_int(cdifficulty);
+			uint32_t difficulty = s.get_int(cdifficulty.c_str());
 			if
-				(sizeof (dif_picture_filenames)
+				(sizeof (difficulty_picture_filenames)
 				 /
-				 sizeof(*dif_picture_filenames)
+				 sizeof(*difficulty_picture_filenames)
 				 <=
-				 dif)
-				dif = 0;
+				 difficulty) {
+				difficulty = 0;
+			}
 
 			m_list.add
-				(s.get_string(cname, _("[No value found]")),
-				 s.get_string(csection),
-				 g_gr->images().get(dif_picture_filenames[dif]));
-
+				(s.get_string(cname.c_str(), _("[No value found]")),
+				 s.get_string(csection.c_str()),
+				 g_gr->images().get(difficulty_picture_filenames[difficulty]));
 		}
 
+		// Increase counter & csection
 		++i;
+		csection = (boost::format("campsect%u") % i).str();
 
-		// increase csection
-		sprintf(csection, "campsect%u", i);
-	} // while (s->get_string(csection))
-	if (m_list.size())
+	} // while (s.get_string(csection.c_str()))
+	if (m_list.size()) {
 		m_list.select(0);
+	}
 }
 
 
@@ -254,8 +245,13 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect() :
 	// Main title
 	m_title
 		(this,
-		 get_w() / 2, get_h() / 25,
+		 get_w() / 2, m_maplisty / 3,
 		 _("Choose a scenario"),
+		 UI::Align_HCenter),
+	m_subtitle
+		(this,
+		 get_w() / 2, m_maplisty / 3 + 50,
+		 "",
 		 UI::Align_HCenter),
 
 	// Map description
@@ -265,7 +261,7 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect() :
 		 _("Scenario:"),
 		 UI::Align_Left),
 	m_ta_mapname(this, m_butx + m_indent, m_label_mapname.get_y() + m_label_mapname.get_h() + m_padding,
-					get_w() - m_butx - m_indent - m_margin_right, 35),
+					get_w() - m_butx - m_indent - m_margin_right, 2 * m_label_height - m_padding),
 
 	m_label_author
 		(this,
@@ -273,7 +269,7 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect() :
 		 _("Authors:"),
 		 UI::Align_Left),
 	m_ta_author(this, m_butx + m_indent, m_label_author.get_y() + m_label_author.get_h() + m_padding,
-				get_w() - m_butx - m_indent - m_margin_right, 20),
+				get_w() - m_butx - m_indent - m_margin_right, m_label_height),
 
 	m_label_description
 		(this,
@@ -302,9 +298,6 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect() :
 	m_back.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuCampaignMapSelect::end_modal, boost::ref(*this), 0));
-
-	m_ok.set_font(font_small());
-	m_back.set_font(font_small());
 
 	m_title.set_textstyle(ts_big());
 
@@ -386,22 +379,14 @@ void FullscreenMenuCampaignMapSelect::fill_list()
 	Section & c = campvis.get_safe_section("campmaps");
 
 	// Set title of the page
-	char cname[sizeof("campname4294967296")];
-	sprintf(cname, "campname%u", campaign);
-	m_title.set_text(global_s.get_string(cname));
+	m_subtitle.set_text(global_s.get_string((boost::format("campname%u") % campaign).str().c_str()));
 
 	// Get section of campaign-maps
-	char csection[sizeof("campsect4294967296")];
-	sprintf(csection, "campsect%u", campaign);
-	std::string campsection = global_s.get_string(csection);
-	std::string mapsection;
-	uint32_t i = 0;
-	char number[sizeof("4294967296")];
+	std::string campsection = global_s.get_string((boost::format("campsect%u") % campaign).str().c_str());
 
 	// Create the entry we use to load the section of the map
-	mapsection = campsection;
-	sprintf(number, "%02u", i);
-	mapsection += number;
+	uint32_t i = 0;
+	std::string mapsection = campsection + (boost::format("%02i") % i).str();
 
 	// Add all visible entries to the list.
 	while (Section * const s = prof.get_section(mapsection.c_str())) {
@@ -415,9 +400,7 @@ void FullscreenMenuCampaignMapSelect::fill_list()
 		++i;
 
 		// increase mapsection
-		mapsection = campsection;
-		sprintf(number, "%02u", i);
-		mapsection += number;
+		mapsection = campsection + (boost::format("%02i") % i).str();
 	}
 	if (m_list.size())
 		m_list.select(0);

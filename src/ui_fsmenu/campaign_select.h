@@ -75,6 +75,7 @@ struct FullscreenMenuCampaignMapSelect : public FullscreenMenuLoadMapOrGame {
 
 private:
 	UI::Textarea                  m_title;
+	UI::Textarea                  m_subtitle;
 	UI::Textarea                  m_label_mapname;
 	UI::MultilineTextarea         m_ta_mapname;
 	UI::Textarea                  m_label_author;
