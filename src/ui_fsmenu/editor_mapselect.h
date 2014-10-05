@@ -37,7 +37,7 @@ struct FullscreenMenuEditorMapSelect : public FullscreenMenuLoadMapOrGame {
 	std::string get_map();
 
 private:
-	void ok();
+	void clicked_ok();
 	void map_selected(uint32_t);
 	void changed(bool);
 	void double_clicked(uint32_t);

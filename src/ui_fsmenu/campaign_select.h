@@ -37,14 +37,15 @@
  */
 struct FullscreenMenuCampaignSelect : public FullscreenMenuLoadMapOrGame {
 	FullscreenMenuCampaignSelect();
-	void clicked_back();
+
+	int32_t get_campaign();
+
+private:
 	void clicked_ok();
 	void campaign_selected(uint32_t);
 	void double_clicked(uint32_t);
 	void fill_list();
-	int32_t get_campaign();
 
-private:
 	UI::Textarea                  m_title;
 	UI::Textarea                  m_label_mapname;
 	UI::MultilineTextarea         m_ta_mapname;
@@ -65,15 +66,16 @@ private:
  */
 struct FullscreenMenuCampaignMapSelect : public FullscreenMenuLoadMapOrGame {
 	FullscreenMenuCampaignMapSelect();
-	void clicked_back();
-	void clicked_ok();
-	void map_selected(uint32_t);
-	void double_clicked(uint32_t);
-	void fill_list();
+
 	std::string get_map();
 	void set_campaign(uint32_t);
 
 private:
+	void clicked_ok();
+	void map_selected(uint32_t);
+	void double_clicked(uint32_t);
+	void fill_list();
+
 	UI::Textarea                  m_title;
 	UI::Textarea                  m_subtitle;
 	UI::Textarea                  m_label_mapname;

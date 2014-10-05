@@ -74,9 +74,8 @@ struct FullscreenMenuMapSelect : public FullscreenMenuLoadMapOrGame {
 	void think() override;
 
 private:
-	void ok();
+	void clicked_ok();
 	void map_selected(uint32_t);
-	void changed(bool);
 	void double_clicked(uint32_t);
 	void fill_list();
 	bool compare_maprows(uint32_t, uint32_t);

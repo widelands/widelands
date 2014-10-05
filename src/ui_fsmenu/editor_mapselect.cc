@@ -106,7 +106,7 @@ FullscreenMenuEditorMapSelect::FullscreenMenuEditorMapSelect() :
 	m_ta_description.set_tooltip(_("Story and hints"));
 
 	m_back.sigclicked.connect(boost::bind(&FullscreenMenuEditorMapSelect::end_modal, boost::ref(*this), 0));
-	m_ok.sigclicked.connect(boost::bind(&FullscreenMenuEditorMapSelect::ok, boost::ref(*this)));
+	m_ok.sigclicked.connect(boost::bind(&FullscreenMenuEditorMapSelect::clicked_ok, boost::ref(*this)));
 
 	m_title.set_textstyle(ts_big());
 
@@ -122,7 +122,7 @@ std::string FullscreenMenuEditorMapSelect::get_map()
 	return m_list.has_selection() ? m_list.get_selected() : nullptr;
 }
 
-void FullscreenMenuEditorMapSelect::ok()
+void FullscreenMenuEditorMapSelect::clicked_ok()
 {
 	std::string mapfilename(m_list.get_selected());
 
@@ -182,7 +182,7 @@ void FullscreenMenuEditorMapSelect::map_selected(uint32_t)
 /**
  * listbox got double clicked
  */
-void FullscreenMenuEditorMapSelect::double_clicked(uint32_t) {ok();}
+void FullscreenMenuEditorMapSelect::double_clicked(uint32_t) {clicked_ok();}
 
 /**
  * fill the file list

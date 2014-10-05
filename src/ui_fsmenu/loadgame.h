@@ -52,16 +52,16 @@ struct FullscreenMenuLoadGame : public FullscreenMenuLoadMapOrGame {
 
 	const std::string & filename() {return m_filename;}
 
-	void clicked_ok();
-	void clicked_delete();
-	void map_selected(uint32_t);
-	void double_clicked(uint32_t);
-	void fill_list();
 	void think();
 
 	bool handle_key(bool down, SDL_keysym code) override;
 
 private:
+	void clicked_ok();
+	void clicked_delete();
+	void map_selected(uint32_t);
+	void double_clicked(uint32_t);
+	void fill_list();
 	void no_selection();
 
 	UI::Textarea                  m_title;

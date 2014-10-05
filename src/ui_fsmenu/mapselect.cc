@@ -125,7 +125,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	m_ta_description.set_tooltip(_("Story and hints"));
 
 	m_back.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::end_modal, boost::ref(*this), 0));
-	m_ok.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::ok, boost::ref(*this)));
+	m_ok.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_ok, boost::ref(*this)));
 
 	m_title.set_textstyle(ts_big());
 
@@ -225,7 +225,7 @@ MapData const * FullscreenMenuMapSelect::get_map() const
 }
 
 
-void FullscreenMenuMapSelect::ok()
+void FullscreenMenuMapSelect::clicked_ok()
 {
 	const MapData & mapdata = m_maps_data[m_list.get_selected()];
 
@@ -276,7 +276,7 @@ void FullscreenMenuMapSelect::map_selected(uint32_t)
  * listbox got double clicked
  */
 void FullscreenMenuMapSelect::double_clicked(uint32_t) {
-	ok();
+	clicked_ok();
 }
 
 /**

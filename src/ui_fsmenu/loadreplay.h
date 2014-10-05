@@ -38,15 +38,14 @@ struct FullscreenMenuLoadReplay : public FullscreenMenuLoadMapOrGame {
 
 	const std::string& filename() {return m_filename;}
 
+	bool handle_key(bool down, SDL_keysym code) override;
+
+private:
 	void clicked_ok();
 	void clicked_delete();
 	void replay_selected(uint32_t);
 	void double_clicked(uint32_t);
 	void fill_list();
-
-	bool handle_key(bool down, SDL_keysym code) override;
-
-private:
 	void no_selection();
 
 	UI::Textarea                  m_title;
