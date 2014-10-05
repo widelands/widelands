@@ -49,9 +49,6 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	(Widelands::Game & g, GameSettingsProvider * gsp, GameController * gc) :
 	FullscreenMenuLoadMapOrGame(),
 
-	// Savegame / Map / Replay list
-	m_list(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth),
-
 	// Main title
 	m_title
 		(this,
@@ -64,20 +61,20 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 		 m_butx, m_maplisty,
 		 _("Map Name:"),
 		 UI::Align_Left),
-	m_tamapname(this, m_butx, m_label_mapname.get_y() + m_label_mapname.get_h(),
+	m_ta_mapname(this, m_butx, m_label_mapname.get_y() + m_label_mapname.get_h(),
 					get_w() - m_butx - m_margin_right, 35),
 
 	m_label_gametime
 		(this,
-		 m_butx, m_tamapname.get_y() + m_tamapname.get_h() + m_padding,
+		 m_butx, m_ta_mapname.get_y() + m_ta_mapname.get_h() + m_padding,
 		 _("Gametime:"),
 		 UI::Align_Left),
-	m_tagametime(this, m_description_column_tab, m_label_gametime.get_y(),
+	m_ta_gametime(this, m_description_column_tab, m_label_gametime.get_y(),
 					 get_w() - m_butx - m_margin_right, 20),
 
 	m_label_players
 		(this,
-		 m_butx, m_tagametime.get_y() + m_tagametime.get_h() + m_padding,
+		 m_butx, m_ta_gametime.get_y() + m_ta_gametime.get_h() + m_padding,
 		 _("Players:"),
 		 UI::Align_Left),
 	m_ta_players(this, m_description_column_tab, m_label_players.get_y(),
@@ -104,6 +101,9 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 		(this, m_butx,  m_delete.get_y() + m_delete.get_h() + 2 * m_padding,
 		 m_minimap_max_width, m_minimap_max_height, nullptr),
 
+	// Savegame list
+	m_list(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth),
+
 	// "Data container" for the savegame information
 	m_game(g),
 	m_settings(gsp),
@@ -113,8 +113,8 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 
 	m_back.set_tooltip(_("Return to the single player menu"));
 	m_ok.set_tooltip(_("Load this game"));
-	m_tamapname.set_tooltip(_("The map that this game is based on"));
-	m_tagametime.set_tooltip(_("The time that elapsed inside this game"));
+	m_ta_mapname.set_tooltip(_("The map that this game is based on"));
+	m_ta_gametime.set_tooltip(_("The time that elapsed inside this game"));
 	m_ta_players.set_tooltip(_("The number of players"));
 	m_ta_win_condition.set_tooltip(_("The win condition that was set for this game"));
 	m_delete.set_tooltip(_("Delete this game"));
@@ -173,8 +173,8 @@ void FullscreenMenuLoadGame::no_selection()
 	m_ok.set_enabled(false);
 	m_delete.set_enabled(false);
 
-	m_tamapname .set_text(std::string());
-	m_tagametime.set_text(std::string());
+	m_ta_mapname .set_text(std::string());
+	m_ta_gametime.set_text(std::string());
 	m_ta_players.set_text(std::string());
 	m_ta_win_condition.set_text(std::string());
 	m_minimap_icon.set_icon(nullptr);
@@ -209,8 +209,8 @@ void FullscreenMenuLoadGame::map_selected(uint32_t selected)
 		} else {
 			m_ok.set_enabled(true);
 			m_delete.set_enabled(false);
-			m_tamapname .set_text(_("Savegame from dedicated server"));
-			m_tagametime.set_text(_("Unknown gametime"));
+			m_ta_mapname .set_text(_("Savegame from dedicated server"));
+			m_ta_gametime.set_text(_("Unknown gametime"));
 			return;
 		}
 	}
@@ -225,11 +225,11 @@ void FullscreenMenuLoadGame::map_selected(uint32_t selected)
 	//the official maps, but this should not be a problem to worry about.
 	{
 		i18n::Textdomain td("maps");
-		m_tamapname.set_text(_(gpdp.get_mapname()));
+		m_ta_mapname.set_text(_(gpdp.get_mapname()));
 	}
 
 	uint32_t gametime = gpdp.get_gametime();
-	m_tagametime.set_text(gametimestring(gametime));
+	m_ta_gametime.set_text(gametimestring(gametime));
 
 	uint8_t number_of_players = gpdp.get_number_of_players();
 	if (number_of_players > 0) {

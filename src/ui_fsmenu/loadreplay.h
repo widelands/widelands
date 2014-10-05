@@ -29,13 +29,14 @@
 
 namespace Widelands
 {class Game;}
+
 /**
  * Select a replay from a list of replays.
  */
 struct FullscreenMenuLoadReplay : public FullscreenMenuLoadMapOrGame {
-	FullscreenMenuLoadReplay(Widelands::Game &);
+	FullscreenMenuLoadReplay(Widelands::Game&);
 
-	const std::string & filename() {return m_filename;}
+	const std::string& filename() {return m_filename;}
 
 	void clicked_ok();
 	void clicked_delete();
@@ -48,19 +49,19 @@ struct FullscreenMenuLoadReplay : public FullscreenMenuLoadMapOrGame {
 private:
 	void no_selection();
 
-	UI::Listselect<std::string>   m_list;
 	UI::Textarea                  m_title;
 	UI::Textarea                  m_label_mapname;
-	UI::MultilineTextarea         m_tamapname; // Multiline for long names
+	UI::MultilineTextarea         m_ta_mapname;  // Multiline for long names
 	UI::Textarea                  m_label_gametime;
-	UI::MultilineTextarea         m_tagametime; // Multiline because we want tooltips
+	UI::MultilineTextarea         m_ta_gametime; // Multiline because we want tooltips
 	UI::Textarea                  m_label_players;
 	UI::MultilineTextarea         m_ta_players;
 	UI::Textarea                  m_label_win_condition;
 	UI::MultilineTextarea         m_ta_win_condition;
 	UI::Button                    m_delete;
 
-	Widelands::Game &             m_game;
+	UI::Listselect<std::string>   m_list;
+	Widelands::Game&              m_game;
 };
 
 

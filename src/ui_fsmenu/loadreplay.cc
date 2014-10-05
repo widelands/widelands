@@ -38,9 +38,6 @@
 FullscreenMenuLoadReplay::FullscreenMenuLoadReplay(Widelands::Game & g) :
 	FullscreenMenuLoadMapOrGame(),
 
-	// Savegame / Map / Replay list
-	m_list(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth),
-
 	// Main title
 	m_title
 		(this,
@@ -53,20 +50,20 @@ FullscreenMenuLoadReplay::FullscreenMenuLoadReplay(Widelands::Game & g) :
 		 m_butx, m_maplisty,
 		 _("Map Name:"),
 		 UI::Align_Left),
-	m_tamapname(this, m_butx, m_label_mapname.get_y() + m_label_mapname.get_h(),
+	m_ta_mapname(this, m_butx, m_label_mapname.get_y() + m_label_mapname.get_h(),
 					get_w() - m_butx - m_margin_right, 35),
 
 	m_label_gametime
 		(this,
-		 m_butx, m_tamapname.get_y() + m_tamapname.get_h() + m_padding,
+		 m_butx, m_ta_mapname.get_y() + m_ta_mapname.get_h() + m_padding,
 		 _("Gametime:"),
 		 UI::Align_Left),
-	m_tagametime(this, m_description_column_tab, m_label_gametime.get_y(),
+	m_ta_gametime(this, m_description_column_tab, m_label_gametime.get_y(),
 					 get_w() - m_butx - m_margin_right, 20),
 
 	m_label_players
 		(this,
-		 m_butx, m_tagametime.get_y() + m_tagametime.get_h() + m_padding,
+		 m_butx, m_ta_gametime.get_y() + m_ta_gametime.get_h() + m_padding,
 		 _("Players:"),
 		 UI::Align_Left),
 	m_ta_players(this, m_description_column_tab, m_label_players.get_y(),
@@ -87,6 +84,9 @@ FullscreenMenuLoadReplay::FullscreenMenuLoadReplay(Widelands::Game & g) :
 		 g_gr->images().get("pics/but0.png"),
 		 _("Delete"), std::string(), false, false),
 
+	// Replay list
+	m_list(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth),
+
 	// "Data container" for the replay information
 	m_game(g)
 {
@@ -94,8 +94,8 @@ FullscreenMenuLoadReplay::FullscreenMenuLoadReplay(Widelands::Game & g) :
 
 	m_back.set_tooltip(_("Return to the main menu"));
 	m_ok.set_tooltip(_("Load this replay"));
-	m_tamapname.set_tooltip(_("The map that this replay is based on"));
-	m_tagametime.set_tooltip(_("The time that elapsed inside this game"));
+	m_ta_mapname.set_tooltip(_("The map that this replay is based on"));
+	m_ta_gametime.set_tooltip(_("The time that elapsed inside this game"));
 	m_ta_players.set_tooltip(_("The number of players"));
 	m_ta_win_condition.set_tooltip(_("The win condition that was set for this game"));
 	m_delete.set_tooltip(_("Delete this replay"));
@@ -159,8 +159,8 @@ void FullscreenMenuLoadReplay::no_selection()
 	m_ok.set_enabled(false);
 	m_delete.set_enabled(false);
 
-	m_tamapname .set_text(std::string());
-	m_tagametime.set_text(std::string());
+	m_ta_mapname .set_text(std::string());
+	m_ta_gametime.set_text(std::string());
 }
 
 void FullscreenMenuLoadReplay::replay_selected(uint32_t const selected)
@@ -185,10 +185,10 @@ void FullscreenMenuLoadReplay::replay_selected(uint32_t const selected)
 
 		m_ok.set_enabled(true);
 		m_delete.set_enabled(true);
-		m_tamapname.set_text(gpdp.get_mapname());
+		m_ta_mapname.set_text(gpdp.get_mapname());
 
 		uint32_t gametime = gpdp.get_gametime();
-		m_tagametime.set_text(gametimestring(gametime));
+		m_ta_gametime.set_text(gametimestring(gametime));
 
 		uint8_t number_of_players = gpdp.get_number_of_players();
 		if (number_of_players > 0) {
