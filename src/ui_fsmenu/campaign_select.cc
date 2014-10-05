@@ -306,7 +306,6 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect() :
 		(boost::bind(&FullscreenMenuCampaignMapSelect::double_clicked, this, _1));
 
 	m_list.focus();
-	fill_list();
 }
 
 
