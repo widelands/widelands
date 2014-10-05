@@ -269,6 +269,7 @@ void FullscreenMenuMapSelect::map_selected(uint32_t)
 	}
 	m_ok.set_enabled(true);
 	m_cb_load_map_as_scenario.set_state(false); // reset
+	m_ta_description.scroll_to_top();
 }
 
 /**

@@ -163,6 +163,7 @@ void FullscreenMenuCampaignSelect::campaign_selected(uint32_t const i)
 		m_ta_difficulty.set_text("");
 		m_ta_description .set_text("");
 	}
+	m_ta_description.scroll_to_top();
 }
 
 
@@ -350,6 +351,7 @@ void FullscreenMenuCampaignMapSelect::map_selected(uint32_t) {
 	m_ta_mapname.set_text(_(map.get_name()));
 	m_ta_author.set_text(map.get_author());
 	m_ta_description.set_text(_(map.get_description()));
+	m_ta_description.scroll_to_top();
 
 	// enable OK button
 	m_ok.set_enabled(true);

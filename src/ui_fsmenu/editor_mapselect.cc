@@ -176,6 +176,7 @@ void FullscreenMenuEditorMapSelect::map_selected(uint32_t)
 		m_ta_players.set_text(std::string());
 		m_ta_size.set_text(std::string());
 	}
+	m_ta_description.scroll_to_top();
 }
 
 /**
