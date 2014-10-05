@@ -30,6 +30,7 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
+#include "ui_fsmenu/load_map_or_game.h"
 
 
 using Widelands::Map;
@@ -65,12 +66,11 @@ struct MapData {
 /**
  * Select a Map in Fullscreen Mode. It's a modal fullscreen menu
  */
-
-struct FullscreenMenuMapSelect : public FullscreenMenuBase {
-	FullscreenMenuMapSelect(GameSettingsProvider *, GameController *);
+struct FullscreenMenuMapSelect : public FullscreenMenuLoadMapOrGame {
+	FullscreenMenuMapSelect(GameSettingsProvider*, GameController*);
 
 	bool is_scenario();
-	MapData const * get_map() const;
+	MapData const* get_map() const;
 	void think() override;
 
 private:
@@ -81,43 +81,36 @@ private:
 	void fill_list();
 	bool compare_maprows(uint32_t, uint32_t);
 
-	UI::Checkbox * _add_tag_checkbox(UI::Box *, std::string, std::string);
+	UI::Checkbox* _add_tag_checkbox(UI::Box*, std::string, std::string);
 	void _tagbox_changed(int32_t, bool);
 
-	uint32_t const    m_butx;
-	uint32_t const    m_butw;
-	uint32_t const    m_buth;
-	uint32_t const    m_margin_left;
-	uint32_t const    m_margin_right;
-	uint32_t const    m_maplisty;
-	uint32_t const    m_maplistw;
-	uint32_t const    m_nr_players_width;
-	uint32_t const    m_padding;
-	uint32_t const    m_space;
-	uint32_t const    m_description_column_x;
-	UI::Textarea m_title;
-	UI::Textarea m_label_load_map_as_scenario;
-	UI::Textarea m_label_name;
-	UI::MultilineTextarea            m_name;
-	UI::Textarea m_label_author,     m_author;
-	UI::Textarea m_label_size,       m_size;
-	UI::Textarea m_label_nr_players, m_nr_players;
-	UI::MultilineTextarea m_descr;
-	UI::Button m_back, m_ok;
-	UI::Checkbox                      m_load_map_as_scenario;
-	UI::Checkbox *                    m_show_all_maps;
-	std::vector<UI::Checkbox *>       m_tags_checkboxes;
-	UI::Table<uintptr_t const>        m_table;
-	std::string                       m_curdir, m_basedir;
-	Map::ScenarioTypes  m_scenario_types;
+	UI::Textarea                  m_title;
+	UI::Textarea                  m_label_mapname;
+	UI::MultilineTextarea         m_ta_mapname;
+	UI::Textarea                  m_label_author;
+	UI::MultilineTextarea         m_ta_author;
+	UI::Textarea                  m_label_size;
+	UI::MultilineTextarea         m_ta_size;
+	UI::Textarea                  m_label_players;
+	UI::MultilineTextarea         m_ta_players;
+	UI::MultilineTextarea         m_ta_description;
 
-	std::vector<std::string> m_tags_ordered;
-	std::set<uint32_t> m_req_tags;
+	UI::Textarea                  m_label_load_map_as_scenario;
+	UI::Checkbox                  m_cb_load_map_as_scenario;
+	UI::Checkbox*                 m_cb_show_all_maps;
+	std::vector<UI::Checkbox*>    m_tags_checkboxes;
 
-	std::vector<MapData> m_maps_data;
+	UI::Table<uintptr_t const>    m_table;
+	std::string                   m_curdir, m_basedir;
+	Map::ScenarioTypes            m_scenario_types;
 
-	GameSettingsProvider * m_settings;
-	GameController       * m_ctrl;
+	std::vector<std::string>      m_tags_ordered;
+	std::set<uint32_t>            m_req_tags;
+
+	std::vector<MapData>          m_maps_data;
+
+	GameSettingsProvider*         m_settings;
+	GameController*               m_ctrl;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_MAPSELECT_H
