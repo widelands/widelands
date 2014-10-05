@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-09-29 20:36+0100\n"
-"PO-Revision-Date: 2014-10-01 21:40+0000\n"
-"Last-Translator: François Rousselet <francoisrouslt@gmail.com>\n"
+"POT-Creation-Date: 2014-10-04 16:33+0100\n"
+"PO-Revision-Date: 2014-10-04 16:03+0000\n"
+"Last-Translator: wl-zocker <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-10-02 05:34+0000\n"
+"X-Launchpad-Export-Date: 2014-10-05 05:47+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: fr\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -834,7 +834,7 @@ msgid "Loading map"
 msgstr "Chargement de la carte"
 
 #: ../../src/logic/game.cc:369 ../../src/logic/game.cc:402
-#: ../../src/wlapplication.cc:1586
+#: ../../src/wlapplication.cc:1500
 msgid "Loading..."
 msgstr "Chargement..."
 
@@ -1417,7 +1417,7 @@ msgstr ""
 "ou bien le serveur a été éteint pendant que vous tentiez de vous y connecter."
 
 #: ../../src/network/netclient.cc:198 ../../src/network/nethost.cc:849
-#: ../../src/wlapplication.cc:1479
+#: ../../src/wlapplication.cc:1393
 msgid "Preparing game"
 msgstr "Préparation de la partie"
 
@@ -1860,7 +1860,7 @@ msgstr "Préparation..."
 #: ../../src/ui_basic/spinbox.cc:126
 #, c-format
 msgid "%i %s"
-msgstr ""
+msgstr "%i %s"
 
 #: ../../src/ui_basic/spinbox.cc:136
 msgid "Increase the value"
@@ -2658,7 +2658,7 @@ msgstr "Jamais"
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
 #: ../../src/ui_fsmenu/options.cc:368 ../../src/ui_fsmenu/options.cc:374
 msgid "%1% x %2%"
-msgstr ""
+msgstr "%1% x %2%"
 
 #: ../../src/ui_fsmenu/options.cc:386
 msgid "Try system language"
@@ -2680,8 +2680,8 @@ msgstr "Distance pour que la fenêtre se colle au bord"
 #: ../../src/ui_fsmenu/options.cc:671 ../../src/ui_fsmenu/options.cc:675
 msgid "pixel"
 msgid_plural "pixels"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "pixel"
+msgstr[1] "pixels"
 
 #: ../../src/ui_fsmenu/options.cc:533
 msgid "Show in-game chat with transparent background"
@@ -2721,7 +2721,7 @@ msgstr "Campagnes"
 msgid "Load Game"
 msgstr "Charger une partie"
 
-#: ../../src/wlapplication.cc:1178
+#: ../../src/wlapplication.cc:1092
 msgid ""
 "Your video settings could not be enabled, and fallback settings are in "
 "effect. Please check the graphics options!"
@@ -2729,11 +2729,11 @@ msgstr ""
 "Vos paramètres vidéo n'ont pas pu être activés, et les paramètres de secours "
 "sont effectifs. Veuillez vérifier les options graphiques !"
 
-#: ../../src/wlapplication.cc:1252
+#: ../../src/wlapplication.cc:1166
 msgid "Game data error"
 msgstr "Erreur de données du jeu"
 
-#: ../../src/wlapplication.cc:1262
+#: ../../src/wlapplication.cc:1176
 #, c-format
 msgid ""
 "\n"
@@ -2748,7 +2748,7 @@ msgstr ""
 "Widelands, Vous trouverez les messages relatifs dans la sortie standard "
 "(stdout.txt sur windows). Vous utilisez la version %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1269
+#: ../../src/wlapplication.cc:1183
 msgid ""
 "Please add this information to your report.\n"
 "\n"

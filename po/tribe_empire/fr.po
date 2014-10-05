@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-09-29 19:36+0000\n"
-"PO-Revision-Date: 2014-10-02 10:04+0000\n"
+"POT-Creation-Date: 2014-10-04 15:33+0000\n"
+"PO-Revision-Date: 2014-10-04 16:10+0000\n"
 "Last-Translator: François Rousselet <francoisrouslt@gmail.com>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-03 05:38+0000\n"
+"X-Launchpad-Export-Date: 2014-10-05 05:45+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: fr\n"
 
@@ -1380,6 +1380,9 @@ msgid ""
 "returns on investment. This mine can’t be enhanced any further, so you "
 "should consider dismantling or destroying it."
 msgstr ""
+"Cette mine de marbre est épuisée. Attendez-vous à une diminution du "
+"rendement. Cette mine ne peut pas être améliorée, et vous devriez la "
+"démanteler ou la détruire."
 
 #: ../../tribes/empire/deep_marblemine/help.lua:17
 msgid "Digs marble and stones out of the ground in mountain terrain."
@@ -1446,7 +1449,6 @@ msgstr ""
 "ses graines."
 
 #: ../../tribes/empire/farm/help.lua:17
-#: ../../tribes/empire/vineyard/help.lua:17
 msgid "Sow and harvest wheat."
 msgstr "Sème et récolte le blé"
 
@@ -1602,6 +1604,9 @@ msgid ""
 "Although this ship ran aground, it still serves as accommodation for your "
 "people. It also stores your wares and tools."
 msgstr ""
+"Bien que ce navire se soit échoué, il peut encore servir de logement pour la "
+"population. Il peut aussi être utilisé pour stocker la marchandise et les "
+"outils."
 
 #: ../../tribes/empire/headquarters_shipwreck/help.lua:18
 msgid "The headquarters shipwreck is your main building."
@@ -2123,6 +2128,10 @@ msgstr ""
 #: ../../tribes/empire/vineyard/conf:46
 msgid ""
 "The farmer working at this vineyard has no cleared soil to plant his seeds."
+msgstr ""
+
+#: ../../tribes/empire/vineyard/help.lua:17
+msgid "Plant grapevines and harvest grapes."
 msgstr ""
 
 #: ../../tribes/empire/war_lance/conf:1

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-09-29 20:36+0100\n"
-"PO-Revision-Date: 2014-09-19 03:21+0000\n"
+"POT-Creation-Date: 2014-10-04 16:33+0100\n"
+"PO-Revision-Date: 2014-10-04 22:13+0000\n"
 "Last-Translator: Александр <sa13690@yandex.ru>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-09-30 06:01+0000\n"
+"X-Launchpad-Export-Date: 2014-10-05 05:49+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -830,7 +830,7 @@ msgid "Loading map"
 msgstr "Загрузка карты"
 
 #: ../../src/logic/game.cc:369 ../../src/logic/game.cc:402
-#: ../../src/wlapplication.cc:1586
+#: ../../src/wlapplication.cc:1500
 msgid "Loading..."
 msgstr "Загрузка..."
 
@@ -1380,7 +1380,7 @@ msgstr ""
 "Проверьте настройки и попробуйте подключиться еще раз"
 
 #: ../../src/network/netclient.cc:198 ../../src/network/nethost.cc:849
-#: ../../src/wlapplication.cc:1479
+#: ../../src/wlapplication.cc:1393
 msgid "Preparing game"
 msgstr "Подготовка игры"
 
@@ -2609,7 +2609,7 @@ msgstr "Кампании"
 msgid "Load Game"
 msgstr "Загрузить игру"
 
-#: ../../src/wlapplication.cc:1178
+#: ../../src/wlapplication.cc:1092
 msgid ""
 "Your video settings could not be enabled, and fallback settings are in "
 "effect. Please check the graphics options!"
@@ -2617,11 +2617,11 @@ msgstr ""
 "Настройки видео не могут быть применены, задействованы настройки по "
 "умолчанию. Пожалуйстра, проверьте настройки графики!"
 
-#: ../../src/wlapplication.cc:1252
+#: ../../src/wlapplication.cc:1166
 msgid "Game data error"
 msgstr "Ошибка в данных игры"
 
-#: ../../src/wlapplication.cc:1262
+#: ../../src/wlapplication.cc:1176
 #, c-format
 msgid ""
 "\n"
@@ -2631,7 +2631,7 @@ msgid ""
 "using build %1$s (%2$s). "
 msgstr ""
 
-#: ../../src/wlapplication.cc:1269
+#: ../../src/wlapplication.cc:1183
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -3596,24 +3596,3 @@ msgstr "Следовать"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "min."
-#~ msgstr "мин."
-
-#~ msgid " is missing"
-#~ msgid_plural " are missing"
-#~ msgstr[0] " отсутствует"
-#~ msgstr[1] " отсутствуют"
-#~ msgstr[2] " отсутствуют"
-
-#~ msgid "Consumed ware type(s)"
-#~ msgstr "Необходимые товары"
-
-#~ msgid "Use single Watchwindow Mode"
-#~ msgstr "Использовать общее окно наблюдения"
-
-#~ msgid "Remove Replays older than:"
-#~ msgstr "Удалять повторы старше чем:"
-
-#~ msgid "px."
-#~ msgstr "пикс."

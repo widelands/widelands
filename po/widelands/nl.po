@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-09-29 20:36+0100\n"
-"PO-Revision-Date: 2014-07-27 17:12+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"POT-Creation-Date: 2014-10-04 16:33+0100\n"
+"PO-Revision-Date: 2014-10-04 22:11+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-30 05:58+0000\n"
+"X-Launchpad-Export-Date: 2014-10-05 05:47+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -832,7 +832,7 @@ msgid "Loading map"
 msgstr "Kaart laden"
 
 #: ../../src/logic/game.cc:369 ../../src/logic/game.cc:402
-#: ../../src/wlapplication.cc:1586
+#: ../../src/wlapplication.cc:1500
 msgid "Loading..."
 msgstr "Bezig met laden…"
 
@@ -1412,7 +1412,7 @@ msgstr ""
 "of werd de server afgesloten toen je probeerde te verbinden."
 
 #: ../../src/network/netclient.cc:198 ../../src/network/nethost.cc:849
-#: ../../src/wlapplication.cc:1479
+#: ../../src/wlapplication.cc:1393
 msgid "Preparing game"
 msgstr "Voorbereiden spel"
 
@@ -2701,7 +2701,7 @@ msgstr "Campagnes"
 msgid "Load Game"
 msgstr "Laad spel"
 
-#: ../../src/wlapplication.cc:1178
+#: ../../src/wlapplication.cc:1092
 msgid ""
 "Your video settings could not be enabled, and fallback settings are in "
 "effect. Please check the graphics options!"
@@ -2709,11 +2709,11 @@ msgstr ""
 "Je video-instellingen konden niet worden toegepast, en er is teruggevallen "
 "op noodinstellingen. Controleer aub de grafische opties!"
 
-#: ../../src/wlapplication.cc:1252
+#: ../../src/wlapplication.cc:1166
 msgid "Game data error"
 msgstr "Spelgegevensfout"
 
-#: ../../src/wlapplication.cc:1262
+#: ../../src/wlapplication.cc:1176
 #, c-format
 msgid ""
 "\n"
@@ -2729,7 +2729,7 @@ msgstr ""
 "gerelateerde berichten vinden op de standaarduitvoer (stdout.txt onder\n"
 "Windows). Je gebruikt build %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1269
+#: ../../src/wlapplication.cc:1183
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -3704,23 +3704,3 @@ msgstr "Volg"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "Beeld centreren"
-
-#~ msgid "Consumed ware type(s)"
-#~ msgstr "Gebruikte goederensoort(en)"
-
-#~ msgid "min."
-#~ msgstr "min."
-
-#~ msgid "px."
-#~ msgstr "px."
-
-#~ msgid "Remove Replays older than:"
-#~ msgstr "Verwijder Herhalingen ouder dan:"
-
-#~ msgid "Use single Watchwindow Mode"
-#~ msgstr "Gebruik een enkel detailscherm"
-
-#~ msgid " is missing"
-#~ msgid_plural " are missing"
-#~ msgstr[0] " ontbreekt"
-#~ msgstr[1] " ontbreken"

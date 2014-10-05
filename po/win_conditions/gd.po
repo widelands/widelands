@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-29 19:36+0000\n"
-"PO-Revision-Date: 2014-03-14 07:24+0000\n"
+"POT-Creation-Date: 2014-10-04 15:33+0000\n"
+"PO-Revision-Date: 2014-10-04 09:16+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-09-30 06:04+0000\n"
+"X-Launchpad-Export-Date: 2014-10-05 05:51+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: gd\n"
 
@@ -66,7 +66,7 @@ msgstr "Foir-shealladh a' chluicheadair:"
 
 #: ../../scripting/win_conditions/00_endless_game.lua:12
 msgid "Endless Game"
-msgstr "Geama gun chrìch"
+msgstr "Gun chrìch"
 
 #: ../../scripting/win_conditions/00_endless_game.lua:14
 msgid "This is an endless game without rules."
@@ -262,7 +262,7 @@ msgstr "Bhuannaich %1$s is %2$s aige."
 
 #: ../../scripting/win_conditions/05_endless_game_fogless.lua:12
 msgid "Endless Game (no fog)"
-msgstr "Geama gun chrìch (gun cheò)"
+msgstr "Gun chrìch no ceò"
 
 #: ../../scripting/win_conditions/05_endless_game_fogless.lua:13
 msgid "This is an endless game without rules. Fog of war is disabled."
