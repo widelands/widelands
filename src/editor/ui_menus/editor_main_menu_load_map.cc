@@ -170,7 +170,7 @@ void MainMenuLoadMap::selected(uint32_t) {
 		m_name  ->set_tooltip(map.get_name());
 		m_author->set_text(map.get_author());
 		m_descr ->set_text
-			(_(map.get_description()) + (map.get_hint().empty() ? "" : (std::string("\n") + _(map.get_hint()))));
+			(_(map.get_description()) + (map.get_hint().empty() ? "" : (std::string("\n\n") + _(map.get_hint()))));
 
 		char buf[200];
 		sprintf(buf, "%i", map.get_nrplayers());

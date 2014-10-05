@@ -163,7 +163,7 @@ void FullscreenMenuEditorMapSelect::map_selected(uint32_t)
 		m_ta_mapname.set_text(_(map.get_name()));
 		m_ta_author.set_text(map.get_author());
 		m_ta_description.set_text
-			(_(map.get_description()) + (map.get_hint().empty() ? "" : (std::string("\n") + _(map.get_hint()))));
+			(_(map.get_description()) + (map.get_hint().empty() ? "" : (std::string("\n\n") + _(map.get_hint()))));
 
 		m_ta_players.set_text((boost::format(ngettext("%u Player", "%u Players", map.get_nrplayers()))
 				% static_cast<unsigned int>(map.get_nrplayers())).str());

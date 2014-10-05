@@ -253,7 +253,7 @@ void FullscreenMenuMapSelect::map_selected(uint32_t)
 		m_ta_players.set_text((boost::format(ngettext("%u Player", "%u Players", map.nrplayers))
 				% map.nrplayers).str());
 		m_ta_description.set_text(_(map.description) +
-										  (map.hint.empty() ? "" : (std::string("\n") + _(map.hint))));
+										  (map.hint.empty() ? "" : (std::string("\n\n") + _(map.hint))));
 		m_cb_load_map_as_scenario.set_enabled(map.scenario);
 	} else {
 		// Directory
