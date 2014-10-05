@@ -156,6 +156,7 @@ void FullscreenMenuCampaignSelect::campaign_selected(uint32_t const i)
 		m_ta_mapname .set_text(s.get_string(cname.c_str(), _("[No value found]")));
 		m_ta_difficulty.set_text(dif_description.c_str());
 		m_ta_description.set_text(s.get_string(cdescription.c_str(), _("[No value found]")));
+
 	} else { // normally never here
 		m_ok.set_enabled(false);
 		m_ta_mapname  .set_text(_("[Invalid entry]"));
@@ -346,8 +347,8 @@ void FullscreenMenuCampaignMapSelect::map_selected(uint32_t) {
 	ml->preload_map(true);
 
 	i18n::Textdomain td("maps");
-	m_ta_mapname .set_text(_(map.get_name()));
-	m_ta_author  .set_text(map.get_author());
+	m_ta_mapname.set_text(_(map.get_name()));
+	m_ta_author.set_text(map.get_author());
 	m_ta_description.set_text(_(map.get_description()));
 
 	// enable OK button
@@ -397,11 +398,11 @@ void FullscreenMenuCampaignMapSelect::fill_list()
 				 g_gr->images().get("pics/ls_wlmap.png"));
 		}
 
+		// Increase counter & mapsection
 		++i;
-
-		// increase mapsection
 		mapsection = campsection + (boost::format("%02i") % i).str();
 	}
-	if (m_list.size())
+	if (m_list.size()) {
 		m_list.select(0);
+	}
 }
