@@ -73,10 +73,7 @@ struct FullscreenMenuLoadMapOrGame : public FullscreenMenuBase {
 		  (this, "ok",
 			get_w() - m_margin_right - m_butw, m_buty, m_butw, m_buth,
 			g_gr->images().get("pics/but2.png"),
-			_("Load"), std::string(), false, false),
-
-		// Savegame / Map / Replay list
-		m_list(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth)
+			_("Load"), std::string(), false, false)
 	{}
 
 	const std::string & filename() {return m_filename;}
@@ -95,9 +92,7 @@ protected:
 	UI::Button                    m_back;
 	UI::Button                    m_ok;
 
-	UI::Listselect<const char *>  m_list;
 	std::string                   m_filename;
-	FilenameSet                   m_gamefiles;
 };
 
 

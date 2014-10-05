@@ -49,7 +49,10 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	(Widelands::Game & g, GameSettingsProvider * gsp, GameController * gc) :
 	FullscreenMenuLoadMapOrGame(),
 
-// Text areas
+	// Savegame / Map / Replay list
+	m_list(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth),
+
+	// Main title
 	m_title
 		(this,
 		 get_w() / 2, get_h() * 3 / 20,
@@ -106,7 +109,6 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	m_settings(gsp),
 	m_ctrl(gc)
 {
-
 	m_title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
 
 	m_back.set_tooltip(_("Return to the single player menu"));

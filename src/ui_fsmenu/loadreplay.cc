@@ -36,83 +36,79 @@
 #include "wui/text_constants.h"
 
 FullscreenMenuLoadReplay::FullscreenMenuLoadReplay(Widelands::Game & g) :
-	FullscreenMenuBase("choosemapmenu.jpg"),
+	FullscreenMenuLoadMapOrGame(),
 
-// Values for alignment and size
-	m_butw (get_w() / 4),
-	m_buth (get_h() * 19 / 400),
+	// Savegame / Map / Replay list
+	m_list(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth),
 
-// Buttons
-	m_back
-		(this, "back",
-		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
-		 g_gr->images().get("pics/but0.png"),
-		 _("Back"), std::string(), true, false),
-	m_ok
-		(this, "ok",
-		 get_w() * 71 / 100, get_h() * 15 / 20, m_butw, m_buth,
-		 g_gr->images().get("pics/but2.png"),
-		 _("OK"), std::string(), false, false),
-	m_delete
-		(this, "delete",
-		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
-		 g_gr->images().get("pics/but0.png"),
-		 _("Delete"), std::string(), false, false),
-
-// Replay list
-	m_list
-		(this,
-		 get_w() *  47 / 2500, get_h() * 3417 / 10000,
-		 get_w() * 711 / 1250, get_h() * 6083 / 10000),
-
-// Text area
+	// Main title
 	m_title
 		(this,
 		 get_w() / 2, get_h() * 3 / 20,
 		 _("Choose a replay"), UI::Align_HCenter),
+
+	// Replay description
 	m_label_mapname
 		(this,
-		 get_w() * 7 / 10,  get_h() * 17 / 50,
-		 _("Map Name:"), UI::Align_Right),
-	m_tamapname(this, get_w() * 71 / 100, get_h() * 17 / 50),
+		 m_butx, m_maplisty,
+		 _("Map Name:"),
+		 UI::Align_Left),
+	m_tamapname(this, m_butx, m_label_mapname.get_y() + m_label_mapname.get_h(),
+					get_w() - m_butx - m_margin_right, 35),
+
 	m_label_gametime
 		(this,
-		 get_w() * 7 / 10,  get_h() * 3 / 8,
-		 _("Gametime:"), UI::Align_Right),
-	m_tagametime(this, get_w() * 71 / 100, get_h() * 3 / 8),
+		 m_butx, m_tamapname.get_y() + m_tamapname.get_h() + m_padding,
+		 _("Gametime:"),
+		 UI::Align_Left),
+	m_tagametime(this, m_description_column_tab, m_label_gametime.get_y(),
+					 get_w() - m_butx - m_margin_right, 20),
+
 	m_label_players
 		(this,
-		 get_w() * 7 / 10,  get_h() * 41 / 100,
-		 _("Players:"), UI::Align_Right),
-	m_ta_players
-		(this, get_w() * 71 / 100, get_h() * 41 / 100),
-	m_ta_win_condition
-		(this, get_w() * 71 / 100, get_h() * 9 / 20),
+		 m_butx, m_tagametime.get_y() + m_tagametime.get_h() + m_padding,
+		 _("Players:"),
+		 UI::Align_Left),
+	m_ta_players(this, m_description_column_tab, m_label_players.get_y(),
+					 get_w() - m_butx - m_margin_right, 20),
+
+	m_label_win_condition
+		(this,
+		 m_butx, m_ta_players.get_y() + m_ta_players.get_h() + m_padding,
+		 _("Win Condition:"),
+		 UI::Align_Left),
+	m_ta_win_condition(this, m_description_column_tab, m_label_win_condition.get_y(),
+							 get_w() - m_butx - m_margin_right, 20),
+
+	m_delete
+		(this, "delete",
+		 m_butx, m_ta_win_condition.get_y() + m_ta_win_condition.get_h() + m_padding,
+		 m_butw, m_buth,
+		 g_gr->images().get("pics/but0.png"),
+		 _("Delete"), std::string(), false, false),
+
+	// "Data container" for the replay information
 	m_game(g)
 {
+	m_title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
+
+	m_back.set_tooltip(_("Return to the main menu"));
+	m_ok.set_tooltip(_("Load this replay"));
+	m_tamapname.set_tooltip(_("The map that this replay is based on"));
+	m_tagametime.set_tooltip(_("The time that elapsed inside this game"));
+	m_ta_players.set_tooltip(_("The number of players"));
+	m_ta_win_condition.set_tooltip(_("The win condition that was set for this game"));
+	m_delete.set_tooltip(_("Delete this replay"));
+
 	m_back.sigclicked.connect(boost::bind(&FullscreenMenuLoadReplay::end_modal, boost::ref(*this), 0));
 	m_ok.sigclicked.connect(boost::bind(&FullscreenMenuLoadReplay::clicked_ok, boost::ref(*this)));
 	m_delete.sigclicked.connect
 		(boost::bind
 		 	 (&FullscreenMenuLoadReplay::clicked_delete, boost::ref(*this)));
 
-	m_list.set_font(ui_fn(), fs_small());
 	m_list.selected.connect(boost::bind(&FullscreenMenuLoadReplay::replay_selected, this, _1));
 	m_list.double_clicked.connect
 		(boost::bind(&FullscreenMenuLoadReplay::double_clicked, this, _1));
-
-	m_title         .set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
-	m_label_mapname .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
-	m_tamapname     .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
-	m_label_gametime.set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
-	m_tagametime    .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
-	m_label_players .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
-	m_ta_players    .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
-	m_ta_win_condition.set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
-	m_list          .set_font(ui_fn(), fs_small());
-	m_back.set_font(font_small());
-	m_ok.set_font(font_small());
-	m_delete.set_font(font_small());
 
 	fill_list();
 }
@@ -174,7 +170,6 @@ void FullscreenMenuLoadReplay::replay_selected(uint32_t const selected)
 		return;
 	}
 
-
 	if (m_list.has_selection()) {
 		std::string name = m_list.get_selected() + WLGF_SUFFIX;
 		Widelands::GamePreloadPacket gpdp;
@@ -192,16 +187,16 @@ void FullscreenMenuLoadReplay::replay_selected(uint32_t const selected)
 		m_delete.set_enabled(true);
 		m_tamapname.set_text(gpdp.get_mapname());
 
-		char buf[20];
 		uint32_t gametime = gpdp.get_gametime();
 		m_tagametime.set_text(gametimestring(gametime));
 
-		if (gpdp.get_number_of_players() > 0) {
-			sprintf(buf, "%i", gpdp.get_number_of_players());
+		uint8_t number_of_players = gpdp.get_number_of_players();
+		if (number_of_players > 0) {
+			m_ta_players.set_text((boost::format(ngettext("%u Player", "%u Players", number_of_players))
+					% static_cast<unsigned int>(number_of_players)).str());
 		} else {
-			sprintf(buf, "%s", _("Unknown"));
+			m_ta_players.set_text(_("Unknown"));
 		}
-		m_ta_players.set_text(buf);
 
 		m_ta_win_condition.set_text(gpdp.get_win_condition());
 	} else {

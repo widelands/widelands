@@ -62,6 +62,7 @@ struct FullscreenMenuLoadGame : public FullscreenMenuLoadMapOrGame {
 private:
 	void no_selection();
 
+	UI::Listselect<const char *>  m_list;
 	UI::Textarea                  m_title;
 	UI::Textarea                  m_label_mapname;
 	UI::MultilineTextarea         m_tamapname; // Multiline for long names
@@ -81,6 +82,8 @@ private:
 	Widelands::Game &             m_game;
 	GameSettingsProvider          * m_settings;
 	GameController                * m_ctrl;
+
+	FilenameSet                   m_gamefiles;
 };
 
 
