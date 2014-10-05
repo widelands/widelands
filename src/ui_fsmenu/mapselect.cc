@@ -189,8 +189,9 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 
 void FullscreenMenuMapSelect::think()
 {
-	if (m_ctrl)
+	if (m_ctrl) {
 		m_ctrl->think();
+	}
 }
 
 
@@ -217,8 +218,9 @@ bool FullscreenMenuMapSelect::is_scenario()
 
 MapData const * FullscreenMenuMapSelect::get_map() const
 {
-	if (!m_list.has_selection())
+	if (!m_list.has_selection()) {
 		return nullptr;
+	}
 	return &m_maps_data[m_list.get_selected()];
 }
 
@@ -230,8 +232,9 @@ void FullscreenMenuMapSelect::ok()
 	if (!mapdata.width) {
 		m_curdir = mapdata.filename;
 		fill_list();
-	} else
+	} else {
 		end_modal(1 + is_scenario());
+	}
 }
 
 
@@ -331,12 +334,8 @@ void FullscreenMenuMapSelect::fill_list()
 		}
 
 		//Add subdirectories to the list (except for uncompressed maps)
-		for
-			(FilenameSet::iterator pname = files.begin();
-			pname != files.end();
-			++pname)
-		{
-			char const * const name = pname->c_str();
+		for (const std::string& mapfilename : files) {
+			char const * const name = mapfilename.c_str();
 			if (!strcmp(FileSystem::fs_filename(name), "."))
 				continue;
 			// Upsy, appeared again. ignore
@@ -368,8 +367,9 @@ void FullscreenMenuMapSelect::fill_list()
 			for (const std::string& mapfilename : files) {
 
 				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(mapfilename);
-				if (!ml)
+				if (!ml) {
 					continue;
+				}
 
 				try {
 					map.set_filename(mapfilename);
@@ -387,15 +387,16 @@ void FullscreenMenuMapSelect::fill_list()
 					mapdata.scenario    = map.scenario_types() & m_scenario_types;
 					mapdata.tags        = map.get_tags();
 
-					if (!mapdata.width || !mapdata.height)
+					if (!mapdata.width || !mapdata.height) {
 						continue;
+					}
 
 					bool has_all_tags = true;
 					for (std::set<uint32_t>::const_iterator it = m_req_tags.begin(); it != m_req_tags.end(); ++it)
 						has_all_tags &= mapdata.tags.count(m_tags_ordered[*it]);
-					if (!has_all_tags)
+					if (!has_all_tags) {
 						continue;
-
+					}
 
 					m_maps_data.push_back(mapdata);
 					UI::Table<uintptr_t const>::EntryRecord & te = m_list.add(m_maps_data.size() - 1);
@@ -410,9 +411,7 @@ void FullscreenMenuMapSelect::fill_list()
 						"pics/ls_s2map.png"),
 						_(mapdata.name));
 				} catch (const std::exception & e) {
-					log
-						("Mapselect: Skip %s due to preload error: %s\n",
-						mapfilename.c_str(), e.what());
+					log("Mapselect: Skip %s due to preload error: %s\n", mapfilename.c_str(), e.what());
 				} catch (...) {
 					log("Mapselect: Skip %s due to unknown exception\n", mapfilename.c_str());
 				}
@@ -429,8 +428,9 @@ void FullscreenMenuMapSelect::fill_list()
 			const std::string& mapfilename = dmap.path;
 			std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(mapfilename));
 			try {
-				if (!ml)
-					throw wexception("Not useable!");
+				if (!ml) {
+					throw wexception("Mapselect: No MapLoader");
+				}
 
 				map.set_filename(mapfilename);
 				ml->preload_map(true);
@@ -445,11 +445,13 @@ void FullscreenMenuMapSelect::fill_list()
 				mapdata.height      = map.get_height();
 				mapdata.scenario    = map.scenario_types() & m_scenario_types;
 
-				if (mapdata.nrplayers != dmap.players || mapdata.scenario != dmap.scenario)
-					throw wexception("Not useable!");
+				if (mapdata.nrplayers != dmap.players || mapdata.scenario != dmap.scenario) {
+					throw wexception("Mapselect: Number of players or scenario doesn't match");
+				}
 
-				if (!mapdata.width || !mapdata.height)
-					throw wexception("Not useable!");
+				if (!mapdata.width || !mapdata.height) {
+					throw wexception("Mapselect: Map has no size");
+				}
 
 				// Finally write the entry to the list
 				m_maps_data.push_back(mapdata);
@@ -489,8 +491,9 @@ void FullscreenMenuMapSelect::fill_list()
 
 	m_list.sort();
 
-	if (m_list.size())
+	if (m_list.size()) {
 		m_list.select(0);
+	}
 }
 
 /*
@@ -528,15 +531,19 @@ void FullscreenMenuMapSelect::_tagbox_changed(int32_t id, bool to) {
 			}
 		}
 	} else { // Any tag
-		if (to)
+		if (to) {
 			m_req_tags.insert(id);
-		else
+		}
+		else {
 			m_req_tags.erase(id);
+		}
 	}
-	if (m_req_tags.empty())
+	if (m_req_tags.empty()) {
 		m_cb_show_all_maps->set_state(true);
-	else
+	}
+	else {
 		m_cb_show_all_maps->set_state(false);
+	}
 
 	fill_list();
 }

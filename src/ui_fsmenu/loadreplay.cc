@@ -116,8 +116,9 @@ FullscreenMenuLoadReplay::FullscreenMenuLoadReplay(Widelands::Game & g) :
 
 void FullscreenMenuLoadReplay::clicked_ok()
 {
-	if (!m_list.has_selection())
+	if (!m_list.has_selection()) {
 		return;
+	}
 
 	m_filename = m_list.get_selected();
 	end_modal(1);
@@ -130,8 +131,9 @@ void FullscreenMenuLoadReplay::double_clicked(uint32_t)
 
 void FullscreenMenuLoadReplay::clicked_delete()
 {
-	if (!m_list.has_selection())
+	if (!m_list.has_selection()) {
 		return;
+	}
 
 	std::string fname = m_list.get_selected();
 	UI::WLMessageBox confirmationBox
@@ -217,27 +219,25 @@ void FullscreenMenuLoadReplay::fill_list()
 	               [](const std::string& fn) {return boost::ends_with(fn, REPLAY_SUFFIX);});
 
 	Widelands::GamePreloadPacket gpdp;
-	for
-		(FilenameSet::iterator pname = files.begin();
-		 pname != files.end();
-		 ++pname)
-	{
-		std::string savename = *pname + WLGF_SUFFIX;
+	for (const std::string& replayfilename : files) {
+		std::string savename = replayfilename + WLGF_SUFFIX;
 
-		if (!g_fs->file_exists(savename))
+		if (!g_fs->file_exists(savename)) {
 			continue;
+		}
 
 		try {
 			Widelands::GameLoader gl(savename, m_game);
 			gl.preload_game(gpdp);
 
 			m_list.add
-				(FileSystem::filename_without_ext(pname->c_str()).c_str(), *pname);
+				(FileSystem::filename_without_ext(replayfilename.c_str()).c_str(), replayfilename);
 		} catch (const WException &) {} //  we simply skip illegal entries
 	}
 
-	if (m_list.size())
+	if (m_list.size()) {
 		m_list.select(0);
+	}
 }
 
 bool FullscreenMenuLoadReplay::handle_key(bool down, SDL_keysym code)
@@ -277,5 +277,5 @@ bool FullscreenMenuLoadReplay::handle_key(bool down, SDL_keysym code)
 		break; // not handled
 	}
 
-	return FullscreenMenuBase::handle_key(down, code);
+	return FullscreenMenuLoadMapOrGame::handle_key(down, code);
 }

@@ -44,7 +44,6 @@
 #include "wui/text_constants.h"
 
 
-
 FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	(Widelands::Game & g, GameSettingsProvider * gsp, GameController * gc) :
 	FullscreenMenuLoadMapOrGame(),
@@ -135,8 +134,9 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 
 void FullscreenMenuLoadGame::think()
 {
-	if (m_ctrl)
+	if (m_ctrl) {
 		m_ctrl->think();
+	}
 }
 
 
@@ -206,6 +206,7 @@ void FullscreenMenuLoadGame::map_selected(uint32_t selected)
 			log("Save game '%s' must have changed from under us\nException: %s\n", name, e.what());
 			m_list.remove(selected);
 			return;
+
 		} else {
 			m_ok.set_enabled(true);
 			m_delete.set_enabled(false);
@@ -253,7 +254,9 @@ void FullscreenMenuLoadGame::map_selected(uint32_t selected)
 			// Load the image
 			std::unique_ptr<Surface> surface(load_image(
 			   minimap_path, std::unique_ptr<FileSystem>(g_fs->make_sub_file_system(name)).get()));
+
 			m_minimap_image.reset(new_in_memory_image(std::string(name + minimap_path), surface.release()));
+
 			// Scale it
 			double scale = double(m_minimap_max_width) / m_minimap_image->width();
 			double scaleY = double(m_minimap_max_height) / m_minimap_image->height();
@@ -327,8 +330,9 @@ void FullscreenMenuLoadGame::fill_list() {
 		}
 	}
 
-	if (m_list.size())
+	if (m_list.size()) {
 		m_list.select(0);
+	}
 }
 
 bool FullscreenMenuLoadGame::handle_key(bool down, SDL_keysym code)
