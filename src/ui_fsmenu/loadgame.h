@@ -74,8 +74,7 @@ private:
 	UI::Textarea                  m_label_win_condition;
 	UI::MultilineTextarea         m_ta_win_condition;
 	UI::Button                    m_delete;
-	int32_t const                 m_minimap_max_width;
-	int32_t const                 m_minimap_max_height;
+	int32_t const                 m_minimap_y, m_minimap_w, m_minimap_h;
 	UI::Icon                      m_minimap_icon;
 
 	std::unique_ptr<const Image>  m_minimap_image;

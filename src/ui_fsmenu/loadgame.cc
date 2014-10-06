@@ -88,16 +88,17 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 
 	m_delete
 		(this, "delete",
-		 m_right_column_x, get_y_from_preceding(m_ta_win_condition) + 3 * m_padding,
+		 m_right_column_x, m_buty - m_buth - 2 * m_padding,
 		 m_butw, m_buth,
 		 g_gr->images().get("pics/but0.png"),
 		 _("Delete"), std::string(), false, false),
 
-	m_minimap_max_width(get_right_column_w(m_right_column_x)),
-	m_minimap_max_height(m_buty - get_y_from_preceding(m_delete) - 6 * m_padding),
+	m_minimap_y(get_y_from_preceding(m_ta_win_condition) + 3 * m_padding),
+	m_minimap_w(get_right_column_w(m_right_column_x)),
+	m_minimap_h(m_delete.get_y() - get_y_from_preceding(m_ta_win_condition) - 6 * m_padding),
 	m_minimap_icon(this,
-						m_right_column_x, get_y_from_preceding(m_delete) + 3 * m_padding,
-						m_minimap_max_width, m_minimap_max_height, nullptr),
+						m_right_column_x, get_y_from_preceding(m_ta_win_condition) + 3 * m_padding,
+						m_minimap_w, m_minimap_h, nullptr),
 
 	// Savegame list
 	m_list(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth),
@@ -255,8 +256,8 @@ void FullscreenMenuLoadGame::map_selected(uint32_t selected)
 			m_minimap_image.reset(new_in_memory_image(std::string(name + minimap_path), surface.release()));
 
 			// Scale it
-			double scale = double(m_minimap_max_width) / m_minimap_image->width();
-			double scaleY = double(m_minimap_max_height) / m_minimap_image->height();
+			double scale = double(m_minimap_w) / m_minimap_image->width();
+			double scaleY = double(m_minimap_h) / m_minimap_image->height();
 			if (scaleY < scale) {
 				scale = scaleY;
 			}
@@ -269,15 +270,13 @@ void FullscreenMenuLoadGame::map_selected(uint32_t selected)
 			// surface
 			m_minimap_icon.set_size(w, h);
 
-			// Center the minimap in the available space
-			int32_t xpos = m_right_column_x + (get_w() - m_right_column_x - m_right_column_margin - w) / 2;
-			int32_t ypos = m_delete.get_y() + m_delete.get_h() + 3 * m_padding;
-
 			// Set small minimaps higher up for a more harmonious look
-			if (h < m_minimap_max_height * 2 / 3) {
-				ypos += (m_minimap_max_height - h) / 3;
+			int32_t xpos = m_right_column_x + ((get_right_column_w(m_right_column_x) - w) / 2);
+			int32_t ypos = m_minimap_y;
+			if (h < m_minimap_h * 2 / 3) {
+				ypos += (m_minimap_h - h) / 3;
 			} else {
-				ypos += (m_minimap_max_height - h) / 2;
+				ypos += (m_minimap_h - h) / 2;
 			}
 
 			m_minimap_icon.set_pos(Point(xpos, ypos));
