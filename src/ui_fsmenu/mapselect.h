@@ -49,6 +49,7 @@ struct MapData {
 
 	std::string filename;
 	std::string name;
+	std::string localized_name;
 	std::string author;
 	std::string description;
 	std::string hint;
@@ -79,13 +80,13 @@ protected:
 private:
 	void map_selected(uint32_t);
 	void fill_list();
-	bool compare_maprows(uint32_t, uint32_t);
+	bool compare_mapnames(uint32_t, uint32_t);
+	bool compare_size(uint32_t, uint32_t);
 
 	UI::Checkbox* _add_tag_checkbox(UI::Box*, std::string, std::string);
 	void _tagbox_changed(int32_t, bool);
 
 	int32_t const                 m_checkbox_space;
-	int32_t const                 m_maplist_players_column_width;
 
 	UI::Textarea                  m_title;
 	UI::Textarea                  m_label_mapname;

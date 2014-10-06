@@ -46,7 +46,6 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	FullscreenMenuLoadMapOrGame(),
 
 	m_checkbox_space(25),
-	m_maplist_players_column_width(35),
 
 	// Main title
 	m_title
@@ -129,13 +128,15 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	m_list.double_clicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_ok, boost::ref(*this)));
 
 	/** TRANSLATORS: Column title for number of players in map list */
-	m_list.add_column(m_maplist_players_column_width, _("Pl."), "", UI::Align_HCenter);
-	m_list.add_column
-		(m_list.get_w() - m_maplist_players_column_width, _("Map Name"), "", UI::Align_Left);
+	m_list.add_column(35, _("Pl."), _("Number of players"), UI::Align_HCenter);
+	m_list.add_column(m_list.get_w() - 35 - 115, _("Map Name"), _("Map Name"), UI::Align_Left);
+	m_list.add_column(115, _("Size"), _("The size of the map (Width x Height)"), UI::Align_Left);
 	m_list.set_column_compare
 		(1,
-		 boost::bind
-		 (&FullscreenMenuMapSelect::compare_maprows, this, _1, _2));
+		 boost::bind(&FullscreenMenuMapSelect::compare_mapnames, this, _1, _2));
+	m_list.set_column_compare
+		(2,
+		 boost::bind(&FullscreenMenuMapSelect::compare_size, this, _1, _2));
 	m_list.set_sort_column(0);
 	m_cb_load_map_as_scenario.set_state(false);
 	m_cb_load_map_as_scenario.set_enabled(false);
@@ -191,7 +192,7 @@ void FullscreenMenuMapSelect::think()
 }
 
 
-bool FullscreenMenuMapSelect::compare_maprows
+bool FullscreenMenuMapSelect::compare_mapnames
 	(uint32_t rowa, uint32_t rowb)
 {
 	const MapData & r1 = m_maps_data[m_list[rowa]];
@@ -204,8 +205,21 @@ bool FullscreenMenuMapSelect::compare_maprows
 	} else if (r1.width && !r2.width) {
 		return false;
 	}
-	return r1.name < r2.name;
+	return r1.localized_name < r2.localized_name;
 }
+
+bool FullscreenMenuMapSelect::compare_size
+	(uint32_t rowa, uint32_t rowb)
+{
+	const MapData & r1 = m_maps_data[m_list[rowa]];
+	const MapData & r2 = m_maps_data[m_list[rowb]];
+
+	if (r1.width != r2.width) {
+		return r1.width < r2.width;
+	}
+	return r1.height < r2.height;
+}
+
 
 bool FullscreenMenuMapSelect::is_scenario()
 {
@@ -244,14 +258,12 @@ void FullscreenMenuMapSelect::map_selected(uint32_t)
 	const MapData & map = m_maps_data[m_list.get_selected()];
 
 	if (map.width) {
-		// Translate the map data
-		i18n::Textdomain td("maps");
-		m_ta_mapname.set_text(_(map.name));
+		m_ta_mapname.set_text(map.localized_name);
 		m_ta_author.set_text(map.author);
 		m_ta_size.set_text((boost::format("%u  x  %u") % map.width % map.height).str());
 		m_ta_players.set_text((boost::format("%u") % static_cast<unsigned int>(map.nrplayers)).str());
-		m_ta_description.set_text(_(map.description) +
-										  (map.hint.empty() ? "" : (std::string("\n\n") + _(map.hint))));
+		m_ta_description.set_text(map.description +
+										  (map.hint.empty() ? "" : (std::string("\n\n") + map.hint)));
 		m_cb_load_map_as_scenario.set_enabled(map.scenario);
 	} else {
 		// Directory
@@ -289,6 +301,10 @@ void FullscreenMenuMapSelect::map_selected(uint32_t)
  */
 void FullscreenMenuMapSelect::fill_list()
 {
+	uint8_t col_players = 0;
+	uint8_t col_name = 1;
+	uint8_t col_size = 2;
+
 	m_maps_data.clear();
 	m_list.clear();
 
@@ -313,12 +329,13 @@ void FullscreenMenuMapSelect::fill_list()
 			UI::Table<uintptr_t const>::EntryRecord & te =
 				m_list.add(m_maps_data.size() - 1);
 
-			te.set_string(0, "");
+			te.set_string(col_players, "");
 			std::string parent_string =
 				(boost::format("\\<%s\\>") % _("parent")).str();
 			te.set_picture
-				(1,  g_gr->images().get("pics/ls_dir.png"),
+				(col_name,  g_gr->images().get("pics/ls_dir.png"),
 				parent_string);
+			te.set_string(col_size, "");
 
 			++ndirs;
 		}
@@ -342,10 +359,11 @@ void FullscreenMenuMapSelect::fill_list()
 			m_maps_data.push_back(dir);
 			UI::Table<uintptr_t const>::EntryRecord & te = m_list.add(m_maps_data.size() - 1);
 
-			te.set_string(0, "");
+			te.set_string(col_players, "");
 			te.set_picture
-				(1,  g_gr->images().get("pics/ls_dir.png"),
+				(col_name,  g_gr->images().get("pics/ls_dir.png"),
 				FileSystem::fs_filename(name));
+			te.set_string(col_size, "");
 
 			++ndirs;
 		}
@@ -365,12 +383,15 @@ void FullscreenMenuMapSelect::fill_list()
 					map.set_filename(mapfilename);
 					ml->preload_map(true);
 
+					i18n::Textdomain td("maps");
+
 					MapData mapdata;
 					mapdata.filename    = mapfilename;
 					mapdata.name        = map.get_name();
+					mapdata.localized_name = _(mapdata.name);
 					mapdata.author      = map.get_author();
-					mapdata.description = map.get_description();
-					mapdata.hint        = map.get_hint();
+					mapdata.description = _(map.get_description());
+					mapdata.hint        = _(map.get_hint());
 					mapdata.nrplayers   = map.get_nrplayers();
 					mapdata.width       = map.get_width();
 					mapdata.height      = map.get_height();
@@ -391,15 +412,15 @@ void FullscreenMenuMapSelect::fill_list()
 					m_maps_data.push_back(mapdata);
 					UI::Table<uintptr_t const>::EntryRecord & te = m_list.add(m_maps_data.size() - 1);
 
-					te.set_string(0, (boost::format("(%i)") % mapdata.nrplayers).str());
+					te.set_string(col_players, (boost::format("(%i)") % mapdata.nrplayers).str());
 
-					i18n::Textdomain td("maps");
 					te.set_picture
-						(1,  g_gr->images().get
+						(col_name,  g_gr->images().get
 						 (dynamic_cast<WidelandsMapLoader*>(ml.get()) ?
 							  (mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png") :
 						"pics/ls_s2map.png"),
-						_(mapdata.name));
+						mapdata.localized_name);
+					te.set_string(col_size, (boost::format("%u x %u") % mapdata.width % mapdata.height).str());
 				} catch (const std::exception & e) {
 					log("Mapselect: Skip %s due to preload error: %s\n", mapfilename.c_str(), e.what());
 				} catch (...) {
@@ -447,10 +468,12 @@ void FullscreenMenuMapSelect::fill_list()
 				m_maps_data.push_back(mapdata);
 				UI::Table<uintptr_t const>::EntryRecord & te = m_list.add(m_maps_data.size() - 1);
 
-				te.set_string(0, (boost::format("(%i)") % mapdata.nrplayers).str());
+				te.set_string(col_players, (boost::format("(%i)") % mapdata.nrplayers).str());
 				te.set_picture
-					(1, g_gr->images().get((mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")),
+					(col_name,
+					 g_gr->images().get((mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")),
 					 mapdata.name.c_str());
+				te.set_string(col_size, (boost::format("%u x %u") % mapdata.width % mapdata.height).str());
 
 			} catch (...) {
 				log("Mapselect: Skipped reading locale data for file %s - not valid.\n", mapfilename.c_str());
@@ -471,10 +494,11 @@ void FullscreenMenuMapSelect::fill_list()
 				m_maps_data.push_back(mapdata);
 				UI::Table<uintptr_t const>::EntryRecord & te = m_list.add(m_maps_data.size() - 1);
 
-				te.set_string(0, (boost::format("(%i)") % mapdata.nrplayers).str());
+				te.set_string(col_players, (boost::format("(%i)") % mapdata.nrplayers).str());
 				te.set_picture
-					(1, g_gr->images().get
+					(col_name, g_gr->images().get
 					 ((mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")), mapdata.name.c_str());
+				te.set_string(col_size, (boost::format("%u x %u") % mapdata.width % mapdata.height).str());
 			}
 		}
 	}
