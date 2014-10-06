@@ -249,8 +249,7 @@ void FullscreenMenuMapSelect::map_selected(uint32_t)
 		m_ta_mapname.set_text(_(map.name));
 		m_ta_author.set_text(map.author);
 		m_ta_size.set_text((boost::format("%u  x  %u") % map.width % map.height).str());
-		m_ta_players.set_text((boost::format(ngettext("%u Player", "%u Players", map.nrplayers))
-				% map.nrplayers).str());
+		m_ta_players.set_text((boost::format("%u") % static_cast<unsigned int>(map.nrplayers)).str());
 		m_ta_description.set_text(_(map.description) +
 										  (map.hint.empty() ? "" : (std::string("\n\n") + _(map.hint))));
 		m_cb_load_map_as_scenario.set_enabled(map.scenario);

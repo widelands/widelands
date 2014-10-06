@@ -53,7 +53,7 @@ FullscreenMenuLoadReplay::FullscreenMenuLoadReplay(Widelands::Game & g) :
 					 get_right_column_w(m_right_column_x + m_indent), 2 * m_label_height - m_padding),
 
 	m_label_gametime
-		(this, m_right_column_x, get_y_from_preceding(m_ta_mapname),
+		(this, m_right_column_x, get_y_from_preceding(m_ta_mapname) + 2 * m_padding,
 		 _("Gametime:"),
 		 UI::Align_Left),
 	m_ta_gametime(this,
@@ -192,8 +192,7 @@ void FullscreenMenuLoadReplay::replay_selected(uint32_t const selected)
 
 		uint8_t number_of_players = gpdp.get_number_of_players();
 		if (number_of_players > 0) {
-			m_ta_players.set_text((boost::format(ngettext("%u Player", "%u Players", number_of_players))
-					% static_cast<unsigned int>(number_of_players)).str());
+			m_ta_players.set_text((boost::format("%u") % static_cast<unsigned int>(number_of_players)).str());
 		} else {
 			m_ta_players.set_text(_("Unknown"));
 		}

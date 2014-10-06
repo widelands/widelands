@@ -63,7 +63,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 					 get_right_column_w(m_right_column_x + m_indent), 2 * m_label_height - m_padding),
 
 	m_label_gametime
-		(this, m_right_column_x, get_y_from_preceding(m_ta_mapname),
+		(this, m_right_column_x, get_y_from_preceding(m_ta_mapname) + 2 * m_padding,
 		 _("Gametime:"),
 		 UI::Align_Left),
 	m_ta_gametime(this,
@@ -232,8 +232,7 @@ void FullscreenMenuLoadGame::map_selected(uint32_t selected)
 
 	uint8_t number_of_players = gpdp.get_number_of_players();
 	if (number_of_players > 0) {
-		m_ta_players.set_text((boost::format(ngettext("%u Player", "%u Players", number_of_players))
-				% static_cast<unsigned int>(number_of_players)).str());
+		m_ta_players.set_text((boost::format("%u") % static_cast<unsigned int>(number_of_players)).str());
 	} else {
 		m_ta_players.set_text(_("Unknown"));
 	}
@@ -270,9 +269,11 @@ void FullscreenMenuLoadGame::map_selected(uint32_t selected)
 			// surface
 			m_minimap_icon.set_size(w, h);
 
-			// Set small minimaps higher up for a more harmonious look
-			int32_t xpos = m_right_column_x + ((get_right_column_w(m_right_column_x) - w) / 2);
+			// Center the minimap in the available space
+			int32_t xpos = m_right_column_x + (get_w() - m_right_column_margin - w - m_right_column_x) / 2;
 			int32_t ypos = m_minimap_y;
+
+			// Set small minimaps higher up for a more harmonious look
 			if (h < m_minimap_h * 2 / 3) {
 				ypos += (m_minimap_h - h) / 3;
 			} else {
