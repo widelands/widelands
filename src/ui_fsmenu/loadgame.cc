@@ -63,7 +63,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 					 get_right_column_w(m_right_column_x + m_indent), 2 * m_label_height - m_padding),
 
 	m_label_gametime
-		(this, m_right_column_x, get_y_from_preceding(m_ta_mapname) + 3 * m_padding,
+		(this, m_right_column_x, get_y_from_preceding(m_ta_mapname),
 		 _("Gametime:"),
 		 UI::Align_Left),
 	m_ta_gametime(this,
@@ -79,12 +79,12 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 					 get_right_column_w(m_right_column_tab), m_label_height),
 
 	m_label_win_condition
-		(this, m_right_column_x, get_y_from_preceding(m_ta_players),
+		(this, m_right_column_x, get_y_from_preceding(m_ta_players) + 3 * m_padding,
 		 _("Win Condition:"),
 		 UI::Align_Left),
 	m_ta_win_condition(this,
-							 m_right_column_tab, m_label_win_condition.get_y(),
-							 get_right_column_w(m_right_column_tab), m_label_height),
+							 m_right_column_x + m_indent, get_y_from_preceding(m_label_win_condition) + m_padding,
+							 get_right_column_w(m_right_column_x + m_indent), m_label_height),
 
 	m_delete
 		(this, "delete",

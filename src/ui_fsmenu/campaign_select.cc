@@ -270,7 +270,7 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect() :
 					get_right_column_w(m_right_column_x + m_indent), m_label_height),
 
 	m_label_description
-		(this, m_right_column_x, get_y_from_preceding(m_ta_author) + 3 * m_padding,
+		(this, m_right_column_x, get_y_from_preceding(m_ta_author) + 2 * m_padding,
 		 _("Description:"),
 		 UI::Align_Left),
 	m_ta_description
