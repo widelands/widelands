@@ -84,6 +84,7 @@ private:
 	void _tagbox_changed(int32_t, bool);
 
 	int32_t const                 m_checkbox_space;
+	int32_t const                 m_maplist_players_column_width;
 
 	UI::Textarea                  m_title;
 	UI::Textarea                  m_label_mapname;

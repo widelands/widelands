@@ -42,54 +42,52 @@ FullscreenMenuEditorMapSelect::FullscreenMenuEditorMapSelect() :
 
 	// Main title
 	m_title
-		(this,
-		 get_w() / 2, m_maplisty / 3,
+		(this, get_w() / 2, m_maplisty / 3,
 		 _("Choose a map"), UI::Align_HCenter),
 
 	// Map description
 	m_label_mapname
-		(this,
-		 m_butx, m_maplisty,
+		(this, m_right_column_x, m_maplisty,
 		 _("Map Name:"),
 		 UI::Align_Left),
-	m_ta_mapname(this, m_butx + m_indent, m_label_mapname.get_y() + m_label_mapname.get_h() + m_padding,
-					get_w() - m_butx - m_indent - m_margin_right, 2 * m_label_height - m_padding),
+	m_ta_mapname(this,
+					 m_right_column_x + m_indent, get_y_from_preceding(m_label_mapname) + m_padding,
+					 get_right_column_w(m_right_column_x + m_indent), 2 * m_label_height - m_padding),
 
 	m_label_author
-		(this,
-		 m_butx, m_ta_mapname.get_y() + m_ta_mapname.get_h() + m_padding,
+		(this, m_right_column_x, get_y_from_preceding(m_ta_mapname) + m_padding,
 		 _("Authors:"),
 		 UI::Align_Left),
-	m_ta_author(this, m_description_column_tab, m_label_author.get_y(),
-				get_w() - m_butx - m_margin_right, m_label_height),
+	m_ta_author(this,
+					m_right_column_tab, m_label_author.get_y(),
+					get_right_column_w(m_right_column_tab), m_label_height),
 
 	m_label_size
-		(this,
-		 m_butx, m_ta_author.get_y() + m_ta_author.get_h(),
+		(this, m_right_column_x, get_y_from_preceding(m_ta_author),
 		 _("Size:"),
 		 UI::Align_Left),
-	m_ta_size(this, m_description_column_tab, m_label_size.get_y(),
-				 get_w() - m_butx - m_margin_right, m_label_height),
+	m_ta_size(this,
+				 m_right_column_tab, m_label_size.get_y(),
+				 get_right_column_w(m_right_column_tab), m_label_height),
 
 	m_label_players
-		(this,
-		 m_butx, m_ta_size.get_y() + m_ta_size.get_h(),
+		(this, m_right_column_x, get_y_from_preceding(m_ta_size),
 		 _("Players:"),
 		 UI::Align_Left),
-	m_ta_players(this, m_description_column_tab, m_label_players.get_y(),
-					 get_w() - m_butx - m_margin_right, m_label_height),
+	m_ta_players(this,
+					 m_right_column_tab, m_label_players.get_y(),
+					 get_right_column_w(m_right_column_tab), m_label_height),
 
 	m_label_description
-		(this,
-		 m_butx, m_ta_players.get_y() + m_ta_players.get_h() + 3 * m_padding,
+		(this, m_right_column_x, get_y_from_preceding(m_ta_players) + 3 * m_padding,
 		 _("Description:"),
 		 UI::Align_Left),
 	m_ta_description
 		(this,
-		 m_butx + m_indent,
-		 m_label_description.get_y() + m_label_description.get_h() + m_padding,
-		 get_w() - m_butx - m_indent - m_margin_right,
-		 m_buty - m_label_description.get_y() - m_label_description.get_h()  - 4 * m_padding),
+		 m_right_column_x + m_indent,
+		 get_y_from_preceding(m_label_description) + m_padding,
+		 get_right_column_w(m_right_column_x + m_indent),
+		 m_buty - get_y_from_preceding(m_label_description) - 4 * m_padding),
 
 	// Map table
 	m_list(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth),

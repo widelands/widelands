@@ -47,8 +47,8 @@ private:
 	void fill_list();
 
 	UI::Textarea                  m_title;
-	UI::Textarea                  m_label_mapname;
-	UI::MultilineTextarea         m_ta_mapname;
+	UI::Textarea                  m_label_campname;
+	UI::MultilineTextarea         m_ta_campname;
 	UI::Textarea                  m_label_difficulty;
 	UI::MultilineTextarea         m_ta_difficulty;
 	UI::Textarea                  m_label_description;

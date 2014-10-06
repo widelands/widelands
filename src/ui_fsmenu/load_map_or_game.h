@@ -43,7 +43,9 @@ class RenderTarget;
 class GameController;
 struct GameSettingsProvider;
 
-/// Select a Map, Saved Game or Replay in Fullscreen Mode. It's a superclass for modal fullscreen menus.
+/// Select a Map, Saved Game or Replay in Fullscreen Mode.
+/// This class defines common coordinates for these UI screens.
+/// It also defines common buttons.
 struct FullscreenMenuLoadMapOrGame : public FullscreenMenuBase {
 	FullscreenMenuLoadMapOrGame() :
 		FullscreenMenuBase("choosemapmenu.jpg"),
@@ -52,27 +54,26 @@ struct FullscreenMenuLoadMapOrGame : public FullscreenMenuBase {
 		m_padding(4),
 		m_indent(10),
 		m_label_height(20),
-		m_margin_right(15),
 		m_maplistx(get_w() *  47 / 2500),
 		m_maplisty(get_h() * 17 / 50),
 		m_maplistw(get_w() * 711 / 1250),
 		m_maplisth(get_h() * 6083 / 10000),
-		m_butx (m_maplistx + m_maplistw + m_margin_right),
+		m_right_column_margin(15),
+		m_right_column_x(m_maplistx + m_maplistw + m_right_column_margin),
 		m_buty (get_h() * 9 / 10),
-		m_butw ((get_w() - m_butx - m_margin_right) / 2 - m_padding),
+		m_butw ((get_w() - m_right_column_x - m_right_column_margin) / 2 - m_padding),
 		m_buth (get_h() * 9 / 200),
-		m_nr_players_width(35),
-		m_description_column_tab(get_w() - m_margin_right - m_butw),
+		m_right_column_tab(get_w() - m_right_column_margin - m_butw),
 
 		// Main buttons
 		m_back
 		  (this, "back",
-			m_butx, m_buty, m_butw, m_buth,
+			m_right_column_x, m_buty, m_butw, m_buth,
 			g_gr->images().get("pics/but0.png"),
 			_("Back"), std::string(), true, false),
 		m_ok
 		  (this, "ok",
-			get_w() - m_margin_right - m_butw, m_buty, m_butw, m_buth,
+			get_w() - m_right_column_margin - m_butw, m_buty, m_butw, m_buth,
 			g_gr->images().get("pics/but2.png"),
 			_("OK"), std::string(), false, false)
 	{}
@@ -80,15 +81,27 @@ struct FullscreenMenuLoadMapOrGame : public FullscreenMenuBase {
 	bool handle_key(bool down, SDL_keysym code) override {return FullscreenMenuBase::handle_key(down, code);}
 
 protected:
-	int32_t const m_padding;
-	int32_t const m_indent;
-	int32_t const m_label_height;
-	int32_t const m_margin_right;
-	int32_t const m_maplistx, m_maplisty, m_maplistw, m_maplisth;
-	int32_t const m_butx, m_buty, m_butw, m_buth;
-	int32_t const m_nr_players_width;
-	int32_t const m_description_column_tab;
+	// Returns a y coordinate that can be used to position a Panel below the Panel directly above it
+	int32_t get_y_from_preceding(UI::Panel& preceding_panel) {
+		return preceding_panel.get_y() + preceding_panel.get_h();
+	}
 
+	// Returns the width that a Panel in the right column should have, depending on its x position
+	int32_t get_right_column_w(int32_t x) {
+		return get_w() - m_right_column_margin - x;
+	}
+
+	// UI coordinates and spacers
+	int32_t const m_padding;               // Common padding between panels
+	int32_t const m_indent;                // Indent for elements below labels
+	int32_t const m_label_height;
+	int32_t const m_maplistx, m_maplisty, m_maplistw, m_maplisth;
+	int32_t const m_right_column_margin;   // X margins of the right column
+	int32_t const m_right_column_x;
+	int32_t const m_buty, m_butw, m_buth;  // Button dimensions
+	int32_t const m_right_column_tab;
+
+	// Main buttons
 	UI::Button    m_back;
 	UI::Button    m_ok;
 };

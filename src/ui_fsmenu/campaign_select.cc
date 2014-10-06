@@ -46,40 +46,37 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 
 	// Main Title
 	m_title
-		(this,
-		 get_w() / 2, m_maplisty / 3,
+		(this, get_w() / 2, m_maplisty / 3,
 		 _("Choose a campaign"),
 		 UI::Align_HCenter),
 
 	// Campaign description
-	m_label_mapname
-		(this,
-		 m_butx, m_maplisty,
+	m_label_campname
+		(this, m_right_column_x, m_maplisty,
 		 _("Campaign:"),
 		 UI::Align_Left),
-	m_ta_mapname(this, m_butx + m_indent, m_label_mapname.get_y() + m_label_mapname.get_h() + m_padding,
-					get_w() - m_butx - m_indent - m_margin_right, 2 * m_label_height - m_padding),
+	m_ta_campname(this,
+					  m_right_column_x + m_indent, get_y_from_preceding(m_label_campname) + m_padding,
+					  get_right_column_w(m_right_column_x) - m_indent, 2 * m_label_height - m_padding),
 
 	m_label_difficulty
-		(this,
-		 m_butx, m_ta_mapname.get_y() + m_ta_mapname.get_h() + 3 * m_padding,
+		(this, m_right_column_x, get_y_from_preceding(m_ta_campname) + 3 * m_padding,
 		 _("Difficulty:"),
 		 UI::Align_Left),
-	m_ta_difficulty(this, m_butx + m_indent,
-						 m_label_difficulty.get_y() + m_label_difficulty.get_h() + m_padding,
-						 get_w() - m_butx - m_indent - m_margin_right, 2 * m_label_height - m_padding),
+	m_ta_difficulty(this,
+						 m_right_column_x + m_indent, get_y_from_preceding(m_label_difficulty) + m_padding,
+						 get_right_column_w(m_right_column_x + m_indent), 2 * m_label_height - m_padding),
 
 	m_label_description
-		(this,
-		 m_butx, m_ta_difficulty.get_y() + m_ta_difficulty.get_h() + 3 * m_padding,
+		(this, m_right_column_x, get_y_from_preceding(m_ta_difficulty) + 3 * m_padding,
 		 _("Description:"),
 		 UI::Align_Left),
 	m_ta_description
 		(this,
-		 m_butx + m_indent,
-		 m_label_description.get_y() + m_label_description.get_h() + m_padding,
-		 get_w() - m_butx - m_indent - m_margin_right,
-		 m_buty - m_label_description.get_y() - m_label_description.get_h()  - 4 * m_padding),
+		 m_right_column_x + m_indent,
+		 get_y_from_preceding(m_label_description) + m_padding,
+		 get_right_column_w(m_right_column_x + m_indent),
+		 m_buty - get_y_from_preceding(m_label_description) - 4 * m_padding),
 
 	// Campaign list
 	m_list(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth)
@@ -87,7 +84,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 	m_title.set_textstyle(ts_big());
 	m_back.set_tooltip(_("Return to the main menu"));
 	m_ok.set_tooltip(_("Play this campaign"));
-	m_ta_mapname.set_tooltip(_("The name of this campaign"));
+	m_ta_campname.set_tooltip(_("The name of this campaign"));
 	m_ta_difficulty.set_tooltip(_("The difficulty of this campaign"));
 	m_ta_description.set_tooltip(_("Story and hints"));
 
@@ -153,13 +150,13 @@ void FullscreenMenuCampaignSelect::campaign_selected(uint32_t const i)
 		std::string dif_description = s.get_string
 			(cdif_descr.c_str(), _("[No value found]"));
 
-		m_ta_mapname .set_text(s.get_string(cname.c_str(), _("[No value found]")));
+		m_ta_campname .set_text(s.get_string(cname.c_str(), _("[No value found]")));
 		m_ta_difficulty.set_text(dif_description.c_str());
 		m_ta_description.set_text(s.get_string(cdescription.c_str(), _("[No value found]")));
 
 	} else { // normally never here
 		m_ok.set_enabled(false);
-		m_ta_mapname  .set_text(_("[Invalid entry]"));
+		m_ta_campname  .set_text(_("[Invalid entry]"));
 		m_ta_difficulty.set_text("");
 		m_ta_description .set_text("");
 	}
@@ -246,44 +243,42 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect() :
 
 	// Main title
 	m_title
-		(this,
-		 get_w() / 2, m_maplisty / 3,
+		(this, get_w() / 2, m_maplisty / 3,
 		 _("Choose a scenario"),
 		 UI::Align_HCenter),
 	m_subtitle
-		(this,
-		 get_w() / 2, m_maplisty / 3 + 50,
+		(this, get_w() / 2, m_maplisty / 3 + 50,
 		 "",
 		 UI::Align_HCenter),
 
 	// Map description
 	m_label_mapname
-		(this,
-		 m_butx, m_maplisty,
+		(this, m_right_column_x, m_maplisty,
 		 _("Scenario:"),
 		 UI::Align_Left),
-	m_ta_mapname(this, m_butx + m_indent, m_label_mapname.get_y() + m_label_mapname.get_h() + m_padding,
-					get_w() - m_butx - m_indent - m_margin_right, 2 * m_label_height - m_padding),
+	m_ta_mapname(this,
+					 m_right_column_x + m_indent, get_y_from_preceding(m_label_mapname) + m_padding,
+					 get_right_column_w(m_right_column_x + m_indent), 2 * m_label_height - m_padding),
 
 	m_label_author
 		(this,
-		 m_butx, m_ta_mapname.get_y() + m_ta_mapname.get_h() + 3 * m_padding,
+		 m_right_column_x, get_y_from_preceding(m_ta_mapname) + 3 * m_padding,
 		 _("Authors:"),
 		 UI::Align_Left),
-	m_ta_author(this, m_butx + m_indent, m_label_author.get_y() + m_label_author.get_h() + m_padding,
-				get_w() - m_butx - m_indent - m_margin_right, m_label_height),
+	m_ta_author(this,
+					m_right_column_x + m_indent, get_y_from_preceding(m_label_author) + m_padding,
+					get_right_column_w(m_right_column_x + m_indent), m_label_height),
 
 	m_label_description
-		(this,
-		 m_butx, m_ta_author.get_y() + m_ta_author.get_h() + 3 * m_padding,
+		(this, m_right_column_x, get_y_from_preceding(m_ta_author) + 3 * m_padding,
 		 _("Description:"),
 		 UI::Align_Left),
 	m_ta_description
 		(this,
-		 m_butx + m_indent,
-		 m_label_description.get_y() + m_label_description.get_h() + m_padding,
-		 get_w() - m_butx - m_indent - m_margin_right,
-		 m_buty - m_label_description.get_y() - m_label_description.get_h()  - 4 * m_padding),
+		 m_right_column_x + m_indent,
+		 get_y_from_preceding(m_label_description) + m_padding,
+		 get_right_column_w(m_right_column_x + m_indent),
+		 m_buty - get_y_from_preceding(m_label_description) - 4 * m_padding),
 
 	// Campaign map list
 	m_list(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth)

@@ -46,66 +46,64 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	FullscreenMenuLoadMapOrGame(),
 
 	m_checkbox_space(25),
+	m_maplist_players_column_width(35),
 
 	// Main title
 	m_title
-		(this,
-		 get_w() / 2, get_h() / 25,
+		(this, get_w() / 2, get_h() / 25,
 		 _("Choose a map"),
 		 UI::Align_HCenter),
 
 	// Map description
 	m_label_mapname
-		(this,
-		 m_butx, m_maplisty,
+		(this, m_right_column_x, m_maplisty,
 		 _("Map Name:"),
 		 UI::Align_Left),
-	m_ta_mapname(this, m_butx + m_indent, m_label_mapname.get_y() + m_label_mapname.get_h() + m_padding,
-					get_w() - m_butx - m_indent - m_margin_right, 2 * m_label_height - m_padding),
+	m_ta_mapname(this,
+					 m_right_column_x + m_indent, get_y_from_preceding(m_label_mapname) + m_padding,
+					 get_right_column_w(m_right_column_x + m_indent), 2 * m_label_height - m_padding),
 
 	m_label_author
-		(this,
-		 m_butx, m_ta_mapname.get_y() + m_ta_mapname.get_h() + m_padding,
+		(this, m_right_column_x, get_y_from_preceding(m_ta_mapname) + m_padding,
 		 _("Authors:"),
 		 UI::Align_Left),
-	m_ta_author(this, m_description_column_tab, m_label_author.get_y(),
-				get_w() - m_butx - m_margin_right, m_label_height),
+	m_ta_author(this,
+					m_right_column_tab, m_label_author.get_y(),
+					get_right_column_w(m_right_column_tab), m_label_height),
 
 	m_label_size
-		(this,
-		 m_butx, m_ta_author.get_y() + m_ta_author.get_h(),
+		(this, m_right_column_x, get_y_from_preceding(m_ta_author),
 		 _("Size:"),
 		 UI::Align_Left),
-	m_ta_size(this, m_description_column_tab, m_label_size.get_y(),
-				 get_w() - m_butx - m_margin_right, m_label_height),
+	m_ta_size(this,
+				 m_right_column_tab, m_label_size.get_y(),
+				 get_right_column_w(m_right_column_tab), m_label_height),
 
 	m_label_players
-		(this,
-		 m_butx, m_ta_size.get_y() + m_ta_size.get_h(),
+		(this, m_right_column_x, get_y_from_preceding(m_ta_size),
 		 _("Players:"),
 		 UI::Align_Left),
-	m_ta_players(this, m_description_column_tab, m_label_players.get_y(),
-					 get_w() - m_butx - m_margin_right, m_label_height),
+	m_ta_players(this,
+					 m_right_column_tab, m_label_players.get_y(),
+					 get_right_column_w(m_right_column_tab), m_label_height),
 
 	m_label_description
-		(this,
-		 m_butx, m_ta_players.get_y() + m_ta_players.get_h() + 3 * m_padding,
+		(this, m_right_column_x, get_y_from_preceding(m_ta_players) + 3 * m_padding,
 		 _("Description:"),
 		 UI::Align_Left),
 	m_ta_description
 		(this,
-		 m_butx + m_indent,
-		 m_label_description.get_y() + m_label_description.get_h() + m_padding,
-		 get_w() - m_butx - m_indent - m_margin_right,
-		 m_buty - m_label_description.get_y() - m_label_description.get_h()  - 4 * m_padding),
+		 m_right_column_x + m_indent,
+		 get_y_from_preceding(m_label_description) + m_padding,
+		 get_right_column_w(m_right_column_x + m_indent),
+		 m_buty - get_y_from_preceding(m_label_description) - 4 * m_padding),
 
 	// Scenario checkbox
 	m_label_load_map_as_scenario
-		(this,
-		 m_maplistx + m_checkbox_space, m_maplisty - 35,
+		(this, m_maplistx + m_checkbox_space, m_maplisty - 35,
 		 _("Load map as scenario"),
 		 UI::Align_Left),
-	m_cb_load_map_as_scenario (this, Point (m_maplistx, m_maplisty - 35)),
+	m_cb_load_map_as_scenario(this, Point (m_maplistx, m_maplisty - 35)),
 
 	// Map table
 	m_list(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth),
@@ -131,9 +129,9 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	m_list.double_clicked.connect(boost::bind(&FullscreenMenuMapSelect::double_clicked, this, _1));
 
 	/** TRANSLATORS: Column title for number of players in map list */
-	m_list.add_column(m_nr_players_width, _("Pl."), "", UI::Align_HCenter);
+	m_list.add_column(m_maplist_players_column_width, _("Pl."), "", UI::Align_HCenter);
 	m_list.add_column
-		(m_list.get_w() - m_nr_players_width, _("Map Name"), "", UI::Align_Left);
+		(m_list.get_w() - m_maplist_players_column_width, _("Map Name"), "", UI::Align_Left);
 	m_list.set_column_compare
 		(1,
 		 boost::bind
