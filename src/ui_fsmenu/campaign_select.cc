@@ -93,11 +93,11 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 			 (&FullscreenMenuCampaignSelect::clicked_ok, boost::ref(*this)));
 	m_back.sigclicked.connect
 		(boost::bind
-			 (&FullscreenMenuCampaignSelect::end_modal, boost::ref(*this), 0));
+			 (&FullscreenMenuCampaignSelect::clicked_back, boost::ref(*this)));
 	m_list.selected.connect
 		(boost::bind(&FullscreenMenuCampaignSelect::campaign_selected, this, _1));
 	m_list.double_clicked.connect
-		(boost::bind(&FullscreenMenuCampaignSelect::double_clicked, this, _1));
+		(boost::bind(&FullscreenMenuCampaignSelect::clicked_ok, boost::ref(*this)));
 
 	m_list.focus();
 	fill_list();
@@ -161,15 +161,6 @@ void FullscreenMenuCampaignSelect::campaign_selected(uint32_t const i)
 		m_ta_description .set_text("");
 	}
 	m_ta_description.scroll_to_top();
-}
-
-
-/**
- * listbox got double clicked
- */
-void FullscreenMenuCampaignSelect::double_clicked(uint32_t)
-{
-	clicked_ok();
 }
 
 
@@ -295,21 +286,12 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect() :
 			 (&FullscreenMenuCampaignMapSelect::clicked_ok, boost::ref(*this)));
 	m_back.sigclicked.connect
 		(boost::bind
-			 (&FullscreenMenuCampaignMapSelect::end_modal, boost::ref(*this), 0));
+			 (&FullscreenMenuCampaignMapSelect::clicked_back, boost::ref(*this)));
 	m_list.selected.connect(boost::bind(&FullscreenMenuCampaignMapSelect::map_selected, this, _1));
 	m_list.double_clicked.connect
-		(boost::bind(&FullscreenMenuCampaignMapSelect::double_clicked, this, _1));
+		(boost::bind(&FullscreenMenuCampaignMapSelect::clicked_ok, boost::ref(*this)));
 
 	m_list.focus();
-}
-
-
-/**
- * OK was clicked, after an entry of maplist got selected.
- */
-void FullscreenMenuCampaignMapSelect::clicked_ok()
-{
-	end_modal(1);
 }
 
 
@@ -350,15 +332,6 @@ void FullscreenMenuCampaignMapSelect::map_selected(uint32_t) {
 
 	// enable OK button
 	m_ok.set_enabled(true);
-}
-
-
-/**
- * listbox got double clicked
- */
-void FullscreenMenuCampaignMapSelect::double_clicked(uint32_t)
-{
-	clicked_ok();
 }
 
 

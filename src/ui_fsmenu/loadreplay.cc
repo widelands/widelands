@@ -98,14 +98,14 @@ FullscreenMenuLoadReplay::FullscreenMenuLoadReplay(Widelands::Game & g) :
 	m_ta_win_condition.set_tooltip(_("The win condition that was set for this game"));
 	m_delete.set_tooltip(_("Delete this replay"));
 
-	m_back.sigclicked.connect(boost::bind(&FullscreenMenuLoadReplay::end_modal, boost::ref(*this), 0));
+	m_back.sigclicked.connect(boost::bind(&FullscreenMenuLoadReplay::clicked_back, boost::ref(*this)));
 	m_ok.sigclicked.connect(boost::bind(&FullscreenMenuLoadReplay::clicked_ok, boost::ref(*this)));
 	m_delete.sigclicked.connect
 		(boost::bind
 		 	 (&FullscreenMenuLoadReplay::clicked_delete, boost::ref(*this)));
 	m_list.selected.connect(boost::bind(&FullscreenMenuLoadReplay::replay_selected, this, _1));
 	m_list.double_clicked.connect
-		(boost::bind(&FullscreenMenuLoadReplay::double_clicked, this, _1));
+		(boost::bind(&FullscreenMenuLoadReplay::clicked_ok, boost::ref(*this)));
 
 	m_list.focus();
 	fill_list();
@@ -120,11 +120,6 @@ void FullscreenMenuLoadReplay::clicked_ok()
 
 	m_filename = m_list.get_selected();
 	end_modal(1);
-}
-
-void FullscreenMenuLoadReplay::double_clicked(uint32_t)
-{
-	clicked_ok();
 }
 
 void FullscreenMenuLoadReplay::clicked_delete()
@@ -244,34 +239,15 @@ bool FullscreenMenuLoadReplay::handle_key(bool down, SDL_keysym code)
 
 	switch (code.sym)
 	{
-	case SDLK_KP2:
-		if (code.mod & KMOD_NUM)
-			break;
-		/* no break */
-	case SDLK_DOWN:
-	case SDLK_KP8:
-		if (code.mod & KMOD_NUM)
-			break;
-		/* no break */
-	case SDLK_UP:
-		m_list.handle_key(down, code);
-		return true;
-	case SDLK_KP_ENTER:
-	case SDLK_RETURN:
-		clicked_ok();
-		return true;
-	case SDLK_KP_PERIOD:
-		if (code.mod & KMOD_NUM)
-			break;
-		/* no break */
-	case SDLK_DELETE:
-		clicked_delete();
-		return true;
-	case SDLK_ESCAPE:
-		end_modal(0);
-		return true;
-	default:
-		break; // not handled
+		case SDLK_KP_PERIOD:
+			if (code.mod & KMOD_NUM)
+				break;
+			/* no break */
+		case SDLK_DELETE:
+			clicked_delete();
+			return true;
+		default:
+			break; // not handled
 	}
 
 	return FullscreenMenuLoadMapOrGame::handle_key(down, code);

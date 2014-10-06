@@ -118,13 +118,13 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	m_delete.set_tooltip(_("Delete this game"));
 	m_minimap_icon.set_visible(false);
 
-	m_back.sigclicked.connect(boost::bind(&FullscreenMenuLoadGame::end_modal, boost::ref(*this), 0));
+	m_back.sigclicked.connect(boost::bind(&FullscreenMenuLoadGame::clicked_back, boost::ref(*this)));
 	m_ok.sigclicked.connect(boost::bind(&FullscreenMenuLoadGame::clicked_ok, boost::ref(*this)));
 	m_delete.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuLoadGame::clicked_delete, boost::ref(*this)));
 	m_list.selected.connect(boost::bind(&FullscreenMenuLoadGame::map_selected, this, _1));
-	m_list.double_clicked.connect(boost::bind(&FullscreenMenuLoadGame::double_clicked, this, _1));
+	m_list.double_clicked.connect(boost::bind(&FullscreenMenuLoadGame::clicked_ok, boost::ref(*this)));
 
 	m_list.focus();
 	fill_list();
@@ -290,12 +290,6 @@ void FullscreenMenuLoadGame::map_selected(uint32_t selected)
 	}
 }
 
-/**
- * Listbox got double clicked
- */
-void FullscreenMenuLoadGame::double_clicked(uint32_t) {
-	clicked_ok();
-}
 
 /**
  * Fill the file list
@@ -339,34 +333,15 @@ bool FullscreenMenuLoadGame::handle_key(bool down, SDL_keysym code)
 
 	switch (code.sym)
 	{
-	case SDLK_KP2:
-		if (code.mod & KMOD_NUM)
+		case SDLK_KP_PERIOD:
+			if (code.mod & KMOD_NUM)
+				break;
+			/* no break */
+		case SDLK_DELETE:
+			clicked_delete();
+			return true;
+		default:
 			break;
-		/* no break */
-	case SDLK_DOWN:
-	case SDLK_KP8:
-		if (code.mod & KMOD_NUM)
-			break;
-		/* no break */
-	case SDLK_UP:
-		m_list.handle_key(down, code);
-		return true;
-	case SDLK_KP_ENTER:
-	case SDLK_RETURN:
-		clicked_ok();
-		return true;
-	case SDLK_KP_PERIOD:
-		if (code.mod & KMOD_NUM)
-			break;
-		/* no break */
-	case SDLK_DELETE:
-		clicked_delete();
-		return true;
-	case SDLK_ESCAPE:
-		end_modal(0);
-		return true;
-	default:
-		break;
 	}
 
 	return FullscreenMenuLoadMapOrGame::handle_key(down, code);

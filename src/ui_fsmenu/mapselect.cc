@@ -123,10 +123,10 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	m_ta_size.set_tooltip(_("The size of this map (Width x Height)"));
 	m_ta_description.set_tooltip(_("Story and hints"));
 
-	m_back.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::end_modal, boost::ref(*this), 0));
+	m_back.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_back, boost::ref(*this)));
 	m_ok.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_ok, boost::ref(*this)));
 	m_list.selected.connect(boost::bind(&FullscreenMenuMapSelect::map_selected, this, _1));
-	m_list.double_clicked.connect(boost::bind(&FullscreenMenuMapSelect::double_clicked, this, _1));
+	m_list.double_clicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_ok, boost::ref(*this)));
 
 	/** TRANSLATORS: Column title for number of players in map list */
 	m_list.add_column(m_maplist_players_column_width, _("Pl."), "", UI::Align_HCenter);
@@ -267,12 +267,6 @@ void FullscreenMenuMapSelect::map_selected(uint32_t)
 	m_ta_description.scroll_to_top();
 }
 
-/**
- * listbox got double clicked
- */
-void FullscreenMenuMapSelect::double_clicked(uint32_t) {
-	clicked_ok();
-}
 
 /**
  * Fill the list with maps that can be opened.

@@ -73,10 +73,11 @@ struct FullscreenMenuMapSelect : public FullscreenMenuLoadMapOrGame {
 	MapData const* get_map() const;
 	void think() override;
 
+protected:
+	void clicked_ok() override;
+
 private:
-	void clicked_ok();
 	void map_selected(uint32_t);
-	void double_clicked(uint32_t);
 	void fill_list();
 	bool compare_maprows(uint32_t, uint32_t);
 

@@ -36,11 +36,12 @@ struct FullscreenMenuEditorMapSelect : public FullscreenMenuLoadMapOrGame {
 
 	std::string get_map();
 
+protected:
+	void clicked_ok() override;
+
 private:
-	void clicked_ok();
 	void map_selected(uint32_t);
 	void changed(bool);
-	void double_clicked(uint32_t);
 	void fill_list();
 
 	UI::Textarea                  m_title;

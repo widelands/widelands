@@ -56,11 +56,12 @@ struct FullscreenMenuLoadGame : public FullscreenMenuLoadMapOrGame {
 
 	bool handle_key(bool down, SDL_keysym code) override;
 
+protected:
+	void clicked_ok() override;
+
 private:
-	void clicked_ok();
 	void clicked_delete();
 	void map_selected(uint32_t);
-	void double_clicked(uint32_t);
 	void fill_list();
 	void no_selection();
 

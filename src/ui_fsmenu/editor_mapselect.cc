@@ -104,11 +104,11 @@ FullscreenMenuEditorMapSelect::FullscreenMenuEditorMapSelect() :
 	m_ta_size.set_tooltip(_("The size of this map (Width x Height)"));
 	m_ta_description.set_tooltip(_("Story and hints"));
 
-	m_back.sigclicked.connect(boost::bind(&FullscreenMenuEditorMapSelect::end_modal, boost::ref(*this), 0));
+	m_back.sigclicked.connect(boost::bind(&FullscreenMenuEditorMapSelect::clicked_back, boost::ref(*this)));
 	m_ok.sigclicked.connect(boost::bind(&FullscreenMenuEditorMapSelect::clicked_ok, boost::ref(*this)));
 	m_list.selected.connect(boost::bind(&FullscreenMenuEditorMapSelect::map_selected, this, _1));
 	m_list.double_clicked.connect
-		(boost::bind(&FullscreenMenuEditorMapSelect::double_clicked, this, _1));
+		(boost::bind(&FullscreenMenuEditorMapSelect::clicked_ok, boost::ref(*this)));
 
 	m_list.focus();
 	fill_list();
@@ -175,10 +175,6 @@ void FullscreenMenuEditorMapSelect::map_selected(uint32_t)
 	m_ta_description.scroll_to_top();
 }
 
-/**
- * listbox got double clicked
- */
-void FullscreenMenuEditorMapSelect::double_clicked(uint32_t) {clicked_ok();}
 
 /**
  * fill the file list

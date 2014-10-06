@@ -78,9 +78,30 @@ struct FullscreenMenuLoadMapOrGame : public FullscreenMenuBase {
 			_("OK"), std::string(), false, false)
 	{}
 
-	bool handle_key(bool down, SDL_keysym code) override {return FullscreenMenuBase::handle_key(down, code);}
+	bool handle_key(bool down, SDL_keysym code) override {
+
+		if (!down)
+			return false;
+
+		switch (code.sym)
+		{
+			case SDLK_KP_ENTER:
+			case SDLK_RETURN:
+				clicked_ok();
+				return true;
+			case SDLK_ESCAPE:
+				clicked_back();
+				return true;
+			default:
+				break; // not handled
+		}
+		return FullscreenMenuBase::handle_key(down, code);
+	}
 
 protected:
+	virtual void clicked_ok() {end_modal(1);}
+	void clicked_back() {end_modal(0);}
+
 	// Returns a y coordinate that can be used to position a Panel below the Panel directly above it
 	int32_t get_y_from_preceding(UI::Panel& preceding_panel) {
 		return preceding_panel.get_y() + preceding_panel.get_h();

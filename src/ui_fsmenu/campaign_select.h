@@ -40,10 +40,11 @@ struct FullscreenMenuCampaignSelect : public FullscreenMenuLoadMapOrGame {
 
 	int32_t get_campaign();
 
+protected:
+	void clicked_ok() override;
+
 private:
-	void clicked_ok();
 	void campaign_selected(uint32_t);
-	void double_clicked(uint32_t);
 	void fill_list();
 
 	UI::Textarea                  m_title;
@@ -71,9 +72,7 @@ struct FullscreenMenuCampaignMapSelect : public FullscreenMenuLoadMapOrGame {
 	void set_campaign(uint32_t);
 
 private:
-	void clicked_ok();
 	void map_selected(uint32_t);
-	void double_clicked(uint32_t);
 	void fill_list();
 
 	UI::Textarea                  m_title;
