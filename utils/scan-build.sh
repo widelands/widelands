@@ -20,9 +20,7 @@ BUILD_DIR=$SOURCE_DIR/build/scan-build
 mkdir -p $BUILD_DIR
 cd $BUILD_DIR
 
-scan-build cmake $SOURCE_DIR -DCMAKE_BUILD_TYPE=Debug \
- -DWL_PORTABLE=true 
-
+scan-build cmake $SOURCE_DIR -DCMAKE_BUILD_TYPE=Debug
 scan-build make
 
 #The output is stored in /tmp, doesn't need the actual build

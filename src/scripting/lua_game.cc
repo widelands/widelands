@@ -1119,7 +1119,6 @@ int LuaMessage::get_sent(lua_State * L) {
 
 
 /* RST
->>>>>>> MERGE-SOURCE
 	.. attribute:: field
 
 		(RO) The field that corresponds to this Message.
