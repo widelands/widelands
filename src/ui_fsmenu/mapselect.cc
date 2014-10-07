@@ -46,10 +46,11 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	FullscreenMenuLoadMapOrGame(),
 
 	m_checkbox_space(25),
+	m_checkboxes_y(m_maplisty - 120),
 
 	// Main title
 	m_title
-		(this, get_w() / 2, get_h() / 25,
+		(this, get_w() / 2, m_checkboxes_y / 3,
 		 _("Choose a map"),
 		 UI::Align_HCenter),
 
@@ -146,7 +147,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	m_cb_load_map_as_scenario.set_state(false);
 	m_cb_load_map_as_scenario.set_enabled(false);
 
-	UI::Box* vbox = new UI::Box(this, m_maplistx, m_maplisty - 120,
+	UI::Box* vbox = new UI::Box(this, m_maplistx, m_checkboxes_y,
 										 UI::Box::Horizontal, m_checkbox_space, get_w());
 	m_cb_show_all_maps = _add_tag_checkbox(vbox, "blumba", _("Show all maps"));
 	m_tags_checkboxes.clear(); // Remove this again, it is a special tag checkbox
@@ -155,14 +156,13 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	m_cb_dont_localize_mapnames = new UI::Checkbox(vbox, Point(0, 0));
 	m_cb_dont_localize_mapnames->changedto.connect
 			(boost::bind(&FullscreenMenuMapSelect::fill_list, boost::ref(*this)));
-
 	vbox->add(m_cb_dont_localize_mapnames, UI::Box::AlignLeft, true);
-	/** TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated. */
-	UI::Textarea * ta_dont_localize_mapnames = new UI::Textarea(vbox, _("Show original map names"), UI::Align_CenterLeft);
+	UI::Textarea * ta_dont_localize_mapnames =
+			/** TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated. */
+			new UI::Textarea(vbox, _("Show original map names"), UI::Align_CenterLeft);
 	vbox->add_space(m_padding);
 	vbox->add(ta_dont_localize_mapnames, UI::Box::AlignLeft);
 	vbox->add_space(m_checkbox_space);
-
 	vbox->set_size(get_w() - 2 * m_maplistx, m_checkbox_space);
 
 	vbox = new UI::Box(this,
