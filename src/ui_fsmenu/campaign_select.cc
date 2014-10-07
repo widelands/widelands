@@ -53,14 +53,22 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 	// Campaign description
 	m_label_campname
 		(this, m_right_column_x, m_maplisty,
-		 _("Campaign:"),
+		 _("Campaign Name:"),
 		 UI::Align_Left),
 	m_ta_campname(this,
 					  m_right_column_x + m_indent, get_y_from_preceding(m_label_campname) + m_padding,
-					  get_right_column_w(m_right_column_x) - m_indent, 2 * m_label_height - m_padding),
+					  get_right_column_w(m_right_column_x) - m_indent, m_label_height),
+
+	m_label_tribename
+		(this, m_right_column_x, get_y_from_preceding(m_ta_campname) + 2 * m_padding,
+		 _("Tribe:"),
+		 UI::Align_Left),
+	m_ta_tribename(this,
+						 m_right_column_x + m_indent, get_y_from_preceding(m_label_tribename) + m_padding,
+						 get_right_column_w(m_right_column_x + m_indent), m_label_height),
 
 	m_label_difficulty
-		(this, m_right_column_x, get_y_from_preceding(m_ta_campname) + 3 * m_padding,
+		(this, m_right_column_x, get_y_from_preceding(m_ta_tribename) + 2 * m_padding,
 		 _("Difficulty:"),
 		 UI::Align_Left),
 	m_ta_difficulty(this,
@@ -68,7 +76,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 						 get_right_column_w(m_right_column_x + m_indent), 2 * m_label_height - m_padding),
 
 	m_label_description
-		(this, m_right_column_x, get_y_from_preceding(m_ta_difficulty) + 3 * m_padding,
+		(this, m_right_column_x, get_y_from_preceding(m_ta_difficulty) + 2 * m_padding,
 		 _("Description:"),
 		 UI::Align_Left),
 	m_ta_description
@@ -79,12 +87,13 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 		 m_buty - get_y_from_preceding(m_label_description) - 4 * m_padding),
 
 	// Campaign list
-	m_list(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth)
+	m_table(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth)
 {
 	m_title.set_textstyle(ts_big());
 	m_back.set_tooltip(_("Return to the main menu"));
 	m_ok.set_tooltip(_("Play this campaign"));
 	m_ta_campname.set_tooltip(_("The name of this campaign"));
+	m_ta_tribename.set_tooltip(_("The tribe you will be playing"));
 	m_ta_difficulty.set_tooltip(_("The difficulty of this campaign"));
 	m_ta_description.set_tooltip(_("Story and hints"));
 
@@ -94,12 +103,20 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 	m_back.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuCampaignSelect::clicked_back, boost::ref(*this)));
-	m_list.selected.connect
+	m_table.selected.connect
 		(boost::bind(&FullscreenMenuCampaignSelect::campaign_selected, this, _1));
-	m_list.double_clicked.connect
+	m_table.double_clicked.connect
 		(boost::bind(&FullscreenMenuCampaignSelect::clicked_ok, boost::ref(*this)));
 
-	m_list.focus();
+	/** TRANSLATORS: Campaign difficulty table header */
+	m_table.add_column(45, _("Diff."), _("Difficulty"), UI::Align_Left);
+	m_table.add_column(100, _("Tribe"), _("Tribe Name"), UI::Align_Left);
+	m_table.add_column(m_table.get_w() - 100 - 45, _("Campaign Name"), _("Campaign Name"), UI::Align_Left);
+	m_table.set_column_compare
+			(0,
+			 boost::bind(&FullscreenMenuCampaignSelect::compare_difficulty, this, _1, _2));
+	m_table.set_sort_column(0);
+	m_table.focus();
 	fill_list();
 }
 
@@ -129,34 +146,25 @@ static char const * const difficulty_picture_filenames[] = {
 /**
  * an entry of campaignlist got selected.
  */
-void FullscreenMenuCampaignSelect::campaign_selected(uint32_t const i)
+void FullscreenMenuCampaignSelect::campaign_selected(uint32_t i)
 {
-	if (m_list.get_selected()) { //  false if the selected entry has no value
-		campaign = i;
+
+	if (i < m_campaigns_data.size()) { // Don't test for get_selected(), because we need index 0
+
+		const CampaignListData& campaign_data = m_campaigns_data[i];
+		campaign = campaign_data.index;
 
 		// enable OK button
 		m_ok.set_enabled(true);
-
-		Profile prof("campaigns/cconfig", nullptr, "maps");
-		Section & s = prof.get_safe_section("global");
-
-		const std::string cname = (boost::format("campname%u") % i).str();
-		const std::string cdifficulty = (boost::format("campdiff%u") % i).str();
-		const std::string cdif_descr = (boost::format("campdiffdescr%u") % i).str();
-		const std::string cdescription = (boost::format("campdesc%u") % i).str();
-
-		s.get_natural(cdifficulty.c_str());
-
-		std::string dif_description = s.get_string
-			(cdif_descr.c_str(), _("[No value found]"));
-
-		m_ta_campname .set_text(s.get_string(cname.c_str(), _("[No value found]")));
-		m_ta_difficulty.set_text(dif_description.c_str());
-		m_ta_description.set_text(s.get_string(cdescription.c_str(), _("[No value found]")));
+		m_ta_campname.set_text(campaign_data.name);
+		m_ta_tribename.set_text(campaign_data.tribename);
+		m_ta_difficulty.set_text(campaign_data.difficulty_description);
+		m_ta_description.set_text(campaign_data.description);
 
 	} else { // normally never here
 		m_ok.set_enabled(false);
-		m_ta_campname  .set_text(_("[Invalid entry]"));
+		m_ta_campname.set_text("");
+		m_ta_tribename.set_text("");
 		m_ta_difficulty.set_text("");
 		m_ta_description .set_text("");
 	}
@@ -169,6 +177,9 @@ void FullscreenMenuCampaignSelect::campaign_selected(uint32_t const i)
  */
 void FullscreenMenuCampaignSelect::fill_list()
 {
+	m_campaigns_data.clear();
+	m_table.clear();
+
 	// Read in the campaign config
 	Profile prof("campaigns/cconfig", nullptr, "maps");
 	Section & s = prof.get_safe_section("global");
@@ -182,12 +193,18 @@ void FullscreenMenuCampaignSelect::fill_list()
 	uint32_t i = 0;
 	std::string csection = (boost::format("campsect%u") % i).str();
 	std::string cname;
+	std::string ctribename;
 	std::string cdifficulty;
+	std::string cdiff_descr;
+	std::string cdescription;
 
 	while (s.get_string(csection.c_str())) {
 
 		cname = (boost::format("campname%u") % i).str();
+		ctribename = (boost::format("camptribe%u") % i).str();
 		cdifficulty = (boost::format("campdiff%u") % i).str();
+		cdiff_descr = (boost::format("campdiffdescr%u") % i).str();
+		cdescription = (boost::format("campdesc%u") % i).str();
 
 		// Only list visible campaigns
 		if (c.get_bool(csection.c_str())) {
@@ -202,10 +219,20 @@ void FullscreenMenuCampaignSelect::fill_list()
 				difficulty = 0;
 			}
 
-			m_list.add
-				(s.get_string(cname.c_str(), _("[No value found]")),
-				 s.get_string(csection.c_str()),
-				 g_gr->images().get(difficulty_picture_filenames[difficulty]));
+			CampaignListData campaign_data;
+
+			campaign_data.index = i;
+			campaign_data.name = s.get_string(cname.c_str(), "");
+			campaign_data.tribename = s.get_string(ctribename.c_str(), "");
+			campaign_data.difficulty = difficulty;
+			campaign_data.difficulty_description = s.get_string(cdiff_descr.c_str(), "");
+			campaign_data.description = s.get_string(cdescription.c_str(), "");
+			m_campaigns_data.push_back(campaign_data);
+
+			UI::Table<uintptr_t>::EntryRecord& tableEntry = m_table.add(i);
+			tableEntry.set_picture(0, g_gr->images().get(difficulty_picture_filenames[difficulty]));
+			tableEntry.set_string(1, campaign_data.tribename);
+			tableEntry.set_string(2, campaign_data.name);
 		}
 
 		// Increase counter & csection
@@ -213,9 +240,23 @@ void FullscreenMenuCampaignSelect::fill_list()
 		csection = (boost::format("campsect%u") % i).str();
 
 	} // while (s.get_string(csection.c_str()))
-	if (m_list.size()) {
-		m_list.select(0);
+
+	m_table.sort();
+	if (m_table.size()) {
+		m_table.select(0);
 	}
+}
+
+bool FullscreenMenuCampaignSelect::compare_difficulty
+	(uint32_t rowa, uint32_t rowb)
+{
+	const CampaignListData& r1 = m_campaigns_data[m_table[rowa]];
+	const CampaignListData& r2 = m_campaigns_data[m_table[rowb]];
+
+	if (r1.difficulty < r2.difficulty) {
+		return true;
+	}
+	return r1.index < r2.index;
 }
 
 
@@ -363,7 +404,7 @@ void FullscreenMenuCampaignMapSelect::fill_list()
 	while (Section * const s = prof.get_section(mapsection.c_str())) {
 		if (c.get_bool(mapsection.c_str())) {
 			m_list.add
-				(s->get_string("name", _("[No value found]")),
+				(s->get_string("name", ""),
 				 s->get_string("path"),
 				 g_gr->images().get("pics/ls_wlmap.png"));
 		}

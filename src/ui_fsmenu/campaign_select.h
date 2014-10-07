@@ -24,12 +24,14 @@
 #include "ui_basic/button.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
+#include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/load_map_or_game.h"
 
 /*
  * Fullscreen Menu for all Campaigns
  */
+
 
 /*
  * UI 1 - Selection of Campaign
@@ -44,18 +46,39 @@ protected:
 	void clicked_ok() override;
 
 private:
+	/**
+	 * Data about a campaign that we're interested in.
+	 */
+	struct CampaignListData {
+
+		uint32_t index;
+		std::string name;
+		std::string tribename;
+		uint32_t difficulty;
+		std::string difficulty_description;
+		std::string description;
+
+		CampaignListData()
+			: index(0), name(""), difficulty(0), difficulty_description(""), description("") {}
+	};
+
 	void campaign_selected(uint32_t);
 	void fill_list();
+	bool compare_difficulty(uint32_t, uint32_t);
 
 	UI::Textarea                  m_title;
 	UI::Textarea                  m_label_campname;
 	UI::MultilineTextarea         m_ta_campname;
+	UI::Textarea                  m_label_tribename;
+	UI::MultilineTextarea         m_ta_tribename;
 	UI::Textarea                  m_label_difficulty;
 	UI::MultilineTextarea         m_ta_difficulty;
 	UI::Textarea                  m_label_description;
 	UI::MultilineTextarea         m_ta_description;
 
-	UI::Listselect<const char *>  m_list;
+	UI::Table<uintptr_t const>    m_table;
+
+	std::vector<CampaignListData> m_campaigns_data;
 
 	/// Variables used for exchange between the two Campaign UIs and
 	/// Game::run_campaign
