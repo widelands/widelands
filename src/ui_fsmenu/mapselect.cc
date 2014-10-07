@@ -106,14 +106,6 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	m_cb_load_map_as_scenario(this, Point (m_right_column_x, m_label_load_map_as_scenario.get_y())),
 
 
-	// Don't localize checkbox
-	m_label_dont_localize_mapnames
-		(this, m_maplistx + m_checkbox_space, m_maplisty - 35,
-		 /** TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated. */
-		 _("Show original map names"),
-		 UI::Align_Left),
-	m_cb_dont_localize_mapnames(this, Point (m_maplistx, m_maplisty - 35)),
-
 	// Map table
 	m_table(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth),
 
@@ -134,9 +126,6 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 
 	m_back.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_back, boost::ref(*this)));
 	m_ok.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_ok, boost::ref(*this)));
-	m_cb_dont_localize_mapnames.changedto.connect
-			(boost::bind(&FullscreenMenuMapSelect::fill_list, boost::ref(*this)));
-
 	m_table.selected.connect(boost::bind(&FullscreenMenuMapSelect::map_selected, this, _1));
 	m_table.double_clicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_ok, boost::ref(*this)));
 
@@ -157,19 +146,31 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	m_cb_load_map_as_scenario.set_state(false);
 	m_cb_load_map_as_scenario.set_enabled(false);
 
-	UI::Box* vbox = new UI::Box(this, m_maplistx, m_maplisty - 150,
+	UI::Box* vbox = new UI::Box(this, m_maplistx, m_maplisty - 120,
 										 UI::Box::Horizontal, m_checkbox_space, get_w());
 	m_cb_show_all_maps = _add_tag_checkbox(vbox, "blumba", _("Show all maps"));
 	m_tags_checkboxes.clear(); // Remove this again, it is a special tag checkbox
 	m_cb_show_all_maps->set_state(true);
+
+	m_cb_dont_localize_mapnames = new UI::Checkbox(vbox, Point(0, 0));
+	m_cb_dont_localize_mapnames->changedto.connect
+			(boost::bind(&FullscreenMenuMapSelect::fill_list, boost::ref(*this)));
+
+	vbox->add(m_cb_dont_localize_mapnames, UI::Box::AlignLeft, true);
+	/** TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated. */
+	UI::Textarea * ta_dont_localize_mapnames = new UI::Textarea(vbox, _("Show original map names"), UI::Align_CenterLeft);
+	vbox->add_space(m_padding);
+	vbox->add(ta_dont_localize_mapnames, UI::Box::AlignLeft);
+	vbox->add_space(m_checkbox_space);
+
 	vbox->set_size(get_w() - 2 * m_maplistx, m_checkbox_space);
 
 	vbox = new UI::Box(this,
 							 m_maplistx, vbox->get_y() + vbox->get_h() + m_padding,
 							 UI::Box::Horizontal, m_checkbox_space, get_w());
-	_add_tag_checkbox(vbox, "official", _("Official Map"));
-	_add_tag_checkbox(vbox, "seafaring", _("Seafaring Map"));
+	_add_tag_checkbox(vbox, "official", _("Official"));
 	_add_tag_checkbox(vbox, "unbalanced", _("Unbalanced"));
+	_add_tag_checkbox(vbox, "seafaring", _("Seafaring"));
 	_add_tag_checkbox(vbox, "scenario", _("Scenario"));
 	vbox->set_size(get_w() - 2 * m_maplistx, m_checkbox_space);
 
@@ -199,6 +200,11 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 
 	m_table.focus();
 	fill_list();
+
+	// We don't need the unlocalizing option if there is nothing to unlocalize.
+	// We know this after the list is filled.
+	m_cb_dont_localize_mapnames->set_visible(m_has_translated_mapname);
+	ta_dont_localize_mapnames->set_visible(m_has_translated_mapname);
 }
 
 void FullscreenMenuMapSelect::think()
@@ -232,7 +238,7 @@ bool FullscreenMenuMapSelect::compare_mapnames(uint32_t rowa, uint32_t rowb)
 		return true;
 	} else if (r1.width && !r2.width) {
 		return false;
-	} else if (m_cb_dont_localize_mapnames.get_state()) {
+	} else if (m_cb_dont_localize_mapnames->get_state()) {
 		return r1.name < r2.name;
 	}
 	return r1.localized_name < r2.localized_name;
@@ -292,12 +298,12 @@ void FullscreenMenuMapSelect::map_selected(uint32_t)
 	if (map.width) {
 		m_label_mapname.set_text(_("Map Name:"));
 		std::string map_displayname = map.localized_name;
-		if (m_cb_dont_localize_mapnames.get_state()) {
+		if (m_cb_dont_localize_mapnames->get_state()) {
 			map_displayname = map.name;
 		}
 		m_ta_mapname.set_text(map_displayname);
 		if (map.localized_name != map.name) {
-			if (m_cb_dont_localize_mapnames.get_state()) {
+			if (m_cb_dont_localize_mapnames->get_state()) {
 				m_ta_mapname.set_tooltip
 					/** TRANSLATORS: Tooltip in map description when map names are being displayed in English. */
 					/** TRANSLATORS: %s is the localized name of the map. */
@@ -382,6 +388,7 @@ void FullscreenMenuMapSelect::fill_list()
 
 	m_maps_data.clear();
 	m_table.clear();
+	m_has_translated_mapname = false;
 
 	if (m_settings->settings().maps.empty()) {
 		// This is the normal case
@@ -479,6 +486,9 @@ void FullscreenMenuMapSelect::fill_list()
 						mapdata.tags.insert("scenario");
 					}
 
+					m_has_translated_mapname =
+							m_has_translated_mapname || (mapdata.name != mapdata.localized_name);
+
 					if (!mapdata.width || !mapdata.height) {
 						continue;
 					}
@@ -496,7 +506,7 @@ void FullscreenMenuMapSelect::fill_list()
 					te.set_string(col_players, (boost::format("(%i)") % mapdata.nrplayers).str());
 
 					std::string map_displayname = mapdata.localized_name;
-					if (m_cb_dont_localize_mapnames.get_state()) {
+					if (m_cb_dont_localize_mapnames->get_state()) {
 						map_displayname = mapdata.name;
 					}
 					te.set_picture
