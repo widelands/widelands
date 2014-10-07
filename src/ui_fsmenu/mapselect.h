@@ -105,7 +105,7 @@ private:
 	UI::Checkbox*                 m_cb_show_all_maps;
 	std::vector<UI::Checkbox*>    m_tags_checkboxes;
 
-	UI::Table<uintptr_t const>    m_list;
+	UI::Table<uintptr_t const>    m_table;
 	std::string                   m_curdir, m_basedir;
 	Map::ScenarioTypes            m_scenario_types;
 

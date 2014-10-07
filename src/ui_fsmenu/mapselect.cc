@@ -105,7 +105,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	m_cb_load_map_as_scenario(this, Point (m_maplistx, m_maplisty - 35)),
 
 	// Map table
-	m_list(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth),
+	m_table(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth),
 
 	// Runtime variables
 	m_curdir("maps"), m_basedir("maps"),
@@ -124,20 +124,20 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 
 	m_back.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_back, boost::ref(*this)));
 	m_ok.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_ok, boost::ref(*this)));
-	m_list.selected.connect(boost::bind(&FullscreenMenuMapSelect::map_selected, this, _1));
-	m_list.double_clicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_ok, boost::ref(*this)));
+	m_table.selected.connect(boost::bind(&FullscreenMenuMapSelect::map_selected, this, _1));
+	m_table.double_clicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_ok, boost::ref(*this)));
 
 	/** TRANSLATORS: Column title for number of players in map list */
-	m_list.add_column(35, _("Pl."), _("Number of players"), UI::Align_HCenter);
-	m_list.add_column(m_list.get_w() - 35 - 115, _("Map Name"), _("Map Name"), UI::Align_Left);
-	m_list.add_column(115, _("Size"), _("The size of the map (Width x Height)"), UI::Align_Left);
-	m_list.set_column_compare
+	m_table.add_column(35, _("Pl."), _("Number of players"), UI::Align_HCenter);
+	m_table.add_column(m_table.get_w() - 35 - 115, _("Map Name"), _("Map Name"), UI::Align_Left);
+	m_table.add_column(115, _("Size"), _("The size of the map (Width x Height)"), UI::Align_Left);
+	m_table.set_column_compare
 		(1,
 		 boost::bind(&FullscreenMenuMapSelect::compare_mapnames, this, _1, _2));
-	m_list.set_column_compare
+	m_table.set_column_compare
 		(2,
 		 boost::bind(&FullscreenMenuMapSelect::compare_size, this, _1, _2));
-	m_list.set_sort_column(0);
+	m_table.set_sort_column(0);
 	m_cb_load_map_as_scenario.set_state(false);
 	m_cb_load_map_as_scenario.set_enabled(false);
 
@@ -180,7 +180,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 		m_label_load_map_as_scenario.set_visible(false);
 	}
 
-	m_list.focus();
+	m_table.focus();
 	fill_list();
 }
 
@@ -195,8 +195,8 @@ void FullscreenMenuMapSelect::think()
 bool FullscreenMenuMapSelect::compare_mapnames
 	(uint32_t rowa, uint32_t rowb)
 {
-	const MapData & r1 = m_maps_data[m_list[rowa]];
-	const MapData & r2 = m_maps_data[m_list[rowb]];
+	const MapData & r1 = m_maps_data[m_table[rowa]];
+	const MapData & r2 = m_maps_data[m_table[rowb]];
 
 	if (!r1.width && !r2.width) {
 		return r1.name < r2.name;
@@ -211,8 +211,8 @@ bool FullscreenMenuMapSelect::compare_mapnames
 bool FullscreenMenuMapSelect::compare_size
 	(uint32_t rowa, uint32_t rowb)
 {
-	const MapData & r1 = m_maps_data[m_list[rowa]];
-	const MapData & r2 = m_maps_data[m_list[rowb]];
+	const MapData & r1 = m_maps_data[m_table[rowa]];
+	const MapData & r2 = m_maps_data[m_table[rowb]];
 
 	if (r1.width != r2.width) {
 		return r1.width < r2.width;
@@ -228,16 +228,16 @@ bool FullscreenMenuMapSelect::is_scenario()
 
 MapData const * FullscreenMenuMapSelect::get_map() const
 {
-	if (!m_list.has_selection()) {
+	if (!m_table.has_selection()) {
 		return nullptr;
 	}
-	return &m_maps_data[m_list.get_selected()];
+	return &m_maps_data[m_table.get_selected()];
 }
 
 
 void FullscreenMenuMapSelect::clicked_ok()
 {
-	const MapData & mapdata = m_maps_data[m_list.get_selected()];
+	const MapData & mapdata = m_maps_data[m_table.get_selected()];
 
 	if (!mapdata.width) {
 		m_curdir = mapdata.filename;
@@ -255,7 +255,7 @@ void FullscreenMenuMapSelect::clicked_ok()
  */
 void FullscreenMenuMapSelect::map_selected(uint32_t)
 {
-	const MapData & map = m_maps_data[m_list.get_selected()];
+	const MapData & map = m_maps_data[m_table.get_selected()];
 
 	if (map.width) {
 		m_ta_mapname.set_text(map.localized_name);
@@ -306,7 +306,7 @@ void FullscreenMenuMapSelect::fill_list()
 	uint8_t col_size = 2;
 
 	m_maps_data.clear();
-	m_list.clear();
+	m_table.clear();
 
 	if (m_settings->settings().maps.empty()) {
 		// This is the normal case
@@ -327,7 +327,7 @@ void FullscreenMenuMapSelect::fill_list()
 	#endif
 			m_maps_data.push_back(map);
 			UI::Table<uintptr_t const>::EntryRecord & te =
-				m_list.add(m_maps_data.size() - 1);
+				m_table.add(m_maps_data.size() - 1);
 
 			te.set_string(col_players, "");
 			std::string parent_string =
@@ -357,7 +357,7 @@ void FullscreenMenuMapSelect::fill_list()
 			dir.filename = name;
 
 			m_maps_data.push_back(dir);
-			UI::Table<uintptr_t const>::EntryRecord & te = m_list.add(m_maps_data.size() - 1);
+			UI::Table<uintptr_t const>::EntryRecord & te = m_table.add(m_maps_data.size() - 1);
 
 			te.set_string(col_players, "");
 			te.set_picture
@@ -410,7 +410,7 @@ void FullscreenMenuMapSelect::fill_list()
 					}
 
 					m_maps_data.push_back(mapdata);
-					UI::Table<uintptr_t const>::EntryRecord & te = m_list.add(m_maps_data.size() - 1);
+					UI::Table<uintptr_t const>::EntryRecord & te = m_table.add(m_maps_data.size() - 1);
 
 					te.set_string(col_players, (boost::format("(%i)") % mapdata.nrplayers).str());
 
@@ -466,7 +466,7 @@ void FullscreenMenuMapSelect::fill_list()
 
 				// Finally write the entry to the list
 				m_maps_data.push_back(mapdata);
-				UI::Table<uintptr_t const>::EntryRecord & te = m_list.add(m_maps_data.size() - 1);
+				UI::Table<uintptr_t const>::EntryRecord & te = m_table.add(m_maps_data.size() - 1);
 
 				te.set_string(col_players, (boost::format("(%i)") % mapdata.nrplayers).str());
 				te.set_picture
@@ -492,7 +492,7 @@ void FullscreenMenuMapSelect::fill_list()
 
 				// Finally write the entry to the list
 				m_maps_data.push_back(mapdata);
-				UI::Table<uintptr_t const>::EntryRecord & te = m_list.add(m_maps_data.size() - 1);
+				UI::Table<uintptr_t const>::EntryRecord & te = m_table.add(m_maps_data.size() - 1);
 
 				te.set_string(col_players, (boost::format("(%i)") % mapdata.nrplayers).str());
 				te.set_picture
@@ -503,10 +503,10 @@ void FullscreenMenuMapSelect::fill_list()
 		}
 	}
 
-	m_list.sort();
+	m_table.sort();
 
-	if (m_list.size()) {
-		m_list.select(0);
+	if (m_table.size()) {
+		m_table.select(0);
 	}
 }
 
