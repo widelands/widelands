@@ -279,7 +279,7 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect() :
 		 _("Choose a scenario"),
 		 UI::Align_HCenter),
 	m_subtitle
-		(this, get_w() / 2, m_maplisty / 3 + 50,
+		(this, get_w() / 2, get_y_from_preceding(m_title) + 6 * m_padding,
 		 "",
 		 UI::Align_HCenter),
 
@@ -290,11 +290,11 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect() :
 		 UI::Align_Left),
 	m_ta_mapname(this,
 					 m_right_column_x + m_indent, get_y_from_preceding(m_label_mapname) + m_padding,
-					 get_right_column_w(m_right_column_x + m_indent), 2 * m_label_height - m_padding),
+					 get_right_column_w(m_right_column_x + m_indent), m_label_height),
 
 	m_label_author
 		(this,
-		 m_right_column_x, get_y_from_preceding(m_ta_mapname) + 3 * m_padding,
+		 m_right_column_x, get_y_from_preceding(m_ta_mapname) + 2 * m_padding,
 		 _("Authors:"),
 		 UI::Align_Left),
 	m_ta_author(this,
@@ -313,7 +313,7 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect() :
 		 m_buty - get_y_from_preceding(m_label_description) - 4 * m_padding),
 
 	// Campaign map list
-	m_list(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth)
+	m_table(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth)
 {
 	m_title.set_textstyle(ts_big());
 	m_back.set_tooltip(_("Return to the main menu"));
@@ -328,11 +328,16 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect() :
 	m_back.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuCampaignMapSelect::clicked_back, boost::ref(*this)));
-	m_list.selected.connect(boost::bind(&FullscreenMenuCampaignMapSelect::map_selected, this, _1));
-	m_list.double_clicked.connect
+	m_table.selected.connect(boost::bind(&FullscreenMenuCampaignMapSelect::map_selected, this, _1));
+	m_table.double_clicked.connect
 		(boost::bind(&FullscreenMenuCampaignMapSelect::clicked_ok, boost::ref(*this)));
 
-	m_list.focus();
+	/** TRANSLATORS: Campaign scenario number table header */
+	m_table.add_column(35, _("#"), _("The number of this scenario in the campaign"), UI::Align_Left);
+	m_table.add_column(m_table.get_w() - 35, _("Scenario Name"), _("Scenario Name"), UI::Align_Left);
+	m_table.set_sort_column(0);
+
+	m_table.focus();
 }
 
 
@@ -353,7 +358,8 @@ void FullscreenMenuCampaignMapSelect::set_campaign(uint32_t const i) {
  * an entry of the maplist got selected.
  */
 void FullscreenMenuCampaignMapSelect::map_selected(uint32_t) {
-	campmapfile = m_list.get_selected();
+	const CampaignScenarioData& scenario_data = m_scenarios_data[m_table.get_selected()];
+	campmapfile = scenario_data.path;
 	Widelands::Map map;
 
 	std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(campmapfile));
@@ -390,8 +396,12 @@ void FullscreenMenuCampaignMapSelect::fill_list()
 	Profile campvis(cvs.get_path().c_str());
 	Section & c = campvis.get_safe_section("campmaps");
 
-	// Set title of the page
-	m_subtitle.set_text(global_s.get_string((boost::format("campname%u") % campaign).str().c_str()));
+	// Set subtitle of the page
+	const std::string campaign_name =
+			global_s.get_string((boost::format("campname%u") % campaign).str().c_str());
+	const std::string campaign_tribe =
+			global_s.get_string((boost::format("camptribe%u") % campaign).str().c_str());
+	m_subtitle.set_text((boost::format("%s — %s") % campaign_tribe % campaign_name).str().c_str());
 
 	// Get section of campaign-maps
 	std::string campsection = global_s.get_string((boost::format("campsect%u") % campaign).str().c_str());
@@ -403,17 +413,24 @@ void FullscreenMenuCampaignMapSelect::fill_list()
 	// Add all visible entries to the list.
 	while (Section * const s = prof.get_section(mapsection.c_str())) {
 		if (c.get_bool(mapsection.c_str())) {
-			m_list.add
-				(s->get_string("name", ""),
-				 s->get_string("path"),
-				 g_gr->images().get("pics/ls_wlmap.png"));
+
+			CampaignScenarioData scenario_data;
+			scenario_data.index = i + 1;
+			scenario_data.name = s->get_string("name", "");
+			scenario_data.path = s->get_string("path");
+			m_scenarios_data.push_back(scenario_data);
+
+			UI::Table<uintptr_t>::EntryRecord& tableEntry = m_table.add(i);
+			tableEntry.set_string(0, (boost::format("%u") % scenario_data.index).str());
+			tableEntry.set_picture(1, g_gr->images().get("pics/ls_wlmap.png"), scenario_data.name);
 		}
 
 		// Increase counter & mapsection
 		++i;
 		mapsection = campsection + (boost::format("%02i") % i).str();
 	}
-	if (m_list.size()) {
-		m_list.select(0);
+	m_table.sort();
+	if (m_table.size()) {
+		m_table.select(0);
 	}
 }

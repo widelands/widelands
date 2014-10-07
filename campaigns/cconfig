@@ -64,29 +64,29 @@ cnewvisi2=empiretut01
 #####
 
 [barbariantut00]
-name=_"01 – Eyes in the Dark"
+name=_"Eyes in the Dark"
 visible=1
 path="campaigns/t01.wmf"
 
 [barbariantut01]
-name=_"02 – A Place to Call Home"
+name=_"A Place to Call Home"
 visible=0
 path="campaigns/t02.wmf"
 
 [barbariantut02]
-name=_"03 – This Land is Our Land"
+name=_"This Land is Our Land"
 newvisi="campsect1"
 visible=0
 path="campaigns/t03.wmf"
 
 
 [empiretut00]
-name=_"01 – The Strands of Malac’ Mor"
+name=_"The Strands of Malac’ Mor"
 visible=1
 path="campaigns/emp01.wmf"
 
 [empiretut01]
-name=_"02 – An Outpost for Exile"
+name=_"An Outpost for Exile"
 visible=0
 path="campaigns/emp02.wmf"
 
@@ -98,7 +98,7 @@ path="campaigns/dummy.wmf"
 
 
 [atlanteans00]
-name=_"01 – From Nemesis to Genesis"
+name=_"From Nemesis to Genesis"
 visible=1
 path="campaigns/atl01.wmf"
 

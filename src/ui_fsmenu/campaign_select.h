@@ -50,16 +50,12 @@ private:
 	 * Data about a campaign that we're interested in.
 	 */
 	struct CampaignListData {
-
 		uint32_t index;
 		std::string name;
 		std::string tribename;
 		uint32_t difficulty;
 		std::string difficulty_description;
 		std::string description;
-
-		CampaignListData()
-			: index(0), name(""), difficulty(0), difficulty_description(""), description("") {}
 	};
 
 	void campaign_selected(uint32_t);
@@ -95,6 +91,15 @@ struct FullscreenMenuCampaignMapSelect : public FullscreenMenuLoadMapOrGame {
 	void set_campaign(uint32_t);
 
 private:
+	/**
+	 * Data about a campaign scenario that we're interested in.
+	 */
+	struct CampaignScenarioData {
+		uint32_t index;
+		std::string name;
+		std::string path;
+	};
+
 	void map_selected(uint32_t);
 	void fill_list();
 
@@ -107,9 +112,12 @@ private:
 	UI::Textarea                  m_label_description;
 	UI::MultilineTextarea         m_ta_description;
 
-	UI::Listselect<std::string>   m_list;
+	UI::Table<uintptr_t const>    m_table;
+
 	uint32_t                      campaign;
 	std::string                   campmapfile;
+
+	std::vector<CampaignScenarioData> m_scenarios_data;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_CAMPAIGN_SELECT_H
