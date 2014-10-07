@@ -145,6 +145,9 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	m_table.add_column(m_table.get_w() - 35 - 115, _("Map Name"), _("Map Name"), UI::Align_Left);
 	m_table.add_column(115, _("Size"), _("The size of the map (Width x Height)"), UI::Align_Left);
 	m_table.set_column_compare
+		(0,
+		 boost::bind(&FullscreenMenuMapSelect::compare_players, this, _1, _2));
+	m_table.set_column_compare
 		(1,
 		 boost::bind(&FullscreenMenuMapSelect::compare_mapnames, this, _1, _2));
 	m_table.set_column_compare
@@ -206,8 +209,19 @@ void FullscreenMenuMapSelect::think()
 }
 
 
-bool FullscreenMenuMapSelect::compare_mapnames
-	(uint32_t rowa, uint32_t rowb)
+bool FullscreenMenuMapSelect::compare_players(uint32_t rowa, uint32_t rowb)
+{
+	const MapData & r1 = m_maps_data[m_table[rowa]];
+	const MapData & r2 = m_maps_data[m_table[rowb]];
+
+	if (r1.nrplayers == r2.nrplayers) {
+		return compare_mapnames(rowa, rowb);
+	}
+	return r1.nrplayers < r2.nrplayers;
+}
+
+
+bool FullscreenMenuMapSelect::compare_mapnames(uint32_t rowa, uint32_t rowb)
 {
 	const MapData & r1 = m_maps_data[m_table[rowa]];
 	const MapData & r2 = m_maps_data[m_table[rowb]];
@@ -224,14 +238,16 @@ bool FullscreenMenuMapSelect::compare_mapnames
 	return r1.localized_name < r2.localized_name;
 }
 
-bool FullscreenMenuMapSelect::compare_size
-	(uint32_t rowa, uint32_t rowb)
+
+bool FullscreenMenuMapSelect::compare_size(uint32_t rowa, uint32_t rowb)
 {
 	const MapData & r1 = m_maps_data[m_table[rowa]];
 	const MapData & r2 = m_maps_data[m_table[rowb]];
 
 	if (r1.width != r2.width) {
 		return r1.width < r2.width;
+	} else if (r1.height == r2.height) {
+		return compare_mapnames(rowa, rowb);
 	}
 	return r1.height < r2.height;
 }
