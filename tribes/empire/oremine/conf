@@ -5,7 +5,7 @@ enhancement=deep_oremine
 [aihints]
 mines=iron
 mines_percent=50
-prohibited_till=1200
+prohibited_till=900
 
 [buildcost]
 log=4

@@ -205,7 +205,8 @@ struct BuildableField {
 	uint8_t unowned_mines_pots_nearby_;
 	uint8_t trees_nearby_;
 	uint8_t stones_nearby_;
-	int8_t water_nearby_;
+	int16_t water_nearby_;
+	int16_t distant_water_;
 	int8_t fish_nearby_;
 	int8_t critters_nearby_;
 	int8_t ground_water_;  // used by wells
@@ -249,6 +250,7 @@ struct BuildableField {
 	     // non-negative, water is not recaldulated
 	     stones_nearby_(1),
 	     water_nearby_(-1),
+	     distant_water_(0),
 	     fish_nearby_(-1),
 	     critters_nearby_(-1),
 	     ground_water_(1),
@@ -311,7 +313,7 @@ struct BuildingObserver {
 	bool mines_water_;         // wells
 	bool need_water_;          // fisher, fish_breeder = true
 	bool is_hunter_;           // need to identify hunters
-	bool is_fisher_;           // need to identify fishers
+	bool is_fisher_;           // need to identify hunters
 	bool space_consumer_;      // farm, vineyard... = true
 	bool expansion_type_;      // military building used that can be used to control area
 	bool fighting_type_;       // military building built near enemies

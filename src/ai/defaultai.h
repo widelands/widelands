@@ -82,7 +82,7 @@ struct DefaultAI : ComputerPlayer {
 			name = _("Aggressive");
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
-		                             Widelands::PlayerNumber const p) const override {
+		                            Widelands::PlayerNumber const p) const override {
 			return new DefaultAI(game, p, AGGRESSIVE);
 		}
 	};
@@ -92,7 +92,7 @@ struct DefaultAI : ComputerPlayer {
 			name = _("Normal");
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
-		                             Widelands::PlayerNumber const p) const override {
+		                            Widelands::PlayerNumber const p) const override {
 			return new DefaultAI(game, p, NORMAL);
 		}
 	};
@@ -102,7 +102,7 @@ struct DefaultAI : ComputerPlayer {
 			name = _("Defensive");
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
-		                             Widelands::PlayerNumber const p) const override {
+		                            Widelands::PlayerNumber const p) const override {
 			return new DefaultAI(game, p, DEFENSIVE);
 		}
 	};
@@ -136,7 +136,7 @@ private:
 	bool improve_roads(int32_t);
 	bool create_shortcut_road(const Widelands::Flag&, uint16_t maxcheckradius, uint16_t minred);
 	// trying to identify roads that might be removed
-	bool abundant_road_test(const Widelands::Road&);
+	bool dispensable_road_test(const Widelands::Road&);
 	bool check_economies();
 	bool check_productionsites(int32_t);
 	bool check_mines_(int32_t);
@@ -213,11 +213,16 @@ private:
 	uint16_t numof_warehouses_;
 
 	bool new_buildings_stop_;
-	bool water_is_important_;				//for atlanteans, water is on pair with mines and so on
-	uint16_t mines_need_intensity_;			// when we have enough mines weight of possible mines spots
-											// is decreased (range 0-10)
-	uint16_t water_need_intensity_;			// when we have enough fishers weight of water nearby
-											// is decreased (range 0-5)
+
+	// when territory is expanded for every candidate field benefits are calculated
+	// but need for water, space, mines can vary
+	// so if 255 = resource is needed, 0 = not needed
+	uint8_t resource_necessity_territory_;
+	uint8_t resource_necessity_mines_;
+	uint8_t resource_necessity_stones_;
+	uint8_t resource_necessity_water_;
+	bool resource_necessity_water_needed_;  // unless atlanteans
+
 	uint16_t unstationed_milit_buildings_;  // counts empty military buildings (ones where no soldier
 	                                        // is belogning to)
 	uint16_t military_under_constr_;
