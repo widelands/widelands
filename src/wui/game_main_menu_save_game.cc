@@ -154,9 +154,7 @@ void GameMainMenuSaveGame::selected(uint32_t) {
 	Widelands::GamePreloadPacket gpdp;
 	gl.preload_game(gpdp); //  This has worked before, no problem
 	{
-		// NOCOM move localization from data packet somewhere else
-		std::string displaytitle = FileSystem::filename_without_ext(name.c_str());
-		m_editbox->set_text(gpdp.get_localized_display_title(displaytitle).c_str());
+		m_editbox->set_text(FileSystem::filename_without_ext(name.c_str()));
 	}
 	m_button_ok->set_enabled(true);
 
@@ -214,10 +212,7 @@ void GameMainMenuSaveGame::fill_list() {
 		try {
 			Widelands::GameLoader gl(name, igbase().game());
 			gl.preload_game(gpdp);
-
-			// NOCOM move localization from data packet somewhere else
-			std::string displaytitle = FileSystem::filename_without_ext(name);
-			m_ls.add(gpdp.get_localized_display_title(displaytitle).c_str(), name);
+			m_ls.add(FileSystem::filename_without_ext(name).c_str(), name);
 		} catch (const WException &) {} //  we simply skip illegal entries
 	}
 }
