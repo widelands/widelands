@@ -60,8 +60,9 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 		 UI::Align_Left),
 	m_ta_mapname(this,
 					 m_right_column_x + m_indent, get_y_from_preceding(m_label_mapname) + m_padding,
-					 get_right_column_w(m_right_column_x + m_indent), 2 * m_label_height - m_padding),
+					 get_right_column_w(m_right_column_x + m_indent), m_label_height),
 
+	/* NOCOM
 	m_label_size
 		(this, m_right_column_x, get_y_from_preceding(m_ta_mapname),
 		 _("Size:"),
@@ -77,9 +78,9 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	m_ta_players(this,
 					 m_right_column_tab, m_label_players.get_y(),
 					 get_right_column_w(m_right_column_tab), m_label_height),
-
+*/
 	m_label_author
-		(this, m_right_column_x, get_y_from_preceding(m_ta_players) + 3 * m_padding,
+		(this, m_right_column_x, get_y_from_preceding(m_ta_mapname) + 2 * m_padding,
 		 _("Authors:"),
 		 UI::Align_Left),
 	m_ta_author(this,
@@ -118,8 +119,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	m_ok.set_tooltip(_("Play this map"));
 	m_ta_mapname.set_tooltip(_("The name of this map"));
 	m_ta_author.set_tooltip(_("The designers of this map"));
-	m_ta_players.set_tooltip(_("The number of players"));
-	m_ta_size.set_tooltip(_("The size of this map (Width x Height)"));
+	// NOCOM m_ta_players.set_tooltip(_("The number of players"));
+	//m_ta_size.set_tooltip(_("The size of this map (Width x Height)"));
 	m_ta_description.set_tooltip(_("Story and hints"));
 
 	m_back.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_back, boost::ref(*this)));
@@ -260,8 +261,8 @@ void FullscreenMenuMapSelect::map_selected(uint32_t)
 	if (map.width) {
 		m_ta_mapname.set_text(map.localized_name);
 		m_ta_author.set_text(map.author);
-		m_ta_size.set_text((boost::format("%u  x  %u") % map.width % map.height).str());
-		m_ta_players.set_text((boost::format("%u") % static_cast<unsigned int>(map.nrplayers)).str());
+		// NOCOM m_ta_size.set_text((boost::format("%u  x  %u") % map.width % map.height).str());
+		//m_ta_players.set_text((boost::format("%u") % static_cast<unsigned int>(map.nrplayers)).str());
 		m_ta_description.set_text(map.description +
 										  (map.hint.empty() ? "" : (std::string("\n\n") + map.hint)));
 		m_cb_load_map_as_scenario.set_enabled(map.scenario);
@@ -269,8 +270,8 @@ void FullscreenMenuMapSelect::map_selected(uint32_t)
 		// Directory
 		m_ta_mapname.set_text(_("(directory)"));
 		m_ta_author.set_text(std::string());
-		m_ta_size.set_text(std::string());
-		m_ta_players.set_text(std::string());
+		// NOCOM m_ta_size.set_text(std::string());
+		//m_ta_players.set_text(std::string());
 		m_ta_description.set_text(std::string());
 		m_cb_load_map_as_scenario.set_enabled(false);
 	}

@@ -91,10 +91,10 @@ private:
 	UI::Textarea                  m_title;
 	UI::Textarea                  m_label_mapname;
 	UI::MultilineTextarea         m_ta_mapname;
-	UI::Textarea                  m_label_size;
-	UI::MultilineTextarea         m_ta_size;
-	UI::Textarea                  m_label_players;
-	UI::MultilineTextarea         m_ta_players;
+	// NOCOM UI::Textarea                  m_label_size;
+	//UI::MultilineTextarea         m_ta_size;
+	//UI::Textarea                  m_label_players;
+	//UI::MultilineTextarea         m_ta_players;
 	UI::Textarea                  m_label_author;
 	UI::MultilineTextarea         m_ta_author;
 	UI::Textarea                  m_label_description;
