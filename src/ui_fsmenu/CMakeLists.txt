@@ -6,8 +6,6 @@ wl_library(ui_fsmenu
     campaign_select.h
     editor.cc
     editor.h
-    editor_mapselect.cc
-    editor_mapselect.h
     fileview.cc
     fileview.h
     internet_lobby.cc

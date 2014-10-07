@@ -42,9 +42,10 @@
 using Widelands::WidelandsMapLoader;
 
 FullscreenMenuMapSelect::FullscreenMenuMapSelect
-		(GameSettingsProvider* const settings, GameController* const ctrl) :
+		(GameSettingsProvider* const settings, GameController* const ctrl, bool is_editor) :
 	FullscreenMenuLoadMapOrGame(),
 
+	m_is_editor(is_editor),
 	m_checkbox_space(25),
 	m_checkboxes_y(m_maplisty - 120),
 
@@ -63,10 +64,10 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 					 m_right_column_x + m_indent, get_y_from_preceding(m_label_mapname) + m_padding,
 					 get_right_column_w(m_right_column_x + m_indent), m_label_height),
 
-	/* NOCOM
+	/* NOCOM localize if used
 	m_label_size
 		(this, m_right_column_x, get_y_from_preceding(m_ta_mapname),
-		 _("Size:"),
+		 ("Size:"),
 		 UI::Align_Left),
 	m_ta_size(this,
 				 m_right_column_tab, m_label_size.get_y(),
@@ -74,7 +75,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 
 	m_label_players
 		(this, m_right_column_x, get_y_from_preceding(m_ta_size),
-		 _("Players:"),
+		 _"Players:"),
 		 UI::Align_Left),
 	m_ta_players(this,
 					 m_right_column_tab, m_label_players.get_y(),
@@ -117,12 +118,19 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	m_ctrl(ctrl)
 {
 	m_title.set_textstyle(ts_big());
-	m_back.set_tooltip(_("Return to the previous menu"));
-	m_ok.set_tooltip(_("Play this map"));
+	if (m_is_editor) {
+		m_back.set_tooltip(_("Return to the editor menu"));
+	} else {
+		if (m_settings->settings().multiplayer) {
+			m_back.set_tooltip(_("Return to the multiplayer game setup"));
+		} else {
+			m_back.set_tooltip(_("Return to the single player menu"));
+		}
+	}
 	m_ta_mapname.set_tooltip(_("The name of this map"));
 	m_ta_author.set_tooltip(_("The designers of this map"));
-	// NOCOM m_ta_players.set_tooltip(_("The number of players"));
-	//m_ta_size.set_tooltip(_("The size of this map (Width x Height)"));
+	// NOCOM localize if used m_ta_players.set_tooltip(("The number of players"));
+	//m_ta_size.set_tooltip(("The size of this map (Width x Height)"));
 	m_ta_description.set_tooltip(_("Story and hints"));
 
 	m_back.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_back, boost::ref(*this)));
@@ -190,7 +198,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	vbox->set_size(get_w() - 2 * m_maplistx, m_checkbox_space);
 
 	m_scenario_types = m_settings->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO;
-	if (m_scenario_types) {
+	if (m_scenario_types && !m_is_editor) {
 		m_cb_load_map_as_scenario.set_visible(true);
 		m_label_load_map_as_scenario.set_visible(true);
 	} else {
@@ -264,6 +272,7 @@ bool FullscreenMenuMapSelect::is_scenario()
 	return m_cb_load_map_as_scenario.get_state();
 }
 
+
 MapData const * FullscreenMenuMapSelect::get_map() const
 {
 	if (!m_table.has_selection()) {
@@ -325,19 +334,19 @@ void FullscreenMenuMapSelect::map_selected(uint32_t)
 		//m_ta_players.set_text((boost::format("%u") % static_cast<unsigned int>(map.nrplayers)).str());
 		m_ta_description.set_text(map.description +
 										  (map.hint.empty() ? "" : (std::string("\n\n") + map.hint)));
-		m_cb_load_map_as_scenario.set_enabled(map.scenario);
-		m_cb_load_map_as_scenario.set_visible(map.scenario);
-		m_label_load_map_as_scenario.set_visible(map.scenario);
+		m_cb_load_map_as_scenario.set_enabled(map.scenario && !m_is_editor);
+		m_cb_load_map_as_scenario.set_visible(map.scenario && !m_is_editor);
+		m_label_load_map_as_scenario.set_visible(map.scenario && !m_is_editor);
 		m_label_author.set_visible(true);
 		m_label_description.set_visible(true);
 		int32_t descr_bottom = m_buty;
-		if (map.scenario) {
+		if (map.scenario && !m_is_editor) {
 			descr_bottom = m_label_load_map_as_scenario.get_y();
 		}
 		m_ta_description.set_size
 				(m_ta_description.get_w(),
 				 descr_bottom - get_y_from_preceding(m_label_description) - 4 * m_padding);
-		m_ok.set_tooltip(_("Play this map"));
+		m_ok.set_tooltip(m_is_editor ? _("Edit this map") : _("Play this map"));
 	} else {
 		// Directory
 		m_label_mapname.set_text(_("Directory:"));
@@ -480,7 +489,8 @@ void FullscreenMenuMapSelect::fill_list()
 					mapdata.nrplayers      = map.get_nrplayers();
 					mapdata.width          = map.get_width();
 					mapdata.height         = map.get_height();
-					mapdata.scenario       = map.scenario_types() & m_scenario_types;
+					mapdata.scenario       = map.scenario_types() & m_scenario_types
+													 || (m_is_editor && map.scenario_types() > 0);
 					mapdata.tags           = map.get_tags();
 					if (mapdata.scenario) {
 						mapdata.tags.insert("scenario");

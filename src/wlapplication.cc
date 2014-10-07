@@ -73,7 +73,6 @@
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/campaign_select.h"
 #include "ui_fsmenu/editor.h"
-#include "ui_fsmenu/editor_mapselect.h"
 #include "ui_fsmenu/fileview.h"
 #include "ui_fsmenu/internet_lobby.h"
 #include "ui_fsmenu/intro.h"
@@ -1330,11 +1329,12 @@ void WLApplication::mainmenu_editor()
 		case FullscreenMenuEditor::Load_Map: {
 			std::string filename;
 			{
-				FullscreenMenuEditorMapSelect emsm;
+				SinglePlayerGameSettingsProvider sp;
+				FullscreenMenuMapSelect emsm(&sp, nullptr, true);
 				if (emsm.run() <= 0)
 					break;
 
-				filename = emsm.get_map();
+				filename = emsm.get_map()->filename;
 			}
 			EditorInteractive::run_editor(filename.c_str(), "");
 			return;

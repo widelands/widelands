@@ -68,7 +68,7 @@ struct MapData {
  * Select a Map in Fullscreen Mode. It's a modal fullscreen menu
  */
 struct FullscreenMenuMapSelect : public FullscreenMenuLoadMapOrGame {
-	FullscreenMenuMapSelect(GameSettingsProvider*, GameController*);
+	FullscreenMenuMapSelect(GameSettingsProvider*, GameController*, bool is_editor = false);
 
 	bool is_scenario();
 	MapData const* get_map() const;
@@ -87,6 +87,7 @@ private:
 	UI::Checkbox* _add_tag_checkbox(UI::Box*, std::string, std::string);
 	void _tagbox_changed(int32_t, bool);
 
+	bool const                    m_is_editor;
 	int32_t const                 m_checkbox_space;
 	int32_t const                 m_checkboxes_y;
 
