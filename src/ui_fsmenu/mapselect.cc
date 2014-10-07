@@ -167,6 +167,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	_add_tag_checkbox(vbox, "official", _("Official Map"));
 	_add_tag_checkbox(vbox, "seafaring", _("Seafaring Map"));
 	_add_tag_checkbox(vbox, "unbalanced", _("Unbalanced"));
+	_add_tag_checkbox(vbox, "scenario", _("Scenario"));
 	vbox->set_size(get_w() - 2 * m_maplistx, m_checkbox_space);
 
 	vbox = new UI::Box(this,
@@ -458,6 +459,9 @@ void FullscreenMenuMapSelect::fill_list()
 					mapdata.height         = map.get_height();
 					mapdata.scenario       = map.scenario_types() & m_scenario_types;
 					mapdata.tags           = map.get_tags();
+					if (mapdata.scenario) {
+						mapdata.tags.insert("scenario");
+					}
 
 					if (!mapdata.width || !mapdata.height) {
 						continue;
