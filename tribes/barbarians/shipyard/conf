@@ -31,6 +31,7 @@ work=_working
 [work]
 sleep=20000
 call=ship
+return=skipped
 
 [ship]
 check_map=seafaring

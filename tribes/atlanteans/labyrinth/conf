@@ -19,7 +19,7 @@ diamond=1
 quartz=1
 
 [working positions]
-carrier=1
+trainer=1
 
 [inputs]
 bread=10
