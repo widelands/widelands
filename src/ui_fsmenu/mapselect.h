@@ -102,6 +102,8 @@ private:
 
 	UI::Textarea                  m_label_load_map_as_scenario;
 	UI::Checkbox                  m_cb_load_map_as_scenario;
+	UI::Textarea                  m_label_dont_localize_mapnames;
+	UI::Checkbox                  m_cb_dont_localize_mapnames;
 	UI::Checkbox*                 m_cb_show_all_maps;
 	std::vector<UI::Checkbox*>    m_tags_checkboxes;
 

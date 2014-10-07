@@ -100,10 +100,19 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 
 	// Scenario checkbox
 	m_label_load_map_as_scenario
-		(this, m_maplistx + m_checkbox_space, m_maplisty - 35,
+		(this, m_right_column_x + m_checkbox_space, m_buty - m_label_height - 2 * m_padding,
 		 _("Load map as scenario"),
 		 UI::Align_Left),
-	m_cb_load_map_as_scenario(this, Point (m_maplistx, m_maplisty - 35)),
+	m_cb_load_map_as_scenario(this, Point (m_right_column_x, m_label_load_map_as_scenario.get_y())),
+
+
+	// Don't localize checkbox
+	m_label_dont_localize_mapnames
+		(this, m_maplistx + m_checkbox_space, m_maplisty - 35,
+		 /** TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated. */
+		 _("Show original map names"),
+		 UI::Align_Left),
+	m_cb_dont_localize_mapnames(this, Point (m_maplistx, m_maplisty - 35)),
 
 	// Map table
 	m_table(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth),
@@ -125,6 +134,9 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 
 	m_back.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_back, boost::ref(*this)));
 	m_ok.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_ok, boost::ref(*this)));
+	m_cb_dont_localize_mapnames.changedto.connect
+			(boost::bind(&FullscreenMenuMapSelect::fill_list, boost::ref(*this)));
+
 	m_table.selected.connect(boost::bind(&FullscreenMenuMapSelect::map_selected, this, _1));
 	m_table.double_clicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_ok, boost::ref(*this)));
 
@@ -205,6 +217,8 @@ bool FullscreenMenuMapSelect::compare_mapnames
 		return true;
 	} else if (r1.width && !r2.width) {
 		return false;
+	} else if (m_cb_dont_localize_mapnames.get_state()) {
+		return r1.name < r2.name;
 	}
 	return r1.localized_name < r2.localized_name;
 }
@@ -259,21 +273,64 @@ void FullscreenMenuMapSelect::map_selected(uint32_t)
 	const MapData & map = m_maps_data[m_table.get_selected()];
 
 	if (map.width) {
-		m_ta_mapname.set_text(map.localized_name);
+		m_label_mapname.set_text(_("Map Name:"));
+		std::string map_displayname = map.localized_name;
+		if (m_cb_dont_localize_mapnames.get_state()) {
+			map_displayname = map.name;
+		}
+		m_ta_mapname.set_text(map_displayname);
+		if (map.localized_name != map.name) {
+			if (m_cb_dont_localize_mapnames.get_state()) {
+				m_ta_mapname.set_tooltip
+					/** TRANSLATORS: Tooltip in map description when map names are being displayed in English. */
+					/** TRANSLATORS: %s is the localized name of the map. */
+						((boost::format(_("The name of this map in your language: %s"))
+						  % map.localized_name).str());
+			} else {
+				m_ta_mapname.set_tooltip
+					/** TRANSLATORS: Tooltip in map description when translated map names are being displayed. */
+					/** TRANSLATORS: %s is the English name of the map. */
+						((boost::format(_("The original name of this map: %s"))
+						  % map.name).str());
+			}
+		} else {
+			m_ta_mapname.set_tooltip(_("The name of this map"));
+		}
+
 		m_ta_author.set_text(map.author);
 		// NOCOM m_ta_size.set_text((boost::format("%u  x  %u") % map.width % map.height).str());
 		//m_ta_players.set_text((boost::format("%u") % static_cast<unsigned int>(map.nrplayers)).str());
 		m_ta_description.set_text(map.description +
 										  (map.hint.empty() ? "" : (std::string("\n\n") + map.hint)));
 		m_cb_load_map_as_scenario.set_enabled(map.scenario);
+		m_cb_load_map_as_scenario.set_visible(map.scenario);
+		m_label_load_map_as_scenario.set_visible(map.scenario);
+		m_label_author.set_visible(true);
+		m_label_description.set_visible(true);
+		int32_t descr_bottom = m_buty;
+		if (map.scenario) {
+			descr_bottom = m_label_load_map_as_scenario.get_y();
+		}
+		m_ta_description.set_size
+				(m_ta_description.get_w(),
+				 descr_bottom - get_y_from_preceding(m_label_description) - 4 * m_padding);
+		m_ok.set_tooltip(_("Play this map"));
 	} else {
 		// Directory
-		m_ta_mapname.set_text(_("(directory)"));
+		m_label_mapname.set_text(_("Directory:"));
+		m_ta_mapname.set_text(map.localized_name);
+		m_ta_mapname.set_tooltip(_("The name of this directory"));
+
 		m_ta_author.set_text(std::string());
 		// NOCOM m_ta_size.set_text(std::string());
 		//m_ta_players.set_text(std::string());
 		m_ta_description.set_text(std::string());
 		m_cb_load_map_as_scenario.set_enabled(false);
+		m_cb_load_map_as_scenario.set_visible(false);
+		m_label_load_map_as_scenario.set_visible(false);
+		m_label_author.set_visible(false);
+		m_label_description.set_visible(false);
+		m_ok.set_tooltip(_("Open this directory"));
 	}
 	m_ok.set_enabled(true);
 	m_cb_load_map_as_scenario.set_state(false); // reset
@@ -326,16 +383,15 @@ void FullscreenMenuMapSelect::fill_list()
 	#else
 			map.filename = m_curdir.substr(0, m_curdir.rfind('\\'));
 	#endif
+			map.localized_name = (boost::format("\\<%s\\>") % _("parent")).str();
 			m_maps_data.push_back(map);
 			UI::Table<uintptr_t const>::EntryRecord & te =
 				m_table.add(m_maps_data.size() - 1);
 
 			te.set_string(col_players, "");
-			std::string parent_string =
-				(boost::format("\\<%s\\>") % _("parent")).str();
 			te.set_picture
 				(col_name,  g_gr->images().get("pics/ls_dir.png"),
-				parent_string);
+				map.localized_name);
 			te.set_string(col_size, "");
 
 			++ndirs;
@@ -356,14 +412,18 @@ void FullscreenMenuMapSelect::fill_list()
 
 			MapData dir;
 			dir.filename = name;
+			if (strcmp (name, "maps/MP Scenarios") == 0) {
+				/** TRANSLATORS: Directory name for MP Scenarios in map selection */
+				dir.localized_name = _("Multiplayer Scenarios");
+			} else {
+				dir.localized_name = FileSystem::fs_filename(name);
+			}
 
 			m_maps_data.push_back(dir);
 			UI::Table<uintptr_t const>::EntryRecord & te = m_table.add(m_maps_data.size() - 1);
 
 			te.set_string(col_players, "");
-			te.set_picture
-				(col_name,  g_gr->images().get("pics/ls_dir.png"),
-				FileSystem::fs_filename(name));
+			te.set_picture(col_name, g_gr->images().get("pics/ls_dir.png"), dir.localized_name);
 			te.set_string(col_size, "");
 
 			++ndirs;
@@ -415,12 +475,17 @@ void FullscreenMenuMapSelect::fill_list()
 
 					te.set_string(col_players, (boost::format("(%i)") % mapdata.nrplayers).str());
 
+					std::string map_displayname = mapdata.localized_name;
+					if (m_cb_dont_localize_mapnames.get_state()) {
+						map_displayname = mapdata.name;
+					}
 					te.set_picture
 						(col_name,  g_gr->images().get
 						 (dynamic_cast<WidelandsMapLoader*>(ml.get()) ?
 							  (mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png") :
 						"pics/ls_s2map.png"),
-						mapdata.localized_name);
+						map_displayname);
+
 					te.set_string(col_size, (boost::format("%u x %u") % mapdata.width % mapdata.height).str());
 				} catch (const std::exception & e) {
 					log("Mapselect: Skip %s due to preload error: %s\n", mapfilename.c_str(), e.what());
