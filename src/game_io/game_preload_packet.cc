@@ -146,48 +146,4 @@ void GamePreloadPacket::write
 
 }
 
-// NOCOM(#gun): I do not like that this pulls in internationalization (which is a UI thing) into game_io. As much as possible try to handle i18n in the ui please.
-// NOCOM(#sirver): WHere do you want it? The only common included header that would marginally make sense is logic/game_controller.h. Or a new h/cpp for this?
-// base/time_string.h doesn't make sense either, because we would have a reference to game_controller.h in there, which is even more ugly.
-std::string GamePreloadPacket::get_localized_display_title(std::string filename) {
-	std::string result;
-
-	if ((is_timestring(filename) || filename == "wl_autosave") && m_saveyear > 0 && m_savemonth > 0 && m_saveday > 0) {
-
-		if (m_gametype == GameController::GameType::SINGLEPLAYER) {
-			/** TRANSLATORS: Gametype used in filenames for loading games */
-			result = _("Single Player");
-		} else if (m_gametype == GameController::GameType::NETHOST) {
-			/** TRANSLATORS: Gametype used in filenames for loading games */
-			/** TRANSLATORS: %1% is the number of players */
-			result = (boost::format(_("Multiplayer (%1%, Host)"))
-						 % static_cast<unsigned int>(m_number_of_players)).str();
-		} else if (m_gametype == GameController::GameType::NETCLIENT) {
-			/** TRANSLATORS: Gametype used in filenames for loading games */
-			/** TRANSLATORS: %1% is the number of players */
-			result = (boost::format(_("Multiplayer (%1%)"))
-								% static_cast<unsigned int>(m_number_of_players)).str();
-		}
-		/** TRANSLATORS: Filenames for loading games */
-		/** TRANSLATORS: month day, year hour:minute gametype – mapname */
-		/** TRANSLATORS: The mapname should always come last, because it can be longer than the space we have */
-		result = (boost::format(_("%1$s %2$u, %3$u %4$u:%5$u %6$s – %7$s"))
-					 % localize_month(m_savemonth)
-					 % static_cast<unsigned int>(m_saveday)
-					 % static_cast<unsigned int>(m_saveyear)
-					 % static_cast<unsigned int>(m_savehour)
-					 % static_cast<unsigned int>(m_saveminute)
-					 % result
-					 % m_mapname).str();
-	} else {
-		result = filename;
-	}
-	if (filename == "wl_autosave") {
-		/** TRANSLATORS: Used in filenames for loading games */
-		result = (boost::format(_("Autosave: %1%"))
-							% result).str();
-	}
-	return result;
-}
-
 }
