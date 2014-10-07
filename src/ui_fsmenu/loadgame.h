@@ -48,7 +48,8 @@ struct GameSettingsProvider;
 /// Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu.
 struct FullscreenMenuLoadGame : public FullscreenMenuLoadMapOrGame {
 	FullscreenMenuLoadGame
-		(Widelands::Game&, GameSettingsProvider* gsp = nullptr, GameController* gc = nullptr);
+		(Widelands::Game&, GameSettingsProvider* gsp = nullptr, GameController* gc = nullptr,
+		 bool is_replay = false);
 
 	const std::string & filename() {return m_filename;}
 
@@ -65,6 +66,8 @@ private:
 	void fill_list();
 	void no_selection();
 
+	bool                          m_is_replay;
+
 	UI::Textarea                  m_title;
 	UI::Textarea                  m_label_mapname;
 	UI::MultilineTextarea         m_ta_mapname;  // Multiline for long names
@@ -79,7 +82,7 @@ private:
 	UI::Icon                      m_minimap_icon;
 
 	std::unique_ptr<const Image>  m_minimap_image;
-	UI::Listselect<const char*>   m_list;
+	UI::Listselect<std::string>   m_list;
 
 	Widelands::Game&              m_game;
 	GameSettingsProvider*         m_settings;

@@ -78,7 +78,6 @@
 #include "ui_fsmenu/intro.h"
 #include "ui_fsmenu/launch_spg.h"
 #include "ui_fsmenu/loadgame.h"
-#include "ui_fsmenu/loadreplay.h"
 #include "ui_fsmenu/main.h"
 #include "ui_fsmenu/mapselect.h"
 #include "ui_fsmenu/multiplayer.h"
@@ -1484,7 +1483,8 @@ void WLApplication::replay()
 {
 	Widelands::Game game;
 	if (m_filename.empty()) {
-		FullscreenMenuLoadReplay rm(game);
+		SinglePlayerGameSettingsProvider sp;
+		FullscreenMenuLoadGame rm(game, &sp, nullptr, true);
 		if (rm.run() <= 0)
 			return;
 

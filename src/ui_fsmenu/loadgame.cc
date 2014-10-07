@@ -23,6 +23,7 @@
 #include <cstdio>
 #include <memory>
 
+#include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -35,23 +36,26 @@
 #include "graphic/image_transformations.h"
 #include "graphic/in_memory_image.h"
 #include "graphic/surface.h"
+#include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
+#include "logic/replay.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/messagebox.h"
 #include "wui/text_constants.h"
 
 
 FullscreenMenuLoadGame::FullscreenMenuLoadGame
-	(Widelands::Game & g, GameSettingsProvider * gsp, GameController * gc) :
+	(Widelands::Game & g, GameSettingsProvider * gsp, GameController * gc, bool is_replay) :
 	FullscreenMenuLoadMapOrGame(),
 
+	m_is_replay(is_replay),
 	// Main title
 	m_title
 		(this, get_w() / 2, m_maplisty / 3,
-		 _("Choose a saved game"), UI::Align_HCenter),
+		 m_is_replay ? _("Choose a replay") : _("Choose a saved game"), UI::Align_HCenter),
 
 	// Savegame description
 	m_label_mapname
@@ -109,13 +113,21 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	m_ctrl(gc)
 {
 	m_title.set_textstyle(ts_big());
-	m_back.set_tooltip(_("Return to the single player menu"));
-	m_ok.set_tooltip(_("Load this game"));
-	m_ta_mapname.set_tooltip(_("The map that this game is based on"));
 	m_ta_gametime.set_tooltip(_("The time that elapsed inside this game"));
 	m_ta_players.set_tooltip(_("The number of players"));
 	m_ta_win_condition.set_tooltip(_("The win condition that was set for this game"));
-	m_delete.set_tooltip(_("Delete this game"));
+
+	if (m_is_replay) {
+		m_back.set_tooltip(_("Return to the main menu"));
+		m_ok.set_tooltip(_("Load this replay"));
+		m_ta_mapname.set_tooltip(_("The map that this replay is based on"));
+		m_delete.set_tooltip(_("Delete this replay"));
+	} else {
+		m_back.set_tooltip(_("Return to the single player menu"));
+		m_ok.set_tooltip(_("Load this game"));
+		m_ta_mapname.set_tooltip(_("The map that this game is based on"));
+		m_delete.set_tooltip(_("Delete this game"));
+	}
 	m_minimap_icon.set_visible(false);
 
 	m_back.sigclicked.connect(boost::bind(&FullscreenMenuLoadGame::clicked_back, boost::ref(*this)));
@@ -146,6 +158,10 @@ void FullscreenMenuLoadGame::clicked_ok()
 
 void FullscreenMenuLoadGame::clicked_delete()
 {
+if (!m_list.has_selection()) {
+		return;
+	}
+
 	std::string fname = m_list.get_selected();
 	UI::WLMessageBox confirmationBox
 		(this,
@@ -154,6 +170,9 @@ void FullscreenMenuLoadGame::clicked_delete()
 		 UI::WLMessageBox::YESNO);
 	if (confirmationBox.run()) {
 		g_fs->fs_unlink(m_list.get_selected());
+		if (m_is_replay) {
+			g_fs->fs_unlink(m_list.get_selected() + WLGF_SUFFIX);
+		}
 		m_list.clear();
 		fill_list();
 		if (m_list.empty()) {
@@ -188,8 +207,14 @@ void FullscreenMenuLoadGame::map_selected(uint32_t selected)
 		no_selection();
 		return;
 	}
-	const char * const name = m_list.get_selected();
-	if (!name) {
+	std::string name;
+	if (m_is_replay) {
+		name = m_list.get_selected() + WLGF_SUFFIX;
+	}
+	else {
+		name = m_list.get_selected();
+	}
+	if (name.empty()) {
 		no_selection();
 		return;
 	}
@@ -201,7 +226,8 @@ void FullscreenMenuLoadGame::map_selected(uint32_t selected)
 		gl.preload_game(gpdp);
 	} catch (const WException & e) {
 		if (!m_settings || m_settings->settings().saved_games.empty()) {
-			log("Save game '%s' must have changed from under us\nException: %s\n", name, e.what());
+			log("Save game or replay '%s' must have changed from under us\nException: %s\n",
+				 name.c_str(), e.what());
 			m_list.remove(selected);
 			return;
 
@@ -295,6 +321,7 @@ void FullscreenMenuLoadGame::map_selected(uint32_t selected)
  * Fill the file list
  */
 void FullscreenMenuLoadGame::fill_list() {
+
 	if (m_settings && !m_settings->settings().saved_games.empty()) {
 		for (uint32_t i = 0; i < m_settings->settings().saved_games.size(); ++i) {
 			const char * path = m_settings->settings().saved_games.at(i).path.c_str();
@@ -302,27 +329,34 @@ void FullscreenMenuLoadGame::fill_list() {
 		}
 	} else { // Normal case
 		// Fill it with all files we find.
-		m_gamefiles = g_fs->list_directory("save");
+
+		if (m_is_replay) {
+			m_gamefiles = filter(g_fs->list_directory(REPLAY_DIR),
+								[](const std::string& fn) {return boost::ends_with(fn, REPLAY_SUFFIX);});
+		} else {
+			m_gamefiles = g_fs->list_directory("save");
+		}
 
 		Widelands::GamePreloadPacket gpdp;
 
 		const FilenameSet & gamefiles = m_gamefiles;
-		for (const std::string& gamefile : gamefiles) {
-			char const * const name = gamefile.c_str();
+
+		for (const std::string& gamefilename : gamefiles) {
+			std::string savename = gamefilename;
+			if (m_is_replay) savename += WLGF_SUFFIX;
+
+			if (!g_fs->file_exists(savename.c_str())) {
+				continue;
+			}
 
 			try {
-				Widelands::GameLoader gl(name, m_game);
+				Widelands::GameLoader gl(savename.c_str(), m_game);
 				gl.preload_game(gpdp);
 
-				m_list.add(FileSystem::filename_without_ext(name).c_str(), name);
-			} catch (const WException &) {
-				//  we simply skip illegal entries
-			}
+				m_list.add
+					(FileSystem::filename_without_ext(gamefilename.c_str()).c_str(), gamefilename);
+			} catch (const WException &) {} //  we simply skip illegal entries
 		}
-	}
-
-	if (m_list.size()) {
-		m_list.select(0);
 	}
 }
 

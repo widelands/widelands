@@ -19,8 +19,6 @@ wl_library(ui_fsmenu
     loadgame.cc
     loadgame.h
     load_map_or_game.h
-    loadreplay.cc
-    loadreplay.h
     main.cc
     main.h
     mapselect.cc
