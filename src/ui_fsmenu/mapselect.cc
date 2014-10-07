@@ -387,17 +387,17 @@ void FullscreenMenuMapSelect::fill_list()
 					i18n::Textdomain td("maps");
 
 					MapData mapdata;
-					mapdata.filename    = mapfilename;
-					mapdata.name        = map.get_name();
-					mapdata.localized_name = _(mapdata.name);
-					mapdata.author      = map.get_author();
-					mapdata.description = _(map.get_description());
-					mapdata.hint        = _(map.get_hint());
-					mapdata.nrplayers   = map.get_nrplayers();
-					mapdata.width       = map.get_width();
-					mapdata.height      = map.get_height();
-					mapdata.scenario    = map.scenario_types() & m_scenario_types;
-					mapdata.tags        = map.get_tags();
+					mapdata.filename       = mapfilename;
+					mapdata.name           = map.get_name();
+					mapdata.localized_name = mapdata.name.empty() ? "" : _(mapdata.name);
+					mapdata.author         = map.get_author();
+					mapdata.description    = map.get_description().empty() ? "" : _(map.get_description());
+					mapdata.hint           = map.get_hint().empty() ? "" : _(map.get_hint());
+					mapdata.nrplayers      = map.get_nrplayers();
+					mapdata.width          = map.get_width();
+					mapdata.height         = map.get_height();
+					mapdata.scenario       = map.scenario_types() & m_scenario_types;
+					mapdata.tags           = map.get_tags();
 
 					if (!mapdata.width || !mapdata.height) {
 						continue;
