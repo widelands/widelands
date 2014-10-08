@@ -442,7 +442,7 @@ void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 	m_wasteland->set_text(buffer);
 	snprintf
 		(buffer, sizeof(buffer), _("Mountains: %u %%"),
-		 100 - m_waterval - m_landval);
+		 100 - m_waterval - m_landval - m_wastelandval);
 	m_mountains->set_text(buffer);
 	snprintf(buffer, sizeof(buffer), _("Players: %u"), m_pn);
 	m_players->set_text(buffer);
