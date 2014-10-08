@@ -311,7 +311,7 @@ void FullscreenMenuLoadGame::fill_list() {
 				Widelands::GameLoader gl(name, m_game);
 				gl.preload_game(gpdp);
 
-				// TODO(GunChleoc): Move into superclass "FullscreenMenuLoadMapOrGame"
+				// TODO(GunChleoc): Do something more structured with this information
 				// in the ui_fsmenu refactoring branch
 				std::string fs_filename = FileSystem::filename_without_ext(name);
 
@@ -322,20 +322,28 @@ void FullscreenMenuLoadGame::fill_list() {
 					 && gpdp.get_savemonth() > 0
 					 && gpdp.get_saveday() > 0) {
 
-					if (gpdp.get_gametype() == GameController::GameType::SINGLEPLAYER) {
-						/** TRANSLATORS: Gametype used in filenames for loading games */
-						displaytitle = _("Single Player");
-					} else if (gpdp.get_gametype() == GameController::GameType::NETHOST) {
-						/** TRANSLATORS: Gametype used in filenames for loading games */
-						/** TRANSLATORS: %1% is the number of players */
-						displaytitle = (boost::format(_("Multiplayer (%1%, Host)"))
-									 % static_cast<unsigned int>(gpdp.get_number_of_players())).str();
-					} else if (gpdp.get_gametype() == GameController::GameType::NETCLIENT) {
-						/** TRANSLATORS: Gametype used in filenames for loading games */
-						/** TRANSLATORS: %1% is the number of players */
-						displaytitle = (boost::format(_("Multiplayer (%1%)"))
-											% static_cast<unsigned int>(gpdp.get_number_of_players())).str();
+					switch (gpdp.get_gametype()) {
+						case GameController::GameType::SINGLEPLAYER:
+							/** TRANSLATORS: Gametype used in filenames for loading games */
+							displaytitle = _("Single Player");
+							break;
+						case GameController::GameType::NETHOST:
+							/** TRANSLATORS: Gametype used in filenames for loading games */
+							/** TRANSLATORS: %1% is the number of players */
+							displaytitle = (boost::format(_("Multiplayer (%1%, Host)"))
+												 % static_cast<unsigned int>(gpdp.get_number_of_players())).str();
+							break;
+						case GameController::GameType::NETCLIENT:
+							/** TRANSLATORS: Gametype used in filenames for loading games */
+							/** TRANSLATORS: %1% is the number of players */
+							displaytitle = (boost::format(_("Multiplayer (%1%)"))
+												% static_cast<unsigned int>(gpdp.get_number_of_players())).str();
+							break;
+						default:
+							// TODO(GunChleoc): Localize this
+							displaytitle = ("Unknown game type");
 					}
+
 					/** TRANSLATORS: Filenames for loading games */
 					/** TRANSLATORS: month day, year hour:minute gametype – mapname */
 					/** TRANSLATORS: The mapname should always come last, because it can be longer than the space we have */
@@ -348,13 +356,14 @@ void FullscreenMenuLoadGame::fill_list() {
 								 % static_cast<unsigned int>(gpdp.get_saveminute())
 								 % displaytitle
 								 % gpdp.get_mapname()).str();
+
+					if (fs_filename == "wl_autosave") {
+						/** TRANSLATORS: Used in filenames for loading games */
+						// TODO(GunChleoc): Localize this
+						displaytitle = (boost::format(("Autosave: %1%")) % displaytitle).str();
+					}
 				} else {
 					displaytitle = fs_filename;
-				}
-				if (fs_filename == "wl_autosave") {
-					/** TRANSLATORS: Used in filenames for loading games */
-					displaytitle = (boost::format(_("Autosave: %1%"))
-										% displaytitle).str();
 				}
 				// End localization section
 
