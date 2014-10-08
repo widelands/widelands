@@ -103,7 +103,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	// Scenario checkbox
 	m_label_load_map_as_scenario
 		(this, m_right_column_x + m_checkbox_space, m_buty - m_label_height - 2 * m_padding,
-		 _("Load map as scenario"),
+		 m_is_editor ? _("This is a scenario map") : _("Load map as scenario"),
 		 UI::Align_Left),
 	m_cb_load_map_as_scenario(this, Point (m_right_column_x, m_label_load_map_as_scenario.get_y())),
 
@@ -198,7 +198,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	vbox->set_size(get_w() - 2 * m_maplistx, m_checkbox_space);
 
 	m_scenario_types = m_settings->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO;
-	if (m_scenario_types && !m_is_editor) {
+	if (m_scenario_types) {
 		m_cb_load_map_as_scenario.set_visible(true);
 		m_label_load_map_as_scenario.set_visible(true);
 	} else {
@@ -335,12 +335,12 @@ void FullscreenMenuMapSelect::map_selected(uint32_t)
 		m_ta_description.set_text(map.description +
 										  (map.hint.empty() ? "" : (std::string("\n\n") + map.hint)));
 		m_cb_load_map_as_scenario.set_enabled(map.scenario && !m_is_editor);
-		m_cb_load_map_as_scenario.set_visible(map.scenario && !m_is_editor);
-		m_label_load_map_as_scenario.set_visible(map.scenario && !m_is_editor);
+		m_cb_load_map_as_scenario.set_visible(map.scenario);
+		m_label_load_map_as_scenario.set_visible(map.scenario);
 		m_label_author.set_visible(true);
 		m_label_description.set_visible(true);
 		int32_t descr_bottom = m_buty;
-		if (map.scenario && !m_is_editor) {
+		if (map.scenario) {
 			descr_bottom = m_label_load_map_as_scenario.get_y();
 		}
 		m_ta_description.set_size
