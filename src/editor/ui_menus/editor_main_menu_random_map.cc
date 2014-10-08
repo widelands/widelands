@@ -230,7 +230,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 
 	m_mountains = new UI::Textarea(this, posx + spacing + 20, posy,
 											 (boost::format(_("Mountains: %i %%"))
-											  % (100 - m_waterval - m_landval)).str().c_str());
+											  % (100 - m_waterval - m_landval - m_wastelandval)).str().c_str());
 
 	posy += 20 + spacing + spacing;
 
