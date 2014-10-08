@@ -56,6 +56,8 @@ private:
 		uint32_t difficulty;
 		std::string difficulty_description;
 		std::string description;
+
+		CampaignListData() : index(0), difficulty(0) {}
 	};
 
 	void campaign_selected(uint32_t);
@@ -98,6 +100,8 @@ private:
 		uint32_t index;
 		std::string name;
 		std::string path;
+
+		CampaignScenarioData() : index(0) {}
 	};
 
 	void map_selected(uint32_t);

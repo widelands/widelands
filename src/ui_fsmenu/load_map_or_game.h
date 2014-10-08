@@ -24,6 +24,8 @@
 
 #include <memory>
 
+#include <boost/algorithm/string.hpp>
+
 #include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "io/filesystem/filesystem.h"
@@ -42,6 +44,26 @@ class Image;
 class RenderTarget;
 class GameController;
 struct GameSettingsProvider;
+
+/**
+ * Author data for a map or scenario that we're interested in.
+ */
+struct MapAuthorData {
+
+	const std::string& get_name() const {return m_name;}
+	size_t get_number()           const {return m_number;}
+
+	explicit MapAuthorData(const std::string& author_list) {
+		std::vector<std::string> authors;
+		boost::split(authors, author_list, boost::is_any_of(","));
+		m_name = localize_item_list(authors, i18n::ConcatenateWith::AMPERSAND);
+		m_number = authors.size();
+	}
+
+private:
+	std::string m_name;
+	size_t      m_number;
+};
 
 /// Select a Map, Saved Game or Replay in Fullscreen Mode.
 /// This class defines common coordinates for these UI screens.

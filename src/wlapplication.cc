@@ -356,7 +356,7 @@ void WLApplication::run()
 				MapData mapdata;
 				mapdata.filename = m_filename;
 				mapdata.name = map.get_name();
-				mapdata.author = map.get_author();
+				mapdata.authors = new MapAuthorData(map.get_author());
 				mapdata.description = map.get_description();
 				mapdata.nrplayers = map.get_nrplayers();
 				mapdata.width = map.get_width();

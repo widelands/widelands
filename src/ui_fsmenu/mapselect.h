@@ -50,18 +50,18 @@ struct MapData {
 	std::string filename;
 	std::string name;
 	std::string localized_name;
-	std::string author;
 	std::string description;
 	std::string hint;
 	Tags tags;
 
+	MapAuthorData* authors;
 	uint32_t width;
 	uint32_t height;
 	uint32_t nrplayers;
 	bool scenario; // is this a scenario we should list?
 
 	MapData()
-		: width(0), height(0), nrplayers(0), scenario(false) {}
+			: authors(new MapAuthorData("")), width(0), height(0), nrplayers(0), scenario(false) {}
 };
 
 /**

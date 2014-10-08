@@ -23,19 +23,15 @@
 
 #include <boost/format.hpp>
 
-#include "base/deprecated.h"
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/editor_game_base.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "map_io/widelands_map_loader.h"
-#include "profile/profile.h"
 #include "ui_basic/box.h"
-#include "ui_basic/checkbox.h"
 #include "wui/text_constants.h"
 
 
@@ -128,7 +124,6 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 		}
 	}
 	m_ta_mapname.set_tooltip(_("The name of this map"));
-	m_ta_author.set_tooltip(_("The designers of this map"));
 	// NOCOM localize if used m_ta_players.set_tooltip(("The number of players"));
 	//m_ta_size.set_tooltip(("The size of this map (Width x Height)"));
 	m_ta_description.set_tooltip(_("Story and hints"));
@@ -328,8 +323,10 @@ void FullscreenMenuMapSelect::map_selected(uint32_t)
 		} else {
 			m_ta_mapname.set_tooltip(_("The name of this map"));
 		}
-
-		m_ta_author.set_text(map.author);
+		m_label_author.set_text(ngettext("Author", "Authors", map.authors->get_number()));
+		m_ta_author.set_tooltip(ngettext("The designer of this map", "The designers of this map",
+													map.authors->get_number()));
+		m_ta_author.set_text(map.authors->get_name());
 		// NOCOM m_ta_size.set_text((boost::format("%u  x  %u") % map.width % map.height).str());
 		//m_ta_players.set_text((boost::format("%u") % static_cast<unsigned int>(map.nrplayers)).str());
 		m_ta_description.set_text(map.description +
@@ -483,7 +480,7 @@ void FullscreenMenuMapSelect::fill_list()
 					mapdata.filename       = mapfilename;
 					mapdata.name           = map.get_name();
 					mapdata.localized_name = mapdata.name.empty() ? "" : _(mapdata.name);
-					mapdata.author         = map.get_author();
+					mapdata.authors        = new MapAuthorData(map.get_author());
 					mapdata.description    = map.get_description().empty() ? "" : _(map.get_description());
 					mapdata.hint           = map.get_hint().empty() ? "" : _(map.get_hint());
 					mapdata.nrplayers      = map.get_nrplayers();
@@ -554,7 +551,7 @@ void FullscreenMenuMapSelect::fill_list()
 
 				mapdata.filename    = mapfilename;
 				mapdata.name        = map.get_name();
-				mapdata.author      = map.get_author();
+				mapdata.authors     = new MapAuthorData(map.get_author());
 				mapdata.description = map.get_description();
 				mapdata.hint        = map.get_hint();
 				mapdata.nrplayers   = map.get_nrplayers();
@@ -587,7 +584,7 @@ void FullscreenMenuMapSelect::fill_list()
 				// Fill in the data we got from the dedicated server
 				mapdata.filename    = mapfilename;
 				mapdata.name        = mapfilename.substr(5, mapfilename.size() - 1);
-				mapdata.author      = _("unknown");
+				mapdata.authors     = new MapAuthorData(_("Nobody"));
 				mapdata.description = _("This map file is not present in your filesystem."
 							" The data shown here was sent by the server.");
 				mapdata.hint        = "";
