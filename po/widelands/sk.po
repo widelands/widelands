@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-09-29 20:36+0100\n"
-"PO-Revision-Date: 2014-09-19 04:14+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"POT-Creation-Date: 2014-10-04 16:33+0100\n"
+"PO-Revision-Date: 2014-10-04 22:29+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2014-09-30 06:02+0000\n"
+"X-Launchpad-Export-Date: 2014-10-05 05:49+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: sk\n"
 
@@ -832,7 +832,7 @@ msgid "Loading map"
 msgstr "Načítava sa mapa"
 
 #: ../../src/logic/game.cc:369 ../../src/logic/game.cc:402
-#: ../../src/wlapplication.cc:1586
+#: ../../src/wlapplication.cc:1500
 msgid "Loading..."
 msgstr "Načítava sa..."
 
@@ -1403,7 +1403,7 @@ msgstr ""
 "alebo bol server ukončený, keď ste sa naň pokúšali pripojiť."
 
 #: ../../src/network/netclient.cc:198 ../../src/network/nethost.cc:849
-#: ../../src/wlapplication.cc:1479
+#: ../../src/wlapplication.cc:1393
 msgid "Preparing game"
 msgstr "Pripravuje sa hra"
 
@@ -2686,7 +2686,7 @@ msgstr "Kampane"
 msgid "Load Game"
 msgstr "Načítať hru"
 
-#: ../../src/wlapplication.cc:1178
+#: ../../src/wlapplication.cc:1092
 msgid ""
 "Your video settings could not be enabled, and fallback settings are in "
 "effect. Please check the graphics options!"
@@ -2694,11 +2694,11 @@ msgstr ""
 "Nepodarilo sa aktivovať vaše grafické nastavenia, v dôsledku čoho boli "
 "použité záložné nastavenia. Prosím, skontrolujte možnosti grafiky!"
 
-#: ../../src/wlapplication.cc:1252
+#: ../../src/wlapplication.cc:1166
 msgid "Game data error"
 msgstr "Chyba herných údajov"
 
-#: ../../src/wlapplication.cc:1262
+#: ../../src/wlapplication.cc:1176
 #, c-format
 msgid ""
 "\n"
@@ -2713,7 +2713,7 @@ msgstr ""
 "Súvisiace správy nájdete v štandardnom výstupe (stdout.txt v systéme "
 "Windows). Používate zostavenie %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1269
+#: ../../src/wlapplication.cc:1183
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -3689,24 +3689,3 @@ msgstr "Nasledovať"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "Vycentrovať pohľad na túto pozíciu"
-
-#~ msgid "min."
-#~ msgstr "min."
-
-#~ msgid "px."
-#~ msgstr "px."
-
-#~ msgid "Use single Watchwindow Mode"
-#~ msgstr "Použiť režim jediného sledovacieho okna"
-
-#~ msgid "Consumed ware type(s)"
-#~ msgstr "Spotrebované druhy tovaru"
-
-#~ msgid "Remove Replays older than:"
-#~ msgstr "Mazať záznamy staršie ako:"
-
-#~ msgid " is missing"
-#~ msgid_plural " are missing"
-#~ msgstr[0] " chýba"
-#~ msgstr[1] " chýbajú"
-#~ msgstr[2] " chýbajú"
