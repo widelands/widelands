@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-09-29 20:36+0100\n"
-"PO-Revision-Date: 2014-07-27 16:59+0000\n"
+"POT-Creation-Date: 2014-10-04 16:33+0100\n"
+"PO-Revision-Date: 2014-10-04 22:22+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-09-30 05:58+0000\n"
+"X-Launchpad-Export-Date: 2014-10-05 05:47+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "Language: cs\n"
@@ -832,7 +832,7 @@ msgid "Loading map"
 msgstr "Nahrávání mapy"
 
 #: ../../src/logic/game.cc:369 ../../src/logic/game.cc:402
-#: ../../src/wlapplication.cc:1586
+#: ../../src/wlapplication.cc:1500
 msgid "Loading..."
 msgstr "Nahrávání..."
 
@@ -1404,7 +1404,7 @@ msgstr ""
 "se server vypnul když ses snažil připojit."
 
 #: ../../src/network/netclient.cc:198 ../../src/network/nethost.cc:849
-#: ../../src/wlapplication.cc:1479
+#: ../../src/wlapplication.cc:1393
 msgid "Preparing game"
 msgstr "Připravuji hru"
 
@@ -2686,7 +2686,7 @@ msgstr "Kampaně"
 msgid "Load Game"
 msgstr "Nahrát hru"
 
-#: ../../src/wlapplication.cc:1178
+#: ../../src/wlapplication.cc:1092
 msgid ""
 "Your video settings could not be enabled, and fallback settings are in "
 "effect. Please check the graphics options!"
@@ -2694,11 +2694,11 @@ msgstr ""
 "Zvolené nastavení grafiky nelze zapnout, proto zapínám záložní. Prosím "
 "zkontrolujte nastavení grafiky."
 
-#: ../../src/wlapplication.cc:1252
+#: ../../src/wlapplication.cc:1166
 msgid "Game data error"
 msgstr "Chyba herních dat"
 
-#: ../../src/wlapplication.cc:1262
+#: ../../src/wlapplication.cc:1176
 #, c-format
 msgid ""
 "\n"
@@ -2713,7 +2713,7 @@ msgstr ""
 "Další podrobnosti najdeš ve standardním výstupu (stdout.txt na Windows). "
 "Používáš verzi %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1269
+#: ../../src/wlapplication.cc:1183
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -3688,24 +3688,3 @@ msgstr "Následovat"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "Vycentrovat hlavní pohled"
-
-#~ msgid "Consumed ware type(s)"
-#~ msgstr "Spotřebované typy zboží"
-
-#~ msgid "min."
-#~ msgstr "min."
-
-#~ msgid "Use single Watchwindow Mode"
-#~ msgstr "Použít mód jediného hlídacího okna"
-
-#~ msgid "Remove Replays older than:"
-#~ msgstr "Odstranit záznamy starší než:"
-
-#~ msgid "px."
-#~ msgstr "px."
-
-#~ msgid " is missing"
-#~ msgid_plural " are missing"
-#~ msgstr[0] " chybí"
-#~ msgstr[1] " chybí"
-#~ msgstr[2] " chybí"

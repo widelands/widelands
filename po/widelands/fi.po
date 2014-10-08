@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-09-29 20:36+0100\n"
-"PO-Revision-Date: 2014-09-19 00:12+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"POT-Creation-Date: 2014-10-04 16:33+0100\n"
+"PO-Revision-Date: 2014-10-04 22:19+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-30 05:59+0000\n"
+"X-Launchpad-Export-Date: 2014-10-05 05:47+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "X-Poedit-Country: FINLAND\n"
 "Language: fi\n"
@@ -840,7 +840,7 @@ msgid "Loading map"
 msgstr "Lataan karttaa"
 
 #: ../../src/logic/game.cc:369 ../../src/logic/game.cc:402
-#: ../../src/wlapplication.cc:1586
+#: ../../src/wlapplication.cc:1500
 msgid "Loading..."
 msgstr "Lataan..."
 
@@ -1412,7 +1412,7 @@ msgstr ""
 "palvelin sulkeutui kun yritit ottaa yhteyttä."
 
 #: ../../src/network/netclient.cc:198 ../../src/network/nethost.cc:849
-#: ../../src/wlapplication.cc:1479
+#: ../../src/wlapplication.cc:1393
 msgid "Preparing game"
 msgstr "Valmistelen peliä"
 
@@ -2678,7 +2678,7 @@ msgstr "Kampanjat"
 msgid "Load Game"
 msgstr "Lataa peli"
 
-#: ../../src/wlapplication.cc:1178
+#: ../../src/wlapplication.cc:1092
 msgid ""
 "Your video settings could not be enabled, and fallback settings are in "
 "effect. Please check the graphics options!"
@@ -2686,11 +2686,11 @@ msgstr ""
 "Videoasetuksiasi ei voitu ottaa käyttöön. Palasin turvallisiksi luultuihin "
 "asetuksiin. Yritä uudelleen!"
 
-#: ../../src/wlapplication.cc:1252
+#: ../../src/wlapplication.cc:1166
 msgid "Game data error"
 msgstr "Pelitietovirhe"
 
-#: ../../src/wlapplication.cc:1262
+#: ../../src/wlapplication.cc:1176
 #, c-format
 msgid ""
 "\n"
@@ -2705,7 +2705,7 @@ msgstr ""
 "Löydät asiaankuuluvat viestit ohjelman perustulosteesta (stdout, Windowsissa "
 "tiedosto stdout.txt). Käytät versiota  %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1269
+#: ../../src/wlapplication.cc:1183
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -3679,23 +3679,3 @@ msgstr "Seuraa"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "Keskitä päänäkymä tähän"
-
-#~ msgid "Consumed ware type(s)"
-#~ msgstr "Kulutetut tuotetyypit"
-
-#~ msgid "min."
-#~ msgstr "min välein"
-
-#~ msgid "Use single Watchwindow Mode"
-#~ msgstr "Käytä vain yhtä tarkkailuikkunaa"
-
-#~ msgid "Remove Replays older than:"
-#~ msgstr "Poista vanhemmat tallennukset kuin:"
-
-#~ msgid "px."
-#~ msgstr "px."
-
-#~ msgid " is missing"
-#~ msgid_plural " are missing"
-#~ msgstr[0] " puuttuu"
-#~ msgstr[1] " puuttuvat"

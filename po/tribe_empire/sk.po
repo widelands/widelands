@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-09-29 19:36+0000\n"
+"POT-Creation-Date: 2014-10-04 15:33+0000\n"
 "PO-Revision-Date: 2014-08-11 22:11+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-09-30 05:58+0000\n"
+"X-Launchpad-Export-Date: 2014-10-05 05:46+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: sk\n"
 
@@ -1448,7 +1448,6 @@ msgstr ""
 "mohol začať sadiť."
 
 #: ../../tribes/empire/farm/help.lua:17
-#: ../../tribes/empire/vineyard/help.lua:17
 msgid "Sow and harvest wheat."
 msgstr "Siať a zberať pšenicu."
 
@@ -2111,6 +2110,10 @@ msgstr "oberanie hrozna"
 #: ../../tribes/empire/vineyard/conf:46
 msgid ""
 "The farmer working at this vineyard has no cleared soil to plant his seeds."
+msgstr ""
+
+#: ../../tribes/empire/vineyard/help.lua:17
+msgid "Plant grapevines and harvest grapes."
 msgstr ""
 
 #: ../../tribes/empire/war_lance/conf:1

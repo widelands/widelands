@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-29 20:36+0100\n"
-"PO-Revision-Date: 2014-09-19 02:32+0000\n"
+"POT-Creation-Date: 2014-10-04 16:33+0100\n"
+"PO-Revision-Date: 2014-10-04 22:23+0000\n"
 "Last-Translator: Midori <midori.tj@gmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-09-30 06:00+0000\n"
+"X-Launchpad-Export-Date: 2014-10-05 05:48+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -829,7 +829,7 @@ msgid "Loading map"
 msgstr "マップを読込中"
 
 #: ../../src/logic/game.cc:369 ../../src/logic/game.cc:402
-#: ../../src/wlapplication.cc:1586
+#: ../../src/wlapplication.cc:1500
 msgid "Loading..."
 msgstr "読込中..."
 
@@ -1383,7 +1383,7 @@ msgstr ""
 "あなたが接続しようとしたときに、サーバーがシャットダウンしました。"
 
 #: ../../src/network/netclient.cc:198 ../../src/network/nethost.cc:849
-#: ../../src/wlapplication.cc:1479
+#: ../../src/wlapplication.cc:1393
 msgid "Preparing game"
 msgstr "ゲーム準備中"
 
@@ -2646,17 +2646,17 @@ msgstr "キャンペーン"
 msgid "Load Game"
 msgstr "ゲーム読込"
 
-#: ../../src/wlapplication.cc:1178
+#: ../../src/wlapplication.cc:1092
 msgid ""
 "Your video settings could not be enabled, and fallback settings are in "
 "effect. Please check the graphics options!"
 msgstr "ビデオ設定を有効にすることができなかったため、フォールバックの設定が有効になります。グラフィックのオプションを確認してください。"
 
-#: ../../src/wlapplication.cc:1252
+#: ../../src/wlapplication.cc:1166
 msgid "Game data error"
 msgstr "ゲームデータエラー"
 
-#: ../../src/wlapplication.cc:1262
+#: ../../src/wlapplication.cc:1176
 #, c-format
 msgid ""
 "\n"
@@ -2670,7 +2670,7 @@ msgstr ""
 "Widelandsの改善のためにこの問題を報告してください。標準出力（Windowsの場合はstdout.txt）に関連するメッセージを見つけましょう。あ"
 "なたはビルド%1$s (%2$s)を使用しています。 "
 
-#: ../../src/wlapplication.cc:1269
+#: ../../src/wlapplication.cc:1183
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -3638,22 +3638,3 @@ msgstr "追跡"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "ここに視点移動"
-
-#~ msgid " is missing"
-#~ msgid_plural " are missing"
-#~ msgstr[0] " が不足"
-
-#~ msgid "min."
-#~ msgstr "分"
-
-#~ msgid "Use single Watchwindow Mode"
-#~ msgstr "シングル監視ウィンドウモードを使用する"
-
-#~ msgid "Remove Replays older than:"
-#~ msgstr "古いリプレイデータの削除期限"
-
-#~ msgid "px."
-#~ msgstr "px"
-
-#~ msgid "Consumed ware type(s)"
-#~ msgstr "消費アイテムの種類"
