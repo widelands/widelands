@@ -313,7 +313,7 @@ struct BuildingObserver {
 	bool mines_water_;         // wells
 	bool need_water_;          // fisher, fish_breeder = true
 	bool is_hunter_;           // need to identify hunters
-	bool is_fisher_;           // need to identify hunters
+	bool is_fisher_;           // need to identify fishers
 	bool space_consumer_;      // farm, vineyard... = true
 	bool expansion_type_;      // military building used that can be used to control area
 	bool fighting_type_;       // military building built near enemies

@@ -123,7 +123,7 @@ private:
 
 	void update_productionsite_stats(int32_t);
 
-	void check_ware_needeness(BuildingObserver& bo,
+	void check_ware_necessity(BuildingObserver& bo,
 	                          bool* output_is_needed,
 	                          int16_t* max_preciousness,
 	                          int16_t* max_needed_preciousness);
