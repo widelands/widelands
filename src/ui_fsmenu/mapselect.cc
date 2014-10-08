@@ -32,6 +32,7 @@
 #include "logic/game_settings.h"
 #include "map_io/widelands_map_loader.h"
 #include "ui_basic/box.h"
+#include "ui_basic/icon.h"
 #include "wui/text_constants.h"
 
 
@@ -182,6 +183,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 							 UI::Box::Horizontal, m_checkbox_space, get_w());
 	_add_tag_checkbox(vbox, "ffa", _("Free for all"));
 	_add_tag_checkbox(vbox, "1v1", _("1v1"));
+
 	vbox->set_size(get_w() - 2 * m_maplistx, m_checkbox_space);
 
 	vbox = new UI::Box(this,
@@ -299,7 +301,20 @@ void FullscreenMenuMapSelect::map_selected(uint32_t)
 {
 	const MapData & map = m_maps_data[m_table.get_selected()];
 
+	// Initialize suggested teams
+	// NOCOM still need to make these disappear when switching to new map
+	uint8_t lineup_counter = 0;
+	UI::Box* suggested_teams_box = new UI::Box(this, m_right_column_x, 10,
+												 UI::Box::Vertical, m_checkbox_space, get_w() - m_right_column_x);
+	suggested_teams_box->set_visible(false);
+	suggested_teams_box->set_size(0, 0);
+	UI::Textarea * suggested_teams_box_label =
+			new UI::Textarea(suggested_teams_box, _("Suggested Teams:"), UI::Align_CenterLeft);
+	suggested_teams_box->add(suggested_teams_box_label, UI::Box::AlignLeft);
+	suggested_teams_box_label->set_visible(false);
+
 	if (map.width) {
+		// Show map information
 		m_label_mapname.set_text(_("Map Name:"));
 		std::string map_displayname = map.localized_name;
 		if (m_cb_dont_localize_mapnames->get_state()) {
@@ -344,8 +359,43 @@ void FullscreenMenuMapSelect::map_selected(uint32_t)
 				(m_ta_description.get_w(),
 				 descr_bottom - get_y_from_preceding(m_label_description) - 4 * m_padding);
 		m_ok.set_tooltip(m_is_editor ? _("Edit this map") : _("Play this map"));
+
+		// Parse suggested teams
+		for (Map::SuggestedTeamLineup* lineup : map.suggested_teams) {
+
+			UI::Box* lineup_box =
+					new UI::Box(suggested_teams_box,
+									m_indent,
+									get_y_from_preceding(*suggested_teams_box_label)
+									+ lineup_counter * (20 + m_padding),
+									UI::Box::Horizontal, m_checkbox_space, get_w() - m_right_column_x);
+			lineup_box->set_size(get_w() - m_right_column_x, 20 + m_padding);
+
+			bool is_first = true;
+			for (Map::SuggestedTeam* team : *lineup) {
+
+				if (!is_first) {
+					lineup_box->add_space(m_padding);
+					UI::Textarea * vs_label =
+							new UI::Textarea(lineup_box, _("vs."), UI::Align_CenterLeft);
+					lineup_box->add(vs_label, UI::Box::AlignLeft);
+					lineup_box->add_space(m_padding);
+				}
+				is_first = false;
+
+				for (uint16_t player : *team) {
+					assert(player < MAX_PLAYERS);
+					const std::string player_filename = (boost::format("pics/fsel_editor_set_player_0%i_pos.png")
+																	 % (++player)).str().c_str();
+					UI::Icon* player_icon = new UI::Icon(lineup_box, 0, 0, 20, 20, g_gr->images().get(player_filename));
+					player_icon->set_no_frame();
+					lineup_box->add(player_icon, UI::Box::AlignLeft);
+				} // Players in team
+			} // Teams in lineup
+			++lineup_counter;
+		} // All lineups
 	} else {
-		// Directory
+		// Show directory information
 		m_label_mapname.set_text(_("Directory:"));
 		m_ta_mapname.set_text(map.localized_name);
 		m_ta_mapname.set_tooltip(_("The name of this directory"));
@@ -364,6 +414,30 @@ void FullscreenMenuMapSelect::map_selected(uint32_t)
 	m_ok.set_enabled(true);
 	m_cb_load_map_as_scenario.set_state(false); // reset
 	m_ta_description.scroll_to_top();
+
+	// Show / hide suggested teams
+	if (lineup_counter > 0) {
+		suggested_teams_box->set_visible(true);
+		suggested_teams_box_label->set_visible(true);
+		suggested_teams_box->set_size(get_w() - m_right_column_x,
+												lineup_counter * (20 + m_padding)
+												+ suggested_teams_box_label->get_h() + 2 * m_padding);
+		if (m_cb_load_map_as_scenario.is_visible()) {
+			suggested_teams_box->set_pos
+					(Point(suggested_teams_box->get_x(),
+							 m_cb_load_map_as_scenario.get_y() - suggested_teams_box->get_h() - 2 * m_padding));
+		} else {
+			suggested_teams_box->set_pos(Point(suggested_teams_box->get_x(),
+														  m_buty - suggested_teams_box->get_h()));
+
+		}
+		m_ta_description.set_size(m_ta_description.get_w(),
+										  suggested_teams_box->get_y() - m_ta_description.get_y() - 2 * m_padding);
+		// NOCOM these won't disappear
+	} else {
+		suggested_teams_box_label->set_visible(false);
+		suggested_teams_box->set_visible(false);
+	}
 }
 
 
@@ -461,69 +535,72 @@ void FullscreenMenuMapSelect::fill_list()
 
 		//Add map files(compressed maps) and directories(uncompressed)
 		{
-			Widelands::Map map; //  MapLoader needs a place to put its preload data
+			Widelands::Map* map; //  MapLoader needs a place to put its preload data
 
 			for (const std::string& mapfilename : files) {
 
-				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(mapfilename);
+				map = new Widelands::Map();
+
+				std::unique_ptr<Widelands::MapLoader> ml = map->get_correct_loader(mapfilename);
 				if (!ml) {
 					continue;
 				}
 
 				try {
-					map.set_filename(mapfilename);
+					map->set_filename(mapfilename);
 					ml->preload_map(true);
 
 					i18n::Textdomain td("maps");
 
-					MapData mapdata;
-					mapdata.filename       = mapfilename;
-					mapdata.name           = map.get_name();
-					mapdata.localized_name = mapdata.name.empty() ? "" : _(mapdata.name);
-					mapdata.authors        = new MapAuthorData(map.get_author());
-					mapdata.description    = map.get_description().empty() ? "" : _(map.get_description());
-					mapdata.hint           = map.get_hint().empty() ? "" : _(map.get_hint());
-					mapdata.nrplayers      = map.get_nrplayers();
-					mapdata.width          = map.get_width();
-					mapdata.height         = map.get_height();
-					mapdata.scenario       = map.scenario_types() & m_scenario_types
-													 || (m_is_editor && map.scenario_types() > 0);
-					mapdata.tags           = map.get_tags();
-					if (mapdata.scenario) {
-						mapdata.tags.insert("scenario");
+					MapData* mapdata = new MapData();
+					mapdata->filename       = mapfilename;
+					mapdata->name           = map->get_name();
+					mapdata->localized_name = mapdata->name.empty() ? "" : _(mapdata->name);
+					mapdata->authors        = new MapAuthorData(map->get_author());
+					mapdata->description    = map->get_description().empty() ? "" : _(map->get_description());
+					mapdata->hint           = map->get_hint().empty() ? "" : _(map->get_hint());
+					mapdata->nrplayers      = map->get_nrplayers();
+					mapdata->width          = map->get_width();
+					mapdata->height         = map->get_height();
+					mapdata->scenario       = map->scenario_types() & m_scenario_types
+													 || (m_is_editor && map->scenario_types() > 0);
+					mapdata->tags           = map->get_tags();
+					if (mapdata->scenario) {
+						mapdata->tags.insert("scenario");
 					}
+					mapdata->suggested_teams = map->get_suggested_teams();
 
 					m_has_translated_mapname =
-							m_has_translated_mapname || (mapdata.name != mapdata.localized_name);
+							m_has_translated_mapname || (mapdata->name != mapdata->localized_name);
 
-					if (!mapdata.width || !mapdata.height) {
+					if (!mapdata->width || !mapdata->height) {
 						continue;
 					}
 
 					bool has_all_tags = true;
 					for (std::set<uint32_t>::const_iterator it = m_req_tags.begin(); it != m_req_tags.end(); ++it)
-						has_all_tags &= mapdata.tags.count(m_tags_ordered[*it]);
+						has_all_tags &= mapdata->tags.count(m_tags_ordered[*it]);
 					if (!has_all_tags) {
 						continue;
 					}
 
-					m_maps_data.push_back(mapdata);
+					m_maps_data.push_back(*mapdata);
 					UI::Table<uintptr_t const>::EntryRecord & te = m_table.add(m_maps_data.size() - 1);
 
-					te.set_string(col_players, (boost::format("(%i)") % mapdata.nrplayers).str());
+					te.set_string(col_players, (boost::format("(%i)") % mapdata->nrplayers).str());
 
-					std::string map_displayname = mapdata.localized_name;
+					std::string map_displayname = mapdata->localized_name;
 					if (m_cb_dont_localize_mapnames->get_state()) {
-						map_displayname = mapdata.name;
+						map_displayname = mapdata->name;
 					}
 					te.set_picture
 						(col_name,  g_gr->images().get
 						 (dynamic_cast<WidelandsMapLoader*>(ml.get()) ?
-							  (mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png") :
+							  (mapdata->scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png") :
 						"pics/ls_s2map.png"),
 						map_displayname);
 
-					te.set_string(col_size, (boost::format("%u x %u") % mapdata.width % mapdata.height).str());
+					te.set_string(col_size, (boost::format("%u x %u") % mapdata->width % mapdata->height).str());
 				} catch (const std::exception & e) {
 					log("Mapselect: Skip %s due to preload error: %s\n", mapfilename.c_str(), e.what());
 				} catch (...) {

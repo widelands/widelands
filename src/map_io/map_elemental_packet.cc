@@ -20,8 +20,10 @@
 #include "map_io/map_elemental_packet.h"
 
 #include <boost/algorithm/string.hpp>
+#include <boost/format.hpp>
 
 #include "base/deprecated.h"
+#include "base/log.h" // NOCOM delete when done
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
@@ -60,6 +62,46 @@ void MapElementalPacket::pre_read(FileSystem & fs, Map * map)
 					boost::trim(tn);
 					map->add_tag(tn);
 				}
+			}
+
+			// Get suggested teams
+			uint16_t team_section_id = 0;
+			std::string teamsection_key = (boost::format("teams%02i") % team_section_id).str();
+			while (Section* teamsection = prof.get_section(teamsection_key.c_str())) {
+
+				// A lineup is made up of teams
+				Map::SuggestedTeamLineup* lineup = new Map::SuggestedTeamLineup();
+
+				uint16_t team_number = 1;
+				std::string team_key = (boost::format("team%i") % team_number).str().c_str();
+				std::string team_string = teamsection->get_string(team_key.c_str(), "");
+				while (!team_string.empty()) {
+
+					// A team is made up of players
+					Map::SuggestedTeam* team = new Map::SuggestedTeam();
+
+					std::vector<std::string> players_string;
+					boost::split(players_string, team_string, boost::is_any_of(","));
+
+					for (const std::string& player: players_string) {
+						uint16_t player_number = static_cast<uint16_t>(atoi(player.c_str()));
+						assert(player_number < MAX_PLAYERS);
+						team->push_back(player_number);
+					}
+
+					lineup->push_back(team);
+
+					// Increase team number
+					++team_number;
+					team_key = (boost::format("team%i") % team_number).str();
+					team_string = teamsection->get_string(team_key.c_str(), "");
+				}
+
+				map->m_suggested_teams.push_back(lineup);
+
+				// Increase teamsection
+				++team_section_id;
+				teamsection_key = (boost::format("teams%02i") % team_section_id).str().c_str();
 			}
 		} else
 			throw GameDataError

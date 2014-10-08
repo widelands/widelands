@@ -142,6 +142,9 @@ public:
 
 	using PortSpacesSet = std::set<Coords, Coords::OrderingFunctor>;
 	using Objectives = std::map<std::string, std::unique_ptr<Objective>>;
+	using SuggestedTeam = std::vector<uint16_t>;             // Players in a team
+	using SuggestedTeamLineup = std::vector<SuggestedTeam*>; // Recommended teams to play against each other
+
 
 	enum { // flags for findpath()
 
@@ -210,9 +213,12 @@ public:
 	const std::string& get_description() const {return m_description;}
 	const std::string& get_hint()        const {return m_hint;}
 	const std::string& get_background()  const {return m_background;}
+
 	using Tags = std::set<std::string>;
 	const Tags & get_tags() const {return m_tags;}
 	bool has_tag(std::string & s) const {return m_tags.count(s);}
+
+	const std::vector<SuggestedTeamLineup*>& get_suggested_teams() const {return m_suggested_teams;}
 
 	PlayerNumber get_nrplayers() const {return m_nrplayers;}
 	ScenarioTypes scenario_types() const {return m_scenario_types;}
@@ -401,6 +407,8 @@ private:
 	std::string m_hint;
 	std::string m_background;
 	Tags        m_tags;
+	std::vector<SuggestedTeamLineup*> m_suggested_teams;
+
 	std::vector<Coords> m_starting_pos;    //  players' starting positions
 
 	std::unique_ptr<Field[]> m_fields;

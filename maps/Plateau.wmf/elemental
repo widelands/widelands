@@ -10,3 +10,7 @@ descr=_"You are standing on an island, crowned by mighty mountains which keep a 
 hint=_"Suggested Teams: blue vs. yellow"
 tags="official,1v1"
 
+[teams00]
+team1=0
+team2=2
+# blue vs. yellow

@@ -53,6 +53,7 @@ struct MapData {
 	std::string description;
 	std::string hint;
 	Tags tags;
+	std::vector<Map::SuggestedTeamLineup*> suggested_teams;
 
 	MapAuthorData* authors;
 	uint32_t width;
@@ -60,8 +61,13 @@ struct MapData {
 	uint32_t nrplayers;
 	bool scenario; // is this a scenario we should list?
 
-	MapData()
-			: authors(new MapAuthorData("")), width(0), height(0), nrplayers(0), scenario(false) {}
+	MapData() :
+		authors(new MapAuthorData("")),
+		width(0), height(0), nrplayers(0),
+		scenario(false)
+	{
+		suggested_teams.clear();
+	}
 };
 
 /**
