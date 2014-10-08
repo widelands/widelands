@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-09-29 20:36+0100\n"
+"POT-Creation-Date: 2014-10-04 16:33+0100\n"
 "PO-Revision-Date: 2014-10-01 20:05+0000\n"
 "Last-Translator: wl-zocker <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-02 05:34+0000\n"
+"X-Launchpad-Export-Date: 2014-10-05 05:47+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: de\n"
 
@@ -832,7 +832,7 @@ msgid "Loading map"
 msgstr "Lade Karte"
 
 #: ../../src/logic/game.cc:369 ../../src/logic/game.cc:402
-#: ../../src/wlapplication.cc:1586
+#: ../../src/wlapplication.cc:1500
 msgid "Loading..."
 msgstr "Laden..."
 
@@ -1423,7 +1423,7 @@ msgstr ""
 "der Server wurde gerade beendet, als du dich anmelden wolltest."
 
 #: ../../src/network/netclient.cc:198 ../../src/network/nethost.cc:849
-#: ../../src/wlapplication.cc:1479
+#: ../../src/wlapplication.cc:1393
 msgid "Preparing game"
 msgstr "Das Spiel wird vorbereitet...."
 
@@ -2741,7 +2741,7 @@ msgstr "Kampagnen"
 msgid "Load Game"
 msgstr "Spielstand laden"
 
-#: ../../src/wlapplication.cc:1178
+#: ../../src/wlapplication.cc:1092
 msgid ""
 "Your video settings could not be enabled, and fallback settings are in "
 "effect. Please check the graphics options!"
@@ -2750,11 +2750,11 @@ msgstr ""
 "Notfalleinstellungen werden verwendet. Bitte die Grafikeinstellungen "
 "überprüfen!"
 
-#: ../../src/wlapplication.cc:1252
+#: ../../src/wlapplication.cc:1166
 msgid "Game data error"
 msgstr "Spieldatenfehler"
 
-#: ../../src/wlapplication.cc:1262
+#: ../../src/wlapplication.cc:1176
 #, c-format
 msgid ""
 "\n"
@@ -2769,7 +2769,7 @@ msgstr ""
 "verbessert werden kann. Weitere Informationen sind in der Standardausgabe "
 "(stdout.txt unter Windows). Benutzte Build-Version %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1269
+#: ../../src/wlapplication.cc:1183
 msgid ""
 "Please add this information to your report.\n"
 "\n"

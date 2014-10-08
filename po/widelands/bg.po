@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-29 20:36+0100\n"
+"POT-Creation-Date: 2014-10-04 16:33+0100\n"
 "PO-Revision-Date: 2014-09-19 09:01+0000\n"
 "Last-Translator: SirVer <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-30 05:58+0000\n"
+"X-Launchpad-Export-Date: 2014-10-05 05:47+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: bg\n"
 
@@ -826,7 +826,7 @@ msgid "Loading map"
 msgstr ""
 
 #: ../../src/logic/game.cc:369 ../../src/logic/game.cc:402
-#: ../../src/wlapplication.cc:1586
+#: ../../src/wlapplication.cc:1500
 msgid "Loading..."
 msgstr "Зареждане…"
 
@@ -1366,7 +1366,7 @@ msgid ""
 msgstr ""
 
 #: ../../src/network/netclient.cc:198 ../../src/network/nethost.cc:849
-#: ../../src/wlapplication.cc:1479
+#: ../../src/wlapplication.cc:1393
 msgid "Preparing game"
 msgstr "Подготовка на играта"
 
@@ -2592,17 +2592,17 @@ msgstr ""
 msgid "Load Game"
 msgstr "Зареждане на игра"
 
-#: ../../src/wlapplication.cc:1178
+#: ../../src/wlapplication.cc:1092
 msgid ""
 "Your video settings could not be enabled, and fallback settings are in "
 "effect. Please check the graphics options!"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1252
+#: ../../src/wlapplication.cc:1166
 msgid "Game data error"
 msgstr "Грешка в данните за играта"
 
-#: ../../src/wlapplication.cc:1262
+#: ../../src/wlapplication.cc:1176
 #, c-format
 msgid ""
 "\n"
@@ -2617,7 +2617,7 @@ msgstr ""
 "намерите релевантна информация на стандартния изход (stdout.txt в Windows). "
 "Използвате билд на играта %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1269
+#: ../../src/wlapplication.cc:1183
 msgid ""
 "Please add this information to your report.\n"
 "\n"

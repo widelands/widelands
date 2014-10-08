@@ -204,9 +204,9 @@ uint32_t persist_object
 
 	// The next few lines make eris error messages much more useful, but make
 	// eris much slower too. Only enable if you need more debug informations.
-	// lua_pushboolean(L, true);
-	// eris_set_setting(L, "path", lua_gettop(L));
-	// lua_pop(L, 1);
+	lua_pushboolean(L, true);
+	eris_set_setting(L, "path", lua_gettop(L));
+	lua_pop(L, 1);
 
 	size_t cpos = fw.get_pos();
 	eris_dump(L, &LuaWriter, &fw);
