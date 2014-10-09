@@ -47,7 +47,6 @@ private:
 	int32_t const m_padding;
 	int32_t const m_indent;
 	int32_t const m_label_height;
-	int32_t const m_max_overall_height;
 	UI::Textarea * m_suggested_teams_box_label;
 	UI::Box* m_lineup_box;
 	std::vector<UI::Icon*> m_player_icons;

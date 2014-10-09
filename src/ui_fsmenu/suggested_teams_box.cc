@@ -37,8 +37,7 @@ SuggestedTeamsBox::SuggestedTeamsBox(Panel * parent,
 	UI::Box(parent, x, y, orientation, max_x, max_y, inner_spacing),
 	m_padding(padding),
 	m_indent(indent),
-	m_label_height(label_height),
-	m_max_overall_height(max_y > 0 ? max_y : 5 * m_label_height + m_padding)
+	m_label_height(label_height)
 {
 	m_player_icons.clear();
 	m_suggested_teams.clear();
@@ -81,13 +80,15 @@ void SuggestedTeamsBox::show(std::vector<Widelands::Map::SuggestedTeamLineup*> s
 		uint8_t lineup_counter = 0;
 		set_visible(true);
 		m_suggested_teams_box_label->set_visible(true);
-		m_suggested_teams_box_label->set_text(_("Suggested Teams:"));
+		/** TRANSLATORS: Label for the list of suggested teams when choosing a map */
+		m_suggested_teams_box_label->set_text(_("Teams:"));
 		int32_t teamlist_offset = m_suggested_teams_box_label->get_y() +
 										  m_suggested_teams_box_label->get_h() +
 										  m_padding;
 
 		// Parse suggested teams
 		UI::Icon* player_icon;
+		UI::Textarea * vs_label;
 		for (Widelands::Map::SuggestedTeamLineup* lineup : m_suggested_teams) {
 
 			m_lineup_box =
@@ -101,8 +102,7 @@ void SuggestedTeamsBox::show(std::vector<Widelands::Map::SuggestedTeamLineup*> s
 
 				if (!is_first) {
 					m_lineup_box->add_space(m_padding);
-					UI::Textarea * vs_label =
-							new UI::Textarea(m_lineup_box, _("vs."), UI::Align_CenterLeft);
+					vs_label = new UI::Textarea(m_lineup_box, "x", UI::Align_CenterLeft);
 					m_lineup_box->add(vs_label, UI::Box::AlignLeft);
 					vs_label->set_visible(true);
 					m_vs_labels.push_back(vs_label);
@@ -125,11 +125,8 @@ void SuggestedTeamsBox::show(std::vector<Widelands::Map::SuggestedTeamLineup*> s
 			++lineup_counter;
 		} // All lineups
 
-		// Adjust sizes to content
-		if (lineup_counter > 0) {
-			int32_t new_height = teamlist_offset + lineup_counter * m_label_height;
-			set_size(get_w(), new_height < m_max_overall_height ? new_height : m_max_overall_height);
-		}
+		// Adjust size to content
+		set_size(get_w(), teamlist_offset + lineup_counter * m_label_height);
 	}
 }
 
