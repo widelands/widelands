@@ -31,6 +31,8 @@ wl_library(ui_fsmenu
     options.h
     singleplayer.cc
     singleplayer.h
+    suggested_teams_box.cc
+    suggested_teams_box.h
   DEPENDS
     base_deprecated
     base_exceptions
