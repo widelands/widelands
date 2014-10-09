@@ -87,6 +87,7 @@ void SuggestedTeamsBox::show(std::vector<Widelands::Map::SuggestedTeamLineup*> s
 										  m_padding;
 
 		// Parse suggested teams
+		UI::Icon* player_icon;
 		for (Widelands::Map::SuggestedTeamLineup* lineup : m_suggested_teams) {
 
 			m_lineup_box =
@@ -113,7 +114,7 @@ void SuggestedTeamsBox::show(std::vector<Widelands::Map::SuggestedTeamLineup*> s
 					assert(player < MAX_PLAYERS);
 					const std::string player_filename = (boost::format("pics/fsel_editor_set_player_0%i_pos.png")
 																	 % (++player)).str().c_str();
-					UI::Icon* player_icon = new UI::Icon(m_lineup_box, 0, 0, 20, 20,
+					player_icon = new UI::Icon(m_lineup_box, 0, 0, 20, 20,
 																	 g_gr->images().get(player_filename));
 					player_icon->set_visible(true);
 					player_icon->set_no_frame();
@@ -126,9 +127,8 @@ void SuggestedTeamsBox::show(std::vector<Widelands::Map::SuggestedTeamLineup*> s
 
 		// Adjust sizes to content
 		if (lineup_counter > 0) {
-			// NOCOM lots too big if there is only 1 lineup, a bit too big for 2
 			int32_t new_height = teamlist_offset + lineup_counter * m_label_height;
-			set_size(get_w(), new_height > m_max_overall_height ? new_height : m_max_overall_height);
+			set_size(get_w(), new_height < m_max_overall_height ? new_height : m_max_overall_height);
 		}
 	}
 }
