@@ -69,6 +69,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	m_waterval     = 20;
 	m_landval      = 60;
 	m_wastelandval = 0;
+	m_mountainsval = 100 - m_waterval - m_landval - m_wastelandval;
 	m_pn = 1;
 
 	// ---------- Random map number edit ----------
@@ -375,22 +376,26 @@ void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 	case ButtonId::WATER_PLUS:
 		if (m_waterval < 60)
 			m_waterval += 5;
-		if (m_landval + m_waterval > 100)
-			m_landval -= 5;
+		normalize(&m_waterval,&m_landval ,&m_wastelandval ,&m_mountainsval)	;	
 		break;
 	case ButtonId::WATER_MINUS:
-		if (m_waterval > 0)
+		if (m_waterval >= 5)
 			m_waterval -= 5;
+		else
+			m_waterval = 0;
+		normalize(&m_waterval,&m_landval ,&m_wastelandval ,&m_mountainsval)	;
 		break;
 	case ButtonId::LAND_PLUS:
 		if (m_landval < 100)
 			m_landval += 5;
-		if (m_waterval + m_landval > 100)
-			m_waterval -= 5;
+		normalize(&m_waterval,&m_landval ,&m_wastelandval ,&m_mountainsval)	;
 		break;
 	case ButtonId::LAND_MINUS:
-		if (m_landval > 0)
+		if (m_landval >= 5)
 			m_landval -= 5;
+		else
+			m_landval = 0;
+		normalize(&m_waterval,&m_landval ,&m_wastelandval ,&m_mountainsval)	;
 		break;
 	case ButtonId::SWITCH_WORLD:
 		++ m_current_world;
@@ -401,11 +406,15 @@ void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 		break;
 	case ButtonId::WASTE_PLUS:
 		if (m_wastelandval < 70)
-			m_wastelandval += 10;
+			m_wastelandval += 5;
+		normalize(&m_waterval,&m_landval ,&m_wastelandval ,&m_mountainsval)	;
 		break;
 	case ButtonId::WASTE_MINUS:
-		if (m_wastelandval > 0)
-			m_wastelandval -= 10;
+		if (m_wastelandval >= 5)
+			m_wastelandval -= 5;
+		else
+			m_wastelandval = 0;
+		normalize(&m_waterval,&m_landval ,&m_wastelandval ,&m_mountainsval)	;
 		break;
 	case ButtonId::SWITCH_RES:
 		++ m_res_amount;
@@ -442,7 +451,7 @@ void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 	m_wasteland->set_text(buffer);
 	snprintf
 		(buffer, sizeof(buffer), _("Mountains: %u %%"),
-		 100 - m_waterval - m_landval - m_wastelandval);
+		 m_mountainsval);
 	m_mountains->set_text(buffer);
 	snprintf(buffer, sizeof(buffer), _("Players: %u"), m_pn);
 	m_players->set_text(buffer);
@@ -450,6 +459,30 @@ void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 	nr_edit_box_changed();  // Update ID String
 }
 
+//NOCOM please review this approach, I believe more elegant code can be made
+// Editor window increases/decreases a single value by 4
+// so to compensate we decrease/increase all of them by 1
+void MainMenuNewRandomMap::normalize(int32_t*  a,int32_t* b,int32_t* c,int32_t* d) {
+	while ((*a + *b + *c + *d) != 100) {
+		if ((*a + *b + *c + *d)>100 and *a>0)
+			*a-=1;
+		if ((*a + *b + *c + *d)<100 and *a<100)
+			*a+=1;
+		if ((*a + *b + *c + *d)>100 and *b>0)
+			*b-=1;
+		if ((*a + *b + *c + *d)<100 and *b<100)
+			*b+=1;
+		if ((*a + *b + *c + *d)>100 and *c>0)
+			*c-=1;
+		if ((*a + *b + *c + *d)<100 and *c<100)
+			*c+=1;
+		if ((*a + *b + *c + *d)>100 and *d>0)
+			*d-=1;
+		if ((*a + *b + *c + *d)<100 and *d<100)
+			*d+=1;
+	}
+}				
+		
 void MainMenuNewRandomMap::clicked_create_map() {
 	EditorInteractive & eia =
 		ref_cast<EditorInteractive, UI::Panel>(*get_parent());
