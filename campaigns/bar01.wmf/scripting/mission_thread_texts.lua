@@ -21,7 +21,6 @@ end
 obj_build_rangers = {
    name = "mission rangers",
    title = _"Build two ranger's huts",
-   -- TODO: "number" currently refers to the number of buildings to be built, not the number of bullet points. Sensible?
    number = 1,
    body = objective_text(_"Build two ranger's huts",
       listitem_bullet(_"Build a ranger's hut next to each lumberjack's hut.") ..
@@ -121,7 +120,7 @@ obj_better_material_1 = {
 }
 
 obj_better_material_2 = {
-   name="mission grindstone",
+   name="mission grout",
    title=_"Build a lime kiln and coal economy",
    number = 3,
    body=objective_text(_"Build a lime kiln, a well and a charcoal kiln, or a coal mine", _(
@@ -170,6 +169,7 @@ briefing_msg_01 = {
    _[[My warriors hunt at day and lie awake at night – listening to the sounds of the cruel slaughter echoing from afar amongst the ancient trees.]])
 }
 
+
 briefing_msg_02 = {
    title = _"The Story Begins",
    body =
@@ -179,8 +179,8 @@ briefing_msg_02 = {
    field = al_thunran,
    posx = 0,
    posy = 0
-   -- TODO: make this appear to the top left
 }
+
 
 briefing_msg_03 = {
    title = _"The Story Begins",
@@ -192,14 +192,15 @@ briefing_msg_03 = {
    posy = 0
 }
 
+
 briefing_msg_04 = {
    title = _"The Story Begins",
    body = thron(
    _[[As father told me, there are times to fight and times to lie and wait, trying not to fall asleep or die before the right time comes. And so I do... wait.]])
 }
 
--- TODO: rename the three messages here and in mission_thread
-briefing_msg_1 = {
+
+briefing_msg_05 = {
    title =_ "The Story Begins",
    body = thron(_"Thron is shaking his head...",
 _([[Yet the war goes on. More and more of our brothers and sisters flee the brutal war raging ]] ..
@@ -212,7 +213,8 @@ _([[The stories they tell about the deeds of our kin are sad to hear. ]] ..
    field = home -- scroll back when showing the next few message boxes
 }
 
-briefing_msg_2 = {
+
+briefing_msg_06 = {
    title =_ "The Story Begins",
    body = thron(
 _([[Today my hunters brought men, women and little children before me who had hidden out in the forests, ]] ..
@@ -226,7 +228,7 @@ _([[To rise against whoever threatens our very existence, even tough it may be o
 }
 
 
-briefing_msg_3 = {
+briefing_msg_07 = {
    title =_ "The Story Begins",
    body = thron(
 _([[Boldreth seems more and more torn as the days go by. ]] ..
@@ -239,8 +241,8 @@ _([[Perhaps it’s time to make ourselves feel a little more at ease here. ]] ..
    )
 }
 
--- TODO: rename this
-khantrukh_1 = {
+
+briefing_msg_08 = {
    title = _"Somebody Comes up to You",
    body = khantrukh(_"An old man says...",
    _[[Hail, chieftain. I am Khantrukh and have seen many winters pass. Please allow me to aid you with my counsel through these darkened days.]] ..
@@ -250,6 +252,7 @@ khantrukh_1 = {
    )
 }
 
+
 order_msg_ranger = {
    title = _"The Advisor",
    body = khantrukh(_"Khantrukh notes...",
@@ -258,6 +261,7 @@ order_msg_ranger = {
    _[[So, in order to replace the trees we chop down, we should build some ranger’s huts, preferably close to the lumberjack’s huts.]])
 .. new_objectives(start_ranger)
 }
+
 
 story_msg1 = {
    title = _"In the Night",
@@ -269,6 +273,7 @@ posx = 0,
 posy = 0
 }
 
+
 story_msg2= {
    title = _"At the Tomb",
    body = thron(_"Thron says...",
@@ -279,12 +284,14 @@ posx = 0,
 posy = 0
 }
 
+
 story_msg3 = {
   title=_ "The Other Day",
   body = thron(_"Thron says thoughtfully...",
 _[[Some time ago, Boldreth came to me. His advice was to move to a place closer to home – to strike at the first sign of my brothers’ forces wavering.]] .. paragraphdivider() ..
 _[[But when I look over the forests I can still see black smoke rising to the sky. I know – it is too early yet, and what he hopes for will not happen any time soon. He might still be right, but I fear the bloodshed that returning too fast would cause both on our and the other side...]])
 }
+
 
 story_msg4 = {
 title =_ "The Oath",
@@ -442,8 +449,7 @@ _([[We need a wood hardener, and we need one now!]])
    ) .. new_objectives(obj_better_material_1)
 }
 
--- TODO: change grindstone to grout
-order_msg_17_grindstone = {
+order_msg_17_grout = {
    title=_"Your Loyal Companion",
    body= boldreth(_"Boldreth smiles...",
 _([[Well, old friend, this should ensure that our fortifications do not break down with our foes’ first battle cry! ]] ..
@@ -453,8 +459,7 @@ _([[Still, it would not hurt to accumulate some grout for our further campaign; 
    ) .. new_objectives(obj_better_material_2)
 }
 
--- TODO: simply call it reed
-order_msg_18_reed_yard = {
+order_msg_18_reed = {
    title=_"The Advisor",
    body= khantrukh(_"Khantrukh steps in...",
 _([[Chieftain, this is a disgrace! ]] ..

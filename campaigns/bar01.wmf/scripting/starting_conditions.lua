@@ -7,9 +7,7 @@ plr:forbid_buildings("all")
 plr:allow_buildings{
    "lumberjacks_hut",
    "quarry", 
-   "rangers_hut"--, 
-   --"sentry",
-   --"barrier"
+   "rangers_hut"
 }
 
 -- Place hq and fill it with wares

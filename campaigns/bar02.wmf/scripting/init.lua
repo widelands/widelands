@@ -1,8 +1,8 @@
 -- =======================================================================
---                       Barbarians Campaign Mission 3
+--                       Barbarians Campaign Mission 2
 -- =======================================================================
 
-set_textdomain("scenario_t03.wmf")
+set_textdomain("scenario_bar02.wmf")
 
 include "scripting/coroutine.lua"
 include "scripting/objective_utils.lua"
