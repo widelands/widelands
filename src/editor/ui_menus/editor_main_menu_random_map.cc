@@ -450,32 +450,32 @@ void MainMenuNewRandomMap::normalize_landmass(ButtonId button_id) {
 			m_mountainsval += 1;
 	}
 
-	// Compensate if we should get above/below 100%
+	// Compensate if mountainsval got above 100% / below 0%
 	while (m_mountainsval < 0) {
-		if (button_id != ButtonId::WASTE_PLUS && m_mountainsval < 0 && m_wastelandval > 0) {
+		if (button_id != ButtonId::WASTE_PLUS && m_wastelandval > 0) {
 			m_wastelandval -= 5;
 			m_mountainsval += 5;
 		}
-		if (button_id != ButtonId::LAND_PLUS && m_mountainsval < 0 && m_landval > 0) {
+		if (m_mountainsval < 0 && button_id != ButtonId::LAND_PLUS && m_landval > 0) {
 			m_landval -= 5;
 			m_mountainsval += 5;
 		}
-		if (button_id != ButtonId::WATER_PLUS && m_waterval > 0 && m_waterval > 0) {
+		if (m_mountainsval < 0 && button_id != ButtonId::WATER_PLUS && m_waterval > 0) {
 			m_waterval -= 5;
 			m_mountainsval += 5;
 		}
 	}
 
 	while (m_mountainsval > 100) {
-		if (button_id != ButtonId::WASTE_MINUS && m_mountainsval > 100 && m_wastelandval < 100) {
+		if (button_id != ButtonId::WASTE_MINUS && m_wastelandval < 100) {
 			m_wastelandval += 5;
 			m_mountainsval -= 5;
 		}
-		if (button_id != ButtonId::LAND_MINUS && m_mountainsval > 100 && m_landval < 100) {
+		if (m_mountainsval > 100 && button_id != ButtonId::LAND_MINUS && m_landval < 100) {
 			m_landval += 5;
 			m_mountainsval -= 5;
 		}
-		if (button_id != ButtonId::WATER_MINUS && m_waterval < 100 && m_waterval < 100) {
+		if (m_mountainsval > 100 && button_id != ButtonId::WATER_MINUS && m_waterval < 100) {
 			m_waterval += 5;
 			m_mountainsval -= 5;
 		}
