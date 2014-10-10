@@ -37,8 +37,7 @@ obj_build_lumberjack = {
    title=_"Build a lumberjack’s house",
    number = 1,
    body = objective_text(_"Lumberjack’s House",
-      listitem_bullet(_[[Build a lumberjack’s house at the red house symbol, south of your provisional headquarters.]]) ..
-      listitem_arrow(_[[Cutting down enough trees for more buildings will take a while. You can speed the game up by using PAGE UP and slow it down again with PAGE DOWN.]])
+      listitem_bullet(_[[Build a lumberjack’s house at the red house symbol, south of your provisional headquarters.]])
    ),
 }
 
