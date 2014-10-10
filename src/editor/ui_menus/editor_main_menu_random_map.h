@@ -80,7 +80,7 @@ private:
 	// this is just a placeholder, the result will not be passed
 	// but value will be recalculated from three above results
 	// needed for normalization
-	int32_t m_mountainsval; 
+	int32_t m_mountainsval;
 	uint8_t m_pn;
 	uint32_t m_mapNumber;
 	uint32_t m_res_amount;
@@ -93,7 +93,9 @@ private:
 	void clicked_create_map();
 	void id_edit_box_changed();
 	void nr_edit_box_changed();
-	void normalize(int32_t*  a,int32_t* b,int32_t* c,int32_t* d);
+	// This function makes sure that the sum of our landmass is >= 0% and <= 100%,
+	// and changes these values directly.
+	void normalize_landmass(MainMenuNewRandomMap::ButtonId button_id);
 
 	void set_map_info(Widelands::UniqueRandomMapInfo & mapInfo) const;
 };
