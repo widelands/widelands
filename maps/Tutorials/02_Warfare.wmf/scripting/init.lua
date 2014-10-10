@@ -88,7 +88,8 @@ function init_player()
          },
          workers = {
             builder = 3,
-            ox = 15
+            ox = 15,
+            trainer = 2
          },
          wares = {
             log = 40,
@@ -144,12 +145,16 @@ function training()
    -- Teach about trainingsites and soldiers' abilities
    sleep(5000) -- to let soldiers walk
 
-   msg_box(training1)
-   msg_box(training2)
-   local o = msg_box(training3)
-   
-   while #plr:get_buildings("trainingcamp") == 0 or #plr:get_buildings("battlearena") == 0 do sleep(200) end
+   msg_box(abilities)
+   local o = msg_box(battlearena1)
+   while #plr:get_buildings("battlearena") == 0 do sleep(500) end
    o.done = true
+   msg_box(battlearena2)
+
+   o = msg_box(trainingcamp1)
+   while #plr:get_buildings("trainingcamp") == 0 do sleep(500) end
+   o.done = true
+   msg_box(trainingcamp2)
    
    sleep(300)
    
@@ -238,5 +243,3 @@ end
 
 run(init_player)
 run(intro)
---run(test)
---run(enhance_fortress)

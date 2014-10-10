@@ -18,24 +18,15 @@ introduction = {
    body = rt(
       h1(_ "Soldiers, Training and Warfare") ..
       p(_[[In this scenario, I'm going to tell you about soldiers, their training and their profession: warfare. Although Widelands is about building up, not burning down, there is an enemy you sometimes have to defeat. Yet warfare is mainly focused on economics, not on military strategies, and its mechanics deserve explanation.]]) ..
-      p(_[[I've set up a small village that contains the most important things. You also have enough wares so you do not have to care for the production of your weapons. In a real game, you will not have this luxury.]])
+      p(_[[I've set up a small village that contains the most important things. You also have enough wares so you do not have to take care of your weapon production. In a real game, you will not have this luxury.]])
    )
 }
 
-training1 = {
+abilities = {
    pos = "topright",
-   title = _"Training Camp and Battle Arena",
+   title = _"Soldiers' abilities",
    body = rt(
-      p(_[[A new soldier is created like a worker: When a military building needs a soldier, a carrier grabs the needed weapons and armor and walks out. Barbarians do not have an armor, they only need an ax.]]) ..
-      p(_[[You surely can imagine that such a soldier is not very well at fighting. But luckily, there is a possibility to train him: By sending him into a training camp or the battle arena.]]) ..
-      p(_[[Both are big buildings and their only purpose is to train soldiers. Since soldiers get very hungry during their workout, both buildings need a lot of food. Be sure to have a good infrastucture before you build them.]])
-   )
-} 
-
-training2 = {
-   pos = "topright",
-   title = _ "Soldiers' abilities",
-   body = rt(
+      p(_[[A new soldier is created like a worker: When a military building needs a soldier, a carrier grabs the needed weapons and armor from a warehouse (or your headquarters) and walks up the road to your new building. Basic Barbarian soldiers do not use an armor, they only need an ax.]]) ..
       p(_[[Take a look at the soldiers that are on their way into our military buildings. They look different from normal workers: they have a health bar over their head that displays their remaining health, and they have four symbols, which symbolize the individual soldier’s current levels in the four different categories health, attack, defense and evade.]]) ..
       p(_[[If a barbarian soldier is fully trained, he has level 3 health, level 5 attack, level 0 defense and level 2 evade. This is one fearsome warrior then! The individual abilities have the following meaning:]])
    ) ..
@@ -43,40 +34,73 @@ training2 = {
    rt(p(_[[The total life of a soldier. A barbarian soldier starts with 130 health, and with each health level he gains 28 health.]])) ..
    rt("image=tribes/barbarians/soldier/attack_level0.png", h2(_"Attack:")) ..
    rt(p(_[[The amount of damage a soldier will inflict on the enemy when an attack is successful. A barbarian soldier with attack level 0 inflicts ~14 points of health damage when he succeeds in hitting an enemy. For each attack level, he gains 7 damage points.]])) ..
+   -- The Atlanteans' image, because the Barbarian one has a white background
    rt("image=tribes/atlanteans/soldier/defense_level0.png", h2(_"Defense:")) ..
    rt(p(_[[The defense is the percentage that is subtracted from the attack value. The barbarians cannot train in this skill and therefore have always defense level 0, which means that the damage is always reduced by 3%. If an attacker with an attack value of 35 points hits a barbarian soldier, the barbarian will lose 35·0.97 = 34 health.]])) ..
    rt("image=tribes/barbarians/soldier/evade_level0.png", h2(_"Evade:")) ..
-   rt(p(_[[Evade is the chance that the soldier is able to dodge an attack. It is 25% for a level 0 evade barbarian and increases in steps of 15% for each level.]])) ..
-   rt(p(_[[You probably have noticed that those icons are modified by red dots. They are quite easy to understand:]])) ..
+   rt(p(_[[Evade is the chance that the soldier is able to dodge an attack. It is 25% for a level 0 evade barbarian and increases in steps of 15% for each level.]]))
+}
+
+battlearena1 = {
+   pos = "topright",
+   title = _"The Battle Arena",
+   body = rt(
+      p(_[[Now I have talked about training and levels. Let me elaborate that.]]) ..
+      p(_[[A newly created soldier has no experience and is not very good at fighting. To make him stronger, you can build trainingsites.]]) ..
+      p(_[[One trainingsite is the battle arena. It is a big and expensive building and it trains the soldiers in evade. Since soldiers get very hungry during their workout, this building needs a lot of food and strongbeer. In a real game, you should have a good infrastucture before you build it.]]) ..
+      paragraphdivider() ..
+      listitem_bullet(_[[To see this in action, build a battle arena.]])
+   ),
+   obj_name = "build_battlearena",
+   obj_title = _"Build a battle arena",
+   obj_body = rt(
+      paragraphdivider() ..
+      listitem_bullet(_[[Build a battle arena. It is a big building.]]) ..
+      listitem_arrow(_[[Since the construction takes some time, you can change the game speed using PG_UP and PG_DOWN]])
+   )
+}
+
+battlearena2 = {
+   pos = "topright",
+   title = _"The Battle Arena",
+   body = rt(
+      h1(_"The Battle Arena Has Been Constructed") ..
+      p(_[[Very good. Our battle arena is finished, and the soldiers are already walking towards it.]]) ..
+      -- Not perfectly correct (some training steps need either bread or meat), but we do not want to confuse new players
+      p(_[[The needed wares are also delivered there. For successful training, you need bread and strongbeer. Most steps additionally require either fish or meat. For more information, you can have a look at the building's help window, accessible via the questionmark in every building's window.]]) ..
+      p(_[[To understand how far your soldiers are trained, you can have a look at the icon. They are modified by red dots:]])
+   ) ..
    rt("image=tribes/barbarians/soldier/evade_level0.png", p(_[[No red dots means that the soldier is not trained, so he has level 0. All your new recruits have this.]])) ..
    rt("image=tribes/barbarians/soldier/evade_level1.png", p(_[[With every successful training step, your soldier becomes stronger. This is indicated by a red dot. This soldier is on level 1 in evade training.]])) ..
    rt("image=tribes/barbarians/soldier/evade_level2.png", p(_[[When your soldier has reached the highest possible level (in this case level 2), this is indicated by a white blackground color.]]))
 }
 
-training3 = {
+trainingcamp1 = {
    pos = "topright",
-   title = _"Soldiers' abilities",
-   body =
-   rt(
-      p(_[[Now how are all these abilities trained?]]) ..
+   title = _"The Training Camp",
+   body = rt(
+      h1(_"The Training Camp") ..
+      p(_[[There is a second trainingsite: the training camp. It is a big building, too, but in opposition to the battle arena, it trains attack and health (remember, the Barbarian soldiers cannot be trained in defense).]]) ..
       paragraphdivider() ..
-      listitem_bullet(_[[Health is trained in the training camp. The soldiers need the helmets produced at the helm smithy.]]) ..
-      listitem_bullet(_[[Attack is also trained at the training camp. You need the axes from the axfactory and the warmill - a certain one for each level.]]) ..
-      listitem_bullet(_[[Evade is trained in the battle arena. Your soldiers need no weapon or armor, just some tasty strongbeer.]])
-   ) ..
-   rt(
-   -- Not perfectly correct (some training steps need either bread or meat), but we do not want to confuse new players
-      p(_[[All training steps need some food. Pitta bread is always needed, and most steps additionally require either fish or meat.]]) ..
-      p(_[[You should also keep in mind that each of the three tribes in Widelands has its own way of training, so the buildings and wares are different. Also, the ability levels cannot be compared: An Imperial soldier with evade level 0 has a 30% chance of evading, while the Barbarian one only has 25%.]]) ..
-      p(_[[Now let's build these trainingsites.]])
+      listitem_bullet(_[[Build a training camp.]])
    ),
-   obj_name = "build_trainingsites",
-   obj_title = "Build a training camp and a battle arena",
+   obj_name = "build_trainingcamp",
+   obj_title = _"Build a training camp",
    obj_body = rt(
-      p(_[[Soldiers are trained in trainingsites. The Barbarian have two different types: the training camp for the training of health and attack, and the battle arena for the training of evade.]]) ..
+      p(_[[The battle arena only trains the soldiers in evade. To get the strongest possible soldier, you also need to build a training camp, which trains them in attack and health.]]) ..
       paragraphdivider() ..
-      listitem_bullet(_[[Build one of each.]]) ..
-      listitem_arrow(_[[Remember that you can speed time up by using PAGE_UP. The more expensive a building is, is longer takes it to construct it.]])
+      listitem_bullet(_[[Build a training camp.]])
+   )
+}
+
+trainingcamp2 = {
+   pos = "topright",
+   title = _"The Training Camp",
+   body = rt(
+      p(_[[Great, our training camp is now finished, too. Now nothing hinders us from getting the strongest warriors the world has ever seen.]]) ..
+      p(_[[To train in the training camp, our soldiers need food like in the battle arena, but no strongbeer. Instead, they need different axes for attack training and helmets for the health training.]]) ..
+      p(_[[This equipment is produced in smithies out of coal, iron, and sometimes gold. To explain this in detail would lead too far. You learn more about this in the second Barbarian campaign.]]) ..
+      p(_[[You should also keep in mind that each of the three tribes in Widelands has its own way of training, so the buildings and wares are different. Also, the ability levels cannot be compared: An Imperial soldier with evade level 0 has a 30% chance of evading, while the Barbarian one only has 25%.]])
    )
 }
 
@@ -85,7 +109,7 @@ heroes_rookies = {
    title = _"Heroes and Rookies",
    body = rt(
       h1(_"Heroes and Rookies") ..
-      p(_[[Great. Our training sites are starting their work. Do you see how food and weapons are delivered? Soon, we will have strong warriors. Now let me tell you what we can do with them.]]) ..
+      p(_[[While our soldiers are training, let me tell you what we can do with them.]]) ..
       p(_[[In every military building, you can set the preference for heroes (trained soldiers) or rookies. From time to time, a soldier walks out of the building and is replaced by a stronger/weaker one automatically.]]) ..
       p(_[[The initial setting depends on the type of the building. Concerning the Barbarians, the sentry is the only building that prefers rookies by default. You should change this setting to fit your current needs.]]) ..
       p(_[[When you are expanding into no man's land, you can make your buildings prefer rookies. When you are planning to attack, send heroes into that region. Conquered buildings always prefer heroes.]])
@@ -122,11 +146,11 @@ dismantle = {
    ) ..
    rt(p(_[[You can also use this opportunity to get familiar with the other options: The heroes/rookies preference and the capacity.]])),
    obj_name = "dismantle_sentry",
-   obj_title = _"Dismantle your sentry",
+   obj_title = _"Dismantle your north-western sentry",
    obj_body = rt(
       p(_[[You can control the number of soldiers in military sites with the arrow buttons. If you even want to get your last soldier out it, you have to destroy it. But it will no longer protect your territory, which makes it vulnerable for hostile attacks.]]) ..
       paragraphdivider() ..
-      listitem_bullet(_[[Dismantle your sentry.]])
+      listitem_bullet(_[[Dismantle your sentry in the north-west, next to the barrier.]])
    )
 }
 
