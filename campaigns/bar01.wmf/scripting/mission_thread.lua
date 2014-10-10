@@ -309,8 +309,7 @@ function mission_complete_thread()
    end
 
    send_msg(msg_mission_complete)
-   -- TODO: change this
-   --plr:reveal_scenario("barbariantut02")
+   plr:reveal_scenario("barbarians01")
 end
 
 -- ===============
