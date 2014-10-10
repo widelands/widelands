@@ -25,9 +25,7 @@
 #include <memory>
 
 #include "graphic/image.h"
-#include "io/filesystem/filesystem.h"
 #include "ui_basic/button.h"
-#include "ui_basic/checkbox.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/table.h"
@@ -95,21 +93,20 @@ private:
 	UI::MultilineTextarea         m_ta_players;
 	UI::Textarea                  m_label_win_condition;
 	UI::MultilineTextarea         m_ta_win_condition;
+
 	UI::Button                    m_delete;
+
 	int32_t const                 m_minimap_y, m_minimap_w, m_minimap_h;
 	UI::Icon                      m_minimap_icon;
-
 	std::unique_ptr<const Image>  m_minimap_image;
-	UI::Table<uintptr_t const>    m_table;
 
-	std::vector<SavegameData>         m_games_data;
+	UI::Table<uintptr_t const>    m_table;
+	std::vector<SavegameData>     m_games_data;
+	std::string                   m_filename;
 
 	Widelands::Game&              m_game;
 	GameSettingsProvider*         m_settings;
 	GameController*               m_ctrl;
-
-	FilenameSet                   m_gamefiles;
-	std::string                   m_filename;
 };
 
 

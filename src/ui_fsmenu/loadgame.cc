@@ -153,7 +153,8 @@ void FullscreenMenuLoadGame::think()
 
 void FullscreenMenuLoadGame::clicked_ok()
 {
-	m_filename = m_table.get_selected();
+	const SavegameData & gamedata = m_games_data[m_table.get_selected()];
+	m_filename = gamedata.filename;
 	end_modal(1);
 }
 
@@ -296,16 +297,16 @@ void FullscreenMenuLoadGame::fill_list() {
 	} else { // Normal case
 		// Fill it with all files we find.
 
+		FilenameSet gamefiles;
+
 		if (m_is_replay) {
-			m_gamefiles = filter(g_fs->list_directory(REPLAY_DIR),
+			gamefiles = filter(g_fs->list_directory(REPLAY_DIR),
 								[](const std::string& fn) {return boost::ends_with(fn, REPLAY_SUFFIX);});
 		} else {
-			m_gamefiles = g_fs->list_directory("save");
+			gamefiles = g_fs->list_directory("save");
 		}
 
 		Widelands::GamePreloadPacket gpdp;
-
-		const FilenameSet & gamefiles = m_gamefiles;
 
 		for (const std::string& gamefilename : gamefiles) {
 
