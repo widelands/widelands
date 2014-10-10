@@ -399,6 +399,8 @@ void FullscreenMenuMapSelect::fill_list()
 	m_table.clear();
 	m_has_translated_mapname = false;
 
+	MapData* mapdata;
+
 	if (m_settings->settings().maps.empty()) {
 		// This is the normal case
 
@@ -410,21 +412,21 @@ void FullscreenMenuMapSelect::fill_list()
 		//If we are not at the top of the map directory hierarchy (we're not talking
 		//about the absolute filesystem top!) we manually add ".."
 		if (m_curdir != m_basedir) {
-			MapData map;
+			mapdata = new MapData();
 	#ifndef _WIN32
-			map.filename = m_curdir.substr(0, m_curdir.rfind('/'));
+			mapdata->filename = m_curdir.substr(0, m_curdir.rfind('/'));
 	#else
-			map.filename = m_curdir.substr(0, m_curdir.rfind('\\'));
+			mapdata->filename = m_curdir.substr(0, m_curdir.rfind('\\'));
 	#endif
-			map.localized_name = (boost::format("\\<%s\\>") % _("parent")).str();
-			m_maps_data.push_back(map);
+			mapdata->localized_name = (boost::format("\\<%s\\>") % _("parent")).str();
+			m_maps_data.push_back(*mapdata);
 			UI::Table<uintptr_t const>::EntryRecord & te =
 				m_table.add(m_maps_data.size() - 1);
 
 			te.set_string(col_players, "");
 			te.set_picture
 				(col_name,  g_gr->images().get("pics/ls_dir.png"),
-				map.localized_name);
+				mapdata->localized_name);
 			te.set_string(col_size, "");
 
 			++ndirs;
@@ -443,20 +445,20 @@ void FullscreenMenuMapSelect::fill_list()
 			if (WidelandsMapLoader::is_widelands_map(name))
 				continue;
 
-			MapData dir;
-			dir.filename = name;
+			mapdata = new MapData();
+			mapdata->filename = name;
 			if (strcmp (name, "maps/MP Scenarios") == 0) {
 				/** TRANSLATORS: Directory name for MP Scenarios in map selection */
-				dir.localized_name = _("Multiplayer Scenarios");
+				mapdata->localized_name = _("Multiplayer Scenarios");
 			} else {
-				dir.localized_name = FileSystem::fs_filename(name);
+				mapdata->localized_name = FileSystem::fs_filename(name);
 			}
 
-			m_maps_data.push_back(dir);
+			m_maps_data.push_back(*mapdata);
 			UI::Table<uintptr_t const>::EntryRecord & te = m_table.add(m_maps_data.size() - 1);
 
 			te.set_string(col_players, "");
-			te.set_picture(col_name, g_gr->images().get("pics/ls_dir.png"), dir.localized_name);
+			te.set_picture(col_name, g_gr->images().get("pics/ls_dir.png"), mapdata->localized_name);
 			te.set_string(col_size, "");
 
 			++ndirs;
@@ -481,7 +483,7 @@ void FullscreenMenuMapSelect::fill_list()
 
 					i18n::Textdomain td("maps");
 
-					MapData* mapdata = new MapData();
+					mapdata = new MapData();
 					mapdata->filename       = mapfilename;
 					mapdata->name           = map->get_name();
 					mapdata->localized_name = mapdata->name.empty() ? "" : _(mapdata->name);
@@ -541,12 +543,13 @@ void FullscreenMenuMapSelect::fill_list()
 		//client changing maps on dedicated server
 		for (uint16_t i = 0; i < m_settings->settings().maps.size(); ++i) {
 			Widelands::Map map; //  MapLoader needs a place to put its preload data
-			i18n::Textdomain td("maps");
-			MapData mapdata;
 
 			const DedicatedMapInfos & dmap = m_settings->settings().maps.at(i);
 			const std::string& mapfilename = dmap.path;
 			std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(mapfilename));
+
+			i18n::Textdomain td("maps");
+			mapdata = new MapData();
 			try {
 				if (!ml) {
 					throw wexception("Mapselect: No MapLoader");
@@ -555,59 +558,59 @@ void FullscreenMenuMapSelect::fill_list()
 				map.set_filename(mapfilename);
 				ml->preload_map(true);
 
-				mapdata.filename    = mapfilename;
-				mapdata.name        = map.get_name();
-				mapdata.authors     = new MapAuthorData(map.get_author());
-				mapdata.description = map.get_description();
-				mapdata.hint        = map.get_hint();
-				mapdata.nrplayers   = map.get_nrplayers();
-				mapdata.width       = map.get_width();
-				mapdata.height      = map.get_height();
-				mapdata.scenario    = map.scenario_types() & m_scenario_types;
+				mapdata->filename    = mapfilename;
+				mapdata->name        = map.get_name();
+				mapdata->authors     = new MapAuthorData(map.get_author());
+				mapdata->description = map.get_description();
+				mapdata->hint        = map.get_hint();
+				mapdata->nrplayers   = map.get_nrplayers();
+				mapdata->width       = map.get_width();
+				mapdata->height      = map.get_height();
+				mapdata->scenario    = map.scenario_types() & m_scenario_types;
 
-				if (mapdata.nrplayers != dmap.players || mapdata.scenario != dmap.scenario) {
+				if (mapdata->nrplayers != dmap.players || mapdata->scenario != dmap.scenario) {
 					throw wexception("Mapselect: Number of players or scenario doesn't match");
 				}
 
-				if (!mapdata.width || !mapdata.height) {
+				if (!mapdata->width || !mapdata->height) {
 					throw wexception("Mapselect: Map has no size");
 				}
 
 				// Finally write the entry to the list
-				m_maps_data.push_back(mapdata);
+				m_maps_data.push_back(*mapdata);
 				UI::Table<uintptr_t const>::EntryRecord & te = m_table.add(m_maps_data.size() - 1);
 
-				te.set_string(col_players, (boost::format("(%i)") % mapdata.nrplayers).str());
+				te.set_string(col_players, (boost::format("(%i)") % mapdata->nrplayers).str());
 				te.set_picture
 					(col_name,
-					 g_gr->images().get((mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")),
-					 mapdata.name.c_str());
-				te.set_string(col_size, (boost::format("%u x %u") % mapdata.width % mapdata.height).str());
+					 g_gr->images().get((mapdata->scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")),
+					 mapdata->name.c_str());
+				te.set_string(col_size, (boost::format("%u x %u") % mapdata->width % mapdata->height).str());
 
 			} catch (...) {
 				log("Mapselect: Skipped reading locale data for file %s - not valid.\n", mapfilename.c_str());
 
 				// Fill in the data we got from the dedicated server
-				mapdata.filename    = mapfilename;
-				mapdata.name        = mapfilename.substr(5, mapfilename.size() - 1);
-				mapdata.authors     = new MapAuthorData(_("Nobody"));
-				mapdata.description = _("This map file is not present in your filesystem."
+				mapdata->filename    = mapfilename;
+				mapdata->name        = mapfilename.substr(5, mapfilename.size() - 1);
+				mapdata->authors     = new MapAuthorData(_("Nobody"));
+				mapdata->description = _("This map file is not present in your filesystem."
 							" The data shown here was sent by the server.");
-				mapdata.hint        = "";
-				mapdata.nrplayers   = dmap.players;
-				mapdata.width       = 1;
-				mapdata.height      = 0;
-				mapdata.scenario    = dmap.scenario;
+				mapdata->hint        = "";
+				mapdata->nrplayers   = dmap.players;
+				mapdata->width       = 1;
+				mapdata->height      = 0;
+				mapdata->scenario    = dmap.scenario;
 
 				// Finally write the entry to the list
-				m_maps_data.push_back(mapdata);
+				m_maps_data.push_back(*mapdata);
 				UI::Table<uintptr_t const>::EntryRecord & te = m_table.add(m_maps_data.size() - 1);
 
-				te.set_string(col_players, (boost::format("(%i)") % mapdata.nrplayers).str());
+				te.set_string(col_players, (boost::format("(%i)") % mapdata->nrplayers).str());
 				te.set_picture
 					(col_name, g_gr->images().get
-					 ((mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")), mapdata.name.c_str());
-				te.set_string(col_size, (boost::format("%u x %u") % mapdata.width % mapdata.height).str());
+					 ((mapdata->scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")), mapdata->name.c_str());
+				te.set_string(col_size, (boost::format("%u x %u") % mapdata->width % mapdata->height).str());
 			}
 		}
 	}
