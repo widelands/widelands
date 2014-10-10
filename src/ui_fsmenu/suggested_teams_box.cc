@@ -69,7 +69,7 @@ void SuggestedTeamsBox::hide() {
 }
 
 
-void SuggestedTeamsBox::show(std::vector<Widelands::Map::SuggestedTeamLineup*> suggested_teams)
+void SuggestedTeamsBox::show(const std::vector<Widelands::Map::SuggestedTeamLineup*>& suggested_teams)
 {
 	hide();
 	m_suggested_teams = suggested_teams;

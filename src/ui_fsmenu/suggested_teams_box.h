@@ -41,7 +41,7 @@ struct SuggestedTeamsBox : public UI::Box {
 							uint32_t inner_spacing = 0);
 
 	void hide();
-	void show(std::vector<Widelands::Map::SuggestedTeamLineup*> suggested_teams);
+	void show(const std::vector<Widelands::Map::SuggestedTeamLineup*>& suggested_teams);
 
 private:
 	int32_t const m_padding;
