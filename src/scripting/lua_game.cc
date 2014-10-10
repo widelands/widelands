@@ -984,11 +984,11 @@ int LuaObjective::set_done(lua_State * L) {
 	if (o.done()) {
 		/** TRANSLATORS: File name for saving objective achieved */
 		/** TRANSLATORS: %1$s = map name. %2$s = achievement name */
-		std::string filename = (boost::format
-			(_("%1$s (achieved %2$s)"))
-			% get_egbase(L).get_map()->get_name().c_str()
-			% o.descname().c_str()
-		).str();
+		std::string filename = _("%1$s (achieved %2$s)");
+		i18n::Textdomain td("maps");
+		filename = (boost::format(filename)
+						% _(get_egbase(L).get_map()->get_name())
+						% o.descname().c_str()).str();
 		get_game(L).save_handler().request_save(filename);
 	}
 	return 0;
