@@ -7,6 +7,7 @@
 -- ===============
 plr = wl.Game().players[1]
 plr:allow_buildings("all")
+map = wl.Game().map
 
 -- A default headquarters
 include "tribes/barbarians/scripting/sc00_headquarters.lua"
@@ -20,9 +21,9 @@ include "scripting/ui.lua"
 include "scripting/table.lua"
 
 -- Constants
-first_lumberjack_field = wl.Game().map:get_field(16,10)
-first_quarry_field = wl.Game().map:get_field(8,12)
-second_quarry_field = wl.Game().map:get_field(5,10)
+first_lumberjack_field = map:get_field(16,10)
+first_quarry_field = map:get_field(8,12)
+second_quarry_field = map:get_field(5,10)
 
 -- Global variables
 registered_player_immovables = {}
@@ -156,7 +157,6 @@ end
 -- in a loop for a nice optical effect
 function remove_all_stones(fields, g_sleeptime)
    local sleeptime = g_sleeptime or 150
-   local map = wl.Game().map
    while #fields > 0 do
       local idx = math.random(#fields)
       local f = fields[idx]
@@ -198,10 +198,10 @@ function register_immovable_as_allowed(i)
       registered_player_immovables[_fmt(i.fields[1].brn)] = true
    end
 end
-register_immovable_as_allowed(wl.Game().map.player_slots[1].starting_field.immovable)
+register_immovable_as_allowed(map.player_slots[1].starting_field.immovable)
 
 function bad_boy_sentry()
-   local sf = wl.Game().map.player_slots[1].starting_field
+   local sf = map.player_slots[1].starting_field
    while not terminate_bad_boy_sentinel do
       -- Check all fields.
       local sent_msg = false
@@ -253,6 +253,9 @@ end
 -- Message threads
 -- ================
 function starting_infos()
+   map:place_immovable("debris00",second_quarry_field)
+   -- so that the player cannot build anything here
+
    sleep(100)
    
    msg_box(initial_message_01)
@@ -299,13 +302,13 @@ function build_lumberjack()
    msg_box(lumberjack_message_03)
    sleep(500)
 
-   click_on_field(wl.Game().map.player_slots[1].starting_field.brn)
+   click_on_field(map.player_slots[1].starting_field.brn)
 
    msg_box(lumberjack_message_04)
 
    register_immovable_as_allowed(first_lumberjack_field.immovable) -- hut + flag
 
-   local f = wl.Game().map:get_field(14,11)
+   local f = map:get_field(14,11)
    register_immovable_as_allowed(f.immovable) -- road + everything on it
 
    immovable_is_legal = function(i) return false end
@@ -319,7 +322,7 @@ function build_lumberjack()
    local blocker = UserInputDisabler:new()
    close_windows()
 
-   local f = wl.Game().map:get_field(14,11)
+   local f = map:get_field(14,11)
    scroll_smoothly_to(f)
    mouse_smoothly_to(f)
 
@@ -332,6 +335,9 @@ function build_lumberjack()
    sleep(300)
 
    msg_box(lumberjack_message_06)
+
+   sleep(30*1000) -- let the player experiment a bit with the speed
+   msg_box(construction_site_window)
 
    while #plr:get_buildings("lumberjacks_hut") < 1 do sleep(300) end
 
@@ -419,7 +425,6 @@ function build_a_quarry()
 
    msg_box(talk_about_roadbuilding_00)
    -- Showoff one-by-one roadbuilding
-   local map = wl.Game().map
    click_on_field(map:get_field(9,12))
    click_on_field(map:get_field(10,12))
    click_on_field(map:get_field(11,12))
@@ -460,6 +465,8 @@ function build_a_quarry()
 
    -- Wait a while
    sleep(60*1000)
+   -- check every 30 seconds if the second quarry is connected. Inform the player if not
+   -- When that is finally done (and 30 seconds have passed), go on
 
    -- Interludium: talk about census and statistics
    census_and_statistics(cs.fields[1])
@@ -474,6 +481,8 @@ function second_quarry()
    sleep(200)
 
    local o = msg_box(build_second_quarry)
+   second_quarry_field.immovable:remove()
+   -- remove this immovable
 
    local cs = nil
    immovable_is_legal = function(i)
@@ -594,6 +603,8 @@ function expansion()
    end
          
    o.done = true
+   sleep(4000)
+   msg_box(military_building_finished)
 
    conclusion()
 end
@@ -602,7 +613,7 @@ function conclusion()
    -- Conclude the tutorial with final words and information
    -- on how to quit
 
-   sleep(4000)
+   sleep(10000) -- to give the player time to see his expanded area
    msg_box(conclude_tutorial)
 
 end

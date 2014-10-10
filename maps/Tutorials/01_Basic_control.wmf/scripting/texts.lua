@@ -115,19 +115,29 @@ lumberjack_message_06 = {
    )
 }
 
+construction_site_window = {
+   title = _"The Construction Site",
+   body = rt(
+      h1(_"Let's see the progress") ..
+      p(_[[If you click on the construction site, a window opens. You can see the wares that are still missing greyed out. You can also see the progress of this construction site.]]) ..
+      -- The player doesn't know about the statistics yet. First things first.
+      p(_[[To close the window, simply right-click on it. All windows in Widelands can be closed that way, except the ones with instructions, like this one. Try it out!]])
+   )
+}
+
 lumberjack_message_07 = {
    title = _ "Lumberjack is Done",
    pos = "topright",
    body = rt(
-      p(_[[Excellent. The lumberjack’s hut is done. A lumberjack will now move in and start chopping down trees, so our logs income is secured for now. Now on to the raw stone.]])
+      p(_[[Excellent. The lumberjack’s hut is done. A lumberjack will now move in and start chopping down trees, so our log income is secured for now. Now on to the raw stone.]])
    )
 }
 
 inform_about_stones = {
-   title = _ "Some Stones Were Found",
+   title = _ "Some Rocks Were Found",
    body = rt(h1(_"Getting a Quarry Up.")) ..
    rt(
-      p(_[[Stones can be mined in granite mines, but the easier way is to build a quarry next to some stones lying around. As it happens, there is a pile of them just to the west (left) of your headquarters. I will teach you now how to move your view over there.]]) ..
+      p(_[[Stones can be mined in granite mines, but the easier way is to build a quarry next to some rocks lying around. As it happens, there is a pile of them just to the west (left) of your headquarters. I will teach you now how to move your view over there.]]) ..
       paragraphdivider() ..
       listitem_arrow(_[[There are three ways to move your view. The first one is using the cursor keys on your keyboard. Go ahead and try this out.]]) ..
       listitem_bullet(_[[Click the ‘OK’ button and then move the view using the cursor keys]])
@@ -174,7 +184,7 @@ tell_about_minimap = {
       paragraphdivider() ..
       listitem_bullet(_[[Open the minimap by using the third button from the left on the bottom of your screen or the 'm' key.]]) ..
       listitem_bullet(_[[Play around a bit with the different overlays (roads, flags, etc.)]]) ..
-      listitem_bullet(_[[Close the minimap when you are ready to continue by using the same button or 'm' again.]])
+      listitem_bullet(_[[Close the minimap when you are ready to continue by using the same button or 'm' again. Of course, a right-click also works.]])
    )
 }
 
@@ -188,7 +198,7 @@ order_quarry_recap_how_to_build = {
    pos = "topright",
    title = _ "How to Build a Quarry",
    body = rt(
-      p(_[[Build a quarry next to those stones here. Remember how I did it earlier?]]) ..
+      p(_[[Build a quarry next to those rocks here. Remember how I did it earlier?]]) ..
       p(_[[Make sure that you are showing the building spaces, then just click on the space were you want the building to be, choose it from the window that appears and it is placed. Maybe this is a good time to explain about all those building space symbols we activated earlier.]]) ..
       p(_[[You can build four things on fields in Widelands: Flags, small houses, medium houses and big houses. But not every field can hold everything. The build space symbols ease recognition:]])
    ) ..
@@ -202,13 +212,13 @@ order_quarry_recap_how_to_build = {
       listitem_bullet(_[[Now go ahead, try it. The quarry is a small building, so if you click on a medium or big building symbol, you will have to select the small buildings tab first to find it. Go on, check it out!]])
    ),
    obj_name = "build_a_quarry",
-   obj_title = _ "Build a quarry next to the stones",
+   obj_title = _ "Build a quarry next to the rocks",
    obj_body = rt(
       h1(_ "Build a Quarry") ..
       paragraphdivider() ..
-      listitem_bullet(_[[There are some stones to the west of your headquarters. Build a quarry right next to them.]]) ..
+      listitem_bullet(_[[There are some rocks to the west of your headquarters. Build a quarry right next to them.]]) ..
       listitem_arrow(_[[The quarry is a small building like the lumberjack’s hut. You can therefore build it on any field that shows a red, yellow or green house when the building spaces symbols are enabled (Press SPACE for that).]]) ..
-      listitem_arrow(_[[Just click on any house symbol next to the stones, select the small buildings tab in the window that opens up, then click on the quarry symbol.]])
+      listitem_arrow(_[[Just click on any house symbol next to the rocks, select the small buildings tab in the window that opens up, then click on the quarry symbol.]])
    )
 }
 
@@ -263,7 +273,7 @@ build_second_quarry = {
    pos = "topright",
    title = _ "Build a second quarry",
    body = rt(
-      p(_[[When there are many stones, you can consider building another quarry. This will make the stone production faster.]]) ..
+      p(_[[When there are many rocks, you can consider building another quarry. This will make the stone production faster.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[Build a second quarry near the rocks and connect it to your road network.]])
    ),
@@ -321,7 +331,7 @@ closing_msg_window_00 = {
    field = first_quarry_field,
    title = _"Closing Windows",
    body = rt(
-      p(_[[Excellent. By the way: closing windows in Widelands is as easy as right-clicking on them. This will work with all windows except for story message windows like this one. Go ahead and try it.]]) ..
+      p(_[[Excellent. Do you remember how to close windows? You simply have to right-click on them. This will work with all windows except for story message windows like this one. Go ahead and try it.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[First, close this window by pressing the button below, then right-click into the messages window to close it.]])
    ),
@@ -340,7 +350,7 @@ closing_msg_window_01 = {
    field = first_quarry_field,
    title = _ "Closing Windows",
    body = rt(
-      p(_[[Well done! Let’s see how messages work in a real game, shall we? For this, I’ll take all stones away from the poor stonemasons in the quarries. They will then send a message each that they can’t find any in their working areas the next time they try to do some work.]])
+      p(_[[Well done! Let’s see how messages work in a real game, shall we? For this, I’ll take all rocks away from the poor stonemasons in the quarries. They will then send a message each that they can’t find any in their working areas the next time they try to do some work.]])
    )
 }
 
@@ -350,7 +360,7 @@ destroy_quarries_message = {
    body = rt(
       p(_[[You received some messages. See how the button at the bottom of the screen has changed appearance? You can destroy the quarries now as they are no longer of any use and just blocking space. To do so, there are two possibilities:]]) ..
       paragraphdivider() ..
-      listitem_bullet(_[[Burning down the quarry: This is the fastest way of cleaning the space. While the worker runs out, the wares are lost.]]) ..
+      listitem_bullet(_[[Burning down the quarry: This is the fastest way of cleaning the space. While the worker abandons the building, the wares are lost.]]) ..
       listitem_bullet(_[[Dismantling the quarry: A builder will walk from the headquarters to dismantle the quarry piece by piece. Thereby, you regain some of the resources you used for the construction.]])
    ),
    obj_name = "destroy_quarries",
@@ -358,7 +368,9 @@ destroy_quarries_message = {
    obj_body = rt(
       p(_[[Since our quarries are useless now, you can destroy them and reuse the space later on.]]) ..
       paragraphdivider() ..
-      listitem_arrow(_[[You learned two different ways of destroying a building: burning down and dismantling. Try them both out on your quarries.]])
+      listitem_arrow(_[[There are two different ways of destroying a building: burning down and dismantling. Try them both out on your quarries.]]) ..
+      listitem_arrow(_[[Burning down the quarry: This is the fastest way of cleaning the space. While the worker abandons the building, the wares are lost.]]) ..
+      listitem_arrow(_[[Dismantling the quarry: A builder will walk from the headquarters to dismantle the quarry piece by piece. Thereby, you regain some of the resources you used for the construction.]])
    )
 }
 
@@ -382,13 +394,22 @@ introduce_expansion = {
    )
 }
 
+
+military_building_finished = {
+   title = _"Militarysite occupied",
+   body = rt(
+      h1(_"Your territory has just grown!") ..
+      p(_[[Great. Do you see how your territory has grown since your soldiers entered the military building?]]) ..
+      p(_[[Every military building has a certain conquer area - the more expensive the building, the more land it conquers.]])
+   )
+}
+
 conclude_tutorial = {
    title = _ "Conclusion",
    body = rt(
       h1(_"Conclusion") ..
-      p(_[[Great. Do you see how your territory has grown when your soldiers have entered the military building?]]) ..
       p(_[[This concludes the first tutorial. In order to learn more about the game, I suggest to play one of the other tutorials. Each of them covers a different topic.]]) ..
-      p(_[[However, since you know now how to control Widelands, you can also start a game (or continue this one) and discover the things yourself.]]) ..
+      p(_[[However, since you now know how to control Widelands, you can also start a game (or continue this one) and discover yourself more by.]]) ..
       p(_[[To leave this game and return to the main menu, click on the]])
    ) ..
    rt("image=pics/menu_options_menu.png", p(_[[‘Options’ menu button on the very left at the bottom of the screen. Then click the]])) ..
