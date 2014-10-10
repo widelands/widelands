@@ -22,10 +22,11 @@
 #####
 
 [global]
+# TODO(codereview): Do I have to increase this?
 version = 6
 # Barbarians Introduction
 campname0=_"Barbarians – The Second Empire"
-campsect0=barbarians
+campsect0=barbariantut
 campdiff0=1
 campdiffdescr0=_"Easy. Introduces the Barbarians"
 campdesc0=_"When Chat’Karuth died, he was an old man, father to three strong and ambitious sons, and warlord to an army that could match any enemy willing to rise against the ancient forests. Though at the end of his glorious reign, Chat’Karuth chose his eldest son, Thron, to succeed him as the tribe’s warlord – a decision that left his two brothers unsatisfied. The old warlord knew that. As his father instructed him, Thron left the capital of Al’thunran, the home of the Throne Among the Trees, and withdrew his forces to the high hills where he buried the corpse of his father. There he swore to the gods and his father’s spirit that he’d return to re-established order. While his brothers have raged blind war against Thron and the few forces he left to secure the borders of Al’thunran, the young warlord seeks to reunite his ambitious brothers and force the tribes to march once again under a common banner."
@@ -53,7 +54,7 @@ cnewvisi2=empiretut01
 # Naming MUST be the name of the campaign-section + "??" where ?? is an increasing number.
 #
 # name      = name of the map.
-# TODO(codereview): Is this description correct. Does campsect1 reveal barbarians01 or does barbarians01 reveal campsect01?
+# TODO(codereview): Is this description correct? Does campsect1 reveal barbarians01 or does barbarians01 reveal campsect01?
 # * newvisi = the name of a campaign or a scenario that must be visible, to show
 #             this entry as well - this string unhides the map, if the player
 #             completed the requirements with an older cconfig version.
@@ -61,12 +62,12 @@ cnewvisi2=empiretut01
 # path      = path to the map.
 #####
 
-[barbarians00]
+[barbariantut00]
 name=_"01 – A Place to Call Home"
 visible=1
 path="campaigns/bar01.wmf"
 
-[barbarians01]
+[barbariantut01]
 name=_"02 – This Land is Our Land"
 newvisi="campsect1"
 visible=0
