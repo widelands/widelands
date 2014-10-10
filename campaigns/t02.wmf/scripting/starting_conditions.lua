@@ -7,9 +7,9 @@ plr:forbid_buildings("all")
 plr:allow_buildings{
    "lumberjacks_hut",
    "quarry", 
-   "rangers_hut", 
-   "sentry",
-   "barrier"
+   "rangers_hut"--, 
+   --"sentry",
+   --"barrier"
 }
 
 -- Place hq and fill it with wares
@@ -19,13 +19,12 @@ hq:set_wares{
    ax=6,
    bread_paddle=2,
    blackwood=32,
-   coal=12,
+   coal=5,
    fire_tongs=2,
    fish=6,
-   grout=12,
+   grout=4,
    hammer=12,
    hunting_spear=2,
-   iron=12,
    ironore=5,
    kitchen_tools=4,
    meal=4,
@@ -52,7 +51,7 @@ hq:set_workers{
    ["lime-burner"]=1,
    lumberjack=3,
    miner=4,
-   ranger=1,
+   ranger=2,
    stonemason=2
 }
 hq:set_soldiers({0,0,0,0}, 45)
@@ -60,15 +59,14 @@ hq:set_soldiers({0,0,0,0}, 45)
 -- ============
 -- Build roads 
 -- ============
-connected_road(plr, hq_pos.brn.immovable, "r,r|br,r|r,r")
+connected_road(plr,hq_pos.brn.immovable, "r,r|br,r")
 connected_road(plr, hq_pos.brn.immovable, "l,l|l,bl,bl|br,r|br,r|r,tr|tr,tr,tr")
 
--- Place some buildings from the last map
+-- Place some initial buildings
 prefilled_buildings(plr,
    {"lumberjacks_hut", 15, 11},
    {"lumberjacks_hut", 12, 13},
-   {"quarry", 8, 12},
-   {"rangers_hut", 9, 13}
+   {"quarry", 8, 12}
 ) 
 
 

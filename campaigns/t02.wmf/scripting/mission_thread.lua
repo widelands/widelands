@@ -13,6 +13,7 @@ cattle_farm_done = false
 
 function send_msg(t)
    t.h = 400
+   -- TODO: this jumps. scrolling would be better
    plr:message_box(t.title, t.body, t)
 end
 
@@ -27,28 +28,45 @@ end
 function introduction_thread()
    sleep(2000)
 
+   send_msg(briefing_msg_01)
+   -- these buildings are still burning, but only for a while
+   map:place_immovable("destroyed_building",map:get_field(7,41),"barbarians")
+   map:place_immovable("destroyed_building",map:get_field(5,52),"barbarians")
+   plr:reveal_fields(al_thunran:region(8))
+   send_msg(briefing_msg_02) -- Al'thunran
+   plr:reveal_fields(grave:region(4))
+   send_msg(briefing_msg_03) -- grave
+   send_msg(briefing_msg_04)
+
    send_msg(briefing_msg_1)
    send_msg(briefing_msg_2)
    send_msg(briefing_msg_3)
-
+   
+   -- introduction of Khantrukh
+   send_msg(khantrukh_1)
+   
+   send_msg(order_msg_ranger)
+   local obj = add_obj(obj_build_rangers)
+   
+   while not check_for_buildings(plr, {rangers_hut = 2}) do sleep(500) end
+   obj.done = true
+   
+   plr:allow_buildings{"sentry","barrier"}
+   
    send_msg(order_msg_1)
    send_msg(order_msg_2)
 
    -- Reveal the rocks
-   local obj = add_obj(obj_claim_northeastern_rocks)
-
    local rocks = wl.Game().map:get_field(27, 48)
-   local intermediate_point = wl.Game().map:get_field(31,12)
    plr:reveal_fields(rocks:region(6))
-   local way1 = scroll_smoothly_to(intermediate_point, 1500)
-   local way2 = scroll_smoothly_to(rocks, 1500)
+   local way = scroll_smoothly_to(rocks, 1500)
 
    send_msg(order_msg_3)
+   obj = add_obj(obj_claim_northeastern_rocks)
    send_msg(order_msg_4)
 
-   -- Move back to HQ
-   timed_scroll(array_reverse(way2), 10)
-   timed_scroll(array_reverse(way1), 10)
+   -- Move back
+   timed_scroll(array_reverse(way), 10)
 
    -- Now, wait till the quarry comes up
    local f = wl.Game().map:get_field(27,48):region(6)
@@ -83,6 +101,9 @@ function mines_and_food_thread()
       "goldmine",
       "granitemine"
    }
+   
+   sleep(10000)
+   send_msg(story_msg2) -- NOCOM: new
 
    -- Wait for completion
    while not check_for_buildings(plr, {coalmine = 1, oremine = 1}) do
@@ -116,6 +137,8 @@ function mines_and_food_thread()
          sleep(5331)
       end
       obj_bf.done = true
+      sleep(5000)
+      send_msg(story_msg4) -- NOCOM: new
    end)
 
    local obj_farming = add_obj(obj_begin_farming)
@@ -160,6 +183,17 @@ function mines_and_food_thread()
    o.done = true
 
    -- Information about making mines deeper
+   local chiefminer_found = false
+   while not chiefminer_found do
+      local mines = plr:get_buildings("coalmine")
+      for k,v in ipairs(mines) do
+         if v:get_workers("chief-miner") > 0 then
+            chiefminer_found = true
+            break
+         end
+      end
+      sleep(5000)
+   end
    send_msg(order_msg_15_mines_exhausted)
    plr:allow_buildings{ "deep_coalmine", "inn", "micro-brewery" }
    -- objective.check will make sure that this i finished
@@ -183,7 +217,7 @@ end
 function build_materials_thread()
    local plr = wl.Game().players[1]
 
-   -- Wait for a barrier or sentry to be build
+   -- Wait for a barrier or sentry to be built
    while true do
       local rv = plr:get_buildings{"sentry", "barrier"}
       if #rv.sentry + #rv.barrier > 0 then
@@ -194,14 +228,19 @@ function build_materials_thread()
 
    send_msg(order_msg_16_blackwood)
    plr:allow_buildings{"hardener"}
+   home.immovable:set_wares("blackwood",5)
+   -- So that player has really little, but still enough to expand a bit
    local o = add_obj(obj_better_material_1)
+   
+   sleep(10000)
+   send_msg(story_msg1) -- NOCOM: new
    while #plr:get_buildings("hardener") < 1 do sleep(5421) end
    o.done = true
 
    send_msg(order_msg_17_grindstone)
    plr:allow_buildings{"lime_kiln", "well", "charcoal_kiln"}
    o = add_obj(obj_better_material_2)
-   -- Wait for the buildings to be build
+   -- Wait for the buildings to be built
    while true do
       local rv = plr:get_buildings{"lime_kiln", "well",
          "coalmine", "deep_coalmine", "charcoal_kiln"}
@@ -236,7 +275,10 @@ function cattle_farm()
 
    local o = add_obj(obj_build_cattlefarm)
    plr:allow_buildings{"cattlefarm"}
-
+   
+   sleep(10000)
+   send_msg(story_msg3) -- NOCOM: new
+   
    while not check_for_buildings(plr, { cattlefarm = 1 }) do
       sleep(2323)
    end
@@ -267,7 +309,8 @@ function mission_complete_thread()
    end
 
    send_msg(msg_mission_complete)
-   plr:reveal_scenario("barbariantut02")
+   -- TODO: change this
+   --plr:reveal_scenario("barbariantut02")
 end
 
 -- ===============
@@ -309,6 +352,7 @@ end
    some time. Some land ownership adjustments are made to ensure that the
    village owns all land between the glaciers.
 --]]
+-- TODO: move to new file
 function reveal_village()
    function force_map_immovables(list)
       local map = wl.Game().map
@@ -377,7 +421,14 @@ function reveal_village()
       {"rangers_hut", 57, 24},
       {"rangers_hut", 55, 25},
       {"hardener", 54, 26, wares = {log = 8}},
-      {"warehouse", 53, 28},
+      -- to make it more realistic
+      {"warehouse", 53, 28,
+         wares = {
+            wheat = 20,
+            log = 40,
+            meat = 30
+         }
+      },
       {"inn", 55, 28, wares = {pittabread = 4, meat = 4}},
       {"tavern", 57, 28, wares = {pittabread=4, meat = 4}},
       {"well", 52, 30},
@@ -416,6 +467,7 @@ function reveal_village()
    connected_road(plr, map:get_field(54, 19).immovable, "sw,se,e")
    connected_road(plr, map:get_field(56, 17).immovable, "sw,se")
 end
+  
 
 run(introduction_thread)
 run(mines_and_food_thread)

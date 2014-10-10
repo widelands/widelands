@@ -18,6 +18,17 @@ end
 -- =======================================================================
 --                                OBJECTIVES
 -- =======================================================================
+obj_build_rangers = {
+   name = "mission rangers",
+   title = _"Build two ranger's huts",
+   -- TODO: "number" currently refers to the number of buildings to be built, not the number of bullet points. Sensible?
+   number = 1,
+   body = objective_text(_"Build two ranger's huts",
+      listitem_bullet(_"Build a ranger's hut next to each lumberjack's hut.") ..
+      listitem_arrow(_"Naturally, trees only grow at a slow rate. To make sure you have enough logs, you have to build rangers.")
+   )
+}
+
 obj_claim_northeastern_rocks = {
    name = "mission quarry",
    title =_"Expand north-east and build a quarry",
@@ -35,11 +46,19 @@ obj_build_mines = {
    body= objective_text(_"Build coal and iron ore mines",
       listitem_bullet(_"Build a coal mine and an iron ore mine.") ..
       listitem_arrow(_"To do so, place a flag up on the mountain’s flank to the east (on mountain terrain though, not mountain meadow). When you click on the new flag, you can send geologists there. Because the flag is on a mountain, the geologists will search for ores; otherwise, they would search for water. Then build a mine for both kinds of resources that he will find, choosing the mine to be built appropriately:") ..
-_[[Black – coal]] .. "<br>" ..
-_[[Red – iron ore]] .. "<br>" ..
-_[[Yellow – gold]] .. "<br>" ..
-_[[Grey – granite]] .. paragraphdivider() ..
-_[[Mines can only be built on mountain terrain. Suitable places for mines are displayed as orange mine symbols.]]
+   "</rt>" ..
+   rt("image=tribes/barbarians/resi_coal1/resi_00.png", p(_ "a bit of coal")) ..
+   rt("image=tribes/barbarians/resi_coal2/resi_00.png", p(_ "a lot of coal")) ..
+   rt("image=tribes/barbarians/resi_iron1/resi_00.png", p(_ "a bit of iron")) ..
+   rt("image=tribes/barbarians/resi_iron2/resi_00.png", p(_ "a lot of iron")) ..
+   rt("image=tribes/barbarians/resi_gold1/resi_00.png", p(_ "a bit of gold")) ..
+   rt("image=tribes/barbarians/resi_gold2/resi_00.png", p(_ "a lot of gold")) ..
+   rt("image=tribes/barbarians/resi_granite1/resi_00.png", p(_ "a bit of granite")) ..
+   rt("image=tribes/barbarians/resi_granite2/resi_00.png", p(_ "a lot of granite")) ..
+   rt("image=tribes/barbarians/resi_water1/resi_00.png", p(_ "water")) ..
+   rt("image=tribes/barbarians/resi_none/resi_00.png", p(_ "nothing was found here")) ..
+   "<rt>" ..
+p(_[[Mines can only be built on mountain terrain. Suitable places for mines are displayed as orange mine symbols.]])
    )
 }
 
@@ -109,8 +128,8 @@ obj_better_material_2 = {
 [[Better buildings may also require other improved materials besides blackwood. ]] ..
 [[One of these is grout, which is produced out of raw stone, water and coal by a lime-burner.]]) .. paragraphdivider() ..
 _([[You can obtain water by building a well upon a water source, ]] ..
-[[which your geologists can discover when you send them to any flag that is not on a mountain. ]] ..
-[[Coal can be obtained by building a charcoal kiln or a coal mine.]] ..
+[[which your geologists can discover when you send them to any flag that is not on a mountain. ]]) .. paragraphdivider() ..
+_([[Coal can be obtained by building a charcoal kiln or a coal mine. Burning charcoal out of logs is slow. You should only build a charcoal kiln when no coal is available.]] ..
       listitem_bullet(_"Build a lime kiln, a well and a charcoal kiln, or a coal mine")
    ))
 }
@@ -143,20 +162,58 @@ _[[Oxen are bred in cattle farms out of wheat and water.]] ..
 -- =======================================================================
 --                     Texts for the Main Mission Thread
 -- =======================================================================
+
+briefing_msg_01 = {
+   title = _"The Story Begins",
+   body = thron(_"Thron sighs...",
+   _[[It’s been months, and we are still hiding where the forests are old and dark.]] .. paragraphdivider() ..
+   _[[My warriors hunt at day and lie awake at night – listening to the sounds of the cruel slaughter echoing from afar amongst the ancient trees.]])
+}
+
+briefing_msg_02 = {
+   title = _"The Story Begins",
+   body =
+   thron(
+   _[[We can see the raging flames that swallow Al’thunran from here, miles away.]] .. paragraphdivider() ..
+   _[[The red lights flash in the darkness and dance to the rhythm of the war drums that haunt me even in my nightmares.]]),
+   field = al_thunran,
+   posx = 0,
+   posy = 0
+   -- TODO: make this appear to the top left
+}
+
+briefing_msg_03 = {
+   title = _"The Story Begins",
+   body = thron(
+   _[[My father’s bones rest peacefully in the ground on which he once ended the senseless spilling of blood that had arisen amongst us. It pains me that his peace only endured for one generation.]] .. paragraphdivider() ..
+   _[[Boldreth, my loyal companion and friend is a source of peace and comfort to me in these dark times. He keeps my spirits high and those of my warriors awake, preventing greed or despair from destroying the bonds between us as well.]]),
+   field = grave,
+   posx = 0,
+   posy = 0
+}
+
+briefing_msg_04 = {
+   title = _"The Story Begins",
+   body = thron(
+   _[[As father told me, there are times to fight and times to lie and wait, trying not to fall asleep or die before the right time comes. And so I do... wait.]])
+}
+
+-- TODO: rename the three messages here and in mission_thread
 briefing_msg_1 = {
-   title =_ "The Story Continues",
+   title =_ "The Story Begins",
    body = thron(_"Thron is shaking his head...",
-_([[The war goes on. More and more of our brothers and sisters flee the brutal war raging ]] ..
+_([[Yet the war goes on. More and more of our brothers and sisters flee the brutal war raging ]] ..
 [[in the capital beneath the trees.]]) .. paragraphdivider() ..
 _([[The stories they tell about the deeds of our kin are sad to hear. ]] ..
 [[I’ve spent nights lying awake, restless, more tired than I ever believed one could be. ]] ..
 [[Yet whenever I close my eyes, I see the fortress my father built consumed by flames. ]] ..
 [[The Throne Among the Trees, the symbol of unity and peace among our kin, became the wedge that drives us apart.]])
-   )
+   ),
+   field = home -- scroll back when showing the next few message boxes
 }
 
 briefing_msg_2 = {
-   title =_ "The Story Continues",
+   title =_ "The Story Begins",
    body = thron(
 _([[Today my hunters brought men, women and little children before me who had hidden out in the forests, ]] ..
 [[trying to escape the war, hate and revenge that rage among the tribes fighting each other like in olden times, ]] ..
@@ -170,7 +227,7 @@ _([[To rise against whoever threatens our very existence, even tough it may be o
 
 
 briefing_msg_3 = {
-   title =_ "The Story Continues",
+   title =_ "The Story Begins",
    body = thron(
 _([[Boldreth seems more and more torn as the days go by. ]] ..
 [[The spirits of my fellows sink as the cold season approaches, and we are still living in no more than huts and barracks. ]] ..
@@ -182,7 +239,61 @@ _([[Perhaps it’s time to make ourselves feel a little more at ease here. ]] ..
    )
 }
 
+-- TODO: rename this
+khantrukh_1 = {
+   title = _"Somebody Comes up to You",
+   body = khantrukh(_"An old man says...",
+   _[[Hail, chieftain. I am Khantrukh and have seen many winters pass. Please allow me to aid you with my counsel through these darkened days.]] ..
+   paragraphdivider() ..
+   -- TODO(codereview): Has there to be a space in front of the ellipsis (cold... or cold ...)?
+   _[[Only the gods know how long we have to remain hidden here. The warriors hope we may march back gloriously any day now, but I strongly doubt that will happen soon. And the days are short and cold...]]
+   )
+}
 
+order_msg_ranger = {
+   title = _"The Advisor",
+   body = khantrukh(_"Khantrukh notes...",
+   _[[I see you have already built a quarry and two lumberjack's huts. That is a good beginning if we want to stay here longer.]] .. paragraphdivider() ..
+   _[[But never forget – these forests are our heritage, entrusted upon us by our ancestors. We must always respect and care for them. What we take, we must give back again.]] .. paragraphdivider() ..
+   _[[So, in order to replace the trees we chop down, we should build some ranger’s huts, preferably close to the lumberjack’s huts.]])
+.. new_objectives(start_ranger)
+}
+
+story_msg1 = {
+   title = _"In the Night",
+   body = thron(_"Thron says...",
+_[[During another sleepless night, I went up to the hill and gazed towards the north. The fires are still burning, satisfying their hunger upon my father’s legacy.]] .. paragraphdivider() ..
+_[[They are a constant reminder of why we have to hide here... and why we must return in the end!]]),
+field = al_thunran,
+posx = 0,
+posy = 0
+}
+
+story_msg2= {
+   title = _"At the Tomb",
+   body = thron(_"Thron says...",
+_[[Once again, I went up to my father’s tomb, in a sacred grove at the foot of the great spire of Kal’mavrath. I just stood there and felt neither the hours pass nor the cold rain pouring down from the darkened sky...]] .. paragraphdivider() ..
+_[[Somehow, it felt like a farewell. For the first time, I wondered what the future might hold for me...]]),
+field = grave,
+posx = 0,
+posy = 0
+}
+
+story_msg3 = {
+  title=_ "The Other Day",
+  body = thron(_"Thron says thoughtfully...",
+_[[Some time ago, Boldreth came to me. His advice was to move to a place closer to home – to strike at the first sign of my brothers’ forces wavering.]] .. paragraphdivider() ..
+_[[But when I look over the forests I can still see black smoke rising to the sky. I know – it is too early yet, and what he hopes for will not happen any time soon. He might still be right, but I fear the bloodshed that returning too fast would cause both on our and the other side...]])
+}
+
+story_msg4 = {
+title =_ "The Oath",
+body = thron(_"Thron looks furious...",
+_[[Today, my warriors picked up an old man, wandering sick and wounded through the dark forest. We listened in horror as he told us of the atrocities taking place in Al’thunran.]] .. paragraphdivider() ..
+_[[I hereby renew my oath – I will stop this madness at any cost!]])
+}
+
+--NOCOM: until here: changed; below: leave it *************************************************************************************
 order_msg_1 = {
    title=_"Your Loyal Companion",
    body = boldreth(_"Brave Boldreth steps to your side...",
@@ -331,6 +442,7 @@ _([[We need a wood hardener, and we need one now!]])
    ) .. new_objectives(obj_better_material_1)
 }
 
+-- TODO: change grindstone to grout
 order_msg_17_grindstone = {
    title=_"Your Loyal Companion",
    body= boldreth(_"Boldreth smiles...",
@@ -341,6 +453,7 @@ _([[Still, it would not hurt to accumulate some grout for our further campaign; 
    ) .. new_objectives(obj_better_material_2)
 }
 
+-- TODO: simply call it reed
 order_msg_18_reed_yard = {
    title=_"The Advisor",
    body= khantrukh(_"Khantrukh steps in...",
@@ -412,6 +525,7 @@ msg_village = {
    title=_"A friendly village has joined us!",
    body= thron(_"Thron speaks...",
 _([[We have found a village with friendly and productive people, impressed by our wealth, technology and strength.]]) .. paragraphdivider() ..
-_([[They have decided to join us!]])
+_([[They have lived simply, yet blithely, from hunting and farming. They have not been involved in any conflict so far, and are not ready for fighting.]]) .. paragraphdivider() ..
+_([[But they fear that the war around Al'thunran will set an end to this life. Therefore, they have decided to join us, hoping that we can help each other.]])
    )
 }

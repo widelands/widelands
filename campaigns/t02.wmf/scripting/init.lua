@@ -12,6 +12,11 @@ include "scripting/infrastructure.lua"
 -- Constants
 -- ==========
 plr = wl.Game().players[1]
+map = wl.Game().map
+
+home = map:get_field(12,10)
+al_thunran = map:get_field(5,46)
+grave = map:get_field(24,28)
 
 -- ===============
 -- Initialization
