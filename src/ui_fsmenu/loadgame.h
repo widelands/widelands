@@ -29,8 +29,8 @@
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/icon.h"
-#include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
+#include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/load_map_or_game.h"
 
@@ -44,6 +44,24 @@ class Image;
 class RenderTarget;
 class GameController;
 struct GameSettingsProvider;
+
+
+/**
+ * Data about a savegame/replay that we're interested in.
+ */
+struct SavegameData {
+	std::string filename;
+	std::string name;
+	std::string wincondition;
+	std::string minimap_path;
+
+	uint32_t gametime;
+	uint32_t nrplayers;
+
+	SavegameData() : gametime(0), nrplayers(0) {}
+};
+
+
 
 /// Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu.
 struct FullscreenMenuLoadGame : public FullscreenMenuLoadMapOrGame {
@@ -82,7 +100,9 @@ private:
 	UI::Icon                      m_minimap_icon;
 
 	std::unique_ptr<const Image>  m_minimap_image;
-	UI::Listselect<std::string>   m_list;
+	UI::Table<uintptr_t const>    m_table;
+
+	std::vector<SavegameData>         m_games_data;
 
 	Widelands::Game&              m_game;
 	GameSettingsProvider*         m_settings;

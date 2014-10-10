@@ -104,8 +104,8 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 						m_right_column_x, get_y_from_preceding(m_ta_win_condition) + 3 * m_padding,
 						m_minimap_w, m_minimap_h, nullptr),
 
-	// Savegame list
-	m_list(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth),
+	// Savegame table
+	m_table(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth),
 
 	// "Data container" for the savegame information
 	m_game(g),
@@ -135,10 +135,11 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	m_delete.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuLoadGame::clicked_delete, boost::ref(*this)));
-	m_list.selected.connect(boost::bind(&FullscreenMenuLoadGame::map_selected, this, _1));
-	m_list.double_clicked.connect(boost::bind(&FullscreenMenuLoadGame::clicked_ok, boost::ref(*this)));
-
-	m_list.focus();
+	m_table.add_column(m_table.get_w(), _("Filename"), _("Filename"), UI::Align_Left);
+	m_table.selected.connect(boost::bind(&FullscreenMenuLoadGame::map_selected, this, _1));
+	m_table.double_clicked.connect(boost::bind(&FullscreenMenuLoadGame::clicked_ok, boost::ref(*this)));
+	m_table.set_sort_column(0);
+	m_table.focus();
 	fill_list();
 }
 
@@ -152,33 +153,29 @@ void FullscreenMenuLoadGame::think()
 
 void FullscreenMenuLoadGame::clicked_ok()
 {
-	m_filename = m_list.get_selected();
+	m_filename = m_table.get_selected();
 	end_modal(1);
 }
 
 void FullscreenMenuLoadGame::clicked_delete()
 {
-if (!m_list.has_selection()) {
+	if (!m_table.has_selection()) {
 		return;
 	}
+	const SavegameData & gamedata = m_games_data[m_table.get_selected()];
 
-	std::string fname = m_list.get_selected();
+	std::string fname = gamedata.filename;
 	UI::WLMessageBox confirmationBox
 		(this,
 		 _("Delete file"),
 		 (boost::format(_("Do you really want to delete %s?")) % fname).str(),
 		 UI::WLMessageBox::YESNO);
 	if (confirmationBox.run()) {
-		g_fs->fs_unlink(m_list.get_selected());
+		g_fs->fs_unlink(fname);
 		if (m_is_replay) {
-			g_fs->fs_unlink(m_list.get_selected() + WLGF_SUFFIX);
+			g_fs->fs_unlink(fname + WLGF_SUFFIX);
 		}
-		m_list.clear();
 		fill_list();
-		if (m_list.empty()) {
-			//  else fill_list() already selected the first entry
-			no_selection();
-		}
 	}
 }
 
@@ -201,71 +198,31 @@ void FullscreenMenuLoadGame::no_selection()
 }
 
 
-void FullscreenMenuLoadGame::map_selected(uint32_t selected)
+void FullscreenMenuLoadGame::map_selected(uint32_t)
 {
-	if (!m_list.has_selection()) {
-		no_selection();
-		return;
-	}
-	std::string name;
-	if (m_is_replay) {
-		name = m_list.get_selected() + WLGF_SUFFIX;
-	}
-	else {
-		name = m_list.get_selected();
-	}
-	if (name.empty()) {
+	if (!m_table.has_selection()) {
 		no_selection();
 		return;
 	}
 
-	Widelands::GamePreloadPacket gpdp;
-	Widelands::GameLoader gl(name, m_game);
-
-	try {
-		gl.preload_game(gpdp);
-	} catch (const WException & e) {
-		if (!m_settings || m_settings->settings().saved_games.empty()) {
-			log("Save game or replay '%s' must have changed from under us\nException: %s\n",
-				 name.c_str(), e.what());
-			m_list.remove(selected);
-			return;
-
-		} else {
-			m_ok.set_enabled(true);
-			m_delete.set_enabled(false);
-			m_ta_mapname .set_text(_("Savegame from dedicated server"));
-			m_ta_gametime.set_text(_("Unknown gametime"));
-			return;
-		}
-	}
+	const SavegameData & gamedata = m_games_data[m_table.get_selected()];
 
 	m_ok.set_enabled(true);
 	m_delete.set_enabled(true);
 
-	//Try to translate the map name.
-	//This will work on every official map as expected
-	//and 'fail silently' (not find a translation) for already translated campaign map names.
-	//It will also translate 'false-positively' on any user-made map which shares a name with
-	//the official maps, but this should not be a problem to worry about.
-	{
-		i18n::Textdomain td("maps");
-		m_ta_mapname.set_text(_(gpdp.get_mapname()));
-	}
+	m_ta_mapname.set_text(gamedata.name);
+	m_ta_gametime.set_text(gametimestring(gamedata.gametime));
 
-	uint32_t gametime = gpdp.get_gametime();
-	m_ta_gametime.set_text(gametimestring(gametime));
-
-	uint8_t number_of_players = gpdp.get_number_of_players();
+	uint8_t number_of_players = gamedata.nrplayers;
 	if (number_of_players > 0) {
 		m_ta_players.set_text((boost::format("%u") % static_cast<unsigned int>(number_of_players)).str());
 	} else {
 		m_ta_players.set_text(_("Unknown"));
 	}
 
-	m_ta_win_condition.set_text(gpdp.get_win_condition());
+	m_ta_win_condition.set_text(gamedata.wincondition);
 
-	std::string minimap_path = gpdp.get_minimap_path();
+	std::string minimap_path = gamedata.minimap_path;
 	// Delete former image
 	m_minimap_icon.set_icon(nullptr);
 	m_minimap_icon.set_visible(false);
@@ -276,9 +233,9 @@ void FullscreenMenuLoadGame::map_selected(uint32_t selected)
 		try {
 			// Load the image
 			std::unique_ptr<Surface> surface(load_image(
-			   minimap_path, std::unique_ptr<FileSystem>(g_fs->make_sub_file_system(name)).get()));
+				minimap_path, std::unique_ptr<FileSystem>(g_fs->make_sub_file_system(gamedata.filename)).get()));
 
-			m_minimap_image.reset(new_in_memory_image(std::string(name + minimap_path), surface.release()));
+			m_minimap_image.reset(new_in_memory_image(std::string(gamedata.filename + minimap_path), surface.release()));
 
 			// Scale it
 			double scale = double(m_minimap_w) / m_minimap_image->width();
@@ -322,10 +279,19 @@ void FullscreenMenuLoadGame::map_selected(uint32_t selected)
  */
 void FullscreenMenuLoadGame::fill_list() {
 
+	m_games_data.clear();
+	m_table.clear();
+
+	SavegameData* gamedata = new SavegameData();
+
 	if (m_settings && !m_settings->settings().saved_games.empty()) {
 		for (uint32_t i = 0; i < m_settings->settings().saved_games.size(); ++i) {
-			const char * path = m_settings->settings().saved_games.at(i).path.c_str();
-			m_list.add(FileSystem::filename_without_ext(path).c_str(), path);
+			gamedata->filename = m_settings->settings().saved_games.at(i).path;
+			m_games_data.push_back(*gamedata);
+
+			UI::Table<uintptr_t const>::EntryRecord & te =
+				m_table.add(m_games_data.size() - 1);
+			te.set_string(0, FileSystem::filename_without_ext(gamedata->filename.c_str()).c_str());
 		}
 	} else { // Normal case
 		// Fill it with all files we find.
@@ -342,6 +308,9 @@ void FullscreenMenuLoadGame::fill_list() {
 		const FilenameSet & gamefiles = m_gamefiles;
 
 		for (const std::string& gamefilename : gamefiles) {
+
+			gamedata = new SavegameData();
+
 			std::string savename = gamefilename;
 			if (m_is_replay) savename += WLGF_SUFFIX;
 
@@ -349,14 +318,37 @@ void FullscreenMenuLoadGame::fill_list() {
 				continue;
 			}
 
+			gamedata->filename = gamefilename;
+
 			try {
 				Widelands::GameLoader gl(savename.c_str(), m_game);
 				gl.preload_game(gpdp);
+				{
+					i18n::Textdomain td("maps");
+					gamedata->name = _(gpdp.get_mapname());
+				}
+				gamedata->gametime = gpdp.get_gametime();
+				gamedata->nrplayers = gpdp.get_number_of_players();
+				{
+					i18n::Textdomain td("win_conditions");
+					gamedata->wincondition = _(gpdp.get_win_condition());
+				}
+				gamedata->minimap_path = gpdp.get_minimap_path();
+				m_games_data.push_back(*gamedata);
 
-				m_list.add
-					(FileSystem::filename_without_ext(gamefilename.c_str()).c_str(), gamefilename);
+				UI::Table<uintptr_t const>::EntryRecord & te =
+					m_table.add(m_games_data.size() - 1);
+				te.set_string(0, FileSystem::filename_without_ext(gamefilename.c_str()).c_str());
+
 			} catch (const WException &) {} //  we simply skip illegal entries
 		}
+	}
+	m_table.sort();
+
+	if (m_table.size()) {
+		m_table.select(0);
+	} else {
+		no_selection();
 	}
 }
 
