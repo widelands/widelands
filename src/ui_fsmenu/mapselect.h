@@ -115,7 +115,7 @@ private:
 	UI::Checkbox*                 m_cb_show_all_maps;
 	std::vector<UI::Checkbox*>    m_tags_checkboxes;
 
-	UI::SuggestedTeamsBox         m_suggested_teams_box;
+	UI::SuggestedTeamsBox*        m_suggested_teams_box;
 
 	UI::Table<uintptr_t const>    m_table;
 	std::string                   m_curdir, m_basedir;

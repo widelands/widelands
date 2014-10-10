@@ -86,12 +86,6 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 		 UI::Align_Left),
 	m_cb_load_map_as_scenario(this, Point (m_right_column_x, m_label_load_map_as_scenario.get_y())),
 
-	// Suggested teams
-	// Y coordinate will be set later, when we know how high this box will get.
-	m_suggested_teams_box(this, m_right_column_x, 0, UI::Box::Vertical,
-								 m_padding, m_indent, m_label_height,
-								 get_w() - m_right_column_x, 4 * m_label_height),
-
 	// Map table
 	m_table(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth),
 
@@ -135,6 +129,13 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	m_table.set_sort_column(0);
 	m_cb_load_map_as_scenario.set_state(false);
 	m_cb_load_map_as_scenario.set_enabled(false);
+
+	// Suggested teams
+	// Y coordinate will be set later, when we know how high this box will get.
+	m_suggested_teams_box = new UI::SuggestedTeamsBox(this, m_right_column_x, 0, UI::Box::Vertical,
+								 m_padding, m_indent, m_label_height,
+								 get_w() - m_right_column_x, 4 * m_label_height);
+
 
 	UI::Box* vbox = new UI::Box(this, m_maplistx, m_checkboxes_y,
 										 UI::Box::Horizontal, m_checkbox_space, get_w());
@@ -351,21 +352,21 @@ void FullscreenMenuMapSelect::map_selected(uint32_t)
 	m_ta_description.scroll_to_top();
 
 	// Show / hide suggested teams
-	m_suggested_teams_box.hide();
+	m_suggested_teams_box->hide();
 
 	if (!map.suggested_teams.empty()) {
-		m_suggested_teams_box.show(map.suggested_teams);
+		m_suggested_teams_box->show(map.suggested_teams);
 
 		if (m_cb_load_map_as_scenario.is_visible()) {
-			m_suggested_teams_box.set_pos(
-					(Point(m_suggested_teams_box.get_x(),
-							 m_cb_load_map_as_scenario.get_y() - m_suggested_teams_box.get_h() - 3 * m_padding)));
+			m_suggested_teams_box->set_pos(
+					(Point(m_suggested_teams_box->get_x(),
+							 m_cb_load_map_as_scenario.get_y() - m_suggested_teams_box->get_h() - 3 * m_padding)));
 		} else {
-			m_suggested_teams_box.set_pos(Point(m_suggested_teams_box.get_x(),
-														  m_buty - m_padding - m_suggested_teams_box.get_h() - m_padding));
+			m_suggested_teams_box->set_pos(Point(m_suggested_teams_box->get_x(),
+														  m_buty - m_padding - m_suggested_teams_box->get_h() - m_padding));
 		}
 		m_ta_description.set_size(m_ta_description.get_w(),
-										  m_suggested_teams_box.get_y() - m_ta_description.get_y() - 3 * m_padding);
+										  m_suggested_teams_box->get_y() - m_ta_description.get_y() - 3 * m_padding);
 	}
 }
 
