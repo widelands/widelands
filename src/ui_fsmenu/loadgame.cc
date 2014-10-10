@@ -54,12 +54,12 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	m_is_replay(is_replay),
 	// Main title
 	m_title
-		(this, get_w() / 2, m_maplisty / 3,
+		(this, get_w() / 2, m_tabley / 3,
 		 m_is_replay ? _("Choose a replay") : _("Choose a saved game"), UI::Align_HCenter),
 
 	// Savegame description
 	m_label_mapname
-		(this, m_right_column_x, m_maplisty,
+		(this, m_right_column_x, m_tabley,
 		 _("Map Name:"),
 		 UI::Align_Left),
 	m_ta_mapname(this,
@@ -105,7 +105,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 						m_minimap_w, m_minimap_h, nullptr),
 
 	// Savegame table
-	m_table(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth),
+	m_table(this, m_tablex, m_tabley, m_tablew, m_tableh),
 
 	// "Data container" for the savegame information
 	m_game(g),
@@ -136,11 +136,11 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 		(boost::bind
 			 (&FullscreenMenuLoadGame::clicked_delete, boost::ref(*this)));
 	m_table.add_column(m_table.get_w(), _("Filename"), _("Filename"), UI::Align_Left);
-	m_table.selected.connect(boost::bind(&FullscreenMenuLoadGame::map_selected, this, _1));
+	m_table.selected.connect(boost::bind(&FullscreenMenuLoadGame::entry_selected, this));
 	m_table.double_clicked.connect(boost::bind(&FullscreenMenuLoadGame::clicked_ok, boost::ref(*this)));
 	m_table.set_sort_column(0);
 	m_table.focus();
-	fill_list();
+	fill_table();
 }
 
 void FullscreenMenuLoadGame::think()
@@ -176,7 +176,7 @@ void FullscreenMenuLoadGame::clicked_delete()
 		if (m_is_replay) {
 			g_fs->fs_unlink(fname + WLGF_SUFFIX);
 		}
-		fill_list();
+		fill_table();
 	}
 }
 
@@ -199,7 +199,7 @@ void FullscreenMenuLoadGame::no_selection()
 }
 
 
-void FullscreenMenuLoadGame::map_selected(uint32_t)
+void FullscreenMenuLoadGame::entry_selected()
 {
 	if (!m_table.has_selection()) {
 		no_selection();
@@ -236,7 +236,8 @@ void FullscreenMenuLoadGame::map_selected(uint32_t)
 			std::unique_ptr<Surface> surface(load_image(
 				minimap_path, std::unique_ptr<FileSystem>(g_fs->make_sub_file_system(gamedata.filename)).get()));
 
-			m_minimap_image.reset(new_in_memory_image(std::string(gamedata.filename + minimap_path), surface.release()));
+			m_minimap_image.reset(new_in_memory_image(std::string(gamedata.filename + minimap_path),
+																	surface.release()));
 
 			// Scale it
 			double scale = double(m_minimap_w) / m_minimap_image->width();
@@ -278,7 +279,7 @@ void FullscreenMenuLoadGame::map_selected(uint32_t)
 /**
  * Fill the file list
  */
-void FullscreenMenuLoadGame::fill_list() {
+void FullscreenMenuLoadGame::fill_table() {
 
 	m_games_data.clear();
 	m_table.clear();

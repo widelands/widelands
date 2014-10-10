@@ -18,6 +18,7 @@ wl_library(ui_fsmenu
     launch_spg.h
     loadgame.cc
     loadgame.h
+    load_map_or_game.cc
     load_map_or_game.h
     main.cc
     main.h

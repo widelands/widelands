@@ -84,10 +84,11 @@ struct FullscreenMenuMapSelect : public FullscreenMenuLoadMapOrGame {
 
 protected:
 	void clicked_ok() override;
+	void entry_selected() override;
+	void fill_table() override;
+
 
 private:
-	void map_selected(uint32_t);
-	void fill_list();
 	bool compare_players(uint32_t, uint32_t);
 	bool compare_mapnames(uint32_t, uint32_t);
 	bool compare_size(uint32_t, uint32_t);

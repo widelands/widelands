@@ -75,11 +75,12 @@ struct FullscreenMenuLoadGame : public FullscreenMenuLoadMapOrGame {
 
 protected:
 	void clicked_ok() override;
+	void entry_selected() override;
+	void fill_table() override;
+
 
 private:
 	void clicked_delete();
-	void map_selected(uint32_t);
-	void fill_list();
 	void no_selection();
 
 	bool                          m_is_replay;

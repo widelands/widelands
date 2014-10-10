@@ -44,6 +44,9 @@ struct FullscreenMenuCampaignSelect : public FullscreenMenuLoadMapOrGame {
 
 protected:
 	void clicked_ok() override;
+	void entry_selected() override;
+	void fill_table() override;
+
 
 private:
 	/**
@@ -60,8 +63,6 @@ private:
 		CampaignListData() : index(0), difficulty(0) {}
 	};
 
-	void campaign_selected(uint32_t);
-	void fill_list();
 	bool compare_difficulty(uint32_t, uint32_t);
 
 	UI::Textarea                  m_title;
@@ -92,6 +93,10 @@ struct FullscreenMenuCampaignMapSelect : public FullscreenMenuLoadMapOrGame {
 	std::string get_map();
 	void set_campaign(uint32_t);
 
+protected:
+	void entry_selected() override;
+	void fill_table() override;
+
 private:
 	/**
 	 * Data about a campaign scenario that we're interested in.
@@ -103,9 +108,6 @@ private:
 
 		CampaignScenarioData() : index(0) {}
 	};
-
-	void map_selected(uint32_t);
-	void fill_list();
 
 	UI::Textarea                  m_title;
 	UI::Textarea                  m_subtitle;

@@ -43,7 +43,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 
 	m_is_editor(is_editor),
 	m_checkbox_space(25),
-	m_checkboxes_y(m_maplisty - 120),
+	m_checkboxes_y(m_tabley - 120),
 
 	// Main title
 	m_title
@@ -53,7 +53,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 
 	// Map description
 	m_label_mapname
-		(this, m_right_column_x, m_maplisty,
+		(this, m_right_column_x, m_tabley,
 		 _("Map Name:"),
 		 UI::Align_Left),
 	m_ta_mapname(this,
@@ -87,7 +87,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	m_cb_load_map_as_scenario(this, Point (m_right_column_x, m_label_load_map_as_scenario.get_y())),
 
 	// Map table
-	m_table(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth),
+	m_table(this, m_tablex, m_tabley, m_tablew, m_tableh),
 
 	// Runtime variables
 	m_curdir("maps"), m_basedir("maps"),
@@ -110,7 +110,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 
 	m_back.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_back, boost::ref(*this)));
 	m_ok.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_ok, boost::ref(*this)));
-	m_table.selected.connect(boost::bind(&FullscreenMenuMapSelect::map_selected, this, _1));
+	m_table.selected.connect(boost::bind(&FullscreenMenuMapSelect::entry_selected, this));
 	m_table.double_clicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_ok, boost::ref(*this)));
 
 	/** TRANSLATORS: Column title for number of players in map list */
@@ -137,7 +137,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 								 get_w() - m_right_column_x, 4 * m_label_height);
 
 
-	UI::Box* vbox = new UI::Box(this, m_maplistx, m_checkboxes_y,
+	UI::Box* vbox = new UI::Box(this, m_tablex, m_checkboxes_y,
 										 UI::Box::Horizontal, m_checkbox_space, get_w());
 	m_cb_show_all_maps = _add_tag_checkbox(vbox, "blumba", _("Show all maps"));
 	m_tags_checkboxes.clear(); // Remove this again, it is a special tag checkbox
@@ -145,7 +145,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 
 	m_cb_dont_localize_mapnames = new UI::Checkbox(vbox, Point(0, 0));
 	m_cb_dont_localize_mapnames->changedto.connect
-			(boost::bind(&FullscreenMenuMapSelect::fill_list, boost::ref(*this)));
+			(boost::bind(&FullscreenMenuMapSelect::fill_table, boost::ref(*this)));
 	vbox->add(m_cb_dont_localize_mapnames, UI::Box::AlignLeft, true);
 	UI::Textarea * ta_dont_localize_mapnames =
 			/** TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated. */
@@ -153,32 +153,32 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	vbox->add_space(m_padding);
 	vbox->add(ta_dont_localize_mapnames, UI::Box::AlignLeft);
 	vbox->add_space(m_checkbox_space);
-	vbox->set_size(get_w() - 2 * m_maplistx, m_checkbox_space);
+	vbox->set_size(get_w() - 2 * m_tablex, m_checkbox_space);
 
 	vbox = new UI::Box(this,
-							 m_maplistx, vbox->get_y() + vbox->get_h() + m_padding,
+							 m_tablex, vbox->get_y() + vbox->get_h() + m_padding,
 							 UI::Box::Horizontal, m_checkbox_space, get_w());
 	_add_tag_checkbox(vbox, "official", _("Official"));
 	_add_tag_checkbox(vbox, "unbalanced", _("Unbalanced"));
 	_add_tag_checkbox(vbox, "seafaring", _("Seafaring"));
 	_add_tag_checkbox(vbox, "scenario", _("Scenario"));
-	vbox->set_size(get_w() - 2 * m_maplistx, m_checkbox_space);
+	vbox->set_size(get_w() - 2 * m_tablex, m_checkbox_space);
 
 	vbox = new UI::Box(this,
-							 m_maplistx, vbox->get_y() + vbox->get_h() + m_padding,
+							 m_tablex, vbox->get_y() + vbox->get_h() + m_padding,
 							 UI::Box::Horizontal, m_checkbox_space, get_w());
 	_add_tag_checkbox(vbox, "ffa", _("Free for all"));
 	_add_tag_checkbox(vbox, "1v1", _("1v1"));
 
-	vbox->set_size(get_w() - 2 * m_maplistx, m_checkbox_space);
+	vbox->set_size(get_w() - 2 * m_tablex, m_checkbox_space);
 
 	vbox = new UI::Box(this,
-							 m_maplistx, vbox->get_y() + vbox->get_h() + m_padding,
+							 m_tablex, vbox->get_y() + vbox->get_h() + m_padding,
 							 UI::Box::Horizontal, m_checkbox_space, get_w());
 	_add_tag_checkbox(vbox, "2teams", _("Teams of 2"));
 	_add_tag_checkbox(vbox, "3teams", _("Teams of 3"));
 	_add_tag_checkbox(vbox, "4teams", _("Teams of 4"));
-	vbox->set_size(get_w() - 2 * m_maplistx, m_checkbox_space);
+	vbox->set_size(get_w() - 2 * m_tablex, m_checkbox_space);
 
 	m_scenario_types = m_settings->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO;
 	if (m_scenario_types) {
@@ -190,7 +190,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	}
 
 	m_table.focus();
-	fill_list();
+	fill_table();
 
 	// We don't need the unlocalizing option if there is nothing to unlocalize.
 	// We know this after the list is filled.
@@ -271,7 +271,7 @@ void FullscreenMenuMapSelect::clicked_ok()
 
 	if (!mapdata.width) {
 		m_curdir = mapdata.filename;
-		fill_list();
+		fill_table();
 	} else {
 		end_modal(1 + is_scenario());
 	}
@@ -283,7 +283,7 @@ void FullscreenMenuMapSelect::clicked_ok()
  * When this happens, the information display at the right needs to be
  * refreshed.
  */
-void FullscreenMenuMapSelect::map_selected(uint32_t)
+void FullscreenMenuMapSelect::entry_selected()
 {
 	const MapData & map = m_maps_data[m_table.get_selected()];
 
@@ -390,7 +390,7 @@ void FullscreenMenuMapSelect::map_selected(uint32_t)
  * \note special case is, if this is a multiplayer game on a dedicated server and
  * the client wants to change the map - in that case the maps available on the server are shown.
  */
-void FullscreenMenuMapSelect::fill_list()
+void FullscreenMenuMapSelect::fill_table()
 {
 	uint8_t col_players = 0;
 	uint8_t col_name = 1;
@@ -673,5 +673,5 @@ void FullscreenMenuMapSelect::_tagbox_changed(int32_t id, bool to) {
 		m_cb_show_all_maps->set_state(false);
 	}
 
-	fill_list();
+	fill_table();
 }

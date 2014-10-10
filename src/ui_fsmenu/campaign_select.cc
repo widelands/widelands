@@ -46,13 +46,13 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 
 	// Main Title
 	m_title
-		(this, get_w() / 2, m_maplisty / 3,
+		(this, get_w() / 2, m_tabley / 3,
 		 _("Choose a campaign"),
 		 UI::Align_HCenter),
 
 	// Campaign description
 	m_label_campname
-		(this, m_right_column_x, m_maplisty,
+		(this, m_right_column_x, m_tabley,
 		 _("Campaign Name:"),
 		 UI::Align_Left),
 	m_ta_campname(this,
@@ -87,7 +87,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 		 m_buty - get_y_from_preceding(m_label_description) - 4 * m_padding),
 
 	// Campaign list
-	m_table(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth)
+	m_table(this, m_tablex, m_tabley, m_tablew, m_tableh)
 {
 	m_title.set_textstyle(ts_big());
 	m_back.set_tooltip(_("Return to the main menu"));
@@ -104,7 +104,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 		(boost::bind
 			 (&FullscreenMenuCampaignSelect::clicked_back, boost::ref(*this)));
 	m_table.selected.connect
-		(boost::bind(&FullscreenMenuCampaignSelect::campaign_selected, this, _1));
+		(boost::bind(&FullscreenMenuCampaignSelect::entry_selected, this));
 	m_table.double_clicked.connect
 		(boost::bind(&FullscreenMenuCampaignSelect::clicked_ok, boost::ref(*this)));
 
@@ -117,7 +117,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 			 boost::bind(&FullscreenMenuCampaignSelect::compare_difficulty, this, _1, _2));
 	m_table.set_sort_column(0);
 	m_table.focus();
-	fill_list();
+	fill_table();
 }
 
 
@@ -146,12 +146,10 @@ static char const * const difficulty_picture_filenames[] = {
 /**
  * an entry of campaignlist got selected.
  */
-void FullscreenMenuCampaignSelect::campaign_selected(uint32_t i)
+void FullscreenMenuCampaignSelect::entry_selected()
 {
-
-	if (i < m_campaigns_data.size()) { // Don't test for get_selected(), because we need index 0
-
-		const CampaignListData& campaign_data = m_campaigns_data[i];
+	if (m_table.has_selection()) {
+		const CampaignListData& campaign_data = m_campaigns_data[m_table.get_selected()];
 		campaign = campaign_data.index;
 
 		// enable OK button
@@ -175,7 +173,7 @@ void FullscreenMenuCampaignSelect::campaign_selected(uint32_t i)
 /**
  * fill the campaign list
  */
-void FullscreenMenuCampaignSelect::fill_list()
+void FullscreenMenuCampaignSelect::fill_table()
 {
 	m_campaigns_data.clear();
 	m_table.clear();
@@ -275,7 +273,7 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect() :
 
 	// Main title
 	m_title
-		(this, get_w() / 2, m_maplisty / 3,
+		(this, get_w() / 2, m_tabley / 3,
 		 _("Choose a scenario"),
 		 UI::Align_HCenter),
 	m_subtitle
@@ -285,7 +283,7 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect() :
 
 	// Map description
 	m_label_mapname
-		(this, m_right_column_x, m_maplisty,
+		(this, m_right_column_x, m_tabley,
 		 _("Scenario:"),
 		 UI::Align_Left),
 	m_ta_mapname(this,
@@ -313,7 +311,7 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect() :
 		 m_buty - get_y_from_preceding(m_label_description) - 4 * m_padding),
 
 	// Campaign map list
-	m_table(this, m_maplistx, m_maplisty, m_maplistw, m_maplisth)
+	m_table(this, m_tablex, m_tabley, m_tablew, m_tableh)
 {
 	m_title.set_textstyle(ts_big());
 	m_back.set_tooltip(_("Return to the main menu"));
@@ -327,7 +325,7 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect() :
 	m_back.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuCampaignMapSelect::clicked_back, boost::ref(*this)));
-	m_table.selected.connect(boost::bind(&FullscreenMenuCampaignMapSelect::map_selected, this, _1));
+	m_table.selected.connect(boost::bind(&FullscreenMenuCampaignMapSelect::entry_selected, this));
 	m_table.double_clicked.connect
 		(boost::bind(&FullscreenMenuCampaignMapSelect::clicked_ok, boost::ref(*this)));
 
@@ -350,13 +348,13 @@ std::string FullscreenMenuCampaignMapSelect::get_map()
 //have, fill it.
 void FullscreenMenuCampaignMapSelect::set_campaign(uint32_t const i) {
 	campaign = i;
-	fill_list();
+	fill_table();
 }
 
 /**
  * an entry of the maplist got selected.
  */
-void FullscreenMenuCampaignMapSelect::map_selected(uint32_t) {
+void FullscreenMenuCampaignMapSelect::entry_selected() {
 	const CampaignScenarioData& scenario_data = m_scenarios_data[m_table.get_selected()];
 	campmapfile = scenario_data.path;
 	Widelands::Map map;
@@ -389,7 +387,7 @@ void FullscreenMenuCampaignMapSelect::map_selected(uint32_t) {
 /**
  * fill the campaign-map list
  */
-void FullscreenMenuCampaignMapSelect::fill_list()
+void FullscreenMenuCampaignMapSelect::fill_table()
 {
 	// read in the campaign config
 	Profile prof("campaigns/cconfig", nullptr, "maps");
