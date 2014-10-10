@@ -49,7 +49,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 				  (parent.get_w() - 260) / 2,
 				  (parent.get_h() - 450) / 2,
 				  305,
-				  490,
+				  500,
 				  _("New Random Map")),
    // TRANSLATORS: The next are world names for the random map generator.
 	m_world_descriptions(
@@ -82,7 +82,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 		new UI::EditBox
 			(this,
 			 posx, posy,
-			 width, 20,
+			 width, height,
 			 g_gr->images().get("pics/but1.png"));
 	m_nrEditbox->changed.connect
 		(boost::bind(&MainMenuNewRandomMap::nr_edit_box_changed, this));
@@ -91,7 +91,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	rng.rand();
 	m_mapNumber = rng.rand();
 	m_nrEditbox->set_text(std::to_string(static_cast<unsigned int>(m_mapNumber)));
-	posy += height + spacing + spacing + spacing;
+	posy += height + 3 * spacing;
 
 
 	// ---------- Width  ----------
@@ -107,7 +107,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 
 	UI::Button * widthupbtn = new UI::Button
 		(this, "width_up",
-		 get_inner_w() - spacing - 20, posy, 20, 20,
+		 get_inner_w() - spacing - height, posy, height, height,
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_up.png"));
 	widthupbtn->sigclicked.connect
@@ -115,27 +115,27 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 
 	UI::Button * widthdownbtn = new UI::Button
 		(this, "width_down",
-		 posx, posy, 20, 20,
+		 posx, posy, height, height,
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_down.png"));
 	widthdownbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::MAP_W_MINUS));
 
-	m_width = new UI::Textarea(this, posx + spacing + 20, posy,
+	m_width = new UI::Textarea(this, posx + spacing + height, posy,
 										(boost::format(_("Width: %u"))
 										 % Widelands::MAP_DIMENSIONS[m_w]).str().c_str());
 
-	posy += 20 + spacing + spacing;
+	posy += height + 2 * spacing;
 
 	// ---------- Height  ----------
 
-	m_height = new UI::Textarea(this, posx + spacing + 20, posy,
+	m_height = new UI::Textarea(this, posx + spacing + height, posy,
 										 (boost::format(_("Height: %u"))
 										  % Widelands::MAP_DIMENSIONS[m_h]).str().c_str());
 
 	UI::Button * heightupbtn = new UI::Button
 		(this, "height_up",
-		 get_inner_w() - spacing - 20, posy, 20, 20,
+		 get_inner_w() - spacing - height, posy, height, height,
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_up.png"));
 	heightupbtn->sigclicked.connect
@@ -143,20 +143,20 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 
 	UI::Button * heightdownbtn = new UI::Button
 		(this, "height_down",
-		 posx, posy, 20, 20,
+		 posx, posy, height, height,
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_down.png"));
 	heightdownbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::MAP_H_MINUS));
 
-	posy += 20 + spacing + spacing;
+	posy += height + 4 * spacing;
 
 
 	// ---------- Water -----------
 
 	UI::Button * waterupbtn = new UI::Button
 		(this, "water_up",
-		 get_inner_w() - spacing - 20, posy, 20, 20,
+		 get_inner_w() - spacing - height, posy, height, height,
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_up.png"));
 	waterupbtn->sigclicked.connect
@@ -164,16 +164,16 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 
 	UI::Button * waterdownbtn = new UI::Button
 		(this, "water_down",
-		 posx, posy, 20, 20,
+		 posx, posy, height, height,
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_down.png"));
 	waterdownbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::WATER_MINUS));
 
-	m_water = new UI::Textarea(this, posx + spacing + 20, posy,
+	m_water = new UI::Textarea(this, posx + spacing + height, posy,
 										(boost::format(_("Water: %i %%")) % m_waterval).str().c_str());
 
-	posy += 20 + spacing + spacing;
+	posy += height + 2 * spacing;
 
 
 
@@ -181,7 +181,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 
 	UI::Button * landupbtn = new UI::Button
 		(this, "land_up",
-		 get_inner_w() - spacing - 20, posy, 20, 20,
+		 get_inner_w() - spacing - height, posy, height, height,
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_up.png"));
 	landupbtn->sigclicked.connect
@@ -189,16 +189,16 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 
 	UI::Button * landdownbtn = new UI::Button
 		(this, "land_down",
-		 posx, posy, 20, 20,
+		 posx, posy, height, height,
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_down.png"));
 	landdownbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::LAND_MINUS));
 
-	m_land = new UI::Textarea(this, posx + spacing + 20, posy,
+	m_land = new UI::Textarea(this, posx + spacing + height, posy,
 									  (boost::format(_("Land: %i %%")) % m_landval).str().c_str());
 
-	posy += 20 + spacing + spacing;
+	posy += height + 2 * spacing;
 
 
 
@@ -206,7 +206,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 
 	UI::Button * wastelandupbtn = new UI::Button
 		(this, "wasteland_up",
-		 get_inner_w() - spacing - 20, posy, 20, 20,
+		 get_inner_w() - spacing - height, posy, height, height,
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_up.png"));
 	wastelandupbtn->sigclicked.connect
@@ -214,30 +214,30 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 
 	UI::Button * wastelanddownbtn = new UI::Button
 		(this, "wasteland_down",
-		 posx, posy, 20, 20,
+		 posx, posy, height, height,
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_down.png"));
 	wastelanddownbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::WASTE_MINUS));
 
-	m_wasteland = new UI::Textarea(this, posx + spacing + 20, posy,
+	m_wasteland = new UI::Textarea(this, posx + spacing + height, posy,
 											 (boost::format(_("Wasteland: %i %%")) % m_wastelandval).str().c_str());
 
-	posy += 20 + spacing + spacing;
+	posy += height + 2 * spacing;
 
 
 
 	// ---------- Mountains -----------
 
-	m_mountains = new UI::Textarea(this, posx + spacing + 20, posy,
+	m_mountains = new UI::Textarea(this, posx + spacing + height, posy,
 											 (boost::format(_("Mountains: %i %%")) % m_mountainsval).str().c_str());
 
-	posy += 20 + spacing + spacing;
+	posy += height + 2 * spacing;
 
 
 	// ---------- Island mode ----------
 
-	Point pos(get_inner_w() - spacing - 20, posy);
+	Point pos(get_inner_w() - spacing - height, posy);
 	m_island_mode = new UI::Checkbox(this, pos);
 	m_island_mode->set_state(true);
 	m_island_mode->changed.connect
@@ -266,7 +266,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 		 m_res_amounts[m_res_amount].c_str());
 	m_res->sigclicked.connect(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::SWITCH_RES));
 
-	posy += height + spacing + spacing + spacing;
+	posy += height + 3 * spacing;
 
 	// ---------- Worlds ----------
 	m_world = new UI::Button
@@ -277,23 +277,23 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	m_world->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::SWITCH_WORLD));
 
-	posy += height + spacing + spacing + spacing;
+	posy += height + 3 * spacing;
 
 	// ---------- Map ID String edit ----------
 
-	new UI::Textarea(this, posx + spacing + 20, posy, _("Map ID:"));
+	new UI::Textarea(this, posx, posy, _("Map ID:"));
 	posy += height + spacing;
 
 	m_idEditbox =
 		new UI::EditBox
 			(this,
 			 posx, posy,
-			 width, 20,
+			 width, height,
 			 g_gr->images().get("pics/but1.png"));
 	m_idEditbox->set_text("abcd-efgh-ijkl-mnop");
 	m_idEditbox->changed.connect
 		(boost::bind(&MainMenuNewRandomMap::id_edit_box_changed, this));
-	posy += height + spacing + spacing + spacing;
+	posy += height + 3 * spacing;
 
 
 
@@ -301,7 +301,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 
 	UI::Button * playerupbtn = new UI::Button
 		(this, "player_up",
-		 get_inner_w() - spacing - 20, posy, 20, 20,
+		 get_inner_w() - spacing - height, posy, height, height,
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_up.png"));
 	playerupbtn->sigclicked.connect
@@ -309,17 +309,17 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 
 	UI::Button * playerdownbtn = new UI::Button
 		(this, "player_down",
-		 posx, posy, 20, 20,
+		 posx, posy, height, height,
 		 g_gr->images().get("pics/but1.png"),
 		 g_gr->images().get("pics/scrollbar_down.png"));
 	playerdownbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::PLAYER_MINUS));
 
-	m_players = new UI::Textarea(this, posx + spacing + 20, posy,
+	m_players = new UI::Textarea(this, posx + spacing + height, posy,
 										  (boost::format(_("Players: %u"))
 											% static_cast<unsigned int>(m_pn)).str().c_str());
 
-	posy += 20 + spacing + spacing;
+	posy += height + 2 * spacing;
 
 
 
