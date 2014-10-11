@@ -1039,6 +1039,7 @@ MapObject::Loader * Ship::load
 		// The header has been peeled away by the caller
 
 		uint8_t const packet_version = fr.unsigned_8();
+		// NOCOM(#codereview): I do not think this is needed.
 		// Supporting older versions for map loading
 		if (1 <= packet_version && packet_version  <= kCurrentPacketVersion) {
 			std::string owner = fr.c_string();

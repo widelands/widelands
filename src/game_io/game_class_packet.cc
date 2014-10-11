@@ -58,7 +58,7 @@ void GameClassPacket::write
 
 	// State is running, we do not need to save this
 	// Save speed
-	fw.signed_16(1000);
+	fw.signed_16(1000); // NOCOM(#codereview): remove this too? we ignore it on load it seems.
 
 	// From the interactive player, is saved somewhere else
 	// Computer players are saved somewhere else

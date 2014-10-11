@@ -55,6 +55,8 @@ void MapBuildingPacket::read(FileSystem& fs,
 	InteractiveBase & ibase = *egbase.get_ibase();
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
+		// NOCOM(#codereview): scenarios shuold not contain building information. All buildings are placed via
+		// lua scripting after the scenario starts up.
 		// Supporting older versions for scenario loading
 		if (2 <= packet_version && packet_version <= kCurrentPacketVersion) {
 			Map & map = egbase.map();

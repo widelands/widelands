@@ -41,6 +41,10 @@ GameDataError::GameDataError(char const * const fmt, ...)
 }
 
 
+// NOCOM(#codereview): this is also thrown on newer (i.e. unhandled versions).
+// Maybe change naming and message to reflect that. It will be much rarer I
+// guess that people have newer savegames that they cannot load, but it might
+// happen.
 OldVersionError::OldVersionError(int32_t packet_version,
 											int32_t current_packet_version)
 {
