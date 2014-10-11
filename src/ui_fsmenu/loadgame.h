@@ -25,6 +25,7 @@
 #include <memory>
 
 #include "graphic/image.h"
+#include "logic/game_controller.h"
 #include "ui_basic/button.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/multilinetextarea.h"
@@ -49,14 +50,23 @@ struct GameSettingsProvider;
  */
 struct SavegameData {
 	std::string filename;
-	std::string name;
+	std::string mapname;
 	std::string wincondition;
 	std::string minimap_path;
 
 	uint32_t gametime;
 	uint32_t nrplayers;
 
-	SavegameData() : gametime(0), nrplayers(0) {}
+	uint16_t saveyear;
+	uint16_t savemonth;
+	uint16_t saveday;
+	uint16_t savehour;
+	uint16_t saveminute;
+	GameController::GameType gametype;
+
+	SavegameData() : gametime(0), nrplayers(0),
+		saveyear(0), savemonth(0), saveday(0), savehour(0), saveminute(0),
+		gametype(GameController::GameType::SINGLEPLAYER) {}
 };
 
 

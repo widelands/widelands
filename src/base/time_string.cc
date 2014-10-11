@@ -160,7 +160,6 @@ std::string localize_month(int8_t month) {
 			/** TRANSLATORS: December. Keep this to 4 letters maximum. */
 			/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
 			/** TRANSLATORS: definition if there is one for your language. */
-			/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
 			return _("Dec");
 		default:
 			return std::to_string(month);
