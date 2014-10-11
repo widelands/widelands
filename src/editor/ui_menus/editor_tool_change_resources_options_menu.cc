@@ -20,6 +20,7 @@
 #include "editor/ui_menus/editor_tool_change_resources_options_menu.h"
 
 #include <cstdio>
+#include <string>
 
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
@@ -226,11 +227,11 @@ void EditorToolChangeResourcesOptionsMenu::selected() {
  * Update all the textareas, so that they represent the correct values
 */
 void EditorToolChangeResourcesOptionsMenu::update() {
-	char buf[250];
-	sprintf(buf, "%i", m_increase_tool.get_change_by());
-	m_change_by_value.set_text(buf);
-	sprintf(buf, "%i", m_increase_tool.set_tool().get_set_to());
-	m_set_to_value.set_text(buf);
+
+	m_change_by_value.set_text(std::to_string(m_increase_tool.get_change_by()));
+
+	m_set_to_value.set_text(std::to_string(
+										static_cast<unsigned int>(m_increase_tool.set_tool().get_set_to())));
 
 	m_cur_selection.set_text
 		(ref_cast<EditorInteractive, UI::Panel>(*get_parent()).egbase()

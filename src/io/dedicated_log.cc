@@ -19,6 +19,8 @@
 
 #include "io/dedicated_log.h"
 
+#include <string>
+
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -165,13 +167,13 @@ void DedicatedLog::info_update() {
 	temp += "<tr><td class=\"infoname\">Server MOTD</td><td class=\"info\">" + d_motd  + "</td></tr>\n";
 	temp += "<tr><td class=\"infoname\">Started on</td><td class=\"info\">"  + d_start + "</td></tr>\n";
 	temp += "<tr><td class=\"infoname\">Logins</td><td class=\"info\">";
-	temp += (boost::format("%u") % d_logins).str() + "</td></tr>\n";
+	temp += std::to_string(d_logins) + "</td></tr>\n";
 	temp += "<tr><td class=\"infoname\">Logouts</td><td class=\"info\">";
-	temp += (boost::format("%u") % d_logouts).str() + "</td></tr>\n";
+	temp += std::to_string(d_logouts) + "</td></tr>\n";
 	temp += "<tr><td class=\"infoname\">Chat messages</td><td class=\"info\">";
-	temp += (boost::format("%u") % d_chatmessages).str() + "</td></tr>\n";
+	temp += std::to_string(d_chatmessages) + "</td></tr>\n";
 	temp += "<tr><td class=\"infoname\">Games started</td><td class=\"info\">";
-	temp += (boost::format("%u") % d_games.size()).str() + "</td></tr>\n";
+	temp += std::to_string(d_games.size()) + "</td></tr>\n";
 	if (!d_games.empty()) {
 		// Games information
 		temp += "</table><br><table class=\"infogames\">\n";

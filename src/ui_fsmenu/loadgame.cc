@@ -21,6 +21,7 @@
 
 #include <cstdio>
 #include <memory>
+#include <string>
 
 #include <boost/format.hpp>
 
@@ -234,16 +235,14 @@ void FullscreenMenuLoadGame::map_selected(uint32_t selected)
 		m_tamapname.set_text(_(gpdp.get_mapname()));
 	}
 
-	char buf[20];
 	uint32_t gametime = gpdp.get_gametime();
 	m_tagametime.set_text(gametimestring(gametime));
 
 	if (gpdp.get_number_of_players() > 0) {
-		sprintf(buf, "%i", gpdp.get_number_of_players());
+		m_ta_players.set_text(std::to_string(static_cast<unsigned int>(gpdp.get_number_of_players())));
 	} else {
-		sprintf(buf, "%s", _("Unknown"));
+		m_ta_players.set_text(_("Unknown"));
 	}
-	m_ta_players.set_text(buf);
 	m_ta_win_condition.set_text(gpdp.get_win_condition());
 
 	std::string minimap_path = gpdp.get_minimap_path();
@@ -346,7 +345,8 @@ void FullscreenMenuLoadGame::fill_list() {
 
 					/** TRANSLATORS: Filenames for loading games */
 					/** TRANSLATORS: month day, year hour:minute gametype – mapname */
-					/** TRANSLATORS: The mapname should always come last, because it can be longer than the space we have */
+					/** TRANSLATORS: The mapname should always come last, because it */
+					/** TRANSLATORS: can be longer than the space we have */
 					// TODO(GunChleoc): Localize this
 					displaytitle = (boost::format("%1$s %2$u, %3$u %4$u:%5$u %6$s – %7$s")
 								 % localize_month(gpdp.get_savemonth())

@@ -192,15 +192,13 @@ void EncyclopediaWindow::prod_site_selected(uint32_t) {
 					//  Make sure to detect if someone changes the type so that it
 					//  needs more than 3 decimal digits to represent.
 					static_assert(sizeof(temp_group.second) == 1, "Number is too big for 3 char string.");
-					char amount_string[4]; //  Space for 3 digits + terminator.
-					sprintf(amount_string, "%u", temp_group.second);
 
 					//  picture only of first ware type in group
 					UI::Table<uintptr_t>::EntryRecord & tableEntry =
 						condTable.add(0);
 					tableEntry.set_picture
 						(0, tribe.get_ware_descr(*ware_types.begin())->icon(), ware_type_names);
-					tableEntry.set_string (1, amount_string);
+					tableEntry.set_string(1, std::to_string(static_cast<unsigned int>(temp_group.second)));
 					condTable.set_sort_column(0);
 					condTable.sort();
 				}
