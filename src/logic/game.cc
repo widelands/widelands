@@ -532,10 +532,6 @@ bool Game::run
 		std::string fname(REPLAY_DIR);
 		fname += '/';
 		fname += timestring();
-		if (m_ctrl) {
-			fname += ' ';
-			fname += m_ctrl->get_game_description();
-		}
 		fname += REPLAY_SUFFIX;
 
 		if (m_writereplay) {

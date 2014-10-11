@@ -5,6 +5,7 @@ enhancement=deep_coalmine
 [aihints]
 mines=coal
 mines_percent=30
+prohibited_till=1200
 
 [buildcost]
 log=4

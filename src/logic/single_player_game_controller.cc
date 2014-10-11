@@ -96,9 +96,9 @@ int32_t SinglePlayerGameController::get_frametime()
 	return m_time - m_game.get_gametime();
 }
 
-std::string SinglePlayerGameController::get_game_description()
+GameController::GameType SinglePlayerGameController::get_game_type()
 {
-	return "singleplayer";
+	return GameController::GameType::SINGLEPLAYER;
 }
 
 uint32_t SinglePlayerGameController::real_speed()

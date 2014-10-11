@@ -3,7 +3,7 @@ output=beer
 enhancement=brewery
 
 [aihints]
-build_material=false
+forced_after=500
 
 [buildcost]
 log=3
