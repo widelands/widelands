@@ -106,7 +106,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 						m_minimap_w, m_minimap_h, nullptr),
 
 	// Savegame table
-	m_table(this, m_tablex, m_tabley, m_tablew, m_tableh),
+	m_table(this, m_tablex, m_tabley, m_tablew, m_tableh, true),
 
 	// "Data container" for the savegame information
 	m_game(g),
@@ -160,6 +160,9 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 								 _("Filename"), _("The filename the game was saved under"),
 								 UI::Align_Left);
 	}
+	m_table.set_column_compare
+		(0,
+		 boost::bind(&FullscreenMenuLoadGame::compare_date_descending, this, _1, _2));
 	m_table.selected.connect(boost::bind(&FullscreenMenuLoadGame::entry_selected, this));
 	m_table.double_clicked.connect(boost::bind(&FullscreenMenuLoadGame::clicked_ok, boost::ref(*this)));
 	m_table.set_sort_column(0);
@@ -172,6 +175,39 @@ void FullscreenMenuLoadGame::think()
 	if (m_ctrl) {
 		m_ctrl->think();
 	}
+}
+
+// Reverse default sort order for save date column
+bool FullscreenMenuLoadGame::compare_date_descending(uint32_t rowa, uint32_t rowb)
+{
+	const SavegameData & r1 = m_games_data[m_table[rowa]];
+	const SavegameData & r2 = m_games_data[m_table[rowb]];
+
+	bool result = false;
+
+	if(r1.saveyear > 0 && r2.saveyear > 0) {
+		if (r1.saveyear < r2.saveyear) {
+			result = true;
+		} else if (r1.saveyear == r2.saveyear) {
+			if (r1.savemonth < r2.savemonth) {
+				result = true;
+			} else if (r1.savemonth == r2.savemonth) {
+				if (r1.saveday < r2.saveday) {
+					result = true;
+				} else if (r1.saveday == r2.saveday) {
+					if (r1.savehour < r2.savehour) {
+						result = true;
+					} else if (r1.savehour == r2.savehour) {
+						result = r1.saveminute < r2.saveminute;
+					}
+				}
+			}
+		}
+	} else {
+		// Sort old savegames that don't have date information yet
+		result = r1.savedatestring.empty() ? true : r1.savedatestring < r2.savedatestring;
+	}
+	return result;
 }
 
 
@@ -361,7 +397,6 @@ void FullscreenMenuLoadGame::fill_table() {
 				gamedata->savehour = gpdp.get_savehour();
 				gamedata->saveminute = gpdp.get_saveminute();
 
-				std:: string savedatestring;
 				time_t t;
 				time(&t);
 				struct tm * datetime  = localtime(&t);
@@ -371,7 +406,7 @@ void FullscreenMenuLoadGame::fill_table() {
 
 					/** TRANSLATORS: Display date for choosing a savegame/replay */
 					/** TRANSLATORS: hour:minute */
-					savedatestring = (boost::format(_("Today, %1%:%2%"))
+					gamedata->savedatestring = (boost::format(_("Today, %1%:%2%"))
 						 % static_cast<unsigned int>(gpdp.get_savehour())
 						 % static_cast<unsigned int>(gpdp.get_saveminute())).str();
 
@@ -379,7 +414,7 @@ void FullscreenMenuLoadGame::fill_table() {
 
 					/** TRANSLATORS: Display date for choosing a savegame/replay */
 					/** TRANSLATORS: month day, year hour:minute */
-					savedatestring = (boost::format(_("%2% %1%, %3%"))
+					gamedata->savedatestring = (boost::format(_("%2% %1%, %3%"))
 						 % static_cast<unsigned int>(gpdp.get_saveday())
 						 % localize_month(gpdp.get_savemonth())
 						 % static_cast<unsigned int>(gpdp.get_saveyear())).str();
@@ -394,7 +429,7 @@ void FullscreenMenuLoadGame::fill_table() {
 
 				UI::Table<uintptr_t const>::EntryRecord & te =
 					m_table.add(m_games_data.size() - 1);
-				te.set_string(0, savedatestring);
+				te.set_string(0, gamedata->savedatestring);
 
 				if (m_is_replay) {
 					gamedata->gametype = gpdp.get_gametype();

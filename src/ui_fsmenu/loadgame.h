@@ -53,6 +53,7 @@ struct SavegameData {
 	std::string mapname;
 	std::string wincondition;
 	std::string minimap_path;
+	std::string savedatestring;
 
 	uint32_t gametime;
 	uint32_t nrplayers;
@@ -90,6 +91,7 @@ protected:
 
 
 private:
+	bool compare_date_descending(uint32_t, uint32_t);
 	void clicked_delete();
 	void no_selection();
 
