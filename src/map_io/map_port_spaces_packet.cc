@@ -19,6 +19,8 @@
 
 #include "map_io/map_port_spaces_packet.h"
 
+#include <string>
+
 #include <boost/algorithm/string.hpp>
 
 #include "base/deprecated.h"
@@ -50,11 +52,9 @@ void MapPortSpacesPacket::read
 			if (!num)
 				return;
 
-			char buf[8]; // there won't be that many port spaces... definitely!
 			Section & s2 = prof.get_safe_section("port_spaces");
 			for (uint16_t i = 0; i < num; ++i) {
-				snprintf(buf, sizeof(buf), "%u", i);
-				map.set_port_space(get_safe_coords(buf, ext, &s2), true);
+				map.set_port_space(get_safe_coords(std::to_string(static_cast<unsigned int>(i)), ext, &s2), true);
 			}
 		} else
 			throw GameDataError
@@ -95,14 +95,12 @@ void MapPortSpacesPacket::write(FileSystem & fs, EditorGameBase & egbase, MapObj
 	}
 
 	const uint16_t num = port_spaces.size();
-	char buf[8]; // there won't be that many port spaces... Definitely!
 	s1.set_int("number_of_port_spaces", num);
 
 	Section & s2 = prof.create_section("port_spaces");
 	int i = 0;
 	for (const Coords& c : port_spaces) {
-		snprintf(buf, sizeof(buf), "%u", i++);
-		set_coords(buf, c, &s2);
+		set_coords(std::to_string(i++), c, &s2);
 	}
 	prof.write("port_spaces", false, fs);
 }
