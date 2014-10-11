@@ -405,17 +405,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 
 	// Blit node information when in debug mode.
 	if (get_display_flag(dfDebug) || !dynamic_cast<const Game*>(&egbase())) {
-		// NOCOM(#codereview): Only cast when absolutely necessary. get gametime is already uint32_t?
 		const std::string gametime(gametimestring(egbase().get_gametime()));
-
-		// NOCOM(#codereview): If you use .c_str() when passing something to a
-		// function and it takes a std::string you are wasting cycles: it will
-		// get the underlying string array of the original string (c_str()), will
-		// that hand over. The compiler needs to construct a new string - it does
-		// so by looking up the length on the string (linear in time, it means
-		// searching for the 0 byte at the end) and then allocates memory for the
-		// string and copies it over. If you pass the original std::string, it is
-		// just a 8 byte pointer copy - much more efficient. tl;dr: use c_str() only when needed.
 		const std::string gametime_text = as_uifont(gametime, UI_FONT_SIZE_SMALL);
 		dst.blit(Point(5, 5), UI::g_fh1->render(gametime_text), CM_Normal, UI::Align_TopLeft);
 		static format node_format("(%i, %i)");

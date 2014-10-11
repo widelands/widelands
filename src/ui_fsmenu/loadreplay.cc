@@ -241,8 +241,6 @@ void FullscreenMenuLoadReplay::fill_list()
 			const std::string fs_filename = FileSystem::filename_without_ext(pname->c_str());
 
 			// Begin localization section
-			// NOCOM(#codereview): This seems very much the same as in loadgame.cc. Any reasons not to refactor this into a
-			// common method?
 			std::string displaytitle = fs_filename;
 			if ((is_timestring(fs_filename) || fs_filename == "wl_autosave")
 				 && gpdp.get_saveyear() > 0
