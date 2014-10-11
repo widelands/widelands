@@ -47,22 +47,25 @@ SuggestedTeamsBox::SuggestedTeamsBox(Panel * parent,
 			new UI::Textarea(this, "", UI::Align_CenterLeft);
 	add(m_suggested_teams_box_label, UI::Box::AlignLeft);
 }
+SuggestedTeamsBox::~SuggestedTeamsBox() {
+	SuggestedTeamsBox::hide();
+}
 
 void SuggestedTeamsBox::hide() {
 	// Delete former images
-	// NOCOM: Can I call a destructor on these? I want them gone.
 	for (UI::Icon* player_icon : m_player_icons) {
 		player_icon->set_icon(nullptr);
 		player_icon->set_visible(false);
 		player_icon->set_no_frame();
 	}
 	m_player_icons.clear();
+
 	// Delete vs. labels
-	// NOCOM: Can I call a destructor on these? I want them gone.
 	for (UI::Textarea* vs_label : m_vs_labels) {
 		vs_label->set_visible(false);
 	}
 	m_vs_labels.clear();
+
 	set_visible(false);
 	m_suggested_teams_box_label->set_visible(false);
 	m_suggested_teams_box_label->set_text("");

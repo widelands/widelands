@@ -39,6 +39,7 @@ struct SuggestedTeamsBox : public UI::Box {
 							int32_t padding, int32_t indent, int32_t label_height,
 							int32_t max_x = 0, int32_t max_y = 0,
 							uint32_t inner_spacing = 0);
+	~SuggestedTeamsBox();
 
 	void hide();
 	void show(const std::vector<Widelands::Map::SuggestedTeamLineup*>& suggested_teams);
