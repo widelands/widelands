@@ -912,6 +912,7 @@ void ProductionSite::train_workers(Game & game)
 
 void ProductionSite::notify_player(Game & game, uint8_t minutes)
 {
+
 	if (m_out_of_resource_delay_counter >=
 		 descr().out_of_resource_delay_attempts()) {
 		if (descr().out_of_resource_title().empty())
@@ -930,6 +931,10 @@ void ProductionSite::notify_player(Game & game, uint8_t minutes)
 				 true,
 				 minutes * 60000, 0);
 		}
+		// following sends "out of resources" messages to be picked up by AI
+		// used as a information for dismantling and upgrading mines
+		if (descr().get_ismine())
+			Notifications::publish(NoteProductionSiteOutOfResources(this, get_owner()));
 	}
 	if (m_out_of_resource_delay_counter++ >=
 		 descr().out_of_resource_delay_attempts()) {

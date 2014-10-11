@@ -3,6 +3,7 @@ output=coal
 
 [aihints]
 mines=coal
+prohibited_till=1200
 
 [buildcost]
 log=7

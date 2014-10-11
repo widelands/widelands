@@ -82,7 +82,7 @@ struct DefaultAI : ComputerPlayer {
 			name = _("Aggressive");
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
-		                             Widelands::PlayerNumber const p) const override {
+		                            Widelands::PlayerNumber const p) const override {
 			return new DefaultAI(game, p, AGGRESSIVE);
 		}
 	};
@@ -92,7 +92,7 @@ struct DefaultAI : ComputerPlayer {
 			name = _("Normal");
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
-		                             Widelands::PlayerNumber const p) const override {
+		                            Widelands::PlayerNumber const p) const override {
 			return new DefaultAI(game, p, NORMAL);
 		}
 	};
@@ -102,7 +102,7 @@ struct DefaultAI : ComputerPlayer {
 			name = _("Defensive");
 		}
 		ComputerPlayer* instantiate(Widelands::Game& game,
-		                             Widelands::PlayerNumber const p) const override {
+		                            Widelands::PlayerNumber const p) const override {
 			return new DefaultAI(game, p, DEFENSIVE);
 		}
 	};
@@ -123,13 +123,20 @@ private:
 
 	void update_productionsite_stats(int32_t);
 
+	void check_ware_necessity(BuildingObserver& bo,
+	                          bool* output_is_needed,
+	                          int16_t* max_preciousness,
+	                          int16_t* max_needed_preciousness);
+
 	bool construct_building(int32_t);
-	bool construct_roads(int32_t);
+
+	// all road management is invoked by function improve_roads()
+	// if needed it calls create_shortcut_road() with a flag from which
+	// new road should be considered (or is needed)
 	bool improve_roads(int32_t);
-
-	bool improve_transportation_ways(const Widelands::Flag&);
-	bool connect_flag_to_another_economy(const Widelands::Flag&);
-
+	bool create_shortcut_road(const Widelands::Flag&, uint16_t maxcheckradius, uint16_t minred);
+	// trying to identify roads that might be removed
+	bool dispensable_road_test(const Widelands::Road&);
 	bool check_economies();
 	bool check_productionsites(int32_t);
 	bool check_mines_(int32_t);
@@ -152,10 +159,13 @@ private:
 	void lose_immovable(const Widelands::PlayerImmovable&);
 	void gain_building(Widelands::Building&);
 	void lose_building(const Widelands::Building&);
+	void out_of_resources_site(const Widelands::ProductionSite&);
 
 	bool check_supply(const BuildingObserver&);
 
 	bool consider_attack(int32_t);
+
+	void print_land_stats();
 
 private:
 	// Variables of default AI
@@ -169,6 +179,8 @@ private:
 
 	std::vector<BuildingObserver> buildings_;
 	uint32_t num_constructionsites_;
+	uint32_t num_milit_constructionsites;
+	uint32_t num_prod_constructionsites;
 
 	std::list<Widelands::FCoords> unusable_fields;
 	std::list<BuildableField*> buildable_fields;
@@ -193,22 +205,37 @@ private:
 	int32_t next_militarysite_check_due_;
 	int32_t next_attack_consideration_due_;
 	int32_t next_helpersites_check_due_;
+	int32_t next_bf_check_due_;
 	int32_t inhibit_road_building_;
 	int32_t time_of_last_construction_;
-	int32_t next_wood_cutting_check_due_;
+	int32_t enemy_last_seen_;
 
 	uint16_t numof_warehouses_;
 
 	bool new_buildings_stop_;
+
+	// when territory is expanded for every candidate field benefits are calculated
+	// but need for water, space, mines can vary
+	// so if 255 = resource is needed, 0 = not needed
+	uint8_t resource_necessity_territory_;
+	uint8_t resource_necessity_mines_;
+	uint8_t resource_necessity_stones_;
+	uint8_t resource_necessity_water_;
+	bool resource_necessity_water_needed_;  // unless atlanteans
+
 	uint16_t unstationed_milit_buildings_;  // counts empty military buildings (ones where no soldier
 	                                        // is belogning to)
 	uint16_t military_under_constr_;
 	uint16_t military_last_dismantle_;
 	int32_t military_last_build_;  // sometimes expansions just stops, this is time of last military
 	                               // building build
+	int32_t spots_;                // sum of buildable fields
 
-	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldPossession>> field_possession_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldPossession>>
+	   field_possession_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteImmovable>> immovable_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteProductionSiteOutOfResources>>
+	   outofresource_subscriber_;
 };
 
 #endif  // end of include guard: WL_AI_DEFAULTAI_H

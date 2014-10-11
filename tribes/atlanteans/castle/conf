@@ -13,6 +13,7 @@ defeated_you_string=_Your soldiers defeated the enemy at the castle.
 expansion=true
 fighting=true
 mountain_conqueror=true
+prohibited_till=1800
 
 [buildcost]
 planks=4
