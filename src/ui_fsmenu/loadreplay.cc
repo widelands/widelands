@@ -236,8 +236,61 @@ void FullscreenMenuLoadReplay::fill_list()
 			Widelands::GameLoader gl(savename, m_game);
 			gl.preload_game(gpdp);
 
-			m_list.add
-				(FileSystem::filename_without_ext(pname->c_str()).c_str(), *pname);
+			// TODO(GunChleoc): Do something more structured with this information
+			// in the ui_fsmenu refactoring branch
+			const std::string fs_filename = FileSystem::filename_without_ext(pname->c_str());
+
+			// Begin localization section
+			std::string displaytitle = fs_filename;
+			if ((is_timestring(fs_filename) || fs_filename == "wl_autosave")
+				 && gpdp.get_saveyear() > 0
+				 && gpdp.get_savemonth() > 0
+				 && gpdp.get_saveday() > 0) {
+
+				switch (gpdp.get_gametype()) {
+					case GameController::GameType::SINGLEPLAYER:
+						/** TRANSLATORS: Gametype used in filenames for loading games */
+						displaytitle = _("Single Player");
+						break;
+					case GameController::GameType::NETHOST:
+						/** TRANSLATORS: Gametype used in filenames for loading games */
+						/** TRANSLATORS: %1% is the number of players */
+						displaytitle = (boost::format(_("Multiplayer (%1%, Host)"))
+											 % static_cast<unsigned int>(gpdp.get_number_of_players())).str();
+						break;
+					case GameController::GameType::NETCLIENT:
+						/** TRANSLATORS: Gametype used in filenames for loading games */
+						/** TRANSLATORS: %1% is the number of players */
+						displaytitle = (boost::format(_("Multiplayer (%1%)"))
+											% static_cast<unsigned int>(gpdp.get_number_of_players())).str();
+						break;
+					default:
+						// TODO(GunChleoc): Localize this
+						displaytitle = ("Unknown game type");
+				}
+
+				/** TRANSLATORS: Filenames for loading games */
+				/** TRANSLATORS: month day, year hour:minute gametype – mapname */
+				/** TRANSLATORS: The mapname should always come last, because it can be longer than the space we have */
+				// TODO(GunChleoc): Localize this
+				displaytitle = (boost::format("%1$s %2$u, %3$u %4$u:%5$u %6$s – %7$s")
+							 % localize_month(gpdp.get_savemonth())
+							 % static_cast<unsigned int>(gpdp.get_saveday())
+							 % static_cast<unsigned int>(gpdp.get_saveyear())
+							 % static_cast<unsigned int>(gpdp.get_savehour())
+							 % static_cast<unsigned int>(gpdp.get_saveminute())
+							 % displaytitle
+							 % gpdp.get_mapname()).str();
+
+				if (fs_filename == "wl_autosave") {
+					/** TRANSLATORS: Used in filenames for loading games */
+					// TODO(GunChleoc): Localize this
+					displaytitle = (boost::format(("Autosave: %1%")) % displaytitle).str();
+				}
+			}
+			// End localization section
+
+			m_list.add(displaytitle.c_str(), *pname);
 		} catch (const WException &) {} //  we simply skip illegal entries
 	}
 
