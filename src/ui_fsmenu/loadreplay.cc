@@ -271,7 +271,8 @@ void FullscreenMenuLoadReplay::fill_list()
 
 				/** TRANSLATORS: Filenames for loading games */
 				/** TRANSLATORS: month day, year hour:minute gametype – mapname */
-				/** TRANSLATORS: The mapname should always come last, because it can be longer than the space we have */
+				/** TRANSLATORS: The mapname should always come last, because it */
+				/** TRANSLATORS: can be longer than the space we have */
 				// TODO(GunChleoc): Localize this
 				displaytitle = (boost::format("%1$s %2$u, %3$u %4$u:%5$u %6$s – %7$s")
 							 % localize_month(gpdp.get_savemonth())
