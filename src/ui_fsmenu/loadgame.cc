@@ -313,10 +313,10 @@ void FullscreenMenuLoadGame::fill_list() {
 
 				// TODO(GunChleoc): Do something more structured with this information
 				// in the ui_fsmenu refactoring branch
-				std::string fs_filename = FileSystem::filename_without_ext(name);
+				const std::string fs_filename = FileSystem::filename_without_ext(name);
 
 				// Begin localization section
-				std::string displaytitle;
+				std::string displaytitle = fs_filename;
 				if ((is_timestring(fs_filename) || fs_filename == "wl_autosave")
 					 && gpdp.get_saveyear() > 0
 					 && gpdp.get_savemonth() > 0
@@ -362,8 +362,6 @@ void FullscreenMenuLoadGame::fill_list() {
 						// TODO(GunChleoc): Localize this
 						displaytitle = (boost::format(("Autosave: %1%")) % displaytitle).str();
 					}
-				} else {
-					displaytitle = fs_filename;
 				}
 				// End localization section
 

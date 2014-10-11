@@ -137,7 +137,7 @@ bool is_timestring(const std::string& timestring) {
 	return boost::regex_match(timestring, re);
 }
 
-char * gametimestring_leading_zeros(uint32_t gametime)
+char * gamestring_with_leading_zeros(uint32_t gametime)
 {
 	uint32_t time = gametime / 1000;
 	gamestringbuffer[8] = '0' +  time        % 10;
@@ -153,7 +153,7 @@ char * gametimestring_leading_zeros(uint32_t gametime)
 std::string gametimestring(uint32_t gametime)
 {
 	// update buffer
-	std::string result = gametimestring_leading_zeros(gametime);
+	std::string result = gamestring_with_leading_zeros(gametime);
 
 	// remove leading 0s
 	int i = 0;

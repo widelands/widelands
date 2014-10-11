@@ -205,7 +205,7 @@ void GameMessageMenu::update_record
 	er.set_string(ColTitle, message.title());
 
 	const uint32_t time = message.sent();
-	er.set_string(ColTimeSent, gametimestring_leading_zeros(time));
+	er.set_string(ColTimeSent, gamestring_with_leading_zeros(time));
 }
 
 /*

@@ -238,10 +238,12 @@ void FullscreenMenuLoadReplay::fill_list()
 
 			// TODO(GunChleoc): Do something more structured with this information
 			// in the ui_fsmenu refactoring branch
-			std::string fs_filename = FileSystem::filename_without_ext(pname->c_str());
+			const std::string fs_filename = FileSystem::filename_without_ext(pname->c_str());
 
 			// Begin localization section
-			std::string displaytitle;
+			// NOCOM(#codereview): This seems very much the same as in loadgame.cc. Any reasons not to refactor this into a
+			// common method?
+			std::string displaytitle = fs_filename;
 			if ((is_timestring(fs_filename) || fs_filename == "wl_autosave")
 				 && gpdp.get_saveyear() > 0
 				 && gpdp.get_savemonth() > 0
@@ -287,8 +289,6 @@ void FullscreenMenuLoadReplay::fill_list()
 					// TODO(GunChleoc): Localize this
 					displaytitle = (boost::format(("Autosave: %1%")) % displaytitle).str();
 				}
-			} else {
-				displaytitle = fs_filename;
 			}
 			// End localization section
 
