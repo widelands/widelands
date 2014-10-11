@@ -19,8 +19,12 @@
 
 #include "game_io/game_preload_packet.h"
 
+#include <ctime>
 #include <memory>
 
+#include <boost/format.hpp>
+
+#include "base/time_string.h"
 #include "graphic/graphic.h"
 #include "graphic/in_memory_image.h"
 #include "graphic/minimap_renderer.h"
@@ -45,7 +49,7 @@ namespace Widelands {
 #define MINIMAP_FILENAME "minimap.png"
 
 
-void GamePreloadPacket::Read
+void GamePreloadPacket::read
 	(FileSystem & fs, Game &, MapObjectLoader * const)
 {
 	try {
@@ -62,9 +66,15 @@ void GamePreloadPacket::Read
 			m_player_nr = s.get_safe_int("player_nr");
 			m_win_condition = s.get_safe_string("win_condition");
 			m_number_of_players = s.get_safe_int(PLAYERS_AMOUNT_KEY_V4);
-			if (fs.FileExists(MINIMAP_FILENAME)) {
+			if (fs.file_exists(MINIMAP_FILENAME)) {
 				m_minimap_path = MINIMAP_FILENAME;
 			}
+			m_saveyear = s.get_int("saveyear");
+			m_savemonth = s.get_int("savemonth");
+			m_saveday = s.get_int("saveday");
+			m_savehour = s.get_int("savehour");
+			m_saveminute = s.get_int("saveminute");
+			m_gametype = static_cast<GameController::GameType>(s.get_natural("gametype"));
 		} else {
 			throw GameDataError
 				("unknown/unhandled version %i", packet_version);
@@ -75,7 +85,7 @@ void GamePreloadPacket::Read
 }
 
 
-void GamePreloadPacket::Write
+void GamePreloadPacket::write
 	(FileSystem & fs, Game & game, MapObjectSaver * const)
 {
 
@@ -107,6 +117,17 @@ void GamePreloadPacket::Write
 
 	s.set_string("background", map.get_background());
 	s.set_string("win_condition", game.get_win_condition_displayname());
+
+	time_t t;
+	time(&t);
+	struct tm * datetime  = localtime(&t);
+	s.set_int("saveyear", 1900 + datetime->tm_year); //  years start at 1900
+	s.set_int("savemonth", 1 + datetime->tm_mon); //  months start at 0
+	s.set_int("saveday", datetime->tm_mday);
+	s.set_int("savehour", datetime->tm_hour);
+	s.set_int("saveminute", datetime->tm_min);
+	s.set_int("gametype", static_cast<int32_t>(game.game_controller()->get_game_type()));
+
 	prof.write("preload", false, fs);
 
 	// Write minimap image
@@ -116,12 +137,13 @@ void GamePreloadPacket::Write
 	if (ipl != nullptr) {
 		const MiniMapLayer flags = MiniMapLayer::Owner | MiniMapLayer::Building | MiniMapLayer::Terrain;
 		const Point& vp = ipl->get_viewpoint();
-		std::unique_ptr< ::StreamWrite> sw(fs.OpenStreamWrite(MINIMAP_FILENAME));
+		std::unique_ptr< ::StreamWrite> sw(fs.open_stream_write(MINIMAP_FILENAME));
 		if (sw.get() != nullptr) {
 			write_minimap_image(game, &ipl->player(), vp, flags, sw.get());
-			sw->Flush();
+			sw->flush();
 		}
 	}
+
 }
 
 }

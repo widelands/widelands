@@ -407,7 +407,7 @@ int do_get_soldiers(lua_State* L, const Widelands::SoldierControl& sc, const Tri
 	if (lua_gettop(L) != 2)
 		report_error(L, "Invalid arguments!");
 
-	const SoldiersList soldiers = sc.stationedSoldiers();
+	const SoldiersList soldiers = sc.stationed_soldiers();
 	if (lua_isstring(L, -1)) {
 		if (std::string(luaL_checkstring(L, -1)) != "all")
 			report_error(L, "Invalid arguments!");
@@ -475,7 +475,7 @@ int do_set_soldiers
 	SoldiersMap setpoints = m_parse_set_soldiers_arguments(L, soldier_descr);
 
 	// Get information about current soldiers
-	const std::vector<Soldier*> curs = sc->stationedSoldiers();
+	const std::vector<Soldier*> curs = sc->stationed_soldiers();
 	SoldiersMap hist;
 	for (const Soldier* s : curs) {
 		SoldierMapDescr sd
@@ -502,13 +502,13 @@ int do_set_soldiers
 		int d = sp.second - cur;
 		if (d < 0) {
 			while (d) {
-				for (Soldier* s : sc->stationedSoldiers()) {
+				for (Soldier* s : sc->stationed_soldiers()) {
 					SoldierMapDescr is
 						(s->get_hp_level(), s->get_attack_level(),
 						 s->get_defense_level(), s->get_evade_level());
 
 					if (is == sp.first) {
-						sc->outcorporateSoldier(egbase, *s);
+						sc->outcorporate_soldier(egbase, *s);
 						s->remove(egbase);
 						++d;
 						break;
@@ -521,7 +521,7 @@ int do_set_soldiers
 					(soldier_descr.create(egbase, *owner, nullptr, building_position));
 				soldier.set_level
 					(sp.first.hp, sp.first.at, sp.first.de, sp.first.ev);
-				if (sc->incorporateSoldier(egbase, soldier)) {
+				if (sc->incorporate_soldier(egbase, soldier)) {
 					soldier.remove(egbase);
 					report_error(L, "No space left for soldier!");
 				}
@@ -1338,7 +1338,7 @@ int LuaBuildingDescription::get_workarea_radius(lua_State * L) {
 
 /* RST
 ConstructionSiteDescription
-----------
+---------------------------
 
 .. class:: ConstructionSiteDescription
 
@@ -3027,7 +3027,7 @@ const PropertyType<LuaMilitarySite> LuaMilitarySite::Properties[] = {
 
 // documented in parent class
 int LuaMilitarySite::get_max_soldiers(lua_State* L) {
-	lua_pushuint32(L, get(L, get_egbase(L))->soldierCapacity());
+	lua_pushuint32(L, get(L, get_egbase(L))->soldier_capacity());
 	return 1;
 }
 
@@ -3084,7 +3084,7 @@ const PropertyType<LuaTrainingSite> LuaTrainingSite::Properties[] = {
 
 // documented in parent class
 int LuaTrainingSite::get_max_soldiers(lua_State* L) {
-	lua_pushuint32(L, get(L, get_egbase(L))->soldierCapacity());
+	lua_pushuint32(L, get(L, get_egbase(L))->soldier_capacity());
 	return 1;
 }
 

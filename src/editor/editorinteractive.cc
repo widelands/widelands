@@ -244,7 +244,7 @@ void EditorInteractive::think() {
 	m_realtime = WLApplication::get()->get_time();
 	frametime = m_realtime - lasttime;
 
-	egbase().get_game_time_pointer() += frametime;
+	egbase().get_gametime_pointer() += frametime;
 
 	g_gr->animate_maptextures(egbase().get_gametime());
 }

@@ -2,7 +2,8 @@ size=medium
 output=planks
 
 [aihints]
-is_basic=true
+forced_after=300
+prohibited_till=60
 
 [buildcost]
 log=2

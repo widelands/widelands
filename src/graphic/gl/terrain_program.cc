@@ -120,7 +120,7 @@ void TerrainProgram::gl_draw(int num_vertices,
 		}
 		glBindTexture(
 		   GL_TEXTURE_2D,
-		   g_gr->get_maptexture_data(terrains.get_unmutable(i).get_texture())->getTexture());
+		   g_gr->get_maptexture_data(terrains.get_unmutable(i).get_texture())->get_texture());
 		glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, indices.data());
 	}
 

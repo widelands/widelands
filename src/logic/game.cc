@@ -79,23 +79,23 @@ Game::SyncWrapper::~SyncWrapper() {
 		m_dump = nullptr;
 
 		if (!m_syncstreamsave)
-			g_fs->Unlink(m_dumpfname);
+			g_fs->fs_unlink(m_dumpfname);
 	}
 }
 
-void Game::SyncWrapper::StartDump(const std::string & fname) {
+void Game::SyncWrapper::start_dump(const std::string & fname) {
 	m_dumpfname = fname + ".wss";
-	m_dump = g_fs->OpenStreamWrite(m_dumpfname);
+	m_dump = g_fs->open_stream_write(m_dumpfname);
 }
 
 static const unsigned long long MINIMUM_DISK_SPACE = 256 * 1024 * 1024;
 
-void Game::SyncWrapper::Data(void const * const data, size_t const size) {
+void Game::SyncWrapper::data(void const * const sync_data, size_t const size) {
 #ifdef SYNC_DEBUG
 	uint32_t time = m_game.get_gametime();
 	log("[sync:%08u t=%6u]", m_counter, time);
 	for (size_t i = 0; i < size; ++i)
-		log(" %02x", (static_cast<uint8_t const *>(data))[i]);
+		log(" %02x", (static_cast<uint8_t const *>(sync_data))[i]);
 	log("\n");
 #endif
 
@@ -105,7 +105,7 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 	{
 		m_next_diskspacecheck = m_counter + 16 * 1024 * 1024;
 
-		if (g_fs->DiskSpace() < MINIMUM_DISK_SPACE) {
+		if (g_fs->disk_space() < MINIMUM_DISK_SPACE) {
 			log("Stop writing to syncstream file: disk is getting full.\n");
 			delete m_dump;
 			m_dump = nullptr;
@@ -114,7 +114,7 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 
 	if (m_dump) {
 		try {
-			m_dump->Data(data, size);
+			m_dump->data(sync_data, size);
 		} catch (const WException &) {
 			log
 				("Writing to syncstream file %s failed. Stop synctream dump.\n",
@@ -125,7 +125,7 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 		}
 	}
 
-	m_target.Data(data, size);
+	m_target.data(sync_data, size);
 	m_counter += size;
 }
 
@@ -149,7 +149,7 @@ Game::~Game()
 }
 
 
-void Game::SyncReset() {
+void Game::sync_reset() {
 	m_syncwrapper.m_counter = 0;
 
 	m_synchash.Reset();
@@ -181,7 +181,7 @@ void Game::set_game_controller(GameController * const ctrl)
 	m_ctrl = ctrl;
 }
 
-GameController * Game::gameController()
+GameController * Game::game_controller()
 {
 	return m_ctrl;
 }
@@ -241,7 +241,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 			 0,
 			 map().get_scenario_player_tribe(p),
 			 map().get_scenario_player_name (p));
-		get_player(p)->setAI(map().get_scenario_player_ai(p));
+		get_player(p)->set_ai(map().get_scenario_player_ai(p));
 	}
 	m_win_condition_displayname = _("Scenario");
 
@@ -313,7 +313,7 @@ void Game::init_newgame
 			 playersettings.tribe,
 			 playersettings.name,
 			 playersettings.team);
-		get_player(i + 1)->setAI(playersettings.ai);
+		get_player(i + 1)->set_ai(playersettings.ai);
 	}
 
 	// Add shared in starting positions
@@ -504,7 +504,7 @@ bool Game::run
 			const std::string                                              no_name;
 			const std::string & player_tribe = plr ? plr->tribe().name() : no_name;
 			const std::string & player_name  = plr ? plr->    get_name() : no_name;
-			const std::string & player_ai    = plr ? plr->    getAI()    : no_name;
+			const std::string & player_ai    = plr ? plr->    get_ai()    : no_name;
 			map().set_scenario_player_tribe    (p, player_tribe);
 			map().set_scenario_player_name     (p, player_name);
 			map().set_scenario_player_ai       (p, player_ai);
@@ -531,10 +531,6 @@ bool Game::run
 		std::string fname(REPLAY_DIR);
 		fname += '/';
 		fname += timestring();
-		if (m_ctrl) {
-			fname += ' ';
-			fname += m_ctrl->getGameDescription();
-		}
 		fname += REPLAY_SUFFIX;
 
 		if (m_writereplay) {
@@ -547,10 +543,10 @@ bool Game::run
 		}
 
 		if (m_writesyncstream)
-			m_syncwrapper.StartDump(fname);
+			m_syncwrapper.start_dump(fname);
 	}
 
-	SyncReset();
+	sync_reset();
 
 	if (loader_ui) {
 		load_graphics(*loader_ui);
@@ -614,7 +610,7 @@ void Game::think()
 		// computer and the fps if and when the game is saved - this is very bad
 		// for scenarios and even worse for the regression suite (which relies on
 		// the timings of savings.
-		cmdqueue().run_queue(m_ctrl->getFrametime(), get_game_time_pointer());
+		cmdqueue().run_queue(m_ctrl->get_frametime(), get_gametime_pointer());
 
 		if (g_gr) // not in dedicated server mode
 			g_gr->animate_maptextures(get_gametime());
@@ -681,8 +677,8 @@ Md5Checksum Game::get_sync_hash() const
 {
 	MD5Checksum<StreamWrite> copy(m_synchash);
 
-	copy.FinishChecksum();
-	return copy.GetChecksum();
+	copy.finish_checksum();
+	return copy.get_checksum();
 }
 
 
@@ -695,7 +691,7 @@ Md5Checksum Game::get_sync_hash() const
 uint32_t Game::logic_rand()
 {
 	uint32_t const result = rng().rand();
-	syncstream().Unsigned32(result);
+	syncstream().unsigned_32(result);
 	return result;
 }
 
@@ -707,7 +703,7 @@ uint32_t Game::logic_rand()
  */
 void Game::send_player_command (PlayerCommand & pc)
 {
-	m_ctrl->sendPlayerCommand(pc);
+	m_ctrl->send_player_command(pc);
 }
 
 
@@ -723,7 +719,7 @@ void Game::enqueue_command (Command * const cmd)
 {
 	if (m_writereplay && m_replaywriter) {
 		if (upcast(PlayerCommand, plcmd, cmd)) {
-			m_replaywriter->SendPlayerCommand(plcmd);
+			m_replaywriter->send_player_command(plcmd);
 		}
 	}
 	cmdqueue().enqueue(cmd);
@@ -1070,13 +1066,13 @@ void Game::sample_statistics()
  *   is 4, support for older versions (used in widelands build <= 12) was
  *   dropped after the release of build 15
  */
-void Game::ReadStatistics(FileRead & fr, uint32_t const version)
+void Game::read_statistics(FileRead & fr, uint32_t const version)
 {
 	if (version >= 3) {
-		fr.Unsigned32(); // used to be last stats update time
+		fr.unsigned_32(); // used to be last stats update time
 
 		// Read general statistics
-		uint32_t entries = fr.Unsigned16();
+		uint32_t entries = fr.unsigned_16();
 		const PlayerNumber nr_players = map().get_nrplayers();
 		m_general_stats.resize(nr_players);
 
@@ -1099,20 +1095,20 @@ void Game::ReadStatistics(FileRead & fr, uint32_t const version)
 		iterate_players_existing_novar(p, nr_players, *this)
 			for (uint32_t j = 0; j < m_general_stats[p - 1].land_size.size(); ++j)
 			{
-				m_general_stats[p - 1].land_size       [j] = fr.Unsigned32();
-				m_general_stats[p - 1].nr_workers      [j] = fr.Unsigned32();
-				m_general_stats[p - 1].nr_buildings    [j] = fr.Unsigned32();
-				m_general_stats[p - 1].nr_wares        [j] = fr.Unsigned32();
-				m_general_stats[p - 1].productivity    [j] = fr.Unsigned32();
-				m_general_stats[p - 1].nr_casualties   [j] = fr.Unsigned32();
-				m_general_stats[p - 1].nr_kills        [j] = fr.Unsigned32();
-				m_general_stats[p - 1].nr_msites_lost        [j] = fr.Unsigned32();
-				m_general_stats[p - 1].nr_msites_defeated    [j] = fr.Unsigned32();
-				m_general_stats[p - 1].nr_civil_blds_lost    [j] = fr.Unsigned32();
-				m_general_stats[p - 1].nr_civil_blds_defeated[j] = fr.Unsigned32();
-				m_general_stats[p - 1].miltary_strength[j] = fr.Unsigned32();
+				m_general_stats[p - 1].land_size       [j] = fr.unsigned_32();
+				m_general_stats[p - 1].nr_workers      [j] = fr.unsigned_32();
+				m_general_stats[p - 1].nr_buildings    [j] = fr.unsigned_32();
+				m_general_stats[p - 1].nr_wares        [j] = fr.unsigned_32();
+				m_general_stats[p - 1].productivity    [j] = fr.unsigned_32();
+				m_general_stats[p - 1].nr_casualties   [j] = fr.unsigned_32();
+				m_general_stats[p - 1].nr_kills        [j] = fr.unsigned_32();
+				m_general_stats[p - 1].nr_msites_lost        [j] = fr.unsigned_32();
+				m_general_stats[p - 1].nr_msites_defeated    [j] = fr.unsigned_32();
+				m_general_stats[p - 1].nr_civil_blds_lost    [j] = fr.unsigned_32();
+				m_general_stats[p - 1].nr_civil_blds_defeated[j] = fr.unsigned_32();
+				m_general_stats[p - 1].miltary_strength[j] = fr.unsigned_32();
 				if (version == 4)
-					m_general_stats[p - 1].custom_statistic[j] = fr.Unsigned32();
+					m_general_stats[p - 1].custom_statistic[j] = fr.unsigned_32();
 			}
 	} else
 		throw wexception("Unsupported version %i", version);
@@ -1122,9 +1118,9 @@ void Game::ReadStatistics(FileRead & fr, uint32_t const version)
 /**
  * Write general statistics to the given file.
  */
-void Game::WriteStatistics(FileWrite & fw)
+void Game::write_statistics(FileWrite & fw)
 {
-	fw.Unsigned32(0); // Used to be last stats update time. No longer needed
+	fw.unsigned_32(0); // Used to be last stats update time. No longer needed
 
 	// General statistics
 	// First, we write the size of the statistics arrays
@@ -1137,23 +1133,23 @@ void Game::WriteStatistics(FileWrite & fw)
 			break;
 		}
 
-	fw.Unsigned16(entries);
+	fw.unsigned_16(entries);
 
 	iterate_players_existing_novar(p, nr_players, *this)
 		for (uint32_t j = 0; j < entries; ++j) {
-			fw.Unsigned32(m_general_stats[p - 1].land_size       [j]);
-			fw.Unsigned32(m_general_stats[p - 1].nr_workers      [j]);
-			fw.Unsigned32(m_general_stats[p - 1].nr_buildings    [j]);
-			fw.Unsigned32(m_general_stats[p - 1].nr_wares        [j]);
-			fw.Unsigned32(m_general_stats[p - 1].productivity    [j]);
-			fw.Unsigned32(m_general_stats[p - 1].nr_casualties   [j]);
-			fw.Unsigned32(m_general_stats[p - 1].nr_kills        [j]);
-			fw.Unsigned32(m_general_stats[p - 1].nr_msites_lost        [j]);
-			fw.Unsigned32(m_general_stats[p - 1].nr_msites_defeated    [j]);
-			fw.Unsigned32(m_general_stats[p - 1].nr_civil_blds_lost    [j]);
-			fw.Unsigned32(m_general_stats[p - 1].nr_civil_blds_defeated[j]);
-			fw.Unsigned32(m_general_stats[p - 1].miltary_strength[j]);
-			fw.Unsigned32(m_general_stats[p - 1].custom_statistic[j]);
+			fw.unsigned_32(m_general_stats[p - 1].land_size       [j]);
+			fw.unsigned_32(m_general_stats[p - 1].nr_workers      [j]);
+			fw.unsigned_32(m_general_stats[p - 1].nr_buildings    [j]);
+			fw.unsigned_32(m_general_stats[p - 1].nr_wares        [j]);
+			fw.unsigned_32(m_general_stats[p - 1].productivity    [j]);
+			fw.unsigned_32(m_general_stats[p - 1].nr_casualties   [j]);
+			fw.unsigned_32(m_general_stats[p - 1].nr_kills        [j]);
+			fw.unsigned_32(m_general_stats[p - 1].nr_msites_lost        [j]);
+			fw.unsigned_32(m_general_stats[p - 1].nr_msites_defeated    [j]);
+			fw.unsigned_32(m_general_stats[p - 1].nr_civil_blds_lost    [j]);
+			fw.unsigned_32(m_general_stats[p - 1].nr_civil_blds_defeated[j]);
+			fw.unsigned_32(m_general_stats[p - 1].miltary_strength[j]);
+			fw.unsigned_32(m_general_stats[p - 1].custom_statistic[j]);
 		}
 }
 

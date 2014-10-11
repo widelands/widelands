@@ -25,15 +25,18 @@
 
 #include "game_io/game_data_packet.h"
 
+#include "logic/game_controller.h"
+
 namespace Widelands {
 
 /**
  * This contains all the preload data needed to identify
  * a game for a user (for example in a listbox)
  */
+
 struct GamePreloadPacket : public GameDataPacket {
-	void Read (FileSystem &, Game &, MapObjectLoader * = nullptr) override;
-	void Write(FileSystem &, Game &, MapObjectSaver  * = nullptr) override;
+	void read (FileSystem &, Game &, MapObjectLoader * = nullptr) override;
+	void write(FileSystem &, Game &, MapObjectSaver  * = nullptr) override;
 
 	char const * get_mapname()      {return m_mapname.c_str();}
 	std::string get_background()    {return m_background;}
@@ -44,6 +47,13 @@ struct GamePreloadPacket : public GameDataPacket {
 	uint8_t get_number_of_players() {return m_number_of_players;}
 	std::string get_minimap_path() {return m_minimap_path;}
 
+	uint16_t get_saveyear() {return m_saveyear;}
+	uint8_t get_savemonth() {return m_savemonth;}
+	uint8_t get_saveday() {return m_saveday;}
+	uint8_t get_savehour() {return m_savehour;}
+	uint8_t get_saveminute() {return m_saveminute;}
+	GameController::GameType get_gametype() {return m_gametype;}
+
 private:
 	std::string m_minimap_path;
 	std::string m_mapname;
@@ -52,6 +62,12 @@ private:
 	uint32_t m_gametime;
 	uint8_t  m_player_nr; // The local player idx
 	uint8_t  m_number_of_players;
+	uint16_t m_saveyear;
+	uint8_t  m_savemonth;
+	uint8_t  m_saveday;
+	uint8_t  m_savehour;
+	uint8_t  m_saveminute;
+	GameController::GameType m_gametype;
 };
 
 }

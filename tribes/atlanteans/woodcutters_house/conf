@@ -2,8 +2,8 @@ size=small
 output=log
 
 [aihints]
-is_basic=true
 logproducer=true
+forced_after=0
 
 [buildcost]
 log=2

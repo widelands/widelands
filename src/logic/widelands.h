@@ -36,7 +36,7 @@ using TribeIndex = uint8_t;
 using MilitaryInfluence = uint16_t;
 
 using PlayerNumber = uint8_t; /// 5 bits used, so 0 .. 31
-inline PlayerNumber Neutral() {return 0;}
+inline PlayerNumber neutral() {return 0;}
 #define iterate_player_numbers(p, nr_players) \
 	for (Widelands::PlayerNumber p = 1; p < nr_players + 1; ++p)
 
@@ -55,10 +55,10 @@ using ResourceAmount = uint8_t; /// 4 bits used, so 0 .. 15.
 using Vision = uint16_t;
 
 using Time = int32_t; // TODO(unknown): should be unsigned
-inline Time Never() {return 0xffffffff;}
+inline Time never() {return 0xffffffff;}
 
 using Duration = uint32_t;
-inline Duration Forever() {return 0xffffffff;}
+inline Duration endless() {return 0xffffffff;}
 
 using Serial = uint32_t; /// Serial number for MapObject.
 

@@ -718,9 +718,9 @@ void Economy::_process_requests(Game & game, RSPairStruct & s)
 		// alerts, so add info to the sync stream here.
 		{
 			::StreamWrite & ss = game.syncstream();
-			ss.Unsigned8 (req.get_type  ());
-			ss.Unsigned8 (req.get_index ());
-			ss.Unsigned32(req.target    ().serial());
+			ss.unsigned_8 (req.get_type  ());
+			ss.unsigned_8 (req.get_index ());
+			ss.unsigned_32(req.target    ().serial());
 		}
 
 		int32_t cost; // estimated time in milliseconds to fulfill Request
@@ -1017,12 +1017,12 @@ void Economy::_handle_active_supplies(Game & game)
 	// to avoid potential future problems caused by the m_supplies changing
 	// under us in some way.
 	::StreamWrite & ss = game.syncstream();
-	ss.Unsigned32(0x02decafa); // appears as facade02 in sync stream
-	ss.Unsigned32(assignments.size());
+	ss.unsigned_32(0x02decafa); // appears as facade02 in sync stream
+	ss.unsigned_32(assignments.size());
 
 	for (const std::pair<Supply *, Warehouse *>& temp_assignment : assignments) {
-		ss.Unsigned32(temp_assignment.first->get_position(game)->serial());
-		ss.Unsigned32(temp_assignment.second->serial());
+		ss.unsigned_32(temp_assignment.first->get_position(game)->serial());
+		ss.unsigned_32(temp_assignment.second->serial());
 
 		temp_assignment.first->send_to_storage(game, temp_assignment.second);
 	}

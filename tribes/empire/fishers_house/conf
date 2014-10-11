@@ -2,8 +2,8 @@ size=small
 output=fish
 
 [aihints]
-build_material=false
 needs_water=true
+prohibited_till=600
 
 [buildcost]
 log=1

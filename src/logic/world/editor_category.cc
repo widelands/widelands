@@ -30,7 +30,7 @@ EditorCategory::EditorCategory(const LuaTable& table)
    : name_(table.get_string("name")),
      descname_(table.get_string("descname")),
      image_file_(table.get_string("picture")) {
-	if (!g_fs->FileExists(image_file_)) {
+	if (!g_fs->file_exists(image_file_)) {
 		throw GameDataError("EditorCategory %s has non-existing \"picture\".", name_.c_str());
 	}
 }

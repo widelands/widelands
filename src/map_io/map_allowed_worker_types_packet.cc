@@ -30,7 +30,7 @@ namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 1
 
-void MapAllowedWorkerTypesPacket::Read
+void MapAllowedWorkerTypesPacket::read
 	(FileSystem            &       fs,
 	 EditorGameBase      &       egbase,
 	 bool                    skip,
@@ -82,7 +82,7 @@ void MapAllowedWorkerTypesPacket::Read
 }
 
 
-void MapAllowedWorkerTypesPacket::Write
+void MapAllowedWorkerTypesPacket::write
 	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver &)
 {
 	Profile prof;

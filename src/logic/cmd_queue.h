@@ -110,9 +110,9 @@ struct GameLogicCommand : public Command {
 	GameLogicCommand (int32_t const _duetime) : Command(_duetime) {}
 
 	// Write these commands to a file (for savegames)
-	virtual void Write
+	virtual void write
 		(FileWrite &, EditorGameBase &, MapObjectSaver  &);
-	virtual void Read
+	virtual void read
 		(FileRead  &, EditorGameBase &, MapObjectLoader &);
 };
 

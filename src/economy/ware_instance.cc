@@ -557,9 +557,9 @@ void WareInstance::Loader::load(FileRead & fr)
 	MapObject::Loader::load(fr);
 
 	WareInstance & ware = get<WareInstance>();
-	m_location = fr.Unsigned32();
-	m_transfer_nextstep = fr.Unsigned32();
-	if (fr.Unsigned8()) {
+	m_location = fr.unsigned_32();
+	m_transfer_nextstep = fr.unsigned_32();
+	if (fr.unsigned_8()) {
 		ware.m_transfer =
 			new Transfer(ref_cast<Game, EditorGameBase>(egbase()), ware);
 		ware.m_transfer->read(fr, m_transfer);
@@ -598,21 +598,21 @@ void WareInstance::Loader::load_finish()
 void WareInstance::save
 	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(HeaderWareInstance);
-	fw.Unsigned8(WAREINSTANCE_SAVEGAME_VERSION);
-	fw.CString(descr().tribe().name());
-	fw.CString(descr().name());
+	fw.unsigned_8(HeaderWareInstance);
+	fw.unsigned_8(WAREINSTANCE_SAVEGAME_VERSION);
+	fw.c_string(descr().tribe().name());
+	fw.c_string(descr().name());
 
 	MapObject::save(egbase, mos, fw);
 
-	fw.Unsigned32(mos.get_object_file_index_or_zero(m_location.get(egbase)));
-	fw.Unsigned32
+	fw.unsigned_32(mos.get_object_file_index_or_zero(m_location.get(egbase)));
+	fw.unsigned_32
 		(mos.get_object_file_index_or_zero(m_transfer_nextstep.get(egbase)));
 	if (m_transfer) {
-		fw.Unsigned8(1);
+		fw.unsigned_8(1);
 		m_transfer->write(mos, fw);
 	} else {
-		fw.Unsigned8(0);
+		fw.unsigned_8(0);
 	}
 }
 
@@ -620,13 +620,13 @@ MapObject::Loader * WareInstance::load
 	(EditorGameBase & egbase, MapObjectLoader & mol, FileRead & fr)
 {
 	try {
-		uint8_t version = fr.Unsigned8();
+		uint8_t version = fr.unsigned_8();
 
 		if (version != WAREINSTANCE_SAVEGAME_VERSION)
 			throw wexception("unknown/unhandled version %i", version);
 
-		const std::string tribename = fr.CString();
-		const std::string warename = fr.CString();
+		const std::string tribename = fr.c_string();
+		const std::string warename = fr.c_string();
 
 		egbase.manually_load_tribe(tribename);
 

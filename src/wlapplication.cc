@@ -109,97 +109,6 @@ void terminate(int) {
 
 }  // namespace
 
-
-/**
- * Sets the filelocators default searchpaths (partly OS specific)
- */
-// TODO(unknown): Handle exception FileTypeError
-// TODO(unknown): Handle case when \e no data can be found
-void WLApplication::setup_searchpaths(std::string argv0)
-{
-	try {
-#if defined (__APPLE__) || defined(_WIN32)
-		// on mac and windows, the default data dir is relative to the executable directory
-		std::string s = get_executable_path();
-		log("Adding executable directory to search path\n");
-		g_fs->AddFileSystem(&FileSystem::Create(s));
-#else
-		log ("Adding directory:%s\n", INSTALL_PREFIX "/" INSTALL_DATADIR);
-		g_fs->AddFileSystem //  see config.h
-			(&FileSystem::Create
-			 	(std::string(INSTALL_PREFIX) + '/' + INSTALL_DATADIR));
-#endif
-	}
-	catch (FileNotFoundError &) {}
-	catch (FileAccessDeniedError & e) {
-		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
-	}
-	catch (FileTypeError &) {
-		//TODO(unknown): handle me
-	}
-
-	try {
-#ifdef __linux__
-		// if that fails, search in FHS standard location (obviously UNIX-only)
-		log ("Adding directory:/usr/share/games/widelands\n");
-		g_fs->AddFileSystem(&FileSystem::Create("/usr/share/games/widelands"));
-#endif
-	}
-	catch (FileNotFoundError &) {}
-	catch (FileAccessDeniedError & e) {
-		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
-	}
-	catch (FileTypeError &) {
-		//TODO(unknown): handle me
-	}
-
-	try {
-#ifndef __APPLE__
-		/*
-		 * Why? Please do NOT attempt do read from random places.
-		 * absolute fallback directory is the CWD
-		 */
-		log ("Adding directory:.\n");
-		g_fs->AddFileSystem(&FileSystem::Create("."));
-#endif
-	}
-	catch (FileNotFoundError &) {}
-	catch (FileAccessDeniedError & e) {
-		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
-	}
-	catch (FileTypeError &) {
-		//TODO(unknown): handle me
-	}
-
-	//TODO(unknown): what if all the searching failed? Bail out!
-
-	// the directory the executable is in is the default game data directory
-	std::string::size_type slash = argv0.rfind('/');
-	std::string::size_type backslash = argv0.rfind('\\');
-
-	if
-		(backslash != std::string::npos &&
-		 (slash == std::string::npos || backslash > slash))
-		slash = backslash;
-
-	if (slash != std::string::npos) {
-		argv0.erase(slash);
-		if (argv0 != ".") {
-			try {
-				log ("Adding directory: %s\n", argv0.c_str());
-				g_fs->AddFileSystem(&FileSystem::Create(argv0));
-			}
-			catch (FileNotFoundError &) {}
-			catch (FileAccessDeniedError & e) {
-				log ("Access denied on %s. Continuing.\n", e.m_filename.c_str());
-			}
-			catch (FileTypeError &) {
-				//TODO(unknown): handle me
-			}
-		}
-	}
-}
-
 void WLApplication::setup_homedir() {
 	//If we don't have a home directory don't do anything
 	if (m_homedir.size()) {
@@ -208,8 +117,8 @@ void WLApplication::setup_homedir() {
 			log ("Set home directory: %s\n", m_homedir.c_str());
 
 			std::unique_ptr<FileSystem> home(new RealFSImpl(m_homedir));
-			home->EnsureDirectoryExists(".");
-			g_fs->SetHomeFileSystem(home.release());
+			home->ensure_directory_exists(".");
+			g_fs->set_home_file_system(home.release());
 		} catch (const std::exception & e) {
 			log("Failed to add home directory: %s\n", e.what());
 		}
@@ -263,11 +172,11 @@ m_mouse_position       (0, 0),
 m_mouse_locked         (0),
 m_mouse_compensate_warp(0, 0),
 m_should_die           (false),
-m_default_datadirs     (true),
+m_use_default_datadir     (true),
 #ifdef _WIN32
-m_homedir(FileSystem::GetHomedir() + "\\.widelands"),
+m_homedir(FileSystem::get_homedir() + "\\.widelands"),
 #else
-m_homedir(FileSystem::GetHomedir() + "/.widelands"),
+m_homedir(FileSystem::get_homedir() + "/.widelands"),
 #endif
 m_redirected_stdio(false)
 {
@@ -288,8 +197,13 @@ m_redirected_stdio(false)
 
 	setup_homedir();
 	init_settings();
-	if (m_default_datadirs)
-		setup_searchpaths(m_commandline["EXENAME"]);
+
+	if (m_use_default_datadir) {
+		const std::string default_datadir =
+		   std::string(INSTALL_PREFIX) + "/" + std::string(INSTALL_DATADIR);
+		log("Adding directory: %s\n", default_datadir.c_str());
+		g_fs->add_file_system(&FileSystem::create(default_datadir));
+	}
 	init_language(); // search paths must already be set up
 	cleanup_replays();
 
@@ -451,7 +365,7 @@ void WLApplication::run()
 				mapdata.height = map.get_height();
 
 				// set the map
-				netgame.setMap(mapdata.name, mapdata.filename, mapdata.nrplayers);
+				netgame.set_map(mapdata.name, mapdata.filename, mapdata.nrplayers);
 
 				// run the network game
 				// -> autostarts when a player sends "/start" as pm to the server.
@@ -550,17 +464,17 @@ void WLApplication::handle_input(InputCallback const * cb)
 			if (ev.key.keysym.sym == SDLK_F11) { //  take screenshot
 				if (ev.type == SDL_KEYDOWN)
 				{
-					if (g_fs->DiskSpace() < MINIMUM_DISK_SPACE) {
+					if (g_fs->disk_space() < MINIMUM_DISK_SPACE) {
 						log
 							("Omitting screenshot because diskspace is lower than %luMB\n",
 							 MINIMUM_DISK_SPACE / (1000 * 1000));
 						break;
 					}
-					g_fs->EnsureDirectoryExists(SCREENSHOT_DIR);
+					g_fs->ensure_directory_exists(SCREENSHOT_DIR);
 					for (uint32_t nr = 0; nr < 10000; ++nr) {
 						char buffer[256];
 						snprintf(buffer, sizeof(buffer), SCREENSHOT_DIR "/shot%04u.png", nr);
-						if (g_fs->FileExists(buffer))
+						if (g_fs->file_exists(buffer))
 							continue;
 						g_gr->screenshot(buffer);
 						break;
@@ -1069,8 +983,8 @@ void WLApplication::handle_commandline_parameters()
 
 	if (m_commandline.count("datadir")) {
 		log ("Adding directory: %s\n", m_commandline["datadir"].c_str());
-		g_fs->AddFileSystem(&FileSystem::Create(m_commandline["datadir"]));
-		m_default_datadirs = false;
+		m_use_default_datadir = false;
+		g_fs->add_file_system(&FileSystem::create(m_commandline["datadir"]));
 		m_commandline.erase("datadir");
 	}
 
@@ -1450,7 +1364,7 @@ bool WLApplication::new_game()
 		return false;
 	if (code == 2) { // scenario
 		try {
-			game.run_splayer_scenario_direct(sp.getMap().c_str(), "");
+			game.run_splayer_scenario_direct(sp.get_map().c_str(), "");
 		} catch (const std::exception & e) {
 			log("Fatal exception: %s\n", e.what());
 			emergency_save(game);
@@ -1471,7 +1385,7 @@ bool WLApplication::new_game()
 			tipstext.push_back("general_game");
 			tipstext.push_back("singleplayer");
 			try {
-				tipstext.push_back(sp.getPlayersTribe());
+				tipstext.push_back(sp.get_players_tribe());
 			} catch (GameSettingsProvider::NoTribe) {
 			}
 			GameTips tips (loaderUI, tipstext);
@@ -1640,7 +1554,7 @@ void WLApplication::cleanup_replays()
 
 	if (s.get_bool("remove_syncstreams", true)) {
 		files =
-		   filter(g_fs->ListDirectory(REPLAY_DIR),
+			filter(g_fs->list_directory(REPLAY_DIR),
 		          [](const std::string& fn) {return boost::ends_with(fn, REPLAY_SUFFIX ".wss");});
 
 		for
@@ -1649,7 +1563,7 @@ void WLApplication::cleanup_replays()
 			 ++filename)
 		{
 			log("Delete syncstream %s\n", filename->c_str());
-			g_fs->Unlink(*filename);
+			g_fs->fs_unlink(*filename);
 		}
 	}
 
@@ -1657,7 +1571,7 @@ void WLApplication::cleanup_replays()
 
 	if (s.get_int("remove_replays", 0)) {
 		files =
-		   filter(g_fs->ListDirectory(REPLAY_DIR),
+			filter(g_fs->list_directory(REPLAY_DIR),
 		          [](const std::string& fn) {return boost::ends_with(fn, REPLAY_SUFFIX);});
 
 		for
@@ -1665,7 +1579,7 @@ void WLApplication::cleanup_replays()
 			 filename != files.end();
 			 ++filename)
 		{
-			std::string file = g_fs->FS_Filename(filename->c_str());
+			std::string file = g_fs->fs_filename(filename->c_str());
 			std::string timestr = file.substr(0, file.find(' '));
 
 			if (19 != timestr.size())
@@ -1683,8 +1597,8 @@ void WLApplication::cleanup_replays()
 			if (tdiff > s.get_int("remove_replays")) {
 				log("Delete replay %s\n", file.c_str());
 
-				g_fs->Unlink(*filename);
-				g_fs->Unlink(*filename + ".wgf");
+				g_fs->fs_unlink(*filename);
+				g_fs->fs_unlink(*filename + ".wgf");
 			}
 		}
 	}

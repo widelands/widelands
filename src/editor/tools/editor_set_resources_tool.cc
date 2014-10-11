@@ -55,7 +55,7 @@ int32_t EditorSetResourcesTool::handle_click_impl(Widelands::Map& map,
 		args.orgResT.push_back(res);
 		args.orgRes.push_back(mr.location().field->get_resources_amount());
 
-		if (Editor_Change_Resource_Tool_Callback(mr.location(), map, world, args.cur_res)) {
+		if (editor_change_resource_tool_callback(mr.location(), map, world, args.cur_res)) {
 			//  Ok, we're doing something. First remove the current overlays.
 			const Image* pic = g_gr->images().get
 				(world.get_resource(res)->get_editor_pic (mr.location().field->get_resources_amount()));

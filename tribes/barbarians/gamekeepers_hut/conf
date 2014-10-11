@@ -1,8 +1,8 @@
 size=small
 
 [aihints]
-build_material=false
 renews_map_resource=meat
+prohibited_till=900
 
 [buildcost]
 log=4

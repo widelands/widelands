@@ -33,8 +33,8 @@ class EconomyDataPacket {
 	public:
 		EconomyDataPacket(Economy * e) : m_eco(e) {}
 
-		void Read(FileRead &);
-		void Write(FileWrite &);
+		void read(FileRead &);
+		void write(FileWrite &);
 
 	private:
 		Economy * m_eco;

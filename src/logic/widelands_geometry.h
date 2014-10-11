@@ -42,7 +42,7 @@ struct Coords {
 	Coords(int16_t nx, int16_t ny);
 
 	/// Returns a special value indicating invalidity.
-	static Coords Null();
+	static Coords null();
 
 	bool operator== (const Coords& other) const;
 	bool operator!= (const Coords & other) const;

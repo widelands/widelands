@@ -28,6 +28,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/listselect.h"
+#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/spinbox.h"
 #include "ui_basic/textarea.h"
 
@@ -44,7 +45,7 @@ public:
 		bool single_watchwin;
 		bool auto_roadbuild_mode;
 		bool show_warea;
-		bool snap_windows_only_when_overlapping;
+		bool snap_win_overlap_only;
 		bool dock_windows_to_edges;
 		bool music;
 		bool fx;
@@ -92,41 +93,54 @@ public:
 	bool handle_key(bool down, SDL_keysym code) override;
 
 private:
-	uint32_t                          m_vbutw;
-	uint32_t                          m_butw;
-	uint32_t                          m_buth;
-	UI::Button           m_advanced_options, m_cancel, m_apply;
-	UI::SpinBox                       m_sb_maxfps, m_sb_autosave;
-	UI::SpinBox                       m_sb_remove_replays;
-	UI::Textarea                      m_title;
-	UI::Checkbox                      m_fullscreen;
-	UI::Textarea                      m_label_fullscreen;
-	UI::Checkbox                      m_inputgrab;
-	UI::Textarea                      m_label_inputgrab;
-	UI::Checkbox                      m_music;
-	UI::Textarea                      m_label_music;
-	UI::Checkbox                      m_fx;
-	UI::Textarea                      m_label_fx;
-	UI::Textarea                      m_label_maxfps;
-	UI::Listselect<void *>            m_reslist;
-	UI::Textarea                      m_label_resolution;
-	UI::Textarea                      m_label_language;
-	UI::Listselect<std::string>       m_language_list;
-	UI::Textarea                      m_label_game_options;
-	UI::Checkbox                      m_single_watchwin;
-	UI::Textarea                      m_label_single_watchwin;
-	UI::Checkbox                      m_auto_roadbuild_mode;
-	UI::Textarea                      m_label_auto_roadbuild_mode;
-	UI::Checkbox                      m_show_workarea_preview;
-	UI::Textarea                      m_label_show_workarea_preview;
-	UI::Checkbox                      m_snap_windows_only_when_overlapping;
-	UI::Textarea                      m_label_snap_windows_only_when_overlapping;
-	UI::Checkbox                      m_dock_windows_to_edges;
-	UI::Textarea                      m_label_dock_windows_to_edges;
-	UI::Textarea                      m_label_autosave;
-	UI::Textarea                      m_label_remove_replays;
-	OptionsCtrl::OptionsStruct os;
+	uint32_t const              m_vbutw;
+	uint32_t const              m_butw;
+	uint32_t const              m_buth;
+	uint32_t const              m_hmargin;
+	uint32_t const              m_padding;
+	uint32_t const              m_space;
+	uint32_t const              m_offset_first_group;
+	uint32_t const              m_offset_second_group;
 
+	UI::Button                  m_advanced_options, m_cancel, m_apply;
+
+	UI::Textarea                m_title;
+	UI::Textarea                m_label_resolution;
+	UI::Listselect<void *>      m_reslist;
+	UI::Checkbox                m_fullscreen;
+	UI::Textarea                m_label_fullscreen;
+	UI::Checkbox                m_inputgrab;
+	UI::Textarea                m_label_inputgrab;
+	UI::Textarea                m_label_maxfps;
+	UI::SpinBox                 m_sb_maxfps;
+
+	UI::Textarea                m_label_language;
+	UI::Listselect<std::string> m_language_list;
+	UI::Checkbox                m_music;
+	UI::Textarea                m_label_music;
+	UI::Checkbox                m_fx;
+	UI::Textarea                m_label_fx;
+
+	UI::Textarea                m_label_game_options;
+	UI::Checkbox                m_single_watchwin;
+	UI::Textarea                m_label_single_watchwin;
+	UI::Checkbox                m_auto_roadbuild_mode;
+	UI::Textarea                m_label_auto_roadbuild_mode;
+	UI::Checkbox                m_show_workarea_preview;
+	UI::Textarea                m_label_show_workarea_preview;
+	UI::Checkbox                m_snap_win_overlap_only;
+	UI::Textarea                m_label_snap_win_overlap_only;
+	UI::Checkbox                m_dock_windows_to_edges;
+	UI::Textarea                m_label_dock_windows_to_edges;
+	UI::SpinBox                 m_sb_autosave;
+	UI::Textarea                m_label_autosave;
+	UI::SpinBox                 m_sb_remove_replays;
+	UI::Textarea                m_label_remove_replays;
+
+	OptionsCtrl::OptionsStruct  os;
+
+	void update_sb_autosave_unit();
+	void update_sb_remove_replays_unit();
 	void advanced_options();
 
 	class ScreenResolution {
@@ -156,30 +170,36 @@ public:
 	bool handle_key(bool down, SDL_keysym code) override;
 
 private:
-	uint32_t                    m_vbutw;
-	uint32_t                    m_butw;
-	uint32_t                    m_buth;
+	void update_sb_dis_panel_unit();
+	void update_sb_dis_border_unit();
 
-	UI::Button     m_cancel, m_apply;
-	UI::SpinBox                 m_sb_dis_panel, m_sb_dis_border;
+	uint32_t const              m_vbutw;
+	uint32_t const              m_butw;
+	uint32_t const              m_buth;
+	uint32_t const              m_hmargin;
+	uint32_t const              m_padding;
+	uint32_t const              m_space;
+	uint32_t const              m_offset_first_group;
+
+	UI::Button                  m_cancel, m_apply;
 	UI::Textarea                m_title;
-	UI::Listselect<std::string> m_ui_font_list;
 	UI::Textarea                m_label_ui_font;
-	UI::Checkbox                m_message_sound;
-	UI::Textarea                m_label_message_sound;
-	UI::Checkbox                m_nozip;
-	UI::Textarea                m_label_nozip;
+	UI::Listselect<std::string> m_ui_font_list;
 
 	UI::Textarea                m_label_snap_dis_panel, m_label_snap_dis_border;
-
-	UI::Checkbox                m_remove_syncstreams;
-	UI::Textarea                m_label_remove_syncstreams;
-	UI::Checkbox                m_opengl;
-	UI::Textarea                m_label_opengl;
+	UI::SpinBox                 m_sb_dis_panel, m_sb_dis_border;
 	UI::Checkbox                m_transparent_chat;
-	UI::Textarea                m_label_transparent_chat;
+	UI::MultilineTextarea       m_label_transparent_chat;
+	UI::Checkbox                m_message_sound;
+	UI::MultilineTextarea       m_label_message_sound;
+	UI::Checkbox                m_nozip;
+	UI::MultilineTextarea       m_label_nozip;
+	UI::Checkbox                m_remove_syncstreams;
+	UI::MultilineTextarea       m_label_remove_syncstreams;
+	UI::Checkbox                m_opengl;
+	UI::MultilineTextarea       m_label_opengl;
 
-	OptionsCtrl::OptionsStruct os;
+	OptionsCtrl::OptionsStruct  os;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_OPTIONS_H

@@ -310,7 +310,7 @@ void FullscreenMenuMapSelect::fill_list()
 		// This is the normal case
 
 		//  Fill it with all files we find in all directories.
-		FilenameSet files = g_fs->ListDirectory(m_curdir);
+		FilenameSet files = g_fs->list_directory(m_curdir);
 
 		int32_t ndirs = 0;
 
@@ -344,12 +344,12 @@ void FullscreenMenuMapSelect::fill_list()
 			++pname)
 		{
 			char const * const name = pname->c_str();
-			if (!strcmp(FileSystem::FS_Filename(name), "."))
+			if (!strcmp(FileSystem::fs_filename(name), "."))
 				continue;
 			// Upsy, appeared again. ignore
-			if (!strcmp(FileSystem::FS_Filename(name), ".."))
+			if (!strcmp(FileSystem::fs_filename(name), ".."))
 				continue;
-			if (!g_fs->IsDirectory(name))
+			if (!g_fs->is_directory(name))
 				continue;
 			if (WidelandsMapLoader::is_widelands_map(name))
 				continue;
@@ -363,7 +363,7 @@ void FullscreenMenuMapSelect::fill_list()
 			te.set_string(0, "");
 			te.set_picture
 				(1,  g_gr->images().get("pics/ls_dir.png"),
-				FileSystem::FS_Filename(name));
+				FileSystem::fs_filename(name));
 
 			++ndirs;
 		}

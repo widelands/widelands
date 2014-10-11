@@ -143,23 +143,23 @@ public:
 	void set_economy(Economy * e) override;
 
 	// Begin implementation of SoldierControl
-	std::vector<Soldier *> presentSoldiers() const override;
-	std::vector<Soldier *> stationedSoldiers() const override;
-	uint32_t minSoldierCapacity() const override;
-	uint32_t maxSoldierCapacity() const override;
-	uint32_t soldierCapacity() const override;
-	void setSoldierCapacity(uint32_t capacity) override;
-	void dropSoldier(Soldier &) override;
-	int incorporateSoldier(EditorGameBase &, Soldier &) override;
+	std::vector<Soldier *> present_soldiers() const override;
+	std::vector<Soldier *> stationed_soldiers() const override;
+	uint32_t min_soldier_capacity() const override;
+	uint32_t max_soldier_capacity() const override;
+	uint32_t soldier_capacity() const override;
+	void set_soldier_capacity(uint32_t capacity) override;
+	void drop_soldier(Soldier &) override;
+	int incorporate_soldier(EditorGameBase &, Soldier &) override;
 	// End implementation of SoldierControl
 
 	int32_t get_pri(enum TrainingAttribute atr);
 	void set_pri(enum TrainingAttribute atr, int32_t prio);
 
 	// These are for premature soldier kick-out
-	void trainingAttempted(uint32_t type, uint32_t level);
-	void trainingSuccessful(uint32_t type, uint32_t level);
-	void trainingDone();
+	void training_attempted(uint32_t type, uint32_t level);
+	void training_successful(uint32_t type, uint32_t level);
+	void training_done();
 
 
 protected:

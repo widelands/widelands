@@ -36,13 +36,13 @@
 namespace Widelands {
 
 WorkerDescr::WorkerDescr
-	(const MapObjectType type, char const * const _name, char const * const _descname,
+	(const MapObjectType object_type, char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const TribeDescr & _tribe)
 	:
-	BobDescr(type, _name, _descname, &_tribe),
+	BobDescr(object_type, _name, _descname, &_tribe),
 	m_helptext          (global_s.get_string("help", "")),
-	m_ware_hotspot      (global_s.get_Point("ware_hotspot", Point(0, 15))),
+	m_ware_hotspot      (global_s.get_point("ware_hotspot", Point(0, 15))),
 	m_icon_fname        (directory + "/menu.png"),
 	m_icon              (nullptr),
 	m_buildable         (false),

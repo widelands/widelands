@@ -14,7 +14,7 @@ return {
 
 	--General Section
 	building_help_general_string("empire", building_description,
-		_"Sow and harvest wheat.") ..
+		_"Plant grapevines and harvest grapes.") ..
 
 	--Dependencies
 	building_help_dependencies_production("empire", building_description) ..

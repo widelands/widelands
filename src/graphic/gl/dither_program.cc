@@ -234,7 +234,7 @@ void DitherProgram::draw(const DescriptionMaintainer<TerrainDescription>& terrai
 		}
 		glBindTexture(
 		   GL_TEXTURE_2D,
-		   g_gr->get_maptexture_data(terrains.get_unmutable(i).get_texture())->getTexture());
+		   g_gr->get_maptexture_data(terrains.get_unmutable(i).get_texture())->get_texture());
 
 		glBufferData(GL_ARRAY_BUFFER,
 		             sizeof(PerVertexData) * current_data.size(),

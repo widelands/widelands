@@ -53,8 +53,8 @@ struct PlayerSettings {
 
 struct UserSettings {
 	static uint8_t none() {return std::numeric_limits<uint8_t>::max();}
-	static uint8_t notConnected() {return none() - 1;}
-	static uint8_t highestPlayernum() {return notConnected() - 1;}
+	static uint8_t not_connected() {return none() - 1;}
+	static uint8_t highest_playernum() {return not_connected() - 1;}
 
 	uint8_t     position;
 	std::string name;
@@ -134,39 +134,39 @@ struct GameSettingsProvider {
 
 	virtual const GameSettings & settings() = 0;
 
-	virtual void setScenario(bool set) = 0;
-	virtual bool canChangeMap() = 0;
-	virtual bool canChangePlayerState(uint8_t number) = 0;
-	virtual bool canChangePlayerTribe(uint8_t number) = 0;
-	virtual bool canChangePlayerInit (uint8_t number) = 0;
-	virtual bool canChangePlayerTeam (uint8_t number) = 0;
+	virtual void set_scenario(bool set) = 0;
+	virtual bool can_change_map() = 0;
+	virtual bool can_change_player_state(uint8_t number) = 0;
+	virtual bool can_change_player_tribe(uint8_t number) = 0;
+	virtual bool can_change_player_init (uint8_t number) = 0;
+	virtual bool can_change_player_team (uint8_t number) = 0;
 
-	virtual bool canLaunch() = 0;
+	virtual bool can_launch() = 0;
 
-	virtual void setMap
+	virtual void set_map
 		(const std::string & mapname,
 		 const std::string & mapfilename,
 		 uint32_t maxplayers,
-		 bool                savegame = false)
+		 bool savegame = false)
 		= 0;
-	virtual void setPlayerState    (uint8_t number, PlayerSettings::State) = 0;
-	virtual void setPlayerAI       (uint8_t number, const std::string &, bool const random_ai = false) = 0;
-	virtual void nextPlayerState   (uint8_t number) = 0;
-	virtual void setPlayerTribe    (uint8_t number, const std::string &, bool const random_tribe = false) = 0;
-	virtual void setPlayerInit     (uint8_t number, uint8_t index) = 0;
-	virtual void setPlayerName     (uint8_t number, const std::string &) = 0;
-	virtual void setPlayer         (uint8_t number, PlayerSettings) = 0;
-	virtual void setPlayerNumber   (uint8_t number) = 0;
-	virtual void setPlayerTeam     (uint8_t number, Widelands::TeamNumber team) = 0;
-	virtual void setPlayerCloseable(uint8_t number, bool closeable) = 0;
-	virtual void setPlayerShared   (uint8_t number, uint8_t shared) = 0;
-	virtual void setWinConditionScript   (std::string wc) = 0;
-	virtual void nextWinCondition      () = 0;
-	virtual std::string getWinConditionScript() = 0;
+	virtual void set_player_state   (uint8_t number, PlayerSettings::State) = 0;
+	virtual void set_player_ai      (uint8_t number, const std::string &, bool const random_ai = false) = 0;
+	virtual void next_player_state  (uint8_t number) = 0;
+	virtual void set_player_tribe   (uint8_t number, const std::string &, bool const random_tribe = false) = 0;
+	virtual void set_player_init    (uint8_t number, uint8_t index) = 0;
+	virtual void set_player_name    (uint8_t number, const std::string &) = 0;
+	virtual void set_player         (uint8_t number, PlayerSettings) = 0;
+	virtual void set_player_number  (uint8_t number) = 0;
+	virtual void set_player_team    (uint8_t number, Widelands::TeamNumber team) = 0;
+	virtual void set_player_closeable(uint8_t number, bool closeable) = 0;
+	virtual void set_player_shared  (uint8_t number, uint8_t shared) = 0;
+	virtual void set_win_condition_script(std::string wc) = 0;
+	virtual void next_win_condition      () = 0;
+	virtual std::string get_win_condition_script() = 0;
 
 	struct NoTribe {};
-	const std::string & getPlayersTribe() {
-		if (UserSettings::highestPlayernum() < settings().playernum)
+	const std::string & get_players_tribe() {
+		if (UserSettings::highest_playernum() < settings().playernum)
 			throw NoTribe();
 		return settings().players[settings().playernum].tribe;
 	}

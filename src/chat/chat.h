@@ -62,14 +62,14 @@ struct ChatProvider {
 	virtual ~ChatProvider();
 
 	// Send the given chat message. The message may or may not
-	// appear in subsequent calls to \ref getMessages.
+	// appear in subsequent calls to \ref get_messages.
 	virtual void send(const std::string &) = 0;
 
 	// \return a (chronological) list of received chat messages.
 	// This list need not be stable or monotonic. In other words,
 	// subsequent calls to this functions may return a smaller or
 	// greater number of chat messages.
-	virtual const std::vector<ChatMessage>& getMessages() const = 0;
+	virtual const std::vector<ChatMessage>& get_messages() const = 0;
 
 	// reimplemented e.g. in internet_gaming to silence the chat if in game.
 	// TODO(sirver): this does not belong here. The receiver of the

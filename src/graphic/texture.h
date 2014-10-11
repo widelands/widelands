@@ -59,7 +59,7 @@ struct Texture {
 	RGBColor get_minimap_color(int8_t shade);
 
 	void animate(uint32_t time);
-	uint32_t getTexture() const
+	uint32_t get_texture() const
 		{return m_glFrames.at(m_frame_num)->get_gl_texture();}
 
 private:

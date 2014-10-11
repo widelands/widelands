@@ -181,7 +181,7 @@ static int test_check_int(lua_State* L) {
 	return 0;
 }
 
-static void InitLuaTests(lua_State* L)
+static void init_lua_tests(lua_State* L)
 {
 	luaL_openlibs(L);
 
@@ -210,7 +210,7 @@ BOOST_AUTO_TEST_CASE(test_luna_simple)
 
 	std::unique_ptr<lua_State, LuaCloser> L_ptr(luaL_newstate());
 	lua_State* L = L_ptr.get();
-	InitLuaTests(L);
+	init_lua_tests(L);
 	register_class<LuaClass>(L, "test");
 
 	BOOST_REQUIRE_EQUAL(0, luaL_loadbuffer(L, script1, strlen(script1), "testscript1"));
@@ -226,7 +226,7 @@ BOOST_AUTO_TEST_CASE(test_luna_property_ro)
 
 	std::unique_ptr<lua_State, LuaCloser> L_ptr(luaL_newstate());
 	lua_State* L = L_ptr.get();
-	InitLuaTests(L);
+	init_lua_tests(L);
 	register_class<LuaClass>(L, "test");
 
 	BOOST_REQUIRE_EQUAL(0, luaL_loadbuffer(L, script1, strlen(script1), "testscript1"));
@@ -243,7 +243,7 @@ BOOST_AUTO_TEST_CASE(test_luna_inheritance)
 
 	std::unique_ptr<lua_State, LuaCloser> L_ptr(luaL_newstate());
 	lua_State* L = L_ptr.get();
-	InitLuaTests(L);
+	init_lua_tests(L);
 
 	// single inheritance
 	register_class<LuaSubClass>(L, "test", true);
@@ -262,7 +262,7 @@ BOOST_AUTO_TEST_CASE(test_luna_virtualbase_method)
 
 	std::unique_ptr<lua_State, LuaCloser> L_ptr(luaL_newstate());
 	lua_State* L = L_ptr.get();
-	InitLuaTests(L);
+	init_lua_tests(L);
 
 	// virtual base class
 	register_class<LuaVirtualClass>(L, "test", true);
@@ -281,7 +281,7 @@ BOOST_AUTO_TEST_CASE(test_luna_virtualbase_property)
 
 	std::unique_ptr<lua_State, LuaCloser> L_ptr(luaL_newstate());
 	lua_State* L = L_ptr.get();
-	InitLuaTests(L);
+	init_lua_tests(L);
 
 	// virtual base class
 	register_class<LuaVirtualClass>(L, "test", true);
@@ -301,7 +301,7 @@ BOOST_AUTO_TEST_CASE(test_luna_multibase_method)
 
 	std::unique_ptr<lua_State, LuaCloser> L_ptr(luaL_newstate());
 	lua_State* L = L_ptr.get();
-	InitLuaTests(L);
+	init_lua_tests(L);
 
 	// virtual base class
 	register_class<LuaMultiClass>(L, "test", true);
@@ -321,7 +321,7 @@ BOOST_AUTO_TEST_CASE(test_luna_multibase_property_get)
 
 	std::unique_ptr<lua_State, LuaCloser> L_ptr(luaL_newstate());
 	lua_State* L = L_ptr.get();
-	InitLuaTests(L);
+	init_lua_tests(L);
 
 	register_class<LuaMultiClass>(L, "test", true);
 	add_parent<LuaMultiClass, LuaClass>(L);
@@ -341,7 +341,7 @@ BOOST_AUTO_TEST_CASE(test_luna_multibase_property_set)
 
 	std::unique_ptr<lua_State, LuaCloser> L_ptr(luaL_newstate());
 	lua_State* L = L_ptr.get();
-	InitLuaTests(L);
+	init_lua_tests(L);
 
 	register_class<LuaMultiClass>(L, "test", true);
 	add_parent<LuaMultiClass, LuaClass>(L);

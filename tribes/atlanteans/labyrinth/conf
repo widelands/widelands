@@ -19,7 +19,7 @@ diamond=1
 quartz=1
 
 [working positions]
-carrier=1
+trainer=1
 
 [inputs]
 bread=10
@@ -97,3 +97,6 @@ train=soldier evade 1 2
 [idle]
 pics=labyrinth_i_??.png  # ???
 hotspot=80 88
+
+[aihints]
+prohibited_till=2700

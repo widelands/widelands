@@ -59,7 +59,7 @@ Widelands::Game & InteractiveGameBase::    game() const
 void InteractiveGameBase::set_chat_provider(ChatProvider & chat)
 {
 	m_chatProvider = &chat;
-	m_chatOverlay->setChatProvider(chat);
+	m_chatOverlay->set_chat_provider(chat);
 
 	m_chatenabled = true;
 }

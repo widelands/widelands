@@ -181,7 +181,7 @@ TrainingSite::init_kick_state(const TrainingAttribute & art, const TrainingSiteD
 {
 		// Now with kick-out state saving implemented, initializing is an overkill
 		for (int t = d.get_min_level(art); t <= d.get_max_level(art); t++)
-			trainingAttempted(art, t);
+			training_attempted(art, t);
 }
 
 
@@ -319,7 +319,7 @@ void TrainingSite::update_soldier_request() {
 		m_soldier_request = nullptr;
 
 		while (m_soldiers.size() > m_capacity)
-			dropSoldier(**m_soldiers.rbegin());
+			drop_soldier(**m_soldiers.rbegin());
 	}
 }
 
@@ -345,7 +345,7 @@ void TrainingSite::request_soldier_callback
 	assert(s.get_location(game) == &tsite);
 	assert(tsite.m_soldier_request == &rq);
 
-	tsite.incorporateSoldier(game, s);
+	tsite.incorporate_soldier(game, s);
 }
 
 /*
@@ -355,9 +355,9 @@ Takes one soldier and adds him to ours
 returns 0 on succes, -1 if there was no room for this soldier
 ===============
 */
-int TrainingSite::incorporateSoldier(EditorGameBase & egbase, Soldier & s) {
+int TrainingSite::incorporate_soldier(EditorGameBase & egbase, Soldier & s) {
 	if (s.get_location(egbase) != this) {
-		if (stationedSoldiers().size() + 1 > descr().get_max_number_of_soldiers())
+		if (stationed_soldiers().size() + 1 > descr().get_max_number_of_soldiers())
 			return -1;
 
 		s.set_location(this);
@@ -374,30 +374,30 @@ int TrainingSite::incorporateSoldier(EditorGameBase & egbase, Soldier & s) {
 }
 
 
-std::vector<Soldier *> TrainingSite::presentSoldiers() const
+std::vector<Soldier *> TrainingSite::present_soldiers() const
 {
 	return m_soldiers;
 }
 
-std::vector<Soldier *> TrainingSite::stationedSoldiers() const
+std::vector<Soldier *> TrainingSite::stationed_soldiers() const
 {
 	return m_soldiers;
 }
 
-uint32_t TrainingSite::minSoldierCapacity() const {
+uint32_t TrainingSite::min_soldier_capacity() const {
 	return 0;
 }
-uint32_t TrainingSite::maxSoldierCapacity() const {
+uint32_t TrainingSite::max_soldier_capacity() const {
 	return descr().get_max_number_of_soldiers();
 }
-uint32_t TrainingSite::soldierCapacity() const
+uint32_t TrainingSite::soldier_capacity() const
 {
 	return m_capacity;
 }
 
-void TrainingSite::setSoldierCapacity(uint32_t const capacity) {
-	assert(minSoldierCapacity() <= capacity);
-	assert                        (capacity <= maxSoldierCapacity());
+void TrainingSite::set_soldier_capacity(uint32_t const capacity) {
+	assert(min_soldier_capacity() <= capacity);
+	assert                        (capacity <= max_soldier_capacity());
 	assert(m_capacity != capacity);
 	m_capacity = capacity;
 	update_soldier_request();
@@ -412,14 +412,14 @@ void TrainingSite::setSoldierCapacity(uint32_t const capacity) {
  * \note This is called from player commands, so we need to verify that the
  * soldier is actually stationed here, without breaking anything if he isn't.
  */
-void TrainingSite::dropSoldier(Soldier & soldier)
+void TrainingSite::drop_soldier(Soldier & soldier)
 {
 	Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
 
 	std::vector<Soldier *>::iterator it =
 		std::find(m_soldiers.begin(), m_soldiers.end(), &soldier);
 	if (it == m_soldiers.end()) {
-		molog("TrainingSite::dropSoldier: soldier not in training site");
+		molog("TrainingSite::drop_soldier: soldier not in training site");
 		return;
 	}
 
@@ -455,7 +455,7 @@ void TrainingSite::drop_unupgradable_soldiers(Game &)
 	// Drop soldiers only now, so that changes in the soldiers array don't
 	// mess things up
 	for (Soldier * soldier : droplist) {
-		dropSoldier(*soldier);
+		drop_soldier(*soldier);
 	}
 }
 
@@ -528,7 +528,7 @@ void TrainingSite::drop_stalled_soldiers(Game &)
 	if (nullptr != soldier_to_drop)
 		{
 			log("TrainingSite::drop_stalled_soldiers: Kicking somebody out.\n");
-			dropSoldier (*soldier_to_drop);
+			drop_soldier (*soldier_to_drop);
 		}
 }
 
@@ -563,7 +563,7 @@ void TrainingSite::program_end(Game & game, ProgramResult const result)
 		}
 		m_current_upgrade = nullptr;
 	}
-	trainingDone();
+	training_done();
 }
 
 
@@ -739,7 +739,7 @@ void TrainingSite::calc_upgrades() {
 
 
 void
-TrainingSite::trainingAttempted(uint32_t type, uint32_t level)
+TrainingSite::training_attempted(uint32_t type, uint32_t level)
 	{
 	        TypeAndLevel key(type, level);
 		if (training_failure_count.find(key) == training_failure_count.end())
@@ -753,7 +753,7 @@ TrainingSite::trainingAttempted(uint32_t type, uint32_t level)
  */
 
 void
-TrainingSite::trainingSuccessful(uint32_t type, uint32_t level)
+TrainingSite::training_successful(uint32_t type, uint32_t level)
 {
 	TypeAndLevel key(type, level);
 	// Here I assume that key exists: training has been attempted before it can succeed.
@@ -761,7 +761,7 @@ TrainingSite::trainingSuccessful(uint32_t type, uint32_t level)
 }
 
 void
-TrainingSite::trainingDone()
+TrainingSite::training_done()
 {
 	TrainFailCount::iterator it;
 	for (it = training_failure_count.begin(); it != training_failure_count.end(); it++)

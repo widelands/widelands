@@ -138,7 +138,7 @@ bool Section::Value::get_bool() const
 }
 
 
-Point Section::Value::get_Point() const
+Point Section::Value::get_point() const
 {
 	char * endp = m_value;
 	long int const x = strtol(endp, &endp, 0);
@@ -457,10 +457,10 @@ char const * Section::get_string
 	return v ? v->get_string() : def;
 }
 
-Point Section::get_Point(const char * const name, const Point def)
+Point Section::get_point(const char * const name, const Point def)
 {
 	Value const * const v = get_val(name);
-	return v ? v->get_Point() : def;
+	return v ? v->get_point() : def;
 }
 
 
@@ -715,7 +715,7 @@ void Profile::read
 	uint32_t linenr = 0;
 	try {
 		FileRead fr;
-		fr.Open(fs, filename);
+		fr.open(fs, filename);
 
 		char    * p = nullptr;
 		Section * s = nullptr;
@@ -724,7 +724,7 @@ void Profile::read
 		std::string data;
 		char * key = nullptr;
 		bool translate_line = false;
-		while (char * line = fr.ReadLine()) {
+		while (char * line = fr.read_line()) {
 			++linenr;
 
 			if (!reading_multiline)
@@ -852,7 +852,7 @@ void Profile::write
 {
 	FileWrite fw;
 
-	fw.Printf
+	fw.print_f
 		("# Automatically created by Widelands %s (%s)\n",
 		 build_id().c_str(), build_type().c_str());
 
@@ -860,7 +860,7 @@ void Profile::write
 		if (used_only && !temp_section.is_used())
 			continue;
 
-		fw.Printf("\n[%s]\n", temp_section.get_name());
+		fw.print_f("\n[%s]\n", temp_section.get_name());
 
 		for (const Section::Value& temp_value : temp_section.m_values) {
 			if (used_only && !temp_value.is_used())
@@ -908,11 +908,11 @@ void Profile::write
 					// End of multilined text.
 					tempstr += '"';
 
-				fw.Printf("%s=\"%s\"\n", temp_value.get_name(), tempstr.c_str());
+				fw.print_f("%s=\"%s\"\n", temp_value.get_name(), tempstr.c_str());
 			} else
-				fw.Printf("%s=\n", temp_value.get_name());
+				fw.print_f("%s=\n", temp_value.get_name());
 		}
 	}
 
-	fw.Write(fs, filename);
+	fw.write(fs, filename);
 }

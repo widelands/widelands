@@ -692,22 +692,22 @@ void Fleet::Loader::load(FileRead & fr, uint8_t version)
 
 	Fleet & fleet = get<Fleet>();
 
-	uint32_t nrships = fr.Unsigned32();
+	uint32_t nrships = fr.unsigned_32();
 	m_ships.resize(nrships);
 	for (uint32_t i = 0; i < nrships; ++i)
-		m_ships[i] = fr.Unsigned32();
+		m_ships[i] = fr.unsigned_32();
 
-	uint32_t nrports = fr.Unsigned32();
+	uint32_t nrports = fr.unsigned_32();
 	m_ports.resize(nrports);
 	for (uint32_t i = 0; i < nrports; ++i)
-		m_ports[i] = fr.Unsigned32();
+		m_ports[i] = fr.unsigned_32();
 
 	if (version >= 2) {
-		fleet.m_act_pending = fr.Unsigned8();
+		fleet.m_act_pending = fr.unsigned_8();
 		if (version < 3)
 			fleet.m_act_pending = false;
 		if (version < 4)
-			fr.Unsigned32(); // m_roundrobin
+			fr.unsigned_32(); // m_roundrobin
 	}
 }
 
@@ -756,9 +756,9 @@ MapObject::Loader * Fleet::load
 
 	try {
 		// The header has been peeled away by the caller
-		uint8_t const version = fr.Unsigned8();
+		uint8_t const version = fr.unsigned_8();
 		if (1 <= version && version <= FLEET_SAVEGAME_VERSION) {
-			PlayerNumber owner_number = fr.Unsigned8();
+			PlayerNumber owner_number = fr.unsigned_8();
 			if (!owner_number || owner_number > egbase.map().get_nrplayers())
 				throw GameDataError
 					("owner number is %u but there are only %u players",
@@ -781,23 +781,23 @@ MapObject::Loader * Fleet::load
 
 void Fleet::save(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(HeaderFleet);
-	fw.Unsigned8(FLEET_SAVEGAME_VERSION);
+	fw.unsigned_8(HeaderFleet);
+	fw.unsigned_8(FLEET_SAVEGAME_VERSION);
 
-	fw.Unsigned8(m_owner.player_number());
+	fw.unsigned_8(m_owner.player_number());
 
 	MapObject::save(egbase, mos, fw);
 
-	fw.Unsigned32(m_ships.size());
+	fw.unsigned_32(m_ships.size());
 	for (const Ship * temp_ship : m_ships) {
-		fw.Unsigned32(mos.get_object_file_index(*temp_ship));
+		fw.unsigned_32(mos.get_object_file_index(*temp_ship));
 	}
-	fw.Unsigned32(m_ports.size());
+	fw.unsigned_32(m_ports.size());
 	for (const PortDock * temp_port : m_ports) {
-		fw.Unsigned32(mos.get_object_file_index(*temp_port));
+		fw.unsigned_32(mos.get_object_file_index(*temp_port));
 	}
 
-	fw.Unsigned8(m_act_pending);
+	fw.unsigned_8(m_act_pending);
 }
 
 } // namespace Widelands

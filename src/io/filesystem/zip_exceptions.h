@@ -27,7 +27,7 @@
  *
  * Problems with the zipfile itself or normal file operations should throw
  * FileError or one of it's descendants with an appropriate message. E.g.:
- * throw FileNotFoundError("ZipFilesystem::Load", fname,
+ * throw FileNotFoundError("ZipFilesystem::load", fname,
  * "couldn't open file (from zipfile "+m_zipfilename+")");
  */
 struct ZipOperationError : public std::logic_error {

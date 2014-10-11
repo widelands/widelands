@@ -42,45 +42,52 @@ enum class PlayerEndResult: uint8_t;
  */
 class GameController {
 public:
+	enum class GameType : uint8_t {
+		SINGLEPLAYER = 1, // we don't want SINGLEPLAYER just because a value is empty
+		NETCLIENT,
+		NETHOST,
+		REPLAY
+	};
+
 	virtual ~GameController() {}
 
 	virtual void think() = 0;
-	virtual void sendPlayerCommand(Widelands::PlayerCommand &) = 0;
-	virtual int32_t getFrametime() = 0;
-	virtual std::string getGameDescription() = 0;
+	virtual void send_player_command(Widelands::PlayerCommand &) = 0;
+	virtual int32_t get_frametime() = 0;
+	virtual GameType get_game_type() = 0;
 
 	/**
 	 * \return the effective speed, in milliseconds per second,
 	 * that the game is running at.
 	 */
-	virtual uint32_t realSpeed() = 0;
+	virtual uint32_t real_speed() = 0;
 
 	/**
 	 * \return the speed that the local player wants the game to run at.
 	 */
-	virtual uint32_t desiredSpeed() = 0;
+	virtual uint32_t desired_speed() = 0;
 
 	/**
 	 * Indicate to the game controller the speed (in milliseconds per second)
 	 * that the local player wants the game to run at.
 	 */
-	virtual void setDesiredSpeed(uint32_t speed) = 0;
+	virtual void set_desired_speed(uint32_t speed) = 0;
 
 	/**
 	 * Whether the game is paused.
 	 */
-	virtual bool isPaused() = 0;
+	virtual bool is_paused() = 0;
 
 	/**
 	 * Sets whether the game is paused.
 	 */
-	virtual void setPaused(const bool paused) = 0;
+	virtual void set_paused(const bool paused) = 0;
 
 	/**
 	 * Toggle pause state (convenience function)
 	 */
-	void togglePaused() {
-		setPaused(!isPaused());
+	void toggle_paused() {
+		set_paused(!is_paused());
 	}
 
 	/**

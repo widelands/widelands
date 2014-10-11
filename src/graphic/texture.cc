@@ -51,7 +51,7 @@ Texture::Texture(const std::vector<std::string>& texture_files,
 	}
 
 	for (const std::string& fname : texture_files) {
-		if (!g_fs->FileExists(fname)) {
+		if (!g_fs->file_exists(fname)) {
 			throw wexception("Could not find %s.", fname.c_str());
 		}
 
