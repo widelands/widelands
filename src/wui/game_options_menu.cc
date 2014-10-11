@@ -30,10 +30,11 @@
 #include "ui_fsmenu/fileview.h"
 #include "wui/game_main_menu_save_game.h"
 #include "wui/game_options_sound_menu.h"
+#include "wui/unique_window_handler.h"
 
 GameOptionsMenu::GameOptionsMenu
-	(InteractiveGameBase                         & gb,
-	 UI::UniqueWindow::Registry                   & registry,
+	(InteractiveGameBase                      & gb,
+	 UI::UniqueWindow::Registry               & registry,
 	 InteractiveGameBase::GameMainMenuWindows & windows)
 :
 	UI::UniqueWindow
@@ -81,6 +82,7 @@ GameOptionsMenu::GameOptionsMenu
 		 buttonw(1), 35,
 		 g_gr->images().get("pics/but4.png"),
 		 g_gr->images().get("pics/menu_save_game.png"),
+		 /** TRANSLATORS: Button tooltip */
 		 _("Save Game")),
 	exit_game
 		(this, "exit_game",
@@ -90,6 +92,7 @@ GameOptionsMenu::GameOptionsMenu
 		 buttonw(1), 35,
 		 g_gr->images().get("pics/but4.png"),
 		 g_gr->images().get("pics/menu_exit_game.png"),
+		 /** TRANSLATORS: Button tooltip */
 		 _("Exit Game"))
 {
 	readme.sigclicked.connect
@@ -133,6 +136,11 @@ GameOptionsMenu::GameOptionsMenu
 	if (get_usedefaultpos())
 		center_to_parent();
 }
+GameOptionsMenu::~GameOptionsMenu() {
+	UI::UniqueWindow::Registry& registry =
+		m_gb.unique_windows().get_registry("game_options_confirm_exit_game");
+	registry.destroy();
+}
 
 void GameOptionsMenu::clicked_sound() {
 	if (m_windows.sound_options.window)
@@ -146,4 +154,44 @@ void GameOptionsMenu::clicked_save_game() {
 	die();
 }
 
-void GameOptionsMenu::clicked_exit_game() {m_gb.end_modal(0);}
+
+struct GameOptionsMenuExitConfirmBox : public UI::WLMessageBox {
+	GameOptionsMenuExitConfirmBox
+		(UI::Panel& parent, InteractiveGameBase & gb)
+		:
+		UI::WLMessageBox
+			(&parent,
+			 /** TRANSLATORS: Window label when "Exit game" has been pressed */
+			 _("Exit Game Confirmation"),
+			_("Are you sure you wish to exit this game?"),
+			 YESNO),
+		m_gb(gb)
+	{}
+
+	void pressed_yes() override
+	{
+		m_gb.end_modal(0);
+	}
+
+	void pressed_no() override
+	{
+		die();
+	}
+
+private:
+	InteractiveGameBase & m_gb;
+};
+
+void GameOptionsMenu::clicked_exit_game() {
+	if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) {
+		m_gb.end_modal(0);
+	}
+	else {
+		UI::UniqueWindow::Registry& registry =
+			m_gb.unique_windows().get_registry("game_options_confirm_exit_game");
+		registry.open_window = [this, &registry] {
+			new GameOptionsMenuExitConfirmBox(*get_parent(), m_gb);
+		};
+		registry.create();
+	}
+}
