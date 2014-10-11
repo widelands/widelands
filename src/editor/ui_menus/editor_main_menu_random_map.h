@@ -68,6 +68,19 @@ private:
 		std::string descrname;
 	};
 
+	// NOCOM(#codereview): style first structs (or types), then methods, then variables.
+	void button_clicked(ButtonId);
+	void clicked_create_map();
+	void id_edit_box_changed();
+	void nr_edit_box_changed();
+
+	// Ensures that the sum of our landmass is >= 0% and <= 100%, and changes
+	// values as necessary.
+	// NOCOM(#codereview): What is 'button_id' and comment why it is used?
+	void normalize_landmass(MainMenuNewRandomMap::ButtonId button_id);
+
+	void set_map_info(Widelands::UniqueRandomMapInfo & mapInfo) const;
+
 	const std::vector<WorldDescription> m_world_descriptions;
 	int m_current_world;
 	UI::Textarea * m_width, * m_height, * m_land;
@@ -80,6 +93,7 @@ private:
 	// this is just a placeholder, the result will not be passed
 	// but value will be recalculated from three above results
 	// needed for normalization
+	// NOCOM(#codereview): this comment is hard to understand. Passed where?
 	int32_t m_mountainsval;
 	uint8_t m_pn;
 	uint32_t m_mapNumber;
@@ -89,15 +103,7 @@ private:
 	UI::EditBox * m_nrEditbox;
 	UI::EditBox * m_idEditbox;
 
-	void button_clicked(ButtonId);
-	void clicked_create_map();
-	void id_edit_box_changed();
-	void nr_edit_box_changed();
-	// This function makes sure that the sum of our landmass is >= 0% and <= 100%,
-	// and changes these values directly.
-	void normalize_landmass(MainMenuNewRandomMap::ButtonId button_id);
-
-	void set_map_info(Widelands::UniqueRandomMapInfo & mapInfo) const;
+	DISALLOW_COPY_AND_ASSIGN(WorldDescription);
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_RANDOM_MAP_H

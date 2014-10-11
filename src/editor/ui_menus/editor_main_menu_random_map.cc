@@ -75,6 +75,9 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 
 	// ---------- Random map number edit ----------
 
+	// NOCOM(#codereview): This menu should use a UI::Box of course. No need to
+	// fix it right now, just making you all aware that this form of UI layout
+	// is not easy to work with and breaks easily.
 	new UI::Textarea(this, posx, posy, _("Random Number:"));
 	posy += height + spacing;
 
@@ -439,7 +442,6 @@ void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 // If the the sum of our landmass is < 0% or > 100% change the mountain value.
 // If the mountain value gets out of range, change the other values.
 void MainMenuNewRandomMap::normalize_landmass(ButtonId button_id) {
-
 	int32_t sum_without_mountainsval = m_waterval + m_landval + m_wastelandval;
 
 	// Prefer changing mountainsval to keep consistency with old behaviour
