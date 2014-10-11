@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2014-09-29 20:36+0100\n"
+"POT-Creation-Date: 2014-10-08 06:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -823,7 +823,7 @@ msgid "Loading map"
 msgstr ""
 
 #: ../../src/logic/game.cc:369 ../../src/logic/game.cc:402
-#: ../../src/wlapplication.cc:1586
+#: ../../src/wlapplication.cc:1500
 msgid "Loading..."
 msgstr ""
 
@@ -1359,7 +1359,7 @@ msgid ""
 msgstr ""
 
 #: ../../src/network/netclient.cc:198 ../../src/network/nethost.cc:849
-#: ../../src/wlapplication.cc:1479
+#: ../../src/wlapplication.cc:1393
 msgid "Preparing game"
 msgstr ""
 
@@ -2585,17 +2585,17 @@ msgstr ""
 msgid "Load Game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1178
+#: ../../src/wlapplication.cc:1092
 msgid ""
 "Your video settings could not be enabled, and fallback settings are in "
 "effect. Please check the graphics options!"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1252
+#: ../../src/wlapplication.cc:1166
 msgid "Game data error"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1262
+#: ../../src/wlapplication.cc:1176
 #, c-format
 msgid ""
 "\n"
@@ -2605,7 +2605,7 @@ msgid ""
 "using build %1$s (%2$s). "
 msgstr ""
 
-#: ../../src/wlapplication.cc:1269
+#: ../../src/wlapplication.cc:1183
 msgid ""
 "Please add this information to your report.\n"
 "\n"
