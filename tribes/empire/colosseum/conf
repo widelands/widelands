@@ -20,7 +20,7 @@ gold=2
 marblecolumn=2
 
 [working positions]
-carrier=1
+trainer=1
 
 [inputs]
 bread=10
