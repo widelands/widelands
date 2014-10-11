@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-09-29 20:36+0100\n"
-"PO-Revision-Date: 2014-06-18 09:11+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"POT-Creation-Date: 2014-10-04 16:33+0100\n"
+"PO-Revision-Date: 2014-10-04 22:19+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-30 05:59+0000\n"
+"X-Launchpad-Export-Date: 2014-10-05 05:48+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: hu\n"
 
@@ -827,7 +827,7 @@ msgid "Loading map"
 msgstr "Térkép betöltése"
 
 #: ../../src/logic/game.cc:369 ../../src/logic/game.cc:402
-#: ../../src/wlapplication.cc:1586
+#: ../../src/wlapplication.cc:1500
 msgid "Loading..."
 msgstr "Betöltés…"
 
@@ -1380,7 +1380,7 @@ msgstr ""
 "a szerver leállt ahogy csatlakozni próbáltál."
 
 #: ../../src/network/netclient.cc:198 ../../src/network/nethost.cc:849
-#: ../../src/wlapplication.cc:1479
+#: ../../src/wlapplication.cc:1393
 msgid "Preparing game"
 msgstr "Játék előtötése"
 
@@ -2612,17 +2612,17 @@ msgstr "Hadjáratok"
 msgid "Load Game"
 msgstr "Játék betöltése"
 
-#: ../../src/wlapplication.cc:1178
+#: ../../src/wlapplication.cc:1092
 msgid ""
 "Your video settings could not be enabled, and fallback settings are in "
 "effect. Please check the graphics options!"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1252
+#: ../../src/wlapplication.cc:1166
 msgid "Game data error"
 msgstr "Játékadat hiba"
 
-#: ../../src/wlapplication.cc:1262
+#: ../../src/wlapplication.cc:1176
 #, c-format
 msgid ""
 "\n"
@@ -2637,7 +2637,7 @@ msgstr ""
 "hibával kapcoslatos üzeneteket megtalálod a standard kimeneten (stdout.txt "
 "Windowson). Te ezt a verziót használod: %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1269
+#: ../../src/wlapplication.cc:1183
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -3606,23 +3606,3 @@ msgstr "Követ"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "Use single Watchwindow Mode"
-#~ msgstr "Egy nézőke ablak"
-
-#~ msgid "px."
-#~ msgstr "px."
-
-#~ msgid "Remove Replays older than:"
-#~ msgstr "Ennyi időnél idősebb felvételek törlése:"
-
-#~ msgid "min."
-#~ msgstr "perc"
-
-#~ msgid "Consumed ware type(s)"
-#~ msgstr "Felhasznált termék(ek)"
-
-#~ msgid " is missing"
-#~ msgid_plural " are missing"
-#~ msgstr[0] " hiányzik"
-#~ msgstr[1] " hiányoznak"

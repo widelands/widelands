@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-29 20:36+0100\n"
-"PO-Revision-Date: 2014-09-30 10:54+0000\n"
+"POT-Creation-Date: 2014-10-04 16:33+0100\n"
+"PO-Revision-Date: 2014-10-06 17:39+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
@@ -17,13 +17,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-10-01 05:33+0000\n"
+"X-Launchpad-Export-Date: 2014-10-07 05:36+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: gd\n"
 
 #: ../../src/ai/computer_player.cc:39
 msgid "None"
-msgstr "Gun IF"
+msgstr ": gun IF"
 
 #: ../../src/ai/defaultai.h:82
 msgid "Aggressive"
@@ -313,7 +313,7 @@ msgstr "Mapa ùr"
 #: ../../src/editor/ui_menus/editor_main_menu.cc:61
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:51
 msgid "New Random Map"
-msgstr "Mapa air thuaiream ùr"
+msgstr "Mapa tuaireamach  ùr"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:66
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:52
@@ -470,7 +470,7 @@ msgstr "Dubh"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:76
 msgid "Random Number:"
-msgstr "Àireamh air thuaiream:"
+msgstr "Àireamh thuaireamach :"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:175
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:435
@@ -529,7 +529,7 @@ msgstr "Gin mapa"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:481
 msgid "Generating random map..."
-msgstr "A' gintinn mapa air thuaiream..."
+msgstr "A' gintinn mapa tuaireamach..."
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:109
 msgid "Descr: "
@@ -671,7 +671,7 @@ msgstr "Atharraich an àirde"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:66
 msgid "Noise height"
-msgstr "Àirde air thuaiream"
+msgstr "Àirde thuaireamach"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:67
 #: ../../src/wui/minimap.cc:150
@@ -693,7 +693,7 @@ msgstr "Suidhich raon puirt"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:43
 msgid "Noise Height Options"
-msgstr "Roghainnean an àirde air thuaiream"
+msgstr "Roghainnean na h-àirde tuaireamaiche"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:146
 #, c-format
@@ -806,7 +806,7 @@ msgstr "A' luchdadh treubhan"
 
 #: ../../src/logic/game.cc:142
 msgid "Not set"
-msgstr "Cha deach a shuidheachadh"
+msgstr "Gun chumha"
 
 #: ../../src/logic/game.cc:228
 msgid "Preloading a map"
@@ -841,7 +841,7 @@ msgid "Loading map"
 msgstr "A' luchdadh am mapa"
 
 #: ../../src/logic/game.cc:369 ../../src/logic/game.cc:402
-#: ../../src/wlapplication.cc:1586
+#: ../../src/wlapplication.cc:1500
 msgid "Loading..."
 msgstr "'Ga luchdadh..."
 
@@ -1445,7 +1445,7 @@ msgstr ""
 "ceangal."
 
 #: ../../src/network/netclient.cc:198 ../../src/network/nethost.cc:849
-#: ../../src/wlapplication.cc:1479
+#: ../../src/wlapplication.cc:1393
 msgid "Preparing game"
 msgstr "Ag ullachadh a' gheama"
 
@@ -2131,7 +2131,7 @@ msgstr "Cha do thagh an t-òstair mapa no geama air a shàbhaladh fhathast."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:294 ../../src/ui_fsmenu/launch_spg.cc:243
 msgid "Win condition is set through the scenario"
-msgstr "Chaidh cumha a' bhuannachd a shuidheachadh sa chnàmh-sgeul"
+msgstr "Chaidh cumha na buaidhe a shuidheachadh sa chnàmh-sgeul"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:296
 #: ../../src/wui/multiplayersetupgroup.cc:359
@@ -2353,8 +2353,8 @@ msgid ""
 msgstr ""
 "Chì thu fiosrachadh mun mhapa no geama air a shàbhaladh taobh deas. Leigidh "
 "putan ri taobh ainm a' mhapa leis an òstair atharrachadh gu fear eile. 'S "
-"urrainn dhan òstair cuideachd cumha a' bhuannachd a shuidheachadh is an "
-"geama a thòiseachadh nuair a bhios gach cluicheadair ullamh."
+"urrainn dhan òstair cuideachd cumha na buaidhe a shuidheachadh is an geama a "
+"thòiseachadh nuair a bhios gach cluicheadair ullamh."
 
 #: ../../src/ui_fsmenu/launch_spg.cc:62
 msgid "Select map"
@@ -2387,7 +2387,7 @@ msgstr "Seòrsa tòiseachaidh"
 
 #: ../../src/ui_fsmenu/launch_spg.cc:169
 msgid "Switch to position"
-msgstr "Gearr leum dhan ionad"
+msgstr "Tagh an t-ionad seo"
 
 #: ../../src/ui_fsmenu/launch_spg.cc:269
 #, c-format
@@ -2782,7 +2782,7 @@ msgstr "Iomairtean"
 msgid "Load Game"
 msgstr "Luchdaich geama"
 
-#: ../../src/wlapplication.cc:1178
+#: ../../src/wlapplication.cc:1092
 msgid ""
 "Your video settings could not be enabled, and fallback settings are in "
 "effect. Please check the graphics options!"
@@ -2791,11 +2791,11 @@ msgstr ""
 "roghainnean èiginneach 'gan cleachdadh. Bu chòir dhut sùil a thoirt air na "
 "roghainnean grafaigeachd!"
 
-#: ../../src/wlapplication.cc:1252
+#: ../../src/wlapplication.cc:1166
 msgid "Game data error"
 msgstr "Mearachd le dàta a' gheama"
 
-#: ../../src/wlapplication.cc:1262
+#: ../../src/wlapplication.cc:1176
 #, c-format
 msgid ""
 "\n"
@@ -2811,7 +2811,7 @@ msgstr ""
 "stannardach (stdout.txt air Windows). Tha thu a' chleachdadh an togail %1$s "
 "(%2$s). "
 
-#: ../../src/wlapplication.cc:1269
+#: ../../src/wlapplication.cc:1183
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -3001,10 +3001,10 @@ msgstr "Leabhar-eòlais bathar na treubha"
 #: ../../src/wui/encyclopedia_window.cc:210
 msgid "Consumed Ware Type"
 msgid_plural "Consumed Ware Types"
-msgstr[0] "Seòrsa de bhathar air a bheil feum"
-msgstr[1] "Seòrsaichean de bhathar air a bheil feum"
-msgstr[2] "Seòrsaichean de bhathar air a bheil feum"
-msgstr[3] "Seòrsaichean de bhathar air a bheil feum"
+msgstr[0] "Bathar air a bheil feum"
+msgstr[1] "Bathar air a bheil feum"
+msgstr[2] "Bathar air a bheil feum"
+msgstr[3] "Bathar air a bheil feum"
 
 #: ../../src/wui/encyclopedia_window.cc:79
 msgid "Quantity"
@@ -3527,7 +3527,7 @@ msgstr "IF %s"
 #: ../../src/wui/multiplayersetupgroup.cc:321
 #: ../../src/wui/playerdescrgroup.cc:194
 msgid "Random"
-msgstr "Air thuaiream"
+msgstr "Tuaireamach"
 
 #: ../../src/wui/multiplayersetupgroup.cc:315
 #: ../../src/wui/playerdescrgroup.cc:182
@@ -3557,7 +3557,7 @@ msgstr "Tòiseachadh"
 
 #: ../../src/wui/playerdescrgroup.cc:175
 msgid "AI: Random"
-msgstr "IF: air thuaiream"
+msgstr "IF thuaireamach"
 
 #: ../../src/wui/plot_area.cc:107
 msgid "d"
