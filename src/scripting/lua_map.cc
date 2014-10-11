@@ -1338,7 +1338,7 @@ int LuaBuildingDescription::get_workarea_radius(lua_State * L) {
 
 /* RST
 ConstructionSiteDescription
-----------
+---------------------------
 
 .. class:: ConstructionSiteDescription
 

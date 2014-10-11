@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-09-18 18:55+0000\n"
-"PO-Revision-Date: 2014-08-30 18:45+0000\n"
-"Last-Translator: bouchard renaud <Unknown>\n"
+"POT-Creation-Date: 2014-10-04 15:33+0000\n"
+"PO-Revision-Date: 2014-10-01 22:01+0000\n"
+"Last-Translator: François Rousselet <francoisrouslt@gmail.com>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-09-19 05:50+0000\n"
+"X-Launchpad-Export-Date: 2014-10-05 05:42+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: fr\n"
 
@@ -564,13 +564,10 @@ msgstr "Produit du Charbon."
 
 #: ../../tribes/atlanteans/coal/conf:1
 msgid ""
-"The Atlantean fires in smelting works, armorsmithies and weaponsmithies are "
-"fed with coal. This coal is mined in coal mines or produced out of logs by a "
-"charcoal kiln."
+"The Atlantean fires in smelting works, armor smithies and weapon smithies "
+"are fed with coal. This coal is mined in coal mines or produced out of logs "
+"by a charcoal kiln."
 msgstr ""
-"Les feux Atlantes dans les forges, les forges d'armures et les forges "
-"d'armes sont nourris de charbon. Ce charbon est extrait des mines de charbon "
-"ou produit à partir de troncs dans un four à charbon."
 
 #: ../../tribes/atlanteans/coalmine/conf:26
 #: ../../tribes/atlanteans/crystalmine/conf:34
@@ -1240,7 +1237,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/crystalmine/help.lua:17
 msgid "Carve precious stones out of the rock in mountain terrain."
-msgstr ""
+msgstr "Tailler les pierres précieuses dans la roche en terrain montagneux."
 
 #: ../../tribes/atlanteans/diamond/conf:1
 msgid ""
@@ -1300,6 +1297,8 @@ msgstr "Récolte du maïs"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
+"Le fermier qui travaille dans cette ferme n'a pas dégagé le sol pour planter "
+"ses graines."
 
 #: ../../tribes/atlanteans/farm/help.lua:17
 msgid "Sow and harvest corn."
@@ -1364,6 +1363,8 @@ msgstr ""
 msgid ""
 "The fisher’s house needs water full of fish within the working radius."
 msgstr ""
+"La cabane de pêche nécessite un point d'eau rempli de poissons dans son "
+"rayon d'action."
 
 #: ../../tribes/atlanteans/fishing_net/conf:1
 msgid "The fishing net is used by the fisher and produced by the toolsmith."
@@ -1388,6 +1389,8 @@ msgid ""
 "The foresters’s house needs free space within the working radius to plant "
 "the trees."
 msgstr ""
+"La cabane du forestier nécessite de l'espace disponible dans son rayon "
+"d'action pour planter des arbres."
 
 #: ../../tribes/atlanteans/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -1508,7 +1511,7 @@ msgstr "Élève les puissants chevaux atlantes"
 
 #: ../../tribes/atlanteans/horsefarm/conf:26
 msgid "breeding horses"
-msgstr ""
+msgstr "élevage de chevaux"
 
 #: ../../tribes/atlanteans/horsefarm/help.lua:17
 msgid "Breeds horses for adding them to the transportation system."
@@ -1583,11 +1586,11 @@ msgstr "dors"
 
 #: ../../tribes/atlanteans/labyrinth/conf:48
 msgid "upgrading soldier defense from level 0 to level 1"
-msgstr ""
+msgstr "augmenter la défense du soldat du niveau 0 au niveau 1"
 
 #: ../../tribes/atlanteans/labyrinth/conf:50
 msgid "upgrading soldier defense from level 1 to level 2"
-msgstr ""
+msgstr "augmenter la défense du soldat du niveau 1 au niveau 2"
 
 #: ../../tribes/atlanteans/labyrinth/conf:52
 msgid "upgrading soldier health from level 0 to level 1"

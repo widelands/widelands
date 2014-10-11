@@ -109,97 +109,6 @@ void terminate(int) {
 
 }  // namespace
 
-
-/**
- * Sets the filelocators default searchpaths (partly OS specific)
- */
-// TODO(unknown): Handle exception FileTypeError
-// TODO(unknown): Handle case when \e no data can be found
-void WLApplication::setup_searchpaths(std::string argv0)
-{
-	try {
-#if defined (__APPLE__) || defined(_WIN32)
-		// on mac and windows, the default data dir is relative to the executable directory
-		std::string s = get_executable_path();
-		log("Adding executable directory to search path\n");
-		g_fs->add_file_system(&FileSystem::create(s));
-#else
-		log ("Adding directory:%s\n", INSTALL_PREFIX "/" INSTALL_DATADIR);
-		g_fs->add_file_system //  see config.h
-			(&FileSystem::create
-			 	(std::string(INSTALL_PREFIX) + '/' + INSTALL_DATADIR));
-#endif
-	}
-	catch (FileNotFoundError &) {}
-	catch (FileAccessDeniedError & e) {
-		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
-	}
-	catch (FileTypeError &) {
-		//TODO(unknown): handle me
-	}
-
-	try {
-#ifdef __linux__
-		// if that fails, search in FHS standard location (obviously UNIX-only)
-		log ("Adding directory:/usr/share/games/widelands\n");
-		g_fs->add_file_system(&FileSystem::create("/usr/share/games/widelands"));
-#endif
-	}
-	catch (FileNotFoundError &) {}
-	catch (FileAccessDeniedError & e) {
-		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
-	}
-	catch (FileTypeError &) {
-		//TODO(unknown): handle me
-	}
-
-	try {
-#ifndef __APPLE__
-		/*
-		 * Why? Please do NOT attempt do read from random places.
-		 * absolute fallback directory is the CWD
-		 */
-		log ("Adding directory:.\n");
-		g_fs->add_file_system(&FileSystem::create("."));
-#endif
-	}
-	catch (FileNotFoundError &) {}
-	catch (FileAccessDeniedError & e) {
-		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
-	}
-	catch (FileTypeError &) {
-		//TODO(unknown): handle me
-	}
-
-	//TODO(unknown): what if all the searching failed? Bail out!
-
-	// the directory the executable is in is the default game data directory
-	std::string::size_type slash = argv0.rfind('/');
-	std::string::size_type backslash = argv0.rfind('\\');
-
-	if
-		(backslash != std::string::npos &&
-		 (slash == std::string::npos || backslash > slash))
-		slash = backslash;
-
-	if (slash != std::string::npos) {
-		argv0.erase(slash);
-		if (argv0 != ".") {
-			try {
-				log ("Adding directory: %s\n", argv0.c_str());
-				g_fs->add_file_system(&FileSystem::create(argv0));
-			}
-			catch (FileNotFoundError &) {}
-			catch (FileAccessDeniedError & e) {
-				log ("Access denied on %s. Continuing.\n", e.m_filename.c_str());
-			}
-			catch (FileTypeError &) {
-				//TODO(unknown): handle me
-			}
-		}
-	}
-}
-
 void WLApplication::setup_homedir() {
 	//If we don't have a home directory don't do anything
 	if (m_homedir.size()) {
@@ -263,7 +172,7 @@ m_mouse_position       (0, 0),
 m_mouse_locked         (0),
 m_mouse_compensate_warp(0, 0),
 m_should_die           (false),
-m_default_datadirs     (true),
+m_use_default_datadir     (true),
 #ifdef _WIN32
 m_homedir(FileSystem::get_homedir() + "\\.widelands"),
 #else
@@ -288,8 +197,13 @@ m_redirected_stdio(false)
 
 	setup_homedir();
 	init_settings();
-	if (m_default_datadirs)
-		setup_searchpaths(m_commandline["EXENAME"]);
+
+	if (m_use_default_datadir) {
+		const std::string default_datadir =
+		   std::string(INSTALL_PREFIX) + "/" + std::string(INSTALL_DATADIR);
+		log("Adding directory: %s\n", default_datadir.c_str());
+		g_fs->add_file_system(&FileSystem::create(default_datadir));
+	}
 	init_language(); // search paths must already be set up
 	cleanup_replays();
 
@@ -1069,8 +983,8 @@ void WLApplication::handle_commandline_parameters()
 
 	if (m_commandline.count("datadir")) {
 		log ("Adding directory: %s\n", m_commandline["datadir"].c_str());
+		m_use_default_datadir = false;
 		g_fs->add_file_system(&FileSystem::create(m_commandline["datadir"]));
-		m_default_datadirs = false;
 		m_commandline.erase("datadir");
 	}
 

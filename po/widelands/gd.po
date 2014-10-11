@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-18 19:55+0100\n"
-"PO-Revision-Date: 2014-09-22 11:03+0000\n"
+"POT-Creation-Date: 2014-10-04 16:33+0100\n"
+"PO-Revision-Date: 2014-10-06 17:39+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
@@ -17,13 +17,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-09-23 05:52+0000\n"
+"X-Launchpad-Export-Date: 2014-10-07 05:36+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: gd\n"
 
 #: ../../src/ai/computer_player.cc:39
 msgid "None"
-msgstr "Gun IF"
+msgstr ": gun IF"
 
 #: ../../src/ai/defaultai.h:82
 msgid "Aggressive"
@@ -136,7 +136,7 @@ msgstr ""
 #: ../../src/editor/editorinteractive.cc:595
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:154
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:478
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:175
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:177
 #: ../../src/logic/map.h:177
 msgid "No Name"
 msgstr "Gun ainm"
@@ -313,7 +313,7 @@ msgstr "Mapa ùr"
 #: ../../src/editor/ui_menus/editor_main_menu.cc:61
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:51
 msgid "New Random Map"
-msgstr "Mapa air thuaiream ùr"
+msgstr "Mapa tuaireamach  ùr"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:66
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:52
@@ -379,10 +379,10 @@ msgstr "Cluichead.:"
 msgid "Descr:"
 msgstr "Tuairisgeul:"
 
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:114
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:125
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:115
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:126
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:56
-#: ../../src/scripting/lua_game.cc:405 ../../src/ui_basic/helpwindow.cc:86
+#: ../../src/scripting/lua_game.cc:393 ../../src/ui_basic/helpwindow.cc:86
 #: ../../src/ui_basic/messagebox.cc:90
 #: ../../src/ui_fsmenu/campaign_select.cc:76
 #: ../../src/ui_fsmenu/campaign_select.cc:283
@@ -393,18 +393,18 @@ msgstr "Tuairisgeul:"
 msgid "OK"
 msgstr "Ceart ma-thà"
 
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:123
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:132
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:125
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:134
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:66
-#: ../../src/ui_fsmenu/launch_mpg.cc:90 ../../src/ui_fsmenu/options.cc:107
-#: ../../src/ui_fsmenu/options.cc:422
-#: ../../src/wui/game_main_menu_save_game.cc:104 ../../src/wui/login_box.cc:70
+#: ../../src/ui_fsmenu/launch_mpg.cc:90 ../../src/ui_fsmenu/options.cc:113
+#: ../../src/ui_fsmenu/options.cc:478
+#: ../../src/wui/game_main_menu_save_game.cc:104 ../../src/wui/login_box.cc:73
 msgid "Cancel"
 msgstr "Sguir dheth"
 
 #. * TRANSLATORS: Parent directory
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:208
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:289
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:212
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:293
 #: ../../src/ui_fsmenu/editor_mapselect.cc:215
 #: ../../src/ui_fsmenu/mapselect.cc:332
 msgid "parent"
@@ -470,7 +470,7 @@ msgstr "Dubh"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:76
 msgid "Random Number:"
-msgstr "Àireamh air thuaiream:"
+msgstr "Àireamh thuaireamach :"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:175
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:435
@@ -529,30 +529,35 @@ msgstr "Gin mapa"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:481
 msgid "Generating random map..."
-msgstr "A' gintinn mapa air thuaiream..."
+msgstr "A' gintinn mapa tuaireamach..."
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:109
 msgid "Descr: "
 msgstr "Tuairisgeul: "
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:139
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:141
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:32
 msgid "Make Directory"
 msgstr "Cruthaich pasgan"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:199
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:201
 msgid "unnamed"
 msgstr "gun ainm"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:246
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:249
+#, c-format
+msgid "Directory: %s"
+msgstr "Pasgan: %s"
+
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:251
 msgid "directory"
 msgstr "pasgan"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:250
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:253
 msgid "Not a map file"
 msgstr "Chan e faidhle mapa a th' ann"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:378
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:382
 #: ../../src/wui/game_main_menu_save_game.cc:267
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
@@ -560,12 +565,12 @@ msgstr ""
 "Tha faidhle air a bheil \"%s\" ann mar-thà. A bheil thu airson sgrìobhadh "
 "thairis air?"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:381
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:401
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:385
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:405
 msgid "Error Saving Map!"
 msgstr "Mearachd le sàbhaladh a' mhapa!"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:397
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:401
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -666,7 +671,7 @@ msgstr "Atharraich an àirde"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:66
 msgid "Noise height"
-msgstr "Àirde air thuaiream"
+msgstr "Àirde thuaireamach"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:67
 #: ../../src/wui/minimap.cc:150
@@ -688,7 +693,7 @@ msgstr "Suidhich raon puirt"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:43
 msgid "Noise Height Options"
-msgstr "Roghainnean an àirde air thuaiream"
+msgstr "Roghainnean na h-àirde tuaireamaiche"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:146
 #, c-format
@@ -709,7 +714,37 @@ msgstr "Suidhich an luach: %u"
 msgid "Immovable Select"
 msgstr "Tagh nì neo-ghluasadach"
 
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:119
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:88
+msgid "arable"
+msgstr "talamh-àitich"
+
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:94
+msgid "aquatic"
+msgstr "uisge"
+
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:100
+msgid "mountainous"
+msgstr "monadh"
+
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:106
+msgid "dead"
+msgstr "marbh"
+
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:113
+msgid "unpassable"
+msgstr "do-choiseach"
+
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:118
+msgid "treeless"
+msgstr "gun chraobhan"
+
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:141
 msgid "Terrain Select"
 msgstr "Tagh cruth-tìre"
 
@@ -771,7 +806,7 @@ msgstr "A' luchdadh treubhan"
 
 #: ../../src/logic/game.cc:142
 msgid "Not set"
-msgstr "Cha deach a shuidheachadh"
+msgstr "Gun chumha"
 
 #: ../../src/logic/game.cc:228
 msgid "Preloading a map"
@@ -806,7 +841,7 @@ msgid "Loading map"
 msgstr "A' luchdadh am mapa"
 
 #: ../../src/logic/game.cc:369 ../../src/logic/game.cc:402
-#: ../../src/wlapplication.cc:1586
+#: ../../src/wlapplication.cc:1500
 msgid "Loading..."
 msgstr "'Ga luchdadh..."
 
@@ -949,8 +984,8 @@ msgstr "nach eil an eaconamaidh feumach air an obraiche ‘%s’"
 #: ../../src/logic/production_program.cc:343
 #: ../../src/logic/production_program.cc:365
 #: ../../src/logic/production_program.cc:945
-#: ../../src/logic/production_program.cc:1062
-#: ../../src/logic/production_program.cc:1157
+#: ../../src/logic/production_program.cc:1063
+#: ../../src/logic/production_program.cc:1158
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$ix %2$s"
@@ -978,7 +1013,15 @@ msgid "the workers need no experience"
 msgstr "nach eil eòlas a dhìth air aobraiche"
 
 #. * TRANSLATORS: "Did not start working because the economy needs the ware ‘%s’"
+#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
+#. * TRANSLATORS: For this example, this is what's in the place holders:
+#. * TRANSLATORS:    %1$s = "working"
+#. * TRANSLATORS:    %2$s = "3x water and 3x wheat are missing"
+#. * TRANSLATORS: This appears in the hover text on buildings. Please test these in context
+#. * TRANSLATORS: on a development build if you can, and let us know if there are any issues
+#. * TRANSLATORS: we need to address for your language.
 #: ../../src/logic/production_program.cc:577
+#: ../../src/logic/production_program.cc:968
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr "Cha deach leinn %1$s air sgàth 's %2$s"
@@ -996,53 +1039,40 @@ msgid "Skipped %1$s because %2$s"
 msgstr "Leig sinn seachad %1$s air sgàth 's %2$s"
 
 #. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
-#. * TRANSLATORS: For this example, this is what's in the place holders:
-#. * TRANSLATORS:    %1$s = "work"
-#. * TRANSLATORS:    %2$s = "water and wheat (2) "
-#. * TRANSLATORS:    %3$s = "are missing"
-#: ../../src/logic/production_program.cc:959
-#, c-format
-msgid "Did not start %1$s because %2$s %3$s"
-msgstr "Cha deach leinn %1$s air sgàth 's %2$s %3$s"
-
-#. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta bread is missing'
-#. * TRANSLATORS:
-#. * TRANSLATORS: This appears in the hover text on buildings. Please test these in context
-#. * TRANSLATORS: on a development build if you can, and let us know if there are any issues
-#. * TRANSLATORS: we need to address for your language.
-#: ../../src/logic/production_program.cc:968
-msgid " is missing"
-msgid_plural " are missing"
-msgstr[0] " a dhìth"
-msgstr[1] " a dhìth"
-msgstr[2] " a dhìth"
-msgstr[3] " a dhìth"
+#: ../../src/logic/production_program.cc:956
+#, c-format
+msgid "%s is missing"
+msgid_plural "%s are missing"
+msgstr[0] "gu bheil %s a dhìth"
+msgstr[1] "gu bheil %s a dhìth"
+msgstr[2] "gu bheil %s a dhìth"
+msgstr[3] "gu bheil %s a dhìth"
 
 #. * TRANSLATORS: %s is a list of wares
-#: ../../src/logic/production_program.cc:1072
+#: ../../src/logic/production_program.cc:1073
 #, c-format
 msgid "Produced %s"
 msgstr "Chaidh %s a shaothrachadh"
 
 #. * TRANSLATORS: %s is a list of workers
-#: ../../src/logic/production_program.cc:1166
+#: ../../src/logic/production_program.cc:1167
 #, c-format
 msgid "Recruited %s"
 msgstr "Chaidh %s a thrusadh"
 
 #. * TRANSLATORS: %1$s = production site name, %2$s = production program name, %3$s = resource
-#: ../../src/logic/production_program.cc:1227
+#: ../../src/logic/production_program.cc:1228
 #, c-format
 msgid "%1$s %2$s mine %3$s"
 msgstr "%1$s %2$s – tochladh %3$s"
 
-#: ../../src/logic/production_program.cc:1389
+#: ../../src/logic/production_program.cc:1390
 msgid "No soldier to train!"
 msgstr "Chan eil saighdear ri thrèanadh ann!"
 
-#: ../../src/logic/production_program.cc:1397
-#: ../../src/logic/production_program.cc:1482
+#: ../../src/logic/production_program.cc:1398
+#: ../../src/logic/production_program.cc:1483
 msgid "No soldier found for this training level!"
 msgstr "Cha deach saighdear airson an leibheil de thrèanaidh seo a lorg!"
 
@@ -1415,7 +1445,7 @@ msgstr ""
 "ceangal."
 
 #: ../../src/network/netclient.cc:198 ../../src/network/nethost.cc:849
-#: ../../src/wlapplication.cc:1479
+#: ../../src/wlapplication.cc:1393
 msgid "Preparing game"
 msgstr "Ag ullachadh a' gheama"
 
@@ -1857,7 +1887,7 @@ msgstr ""
 "Gheibh an cliant %1$s a' bhròg gu fèin-obrachail mur fhuaras freagairt an "
 "ceann %2$s."
 
-#: ../../src/scripting/lua_game.cc:1000
+#: ../../src/scripting/lua_game.cc:988
 #, c-format
 msgid "%1$s (achieved %2$s)"
 msgstr "%1$s (%2$s air a choileanadh)"
@@ -1879,19 +1909,25 @@ msgstr "Chan eil"
 msgid "Preparing..."
 msgstr "'Ga ullachadh..."
 
-#: ../../src/ui_basic/spinbox.cc:116
+#. * TRANSLATORS: %i = number, %s = unit, e.g. "5 pixels" in the advanced options
+#: ../../src/ui_basic/spinbox.cc:126
+#, c-format
+msgid "%i %s"
+msgstr "%i %s"
+
+#: ../../src/ui_basic/spinbox.cc:136
 msgid "Increase the value"
 msgstr "Meudaich an luach"
 
-#: ../../src/ui_basic/spinbox.cc:124
+#: ../../src/ui_basic/spinbox.cc:144
 msgid "Decrease the value"
 msgstr "Lùghdaich an luach"
 
-#: ../../src/ui_basic/spinbox.cc:135
+#: ../../src/ui_basic/spinbox.cc:155
 msgid "Increase the value by 10"
 msgstr "Meudaich an luach le 10"
 
-#: ../../src/ui_basic/spinbox.cc:143
+#: ../../src/ui_basic/spinbox.cc:163
 msgid "Decrease the value by 10"
 msgstr "Lùghdaich an luach le 10"
 
@@ -2095,7 +2131,7 @@ msgstr "Cha do thagh an t-òstair mapa no geama air a shàbhaladh fhathast."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:294 ../../src/ui_fsmenu/launch_spg.cc:243
 msgid "Win condition is set through the scenario"
-msgstr "Chaidh cumha a' bhuannachd a shuidheachadh sa chnàmh-sgeul"
+msgstr "Chaidh cumha na buaidhe a shuidheachadh sa chnàmh-sgeul"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:296
 #: ../../src/wui/multiplayersetupgroup.cc:359
@@ -2317,8 +2353,8 @@ msgid ""
 msgstr ""
 "Chì thu fiosrachadh mun mhapa no geama air a shàbhaladh taobh deas. Leigidh "
 "putan ri taobh ainm a' mhapa leis an òstair atharrachadh gu fear eile. 'S "
-"urrainn dhan òstair cuideachd cumha a' bhuannachd a shuidheachadh is an "
-"geama a thòiseachadh nuair a bhios gach cluicheadair ullamh."
+"urrainn dhan òstair cuideachd cumha na buaidhe a shuidheachadh is an geama a "
+"thòiseachadh nuair a bhios gach cluicheadair ullamh."
 
 #: ../../src/ui_fsmenu/launch_spg.cc:62
 msgid "Select map"
@@ -2351,7 +2387,7 @@ msgstr "Seòrsa tòiseachaidh"
 
 #: ../../src/ui_fsmenu/launch_spg.cc:169
 msgid "Switch to position"
-msgstr "Gearr leum dhan ionad"
+msgstr "Tagh an t-ionad seo"
 
 #: ../../src/ui_fsmenu/launch_spg.cc:269
 #, c-format
@@ -2528,7 +2564,7 @@ msgid "Show login dialog"
 msgstr "Seall còmhradh logaidh a-steach"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:115
-#: ../../src/ui_fsmenu/netsetup_lan.cc:121 ../../src/wui/login_box.cc:74
+#: ../../src/ui_fsmenu/netsetup_lan.cc:121 ../../src/wui/login_box.cc:77
 msgid "nobody"
 msgstr "gun_ainm"
 
@@ -2575,21 +2611,87 @@ msgstr "Fosgailte"
 msgid "Closed"
 msgstr "Dùinte"
 
-#: ../../src/ui_fsmenu/options.cc:102 ../../src/ui_fsmenu/options.cc:446
+#: ../../src/ui_fsmenu/options.cc:108 ../../src/ui_fsmenu/options.cc:489
 msgid "Advanced Options"
 msgstr "Roghainnean adhartach"
 
-#: ../../src/ui_fsmenu/options.cc:112 ../../src/ui_fsmenu/options.cc:427
+#: ../../src/ui_fsmenu/options.cc:118 ../../src/ui_fsmenu/options.cc:483
 msgid "Apply"
 msgstr "Cuir an sàs"
 
-#: ../../src/ui_fsmenu/options.cc:123
-msgid "min."
-msgstr "m."
+#: ../../src/ui_fsmenu/options.cc:124
+msgid "General Options"
+msgstr "Roghainnean coitcheann"
+
+#: ../../src/ui_fsmenu/options.cc:130
+msgid "In-game resolution"
+msgstr "Dùmhlachd-bhreacaidh sa gheama"
+
+#: ../../src/ui_fsmenu/options.cc:146
+msgid "Fullscreen"
+msgstr "Làn-sgrìn"
+
+#: ../../src/ui_fsmenu/options.cc:157
+msgid "Grab Input"
+msgstr "Glac an t-ion-chur"
+
+#: ../../src/ui_fsmenu/options.cc:164
+msgid "Maximum FPS:"
+msgstr "FPS as motha:"
+
+#: ../../src/ui_fsmenu/options.cc:177
+msgid "Language"
+msgstr "Cànan"
+
+#: ../../src/ui_fsmenu/options.cc:193
+msgid "Enable Music"
+msgstr "Cuir an ceòl an comas"
+
+#: ../../src/ui_fsmenu/options.cc:203
+msgid "Enable Sound"
+msgstr "Cuir an fhuaim an comas"
+
+#: ../../src/ui_fsmenu/options.cc:210
+msgid "In-game Options"
+msgstr "Roghainnean am broinn a' gheama"
+
+#: ../../src/ui_fsmenu/options.cc:218
+msgid "Use single watchwindow mode"
+msgstr "Cleachd modh uinneag cumail sùil air singilte"
+
+#: ../../src/ui_fsmenu/options.cc:228
+msgid "Start building road after placing a flag"
+msgstr "Tòisich air rathad a thogail às dèidh bratach a thogail"
+
+#: ../../src/ui_fsmenu/options.cc:239
+msgid "Show buildings area preview"
+msgstr "Ro-sheall an raon togail"
+
+#: ../../src/ui_fsmenu/options.cc:250
+msgid "Snap windows only when overlapping"
+msgstr "Na greimich uinneagan ach nuair a bhios iad a' tar-iadhadh"
+
+#: ../../src/ui_fsmenu/options.cc:260
+msgid "Dock windows to edges"
+msgstr "Docaich uinneagan ris na h-oirean"
+
+#. * TRANSLATORS: Options: Save game automatically every:
+#. * TRANSLATORS: This will have a number added in front of it
+#: ../../src/ui_fsmenu/options.cc:269 ../../src/ui_fsmenu/options.cc:397
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "mhionaid"
+msgstr[1] "mhionaid"
+msgstr[2] "mionaidean"
+msgstr[3] "mionaid"
+
+#: ../../src/ui_fsmenu/options.cc:277
+msgid "Save game automatically every"
+msgstr "Sàbhail an geama gu fèin-obrachail gach"
 
 #. * TRANSLATORS: Options: Remove Replays older than:
 #. * TRANSLATORS: This will have a number added in front of it
-#: ../../src/ui_fsmenu/options.cc:131
+#: ../../src/ui_fsmenu/options.cc:287 ../../src/ui_fsmenu/options.cc:401
 msgid "day"
 msgid_plural "days"
 msgstr[0] "latha"
@@ -2597,135 +2699,74 @@ msgstr[1] "latha"
 msgstr[2] "làithean"
 msgstr[3] "latha"
 
-#: ../../src/ui_fsmenu/options.cc:138
-msgid "General Options"
-msgstr "Roghainnean coitcheann"
+#: ../../src/ui_fsmenu/options.cc:295
+msgid "Remove replays older than:"
+msgstr "Thoir ath-chluichean air falbh a tha nas sine na:"
 
-#: ../../src/ui_fsmenu/options.cc:145
-msgid "Fullscreen"
-msgstr "Làn-sgrìn"
-
-#: ../../src/ui_fsmenu/options.cc:151
-msgid "Grab Input"
-msgstr "Glac an t-ion-chur"
-
-#: ../../src/ui_fsmenu/options.cc:157
-msgid "Enable Music"
-msgstr "Cuir an ceòl an comas"
-
-#: ../../src/ui_fsmenu/options.cc:163
-msgid "Enable Sound"
-msgstr "Cuir an fhuaim an comas"
-
-#: ../../src/ui_fsmenu/options.cc:168
-msgid "Maximum FPS:"
-msgstr "FPS as motha:"
-
-#: ../../src/ui_fsmenu/options.cc:178
-msgid "In-game resolution"
-msgstr "Dùmhlachd-bhreacaidh am broinn a' gheama"
-
-#: ../../src/ui_fsmenu/options.cc:183
-msgid "Language"
-msgstr "Cànan"
-
-#: ../../src/ui_fsmenu/options.cc:194
-msgid "In-game Options"
-msgstr "Roghainnean am broinn a' gheama"
-
-#: ../../src/ui_fsmenu/options.cc:201
-msgid "Use single Watchwindow Mode"
-msgstr "Cleachd modh uinneag cumail sùil air singilte"
-
-#: ../../src/ui_fsmenu/options.cc:207
-msgid "Start building road after placing a flag"
-msgstr "Tòisich air rathad a thogail às dèidh bratach a thogail"
-
-#: ../../src/ui_fsmenu/options.cc:214
-msgid "Show buildings area preview"
-msgstr "Ro-sheall an raon togail"
-
-#: ../../src/ui_fsmenu/options.cc:221
-msgid "Snap windows only when overlapping"
-msgstr "Na greimich uinneagan ach nuair a bhios iad a' tar-iadhadh"
-
-#: ../../src/ui_fsmenu/options.cc:227
-msgid "Dock windows to edges"
-msgstr "Docaich uinneagan ris na h-oirean"
-
-#: ../../src/ui_fsmenu/options.cc:232
-msgid "Save game automatically every"
-msgstr "Sàbhail an geama gu fèin-obrachail gach"
-
-#: ../../src/ui_fsmenu/options.cc:236
-msgid "Remove Replays older than:"
-msgstr "Thoir ath-chluichean air falbh a bhios nas sine na:"
-
-#. * TRANSLATORS Options: Remove Replays older than:
-#: ../../src/ui_fsmenu/options.cc:252
+#. * TRANSLATORS Options: Save game automatically every:
+#: ../../src/ui_fsmenu/options.cc:307
 msgid "Off"
 msgstr "Dheth"
 
 #. * TRANSLATORS Options: Remove Replays older than:
-#: ../../src/ui_fsmenu/options.cc:254
+#: ../../src/ui_fsmenu/options.cc:315
 msgid "Never"
 msgstr "Chan ann idir"
 
-#. * TRANSLATORS Options: Remove Replays older than:
-#: ../../src/ui_fsmenu/options.cc:256
-msgid "1 day"
-msgstr "1 latha"
-
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
-#: ../../src/ui_fsmenu/options.cc:321
-#, c-format
-msgid "%1$i x %2$i"
-msgstr "%1$i x %2$i"
+#: ../../src/ui_fsmenu/options.cc:368 ../../src/ui_fsmenu/options.cc:374
+msgid "%1% x %2%"
+msgstr "%1% x %2%"
 
-#: ../../src/ui_fsmenu/options.cc:341
+#: ../../src/ui_fsmenu/options.cc:386
 msgid "Try system language"
 msgstr "Feuch cànan an t-siostaim"
 
-#: ../../src/ui_fsmenu/options.cc:433 ../../src/ui_fsmenu/options.cc:438
-msgid "px."
-msgstr "puing"
-
-#: ../../src/ui_fsmenu/options.cc:457
+#: ../../src/ui_fsmenu/options.cc:495
 msgid "Main menu font:"
 msgstr "Cruth-clò a' phrìomh chlàir-taice:"
 
-#: ../../src/ui_fsmenu/options.cc:463
+#: ../../src/ui_fsmenu/options.cc:505
+msgid "Distance for windows to snap to other panels:"
+msgstr "Astar nan uinneagan a ghreimicheas ri panailean eile:"
+
+#: ../../src/ui_fsmenu/options.cc:509
+msgid "Distance for windows to snap to borders:"
+msgstr "Astar nan uinneagan a ghreimicheas ris na crìochan:"
+
+#: ../../src/ui_fsmenu/options.cc:516 ../../src/ui_fsmenu/options.cc:523
+#: ../../src/ui_fsmenu/options.cc:671 ../../src/ui_fsmenu/options.cc:675
+msgid "pixel"
+msgid_plural "pixels"
+msgstr[0] "phiogsail"
+msgstr[1] "phiogsail"
+msgstr[2] "piogsailean"
+msgstr[3] "piogsail"
+
+#: ../../src/ui_fsmenu/options.cc:533
+msgid "Show in-game chat with transparent background"
+msgstr "Seall cabadaich am broinn a' gheama le cùlaibh trìd-shoilleir"
+
+#: ../../src/ui_fsmenu/options.cc:543
 msgid "Play a sound at message arrival."
 msgstr "Cluich fuaim nuair a thig teachdaireachd a-steach."
 
-#: ../../src/ui_fsmenu/options.cc:471
+#: ../../src/ui_fsmenu/options.cc:553
 msgid "Do not zip widelands data files (maps, replays and savegames)."
 msgstr ""
 "Na dùmhlaich faidhlichean dàta widelands (mapaichean, ath-chluichean is "
 "geamaichean air an sàbhaladh)."
 
-#: ../../src/ui_fsmenu/options.cc:476
-msgid "Distance for windows to snap to other panels:"
-msgstr "Astar nan uinneagan a ghreimicheas ri panailean eile:"
-
-#: ../../src/ui_fsmenu/options.cc:480
-msgid "Distance for windows to snap to borders:"
-msgstr "Astar nan uinneagan a ghreimicheas ris na crìochan:"
-
-#: ../../src/ui_fsmenu/options.cc:486
+#: ../../src/ui_fsmenu/options.cc:563
 msgid "Remove Syncstream dumps on startup"
 msgstr ""
 "Thoir às-chur nan sruthan-sioncronachaidh air falbh leis an tòiseachadh"
 
-#: ../../src/ui_fsmenu/options.cc:492
+#: ../../src/ui_fsmenu/options.cc:572
 msgid "OpenGL rendering"
 msgstr "Reandaradh OpenGL"
 
-#: ../../src/ui_fsmenu/options.cc:497
-msgid "Show in-game chat with transparent background"
-msgstr "Seall cabadaich am broinn a' gheama le cùlaibh trìd-shoilleir"
-
-#: ../../src/ui_fsmenu/options.cc:538
+#: ../../src/ui_fsmenu/options.cc:612
 msgid "DejaVuSerif (Default)"
 msgstr "DejaVuSerif (Tùsail)"
 
@@ -2741,7 +2782,7 @@ msgstr "Iomairtean"
 msgid "Load Game"
 msgstr "Luchdaich geama"
 
-#: ../../src/wlapplication.cc:1178
+#: ../../src/wlapplication.cc:1092
 msgid ""
 "Your video settings could not be enabled, and fallback settings are in "
 "effect. Please check the graphics options!"
@@ -2750,11 +2791,11 @@ msgstr ""
 "roghainnean èiginneach 'gan cleachdadh. Bu chòir dhut sùil a thoirt air na "
 "roghainnean grafaigeachd!"
 
-#: ../../src/wlapplication.cc:1252
+#: ../../src/wlapplication.cc:1166
 msgid "Game data error"
 msgstr "Mearachd le dàta a' gheama"
 
-#: ../../src/wlapplication.cc:1262
+#: ../../src/wlapplication.cc:1176
 #, c-format
 msgid ""
 "\n"
@@ -2770,7 +2811,7 @@ msgstr ""
 "stannardach (stdout.txt air Windows). Tha thu a' chleachdadh an togail %1$s "
 "(%2$s). "
 
-#: ../../src/wlapplication.cc:1269
+#: ../../src/wlapplication.cc:1183
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -2955,11 +2996,17 @@ msgstr "Stuth togail"
 msgid "Tribal Ware Encyclopedia"
 msgstr "Leabhar-eòlais bathar na treubha"
 
-#: ../../src/wui/encyclopedia_window.cc:79
-msgid "Consumed ware type(s)"
-msgstr "Bathar air a bheil feum"
+#. * TRANSLATORS: Column title in the Tribal Wares Encyclopedia
+#: ../../src/wui/encyclopedia_window.cc:78
+#: ../../src/wui/encyclopedia_window.cc:210
+msgid "Consumed Ware Type"
+msgid_plural "Consumed Ware Types"
+msgstr[0] "Bathar air a bheil feum"
+msgstr[1] "Bathar air a bheil feum"
+msgstr[2] "Bathar air a bheil feum"
+msgstr[3] "Bathar air a bheil feum"
 
-#: ../../src/wui/encyclopedia_window.cc:80
+#: ../../src/wui/encyclopedia_window.cc:79
 msgid "Quantity"
 msgstr "Uiread"
 
@@ -3384,54 +3431,54 @@ msgstr "Fàg an ath-chluiche"
 msgid "Metaserver login"
 msgstr "Logadh a-steach a' mheata-fhrithealaiche:"
 
-#: ../../src/wui/login_box.cc:33
+#: ../../src/wui/login_box.cc:35
 msgid "Nickname:"
 msgstr "Far-ainm:"
 
-#: ../../src/wui/login_box.cc:39
+#: ../../src/wui/login_box.cc:41
 msgid "Password:"
 msgstr "Facal-faire:"
 
-#: ../../src/wui/login_box.cc:48
+#: ../../src/wui/login_box.cc:50
 msgid "WARNING: Password will be shown and saved readable!"
 msgstr ""
 "RABHADH: Thèid am facal-faire a shealltainn is a shàbhaladh air dòigh a "
 "ghabhas leughadh!"
 
-#: ../../src/wui/login_box.cc:53
+#: ../../src/wui/login_box.cc:55
 msgid "Log in to a registered account"
 msgstr "Log a-steach le cunntas clàraichte"
 
-#: ../../src/wui/login_box.cc:58
+#: ../../src/wui/login_box.cc:60
 msgid "Automatically use this login information from now on."
 msgstr ""
 "Cuir am fiosrachadh logaidh a-steach seo gu fèin-obrachail o seo a-mach."
 
-#: ../../src/wui/login_box.cc:64
+#: ../../src/wui/login_box.cc:67
 msgid "Login"
 msgstr "Logadh a-steach"
 
-#: ../../src/wui/login_box.cc:86
+#: ../../src/wui/login_box.cc:89
 msgid "Empty Nickname"
 msgstr "Far-ainm falamh"
 
-#: ../../src/wui/login_box.cc:86
+#: ../../src/wui/login_box.cc:89
 msgid "Please enter a nickname!"
 msgstr "Cuir far-ainm a-steach!"
 
-#: ../../src/wui/login_box.cc:93
+#: ../../src/wui/login_box.cc:96
 msgid "Space in Nickname"
 msgstr "Beàrn san fhar-ainm"
 
-#: ../../src/wui/login_box.cc:94
+#: ../../src/wui/login_box.cc:97
 msgid "Sorry, but spaces are not allowed in nicknames!"
 msgstr "Duilich, ach chan eil beàrnan ceadaichte ann am far-ainm!"
 
-#: ../../src/wui/login_box.cc:101
+#: ../../src/wui/login_box.cc:104
 msgid "Empty Password"
 msgstr "Facal-faire falamh"
 
-#: ../../src/wui/login_box.cc:101
+#: ../../src/wui/login_box.cc:104
 msgid "Please enter your password!"
 msgstr "Cuir a-steach am facal-faire agad!"
 
@@ -3480,7 +3527,7 @@ msgstr "IF %s"
 #: ../../src/wui/multiplayersetupgroup.cc:321
 #: ../../src/wui/playerdescrgroup.cc:194
 msgid "Random"
-msgstr "Air thuaiream"
+msgstr "Tuaireamach"
 
 #: ../../src/wui/multiplayersetupgroup.cc:315
 #: ../../src/wui/playerdescrgroup.cc:182
@@ -3510,7 +3557,7 @@ msgstr "Tòiseachadh"
 
 #: ../../src/wui/playerdescrgroup.cc:175
 msgid "AI: Random"
-msgstr "IF: air thuaiream"
+msgstr "IF thuaireamach"
 
 #: ../../src/wui/plot_area.cc:107
 msgid "d"

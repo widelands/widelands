@@ -202,7 +202,6 @@ protected:
 	void parse_commandline(int argc, char const * const * argv);
 	void handle_commandline_parameters();
 
-	void setup_searchpaths(std::string argv0);
 	void setup_homedir();
 
 	void cleanup_replays();
@@ -210,9 +209,7 @@ protected:
 	bool redirect_output(std::string path = "");
 
 	/**
-	 * The commandline, conveniently repackaged
-	 * This is usually not empty, it contains at least the tuple
-	 * {"EXENAME", argv0}
+	 * The commandline, conveniently repackaged.
 	 */
 	std::map<std::string, std::string> m_commandline;
 
@@ -249,7 +246,7 @@ protected:
 	bool   m_should_die;
 
 	//do we want to search the default places for widelands installs
-	bool   m_default_datadirs;
+	bool   m_use_default_datadir;
 	std::string m_homedir;
 
 	/// flag indicating if stdout and stderr have been redirected

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-18 18:55+0000\n"
+"POT-Creation-Date: 2014-10-04 15:33+0000\n"
 "PO-Revision-Date: 2014-09-12 20:45+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-09-19 06:02+0000\n"
+"X-Launchpad-Export-Date: 2014-10-05 05:52+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ../../tribes/scripting/format_help.lua:150
@@ -256,26 +256,26 @@ msgstr "Pracownicy"
 msgid "%s or better"
 msgstr "%s lub lepszy"
 
-#: ../../tribes/scripting/format_help.lua:699
+#: ../../tribes/scripting/format_help.lua:701
 msgid "Experience levels:"
 msgstr "Poziomy doświadczenia:"
 
-#: ../../tribes/scripting/format_help.lua:700
-#: ../../tribes/scripting/format_help.lua:709
+#: ../../tribes/scripting/format_help.lua:702
+#: ../../tribes/scripting/format_help.lua:711
 msgid "%s to %s (%s EP)"
 msgstr "%s do: %s (%s PD)"
 
-#: ../../tribes/scripting/format_help.lua:735
+#: ../../tribes/scripting/format_help.lua:736
 msgid "Worker uses:"
 msgid_plural "Workers use:"
 msgstr[0] "Pracownik używa:"
 msgstr[1] "Pracownicy używają:"
 msgstr[2] "Pracownicy używają:"
 
-#: ../../tribes/scripting/format_help.lua:748
+#: ../../tribes/scripting/format_help.lua:754
 msgid "Performance:"
 msgstr "Produktywność:"
 
-#: ../../tribes/scripting/format_help.lua:748
+#: ../../tribes/scripting/format_help.lua:754
 msgid "Production"
 msgstr "Produkcja"

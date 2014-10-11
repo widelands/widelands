@@ -405,7 +405,7 @@ bool FileSystem::check_writeable_for_data(char const * const path)
 	try {
 		// throws an exception if not writable
 		fs.ensure_directory_exists(".widelands");
-		fs.unlink(".widelands");
+		fs.fs_unlink(".widelands");
 		return true;
 	} catch (...) {
 		log("Directory %s is not writeable - next try\n", path);

@@ -240,7 +240,7 @@ void RealFSImpl::m_unlink_file(const std::string & file) {
 #ifndef _WIN32
 	unlink(fspath.c_str());
 #else
-	delete_file(fspath.c_str());
+	DeleteFile(fspath.c_str());
 #endif
 }
 
@@ -275,7 +275,7 @@ void RealFSImpl::m_unlink_directory(const std::string & file) {
 #ifndef _WIN32
 	rmdir(fspath.c_str());
 #else
-	remove_directory(fspath.c_str());
+	RemoveDirectory(fspath.c_str());
 #endif
 }
 
