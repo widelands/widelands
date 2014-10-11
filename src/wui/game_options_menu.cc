@@ -53,28 +53,36 @@ GameOptionsMenu::GameOptionsMenu
 		 vmargin() + 0 * (20 + vspacing()) + 0 * vgap(),
 		 buttonw(1), 20,
 		 g_gr->images().get("pics/but4.png"),
-		 _("README")),
+		 _("README"),
+		/** TRANSLATORS: Button tooltip */
+		_("Show general information about Widelands and keyboard shortcuts")),
 	license
 		(this, "license",
 		 posx(0, 1),
 		 vmargin() + 1 * (20 + vspacing()) + 0 * vgap(),
 		 buttonw(1), 20,
 		 g_gr->images().get("pics/but4.png"),
-		 _("License")),
+		 _("License"),
+		/** TRANSLATORS: Button tooltip */
+		_("Show the distribution licence document")),
 	authors
 		(this, "authors",
 		 posx(0, 1),
 		 vmargin() + 2 * (20 + vspacing()) + 0 * vgap(),
 		 buttonw(1), 20,
 		 g_gr->images().get("pics/but4.png"),
-		 _("Authors")),
+		 _("Authors"),
+		/** TRANSLATORS: Button tooltip */
+		_("Show information about the Widelands Development Team")),
 	sound
 		(this, "sound_options",
 		 posx(0, 1),
 		 vmargin() + 3 * (20 + vspacing()) + 1 * vgap(),
 		 buttonw(1), 20,
 		 g_gr->images().get("pics/but4.png"),
-		 _("Sound Options")),
+		 _("Sound Options"),
+		/** TRANSLATORS: Button tooltip */
+		_("Set sound effect and music options")),
 	save_game
 		(this, "save_game",
 		 posx(0, 1),
