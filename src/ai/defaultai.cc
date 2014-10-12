@@ -3275,6 +3275,8 @@ void DefaultAI::print_land_stats() {
 		sum_m += genstats[j - 1].miltary_strength.back();
 		count_m += 1;
 	}
-
-	log(" Average: Landsize: %5d, military strenght: %3d\n", sum_l / count_l, sum_m / count_m);
+	
+	if ( count_l > 0 &&  count_m >0 ) {
+		log(" Average: Landsize: %5d, military strenght: %3d\n", sum_l / count_l, sum_m / count_m);
+	}
 }
