@@ -24,6 +24,8 @@
 #include <string>
 #include <vector>
 
+#include <boost/format.hpp>
+
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/map_generator.h"
@@ -58,7 +60,6 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 		{"blackland", _("Black")},
 	}),
 	m_current_world(0) {
-	char buffer[250];
 	int32_t const offsx   =  5;
 	int32_t const offsy   =  5;
 	int32_t const spacing =  5;
@@ -88,9 +89,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	rng.seed(clock());
 	rng.rand();
 	m_mapNumber = rng.rand();
-	snprintf
-		(buffer, sizeof(buffer), "%u", static_cast<unsigned int>(m_mapNumber));
-	m_nrEditbox->set_text(buffer);
+	m_nrEditbox->set_text(std::to_string(static_cast<unsigned int>(m_mapNumber)));
 	posy += height + spacing + spacing + spacing;
 
 
@@ -121,19 +120,17 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	widthdownbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::MAP_W_MINUS));
 
-	snprintf
-		(buffer, sizeof(buffer), _("Width: %u"), Widelands::MAP_DIMENSIONS[m_w]);
-	m_width =
-		new UI::Textarea(this, posx + spacing + 20, posy, buffer);
+	m_width = new UI::Textarea(this, posx + spacing + 20, posy,
+										(boost::format(_("Width: %u"))
+										 % Widelands::MAP_DIMENSIONS[m_w]).str().c_str());
 
 	posy += 20 + spacing + spacing;
 
 	// ---------- Height  ----------
 
-	snprintf
-		(buffer, sizeof(buffer),
-		 _("Height: %u"), Widelands::MAP_DIMENSIONS[m_h]);
-	m_height = new UI::Textarea(this, posx + spacing + 20, posy, buffer);
+	m_height = new UI::Textarea(this, posx + spacing + 20, posy,
+										 (boost::format(_("Height: %u"))
+										  % Widelands::MAP_DIMENSIONS[m_h]).str().c_str());
 
 	UI::Button * heightupbtn = new UI::Button
 		(this, "height_up",
@@ -172,8 +169,8 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	waterdownbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::WATER_MINUS));
 
-	snprintf(buffer, sizeof(buffer), _("Water: %u %%"), m_waterval);
-	m_water = new UI::Textarea(this, posx + spacing + 20, posy, buffer);
+	m_water = new UI::Textarea(this, posx + spacing + 20, posy,
+										(boost::format(_("Water: %i %%")) % m_waterval).str().c_str());
 
 	posy += 20 + spacing + spacing;
 
@@ -197,9 +194,8 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	landdownbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::LAND_MINUS));
 
-	snprintf
-		(buffer, sizeof(buffer), _("Land: %u %%"), m_landval);
-	m_land = new UI::Textarea(this, posx + spacing + 20, posy, buffer);
+	m_land = new UI::Textarea(this, posx + spacing + 20, posy,
+									  (boost::format(_("Land: %i %%")) % m_landval).str().c_str());
 
 	posy += 20 + spacing + spacing;
 
@@ -223,9 +219,8 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	wastelanddownbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::WASTE_MINUS));
 
-	snprintf
-		(buffer, sizeof(buffer), _("Wasteland: %u %%"), m_wastelandval);
-	m_wasteland = new UI::Textarea(this, posx + spacing + 20, posy, buffer);
+	m_wasteland = new UI::Textarea(this, posx + spacing + 20, posy,
+											 (boost::format(_("Wasteland: %i %%")) % m_wastelandval).str().c_str());
 
 	posy += 20 + spacing + spacing;
 
@@ -233,10 +228,9 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 
 	// ---------- Mountains -----------
 
-	snprintf
-		(buffer, sizeof(buffer), _("Mountains: %u %%"),
-		 100 - m_waterval - m_landval);
-	m_mountains = new UI::Textarea(this, posx + spacing + 20, posy, buffer);
+	m_mountains = new UI::Textarea(this, posx + spacing + 20, posy,
+											 (boost::format(_("Mountains: %i %%"))
+											  % (100 - m_waterval - m_landval - m_wastelandval)).str().c_str());
 
 	posy += 20 + spacing + spacing;
 
@@ -322,8 +316,9 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	playerdownbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::PLAYER_MINUS));
 
-	snprintf(buffer, sizeof(buffer), _("Players: %u"), m_pn);
-	m_players = new UI::Textarea(this, posx + spacing + 20, posy, buffer);
+	m_players = new UI::Textarea(this, posx + spacing + 20, posy,
+										  (boost::format(_("Players: %u"))
+											% static_cast<unsigned int>(m_pn)).str().c_str());
 
 	posy += 20 + spacing + spacing;
 
@@ -417,35 +412,26 @@ void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 		assert(false);
 	}
 
-	char buffer[200];
 	if (m_w <  0)                        m_w = 0;
 	if (m_w >= NUMBER_OF_MAP_DIMENSIONS) m_w = NUMBER_OF_MAP_DIMENSIONS - 1;
 	if (m_h <  0)                        m_h = 0;
 	if (m_h >= NUMBER_OF_MAP_DIMENSIONS) m_h = NUMBER_OF_MAP_DIMENSIONS - 1;
-	snprintf
-		(buffer, sizeof(buffer),
-		 _("Width: %u"),  Widelands::MAP_DIMENSIONS[m_w]);
-	m_width ->set_text(buffer);
-	snprintf
-		(buffer, sizeof(buffer),
-		 _("Height: %u"), Widelands::MAP_DIMENSIONS[m_h]);
-	m_height->set_text(buffer);
 
-	snprintf
-		(buffer, sizeof(buffer), _("Water: %u %%"), m_waterval);
-	m_water->set_text(buffer);
-	snprintf
-		(buffer, sizeof(buffer), _("Land: %u %%"), m_landval);
-	m_land->set_text(buffer);
-	snprintf
-		(buffer, sizeof(buffer), _("Wasteland: %u %%"), m_wastelandval);
-	m_wasteland->set_text(buffer);
-	snprintf
-		(buffer, sizeof(buffer), _("Mountains: %u %%"),
-		 100 - m_waterval - m_landval);
-	m_mountains->set_text(buffer);
-	snprintf(buffer, sizeof(buffer), _("Players: %u"), m_pn);
-	m_players->set_text(buffer);
+	m_width ->set_text((boost::format(_("Width: %u")) % Widelands::MAP_DIMENSIONS[m_w]).str().c_str());
+
+	m_height->set_text((boost::format(_("Height: %u")) % Widelands::MAP_DIMENSIONS[m_h]).str().c_str());
+
+	m_water->set_text((boost::format(_("Water: %i %%")) % m_waterval).str().c_str());
+
+	m_land->set_text((boost::format(_("Land: %i %%")) % m_landval).str().c_str());
+
+	m_wasteland->set_text((boost::format(_("Wasteland: %i %%")) % m_wastelandval).str().c_str());
+
+	m_mountains->set_text((boost::format(_("Mountains: %i %%"))
+								  % (100 - m_waterval - m_landval)).str().c_str());
+
+	m_players->set_text((boost::format(_("Players: %u"))
+								% static_cast<unsigned int>(m_pn)).str().c_str());
 
 	nr_edit_box_changed();  // Update ID String
 }

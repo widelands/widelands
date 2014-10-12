@@ -21,6 +21,7 @@
 
 #include <cstdio>
 #include <memory>
+#include <string>
 
 #include <boost/format.hpp>
 
@@ -175,12 +176,10 @@ void FullscreenMenuEditorMapSelect::map_selected(uint32_t)
 		m_descr .set_text
 			(_(map.get_description()) + (map.get_hint().empty() ? "" : (std::string("\n") + _(map.get_hint()))));
 
-		char buf[200];
-		sprintf(buf, "%i", map.get_nrplayers());
-		m_nr_players.set_text(buf);
+		m_nr_players.set_text(std::to_string(static_cast<unsigned int>(map.get_nrplayers())));
 
-		sprintf(buf, "%ix%i", map.get_width(), map.get_height());
-		m_size      .set_text(buf);
+		/** TRANSLATORS: These are map coordinates */
+		m_size      .set_text((boost::format(_("%1$ix%2$i")) % map.get_width() % map.get_height()).str());
 	} else {
 		m_name      .set_text(std::string());
 		m_author    .set_text(std::string());

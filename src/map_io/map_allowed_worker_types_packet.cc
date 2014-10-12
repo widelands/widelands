@@ -19,6 +19,8 @@
 
 #include "map_io/map_allowed_worker_types_packet.h"
 
+#include <boost/format.hpp>
+
 #include "base/macros.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -55,10 +57,9 @@ void MapAllowedWorkerTypesPacket::read
 		if (packet_version == kCurrentPacketVersion) {
 			iterate_players_existing(p, egbase.map().get_nrplayers(), egbase, player) {
 				const TribeDescr & tribe = player->tribe();
-				char buffer[10];
-				snprintf(buffer, sizeof(buffer), "player_%u", p);
 				try {
-					Section* s = prof.get_section(buffer);
+					Section* s = prof.get_section((boost::format("player_%u")
+															 % static_cast<unsigned int>(p)).str().c_str());
 					if (s == nullptr)
 						continue;
 
@@ -92,9 +93,8 @@ void MapAllowedWorkerTypesPacket::write
 	bool forbidden_worker_seen = false;
 	iterate_players_existing_const(p, egbase.map().get_nrplayers(), egbase, player) {
 		const TribeDescr & tribe = player->tribe();
-		char buffer[10];
-		snprintf(buffer, sizeof(buffer), "player_%u", p);
-		Section & section = prof.create_section(buffer);
+		Section & section = prof.create_section((boost::format("player_%u")
+															  % static_cast<unsigned int>(p)).str().c_str());
 
 		// Only write the workers which are disabled.
 		for (WareIndex b = 0; b < tribe.get_nrworkers(); ++b) {

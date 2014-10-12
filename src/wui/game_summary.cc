@@ -138,16 +138,15 @@ void GameSummaryScreen::fill_data()
 		UI::Table<uintptr_t const>::EntryRecord & te
 			= m_players_table->add(i);
 		// Player name & pic
-		// Boost doesn't handle uint8_t as integers
-		uint16_t player_number = pes.player;
 		std::string pic_path =
-			(boost::format("pics/genstats_enable_plr_0%|1$u|.png") % player_number).str();
+			(boost::format("pics/genstats_enable_plr_0%|1$u|.png")
+			 % static_cast<unsigned int>(pes.player)).str();
 		const Image* pic = g_gr->images().get(pic_path);
 		te.set_picture(0, pic, p->get_name());
 		// Team
-		uint16_t team_number = p->team_number();
 		std::string team_str =
-			(boost::format("%|1$u|") % team_number).str();
+			(boost::format("%|1$u|")
+			 % static_cast<unsigned int>(p->team_number())).str();
 		te.set_string(1, team_str);
 		// Status
 		std::string stat_str;
@@ -186,9 +185,9 @@ void GameSummaryScreen::fill_data()
 			m_title_area->set_text
 				((boost::format(_("%s won!")) % single_won->get_name()).str());
 		} else {
-			uint16_t team_number = team_won;
 			m_title_area->set_text
-				((boost::format(_("Team %|1$u| won!")) % team_number).str());
+				((boost::format(_("Team %|1$u| won!"))
+				  % static_cast<unsigned int>(team_won)).str());
 		}
 	}
 	m_players_table->update();

@@ -23,6 +23,7 @@
 #include <memory>
 
 #include <boost/algorithm/string.hpp>
+#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/macros.h"
@@ -400,13 +401,11 @@ uint32_t TribeDescr::get_resource_indicator
 		return idx;
 	}
 
-	char buffer[256];
-
 	int32_t i = 1;
 	int32_t num_indicators = 0;
 	for (;;) {
-		snprintf(buffer, sizeof(buffer), "resi_%s%i", res->name().c_str(), i);
-		if (get_immovable_index(buffer) == -1)
+		const std::string resi_filename = (boost::format("resi_%s%i") % res->name().c_str() % i).str();
+		if (get_immovable_index(resi_filename) == -1)
 			break;
 		++i;
 		++num_indicators;
@@ -432,15 +431,9 @@ uint32_t TribeDescr::get_resource_indicator
 	if (static_cast<int32_t>(amount) < res->max_amount())
 		bestmatch += 1; // Resi start with 1, not 0
 
-	snprintf
-		(buffer, sizeof(buffer), "resi_%s%i", res->name().c_str(), bestmatch);
-
-	// NoLog("Resource(%s): Indicator '%s' for amount = %u\n",
-	//res->get_name(), buffer, amount);
-
-
-
-	return get_immovable_index(buffer);
+	return get_immovable_index((boost::format("resi_%s%i")
+										 % res->name().c_str()
+										 % bestmatch).str().c_str());
 }
 
 /*

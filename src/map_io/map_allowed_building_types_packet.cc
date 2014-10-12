@@ -19,6 +19,8 @@
 
 #include "map_io/map_allowed_building_types_packet.h"
 
+#include <boost/format.hpp>
+
 #include "base/macros.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -68,10 +70,9 @@ void MapAllowedBuildingTypesPacket::read
 						(BuildingIndex i = tribe.get_nrbuildings();
 						 0 < i;)
 						player->allow_building_type(--i, false);
-				char buffer[10];
-				snprintf(buffer, sizeof(buffer), "player_%u", p);
 				try {
-					Section & s = prof.get_safe_section(buffer);
+					Section & s = prof.get_safe_section((boost::format("player_%u")
+																	 % static_cast<unsigned int>(p)).str().c_str());
 
 					bool allowed;
 					while (const char * const name = s.get_next_bool(nullptr, &allowed)) {
@@ -107,9 +108,8 @@ void MapAllowedBuildingTypesPacket::write
 	PlayerNumber const nr_players = egbase.map().get_nrplayers();
 	iterate_players_existing_const(p, nr_players, egbase, player) {
 		const TribeDescr & tribe = player->tribe();
-		char buffer[10];
-		snprintf(buffer, sizeof(buffer), "player_%u", p);
-		Section & section = prof.create_section(buffer);
+		Section & section = prof.create_section((boost::format("player_%u")
+															  % static_cast<unsigned int>(p)).str().c_str());
 
 		//  Write for all buildings if it is enabled.
 		BuildingIndex const nr_buildings = tribe.get_nrbuildings();

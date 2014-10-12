@@ -31,6 +31,7 @@ enum class NoteId : uint32_t {
 	Immovable,
 	FieldPossession,
 	FieldTransformed,
+	ProductionSiteOutOfResources,
 };
 
 #endif  // end of include guard: WL_NOTIFICATIONS_NOTE_IDS_H

@@ -19,8 +19,12 @@
 
 #include "game_io/game_preload_packet.h"
 
+#include <ctime>
 #include <memory>
 
+#include <boost/format.hpp>
+
+#include "base/time_string.h"
 #include "graphic/graphic.h"
 #include "graphic/in_memory_image.h"
 #include "graphic/render/minimaprenderer.h"
@@ -63,6 +67,12 @@ void GamePreloadPacket::read
 			if (fs.file_exists(kMinimapFilename)) {
 				m_minimap_path = kMinimapFilename;
 			}
+			m_saveyear = s.get_int("saveyear");
+			m_savemonth = s.get_int("savemonth");
+			m_saveday = s.get_int("saveday");
+			m_savehour = s.get_int("savehour");
+			m_saveminute = s.get_int("saveminute");
+			m_gametype = static_cast<GameController::GameType>(s.get_natural("gametype"));
 		} else {
 			throw OldVersionError(packet_version, kCurrentPacketVersion);
 		}
@@ -104,6 +114,17 @@ void GamePreloadPacket::write
 
 	s.set_string("background", map.get_background());
 	s.set_string("win_condition", game.get_win_condition_displayname());
+
+	time_t t;
+	time(&t);
+	struct tm * datetime  = localtime(&t);
+	s.set_int("saveyear", 1900 + datetime->tm_year); //  years start at 1900
+	s.set_int("savemonth", 1 + datetime->tm_mon); //  months start at 0
+	s.set_int("saveday", datetime->tm_mday);
+	s.set_int("savehour", datetime->tm_hour);
+	s.set_int("saveminute", datetime->tm_min);
+	s.set_int("gametype", static_cast<int32_t>(game.game_controller()->get_game_type()));
+
 	prof.write("preload", false, fs);
 
 	// Write minimap image
@@ -119,6 +140,7 @@ void GamePreloadPacket::write
 			sw->flush();
 		}
 	}
+
 }
 
 }

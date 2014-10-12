@@ -3,6 +3,7 @@ output=raw_stone
 
 [aihints]
 mines=granite
+prohibited_till=900
 
 [buildcost]
 log=4

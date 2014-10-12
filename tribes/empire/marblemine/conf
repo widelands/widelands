@@ -6,7 +6,7 @@ enhancement=deep_marblemine
 [aihints]
 mines=granite
 mines_percent=50
-marbleproducer=true
+prohibited_till=450
 
 [buildcost]
 log=4
