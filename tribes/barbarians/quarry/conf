@@ -2,7 +2,7 @@ size=small
 output=raw_stone
 
 [aihints]
-is_basic=true
+forced_after=0
 stoneproducer=true
 
 [buildcost]

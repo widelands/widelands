@@ -21,6 +21,8 @@
 
 #include <cstdio>
 
+#include <boost/format.hpp>
+
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_tool.h"
@@ -71,9 +73,7 @@ void EditorToolsizeMenu::update(uint32_t const val) {
 	eia().set_sel_radius(val);
 	m_decrease.set_enabled(0 < val);
 	m_increase.set_enabled    (val < MAX_TOOL_AREA);
-	char buffer[250];
-	snprintf(buffer, sizeof(buffer), _("Current Size: %u"), val + 1);
-	m_textarea.set_text(buffer);
+	m_textarea.set_text((boost::format(_("Current Size: %u")) % (val + 1)).str());
 }
 
 

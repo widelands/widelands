@@ -37,7 +37,7 @@ public:
 
 	void send_player_command(Widelands::PlayerCommand &) override;
 	int32_t get_frametime() override;
-	std::string get_game_description() override;
+	GameController::GameType get_game_type() override;
 	uint32_t real_speed() override;
 	uint32_t desired_speed() override;
 	void set_desired_speed(uint32_t const speed) override;

@@ -21,6 +21,8 @@
 
 #include <cstdio>
 
+#include <boost/format.hpp>
+
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_decrease_height_tool.h"
@@ -141,17 +143,16 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu
  * Update all textareas
 */
 void EditorToolNoiseHeightOptionsMenu::update() {
-	char buffer[200];
 	const Widelands::HeightInterval height_interval = m_noise_tool.get_interval();
-	snprintf(buffer, sizeof(buffer), _("Minimum: %u"), height_interval.min);
-	m_lower_label.set_text(buffer);
-	snprintf(buffer, sizeof(buffer), _("Maximum: %u"), height_interval.max);
-	m_upper_label.set_text(buffer);
 
-	snprintf
-		(buffer, sizeof(buffer),
-		 _("Set value: %u"), m_noise_tool.set_tool().get_interval().min);
-	m_set_label.set_text(buffer);
+	m_lower_label.set_text((boost::format(_("Minimum: %u"))
+									% static_cast<unsigned int>(height_interval.min)).str());
+
+	m_upper_label.set_text((boost::format(_("Maximum: %u"))
+									% static_cast<unsigned int>(height_interval.max)).str());
+
+	m_set_label.set_text((boost::format(_("Set value: %u"))
+								 % static_cast<unsigned int>(m_noise_tool.set_tool().get_interval().min)).str());
 
 	select_correct_tool();
 }
