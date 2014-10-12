@@ -162,32 +162,27 @@ void GameOptionsMenu::clicked_save_game() {
 	die();
 }
 
+class GameOptionsMenuExitConfirmBox : public UI::WLMessageBox {
+public:
+	GameOptionsMenuExitConfirmBox(UI::Panel& parent, InteractiveGameBase& gb)
+	   : UI::WLMessageBox(&parent,
+	                      /** TRANSLATORS: Window label when "Exit game" has been pressed */
+	                      _("Exit Game Confirmation"),
+	                      _("Are you sure you wish to exit this game?"),
+	                      YESNO),
+	     m_gb(gb) {
+	}
 
-struct GameOptionsMenuExitConfirmBox : public UI::WLMessageBox {
-	GameOptionsMenuExitConfirmBox
-		(UI::Panel& parent, InteractiveGameBase & gb)
-		:
-		UI::WLMessageBox
-			(&parent,
-			 /** TRANSLATORS: Window label when "Exit game" has been pressed */
-			 _("Exit Game Confirmation"),
-			_("Are you sure you wish to exit this game?"),
-			 YESNO),
-		m_gb(gb)
-	{}
-
-	void pressed_yes() override
-	{
+	void pressed_yes() override {
 		m_gb.end_modal(0);
 	}
 
-	void pressed_no() override
-	{
+	void pressed_no() override {
 		die();
 	}
 
 private:
-	InteractiveGameBase & m_gb;
+	InteractiveGameBase& m_gb;
 };
 
 void GameOptionsMenu::clicked_exit_game() {

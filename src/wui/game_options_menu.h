@@ -26,11 +26,8 @@
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 
-struct GameOptionsMenuExitConfirmBox;
-
 // The GameOptionsMenu is a rather dumb window with lots of buttons
 struct GameOptionsMenu : public UI::UniqueWindow {
-	friend struct GameOptionsMenuExitConfirmBox;
 	GameOptionsMenu
 		(InteractiveGameBase &,
 		 UI::UniqueWindow::Registry &,
