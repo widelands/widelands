@@ -6,7 +6,7 @@ output=heavy_lance
 output=war_lance
 
 [aihints]
-build_material=false
+prohibited_till=900
 
 [buildcost]
 log=2

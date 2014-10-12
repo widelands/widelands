@@ -12,6 +12,7 @@ defeated_you_string=_Your soldiers defeated the enemy at the outpost.
 
 [aihints]
 expansion=true
+prohibited_till=600
 
 [buildcost]
 log=1

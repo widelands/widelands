@@ -2,8 +2,8 @@ size=big
 output=blackroot
 
 [aihints]
+prohibited_till=600
 space_consumer=true
-build_material=false
 
 [buildcost]
 planks=3

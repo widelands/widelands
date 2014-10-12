@@ -22,6 +22,7 @@
 #include <memory>
 
 #include <boost/algorithm/string/predicate.hpp>
+#include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 
 #include "base/i18n.h"
@@ -295,11 +296,9 @@ int32_t NetClient::get_frametime()
 	return d->time.time() - d->game->get_gametime();
 }
 
-std::string NetClient::get_game_description()
+GameController::GameType NetClient::get_game_type()
 {
-	char buf[200];
-	snprintf(buf, sizeof(buf), "network player %i", d->settings.playernum);
-	return buf;
+	return GameController::GameType::NETCLIENT;
 }
 
 void NetClient::report_result
