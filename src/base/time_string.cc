@@ -19,13 +19,10 @@
 
 #include "base/time_string.h"
 
-#include <algorithm>
 #include <cassert>
 #include <ctime>
 #include <string>
 
-#include <boost/format.hpp>
-#include <boost/regex.hpp>
 #include <stdint.h>
 
 #include "base/i18n.h"
