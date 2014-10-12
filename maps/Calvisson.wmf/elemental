@@ -9,7 +9,6 @@ world="greenland"
 name=_"Calvisson"
 author="Kristin"
 descr=_"It’s a pleasure to settle in the beauty of this fissured countryside. But the ways to encompass these large territories are long and meandering, so it is easy to err into the land of the foreign clans."
-hint=_"Suggested Teams: blue vs. red | yellow vs. green | (blue, yellow) vs. (red, green) | (blue, green) vs. (red, yellow)"
 tags="seafaring,official,2teams"
 
 [teams00]

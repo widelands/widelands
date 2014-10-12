@@ -7,7 +7,6 @@ world="greenland"
 name=_"Swamp Monks"
 author="Nasenbaer"
 descr=_ "It is said that the old war monks, living in the even older swamps, are the key to control over the whole island."
-hint=_ "Suggested Teams: (blue, red) vs. (yellow, green)"
 tags="official,2teams"
 
 [teams00]

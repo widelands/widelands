@@ -9,7 +9,6 @@ world="desert"
 name=_"Atoll"
 author="Nasenbaer"
 descr=_"Who will be the real king of the big atoll?"
-hint=_"Suggested Teams: (blue, yellow) vs. (red, green)"
 tags="2teams,official,seafaring"
 
 [teams00]

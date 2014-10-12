@@ -9,7 +9,6 @@ world="desert"
 name=_"The Nile"
 author="Einstein13"
 descr=_"The river has always provided food and communication. This time, eight empires will fight for control over this land."
-hint=_"Suggested Teams: blue vs. red | yellow vs. green | (blue, yellow) vs. (red, green) | (green, orange, white) vs. (yellow, black, purple) | (blue, orange, green) vs. (red, yellow, black) | (blue, green, orange, white) vs. (red, yellow, black, purple)"
 tags="official,seafaring,1v1,2teams,3teams,4teams"
 
 [teams00]
