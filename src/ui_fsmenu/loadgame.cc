@@ -404,11 +404,15 @@ void FullscreenMenuLoadGame::fill_table() {
 					 gamedata->savemonth == 1 + datetime->tm_mon &&
 					 gamedata->saveday == datetime->tm_mday) {
 
+					// Adding the 0 padding in a separate statement so translators won't have to deal with it
+					const std::string minute = (boost::format("%02u")
+														 % static_cast<unsigned int>(gpdp.get_saveminute())).str();
+
 					/** TRANSLATORS: Display date for choosing a savegame/replay */
 					/** TRANSLATORS: hour:minute */
 					gamedata->savedatestring = (boost::format(_("Today, %1%:%2%"))
 						 % static_cast<unsigned int>(gpdp.get_savehour())
-						 % static_cast<unsigned int>(gpdp.get_saveminute())).str();
+						 % minute).str();
 
 				} else if (gamedata->saveyear > 0 && gamedata->savemonth > 0 && gamedata->saveday > 0) {
 
