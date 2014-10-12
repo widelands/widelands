@@ -44,7 +44,7 @@ void CmdIncorporate::read
 				throw wexception("worker %u: %s", worker_serial, e.what());
 			}
 		} else {
-			throw OldVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
 		}
 
 	} catch (const WException & e) {

@@ -77,7 +77,7 @@ void GameInteractivePlayerPacket::read
 				ipl->set_player_number(player_number);
 			}
 		} else {
-			throw OldVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("interactive player: %s", e.what());

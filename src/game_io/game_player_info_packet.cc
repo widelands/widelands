@@ -72,7 +72,7 @@ void GamePlayerInfoPacket::read
 			}
 			game.read_statistics(fr);
 		} else {
-			throw OldVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("player info: %s", e.what());

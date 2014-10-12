@@ -1059,7 +1059,7 @@ MapObject::Loader * Ship::load
 			loader->init(egbase, mol, descr->create_object());
 			loader->load(fr);
 		} else {
-			throw OldVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
 		}
 	} catch (const std::exception & e) {
 		throw wexception("loading ship: %s", e.what());

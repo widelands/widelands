@@ -118,7 +118,7 @@ void MapFlagPacket::read
 					}
 				}
 		} else {
-			throw OldVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("flags: %s", e.what());

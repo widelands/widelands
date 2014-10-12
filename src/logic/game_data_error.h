@@ -39,13 +39,13 @@ protected:
 /// The main message is localizeable, the technical information is not.
 /// \param packet_version:         The version of the packet that Widelands is trying to load.
 /// \param current_packet_version: The packet version that Widelands is currently using.
-struct OldVersionError : public GameDataError {
-	explicit OldVersionError(int32_t packet_version,
+struct UnhandledVersionError : public GameDataError {
+	explicit UnhandledVersionError(int32_t packet_version,
 									 int32_t current_packet_version);
 
 	char const * what() const noexcept override {return m_what.c_str();}
 protected:
-	OldVersionError() {}
+	UnhandledVersionError() {}
 };
 
 }

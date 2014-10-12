@@ -408,7 +408,7 @@ MapObject::Loader * Battle::load
 			loader->init(egbase, mol, *new Battle);
 			loader->load(fr);
 		} else {
-			throw OldVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
 		}
 	} catch (const std::exception & e) {
 		throw wexception("Loading Battle: %s", e.what());

@@ -800,7 +800,7 @@ MapObject::Loader * Immovable::load
 			loader->init(egbase, mol, *imm);
 			loader->load(fr, packet_version);
 		} else {
-			throw OldVersionError(packet_version, kCurrentPacketVersionImmovable);
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersionImmovable);
 		}
 	} catch (const std::exception & e) {
 		throw wexception("immovable type: %s", e.what());
@@ -1181,7 +1181,7 @@ struct ActConstructionData : ImmovableActionData {
 			if (packet_version == kCurrentPacketVersionConstructionData) {
 				d->delivered.load(fr, *imm.descr().get_owner_tribe());
 			} else {
-				throw OldVersionError(packet_version, kCurrentPacketVersionConstructionData);
+				throw UnhandledVersionError(packet_version, kCurrentPacketVersionConstructionData);
 			}
 		} catch (const WException & e) {
 			delete d;
@@ -1481,7 +1481,7 @@ void PlayerImmovable::Loader::load(FileRead & fr)
 
 			imm.m_owner = owner;
 		} else {
-			throw OldVersionError(packet_version, kCurrentPacketVersionPlayerImmovable);
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersionPlayerImmovable);
 		}
 	} catch (const std::exception & e) {
 		throw wexception("loading player immovable: %s", e.what());

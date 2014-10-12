@@ -765,7 +765,7 @@ MapObject::Loader * Fleet::load
 			loader->init(egbase, mol, *(new Fleet(*owner)));
 			loader->load(fr);
 		} else {
-			throw OldVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
 		}
 	} catch (const std::exception & e) {
 		throw wexception("loading portdock: %s", e.what());

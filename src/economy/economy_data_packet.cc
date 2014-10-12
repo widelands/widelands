@@ -89,7 +89,7 @@ void EconomyDataPacket::read(FileRead & fr)
 			}
 		m_eco->m_request_timerid = fr.unsigned_32();
 		} else {
-			throw OldVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
 		}
 	} catch (const std::exception & e) {
 		throw GameDataError("economy: %s", e.what());

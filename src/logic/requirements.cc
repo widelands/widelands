@@ -46,7 +46,7 @@ void Requirements::read
 		if (packet_version == kCurrentPacketVersion) {
 			*this = RequirementsStorage::read(fr, egbase, mol);
 		} else {
-			throw OldVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw wexception("requirements: %s", e.what());

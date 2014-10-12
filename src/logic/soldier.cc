@@ -1884,7 +1884,7 @@ void Soldier::Loader::load(FileRead & fr)
 
 			m_battle = fr.unsigned_32();
 		} else {
-			throw OldVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
 		}
 	} catch (const std::exception & e) {
 		throw wexception("loading player immovable: %s", e.what());

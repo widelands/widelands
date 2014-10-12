@@ -90,7 +90,7 @@ void MapResourcesPacket::read
 				}
 			}
 		} else {
-			throw OldVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("port spaces: %s", e.what());

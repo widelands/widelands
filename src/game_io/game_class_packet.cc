@@ -39,7 +39,7 @@ void GameClassPacket::read
 			fr.signed_16(); // This used to be game speed
 			game.gametime_ = fr.unsigned_32();
 		} else {
-			throw OldVersionError(packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError(packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException & e) {
 		throw GameDataError("game class: %s", e.what());
