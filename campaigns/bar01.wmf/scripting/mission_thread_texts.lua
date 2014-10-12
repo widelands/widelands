@@ -97,8 +97,8 @@ obj_enhance_buildings = {
    name="enhance buildings",
    title=_"Enhance buildings and build a micro brewery",
    number = 3,
-   body= objective_text(_[[Enhance the coal mine and the tavern, and build a micro brewery.]],
-      listitem_bullet(_"Enhance the coal mine and the tavern to the better versions of their buildings respectively.") ..
+   body= objective_text(_[[Enhance a mine and the tavern, and build a micro brewery.]],
+      listitem_bullet(_"Enhance the coal mine or the iron mine to a deep mine, and enhance the tavern to an inn.") ..
       listitem_bullet(_"Also build a micro brewery.") ..
       listitem_arrow(_"A normal mine can only dig up about one third of all the resources lying beneath it; then it must be enhanced to a deep mine in order to keep it working properly. To enhance a building, choose it and then click the appropriate button in the appearing window.")  ..
       listitem_arrow(_"Workers gain experience by successful work. With enough experience, they become more advanced workers, who are necessary to operate the enhanced buildings. Do not enhance a building before you have enough advanced workers to operate the advanced building!") ..

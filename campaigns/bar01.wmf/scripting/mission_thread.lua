@@ -103,7 +103,7 @@ function mines_and_food_thread()
    }
    
    sleep(10000)
-   send_msg(story_msg2) -- NOCOM: new
+   send_msg(story_msg2)
 
    -- Wait for completion
    while not check_for_buildings(plr, {coalmine = 1, oremine = 1}) do
@@ -138,7 +138,7 @@ function mines_and_food_thread()
       end
       obj_bf.done = true
       sleep(5000)
-      send_msg(story_msg4) -- NOCOM: new
+      send_msg(story_msg4)
    end)
 
    local obj_farming = add_obj(obj_begin_farming)
@@ -182,28 +182,43 @@ function mines_and_food_thread()
    end
    o.done = true
 
+   start_time = wl.Game().time
    -- Information about making mines deeper
+   -- Wait until the player has an experienced worker.
    local chiefminer_found = false
-   while not chiefminer_found do
-      local mines = plr:get_buildings("coalmine")
-      for k,v in ipairs(mines) do
+   while ((not chiefminer_found)) do
+      local mines = plr:get_buildings{"coalmine","oremine"}
+      for k,v in ipairs(mines.coalmine) do
          if v:get_workers("chief-miner") > 0 then
             chiefminer_found = true
             break
          end
       end
+      for k,v in ipairs(mines.oremine) do
+         if v:get_workers("chief-miner") > 0 then
+            chiefminer_found = true
+            break
+         end
+      end
+
+      -- if everything else is done, show this objective. Otherwise, the player has nothing to do.
+      if (build_materials_done and quarry_done and cattle_farm_done) then
+         chiefminer_found = true
+      end
       sleep(5000)
    end
    send_msg(order_msg_15_mines_exhausted)
-   plr:allow_buildings{ "deep_coalmine", "inn", "micro-brewery" }
-   -- objective.check will make sure that this i finished
+   plr:allow_buildings{ "deep_coalmine", "deep_oremine" , "inn", "micro-brewery" }
    local obj = add_obj(obj_enhance_buildings)
 
    run(function()
-      while not check_for_buildings(plr,
-         { inn = 1, deep_coalmine = 1, ["micro-brewery"] = 1 })
-      do
-         sleep(5742)
+      while true do
+         local rv = plr:get_buildings{"deep_coalmine", "deep_oremine", "inn", "micro-brewery"}
+         if (#rv.inn > 0 and #rv["micro-brewery"] > 0) and
+            (#rv.deep_coalmine + #rv.deep_oremine > 0) then
+            break
+         end
+         sleep(5421)
       end
       obj.done = true
       enhance_buildings_done = true
@@ -232,8 +247,8 @@ function build_materials_thread()
    -- So that player has really little, but still enough to expand a bit
    local o = add_obj(obj_better_material_1)
    
-   sleep(10000)
-   send_msg(story_msg1) -- NOCOM: new
+   sleep(30*1000)
+   send_msg(story_msg1)
    while #plr:get_buildings("hardener") < 1 do sleep(5421) end
    o.done = true
 
@@ -252,7 +267,7 @@ function build_materials_thread()
    end
    o.done = true
 
-   send_msg(order_msg_18_reed_yard)
+   send_msg(order_msg_18_reed)
    plr:allow_buildings{"reed_yard"}
    o = add_obj(obj_better_material_3)
    while #plr:get_buildings("reed_yard") < 1 do sleep(5421) end
@@ -277,7 +292,7 @@ function cattle_farm()
    plr:allow_buildings{"cattlefarm"}
    
    sleep(10000)
-   send_msg(story_msg3) -- NOCOM: new
+   send_msg(story_msg3)
    
    while not check_for_buildings(plr, { cattlefarm = 1 }) do
       sleep(2323)
