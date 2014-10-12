@@ -35,3 +35,7 @@ hotspot=87 75
 [working]
 pics=spiderfarm_i_??.png  # ???
 hotspot=87 75
+
+[aihints]
+forced_after=60
+prohibited_till=60

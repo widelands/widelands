@@ -19,10 +19,16 @@
 
 #include "base/time_string.h"
 
+#include <algorithm>
 #include <cassert>
 #include <ctime>
+#include <string>
 
+#include <boost/format.hpp>
+#include <boost/regex.hpp>
 #include <stdint.h>
+
+#include "base/i18n.h"
 
 namespace  {
 char timestring_buffer[] = "YYYY-MM-DDThh.mm.ss"; //  ':' is not a valid file name character for FAT FS
@@ -82,7 +88,56 @@ char * timestring() {
 	return timestring_buffer;
 }
 
-char * gametimestring(uint32_t gametime)
+std::string localize_month(int8_t month) {
+	switch (month) {
+		case 1:
+			/** TRANSLATORS: January. Keep this short if you can. */
+			return _("Jan");
+		case 2:
+			/** TRANSLATORS: February. Keep this short if you can. */
+			return _("Feb");
+		case 3:
+			/** TRANSLATORS: March. Keep this short if you can. */
+			return _("Mar");
+		case 4:
+			/** TRANSLATORS: April. Keep this short if you can. */
+			return _("Apr");
+		case 5:
+			/** TRANSLATORS: May. Keep this short if you can. */
+			return _("May");
+		case 6:
+			/** TRANSLATORS: June. Keep this short if you can. */
+			return _("Jun");
+		case 7:
+			/** TRANSLATORS: July. Keep this short if you can. */
+			return _("Jul");
+		case 8:
+			/** TRANSLATORS: August. Keep this short if you can. */
+			return _("Aug");
+		case 9:
+			/** TRANSLATORS: September. Keep this short if you can. */
+			return _("Sep");
+		case 10:
+			/** TRANSLATORS: October. Keep this short if you can. */
+			return _("Oct");
+		case 11:
+			/** TRANSLATORS: November. Keep this short if you can. */
+			return _("Nov");
+		case 12:
+			/** TRANSLATORS: December. Keep this short if you can. */
+			return _("Dec");
+		default:
+			return std::to_string(month);
+	}
+}
+
+// Check if this is a string of the type "YYYY-MM-DDThh.mm.ss"
+bool is_timestring(const std::string& timestring) {
+	boost::regex re("\\d\\d\\d\\d-\\d\\d-\\d\\dT\\d\\d\\.\\d\\d\\.\\d\\d.*");
+	return boost::regex_match(timestring, re);
+}
+
+char * gamestring_with_leading_zeros(uint32_t gametime)
 {
 	uint32_t time = gametime / 1000;
 	gamestringbuffer[8] = '0' +  time        % 10;
@@ -93,4 +148,17 @@ char * gametimestring(uint32_t gametime)
 	gamestringbuffer[1] = '0' + (time /= 10) % 10;
 	gamestringbuffer[0] = '0' + (time /= 10);
 	return gamestringbuffer;
+}
+
+std::string gametimestring(uint32_t gametime)
+{
+	// update buffer
+	std::string result = gamestring_with_leading_zeros(gametime);
+
+	// remove leading 0s
+	int i = 0;
+	while (result.at(i) == '0') ++i;
+	if (result.at(i) == ':') ++i;
+
+	return result.substr(i);
 }

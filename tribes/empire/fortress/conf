@@ -14,6 +14,7 @@ defeated_you_string=_Your soldiers defeated the enemy at the fortress.
 expansion=true
 fighting=true
 mountain_conqueror=true
+prohibited_till=1500
 
 [buildcost]
 wood=5

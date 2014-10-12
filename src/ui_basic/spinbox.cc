@@ -128,6 +128,7 @@ SpinBox::SpinBox
 
 	sbi->text = new UI::Textarea
 		(this, text_x, 0, textw, h, unit_text, Align_Center);
+
 	sbi->butPlus =
 		new Button
 			(this, "+",
@@ -195,9 +196,7 @@ void SpinBox::update()
 		}
 	}
 	if (!was_in_list) {
-		char buf[64];
-		snprintf(buf, sizeof(buf), "%i %s", sbi->value, sbi->unit.c_str());
-		sbi->text->set_text(buf);
+		sbi->text->set_text((boost::format("%i %s") % sbi->value % sbi->unit.c_str()).str());
 	}
 
 	sbi->butMinus->set_enabled(sbi->min < sbi->value);
@@ -358,9 +357,7 @@ void SpinBox::add_replacement(int32_t value, std::string text)
 void SpinBox::remove_replacement(int32_t value)
 {
 	if (int32_t i = find_replacement(value) >= 0) {
-		char buf[64];
-		snprintf(buf, sizeof(buf), "%i %s", value, sbi->unit.c_str());
-		sbi->valrep[i].text = buf;
+		sbi->valrep[i].text = (boost::format("%i %s") % value % sbi->unit.c_str()).str();
 	}
 }
 

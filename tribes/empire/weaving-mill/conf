@@ -43,3 +43,6 @@ hotspot=65 62
 pics=weaving_mill_w_??.png  # ???
 hotspot=65 62
 fps=5
+
+[aihints]
+prohibited_till=120

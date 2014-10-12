@@ -35,6 +35,9 @@ warhelm=2
 min_level=0
 max_level=4
 
+[aihints]
+prohibited_till=2700
+
 [soldier hp]
 min_level=0
 max_level=2
