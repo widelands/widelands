@@ -30,7 +30,7 @@
 char * timestring();
 
 /// Turn a month number into a short, localized month string,
-/// 1 = "Jan" ... 12 = "Dec"
+/// 0 = "Jan" ... 11 = "Dec"
 std::string localize_month(int8_t month);
 
 /// Get a string representation of the game time as hhh:mm:ss. If Time

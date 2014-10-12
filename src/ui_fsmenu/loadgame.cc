@@ -183,31 +183,7 @@ bool FullscreenMenuLoadGame::compare_date_descending(uint32_t rowa, uint32_t row
 	const SavegameData & r1 = m_games_data[m_table[rowa]];
 	const SavegameData & r2 = m_games_data[m_table[rowb]];
 
-	bool result = false;
-
-	if(r1.saveyear > 0 && r2.saveyear > 0) {
-		if (r1.saveyear < r2.saveyear) {
-			result = true;
-		} else if (r1.saveyear == r2.saveyear) {
-			if (r1.savemonth < r2.savemonth) {
-				result = true;
-			} else if (r1.savemonth == r2.savemonth) {
-				if (r1.saveday < r2.saveday) {
-					result = true;
-				} else if (r1.saveday == r2.saveday) {
-					if (r1.savehour < r2.savehour) {
-						result = true;
-					} else if (r1.savehour == r2.savehour) {
-						result = r1.saveminute < r2.saveminute;
-					}
-				}
-			}
-		}
-	} else {
-		// Sort old savegames that don't have date information yet
-		result = r1.savedatestring.empty() ? true : r1.savedatestring < r2.savedatestring;
-	}
-	return result;
+	return r1.savetimestamp < r2.savetimestamp;
 }
 
 
@@ -383,7 +359,6 @@ void FullscreenMenuLoadGame::fill_table() {
 			gamedata->filename = gamefilename;
 
 			try {
-
 				Widelands::GameLoader gl(savename.c_str(), m_game);
 				gl.preload_game(gpdp);
 
@@ -391,37 +366,33 @@ void FullscreenMenuLoadGame::fill_table() {
 				gamedata->gametime = gpdp.get_gametime();
 				gamedata->nrplayers = gpdp.get_number_of_players();
 
-				gamedata->saveyear = gpdp.get_saveyear();
-				gamedata->savemonth = gpdp.get_savemonth();
-				gamedata->saveday = gpdp.get_saveday();
-				gamedata->savehour = gpdp.get_savehour();
-				gamedata->saveminute = gpdp.get_saveminute();
-
+				gamedata->savetimestamp = gpdp.get_savetimestamp();
 				time_t t;
 				time(&t);
-				struct tm * datetime  = localtime(&t);
-				if (gamedata->saveyear == 1900 + datetime->tm_year &&
-					 gamedata->savemonth == 1 + datetime->tm_mon &&
-					 gamedata->saveday == datetime->tm_mday) {
+				struct tm * currenttime  = localtime(&t);
+				struct tm * savedate  = localtime(&gamedata->savetimestamp);
 
-					// Adding the 0 padding in a separate statement so translators won't have to deal with it
-					const std::string minute = (boost::format("%02u")
-														 % static_cast<unsigned int>(gpdp.get_saveminute())).str();
+				if (gamedata->savetimestamp > 0) {
+					if (savedate->tm_year == currenttime->tm_year &&
+						 savedate->tm_mon == currenttime->tm_mon &&
+						 savedate->tm_mday == currenttime->tm_mday) {  // Today
 
-					/** TRANSLATORS: Display date for choosing a savegame/replay */
-					/** TRANSLATORS: hour:minute */
-					gamedata->savedatestring = (boost::format(_("Today, %1%:%2%"))
-						 % static_cast<unsigned int>(gpdp.get_savehour())
-						 % minute).str();
+						// Adding the 0 padding in a separate statement so translators won't have to deal with it
+						const std::string minute = (boost::format("%02u") % savedate->tm_min).str();
 
-				} else if (gamedata->saveyear > 0 && gamedata->savemonth > 0 && gamedata->saveday > 0) {
+						/** TRANSLATORS: Display date for choosing a savegame/replay */
+						/** TRANSLATORS: hour:minute */
+						gamedata->savedatestring = (boost::format(_("Today, %1%:%2%"))
+															 % savedate->tm_hour % minute).str();
+					} else {  // Older
 
-					/** TRANSLATORS: Display date for choosing a savegame/replay */
-					/** TRANSLATORS: month day, year hour:minute */
-					gamedata->savedatestring = (boost::format(_("%2% %1%, %3%"))
-						 % static_cast<unsigned int>(gpdp.get_saveday())
-						 % localize_month(gpdp.get_savemonth())
-						 % static_cast<unsigned int>(gpdp.get_saveyear())).str();
+						/** TRANSLATORS: Display date for choosing a savegame/replay */
+						/** TRANSLATORS: month day, year hour:minute */
+						gamedata->savedatestring = (boost::format(_("%2% %1%, %3%"))
+							 % savedate->tm_mday
+							 % localize_month(savedate->tm_mon)
+							 % (1900 + savedate->tm_year)).str();
+					}
 				}
 
 				{

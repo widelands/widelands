@@ -57,16 +57,10 @@ struct SavegameData {
 
 	uint32_t gametime;
 	uint32_t nrplayers;
-
-	uint16_t saveyear;
-	uint16_t savemonth;
-	uint16_t saveday;
-	uint16_t savehour;
-	uint16_t saveminute;
+	time_t savetimestamp;
 	GameController::GameType gametype;
 
-	SavegameData() : gametime(0), nrplayers(0),
-		saveyear(0), savemonth(0), saveday(0), savehour(0), saveminute(0),
+	SavegameData() : gametime(0), nrplayers(0), savetimestamp(0),
 		gametype(GameController::GameType::SINGLEPLAYER) {}
 };
 
