@@ -52,10 +52,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 		 UI::Align_HCenter),
 
 	// Map description
-	m_label_mapname
-		(this, m_right_column_x, m_tabley,
-		 _("Map Name:"),
-		 UI::Align_Left),
+	m_label_mapname(this, m_right_column_x, m_tabley, "", UI::Align_Left),
 	m_ta_mapname(this,
 					 m_right_column_x + m_indent, get_y_from_preceding(m_label_mapname) + m_padding,
 					 get_right_column_w(m_right_column_x + m_indent), m_label_height),
@@ -80,14 +77,12 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 		 m_buty - get_y_from_preceding(m_label_description) - 4 * m_padding),
 
 	// Scenario checkbox
-	m_label_load_map_as_scenario
-		(this, m_right_column_x + m_checkbox_space, m_buty - m_label_height - 2 * m_padding,
-		 m_is_editor ? _("This is a scenario map") : _("Load map as scenario"),
-		 UI::Align_Left),
-	m_cb_load_map_as_scenario(this, Point (m_right_column_x, m_label_load_map_as_scenario.get_y())),
+	m_cb_load_map_as_scenario(this, Point(0, 0)),
 
 	// Map table
 	m_table(this, m_tablex, m_tabley, m_tablew, m_tableh),
+
+	m_is_scenario(false),
 
 	// Runtime variables
 	m_curdir("maps"), m_basedir("maps"),
@@ -95,6 +90,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	m_settings(settings),
 	m_ctrl(ctrl)
 {
+	m_cb_load_map_as_scenario.set_visible(false);
 	m_title.set_textstyle(ts_big());
 	if (m_is_editor) {
 		m_back.set_tooltip(_("Return to the editor menu"));
@@ -127,8 +123,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 		(2,
 		 boost::bind(&FullscreenMenuMapSelect::compare_size, this, _1, _2));
 	m_table.set_sort_column(0);
-	m_cb_load_map_as_scenario.set_state(false);
-	m_cb_load_map_as_scenario.set_enabled(false);
+	m_is_scenario = false;
 
 	// Suggested teams
 	// Y coordinate will be set later, when we know how high this box will get.
@@ -181,13 +176,6 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	vbox->set_size(get_w() - 2 * m_tablex, m_checkbox_space);
 
 	m_scenario_types = m_settings->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO;
-	if (m_scenario_types) {
-		m_cb_load_map_as_scenario.set_visible(true);
-		m_label_load_map_as_scenario.set_visible(true);
-	} else {
-		m_cb_load_map_as_scenario.set_visible(false);
-		m_label_load_map_as_scenario.set_visible(false);
-	}
 
 	m_table.focus();
 	fill_table();
@@ -252,7 +240,7 @@ bool FullscreenMenuMapSelect::compare_size(uint32_t rowa, uint32_t rowb)
 
 bool FullscreenMenuMapSelect::is_scenario()
 {
-	return m_cb_load_map_as_scenario.get_state();
+	return m_is_scenario;
 }
 
 
@@ -289,7 +277,11 @@ void FullscreenMenuMapSelect::entry_selected()
 
 	if (map.width) {
 		// Show map information
-		m_label_mapname.set_text(_("Map Name:"));
+		if(map.scenario) {
+			m_label_mapname.set_text(_("Scenario:"));
+		} else {
+			m_label_mapname.set_text(_("Map:"));
+		}
 		std::string map_displayname = map.localized_name;
 		if (m_cb_dont_localize_mapnames->get_state()) {
 			map_displayname = map.name;
@@ -318,20 +310,12 @@ void FullscreenMenuMapSelect::entry_selected()
 		m_ta_author.set_text(map.authors->get_names());
 		m_ta_description.set_text(map.description +
 										  (map.hint.empty() ? "" : (std::string("\n\n") + map.hint)));
-		m_cb_load_map_as_scenario.set_enabled(map.scenario && !m_is_editor);
-		m_cb_load_map_as_scenario.set_visible(map.scenario);
-		m_label_load_map_as_scenario.set_visible(map.scenario);
 		m_label_author.set_visible(true);
 		m_label_description.set_visible(true);
-		int32_t descr_bottom = m_buty;
-		if (map.scenario) {
-			descr_bottom = m_label_load_map_as_scenario.get_y();
-		}
 		m_ta_description.set_size
 				(m_ta_description.get_w(),
-				 descr_bottom - get_y_from_preceding(m_label_description) - 4 * m_padding);
+				 m_buty - get_y_from_preceding(m_label_description) - 4 * m_padding);
 		m_ok.set_tooltip(m_is_editor ? _("Edit this map") : _("Play this map"));
-
 	} else {
 		// Show directory information
 		m_label_mapname.set_text(_("Directory:"));
@@ -340,15 +324,12 @@ void FullscreenMenuMapSelect::entry_selected()
 
 		m_ta_author.set_text(std::string());
 		m_ta_description.set_text(std::string());
-		m_cb_load_map_as_scenario.set_enabled(false);
-		m_cb_load_map_as_scenario.set_visible(false);
-		m_label_load_map_as_scenario.set_visible(false);
 		m_label_author.set_visible(false);
 		m_label_description.set_visible(false);
 		m_ok.set_tooltip(_("Open this directory"));
 	}
 	m_ok.set_enabled(true);
-	m_cb_load_map_as_scenario.set_state(false); // reset
+	m_is_scenario = map.scenario; // reset
 	m_ta_description.scroll_to_top();
 
 	// Show / hide suggested teams
@@ -357,14 +338,9 @@ void FullscreenMenuMapSelect::entry_selected()
 	if (!map.suggested_teams.empty()) {
 		m_suggested_teams_box->show(map.suggested_teams);
 
-		if (m_cb_load_map_as_scenario.is_visible()) {
-			m_suggested_teams_box->set_pos(
-					(Point(m_suggested_teams_box->get_x(),
-							 m_cb_load_map_as_scenario.get_y() - m_suggested_teams_box->get_h() - 3 * m_padding)));
-		} else {
-			m_suggested_teams_box->set_pos(Point(m_suggested_teams_box->get_x(),
-														  m_buty - m_padding - m_suggested_teams_box->get_h() - m_padding));
-		}
+		m_suggested_teams_box->set_pos(Point(m_suggested_teams_box->get_x(),
+														 m_buty - m_padding - m_suggested_teams_box->get_h() - m_padding));
+
 		m_ta_description.set_size(m_ta_description.get_w(),
 										  m_suggested_teams_box->get_y() - m_ta_description.get_y() - 3 * m_padding);
 	}

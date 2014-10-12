@@ -108,7 +108,8 @@ private:
 	UI::Textarea                  m_label_description;
 	UI::MultilineTextarea         m_ta_description;
 
-	UI::Textarea                  m_label_load_map_as_scenario;
+	// NOCOM Segfaults if this unused (!) checkbox is removed. To reproduce:
+	// Single Player -> New Game, select "The Green Plateau", OK, Back.
 	UI::Checkbox                  m_cb_load_map_as_scenario;
 	UI::Checkbox*                 m_cb_dont_localize_mapnames;
 	bool                          m_has_translated_mapname;
@@ -119,6 +120,7 @@ private:
 	UI::SuggestedTeamsBox*        m_suggested_teams_box;
 
 	UI::Table<uintptr_t const>    m_table;
+	bool                          m_is_scenario;
 	std::string                   m_curdir, m_basedir;
 	Map::ScenarioTypes            m_scenario_types;
 
