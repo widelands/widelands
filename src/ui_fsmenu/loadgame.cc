@@ -60,16 +60,14 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 
 	// Savegame description
 	m_label_mapname
-		(this, m_right_column_x, m_tabley,
-		 _("Map Name:"),
-		 UI::Align_Left),
+		(this, m_right_column_x, m_tabley, "", UI::Align_Left),
 	m_ta_mapname(this,
 					 m_right_column_x + m_indent, get_y_from_preceding(m_label_mapname) + m_padding,
 					 get_right_column_w(m_right_column_x + m_indent), 2 * m_label_height - m_padding),
 
 	m_label_gametime
 		(this, m_right_column_x, get_y_from_preceding(m_ta_mapname) + 2 * m_padding,
-		 _("Gametime:"),
+		 "",
 		 UI::Align_Left),
 	m_ta_gametime(this,
 					  m_right_column_tab, m_label_gametime.get_y(),
@@ -77,7 +75,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 
 	m_label_players
 		(this, m_right_column_x, get_y_from_preceding(m_ta_gametime),
-		 _("Players:"),
+		 "",
 		 UI::Align_Left),
 	m_ta_players(this,
 					 m_right_column_tab, m_label_players.get_y(),
@@ -85,7 +83,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 
 	m_label_win_condition
 		(this, m_right_column_x, get_y_from_preceding(m_ta_players) + 3 * m_padding,
-		 _("Win Condition:"),
+		 "",
 		 UI::Align_Left),
 	m_ta_win_condition(this,
 							 m_right_column_x + m_indent, get_y_from_preceding(m_label_win_condition) + m_padding,
@@ -224,6 +222,11 @@ void FullscreenMenuLoadGame::no_selection()
 	m_ok.set_enabled(false);
 	m_delete.set_enabled(false);
 
+	m_label_mapname .set_text(std::string());
+	m_label_gametime.set_text(std::string());
+	m_label_players.set_text(std::string());
+	m_label_win_condition.set_text(std::string());
+
 	m_ta_mapname .set_text(std::string());
 	m_ta_gametime.set_text(std::string());
 	m_ta_players.set_text(std::string());
@@ -242,6 +245,11 @@ void FullscreenMenuLoadGame::entry_selected()
 		return;
 	}
 
+	m_label_mapname .set_text(_("Map Name:"));
+	m_label_gametime.set_text(_("Gametime:"));
+	m_label_players.set_text(_("Players:"));
+	m_label_win_condition.set_text(_("Win Condition:"));
+
 	const SavegameData & gamedata = m_games_data[m_table.get_selected()];
 
 	m_ok.set_enabled(true);
@@ -254,7 +262,8 @@ void FullscreenMenuLoadGame::entry_selected()
 	if (number_of_players > 0) {
 		m_ta_players.set_text((boost::format("%u") % static_cast<unsigned int>(number_of_players)).str());
 	} else {
-		m_ta_players.set_text(_("Unknown"));
+		m_label_players.set_text("");
+		m_ta_players.set_text("");
 	}
 
 	m_ta_win_condition.set_text(gamedata.wincondition);

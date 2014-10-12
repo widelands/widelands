@@ -293,7 +293,7 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect() :
 	m_label_author
 		(this,
 		 m_right_column_x, get_y_from_preceding(m_ta_mapname) + 2 * m_padding,
-		 _("Authors:"),
+		 "",
 		 UI::Align_Left),
 	m_ta_author(this,
 					m_right_column_x + m_indent, get_y_from_preceding(m_label_author) + m_padding,
@@ -372,7 +372,7 @@ void FullscreenMenuCampaignMapSelect::entry_selected() {
 	m_ta_author.set_text(authors->get_names());
 	m_ta_author.set_tooltip(ngettext("The designer of this scenario", "The designers of this scenario",
 									authors->get_number()));
-	m_label_author.set_text(ngettext("Author", "Authors", authors->get_number()));
+	m_label_author.set_text(ngettext("Author:", "Authors:", authors->get_number()));
 
 	i18n::Textdomain td("maps");
 	m_ta_mapname.set_text(_(map.get_name()));

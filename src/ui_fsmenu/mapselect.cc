@@ -59,7 +59,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 
 	m_label_author
 		(this, m_right_column_x, get_y_from_preceding(m_ta_mapname) + 2 * m_padding,
-		 _("Authors:"),
+		 "",
 		 UI::Align_Left),
 	m_ta_author(this,
 					 m_right_column_x + m_indent, get_y_from_preceding(m_label_author) + m_padding,
@@ -101,7 +101,6 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 			m_back.set_tooltip(_("Return to the single player menu"));
 		}
 	}
-	m_ta_mapname.set_tooltip(_("The name of this map"));
 	m_ta_description.set_tooltip(_("Story and hints"));
 
 	m_back.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_back, boost::ref(*this)));
@@ -111,7 +110,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 
 	/** TRANSLATORS: Column title for number of players in map list */
 	m_table.add_column(35, _("Pl."), _("Number of players"), UI::Align_HCenter);
-	m_table.add_column(m_table.get_w() - 35 - 115, _("Map Name"), _("Map Name"), UI::Align_Left);
+	m_table.add_column(m_table.get_w() - 35 - 115, _("Map Name"), _("The name of the map or scenario"), UI::Align_Left);
 	m_table.add_column(115, _("Size"), _("The size of the map (Width x Height)"), UI::Align_Left);
 	m_table.set_column_compare
 		(0,
@@ -304,7 +303,7 @@ void FullscreenMenuMapSelect::entry_selected()
 		} else {
 			m_ta_mapname.set_tooltip(_("The name of this map"));
 		}
-		m_label_author.set_text(ngettext("Author", "Authors", map.authors->get_number()));
+		m_label_author.set_text(ngettext("Author:", "Authors:", map.authors->get_number()));
 		m_ta_author.set_tooltip(ngettext("The designer of this map", "The designers of this map",
 													map.authors->get_number()));
 		m_ta_author.set_text(map.authors->get_names());
