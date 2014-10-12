@@ -137,9 +137,7 @@ private:
 	const World& world_;
 };
 
-
 struct FindNodeWithFlagOrRoad {
-	Economy* economy;
 	bool accept(const Map&, FCoords) const;
 };
 
@@ -163,6 +161,13 @@ struct NearFlag {
 struct CompareDistance {
 	bool operator()(const NearFlag& a, const NearFlag& b) const {
 		return a.distance_ < b.distance_;
+	}
+};
+
+// ordering nearflags by biggest reduction
+struct CompareShortening {
+	bool operator()(const NearFlag& a, const NearFlag& b) const {
+		return (a.cost_ - a.distance_) > (b.cost_ - b.distance_);
 	}
 };
 
@@ -191,7 +196,6 @@ struct BuildableField {
 
 	int32_t next_update_due_;
 
-	bool reachable;
 	bool preferred_;
 	bool enemy_nearby_;
 
@@ -201,7 +205,8 @@ struct BuildableField {
 	uint8_t unowned_mines_pots_nearby_;
 	uint8_t trees_nearby_;
 	uint8_t stones_nearby_;
-	int8_t water_nearby_;
+	int16_t water_nearby_;
+	int16_t distant_water_;
 	int8_t fish_nearby_;
 	int8_t critters_nearby_;
 	int8_t ground_water_;  // used by wells
@@ -220,6 +225,10 @@ struct BuildableField {
 	int16_t military_presence_;
 	// stationed (manned) military buildings nearby
 	int16_t military_stationed_;
+	// some buildings must be postponed bit
+	int32_t prohibited_till_;
+	// and then some must be forced
+	int32_t forced_after_;
 
 	std::vector<uint8_t> consumers_nearby_;
 	std::vector<uint8_t> producers_nearby_;
@@ -227,7 +236,6 @@ struct BuildableField {
 	BuildableField(const Widelands::FCoords& fc)
 	   : coords(fc),
 	     next_update_due_(0),
-	     reachable(false),
 	     preferred_(false),
 	     enemy_nearby_(0),
 	     unowned_land_nearby_(0),
@@ -242,6 +250,7 @@ struct BuildableField {
 	     // non-negative, water is not recaldulated
 	     stones_nearby_(1),
 	     water_nearby_(-1),
+	     distant_water_(0),
 	     fish_nearby_(-1),
 	     critters_nearby_(-1),
 	     ground_water_(1),
@@ -259,13 +268,12 @@ struct MineableField {
 
 	int32_t next_update_due_;
 
-	bool reachable;
 	bool preferred_;
 
 	int32_t mines_nearby_;
 
 	MineableField(const Widelands::FCoords& fc)
-	   : coords(fc), next_update_due_(0), reachable(false), preferred_(false), mines_nearby_(0) {
+	   : coords(fc), next_update_due_(0), preferred_(false), mines_nearby_(0) {
 	}
 };
 
@@ -296,22 +304,22 @@ struct BuildingObserver {
 		MINE
 	} type;
 
-	bool is_basic_;       // is a "must" to have for the ai
-	bool is_food_basic_;  // few food producer to be built sooner
 	bool prod_build_material_;
 	bool plants_trees_;
 	bool recruitment_;  // is "producing" workers?
 	bool is_buildable_;
 	bool need_trees_;          // lumberjack = true
 	bool need_stones_;         // quarry = true
-	bool mines_marble_;        // need to distinquish mines_ that produce marbles
 	bool mines_water_;         // wells
 	bool need_water_;          // fisher, fish_breeder = true
 	bool is_hunter_;           // need to identify hunters
+	bool is_fisher_;           // need to identify fishers
 	bool space_consumer_;      // farm, vineyard... = true
 	bool expansion_type_;      // military building used that can be used to control area
 	bool fighting_type_;       // military building built near enemies
 	bool mountain_conqueror_;  // military building built near mountains
+	int32_t prohibited_till_;  // do not build before (ms)
+	int32_t forced_after_;     // do not wait until ware is needed
 
 	bool unoccupied_;  //
 
@@ -347,6 +355,7 @@ struct ProductionSiteObserver {
 	int32_t built_time_;
 	int32_t unoccupied_till_;
 	uint8_t stats_zero_;
+	uint8_t no_resources_count;
 	BuildingObserver* bo;
 };
 

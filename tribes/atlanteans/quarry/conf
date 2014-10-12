@@ -2,7 +2,7 @@ size=small
 output=stone
 
 [aihints]
-is_basic=true
+forced_after=60
 stoneproducer=true
 
 [buildcost]

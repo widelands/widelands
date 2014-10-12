@@ -3,7 +3,7 @@ output=advanced_shield
 output=steel_shield
 
 [aihints]
-build_material=false
+prohibited_till=900
 
 [buildcost]
 log=2

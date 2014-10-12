@@ -155,6 +155,7 @@ public:
 	uint8_t get_statistics_percent() {return m_last_stat_percent;}
 	uint8_t get_crude_statistics() {return (m_crude_percent + 5000) / 10000;}
 
+
 	const std::string& production_result() const {return m_production_result;}
 
 	 // Production and worker programs set this to explain the current
@@ -301,6 +302,24 @@ struct Input {
 private:
 	WareIndex m_ware;
 	uint8_t    m_max;
+};
+
+/**
+ * Note to be published when a production site is out of resources
+ */
+// A note we're using to notify the AI
+struct NoteProductionSiteOutOfResources {
+	CAN_BE_SEND_AS_NOTE(NoteId::ProductionSiteOutOfResources)
+
+	// The production site that is out of resources.
+	ProductionSite* ps;
+
+	// The player that owns the production site.
+	Player * player;
+
+	NoteProductionSiteOutOfResources(ProductionSite* const init_ps, Player* init_player)
+		: ps(init_ps), player(init_player) {
+	}
 };
 
 }

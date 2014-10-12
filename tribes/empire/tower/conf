@@ -12,6 +12,7 @@ defeated_you_string=_Your soldiers defeated the enemy at the tower.
 
 [aihints]
 mountain_conqueror=true
+prohibited_till=300
 
 [buildcost]
 log=2

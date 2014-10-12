@@ -1,7 +1,6 @@
 size=small
 
 [aihints]
-build_material=false
 
 [buildcost]
 log=2

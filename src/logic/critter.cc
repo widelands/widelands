@@ -21,7 +21,9 @@
 
 #include <cstdio>
 #include <memory>
+#include <string>
 
+#include <boost/format.hpp>
 #include <stdint.h>
 
 #include "base/wexception.h"
@@ -48,9 +50,7 @@ namespace {
 std::vector<std::string> section_to_strings(Section* section) {
 	std::vector<std::string> return_value;
 	for (uint32_t idx = 0;; ++idx) {
-		char buffer[32];
-		snprintf(buffer, sizeof(buffer), "%i", idx);
-		char const* const string = section->get_string(buffer, nullptr);
+		char const* const string = section->get_string(std::to_string(idx).c_str(), nullptr);
 		if (!string)
 			break;
 		return_value.emplace_back(string);
@@ -154,8 +154,7 @@ CritterDescr::CritterDescr(char const* const _name,
 		add_attributes(attributes, std::set<uint32_t>());
 	}
 
-	char defaultpics[256];
-	snprintf(defaultpics, sizeof(defaultpics), "%s_walk_!!_??.png", _name);
+	const std::string defaultpics = (boost::format("%s_walk_!!_??.png") % _name).str().c_str();
 	m_walk_anims.parse(*this, directory, prof, "walk", false, defaultpics);
 
 	while (Section::Value const * const v = global_s.get_next_val("program")) {
