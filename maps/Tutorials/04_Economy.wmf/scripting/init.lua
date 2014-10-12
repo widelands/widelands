@@ -403,13 +403,10 @@ end
 
 function test()
 while true do
-   if mv.windows.stock_menu then
-      print('stock')
-      for k,v in pairs(mv.windows.stock_menu.tabs) do print(v.name) end
-   end
-   if mv.windows.ware_statistics then
-      print('wares')
-      for k,v in pairs(mv.windows.ware_statistics.tabs) do print(v.name) end
+   if mv.windows.building_window then
+      for name, window in pairs(mv.windows.building_window.windows) do print('window ' .. name) end
+      for name, button in pairs(mv.windows.building_window.buttons) do print('button ' .. name) end
+      for name, tab in pairs(mv.windows.building_window.tabs) do print('tab ' .. name) end
    end
 sleep(1000)
 end
@@ -417,3 +414,4 @@ end
 
 run(init_player)
 run(introduction)
+--run(test)

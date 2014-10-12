@@ -180,6 +180,7 @@ building_priority_settings = {
       p(_[[When you click on the red part (low priority), the corresponding ware gets delivered less frequently. Green means that as many wares as possible should de delivered to this building, maybe because it produces something important.]]) ..
       p(_[[In our situation, you might want to work the bakeries as fast as possible because they supply our taverns, so you set the water to the highest priority. The other buildings (for example the donkey farm) then get less water, but the bakery can work faster.]])
       -- we cannot check whether the user does this, so no objective
+      -- see bug https://bugs.launchpad.net/widelands/+bug/1380288
    )
 }
 

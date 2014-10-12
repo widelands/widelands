@@ -5,7 +5,6 @@
 -- TODO: move common functions to tutorial_utils.lua or so
 -- compare with other stuff (documentation, redundant functions etc.)
 
-
 -- ===============
 -- Initialization
 -- ===============
@@ -139,13 +138,9 @@ function init_player()
    {"well", 38, 55},
    {"well", 35, 61},
    {"well", 32, 59},
-   {"hunters_house", 37, 50},
-   {"warehouse", 36, 57,
-      wares = {},
-      workers = {},
-      soldiers = {}
-   },
-   
+   {"warehouse", 36, 57},
+
+   -- everthing below is in the north
    {"castle", 36, 20},
    {"warehouse", 37, 16, 
       wares = {
@@ -182,8 +177,9 @@ function init_player()
    connected_road(plr,map:get_field(17,50).immovable,"r,r|r,r|tr,r|br,r|br,br|r,br|br,br|br,br,r|br,r|bl,br|r,r|tr,r")
    connected_road(plr,map:get_field(24,60).immovable,"l,l,l")
    connected_road(plr,map:get_field(54,54).immovable,"tr,tr,tl")
-   connected_road(plr,map:get_field(40,44).immovable,"r,r")
+   connected_road(plr,map:get_field(42,44).immovable,"l,l|l,tl|l,l|l,l")
    connected_road(plr,map:get_field(37,58).immovable,"bl,bl")
+   connected_road(plr,map:get_field(41,47).immovable,"r,tr,tr")
 
    connected_road(plr,map:get_field(33,26).immovable,"r,tr|tr,tr|tr,tr|tr,tr|tl,tr")
    
@@ -273,7 +269,7 @@ function build_port()
    sleep(200)
    msg_box(tell_about_port)
    
-   wl.ui.MapView().buildhelp = true -- so that the player sees the port space
+   wl.ui.MapView().buildhelp = true -- so that the player sees the port building icon
    local o = msg_box(tell_about_port_building)
    
    while #plr:get_buildings("port") < 2 do sleep(200) end
@@ -292,8 +288,8 @@ function build_ships()
    
    local o = msg_box(tell_about_ships)
    
-   -- TODO(codereview): how to check for ships? (player shall build two)
-   sleep(30*60*1000) -- 30 minutes
+   -- we cannot check for ships yet (see https://bugs.launchpad.net/widelands/+bug/1380287), so we just wait some time and hope for the best
+   sleep(25*60*1000) -- 25 minutes
    o.done = true
    
    expedition()
@@ -304,8 +300,8 @@ function expedition()
    msg_box(expedition1)
    local o = msg_box(expedition2)
    
-   -- TODO(codereview): Can I check whether a ship is ready for an expedition?
-   sleep(2*60*1000) -- 2 minutes
+   -- again, we can only wait. Better a bit too long than too short
+   sleep(3*60*1000) -- 3 minutes
    o.done = true
    
    local o2 = msg_box(expedition3)

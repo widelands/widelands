@@ -104,7 +104,8 @@ tell_about_ships = {
       paragraphdivider() ..
       listitem_bullet(_[[We should wait until we have two ships. That should be enough for now.]]) ..
       listitem_arrow(_[[You need to stop your shipyard when you have enough ships. Otherwise, your shipwright will consume all your logs and spidercloth, producing dozens of ships.]])
-   ),
+   ) ..
+   rt("image=pics/stop.png",p(_[[This is the icon. You find it in the building window.]])),
    obj_name = "wait_for_ships",
    obj_title = _"Construct two ships",
    obj_body = rt(
@@ -120,9 +121,8 @@ expedition1 = {
    title = _"No Iron",
    body = rt(
       h1(_"We lack iron") ..
-      p(_[[Well done, your ships are finished. Do you see how they transport the goldores from one port to the other?]]) ..
-      p([[]]) .. -- an empty line
-      p(_[[But we have a problem: As you surely have already noticed, there is no iron in the mountain in the west. We have plenty of coal and goldores, but without ironores, we cannot produce any tools.]]) ..
+      p(_[[Your second ship might not finished yet, but we have an urgent problem.]]) ..
+      p(_[[As you surely have already noticed, there is no iron in the mountain in the west. We have plenty of coal and goldores, but without ironores, we cannot produce any tools.]]) ..
       p(_[[Although it might take long and is expensive and not without dangers (who knows what monsters live in the sea?), I see no other possibility: We have to make an expedition into the unknown seas.]])
    )
 }
@@ -143,8 +143,9 @@ expedition2 = {
    obj_title = _"Start an expedition",
    obj_body = rt(
       paragraphdivider() ..
-      listitem_bullet(_[[Start an expedition.]]) ..
-      listitem_arrow(_[[To do so, click on the 'Start Expedition' button in the bottom left corner of a port. A new tab where you can see the needed wares will appear.]])
+      listitem_bullet(_[[Start an expedition.]])
+   ) ..
+   rt("image=pics/start_expedition.png",p(_[[To do so, click on the 'Start Expedition' button in any port. A new tab where you can see the needed wares will appear.]])
    )
 }
 
@@ -153,7 +154,7 @@ expedition3 = {
    title = _"Off to new pastures",
    body = rt(
       h1(_"The ship is ready") ..
-      p(_[[You ship is now waiting for your orders in front of your port. It does not transport wares anymore. The control is self-explanatory: You can send your ship in any of the six main directions of the Widelands map. When it has reached a coast, you can make it travel around the coast, where it looks for suitable places for landing. With the button in the centre of the ship's control window, you can construct a port.]]) ..
+      p(_[[Your expedition should be ready about now. (If not, please wait some more time. You will receive a message.) Your ship is waiting for your orders in front of your port. It does not transport wares anymore. The control is self-explanatory: You can send your ship in any of the six main directions of the Widelands map. When it has reached a coast, you can make it travel around the coast, where it looks for suitable places for landing. With the button in the centre of the ship's control window, you can construct a port.]]) ..
       p(_[[The wares will then be unloaded and the ship takes the task of transporting wares again. The builder will start his work and build a port.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[Search for an island with a mountain, and look for a port space there. Colonize the island.]])
