@@ -5,7 +5,6 @@
 -- TODO: move common functions to tutorial_utils.lua or so
 -- compare with other stuff (documentation, redundant functions etc.)
 
-
 -- ===============
 -- Initialization
 -- ===============
@@ -285,17 +284,37 @@ function burn_tavern_down()
    tavern_field.immovable:destroy()
    sleep(50)
    msg_box(tavern_burnt_down)
+   sleep(2000)
    local o = msg_box(building_stat)
    -- wait for the window to open and close
    while not mv.windows.building_statistics do sleep(100) end
+   -- we cannot check whether the user scrolled, so let's hope he does it
    while mv.windows.building_statistics do sleep(100) end
    o.done = true
    
+   sleep(2000)
    o = msg_box(inventory1)
    while not mv.windows.stock_menu do sleep(200) end
    o.done = true
-   msg_box(inventory2)
-   
+
+   o = msg_box(inventory2)
+   -- We cannot create several objectives with the same name. Therefore, we create o2 here once and change its visibility
+   local o2 = _try_add_objective(reopen_stock_menu_obj)
+   o2.visible = false
+   while not o.done do
+      if not mv.windows.stock_menu then
+         o2.visible = true
+         msg_box(reopen_stock_menu)
+         while not mv.windows.stock_menu do sleep(200) end
+         o2.visible = false
+      end
+      if mv.windows.stock_menu.tabs["wares_in_warehouses"].active then o.done = true end
+      sleep(200)
+   end
+
+   msg_box(inventory3)
+
+   sleep(2000)
    o = msg_box(build_taverns)
    
    sleep(100*1000)
@@ -308,18 +327,56 @@ function burn_tavern_down()
 end
 
 function plan_the_future()
-   sleep(200)
+   sleep(2000)
    msg_box(building_priority_settings)
-   msg_box(ware_stat)
-   --while not mv.windows.ware_statistics do sleep(200) end
-   -- TODO(codereview): How do I select a ware via scripting?
-   -- TODO(wl-zocker): If possible, choose an example (wheat?) and talk about it. Make objective for opening
-   local o = msg_box(economy_settings1)
+   sleep(30*1000) -- give the user time to try it out
+
+   local o = msg_box(ware_stats1)
+   while not mv.windows.ware_statistics do sleep(200) end
+   o.done = true
+
+   o = msg_box(ware_stats2)
+   local o2 = _try_add_objective(reopen_ware_stats1_obj)
+   o2.visible = false
+   while not o.done do
+      if not mv.windows.ware_statistics then
+         o2.visible = true
+         msg_box(reopen_ware_stats1)
+         while not mv.windows.ware_statistics do sleep(200) end
+         o2.visible = false
+      end
+      if mv.windows.ware_statistics.tabs["economy_health"].active then o.done = true end
+      sleep(200)
+   end
+
+   o = msg_box(ware_stats3)
+   o2 = _try_add_objective(reopen_ware_stats2_obj)
+   o2.visible = false
+   while not o.done do
+      if not mv.windows.ware_statistics then
+         o2.visible = true
+         msg_box(reopen_ware_stats2)
+         while not mv.windows.ware_statistics do sleep(200) end
+         o2.visible = false
+      end
+      if mv.windows.ware_statistics.tabs["stock"].active then o.done = true end
+      sleep(200)
+   end
+
+   o = msg_box(ware_stats4)
+   while mv.windows.ware_statistics do sleep(500) end
+   o.done = true
+
+   sleep(2000)
+
+   o = msg_box(economy_settings1)
    while not mv.windows.economy_options do sleep(200) end
    o.done = true
-   o = msg_box(economy_settings2)
+   msg_box(economy_settings2)
+   o = msg_box(economy_settings3)
    
-   sleep(40*1000)
+   while sf.immovable:get_wares("marblecolumn") < 12 do sleep(500) end
+   -- wait that the player has really changed the target quantity
    
    o.visible = false
    -- just forget about the old objective, the new one includes the old one
@@ -345,11 +402,18 @@ function conclude()
 end
 
 function test()
-   local n = warehouse_field.immovable:get_wares('log')
-   print(n)
+while true do
+   if mv.windows.stock_menu then
+      print('stock')
+      for k,v in pairs(mv.windows.stock_menu.tabs) do print(v.name) end
+   end
+   if mv.windows.ware_statistics then
+      print('wares')
+      for k,v in pairs(mv.windows.ware_statistics.tabs) do print(v.name) end
+   end
+sleep(1000)
+end
 end
 
 run(init_player)
 run(introduction)
---run(plan_the_future)
---run(test)
