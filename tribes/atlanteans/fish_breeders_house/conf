@@ -1,9 +1,9 @@
 size=small
 
 [aihints]
-build_material=false
 needs_water=true
 renews_map_resource=fish
+prohibited_till=900
 
 [buildcost]
 log=1

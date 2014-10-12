@@ -21,6 +21,8 @@
 
 #include <algorithm>
 
+#include <boost/format.hpp>
+
 #include "base/deprecated.h"
 #include "base/log.h"
 #include "base/macros.h"

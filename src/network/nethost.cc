@@ -21,6 +21,7 @@
 
 #include <memory>
 #include <sstream>
+#include <string>
 
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
@@ -1416,13 +1417,9 @@ int32_t NetHost::get_frametime()
 	return d->time.time() - d->game->get_gametime();
 }
 
-std::string NetHost::get_game_description()
+GameController::GameType NetHost::get_game_type()
 {
-	char buf[200];
-	snprintf
-		(buf, sizeof(buf),
-		 "network player %i (host)", d->settings.users.at(0).position);
-	return buf;
+	return GameController::GameType::NETHOST;
 }
 
 const GameSettings& NetHost::settings()
@@ -2002,9 +1999,7 @@ std::string NetHost::get_computer_player_name(uint8_t const playernum)
 	std::string name;
 	uint32_t suffix = playernum;
 	do {
-		char buf[200];
-		snprintf(buf, sizeof(buf), _("Computer %u"), ++suffix);
-		name = buf;
+		name = (boost::format(_("Computer %u")) % static_cast<unsigned int>(++suffix)).str();
 	} while (has_user_name(name, playernum));
 	return name;
 }
@@ -2075,9 +2070,7 @@ void NetHost::welcome_client (uint32_t const number, std::string & playername)
 	if (has_user_name(effective_name, client.usernum)) {
 		uint32_t i = 2;
 		do {
-			char buf[32];
-			snprintf(buf, sizeof(buf), "%u", i++);
-			effective_name = (boost::format(_("Player %s")) % buf).str();
+			effective_name = (boost::format(_("Player %u")) % i++).str();
 		} while (has_user_name(effective_name, client.usernum));
 	}
 
@@ -2264,16 +2257,19 @@ void NetHost::check_hung_clients()
 
 					// inform the other clients about the problem regulary
 					if (deltanow - d->clients.at(i).lastdelta > 30) {
-						char buf[5];
-						//snprintf(buf, sizeof(buf), "%li", deltanow);
-						snprintf(buf, sizeof(buf), ngettext("%li second", "%li seconds", deltanow), deltanow);
+						std::string seconds = (boost::format(ngettext("%li second", "%li seconds", deltanow))
+															  % deltanow).str();
 						send_system_message_code
-							("CLIENT_HUNG", d->settings.users.at(d->clients.at(i).usernum).name, buf);
+							("CLIENT_HUNG",
+							 d->settings.users.at(d->clients.at(i).usernum).name,
+							 seconds.c_str());
 						d->clients.at(i).lastdelta = deltanow;
 						if (m_is_dedicated) {
-							snprintf(buf, sizeof(buf), "%li", 300 - deltanow);
+							seconds = (boost::format("%li") % (300 - deltanow)).str();
 							send_system_message_code
-								("CLIENT_HUNG_AUTOKICK", d->settings.users.at(d->clients.at(i).usernum).name, buf);
+								("CLIENT_HUNG_AUTOKICK",
+								 d->settings.users.at(d->clients.at(i).usernum).name,
+								 seconds.c_str());
 						}
 					}
 

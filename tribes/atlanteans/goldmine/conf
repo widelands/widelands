@@ -2,8 +2,8 @@ size=mine
 output=goldore
 
 [aihints]
-build_material=false
 mines=gold
+prohibited_till=1200
 
 [buildcost]
 log=7

@@ -19,6 +19,8 @@
 
 #include "map_io/map_player_position_packet.h"
 
+#include <boost/format.hpp>
+
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
@@ -48,9 +50,10 @@ void MapPlayerPositionPacket::read
 			PlayerNumber const nr_players = map.get_nrplayers();
 			iterate_player_numbers(p, nr_players) {
 				try {
-					char buffer[10];
-					snprintf(buffer, sizeof(buffer), "player_%u", p);
-					map.set_starting_pos(p, get_safe_coords(buffer, extent, &s));
+					map.set_starting_pos(p,
+												get_safe_coords((boost::format("player_%u")
+																	  % static_cast<unsigned int>(p)).str().c_str(),
+																	 extent, &s));
 				} catch (const WException & e) {
 					throw GameDataError("player %u: %s", p, e.what());
 				}
@@ -76,9 +79,8 @@ void MapPlayerPositionPacket::write
 	const Map & map = egbase.map();
 	const PlayerNumber nr_players = map.get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
-		char buffer[10];
-		snprintf(buffer, sizeof(buffer), "player_%u", p);
-		set_coords(buffer, map.get_starting_pos(p), &s);
+		set_coords((boost::format("player_%u") % static_cast<unsigned int>(p)).str().c_str(),
+					  map.get_starting_pos(p), &s);
 	}
 
 	prof.write("player_position", false, fs);

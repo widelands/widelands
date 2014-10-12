@@ -548,25 +548,21 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata()
 	std::unique_ptr<FileSystem> l_fs(g_fs->make_sub_file_system(m_settings->settings().mapfilename.c_str()));
 	Profile prof;
 	prof.read("map/player_names", nullptr, *l_fs);
-	std::string strbuf;
 	std::string infotext = _("Saved players are:");
 	std::string player_save_name [MAX_PLAYERS];
 	std::string player_save_tribe[MAX_PLAYERS];
 	std::string player_save_ai   [MAX_PLAYERS];
-	char buf[32];
 
 	uint8_t i = 1;
 	for (; i <= m_nr_players; ++i) {
 		infotext += "\n* ";
-		strbuf = std::string();
-		snprintf(buf, sizeof(buf), "player_%u", i);
-		Section & s = prof.get_safe_section(buf);
+		Section & s = prof.get_safe_section((boost::format("player_%u")
+														 % static_cast<unsigned int>(i)).str().c_str());
 		player_save_name [i - 1] = s.get_string("name");
 		player_save_tribe[i - 1] = s.get_string("tribe");
 		player_save_ai   [i - 1] = s.get_string("ai");
 
-		snprintf(buf, sizeof(buf), _("Player %u"), i);
-		infotext += buf;
+		infotext += (boost::format(_("Player %u")) % static_cast<unsigned int>(i)).str();
 		if (player_save_tribe[i - 1].empty()) {
 			std::string closed_string =
 				(boost::format("\\<%s\\>") % _("closed")).str();
@@ -594,9 +590,8 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata()
 		m_settings->set_player_tribe(i - 1, player_save_tribe[i - 1]);
 
 		// get translated tribename
-		strbuf = "tribes/" + player_save_tribe[i - 1];
-		strbuf += "/conf";
-		Profile tribe(strbuf.c_str(), nullptr, "tribe_" + player_save_tribe[i - 1]);
+		Profile tribe((new std::string("tribes/" + player_save_tribe[i - 1] + "/conf"))->c_str(),
+				nullptr, "tribe_" + player_save_tribe[i - 1]);
 		Section & global = tribe.get_safe_section("tribe");
 		player_save_tribe[i - 1] = global.get_safe_string("name");
 		infotext += " (";
