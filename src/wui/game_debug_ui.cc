@@ -21,6 +21,7 @@
 #include "wui/game_debug_ui.h"
 
 #include <cstdio>
+#include <string>
 
 #include <boost/format.hpp>
 
@@ -155,11 +156,8 @@ MapObjectDebugWindow::MapObjectDebugWindow
 		(this, 0, 0,
 		 g_gr->images().get("pics/but1.png"))
 {
-	char buffer[128];
-
 	m_serial = obj.serial();
-	snprintf(buffer, sizeof(buffer), "%u", m_serial);
-	set_title(buffer);
+	set_title(std::to_string(m_serial));
 
 	obj.create_debug_panels(parent.egbase(), m_tabs);
 
@@ -182,10 +180,7 @@ void MapObjectDebugWindow::think()
 		}
 		UI::Window::think();
 	} else {
-		char buffer[128];
-
-		snprintf(buffer, sizeof(buffer), "DEAD: %u", m_serial);
-		set_title(buffer);
+		set_title((boost::format("DEAD: %u") % m_serial).str().c_str());
 	}
 
 }
@@ -274,7 +269,6 @@ This is done every frame in order to have up to date information all the time.
 void FieldDebugWindow::think()
 {
 	std::string str;
-	char buffer[512];
 
 	UI::Window::think();
 
@@ -284,10 +278,11 @@ void FieldDebugWindow::think()
 		.egbase();
 	{
 		Widelands::PlayerNumber const owner = m_coords.field->get_owned_by();
-		snprintf
-			(buffer, sizeof(buffer), "(%i, %i)\nheight: %u\nowner: %u\n",
-			 m_coords.x, m_coords.y, m_coords.field->get_height(), owner);
-		str += buffer;
+		str += (boost::format("(%i, %i)\nheight: %u\nowner: %u\n")
+				  % m_coords.x % m_coords.y
+				  % static_cast<unsigned int>(m_coords.field->get_height())
+				  % static_cast<unsigned int>(owner)).str();
+
 		if (owner) {
 			Widelands::NodeCaps const buildcaps =
 				egbase.player(owner).get_buildcaps(m_coords);
@@ -313,35 +308,31 @@ void FieldDebugWindow::think()
 	Widelands::PlayerNumber const nr_players = m_map.get_nrplayers();
 	iterate_players_existing_const(plnum, nr_players, egbase, player) {
 		const Widelands::Player::Field & player_field = player->fields()[i];
-		snprintf(buffer, sizeof(buffer), "Player %u:\n", plnum);
-		str += buffer;
-		snprintf
-			(buffer, sizeof(buffer),
-			 "  military influence: %u\n", player_field.military_influence);
-		str += buffer;
+		str += (boost::format("Player %u:\n") % static_cast<unsigned int>(plnum)).str();
+		str += (boost::format("  military influence: %u\n") % player_field.military_influence).str();
+
 		Widelands::Vision const vision = player_field.vision;
-		snprintf(buffer, sizeof(buffer), "  vision: %u\n", vision);
-		str += buffer;
+		str += (boost::format("  vision: %u\n") % vision).str();
 		{
 			Widelands::Time const time_last_surveyed =
 				player_field.time_triangle_last_surveyed[Widelands::TCoords<>::D];
+
 			if (time_last_surveyed != Widelands::never()) {
-				snprintf
-					(buffer, sizeof(buffer),
-					 "  D triangle last surveyed at %u: amount %u\n",
-					 time_last_surveyed, player_field.resource_amounts.d);
-				str += buffer;
+				str += (boost::format("  D triangle last surveyed at %u: amount %u\n")
+						  % time_last_surveyed
+						  % static_cast<unsigned int>(player_field.resource_amounts.d)).str();
+
 			} else str += "  D triangle never surveyed\n";
 		}
 		{
 			Widelands::Time const time_last_surveyed =
 				player_field.time_triangle_last_surveyed[Widelands::TCoords<>::R];
+
 			if (time_last_surveyed != Widelands::never()) {
-				snprintf
-					(buffer, sizeof(buffer),
-					 "  R triangle last surveyed at %u: amount %u\n",
-					 time_last_surveyed, player_field.resource_amounts.r);
-				str += buffer;
+				str += (boost::format("  R triangle last surveyed at %u: amount %u\n")
+						  % time_last_surveyed
+						  % static_cast<unsigned int>(player_field.resource_amounts.r)).str();
+
 			} else str += "  R triangle never surveyed\n";
 		}
 		switch (vision) {
@@ -352,21 +343,17 @@ void FieldDebugWindow::think()
 				animation_name = "(seen an animation)";
 			}
 
-			snprintf
-				(buffer, sizeof(buffer),
-				 "  last seen at %u:\n"
-				 "    owner: %u\n"
-				 "    immovable animation:\n%s\n"
-				 "      ",
-				 player_field.time_node_last_unseen,
-				 player_field.owner,
-				 animation_name.c_str());
-			str += buffer;
+			str += (boost::format("  last seen at %u:\n"
+										"    owner: %u\n"
+										"    immovable animation:\n%s\n"
+										"      ")
+					  % player_field.time_node_last_unseen
+					  % static_cast<unsigned int>(player_field.owner)
+					  % animation_name.c_str()).str();
 			break;
 		}
 		default:
-			snprintf(buffer, sizeof(buffer), "  seen %u times\n", vision - 1);
-			str += buffer;
+			str += (boost::format("  seen %u times\n") % (vision - 1)).str();
 			break;
 		}
 	}
@@ -374,16 +361,11 @@ void FieldDebugWindow::think()
 		Widelands::ResourceIndex ridx = m_coords.field->get_resources();
 		int ramount = m_coords.field->get_resources_amount();
 		int startingAmount = m_coords.field->get_starting_res_amount();
-		snprintf(buffer,
-		         sizeof(buffer),
-		         "Resource: %s\n",
-		         ibase().egbase().world().get_resource(ridx)->name().c_str());
 
-		str += buffer;
+		str += (boost::format("Resource: %s\n")
+				  % ibase().egbase().world().get_resource(ridx)->name().c_str()).str();
 
-		snprintf
-		(buffer, sizeof(buffer), "  Amount: %i/%i\n", ramount, startingAmount);
-		str += buffer;
+		str += (boost::format("  Amount: %i/%i\n") % ramount % startingAmount).str();
 	}
 
 	m_ui_field.set_text(str.c_str());
@@ -391,10 +373,9 @@ void FieldDebugWindow::think()
 	// Immovable information
 	if (Widelands::BaseImmovable * const imm = m_coords.field->get_immovable())
 	{
-		snprintf
-			(buffer, sizeof(buffer),
-			 "%s (%u)", imm->descr().name().c_str(), imm->serial());
-		m_ui_immovable.set_title(buffer);
+		m_ui_immovable.set_title((boost::format("%s (%u)")
+										  % imm->descr().name().c_str()
+										  % imm->serial()).str().c_str());
 		m_ui_immovable.set_enabled(true);
 	} else {
 		m_ui_immovable.set_title("no immovable");

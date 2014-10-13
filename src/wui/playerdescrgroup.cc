@@ -19,6 +19,8 @@
 
 #include "wui/playerdescrgroup.h"
 
+#include <string>
+
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -212,9 +214,7 @@ void PlayerDescriptionGroup::refresh()
 			d->plr_name->set_text(player.name);
 
 			if (player.team) {
-				char buf[64];
-				snprintf(buf, sizeof(buf), "%i", player.team);
-				d->btnPlayerTeam->set_title(buf);
+				d->btnPlayerTeam->set_title(std::to_string(static_cast<unsigned int>(player.team)));
 			} else {
 				d->btnPlayerTeam->set_title("--");
 			}

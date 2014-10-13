@@ -24,12 +24,14 @@ wl_library(game_io
     base_log
     base_macros
     base_scoped_timer
+    base_time_string
     economy
     graphic
     graphic_surface
     io_fileread
     io_filesystem
     logic
+    logic_game_controller
     map_io
     map_io_map_loader
     profile

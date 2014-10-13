@@ -2,7 +2,6 @@ size=small
 output=meat
 
 [aihints]
-build_material=false
 
 [buildcost]
 log=1

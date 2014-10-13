@@ -233,12 +233,10 @@ void MainMenuSaveMap::clicked_item(uint32_t) {
 		m_author->set_text(map.get_author     ());
 		m_descr ->set_text(map.get_description());
 
-		char buf[200];
-		sprintf(buf, "%i", map.get_nrplayers());
-		m_nrplayers->set_text(buf);
+		m_nrplayers->set_text(std::to_string(static_cast<unsigned int>(map.get_nrplayers())));
 
-		sprintf(buf, "%ix%i", map.get_width(), map.get_height());
-		m_size->set_text(buf);
+		m_size->set_text((boost::format(_("%1$ix%2$i"))
+								% map.get_width() % map.get_height()).str().c_str());
 	} else {
 		m_name     ->set_text(FileSystem::fs_filename(name));
 		m_name     ->set_tooltip("");

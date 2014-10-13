@@ -490,9 +490,7 @@ char const * Section::get_next_bool
  */
 void Section::set_int(char const * const name, int32_t const value)
 {
-	char buffer[sizeof("-2147483649")];
-	sprintf(buffer, "%i", value);
-	set_string(name, buffer);
+	set_string(name, std::to_string(value));
 }
 
 
