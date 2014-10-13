@@ -21,6 +21,7 @@
 
 #include <cstdio>
 #include <memory>
+#include <string>
 
 #include <boost/format.hpp>
 
@@ -173,12 +174,11 @@ void MainMenuLoadMap::selected(uint32_t) {
 			(_(map.get_description()) +
 			 (map.get_hint().empty() ? "" : (std::string("\n\n") + _(map.get_hint()))));
 
-		char buf[200];
-		sprintf(buf, "%i", map.get_nrplayers());
-		m_nrplayers->set_text(buf);
+		m_nrplayers->set_text(std::to_string(static_cast<unsigned int>(map.get_nrplayers())));
 
-		sprintf(buf, "%ix%i", map.get_width(), map.get_height());
-		m_size     ->set_text(buf);
+		m_size     ->set_text((boost::format(_("%1$ix%2$i"))
+									  % map.get_width()
+									  % map.get_height()).str().c_str());
 	} else {
 		m_name     ->set_text("");
 		m_name     ->set_tooltip("");

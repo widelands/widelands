@@ -19,6 +19,8 @@
 
 #include "scripting/lua_bases.h"
 
+#include <boost/format.hpp>
+
 #include "economy/economy.h"
 #include "logic/checkstep.h"
 #include "logic/constants.h"
@@ -315,10 +317,8 @@ int LuaPlayerBase::__eq(lua_State * L) {
 }
 
 int LuaPlayerBase::__tostring(lua_State * L) {
-	char rv[40];
-	snprintf
-		(rv, sizeof(rv), "Player(%i)", get(L, get_egbase(L)).player_number());
-	lua_pushstring(L, rv);
+	lua_pushstring(L, (boost::format("Player(%i)")
+							 % static_cast<unsigned int>(get(L, get_egbase(L)).player_number())).str().c_str());
 	return 1;
 }
 /* RST
