@@ -375,12 +375,17 @@ void FullscreenMenuLoadGame::fill_table() {
 				time_t t;
 				time(&t);
 				struct tm * currenttime  = localtime(&t);
+				// We need to put these into variables because of a sideeffect of the localtime function.
+				int8_t current_year = currenttime->tm_year;
+				int8_t current_month = currenttime->tm_mon;
+				int8_t current_day = currenttime->tm_mday;
+
 				struct tm * savedate  = localtime(&gamedata->savetimestamp);
 
 				if (gamedata->savetimestamp > 0) {
-					if (savedate->tm_year == currenttime->tm_year &&
-						 savedate->tm_mon == currenttime->tm_mon &&
-						 savedate->tm_mday == currenttime->tm_mday) {  // Today
+					if (savedate->tm_year == current_year &&
+						 savedate->tm_mon == current_month &&
+						 savedate->tm_mday == current_day) {  // Today
 
 						// Adding the 0 padding in a separate statement so translators won't have to deal with it
 						const std::string minute = (boost::format("%02u") % savedate->tm_min).str();
