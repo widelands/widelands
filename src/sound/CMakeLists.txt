@@ -7,8 +7,8 @@ wl_library(sound
     sound_handler.cc
     sound_handler.h
   USES_BOOST_REGEX
-  USES_SDL
-  USES_SDL_MIXER
+  USES_SDL2
+  USES_SDL2_MIXER
   DEPENDS
     base_deprecated
     base_i18n

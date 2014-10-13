@@ -4,7 +4,7 @@ wl_library(graphic_color
   SRCS
     color.h
     color.cc
-  USES_SDL
+  USES_SDL2
 )
 
 wl_library(graphic_image_io
@@ -12,8 +12,8 @@ wl_library(graphic_image_io
     image_io.h
     image_io.cc
   USES_PNG
-  USES_SDL
-  USES_SDL_IMAGE
+  USES_SDL2
+  USES_SDL2_IMAGE
   DEPENDS
     base_exceptions
     graphic_surface
@@ -27,8 +27,8 @@ wl_library(graphic_image
     image.h
     image_cache.cc
     image_cache.h
-  USES_SDL
-  USES_SDL_IMAGE
+  USES_SDL2
+  USES_SDL2_IMAGE
   DEPENDS
     base_log
     base_macros
@@ -56,7 +56,7 @@ wl_library(graphic_surface
     surface_cache.cc
     surface_cache.h
   USES_OPENGL
-  USES_SDL
+  USES_SDL2
   DEPENDS
     base_macros
     base_exceptions
@@ -110,10 +110,10 @@ wl_library(graphic
     wordwrap.cc
     wordwrap.h
   USES_OPENGL
-  USES_SDL
-  USES_SDL_GFX
-  USES_SDL_IMAGE
-  USES_SDL_TTF
+  USES_SDL2
+  USES_SDL2_GFX
+  USES_SDL2_IMAGE
+  USES_SDL2_TTF
   DEPENDS
     base_deprecated
     base_exceptions
