@@ -32,6 +32,29 @@
 #include "wui/game_options_sound_menu.h"
 #include "wui/unique_window_handler.h"
 
+class GameOptionsMenuExitConfirmBox : public UI::WLMessageBox {
+public:
+	GameOptionsMenuExitConfirmBox(UI::Panel& parent, InteractiveGameBase& gb)
+		: UI::WLMessageBox(&parent,
+								 /** TRANSLATORS: Window label when "Exit game" has been pressed */
+								 _("Exit Game Confirmation"),
+								 _("Are you sure you wish to exit this game?"),
+								 YESNO),
+		  m_gb(gb) {
+	}
+
+	void pressed_yes() override {
+		m_gb.end_modal(0);
+	}
+
+	void pressed_no() override {
+		die();
+	}
+
+private:
+	InteractiveGameBase& m_gb;
+};
+
 GameOptionsMenu::GameOptionsMenu
 	(InteractiveGameBase                      & gb,
 	 UI::UniqueWindow::Registry               & registry,
@@ -144,11 +167,7 @@ GameOptionsMenu::GameOptionsMenu
 	if (get_usedefaultpos())
 		center_to_parent();
 }
-GameOptionsMenu::~GameOptionsMenu() {
-	UI::UniqueWindow::Registry& registry =
-		m_gb.unique_windows().get_registry("game_options_confirm_exit_game");
-	registry.destroy();
-}
+
 
 void GameOptionsMenu::clicked_sound() {
 	if (m_windows.sound_options.window)
@@ -162,39 +181,12 @@ void GameOptionsMenu::clicked_save_game() {
 	die();
 }
 
-class GameOptionsMenuExitConfirmBox : public UI::WLMessageBox {
-public:
-	GameOptionsMenuExitConfirmBox(UI::Panel& parent, InteractiveGameBase& gb)
-	   : UI::WLMessageBox(&parent,
-	                      /** TRANSLATORS: Window label when "Exit game" has been pressed */
-	                      _("Exit Game Confirmation"),
-	                      _("Are you sure you wish to exit this game?"),
-	                      YESNO),
-	     m_gb(gb) {
-	}
-
-	void pressed_yes() override {
-		m_gb.end_modal(0);
-	}
-
-	void pressed_no() override {
-		die();
-	}
-
-private:
-	InteractiveGameBase& m_gb;
-};
-
 void GameOptionsMenu::clicked_exit_game() {
 	if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) {
 		m_gb.end_modal(0);
 	}
 	else {
-		UI::UniqueWindow::Registry& registry =
-			m_gb.unique_windows().get_registry("game_options_confirm_exit_game");
-		registry.open_window = [this, &registry] {
-			new GameOptionsMenuExitConfirmBox(*get_parent(), m_gb);
-		};
-		registry.create();
+		new GameOptionsMenuExitConfirmBox(*get_parent(), m_gb);
+		die();
 	}
 }
