@@ -46,6 +46,7 @@ protected:
 	void clicked_ok() override;
 	void entry_selected() override;
 	void fill_table() override;
+	bool set_has_selection() override;
 
 
 private:
@@ -75,8 +76,6 @@ private:
 	UI::Textarea                  m_label_description;
 	UI::MultilineTextarea         m_ta_description;
 
-	UI::Table<uintptr_t const>    m_table;
-
 	std::vector<CampaignListData> m_campaigns_data;
 
 	/// Variables used for exchange between the two Campaign UIs and
@@ -96,6 +95,7 @@ struct FullscreenMenuCampaignMapSelect : public FullscreenMenuLoadMapOrGame {
 protected:
 	void entry_selected() override;
 	void fill_table() override;
+	bool set_has_selection() override;
 
 private:
 	/**
@@ -117,8 +117,6 @@ private:
 	UI::MultilineTextarea         m_ta_author;
 	UI::Textarea                  m_label_description;
 	UI::MultilineTextarea         m_ta_description;
-
-	UI::Table<uintptr_t const>    m_table;
 
 	uint32_t                      campaign;
 	std::string                   campmapfile;

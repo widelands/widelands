@@ -50,7 +50,7 @@
 
 FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	(Widelands::Game & g, GameSettingsProvider * gsp, GameController * gc, bool is_replay) :
-	FullscreenMenuLoadMapOrGame(),
+	FullscreenMenuLoadMapOrGame(true),
 
 	m_is_replay(is_replay),
 	// Main title
@@ -102,9 +102,6 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	m_minimap_icon(this,
 						m_right_column_x, get_y_from_preceding(m_ta_win_condition) + 3 * m_padding,
 						m_minimap_w, m_minimap_h, nullptr),
-
-	// Savegame table
-	m_table(this, m_tablex, m_tabley, m_tablew, m_tableh, true),
 
 	// "Data container" for the savegame information
 	m_game(g),
@@ -214,108 +211,107 @@ void FullscreenMenuLoadGame::clicked_delete()
 	}
 }
 
-/**
- * Update buttons and labels to reflect that no loadable game is selected.
- */
-void FullscreenMenuLoadGame::no_selection()
+
+bool FullscreenMenuLoadGame::set_has_selection()
 {
-	m_ok.set_enabled(false);
-	m_delete.set_enabled(false);
+	bool has_selection = m_table.has_selection();
+	FullscreenMenuLoadMapOrGame::set_has_selection();
+	m_delete.set_enabled(has_selection);
 
-	m_label_mapname .set_text(std::string());
-	m_label_gametime.set_text(std::string());
-	m_label_players.set_text(std::string());
-	m_label_win_condition.set_text(std::string());
+	if (!has_selection) {
+		m_label_mapname .set_text(std::string());
+		m_label_gametime.set_text(std::string());
+		m_label_players.set_text(std::string());
+		m_label_win_condition.set_text(std::string());
 
-	m_ta_mapname .set_text(std::string());
-	m_ta_gametime.set_text(std::string());
-	m_ta_players.set_text(std::string());
-	m_ta_win_condition.set_text(std::string());
-	m_minimap_icon.set_icon(nullptr);
-	m_minimap_icon.set_visible(false);
-	m_minimap_icon.set_no_frame();
-	m_minimap_image.reset();
+		m_ta_mapname .set_text(std::string());
+		m_ta_gametime.set_text(std::string());
+		m_ta_players.set_text(std::string());
+		m_ta_win_condition.set_text(std::string());
+		m_minimap_icon.set_icon(nullptr);
+		m_minimap_icon.set_visible(false);
+		m_minimap_icon.set_no_frame();
+		m_minimap_image.reset();
+	} else {
+		m_label_mapname .set_text(_("Map Name:"));
+		m_label_gametime.set_text(_("Gametime:"));
+		m_label_players.set_text(_("Players:"));
+		m_label_win_condition.set_text(_("Win Condition:"));
+	}
+	return has_selection;
 }
 
 
 void FullscreenMenuLoadGame::entry_selected()
 {
-	if (!m_table.has_selection()) {
-		no_selection();
-		return;
-	}
+	if (set_has_selection()) {
 
-	m_label_mapname .set_text(_("Map Name:"));
-	m_label_gametime.set_text(_("Gametime:"));
-	m_label_players.set_text(_("Players:"));
-	m_label_win_condition.set_text(_("Win Condition:"));
+		const SavegameData & gamedata = m_games_data[m_table.get_selected()];
 
-	const SavegameData & gamedata = m_games_data[m_table.get_selected()];
+		m_ta_mapname.set_text(gamedata.mapname);
+		m_ta_gametime.set_text(gametimestring(gamedata.gametime));
 
-	m_ok.set_enabled(true);
-	m_delete.set_enabled(true);
+		uint8_t number_of_players = gamedata.nrplayers;
+		if (number_of_players > 0) {
+			m_ta_players.set_text((boost::format("%u") % static_cast<unsigned int>(number_of_players)).str());
+		} else {
+			m_label_players.set_text("");
+			m_ta_players.set_text("");
+		}
 
-	m_ta_mapname.set_text(gamedata.mapname);
-	m_ta_gametime.set_text(gametimestring(gamedata.gametime));
+		m_ta_win_condition.set_text(gamedata.wincondition);
 
-	uint8_t number_of_players = gamedata.nrplayers;
-	if (number_of_players > 0) {
-		m_ta_players.set_text((boost::format("%u") % static_cast<unsigned int>(number_of_players)).str());
-	} else {
-		m_label_players.set_text("");
-		m_ta_players.set_text("");
-	}
+		std::string minimap_path = gamedata.minimap_path;
+		// Delete former image
+		m_minimap_icon.set_icon(nullptr);
+		m_minimap_icon.set_visible(false);
+		m_minimap_icon.set_no_frame();
+		m_minimap_image.reset();
+		// Load the new one
+		if (!minimap_path.empty()) {
+			try {
+				// Load the image
+				std::unique_ptr<Surface> surface(
+							load_image(
+								minimap_path,
+								std::unique_ptr<FileSystem>(g_fs->make_sub_file_system(gamedata.filename)).get()));
 
-	m_ta_win_condition.set_text(gamedata.wincondition);
+				m_minimap_image.reset(new_in_memory_image(std::string(gamedata.filename + minimap_path),
+																		surface.release()));
 
-	std::string minimap_path = gamedata.minimap_path;
-	// Delete former image
-	m_minimap_icon.set_icon(nullptr);
-	m_minimap_icon.set_visible(false);
-	m_minimap_icon.set_no_frame();
-	m_minimap_image.reset();
-	// Load the new one
-	if (!minimap_path.empty()) {
-		try {
-			// Load the image
-			std::unique_ptr<Surface> surface(load_image(
-				minimap_path, std::unique_ptr<FileSystem>(g_fs->make_sub_file_system(gamedata.filename)).get()));
+				// Scale it
+				double scale = double(m_minimap_w) / m_minimap_image->width();
+				double scaleY = double(m_minimap_h) / m_minimap_image->height();
+				if (scaleY < scale) {
+					scale = scaleY;
+				}
+				if (scale > 1.0) scale = 1.0; // Don't make the image too big; fuzziness will result
+				uint16_t w = scale * m_minimap_image->width();
+				uint16_t h = scale * m_minimap_image->height();
+				const Image* resized = ImageTransformations::resize(m_minimap_image.get(), w, h);
+				// keeps our in_memory_image around and give to icon the one
+				// from resize that is handled by the cache. It is still linked to our
+				// surface
+				m_minimap_icon.set_size(w, h);
 
-			m_minimap_image.reset(new_in_memory_image(std::string(gamedata.filename + minimap_path),
-																	surface.release()));
+				// Center the minimap in the available space
+				int32_t xpos = m_right_column_x + (get_w() - m_right_column_margin - w - m_right_column_x) / 2;
+				int32_t ypos = m_minimap_y;
 
-			// Scale it
-			double scale = double(m_minimap_w) / m_minimap_image->width();
-			double scaleY = double(m_minimap_h) / m_minimap_image->height();
-			if (scaleY < scale) {
-				scale = scaleY;
+				// Set small minimaps higher up for a more harmonious look
+				if (h < m_minimap_h * 2 / 3) {
+					ypos += (m_minimap_h - h) / 3;
+				} else {
+					ypos += (m_minimap_h - h) / 2;
+				}
+
+				m_minimap_icon.set_pos(Point(xpos, ypos));
+				m_minimap_icon.set_frame(UI_FONT_CLR_FG);
+				m_minimap_icon.set_visible(true);
+				m_minimap_icon.set_icon(resized);
+			} catch (const std::exception & e) {
+				log("Failed to load the minimap image : %s\n", e.what());
 			}
-			if (scale > 1.0) scale = 1.0; // Don't make the image too big; fuzziness will result
-			uint16_t w = scale * m_minimap_image->width();
-			uint16_t h = scale * m_minimap_image->height();
-			const Image* resized = ImageTransformations::resize(m_minimap_image.get(), w, h);
-			// keeps our in_memory_image around and give to icon the one
-			// from resize that is handled by the cache. It is still linked to our
-			// surface
-			m_minimap_icon.set_size(w, h);
-
-			// Center the minimap in the available space
-			int32_t xpos = m_right_column_x + (get_w() - m_right_column_margin - w - m_right_column_x) / 2;
-			int32_t ypos = m_minimap_y;
-
-			// Set small minimaps higher up for a more harmonious look
-			if (h < m_minimap_h * 2 / 3) {
-				ypos += (m_minimap_h - h) / 3;
-			} else {
-				ypos += (m_minimap_h - h) / 2;
-			}
-
-			m_minimap_icon.set_pos(Point(xpos, ypos));
-			m_minimap_icon.set_frame(UI_FONT_CLR_FG);
-			m_minimap_icon.set_visible(true);
-			m_minimap_icon.set_icon(resized);
-		} catch (const std::exception & e) {
-			log("Failed to load the minimap image : %s\n", e.what());
 		}
 	}
 }
@@ -469,9 +465,8 @@ void FullscreenMenuLoadGame::fill_table() {
 
 	if (m_table.size()) {
 		m_table.select(0);
-	} else {
-		no_selection();
 	}
+	set_has_selection();
 }
 
 bool FullscreenMenuLoadGame::handle_key(bool down, SDL_keysym code)

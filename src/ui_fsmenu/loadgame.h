@@ -82,12 +82,12 @@ protected:
 	void clicked_ok() override;
 	void entry_selected() override;
 	void fill_table() override;
+	bool set_has_selection() override;
 
 
 private:
 	bool compare_date_descending(uint32_t, uint32_t);
 	void clicked_delete();
-	void no_selection();
 
 	bool                          m_is_replay;
 
@@ -107,7 +107,6 @@ private:
 	UI::Icon                      m_minimap_icon;
 	std::unique_ptr<const Image>  m_minimap_image;
 
-	UI::Table<uintptr_t const>    m_table;
 	std::vector<SavegameData>     m_games_data;
 	std::string                   m_filename;
 

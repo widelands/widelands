@@ -86,6 +86,7 @@ protected:
 	void clicked_ok() override;
 	void entry_selected() override;
 	void fill_table() override;
+	bool set_has_selection() override;
 
 
 private:
@@ -119,7 +120,6 @@ private:
 
 	UI::SuggestedTeamsBox*        m_suggested_teams_box;
 
-	UI::Table<uintptr_t const>    m_table;
 	bool                          m_is_scenario;
 	std::string                   m_curdir, m_basedir;
 	Map::ScenarioTypes            m_scenario_types;

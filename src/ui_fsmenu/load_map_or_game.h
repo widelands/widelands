@@ -32,7 +32,9 @@
 #include "ui_basic/button.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
+#include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
+
 
 namespace Widelands {
 class EditorGameBase;
@@ -71,15 +73,25 @@ private:
 /// This class defines common coordinates for these UI screens.
 /// It also defines common buttons.
 struct FullscreenMenuLoadMapOrGame : public FullscreenMenuBase {
-	FullscreenMenuLoadMapOrGame();
+	FullscreenMenuLoadMapOrGame(bool sortdesc = false);
 
 	bool handle_key(bool down, SDL_keysym code) override;
 
 protected:
 	virtual void clicked_ok() {end_modal(1);}
 	void clicked_back() {end_modal(0);}
+
+	// Updates the information display on the right-hand side.
+	// Call this function when a different entry in the table gets selected.
 	virtual void entry_selected() {}
 	virtual void fill_table() {}
+
+	// Updates buttons and text labels and returns whether a table entry is selected.
+	virtual bool set_has_selection() {
+		bool has_selection = m_table.has_selection();
+		m_ok.set_enabled(has_selection);
+		return has_selection;
+	}
 
 	// Returns a y coordinate that can be used to position a Panel below the Panel directly above it
 	int32_t get_y_from_preceding(UI::Panel& preceding_panel);
@@ -100,6 +112,8 @@ protected:
 	// Main buttons
 	UI::Button    m_back;
 	UI::Button    m_ok;
+
+	UI::Table<uintptr_t const>    m_table;
 };
 
 

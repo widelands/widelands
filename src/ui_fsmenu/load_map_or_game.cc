@@ -35,7 +35,7 @@
 /// Select a Map, Saved Game or Replay in Fullscreen Mode.
 /// This class defines common coordinates for these UI screens.
 /// It also defines common buttons.
-FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame() :
+FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame(bool sort_descending) :
 		FullscreenMenuBase("choosemapmenu.jpg"),
 
 		// Values for alignment and size
@@ -63,7 +63,8 @@ FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame() :
 		  (this, "ok",
 			get_w() - m_right_column_margin - m_butw, m_buty, m_butw, m_buth,
 			g_gr->images().get("pics/but2.png"),
-			_("OK"), std::string(), false, false)
+			_("OK"), std::string(), false, false),
+		m_table(this, m_tablex, m_tabley, m_tablew, m_tableh, sort_descending)
 	{}
 
 bool FullscreenMenuLoadMapOrGame::handle_key(bool down, SDL_keysym code) {

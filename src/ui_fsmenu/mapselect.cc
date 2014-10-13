@@ -79,9 +79,6 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	// Scenario checkbox
 	m_cb_load_map_as_scenario(this, Point(0, 0)),
 
-	// Map table
-	m_table(this, m_tablex, m_tabley, m_tablew, m_tableh),
-
 	m_is_scenario(false),
 
 	// Runtime variables
@@ -110,7 +107,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 
 	/** TRANSLATORS: Column title for number of players in map list */
 	m_table.add_column(35, _("Pl."), _("Number of players"), UI::Align_HCenter);
-	m_table.add_column(m_table.get_w() - 35 - 115, _("Map Name"), _("The name of the map or scenario"), UI::Align_Left);
+	m_table.add_column(m_table.get_w() - 35 - 115, _("Map Name"), _("The name of the map or scenario"),
+							 UI::Align_Left);
 	m_table.add_column(115, _("Size"), _("The size of the map (Width x Height)"), UI::Align_Left);
 	m_table.set_column_compare
 		(0,
@@ -264,84 +262,101 @@ void FullscreenMenuMapSelect::clicked_ok()
 	}
 }
 
-
-/**
- * Called when a different entry in the listbox gets selected.
- * When this happens, the information display at the right needs to be
- * refreshed.
- */
-void FullscreenMenuMapSelect::entry_selected()
+bool FullscreenMenuMapSelect::set_has_selection()
 {
-	const MapData & map = m_maps_data[m_table.get_selected()];
+	bool has_selection = m_table.has_selection();
+	FullscreenMenuLoadMapOrGame::set_has_selection();
 
-	if (map.width) {
-		// Show map information
-		if(map.scenario) {
-			m_label_mapname.set_text(_("Scenario:"));
-		} else {
-			m_label_mapname.set_text(_("Map:"));
-		}
-		std::string map_displayname = map.localized_name;
-		if (m_cb_dont_localize_mapnames->get_state()) {
-			map_displayname = map.name;
-		}
-		m_ta_mapname.set_text(map_displayname);
-		if (map.localized_name != map.name) {
-			if (m_cb_dont_localize_mapnames->get_state()) {
-				m_ta_mapname.set_tooltip
-					/** TRANSLATORS: Tooltip in map description when map names are being displayed in English. */
-					/** TRANSLATORS: %s is the localized name of the map. */
-						((boost::format(_("The name of this map in your language: %s"))
-						  % map.localized_name).str());
-			} else {
-				m_ta_mapname.set_tooltip
-					/** TRANSLATORS: Tooltip in map description when translated map names are being displayed. */
-					/** TRANSLATORS: %s is the English name of the map. */
-						((boost::format(_("The original name of this map: %s"))
-						  % map.name).str());
-			}
-		} else {
-			m_ta_mapname.set_tooltip(_("The name of this map"));
-		}
-		m_label_author.set_text(ngettext("Author:", "Authors:", map.authors->get_number()));
-		m_ta_author.set_tooltip(ngettext("The designer of this map", "The designers of this map",
-													map.authors->get_number()));
-		m_ta_author.set_text(map.authors->get_names());
-		m_ta_description.set_text(map.description +
-										  (map.hint.empty() ? "" : (std::string("\n\n") + map.hint)));
-		m_label_author.set_visible(true);
-		m_label_description.set_visible(true);
-		m_ta_description.set_size
-				(m_ta_description.get_w(),
-				 m_buty - get_y_from_preceding(m_label_description) - 4 * m_padding);
-		m_ok.set_tooltip(m_is_editor ? _("Edit this map") : _("Play this map"));
-	} else {
-		// Show directory information
-		m_label_mapname.set_text(_("Directory:"));
-		m_ta_mapname.set_text(map.localized_name);
-		m_ta_mapname.set_tooltip(_("The name of this directory"));
+	if (!has_selection) {
+		m_label_mapname.set_text(std::string());
+		m_label_author.set_text(std::string());
+		m_label_description.set_text(std::string());
 
+		m_ta_mapname.set_text(std::string());
 		m_ta_author.set_text(std::string());
 		m_ta_description.set_text(std::string());
-		m_label_author.set_visible(false);
-		m_label_description.set_visible(false);
-		m_ok.set_tooltip(_("Open this directory"));
+
+		m_suggested_teams_box->hide();
 	}
-	m_ok.set_enabled(true);
-	m_is_scenario = map.scenario; // reset
-	m_ta_description.scroll_to_top();
+	return has_selection;
+}
 
-	// Show / hide suggested teams
-	m_suggested_teams_box->hide();
 
-	if (!map.suggested_teams.empty()) {
-		m_suggested_teams_box->show(map.suggested_teams);
+void FullscreenMenuMapSelect::entry_selected()
+{
+	if (set_has_selection()) {
+		const MapData & map = m_maps_data[m_table.get_selected()];
 
-		m_suggested_teams_box->set_pos(Point(m_suggested_teams_box->get_x(),
-														 m_buty - m_padding - m_suggested_teams_box->get_h() - m_padding));
+		if (map.width) {
+			// Show map information
+			if (map.scenario) {
+				m_label_mapname.set_text(_("Scenario:"));
+			} else {
+				m_label_mapname.set_text(_("Map:"));
+			}
+			std::string map_displayname = map.localized_name;
+			if (m_cb_dont_localize_mapnames->get_state()) {
+				map_displayname = map.name;
+			}
+			m_ta_mapname.set_text(map_displayname);
+			if (map.localized_name != map.name) {
+				if (m_cb_dont_localize_mapnames->get_state()) {
+					m_ta_mapname.set_tooltip
+					/** TRANSLATORS: Tooltip in map description when map names are being displayed in English. */
+					/** TRANSLATORS: %s is the localized name of the map. */
+							((boost::format(_("The name of this map in your language: %s"))
+							  % map.localized_name).str());
+				} else {
+					m_ta_mapname.set_tooltip
+					/** TRANSLATORS: Tooltip in map description when translated map names are being displayed. */
+					/** TRANSLATORS: %s is the English name of the map. */
+							((boost::format(_("The original name of this map: %s"))
+							  % map.name).str());
+				}
+			} else {
+				m_ta_mapname.set_tooltip(_("The name of this map"));
+			}
+			m_label_author.set_text(ngettext("Author:", "Authors:", map.authors->get_number()));
+			m_ta_author.set_tooltip(ngettext("The designer of this map", "The designers of this map",
+														map.authors->get_number()));
+			m_ta_author.set_text(map.authors->get_names());
+			m_ta_description.set_text(map.description +
+											  (map.hint.empty() ? "" : (std::string("\n\n") + map.hint)));
+			m_label_author.set_visible(true);
+			m_label_description.set_visible(true);
+			m_ta_description.set_size
+					(m_ta_description.get_w(),
+					 m_buty - get_y_from_preceding(m_label_description) - 4 * m_padding);
+			m_ok.set_tooltip(m_is_editor ? _("Edit this map") : _("Play this map"));
+		} else {
+			// Show directory information
+			m_label_mapname.set_text(_("Directory:"));
+			m_ta_mapname.set_text(map.localized_name);
+			m_ta_mapname.set_tooltip(_("The name of this directory"));
 
-		m_ta_description.set_size(m_ta_description.get_w(),
-										  m_suggested_teams_box->get_y() - m_ta_description.get_y() - 3 * m_padding);
+			m_ta_author.set_text(std::string());
+			m_ta_description.set_text(std::string());
+			m_label_author.set_visible(false);
+			m_label_description.set_visible(false);
+			m_ok.set_tooltip(_("Open this directory"));
+		}
+
+		m_is_scenario = map.scenario; // reset
+		m_ta_description.scroll_to_top();
+
+		// Show / hide suggested teams
+		m_suggested_teams_box->hide();
+
+		if (!map.suggested_teams.empty()) {
+			m_suggested_teams_box->show(map.suggested_teams);
+
+			m_suggested_teams_box->set_pos(
+						Point(m_suggested_teams_box->get_x(),
+								m_buty - m_padding - m_suggested_teams_box->get_h() - m_padding));
+
+			m_ta_description.set_size(m_ta_description.get_w(),
+											  m_suggested_teams_box->get_y() - m_ta_description.get_y() - 3 * m_padding);
+		}
 	}
 }
 
@@ -591,12 +606,12 @@ void FullscreenMenuMapSelect::fill_table()
 			}
 		}
 	}
-
 	m_table.sort();
 
 	if (m_table.size()) {
 		m_table.select(0);
 	}
+	set_has_selection();
 }
 
 /*

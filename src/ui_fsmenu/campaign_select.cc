@@ -53,7 +53,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 	// Campaign description
 	m_label_campname
 		(this, m_right_column_x, m_tabley,
-		 _("Campaign Name:"),
+		 "",
 		 UI::Align_Left),
 	m_ta_campname(this,
 					  m_right_column_x + m_indent, get_y_from_preceding(m_label_campname) + m_padding,
@@ -61,7 +61,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 
 	m_label_tribename
 		(this, m_right_column_x, get_y_from_preceding(m_ta_campname) + 2 * m_padding,
-		 _("Tribe:"),
+		 "",
 		 UI::Align_Left),
 	m_ta_tribename(this,
 						 m_right_column_x + m_indent, get_y_from_preceding(m_label_tribename) + m_padding,
@@ -69,7 +69,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 
 	m_label_difficulty
 		(this, m_right_column_x, get_y_from_preceding(m_ta_tribename) + 2 * m_padding,
-		 _("Difficulty:"),
+		 "",
 		 UI::Align_Left),
 	m_ta_difficulty(this,
 						 m_right_column_x + m_indent, get_y_from_preceding(m_label_difficulty) + m_padding,
@@ -84,10 +84,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 		 m_right_column_x + m_indent,
 		 get_y_from_preceding(m_label_description) + m_padding,
 		 get_right_column_w(m_right_column_x + m_indent),
-		 m_buty - get_y_from_preceding(m_label_description) - 4 * m_padding),
-
-	// Campaign list
-	m_table(this, m_tablex, m_tabley, m_tablew, m_tableh)
+		 m_buty - get_y_from_preceding(m_label_description) - 4 * m_padding)
 {
 	m_title.set_textstyle(ts_big());
 	m_back.set_tooltip(_("Return to the main menu"));
@@ -143,28 +140,44 @@ static char const * const difficulty_picture_filenames[] = {
 	"pics/hard.png"
 };
 
-/**
- * an entry of campaignlist got selected.
- */
+
+bool FullscreenMenuCampaignSelect::set_has_selection()
+{
+	bool has_selection = m_table.has_selection();
+	FullscreenMenuLoadMapOrGame::set_has_selection();
+
+	if (!has_selection) {
+		m_label_campname.set_text(std::string());
+		m_label_tribename.set_text(std::string());
+		m_label_difficulty.set_text(std::string());
+		m_label_description.set_text(std::string());
+
+		m_ta_campname.set_text(std::string());
+		m_ta_tribename.set_text(std::string());
+		m_ta_difficulty.set_text(std::string());
+		m_ta_description.set_text(std::string());
+
+	} else {
+		m_label_campname.set_text(_("Campaign Name:"));
+		m_label_tribename.set_text(_("Tribe:"));
+		m_label_tribename.set_text(_("Difficulty:"));
+		m_label_description.set_text(_("Description:"));
+	}
+	return has_selection;
+}
+
+
 void FullscreenMenuCampaignSelect::entry_selected()
 {
-	if (m_table.has_selection()) {
+	if (set_has_selection()) {
 		const CampaignListData& campaign_data = m_campaigns_data[m_table.get_selected()];
 		campaign = campaign_data.index;
 
-		// enable OK button
-		m_ok.set_enabled(true);
 		m_ta_campname.set_text(campaign_data.name);
 		m_ta_tribename.set_text(campaign_data.tribename);
 		m_ta_difficulty.set_text(campaign_data.difficulty_description);
 		m_ta_description.set_text(campaign_data.description);
 
-	} else { // normally never here
-		m_ok.set_enabled(false);
-		m_ta_campname.set_text("");
-		m_ta_tribename.set_text("");
-		m_ta_difficulty.set_text("");
-		m_ta_description .set_text("");
 	}
 	m_ta_description.scroll_to_top();
 }
@@ -238,11 +251,12 @@ void FullscreenMenuCampaignSelect::fill_table()
 		csection = (boost::format("campsect%u") % i).str();
 
 	} // while (s.get_string(csection.c_str()))
-
 	m_table.sort();
+
 	if (m_table.size()) {
 		m_table.select(0);
 	}
+	set_has_selection();
 }
 
 bool FullscreenMenuCampaignSelect::compare_difficulty
@@ -284,7 +298,7 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect() :
 	// Map description
 	m_label_mapname
 		(this, m_right_column_x, m_tabley,
-		 _("Scenario:"),
+		 "",
 		 UI::Align_Left),
 	m_ta_mapname(this,
 					 m_right_column_x + m_indent, get_y_from_preceding(m_label_mapname) + m_padding,
@@ -301,17 +315,14 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect() :
 
 	m_label_description
 		(this, m_right_column_x, get_y_from_preceding(m_ta_author) + 2 * m_padding,
-		 _("Description:"),
+		 "",
 		 UI::Align_Left),
 	m_ta_description
 		(this,
 		 m_right_column_x + m_indent,
 		 get_y_from_preceding(m_label_description) + m_padding,
 		 get_right_column_w(m_right_column_x + m_indent),
-		 m_buty - get_y_from_preceding(m_label_description) - 4 * m_padding),
-
-	// Campaign map list
-	m_table(this, m_tablex, m_tabley, m_tablew, m_tableh)
+		 m_buty - get_y_from_preceding(m_label_description) - 4 * m_padding)
 {
 	m_title.set_textstyle(ts_big());
 	m_back.set_tooltip(_("Return to the main menu"));
@@ -351,36 +362,54 @@ void FullscreenMenuCampaignMapSelect::set_campaign(uint32_t const i) {
 	fill_table();
 }
 
-/**
- * an entry of the maplist got selected.
- */
-void FullscreenMenuCampaignMapSelect::entry_selected() {
-	const CampaignScenarioData& scenario_data = m_scenarios_data[m_table.get_selected()];
-	campmapfile = scenario_data.path;
-	Widelands::Map map;
+bool FullscreenMenuCampaignMapSelect::set_has_selection()
+{
+	bool has_selection = m_table.has_selection();
+	FullscreenMenuLoadMapOrGame::set_has_selection();
 
-	std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(campmapfile));
-	if (!ml) {
-		throw wexception
-			(_("Invalid path to file in cconfig: %s"), campmapfile.c_str());
+	if (!has_selection) {
+		m_label_mapname.set_text(std::string());
+		m_label_author.set_text(std::string());
+		m_label_description.set_text(std::string());
+
+		m_ta_mapname.set_text(std::string());
+		m_ta_author.set_text(std::string());
+		m_ta_description.set_text(std::string());
+
+	} else {
+		m_label_mapname.set_text(_("Scenario:"));
+		m_label_description.set_text(_("Description:"));
 	}
+	return has_selection;
+}
 
-	map.set_filename(campmapfile);
-	ml->preload_map(true);
 
-	MapAuthorData* authors = new MapAuthorData(map.get_author());
-	m_ta_author.set_text(authors->get_names());
-	m_ta_author.set_tooltip(ngettext("The designer of this scenario", "The designers of this scenario",
-									authors->get_number()));
-	m_label_author.set_text(ngettext("Author:", "Authors:", authors->get_number()));
+void FullscreenMenuCampaignMapSelect::entry_selected() {
+	if (set_has_selection()) {
+		const CampaignScenarioData& scenario_data = m_scenarios_data[m_table.get_selected()];
+		campmapfile = scenario_data.path;
+		Widelands::Map map;
 
-	i18n::Textdomain td("maps");
-	m_ta_mapname.set_text(_(map.get_name()));
-	m_ta_description.set_text(_(map.get_description()));
-	m_ta_description.scroll_to_top();
+		std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(campmapfile));
+		if (!ml) {
+			throw wexception
+				(_("Invalid path to file in cconfig: %s"), campmapfile.c_str());
+		}
 
-	// enable OK button
-	m_ok.set_enabled(true);
+		map.set_filename(campmapfile);
+		ml->preload_map(true);
+
+		MapAuthorData* authors = new MapAuthorData(map.get_author());
+		m_ta_author.set_text(authors->get_names());
+		m_ta_author.set_tooltip(ngettext("The designer of this scenario", "The designers of this scenario",
+										authors->get_number()));
+		m_label_author.set_text(ngettext("Author:", "Authors:", authors->get_number()));
+
+		i18n::Textdomain td("maps");
+		m_ta_mapname.set_text(_(map.get_name()));
+		m_ta_description.set_text(_(map.get_description()));
+		m_ta_description.scroll_to_top();
+	}
 }
 
 
@@ -432,7 +461,9 @@ void FullscreenMenuCampaignMapSelect::fill_table()
 		mapsection = campsection + (boost::format("%02i") % i).str();
 	}
 	m_table.sort();
+
 	if (m_table.size()) {
 		m_table.select(0);
 	}
+	set_has_selection();
 }
