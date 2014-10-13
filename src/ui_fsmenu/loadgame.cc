@@ -196,16 +196,38 @@ void FullscreenMenuLoadGame::clicked_delete()
 	}
 	const SavegameData & gamedata = m_games_data[m_table.get_selected()];
 
-	std::string fname = gamedata.filename;
+	std::string message = (boost::format("%s %s\n")
+				  % m_label_mapname.get_text() % gamedata.mapname).str();
+
+	message = (boost::format("%s %s %s\n") % message
+				  % m_label_win_condition.get_text() % gamedata.wincondition).str();
+
+	message = (boost::format("%s %s %s\n") % message
+				  % _("Save Date:") % gamedata.savedatestring).str();
+
+	message = (boost::format("%s %s %s\n") % message
+				  % m_label_gametime.get_text() % gametimestring(gamedata.gametime)).str();
+
+	message = (boost::format("%s %s %s\n\n") % message
+				  % m_label_players.get_text() % gamedata.nrplayers).str();
+
+	message = (boost::format("%s %s %s\n") % message
+				  % _("Filename:") % gamedata.filename).str();
+
+	if (m_is_replay) {
+		message = (boost::format("%s\n\n%s")
+					  % _("Do you really want to delete this replay?") % message).str();
+	} else {
+		message = (boost::format("%s\n\n%s")
+					  % _("Do you really want to delete this game?") % message).str();
+	}
+
 	UI::WLMessageBox confirmationBox
-		(this,
-		 _("Delete file"),
-		 (boost::format(_("Do you really want to delete %s?")) % fname).str(),
-		 UI::WLMessageBox::YESNO);
+		(this, _("Confirm deleting file"), message, UI::WLMessageBox::YESNO);
 	if (confirmationBox.run()) {
-		g_fs->fs_unlink(fname);
+		g_fs->fs_unlink(gamedata.filename);
 		if (m_is_replay) {
-			g_fs->fs_unlink(fname + WLGF_SUFFIX);
+			g_fs->fs_unlink(gamedata.filename + WLGF_SUFFIX);
 		}
 		fill_table();
 	}
