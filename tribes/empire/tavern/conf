@@ -3,8 +3,8 @@ output=ration
 enhancement=inn
 
 [aihints]
-build_material=false
-is_food_basic=true
+forced_after=900
+prohibited_till=300
 
 [buildcost]
 wood=2

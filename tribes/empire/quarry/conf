@@ -3,7 +3,7 @@ output=stone
 output=marble
 
 [aihints]
-is_basic=true
+forced_after=0
 stoneproducer=true
 
 [buildcost]

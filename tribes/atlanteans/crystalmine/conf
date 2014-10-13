@@ -5,6 +5,7 @@ output=stone
 
 [aihints]
 mines=granite
+prohibited_till=600
 
 [buildcost]
 log=7

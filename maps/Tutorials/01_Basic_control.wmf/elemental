@@ -6,7 +6,6 @@ map_w="64"
 map_h="64"
 nr_players="1"
 name="Basic Control"
-author="Winterwind, SirVer, Nasenbaer, wl-zocker"
+author="Winterwind,SirVer,Nasenbaer,wl-zocker"
 descr="In this tutorial, you will learn how to navigate in Widelands and how to build buildings and roads."
-hint=
-tags=
+#needs no background

@@ -8,5 +8,4 @@ nr_players="1"
 name="01 – A Place to Call Home"
 author="Winterwind,wl-zocker"
 descr="In this scenario, the higher production buildings including mining will be introduced."
-hint=
-tags=
+background="campaigns/bar01.wmf/pics/background.jpg
