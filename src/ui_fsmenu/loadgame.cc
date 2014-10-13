@@ -394,10 +394,23 @@ void FullscreenMenuLoadGame::fill_table() {
 						/** TRANSLATORS: hour:minute */
 						gamedata->savedatestring = (boost::format(_("Today, %1%:%2%"))
 															 % savedate->tm_hour % minute).str();
+					} else if ((savedate->tm_year == current_year &&
+									savedate->tm_mon == current_month &&
+									savedate->tm_mday == current_day - 1) ||
+								  (savedate->tm_year == current_year - 1 &&
+									savedate->tm_mon == 11 && current_month == 0 &&
+									savedate->tm_mday == 31 && current_day == 1)) {  // Yesterday
+						// Adding the 0 padding in a separate statement so translators won't have to deal with it
+						const std::string minute = (boost::format("%02u") % savedate->tm_min).str();
+
+						/** TRANSLATORS: Display date for choosing a savegame/replay */
+						/** TRANSLATORS: hour:minute */
+						gamedata->savedatestring = (boost::format(_("Yesterday, %1%:%2%"))
+															 % savedate->tm_hour % minute).str();
 					} else {  // Older
 
 						/** TRANSLATORS: Display date for choosing a savegame/replay */
-						/** TRANSLATORS: month day, year hour:minute */
+						/** TRANSLATORS: month day, year */
 						gamedata->savedatestring = (boost::format(_("%2% %1%, %3%"))
 							 % savedate->tm_mday
 							 % localize_month(savedate->tm_mon)
