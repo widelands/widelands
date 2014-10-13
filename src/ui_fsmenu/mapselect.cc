@@ -76,9 +76,6 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 		 get_right_column_w(m_right_column_x + m_indent),
 		 m_buty - get_y_from_preceding(m_label_description) - 4 * m_padding),
 
-	// Scenario checkbox
-	m_cb_load_map_as_scenario(this, Point(0, 0)),
-
 	m_is_scenario(false),
 
 	// Runtime variables
@@ -87,7 +84,6 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	m_settings(settings),
 	m_ctrl(ctrl)
 {
-	m_cb_load_map_as_scenario.set_visible(false);
 	m_title.set_textstyle(ts_big());
 	if (m_is_editor) {
 		m_back.set_tooltip(_("Return to the editor menu"));
