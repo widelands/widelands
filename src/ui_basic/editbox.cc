@@ -225,16 +225,16 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 {
 	if (down) {
 		switch (code.sym) {
-		case SDL_SCANCODE_ESCAPE:
+		case SDLK_ESCAPE:
 			cancel();
 			return true;
 
-		case SDL_SCANCODE_TAB:
+		case SDLK_TAB:
 			//let the panel handle the tab key
 			return false;
 
 		case SDL_SCANCODE_KP_ENTER:
-		case SDL_SCANCODE_RETURN:
+		case SDLK_RETURN:
 			// Save history if active and text is not empty
 			if (m_history_active) {
 				if (!m->text.empty()) {
@@ -252,14 +252,14 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 				break;
 			}
 			/* no break */
-		case SDL_SCANCODE_DELETE:
+		case SDLK_DELETE:
 			if (m->caret < m->text.size()) {
 				while ((m->text[++m->caret] & 0xc0) == 0x80) {};
 				// now handle it like Backspace
 			} else
 				return true;
 			/* no break */
-		case SDL_SCANCODE_BACKSPACE:
+		case SDLK_BACKSPACE:
 			if (m->caret > 0) {
 				while ((m->text[--m->caret] & 0xc0) == 0x80)
 					m->text.erase(m->text.begin() + m->caret);
@@ -318,7 +318,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 				break;
 			}
 			/* no break */
-		case SDL_SCANCODE_HOME:
+		case SDLK_HOME:
 			if (m->caret != 0) {
 				m->caret = 0;
 
@@ -332,7 +332,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 				break;
 			}
 			/* no break */
-		case SDL_SCANCODE_END:
+		case SDLK_END:
 			if (m->caret != m->text.size()) {
 				m->caret = m->text.size();
 				check_caret();

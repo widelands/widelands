@@ -689,7 +689,7 @@ bool Panel::handle_key(bool down, SDL_Keysym code)
 				Panel * p = _focus->_next;
 				switch (code.sym) {
 
-				case SDL_SCANCODE_TAB:
+				case SDLK_TAB:
 					while (p != _focus) {
 						if (p->get_can_focus()) {
 							p->focus();

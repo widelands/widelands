@@ -926,7 +926,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code)
 		if (code.mod & KMOD_NUM)
 			break;
 		/* no break */
-	case SDL_SCANCODE_PAGEUP:
+	case SDLK_PAGEUP:
 		if (!get_display_flag(dfSpeed))
 			break;
 
@@ -936,7 +936,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code)
 					ctrl->set_desired_speed(ctrl->desired_speed() + 1000);
 		return true;
 
-	case SDL_SCANCODE_PAUSE:
+	case SDLK_PAUSE:
 		if (down)
 			if (upcast(Game, game, &m_egbase))
 				if (GameController * const ctrl = game->game_controller())
@@ -947,7 +947,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code)
 		if (code.mod & KMOD_NUM)
 			break;
 		/* no break */
-	case SDL_SCANCODE_PAGEDOWN:
+	case SDLK_PAGEDOWN:
 		if (!get_display_flag(dfSpeed))
 			break;
 

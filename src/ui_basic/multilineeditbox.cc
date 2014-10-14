@@ -258,14 +258,14 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code)
 			if (code.mod & KMOD_NUM)
 				break;
 			/* no break */
-		case SDL_SCANCODE_DELETE:
+		case SDLK_DELETE:
 			if (d->cursor_pos < d->text.size()) {
 				d->erase_bytes(d->cursor_pos, d->next_char(d->cursor_pos));
 				changed();
 			}
 			break;
 
-		case SDL_SCANCODE_BACKSPACE:
+		case SDLK_BACKSPACE:
 			if (d->cursor_pos > 0) {
 				d->erase_bytes(d->prev_char(d->cursor_pos), d->cursor_pos);
 				changed();
@@ -374,7 +374,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code)
 				break;
 			}
 			/* no break */
-		case SDL_SCANCODE_HOME:
+		case SDLK_HOME:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				d->set_cursor_pos(0);
 			} else {
@@ -392,7 +392,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code)
 				break;
 			}
 			/* no break */
-		case SDL_SCANCODE_END:
+		case SDLK_END:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				d->set_cursor_pos(d->text.size());
 			} else {
@@ -409,7 +409,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code)
 			break;
 
 		case SDL_SCANCODE_KP_ENTER:
-		case SDL_SCANCODE_RETURN:
+		case SDLK_RETURN:
 			d->insert(d->cursor_pos, "\n");
 			changed();
 			break;

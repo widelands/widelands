@@ -411,12 +411,12 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code)
 			if (code.mod & KMOD_NUM)
 				break;
 			/* no break */
-		case SDL_SCANCODE_HOME:
+		case SDLK_HOME:
 			move_view_to(game().map().get_starting_pos(m_player_number));
 			return true;
 
 		case SDL_SCANCODE_KP_ENTER:
-		case SDL_SCANCODE_RETURN:
+		case SDLK_RETURN:
 			if (!m_chatProvider | !m_chatenabled || !is_multiplayer())
 				break;
 

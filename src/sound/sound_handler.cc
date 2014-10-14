@@ -703,7 +703,7 @@ void SoundHandler::music_finished_callback()
 		//special case for splashscreen: there, only one song is ever played
 		event.type           = SDL_KEYDOWN;
 		event.key.state      = SDL_PRESSED;
-		event.key.keysym.sym = SDL_SCANCODE_ESCAPE;
+		event.key.keysym.sym = SDLK_ESCAPE;
 	} else {
 		//else just play the next song - see general description for
 		//further explanation

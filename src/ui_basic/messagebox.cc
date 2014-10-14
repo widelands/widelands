@@ -141,11 +141,11 @@ bool WLMessageBox::handle_key(bool down, SDL_Keysym code)
 
 	switch (code.sym) {
 		case SDL_SCANCODE_KP_ENTER:
-		case SDL_SCANCODE_RETURN:
+		case SDLK_RETURN:
 			pressed_yes();
 			pressed_ok();
 			return true;
-		case SDL_SCANCODE_ESCAPE:
+		case SDLK_ESCAPE:
 			pressed_no();
 			pressed_ok();
 			return true;

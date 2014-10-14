@@ -267,7 +267,7 @@ bool InteractiveSpectator::handle_key(bool const down, SDL_Keysym const code)
 			g_gr->toggle_fullscreen();
 			return true;
 
-		case SDL_SCANCODE_RETURN:
+		case SDLK_RETURN:
 		case SDL_SCANCODE_KP_ENTER:
 			if (!m_chatProvider | !m_chatenabled)
 				break;

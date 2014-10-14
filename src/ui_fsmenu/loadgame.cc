@@ -396,17 +396,17 @@ bool FullscreenMenuLoadGame::handle_key(bool down, SDL_Keysym code)
 		m_list.handle_key(down, code);
 		return true;
 	case SDL_SCANCODE_KP_ENTER:
-	case SDL_SCANCODE_RETURN:
+	case SDLK_RETURN:
 		clicked_ok();
 		return true;
 	case SDL_SCANCODE_KP_PERIOD:
 		if (code.mod & KMOD_NUM)
 			break;
 		/* no break */
-	case SDL_SCANCODE_DELETE:
+	case SDLK_DELETE:
 		clicked_delete();
 		return true;
-	case SDL_SCANCODE_ESCAPE:
+	case SDLK_ESCAPE:
 		end_modal(0);
 		return true;
 	default:
