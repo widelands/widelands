@@ -49,7 +49,7 @@ tell_about_port = {
 
 tell_about_port_building = {
    pos = "topright",
-   field = wl.Game().map:get_field(37,27), -- field of the port
+   field = second_port_field, --wl.Game().map:get_field(37,27), -- field of the port NOCOM
    title = _"Building ports",
    body = rt(
       h1(_"How to build a port?") ..
@@ -133,8 +133,9 @@ expedition2 = {
    title = _"A trip by the sea what fun it can be",
    body = rt(
       h1(_"Expeditions") ..
-      p(_[[In an expedition, you send a ship out to discover new islands and maybe found a colony there.]]) ..
-      p(_[[Expeditions can be started in every port. Then, all needed wares are transported to that port. The wares are exactly those your tribe needs to build a port (you build a port far away from home, so that is not surprising), and of course you need a builder, too. When everything is prepared, a ship will come and pick it up. You can check out the missing wares in the fifth tab of your port (it will appear when you've started an expedition).]]) ..
+      p(_[[In an expedition, you send a ship out to discover new islands and maybe found a colony there.]])
+   ) ..
+   rt("image=pics/start_expedition.png",p(_[[Expeditions can be started in every port. Then, all needed wares are transported to that port. The wares are exactly those your tribe needs to build a port (you build a port far away from home, so that is not surprising), and of course you need a builder, too. When everything is prepared, a ship will come and pick it up. You can check out the missing wares in the fifth tab of your port (it will appear when you've started an expedition).]]) ..
       p(_[[Now try this out. I will tell you later what are the next steps.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[Start an expedition in any of your ports.]])
@@ -173,7 +174,7 @@ expedition3 = {
 
 conclusion = {
    pos = "topright",
-   field = wl.Game().map:get_field(102, 36), -- port on island
+   field = port_on_island, --wl.Game().map:get_field(102, 36), -- port on island NOCOM
    title = _"Conclusion",
    body = rt(
       h1(_"Congratulations") ..

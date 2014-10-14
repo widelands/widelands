@@ -11,8 +11,8 @@ plr:allow_buildings{
 }
 
 -- Place hq and fill it with wares
-hq_pos = wl.Game().map:get_field(12,10)
-hq = plr:place_building("headquarters_interim", hq_pos, false, true)
+--hq_pos = wl.Game().map:get_field(12,10)
+hq = plr:place_building("headquarters_interim", sf, false, true)
 hq:set_wares{
    ax=6,
    bread_paddle=2,
@@ -57,8 +57,8 @@ hq:set_soldiers({0,0,0,0}, 45)
 -- ============
 -- Build roads 
 -- ============
-connected_road(plr,hq_pos.brn.immovable, "r,r|br,r")
-connected_road(plr, hq_pos.brn.immovable, "l,l|l,bl,bl|br,r|br,r|r,tr|tr,tr,tr")
+connected_road(plr,sf.brn.immovable, "r,r|br,r")
+connected_road(plr, sf.brn.immovable, "l,l|l,bl,bl|br,r|br,r|r,tr|tr,tr,tr")
 
 -- Place some initial buildings
 prefilled_buildings(plr,

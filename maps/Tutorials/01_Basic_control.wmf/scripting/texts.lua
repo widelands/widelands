@@ -115,6 +115,17 @@ lumberjack_message_06 = {
    )
 }
 
+flag_built = {
+   title = _"Waiting for the Hut to be Finished",
+   pos = "topright",
+   body = rt(
+      p(_[[I wanted to teach you how to build new flags, but it seems you have already found out on your own. Well done!]]) ..
+      p(_[[Now you have split the road in two parts with a carrier each. This means less work for him and a higher efficiency for us. You should therefore always place as many flags as possible on your roads.]]) ..
+      p(_[[Now we only have to wait till the hut is finished.]]) ..
+      p(_[[If you want things to go faster, simply use the PAGE UP key on your keyboard to increase the game speed. You can use PAGE DOWN to make the game slower again.]])
+   )
+}
+
 construction_site_window = {
    title = _"The Construction Site",
    body = rt(
@@ -133,7 +144,7 @@ lumberjack_message_07 = {
    )
 }
 
-inform_about_stones = {
+inform_about_rocks = {
    title = _ "Some Rocks Were Found",
    body = rt(h1(_"Getting a Quarry Up.")) ..
    rt(
@@ -163,7 +174,7 @@ tell_about_right_drag_move = {
    ),
    obj_name = "move_view_with_mouse",
    obj_title = _ "Move your view with the mouse",
-   obj_body = inform_about_stones.obj_body,
+   obj_body = inform_about_rocks.obj_body,
 }
 
 tell_about_minimap = {

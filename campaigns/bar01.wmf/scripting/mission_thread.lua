@@ -2,7 +2,6 @@
 --                            Main mission thread
 -- =======================================================================
 
-include "map:scripting/mission_thread_texts.lua"
 include "scripting/ui.lua"
 include "scripting/table.lua"
 
@@ -11,20 +10,10 @@ enhance_buildings_done = false
 build_materials_done = false
 cattle_farm_done = false
 
-function send_msg(t)
-   t.h = 400
-   -- TODO: this jumps. scrolling would be better
-   plr:message_box(t.title, t.body, t)
-end
 
-function add_obj(t)
-   return plr:add_objective(t.name, t.title, t.body)
-end
-
-
--- ==============================================
--- First messages player at beginning of mission
--- ==============================================
+-- =====================================================
+-- First messages to the player at beginning of mission
+-- =====================================================
 function introduction_thread()
    sleep(2000)
 
@@ -333,6 +322,6 @@ run(mines_and_food_thread)
 run(build_materials_thread)
 run(story_messages_thread)
 
-include "map:scripting/secret_village.lua"
+include "map:scripting/secret_village.lua" -- starts the thread
 
 run(mission_complete_thread)

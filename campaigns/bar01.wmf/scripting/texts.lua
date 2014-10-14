@@ -210,7 +210,7 @@ _([[The stories they tell about the deeds of our kin are sad to hear. ]] ..
 [[Yet whenever I close my eyes, I see the fortress my father built consumed by flames. ]] ..
 [[The Throne Among the Trees, the symbol of unity and peace among our kin, became the wedge that drives us apart.]])
    ),
-   field = home -- scroll back when showing the next few message boxes
+   field = sf -- scroll back when showing the next few message boxes
 }
 
 

@@ -14,17 +14,13 @@ include "scripting/infrastructure.lua"
 plr = wl.Game().players[1]
 map = wl.Game().map
 
-home = map:get_field(12,10)
+sf = map:get_field(12,10)
 al_thunran = map:get_field(5,46)
 grave = map:get_field(24,28)
 
--- ===============
--- Initialization
--- ===============
+include "map:scripting/texts.lua"
+include "map:scripting/helper_functions.lua"
+
 include "map:scripting/starting_conditions.lua"
 
-
--- ==============
--- Mission Logic
--- ==============
 include "map:scripting/mission_thread.lua"
