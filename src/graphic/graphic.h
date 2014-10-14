@@ -93,13 +93,10 @@ public:
 
 	RenderTarget * get_render_target();
 	void toggle_fullscreen();
-	void update_fullscreen();
-	void update_rectangle(int32_t x, int32_t y, int32_t w, int32_t h);
-	void update_rectangle(const Rect& rect) {
-		update_rectangle (rect.x, rect.y, rect.w, rect.h);
-	}
+	void update();
 	bool need_update() const;
-	void refresh(bool force = true);
+	void refresh();
+	SDL_Window* get_sdlwindow() {return m_sdlwindow;}
 
 	SurfaceCache& surfaces() const {return *surface_cache_.get();}
 	ImageCache& images() const {return *image_cache_.get();}
@@ -134,15 +131,14 @@ protected:
 	/// opengl rendering as the SurfaceOpenGL does not use it. It allows
 	/// manipulation the screen context.
 	SDL_Surface * m_sdl_screen;
+	SDL_Renderer * m_sdl_renderer;
+	SDL_Window * m_sdlwindow;
+	SDL_Texture * m_sdl_texture;
+	SDL_GLContext m_glcontext;
 	/// A RenderTarget for screen_. This is initialized during init()
 	std::unique_ptr<RenderTarget> m_rendertarget;
-	/// keeps track which screen regions needs to be redrawn during the next
-	/// update(). Only used for SDL rendering.
-	SDL_Rect m_update_rects[MAX_RECTS];
-	/// saves how many screen regions need updating. @see m_update_rects
-	int32_t m_nr_update_rects;
-	/// This marks the komplete screen for updating.
-	bool m_update_fullscreen;
+	/// This marks the complete screen for updating.
+	bool m_update;
 	/// stores which features the current renderer has
 	GraphicCaps m_caps;
 

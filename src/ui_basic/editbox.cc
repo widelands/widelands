@@ -21,7 +21,7 @@
 
 #include <limits>
 
-#include <SDL_keysym.h>
+#include <SDL_keycode.h>
 
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
@@ -87,6 +87,7 @@ EditBox::EditBox
 
 	set_handle_mouse(true);
 	set_can_focus(true);
+	set_handle_textinput(true);
 
 	// Initialize history as empty string
 	for (uint8_t i = 0; i < CHAT_HISTORY_SIZE; ++i)
@@ -220,20 +221,20 @@ bool EditBox::handle_mouserelease(const uint8_t btn, int32_t, int32_t)
 // TODO(unknown): Text input works only because code.unicode happens to map to ASCII for
 // ASCII characters (--> //HERE). Instead, all user editable strings should be
 // real unicode.
-bool EditBox::handle_key(bool const down, SDL_keysym const code)
+bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 {
 	if (down) {
 		switch (code.sym) {
-		case SDLK_ESCAPE:
+		case SDL_SCANCODE_ESCAPE:
 			cancel();
 			return true;
 
-		case SDLK_TAB:
+		case SDL_SCANCODE_TAB:
 			//let the panel handle the tab key
 			return false;
 
-		case SDLK_KP_ENTER:
-		case SDLK_RETURN:
+		case SDL_SCANCODE_KP_ENTER:
+		case SDL_SCANCODE_RETURN:
 			// Save history if active and text is not empty
 			if (m_history_active) {
 				if (!m->text.empty()) {
@@ -246,20 +247,19 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			ok();
 			return true;
 
-		case SDLK_KP_PERIOD:
+		case SDL_SCANCODE_KP_PERIOD:
 			if (code.mod & KMOD_NUM) {
-				insert(code);
 				break;
 			}
 			/* no break */
-		case SDLK_DELETE:
+		case SDL_SCANCODE_DELETE:
 			if (m->caret < m->text.size()) {
 				while ((m->text[++m->caret] & 0xc0) == 0x80) {};
 				// now handle it like Backspace
 			} else
 				return true;
 			/* no break */
-		case SDLK_BACKSPACE:
+		case SDL_SCANCODE_BACKSPACE:
 			if (m->caret > 0) {
 				while ((m->text[--m->caret] & 0xc0) == 0x80)
 					m->text.erase(m->text.begin() + m->caret);
@@ -270,13 +270,12 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			}
 			return true;
 
-		case SDLK_KP4:
+		case SDL_SCANCODE_KP_4:
 			if (code.mod & KMOD_NUM) {
-				insert(code);
 				break;
 			}
 			/* no break */
-		case SDLK_LEFT:
+		case SDL_SCANCODE_LEFT:
 			if (m->caret > 0) {
 				while ((m->text[--m->caret] & 0xc0) == 0x80) {};
 				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
@@ -290,13 +289,12 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			}
 			return true;
 
-		case SDLK_KP6:
+		case SDL_SCANCODE_KP_6:
 			if (code.mod & KMOD_NUM) {
-				insert(code);
 				break;
 			}
 			/* no break */
-		case SDLK_RIGHT:
+		case SDL_SCANCODE_RIGHT:
 			if (m->caret < m->text.size()) {
 				while ((m->text[++m->caret] & 0xc0) == 0x80) {};
 				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
@@ -315,13 +313,12 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			}
 			return true;
 
-		case SDLK_KP7:
+		case SDL_SCANCODE_KP_7:
 			if (code.mod & KMOD_NUM) {
-				insert(code);
 				break;
 			}
 			/* no break */
-		case SDLK_HOME:
+		case SDL_SCANCODE_HOME:
 			if (m->caret != 0) {
 				m->caret = 0;
 
@@ -330,13 +327,12 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			}
 			return true;
 
-		case SDLK_KP1:
+		case SDL_SCANCODE_KP_1:
 			if (code.mod & KMOD_NUM) {
-				insert(code);
 				break;
 			}
 			/* no break */
-		case SDLK_END:
+		case SDL_SCANCODE_END:
 			if (m->caret != m->text.size()) {
 				m->caret = m->text.size();
 				check_caret();
@@ -344,13 +340,12 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			}
 			return true;
 
-		case SDLK_KP8:
+		case SDL_SCANCODE_KP_8:
 			if (code.mod & KMOD_NUM) {
-				insert(code);
 				break;
 			}
 			/* no break */
-		case SDLK_UP:
+		case SDL_SCANCODE_UP:
 			// Load entry from history if active and text is not empty
 			if (m_history_active) {
 				if (m_history_position > CHAT_HISTORY_SIZE - 2)
@@ -364,13 +359,12 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			}
 			return true;
 
-		case SDLK_KP2:
+		case SDL_SCANCODE_KP_2:
 			if (code.mod & KMOD_NUM) {
-				insert(code);
 				break;
 			}
 			/* no break */
-		case SDLK_DOWN:
+		case SDL_SCANCODE_DOWN:
 			// Load entry from history if active and text is not equivalent to the current one
 			if (m_history_active) {
 				if (m_history_position < 1)
@@ -389,11 +383,13 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			// Nullbytes happen on MacOS X when entering Multiline Chars, like for
 			// example ~ + o results in a o with a tilde over it. The ~ is reported
 			// as a 0 on keystroke, the o then as the unicode character. We simply
-			// ignore the 0.
-			if (is_printable(code) && code.unicode) {
+			// ignore the 0. NOCOM somebody needs to test this on a Mac
+			/*
+				if (is_printable(code) && code.unicode) {
 				insert(code);
 				return true;
 			}
+			*/
 			break;
 		}
 	}
@@ -401,31 +397,16 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 	return false;
 }
 
-/**
- * Insert the utf8 character according to the specified key code
- */
-void EditBox::insert(SDL_keysym const code)
-{
-	if (m->text.size() < m->maxLength) {
-		if (code.unicode < 0x80) // 1 byte char
-			m->text.insert(m->text.begin() + m->caret++, 1, code.unicode);
-		else if (code.unicode < 0x800) { // 2 byte char
-			m->text.insert
-				(m->text.begin() + m->caret++, (((code.unicode & 0x7c0) >> 6) | 0xc0));
-			m->text.insert
-				(m->text.begin() + m->caret++, ((code.unicode & 0x3f) | 0x80));
-		} else { // 3 byte char
-			m->text.insert
-				(m->text.begin() + m->caret++, (((code.unicode & 0xf000) >> 12) | 0xe0));
-			m->text.insert
-				(m->text.begin() + m->caret++, (((code.unicode & 0xfc0) >> 6) | 0x80));
-			m->text.insert
-				(m->text.begin() + m->caret++, ((code.unicode & 0x3f) | 0x80));
-		}
+bool EditBox::handle_textinput(const char * ntext) {
+	const std::string help(ntext);
+	if ((m->text.size() +  help.length() ) < m->maxLength) {
+		m->text.insert( m->caret, help);
+		m->caret += help.length();
 		check_caret();
 		changed();
 		update();
 	}
+	return true;
 }
 
 void EditBox::draw(RenderTarget & odst)

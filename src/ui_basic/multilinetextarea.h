@@ -64,7 +64,7 @@ struct MultilineTextarea : public Panel {
 	// Drawing and event handlers
 	void draw(RenderTarget &) override;
 
-	bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y);
 
 	const char *  get_font_name() {return m_fontname.c_str();}
 	int32_t       get_font_size() {return m_fontsize;}

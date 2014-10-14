@@ -89,6 +89,7 @@ MultilineEditbox::MultilineEditbox
 	set_handle_mouse(true);
 	set_can_focus(true);
 	set_think(false);
+	set_handle_textinput(true);
 
 	set_text(text);
 }
@@ -245,51 +246,38 @@ uint32_t MultilineEditbox::Data::snap_to_char(uint32_t cursor)
 	return cursor;
 }
 
-/**
- * Insert the utf8 character according to the specified key code
- */
-void MultilineEditbox::insert(SDL_keysym const code)
-{
-	std::string utf8 = Utf8::unicode_to_utf8(code.unicode);
-
-	if (d->text.size() + utf8.size() <= d->maxbytes) {
-		d->insert(d->cursor_pos, utf8);
-		changed();
-	}
-}
 
 /**
  * This is called by the UI code whenever a key press or release arrives
  */
-bool MultilineEditbox::handle_key(bool const down, SDL_keysym const code)
+bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code)
 {
 	if (down) {
 		switch (code.sym) {
-		case SDLK_KP_PERIOD:
+		case SDL_SCANCODE_KP_PERIOD:
 			if (code.mod & KMOD_NUM)
 				break;
 			/* no break */
-		case SDLK_DELETE:
+		case SDL_SCANCODE_DELETE:
 			if (d->cursor_pos < d->text.size()) {
 				d->erase_bytes(d->cursor_pos, d->next_char(d->cursor_pos));
 				changed();
 			}
 			break;
 
-		case SDLK_BACKSPACE:
+		case SDL_SCANCODE_BACKSPACE:
 			if (d->cursor_pos > 0) {
 				d->erase_bytes(d->prev_char(d->cursor_pos), d->cursor_pos);
 				changed();
 			}
 			break;
 
-		case SDLK_KP4:
+		case SDL_SCANCODE_KP_4:
 			if (code.mod & KMOD_NUM) {
-				insert(code);
 				break;
 			}
 			/* no break */
-		case SDLK_LEFT: {
+		case SDL_SCANCODE_LEFT: {
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				uint32_t newpos = d->prev_char(d->cursor_pos);
 				while (newpos > 0 && isspace(d->text[newpos]))
@@ -307,13 +295,12 @@ bool MultilineEditbox::handle_key(bool const down, SDL_keysym const code)
 			break;
 		}
 
-		case SDLK_KP6:
+		case SDL_SCANCODE_KP_6:
 			if (code.mod & KMOD_NUM) {
-				insert(code);
 				break;
 			}
 			/* no break */
-		case SDLK_RIGHT:
+		case SDL_SCANCODE_RIGHT:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				uint32_t newpos = d->next_char(d->cursor_pos);
 				while (newpos < d->text.size() && isspace(d->text[newpos]))
@@ -326,13 +313,12 @@ bool MultilineEditbox::handle_key(bool const down, SDL_keysym const code)
 			}
 			break;
 
-		case SDLK_KP2:
+		case SDL_SCANCODE_KP_2:
 			if (code.mod & KMOD_NUM) {
-				insert(code);
 				break;
 			}
 			/* no break */
-		case SDLK_DOWN:
+		case SDL_SCANCODE_DOWN:
 			if (d->cursor_pos < d->text.size()) {
 				d->refresh_ww();
 
@@ -356,13 +342,12 @@ bool MultilineEditbox::handle_key(bool const down, SDL_keysym const code)
 			}
 			break;
 
-		case SDLK_KP8:
+		case SDL_SCANCODE_KP_8:
 			if (code.mod & KMOD_NUM) {
-				insert(code);
 				break;
 			}
 			/* no break */
-		case SDLK_UP:
+		case SDL_SCANCODE_UP:
 			if (d->cursor_pos > 0) {
 				d->refresh_ww();
 
@@ -384,13 +369,12 @@ bool MultilineEditbox::handle_key(bool const down, SDL_keysym const code)
 			}
 			break;
 
-		case SDLK_KP7:
+		case SDL_SCANCODE_KP_7:
 			if (code.mod & KMOD_NUM) {
-				insert(code);
 				break;
 			}
 			/* no break */
-		case SDLK_HOME:
+		case SDL_SCANCODE_HOME:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				d->set_cursor_pos(0);
 			} else {
@@ -403,13 +387,12 @@ bool MultilineEditbox::handle_key(bool const down, SDL_keysym const code)
 			}
 			break;
 
-		case SDLK_KP1:
+		case SDL_SCANCODE_KP_1:
 			if (code.mod & KMOD_NUM) {
-				insert(code);
 				break;
 			}
 			/* no break */
-		case SDLK_END:
+		case SDL_SCANCODE_END:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				d->set_cursor_pos(d->text.size());
 			} else {
@@ -425,8 +408,8 @@ bool MultilineEditbox::handle_key(bool const down, SDL_keysym const code)
 			}
 			break;
 
-		case SDLK_KP_ENTER:
-		case SDLK_RETURN:
+		case SDL_SCANCODE_KP_ENTER:
+		case SDL_SCANCODE_RETURN:
 			d->insert(d->cursor_pos, "\n");
 			changed();
 			break;
@@ -435,10 +418,12 @@ bool MultilineEditbox::handle_key(bool const down, SDL_keysym const code)
 			// Nullbytes happen on MacOS X when entering Multiline Chars, like for
 			// example ~ + o results in a o with a tilde over it. The ~ is reported
 			// as a 0 on keystroke, the o then as the unicode character. We simply
-			// ignore the 0.
+			// ignore the 0. NOCOM test on a Mac
+				/*
 			if (is_printable(code) && code.unicode) {
 				insert(code);
 			}
+			*/
 			break;
 		}
 		return true;
@@ -447,12 +432,21 @@ bool MultilineEditbox::handle_key(bool const down, SDL_keysym const code)
 	return Panel::handle_key(down, code);
 }
 
+
+bool MultilineEditbox::handle_textinput(const char * ntext) {
+	const std::string help(ntext);
+	if (d->text.size() + help.size() <= d->maxbytes) {
+		d->insert(d->cursor_pos, help);
+		changed();
+	}
+	return true;
+}
+
 /**
  * Grab the focus and redraw.
  */
-void MultilineEditbox::focus() {
-	Panel::focus();
-
+void MultilineEditbox::focus(bool topcaller) {
+	Panel::focus(topcaller);
 	update();
 }
 

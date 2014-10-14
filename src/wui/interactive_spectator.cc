@@ -243,7 +243,7 @@ void InteractiveSpectator::node_action() {
 /**
  * Global in-game keypresses:
  */
-bool InteractiveSpectator::handle_key(bool const down, SDL_keysym const code)
+bool InteractiveSpectator::handle_key(bool const down, SDL_Keysym const code)
 {
 	if (down)
 		switch (code.sym) {
@@ -267,8 +267,8 @@ bool InteractiveSpectator::handle_key(bool const down, SDL_keysym const code)
 			g_gr->toggle_fullscreen();
 			return true;
 
-		case SDLK_RETURN:
-		case SDLK_KP_ENTER:
+		case SDL_SCANCODE_RETURN:
+		case SDL_SCANCODE_KP_ENTER:
 			if (!m_chatProvider | !m_chatenabled)
 				break;
 

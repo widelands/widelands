@@ -164,8 +164,7 @@ void SoundHandler::shutdown()
 	if (SDL_InitSubSystem(SDL_INIT_AUDIO) == -1) {
 		log ("audio error %s\n", SDL_GetError());
 	}
-	char * text = new char[21];
-	SDL_AudioDriverName(text, 20);
+	const char * text = SDL_GetCurrentAudioDriver();
 	log("SDL_AUDIODRIVER %s\n", text);
 	delete[] text;
 	text = nullptr;
@@ -704,7 +703,7 @@ void SoundHandler::music_finished_callback()
 		//special case for splashscreen: there, only one song is ever played
 		event.type           = SDL_KEYDOWN;
 		event.key.state      = SDL_PRESSED;
-		event.key.keysym.sym = SDLK_ESCAPE;
+		event.key.keysym.sym = SDL_SCANCODE_ESCAPE;
 	} else {
 		//else just play the next song - see general description for
 		//further explanation

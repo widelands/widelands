@@ -41,7 +41,7 @@ struct FullscreenMenuLoadReplay : public FullscreenMenuBase {
 	void double_clicked(uint32_t);
 	void fill_list();
 
-	bool handle_key(bool down, SDL_keysym code) override;
+	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
 	void no_selection();

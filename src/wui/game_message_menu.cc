@@ -243,7 +243,7 @@ void GameMessageMenu::double_clicked(uint32_t const /* t */) {
 /**
  * Handle message menu hotkeys.
  */
-bool GameMessageMenu::handle_key(bool down, SDL_keysym code)
+bool GameMessageMenu::handle_key(bool down, SDL_Keysym code)
 {
 	if (down) {
 		switch (code.sym) {
@@ -252,11 +252,11 @@ bool GameMessageMenu::handle_key(bool down, SDL_keysym code)
 				center_view();
 			return true;
 
-		case SDLK_KP_PERIOD:
+		case SDL_SCANCODE_KP_PERIOD:
 			if (code.mod & KMOD_NUM)
 				break;
 			/* no break */
-		case SDLK_DELETE:
+		case SDL_SCANCODE_DELETE:
 			archive_or_restore();
 			return true;
 

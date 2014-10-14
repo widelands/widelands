@@ -432,10 +432,6 @@ bool WLApplication::poll_event(SDL_Event& ev) {
 			g_sound_handler.change_music();
 		break;
 
-	case SDL_VIDEOEXPOSE:
-		// log ("SDL Video Window expose event: %i\n", ev.expose.type);
-		g_gr->update_fullscreen();
-		break;
 	default:
 		break;
 	}
@@ -453,15 +449,15 @@ void WLApplication::handle_input(InputCallback const * cb)
 		case SDL_KEYDOWN:
 		case SDL_KEYUP:
 			if
-				(ev.key.keysym.sym == SDLK_F10 &&
-				 (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)))
+				(ev.key.keysym.sym == SDL_SCANCODE_F10 &&
+				 (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)))
 			{
 				//  get out of here quick
 				if (ev.type == SDL_KEYDOWN)
 					m_should_die = true;
 				break;
 			}
-			if (ev.key.keysym.sym == SDLK_F11) { //  take screenshot
+			if (ev.key.keysym.sym == SDL_SCANCODE_F11) { //  take screenshot
 				if (ev.type == SDL_KEYDOWN)
 				{
 					if (g_fs->disk_space() < MINIMUM_DISK_SPACE) {
@@ -487,11 +483,20 @@ void WLApplication::handle_input(InputCallback const * cb)
 			}
 			break;
 
+		case SDL_TEXTINPUT:
+			if (cb && cb->textinput) {
+				cb->textinput(ev.text.text);
+			}
+			break;
 		case SDL_MOUSEBUTTONDOWN:
 		case SDL_MOUSEBUTTONUP:
 			_handle_mousebutton(ev, cb);
 			break;
-
+		case SDL_MOUSEWHEEL:
+			if (cb && cb->mouse_wheel) {
+				cb->mouse_wheel(ev.wheel.which, ev.wheel.x, ev.wheel.y);
+			}
+			break;
 		case SDL_MOUSEMOTION:
 			m_mouse_position = Point(ev.motion.x, ev.motion.y);
 
@@ -501,7 +506,6 @@ void WLApplication::handle_input(InputCallback const * cb)
 					 ev.motion.x,    ev.motion.y,
 					 ev.motion.xrel, ev.motion.yrel);
 			break;
-
 		case SDL_QUIT:
 			m_should_die = true;
 			break;
@@ -537,7 +541,7 @@ void WLApplication::_handle_mousebutton
 		//  mouse button.
 		if
 			(ev.button.button == SDL_BUTTON_MIDDLE &&
-			 (get_key_state(SDLK_LALT) || get_key_state(SDLK_RALT)))
+			 (get_key_state(SDL_SCANCODE_LALT) || get_key_state(SDL_SCANCODE_RALT)))
 		{
 			ev.button.button = SDL_BUTTON_LEFT;
 			m_faking_middle_mouse_button = true;
@@ -570,8 +574,8 @@ int32_t WLApplication::get_time() {
 
 /// Instantaneously move the mouse cursor without creating a motion event.
 ///
-/// SDL_WarpMouse() *will* create a mousemotion event, which we do not want. As
-/// a workaround, we store the delta in m_mouse_compensate_warp and use that to
+/// SDL_WarpMouseInWindow() *will* create a mousemotion event, which we do not want.
+/// As a workaround, we store the delta in m_mouse_compensate_warp and use that to
 /// eliminate the motion event in poll_event()
 ///
 /// \param position The new mouse position
@@ -583,7 +587,10 @@ void WLApplication::warp_mouse(const Point position)
 	SDL_GetMouseState(&cur_position.x, &cur_position.y);
 	if (cur_position != position) {
 		m_mouse_compensate_warp += cur_position - position;
-		SDL_WarpMouse(position.x, position.y);
+		SDL_Window* sdl_window = g_gr->get_sdlwindow();
+		if (sdl_window) {
+			SDL_WarpMouseInWindow(sdl_window, position.x, position.y);
+		}
 	}
 }
 
@@ -598,10 +605,18 @@ void WLApplication::warp_mouse(const Point position)
  */
 void WLApplication::set_input_grab(bool grab)
 {
+	if (!g_gr) {
+		return;
+	}
+	SDL_Window * sdl_window = g_gr->get_sdlwindow();
 	if (grab) {
-		SDL_WM_GrabInput(SDL_GRAB_ON);
+		if (sdl_window) {
+			SDL_SetWindowGrab(sdl_window, SDL_TRUE);
+		}
 	} else {
-		SDL_WM_GrabInput(SDL_GRAB_OFF);
+		if (sdl_window) {
+			SDL_SetWindowGrab(sdl_window, SDL_FALSE);
+		}
 		warp_mouse(m_mouse_position); //TODO(unknown): is this redundant?
 	}
 }
@@ -643,6 +658,8 @@ void WLApplication::refresh_graphics()
 		 s.get_int("yres", DEFAULT_RESOLUTION_H),
 		 s.get_bool("fullscreen", false),
 		 s.get_bool("opengl", true));
+	// does only work with a window
+	set_input_grab(s.get_bool("inputgrab", false));
 }
 
 /**
@@ -658,7 +675,6 @@ bool WLApplication::init_settings() {
 	//then parse the commandline - overwrites conffile settings
 	handle_commandline_parameters();
 
-	set_input_grab(s.get_bool("inputgrab", false));
 	set_mouse_swap(s.get_bool("swapmouse", false));
 
 	// KLUDGE!
@@ -824,7 +840,7 @@ bool WLApplication::init_hardware() {
 	videomode.push_back("x11");
 #endif
 #ifdef _WIN32
-	videomode.push_back("windib");
+	videomode.push_back("windows");
 #endif
 #ifdef __APPLE__
 	videomode.push_back("Quartz");
@@ -857,8 +873,6 @@ bool WLApplication::init_hardware() {
 			 SDL_GetError());
 
 	SDL_ShowCursor(SDL_DISABLE);
-	SDL_EnableUNICODE(1);
-	SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 
 	refresh_graphics();
 
@@ -879,8 +893,7 @@ void WLApplication::shutdown_hardware()
 			<< std::endl;
 
 	init_graphics(0, 0, false, false);
-	SDL_QuitSubSystem
-		(SDL_INIT_TIMER|SDL_INIT_VIDEO|SDL_INIT_CDROM|SDL_INIT_JOYSTICK);
+	SDL_QuitSubSystem(SDL_INIT_TIMER|SDL_INIT_VIDEO|SDL_INIT_JOYSTICK);
 
 #ifndef _WIN32
 	// SOUND can lock up with buggy SDL/drivers. we try to do the right thing

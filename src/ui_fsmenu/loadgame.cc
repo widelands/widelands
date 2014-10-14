@@ -376,37 +376,37 @@ void FullscreenMenuLoadGame::fill_list() {
 		m_list.select(0);
 }
 
-bool FullscreenMenuLoadGame::handle_key(bool down, SDL_keysym code)
+bool FullscreenMenuLoadGame::handle_key(bool down, SDL_Keysym code)
 {
 	if (!down)
 		return false;
 
 	switch (code.sym)
 	{
-	case SDLK_KP2:
+	case SDL_SCANCODE_KP_2:
 		if (code.mod & KMOD_NUM)
 			break;
 		/* no break */
-	case SDLK_DOWN:
-	case SDLK_KP8:
+	case SDL_SCANCODE_DOWN:
+	case SDL_SCANCODE_KP_8:
 		if (code.mod & KMOD_NUM)
 			break;
 		/* no break */
-	case SDLK_UP:
+	case SDL_SCANCODE_UP:
 		m_list.handle_key(down, code);
 		return true;
-	case SDLK_KP_ENTER:
-	case SDLK_RETURN:
+	case SDL_SCANCODE_KP_ENTER:
+	case SDL_SCANCODE_RETURN:
 		clicked_ok();
 		return true;
-	case SDLK_KP_PERIOD:
+	case SDL_SCANCODE_KP_PERIOD:
 		if (code.mod & KMOD_NUM)
 			break;
 		/* no break */
-	case SDLK_DELETE:
+	case SDL_SCANCODE_DELETE:
 		clicked_delete();
 		return true;
-	case SDLK_ESCAPE:
+	case SDL_SCANCODE_ESCAPE:
 		end_modal(0);
 		return true;
 	default:

@@ -85,7 +85,7 @@ GLSurfaceTexture::GLSurfaceTexture(SDL_Surface * surface, bool intensity)
 	uint8_t bpp = surface->format->BytesPerPixel;
 
 	if
-		(surface->format->palette || (surface->format->colorkey > 0) ||
+		(surface->format->palette ||
 		 m_tex_w != static_cast<uint32_t>(surface->w) ||
 		 m_tex_h != static_cast<uint32_t>(surface->h) ||
 		 (bpp != 3 && bpp != 4))
@@ -94,8 +94,10 @@ GLSurfaceTexture::GLSurfaceTexture(SDL_Surface * surface, bool intensity)
 			(SDL_SWSURFACE, m_tex_w, m_tex_h,
 			 32, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
 		assert(converted);
-		SDL_SetAlpha(converted, 0, 0);
-		SDL_SetAlpha(surface, 0, 0);
+		SDL_SetSurfaceAlphaMod(converted,  SDL_ALPHA_OPAQUE);
+		SDL_SetSurfaceBlendMode(converted, SDL_BLENDMODE_NONE);
+		SDL_SetSurfaceAlphaMod(surface,  SDL_ALPHA_OPAQUE);
+		SDL_SetSurfaceBlendMode(surface, SDL_BLENDMODE_NONE);
 		SDL_BlitSurface(surface, nullptr, converted, nullptr);
 		SDL_FreeSurface(surface);
 		surface = converted;

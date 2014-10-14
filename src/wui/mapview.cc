@@ -192,7 +192,7 @@ bool MapView::handle_mousemove
 	if (!intbase().get_sel_freeze())
 		track_sel(Point(x, y));
 
-	g_gr->update_fullscreen();
+	g_gr->update();
 	return true;
 }
 

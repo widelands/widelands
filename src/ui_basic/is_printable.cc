@@ -21,10 +21,9 @@
 
 namespace UI {
 
-bool is_printable(SDL_keysym k) {
-	return (k.sym == SDLK_TAB) || ((k.sym >= SDLK_SPACE) && (k.sym <= SDLK_z)) ||
-	       ((k.sym >= SDLK_WORLD_0) && (k.sym <= SDLK_WORLD_95)) ||
-	       ((k.sym >= SDLK_KP0) && (k.sym <= SDLK_KP_EQUALS));
+bool is_printable(SDL_Keysym k) {
+	return (k.sym == SDL_SCANCODE_TAB) || ((k.sym >= SDL_SCANCODE_SPACE) && (k.sym <= SDLK_z)) ||
+			 ((k.sym >= SDL_SCANCODE_KP_0) && (k.sym <= SDL_SCANCODE_KP_EQUALS));
 }
 
 }  // namespace UI

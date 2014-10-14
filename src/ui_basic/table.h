@@ -107,7 +107,8 @@ public:
 	void draw(RenderTarget &);
 	bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y);
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y);
-	virtual bool handle_key(bool down, SDL_keysym code);
+	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y);
+	virtual bool handle_key(bool down, SDL_Keysym code);
 };
 
 template <> class Table<void *> : public Panel {
@@ -243,7 +244,8 @@ public:
 	void draw(RenderTarget &) override;
 	bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
-	bool handle_key(bool down, SDL_keysym code) override;
+	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y);
+	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
 	bool default_compare_checkbox(uint32_t column, uint32_t a, uint32_t b);
