@@ -22,9 +22,12 @@
 
 // Basic constants for often used text attributes.
 
-#define UI_FONT_NAME_SERIF      "DejaVuSerif.ttf"
-#define UI_FONT_NAME_SANS       "DejaVuSans.ttf"
-#define UI_FONT_NAME_WIDELANDS  "Widelands/Widelands.ttf"
+#define UI_FONT_NAME_SERIF        "DejaVuSerif.ttf"
+#define UI_FONT_NAME_SANS         "DejaVuSans.ttf"
+#define UI_FONT_NAME_WIDELANDS    "Widelands/Widelands.ttf"
+#define UI_FONT_NAME_CJK          "MicroHei/wqy-microhei.ttc"
+#define UI_FONT_NAME_ARABIC_FARSI "FaKacstBook/FaKacstBook.ttf"
+#define UI_FONT_NAME_HEBREW       "Culmus/TaameyFrankCLM-Medium.ttf"
 
 #define UI_FONT_NAME            UI_FONT_NAME_SERIF
 #define UI_FONT_NAME_NO_EXT     "DejaVuSerif"

@@ -610,18 +610,35 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 		bool did_select_a_font = cmpbool;
 		m_ui_font_list.add
 			(_("DejaVuSerif (Default)"), "serif", nullptr, cmpbool);
+
 		cmpbool = !strcmp("sans", opt.ui_font.c_str());
 		did_select_a_font |= cmpbool;
 		m_ui_font_list.add
 			("DejaVuSans", "sans", nullptr, cmpbool);
+
 		cmpbool = !strcmp(UI_FONT_NAME_WIDELANDS, opt.ui_font.c_str());
 		did_select_a_font |= cmpbool;
 		m_ui_font_list.add
 			("Widelands", UI_FONT_NAME_WIDELANDS, nullptr, cmpbool);
 
+		cmpbool = !strcmp(UI_FONT_NAME_CJK, opt.ui_font.c_str());
+		did_select_a_font |= cmpbool;
+		m_ui_font_list.add
+			("Micro Hei (CJK)", UI_FONT_NAME_CJK, nullptr, cmpbool);
+
+		cmpbool = !strcmp(UI_FONT_NAME_ARABIC_FARSI, opt.ui_font.c_str());
+		did_select_a_font |= cmpbool;
+		m_ui_font_list.add
+			("Kacst Book (Arabic/Farsi)", UI_FONT_NAME_ARABIC_FARSI, nullptr, cmpbool);
+
+		cmpbool = !strcmp(UI_FONT_NAME_HEBREW, opt.ui_font.c_str());
+		did_select_a_font |= cmpbool;
+		m_ui_font_list.add
+			("Taamey Frank CLM (Hebrew)", UI_FONT_NAME_HEBREW, nullptr, cmpbool);
+
 		// Fill with all left *.ttf files we find in fonts
 		FilenameSet files =
-		   filter(g_fs->list_directory("fonts"),
+			filter(g_fs->list_directory("fonts"),
 		          [](const std::string& fn) {return boost::ends_with(fn, ".ttf");});
 
 		for
