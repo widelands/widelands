@@ -78,6 +78,6 @@ end
 function conclude()
    additional_port_space.terr = "desert_steppe" -- make it land again so that the player can build a port
    msg_box(conclusion)
-end   
+end
 
 run(introduction)

@@ -6,7 +6,7 @@ function introduction()
    sleep(500)
    msg_box(intro1)
    msg_box(intro2)
-   
+
    burn_tavern_down()
 end
 
@@ -24,7 +24,7 @@ function burn_tavern_down()
    -- we cannot check whether the user scrolled, so let's hope he does it
    while mv.windows.building_statistics do sleep(100) end
    o.done = true
-   
+
    sleep(2000)
    o = msg_box(inventory1)
    while not mv.windows.stock_menu do sleep(200) end
@@ -49,13 +49,13 @@ function burn_tavern_down()
 
    sleep(2000)
    o = msg_box(build_taverns)
-   
+
    sleep(100*1000)
    msg_box(ware_encyclopedia) -- a small insert
-   
+
    while #plr:get_buildings("tavern") < 2 do sleep(500) end
    o.done = true
-   
+
    plan_the_future()
 end
 
@@ -107,14 +107,14 @@ function plan_the_future()
    o.done = true
    msg_box(economy_settings2)
    o = msg_box(economy_settings3)
-   
+
    while sf.immovable:get_wares("marblecolumn") < 12 do sleep(500) end
    -- wait that the player has really changed the target quantity
-   
+
    o.visible = false
    -- just forget about the old objective, the new one includes the old one
    o = msg_box(warehouse_preference_settings)
-   
+
    local enough_wares = false
    while not enough_wares do
       if (warehouse_field.immovable and (warehouse_field.immovable.descr.name == "warehouse")) then
@@ -125,7 +125,7 @@ function plan_the_future()
       sleep(500)
    end
    o.done = true
-   
+
    -- if the minimum_storage_per_warehouse feature is introduced, use the gold mountain to the northeast for explanation
    conclude()
 end

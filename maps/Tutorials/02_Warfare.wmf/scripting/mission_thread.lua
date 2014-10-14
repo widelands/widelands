@@ -64,7 +64,7 @@ function enhance_fortress()
 
       sleep(500)
    end
-   
+
    sleep(300)
 
    attack()

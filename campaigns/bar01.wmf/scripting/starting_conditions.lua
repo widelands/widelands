@@ -1,12 +1,12 @@
 -- =======================================================================
---                            Starting conditions                           
+--                            Starting conditions
 -- =======================================================================
 
 -- Allow some buildings
 plr:forbid_buildings("all")
 plr:allow_buildings{
    "lumberjacks_hut",
-   "quarry", 
+   "quarry",
    "rangers_hut"
 }
 
@@ -55,7 +55,7 @@ hq:set_workers{
 hq:set_soldiers({0,0,0,0}, 45)
 
 -- ============
--- Build roads 
+-- Build roads
 -- ============
 connected_road(plr,sf.brn.immovable, "r,r|br,r")
 connected_road(plr, sf.brn.immovable, "l,l|l,bl,bl|br,r|br,r|r,tr|tr,tr,tr")
@@ -65,6 +65,4 @@ prefilled_buildings(plr,
    {"lumberjacks_hut", 15, 11},
    {"lumberjacks_hut", 12, 13},
    {"quarry", 8, 12}
-) 
-
-
+)

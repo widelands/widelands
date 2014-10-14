@@ -6,7 +6,7 @@ function starting_infos()
    -- so that the player cannot build anything here
 
    sleep(100)
-   
+
    msg_box(initial_message_01)
    sleep(500)
 
@@ -125,15 +125,15 @@ function learn_to_move()
    _wait_for_move()
    o.done = true
    sleep(3000) -- Give the player a chance to try this some more
-   
+
    o = msg_box(tell_about_minimap)
-   
+
    -- Wait until the minimap has been opened and closed again
    while not wl.ui.MapView().windows.minimap do sleep(100) end
    while wl.ui.MapView().windows.minimap do sleep(100) end
-   
+
    o.done = true
-   sleep(500) 
+   sleep(500)
 
    msg_box(congratulate_and_on_to_quarry)
 
@@ -154,7 +154,7 @@ function build_a_quarry()
          return cs
       else return false end
    end
-   
+
    -- Wait for the constructionsite to be placed
    while not cs do sleep(200) end
 
@@ -205,7 +205,7 @@ function build_a_quarry()
    blocker:lift_blocks()
 
    local o = msg_box(talk_about_roadbuilding_02)
-   
+
    -- The player is allowed to build roads and flags at will
    immovable_is_legal = function(i)
       if (i.descr.type_name == "flag") or (i.descr.type_name == "road") then
@@ -213,11 +213,11 @@ function build_a_quarry()
          return true
       else return false end
    end
-   
+
    -- Give the player some time to build the road
    -- It is not possible to check for the road. See https://bugs.launchpad.net/widelands/+bug/1380286
    sleep(20*1000)
-   
+
    second_quarry()
 
    -- Wait a while
@@ -251,10 +251,10 @@ function second_quarry()
          return true
       else return false end
    end
-   
+
    -- Wait for the constructionsite to be placed
    while not cs do sleep(200) end
-   
+
    o.done = true
    register_immovable_as_allowed(cs)
 end
@@ -315,7 +315,7 @@ function messages()
    msg_box(closing_msg_window_01)
 
    sleep(800)
-   
+
    destroy_quarries()
 end
 
@@ -326,17 +326,17 @@ function destroy_quarries()
 
    -- Wait for messages to arrive
    while #plr.inbox < 2 do sleep(300) end
-   
+
    local o = msg_box(destroy_quarries_message)
-   
+
    -- From now on, the player can build whatever he wants
    terminate_bad_boy_sentinel = true
-   
+
    while #plr:get_buildings("quarry") > 0 do sleep(200) end
    o.done = true
 
    sleep(3000)
-   
+
    expansion()
 end
 
@@ -345,7 +345,7 @@ function expansion()
    sleep(10)
 
    local o = msg_box(introduce_expansion)
-   
+
    -- wait until there are soldiers inside so that the player sees the expansion
    local soldier_inside = false
    while not soldier_inside do
@@ -358,7 +358,7 @@ function expansion()
       end
       sleep(500)
    end
-         
+
    o.done = true
    sleep(4000)
    msg_box(military_building_finished)

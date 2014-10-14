@@ -38,7 +38,7 @@ function msg_box(i)
    local o = _try_add_objective(i)
 
    sleep(130)
-   
+
    wl.Game().desired_speed = speed
 
    return o

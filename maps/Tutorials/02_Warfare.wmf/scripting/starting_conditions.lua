@@ -36,7 +36,7 @@ function init_player()
             grout = 30,
             raw_stone = 30,
             thatchreed = 40,
-            
+
             -- wares for training
             sharpax = 20,
             broadax = 20,
@@ -56,7 +56,7 @@ function init_player()
       {"barrier", 30, 58, soldiers = {[{0,0,0,0}] = 1 }}, -- to make sure some soldiers walk out
       {"lumberjacks_hut", 24, 1}
    )
-   
+
    -- Build the roads
    local map = wl.Game().map
    connected_road(plr,map:get_field(29,58).immovable,"br,r|r,r|r,tr")

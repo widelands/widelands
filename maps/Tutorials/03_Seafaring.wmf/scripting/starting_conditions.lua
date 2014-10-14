@@ -82,7 +82,7 @@ function init_player()
    {"fishers_house", 42, 66},
    {"fish_breeders_house", 44, 66},
    {"fishers_house", 46, 66},
-   {"fish_breeders_house", 48, 66},   
+   {"fish_breeders_house", 48, 66},
    {"castle", 22, 55},
    {"coalmine", 22, 48},
    {"coalmine", 16, 49},
@@ -117,7 +117,7 @@ function init_player()
 
    -- everthing below is in the north
    {"castle", 36, 20},
-   {"warehouse", 37, 16, 
+   {"warehouse", 37, 16,
       wares = {
          smoked_meat = 50,
          smoked_fish = 150,
@@ -138,7 +138,7 @@ function init_player()
          [{0,0,0,0}] = 10,
       }
    }, -- end of warehouse on northern peninsula
-   {"goldmine", 32, 25}   
+   {"goldmine", 32, 25}
    )
 
    plr:forbid_buildings{"shipyard"}

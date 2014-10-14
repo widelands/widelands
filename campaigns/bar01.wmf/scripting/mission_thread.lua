@@ -2,8 +2,8 @@
 --                            Main mission thread
 -- =======================================================================
 
-include "scripting/ui.lua"
 include "scripting/table.lua"
+include "scripting/ui.lua"
 
 quarry_done = false
 enhance_buildings_done = false
@@ -30,18 +30,18 @@ function introduction_thread()
    send_msg(briefing_msg_05)
    send_msg(briefing_msg_06)
    send_msg(briefing_msg_07)
-   
+
    -- introduction of Khantrukh
    send_msg(briefing_msg_08)
-   
+
    send_msg(order_msg_ranger)
    local obj = add_obj(obj_build_rangers)
-   
+
    while not check_for_buildings(plr, {rangers_hut = 2}) do sleep(500) end
    obj.done = true
-   
+
    plr:allow_buildings{"sentry","barrier"}
-   
+
    send_msg(order_msg_1)
    send_msg(order_msg_2)
 
@@ -90,7 +90,7 @@ function mines_and_food_thread()
       "goldmine",
       "granitemine"
    }
-   
+
    sleep(10000)
    send_msg(story_msg2)
 
@@ -232,10 +232,10 @@ function build_materials_thread()
 
    send_msg(order_msg_16_blackwood)
    plr:allow_buildings{"hardener"}
-   home.immovable:set_wares("blackwood",5)
+   sf.immovable:set_wares("blackwood",5)
    -- So that player has really little, but still enough to expand a bit
    local o = add_obj(obj_better_material_1)
-   
+
    sleep(30*1000)
    send_msg(story_msg1)
    while #plr:get_buildings("hardener") < 1 do sleep(5421) end
@@ -279,10 +279,10 @@ function cattle_farm()
 
    local o = add_obj(obj_build_cattlefarm)
    plr:allow_buildings{"cattlefarm"}
-   
+
    sleep(10000)
    send_msg(story_msg3)
-   
+
    while not check_for_buildings(plr, { cattlefarm = 1 }) do
       sleep(2323)
    end
@@ -315,7 +315,7 @@ function mission_complete_thread()
    send_msg(msg_mission_complete)
    plr:reveal_scenario("barbariantut01")
 end
-  
+
 
 run(introduction_thread)
 run(mines_and_food_thread)
