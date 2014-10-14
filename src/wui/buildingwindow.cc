@@ -205,6 +205,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 						(capsbuttons, is_stopped ? "continue" : "stop", 0, 0, 34, 34,
 						 g_gr->images().get("pics/but4.png"),
 						 g_gr->images().get((is_stopped ? "pics/continue.png" : "pics/stop.png")),
+						 /** TRANSLATORS: Stop/Continue toggle button for production sites. */
 						 is_stopped ? _("Continue") : _("Stop"));
 				stopbtn->sigclicked.connect(boost::bind(&BuildingWindow::act_start_stop, boost::ref(*this)));
 				capsbuttons->add
