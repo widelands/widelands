@@ -31,7 +31,7 @@
 #include <stdexcept>
 #include <string>
 
-#include <boost/algorithm/string/predicate.hpp>
+#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 #ifdef __APPLE__
 #include <mach-o/dyld.h>
@@ -90,6 +90,7 @@
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
+#include "wui/text_constants.h"
 
 #define MINIMUM_DISK_SPACE 250000000lu
 #define SCREENSHOT_DIR "screenshots"
@@ -661,7 +662,7 @@ bool WLApplication::init_settings() {
 	set_input_grab(s.get_bool("inputgrab", false));
 	set_mouse_swap(s.get_bool("swapmouse", false));
 
-	// KLUDGE!
+	// TODO(unknown): KLUDGE!
 	// Without this the following config options get dropped by check_used().
 	// Profile needs support for a Syntax definition to solve this in a
 	// sensible way
@@ -714,8 +715,58 @@ void WLApplication::init_language() {
 	i18n::grab_textdomain("widelands");
 
 	// Set locale corresponding to selected language
-	i18n::set_locale(s.get_string("language", ""));
+	std::string language = s.get_string("language", "");
+	i18n::set_locale(language);
+	s.set_string("ui_font", get_font_for_locale(language));
 }
+
+
+std::string& WLApplication::get_font_for_locale(const std::string& localename) {
+	std::string ui_font = UI_FONT_NAME_DEFAULT;
+	Profile* ln = nullptr;
+	std::string filename;
+
+	try  {
+		if (localename.empty()) {
+			std::vector<std::string> parts;
+			boost::split(parts, i18n::get_locale(), boost::is_any_of("."));
+			filename = (boost::format("txts/localedata/%s.conf") % parts[0]).str();
+
+			if (g_fs->file_exists(filename.c_str())) {
+				ln = new Profile(filename.c_str());
+			} else {
+				boost::split(parts, parts[0], boost::is_any_of("_"));
+				filename = (boost::format("txts/localedata/%s.conf") % parts[0]).str();
+
+				if (g_fs->file_exists(filename.c_str())) {
+					ln = new Profile(filename.c_str());
+				}
+			}
+		} else {
+			filename = (boost::format("txts/localedata/%s.conf") % localename).str().c_str();
+			if (g_fs->file_exists(filename.c_str())) {
+				ln = new Profile(filename.c_str());
+			}
+		}
+	} catch (const WException&) {
+		log("Error loading profile from file: %s\n", filename.c_str());
+	}
+	if (ln == nullptr) {
+		log("Could not find profile for system language: %s\n", i18n::get_locale().c_str());
+	} else {
+		// get font for locale
+		try  {
+				Section& s = ln->pull_section("locale");
+				ui_font = s.get_string("font", ui_font.c_str());
+				log("#gunchleoc: Font for locale %s is: %s\n", localename.c_str(), ui_font.c_str());
+		} catch (const WException&) {
+				log("Could not read locale: %s\n", localename.c_str());
+		}
+	}
+	return ui_font;
+}
+
+
 
 /**
  * Remember the last settings: write them into the config file

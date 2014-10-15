@@ -22,7 +22,7 @@
 #include <cstdio>
 #include <iostream>
 
-#include <boost/algorithm/string.hpp>
+#include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -731,7 +731,6 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct() {
 
 	opt.message_sound = m_opt_section.get_bool("sound_at_message", true);
 	opt.nozip = m_opt_section.get_bool("nozip", false);
-	// NOCOM opt.ui_font = m_opt_section.get_string("ui_font", "serif");
 	opt.border_snap_distance = m_opt_section.get_int("border_snap_distance", 0);
 	opt.panel_snap_distance = m_opt_section.get_int("panel_snap_distance", 0);
 	opt.remove_replays = m_opt_section.get_int("remove_replays", 0);
@@ -775,47 +774,5 @@ void OptionsCtrl::save_options() {
 	g_sound_handler.set_disable_music(!opt.music);
 	g_sound_handler.set_disable_fx(!opt.fx);
 
-	// Parse font information from locale
-	std::string ui_font = UI_FONT_NAME_DEFAULT;
-	Profile* ln = nullptr;
-	std::string filename;
-
-	try  {
-		if (opt.language.empty()) {
-			std::vector<std::string> parts;
-			boost::split(parts, i18n::get_locale(), boost::is_any_of("."));
-			filename = (boost::format("txts/localedata/%s.conf") % parts[0]).str();
-
-			if (g_fs->file_exists(filename.c_str())) {
-				ln = new Profile(filename.c_str());
-			} else {
-				boost::split(parts, parts[0], boost::is_any_of("_"));
-				filename = (boost::format("txts/localedata/%s.conf") % parts[0]).str();
-
-				if (g_fs->file_exists(filename.c_str())) {
-					ln = new Profile(filename.c_str());
-				}
-			}
-		} else {
-			filename = (boost::format("txts/localedata/%s.conf") % opt.language).str().c_str();
-			if (g_fs->file_exists(filename.c_str())) {
-				ln = new Profile(filename.c_str());
-			}
-		}
-	} catch (const WException&) {
-		log("Error loading profile from file: %s\n", filename.c_str());
-	}
-	if (ln == nullptr) {
-		log("Could not find profile for system language: %s\n", i18n::get_locale());
-	} else {
-		// get font for locale
-		try  {
-				Section& s = ln->pull_section("locale");
-				ui_font = s.get_string("font", ui_font.c_str());
-				log("#gunchleoc: Font for locale %s is: %s\n", opt.language.c_str(), ui_font.c_str());
-		} catch (const WException&) {
-				log("Could not read locale: %s\n", opt.language.c_str());
-		}
-	}
-	m_opt_section.set_string("ui_font", ui_font);
+	m_opt_section.set_string("ui_font", WLApplication::get()->get_font_for_locale(opt.language));
 }
