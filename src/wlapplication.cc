@@ -970,17 +970,6 @@ void WLApplication::handle_commandline_parameters()
 		m_commandline.erase("nozip");
 	}
 
-	if (m_commandline.count("opengl")) {
-		if (m_commandline["opengl"].compare("0") == 0) {
-			g_options.pull_section("global").create_val("opengl", "false");
-		} else if (m_commandline["opengl"].compare("1") == 0) {
-			g_options.pull_section("global").create_val("opengl", "true");
-		} else {
-			log ("Invalid option opengl=[0|1]\n");
-		}
-		m_commandline.erase("opengl");
-	}
-
 	if (m_commandline.count("datadir")) {
 		log ("Adding directory: %s\n", m_commandline["datadir"].c_str());
 		m_use_default_datadir = false;
