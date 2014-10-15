@@ -1234,11 +1234,9 @@ bool Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 std::string Panel::ui_fn() {
 	std::string style
 		(g_options.pull_section("global").get_string
-		 	("ui_font", UI_FONT_NAME_SERIF));
+			("ui_font", UI_FONT_NAME_DEFAULT));
 	if (style.empty() | (style == "serif"))
-		return UI_FONT_NAME_SERIF;
-	if (style == "sans")
-		return UI_FONT_NAME_SANS;
+		return UI_FONT_NAME_DEFAULT;
 	if (g_fs->file_exists("fonts/" + style))
 		return style;
 	log

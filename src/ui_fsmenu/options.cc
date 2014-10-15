@@ -22,10 +22,12 @@
 #include <cstdio>
 #include <iostream>
 
-#include <boost/algorithm/string/predicate.hpp>
+#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "base/log.h"
+#include "base/wexception.h"
 #include "graphic/default_resolution.h"
 #include "graphic/graphic.h"
 #include "helper.h"
@@ -36,54 +38,6 @@
 #include "wlapplication.h"
 #include "wui/text_constants.h"
 
-namespace  {
-
-struct LanguageEntry {
-	LanguageEntry(const std::string& init_abbreviation, const std::string& init_descname) :
-		abbreviation(init_abbreviation),
-		descname(init_descname) {}
-
-	bool operator<(const LanguageEntry& other) const {
-		return descname < other.descname;
-	}
-
-	std::string abbreviation;
-	std::string descname;
-};
-
-void add_languages_to_list(UI::Listselect<std::string>* list, const std::string& language) {
-
-	Section* s = &g_options.pull_section("global");
-	FilenameSet files = g_fs->list_directory(s->get_string("localedir", INSTALL_LOCALEDIR));
-	Profile ln("txts/languages");
-	s = &ln.pull_section("languages");
-	bool own_selected = "" == language || "en" == language;
-
-	// Add translation directories to the list
-	std::vector<LanguageEntry> entries;
-	for (const std::string& filename : files) {
-		char const* const path = filename.c_str();
-		if (!strcmp(FileSystem::fs_filename(path), ".") ||
-		    !strcmp(FileSystem::fs_filename(path), "..") || !g_fs->is_directory(path)) {
-			continue;
-		}
-
-		char const* const abbreviation = FileSystem::fs_filename(path);
-		entries.emplace_back(abbreviation, s->get_string(abbreviation, abbreviation));
-		own_selected |= abbreviation == language;
-	}
-	// Add currently used language manually
-	if (!own_selected) {
-		entries.emplace_back(language, s->get_string(language.c_str(), language.c_str()));
-	}
-	std::sort(entries.begin(), entries.end());
-
-	for (const LanguageEntry& entry : entries) {
-		list->add(entry.descname.c_str(), entry.abbreviation, nullptr, entry.abbreviation == language);
-	}
-}
-
-}  // namespace
 
 FullscreenMenuOptions::FullscreenMenuOptions
 		(OptionsCtrl::OptionsStruct opt)
@@ -382,15 +336,10 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	}
 
 	// Fill language list
-	m_language_list.add
-		(_("Try system language"), "", // "try", as many translations are missing.
-		 nullptr, "" == opt.language);
+	m_entries.push_back(new LanguageEntry("", _("Try system language"), "aaaa", UI_FONT_NAME_DEFAULT));
+	m_entries.push_back(new LanguageEntry("en", _("English"), "aaab", UI_FONT_NAME_DEFAULT));
 
-	m_language_list.add
-		("English", "en",
-		 nullptr, "en" == opt.language);
-
-	add_languages_to_list(&m_language_list, opt.language);
+	add_languages_to_list(opt.language);
 }
 
 void FullscreenMenuOptions::update_sb_autosave_unit() {
@@ -408,6 +357,53 @@ void FullscreenMenuOptions::advanced_options() {
 		end_modal(om_restart);
 	}
 }
+
+void FullscreenMenuOptions::add_languages_to_list(const std::string& current_locale) {
+
+	bool own_selected = "" == current_locale || "en" == current_locale;
+	Section* s = &g_options.pull_section("global");
+	FilenameSet files = g_fs->list_directory(s->get_string("localedir", INSTALL_LOCALEDIR));
+
+	// Add translation directories to the list
+	LanguageEntry* languageentry;
+	std::string localename;
+	std::string name;
+	std::string sortname;
+	std::string fontname;
+	for (const std::string& filename : files) {
+		char const* const path = filename.c_str();
+		if (!strcmp(FileSystem::fs_filename(path), ".") ||
+			 !strcmp(FileSystem::fs_filename(path), "..") || !g_fs->is_directory(path)) {
+			continue;
+		}
+
+		try {
+			localename = g_fs->filename_without_ext(path);
+			Profile ln((boost::format("txts/localedata/%s.conf") % localename.c_str()).str().c_str());
+			Section& localesection = ln.pull_section("locale");
+			name = localesection.get_safe_string("name");
+			sortname = localesection.get_string("sort_name", name.c_str());
+			fontname = localesection.get_string("font", UI_FONT_NAME_DEFAULT);
+
+			languageentry = new LanguageEntry(localename, name, sortname, fontname);
+
+			m_entries.push_back(languageentry);
+			own_selected |= localename == current_locale;
+
+		} catch (const WException&) {
+			log("Could not read locale for: %s\n", localename.c_str());
+			m_entries.push_back(new LanguageEntry(localename, localename, localename, UI_FONT_NAME_DEFAULT));
+		}
+	}
+
+	std::sort(m_entries.begin(), m_entries.end());
+
+	for (const LanguageEntry* entry : m_entries) {
+		m_language_list.add(entry->descname.c_str(), entry->localename, nullptr,
+									entry->localename == current_locale);
+	}
+}
+
 
 bool FullscreenMenuOptions::handle_key(bool down, SDL_keysym code)
 {
@@ -621,21 +617,6 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 		m_ui_font_list.add
 			("Widelands", UI_FONT_NAME_WIDELANDS, nullptr, cmpbool);
 
-		cmpbool = !strcmp(UI_FONT_NAME_CJK, opt.ui_font.c_str());
-		did_select_a_font |= cmpbool;
-		m_ui_font_list.add
-			("Micro Hei (CJK)", UI_FONT_NAME_CJK, nullptr, cmpbool);
-
-		cmpbool = !strcmp(UI_FONT_NAME_ARABIC_FARSI, opt.ui_font.c_str());
-		did_select_a_font |= cmpbool;
-		m_ui_font_list.add
-			("Kacst Book (Arabic/Farsi)", UI_FONT_NAME_ARABIC_FARSI, nullptr, cmpbool);
-
-		cmpbool = !strcmp(UI_FONT_NAME_HEBREW, opt.ui_font.c_str());
-		did_select_a_font |= cmpbool;
-		m_ui_font_list.add
-			("Taamey Frank CLM (Hebrew)", UI_FONT_NAME_HEBREW, nullptr, cmpbool);
-
 		// Fill with all left *.ttf files we find in fonts
 		FilenameSet files =
 			filter(g_fs->list_directory("fonts"),
@@ -648,9 +629,7 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 		{
 			char const * const path = pname->c_str();
 			char const * const name = FileSystem::fs_filename(path);
-			if (!strcmp(name, UI_FONT_NAME_SERIF))
-				continue;
-			if (!strcmp(name, UI_FONT_NAME_SANS))
+			if (!strcmp(name, UI_FONT_NAME_DEFAULT))
 				continue;
 			if (g_fs->is_directory(name))
 				continue;
@@ -752,7 +731,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct() {
 
 	opt.message_sound = m_opt_section.get_bool("sound_at_message", true);
 	opt.nozip = m_opt_section.get_bool("nozip", false);
-	opt.ui_font = m_opt_section.get_string("ui_font", "serif");
+	// NOCOM opt.ui_font = m_opt_section.get_string("ui_font", "serif");
 	opt.border_snap_distance = m_opt_section.get_int("border_snap_distance", 0);
 	opt.panel_snap_distance = m_opt_section.get_int("panel_snap_distance", 0);
 	opt.remove_replays = m_opt_section.get_int("remove_replays", 0);
@@ -783,7 +762,6 @@ void OptionsCtrl::save_options() {
 
 	m_opt_section.set_bool("sound_at_message",      opt.message_sound);
 	m_opt_section.set_bool("nozip",                 opt.nozip);
-	m_opt_section.set_string("ui_font",             opt.ui_font);
 	m_opt_section.set_int("border_snap_distance",   opt.border_snap_distance);
 	m_opt_section.set_int("panel_snap_distance",    opt.panel_snap_distance);
 
@@ -796,4 +774,48 @@ void OptionsCtrl::save_options() {
 	i18n::set_locale(opt.language);
 	g_sound_handler.set_disable_music(!opt.music);
 	g_sound_handler.set_disable_fx(!opt.fx);
+
+	// Parse font information from locale
+	std::string ui_font = UI_FONT_NAME_DEFAULT;
+	Profile* ln = nullptr;
+	std::string filename;
+
+	try  {
+		if (opt.language.empty()) {
+			std::vector<std::string> parts;
+			boost::split(parts, i18n::get_locale(), boost::is_any_of("."));
+			filename = (boost::format("txts/localedata/%s.conf") % parts[0]).str();
+
+			if (g_fs->file_exists(filename.c_str())) {
+				ln = new Profile(filename.c_str());
+			} else {
+				boost::split(parts, parts[0], boost::is_any_of("_"));
+				filename = (boost::format("txts/localedata/%s.conf") % parts[0]).str();
+
+				if (g_fs->file_exists(filename.c_str())) {
+					ln = new Profile(filename.c_str());
+				}
+			}
+		} else {
+			filename = (boost::format("txts/localedata/%s.conf") % opt.language).str().c_str();
+			if (g_fs->file_exists(filename.c_str())) {
+				ln = new Profile(filename.c_str());
+			}
+		}
+	} catch (const WException&) {
+		log("Error loading profile from file: %s\n", filename.c_str());
+	}
+	if (ln == nullptr) {
+		log("Could not find profile for system language: %s\n", i18n::get_locale());
+	} else {
+		// get font for locale
+		try  {
+				Section& s = ln->pull_section("locale");
+				ui_font = s.get_string("font", ui_font.c_str());
+				log("#gunchleoc: Font for locale %s is: %s\n", opt.language.c_str(), ui_font.c_str());
+		} catch (const WException&) {
+				log("Could not read locale: %s\n", opt.language.c_str());
+		}
+	}
+	m_opt_section.set_string("ui_font", ui_font);
 }
