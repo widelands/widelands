@@ -721,7 +721,7 @@ void WLApplication::init_language() {
 }
 
 
-std::string& WLApplication::get_font_for_locale(const std::string& localename) {
+std::string WLApplication::get_font_for_locale(const std::string& localename) {
 	std::string ui_font = UI_FONT_NAME_DEFAULT;
 	Profile* ln = nullptr;
 	std::string filename;

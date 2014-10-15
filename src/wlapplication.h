@@ -184,7 +184,7 @@ struct WLApplication {
 	void replay();
 	static void emergency_save(Widelands::Game &);
 
-	std::string& get_font_for_locale(const std::string& locale);
+	std::string get_font_for_locale(const std::string& locale);
 
 protected:
 	WLApplication(int argc, char const * const * argv);
