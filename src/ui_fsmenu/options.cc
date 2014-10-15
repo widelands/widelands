@@ -485,7 +485,6 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 	m_hmargin (get_w() * 19 / 200),
 	m_padding (10),
 	m_space   (25),
-	m_offset_first_group (get_h() * 1417 / 10000),
 
 // Buttons
 	m_cancel
@@ -502,23 +501,13 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 // Title
 	m_title
 		(this,
-		 get_w() / 2, get_h() / 40,
+		 get_w() / 2, get_h() * 17 / 150,
 		 _("Advanced Options"), UI::Align_HCenter),
 
 // First options block
-	m_label_ui_font
-		(this,
-		 m_hmargin, m_offset_first_group,
-		 _("Main menu font:"), UI::Align_BottomLeft),
-	m_ui_font_list
-		(this,
-		 m_label_ui_font.get_x(), m_label_ui_font.get_y() + m_label_ui_font.get_h() + m_padding,
-		 get_w() - 2 * m_hmargin, 134,
-		 UI::Align_Left, true),
-
 	m_label_snap_dis_panel
 		(this,
-		 m_hmargin, m_ui_font_list.get_y() + m_ui_font_list.get_h() + m_space + m_padding,
+		 m_hmargin, get_h() * 9 / 30,
 		 _("Distance for windows to snap to other panels:"), UI::Align_VCenter),
 	m_label_snap_dis_border
 		(this,
@@ -620,49 +609,6 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 	m_remove_syncstreams   .set_state(opt.remove_syncstreams);
 	m_opengl               .set_state(opt.opengl);
 	m_transparent_chat     .set_state(opt.transparent_chat);
-
-	// Fill the font list.
-	{ // For use of string ui_font take a look at fullscreen_menu_base.cc
-		bool cmpbool = !strcmp("serif", opt.ui_font.c_str());
-		bool did_select_a_font = cmpbool;
-		m_ui_font_list.add
-			(_("DejaVuSerif (Default)"), "serif", nullptr, cmpbool);
-
-		cmpbool = !strcmp("sans", opt.ui_font.c_str());
-		did_select_a_font |= cmpbool;
-		m_ui_font_list.add
-			("DejaVuSans", "sans", nullptr, cmpbool);
-
-		cmpbool = !strcmp(UI_FONT_NAME_WIDELANDS, opt.ui_font.c_str());
-		did_select_a_font |= cmpbool;
-		m_ui_font_list.add
-			("Widelands", UI_FONT_NAME_WIDELANDS, nullptr, cmpbool);
-
-		// Fill with all left *.ttf files we find in fonts
-		FilenameSet files =
-			filter(g_fs->list_directory("fonts"),
-		          [](const std::string& fn) {return boost::ends_with(fn, ".ttf");});
-
-		for
-			(FilenameSet::iterator pname = files.begin();
-			 pname != files.end();
-			 ++pname)
-		{
-			char const * const path = pname->c_str();
-			char const * const name = FileSystem::fs_filename(path);
-			if (!strcmp(name, UI_FONT_NAME_DEFAULT))
-				continue;
-			if (g_fs->is_directory(name))
-				continue;
-			cmpbool = !strcmp(name, opt.ui_font.c_str());
-			did_select_a_font |= cmpbool;
-			m_ui_font_list.add
-				(name, name, nullptr, cmpbool);
-		}
-
-		if (!did_select_a_font)
-			m_ui_font_list.select(0);
-	}
 }
 
 bool FullscreenMenuAdvancedOptions::handle_key(bool down, SDL_keysym code)
@@ -697,7 +643,6 @@ OptionsCtrl::OptionsStruct FullscreenMenuAdvancedOptions::get_values() {
 	// Write all remaining data from UI elements
 	os.message_sound        = m_message_sound.get_state();
 	os.nozip                = m_nozip.get_state();
-	os.ui_font              = m_ui_font_list.get_selected();
 	os.panel_snap_distance  = m_sb_dis_panel.get_value();
 	os.border_snap_distance = m_sb_dis_border.get_value();
 	os.remove_syncstreams   = m_remove_syncstreams.get_state();
