@@ -225,6 +225,8 @@ struct BuildableField {
 	int16_t military_presence_;
 	// stationed (manned) military buildings nearby
 	int16_t military_stationed_;
+	// stationed (manned) military buildings nearby
+	int16_t military_unstationed_;
 	// some buildings must be postponed bit
 	int32_t prohibited_till_;
 	// and then some must be forced
@@ -330,6 +332,7 @@ struct BuildingObserver {
 
 	std::vector<int16_t> inputs_;
 	std::vector<int16_t> outputs_;
+	std::vector<Widelands::WareIndex> critical_built_mat_;
 	int16_t production_hint_;
 
 	int32_t cnt_built_;
@@ -341,6 +344,7 @@ struct BuildingObserver {
 	int32_t stocklevel_time;  // time when stocklevel_ was last time recalculated
 	int32_t last_dismantle_time_;
 	int32_t construction_decision_time_;
+	bool built_mat_shortage_;
 
 	int32_t total_count() const {
 		return cnt_built_ + cnt_under_construction_;
