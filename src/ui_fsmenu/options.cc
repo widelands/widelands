@@ -38,6 +38,30 @@
 #include "wlapplication.h"
 #include "wui/text_constants.h"
 
+namespace {
+
+struct LanguageEntry {
+	LanguageEntry(const std::string& init_localename,
+					  const std::string& init_descname,
+					  const std::string& init_sortname,
+					  const std::string& init_fontname) :
+		localename(init_localename),
+		descname(init_descname),
+		sortname(init_sortname),
+		fontname(init_fontname) {}
+
+	bool operator<(const LanguageEntry& other) const {
+		return sortname < other.sortname;
+	}
+
+	std::string localename;
+	std::string descname;
+	std::string sortname;
+	std::string fontname;
+};
+
+}
+
 
 FullscreenMenuOptions::FullscreenMenuOptions
 		(OptionsCtrl::OptionsStruct opt)
@@ -335,10 +359,6 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		m_resolutions[entry].yres  = opt.yres;
 	}
 
-	// Fill language list
-	m_entries.push_back(new LanguageEntry("", _("Try system language"), "aaaa", UI_FONT_NAME_DEFAULT));
-	m_entries.push_back(new LanguageEntry("en", _("English"), "aaab", UI_FONT_NAME_DEFAULT));
-
 	add_languages_to_list(opt.language);
 }
 
@@ -360,12 +380,15 @@ void FullscreenMenuOptions::advanced_options() {
 
 void FullscreenMenuOptions::add_languages_to_list(const std::string& current_locale) {
 
+	m_language_list.add(_("Try system language"), "", nullptr, "" == current_locale);
+	m_language_list.add(_("English"), "en", nullptr, "" == current_locale);
+
 	bool own_selected = "" == current_locale || "en" == current_locale;
 	Section* s = &g_options.pull_section("global");
 	FilenameSet files = g_fs->list_directory(s->get_string("localedir", INSTALL_LOCALEDIR));
 
 	// Add translation directories to the list
-	LanguageEntry* languageentry;
+	std::vector<LanguageEntry> entries;
 	std::string localename;
 	std::string name;
 	std::string sortname;
@@ -385,22 +408,20 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 			sortname = localesection.get_string("sort_name", name.c_str());
 			fontname = localesection.get_string("font", UI_FONT_NAME_DEFAULT);
 
-			languageentry = new LanguageEntry(localename, name, sortname, fontname);
-
-			m_entries.push_back(languageentry);
+			entries.push_back(LanguageEntry(localename, name, sortname, fontname));
 			own_selected |= localename == current_locale;
 
 		} catch (const WException&) {
 			log("Could not read locale for: %s\n", localename.c_str());
-			m_entries.push_back(new LanguageEntry(localename, localename, localename, UI_FONT_NAME_DEFAULT));
+			entries.push_back(LanguageEntry(localename, localename, localename, UI_FONT_NAME_DEFAULT));
 		}
 	}
 
-	std::sort(m_entries.begin(), m_entries.end());
+	std::sort(entries.begin(), entries.end());
 
-	for (const LanguageEntry* entry : m_entries) {
-		m_language_list.add(entry->descname.c_str(), entry->localename, nullptr,
-									entry->localename == current_locale);
+	for (const LanguageEntry& entry : entries) {
+		m_language_list.add(entry.descname.c_str(), entry.localename, nullptr,
+									entry.localename == current_locale);
 	}
 }
 

@@ -35,25 +35,6 @@
 class FullscreenMenuOptions;
 class Section;
 
-struct LanguageEntry {
-	LanguageEntry(const std::string& init_localename,
-					  const std::string& init_descname,
-					  const std::string& init_sortname,
-					  const std::string& init_fontname) :
-		localename(init_localename),
-		descname(init_descname),
-		sortname(init_sortname),
-		fontname(init_fontname) {}
-
-	bool operator<(const LanguageEntry& other) const {
-		return sortname < other.sortname;
-	}
-
-	std::string localename;
-	std::string descname;
-	std::string sortname;
-	std::string fontname;
-};
 
 class OptionsCtrl {
 public:
@@ -156,7 +137,6 @@ private:
 	UI::Textarea                m_label_autosave;
 	UI::SpinBox                 m_sb_remove_replays;
 	UI::Textarea                m_label_remove_replays;
-	std::vector<LanguageEntry*> m_entries;
 
 	OptionsCtrl::OptionsStruct  os;
 
