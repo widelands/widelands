@@ -78,7 +78,7 @@ ProductionSiteWindow::ProductionSiteWindow
 		m_worker_table = new UI::Table<uintptr_t>(worker_box, 0, 0, 0, 100);
 		m_worker_caps = new UI::Box(worker_box, 0, 0, UI::Box::Horizontal);
 
-		m_worker_table->add_column(150, (ngettext
+		m_worker_table->add_column(210, (ngettext
 			("Worker", "Workers", productionsite().descr().nr_working_positions())
 		));
 		m_worker_table->add_column(60, _("Exp"));
@@ -185,8 +185,8 @@ void ProductionSiteWindow::update_worker_table()
 						(worker->descr().becomes())->descname());
 			} else {
 				// Worker is not upgradeable
-				er.set_string(1, "---");
-				er.set_string(2, "---");
+				er.set_string(1, "—");
+				er.set_string(2, "—");
 			}
 		} else if (request) {
 			const Widelands::WorkerDescr * desc =
