@@ -399,8 +399,8 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 
 bool EditBox::handle_textinput(const char * ntext) {
 	const std::string help(ntext);
-	if ((m->text.size() +  help.length() ) < m->maxLength) {
-		m->text.insert( m->caret, help);
+	if ((m->text.size() +  help.length()) < m->maxLength) {
+		m->text.insert(m->caret, help);
 		m->caret += help.length();
 		check_caret();
 		changed();
