@@ -796,6 +796,7 @@ UI::FontSet WLApplication::parse_font_for_locale(const std::string& localename) 
 	std::string filename;
 
 	// Find out which fontset to use from the locale
+	// Locale identifiers can look like this: ca_ES@valencia.UTF-8
 	try  {
 		if (localename.empty()) {
 			std::vector<std::string> parts;
@@ -805,11 +806,18 @@ UI::FontSet WLApplication::parse_font_for_locale(const std::string& localename) 
 			if (g_fs->file_exists(filename.c_str())) {
 				ln = new Profile(filename.c_str());
 			} else {
-				boost::split(parts, parts[0], boost::is_any_of("_"));
+				boost::split(parts, parts[0], boost::is_any_of("@"));
 				filename = (boost::format("txts/localedata/%s.conf") % parts[0]).str();
 
 				if (g_fs->file_exists(filename.c_str())) {
 					ln = new Profile(filename.c_str());
+				} else {
+					boost::split(parts, parts[0], boost::is_any_of("_"));
+					filename = (boost::format("txts/localedata/%s.conf") % parts[0]).str();
+
+					if (g_fs->file_exists(filename.c_str())) {
+						ln = new Profile(filename.c_str());
+					}
 				}
 			}
 		} else {

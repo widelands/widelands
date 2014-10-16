@@ -22,7 +22,7 @@
 #include <cstdio>
 #include <iostream>
 
-#include <boost/algorithm/string/predicate.hpp>
+#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -380,10 +380,9 @@ void FullscreenMenuOptions::advanced_options() {
 
 void FullscreenMenuOptions::add_languages_to_list(const std::string& current_locale) {
 
-	m_language_list.add(_("Try system language"), "", nullptr, "" == current_locale);
-	m_language_list.add(_("English"), "en", nullptr, "" == current_locale);
+	m_language_list.add(_("Try system language"), "", nullptr, current_locale == "");
+	m_language_list.add(_("English"), "en", nullptr, current_locale == "en");
 
-	bool own_selected = "" == current_locale || "en" == current_locale;
 	Section* s = &g_options.pull_section("global");
 	FilenameSet files = g_fs->list_directory(s->get_string("localedir", INSTALL_LOCALEDIR));
 
@@ -393,6 +392,8 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 	std::string name;
 	std::string sortname;
 	UI::FontSet fontset;
+	std::string selected_locale;
+
 	for (const std::string& filename : files) {
 		char const* const path = filename.c_str();
 		if (!strcmp(FileSystem::fs_filename(path), ".") ||
@@ -409,7 +410,9 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 			fontset = WLApplication::get()->parse_font_for_locale(localename);
 
 			entries.push_back(LanguageEntry(localename, name, sortname, fontset.serif()));
-			own_selected |= localename == current_locale;
+			if (localename == current_locale) {
+				selected_locale = current_locale;
+			}
 
 		} catch (const WException&) {
 			log("Could not read locale for: %s\n", localename.c_str());
@@ -419,9 +422,28 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 
 	std::sort(entries.begin(), entries.end());
 
+	// Locale identifiers can look like this: ca_ES@valencia.UTF-8
+	if (selected_locale.empty()) {
+		std::vector<std::string> parts;
+		boost::split(parts, current_locale, boost::is_any_of("."));
+		if (current_locale  == parts[0]) {
+			selected_locale = current_locale;
+		} else {
+			boost::split(parts, parts[0], boost::is_any_of("@"));
+			if (current_locale  == parts[0]) {
+				selected_locale = current_locale;
+			} else {
+				boost::split(parts, parts[0], boost::is_any_of("_"));
+				if (current_locale  == parts[0]) {
+					selected_locale = current_locale;
+				}
+			}
+		}
+	}
+
 	for (const LanguageEntry& entry : entries) {
 		m_language_list.add(entry.descname.c_str(), entry.localename, nullptr,
-									entry.localename == current_locale);
+									entry.localename == selected_locale);
 	}
 }
 
