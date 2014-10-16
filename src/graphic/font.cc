@@ -240,14 +240,10 @@ Font * Font::ui_ultrasmall()
 const TextStyle & TextStyle::ui_big()
 {
 	static TextStyle style;
-	static bool init = false;
 
-	if (!init) {
-		style.font = Font::ui_big();
-		style.fg = UI_FONT_CLR_FG;
-		style.bold = true;
-		init = true;
-	}
+	style.font = Font::ui_big();
+	style.fg = UI_FONT_CLR_FG;
+	style.bold = true;
 
 	return style;
 }
@@ -255,14 +251,10 @@ const TextStyle & TextStyle::ui_big()
 const TextStyle & TextStyle::ui_small()
 {
 	static TextStyle style;
-	static bool init = false;
 
-	if (!init) {
-		style.font = Font::ui_small();
-		style.fg = UI_FONT_CLR_FG;
-		style.bold = true;
-		init = true;
-	}
+	style.font = Font::ui_small();
+	style.fg = UI_FONT_CLR_FG;
+	style.bold = true;
 
 	return style;
 }
@@ -270,14 +262,10 @@ const TextStyle & TextStyle::ui_small()
 const TextStyle & TextStyle::ui_ultrasmall()
 {
 	static TextStyle style;
-	static bool init = false;
 
-	if (!init) {
-		style.font = Font::ui_ultrasmall();
-		style.fg = UI_FONT_CLR_FG;
-		style.bold = true;
-		init = true;
-	}
+	style.font = Font::ui_ultrasmall();
+	style.fg = UI_FONT_CLR_FG;
+	style.bold = true;
 
 	return style;
 }
