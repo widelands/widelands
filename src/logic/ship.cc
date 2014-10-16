@@ -907,9 +907,9 @@ void Ship::send_message
 	if (picture.size() > 3) {
 		rt_description  = "<rt image=pics/";
 		rt_description += picture;
-		rt_description += "><p font-size=14 font-face=DejaVuSerif>";
+		rt_description += "><p font-size=14 font-face=serif>";
 	} else
-		rt_description  = "<rt><p font-size=14 font-face=DejaVuSerif>";
+		rt_description  = "<rt><p font-size=14 font-face=serif>";
 	rt_description += description;
 	rt_description += "</p></rt>";
 

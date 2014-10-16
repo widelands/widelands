@@ -894,7 +894,7 @@ void Building::send_message
 	std::string rt_description;
 	rt_description.reserve
 		(strlen("<rt image=") + img.size() + 1 +
-		 strlen("<p font-size=14 font-face=DejaVuSerif></p>") +
+		 strlen("<p font-size=14 font-face=serif></p>") +
 		 description.size() +
 		 strlen("</rt>"));
 	rt_description  = "<rt image=";
@@ -905,7 +905,7 @@ void Building::send_message
 		for (;                                 *it == '?'; --it)
 			*it = '0';
 	}
-	rt_description += "><p font-size=14 font-face=DejaVuSerif>";
+	rt_description += "><p font-size=14 font-face=serif>";
 	rt_description += description;
 	rt_description += "</p></rt>";
 

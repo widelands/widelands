@@ -71,7 +71,7 @@ enum UNIT {
 };
 
 string ytick_text_style(const string& text, const RGBColor& clr) {
-	static format f("<rt><p><font face=DejaVuSansCondensed size=13 color=%02x%02x%02x>%s</font></p></rt>");
+	static format f("<rt><p><font face=condensed size=13 color=%02x%02x%02x>%s</font></p></rt>");
 	f % int(clr.r) % int(clr.g) % int(clr.b);
 	f % text;
 	return f.str();

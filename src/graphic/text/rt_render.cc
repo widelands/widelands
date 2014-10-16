@@ -28,6 +28,7 @@
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 
+#include "base/log.h" // NOCOM
 #include "base/point.h"
 #include "base/rect.h"
 #include "graphic/image_cache.h"
@@ -587,20 +588,54 @@ private:
 };
 
 IFont& FontCache::get_font(NodeStyle& ns) {
-	if (ns.font_style & IFont::BOLD) {
-		ns.font_face += "Bold";
-		ns.font_style &= ~IFont::BOLD;
+	UI::FontSet fontset = WLApplication::get()->get_fontset();
+
+	if (ns.font_face == fontset.serif_bold() ||
+		 ns.font_face == fontset.serif_italic() ||
+		 ns.font_face == fontset.sans_bold() ||
+		 ns.font_face == fontset.sans_italic() ||
+		 ns.font_face == fontset.condensed_bold() ||
+		 ns.font_face == fontset.condensed_italic()) {
+		; // Font face has already been processed with its properties
+	} else if (ns.font_face == fontset.condensed()) {
+		if (ns.font_style & IFont::BOLD) {
+			ns.font_face = fontset.condensed_bold();
+			ns.font_style &= ~IFont::BOLD;
+		} else if (ns.font_style & IFont::ITALIC) {
+			ns.font_face = fontset.condensed_italic();
+			ns.font_style &= ~IFont::ITALIC;
+		} else {
+			ns.font_face = fontset.condensed();
+		}
+	} else if (ns.font_face == fontset.serif()) {
+		if (ns.font_style & IFont::BOLD) {
+			ns.font_face = fontset.serif_bold();
+			ns.font_style &= ~IFont::BOLD;
+		} else if (ns.font_style & IFont::ITALIC) {
+			ns.font_face = fontset.serif_italic();
+			ns.font_style &= ~IFont::ITALIC;
+		} else {
+			ns.font_face = fontset.serif();
+		}
 	}
-	if (ns.font_style & IFont::ITALIC) {
-		ns.font_face += "Italic";
-		ns.font_style &= ~IFont::ITALIC;
+	else {
+		if (ns.font_style & IFont::BOLD) {
+			ns.font_face = fontset.sans_bold();
+			ns.font_style &= ~IFont::BOLD;
+		} else if (ns.font_style & IFont::ITALIC) {
+			ns.font_face = fontset.sans_italic();
+			ns.font_style &= ~IFont::ITALIC;
+		} else {
+			ns.font_face = fontset.sans();
+		}
 	}
+
 	FontDescr fd = {ns.font_face, ns.font_size};
 	FontMap::iterator i = m_fontmap.find(fd);
 	if (i != m_fontmap.end())
 		return *i->second;
 
-	IFont* font = load_font(ns.font_face + ".ttf", ns.font_size);
+	IFont* font = load_font(ns.font_face, ns.font_size);
 	m_fontmap[fd] = font;
 	return *font;
 }
@@ -958,7 +993,7 @@ RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& 
 	std::unique_ptr<Tag> rt(parser_->parse(text, allowed_tags));
 
 	NodeStyle default_style = {
-		(WLApplication::get()->get_fontset()).serif_name(), 16,
+		(WLApplication::get()->get_fontset()).serif(), 16,
 		RGBColor(0, 0, 0), IFont::DEFAULT, 0, HALIGN_LEFT, VALIGN_BOTTOM,
 		""
 	};

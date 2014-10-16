@@ -54,19 +54,34 @@ public:
 	};
 
 	FontSet(const std::string& serif_ = "DejaVuSerif.ttf",
-			  const std::string& serif_name_ = "DejaVuSerif",
+			  const std::string& serif_bold_ = "DejaVuSerifBold.ttf",
+			  const std::string& serif_italic_ = "DejaVuSerifItalic.ttf",
 			  const std::string& sans_ = "DejaVuSans.ttf",
-			  const std::string& sans_name_ = "DejaVuSans",
+			  const std::string& sans_bold_ = "DejaVuSansBold.ttf",
+			  const std::string& sans_italic_ = "DejaVuSansItalic.ttf",
+			  const std::string& condensed_ = "DejaVuSansCondensed.ttf",
+			  const std::string& condensed_bold_ = "DejaVuSansCondensedBold.ttf",
+			  const std::string& condensed_italic_ = "DejaVuSansCondensedItalic.ttf",
 			  const std::string& direction_ = "ltr") :
 		m_serif(serif_),
-		m_serif_name(serif_name_),
+		m_serif_bold(serif_bold_),
+		m_serif_italic(serif_italic_),
 		m_sans(sans_),
-		m_sans_name(sans_name_) {
+		m_sans_bold(sans_bold_),
+		m_sans_italic(sans_italic_),
+		m_condensed(condensed_),
+		m_condensed_bold(condensed_bold_),
+		m_condensed_italic(condensed_italic_) {
 
 		assert(!m_serif.empty());
-		assert(!m_serif_name.empty());
+		assert(!m_serif_bold.empty());
+		assert(!m_serif_italic.empty());
 		assert(!m_sans.empty());
-		assert(!m_sans_name.empty());
+		assert(!m_sans_bold.empty());
+		assert(!m_sans_italic.empty());
+		assert(!m_condensed.empty());
+		assert(!m_condensed_bold.empty());
+		assert(!m_condensed_italic.empty());
 
 		if(direction_ == "rtl") {
 			m_direction = FontSet::Direction::kRightToLeft;
@@ -76,16 +91,26 @@ public:
 	}
 
 	const std::string& serif() const {return m_serif;}
-	const std::string& serif_name() const {return m_serif_name;}
+	const std::string& serif_bold() const {return m_serif_bold;}
+	const std::string& serif_italic() const {return m_serif_italic;}
 	const std::string& sans() const {return m_sans;}
-	const std::string& sans_name() const {return m_sans_name;}
+	const std::string& sans_bold() const {return m_sans_bold;}
+	const std::string& sans_italic() const {return m_sans_italic;}
+	const std::string& condensed() const {return m_condensed;}
+	const std::string& condensed_bold() const {return m_condensed_bold;}
+	const std::string& condensed_italic() const {return m_condensed_italic;}
 	FontSet::Direction direction() {return m_direction;}
 
 private:
 	std::string m_serif;
-	std::string m_serif_name;
+	std::string m_serif_bold;
+	std::string m_serif_italic;
 	std::string m_sans;
-	std::string m_sans_name;
+	std::string m_sans_bold;
+	std::string m_sans_italic;
+	std::string m_condensed;
+	std::string m_condensed_bold;
+	std::string m_condensed_italic;
 	FontSet::Direction m_direction;
 };
 

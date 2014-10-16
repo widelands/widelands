@@ -37,7 +37,7 @@ function speech(img, clr, g_title, g_text)
 
    local s = ""
    if title then
-      s = rt("<p font-size=20 font-weight=bold font-face=DejaVuSerif " ..
+      s = rt("<p font-size=20 font-weight=bold font-face=serif " ..
          ("font-color=%s>"):format(clr) .. title ..
          "</p><p font-size=8> <br></p>"
       )
@@ -125,7 +125,7 @@ function new_objectives(...)
    local s = ""
    for idx,obj in ipairs{...} do
    	s = rt("<p font-size=10> <br></p>" ..
-	   "<p font=DejaVuSerif font-size=18 font-weight=bold font-color=D1D1D1>"
+	   "<p font=serif font-size=18 font-weight=bold font-color=D1D1D1>"
 	   .. ngettext("New Objective", "New Objectives", obj.number) .. "</p>")
 	   .. obj.body
    end

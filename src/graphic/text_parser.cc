@@ -53,7 +53,7 @@ TextBlock::TextBlock() {
 	m_font_weight = "normal";
 	m_font_style = "normal";
 	m_font_decoration = "none";
-	m_font_face = "DejaVuSans.ttf";
+	m_font_face = (WLApplication::get()->get_fontset()).sans();
 	m_line_spacing = 0;
 }
 
@@ -254,9 +254,9 @@ void TextParser::parse_text_attributes
 
 	while (format.size()) {
 		std::string::size_type const key_end = format.find('=');
-		if (key_end == std::string::npos)
+		if (key_end == std::string::npos) {
 			return;
-		else {
+		} else {
 			std::string key = format.substr(0, key_end);
 			format.erase(0, key_end + 1);
 			std::string::size_type val_end = format.find(' ');
@@ -266,11 +266,19 @@ void TextParser::parse_text_attributes
 			format.erase(0, val_end + 1);
 			if (key == "font-size") {
 				element.set_font_size(atoi(val.c_str()));
-			} else if (key == "font-face")
-				element.set_font_face(val + ".ttf");
-			else if (key == "line-spacing")
+			} else if (key == "font-face") {
+				UI::FontSet fontset = WLApplication::get()->get_fontset();
+				if (val == fontset.condensed() || val == "condensed") {
+					val = fontset.condensed();
+				} else if (val == fontset.sans() || val == "serif") {
+					val = fontset.serif();
+				} else {
+					val= fontset.sans();
+				}
+				element.set_font_style(val);
+			} else if (key == "line-spacing") {
 				element.set_line_spacing(atoi(val.c_str()));
-			else if (key == "font-color") {
+			} else if (key == "font-color") {
 				std::string::size_type const offset = val[0] == '#';
 				std::string const r = "0x" + val.substr(offset,     2);
 				std::string const g = "0x" + val.substr(offset + 2, 2);
@@ -281,12 +289,13 @@ void TextParser::parse_text_attributes
 				long int const green = strtol(g.c_str(), &ptr, 0);
 				long int const blue  = strtol(b.c_str(), &ptr, 0);
 				element.set_font_color(RGBColor(red, green, blue));
-			} else if (key == "font-weight")
+			} else if (key == "font-weight") {
 				element.set_font_weight(val);
-			else if (key == "font-style")
+			} else if (key == "font-style") {
 				element.set_font_style(val);
-			else if (key == "font-decoration")
+			} else if (key == "font-decoration") {
 				element.set_font_decoration(val);
+			}
 		}
 	}
 }

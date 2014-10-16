@@ -318,7 +318,7 @@ class TestRealWorldExample2(_TestLua_GetText_SingleFile):
     code = """
 -- Khantruth's texts
 -- Khantruth"s texts
-khantrukh_1="<rt><p font-size=24 font-face=DejaVuSerif font-weight=bold font-color=8080FF>" ..
+khantrukh_1="<rt><p font-size=24 font-face=serif font-weight=bold font-color=8080FF>" ..
 _"An old man says..." ..
 "</p></rt><rt image=map:khantrukh.png><p line-spacing=3 font-size=12>" ..
 _[[ "Hail, chieftain. I am Khantrukh and have seen many winters pass. Please allow me to aid you with my counsel through these darkened days." ]] ..

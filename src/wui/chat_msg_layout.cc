@@ -89,7 +89,7 @@ std::string format_as_old_richtext(const ChatMessage& chat_message) {
 	strftime(ts, sizeof(ts), "[%H:%M] </p>", localtime(&chat_message.time));
 	message += ts;
 
-	message += "<p font-size=14 font-face=DejaVuSerif font-color=#";
+	message += "<p font-size=14 font-face=serif font-color=#";
 	message += color(chat_message.playern);
 
 	if (chat_message.recipient.size() && chat_message.sender.size()) {
@@ -99,13 +99,13 @@ std::string format_as_old_richtext(const ChatMessage& chat_message) {
 			message += chat_message.sender;
 			message += " @ ";
 			message += chat_message.recipient;
-			message += ":</p><p font-size=14 font-face=DejaVuSerif> ";
+			message += ":</p><p font-size=14 font-face=serif> ";
 			message += sanitized;
 		} else {
 			message += ">@";
 			message += chat_message.recipient;
 			message += " >> </p><p font-size=14";
-			message += " font-face=DejaVuSerif font-color=#";
+			message += " font-face=serif font-color=#";
 			message += color(chat_message.playern);
 			message += " font-style=italic> ";
 			message += chat_message.sender;
@@ -123,7 +123,7 @@ std::string format_as_old_richtext(const ChatMessage& chat_message) {
 		} else if (chat_message.sender.size()) {
 			message += " font-decoration=underline>";
 			message += chat_message.sender;
-			message += ":</p><p font-size=14 font-face=DejaVuSerif> ";
+			message += ":</p><p font-size=14 font-face=serif> ";
 			message += sanitized;
 		} else {
 			message += " font-weight=bold>*** ";
@@ -186,7 +186,7 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 	strftime(ts, sizeof(ts), "[%H:%M] ", localtime(&chat_message.time));
 	message += ts;
 
-	message += "</font><font size=14 face=DejaVuSerif color=";
+	message += "</font><font size=14 face=serif color=";
 	message += color(chat_message.playern);
 
 	if (chat_message.recipient.size() && chat_message.sender.size()) {
@@ -196,13 +196,13 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 			message += chat_message.sender;
 			message += " @ ";
 			message += chat_message.recipient;
-			message += ":</font><font size=14 face=DejaVuSerif shadow=1 color=eeeeee> ";
+			message += ":</font><font size=14 face=serif shadow=1 color=eeeeee> ";
 			message += sanitized;
 		} else {
 			message += ">@";
 			message += chat_message.recipient;
 			message += " \\> </font><font size=14";
-			message += " face=DejaVuSerif color=";
+			message += " face=serif color=";
 			message += color(chat_message.playern);
 			message += " italic=1 shadow=1> ";
 			message += chat_message.sender;
@@ -220,7 +220,7 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 		} else if (chat_message.sender.size()) {
 			message += " bold=1>";
 			message += chat_message.sender;
-			message += ":</font><font size=14 face=DejaVuSerif shadow=1 color=eeeeee> ";
+			message += ":</font><font size=14 face=serif shadow=1 color=eeeeee> ";
 			message += sanitized;
 		} else {
 			message += " bold=1>*** ";
