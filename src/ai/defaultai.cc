@@ -105,7 +105,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
      military_last_dismantle_(0),
      military_last_build_(-60 * 1000),
 	last_attack_target_(
-		std::numeric_limits<uint16_t>::max(), std::numeric_limits<uint16_t>::max()),
+			std::numeric_limits<uint16_t>::max(), std::numeric_limits<uint16_t>::max()),
      next_attack_waittime_(10),
      spots_(0) {
 
@@ -1315,7 +1315,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 						}
 
 						// sometimes all area is blocked by trees so this is to prevent this
-						if (buildable_fields.size() < 4) {
+						if (buildable_fields.size() < 4 && bo.total_count() > 0) {
 							continue;
 						}
 
@@ -1332,7 +1332,8 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 							continue;
 						}
 						// we can go above target if there is shortage of logs on stock
-						else if (bo.total_count() >= bo.cnt_target_ && bo.stocklevel_ > 40) {
+						else if (bo.total_count() >= bo.cnt_target_ &&
+						         bo.stocklevel_ > 40 + productionsites.size() * 5) {
 							continue;
 						}
 
@@ -1500,7 +1501,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 				}  // it is ok, go on
 				else if (bf->unowned_land_nearby_ && bo.expansion_type_ &&
 				         num_milit_constructionsites <= 1) {
-					{;}  // we allow big buildings now
+					;  // we allow big buildings now
 				} else if (bf->unowned_land_nearby_ &&
 				           bo.expansion_type_) {  // decreasing probability for big buidlings
 					if (bo.desc->get_size() == 2 && gametime % 15 >= 1) {
@@ -1542,12 +1543,17 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 
 				// we need to prefer military building near to borders
 				// with enemy
-				if (bf->enemy_nearby_ && bf->military_capacity_ < 14) {
-					prio += 50 + (12 - bf->military_capacity_) * 20;
+				// Note: if we dont have enough mines, we cannot afford
+				// full-power defense (we need to preserve material and soldiers
+				// for expansion)
+				const int16_t bottom_treshold =
+				   15 - ((virtual_mines <= 4) ? (5 - virtual_mines) * 2 : 0);
+				if (bf->enemy_nearby_ && bf->military_capacity_ < bottom_treshold) {
+					prio += 50 + (bottom_treshold - bf->military_capacity_) * 20;
 				}
 
-				if (bf->enemy_nearby_ && bf->military_capacity_ > 18) {
-					prio -= (bf->military_capacity_ - 18) * 5;
+				if (bf->enemy_nearby_ && bf->military_capacity_ > bottom_treshold + 4) {
+					prio -= (bf->military_capacity_ - (bottom_treshold + 4)) * 5;
 				}
 
 			} else if (bo.type == BuildingObserver::WAREHOUSE) {
@@ -2500,7 +2506,9 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 			site.bo->stocklevel_time = game().get_gametime();
 		}
 
-		uint16_t score = site.bo->stocklevel_;
+		// logs can be stored also in productionsites, they are counted as on stock
+		// but are no available for random production site
+		int16_t score = site.bo->stocklevel_ - productionsites.size() * 5;
 
 		if (score > 200 && site.bo->cnt_built_ > site.bo->cnt_target_) {
 
@@ -2784,25 +2792,11 @@ bool DefaultAI::check_militarysites(int32_t gametime) {
 		}
 	} else {
 
-		// If an enemy is in sight we consider unstationed buildings
-		// nearby
 		uint32_t const total_capacity = ms->max_soldier_capacity();
 		uint32_t const target_capacity = ms->soldier_capacity();
 
-		// treat this field like a buildable and write military info to it.
-		BuildableField bf(f);
-		update_buildable_field(bf, vision, true);
-
-		if (bf.military_unstationed_ > 0 && bf.military_presence_ > 2 && target_capacity > 1) {
-			// decrease current capacity hoping freed soldier will
-			// come to empty building
-			game().send_player_change_soldier_capacity(*ms, -1);
-			changed = true;
-		} else if (bf.military_unstationed_ == 0 && total_capacity > target_capacity) {
-			// otherwise increase to maximum
-			game().send_player_change_soldier_capacity(*ms, total_capacity - target_capacity);
-			changed = true;
-		}
+		game().send_player_change_soldier_capacity(*ms, total_capacity - target_capacity);
+		changed = true;
 
 		// and also set preference to Heroes
 		if (MilitarySite::kPrefersHeroes != ms->get_soldier_preference()) {
@@ -3211,6 +3205,28 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 
 	// receiving games statistics and parsing it (reading latest entry)
 	const Game::GeneralStatsVector& genstats = game().get_general_statistics();
+
+	// first we try to prevent exhaustion of military forces (soldiers)
+	// via excessive attacking,
+	// before building an economy with mines
+	int32_t needed_margin = (mines_.size() < 6) ?
+	                           (6 - mines_.size()) * 3 :
+	                           0 + 2 + (type_ == NORMAL) ? 4 : 0 + (type_ == DEFENSIVE) ? 8 : 0;
+	const int32_t current_margin =
+	   genstats[pn - 1].miltary_strength.back() - militarysites.size() - num_milit_constructionsites;
+
+	// if (needed_margin > current_margin)
+	// printf (" %1d: Needed margin: %2d, current margin: %2d\n",
+	// player_number(),needed_margin,current_margin);
+
+	if (current_margin < needed_margin) {  // no attacking!
+		last_attack_target_.x = std::numeric_limits<uint16_t>::max();
+		last_attack_target_.y = std::numeric_limits<uint16_t>::max();
+		next_attack_consideration_due_ = next_attack_waittime_ * 1000 + gametime;
+		return false;
+	}
+
+	// now we test all players which one are 'attackable'
 	for (uint8_t j = 1; j <= plr_in_game; ++j) {
 		if (pn == j) {
 			player_attackable[j - 1] = false;
@@ -3261,7 +3277,7 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 
 		// get list of immovable around this our military site
 		std::vector<ImmovableFound> immovables;
-		map.find_immovables(Area<FCoords>(f, vision + 1), &immovables, FindImmovableAttackable());
+		map.find_immovables(Area<FCoords>(f, vision + 2), &immovables, FindImmovableAttackable());
 
 		for (uint32_t j = 0; j < immovables.size(); ++j) {
 
@@ -3356,8 +3372,8 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 		// attacking with defenders + 4 soldiers
 		int32_t attackers = player_->find_attack_soldiers(best_ms_target->base_flag());
 		const int32_t defenders = best_ms_target->present_soldiers().size();
-		if (attackers > defenders + 10) { //we need to leave meaningful count of soldiers
-			//for next attack
+		if (attackers > defenders + 10) {  // we need to leave meaningful count of soldiers
+			// for next attack
 			attackers = defenders + 6;
 		}
 
