@@ -54,16 +54,16 @@ void show_usage(const std::string& build_id, const std::string& build_type)
 		<< _("                      Default is ~/.widelands") << endl
 #endif
 		<< endl
-			/** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but "*/
-			/** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain "*/
+			/** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
+			/** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain */
 		<< _(" --coredump=[true|false]\n"
 			  "                      Generates a core dump on segfaults instead of\n"
 			  "                      using the SDL") << endl
 		<< _(" --language=[de_DE|sv_SE|...]\n"
 			  "                      The locale to use.") << endl
 		<< _(" --localedir=DIRNAME  Use DIRNAME as location for the locale") << endl
-			/** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but "*/
-			/** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain "*/
+			/** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
+			/** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain */
 		<< _(" --remove_syncstreams=[true|false]\n"
 			  "                      Remove syncstream files on startup") << endl
 		<< _(" --remove_replays=[...]\n"
@@ -84,22 +84,22 @@ void show_usage(const std::string& build_id, const std::string& build_type)
 		<< _(" --script=FILENAME    Run the given Lua script after initialization.\n"
 			  "                      Only valid with --scenario, --loadgame, or --editor.") << endl
 		<< _(" --dedicated=FILENAME Starts a dedicated server with FILENAME as map") << endl
-			/** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but "*/
-			/** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain "*/
+			/** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
+			/** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain */
 		<< _(" --auto_roadbuild_mode=[true|false]\n"
 			  "                      Whether to enter roadbuilding mode\n"
 			  "                      automatically after placing a flag that is\n"
 			  "                      not connected to a road.") << endl << endl
 		<< _("Graphic options:") << endl
-			/** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but "*/
-			/** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain "*/
+			/** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
+			/** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain */
 		<< _(" --fullscreen=[true|false]\n"
 			  "                      Whether to use the whole display for the\n"
 			  "                      game screen.") << endl
 		<< _(" --xres=[...]         Width of the window in pixel.") << endl
 		<< _(" --yres=[...]         Height of the window in pixel.") << endl
-			/** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but "*/
-			/** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain "*/
+			/** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
+			/** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain */
 		<< _(" --opengl=[true|false]\n"
 			  "                      Enables OpenGL rendering") << endl << endl
 		<< _("Options for the internal window manager:") << endl
@@ -107,8 +107,8 @@ void show_usage(const std::string& build_id, const std::string& build_type)
 			  "                      Move a window to the edge of the screen\n"
 			  "                      when the edge of the window comes within\n"
 			  "                      this distance from the edge of the screen.") << endl
-			/** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but "*/
-			/** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain "*/
+			/** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
+			/** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain */
 		<< _(" --dock_windows_to_edges=[true|false]\n"
 			  "                      Eliminate a window's border towards the\n"
 			  "                      edge of the screen when the edge of the\n"
