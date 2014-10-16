@@ -848,16 +848,19 @@ UI::FontSet WLApplication::parse_font_for_locale(const std::string& localename) 
 			std::string serif = s.get_safe_string("serif");
 			std::string serif_bold = s.get_string("serif_bold", serif.c_str());
 			std::string serif_italic = s.get_string("serif_italic", serif.c_str());
+			std::string serif_bold_italic = s.get_string("serif_bold_italic", serif_bold.c_str());
 			std::string sans = s.get_safe_string("sans");
 			std::string sans_bold = s.get_string("sans_bold", sans.c_str());
 			std::string sans_italic = s.get_string("sans_italic", sans.c_str());
+			std::string sans_bold_italic = s.get_string("sans_bold_italic", sans_bold.c_str());
 			std::string condensed = s.get_string("condensed", sans.c_str());
 			std::string condensed_bold = s.get_string("condensed", condensed.c_str());
 			std::string condensed_italic = s.get_string("condensed", condensed.c_str());
+			std::string condensed_bold_italic = s.get_string("condensed_bold_italic", condensed_bold.c_str());
 
-			fontset = new UI::FontSet(serif, serif_bold, serif_italic,
-											  sans, sans_bold, sans_italic,
-											  condensed, condensed_bold, condensed_italic,
+			fontset = new UI::FontSet(serif, serif_bold, serif_italic, serif_bold_italic,
+											  sans, sans_bold, sans_italic, sans_bold_italic,
+											  condensed, condensed_bold, condensed_italic, condensed_bold_italic,
 											  s.get_string("dir", "ltr"));
 
 		} catch (const WException&) {

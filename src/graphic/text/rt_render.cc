@@ -590,45 +590,38 @@ private:
 IFont& FontCache::get_font(NodeStyle& ns) {
 	UI::FontSet fontset = WLApplication::get()->get_fontset();
 
-	if (ns.font_face == fontset.serif_bold() ||
-		 ns.font_face == fontset.sans_bold() ||
-		 ns.font_face == fontset.condensed_bold()) {
-		ns.font_style &= ~IFont::BOLD;
-	} else if (ns.font_face == fontset.serif_italic() ||
-				  ns.font_face == fontset.sans_italic() ||
-				  ns.font_face == fontset.condensed_italic()) {
+	if(ns.font_style & IFont::BOLD && ns.font_style & IFont::ITALIC) {
+		if (ns.font_face == fontset.condensed() ||
+			 ns.font_face == fontset.condensed_bold() ||
+			 ns.font_face == fontset.condensed_italic()) {
+			ns.font_face = fontset.condensed_bold_italic();
+		} else if (ns.font_face == fontset.serif() ||
+					  ns.font_face == fontset.serif_bold() ||
+					  ns.font_face == fontset.serif_italic()) {
+			ns.font_face = fontset.serif_bold_italic();
+		} else {
+			ns.font_face = fontset.sans_bold_italic();
+		}
 		ns.font_style &= ~IFont::ITALIC;
-	} else if (ns.font_face == fontset.condensed()) {
-		if (ns.font_style & IFont::BOLD) {
+		ns.font_style &= ~IFont::BOLD;
+	} else if (ns.font_style & IFont::BOLD) {
+		if (ns.font_face == fontset.condensed()) {
 			ns.font_face = fontset.condensed_bold();
-			ns.font_style &= ~IFont::BOLD;
-		} else if (ns.font_style & IFont::ITALIC) {
-			ns.font_face = fontset.condensed_italic();
-			ns.font_style &= ~IFont::ITALIC;
-		} else {
-			ns.font_face = fontset.condensed();
-		}
-	} else if (ns.font_face == fontset.serif()) {
-		if (ns.font_style & IFont::BOLD) {
+		} else if (ns.font_face == fontset.serif()) {
 			ns.font_face = fontset.serif_bold();
-			ns.font_style &= ~IFont::BOLD;
-		} else if (ns.font_style & IFont::ITALIC) {
-			ns.font_face = fontset.serif_italic();
-			ns.font_style &= ~IFont::ITALIC;
 		} else {
-			ns.font_face = fontset.serif();
-		}
-	}
-	else {
-		if (ns.font_style & IFont::BOLD) {
 			ns.font_face = fontset.sans_bold();
-			ns.font_style &= ~IFont::BOLD;
-		} else if (ns.font_style & IFont::ITALIC) {
-			ns.font_face = fontset.sans_italic();
-			ns.font_style &= ~IFont::ITALIC;
-		} else {
-			ns.font_face = fontset.sans();
 		}
+		ns.font_style &= ~IFont::BOLD;
+	} else if (ns.font_style & IFont::ITALIC) {
+		if (ns.font_face == fontset.condensed()) {
+			ns.font_face = fontset.condensed_italic();
+		} else if (ns.font_face == fontset.serif()) {
+			ns.font_face = fontset.serif_italic();
+		} else {
+			ns.font_face = fontset.sans_italic();
+		}
+		ns.font_style &= ~IFont::ITALIC;
 	}
 
 	FontDescr fd = {ns.font_face, ns.font_size};
