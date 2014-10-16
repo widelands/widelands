@@ -693,7 +693,6 @@ bool WLApplication::init_settings() {
 	s.get_string("lasthost");
 	s.get_string("servername");
 	s.get_string("realname");
-	s.get_string("ui_font");
 	s.get_string("metaserver");
 	s.get_natural("metaserverport");
 	// KLUDGE!
@@ -717,15 +716,17 @@ void WLApplication::init_language() {
 	// Set locale corresponding to selected language
 	std::string language = s.get_string("language", "");
 	i18n::set_locale(language);
-	s.set_string("ui_font", get_font_for_locale(language));
+	m_fontset =  parse_font_for_locale(language);
 }
 
-
-std::string WLApplication::get_font_for_locale(const std::string& localename) {
-	std::string ui_font = UI_FONT_NAME_DEFAULT;
+// Loads font info from config files, depending on the localename
+UI::FontSet WLApplication::parse_font_for_locale(const std::string& localename) {
+	std::string fontsetname;
+	UI::FontSet* fontset;
 	Profile* ln = nullptr;
 	std::string filename;
 
+	// Find out which fontset to use from the locale
 	try  {
 		if (localename.empty()) {
 			std::vector<std::string> parts;
@@ -757,13 +758,28 @@ std::string WLApplication::get_font_for_locale(const std::string& localename) {
 		// get font for locale
 		try  {
 				Section& s = ln->pull_section("locale");
-				ui_font = s.get_string("font", ui_font.c_str());
-				log("#gunchleoc: Font for locale %s is: %s\n", localename.c_str(), ui_font.c_str());
+				fontsetname = s.get_string("font", "default");
 		} catch (const WException&) {
 				log("Could not read locale: %s\n", localename.c_str());
 		}
 	}
-	return ui_font;
+	// Get the fontset information from conf
+	if(!fontsetname.empty()) {
+		try  {
+			ln = new Profile("fonts/fonts.conf");
+			Section& s = ln->pull_section(fontsetname.c_str());
+			fontset = new UI::FontSet(s.get_string("serif", UI_FONT_NAME_SERIF),
+												 s.get_string("sans", UI_FONT_NAME_SANS),
+											  s.get_string("dir", ""));
+
+		} catch (const WException&) {
+				log("Could not read font set: %s\n", fontsetname.c_str());
+				fontset = new UI::FontSet(UI_FONT_NAME_SERIF, UI_FONT_NAME_SANS, "");
+		}
+	} else {
+		fontset = new UI::FontSet(UI_FONT_NAME_SERIF, UI_FONT_NAME_SANS, "");
+	}
+	return *fontset;
 }
 
 

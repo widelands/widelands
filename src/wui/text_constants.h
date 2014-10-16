@@ -22,10 +22,11 @@
 
 // Basic constants for often used text attributes.
 
-#define UI_FONT_NAME_DEFAULT      "DejaVuSerif.ttf"
-#define UI_FONT_NAME_WIDELANDS    "Widelands/Widelands.ttf"
+#define UI_FONT_NAME_SERIF      "DejaVuSerif.ttf"
+#define UI_FONT_NAME_SANS       "DejaVuSans.ttf"
+#define UI_FONT_NAME_WIDELANDS  "Widelands/Widelands.ttf"
 
-#define UI_FONT_NAME            UI_FONT_NAME_DEFAULT
+#define UI_FONT_NAME            UI_FONT_NAME_SERIF
 #define UI_FONT_NAME_NO_EXT     "DejaVuSerif"
 #define UI_FONT_SIZE_BIG        22
 #define UI_FONT_SIZE_SMALL      14
@@ -36,7 +37,7 @@
 #define UI_FONT_ULTRASMALL      UI_FONT_NAME, UI_FONT_SIZE_ULTRASMALL
 
 #define UI_FONT_TOOLTIP         UI_FONT_SMALL
-#define PROSA_FONT              UI_FONT_NAME_DEFAULT, 18
+#define PROSA_FONT              UI_FONT_NAME_SERIF, 18
 
 /// Font colors
 

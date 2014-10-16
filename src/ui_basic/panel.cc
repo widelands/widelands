@@ -1232,11 +1232,12 @@ bool Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 }
 
 std::string Panel::ui_fn() {
+	UI::FontSet fontset = WLApplication::get()->get_fontset();
+
 	std::string style
-		(g_options.pull_section("global").get_string
-			("ui_font", UI_FONT_NAME_DEFAULT));
+		(fontset.serif());
 	if (style.empty() | (style == "serif"))
-		return UI_FONT_NAME_DEFAULT;
+		return UI_FONT_NAME_SERIF;
 	if (g_fs->file_exists("fonts/" + style))
 		return style;
 	log

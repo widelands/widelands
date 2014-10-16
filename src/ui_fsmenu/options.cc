@@ -392,7 +392,7 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 	std::string localename;
 	std::string name;
 	std::string sortname;
-	std::string fontname;
+	UI::FontSet fontset;
 	for (const std::string& filename : files) {
 		char const* const path = filename.c_str();
 		if (!strcmp(FileSystem::fs_filename(path), ".") ||
@@ -406,14 +406,14 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 			Section& localesection = ln.pull_section("locale");
 			name = localesection.get_safe_string("name");
 			sortname = localesection.get_string("sort_name", name.c_str());
-			fontname = localesection.get_string("font", UI_FONT_NAME_DEFAULT);
+			fontset = WLApplication::get()->parse_font_for_locale(localename);
 
-			entries.push_back(LanguageEntry(localename, name, sortname, fontname));
+			entries.push_back(LanguageEntry(localename, name, sortname, fontset.serif()));
 			own_selected |= localename == current_locale;
 
 		} catch (const WException&) {
 			log("Could not read locale for: %s\n", localename.c_str());
-			entries.push_back(LanguageEntry(localename, localename, localename, UI_FONT_NAME_DEFAULT));
+			entries.push_back(LanguageEntry(localename, localename, localename, UI_FONT_NAME_SERIF));
 		}
 	}
 
@@ -737,8 +737,7 @@ void OptionsCtrl::save_options() {
 
 	WLApplication::get()->set_input_grab(opt.inputgrab);
 	i18n::set_locale(opt.language);
+	WLApplication::get()->set_fontset(WLApplication::get()->parse_font_for_locale(opt.language));
 	g_sound_handler.set_disable_music(!opt.music);
 	g_sound_handler.set_disable_fx(!opt.fx);
-
-	m_opt_section.set_string("ui_font", WLApplication::get()->get_font_for_locale(opt.language));
 }

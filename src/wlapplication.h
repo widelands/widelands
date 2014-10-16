@@ -38,7 +38,44 @@
 #include "base/point.h"
 
 
-namespace Widelands {class Game;}
+namespace Widelands{class Game;}
+
+namespace UI
+{
+
+// Contains font information for a locale
+struct FontSet {
+public:
+	// Wiriting diection of a script
+	enum class Direction: uint8_t {
+		kLeftToRight,
+		kRightToLeft
+	};
+
+	FontSet() :	m_serif("DejaVuSerif.ttf"), m_sans("DejaVuSans.ttf") {}
+	FontSet(const std::string& serif_,
+			  const std::string& sans_,
+			  const std::string& direction_) :
+		m_serif(serif_),
+		m_sans(sans_) {
+		if(direction_ == "rtl") {
+			m_direction = FontSet::Direction::kRightToLeft;
+		} else {
+			m_direction = FontSet::Direction::kLeftToRight;
+		}
+	}
+
+	const std::string& serif() const {return m_serif;}
+	const std::string& sans() const {return m_sans;}
+	FontSet::Direction direction() {return m_direction;}
+
+private:
+	std::string m_serif;
+	std::string m_sans;
+	FontSet::Direction m_direction;
+};
+
+}
 
 ///Thrown if a commandline parameter is faulty
 struct ParameterError : public std::runtime_error {
@@ -184,7 +221,11 @@ struct WLApplication {
 	void replay();
 	static void emergency_save(Widelands::Game &);
 
-	std::string get_font_for_locale(const std::string& locale);
+	UI::FontSet parse_font_for_locale(const std::string& locale);
+	const UI::FontSet& get_fontset() const {return m_fontset;}
+	void set_fontset(UI::FontSet fontset) {
+		m_fontset = fontset;
+	}
 
 protected:
 	WLApplication(int argc, char const * const * argv);
@@ -259,6 +300,8 @@ private:
 	static WLApplication * the_singleton;
 
 	void _handle_mousebutton(SDL_Event &, InputCallback const *);
+
+	UI::FontSet m_fontset;
 
 };
 
