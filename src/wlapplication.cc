@@ -107,6 +107,61 @@ void terminate(int) {
 #endif
 }
 
+/**
+ * Returns the widelands executable path.
+ */
+std::string get_executable_directory()
+{
+	std::string executabledir;
+#ifdef __APPLE__
+	uint32_t buffersize = 0;
+	_NSGetExecutablePath(nullptr, &buffersize);
+	std::unique_ptr<char []> buffer(new char[buffersize]);
+	int32_t check = _NSGetExecutablePath(buffer.get(), &buffersize);
+	if (check != 0) {
+		throw wexception ("could not find the path of the main executable");
+	}
+	executabledir = std::string(buffer.get());
+	executabledir.resize(executabledir.rfind('/') + 1);
+#endif
+#ifdef __linux__
+	char buffer[PATH_MAX];
+	size_t size = readlink("/proc/self/exe", buffer, PATH_MAX);
+	if (size <= 0) {
+		throw wexception ("could not find the path of the main executable");
+	}
+	executabledir = std::string(buffer, size);
+	executabledir.resize(executabledir.rfind('/') + 1);
+#endif
+#ifdef _WIN32
+	char filename[_MAX_PATH + 1] = {0};
+	GetModuleFileName(nullptr, filename, MAX_PATH);
+	executabledir = filename;
+	executabledir = executabledir.substr(0, executabledir.rfind('\\'));
+#endif
+	log("Widelands executable directory: %s\n", executabledir.c_str());
+	return executabledir;
+}
+
+
+/**
+ * In case that the path is defined in a relative manner to the
+ * executable file.
+ *
+ * Track down the executable file and append the path.
+ */
+std::string relative_to_executable_to_absolute(const std::string& path)
+{
+#ifndef _WIN32
+	char buffer[PATH_MAX];
+	realpath((get_executable_directory() + path).c_str(), buffer);
+	log("full path: %s\n", buffer);
+	return std::string(buffer);
+#else
+	return path;
+#endif
+}
+
 }  // namespace
 
 void WLApplication::setup_homedir() {
@@ -199,8 +254,12 @@ m_redirected_stdio(false)
 	init_settings();
 
 	if (m_use_default_datadir) {
+		std::string install_prefix = INSTALL_PREFIX;
+		if (!PATHS_ARE_ABSOLUTE) {
+			install_prefix = relative_to_executable_to_absolute(install_prefix);
+		}
 		const std::string default_datadir =
-		   std::string(INSTALL_PREFIX) + "/" + std::string(INSTALL_DATADIR);
+		   install_prefix + "/" + std::string(INSTALL_DATADIR);
 		log("Adding directory: %s\n", default_datadir.c_str());
 		g_fs->add_file_system(&FileSystem::create(default_datadir));
 	}
@@ -709,8 +768,18 @@ void WLApplication::init_language() {
 
 	// Initialize locale and grab "widelands" textdomain
 	i18n::init_locale();
-	std::string localedir = s.get_string("localedir", INSTALL_LOCALEDIR);
-	i18n::set_localedir(find_relative_locale_path(localedir));
+
+	if (s.has_val("localedir")) {
+		// Localedir has been specified on the command line or in the config file.
+		i18n::set_localedir(s.get_safe_string("localedir"));
+	} else {
+		// Use default localedir, as configured at compile time.
+		std::string localedir = INSTALL_LOCALEDIR;
+		if (!PATHS_ARE_ABSOLUTE) {
+			localedir = relative_to_executable_to_absolute(localedir);
+		}
+		i18n::set_localedir(localedir);
+	}
 	i18n::grab_textdomain("widelands");
 
 	// Set locale corresponding to selected language
@@ -732,61 +801,6 @@ void WLApplication::shutdown_settings()
 	} catch (...)                      {
 		log("WARNING: could not save configuration");
 	}
-}
-
-/**
- * Returns the widelands executable path.
- */
-std::string WLApplication::get_executable_path()
-{
-	std::string executabledir;
-#ifdef __APPLE__
-	uint32_t buffersize = 0;
-	_NSGetExecutablePath(nullptr, &buffersize);
-	std::unique_ptr<char []> buffer(new char[buffersize]);
-	int32_t check = _NSGetExecutablePath(buffer.get(), &buffersize);
-	if (check != 0) {
-		throw wexception ("could not find the path of the main executable");
-	}
-	executabledir = std::string(buffer.get());
-	executabledir.resize(executabledir.rfind('/') + 1);
-#endif
-#ifdef __linux__
-	char buffer[PATH_MAX];
-	size_t size = readlink("/proc/self/exe", buffer, PATH_MAX);
-	if (size <= 0) {
-		throw wexception ("could not find the path of the main executable");
-	}
-	executabledir = std::string(buffer, size);
-	executabledir.resize(executabledir.rfind('/') + 1);
-#endif
-#ifdef _WIN32
-	char filename[_MAX_PATH + 1] = {0};
-	GetModuleFileName(nullptr, filename, MAX_PATH);
-	executabledir = filename;
-	executabledir = executabledir.substr(0, executabledir.rfind('\\'));
-#endif
-	log("Widelands executable directory: %s\n", executabledir.c_str());
-	return executabledir;
-}
-
-/**
- * In case that the localedir is defined in a relative manner to the
- * executable file.
- *
- * Track down the executable file and append the localedir.
- */
-std::string WLApplication::find_relative_locale_path(std::string localedir)
-{
-#ifndef _WIN32
-	if (localedir[0] != '/') {
-		std::string executabledir = get_executable_path();
-		executabledir+= localedir;
-		log ("localedir: %s\n", executabledir.c_str());
-		return executabledir;
-	}
-#endif
-	return localedir;
 }
 
 /**
