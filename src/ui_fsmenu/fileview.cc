@@ -29,6 +29,7 @@
 #include "profile/profile.h"
 #include "scripting/lua_table.h"
 #include "scripting/scripting.h"
+#include "wlapplication.h"
 #include "wui/text_constants.h"
 
 
@@ -88,7 +89,8 @@ FullscreenMenuTextView::FullscreenMenuTextView
 	title.set_pos
 		(Point((get_inner_w() - title.get_w()) / 2, get_h() * 167 / 1000));
 
-	textview.set_font(PROSA_FONT, PROSA_FONT_CLR_FG);
+	UI::FontSet fontset = WLApplication::get()->get_fontset();
+	textview.set_font(fontset.serif(), UI_FONT_SIZE_PROSA, PROSA_FONT_CLR_FG);
 }
 
 void FullscreenMenuTextView::set_text(const std::string & text)
@@ -123,7 +125,8 @@ FileViewWindow::FileViewWindow
 
 	textview.set_text(content);
 
-	textview.set_font(PROSA_FONT, PROSA_FONT_CLR_FG);
+	UI::FontSet fontset = WLApplication::get()->get_fontset();
+	textview.set_font(fontset.serif(), UI_FONT_SIZE_PROSA, PROSA_FONT_CLR_FG);
 
 	set_inner_size(560, 240);
 

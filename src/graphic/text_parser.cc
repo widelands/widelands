@@ -27,6 +27,7 @@
 #include "base/deprecated.h"
 #include "base/log.h"
 #include "helper.h"
+#include "wlapplication.h"
 
 namespace UI {
 

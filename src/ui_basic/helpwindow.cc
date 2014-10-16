@@ -35,6 +35,7 @@
 #include "scripting/scripting.h"
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
+#include "wlapplication.h"
 #include "wui/text_constants.h"
 
 
@@ -86,7 +87,8 @@ HelpWindow::HelpWindow
 		 g_gr->images().get("pics/but0.png"),
 		 _("OK"), std::string(), true, false);
 	btn->sigclicked.connect(boost::bind(&HelpWindow::pressed_ok, boost::ref(*this)));
-	btn->set_font(Font::get(UI_FONT_NAME, (fontsize < 12 ? 12 : fontsize)));
+	btn->set_font(Font::get((WLApplication::get()->get_fontset()).serif(),
+									(fontsize < 12 ? 12 : fontsize)));
 
 	textarea->set_size(in_width - 10, in_height - 10 - (2 * but_height));
 }

@@ -24,6 +24,7 @@
 #include "graphic/font_handler.h"
 #include "graphic/richtext.h"
 #include "graphic/wordwrap.h"
+#include "wlapplication.h"
 #include "wui/text_constants.h"
 
 namespace UI {
@@ -59,12 +60,13 @@ MultilineTextarea::MultilineTextarea
 
 	m_scrollbar.moved.connect(boost::bind(&MultilineTextarea::scrollpos_changed, this, _1));
 
-	m_scrollbar.set_singlestepsize(g_fh->get_fontheight(UI_FONT_SMALL));
-	m_scrollbar.set_pagesize(h - 2 * g_fh->get_fontheight(UI_FONT_BIG));
+	UI::FontSet fontset = WLApplication::get()->get_fontset();
+	m_scrollbar.set_singlestepsize(g_fh->get_fontheight(fontset.serif(), UI_FONT_SIZE_SMALL));
+	m_scrollbar.set_pagesize(h - 2 * g_fh->get_fontheight(fontset.serif(), UI_FONT_SIZE_BIG));
 	m_scrollbar.set_steps(1);
 	m_scrollbar.set_force_draw(always_show_scrollbar);
 
-	set_font(UI_FONT_SMALL, UI_FONT_CLR_FG);
+	set_font(fontset.serif(), UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG);
 
 	update(0, 0, get_eff_w(), get_h());
 }

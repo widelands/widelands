@@ -768,16 +768,18 @@ UI::FontSet WLApplication::parse_font_for_locale(const std::string& localename) 
 		try  {
 			ln = new Profile("fonts/fonts.conf");
 			Section& s = ln->pull_section(fontsetname.c_str());
-			fontset = new UI::FontSet(s.get_string("serif", UI_FONT_NAME_SERIF),
-												 s.get_string("sans", UI_FONT_NAME_SANS),
-											  s.get_string("dir", ""));
+			fontset = new UI::FontSet(s.get_safe_string("serif"),
+											  s.get_safe_string("serif_name"),
+											  s.get_safe_string("sans"),
+											  s.get_safe_string("sans_name"),
+											  s.get_string("dir", "ltr"));
 
 		} catch (const WException&) {
 				log("Could not read font set: %s\n", fontsetname.c_str());
-				fontset = new UI::FontSet(UI_FONT_NAME_SERIF, UI_FONT_NAME_SANS, "");
+				fontset = new UI::FontSet();
 		}
 	} else {
-		fontset = new UI::FontSet(UI_FONT_NAME_SERIF, UI_FONT_NAME_SANS, "");
+		fontset = new UI::FontSet();
 	}
 	return *fontset;
 }

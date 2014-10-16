@@ -165,7 +165,9 @@ void AttackBox::init() {
 	sprintf(buf, "%u / %u", max_attackers > 0 ? 1 : 0, max_attackers);
 
 	m_text_soldiers =
-		&add_text(columnbox, buf, UI::Box::AlignCenter, UI_FONT_ULTRASMALL);
+		&add_text(columnbox, buf, UI::Box::AlignCenter,
+					 (WLApplication::get()->get_fontset()).serif(),
+					 UI_FONT_SIZE_ULTRASMALL);
 
 	m_slider_soldiers =
 		&add_slider

@@ -36,7 +36,7 @@
 #include "graphic/text/font_io.h"
 #include "graphic/text/rt_parse.h"
 #include "graphic/text/textstream.h"
-
+#include "wlapplication.h"
 
 using namespace std;
 using namespace boost;
@@ -958,7 +958,7 @@ RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& 
 	std::unique_ptr<Tag> rt(parser_->parse(text, allowed_tags));
 
 	NodeStyle default_style = {
-		"DejaVuSerif", 16,
+		(WLApplication::get()->get_fontset()).serif_name(), 16,
 		RGBColor(0, 0, 0), IFont::DEFAULT, 0, HALIGN_LEFT, VALIGN_BOTTOM,
 		""
 	};

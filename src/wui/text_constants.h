@@ -22,33 +22,24 @@
 
 // Basic constants for often used text attributes.
 
-#define UI_FONT_NAME_SERIF      "DejaVuSerif.ttf"
-#define UI_FONT_NAME_SANS       "DejaVuSans.ttf"
-#define UI_FONT_NAME_WIDELANDS  "Widelands/Widelands.ttf"
-
-#define UI_FONT_NAME            UI_FONT_NAME_SERIF
-#define UI_FONT_NAME_NO_EXT     "DejaVuSerif"
+/// Font Sizes
 #define UI_FONT_SIZE_BIG        22
+#define UI_FONT_SIZE_PROSA      18
 #define UI_FONT_SIZE_SMALL      14
 #define UI_FONT_SIZE_ULTRASMALL 10
-
-#define UI_FONT_BIG             UI_FONT_NAME, UI_FONT_SIZE_BIG
-#define UI_FONT_SMALL           UI_FONT_NAME, UI_FONT_SIZE_SMALL
-#define UI_FONT_ULTRASMALL      UI_FONT_NAME, UI_FONT_SIZE_ULTRASMALL
-
-#define UI_FONT_TOOLTIP         UI_FONT_SMALL
-#define PROSA_FONT              UI_FONT_NAME_SERIF, 18
 
 /// Font colors
 
 /// Global UI font color
 #define UI_FONT_CLR_FG       RGBColor(255, 255,   0)
-#define UI_FONT_CLR_BG       RGBColor(107,  87,  55)
 #define UI_FONT_CLR_DISABLED RGBColor(127, 127, 127)
 #define UI_FONT_CLR_WARNING  RGBColor(255,  22,  22)
 
 /// Prosa font color
 #define PROSA_FONT_CLR_FG    RGBColor(255, 255,   0)
+
+/// Tooltip font color
+#define UI_FONT_TOOLTIP_CLR  RGBColor(255, 255,   0)
 
 /// Colors for good/ok/bad
 #define UI_FONT_CLR_BRIGHT_HEX    "fffaaa"
@@ -57,17 +48,5 @@
 #define UI_FONT_CLR_OK_HEX        "ffe11e"
 #define UI_FONT_CLR_GOOD_HEX      "00bb00"
 #define UI_FONT_CLR_IDLE_HEX      "0090ff"
-
-/** \name Text colors
- * User interface text color constants
- *
- * Defined as "\<fontcolor\>, \<background color\>".
- * The background colors are chosen to match the user interface
- * backgrounds.
- */
-#define UI_FONT_BIG_CLR     UI_FONT_CLR_FG, UI_FONT_CLR_BG
-/// small is used for ultrasmall, too
-#define UI_FONT_SMALL_CLR   UI_FONT_CLR_FG, UI_FONT_CLR_BG
-#define UI_FONT_TOOLTIP_CLR RGBColor(255, 255, 0)
 
 #endif  // end of include guard: WL_WUI_TEXT_CONSTANTS_H

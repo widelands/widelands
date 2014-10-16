@@ -23,6 +23,7 @@
 
 #include "base/utf8.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "wlapplication.h"
 #include "wui/text_constants.h"
 
 namespace {
@@ -216,7 +217,7 @@ Font * Font::ui_big()
 {
 	Font * font = nullptr;
 	if (!font)
-		font = Font::get(UI_FONT_BIG);
+		font = Font::get((WLApplication::get()->get_fontset()).serif(), UI_FONT_SIZE_BIG);
 	return font;
 }
 
@@ -224,7 +225,7 @@ Font * Font::ui_small()
 {
 	Font * font = nullptr;
 	if (!font)
-		font = Font::get(UI_FONT_SMALL);
+		font = Font::get((WLApplication::get()->get_fontset()).serif(), UI_FONT_SIZE_SMALL);
 	return font;
 }
 
@@ -232,7 +233,7 @@ Font * Font::ui_ultrasmall()
 {
 	Font * font = nullptr;
 	if (!font)
-		font = Font::get(UI_FONT_ULTRASMALL);
+		font = Font::get((WLApplication::get()->get_fontset()).serif(), UI_FONT_SIZE_ULTRASMALL);
 	return font;
 }
 

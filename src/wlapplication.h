@@ -27,6 +27,7 @@
 #endif
 #endif
 
+#include <cassert>
 #include <cstring>
 #include <map>
 #include <stdexcept>
@@ -52,12 +53,21 @@ public:
 		kRightToLeft
 	};
 
-	FontSet() :	m_serif("DejaVuSerif.ttf"), m_sans("DejaVuSans.ttf") {}
-	FontSet(const std::string& serif_,
-			  const std::string& sans_,
-			  const std::string& direction_) :
+	FontSet(const std::string& serif_ = "DejaVuSerif.ttf",
+			  const std::string& serif_name_ = "DejaVuSerif",
+			  const std::string& sans_ = "DejaVuSans.ttf",
+			  const std::string& sans_name_ = "DejaVuSans",
+			  const std::string& direction_ = "ltr") :
 		m_serif(serif_),
-		m_sans(sans_) {
+		m_serif_name(serif_name_),
+		m_sans(sans_),
+		m_sans_name(sans_name_) {
+
+		assert(!m_serif.empty());
+		assert(!m_serif_name.empty());
+		assert(!m_sans.empty());
+		assert(!m_sans_name.empty());
+
 		if(direction_ == "rtl") {
 			m_direction = FontSet::Direction::kRightToLeft;
 		} else {
@@ -66,12 +76,16 @@ public:
 	}
 
 	const std::string& serif() const {return m_serif;}
+	const std::string& serif_name() const {return m_serif_name;}
 	const std::string& sans() const {return m_sans;}
+	const std::string& sans_name() const {return m_sans_name;}
 	FontSet::Direction direction() {return m_direction;}
 
 private:
 	std::string m_serif;
+	std::string m_serif_name;
 	std::string m_sans;
+	std::string m_sans_name;
 	FontSet::Direction m_direction;
 };
 

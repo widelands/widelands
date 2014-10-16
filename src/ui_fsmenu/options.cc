@@ -413,7 +413,7 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 
 		} catch (const WException&) {
 			log("Could not read locale for: %s\n", localename.c_str());
-			entries.push_back(LanguageEntry(localename, localename, localename, UI_FONT_NAME_SERIF));
+			entries.push_back(LanguageEntry(localename, localename, localename, (new UI::FontSet())->serif()));
 		}
 	}
 

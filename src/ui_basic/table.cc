@@ -50,7 +50,7 @@ Table<void *>::Table
 :
 	Panel             (parent, x, y, w, h),
 	m_total_width     (0),
-	m_fontname        (UI_FONT_NAME),
+	m_fontname        ((WLApplication::get()->get_fontset()).serif()),
 	m_fontsize        (UI_FONT_SIZE_SMALL),
 	m_headerheight    (15),
 	m_lineheight      (g_fh->get_fontheight(m_fontname, m_fontsize)),

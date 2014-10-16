@@ -28,6 +28,7 @@
 #include "graphic/rendertarget.h"
 #include "ui_basic/is_printable.h"
 #include "ui_basic/mouse_constants.h"
+#include "wlapplication.h"
 #include "wui/text_constants.h"
 
 namespace UI {
@@ -74,8 +75,10 @@ EditBox::EditBox
 {
 	set_think(false);
 
+	UI::FontSet fontset = WLApplication::get()->get_fontset();
+
 	m->background = background;
-	m->fontname = UI_FONT_NAME;
+	m->fontname = fontset.serif();
 	m->fontsize = UI_FONT_SIZE_SMALL;
 	m->fontcolor = UI_FONT_CLR_FG;
 

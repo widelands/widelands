@@ -1234,10 +1234,7 @@ bool Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 std::string Panel::ui_fn() {
 	UI::FontSet fontset = WLApplication::get()->get_fontset();
 
-	std::string style
-		(fontset.serif());
-	if (style.empty() | (style == "serif"))
-		return UI_FONT_NAME_SERIF;
+	std::string style(fontset.serif());
 	if (g_fs->file_exists("fonts/" + style))
 		return style;
 	log
@@ -1245,7 +1242,7 @@ std::string Panel::ui_fn() {
 		 "Make sure the path is given relative to Widelands font directory. "
 		 "Widelands will use standard font.\n",
 		 style.c_str());
-	return UI_FONT_NAME;
+	return (new UI::FontSet())->serif();
 }
 
 }
