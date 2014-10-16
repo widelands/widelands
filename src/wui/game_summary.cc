@@ -50,8 +50,7 @@ m_game(parent->game())
 	vbox->add_space(PADDING);
 
 	UI::Box * hbox1 = new UI::Box(this, 0, 0, UI::Box::Horizontal);
-	m_players_table = new UI::Table<uintptr_t const>(hbox1, 0, 0,
-																	 150 + 80 + 100 + 100, 200);
+	m_players_table = new UI::Table<uintptr_t const>(hbox1, 0, 0, 150 + 80 + 100 + 100, 200);
 	hbox1->add_space(PADDING);
 	hbox1->add(m_players_table, UI::Box::AlignTop);
 	hbox1->add_space(PADDING);
