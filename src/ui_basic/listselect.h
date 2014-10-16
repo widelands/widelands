@@ -64,12 +64,14 @@ struct BaseListselect : public Panel {
 		 uint32_t value,
 		 const Image* pic = nullptr,
 		 const bool select_this = false,
-		 const std::string & tooltip_text = std::string());
+		 const std::string & tooltip_text = std::string(),
+		 const std::string& fontname = "");
 	void add_front
 		(const char * const name,
 		 const Image* pic = nullptr,
 		 const bool select_this = false,
-		 const std::string & tooltip_text = std::string());
+		 const std::string & tooltip_text = std::string(),
+		 const std::string& fontname = "");
 	void remove(uint32_t);
 	void remove(const char * name);
 
@@ -134,6 +136,7 @@ private:
 		const Image* pic;
 		std::string name;
 		std::string tooltip;
+		std::string font_face;
 	};
 	using EntryRecordDeque = std::deque<EntryRecord *>;
 
@@ -170,10 +173,11 @@ struct Listselect : public BaseListselect {
 		 Entry value,
 		 const Image* pic = nullptr,
 		 const bool select_this = false,
-		 const std::string & tooltip_text = std::string())
+		 const std::string & tooltip_text = std::string(),
+		 const std::string & font_face = "")
 	{
 		m_entry_cache.push_back(value);
-		BaseListselect::add(name, m_entry_cache.size() - 1, pic, select_this, tooltip_text);
+		BaseListselect::add(name, m_entry_cache.size() - 1, pic, select_this, tooltip_text, font_face);
 	}
 	void add_front
 		(const char * const name,

@@ -273,7 +273,7 @@ void TextParser::parse_text_attributes
 				} else if (val == fontset.sans() || val == "serif") {
 					val = fontset.serif();
 				} else {
-					val= fontset.sans();
+					val = fontset.sans();
 				}
 				element.set_font_style(val);
 			} else if (key == "line-spacing") {

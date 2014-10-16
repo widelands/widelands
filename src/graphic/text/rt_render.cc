@@ -591,12 +591,13 @@ IFont& FontCache::get_font(NodeStyle& ns) {
 	UI::FontSet fontset = WLApplication::get()->get_fontset();
 
 	if (ns.font_face == fontset.serif_bold() ||
-		 ns.font_face == fontset.serif_italic() ||
 		 ns.font_face == fontset.sans_bold() ||
-		 ns.font_face == fontset.sans_italic() ||
-		 ns.font_face == fontset.condensed_bold() ||
-		 ns.font_face == fontset.condensed_italic()) {
-		; // Font face has already been processed with its properties
+		 ns.font_face == fontset.condensed_bold()) {
+		ns.font_style &= ~IFont::BOLD;
+	} else if (ns.font_face == fontset.serif_italic() ||
+				  ns.font_face == fontset.sans_italic() ||
+				  ns.font_face == fontset.condensed_italic()) {
+		ns.font_style &= ~IFont::ITALIC;
 	} else if (ns.font_face == fontset.condensed()) {
 		if (ns.font_style & IFont::BOLD) {
 			ns.font_face = fontset.condensed_bold();

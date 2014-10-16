@@ -841,7 +841,7 @@ UI::FontSet WLApplication::parse_font_for_locale(const std::string& localename) 
 		}
 	}
 	// Get the fontset information from conf
-	if(!fontsetname.empty()) {
+	if (!fontsetname.empty()) {
 		try  {
 			ln = new Profile("fonts/fonts.conf");
 			Section& s = ln->pull_section(fontsetname.c_str());

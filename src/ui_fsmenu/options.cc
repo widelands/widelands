@@ -443,7 +443,7 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 
 	for (const LanguageEntry& entry : entries) {
 		m_language_list.add(entry.descname.c_str(), entry.localename, nullptr,
-									entry.localename == selected_locale);
+									entry.localename == selected_locale, entry.sortname, entry.fontname);
 	}
 }
 

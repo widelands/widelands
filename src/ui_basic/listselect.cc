@@ -123,7 +123,8 @@ void BaseListselect::add
 	 uint32_t             entry,
 	 const Image*   pic,
 	 bool         const   sel,
-	 const std::string  & tooltip_text)
+	 const std::string  & tooltip_text,
+	 const std::string  & fontname)
 {
 	EntryRecord * er = new EntryRecord();
 
@@ -132,14 +133,15 @@ void BaseListselect::add
 	er->use_clr = false;
 	er->name    = std::string(name);
 	er->tooltip = tooltip_text;
+	er->font_face = fontname;
 	uint32_t entry_height = 0;
 	if (!pic) {
-		entry_height = g_fh->get_fontheight(m_fontname, m_fontsize);
+		entry_height = g_fh->get_fontheight(fontname.empty() ? m_fontname : fontname, m_fontsize);
 	} else {
 		uint16_t w = pic->width();
 		uint16_t h = pic->height();
-		entry_height = (h >= g_fh->get_fontheight(m_fontname, m_fontsize))
-			? h : g_fh->get_fontheight(m_fontname, m_fontsize);
+		entry_height = (h >= g_fh->get_fontheight(fontname.empty() ? m_fontname : fontname, m_fontsize))
+			? h : g_fh->get_fontheight(fontname.empty() ? m_fontname : fontname, m_fontsize);
 		if (m_max_pic_width < w)
 			m_max_pic_width = w;
 	}
@@ -161,7 +163,8 @@ void BaseListselect::add_front
 	(char const * const   name,
 	 const Image*   pic,
 	 bool         const   sel,
-	 const std::string  & tooltip_text)
+	 const std::string  & tooltip_text,
+	 const std::string& fontname)
 {
 	EntryRecord * er = new EntryRecord();
 
@@ -174,15 +177,16 @@ void BaseListselect::add_front
 	er->use_clr = false;
 	er->name    = std::string(name);
 	er->tooltip = tooltip_text;
+	er->font_face = fontname;
 
 	uint32_t entry_height = 0;
 	if (!pic)
-		entry_height = g_fh->get_fontheight(m_fontname, m_fontsize);
+		entry_height = g_fh->get_fontheight(fontname.empty() ? m_fontname : fontname, m_fontsize);
 	else {
 		uint16_t w = pic->width();
 		uint16_t h = pic->height();
-		entry_height = (h >= g_fh->get_fontheight(m_fontname, m_fontsize))
-			? h : g_fh->get_fontheight(m_fontname, m_fontsize);
+		entry_height = (h >= g_fh->get_fontheight(fontname.empty() ? m_fontname : fontname, m_fontsize))
+			? h : g_fh->get_fontheight(fontname.empty() ? m_fontname : fontname, m_fontsize);
 		if (m_max_pic_width < w)
 			m_max_pic_width = w;
 	}
@@ -394,11 +398,13 @@ void BaseListselect::draw(RenderTarget & dst)
 		// Horizontal center the string
 		UI::g_fh->draw_text
 			(dst,
-			 TextStyle::makebold(Font::get(m_fontname, m_fontsize), er.use_clr ? er.clr : UI_FONT_CLR_FG),
+			 TextStyle::makebold(Font::get(er.font_face.empty() ? m_fontname : er.font_face, m_fontsize),
+										er.use_clr ? er.clr : UI_FONT_CLR_FG),
 			 Point
 			 	(x,
 			 	 y +
-			 	 (get_lineheight() - g_fh->get_fontheight(m_fontname, m_fontsize))
+				 (get_lineheight() - g_fh->get_fontheight(er.font_face.empty() ? m_fontname : er.font_face,
+																		m_fontsize))
 			 	 /
 			 	 2),
 			 er.name,

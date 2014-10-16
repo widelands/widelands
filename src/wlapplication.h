@@ -39,7 +39,7 @@
 #include "base/point.h"
 
 
-namespace Widelands{class Game;}
+namespace Widelands {class Game;}
 
 namespace UI
 {
@@ -83,7 +83,7 @@ public:
 		assert(!m_condensed_bold.empty());
 		assert(!m_condensed_italic.empty());
 
-		if(direction_ == "rtl") {
+		if (direction_ == "rtl") {
 			m_direction = FontSet::Direction::kRightToLeft;
 		} else {
 			m_direction = FontSet::Direction::kLeftToRight;
