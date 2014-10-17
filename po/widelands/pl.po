@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-10-04 16:33+0100\n"
-"PO-Revision-Date: 2014-10-04 22:29+0000\n"
+"POT-Creation-Date: 2014-10-08 06:24+0200\n"
+"PO-Revision-Date: 2014-10-16 17:16+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-10-05 05:49+0000\n"
+"X-Launchpad-Export-Date: 2014-10-17 05:36+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -542,7 +542,7 @@ msgstr "nienazwany"
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:249
 #, c-format
 msgid "Directory: %s"
-msgstr ""
+msgstr "Folder: %s"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:251
 msgid "directory"
@@ -709,32 +709,32 @@ msgstr "Wybór nieruchomego obiektu"
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:88
 msgid "arable"
-msgstr ""
+msgstr "uprawialny"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:94
 msgid "aquatic"
-msgstr ""
+msgstr "wodny"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:100
 msgid "mountainous"
-msgstr ""
+msgstr "górzysty"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:106
 msgid "dead"
-msgstr ""
+msgstr "martwy"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:113
 msgid "unpassable"
-msgstr ""
+msgstr "nie do przebycia"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:118
 msgid "treeless"
-msgstr ""
+msgstr "bezdrzewny"
 
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:141
 msgid "Terrain Select"
@@ -1030,8 +1030,9 @@ msgstr "Pominięto: %1$s, gdyż %2$s"
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "brakuje: %s"
+msgstr[1] "brakuje: %s"
+msgstr[2] "brakuje: %s"
 
 #. * TRANSLATORS: %s is a list of wares
 #: ../../src/logic/production_program.cc:1073
@@ -1851,7 +1852,7 @@ msgstr "Przygotowywanie..."
 #: ../../src/ui_basic/spinbox.cc:126
 #, c-format
 msgid "%i %s"
-msgstr ""
+msgstr "%i %s"
 
 #: ../../src/ui_basic/spinbox.cc:136
 msgid "Increase the value"
@@ -2583,7 +2584,7 @@ msgstr "Opcje gry"
 
 #: ../../src/ui_fsmenu/options.cc:218
 msgid "Use single watchwindow mode"
-msgstr ""
+msgstr "Używaj trybu jednego okna obserwacji"
 
 #: ../../src/ui_fsmenu/options.cc:228
 msgid "Start building road after placing a flag"
@@ -2606,8 +2607,9 @@ msgstr "Chwytaj okna do brzegów"
 #: ../../src/ui_fsmenu/options.cc:269 ../../src/ui_fsmenu/options.cc:397
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "minutę"
+msgstr[1] "minuty"
+msgstr[2] "minut"
 
 #: ../../src/ui_fsmenu/options.cc:277
 msgid "Save game automatically every"
@@ -2624,7 +2626,7 @@ msgstr[2] "dni"
 
 #: ../../src/ui_fsmenu/options.cc:295
 msgid "Remove replays older than:"
-msgstr ""
+msgstr "Usuwaj powtórki starsze niż:"
 
 #. * TRANSLATORS Options: Save game automatically every:
 #: ../../src/ui_fsmenu/options.cc:307
@@ -2639,7 +2641,7 @@ msgstr "Nigdy"
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
 #: ../../src/ui_fsmenu/options.cc:368 ../../src/ui_fsmenu/options.cc:374
 msgid "%1% x %2%"
-msgstr ""
+msgstr "%1% x %2%"
 
 #: ../../src/ui_fsmenu/options.cc:386
 msgid "Try system language"
@@ -2661,8 +2663,9 @@ msgstr "Odległość dla okien do przyciągnięcia do brzegów ekranu:"
 #: ../../src/ui_fsmenu/options.cc:671 ../../src/ui_fsmenu/options.cc:675
 msgid "pixel"
 msgid_plural "pixels"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "piksel"
+msgstr[1] "piksele"
+msgstr[2] "pikseli"
 
 #: ../../src/ui_fsmenu/options.cc:533
 msgid "Show in-game chat with transparent background"
@@ -2916,8 +2919,9 @@ msgstr "Encyklopedia Towarów Plemiennych"
 #: ../../src/wui/encyclopedia_window.cc:210
 msgid "Consumed Ware Type"
 msgid_plural "Consumed Ware Types"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Używane towary"
+msgstr[1] "Używane towary"
+msgstr[2] "Używane towary"
 
 #: ../../src/wui/encyclopedia_window.cc:79
 msgid "Quantity"
