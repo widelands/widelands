@@ -3351,7 +3351,7 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 
 	// we allways try to attack warehouse first
 	if (best_wh_target != nullptr && gametime % 2 == 0) {
-		// attacking with defenders + 4 soldiers
+		// attacking with all attack-ready soldiers
 		int32_t attackers = player_->find_attack_soldiers(best_wh_target->base_flag());
 
 		game().send_player_enemyflagaction(best_wh_target->base_flag(), pn, attackers);
@@ -3362,7 +3362,7 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 
 	} else if (best_ms_target != nullptr) {
 
-		// attacking with defenders + 4 soldiers
+		// attacking with defenders + 6 soldiers
 		int32_t attackers = player_->find_attack_soldiers(best_ms_target->base_flag());
 		const int32_t defenders = best_ms_target->present_soldiers().size();
 		if (attackers > defenders + 10) {  // we need to leave meaningful count of soldiers
