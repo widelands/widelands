@@ -36,7 +36,7 @@ GameMainMenu::GameMainMenu
 	 UI::UniqueWindow::Registry                 & registry,
 	 InteractivePlayer::GameMainMenuWindows & windows)
 :
-UI::UniqueWindow(&plr, "main_menu", &registry, 180, 55, _("Main Menu")),
+UI::UniqueWindow(&plr, "main_menu", &registry, 180, 55, _("Statistics Menu")),
 m_player      (plr),
 m_windows     (windows),
 general_stats
