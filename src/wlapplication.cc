@@ -1416,7 +1416,9 @@ bool WLApplication::load_game()
 	Widelands::Game game;
 	std::string filename;
 
-	FullscreenMenuLoadGame ssg(game);
+	SinglePlayerGameSettingsProvider sp;
+	FullscreenMenuLoadGame ssg(game, &sp, nullptr);
+
 	if (ssg.run() > 0)
 		filename = ssg.filename();
 	else

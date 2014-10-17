@@ -69,7 +69,7 @@ struct SavegameData {
 /// Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu.
 struct FullscreenMenuLoadGame : public FullscreenMenuLoadMapOrGame {
 	FullscreenMenuLoadGame
-		(Widelands::Game&, GameSettingsProvider* gsp = nullptr, GameController* gc = nullptr,
+		(Widelands::Game&, GameSettingsProvider* gsp, GameController* gc = nullptr,
 		 bool is_replay = false);
 
 	const std::string & filename() {return m_filename;}

@@ -132,11 +132,24 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 		(boost::bind
 			 (&FullscreenMenuLoadGame::clicked_delete, boost::ref(*this)));
 	m_table.add_column(130, _("Save Date"), _("The date this game was saved"), UI::Align_Left);
-	if (m_is_replay) {
+	if (m_is_replay || m_settings->settings().multiplayer) {
+		std::vector<std::string> modes;
+		if (m_is_replay) {
+			/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
+			/** TRANSLATORS: Make sure that you keep consistency in your translation. */
+			modes.push_back("SP = Single Player");
+		}
+		/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
+		/** TRANSLATORS: Make sure that you keep consistency in your translation. */
+		modes.push_back("MP = Multiplayer");
+		/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
+		/** TRANSLATORS: Make sure that you keep consistency in your translation. */
+		modes.push_back("H = Multiplayer (Host)");
 		const std::string mode_tooltip_1 =
 				/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
-				/** TRANSLATORS: Make sure that you keep consistency in your translation. */
-				_("Game Mode: SP = Single Player, MP = Multiplayer, H = Multiplayer (Host).");
+				/** TRANSLATORS: %s is a list of game modes. */
+				((boost::format(_("Game Mode: %s."))
+				  % i18n::localize_item_list(modes, i18n::ConcatenateWith::COMMA))).str();
 		const std::string mode_tooltip_2 =
 				_("Numbers are the number of players.");
 
@@ -389,6 +402,18 @@ void FullscreenMenuLoadGame::fill_table() {
 				Widelands::GameLoader gl(savename.c_str(), m_game);
 				gl.preload_game(gpdp);
 
+				gamedata->gametype = gpdp.get_gametype();
+
+				if (!m_is_replay) {
+					if (m_settings->settings().multiplayer) {
+						if (gamedata->gametype == GameController::GameType::SINGLEPLAYER) {
+							continue;
+						}
+					} else if (gamedata->gametype > GameController::GameType::SINGLEPLAYER) {
+						continue;
+					}
+				}
+
 				gamedata->mapname = gpdp.get_mapname();
 				gamedata->gametime = gpdp.get_gametime();
 				gamedata->nrplayers = gpdp.get_number_of_players();
@@ -451,8 +476,7 @@ void FullscreenMenuLoadGame::fill_table() {
 					m_table.add(m_games_data.size() - 1);
 				te.set_string(0, gamedata->savedatestring);
 
-				if (m_is_replay) {
-					gamedata->gametype = gpdp.get_gametype();
+				if (m_is_replay || m_settings->settings().multiplayer) {
 					std::string gametypestring;
 					switch (gamedata->gametype) {
 						case GameController::GameType::SINGLEPLAYER:

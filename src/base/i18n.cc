@@ -329,13 +329,15 @@ std::string localize_item_list(const std::vector<std::string>& items, Concatenat
 				/** TRANSLATORS: Concatenate the last 2 items on a list. */
 				/** TRANSLATORS: RTL languages might want to change the word order here. */
 				result = (boost::format(_("%1$s & %2$s")) % result % (*it)).str();
-			}
-			else if (listtype == ConcatenateWith::OR) {
+			} else if (listtype == ConcatenateWith::OR) {
 				/** TRANSLATORS: Join the last 2 items on a list with "or". */
 				/** TRANSLATORS: RTL languages might want to change the word order here. */
 				result = (boost::format(_("%1$s or %2$s")) % result % (*it)).str();
-			}
-			else {
+			} else if (listtype == ConcatenateWith::COMMA) {
+				/** TRANSLATORS: Join the last 2 items on a list with a comma. */
+				/** TRANSLATORS: RTL languages might want to change the word order here. */
+				result = (boost::format(_("%1$s, %2$s")) % result % (*it)).str();
+			} else {
 				/** TRANSLATORS: Concatenate the last 2 items on a list. */
 				/** TRANSLATORS: RTL languages might want to change the word order here. */
 				result = (boost::format(_("%1$s and %2$s")) % result % (*it)).str();
