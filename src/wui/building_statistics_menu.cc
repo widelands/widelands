@@ -437,7 +437,6 @@ void BuildingStatisticsMenu::update() {
 		}
 
 		//  add new Table Entry
-		char buffer[100];
 		te->set_picture
 			(Columns::Name, building.get_icon(), building.descname());
 
@@ -483,15 +482,17 @@ void BuildingStatisticsMenu::update() {
 			}
 		}
 
-		//  number of this buildings
-		te->set_string(Columns::Owned, (boost::format("%3u") % nr_owned).str()); //  space-pad for sort
+		//  number of these buildings
+		std::string owned_string = (boost::format("%3u") % nr_owned).str(); //  space-pad for sort
+		te->set_string(Columns::Owned, owned_string);
 		if (is_selected)
-			m_owned.set_text(buffer);
+			m_owned.set_text(owned_string);
 
-		//  number of currently builds
-		te->set_string(Columns::Build, (boost::format("%3u") % nr_build).str()); //  space-pad for sort
+		//  number of these buildings currently being built
+		std::string build_string =  (boost::format("%3u") % nr_build).str();  //  space-pad for sort
+		te->set_string(Columns::Build,build_string);
 		if (is_selected)
-			m_in_build.set_text(buffer);
+			m_in_build.set_text(build_string);
 	}
 
 	//  disable all buttons, if nothing to select
