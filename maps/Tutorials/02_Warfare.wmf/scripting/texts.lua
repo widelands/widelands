@@ -69,7 +69,8 @@ battlearena2 = {
       h1(_"The Battle Arena Has Been Constructed") ..
       p(_[[Very good. Our battle arena has been finished, and the soldiers are already walking towards it.]]) ..
       -- Not perfectly correct (some training steps need either bread or meat), but we do not want to confuse new players
-      p(_[[The needed wares are also delivered there. For successful training, you need bread and strongbeer. Most steps additionally require either fish or meat. For more information, you can have a look at the building’s help window, accessible via the question mark in every building’s window.]]) ..
+      p(_[[The needed wares are also delivered there. For successful training, you need bread and strongbeer. Most steps additionally require either fish or meat.]] .. " " ..
+		_[[For more information, you can have a look at the building’s help window, accessible via the question mark in every building’s window.]]) ..
       p(_[[To learn how far your soldiers have progressed in their training, you can have a look at their icons. They are modified by red dots:]])
    ) ..
    rt("image=tribes/barbarians/soldier/evade_level0.png", p(_[[No red dots means that the soldier is not trained, so he has level 0. All your new recruits have this.]])) ..
