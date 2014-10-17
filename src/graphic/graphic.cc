@@ -141,16 +141,14 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 				("Graphics: could not set video mode: %s", SDL_GetError());
 		}
 	}
-	//fastOpen tries to use mmap NOCOM: I don't understand this comment.
-	//fastOpen doesn't exist anymore anyway, so I used open instead.
-	FileRead fr;
+
 #ifndef _WIN32
-	fr.open(*g_fs, "pics/wl-ico-128.png");
+	const std::string icon_name = "pics/wl-ico-128.png";
 #else
-	fr.open(*g_fs, "pics/wl-ico-32.png");
+	const std::string icon_name = "pics/wl-ico-32.png";
 #endif
-	SDL_Surface * s = IMG_Load_RW(SDL_RWFromMem(fr.data(0), fr.get_size()), 1);
-	SDL_SetWindowIcon(m_sdlwindow, 0);
+	SDL_Surface* s = load_image_as_sdl_surface(icon_name, g_fs);
+	SDL_SetWindowIcon(m_sdlwindow, s);
 	SDL_FreeSurface(s);
 
 	// setting the videomode was successful. Print some information now
