@@ -40,7 +40,7 @@
 
 GameSummaryScreen::GameSummaryScreen
 	(InteractiveGameBase * parent, UI::UniqueWindow::Registry * r)
-: UI::UniqueWindow(parent, "game_summary", r, 500, 400, _("Game over")),
+: UI::UniqueWindow(parent, "game_summary", r, 550, 260, _("Game over")),
 m_game(parent->game())
 {
 	// Init boxes
@@ -50,7 +50,7 @@ m_game(parent->game())
 	vbox->add_space(PADDING);
 
 	UI::Box * hbox1 = new UI::Box(this, 0, 0, UI::Box::Horizontal);
-	m_players_table = new UI::Table<uintptr_t const>(hbox1, 0, 0, 260, 200);
+	m_players_table = new UI::Table<uintptr_t const>(hbox1, 0, 0, 150 + 80 + 100 + 100, 200);
 	hbox1->add_space(PADDING);
 	hbox1->add(m_players_table, UI::Box::AlignTop);
 	hbox1->add_space(PADDING);
@@ -59,35 +59,41 @@ m_game(parent->game())
 	m_gametime_label = new UI::Textarea(infoBox, _("Elapsed time:"));
 	infoBox->add(m_gametime_label, UI::Box::AlignLeft);
 	m_gametime_value = new UI::Textarea(infoBox);
-	infoBox->add(m_gametime_value, UI::Box::AlignRight);
-	infoBox->add_space(PADDING);
+	infoBox->add(m_gametime_value, UI::Box::AlignLeft);
+	infoBox->add_space(2 * PADDING);
+	m_info_area_label = new UI::Textarea(infoBox, _("Player info:"));
+	infoBox->add(m_info_area_label, UI::Box::AlignLeft);
 	m_info_area = new UI::MultilineTextarea(infoBox, 0, 0, 130, 130, "");
 	infoBox->add(m_info_area, UI::Box::AlignLeft, true);
 	infoBox->add_space(PADDING);
 	hbox1->add(infoBox, UI::Box::AlignTop);
 	hbox1->add_space(PADDING);
 	vbox->add(hbox1, UI::Box::AlignLeft);
-	vbox->add_space(PADDING);
 
 	UI::Box * buttonBox = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 	m_continue_button = new UI::Button
 		(buttonBox, "continue_button",
-		0, 0, 100, 32, g_gr->images().get("pics/but0.png"),
-		_("Continue"), _("Continue playing"));
+		 0, 0, 35, 35,
+		 g_gr->images().get("pics/but4.png"),
+		 g_gr->images().get("pics/continue.png"),
+		 _("Continue playing"));
 	buttonBox->add(m_continue_button, UI::Box::AlignRight);
 	buttonBox->add_space(PADDING);
 	m_stop_button = new UI::Button
 		(buttonBox, "stop_button",
-		0, 0, 100, 32, g_gr->images().get("pics/but0.png"),
-		_("Quit"), _("Return to main menu"));
+		 0, 0, 35, 35,
+		 g_gr->images().get("pics/but4.png"),
+		 g_gr->images().get("pics/menu_exit_game.png"),
+		_("Exit Game"));
 	buttonBox->add(m_stop_button, UI::Box::AlignRight);
+	buttonBox->add_space(PADDING);
 	vbox->add(buttonBox, UI::Box::AlignBottom);
 	vbox->add_space(PADDING);
 	set_center_panel(vbox);
 
 	// Prepare table
 	m_players_table->add_column(150, _("Player"));
-	m_players_table->add_column(50, _("Team"), "", UI::Align_HCenter);
+	m_players_table->add_column(80, _("Team"), "", UI::Align_HCenter);
 	m_players_table->add_column(100, _("Status"), "", UI::Align_HCenter);
 	m_players_table->add_column(100, _("Time"));
 
@@ -247,10 +253,6 @@ std::string GameSummaryScreen::parse_player_info(std::string& info)
 				(boost::format("%1%\n") % pair.at(1)).str();
 		}
 		++substring_it;
-	}
-	if (!info_str.empty()) {
-		info_str =
-			(boost::format("%1% :\n%2%") % _("Player info") % info_str).str();
 	}
 	return info_str;
 }

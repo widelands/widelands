@@ -36,21 +36,39 @@
 #include "logic/tribe.h"
 #include "logic/world/world.h"
 
-#define TRUE_WORDS 4
+#define TRUE_WORDS 7
 static char const * trueWords[TRUE_WORDS] =
 {
 	"true",
+	/** TRANSLATORS: A variant of the commandline parameter "true" value */
+	/** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
+	_("true"),
 	"yes",
+	/** TRANSLATORS: A variant of the commandline parameter "true" value */
+	/** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
+	_("yes"),
 	"on",
+	/** TRANSLATORS: A variant of the commandline parameter "true" value */
+	/** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
+	_("on"),
 	"1"
 };
 
-#define FALSE_WORDS 4
+#define FALSE_WORDS 7
 static char const * falseWords[FALSE_WORDS] =
 {
 	"false",
+	/** TRANSLATORS: A variant of the commandline parameter "false" value */
+	/** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
+	_("false"),
 	"no",
+	/** TRANSLATORS: A variant of the commandline parameter "false" value */
+	/** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
+	_("no"),
 	"off",
+	/** TRANSLATORS: A variant of the commandline parameter "false" value */
+	/** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
+	_("off"),
 	"0"
 };
 
