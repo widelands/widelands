@@ -3276,5 +3276,7 @@ void DefaultAI::print_land_stats() {
 		count_m += 1;
 	}
 
+	assert (count_l > 0 &&  count_m > 0);
 	log(" Average: Landsize: %5d, military strenght: %3d\n", sum_l / count_l, sum_m / count_m);
+
 }

@@ -102,6 +102,8 @@ function BuildWidelands() {
       -DCMAKE_INSTALL_PREFIX:PATH="$DESTINATION/Widelands.app/Contents/MacOS" \
       -DCMAKE_OSX_ARCHITECTURES:STRING="x86_64" \
       -DCMAKE_BUILD_TYPE:STRING="$TYPE" \
+      -DWL_INSTALL_PREFIX:STRING="." \
+      -DWL_PATHS_ARE_ABSOLUTE:STRING="false" \
       -DCMAKE_PREFIX_PATH:PATH="/usr/local" \
       \
       -DSDL2_LIBRARY:STRING="-L/usr/local/lib /usr/local/lib/libSDL2main.a /usr/local/lib/libSDL2.a -Wl,-framework,OpenGL -Wl,-framework,Cocoa -Wl,-framework,ApplicationServices -Wl,-framework,Carbon -Wl,-framework,AudioToolbox -Wl,-framework,AudioUnit -Wl,-framework,IOKit" \

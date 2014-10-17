@@ -12,6 +12,7 @@ endif (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
 # (through config.h).
 # If not specified, we are going to use the current directory. Also on Linux.
 # Packagers (or people using make install) have to set those variables.
+wl_set_if_unset(WL_PATHS_ARE_ABSOLUTE "false")
 wl_set_if_unset(WL_INSTALL_PREFIX ".")
 wl_set_if_unset(WL_INSTALL_DATADIR ".")
 wl_set_if_unset(WL_INSTALL_LOCALEDIR "locale")
