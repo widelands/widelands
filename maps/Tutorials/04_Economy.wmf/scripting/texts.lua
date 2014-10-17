@@ -21,18 +21,20 @@ intro1 = {
       p(_[[Welcome back. In this tutorial, I'll tell you what you can do to check how well your economy works.]]) ..
       p(_[[Building your economy up and making it work well and grow is the main part of Widelands. But you can't control the workers directly - they follow the frame conditions you set.]]) ..
       p(_[[That is what I'll show you in this tutorial: What action can you take to define those frame conditions?]])
-   )
+   ),
+   h = 300
 }
 
 intro2 = {
    position = "topright",
-   field = wl.Game().map:get_field(67,70), -- somewhere near the border
+   field = wl.Game().map:get_field(69,66), -- somewhere near the border
    title = _"A peaceful land",
    body = rt(
       p(_[[Now about the map: You settled in a nice valley between two mountains, rich in marble, iron ore and coal. All were hoping for a peaceful life.]]) ..
       p(_[[But one day, you discovered a barren, waste land with abandoned buildings in the east. A strange aura came from there, and no one wanted to set a foot there. But the border could not be let undefended, and so you have three castles constructed.]]) ..
       p(_[[You you have not been prepared for a war, and so you have to hurry to build up an army.]])
-   )
+   ),
+   h = 300
 }
 
 tavern_burnt_down = {
@@ -41,7 +43,9 @@ tavern_burnt_down = {
    body = rt(
       h1(_[[An accident]]) ..
       p(_[[Oh no, look at this: Our tavern is burning! In all the hurry, our innkeeper accidentally dropped a torch. She is fine, but we could not extinguish the fire in time.]])
-   )
+   ),
+   w = 300,
+   h = 250
 }
 
 building_stat = {
@@ -57,13 +61,14 @@ building_stat = {
       listitem_bullet(_[[Open the building statistic menu.]]) ..
       listitem_bullet(_[[When you have looked up the number of taverns, close it.]])
    ),
+   h = 350,
    obj_name = "open_building_stat",
    obj_title = _"Look the number of taverns up in the building statistics window.",
    obj_body =
       rt("image=pics/menu_building_stats.png", p(_[[The building statistics window gives you an overview over the buildings you have.]])) ..
    rt(
       paragraphdivider() ..
-      --TRANSLATORS: "it" refers to the building statistic window
+      -- TRANSLATORS: "it" refers to the building statistic window
       listitem_bullet(_[[Open it. You can access it from the statistic window.]]) ..
       listitem_arrow(_[[The statistic window is accessible via the second button at the bottom. It provides several menus that give you information about the game.]]) ..
       listitem_bullet(_[[Look how many taverns you have (in the column 'Owned')]]) ..
@@ -83,12 +88,13 @@ inventory1 = {
       paragraphdivider() ..
       listitem_arrow(_[[You can also use the hotkey 'i' (like inventory) to accesss this menu quickly.]])
    ),
+   h = 300,
    obj_name = "open_inventory",
    obj_title = _"Open your stock window.",
    obj_body = rt(
       p(_[[The stock window gives you an overview over the wares you have.]]) ..
       paragraphdivider() ..
-      --TRANSLATORS: "it" refers to the stock window
+      -- TRANSLATORS: "it" refers to the stock window
       listitem_bullet(_[[Open it. You can access it from the statistic window.]]) ..
       listitem_arrow(_[[The statistic window is accessible via the second button at the bottom. It provides several menus that give you information about the game.]])
    )
@@ -103,13 +109,15 @@ inventory2 = {
       p(_[[Now have a look at these two tabs. When you click on the]])) ..
    rt("image=pics/menu_tab_wares_warehouse.png",p(_[[third tab ('Wares in warehouses'), I'll continue.]])
    ),
+   h = 350,
+   show_instantly = true,
    obj_name = "switch_stock_tab",
    obj_title = _"Switch to the third tab in the stock window.",
    obj_body = rt(
       p(_[[Have a look at the first two tabs in the stock window. They show all the wares and workers you have.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[When you have seen enough, switch to third tab.]])
-   )
+   ),
 }
 
 inventory3 = {
@@ -118,14 +126,19 @@ inventory3 = {
       p(_[[The third tab shows you the wares that are stored in your headquarters, your warehouses and ports. They are not needed anywhere and are therefore your reserve.]]) ..
       p(_[[The fourth tab shows the same thing for workers.]]) ..
       p(_[[The third tab tells you that there aren't any rations left in your headquarters - that is not good!]])
-   )
+   ),
+   show_instantly = true,
+   h = 300
 }
 
 reopen_stock_menu = {
    title = _"You closed the stock menu!",
    body = rt(
       p(_[[You have closed the stock menu window, but I have not yet finished with my explanation. Would you please reopen it and choose the third tab?]])
-   )
+   ),
+   show_instantly = true,
+   w = 300,
+   h = 250
 }
 
 reopen_stock_menu_obj = {
@@ -134,9 +147,10 @@ reopen_stock_menu_obj = {
    obj_body = rt(
       p(_[[You closed the stock menu window before I had told you everything about it. If you already know everything, please leave this tutorial.]]) ..
       paragraphdivider() ..
-      --TRANSLATORS: "it" refers to the stock menu window.
+      -- TRANSLATORS: "it" refers to the stock menu window.
       listitem_bullet(_[[Otherwise: Please reopen it and choose the third tab.]])
-   )
+   ),
+   h = 250
 }
 
 build_taverns = {
@@ -148,6 +162,7 @@ build_taverns = {
       paragraphdivider() ..
       listitem_bullet(_[[Build at least two taverns.]])
    ),
+   h = 300,
    obj_name = "build_taverns",
    obj_title = _"Build new taverns.",
    obj_body = rt(
@@ -167,7 +182,8 @@ ware_encyclopedia = {
    rt("image=pics/menu_help.png",p(_[[this button at the bottom. For all wares of your tribe, it shows a short help text, the building that produces the ware and the needed wares.]]) ..
       p(_[[If you want, you can try it out. A soldier needs a wood lance and a helm - from there on, you can search backwards.]])
       -- TODO(codereview): Is there a place where the player can see the needed weapons?
-   )
+   ),
+   h = 350
 }
 
 building_priority_settings = {
@@ -185,15 +201,17 @@ building_priority_settings = {
 }
 
 ware_stats1 = {
-   position = "topright",
+   position = "top",
    title = _"Ware Statistics",
    body = rt(
       p(_[[In the statistic menu, there is also the]])) ..
       rt("image=pics/menu_ware_stats.png",p(_[[button 'Ware statistics'.]])) ..
       rt(paragraphdivider() ..
-      --TRANSLATORS: "it" refers to the ware statistics button
+      -- TRANSLATORS: "it" refers to the ware statistics button
       listitem_bullet(_[[Click on it.]])
    ),
+   w = 200,
+   h = 200,
    obj_name = "open_ware_stat",
    obj_title = _"Open the ware statistics window.",
    obj_body = rt(
@@ -210,6 +228,8 @@ ware_stats2 = {
       listitem_bullet(_[[I'll continue as soon as you click on the]])) ..
    rt("image=pics/menu_tab_wares_econ_health.png",p(_[[third tab ('Economy Health').]])
    ),
+   h = 250,
+   show_instantly = true,
    obj_name = "switch_ware_stat_tab_to_third",
    obj_title = _"Switch to the third tab in the ware statistics window.",
    obj_body = rt(
@@ -227,6 +247,8 @@ ware_stats3 = {
       paragraphdivider() ..
       listitem_bullet(_[[Click on the last tab when I shall continue.]])
    ),
+   h = 250,
+   show_instantly = true,
    obj_name = "switch_ware_stat_tab_to_forth",
    obj_title = _"Switch to the last tab in the ware statistics window.",
    obj_body = rt(
@@ -244,20 +266,25 @@ ware_stats4 = {
       paragraphdivider() ..
       listitem_bullet(_[[Close this window when you're done.]])
    ),
+   h = 250,
+   show_instantly = true,
    obj_name = "close_ware_stats",
    obj_title = _"Close the ware statistics window.",
    obj_body = rt(
       p(_[[The stock tab shows you how many wares you have. Compare the information from the four tabs to understand the correlation.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[When you have finished, close the ware statistics window.]])
-   )
+   ),
 }
 
 reopen_ware_stats1 = {
    title = _"You closed the ware statistics menu!",
    body = rt(
       p(_[[You have closed the ware statistics window, but I have not yet finished with my explanation. Would you please reopen it and choose the third tab?]])
-   )
+   ),
+   show_instantly = true,
+   w = 300,
+   h = 250
 }
 
 reopen_ware_stats1_obj = {
@@ -266,7 +293,7 @@ reopen_ware_stats1_obj = {
    obj_body = rt(
       p(_[[You closed the ware statistics window before I had told you everything about it. If you already know everything, please leave this tutorial.]]) ..
       paragraphdivider() ..
-      --TRANSLATORS: "it" refers to the ware statistics window.
+      -- TRANSLATORS: "it" refers to the ware statistics window.
       listitem_bullet(_[[Otherwise: Please reopen it and choose the third tab.]])
    )
 }
@@ -275,7 +302,10 @@ reopen_ware_stats2 = {
    title = _"You closed the ware statistics menu!",
    body = rt(
       p(_[[You have closed the ware statistics window, but I have not yet finished with my explanation. Would you please reopen it and choose the forth tab?]])
-   )
+   ),
+   show_instantly = true,
+   w = 300,
+   h = 250
 }
 
 reopen_ware_stats2_obj = {
@@ -284,7 +314,7 @@ reopen_ware_stats2_obj = {
    obj_body = rt(
       p(_[[You closed the ware statistics window before I had told you everything about it. If you already know everything, please leave this tutorial.]]) ..
       paragraphdivider() ..
-      --TRANSLATORS: "it" refers to the ware statistics window.
+      -- TRANSLATORS: "it" refers to the ware statistics window.
       listitem_bullet(_[[Otherwise: Please reopen it and choose the forth tab.]])
    )
 }
@@ -301,6 +331,7 @@ economy_settings1 = {
       paragraphdivider() ..
       listitem_bullet(_[[Open this menu.]])
    ),
+   h = 350,
    obj_name = "open_economy_settings",
    obj_title = _"Open the 'Configure economy' menu.",
    obj_body = rt(
@@ -319,7 +350,8 @@ economy_settings2 = {
       p(_[[Most buildings will only produce when your stock level (what is in your warehouses) is below the target quantity, so you indicate the reserve you want to have.]]) ..
       p(_[[An example: The default value for scythes is 1. If you build a farm, a carrier takes a scythe and becomes a farmer. Now there are no scythes left, but the target quantity is 1, therefore your toolsmith starts to produce another one.]]) ..
       p(_[[If you build two farms, only one can immediately start working. The second farm waits for its worker, who needs a scythe. If you had set the target quantity to 2 before, two scythes were available and both farms could start working right away.]])
-   )
+   ),
+   h = 450
 }
 
 economy_settings3 = {
@@ -378,3 +410,4 @@ conclusion = {
    ) ..
    rt("text-align=center", "<p font-size=24 font-decoration=underline>http://www.widelands.org</p>")
 }
+

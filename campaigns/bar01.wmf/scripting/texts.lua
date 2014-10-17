@@ -121,8 +121,8 @@ obj_better_material_2 = {
    title = _"Build a lime kiln and coal economy",
    number = 3,
    body = objective_text(_"Build a lime kiln, a well and a charcoal kiln, or a coal mine",
-      _([[Better buildings may also require other improved materials besides blackwood. One of these is grout, which is produced out of raw stone, water and coal by a lime-burner.]])
-      .. paragraphdivider() ..
+      _([[Better buildings may also require other improved materials besides blackwood. One of these is grout, which is produced out of raw stone, water and coal by a lime-burner.]]) ..
+      paragraphdivider() ..
       _([[You can obtain water by building a well upon a water source, which your geologists can discover when you send them to any flag that is not on a mountain. ]]) ..
       paragraphdivider() ..
       _([[Coal can be obtained by building a charcoal kiln or a coal mine. Burning charcoal out of logs is slow. You should only build a charcoal kiln when no coal is available.]]) ..
@@ -137,6 +137,7 @@ obj_better_material_3 = {
    number = 1,
    body = objective_text(_"Build a reed yard",
       _([[The third material necessary for improved buildings is thatch reed, used to cover roofs. Thatch reed is planted by a gardener around his building, the reed yard.]]) ..
+      paragraphdivider() ..
       listitem_bullet(_"Build a reed yard")
    )
 }
@@ -149,6 +150,7 @@ obj_build_cattlefarm = {
       _([[When roads are under heavy load for a long time, one carrier is usually not enough to transport goods swiftly. Traffic jams are the consequence. Such roads therefore employ a second carrier: An ox that helps to carry the wares. This doubles the transport capacity.]]) ..
       paragraphdivider() ..
       _([[Oxen are bred in cattle farms out of wheat and water.]]) ..
+      paragraphdivider() ..
       listitem_bullet(_"Build a cattle farm")
    )
 }
@@ -176,8 +178,8 @@ briefing_msg_02 = {
       _[[The red lights flash in the darkness and dance to the rhythm of the war drums that haunt me even in my nightmares.]]
    ),
    field = al_thunran,
-   posx = 0,
-   posy = 0
+   position = "topleft",
+   scroll_back = true
 }
 
 
@@ -189,8 +191,7 @@ briefing_msg_03 = {
       _[[Boldreth, my loyal companion and friend is a source of peace and comfort to me in these dark times. He keeps my spirits high and those of my warriors awake, preventing greed or despair from destroying the bonds between us as well.]]
    ),
    field = grave,
-   posx = 0,
-   posy = 0
+   position = "topleft"
 }
 
 
@@ -246,10 +247,12 @@ briefing_msg_08 = {
 order_msg_ranger = {
    title = _"The Advisor",
    body = khantrukh(_"Khantrukh notes...",
-   _[[I see you have already built a quarry and two lumberjack's huts. That is a good beginning if we want to stay here longer.]] .. paragraphdivider() ..
-   _[[But never forget – these forests are our heritage, entrusted upon us by our ancestors. We must always respect and care for them. What we take, we must give back again.]] .. paragraphdivider() ..
-   _[[So, in order to replace the trees we chop down, we should build some ranger’s huts, preferably close to the lumberjack’s huts.]]) ..
-   new_objectives(start_ranger)
+      _[[I see you have already built a quarry and two lumberjack's huts. That is a good beginning if we want to stay here longer.]] ..
+      paragraphdivider() ..
+      _[[But never forget – these forests are our heritage, entrusted upon us by our ancestors. We must always respect and care for them. What we take, we must give back again.]] ..
+      paragraphdivider() ..
+      _[[So, in order to replace the trees we chop down, we should build some ranger’s huts, preferably close to the lumberjack’s huts.]]) ..
+   new_objectives(obj_build_rangers)
 }
 
 
@@ -261,8 +264,7 @@ story_msg1 = {
       _[[They are a constant reminder of why we have to hide here... and why we must return in the end!]]
    ),
    field = al_thunran,
-   posx = 0,
-   posy = 0
+   position = "topleft"
 }
 
 
@@ -274,8 +276,7 @@ story_msg2= {
       _[[Somehow, it felt like a farewell. For the first time, I wondered what the future might hold for me...]]
    ),
    field = grave,
-   posx = 0,
-   posy = 0
+   position = "topleft"
 }
 
 
@@ -318,7 +319,7 @@ _([[I beg your forgiveness, chieftain, but I have a grave concern to discuss wit
 
 order_msg_3 = {
    title = _"Your Loyal Companion",
-   posx = 0,
+   position = "left",
    body = boldreth(_"Boldreth jumps up...",
       _([[While it is certainly no worthy task for a warrior, at least it is something to do! Thron, what would you say about my taking a few of our most restless warriors and venturing somewhat closer to the great mountain of Kal’mavrath – maybe we will find some more big stones to please the old man?]])
    ) ..
@@ -327,169 +328,169 @@ order_msg_3 = {
 
 order_msg_4 = {
    title = _"The Advisor",
-   posx = 0,
+   position = "left",
    body = khantrukh(_"Khantrukh grumbles...",
-		_[[Old man? Disrespectful youth!]])
+      _[[Old man? Disrespectful youth!]])
 }
 
 order_msg_5_quarry = {
    title = _"The Advisor",
    body = khantrukh(_"Khantrukh nods satisfied...",
-		_[[At last! These rocks should last for a while.]])
+      _[[At last! These rocks should last for a while.]])
 }
 
 order_msg_6_geologist = {
    title = _"Your Loyal Companion",
    body = boldreth(_"Boldreth exclaims...",
-		_([[Just look at that! In the east is the great mountain of Kal’mavrath! I wonder what treasures nature might have hidden beneath its majestic flanks!]])
-		.. paragraphdivider() ..
-		_([[Let’s expand to the east. There’s a chance for the elderly to become useful once in a while! Let us send out some of those who understand the stone’s tongue to unravel the mountain’s secrets!]]))
-		.. new_objectives(obj_build_mines)
+      _([[Just look at that! In the east is the great mountain of Kal’mavrath! I wonder what treasures nature might have hidden beneath its majestic flanks!]]) ..
+      paragraphdivider() ..
+      _([[Let’s expand to the east. There’s a chance for the elderly to become useful once in a while! Let us send out some of those who understand the stone’s tongue to unravel the mountain’s secrets!]])) ..
+      new_objectives(obj_build_mines)
 }
 
 order_msg_7_mines_up = {
    title = _"Your Loyal Companion",
    body = boldreth(_"Boldreth laughs...",
-		_([[By Chat’Karuth’s beard, this is amazing! Just imagine what we can use this coal and iron ore for!]])
-		.. paragraphdivider() ..
-		_([[It might even be enough to...]]))
+      _([[By Chat’Karuth’s beard, this is amazing! Just imagine what we can use this coal and iron ore for!]]) ..
+      paragraphdivider() ..
+      _([[It might even be enough to...]]))
 }
 
 order_msg_8_mines_up = {
    title = _"The Advisor",
    body = khantrukh(_"Khantrukh interrupts...",
-		_([[While this is true, we should consider it later, for now other obstacles are at hand. The miners will definitely demand greater rations for working high up on the mountain in this bitter cold, and providing these supplies may not be easy.]]))
+      _([[While this is true, we should consider it later, for now other obstacles are at hand. The miners will definitely demand greater rations for working high up on the mountain in this bitter cold, and providing these supplies may not be easy.]]))
 }
 
 
 order_msg_9_hunter = {
    title = _"Your Loyal Companion",
    body = boldreth(_"Boldreth nods...",
-		_([[I have to hand it to you: you are right here, old man.]])
-		.. paragraphdivider() ..
-		_([[There seem to be quite a lot of animals in the forests here – we might just hunt down more of them. And, of course, the people would cheer a new tavern – hey, we might call it ‘Thron’s Pride’ or so if you want!]]))
-		.. new_objectives(obj_basic_food)
+      _([[I have to hand it to you: you are right here, old man.]]) ..
+      paragraphdivider() ..
+      _([[There seem to be quite a lot of animals in the forests here – we might just hunt down more of them. And, of course, the people would cheer a new tavern – hey, we might call it ‘Thron’s Pride’ or so if you want!]])) ..
+      new_objectives(obj_basic_food)
 }
 
 order_msg_10_bread = {
    title = _"The Advisor",
    body = khantrukh(_"The elder jumps into the air...",
-		_([[Wisdom commands to seek variety.]])
-		.. paragraphdivider() ..
-		_([[North of the great mountain is a large plain – why don’t we use the space Mother Nature gave us and build a farm? I sure would enjoy a freshly baked pitta bread for a change...]]))
-		.. new_objectives(obj_begin_farming)
+      _([[Wisdom commands to seek variety.]]) ..
+      paragraphdivider() ..
+      _([[North of the great mountain is a large plain – why don’t we use the space Mother Nature gave us and build a farm? I sure would enjoy a freshly baked pitta bread for a change...]])) ..
+      new_objectives(obj_begin_farming)
 }
 
 order_msg_11_basic_food_began = {
    title = _"Your Loyal Companion",
    body = boldreth(_"Boldreth cheers up...",
-		_([[Our hunters are out in the forests, Thron.]])
-		.. paragraphdivider() ..
-		_([[I promise you, before the sun sets today you will have a magnificent meal fit for the chieftain of all clans!]]))
+      _([[Our hunters are out in the forests, Thron.]]) ..
+      paragraphdivider() ..
+      _([[I promise you, before the sun sets today you will have a magnificent meal fit for the chieftain of all clans!]]))
 }
 
 order_msg_12_farming_began = {
    title = _"The Advisor",
    body = khantrukh(_"Khantrukh gazes over the plains...",
-		_([[Isn’t it lovely, the view of golden fields, growing peacefully, dancing to the wind? And I believe the baker is just on his way here, with his most delicious bread reserved for our chieftain alone!]]))
+      _([[Isn’t it lovely, the view of golden fields, growing peacefully, dancing to the wind? And I believe the baker is just on his way here, with his most delicious bread reserved for our chieftain alone!]]))
 }
 
 order_msg_13_tavern = {
    title = _"A Beautiful Morning",
    body = thron(_"Thron recognizes...",
-		_([[A tavern opened for our people yesterday. While I am hardly in the mood for celebration, I noticed how much this tiny bit of home means to my people. Their songs filled the air until deep in the night, and they were in higher spirits still the day after.]])
-		.. paragraphdivider() ..
-		_([[Maybe we actually are slowly creating a place here which we can... call home.]]))
+      _([[A tavern opened for our people yesterday. While I am hardly in the mood for celebration, I noticed how much this tiny bit of home means to my people. Their songs filled the air until deep in the night, and they were in higher spirits still the day after.]]) ..
+      paragraphdivider() ..
+      _([[Maybe we actually are slowly creating a place here which we can... call home.]]))
 }
 
 order_msg_14_refine_ore = {
    title = _"Your Loyal Companion",
    body = boldreth(_"Boldreth remarks...",
-		_([[So now that we have both the mines and the food to sustain them, we should bring what our brave miners gain for us into a more useful state. The iron ore has to be melted into iron so that it is ready to be forged into whatever we want. And we need the coal to keep the smelter’s ovens burning.]]))
-		.. new_objectives(obj_refine_ores)
+      _([[So now that we have both the mines and the food to sustain them, we should bring what our brave miners gain for us into a more useful state. The iron ore has to be melted into iron so that it is ready to be forged into whatever we want. And we need the coal to keep the smelter’s ovens burning.]])) ..
+      new_objectives(obj_refine_ores)
 }
 
 order_msg_15_mines_exhausted = {
    title = _"The Advisor",
    body = khantrukh(_"Khantrukh speaks...",
-		_([[Our miners are digging up less and less by the day! We have to go deeper, closer to the mountain’s core, if we want more of its treasures!]])
-		.. paragraphdivider() ..
-		_([[Of course, it is dark and cold in such depths and only a few venture voluntarily into these places. We should reward this bravery with greater rations for them. And a pint of beer or two will keep their spirits high.]]))
-		.. new_objectives(obj_enhance_buildings)
+      _([[Our miners are digging up less and less by the day! We have to go deeper, closer to the mountain’s core, if we want more of its treasures!]]) ..
+      paragraphdivider() ..
+      _([[Of course, it is dark and cold in such depths and only a few venture voluntarily into these places. We should reward this bravery with greater rations for them. And a pint of beer or two will keep their spirits high.]])) ..
+      new_objectives(obj_enhance_buildings)
 }
 
 order_msg_16_blackwood = {
    title = _"Your Loyal Companion",
    body = boldreth(_"Boldreth seems concerned...",
-		_([[As I just discovered, we are running short on blackwood! We cannot put our warriors into some crumbling huts, and even less so in times as dangerous as ours!]])
-		.. paragraphdivider() ..
-		_([[We need a wood hardener, and we need one now!]]))
-		.. new_objectives(obj_better_material_1)
+      _([[As I just discovered, we are running short on blackwood! We cannot put our warriors into some crumbling huts, and even less so in times as dangerous as ours!]]) ..
+      paragraphdivider() ..
+      _([[We need a wood hardener, and we need one now!]])) ..
+      new_objectives(obj_better_material_1)
 }
 
 order_msg_17_grout = {
    title = _"Your Loyal Companion",
    body = boldreth(_"Boldreth smiles...",
-		_([[Well, old friend, this should ensure that our fortifications do not break down with our foes’ first battle cry! Now we can expand safely!]])
-		.. paragraphdivider() ..
-		_([[Still, it would not hurt to accumulate some grout for our further campaign; thus we could, in times of need, build a fortress such as the world has never seen before!]]))
-		.. new_objectives(obj_better_material_2)
+      _([[Well, old friend, this should ensure that our fortifications do not break down with our foes’ first battle cry! Now we can expand safely!]]) ..
+      paragraphdivider() ..
+      _([[Still, it would not hurt to accumulate some grout for our further campaign; thus we could, in times of need, build a fortress such as the world has never seen before!]])) ..
+      new_objectives(obj_better_material_2)
 }
 
 
 order_msg_18_reed = {
    title = _"The Advisor",
    body = khantrukh(_"Khantrukh steps in...",
-		_([[Chieftain, this is a disgrace! It is well that we can produce grout for mighty fortifications and great buildings now – only this does not prevent our roofs from becoming leaky! Maybe the young ones like spending their nights in the rain, but I just can’t find any sleep with these raindrops dripping on my face!]])
-		.. paragraphdivider() ..
-		_([[Now this is a problem we should do something about!]]))
-		.. new_objectives(obj_better_material_3)
+      _([[Chieftain, this is a disgrace! It is well that we can produce grout for mighty fortifications and great buildings now – only this does not prevent our roofs from becoming leaky! Maybe the young ones like spending their nights in the rain, but I just can’t find any sleep with these raindrops dripping on my face!]]) ..
+      paragraphdivider() ..
+      _([[Now this is a problem we should do something about!]])) ..
+      new_objectives(obj_better_material_3)
 }
 
 order_msg_19_all_material = {
    title = _"The Advisor",
    body = khantrukh(_"Khantrukh seems relieved...",
-		_([[Wonderful! Our roofs are not dripping anymore, and we have all the material we need for, well, whichever monumental building we see fit!]]))
+      _([[Wonderful! Our roofs are not dripping anymore, and we have all the material we need for, well, whichever monumental building we see fit!]]))
 }
 
 
 msg_cattlefarm_00 = {
    title = _"We Need Oxen!",
    body = khantrukh(_"Khantrukh speaks...",
-		_([[As our realm is getting bigger and bigger, the traffic on the roads is overwhelming. Our poor carriers are no longer able to transport the goods as fast as we need them to. I suggest we give them some support by breeding oxen.]])
-		.. paragraphdivider() ..
-		_([[They are amazing animals: The ox is as swift as a human being while being much stronger and very frugal: all we need is wheat and water to breed them and they will do their work on the roads loyally and reliably.]]))
-		.. new_objectives(obj_build_cattlefarm)
+      _([[As our realm is getting bigger and bigger, the traffic on the roads is overwhelming. Our poor carriers are no longer able to transport the goods as fast as we need them to. I suggest we give them some support by breeding oxen.]]) ..
+      paragraphdivider() ..
+      _([[They are amazing animals: The ox is as swift as a human being while being much stronger and very frugal: all we need is wheat and water to breed them and they will do their work on the roads loyally and reliably.]])) ..
+      new_objectives(obj_build_cattlefarm)
 }
 
 msg_mission_complete = {
    title = _"Mission Complete",
    body = thron(_"Thron speaks...",
-		_([[The other day Boldreth asked me to accompany him to the new inn. It would cheer me up, he said.]])
-		.. paragraphdivider() ..
-		_([[When I looked around, I saw faithful faces, trusting that I could guide them through these dark days. Yet before I could speak any words of gratitude or encouragement, one of my warriors ran into the inn. He had been far out in the forest for the past days and I could see how weary he was.]])
-		.. paragraphdivider() ..
-		_([[The news he brought changed everything...]]))
-		..  objective_text(_"Victory",
-		_[[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]])
+      _([[The other day Boldreth asked me to accompany him to the new inn. It would cheer me up, he said.]]) ..
+      paragraphdivider() ..
+      _([[When I looked around, I saw faithful faces, trusting that I could guide them through these dark days. Yet before I could speak any words of gratitude or encouragement, one of my warriors ran into the inn. He had been far out in the forest for the past days and I could see how weary he was.]]) ..
+      paragraphdivider() ..
+      _([[The news he brought changed everything...]])) ..
+      objective_text(_"Victory",
+      _[[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]])
 }
 
 msg_story_1 = {
    title = _"One Full Moon Night",
    body = thron(_"Thron speaks...",
-		_([[One night, when the moon shone brightly, I climbed to the peak of Kal’mavrath.]])
-		.. paragraphdivider() ..
-		_([[When I gazed at the horizon, I still saw crimson lights flicker in the distance. It is incredible with how much passion my brethren fight this war. I fear the moment I will see Al’thunran again – will there be anything but ashes and wasted ruins left of our once beautiful capital when we get there?]]))
+      _([[One night, when the moon shone brightly, I climbed to the peak of Kal’mavrath.]]) ..
+      paragraphdivider() ..
+      _([[When I gazed at the horizon, I still saw crimson lights flicker in the distance. It is incredible with how much passion my brethren fight this war. I fear the moment I will see Al’thunran again – will there be anything but ashes and wasted ruins left of our once beautiful capital when we get there?]]))
 }
 
 msg_story_2 = {
     title = _"Another Cold Day",
     body = thron(_"Thron looks worried...",
-		_([[The winter is upon us. Many of us are suffering from the cold, yet we must endure. The day we may return cannot be far anymore – it must not be far anymore.]])
-		.. paragraphdivider() ..
-		_([[I prayed that it might get warmer again, as I prayed that the war would finally come to an end.]])
-		.. paragraphdivider() ..
-		_([[So far, it seems that neither prayer was fulfilled.]]))
+      _([[The winter is upon us. Many of us are suffering from the cold, yet we must endure. The day we may return cannot be far anymore – it must not be far anymore.]]) ..
+      paragraphdivider() ..
+      _([[I prayed that it might get warmer again, as I prayed that the war would finally come to an end.]]) ..
+      paragraphdivider() ..
+      _([[So far, it seems that neither prayer was fulfilled.]]))
 }
 
 msg_village = {
@@ -502,3 +503,4 @@ msg_village = {
       _([[But they fear that the war around Al'thunran will set an end to this life. Therefore, they have decided to join us, hoping that we can help each other.]])
    )
 }
+

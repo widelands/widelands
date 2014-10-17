@@ -14,16 +14,17 @@ include "scripting/format_scenario.lua"
 -- =============
 
 introduction = {
-   title = _ "Introduction",
+   title = _"Introduction",
    body = rt(
-      h1(_ "Soldiers, Training and Warfare") ..
+      h1(_"Soldiers, Training and Warfare") ..
       p(_[[In this scenario, I'm going to tell you about soldiers, their training and their profession: warfare. Although Widelands is about building up, not burning down, there is an enemy you sometimes have to defeat. Yet warfare is mainly focused on economics, not on military strategies, and its mechanics deserve explanation.]]) ..
       p(_[[I've set up a small village that contains the most important things. You also have enough wares so you do not have to take care of your weapon production. In a real game, you will not have this luxury.]])
-   )
+   ),
+   h = 300
 }
 
 abilities = {
-   pos = "topright",
+   position = "topright",
    title = _"Soldiers' abilities",
    body = rt(
       p(_[[A new soldier is created like a worker: When a military building needs a soldier, a carrier grabs the needed weapons and armor from a warehouse (or your headquarters) and walks up the road to your new building. Basic Barbarian soldiers do not use an armor, they only need an ax.]]) ..
@@ -42,7 +43,7 @@ abilities = {
 }
 
 battlearena1 = {
-   pos = "topright",
+   position = "topright",
    title = _"The Battle Arena",
    body = rt(
       p(_[[Now I have talked about training and levels. Let me elaborate that.]]) ..
@@ -51,6 +52,7 @@ battlearena1 = {
       paragraphdivider() ..
       listitem_bullet(_[[To see this in action, build a battle arena.]])
    ),
+   h = 350,
    obj_name = "build_battlearena",
    obj_title = _"Build a battle arena",
    obj_body = rt(
@@ -61,7 +63,7 @@ battlearena1 = {
 }
 
 battlearena2 = {
-   pos = "topright",
+   position = "topright",
    title = _"The Battle Arena",
    body = rt(
       h1(_"The Battle Arena Has Been Constructed") ..
@@ -72,11 +74,12 @@ battlearena2 = {
    ) ..
    rt("image=tribes/barbarians/soldier/evade_level0.png", p(_[[No red dots means that the soldier is not trained, so he has level 0. All your new recruits have this.]])) ..
    rt("image=tribes/barbarians/soldier/evade_level1.png", p(_[[With every successful training step, your soldier becomes stronger. This is indicated by a red dot. This soldier is on level 1 in evade training.]])) ..
-   rt("image=tribes/barbarians/soldier/evade_level2.png", p(_[[When your soldier has reached the highest possible level (in this case level 2), this is indicated by a white blackground color.]]))
+   rt("image=tribes/barbarians/soldier/evade_level2.png", p(_[[When your soldier has reached the highest possible level (in this case level 2), this is indicated by a white blackground color.]])),
+   h = 450
 }
 
 trainingcamp1 = {
-   pos = "topright",
+   position = "topright",
    title = _"The Training Camp",
    body = rt(
       h1(_"The Training Camp") ..
@@ -84,6 +87,7 @@ trainingcamp1 = {
       paragraphdivider() ..
       listitem_bullet(_[[Build a training camp.]])
    ),
+   h = 300,
    obj_name = "build_trainingcamp",
    obj_title = _"Build a training camp",
    obj_body = rt(
@@ -94,7 +98,7 @@ trainingcamp1 = {
 }
 
 trainingcamp2 = {
-   pos = "topright",
+   position = "topright",
    title = _"The Training Camp",
    body = rt(
       p(_[[Great, our training camp is now finished, too. Now nothing hinders us from getting the strongest warriors the world has ever seen.]]) ..
@@ -105,7 +109,7 @@ trainingcamp2 = {
 }
 
 heroes_rookies = {
-   pos = "topright",
+   position = "topright",
    title = _"Heroes and Rookies",
    body = rt(
       h1(_"Heroes and Rookies") ..
@@ -117,7 +121,7 @@ heroes_rookies = {
 }
 
 soldier_capacity = {
-   pos = "topright",
+   position = "topright",
    title = _"Soldier capacity",
    body = rt(
       h1(_"Adjusting the number of soldiers") ..
@@ -133,7 +137,7 @@ soldier_capacity = {
 }
 
 dismantle = {
-   pos = "topright",
+   position = "topright",
    title = _"Dismantle your sentry",
    body = rt(
       h1(_"Dismantling military buildings") ..
@@ -141,7 +145,7 @@ dismantle = {
       p(_[[But destroying a military building is always linked with a risk: The land is still yours, but it is no longer protected. Any enemy that builds his own military sites can take away that land without a fight, causing your building to burst into flames. Furthermore, some parts of the land can now be hidden under the fog of war. You should therefore only dismantle military buildings inside your territory, where you are safe from enemies.]]) ..
       p(_[[Have you seen your sentry? Since it cannot contain many soldiers and is next to a stronger barrier, it is rather useless.]]) ..
       paragraphdivider() ..
-      --TRANSLATORS: 'it' refers to the Barbarian sentry
+      -- TRANSLATORS: 'it' refers to the Barbarian sentry
       listitem_bullet(_[[Dismantle it.]])
    ) ..
    rt(p(_[[You can also use this opportunity to get familiar with the other options: The heroes/rookies preference and the capacity.]])),
@@ -155,10 +159,10 @@ dismantle = {
 }
 
 fortress_enhancement = {
-   pos = "topright",
-   title = _ "Enhance This Fortress",
+   position = "topright",
+   title = _"Enhance This Fortress",
    body = rt(
-      h1(_ "Enhancing Buildings") ..
+      h1(_"Enhancing Buildings") ..
       p(_[[Well done. Now you know how to draw back your soldiers from the places where you don't need them. Now I'll tell you how to reinforce your front line.]]) ..
       p(_[[This fortress is already quite strong and conquers a lot of space. But there is an even bigger building: the citadel.]]) ..
       p(_[[Citadels can't be built directly. Instead, you'll have to construct a fortress first and then enhance it to a citadel. To do so, click on the fortress, then choose the ‘Enhance to Citadel’ button.]]) ..
@@ -168,7 +172,7 @@ fortress_enhancement = {
    obj_name = "enhance_fortress",
    obj_title = _"Enhance your fortress to a citadel",
    obj_body = rt(
-      h1(_ "Enhance Your Fortress") ..
+      h1(_"Enhance Your Fortress") ..
       paragraphdivider() ..
       listitem_bullet(_[[Enhance your fortress to a mighty citadel.]]) ..
       listitem_arrow(_[[The citadel can house 12 soldiers and is the biggest military building the barbarians can build. It also costs a lot of resources and takes a long time to build. It is most suited to guard strategically important points like constricted points or mountains.]])
@@ -176,26 +180,29 @@ fortress_enhancement = {
 }
 
 attack_enemy = {
-   pos = "topright",
-   field = wl.Game().map:get_field(29,4),
+   position = "topright",
+   field = wl.Game().map:get_field(29,4), -- show the lost territory
    title = _"Defeat your Enemy",
    body = rt(
       h1(_"Defeat the Enemy") ..
       p(_[[Great work, the citadel is finished. But what is that: A hostile tribe has settled next to us while the citadel was under construction! Do you see how it took away a part of our land? And our lumberjack has no lost his working place. That is what I talked about. Let's take our land back and defeat the enemy.]]) ..
       p(_[[To attack a building, click on the door, choose the number of soldiers that you wish to send and click on the attack button. Your soldiers will come from all nearby military buildings. Likewise, the defenders will come from all nearby military buildings of the enemy and intercept your forces.]]) ..
+      paragraphdivider() ..
       listitem_bullet(_[[Attack and conquer all military buildings of the enemy and destroy their headquarters.]])
    ),
+   h = 350,
    obj_name = "defeated_the_empire",
-   obj_title = _ "Defeat the enemy tribe",
+   obj_title = _"Defeat the enemy tribe",
    obj_body = rt(
       h1(_"Defeat Your Enemy") ..
+      paragraphdivider() ..
       listitem_bullet(_[[Defeat the nearby enemy.]]) ..
       listitem_arrow(_[[To attack a building, click on its doors, choose the number of attacking soldiers, then send them via the ‘Attack’ button.]])
    )
 }
 
 conclude_tutorial = {
-   title = _ "Conclusion",
+   title = _"Conclusion",
    body = rt(
       h1(_"Conclusion") ..
       p(_[[Thank you for playing this tutorial. I hope you enjoyed it and you learned how to create and train soldiers, how to control where they go and how to defeat an enemy. Did you see how easy you could overwhelm your enemy? Having trained soldiers is a huge advantage.]]) ..
@@ -203,3 +210,4 @@ conclude_tutorial = {
       p(_[[You are now ready to play the campaigns. They will teach you about the different economies of the tribes. You can also play the remaining tutorials, but they are not crucial for succeeding in the campaigns.]])
    )
 }
+

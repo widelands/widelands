@@ -4,7 +4,7 @@
 
 function intro()
    sleep(200)
-   msg_box(introduction)
+   message_box_objective(plr, introduction)
 
    training()
 end
@@ -13,16 +13,16 @@ function training()
    -- Teach about trainingsites and soldiers' abilities
    sleep(5000) -- to let soldiers walk
 
-   msg_box(abilities)
-   local o = msg_box(battlearena1)
+   message_box_objective(plr, abilities)
+   local o = message_box_objective(plr, battlearena1)
    while #plr:get_buildings("battlearena") == 0 do sleep(500) end
    o.done = true
-   msg_box(battlearena2)
+   message_box_objective(plr, battlearena2)
 
-   o = msg_box(trainingcamp1)
+   o = message_box_objective(plr, trainingcamp1)
    while #plr:get_buildings("trainingcamp") == 0 do sleep(500) end
    o.done = true
-   msg_box(trainingcamp2)
+   message_box_objective(plr, trainingcamp2)
 
    sleep(300)
 
@@ -30,9 +30,9 @@ function training()
 end
 
 function military_buildings()
-   msg_box(heroes_rookies)
-   msg_box(soldier_capacity)
-   local o = msg_box(dismantle)
+   message_box_objective(plr, heroes_rookies)
+   message_box_objective(plr, soldier_capacity)
+   local o = message_box_objective(plr, dismantle)
 
    while #plr:get_buildings("sentry") > 1 do sleep(200) end
    o.done = true
@@ -46,7 +46,7 @@ function enhance_fortress()
    sleep(5000)
 
    local citadel_field = wl.Game().map:get_field(32, 62)
-   local o = msg_box(fortress_enhancement)
+   local o = message_box_objective(plr, fortress_enhancement)
    while not (citadel_field.immovable and
       citadel_field.immovable.descr.name == "citadel") do sleep(800) end
    o.done = true
@@ -85,7 +85,7 @@ function create_enemy()
 end
 
 function attack()
-   local o = msg_box(attack_enemy)
+   local o = message_box_objective(plr, attack_enemy)
 
    local plr2 = wl.Game().players[2]
    while #plr2:get_buildings("headquarters") > 0 do
@@ -98,8 +98,8 @@ end
 
 function conclusion()
    sleep(4000)
-   msg_box(conclude_tutorial)
+   message_box_objective(plr, conclude_tutorial)
 end
 
-
 run(intro)
+

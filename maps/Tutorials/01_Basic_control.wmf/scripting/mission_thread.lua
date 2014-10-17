@@ -1,16 +1,17 @@
 -- ================
 -- Mission thread
 -- ================
+
 function starting_infos()
    map:place_immovable("debris00",second_quarry_field)
    -- so that the player cannot build anything here
 
    sleep(100)
 
-   msg_box(initial_message_01)
+   message_box_objective(plr, initial_message_01)
    sleep(500)
 
-   local o = msg_box(initial_message_02)
+   local o = message_box_objective(plr, initial_message_02)
 
    -- Wait for buildhelp to come on
    while not wl.ui.MapView().buildhelp do
@@ -30,7 +31,7 @@ function build_lumberjack()
    -- We take control, everything that we build is legal
    immovable_is_legal = function(i) return true end
 
-   msg_box(lumberjack_message_01)
+   message_box_objective(plr, lumberjack_message_01)
 
    local blocker = UserInputDisabler:new()
    close_windows()
@@ -38,22 +39,26 @@ function build_lumberjack()
    scroll_smoothly_to(first_lumberjack_field)
    mouse_smoothly_to(first_lumberjack_field)
    sleep(500)
-   msg_box(lumberjack_message_02)
+   message_box_objective(plr, lumberjack_message_02)
    sleep(500)
 
    click_on_field(first_lumberjack_field)
    click_on_panel(wl.ui.MapView().windows.field_action.tabs.small)
    click_on_panel(wl.ui.MapView().windows.field_action.buttons.lumberjacks_hut)
 
-   enter_road_building_mode(first_lumberjack_field.brn.immovable)
-
    sleep(500)
-   msg_box(lumberjack_message_03)
+
+   if wl.ui.MapView().is_building_road then
+      message_box_objective(plr, lumberjack_message_03a)
+   else
+      enter_road_building_mode(first_lumberjack_field.brn.immovable)
+      message_box_objective(plr, lumberjack_message_03b)
+   end
    sleep(500)
 
    click_on_field(map.player_slots[1].starting_field.brn)
 
-   msg_box(lumberjack_message_04)
+   message_box_objective(plr, lumberjack_message_04)
 
    register_immovable_as_allowed(first_lumberjack_field.immovable) -- hut + flag
 
@@ -68,7 +73,7 @@ function build_lumberjack()
 
    if not (f.immovable and f.immovable.descr.type_name == "flag") then
       -- only show this if the user has not already built a flag
-      local o = msg_box(lumberjack_message_05)
+      local o = message_box_objective(plr, lumberjack_message_05)
 
       local blocker = UserInputDisabler:new()
       close_windows()
@@ -85,27 +90,25 @@ function build_lumberjack()
 
       sleep(300)
 
-      msg_box(lumberjack_message_06)
+      message_box_objective(plr, lumberjack_message_06)
    else
       -- if the flag is already built, show the player a different message box
-      msg_box(flag_built)
+      message_box_objective(plr, flag_built)
    end
 
-
-
    sleep(30*1000) -- let the player experiment a bit with the speed
-   msg_box(construction_site_window)
+   message_box_objective(plr, construction_site_window)
 
    while #plr:get_buildings("lumberjacks_hut") < 1 do sleep(300) end
 
-   msg_box(lumberjack_message_07)
+   message_box_objective(plr, lumberjack_message_07)
 
    learn_to_move()
 end
 
 function learn_to_move()
    -- Teaching the user how to scroll on the map
-   local o = msg_box(inform_about_rocks)
+   local o = message_box_objective(plr, inform_about_rocks)
 
    function _wait_for_move()
       local cx = wl.ui.MapView().viewpoint_x
@@ -120,13 +123,13 @@ function learn_to_move()
    o.done = true
    sleep(3000) -- Give the player a chance to try this some more
 
-   o = msg_box(tell_about_right_drag_move)
+   o = message_box_objective(plr, tell_about_right_drag_move)
 
    _wait_for_move()
    o.done = true
    sleep(3000) -- Give the player a chance to try this some more
 
-   o = msg_box(tell_about_minimap)
+   o = message_box_objective(plr, tell_about_minimap)
 
    -- Wait until the minimap has been opened and closed again
    while not wl.ui.MapView().windows.minimap do sleep(100) end
@@ -135,7 +138,7 @@ function learn_to_move()
    o.done = true
    sleep(500)
 
-   msg_box(congratulate_and_on_to_quarry)
+   message_box_objective(plr, congratulate_and_on_to_quarry)
 
    build_a_quarry()
 end
@@ -144,7 +147,7 @@ function build_a_quarry()
    sleep(200)
 
    -- Teaching how to build a quarry and the nits and knacks of road building.
-   local o = msg_box(order_quarry_recap_how_to_build)
+   local o = message_box_objective(plr, order_quarry_recap_how_to_build)
 
    local cs = nil
    immovable_is_legal = function(i)
@@ -160,8 +163,6 @@ function build_a_quarry()
 
    o.done = true
    register_immovable_as_allowed(cs)
-
-   enter_road_building_mode(cs.fields[1].brn.immovable)
 
    local function _rip_road()
       for idx,f in ipairs(cs.fields[1].brn:region(2)) do
@@ -180,7 +181,15 @@ function build_a_quarry()
 
    immovable_is_legal = function() return true end
 
-   msg_box(talk_about_roadbuilding_00)
+   if wl.ui.MapView().is_building_road then
+      message_box_objective(plr, talk_about_roadbuilding_00a)
+   else
+      message_box_objective(plr, talk_about_roadbuilding_00b)
+      click_on_field(cs.fields[1].brn)
+      click_on_panel(wl.ui.MapView().windows.field_action.buttons.build_road, 300)
+      -- show the user how to enter road building mode manually
+   end
+
    -- Showoff one-by-one roadbuilding
    click_on_field(map:get_field(9,12))
    click_on_field(map:get_field(10,12))
@@ -192,7 +201,7 @@ function build_a_quarry()
 
    _rip_road()
 
-   msg_box(talk_about_roadbuilding_01)
+   message_box_objective(plr, talk_about_roadbuilding_01)
    -- Showoff direct roadbuilding
    click_on_field(cs.fields[1].brn)
    click_on_panel(wl.ui.MapView().windows.field_action.buttons.build_road, 300)
@@ -204,7 +213,7 @@ function build_a_quarry()
 
    blocker:lift_blocks()
 
-   local o = msg_box(talk_about_roadbuilding_02)
+   local o = message_box_objective(plr, talk_about_roadbuilding_02)
 
    -- The player is allowed to build roads and flags at will
    immovable_is_legal = function(i)
@@ -237,9 +246,9 @@ end
 function second_quarry()
    sleep(200)
 
-   local o = msg_box(build_second_quarry)
+   local o = message_box_objective(plr, build_second_quarry)
    second_quarry_field.immovable:remove()
-   -- remove this immovable
+   -- remove this immovable (debris)
 
    local cs = nil
    immovable_is_legal = function(i)
@@ -271,7 +280,7 @@ function census_and_statistics(field)
 
    wl.ui.MapView():abort_road_building()
 
-   msg_box(census_and_statistics_00)
+   message_box_objective(plr, census_and_statistics_00)
    -- Pick any empty field
    local function _pick_empty_field()
       local reg = field:region(2)
@@ -290,7 +299,7 @@ function census_and_statistics(field)
    click_on_panel(wl.ui.MapView().windows.field_action.tabs.watch)
    click_on_panel(wl.ui.MapView().windows.field_action.buttons.statistics)
 
-   msg_box(census_and_statistics_01)
+   message_box_objective(plr, census_and_statistics_01)
 
    blocker:lift_blocks()
 end
@@ -299,20 +308,21 @@ function messages()
    -- Teach the player about receiving messages
    sleep(10)
 
-   local o = send_message(teaching_about_messages)
+   send_message(plr, teaching_about_messages.title, teaching_about_messages.body, teaching_about_messages)
+   local o = add_campaign_objective(teaching_about_messages)
 
    while #plr.inbox > 0 do sleep(200) end
    o.done = true
 
    sleep(500)
 
-   local o = msg_box(closing_msg_window_00)
+   local o = message_box_objective(plr, closing_msg_window_00)
 
    -- Wait for messages window to close
    while wl.ui.MapView().windows.messages do sleep(300) end
    o.done = true
 
-   msg_box(closing_msg_window_01)
+   message_box_objective(plr, closing_msg_window_01)
 
    sleep(800)
 
@@ -327,7 +337,7 @@ function destroy_quarries()
    -- Wait for messages to arrive
    while #plr.inbox < 2 do sleep(300) end
 
-   local o = msg_box(destroy_quarries_message)
+   local o = message_box_objective(plr, destroy_quarries_message)
 
    -- From now on, the player can build whatever he wants
    terminate_bad_boy_sentinel = true
@@ -344,7 +354,7 @@ function expansion()
    -- Teach about expanding the territory
    sleep(10)
 
-   local o = msg_box(introduce_expansion)
+   local o = message_box_objective(plr, introduce_expansion)
 
    -- wait until there are soldiers inside so that the player sees the expansion
    local soldier_inside = false
@@ -361,7 +371,7 @@ function expansion()
 
    o.done = true
    sleep(4000)
-   msg_box(military_building_finished)
+   message_box_objective(plr, military_building_finished)
 
    conclusion()
 end
@@ -371,7 +381,7 @@ function conclusion()
 
    -- Conclude the tutorial with final words and information
    -- on how to quit
-   msg_box(conclude_tutorial)
+   message_box_objective(plr, conclude_tutorial)
 
 end
 

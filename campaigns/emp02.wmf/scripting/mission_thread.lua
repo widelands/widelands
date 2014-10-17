@@ -1,5 +1,5 @@
 -- =======================================================================
---                              Mission Threads                             
+--                              Mission Threads
 -- =======================================================================
 function building_materials()
    sleep(200)
@@ -10,7 +10,7 @@ function building_materials()
    p1:reveal_fields(forests:region(6))
    -- Hide again in 5 seconds
    run(function() sleep(5000) p1:hide_fields(forests:region(6)) end)
-   
+
    -- Show the trees
    scroll_smoothly_to(forests)
 
@@ -57,7 +57,7 @@ function food_thread()
       if s > 0 then break end
       sleep(2344)
    end
-   
+
    send_msg(amalea_1)
    p1:allow_buildings{
       "well",
@@ -76,7 +76,7 @@ function food_thread()
    local o = add_obj(obj_build_Food_infrastructure)
 
    -- Run easter egg: Amalea says something when Tavern is done
-   run(function() 
+   run(function()
       while #p1:get_buildings("tavern") < 1 do sleep(2349) end
       send_msg(amalea_2)
    end)
@@ -110,7 +110,7 @@ function mining_infrastructure()
    local iron_mountain = wl.Game().map:get_field(38,37)
    p1:reveal_fields(coal_mountain:region(6))
    p1:reveal_fields(iron_mountain:region(6))
-   run(function() sleep(5000) 
+   run(function() sleep(5000)
       p1:hide_fields(coal_mountain:region(6))
       p1:hide_fields(iron_mountain:region(6))
    end)
@@ -133,7 +133,7 @@ function mining_infrastructure()
    }
 
    local o = add_obj(obj_build_mining_infrastructure)
-   -- Wait for the infrastructure to come up 
+   -- Wait for the infrastructure to come up
    while true do
       local rv = p1:get_buildings{
          "coalmine",
@@ -180,7 +180,7 @@ function expand_and_build_marblemine()
    -- sleep while not owning 26, 21
    while wl.Game().map:get_field(26,21).owner ~= p1 do sleep(3243) end
    o.done = true
-   
+
    -- Marble Mountains
    local marblemountains = wl.Game().map:get_field(35,19)
    p1:reveal_fields(marblemountains:region(5))

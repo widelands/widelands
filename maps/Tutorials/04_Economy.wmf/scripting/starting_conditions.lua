@@ -5,18 +5,18 @@
 plr:forbid_buildings{"scouts_house"} -- otherwise, player could scout and attack the enemy when he should not
 
 function init_player()
-   -- a normal headquarters, but without helms, lances, ores, coal
+   -- a headquarters without helms, lances, ores and coal
    prefilled_buildings(plr, { "headquarters", sf.x, sf.y,
       wares = {
          ax = 6,
          bread_paddle = 2,
          basket = 2,
-         bread = 28, -- was 8
+         bread = 28,
          cloth = 5,
          fire_tongs = 2,
          fish = 6,
          fishing_rod = 2,
-         flour = 34, -- was 4
+         flour = 34,
          grape = 4,
          hammer = 14,
          hunting_spear = 2,
@@ -26,14 +26,14 @@ function init_player()
          meal = 4,
          meat = 6,
          pick = 8,
-         ration = 5, -- was 12
+         ration = 5,
          saw = 2,
          scythe = 5,
          shovel = 6,
          stone = 40,
-         log = 60, --was 30
+         log = 60,
          water = 12,
-         wheat = 24, -- was 4
+         wheat = 24,
          wine = 8,
          wood = 45,
          wool = 2,
@@ -51,9 +51,6 @@ function init_player()
          toolsmith = 2,
          weaponsmith = 1,
          donkey = 5,
-      },
-      soldiers = {
-         [{0,0,0,0}] = 0, -- was 45
       }
    })
 
@@ -171,3 +168,4 @@ function init_player()
    connected_road(plr,map:get_field(115,25).immovable,"bl,bl")
    connected_road(plr,map:get_field(97,54).immovable,"r,r,tr")
 end
+

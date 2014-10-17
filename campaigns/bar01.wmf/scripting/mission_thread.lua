@@ -17,42 +17,42 @@ cattle_farm_done = false
 function introduction_thread()
    sleep(2000)
 
-   send_msg(briefing_msg_01)
+   message_box_objective(plr, briefing_msg_01)
    -- these buildings are still burning, but only for a while
    map:place_immovable("destroyed_building",map:get_field(7,41),"barbarians")
    map:place_immovable("destroyed_building",map:get_field(5,52),"barbarians")
    plr:reveal_fields(al_thunran:region(8))
-   send_msg(briefing_msg_02) -- Al'thunran
+   message_box_objective(plr, briefing_msg_02) -- Al'thunran
    plr:reveal_fields(grave:region(4))
-   send_msg(briefing_msg_03) -- grave
-   send_msg(briefing_msg_04)
+   message_box_objective(plr, briefing_msg_03) -- grave
+   message_box_objective(plr, briefing_msg_04)
 
-   send_msg(briefing_msg_05)
-   send_msg(briefing_msg_06)
-   send_msg(briefing_msg_07)
+   message_box_objective(plr, briefing_msg_05)
+   message_box_objective(plr, briefing_msg_06)
+   message_box_objective(plr, briefing_msg_07)
 
    -- introduction of Khantrukh
-   send_msg(briefing_msg_08)
+   message_box_objective(plr, briefing_msg_08)
 
-   send_msg(order_msg_ranger)
-   local obj = add_obj(obj_build_rangers)
+   message_box_objective(plr, order_msg_ranger)
+   local obj = add_campaign_objective(obj_build_rangers)
 
    while not check_for_buildings(plr, {rangers_hut = 2}) do sleep(500) end
    obj.done = true
 
    plr:allow_buildings{"sentry","barrier"}
 
-   send_msg(order_msg_1)
-   send_msg(order_msg_2)
+   message_box_objective(plr, order_msg_1)
+   message_box_objective(plr, order_msg_2)
 
    -- Reveal the rocks
    local rocks = wl.Game().map:get_field(27, 48)
    plr:reveal_fields(rocks:region(6))
-   local way = scroll_smoothly_to(rocks, 1500)
+   local way = scroll_smoothly_nordwards_to(rocks, 1500)
 
-   send_msg(order_msg_3)
-   obj = add_obj(obj_claim_northeastern_rocks)
-   send_msg(order_msg_4)
+   message_box_objective(plr, order_msg_3)
+   obj = add_campaign_objective(obj_claim_northeastern_rocks)
+   message_box_objective(plr, order_msg_4)
 
    -- Move back
    timed_scroll(array_reverse(way), 10)
@@ -64,7 +64,7 @@ function introduction_thread()
    end
    obj.done = true
 
-   send_msg(order_msg_5_quarry)
+   message_box_objective(plr, order_msg_5_quarry)
 
    quarry_done = true
 end
@@ -81,9 +81,9 @@ function mines_and_food_thread()
       sleep(4000)
    end
 
-   -- Send a msg and add the objective
-   send_msg(order_msg_6_geologist)
-   o = add_obj(obj_build_mines)
+   -- Send a message and add the objective
+   message_box_objective(plr, order_msg_6_geologist)
+   o = add_campaign_objective(obj_build_mines)
    plr:allow_buildings{
       "coalmine",
       "oremine",
@@ -92,19 +92,19 @@ function mines_and_food_thread()
    }
 
    sleep(10000)
-   send_msg(story_msg2)
+   message_box_objective(plr, story_msg2)
 
    -- Wait for completion
    while not check_for_buildings(plr, {coalmine = 1, oremine = 1}) do
       sleep(5000)
    end
    o.done = true
-   send_msg(order_msg_7_mines_up)
-   send_msg(order_msg_8_mines_up)
-   send_msg(order_msg_9_hunter)
-   send_msg(order_msg_10_bread)
+   message_box_objective(plr, order_msg_7_mines_up)
+   message_box_objective(plr, order_msg_8_mines_up)
+   message_box_objective(plr, order_msg_9_hunter)
+   message_box_objective(plr, order_msg_10_bread)
 
-   local obj_bf = add_obj(obj_basic_food)
+   local obj_bf = add_campaign_objective(obj_basic_food)
    -- The function to check for completeness
    run(function()
       local tavern_msg_done = nil
@@ -114,11 +114,11 @@ function mines_and_food_thread()
             "hunters_hut", "gamekeepers_hut", "tavern"
          }
          if #rv.hunters_hut >= 1 and not hunter_msg_done then
-            send_msg(order_msg_11_basic_food_began)
+            message_box_objective(plr, order_msg_11_basic_food_began)
             hunter_msg_done = true
          end
          if #rv.tavern >= 1 and not tavern_msg_done then
-            send_msg(order_msg_13_tavern)
+            message_box_objective(plr, order_msg_13_tavern)
             tavern_msg_done = true
          end
          if #rv.hunters_hut >= 1 and #rv.gamekeepers_hut >= 1
@@ -127,10 +127,10 @@ function mines_and_food_thread()
       end
       obj_bf.done = true
       sleep(5000)
-      send_msg(story_msg4)
+      message_box_objective(plr, story_msg4)
    end)
 
-   local obj_farming = add_obj(obj_begin_farming)
+   local obj_farming = add_campaign_objective(obj_begin_farming)
 
    -- Start the cattlefarm thread
    run(cattle_farm)
@@ -143,7 +143,7 @@ function mines_and_food_thread()
          end
          sleep(4234)
       end
-      send_msg(order_msg_12_farming_began)
+      message_box_objective(plr, order_msg_12_farming_began)
       obj_farming.done = true
    end)
 
@@ -163,19 +163,18 @@ function mines_and_food_thread()
    end
 
    -- Ready to build refiner stuff
-   send_msg(order_msg_14_refine_ore)
+   message_box_objective(plr, order_msg_14_refine_ore)
    plr:allow_buildings{"smelting_works"}
-   o = add_obj(obj_refine_ores)
+   o = add_campaign_objective(obj_refine_ores)
    while #plr:get_buildings("smelting_works") < 1 do
       sleep(6223)
    end
    o.done = true
 
-   start_time = wl.Game().time
    -- Information about making mines deeper
    -- Wait until the player has an experienced worker.
    local chiefminer_found = false
-   while ((not chiefminer_found)) do
+   while not chiefminer_found do
       local mines = plr:get_buildings{"coalmine","oremine"}
       for k,v in ipairs(mines.coalmine) do
          if v:get_workers("chief-miner") > 0 then
@@ -190,15 +189,15 @@ function mines_and_food_thread()
          end
       end
 
-      -- if everything else is done, show this objective. Otherwise, the player has nothing to do.
+      -- If everything else is done, show this objective, too. Otherwise, the player has nothing to do.
       if (build_materials_done and quarry_done and cattle_farm_done) then
          chiefminer_found = true
       end
       sleep(5000)
    end
-   send_msg(order_msg_15_mines_exhausted)
-   plr:allow_buildings{ "deep_coalmine", "deep_oremine" , "inn", "micro-brewery" }
-   local obj = add_obj(obj_enhance_buildings)
+   message_box_objective(plr, order_msg_15_mines_exhausted)
+   plr:allow_buildings{"deep_coalmine", "deep_oremine", "inn", "micro-brewery"}
+   local obj = add_campaign_objective(obj_enhance_buildings)
 
    run(function()
       while true do
@@ -230,20 +229,20 @@ function build_materials_thread()
       sleep(5421)
    end
 
-   send_msg(order_msg_16_blackwood)
+   message_box_objective(plr, order_msg_16_blackwood)
    plr:allow_buildings{"hardener"}
    sf.immovable:set_wares("blackwood",5)
    -- So that player has really little, but still enough to expand a bit
-   local o = add_obj(obj_better_material_1)
+   local o = add_campaign_objective(obj_better_material_1)
 
    sleep(30*1000)
-   send_msg(story_msg1)
+   message_box_objective(plr, story_msg1)
    while #plr:get_buildings("hardener") < 1 do sleep(5421) end
    o.done = true
 
-   send_msg(order_msg_17_grout)
+   message_box_objective(plr, order_msg_17_grout)
    plr:allow_buildings{"lime_kiln", "well", "charcoal_kiln"}
-   o = add_obj(obj_better_material_2)
+   o = add_campaign_objective(obj_better_material_2)
    -- Wait for the buildings to be built
    while true do
       local rv = plr:get_buildings{"lime_kiln", "well",
@@ -256,12 +255,12 @@ function build_materials_thread()
    end
    o.done = true
 
-   send_msg(order_msg_18_reed)
+   message_box_objective(plr, order_msg_18_reed)
    plr:allow_buildings{"reed_yard"}
-   o = add_obj(obj_better_material_3)
+   o = add_campaign_objective(obj_better_material_3)
    while #plr:get_buildings("reed_yard") < 1 do sleep(5421) end
 
-   send_msg(order_msg_19_all_material)
+   message_box_objective(plr, order_msg_19_all_material)
    o.done = true
 
    build_materials_done = true
@@ -275,13 +274,13 @@ function cattle_farm()
       sleep(7834)
    end
 
-   send_msg(msg_cattlefarm_00)
+   message_box_objective(plr, msg_cattlefarm_00)
 
-   local o = add_obj(obj_build_cattlefarm)
+   local o = add_campaign_objective(obj_build_cattlefarm)
    plr:allow_buildings{"cattlefarm"}
 
    sleep(10000)
-   send_msg(story_msg3)
+   message_box_objective(plr, story_msg3)
 
    while not check_for_buildings(plr, { cattlefarm = 1 }) do
       sleep(2323)
@@ -297,10 +296,10 @@ end
 -- ======================
 function story_messages_thread()
    wake_me(180 * 1000)
-   send_msg(msg_story_2)
+   message_box_objective(plr, msg_story_2)
 
    wake_me(600 * 1000)
-   send_msg(msg_story_1)
+   message_box_objective(plr, msg_story_1)
 end
 
 -- =================
@@ -312,7 +311,7 @@ function mission_complete_thread()
          sleep(10000)
    end
 
-   send_msg(msg_mission_complete)
+   message_box_objective(plr, msg_mission_complete)
    plr:reveal_scenario("barbariantut01")
 end
 
@@ -325,3 +324,4 @@ run(story_messages_thread)
 include "map:scripting/secret_village.lua" -- starts the thread
 
 run(mission_complete_thread)
+

@@ -10,8 +10,7 @@ plr:allow_buildings{
    "rangers_hut"
 }
 
--- Place hq and fill it with wares
---hq_pos = wl.Game().map:get_field(12,10)
+-- Place headquarters and fill it with wares
 hq = plr:place_building("headquarters_interim", sf, false, true)
 hq:set_wares{
    ax=6,
@@ -63,6 +62,6 @@ connected_road(plr, sf.brn.immovable, "l,l|l,bl,bl|br,r|br,r|r,tr|tr,tr,tr")
 -- Place some initial buildings
 prefilled_buildings(plr,
    {"lumberjacks_hut", 15, 11},
-   {"lumberjacks_hut", 12, 13},
+   {"lumberjacks_hut", 9, 13},
    {"quarry", 8, 12}
 )

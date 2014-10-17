@@ -9,10 +9,12 @@ set_textdomain("Basic_control.wmf")
 
 include "scripting/coroutine.lua"
 include "scripting/infrastructure.lua"
-include "scripting/ui.lua"
+include "scripting/messages.lua"
 include "scripting/table.lua"
+include "scripting/ui.lua"
 
 -- Constants
+sf = map.player_slots[1].starting_field
 first_lumberjack_field = map:get_field(16,10)
 first_quarry_field = map:get_field(8,12)
 second_quarry_field = map:get_field(5,10)
@@ -29,3 +31,4 @@ include "map:scripting/helper_functions.lua"
 include "map:scripting/helper_functions_demonstration.lua"
 
 include "map:scripting/mission_thread.lua"
+

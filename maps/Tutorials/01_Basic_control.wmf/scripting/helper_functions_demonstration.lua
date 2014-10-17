@@ -20,15 +20,18 @@ function UserInputDisabler:new()
 end
 function UserInputDisabler:establish_blocks()
    self._ui_state = wl.ui.get_user_input_allowed()
-   local game = wl.Game()
-   self._as_state = game.allow_saving
+   self._as_state = wl.Game().allow_saving
+   self._game_speed = wl.Game().desired_speed
 
    wl.ui.set_user_input_allowed(false)
    wl.Game().allow_saving = false
+   -- whatever we do, we want it to happen slowly
+   wl.Game().desired_speed = 1000
 end
 function UserInputDisabler:lift_blocks()
    wl.ui.set_user_input_allowed(self._ui_state)
    wl.Game().allow_saving = self._as_state
+   wl.Game().desired_speed = self._game_speed
 end
 
 function click_on_field(f, g_T, g_sleeptime)
@@ -91,32 +94,42 @@ function register_immovable_as_allowed(i)
       registered_player_immovables[_fmt(i.fields[1].brn)] = true
    end
 end
-register_immovable_as_allowed(map.player_slots[1].starting_field.immovable)
+register_immovable_as_allowed(sf.immovable)
+
+-- This function removes the field from the list of allowed immovables. This is
+-- needed when the player destroys a flag, for example.
+function unregister_field(f)
+   if registered_player_immovables[_fmt(f)] then
+      registered_player_immovables[_fmt(f)] = false
+   end
+end
 
 function bad_boy_sentry()
-   local sf = map.player_slots[1].starting_field
    while not terminate_bad_boy_sentinel do
       -- Check all fields.
       local sent_msg = false
       for idx,f in ipairs(sf:region(8)) do
-         if f.immovable and f.immovable.owner == plr and
-               not registered_player_immovables[_fmt(f)] then
+         if f.immovable and f.immovable.owner == plr then
+            if not registered_player_immovables[_fmt(f)] then
 
-            -- Give the callback a chance to veto the deletion. Maybe
-            -- we expect the player to build something at the moment
-            if not immovable_is_legal(f.immovable) then
-               -- scould the player
-               if not sent_msg then
-                  msg_box(scould_player)
-                  sent_msg = true
+               -- Give the callback a chance to veto the deletion. Maybe
+               -- we expect the player to build something at the moment
+               if not immovable_is_legal(f.immovable) then
+                  -- scould the player
+                  if not sent_msg then
+                     message_box_objective(plr, scould_player)
+                     sent_msg = true
+                  end
+
+                  -- Remove the object again
+                  f.immovable:remove()
+
+                  -- Make sure that the user is not building a road at the moment.
+                  wl.ui.MapView():abort_road_building()
                end
-
-               -- Remove the object again
-               f.immovable:remove()
-
-               -- Make sure that the user is not building a road at the moment.
-               wl.ui.MapView():abort_road_building()
             end
+         else
+            unregister_field(f)
          end
       end
       sleep(1000)

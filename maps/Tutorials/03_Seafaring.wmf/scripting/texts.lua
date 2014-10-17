@@ -15,7 +15,7 @@ include "scripting/format_scenario.lua"
 -- =============
 
 intro_south = {
-   pos = "topright",
+   position = "topright",
    field = wl.Game().map.player_slots[1].starting_field,
    title = _"Seafaring",
    body = rt(
@@ -24,10 +24,11 @@ intro_south = {
       p([[]]) .. -- empty line
       p(_[[But let me first give you an overview about your territory: Here in the south, you have a whole economy with almost everything you need.]])
    ),
+   h = 300
 }
 
 intro_north = {
-   pos = "topright",
+   position = "topright",
    field = wl.Game().map:get_field(36,20), -- field of the castle
    title = _"The Northern Part",
    body = rt(
@@ -35,21 +36,23 @@ intro_north = {
       p(_[[We have tried to build a road, but the mountain is too wide and too steep. We have therefore only one possibility: We need to establish a ship route between those two parts.]]) ..
       p(_[[But I don't want to rush you: You have just arrived here and you would probably like to have a closer look at your camp. I will also take a short break and be back soon.]])
    ),
+   h = 350
 }
 
 tell_about_port = {
-   pos = "topright",
+   position = "topright",
    title = _"Ports",
    body = rt(
       h1(_"Ports") ..
       p(_[[For everything you do on the high seas, you need a port at the shore. Ports are like headquarters: They can store wares, workers and soldiers. The soldiers inside will automatically come out when an enemy attacks the port.]]) ..
       p(_[[But ports offer the possibility to transport wares via ships. When you click on the port you already have, you will notice two additional tabs: Wares and workers in the dock. They are waiting for a ship to transport them to another port. Currently, there are none because we have not yet built a second port. So let's change this!]])
    ),
+   h = 350
 }
 
 tell_about_port_building = {
-   pos = "topright",
-   field = second_port_field, --wl.Game().map:get_field(37,27), -- field of the port NOCOM
+   position = "topright",
+   field = second_port_field,
    title = _"Building ports",
    body = rt(
       h1(_"How to build a port?") ..
@@ -75,7 +78,7 @@ tell_about_port_building = {
 }
 
 tell_about_shipyard = {
-   pos = "topright",
+   position = "topright",
    title = _"Constructing ships",
    body = rt(
       h1(_"Let's build ships") ..
@@ -84,6 +87,7 @@ tell_about_shipyard = {
       paragraphdivider() ..
       listitem_bullet(_[[Build a shipyard at the cost. It is a medium building.]])
    ),
+   h = 300,
    obj_name = "build_shipyard",
    obj_title = _"Build a shipyard",
    obj_body = rt(
@@ -96,7 +100,7 @@ tell_about_shipyard = {
 }
 
 tell_about_ships = {
-   pos = "topright",
+   position = "topright",
    title = _"Constructing ships",
    body = rt(
       h1(_"Waiting for the ships") ..
@@ -117,18 +121,19 @@ tell_about_ships = {
 }
 
 expedition1 = {
-   pos = "topright",
+   position = "topright",
    title = _"No Iron",
    body = rt(
       h1(_"We lack iron") ..
-      p(_[[Your second ship might not finished yet, but we have an urgent problem.]]) ..
+      p(_[[The second ship might not finished yet, but we have an urgent problem.]]) ..
       p(_[[As you surely have already noticed, there is no iron in the mountain in the west. We have plenty of coal and goldores, but without ironores, we cannot produce any tools.]]) ..
       p(_[[Although it might take long and is expensive and not without dangers (who knows what monsters live in the sea?), I see no other possibility: We have to make an expedition into the unknown seas.]])
-   )
+   ),
+   h = 300
 }
 
 expedition2 = {
-   pos = "topright",
+   position = "topright",
    -- TRANSLATORS: This shall be the beginning of a poem
    title = _"A trip by the sea what fun it can be",
    body = rt(
@@ -151,7 +156,7 @@ expedition2 = {
 }
 
 expedition3 = {
-   pos = "topright",
+   position = "topright",
    title = _"Off to new pastures",
    body = rt(
       h1(_"The ship is ready") ..
@@ -168,13 +173,11 @@ expedition3 = {
       listitem_arrow(_[[When you click on the expedition ship, a window opens where you can control your ship.]]) ..
       listitem_bullet(_[[When you have found a suitable port space, build a port there.]])
    )
-   
-   
 }
 
 conclusion = {
-   pos = "topright",
-   field = port_on_island, --wl.Game().map:get_field(102, 36), -- port on island NOCOM
+   position = "topright",
+   field = port_on_island,
    title = _"Conclusion",
    body = rt(
       h1(_"Congratulations") ..
@@ -182,5 +185,7 @@ conclusion = {
       p(_[[In this scenario, you've learned everything about seafaring: how to build ports and ships and how to send out an expedition. Remember that expeditions are sometimes the fastest way to reach essentially needed resources - and sometimes the only one.]]) ..
       p(_[[But I want to speak a word of warning. Ports are like headquarters: They can be attacked by a nearby enemy. While your headquarters has soldiers to defend, your newly built port hasn't. You should therefore avoid to settle next to an enemy.]]) ..
       p(_[[On this map, there is no enemy to fear. As always, you can continue playing and watch how the ships deliver wares to the island when you construct some buildings here. There is also another island where you can build a port.]])
-   )
+   ),
+   h = 450
 }
+

@@ -2,11 +2,12 @@
 --                       Barbarians Campaign Mission 1
 -- =======================================================================
 
-set_textdomain("scenario_bar01.wmf")
+set_textdomain("bar01.wmf")
 
 include "scripting/coroutine.lua"
 include "scripting/objective_utils.lua"
 include "scripting/infrastructure.lua"
+include "scripting/messages.lua"
 
 -- ==========
 -- Constants
@@ -24,3 +25,4 @@ include "map:scripting/helper_functions.lua"
 include "map:scripting/starting_conditions.lua"
 
 include "map:scripting/mission_thread.lua"
+

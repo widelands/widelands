@@ -4,8 +4,8 @@
 
 function introduction()
    sleep(500)
-   msg_box(intro1)
-   msg_box(intro2)
+   message_box_objective(plr, intro1)
+   message_box_objective(plr, intro2)
 
    burn_tavern_down()
 end
@@ -16,9 +16,9 @@ function burn_tavern_down()
    sleep(250)
    tavern_field.immovable:destroy()
    sleep(50)
-   msg_box(tavern_burnt_down)
+   message_box_objective(plr, tavern_burnt_down)
    sleep(2000)
-   local o = msg_box(building_stat)
+   local o = message_box_objective(plr, building_stat)
    -- wait for the window to open and close
    while not mv.windows.building_statistics do sleep(100) end
    -- we cannot check whether the user scrolled, so let's hope he does it
@@ -26,18 +26,18 @@ function burn_tavern_down()
    o.done = true
 
    sleep(2000)
-   o = msg_box(inventory1)
+   o = message_box_objective(plr, inventory1)
    while not mv.windows.stock_menu do sleep(200) end
    o.done = true
 
-   o = msg_box(inventory2)
+   o = message_box_objective(plr, inventory2)
    -- We cannot create several objectives with the same name. Therefore, we create o2 here once and change its visibility
    local o2 = _try_add_objective(reopen_stock_menu_obj)
    o2.visible = false
    while not o.done do
       if not mv.windows.stock_menu then
          o2.visible = true
-         msg_box(reopen_stock_menu)
+         message_box_objective(plr, reopen_stock_menu)
          while not mv.windows.stock_menu do sleep(200) end
          o2.visible = false
       end
@@ -45,13 +45,13 @@ function burn_tavern_down()
       sleep(200)
    end
 
-   msg_box(inventory3)
+   message_box_objective(plr, inventory3)
 
    sleep(2000)
-   o = msg_box(build_taverns)
+   o = message_box_objective(plr, build_taverns)
 
    sleep(100*1000)
-   msg_box(ware_encyclopedia) -- a small insert
+   message_box_objective(plr, ware_encyclopedia) -- a small insert
 
    while #plr:get_buildings("tavern") < 2 do sleep(500) end
    o.done = true
@@ -61,20 +61,20 @@ end
 
 function plan_the_future()
    sleep(2000)
-   msg_box(building_priority_settings)
+   message_box_objective(plr, building_priority_settings)
    sleep(30*1000) -- give the user time to try it out
 
-   local o = msg_box(ware_stats1)
+   local o = message_box_objective(plr, ware_stats1)
    while not mv.windows.ware_statistics do sleep(200) end
    o.done = true
 
-   o = msg_box(ware_stats2)
+   o = message_box_objective(plr, ware_stats2)
    local o2 = _try_add_objective(reopen_ware_stats1_obj)
    o2.visible = false
    while not o.done do
       if not mv.windows.ware_statistics then
          o2.visible = true
-         msg_box(reopen_ware_stats1)
+         message_box_objective(plr, reopen_ware_stats1)
          while not mv.windows.ware_statistics do sleep(200) end
          o2.visible = false
       end
@@ -82,13 +82,13 @@ function plan_the_future()
       sleep(200)
    end
 
-   o = msg_box(ware_stats3)
+   o = message_box_objective(plr, ware_stats3)
    o2 = _try_add_objective(reopen_ware_stats2_obj)
    o2.visible = false
    while not o.done do
       if not mv.windows.ware_statistics then
          o2.visible = true
-         msg_box(reopen_ware_stats2)
+         message_box_objective(plr, reopen_ware_stats2)
          while not mv.windows.ware_statistics do sleep(200) end
          o2.visible = false
       end
@@ -96,24 +96,24 @@ function plan_the_future()
       sleep(200)
    end
 
-   o = msg_box(ware_stats4)
+   o = message_box_objective(plr, ware_stats4)
    while mv.windows.ware_statistics do sleep(500) end
    o.done = true
 
    sleep(2000)
 
-   o = msg_box(economy_settings1)
+   o = message_box_objective(plr, economy_settings1)
    while not mv.windows.economy_options do sleep(200) end
    o.done = true
-   msg_box(economy_settings2)
-   o = msg_box(economy_settings3)
+   message_box_objective(plr, economy_settings2)
+   o = message_box_objective(plr, economy_settings3)
 
    while sf.immovable:get_wares("marblecolumn") < 12 do sleep(500) end
    -- wait that the player has really changed the target quantity
 
    o.visible = false
    -- just forget about the old objective, the new one includes the old one
-   o = msg_box(warehouse_preference_settings)
+   o = message_box_objective(plr, warehouse_preference_settings)
 
    local enough_wares = false
    while not enough_wares do
@@ -131,9 +131,10 @@ function plan_the_future()
 end
 
 function conclude()
-   msg_box(conclusion)
+   message_box_objective(plr, conclusion)
 end
 
 
 run(init_player)
 run(introduction)
+
