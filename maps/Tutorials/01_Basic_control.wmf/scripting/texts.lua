@@ -26,7 +26,7 @@ initial_message_01 = {
    title = _"Welcome to the Widelands Tutorial!",
    body = rt(
       h1(_"Welcome to Widelands!") ..
-      p(_[[Widelands is a slow-paced build-up strategy game with an emphasis on construction, not destruction. This tutorial will guide you through the basics of the game.]]) ..
+      p(_[[Widelands is a slow-paced build-up strategy game with an emphasis on construction rather than destruction. This tutorial will guide you through the basics of the game.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[Dismiss this box by left-clicking on the button below.]])
    ),
@@ -51,7 +51,7 @@ initial_message_02 = {
       h1(_"Show Building Spaces") ..
       p(_[[It is easier to understand what type of buildings can be built on which field when the symbols for the building spaces are enabled.]]) ..
       paragraphdivider() ..
-      listitem_bullet(_[[Do so now either by pressing SPACE or by clicking the fourth button from the left at the very bottom of the screen. Right-click on this window and then give it a try.]])
+      listitem_bullet(_[[Do so now, either by pressing SPACE or by clicking the fourth button from the left at the very bottom of the screen. Right-click on this window and then give it a try.]])
    )
 }
 
@@ -92,7 +92,7 @@ lumberjack_message_03b = {
    title = _"Building a Connecting Road",
    position = "topright",
    body = rt(
-      p(_[[That won’t do yet. I still need to connect the lumberjack’s hut to the rest of my road network. You have disabled the option "Start building road after placing a flag" (to change that, choose "Options" in the Widelands main menu). Therefore, I have entered the road building mode manually. I will tell you later how to do that. To build the road, all I have to do now is click on the blue flag in front of my headquarters.]])
+      p(_[[That won’t do yet. I still need to connect the lumberjack’s hut to the rest of my road network. You have disabled the option ‘Start building road after placing a flag’ (to change that, choose ‘Options’ in the Widelands main menu). Therefore, I have entered the road building mode manually. I will tell you later how to do that. To build the road, all I have to do now is click on the blue flag in front of my headquarters.]])
    ),
    show_instantly = true,
    h = 300,
@@ -113,7 +113,7 @@ lumberjack_message_05 = {
    title = _"Placing Another Flag",
    position = "topright",
    body = rt(
-      p(_[[Nice how they are working, isn’t it? But the poor carrier has a very long way to go. We can make it easier for him (and more efficient for us) when we place another blue flag on the road.]]) ..
+      p(_[[Nice how they are working, isn’t it? But the poor carrier has a very long way to go. We can make it easier for him (and more efficient for us) by placing another blue flag on the road.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[You try it this time: click on the yellow flag symbol in between the two blue flags we just placed and then click on the]])
    ) ..
@@ -146,7 +146,7 @@ flag_built = {
    position = "topright",
    body = rt(
       p(_[[I wanted to teach you how to build new flags, but it seems you have already found out on your own. Well done!]]) ..
-      p(_[[Now you have split the road in two parts with a carrier each. This means less work for him and a higher efficiency for us. You should therefore always place as many flags as possible on your roads.]]) ..
+      p(_[[Now you have split the road in two parts with a carrier each. This means less work for him and higher efficiency for us. You should therefore always place as many flags as possible on your roads.]]) ..
       p(_[[Now we only have to wait till the hut is finished.]]) ..
       p(_[[If you want things to go faster, simply use the PAGE UP key on your keyboard to increase the game speed. You can use PAGE DOWN to make the game slower again.]])
    ),
@@ -157,7 +157,7 @@ construction_site_window = {
    title = _"The Construction Site",
    body = rt(
       h1(_"Let's see the progress") ..
-      p(_[[If you click on the construction site, a window opens. You can see the wares that are still missing greyed out. You can also see the progress of this construction site.]]) ..
+      p(_[[If you click on the construction site, a window opens. You can see the wares that are still missing grayed out. You can also see the progress of this construction site.]]) ..
       -- The player doesn't know about the statistics yet. First things first.
       p(_[[To close the window, simply right-click on it. All windows in Widelands can be closed that way, except the ones with instructions, like this one. Try it out!]])
    ),
@@ -193,7 +193,7 @@ inform_about_rocks = {
       paragraphdivider() ..
       listitem_arrow(_[[The first one is to use the cursor keys on your keyboard.]]) ..
       listitem_arrow(_[[The second one is the more common and faster one: press-and-hold the right mouse button anywhere on the map, then move your mouse around and you’ll see the view scroll.]]) ..
-      listitem_arrow(_[[The third one is to use the minimap. It is especially useful for travelling big distances.]])
+      listitem_arrow(_[[The third one is to use the minimap. It is especially useful for traveling big distances.]])
    )
 }
 
@@ -216,21 +216,21 @@ tell_about_minimap = {
    body = rt(
       p(_[[Very good. And now about the minimap. You can open it by clicking on the]])
    ) ..
-   rt("image=pics/menu_toggle_minimap.png", p(_[[minimap button at the bottom of the screen or simply by using the keyboard shortcut 'm'.]])
+   rt("image=pics/menu_toggle_minimap.png", p(_[[minimap button at the bottom of the screen or simply by using the keyboard shortcut ‘m’.]])
    ) ..
    rt(
       p(_[[The minimap shows the complete map in miniature. You can directly jump to any field by left-clicking on it. You can also toggle buildings, roads, flags and player indicators on and off inside the minimap.]]) ..
       paragraphdivider() ..
-      listitem_bullet(_[[Try it out. Open the minimap, click on a few buttons and try to move. Close it when you have have experimented enough.]])
+      listitem_bullet(_[[Try it out. Open the minimap, click on a few buttons and try moving around. Close it when you have have experimented enough.]])
    ),
    h = 300,
    obj_name = "use_minimap",
    obj_title = _"Learn to use the minimap",
    obj_body = rt(
       paragraphdivider() ..
-      listitem_bullet(_[[Open the minimap by using the third button from the left on the bottom of your screen or the 'm' key.]]) ..
+      listitem_bullet(_[[Open the minimap by using the third button from the left on the bottom of your screen or the ‘m’ key.]]) ..
       listitem_bullet(_[[Play around a bit with the different overlays (roads, flags, etc.)]]) ..
-      listitem_bullet(_[[Close the minimap when you are ready to continue by using the same button or 'm' again. Of course, a right-click also works.]])
+      listitem_bullet(_[[Close the minimap when you are ready to continue by using the same button or ‘m’ again. Of course, a right-click also works.]])
    )
 }
 
@@ -247,13 +247,13 @@ order_quarry_recap_how_to_build = {
    title = _"How to Build a Quarry",
    body = rt(
       p(_[[Build a quarry next to those rocks here. Remember how I did it earlier?]]) ..
-      p(_[[Make sure that you are showing the building spaces, then just click on the space were you want the building to be, choose it from the window that appears and it is placed. Maybe this is a good time to explain about all those building space symbols we activated earlier.]]) ..
-      p(_[[You can build four things on fields in Widelands: Flags, small houses, medium houses and big houses. But not every field can hold everything. The build space symbols ease recognition:]])
+      p(_[[Make sure that you are showing the building spaces, then just click on the space were you want the building to be, choose it from the window that appears, and it is placed. Maybe this is a good time to explain about all those building space symbols we activated earlier.]]) ..
+      p(_[[You can build four things on fields in Widelands: flags, small houses, medium houses and big houses. But not every field can hold everything. The build space symbols ease recognition:]])
    ) ..
    rt("image=pics/big.png", p(_[[Everything can be built on the green house symbol.]])) ..
    rt("image=pics/medium.png", p(_[[Everything except for big buildings can be built on a yellow house symbol.]])) ..
    rt("image=pics/small.png", p(_[[Red building symbols can only hold small buildings and flags.]])) ..
-   rt("image=pics/set_flag.png", p(_[[And finally the yellow flag symbol only allows for flags.]])) ..
+   rt("image=pics/set_flag.png", p(_[[And finally, the yellow flag symbol only allows for flags.]])) ..
    rt(
       p(_[[If you place something on a field, the surrounding fields might have less space for holding buildings, so choose your fields wisely.]]) ..
       paragraphdivider() ..
@@ -282,7 +282,7 @@ talk_about_roadbuilding_00a = {
       p(_[[If you decide you do not want to build a road at this time, you can cancel road building by clicking on the starting flag of the road and selecting]])) ..
    rt("image=pics/menu_abort.png", p(_[[the abort symbol.]])) ..
    rt(
-      p(_[[Now, about this road. Remember: we are already in road building mode since you just ordered the quarry. You can either make it longer by one field at a time by left-clicking multiple times on neighboring fields for perfect control over the route the road takes like so:]])
+      p(_[[Now, about this road. Remember: we are already in road building mode since you just ordered the quarry. You can either make it longer by one field at a time by left-clicking multiple times on neighboring fields for perfect control over the route the road takes, like so:]])
    ),
    show_instantly = true
 }
@@ -299,7 +299,7 @@ talk_about_roadbuilding_00b = {
       p(_[[If you decide you do not want to build a road at this time, you can cancel road building by clicking on the starting flag of the road and selecting]])) ..
    rt("image=pics/menu_abort.png", p(_[[the abort symbol.]])) ..
    rt(
-      p(_[[Now, about this road. Remember: we are already in road building mode since you just ordered the quarry. You can either make it longer by one field at a time by left-clicking multiple times on neighboring fields for perfect control over the route the road takes like so:]])
+      p(_[[Now, about this road. Remember: we are already in road building mode since you just ordered the quarry. You can either make it longer by one field at a time by left-clicking multiple times on neighboring fields for perfect control over the route the road takes, like so:]])
    ),
    show_instantly = true
 }
@@ -308,7 +308,7 @@ talk_about_roadbuilding_01 = {
    position = "topright",
    field = wl.Game().map:get_field(9,12),
    title = _"Road Building",
-   body = rt(p(_[[Or, you can directly click the flag where the road should end like so:]])),
+   body = rt(p(_[[Or, you can directly click the flag where the road should end, like so:]])),
    h = 200,
    w = 250
 }
@@ -437,7 +437,7 @@ destroy_quarries_message = {
    body = rt(
       p(_[[You received some messages. See how the button at the bottom of the screen has changed appearance? You can destroy the quarries now as they are no longer of any use and just blocking space. To do so, there are two possibilities:]]) ..
       paragraphdivider() ..
-      listitem_bullet(_[[Burning down the quarry: This is the fastest way of cleaning the space. While the worker abandons the building, the wares are lost.]]) ..
+      listitem_bullet(_[[Burning down the quarry: This is the fastest way of clearing the space. While the worker abandons the building, the wares are lost.]]) ..
       listitem_bullet(_[[Dismantling the quarry: A builder will walk from the headquarters to dismantle the quarry piece by piece. Thereby, you regain some of the resources you used for the construction.]])
    ),
    h = 300,
@@ -447,7 +447,7 @@ destroy_quarries_message = {
       p(_[[Since our quarries are useless now, you can destroy them and reuse the space later on.]]) ..
       paragraphdivider() ..
       listitem_arrow(_[[There are two different ways of destroying a building: burning down and dismantling. Try them both out on your quarries.]]) ..
-      listitem_arrow(_[[Burning down the quarry: This is the fastest way of cleaning the space. While the worker abandons the building, the wares are lost.]]) ..
+      listitem_arrow(_[[Burning down the quarry: This is the fastest way of clearing the space. While the worker abandons the building, the wares are lost.]]) ..
       listitem_arrow(_[[Dismantling the quarry: A builder will walk from the headquarters to dismantle the quarry piece by piece. Thereby, you regain some of the resources you used for the construction.]])
    )
 }
@@ -465,20 +465,20 @@ introduce_expansion = {
    obj_title = _"Expand your territory",
    obj_body = rt(
       h1(_"Make your territory grow") ..
-      p(_[[In Widelands, it is necessary to build many buildings, which take a lot of space. To expand your territory, you have to build military buildings next to your border. Every tribe has several military buildings.]]) ..
+      p(_[[In Widelands, it is necessary to build many buildings, which take up a lot of space. To expand your territory, you have to build military buildings next to your border. Every tribe has several military buildings.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[The Barbarians have four different military buildings you can build: the sentry (small), the barrier and the donjon (both medium) and the fortress (big). Just choose the one you like most.]]) ..
-      listitem_arrow(_[[Remember that big buildings (green icon) cannot be built on small (red) or medium (yellow) building plots, but buildings can be built on a building spot that provides more space than they need. You should always keep that in mind when you search a suitable place.]])
+      listitem_arrow(_[[Remember that big buildings (green icon) cannot be built on small (red) or medium (yellow) building plots, but buildings can be built on a building plot that provides more space than they need. You should always keep that in mind when you search for a suitable place.]])
    )
 }
 
 
 military_building_finished = {
-   title = _"Militarysite occupied",
+   title = _"Military Site Occupied",
    body = rt(
       h1(_"Your territory has just grown!") ..
       p(_[[Great. Do you see how your territory has grown since your soldiers entered the military building?]]) ..
-      p(_[[Every military building has a certain conquer area - the more expensive the building, the more land it conquers.]])
+      p(_[[Every military building has a certain conquer area – the more expensive the building, the more land it conquers.]])
    ),
    h = 300,
    w = 350
@@ -489,7 +489,7 @@ conclude_tutorial = {
    body = rt(
       h1(_"Conclusion") ..
       p(_[[This concludes the first tutorial. In order to learn more about the game, I suggest to play one of the other tutorials. Each of them covers a different topic.]]) ..
-      p(_[[However, since you now know how to control Widelands, you can also start a game (or continue this one) and discover yourself more by.]]) ..
+      p(_[[However, since you now know how to control Widelands, you can also start a game (or continue this one) and discover more by yourself.]]) ..
       p(_[[To leave this game and return to the main menu, click on the]])
    ) ..
    rt("image=pics/menu_options_menu.png", p(_[[‘Options’ menu button on the very left at the bottom of the screen. Then click the]])) ..
