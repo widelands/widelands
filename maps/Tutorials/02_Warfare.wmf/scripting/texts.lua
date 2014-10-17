@@ -127,7 +127,6 @@ soldier_capacity = {
       h1(_"Adjusting the number of soldiers") ..
       p(_[[There is another way how you can control the strength of a military buildings: By the number of soldiers stationed there. Just click on the arrow buttons to decrease or increase the desired number of soldiers. Every buildings has a maximum capacity. In case of the barrier, it is five, for example.]]) ..
       p(_[[If you wish to send a certain soldier away, you can simply click on it. It will then be replaced by another soldier.]]) ..
-      -- TODO(codereview): Is there a possibility to create non-breaking spaces?
       p(_[[Let me also describe what the numbers in the statistic string mean. It can contain up to three numbers, e.g. '1 (+5) soldier (+2)'.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[The first number describes how many soldiers are currently in this building. In this example, only one soldier is left behind (one soldier always has to guard a military building).]]) ..

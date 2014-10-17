@@ -22,8 +22,7 @@
 #####
 
 [global]
-# TODO(codereview): Do I have to increase this?
-version = 6
+version = 7
 # Barbarians Introduction
 campname0=_"Barbarians – The Second Empire"
 campsect0=barbariantut
@@ -54,7 +53,6 @@ cnewvisi2=empiretut01
 # Naming MUST be the name of the campaign-section + "??" where ?? is an increasing number.
 #
 # name      = name of the map.
-# TODO(codereview): Is this description correct? Does campsect1 reveal barbarians01 or does barbarians01 reveal campsect01?
 # * newvisi = the name of a campaign or a scenario that must be visible, to show
 #             this entry as well - this string unhides the map, if the player
 #             completed the requirements with an older cconfig version.
