@@ -163,8 +163,7 @@ private:
 
 	bool check_supply(const BuildingObserver&);
 
-	bool consider_attack(int32_t);  // NOCOM
-	bool consider_attack2(int32_t);  // NOCOM
+	bool consider_attack(int32_t);
 
 	void print_land_stats();
 
@@ -231,9 +230,9 @@ private:
 	int32_t military_last_build_;  // sometimes expansions just stops, this is time of last military
 	                               // building build
 	Widelands::Coords
-	   last_attack_target_;  // flag to abuilding (position) that was attacked last time
+	   last_attack_target_;         // flag to abuilding (position) that was attacked last time
 	int32_t next_attack_waittime_;  // second till the next attack consideration
-	int32_t spots_;  // sum of buildable fields
+	int32_t spots_;                 // sum of buildable fields
 
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldPossession>>
 	   field_possession_subscriber_;

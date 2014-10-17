@@ -105,7 +105,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
      military_last_dismantle_(0),
      military_last_build_(-60 * 1000),
 	last_attack_target_(
-			std::numeric_limits<uint16_t>::max(), std::numeric_limits<uint16_t>::max()),
+        std::numeric_limits<uint16_t>::max(), std::numeric_limits<uint16_t>::max()),
      next_attack_waittime_(10),
      spots_(0) {
 
@@ -1743,16 +1743,6 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 	   game().map().get_fcoords(proposed_coords), game().get_gametime() + 120000);  // two minutes
 	blocked_fields.push_back(blocked);
 
-	if (best_building->type == BuildingObserver::MILITARYSITE &&
-	    best_building->desc->get_size() > BaseImmovable::SMALL)
-		log("  %1d: %-10s building %-15s at %3dx%3d, shortage of material: %s\n",
-		       player_number(),
-		       tribe_->name().c_str(),
-		       best_building->name,
-		       proposed_coords.x,
-		       proposed_coords.y,
-		       (best_building->built_mat_shortage_) ? "Y" : "N");
-
 	// we block also nearby fields
 	// if farms and so on, for quite a long time
 	// if military sites only for short time for AI can update information on near buildable fields
@@ -2311,6 +2301,15 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 						if (static_cast<int32_t>(en_bo.current_stats_) -
 						       static_cast<int32_t>(site.bo->current_stats_) >
 						    20) {
+
+							enbld = enhancement;
+							bestbld = &en_bo;
+						}
+
+						if ((static_cast<int32_t>(en_bo.current_stats_) > 85 &&
+						     en_bo.total_count() * 2 < site.bo->total_count()) ||
+						    (static_cast<int32_t>(en_bo.current_stats_) > 50 &&
+						     en_bo.total_count() * 4 < site.bo->total_count())) {
 
 							enbld = enhancement;
 							bestbld = &en_bo;
@@ -3160,14 +3159,14 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 	// this is intended to save some CPU and add randomness in attacking
 	// and also differentiate according to type
 	next_attack_waittime_ += gametime % 30;
-	if (next_attack_waittime_ > 900 && type_ == DEFENSIVE) {
-		next_attack_waittime_ = 900;
+	if (next_attack_waittime_ > 600 && type_ == DEFENSIVE) {
+		next_attack_waittime_ = 20;
 	}
-	if (next_attack_waittime_ > 750 && type_ == NORMAL) {
-		next_attack_waittime_ = 750;
+	if (next_attack_waittime_ > 450 && type_ == NORMAL) {
+		next_attack_waittime_ = 20;
 	}
-	if (next_attack_waittime_ > 600 && type_ == AGGRESSIVE) {
-		next_attack_waittime_ = 600;
+	if (next_attack_waittime_ > 300 && type_ == AGGRESSIVE) {
+		next_attack_waittime_ = 20;
 	}
 
 	// Only useable, if it owns at least one militarysite
@@ -3186,9 +3185,6 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 	bool any_attackable = false;
 	uint16_t const pn = player_number();
 	std::unordered_set<uint32_t> irrelevant_immovables;
-	uint32_t hits_tmp = 0;    // only temporary to get some statistics on usefullness
-	uint32_t missed_tmp = 0;  // of lookuptable
-	uint32_t checked_own_ms_tmp = 0;
 
 	std::vector<ImmovableFound> target_buildings;
 
@@ -3207,17 +3203,17 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 	const Game::GeneralStatsVector& genstats = game().get_general_statistics();
 
 	// first we try to prevent exhaustion of military forces (soldiers)
-	// via excessive attacking,
-	// before building an economy with mines
+	// via excessive attacking
+	// before building an economy with mines.
+	// 'Margin' is an difference between count of actual soldiers and
+	// military sites to be manned.
+	// If we have no mines yet, we need to preserve some soldiers for further
+	// expansion (if enemy allows this)
 	int32_t needed_margin = (mines_.size() < 6) ?
 	                           (6 - mines_.size()) * 3 :
 	                           0 + 2 + (type_ == NORMAL) ? 4 : 0 + (type_ == DEFENSIVE) ? 8 : 0;
 	const int32_t current_margin =
 	   genstats[pn - 1].miltary_strength.back() - militarysites.size() - num_milit_constructionsites;
-
-	// if (needed_margin > current_margin)
-	// printf (" %1d: Needed margin: %2d, current margin: %2d\n",
-	// player_number(),needed_margin,current_margin);
 
 	if (current_margin < needed_margin) {  // no attacking!
 		last_attack_target_.x = std::numeric_limits<uint16_t>::max();
@@ -3257,7 +3253,7 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 	// the logic of attacking is to pick n own military buildings - random ones
 	// and test the vicinity for attackable buildings
 	// candidates are put into target_buildings vector for later processing
-	const uint16_t test_every = 3;
+	const uint16_t test_every = 4;
 	Map& map = game().map();
 	MilitarySite* best_ms_target = nullptr;
 	Warehouse* best_wh_target = nullptr;
@@ -3267,7 +3263,7 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 
 	for (uint32_t position = gametime % test_every; position < militarysites.size();
 	     position += test_every) {
-		checked_own_ms_tmp += 1;
+		// checked_own_ms_tmp += 1;
 		std::list<MilitarySiteObserver>::iterator mso = militarysites.begin();
 		std::advance(mso, position);
 
@@ -3277,25 +3273,22 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 
 		// get list of immovable around this our military site
 		std::vector<ImmovableFound> immovables;
-		map.find_immovables(Area<FCoords>(f, vision + 2), &immovables, FindImmovableAttackable());
+		map.find_immovables(Area<FCoords>(f, vision + 3), &immovables, FindImmovableAttackable());
 
 		for (uint32_t j = 0; j < immovables.size(); ++j) {
 
 			// skip if in irrelevant_immovables
 			const uint32_t hash = immovables.at(j).coords.x << 16 | immovables.at(j).coords.y;
 			if (irrelevant_immovables.count(hash) > 0) {
-				hits_tmp += 1;
 				continue;
 			} else {
 				irrelevant_immovables.insert(hash);
-				missed_tmp += 1;
 			}
 
 			// maybe these are not good candidates to attack
 			if (upcast(MilitarySite, bld, immovables.at(j).object)) {
 
 				if (!player_attackable[bld->owner().player_number() - 1]) {
-					// irrelevant_immovables.insert(hash);
 					continue;
 				}
 
