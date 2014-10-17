@@ -48,7 +48,7 @@ battlearena1 = {
    body = rt(
       p(_[[Now I have talked about training and levels. Let me elaborate on that.]]) ..
       p(_[[A newly created soldier has no experience and is not very good at fighting. To make him stronger, you can build training sites.]]) ..
-      p(_[[One of these training sites is the battle arena. It is a big and expensive building, and it trains soldiers in evade. Since soldiers get very hungry during their workout, this building needs a lot of food and strongbeer. In a real game, you should have a good infrastucture before you build it.]]) ..
+      p(_[[One of these training sites is the battle arena. It is a big and expensive building, and it trains soldiers in evade. Since soldiers get very hungry during their workout, this building needs a lot of food and strongbeer. In a real game, you should have a good infrastructure before you build it.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[To see evade training in action, build a battle arena.]])
    ),
@@ -74,7 +74,7 @@ battlearena2 = {
    ) ..
    rt("image=tribes/barbarians/soldier/evade_level0.png", p(_[[No red dots means that the soldier is not trained, so he has level 0. All your new recruits have this.]])) ..
    rt("image=tribes/barbarians/soldier/evade_level1.png", p(_[[With every successful training step, your soldier becomes stronger. This is indicated by a red dot. This soldier is on level 1 in evade training.]])) ..
-   rt("image=tribes/barbarians/soldier/evade_level2.png", p(_[[When your soldier has reached the highest possible level (in this case level 2), this is indicated by a white blackground color.]])),
+   rt("image=tribes/barbarians/soldier/evade_level2.png", p(_[[When your soldier has reached the highest possible level (in this case level 2), this is indicated by a white background color.]])),
    h = 450
 }
 
