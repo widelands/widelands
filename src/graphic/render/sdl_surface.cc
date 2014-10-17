@@ -343,6 +343,7 @@ void SDLSurface::blit
 		alpha = bm & SDL_BLENDMODE_BLEND;
 		SDL_GetSurfaceAlphaMod(sdlsurf, &alphaval);
 		SDL_SetSurfaceAlphaMod(sdlsurf, 255);
+		SDL_SetSurfaceBlendMode(sdlsurf, SDL_BLENDMODE_NONE);
 	}
 
 	SDL_BlitSurface(sdlsurf, &srcrect, m_surface, &dstrect);

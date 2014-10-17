@@ -78,13 +78,14 @@ const Surface& SdlTtfFont::render
 		text_surface = empty_sdl_surface(shadow->w + SHADOW_OFFSET, shadow->h + SHADOW_OFFSET);
 		SDL_FillRect(text_surface,
 		             NULL,
-		             SDL_MapRGBA(text_surface->format, 255, 255, 255, SDL_ALPHA_TRANSPARENT));
+						 SDL_MapRGBA(text_surface->format, 255, 255, 255, SDL_ALPHA_TRANSPARENT));
 
 		if (text_surface->format->BitsPerPixel != 32)
 			throw RenderError("SDL_TTF did not return a 32 bit surface for shadow text. Giving up!");
 
 		SDL_Rect dstrct1 = {0, 0, 0, 0};
 		SDL_SetSurfaceAlphaMod(shadow, SDL_ALPHA_OPAQUE);
+		SDL_SetSurfaceBlendMode(shadow, SDL_BLENDMODE_NONE);
 		SDL_BlitSurface(shadow, nullptr, text_surface, &dstrct1);
 
 		uint32_t* spix = static_cast<uint32_t*>(tsurf->pixels);
