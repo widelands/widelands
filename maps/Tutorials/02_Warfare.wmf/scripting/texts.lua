@@ -115,7 +115,7 @@ heroes_rookies = {
    body = rt(
       h1(_"Heroes and Rookies") ..
       p(_[[While our soldiers are training, let me tell you what we can do with them.]]) ..
-      p(_[[In every military building, you can set the preference for heroes (trained soldiers) or rookies. From time to time, a soldier walks out of the building and is replaced by a stronger/weaker one automatically.]]) ..
+      p(_[[In every military building, you can set the preference for heroes (trained soldiers) or rookies. From time to time, a soldier will walk out of the building and be replaced by a stronger/weaker one automatically.]]) ..
       p(_[[The initial setting depends on the type of the building. For the Barbarians, the sentry is the only building that prefers rookies by default. You should change this setting to fit your current needs.]]) ..
       p(_[[When you are expanding into no man’s land, you can make your buildings prefer rookies. When you are planning to attack, send heroes into that region. Conquered buildings always prefer heroes.]])
    )
@@ -128,7 +128,7 @@ soldier_capacity = {
       h1(_"Adjusting the number of soldiers") ..
       p(_[[There is another way how you can control the strength of a military building: By the number of soldiers stationed there. Just click on the arrow buttons to decrease or increase the desired number of soldiers. Every buildings has a maximum capacity. In case of the barrier, it is five, for example.]]) ..
       p(_[[If you wish to send a certain soldier away, you can simply click on it. It will then be replaced by another soldier.]]) ..
-      p(_[[Let me also describe what the numbers in the statistic string mean. It can contain up to three numbers, e.g. ‘1 (+5) soldier (+2)’.]]) ..
+      p(_[[Let me also describe what the numbers in the statistics string mean. This string can contain up to three numbers, e.g. ‘1 (+5) soldier (+2)’.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[The first number describes how many soldiers are currently in this building. In this example, only one soldier is left inside (each military building is always guarded by at least one soldier).]]) ..
       listitem_bullet(_[[The second number tells you how many additional soldiers reside in this building, but are currently outside. The five soldiers are maybe attacking an enemy. They will return when they have been successful.]]) ..
@@ -142,7 +142,7 @@ dismantle = {
    body = rt(
       h1(_"Dismantling military buildings") ..
       p(_[[You can only reduce the number of soldiers to one. The last soldier of a building will never come out (unless this building is attacked). If you want to have your soldier elsewhere, you will have to dismantle the building (buildings of an alien tribe cannot be dismantled, only be burned down).]]) ..
-      p(_[[However, destroying a military building is always linked with a risk: The land is still yours, but it is no longer protected. Any enemy that builds his own military sites can take over that land without a fight, causing your building to burst into flames. Furthermore, some parts of the land can now be hidden under the fog of war. You should therefore only dismantle military buildings deep inside your territory where you are safe from enemies.]]) ..
+      p(_[[However, destroying a military building is always linked with a risk: The land is still yours, but it is no longer protected. Any enemy that builds his own military sites can take over that land without a fight, causing your buildings to burst into flames. Furthermore, some parts of the land can now be hidden under the fog of war. You should therefore only dismantle military buildings deep inside your territory where you are safe from enemies.]]) ..
       p(_[[Have you seen your sentry? Since it cannot contain many soldiers and is next to a stronger barrier, it is rather useless.]]) ..
       paragraphdivider() ..
       -- TRANSLATORS: 'it' refers to the Barbarian sentry
@@ -160,11 +160,11 @@ dismantle = {
 
 fortress_enhancement = {
    position = "topright",
-   title = _"Enhance This Fortress",
+   title = _"Enhance Your Fortress",
    body = rt(
       h1(_"Enhancing Buildings") ..
-      p(_[[Well done. Now you know how to draw back your soldiers from the places where you don’t need them. Now I’ll tell you how to reinforce your front line.]]) ..
-      p(_[[This fortress is already quite strong and conquers a lot of space. But there is an even bigger building: the citadel.]]) ..
+      p(_[[Well done. Now you know how to draw back your soldiers from the places where you don’t need them. It is time to tell you how to reinforce your front line.]]) ..
+      p(_[[Your fortress is already quite strong and conquers a lot of space. But there is an even bigger building: the citadel.]]) ..
       p(_[[Citadels can’t be built directly. Instead, you’ll have to construct a fortress first and then enhance it to a citadel. To do so, click on the fortress, then choose the ‘Enhance to Citadel’ button.]]) ..
       p(_[[Your soldiers will leave the fortress while the construction is going on. This means that your fortress will lose its military influence, as I described above.]]) ..
       listitem_bullet(_[[Enhance your fortress to a citadel now.]])
@@ -205,8 +205,8 @@ conclude_tutorial = {
    title = _"Conclusion",
    body = rt(
       h1(_"Conclusion") ..
-      p(_[[Thank you for playing this tutorial. I hope you enjoyed it and you learned how to create and train soldiers, how to control where they go and how to defeat an enemy. Did you see how easy you could overwhelm your enemy? Having trained soldiers is a huge advantage.]]) ..
-      p(_[[But a war is expensive, and not always the path leading to the goal. When set up a new game, you can also choose peaceful win conditions. You should definitely try them out, they’re worth it.]]) ..
+      p(_[[Thank you for playing this tutorial. I hope you enjoyed it and you learned how to create and train soldiers, how to control where they go and how to defeat an enemy. Did you see how easily you could overwhelm your enemy? Having trained soldiers is a huge advantage.]]) ..
+      p(_[[But a war is expensive, and not always the path leading to the goal. When setting up a new game, you can also choose peaceful win conditions. You should definitely try them out, they’re worth it.]]) ..
       p(_[[You are now ready to play the campaigns. They will teach you about the different economies of the tribes. You can also play the remaining tutorials, but they are not crucial for succeeding in the campaigns.]])
    )
 }
