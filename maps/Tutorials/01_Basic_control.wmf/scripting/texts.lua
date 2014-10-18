@@ -236,7 +236,7 @@ tell_about_minimap = {
 
 congratulate_and_on_to_quarry = {
    title = _"Onward to the Quarry",
-   body = rt(p(_[[Great. Now about that quarry...]])),
+   body = rt(p(_[[Great. Now about that quarry…]])),
    h = 200,
    w = 250
 }
@@ -379,7 +379,7 @@ teaching_about_messages = {
    title = _"Introducing Messages",
    body = rt(
       h1(_"Messages") ..
-      p(_[[Hi, it’s me again! This time, I have sent you a message. Messages are sent to you by Widelands to inform you about important events: empty mines, attacks on your tribe, won or lost military buildings, resources found...]]) ..
+      p(_[[Hi, it’s me again! This time, I have sent you a message. Messages are sent to you by Widelands to inform you about important events: empty mines, attacks on your tribe, won or lost military buildings, resources found…]]) ..
       p(_[[The message window can be toggled by the button on the very right at the bottom of the screen. This button will also change appearance whenever new messages are available, but there is also a bell sound played whenever you receive a new message.]]) ..
       p(_[[You have two messages at the moment. This one, which you are currently reading, and the one that informed you that a new headquarters was added to your economy. Let’s learn how to archive messages: You can check them off in your inbox so that they get a tick-symbol in front of them. Then, you can click the]])
    ) ..
