@@ -177,7 +177,7 @@ lumberjack_message_07 = {
 
 inform_about_rocks = {
    title = _"Some Rocks Were Found",
-   body = rt(h1(_"Getting a Quarry Up.")) ..
+   body = rt(h1(_"Getting a Quarry Up")) ..
    rt(
       p(_[[Stones can be mined in granite mines, but the easier way is to build a quarry next to some rocks lying around. As it happens, there is a pile of them just to the west (left) of your headquarters. I will teach you now how to move your view over there.]]) ..
       paragraphdivider() ..
@@ -289,7 +289,7 @@ talk_about_roadbuilding_00a = {
 
 talk_about_roadbuilding_00b = {
    position = "topright",
-   field = wl.Game().map:get_field(9,12),
+   field = road_building_field,
    title = _"Road Building",
    body = rt(
       p(_[[Excellent! To enter road building mode for any flag left-click on a flag and select]])
@@ -306,7 +306,7 @@ talk_about_roadbuilding_00b = {
 
 talk_about_roadbuilding_01 = {
    position = "topright",
-   field = wl.Game().map:get_field(9,12),
+   field = road_building_field,
    title = _"Road Building",
    body = rt(p(_[[Or, you can directly click the flag where the road should end, like so:]])),
    h = 200,

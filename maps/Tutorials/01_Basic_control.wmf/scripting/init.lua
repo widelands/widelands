@@ -15,9 +15,10 @@ include "scripting/ui.lua"
 
 -- Constants
 sf = map.player_slots[1].starting_field
-first_lumberjack_field = map:get_field(16,10)
-first_quarry_field = map:get_field(8,12)
-second_quarry_field = map:get_field(5,10)
+first_lumberjack_field = map:get_field(16, 10)
+first_quarry_field = map:get_field(8, 12)
+second_quarry_field = map:get_field(5, 10)
+road_building_field = map:get_field(9, 12)
 
 -- Global variables
 registered_player_immovables = {}
