@@ -8,8 +8,9 @@ plr2 = wl.Game().players[2]
 map = wl.Game().map
 mv = wl.ui.MapView()
 
-tavern_field = map:get_field(105,44)
-warehouse_field = map:get_field(78,67)
+tavern_field = map:get_field(105, 44)
+warehouse_field = map:get_field(78, 67)
+field_near_border = map:get_field(69, 66)
 
 sf = map.player_slots[1].starting_field
 

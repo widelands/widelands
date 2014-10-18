@@ -27,11 +27,11 @@ intro1 = {
 
 intro2 = {
    position = "topright",
-   field = wl.Game().map:get_field(69,66), -- somewhere near the border
+   field = field_near_border,
    title = _"A Peaceful Land",
    body = rt(
       p(_[[Now about the map: you have settled in a nice valley between two mountains, rich in marble, iron ore and coal. All were hoping for a peaceful life.]]) ..
-      p(_[[But one day, you discovered a barren wasteland with abandoned buildings in the east. A strange aura came from there, and no one wanted to set foot there. But the border could not be let undefended, and so you constructed three castles.]]) ..
+      p(_[[But one day, you discovered a barren wasteland with abandoned buildings in the east. A strange aura came from there, and no one wanted to set foot there. But the border could not be left undefended, and so you constructed three castles.]]) ..
       p(_[[You had not been prepared for war, and you have to hurry now to build up an army.]])
    ),
    h = 300
@@ -52,7 +52,7 @@ building_stat = {
    position = "topright",
    title = _"Building statistics",
    body = rt(
-      h1(_[[Check for your taverns]]) ..
+      h1(_[[Check out your taverns]]) ..
       p(_[[At first, we should find out how many taverns we currently have. Widelands offers you a list where you can easily check this.]])
    ) ..
    rt("image=pics/menu_toggle_menu.png",p(_[[First, you will have to open the statistics menu (you can find the corresponding button at the bottom). We will need this menu several times.]])) ..
@@ -80,7 +80,7 @@ inventory1 = {
    position = "topright",
    title = _"Stock",
    body = rt(
-      h1(_[[Check for your rations]]) ..
+      h1(_[[Check for rations]]) ..
       p(_[[OK. In the list, you’ve seen that you have no more taverns or inns. That means that you’re not producing any rations. But let’s see what we still have in stock.]])
    ) ..
    rt("image=pics/menu_stock.png",p(_[[Click on the ‘Stock’ button.]])) ..
@@ -92,7 +92,7 @@ inventory1 = {
    obj_name = "open_inventory",
    obj_title = _"Open your stock window.",
    obj_body = rt(
-      p(_[[The stock window gives you an overview over the wares you have.]]) ..
+      p(_[[The stock window gives you an overview over the wares you currently have.]]) ..
       paragraphdivider() ..
       -- TRANSLATORS: "it" refers to the stock window
       listitem_bullet(_[[Open it. You can access it from the statistics menu.]]) ..
@@ -103,7 +103,7 @@ inventory1 = {
 inventory2 = {
    title = _"Stock",
    body = rt(
-      p(_[[The stock window has four tabs. The first (and currently selected) one shows you all the wares you have, including those on roads, at flags and inside buildings waiting for processing.]]) ..
+      p(_[[The stock window has four tabs. The first (and currently selected) one shows you all your current wares, including those on roads, at flags and inside buildings waiting for processing.]]) ..
       p(_[[Looking at the rations, there are currently only five in total, probably on their way to somewhere. Five rations are not much for such a big economy.]]) ..
       p(_[[The second tab shows you all your workers, again those on roads and in buildings summed up.]]) ..
       p(_[[Now have a look at these two tabs. When you click on the]])) ..
