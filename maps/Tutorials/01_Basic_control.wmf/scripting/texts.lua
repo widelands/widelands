@@ -325,7 +325,7 @@ talk_about_roadbuilding_02 = {
    rt(
       p(_[[Keep the slopes in mind while placing roads and use them to your advantage. Also, try to keep roads as short as possible and always remember to place as many flags as you can on road segments to share the load better. If you hold Ctrl or Shift+Ctrl while you finish the road, flags are placed automatically.]]) ..
       paragraphdivider() ..
-      listitem_bullet(_[[Now please rebuild the road between your quarry and your headquarters. We’ll wait until the quarry is completed.]])
+      listitem_bullet(_[[Now please rebuild the road between your quarry and your headquarters.]])
    ),
    h = 450,
    obj_name = "build_road_to_quarry",
@@ -459,7 +459,7 @@ introduce_expansion = {
       p(_[[Expanding is as simple as building a military building at the edge of your territory. The barbarians have a selection of different military buildings: sentries, barriers, donjons, fortresses and citadels. The bigger the building, the more expensive it is to build, but the more land it will conquer around itself and the more soldiers can be stationed there. The buildings also vary in their vision range: buildings with a tower see farther than others.]]) ..
       p(_[[As soon as a military building is manned, it will extend your land. I will tell your more about military buildings in another tutorial.]]) ..
       paragraphdivider() ..
-      listitem_bullet(_[[Let’s try it out now: build a military building on your border.]])
+      listitem_bullet(_[[Let’s try it out now: build a sentry on your border.]])
    ),
    obj_name = "expand_territory",
    obj_title = _"Expand your territory",
@@ -477,7 +477,7 @@ military_building_finished = {
    title = _"Military Site Occupied",
    body = rt(
       h1(_"Your territory has just grown!") ..
-      p(_[[Great. Do you see how your territory has grown since your soldiers entered the military building?]]) ..
+      p(_[[Great. Do you see how your territory has grown since your soldiers entered the sentry?]]) ..
       p(_[[Every military building has a certain conquer area – the more expensive the building, the more land it conquers.]])
    ),
    h = 300,
