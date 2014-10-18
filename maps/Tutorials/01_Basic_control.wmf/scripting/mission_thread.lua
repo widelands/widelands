@@ -244,7 +244,7 @@ function build_a_quarry()
 end
 
 function second_quarry()
-   sleep(200)
+   sleep(2000)
 
    local o = message_box_objective(plr, build_second_quarry)
    second_quarry_field.immovable:remove()
