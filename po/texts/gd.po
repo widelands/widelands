@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-10-08 04:24+0000\n"
+"POT-Creation-Date: 2014-10-17 18:36+0000\n"
 "PO-Revision-Date: 2014-07-17 13:21+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-09 05:41+0000\n"
+"X-Launchpad-Export-Date: 2014-10-18 05:43+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: gd\n"
 
@@ -211,30 +211,34 @@ msgid "CTRL+F10: quits the game immediately"
 msgstr "CTRL+F10: fàgaidh seo an geama sa bhad"
 
 #: ../../txts/README.lua:77
+msgid "CTRL+Leftclick: skips confirmation dialogs"
+msgstr ""
+
+#: ../../txts/README.lua:78
 msgid "F11: takes a screenshot"
 msgstr "F11: tog glacadh-sgrìn"
 
-#: ../../txts/README.lua:79
+#: ../../txts/README.lua:80
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr ""
 "Tha na h-ath-ghoiridean a bharrachd seo ri làimh ann an uinneag nan "
 "teachdaireachd:"
 
-#: ../../txts/README.lua:81
+#: ../../txts/README.lua:82
 msgid "G: jumps to the location corresponding to the current message"
 msgstr ""
 "G: gearr leum dhan ionad co-cheangailte ris an teachdaireachd làithreach"
 
-#: ../../txts/README.lua:82
+#: ../../txts/README.lua:83
 msgid "DELETE: archives the current message"
 msgstr "DELETE: cuir an teachdaireachd làithreach dhan tasglann"
 
-#: ../../txts/README.lua:84
+#: ../../txts/README.lua:85
 msgid "Online Help"
 msgstr "Cobhair air loidhne"
 
-#: ../../txts/README.lua:86
+#: ../../txts/README.lua:87
 msgid ""
 "If you need documentation or help for Widelands or the Widelands Editor, be\n"
 "sure to visit our homepage. You can find an up to date online help in our "
@@ -246,34 +250,34 @@ msgstr ""
 "loidhne làithreach sa uicidh againn is mìneachadh mionaideach air "
 "eaconamaidhean nan treubhan san leabhar-eòlais air loidhne againn."
 
-#: ../../txts/README.lua:90
+#: ../../txts/README.lua:91
 msgid "Reporting Bugs"
 msgstr "A' dèanamh aithris air bugaichean"
 
-#: ../../txts/README.lua:92
+#: ../../txts/README.lua:93
 msgid "If you encounter a bug, please report it to our bugtracker:"
 msgstr ""
 "Ma thachras tu air buga, an innis thu dhuinn mu dheidhinn air tracaiche nam "
 "buga againn:"
 
-#: ../../txts/README.lua:96
+#: ../../txts/README.lua:97
 msgid "Please provide enough background information. Tell us:"
 msgstr "Feuch an toir thu cùl-fhiosrachaidh dhuinn. Innis dhuinn:"
 
-#: ../../txts/README.lua:98
+#: ../../txts/README.lua:99
 msgid "- Detailed steps on how to trigger the bug, if possible."
 msgstr ""
 "- Ceuman mionaideach air mar a dh'adhbharaicheas tu am buga ma ghabh seo "
 "dèanamh."
 
-#: ../../txts/README.lua:100
+#: ../../txts/README.lua:101
 msgid ""
 "- What you expected to happen when performing the steps and what actually "
 "happened."
 msgstr ""
 "- Na tha thu an dùil air nuair a nì thu na ceuman is na thachair dha-rìribh."
 
-#: ../../txts/README.lua:102
+#: ../../txts/README.lua:103
 msgid ""
 "- Which version of Widelands you are running (i.e. either the build number "
 "or\n"
@@ -284,7 +288,7 @@ msgstr ""
 "lèirmheis nuair a bhios tu a' ruith tionndadh leasachaidh no togail "
 "làitheil.)"
 
-#: ../../txts/README.lua:105
+#: ../../txts/README.lua:106
 msgid ""
 "- Please also include which operating system you are running Widelands on "
 "as\n"
@@ -293,11 +297,11 @@ msgstr ""
 "- Innis dhuinn cuideachd dè an t-siostam-obrachaidh a ruitheas tu Widelands "
 "air o nach nochd gach buga air gach siostam-obrachaidh."
 
-#: ../../txts/README.lua:108
+#: ../../txts/README.lua:109
 msgid "- Which map you were playing when the bug occurred."
 msgstr "- Am mapa a bha thu a' cluiche nuair a thachair am buga."
 
-#: ../../txts/README.lua:110
+#: ../../txts/README.lua:111
 msgid ""
 "- If the bug concerns something not being displayed correctly or if it "
 "helps\n"
@@ -307,7 +311,7 @@ msgstr ""
 "tèid a shealltainn mar bu chòir no ma chuireas iad ri mìneachadh an "
 "duilgheadais."
 
-#: ../../txts/README.lua:113
+#: ../../txts/README.lua:114
 msgid ""
 "- If you have a save game or replay demonstrating the issue (for instance\n"
 "crashes where it can be hard to tell exactly what is triggering it), please\n"
@@ -318,11 +322,11 @@ msgstr ""
 "dh'adhbharaich iad) feuch an cuir thu iad ann cuideachd. Seall air an earran "
 "air ath-chluichean gu h-ìosail airson barrachd fiosrachaidh."
 
-#: ../../txts/README.lua:117
+#: ../../txts/README.lua:118
 msgid "Replays"
 msgstr "Ath-chluichean"
 
-#: ../../txts/README.lua:119
+#: ../../txts/README.lua:120
 msgid ""
 "Widelands records every game you play in two files. One of these files has "
 "a\n"
@@ -340,7 +344,7 @@ msgstr ""
 "no ionnsaigh air an nàmhad. Innsidh an corr dhe na h-ainmean faidhle dhut "
 "cuine a thòisich thu air a' gheama."
 
-#: ../../txts/README.lua:125
+#: ../../txts/README.lua:126
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game "
 "will\n"
@@ -362,7 +366,7 @@ msgstr ""
 "nuair a bhios tionndadh dhen gheama eadar-dhealaichte aig aon dhe na "
 "cluicheadairean"
 
-#: ../../txts/README.lua:132
+#: ../../txts/README.lua:133
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic, so they\n"
 "can be useful as attachments to bug reports. The replay files are saved in "

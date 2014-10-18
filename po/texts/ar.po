@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-10-08 04:24+0000\n"
+"POT-Creation-Date: 2014-10-17 18:36+0000\n"
 "PO-Revision-Date: 2013-10-17 13:48+0000\n"
 "Last-Translator: abdXelrhman <abdXelrhman@gmail.com>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-09 05:40+0000\n"
+"X-Launchpad-Export-Date: 2014-10-18 05:43+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ../../txts/README.lua:6
@@ -180,27 +180,31 @@ msgid "CTRL+F10: quits the game immediately"
 msgstr "مفتاح كنترول + إف عشره للخروج من اللعبه فوراً"
 
 #: ../../txts/README.lua:77
+msgid "CTRL+Leftclick: skips confirmation dialogs"
+msgstr ""
+
+#: ../../txts/README.lua:78
 msgid "F11: takes a screenshot"
 msgstr "مفتاح إف11 يأخذ لقطه من الشاشه"
 
-#: ../../txts/README.lua:79
+#: ../../txts/README.lua:80
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr ""
 
-#: ../../txts/README.lua:81
+#: ../../txts/README.lua:82
 msgid "G: jumps to the location corresponding to the current message"
 msgstr ""
 
-#: ../../txts/README.lua:82
+#: ../../txts/README.lua:83
 msgid "DELETE: archives the current message"
 msgstr ""
 
-#: ../../txts/README.lua:84
+#: ../../txts/README.lua:85
 msgid "Online Help"
 msgstr "المساعده عبر الشبكه العنكبوتيه"
 
-#: ../../txts/README.lua:86
+#: ../../txts/README.lua:87
 msgid ""
 "If you need documentation or help for Widelands or the Widelands Editor, be\n"
 "sure to visit our homepage. You can find an up to date online help in our "
@@ -213,29 +217,29 @@ msgstr ""
 "موسوعتُنا\n"
 "ووصف دقيق للقبائل وانواع إقتصادها"
 
-#: ../../txts/README.lua:90
+#: ../../txts/README.lua:91
 msgid "Reporting Bugs"
 msgstr ""
 
-#: ../../txts/README.lua:92
+#: ../../txts/README.lua:93
 msgid "If you encounter a bug, please report it to our bugtracker:"
 msgstr "إذا صادفتك عله فيُرجَى إبلاغها لمتعقب العلل:"
 
-#: ../../txts/README.lua:96
+#: ../../txts/README.lua:97
 msgid "Please provide enough background information. Tell us:"
 msgstr "يُرجَى تزويدنا بما يكفى من المعلومات. اخبرنا عن:"
 
-#: ../../txts/README.lua:98
+#: ../../txts/README.lua:99
 msgid "- Detailed steps on how to trigger the bug, if possible."
 msgstr "- تفاصيل دقيقه حول كيفيه إفتعال العله من جديد، لو امكن."
 
-#: ../../txts/README.lua:100
+#: ../../txts/README.lua:101
 msgid ""
 "- What you expected to happen when performing the steps and what actually "
 "happened."
 msgstr "- ما إنتظرت حدوثه عندما نفذت تلك الخطوات وما حدث بالفعل."
 
-#: ../../txts/README.lua:102
+#: ../../txts/README.lua:103
 msgid ""
 "- Which version of Widelands you are running (i.e. either the build number "
 "or\n"
@@ -243,7 +247,7 @@ msgid ""
 "build.)"
 msgstr ""
 
-#: ../../txts/README.lua:105
+#: ../../txts/README.lua:106
 msgid ""
 "- Please also include which operating system you are running Widelands on "
 "as\n"
@@ -251,11 +255,11 @@ msgid ""
 msgstr ""
 "- كما يُرجَى إدراج إسم نظام تشغيلك حيث ان بعض العلل قد تحدث على منصات محدده."
 
-#: ../../txts/README.lua:108
+#: ../../txts/README.lua:109
 msgid "- Which map you were playing when the bug occurred."
 msgstr "- فى اى خريطه كنت تلعب عندما وقعت العله."
 
-#: ../../txts/README.lua:110
+#: ../../txts/README.lua:111
 msgid ""
 "- If the bug concerns something not being displayed correctly or if it "
 "helps\n"
@@ -264,7 +268,7 @@ msgstr ""
 "لو ظننت ان رؤيه ما يُعرَض على الشاشه ستساعد\n"
 "فى تحديد العله بدقه اكبر او برهنتها، فيُرجَى إرسال بضع لقطات للشاشه."
 
-#: ../../txts/README.lua:113
+#: ../../txts/README.lua:114
 msgid ""
 "- If you have a save game or replay demonstrating the issue (for instance\n"
 "crashes where it can be hard to tell exactly what is triggering it), please\n"
@@ -275,11 +279,11 @@ msgstr ""
 "حيث يكون من شبه المُستحيل تحديد ما اطلق العله بدقه)، فيُرجَى إدراجهم ايضاً. "
 "لمزيد من المعلومات يمكنك قراءه قسم مقاطع اﻹعادات ادناه."
 
-#: ../../txts/README.lua:117
+#: ../../txts/README.lua:118
 msgid "Replays"
 msgstr "مقاطع اﻹعادات"
 
-#: ../../txts/README.lua:119
+#: ../../txts/README.lua:120
 msgid ""
 "Widelands records every game you play in two files. One of these files has "
 "a\n"
@@ -291,7 +295,7 @@ msgid ""
 "you the time you started the game."
 msgstr ""
 
-#: ../../txts/README.lua:125
+#: ../../txts/README.lua:126
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game "
 "will\n"
@@ -305,7 +309,7 @@ msgid ""
 "different version of the game."
 msgstr ""
 
-#: ../../txts/README.lua:132
+#: ../../txts/README.lua:133
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic, so they\n"
 "can be useful as attachments to bug reports. The replay files are saved in "

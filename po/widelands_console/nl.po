@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-10-08 06:24+0200\n"
-"PO-Revision-Date: 2014-09-19 11:53+0000\n"
+"POT-Creation-Date: 2014-10-17 19:36+0100\n"
+"PO-Revision-Date: 2014-10-18 04:59+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-09 05:50+0000\n"
+"X-Launchpad-Export-Date: 2014-10-18 05:51+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "Language: nl\n"
@@ -69,16 +69,16 @@ msgstr ""
 msgid "                      Default is ~/.widelands"
 msgstr "                      Standaard is ~/.widelands"
 
-#: ../../src/wlapplication_messages.cc:57
-msgid ""
-" --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
-"                      of using the SDL"
-msgstr ""
-" --coredump=[yes|no] Genereert een core dump bij segmentatiefouten in plaats "
-"van\n"
-"                      gebruik te maken van SDL"
-
+#. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
 #: ../../src/wlapplication_messages.cc:59
+msgid ""
+" --coredump=[true|false]\n"
+"                      Generates a core dump on segfaults instead of\n"
+"                      using the SDL"
+msgstr ""
+
+#: ../../src/wlapplication_messages.cc:62
 msgid ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      The locale to use."
@@ -86,11 +86,13 @@ msgstr ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      Deze lokale gebruiken."
 
-#: ../../src/wlapplication_messages.cc:61
+#: ../../src/wlapplication_messages.cc:64
 msgid " --localedir=DIRNAME  Use DIRNAME as location for the locale"
 msgstr " --localedir=DIRNAAM Gebruik DIRNAAM als locatie voor de lokale"
 
-#: ../../src/wlapplication_messages.cc:62
+#. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
+#: ../../src/wlapplication_messages.cc:67
 msgid ""
 " --remove_syncstreams=[true|false]\n"
 "                      Remove syncstream files on startup"
@@ -98,7 +100,7 @@ msgstr ""
 " --remove_syncstreams=[true|false]\n"
 "                      Verwijder syncstream bestanden bij het opstarten"
 
-#: ../../src/wlapplication_messages.cc:64
+#: ../../src/wlapplication_messages.cc:69
 msgid ""
 " --remove_replays=[...]\n"
 "                      Remove replays after this number of days.\n"
@@ -108,27 +110,27 @@ msgstr ""
 "                      Verwijder herhalingen na dit aantal dagen.\n"
 "                      Als dit 0 is worden de herhalingen niet verwijderd."
 
-#: ../../src/wlapplication_messages.cc:68
+#: ../../src/wlapplication_messages.cc:73
 msgid "Sound options:"
 msgstr "Geluidsopties:"
 
-#: ../../src/wlapplication_messages.cc:69
+#: ../../src/wlapplication_messages.cc:74
 msgid " --nosound            Starts the game with sound disabled."
 msgstr " --nosound Start het spel zonder geluid."
 
-#: ../../src/wlapplication_messages.cc:70
+#: ../../src/wlapplication_messages.cc:75
 msgid " --disable_fx         Disable sound effects."
 msgstr " --disable_fx Schakel geluidseffecten uit."
 
-#: ../../src/wlapplication_messages.cc:71
+#: ../../src/wlapplication_messages.cc:76
 msgid " --disable_music      Disable music."
 msgstr " --disable_music Schakel muziek uit."
 
-#: ../../src/wlapplication_messages.cc:72
+#: ../../src/wlapplication_messages.cc:77
 msgid " --nozip              Do not save files as binary zip archives."
 msgstr " --nozip Sla bestanden niet op als binaire zip archieven."
 
-#: ../../src/wlapplication_messages.cc:73
+#: ../../src/wlapplication_messages.cc:78
 msgid ""
 " --editor             Directly starts the Widelands editor.\n"
 "                      You can add a =FILENAME to directly load\n"
@@ -138,7 +140,7 @@ msgstr ""
 "                      Je kunt =BESTANDNAAM toevoegen om direct\n"
 "                      de kaart BESTANDNAAM in de editor te laden."
 
-#: ../../src/wlapplication_messages.cc:76
+#: ../../src/wlapplication_messages.cc:81
 msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
@@ -146,11 +148,11 @@ msgstr ""
 " --scenario=BESTANDNAAM  Start meteen de map BESTANDNAAM als scenario\n"
 "                      kaart."
 
-#: ../../src/wlapplication_messages.cc:78
+#: ../../src/wlapplication_messages.cc:83
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
 msgstr " --loadgame=BESTANDNAAM Laad meteen het opgeslagen spel BESTANDNAAM."
 
-#: ../../src/wlapplication_messages.cc:79
+#: ../../src/wlapplication_messages.cc:84
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
@@ -158,53 +160,54 @@ msgstr ""
 " --script=BESTANDSNAAM Start het opgegeven script na initialisatie.\n"
 "                      Alleen geldig met --scenario, --loadgame of --editor."
 
-#: ../../src/wlapplication_messages.cc:81
+#: ../../src/wlapplication_messages.cc:86
 msgid " --dedicated=FILENAME Starts a dedicated server with FILENAME as map"
 msgstr " --dedicated=FILENAME Begint een vaste server met FILENAME als map"
 
-#: ../../src/wlapplication_messages.cc:82
+#. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
+#: ../../src/wlapplication_messages.cc:89
 msgid ""
-" --auto_roadbuild_mode=[yes|no]\n"
+" --auto_roadbuild_mode=[true|false]\n"
 "                      Whether to enter roadbuilding mode\n"
 "                      automatically after placing a flag that is\n"
 "                      not connected to a road."
 msgstr ""
-" --auto_roadbuild_mode=[yes|no]\n"
-"                      Of automatisch naar wegenbouw modus omgeschakeld\n"
-"                      moet worden nadat een vlag is geplaatst die niet is \n"
-"                      verbonden met een weg."
 
-#: ../../src/wlapplication_messages.cc:86
+#: ../../src/wlapplication_messages.cc:93
 msgid "Graphic options:"
 msgstr "Grafische opties:"
 
-#: ../../src/wlapplication_messages.cc:87
+#. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
+#: ../../src/wlapplication_messages.cc:96
 msgid ""
-" --fullscreen=[yes|no]\n"
+" --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
 msgstr ""
-" --fullscreen=[yes|no]\n"
-"                      Of het hele beeld gebruikt moet worden\n"
-"                      voor het spelscherm."
 
-#: ../../src/wlapplication_messages.cc:90
+#: ../../src/wlapplication_messages.cc:99
 msgid " --xres=[...]         Width of the window in pixel."
 msgstr " --xres=[...]         Breedte van het scherm in pixels."
 
-#: ../../src/wlapplication_messages.cc:91
+#: ../../src/wlapplication_messages.cc:100
 msgid " --yres=[...]         Height of the window in pixel."
 msgstr " --yres=[...]         Hoogte van het scherm in pixels."
 
-#: ../../src/wlapplication_messages.cc:92
-msgid " --opengl=[0|1]       Enables OpenGL rendering"
-msgstr " --opengl=[0|1]                      Zet OpenGL rendering aan"
+#. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
+#: ../../src/wlapplication_messages.cc:103
+msgid ""
+" --opengl=[true|false]\n"
+"                      Enables OpenGL rendering"
+msgstr ""
 
-#: ../../src/wlapplication_messages.cc:93
+#: ../../src/wlapplication_messages.cc:105
 msgid "Options for the internal window manager:"
 msgstr "Opties voor de interne vensterbeheerder:"
 
-#: ../../src/wlapplication_messages.cc:94
+#: ../../src/wlapplication_messages.cc:106
 msgid ""
 " --border_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the screen\n"
@@ -216,19 +219,17 @@ msgstr ""
 "                      als de rand van het scherm binnen deze afstand van\n"
 "                      de rand van het scherm komt."
 
-#: ../../src/wlapplication_messages.cc:98
+#. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
+#: ../../src/wlapplication_messages.cc:112
 msgid ""
-" --dock_windows_to_edges=[yes|no]\n"
+" --dock_windows_to_edges=[true|false]\n"
 "                      Eliminate a window's border towards the\n"
 "                      edge of the screen when the edge of the\n"
 "                      window is next to the edge of the screen."
 msgstr ""
-" --dock_windows_to_edges=[yes|no]\n"
-"                      Verwijder de rand van een venster aan de kant van\n"
-"                      de rand van het scherm als de rand van het venster\n"
-"                      naast de rand van het scherm is."
 
-#: ../../src/wlapplication_messages.cc:102
+#: ../../src/wlapplication_messages.cc:116
 msgid ""
 " --panel_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the panel when\n"
@@ -240,7 +241,7 @@ msgstr ""
 "                      de rand van het venster binnen deze afstand van de\n"
 "                      rand van het paneel komt."
 
-#: ../../src/wlapplication_messages.cc:106
+#: ../../src/wlapplication_messages.cc:120
 msgid ""
 " --snap_windows_only_when_overlapping=[yes|no]\n"
 "                      Only move a window to the edge of a panel\n"
@@ -252,15 +253,15 @@ msgstr ""
 "                      van een paneel als het venster het paneel\n"
 "                      overlapt."
 
-#: ../../src/wlapplication_messages.cc:111
+#: ../../src/wlapplication_messages.cc:125
 msgid " --verbose            Enable verbose debug messages"
 msgstr " --verbose            Activeer uitgebreide debug-berichten"
 
-#: ../../src/wlapplication_messages.cc:113
+#: ../../src/wlapplication_messages.cc:127
 msgid " --help               Show this help"
 msgstr " --help Toon deze hulp"
 
-#: ../../src/wlapplication_messages.cc:115
+#: ../../src/wlapplication_messages.cc:129
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://launchpad.net/widelands\n"
@@ -271,3 +272,45 @@ msgstr ""
 "        https://launchpad.net/widelands\n"
 "\n"
 "Hopelijk vind je dit spel leuk!"
+
+#~ msgid ""
+#~ " --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
+#~ "                      of using the SDL"
+#~ msgstr ""
+#~ " --coredump=[yes|no] Genereert een core dump bij segmentatiefouten in plaats "
+#~ "van\n"
+#~ "                      gebruik te maken van SDL"
+
+#~ msgid ""
+#~ " --auto_roadbuild_mode=[yes|no]\n"
+#~ "                      Whether to enter roadbuilding mode\n"
+#~ "                      automatically after placing a flag that is\n"
+#~ "                      not connected to a road."
+#~ msgstr ""
+#~ " --auto_roadbuild_mode=[yes|no]\n"
+#~ "                      Of automatisch naar wegenbouw modus omgeschakeld\n"
+#~ "                      moet worden nadat een vlag is geplaatst die niet is \n"
+#~ "                      verbonden met een weg."
+
+#~ msgid ""
+#~ " --fullscreen=[yes|no]\n"
+#~ "                      Whether to use the whole display for the\n"
+#~ "                      game screen."
+#~ msgstr ""
+#~ " --fullscreen=[yes|no]\n"
+#~ "                      Of het hele beeld gebruikt moet worden\n"
+#~ "                      voor het spelscherm."
+
+#~ msgid " --opengl=[0|1]       Enables OpenGL rendering"
+#~ msgstr " --opengl=[0|1]                      Zet OpenGL rendering aan"
+
+#~ msgid ""
+#~ " --dock_windows_to_edges=[yes|no]\n"
+#~ "                      Eliminate a window's border towards the\n"
+#~ "                      edge of the screen when the edge of the\n"
+#~ "                      window is next to the edge of the screen."
+#~ msgstr ""
+#~ " --dock_windows_to_edges=[yes|no]\n"
+#~ "                      Verwijder de rand van een venster aan de kant van\n"
+#~ "                      de rand van het scherm als de rand van het venster\n"
+#~ "                      naast de rand van het scherm is."
