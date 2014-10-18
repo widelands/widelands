@@ -22,6 +22,7 @@ obj_build_small_food_economy = {
    number = 5,
    body = objective_text(_"Build up a small food economy",
       _"Build up a basic food economy to provide your people with food." ..
+      paragraphdivider() ..
       listitem_bullet(_"Build a fisher’s hut") ..
       listitem_bullet(_"Build a hunter’s hut") ..
       listitem_bullet(_"Build a well") ..
@@ -36,6 +37,7 @@ obj_build_cattlefarm = {
    number = 1,
    body = objective_text(_"Remember to build a cattle farm",
       _"As your roads grow longer and your economy bigger, you should make good use of your oxen to help transport wares more quickly." ..
+      paragraphdivider () ..
       listitem_bullet(_"Remember to build a cattle farm")
    ),
 }
@@ -45,7 +47,7 @@ obj_build_a_donjon = {
    title=_"Build a donjon",
    number = 1,
    body = objective_text(_"Build a donjon",
-      listitem_bullet(_"Build a donjon at the north-east border of your territory to get greater visual range and to protect your people from sudden attacks of enemies.")
+      listitem_bullet(_"Build a donjon at the north-east border of your territory to get greater visual range and to protect your people from sudden attacks by enemies.")
    ),
 }
 
@@ -208,7 +210,7 @@ order_msg_7_renegade_fortification = {
    title=_"Renegade Fortification",
    body= thron(_"Thron says:",
 _([[The traitor left his armies dying where they lay when he saw that he would not keep my forces back. Kalitath disappeared in the confusion of the war, but I don’t care now. Shall he flee and be forgotten for all times as a tribal leader that would not bow before the wooden throne, that is mine to take now.]]) .. paragraphdivider() ..
-_([[Furthermore, his flight brought us a great benefit: all year, Kalitath was so busy fighting that he did not even care to store enough food for all his men. Now that he has fled, their hunger has caused some of his younger followers to desert. This group holds a strong fortification on the main ring.]]) ..
+_([[Furthermore, his flight brought us a great benefit: all year, Kalitath was so busy fighting that he did not even care to store enough food for all his men. Now that he has fled, their hunger has caused some of his younger followers to desert. This group holds a strong fortification on the main ring.]]) .. " " ..
 _([[But there is more news: My scouts have reported that the two raging tribes of my brothers are in chaos and have barely noticed the new danger that is about to strike them. However, they would not care if they noticed I guess, blinded by rage and hate, there is no sense left in them at all I believe.]])),
 }
 
@@ -256,7 +258,7 @@ order_msg_4_build_mining_economy = {
    posy=1,
    title=_"Mountains Found",
    body= khantrukh(
-_([[I have just spoken to the leader of our patrol. He told me that they found some mountains to the north-east and east of our territory. With a bit of luck this will open up a new chance for rearming our men, because as far as I remember, most of the mountains west to Al’thunran hold coal and some metal ores.]]))
+_([[I have just spoken to the leader of our patrol. He told me that they found some mountains to the north-east and east of our territory. With a bit of luck this will open up a new chance for rearming our men, because as far as I remember, most of the mountains west of Al’thunran hold coal and some metal ores.]]))
 .. new_objectives(obj_build_mining_economy),
 }
 
@@ -298,9 +300,9 @@ story_msg_7 = {
    body= thron(_"Thron looks worried…",
 _([[My brothers and their soldiers are dead and left fire and destruction behind. In none of all the ruins could I find any man or woman of the normal folk, and so I just may hope that they fled from this cruel battleground and started a better life somewhere else.]])
 .. paragraphdivider() ..
-_([[Nothing is left of that beauty I remember, only ruins remain of the old capital. I am sorrowful but also relieved. I never hoped to ever see Al’thunran’s old beauty again – it was only a few months ago that I wondered whether I would ever be able to set my feet in Al’thunran again. Now the old town is back in my hands, and I will not hesitate to rebuild it with all the strength my people have. I can’t wait to see it again in its old beauty.]]))
+_([[Nothing is left of that beauty I remember, only ruins remain of the old capital. I am sorrowful but also relieved. I never hoped to see Al’thunran’s old beauty again – it was only a few months ago that I wondered whether I would ever be able to set my feet there again. Now the old town is back in my hands, and I will not hesitate to rebuild it with all the strength my people have. I can’t wait to see it again in its old beauty.]]))
 ..  objective_text(_"Victory",
-   _([[You have completed the last mission of the barbarian tutorial campaign. You may continue playing if you wish, otherwise move on to the next campaign.]]))
+   _([[You have completed the last mission of the Barbarian tutorial campaign. You may continue playing if you wish, otherwise move on to the next campaign.]]))
 }
 
 order_msg_7_free_althunran = {
