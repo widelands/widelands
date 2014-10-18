@@ -32,7 +32,7 @@ function burn_tavern_down()
 
    o = message_box_objective(plr, inventory2)
    -- We cannot create several objectives with the same name. Therefore, we create o2 here once and change its visibility
-   local o2 = _try_add_objective(reopen_stock_menu_obj)
+   local o2 = add_campaign_objective(reopen_stock_menu_obj)
    o2.visible = false
    while not o.done do
       if not mv.windows.stock_menu then
@@ -69,7 +69,7 @@ function plan_the_future()
    o.done = true
 
    o = message_box_objective(plr, ware_stats2)
-   local o2 = _try_add_objective(reopen_ware_stats1_obj)
+   local o2 = add_campaign_objective(reopen_ware_stats1_obj)
    o2.visible = false
    while not o.done do
       if not mv.windows.ware_statistics then
@@ -83,7 +83,7 @@ function plan_the_future()
    end
 
    o = message_box_objective(plr, ware_stats3)
-   o2 = _try_add_objective(reopen_ware_stats2_obj)
+   o2 = add_campaign_objective(reopen_ware_stats2_obj)
    o2.visible = false
    while not o.done do
       if not mv.windows.ware_statistics then
