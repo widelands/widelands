@@ -181,6 +181,7 @@ function build_a_quarry()
 
    immovable_is_legal = function() return true end
 
+   sleep(100) -- give the game some time to enter road building mode
    if wl.ui.MapView().is_building_road then
       message_box_objective(plr, talk_about_roadbuilding_00a)
    else
@@ -235,7 +236,7 @@ function build_a_quarry()
    -- When that is finally done (and 30 seconds have passed), go on
 
    -- Interludium: talk about census and statistics
-   census_and_statistics(cs.fields[1])
+   census_and_statistics(first_quarry_field)
 
    while #plr:get_buildings("quarry") < 2 do sleep(1400) end
    o.done = true
@@ -387,3 +388,4 @@ end
 
 run(bad_boy_sentry)
 run(starting_infos)
+
