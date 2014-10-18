@@ -116,19 +116,20 @@ function init_player()
    {"warehouse", 36, 57},
 
    -- everthing below is in the north
-   {"castle", 36, 20},
+   {"castle", castle_field.x, castle_field.y},
    {"warehouse", 37, 16,
       wares = {
          smoked_meat = 50,
          smoked_fish = 150,
          bread = 200,
-         log = 20,
-         planks = 13,
+         log = 30,
+         planks = 30,
          stone = 10,
          diamond = 3,
          quartz = 4,
-         spidercloth = 7,
+         spidercloth = 14,
          gold = 2,
+         hammer = 1
       },
       workers = {
          builder = 3,

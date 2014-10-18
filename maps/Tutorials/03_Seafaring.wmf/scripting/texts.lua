@@ -16,20 +16,19 @@ include "scripting/format_scenario.lua"
 
 intro_south = {
    position = "topright",
-   field = wl.Game().map.player_slots[1].starting_field,
+   field = sf,
    title = _"Seafaring",
    body = rt(
       h1(_"Seafaring Tutorial") ..
       p(_[[Welcome back. In this tutorial, you are going to learn the most important things about seafaring, that is ships, ports, and expedition.]]) ..
-      p([[]]) .. -- empty line
       p(_[[But let me first give you an overview about your territory: Here in the south, you have a whole economy with almost everything you need.]])
    ),
-   h = 300
+   h = 250
 }
 
 intro_north = {
    position = "topright",
-   field = wl.Game().map:get_field(36,20), -- field of the castle
+   field = castle_field,
    title = _"The Northern Part",
    body = rt(
       p(_[[Here in the northern part, you only have a goldmine and a warehouse. While the miners are supplied well with food, there is no way to transport the gold ore to our smelting works in the southern part.]]) ..
@@ -83,7 +82,7 @@ tell_about_shipyard = {
    body = rt(
       h1(_"Let’s build ships") ..
       p(_[[Great. Your port has just been finished. Now we need some ships.]]) ..
-      p(_[[Ships are constructed in a shipyard by a shipwright. We have to build one somewhere close to the shore. You should pick a spot in your main camp because only this provides the needed materials.]]) ..
+      p(_[[Ships are constructed in a shipyard by a shipwright. We have to build one somewhere close to the shore.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[Build a shipyard close to the coast. It is a medium building.]])
    ),
@@ -104,7 +103,7 @@ tell_about_ships = {
    title = _"Constructing ships",
    body = rt(
       h1(_"Waiting for the ships") ..
-      p(_[[Very good. Your shipyard is finished and your shipwright immediately started working. For the construction of ships, he needs logs, planks and spidercloth, which will be transported to the shipyard.]] .. " " .. 
+      p(_[[Very good. Your shipyard is finished and your shipwright immediately started working. For the construction of ships, he needs logs, planks and spidercloth, which will be transported to the shipyard.]] .. " " ..
 		_[[The shipwright will take the ware he needs to a free spot at the shoreline and build a ship there. When the first ship is finished, it will launch onto the sea, and the shipwright will construct another one.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[We should wait until we have two ships. That should be enough for now.]]) ..
@@ -141,7 +140,7 @@ expedition2 = {
       h1(_"Expeditions") ..
       p(_[[During an expedition, you send a ship out to discover new islands and maybe found a colony there.]])
    ) ..
-   rt("image=pics/start_expedition.png",p(_[[Expeditions can be started in every port. Then, all needed wares are transported to that port. The wares are exactly those your tribe needs to build a port (your goal is to build a port far away from home, so that is not surprising), and of course you need a builder, too. When everything is prepared, a ship will come and pick it up.]] .. " " .. 
+   rt("image=pics/start_expedition.png",p(_[[Expeditions can be started in every port. Then, all needed wares are transported to that port. The wares are exactly those your tribe needs to build a port (your goal is to build a port far away from home, so this is not surprising), and of course you need a builder, too. When everything is prepared, a ship will come and pick it up.]] .. " " ..
 		_[[You can check out the needed wares in the fifth tab of your port (it will appear when you’ve started an expedition).]]) ..
       p(_[[Now try this out. I will tell you later what the next steps are.]]) ..
       paragraphdivider() ..
@@ -161,11 +160,11 @@ expedition3 = {
    position = "topright",
    title = _"Off to greener pastures",
    body = rt(
-      h1(_"The ship is ready") ..
-      p(_[[Your expedition should be ready about now. If not, please wait a bit – you will receive a message.]] .. " " .. 
-		_[[Your ship will be waiting for your orders in front of your port. It won’t be transporting wares anymore. Use its buttons to send your ship in any of the six main directions of the Widelands map. When it has reached a coastline, you can make it travel around the coast, where it will look for suitable places for landing.]] .. " " ..
+      h1(_"Start your expedition") ..
+      p(_[[Your expedition should be ready about now. If not, please wait a bit – you will receive a message.]]) ..
+		p(_[[Your ship will be waiting for your orders in front of your port. It won’t be transporting wares anymore. Use its buttons to send your ship in any of the six main directions of the Widelands map. When it has reached a coastline, you can make it travel around the coast, where it will look for suitable places for landing.]] .. " " ..
 		_[[Once a port space has been found, you can construct a new port with the button in the center of the ship’s control window.]]) ..
-      p(_[[The wares will then be unloaded and the ship will take up the task of transporting wares once again. The builder will start his work and build a port.]]) ..
+      p(_[[The wares will then be unloaded, and the ship will take up the task of transporting wares once again. The builder will start his work and build a port.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[Search for an island with a mountain, and look for a port space there. Colonize the island.]])
    ),
