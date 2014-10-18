@@ -119,14 +119,16 @@ obj_better_material_2 = {
    name = "mission grout",
    title = _"Build a lime kiln and coal economy",
    number = 3,
-   body = objective_text(_"Build a lime kiln fed by a well and charcoal kiln or by a coal mine",
+   body = objective_text(_"Build a lime kiln fed by a well and charcoal kiln, or by a coal mine",
       _([[Better buildings may also require other improved materials besides blackwood. One of these is grout, which is produced out of raw stone, water and coal by a lime-burner.]]) ..
       paragraphdivider() ..
-      _([[You can obtain water by building a well upon a water source, which your geologists can discover when you send them to any flag that is not on a mountain. ]]) ..
+      _([[You can obtain water by building a well upon a water source, which your geologists can discover when you send them to any flag that is not on a mountain.]]) ..paragraphdivider() ..
+      "</p></rt>" ..
+      rt("image=pics/menu_geologist.png", p(_"In order to call a geologist to search for water, click on a flag in the area that you want him to search and then on the button labeled ‘Send geologist to explore site’.") ..
       paragraphdivider() ..
       _([[Coal can be obtained by building a charcoal kiln or a coal mine. Burning charcoal out of logs is slow. You should only build a charcoal kiln when no coal is available.]]) ..
       paragraphdivider() ..
-      listitem_bullet(_"Build a lime kiln, a well and a charcoal kiln, or a lime kiln and a coal mine")
+      listitem_bullet(_"Build a lime kiln, a well and a charcoal kiln, or a lime kiln and a coal mine."))
    )
 }
 
@@ -318,7 +320,7 @@ order_msg_3 = {
    title = _"Your Loyal Companion",
    position = "left",
    body = boldreth(_"Boldreth jumps up…",
-      _([[While it is certainly no worthy task for a warrior, at least it is something to do! Thron, what would you say about my taking a few of our most restless warriors and venturing somewhat closer to the great mountain of Kal’mavrath – maybe we will find some more big stones to please the old man?]])
+      _([[While it is certainly no worthy task for a warrior, at least it is something to do! Thron, what would you say about my taking a few of our most restless warriors and venturing somewhat closer to the great mountain of Kal’mavrath – maybe we will find some more big rocks to please the old man?]])
    ) ..
    new_objectives(obj_claim_northeastern_rocks)
 }
