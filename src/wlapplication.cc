@@ -765,7 +765,7 @@ void WLApplication::init_language() {
 	i18n::init_locale();
 
 	if (s.has_val("localedir")) {
-		//TODO(code review) Should this still be possible, or do we want to tie it with
+		//TODO(code review): Should this still be possible, or do we want to tie it with
 		//datadir so that people using --datadir will also load locales from that?
 		// Localedir has been specified on the command line or in the config file.
 		i18n::set_localedir(s.get_safe_string("localedir"));
