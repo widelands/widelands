@@ -236,9 +236,9 @@ function build_a_quarry()
    -- When that is finally done (and 30 seconds have passed), go on
 
    -- Interludium: talk about census and statistics
-   census_and_statistics(first_quarry_field)
+   census_and_statistics()
 
-   while #plr:get_buildings("quarry") < 2 do sleep(1400) end
+   while #plr:get_buildings("quarry") < 1 do sleep(1400) end
    o.done = true
 
    messages()
@@ -270,7 +270,7 @@ function second_quarry()
 end
 
 
-function census_and_statistics(field)
+function census_and_statistics()
    sleep(15000)
 
    local blocker = UserInputDisabler:new()
@@ -283,20 +283,20 @@ function census_and_statistics(field)
 
    message_box_objective(plr, census_and_statistics_00)
    -- Pick any empty field
-   local function _pick_empty_field()
+   --[[local function _pick_empty_field()
       local reg = field:region(2)
       local f
       repeat
          f = reg[math.random(#reg)]
       until not f.immovable
       return f
-   end
+   end]]
 
-   click_on_field(_pick_empty_field())
+   click_on_field(first_quarry_field.brn)
    click_on_panel(wl.ui.MapView().windows.field_action.tabs.watch)
    click_on_panel(wl.ui.MapView().windows.field_action.buttons.census)
    sleep(300)
-   click_on_field(_pick_empty_field())
+   click_on_field(first_quarry_field.brn)
    click_on_panel(wl.ui.MapView().windows.field_action.tabs.watch)
    click_on_panel(wl.ui.MapView().windows.field_action.buttons.statistics)
 

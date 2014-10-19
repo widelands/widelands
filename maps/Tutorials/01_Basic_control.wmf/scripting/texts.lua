@@ -299,7 +299,7 @@ talk_about_roadbuilding_00b = {
       p(_[[If you decide you do not want to build a road at this time, you can cancel road building by clicking on the starting flag of the road and selecting]])) ..
    rt("image=pics/menu_abort.png", p(_[[the abort symbol.]])) ..
    rt(
-      p(_[[Now, about this road. Remember: we are already in road building mode since you just ordered the quarry. You can either make it longer by one field at a time by left-clicking multiple times on neighboring fields for perfect control over the route the road takes, like so:]])
+      p(_[[Now, about this road. I’ll enter the road building mode and the make it longer by one field at a time by left-clicking multiple times on neighboring fields for perfect control over the route the road takes, like so:]])
    ),
    show_instantly = true
 }
@@ -459,7 +459,8 @@ introduce_expansion = {
       p(_[[Expanding is as simple as building a military building at the edge of your territory. The barbarians have a selection of different military buildings: sentries, barriers, donjons, fortresses and citadels. The bigger the building, the more expensive it is to build, but the more land it will conquer around itself and the more soldiers can be stationed there. The buildings also vary in their vision range: buildings with a tower see farther than others.]]) ..
       p(_[[As soon as a military building is manned, it will extend your land. I will tell your more about military buildings in another tutorial.]]) ..
       paragraphdivider() ..
-      listitem_bullet(_[[Let’s try it out now: build a sentry on your border.]])
+      listitem_bullet(_[[Let’s try it out now: build a military building on your border.]]) ..
+      listitem_arrow(_[[The sentry is the only military site that fits on a small building plot. If your lumberjack has cleared enough space, you can also build another military building.]])
    ),
    obj_name = "expand_territory",
    obj_title = _"Expand your territory",
