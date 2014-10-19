@@ -254,12 +254,7 @@ m_redirected_stdio(false)
 	init_settings();
 
 	if (m_use_default_datadir) {
-		std::string install_prefix = INSTALL_PREFIX;
-		if (!PATHS_ARE_ABSOLUTE) {
-			install_prefix = relative_to_executable_to_absolute(install_prefix);
-		}
-		const std::string default_datadir =
-		   install_prefix + "/" + std::string(INSTALL_DATADIR);
+		const std::string default_datadir = std::string(INSTALL_DATADIR);
 		log("Adding directory: %s\n", default_datadir.c_str());
 		g_fs->add_file_system(&FileSystem::create(default_datadir));
 	}

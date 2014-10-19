@@ -47,7 +47,7 @@ void initialize() {
 	SDL_Init(SDL_INIT_VIDEO);
 
 	g_fs = new LayeredFileSystem();
-	g_fs->add_file_system(&FileSystem::create(INSTALL_PREFIX + std::string("/") + INSTALL_DATADIR));
+	g_fs->add_file_system(&FileSystem::create(INSTALL_DATADIR));
 
 #ifdef HAS_GETENV
 	char dummy_video_env[] = "SDL_VIDEODRIVER=dummy";
