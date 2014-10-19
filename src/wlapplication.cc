@@ -845,43 +845,7 @@ bool WLApplication::init_hardware() {
 	setenv("SDL_VIDEO_ALLOW_SCREENSAVER", "1", 0);
 	#endif
 
-	//try all available video drivers till we find one that matches
-	std::vector<std::string> videomode;
-	int result = -1;
-
-	//add default video mode
-#if defined(__linux__) || defined(__FreeBSD__) || defined(__OpenBSD__)
-	videomode.push_back("x11");
-#endif
-#ifdef _WIN32
-	videomode.push_back("windows");
-#endif
-#ifdef __APPLE__
-	videomode.push_back("Quartz");
-#endif
-	//if a video mode is given on the command line, add that one first
-	{
-		const char * videodrv;
-		videodrv = getenv("SDL_VIDEODRIVER");
-		if (videodrv) {
-			log("Also adding video driver %s\n", videodrv);
-			videomode.push_back(videodrv);
-		}
-	}
-	char videodrvused[26];
-	strcpy(videodrvused, "SDL_VIDEODRIVER=\0");
-	wout << videodrvused << "&" << std::endl;
-	for (int i = videomode.size() - 1; result == -1 && i >= 0; --i) {
-		strcpy(videodrvused + 16, videomode[i].c_str());
-		videodrvused[16 + videomode[i].size()] = '\0';
-		putenv(videodrvused);
-		log
-			("Graphics: Trying Video driver: %i %s %s\n",
-			 i, videomode[i].c_str(), videodrvused);
-		result = SDL_Init(sdl_flags);
-	}
-
-	if (result == -1)
+	if (SDL_Init(sdl_flags) == -1)
 		throw wexception
 			("Failed to initialize SDL, no valid video driver: %s",
 			 SDL_GetError());

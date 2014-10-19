@@ -341,7 +341,8 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		if (800 <= mode.w && 600 <= mode.h &&
 			 (SDL_BITSPERPIXEL(mode.format) == 32 ||
 			  SDL_BITSPERPIXEL(mode.format) == 24)) {
-			ScreenResolution this_res = {mode.w, mode.h, SDL_BITSPERPIXEL(mode.format)};
+			ScreenResolution this_res = {
+			   mode.w, mode.h, static_cast<int32_t>(SDL_BITSPERPIXEL(mode.format))};
 			if (this_res.depth == 24) this_res.depth = 32;
 			if (m_resolutions.empty()
 				 || this_res.xres != m_resolutions.rbegin()->xres

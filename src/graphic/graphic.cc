@@ -113,6 +113,8 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 	m_sdlwindow = SDL_CreateWindow("Widelands Window",
 											 SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, flags);
 	if (opengl) {
+		// TODO(sirver): this context needs to be created also for fallback settings, otherwise SDL_GetWindowFlags() will
+		// return SDL_WINDOW_OPENGL, though if you call any gl function, the system crashes.
 		m_glcontext = SDL_GL_CreateContext(m_sdlwindow);
 		if (m_glcontext) {
 			SDL_GL_MakeCurrent(m_sdlwindow, m_glcontext);
@@ -162,7 +164,7 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 	bool use_arb = true;
 	const char * extensions = nullptr;
 
-	if (0 != (SDL_GetWindowFlags(m_sdlwindow) & SDL_WINDOW_OPENGL)) {
+	if (opengl && 0 != (SDL_GetWindowFlags(m_sdlwindow) & SDL_WINDOW_OPENGL)) {
 		//  We have successful opened an opengl screen. Print some information
 		//  about opengl and set the rendering capabilities.
 		log ("Graphics: OpenGL: OpenGL enabled\n");
@@ -200,7 +202,7 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 	Surface::display_format_is_now_defined();
 
 	// Redoing the check, because fallback settings might mean we no longer use OpenGL.
-	if (0 != (SDL_GetWindowFlags(m_sdlwindow) & SDL_WINDOW_OPENGL)) {
+	if (opengl && 0 != (SDL_GetWindowFlags(m_sdlwindow) & SDL_WINDOW_OPENGL)) {
 		//  We now really have a working opengl screen...
 		g_opengl = true;
 
