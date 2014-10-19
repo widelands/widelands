@@ -253,7 +253,7 @@ void InteractiveBase::show_buildhelp(bool t) {
 OverlayManager::JobId InteractiveBase::show_work_area
 	(const WorkareaInfo & workarea_info, Widelands::Coords coords)
 {
-	uint8_t workareas_nrs = workarea_info.size();
+	const uint8_t workareas_nrs = workarea_info.size();
 	WorkareaInfo::size_type wa_index;
 	switch (workareas_nrs) {
 		case 0: return 0; // no workarea
@@ -261,8 +261,7 @@ OverlayManager::JobId InteractiveBase::show_work_area
 		case 2: wa_index = 3; break;
 		case 3: wa_index = 0; break;
 		default:
-			wa_index = 0;
-			assert(false);
+			throw wexception("Encountered unexpected WorkareaInfo size %i", workareas_nrs);
 			break;
 	}
 	Widelands::Map & map = m_egbase.map();
