@@ -1984,6 +1984,9 @@ bool NetHost::write_map_transfer_info(SendPacket & s, std::string mapfilename) {
 	// needs the file.
 	s.unsigned_8(NETCMD_NEW_FILE_AVAILABLE);
 	s.string(mapfilename);
+	//Scan-build reports that access to bytes here results in a dereference of null pointer.
+	//This is a false positive.
+	//See https://bugs.launchpad.net/widelands/+bug/1198919
 	s.unsigned_32(file->bytes);
 	s.string(file->md5sum);
 	return true;
