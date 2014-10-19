@@ -483,16 +483,20 @@ void BuildingStatisticsMenu::update() {
 		}
 
 		//  number of these buildings
-		std::string owned_string = (boost::format("%3u") % nr_owned).str(); //  space-pad for sort
+		const std::string owned_string =
+		   (boost::format("%3u") % nr_owned).str();  //  space-pad for sort
 		te->set_string(Columns::Owned, owned_string);
-		if (is_selected)
+		if (is_selected) {
 			m_owned.set_text(owned_string);
+		}
 
 		//  number of these buildings currently being built
-		std::string build_string =  (boost::format("%3u") % nr_build).str();  //  space-pad for sort
-		te->set_string(Columns::Build,build_string);
-		if (is_selected)
+		const std::string build_string =
+		   (boost::format("%3u") % nr_build).str();  //  space-pad for sort
+		te->set_string(Columns::Build, build_string);
+		if (is_selected) {
 			m_in_build.set_text(build_string);
+		}
 	}
 
 	//  disable all buttons, if nothing to select
