@@ -18,7 +18,7 @@
 # campvisi??   = Is campaign visible by default? (1=yes, 0=no)
 # * cnewvisi?? = the name of a campaign or a scenario that must be visible, to show
 #                this entry as well - this string unhides the map, if the player
-#                completed the requierements with an older cconfig version.
+#                completed the requirements with an older cconfig version.
 #####
 
 [global]

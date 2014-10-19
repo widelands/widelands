@@ -119,7 +119,7 @@ obj_better_material_2 = {
    name = "mission grout",
    title = _"Build a lime kiln and coal economy",
    number = 3,
-   body = objective_text(_"Build a lime kiln fed by a well and charcoal kiln, or by a coal mine",
+   body = objective_text(_"Build a lime kiln fed by a well, and by a charcoal kiln or by a coal mine",
       _([[Better buildings may also require other improved materials besides blackwood. One of these is grout, which is produced out of raw stone, water and coal by a lime-burner.]]) ..
       paragraphdivider() ..
       _([[You can obtain water by building a well upon a water source, which your geologists can discover when you send them to any flag that is not on a mountain.]]) ..paragraphdivider() ..
@@ -128,7 +128,7 @@ obj_better_material_2 = {
       paragraphdivider() ..
       _([[Coal can be obtained by building a charcoal kiln or a coal mine. Burning charcoal out of logs is slow. You should only build a charcoal kiln when no coal is available.]]) ..
       paragraphdivider() ..
-      listitem_bullet(_"Build a lime kiln, a well and a charcoal kiln, or a lime kiln and a coal mine."))
+      listitem_bullet(_"Build a lime kiln and a well. Additionally, build either a charcoal kiln or a coal mine for coal supply."))
    )
 }
 

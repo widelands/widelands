@@ -282,15 +282,6 @@ function census_and_statistics()
    wl.ui.MapView():abort_road_building()
 
    message_box_objective(plr, census_and_statistics_00)
-   -- Pick any empty field
-   --[[local function _pick_empty_field()
-      local reg = field:region(2)
-      local f
-      repeat
-         f = reg[math.random(#reg)]
-      until not f.immovable
-      return f
-   end]]
 
    click_on_field(first_quarry_field.brn)
    click_on_panel(wl.ui.MapView().windows.field_action.tabs.watch)

@@ -223,7 +223,7 @@ tell_about_minimap = {
       paragraphdivider() ..
       listitem_bullet(_[[Try it out. Open the minimap, click on a few buttons and try moving around. Close it when you have have experimented enough.]])
    ),
-   h = 300,
+   h = 350,
    obj_name = "use_minimap",
    obj_title = _"Learn to use the minimap",
    obj_body = rt(

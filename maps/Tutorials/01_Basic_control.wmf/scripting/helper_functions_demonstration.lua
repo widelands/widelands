@@ -62,7 +62,8 @@ function click_on_panel(panel, g_T, g_sleeptime)
 			if panel.click then panel:click() end
 			sleep(sleeptime)
 		end
-   else print('Attempt to click on a non-existing panel.')
+   else
+      print('Attempt to click on a non-existing panel.')
 	end
    blocker:lift_blocks()
 end
