@@ -369,7 +369,7 @@ struct MilitarySiteObserver {
 	uint8_t checks;
 	// when considering attack most military sites are inside territory and should be skipped during
 	// evaluation
-	bool enemies_nearby;
+	bool enemies_nearby_;
 };
 
 struct WareObserver {

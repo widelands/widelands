@@ -2740,6 +2740,7 @@ bool DefaultAI::check_militarysites(int32_t gametime) {
 	bool changed = false;
 	Map& map = game().map();
 	MilitarySite* ms = militarysites.front().site;
+	MilitarySiteObserver& mso = militarysites.front(); 
 	uint32_t const vision = ms->descr().vision_range();
 	FCoords f = map.get_fcoords(ms->get_position());
 	// look if there are any enemies building
@@ -2747,6 +2748,9 @@ bool DefaultAI::check_militarysites(int32_t gametime) {
 
 	// first if there are enemies nearby, check for buildings not land
 	if (map.find_fields(Area<FCoords>(f, vision + 4), nullptr, find_enemy) == 0) {
+		
+		mso.enemies_nearby_ = false;
+		
 		// If no enemy in sight - decrease the number of stationed soldiers
 		// as long as it is > 1 - BUT take care that there is a warehouse in the
 		// same economy where the thrown out soldiers can go to.
@@ -2791,6 +2795,8 @@ bool DefaultAI::check_militarysites(int32_t gametime) {
 		}
 	} else {
 
+		mso.enemies_nearby_ = true;
+		
 		uint32_t const total_capacity = ms->max_soldier_capacity();
 		uint32_t const target_capacity = ms->soldier_capacity();
 
@@ -3042,7 +3048,7 @@ void DefaultAI::gain_building(Building& b) {
 			militarysites.back().site = &ref_cast<MilitarySite, Building>(b);
 			militarysites.back().bo = &bo;
 			militarysites.back().checks = bo.desc->get_size();
-			militarysites.back().enemies_nearby = true;
+			militarysites.back().enemies_nearby_ = true;
 
 		} else if (bo.type == BuildingObserver::WAREHOUSE) {
 			++numof_warehouses_;
@@ -3168,7 +3174,7 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 	if (next_attack_waittime_ > 300 && type_ == AGGRESSIVE) {
 		next_attack_waittime_ = 20;
 	}
-
+	
 	// Only useable, if it owns at least one militarysite
 	if (militarysites.empty()) {
 		next_attack_consideration_due_ = next_attack_waittime_ * 1000 + gametime;
@@ -3268,6 +3274,11 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 		std::advance(mso, position);
 
 		MilitarySite* ms = mso->site;
+		
+		if (!mso->enemies_nearby_) {
+			continue;
+		}
+		
 		uint32_t const vision = ms->descr().vision_range();
 		FCoords f = map.get_fcoords(ms->get_position());
 
