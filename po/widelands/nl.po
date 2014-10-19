@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-18 05:48+0000\n"
+"X-Launchpad-Export-Date: 2014-10-19 05:33+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -3863,24 +3863,3 @@ msgstr "Volg"
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr "Beeld centreren"
-
-#~ msgid "Water: %u %%"
-#~ msgstr "Water: %u %%"
-
-#~ msgid "Land: %u %%"
-#~ msgstr "Land: %u %%"
-
-#~ msgid "Wasteland: %u %%"
-#~ msgstr "Woestenij: %u %%"
-
-#~ msgid "Mountains: %u %%"
-#~ msgstr "Bergen: %u %%"
-
-#~ msgid "Quit"
-#~ msgstr "Afsluiten"
-
-#~ msgid "Return to main menu"
-#~ msgstr "Terug naar het hoofdmenu"
-
-#~ msgid "Player info"
-#~ msgstr "Spelergegevens"

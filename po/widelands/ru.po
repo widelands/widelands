@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-10-18 05:50+0000\n"
+"X-Launchpad-Export-Date: 2014-10-19 05:34+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -3755,21 +3755,3 @@ msgstr "Следовать"
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "Water: %u %%"
-#~ msgstr "Вода: %u %%"
-
-#~ msgid "Land: %u %%"
-#~ msgstr "Суша: %u %%"
-
-#~ msgid "Wasteland: %u %%"
-#~ msgstr "Пустошь: %u %%"
-
-#~ msgid "Mountains: %u %%"
-#~ msgstr "Горы: %u %%"
-
-#~ msgid "Quit"
-#~ msgstr "Выйти"
-
-#~ msgid "Return to main menu"
-#~ msgstr "Вернуться в главное меню"

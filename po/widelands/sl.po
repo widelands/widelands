@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2014-10-18 05:50+0000\n"
+"X-Launchpad-Export-Date: 2014-10-19 05:34+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -3752,15 +3752,3 @@ msgstr "Sledi"
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "Water: %u %%"
-#~ msgstr "Voda: %u %%"
-
-#~ msgid "Land: %u %%"
-#~ msgstr "Kopno: %u %%"
-
-#~ msgid "Wasteland: %u %%"
-#~ msgstr "Pustinja: %u %%"
-
-#~ msgid "Mountains: %u %%"
-#~ msgstr "Gorovje: %u %%"

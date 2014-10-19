@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-10-18 05:51+0000\n"
+"X-Launchpad-Export-Date: 2014-10-19 05:35+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -3736,18 +3736,3 @@ msgstr ""
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "Owned by: %u"
-#~ msgstr "拥有者：%u"
-
-#~ msgid "Water: %u %%"
-#~ msgstr "水: %u %%"
-
-#~ msgid "Land: %u %%"
-#~ msgstr "陆地：%u %%"
-
-#~ msgid "Wasteland: %u %%"
-#~ msgstr "荒地：%u %%"
-
-#~ msgid "Mountains: %u %%"
-#~ msgstr "山: %u %%"

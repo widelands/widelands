@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-10-18 05:49+0000\n"
+"X-Launchpad-Export-Date: 2014-10-19 05:34+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -3797,24 +3797,3 @@ msgstr "追跡"
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr "ここに視点移動"
-
-#~ msgid "Water: %u %%"
-#~ msgstr "水　 %u %%"
-
-#~ msgid "Land: %u %%"
-#~ msgstr "平地 %u %%"
-
-#~ msgid "Wasteland: %u %%"
-#~ msgstr "荒地 %u %%"
-
-#~ msgid "Mountains: %u %%"
-#~ msgstr "山地 %u %%"
-
-#~ msgid "Quit"
-#~ msgstr "終了"
-
-#~ msgid "Return to main menu"
-#~ msgstr "メインメニューに戻る"
-
-#~ msgid "Player info"
-#~ msgstr "プレイヤー情報"

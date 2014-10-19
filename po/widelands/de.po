@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-18 05:48+0000\n"
+"X-Launchpad-Export-Date: 2014-10-19 05:33+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: de\n"
 
@@ -3901,27 +3901,3 @@ msgstr "Folge"
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr "Zentriere die Ansicht hierauf"
-
-#~ msgid "Owned by: %u"
-#~ msgstr "Im Besitz von: %u"
-
-#~ msgid "Water: %u %%"
-#~ msgstr "Wasser: %u %%"
-
-#~ msgid "Land: %u %%"
-#~ msgstr "Land: %u %%"
-
-#~ msgid "Wasteland: %u %%"
-#~ msgstr "Unbewohnbar: %u %%"
-
-#~ msgid "Mountains: %u %%"
-#~ msgstr "Berge: %u %%"
-
-#~ msgid "Quit"
-#~ msgstr "Beenden"
-
-#~ msgid "Return to main menu"
-#~ msgstr "Zurück zum Hauptmenü"
-
-#~ msgid "Player info"
-#~ msgstr "Spieler Information"

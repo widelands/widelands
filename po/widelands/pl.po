@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-10-18 05:50+0000\n"
+"X-Launchpad-Export-Date: 2014-10-19 05:34+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -3866,27 +3866,3 @@ msgstr "Śledź"
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr "Wycentruj na tym główny widok"
-
-#~ msgid "Owned by: %u"
-#~ msgstr "Należy do: %u"
-
-#~ msgid "Water: %u %%"
-#~ msgstr "Woda: %u %%"
-
-#~ msgid "Land: %u %%"
-#~ msgstr "Ląd: %u %%"
-
-#~ msgid "Wasteland: %u %%"
-#~ msgstr "Nieużytki: %u %%"
-
-#~ msgid "Mountains: %u %%"
-#~ msgstr "Góry: %u %%"
-
-#~ msgid "Quit"
-#~ msgstr "Zakończ"
-
-#~ msgid "Return to main menu"
-#~ msgstr "Wróć do menu głównego"
-
-#~ msgid "Player info"
-#~ msgstr "Informacje o graczu"

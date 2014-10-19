@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-17 19:36+0100\n"
-"PO-Revision-Date: 2014-10-18 05:14+0000\n"
+"PO-Revision-Date: 2014-10-18 19:42+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-10-18 05:49+0000\n"
+"X-Launchpad-Export-Date: 2014-10-19 05:33+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: gd\n"
 
@@ -61,62 +61,62 @@ msgstr "%1$s, %2$s"
 #. * TRANSLATORS: January. Keep this short if you can.
 #: ../../src/base/time_string.cc:95
 msgid "Jan"
-msgstr ""
+msgstr "Faoi"
 
 #. * TRANSLATORS: February. Keep this short if you can.
 #: ../../src/base/time_string.cc:98
 msgid "Feb"
-msgstr ""
+msgstr "Gearr"
 
 #. * TRANSLATORS: March. Keep this short if you can.
 #: ../../src/base/time_string.cc:101
 msgid "Mar"
-msgstr ""
+msgstr "Màrt"
 
 #. * TRANSLATORS: April. Keep this short if you can.
 #: ../../src/base/time_string.cc:104
 msgid "Apr"
-msgstr ""
+msgstr "Gibl"
 
 #. * TRANSLATORS: May. Keep this short if you can.
 #: ../../src/base/time_string.cc:107
 msgid "May"
-msgstr ""
+msgstr "Cèit"
 
 #. * TRANSLATORS: June. Keep this short if you can.
 #: ../../src/base/time_string.cc:110
 msgid "Jun"
-msgstr ""
+msgstr "Ògmh"
 
 #. * TRANSLATORS: July. Keep this short if you can.
 #: ../../src/base/time_string.cc:113
 msgid "Jul"
-msgstr ""
+msgstr "Iuch"
 
 #. * TRANSLATORS: August. Keep this short if you can.
 #: ../../src/base/time_string.cc:116
 msgid "Aug"
-msgstr ""
+msgstr "Lùn"
 
 #. * TRANSLATORS: September. Keep this short if you can.
 #: ../../src/base/time_string.cc:119
 msgid "Sep"
-msgstr ""
+msgstr "Sult"
 
 #. * TRANSLATORS: October. Keep this short if you can.
 #: ../../src/base/time_string.cc:122
 msgid "Oct"
-msgstr ""
+msgstr "Dàmh"
 
 #. * TRANSLATORS: November. Keep this short if you can.
 #: ../../src/base/time_string.cc:125
 msgid "Nov"
-msgstr ""
+msgstr "Samh"
 
 #. * TRANSLATORS: December. Keep this short if you can.
 #: ../../src/base/time_string.cc:128
 msgid "Dec"
-msgstr ""
+msgstr "Dùbh"
 
 #: ../../src/editor/editorinteractive.cc:64
 #, c-format
@@ -271,7 +271,7 @@ msgstr "Seòrsaichean:%s"
 #: ../../src/editor/tools/editor_info_tool.cc:82
 #, c-format
 msgid "Owned by: Player %u"
-msgstr ""
+msgstr "Le: Cluicheadair %u"
 
 #: ../../src/editor/tools/editor_info_tool.cc:85
 msgid "Owned by: —"
@@ -468,7 +468,7 @@ msgstr "Sguir dheth"
 #: ../../src/ui_fsmenu/editor_mapselect.cc:182
 #, c-format
 msgid "%1$ix%2$i"
-msgstr ""
+msgstr "%1$ix%2$i"
 
 #. * TRANSLATORS: Parent directory
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:212
@@ -544,13 +544,13 @@ msgstr "Àireamh thuaireamach :"
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:429
 #, c-format
 msgid "Water: %i %%"
-msgstr ""
+msgstr "Uisge: %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:199
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:430
 #, c-format
 msgid "Land: %i %%"
-msgstr ""
+msgstr "Tìr: %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:224
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:431
@@ -562,7 +562,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:432
 #, c-format
 msgid "Mountains: %i %%"
-msgstr ""
+msgstr "Beanntan: %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:246
 msgid "Island mode:"
@@ -1965,37 +1965,37 @@ msgstr ""
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-console
 #: ../../src/profile/profile.cc:45
 msgid "true"
-msgstr ""
+msgstr "true"
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-console
 #: ../../src/profile/profile.cc:49
 msgid "yes"
-msgstr ""
+msgstr "t"
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-console
 #: ../../src/profile/profile.cc:53
 msgid "on"
-msgstr ""
+msgstr "air"
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-console
 #: ../../src/profile/profile.cc:63
 msgid "false"
-msgstr ""
+msgstr "false"
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-console
 #: ../../src/profile/profile.cc:67
 msgid "no"
-msgstr ""
+msgstr "c"
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-console
 #: ../../src/profile/profile.cc:71
 msgid "off"
-msgstr ""
+msgstr "dheth"
 
 #: ../../src/scripting/lua_game.cc:988
 #, c-format
@@ -2552,13 +2552,13 @@ msgstr "Aon chluicheadair"
 #. * TRANSLATORS: %1% is the number of players
 #: ../../src/ui_fsmenu/loadgame.cc:332 ../../src/ui_fsmenu/loadreplay.cc:258
 msgid "Multiplayer (%1%, Host)"
-msgstr ""
+msgstr "Ioma-chluicheadair (%1%, Òstair)"
 
 #. * TRANSLATORS: Gametype used in filenames for loading games
 #. * TRANSLATORS: %1% is the number of players
 #: ../../src/ui_fsmenu/loadgame.cc:338 ../../src/ui_fsmenu/loadreplay.cc:264
 msgid "Multiplayer (%1%)"
-msgstr ""
+msgstr "Ioma-chluicheadair (%1%)"
 
 #: ../../src/ui_fsmenu/loadreplay.cc:74
 msgid "Choose a replay"
@@ -2588,7 +2588,7 @@ msgstr "Ceadachas"
 
 #: ../../src/ui_fsmenu/main.cc:80
 msgid "Exit Widelands"
-msgstr ""
+msgstr "Fàg Widelands"
 
 #: ../../src/ui_fsmenu/main.cc:86
 msgid "Version "
@@ -2982,7 +2982,7 @@ msgstr "A bheil thu airson sgur dhen triall gnìomhach?"
 #. * TRANSLATORS: %1% of %2% soldiers. Used in Attack box.
 #: ../../src/wui/attack_box.cc:136
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1% / %2%"
 
 #: ../../src/wui/attack_box.cc:151
 msgid "Soldiers:"
@@ -3235,7 +3235,7 @@ msgstr "Dì-bhugaich an raon"
 
 #: ../../src/wui/game_main_menu.cc:39
 msgid "Statistics Menu"
-msgstr ""
+msgstr "Clàr-taice na stadastaireachd"
 
 #: ../../src/wui/game_main_menu.cc:47
 #: ../../src/wui/general_statistics_menu.cc:53
@@ -3383,11 +3383,11 @@ msgstr "Amasan"
 #. * TRANSLATORS: Window label when "Exit game" has been pressed
 #: ../../src/wui/game_options_menu.cc:40
 msgid "Exit Game Confirmation"
-msgstr ""
+msgstr "Dearbhaich fàgail a' gheama"
 
 #: ../../src/wui/game_options_menu.cc:41
 msgid "Are you sure you wish to exit this game?"
-msgstr ""
+msgstr "A bheil thu cinnteach gu bheil thu airson an geama seo fhàgail?"
 
 #: ../../src/wui/game_options_menu.cc:79
 msgid "README"
@@ -3397,11 +3397,12 @@ msgstr "LEUGHMI"
 #: ../../src/wui/game_options_menu.cc:81
 msgid "Show general information about Widelands and keyboard shortcuts"
 msgstr ""
+"Seall fiosrachadh coitcheann mu Widelands 's ath-ghoiridean a' mheur-chlàir"
 
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_options_menu.cc:90
 msgid "Show the distribution licence document"
-msgstr ""
+msgstr "Seall sgrìobhainn a' cheadachais sgaoilidh"
 
 #: ../../src/wui/game_options_menu.cc:97
 msgid "Authors"
@@ -3410,7 +3411,7 @@ msgstr "Ùghdaran"
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_options_menu.cc:99
 msgid "Show information about the Widelands Development Team"
-msgstr ""
+msgstr "Seall fiosrachadh mun sgioba leasachaidh aig Widelands"
 
 #: ../../src/wui/game_options_menu.cc:106
 #: ../../src/wui/game_options_sound_menu.cc:29
@@ -3420,7 +3421,7 @@ msgstr "Roghainnean fuaime"
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_options_menu.cc:108
 msgid "Set sound effect and music options"
-msgstr ""
+msgstr "Suidhich roghainnean na fuaime 's a' chiùil"
 
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_options_menu.cc:127 ../../src/wui/game_summary.cc:87
@@ -3453,7 +3454,7 @@ msgstr "An ùine a dh'fhalbh:"
 
 #: ../../src/wui/game_summary.cc:64
 msgid "Player info:"
-msgstr ""
+msgstr "Fiosrachadh a' chluicheadair:"
 
 #: ../../src/wui/game_summary.cc:79
 msgid "Continue playing"
@@ -3753,7 +3754,7 @@ msgstr "Cuir an obraiche a thagh thu a-mach à dreuchd"
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
 #: ../../src/wui/productionsitewindow.cc:180
 msgid "%1%/%2%"
-msgstr ""
+msgstr "%1%/%2%"
 
 #: ../../src/wui/productionsitewindow.cc:196
 msgid "(coming)"
@@ -3958,27 +3959,3 @@ msgstr "Lean air"
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr "Meadhanaich am prìomh shealladh air seo"
-
-#~ msgid "Owned by: %u"
-#~ msgstr "Sealbhaiche: %u"
-
-#~ msgid "Water: %u %%"
-#~ msgstr "Uisge: %u %%"
-
-#~ msgid "Land: %u %%"
-#~ msgstr "Tìr: %u %%"
-
-#~ msgid "Wasteland: %u %%"
-#~ msgstr "Fàsach: %u %%"
-
-#~ msgid "Mountains: %u %%"
-#~ msgstr "Beanntan: %u %%"
-
-#~ msgid "Quit"
-#~ msgstr "Fàg an-seo"
-
-#~ msgid "Return to main menu"
-#~ msgstr "Till dhan phrìomh clàr-taice"
-
-#~ msgid "Player info"
-#~ msgstr "Fiosrachadh a' chluicheadair"

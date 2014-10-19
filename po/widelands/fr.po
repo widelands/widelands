@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-10-18 05:48+0000\n"
+"X-Launchpad-Export-Date: 2014-10-19 05:33+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: fr\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -3884,27 +3884,3 @@ msgstr "Suivre"
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr "Centrer la vue principale sur ceci"
-
-#~ msgid "Owned by: %u"
-#~ msgstr "Possédé par : %u"
-
-#~ msgid "Water: %u %%"
-#~ msgstr "Eau: %u %%"
-
-#~ msgid "Land: %u %%"
-#~ msgstr "Terrain: %u %%"
-
-#~ msgid "Wasteland: %u %%"
-#~ msgstr "Terres désolées: %u %%"
-
-#~ msgid "Mountains: %u %%"
-#~ msgstr "Montagnes: %u %%"
-
-#~ msgid "Quit"
-#~ msgstr "Quitter"
-
-#~ msgid "Return to main menu"
-#~ msgstr "Retour au menu principal"
-
-#~ msgid "Player info"
-#~ msgstr "Information du joueur"
