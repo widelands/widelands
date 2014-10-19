@@ -16,16 +16,6 @@ constexpr bool PATHS_ARE_ABSOLUTE = @WL_PATHS_ARE_ABSOLUTE@;
 // For a standard Linux installation, this should be "share/games/widelands"
 #define INSTALL_DATADIR "@WL_INSTALL_DATADIR@"
 
-// This is the locale directory, usually located within the data directory;
-// Absolute path if PATHS_ARE_ABSOLUTE, otherwise relative to the directory
-// where the executable is in.
-// For portable installation, this needs to be "locale" and PATHS_ARE_ABSOLUTE
-// must be false.
-// For a standard Linux installation, this should be
-// "/usr/local/share/games/widelands/locale" and PATHS_ARE_ABSOLUTE should be
-// true.
-#define INSTALL_LOCALEDIR "@WL_INSTALL_LOCALEDIR@"
-
 // don't know if this causes problems on Windows but it solves the problems
 // finding a user's home directory on Linux
 #define HAS_GETENV

@@ -54,7 +54,11 @@ struct LanguageEntry {
 void add_languages_to_list(UI::Listselect<std::string>* list, const std::string& language) {
 
 	Section* s = &g_options.pull_section("global");
-	FilenameSet files = g_fs->list_directory(s->get_string("localedir", INSTALL_LOCALEDIR));
+	//TODO(code review) I don't think I change the behaviour here, but this doesn't seem to take into account whether
+	//the constant we use as base is relative or absolute. Maybe it doesn't need it?
+	//Though, this is the second time I concatenate datadir/locale so I wonder if that should be in some constant
+	//so I only have to do it once. 
+	FilenameSet files = g_fs->list_directory(s->get_string("localedir", std::string(INSTALL_DATADIR) + "/locale"));
 	Profile ln("txts/languages");
 	s = &ln.pull_section("languages");
 	bool own_selected = "" == language || "en" == language;
