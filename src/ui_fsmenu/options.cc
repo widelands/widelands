@@ -58,10 +58,20 @@ void add_languages_to_list(UI::Listselect<std::string>* list, const std::string&
 	//the constant we use as base is relative or absolute. Maybe it doesn't need it?
 	//Though, this is the second time I concatenate datadir/locale so I wonder if that should be in some constant
 	//so I only have to do it once.
+	//Questions:
+	//Now that I've had time to think about this, shouldn't we be able to guarantee localedir path has already been set
+	//when we bootstrapped in wlapplication.cc?
+	//Though, it's not clear to me what the purpose of the section is, get_string seem to wrap a keybased
+	//lookup with a fallback value. Under the hood it ends up looking up the key in what looked very much like a map
+	//except it marked whether the value had been looked at (why?), and had an implementation instead of just
+	//using a map (again, why?).
+
+	const std::string directory = std::string(INSTALL_DATADIR) + "/locale";
 	FilenameSet files = g_fs->list_directory(
 		s->get_string(
 			"localedir",
-			std::string(INSTALL_DATADIR) + "/locale"
+			//TODO(code review): I'd rather avoid this workaround, but it worked at the moment.
+			directory.c_str()
 		)
 	);
 	Profile ln("txts/languages");
