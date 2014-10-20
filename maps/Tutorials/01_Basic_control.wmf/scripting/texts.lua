@@ -292,7 +292,7 @@ talk_about_roadbuilding_00b = {
    field = road_building_field,
    title = _"Road Building",
    body = rt(
-      p(_[[Excellent! To enter road building mode for any flag left-click on a flag and select]])
+      p(_[[Excellent! To enter road building mode for any flag, left-click on a flag and select]])
       ) ..
    rt("image=pics/menu_build_way.png", p(_[[the road building symbol.]])) ..
    rt(

@@ -165,7 +165,7 @@ function build_a_quarry()
    register_immovable_as_allowed(cs)
 
    local function _rip_road()
-      for idx,f in ipairs(cs.fields[1].brn:region(2)) do
+      for idx,f in ipairs(first_quarry_field.brn:region(2)) do
          if f.immovable and f.immovable.descr.type_name == "road" then
             click_on_field(f)
             click_on_panel(wl.ui.MapView().windows.
@@ -185,8 +185,11 @@ function build_a_quarry()
    if wl.ui.MapView().is_building_road then
       message_box_objective(plr, talk_about_roadbuilding_00a)
    else
+      -- TODO(codereview): Sometimes, the script enters the else part although the auto-road-building is enabled.
+      -- The road build markers appear after the message box has been closed.
+      -- The panel build_road does not exist then, which prints the warning on the terminal.
       message_box_objective(plr, talk_about_roadbuilding_00b)
-      click_on_field(cs.fields[1].brn)
+      click_on_field(first_quarry_field.brn)
       click_on_panel(wl.ui.MapView().windows.field_action.buttons.build_road, 300)
       -- show the user how to enter road building mode manually
    end
@@ -204,7 +207,7 @@ function build_a_quarry()
 
    message_box_objective(plr, talk_about_roadbuilding_01)
    -- Showoff direct roadbuilding
-   click_on_field(cs.fields[1].brn)
+   click_on_field(first_quarry_field.brn)
    click_on_panel(wl.ui.MapView().windows.field_action.buttons.build_road, 300)
    click_on_field(map.player_slots[1].starting_field.brn)
 
@@ -283,7 +286,7 @@ function census_and_statistics()
 
    message_box_objective(plr, census_and_statistics_00)
 
-   click_on_field(first_quarry_field.brn)
+   click_on_field(first_quarry_field.bln)
    click_on_panel(wl.ui.MapView().windows.field_action.tabs.watch)
    click_on_panel(wl.ui.MapView().windows.field_action.buttons.census)
    sleep(300)
