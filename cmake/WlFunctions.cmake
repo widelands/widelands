@@ -255,5 +255,7 @@ function(wl_binary NAME)
 
   _common_compile_tasks()
 
-  install(TARGETS ${NAME} DESTINATION ${WL_INSTALL_BINDIR} COMPONENT ExecutableFiles)
+  #Quoting the CMake documentation on DESTINATION:
+  #"If a relative path is given it is interpreted relative to the value of CMAKE_INSTALL_PREFIX"
+  install(TARGETS ${NAME} DESTINATION "." COMPONENT ExecutableFiles)
 endfunction()
