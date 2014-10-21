@@ -2,19 +2,20 @@
 # Copyright (C) 2009 Widelands Development Team
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005.
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014.
+# Fabian Mack <wl-zocker@t-online.de>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-10-17 18:36+0000\n"
-"PO-Revision-Date: 2014-08-23 14:05+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
-"Language-Team: German <widelands-public@lists.sourceforge.net>\n"
+"PO-Revision-Date: 2014-10-20 19:38+0000\n"
+"Last-Translator: wl-zocker <Unknown>\n"
+"Language-Team: widelands-dev\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-18 05:43+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-10-21 05:39+0000\n"
+"X-Generator: Launchpad (build 17203)\n"
 "X-Poedit-Country: GERMANY\n"
 "Language: de\n"
 "X-Poedit-Language: German\n"
@@ -224,7 +225,7 @@ msgstr "STRG+F10: Beendet das Spiel sofort"
 
 #: ../../txts/README.lua:77
 msgid "CTRL+Leftclick: skips confirmation dialogs"
-msgstr ""
+msgstr "Strg+Linksklick: Überspringt den Bestätigungsdialog"
 
 #: ../../txts/README.lua:78
 msgid "F11: takes a screenshot"
