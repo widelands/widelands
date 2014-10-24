@@ -32,6 +32,7 @@
 #include "logic/player.h"
 #include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
+#include "logic/ship.h"
 
 namespace Widelands {
 
@@ -153,7 +154,7 @@ struct NearFlag {
 		return cost_ > f.cost_;
 	}
 
-	bool operator == (Flag const* const f) const {
+	bool operator==(Flag const* const f) const {
 		return flag == f;
 	}
 };
@@ -227,10 +228,12 @@ struct BuildableField {
 	int16_t military_stationed_;
 	// stationed (manned) military buildings nearby
 	int16_t military_unstationed_;
-	// some buildings must be postponed bit
-	int32_t prohibited_till_;
-	// and then some must be forced
-	int32_t forced_after_;
+	//// some buildings must be postponed bit //NOCOM ???
+	// int32_t prohibited_till_;
+	//// and then some must be forced
+	// int32_t forced_after_;
+	bool is_portspace_;
+	bool portspace_nearby_;
 
 	std::vector<uint8_t> consumers_nearby_;
 	std::vector<uint8_t> producers_nearby_;
@@ -261,7 +264,9 @@ struct BuildableField {
 	     military_loneliness_(1000),
 	     military_in_constr_nearby_(0),
 	     military_presence_(0),
-	     military_stationed_(0) {
+	     military_stationed_(0),
+	     is_portspace_(false),
+	     portspace_nearby_(false) {
 	}
 };
 
@@ -310,12 +315,14 @@ struct BuildingObserver {
 	bool plants_trees_;
 	bool recruitment_;  // is "producing" workers?
 	bool is_buildable_;
-	bool need_trees_;          // lumberjack = true
-	bool need_stones_;         // quarry = true
-	bool mines_water_;         // wells
-	bool need_water_;          // fisher, fish_breeder = true
-	bool is_hunter_;           // need to identify hunters
-	bool is_fisher_;           // need to identify fishers
+	bool need_trees_;   // lumberjack = true
+	bool need_stones_;  // quarry = true
+	bool mines_water_;  // wells
+	bool need_water_;   // fisher, fish_breeder = true
+	bool is_hunter_;    // need to identify hunters
+	bool is_fisher_;    // need to identify fishers
+	bool is_port_;
+	bool is_shipyard_;
 	bool space_consumer_;      // farm, vineyard... = true
 	bool expansion_type_;      // military building used that can be used to control area
 	bool fighting_type_;       // military building built near enemies
@@ -370,6 +377,17 @@ struct MilitarySiteObserver {
 	// when considering attack most military sites are inside territory and should be skipped during
 	// evaluation
 	bool enemies_nearby_;
+};
+
+struct WarehouseSiteObserver {
+	Widelands::Warehouse* site;
+	BuildingObserver* bo;
+};
+
+struct ShipObserver {
+	Widelands::Ship* ship;
+	Widelands::NoteShipMessage::Message last_message_;
+	Widelands::Coords expedition_start_point_;
 };
 
 struct WareObserver {

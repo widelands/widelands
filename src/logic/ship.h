@@ -37,6 +37,19 @@ class Economy;
 struct Fleet;
 class PortDock;
 
+struct NoteShipMessage {
+	CAN_BE_SEND_AS_NOTE(NoteId::ShipMessage)
+
+	Ship* ship;
+
+	enum class Message {LOST, GAINED,PORTSPACEFOUND,EXPEDITIONREADY,ISLANDCIRCUMNAVIGATED,NOMESSAGE};
+	Message message;
+
+	NoteShipMessage(Ship* const init_ship, Message const init_message)
+	   : ship(init_ship), message(init_message) {
+	}
+};
+
 struct ShipDescr : BobDescr {
 	ShipDescr
 		(char const * name, char const * descname,

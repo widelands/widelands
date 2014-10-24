@@ -111,6 +111,7 @@ void Ship::init_auto_task(Game & game) {
 void Ship::init(EditorGameBase & egbase) {
 	Bob::init(egbase);
 	init_fleet(egbase);
+	Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::GAINED));
 }
 
 /**
@@ -135,6 +136,8 @@ void Ship::cleanup(EditorGameBase & egbase) {
 		m_items.back().remove(egbase);
 		m_items.pop_back();
 	}
+
+	Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::LOST));
 
 	Bob::cleanup(egbase);
 }
@@ -460,8 +463,17 @@ void Ship::ship_update_expedition(Game & game, Bob::State &) {
 			std::string msg_head = _("Port Space Found");
 			std::string msg_body = _("An expedition ship found a new port build space.");
 			send_message(game, "exp_port_space", msg_head, msg_body, "port.png");
+			
 		}
 		m_expedition->seen_port_buildspaces.swap(temp_port_buildspaces);
+		if (new_port_space) {
+			Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::PORTSPACEFOUND));
+			//printf ("    port spaces tmp: %1d, normal: %1d, last one: %3dx%3d, starting field: %3dx%3d\n", //NOCOM
+				//m_expedition->seen_port_buildspaces->size(),
+				//temp_port_buildspaces->size(),
+				//temp_port_buildspaces->front().x,temp_port_buildspaces->front().y,
+				//m_expedition->exploration_start.x,m_expedition->exploration_start.y);
+		}
 	}
 }
 
@@ -571,6 +583,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 							send_message(game, "exp_island", msg_head, msg_body,
 								"ship_explore_island_cw.png");
 							m_ship_state = EXP_WAITING;
+							Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::ISLANDCIRCUMNAVIGATED));
 							return start_task_idle(game, descr().main_animation(), 1500);
 						}
 					}
@@ -631,6 +644,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 		case EXP_COLONIZING: {
 			assert(m_expedition->seen_port_buildspaces && !m_expedition->seen_port_buildspaces->empty());
 			BaseImmovable * baim = game.map()[m_expedition->seen_port_buildspaces->front()].get_immovable();
+			printf ("    ship.cc: testing asset on %3dx%3d\n", m_expedition->seen_port_buildspaces->front().x, m_expedition->seen_port_buildspaces->front().y);
 			assert(baim);
 			upcast(ConstructionSite, cs, baim);
 
@@ -758,6 +772,7 @@ void Ship::start_task_expedition(Game & game) {
 	m_ship_state = EXP_WAITING;
 	// Initialize a new, yet empty expedition
 	m_expedition.reset(new Expedition());
+	//printf ("    ship.cc: start_task_expedition()[1] - emptying seen_port_buildspaces\n"); //NOCOM
 	m_expedition->seen_port_buildspaces.reset(new std::list<Coords>());
 	m_expedition->island_exploration = false;
 	m_expedition->direction = 0;
@@ -788,6 +803,7 @@ void Ship::start_task_expedition(Game & game) {
 	const std::string msg_head = _("Expedition Ready");
 	const std::string msg_body = _("An expedition ship is waiting for your commands.");
 	send_message(game, "exp_ready", msg_head, msg_body, "start_expedition.png");
+	Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::EXPEDITIONREADY));
 }
 
 /// Initializes / changes the direction of scouting to @arg direction
@@ -964,6 +980,7 @@ void Ship::Loader::load(FileRead & fr, uint8_t version)
 				m_expedition.reset(new Expedition());
 				// Currently seen port build spaces
 				m_expedition->seen_port_buildspaces.reset(new std::list<Coords>());
+				//printf ("    ship.cc: start_task_expedition()[2] - emptying seen_port_buildspaces\n"); //NOCOM
 				uint8_t numofports = fr.unsigned_8();
 				for (uint8_t i = 0; i < numofports; ++i)
 					m_expedition->seen_port_buildspaces->push_back(read_coords_32(&fr));
