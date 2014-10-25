@@ -296,10 +296,10 @@ talk_about_roadbuilding_00b = {
       ) ..
    rt("image=pics/menu_build_way.png", p(_[[the road building symbol.]])) ..
    rt(
-      p(_[[If you decide you do not want to build a road at this time, you can cancel road building by clicking on the starting flag of the road and selecting]])) ..
+      p(_[[If you decide that you do not want to build a road at this time, you can cancel road building by clicking on the starting flag of the road and selecting]])) ..
    rt("image=pics/menu_abort.png", p(_[[the abort symbol.]])) ..
    rt(
-      p(_[[Now, about this road. I’ll enter the road building mode and the make it longer by one field at a time by left-clicking multiple times on neighboring fields for perfect control over the route the road takes, like so:]])
+      p(_[[Now, about this road. I’ll enter the road building mode and then make it longer by one field at a time by left-clicking multiple times on neighboring fields for perfect control over the route the road takes, like so:]])
    ),
    show_instantly = true
 }

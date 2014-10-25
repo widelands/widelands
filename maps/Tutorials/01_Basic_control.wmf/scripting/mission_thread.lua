@@ -181,17 +181,14 @@ function build_a_quarry()
 
    immovable_is_legal = function() return true end
 
-   sleep(100) -- give the game some time to enter road building mode
+   sleep(3000) -- give the game some time to enter road building mode
    if wl.ui.MapView().is_building_road then
       message_box_objective(plr, talk_about_roadbuilding_00a)
    else
-      -- TODO(codereview): Sometimes, the script enters the else part although the auto-road-building is enabled.
-      -- The road build markers appear after the message box has been closed.
-      -- The panel build_road does not exist then, which prints the warning on the terminal.
+      -- show the user how to enter road building mode manually
       message_box_objective(plr, talk_about_roadbuilding_00b)
       click_on_field(first_quarry_field.brn)
       click_on_panel(wl.ui.MapView().windows.field_action.buttons.build_road, 300)
-      -- show the user how to enter road building mode manually
    end
 
    -- Showoff one-by-one roadbuilding
