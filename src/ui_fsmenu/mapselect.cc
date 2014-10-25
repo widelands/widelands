@@ -132,6 +132,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	m_cb_show_all_maps->set_state(true);
 
 	m_cb_dont_localize_mapnames = new UI::Checkbox(vbox, Point(0, 0));
+	m_cb_dont_localize_mapnames->set_state(false);
 	m_cb_dont_localize_mapnames->changedto.connect
 			(boost::bind(&FullscreenMenuMapSelect::fill_table, boost::ref(*this)));
 	vbox->add(m_cb_dont_localize_mapnames, UI::Box::AlignLeft, true);
