@@ -65,6 +65,17 @@ void add_languages_to_list(UI::Listselect<std::string>* list, const std::string&
 	//lookup with a fallback value. Under the hood it ends up looking up the key in what looked very much like a map
 	//except it marked whether the value had been looked at (why?), and had an implementation instead of just
 	//using a map (again, why?).
+	// NOCOM(#codereview): this code only works when "localedir" is in one of
+	// the directories that we added to the LayeredFileSystem that is g_fs. If
+	// "localedir" is /usr/share/locale or something like that this code will
+	// not work I think. This makes me wonder: does selecting different languages even work on the PPA or so, and if so, is
+	// the localepath then inside the datadir? If the answer is yes, we should kill the localepath option.
+	//
+	// The further code works like this: It lists localedir/*, removes "." and
+	// ".." and asks txts/languges for the long name of the code it saw in the
+	// directory (i.e. de -> "Deutsch"). It adds the long codes to the list, but
+	// remember the related code (i.e. "de") so that the languge can be
+	// selected.
 
 	const std::string directory = std::string(INSTALL_DATADIR) + "/locale";
 	FilenameSet files = g_fs->list_directory(

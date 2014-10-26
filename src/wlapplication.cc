@@ -767,6 +767,10 @@ void WLApplication::init_language() {
 	if (s.has_val("localedir")) {
 		//TODO(code review): Should this still be possible, or do we want to tie it with
 		//datadir so that people using --datadir will also load locales from that?
+		// NOCOM(#codereview): I think that we have to keep it separate, but I am
+		// not 100% sure. I think some linux distributions (i.e. debian) need to
+		// have locales in another directory as data. Otherwise, I would much
+		// appreciate this to be merged into datadir.
 		// Localedir has been specified on the command line or in the config file.
 		i18n::set_localedir(s.get_safe_string("localedir"));
 	} else {
