@@ -115,11 +115,11 @@ struct MultiPlayerClientGroup : public UI::Box {
 		} else {
 			name->set_text(us.name);
 			if (m_save != us.position) {
-				const char* pic;
-				const char* temp_tooltip;
+				std::string pic;
+				std::string temp_tooltip;
 				if (us.position < UserSettings::highest_playernum()) {
-					pic =  (boost::format("pics/genstats_enable_plr_0%u.png")
-							  % static_cast<unsigned int>(us.position + 1)).str().c_str();
+					pic = (boost::format("pics/genstats_enable_plr_0%u.png")
+							  % static_cast<unsigned int>(us.position + 1)).str();
 					temp_tooltip = (boost::format(_("Player %u"))
 										 % static_cast<unsigned int>(us.position + 1)).str().c_str();
 				} else {
@@ -505,6 +505,7 @@ void MultiPlayerSetupGroup::refresh()
 	}
 
 	// Update player groups
-	for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
+	for (uint32_t i = 0; i < MAX_PLAYERS; ++i) {
 		p.at(i)->refresh();
+	}
 }

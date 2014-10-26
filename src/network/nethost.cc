@@ -978,10 +978,12 @@ void NetHost::think()
 
 		for (uint32_t i = 0; i < d->computerplayers.size(); ++i)
 			d->computerplayers.at(i)->think();
-	} else if (m_is_dedicated)
+	} else if (m_is_dedicated) {
 		// Take care that every player gets updated during set up time
-		for (uint8_t i = 0; i < d->settings.players.size(); ++i)
+		for (uint8_t i = 0; i < d->settings.players.size(); ++i) {
 			d->npsb.refresh(i);
+		}
+	}
 }
 
 void NetHost::send_player_command(Widelands::PlayerCommand & pc)
