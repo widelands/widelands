@@ -206,7 +206,7 @@ void GameMainMenuSaveGame::fill_list() {
 		try {
 			Widelands::GameLoader gl(name, igbase().game());
 			gl.preload_game(gpdp);
-			m_ls.add(FileSystem::filename_without_ext(name).c_str(), name);
+			m_ls.add(FileSystem::filename_without_ext(name), name);
 		} catch (const WException &) {} //  we simply skip illegal entries
 	}
 }

@@ -79,7 +79,7 @@ void add_languages_to_list(UI::Listselect<std::string>* list, const std::string&
 	std::sort(entries.begin(), entries.end());
 
 	for (const LanguageEntry& entry : entries) {
-		list->add(entry.descname.c_str(), entry.abbreviation, nullptr, entry.abbreviation == language);
+		list->add(entry.descname, entry.abbreviation, nullptr, entry.abbreviation == language);
 	}
 }
 

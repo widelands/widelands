@@ -286,13 +286,12 @@ void MainMenuSaveMap::fill_list() {
 #else
 		m_parentdir = m_curdir.substr(0, m_curdir.rfind('\\'));
 #endif
-		std::string parent_string =
-				/** TRANSLATORS: Parent directory */
-				(boost::format("\\<%s\\>") % _("parent")).str();
+
 		m_ls->add
-			(parent_string.c_str(),
-			 m_parentdir.c_str(),
-			 g_gr->images().get("pics/ls_dir.png"));
+				/** TRANSLATORS: Parent directory */
+				((boost::format("\\<%s\\>") % _("parent")).str(),
+				 m_parentdir.c_str(),
+				 g_gr->images().get("pics/ls_dir.png"));
 	}
 
 	const FilenameSet::const_iterator mapfiles_end = m_mapfiles.end();
@@ -329,7 +328,7 @@ void MainMenuSaveMap::fill_list() {
 			try {
 				wml->preload_map(true);
 				m_ls->add
-					(FileSystem::filename_without_ext(name).c_str(),
+					(FileSystem::filename_without_ext(name),
 					 name,
 					 g_gr->images().get("pics/ls_wlmap.png"));
 			} catch (const WException &) {} //  we simply skip illegal entries

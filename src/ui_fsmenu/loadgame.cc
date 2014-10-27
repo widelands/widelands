@@ -294,7 +294,7 @@ void FullscreenMenuLoadGame::fill_list() {
 	if (m_settings && !m_settings->settings().saved_games.empty()) {
 		for (uint32_t i = 0; i < m_settings->settings().saved_games.size(); ++i) {
 			const char * path = m_settings->settings().saved_games.at(i).path.c_str();
-			m_list.add(FileSystem::filename_without_ext(path).c_str(), path);
+			m_list.add(FileSystem::filename_without_ext(path), path);
 		}
 	} else { // Normal case
 		// Fill it with all files we find.
@@ -365,7 +365,7 @@ void FullscreenMenuLoadGame::fill_list() {
 				}
 				// End localization section
 
-				m_list.add(displaytitle.c_str(), name);
+				m_list.add(displaytitle, name);
 			} catch (const WException &) {
 				//  we simply skip illegal entries
 			}

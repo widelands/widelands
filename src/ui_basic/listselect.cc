@@ -119,7 +119,7 @@ void BaseListselect::clear() {
  *       sel    if true, directly select the new entry
 */
 void BaseListselect::add
-	(std::string name,
+	(const std::string& name,
 	 uint32_t             entry,
 	 const Image*   pic,
 	 bool         const   sel,
@@ -158,7 +158,7 @@ void BaseListselect::add
 }
 
 void BaseListselect::add_front
-	(std::string name,
+	(const std::string& name,
 	 const Image*   pic,
 	 bool         const   sel,
 	 const std::string  & tooltip_text)

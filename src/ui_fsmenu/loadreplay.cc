@@ -291,7 +291,7 @@ void FullscreenMenuLoadReplay::fill_list()
 			}
 			// End localization section
 
-			m_list.add(displaytitle.c_str(), *pname);
+			m_list.add(displaytitle, *pname);
 		} catch (const WException &) {} //  we simply skip illegal entries
 	}
 
