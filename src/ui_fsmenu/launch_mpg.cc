@@ -555,7 +555,7 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata()
 	for (; i <= m_nr_players; ++i) {
 		infotext += "\n* ";
 		Section & s = prof.get_safe_section((boost::format("player_%u")
-														 % static_cast<unsigned int>(i)).str().c_str());
+														 % static_cast<unsigned int>(i)).str());
 		player_save_name [i - 1] = s.get_string("name");
 		player_save_tribe[i - 1] = s.get_string("tribe");
 		player_save_ai   [i - 1] = s.get_string("ai");

@@ -733,14 +733,13 @@ void NetHost::run(bool const autorun)
 		// May be the server is password protected?
 		Section & s = g_options.pull_section("global");
 		m_password  = s.get_string("dedicated_password", "");
+
 		// And we read the message of the day
-		m_dedicated_motd =
-			s.get_string
-				("dedicated_motd",
-				 (boost::format
-					(_("This is a dedicated server. Send \"@%s help\" to get a full list of available commands."))
-					% d->localplayername)
-				.str().c_str());
+		const std::string dedicated_motd_key =
+				(boost::format
+				 (_("This is a dedicated server. Send \"@%s help\" to get a full list of available commands."))
+				 % d->localplayername).str();
+		m_dedicated_motd = s.get_string("dedicated_motd", dedicated_motd_key.c_str());
 
 		// Maybe this is the first run, so we try to setup the DedicatedLog
 		// empty strings are treated as "do not write this type of log"
@@ -2283,7 +2282,7 @@ void NetHost::check_hung_clients()
 					if ((d->clients.at(i).hung_since < (time(nullptr) - 300)) && m_is_dedicated) {
 						disconnect_client(i, "CLIENT_TIMEOUTED");
 						// Try to save the game
-						std::string savename = (boost::format("save/client_hung_%i.wmf") % time(nullptr)).str();;
+						std::string savename = (boost::format("save/client_hung_%i.wmf") % time(nullptr)).str();
 						std::string * error = new std::string();
 						SaveHandler & sh = d->game->save_handler();
 						if (sh.save_game(*d->game, savename, error))

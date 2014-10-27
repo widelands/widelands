@@ -45,7 +45,7 @@ HelpWindow::HelpWindow
 	 uint32_t fontsize,
 	 uint32_t width, uint32_t height)
 	:
-	Window(parent, "help_window", 0, 0, 20, 20, (boost::format(_("Help: %s")) % caption).str().c_str()),
+	Window(parent, "help_window", 0, 0, 20, 20, (boost::format(_("Help: %s")) % caption).str()),
 	textarea(new MultilineTextarea(this, 5, 5, 30, 30, std::string(), Align_Left)),
 	m_h1(std::to_string(fontsize < 12 ? 18 : fontsize * 3 / 2)),
 	m_h2(std::to_string(fontsize < 12 ? 12 : fontsize)),
@@ -188,7 +188,7 @@ LuaTextHelpWindow::LuaTextHelpWindow
 	 uint32_t width, uint32_t height)
 	:
 	UI::UniqueWindow(parent, "help_window", &reg, width, height,
-			(boost::format(_("Help: %s")) % building_description.descname()).str().c_str()),
+			(boost::format(_("Help: %s")) % building_description.descname()).str()),
 	textarea(new MultilineTextarea(this, 5, 5, width - 10, height -10, std::string(), Align_Left))
 {
 	try {

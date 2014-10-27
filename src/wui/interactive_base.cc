@@ -333,7 +333,7 @@ void InteractiveBase::update_speedlabel()
 						(_("%1$s (%2$s)"))
 						% speed_string(real).c_str()
 						% speed_string(desired).c_str()
-					).str().c_str()
+					).str()
 				);
 			}
 		} else

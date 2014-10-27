@@ -166,14 +166,10 @@ void GameMainMenuSaveGame::selected(uint32_t) {
 	m_gametime.set_text(gametimestring(gametime));
 
 	if (gpdp.get_number_of_players() > 0) {
-		char buf[200];
-		sprintf
-			(buf, "%i %s", gpdp.get_number_of_players(),
-			// TODO(GunChleoc): This should be ngettext(" %i player" etc.
-			// with boost::format, but it refuses to work
-			/** TRANSLATORS: This is preceded by a number */
-			ngettext("player", "players", gpdp.get_number_of_players()));
-			m_players_label.set_text(buf);
+		const std::string text =
+				(boost::format(ngettext("%u Player", "%u Players", gpdp.get_number_of_players()))
+				 % static_cast<unsigned int>(gpdp.get_number_of_players())).str();
+		m_players_label.set_text(text);
 	} else {
 		// Keep label empty
 		m_players_label.set_text("");

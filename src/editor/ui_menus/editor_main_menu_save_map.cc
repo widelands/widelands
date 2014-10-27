@@ -236,7 +236,7 @@ void MainMenuSaveMap::clicked_item(uint32_t) {
 		m_nrplayers->set_text(std::to_string(static_cast<unsigned int>(map.get_nrplayers())));
 
 		m_size->set_text((boost::format(_("%1$ix%2$i"))
-								% map.get_width() % map.get_height()).str().c_str());
+								% map.get_width() % map.get_height()).str());
 	} else {
 		m_name     ->set_text(FileSystem::fs_filename(name));
 		m_name     ->set_tooltip("");

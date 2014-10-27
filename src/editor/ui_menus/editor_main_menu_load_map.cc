@@ -177,7 +177,7 @@ void MainMenuLoadMap::selected(uint32_t) {
 
 		m_size     ->set_text((boost::format(_("%1$ix%2$i"))
 									  % map.get_width()
-									  % map.get_height()).str().c_str());
+									  % map.get_height()).str());
 	} else {
 		m_name     ->set_text("");
 		m_name     ->set_tooltip("");
