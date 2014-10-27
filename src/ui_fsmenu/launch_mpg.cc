@@ -476,9 +476,9 @@ void FullscreenMenuLaunchMPG::refresh()
 			// Care about the newly selected file. This has to be done here and not
 			// after selection of a new map / saved game, as the clients user
 			// interface can only notice the change after the host broadcasted it.
-			if (settings.savegame)
+			if (settings.savegame) {
 				load_previous_playerdata();
-			else {
+			} else {
 				load_map_info();
 				if (settings.scenario)
 					set_scenario_values();

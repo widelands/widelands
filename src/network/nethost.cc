@@ -978,10 +978,12 @@ void NetHost::think()
 
 		for (uint32_t i = 0; i < d->computerplayers.size(); ++i)
 			d->computerplayers.at(i)->think();
-	} else if (m_is_dedicated)
+	} else if (m_is_dedicated) {
 		// Take care that every player gets updated during set up time
-		for (uint8_t i = 0; i < d->settings.players.size(); ++i)
+		for (uint8_t i = 0; i < d->settings.players.size(); ++i) {
 			d->npsb.refresh(i);
+		}
+	}
 }
 
 void NetHost::send_player_command(Widelands::PlayerCommand & pc)
@@ -1982,6 +1984,9 @@ bool NetHost::write_map_transfer_info(SendPacket & s, std::string mapfilename) {
 	// needs the file.
 	s.unsigned_8(NETCMD_NEW_FILE_AVAILABLE);
 	s.string(mapfilename);
+	//Scan-build reports that access to bytes here results in a dereference of null pointer.
+	//This is a false positive.
+	//See https://bugs.launchpad.net/widelands/+bug/1198919
 	s.unsigned_32(file->bytes);
 	s.string(file->md5sum);
 	return true;
