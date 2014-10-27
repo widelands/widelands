@@ -70,7 +70,6 @@ private:
 	std::unique_ptr<EditBoxImpl> m;
 
 	void check_caret();
-	// NOCOM test void insert(SDL_Keysym code);
 
 	bool        m_history_active;
 	int16_t     m_history_position;

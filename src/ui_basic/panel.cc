@@ -1057,6 +1057,12 @@ bool Panel::do_mousewheel(uint32_t which, int32_t x, int32_t y) {
 			}
 		}
 	}
+
+	if (_focus) {
+		if (_focus->do_mousewheel(which, x, y))
+			return true;
+	}
+
 	return handle_mousewheel(which, x, y);
 }
 

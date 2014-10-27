@@ -188,11 +188,11 @@ struct Panel : boost::signals2::trackable {
 	virtual bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y);
 	virtual bool handle_mousemove
 		(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+	virtual bool handle_mousewheel(uint32_t which, int32_t x, int32_t y);
 	virtual bool handle_key(bool down, SDL_Keysym);
 	virtual bool handle_textinput(const char* text);
 	virtual bool handle_alt_drag(int32_t x, int32_t y);
 	virtual bool handle_tooltip();
-	virtual bool handle_mousewheel(uint32_t which, int32_t x, int32_t y);
 
 	/// \returns whether a certain given is currently down.
 	///

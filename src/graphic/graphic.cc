@@ -113,8 +113,9 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 	m_sdlwindow = SDL_CreateWindow("Widelands Window",
 											 SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, flags);
 	if (opengl) {
-		// TODO(sirver): this context needs to be created also for fallback settings, otherwise SDL_GetWindowFlags() will
-		// return SDL_WINDOW_OPENGL, though if you call any gl function, the system crashes.
+		// TODO(sirver): this context needs to be created also for fallback settings,
+		// otherwise SDL_GetWindowFlags() will return SDL_WINDOW_OPENGL,
+		// though if you call any gl function, the system crashes.
 		m_glcontext = SDL_GL_CreateContext(m_sdlwindow);
 		if (m_glcontext) {
 			SDL_GL_MakeCurrent(m_sdlwindow, m_glcontext);

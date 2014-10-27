@@ -392,9 +392,11 @@ void Scrollbar::think()
 
 
 bool Scrollbar::handle_mousewheel(uint32_t, int32_t, int32_t y) {
-	int32_t pos = static_cast<int32_t>(m_pos) + m_singlestepsize * y;
-	set_scrollpos(pos);
-	update();
+	if (y < 0) {
+		action(Plus);
+	} else {
+		action(Minus);
+	}
 	return true;
 }
 

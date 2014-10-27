@@ -107,7 +107,7 @@ public:
 	void draw(RenderTarget &);
 	bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y);
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y);
-	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y);
+	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
 	virtual bool handle_key(bool down, SDL_Keysym code);
 };
 
@@ -244,7 +244,7 @@ public:
 	void draw(RenderTarget &) override;
 	bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
-	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y);
+	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
 	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:

@@ -117,8 +117,8 @@ struct BaseListselect : public Panel {
 	bool handle_mousepress  (uint8_t btn,   int32_t x, int32_t y) override;
 	bool handle_mouserelease(uint8_t btn,   int32_t x, int32_t y) override;
 	bool handle_mousemove   (uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
+	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
 	bool handle_key(bool down, SDL_Keysym) override;
-	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y);
 
 private:
 	static const int32_t DOUBLE_CLICK_INTERVAL = 500; // half a second
