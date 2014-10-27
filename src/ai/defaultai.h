@@ -254,10 +254,12 @@ private:
 	Widelands::Coords
 	   last_attack_target_;         // flag to abuilding (position) that was attacked last time
 	int32_t next_attack_waittime_;  // second till the next attack consideration
-	bool building_ships ;			// a "semaphore" for shipyards whether to keep building ships
+	//bool building_ships ;			// a "semaphore" for shipyards whether to keep building ships
 	bool seafaring_economy;			// false by default, until first port space is found
 	int32_t spots_;                 // sum of buildable fields
 
+	enum {REPRIORITIZE,STOPSHIPYARD,STARTSHIPYARD};
+	std::vector<int16_t> marineTaskQueue_;
 
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldPossession>>
 	   field_possession_subscriber_;

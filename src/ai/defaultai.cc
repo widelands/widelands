@@ -91,7 +91,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
      next_productionsite_check_due_(0),
      next_mine_check_due_(0),
      next_militarysite_check_due_(0),
-     next_ship_check_due(10 * 60 * 1000),
+     next_ship_check_due(5 * 60 * 1000),
      next_attack_consideration_due_(300000),
      next_helpersites_check_due_(180000),
      next_bf_check_due_(1000),
@@ -111,7 +111,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
      last_attack_target_(
         std::numeric_limits<uint16_t>::max(), std::numeric_limits<uint16_t>::max()),
      next_attack_waittime_(10),
-     building_ships(true),
+     // building_ships(true),
      seafaring_economy(false),
      spots_(0) {
 
@@ -161,12 +161,11 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 
 		   if (note.message == NoteShipMessage::Message::GAINED) {
 			   printf(" %1d: message received: GAINED \n", player_number());
-			   building_ships = false;
+			   marineTaskQueue_.push_back(STOPSHIPYARD);
 
 			   allships.push_back(ShipObserver());
 			   allships.back().ship = note.ship;
 			   allships.back().last_message_ = NoteShipMessage::Message::GAINED;
-			   //ship_decision(allships.back(), note.message);
 
 		   } else if (note.message == NoteShipMessage::Message::LOST) {
 			   printf(" %1d: message received: LOST\n", player_number());
@@ -184,25 +183,6 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 					   break;
 				   }
 		   }
-
-		   //} else if (note.message == NoteShipMessage::Message::EXPEDITIONREADY) {
-		   // printf(" %1d: message received: EXPEDITIONREADY\n", player_number());
-		   // ship_decision(*note.ship, note.message);
-		   //} else if (note.message == NoteShipMessage::Message::PORTSPACEFOUND) {
-		   // printf(" %1d: message received: PORTSPACEFOUND at :%3dx%3d\n",
-		   // player_number(),
-		   // note.ship->get_position().x,
-		   // note.ship->get_position().y);
-		   // ship_decision(*note.ship, note.message);
-		   //} else if (note.message == NoteShipMessage::Message::ISLANDCIRCUMNAVIGATED) {
-		   // printf(" %1d: message received: ISLANDCIRCUMNAVIGATED, ship at %3dx%3d\n",
-		   // player_number(),
-		   // note.ship->get_position().x,
-		   // note.ship->get_position().y);
-		   //// TODO - what now??
-		   // pick_farest_portspace(*note.ship);
-		   //}
-
 		});
 }
 
@@ -686,8 +666,8 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 			// blocking fields in vicinity
 			MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(field.coords), 3));
 			do {
-				const Coords coords = map.get_fcoords(*(mr.location().field));
-				const int32_t hash = coords.x << 16 | coords.y;
+				// const Coords coords = map.get_fcoords(*(mr.location().field));
+				const int32_t hash = coords_hash(map.get_fcoords(*(mr.location().field)));
 				if (port_reserved_coords.count(hash) == 0)
 					port_reserved_coords.insert(hash);
 			} while (mr.advance(map));
@@ -1234,6 +1214,14 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 				continue;
 			}
 
+			// testing for reserved ports
+			if (!bo.is_port_) {
+				if (port_reserved_coords.count(coords_hash(bf->coords)) > 0) {
+					// printf (" %3dx%3d prohibited as near port space\n", bf->coords.x,bf->coords.y);
+					continue;
+				}
+			}
+
 			if (time(nullptr) % 3 == 0 && bo.total_count() > 0) {
 				continue;
 			}  // add randomnes and ease AI
@@ -1578,9 +1566,9 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 						// if (gametime%20==0) printf (" %1d: ports count: %2d \n",
 						// player_number(),num_ports);
 						if (bf->water_nearby_ > 15 && bo.total_count() == 0 && seafaring_economy) {
-							prio += kDefaultPrioBoost + productionsites.size() + bf->water_nearby_;
-							// printf (" %1d: suggesting shipyard at :%3d x %3d\n",
-							// player_number(),bf->coords.x,bf->coords.y);
+							prio += kDefaultPrioBoost + productionsites.size() * 5 + bf->water_nearby_;
+							 printf (" %1d: suggesting shipyard at: %3d x %3d\n",
+							 player_number(),bf->coords.x,bf->coords.y);
 						}
 
 					} else if (!bo.inputs_.empty()) {
@@ -1776,9 +1764,9 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 			}
 
 			// also do not allow non-ports on port spaces
-			if (bf->is_portspace_ && !bo.is_port_) {
-				continue;
-			}
+			// if (bf->is_portspace_ && !bo.is_port_) {
+			//	continue;
+			//}
 
 			// testing also vicinity
 			if (!bo.is_port_) {
@@ -2146,10 +2134,10 @@ bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uin
 			if (bo.is_port_ &&
 			    remote_ports_coords.count(coords_hash(flag.get_building()->get_position())) > 0) {
 				is_remote_port_csite = true;
-			} //else if (bo.is_port_) {
-				//printf("  is local port at: %3d x %3d\n",
-				       //flag.get_building()->get_position().x,
-				       //flag.get_building()->get_position().y);
+			}  // else if (bo.is_port_) {
+			// printf("  is local port at: %3d x %3d\n",
+			// flag.get_building()->get_position().x,
+			// flag.get_building()->get_position().y);
 			//}
 		}
 	}
@@ -2566,16 +2554,16 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	// shipyards handling
 	if (site.bo
 	       ->is_shipyard_) {  // it needs some time to be stocked, but better method would be needed
-		if (site.site->can_start_working() && site.site->is_stopped() && building_ships &&
-		    site.built_time_ < gametime - 25 * 60 * 1000) {
+		if (site.site->can_start_working() && site.site->is_stopped() && allships.size() == 0 &&
+		    site.built_time_ < gametime - 30 * 60 * 1000 && gametime > 60 * 60 * 1000) {
 			game().send_player_start_stop_building(*site.site);
-			printf(" %1d: starting shipyard\n", player_number());
+			printf(" %1d: starting shipyard, we have 0 ships now\n", player_number());
 		}
-		if (!site.site->is_stopped() &&
-		    (!building_ships || site.built_time_ > gametime - 25 * 60 * 1000)) {
-			game().send_player_start_stop_building(*site.site);
-			printf(" %1d: stopping shipyard\n", player_number());
-		}
+		// if (!site.site->is_stopped() &&
+		//(!building_ships || site.built_time_ > gametime - 25 * 60 * 1000)) {
+		// game().send_player_start_stop_building(*site.site);
+		// printf(" %1d: stopping shipyard\n", player_number());
+		//}
 	}
 
 	// Wells handling
@@ -2753,7 +2741,7 @@ bool DefaultAI::check_ships(int32_t const gametime) {
 			if (i->last_message_ == NoteShipMessage::Message::GAINED) {
 				printf(" %1d:  message recorded: GAINED\n", player_number());
 				ship_decision(*i, i->last_message_);
-				//not resetting NoteShipMessage::Message, this is done by ship_decision
+				// not resetting NoteShipMessage::Message, this is done by ship_decision
 			} else if (i->last_message_ == NoteShipMessage::Message::EXPEDITIONREADY) {
 				printf(" %1d:  message recorded: EXPEDITIONREADY\n", player_number());
 				ship_decision(*i, i->last_message_);
@@ -2767,20 +2755,60 @@ bool DefaultAI::check_ships(int32_t const gametime) {
 				ship_decision(*i, i->last_message_);
 				// reset the message
 				i->last_message_ = NoteShipMessage::Message::NOMESSAGE;
+			} else if (i->last_message_ == NoteShipMessage::Message::COASTREACHED) {
+				printf(" %1d:  message recorded: COASTREACHED at :%3dx%3d\n",
+				       player_number(),
+				       i->ship->get_position().x,
+				       i->ship->get_position().y);
+				ship_decision(*i, i->last_message_);
+				// reset the message
+				i->last_message_ = NoteShipMessage::Message::NOMESSAGE;
 			} else if (i->last_message_ == NoteShipMessage::Message::ISLANDCIRCUMNAVIGATED) {
 				printf(" %1d:  message recorded: ISLANDCIRCUMNAVIGATED, ship at %3dx%3d\n",
 				       player_number(),
 				       i->ship->get_position().x,
 				       i->ship->get_position().y);
 				// we ignoring "circumnavigated" fact
-				ship_decision(*i,NoteShipMessage::Message::PORTSPACEFOUND);
-				//pick_farest_portspace(*i->ship);
+				ship_decision(*i, NoteShipMessage::Message::PORTSPACEFOUND);
+				// pick_farest_portspace(*i->ship);
 				// reset the message
 				i->last_message_ = NoteShipMessage::Message::NOMESSAGE;
-			}  
-
-
+			}
 		}
+	}
+
+	// processing marineTaskQueue_
+	while (marineTaskQueue_.size() > 0) {
+		if (marineTaskQueue_.back() == STOPSHIPYARD) {
+			// iterate over all production sites searching for shipyard
+			// for (uint32_t m = 0; m < productionsites.size(); ++m) {
+			for (std::list<ProductionSiteObserver>::iterator site = productionsites.begin();
+			     site != productionsites.end();
+			     ++site) {
+				if (site->bo->is_shipyard_) {
+					if (!site->site->is_stopped()) {
+						game().send_player_start_stop_building(*site->site);
+						printf(" %1d: stopping shipyard\n", player_number());
+					}
+				}
+			}
+		}
+
+		if (marineTaskQueue_.back() == REPRIORITIZE) {
+			for (std::list<ProductionSiteObserver>::iterator site = productionsites.begin();
+			     site != productionsites.end();
+			     ++site) {
+				if (site->bo->is_shipyard_) {
+					for (uint32_t k = 0; k < site->bo->inputs_.size(); ++k) {
+						game().send_player_set_ware_priority(
+						   *site->site, wwWARE, site->bo->inputs_.at(k), HIGH_PRIORITY);
+						printf(" %d: shipyard - reprioritizing...\n", player_number());
+					}
+				}
+			}
+		}
+
+		marineTaskQueue_.pop_back();
 	}
 
 	next_ship_check_due += kShipCheckInterval;
@@ -3258,16 +3286,6 @@ void DefaultAI::ship_decision(ShipObserver& so, NoteShipMessage::Message message
 
 	Map& map = game().map();
 
-	enum {
-		TRANSPORT = 0,
-		EXP_WAITING = 1,
-		EXP_SCOUTING = 2,
-		EXP_FOUNDPORTSPACE = 3,
-		EXP_COLONIZING = 4,
-		SINK_REQUEST = 8,
-		SINK_ANIMATION = 9
-	};
-
 	// very first thing we do with new ship we send it to expecition, but
 	// fist it must be prepared for it
 	if (message == NoteShipMessage::Message::GAINED) {
@@ -3277,9 +3295,6 @@ void DefaultAI::ship_decision(ShipObserver& so, NoteShipMessage::Message message
 		     wh_iter != warehousesites.end();
 		     ++wh_iter) {
 
-			// for (uint32_t i = 0; i < warehousesites.size(); ++i) {
-			// WarehouseSiteObserver site = wh_iter;
-			// BuildingObserver& bo = productionsites.at(i).bo;
 			if (wh_iter->bo->is_port_) {
 				printf(" %1d:   starting the preparation for expedition\n", player_number());
 				game().send_player_start_or_cancel_expedition(*wh_iter->site);
@@ -3287,119 +3302,112 @@ void DefaultAI::ship_decision(ShipObserver& so, NoteShipMessage::Message message
 				return;
 			}
 		}
-		printf(" %1d:   We failed to find any (finished) port!\n", player_number());
-		return;
-	}
-
-	// if ready for expedition, launch the expedition
-	if (message == NoteShipMessage::Message::EXPEDITIONREADY) {
-		printf("  %1d: Starting the expedition now\n", player_number());
-		so.expedition_start_point_ = so.ship->get_position();
-		game().send_player_ship_explore_island(*so.ship, true);
-		return;
-	}
-
-	if (message == NoteShipMessage::Message::PORTSPACEFOUND) {
-		if (so.ship->exp_port_spaces()->size()==0) {
-			printf (" %1d:   exp_port_spaces() is empty?!\n", player_number());
-			game().send_player_ship_explore_island(*so.ship, true);
+		if (game().get_gametime() % 20 == 0) {
+			printf(" %1d:   We failed to find any (finished) port!\n", player_number());
 		}
-		
-		// if no player immovables within radius 15
-		// then randomly
+		return;
+	}
 
-		bool any_immovables = false;
-		std::vector<ImmovableFound> immovables;
-		map.find_immovables(
-		   Area<FCoords>(map.get_fcoords(so.ship->exp_port_spaces()->front()), 20), &immovables);
-		for (uint32_t i = 0; i < immovables.size(); ++i) {
-			const BaseImmovable& base_immovable = *immovables.at(i).object;
+	// if we have port nearby, we can settle there
+	if (message == NoteShipMessage::Message::PORTSPACEFOUND) {
+		if (so.ship->exp_port_spaces()->size() > 0) {  // making sure we have possible portspaces
 
-			if (upcast(PlayerImmovable const, player_immovable, &base_immovable)) {
-				// there is one immovable, port is not suitable
-				any_immovables = true;
-				break;
+			// if no player immovables within radius 15
+			// then randomly
+
+			bool any_immovables = false;
+			std::vector<ImmovableFound> immovables;
+			map.find_immovables(
+			   Area<FCoords>(map.get_fcoords(so.ship->exp_port_spaces()->front()), 20), &immovables);
+			for (uint32_t i = 0; i < immovables.size(); ++i) {
+				const BaseImmovable& base_immovable = *immovables.at(i).object;
+
+				if (upcast(PlayerImmovable const, player_immovable, &base_immovable)) {
+					// there is one immovable, port is not suitable
+					any_immovables = true;
+					break;
+				}
+			}
+
+			printf(
+			   " %1d:   considering port here, immovables in vicinity: %s, portspaces seen so far: "
+			   "%2d, distance from start: %2d\n",
+			   player_number(),
+			   (any_immovables) ? "Y" : "N",
+			   so.ship->exp_port_spaces()->size(),
+			   map.calc_distance(so.expedition_start_point_, so.ship->get_position()));
+
+			if ((game().get_gametime()/10) % 2 == 0 && !any_immovables) {
+				const Coords last_portspace = so.ship->exp_port_spaces()->front();
+				printf("   Building colonization port at: %3dx%3d (current position: %3dx %3d)\n",
+				       last_portspace.x,
+				       last_portspace.y,
+				       so.ship->get_position().x,
+				       so.ship->get_position().y);
+				remote_ports_coords.insert(coords_hash(last_portspace));
+				// s.exp_construct_port(game(),last_portspace);
+				game().send_player_ship_construct_port(*so.ship, so.ship->exp_port_spaces()->front());
+				// blocking the area for some time to save AI from idle attempts to built there
+				// buildings
+				MapRegion<Area<FCoords>> mr(
+				   game().map(),
+				   Area<FCoords>(map.get_fcoords(so.ship->exp_port_spaces()->front()), 8));
+				do {
+					BlockedField blocked2(
+					   map.get_fcoords(*(mr.location().field)),
+					   game().get_gametime() + 5 * 60 * 1000);  // TODO block time must be reviewed
+					blocked_fields.push_back(blocked2);
+				} while (mr.advance(map));
+
+				return;
 			}
 		}
-
-		printf(" %1d:   considering port here, immovables in vicinity: %s, portspaces seen so far: "
-		       "%2d, distance from start: %2d\n",
-		       player_number(),
-		       (any_immovables) ? "Y" : "N",
-		       so.ship->exp_port_spaces()->size(),
-		       map.calc_distance(so.expedition_start_point_, so.ship->get_position()));
-
-		if (game().get_gametime() % 5 == 0 && !any_immovables) {
-			const Coords last_portspace = so.ship->exp_port_spaces()->front();
-			printf("   Building colonization port at: %3dx%3d (current position: %3dx %3d)\n",
-			       last_portspace.x,
-			       last_portspace.y,
-			       so.ship->get_position().x,
-			       so.ship->get_position().y);
-			remote_ports_coords.insert(coords_hash(last_portspace));
-			// s.exp_construct_port(game(),last_portspace);
-			game().send_player_ship_construct_port(*so.ship, so.ship->exp_port_spaces()->front());
-			// blocking the area for some time to save AI from idle attempts to built there buildings
-			MapRegion<Area<FCoords>> mr(
-			   game().map(), Area<FCoords>(map.get_fcoords(so.ship->exp_port_spaces()->front()), 8));
-			do {
-				BlockedField blocked2(
-				   map.get_fcoords(*(mr.location().field)),
-				   game().get_gametime() + 5 * 60 * 1000);  // TODO block time must be reviewed
-				blocked_fields.push_back(blocked2);
-			} while (mr.advance(map));
-
-		} else {
-			// printf("   Port spaces count: %2d, continuing exploration\n",
-			// s.exp_port_spaces()->size());
-			// s.exp_explore_island(game(), true); //NOCOM
-			game().send_player_ship_explore_island(*so.ship, true);
-		}
-		return;
 	}
 
-	printf("   %1d: ship_decision(), ship in state: %1d, position: %3dx%3d - dont know what to do "
-	       "with this:\n",
-	       player_number(),
-	       so.ship->get_ship_state(),
-	       so.ship->get_position().x,
-	       so.ship->get_position().y);
+	// if we are here we must go on with expedition
+	printf(" %1d: Making decision on expediction\n", player_number());
+	const int32_t gametime = game().get_gametime();
+	if (gametime % 20 > 10) {
+		game().send_player_ship_explore_island(*so.ship, gametime % 2);
+		printf("    exploring the island, now on %3dx%3d\n",
+		       so.ship->get_position().x,
+		       so.ship->get_position().y);
+	} else {
+		// get swimable directions
+		std::vector<Direction> possible_directions;
+		for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
+			if (map.get_neighbour(so.ship->get_position(), dir).field->nodecaps() & MOVECAPS_SWIM) {
+				possible_directions.push_back(dir);
+			}
+		}
+		printf("   got %1d swimmable directions\n", possible_directions.size());
+		if (possible_directions.size() == 0) {
+			printf("   ZERO swimmable directions, dont know what to do!!!\n");
+			return;
+		}
+
+		const Direction final_direction =
+		   possible_directions.at(gametime % possible_directions.size());
+		game().send_player_ship_scout_direction(*so.ship, final_direction);
+		printf("   scouting in direction: %1d (possible directions: %1d, now on %3dx%3d)\n",
+		       final_direction,
+		       possible_directions.size(),
+		       so.ship->get_position().x,
+		       so.ship->get_position().y);
+	}
+	return;
+
+	printf(
+	   "   %1d: ship_decision(), ship in state: %1d, position: %3dx%3d - should not be there "  // NOCOM
+	                                                                                            // -
+	                                                                                            // delete
+	                                                                                            // this
+	   "with this:\n",
+	   player_number(),
+	   so.ship->get_ship_state(),
+	   so.ship->get_position().x,
+	   so.ship->get_position().y);
 }
-
-//This did not work as suggested
-//bool DefaultAI::pick_farest_portspace(Ship& s) {
-	//if (s.exp_port_spaces()->empty()) {
-		//printf(" No visited ports \n");
-		//return false;
-	//}
-
-	//uint32_t biggest_distance = 0;
-	//Coords best_dock;  //=nullptr;
-
-	//for (std::list<Coords>::const_iterator it = s.exp_port_spaces()->begin();
-	     //it != s.exp_port_spaces()->end();
-	     //++it) {
-		//const uint32_t dist = game().map().calc_distance(*it, s.get_position());
-		//if (dist > biggest_distance) {
-			//biggest_distance = dist;
-			//best_dock = *it;
-		//}
-	//}
-
-	//if (biggest_distance > 0) {
-		//// sending ship to build a port there
-		//printf("  %1d: sending ship to best port condidate: %3dx%3d\n",
-		       //player_number(),
-		       //best_dock.x,
-		       //best_dock.y);
-		//game().send_player_ship_construct_port(s, best_dock);
-		//return true;
-	//} else {
-		//printf(" %1d: failed to pick best port from visited ports\n", player_number());
-	//}
-
-	//return false;
-//}
 
 // this is called whenever we gain a new building
 void DefaultAI::gain_building(Building& b) {
@@ -3432,6 +3440,8 @@ void DefaultAI::gain_building(Building& b) {
 			productionsites.back().no_resources_count = 0;
 			if (bo.is_shipyard_) {
 				printf(" %1d: shipyard acquired\n", player_number());
+				marineTaskQueue_.push_back(STOPSHIPYARD);
+				marineTaskQueue_.push_back(REPRIORITIZE);
 				// game().send_player_start_stop_building(b); //doesnt work
 			}
 

@@ -638,6 +638,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 				std::string msg_body =
 					_("An expedition ship reached a coast and is waiting for further commands.");
 				send_message(game, "exp_coast", msg_head, msg_body, "ship_explore_island_cw.png");
+				Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::COASTREACHED));
 				return;
 			}
 		}
