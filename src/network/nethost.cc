@@ -64,9 +64,6 @@
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 
-using boost::format;
-
-
 
 struct HostGameSettingsProvider : public GameSettingsProvider {
 	HostGameSettingsProvider(NetHost * const _h) : h(_h), m_lua(nullptr), m_cur_wincondition(0) {}
@@ -418,9 +415,9 @@ struct HostChatProvider : public ChatProvider {
 					} else if (num == -1) {
 						if (!h->is_dedicated())
 							c.recipient = h->get_local_playername();
-						c.msg = (format(_("The client %s could not be found.")) % arg1).str();
+						c.msg = (boost::format(_("The client %s could not be found.")) % arg1).str();
 					} else {
-						c.msg  = (format("HOST WARNING FOR %s: ") % arg1).str();
+						c.msg  = (boost::format("HOST WARNING FOR %s: ") % arg1).str();
 						c.msg += arg2;
 					}
 				}
@@ -444,12 +441,12 @@ struct HostChatProvider : public ChatProvider {
 						} else
 							c.msg = _("You can not kick the dedicated server");
 					else if (num == -1)
-						c.msg = (format(_("The client %s could not be found.")) % arg1).str();
+						c.msg = (boost::format(_("The client %s could not be found.")) % arg1).str();
 					else {
 						kickClient = num;
-						c.msg  = (format(_("Are you sure you want to kick %s?")) % arg1).str() + "<br>";
-						c.msg += (format(_("The stated reason was: %s")) % kickReason).str() + "<br>";
-						c.msg += (format(_("If yes, type: /ack_kick %s")) % arg1).str();
+						c.msg  = (boost::format(_("Are you sure you want to kick %s?")) % arg1).str() + "<br>";
+						c.msg += (boost::format(_("The stated reason was: %s")) % kickReason).str() + "<br>";
+						c.msg += (boost::format(_("If yes, type: /ack_kick %s")) % arg1).str();
 					}
 				}
 				if (!h->is_dedicated())
@@ -740,7 +737,7 @@ void NetHost::run(bool const autorun)
 		m_dedicated_motd =
 			s.get_string
 				("dedicated_motd",
-				 (format
+				 (boost::format
 					(_("This is a dedicated server. Send \"@%s help\" to get a full list of available commands."))
 					% d->localplayername)
 				.str().c_str());
@@ -1242,7 +1239,7 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 			return;
 		}
 		std::string temp = arg1 + " " + arg2;
-		c.msg = (format(_("%1$s told me to run the command: \"%2$s\"")) % sender % temp).str();
+		c.msg = (boost::format(_("%1$s told me to run the command: \"%2$s\"")) % sender % temp).str();
 		c.recipient = "";
 		send(c);
 		d->chat.send(temp);
@@ -1269,7 +1266,7 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 				c.msg = _("Game successfully saved!");
 			else
 				c.msg =
-					(format(_("Could not save the game to the file \"%1$s\"! (%2$s)"))
+					(boost::format(_("Could not save the game to the file \"%1$s\"! (%2$s)"))
 					 % savename % error)
 					 .str();
 			send(c);
@@ -1300,7 +1297,7 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 
 	// default
 	} else {
-		c.msg = (format(_("Unknown dedicated server command \"%s\"!")) % cmd).str();
+		c.msg = (boost::format(_("Unknown dedicated server command \"%s\"!")) % cmd).str();
 		send(c);
 	}
 }
@@ -2163,7 +2160,7 @@ void NetHost::welcome_client (uint32_t const number, std::string & playername)
 		if (m_password.size() > 1) {
 			c.msg += "<br>";
 			c.msg +=
-				(format
+				(boost::format
 					(_("This server is password protected. You can send the password with: \"@%s pwd PASSWORD\""))
 					% d->localplayername)
 				.str();

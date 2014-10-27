@@ -37,9 +37,6 @@
 #include "ui_basic/window.h"
 #include "wui/text_constants.h"
 
-
-using boost::format;
-
 namespace UI {
 
 HelpWindow::HelpWindow

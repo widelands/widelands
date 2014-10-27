@@ -34,8 +34,6 @@
 #include "profile/profile.h"
 #include "wui/interactive_gamebase.h"
 
-using boost::format;
-
 InteractiveGameBase & GameMainMenuSaveGame::igbase() {
 	return ref_cast<InteractiveGameBase, UI::Panel>(*get_parent());
 }
@@ -325,7 +323,7 @@ struct DeletionMessageBox : public UI::WLMessageBox {
 			(&parent,
 			 _("File deletion"),
 			 str
-				 (format(_("Do you really want to delete the file %s?")) %
+				 (boost::format(_("Do you really want to delete the file %s?")) %
 				  FileSystem::fs_filename(filename.c_str())),
 			 YESNO),
 		m_filename(filename)

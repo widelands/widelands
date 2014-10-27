@@ -54,8 +54,6 @@ namespace Widelands {
 
 namespace {
 
-// For formation of better translateable texts
-using boost::format;
 
 /**
  * Convert std::string to any sstream-compatible type
@@ -1070,7 +1068,7 @@ void ProductionProgram::ActProduce::execute
 
 	// Keep translateability in mind!
 	/** TRANSLATORS: %s is a list of wares */
-	ps.set_production_result(str(format(_("Produced %s")) % ware_list));
+	ps.set_production_result(str(boost::format(_("Produced %s")) % ware_list));
 }
 
 bool ProductionProgram::ActProduce::get_building_work

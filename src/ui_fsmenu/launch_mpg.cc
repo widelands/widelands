@@ -45,8 +45,6 @@
 #include "wui/multiplayersetupgroup.h"
 #include "wui/text_constants.h"
 
-using boost::format;
-
 /// Simple user interaction window for selecting either map, save or cancel
 struct MapOrSaveSelectionWindow : public UI::Window {
 	MapOrSaveSelectionWindow
@@ -484,10 +482,10 @@ void FullscreenMenuLaunchMPG::refresh()
 		std::string temp =
 			(settings.playernum > -1) && (settings.playernum < MAX_PLAYERS)
 			?
-			(format(_("Player %i")) % (settings.playernum + 1)).str()
+			(boost::format(_("Player %i")) % (settings.playernum + 1)).str()
 			:
 			_("Spectator");
-		temp  = (format(_("At the moment you are %s")) % temp.c_str()).str() + "\n\n";
+		temp  = (boost::format(_("At the moment you are %s")) % temp.c_str()).str() + "\n\n";
 		temp += _("Click on the ‘?’ in the top right corner to get help.");
 		m_client_info.set_text(temp);
 	}
@@ -639,12 +637,12 @@ void FullscreenMenuLaunchMPG::load_map_info()
 
 	std::string infotext;
 	infotext += std::string(_("Map details:")) + "\n";
-	infotext += std::string("• ") + (format(_("Size: %1$u x %2$u"))
+	infotext += std::string("• ") + (boost::format(_("Size: %1$u x %2$u"))
 					 % map.get_width() % map.get_height()).str() + "\n";
-	infotext += std::string("• ") + (format(ngettext("%u Player", "%u Players", m_nr_players))
+	infotext += std::string("• ") + (boost::format(ngettext("%u Player", "%u Players", m_nr_players))
 					 % m_nr_players).str() + "\n";
 	if (m_settings->settings().scenario)
-		infotext += std::string("• ") + (format(_("Scenario mode selected"))).str() + "\n";
+		infotext += std::string("• ") + (boost::format(_("Scenario mode selected"))).str() + "\n";
 	infotext += "\n";
 	infotext += map.get_description();
 	infotext += "\n";
