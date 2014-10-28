@@ -85,7 +85,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 	posy += 40 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, descr_label_w, 20, _("Author:"), UI::Align_CenterLeft);
+		(this, posx, posy, descr_label_w, 20, _("Authors:"), UI::Align_CenterLeft);
 	m_author =
 		new UI::Textarea
 			(this, posx + descr_label_w, posy, 200, 20, "---", UI::Align_CenterLeft);
@@ -174,7 +174,7 @@ void MainMenuSaveMap::clicked_ok() {
 		fill_list();
 	} else { //  Ok, save this map
 		Widelands::Map & map = eia().egbase().map();
-		if (!strcmp(map.get_name(), _("No Name"))) {
+		if (map.get_name() != _("No Name")) {
 			std::string::size_type const filename_size = filename.size();
 			map.set_name
 				((4 <= filename_size

@@ -75,7 +75,7 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
 	posy += 40 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, 150, 20, _("Author:"), UI::Align_CenterLeft);
+		(this, posx, posy, 150, 20, _("Authors:"), UI::Align_CenterLeft);
 	m_author =
 		new UI::Textarea
 			(this, posx + descr_label_w, posy, 200, 20, "---", UI::Align_CenterLeft);
@@ -171,7 +171,8 @@ void MainMenuLoadMap::selected(uint32_t) {
 		m_name  ->set_tooltip(map.get_name());
 		m_author->set_text(map.get_author());
 		m_descr ->set_text
-			(_(map.get_description()) + (map.get_hint().empty() ? "" : (std::string("\n") + _(map.get_hint()))));
+			(_(map.get_description()) +
+			 (map.get_hint().empty() ? "" : (std::string("\n\n") + _(map.get_hint()))));
 
 		m_nrplayers->set_text(std::to_string(static_cast<unsigned int>(map.get_nrplayers())));
 

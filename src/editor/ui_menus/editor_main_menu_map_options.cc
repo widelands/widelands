@@ -75,7 +75,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent)
 	m_nrplayers =
 		new UI::Textarea(this, posx + ta->get_w() + spacing, posy - 2, "1");
 	posy += height + spacing;
-	ta = new UI::Textarea(this, posx, posy - 2, _("Author:"));
+	ta = new UI::Textarea(this, posx, posy - 2, _("Authors:"));
 	m_author =
 		new UI::EditBox
 			(this,
@@ -131,9 +131,9 @@ void MainMenuMapOptions::update() {
 */
 void MainMenuMapOptions::changed(int32_t const id) {
 	if        (id == 0) {
-		eia().egbase().map().set_name(m_name->text().c_str());
+		eia().egbase().map().set_name(m_name->text());
 	} else if (id == 1) {
-		eia().egbase().map().set_author(m_author->text().c_str());
+		eia().egbase().map().set_author(m_author->text());
 		g_options.pull_section("global").set_string
 			("realname", m_author->text());
 	}
@@ -144,5 +144,5 @@ void MainMenuMapOptions::changed(int32_t const id) {
  * Called when the editbox has changed
  */
 void MainMenuMapOptions::editbox_changed() {
-	eia().egbase().map().set_description(m_descr->get_text().c_str());
+	eia().egbase().map().set_description(m_descr->get_text());
 }

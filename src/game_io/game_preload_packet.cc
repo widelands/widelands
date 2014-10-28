@@ -69,11 +69,7 @@ void GamePreloadPacket::read
 			if (fs.file_exists(MINIMAP_FILENAME)) {
 				m_minimap_path = MINIMAP_FILENAME;
 			}
-			m_saveyear = s.get_int("saveyear");
-			m_savemonth = s.get_int("savemonth");
-			m_saveday = s.get_int("saveday");
-			m_savehour = s.get_int("savehour");
-			m_saveminute = s.get_int("saveminute");
+			m_savetimestamp = static_cast<time_t>(s.get_natural("savetimestamp"));
 			m_gametype = static_cast<GameController::GameType>(s.get_natural("gametype"));
 		} else {
 			throw GameDataError
@@ -117,15 +113,7 @@ void GamePreloadPacket::write
 
 	s.set_string("background", map.get_background());
 	s.set_string("win_condition", game.get_win_condition_displayname());
-
-	time_t t;
-	time(&t);
-	struct tm * datetime  = localtime(&t);
-	s.set_int("saveyear", 1900 + datetime->tm_year); //  years start at 1900
-	s.set_int("savemonth", 1 + datetime->tm_mon); //  months start at 0
-	s.set_int("saveday", datetime->tm_mday);
-	s.set_int("savehour", datetime->tm_hour);
-	s.set_int("saveminute", datetime->tm_min);
+	s.set_int("savetimestamp", static_cast<uint32_t>(time(nullptr)));
 	s.set_int("gametype", static_cast<int32_t>(game.game_controller()->get_game_type()));
 
 	prof.write("preload", false, fs);
