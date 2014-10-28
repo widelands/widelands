@@ -153,7 +153,12 @@ Panel::~Panel()
 /**
  * Free all of the panel's children.
  */
-void Panel::free_children() {while (_fchild) delete _fchild;}
+void Panel::free_children() {
+	//Scan-build claims this results in double free.
+	//This is a false positive.
+	//See https://bugs.launchpad.net/widelands/+bug/1198928
+	while (_fchild) delete _fchild;
+}
 
 
 /**

@@ -119,7 +119,7 @@ int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
 
 	// *** Map info
 	buf += std::string("\n") + _("Map:") + "\n";
-	buf += "• " + (boost::format(_("Name: %s")) % map.get_name()).str() + "\n";
+	buf += "• " + (boost::format(_("Name: %s")) % map.get_name().c_str()).str() + "\n";
 	buf += "• " + (boost::format(_("Size: %1$ix%2$i"))
 					 % map.get_width() % map.get_height()).str() + "\n";
 
@@ -132,7 +132,7 @@ int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
 	}
 
 	buf += "• " + (boost::format(_("Author: %s")) % map.get_author()).str() + "\n";
-	buf += "• " + (boost::format(_("Descr: %s")) % map.get_description()).str() + "\n";
+	buf += "• " + (boost::format(_("Descr: %s")) % map.get_description().c_str()).str() + "\n";
 
 	multiline_textarea->set_text(buf.c_str());
 

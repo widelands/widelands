@@ -192,8 +192,6 @@ protected:
 
 	bool init_settings();
 	void init_language();
-	std::string find_relative_locale_path(std::string localedir);
-	std::string get_executable_path();
 	void shutdown_settings();
 
 	bool init_hardware();

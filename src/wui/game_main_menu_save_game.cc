@@ -34,8 +34,6 @@
 #include "profile/profile.h"
 #include "wui/interactive_gamebase.h"
 
-using boost::format;
-
 InteractiveGameBase & GameMainMenuSaveGame::igbase() {
 	return ref_cast<InteractiveGameBase, UI::Panel>(*get_parent());
 }
@@ -168,14 +166,10 @@ void GameMainMenuSaveGame::selected(uint32_t) {
 	m_gametime.set_text(gametimestring(gametime));
 
 	if (gpdp.get_number_of_players() > 0) {
-		char buf[200];
-		sprintf
-			(buf, "%i %s", gpdp.get_number_of_players(),
-			// TODO(GunChleoc): This should be ngettext(" %i player" etc.
-			// with boost::format, but it refuses to work
-			/** TRANSLATORS: This is preceded by a number */
-			ngettext("player", "players", gpdp.get_number_of_players()));
-			m_players_label.set_text(buf);
+		const std::string text =
+				(boost::format(ngettext("%u Player", "%u Players", gpdp.get_number_of_players()))
+				 % static_cast<unsigned int>(gpdp.get_number_of_players())).str();
+		m_players_label.set_text(text);
 	} else {
 		// Keep label empty
 		m_players_label.set_text("");
@@ -212,7 +206,7 @@ void GameMainMenuSaveGame::fill_list() {
 		try {
 			Widelands::GameLoader gl(name, igbase().game());
 			gl.preload_game(gpdp);
-			m_ls.add(FileSystem::filename_without_ext(name).c_str(), name);
+			m_ls.add(FileSystem::filename_without_ext(name), name);
 		} catch (const WException &) {} //  we simply skip illegal entries
 	}
 }
@@ -325,7 +319,7 @@ struct DeletionMessageBox : public UI::WLMessageBox {
 			(&parent,
 			 _("File deletion"),
 			 str
-				 (format(_("Do you really want to delete the file %s?")) %
+				 (boost::format(_("Do you really want to delete the file %s?")) %
 				  FileSystem::fs_filename(filename.c_str())),
 			 YESNO),
 		m_filename(filename)

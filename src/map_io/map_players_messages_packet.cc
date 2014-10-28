@@ -47,8 +47,9 @@ void MapPlayersMessagesPacket::read
 		try {
 			Profile prof;
 			try {
-				prof.read((boost::format(FILENAME_TEMPLATE) % static_cast<unsigned int>(p)).str().c_str(),
-							 nullptr, fs);
+				const std::string profile_filename =
+						(boost::format(FILENAME_TEMPLATE) % static_cast<unsigned int>(p)).str();
+				prof.read(profile_filename.c_str(), nullptr, fs);
 			} catch (...) {continue;}
 			prof.get_safe_section("global").get_positive
 				("packet_version", CURRENT_PACKET_VERSION);
@@ -183,9 +184,11 @@ void MapPlayersMessagesPacket::write
 			}
 		}
 		fs.ensure_directory_exists((boost::format(PLAYERDIRNAME_TEMPLATE)
-										  % static_cast<unsigned int>(p)).str().c_str());
-		prof.write((boost::format(FILENAME_TEMPLATE)
-						% static_cast<unsigned int>(p)).str().c_str(), false, fs);
+										  % static_cast<unsigned int>(p)).str());
+
+		const std::string profile_filename =
+				(boost::format(FILENAME_TEMPLATE) % static_cast<unsigned int>(p)).str();
+		prof.write(profile_filename.c_str(), false, fs);
 	}
 }
 

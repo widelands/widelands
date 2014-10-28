@@ -299,7 +299,7 @@ void ProductionSite::calc_statistics()
 				++lastOk;
 		}
 	}
-	// Somehow boost::format doesn't handle correctly uint8_t in this case
+	// boost::format would treat uint8_t as char
 	const unsigned int percOk = (ok * 100) / STATISTICS_VECTOR_LENGTH;
 	m_last_stat_percent = percOk;
 
