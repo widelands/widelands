@@ -160,7 +160,7 @@ bool FullscreenMenuCampaignSelect::set_has_selection()
 	} else {
 		m_label_campname.set_text(_("Campaign Name:"));
 		m_label_tribename.set_text(_("Tribe:"));
-		m_label_tribename.set_text(_("Difficulty:"));
+		m_label_difficulty.set_text(_("Difficulty:"));
 		m_label_description.set_text(_("Description:"));
 	}
 	return has_selection;
