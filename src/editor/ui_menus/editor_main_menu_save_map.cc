@@ -236,7 +236,7 @@ void MainMenuSaveMap::clicked_item(uint32_t) {
 		m_nrplayers->set_text(std::to_string(static_cast<unsigned int>(map.get_nrplayers())));
 
 		m_size->set_text((boost::format(_("%1$ix%2$i"))
-								% map.get_width() % map.get_height()).str().c_str());
+								% map.get_width() % map.get_height()).str());
 	} else {
 		m_name     ->set_text(FileSystem::fs_filename(name));
 		m_name     ->set_tooltip("");
@@ -286,13 +286,12 @@ void MainMenuSaveMap::fill_list() {
 #else
 		m_parentdir = m_curdir.substr(0, m_curdir.rfind('\\'));
 #endif
-		std::string parent_string =
-				/** TRANSLATORS: Parent directory */
-				(boost::format("\\<%s\\>") % _("parent")).str();
+
 		m_ls->add
-			(parent_string.c_str(),
-			 m_parentdir.c_str(),
-			 g_gr->images().get("pics/ls_dir.png"));
+				/** TRANSLATORS: Parent directory */
+				((boost::format("\\<%s\\>") % _("parent")).str(),
+				 m_parentdir.c_str(),
+				 g_gr->images().get("pics/ls_dir.png"));
 	}
 
 	const FilenameSet::const_iterator mapfiles_end = m_mapfiles.end();
@@ -329,7 +328,7 @@ void MainMenuSaveMap::fill_list() {
 			try {
 				wml->preload_map(true);
 				m_ls->add
-					(FileSystem::filename_without_ext(name).c_str(),
+					(FileSystem::filename_without_ext(name),
 					 name,
 					 g_gr->images().get("pics/ls_wlmap.png"));
 			} catch (const WException &) {} //  we simply skip illegal entries

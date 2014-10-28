@@ -72,7 +72,7 @@ void MapAllowedBuildingTypesPacket::read
 						player->allow_building_type(--i, false);
 				try {
 					Section & s = prof.get_safe_section((boost::format("player_%u")
-																	 % static_cast<unsigned int>(p)).str().c_str());
+																	 % static_cast<unsigned int>(p)).str());
 
 					bool allowed;
 					while (const char * const name = s.get_next_bool(nullptr, &allowed)) {
@@ -108,8 +108,9 @@ void MapAllowedBuildingTypesPacket::write
 	PlayerNumber const nr_players = egbase.map().get_nrplayers();
 	iterate_players_existing_const(p, nr_players, egbase, player) {
 		const TribeDescr & tribe = player->tribe();
-		Section & section = prof.create_section((boost::format("player_%u")
-															  % static_cast<unsigned int>(p)).str().c_str());
+		const std::string section_key = (boost::format("player_%u")
+													% static_cast<unsigned int>(p)).str();
+		Section & section = prof.create_section(section_key.c_str());
 
 		//  Write for all buildings if it is enabled.
 		BuildingIndex const nr_buildings = tribe.get_nrbuildings();

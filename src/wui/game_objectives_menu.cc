@@ -71,7 +71,7 @@ void GameObjectivesMenu::think() {
 		for (uint32_t j = 0;; ++j)
 			if (j == list_size) {  //  the objective is not in our list
 				if (should_show)
-					list.add(obj.descname().c_str(), obj);
+					list.add(obj.descname(), obj);
 				break;
 			} else if (&list[j] == &obj) {  //  the objective is in our list
 				if (!should_show)
@@ -79,7 +79,7 @@ void GameObjectivesMenu::think() {
 				else if (list[j].descname() != obj.descname() || list[j].descr() != obj.descr()) {
 					// Update
 					list.remove(j);
-					list.add(obj.descname().c_str(), obj);
+					list.add(obj.descname(), obj);
 				}
 				break;
 			}
