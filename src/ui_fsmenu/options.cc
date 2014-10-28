@@ -385,6 +385,8 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 nullptr, "en" == opt.language);
 
 	add_languages_to_list(&m_language_list, opt.language);
+
+	m_language_list.focus();
 }
 
 void FullscreenMenuOptions::update_sb_autosave_unit() {
@@ -612,6 +614,7 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 		did_select_a_font |= cmpbool;
 		m_ui_font_list.add
 			("Widelands", UI_FONT_NAME_WIDELANDS, nullptr, cmpbool);
+		m_ui_font_list.focus();
 
 		// Fill with all left *.ttf files we find in fonts
 		FilenameSet files =

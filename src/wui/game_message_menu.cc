@@ -57,6 +57,7 @@ GameMessageMenu::GameMessageMenu
 	list->add_column (60, _("Status"), "", UI::Align_HCenter);
 	list->add_column(330, _("Title"));
 	list->add_column(120, _("Time sent"));
+	list->focus();
 
 	UI::Button * clearselectionbtn =
 		new UI::Button
