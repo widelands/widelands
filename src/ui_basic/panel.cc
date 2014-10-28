@@ -1048,16 +1048,11 @@ bool Panel::do_mousewheel(uint32_t which, int32_t x, int32_t y) {
 	if (!_g_allow_user_input) {
 		return true;
 	}
-	if (_g_mousegrab != this) {
-		for (Panel * child = _fchild;
-			  (child = child_at_mouse_cursor(x, y, child));
-			  child = child->_next) {
-			if (child->do_mousewheel(which, x, y)) {
-				return true;
-			}
-		}
-	}
 
+	// TODO(GunChleoc): This is just a hack for focussed panels
+	// We need to find the actualy scrollable panel beneaththe mouse cursor,
+	// so we can have multiple scrollable elements on the same screen
+	// e.g. load map with a long desctiprion has 2 of them.
 	if (_focus) {
 		if (_focus->do_mousewheel(which, x, y))
 			return true;
