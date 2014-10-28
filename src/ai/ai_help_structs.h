@@ -33,6 +33,7 @@
 #include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
 #include "logic/ship.h"
+#include <unordered_set>
 
 namespace Widelands {
 
@@ -388,7 +389,9 @@ struct ShipObserver {
 	Widelands::Ship* ship;
 	Widelands::NoteShipMessage::Message last_message_;
 	Widelands::Coords expedition_start_point_;
-};
+	std::unordered_set<uint32_t> visited_spots_;
+	bool island_circ_direction=true; // a ship circumvents all island in the same direction
+	};
 
 struct WareObserver {
 	uint8_t producers_;

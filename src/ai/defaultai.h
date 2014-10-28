@@ -164,6 +164,8 @@ private:
 
 	void
 	consider_productionsite_influence(BuildableField&, Widelands::Coords, const BuildingObserver&);
+	//considering wood, stones, mines, water, fishes for candidate for colonization (new port)
+	uint8_t spot_scoring(Widelands::Coords candidate_spot,Widelands::Coords starting_point);
 
 	EconomyObserver* get_economy_observer(Widelands::Economy&);
 	BuildingObserver& get_building_observer(char const*);
