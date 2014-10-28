@@ -202,6 +202,7 @@ void Box::layout()
 		m_orientation == Horizontal ? get_inner_w() : get_inner_h();
 	for (uint32_t idx = 0; idx < m_items.size(); ++idx)
 		if (m_items[idx].fillspace) {
+			assert(infspace_count > 0);
 			m_items[idx].assigned_var_depth =
 				(max_depths - totaldepth) / infspace_count;
 			totaldepth += m_items[idx].assigned_var_depth;
