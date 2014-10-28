@@ -73,13 +73,11 @@
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/campaign_select.h"
 #include "ui_fsmenu/editor.h"
-#include "ui_fsmenu/editor_mapselect.h"
 #include "ui_fsmenu/fileview.h"
 #include "ui_fsmenu/internet_lobby.h"
 #include "ui_fsmenu/intro.h"
 #include "ui_fsmenu/launch_spg.h"
 #include "ui_fsmenu/loadgame.h"
-#include "ui_fsmenu/loadreplay.h"
 #include "ui_fsmenu/main.h"
 #include "ui_fsmenu/mapselect.h"
 #include "ui_fsmenu/multiplayer.h"
@@ -403,7 +401,7 @@ void WLApplication::run()
 				// Load the requested map
 				Widelands::Map map;
 				i18n::Textdomain td("maps");
-				map.set_filename(m_filename.c_str());
+				map.set_filename(m_filename);
 				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(m_filename);
 				if (!ml) {
 					throw WLWarning
@@ -417,7 +415,7 @@ void WLApplication::run()
 				MapData mapdata;
 				mapdata.filename = m_filename;
 				mapdata.name = map.get_name();
-				mapdata.author = map.get_author();
+				mapdata.authors = new MapAuthorData(map.get_author());
 				mapdata.description = map.get_description();
 				mapdata.nrplayers = map.get_nrplayers();
 				mapdata.width = map.get_width();
@@ -528,7 +526,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 					g_fs->ensure_directory_exists(SCREENSHOT_DIR);
 					for (uint32_t nr = 0; nr < 10000; ++nr) {
 						const std::string filename = (boost::format(SCREENSHOT_DIR "/shot%04u.png")
-																% nr).str().c_str();
+																% nr).str();
 						if (g_fs->file_exists(filename))
 							continue;
 						g_gr->screenshot(filename);
@@ -1310,11 +1308,12 @@ void WLApplication::mainmenu_editor()
 		case FullscreenMenuEditor::Load_Map: {
 			std::string filename;
 			{
-				FullscreenMenuEditorMapSelect emsm;
+				SinglePlayerGameSettingsProvider sp;
+				FullscreenMenuMapSelect emsm(&sp, nullptr, true);
 				if (emsm.run() <= 0)
 					break;
 
-				filename = emsm.get_map();
+				filename = emsm.get_map()->filename;
 			}
 			EditorInteractive::run_editor(filename.c_str(), "");
 			return;
@@ -1397,7 +1396,9 @@ bool WLApplication::load_game()
 	Widelands::Game game;
 	std::string filename;
 
-	FullscreenMenuLoadGame ssg(game);
+	SinglePlayerGameSettingsProvider sp;
+	FullscreenMenuLoadGame ssg(game, &sp, nullptr);
+
 	if (ssg.run() > 0)
 		filename = ssg.filename();
 	else
@@ -1464,7 +1465,8 @@ void WLApplication::replay()
 {
 	Widelands::Game game;
 	if (m_filename.empty()) {
-		FullscreenMenuLoadReplay rm(game);
+		SinglePlayerGameSettingsProvider sp;
+		FullscreenMenuLoadGame rm(game, &sp, nullptr, true);
 		if (rm.run() <= 0)
 			return;
 

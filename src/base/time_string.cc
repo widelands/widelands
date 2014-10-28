@@ -19,13 +19,10 @@
 
 #include "base/time_string.h"
 
-#include <algorithm>
 #include <cassert>
 #include <ctime>
 #include <string>
 
-#include <boost/format.hpp>
-#include <boost/regex.hpp>
 #include <stdint.h>
 
 #include "base/i18n.h"
@@ -90,52 +87,82 @@ char * timestring() {
 
 std::string localize_month(int8_t month) {
 	switch (month) {
-		case 1:
-			/** TRANSLATORS: January. Keep this short if you can. */
+		case 0:
+			/** TRANSLATORS: January. Keep this to 4 letters maximum. */
+			/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
+			/** TRANSLATORS: definition if there is one for your language. */
+			/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
 			return _("Jan");
-		case 2:
-			/** TRANSLATORS: February. Keep this short if you can. */
+		case 1:
+			/** TRANSLATORS: February. Keep this to 4 letters maximum. */
+			/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
+			/** TRANSLATORS: definition if there is one for your language. */
+			/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
 			return _("Feb");
-		case 3:
-			/** TRANSLATORS: March. Keep this short if you can. */
+		case 2:
+			/** TRANSLATORS: March. Keep this to 4 letters maximum. */
+			/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
+			/** TRANSLATORS: definition if there is one for your language. */
+			/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
 			return _("Mar");
-		case 4:
-			/** TRANSLATORS: April. Keep this short if you can. */
+		case 3:
+			/** TRANSLATORS: April. Keep this to 4 letters maximum. */
+			/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
+			/** TRANSLATORS: definition if there is one for your language. */
+			/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
 			return _("Apr");
-		case 5:
-			/** TRANSLATORS: May. Keep this short if you can. */
+		case 4:
+			/** TRANSLATORS: May. Keep this to 4 letters maximum. */
+			/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
+			/** TRANSLATORS: definition if there is one for your language. */
+			/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
 			return _("May");
-		case 6:
-			/** TRANSLATORS: June. Keep this short if you can. */
+		case 5:
+			/** TRANSLATORS: June. Keep this to 4 letters maximum. */
+			/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
+			/** TRANSLATORS: definition if there is one for your language. */
+			/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
 			return _("Jun");
-		case 7:
-			/** TRANSLATORS: July. Keep this short if you can. */
+		case 6:
+			/** TRANSLATORS: July. Keep this to 4 letters maximum. */
+			/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
+			/** TRANSLATORS: definition if there is one for your language. */
+			/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
 			return _("Jul");
-		case 8:
-			/** TRANSLATORS: August. Keep this short if you can. */
+		case 7:
+			/** TRANSLATORS: August. Keep this to 4 letters maximum. */
+			/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
+			/** TRANSLATORS: definition if there is one for your language. */
+			/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
 			return _("Aug");
-		case 9:
-			/** TRANSLATORS: September. Keep this short if you can. */
+		case 8:
+			/** TRANSLATORS: September. Keep this to 4 letters maximum. */
+			/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
+			/** TRANSLATORS: definition if there is one for your language. */
+			/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
 			return _("Sep");
-		case 10:
-			/** TRANSLATORS: October. Keep this short if you can. */
+		case 9:
+			/** TRANSLATORS: October. Keep this to 4 letters maximum. */
+			/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
+			/** TRANSLATORS: definition if there is one for your language. */
+			/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
 			return _("Oct");
-		case 11:
-			/** TRANSLATORS: November. Keep this short if you can. */
+		case 10:
+			/** TRANSLATORS: November. Keep this to 4 letters maximum. */
+			/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
+			/** TRANSLATORS: definition if there is one for your language. */
+			/** TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html */
 			return _("Nov");
-		case 12:
-			/** TRANSLATORS: December. Keep this short if you can. */
+		case 11:
+			/** TRANSLATORS: December. Keep this to 4 letters maximum. */
+			/** TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR */
+			/** TRANSLATORS: definition if there is one for your language. */
 			return _("Dec");
 		default:
 			return std::to_string(month);
 	}
 }
 
-// Check if this is a string of the type "YYYY-MM-DDThh.mm.ss"
-bool is_timestring(const std::string& timestring) {
-	boost::regex re("\\d\\d\\d\\d-\\d\\d-\\d\\dT\\d\\d\\.\\d\\d\\.\\d\\d.*");
-	return boost::regex_match(timestring, re);
-}
 
 char * gamestring_with_leading_zeros(uint32_t gametime)
 {

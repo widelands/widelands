@@ -36,7 +36,7 @@ class EditorGameBase;
 /// must be selected.
 class MapLoader {
 public:
-	MapLoader(char const * const filename, Map & M)
+	MapLoader(const std::string& filename, Map & M)
 		: m_map(M), m_s(STATE_INIT) {m_map.set_filename(filename);}
 	virtual ~MapLoader() {}
 

@@ -317,8 +317,10 @@ int LuaPlayerBase::__eq(lua_State * L) {
 }
 
 int LuaPlayerBase::__tostring(lua_State * L) {
-	lua_pushstring(L, (boost::format("Player(%i)")
-							 % static_cast<unsigned int>(get(L, get_egbase(L)).player_number())).str().c_str());
+	const std::string pushme =
+			(boost::format("Player(%i)")
+			 % static_cast<unsigned int>(get(L, get_egbase(L)).player_number())).str();
+	lua_pushstring(L, pushme.c_str());
 	return 1;
 }
 /* RST

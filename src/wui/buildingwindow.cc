@@ -230,11 +230,10 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 					const Widelands::BuildingDescr & building_descr =
 						*tribe.get_building_descr(enhancement);
 
-					std::string enhance_tooltip =
-							(boost::format(_("Enhance to %s"))
-							 % building_descr.descname().c_str()).str()
-							+ "<br><font size=11>" + _("Construction costs:") + "</font><br>"
-							+  waremap_to_richtext(tribe, building_descr.enhancement_cost());
+					std::string enhance_tooltip = (boost::format(_("Enhance to %s"))
+												  % building_descr.descname().c_str()).str()
+												 + "<br><font size=11>" + _("Construction costs:") + "</font><br>"
+												 +  waremap_to_richtext(tribe, building_descr.enhancement_cost());
 
 					UI::Button * enhancebtn =
 						new UI::Button

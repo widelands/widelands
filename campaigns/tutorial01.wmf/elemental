@@ -5,6 +5,6 @@ map_h=64
 nr_players=2
 world=greenland
 name=_"Tutorial 1"
-author="Winterwind, SirVer, Nasenbaer"
+author="Winterwind,SirVer,Nasenbaer"
 descr=_"Basic Tutorial – a map based on Winterwind’s tutorial 1 for the Barbarians"
 background="campaigns/tutorial01.wmf/pics/background.jpg"

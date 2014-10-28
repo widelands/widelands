@@ -195,4 +195,9 @@ bool MultilineTextarea::handle_mousewheel(uint32_t which, int32_t x, int32_t y) 
 	return m_scrollbar.handle_mousewheel(which, x, y);
 }
 
+void MultilineTextarea::scroll_to_top() {
+	m_scrollbar.set_scrollpos(0);
+	update(0, 0, 0, 0);
+}
+
 } // namespace UI

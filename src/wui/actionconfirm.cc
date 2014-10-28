@@ -31,7 +31,6 @@
 #include "ui_basic/window.h"
 #include "wui/interactive_player.h"
 
-using boost::format;
 
 struct ActionConfirm : public UI::Window {
 	ActionConfirm
@@ -148,7 +147,7 @@ ActionConfirm::ActionConfirm
 	new UI::MultilineTextarea
 		(this,
 		 0, 0, 200, 74,
-		 (format(message) % building.descr().descname()).str(),
+		 (boost::format(message) % building.descr().descname()).str(),
 		 UI::Align_Center);
 
 	UI::Button * okbtn =

@@ -115,13 +115,13 @@ struct MultiPlayerClientGroup : public UI::Box {
 		} else {
 			name->set_text(us.name);
 			if (m_save != us.position) {
-				const char* pic;
-				const char* temp_tooltip;
+				std::string pic;
+				std::string temp_tooltip;
 				if (us.position < UserSettings::highest_playernum()) {
-					pic =  (boost::format("pics/genstats_enable_plr_0%u.png")
-							  % static_cast<unsigned int>(us.position + 1)).str().c_str();
+					pic = (boost::format("pics/genstats_enable_plr_0%u.png")
+							  % static_cast<unsigned int>(us.position + 1)).str();
 					temp_tooltip = (boost::format(_("Player %u"))
-										 % static_cast<unsigned int>(us.position + 1)).str().c_str();
+										 % static_cast<unsigned int>(us.position + 1)).str();
 				} else {
 					pic = "pics/menu_tab_watch.png";
 					temp_tooltip = _("Spectator");
@@ -174,7 +174,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		set_size(w, h);
 
 		const std::string pic = (boost::format("pics/fsel_editor_set_player_0%i_pos.png")
-										 % static_cast<unsigned int>(id + 1)).str().c_str();
+										 % static_cast<unsigned int>(id + 1)).str();
 		player =
 			new UI::Icon(this, 0, 0, h, h, g_gr->images().get(pic));
 		add(player, UI::Box::AlignCenter);
@@ -288,11 +288,11 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			type ->set_pic(g_gr->images().get("pics/shared_in.png"));
 
 			const std::string pic = (boost::format("pics/fsel_editor_set_player_0%u_pos.png")
-											 % static_cast<unsigned int>(player_setting.shared_in)).str().c_str();
+											 % static_cast<unsigned int>(player_setting.shared_in)).str();
 
 			tribe->set_pic(g_gr->images().get(pic));
 			tribe->set_tooltip((boost::format(_("Player %u"))
-									  % static_cast<unsigned int>(player_setting.shared_in)).str().c_str());
+									  % static_cast<unsigned int>(player_setting.shared_in)).str());
 
 			team ->set_visible(false);
 			team ->set_enabled(false);
@@ -505,6 +505,7 @@ void MultiPlayerSetupGroup::refresh()
 	}
 
 	// Update player groups
-	for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
+	for (uint32_t i = 0; i < MAX_PLAYERS; ++i) {
 		p.at(i)->refresh();
+	}
 }

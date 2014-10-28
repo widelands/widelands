@@ -52,7 +52,7 @@ Table<void *>::Table
 	m_total_width     (0),
 	m_fontname        (UI_FONT_NAME),
 	m_fontsize        (UI_FONT_SIZE_SMALL),
-	m_headerheight    (15),
+	m_headerheight    (UI_FONT_SIZE_SMALL * 8 / 5),
 	m_lineheight      (g_fh->get_fontheight(m_fontname, m_fontsize)),
 	m_scrollbar       (nullptr),
 	m_scrollpos       (0),

@@ -329,11 +329,9 @@ void * ZipFilesystem::load(const std::string & fname, size_t & length) {
 			break;
 		if (len < 0) {
 			unzCloseCurrentFile(m_unzipfile);
+			const std::string errormessage = (boost::format("read error %i") % len).str();
 			throw ZipOperationError
-				("ZipFilesystem::load",
-				 fname,
-				 m_zipfilename,
-				 (boost::format("read error %i") % len).str().c_str());
+				("ZipFilesystem::load", fname, m_zipfilename, errormessage.c_str());
 		}
 
 		totallen += len;
