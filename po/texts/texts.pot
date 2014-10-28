@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2014-10-17 18:36+0000\n"
+"POT-Creation-Date: 2014-10-28 08:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -692,7 +692,7 @@ msgstr ""
 #: ../../txts/tips/barbarians.tip:6
 #: ../../txts/tips/empire.tip:6
 msgid ""
-"Keep an eye on your fishers. After fish resources are exhausted in their working area, they will stop to fish."
+"Keep an eye on your fishers. After fish resources are exhausted in their working area, they will stop fishing."
 msgstr ""
 
 #: ../../txts/tips/barbarians.tip:10
