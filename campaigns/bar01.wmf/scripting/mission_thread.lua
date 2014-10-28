@@ -324,4 +324,3 @@ run(story_messages_thread)
 include "map:scripting/secret_village.lua" -- starts the thread
 
 run(mission_complete_thread)
-

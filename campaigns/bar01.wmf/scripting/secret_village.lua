@@ -12,11 +12,10 @@ function village_thread()
 
    reveal_village()
 
-   pts = scroll_smoothly_to(wl.Game().map:get_field(55, 25), 3000)
-
-   send_msg(msg_village)
-
+   local pts = scroll_smoothly_to(map:get_field(55, 25), 3000)
+   campaign_message_box(msg_village)
    timed_scroll(array_reverse(pts), 10)
+
    sleep(1500)
 end
 
