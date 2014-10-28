@@ -5,7 +5,7 @@
 plr = wl.Game().players[1]
 plr2 = wl.Game().players[2]
 
-set_textdomain("Tutorial 04: Economy.wmf")
+set_textdomain("scenario_tutorial04_economy.wmf")
 
 include "scripting/coroutine.lua"
 include "scripting/infrastructure.lua"

@@ -5,7 +5,7 @@
 plr = wl.Game().players[1]
 map = wl.Game().map
 
-set_textdomain("Tutorial01: Basic_control.wmf")
+set_textdomain("scenario_tutorial01_basic_control.wmf")
 
 include "scripting/coroutine.lua"
 include "scripting/infrastructure.lua"
