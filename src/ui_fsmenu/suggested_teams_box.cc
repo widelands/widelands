@@ -84,7 +84,7 @@ void SuggestedTeamsBox::show(const std::vector<Widelands::Map::SuggestedTeamLine
 		set_visible(true);
 		m_suggested_teams_box_label->set_visible(true);
 		/** TRANSLATORS: Label for the list of suggested teams when choosing a map */
-		m_suggested_teams_box_label->set_text(_("Teams:"));
+		m_suggested_teams_box_label->set_text(_("Suggested Teams:"));
 		int32_t teamlist_offset = m_suggested_teams_box_label->get_y() +
 										  m_suggested_teams_box_label->get_h() +
 										  m_padding;
