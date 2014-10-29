@@ -399,11 +399,13 @@ void FullscreenMenuCampaignMapSelect::entry_selected() {
 		map.set_filename(campmapfile);
 		ml->preload_map(true);
 
-		MapAuthorData* authors = new MapAuthorData(map.get_author());
-		m_ta_author.set_text(authors->get_names());
+		MapAuthorData authors;
+		authors.parse(map.get_author());
+
+		m_ta_author.set_text(authors.get_names());
 		m_ta_author.set_tooltip(ngettext("The designer of this scenario", "The designers of this scenario",
-										authors->get_number()));
-		m_label_author.set_text(ngettext("Author:", "Authors:", authors->get_number()));
+										authors.get_number()));
+		m_label_author.set_text(ngettext("Author:", "Authors:", authors.get_number()));
 
 		i18n::Textdomain td("maps");
 		m_ta_mapname.set_text(_(map.get_name()));
