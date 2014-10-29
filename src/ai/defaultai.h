@@ -165,7 +165,7 @@ private:
 	void
 	consider_productionsite_influence(BuildableField&, Widelands::Coords, const BuildingObserver&);
 	//considering wood, stones, mines, water, fishes for candidate for colonization (new port)
-	uint8_t spot_scoring(Widelands::Coords candidate_spot,Widelands::Coords starting_point);
+	uint8_t spot_scoring(Widelands::Coords candidate_spot);
 
 	EconomyObserver* get_economy_observer(Widelands::Economy&);
 	BuildingObserver& get_building_observer(char const*);
@@ -174,7 +174,7 @@ private:
 	void lose_immovable(const Widelands::PlayerImmovable&);
 	void gain_building(Widelands::Building&);
 	void lose_building(const Widelands::Building&);
-	void ship_decision(ShipObserver&,const Widelands::NoteShipMessage::Message);
+	void expedition_management(ShipObserver&,const Widelands::NoteShipMessage::Message);
 	//bool pick_farest_portspace(Widelands::Ship&);
 	void out_of_resources_site(const Widelands::ProductionSite&);
 
