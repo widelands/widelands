@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-10-17 18:36+0000\n"
-"PO-Revision-Date: 2014-10-01 09:10+0000\n"
+"POT-Creation-Date: 2014-10-28 08:26+0000\n"
+"PO-Revision-Date: 2014-10-28 18:59+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-18 05:40+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-10-29 05:52+0000\n"
+"X-Generator: Launchpad (build 17203)\n"
 "Language: gd\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
-#: ../../campaigns/cconfig:98
-msgid "01 – From Nemesis to Genesis"
-msgstr "01 – On aimhleas dhan ghineachas"
+#: ../../campaigns/cconfig:101
+msgid "From Nemesis to Genesis"
+msgstr "On aimhleas dhan ghineachas"
 
 #: ../../campaigns/atl01.wmf/elemental:11
 msgid ""
@@ -33,14 +33,18 @@ msgstr ""
 "dhaibh fhèin."
 
 #: ../../campaigns/cconfig:27
-msgid "Barbarians – The Second Empire"
-msgstr "Na Tùsanaich – An impireachd eile"
+msgid "The Second Empire"
+msgstr "An dàrna impireachd"
 
-#: ../../campaigns/cconfig:30
+#: ../../campaigns/cconfig:29
+msgid "Barbarians"
+msgstr "Na Tùsanaich"
+
+#: ../../campaigns/cconfig:31
 msgid "Easy. Introduces the Barbarians"
 msgstr "Furasta. Bheir e eòlas air na Tùsanaich dhut."
 
-#: ../../campaigns/cconfig:31
+#: ../../campaigns/cconfig:32
 msgid ""
 "When Chat’Karuth died, he was an old man, father to three strong and "
 "ambitious sons, and warlord to an army that could match any enemy willing to "
@@ -71,15 +75,19 @@ msgstr ""
 "mhiannach a rèiteachadh ach am biodh na cinnidhean air an ath-chruinneachadh "
 "fon aon bratach a-rithist."
 
-#: ../../campaigns/cconfig:34
-msgid "Empire – The Months of Exile"
-msgstr "An Impireachd – Mìosan an fhògraidh"
+#: ../../campaigns/cconfig:35
+msgid "The Months of Exile"
+msgstr "Mìosan an fhògraidh"
 
 #: ../../campaigns/cconfig:37
+msgid "Empire"
+msgstr "An Impireachd"
+
+#: ../../campaigns/cconfig:39
 msgid "Easy. Introduces the Empire"
 msgstr "Furasta. Bheir e eòlas air an Impireachd dhut."
 
-#: ../../campaigns/cconfig:38
+#: ../../campaigns/cconfig:40
 msgid ""
 "Six months ago, Lutius – a young general of the Empire – was sent with 150 "
 "soldiers to the frontier beyond the northern forests where Barbarian tribes "
@@ -105,15 +113,19 @@ msgstr ""
 "’s farsaing. ’S gann gun do mhair e fhèin is grunnan dhe na saighdearan aige "
 "beò."
 
-#: ../../campaigns/cconfig:41
-msgid "Atlanteans – The Run for the Fire"
-msgstr "Na h-Atlantaich – An toir air an teine"
+#: ../../campaigns/cconfig:43
+msgid "The Run for the Fire"
+msgstr "An toir air an teine"
 
-#: ../../campaigns/cconfig:44
+#: ../../campaigns/cconfig:45
+msgid "Atlanteans"
+msgstr "Na h-Atlantaich"
+
+#: ../../campaigns/cconfig:47
 msgid "Challenging. Introduces the Atlanteans"
 msgstr "Dùbhlanach. Bheir e eòlas air na h-Atlantaich dhut."
 
-#: ../../campaigns/cconfig:45
+#: ../../campaigns/cconfig:48
 msgid ""
 "When their God lost faith in the Atlanteans and drowned their island, one "
 "woman’s struggle for justice and a second chance for her people would become "
@@ -127,38 +139,42 @@ msgstr ""
 "tìr san aineolas, dh’fhàs Jundlina nas cumhachdaiche na fear sam bith eile "
 "’na linn ach b’ e daor na phàigh i: a daonnachd ’s a h-anam."
 
-#: ../../campaigns/cconfig:64
+#: ../../campaigns/cconfig:67
 #: ../../campaigns/t01.wmf/elemental:7
-msgid "01 – Eyes in the Dark"
-msgstr "01 – Sùilean san dorchadas"
+msgid "Eyes in the Dark"
+msgstr "Sùilean san dorchadas"
 
-#: ../../campaigns/cconfig:69
+#: ../../campaigns/cconfig:72
 #: ../../campaigns/t02.wmf/elemental:7
-msgid "02 – A Place to Call Home"
-msgstr "02 – Dachaigh ùr"
+msgid "A Place to Call Home"
+msgstr "Dachaigh ùr"
 
-#: ../../campaigns/cconfig:74
+#: ../../campaigns/cconfig:77
 #: ../../campaigns/t03.wmf/elemental:7
-msgid "03 – This Land is Our Land"
-msgstr "03 – Seo ar dùthaich"
+msgid "This Land is Our Land"
+msgstr "Seo ar dùthaich"
 
-#: ../../campaigns/cconfig:81
+#: ../../campaigns/cconfig:84
 #: ../../campaigns/emp01.wmf/elemental:7
-msgid "01 – The Strands of Malac’ Mor"
-msgstr "01 – Traighean Mhalac' Mhòir"
+msgid "The Strands of Malac’ Mor"
+msgstr "Traighean Mhalac' Mhòir"
 
-#: ../../campaigns/cconfig:86
+#: ../../campaigns/cconfig:89
 #: ../../campaigns/emp02.wmf/elemental:9
-msgid "02 – An Outpost for Exile"
-msgstr "02 – Tuineachadh nam fògarrach"
+msgid "An Outpost for Exile"
+msgstr "Tuineachadh nam fògarrach"
 
-#: ../../campaigns/cconfig:91
-#: ../../campaigns/cconfig:103
+#: ../../campaigns/cconfig:94
+#: ../../campaigns/cconfig:106
 #: ../../campaigns/dummy.wmf/elemental:7
 msgid "Not yet implemented"
 msgstr "Chan eil seo ann fhathast"
 
 #: ../../campaigns/dummy.wmf/elemental:9
+msgid "Nobody"
+msgstr "Chan eil duine"
+
+#: ../../campaigns/dummy.wmf/elemental:10
 msgid "Sorry, this map is not yet implemented."
 msgstr "Duilich, ach cha deach am mapa seo a phrògramachadh fhathast."
 
@@ -233,10 +249,6 @@ msgstr "Atal"
 msgid "Who will be the real king of the big atoll?"
 msgstr "Cò thèid 'na rìgh an atail mhòir?"
 
-#: ../../maps/Atoll.wmf/elemental:12
-msgid "Suggested Teams: (blue, yellow) vs. (red, green)"
-msgstr "Sgiobaidhean a mholamaid: (gorm, dearg) an aghaidh (buidhe, uaine)"
-
 #: ../../maps/Calvisson.wmf/elemental:9
 msgid "Calvisson"
 msgstr "Calvisson"
@@ -252,15 +264,6 @@ msgstr ""
 "caochlaideach aig an ranntair seo a thuigsinn, mar sin feumaidh sinn a bhith "
 "faiceallach ach nach bris sinn a-steach air tìr nan cinnidhean eile le "
 "mearachd."
-
-#: ../../maps/Calvisson.wmf/elemental:12
-msgid ""
-"Suggested Teams: blue vs. red | yellow vs. green | (blue, yellow) vs. (red, "
-"green) | (blue, green) vs. (red, yellow)"
-msgstr ""
-"Sgiobaidhean a mholamaid: gorm an aghaidh dearg | buidhe an aghaidh uaine | "
-"(gorm, buidhe) an aghaidh (dearg, uaine) | (gorm, uaine) an aghaidh (dearg, "
-"buidhe)"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -314,11 +317,6 @@ msgstr "Thairis air an fhàire"
 msgid "Man your ship and sail to the horizon."
 msgstr "Cruinnich sgioba is seòl dhan aineolach."
 
-#: ../../maps/Crossing the horizon.wmf/elemental:12
-#: ../../maps/Rendez-Vous.wmf/elemental:10
-msgid "Suggested Teams: all ok"
-msgstr "Sgiobaidhean a mholamaid: biodh iad uile taghta"
-
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
 msgstr "Fèill an fhàsaich"
@@ -332,12 +330,6 @@ msgstr ""
 "Tha ceithir treubhan ann an còmhstri leis an nàbaidh as fhaisge gus am beinn "
 "òir a ruigsinn ro chàch 's an dùil air saoibhreas do-chreidsinneach. Ach an "
 "urrainn dhan dà dhiubh a dh'fhuiricheas na stòrasan a cho-roinneadh gu glic?"
-
-#: ../../maps/Desert Tournament.wmf/elemental:10
-#: ../../maps/Four Castles.wmf/elemental:10
-#: ../../maps/Swamp Monks.wmf/elemental:10
-msgid "Suggested Teams: (blue, red) vs. (yellow, green)"
-msgstr "Sgiobaidhean a mholamaid: (gorm, dearg) an aghaidh (buidhe, uaine)"
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
@@ -365,14 +357,6 @@ msgid ""
 msgstr ""
 "Tha fìor bhòidhchead na tìre uaine seo a' tàladh iomadh treubh ach an "
 "gabhadh iad air an son fhèin i."
-
-#: ../../maps/Elven Forests.wmf/elemental:10
-msgid ""
-"Suggested Teams: (blue, red) vs. (yellow, green) | (blue, yellow) vs. (red, "
-"green)"
-msgstr ""
-"Sgiobaidhean a mholamaid: (gorm, dearg) an aghaidh (buidhe, uaine) | (gorm, "
-"buidhe) an aghaidh (deirg, uaine)"
 
 #: ../../maps/Fellowships.wmf/elemental:9
 msgid "Fellowships"
@@ -456,14 +440,6 @@ msgstr ""
 "uisge ri taobh na h-aibhne. Gliocas II: Seallaidh bodaich-shneachda barrachd "
 "stòrasan uisge dhut. Gliocas III: Chan eil ach aon seòrsa stòrais anns gach "
 "beinn."
-
-#: ../../maps/Four Mountains.wmf/elemental:10
-msgid ""
-"Suggested Teams: (blue, red) vs. (yellow, green) | (blue, green) vs. (red, "
-"yellow)"
-msgstr ""
-"Sgiobaidhean a mholamaid: (gorm, dearg) an aghaidh (buidhe, uaine) | (gorm, "
-"buidhe) an aghaidh (deirg, buidhe)"
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -603,17 +579,6 @@ msgstr ""
 "Cà bheil e? Mìle mìle on a sheo! Feumaidh tu dol astar fada fada gus a h-"
 "uile eilean a cheannsachadh. Gura math a thèid leat!"
 
-#: ../../maps/Long, long way.wmf/elemental:12
-msgid ""
-"Suggested Teams: blue vs. red | yellow vs. green | (blue, yellow) vs. (red, "
-"green) | (blue, yellow, black) vs. (red, green, orange) | (blue, yellow, "
-"black, purple) vs. (red, green, orange, white)"
-msgstr ""
-"Sgiobaidhean a mholamaid: gorm an aghaidh dearg | buidhe an aghaidh uaine | "
-"(gorm, uaine) an aghaidh (dearg, uaine) | (gorm, buidhe, dubh) an aghaidh "
-"(dearg, uaine, orains) | (gorm, buidhe, dubh, purpaidh) an aghaidh (dearg, "
-"uaine, orains, geal)"
-
 #: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
 msgid "Island Hopping"
 msgstr "Starraineachd nan eilean"
@@ -629,17 +594,19 @@ msgstr ""
 "eilean meadhanach a ruigsinn cho luath 's a ghabhas ach an tog iad caisteal "
 "air mullach na beinne meadhanaich mus dèan càch e."
 
+#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
+msgid "Smugglers"
+msgstr "Cùiltearachd"
+
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
 msgid ""
 "Your well established smuggling routes suddenly got busy: Two other tribes "
 "have appeared and now a rivalry among smugglers has started: Which team will "
-"be the first to smuggle a certain number of wares? Teams are: Blue + Red vs. "
-"Yellow + Green."
+"be the first to smuggle a certain number of wares?"
 msgstr ""
 "Dh’fhàs na slighean cùiltearachd  stèidhichte agad trang gu h-obann: Nochd "
 "dà threubh eile ’s tha còmhstri am measg an luchd-cùiltearachd air a "
-"tòiseachadh: Cò an sgioba a mhalairteas uiread de bhathar ro chàch? Seo na "
-"sgiobaidhean: (gorm, dearg) an aghaidh (buidhe, uaine)."
+"tòiseachadh: Cò an sgioba a mhalairteas uiread de bhathar ro chàch?"
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"
@@ -668,10 +635,6 @@ msgstr ""
 "teas-mheadhan aca – an àrd-chlàr uaine a tha doirbh ceannsachadh ach furasta "
 "call. Mar sin, ma tha thu airson a thogail, thoir an aire air na cinnidhean "
 "eile."
-
-#: ../../maps/Plateau.wmf/elemental:10
-msgid "Suggested Teams: blue vs. yellow"
-msgstr "Sgiobaidhean a mholamaid: gorm an aghaidh buidhe"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:7
 msgid "Rendez-Vous"
@@ -803,19 +766,6 @@ msgid ""
 msgstr ""
 "Bhiodh an abhainn a’ solar biadh ’s conaltradh a-riamh. An turas seo, bidh "
 "ceithir impireachdan a’ strì airson smachd air an tìr seo."
-
-#: ../../maps/The Nile.wmf/elemental:12
-msgid ""
-"Suggested Teams: blue vs. red | yellow vs. green | (blue, yellow) vs. (red, "
-"green) | (green, orange, white) vs. (yellow, black, purple) | (blue, orange, "
-"green) vs. (red, yellow, black) | (blue, green, orange, white) vs. (red, "
-"yellow, black, purple)"
-msgstr ""
-"Sgiobaidhean a mholamaid: gorm an aghaidh dearg | buidhe an aghaidh uaine | "
-"(gorm, buidhe) an aghaidh (dearg, uaine) | (uaine, orains, geal) an aghaidh "
-"(buidhe, dubh, purpaidh) | (gorm, orains, uaine) an aghaidh (dearg, buidhe, "
-"dubh) | (gorm, uaine, orains, geal) an aghaidh (dearg, buidhe, dubh, "
-"purpaidh)"
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:7
 msgid "The Oasis Triangle"
