@@ -15,7 +15,7 @@ function filled_buildings_one_soldier(p, ...)
          if bdescr.soldiers then
             b:set_soldiers(bdescr.soldiers)
          else
-            -- TODO(codereview): this creates "1 soldier (+4)", but I want a capacity of 1 (i.e. "1 soldier")
+            -- TODO(wl-zocker): this creates "1 soldier (+4)", but I want a capacity of 1 (i.e. "1 soldier")
             b:set_soldiers({0,0,0,0}, 1)
          end
       elseif bdescr.soldiers then -- Must be a warehouse

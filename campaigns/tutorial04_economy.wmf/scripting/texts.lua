@@ -181,7 +181,6 @@ ware_encyclopedia = {
    ) ..
    rt("image=pics/menu_help.png",p(_[[the help button at the bottom. For all your tribe’s wares, it shows a short help text, a list of buildings that produces the ware and the needed wares.]]) ..
       p(_[[If you want, you can try it out. A soldier needs a wood lance and a helm – from there on out, you can search backwards.]])
-      -- TODO(codereview): Is there a place where the player can see the needed weapons?
    ),
    h = 350
 }
@@ -384,8 +383,7 @@ warehouse_preference_settings = {
       p(_[[Every warehouse has four buttons to set the preference. If you move your mouse pointer over them, you will see tooltips that explain what the buttons do.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[Bring all the marble columns to the warehouse near the front line.]]) ..
-      -- TODO(codereview): Is this how the "Preferably store here" option works? (change the text below, too)
-      listitem_arrow(_[[To achieve this, you will have to do two things. First, set a preference for marble columns in the desired warehouse. All marble columns produced in the future will be brought there.]]) ..
+      listitem_arrow(_[[To achieve this, you will have to do two things. First, set a preference for marble columns in the desired warehouse. All marble columns produced in the future will be brought there if possible.]]) ..
       listitem_arrow(_[[Then, to move the marble columns out of your headquarters, you will have to click on the remove button there.]])
    ),
    obj_name = "bring_marble_columns_to_front",
@@ -393,7 +391,7 @@ warehouse_preference_settings = {
    obj_body = economy_settings3.obj_body .. rt(
       p(_[[To decide where your wares get stored, you can use the preference buttons in the warehouses.]]) ..
       listitem_bullet(_[[Bring all the marble columns to the warehouse near the front line.]]) ..
-      listitem_arrow(_[[To achieve this, you will have to do two things. First, set a preference for marble columns in the desired warehouse. All marble columns produced in the future will be brought there.]]) ..
+      listitem_arrow(_[[To achieve this, you will have to do two things. First, set a preference for marble columns in the desired warehouse. All marble columns produced in the future will be brought there if possible.]]) ..
       listitem_arrow(_[[Then, to move the marble columns out of your headquarters, you will have to click on the remove button there.]])
    )
 }
