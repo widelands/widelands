@@ -19,6 +19,8 @@
 
 #include "map_io/map_players_messages_packet.h"
 
+#include <boost/format.hpp>
+
 #include "logic/game_data_error.h"
 #include "logic/player.h"
 #include "map_io/coords_profile.h"
@@ -31,9 +33,8 @@ namespace Widelands {
 #define CURRENT_PACKET_VERSION 1
 #define PLAYERDIRNAME_TEMPLATE "player/%u"
 #define FILENAME_TEMPLATE PLAYERDIRNAME_TEMPLATE "/messages"
-#define FILENAME_SIZE 19
 
-void MapPlayersMessagesPacket::Read
+void MapPlayersMessagesPacket::read
 	(FileSystem & fs, EditorGameBase & egbase, bool, MapObjectLoader & mol)
 
 {
@@ -43,10 +44,12 @@ void MapPlayersMessagesPacket::Read
 	PlayerNumber const nr_players = map   .get_nrplayers();
 	iterate_players_existing(p, nr_players, egbase, player)
 		try {
-			char filename[FILENAME_SIZE];
-			snprintf(filename, sizeof(filename), FILENAME_TEMPLATE, p);
 			Profile prof;
-			try {prof.read(filename, nullptr, fs);} catch (...) {continue;}
+			try {
+				const std::string profile_filename =
+						(boost::format(FILENAME_TEMPLATE) % static_cast<unsigned int>(p)).str();
+				prof.read(profile_filename.c_str(), nullptr, fs);
+			} catch (...) {continue;}
 			prof.get_safe_section("global").get_positive
 				("packet_version", CURRENT_PACKET_VERSION);
 			MessageQueue & messages = player->messages();
@@ -124,7 +127,7 @@ void MapPlayersMessagesPacket::Read
 						 	 sent,
 						 	 s->get_name       (),
 						 	 s->get_safe_string("body"),
-							 get_coords("position", extent, Coords::Null(), s),
+							 get_coords("position", extent, Coords::null(), s),
 							 serial,
 						 	 status));
 					previous_message_sent = sent;
@@ -139,10 +142,10 @@ void MapPlayersMessagesPacket::Read
 		}
 }
 
-void MapPlayersMessagesPacket::Write
+void MapPlayersMessagesPacket::write
 	(FileSystem & fs, EditorGameBase & egbase, MapObjectSaver & mos)
 {
-	fs.EnsureDirectoryExists("player");
+	fs.ensure_directory_exists("player");
 	PlayerNumber const nr_players = egbase.map().get_nrplayers();
 	iterate_players_existing_const(p, nr_players, egbase, player) {
 		Profile prof;
@@ -180,11 +183,12 @@ void MapPlayersMessagesPacket::Write
 				s.set_int       ("serial",    fileindex);
 			}
 		}
-		char filename[FILENAME_SIZE];
-		snprintf(filename, sizeof(filename), PLAYERDIRNAME_TEMPLATE, p);
-		fs.EnsureDirectoryExists(filename);
-		snprintf(filename, sizeof(filename),      FILENAME_TEMPLATE, p);
-		prof.write(filename, false, fs);
+		fs.ensure_directory_exists((boost::format(PLAYERDIRNAME_TEMPLATE)
+										  % static_cast<unsigned int>(p)).str());
+
+		const std::string profile_filename =
+				(boost::format(FILENAME_TEMPLATE) % static_cast<unsigned int>(p)).str();
+		prof.write(profile_filename.c_str(), false, fs);
 	}
 }
 

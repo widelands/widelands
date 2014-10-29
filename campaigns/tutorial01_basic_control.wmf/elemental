@@ -1,0 +1,10 @@
+# Automatically created by Widelands bzr7181[trunk] (Release)
+
+[global]
+packet_version="1"
+map_w="64"
+map_h="64"
+nr_players="1"
+name=_"Basic Control"
+author="Winterwind,SirVer,Nasenbaer,wl-zocker"
+descr=_"In this tutorial, you will learn how to navigate in Widelands and how to build buildings and roads."

@@ -153,7 +153,12 @@ Panel::~Panel()
 /**
  * Free all of the panel's children.
  */
-void Panel::free_children() {while (_fchild) delete _fchild;}
+void Panel::free_children() {
+	//Scan-build claims this results in double free.
+	//This is a false positive.
+	//See https://bugs.launchpad.net/widelands/+bug/1198928
+	while (_fchild) delete _fchild;
+}
 
 
 /**
@@ -1239,7 +1244,7 @@ std::string Panel::ui_fn() {
 		return UI_FONT_NAME_SERIF;
 	if (style == "sans")
 		return UI_FONT_NAME_SANS;
-	if (g_fs->FileExists("fonts/" + style))
+	if (g_fs->file_exists("fonts/" + style))
 		return style;
 	log
 		("Could not find font file \"%s\"\n"

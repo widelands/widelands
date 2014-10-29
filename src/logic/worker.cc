@@ -23,6 +23,8 @@
 #include <memory>
 #include <tuple>
 
+#include <boost/format.hpp>
+
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
@@ -611,7 +613,7 @@ bool Worker::run_findspace(Game & game, State & state, const Action & action)
 bool Worker::run_walk(Game & game, State & state, const Action & action)
 {
 	BaseImmovable const * const imm = game.map()[get_position()].get_immovable();
-	Coords dest(Coords::Null());
+	Coords dest(Coords::null());
 	bool forceonlast = false;
 	int32_t max_steps = -1;
 
@@ -931,15 +933,13 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 	{
 		// Geologist also sends a message notifying the player
 		if (rdescr->detectable() && position.field->get_resources_amount()) {
-			char message[1024];
 			// TODO(sirver): this is very wrong: It assumes a directory layout
 			// that might not be around forever.
-			snprintf(message,
-			         sizeof(message),
-			         "<rt image=world/resources/pics/%s4.png>"
-			         "<p font-size=14 font-face=DejaVuSerif>%s</p></rt>",
-			         rdescr->name().c_str(),
-			         _("A geologist found resources."));
+			const std::string message =
+					(boost::format("<rt image=world/resources/pics/%s4.png>"
+										"<p font-size=14 font-face=DejaVuSerif>%s</p></rt>")
+					 % rdescr->name().c_str()
+					 % _("A geologist found resources.")).str();
 
 			//  We should add a message to the player's message queue - but only,
 			//  if there is not already a similar one in list.
@@ -975,7 +975,7 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
  * Demand from the g_sound_handler to play a certain sound effect.
  * Whether the effect actually gets played is decided only by the sound server.
  */
-bool Worker::run_playFX(Game & game, State & state, const Action & action)
+bool Worker::run_playfx(Game & game, State & state, const Action & action)
 {
 	g_sound_handler.play_fx(action.sparam1, get_position(), action.iparam1);
 
@@ -1543,6 +1543,9 @@ void Worker::transfer_update(Game & game, State & /* state */) {
 				("MO(%u): [transfer]: from road to bad nextstep %u",
 				 serial(), nextstep->serial());
 	} else
+		//Scan-build reports Called C++ object pointer is null here.
+		//This is a false positive.
+		//See https://bugs.launchpad.net/widelands/+bug/1198918
 		throw wexception
 			("MO(%u): location %u has bad type",
 			 serial(), location->serial());
@@ -1836,18 +1839,17 @@ void Worker::return_update(Game & game, State & state)
 		 	 descr().get_right_walk_anims(does_carry_ware())))
 	{
 		molog("[return]: Failed to return\n");
-		char buffer[2048];
-		snprintf
-			(buffer, sizeof(buffer),
-			 _ ("Your %s can't find a way home and will likely die."),
-			 descr().descname().c_str());
+		const std::string message =
+				(boost::format(_("Your %s can't find a way home and will likely die."))
+				 % descr().descname().c_str()).str();
+
 		owner().add_message
 			(game,
 			 *new Message
 			 	("game engine",
 				 game.get_gametime(),
 			 	 _("Worker got lost!"),
-			 	 buffer,
+				 message,
 			 	 get_position()),
 				 m_serial);
 		set_location(nullptr);
@@ -2945,17 +2947,17 @@ void Worker::Loader::load(FileRead & fr)
 {
 	Bob::Loader::load(fr);
 
-	uint8_t version = fr.Unsigned8();
+	uint8_t version = fr.unsigned_8();
 	if (!(1 <= version && version <= WORKER_SAVEGAME_VERSION))
 		throw GameDataError("unknown/unhandled version %u", version);
 
 	Worker & worker = get<Worker>();
-	m_location = fr.Unsigned32();
-	m_carried_ware = fr.Unsigned32();
-	worker.m_current_exp = fr.Signed32();
+	m_location = fr.unsigned_32();
+	m_carried_ware = fr.unsigned_32();
+	worker.m_current_exp = fr.signed_32();
 
 	if (version >= 2) {
-		if (fr.Unsigned8()) {
+		if (fr.unsigned_8()) {
 			worker.m_transfer =
 				new Transfer(ref_cast<Game, EditorGameBase>(egbase()), worker);
 			worker.m_transfer->read(fr, m_transfer);
@@ -3035,8 +3037,8 @@ MapObject::Loader * Worker::load
 {
 	try {
 		// header has already been read by caller
-		std::string tribename = fr.CString();
-		std::string name = fr.CString();
+		std::string tribename = fr.c_string();
+		std::string name = fr.c_string();
 
 		egbase.manually_load_tribe(tribename);
 
@@ -3065,9 +3067,9 @@ MapObject::Loader * Worker::load
 void Worker::save
 	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(HeaderWorker);
-	fw.CString(descr().tribe().name());
-	fw.CString(descr().name());
+	fw.unsigned_8(HeaderWorker);
+	fw.c_string(descr().tribe().name());
+	fw.c_string(descr().name());
 
 	do_save(egbase, mos, fw);
 }
@@ -3084,16 +3086,16 @@ void Worker::do_save
 {
 	Bob::save(egbase, mos, fw);
 
-	fw.Unsigned8(WORKER_SAVEGAME_VERSION);
-	fw.Unsigned32(mos.get_object_file_index_or_zero(m_location.get(egbase)));
-	fw.Unsigned32(mos.get_object_file_index_or_zero(m_carried_ware.get(egbase)));
-	fw.Signed32(m_current_exp);
+	fw.unsigned_8(WORKER_SAVEGAME_VERSION);
+	fw.unsigned_32(mos.get_object_file_index_or_zero(m_location.get(egbase)));
+	fw.unsigned_32(mos.get_object_file_index_or_zero(m_carried_ware.get(egbase)));
+	fw.signed_32(m_current_exp);
 
 	if (m_transfer) {
-		fw.Unsigned8(1);
+		fw.unsigned_8(1);
 		m_transfer->write(mos, fw);
 	} else {
-		fw.Unsigned8(0);
+		fw.unsigned_8(0);
 	}
 }
 

@@ -41,8 +41,8 @@ IFont* load_font(const std::string& face, int ptsize) {
 	std::unique_ptr<std::string> memory;
 	{
 		FileRead* fr = new FileRead();
-		fr->Open(*g_fs, filename);
-		memory.reset(new std::string(fr->Data(0), fr->GetSize()));
+		fr->open(*g_fs, filename);
+		memory.reset(new std::string(fr->data(0), fr->get_size()));
 	}
 
 	SDL_RWops* ops = SDL_RWFromConstMem(memory->data(), memory->size());

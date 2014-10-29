@@ -90,7 +90,7 @@ BuildingDescr::BuildingDescr
 	}
 
 	m_helptext_script = directory + "/help.lua";
-	if (!g_fs->FileExists(m_helptext_script))
+	if (!g_fs->file_exists(m_helptext_script))
 		m_helptext_script = "";
 
 	// Parse build options

@@ -72,55 +72,55 @@ void MapSaver::save() {
 
 	// The binary data is saved in an own directory
 	// to keep it hidden from the poor debuggers
-	m_fs.EnsureDirectoryExists("binary");
+	m_fs.ensure_directory_exists("binary");
 
 	// MANDATORY PACKETS
 	// Start with writing the map out, first Elemental data
 	// PRELOAD DATA BEGIN
 	log("Writing Elemental Data ... ");
-	{MapElementalPacket               p; p.Write(m_fs, m_egbase, *m_mos);}
+	{MapElementalPacket               p; p.write(m_fs, m_egbase, *m_mos);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Player Names And Tribe Data ... ");
-	{MapPlayerNamesAndTribesPacket p; p.Write(m_fs, m_egbase, *m_mos);
+	{MapPlayerNamesAndTribesPacket p; p.write(m_fs, m_egbase, *m_mos);
 	}
 	log("took %ums\n ", timer.ms_since_last_query());
 	//  PRELOAD DATA END
 
 	log("Writing Port Spaces Data ... ");
-	{MapPortSpacesPacket             p; p.Write(m_fs, m_egbase, *m_mos);}
+	{MapPortSpacesPacket             p; p.write(m_fs, m_egbase, *m_mos);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Heights Data ... ");
-	{MapHeightsPacket                 p; p.Write(m_fs, m_egbase, *m_mos);}
+	{MapHeightsPacket                 p; p.write(m_fs, m_egbase, *m_mos);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Terrain Data ... ");
-	{MapTerrainPacket                 p; p.Write(m_fs, m_egbase);}
+	{MapTerrainPacket                 p; p.write(m_fs, m_egbase);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Player Start Position Data ... ");
-	{MapPlayerPositionPacket         p; p.Write(m_fs, m_egbase, *m_mos);}
+	{MapPlayerPositionPacket         p; p.write(m_fs, m_egbase, *m_mos);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	//  This must come before anything that references messages, such as:
 	//    * command queue (PlayerMessageCommand, inherited by
 	//      Cmd_MessageSetStatusRead and Cmd_MessageSetStatusArchived)
 	log("Writing Player Message Data ... ");
-	{MapPlayersMessagesPacket        p; p.Write(m_fs, m_egbase, *m_mos);}
+	{MapPlayersMessagesPacket        p; p.write(m_fs, m_egbase, *m_mos);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Resources Data ... ");
-	{MapResourcesPacket               p; p.Write(m_fs, m_egbase);}
+	{MapResourcesPacket               p; p.write(m_fs, m_egbase);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	//  NON MANDATORY PACKETS BELOW THIS POINT
 	log("Writing Map Extra Data ... ");
-	{MapExtradataPacket               p; p.Write(m_fs, m_egbase);}
+	{MapExtradataPacket               p; p.write(m_fs, m_egbase);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Map Version ... ");
-	{MapVersionPacket               p; p.Write(m_fs, m_egbase, *m_mos);}
+	{MapVersionPacket               p; p.write(m_fs, m_egbase, *m_mos);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 
@@ -130,7 +130,7 @@ void MapSaver::save() {
 
 	//  allowed worker types
 	log("Writing Allowed Worker Types Data ... ");
-	{MapAllowedWorkerTypesPacket p; p.Write(m_fs, m_egbase, *m_mos);}
+	{MapAllowedWorkerTypesPacket p; p.write(m_fs, m_egbase, *m_mos);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
  //  allowed building types
@@ -140,7 +140,7 @@ void MapSaver::save() {
 			if (!player->is_building_type_allowed(i)) {
 				log("Writing Allowed Building Types Data ... ");
 				MapAllowedBuildingTypesPacket p;
-				p                                  .Write(m_fs, m_egbase, *m_mos);
+				p                                  .write(m_fs, m_egbase, *m_mos);
 				log("took %ums\n ", timer.ms_since_last_query());
 				goto end_find_a_forbidden_building_type_loop;
 			}
@@ -151,58 +151,58 @@ void MapSaver::save() {
 	// change this order without knowing what you do
 	// EXISTENT PACKETS
 	log("Writing Flag Data ... ");
-	{MapFlagPacket                   p; p.Write(m_fs, m_egbase, *m_mos);}
+	{MapFlagPacket                   p; p.write(m_fs, m_egbase, *m_mos);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Road Data ... ");
-	{MapRoadPacket                   p; p.Write(m_fs, m_egbase, *m_mos);}
+	{MapRoadPacket                   p; p.write(m_fs, m_egbase, *m_mos);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Building Data ... ");
-	{MapBuildingPacket               p; p.Write(m_fs, m_egbase, *m_mos);}
+	{MapBuildingPacket               p; p.write(m_fs, m_egbase, *m_mos);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Map Objects ... ");
-	{MapObjectPacket                      p; p.Write(m_fs, m_egbase, *m_mos);}
+	{MapObjectPacket                      p; p.write(m_fs, m_egbase, *m_mos);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	// DATA PACKETS
 	if (m_mos->get_nr_flags()) {
 		log("Writing Flagdata Data ... ");
-		{MapFlagdataPacket            p; p.Write(m_fs, m_egbase, *m_mos);}
+		{MapFlagdataPacket            p; p.write(m_fs, m_egbase, *m_mos);}
 		log("took %ums\n ", timer.ms_since_last_query());
 	}
 
 	if (m_mos->get_nr_roads()) {
 		log("Writing Roaddata Data ... ");
-		{MapRoaddataPacket            p; p.Write(m_fs, m_egbase, *m_mos);}
+		{MapRoaddataPacket            p; p.write(m_fs, m_egbase, *m_mos);}
 		log("took %ums\n ", timer.ms_since_last_query());
 	}
 
 	if (m_mos->get_nr_buildings()) {
 		log("Writing Buildingdata Data ... ");
-		{MapBuildingdataPacket        p; p.Write(m_fs, m_egbase, *m_mos);}
+		{MapBuildingdataPacket        p; p.write(m_fs, m_egbase, *m_mos);}
 		log("took %ums\n ", timer.ms_since_last_query());
 	}
 
 	log("Writing Node Ownership Data ... ");
-	{MapNodeOwnershipPacket         p; p.Write(m_fs, m_egbase, *m_mos);}
+	{MapNodeOwnershipPacket         p; p.write(m_fs, m_egbase, *m_mos);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Exploration Data ... ");
-	{MapExplorationPacket            p; p.Write(m_fs, m_egbase, *m_mos);}
+	{MapExplorationPacket            p; p.write(m_fs, m_egbase, *m_mos);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Players Unseen Data ... ");
-	{MapPlayersViewPacket           p; p.Write(m_fs, m_egbase, *m_mos);}
+	{MapPlayersViewPacket           p; p.write(m_fs, m_egbase, *m_mos);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Scripting Data ... ");
-	{MapScriptingPacket              p; p.Write(m_fs, m_egbase, *m_mos);}
+	{MapScriptingPacket              p; p.write(m_fs, m_egbase, *m_mos);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Writing Objective Data ... ");
-	{MapObjectivePacket              p; p.Write(m_fs, m_egbase, *m_mos);}
+	{MapObjectivePacket              p; p.write(m_fs, m_egbase, *m_mos);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 #ifndef NDEBUG

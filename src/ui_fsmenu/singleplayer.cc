@@ -24,7 +24,7 @@
 #include "wui/text_constants.h"
 
 FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer() :
-FullscreenMenuBase("singleplmenu.jpg"),
+FullscreenMenuBase("ui_fsmenu.jpg"),
 
 // Values for alignment and size
 	m_butw (get_w() * 7 / 20),

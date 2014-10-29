@@ -317,9 +317,9 @@ the given data
 */
 void Map::create_empty_map
 	(const World& world, uint32_t const w, uint32_t const h,
-	 char const * const name,
-	 char const * const author,
-	 char const * const description)
+	 const std::string& name,
+	 const std::string& author,
+	 const std::string& description)
 {
 	set_size(w, h);
 	set_name       (name);
@@ -433,7 +433,7 @@ void Map::set_size(const uint32_t w, const uint32_t h)
 	m_fields.reset(new Field[w * h]);
 	memset(m_fields.get(), 0, sizeof(Field) * w * h);
 
-	m_pathfieldmgr->setSize(w * h);
+	m_pathfieldmgr->set_size(w * h);
 
 	m_overlay_manager.reset(new OverlayManager());
 }
@@ -543,40 +543,40 @@ void Map::set_starting_pos(PlayerNumber const plnum, Coords const c)
 }
 
 
-void Map::set_filename(char const * const string)
+void Map::set_filename(const std::string& filename)
 {
-	snprintf(m_filename, sizeof(m_filename), "%s", string);
+	m_filename = filename;
 }
 
-void Map::set_author(char const * const string)
+void Map::set_author(const std::string& author)
 {
-	snprintf(m_author, sizeof(m_author), "%s", string);
+	m_author = author;
 }
 
-void Map::set_name(char const * const string)
+void Map::set_name(const std::string& name)
 {
-	snprintf(m_name, sizeof(m_name), "%s", string);
+	m_name = name;
 }
 
-void Map::set_description(char const * const string)
+void Map::set_description(const std::string& description)
 {
-	snprintf(m_description, sizeof(m_description), "%s", string);
+	m_description = description;
 }
 
-void Map::set_hint(std::string string)
+void Map::set_hint(const std::string& hint)
 {
-	m_hint = string;
+	m_hint = hint;
 }
 
-void Map::set_background(char const * const string)
+void Map::set_background(const std::string& image_path)
 {
-	if (string)
-		m_background = string;
-	else
+	if (image_path.empty())
 		m_background.clear();
+	else
+		m_background = image_path;
 }
 
-void Map::add_tag(std::string tag) {
+void Map::add_tag(const std::string& tag) {
 	m_tags.insert(tag);
 }
 
@@ -843,7 +843,7 @@ uint32_t Map::find_reachable_immovables_unique
 	 const FindImmovable & functor)
 {
 	std::vector<ImmovableFound> duplist;
-	FindImmovablesCallback cb(&duplist, FindImmovableAlwaysTrue());
+	FindImmovablesCallback cb(&duplist, find_immovable_always_true());
 
 	find_reachable(area, checkstep, cb);
 
@@ -1639,14 +1639,14 @@ std::unique_ptr<MapLoader> Map::get_correct_loader(const std::string& filename) 
 
 	if (boost::algorithm::ends_with(lower_filename, WLMF_SUFFIX)) {
 		try {
-			result.reset(new WidelandsMapLoader(g_fs->MakeSubFileSystem(filename), this));
+			result.reset(new WidelandsMapLoader(g_fs->make_sub_file_system(filename), this));
 		} catch (...) {
 			//  If this fails, it is an illegal file.
 			//  TODO(unknown): catchall hides real errors! Replace with more specific code
 		}
 	} else if (boost::algorithm::ends_with(lower_filename, S2MF_SUFFIX) ||
 	           boost::algorithm::ends_with(lower_filename, S2MF_SUFFIX2)) {
-		result.reset(new S2MapLoader(filename.c_str(), *this));
+		result.reset(new S2MapLoader(filename, *this));
 	}
 	return result;
 }
@@ -1704,7 +1704,7 @@ int32_t Map::findpath
 		return 0; // duh...
 	}
 
-	if (!checkstep.reachabledest(*this, end))
+	if (!checkstep.reachable_dest(*this, end))
 		return -1;
 
 	if (!persist)

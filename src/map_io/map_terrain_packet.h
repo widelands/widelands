@@ -31,8 +31,8 @@ class EditorGameBase;
 
 class MapTerrainPacket {
 public:
-	void Read(FileSystem&, EditorGameBase&, const OneWorldLegacyLookupTable& lookup_table);
-	void Write(FileSystem&, EditorGameBase&);
+	void read(FileSystem&, EditorGameBase&, const OneWorldLegacyLookupTable& lookup_table);
+	void write(FileSystem&, EditorGameBase&);
 };
 
 }

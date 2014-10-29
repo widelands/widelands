@@ -34,8 +34,8 @@ struct FullscreenMenuMultiPlayer : public FullscreenMenuBase {
 
 	enum {Back = dying_code, Metaserver, Lan};
 
-	void showInternetLogin();
-	void internetLogin();
+	void show_internet_login();
+	void internet_login();
 	std::string get_nickname() {return m_nickname;}
 	std::string get_password() {return m_password;}
 	bool registered()          {return m_register;}

@@ -50,12 +50,12 @@ namespace  {
 struct S2MapDescrHeader {
 
 	char    magic[10]; // "WORLD_V1.0"
-	char    name [20];
+	std::string name;
 	int16_t w;
 	int16_t h;
 	int8_t  uses_world; // 0 = green, 1 =black, 2 = winter
 	int8_t  nplayers;
-	char    author[26];
+	std::string author;
 	char    bulk[2290]; // unknown
 } /* size 2352 */;
 
@@ -172,7 +172,7 @@ load_s2mf_section(FileRead& fr, int32_t const width, int32_t const height) {
 	char buffer[256];
 
 	std::unique_ptr<uint8_t[]> section;
-	memcpy(buffer, fr.Data(6), 6);
+	memcpy(buffer, fr.data(6), 6);
 	if
 		(buffer[0] != 0x10 ||
 		 buffer[1] != 0x27 ||
@@ -185,15 +185,15 @@ load_s2mf_section(FileRead& fr, int32_t const width, int32_t const height) {
 		return section;
 	}
 
-	uint16_t const dw = fr.Unsigned16();
-	uint16_t const dh = fr.Unsigned16();
+	uint16_t const dw = fr.unsigned_16();
+	uint16_t const dh = fr.unsigned_16();
 
 	{
-		uint16_t const one = fr.Unsigned16();
+		uint16_t const one = fr.unsigned_16();
 		if (one != 1)
 			throw wexception("expected 1 but found %u", one);
 	}
-	int32_t const size = fr.Signed32();
+	int32_t const size = fr.signed_32();
 	if (size != dw * dh)
 		throw wexception("expected %u but found %u", dw * dh, size);
 
@@ -205,12 +205,12 @@ load_s2mf_section(FileRead& fr, int32_t const width, int32_t const height) {
 	section.reset(new uint8_t[size]);
 	int32_t y = 0;
 	for (; y < height; ++y) {
-		uint8_t const* const ptr = reinterpret_cast<uint8_t*>(fr.Data(width));
+		uint8_t const* const ptr = reinterpret_cast<uint8_t*>(fr.data(width));
 		memcpy(section.get() + y * width, ptr, width);
-		fr.Data(dw - width);  // skip the alignment junk
+		fr.data(dw - width);  // skip the alignment junk
 	}
 	while (y < dh) {
-		fr.Data(dw);  // more alignment junk++ y;
+		fr.data(dw);  // more alignment junk++ y;
 	}
 
 	return section;
@@ -308,7 +308,7 @@ Widelands::TerrainIndex TerrainConverter::lookup(S2MapLoader::WorldType world, i
 
 }  // namespace
 
-S2MapLoader::S2MapLoader(const char * filename, Widelands::Map & M)
+S2MapLoader::S2MapLoader(const std::string& filename, Widelands::Map& M)
 : Widelands::MapLoader(filename, M), m_filename(filename)
 {
 }
@@ -321,7 +321,7 @@ int32_t S2MapLoader::preload_map(bool const scenario) {
 	m_map.cleanup();
 
 	FileRead fr;
-	fr.Open(*g_fs, m_filename.c_str());
+	fr.open(*g_fs, m_filename.c_str());
 
 	load_s2mf_header(fr);
 
@@ -383,14 +383,14 @@ int32_t S2MapLoader::load_map_complete
 void S2MapLoader::load_s2mf_header(FileRead& fr)
 {
 	S2MapDescrHeader header;
-	memcpy(&header, fr.Data(sizeof(header)), sizeof(header));
+	memcpy(&header, fr.data(sizeof(header)), sizeof(header));
 
 	//  Header must be swapped for big-endian Systems, works at the moment only
 	//  for PowerPC architecture
 	//  TODO(unknown): Generalize this
 #if defined(__ppc__)
-	header.w = Swap16(header.w);
-	header.h = Swap16(header.h);
+	header.w = swap_16(header.w);
+	header.h = swap_16(header.h);
 #endif
 
 	//  don't really set size, but make the structures valid
@@ -414,7 +414,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 	uint8_t * pc;
 
 	FileRead fr;
-	fr.Open(*g_fs, m_filename.c_str());
+	fr.open(*g_fs, m_filename.c_str());
 
 	load_s2mf_header(fr);
 	m_map.set_size(m_map.m_width, m_map.m_height);
@@ -673,7 +673,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase & egbase)
 	if (!section)
 		throw wexception("Section 14 (Island id) not found");
 
-	fr.Close();
+	fr.close();
 
 	//  Map is completely read into memory.
 	//  Now try to convert the remaining stuff to Widelands-format. This will

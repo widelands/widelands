@@ -51,6 +51,7 @@ private:
 	UI::Textarea *  m_title_area;
 	UI::Textarea *  m_gametime_label;
 	UI::Textarea *  m_gametime_value;
+	UI::Textarea *  m_info_area_label;
 	UI::MultilineTextarea *  m_info_area;
 	UI::Button *    m_continue_button;
 	UI::Button *    m_stop_button;

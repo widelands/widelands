@@ -47,7 +47,7 @@ void initialize() {
 	SDL_Init(SDL_INIT_VIDEO);
 
 	g_fs = new LayeredFileSystem();
-	g_fs->AddFileSystem(&FileSystem::Create(INSTALL_PREFIX + std::string("/") + INSTALL_DATADIR));
+	g_fs->add_file_system(&FileSystem::create(INSTALL_PREFIX + std::string("/") + INSTALL_DATADIR));
 
 #ifdef HAS_GETENV
 	char dummy_video_env[] = "SDL_VIDEODRIVER=dummy";
@@ -71,13 +71,13 @@ int main(int argc, char ** argv)
 	try {
 		initialize();
 
-		std::string map_dir = FileSystem::FS_Dirname(map_path);
+		std::string map_dir = FileSystem::fs_dirname(map_path);
 		if (map_dir.empty()) {
 			map_dir = ".";
 		}
-		const std::string map_file = FileSystem::FS_Filename(map_path.c_str());
-		FileSystem* in_out_filesystem = &FileSystem::Create(map_dir);
-		g_fs->AddFileSystem(in_out_filesystem);
+		const std::string map_file = FileSystem::fs_filename(map_path.c_str());
+		FileSystem* in_out_filesystem = &FileSystem::create(map_dir);
+		g_fs->add_file_system(in_out_filesystem);
 
 		Map* map = new Map();
 		EditorGameBase egbase(nullptr);
@@ -98,7 +98,7 @@ int main(int argc, char ** argv)
 		{
 			FileWrite fw;
 			save_surface_to_png(minimap.get(), &fw);
-			fw.Write(*in_out_filesystem, (map_file + ".png").c_str());
+			fw.write(*in_out_filesystem, (map_file + ".png").c_str());
 		}
 
 		// Write JSON.
@@ -106,7 +106,7 @@ int main(int argc, char ** argv)
 			FileWrite fw;
 
 			const auto write_string = [&fw] (const std::string& s) {
-				fw.Data(s.c_str(), s.size());
+				fw.data(s.c_str(), s.size());
 			};
 			const auto write_key_value =
 			   [&write_string](const std::string& key, const std::string& quoted_value) {
@@ -143,7 +143,7 @@ int main(int argc, char ** argv)
 			write_string("\n");
 
 			write_string("}\n");
-			fw.Write(*in_out_filesystem, (map_file + ".json").c_str());
+			fw.write(*in_out_filesystem, (map_file + ".json").c_str());
 		}
 	}
 	catch (std::exception& e) {

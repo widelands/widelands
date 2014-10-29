@@ -21,6 +21,7 @@
 
 #include <cstdio>
 #include <memory>
+#include <string>
 
 #include <boost/format.hpp>
 
@@ -49,13 +50,14 @@ using Widelands::WidelandsMapLoader;
  * Create all the buttons etc...
 */
 MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
-	: UI::Window(&parent, "load_map_menu", 0, 0, 500, 300, _("Load Map"))
+	: UI::Window(&parent, "load_map_menu", 0, 0, 560, 300, _("Load Map"))
 {
 	int32_t const spacing =  5;
 	int32_t const offsx   = spacing;
-	int32_t const offsy   = 30;
+	int32_t const offsy   = 10;
 	int32_t       posx    = offsx;
 	int32_t       posy    = offsy;
+	int32_t const descr_label_w = 100;
 
 	m_ls = new UI::Listselect<const char *>
 		(this,
@@ -65,43 +67,42 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
 	m_ls->double_clicked.connect(boost::bind(&MainMenuLoadMap::double_clicked, this, _1));
 
 	posx = get_inner_w() / 2 + spacing;
-	posy += 20;
 	new UI::Textarea
-		(this, posx, posy, 150, 20, _("Name:"), UI::Align_CenterLeft);
+		(this, posx, posy, descr_label_w, 20, _("Name:"), UI::Align_CenterLeft);
 	m_name =
-		new UI::Textarea
-			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
-	posy += 20 + spacing;
+		new UI::MultilineTextarea
+			(this, posx + descr_label_w, posy, 200, 40, "---", UI::Align_CenterLeft);
+	posy += 40 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, 150, 20, _("Author:"), UI::Align_CenterLeft);
+		(this, posx, posy, 150, 20, _("Authors:"), UI::Align_CenterLeft);
 	m_author =
 		new UI::Textarea
-			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
+			(this, posx + descr_label_w, posy, 200, 20, "---", UI::Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, 70, 20, _("Size:"), UI::Align_CenterLeft);
+		(this, posx, posy, descr_label_w, 20, _("Size:"), UI::Align_CenterLeft);
 	m_size =
 		new UI::Textarea
-			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
+			(this, posx + descr_label_w, posy, 200, 20, "---", UI::Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, 70, 20, _("Players:"), UI::Align_CenterLeft);
+		(this, posx, posy, descr_label_w, 20, _("Players:"), UI::Align_CenterLeft);
 	m_nrplayers =
 		new UI::Textarea
-			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
+			(this, posx + descr_label_w, posy, 200, 20, "---", UI::Align_CenterLeft);
 	posy += 20 + spacing;
 
 
 	new UI::Textarea
-		(this, posx, posy, 70, 20, _("Descr:"), UI::Align_CenterLeft);
+		(this, posx, posy, descr_label_w, 20, _("Descr:"), UI::Align_CenterLeft);
 	m_descr =
 		new UI::MultilineTextarea
 			(this,
-			 posx + 70, posy,
-			 get_inner_w() - posx - spacing - 70,
+			 posx + descr_label_w, posy,
+			 get_inner_w() - posx - spacing - descr_label_w,
 			 get_inner_h() - posy - spacing - 40,
 			 "---", UI::Align_CenterLeft);
 
@@ -109,7 +110,8 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
 
 	m_ok_btn = new UI::Button
 		(this, "ok",
-		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
+		 posx, posy,
+		 get_inner_w() / 4 - 1.5 * spacing, 20,
 		 g_gr->images().get("pics/but0.png"),
 		 _("OK"),
 		 std::string(),
@@ -118,7 +120,8 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
 
 	UI::Button * cancelbtn = new UI::Button
 		(this, "cancel",
-		 posx, posy, 80, 20,
+		 posx + get_inner_w() / 4 - spacing / 2, posy,
+		 get_inner_w() / 4 - 1.5 * spacing, 20,
 		 g_gr->images().get("pics/but1.png"),
 		 _("Cancel"));
 	cancelbtn->sigclicked.connect(boost::bind(&MainMenuLoadMap::die, this));
@@ -136,7 +139,7 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
 void MainMenuLoadMap::clicked_ok() {
 	const char * const filename(m_ls->get_selected());
 
-	if (g_fs->IsDirectory(filename) && !WidelandsMapLoader::is_widelands_map(filename)) {
+	if (g_fs->is_directory(filename) && !WidelandsMapLoader::is_widelands_map(filename)) {
 		m_curdir = filename;
 		m_ls->clear();
 		m_mapfiles.clear();
@@ -155,7 +158,7 @@ void MainMenuLoadMap::selected(uint32_t) {
 
 	m_ok_btn->set_enabled(true);
 
-	if (!g_fs->IsDirectory(name) || WidelandsMapLoader::is_widelands_map(name)) {
+	if (!g_fs->is_directory(name) || WidelandsMapLoader::is_widelands_map(name)) {
 		Widelands::Map map;
 		{
 			std::unique_ptr<Widelands::MapLoader> map_loader = map.get_correct_loader(name);
@@ -164,19 +167,21 @@ void MainMenuLoadMap::selected(uint32_t) {
 
 		// Translate the map data
 		i18n::Textdomain td("maps");
-		m_name  ->set_text(_(map.get_name()));
+		m_name  ->set_text(map.get_name());
+		m_name  ->set_tooltip(map.get_name());
 		m_author->set_text(map.get_author());
 		m_descr ->set_text
-			(_(map.get_description()) + (map.get_hint().empty() ? "" : (std::string("\n") + _(map.get_hint()))));
+			(_(map.get_description()) +
+			 (map.get_hint().empty() ? "" : (std::string("\n\n") + _(map.get_hint()))));
 
-		char buf[200];
-		sprintf(buf, "%i", map.get_nrplayers());
-		m_nrplayers->set_text(buf);
+		m_nrplayers->set_text(std::to_string(static_cast<unsigned int>(map.get_nrplayers())));
 
-		sprintf(buf, "%ix%i", map.get_width(), map.get_height());
-		m_size     ->set_text(buf);
+		m_size     ->set_text((boost::format(_("%1$ix%2$i"))
+									  % map.get_width()
+									  % map.get_height()).str());
 	} else {
 		m_name     ->set_text("");
+		m_name     ->set_tooltip("");
 		m_author   ->set_text("");
 		m_descr    ->set_text("");
 		m_nrplayers->set_text("");
@@ -194,7 +199,7 @@ void MainMenuLoadMap::double_clicked(uint32_t) {clicked_ok();}
  */
 void MainMenuLoadMap::fill_list() {
 	//  Fill it with all files we find.
-	m_mapfiles = g_fs->ListDirectory(m_curdir);
+	m_mapfiles = g_fs->list_directory(m_curdir);
 
 	//  First, we add all directories. We manually add the parent directory.
 	if (m_curdir != m_basedir) {
@@ -203,13 +208,12 @@ void MainMenuLoadMap::fill_list() {
 #else
 		m_parentdir = m_curdir.substr(0, m_curdir.rfind('\\'));
 #endif
-		std::string parent_string =
-				/** TRANSLATORS: Parent directory */
-				(boost::format("\\<%s\\>") % _("parent")).str();
+
 		m_ls->add
-			(parent_string.c_str(),
-			 m_parentdir.c_str(),
-			 g_gr->images().get("pics/ls_dir.png"));
+				/** TRANSLATORS: Parent directory */
+				((boost::format("\\<%s\\>") % _("parent")).str(),
+				 m_parentdir.c_str(),
+				 g_gr->images().get("pics/ls_dir.png"));
 	}
 
 	const FilenameSet::const_iterator mapfiles_end = m_mapfiles.end();
@@ -220,13 +224,13 @@ void MainMenuLoadMap::fill_list() {
 	{
 		const char * const name = pname->c_str();
 		if
-			(strcmp(FileSystem::FS_Filename(name), ".")    &&
-			 strcmp(FileSystem::FS_Filename(name), "..")   &&
-			 g_fs->IsDirectory(name)                       &&
+			(strcmp(FileSystem::fs_filename(name), ".")    &&
+			 strcmp(FileSystem::fs_filename(name), "..")   &&
+			 g_fs->is_directory(name)                       &&
 			 !WidelandsMapLoader::is_widelands_map(name))
 
 		m_ls->add
-			(FileSystem::FS_Filename(name),
+			(FileSystem::fs_filename(name),
 			 name,
 			 g_gr->images().get("pics/ls_dir.png"));
 	}
@@ -244,7 +248,7 @@ void MainMenuLoadMap::fill_list() {
 			try {
 				map_loader->preload_map(true);
 				m_ls->add
-					(FileSystem::FS_Filename(name),
+					(FileSystem::filename_without_ext(name),
 					 name,
 					 g_gr->images().get
 						 (dynamic_cast<WidelandsMapLoader*>(map_loader.get())

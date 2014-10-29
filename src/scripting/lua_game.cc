@@ -291,7 +291,7 @@ int LuaPlayer::send_message(lua_State * L) {
 	uint32_t n = lua_gettop(L);
 	std::string title = luaL_checkstring(L, 2);
 	std::string body = luaL_checkstring(L, 3);
-	Coords c = Coords::Null();
+	Coords c = Coords::null();
 	Message::Status st = Message::New;
 	std::string sender = "ScriptingEngine";
 	bool popup = false;
@@ -382,7 +382,7 @@ int LuaPlayer::send_message(lua_State * L) {
 int LuaPlayer::message_box(lua_State * L) {
 	Game & game = get_game(L);
 	// don't show message boxes in replays, cause they crash the game
-	if (game.gameController()->getGameDescription() == "replay") {
+	if (game.game_controller()->get_game_type() == GameController::GameType::REPLAY) {
 		return 1;
 	}
 
@@ -417,8 +417,8 @@ int LuaPlayer::message_box(lua_State * L) {
 	std::string title = luaL_checkstring(L, 2);
 	std::string body =  luaL_checkstring(L, 3);
 
-	uint32_t cspeed = game.gameController()->desiredSpeed();
-	game.gameController()->setDesiredSpeed(0);
+	uint32_t cspeed = game.game_controller()->desired_speed();
+	game.game_controller()->set_desired_speed(0);
 
 	game.save_handler().set_allow_saving(false);
 
@@ -432,9 +432,9 @@ int LuaPlayer::message_box(lua_State * L) {
 
 	// Manually force the game to reevaluate it's current state,
 	// especially time information.
-	game.gameController()->think();
+	game.game_controller()->think();
 
-	game.gameController()->setDesiredSpeed(cspeed);
+	game.game_controller()->set_desired_speed(cspeed);
 
 	game.save_handler().set_allow_saving(true);
 
@@ -983,12 +983,12 @@ int LuaObjective::set_done(lua_State * L) {
 
 	if (o.done()) {
 		/** TRANSLATORS: File name for saving objective achieved */
-		/** TRANSLATORS: %1$s = map name. %2$s = achievement name */
-		std::string filename = (boost::format
-			(_("%1$s (achieved %2$s)"))
-			% get_egbase(L).get_map()->get_name()
-			% o.descname().c_str()
-		).str();
+		/** TRANSLATORS: %1% = map name. %2% = achievement name */
+		std::string filename = _("%1% (%2%)");
+		i18n::Textdomain td("maps");
+		filename = (boost::format(filename)
+						% _(get_egbase(L).get_map()->get_name())
+						% o.descname().c_str()).str();
 		get_game(L).save_handler().request_save(filename);
 	}
 	return 0;
@@ -1119,14 +1119,13 @@ int LuaMessage::get_sent(lua_State * L) {
 
 
 /* RST
->>>>>>> MERGE-SOURCE
 	.. attribute:: field
 
 		(RO) The field that corresponds to this Message.
 */
 int LuaMessage::get_field(lua_State * L) {
 	Coords c = get(L, get_game(L)).position();
-	if (c == Coords::Null())
+	if (c == Coords::null())
 		return 0;
 	return to_lua<LuaField>(L, new LuaField(c));
 }
@@ -1218,7 +1217,7 @@ static int L_report_result(lua_State * L) {
 	Widelands::PlayerEndResult result = static_cast<Widelands::PlayerEndResult>
 		(luaL_checknumber(L, 2));
 
-	get_game(L).gameController()->report_result
+	get_game(L).game_controller()->report_result
 		((*get_user_class<LuaPlayer>(L, 1))->get(L, get_game(L)).player_number(),
 		 result, info);
 	return 0;

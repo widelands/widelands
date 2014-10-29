@@ -253,15 +253,15 @@ void SoundHandler::load_fx_if_needed
 
 	// filename can be relative to dir.
 	const std::string full_path = dir + "/" + filename;
-	const std::string basename = FileSystem::FS_Filename(full_path.c_str());
-	const std::string dirname = FileSystem::FS_Dirname(full_path);
+	const std::string basename = FileSystem::fs_filename(full_path.c_str());
+	const std::string dirname = FileSystem::fs_dirname(full_path);
 	boost::regex re(basename + "_\\d+\\.ogg");
-	files = filter(g_fs->ListDirectory(dirname), [&re](const std::string& fn) {
-		return boost::regex_match(FileSystem::FS_Filename(fn.c_str()), re);
+	files = filter(g_fs->list_directory(dirname), [&re](const std::string& fn) {
+		return boost::regex_match(FileSystem::fs_filename(fn.c_str()), re);
 	});
 
 	for (i = files.begin(); i != files.end(); ++i) {
-		assert(!g_fs->IsDirectory(*i));
+		assert(!g_fs->is_directory(*i));
 		load_one_fx(i->c_str(), fx_name);
 	}
 }
@@ -282,14 +282,14 @@ void SoundHandler::load_one_fx
 	if (nosound_)
 		return;
 
-	if (!fr.TryOpen(*g_fs, path)) {
+	if (!fr.try_open(*g_fs, path)) {
 		log("WARNING: Could not open %s for reading!\n", path);
 		return;
 	}
 
 	if
 		(Mix_Chunk * const m =
-		 Mix_LoadWAV_RW(SDL_RWFromMem(fr.Data(fr.GetSize(), 0), fr.GetSize()), 1))
+		 Mix_LoadWAV_RW(SDL_RWFromMem(fr.data(fr.get_size(), 0), fr.get_size()), 1))
 	{
 		//make sure that requested FXset exists
 
@@ -519,13 +519,13 @@ void SoundHandler::register_song
 
 	FilenameSet files;
 
-	files = filter(g_fs->ListDirectory(dir), [&basename](const std::string& fn) {
-		const std::string only_filename = FileSystem::FS_Filename(fn.c_str());
+	files = filter(g_fs->list_directory(dir), [&basename](const std::string& fn) {
+		const std::string only_filename = FileSystem::fs_filename(fn.c_str());
 		return boost::starts_with(only_filename, basename) && boost::ends_with(only_filename, ".ogg");
 	});
 
 	for (const std::string& filename : files) {
-		assert(!g_fs->IsDirectory(filename));
+		assert(!g_fs->is_directory(filename));
 		if (songs_.count(basename) == 0) {
 			songs_[basename] = new Songset();
 		}

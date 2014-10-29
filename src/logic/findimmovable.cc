@@ -31,7 +31,7 @@ struct FindImmovableAlwaysTrueImpl {
 	bool accept(const BaseImmovable &) const {return true;}
 };
 
-const FindImmovable & FindImmovableAlwaysTrue()
+const FindImmovable & find_immovable_always_true()
 {
 	static FindImmovable alwaystrue = FindImmovableAlwaysTrueImpl();
 	return alwaystrue;

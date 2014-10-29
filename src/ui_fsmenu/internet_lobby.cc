@@ -147,7 +147,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	m_maxclients.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	maxclients  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	std::string server = s.get_string("servername", "");
-	servername  .setText (server);
+	servername  .set_text (server);
 	servername  .changed.connect
 		(boost::bind(&FullscreenMenuInternetLobby::change_servername, this));
 	servername  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
@@ -181,7 +181,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 
 	// try to connect to the metaserver
 	if (!InternetGaming::ref().error() && !InternetGaming::ref().logged_in())
-		connectToMetaserver();
+		connect_to_metaserver();
 }
 
 
@@ -194,23 +194,23 @@ void FullscreenMenuInternetLobby::think ()
 
 		// If we have no connection try to connect
 		if (!InternetGaming::ref().logged_in()) {
-			connectToMetaserver();
+			connect_to_metaserver();
 		}
 
 		// Check whether metaserver send some data
 		InternetGaming::ref().handle_metaserver_communication();
 	}
 
-	if (InternetGaming::ref().updateForClients())
-		fillClientList(InternetGaming::ref().clients());
+	if (InternetGaming::ref().update_for_clients())
+		fill_client_list(InternetGaming::ref().clients());
 
-	if (InternetGaming::ref().updateForGames())
-		fillGamesList(InternetGaming::ref().games());
+	if (InternetGaming::ref().update_for_games())
+		fill_games_list(InternetGaming::ref().games());
 }
 
 
 /// connects Widelands with the metaserver
-void FullscreenMenuInternetLobby::connectToMetaserver()
+void FullscreenMenuInternetLobby::connect_to_metaserver()
 {
 	Section & s = g_options.pull_section("global");
 	const std::string & metaserver = s.get_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
@@ -220,13 +220,13 @@ void FullscreenMenuInternetLobby::connectToMetaserver()
 	if (InternetGaming::ref().login(nickname, password, reg, metaserver, port))
 	{
 		// Update of server spinbox
-		maxclients.setInterval(1, InternetGaming::ref().max_clients());
+		maxclients.set_interval(1, InternetGaming::ref().max_clients());
 	}
 }
 
 
 /// fills the server list
-void FullscreenMenuInternetLobby::fillGamesList(const std::vector<InternetGame> & games)
+void FullscreenMenuInternetLobby::fill_games_list(const std::vector<InternetGame> & games)
 {
 	// List and button cleanup
 	opengames.clear();
@@ -249,7 +249,7 @@ void FullscreenMenuInternetLobby::fillGamesList(const std::vector<InternetGame> 
 		// than one server with the same name.
 		if (games.at(i).name == localservername)
 			hostgame.set_enabled(false);
-		opengames.add(games.at(i).name.c_str(), games.at(i), pic, false, games.at(i).build_id);
+		opengames.add(games.at(i).name, games.at(i), pic, false, games.at(i).build_id);
 	}
 }
 
@@ -279,7 +279,7 @@ bool FullscreenMenuInternetLobby::compare_clienttype(unsigned int rowa, unsigned
 }
 
 /// fills the client list
-void FullscreenMenuInternetLobby::fillClientList(const std::vector<InternetClient> & clients)
+void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetClient> & clients)
 {
 	clientsonline.clear();
 	for (uint32_t i = 0; i < clients.size(); ++i) {
@@ -407,7 +407,7 @@ void FullscreenMenuInternetLobby::clicked_joingame()
 						 "of the server.\n"));
 				UI::WLMessageBox mmb(this, warningheader, warning, UI::WLMessageBox::OK, UI::Align_Left);
 				mmb.run();
-				return InternetGaming::ref().setError();
+				return InternetGaming::ref().set_error();
 			}
 		}
 		std::string ip = InternetGaming::ref().ip();

@@ -19,6 +19,8 @@
 
 #include "logic/worker_program.h"
 
+#include <string>
+
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "logic/findnode.h"
@@ -47,7 +49,7 @@ const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
 	{"geologist",         &WorkerProgram::parse_geologist},
 	{"geologist-find",    &WorkerProgram::parse_geologist_find},
 	{"scout",             &WorkerProgram::parse_scout},
-	{"playFX",            &WorkerProgram::parse_playFX},
+	{"playFX",           &WorkerProgram::parse_play_fx},
 	{"construct",         &WorkerProgram::parse_construct},
 
 	{nullptr, nullptr}
@@ -65,10 +67,9 @@ void WorkerProgram::parse
 	for (uint32_t idx = 0;; ++idx) {
 		try
 		{
-			char buf[32];
-
-			snprintf(buf, sizeof(buf), "%i", idx);
-			char const * const string = program_s.get_string(buf, nullptr);
+			char const * const string = program_s.get_string(
+													 std::to_string(static_cast<unsigned int>(idx)).c_str(),
+													 nullptr);
 			if (!string)
 				break;
 
@@ -636,7 +637,7 @@ void WorkerProgram::parse_scout
 	act->function = &Worker::run_scout;
 }
 
-void WorkerProgram::parse_playFX
+void WorkerProgram::parse_play_fx
 	(WorkerDescr                   *,
 	 Worker::Action                 * act,
 	 Parser                         * parser,
@@ -649,7 +650,7 @@ void WorkerProgram::parse_playFX
 
 	g_sound_handler.load_fx_if_needed(parser->directory, cmd[1], act->sparam1);
 
-	act->function = &Worker::run_playFX;
+	act->function = &Worker::run_playfx;
 	act->iparam1 =
 		cmd.size() == 2 ?
 		64 : //  50% chance to play, only one instance at a time

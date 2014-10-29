@@ -31,16 +31,16 @@ namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 1
 
-void MapBobPacket::ReadBob(FileRead& fr,
+void MapBobPacket::read_bob(FileRead& fr,
                                   EditorGameBase& egbase,
 											 MapObjectLoader&,
                                   Coords const coords,
                                   const OneWorldLegacyLookupTable& lookup_table) {
-	const std::string owner = fr.CString();
-	char const* const read_name = fr.CString();
-	uint8_t subtype = fr.Unsigned8();
+	const std::string owner = fr.c_string();
+	char const* const read_name = fr.c_string();
+	uint8_t subtype = fr.unsigned_8();
 	constexpr uint8_t kLegacyCritterType = 0;
-	Serial const serial = fr.Unsigned32();
+	Serial const serial = fr.unsigned_32();
 
 	if (subtype != kLegacyCritterType || owner != "world") {
 		throw GameDataError("unknown legacy bob %s/%s", owner.c_str(), read_name);
@@ -67,23 +67,23 @@ void MapBobPacket::ReadBob(FileRead& fr,
 	}
 }
 
-void MapBobPacket::Read(FileSystem& fs,
+void MapBobPacket::read(FileSystem& fs,
                                EditorGameBase& egbase,
 										 MapObjectLoader& mol,
                                const OneWorldLegacyLookupTable& lookup_table) {
 	FileRead fr;
-	fr.Open(fs, "binary/bob");
+	fr.open(fs, "binary/bob");
 
 	Map& map = egbase.map();
 	map.recalc_whole_map(egbase.world());  //  for movecaps checks in ReadBob
 	try {
-		uint16_t const packet_version = fr.Unsigned16();
+		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == CURRENT_PACKET_VERSION)
 			for (uint16_t y = 0; y < map.get_height(); ++y) {
 				for (uint16_t x = 0; x < map.get_width(); ++x) {
-					uint32_t const nr_bobs = fr.Unsigned32();
+					uint32_t const nr_bobs = fr.unsigned_32();
 					for (uint32_t i = 0; i < nr_bobs; ++i)
-						ReadBob(fr, egbase, mol, Coords(x, y), lookup_table);
+						read_bob(fr, egbase, mol, Coords(x, y), lookup_table);
 				}
 			}
 		else

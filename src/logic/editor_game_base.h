@@ -182,7 +182,7 @@ public:
 
 	// next function is used to update the current gametime,
 	// for queue runs e.g.
-	int32_t& get_game_time_pointer() {
+	int32_t& get_gametime_pointer() {
 		return gametime_;
 	}
 	void set_ibase(InteractiveBase* const b) {

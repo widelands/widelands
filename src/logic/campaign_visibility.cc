@@ -34,11 +34,11 @@
 std::string CampaignVisibilitySave::get_path()
 {
 	std::string savepath = "save";
-	g_fs->EnsureDirectoryExists(savepath); // Make sure save directory exists
+	g_fs->ensure_directory_exists(savepath); // Make sure save directory exists
 	savepath += "/campvis"; // add the name of save-file
 
 	// check if campaigns visibility-save is available
-	if (!(g_fs->FileExists(savepath)))
+	if (!(g_fs->file_exists(savepath)))
 		make_campvis(savepath);
 
 	// check if campaigns visibility-save is up to date
@@ -49,7 +49,7 @@ std::string CampaignVisibilitySave::get_path()
 		update_campvis(savepath);
 	else {
 		Section & ca_s = ca.get_safe_section("global");
-		Profile cc("campaigns/cconfig");
+		Profile cc("campaigns/campaigns.conf");
 		Section & cc_s = cc.get_safe_section("global");
 		if (cc_s.get_int("version") > ca_s.get_int("version"))
 			update_campvis(savepath);
@@ -88,8 +88,8 @@ void CampaignVisibilitySave::update_campvis(const std::string & savepath)
 	std::string mapsection;
 	std::string cms;
 
-	// Prepare cconfig and campvis
-	Profile cconfig("campaigns/cconfig");
+	// Prepare campaigns.conf and campvis
+	Profile cconfig("campaigns/campaigns.conf");
 	Section & cconf_s = cconfig.get_safe_section("global");
 	Profile campvisr(savepath.c_str());
 	Profile campvisw(savepath.c_str());

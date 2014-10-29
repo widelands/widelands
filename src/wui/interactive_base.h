@@ -151,8 +151,8 @@ protected:
 private:
 	void roadb_add_overlay   ();
 	void roadb_remove_overlay();
-	void cmdMapObject(const std::vector<std::string> & args);
-	void cmdLua(const std::vector<std::string> & args);
+	void cmd_map_object(const std::vector<std::string> & args);
+	void cmd_lua(const std::vector<std::string> & args);
 	void update_speedlabel();
 
 	struct SelData {

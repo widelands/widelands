@@ -22,6 +22,7 @@
 #include <vector>
 
 #include <boost/bind.hpp>
+#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/macros.h"
@@ -436,7 +437,6 @@ void BuildingStatisticsMenu::update() {
 		}
 
 		//  add new Table Entry
-		char buffer[100];
 		te->set_picture
 			(Columns::Name, building.get_icon(), building.descname());
 
@@ -468,32 +468,35 @@ void BuildingStatisticsMenu::update() {
 			uint32_t const percent =
 				static_cast<uint32_t>
 					(static_cast<float>(total_prod) / static_cast<float>(nr_owned));
-			snprintf(buffer, sizeof(buffer), "%3u", percent);
+			te->set_string(Columns::Prod, (boost::format("%3u") % percent).str()); //  space-pad for sort
 			if (is_selected)  {
 				m_progbar.set_state(percent);
 				m_btn[PrevUnproductive]->set_enabled(true);
 				m_btn[NextUnproductive]->set_enabled(true);
 			}
 		} else {
-			snprintf(buffer, sizeof(buffer), " ");
+			te->set_string(Columns::Prod,  " ");
 			if (is_selected) {
 				m_btn[PrevUnproductive]->set_enabled(false);
 				m_btn[NextUnproductive]->set_enabled(false);
 			}
 		}
-		te->set_string(Columns::Prod, buffer);
 
-		//  number of this buildings
-		snprintf(buffer, sizeof(buffer), "%3u", nr_owned); //  space-pad for sort
-		te->set_string(Columns::Owned, buffer);
-		if (is_selected)
-			m_owned.set_text(buffer);
+		//  number of these buildings
+		const std::string owned_string =
+		   (boost::format("%3u") % nr_owned).str();  //  space-pad for sort
+		te->set_string(Columns::Owned, owned_string);
+		if (is_selected) {
+			m_owned.set_text(owned_string);
+		}
 
-		//  number of currently builds
-		snprintf(buffer, sizeof(buffer), "%3u", nr_build); //  space-pad for sort
-		te->set_string(Columns::Build, buffer);
-		if (is_selected)
-			m_in_build.set_text(buffer);
+		//  number of these buildings currently being built
+		const std::string build_string =
+		   (boost::format("%3u") % nr_build).str();  //  space-pad for sort
+		te->set_string(Columns::Build, build_string);
+		if (is_selected) {
+			m_in_build.set_text(build_string);
+		}
 	}
 
 	//  disable all buttons, if nothing to select

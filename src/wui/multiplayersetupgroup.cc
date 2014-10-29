@@ -19,6 +19,8 @@
 
 #include "wui/multiplayersetupgroup.h"
 
+#include <string>
+
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -91,17 +93,17 @@ struct MultiPlayerClientGroup : public UI::Box {
 				 ||
 				 s->settings().players.at(p).state == PlayerSettings::stateOpen)
 			{
-				s->setPlayerNumber(p);
+				s->set_player_number(p);
 				return;
 			}
 		}
-		s->setPlayerNumber(UserSettings::none());
+		s->set_player_number(UserSettings::none());
 	}
 
 	/// Care about visibility and current values
 	void refresh() {
 		UserSettings us = s->settings().users.at(m_id);
-		if (us.position == UserSettings::notConnected()) {
+		if (us.position == UserSettings::not_connected()) {
 			std::string free_i18n = _("free");
 			std::string free_text =
 				(boost::format("\\<%s\\>") % free_i18n).str();
@@ -113,24 +115,26 @@ struct MultiPlayerClientGroup : public UI::Box {
 		} else {
 			name->set_text(us.name);
 			if (m_save != us.position) {
-				char buf[42] = "pics/menu_tab_watch.png";
-				char buf2[128];
-				if (us.position < UserSettings::highestPlayernum()) {
-					snprintf
-						(buf, sizeof(buf),
-						 "pics/genstats_enable_plr_0%i.png", us.position + 1);
-					snprintf(buf2, sizeof(buf2), _("Player %i"), us.position + 1);
-				} else
-					snprintf(buf2, sizeof(buf2), _("Spectator"));
+				std::string pic;
+				std::string temp_tooltip;
+				if (us.position < UserSettings::highest_playernum()) {
+					pic = (boost::format("pics/genstats_enable_plr_0%u.png")
+							  % static_cast<unsigned int>(us.position + 1)).str();
+					temp_tooltip = (boost::format(_("Player %u"))
+										 % static_cast<unsigned int>(us.position + 1)).str();
+				} else {
+					pic = "pics/menu_tab_watch.png";
+					temp_tooltip = _("Spectator");
+				}
 
 				// Either Button if changeable OR text if not
 				if (m_id == s->settings().usernum) {
-					type->set_pic(g_gr->images().get(buf));
-					type->set_tooltip(buf2);
+					type->set_pic(g_gr->images().get(pic));
+					type->set_tooltip(temp_tooltip);
 					type->set_visible(true);
 				} else {
-					type_icon->setIcon(g_gr->images().get(buf));
-					type_icon->set_tooltip(buf2);
+					type_icon->set_icon(g_gr->images().get(pic));
+					type_icon->set_tooltip(temp_tooltip);
 					type_icon->set_visible(true);
 				}
 				m_save = us.position;
@@ -168,11 +172,11 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		 m_tribenames(tn)
 	{
 		set_size(w, h);
-		char buf[42];
-		snprintf
-			(buf, sizeof(buf), "pics/fsel_editor_set_player_0%i_pos.png", id + 1);
+
+		const std::string pic = (boost::format("pics/fsel_editor_set_player_0%i_pos.png")
+										 % static_cast<unsigned int>(id + 1)).str();
 		player =
-			new UI::Icon(this, 0, 0, h, h, g_gr->images().get(buf));
+			new UI::Icon(this, 0, 0, h, h, g_gr->images().get(pic));
 		add(player, UI::Box::AlignCenter);
 		type = new UI::Button
 			(this, "player_type",
@@ -251,10 +255,10 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		set_visible(true);
 
 		const PlayerSettings & player_setting = settings.players[m_id];
-		bool typeaccess       = s->canChangePlayerState(m_id);
-		bool tribeaccess      = s->canChangePlayerTribe(m_id);
-		bool const initaccess = s->canChangePlayerInit(m_id);
-		bool teamaccess       = s->canChangePlayerTeam(m_id);
+		bool typeaccess       = s->can_change_player_state(m_id);
+		bool tribeaccess      = s->can_change_player_tribe(m_id);
+		bool const initaccess = s->can_change_player_init(m_id);
+		bool teamaccess       = s->can_change_player_team(m_id);
 
 		type->set_enabled(typeaccess);
 		if (player_setting.state == PlayerSettings::stateClosed) {
@@ -283,12 +287,12 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			type ->set_tooltip(_("Shared in"));
 			type ->set_pic(g_gr->images().get("pics/shared_in.png"));
 
-			char pic[42], hover[128];
-			snprintf(pic, sizeof(pic), "pics/fsel_editor_set_player_0%i_pos.png", player_setting.shared_in);
-			snprintf(hover, sizeof(hover), _("Player %i"), player_setting.shared_in);
+			const std::string pic = (boost::format("pics/fsel_editor_set_player_0%u_pos.png")
+											 % static_cast<unsigned int>(player_setting.shared_in)).str();
 
 			tribe->set_pic(g_gr->images().get(pic));
-			tribe->set_tooltip(hover);
+			tribe->set_tooltip((boost::format(_("Player %u"))
+									  % static_cast<unsigned int>(player_setting.shared_in)).str());
 
 			team ->set_visible(false);
 			team ->set_enabled(false);
@@ -339,9 +343,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			tribe->set_flat(false);
 
 			if (player_setting.team) {
-				char buf[64];
-				snprintf(buf, sizeof(buf), "%i", player_setting.team);
-				team->set_title(buf);
+				team->set_title(std::to_string(static_cast<unsigned int>(player_setting.team)));
 			} else {
 				team->set_title("--");
 			}
@@ -503,6 +505,7 @@ void MultiPlayerSetupGroup::refresh()
 	}
 
 	// Update player groups
-	for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
+	for (uint32_t i = 0; i < MAX_PLAYERS; ++i) {
 		p.at(i)->refresh();
+	}
 }

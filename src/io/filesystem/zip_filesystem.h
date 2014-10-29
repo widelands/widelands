@@ -35,40 +35,40 @@ public:
 	explicit ZipFilesystem(const std::string &);
 	virtual ~ZipFilesystem();
 
-	bool IsWritable() const override;
+	bool is_writable() const override;
 
-	std::set<std::string> ListDirectory(const std::string& path) override;
+	std::set<std::string> list_directory(const std::string& path) override;
 
-	bool IsDirectory(const std::string & path) override;
-	bool FileExists (const std::string & path) override;
+	bool is_directory(const std::string & path) override;
+	bool file_exists (const std::string & path) override;
 
-	void * Load(const std::string & fname, size_t & length) override;
+	void * load(const std::string & fname, size_t & length) override;
 
-	virtual void Write
+	virtual void write
 		(const std::string & fname, void const * data, int32_t length) override;
-	void EnsureDirectoryExists(const std::string & dirname) override;
-	void   MakeDirectory      (const std::string & dirname) override;
+	void ensure_directory_exists(const std::string & fs_dirname) override;
+	void   make_directory      (const std::string & fs_dirname) override;
 
-	virtual StreamRead  * OpenStreamRead
+	virtual StreamRead  * open_stream_read
 		(const std::string & fname) override;
-	virtual StreamWrite * OpenStreamWrite
+	virtual StreamWrite * open_stream_write
 		(const std::string & fname) override;
 
-	FileSystem * MakeSubFileSystem(const std::string & dirname) override;
-	FileSystem * CreateSubFileSystem(const std::string & dirname, Type) override;
-	void Unlink(const std::string & filename) override;
-	void Rename(const std::string &, const std::string &) override;
+	FileSystem * make_sub_file_system(const std::string & fs_dirname) override;
+	FileSystem * create_sub_file_system(const std::string & fs_dirname, Type) override;
+	void fs_unlink(const std::string & fs_filename) override;
+	void fs_rename(const std::string &, const std::string &) override;
 
-	unsigned long long DiskSpace() override;
+	unsigned long long disk_space() override;
 
-	static FileSystem * CreateFromDirectory(const std::string & directory);
+	static FileSystem * create_from_directory(const std::string & directory);
 
-	std::string getBasename() override {return m_zipfilename;}
+	std::string get_basename() override {return m_zipfilename;}
 
 protected:
-	void m_OpenUnzip();
-	void m_OpenZip();
-	void m_Close();
+	void m_open_unzip();
+	void m_open_zip();
+	void m_close();
 	std::string strip_basename(std::string);
 
 	enum State {
@@ -90,8 +90,8 @@ protected:
 	struct ZipStreamRead : StreamRead {
 		explicit ZipStreamRead(zipFile file, ZipFilesystem* zipfs);
 		virtual ~ZipStreamRead();
-		size_t Data(void* data, size_t bufsize) override;
-		bool EndOfFile() const override;
+		size_t data(void* data, size_t bufsize) override;
+		bool end_of_file() const override;
 	private:
 		zipFile m_unzipfile;
 		ZipFilesystem* m_zipfs;
@@ -99,7 +99,7 @@ protected:
 	struct ZipStreamWrite : StreamWrite {
 		explicit ZipStreamWrite(zipFile file, ZipFilesystem* zipfs);
 		virtual ~ZipStreamWrite();
-		void Data(const void* const data, size_t size) override;
+		void data(const void* const data, size_t size) override;
 	private:
 		zipFile m_zipfile;
 		ZipFilesystem* m_zipfs;

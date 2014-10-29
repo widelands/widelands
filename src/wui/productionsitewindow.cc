@@ -19,6 +19,8 @@
 
 #include "wui/productionsitewindow.h"
 
+#include <boost/format.hpp>
+
 #include "economy/request.h"
 #include "graphic/graphic.h"
 #include "logic/constructionsite.h"
@@ -76,7 +78,7 @@ ProductionSiteWindow::ProductionSiteWindow
 		m_worker_table = new UI::Table<uintptr_t>(worker_box, 0, 0, 0, 100);
 		m_worker_caps = new UI::Box(worker_box, 0, 0, UI::Box::Horizontal);
 
-		m_worker_table->add_column(150, (ngettext
+		m_worker_table->add_column(210, (ngettext
 			("Worker", "Workers", productionsite().descr().nr_working_positions())
 		));
 		m_worker_table->add_column(60, _("Exp"));
@@ -173,21 +175,18 @@ void ProductionSiteWindow::update_worker_table()
 				assert(worker->descr().becomes() != Widelands::INVALID_INDEX);
 
 				// Fill upgrade status
-				char buffer[7];
-				snprintf
-					(buffer, sizeof(buffer),
-						"%i/%i",
-						worker->get_current_experience(),
-						worker->descr().get_needed_experience());
-
-				er.set_string(1, buffer);
+				/** TRANSLATORS: %1% = the experience a worker has */
+				/** TRANSLATORS: %2% = the experience a worker needs to reach the next level */
+				er.set_string(1, (boost::format(_("%1%/%2%"))
+										% worker->get_current_experience()
+										% worker->descr().get_needed_experience()).str());
 				er.set_string
 					(2, worker->descr().tribe().get_worker_descr
 						(worker->descr().becomes())->descname());
 			} else {
 				// Worker is not upgradeable
-				er.set_string(1, "---");
-				er.set_string(2, "---");
+				er.set_string(1, "—");
+				er.set_string(2, "—");
 			}
 		} else if (request) {
 			const Widelands::WorkerDescr * desc =

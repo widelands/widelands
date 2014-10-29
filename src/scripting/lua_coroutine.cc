@@ -136,22 +136,22 @@ uint32_t LuaCoroutine::pop_uint32() {
 
 #define COROUTINE_DATA_PACKET_VERSION 3
 void LuaCoroutine::write(FileWrite& fw) {
-	fw.Unsigned8(COROUTINE_DATA_PACKET_VERSION);
+	fw.unsigned_8(COROUTINE_DATA_PACKET_VERSION);
 
-	fw.Unsigned32(m_ninput_args);
-	fw.Unsigned32(m_nreturn_values);
-	fw.Unsigned32(m_idx);
+	fw.unsigned_32(m_ninput_args);
+	fw.unsigned_32(m_nreturn_values);
+	fw.unsigned_32(m_idx);
 }
 
 void LuaCoroutine::read(lua_State* parent, FileRead& fr) {
-	uint8_t version = fr.Unsigned8();
+	uint8_t version = fr.unsigned_8();
 
 	if (version != COROUTINE_DATA_PACKET_VERSION)
 		throw wexception("Unhandled data packet version: %i\n", version);
 
-	m_ninput_args = fr.Unsigned32();
-	m_nreturn_values = fr.Unsigned32();
-	m_idx = fr.Unsigned32();
+	m_ninput_args = fr.unsigned_32();
+	m_nreturn_values = fr.unsigned_32();
+	m_idx = fr.unsigned_32();
 
 	lua_getglobal(parent, kReferenceTableName);
 	lua_rawgeti(parent, -1, m_idx);

@@ -87,15 +87,15 @@ m_value(this, "199", UI::Align_Center)
 void SoldierCapacityControl::think()
 {
 	SoldierControl * soldiers = dynamic_cast<SoldierControl *>(&m_building);
-	uint32_t const capacity = soldiers->soldierCapacity();
+	uint32_t const capacity = soldiers->soldier_capacity();
 	char buffer[sizeof("4294967295")];
 
 	sprintf(buffer, "%2u", capacity);
 	m_value.set_text(buffer);
 
 	bool const can_act = m_igb.can_act(m_building.owner().player_number());
-	m_decrease.set_enabled(can_act && soldiers->minSoldierCapacity() < capacity);
-	m_increase.set_enabled(can_act && soldiers->maxSoldierCapacity() > capacity);
+	m_decrease.set_enabled(can_act && soldiers->min_soldier_capacity() < capacity);
+	m_increase.set_enabled(can_act && soldiers->max_soldier_capacity() > capacity);
 }
 
 void SoldierCapacityControl::change_soldier_capacity(int delta)

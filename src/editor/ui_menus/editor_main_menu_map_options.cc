@@ -20,6 +20,9 @@
 #include "editor/ui_menus/editor_main_menu_map_options.h"
 
 #include <cstdio>
+#include <string>
+
+#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
@@ -44,7 +47,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent)
 	:
 	UI::Window
 		(&parent, "map_options",
-		 250, (parent.get_h() - 300) / 2, 200, 305,
+		 250, (parent.get_h() - 300) / 2, 305, 305,
 		 _("Map Options"))
 {
 
@@ -72,7 +75,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent)
 	m_nrplayers =
 		new UI::Textarea(this, posx + ta->get_w() + spacing, posy - 2, "1");
 	posy += height + spacing;
-	ta = new UI::Textarea(this, posx, posy - 2, _("Author:"));
+	ta = new UI::Textarea(this, posx, posy - 2, _("Authors:"));
 	m_author =
 		new UI::EditBox
 			(this,
@@ -113,13 +116,12 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent)
 void MainMenuMapOptions::update() {
 	const Widelands::Map & map = eia().egbase().map();
 
-	char buf[200];
-	sprintf(buf, "%ix%i", map.get_width(), map.get_height());
-	m_size->set_text(buf);
-	m_author->setText(map.get_author());
-	m_name  ->setText(map.get_name());
-	sprintf(buf, "%i", map.get_nrplayers());
-	m_nrplayers->set_text(buf);
+	m_size     ->set_text((boost::format(_("%1$ix%2$i"))
+								  % map.get_width()
+								  % map.get_height()).str());
+	m_author->set_text(map.get_author());
+	m_name  ->set_text(map.get_name());
+	m_nrplayers->set_text(std::to_string(static_cast<unsigned int>(map.get_nrplayers())));
 	m_descr ->set_text(map.get_description());
 }
 
@@ -129,9 +131,9 @@ void MainMenuMapOptions::update() {
 */
 void MainMenuMapOptions::changed(int32_t const id) {
 	if        (id == 0) {
-		eia().egbase().map().set_name(m_name->text().c_str());
+		eia().egbase().map().set_name(m_name->text());
 	} else if (id == 1) {
-		eia().egbase().map().set_author(m_author->text().c_str());
+		eia().egbase().map().set_author(m_author->text());
 		g_options.pull_section("global").set_string
 			("realname", m_author->text());
 	}
@@ -142,5 +144,5 @@ void MainMenuMapOptions::changed(int32_t const id) {
  * Called when the editbox has changed
  */
 void MainMenuMapOptions::editbox_changed() {
-	eia().egbase().map().set_description(m_descr->get_text().c_str());
+	eia().egbase().map().set_description(m_descr->get_text());
 }

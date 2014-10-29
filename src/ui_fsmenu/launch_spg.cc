@@ -48,7 +48,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG
 	(GameSettingsProvider * const settings, GameController * const ctrl,
 	 bool /* autolaunch */)
 	:
-	FullscreenMenuBase("launchgamemenu.jpg"),
+	FullscreenMenuBase("ui_fsmenu.jpg"),
 
 // Values for alignment and size
 	m_butw (get_w() / 4),
@@ -129,7 +129,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG
 
 	m_lua = new LuaInterface();
 	std::set<std::string> win_conditions =
-	   filter(g_fs->ListDirectory("scripting/win_conditions"),
+	   filter(g_fs->list_directory("scripting/win_conditions"),
 	          [](const std::string& fn) {return boost::ends_with(fn, ".lua");});
 
 	m_win_condition_scripts.insert(
@@ -212,7 +212,7 @@ void FullscreenMenuLaunchSPG::back_clicked()
 	//  user it seems as if the launchgame-menu is a child of mapselect and
 	//  not the other way around - just end_modal(0); will be seen as bug
 	//  from user point of view, so we reopen the mapselect-menu.
-	m_settings->setMap(std::string(), std::string(), 0);
+	m_settings->set_map(std::string(), std::string(), 0);
 	select_map();
 	if (m_settings->settings().mapname.empty())
 		return end_modal(0);
@@ -224,10 +224,10 @@ void FullscreenMenuLaunchSPG::back_clicked()
  */
 void FullscreenMenuLaunchSPG::win_condition_clicked()
 {
-	if (m_settings->canChangeMap()) {
+	if (m_settings->can_change_map()) {
 		m_cur_wincondition++;
 		m_cur_wincondition %= m_win_condition_scripts.size();
-		m_settings->setWinConditionScript(m_win_condition_scripts[m_cur_wincondition]);
+		m_settings->set_win_condition_script(m_win_condition_scripts[m_cur_wincondition]);
 	}
 
 	win_condition_update();
@@ -244,7 +244,7 @@ void FullscreenMenuLaunchSPG::win_condition_update() {
 	} else {
 		try {
 			std::unique_ptr<LuaTable> t =
-			   m_lua->run_script(m_settings->getWinConditionScript());
+			   m_lua->run_script(m_settings->get_win_condition_script());
 			t->do_not_warn_about_unaccessed_keys();
 			const std::string name = t->get_string("name");
 			const std::string descr = t->get_string("description");
@@ -262,7 +262,7 @@ void FullscreenMenuLaunchSPG::win_condition_update() {
  */
 void FullscreenMenuLaunchSPG::start_clicked()
 {
-	if (!g_fs->FileExists(m_filename))
+	if (!g_fs->file_exists(m_filename))
 		throw WLWarning
 			(_("File not found"),
 			 _
@@ -274,7 +274,7 @@ void FullscreenMenuLaunchSPG::start_clicked()
 			 	 "from the host to you, but perhaps the transfer was not yet "
 			 	 "finished!?!"),
 			 m_filename.c_str());
-	if (m_settings->canLaunch()) {
+	if (m_settings->can_launch()) {
 		end_modal(1 + m_is_scenario);
 	}
 }
@@ -297,12 +297,12 @@ void FullscreenMenuLaunchSPG::refresh()
 	m_filename = settings.mapfilename;
 	m_nr_players = settings.players.size();
 
-	m_ok.set_enabled(m_settings->canLaunch());
+	m_ok.set_enabled(m_settings->can_launch());
 
-	m_select_map.set_visible(m_settings->canChangeMap());
-	m_select_map.set_enabled(m_settings->canChangeMap());
+	m_select_map.set_visible(m_settings->can_change_map());
+	m_select_map.set_enabled(m_settings->can_change_map());
 	m_wincondition.set_enabled
-		(m_settings->canChangeMap() && !settings.scenario);
+		(m_settings->can_change_map() && !settings.scenario);
 
 	if (settings.scenario)
 		set_scenario_values();
@@ -334,7 +334,7 @@ void FullscreenMenuLaunchSPG::refresh()
  */
 void FullscreenMenuLaunchSPG::select_map()
 {
-	if (!m_settings->canChangeMap())
+	if (!m_settings->can_change_map())
 		return;
 
 	FullscreenMenuMapSelect msm(m_settings, nullptr);
@@ -342,18 +342,18 @@ void FullscreenMenuLaunchSPG::select_map()
 
 	if (code <= 0) {
 		// Set scenario = false, else the menu might crash when back is pressed.
-		m_settings->setScenario(false);
+		m_settings->set_scenario(false);
 		return;  // back was pressed
 	}
 
 	m_is_scenario = code == 2;
-	m_settings->setScenario(m_is_scenario);
+	m_settings->set_scenario(m_is_scenario);
 
 	const MapData & mapdata = *msm.get_map();
 	m_nr_players = mapdata.nrplayers;
 
 	safe_place_for_host(m_nr_players);
-	m_settings->setMap(mapdata.name, mapdata.filename, m_nr_players);
+	m_settings->set_map(mapdata.name, mapdata.filename, m_nr_players);
 }
 
 
@@ -370,12 +370,12 @@ void FullscreenMenuLaunchSPG::set_scenario_values()
 	Widelands::Map map; //  MapLoader needs a place to put its preload data
 	std::unique_ptr<Widelands::MapLoader> map_loader(
 	   map.get_correct_loader(m_settings->settings().mapfilename));
-	map.set_filename(m_settings->settings().mapfilename.c_str());
+	map.set_filename(m_settings->settings().mapfilename);
 	map_loader->preload_map(true);
 	Widelands::PlayerNumber const nrplayers = map.get_nrplayers();
 	for (uint8_t i = 0; i < nrplayers; ++i) {
-		m_settings->setPlayerName (i, map.get_scenario_player_name (i + 1));
-		m_settings->setPlayerTribe(i, map.get_scenario_player_tribe(i + 1));
+		m_settings->set_player_name (i, map.get_scenario_player_name (i + 1));
+		m_settings->set_player_tribe(i, map.get_scenario_player_tribe(i + 1));
 	}
 }
 
@@ -384,7 +384,7 @@ void FullscreenMenuLaunchSPG::set_scenario_values()
  */
 void FullscreenMenuLaunchSPG::switch_to_position(uint8_t const pos)
 {
-	m_settings->setPlayerNumber(pos);
+	m_settings->set_player_number(pos);
 }
 
 
@@ -414,7 +414,7 @@ void FullscreenMenuLaunchSPG::safe_place_for_host
 	}
 
 	// Kick player 1 and take the position
-	m_settings->setPlayerState(0, PlayerSettings::stateClosed);
-	m_settings->setPlayerState(0, PlayerSettings::stateOpen);
+	m_settings->set_player_state(0, PlayerSettings::stateClosed);
+	m_settings->set_player_state(0, PlayerSettings::stateOpen);
 	switch_to_position(0);
 }

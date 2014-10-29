@@ -173,7 +173,7 @@ NonPackedAnimation::NonPackedAnimation(const string& directory, Section& section
 	if (fps > 0)
 		frametime_ = 1000 / fps;
 
-	hotspot_ = section.get_Point("hotspot");
+	hotspot_ = section.get_point("hotspot");
 
 	//  In the filename template, the last sequence of '?' characters (if any)
 	//  is replaced with a number, for example the template "idle_??" is
@@ -193,12 +193,12 @@ NonPackedAnimation::NonPackedAnimation(const string& directory, Section& section
 	string filename_wo_ext;
 	while (glob.next(&filename_wo_ext)) {
 		const string filename = filename_wo_ext + ".png";
-		if (!g_fs->FileExists(filename))
+		if (!g_fs->file_exists(filename))
 			break;
 		image_files_.push_back(filename);
 
 		const string pc_filename = filename_wo_ext + "_pc.png";
-		if (g_fs->FileExists(pc_filename)) {
+		if (g_fs->file_exists(pc_filename)) {
 			hasplrclrs_ = true;
 			pc_mask_image_files_.push_back(pc_filename);
 		}

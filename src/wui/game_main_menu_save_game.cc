@@ -34,8 +34,6 @@
 #include "profile/profile.h"
 #include "wui/interactive_gamebase.h"
 
-using boost::format;
-
 InteractiveGameBase & GameMainMenuSaveGame::igbase() {
 	return ref_cast<InteractiveGameBase, UI::Panel>(*get_parent());
 }
@@ -134,8 +132,6 @@ GameMainMenuSaveGame::GameMainMenuSaveGame
 		m_gametime.set_text(gametimestring(gametime));
 
 		int player_nr = parent.game().player_manager()->get_number_of_players();
-		// TODO(GunChleoc): This should be ngettext(" %i player" etc. with boost::format, but it refuses to work
-		/** TRANSLATORS: This is preceded by a number */
 		m_players_label.set_text(
 		   (boost::format(ngettext("%i player", "%i players", player_nr)) % player_nr).str());
 		m_win_condition.set_text(parent.game().get_win_condition_displayname());
@@ -155,9 +151,8 @@ void GameMainMenuSaveGame::selected(uint32_t) {
 	Widelands::GameLoader gl(name, igbase().game());
 	Widelands::GamePreloadPacket gpdp;
 	gl.preload_game(gpdp); //  This has worked before, no problem
-
 	{
-		m_editbox->setText(FileSystem::FS_FilenameWoExt(name.c_str()));
+		m_editbox->set_text(FileSystem::filename_without_ext(name.c_str()));
 	}
 	m_button_ok->set_enabled(true);
 
@@ -171,14 +166,10 @@ void GameMainMenuSaveGame::selected(uint32_t) {
 	m_gametime.set_text(gametimestring(gametime));
 
 	if (gpdp.get_number_of_players() > 0) {
-		char buf[200];
-		sprintf
-			(buf, "%i %s", gpdp.get_number_of_players(),
-			// TODO(GunChleoc): This should be ngettext(" %i player" etc.
-			// with boost::format, but it refuses to work
-			/** TRANSLATORS: This is preceded by a number */
-			ngettext("player", "players", gpdp.get_number_of_players()));
-			m_players_label.set_text(buf);
+		const std::string text =
+				(boost::format(ngettext("%u Player", "%u Players", gpdp.get_number_of_players()))
+				 % static_cast<unsigned int>(gpdp.get_number_of_players())).str();
+		m_players_label.set_text(text);
 	} else {
 		// Keep label empty
 		m_players_label.set_text("");
@@ -201,7 +192,7 @@ void GameMainMenuSaveGame::fill_list() {
 	FilenameSet gamefiles;
 
 	//  Fill it with all files we find.
-	gamefiles = g_fs->ListDirectory(m_curdir);
+	gamefiles = g_fs->list_directory(m_curdir);
 
 	Widelands::GamePreloadPacket gpdp;
 
@@ -215,7 +206,7 @@ void GameMainMenuSaveGame::fill_list() {
 		try {
 			Widelands::GameLoader gl(name, igbase().game());
 			gl.preload_game(gpdp);
-			m_ls.add(FileSystem::FS_FilenameWoExt(name).c_str(), name);
+			m_ls.add(FileSystem::filename_without_ext(name), name);
 		} catch (const WException &) {} //  we simply skip illegal entries
 	}
 }
@@ -265,7 +256,7 @@ struct SaveWarnMessageBox : public UI::WLMessageBox {
 			(&parent,
 			 _("Save Game Error!"),
 			(boost::format(_("A file with the name ‘%s’ already exists. Overwrite?"))
-				% FileSystem::FS_Filename(filename.c_str())).str(),
+				% FileSystem::fs_filename(filename.c_str())).str(),
 			 YESNO),
 		m_filename(filename)
 	{}
@@ -275,14 +266,14 @@ struct SaveWarnMessageBox : public UI::WLMessageBox {
 	}
 
 
-	void pressedYes() override
+	void pressed_yes() override
 	{
-		g_fs->Unlink(m_filename);
+		g_fs->fs_unlink(m_filename);
 		dosave(menu_save_game().igbase(), m_filename);
 		menu_save_game().die();
 	}
 
-	void pressedNo() override
+	void pressed_no() override
 	{
 		die();
 	}
@@ -304,7 +295,7 @@ void GameMainMenuSaveGame::ok()
 			(m_curdir, m_editbox->text());
 
 	//  Check if file exists. If it does, show a warning.
-	if (g_fs->FileExists(complete_filename)) {
+	if (g_fs->file_exists(complete_filename)) {
 		new SaveWarnMessageBox(*this, complete_filename);
 	} else {
 		dosave(igbase(), complete_filename);
@@ -328,20 +319,20 @@ struct DeletionMessageBox : public UI::WLMessageBox {
 			(&parent,
 			 _("File deletion"),
 			 str
-				 (format(_("Do you really want to delete the file %s?")) %
-				  FileSystem::FS_Filename(filename.c_str())),
+				 (boost::format(_("Do you really want to delete the file %s?")) %
+				  FileSystem::fs_filename(filename.c_str())),
 			 YESNO),
 		m_filename(filename)
 	{}
 
-	void pressedYes() override
+	void pressed_yes() override
 	{
-		g_fs->Unlink(m_filename);
+		g_fs->fs_unlink(m_filename);
 		ref_cast<GameMainMenuSaveGame, UI::Panel>(*get_parent()).fill_list();
 		die();
 	}
 
-	void pressedNo() override
+	void pressed_no() override
 	{
 		die();
 	}
@@ -361,7 +352,7 @@ void GameMainMenuSaveGame::delete_clicked()
 			(m_curdir, m_editbox->text());
 
 	//  Check if file exists. If it does, let the user confirm the deletion.
-	if (g_fs->FileExists(complete_filename))
+	if (g_fs->file_exists(complete_filename))
 		new DeletionMessageBox(*this, complete_filename);
 }
 
@@ -370,5 +361,5 @@ void GameMainMenuSaveGame::pause_game(bool paused)
 	if (igbase().is_multiplayer()) {
 		return;
 	}
-	igbase().game().gameController()->setPaused(paused);
+	igbase().game().game_controller()->set_paused(paused);
 }

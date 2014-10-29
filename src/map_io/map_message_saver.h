@@ -46,7 +46,7 @@ struct MapMessageSaver : private std::map<MessageId, MessageId> {
 		insert(std::pair<MessageId, MessageId>(id, ++counter));
 	}
 	MessageId operator[](MessageId const id) const {
-		return find(id) != end() ? find(id)->second : MessageId::Null();
+		return find(id) != end() ? find(id)->second : MessageId::null();
 	}
 private:
 	MessageId counter;

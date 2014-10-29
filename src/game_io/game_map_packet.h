@@ -36,11 +36,11 @@ struct GameMapPacket : public GameDataPacket {
 
 
 	/// Ensures that the world gets loaded but does not much more.
-	void Read (FileSystem &, Game &, MapObjectLoader * = nullptr) override;
+	void read (FileSystem &, Game &, MapObjectLoader * = nullptr) override;
 
-	void Read_Complete(Game &); ///  Loads the rest of the map.
+	void read_complete(Game &); ///  Loads the rest of the map.
 
-	void Write(FileSystem &, Game &, MapObjectSaver  * = nullptr) override;
+	void write(FileSystem &, Game &, MapObjectSaver  * = nullptr) override;
 
 	MapObjectSaver  * get_map_object_saver () {return m_mos;}
 	MapObjectLoader * get_map_object_loader() {return m_mol;}

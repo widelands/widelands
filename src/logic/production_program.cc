@@ -54,8 +54,6 @@ namespace Widelands {
 
 namespace {
 
-// For formation of better translateable texts
-using boost::format;
 
 /**
  * Convert std::string to any sstream-compatible type
@@ -242,18 +240,18 @@ bool ProductionProgram::ActReturn::Negation::evaluate
 	return !operand->evaluate(ps);
 }
 
-// Just a dummy to satisfy the superclass interface. Do not use.
+// Just a dummy to satisfy the superclass interface. Returns an empty string.
 std::string ProductionProgram::ActReturn::Negation::description
 	(const TribeDescr &) const
 {
-	throw wexception("Not implemented.");
+	return "";
 }
 
-// Just a dummy to satisfy the superclass interface. Do not use.
+// Just a dummy to satisfy the superclass interface. Returns an empty string.
 std::string ProductionProgram::ActReturn::Negation::description_negation
 	(const TribeDescr &) const
 {
-	throw wexception("Not implemented.");
+	return "";
 }
 
 
@@ -268,15 +266,17 @@ std::string ProductionProgram::ActReturn::EconomyNeedsWare::description
 	// TODO(GunChleoc): We can make this more elegant if we add another definition to the conf files,
 	// so for "Log"; we will also have "logs" (numberless plural)
 	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the ware ‘%s’*/
-	return (boost::format(_("the economy needs the ware ‘%s’"))
+	std::string result =  (boost::format(_("the economy needs the ware ‘%s’"))
 			  % tribe.get_ware_descr(ware_type)->descname()).str();
+	return result;
 }
 std::string ProductionProgram::ActReturn::EconomyNeedsWare::description_negation
 	(const TribeDescr & tribe) const
 {
 	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy doesn’t need the ware ‘%s’*/
-	return (boost::format(_("the economy doesn’t need the ware ‘%s’"))
+	std::string result = (boost::format(_("the economy doesn’t need the ware ‘%s’"))
 			  % tribe.get_ware_descr(ware_type)->descname()).str();
+	return result;
 }
 
 bool ProductionProgram::ActReturn::EconomyNeedsWorker::evaluate
@@ -288,8 +288,9 @@ std::string ProductionProgram::ActReturn::EconomyNeedsWorker::description
 	(const TribeDescr & tribe) const
 {
 	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the worker ‘%s’*/
-	return (boost::format(_("the economy needs the worker ‘%s’"))
+	std::string result = (boost::format(_("the economy needs the worker ‘%s’"))
 			  % tribe.get_worker_descr(worker_type)->descname()).str();
+	return result;
 }
 
 std::string ProductionProgram::ActReturn::EconomyNeedsWorker::description_negation
@@ -297,8 +298,9 @@ std::string ProductionProgram::ActReturn::EconomyNeedsWorker::description_negati
 {
 	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ...*/
 	/** TRANSLATORS:      ... because the economy doesn’t need the worker ‘%s’*/
-	return (boost::format(_("the economy doesn’t need the worker ‘%s’"))
+	std::string result = (boost::format(_("the economy doesn’t need the worker ‘%s’"))
 			  % tribe.get_worker_descr(worker_type)->descname()).str();
+	return result;
 }
 
 
@@ -950,23 +952,24 @@ void ProductionProgram::ActConsume::execute
 			group_list.push_back(ware_string);
 		}
 
+		const std::string is_missing_string =
+				/** TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing' */
+				/** TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta bread is missing' */
+				(boost::format(ngettext("%s is missing", "%s are missing", nr_missing_groups))
+				 % i18n::localize_item_list(group_list, i18n::ConcatenateWith::AND))
+				 .str();
+
 		std::string result_string =
 			/** TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing' */
 			/** TRANSLATORS: For this example, this is what's in the place holders: */
-			/** TRANSLATORS:    %1$s = "work" */
-			/** TRANSLATORS:    %2$s = "water and wheat (2) " */
-			/** TRANSLATORS:    %3$s = "are missing" */
-			(boost::format(_("Did not start %1$s because %2$s %3$s"))
-			 % ps.top_state().program->descname()
-			 % i18n::localize_item_list(group_list, i18n::ConcatenateWith::AND)
-			/** TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing' */
-			/** TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta bread is missing' */
-			 /** TRANSLATORS: */
+			/** TRANSLATORS:    %1$s = "working" */
+			/** TRANSLATORS:    %2$s = "3x water and 3x wheat are missing" */
 			/** TRANSLATORS: This appears in the hover text on buildings. Please test these in context*/
 			/** TRANSLATORS: on a development build if you can, and let us know if there are any issues */
 			/** TRANSLATORS: we need to address for your language. */
-			 % ngettext(" is missing", " are missing", nr_missing_groups))
-			 .str();
+			(boost::format(_("Did not start %1$s because %2$s"))
+			 % ps.top_state().program->descname()
+			 % is_missing_string).str();
 
 		ps.set_production_result(result_string);
 		return ps.program_end(game, Failed);
@@ -1067,9 +1070,9 @@ void ProductionProgram::ActProduce::execute
 	}
 	std::string ware_list = i18n::localize_item_list(ware_descnames, i18n::ConcatenateWith::AND);
 
-	// Keep translateability in mind!
 	/** TRANSLATORS: %s is a list of wares */
-	ps.set_production_result(str(format(_("Produced %s")) % ware_list));
+	const std::string result_string = (boost::format(_("Produced %s")) % ware_list).str();
+	ps.set_production_result(result_string);
 }
 
 bool ProductionProgram::ActProduce::get_building_work
@@ -1163,7 +1166,8 @@ void ProductionProgram::ActRecruit::execute
 	std::string unit_string = i18n::localize_item_list(worker_descnames, i18n::ConcatenateWith::AND);
 
 	/** TRANSLATORS: %s is a list of workers */
-	ps.set_production_result((boost::format(_("Recruited %s")) % unit_string).str());
+	const std::string result_string = (boost::format(_("Recruited %s")) % unit_string).str();
+	ps.set_production_result(result_string);
 }
 
 bool ProductionProgram::ActRecruit::get_building_work
@@ -1384,7 +1388,7 @@ void ProductionProgram::ActCheckSoldier::execute
 	(Game & game, ProductionSite & ps) const
 {
 	SoldierControl & ctrl = dynamic_cast<SoldierControl &>(ps);
-	const std::vector<Soldier *> soldiers = ctrl.presentSoldiers();
+	const std::vector<Soldier *> soldiers = ctrl.present_soldiers();
 	if (soldiers.empty()) {
 		ps.set_production_result(_("No soldier to train!"));
 		return ps.program_end(game, Skipped);
@@ -1414,7 +1418,7 @@ void ProductionProgram::ActCheckSoldier::execute
 	ps.molog("    okay\n"); // okay, do nothing
 
 	upcast(TrainingSite, ts, &ps);
-	ts->trainingAttempted(attribute, level);
+	ts->training_attempted(attribute, level);
 
 	ps.molog("  Check done!\n");
 
@@ -1468,7 +1472,7 @@ void ProductionProgram::ActTrain::execute
 	(Game & game, ProductionSite & ps) const
 {
 	SoldierControl & ctrl = dynamic_cast<SoldierControl &>(ps);
-	const std::vector<Soldier *> soldiers = ctrl.presentSoldiers();
+	const std::vector<Soldier *> soldiers = ctrl.present_soldiers();
 	const std::vector<Soldier *>::const_iterator soldiers_end =
 		soldiers.end();
 	std::vector<Soldier *>::const_iterator it = soldiers.begin();
@@ -1515,7 +1519,7 @@ void ProductionProgram::ActTrain::execute
 		ps.molog("  Training done!\n");
 
 	upcast(TrainingSite, ts, &ps);
-	ts->trainingSuccessful(attribute, level);
+	ts->training_successful(attribute, level);
 
 
 	return ps.program_step(game);

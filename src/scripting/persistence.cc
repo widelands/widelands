@@ -41,10 +41,10 @@ struct LuaReaderHelper {
 	size_t data_len;
 };
 
-int LuaWriter(lua_State* /* L */, const void* data, size_t len, void* userdata) {
+int LuaWriter(lua_State* /* L */, const void* write_data, size_t len, void* userdata) {
 	FileWrite* fw = static_cast<FileWrite*>(userdata);
 
-	fw->Data(data, len, FileWrite::Pos::Null());
+	fw->data(write_data, len, FileWrite::Pos::null());
 	return 0;
 }
 
@@ -204,13 +204,13 @@ uint32_t persist_object
 
 	// The next few lines make eris error messages much more useful, but make
 	// eris much slower too. Only enable if you need more debug informations.
-	// lua_pushboolean(L, true);
-	// eris_set_setting(L, "path", lua_gettop(L));
-	// lua_pop(L, 1);
+	lua_pushboolean(L, true);
+	eris_set_setting(L, "path", lua_gettop(L));
+	lua_pop(L, 1);
 
-	size_t cpos = fw.GetPos();
+	size_t cpos = fw.get_pos();
 	eris_dump(L, &LuaWriter, &fw);
-	uint32_t nwritten = fw.GetPos() - cpos;
+	uint32_t nwritten = fw.get_pos() - cpos;
 
 	lua_pop(L, 2); // pop the object and the table
 
@@ -251,7 +251,7 @@ void unpersist_object
 	LuaReaderHelper helper;
 	helper.data_len = size;
 	helper.data.reset(new char[size]);
-	fr.Data(helper.data.get(), size);
+	fr.data(helper.data.get(), size);
 
 	eris_undump(L, &LuaReader, &helper);
 

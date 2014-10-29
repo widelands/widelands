@@ -95,7 +95,7 @@ CheckStep
 Predicates used in path finding and find functions.
 */
 struct FindImmovable;
-const FindImmovable & FindImmovableAlwaysTrue();
+const FindImmovable & find_immovable_always_true();
 
 struct FindBob {
 	//  Return true if this bob should be returned by find_bobs.
@@ -142,6 +142,9 @@ public:
 
 	using PortSpacesSet = std::set<Coords, Coords::OrderingFunctor>;
 	using Objectives = std::map<std::string, std::unique_ptr<Objective>>;
+	using SuggestedTeam = std::vector<uint16_t>;             // Players in a team
+	using SuggestedTeamLineup = std::vector<SuggestedTeam>; // Recommended teams to play against each other
+
 
 	enum { // flags for findpath()
 
@@ -174,9 +177,9 @@ public:
 	   (const World& world,
 	    uint32_t w = 64,
 	    uint32_t h = 64,
-	    char const* name = _("No Name"),
-	    char const* author = _("Unknown"),
-	    char const* description = _("no description defined"));
+		 const std::string& name = _("No Name"),
+		 const std::string& author = _("Unknown"),
+		 const std::string& description = _("No description defined"));
 
 	void recalc_whole_map(const World& world);
 	virtual void recalc_for_field_area(const World& world, Area<FCoords>);
@@ -190,13 +193,13 @@ public:
 		return m_starting_pos[p - 1];
 	}
 
-	void set_filename   (char const *);
-	void set_author     (char const *);
-	void set_name       (char const *);
-	void set_description(char const *);
-	void set_hint       (std::string);
-	void set_background (char const *);
-	void add_tag        (std::string);
+	void set_filename   (const std::string& filename);
+	void set_author     (const std::string& author);
+	void set_name       (const std::string& name);
+	void set_description(const std::string& description);
+	void set_hint       (const std::string& hint);
+	void set_background (const std::string& image_path);
+	void add_tag        (const std::string& tag);
 	void set_scenario_types(ScenarioTypes t) {m_scenario_types = t;}
 
 	// Allows access to the filesystem of the map to access auxiliary files.
@@ -204,15 +207,18 @@ public:
 	FileSystem* filesystem() const;
 
 	// informational functions
-	const char * get_filename()    const {return m_filename;}
-	const char * get_author()      const {return m_author;}
-	const char * get_name()        const {return m_name;}
-	const char * get_description() const {return m_description;}
-	std::string  get_hint()        const {return m_hint;}
-	const std::string & get_background() const {return m_background;}
+	const std::string& get_filename()    const {return m_filename;}
+	const std::string& get_author()      const {return m_author;}
+	const std::string& get_name()        const {return m_name;}
+	const std::string& get_description() const {return m_description;}
+	const std::string& get_hint()        const {return m_hint;}
+	const std::string& get_background()  const {return m_background;}
+
 	using Tags = std::set<std::string>;
 	const Tags & get_tags() const {return m_tags;}
 	bool has_tag(std::string & s) const {return m_tags.count(s);}
+
+	const std::vector<SuggestedTeamLineup>& get_suggested_teams() const {return m_suggested_teams;}
 
 	PlayerNumber get_nrplayers() const {return m_nrplayers;}
 	ScenarioTypes scenario_types() const {return m_scenario_types;}
@@ -247,17 +253,17 @@ public:
 	uint32_t find_immovables
 		(const Area<FCoords>,
 		 std::vector<ImmovableFound> * list,
-		 const FindImmovable & = FindImmovableAlwaysTrue());
+		 const FindImmovable & = find_immovable_always_true());
 	uint32_t find_reachable_immovables
 		(const Area<FCoords>,
 		 std::vector<ImmovableFound> * list,
 		 const CheckStep &,
-		 const FindImmovable & = FindImmovableAlwaysTrue());
+		 const FindImmovable & = find_immovable_always_true());
 	uint32_t find_reachable_immovables_unique
 		(const Area<FCoords>,
 		 std::vector<BaseImmovable *> & list,
 		 const CheckStep &,
-		 const FindImmovable & = FindImmovableAlwaysTrue());
+		 const FindImmovable & = find_immovable_always_true());
 	uint32_t find_fields
 		(const Area<FCoords>,
 		 std::vector<Coords> * list,
@@ -394,13 +400,15 @@ private:
 
 	int16_t m_width;
 	int16_t m_height;
-	char        m_filename    [256];
-	char        m_author       [61];
-	char        m_name         [61];
-	char        m_description[1024];
+	std::string m_filename;
+	std::string m_author;
+	std::string m_name;
+	std::string m_description;
 	std::string m_hint;
 	std::string m_background;
 	Tags        m_tags;
+	std::vector<SuggestedTeamLineup> m_suggested_teams;
+
 	std::vector<Coords> m_starting_pos;    //  players' starting positions
 
 	std::unique_ptr<Field[]> m_fields;

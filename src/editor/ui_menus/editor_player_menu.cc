@@ -147,7 +147,7 @@ void EditorPlayerMenu::update() {
 			m_plr_names[p - 1]->changed.connect
 				(boost::bind(&EditorPlayerMenu::name_changed, this, p - 1));
 			posx += 140 + spacing;
-			m_plr_names[p - 1]->setText(map.get_scenario_player_name(p));
+			m_plr_names[p - 1]->set_text(map.get_scenario_player_name(p));
 		}
 
 		if (!m_plr_set_tribes_buts[p - 1]) {
@@ -208,7 +208,7 @@ void EditorPlayerMenu::clicked_add_player() {
 			number += '0' + nr_players_10;
 		number += '0' + nr_players % 10;
 		/** TRANSLATORS: Default player name, e.g. Player 1 */
-		std::string name = (boost::format(_("Player %s")) % number).str();
+		const std::string name = (boost::format(_("Player %s")) % number).str();
 		map.set_scenario_player_name(nr_players, name);
 	}
 	map.set_scenario_player_tribe(nr_players, m_tribes[0]);
@@ -356,7 +356,7 @@ void EditorPlayerMenu::set_starting_pos_clicked(uint8_t n) {
 	//  Register callback function to make sure that only valid locations are
 	//  selected.
 	map.overlay_manager().register_overlay_callback_function(
-	   boost::bind(&Editor_Tool_Set_Starting_Pos_Callback, _1, boost::ref(map)));
+	   boost::bind(&editor_tool_set_starting_pos_callback, _1, boost::ref(map)));
 	map.recalc_whole_map(menu.egbase().world());
 	update();
 }
@@ -372,10 +372,10 @@ void EditorPlayerMenu::name_changed(int32_t m) {
 	Widelands::Map & map = menu.egbase().map();
 	if (text == "") {
 		text = map.get_scenario_player_name(m + 1);
-		m_plr_names[m]->setText(text);
+		m_plr_names[m]->set_text(text);
 	}
 	map.set_scenario_player_name(m + 1, text);
-	m_plr_names[m]->setText(map.get_scenario_player_name(m + 1));
+	m_plr_names[m]->set_text(map.get_scenario_player_name(m + 1));
 	menu.set_need_save(true);
 }
 
@@ -441,6 +441,6 @@ void EditorPlayerMenu::make_infrastructure_clicked(uint8_t n) {
 	parent.select_tool(parent.tools.make_infrastructure, EditorTool::First);
 	parent.tools.make_infrastructure.set_player(n);
 	overlay_manager.register_overlay_callback_function(
-	   boost::bind(&Editor_Make_Infrastructure_Tool_Callback, _1, boost::ref(egbase), n));
+	   boost::bind(&editor_make_infrastructure_tool_callback, _1, boost::ref(egbase), n));
 	map.recalc_whole_map(egbase.world());
 }

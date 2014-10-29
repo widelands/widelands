@@ -115,8 +115,8 @@ Display number of soldiers.
 void MilitarySite::update_statistics_string(std::string* s)
 {
 	s->clear();
-	uint32_t present = presentSoldiers().size();
-	uint32_t stationed = stationedSoldiers().size();
+	uint32_t present = present_soldiers().size();
+	uint32_t stationed = stationed_soldiers().size();
 
 	if (present == stationed) {
 		if (m_capacity > stationed) {
@@ -219,7 +219,7 @@ Takes one soldier and adds him to ours
 returns 0 on succes, -1 if there was no room for this soldier
 ===============
 */
-int MilitarySite::incorporateSoldier(EditorGameBase & egbase, Soldier & s)
+int MilitarySite::incorporate_soldier(EditorGameBase & egbase, Soldier & s)
 {
 
 	if (s.get_location(egbase) != this)
@@ -235,9 +235,9 @@ int MilitarySite::incorporateSoldier(EditorGameBase & egbase, Soldier & s)
 	// should either drop one of the existing soldiers or reject the new guy, to
 	// avoid overstocking this site.
 
-	if (stationedSoldiers().size()  > descr().get_max_number_of_soldiers())
+	if (stationed_soldiers().size()  > descr().get_max_number_of_soldiers())
 	{
-		return incorporateUpgradedSoldier(egbase, s) ? 0 : -1;
+		return incorporate_upgraded_soldier(egbase, s) ? 0 : -1;
 	}
 
 	if (!m_didconquer) {
@@ -276,7 +276,7 @@ int MilitarySite::incorporateSoldier(EditorGameBase & egbase, Soldier & s)
 Soldier *
 MilitarySite::find_least_suited_soldier()
 {
-	const std::vector<Soldier *> present = presentSoldiers();
+	const std::vector<Soldier *> present = present_soldiers();
 	const int32_t multiplier = kPrefersHeroes == m_soldier_preference ? -1:1;
 	int worst_soldier_level = INT_MIN;
 	Soldier * worst_soldier = nullptr;
@@ -309,7 +309,7 @@ MilitarySite::find_least_suited_soldier()
 bool
 MilitarySite::drop_least_suited_soldier(bool new_soldier_has_arrived, Soldier * newguy)
 {
-	const std::vector<Soldier *> present = presentSoldiers();
+	const std::vector<Soldier *> present = present_soldiers();
 
 	// If I have only one soldier, and the  new guy is not here yet, I can't release.
 	if (new_soldier_has_arrived || 1 < present.size())
@@ -350,10 +350,10 @@ MilitarySite::drop_least_suited_soldier(bool new_soldier_has_arrived, Soldier * 
  * Returns false if the soldier was not incorporated.
  */
 bool
-MilitarySite::incorporateUpgradedSoldier(EditorGameBase & egbase, Soldier & s)
+MilitarySite::incorporate_upgraded_soldier(EditorGameBase & egbase, Soldier & s)
 {
 	// Call to drop_least routine has side effects: it tries to drop a soldier. Order is important!
-	if (stationedSoldiers().size() < m_capacity || drop_least_suited_soldier(true, &s))
+	if (stationed_soldiers().size() < m_capacity || drop_least_suited_soldier(true, &s))
 	{
 		Game & game = ref_cast<Game, EditorGameBase>(egbase);
 		s.set_location(this);
@@ -379,7 +379,7 @@ void MilitarySite::request_soldier_callback
 	MilitarySite & msite = ref_cast<MilitarySite, PlayerImmovable>(target);
 	Soldier      & s     = ref_cast<Soldier,      Worker>         (*w);
 
-	msite.incorporateSoldier(game, s);
+	msite.incorporate_soldier(game, s);
 }
 
 
@@ -389,8 +389,8 @@ void MilitarySite::request_soldier_callback
  */
 void MilitarySite::update_normal_soldier_request()
 {
-	std::vector<Soldier *> present = presentSoldiers();
-	uint32_t const stationed = stationedSoldiers().size();
+	std::vector<Soldier *> present = present_soldiers();
+	uint32_t const stationed = stationed_soldiers().size();
 
 	if (stationed < m_capacity) {
 		if (!m_normal_soldier_request) {
@@ -478,8 +478,8 @@ void MilitarySite::update_upgrade_soldier_request()
 
 void MilitarySite::update_soldier_request(bool incd)
 {
-	const uint32_t capacity = soldierCapacity();
-	const uint32_t stationed = stationedSoldiers().size();
+	const uint32_t capacity = soldier_capacity();
+	const uint32_t stationed = stationed_soldiers().size();
 
 	if (m_doing_upgrade_request)
 	{
@@ -535,7 +535,7 @@ void MilitarySite::update_soldier_request(bool incd)
 
 		if ((capacity == stationed) && (! m_normal_soldier_request))
 		{
-			if (presentSoldiers().size() == capacity)
+			if (present_soldiers().size() == capacity)
 			{
 				m_doing_upgrade_request = true;
 				update_upgrade_soldier_request();
@@ -581,7 +581,7 @@ void MilitarySite::act(Game & game, uint32_t const data)
 
 	if (m_nexthealtime <= game.get_gametime()) {
 		uint32_t total_heal = descr().get_heal_per_second();
-		std::vector<Soldier *> soldiers = presentSoldiers();
+		std::vector<Soldier *> soldiers = present_soldiers();
 
 		for (uint32_t i = 0; i < soldiers.size(); ++i) {
 			Soldier & s = *soldiers[i];
@@ -610,7 +610,7 @@ void MilitarySite::remove_worker(Worker & w)
 	ProductionSite::remove_worker(w);
 
 	if (upcast(Soldier, soldier, &w))
-		popSoldierJob(soldier, nullptr);
+		pop_soldier_job(soldier, nullptr);
 
 	update_soldier_request();
 }
@@ -623,7 +623,7 @@ bool MilitarySite::get_building_work(Game & game, Worker & worker, bool)
 {
 	if (upcast(Soldier, soldier, &worker)) {
 		// Evict soldiers that have returned home if the capacity is too low
-		if (m_capacity < presentSoldiers().size()) {
+		if (m_capacity < present_soldiers().size()) {
 			worker.reset_tasks(game);
 			worker.start_task_leavebuilding(game, true);
 			return true;
@@ -633,14 +633,14 @@ bool MilitarySite::get_building_work(Game & game, Worker & worker, bool)
 		if
 			(MapObject * const enemy
 			 =
-			 popSoldierJob(soldier, &stayhome))
+			 pop_soldier_job(soldier, &stayhome))
 		{
 			if (upcast(Building, building, enemy)) {
 				soldier->start_task_attack
 					(game, *building);
 				return true;
 			} else if (upcast(Soldier, opponent, enemy)) {
-				if (!opponent->getBattle()) {
+				if (!opponent->get_battle()) {
 					soldier->start_task_defense
 						(game, stayhome);
 					if (stayhome)
@@ -659,7 +659,7 @@ bool MilitarySite::get_building_work(Game & game, Worker & worker, bool)
 /**
  * \return \c true if the soldier is currently present and idle in the building.
  */
-bool MilitarySite::isPresent(Soldier & soldier) const
+bool MilitarySite::is_present(Soldier & soldier) const
 {
 	return
 		soldier.get_location(owner().egbase()) == this                     &&
@@ -668,13 +668,13 @@ bool MilitarySite::isPresent(Soldier & soldier) const
 }
 
 // TODO(sirver): This method should probably return a const reference.
-std::vector<Soldier *> MilitarySite::presentSoldiers() const
+std::vector<Soldier *> MilitarySite::present_soldiers() const
 {
 	std::vector<Soldier *> soldiers;
 
 	for (Worker * worker : get_workers()) {
 		if (upcast(Soldier, soldier, worker)) {
-			if (isPresent(*soldier)) {
+			if (is_present(*soldier)) {
 				soldiers.push_back(soldier);
 			}
 		}
@@ -683,7 +683,7 @@ std::vector<Soldier *> MilitarySite::presentSoldiers() const
 }
 
 // TODO(sirver): This method should probably return a const reference.
-std::vector<Soldier *> MilitarySite::stationedSoldiers() const
+std::vector<Soldier *> MilitarySite::stationed_soldiers() const
 {
 	std::vector<Soldier *> soldiers;
 
@@ -695,36 +695,36 @@ std::vector<Soldier *> MilitarySite::stationedSoldiers() const
 	return soldiers;
 }
 
-uint32_t MilitarySite::minSoldierCapacity() const {
+uint32_t MilitarySite::min_soldier_capacity() const {
 	return 1;
 }
-uint32_t MilitarySite::maxSoldierCapacity() const {
+uint32_t MilitarySite::max_soldier_capacity() const {
 	return descr().get_max_number_of_soldiers();
 }
-uint32_t MilitarySite::soldierCapacity() const
+uint32_t MilitarySite::soldier_capacity() const
 {
 	return m_capacity;
 }
 
-void MilitarySite::setSoldierCapacity(uint32_t const capacity) {
-	assert(minSoldierCapacity() <= capacity);
-	assert                        (capacity <= maxSoldierCapacity());
+void MilitarySite::set_soldier_capacity(uint32_t const capacity) {
+	assert(min_soldier_capacity() <= capacity);
+	assert                        (capacity <= max_soldier_capacity());
 	assert(m_capacity != capacity);
 	m_capacity = capacity;
 	update_soldier_request();
 }
 
-void MilitarySite::dropSoldier(Soldier & soldier)
+void MilitarySite::drop_soldier(Soldier & soldier)
 {
 	Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
 
-	if (!isPresent(soldier)) {
+	if (!is_present(soldier)) {
 		// This can happen when the "drop soldier" player command is delayed
 		// by network delay or a client has bugs.
-		molog("MilitarySite::dropSoldier(%u): not present\n", soldier.serial());
+		molog("MilitarySite::drop_soldier(%u): not present\n", soldier.serial());
 		return;
 	}
-	if (presentSoldiers().size() <= minSoldierCapacity()) {
+	if (present_soldiers().size() <= min_soldier_capacity()) {
 		molog("cannot drop last soldier(s)\n");
 		return;
 	}
@@ -747,7 +747,7 @@ void MilitarySite::conquer_area(EditorGameBase & egbase) {
 }
 
 
-bool MilitarySite::canAttack()
+bool MilitarySite::can_attack()
 {
 	return m_didconquer;
 }
@@ -758,7 +758,7 @@ void MilitarySite::aggressor(Soldier & enemy)
 	Map  & map  = game.map();
 	if
 		(enemy.get_owner() == &owner() ||
-		 enemy.getBattle() ||
+		 enemy.get_battle() ||
 		 descr().get_conquers()
 		 <=
 		 map.calc_distance(enemy.get_position(), get_position()))
@@ -774,11 +774,11 @@ void MilitarySite::aggressor(Soldier & enemy)
 	// We're dealing with a soldier that we might want to keep busy
 	// Now would be the time to implement some player-definable
 	// policy as to how many soldiers are allowed to leave as defenders
-	std::vector<Soldier *> present = presentSoldiers();
+	std::vector<Soldier *> present = present_soldiers();
 
 	if (1 < present.size()) {
 		for (Soldier * temp_soldier : present) {
-			if (!haveSoldierJob(*temp_soldier)) {
+			if (!has_soldier_job(*temp_soldier)) {
 				SoldierJob sj;
 				sj.soldier  = temp_soldier;
 				sj.enemy = &enemy;
@@ -799,7 +799,7 @@ bool MilitarySite::attack(Soldier & enemy)
 {
 	Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
 
-	std::vector<Soldier *> present = presentSoldiers();
+	std::vector<Soldier *> present = present_soldiers();
 	Soldier * defender = nullptr;
 
 	if (!present.empty()) {
@@ -814,7 +814,7 @@ bool MilitarySite::attack(Soldier & enemy)
 	} else {
 		// If one of our stationed soldiers is currently walking into the
 		// building, give us another chance.
-		std::vector<Soldier *> stationed = stationedSoldiers();
+		std::vector<Soldier *> stationed = stationed_soldiers();
 		for (Soldier * temp_soldier : stationed) {
 			if (temp_soldier->get_position() == get_position()) {
 				defender = temp_soldier;
@@ -824,7 +824,7 @@ bool MilitarySite::attack(Soldier & enemy)
 	}
 
 	if (defender) {
-		popSoldierJob(defender); // defense overrides all other jobs
+		pop_soldier_job(defender); // defense overrides all other jobs
 
 		SoldierJob sj;
 		sj.soldier = defender;
@@ -977,12 +977,12 @@ void MilitarySite::clear_requirements ()
 	m_soldier_requirements = Requirements();
 }
 
-void MilitarySite::sendAttacker
+void MilitarySite::send_attacker
 	(Soldier & soldier, Building & target)
 {
-	assert(isPresent(soldier));
+	assert(is_present(soldier));
 
-	if (haveSoldierJob(soldier))
+	if (has_soldier_job(soldier))
 		return;
 
 	SoldierJob sj;
@@ -996,7 +996,7 @@ void MilitarySite::sendAttacker
 }
 
 
-bool MilitarySite::haveSoldierJob(Soldier & soldier)
+bool MilitarySite::has_soldier_job(Soldier & soldier)
 {
 	for (const SoldierJob& temp_job : m_soldierjobs) {
 		if (temp_job.soldier == &soldier) {
@@ -1011,7 +1011,7 @@ bool MilitarySite::haveSoldierJob(Soldier & soldier)
  * \return the enemy, if any, that the given soldier was scheduled
  * to attack, and remove the job.
  */
-MapObject * MilitarySite::popSoldierJob
+MapObject * MilitarySite::pop_soldier_job
 	(Soldier * const soldier, bool * const stayhome)
 {
 	for (std::vector<SoldierJob>::iterator job_iter = m_soldierjobs.begin();
@@ -1040,8 +1040,8 @@ MapObject * MilitarySite::popSoldierJob
 bool
 MilitarySite::update_upgrade_requirements()
 {
-	int32_t soldier_upgrade_required_min = m_soldier_upgrade_requirements.getMin();
-	int32_t soldier_upgrade_required_max = m_soldier_upgrade_requirements.getMax();
+	int32_t soldier_upgrade_required_min = m_soldier_upgrade_requirements.get_min();
+	int32_t soldier_upgrade_required_max = m_soldier_upgrade_requirements.get_max();
 
 	if (kPrefersHeroes != m_soldier_preference && kPrefersRookies != m_soldier_preference)
 	{

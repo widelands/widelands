@@ -25,10 +25,10 @@ struct SDL_Surface;
 
 class GLSurfaceTexture : public GLSurface {
 public:
-	// Call this once before using any instance of this class and Cleanup once
+	// Call this once before using any instance of this class and cleanup once
 	// before the program exits.
-	static void Initialize(bool use_arb);
-	static void Cleanup();
+	static void initialize(bool use_arb);
+	static void cleanup();
 
 	GLSurfaceTexture(SDL_Surface * surface, bool intensity = false);
 	GLSurfaceTexture(int w, int h);
