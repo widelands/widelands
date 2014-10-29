@@ -64,6 +64,8 @@ void MapElementalPacket::pre_read(FileSystem & fs, Map * map)
 			}
 
 			// Get suggested teams
+			map->m_suggested_teams.clear();
+
 			uint16_t team_section_id = 0;
 			std::string teamsection_key = (boost::format("teams%02i") % team_section_id).str();
 			while (Section* teamsection = prof.get_section(teamsection_key.c_str())) {
@@ -75,7 +77,6 @@ void MapElementalPacket::pre_read(FileSystem & fs, Map * map)
 				std::string team_key = (boost::format("team%i") % team_number).str().c_str();
 				std::string team_string = teamsection->get_string(team_key.c_str(), "");
 				while (!team_string.empty()) {
-
 					// A team is made up of players
 					Map::SuggestedTeam team;
 
