@@ -87,7 +87,7 @@ private:
  *
  */
 struct FullscreenMenuCampaignMapSelect : public FullscreenMenuLoadMapOrGame {
-	FullscreenMenuCampaignMapSelect();
+	FullscreenMenuCampaignMapSelect(bool is_tutorial = false);
 
 	std::string get_map();
 	void set_campaign(uint32_t);
@@ -110,7 +110,7 @@ private:
 	};
 
 	UI::Textarea                  m_title;
-	UI::Textarea                  m_subtitle;
+	UI::MultilineTextarea         m_subtitle;
 	UI::Textarea                  m_label_mapname;
 	UI::MultilineTextarea         m_ta_mapname;
 	UI::Textarea                  m_label_author;
@@ -122,6 +122,8 @@ private:
 	std::string                   campmapfile;
 
 	std::vector<CampaignScenarioData> m_scenarios_data;
+
+	bool m_is_tutorial;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_CAMPAIGN_SELECT_H

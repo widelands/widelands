@@ -165,12 +165,12 @@ initial_messages = {
 {
    title = _ "Uproar and Confusion",
    body = rt(
-      h1(_"Emerging Chaos...") ..
+      h1(_"Emerging Chaos…") ..
       p(_(
 [[Guilt-ridden, the king committed suicide. ]] ..
 [[Without a monarch, the people turned to the clerics, but they had no substantial help to offer. ]] ..
 [[Most accepted their fate while others tried to change the god’s mind by offering animals in his temple. ]] ..
-[[But to no avail...]]
+[[But to no avail…]]
    )) .. p(_(
 [[Jundlina, the late king’s daughter and the highest priestess of the god was the most determined cleric. ]] ..
 [[As countless offerings didn’t change the situation, she convinced herself that to soothe the god, ]] ..
@@ -518,7 +518,7 @@ scenario_won = {
 [[Praise Satul! Ostur, the young ship builder did it. ]] ..
 [[We have three ships – never have I seen sturdier ones – with enough room to carry all of us and some wares too. ]] ..
 [[And this rescue came just in time: Lutas is about to swallow the rest of this island, ]] ..
-[[the water rises faster by the hour. But we can make our escape now and start over in some country farther away... ]] ..
+[[the water rises faster by the hour. But we can make our escape now and start over in some country farther away… ]] ..
 [[I expect a long journey, but we will find the land of Satul in the end. ]] ..
 [[This is what I promised my people. And myself.]]
       )) .. rt("<p font-size=10> <br></p>" .. h1(_ "Congratulations") .. p(_
