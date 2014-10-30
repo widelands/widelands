@@ -7,19 +7,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-10-28 08:26+0000\n"
-"PO-Revision-Date: 2014-10-28 18:59+0000\n"
+"POT-Creation-Date: 2014-10-29 10:08+0000\n"
+"PO-Revision-Date: 2014-10-29 18:30+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-29 05:52+0000\n"
+"X-Launchpad-Export-Date: 2014-10-30 05:41+0000\n"
 "X-Generator: Launchpad (build 17203)\n"
 "Language: gd\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
-#: ../../campaigns/cconfig:101
 msgid "From Nemesis to Genesis"
 msgstr "On aimhleas dhan ghineachas"
 
@@ -32,140 +31,30 @@ msgstr ""
 "Atlantaich a tha air am fàgail a' strì gus dachaigh ùr a stèidheachadh "
 "dhaibh fhèin."
 
-#: ../../campaigns/cconfig:27
-msgid "The Second Empire"
-msgstr "An dàrna impireachd"
-
-#: ../../campaigns/cconfig:29
-msgid "Barbarians"
-msgstr "Na Tùsanaich"
-
-#: ../../campaigns/cconfig:31
-msgid "Easy. Introduces the Barbarians"
-msgstr "Furasta. Bheir e eòlas air na Tùsanaich dhut."
-
-#: ../../campaigns/cconfig:32
-msgid ""
-"When Chat’Karuth died, he was an old man, father to three strong and "
-"ambitious sons, and warlord to an army that could match any enemy willing to "
-"rise against the ancient forests. Though at the end of his glorious reign, "
-"Chat’Karuth chose his eldest son, Thron, to succeed him as the tribe’s "
-"warlord – a decision that left his two brothers unsatisfied. The old warlord "
-"knew that. As his father instructed him, Thron left the capital of "
-"Al’thunran, the home of the Throne Among the Trees, and withdrew his forces "
-"to the high hills where he buried the corpse of his father. There he swore "
-"to the gods and his father’s spirit that he’d return to re-established "
-"order. While his brothers have raged blind war against Thron and the few "
-"forces he left to secure the borders of Al’thunran, the young warlord seeks "
-"to reunite his ambitious brothers and force the tribes to march once again "
-"under a common banner."
-msgstr ""
-"’S e an ceannard-cogaidh aig feachd a rinneadh a cheannsaicheadh gach "
-"nàmhaid a bhiodh deònach èirigh an aghaidh nan seann choilltean a bh’ ann an "
-"Chat’Karuth ’s bha e ’na bhodach nuair a chaochail e ’s triùir mhac treun "
-"glòir-mhiannach aige. Ged a thagh Chat’Karuth a mhac as sine Tron mar an "
-"ceannard-cogaidh ùr aig crìoch a rìoghachd glòrmhor, dh’fhàg an co-dhùnadh "
-"aige a dhithis bhràithrean mì-shàsaichte. Mhothaich an seann tighearna dha. "
-"Mar a thuirt athair ris, dh’fhàg Tron cathair-bhaile Al’tùnrain, dachaigh "
-"cathair nan craobh ’s chùlaich e fheachd dhan mhonadh far an do thìodhlaic e "
-"corp athar. Ghabh e bòid dha na diathan ’s do anam athar gun tilleadh e na "
-"cùisean gu mar a b’ àbhaist. Fhad ’s a tha a bhràithrean air strì gu "
-"fiadhaich a aghaidh Throin ’s an fheachd bhig a dh’fhàg e gus crìochan "
-"Al’tùnran a dhìon, tha an tighearna-cogaidh òg ag amas a bhràithrean glòir-"
-"mhiannach a rèiteachadh ach am biodh na cinnidhean air an ath-chruinneachadh "
-"fon aon bratach a-rithist."
-
-#: ../../campaigns/cconfig:35
-msgid "The Months of Exile"
-msgstr "Mìosan an fhògraidh"
-
-#: ../../campaigns/cconfig:37
-msgid "Empire"
-msgstr "An Impireachd"
-
-#: ../../campaigns/cconfig:39
-msgid "Easy. Introduces the Empire"
-msgstr "Furasta. Bheir e eòlas air an Impireachd dhut."
-
-#: ../../campaigns/cconfig:40
-msgid ""
-"Six months ago, Lutius – a young general of the Empire – was sent with 150 "
-"soldiers to the frontier beyond the northern forests where Barbarian tribes "
-"were crossing onto land held by the Empire. His task was to defend the "
-"Empire’s land. At first, everything was calm. He even talked to a few "
-"barbarian children and thought about a peaceful life – side by side with "
-"this archaic folk. He began to feel safer and his army began to drop their "
-"attention off the potential enemy. That was their undoing. One night in "
-"March his unprepared army was attacked by 100 barbarian footmen and was "
-"completely scattered. Only with his bare life he and a handful of his "
-"soldiers survived."
-msgstr ""
-"O chionn sia mìosan, chaidh, Lutius – ceann-armailt òg na h-Impireachd – a "
-"chur còmhla ri 150 saighdear dha na crìochan taobh thall nan coilltean "
-"tuathach far an robh treubhan nan tùsanach a’ briseadh a-steach do ranntair "
-"na h-Impireachd. B’ e a dhleastanas tìr na h-Impireachd a dhìon. Bha a h-"
-"uile càil socair aig an toiseach. Bhruidhinn e ri clann nan tùsanach fiù ’s "
-"agus bha beatha sìtheil fainear dha – ri taobh na muinntir àrsaidh ud. "
-"Thòisich e a’ faireachdainn sàbhailte agus cha tug am feachd aige aire air "
-"an t-sluagh a bhiodh nàimhdeil ma dh’fhaoidte tuilleadh. Seo na mhill iad. "
-"B’ e oidhche sa Mhàirt a bh’ ann nuair a thug 100 coisridh nan tùsanach "
-"ionnsaigh air an fheachd aige nach robh ullamh ’s chaidh an sgaoileadh fada "
-"’s farsaing. ’S gann gun do mhair e fhèin is grunnan dhe na saighdearan aige "
-"beò."
-
-#: ../../campaigns/cconfig:43
-msgid "The Run for the Fire"
-msgstr "An toir air an teine"
-
-#: ../../campaigns/cconfig:45
-msgid "Atlanteans"
-msgstr "Na h-Atlantaich"
-
-#: ../../campaigns/cconfig:47
-msgid "Challenging. Introduces the Atlanteans"
-msgstr "Dùbhlanach. Bheir e eòlas air na h-Atlantaich dhut."
-
-#: ../../campaigns/cconfig:48
-msgid ""
-"When their God lost faith in the Atlanteans and drowned their island, one "
-"woman’s struggle for justice and a second chance for her people would become "
-"the stuff of legends. Leading the remaining Atlanteans into a new future in "
-"a new part of the World, Jundlina became the most powerful human of her "
-"time, but at a high cost: her humanity and soul."
-msgstr ""
-"Nuair a chaill an dia earbsa sna h-Atlantaich is e air an t-eilean aca air a "
-"bhàthadh, bhuannaich strì boireannach airson ceartais ’s cothrom eile dha a "
-"muinntir cliù mòr. On a stiùirich i corr nan  Atlantach gu beatha ùr ann an "
-"tìr san aineolas, dh’fhàs Jundlina nas cumhachdaiche na fear sam bith eile "
-"’na linn ach b’ e daor na phàigh i: a daonnachd ’s a h-anam."
-
-#: ../../campaigns/cconfig:67
-#: ../../campaigns/t01.wmf/elemental:7
-msgid "Eyes in the Dark"
-msgstr "Sùilean san dorchadas"
-
-#: ../../campaigns/cconfig:72
-#: ../../campaigns/t02.wmf/elemental:7
+#: ../../campaigns/bar01.wmf/elemental:8
 msgid "A Place to Call Home"
 msgstr "Dachaigh ùr"
 
-#: ../../campaigns/cconfig:77
-#: ../../campaigns/t03.wmf/elemental:7
+#: ../../campaigns/bar01.wmf/elemental:10
+msgid ""
+"In this scenario, the higher production buildings including mining will be "
+"introduced."
+msgstr ""
+"Ionnsaichidh tu mu na togalaichean saothrachaidh as àirde sa chnàmh-sgeul "
+"seo, a' gabhail a-steach mèinnearachd."
+
+#: ../../campaigns/bar02.wmf/elemental:7
 msgid "This Land is Our Land"
 msgstr "Seo ar dùthaich"
 
-#: ../../campaigns/cconfig:84
-#: ../../campaigns/emp01.wmf/elemental:7
-msgid "The Strands of Malac’ Mor"
-msgstr "Traighean Mhalac' Mhòir"
+#: ../../campaigns/bar02.wmf/elemental:9
+msgid ""
+"This tutorial explains the handling of military and training site buildings "
+"and will introduce fighting."
+msgstr ""
+"Mìnichidh an t-oideachadh seo mar a làimhsicheas tu togalaichean an airm is "
+"trèanaidh is ionnsaichidh tu sabaid."
 
-#: ../../campaigns/cconfig:89
-#: ../../campaigns/emp02.wmf/elemental:9
-msgid "An Outpost for Exile"
-msgstr "Tuineachadh nam fògarrach"
-
-#: ../../campaigns/cconfig:94
-#: ../../campaigns/cconfig:106
 #: ../../campaigns/dummy.wmf/elemental:7
 msgid "Not yet implemented"
 msgstr "Chan eil seo ann fhathast"
@@ -177,6 +66,10 @@ msgstr "Chan eil duine"
 #: ../../campaigns/dummy.wmf/elemental:10
 msgid "Sorry, this map is not yet implemented."
 msgstr "Duilich, ach cha deach am mapa seo a phrògramachadh fhathast."
+
+#: ../../campaigns/emp01.wmf/elemental:7
+msgid "The Strands of Malac’ Mor"
+msgstr "Traighean Mhalac' Mhòir"
 
 #: ../../campaigns/emp01.wmf/elemental:9
 msgid ""
@@ -193,6 +86,10 @@ msgstr ""
 "aige a chur air tìr air tràigh fàsach neo-aithnichte ’s a mhuinntir a "
 "shàbhaladh. Ach a bheil iad sàbhailte dha-rìribh?"
 
+#: ../../campaigns/emp02.wmf/elemental:9
+msgid "An Outpost for Exile"
+msgstr "Tuineachadh nam fògarrach"
+
 #: ../../campaigns/emp02.wmf/elemental:11
 msgid ""
 "Finally the ship was repaired, so Lutius and his people returned to the "
@@ -205,41 +102,55 @@ msgstr ""
 "làithean gus an do ràinig iad eilean blàth uaine le coltas a’ phàrrais air. "
 "Thòisich iad air an àite-còmhnaidh ùr aca a rùrachadh le deagh shunnd."
 
-#: ../../campaigns/t01.wmf/elemental:9
-msgid ""
-"In this tutorial, the basic gameplay and control as well as basic production "
-"buildings of the Barbarians are introduced."
-msgstr ""
-"Ionnsaichidh tu mu uidheaman-smachd is rudan bunasach eile mun gheama san "
-"oideachadh seo cho math ri mu thogalaichean bunasach nan tùsanach."
+#: ../../campaigns/tutorial01_basic_control.wmf/elemental:8
+msgid "Basic Control"
+msgstr "Stiùireadh bunasach"
 
-#: ../../campaigns/t02.wmf/elemental:9
+#: ../../campaigns/tutorial01_basic_control.wmf/elemental:10
 msgid ""
-"In this scenario, the higher production buildings including mining and "
-"military expansions will be introduced."
+"In this tutorial, you will learn how to navigate in Widelands and how to "
+"build buildings and roads."
 msgstr ""
-"Ionnsaichidh tu mu na togalaichean saothrachaidh as àirde sa chnàmh-sgeul "
-"seo, a' gabhail a-steach mèinnearachd agus meudachadh do ranntair leis an "
-"arm."
+"San oideachadh seo, ionnsaichidh tu mar a stiùiricheas tu rudan ann an "
+"Widelands agus mar a thogas tu togalaichean 's rathaidean."
 
-#: ../../campaigns/t03.wmf/elemental:9
+#: ../../campaigns/tutorial02_warfare.wmf/elemental:8
+msgid "Warfare"
+msgstr "Cogadh"
+
+#: ../../campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""
-"This tutorial explains the handling of military and training site buildings "
-"and will introduce fighting."
+"In this tutorial, you will be taught the secrets of warfare: how to create "
+"soldiers, how to train them and how to lead them in battle."
 msgstr ""
-"Mìnichidh an t-oideachadh seo mar a làimhsicheas tu togalaichean an airm is "
-"trèanaidh is ionnsaichidh tu sabaid."
+"San oideachadh seo, ionnsaichidh tu dòighean a' chogaidh: mar a "
+"chruthaicheas tu saighdearan, mar a nì thu trèanadh orra 's mar a "
+"stiùiricheas tu air a' bhlàr iad."
 
-#: ../../campaigns/tutorial01.wmf/elemental:7
-msgid "Tutorial 1"
-msgstr "Oideachadh 1"
+#: ../../campaigns/tutorial03_seafaring.wmf/elemental:8
+msgid "Seafaring"
+msgstr "Seòladaireachd"
 
-#: ../../campaigns/tutorial01.wmf/elemental:9
+#: ../../campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
-"Basic Tutorial – a map based on Winterwind’s tutorial 1 for the Barbarians"
+"In this tutorial, you will get to know seafaring, which is how to handle "
+"ships and ports."
 msgstr ""
-"Oideachadh bunasach – mapa stèidhichte air oideachadh 1 airson nan tùsanach "
-"aig Winterwind"
+"San oideachadh seo, gheibh thu eòlas air an t-seòladaireachd, 's e seo mar a "
+"làimhsicheas tu longan agus puirt."
+
+#: ../../campaigns/tutorial04_economy.wmf/elemental:8
+msgid "Economy"
+msgstr "Eaconamaidh"
+
+#: ../../campaigns/tutorial04_economy.wmf/elemental:10
+msgid ""
+"In this tutorial, you will learn what option Widelands offers to adjust your "
+"economy. Recommended for players with some experience."
+msgstr ""
+"San oideachadh seo, ionnsaichidh tu mu na roghainnean a bheir Widelands dhut "
+"gus an eaconamaidh agad a ghleusadh. Mholamaid e airson cluicheadairean aig "
+"a bheil eòlas air a' gheama mar-thà."
 
 #: ../../maps/Atoll.wmf/elemental:9
 msgid "Atoll"

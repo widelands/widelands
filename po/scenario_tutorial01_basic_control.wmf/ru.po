@@ -7,18 +7,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2014-10-29 08:57+0000\n"
+"POT-Creation-Date: 2014-10-29 10:08+0000\n"
 "PO-Revision-Date: 2014-05-24 20:52+0000\n"
 "Last-Translator: Ruslan Kovtun <koutoftimer@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
-"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-10-29 06:10+0000\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Launchpad-Export-Date: 2014-10-30 05:56+0000\n"
 "X-Generator: Launchpad (build 17203)\n"
+"Language: ru\n"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:16
 msgid "Nice And Easy Does It All the Time"
@@ -41,15 +41,11 @@ msgid "Welcome to Widelands!"
 msgstr "Добро пожаловать в Widelands!"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:29
-#, fuzzy
 msgid ""
 "Widelands is a slow-paced build-up strategy game with an emphasis on "
 "construction rather than destruction. This tutorial will guide you through "
 "the basics of the game."
 msgstr ""
-"Widelands - это медленная экономическая стратегия в реальном времени, больше "
-"нацеленная на созидание, чем на разрушение. Этот обучающий курс ознакомит "
-"Вас с основными аспектами игры."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:31
 msgid "Dismiss this box by left-clicking on the button below."
@@ -130,15 +126,11 @@ msgstr ""
 "построен на участке земли."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:54
-#, fuzzy
 msgid ""
 "Do so now, either by pressing SPACE or by clicking the fourth button from "
 "the left at the very bottom of the screen. Right-click on this window and "
 "then give it a try."
 msgstr ""
-"Сделайте это нажав ПРОБЕЛ или нажав четвертую кнопку слева на панели снизу "
-"экрана. Нажмите правую кнопку мыши чтобы закрыть это окно и перейти к "
-"выполнению."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:59
 msgid "Lumberjack’s Spot"
@@ -203,7 +195,6 @@ msgstr ""
 "синий флаг штаба."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:95
-#, fuzzy
 msgid ""
 "That won’t do yet. I still need to connect the lumberjack’s hut to the rest "
 "of my road network. You have disabled the option ‘Start building road after "
@@ -212,10 +203,6 @@ msgid ""
 "tell you later how to do that. To build the road, all I have to do now is "
 "click on the blue flag in front of my headquarters."
 msgstr ""
-"Лесоруб не приступит к работе. Я все еще должен присоединить хижину к сети "
-"дорог. После приведения в порядок места строительства, я автоматически войду "
-"в режим построение дорог, поэтому, все что мне надо сделать это нажать на "
-"синий флаг штаба."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:103
 msgid "Waiting for the Lumberjack to Go Up"
@@ -235,15 +222,11 @@ msgid "Placing Another Flag"
 msgstr "Установка дополнительного флага"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:116
-#, fuzzy
 msgid ""
 "Nice how they are working, isn’t it? But the poor carrier has a very long "
 "way to go. We can make it easier for him (and more efficient for us) by "
 "placing another blue flag on the road."
 msgstr ""
-"На работу то как работаю другие можно смотреть вечно, но бедному посыльному "
-"очень долго идти. Мы можем облегчить ему задачу (и повысить эффективность) "
-"поместив дополнительный синий флаг на дороге."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:118
 msgid ""
@@ -301,9 +284,8 @@ msgstr ""
 "используется кнопка PAGE DOWN."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:145
-#, fuzzy
 msgid "Waiting for the Hut to be Finished"
-msgstr "Ожидание строительства хижины"
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:148
 msgid ""
@@ -319,9 +301,8 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:150
-#, fuzzy
 msgid "Now we only have to wait till the hut is finished."
-msgstr "Хорошо. Давайте подождем, когда построится хижина."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:157
 msgid "The Construction Site"
@@ -418,7 +399,8 @@ msgid "Other Ways to Move the View"
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:203
-msgid "Excellent. Now there is a faster way to move, using the mouse instead:"
+msgid ""
+"Excellent. Now there is a faster way to move, using the mouse instead:"
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:205
@@ -484,16 +466,16 @@ msgid "Onward to the Quarry"
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:239
-#, fuzzy
 msgid "Great. Now about that quarry…"
-msgstr "Замечательно. Теперь о каменоломне..."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:247
 msgid "How to Build a Quarry"
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:249
-msgid "Build a quarry next to those rocks here. Remember how I did it earlier?"
+msgid ""
+"Build a quarry next to those rocks here. Remember how I did it earlier?"
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:250
@@ -529,9 +511,8 @@ msgstr ""
 "домика."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:256
-#, fuzzy
 msgid "And finally, the yellow flag symbol only allows for flags."
-msgstr "И наконец значок жёлтого флага разрешает устанавливать только флажки."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:258
 msgid ""
@@ -547,9 +528,8 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:263
-#, fuzzy
 msgid "Build a quarry next to the rocks"
-msgstr "Построить каменоломню возле камней"
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:265
 msgid "Build a Quarry"
@@ -634,7 +614,8 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:311
-msgid "Or, you can directly click the flag where the road should end, like so:"
+msgid ""
+"Or, you can directly click the flag where the road should end, like so:"
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:320
@@ -671,7 +652,8 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:328
-msgid "Now please rebuild the road between your quarry and your headquarters."
+msgid ""
+"Now please rebuild the road between your quarry and your headquarters."
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:332
@@ -875,9 +857,8 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:436
-#, fuzzy
 msgid "Messages Arrived!"
-msgstr "Сообщения"
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:438
 msgid ""
@@ -1050,63 +1031,3 @@ msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""
 msgstr[1] ""
-
-#~ msgid "Conquer an area were we can build mines"
-#~ msgstr "Захватить участок пригодный под шахты"
-
-#~ msgid "a bit of coal"
-#~ msgstr "небольшие залежи угля"
-
-#~ msgid "a lot of coal"
-#~ msgstr "большие залежи угля"
-
-#~ msgid "a bit of iron"
-#~ msgstr "небольшие залежи железа"
-
-#~ msgid "a lot of iron"
-#~ msgstr "большие залежи железа"
-
-#~ msgid "a bit of gold"
-#~ msgstr "небольшие залежи золота"
-
-#~ msgid "a lot of gold"
-#~ msgstr "большие залежи золота"
-
-#~ msgid "a bit of granite"
-#~ msgstr "небольшие залежи гранита"
-
-#~ msgid "a lot of granite"
-#~ msgstr "большие залежи гранита"
-
-#~ msgid "water"
-#~ msgstr "вода"
-
-#~ msgid "nothing was found here"
-#~ msgstr "ничего не найдено здесь"
-
-#~ msgid "this one."
-#~ msgstr "вот такой."
-
-#~ msgid "Warfare and Training"
-#~ msgstr "Военные действия и военная подготовка"
-
-#~ msgid "Soldiers and Warfare"
-#~ msgstr "Солдаты и ведение войны"
-
-#~ msgid "Attack:"
-#~ msgstr "Атака:"
-
-#~ msgid "Defense:"
-#~ msgstr "Оборона:"
-
-#~ msgid "Evade:"
-#~ msgstr "Уклонение:"
-
-#~ msgid "Enhance your fortress to a citadel"
-#~ msgstr "Усовершенствовать крепость до цитадели"
-
-#~ msgid "Defeat your enemy"
-#~ msgstr "Разгромите Вашего врага"
-
-#~ msgid "Defeat the enemy tribe"
-#~ msgstr "Разгромить вражеское племя"
