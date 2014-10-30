@@ -1,5 +1,5 @@
 -- =======================================================================
---                                 Player 1                                 
+--                                 Player 1
 -- =======================================================================
 p1:forbid_buildings("all")
 p1:allow_buildings{
@@ -8,7 +8,7 @@ p1:allow_buildings{
    "quarry",
    "sawmill",
 }
-prefilled_buildings(p1, 
+prefilled_buildings(p1,
    {"headquarters", 16, 21,
       wares = {
          helm = 4,
@@ -46,7 +46,7 @@ prefilled_buildings(p1,
          wine = 8,
          wood = 45,
          wool = 2,
-      }, 
+      },
       workers = {
          armorsmith = 1,
          brewer = 1,
@@ -68,7 +68,7 @@ prefilled_buildings(p1,
 )
 
 -- =======================================================================
---                                 Player 2                                 
+--                                 Player 2
 -- =======================================================================
 p2:forbid_buildings("all")
 p2:allow_buildings{
@@ -89,7 +89,7 @@ p2:allow_buildings{
 }
 
 prefilled_buildings(p2,
-   {"headquarters", 60, 65, 
+   {"headquarters", 60, 65,
    wares = {
       ax = 6,
       bread_paddle = 2,

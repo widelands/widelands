@@ -1595,7 +1595,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 				if (virtual_mines<3) {
 					continue;
 				}
-				
+
 				// build after 20 production sites and then after each 50 production site
 				if (static_cast<int32_t>((productionsites.size() + 30) / 50) > bo.total_count() &&
 				    bo.cnt_under_construction_ == 0) {
@@ -2744,7 +2744,7 @@ bool DefaultAI::check_militarysites(int32_t gametime) {
 	bool changed = false;
 	Map& map = game().map();
 	MilitarySite* ms = militarysites.front().site;
-	MilitarySiteObserver& mso = militarysites.front(); 
+	MilitarySiteObserver& mso = militarysites.front();
 	uint32_t const vision = ms->descr().vision_range();
 	FCoords f = map.get_fcoords(ms->get_position());
 	// look if there are any enemies building
@@ -2752,9 +2752,9 @@ bool DefaultAI::check_militarysites(int32_t gametime) {
 
 	// first if there are enemies nearby, check for buildings not land
 	if (map.find_fields(Area<FCoords>(f, vision + 4), nullptr, find_enemy) == 0) {
-		
+
 		mso.enemies_nearby_ = false;
-		
+
 		// If no enemy in sight - decrease the number of stationed soldiers
 		// as long as it is > 1 - BUT take care that there is a warehouse in the
 		// same economy where the thrown out soldiers can go to.
@@ -2800,7 +2800,7 @@ bool DefaultAI::check_militarysites(int32_t gametime) {
 	} else {
 
 		mso.enemies_nearby_ = true;
-		
+
 		uint32_t const total_capacity = ms->max_soldier_capacity();
 		uint32_t const target_capacity = ms->soldier_capacity();
 
@@ -3178,7 +3178,7 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 	if (next_attack_waittime_ > 300 && type_ == AGGRESSIVE) {
 		next_attack_waittime_ = 20;
 	}
-	
+
 	// Only useable, if it owns at least one militarysite
 	if (militarysites.empty()) {
 		next_attack_consideration_due_ = next_attack_waittime_ * 1000 + gametime;
@@ -3278,11 +3278,11 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 		std::advance(mso, position);
 
 		MilitarySite* ms = mso->site;
-		
+
 		if (!mso->enemies_nearby_) {
 			continue;
 		}
-		
+
 		uint32_t const vision = ms->descr().vision_range();
 		FCoords f = map.get_fcoords(ms->get_position());
 
@@ -3423,5 +3423,6 @@ void DefaultAI::print_land_stats() {
 		count_m += 1;
 	}
 
-	log(" Average: Landsize: %5d, military strenght: %3d\n", sum_l / count_l, sum_m / count_m);
+	assert(count_l > 0 && count_m > 0);
+	log(" Average: Landsize: %5d, military strength: %3d\n", sum_l / count_l, sum_m / count_m);
 }

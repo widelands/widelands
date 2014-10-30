@@ -79,7 +79,7 @@ void add_languages_to_list(UI::Listselect<std::string>* list, const std::string&
 	std::sort(entries.begin(), entries.end());
 
 	for (const LanguageEntry& entry : entries) {
-		list->add(entry.descname.c_str(), entry.abbreviation, nullptr, entry.abbreviation == language);
+		list->add(entry.descname, entry.abbreviation, nullptr, entry.abbreviation == language);
 	}
 }
 
@@ -367,13 +367,13 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		/** TRANSLATORS: Screen resolution, e.g. 800 x 600*/
 		m_reslist.add((boost::format(_("%1% x %2%"))
 							% m_resolutions[i].xres
-							% m_resolutions[i].yres).str().c_str(),
+							% m_resolutions[i].yres).str(),
 						  nullptr, nullptr, selected);
 	}
 	if (!did_select_a_res) {
 		m_reslist.add((boost::format(_("%1% x %2%"))
 							% opt.xres
-							% opt.yres).str().c_str(),
+							% opt.yres).str(),
 						  nullptr, nullptr, true);
 		uint32_t entry = m_resolutions.size();
 		m_resolutions.resize(entry + 1);
