@@ -362,7 +362,7 @@ void DefaultAI::late_initialization() {
 		// this is set to negative number, otherwise the AI would wait 25 sec
 		// after game start not building anything
 		bo.construction_decision_time_ = -60 * 60 * 1000;
-		bo.built_mat_shortage_ = false;
+		bo.build_material_shortage_ = false;
 		bo.production_hint_ = -1;
 		bo.current_stats_ = 0;
 		bo.unoccupied_ = false;
@@ -1128,7 +1128,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 		if (bo.desc->get_size() == BaseImmovable::SMALL)
 			continue;
 
-		bo.built_mat_shortage_ = false;
+		bo.build_material_shortage_ = false;
 
 		for (EconomyObserver* observer : economies) {
 			// Don't check if the economy has no warehouse.
@@ -1140,7 +1140,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 				WareIndex wt(static_cast<size_t>(bo.critical_built_mat_.at(m)));
 
 				if (observer->economy.needs_ware(wt)) {
-					bo.built_mat_shortage_ = true;
+					bo.build_material_shortage_ = true;
 					continue;
 				}
 			}
@@ -1584,7 +1584,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 			else if (bo.type == BuildingObserver::MILITARYSITE) {
 
 				// we allow 1 exemption from big buildings prohibition
-				if (bo.built_mat_shortage_ &&
+				if (bo.build_material_shortage_ &&
 				    (bo.cnt_under_construction_ > 0 || !(bf->enemy_nearby_))) {
 					continue;
 				}
@@ -2772,8 +2772,9 @@ bool DefaultAI::marine_main_decisions(int32_t const gametime) {
 
 		if (wh_iter->bo->is_port_) {
 			ports_count += 1;
-			if (wh_iter->site->get_portdock()) {
-				if (wh_iter->site->get_portdock()->expedition_started()) {
+			//if (wh_iter->site->get_portdock()) {
+			if (Widelands::PortDock * pd = wh_iter->site->get_portdock()) {
+				if (pd->expedition_started()) {
 					expeditions_in_prep += 1;
 				}
 			} else {  // NOCOM remove lines below, it is only for debugging
@@ -3635,7 +3636,7 @@ void DefaultAI::expedition_management(ShipObserver& so, NoteShipMessage::Message
 	// 2. Go on with expedition
 	printf("  %1d: Making decision on expediction\n", player_number());
 	const int32_t gametime = game().get_gametime();
-	if (first_time_here) {
+	if (first_time_here && message != NoteShipMessage::Message::EXPEDITIONREADY) {
 		game().send_player_ship_explore_island(*so.ship, so.island_circ_direction);
 		printf("     on new spot, going on with island exploration, now on %3dx%3d\n",
 		       so.ship->get_position().x,

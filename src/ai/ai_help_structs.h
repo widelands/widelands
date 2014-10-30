@@ -352,7 +352,7 @@ struct BuildingObserver {
 	int32_t stocklevel_time;  // time when stocklevel_ was last time recalculated
 	int32_t last_dismantle_time_;
 	int32_t construction_decision_time_;
-	bool built_mat_shortage_;
+	bool build_material_shortage_;
 
 	int32_t total_count() const {
 		return cnt_built_ + cnt_under_construction_;
