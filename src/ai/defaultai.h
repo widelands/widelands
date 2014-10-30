@@ -131,16 +131,18 @@ private:
 	                          int16_t* max_needed_preciousness);
 
 	bool construct_building(int32_t);
-	
-	uint32_t coords_hash(Widelands::Coords coords){
-		uint32_t hash= coords.x << 16 | coords.y;
-		return hash;}
 
-	Widelands::Coords coords_unhash(uint32_t hash){
+	uint32_t coords_hash(Widelands::Coords coords) {
+		uint32_t hash = coords.x << 16 | coords.y;
+		return hash;
+	}
+
+	Widelands::Coords coords_unhash(uint32_t hash) {
 		Widelands::Coords coords;
-		coords.x=hash>>16; //NOCOM cast this???
-		coords.y=hash;
-		return coords;}
+		coords.x = hash >> 16;  // NOCOM cast this???
+		coords.y = hash;
+		return coords;
+	}
 
 	// all road management is invoked by function improve_roads()
 	// if needed it calls create_shortcut_road() with a flag from which
@@ -151,9 +153,11 @@ private:
 	bool dispensable_road_test(const Widelands::Road&);
 	bool check_economies();
 	bool check_productionsites(int32_t);
+	bool check_trainingsites(int32_t);
 	bool check_mines_(int32_t);
 	bool check_militarysites(int32_t);
-	bool check_ships(int32_t);
+	bool marine_main_decisions(int32_t);
+	bool marine_notification_processing(int32_t);
 	uint32_t get_stocklevel_by_hint(size_t);
 	uint32_t get_stocklevel(BuildingObserver&);
 	uint32_t get_stocklevel(Widelands::WareIndex);  // count all direct outputs_
@@ -164,7 +168,7 @@ private:
 
 	void
 	consider_productionsite_influence(BuildableField&, Widelands::Coords, const BuildingObserver&);
-	//considering wood, stones, mines, water, fishes for candidate for colonization (new port)
+	// considering wood, stones, mines, water, fishes for candidate for colonization (new port)
 	uint8_t spot_scoring(Widelands::Coords candidate_spot);
 
 	EconomyObserver* get_economy_observer(Widelands::Economy&);
@@ -174,8 +178,8 @@ private:
 	void lose_immovable(const Widelands::PlayerImmovable&);
 	void gain_building(Widelands::Building&);
 	void lose_building(const Widelands::Building&);
-	void expedition_management(ShipObserver&,const Widelands::NoteShipMessage::Message);
-	//bool pick_farest_portspace(Widelands::Ship&);
+	void expedition_management(ShipObserver&, const Widelands::NoteShipMessage::Message);
+	// bool pick_farest_portspace(Widelands::Ship&);
 	void out_of_resources_site(const Widelands::ProductionSite&);
 
 	bool check_supply(const BuildingObserver&);
@@ -204,7 +208,7 @@ private:
 	std::list<BuildableField*> buildable_fields;
 	std::list<BlockedField> blocked_fields;
 	std::unordered_set<uint32_t> port_reserved_coords;
-	//to distinquish which ports are on home teritory and which one are remote
+	// to distinquish which ports are on home teritory and which one are remote
 	std::unordered_set<uint32_t> remote_ports_coords;
 	std::list<MineableField*> mineable_fields;
 	std::list<Widelands::Flag const*> new_flags;
@@ -215,6 +219,7 @@ private:
 	std::list<ProductionSiteObserver> mines_;
 	std::list<MilitarySiteObserver> militarysites;
 	std::list<WarehouseSiteObserver> warehousesites;
+	std::list<TrainingSiteObserver> trainingsites;
 	std::list<ShipObserver> allships;
 
 	std::vector<WareObserver> wares;
@@ -227,8 +232,10 @@ private:
 	int32_t next_mine_check_due_;
 	int32_t next_militarysite_check_due_;
 	int32_t next_ship_check_due;
+	int32_t next_marine_decisions_due;
 	int32_t next_attack_consideration_due_;
-	int32_t next_helpersites_check_due_;
+	// int32_t next_helpersites_check_due_;
+	int32_t next_trainingsites_check_due_;
 	int32_t next_bf_check_due_;
 	int32_t inhibit_road_building_;
 	int32_t time_of_last_construction_;
@@ -256,11 +263,11 @@ private:
 	Widelands::Coords
 	   last_attack_target_;         // flag to abuilding (position) that was attacked last time
 	int32_t next_attack_waittime_;  // second till the next attack consideration
-	//bool building_ships ;			// a "semaphore" for shipyards whether to keep building ships
-	bool seafaring_economy;			// false by default, until first port space is found
-	int32_t spots_;                 // sum of buildable fields
+	// bool building_ships ;			// a "semaphore" for shipyards whether to keep building ships
+	bool seafaring_economy;  // false by default, until first port space is found
+	int32_t spots_;          // sum of buildable fields
 
-	enum {REPRIORITIZE,STOPSHIPYARD,STARTSHIPYARD};
+	enum { REPRIORITIZE, STOPSHIPYARD, STARTSHIPYARD };
 	std::vector<int16_t> marineTaskQueue_;
 
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldPossession>>

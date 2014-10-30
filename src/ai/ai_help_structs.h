@@ -380,6 +380,11 @@ struct MilitarySiteObserver {
 	bool enemies_nearby_;
 };
 
+struct TrainingSiteObserver {
+	Widelands::TrainingSite* site;
+	BuildingObserver* bo;
+};
+
 struct WarehouseSiteObserver {
 	Widelands::Warehouse* site;
 	BuildingObserver* bo;
