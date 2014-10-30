@@ -301,7 +301,7 @@ void DefaultAI::late_initialization() {
 		// this is set to negative number, otherwise the AI would wait 25 sec
 		// after game start not building anything
 		bo.construction_decision_time_ = -60 * 60 * 1000;
-		bo.built_mat_shortage_ = false;
+		bo.build_material_shortage_ = false;
 		bo.production_hint_ = -1;
 		bo.current_stats_ = 0;
 		bo.unoccupied_ = false;
@@ -1034,7 +1034,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 		if (bo.desc->get_size() == BaseImmovable::SMALL)
 			continue;
 
-		bo.built_mat_shortage_ = false;
+		bo.build_material_shortage_ = false;
 
 		for (EconomyObserver* observer : economies) {
 			// Don't check if the economy has no warehouse.
@@ -1046,7 +1046,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 				WareIndex wt(static_cast<size_t>(bo.critical_built_mat_.at(m)));
 
 				if (observer->economy.needs_ware(wt)) {
-					bo.built_mat_shortage_ = true;
+					bo.build_material_shortage_ = true;
 					continue;
 				}
 			}
@@ -1471,7 +1471,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 			else if (bo.type == BuildingObserver::MILITARYSITE) {
 
 				// we allow 1 exemption from big buildings prohibition
-				if (bo.built_mat_shortage_ &&
+				if (bo.build_material_shortage_ &&
 				    (bo.cnt_under_construction_ > 0 || !(bf->enemy_nearby_))) {
 					continue;
 				}
@@ -1592,6 +1592,10 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 					continue;
 				}
 
+				if (virtual_mines<3) {
+					continue;
+				}
+				
 				// build after 20 production sites and then after each 50 production site
 				if (static_cast<int32_t>((productionsites.size() + 30) / 50) > bo.total_count() &&
 				    bo.cnt_under_construction_ == 0) {
