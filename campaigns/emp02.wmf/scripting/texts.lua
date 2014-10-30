@@ -184,13 +184,13 @@ saledus_3 = {
 
 amalea_1 = {
    title =_ "Food for the Miners",
-   body= amalea(_"Amalea enters...",
+   body= amalea(_"Amalea enters…",
 		_([[Hi Lutius, I hope you forgive my criticism, but it seems to me as if you forgot something.]])
 		.. paragraphdivider() ..
 		_([[It’s nice, and of course a good idea, to build up mines, which will give us a more comfortable life, but the people working in the mines are unhappy with the current situation. They have to do hard work and have no time for making their own food.]])
 		.. paragraphdivider() ..
-		_([[What do you think about helping them out? I can’t tell you what we need exactly... but here are my recommendations:]]))
-		.. new_objectives(obj_build_food_infrastructure)
+		_([[What do you think about helping them out? I can’t tell you what we need exactly… but here are my recommendations:]]))
+		.. new_objectives(obj_build_Food_infrastructure)
 }
 
 amalea_2 = {
@@ -238,7 +238,7 @@ seven_days_later = {
    title =_ "As Time is Running By",
    w=200,
    h=150,
-   body=rt(p(_"7 days later...")),
+   body=rt(p(_"7 days later…")),
 }
 
 diary_page_11 = {
@@ -247,7 +247,7 @@ diary_page_11 = {
    body= lutius(_"Diary of Lutius",
 		_([[Today a pigeon landed on our island. It brought a message which fills me with dark thoughts and brings back my fears.]])
 		.. paragraphdivider() ..
-		_([[The message was addressed to me, begging me to come back to Fremil. It says that the Empire is at war with the Barbarians. They were attacked from the north by the tribe that I was forbidden to attack. It is clear to me what I must do...]])
+		_([[The message was addressed to me, begging me to come back to Fremil. It says that the Empire is at war with the Barbarians. They were attacked from the north by the tribe that I was forbidden to attack. It is clear to me what I must do…]])
 		.. paragraphdivider() ..
-		_([[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]])),
+		_([[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]]))
 }

@@ -5,6 +5,7 @@
 -- Functions to send messages to the player and to add objectives to campaigns.
 
 include "scripting/coroutine.lua"
+include "scripting/table.lua"
 
 -- RST
 -- .. function:: send_message(player, title, body, parameters)
@@ -45,7 +46,12 @@ end
 --
 function message_box(player, title, body, parameters)
    while (wl.ui.MapView().is_building_road) do sleep(2000) end
+   -- In case the user input was forbidden for some reason, allow him to close the message box.
+   -- While the message box is shown, the user cannot do anything else anyway.
+   local user_input = wl.ui.get_user_input_allowed()
+   wl.ui.set_user_input_allowed(true)
    player:message_box(title, body, parameters)
+   wl.ui.set_user_input_allowed(user_input)
 end
 
 -- RST
@@ -65,12 +71,108 @@ end
 -- RST
 -- .. function:: add_campaign_objective(objective)
 --
---    Addes an objective to a campaign.
+--    Adds an objective to a campaign.
 --
---    :arg objective: The objective to be added. It needs to have a name, title, and body.
+--    :arg objective: The objective to be added. If the variable obj_name exists, obj_name, obj_title and obj_body are used. Otherwise, it needs to have a name, title, and body.
 --
 --    :returns: The new objective.
 --
 function add_campaign_objective(objective)
-   return wl.Game().players[1]:add_objective(objective.name, objective.title, objective.body)
+   if objective.obj_name then
+      return wl.Game().players[1]:add_objective(objective.obj_name, objective.obj_title, objective.obj_body)
+   else
+      return wl.Game().players[1]:add_objective(objective.name, objective.title, objective.body)
+   end
 end
+
+-- RST
+-- .. function:: message_box_objective(player, message)
+--
+--    Calls message_box(player, message.title, message.body, message). Also adds an objective defined in obj_name, obj_title and obj_body.
+--    This method should gather all options that are used often to avoid reimplementation in every single scenario script.
+--
+--    :arg player: the recipient of the message
+--    :arg message: a table that contains all information
+--
+--    Besides the normal message arguments (see wl.Game.Player:message_box) the following ones can be used:
+--
+--    :arg append_objective: If true, the objective text is appended to the message.body using new_objectives(). Default: False.
+--       :arg obj_number: or :arg number: Used for the plural formatting in new_objectives. Default: 1.
+--    :arg jump_to_field: If true, the view jumps to the message.field rather than scroll to it. Does nothing if the field is nil. Default: False, i.e. the view will scroll.
+--    :arg position: A string that indicates at which border of the screen the message box shall appear. Can be "top", "bottom", "right", "left" or a combination (e.g. "topright"). Overrides posx and posy. Default: Center. If only one direction is indicated, the other one stays central.
+--    :arg scroll_back: If true, the view scrolls/jumps back to where it came from. If false, the new location stays on the screen when the message box is closed. Default: False.
+--    :arg show_instantly: If true, the message box is shown immediately. If false, this function calls message_box(), which waits until the player leaves the roadbuilding mode. Use this with care because it can be very interruptive. Default: false.
+--
+--    :returns: the objective if defined, nil otherwise
+
+-- TODO(wl-zocker): This function should be used by all tutorials, campaigns and scenario maps
+function message_box_objective(player, message)
+   message.jump_to_field = message.jump_to_field or false
+   message.show_instantly = message.show_instantly or false
+   message.scroll_back = message.scroll_back or false
+   message.append_objective = message.append_objective or false
+   message.h = message.h or 400
+   message.w = message.w or 450
+
+   local way, x, y
+
+   if message.field then
+      -- This is necessary. Otherwise, we would scroll and then wait until the road is finished.
+      -- In this time, could user can scroll elsewhere, giving weird results.
+      if not message.show_instantly then
+         while (wl.ui.MapView().is_building_road) do sleep(2000) end
+      end
+      if message.jump_to_field then
+         x,y = wl.ui.MapView().viewpoint_x, wl.ui.MapView().viewpoint_y
+         -- player:message_box jumps, so nothing to do for us
+      else
+         way = scroll_smoothly_to(message.field)
+      end
+   end
+
+   if message.position then
+      if string.find(message.position,"top") then
+         message.posy = 0
+      elseif string.find(message.position,"bottom") then
+         message.posy = 10000
+      end
+      if string.find(message.position,"left") then
+         message.posx = 0
+      elseif string.find(message.position,"right") then
+         message.posx = 10000
+      end
+   end
+
+   if (message.obj_name and message.append_objective) then
+      message.obj_number = message.obj_number or message.number or 1
+      -- because new_objectives needs a body
+      local obj = {body = objective_text(message.obj_title, message.obj_body), number = message.obj_number}
+      message.body = message.body .. new_objectives(obj)
+   end
+
+   if message.show_instantly then
+      -- message_box takes care of this, but player:message_box does not
+      local user_input = wl.ui.get_user_input_allowed()
+      wl.ui.set_user_input_allowed(true)
+      player:message_box(message.title, message.body, message)
+      wl.ui.set_user_input_allowed(user_input)
+   else
+      message_box(plr, message.title, message.body, message)
+   end
+
+   if (message.field and message.scroll_back) then
+      if message.jump_to_field then
+         wl.ui.MapView().viewpoint_x = x
+         wl.ui.MapView().viewpoint_y = y
+      else
+         timed_scroll(array_reverse(way))
+      end
+   end
+
+   if message.obj_name then
+      return add_campaign_objective(message)
+   else
+      return nil
+   end
+end
+

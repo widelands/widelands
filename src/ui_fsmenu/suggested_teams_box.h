@@ -42,7 +42,7 @@ struct SuggestedTeamsBox : public UI::Box {
 	~SuggestedTeamsBox();
 
 	void hide();
-	void show(const std::vector<Widelands::Map::SuggestedTeamLineup*>& suggested_teams);
+	void show(const std::vector<Widelands::Map::SuggestedTeamLineup>& suggested_teams);
 
 private:
 	int32_t const m_padding;
@@ -52,7 +52,7 @@ private:
 	UI::Box* m_lineup_box;
 	std::vector<UI::Icon*> m_player_icons;
 	std::vector<UI::Textarea*> m_vs_labels;
-	std::vector<Widelands::Map::SuggestedTeamLineup*> m_suggested_teams;
+	std::vector<Widelands::Map::SuggestedTeamLineup> m_suggested_teams;
 };
 
 }

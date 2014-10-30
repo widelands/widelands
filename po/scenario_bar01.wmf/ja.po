@@ -1,0 +1,2086 @@
+# Japanese translation for widelands
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2014-10-29 08:30+0000\n"
+"PO-Revision-Date: 2014-07-27 17:09+0000\n"
+"Last-Translator: Midori <midori.tj@gmail.com>\n"
+"Language-Team: Japanese <ja@li.org>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Launchpad-Export-Date: 2014-10-29 06:09+0000\n"
+"X-Generator: Launchpad (build 17203)\n"
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:23
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:25
+msgid "Build two ranger’s huts"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:26
+msgid "Build a ranger’s hut next to each lumberjack’s hut."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:27
+msgid ""
+"Naturally, trees only grow at a slow rate. To make sure you have enough "
+"logs, you have to build rangers."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:33
+msgid "Expand north-east and build a quarry"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:35
+msgid "Expand north-east to the rocks"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:36
+msgid ""
+"Build military buildings (like sentries or barriers) to expand your "
+"territory."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:37
+msgid "Get to the rocks north-east from you and build a quarry there."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:43
+msgid "Start building mines on the mountain"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:45
+msgid "Build coal and iron ore mines"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:46
+msgid "Build a coal mine and an iron ore mine."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:47
+msgid ""
+"To do so, place a flag up on the mountain’s flank to the east (on mountain "
+"terrain though, not mountain meadow). When you click on the new flag, you "
+"can send geologists there. Because the flag is on a mountain, the geologists "
+"will search for ores; otherwise, they would search for water. Then build a "
+"mine for both kinds of resources that he will find, choosing the appropriate "
+"mine to be built:"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:49
+msgid "a bit of coal"
+msgstr "少量の石炭"
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:50
+msgid "a lot of coal"
+msgstr "大量の石炭"
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:51
+msgid "a bit of iron"
+msgstr "少量の鉄"
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:52
+msgid "a lot of iron"
+msgstr "大量の鉄"
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:53
+msgid "a bit of gold"
+msgstr "少量の金"
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:54
+msgid "a lot of gold"
+msgstr "大量の金"
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:55
+msgid "a bit of granite"
+msgstr "少量の花崗岩"
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:56
+msgid "a lot of granite"
+msgstr "大量の花崗岩"
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:57
+msgid "water"
+msgstr "水"
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:58
+msgid "nothing was found here"
+msgstr "何も見つからなかった"
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:60
+msgid ""
+"Mines can only be built on mountain terrain. Suitable places for mines are "
+"displayed as orange mine symbols."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:66
+#, fuzzy
+msgid "Provide your miners with food"
+msgstr "マウスで視点を移動する"
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:68
+msgid "Build a hunter, a gamekeeper and a tavern"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:69
+msgid "In order to work, your miners need food."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:70
+msgid ""
+"A hunter can hunt down animals, while a gamekeeper prevents them from "
+"becoming extinct. The meat is then processed in a tavern into lunches for "
+"your miners."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:71
+msgid ""
+"This is only the first example of a ware which has to be refined before "
+"being used in a secondary building – others will follow."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:77
+msgid "Bake bread"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:79
+msgid "Build a well, a farm and a bakery"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:80
+msgid ""
+"Other ways to produce food – different kinds of food – are fishers and "
+"hunters. The wheat of the farms has to be processed with water in a bakery "
+"before it becomes edible. You can obtain water by building a well on a spot "
+"where your geologists have found a water source."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:86
+#, fuzzy
+msgid "Refine your mined resources"
+msgstr "資源の探索"
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:88
+#, fuzzy
+msgid "Build a smelting works"
+msgstr "道路を接続する"
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:89
+msgid ""
+"The iron ore your miners dig up is not usable yet – it has to be melted into "
+"iron first."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:95
+msgid "Enhance buildings and build a micro brewery"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:97
+msgid "Enhance a mine and the tavern, and build a micro brewery."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:98
+msgid ""
+"Enhance the coal mine or the iron mine to a deep mine, and enhance the "
+"tavern to an inn."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:99
+msgid "Also build a micro brewery."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:100
+msgid ""
+"A normal mine can only dig up about one third of all the resources that lie "
+"beneath it; then it must be enhanced to a deep mine in order to keep it "
+"working properly. To enhance a building, choose it and then click the "
+"appropriate button in the appearing window."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:101
+msgid ""
+"Workers gain experience by successful work. With enough experience, they "
+"become more advanced workers, who are necessary to operate the enhanced "
+"buildings. Do not enhance a building before you have enough advanced workers "
+"to operate the advanced building!"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:102
+msgid ""
+"Such buildings usually have greater demands than the basic kind of that "
+"building – for instance, deep mines need snacks instead of rations. You will "
+"have to enhance your tavern to an inn in order to produce snacks out of "
+"pitta bread AND a second kind of food (meat or fish) AND beer."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:103
+msgid ""
+"You may of course enhance all mines to deep mines instantly given you have "
+"the workers – bigger mines work a bit faster, smaller mines need cheaper "
+"food. It’s up to you which strategy you prefer."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:109
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:111
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:114
+#, fuzzy
+msgid "Build a wood hardener"
+msgstr "採石場を建設する"
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:112
+msgid ""
+"Bigger and better buildings – including all military ones – require better "
+"building materials. They cannot be built out of simple logs – the wood has "
+"to be refined to blackwood by a wood hardener first. Always remember to "
+"build a wood hardener before you run out of blackwood, as without it you "
+"cannot expand."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:120
+msgid "Build a lime kiln and coal economy"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:122
+msgid ""
+"Build a lime kiln fed by a well, and by a charcoal kiln or by a coal mine"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:123
+msgid ""
+"Better buildings may also require other improved materials besides "
+"blackwood. One of these is grout, which is produced out of raw stone, water "
+"and coal by a lime-burner."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:125
+msgid ""
+"You can obtain water by building a well upon a water source, which your "
+"geologists can discover when you send them to any flag that is not on a "
+"mountain."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:127
+msgid ""
+"In order to call a geologist to search for water, click on a flag in the "
+"area that you want him to search and then on the button labeled ‘Send "
+"geologist to explore site’."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:129
+msgid ""
+"Coal can be obtained by building a charcoal kiln or a coal mine. Burning "
+"charcoal out of logs is slow. You should only build a charcoal kiln when no "
+"coal is available."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:131
+msgid ""
+"Build a lime kiln and a well. Additionally, build either a charcoal kiln or "
+"a coal mine for coal supply."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:137
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:139
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:142
+#, fuzzy
+msgid "Build a reed yard"
+msgstr "採石場を建設する"
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:140
+msgid ""
+"The third material necessary for improved buildings is thatch reed, used to "
+"cover roofs. Thatch reed is planted by a gardener around his building, the "
+"reed yard."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:148
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:150
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:155
+#, fuzzy
+msgid "Build a cattle farm"
+msgstr "採石場を建設する"
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:151
+msgid ""
+"When roads are under heavy load for a long time, one carrier is usually not "
+"enough to transport goods swiftly. Traffic jams are the consequence. Such "
+"roads therefore employ a second carrier: an ox that helps to carry the "
+"wares. This doubles the transport capacity."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:153
+msgid "Oxen are bred in cattle farms out of wheat and water."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:165
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:175
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:188
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:200
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:208
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:219
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:229
+msgid "The Story Begins"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:166
+msgid "Thron sighs…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:167
+msgid ""
+"It’s been months, and we are still hiding where the forests are old and dark."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:169
+msgid ""
+"My warriors hunt at day and lie awake at night – listening to the sounds of "
+"the cruel slaughter echoing from afar amongst the ancient trees."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:177
+msgid ""
+"We can see the raging flames that swallow Al’thunran from here, miles away."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:179
+msgid ""
+"The red lights flash in the darkness and dance to the rhythm of the war "
+"drums that haunt me even in my nightmares."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:190
+msgid ""
+"My father’s bones rest peacefully in the ground on which he once ended the "
+"senseless spilling of blood that had arisen amongst us. It pains me that his "
+"peace only endured for one generation."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:192
+msgid ""
+"Boldreth, my loyal companion and friend is a source of peace and comfort to "
+"me in these dark times. He keeps my spirits high and those of my warriors "
+"awake, preventing greed or despair from destroying the bonds between us as "
+"well."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:202
+msgid ""
+"As father told me, there are times to fight and times to lie and wait, "
+"trying not to fall asleep or die before the right time comes. And so I do "
+"wait."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:209
+msgid "Thron is shaking his head…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:210
+msgid ""
+"Yet the war goes on. More and more of our brothers and sisters flee the "
+"brutal war raging in the capital beneath the trees."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:212
+msgid ""
+"The stories they tell about the deeds of our kin are sad to hear. I’ve spent "
+"nights lying awake, restless, more tired than I ever believed one could be. "
+"Yet whenever I close my eyes, I see the fortress my father built consumed by "
+"flames. The Throne Among the Trees, the symbol of unity and peace among our "
+"kin, became the wedge that drives us apart."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:221
+msgid ""
+"Today my hunters brought men, women and little children before me who had "
+"hidden out in the forests, trying to escape the war, hate and revenge that "
+"rage among the tribes fighting each other like in olden times, when we were "
+"no more but wild beasts driven and controlled by instincts. None of my "
+"brothers will ever gain and hold control over the wooden throne, none of the "
+"tribes will be strong enough to subdue the other. There will be no end to "
+"this slaughter, unless… is this it? As father told me?"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:223
+msgid ""
+"To rise against whoever threatens our very existence, even though it may be "
+"one of your own blood or mind?"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:231
+msgid ""
+"Boldreth seems more and more torn as the days go by. The spirits of my "
+"fellows sink as the cold season approaches, and we are still living in no "
+"more than huts and barracks. I never intended to stay out here in the "
+"wilderness for so long – but I never thought my brothers would engage in "
+"this senseless battle for so long either."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:233
+msgid ""
+"Perhaps it’s time to make ourselves feel a little more at ease here. Perhaps "
+"it’s time to give those who still live and think united a new home, "
+"replacing what is now lost to us? Until we can return to the place we once "
+"called our home…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:239
+msgid "Somebody Comes up to You"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:240
+msgid "An old man says…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:241
+msgid ""
+"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
+"allow me to aid you with my counsel through these darkened days."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:243
+msgid ""
+"Only the gods know for how long we have to remain hidden here. The warriors "
+"hope we may march back gloriously any day now, but I strongly doubt that "
+"will happen soon. And the days are short and cold…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:249
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:313
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:329
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:336
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:359
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:375
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:392
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:413
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:441
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:450
+msgid "The Advisor"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:250
+msgid "Khantrukh notes…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:251
+msgid ""
+"I see you have already built a quarry and two lumberjack’s huts. That is a "
+"good beginning if we want to stay here longer."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:253
+msgid ""
+"But never forget – these forests are our heritage, entrusted upon us by our "
+"ancestors. We must always respect and care for them. What we take, we must "
+"give back again."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:255
+msgid ""
+"So, in order to replace the trees we chop down, we should build some "
+"ranger’s huts, preferably close to the lumberjack’s huts."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:261
+msgid "In the Night"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:262
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:274
+msgid "Thron says…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:263
+msgid ""
+"During another sleepless night, I went up to the hill and gazed towards the "
+"north. The fires are still burning, satisfying their hunger upon my father’s "
+"legacy."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:265
+msgid ""
+"They are a constant reminder of why we have to hide here… and why we must "
+"return in the end!"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:273
+msgid "At the Tomb"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:275
+msgid ""
+"Once again, I went up to my father’s tomb, in a sacred grove at the foot of "
+"the great spire of Kal’mavrath. I just stood there and felt neither the "
+"hours pass nor the cold rain pouring down from the darkened sky…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:277
+msgid ""
+"Somehow, it felt like a farewell. For the first time, I wondered what the "
+"future might hold for me…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:285
+msgid "The Other Day"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:286
+msgid "Thron says thoughtfully…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:287
+msgid ""
+"Some time ago, Boldreth came to me. His advice was to move to a place closer "
+"to home – to strike at the first sign of my brothers’ forces wavering."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:289
+msgid ""
+"But when I look over the forests I can still see black smoke rising to the "
+"sky. I know – it is too early yet, and what he hopes for will not happen any "
+"time soon. He might still be right, but I fear the bloodshed that returning "
+"too fast would cause on both sides…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:295
+msgid "The Oath"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:296
+msgid "Thron looks furious…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:297
+msgid ""
+"Today, my warriors picked up an old man, wandering sick and wounded through "
+"the dark forest. We listened in horror as he told us of the atrocities "
+"taking place in Al’thunran."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:299
+msgid "I hereby renew my oath – I will stop this madness at any cost!"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:305
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:320
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:342
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:351
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:366
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:384
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:406
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:422
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:431
+msgid "Your Loyal Companion"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:306
+msgid "Brave Boldreth steps to your side…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:307
+msgid ""
+"So you want to prepare us for a longer stay in these forests, Thron? Well, I "
+"see the wisdom in doing so, yet my heart is yearning for a glorious return "
+"to Al’thunran. Too long have we waited while our brethren have fought on the "
+"battlefield, and our axes and swords have turned rusty over time."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:314
+msgid "Khantrukh joins in…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:315
+msgid ""
+"I beg your forgiveness, chieftain, but I have a grave concern to discuss "
+"with you. The rocks close to our camp are shrinking fast under our workers’ "
+"tools, and it is a matter of little time only before they are all gone."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:322
+msgid "Boldreth jumps up…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:323
+msgid ""
+"While it is certainly no worthy task for a warrior, at least it is something "
+"to do! Thron, what would you say about my taking a few of our most restless "
+"warriors and venturing somewhat closer to the great mountain of Kal’mavrath "
+"– maybe we will find some more big rocks to please the old man?"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:331
+msgid "Khantrukh grumbles…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:332
+msgid "Old man? Disrespectful youth!"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:337
+msgid "Khantrukh nods satisfied…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:338
+msgid "At last! These rocks should last for a while."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:343
+msgid "Boldreth exclaims…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:344
+msgid ""
+"Just look at that! In the east is the great mountain of Kal’mavrath! I "
+"wonder what treasures nature might have hidden beneath its majestic flanks!"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:346
+msgid ""
+"Let’s expand to the east. There’s a chance for the elderly to become useful "
+"once in a while! Let us send out some of those who understand the stone’s "
+"tongue to unravel the mountain’s secrets!"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:352
+msgid "Boldreth laughs…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:353
+msgid ""
+"By Chat’Karuth’s beard, this is amazing! Just imagine what we can use this "
+"coal and iron ore for!"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:355
+msgid "It might even be enough to…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:360
+msgid "Khantrukh interrupts…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:361
+msgid ""
+"While this is true, we should consider it later, for now other obstacles are "
+"at hand. The miners will definitely demand greater rations for working high "
+"up on the mountain in this bitter cold, and providing these supplies may not "
+"be easy."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:367
+msgid "Boldreth nods…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:368
+msgid "I have to hand it to you: you are right here, old man."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:370
+msgid ""
+"There seem to be quite a lot of animals in the forests here – we might just "
+"hunt down more of them. And, of course, the people would cheer a new tavern "
+"– hey, we might call it ‘Thron’s Pride’ or so if you want!"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:376
+msgid "The elder jumps into the air…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:377
+msgid "Wisdom commands to seek variety."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:379
+msgid ""
+"North of the great mountain is a large plain – why don’t we use the space "
+"Mother Nature gave us and build a farm? I sure would enjoy a freshly baked "
+"pitta bread for a change…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:385
+msgid "Boldreth cheers up…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:386
+msgid "Our hunters are out in the forests, Thron."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:388
+msgid ""
+"I promise you, before the sun sets today you will have a magnificent meal "
+"fit for the chieftain of all clans!"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:393
+msgid "Khantrukh gazes over the plains…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:394
+msgid ""
+"Isn’t it lovely, the view of golden fields, growing peacefully, dancing to "
+"the wind? And I believe the baker is just on his way here, with his most "
+"delicious bread reserved for our chieftain alone!"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:398
+msgid "A Beautiful Morning"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:399
+msgid "Thron recognizes…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:400
+msgid ""
+"A tavern opened for our people yesterday. While I am hardly in the mood for "
+"celebration, I noticed how much this tiny bit of home means to my people. "
+"Their songs filled the air until deep in the night, and they were in higher "
+"spirits still the day after."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:402
+msgid ""
+"Maybe we actually are slowly creating a place here which we can… call home."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:407
+msgid "Boldreth remarks…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:408
+msgid ""
+"So now that we have both the mines and the food to sustain them, we should "
+"bring what our brave miners gain for us into a more useful state. The iron "
+"ore has to be melted into iron so that it is ready to be forged into "
+"whatever we want. And we need the coal to keep the smelter’s ovens burning."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:414
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:458
+msgid "Khantrukh speaks…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:415
+msgid ""
+"Our miners are digging up less and less by the day! We have to go deeper, "
+"closer to the mountain’s core, if we want more of its treasures!"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:417
+msgid ""
+"Of course, it is dark and cold in such depths and only a few venture "
+"voluntarily into these places. We should reward this bravery with greater "
+"rations for them. And a pint of beer or two will keep their spirits high."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:423
+msgid "Boldreth seems concerned…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:424
+msgid ""
+"As I just discovered, we are running short on blackwood! We cannot put our "
+"warriors into some crumbling huts, and even less so in times as dangerous as "
+"ours!"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:426
+msgid "We need a wood hardener, and we need one now!"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:432
+msgid "Boldreth smiles…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:433
+msgid ""
+"Well, old friend, this should ensure that our fortifications do not break "
+"down with our foes’ first battle cry! Now we can expand safely!"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:435
+msgid ""
+"Still, it would not hurt to accumulate some grout for our further campaign; "
+"thus we could, in times of need, build a fortress such as the world has "
+"never seen before!"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:442
+msgid "Khantrukh steps in…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:443
+msgid ""
+"Chieftain, this is a disgrace! It is well that we can produce grout for "
+"mighty fortifications and great buildings now – only this does not prevent "
+"our roofs from becoming leaky! Maybe the young ones like spending their "
+"nights in the rain, but I just can’t find any sleep with these raindrops "
+"dripping on my face!"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:445
+msgid "Now this is a problem we should do something about!"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:451
+msgid "Khantrukh seems relieved…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:452
+msgid ""
+"Wonderful! Our roofs are not dripping anymore, and we have all the material "
+"we need for, well, whichever monumental building we see fit!"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:457
+msgid "We Need Oxen!"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:459
+msgid ""
+"As our realm is getting bigger and bigger, the traffic on the roads is "
+"overwhelming. Our poor carriers are no longer able to transport the goods as "
+"fast as we need them to. I suggest we give them some support by breeding "
+"oxen."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:461
+msgid ""
+"They are amazing animals: The ox is as swift as a human being while being "
+"much stronger and very frugal: all we need is wheat and water to breed them "
+"and they will do their work on the roads loyally and reliably."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:466
+msgid "Mission Complete"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:467
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:479
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:497
+msgid "Thron speaks…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:468
+msgid ""
+"The other day Boldreth asked me to accompany him to the new inn. It would "
+"cheer me up, he said."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:470
+msgid ""
+"When I looked around, I saw faithful faces, trusting that I could guide them "
+"through these dark days. Yet before I could speak any words of gratitude or "
+"encouragement, one of my warriors ran into the inn. He had been far out in "
+"the forest for the past days and I could see how weary he was."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:472
+msgid "The news he brought changed everything…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:473
+msgid "Victory"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:474
+msgid ""
+"You have completed this mission. You may continue playing if you wish, "
+"otherwise move on to the next mission."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:478
+msgid "One Full Moon Night"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:480
+msgid ""
+"One night, when the moon shone brightly, I climbed to the peak of "
+"Kal’mavrath."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:482
+msgid ""
+"When I gazed at the horizon, I still saw crimson lights flicker in the "
+"distance. It is incredible with how much passion my brethren fight this war. "
+"I fear the moment I will see Al’thunran again – will there be anything but "
+"ashes and wasted ruins left of our once beautiful capital when we get there?"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:486
+msgid "Another Cold Day"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:487
+msgid "Thron looks worried…"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:488
+msgid ""
+"The winter is upon us. Many of us are suffering from the cold, yet we must "
+"endure. The day we may return cannot be far anymore – it must not be far "
+"anymore."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:490
+msgid ""
+"I prayed that it might get warmer again, as I prayed that the war would "
+"finally come to an end."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:492
+msgid "So far, it seems that neither prayer was fulfilled."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:496
+msgid "A friendly village has joined us!"
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:498
+msgid ""
+"We have found a village with friendly and productive people, impressed by "
+"our wealth, technology and strength."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:500
+msgid ""
+"They have lived simply, yet blithely, from hunting and farming. They have "
+"not been involved in any conflict so far, and are not ready for fighting."
+msgstr ""
+
+#: ../../campaigns/bar01.wmf/scripting/texts.lua:502
+msgid ""
+"But they fear that the war around Al’thunran will set an end to this life. "
+"Therefore, they have decided to join us, hoping that we can help each other."
+msgstr ""
+
+#: ../../scripting/format_scenario.lua:36
+msgid "“%s”"
+msgstr "『%s』"
+
+#: ../../scripting/format_scenario.lua:133
+msgid "New Objective"
+msgid_plural "New Objectives"
+msgstr[0] "新しい目的"
+
+#~ msgid "Nice And Easy Does It All the Time"
+#~ msgstr "いつでも、のんびりいこう"
+
+#~ msgid ""
+#~ "I am sorry, but will I have to tear this down again. We might need the "
+#~ "space here later on. If I am too slow for you, you might want to play a "
+#~ "real game and just find everything out for yourself. Otherwise, please "
+#~ "bear with me, I am not the youngest and quickest anymore."
+#~ msgstr ""
+#~ "すみませんが、これを再び取り壊す必要があります。あとから、ここにスペースが"
+#~ "必要になる場合があります。あなたにとって説明がスローペースすぎる場合は、実"
+#~ "際のゲームをプレイし、自分自身ですべてを見つけるのも良いでしょう。そうでな"
+#~ "ければ、もうそれほど若くも速くもないわたしに、お付き合いください。"
+
+#~ msgid "Welcome to the Widelands Tutorial!"
+#~ msgstr "Widelandsのチュートリアルにようこそ！"
+
+#~ msgid "Welcome to Widelands!"
+#~ msgstr "Widelandsにようこそ！"
+
+#~ msgid ""
+#~ "Widelands is a slow-paced build-up strategy game with an emphasis on "
+#~ "construction, not destruction. This tutorial will guide you through the "
+#~ "basics of the game."
+#~ msgstr ""
+#~ "Widelandsは破壊ではなく建設に重点を置いた、スローペースなビルドアップスト"
+#~ "ラテジーです。このチュートリアルではゲームの基本を学びます。"
+
+#~ msgid "Dismiss this box by left-clicking on the button below."
+#~ msgstr "下のボタンを左クリックして、このボックスを閉じてください。"
+
+#~ msgid "Diving In"
+#~ msgstr "はじめよう"
+
+#~ msgid "Let’s dive right in!"
+#~ msgstr "さあはじめよう！"
+
+#~ msgid ""
+#~ "There are three different tribes in Widelands: the Barbarians, the Empire "
+#~ "and the Atlanteans. All tribes have a different economy, strength and "
+#~ "weaknesses, but the general gameplay is the same for all. We will play "
+#~ "the barbarians for now."
+#~ msgstr ""
+#~ "Widelandsには、バーバリアン・帝国・アトランティスの三つの異なる部族がいま"
+#~ "す。すべての部族それぞれに異なる経済、強み、弱みがありますが、基本的なゲー"
+#~ "ムプレイは同じです。今からバーバリアンでプレイします。"
+
+#~ msgid ""
+#~ "You will usually start the game with one headquarters. This is the big "
+#~ "building with the blue flag in front of it. The headquarters is a "
+#~ "warehouse that stores wares, workers and soldiers. Some wares are needed "
+#~ "for building houses, others for making other wares. Obviously, the wares "
+#~ "in the headquarters will not last forever, so you must make sure to "
+#~ "replace them. The most important wares in the early game are the basic "
+#~ "construction wares: logs and raw stone. Let’s make sure that we do not "
+#~ "run out of logs. For this, we need a lumberjack and a hut for him to stay "
+#~ "in."
+#~ msgstr ""
+#~ "本拠地からゲームを開始します。本拠地は目の前に青い旗を持つ大きな建物です。"
+#~ "本拠地はアイテムや労働者、そして兵士を格納する倉庫です。いくつかのアイテム"
+#~ "は他のアイテムを作るための建物や人々に必要とされています。本拠地にあるアイ"
+#~ "テムは永遠には続かないので、それらを再生産する必要があります。ゲーム序盤で"
+#~ "最も重要なアイテムは木材や原石といった基本的な建設材料です。早速、木材が不"
+#~ "足しないようにしましょう。そのためには木こりと木こりが滞在するための小屋が"
+#~ "必要です。"
+
+#~ msgid ""
+#~ "We need to find a nice place for the lumberjack’s hut. To make this "
+#~ "easier, we can activate ‘Show Building Spaces’. There are two ways you "
+#~ "can do this, either by clicking on the ‘Show Building Spaces’ button at "
+#~ "the bottom of the screen, which is the fourth one from the left. Or you "
+#~ "can use the SPACE key to toggle it."
+#~ msgstr ""
+#~ "木こり小屋に適した場所を見つける必要があります。簡単に見つけるには、「建設"
+#~ "スペースを表示」を有効にします。有効にするには二つの方法があります。画面下"
+#~ "部の左から４番目の「建設スペースを表示」のボタンをクリックして切り替える"
+#~ "か、Spaceキーで切り替えてください。"
+
+#~ msgid "Left-click the ‘OK’ button to close this box and then try it."
+#~ msgstr ""
+#~ "OKボタンを左クリックしてこのボックスを閉じ、実際にやってみましょう。"
+
+#~ msgid "Enable the showing of building spaces"
+#~ msgstr "建設スペースの表示を有効化"
+
+#~ msgid "Show Building Spaces"
+#~ msgstr "建設スペースを表示する"
+
+#~ msgid ""
+#~ "It is easier to understand what type of buildings can be built on which "
+#~ "field when the symbols for the building spaces are enabled."
+#~ msgstr ""
+#~ "建設スペースを有効にすると、フィールドにどのタイプの建物を建てることが許可"
+#~ "されているか理解しやすくなります。"
+
+#~ msgid ""
+#~ "Do so now either by pressing SPACE or by clicking the fourth button from "
+#~ "the left at the very bottom of the screen. Right-click on this window and "
+#~ "then give it a try."
+#~ msgstr ""
+#~ "Spaceキーを押すか、画面最下部の左から４番目のボタンをクリックしてくださ"
+#~ "い。このウィンドウを右クリックしてから、実際にやってみましょう。"
+
+#~ msgid "Lumberjack’s Spot"
+#~ msgstr "木こり小屋の場所"
+
+#~ msgid ""
+#~ "There you go. I will explain about all those symbols in a minute. First, "
+#~ "let me show you how to make a lumberjack’s hut and how to connect it with "
+#~ "a road. There is a sweet spot for a lumberjack right next to those trees. "
+#~ "I’ll describe the steps I will take and then ask you to click on the ‘OK’ "
+#~ "button for me to demonstrate."
+#~ msgstr ""
+#~ "まず、木こり小屋をどのように建て、それを道路とどのように接続するかをお見せ"
+#~ "します。木々のすぐそばが木こり小屋に適した場所です。デモをするので「OK」ボ"
+#~ "タンをクリックしてください。"
+
+#~ msgid "Building the Lumberjack"
+#~ msgstr "木こり小屋を建てる"
+
+#~ msgid ""
+#~ "First, I’ll left-click on the symbol where I want the lumberjack’s hut to "
+#~ "be built. A window will appear where I can choose between buildings. "
+#~ "Because I’ll click a yellow house symbol – which means that its field can "
+#~ "house medium and small buildings – I am presented with all the medium "
+#~ "buildings that I can build. The lumberjack’s hut is a small building, so "
+#~ "I will go on to select the small buildings tab. Then I’ll choose the "
+#~ "lumberjack’s hut."
+#~ msgstr ""
+#~ "はじめに、木こり小屋を建設したい場所のシンボルを左クリックします。建物を選"
+#~ "択できるウィンドウが表示されます。黄色の家のシンボル（中規模の建物が建設可"
+#~ "能なことを意味します）をクリックすると建設可能な建物 中が表示されます。木"
+#~ "こり小屋は小規模な建物なので小規模の建物のタブを選択します。それから木こり"
+#~ "小屋を選びます。"
+
+#~ msgid ""
+#~ "Click the ‘OK’ button to watch me. I’ll go really slowly: I will click – "
+#~ "then select the tab – and finally I’ll choose the building."
+#~ msgstr ""
+#~ "デモを見るにはOKボタンをクリックしてください。デモではこれらをゆっくりと"
+#~ "行ってみせます。クリックします - タブを選択します - そして最後に建物を選び"
+#~ "ます。"
+
+#~ msgid ""
+#~ "That won’t do yet. I still need to connect the lumberjack’s hut to the "
+#~ "rest of my road network. After ordering the construction site, I was "
+#~ "automatically put into road building mode, so all I have to do is click "
+#~ "on the blue flag in front of my headquarters."
+#~ msgstr ""
+#~ "まだ終わりではありません。道路網に木こり小屋を接続する必要があります。建設"
+#~ "を命じた後、自動的に道路敷設モードに入るので、本拠地の前の青旗をクリックし"
+#~ "ます。"
+
+#~ msgid "Waiting for the Lumberjack to Go Up"
+#~ msgstr "木こり小屋が立ち上がるのを待つ"
+
+#~ msgid ""
+#~ "Now watch closely while a builder leaves the headquarters and goes to the "
+#~ "construction site. Also, a carrier will take position in between the two "
+#~ "blue flags and carry wares from one blue flag to the other."
+#~ msgstr ""
+#~ "建築人が本拠地を出て、建設地に行くようになることに注目してください。また、"
+#~ "運搬人が二つの青旗の間にポジションを取り、一方の青旗から他方の青旗にアイテ"
+#~ "ムを運ぶようになります。"
+
+#~ msgid "Placing Another Flag"
+#~ msgstr "別の旗を立てる"
+
+#~ msgid ""
+#~ "Nice how they are working, isn’t it? But the poor carrier has a very long "
+#~ "way to go. We can make it easier for him (and more efficient for us) when "
+#~ "we place another blue flag on the road."
+#~ msgstr ""
+#~ "彼らは良く働いているでしょう？しかし、運搬人にとっては非常に長い道のりで"
+#~ "す。道路上に別の青旗を立てることで彼らを楽に（そして私たちのために、より効"
+#~ "率的に）させてあげることができます。"
+
+#~ msgid ""
+#~ "You try it this time: click on the yellow flag symbol in between the two "
+#~ "blue flags we just placed and then click on the"
+#~ msgstr ""
+#~ "ここで試してみましょう。配置済みの二つの青旗の間の黄旗のシンボルをクリック"
+#~ "し、下記のシンボルをクリックしてください。"
+
+#~ msgid "build flag symbol."
+#~ msgstr "旗を立てるシンボル"
+
+#~ msgid "Build a flag to divide the road to the lumberjack"
+#~ msgstr "木こり小屋への道を分割するために旗を立てる"
+
+#~ msgid "Build a Flag on the Road"
+#~ msgstr "道路に旗を立てる"
+
+#~ msgid ""
+#~ "The shorter your road segments are, the faster your wares will be "
+#~ "transported. You should therefore make sure that your roads have as many "
+#~ "flags as possible."
+#~ msgstr ""
+#~ "道路の区間を短くすると、アイテムがより速く運搬されます。したがって、道路に"
+#~ "可能な限り多くの旗を立てるべきです。"
+
+#~ msgid ""
+#~ "Build a blue flag now in the middle of the road that connects your "
+#~ "headquarters to your lumberjack’s hut."
+#~ msgstr "木こり小屋と本拠地を接続する道路のまん中に、青い旗を立てましょう。"
+
+#~ msgid "Waiting For the Hut to be Finished"
+#~ msgstr "小屋が完成するのを待つ"
+
+#~ msgid "Well done! Let’s wait till the hut is finished."
+#~ msgstr "良くできました！小屋が完成するまで待ちましょう。"
+
+#~ msgid ""
+#~ "If you want things to go faster, simply use the PAGE UP key on your "
+#~ "keyboard to increase the game speed. You can use PAGE DOWN to make the "
+#~ "game slower again."
+#~ msgstr ""
+#~ "早く進めたい場合、ゲーム速度を上げるためにキーボードのPageUpキーを押してく"
+#~ "ださい。再びゲームを遅くするためにはPageDownキーを押します。"
+
+#~ msgid "Lumberjack is Done"
+#~ msgstr "木こり小屋が完成"
+
+#~ msgid ""
+#~ "Excellent. The lumberjack’s hut is done. A lumberjack will now move in "
+#~ "and start chopping down trees, so our logs income is secured for now. Now "
+#~ "on to the raw stone."
+#~ msgstr ""
+#~ "良くできました。木こり小屋が完成しました。木こりはすぐに移動し、木の伐採を"
+#~ "開始するでしょう。これで木材の収入が確保されました。次は原石の確保です。"
+
+#~ msgid "Some Stones Were Found"
+#~ msgstr "発見した石"
+
+#~ msgid "Getting a Quarry Up."
+#~ msgstr "採石場を建設します。"
+
+#~ msgid ""
+#~ "Stones can be mined in granite mines, but the easier way is to build a "
+#~ "quarry next to some stones lying around. As it happens, there is a pile "
+#~ "of them just to the west (left) of your headquarters. I will teach you "
+#~ "now how to move your view over there."
+#~ msgstr ""
+#~ "原石は花崗岩の鉱山で採掘されますが、もっと簡単な方法は、転がってるいくつか"
+#~ "の岩の隣に採石場を建設することです。偶然にも、本拠地のすぐ西（左）に石の山"
+#~ "があります。これから視点をそこに移動させるための方法を教えます。"
+
+#~ msgid ""
+#~ "There are two ways to move your view. The first one is using the cursor "
+#~ "keys on your keyboard. Go ahead and try this out."
+#~ msgstr ""
+#~ "視点を移動するには二つの方法があります。一つ目は、キーボードのカーソルキー"
+#~ "を使用します。先に進んで、試してみましょう。"
+
+#~ msgid "Click the ‘OK’ button and then move the view using the cursor keys"
+#~ msgstr ""
+#~ "OKボタンをクリックしてからカーソルキーを使用して視点を移動してください。"
+
+#~ msgid "Move your view with the cursor keys"
+#~ msgstr "カーソルキーを使用して視点を移動する"
+
+#~ msgid "Moving Your View"
+#~ msgstr "視点を移動する"
+
+#~ msgid ""
+#~ "Moving your view is essential to get a complete overview of your whole "
+#~ "economy. There are two ways to move your view in Widelands."
+#~ msgstr ""
+#~ "視点の移動は、経済全体の完全な概要を得るために不可欠です。 Widelandsで視点"
+#~ "を移動するには二つの方法があります。"
+
+#~ msgid "The first one is to use the cursor keys on your keyboard."
+#~ msgstr "一つ目は、キーボードのカーソルキーを使用します。"
+
+#~ msgid ""
+#~ "The second one is the more common and faster one: press-and-hold the "
+#~ "right mouse button anywhere on the map, then move your mouse around and "
+#~ "you’ll see the view scroll."
+#~ msgstr ""
+#~ "二つ目は、より一般的かつ早いものです。マップ上の任意の場所をマウスの右ボタ"
+#~ "ンでクリックしながらホールドし、周りにマウスを移動すると、視点がスクロール"
+#~ "されます。"
+
+#~ msgid "Other Ways to Move the View"
+#~ msgstr "視点を移動する別の方法"
+
+#~ msgid ""
+#~ "Excellent. Now there is a faster way to move, using the mouse instead:"
+#~ msgstr ""
+#~ "良くできました。さて、視点を移動する早い方法が別にあります。マウスを使うこ"
+#~ "とです。"
+
+#~ msgid ""
+#~ "Simply right-click-and-hold anywhere on the map, then drag the mouse and "
+#~ "instead of the cursor, the view will be moved. Try it."
+#~ msgstr ""
+#~ "マップ上の任意の場所を右クリックしながらホールドし、マウスをドラッグする"
+#~ "と、カーソルと同じように視点が移動します。試してみましょう。"
+
+#~ msgid "Onward to the Quarry"
+#~ msgstr "採石場へ向かう"
+
+#~ msgid "Great. Now about that quarry..."
+#~ msgstr "良くできました。さて採石場についてですが..."
+
+#~ msgid "How to Build a Quarry"
+#~ msgstr "採石場の建設方法"
+
+#~ msgid ""
+#~ "Build a quarry next to those stones here. Remember how I did it earlier?"
+#~ msgstr ""
+#~ "ここでそれらの石の近くに採石場を建設します。以前やった方法を覚えています"
+#~ "か？"
+
+#~ msgid ""
+#~ "Make sure that you are showing the building spaces, then just click on "
+#~ "the space were you want the building to be, choose it from the window "
+#~ "that appears and it is placed. Maybe this is a good time to explain about "
+#~ "all those building space symbols we activated earlier."
+#~ msgstr ""
+#~ "建設スペースが表示されていることを確認してから、建設したい場所をクリック"
+#~ "し、表示されたウィンドウから選択、それを配置します。以前に有効化したこれら"
+#~ "すべての建設スペースシンボルについて説明するには、多分良い時間でしょう。"
+
+#~ msgid ""
+#~ "You can build four things on fields in Widelands: Flags, small houses, "
+#~ "medium houses and big houses. But not every field can hold everything. "
+#~ "The build space symbols ease recognition:"
+#~ msgstr ""
+#~ "Widelandsのフィールドには建設可能なものが4種類あります。旗、小規模の建物、"
+#~ "中規模の建物、そして大規模な建物です。ただしすべてがどこにでも建てられるわ"
+#~ "けではありません。建設スペースシンボルを利用することで何が建てられるか分か"
+#~ "りやすくなります。"
+
+#~ msgid "Everything can be built on the green house symbol."
+#~ msgstr "緑色の家のシンボルには、すべてのものが建てられます。"
+
+#~ msgid ""
+#~ "Everything except for big buildings can be built on a yellow house symbol."
+#~ msgstr "黄色の家のシンボルには、大規模な建物以外のものが建設できます。"
+
+#~ msgid "Red building symbols can only hold small buildings and flags."
+#~ msgstr "赤色の家のシンボルには、小規模の建物と旗だけが建設可能です。"
+
+#~ msgid "And finally the yellow flag symbol only allows for flags."
+#~ msgstr "そして最後に黄旗のシンボルは、旗を立てることだけが許されます。"
+
+#~ msgid ""
+#~ "If you place something on a field, the surrounding fields might have less "
+#~ "space for holding buildings, so choose your fields wisely."
+#~ msgstr ""
+#~ "フィールドに何か設置すると、周りのフィールドは建物を建設するためのスペース"
+#~ "がなくなっていくので、適切に配置しましょう。"
+
+#~ msgid ""
+#~ "Now go ahead, try it. The quarry is a small building, so if you click on "
+#~ "a medium or big building symbol, you will have to select the small "
+#~ "buildings tab first to find it. Go on, check it out!"
+#~ msgstr ""
+#~ "先に進んで試してみましょう。採石場は小規模の建物ですので、もし中規模もしく"
+#~ "は大規模な建築物のシンボルをクリックした場合、採石場のシンボルを見つけるた"
+#~ "めには、最初に建物 小のタブを選択する必要があります。さあ、やってみましょ"
+#~ "う！"
+
+#~ msgid "Build a quarry next to the stones"
+#~ msgstr "石のそばに採石場を建設する"
+
+#~ msgid ""
+#~ "There are some stones to the west of your headquarters. Build a quarry "
+#~ "right next to them."
+#~ msgstr ""
+#~ "本拠地の西にいくつかの石があります。その右横に採石場を建設しましょう。"
+
+#~ msgid ""
+#~ "The quarry is a small building like the lumberjack’s hut. You can "
+#~ "therefore build it on any field that shows a red, yellow or green house "
+#~ "when the building spaces symbols are enabled (Press SPACE for that)."
+#~ msgstr ""
+#~ "採石場は木こり小屋のような小規模の建物です。したがって、建設スペースシンボ"
+#~ "ルを有効にした（そのためにはスペースキーを押す）ときに赤、黄、緑色の建物を"
+#~ "示す任意のフィールドにそれを建設することができます。"
+
+#~ msgid ""
+#~ "Just click on any house symbol next to the stones, select the small "
+#~ "buildings tab in the window that opens up, then click on the quarry "
+#~ "symbol."
+#~ msgstr ""
+#~ "石のそばにある家のシンボルをクリックして開いたウィンドウの小規模の建物のタ"
+#~ "ブを選択して、採石場のシンボルをクリックしてください。"
+
+#~ msgid "Road Building"
+#~ msgstr "道路の敷設"
+
+#~ msgid ""
+#~ "Excellent! Directly after placing the building, you have been switched "
+#~ "into road building mode. The new road will start at the flag in front of "
+#~ "your newly placed construction site. You can enter road building mode for "
+#~ "any flag by left-clicking on a flag and selecting"
+#~ msgstr ""
+#~ "良くできました！あなたが建物を配置した直後には、道路敷設モードになっていま"
+#~ "す。新たに配置した建設地の目の前の旗から新しい道路は開始されます。道路敷設"
+#~ "モードに入るには、任意の旗を左クリックしてから、下のシンボルを選択してくだ"
+#~ "さい。"
+
+#~ msgid "the road building symbol."
+#~ msgstr "道路敷設シンボル"
+
+#~ msgid ""
+#~ "If you decide you do not want to build a road at this time, you can "
+#~ "cancel road building by clicking on the starting flag of the road and "
+#~ "selecting"
+#~ msgstr ""
+#~ "道路の敷設を止めたくなったら、道路の始点の旗を選択してクリックしてから、下"
+#~ "のシンボルを選択してください。"
+
+#~ msgid "the abort symbol."
+#~ msgstr "中止シンボル"
+
+#~ msgid ""
+#~ "Now, about this road. Remember: we are already in road building mode "
+#~ "since you just ordered the quarry. You can either make it longer by one "
+#~ "field at a time by left-clicking multiple times on neighboring fields for "
+#~ "perfect control over the route the road takes like so:"
+#~ msgstr ""
+#~ "さて、道路についてですが、以下のことを覚えておいてください。採石場の建設を"
+#~ "命じたので、すでに道路敷設モードになっています。敷設するルートをすべて自分"
+#~ "で決めたい場合には、目的地まで隣接するフィールドを左クリックで一つずつ選択"
+#~ "していきます。"
+
+#~ msgid ""
+#~ "Or, you can directly click the flag where the road should end like so:"
+#~ msgstr ""
+#~ "代わりに、道路を終わらせたい場所の旗を直接クリックすることもできます。"
+
+#~ msgid ""
+#~ "One more thing: around the field where your road would end, you can see "
+#~ "different markers. They have the following meaning:"
+#~ msgstr ""
+#~ "もう一点。道路の終点のフィールドの周りに別のマーカーが表示されます。それら"
+#~ "には以下の意味があります。"
+
+#~ msgid ""
+#~ "The terrain is flat here. Your carriers will be very swift on this "
+#~ "terrain."
+#~ msgstr "ここの地形は平坦です。運搬人はこの地形では非常に迅速に移動します。"
+
+#~ msgid ""
+#~ "There is a small slope to climb to reach this field. This means that your "
+#~ "workers will be faster walking downhill than they will be walking uphill."
+#~ msgstr ""
+#~ "このフィールドに到達するには緩やかな傾斜を上る必要があります。労働者は上り"
+#~ "よりも下りの方が早く歩きます。"
+
+#~ msgid ""
+#~ "The connection between the fields is extremely steep. The speed increase "
+#~ "in one direction is huge while the slowdown in the other is also "
+#~ "substantial."
+#~ msgstr ""
+#~ "フィールド間は非常に急峻です。ある方向では速度の増加が大きな一方、逆方向で"
+#~ "は下降が大きくなります。"
+
+#~ msgid ""
+#~ "Keep the slopes in mind while placing roads and use them to your "
+#~ "advantage. Also, try to keep roads as short as possible and always "
+#~ "remember to place as many flags as you can on road segments to share the "
+#~ "load better."
+#~ msgstr ""
+#~ "道路を敷設する際には、傾斜を頭に入れ、活用してください。また、道路は可能な"
+#~ "限り短くし、道路を上手くシェアできるように、道路区間に可能な限り多くの旗を"
+#~ "立てましょう。"
+
+#~ msgid ""
+#~ "Now please rebuild the road between your quarry and your headquarters. "
+#~ "We’ll wait until the quarry is completed."
+#~ msgstr ""
+#~ "今すぐ採石場と本拠地の間の道路を再度敷設してください。そして、採石場が完成"
+#~ "するまで待ちましょう。"
+
+#~ msgid "Connect the quarry to the headquarters"
+#~ msgstr "採石場を本拠地に接続する"
+
+#~ msgid "Connect Your Construction Site"
+#~ msgstr "建設地を接続する"
+
+#~ msgid ""
+#~ "Connect your quarry construction site to your headquarters with a road. "
+#~ "You would have been put directly into road building mode after ordering a "
+#~ "new site. But now, you aren’t."
+#~ msgstr ""
+#~ "本拠地と採石場の建設地を、道路で接続します。新しい現場を配置するときは、直"
+#~ "接に道路建設モードになります。しかし、今はそうではありません。"
+
+#~ msgid ""
+#~ "To build a completely new road, just click on the flag in front of your "
+#~ "construction site, click on the build road icon and then click on the "
+#~ "flag in front of your headquarters. Wait for the completion of the quarry."
+#~ msgstr ""
+#~ "完全に新しい道路を建設するためには、建設地の前の旗をクリックして、道路敷設"
+#~ "アイコンをクリックしてから、本拠地の前で旗をクリックします。採石場の完成を"
+#~ "待ちましょう。"
+
+#~ msgid "Census and Statistics"
+#~ msgstr "センサスと統計"
+
+#~ msgid ""
+#~ "While we wait, I’ll quickly show you another useful feature. All "
+#~ "construction sites look the same, and some buildings look alike. It is "
+#~ "sometimes hard to tell them apart. Widelands offers a feature to show "
+#~ "label texts over the buildings. They are called the ‘census’ and you can "
+#~ "toggle them via the ‘c’ key or via the button on the ‘Watch’ tab of any "
+#~ "field."
+#~ msgstr ""
+#~ "待っている間、別の便利な機能を紹介します。すべての建設地は同じように見え、"
+#~ "いくつかの建物も同じように見えます。そしてそれらを区別するのが難しい場合が"
+#~ "あります。Widelandsは、建物の上にテキストラベルを表示する機能を提供してい"
+#~ "ます。それはセンサスと呼ばれ、Cキーを押す、または任意のフィールド上で監視"
+#~ "タブのボタンを押すことで切り替えることができます。"
+
+#~ msgid ""
+#~ "Similar to this are the building statistics, which are also toggled via a "
+#~ "button on the ‘Watch’ tab of any field. The hotkey for it is ‘s’. This "
+#~ "will display information about the productivity of buildings or the "
+#~ "progress of construction sites."
+#~ msgstr ""
+#~ "これと同様の機能に建物の統計情報があります。任意のフィールドの「監視」タブ"
+#~ "上のボタンで切り替えることができます。対応するホットキーはSです。建物の生"
+#~ "産率や建設地の進行状況に関する情報が表示されます。"
+
+#~ msgid ""
+#~ "Let me quickly enable these two for you. Remember: ‘c’ and ‘s’ are the "
+#~ "keys. Alternatively, you can click on any field without a building on it, "
+#~ "select the watch tab and then click on the corresponding buttons."
+#~ msgstr ""
+#~ "早速それらの二つを有効にします。覚えておいてください。CとSがキーです。また"
+#~ "は、建物ではなく任意のフィールドをクリックして監視のタブを選択し、対応する"
+#~ "ボタンをクリックします。"
+
+#~ msgid "Now we know what’s going on. Let’s wait for this quarry to finish."
+#~ msgstr ""
+#~ "これで、今どうなっているのかが分かるようになりました。採石場が完成するのを"
+#~ "待ちましょう。"
+
+#~ msgid "Introducing Messages"
+#~ msgstr "導入メッセージ"
+
+#~ msgid "Messages"
+#~ msgstr "メッセージ"
+
+#~ msgid ""
+#~ "Hi, it’s me again! This time, I have sent you a message. Messages are "
+#~ "sent to you by Widelands to inform you about important events: empty "
+#~ "mines, attacks on your tribe, won or lost military buildings, resources "
+#~ "found..."
+#~ msgstr ""
+#~ "今回、メッセージを送りました。メッセージとはWidelandsから以下のような重要"
+#~ "なイベントについて通知するものです。鉱山の資源が枯渇した、他部族からの攻"
+#~ "撃、軍事施設を奪ったもしくは奪われた、資源が見つかった..."
+
+#~ msgid ""
+#~ "The message window can be toggled by the button on the very right at the "
+#~ "bottom of the screen. This button will also change appearance whenever "
+#~ "new messages are available, but there is also a bell sound played "
+#~ "whenever you receive a new message."
+#~ msgstr ""
+#~ "メッセージウィンドウは画面の下部にある一番右側のボタンで表示／非表示を切り"
+#~ "替えることができます。新しいメッセージがある時、このボタンの外観が変わりま"
+#~ "すが、ベルの音も流れます。"
+
+#~ msgid ""
+#~ "You have two messages at the moment. This one, which you are currently "
+#~ "reading, and the one that informed you that a new headquarters was added "
+#~ "to your economy. Let’s learn how to archive messages: You can check them "
+#~ "off in your inbox so that they get a tick-symbol in front of them. Then, "
+#~ "you can click the"
+#~ msgstr ""
+#~ "現在、二つのメッセージがあります。今読んでいるこれと、新本拠地が経済に組み"
+#~ "込まれたことを知らせる一つです。では、メッセージをアーカイブする方法を学び"
+#~ "ましょう。受信箱でメッセージをチェックすると、メッセージの前にチェックがつ"
+#~ "きます。その後以下のボタンをクリックします。"
+
+#~ msgid "archive message button to move them into your archive."
+#~ msgstr "保管箱に移動させるためのメッセージを保管ボタン"
+
+#~ msgid ""
+#~ "Archive all messages that you currently have in your inbox, including "
+#~ "this one."
+#~ msgstr ""
+#~ "このメッセージも含めた、受信箱に入っているすべてのメッセージをアーカイブし"
+#~ "ましょう。"
+
+#~ msgid "Archive all messages in your inbox"
+#~ msgstr "すべてのメッセージを保管箱にアーカイブする"
+
+#~ msgid "Archive Your Inbox Messages"
+#~ msgstr "メッセージを保管箱にアーカイブする"
+
+#~ msgid ""
+#~ "The message window is central to fully controlling your tribe’s fortune. "
+#~ "However, you will get a lot of messages in a real game. To keep your head "
+#~ "straight, you should try to keep the inbox empty. "
+#~ msgstr ""
+#~ "メッセージウィンドウは、部族の運命を完全にコントロールするための中心的な役"
+#~ "割を果たします。しかし、実際のゲーム内では大量のメッセージを得ます。頭を"
+#~ "すっきりさせておくには、受信箱を空に保つようにしてください。 "
+
+#~ msgid "Archive all your messages in your inbox now."
+#~ msgstr "今から、受信箱のすべてのメッセージをアーカイブします。"
+
+#~ msgid ""
+#~ "To do so, open the message window by pressing ‘n’ or clicking the "
+#~ "rightmost button at the very bottom of the screen. Then mark all messages "
+#~ "by checking the check box in front of them. Then, click the ‘Archive All’ "
+#~ "button."
+#~ msgstr ""
+#~ "そのためには、「N」キーを押すか、画面の最下部右端のボタンをクリックし、"
+#~ "メッセージウィンドウを開きます。そして、それらの前にあるチェックボックスを"
+#~ "オンにして、すべてのメッセージをマークます。そのあと、「選択したメッセージ"
+#~ "を保管」ボタンをクリックしてください。"
+
+#~ msgid "Closing Windows"
+#~ msgstr "ウィンドウを閉じる"
+
+#~ msgid ""
+#~ "Excellent. By the way: closing windows in Widelands is as easy as right-"
+#~ "clicking on them. This will work with all windows except for story "
+#~ "message windows like this one. Go ahead and try it."
+#~ msgstr ""
+#~ "良くできました！あなたが建物を配置した直後には、道路敷設モードになっていま"
+#~ "す。新たに配置した建設地の目の前の旗から新しい道路は開始されます。"
+
+#~ msgid ""
+#~ "First, close this window by pressing the button below, then right-click "
+#~ "into the messages window to close it."
+#~ msgstr ""
+#~ "道路敷設モードに入るには、任意の旗を左クリックしてから、下のシンボルを選択"
+#~ "してください。"
+
+#~ msgid "Close the messages window"
+#~ msgstr "メッセージウィンドウを閉じる"
+
+#~ msgid "Close the Messages Window"
+#~ msgstr "メッセージウィンドウを閉じる"
+
+#~ msgid ""
+#~ "All windows in Widelands can be closed by right-clicking into them. Some "
+#~ "windows can also be toggled with the buttons at the very bottom of the "
+#~ "screen."
+#~ msgstr ""
+#~ "Widelandsのすべてのウィンドウは、右クリックすることで閉じることができま"
+#~ "す。一部のウィンドウは、画面の最下部にあるボタンで切り替えることができま"
+#~ "す。"
+
+#~ msgid "Close the messages window now by right-clicking into it."
+#~ msgstr "それでは、メッセージウィンドウを右クリックして閉じましょう。"
+
+#~ msgid ""
+#~ "Well done! Let’s see how messages work in a real game, shall we? For "
+#~ "this, I’ll take all stones away from the poor stonemason in the quarry. "
+#~ "He will then send a message that he can’t find any in his working area "
+#~ "the next time he tries to do some work."
+#~ msgstr ""
+#~ "良くできました！メッセージが実際のゲームでどのように機能するかを見てみま"
+#~ "しょう。これのために、採石場の可哀そうな石工からすべての石を奪います。する"
+#~ "と彼は作業領域内に同じ仕事をするための次の機会が見つからないというメッセー"
+#~ "ジを送信します。"
+
+#~ msgid "Message Arrived!"
+#~ msgstr "メッセージ到着！"
+
+#~ msgid ""
+#~ "A message has been sent to you. See how the button at the bottom of the "
+#~ "screen has changed appearance? You can burn this quarry down now as it is "
+#~ "no longer of any use and just blocking space."
+#~ msgstr ""
+#~ "メッセージが送信されました。画面の下部にあるボタンの外観がどのように変わっ"
+#~ "たでしょうか？さて、使用されなくなり、単にスペースの無駄になっている場合、"
+#~ "この採石場を燃やしたくなるかもしれません。"
+
+#~ msgid "To do that, click on the quarry and select the destroy button."
+#~ msgstr "これを行うには、採石場をクリックして、破壊ボタンを選択します。"
+
+#~ msgid "Expanding Your Territory!"
+#~ msgstr "領土拡張！"
+
+#~ msgid ""
+#~ "There is one more thing I’d like to teach you now: Expanding your "
+#~ "territory. The place that we started with around our headquarters is "
+#~ "barely enough for a basic building infrastructure, and we do not have "
+#~ "access to mountains, which we need to mine minerals and coal. So, we have "
+#~ "to expand our territory."
+#~ msgstr ""
+#~ "教えることがもう一つあります。領土の拡張です。本拠地周辺で始まっている場所"
+#~ "は、基本的なインフラ構築のためだけでやっとであり、必要としている鉱物や石炭"
+#~ "を採掘する山へのアクセス権がありません。そのため領土を拡大する必要がありま"
+#~ "す。"
+
+#~ msgid ""
+#~ "Expanding is as simple as building a military building at the edge of "
+#~ "your territory. The barbarians have a selection of different military "
+#~ "buildings: sentries, barriers, donjons, fortresses and citadels. The "
+#~ "bigger the building, the more expensive it is to build, but the more land "
+#~ "it will conquer around itself and the more soldiers can be stationed "
+#~ "there. The buildings also vary in their vision range: buildings with a "
+#~ "tower see farther than others."
+#~ msgstr ""
+#~ "拡大するには、領土の隅に軍事施設を建てるのが簡単です。バーバリアンは、いく"
+#~ "つかの特徴的な軍事施設を持っています。歩哨所、関所、ダンジョン、要塞、城塞"
+#~ "です。大きな建物は、建築するにはより高額ですが、より多くの周りの土地を支配"
+#~ "し、より多くの兵士が駐留することができます。また、建物ごとに視界の範囲は異"
+#~ "なります。塔のある建物は、他の建物よりもより遠くを見ることができます。"
+
+#~ msgid ""
+#~ "As soon as a military building is manned, it will extend your land. You "
+#~ "can then burn it down again if you need the space. But note that your "
+#~ "land is then vulnerable: any military site from another player could "
+#~ "conquer the land. You therefore need military sites to keep military "
+#~ "influence over your land."
+#~ msgstr ""
+#~ "軍事施設が建設されるとすぐに領土は拡大されます。場所が必要な場合は、それを"
+#~ "破壊することができます。しかし、破壊すると防備が弱くなってしまうことに注意"
+#~ "してください。他のプレイヤーの軍事施設で、土地が征服されてしまいます。した"
+#~ "がって、領土に軍事的影響力を維持するためには軍事施設が必要です。"
+
+#~ msgid ""
+#~ "Let’s try it out now: build a few military buildings on your south-"
+#~ "western border."
+#~ msgstr ""
+#~ "それでは早速試してみましょう。南西部国境にいくつか軍事施設を建設してくださ"
+#~ "い。"
+
+#~ msgid ""
+#~ "We want to capture some of this mountain so we can search for resources "
+#~ "there. Bigger buildings will conquer more land, which can be beneficial "
+#~ "close to mountains, because you can’t build houses on mountains."
+#~ msgstr ""
+#~ "資源を探索するために、この山の一部を獲得したいのです。山の中には家を建てる"
+#~ "ことができないため、大きな建物を利用して山に近い有益な多くの土地を支配しま"
+#~ "しょう。"
+
+#~ msgid "Conquer an area were we can build mines"
+#~ msgstr "鉱山を建設できる地域を支配する"
+
+#~ msgid "Conquer the Mountain to the South-West"
+#~ msgstr "南西の山を支配する"
+
+#~ msgid ""
+#~ "For a full-fledged economy, we need coal, iron and gold. These can be "
+#~ "found in mountains. Conquer some area on the mountains to the south-west "
+#~ "of your headquarters by building some military buildings close to your "
+#~ "border."
+#~ msgstr ""
+#~ "本格的な経済のためには、石炭、鉄、金が必要です。これらは山で見つけることが"
+#~ "できます。国境の近くにいくつかの軍事施設を建設することによって、本拠地の南"
+#~ "西の山のいくらかの地域を支配しましょう。"
+
+#~ msgid ""
+#~ "You can choose from the following military buildings: sentry, donjon, "
+#~ "barrier and fortress. The bigger the building, the more expensive it is "
+#~ "to build it, but it will also conquer a bigger region. Sometimes, it is "
+#~ "useful to build a big military building next to a mountain so that you "
+#~ "can reach building sites farther up."
+#~ msgstr ""
+#~ "軍事施設を歩哨所、物見塔、関所、城塞から選択することができます。大規模な建"
+#~ "物は、より建設コストがかかります。しかし、それはまた、より広い地域を支配し"
+#~ "ます。山のそばに大きな軍事施設を建設することは、ときどき、より遠くのフィー"
+#~ "ルドに到達できるようにするために役立ちます。"
+
+#~ msgid ""
+#~ "Okay, now we own some of the area on this mountain. Mountains are very "
+#~ "important, because they contain resources: coal, iron ore, gold ore and "
+#~ "granite. Each tribe uses the resources differently, but all need mines to "
+#~ "extract the resources from the ground."
+#~ msgstr ""
+#~ "さて、今、この山の地域の一部を所有しています。山々には資源（石炭、鉄鉱石、"
+#~ "金鉱石、花崗岩）があるので、非常に重要です。各部族は異なる資源を使用してい"
+#~ "ますが、地面から資源を取得するためにはすべて鉱山が必要です。"
+
+#~ msgid ""
+#~ "Let’s search for resources in this mountain. First, we’ll build a road "
+#~ "onto the mountain and place a flag. Then, we will click on the flag and "
+#~ "call a geologist to it. I’ll show you how it’s done."
+#~ msgstr ""
+#~ "この山の資源を探索してみましょう。まず、山に道路を敷設し、旗を設置します。"
+#~ "そして、旗をクリックして、それに地質学者を呼びます。どのように行うのかお見"
+#~ "せしましょう。"
+
+#~ msgid "Waiting for the Geologist"
+#~ msgstr "地質学者を待つ"
+
+#~ msgid ""
+#~ "The geologist will arrive at the flag shortly and start investigating the "
+#~ "area in his surroundings. He will place the following markers for the "
+#~ "various resources:"
+#~ msgstr ""
+#~ "地質学者はすぐに旗に到着し、周囲の探索を始めます。彼はさまざまな資源がある"
+#~ "ことを示す以下のマークを設置します。"
+
+#~ msgid "Let’s wait and see what the geologist finds on the mountain."
+#~ msgstr "山で地質学者が何を見つけるか待って見てみましょう。"
+
+#~ msgid "Mining Conclusion"
+#~ msgstr "採掘の結果"
+
+#~ msgid ""
+#~ "So our geologist found a lot of coal on this mountain. You should "
+#~ "therefore build a coal mine here. Building a mine is like building a "
+#~ "house. The building space symbol for where a mine can be built is"
+#~ msgstr ""
+#~ "地質学者はこの山で大量の石炭を発見しました。したがってここには炭鉱を建設す"
+#~ "べきです。鉱山の建設は建物を建てるのと同じです。建設可能な鉱山のスペースシ"
+#~ "ンボルは"
+
+#~ msgid "this one."
+#~ msgstr "これです。"
+
+#~ msgid ""
+#~ "Note that a mine needs rations to work. Rations are produced in taverns, "
+#~ "and taverns need meat, pitta bread, and fish to produce them. You will "
+#~ "need a lot more infrastructure to get your mines working well. This "
+#~ "infrastructure also varies from tribe to tribe. We will explain them to "
+#~ "you in the introduction campaigns for the three tribes."
+#~ msgstr ""
+#~ "鉱山には食料が必要なことに注意してください。糧食は酒場で生産され、酒場は糧"
+#~ "食を生産するために肉、ピタパン、魚を必要とします。鉱山で効果的に生産させる"
+#~ "には、さらに多くのインフラが必要です。インフラは部族によって異なります。三"
+#~ "つの部族それぞれの導入キャンペーンで説明を得ることができます。"
+
+#~ msgid "Warfare and Training"
+#~ msgstr "戦争と訓練"
+
+#~ msgid "Soldiers and Warfare"
+#~ msgstr "兵士と戦争"
+
+#~ msgid ""
+#~ "On to the last topic now. We are going to talk about soldiers, their "
+#~ "training and their profession: warfare. As I mentioned, Widelands is "
+#~ "about building up, not burning down: therefore, warfare is also more "
+#~ "focused on economics than on military strategies."
+#~ msgstr ""
+#~ "さて、最後の話題に移りましょう。兵士と、彼らの訓練と彼らの職業、戦争につい"
+#~ "ての話をします。前述したように、Widelandsは築き上げることが目的で、破壊が"
+#~ "目的ではありません。したがって、戦争は軍事戦略というよりも経済に焦点が当て"
+#~ "られたものです。"
+
+#~ msgid ""
+#~ "Ok, I am going to create a little training ground for us with a training "
+#~ "camp and a warehouse to the north east of here."
+#~ msgstr ""
+#~ "では、ここから北東に訓練場と倉庫があるちょっとした訓練場所を作ります。"
+
+#~ msgid ""
+#~ "If you want to come back to this south-western part of your realm, just "
+#~ "scroll here via right-button scrolling or open the minimap by clicking on "
+#~ "the"
+#~ msgstr ""
+#~ "もしこの領土の南西部に戻ってきたくなったら、右クリックでのスクロールか、以"
+#~ "下のボタンをクリックしてミニマップを開いてください。"
+
+#~ msgid "minimap button at the bottom of the screen."
+#~ msgstr "画面下部のミニマップボタンです。"
+
+#~ msgid "Alternatively, you could also press ‘m’ on your keyboard."
+#~ msgstr "代わりにMキーを押すことでも表示できます。"
+
+#~ msgid ""
+#~ "The minimap shows the complete map in miniature. You can directly jump to "
+#~ "any field by left-clicking on it. You can also toggle buildings, roads, "
+#~ "flags and player indicators on and off inside the minimap."
+#~ msgstr ""
+#~ "ミニマップは、ミニチュアの全体マップを表示します。直接それを左クリックし"
+#~ "て、任意のフィールドにジャンプすることができます。また、ミニマップの内側に"
+#~ "建物、道路、旗およびプレイヤーのインジケータを表示することができます。"
+
+#~ msgid ""
+#~ "But I digress. Back to soldiers. What was I about to do? Oh yes, I wanted "
+#~ "to build a small training scenario for you. Let’s do that now."
+#~ msgstr ""
+#~ "話が脱線してしまいました。兵士の話に戻ります。何をしようとしていたのでし"
+#~ "たっけ？そうだ、小さな訓練シナリオを作ろうと思っていたのでした。それでは"
+#~ "やってみましょう。"
+
+#~ msgid "Trainings Camp and Soldier Stats"
+#~ msgstr "訓練場と兵士のステータス"
+
+#~ msgid ""
+#~ "Here we go. Take a look at the soldiers that are on their way into our "
+#~ "training camp. They look different from normal workers: they have a "
+#~ "health bar over their head that displays their remaining health, and they "
+#~ "have four symbols, which symbolize the individual soldier’s current "
+#~ "levels in the four different categories health, attack, defense and evade."
+#~ msgstr ""
+#~ "訓練場に向かっている兵士たちを見てみましょう。彼らは、通常の労働者とは違っ"
+#~ "て見えます。彼らは、頭上に残り体力が表示されるヘルスバーを持っており、ま"
+#~ "た、四つの異なる能力の（体力、攻撃力、防御力、回避力）の現在のレベルを示す"
+#~ "四つのシンボルを持っています。"
+
+#~ msgid ""
+#~ "A soldier is created like any normal worker: a carrier grabs a tool in a "
+#~ "warehouse as soon as a request for a certain profession is not fulfilled. "
+#~ "The tool to create a barbarian soldier is an ax. Newly created soldiers "
+#~ "are of level 0. To make soldiers better in any of the four categories, "
+#~ "training is needed."
+#~ msgstr ""
+#~ "兵士は、通常の労働者のように生み出されます。満たされていないある特定の職種"
+#~ "への要求が起こるや否や、運搬人は道具をつかみます。バーバリアンの兵士を生み"
+#~ "出すための道具はアックスです。新しく作成された兵士はレベル0です。兵士の四"
+#~ "つの能力のいずれかを伸ばすためには訓練が必要です。"
+
+#~ msgid ""
+#~ "Training happens in training sites like the training camp or the battle "
+#~ "arena: soldiers go there (as our little fellows are currently doing), "
+#~ "consume some wares and advance a level in one category. If a barbarian "
+#~ "soldier is fully trained, he has level 3 health, level 5 attack, level 0 "
+#~ "defense and level 2 evade. This is one fearsome warrior then! The "
+#~ "individual statistics have the following meaning:"
+#~ msgstr ""
+#~ "訓練は訓練場もしくは闘技場のような訓練施設で行われます。兵士たちは（小さな"
+#~ "仲間が現在行っているように）そこに行き、いくつかのアイテムを消費し、一つの"
+#~ "能力のレベルを上げます。バーバリアンの兵士が完全に訓練されている場合、彼は"
+#~ "レベル3の体力、レベル5の攻撃力、レベル0の防御力、そしてレベル2の回避力を"
+#~ "持っています。これは、恐ろしい戦士です！個々の統計には以下の意味がありま"
+#~ "す。"
+
+#~ msgid "Health:"
+#~ msgstr "体力"
+
+#~ msgid "Attack:"
+#~ msgstr "攻撃力"
+
+#~ msgid ""
+#~ "The amount of damage a soldier will inflict on the enemy when an attack "
+#~ "is successful. A barbarian soldier with attack level 0 inflicts ~14 "
+#~ "points of health damage when he succeeds in hitting an enemy. For each "
+#~ "attack level, he gains 7 damage points."
+#~ msgstr ""
+#~ "敵に攻撃が成功したときに与えるダメージの量です。攻撃力のレベル0の兵士が攻"
+#~ "撃に成功した場合、敵に最大14ポイントの体力ダメージを与えます。攻撃力のレベ"
+#~ "ルが上がるたびに7ダメージ増加します。"
+
+#~ msgid "Defense:"
+#~ msgstr "防御力"
+
+#~ msgid ""
+#~ "Defense is the value that is subtracted from the attack value. The "
+#~ "barbarians cannot train in this skill and therefore have always defense "
+#~ "level 0, which means that they always get 3 points subtracted from the "
+#~ "damage inflicted. If an attacker with an attack value of 15 points hits a "
+#~ "barbarian soldier, the barbarian will lose 15 - 3 = 12 health. The 3 "
+#~ "points are subtracted because of the defense ability."
+#~ msgstr ""
+#~ "防御力は攻撃値から減らされる値です。バーバリアンはこの能力を訓練することは"
+#~ "できないため、常に防御力のレベルは0です。それは与えられたダメージからは常"
+#~ "に3しか引けないということを意味しています。もし15ポイントの攻撃値を持つ敵"
+#~ "がバーバリアンの兵士に攻撃すればバーバリアンは15から3を引いた12ポイントの"
+#~ "ダメージを受けることになります。減らされる3ポイントがすなわち防御力です。"
+
+#~ msgid "Evade:"
+#~ msgstr "回避力"
+
+#~ msgid ""
+#~ "Evade is the chance that the soldier is able to dodge an attack. It is "
+#~ "25% for a level 0 evade barbarian and increases in steps of 15% for each "
+#~ "level."
+#~ msgstr ""
+#~ "回避力は兵士が攻撃を回避できる機会のことです。レベル0の回避力のバーバリア"
+#~ "ンの値は25%で、レベルが上がるごとに15%増加します。"
+
+#~ msgid "Enhance This Fortress"
+#~ msgstr "この要塞を拡張する"
+
+#~ msgid "Enhancing Buildings"
+#~ msgstr "建物の拡張"
+
+#~ msgid ""
+#~ "I will create an enemy for you soon, but first let’s make sure you are "
+#~ "prepared. This fortress is already quite strong and conquers a lot of "
+#~ "space. But there is an even bigger building: the citadel."
+#~ msgstr ""
+#~ "すぐに敵を用意しますが、準備ができるのを待ちます。この要塞はすでにかなり強"
+#~ "力で多くの土地を占領しています。しかしさらに大きな建物があります。城塞で"
+#~ "す。"
+
+#~ msgid ""
+#~ "Citadels cannot be built directly. Instead, you will have to construct a "
+#~ "fortress first and then enhance it to a citadel. To do so, click on the "
+#~ "fortress, then choose the ‘Enhance to Citadel’ button. Your soldiers will "
+#~ "leave the fortress while the construction is going on. This means that "
+#~ "your fortress will lose its military influence. If an enemy occupies a "
+#~ "military building nearby, your construction site will burn down. No "
+#~ "sweat, that won’t happen here."
+#~ msgstr ""
+#~ "城塞は直接建設することはできません。最初に要塞を建設する必要があり、それを"
+#~ "城塞に拡張する必要があります。そのためには、要塞をクリックし、「城塞に拡"
+#~ "張」ボタンを選択してください。兵士たちは拡張が終わるまで要塞から離れます。"
+#~ "これは要塞に軍事的影響力がないことを意味しています。もし近くに敵の軍事施設"
+#~ "がある場合、建設地は破壊されてしまいます。心配しないでください、ここではそ"
+#~ "のようなことは起きません。"
+
+#~ msgid "Enhance your fortress to a citadel now."
+#~ msgstr "要塞を城塞に拡張してください。"
+
+#~ msgid ""
+#~ "Remember that you can speed time up by using PAGE_UP. Building a citadel "
+#~ "takes a while."
+#~ msgstr ""
+#~ "PageUpキーで速度を上げることができるのを覚えておいてください。城塞の建設に"
+#~ "は時間がかかります。"
+
+#~ msgid "Enhance your fortress to a citadel"
+#~ msgstr "要塞を城塞に拡張する"
+
+#~ msgid "Enhance Your Fortress"
+#~ msgstr "要塞を拡張する"
+
+#~ msgid "Enhance your fortress to a mighty citadel."
+#~ msgstr "要塞を強大な城塞に拡張します。"
+
+#~ msgid ""
+#~ "The citadel can house 12 soldiers and is the biggest military building "
+#~ "the barbarians can build. It also costs a lot of resources and takes a "
+#~ "long time to build. It is most suited to guard strategically important "
+#~ "points like constricted points or mountains."
+#~ msgstr ""
+#~ "城塞は、12人の兵士を収容し、またバーバリアンが建設することができる最大の軍"
+#~ "事施設です。建設には多くの費用と時間もかかります。それは、狭窄地や山のよう"
+#~ "な戦略的に重要なポイントを守るために最も適しています。"
+
+#~ msgid "Defeat your enemy"
+#~ msgstr "敵を倒そう"
+
+#~ msgid "Defeat the Enemy"
+#~ msgstr "敵を倒す"
+
+#~ msgid ""
+#~ "I have created a sparring partner for you: It is an empire tribe close to "
+#~ "your citadel. To attack its buildings, click on the door of a target "
+#~ "building, choose the number of soldiers that you wish to send and click "
+#~ "on the attack button. Your soldiers will come from all nearby military "
+#~ "buildings. Likewise, the defenders will come from all nearby military "
+#~ "buildings of the enemy and intercept your forces."
+#~ msgstr ""
+#~ "スパーリングパートナーを用意しました。城塞の近くの帝国部族です。彼らの建物"
+#~ "を攻撃するには、目標の建物のドアをクリックし、送り込みたい兵士の人数を選択"
+#~ "し、攻撃ボタンをクリックします。兵士は近くのすべての軍事施設から集まってく"
+#~ "るでしょう。同様に、攻撃を妨げるために、近くのすべての軍事施設から敵が集"
+#~ "まってきます。"
+
+#~ msgid ""
+#~ "Attack and conquer all military buildings of the enemy and destroy their "
+#~ "headquarters."
+#~ msgstr ""
+#~ "敵のすべての軍事施設を攻撃して占領し、敵の本拠地を破壊してください。"
+
+#~ msgid "Defeat the enemy tribe"
+#~ msgstr "敵の部族を倒そう"
+
+#~ msgid "Defeat Your Enemy"
+#~ msgstr "敵を倒そう"
+
+#~ msgid "Defeat the nearby enemy."
+#~ msgstr "近くの敵を倒そう"
+
+#~ msgid ""
+#~ "To attack a building, click on its doors, choose the number of attacking "
+#~ "soldiers, then send them via the ‘Attack’ button."
+#~ msgstr ""
+#~ "近くの敵を倒します。建物を攻撃するためには、そのドアをクリックし、攻撃に加"
+#~ "わる兵士の人数を選択して、「攻撃」ボタンを押すことで彼らを送りだしてくださ"
+#~ "い。"
+
+#~ msgid "Conclusion"
+#~ msgstr "終わりに"
+
+#~ msgid ""
+#~ "This concludes the tutorial. There is some stuff we have not covered here "
+#~ "– we have not even built a single production building even though "
+#~ "producing wares is the most important thing in Widelands – but you’ve "
+#~ "learned the ropes."
+#~ msgstr ""
+#~ "これでチュートリアルは終わりです。ここでは取り上げていないものがいくつかあ"
+#~ "ります。生産する建物がWidelandsで最も重要なものであるにもかかわらず、一つ"
+#~ "も生産する建物を建設していません。"
+
+#~ msgid ""
+#~ "You can learn about the remaining stuff while you go through the "
+#~ "individual tribes’ introduction campaigns. Each consists of some "
+#~ "scenarios explaining the tribe and its economy while introducing the "
+#~ "background story of Widelands. Have fun playing!"
+#~ msgstr ""
+#~ "残りについては個々の部族の導入キャンペーンを通じて学ぶことができます。"
+#~ "Widelandsのバックグラウンドストーリーを紹介しながら、部族とその経済を説明"
+#~ "するいくつかのシナリオでキャンペーンは構成されています。楽しんで遊んでくだ"
+#~ "さい！"
+
+#~ msgid ""
+#~ "You can continue playing this map or you can end this game whenever you "
+#~ "like. To leave this game and return to the main menu, click on the"
+#~ msgstr ""
+#~ "このマップを続けて遊ぶこともできますし、好きなときに止めることができます。"
+#~ "ゲームを終了し、メインメニューに戻るには、"
+
+#~ msgid ""
+#~ "‘Options’ menu button on the very left at the bottom of the screen. Then "
+#~ "click the"
+#~ msgstr "画面下部の一番左の「オプション」メニューボタンをクリックし、"
+
+#~ msgid "‘Exit Game’ button."
+#~ msgstr "「ゲーム終了」ボタンをクリックしてください。"
+
+#~ msgid ""
+#~ "Thanks for playing this tutorial. Enjoy Widelands and remember to visit "
+#~ "us at"
+#~ msgstr ""
+#~ "このチュートリアルをプレイしてくれてありがとうございます。Widelandsを楽し"
+#~ "み、サイトに訪れることを忘れないでください。"

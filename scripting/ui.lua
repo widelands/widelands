@@ -77,7 +77,7 @@ end
 --
 --    .. code-block:: lua
 --
-include "scripting/table.lua" -- for reverse()
+--       include "scripting/table.lua" -- for reverse()
 --
 --       -- Move there in one second
 --       pts = scroll_smoothly_to(wl.Game().map:get_field(23, 42))
@@ -93,12 +93,18 @@ function timed_scroll(points, gdt)
    local dt = gdt or 20
    local mv = wl.ui.MapView()
 
+   local old_speed = wl.Game().desired_speed
+   -- Set the speed to normal speed (1.0x). Otherwise, the scrolling would also
+   -- be faster, which is probably not intended.
+   wl.Game().desired_speed = 1000
+
    for idx,p in ipairs(points) do
       mv.viewpoint_x = p.x
       mv.viewpoint_y = p.y
 
       sleep(dt)
    end
+   wl.Game().desired_speed = old_speed
 end
 
 
@@ -187,12 +193,19 @@ function timed_mouse(points, gdt)
    local dt = gdt or 20
    local mv = wl.ui.MapView()
 
+   local old_speed = wl.Game().desired_speed
+   -- Set the speed to normal speed (1.0x). Otherwise, the mouse movement would also
+   -- be faster, which is probably not intended.
+   wl.Game().desired_speed = 1000
+
    for idx,p in ipairs(points) do
       mv.mouse_position_x = p.x
       mv.mouse_position_y = p.y
 
       sleep(dt)
    end
+
+   wl.Game().desired_speed = old_speed
 end
 
 -- RST
