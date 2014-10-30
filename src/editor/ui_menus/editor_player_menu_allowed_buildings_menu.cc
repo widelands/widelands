@@ -116,7 +116,7 @@ EditorPlayerMenuAllowedBuildingsMenu
 		if (!building.is_enhanced() && !building.is_buildable())
 			continue;
 		(m_player.is_building_type_allowed(i) ? m_allowed : m_forbidden).add
-			(building.descname().c_str(), i, building.get_icon());
+			(building.descname(), i, building.get_icon());
 	}
 	m_forbidden.sort();
 	m_allowed  .sort();
@@ -156,7 +156,7 @@ void EditorPlayerMenuAllowedBuildingsMenu::clicked(const bool allow) {
 	const Widelands::BuildingDescr & building =
 		*m_player.tribe().get_building_descr(building_index);
 	target.add
-		(building.descname().c_str(),
+		(building.descname(),
 		 building_index,
 		 building.get_icon());
 	target.sort();

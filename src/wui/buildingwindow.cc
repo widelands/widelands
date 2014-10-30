@@ -205,6 +205,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 						(capsbuttons, is_stopped ? "continue" : "stop", 0, 0, 34, 34,
 						 g_gr->images().get("pics/but4.png"),
 						 g_gr->images().get((is_stopped ? "pics/continue.png" : "pics/stop.png")),
+						 /** TRANSLATORS: Stop/Continue toggle button for production sites. */
 						 is_stopped ? _("Continue") : _("Stop"));
 				stopbtn->sigclicked.connect(boost::bind(&BuildingWindow::act_start_stop, boost::ref(*this)));
 				capsbuttons->add
@@ -229,7 +230,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 					const Widelands::BuildingDescr & building_descr =
 						*tribe.get_building_descr(enhancement);
 
-					std::string tooltip = (boost::format(_("Enhance to %s"))
+					std::string enhance_tooltip = (boost::format(_("Enhance to %s"))
 												  % building_descr.descname().c_str()).str()
 												 + "<br><font size=11>" + _("Construction costs:") + "</font><br>"
 												 +  waremap_to_richtext(tribe, building_descr.enhancement_cost());
@@ -239,7 +240,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 							(capsbuttons, "enhance", 0, 0, 34, 34,
 							 g_gr->images().get("pics/but4.png"),
 							 building_descr.get_icon(),
-							 tooltip);
+							 enhance_tooltip);
 
 					//  button id = building id
 				   enhancebtn->sigclicked.connect([this, enhancement] {act_enhance(enhancement);});

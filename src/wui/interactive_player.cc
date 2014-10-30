@@ -60,8 +60,6 @@
 
 using Widelands::Building;
 using Widelands::Map;
-using boost::format;
-
 
 namespace  {
 
@@ -456,13 +454,13 @@ void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string> & args)
 
 	int const n = atoi(args[1].c_str());
 	if (n < 1 || n > MAX_PLAYERS || !game().get_player(n)) {
-		DebugConsole::write(str(format("Player #%1% does not exist.") % n));
+		DebugConsole::write(str(boost::format("Player #%1% does not exist.") % n));
 		return;
 	}
 
 	DebugConsole::write
 		(str
-		 	(format("Switching from #%1% to #%2%.")
+			(boost::format("Switching from #%1% to #%2%.")
 		 	 % static_cast<int>(m_player_number) % n));
 	m_player_number = n;
 	Map              &       map             = egbase().map();

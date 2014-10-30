@@ -73,6 +73,7 @@ m_width          (0),
 m_height         (0),
 m_pathfieldmgr   (new PathfieldManager)
 {
+	m_suggested_teams.clear();
 }
 
 
@@ -317,9 +318,9 @@ the given data
 */
 void Map::create_empty_map
 	(const World& world, uint32_t const w, uint32_t const h,
-	 char const * const name,
-	 char const * const author,
-	 char const * const description)
+	 const std::string& name,
+	 const std::string& author,
+	 const std::string& description)
 {
 	set_size(w, h);
 	set_name       (name);
@@ -543,40 +544,40 @@ void Map::set_starting_pos(PlayerNumber const plnum, Coords const c)
 }
 
 
-void Map::set_filename(char const * const string)
+void Map::set_filename(const std::string& filename)
 {
-	snprintf(m_filename, sizeof(m_filename), "%s", string);
+	m_filename = filename;
 }
 
-void Map::set_author(char const * const string)
+void Map::set_author(const std::string& author)
 {
-	snprintf(m_author, sizeof(m_author), "%s", string);
+	m_author = author;
 }
 
-void Map::set_name(char const * const string)
+void Map::set_name(const std::string& name)
 {
-	snprintf(m_name, sizeof(m_name), "%s", string);
+	m_name = name;
 }
 
-void Map::set_description(char const * const string)
+void Map::set_description(const std::string& description)
 {
-	snprintf(m_description, sizeof(m_description), "%s", string);
+	m_description = description;
 }
 
-void Map::set_hint(std::string string)
+void Map::set_hint(const std::string& hint)
 {
-	m_hint = string;
+	m_hint = hint;
 }
 
-void Map::set_background(char const * const string)
+void Map::set_background(const std::string& image_path)
 {
-	if (string)
-		m_background = string;
-	else
+	if (image_path.empty())
 		m_background.clear();
+	else
+		m_background = image_path;
 }
 
-void Map::add_tag(std::string tag) {
+void Map::add_tag(const std::string& tag) {
 	m_tags.insert(tag);
 }
 
@@ -1646,7 +1647,7 @@ std::unique_ptr<MapLoader> Map::get_correct_loader(const std::string& filename) 
 		}
 	} else if (boost::algorithm::ends_with(lower_filename, S2MF_SUFFIX) ||
 	           boost::algorithm::ends_with(lower_filename, S2MF_SUFFIX2)) {
-		result.reset(new S2MapLoader(filename.c_str(), *this));
+		result.reset(new S2MapLoader(filename, *this));
 	}
 	return result;
 }

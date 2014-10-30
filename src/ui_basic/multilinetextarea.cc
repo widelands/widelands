@@ -198,4 +198,9 @@ bool MultilineTextarea::handle_mousepress
 		m_scrollbar.handle_mousepress(btn, x, y) : false;
 }
 
+void MultilineTextarea::scroll_to_top() {
+	m_scrollbar.set_scrollpos(0);
+	update(0, 0, 0, 0);
+}
+
 } // namespace UI
