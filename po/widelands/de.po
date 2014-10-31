@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-30 05:51+0000\n"
-"X-Generator: Launchpad (build 17203)\n"
+"X-Launchpad-Export-Date: 2014-10-31 05:38+0000\n"
+"X-Generator: Launchpad (build 17211)\n"
 "Language: de\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -4237,6 +4237,3 @@ msgstr "Folge"
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr "Zentriere die Ansicht hierauf"
-
-#~ msgid "Invalid path to file in cconfig: %s"
-#~ msgstr "Inkorrekter Pfad zur Datei in cconfig: %s"
