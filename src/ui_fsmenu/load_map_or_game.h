@@ -51,13 +51,13 @@ struct GameSettingsProvider;
  * Author data for a map or scenario.
  */
 struct MapAuthorData {
-
 	const std::string& get_names() const {return m_names;}
 	size_t get_number()            const {return m_number;}
 
-	// Parses author list string into localized contatenated list string.
-	// Use , as list separator and no whitespaces between author names.
-	explicit MapAuthorData(const std::string& author_list) {
+	// Parses author list string into localized contatenated list
+	// string. Use , as list separator and no whitespaces between
+	// author names.
+	void parse(const std::string& author_list) {
 		std::vector<std::string> authors;
 		boost::split(authors, author_list, boost::is_any_of(","));
 		m_names = localize_item_list(authors, i18n::ConcatenateWith::AMPERSAND);

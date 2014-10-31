@@ -64,20 +64,21 @@ void MapElementalPacket::pre_read(FileSystem & fs, Map * map)
 			}
 
 			// Get suggested teams
+			map->m_suggested_teams.clear();
+
 			uint16_t team_section_id = 0;
 			std::string teamsection_key = (boost::format("teams%02i") % team_section_id).str();
 			while (Section* teamsection = prof.get_section(teamsection_key.c_str())) {
 
 				// A lineup is made up of teams
-				Map::SuggestedTeamLineup* lineup = new Map::SuggestedTeamLineup();
+				Map::SuggestedTeamLineup lineup;
 
 				uint16_t team_number = 1;
 				std::string team_key = (boost::format("team%i") % team_number).str().c_str();
 				std::string team_string = teamsection->get_string(team_key.c_str(), "");
 				while (!team_string.empty()) {
-
 					// A team is made up of players
-					Map::SuggestedTeam* team = new Map::SuggestedTeam();
+					Map::SuggestedTeam team;
 
 					std::vector<std::string> players_string;
 					boost::split(players_string, team_string, boost::is_any_of(","));
@@ -85,10 +86,10 @@ void MapElementalPacket::pre_read(FileSystem & fs, Map * map)
 					for (const std::string& player: players_string) {
 						uint16_t player_number = static_cast<uint16_t>(atoi(player.c_str()));
 						assert(player_number < MAX_PLAYERS);
-						team->push_back(player_number);
+						team.push_back(player_number);
 					}
 
-					lineup->push_back(team);
+					lineup.push_back(team);
 
 					// Increase team number
 					++team_number;

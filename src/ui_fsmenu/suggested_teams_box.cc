@@ -72,7 +72,7 @@ void SuggestedTeamsBox::hide() {
 }
 
 
-void SuggestedTeamsBox::show(const std::vector<Widelands::Map::SuggestedTeamLineup*>& suggested_teams)
+void SuggestedTeamsBox::show(const std::vector<Widelands::Map::SuggestedTeamLineup>& suggested_teams)
 {
 	hide();
 	m_suggested_teams = suggested_teams;
@@ -92,7 +92,7 @@ void SuggestedTeamsBox::show(const std::vector<Widelands::Map::SuggestedTeamLine
 		// Parse suggested teams
 		UI::Icon* player_icon;
 		UI::Textarea * vs_label;
-		for (Widelands::Map::SuggestedTeamLineup* lineup : m_suggested_teams) {
+		for (const Widelands::Map::SuggestedTeamLineup& lineup : m_suggested_teams) {
 
 			m_lineup_box =
 					new UI::Box(this, m_indent, teamlist_offset + lineup_counter * m_label_height,
@@ -101,7 +101,7 @@ void SuggestedTeamsBox::show(const std::vector<Widelands::Map::SuggestedTeamLine
 			m_lineup_box->set_size(get_w(), m_label_height + m_padding);
 
 			bool is_first = true;
-			for (Widelands::Map::SuggestedTeam* team : *lineup) {
+			for (const Widelands::Map::SuggestedTeam& team : lineup) {
 
 				if (!is_first) {
 					m_lineup_box->add_space(m_padding);
@@ -113,7 +113,7 @@ void SuggestedTeamsBox::show(const std::vector<Widelands::Map::SuggestedTeamLine
 				}
 				is_first = false;
 
-				for (uint16_t player : *team) {
+				for (uint16_t player : team) {
 					assert(player < MAX_PLAYERS);
 					const std::string player_filename = (boost::format("pics/fsel_editor_set_player_0%i_pos.png")
 																	 % (++player)).str().c_str();

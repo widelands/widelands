@@ -192,7 +192,7 @@ void FullscreenMenuCampaignSelect::fill_table()
 	m_table.clear();
 
 	// Read in the campaign config
-	Profile prof("campaigns/cconfig", nullptr, "maps");
+	Profile prof("campaigns/campaigns.conf", nullptr, "maps");
 	Section & s = prof.get_safe_section("global");
 
 	// Read in campvis-file
@@ -282,16 +282,17 @@ bool FullscreenMenuCampaignSelect::compare_difficulty
  * Loads a list of all visible maps of selected campaign and let's the user
  * choose one.
  */
-FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect() :
+FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutorial) :
 	FullscreenMenuLoadMapOrGame(),
 
 	// Main title
 	m_title
 		(this, get_w() / 2, m_tabley / 3,
-		 _("Choose a scenario"),
+		 is_tutorial ? _("Choose a tutorial") : _("Choose a scenario"),
 		 UI::Align_HCenter),
 	m_subtitle
-		(this, get_w() / 2, get_y_from_preceding(m_title) + 6 * m_padding,
+		(this, get_w() / 6, get_y_from_preceding(m_title) + 6 * m_padding,
+		 get_w() * 2 / 3, 4 * m_label_height,
 		 "",
 		 UI::Align_HCenter),
 
@@ -311,10 +312,10 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect() :
 		 UI::Align_Left),
 	m_ta_author(this,
 					m_right_column_x + m_indent, get_y_from_preceding(m_label_author) + m_padding,
-					get_right_column_w(m_right_column_x + m_indent), m_label_height),
+					get_right_column_w(m_right_column_x + m_indent), 2 * m_label_height),
 
 	m_label_description
-		(this, m_right_column_x, get_y_from_preceding(m_ta_author) + 2 * m_padding,
+		(this, m_right_column_x, get_y_from_preceding(m_ta_author) + m_padding,
 		 "",
 		 UI::Align_Left),
 	m_ta_description
@@ -322,13 +323,21 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect() :
 		 m_right_column_x + m_indent,
 		 get_y_from_preceding(m_label_description) + m_padding,
 		 get_right_column_w(m_right_column_x + m_indent),
-		 m_buty - get_y_from_preceding(m_label_description) - 4 * m_padding)
+		 m_buty - get_y_from_preceding(m_label_description) - 4 * m_padding),
+
+	m_is_tutorial(is_tutorial)
 {
 	m_title.set_textstyle(ts_big());
 	m_back.set_tooltip(_("Return to the main menu"));
-	m_ok.set_tooltip(_("Play this scenario"));
-	m_ta_mapname.set_tooltip(_("The name of this scenario"));
-	m_ta_description.set_tooltip(_("Story and hints"));
+	if (m_is_tutorial) {
+		m_ok.set_tooltip(_("Play this tutorial"));
+		m_ta_mapname.set_tooltip(_("The name of this tutorial"));
+		m_ta_description.set_tooltip(_("What you will learn in this tutorial"));
+	} else {
+		m_ok.set_tooltip(_("Play this scenario"));
+		m_ta_mapname.set_tooltip(_("The name of this scenario"));
+		m_ta_description.set_tooltip(_("Story and hints"));
+	}
 
 	m_ok.sigclicked.connect
 		(boost::bind
@@ -341,8 +350,17 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect() :
 		(boost::bind(&FullscreenMenuCampaignMapSelect::clicked_ok, boost::ref(*this)));
 
 	/** TRANSLATORS: Campaign scenario number table header */
-	m_table.add_column(35, _("#"), _("The number of this scenario in the campaign"), UI::Align_Left);
-	m_table.add_column(m_table.get_w() - 35, _("Scenario Name"), _("Scenario Name"), UI::Align_Left);
+	std::string number_tooltip;
+	std::string name_tooltip;
+	if (m_is_tutorial) {
+		number_tooltip = _("The order in which the tutorials should be played");
+		name_tooltip = _("Tutorial Name");
+	} else {
+		number_tooltip = _("The number of this scenario in the campaign");
+		name_tooltip = _("Scenario Name");
+	}
+	m_table.add_column(35, _("#"), number_tooltip, UI::Align_Left);
+	m_table.add_column(m_table.get_w() - 35, name_tooltip, name_tooltip, UI::Align_Left);
 	m_table.set_sort_column(0);
 
 	m_table.focus();
@@ -377,7 +395,7 @@ bool FullscreenMenuCampaignMapSelect::set_has_selection()
 		m_ta_description.set_text(std::string());
 
 	} else {
-		m_label_mapname.set_text(_("Scenario:"));
+		m_is_tutorial? m_label_mapname.set_text(_("Tutorial:")) : m_label_mapname.set_text(_("Scenario:"));
 		m_label_description.set_text(_("Description:"));
 	}
 	return has_selection;
@@ -393,17 +411,24 @@ void FullscreenMenuCampaignMapSelect::entry_selected() {
 		std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(campmapfile));
 		if (!ml) {
 			throw wexception
-				(_("Invalid path to file in cconfig: %s"), campmapfile.c_str());
+				(_("Invalid path to file in campaigns.conf: %s"), campmapfile.c_str());
 		}
 
 		map.set_filename(campmapfile);
 		ml->preload_map(true);
 
-		MapAuthorData* authors = new MapAuthorData(map.get_author());
-		m_ta_author.set_text(authors->get_names());
-		m_ta_author.set_tooltip(ngettext("The designer of this scenario", "The designers of this scenario",
-										authors->get_number()));
-		m_label_author.set_text(ngettext("Author:", "Authors:", authors->get_number()));
+		MapAuthorData authors;
+		authors.parse(map.get_author());
+
+		m_ta_author.set_text(authors.get_names());
+		if (m_is_tutorial) {
+			m_ta_author.set_tooltip(ngettext("The designer of this tutorial", "The designers of this tutorial",
+											authors.get_number()));
+		} else {
+			m_ta_author.set_tooltip(ngettext("The designer of this scenario", "The designers of this scenario",
+											authors.get_number()));
+		}
+		m_label_author.set_text(ngettext("Author:", "Authors:", authors.get_number()));
 
 		i18n::Textdomain td("maps");
 		m_ta_mapname.set_text(_(map.get_name()));
@@ -419,31 +444,49 @@ void FullscreenMenuCampaignMapSelect::entry_selected() {
 void FullscreenMenuCampaignMapSelect::fill_table()
 {
 	// read in the campaign config
-	Profile prof("campaigns/cconfig", nullptr, "maps");
-	Section & global_s = prof.get_safe_section("global");
+	Profile* prof;
+	std::string campsection;
+	if (m_is_tutorial) {
+		prof = new Profile("campaigns/tutorials.conf", nullptr, "maps");
+
+		// Set subtitle of the page
+		const std::string subtitle1 = _("Pick a tutorial from the list, then hit \"OK\".");
+		const std::string subtitle2 =
+				_("You can see a description of the currently selected tutorial on the right.");
+		m_subtitle.set_text((boost::format("%s\n%s") % subtitle1 % subtitle2).str());
+
+		// Get section of campaign-maps
+		campsection = "tutorials";
+
+	} else {
+		prof = new Profile("campaigns/campaigns.conf", nullptr, "maps");
+
+		Section & global_s = prof->get_safe_section("global");
+
+		// Set subtitle of the page
+		const std::string campaign_name = (boost::format("campname%u") % campaign).str();
+		const std::string campaign_tribe = (boost::format("camptribe%u") % campaign).str();
+		m_subtitle.set_text((boost::format("%s — %s")
+									% global_s.get_string(campaign_tribe.c_str())
+									% global_s.get_string(campaign_name.c_str())).str());
+
+		// Get section of campaign-maps
+		const std::string campaign_section = (boost::format("campsect%u") % campaign).str();
+		campsection = global_s.get_string(campaign_section.c_str());
+	}
+
+	// Create the entry we use to load the section of the map
+	uint32_t i = 0;
+	std::string mapsection = campsection + (boost::format("%02i") % i).str();
 
 	// Read in campvis-file
 	CampaignVisibilitySave cvs;
 	Profile campvis(cvs.get_path().c_str());
 	Section & c = campvis.get_safe_section("campmaps");
 
-	// Set subtitle of the page
-	const std::string campaign_name =
-			global_s.get_string((boost::format("campname%u") % campaign).str().c_str());
-	const std::string campaign_tribe =
-			global_s.get_string((boost::format("camptribe%u") % campaign).str().c_str());
-	m_subtitle.set_text((boost::format("%s — %s") % campaign_tribe % campaign_name).str().c_str());
-
-	// Get section of campaign-maps
-	std::string campsection = global_s.get_string((boost::format("campsect%u") % campaign).str().c_str());
-
-	// Create the entry we use to load the section of the map
-	uint32_t i = 0;
-	std::string mapsection = campsection + (boost::format("%02i") % i).str();
-
 	// Add all visible entries to the list.
-	while (Section * const s = prof.get_section(mapsection.c_str())) {
-		if (c.get_bool(mapsection.c_str())) {
+	while (Section * const s = prof->get_section(mapsection)) {
+		if (m_is_tutorial || c.get_bool(mapsection.c_str())) {
 
 			CampaignScenarioData scenario_data;
 			scenario_data.index = i + 1;

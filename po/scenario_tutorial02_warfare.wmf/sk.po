@@ -1,0 +1,1517 @@
+# Slovak translation for widelands
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
+"POT-Creation-Date: 2014-10-29 08:57+0000\n"
+"PO-Revision-Date: 2014-07-17 05:15+0000\n"
+"Last-Translator: SirVer <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
+"X-Launchpad-Export-Date: 2014-10-29 06:10+0000\n"
+"X-Generator: Launchpad (build 17203)\n"
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:17
+#, fuzzy
+msgid "Introduction"
+msgstr "Úvod k správam"
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:19
+#, fuzzy
+msgid "Soldiers, Training and Warfare"
+msgstr "Vojaci a vojenstvo"
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:20
+#, fuzzy
+msgid ""
+"In this scenario, I’m going to tell you about soldiers, their training and "
+"their profession: warfare. Although Widelands is about building up, not "
+"burning down, there is an enemy you sometimes have to defeat. Yet warfare is "
+"mainly focused on economics, not on military strategies, and its mechanics "
+"deserve explanation."
+msgstr ""
+"Teraz k poslednej téme. Budeme sa rozprávať o vojakoch, ich tréningu a "
+"profesii - o vojenstve. Ako už bolo spomenuté, Widelands je o budovaní, nie "
+"vypaľovaní, a tak je armáda viac sústredená na ekonomiku ako na vojenské "
+"stratégie."
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:21
+msgid ""
+"I’ve set up a small village that contains the most important buildings. You "
+"also have enough wares, so you do not have to take care of your weapons "
+"production. In a real game, you will not have this luxury."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:28
+msgid "Soldiers’ abilities"
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:30
+msgid ""
+"A new soldier is created like a worker: When a military building needs a "
+"soldier, a carrier grabs the needed weapons and armor from a warehouse (or "
+"your headquarters) and walks up the road to your new building. Basic "
+"Barbarian soldiers do not use armor, they only need an ax."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:31
+msgid ""
+"Take a look at the soldiers that are on their way to our military buildings. "
+"They look different from normal workers: they have a health bar over their "
+"head that displays their remaining health, and they have four symbols, which "
+"symbolize the individual soldier’s current levels in the four different "
+"categories: health, attack, defense and evade."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:32
+msgid ""
+"If a barbarian soldier is fully trained, he has level 3 health, level 5 "
+"attack, level 0 defense and level 2 evade. This is one fearsome warrior "
+"then! The individual abilities have the following meaning:"
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:34
+msgid "Health:"
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:35
+msgid ""
+"The total life of a soldier. A barbarian soldier starts with 130 health, and "
+"he will gain 28 health with each health level."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:36
+msgid "Attack:"
+msgstr "Útok:"
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:37
+msgid ""
+"The amount of damage a soldier will inflict on the enemy when an attack is "
+"successful. A barbarian soldier with attack level 0 inflicts ~14 points of "
+"health damage when he succeeds in hitting an enemy. For each attack level, "
+"he gains 7 damage points."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:39
+msgid "Defense:"
+msgstr "Obrana:"
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:40
+msgid ""
+"The defense is the percentage that is subtracted from the attack value. The "
+"barbarians cannot train in this skill and therefore have always defense "
+"level 0, which means that the damage is always reduced by 3%. If an attacker "
+"with an attack value of 35 points hits a barbarian soldier, the barbarian "
+"will lose 35·0.97 = 34 health."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:41
+msgid "Evade:"
+msgstr "Uhýbanie:"
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:42
+#, fuzzy
+msgid ""
+"Evade is the chance that the soldier is able to dodge an attack. A level 0 "
+"barbarian has a 25% chance to evade an attack, and this increases in steps "
+"of 15% for each level."
+msgstr ""
+"Uhýbanie je šanca, že sa vojak vyhne útoku. Pre barbara s úrovňou uhýbania 0 "
+"je 25% a zvyšuje sa po 15% pri každej úrovni."
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:47
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:67
+msgid "The Battle Arena"
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:49
+msgid "Now I have talked about training and levels. Let me elaborate on that."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:50
+msgid ""
+"A newly created soldier has no experience and is not very good at fighting. "
+"To make him stronger, you can build training sites."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:51
+msgid ""
+"One of these training sites is the battle arena. It is a big and expensive "
+"building, and it trains soldiers in evade. Since soldiers get very hungry "
+"during their workout, this building needs a lot of food and strongbeer. In a "
+"real game, you should have a good infrastructure before you build it."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:53
+msgid "To see evade training in action, build a battle arena."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:57
+msgid "Build a battle arena"
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:60
+msgid "Build a battle arena. It is a big building."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:61
+msgid ""
+"Since the construction will take some time, you can change the game speed "
+"using PAGE UP and PAGE DOWN."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:69
+msgid "The Battle Arena Has Been Constructed"
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:70
+msgid ""
+"Very good. Our battle arena has been finished, and the soldiers are already "
+"walking towards it."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:72
+msgid ""
+"The needed wares are also delivered there. For successful training, you need "
+"bread and strongbeer. Most steps additionally require either fish or meat."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:73
+msgid ""
+"For more information, you can have a look at the building’s help window, "
+"accessible via the question mark in every building’s window."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:74
+msgid ""
+"To learn how far your soldiers have progressed in their training, you can "
+"have a look at their icons. They are modified by red dots:"
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:76
+msgid ""
+"No red dots means that the soldier is not trained, so he has level 0. All "
+"your new recruits have this."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:77
+msgid ""
+"With every successful training step, your soldier becomes stronger. This is "
+"indicated by a red dot. This soldier is on level 1 in evade training."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:78
+msgid ""
+"When your soldier has reached the highest possible level (in this case level "
+"2), this is indicated by a white background color."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:84
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:86
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:103
+msgid "The Training Camp"
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:87
+msgid ""
+"There is a second training site: the training camp. It is a big building "
+"too, and to complement the battle arena, it trains attack and health "
+"(remember, the Barbarian soldiers cannot be trained in defense)."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:89
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:97
+msgid "Build a training camp."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:93
+msgid "Build a training camp"
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:95
+msgid ""
+"The battle arena only trains the soldiers in evade. To get the strongest "
+"possible soldier, you also need to build a training camp, which trains them "
+"in attack and health."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:105
+msgid ""
+"Great, our training camp has now been finished, too. Now nothing will hinder "
+"us from getting the strongest warriors the world has ever seen."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:106
+msgid ""
+"To train in the training camp, our soldiers need food like in the battle "
+"arena, but no strongbeer. Instead, they need different axes for attack "
+"training and helmets for health training."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:107
+msgid ""
+"This equipment is produced in smithies out of coal, iron, and sometimes "
+"gold. To explain this in detail would lead too far at the moment. You will "
+"learn more about this in the second scenario of the Barbarian campaign."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:108
+msgid ""
+"You should also keep in mind that each of the three tribes in Widelands has "
+"its own way of training, so the buildings and wares are different. Also, the "
+"ability levels cannot be compared: an Imperial soldier with evade level 0 "
+"has a 30% chance of evading, while a Barbarian soldier at the same level "
+"only has a 25% chance."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:114
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:116
+msgid "Heroes and Rookies"
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:117
+msgid ""
+"While our soldiers are training, let me tell you what we can do with them."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:118
+msgid ""
+"In every military building, you can set the preference for heroes (trained "
+"soldiers) or rookies. From time to time, a soldier will walk out of the "
+"building and be replaced by a stronger/weaker one automatically."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:119
+msgid ""
+"The initial setting depends on the type of the building. For the Barbarians, "
+"the sentry is the only building that prefers rookies by default. You should "
+"change this setting to fit your current needs."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:120
+msgid ""
+"When you are expanding into no man’s land, you can make your buildings "
+"prefer rookies. When you are planning to attack, send heroes into that "
+"region. Conquered buildings always prefer heroes."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:126
+msgid "Soldier capacity"
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:128
+msgid "Adjusting the number of soldiers"
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:129
+msgid ""
+"There is another way how you can control the strength of a military "
+"building: By the number of soldiers stationed there. Just click on the arrow "
+"buttons to decrease or increase the desired number of soldiers. Every "
+"buildings has a maximum capacity. In case of the barrier, it is five, for "
+"example."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:130
+msgid ""
+"If you wish to send a certain soldier away, you can simply click on it. It "
+"will then be replaced by another soldier."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
+msgid ""
+"Let me also describe what the numbers in the statistics string mean. This "
+"string can contain up to three numbers, e.g. ‘1 (+5) soldier (+2)’."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:133
+msgid ""
+"The first number describes how many soldiers are currently in this building. "
+"In this example, only one soldier is left inside (each military building is "
+"always guarded by at least one soldier)."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:134
+msgid ""
+"The second number tells you how many additional soldiers reside in this "
+"building, but are currently outside. The five soldiers are maybe attacking "
+"an enemy. They will return when they have been successful."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:135
+msgid ""
+"The third number indicates the missing soldiers. From the eight soldiers (1 "
+"+ 5 + 2) you wish to have here, two have maybe died. They will be replaced "
+"by new soldiers from your warehouse, if possible."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:141
+#, fuzzy
+msgid "Dismantle your sentry"
+msgstr "Porazte svojho nepriateľa"
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143
+msgid "Dismantling military buildings"
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:144
+msgid ""
+"You can only reduce the number of soldiers to one. The last soldier of a "
+"building will never come out (unless this building is attacked). If you want "
+"to have your soldier elsewhere, you will have to dismantle the building "
+"(buildings of an alien tribe cannot be dismantled, only be burned down)."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:145
+msgid ""
+"However, destroying a military building is always linked with a risk: The "
+"land is still yours, but it is no longer protected. Any enemy that builds "
+"his own military sites can take over that land without a fight, causing your "
+"buildings to burst into flames. Furthermore, some parts of the land can now "
+"be hidden under the fog of war. You should therefore only dismantle military "
+"buildings deep inside your territory where you are safe from enemies."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:146
+msgid ""
+"Have you seen your sentry? Since it cannot contain many soldiers and is next "
+"to a stronger barrier, it is rather useless."
+msgstr ""
+
+#: TRANSLATORS: 'it' refers to the Barbarian sentry
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:149
+msgid "Dismantle it."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:151
+msgid ""
+"You can also use this opportunity to become familiar with the other options: "
+"The heroes/rookies preference and the capacity."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:153
+msgid "Dismantle your north-western sentry"
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:155
+msgid ""
+"You can control the number of soldiers stationed at a military site with the "
+"arrow buttons. If you want to get even your last soldier out, you will have "
+"to destroy it. However, it then will no longer protect your territory, which "
+"will make it vulnerable to hostile attacks."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:157
+msgid "Dismantle your sentry in the north-west, next to the barrier."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:163
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:175
+msgid "Enhance Your Fortress"
+msgstr "Vylepšite svoju pevnosť"
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:165
+msgid "Enhancing Buildings"
+msgstr "Vylepšenie budov"
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:166
+msgid ""
+"Well done. Now you know how to draw back your soldiers from the places where "
+"you don’t need them. It is time to tell you how to reinforce your front line."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:167
+#, fuzzy
+msgid ""
+"Your fortress is already quite strong and conquers a lot of space. But there "
+"is an even bigger building: the citadel."
+msgstr ""
+"Čoskoro pre vás vytvorím nepriateľa, ale najprv sa uistíme, či ste "
+"pripravený(á). Táto pevnosť je už dosť silná a zaberá veľa miesta. Existuje "
+"ale aj väčšia budova: citadela."
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:168
+msgid ""
+"Citadels can’t be built directly. Instead, you’ll have to construct a "
+"fortress first and then enhance it to a citadel. To do so, click on the "
+"fortress, then choose the ‘Enhance to Citadel’ button."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:169
+msgid ""
+"Your soldiers will leave the fortress while the construction is going on. "
+"This means that your fortress will lose its military influence, as I "
+"described above."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:170
+msgid "Enhance your fortress to a citadel now."
+msgstr "Teraz vylepšite svoju pevnosť na citadelu."
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:173
+msgid "Enhance your fortress to a citadel"
+msgstr "Vylepšite svoju pevnosť na citadelu"
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:177
+msgid "Enhance your fortress to a mighty citadel."
+msgstr "Vylepšite svoju pevnosť na mohutnú citadelu."
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:178
+#, fuzzy
+msgid ""
+"The citadel can house 12 soldiers, and it is the biggest military building "
+"the barbarians can build. It also costs a lot of resources and takes a long "
+"time to build. It is most suited to guard strategically important points "
+"like constricted points or mountains."
+msgstr ""
+"Citadela dokáže ubytovať 12 vojakov a je najväčšou vojenskou budovou, akú "
+"môžu barbari postaviť. Taktiež stojí veľa a jej stavba trvá dlhý čas. Je "
+"vhodné strážiť strategicky dôležité body ako úzke prechody alebo hory."
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:185
+#, fuzzy
+msgid "Defeat your Enemy"
+msgstr "Porazte svojho nepriateľa"
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:187
+msgid "Defeat the Enemy"
+msgstr "Porazte nepriateľa"
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:188
+msgid ""
+"Great work, the citadel is finished. But what’s that? A hostile tribe has "
+"settled next to us while the citadel was under construction! Do you see how "
+"they took away a part of our land? And our lumberjack has now lost his place "
+"of work. This is what I was talking about. Let’s take our land back and "
+"defeat the enemy!"
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:189
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:200
+#, fuzzy
+msgid ""
+"To attack a building, click on its doors, choose the number of soldiers that "
+"you wish to send and click on the ‘Attack’ button."
+msgstr ""
+"Aby ste zaútočili na budovu, musíte kliknúť na jej dvere, vybrať počet "
+"útočných vojakov a potom ich vyslať s tlačidlom na útok."
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:189
+msgid ""
+"Your soldiers will come from all nearby military buildings. Likewise, the "
+"defenders will come from all nearby military buildings of the enemy and "
+"intercept your forces."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:191
+msgid ""
+"Attack and conquer all military buildings of the enemy and destroy their "
+"headquarters."
+msgstr ""
+"Napadnite a dobyte všetky vojenské budovy nepriateľa a zničte jeho základňu."
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:195
+msgid "Defeat the enemy tribe"
+msgstr "Porazte nepriateľský kmeň"
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:197
+msgid "Defeat Your Enemy"
+msgstr "Porazte svojho nepriateľa"
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:199
+msgid "Defeat the nearby enemy."
+msgstr "Porazte blízkeho nepriateľa."
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:205
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:207
+msgid "Conclusion"
+msgstr "Záver"
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:208
+msgid ""
+"Thank you for playing this tutorial. I hope you enjoyed it and you learned "
+"how to create and train soldiers, how to control where they go and how to "
+"defeat an enemy. Did you see how easily you could overwhelm your enemy? "
+"Having trained soldiers is a huge advantage."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:209
+msgid ""
+"But a war is expensive, and not always the path leading to the goal. When "
+"setting up a new game, you can also choose peaceful win conditions. You "
+"should definitely try them out, they’re worth it."
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:210
+msgid ""
+"You are now ready to play the campaigns. They will teach you about the "
+"different economies of the tribes. You can also play the remaining "
+"tutorials, but they are not crucial for succeeding in the campaigns."
+msgstr ""
+
+#: ../../scripting/format_scenario.lua:36
+msgid "“%s”"
+msgstr ""
+
+#: ../../scripting/format_scenario.lua:133
+msgid "New Objective"
+msgid_plural "New Objectives"
+msgstr[0] ""
+msgstr[1] ""
+
+#~ msgid "Nice And Easy Does It All the Time"
+#~ msgstr "Vždy pekne pokojne"
+
+#~ msgid "Welcome to the Widelands Tutorial!"
+#~ msgstr "Vitajte v tutoriáli hry Widelands!"
+
+#~ msgid "Welcome to Widelands!"
+#~ msgstr "Vitajte vo Widelands!"
+
+#~ msgid ""
+#~ "Widelands is a slow-paced build-up strategy game with an emphasis on "
+#~ "construction, not destruction. This tutorial will guide you through the "
+#~ "basics of the game."
+#~ msgstr ""
+#~ "Widelands je pomaly plynúca stratégia s dôrazom na stavanie, nie ničenie. "
+#~ "V tomto tutoriáli sa dozviete o základoch hry."
+
+#~ msgid "Dismiss this box by left-clicking on the button below."
+#~ msgstr "Toto okno môžete zavrieť kliknutím na tlačidlo nižšie."
+
+#~ msgid "Diving In"
+#~ msgstr "Úvod"
+
+#~ msgid "Let’s dive right in!"
+#~ msgstr "Začnime hneď teraz!"
+
+#~ msgid ""
+#~ "There are three different tribes in Widelands: the Barbarians, the Empire "
+#~ "and the Atlanteans. All tribes have a different economy, strength and "
+#~ "weaknesses, but the general gameplay is the same for all. We will play "
+#~ "the barbarians for now."
+#~ msgstr ""
+#~ "Vo Widelands existujú tri rôzne kmene: barbari, impérium a Atlantíďania. "
+#~ "Každý kmeň má inú ekonomiku, silné a slabé stránky, ale základy hrania sú "
+#~ "rovnaké pre každého. Teraz hráme za barbarov."
+
+#~ msgid ""
+#~ "You will usually start the game with one headquarters. This is the big "
+#~ "building with the blue flag in front of it. The headquarters is a "
+#~ "warehouse that stores wares, workers and soldiers. Some wares are needed "
+#~ "for building houses, others for making other wares. Obviously, the wares "
+#~ "in the headquarters will not last forever, so you must make sure to "
+#~ "replace them. The most important wares in the early game are the basic "
+#~ "construction wares: logs and raw stone. Let’s make sure that we do not "
+#~ "run out of logs. For this, we need a lumberjack and a hut for him to stay "
+#~ "in."
+#~ msgstr ""
+#~ "Zvyčajne začínate hru s jednou základňou. To je tá budova s modrou "
+#~ "vlajkou vpredu. Základňa je sklad, kde sa skladujú výrobky, žijú "
+#~ "robotníci a vojaci. Niektoré výrobky sú potrebné na stavbu domov, iné na "
+#~ "výrobu iných výrobkov. Samozrejme, výrobky v základni nevydržia na "
+#~ "večnosť, takže musíte dbať na to, aby sa opäť vyrobili. Najdôležitejšie "
+#~ "výrobky na začiatku hry sú základné stavebné výrobky: kmene stromov a "
+#~ "kamene. Dbajme na to, aby nám nedošlo drevo. Na to potrebujeme "
+#~ "drevorubača a chatrč, v ktorej bude bývať."
+
+#~ msgid "Left-click the ‘OK’ button to close this box and then try it."
+#~ msgstr ""
+#~ "Ľavým kliknutím na tlačidlo 'OK' zavrite toto okno a potom to vyskúšajte."
+
+#~ msgid "Lumberjack’s Spot"
+#~ msgstr "Miesto pre chatrč"
+
+#~ msgid ""
+#~ "There you go. I will explain about all those symbols in a minute. First, "
+#~ "let me show you how to make a lumberjack’s hut and how to connect it with "
+#~ "a road. There is a sweet spot for a lumberjack right next to those trees. "
+#~ "I’ll describe the steps I will take and then ask you to click on the ‘OK’ "
+#~ "button for me to demonstrate."
+#~ msgstr ""
+#~ "No prosím. Za okamih objasním všetky tie symboly. Najprv vám ukážem, ako "
+#~ "postaviť chatrč pre drevorubača a ako ju spojiť s cestou. Hneď pri "
+#~ "tamtých stromoch je pre ňu skvelé miesto. Opíšem kroky, ktoré urobím a "
+#~ "potom vás požiadam, aby ste pre mňa klikli na tlačidlo \"OK\", aby som "
+#~ "ich mohol predviesť."
+
+#~ msgid "Building the Lumberjack"
+#~ msgstr "Stavanie drevorubačskej chatrče"
+
+#~ msgid ""
+#~ "First, I’ll left-click on the symbol where I want the lumberjack’s hut to "
+#~ "be built. A window will appear where I can choose between buildings. "
+#~ "Because I’ll click a yellow house symbol – which means that its field can "
+#~ "house medium and small buildings – I am presented with all the medium "
+#~ "buildings that I can build. The lumberjack’s hut is a small building, so "
+#~ "I will go on to select the small buildings tab. Then I’ll choose the "
+#~ "lumberjack’s hut."
+#~ msgstr ""
+#~ "Najprv kliknem ľavým tlačidlom myši na symbol, kde chcem, aby bola "
+#~ "postavená drevorubačská chatrč. Zobrazí sa okno, kde si môžem vybrať "
+#~ "medzi budovami. Pretože kliknem na žltý symbol domu, ktorý znamená, že v "
+#~ "jeho oblasti možno postaviť stredné a malé budovy, dozviem sa o všetkých "
+#~ "stredných budovách, ktoré môžem postaviť. Drevorubačská chatrč je malá "
+#~ "budova, takže vyberiem kartu malých budov. Potom zvolím drevorubačskú "
+#~ "chatrč."
+
+#~ msgid ""
+#~ "Click the ‘OK’ button to watch me. I’ll go really slowly: I will click – "
+#~ "then select the tab – and finally I’ll choose the building."
+#~ msgstr ""
+#~ "Ak ma chcete sledovať, kliknite na tlačidlo \"OK\". Pôjdem naozaj pomaly: "
+#~ "Kliknem, potom vyberiem kartu a nakoniec zvolím budovu."
+
+#~ msgid "Building a Connecting Road"
+#~ msgstr "Stavanie spojovacej cesty"
+
+#~ msgid ""
+#~ "That won’t do yet. I still need to connect the lumberjack’s hut to the "
+#~ "rest of my road network. After ordering the construction site, I was "
+#~ "automatically put into road building mode, so all I have to do is click "
+#~ "on the blue flag in front of my headquarters."
+#~ msgstr ""
+#~ "To nebude stačiť. Ešte musím spojiť chatrč drevorubača so zvyškom cestnej "
+#~ "siete. Po tom, čo som postavil stavenisko, dostal som sa automaticky do "
+#~ "režimu stavania ciest, takže všetko, čo musím urobiť, je kliknúť na modrú "
+#~ "vlajku pred základňou."
+
+#~ msgid "Waiting for the Lumberjack to Go Up"
+#~ msgstr "Čakanie na postavenie drevorubačovej chatrče"
+
+#~ msgid ""
+#~ "Now watch closely while a builder leaves the headquarters and goes to the "
+#~ "construction site. Also, a carrier will take position in between the two "
+#~ "blue flags and carry wares from one blue flag to the other."
+#~ msgstr ""
+#~ "Teraz poriadne sledujte, ako opustí staviteľ základňu a pôjde ku "
+#~ "stavenisku. Okrem toho sa nosič postaví medzi dve modré vlajky a bude "
+#~ "prenášať tovary od jednej modrej vlajky k druhej."
+
+#~ msgid "Placing Another Flag"
+#~ msgstr "Umiestnenie ďalšej vlajky"
+
+#~ msgid ""
+#~ "Nice how they are working, isn’t it? But the poor carrier has a very long "
+#~ "way to go. We can make it easier for him (and more efficient for us) when "
+#~ "we place another blue flag on the road."
+#~ msgstr ""
+#~ "Skvelé, ako pracujú, nie? Ale chudák nosič musí prechádzať veľmi dlhé "
+#~ "cesty. Môžeme mu to uľahčiť (a zároveň zefektívniť pre nás), ak na ceste "
+#~ "umiestnime ďalšiu modrú vlajku."
+
+#~ msgid ""
+#~ "You try it this time: click on the yellow flag symbol in between the two "
+#~ "blue flags we just placed and then click on the"
+#~ msgstr ""
+#~ "Tentokrát to vyskúšajte vy: kliknite na symbol žltej vlajky medzi dvomi "
+#~ "modrými vlajkami, ktoré sme práve umiestnili, a potom kliknite na"
+
+#~ msgid "build flag symbol."
+#~ msgstr "symbol vlajky."
+
+#~ msgid "Build a flag to divide the road to the lumberjack"
+#~ msgstr "Postavte vlajku, aby sa rozdelila cesta k drevorubačovi"
+
+#~ msgid "Build a Flag on the Road"
+#~ msgstr "Postavte vlajku na ceste"
+
+#~ msgid ""
+#~ "The shorter your road segments are, the faster your wares will be "
+#~ "transported. You should therefore make sure that your roads have as many "
+#~ "flags as possible."
+#~ msgstr ""
+#~ "Čím kratšie sú úseky ciest, tým rýchlejšie sa váš tovar prenesie. Preto "
+#~ "by ste sa mali uistiť, že na cestách máte toľko vlajok, koľko sa len dá."
+
+#~ msgid ""
+#~ "Build a blue flag now in the middle of the road that connects your "
+#~ "headquarters to your lumberjack’s hut."
+#~ msgstr ""
+#~ "Teraz postavte modrú vlajku v strede cesty, ktorá spája vašu základňu s "
+#~ "drevorubačskou chatrčou."
+
+#~ msgid "Waiting For the Hut to be Finished"
+#~ msgstr "Čakanie na dokončenie chatrče"
+
+#~ msgid "Well done! Let’s wait till the hut is finished."
+#~ msgstr "Výborne! Počkajme, kým postavia chatrč."
+
+#~ msgid ""
+#~ "If you want things to go faster, simply use the PAGE UP key on your "
+#~ "keyboard to increase the game speed. You can use PAGE DOWN to make the "
+#~ "game slower again."
+#~ msgstr ""
+#~ "Ak chcete zrýchliť čas, jednoducho stlačte kláves PAGE UP na vašej "
+#~ "klávesnici, čím sa zvýši herná rýchlosť. Ak chcete hru opäť spomaliť, "
+#~ "stlačte kláves PAGE DOWN."
+
+#~ msgid "Lumberjack is Done"
+#~ msgstr "Chatrč drevorubača je hotová"
+
+#~ msgid ""
+#~ "Excellent. The lumberjack’s hut is done. A lumberjack will now move in "
+#~ "and start chopping down trees, so our logs income is secured for now. Now "
+#~ "on to the raw stone."
+#~ msgstr ""
+#~ "Výborne. Drevorubačská chatrč je hotová. Drevorubač sa do nej teraz "
+#~ "presunie a začne rúbať stromy, takže náš príjem dreva je zabezpečený. "
+#~ "Teraz k nespracovaným kameňom."
+
+#~ msgid "Some Stones Were Found"
+#~ msgstr "Boli nájdené niektoré kamene"
+
+#~ msgid "Getting a Quarry Up."
+#~ msgstr "Stavanie kameňolomu"
+
+#~ msgid ""
+#~ "Stones can be mined in granite mines, but the easier way is to build a "
+#~ "quarry next to some stones lying around. As it happens, there is a pile "
+#~ "of them just to the west (left) of your headquarters. I will teach you "
+#~ "now how to move your view over there."
+#~ msgstr ""
+#~ "Kamene môžno ťažiť v žulových lomoch, ale ľahšie je postaviť kameňolom "
+#~ "pri kameňoch ležiacich navôkol. Náhodou je ich tu hromada na západe "
+#~ "(vľavo) od základne. Teraz vás naučím, ako tam dostať pohľad."
+
+#~ msgid ""
+#~ "There are two ways to move your view. The first one is using the cursor "
+#~ "keys on your keyboard. Go ahead and try this out."
+#~ msgstr ""
+#~ "Pohľad možno presunúť dvoma spôsobmi. Prvým je použitie kurzorových "
+#~ "klávesov na vašej klávesnici. Vyskúšajte si to."
+
+#~ msgid "Click the ‘OK’ button and then move the view using the cursor keys"
+#~ msgstr ""
+#~ "Kliknite na tlačidlo \"OK\" a potom presuňte pohľad použitím kurzorových "
+#~ "klávesov."
+
+#~ msgid "Move your view with the cursor keys"
+#~ msgstr "Presuňte svoj pohľad kurzorovými klávesami"
+
+#~ msgid "Moving Your View"
+#~ msgstr "Presúvanie pohľadu"
+
+#~ msgid ""
+#~ "Moving your view is essential to get a complete overview of your whole "
+#~ "economy. There are two ways to move your view in Widelands."
+#~ msgstr ""
+#~ "Je dôležité presúvať váš pohľad, aby ste získali kompletný prehľad o "
+#~ "celej ekonomike. Vo Widelands môžete presunúť svoj pohľad dvomi spôsobmi."
+
+#~ msgid "The first one is to use the cursor keys on your keyboard."
+#~ msgstr "V prvom je potrebné použiť kurzorové klávesy na klávesnici."
+
+#~ msgid ""
+#~ "The second one is the more common and faster one: press-and-hold the "
+#~ "right mouse button anywhere on the map, then move your mouse around and "
+#~ "you’ll see the view scroll."
+#~ msgstr ""
+#~ "Druhý je viac známy a rýchlejší: stlačte a podržte pravé tlačidlo myši "
+#~ "hocikde na mape, potom pohnite myšou a uvidíte, ako sa pohľad zmení."
+
+#~ msgid "Other Ways to Move the View"
+#~ msgstr "Iné spôsoby, ako presunúť pohľad"
+
+#~ msgid ""
+#~ "Excellent. Now there is a faster way to move, using the mouse instead:"
+#~ msgstr ""
+#~ "Výborne. Teraz rýchlejší spôsob pohybu použitím myši: Jednoducho podržte "
+#~ "pravé tlačidlo myši hocikde na mape, potom potiahnite myš."
+
+#~ msgid ""
+#~ "Simply right-click-and-hold anywhere on the map, then drag the mouse and "
+#~ "instead of the cursor, the view will be moved. Try it."
+#~ msgstr "Namiesto kurzora sa pohne pohľad na mapu. Vyskúšajte to."
+
+#~ msgid "Move your view with the mouse"
+#~ msgstr "Presuňte svoj pohľad s myšou"
+
+#~ msgid "Onward to the Quarry"
+#~ msgstr "Ďalej ku kameňolomu"
+
+#~ msgid "Great. Now about that quarry..."
+#~ msgstr "Skvelé. A teraz ten kameňolom..."
+
+#~ msgid "How to Build a Quarry"
+#~ msgstr "Ako postaviť kameňolom"
+
+#~ msgid ""
+#~ "Build a quarry next to those stones here. Remember how I did it earlier?"
+#~ msgstr ""
+#~ "Postavte kameňolom, tu, pri týchto kameňoch. Pamätáte si, ako som to "
+#~ "predtým urobil?"
+
+#~ msgid ""
+#~ "You can build four things on fields in Widelands: Flags, small houses, "
+#~ "medium houses and big houses. But not every field can hold everything. "
+#~ "The build space symbols ease recognition:"
+#~ msgstr ""
+#~ "Na políčkach vo Widelands možno postaviť štyri veci: vlajky, malé budovy, "
+#~ "stredné budovy a veľké budovy.  Ale nie každé políčko všetko drží. Pomoc "
+#~ "pri stavaní uľahčuje rozpoznanie:"
+
+#~ msgid "Everything can be built on the green house symbol."
+#~ msgstr "Na symbole zelenej budovy možno postaviť všetko."
+
+#~ msgid ""
+#~ "Everything except for big buildings can be built on a yellow house symbol."
+#~ msgstr "Na symbole žltej budovy možno postaviť všetko okrem veľkých budov."
+
+#~ msgid "Red building symbols can only hold small buildings and flags."
+#~ msgstr "Na symbole červenej budovy možno postaviť len malé budovy a vlajky."
+
+#~ msgid "And finally the yellow flag symbol only allows for flags."
+#~ msgstr "A, nakoniec, na symbole žltej vlajky možno umiestniť len vlajky."
+
+#~ msgid ""
+#~ "If you place something on a field, the surrounding fields might have less "
+#~ "space for holding buildings, so choose your fields wisely."
+#~ msgstr ""
+#~ "Ak niečo umiestníte na políčku, na okolitých políčkach sa môže zmenšiť "
+#~ "miesto pre budovy, takže vyberajte políčka rozumne."
+
+#~ msgid ""
+#~ "Now go ahead, try it. The quarry is a small building, so if you click on "
+#~ "a medium or big building symbol, you will have to select the small "
+#~ "buildings tab first to find it. Go on, check it out!"
+#~ msgstr ""
+#~ "Teraz to vyskúšajte. Kameňolom je malá budova, takže ak kliknete na "
+#~ "stredné alebo veľké symboly budov, budete musieť vybrať kartu pre malé "
+#~ "budovy a nájsť ho tam. Pokračujte, skúste to!"
+
+#~ msgid "Build a quarry next to the stones"
+#~ msgstr "Postavte kameňolom pri kameňoch"
+
+#~ msgid "Build a Quarry"
+#~ msgstr "Postavte kameňolom"
+
+#~ msgid ""
+#~ "There are some stones to the west of your headquarters. Build a quarry "
+#~ "right next to them."
+#~ msgstr ""
+#~ "Na západe od vašej základne stoja nejaké skaly. Hneď pri nich postavte "
+#~ "kameňolom."
+
+#~ msgid ""
+#~ "The quarry is a small building like the lumberjack’s hut. You can "
+#~ "therefore build it on any field that shows a red, yellow or green house "
+#~ "when the building spaces symbols are enabled (Press SPACE for that)."
+#~ msgstr ""
+#~ "Kameňolom je malá budova ako drevorubačská chatrč. Preto ju môžete "
+#~ "postaviť na hociktorom políčku, ktoré ukazuje červenú, žltú alebo zelenú "
+#~ "budovu, keď je zapnutá pomoc pri stavaní (prepnete ju stlačením klávesu "
+#~ "MEDZERNÍK)."
+
+#~ msgid ""
+#~ "Just click on any house symbol next to the stones, select the small "
+#~ "buildings tab in the window that opens up, then click on the quarry "
+#~ "symbol."
+#~ msgstr ""
+#~ "Len kliknite na hociktorý symbol domu v blízkosti kameňov, vyberte kartu "
+#~ "malých budov v okne, ktoré sa otvorí, potom kliknite na symbol kameňolomu."
+
+#~ msgid "Road Building"
+#~ msgstr "Stavba cesty"
+
+#~ msgid ""
+#~ "Excellent! Directly after placing the building, you have been switched "
+#~ "into road building mode. The new road will start at the flag in front of "
+#~ "your newly placed construction site. You can enter road building mode for "
+#~ "any flag by left-clicking on a flag and selecting"
+#~ msgstr ""
+#~ "Výborne! Hneď po umiestnení budovy sa dostávate do režimu stavania ciest. "
+#~ "Nová cesta sa začne od vlajky pred vaším novo umiestneným staveniskom. Do "
+#~ "režimu stavania ciest pre hocijakú vlajku sa môžete dostať ľavým "
+#~ "kliknutím na vlajku alebo výberom"
+
+#~ msgid "the road building symbol."
+#~ msgstr "symbolu na stavanie ciest."
+
+#~ msgid ""
+#~ "If you decide you do not want to build a road at this time, you can "
+#~ "cancel road building by clicking on the starting flag of the road and "
+#~ "selecting"
+#~ msgstr ""
+#~ "Ak sa rozhodnete, že tentoraz nechcete postaviť cestu, môžete ju zrušiť "
+#~ "kliknutím na počiatočnú vlajku cesty a výberom"
+
+#~ msgid "the abort symbol."
+#~ msgstr "symbolu na zrušenie."
+
+#~ msgid ""
+#~ "Now, about this road. Remember: we are already in road building mode "
+#~ "since you just ordered the quarry. You can either make it longer by one "
+#~ "field at a time by left-clicking multiple times on neighboring fields for "
+#~ "perfect control over the route the road takes like so:"
+#~ msgstr ""
+#~ "Teraz ohľadom tejto cesty. Pamätajte, že sme už v režime stavania ciest, "
+#~ "keďže ste dali postaviť kameňolom. Cestu môžete predlžovať o jedno "
+#~ "políčko ľavým klikaním na susedné políčka pre úplnú kontrolu nad smerom "
+#~ "cesty takto:"
+
+#~ msgid ""
+#~ "Or, you can directly click the flag where the road should end like so:"
+#~ msgstr "Alebo môžete kliknúť priamo na vlajku, kde by sa cesta mala končiť."
+
+#~ msgid ""
+#~ "One more thing: around the field where your road would end, you can see "
+#~ "different markers. They have the following meaning:"
+#~ msgstr ""
+#~ "Ešte niečo: okolo oblasti, kde by sa vaša cesta mala končiť, možno vidieť "
+#~ "rozličné značky. Majú nasledovný význam:"
+
+#~ msgid ""
+#~ "The terrain is flat here. Your carriers will be very swift on this "
+#~ "terrain."
+#~ msgstr "Tu je terén rovný. Vaši nosiči sa po ňom budú pohybovať svižne."
+
+#~ msgid ""
+#~ "There is a small slope to climb to reach this field. This means that your "
+#~ "workers will be faster walking downhill than they will be walking uphill."
+#~ msgstr ""
+#~ "K tomuto políčku vedie menší svah. To znamená, že vaši nosiči sa pohybujú "
+#~ "smerom nadol rýchlejšie než nahor."
+
+#~ msgid ""
+#~ "The connection between the fields is extremely steep. The speed increase "
+#~ "in one direction is huge while the slowdown in the other is also "
+#~ "substantial."
+#~ msgstr ""
+#~ "Spojenie medzi dvoma políčkami je extrémne strmé. Zrýchlenie v jednom "
+#~ "smere je obrovské, kým spomalenie v druhom je tiež značné."
+
+#~ msgid ""
+#~ "Keep the slopes in mind while placing roads and use them to your "
+#~ "advantage. Also, try to keep roads as short as possible and always "
+#~ "remember to place as many flags as you can on road segments to share the "
+#~ "load better."
+#~ msgstr ""
+#~ "Keď umiestňujete cesty, majte napamäti strmosť a využite ju vo svoj "
+#~ "prospech. Tiež skúste udržiavať cesty čo najkrajšie, ako je to možné, a "
+#~ "nezabudnite umiestniť toľko vlajok, koľko sa dá na úsekoch cesty, aby sa "
+#~ "náklad rozdelil lepšie."
+
+#~ msgid ""
+#~ "Now please rebuild the road between your quarry and your headquarters. "
+#~ "We’ll wait until the quarry is completed."
+#~ msgstr ""
+#~ "Teraz, prosím, znovu postavte cestu medzi kameňolomom a základňou. "
+#~ "Počkáme, kým sa dokončí kameňolom."
+
+#~ msgid "Connect the quarry to the headquarters"
+#~ msgstr "Pripojte kameňolom k základni."
+
+#~ msgid "Connect Your Construction Site"
+#~ msgstr "Pripojte svoje stavenisko"
+
+#~ msgid ""
+#~ "Connect your quarry construction site to your headquarters with a road. "
+#~ "You would have been put directly into road building mode after ordering a "
+#~ "new site. But now, you aren’t."
+#~ msgstr ""
+#~ "Spojte stavenisko kameňolomu so základňou cestou. Keď ste dali postaviť "
+#~ "novú stavbu, dostali ste sa priamo do režimu stavania ciest. Ale teraz v "
+#~ "ňom nie ste."
+
+#~ msgid ""
+#~ "To build a completely new road, just click on the flag in front of your "
+#~ "construction site, click on the build road icon and then click on the "
+#~ "flag in front of your headquarters. Wait for the completion of the quarry."
+#~ msgstr ""
+#~ "Aby ste postavili úplne novú cestu, kliknite na vlajku pred staveniskom, "
+#~ "kliknite na ikonu stavania ciest, potom kliknite na vlajku pred svojou "
+#~ "základňou. Počkajte, kým sa dokončí chatrč kamenára."
+
+#~ msgid "Census and Statistics"
+#~ msgstr "Názvy budov a štatistiky"
+
+#~ msgid ""
+#~ "While we wait, I’ll quickly show you another useful feature. All "
+#~ "construction sites look the same, and some buildings look alike. It is "
+#~ "sometimes hard to tell them apart. Widelands offers a feature to show "
+#~ "label texts over the buildings. They are called the ‘census’ and you can "
+#~ "toggle them via the ‘c’ key or via the button on the ‘Watch’ tab of any "
+#~ "field."
+#~ msgstr ""
+#~ "Kým čakáme, rýchlo vám ukážem ďalšiu užitočnú funkciu. Všetky staveniská "
+#~ "vyzerajú rovnako a niektoré budovy podobne. Niekedy je ťažké rozoznať ich "
+#~ "od seba. Widelands ponúka funkciu na označenie budov. Volá sa \"census\" "
+#~ "a môžete ho prepnúť stlačením klávesu 'c' alebo tlačidla v karte "
+#~ "'Sledovanie' na hociktorom políčku."
+
+#~ msgid ""
+#~ "Similar to this are the building statistics, which are also toggled via a "
+#~ "button on the ‘Watch’ tab of any field. The hotkey for it is ‘s’. This "
+#~ "will display information about the productivity of buildings or the "
+#~ "progress of construction sites."
+#~ msgstr ""
+#~ "Podobné sú štatistiky budov, ktoré sa tiež prepínajú pomocou tlačidla v "
+#~ "karte 'Sledovanie' na hociktorom políčku. Aktivujú sa stlačením klávesu "
+#~ "'s'. Zobrazia sa informácie o produktivite budov alebo priebehy ich "
+#~ "konštrukcií."
+
+#~ msgid ""
+#~ "Let me quickly enable these two for you. Remember: ‘c’ and ‘s’ are the "
+#~ "keys. Alternatively, you can click on any field without a building on it, "
+#~ "select the watch tab and then click on the corresponding buttons."
+#~ msgstr ""
+#~ "Rýchlo vám ich zapnem. Pamätajte: naše klávesy sú 'c' a 's'. Môžete "
+#~ "kliknúť aj na hociktoré políčko, na ktorom nestojí budova, vybrať kartu "
+#~ "'Sledovanie' a potom kliknúť na príslušné tlačidlá."
+
+#~ msgid "Now we know what’s going on. Let’s wait for this quarry to finish."
+#~ msgstr "Teraz vieme, čo sa deje. Počkajme, kým sa dokončí tento kameňolom."
+
+#~ msgid "Messages"
+#~ msgstr "Správy"
+
+#~ msgid ""
+#~ "Hi, it’s me again! This time, I have sent you a message. Messages are "
+#~ "sent to you by Widelands to inform you about important events: empty "
+#~ "mines, attacks on your tribe, won or lost military buildings, resources "
+#~ "found..."
+#~ msgstr ""
+#~ "Zdravím, opäť som to ja. Tentokrát som vám poslal správu. Správy, ktoré "
+#~ "dostávate, vás informujú o podstatných udalostiach: prázdne bane, útoky "
+#~ "na váš kmeň, získané alebo stratené vojenské budovy, nájdené zdroje..."
+
+#~ msgid ""
+#~ "The message window can be toggled by the button on the very right at the "
+#~ "bottom of the screen. This button will also change appearance whenever "
+#~ "new messages are available, but there is also a bell sound played "
+#~ "whenever you receive a new message."
+#~ msgstr ""
+#~ "Okno so správami možno prepnúť s tlačidlom najviac vpravo naspodku "
+#~ "obrazovky. Toto tlačidlo taktiež zmení svoj vzhľad, keď dostanete novú "
+#~ "správu, ale zároveň sa pri každej novej správe prehrá zvuk zvonca."
+
+#~ msgid ""
+#~ "You have two messages at the moment. This one, which you are currently "
+#~ "reading, and the one that informed you that a new headquarters was added "
+#~ "to your economy. Let’s learn how to archive messages: You can check them "
+#~ "off in your inbox so that they get a tick-symbol in front of them. Then, "
+#~ "you can click the"
+#~ msgstr ""
+#~ "Máte dve správy. Túto, ktorú práve čítate, a tú, ktorá vás oboznámila s "
+#~ "tým, že do vašej ekonomiky bola pridaná nová základňa. Naučme sa "
+#~ "archivovať správy: V schránke ich môžete zaškrtnúť tak, že sa pred nimi "
+#~ "zjaví krížik. Potom môžete kliknúť na"
+
+#~ msgid "archive message button to move them into your archive."
+#~ msgstr ""
+#~ "tlačidlo archivovania správ, aby ste ich presunuli do svojho archívu."
+
+#~ msgid ""
+#~ "Archive all messages that you currently have in your inbox, including "
+#~ "this one."
+#~ msgstr ""
+#~ "Archivujte všetky správy, ktoré práve máte vo svojej schránke, vrátane "
+#~ "tejto."
+
+#~ msgid "Archive all messages in your inbox"
+#~ msgstr "Archivujte všetky správy vo svojej schránke"
+
+#~ msgid "Archive Your Inbox Messages"
+#~ msgstr "Archivujte naše prijaté správy"
+
+#~ msgid ""
+#~ "The message window is central to fully controlling your tribe’s fortune. "
+#~ "However, you will get a lot of messages in a real game. To keep your head "
+#~ "straight, you should try to keep the inbox empty. "
+#~ msgstr ""
+#~ "Okno správ je kľúčom k plnej kontrole nad osudom vášho kmeňa. Ale v "
+#~ "skutočnej hre dostávate veľa správ. Aby ste si zachovali jasnú hlavu, "
+#~ "mali by ste sa snažiť udržiavať schránku prázdnu. "
+
+#~ msgid "Archive all your messages in your inbox now."
+#~ msgstr "Teraz archivujte všetky správy v schránke."
+
+#~ msgid ""
+#~ "To do so, open the message window by pressing ‘n’ or clicking the "
+#~ "rightmost button at the very bottom of the screen. Then mark all messages "
+#~ "by checking the check box in front of them. Then, click the ‘Archive All’ "
+#~ "button."
+#~ msgstr ""
+#~ "Aby ste to urobili, otvorte okno správ stlačením 'n' alebo kliknutím na "
+#~ "pravé krajné tlačidlo naspodku obrazovky. Potom označte všetky správy "
+#~ "zaškrtnutím políčka pred nimi. Potom kliknite na tlačidlo 'Archivovať "
+#~ "vybrané správy'."
+
+#~ msgid "Closing Windows"
+#~ msgstr "Zatváranie okien"
+
+#~ msgid ""
+#~ "Excellent. By the way: closing windows in Widelands is as easy as right-"
+#~ "clicking on them. This will work with all windows except for story "
+#~ "message windows like this one. Go ahead and try it."
+#~ msgstr ""
+#~ "Výborne. Mimochodom: zatváranie okien vo Widelands je ľahké: stačí na ne "
+#~ "kliknúť pravým tlačidlom. Funguje to pri každom okne okrem okien s "
+#~ "príbehom ako toto. Skúste si to!"
+
+#~ msgid ""
+#~ "First, close this window by pressing the button below, then right-click "
+#~ "into the messages window to close it."
+#~ msgstr ""
+#~ "Najprv zavrite toto okno stlačením tlačidla nižšie, potom kliknite pravým "
+#~ "tlačidlom na okno správ, aby ste ho zavreli."
+
+#~ msgid "Close the messages window"
+#~ msgstr "Zatvorte okno so správami"
+
+#~ msgid "Close the Messages Window"
+#~ msgstr "Zatvorte okno so správami"
+
+#~ msgid ""
+#~ "All windows in Widelands can be closed by right-clicking into them. Some "
+#~ "windows can also be toggled with the buttons at the very bottom of the "
+#~ "screen."
+#~ msgstr ""
+#~ "Všetky okná vo Widelands možno zavrieť pravým kliknutím. Niektoré okná "
+#~ "možno prepnúť s tlačidlami na úplnom spodku obrazovky."
+
+#~ msgid "Close the messages window now by right-clicking into it."
+#~ msgstr "Teraz pravým kliknutím zavrite okno správ."
+
+#~ msgid ""
+#~ "Well done! Let’s see how messages work in a real game, shall we? For "
+#~ "this, I’ll take all stones away from the poor stonemason in the quarry. "
+#~ "He will then send a message that he can’t find any in his working area "
+#~ "the next time he tries to do some work."
+#~ msgstr ""
+#~ "Výborne! Uvidíme, ako fungujú správy v skutočnej hre. Preto zoberiem "
+#~ "chudákovi kamenárovi všetky kamene. Potom, keď sa pokúsi pracovať, pošle "
+#~ "vám správu, že vo svojej pracovnej oblasti nemohol žiadne nájsť."
+
+#~ msgid "Message Arrived!"
+#~ msgstr "Prišla správa!"
+
+#~ msgid ""
+#~ "A message has been sent to you. See how the button at the bottom of the "
+#~ "screen has changed appearance? You can burn this quarry down now as it is "
+#~ "no longer of any use and just blocking space."
+#~ msgstr ""
+#~ "Bola vám zaslaná správa. Vidíte, ako tlačidlo naspodku obrazovky zmenilo "
+#~ "svoj vzhľad? Teraz môžete spáliť tento kameňolom, lebo už nie je potrebný "
+#~ "a len zaberá miesto."
+
+#~ msgid "To do that, click on the quarry and select the destroy button."
+#~ msgstr ""
+#~ "Aby ste tak vykonali, kliknite na kameňolom a zvoľte tlačidlo na zničenie."
+
+#~ msgid "Expanding Your Territory!"
+#~ msgstr "Rozpínanie vášho územia!"
+
+#~ msgid ""
+#~ "There is one more thing I’d like to teach you now: Expanding your "
+#~ "territory. The place that we started with around our headquarters is "
+#~ "barely enough for a basic building infrastructure, and we do not have "
+#~ "access to mountains, which we need to mine minerals and coal. So, we have "
+#~ "to expand our territory."
+#~ msgstr ""
+#~ "Chcel by som vás ešte naučiť jednu ďalšiu vec: rozširovanie územia. "
+#~ "Priestor, s ktorým začíname okolo základne, ťažko postačí pre základnú "
+#~ "stavebnú infraštruktúru a nemáme prístup k horám, ktoré potrebujeme na "
+#~ "ťažbu minerálov a uhlia. Preto musíme rozšíriť svoje územie."
+
+#~ msgid ""
+#~ "Expanding is as simple as building a military building at the edge of "
+#~ "your territory. The barbarians have a selection of different military "
+#~ "buildings: sentries, barriers, donjons, fortresses and citadels. The "
+#~ "bigger the building, the more expensive it is to build, but the more land "
+#~ "it will conquer around itself and the more soldiers can be stationed "
+#~ "there. The buildings also vary in their vision range: buildings with a "
+#~ "tower see farther than others."
+#~ msgstr ""
+#~ "Územie rozšírite postavením vojenskej budovy na kraji svojho územia. "
+#~ "Barbari majú niektoré odlišné vojenské budovy: strážnice, hradby, "
+#~ "donžony, pevnosti a citadely. Čím väčšia je budova, tým nákladnejšie je "
+#~ "ju postaviť, tým viac územia si okolo seba podmaní, a tým viac vojakov v "
+#~ "nej možno umiestniť. Budovy sa líšia vo svojom dohľade: budovy s vežou "
+#~ "dovidia ďalej než iné."
+
+#~ msgid ""
+#~ "As soon as a military building is manned, it will extend your land. You "
+#~ "can then burn it down again if you need the space. But note that your "
+#~ "land is then vulnerable: any military site from another player could "
+#~ "conquer the land. You therefore need military sites to keep military "
+#~ "influence over your land."
+#~ msgstr ""
+#~ "Akonáhle vaši muži obsadia vojenskú budovu, rozšíri sa vaše územie. Ak "
+#~ "potom potrebujete miesto, môžete ju znovu spáliť. Všimnite si ale, že "
+#~ "vaše územie bude nechránené: každá vojenská stavba iného hráča môže dobyť "
+#~ "toto územie. Preto na udržanie vojenského vplyvu na svojom území "
+#~ "potrebujete vojenské stavby."
+
+#~ msgid ""
+#~ "Let’s try it out now: build a few military buildings on your south-"
+#~ "western border."
+#~ msgstr ""
+#~ "Teraz to vyskúšajme: postavte niekoľko vojenských budov na juhozápadnej "
+#~ "hranici."
+
+#~ msgid ""
+#~ "We want to capture some of this mountain so we can search for resources "
+#~ "there. Bigger buildings will conquer more land, which can be beneficial "
+#~ "close to mountains, because you can’t build houses on mountains."
+#~ msgstr ""
+#~ "Chceme obsadiť časť z tejto hory, aby sme tam mohli hľadať zásoby. Väčšie "
+#~ "budovy obsadia väčšie územie, čo môže byť užitočné blízko hôr, lebo v "
+#~ "horách nemožno postaviť domy."
+
+#~ msgid "Conquer an area were we can build mines"
+#~ msgstr "Obsaďte územie, kde možno postaviť bane"
+
+#~ msgid "Conquer the Mountain to the South-West"
+#~ msgstr "Obsaďte horu na juhozápade"
+
+#~ msgid ""
+#~ "For a full-fledged economy, we need coal, iron and gold. These can be "
+#~ "found in mountains. Conquer some area on the mountains to the south-west "
+#~ "of your headquarters by building some military buildings close to your "
+#~ "border."
+#~ msgstr ""
+#~ "Pre pokročilé hospodárstvo potrebujeme uhlie, železo a zlato. Možno ich "
+#~ "nájsť v horách. Získajte nejaké územie na horách na juhozápade od svojej "
+#~ "základne postavením nejakej vojenskej budovy pri hranici."
+
+#~ msgid ""
+#~ "You can choose from the following military buildings: sentry, donjon, "
+#~ "barrier and fortress. The bigger the building, the more expensive it is "
+#~ "to build it, but it will also conquer a bigger region. Sometimes, it is "
+#~ "useful to build a big military building next to a mountain so that you "
+#~ "can reach building sites farther up."
+#~ msgstr ""
+#~ "Môžete si vybrať z nasledujúcich vojenských budov: strážnica, donžon, "
+#~ "hradba a pevnosť. Čím väčšia je budova, tým nákladnejšie je ju postaviť. "
+#~ "Ale podmaní väčšiu oblasť. Niekedy je vhodné postaviť veľkú vojenskú "
+#~ "budovu pri hore, aby ste dosiahli aj vyššie položené políčka."
+
+#~ msgid "Searching for Resources"
+#~ msgstr "Hľadanie zdrojov"
+
+#~ msgid ""
+#~ "Okay, now we own some of the area on this mountain. Mountains are very "
+#~ "important, because they contain resources: coal, iron ore, gold ore and "
+#~ "granite. Each tribe uses the resources differently, but all need mines to "
+#~ "extract the resources from the ground."
+#~ msgstr ""
+#~ "Dobre, teraz nám patrí kúsok územia na tejto hore. Hory sú veľmi "
+#~ "dôležité, lebo poskytujú prírodné zdroje: uhlie, železnú rudu, zlatú rudu "
+#~ "a žulu. Každý kmeň využíva zdroje rozdielne, ale všetky potrebujú bane na "
+#~ "to, aby zo zeme zdroje dostali."
+
+#~ msgid ""
+#~ "Let’s search for resources in this mountain. First, we’ll build a road "
+#~ "onto the mountain and place a flag. Then, we will click on the flag and "
+#~ "call a geologist to it. I’ll show you how it’s done."
+#~ msgstr ""
+#~ "Poďme hľadať zásoby v tejto hore. Najprv postavíme cestu do hôr a "
+#~ "umiestníme vlajku. Potom klikneme na vlajku a zavoláme k nej geológa. "
+#~ "Ukážem vám, ako na to."
+
+#~ msgid "Waiting for the Geologist"
+#~ msgstr "Čakanie na geológa"
+
+#~ msgid ""
+#~ "The geologist will arrive at the flag shortly and start investigating the "
+#~ "area in his surroundings. He will place the following markers for the "
+#~ "various resources:"
+#~ msgstr ""
+#~ "Geológ zanedlho dorazí k vlajke a začne výskum v okolitom území. Pre "
+#~ "rozličné zdroje umiestni tieto značky:"
+
+#~ msgid "a bit of coal"
+#~ msgstr "trochu uhlia"
+
+#~ msgid "a lot of coal"
+#~ msgstr "veľa uhlia"
+
+#~ msgid "a bit of iron"
+#~ msgstr "trochu železa"
+
+#~ msgid "a lot of iron"
+#~ msgstr "veľa železa"
+
+#~ msgid "a bit of gold"
+#~ msgstr "trochu zlata"
+
+#~ msgid "a lot of gold"
+#~ msgstr "veľa zlata"
+
+#~ msgid "a bit of granite"
+#~ msgstr "trochu žuly"
+
+#~ msgid "a lot of granite"
+#~ msgstr "veľa žuly"
+
+#~ msgid "water"
+#~ msgstr "voda"
+
+#~ msgid "nothing was found here"
+#~ msgstr "nič nenájdené"
+
+#~ msgid "Let’s wait and see what the geologist finds on the mountain."
+#~ msgstr "Počkajme a zistime, čo nájdu geológovia v hore."
+
+#~ msgid "Mining Conclusion"
+#~ msgstr "Záver z baníctva"
+
+#~ msgid "this one."
+#~ msgstr "takto."
+
+#~ msgid ""
+#~ "Note that a mine needs rations to work. Rations are produced in taverns, "
+#~ "and taverns need meat, pitta bread, and fish to produce them. You will "
+#~ "need a lot more infrastructure to get your mines working well. This "
+#~ "infrastructure also varies from tribe to tribe. We will explain them to "
+#~ "you in the introduction campaigns for the three tribes."
+#~ msgstr ""
+#~ "Všimnite si, že bane k činnosti potrebujú prídely. Prídely sa vyrábajú v "
+#~ "krčmách a krčmy k ich výrobe potrebujú mäso, chlieb pita a ryby. Aby bane "
+#~ "pracovali správne, budete potrebovať zložitejšiu infraštruktúru. Táto "
+#~ "infraštruktúra sa tiež líši medzi kmeňmi. Dozviete sa o nich v úvodných "
+#~ "kampaniach pre všetky tri kmene."
+
+#~ msgid "Warfare and Training"
+#~ msgstr "Vojna a výcvik"
+
+#~ msgid ""
+#~ "Ok, I am going to create a little training ground for us with a training "
+#~ "camp and a warehouse to the north east of here."
+#~ msgstr ""
+#~ "Dobre, vytvorím nám malé územie na tréning s výcvikovým táborom a "
+#~ "skladiskom severovýchodne odtiaľ."
+
+#~ msgid ""
+#~ "If you want to come back to this south-western part of your realm, just "
+#~ "scroll here via right-button scrolling or open the minimap by clicking on "
+#~ "the"
+#~ msgstr ""
+#~ "Ak sa chcete vrátiť do juhozápadnej časti ríše, presuňte sa tam pomocou "
+#~ "pravého tlačidla myši alebo otvorte minimapu kliknutím na"
+
+#~ msgid ""
+#~ "The minimap shows the complete map in miniature. You can directly jump to "
+#~ "any field by left-clicking on it. You can also toggle buildings, roads, "
+#~ "flags and player indicators on and off inside the minimap."
+#~ msgstr ""
+#~ "Minimapa ukazuje celú mapu v zmenšenej forme. Ľavým kliknutím na "
+#~ "hociktoré políčko naň skočíte. Taktiež môžete prepnúť zobrazovanie budov, "
+#~ "ciest, vlajok a ukazovateľa hráčov na minimape."
+
+#~ msgid ""
+#~ "But I digress. Back to soldiers. What was I about to do? Oh yes, I wanted "
+#~ "to build a small training scenario for you. Let’s do that now."
+#~ msgstr ""
+#~ "Ale odbočil som od témy. Späť k vojakom. Čo som to len chcel urobiť? Aha, "
+#~ "áno, chcel som pre vás vytvoriť tréningový scenár. Urobme to teraz."
+
+#~ msgid "Trainings Camp and Soldier Stats"
+#~ msgstr "Výcvikový tábor a štatistiky vojakov"
+
+#~ msgid ""
+#~ "A soldier is created like any normal worker: a carrier grabs a tool in a "
+#~ "warehouse as soon as a request for a certain profession is not fulfilled. "
+#~ "The tool to create a barbarian soldier is an ax. Newly created soldiers "
+#~ "are of level 0. To make soldiers better in any of the four categories, "
+#~ "training is needed."
+#~ msgstr ""
+#~ "Vojak sa tvorí ako každý robotník: nosič zoberie zo skladu nejaký "
+#~ "nástroj, akonáhle je potrebné vykonávať určitú profesiu. Nástroj na "
+#~ "vytvorenie barbarského vojaka je sekera. Novo vytvorený vojak je na "
+#~ "úrovni 0. Aby sa vojak zdokonalil v hociktorej zo štyroch kategórií, "
+#~ "potrebuje výcvik."
+
+#~ msgid "Enhance This Fortress"
+#~ msgstr "Vylepšite túto pevnosť"
+
+#~ msgid ""
+#~ "Citadels cannot be built directly. Instead, you will have to construct a "
+#~ "fortress first and then enhance it to a citadel. To do so, click on the "
+#~ "fortress, then choose the ‘Enhance to Citadel’ button. Your soldiers will "
+#~ "leave the fortress while the construction is going on. This means that "
+#~ "your fortress will lose its military influence. If an enemy occupies a "
+#~ "military building nearby, your construction site will burn down. No "
+#~ "sweat, that won’t happen here."
+#~ msgstr ""
+#~ "Citadely nemožno postaviť priamo. Miesto toho najprv musíte postaviť "
+#~ "pevnosť a potom ju vylepšiť na citadelu. Aby ste tak urobili, kliknite na "
+#~ "pevnosť, potom zvoľte tlačidlo Vylepšiť na citadelu. Keď prebieha "
+#~ "konštrukcia, vaši vojaci citadelu opustia. Znamená to, že vaša pevnosť už "
+#~ "nemá žiadny vojenský vplyv. Ak pri nej nepriateľ postaví vojenskú budovu, "
+#~ "vaše stavenisko by mohlo vyhorieť. Bez problémov, tu sa to nestane."
+
+#~ msgid ""
+#~ "Remember that you can speed time up by using PAGE_UP. Building a citadel "
+#~ "takes a while."
+#~ msgstr ""
+#~ "Pamätajte si, že čas môžete zrýchliť s PAGE_UP. Stavanie citadely chvíľu "
+#~ "trvá."
+
+#~ msgid ""
+#~ "I have created a sparring partner for you: It is an empire tribe close to "
+#~ "your citadel. To attack its buildings, click on the door of a target "
+#~ "building, choose the number of soldiers that you wish to send and click "
+#~ "on the attack button. Your soldiers will come from all nearby military "
+#~ "buildings. Likewise, the defenders will come from all nearby military "
+#~ "buildings of the enemy and intercept your forces."
+#~ msgstr ""
+#~ "Vytvoril som pre vás súpera: je ním kmeň impéria v blízkosti vašej "
+#~ "citadely. Aby ste zaútočili na jeho budovy, kliknite na dvere cieľovej "
+#~ "budovy, vyberte počet vojakov, ktorých si prajete vyslať, a kliknite na "
+#~ "tlačidlo na útok. Vaši vojaci prídu z každých blízkych vojenských budov. "
+#~ "Taktiež vyjdú z každých blízkych budov nepriateľskí obrancovia a zadržia "
+#~ "vaše vojsko."
+
+#~ msgid ""
+#~ "This concludes the tutorial. There is some stuff we have not covered here "
+#~ "– we have not even built a single production building even though "
+#~ "producing wares is the most important thing in Widelands – but you’ve "
+#~ "learned the ropes."
+#~ msgstr ""
+#~ "Týmto uzavierame tutoriál. O niektorých veciach sme nehovorili - "
+#~ "nepostavili sme ani jednu výrobnú budovu, aj keď výroba je "
+#~ "najdôležitejšou vecou vo Widelands - ale naučili ste sa základy hry."
+
+#~ msgid ""
+#~ "You can learn about the remaining stuff while you go through the "
+#~ "individual tribes’ introduction campaigns. Each consists of some "
+#~ "scenarios explaining the tribe and its economy while introducing the "
+#~ "background story of Widelands. Have fun playing!"
+#~ msgstr ""
+#~ "O zvyšných veciach sa dozviete v úvodných kampaniach každého kmeňa. Každá "
+#~ "sa skladá zo scenárov, ktoré objasňujú kmene a ich ekonomiku a uvádzajú "
+#~ "príbeh hry Widelands. Príjemnú zábavu pri hraní!"
+
+#~ msgid ""
+#~ "You can continue playing this map or you can end this game whenever you "
+#~ "like. To leave this game and return to the main menu, click on the"
+#~ msgstr ""
+#~ "Môžete pokračovať v hraní tejto mapy alebo môžete hru ukončiť, kedykoľvek "
+#~ "chcete. Aby ste ukončili hru a vrátili sa do hlavného menu, kliknite na"
+
+#~ msgid ""
+#~ "‘Options’ menu button on the very left at the bottom of the screen. Then "
+#~ "click the"
+#~ msgstr ""
+#~ "tlačidlo 'Nastavenia' na ľavom kraji naspodku obrazovky. Potom kliknite na"
+
+#~ msgid "‘Exit Game’ button."
+#~ msgstr "tlačidlo 'Opustiť hru'."
+
+#~ msgid ""
+#~ "Thanks for playing this tutorial. Enjoy Widelands and remember to visit "
+#~ "us at"
+#~ msgstr ""
+#~ "Ďakujeme, že ste si zahrali tento tutoriál. Užite si Widelands a "
+#~ "nezabudnite nás navštíviť na"
