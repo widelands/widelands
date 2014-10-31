@@ -1769,7 +1769,7 @@ bool DefaultAI::improve_roads(int32_t gametime) {
 	}
 
 	// now we rotate economies and flags to get one flag to go on with
-	if (economies.size() == 0) {
+	if (economies.empty()) {
 		return check_economies();
 	}
 
@@ -2405,7 +2405,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	// remaining buildings without inputs and not supporting ones (fishers only left probably and
 	// huters)
 
-	if (site.bo->inputs_.size() == 0 && site.bo->production_hint_ < 0 &&
+	if (site.bo->inputs_.empty() && site.bo->production_hint_ < 0 &&
 	    site.site->can_start_working() && !site.bo->space_consumer_ &&
 	    site.site->get_statistics_percent() < 10 &&
 	    ((game().get_gametime() - site.built_time_) > 10 * 60 * 1000)) {
