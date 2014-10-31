@@ -1,0 +1,10 @@
+# Automatically created by Widelands bzr7194[trunk] (Release)
+
+[global]
+packet_version="1"
+map_w="144"
+map_h="112"
+nr_players="2"
+name=_"Economy"
+author="wl-zocker"
+descr=_"In this tutorial, you will learn what option Widelands offers to adjust your economy. Recommended for players with some experience."

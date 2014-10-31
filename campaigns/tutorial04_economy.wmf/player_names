@@ -1,0 +1,16 @@
+# Automatically created by Widelands bzr7194[trunk] (Release)
+
+[global]
+packet_version="2"
+
+[player_1]
+name="Spieler 1"
+tribe="empire"
+ai=
+closeable="false"
+
+[player_2]
+name="Spieler 2"
+tribe="atlanteans"
+ai=
+closeable="false"

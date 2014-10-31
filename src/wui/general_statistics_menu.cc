@@ -148,7 +148,7 @@ m_selected_information(0)
 
 	iterate_players_existing_const(p, nr_players, game, player) {
 		const std::string pic = (boost::format("pics/genstats_enable_plr_%02u.png")
-										 % static_cast<unsigned int>(p)).str().c_str();
+										 % static_cast<unsigned int>(p)).str();
 		UI::Button & cb =
 			*new UI::Button
 				(hbox1, "playerbutton",

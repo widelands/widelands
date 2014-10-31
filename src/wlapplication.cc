@@ -73,13 +73,11 @@
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/campaign_select.h"
 #include "ui_fsmenu/editor.h"
-#include "ui_fsmenu/editor_mapselect.h"
 #include "ui_fsmenu/fileview.h"
 #include "ui_fsmenu/internet_lobby.h"
 #include "ui_fsmenu/intro.h"
 #include "ui_fsmenu/launch_spg.h"
 #include "ui_fsmenu/loadgame.h"
-#include "ui_fsmenu/loadreplay.h"
 #include "ui_fsmenu/main.h"
 #include "ui_fsmenu/mapselect.h"
 #include "ui_fsmenu/multiplayer.h"
@@ -404,7 +402,7 @@ void WLApplication::run()
 				// Load the requested map
 				Widelands::Map map;
 				i18n::Textdomain td("maps");
-				map.set_filename(m_filename.c_str());
+				map.set_filename(m_filename);
 				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(m_filename);
 				if (!ml) {
 					throw WLWarning
@@ -418,7 +416,7 @@ void WLApplication::run()
 				MapData mapdata;
 				mapdata.filename = m_filename;
 				mapdata.name = map.get_name();
-				mapdata.author = map.get_author();
+				mapdata.authors.parse(map.get_author());
 				mapdata.description = map.get_description();
 				mapdata.nrplayers = map.get_nrplayers();
 				mapdata.width = map.get_width();
@@ -533,7 +531,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 					g_fs->ensure_directory_exists(SCREENSHOT_DIR);
 					for (uint32_t nr = 0; nr < 10000; ++nr) {
 						const std::string filename = (boost::format(SCREENSHOT_DIR "/shot%04u.png")
-																% nr).str().c_str();
+																% nr).str();
 						if (g_fs->file_exists(filename))
 							continue;
 						g_gr->screenshot(filename);
@@ -1209,16 +1207,7 @@ void WLApplication::mainmenu()
 		try {
 			switch (mm.run()) {
 			case FullscreenMenuMain::mm_playtutorial:
-				{
-					Widelands::Game game;
-					try {
-						game.run_splayer_scenario_direct("campaigns/tutorial01.wmf", "");
-					} catch (const std::exception & e) {
-						log("Fatal exception: %s\n", e.what());
-						emergency_save(game);
-						throw;
-					}
-				}
+				mainmenu_tutorial();
 				break;
 			case FullscreenMenuMain::mm_singleplayer:
 				mainmenu_singleplayer();
@@ -1280,6 +1269,34 @@ void WLApplication::mainmenu()
 #endif
 	}
 }
+
+
+/**
+ * Handle the "Play Tutorial" menu option:
+ * Show tutorial UI, let player select tutorial and run it.
+ */
+void WLApplication::mainmenu_tutorial()
+{
+	Widelands::Game game;
+	std::string filename;
+		//  Start UI for the tutorials.
+		FullscreenMenuCampaignMapSelect select_campaignmap(true);
+		select_campaignmap.set_campaign(0);
+		if (select_campaignmap.run() > 0) {
+			filename = select_campaignmap.get_map();
+		}
+	try {
+		// Load selected tutorial-map-file
+		if (filename.size())
+			game.run_splayer_scenario_direct(filename.c_str(), "");
+	} catch (const std::exception & e) {
+		log("Fatal exception: %s\n", e.what());
+		emergency_save(game);
+		throw;
+	}
+}
+
+
 
 /**
  * Run the singleplayer menu
@@ -1422,11 +1439,12 @@ void WLApplication::mainmenu_editor()
 		case FullscreenMenuEditor::Load_Map: {
 			std::string filename;
 			{
-				FullscreenMenuEditorMapSelect emsm;
+				SinglePlayerGameSettingsProvider sp;
+				FullscreenMenuMapSelect emsm(&sp, nullptr, true);
 				if (emsm.run() <= 0)
 					break;
 
-				filename = emsm.get_map();
+				filename = emsm.get_map()->filename;
 			}
 			EditorInteractive::run_editor(filename.c_str(), "");
 			return;
@@ -1509,7 +1527,9 @@ bool WLApplication::load_game()
 	Widelands::Game game;
 	std::string filename;
 
-	FullscreenMenuLoadGame ssg(game);
+	SinglePlayerGameSettingsProvider sp;
+	FullscreenMenuLoadGame ssg(game, &sp, nullptr);
+
 	if (ssg.run() > 0)
 		filename = ssg.filename();
 	else
@@ -1576,7 +1596,8 @@ void WLApplication::replay()
 {
 	Widelands::Game game;
 	if (m_filename.empty()) {
-		FullscreenMenuLoadReplay rm(game);
+		SinglePlayerGameSettingsProvider sp;
+		FullscreenMenuLoadGame rm(game, &sp, nullptr, true);
 		if (rm.run() <= 0)
 			return;
 

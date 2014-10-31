@@ -33,7 +33,7 @@ function speech(img, clr, g_title, g_text)
    end
 
    -- Surround the text with translatable ","
-   text = (_ '“%s”'):format(text)
+   text = (_'“%s”'):format(text)
 
    local s = ""
    if title then
@@ -122,6 +122,7 @@ end
 --       objective text & title.
 --
 function new_objectives(...)
+   local sum = 0
    local s = ""
    for idx,obj in ipairs{...} do
    	s = rt("<p font-size=10> <br></p>" ..

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2014-10-08 04:24+0000\n"
+"POT-Creation-Date: 2014-10-29 10:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -323,7 +323,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:198
 msgid ""
-"Amalea comes in..."
+"Amalea comes in…"
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:199
@@ -338,7 +338,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:203
 msgid ""
-"What do you think about helping them out? I can’t tell you what we need exactly... but here are my recommendations:"
+"What do you think about helping them out? I can’t tell you what we need exactly… but here are my recommendations:"
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:209
@@ -404,7 +404,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:249
 msgid ""
-"7 days later..."
+"7 days later…"
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:253
@@ -419,7 +419,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:258
 msgid ""
-"The message was addressed to me, begging me to come back to Fremil. It says that the Empire is at war with the Barbarians. They were attacked from the north by the tribe that I was forbidden to attack. It is clear to me what I must do..."
+"The message was addressed to me, begging me to come back to Fremil. It says that the Empire is at war with the Barbarians. They were attacked from the north by the tribe that I was forbidden to attack. It is clear to me what I must do…"
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:259
@@ -452,7 +452,7 @@ msgid ""
 "“%s”"
 msgstr ""
 
-#: ../../scripting/format_scenario.lua:129
+#: ../../scripting/format_scenario.lua:133
 msgid ""
 "New Objective"
 msgid_plural ""

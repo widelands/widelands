@@ -71,7 +71,7 @@ get_coords(const std::string& name, const Extent& extent, const Coords& def, Sec
 
 Coords
 get_safe_coords(const std::string& name, const Extent& extent, Section* section) {
-	return parse_coords(name, section->get_safe_string(name.c_str()), extent);
+	return parse_coords(name, section->get_safe_string(name), extent);
 }
 
 }  // namespace Widelands

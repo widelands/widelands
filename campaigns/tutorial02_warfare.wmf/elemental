@@ -1,0 +1,10 @@
+# Automatically created by Widelands bzr7181[trunk] (Release)
+
+[global]
+packet_version="1"
+map_w="64"
+map_h="64"
+nr_players="2"
+name=_"Warfare"
+author="Winterwind,SirVer,Nasenbaer,wl-zocker"
+descr=_"In this tutorial, you will be taught the secrets of warfare: how to create soldiers, how to train them and how to lead them in battle."
