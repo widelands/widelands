@@ -2203,7 +2203,6 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	if (enhancement != INVALID_INDEX && (site.bo->cnt_built_ - site.bo->unoccupied_) > 1) {
 
 		BuildingIndex enbld = INVALID_INDEX;  // to get rid of this
-		BuildingObserver* bestbld = nullptr;
 
 		// Only enhance buildings that are allowed (scenario mode)
 		// do not do decisions to fast
@@ -2211,6 +2210,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 
 			const BuildingDescr& bld = *tribe_->get_building_descr(enhancement);
 			BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
+			BuildingObserver* bestbld = nullptr;
 
 			if (gametime - en_bo.construction_decision_time_ >= kBuildingMinInterval &&
 			    (en_bo.cnt_under_construction_ + en_bo.unoccupied_) == 0) {
