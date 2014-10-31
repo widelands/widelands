@@ -415,7 +415,7 @@ void WLApplication::run()
 				MapData mapdata;
 				mapdata.filename = m_filename;
 				mapdata.name = map.get_name();
-				mapdata.authors = new MapAuthorData(map.get_author());
+				mapdata.authors.parse(map.get_author());
 				mapdata.description = map.get_description();
 				mapdata.nrplayers = map.get_nrplayers();
 				mapdata.width = map.get_width();
@@ -1095,16 +1095,7 @@ void WLApplication::mainmenu()
 		try {
 			switch (mm.run()) {
 			case FullscreenMenuMain::mm_playtutorial:
-				{
-					Widelands::Game game;
-					try {
-						game.run_splayer_scenario_direct("campaigns/tutorial01.wmf", "");
-					} catch (const std::exception & e) {
-						log("Fatal exception: %s\n", e.what());
-						emergency_save(game);
-						throw;
-					}
-				}
+				mainmenu_tutorial();
 				break;
 			case FullscreenMenuMain::mm_singleplayer:
 				mainmenu_singleplayer();
@@ -1166,6 +1157,34 @@ void WLApplication::mainmenu()
 #endif
 	}
 }
+
+
+/**
+ * Handle the "Play Tutorial" menu option:
+ * Show tutorial UI, let player select tutorial and run it.
+ */
+void WLApplication::mainmenu_tutorial()
+{
+	Widelands::Game game;
+	std::string filename;
+		//  Start UI for the tutorials.
+		FullscreenMenuCampaignMapSelect select_campaignmap(true);
+		select_campaignmap.set_campaign(0);
+		if (select_campaignmap.run() > 0) {
+			filename = select_campaignmap.get_map();
+		}
+	try {
+		// Load selected tutorial-map-file
+		if (filename.size())
+			game.run_splayer_scenario_direct(filename.c_str(), "");
+	} catch (const std::exception & e) {
+		log("Fatal exception: %s\n", e.what());
+		emergency_save(game);
+		throw;
+	}
+}
+
+
 
 /**
  * Run the singleplayer menu

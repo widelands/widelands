@@ -1,7 +1,7 @@
 
 function mission_thread()
    sleep(100) -- This is needed for yet unknown reasons
-   
+
    -- Initial messages
    local sea = wl.Game().map:get_field(47,25)
    local pts = scroll_smoothly_to(sea)
@@ -22,7 +22,7 @@ function mission_thread()
 
 
    sleep(400)
-   
+
    send_msg(saledus_1)
    p1:allow_buildings{"barracks"}
    local o = add_obj(obj_build_barracks)

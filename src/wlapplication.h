@@ -176,6 +176,7 @@ struct WLApplication {
 	void handle_input(InputCallback const *);
 
 	void mainmenu();
+	void mainmenu_tutorial();
 	void mainmenu_singleplayer();
 	void mainmenu_multiplayer();
 	void mainmenu_editor();
