@@ -3116,9 +3116,8 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 	const uint16_t attempts = militarysites.size() / 6 + 1;
 	Map& map = game().map();
 
-	uint16_t position = 0;
 	for (uint32_t i = 0; i < attempts && !any_attacked; ++i) {
-		position = (game().get_gametime() + (3 * i)) % militarysites.size();
+		const uint16_t position = (game().get_gametime() + (3 * i)) % militarysites.size();
 
 		// picking random military sites
 		// using gametime as a random value, but it is constant so each next is on position +3
