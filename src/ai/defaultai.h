@@ -162,6 +162,7 @@ private:
 	uint32_t get_stocklevel(BuildingObserver&);
 	uint32_t get_stocklevel(Widelands::WareIndex);  // count all direct outputs_
 	void check_helpersites(int32_t);
+	void review_wares_targets(int32_t);
 
 	int32_t recalc_with_border_range(const BuildableField&, int32_t);
 	int32_t calculate_need_for_ps(BuildingObserver&, int32_t);
@@ -237,6 +238,7 @@ private:
 	// int32_t next_helpersites_check_due_;
 	int32_t next_trainingsites_check_due_;
 	int32_t next_bf_check_due_;
+	int32_t next_wares_review_due_;
 	int32_t inhibit_road_building_;
 	int32_t time_of_last_construction_;
 	int32_t enemy_last_seen_;

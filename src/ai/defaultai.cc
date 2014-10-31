@@ -6,7 +6,7 @@
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * This program is distributed in the hope that it will be useful,n
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -40,6 +40,7 @@
 #include "logic/map.h"
 #include "logic/militarysite.h"
 #include "logic/player.h"
+#include "logic/playercommand.h"   //needed
 #include "logic/productionsite.h"
 #include "logic/trainingsite.h"
 #include "logic/tribe.h"
@@ -49,8 +50,8 @@
 #include "logic/ship.h"
 
 #include "economy/portdock.h"            //needed? NOCOM
-#include "logic/expedition_bootstrap.h"  //needed? NOCOM
-#include "economy/fleet.h"               //needed? NOCOM
+//#include "logic/expedition_bootstrap.h"  //needed? NOCOM
+//#include "economy/fleet.h"               //needed? NOCOM
 
 // Building of new military buildings can be restricted
 constexpr int kPushExpansion = 1;
@@ -105,6 +106,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
      // next_helpersites_check_due_(180000),
      next_trainingsites_check_due_(15 * 60 * 1000),
      next_bf_check_due_(1000),
+     next_wares_review_due_(5*60*1000), //review
      inhibit_road_building_(0),
      time_of_last_construction_(0),
      enemy_last_seen_(-2 * 60 * 1000),
@@ -317,6 +319,12 @@ void DefaultAI::think() {
 		m_buildable_changed = true;
 		m_mineable_changed = true;
 		return;
+	}
+
+	//once in 15 minutes we increase(or decrease) targets for wares
+	if (next_wares_review_due_ <= gametime) {
+		next_wares_review_due_ = gametime + 5 * 60 * 1000; //NOCOM set to 15
+		review_wares_targets(gametime);
 	}
 }
 
@@ -3498,7 +3506,7 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 		Coords tmp_coords = coords_unhash(queue.front());
 
 		// if beyond range
-		if (map.calc_distance(candidate_spot, tmp_coords) > 25) {
+		if (map.calc_distance(candidate_spot, tmp_coords) > 35) {
 			continue;
 		}
 
@@ -3530,6 +3538,11 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 			map.get_neighbour(neigh_coords1, dir, &neigh_coords2);
 			queue.push_front(coords_hash(neigh_coords2));
 		}
+	}
+
+	//if the island is too small
+	if (done.size() < 20) {
+		return 0;
 	}
 
 	// if we are here we put score
@@ -4118,6 +4131,33 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 		last_attack_target_.x = std::numeric_limits<uint16_t>::max();
 		last_attack_target_.y = std::numeric_limits<uint16_t>::max();
 		return false;
+	}
+}
+
+//This runs once in 15 minutes, and adjust wares targets based on number of
+//productionsites and ports
+void DefaultAI::review_wares_targets(int32_t const gametime) {
+	
+	player_ = game().get_player(player_number());
+	tribe_ = &player_->tribe();
+
+	//to avoid floats real multiplicator is multiplicator/10
+	uint16_t multiplicator=10;
+	if ((productionsites.size() + num_ports*5)>50) {
+		multiplicator=(productionsites.size() + num_ports*5)/5;
+	}
+	
+	printf (" %2d: Ware targets review, multiplicator %3d, sites: %3d\n",
+		player_number(),multiplicator,productionsites.size() + num_ports*5);
+	for (EconomyObserver* observer : economies) {
+		WareIndex nritems = observer->economy.owner().tribe().get_nrwares();
+        for (Widelands::WareIndex id = 0; id < nritems; ++id) {
+			const Economy::TargetQuantity & tq = observer->economy.ware_target_quantity(id);
+			const uint16_t default_target = tribe_->get_ware_descr(id)->default_target_quantity();
+		
+			game().send_player_command(*new Widelands::CmdSetWareTargetQuantity(gametime,player_number(),
+			player_->get_economy_number(&observer->economy),id,default_target*multiplicator/10));
+		}
 	}
 }
 

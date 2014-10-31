@@ -402,6 +402,6 @@ struct WareObserver {
 	uint8_t producers_;
 	uint8_t consumers_;
 	uint8_t preciousness_;
-};
+	};
 
 #endif  // end of include guard: WL_AI_AI_HELP_STRUCTS_H
