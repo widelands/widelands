@@ -248,7 +248,8 @@ story_msg1 = {
       .. paragraphdivider() ..
       _[[They are a constant reminder of why we have to hide here… and why we must return in the end!]]),
    field = al_thunran,
-   position = "topleft"
+   position = "topleft",
+   scroll_back = true
 }
 
 
@@ -259,7 +260,8 @@ story_msg2= {
       .. paragraphdivider() ..
       _[[Somehow, it felt like a farewell. For the first time, I wondered what the future might hold for me…]]),
    field = grave,
-   position = "topleft"
+   position = "topleft",
+   scroll_back = true
 }
 
 
