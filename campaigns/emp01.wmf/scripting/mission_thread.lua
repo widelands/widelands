@@ -5,7 +5,7 @@ function mission_thread()
 
    -- Initial messages
    local sea = wl.Game().map:get_field(47,25)
-   local pts = scroll_smoothly_to(sea)
+   scroll_smoothly_to(sea,0)
 
    campaign_message_box(diary_page_1)
    sleep(200)
@@ -18,7 +18,7 @@ function mission_thread()
    run(function() sleep(5000) p1:hide_fields(sea:region(6)) end)
 
    -- Back home
-   timed_scroll(array_reverse(pts))
+   scroll_smoothly_to(wl.Game().map.player_slots[1].starting_field)
    campaign_message_box(diary_page_3)
 
 

@@ -39,8 +39,10 @@ function build_warehouse_and_horsefarm()
    expand_objective.done = true
    let_the_water_rise = true
 
-   scroll_smoothly_to(fowned)
+   local pts = wait_for_roadbuilding_and_scroll(fowned)
    msg_boxes(horsefarm_and_warehouse_story)
+   -- Go back to where we were
+   timed_scroll(array_reverse(pts))
 
    local o = add_campaign_objective(obj_horsefarm_and_warehouse)
    while not check_for_buildings(p1, {
@@ -152,7 +154,7 @@ function leftover_buildings()
    while lob_fields.size > 0 and #msgs > 0 do
       for f in lob_fields:items() do
          if p1:sees_field(f) then
-            scroll_smoothly_to(f)
+            wait_for_roadbuilding_and_scroll(f)
 
             msg_boxes(msgs[1])
 
@@ -210,7 +212,7 @@ function water_rising()
          first_message_send = true
          run(function()
             sleep(200)
-            scroll_smoothly_to(f)
+            wait_for_roadbuilding_and_scroll(f)
             msg_boxes(field_flooded_msg)
             add_campaign_objective(obj_build_ships)
             p1:allow_buildings{"shipyard"}

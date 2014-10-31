@@ -15,7 +15,7 @@ function building_materials()
    run(function() sleep(5000) p1:hide_fields(forests:region(6)) end)
 
    -- Show the trees
-   scroll_smoothly_to(forests)
+   wait_for_roadbuilding_and_scroll(forests)
 
    campaign_message_box(diary_page_5_1)
    local o_woodeconomy = add_campaign_objective(obj_build_woodeconomy)
@@ -33,7 +33,7 @@ function building_materials()
 
 
    -- Show the stones
-   scroll_smoothly_to(map:get_field(14,25))
+   wait_for_roadbuilding_and_scroll(map:get_field(14,25))
    campaign_message_box(diary_page_5_2)
    local o_quarry = add_campaign_objective(obj_build_quarry)
    -- Check for completeness of the quarry
@@ -119,7 +119,7 @@ function mining_infrastructure()
    end)
 
    local move_point = wl.Game().map:get_field(49,22)
-   scroll_smoothly_to(move_point)
+   wait_for_roadbuilding_and_scroll(move_point)
 
    campaign_message_box(saledus_3)
    p1:allow_buildings{
@@ -171,7 +171,7 @@ function expand_and_build_marblemine()
    run(function() sleep(10000) p1:hide_fields(shipparts:region(5)) end)
 
    -- Move to the shipparts
-   local pts = scroll_smoothly_to(shipparts)
+   local pts = wait_for_roadbuilding_and_scroll(shipparts)
 
    campaign_message_box(saledus_1)
    local o = add_campaign_objective(obj_build_military_buildings)
@@ -189,7 +189,7 @@ function expand_and_build_marblemine()
    p1:reveal_fields(marblemountains:region(5))
    run(function() sleep(10000) p1:hide_fields(marblemountains:region(5)) end)
 
-   pts = scroll_smoothly_to(marblemountains)
+   pts = wait_for_roadbuilding_and_scroll(marblemountains)
 
    campaign_message_box(saledus_2)
    p1:allow_buildings{"marblemine", "deep_marblemine"}
@@ -223,7 +223,7 @@ function barbarians_thread()
    )
    p1:reveal_fields(barbarians)
    run(function() sleep(5000) p1:hide_fields(barbarians) end)
-   scroll_smoothly_to(wl.Game().map:get_field(59, 55))
+   wait_for_roadbuilding_and_scroll(wl.Game().map:get_field(59, 55))
 
    campaign_message_box(diary_page_8)
    local o = add_campaign_objective(obj_build_bigger_military_buildings)
