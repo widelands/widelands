@@ -1178,9 +1178,9 @@ void MapPlayersViewPacket::write
 			}
 
 			fs.ensure_directory_exists((boost::format(PLAYERDIRNAME_TEMPLATE)
-											  % static_cast<unsigned int>(plnum)).str().c_str());
+											  % static_cast<unsigned int>(plnum)).str());
 			fs.ensure_directory_exists((boost::format(DIRNAME_TEMPLATE)
-											  % static_cast<unsigned int>(plnum)).str().c_str());
+											  % static_cast<unsigned int>(plnum)).str());
 
 			WRITE
 				(unseen_times_file,

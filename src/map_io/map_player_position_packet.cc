@@ -51,7 +51,7 @@ void MapPlayerPositionPacket::read
 				try {
 					map.set_starting_pos(p,
 												get_safe_coords((boost::format("player_%u")
-																	  % static_cast<unsigned int>(p)).str().c_str(),
+																	  % static_cast<unsigned int>(p)).str(),
 																	 extent, &s));
 				} catch (const WException & e) {
 					throw GameDataError("player %u: %s", p, e.what());
@@ -78,7 +78,7 @@ void MapPlayerPositionPacket::write
 	const Map & map = egbase.map();
 	const PlayerNumber nr_players = map.get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
-		set_coords((boost::format("player_%u") % static_cast<unsigned int>(p)).str().c_str(),
+		set_coords((boost::format("player_%u") % static_cast<unsigned int>(p)).str(),
 					  map.get_starting_pos(p), &s);
 	}
 

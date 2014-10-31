@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-10-04 15:33+0000\n"
+"POT-Creation-Date: 2014-10-28 08:26+0000\n"
 "PO-Revision-Date: 2014-10-04 19:56+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-05 05:45+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-10-29 05:59+0000\n"
+"X-Generator: Launchpad (build 17203)\n"
 "Language: gd\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -479,12 +479,12 @@ msgstr "lùireach mheatailt a dhèanamh"
 #: ../../tribes/empire/lumberjacks_house/conf:21
 #: ../../tribes/empire/marblemine/conf:32
 #: ../../tribes/empire/quarry/conf:25
-#: ../../tribes/empire/sawmill/conf:24
-#: ../../tribes/empire/shipyard/conf:30
+#: ../../tribes/empire/sawmill/conf:25
+#: ../../tribes/empire/shipyard/conf:29
 #: ../../tribes/empire/smelting_works/conf:31
-#: ../../tribes/empire/stonemasons_house/conf:25
+#: ../../tribes/empire/stonemasons_house/conf:26
 #: ../../tribes/empire/toolsmithy/conf:62
-#: ../../tribes/empire/vineyard/conf:29
+#: ../../tribes/empire/vineyard/conf:27
 #: ../../tribes/empire/weaponsmithy/conf:44
 #: ../../tribes/empire/well/conf:22
 #: ../../tribes/empire/winery/conf:27
@@ -672,7 +672,7 @@ msgstr ""
 "h-Impireachd a bhiadhadh le gual mar as trice. Tochlaidh thu gual à mèinn "
 "guail no nì thu de dh'fhiodh e ann an àth-ghuail."
 
-#: ../../tribes/empire/coalmine/conf:26
+#: ../../tribes/empire/coalmine/conf:27
 #: ../../tribes/empire/deep_coalmine/conf:27
 #: ../../tribes/empire/deep_goldmine/conf:27
 #: ../../tribes/empire/deep_marblemine/conf:28
@@ -682,12 +682,12 @@ msgstr ""
 msgid "mining"
 msgstr "stòras a thogail"
 
-#: ../../tribes/empire/coalmine/conf:40
+#: ../../tribes/empire/coalmine/conf:41
 #: ../../tribes/empire/deep_coalmine/conf:41
 msgid "Main Coal Vein Exhausted"
 msgstr "Tha prìomh-chuisle guail air a caitheamh"
 
-#: ../../tribes/empire/coalmine/conf:41
+#: ../../tribes/empire/coalmine/conf:42
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
@@ -1424,7 +1424,7 @@ msgstr ""
 msgid "Breeds cute and helpful donkeys"
 msgstr "Tàrmaichidh e asalan stampa cuideachail"
 
-#: ../../tribes/empire/donkeyfarm/conf:26
+#: ../../tribes/empire/donkeyfarm/conf:25
 msgid "rearing donkeys"
 msgstr "asal àrachadh"
 
@@ -1441,7 +1441,7 @@ msgid "harvesting wheat"
 msgstr "cruithneachd a bhuain"
 
 #: ../../tribes/empire/farm/conf:46
-#: ../../tribes/empire/vineyard/conf:45
+#: ../../tribes/empire/vineyard/conf:43
 msgid "Out of Fields"
 msgstr "Chan eil achadh ann"
 
@@ -1644,15 +1644,15 @@ msgstr ""
 msgid "The Hunter brings good meat to the colonists."
 msgstr "Bheir an sealgair feòil mhath dha na tuinichean."
 
-#: ../../tribes/empire/hunters_house/conf:20
+#: ../../tribes/empire/hunters_house/conf:19
 msgid "hunting"
 msgstr "dol a shealg"
 
-#: ../../tribes/empire/hunters_house/conf:28
+#: ../../tribes/empire/hunters_house/conf:27
 msgid "Out of Game"
 msgstr "Chan eil sitheann ann"
 
-#: ../../tribes/empire/hunters_house/conf:29
+#: ../../tribes/empire/hunters_house/conf:28
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "working radius."
@@ -1867,7 +1867,7 @@ msgstr ""
 msgid "Breeds pigs."
 msgstr "Tàrmaichidh e mucan."
 
-#: ../../tribes/empire/piggery/conf:26
+#: ../../tribes/empire/piggery/conf:25
 msgid "raising pigs"
 msgstr "mucan àrachadh"
 
@@ -1933,7 +1933,7 @@ msgstr ""
 "An rabhadair a rabhas mun aineol mar a bheachdaicheas am beachdadair air "
 "nach eil fios no fàth air."
 
-#: ../../tribes/empire/scouts_house/conf:21
+#: ../../tribes/empire/scouts_house/conf:20
 msgid "scouting"
 msgstr "rùrachadh"
 
@@ -1980,7 +1980,7 @@ msgstr "Long muir-acainneach"
 msgid "Works at the shipyard and constructs new ships."
 msgstr "Obraichidh e aig a' chala is togaidh e longan ùra."
 
-#: ../../tribes/empire/shipyard/conf:28
+#: ../../tribes/empire/shipyard/conf:27
 msgid "constructing a ship"
 msgstr "long a thogail"
 
@@ -2135,15 +2135,15 @@ msgstr "Trèanadh slàinte:"
 msgid "Grows vine."
 msgstr "Fàsaidh e fìonan."
 
-#: ../../tribes/empire/vineyard/conf:25
+#: ../../tribes/empire/vineyard/conf:23
 msgid "planting grapevines"
 msgstr "crann-fìona a chur"
 
-#: ../../tribes/empire/vineyard/conf:27
+#: ../../tribes/empire/vineyard/conf:25
 msgid "harvesting grapes"
 msgstr "dearcan-fìona a bhuain"
 
-#: ../../tribes/empire/vineyard/conf:46
+#: ../../tribes/empire/vineyard/conf:44
 msgid ""
 "The farmer working at this vineyard has no cleared soil to plant his seeds."
 msgstr ""

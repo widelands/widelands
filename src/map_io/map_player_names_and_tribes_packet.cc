@@ -68,7 +68,7 @@ void MapPlayerNamesAndTribesPacket::pre_read
 			PlayerNumber const nr_players = map->get_nrplayers();
 			iterate_player_numbers(p, nr_players) {
 				Section & s = prof.get_safe_section((boost::format("player_%u")
-																 % static_cast<unsigned int>(p)).str().c_str());
+																 % static_cast<unsigned int>(p)).str());
 				map->set_scenario_player_name     (p, s.get_string("name",  ""));
 				map->set_scenario_player_tribe    (p, s.get_string("tribe", ""));
 				map->set_scenario_player_ai       (p, s.get_string("ai",    ""));
@@ -94,8 +94,9 @@ void MapPlayerNamesAndTribesPacket::write
 	const Map & map = egbase.map();
 	PlayerNumber const nr_players = map.get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
-		Section & s = prof.create_section((boost::format("player_%u")
-													  % static_cast<unsigned int>(p)).str().c_str());
+		const std::string section_key = (boost::format("player_%u")
+													% static_cast<unsigned int>(p)).str();
+		Section & s = prof.create_section(section_key.c_str());
 		s.set_string("name",      map.get_scenario_player_name     (p));
 		s.set_string("tribe",     map.get_scenario_player_tribe    (p));
 		s.set_string("ai",        map.get_scenario_player_ai       (p));

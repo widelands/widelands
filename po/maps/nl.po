@@ -6,20 +6,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4556\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-10-04 15:33+0000\n"
+"POT-Creation-Date: 2014-10-28 08:26+0000\n"
 "PO-Revision-Date: 2014-09-08 00:36+0000\n"
 "Last-Translator: SirVer <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-05 05:39+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-10-29 05:52+0000\n"
+"X-Generator: Launchpad (build 17203)\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
-#: ../../campaigns/cconfig:98
-msgid "01 – From Nemesis to Genesis"
-msgstr "01 - Van Nemesis tot Genesis"
+#: ../../campaigns/cconfig:101
+msgid "From Nemesis to Genesis"
+msgstr ""
 
 #: ../../campaigns/atl01.wmf/elemental:11
 msgid ""
@@ -30,14 +30,18 @@ msgstr ""
 "overgebleven Atlantiërs voor een nieuw thuis voor henzelf."
 
 #: ../../campaigns/cconfig:27
-msgid "Barbarians – The Second Empire"
-msgstr "Barbaren - Het tweede koninkrijk"
+msgid "The Second Empire"
+msgstr ""
 
-#: ../../campaigns/cconfig:30
+#: ../../campaigns/cconfig:29
+msgid "Barbarians"
+msgstr ""
+
+#: ../../campaigns/cconfig:31
 msgid "Easy. Introduces the Barbarians"
 msgstr "Gemakkelijk. Introduceert de Barbaren"
 
-#: ../../campaigns/cconfig:31
+#: ../../campaigns/cconfig:32
 msgid ""
 "When Chat’Karuth died, he was an old man, father to three strong and "
 "ambitious sons, and warlord to an army that could match any enemy willing to "
@@ -68,15 +72,19 @@ msgstr ""
 "krijgsheer zijn ambitieuze broers te herenigen en de stammen ertoe te "
 "dwingen nogmaals onder één vaandel te marcheren."
 
-#: ../../campaigns/cconfig:34
-msgid "Empire – The Months of Exile"
-msgstr "Keizerrijk - De Maanden van Ballingschap"
+#: ../../campaigns/cconfig:35
+msgid "The Months of Exile"
+msgstr ""
 
 #: ../../campaigns/cconfig:37
+msgid "Empire"
+msgstr ""
+
+#: ../../campaigns/cconfig:39
 msgid "Easy. Introduces the Empire"
 msgstr "Gemakkelijk. Introduceert de Empiren"
 
-#: ../../campaigns/cconfig:38
+#: ../../campaigns/cconfig:40
 msgid ""
 "Six months ago, Lutius – a young general of the Empire – was sent with 150 "
 "soldiers to the frontier beyond the northern forests where Barbarian tribes "
@@ -102,15 +110,19 @@ msgstr ""
 "uiteengedreven.\n"
 "Alleen met zijn vege lijf een handvol soldaten hebben zij het overleefd."
 
-#: ../../campaigns/cconfig:41
-msgid "Atlanteans – The Run for the Fire"
-msgstr "Atlantiërs - De tocht naar het vuur"
+#: ../../campaigns/cconfig:43
+msgid "The Run for the Fire"
+msgstr ""
 
-#: ../../campaigns/cconfig:44
+#: ../../campaigns/cconfig:45
+msgid "Atlanteans"
+msgstr ""
+
+#: ../../campaigns/cconfig:47
 msgid "Challenging. Introduces the Atlanteans"
 msgstr "Uitdagend. Introduceert de Atlantiërs"
 
-#: ../../campaigns/cconfig:45
+#: ../../campaigns/cconfig:48
 msgid ""
 "When their God lost faith in the Atlanteans and drowned their island, one "
 "woman’s struggle for justice and a second chance for her people would become "
@@ -124,38 +136,42 @@ msgstr ""
 "toekomst in een nieuw deel van de wereld, werd Jundlina de machtigste\n"
 "persoon van haar tijd, maar tegen een hoge prijs: haar menselijkheid en ziel."
 
-#: ../../campaigns/cconfig:64
+#: ../../campaigns/cconfig:67
 #: ../../campaigns/t01.wmf/elemental:7
-msgid "01 – Eyes in the Dark"
-msgstr "01 - Ogen in het donker"
+msgid "Eyes in the Dark"
+msgstr ""
 
-#: ../../campaigns/cconfig:69
+#: ../../campaigns/cconfig:72
 #: ../../campaigns/t02.wmf/elemental:7
-msgid "02 – A Place to Call Home"
-msgstr "02 - Een plaats om thuis te noemen"
+msgid "A Place to Call Home"
+msgstr ""
 
-#: ../../campaigns/cconfig:74
+#: ../../campaigns/cconfig:77
 #: ../../campaigns/t03.wmf/elemental:7
-msgid "03 – This Land is Our Land"
-msgstr "03 - Dit Land is Ons land"
+msgid "This Land is Our Land"
+msgstr ""
 
-#: ../../campaigns/cconfig:81
+#: ../../campaigns/cconfig:84
 #: ../../campaigns/emp01.wmf/elemental:7
-msgid "01 – The Strands of Malac’ Mor"
-msgstr "01 - De Stranden van Malac' Mor"
+msgid "The Strands of Malac’ Mor"
+msgstr ""
 
-#: ../../campaigns/cconfig:86
+#: ../../campaigns/cconfig:89
 #: ../../campaigns/emp02.wmf/elemental:9
-msgid "02 – An Outpost for Exile"
-msgstr "02 - Een Voorpost van Ballingschap"
+msgid "An Outpost for Exile"
+msgstr ""
 
-#: ../../campaigns/cconfig:91
-#: ../../campaigns/cconfig:103
+#: ../../campaigns/cconfig:94
+#: ../../campaigns/cconfig:106
 #: ../../campaigns/dummy.wmf/elemental:7
 msgid "Not yet implemented"
 msgstr "Nog niet geïmplementeerd"
 
 #: ../../campaigns/dummy.wmf/elemental:9
+msgid "Nobody"
+msgstr ""
+
+#: ../../campaigns/dummy.wmf/elemental:10
 msgid "Sorry, this map is not yet implemented."
 msgstr "Sorry, deze kaart is nog niet geïmplementeerd."
 
@@ -230,10 +246,6 @@ msgstr "Atol"
 msgid "Who will be the real king of the big atoll?"
 msgstr "Wie zal de echte Koning zijn van het grote atol?"
 
-#: ../../maps/Atoll.wmf/elemental:12
-msgid "Suggested Teams: (blue, yellow) vs. (red, green)"
-msgstr "Voorgestelde teams: (blauw, geel) tegen (rood, groen)"
-
 #: ../../maps/Calvisson.wmf/elemental:9
 msgid "Calvisson"
 msgstr "Calvisson"
@@ -248,14 +260,6 @@ msgstr ""
 "te strijken. Maar de wegen waarlangs deze uitgestrekte territoria kunnen "
 "worden ontweken zijn lang en slingerend, dus het is gemakkelijk om per "
 "ongeluk in het land van de andere stammen te belanden."
-
-#: ../../maps/Calvisson.wmf/elemental:12
-msgid ""
-"Suggested Teams: blue vs. red | yellow vs. green | (blue, yellow) vs. (red, "
-"green) | (blue, green) vs. (red, yellow)"
-msgstr ""
-"Voorgestelde teams: blauw vs rood, geel vs groen of (blauw, geel) vs (rood, "
-"groen) of (blauw, groen) vs (rood, geel)"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -309,11 +313,6 @@ msgstr "Voorbij de Horizon"
 msgid "Man your ship and sail to the horizon."
 msgstr "Beman je schip en zeil naar de horizon"
 
-#: ../../maps/Crossing the horizon.wmf/elemental:12
-#: ../../maps/Rendez-Vous.wmf/elemental:10
-msgid "Suggested Teams: all ok"
-msgstr "Aanbevolen teams: alles ok"
-
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
 msgstr "Woestijntoernooi"
@@ -328,12 +327,6 @@ msgstr ""
 "de berg met goud bereikt die rijkdommen belooft die ieders "
 "bevattingsvermogen te boven gaan. Maar kunnen de twee overgeblevenen de "
 "hulpbronnen wijselijk delen?"
-
-#: ../../maps/Desert Tournament.wmf/elemental:10
-#: ../../maps/Four Castles.wmf/elemental:10
-#: ../../maps/Swamp Monks.wmf/elemental:10
-msgid "Suggested Teams: (blue, red) vs. (yellow, green)"
-msgstr "Teamsuggestie: (blauw, rood) tegen (geel, groen)"
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
@@ -361,14 +354,6 @@ msgid ""
 msgstr ""
 "De adembenemende schoonheid van deze smaragden landen heeft vele stammen "
 "verleid tot een poging deze toe te eigenen."
-
-#: ../../maps/Elven Forests.wmf/elemental:10
-msgid ""
-"Suggested Teams: (blue, red) vs. (yellow, green) | (blue, yellow) vs. (red, "
-"green)"
-msgstr ""
-"Teamsuggestie: (blauw, rood) tegen (geel, groen) of (blauw, geel) tegen "
-"(rood, groen)"
 
 #: ../../maps/Fellowships.wmf/elemental:9
 msgid "Fellowships"
@@ -449,14 +434,6 @@ msgstr ""
 "veroveren en de hulpbronnen opeisen voor zijn eigen stam? Hint I: Water kan "
 "worden gevonden langs de rivier. Hint II: Sneeuwmannen markeren extra "
 "waterbronnen. Hint III: Iedere berg bevat slechts één soort hulpbronnen."
-
-#: ../../maps/Four Mountains.wmf/elemental:10
-msgid ""
-"Suggested Teams: (blue, red) vs. (yellow, green) | (blue, green) vs. (red, "
-"yellow)"
-msgstr ""
-"Teamsuggestie: (blauw, rood) tegen (geel, groen) of (blauw, groen) tegen "
-"(rood, geel)"
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -596,16 +573,6 @@ msgstr ""
 ">Where dat? A thousand miles from here.< [Porgy and Bess] Je hebt een lange, "
 "lange weg te gaan om alle eilanden te veroveren. Succes!"
 
-#: ../../maps/Long, long way.wmf/elemental:12
-msgid ""
-"Suggested Teams: blue vs. red | yellow vs. green | (blue, yellow) vs. (red, "
-"green) | (blue, yellow, black) vs. (red, green, orange) | (blue, yellow, "
-"black, purple) vs. (red, green, orange, white)"
-msgstr ""
-"Aanbevolen teams: blauw vs rood of geel vs groen of (blauw, geel) vs (red, "
-"green) of (blauw, geel, zwart) vs (rood, groen, oranje) of (blauw, geel, "
-"zwart, paars) vs (rood, groen, oranje, wit)"
-
 #: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
 msgid "Island Hopping"
 msgstr "Eilandhoppen"
@@ -621,17 +588,16 @@ msgstr ""
 "eiland proberen te bereiken, om daar als eerste een kasteel op de top van de "
 "centrale berg te bouwen."
 
+#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
+msgid "Smugglers"
+msgstr ""
+
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
 msgid ""
 "Your well established smuggling routes suddenly got busy: Two other tribes "
 "have appeared and now a rivalry among smugglers has started: Which team will "
-"be the first to smuggle a certain number of wares? Teams are: Blue + Red vs. "
-"Yellow + Green."
+"be the first to smuggle a certain number of wares?"
 msgstr ""
-"Jouw goed verankerde smokkelroutes krijgen het plotseling druk: Twee andere "
-"stammen zijn verschenen en er is nu een rivaliteit onder smokkelaars "
-"begonnen: Welk team zal de eerste zijn om een bepaald aantal goederen te "
-"smokkelen? Teams zijn: Blauw + Rood vs Geel + Groen."
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"
@@ -660,10 +626,6 @@ msgstr ""
 "rijke schat in hun midden bewaren - De Groene Hoogvlakte, die moeilijk te "
 "verkrijgen, maar makkelijk te verliezen is. Dus, als je het wilt, moet je de "
 "andere clans in de gaten houden."
-
-#: ../../maps/Plateau.wmf/elemental:10
-msgid "Suggested Teams: blue vs. yellow"
-msgstr "Aanbevolen teams: blauw vs geel"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:7
 msgid "Rendez-Vous"
@@ -797,18 +759,6 @@ msgid ""
 msgstr ""
 "De rivier heeft altijd voedsel en communicatie verschaft. Ditmaal zullen "
 "acht imperia vechten voor de macht over dit land."
-
-#: ../../maps/The Nile.wmf/elemental:12
-msgid ""
-"Suggested Teams: blue vs. red | yellow vs. green | (blue, yellow) vs. (red, "
-"green) | (green, orange, white) vs. (yellow, black, purple) | (blue, orange, "
-"green) vs. (red, yellow, black) | (blue, green, orange, white) vs. (red, "
-"yellow, black, purple)"
-msgstr ""
-"Aanbevolen teams: blauw vs rood, geel vs groen, (blauw, geel) vs (rood, "
-"groen), (groen, oranje, wit) vs (geel, zwart, paars), (blauw, oranje, groen) "
-"vs (rood, geel, zwart), (blauw, groen, oranje, wit) vs (rood, geel, zwart, "
-"paars)"
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:7
 msgid "The Oasis Triangle"

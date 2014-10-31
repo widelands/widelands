@@ -50,12 +50,12 @@ namespace  {
 struct S2MapDescrHeader {
 
 	char    magic[10]; // "WORLD_V1.0"
-	char    name [20];
+	std::string name;
 	int16_t w;
 	int16_t h;
 	int8_t  uses_world; // 0 = green, 1 =black, 2 = winter
 	int8_t  nplayers;
-	char    author[26];
+	std::string author;
 	char    bulk[2290]; // unknown
 } /* size 2352 */;
 
@@ -308,7 +308,7 @@ Widelands::TerrainIndex TerrainConverter::lookup(S2MapLoader::WorldType world, i
 
 }  // namespace
 
-S2MapLoader::S2MapLoader(const char * filename, Widelands::Map & M)
+S2MapLoader::S2MapLoader(const std::string& filename, Widelands::Map& M)
 : Widelands::MapLoader(filename, M), m_filename(filename)
 {
 }

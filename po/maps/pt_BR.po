@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-10-04 15:33+0000\n"
+"POT-Creation-Date: 2014-10-28 08:26+0000\n"
 "PO-Revision-Date: 2014-03-13 14:11+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-05 05:39+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-10-29 05:53+0000\n"
+"X-Generator: Launchpad (build 17203)\n"
 "Language: pt_BR\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
-#: ../../campaigns/cconfig:98
-msgid "01 – From Nemesis to Genesis"
-msgstr "01 - De Nemesis para Genesis"
+#: ../../campaigns/cconfig:101
+msgid "From Nemesis to Genesis"
+msgstr ""
 
 #: ../../campaigns/atl01.wmf/elemental:11
 msgid ""
@@ -32,14 +32,18 @@ msgstr ""
 "sobreviventes lutam para construir um novo lar."
 
 #: ../../campaigns/cconfig:27
-msgid "Barbarians – The Second Empire"
-msgstr "Bárbaros - O Segundo Império"
+msgid "The Second Empire"
+msgstr ""
 
-#: ../../campaigns/cconfig:30
+#: ../../campaigns/cconfig:29
+msgid "Barbarians"
+msgstr ""
+
+#: ../../campaigns/cconfig:31
 msgid "Easy. Introduces the Barbarians"
 msgstr "Fácil. Introduz os Bárbaros"
 
-#: ../../campaigns/cconfig:31
+#: ../../campaigns/cconfig:32
 msgid ""
 "When Chat’Karuth died, he was an old man, father to three strong and "
 "ambitious sons, and warlord to an army that could match any enemy willing to "
@@ -69,15 +73,19 @@ msgstr ""
 "guerreiro visa reunir seus irmãos ambiciosos e forçar as tribos a marchar, "
 "mais uma vez, sob uma bandeira comum"
 
-#: ../../campaigns/cconfig:34
-msgid "Empire – The Months of Exile"
-msgstr "Império - Os meses no Exílio."
+#: ../../campaigns/cconfig:35
+msgid "The Months of Exile"
+msgstr ""
 
 #: ../../campaigns/cconfig:37
+msgid "Empire"
+msgstr ""
+
+#: ../../campaigns/cconfig:39
 msgid "Easy. Introduces the Empire"
 msgstr "Fácil. Introduz o Império"
 
-#: ../../campaigns/cconfig:38
+#: ../../campaigns/cconfig:40
 msgid ""
 "Six months ago, Lutius – a young general of the Empire – was sent with 150 "
 "soldiers to the frontier beyond the northern forests where Barbarian tribes "
@@ -101,15 +109,19 @@ msgstr ""
 "atacado por 100 homens de infantaria dos bárbaros, e foram completamente "
 "destroçados. Somente ele e um punhado de seus soldados sobreviveram..."
 
-#: ../../campaigns/cconfig:41
-msgid "Atlanteans – The Run for the Fire"
-msgstr "Atlântes - A Corrida para o Fogo"
+#: ../../campaigns/cconfig:43
+msgid "The Run for the Fire"
+msgstr ""
 
-#: ../../campaigns/cconfig:44
+#: ../../campaigns/cconfig:45
+msgid "Atlanteans"
+msgstr ""
+
+#: ../../campaigns/cconfig:47
 msgid "Challenging. Introduces the Atlanteans"
 msgstr "Desafiador. Introduz os Atlântes"
 
-#: ../../campaigns/cconfig:45
+#: ../../campaigns/cconfig:48
 msgid ""
 "When their God lost faith in the Atlanteans and drowned their island, one "
 "woman’s struggle for justice and a second chance for her people would become "
@@ -123,38 +135,42 @@ msgstr ""
 "Mundo, Jundlina se tornou o ser humano mais poderoso de seu tempo, mas por "
 "um preço: sua humanidade e alma!"
 
-#: ../../campaigns/cconfig:64
+#: ../../campaigns/cconfig:67
 #: ../../campaigns/t01.wmf/elemental:7
-msgid "01 – Eyes in the Dark"
-msgstr "01 - Olhos no Escuro"
+msgid "Eyes in the Dark"
+msgstr ""
 
-#: ../../campaigns/cconfig:69
+#: ../../campaigns/cconfig:72
 #: ../../campaigns/t02.wmf/elemental:7
-msgid "02 – A Place to Call Home"
-msgstr "02 - Um lugar para chamar de lar"
+msgid "A Place to Call Home"
+msgstr ""
 
-#: ../../campaigns/cconfig:74
+#: ../../campaigns/cconfig:77
 #: ../../campaigns/t03.wmf/elemental:7
-msgid "03 – This Land is Our Land"
-msgstr "03 - Esta Terra é a Nossa Terra"
+msgid "This Land is Our Land"
+msgstr ""
 
-#: ../../campaigns/cconfig:81
+#: ../../campaigns/cconfig:84
 #: ../../campaigns/emp01.wmf/elemental:7
-msgid "01 – The Strands of Malac’ Mor"
-msgstr "01 - Os Tentáculos de Malac' Mor"
+msgid "The Strands of Malac’ Mor"
+msgstr ""
 
-#: ../../campaigns/cconfig:86
+#: ../../campaigns/cconfig:89
 #: ../../campaigns/emp02.wmf/elemental:9
-msgid "02 – An Outpost for Exile"
-msgstr "02 - Um posto avançado no Exílio."
+msgid "An Outpost for Exile"
+msgstr ""
 
-#: ../../campaigns/cconfig:91
-#: ../../campaigns/cconfig:103
+#: ../../campaigns/cconfig:94
+#: ../../campaigns/cconfig:106
 #: ../../campaigns/dummy.wmf/elemental:7
 msgid "Not yet implemented"
 msgstr "Não Implementado Ainda"
 
 #: ../../campaigns/dummy.wmf/elemental:9
+msgid "Nobody"
+msgstr ""
+
+#: ../../campaigns/dummy.wmf/elemental:10
 msgid "Sorry, this map is not yet implemented."
 msgstr ""
 
@@ -227,10 +243,6 @@ msgstr "Atol"
 msgid "Who will be the real king of the big atoll?"
 msgstr "Quem será o verdadeiro Rei do grande atol?"
 
-#: ../../maps/Atoll.wmf/elemental:12
-msgid "Suggested Teams: (blue, yellow) vs. (red, green)"
-msgstr ""
-
 #: ../../maps/Calvisson.wmf/elemental:9
 msgid "Calvisson"
 msgstr ""
@@ -240,12 +252,6 @@ msgid ""
 "It’s a pleasure to settle in the beauty of this fissured countryside. But "
 "the ways to encompass these large territories are long and meandering, so it "
 "is easy to err into the land of the foreign clans."
-msgstr ""
-
-#: ../../maps/Calvisson.wmf/elemental:12
-msgid ""
-"Suggested Teams: blue vs. red | yellow vs. green | (blue, yellow) vs. (red, "
-"green) | (blue, green) vs. (red, yellow)"
 msgstr ""
 
 #: ../../maps/Checkmate.wmf/elemental:7
@@ -300,11 +306,6 @@ msgstr ""
 msgid "Man your ship and sail to the horizon."
 msgstr ""
 
-#: ../../maps/Crossing the horizon.wmf/elemental:12
-#: ../../maps/Rendez-Vous.wmf/elemental:10
-msgid "Suggested Teams: all ok"
-msgstr ""
-
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
 msgstr "Torneio no Deserto"
@@ -318,12 +319,6 @@ msgstr ""
 "Quatro tribos disputam com seu vizinho mais próximo quem será o primeiro a "
 "alcançar a montanha de outro que promete riquezas além da imaginação. Mas "
 "poderão os outros dois remanescentes dividir os recursos de forma sábia?"
-
-#: ../../maps/Desert Tournament.wmf/elemental:10
-#: ../../maps/Four Castles.wmf/elemental:10
-#: ../../maps/Swamp Monks.wmf/elemental:10
-msgid "Suggested Teams: (blue, red) vs. (yellow, green)"
-msgstr "Equipes sugeridas: (azul, vermelho) vs (amarelo, verde)"
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
@@ -350,12 +345,6 @@ msgid ""
 msgstr ""
 "A beleza de tirar o fôlego destas terras de esmeralda tem atraído muitas "
 "tribos em uma tentativa de tomá-las para si."
-
-#: ../../maps/Elven Forests.wmf/elemental:10
-msgid ""
-"Suggested Teams: (blue, red) vs. (yellow, green) | (blue, yellow) vs. (red, "
-"green)"
-msgstr ""
 
 #: ../../maps/Fellowships.wmf/elemental:9
 msgid "Fellowships"
@@ -426,14 +415,6 @@ msgid ""
 "along the river. Hint II: Snowmen mark additional water sources. Hint III: "
 "Each mountain contains only one resource."
 msgstr ""
-
-#: ../../maps/Four Mountains.wmf/elemental:10
-msgid ""
-"Suggested Teams: (blue, red) vs. (yellow, green) | (blue, green) vs. (red, "
-"yellow)"
-msgstr ""
-"Equipes sugeridas: (azul, vermelho) vs (amarelo, verde) ou (azul, verde) vs "
-"(vermelho, amarelo)"
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -564,13 +545,6 @@ msgid ""
 "long, long way to conquer all the islands. Good luck!"
 msgstr ""
 
-#: ../../maps/Long, long way.wmf/elemental:12
-msgid ""
-"Suggested Teams: blue vs. red | yellow vs. green | (blue, yellow) vs. (red, "
-"green) | (blue, yellow, black) vs. (red, green, orange) | (blue, yellow, "
-"black, purple) vs. (red, green, orange, white)"
-msgstr ""
-
 #: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
 msgid "Island Hopping"
 msgstr "Pulando Ilhas"
@@ -586,17 +560,16 @@ msgstr ""
 "podem, para ser o primeiro a construir um castelo no topo da montanha "
 "central."
 
+#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
+msgid "Smugglers"
+msgstr ""
+
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
 msgid ""
 "Your well established smuggling routes suddenly got busy: Two other tribes "
 "have appeared and now a rivalry among smugglers has started: Which team will "
-"be the first to smuggle a certain number of wares? Teams are: Blue + Red vs. "
-"Yellow + Green."
+"be the first to smuggle a certain number of wares?"
 msgstr ""
-"Suas bem estabelecidas rotas de contrabando repentinamente ficaram cheias: "
-"duas outras tribos apareceram, começando uma rivalidade entre "
-"contrabandistas. Quem será o primeiro a contrabandear um certo número de "
-"mercadorias? Os times são Azul + Vermelho vs. Amarelo + Verde."
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"
@@ -625,10 +598,6 @@ msgstr ""
 "um tesouro maravilhoso e poderoso em seu meio - O Planalto Verde, que é "
 "difícil de se obter, mas fácil de perder, por isso, se o quer, tome cuidado "
 "com os outros clãs ."
-
-#: ../../maps/Plateau.wmf/elemental:10
-msgid "Suggested Teams: blue vs. yellow"
-msgstr ""
 
 #: ../../maps/Rendez-Vous.wmf/elemental:7
 msgid "Rendez-Vous"
@@ -749,14 +718,6 @@ msgstr ""
 msgid ""
 "The river has always provided food and communication. This time, eight "
 "empires will fight for control over this land."
-msgstr ""
-
-#: ../../maps/The Nile.wmf/elemental:12
-msgid ""
-"Suggested Teams: blue vs. red | yellow vs. green | (blue, yellow) vs. (red, "
-"green) | (green, orange, white) vs. (yellow, black, purple) | (blue, orange, "
-"green) vs. (red, yellow, black) | (blue, green, orange, white) vs. (red, "
-"yellow, black, purple)"
 msgstr ""
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:7

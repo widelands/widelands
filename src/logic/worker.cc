@@ -939,7 +939,7 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 					(boost::format("<rt image=world/resources/pics/%s4.png>"
 										"<p font-size=14 font-face=DejaVuSerif>%s</p></rt>")
 					 % rdescr->name().c_str()
-					 % _("A geologist found resources.")).str().c_str();
+					 % _("A geologist found resources.")).str();
 
 			//  We should add a message to the player's message queue - but only,
 			//  if there is not already a similar one in list.
@@ -1543,6 +1543,9 @@ void Worker::transfer_update(Game & game, State & /* state */) {
 				("MO(%u): [transfer]: from road to bad nextstep %u",
 				 serial(), nextstep->serial());
 	} else
+		//Scan-build reports Called C++ object pointer is null here.
+		//This is a false positive.
+		//See https://bugs.launchpad.net/widelands/+bug/1198918
 		throw wexception
 			("MO(%u): location %u has bad type",
 			 serial(), location->serial());
@@ -1838,7 +1841,7 @@ void Worker::return_update(Game & game, State & state)
 		molog("[return]: Failed to return\n");
 		const std::string message =
 				(boost::format(_("Your %s can't find a way home and will likely die."))
-								  % descr().descname().c_str()).str().c_str();
+				 % descr().descname().c_str()).str();
 
 		owner().add_message
 			(game,

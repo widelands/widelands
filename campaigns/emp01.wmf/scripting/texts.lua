@@ -37,8 +37,7 @@ obj_build_lumberjack = {
    title=_"Build a lumberjack’s house",
    number = 1,
    body = objective_text(_"Lumberjack’s House",
-      listitem_bullet(_[[Build a lumberjack’s house at the red house symbol, south of your provisional headquarters.]]) ..
-      listitem_arrow(_[[Cutting down enough trees for more buildings will take a while. You can speed the game up by using PAGE UP and slow it down again with PAGE DOWN.]])
+      listitem_bullet(_[[Build a lumberjack’s house at the red house symbol, south of your provisional headquarters.]])
    ),
 }
 
@@ -128,7 +127,7 @@ _([[It really seems as if we have landed under the only palm trees existing in t
 
 saledus_1 = {
    title=_"A Foreboding",
-   body= saledus(_"Saledus looks around nervously...",
+   body= saledus(_"Saledus looks around nervously…",
    _([[Sire, I fear we are not safe in this foreign land. ]] ..
 [[Who knows what terrible creatures live beyond this forest, in that mighty desert? ]] ..
 [[What if these creatures enter the woods and await the time to attack us?]]) .. paragraphdivider() ..
@@ -143,7 +142,7 @@ _([[We really should build a barracks in the eastern portion of the forest. ]] .
 
 saledus_2 = {
    title=_"Safe For Now",
-   body= saledus(_"Saledus speaks with a sigh of relief...",
+   body= saledus(_"Saledus speaks with a sigh of relief…",
    _([[Sire, I saw that the construction of the barracks was completed, ]] ..
 [[so I have assigned one of my best soldiers to it to keep watch on the desert.]]) .. paragraphdivider() ..
 _([[This is a good step forward. Now we can feel a bit safer and can look forward to repairing our ship.]])),
@@ -152,7 +151,7 @@ _([[This is a good step forward. Now we can feel a bit safer and can look forwar
 
 amalea_1 = {
    title=_"Young Amalea",
-   body= amalea(_"Amalea smiles...",
+   body= amalea(_"Amalea smiles…",
    _([[Hey Lutius, I just met Saledus outside.]]) .. paragraphdivider() ..
 _([[He told me about the barracks. Well, I am not one of those girls who think we need more barracks]] ..
 [[ – instead, we might concentrate on other things now.]]) .. paragraphdivider() ..
@@ -165,7 +164,7 @@ _([[It is absolutely clear that we need wood to repair our ship. ]] ..
 
 amalea_2 = {
    title=_"Young Amalea",
-   body= amalea(_"Amalea recommends...",
+   body= amalea(_"Amalea recommends…",
    _([[Hey Lutius, I got the message that our first lumberjack has started his work today. ]] ..
 [[Perhaps it would be a good idea to wait until he cleans enough space for constructing two more lumberjack’s houses, ]] ..
 [[so that we can harvest the logs faster.]]) .. paragraphdivider() ..
@@ -178,8 +177,8 @@ _([[But unfortunately the logs are useless for repairing our ship – we need re
 
 amalea_3 = {
    title=_"Young Amalea",
-   body= amalea(_"Amalea comes in...",
-   _([[Hi Lutius, I’ve got two important things to talk about... First the good news:]]) .. paragraphdivider() ..
+   body= amalea(_"Amalea comes in…",
+   _([[Hi Lutius, I’ve got two important things to talk about… First the good news:]]) .. paragraphdivider() ..
 _([[I noticed that the construction of the sawmill is complete, ]] ..
 [[so we can begin to refine the logs that the lumberjacks are harvesting into lumber.]]) .. paragraphdivider() ..
 _([[But that’s just about the only positive thing I know to talk about. ]] ..
@@ -195,7 +194,7 @@ _([[Lutius, I beg you: find someone who takes care of planting new trees.]]))
 
 saledus_3 = {
    title=_"Thinking About the Future",
-   body= saledus(_"Saledus notes...",
+   body= saledus(_"Saledus notes…",
    _([[Hey, my good old friend. I just thought about the rocks standing on the south shore of this land. ]] ..
 [[Perhaps we could cut out some useful hard stones and beautiful marble.]]) .. paragraphdivider() ..
 _([[The repair of our ship will take a few weeks, anyway, and the resources we harvest now ]] ..
@@ -206,7 +205,7 @@ _([[The repair of our ship will take a few weeks, anyway, and the resources we h
 
 saledus_4 = {
    title=_"A Step Forward",
-   body= saledus(_"Saledus looks promising...",
+   body= saledus(_"Saledus looks promising…",
    _([[Hey Lutius, today we got a lot closer to our first castle. ]] ..
 [[The quarry to the south began its work today and will soon provide us with stones and beautiful marble.]]) .. paragraphdivider() ..
 _([[Now we truly can look forward to settling down on another island.]])),
