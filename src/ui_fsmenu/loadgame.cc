@@ -96,6 +96,11 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 		 g_gr->images().get("pics/but0.png"),
 		 _("Delete"), std::string(), false, false),
 
+	m_ta_errormessage
+		(this,
+		 m_right_column_x, m_tabley,
+		 get_right_column_w(m_right_column_x), m_delete.get_y() - m_tabley - 4 * m_padding),
+
 	m_minimap_y(get_y_from_preceding(m_ta_win_condition) + 3 * m_padding),
 	m_minimap_w(get_right_column_w(m_right_column_x)),
 	m_minimap_h(m_delete.get_y() - get_y_from_preceding(m_ta_win_condition) - 6 * m_padding),
@@ -249,8 +254,7 @@ void FullscreenMenuLoadGame::clicked_delete()
 
 bool FullscreenMenuLoadGame::set_has_selection()
 {
-	bool has_selection = m_table.has_selection();
-	FullscreenMenuLoadMapOrGame::set_has_selection();
+	bool has_selection = FullscreenMenuLoadMapOrGame::set_has_selection();
 	m_delete.set_enabled(has_selection);
 
 	if (!has_selection) {
@@ -282,71 +286,92 @@ void FullscreenMenuLoadGame::entry_selected()
 	if (set_has_selection()) {
 
 		const SavegameData & gamedata = m_games_data[m_table.get_selected()];
+		m_ta_errormessage.set_text(gamedata.errormessage);
 
-		m_ta_mapname.set_text(gamedata.mapname);
-		m_ta_gametime.set_text(gametimestring(gamedata.gametime));
+		if (gamedata.errormessage.empty()) {
+			m_ta_errormessage.set_visible(false);
+			m_ta_mapname.set_text(gamedata.mapname);
+			m_ta_gametime.set_text(gametimestring(gamedata.gametime));
 
-		uint8_t number_of_players = gamedata.nrplayers;
-		if (number_of_players > 0) {
-			m_ta_players.set_text((boost::format("%u") % static_cast<unsigned int>(number_of_players)).str());
+			uint8_t number_of_players = gamedata.nrplayers;
+			if (number_of_players > 0) {
+				m_ta_players.set_text((boost::format("%u") % static_cast<unsigned int>(number_of_players)).str());
+			} else {
+				m_label_players.set_text("");
+				m_ta_players.set_text("");
+			}
+
+			m_ta_win_condition.set_text(gamedata.wincondition);
+
+			std::string minimap_path = gamedata.minimap_path;
+			// Delete former image
+			m_minimap_icon.set_icon(nullptr);
+			m_minimap_icon.set_visible(false);
+			m_minimap_icon.set_no_frame();
+			m_minimap_image.reset();
+			// Load the new one
+			if (!minimap_path.empty()) {
+				try {
+					// Load the image
+					std::unique_ptr<Surface> surface(
+								load_image(
+									minimap_path,
+									std::unique_ptr<FileSystem>(g_fs->make_sub_file_system(gamedata.filename)).get()));
+
+					m_minimap_image.reset(new_in_memory_image(std::string(gamedata.filename + minimap_path),
+																			surface.release()));
+
+					// Scale it
+					double scale = double(m_minimap_w) / m_minimap_image->width();
+					double scaleY = double(m_minimap_h) / m_minimap_image->height();
+					if (scaleY < scale) {
+						scale = scaleY;
+					}
+					if (scale > 1.0) scale = 1.0; // Don't make the image too big; fuzziness will result
+					uint16_t w = scale * m_minimap_image->width();
+					uint16_t h = scale * m_minimap_image->height();
+					const Image* resized = ImageTransformations::resize(m_minimap_image.get(), w, h);
+					// keeps our in_memory_image around and give to icon the one
+					// from resize that is handled by the cache. It is still linked to our
+					// surface
+					m_minimap_icon.set_size(w, h);
+
+					// Center the minimap in the available space
+					int32_t xpos = m_right_column_x + (get_w() - m_right_column_margin - w - m_right_column_x) / 2;
+					int32_t ypos = m_minimap_y;
+
+					// Set small minimaps higher up for a more harmonious look
+					if (h < m_minimap_h * 2 / 3) {
+						ypos += (m_minimap_h - h) / 3;
+					} else {
+						ypos += (m_minimap_h - h) / 2;
+					}
+
+					m_minimap_icon.set_pos(Point(xpos, ypos));
+					m_minimap_icon.set_frame(UI_FONT_CLR_FG);
+					m_minimap_icon.set_visible(true);
+					m_minimap_icon.set_icon(resized);
+				} catch (const std::exception & e) {
+					log("Failed to load the minimap image : %s\n", e.what());
+				}
+			}
 		} else {
+			m_label_mapname.set_text("");
+			m_ta_mapname.set_text("");
+			m_label_gametime.set_text("");
+			m_ta_gametime.set_text("");
 			m_label_players.set_text("");
 			m_ta_players.set_text("");
-		}
+			m_label_win_condition.set_text("");
+			m_ta_win_condition.set_text("");
 
-		m_ta_win_condition.set_text(gamedata.wincondition);
+			m_minimap_icon.set_icon(nullptr);
+			m_minimap_icon.set_visible(false);
+			m_minimap_icon.set_no_frame();
+			m_minimap_image.reset();
 
-		std::string minimap_path = gamedata.minimap_path;
-		// Delete former image
-		m_minimap_icon.set_icon(nullptr);
-		m_minimap_icon.set_visible(false);
-		m_minimap_icon.set_no_frame();
-		m_minimap_image.reset();
-		// Load the new one
-		if (!minimap_path.empty()) {
-			try {
-				// Load the image
-				std::unique_ptr<Surface> surface(
-							load_image(
-								minimap_path,
-								std::unique_ptr<FileSystem>(g_fs->make_sub_file_system(gamedata.filename)).get()));
-
-				m_minimap_image.reset(new_in_memory_image(std::string(gamedata.filename + minimap_path),
-																		surface.release()));
-
-				// Scale it
-				double scale = double(m_minimap_w) / m_minimap_image->width();
-				double scaleY = double(m_minimap_h) / m_minimap_image->height();
-				if (scaleY < scale) {
-					scale = scaleY;
-				}
-				if (scale > 1.0) scale = 1.0; // Don't make the image too big; fuzziness will result
-				uint16_t w = scale * m_minimap_image->width();
-				uint16_t h = scale * m_minimap_image->height();
-				const Image* resized = ImageTransformations::resize(m_minimap_image.get(), w, h);
-				// keeps our in_memory_image around and give to icon the one
-				// from resize that is handled by the cache. It is still linked to our
-				// surface
-				m_minimap_icon.set_size(w, h);
-
-				// Center the minimap in the available space
-				int32_t xpos = m_right_column_x + (get_w() - m_right_column_margin - w - m_right_column_x) / 2;
-				int32_t ypos = m_minimap_y;
-
-				// Set small minimaps higher up for a more harmonious look
-				if (h < m_minimap_h * 2 / 3) {
-					ypos += (m_minimap_h - h) / 3;
-				} else {
-					ypos += (m_minimap_h - h) / 2;
-				}
-
-				m_minimap_icon.set_pos(Point(xpos, ypos));
-				m_minimap_icon.set_frame(UI_FONT_CLR_FG);
-				m_minimap_icon.set_visible(true);
-				m_minimap_icon.set_icon(resized);
-			} catch (const std::exception & e) {
-				log("Failed to load the minimap image : %s\n", e.what());
-			}
+			m_ta_errormessage.set_visible(true);
+			m_ok.set_enabled(false);
 		}
 	}
 }
@@ -512,15 +537,38 @@ void FullscreenMenuLoadGame::fill_table() {
 
 				} else {
 					const std::string fs_filename = FileSystem::filename_without_ext(gamedata->filename.c_str());
-					if (fs_filename == "wl_autosave") {
+					if (fs_filename == "wl_autosave" || fs_filename == "wl_autosave2") {
 						/** TRANSLATORS: Used in filenames for loading games */
 						te.set_string(1, (boost::format(_("Autosave: %1%")) % gpdp.get_mapname()).str());
 					} else {
 						te.set_string(1, fs_filename);
 					}
 				}
-			} catch (const WException &) {
+			} catch (const WException & e) {
 				//  we simply skip illegal entries
+				if (gamedata->filename != "save/campvis") {
+					gamedata->errormessage =
+							((boost::format("%s\n\n%s\n\n%s"))
+							 /** TRANSLATORS: Error message introduction for when an old savegame can't be loaded */
+							 % _("This file has the wrong format and can’t be loaded."
+								  " Maybe it was created with an older version of Widelands.")
+							 /** TRANSLATORS: This text is on a separate line with an error message below */
+							 % _("Error message:")
+							 % e.what()).str();
+					m_games_data.push_back(*gamedata);
+
+					const std::string fs_filename = FileSystem::filename_without_ext(gamedata->filename.c_str());
+
+					UI::Table<uintptr_t const>::EntryRecord & te =
+						m_table.add(m_games_data.size() - 1);
+					te.set_string(0, "");
+					if (m_is_replay || m_settings->settings().multiplayer) {
+						te.set_string(1, "");
+						te.set_string(2, (boost::format(_("Incompatible file: %s")) % fs_filename).str());
+					} else {
+						te.set_string(1, (boost::format(_("Incompatible file: %s")) % fs_filename).str());
+					}
+				}
 			}
 		}
 	}
