@@ -37,12 +37,19 @@ const char kRoadVertexShader[] = R"(
 
 // Attributes.
 attribute vec2 attr_position;
+attribute vec2 attr_texture_position;
+attribute float attr_texture_mix;
+attribute float attr_brightness;
 
 // Outputs.
-// NOCOM(#sirver): fix this
-// varying vec2 var_texture_position;
+varying vec2 out_texture_position;
+varying float out_texture_mix;
+varying float out_brightness;
 
 void main() {
+	out_texture_position = attr_texture_position;
+	out_texture_mix = attr_texture_mix;
+	out_brightness = attr_brightness;
 	gl_Position = gl_ProjectionMatrix * vec4(attr_position, 0., 1.);
 }
 )";
@@ -50,10 +57,20 @@ void main() {
 const char kRoadFragmentShader[] = R"(
 #version 120
 
-// uniform sampler2D u_terrain_texture;
+// Inputs.
+varying vec2 out_texture_position;
+varying float out_texture_mix;
+varying float out_brightness;
+
+uniform sampler2D u_normal_road_texture;
+uniform sampler2D u_busy_road_texture;
 
 void main() {
-	gl_FragColor = vec4(1., 0., 0., 1.);
+	vec4 normal_road_color = texture2D(u_normal_road_texture, out_texture_position);
+	vec4 busy_road_color = texture2D(u_busy_road_texture, out_texture_position);
+	vec4 color = mix(normal_road_color, busy_road_color, out_texture_mix);
+	color.rgb *= out_brightness;
+	gl_FragColor = color;
 }
 )";
 
@@ -63,14 +80,18 @@ RoadProgram::RoadProgram() {
 	gl_program_.build(kRoadVertexShader, kRoadFragmentShader);
 
 	attr_position_ = glGetAttribLocation(gl_program_.object(), "attr_position");
-	// attr_texture_position_ =
-		// glGetAttribLocation(gl_program_.object(), "attr_texture_position");
-	// attr_brightness_ = glGetAttribLocation(gl_program_.object(), "attr_brightness");
+	attr_texture_position_ =
+		glGetAttribLocation(gl_program_.object(), "attr_texture_position");
+	attr_texture_mix_ = glGetAttribLocation(gl_program_.object(), "attr_texture_mix");
+	attr_brightness_ = glGetAttribLocation(gl_program_.object(), "attr_brightness");
 
-	// u_terrain_texture_ = glGetUniformLocation(gl_program_.object(), "u_terrain_texture");
+	u_normal_road_texture_ = glGetUniformLocation(gl_program_.object(), "u_normal_road_texture");
+	u_busy_road_texture_ = glGetUniformLocation(gl_program_.object(), "u_busy_road_texture");
 }
 
-void RoadProgram::add_road(const FieldsToDraw::Field& start, const FieldsToDraw::Field& end) {
+void RoadProgram::add_road(const FieldsToDraw::Field& start,
+                           const FieldsToDraw::Field& end,
+                           const Widelands::RoadType road_type) {
 	static constexpr float kRoadThicknessInPixels = 3.;
 	const float delta_x = end.x - start.x;
 	const float delta_y = end.y - start.y;
@@ -81,17 +102,30 @@ void RoadProgram::add_road(const FieldsToDraw::Field& start, const FieldsToDraw:
 	const float dx = -delta_y / vector_length;
 	const float dy = delta_x / vector_length;
 
+	const float texture_mix = road_type == Widelands::Road_Normal ? 0. : 1.;
 	const PerVertexData p1 = {
-	   start.x + kRoadThicknessInPixels * dx, start.y + kRoadThicknessInPixels * dy
+	   start.x + kRoadThicknessInPixels * dx, start.y + kRoadThicknessInPixels * dy,
+		0., 0.,
+		start.brightness,
+		texture_mix,
 	};
 	const PerVertexData p2 = {
-	   start.x - kRoadThicknessInPixels * dx, start.y - kRoadThicknessInPixels * dy
+	   start.x - kRoadThicknessInPixels * dx, start.y - kRoadThicknessInPixels * dy,
+		0., 1.,
+		start.brightness,
+		texture_mix,
 	};
 	const PerVertexData p3 = {
-	   end.x + kRoadThicknessInPixels * dx, end.y + kRoadThicknessInPixels * dy
+	   end.x + kRoadThicknessInPixels * dx, end.y + kRoadThicknessInPixels * dy,
+		1., 0.,
+		end.brightness,
+		texture_mix,
 	};
 	const PerVertexData p4 = {
-	   end.x - kRoadThicknessInPixels * dx, end.y - kRoadThicknessInPixels * dy
+	   end.x - kRoadThicknessInPixels * dx, end.y - kRoadThicknessInPixels * dy,
+		1., 1.,
+		end.brightness,
+		texture_mix,
 	};
 
 	// As OpenGl does not support drawing quads in modern days and we have a
@@ -118,7 +152,7 @@ void RoadProgram::draw(const FieldsToDraw& fields_to_draw) {
 			const Widelands::RoadType road =
 			   static_cast<Widelands::RoadType>(field.roads & Widelands::Road_Mask);
 			if (road != Widelands::Road_None) {
-				add_road(field, fields_to_draw.at(rn_index));
+				add_road(field, fields_to_draw.at(rn_index), road);
 			}
 		}
 
@@ -128,7 +162,7 @@ void RoadProgram::draw(const FieldsToDraw& fields_to_draw) {
 			const Widelands::RoadType road =
 			   static_cast<Widelands::RoadType>((field.roads >> 2) & Widelands::Road_Mask);
 			if (road != Widelands::Road_None) {
-				add_road(field, fields_to_draw.at(brn_index));
+				add_road(field, fields_to_draw.at(brn_index), road);
 			}
 		}
 
@@ -139,7 +173,7 @@ void RoadProgram::draw(const FieldsToDraw& fields_to_draw) {
 			const Widelands::RoadType road =
 			   static_cast<Widelands::RoadType>((field.roads >> 4) & Widelands::Road_Mask);
 			if (road != Widelands::Road_None) {
-				add_road(field, fields_to_draw.at(bln_index));
+				add_road(field, fields_to_draw.at(bln_index), road);
 			}
 		}
 	}
@@ -147,6 +181,9 @@ void RoadProgram::draw(const FieldsToDraw& fields_to_draw) {
 	glUseProgram(gl_program_.object());
 
 	glEnableVertexAttribArray(attr_position_);
+	glEnableVertexAttribArray(attr_texture_position_);
+	glEnableVertexAttribArray(attr_brightness_);
+	glEnableVertexAttribArray(attr_texture_mix_);
 
 	glBindBuffer(GL_ARRAY_BUFFER, gl_array_buffer_.object());
 	glBufferData(
@@ -161,22 +198,34 @@ void RoadProgram::draw(const FieldsToDraw& fields_to_draw) {
 		                      reinterpret_cast<void*>(offset));
 	};
 	set_attrib_pointer(attr_position_, 2, offsetof(PerVertexData, x));
+	set_attrib_pointer(attr_texture_position_, 2, offsetof(PerVertexData, texture_x));
+	set_attrib_pointer(attr_brightness_, 1, offsetof(PerVertexData, brightness));
+	set_attrib_pointer(attr_texture_mix_, 1, offsetof(PerVertexData, texture_mix));
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-	// NOCOM(#sirver): what
-	// Set the sampler texture unit to 0
-	// glActiveTexture(GL_TEXTURE0);
-	// glUniform1i(u_terrain_texture_, 0);
+	// Bind the textures.
+	const GLuint rt_normal = dynamic_cast<const GLSurfaceTexture&>(
+	                      g_gr->get_road_texture(Widelands::Road_Normal)).get_gl_texture();
+	const GLuint rt_busy = dynamic_cast<const GLSurfaceTexture&>(
+	                    g_gr->get_road_texture(Widelands::Road_Busy)).get_gl_texture();
 
-	// Which triangles to draw?
-	// NOCOM(#sirver): what
-		// glBindTexture(
-			// GL_TEXTURE_2D,
-			// g_gr->get_maptexture_data(terrains.get_unmutable(i).get_texture())->get_texture());
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, rt_normal);
+	glUniform1i(u_normal_road_texture_, 0);
+
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, rt_busy);
+	glUniform1i(u_busy_road_texture_, 1);
+
 	glDrawArrays(GL_TRIANGLES, 0, vertices_.size());
 
 	glDisableVertexAttribArray(attr_position_);
+	glDisableVertexAttribArray(attr_texture_position_);
+	glDisableVertexAttribArray(attr_brightness_);
+	glDisableVertexAttribArray(attr_texture_mix_);
+
+	glActiveTexture(GL_TEXTURE0);
 
 	glUseProgram(0);
 

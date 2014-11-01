@@ -25,6 +25,7 @@
 #include "base/macros.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
+#include "logic/roadtype.h"
 
 class RoadProgram {
 public:
@@ -38,12 +39,24 @@ private:
 	struct PerVertexData {
 		float x;
 		float y;
+		float texture_x;
+		float texture_y;
+		float brightness;
+
+		// This is a hack: we want to draw busy and normal roads in the same
+		// run, but since samplers (apparently?) cannot be passed through
+		// attribute arrays, we instead sample twice (busy and normal) and mix
+		// them together with 'texture_mix' which is either 1 or 0.
+		float texture_mix;
 	};
 	// NOCOM(#sirver): add this in.
 	// static_assert(sizeof(PerVertexData) == 20, "Wrong padding.");
 
-	// Adds a road from 'start' to 'end' to be rendered in this frame.
-	void add_road(const FieldsToDraw::Field& start, const FieldsToDraw::Field& end);
+	// Adds a road from 'start' to 'end' to be rendered in this frame using the
+	// correct texture for 'road_type'.
+	void add_road(const FieldsToDraw::Field& start,
+	              const FieldsToDraw::Field& end,
+	              const Widelands::RoadType road_type);
 
 	// The buffer that will contain 'vertices_' for rendering.
 	Gl::Buffer gl_array_buffer_;
@@ -53,6 +66,9 @@ private:
 
 	// Attributes.
 	GLint attr_position_;
+	GLint attr_texture_position_;
+	GLint attr_brightness_;
+	GLint attr_texture_mix_;
 
 	// Uniforms.
 	GLint u_normal_road_texture_;
