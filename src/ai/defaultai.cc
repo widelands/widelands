@@ -3094,10 +3094,16 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 			continue;
 		}
 
-		try {
-			// Avoid division by zero
-			if (genstats.at(j - 1).miltary_strength.empty() ||
-				 genstats.at(j - 1).miltary_strength.back() == 0) {
+		// it seems that under some circumstances genstats can be empty
+		//so to avoid crash, the AI tests its content first
+		if (genstats.size()<j) {
+			log("ComputerPlayer(%d): genstats too small :%d\n", player_number(), genstats.size());
+			player_attackable.at(j - 1) = false;
+		} else if (genstats.at(j - 1).miltary_strength.empty()) {
+			log("ComputerPlayer(%d): miltary_strength empty\n", player_number());
+			player_attackable.at(j - 1) = false;
+		} else {
+			if ( genstats.at(j - 1).miltary_strength.back() == 0) {
 				player_attackable.at(j - 1) = true;
 				any_attackable = true;
 			// Check threshold
@@ -3108,9 +3114,6 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 			} else {
 				player_attackable.at(j - 1) = false;
 			}
-		} catch (const std::out_of_range&) {
-			player_attackable.at(j - 1) = true;
-			any_attackable = true;
 		}
 	}
 
