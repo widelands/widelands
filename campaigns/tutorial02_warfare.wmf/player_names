@@ -1,0 +1,16 @@
+# Automatically created by Widelands bzr7181[trunk] (Release)
+
+[global]
+packet_version="2"
+
+[player_1]
+name="Player 1"
+tribe="barbarians"
+ai=
+closeable="false"
+
+[player_2]
+name="Sparring Partner"
+tribe="empire"
+ai=
+closeable="false"

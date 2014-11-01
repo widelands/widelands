@@ -73,13 +73,11 @@
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/campaign_select.h"
 #include "ui_fsmenu/editor.h"
-#include "ui_fsmenu/editor_mapselect.h"
 #include "ui_fsmenu/fileview.h"
 #include "ui_fsmenu/internet_lobby.h"
 #include "ui_fsmenu/intro.h"
 #include "ui_fsmenu/launch_spg.h"
 #include "ui_fsmenu/loadgame.h"
-#include "ui_fsmenu/loadreplay.h"
 #include "ui_fsmenu/main.h"
 #include "ui_fsmenu/mapselect.h"
 #include "ui_fsmenu/multiplayer.h"
@@ -104,6 +102,61 @@ void terminate(int) {
 			" Update your sound driver and/or SDL to fix this problem\n");
 #ifndef _WIN32
 	raise(SIGKILL);
+#endif
+}
+
+/**
+ * Returns the widelands executable path.
+ */
+std::string get_executable_directory()
+{
+	std::string executabledir;
+#ifdef __APPLE__
+	uint32_t buffersize = 0;
+	_NSGetExecutablePath(nullptr, &buffersize);
+	std::unique_ptr<char []> buffer(new char[buffersize]);
+	int32_t check = _NSGetExecutablePath(buffer.get(), &buffersize);
+	if (check != 0) {
+		throw wexception ("could not find the path of the main executable");
+	}
+	executabledir = std::string(buffer.get());
+	executabledir.resize(executabledir.rfind('/') + 1);
+#endif
+#ifdef __linux__
+	char buffer[PATH_MAX];
+	size_t size = readlink("/proc/self/exe", buffer, PATH_MAX);
+	if (size <= 0) {
+		throw wexception ("could not find the path of the main executable");
+	}
+	executabledir = std::string(buffer, size);
+	executabledir.resize(executabledir.rfind('/') + 1);
+#endif
+#ifdef _WIN32
+	char filename[_MAX_PATH + 1] = {0};
+	GetModuleFileName(nullptr, filename, MAX_PATH);
+	executabledir = filename;
+	executabledir = executabledir.substr(0, executabledir.rfind('\\'));
+#endif
+	log("Widelands executable directory: %s\n", executabledir.c_str());
+	return executabledir;
+}
+
+
+/**
+ * In case that the path is defined in a relative manner to the
+ * executable file.
+ *
+ * Track down the executable file and append the path.
+ */
+std::string relative_to_executable_to_absolute(const std::string& path)
+{
+#ifndef _WIN32
+	char buffer[PATH_MAX];
+	realpath((get_executable_directory() + path).c_str(), buffer);
+	log("full path: %s\n", buffer);
+	return std::string(buffer);
+#else
+	return path;
 #endif
 }
 
@@ -199,8 +252,12 @@ m_redirected_stdio(false)
 	init_settings();
 
 	if (m_use_default_datadir) {
+		std::string install_prefix = INSTALL_PREFIX;
+		if (!PATHS_ARE_ABSOLUTE) {
+			install_prefix = relative_to_executable_to_absolute(install_prefix);
+		}
 		const std::string default_datadir =
-		   std::string(INSTALL_PREFIX) + "/" + std::string(INSTALL_DATADIR);
+		   install_prefix + "/" + std::string(INSTALL_DATADIR);
 		log("Adding directory: %s\n", default_datadir.c_str());
 		g_fs->add_file_system(&FileSystem::create(default_datadir));
 	}
@@ -344,7 +401,7 @@ void WLApplication::run()
 				// Load the requested map
 				Widelands::Map map;
 				i18n::Textdomain td("maps");
-				map.set_filename(m_filename.c_str());
+				map.set_filename(m_filename);
 				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(m_filename);
 				if (!ml) {
 					throw WLWarning
@@ -358,7 +415,7 @@ void WLApplication::run()
 				MapData mapdata;
 				mapdata.filename = m_filename;
 				mapdata.name = map.get_name();
-				mapdata.author = map.get_author();
+				mapdata.authors.parse(map.get_author());
 				mapdata.description = map.get_description();
 				mapdata.nrplayers = map.get_nrplayers();
 				mapdata.width = map.get_width();
@@ -473,7 +530,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 					g_fs->ensure_directory_exists(SCREENSHOT_DIR);
 					for (uint32_t nr = 0; nr < 10000; ++nr) {
 						const std::string filename = (boost::format(SCREENSHOT_DIR "/shot%04u.png")
-																% nr).str().c_str();
+																% nr).str();
 						if (g_fs->file_exists(filename))
 							continue;
 						g_gr->screenshot(filename);
@@ -709,8 +766,18 @@ void WLApplication::init_language() {
 
 	// Initialize locale and grab "widelands" textdomain
 	i18n::init_locale();
-	std::string localedir = s.get_string("localedir", INSTALL_LOCALEDIR);
-	i18n::set_localedir(find_relative_locale_path(localedir));
+
+	if (s.has_val("localedir")) {
+		// Localedir has been specified on the command line or in the config file.
+		i18n::set_localedir(s.get_safe_string("localedir"));
+	} else {
+		// Use default localedir, as configured at compile time.
+		std::string localedir = INSTALL_LOCALEDIR;
+		if (!PATHS_ARE_ABSOLUTE) {
+			localedir = relative_to_executable_to_absolute(localedir);
+		}
+		i18n::set_localedir(localedir);
+	}
 	i18n::grab_textdomain("widelands");
 
 	// Set locale corresponding to selected language
@@ -732,61 +799,6 @@ void WLApplication::shutdown_settings()
 	} catch (...)                      {
 		log("WARNING: could not save configuration");
 	}
-}
-
-/**
- * Returns the widelands executable path.
- */
-std::string WLApplication::get_executable_path()
-{
-	std::string executabledir;
-#ifdef __APPLE__
-	uint32_t buffersize = 0;
-	_NSGetExecutablePath(nullptr, &buffersize);
-	std::unique_ptr<char []> buffer(new char[buffersize]);
-	int32_t check = _NSGetExecutablePath(buffer.get(), &buffersize);
-	if (check != 0) {
-		throw wexception ("could not find the path of the main executable");
-	}
-	executabledir = std::string(buffer.get());
-	executabledir.resize(executabledir.rfind('/') + 1);
-#endif
-#ifdef __linux__
-	char buffer[PATH_MAX];
-	size_t size = readlink("/proc/self/exe", buffer, PATH_MAX);
-	if (size <= 0) {
-		throw wexception ("could not find the path of the main executable");
-	}
-	executabledir = std::string(buffer, size);
-	executabledir.resize(executabledir.rfind('/') + 1);
-#endif
-#ifdef _WIN32
-	char filename[_MAX_PATH + 1] = {0};
-	GetModuleFileName(nullptr, filename, MAX_PATH);
-	executabledir = filename;
-	executabledir = executabledir.substr(0, executabledir.rfind('\\'));
-#endif
-	log("Widelands executable directory: %s\n", executabledir.c_str());
-	return executabledir;
-}
-
-/**
- * In case that the localedir is defined in a relative manner to the
- * executable file.
- *
- * Track down the executable file and append the localedir.
- */
-std::string WLApplication::find_relative_locale_path(std::string localedir)
-{
-#ifndef _WIN32
-	if (localedir[0] != '/') {
-		std::string executabledir = get_executable_path();
-		executabledir+= localedir;
-		log ("localedir: %s\n", executabledir.c_str());
-		return executabledir;
-	}
-#endif
-	return localedir;
 }
 
 /**
@@ -970,17 +982,6 @@ void WLApplication::handle_commandline_parameters()
 		m_commandline.erase("nozip");
 	}
 
-	if (m_commandline.count("opengl")) {
-		if (m_commandline["opengl"].compare("0") == 0) {
-			g_options.pull_section("global").create_val("opengl", "false");
-		} else if (m_commandline["opengl"].compare("1") == 0) {
-			g_options.pull_section("global").create_val("opengl", "true");
-		} else {
-			log ("Invalid option opengl=[0|1]\n");
-		}
-		m_commandline.erase("opengl");
-	}
-
 	if (m_commandline.count("datadir")) {
 		log ("Adding directory: %s\n", m_commandline["datadir"].c_str());
 		m_use_default_datadir = false;
@@ -1117,16 +1118,7 @@ void WLApplication::mainmenu()
 		try {
 			switch (mm.run()) {
 			case FullscreenMenuMain::mm_playtutorial:
-				{
-					Widelands::Game game;
-					try {
-						game.run_splayer_scenario_direct("campaigns/tutorial01.wmf", "");
-					} catch (const std::exception & e) {
-						log("Fatal exception: %s\n", e.what());
-						emergency_save(game);
-						throw;
-					}
-				}
+				mainmenu_tutorial();
 				break;
 			case FullscreenMenuMain::mm_singleplayer:
 				mainmenu_singleplayer();
@@ -1188,6 +1180,34 @@ void WLApplication::mainmenu()
 #endif
 	}
 }
+
+
+/**
+ * Handle the "Play Tutorial" menu option:
+ * Show tutorial UI, let player select tutorial and run it.
+ */
+void WLApplication::mainmenu_tutorial()
+{
+	Widelands::Game game;
+	std::string filename;
+		//  Start UI for the tutorials.
+		FullscreenMenuCampaignMapSelect select_campaignmap(true);
+		select_campaignmap.set_campaign(0);
+		if (select_campaignmap.run() > 0) {
+			filename = select_campaignmap.get_map();
+		}
+	try {
+		// Load selected tutorial-map-file
+		if (filename.size())
+			game.run_splayer_scenario_direct(filename.c_str(), "");
+	} catch (const std::exception & e) {
+		log("Fatal exception: %s\n", e.what());
+		emergency_save(game);
+		throw;
+	}
+}
+
+
 
 /**
  * Run the singleplayer menu
@@ -1330,11 +1350,12 @@ void WLApplication::mainmenu_editor()
 		case FullscreenMenuEditor::Load_Map: {
 			std::string filename;
 			{
-				FullscreenMenuEditorMapSelect emsm;
+				SinglePlayerGameSettingsProvider sp;
+				FullscreenMenuMapSelect emsm(&sp, nullptr, true);
 				if (emsm.run() <= 0)
 					break;
 
-				filename = emsm.get_map();
+				filename = emsm.get_map()->filename;
 			}
 			EditorInteractive::run_editor(filename.c_str(), "");
 			return;
@@ -1417,7 +1438,9 @@ bool WLApplication::load_game()
 	Widelands::Game game;
 	std::string filename;
 
-	FullscreenMenuLoadGame ssg(game);
+	SinglePlayerGameSettingsProvider sp;
+	FullscreenMenuLoadGame ssg(game, &sp, nullptr);
+
 	if (ssg.run() > 0)
 		filename = ssg.filename();
 	else
@@ -1484,7 +1507,8 @@ void WLApplication::replay()
 {
 	Widelands::Game game;
 	if (m_filename.empty()) {
-		FullscreenMenuLoadReplay rm(game);
+		SinglePlayerGameSettingsProvider sp;
+		FullscreenMenuLoadGame rm(game, &sp, nullptr, true);
 		if (rm.run() <= 0)
 			return;
 

@@ -28,7 +28,7 @@
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
-
+#include "ui_fsmenu/suggested_teams_box.h"
 
 struct ChatProvider;
 struct GameChatPanel;
@@ -77,6 +77,12 @@ private:
 	uint32_t    m_buth;
 	uint32_t    m_fs;
 	std::string m_fn;
+	// TODO(GunChleoc): We still need to use these consistently. Just getting them in for now
+	// so we can have the SuggestedTeamsBox
+	int32_t const m_padding;               // Common padding between panels
+	int32_t const m_indent;                // Indent for elements below labels
+	int32_t const m_label_height;
+	int32_t const m_right_column_x;
 
 	UI::Button       m_change_map_or_save, m_ok, m_back, m_wincondition;
 	UI::Button       m_help_button;
@@ -89,6 +95,8 @@ private:
 	MultiPlayerSetupGroup   * m_mpsg;
 	std::string               m_filename_proof; // local variable to check state
 	int16_t                   m_nr_players;
+
+	UI::SuggestedTeamsBox*    m_suggested_teams_box;
 };
 
 

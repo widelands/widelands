@@ -180,7 +180,7 @@ void MapObjectDebugWindow::think()
 		}
 		UI::Window::think();
 	} else {
-		set_title((boost::format("DEAD: %u") % m_serial).str().c_str());
+		set_title((boost::format("DEAD: %u") % m_serial).str());
 	}
 
 }
@@ -375,7 +375,7 @@ void FieldDebugWindow::think()
 	{
 		m_ui_immovable.set_title((boost::format("%s (%u)")
 										  % imm->descr().name().c_str()
-										  % imm->serial()).str().c_str());
+										  % imm->serial()).str());
 		m_ui_immovable.set_enabled(true);
 	} else {
 		m_ui_immovable.set_title("no immovable");
@@ -420,7 +420,7 @@ void FieldDebugWindow::think()
 		m_ui_bobs.add(
 			(boost::format("%s (%u)")
 				% temp_bob->descr().name()
-				% temp_bob->serial()).str().c_str(),
+				% temp_bob->serial()).str(),
 			temp_bob->serial());
 	}
 }

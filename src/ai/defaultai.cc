@@ -1769,7 +1769,7 @@ bool DefaultAI::improve_roads(int32_t gametime) {
 	}
 
 	// now we rotate economies and flags to get one flag to go on with
-	if (economies.size() == 0) {
+	if (economies.empty()) {
 		return check_economies();
 	}
 
@@ -2203,7 +2203,6 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	if (enhancement != INVALID_INDEX && (site.bo->cnt_built_ - site.bo->unoccupied_) > 1) {
 
 		BuildingIndex enbld = INVALID_INDEX;  // to get rid of this
-		BuildingObserver* bestbld = nullptr;
 
 		// Only enhance buildings that are allowed (scenario mode)
 		// do not do decisions to fast
@@ -2211,6 +2210,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 
 			const BuildingDescr& bld = *tribe_->get_building_descr(enhancement);
 			BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
+			BuildingObserver* bestbld = nullptr;
 
 			if (gametime - en_bo.construction_decision_time_ >= kBuildingMinInterval &&
 			    (en_bo.cnt_under_construction_ + en_bo.unoccupied_) == 0) {
@@ -2405,7 +2405,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	// remaining buildings without inputs and not supporting ones (fishers only left probably and
 	// huters)
 
-	if (site.bo->inputs_.size() == 0 && site.bo->production_hint_ < 0 &&
+	if (site.bo->inputs_.empty() && site.bo->production_hint_ < 0 &&
 	    site.site->can_start_working() && !site.bo->space_consumer_ &&
 	    site.site->get_statistics_percent() < 10 &&
 	    ((game().get_gametime() - site.built_time_) > 10 * 60 * 1000)) {
@@ -3116,9 +3116,8 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 	const uint16_t attempts = militarysites.size() / 6 + 1;
 	Map& map = game().map();
 
-	uint16_t position = 0;
 	for (uint32_t i = 0; i < attempts && !any_attacked; ++i) {
-		position = (game().get_gametime() + (3 * i)) % militarysites.size();
+		const uint16_t position = (game().get_gametime() + (3 * i)) % militarysites.size();
 
 		// picking random military sites
 		// using gametime as a random value, but it is constant so each next is on position +3
@@ -3276,5 +3275,6 @@ void DefaultAI::print_land_stats() {
 		count_m += 1;
 	}
 
-	log(" Average: Landsize: %5d, military strenght: %3d\n", sum_l / count_l, sum_m / count_m);
+	assert(count_l > 0 && count_m > 0);
+	log(" Average: Landsize: %5d, military strength: %3d\n", sum_l / count_l, sum_m / count_m);
 }

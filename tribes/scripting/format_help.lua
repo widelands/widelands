@@ -74,7 +74,7 @@ function dependencies_basic(images, text)
 		text = ""
 	end
 
-	string = "image=" .. images[1]
+	local string = "image=" .. images[1]
 	for k,v in ipairs({table.unpack(images,2)}) do
 		string = string .. ";pics/arrow-right.png;" .. v
 	end
@@ -97,7 +97,7 @@ function dependencies(items, text)
 	if not text then
 		text = ""
 	end
-	string = "image=" .. items[1].icon_name
+	local string = "image=" .. items[1].icon_name
 	for k,v in ipairs({table.unpack(items,2)}) do
 		string = string .. ";pics/arrow-right.png;" ..  v.icon_name
 	end

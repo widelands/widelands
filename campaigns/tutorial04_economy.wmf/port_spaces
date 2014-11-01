@@ -1,0 +1,7 @@
+# Automatically created by Widelands bzr7194[trunk] (Release)
+
+[global]
+packet_version="1"
+number_of_port_spaces="0"
+
+[port_spaces]

@@ -6,21 +6,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-10-04 15:33+0000\n"
+"POT-Creation-Date: 2014-10-28 08:26+0000\n"
 "PO-Revision-Date: 2014-04-16 03:37+0000\n"
 "Last-Translator: SirVer <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-05 05:39+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-10-29 05:52+0000\n"
+"X-Generator: Launchpad (build 17203)\n"
 "Language: hu\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
-#: ../../campaigns/cconfig:98
-msgid "01 – From Nemesis to Genesis"
-msgstr "01 – Pusztulásból teremtésbe"
+#: ../../campaigns/cconfig:101
+msgid "From Nemesis to Genesis"
+msgstr ""
 
 #: ../../campaigns/atl01.wmf/elemental:11
 msgid ""
@@ -31,14 +31,18 @@ msgstr ""
 "közelében, új otthon építésén fáradoznak."
 
 #: ../../campaigns/cconfig:27
-msgid "Barbarians – The Second Empire"
-msgstr "Barbárok - A második birodalom"
+msgid "The Second Empire"
+msgstr ""
 
-#: ../../campaigns/cconfig:30
+#: ../../campaigns/cconfig:29
+msgid "Barbarians"
+msgstr ""
+
+#: ../../campaigns/cconfig:31
 msgid "Easy. Introduces the Barbarians"
 msgstr "Könnyű. Bemutatja a barbárokat"
 
-#: ../../campaigns/cconfig:31
+#: ../../campaigns/cconfig:32
 msgid ""
 "When Chat’Karuth died, he was an old man, father to three strong and "
 "ambitious sons, and warlord to an army that could match any enemy willing to "
@@ -66,15 +70,19 @@ msgstr ""
 "megvédjék Al'thunran határát, a fiatal hadúr igyekezett maga mellé állítani "
 "nagyravágyó testvéreit, hogy a törzseket újra egy zászló alatt egyesíthesse."
 
-#: ../../campaigns/cconfig:34
-msgid "Empire – The Months of Exile"
-msgstr "Birodalom – Hónapok számkivetésben"
+#: ../../campaigns/cconfig:35
+msgid "The Months of Exile"
+msgstr ""
 
 #: ../../campaigns/cconfig:37
+msgid "Empire"
+msgstr ""
+
+#: ../../campaigns/cconfig:39
 msgid "Easy. Introduces the Empire"
 msgstr "Könnyű. A birodalom bemutatása"
 
-#: ../../campaigns/cconfig:38
+#: ../../campaigns/cconfig:40
 msgid ""
 "Six months ago, Lutius – a young general of the Empire – was sent with 150 "
 "soldiers to the frontier beyond the northern forests where Barbarian tribes "
@@ -98,15 +106,19 @@ msgstr ""
 "mire az teljesen szétzilálódott. Csak Lutius és egy maroknyi katonája "
 "menekült meg."
 
-#: ../../campaigns/cconfig:41
-msgid "Atlanteans – The Run for the Fire"
-msgstr "Atlantisziak – Hajsza a tűz után"
+#: ../../campaigns/cconfig:43
+msgid "The Run for the Fire"
+msgstr ""
 
-#: ../../campaigns/cconfig:44
+#: ../../campaigns/cconfig:45
+msgid "Atlanteans"
+msgstr ""
+
+#: ../../campaigns/cconfig:47
 msgid "Challenging. Introduces the Atlanteans"
 msgstr "Kihívás. Az atlantisziak bemutatása"
 
-#: ../../campaigns/cconfig:45
+#: ../../campaigns/cconfig:48
 msgid ""
 "When their God lost faith in the Atlanteans and drowned their island, one "
 "woman’s struggle for justice and a second chance for her people would become "
@@ -120,38 +132,42 @@ msgstr ""
 "új részére, új jövőbe vezette, kora leghatalmasabb embere lett – de ezért "
 "nagy árat fizetett: emberségét és lelkét."
 
-#: ../../campaigns/cconfig:64
+#: ../../campaigns/cconfig:67
 #: ../../campaigns/t01.wmf/elemental:7
-msgid "01 – Eyes in the Dark"
-msgstr "01 - Szempárok a sötétben"
+msgid "Eyes in the Dark"
+msgstr ""
 
-#: ../../campaigns/cconfig:69
+#: ../../campaigns/cconfig:72
 #: ../../campaigns/t02.wmf/elemental:7
-msgid "02 – A Place to Call Home"
-msgstr "02 - Egy hely, amit otthonnak hívunk"
+msgid "A Place to Call Home"
+msgstr ""
 
-#: ../../campaigns/cconfig:74
+#: ../../campaigns/cconfig:77
 #: ../../campaigns/t03.wmf/elemental:7
-msgid "03 – This Land is Our Land"
-msgstr "03 - Ez a föld a miénk"
+msgid "This Land is Our Land"
+msgstr ""
 
-#: ../../campaigns/cconfig:81
+#: ../../campaigns/cconfig:84
 #: ../../campaigns/emp01.wmf/elemental:7
-msgid "01 – The Strands of Malac’ Mor"
-msgstr "01 – Malac' Mor partjai"
+msgid "The Strands of Malac’ Mor"
+msgstr ""
 
-#: ../../campaigns/cconfig:86
+#: ../../campaigns/cconfig:89
 #: ../../campaigns/emp02.wmf/elemental:9
-msgid "02 – An Outpost for Exile"
-msgstr "02 – A számkivetés előőrse"
+msgid "An Outpost for Exile"
+msgstr ""
 
-#: ../../campaigns/cconfig:91
-#: ../../campaigns/cconfig:103
+#: ../../campaigns/cconfig:94
+#: ../../campaigns/cconfig:106
 #: ../../campaigns/dummy.wmf/elemental:7
 msgid "Not yet implemented"
 msgstr "Még nem készült el"
 
 #: ../../campaigns/dummy.wmf/elemental:9
+msgid "Nobody"
+msgstr ""
+
+#: ../../campaigns/dummy.wmf/elemental:10
 msgid "Sorry, this map is not yet implemented."
 msgstr "Még nem készült el."
 
@@ -224,10 +240,6 @@ msgstr "Atoll"
 msgid "Who will be the real king of the big atoll?"
 msgstr "Ki lesz a nagy atoll igazi királya?"
 
-#: ../../maps/Atoll.wmf/elemental:12
-msgid "Suggested Teams: (blue, yellow) vs. (red, green)"
-msgstr "Javasolt csapatok: (kék, sárga) kontra (piros, zöld)."
-
 #: ../../maps/Calvisson.wmf/elemental:9
 msgid "Calvisson"
 msgstr "Calvisson"
@@ -241,14 +253,6 @@ msgstr ""
 "Öröm ezen a gönyörű hasadékvidéken letelepedni. De csak hosszú és kanyargó "
 "utakon lehet körüljárni e nagy területet, így könnyen idegen klánok földjére "
 "tévedhet az ember."
-
-#: ../../maps/Calvisson.wmf/elemental:12
-msgid ""
-"Suggested Teams: blue vs. red | yellow vs. green | (blue, yellow) vs. (red, "
-"green) | (blue, green) vs. (red, yellow)"
-msgstr ""
-"Javasolt csapatok: kék kontra piros, sárga kontra zöld, (kék, sárga) kontra "
-"(piros, zöld), (kék, zöld) kontra (piros, sárga)."
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -301,11 +305,6 @@ msgstr "Átkelés a horizonton"
 msgid "Man your ship and sail to the horizon."
 msgstr "Legénység a fedélzetre, és irány a horizont!"
 
-#: ../../maps/Crossing the horizon.wmf/elemental:12
-#: ../../maps/Rendez-Vous.wmf/elemental:10
-msgid "Suggested Teams: all ok"
-msgstr "Javasolt csapatok: mindenhogy megfelelő."
-
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
 msgstr "Sivatagi bajnokság"
@@ -319,12 +318,6 @@ msgstr ""
 "Négy törzs küzd a legközelebbi szomszédja oldalán, hogy az elsők legyenek, "
 "akik elérik az arany hegyét, ami hihetetlen gazdagságot ígér. De vajon a két "
 "megmaradt képes bölcsen megosztani a forrásokat?"
-
-#: ../../maps/Desert Tournament.wmf/elemental:10
-#: ../../maps/Four Castles.wmf/elemental:10
-#: ../../maps/Swamp Monks.wmf/elemental:10
-msgid "Suggested Teams: (blue, red) vs. (yellow, green)"
-msgstr "Javasolt csapatok: (kék, piros) kontra (sárga, zöld)."
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
@@ -351,14 +344,6 @@ msgid ""
 msgstr ""
 "E smaragdzöld erdők lélegzetelállító bája számos törzset csábított arra, "
 "hogy megpróbálják magukévá tenni a vidéket."
-
-#: ../../maps/Elven Forests.wmf/elemental:10
-msgid ""
-"Suggested Teams: (blue, red) vs. (yellow, green) | (blue, yellow) vs. (red, "
-"green)"
-msgstr ""
-"Javasolt csapatok: (kék, piros) kontra (sárga, zöld), vagy (kék, sárga) "
-"kontra (piros, zöld)."
 
 #: ../../maps/Fellowships.wmf/elemental:9
 msgid "Fellowships"
@@ -438,14 +423,6 @@ msgstr ""
 "kaparintja meg magának kincseiket? Megjegyzések: (1) Vizet a folyó mellett "
 "találni. (2) A hóemberek további vízforrásokat jelölnek. (3) Minden hegy "
 "csak egy ásványt rejt."
-
-#: ../../maps/Four Mountains.wmf/elemental:10
-msgid ""
-"Suggested Teams: (blue, red) vs. (yellow, green) | (blue, green) vs. (red, "
-"yellow)"
-msgstr ""
-"Javasolt csapatok: (kék, piros) kontra (sárga, zöld), vagy (kék, zöld) "
-"kontra (piros, sárga)."
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -580,16 +557,6 @@ msgstr ""
 "„Az merre van?” – „Ezer mérföldre innen.” (Porgy és Bess) Hosszú, hosszú "
 "utat kell megtenned, hogy meghódítsd az összes szigetet. Sok szerencsét!"
 
-#: ../../maps/Long, long way.wmf/elemental:12
-msgid ""
-"Suggested Teams: blue vs. red | yellow vs. green | (blue, yellow) vs. (red, "
-"green) | (blue, yellow, black) vs. (red, green, orange) | (blue, yellow, "
-"black, purple) vs. (red, green, orange, white)"
-msgstr ""
-"Javasolt csapatok: kék kontra piros, sárga kontra zöld, (kék, sárga) kontra "
-"(piros, zöld), (kék, sárga, fekete) kontra (piros, zöld, narancs), (kék, "
-"sárga, fekete, lila) kontra (piros, zöld, narancs, fehér)."
-
 #: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
 msgid "Island Hopping"
 msgstr "Szigetugrás"
@@ -604,17 +571,16 @@ msgstr ""
 "melynek során két vagy több csoport igyekszik eljutni a középső szigetre, "
 "minél gyorsabban, hogy elsőként építhessen egy várat a középső hegy tetejére."
 
+#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
+msgid "Smugglers"
+msgstr ""
+
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
 msgid ""
 "Your well established smuggling routes suddenly got busy: Two other tribes "
 "have appeared and now a rivalry among smugglers has started: Which team will "
-"be the first to smuggle a certain number of wares? Teams are: Blue + Red vs. "
-"Yellow + Green."
+"be the first to smuggle a certain number of wares?"
 msgstr ""
-"Jólszervezett csempészútvonalaid hirtelen mozgalmasabbá váltak: két másik "
-"törzs jelent meg, így versengés indult a csempészek között: melyik csapat "
-"csempészik át hamarabb egy bizonyos mennyiségű árut? Csapatok: (kék, piros) "
-"kontra (sárga, zöld)."
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"
@@ -642,10 +608,6 @@ msgstr ""
 "Egy hatalmas hegyekkel zsúfolt szigeten állsz, ami csodás és gazdag kincset "
 "rejt a közepén - a zöld fennsíkot, amit nehéz meghódítani, de könnyű "
 "elveszíteni. Ha meg akarod szerezni, figyelj oda a többi klánra."
-
-#: ../../maps/Plateau.wmf/elemental:10
-msgid "Suggested Teams: blue vs. yellow"
-msgstr "Javasolt csapatok: kék kontra sárga."
 
 #: ../../maps/Rendez-Vous.wmf/elemental:7
 msgid "Rendez-Vous"
@@ -775,18 +737,6 @@ msgid ""
 msgstr ""
 "A folyó mindig biztosít élelmet és érintkezést. Ezúttal nyolc birodalom "
 "harcol a vidék uralmáért."
-
-#: ../../maps/The Nile.wmf/elemental:12
-msgid ""
-"Suggested Teams: blue vs. red | yellow vs. green | (blue, yellow) vs. (red, "
-"green) | (green, orange, white) vs. (yellow, black, purple) | (blue, orange, "
-"green) vs. (red, yellow, black) | (blue, green, orange, white) vs. (red, "
-"yellow, black, purple)"
-msgstr ""
-"Javasolt csapatok: kék kontra piros, sárga kontra zöld, (kék, sárga) kontra "
-"(piros, zöld), (zöld, narancs, fehér) kontra (sárga, fekete, lila), (kék, "
-"narancs, zöld) kontra (piros, sárga, fekete), (kék, zöld, narancs, fehér) "
-"kontra (piros, sárga, fekete, lila)."
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:7
 msgid "The Oasis Triangle"
