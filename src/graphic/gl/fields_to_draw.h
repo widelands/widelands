@@ -62,7 +62,7 @@ public:
 	}
 
 	// The number of fields to draw.
-	inline size_t size() const {
+	inline std::size_t size() const {
 		return fields_.size();
 	}
 
