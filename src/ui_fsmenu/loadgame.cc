@@ -98,8 +98,10 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 
 	m_ta_errormessage
 		(this,
-		 m_right_column_x, m_tabley,
-		 get_right_column_w(m_right_column_x), m_delete.get_y() - m_tabley - 4 * m_padding),
+		 m_right_column_x,
+		 get_y_from_preceding(m_ta_mapname) + 2 * m_padding,
+		 get_right_column_w(m_right_column_x),
+		 m_delete.get_y() - get_y_from_preceding(m_ta_mapname) - 6 * m_padding),
 
 	m_minimap_y(get_y_from_preceding(m_ta_win_condition) + 3 * m_padding),
 	m_minimap_w(get_right_column_w(m_right_column_x)),
@@ -356,8 +358,8 @@ void FullscreenMenuLoadGame::entry_selected()
 				}
 			}
 		} else {
-			m_label_mapname.set_text("");
-			m_ta_mapname.set_text("");
+			m_label_mapname.set_text(_("Filename:"));
+			m_ta_mapname.set_text(gamedata.mapname);
 			m_label_gametime.set_text("");
 			m_ta_gametime.set_text("");
 			m_label_players.set_text("");
@@ -555,18 +557,20 @@ void FullscreenMenuLoadGame::fill_table() {
 							 /** TRANSLATORS: This text is on a separate line with an error message below */
 							 % _("Error message:")
 							 % e.what()).str();
-					m_games_data.push_back(*gamedata);
 
 					const std::string fs_filename = FileSystem::filename_without_ext(gamedata->filename.c_str());
+					gamedata->mapname = fs_filename;
+					m_games_data.push_back(*gamedata);
 
 					UI::Table<uintptr_t const>::EntryRecord & te =
 						m_table.add(m_games_data.size() - 1);
 					te.set_string(0, "");
 					if (m_is_replay || m_settings->settings().multiplayer) {
 						te.set_string(1, "");
-						te.set_string(2, (boost::format(_("Incompatible file: %s")) % fs_filename).str());
+						/** TRANSLATORS: Prefix for incompatible files in load game screens */
+						te.set_string(2, (boost::format(_("Incompatible: %s")) % fs_filename).str());
 					} else {
-						te.set_string(1, (boost::format(_("Incompatible file: %s")) % fs_filename).str());
+						te.set_string(1, (boost::format(_("Incompatible: %s")) % fs_filename).str());
 					}
 				}
 			}
