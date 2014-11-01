@@ -2203,7 +2203,6 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	if (enhancement != INVALID_INDEX && (site.bo->cnt_built_ - site.bo->unoccupied_) > 1) {
 
 		BuildingIndex enbld = INVALID_INDEX;  // to get rid of this
-		BuildingObserver* bestbld = nullptr;
 
 		// Only enhance buildings that are allowed (scenario mode)
 		// do not do decisions to fast
@@ -2211,6 +2210,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 
 			const BuildingDescr& bld = *tribe_->get_building_descr(enhancement);
 			BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
+			BuildingObserver* bestbld = nullptr;
 
 			if (gametime - en_bo.construction_decision_time_ >= kBuildingMinInterval &&
 			    (en_bo.cnt_under_construction_ + en_bo.unoccupied_) == 0) {
@@ -3116,9 +3116,8 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 	const uint16_t attempts = militarysites.size() / 6 + 1;
 	Map& map = game().map();
 
-	uint16_t position = 0;
 	for (uint32_t i = 0; i < attempts && !any_attacked; ++i) {
-		position = (game().get_gametime() + (3 * i)) % militarysites.size();
+		const uint16_t position = (game().get_gametime() + (3 * i)) % militarysites.size();
 
 		// picking random military sites
 		// using gametime as a random value, but it is constant so each next is on position +3
