@@ -29,7 +29,6 @@ namespace Widelands {
 // which direction they point for a field. Still, the first few are needed for
 // the drawing code to keep around what kind of road it should draw. I guess
 // that is the reason why it was combined in the first place. Still it is ugly.
-// NOCOM(#sirver): Maybe this can be now simplified.
 enum RoadType {
 	Road_None = 0,
 	Road_Normal = 1,

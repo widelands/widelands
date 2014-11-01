@@ -21,21 +21,9 @@
 #define WL_GRAPHIC_GL_GAME_RENDERER_H
 
 #include <memory>
-#include <vector>
 
-#include "base/rect.h"
 #include "graphic/game_renderer.h"
 #include "graphic/gl/utils.h"
-#include "logic/widelands.h"
-
-namespace Widelands {
-struct Coords;
-struct FCoords;
-class World;
-}
-
-class GLSurface;
-class GLSurfaceTexture;
 
 class TerrainProgram;
 class DitherProgram;
@@ -54,55 +42,7 @@ private:
 	static std::unique_ptr<DitherProgram> dither_program_;
 	static std::unique_ptr<RoadProgram> road_program_;
 
-	void draw_terrain_triangles();
-
-	struct BaseVertex {
-		float x;
-		float y;
-		float tcx;
-		float tcy;
-		uint8_t color[4];
-		uint32_t pad[3];
-	};
-
-	struct DitherVertex {
-		float x;
-		float y;
-		float tcx;
-		float tcy;
-		float edgex;
-		float edgey;
-		uint8_t color[4];
-		uint32_t pad[1];
-	};
-
 	void draw() override;
-	void prepare_roads();
-	void draw_roads();
-
-	uint8_t field_brightness(const Widelands::FCoords & coords) const;
-	uint8_t field_roads(const Widelands::FCoords & coords) const;
-	template<typename vertex>
-	void compute_basevertex(const Widelands::Coords & coords, vertex & vtx) const;
-
-	/**
-	 * The following variables are only valid during rendering.
-	 */
-	/*@{*/
-	GLSurface * m_surface;
-
-	/// Bounding rectangle inside the destination surface
-	Rect m_rect;
-
-	/// Translation from map pixel coordinates to surface pixel coordinates
-	/// (relative to the top-left corner of the surface, @b not relative
-	/// to the bounding rectangle)
-	Point m_surface_offset;
-
-	uint32_t m_road_freq[2];
-	std::unique_ptr<BaseVertex[]> m_road_vertices;
-	uint32_t m_road_vertices_size;
-	/*@}*/
 };
 
 #endif  // end of include guard: WL_GRAPHIC_GL_GAME_RENDERER_H

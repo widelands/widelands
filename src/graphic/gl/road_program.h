@@ -49,8 +49,7 @@ private:
 		// them together with 'texture_mix' which is either 1 or 0.
 		float texture_mix;
 	};
-	// NOCOM(#sirver): add this in.
-	// static_assert(sizeof(PerVertexData) == 20, "Wrong padding.");
+	static_assert(sizeof(PerVertexData) == 24, "Wrong padding.");
 
 	// Adds a road from 'start' to 'end' to be rendered in this frame using the
 	// correct texture for 'road_type'.
