@@ -39,6 +39,7 @@ class GLSurfaceTexture;
 
 class TerrainProgram;
 class DitherProgram;
+class RoadProgram;
 
 /**
  * OpenGL implementation of @ref GameRenderer.
@@ -51,6 +52,7 @@ public:
 private:
 	static std::unique_ptr<TerrainProgram> terrain_program_;
 	static std::unique_ptr<DitherProgram> dither_program_;
+	static std::unique_ptr<RoadProgram> road_program_;
 
 	void draw_terrain_triangles();
 

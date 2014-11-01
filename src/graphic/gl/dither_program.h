@@ -78,7 +78,8 @@ private:
 	GLint u_dither_texture_;
 
 	// Objects below are here to avoid memory allocations on each frame, they
-	// could theoretically also always be recreated.
+	// could theoretically also always be recreated. Index as follows:
+	// vertices_[terrain_index][vertex_index]
 	std::vector<std::vector<PerVertexData>> vertices_;
 };
 

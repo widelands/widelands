@@ -32,6 +32,8 @@ using namespace Widelands;
 // Full specification:
 // http://www.opengl.org/registry/doc/GLSLangSpec.Full.1.20.8.pdf
 // We target OpenGL 2.1 for the desktop here.
+// TODO(sirver): In the end we need to replace gl_ProjectionMatrix. It is not
+// supported in ES and more modern Open GL version.
 const char kTerrainVertexShader[] = R"(
 #version 120
 

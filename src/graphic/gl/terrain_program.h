@@ -68,7 +68,7 @@ private:
 	// They could theoretically also be recreated.
 
 	// All vertices that are going to get rendered this frame.
-	std::vector<TerrainProgram::PerVertexData> vertices_;
+	std::vector<PerVertexData> vertices_;
 
 	// A map from terrain index in world.terrains() to indices in 'vertices_'
 	// that have this terrain type.

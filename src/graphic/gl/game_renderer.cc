@@ -23,6 +23,7 @@
 
 #include "graphic/gl/dither_program.h"
 #include "graphic/gl/fields_to_draw.h"
+#include "graphic/gl/road_program.h"
 #include "graphic/gl/surface.h"
 #include "graphic/gl/terrain_program.h"
 #include "graphic/graphic.h"
@@ -101,6 +102,7 @@ float field_brightness(const FCoords& fcoords,
 
 std::unique_ptr<TerrainProgram> GlGameRenderer::terrain_program_;
 std::unique_ptr<DitherProgram> GlGameRenderer::dither_program_;
+std::unique_ptr<RoadProgram> GlGameRenderer::road_program_;
 
 GlGameRenderer::GlGameRenderer() : m_road_vertices_size(0) {
 }
@@ -136,6 +138,7 @@ void GlGameRenderer::draw() {
 	if (terrain_program_ == nullptr) {
 		terrain_program_.reset(new TerrainProgram());
 		dither_program_.reset(new DitherProgram());
+		road_program_.reset(new RoadProgram());
 	}
 
 	m_surface = dynamic_cast<GLSurface*>(m_dst->get_surface());
@@ -177,16 +180,22 @@ void GlGameRenderer::draw() {
 			f.ter_r = fcoords.field->terrain_r();
 
 			f.brightness = ::field_brightness(fcoords, gametime, map, m_player);
+
+			// NOCOM(#sirver): inline field_roads here or make stand alone method.
+			f.roads = field_roads(fcoords);
 		}
 	}
 
 	const World& world = m_egbase->world();
 	terrain_program_->draw(world.terrains(), fields_to_draw);
 	dither_program_->draw(world.terrains(), fields_to_draw);
+	road_program_->draw(fields_to_draw);
 
+	// NOCOM(#sirver): kill
 	// prepare_roads();
 	// draw_roads();
-	// draw_objects();
+
+	draw_objects();
 
 	glDisable(GL_SCISSOR_TEST);
 }

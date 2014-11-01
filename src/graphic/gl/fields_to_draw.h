@@ -34,6 +34,7 @@ public:
 		float texture_x, texture_y;  // Texture coordinates.
 		float brightness;            // brightness of the pixel
 		uint8_t ter_r, ter_d;        // Texture index of the right and down triangle.
+		uint8_t roads;  // Bitmask of roads to render, see logic/roadtype.h.
 	};
 
 	FieldsToDraw(int minfx, int maxfx, int minfy, int maxfy)
