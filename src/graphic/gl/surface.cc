@@ -154,10 +154,10 @@ void GLSurface::blit
 	{
 		float x1 = srcrc.x;
 		float y1 = srcrc.y;
-		pixel_to_gl_texture(texture->get_tex_w(), texture->get_tex_h(), &x1, &y1);
+		pixel_to_gl_texture(texture->width(), texture->height(), &x1, &y1);
 		float x2 = srcrc.x + srcrc.w;
 		float y2 = srcrc.y + srcrc.h;
-		pixel_to_gl_texture(texture->get_tex_w(), texture->get_tex_h(), &x2, &y2);
+		pixel_to_gl_texture(texture->width(), texture->height(), &x2, &y2);
 		gl_src_rect.x = x1;
 		gl_src_rect.y = y1;
 		gl_src_rect.w = x2 - x1;

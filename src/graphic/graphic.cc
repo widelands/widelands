@@ -194,44 +194,17 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 		//  We now really have a working opengl screen...
 		g_opengl = true;
 
+		log("Graphics: OpenGL: Version \"%s\"\n",
+		    reinterpret_cast<const char*>(glGetString(GL_VERSION)));
+
 		GLboolean glBool;
 		glGetBooleanv(GL_DOUBLEBUFFER, &glBool);
-		log
-			("Graphics: OpenGL: Double buffering %s\n",
-			 (glBool == GL_TRUE)?"enabled":"disabled");
+		log("Graphics: OpenGL: Double buffering %s\n", (glBool == GL_TRUE) ? "enabled" : "disabled");
 
 		GLint glInt;
 		glGetIntegerv(GL_MAX_TEXTURE_SIZE, &glInt);
 		log("Graphics: OpenGL: Max texture size: %u\n", glInt);
-		m_caps.gl.tex_max_size = glInt;
 
-		glGetIntegerv(GL_AUX_BUFFERS, &glInt);
-		log("Graphics: OpenGL: Number of aux buffers: %u\n", glInt);
-		m_caps.gl.aux_buffers = glInt;
-
-		glGetIntegerv(GL_STENCIL_BITS, &glInt);
-		log("Graphics: OpenGL: Number of stencil buffer bits: %u\n", glInt);
-		m_caps.gl.stencil_buffer_bits = glInt;
-
-		const char * str = reinterpret_cast<const char *>(glGetString(GL_VERSION));
-		m_caps.gl.major_version = atoi(str);
-		m_caps.gl.minor_version = strstr(str, ".")?atoi(strstr(str, ".") + 1):0;
-		log
-			("Graphics: OpenGL: Version %d.%d \"%s\"\n",
-			 m_caps.gl.major_version, m_caps.gl.minor_version, str);
-
-		// extensions will be valid if we ever succeeded in runnning glewInit.
-		m_caps.gl.tex_power_of_two =
-			(m_caps.gl.major_version < 2) &&
-			(strstr(extensions, "GL_ARB_texture_non_power_of_two") == nullptr);
-		log("Graphics: OpenGL: Textures ");
-		log
-			(m_caps.gl.tex_power_of_two?"must have a size power of two\n":
-			 "may have any size\n");
-
-DIAG_OFF("-Wold-style-cast")
-		m_caps.gl.blendequation = GLEW_VERSION_1_4 || GLEW_ARB_imaging;
-DIAG_ON ("-Wold-style-cast")
 	}
 
 	/* Information about the video capabilities. */

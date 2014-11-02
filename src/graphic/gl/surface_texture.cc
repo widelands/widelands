@@ -28,20 +28,6 @@
 
 GLuint GLSurfaceTexture::gl_framebuffer_id_;
 
-namespace  {
-
-// Return the smallest power of two greater than or equal to \p x.
-uint32_t next_power_of_two(uint32_t x)
-{
-	uint32_t pot = 1;
-	while (pot < x) {
-		pot *= 2;
-	}
-	return pot;
-}
-
-}  // namespace
-
 /**
  * Initial global resources needed for fast offscreen rendering.
  */
@@ -72,7 +58,7 @@ GLSurfaceTexture::GLSurfaceTexture(int w, int h)
 		return;
 	}
 	glTexImage2D
-		(GL_TEXTURE_2D, 0, GL_RGBA, m_tex_w, m_tex_h, 0, GL_RGBA,
+		(GL_TEXTURE_2D, 0, GL_RGBA, m_w, m_h, 0, GL_RGBA,
 		 GL_UNSIGNED_BYTE, nullptr);
 }
 
@@ -90,12 +76,12 @@ GLSurfaceTexture::GLSurfaceTexture(SDL_Surface * surface, bool intensity)
 
 	if
 		(surface->format->palette ||
-		 m_tex_w != static_cast<uint32_t>(surface->w) ||
-		 m_tex_h != static_cast<uint32_t>(surface->h) ||
+		 m_w != static_cast<uint32_t>(surface->w) ||
+		 m_h != static_cast<uint32_t>(surface->h) ||
 		 (bpp != 3 && bpp != 4))
 	{
 		SDL_Surface * converted = SDL_CreateRGBSurface
-			(SDL_SWSURFACE, m_tex_w, m_tex_h,
+			(SDL_SWSURFACE, m_w, m_h,
 			 32, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
 		assert(converted);
 		SDL_SetSurfaceAlphaMod(converted,  SDL_ALPHA_OPAQUE);
@@ -159,7 +145,7 @@ GLSurfaceTexture::GLSurfaceTexture(SDL_Surface * surface, bool intensity)
 	SDL_LockSurface(surface);
 
 	glTexImage2D
-		(GL_TEXTURE_2D, 0, intensity ? GL_INTENSITY : GL_RGBA, m_tex_w, m_tex_h, 0,
+		(GL_TEXTURE_2D, 0, intensity ? GL_INTENSITY : GL_RGBA, m_w, m_h, 0,
 		 pixels_format, GL_UNSIGNED_BYTE, surface->pixels);
 
 	SDL_UnlockSurface(surface);
@@ -186,15 +172,6 @@ void GLSurfaceTexture::init(uint16_t w, uint16_t h)
 		return;
 	}
 
-	// NOCOM(#sirver): revert
-	// if (g_gr->caps().gl.tex_power_of_two) {
-		m_tex_w = next_power_of_two(w);
-		m_tex_h = next_power_of_two(h);
-	// } else {
-		// m_tex_w = w;
-		// m_tex_h = h;
-	// }
-
 	glGenTextures(1, &m_texture);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 
@@ -215,7 +192,7 @@ void GLSurfaceTexture::lock(LockMode mode) {
 	}
 	assert(!m_pixels);
 
-	m_pixels.reset(new uint8_t[m_tex_w * m_tex_h * 4]);
+	m_pixels.reset(new uint8_t[m_w * m_h * 4]);
 
 	if (mode == Lock_Normal) {
 		glBindTexture(GL_TEXTURE_2D, m_texture);
@@ -232,7 +209,7 @@ void GLSurfaceTexture::unlock(UnlockMode mode) {
 	if (mode == Unlock_Update) {
 		glBindTexture(GL_TEXTURE_2D, m_texture);
 		glTexImage2D
-			(GL_TEXTURE_2D, 0, GL_RGBA, m_tex_w, m_tex_h, 0, GL_RGBA,
+			(GL_TEXTURE_2D, 0, GL_RGBA, m_w, m_h, 0, GL_RGBA,
 			 GL_UNSIGNED_BYTE,  m_pixels.get());
 	}
 
@@ -240,7 +217,7 @@ void GLSurfaceTexture::unlock(UnlockMode mode) {
 }
 
 uint16_t GLSurfaceTexture::get_pitch() const {
-	return 4 * m_tex_w;
+	return 4 * m_w;
 }
 
 void GLSurfaceTexture::draw_rect(const Rect& rectangle, const RGBColor& clr)
@@ -328,10 +305,10 @@ void GLSurfaceTexture::setup_gl() {
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity();
-	glOrtho(0, get_tex_w(), 0, get_tex_h(), -1, 1);
+	glOrtho(0, m_w, 0, m_h, -1, 1);
 
 	glPushAttrib(GL_VIEWPORT_BIT);
-	glViewport(0, 0, get_tex_w(), get_tex_h());
+	glViewport(0, 0, m_w, m_h);
 }
 
 void GLSurfaceTexture::reset_gl() {

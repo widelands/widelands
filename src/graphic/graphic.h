@@ -39,35 +39,6 @@ struct SDL_Surface;
 class StreamWrite;
 struct Texture;
 
-/// Stores the capabilities of opengl
-struct GLCaps
-{
-	/// The OpenGL major version
-	int major_version;
-	/// The OpenGL minor version
-	int minor_version;
-	/// The maximum texture size
-	int tex_max_size;
-	/// If true sizes of texture must be a power of two
-	bool tex_power_of_two;
-	/// How many bits the stencil buffer support
-	int stencil_buffer_bits;
-	/// How many Aux Buffers the opengl context support
-	int aux_buffers;
-	/// Whether the BlendEquation support is available
-	bool blendequation;
-};
-
-/**
- * A structure to store the capabilities of the current rendere. This is set
- * during init() and can be retrieved by g_gr->get_caps()
- */
-struct GraphicCaps
-{
-	/// The capabilities of the opengl hardware and drive
-	GLCaps gl;
-};
-
 /**
  * This class is a kind of Swiss Army knife for your graphics need. It
  * initializes the graphic system and provides access to resolutions. It has an
@@ -110,8 +81,6 @@ public:
 
 	Surface& get_road_texture(int32_t roadtex);
 
-	const GraphicCaps& caps() const {return m_caps;}
-
 	bool check_fallback_settings_in_effect();
 
 private:
@@ -135,8 +104,6 @@ protected:
 	std::unique_ptr<RenderTarget> m_rendertarget;
 	/// This marks the complete screen for updating.
 	bool m_update;
-	/// stores which features the current renderer has
-	GraphicCaps m_caps;
 
 	/// Volatile cache of Hardware dependant surfaces.
 	std::unique_ptr<SurfaceCache> surface_cache_;
