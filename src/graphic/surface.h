@@ -56,10 +56,10 @@ public:
 	virtual void blit(const Point&, const Surface*, const Rect& srcrc, Composite cm = CM_Normal) = 0;
 
 	/// Draws a filled rect to the surface.
-	virtual void fill_rect(const Rect&, RGBAColor) = 0;
+	virtual void fill_rect(const Rect&, const RGBAColor&) = 0;
 
 	/// Draws a rect (frame only) to the surface.
-	virtual void draw_rect(const Rect&, RGBColor) = 0;
+	virtual void draw_rect(const Rect&, const RGBColor&) = 0;
 
 	/// draw a line to the surface
 	virtual void draw_line

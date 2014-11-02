@@ -84,6 +84,8 @@ wl_library(graphic
     font_handler1.h
     game_renderer.cc
     game_renderer.h
+    gl/draw_rect_program.cc
+    gl/draw_rect_program.h
     gl/dither_program.cc
     gl/dither_program.h
     gl/fields_to_draw.h

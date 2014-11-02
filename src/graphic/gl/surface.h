@@ -40,8 +40,8 @@ public:
 	uint32_t get_pixel(uint16_t x, uint16_t y) override;
 
 	void blit(const Point&, const Surface*, const Rect& srcrc, Composite cm) override;
-	void fill_rect(const Rect&, RGBAColor) override;
-	void draw_rect(const Rect&, RGBColor) override;
+	void fill_rect(const Rect&, const RGBAColor&) override;
+	void draw_rect(const Rect&, const RGBColor&) override;
 	void brighten_rect(const Rect&, int32_t factor) override;
 
 	virtual void draw_line

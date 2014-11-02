@@ -131,7 +131,6 @@ void DitherProgram::add_vertex(const FieldsToDraw::Field& field,
 		break;
 	default:
 		throw wexception("Never here.");
-		break;
 	}
 }
 

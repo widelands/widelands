@@ -24,6 +24,7 @@
 #include <cstdlib>
 
 #include "base/macros.h"
+#include "graphic/gl/draw_rect_program.h"
 #include "graphic/gl/surface_texture.h"
 #include "graphic/graphic.h"
 
@@ -61,28 +62,17 @@ void GLSurface::set_pixel(uint16_t x, uint16_t y, uint32_t clr) {
 /**
  * Draws the outline of a rectangle
  */
-void GLSurface::draw_rect(const Rect& rc, const RGBColor clr)
+void GLSurface::draw_rect(const Rect& rc, const RGBColor& clr)
 {
 	assert(g_opengl);
-	glDisable(GL_BLEND);
-	glDisable(GL_TEXTURE_2D);
-	glLineWidth(1);
-
-	glBegin(GL_LINE_LOOP); {
-		glColor3ub(clr.r, clr.g, clr.b);
-		glVertex2f(rc.x + 0.5f,        rc.y + 0.5f);
-		glVertex2f(rc.x + rc.w - 0.5f, rc.y + 0.5f);
-		glVertex2f(rc.x + rc.w - 0.5f, rc.y + rc.h - 0.5f);
-		glVertex2f(rc.x + 0.5f,        rc.y + rc.h - 0.5f);
-	} glEnd();
-	glEnable(GL_TEXTURE_2D);
+	DrawRectProgram::instance().draw(width(), height(), rc, clr);
 }
 
 
 /**
  * Draws a filled rectangle
  */
-void GLSurface::fill_rect(const Rect& rc, const RGBAColor clr) {
+void GLSurface::fill_rect(const Rect& rc, const RGBAColor& clr) {
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
 	assert(g_opengl);

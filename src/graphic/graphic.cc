@@ -147,7 +147,6 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 	if (0 != (sdlsurface->flags & SDL_FULLSCREEN))
 		log("Graphics: FULLSCREEN ENABLED\n");
 
-	bool use_arb = true;
 	const char * extensions = nullptr;
 
 	if (0 != (sdlsurface->flags & SDL_OPENGL)) {
@@ -158,6 +157,8 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 		// See http://stackoverflow.com/questions/13558073/program-crash-on-glgenvertexarrays-call for
 		// the next line.
 		glewExperimental = GL_TRUE;
+
+		// NOCOM(#sirver): what do we use glew for? I do not think we need it anymore.
 		GLenum err = glewInit();
 		if (err != GLEW_OK) {
 			log("glewInit returns %i\nYour OpenGL installation must be __very__ broken.\n", err);
@@ -165,28 +166,6 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 		}
 
 		extensions = reinterpret_cast<const char *>(glGetString (GL_EXTENSIONS));
-
-		if (strstr(extensions, "GL_ARB_framebuffer_object") != nullptr) {
-			use_arb = true;
-		} else if (strstr(extensions, "GL_EXT_framebuffer_object") != nullptr) {
-			use_arb = false;
-		} else {
-			log
-			("Graphics: Neither GL_ARB_framebuffer_object or GL_EXT_framebuffer_object supported! "
-			"Switching off OpenGL!\n"
-			);
-			flags &= ~SDL_OPENGL;
-			m_fallback_settings_in_effect = true;
-
-			// One must never free the screen surface of SDL (using
-			// SDL_FreeSurface) as it is owned by SDL itself, therefore the next
-			// call does not leak memory.
-			sdlsurface = SDL_SetVideoMode
-				(FALLBACK_GRAPHICS_WIDTH, FALLBACK_GRAPHICS_HEIGHT, FALLBACK_GRAPHICS_DEPTH, flags);
-			m_fallback_settings_in_effect = true;
-			if (!sdlsurface)
-				throw wexception("Graphics: could not set video mode: %s", SDL_GetError());
-		}
 	}
 	Surface::display_format_is_now_defined();
 
@@ -306,7 +285,7 @@ DIAG_ON ("-Wold-style-cast")
 		SDL_GL_SwapBuffers();
 		glEnable(GL_TEXTURE_2D);
 
-		GLSurfaceTexture::initialize(use_arb);
+		GLSurfaceTexture::initialize();
 	}
 
 	if (g_opengl)

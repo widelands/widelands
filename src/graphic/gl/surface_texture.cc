@@ -27,18 +27,15 @@
 
 GLuint GLSurfaceTexture::gl_framebuffer_id_;
 
-static bool use_arb_;
-
 namespace  {
 
 // Return the smallest power of two greater than or equal to \p x.
 uint32_t next_power_of_two(uint32_t x)
 {
 	uint32_t pot = 1;
-
-	while (pot < x)
+	while (pot < x) {
 		pot *= 2;
-
+	}
 	return pot;
 }
 
@@ -47,27 +44,18 @@ uint32_t next_power_of_two(uint32_t x)
 /**
  * Initial global resources needed for fast offscreen rendering.
  */
-void GLSurfaceTexture::initialize(bool use_arb) {
-	use_arb_ = use_arb;
-
+// NOCOM(#sirver): do this the first time we come by here.
+void GLSurfaceTexture::initialize() {
 	// Generate the framebuffer for Offscreen rendering.
-	if (use_arb) {
-		glGenFramebuffers(1, &gl_framebuffer_id_);
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	} else {
-		glGenFramebuffersEXT(1, &gl_framebuffer_id_);
-		glBindFramebufferEXT(GL_FRAMEBUFFER, 0);
-	}
+	glGenFramebuffers(1, &gl_framebuffer_id_);
 }
 
 /**
  * Free global resources.
  */
+// NOCOM(#sirver): wrap in a static object to guarantee cleanup.
 void GLSurfaceTexture::cleanup() {
-	if (use_arb_)
-		glDeleteFramebuffers(1, &gl_framebuffer_id_);
-	else
-		glDeleteFramebuffersEXT(1, &gl_framebuffer_id_);
+	glDeleteFramebuffers(1, &gl_framebuffer_id_);
 }
 
 /**
@@ -246,40 +234,45 @@ uint16_t GLSurfaceTexture::get_pitch() const {
 	return 4 * m_tex_w;
 }
 
-void GLSurfaceTexture::draw_rect(const Rect& rc, const RGBColor clr)
+void GLSurfaceTexture::draw_rect(const Rect& rectangle, const RGBColor& clr)
 {
 	if (m_w <= 0 || m_h <= 0) {
 		return;
 	}
-	setup_gl();
-	GLSurface::draw_rect(rc, clr);
-	reset_gl();
+	// NOCOM(#sirver): refactor common code again later.
+
+	glBindFramebuffer(GL_FRAMEBUFFER, gl_framebuffer_id_);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
+
+	GLSurface::draw_rect(rectangle, clr);
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 
 /**
  * Draws a filled rectangle
  */
-void GLSurfaceTexture::fill_rect(const Rect& rc, const RGBAColor clr)
+void GLSurfaceTexture::fill_rect(const Rect& rectangle, const RGBAColor& clr)
 {
 	if (m_w <= 0 || m_h <= 0) {
 		return;
 	}
 	setup_gl();
-	GLSurface::fill_rect(rc, clr);
+	GLSurface::fill_rect(rectangle, clr);
 	reset_gl();
 }
 
 /**
  * Change the brightness of the given rectangle
  */
-void GLSurfaceTexture::brighten_rect(const Rect& rc, const int32_t factor)
+void GLSurfaceTexture::brighten_rect(const Rect& rectangle, const int32_t factor)
 {
 	if (m_w <= 0 || m_h <= 0) {
 		return;
 	}
 	setup_gl();
-	GLSurface::brighten_rect(rc, factor);
+	GLSurface::brighten_rect(rectangle, factor);
 	reset_gl();
 }
 
@@ -306,13 +299,8 @@ void GLSurfaceTexture::blit
 }
 
 void GLSurfaceTexture::setup_gl() {
-	if (use_arb_) {
-		glBindFramebuffer(GL_FRAMEBUFFER, gl_framebuffer_id_);
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
-	} else {
-		glBindFramebufferEXT(GL_FRAMEBUFFER, gl_framebuffer_id_);
-		glFramebufferTexture2DEXT(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
-	}
+	glBindFramebuffer(GL_FRAMEBUFFER, gl_framebuffer_id_);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
 
 	// Note: we do not want to reverse y for textures, we only want this for
 	// the screen.
@@ -326,10 +314,7 @@ void GLSurfaceTexture::setup_gl() {
 }
 
 void GLSurfaceTexture::reset_gl() {
-	if (use_arb_)
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	else
-		glBindFramebufferEXT(GL_FRAMEBUFFER, 0);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();

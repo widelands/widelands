@@ -150,7 +150,7 @@ void SDLSurface::unset_subwin() {
 Draws the outline of a rectangle
 ===============
 */
-void SDLSurface::draw_rect(const Rect& rc, const RGBColor clr) {
+void SDLSurface::draw_rect(const Rect& rc, const RGBColor& clr) {
 	assert(m_surface);
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
@@ -175,7 +175,7 @@ void SDLSurface::draw_rect(const Rect& rc, const RGBColor clr) {
 Draws a filled rectangle
 ===============
 */
-void SDLSurface::fill_rect(const Rect& rc, const RGBAColor clr) {
+void SDLSurface::fill_rect(const Rect& rc, const RGBAColor& clr) {
 	assert(m_surface);
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);

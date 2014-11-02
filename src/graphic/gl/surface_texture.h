@@ -27,7 +27,7 @@ class GLSurfaceTexture : public GLSurface {
 public:
 	// Call this once before using any instance of this class and cleanup once
 	// before the program exits.
-	static void initialize(bool use_arb);
+	static void initialize();
 	static void cleanup();
 
 	GLSurfaceTexture(SDL_Surface * surface, bool intensity = false);
@@ -49,8 +49,8 @@ public:
 	// especially for blit which is called very often and mostly on the screen,
 	// this costs two virtual function calls which makes a notable difference in
 	// profiles.
-	void fill_rect(const Rect&, RGBAColor) override;
-	void draw_rect(const Rect&, RGBColor) override;
+	void fill_rect(const Rect&, const RGBAColor&) override;
+	void draw_rect(const Rect&, const RGBColor&) override;
 	void brighten_rect(const Rect&, int32_t factor) override;
 	virtual void draw_line
 		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor&, uint8_t width) override;
