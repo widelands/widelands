@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_GRAPHIC_RENDER_GAMERENDERER_H
-#define WL_GRAPHIC_RENDER_GAMERENDERER_H
+#ifndef WL_GRAPHIC_GAME_RENDERER_H
+#define WL_GRAPHIC_GAME_RENDERER_H
 
 #include <boost/utility.hpp>
 
@@ -99,4 +99,4 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(GameRenderer);
 };
 
-#endif  // end of include guard: WL_GRAPHIC_RENDER_GAMERENDERER_H
+#endif  // end of include guard: WL_GRAPHIC_GAME_RENDERER_H

@@ -22,7 +22,7 @@
 
 #include <boost/signals2.hpp>
 
-#include "graphic/render/minimaprenderer.h"
+#include "graphic/minimap_renderer.h"
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
 

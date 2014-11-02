@@ -17,16 +17,16 @@
  *
  */
 
-#ifndef WL_GRAPHIC_RENDER_TERRAIN_SDL_H
-#define WL_GRAPHIC_RENDER_TERRAIN_SDL_H
+#ifndef WL_GRAPHIC_SDL_TERRAIN_H
+#define WL_GRAPHIC_SDL_TERRAIN_H
 
 #include <cassert>
 
 #include "base/log.h"
 #include "base/macros.h"
 #include "graphic/graphic.h"
-#include "graphic/render/sdl_surface.h"
-#include "graphic/render/vertex.h"
+#include "graphic/sdl/surface.h"
+#include "graphic/sdl/vertex.h"
 #include "graphic/texture.h"
 #include "logic/roadtype.h"
 #include "random/random.h"
@@ -665,4 +665,4 @@ template<typename T> static void draw_field_int
 	// TODO(unknown): similar textures may not need dithering
 }
 
-#endif  // end of include guard: WL_GRAPHIC_RENDER_TERRAIN_SDL_H
+#endif  // end of include guard: WL_GRAPHIC_SDL_TERRAIN_H

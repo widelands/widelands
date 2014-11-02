@@ -16,18 +16,33 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "graphic/render/gl_surface_texture.h"
+#include "graphic/gl/surface_texture.h"
 
 #include <cassert>
 
 #include "base/wexception.h"
-#include "gl_surface.h"  // for glew.h
+#include "graphic/gl/surface.h"
+#include "graphic/gl/utils.h"
 #include "graphic/graphic.h"
-#include "graphic/render/gl_utils.h"
 
 GLuint GLSurfaceTexture::gl_framebuffer_id_;
 
 static bool use_arb_;
+
+namespace  {
+
+// Return the smallest power of two greater than or equal to \p x.
+uint32_t next_power_of_two(uint32_t x)
+{
+	uint32_t pot = 1;
+
+	while (pot < x)
+		pot *= 2;
+
+	return pot;
+}
+
+}  // namespace
 
 /**
  * Initial global resources needed for fast offscreen rendering.
@@ -160,7 +175,6 @@ GLSurfaceTexture::GLSurfaceTexture(SDL_Surface * surface, bool intensity)
 	SDL_FreeSurface(surface);
 
 	glPopAttrib();
-	handle_glerror();
 }
 
 GLSurfaceTexture::~GLSurfaceTexture()
@@ -170,7 +184,6 @@ GLSurfaceTexture::~GLSurfaceTexture()
 
 void GLSurfaceTexture::init(uint16_t w, uint16_t h)
 {
-	handle_glerror();
 	m_w = w;
 	m_h = h;
 	if (m_w <= 0 || m_h <= 0) {
@@ -193,12 +206,10 @@ void GLSurfaceTexture::init(uint16_t w, uint16_t h)
 	// makes no difference
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	handle_glerror();
 }
 
 const SDL_PixelFormat & GLSurfaceTexture::format() const {
-	return gl_rgba_format();
+	return Gl::gl_rgba_format();
 }
 
 void GLSurfaceTexture::lock(LockMode mode) {

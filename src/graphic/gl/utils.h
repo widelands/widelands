@@ -16,25 +16,74 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef WL_GRAPHIC_RENDER_GL_UTILS_H
-#define WL_GRAPHIC_RENDER_GL_UTILS_H
+#ifndef WL_GRAPHIC_GL_UTILS_H
+#define WL_GRAPHIC_GL_UTILS_H
 
 #define NO_SDL_GLEXT
+
+#include <memory>
 
 #include <GL/glew.h>
 #include <SDL_opengl.h>
 #include <stdint.h>
 
+#include "base/macros.h"
+
 struct SDL_PixelFormat;
 
-uint32_t next_power_of_two(uint32_t x);
+namespace Gl {
+
+class Shader;
+
 const SDL_PixelFormat & gl_rgba_format();
 GLenum _handle_glerror(const char * file, unsigned int line);
+
+// Thin wrapper around a OpenGL program object to ensure proper cleanup. Throws
+// on all errors.
+class Program {
+public:
+	Program();
+	~Program();
+
+	GLuint object() const {
+		return program_object_;
+	}
+
+	// Creates and compiles 'vertex_shader_source' and 'fragment_shader_source'
+	// into shader objects. Then links them into the program.
+	void build(const char* vertex_shader_source, const char* fragment_shader_source);
+
+private:
+	const GLuint program_object_;
+	std::unique_ptr<Shader> vertex_shader_;
+	std::unique_ptr<Shader> fragment_shader_;
+
+	DISALLOW_COPY_AND_ASSIGN(Program);
+};
+
+// Thin wrapper around a OpenGL buffer object to ensure proper cleanup. Throws
+// on all errors.
+class Buffer {
+public:
+	Buffer();
+	~Buffer();
+
+	GLuint object() const {
+		return buffer_object_;
+	}
+
+private:
+	const GLuint buffer_object_;
+
+	DISALLOW_COPY_AND_ASSIGN(Buffer);
+};
+
+}  // namespace Gl
 
 /**
  * handle_glerror() is intended to make debugging of OpenGL easier. It logs the
  * error code returned by glGetError and returns the error code.
  */
-#define handle_glerror() _handle_glerror(__FILE__, __LINE__)
+#define handle_glerror() Gl::_handle_glerror(__FILE__, __LINE__)
 
-#endif  // end of include guard: WL_GRAPHIC_RENDER_GL_UTILS_H
+#endif  // end of include guard: WL_GRAPHIC_GL_UTILS_H

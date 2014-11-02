@@ -21,9 +21,9 @@
 
 #include <SDL.h>
 
-#include "graphic/render/gl_surface_texture.h"
-#include "graphic/render/sdl_helper.h"
-#include "graphic/render/sdl_surface.h"
+#include "graphic/gl/surface_texture.h"
+#include "graphic/sdl/surface.h"
+#include "graphic/sdl/utils.h"
 
 extern bool g_opengl;
 

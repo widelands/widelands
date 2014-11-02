@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2011-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,12 +17,32 @@
  *
  */
 
-#ifndef WL_WUI_MAPVIEWPIXELCONSTANTS_H
-#define WL_WUI_MAPVIEWPIXELCONSTANTS_H
+#ifndef WL_GRAPHIC_GL_GAME_RENDERER_H
+#define WL_GRAPHIC_GL_GAME_RENDERER_H
 
-//  These are constants with the unit pixel.
-constexpr int TRIANGLE_WIDTH = 64;
-constexpr int TRIANGLE_HEIGHT = 32;
-constexpr int HEIGHT_FACTOR = 5;
+#include <memory>
 
-#endif  // end of include guard: WL_WUI_MAPVIEWPIXELCONSTANTS_H
+#include "graphic/game_renderer.h"
+#include "graphic/gl/utils.h"
+
+class TerrainProgram;
+class DitherProgram;
+class RoadProgram;
+
+/**
+ * OpenGL implementation of @ref GameRenderer.
+ */
+class GlGameRenderer : public GameRenderer {
+public:
+	GlGameRenderer();
+	virtual ~GlGameRenderer();
+
+private:
+	static std::unique_ptr<TerrainProgram> terrain_program_;
+	static std::unique_ptr<DitherProgram> dither_program_;
+	static std::unique_ptr<RoadProgram> road_program_;
+
+	void draw() override;
+};
+
+#endif  // end of include guard: WL_GRAPHIC_GL_GAME_RENDERER_H

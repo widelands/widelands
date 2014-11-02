@@ -56,10 +56,6 @@ struct GLCaps
 	int aux_buffers;
 	/// Whether the BlendEquation support is available
 	bool blendequation;
-	/// Maximum number of textures that can be combined
-	int max_tex_combined;
-	/// Whether multitexturing is supported
-	bool multitexture;
 };
 
 /**

@@ -28,7 +28,7 @@
 #include "base/macros.h"
 #include "graphic/color.h"
 #include "graphic/graphic.h"
-#include "graphic/render/sdl_surface.h"
+#include "graphic/sdl/surface.h"
 #include "graphic/surface.h"
 #include "graphic/surface_cache.h"
 
