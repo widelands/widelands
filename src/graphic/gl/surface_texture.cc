@@ -21,6 +21,7 @@
 #include <cassert>
 
 #include "base/wexception.h"
+#include "graphic/gl/blit_program.h"
 #include "graphic/gl/surface.h"
 #include "graphic/gl/utils.h"
 #include "graphic/graphic.h"
@@ -170,6 +171,11 @@ GLSurfaceTexture::~GLSurfaceTexture()
 	glDeleteTextures(1, &m_texture);
 }
 
+void GLSurfaceTexture::pixel_to_gl(float* x, float* y) {
+	*x = (*x / m_w) * 2. - 1.;
+	*y = (*y / m_h) * 2. - 1.;
+}
+
 void GLSurfaceTexture::init(uint16_t w, uint16_t h)
 {
 	m_w = w;
@@ -178,13 +184,14 @@ void GLSurfaceTexture::init(uint16_t w, uint16_t h)
 		return;
 	}
 
-	if (g_gr->caps().gl.tex_power_of_two) {
+	// NOCOM(#sirver): revert
+	// if (g_gr->caps().gl.tex_power_of_two) {
 		m_tex_w = next_power_of_two(w);
 		m_tex_h = next_power_of_two(h);
-	} else {
-		m_tex_w = w;
-		m_tex_h = h;
-	}
+	// } else {
+		// m_tex_w = w;
+		// m_tex_h = h;
+	// }
 
 	glGenTextures(1, &m_texture);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
@@ -293,9 +300,13 @@ void GLSurfaceTexture::blit
 	if (m_w <= 0 || m_h <= 0) {
 		return;
 	}
-	setup_gl();
+
+	glBindFramebuffer(GL_FRAMEBUFFER, gl_framebuffer_id_);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
+
 	GLSurface::blit(dst, src, srcrc, cm);
-	reset_gl();
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 void GLSurfaceTexture::setup_gl() {

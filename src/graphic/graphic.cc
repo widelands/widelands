@@ -259,6 +259,7 @@ DIAG_ON ("-Wold-style-cast")
 		 "Widelands");
 
 	if (g_opengl) {
+		// NOCOM(#sirver): clean up here and do not use the modelmatrix.
 		glViewport(0, 0, w, h);
 
 		// Set up OpenGL projection matrix. This transforms opengl coordinates to
@@ -279,11 +280,9 @@ DIAG_ON ("-Wold-style-cast")
 		glDisable(GL_DEPTH_TEST);
 		glDrawBuffer(GL_BACK);
 
-		// Clear the screen before running the game.
-		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		SDL_GL_SwapBuffers();
 		glEnable(GL_TEXTURE_2D);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		GLSurfaceTexture::initialize();
 	}

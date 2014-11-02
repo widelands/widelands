@@ -78,7 +78,7 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 		const Image* tex = g_gr->images().get(
 		   g_gr->get_maptexture_data(terrain_descr.get_texture())->get_texture_image());
 		Surface* surf = Surface::create(tex->width(), tex->height());
-		surf->blit(Point(0, 0), tex->surface(), Rect(0, 0, tex->width(), tex->height()), CM_Solid);
+		surf->blit(Point(0, 0), tex->surface(), Rect(0, 0, tex->width(), tex->height()), CM_Copy);
 		Point pt(1, tex->height() - kSmallPicHeight - 1);
 
 		if (ter_is == TerrainDescription::GREEN) {

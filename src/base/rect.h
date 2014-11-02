@@ -43,4 +43,12 @@ struct Rect {
 	uint32_t w, h;
 };
 
+// TODO(sirver): Use a templated type for all kinds of rects.
+struct FloatRect {
+	float x = 0.;
+	float y = 0.;
+	float w = 0.;
+	float h = 0.;
+};
+
 #endif  // end of include guard: WL_BASE_RECT_H

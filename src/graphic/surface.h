@@ -53,7 +53,7 @@ public:
 	virtual uint16_t height() const = 0;
 
 	/// This draws a part of another surface to this surface
-	virtual void blit(const Point&, const Surface*, const Rect& srcrc, Composite cm = CM_Normal) = 0;
+	virtual void blit(const Point&, const Surface*, const Rect& srcrc, Composite cm = CM_UseAlpha) = 0;
 
 	/// Draws a filled rect to the surface.
 	virtual void fill_rect(const Rect&, const RGBAColor&) = 0;

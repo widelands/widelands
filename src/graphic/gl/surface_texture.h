@@ -61,6 +61,7 @@ public:
 	uint16_t get_tex_h() const {return m_tex_h;}
 
 private:
+	void pixel_to_gl(float* x, float* y) override;
 	void init(uint16_t w, uint16_t h);
 	void setup_gl();
 	void reset_gl();

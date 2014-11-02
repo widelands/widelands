@@ -24,6 +24,7 @@
 #include <cstdlib>
 
 #include "base/macros.h"
+#include "graphic/gl/blit_program.h"
 #include "graphic/gl/draw_rect_program.h"
 #include "graphic/gl/surface_texture.h"
 #include "graphic/graphic.h"
@@ -65,6 +66,7 @@ void GLSurface::set_pixel(uint16_t x, uint16_t y, uint32_t clr) {
 void GLSurface::draw_rect(const Rect& rc, const RGBColor& clr)
 {
 	assert(g_opengl);
+
 	DrawRectProgram::instance().draw(width(), height(), rc, clr);
 }
 
@@ -76,6 +78,7 @@ void GLSurface::fill_rect(const Rect& rc, const RGBAColor& clr) {
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
 	assert(g_opengl);
+
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
 
@@ -87,6 +90,7 @@ void GLSurface::fill_rect(const Rect& rc, const RGBAColor& clr) {
 		glVertex2f(rc.x,        rc.y + rc.h);
 	} glEnd();
 	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);
 }
 
 /**
@@ -121,7 +125,6 @@ void GLSurface::brighten_rect(const Rect& rc, const int32_t factor)
 	* where Xnew is the new calculated color for destination, Xdest is the old
 	* color of the destination and Xsrc is the color of the source.
 	*/
-	glEnable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);
 	glBlendFunc(GL_ONE, GL_ONE);
 
@@ -142,6 +145,8 @@ void GLSurface::brighten_rect(const Rect& rc, const int32_t factor)
 	if (factor < 0)
 		glBlendEquation(GL_FUNC_ADD);
 
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	glEnable(GL_TEXTURE_2D);
 }
 
@@ -158,56 +163,54 @@ void GLSurface::draw_line
 	} glEnd();
 
 	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);
+}
+
+// NOCOM(#sirver): consolidate these functions. there are too many.
+// Converts the pixel (x, y) in a texture to a gl coordinate in [0, 1].
+inline void pixel_to_gl_texture(const int width, const int height, float* x, float* y) {
+	*x = (*x / width);
+	*y = (*y / height);
 }
 
 void GLSurface::blit
 	(const Point& dst, const Surface* image, const Rect& srcrc, Composite cm)
 {
-	// Note: This function is highly optimized and therefore does not restore
-	// all state. It also assumes that all other glStuff restores state to make
-	// this function faster.
+	glViewport(0, 0, width(), height());
 
 	assert(g_opengl);
-	const GLSurfaceTexture& surf = *static_cast<const GLSurfaceTexture*>(image);
 
-	/* Set a texture scaling factor. Normally texture coordinates
-	* (see glBegin()...glEnd() Block below) are given in the range 0-1
-	* to avoid the calculation (and let opengl do it) the texture
-	* space is modified. glMatrixMode select which matrixconst  to manipulate
-	* (the texture transformation matrix in this case). glLoadIdentity()
-	* resets the (selected) matrix to the identity matrix. And finally
-	* glScalef() calculates the texture matrix.
-	*/
-	glMatrixMode(GL_TEXTURE);
-	glLoadIdentity();
-	glScalef
-		(1.0f / static_cast<GLfloat>(surf.get_tex_w()),
-		 1.0f / static_cast<GLfloat>(surf.get_tex_h()), 1);
+	FloatRect gl_dst_rect, gl_src_rect;
 
-	// Enable Alpha blending
-	if (cm == CM_Normal) {
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	} else {
-		glDisable(GL_BLEND);
+	// Destination Rectangle.
+	{
+		float x1 = dst.x;
+		float y1 = dst.y;
+		pixel_to_gl(&x1, &y1);
+		float x2 = dst.x + srcrc.w;
+		float y2 = dst.y + srcrc.h;
+		pixel_to_gl(&x2, &y2);
+		gl_dst_rect.x = x1;
+		gl_dst_rect.y = y1;
+		gl_dst_rect.w = x2 - x1;
+		gl_dst_rect.h = y2 - y1;
 	}
 
-	glBindTexture(GL_TEXTURE_2D, surf.get_gl_texture());
+	// Source Rectangle.
+	const GLSurfaceTexture* const texture = static_cast<const GLSurfaceTexture*>(image);
+	{
+		float x1 = srcrc.x;
+		float y1 = srcrc.y;
+		pixel_to_gl_texture(texture->get_tex_w(), texture->get_tex_h(), &x1, &y1);
+		float x2 = srcrc.x + srcrc.w;
+		float y2 = srcrc.y + srcrc.h;
+		pixel_to_gl_texture(texture->get_tex_w(), texture->get_tex_h(), &x2, &y2);
+		gl_src_rect.x = x1;
+		gl_src_rect.y = y1;
+		gl_src_rect.w = x2 - x1;
+		gl_src_rect.h = y2 - y1;
+	}
 
-	glBegin(GL_QUADS); {
-		// set color white, otherwise textures get mixed with color
-		glColor3f(1.0, 1.0, 1.0);
-		// top-left
-		glTexCoord2i(srcrc.x, srcrc.y);
-		glVertex2i(dst.x, dst.y);
-		// top-right
-		glTexCoord2i(srcrc.x + srcrc.w, srcrc.y);
-		glVertex2f(dst.x + srcrc.w, dst.y);
-		// bottom-right
-		glTexCoord2i(srcrc.x + srcrc.w, srcrc.y + srcrc.h);
-		glVertex2f(dst.x + srcrc.w, dst.y + srcrc.h);
-		// bottom-left
-		glTexCoord2i(srcrc.x, srcrc.y + srcrc.h);
-		glVertex2f(dst.x, dst.y + srcrc.h);
-	} glEnd();
+	// NOCOM(#sirver): eventually, do not mess with glBlend
+	BlitProgram::instance().draw(gl_dst_rect, gl_src_rect, texture->get_gl_texture(), cm);
 }

@@ -48,6 +48,7 @@ public:
 		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor&, uint8_t width) override;
 
 protected:
+	virtual void pixel_to_gl(float* x, float* y) = 0;
 
 	/// Logical width and height of the surface
 	uint16_t m_w, m_h;

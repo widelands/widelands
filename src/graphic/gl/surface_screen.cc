@@ -29,6 +29,10 @@ GLSurfaceScreen::GLSurfaceScreen(uint16_t w, uint16_t h)
 	m_h = h;
 }
 
+void GLSurfaceScreen::pixel_to_gl(float* x, float* y) {
+	*x = (*x / m_w) * 2. - 1.;
+	*y = 1. - (*y / m_h) * 2.;
+}
 
 /**
  * Swap order of rows in m_pixels, to compensate for the upside-down nature of the
