@@ -82,6 +82,7 @@ void GLSurface::draw_rect(const Rect& rc, const RGBColor& clr)
 /**
  * Draws a filled rectangle
  */
+// NOCOM(#sirver): needs a composite too, so that you can overwrite it.
 void GLSurface::fill_rect(const Rect& rc, const RGBAColor& clr) {
 	glViewport(0, 0, width(), height());
 	FillRectProgram::instance().draw(to_opengl(rc, ConversionMode::kExact), clr);
