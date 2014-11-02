@@ -20,7 +20,7 @@ wl_library(network
     network_player_settings_backend.h
     network_protocol.h
     network_system.h
-  USES_SDL_NET
+  USES_SDL2_NET
   DEPENDS
     ai
     base_deprecated

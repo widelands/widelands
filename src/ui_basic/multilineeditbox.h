@@ -47,16 +47,16 @@ struct MultilineEditbox : public Panel {
 	void set_maximum_bytes(uint32_t n);
 	uint32_t get_maximum_bytes() const;
 
-	void focus() override;
+	void focus(bool topcaller = true) override;
 
 protected:
 	void draw(RenderTarget &) override;
 
-	bool handle_key(bool down, SDL_keysym) override;
+	bool handle_key(bool down, SDL_Keysym) override;
+	bool handle_textinput(const char* text);
 
 private:
 	void scrollpos_changed(int32_t);
-	void insert(SDL_keysym code);
 
 	struct Data;
 	std::unique_ptr<Data> d;

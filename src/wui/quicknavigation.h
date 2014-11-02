@@ -47,7 +47,7 @@ struct QuickNavigation {
 
 	void view_changed(Point point, bool jump);
 
-	bool handle_key(bool down, SDL_keysym key);
+	bool handle_key(bool down, SDL_Keysym key);
 
 private:
 	void setview(Point where);

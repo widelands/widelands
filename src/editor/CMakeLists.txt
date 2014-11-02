@@ -83,7 +83,7 @@ wl_library(editor
     ui_menus/editor_tool_set_terrain_options_menu.h
     ui_menus/editor_toolsize_menu.cc
     ui_menus/editor_toolsize_menu.h
-  USES_SDL
+  USES_SDL2
   DEPENDS
     base_exceptions
     base_i18n

@@ -35,7 +35,7 @@ SDL_Surface* maybe_convert_to_diplay_format(SDL_Surface* surface) {
 	if (!s_is_diplay_format_defined) {
 		return surface;
 	}
-	SDL_Surface * converted = SDL_DisplayFormatAlpha(surface);
+	SDL_Surface * converted = SDL_ConvertSurfaceFormat(surface, SDL_PIXELFORMAT_ARGB8888, 0);
 	SDL_FreeSurface(surface);
 	return converted;
 }

@@ -65,6 +65,7 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
 		 get_inner_w() / 2 - spacing, get_inner_h() - spacing - offsy - 40);
 	m_ls->selected.connect(boost::bind(&MainMenuLoadMap::selected, this, _1));
 	m_ls->double_clicked.connect(boost::bind(&MainMenuLoadMap::double_clicked, this, _1));
+	m_ls->focus();
 
 	posx = get_inner_w() / 2 + spacing;
 	new UI::Textarea

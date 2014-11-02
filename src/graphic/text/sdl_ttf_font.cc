@@ -19,6 +19,7 @@
 
 #include "graphic/text/sdl_ttf_font.h"
 
+#include <SDL.h>
 #include <SDL_ttf.h>
 #include <boost/format.hpp>
 
@@ -70,20 +71,21 @@ const Surface& SdlTtfFont::render
 
 	SDL_Surface * text_surface = nullptr;
 
-	SDL_Color sdlclr = {clr.r, clr.g, clr.b, 0};
+	SDL_Color sdlclr = {clr.r, clr.g, clr.b, SDL_ALPHA_OPAQUE};
 	if (style & SHADOW) {
 		SDL_Surface * tsurf = TTF_RenderUTF8_Blended(font_, txt.c_str(), sdlclr);
 		SDL_Surface * shadow = TTF_RenderUTF8_Blended(font_, txt.c_str(), SHADOW_CLR);
 		text_surface = empty_sdl_surface(shadow->w + SHADOW_OFFSET, shadow->h + SHADOW_OFFSET);
 		SDL_FillRect(text_surface,
 		             NULL,
-		             SDL_MapRGBA(text_surface->format, 255, 255, 255, SDL_ALPHA_TRANSPARENT));
+						 SDL_MapRGBA(text_surface->format, 255, 255, 255, SDL_ALPHA_TRANSPARENT));
 
 		if (text_surface->format->BitsPerPixel != 32)
 			throw RenderError("SDL_TTF did not return a 32 bit surface for shadow text. Giving up!");
 
 		SDL_Rect dstrct1 = {0, 0, 0, 0};
-		SDL_SetAlpha(shadow, 0, SDL_ALPHA_OPAQUE);
+		SDL_SetSurfaceAlphaMod(shadow, SDL_ALPHA_OPAQUE);
+		SDL_SetSurfaceBlendMode(shadow, SDL_BLENDMODE_NONE);
 		SDL_BlitSurface(shadow, nullptr, text_surface, &dstrct1);
 
 		uint32_t* spix = static_cast<uint32_t*>(tsurf->pixels);

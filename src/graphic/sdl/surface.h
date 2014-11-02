@@ -20,6 +20,8 @@
 #ifndef WL_GRAPHIC_SDL_SURFACE_H
 #define WL_GRAPHIC_SDL_SURFACE_H
 
+#include <SDL_render.h>
+
 #include "base/rect.h"
 #include "graphic/color.h"
 #include "graphic/surface.h"
