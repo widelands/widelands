@@ -70,7 +70,7 @@ class EvalMatches( object ):
         if blocks and blocks[0][0][1] == "<":  # library includes.
             for lineno, delimiter, header in blocks[0]:
                 if '.h' not in header or delimiter != "<":
-                    errors.append((fn, lineno, "This include block must only contain library headers (e.g. SDL)."))
+                    errors.append((fn, lineno, "This include block must only contain library headers (e.g. SDL2)."))
                     return errors
             blocks.pop(0)
 
@@ -95,7 +95,7 @@ evaluate_matches = EvalMatches()
 allowed = [
 """#include <memory>
 
-#include <SDL.h>
+#include <SDL2.h>
 """,
 
 """
@@ -120,7 +120,7 @@ allowed = [
 ###################
 forbidden = [
 """
-#include <SDL.h>
+#include <SDL2.h>
 
 #include <memory>
 """,
@@ -133,7 +133,7 @@ forbidden = [
 
 """
 #include <memory>
-#include <SDL.h>
+#include <SDL2.h>
 """
 
 ]

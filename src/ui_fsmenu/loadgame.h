@@ -76,7 +76,7 @@ struct FullscreenMenuLoadGame : public FullscreenMenuLoadMapOrGame {
 
 	void think();
 
-	bool handle_key(bool down, SDL_keysym code) override;
+	bool handle_key(bool down, SDL_Keysym code) override;
 
 protected:
 	void clicked_ok() override;

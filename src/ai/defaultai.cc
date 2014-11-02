@@ -698,7 +698,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		}
 	}
 
-	// folowing is done allways (regardless of military or not)
+	// the following is done always (regardless of military or not)
 
 	// we get immovables with higher radius
 	immovables.clear();
@@ -710,6 +710,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 	field.military_presence_ = 0;
 
 	for (uint32_t i = 0; i < immovables.size(); ++i) {
+
 		const BaseImmovable& base_immovable = *immovables.at(i).object;
 
 		// testing if it is enemy-owned field
@@ -3089,20 +3090,32 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 	const Game::GeneralStatsVector& genstats = game().get_general_statistics();
 	for (uint8_t j = 1; j <= plr_in_game; ++j) {
 		if (pn == j) {
-			player_attackable[j - 1] = false;
+			player_attackable.at(j - 1) = false;
 			continue;
 		}
 
-		if (genstats[j - 1].miltary_strength.back() == 0) {
-			// to avoid improbable zero division
-			player_attackable[j - 1] = true;
-			any_attackable = true;
-		} else if ((genstats[pn - 1].miltary_strength.back() * 100 /
-		            genstats[j - 1].miltary_strength.back()) > treshold_ratio) {
-			player_attackable[j - 1] = true;
-			any_attackable = true;
-		} else {
-			player_attackable[j - 1] = false;
+		try {
+			// It seems that under some circumstances genstats can be empty.
+			// So, to avoid crash, the AI tests its content first.
+			if (genstats.at(j - 1).miltary_strength.empty()) {
+				log("ComputerPlayer(%d): miltary_strength is empty\n", player_number());
+				player_attackable.at(j - 1) = false;
+			// Avoid division by zero
+			} else if (genstats.at(j - 1).miltary_strength.back() == 0) {
+				player_attackable.at(j - 1) = true;
+				any_attackable = true;
+			// Check threshold
+			} else if ((genstats.at(pn - 1).miltary_strength.back() * 100 /
+							genstats.at(j - 1).miltary_strength.back()) > treshold_ratio) {
+				player_attackable.at(j - 1) = true;
+				any_attackable = true;
+			} else {
+				player_attackable.at(j - 1) = false;
+			}
+		} catch (const std::out_of_range&) {
+			log("ComputerPlayer(%d): genstats entry missing - size :%d\n",
+				 player_number(), static_cast<unsigned int>(genstats.size()));
+			player_attackable.at(j - 1) = false;
 		}
 	}
 

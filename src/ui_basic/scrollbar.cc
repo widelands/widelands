@@ -391,6 +391,16 @@ void Scrollbar::think()
 }
 
 
+bool Scrollbar::handle_mousewheel(uint32_t, int32_t, int32_t y) {
+	if (y < 0) {
+		action(Plus);
+	} else {
+		action(Minus);
+	}
+	return true;
+}
+
+
 bool Scrollbar::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	bool result = false;
 
@@ -410,15 +420,6 @@ bool Scrollbar::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 		result = true;
 		break;
 
-	case SDL_BUTTON_WHEELUP:
-		action(Minus);
-		result = true;
-		break;
-
-	case SDL_BUTTON_WHEELDOWN:
-		action(Plus);
-		result = true;
-		break;
 	default:
 		break;
 	}
@@ -437,13 +438,6 @@ bool Scrollbar::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 		result = true;
 		break;
 
-	case SDL_BUTTON_WHEELUP:
-		result = true;
-		break;
-
-	case SDL_BUTTON_WHEELDOWN:
-		result = true;
-		break;
 	default:
 		break;
 	}

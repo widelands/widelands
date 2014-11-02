@@ -340,6 +340,7 @@ bool Button::handle_mouserelease(uint8_t const btn, int32_t, int32_t) {
 	}
 	return true;
 }
+
 bool Button::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_t) {
 	return true; // We handle this always by lighting up
 }

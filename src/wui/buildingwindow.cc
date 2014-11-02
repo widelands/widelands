@@ -373,7 +373,7 @@ Callback for bulldozing request
 */
 void BuildingWindow::act_bulldoze()
 {
-	if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) {
+	if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
 		if (m_building.get_playercaps() & Widelands::Building::PCap_Bulldoze)
 			igbase().game().send_player_bulldoze(m_building);
 	}
@@ -389,7 +389,7 @@ Callback for dismantling request
 */
 void BuildingWindow::act_dismantle()
 {
-	if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) {
+	if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
 		if (m_building.get_playercaps() & Widelands::Building::PCap_Dismantle)
 			igbase().game().send_player_dismantle(m_building);
 	}
@@ -432,7 +432,7 @@ Callback for enhancement request
 */
 void BuildingWindow::act_enhance(Widelands::BuildingIndex id)
 {
-	if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) {
+	if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
 		if (m_building.get_playercaps() & Widelands::Building::PCap_Enhancable)
 			igbase().game().send_player_enhance_building(m_building, id);
 	}

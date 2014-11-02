@@ -21,7 +21,7 @@
 
 #include <memory>
 
-#include <SDL_keysym.h>
+#include <SDL_keycode.h>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"

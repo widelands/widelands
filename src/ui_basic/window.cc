@@ -19,7 +19,7 @@
 
 #include "ui_basic/window.h"
 
-#include <SDL_keysym.h>
+#include <SDL_keycode.h>
 
 #include "base/log.h"
 #include "graphic/font.h"
@@ -436,7 +436,7 @@ bool Window::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my)
 	//  needs is the key state at the time the mouse was clicked. See the
 	//  usage comment for get_key_state.
 	if
-		(((get_key_state(SDLK_LCTRL) | get_key_state(SDLK_RCTRL))
+		(((get_key_state(SDL_SCANCODE_LCTRL) | get_key_state(SDL_SCANCODE_RCTRL))
 		  &&
 		  btn == SDL_BUTTON_LEFT)
 		 ||
