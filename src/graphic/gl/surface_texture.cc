@@ -265,9 +265,13 @@ void GLSurfaceTexture::fill_rect(const Rect& rectangle, const RGBAColor& clr)
 	if (m_w <= 0 || m_h <= 0) {
 		return;
 	}
-	setup_gl();
+
+	glBindFramebuffer(GL_FRAMEBUFFER, gl_framebuffer_id_);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
+
 	GLSurface::fill_rect(rectangle, clr);
-	reset_gl();
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 /**

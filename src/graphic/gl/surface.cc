@@ -26,6 +26,7 @@
 #include "base/macros.h"
 #include "graphic/gl/blit_program.h"
 #include "graphic/gl/draw_rect_program.h"
+#include "graphic/gl/fill_rect_program.h"
 #include "graphic/gl/surface_texture.h"
 #include "graphic/graphic.h"
 
@@ -83,22 +84,9 @@ void GLSurface::draw_rect(const Rect& rc, const RGBColor& clr)
  * Draws a filled rectangle
  */
 void GLSurface::fill_rect(const Rect& rc, const RGBAColor& clr) {
-	assert(rc.x >= 0);
-	assert(rc.y >= 0);
 	assert(g_opengl);
-
-	glDisable(GL_TEXTURE_2D);
-	glDisable(GL_BLEND);
-
-	glBegin(GL_QUADS); {
-		glColor4ub(clr.r, clr.g, clr.b, clr.a);
-		glVertex2f(rc.x,        rc.y);
-		glVertex2f(rc.x + rc.w, rc.y);
-		glVertex2f(rc.x + rc.w, rc.y + rc.h);
-		glVertex2f(rc.x,        rc.y + rc.h);
-	} glEnd();
-	glEnable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);
+	glViewport(0, 0, width(), height());
+	FillRectProgram::instance().draw(to_opengl(rc, ConversionMode::kExact), clr);
 }
 
 /**

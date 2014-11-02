@@ -108,11 +108,11 @@ void Statebox::draw(RenderTarget & dst)
 
 		if (m_flags & Is_Checked) {
 			// NOCOM(#sirver): revert
-			dst.draw_rect
+			dst.fill_rect
 				(Rect(Point(0, 0), get_w(), get_h()), RGBColor(255, 0, 0)/* RGBColor(229, 116,   2) */);
 		} else if (m_flags & Is_Highlighted) {
 			// NOCOM(#sirver): revert
-			dst.draw_rect
+			dst.fill_rect
 				(Rect(Point(0, 0), get_w(), get_h()), RGBColor(0, 255, 0)/* RGBColor(100, 100,  80) */);
 		}
 	} else {
