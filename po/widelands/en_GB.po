@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-29 10:08+0000\n"
-"PO-Revision-Date: 2014-10-04 22:29+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"PO-Revision-Date: 2014-11-01 09:50+0000\n"
+"Last-Translator: Tinker <room101@rhima.info>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-30 05:54+0000\n"
-"X-Generator: Launchpad (build 17203)\n"
+"X-Launchpad-Export-Date: 2014-11-02 05:39+0000\n"
+"X-Generator: Launchpad (build 17211)\n"
 
 #: ../../src/ai/computer_player.cc:39
 msgid "None"
@@ -176,7 +176,7 @@ msgstr "Tools"
 #: ../../src/editor/editorinteractive.cc:92
 #: ../../src/editor/ui_menus/editor_toolsize_menu.cc:43
 msgid "Tool Size"
-msgstr ""
+msgstr "Tool Size"
 
 #: ../../src/editor/editorinteractive.cc:95
 #: ../../src/wui/interactive_player.cc:116
@@ -187,7 +187,7 @@ msgstr "Minimap"
 #: ../../src/editor/editorinteractive.cc:98
 #: ../../src/wui/interactive_player.cc:119
 msgid "Show Building Spaces (on/off)"
-msgstr ""
+msgstr "Show Building Spaces (on/off)"
 
 #: ../../src/editor/editorinteractive.cc:101
 #: ../../src/ui_fsmenu/launch_mpg.cc:171
@@ -1018,7 +1018,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:277
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
-msgstr ""
+msgstr "the economy does not need the ware ‘%s’"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the worker ‘%s’
 #: ../../src/logic/production_program.cc:291
@@ -1031,7 +1031,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:301
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
-msgstr ""
+msgstr "the economy does not need the worker ‘%s’"
 
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "3x water":
 #. * TRANSLATORS:    %1$s = "3"
@@ -1068,7 +1068,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:373
 #, c-format
 msgid "the building doesn’t have the following wares: %s"
-msgstr ""
+msgstr "the building does not have the following wares: %s"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs experience'.
 #: ../../src/logic/production_program.cc:391
@@ -1450,7 +1450,7 @@ msgstr "Metaserver did not answer."
 
 #: ../../src/network/internet_gaming_messages.cc:55
 msgid "Your game can’t be connected to from the internet"
-msgstr ""
+msgstr "Your game cannot be connected to from the internet"
 
 #: ../../src/network/internet_gaming_messages.cc:57
 msgid ""
@@ -1467,6 +1467,10 @@ msgid ""
 "http://wl.widelands.org/wiki/InternetGaming to learn how to set up your "
 "internet connection for hosting a game online."
 msgstr ""
+"The metaserver was unable to connect to your game. Most likely it cannot be "
+"connected to from the internet! Please take a look at "
+"http://wl.widelands.org/wiki/InternetGaming to learn how to set up your "
+"internet connection for hosting a game online."
 
 #: ../../src/network/internet_gaming_messages.cc:64
 msgid ""
@@ -2398,6 +2402,8 @@ msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
 msgstr ""
+"The player with the colour of the flag. If more than one client selected the "
+"same colour, these share control over the player (‘shared kingdom mode’)."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:688
 msgid ""
@@ -2441,6 +2447,10 @@ msgid ""
 "of each player (the set of buildings, wares and workers the player starts "
 "with) and the tribe and team for computer players"
 msgstr ""
+"The latter three can only be set by the hosting client by left-clicking the "
+"‘type’ button of a player. Hosting players can also set the initialisation "
+"of each player (the set of buildings, wares and workers the player starts "
+"with) and the tribe and team for computer players"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:711
 msgid ""
@@ -3940,7 +3950,7 @@ msgstr "Scout south-westwards"
 
 #: ../../src/wui/shipwindow.cc:158
 msgid "Explore the island’s coast counter clockwise"
-msgstr ""
+msgstr "Explore the island’s coast anticlockwise"
 
 #: ../../src/wui/shipwindow.cc:164
 msgid "Scout towards the south east"
@@ -4099,4 +4109,4 @@ msgstr "Follow"
 
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
-msgstr ""
+msgstr "Centre the main view on this"
