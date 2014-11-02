@@ -378,18 +378,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 			}
 			return true;
 
-
 		default:
-			// Nullbytes happen on MacOS X when entering Multiline Chars, like for
-			// example ~ + o results in a o with a tilde over it. The ~ is reported
-			// as a 0 on keystroke, the o then as the unicode character. We simply
-			// ignore the 0. NOCOM: Is this still true for Macs?
-			/*
-				if (is_printable(code) && code.unicode) {
-				insert(code);
-				return true;
-			}
-			*/
 			break;
 		}
 	}

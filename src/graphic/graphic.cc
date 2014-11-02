@@ -414,7 +414,6 @@ void Graphic::toggle_fullscreen()
 	// Note: Not all Images are cached in the ImageCache, at time of me writing
 	// this, only InMemoryImage does not safe itself in the ImageCache. And this
 	// should only be a problem for Images loaded from maps.
-	// NOCOM: Is this still a todo?
 	if (SDL_GetWindowFlags(m_sdlwindow) & SDL_WINDOW_FULLSCREEN) {
 		SDL_SetWindowFullscreen(m_sdlwindow, 0);
 	} else {
