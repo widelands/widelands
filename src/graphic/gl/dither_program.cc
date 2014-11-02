@@ -19,6 +19,7 @@
 
 #include "graphic/gl/dither_program.h"
 
+#include "base/wexception.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/surface_texture.h"
 #include "graphic/graphic.h"
@@ -127,6 +128,9 @@ void DitherProgram::add_vertex(const FieldsToDraw::Field& field,
 	case 2:
 		back.dither_texture_x = 0.5;
 		back.dither_texture_y = 1.;
+		break;
+	default:
+		throw wexception("Never here.");
 		break;
 	}
 }

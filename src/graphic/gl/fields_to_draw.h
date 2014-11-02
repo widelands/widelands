@@ -21,6 +21,7 @@
 #define WL_GRAPHIC_GL_FIELDS_TO_DRAW_H
 
 #include <vector>
+#include <cstddef>
 
 #include <stdint.h>
 
@@ -62,7 +63,7 @@ public:
 	}
 
 	// The number of fields to draw.
-	inline std::size_t size() const {
+	inline size_t size() const {
 		return fields_.size();
 	}
 
