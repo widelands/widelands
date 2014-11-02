@@ -119,6 +119,10 @@ void GLSurface::brighten_rect(const Rect& rc, const int32_t factor)
 void GLSurface::draw_line
 	(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t gwidth)
 {
+
+	// NOCOM(#sirver): hack. remove
+	glUseProgram(0);
+
 	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);
 	glLineWidth(gwidth);

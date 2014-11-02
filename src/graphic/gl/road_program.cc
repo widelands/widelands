@@ -226,7 +226,4 @@ void RoadProgram::draw(const FieldsToDraw& fields_to_draw) {
 	glDisableVertexAttribArray(attr_texture_mix_);
 
 	glActiveTexture(GL_TEXTURE0);
-
-	glUseProgram(0);
-
 }

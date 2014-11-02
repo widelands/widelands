@@ -38,11 +38,8 @@ uniform vec4 u_src_rect;
 varying vec2 out_texture_coordinate;
 
 void main() {
-	float x = u_dst_rect.x + attr_position.x * u_dst_rect.z;
-	float y = u_dst_rect.y + attr_position.y * u_dst_rect.w;
-	out_texture_coordinate.x = u_src_rect.x + attr_position.x * u_src_rect.z;
-	out_texture_coordinate.y = u_src_rect.y + attr_position.y * u_src_rect.w;
-	gl_Position = vec4(x, y, 0., 1.);
+	out_texture_coordinate = u_src_rect.xy + attr_position.xy * u_src_rect.zw;
+	gl_Position = vec4(u_dst_rect.xy + attr_position.xy * u_dst_rect.zw, 0., 1.);
 }
 )";
 
@@ -54,8 +51,7 @@ uniform sampler2D u_texture;
 varying vec2 out_texture_coordinate;
 
 void main() {
-	vec4 clr = texture2D(u_texture, out_texture_coordinate);
-	gl_FragColor = clr;
+	gl_FragColor = texture2D(u_texture, out_texture_coordinate);
 }
 )";
 
@@ -133,5 +129,4 @@ void BlitProgram::draw(const FloatRect& gl_dest_rect,
 
 	glDisableVertexAttribArray(attr_position_);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glUseProgram(0);
 }

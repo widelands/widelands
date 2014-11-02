@@ -110,5 +110,4 @@ void DrawRectProgram::draw(const FloatRect& gl_dst_rect, const RGBColor& color) 
 
 	glDisableVertexAttribArray(attr_position_);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glUseProgram(0);
 }

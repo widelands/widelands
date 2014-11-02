@@ -267,7 +267,4 @@ void DitherProgram::draw(const DescriptionMaintainer<TerrainDescription>& terrai
 	glDisableVertexAttribArray(attr_texture_position_);
 
 	glActiveTexture(GL_TEXTURE0);
-
-	// Release Program object.
-	glUseProgram(0);
 }

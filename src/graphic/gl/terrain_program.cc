@@ -129,8 +129,6 @@ void TerrainProgram::gl_draw(int num_vertices,
 	glDisableVertexAttribArray(attr_position_);
 	glDisableVertexAttribArray(attr_texture_position_);
 	glDisableVertexAttribArray(attr_brightness_);
-
-	glUseProgram(0);
 }
 
 void TerrainProgram::draw(const DescriptionMaintainer<TerrainDescription>& terrains,
