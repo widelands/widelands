@@ -338,14 +338,18 @@ void SDLSurface::blit
 	bool alpha = false;
 	uint8_t alphaval = 0;
 	if (cm == CM_Solid || cm == CM_Copy) {
-		alpha = sdlsurf->flags & SDL_SRCALPHA;
-		alphaval = sdlsurf->format->alpha;
-		SDL_SetAlpha(sdlsurf, 0, 0);
+		SDL_BlendMode bm;
+		SDL_GetSurfaceBlendMode(sdlsurf, &bm);
+		alpha = bm & SDL_BLENDMODE_BLEND;
+		SDL_GetSurfaceAlphaMod(sdlsurf, &alphaval);
+		SDL_SetSurfaceAlphaMod(sdlsurf, 255);
+		SDL_SetSurfaceBlendMode(sdlsurf, SDL_BLENDMODE_NONE);
 	}
 
 	SDL_BlitSurface(sdlsurf, &srcrect, m_surface, &dstrect);
 
 	if (cm == CM_Solid || cm == CM_Copy) {
-		SDL_SetAlpha(sdlsurf, alpha ? SDL_SRCALPHA : 0, alphaval);
+		SDL_SetSurfaceAlphaMod(sdlsurf, alphaval);
+		SDL_SetSurfaceBlendMode(sdlsurf, alpha ? SDL_BLENDMODE_BLEND : SDL_BLENDMODE_NONE);
 	}
 }

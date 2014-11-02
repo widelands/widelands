@@ -54,9 +54,8 @@ using namespace std;
 Graphic * g_gr;
 bool g_opengl;
 
-#define FALLBACK_GRAPHICS_WIDTH 800
-#define FALLBACK_GRAPHICS_HEIGHT 600
-#define FALLBACK_GRAPHICS_DEPTH 32
+constexpr int kFallbackGraphicsWidth = 800;
+constexpr int kFallbackGraphicsHeight = 600;
 
 namespace  {
 
@@ -71,9 +70,8 @@ const uint32_t TRANSIENT_SURFACE_CACHE_SIZE = 160 << 20;   // shifting converts 
 */
 Graphic::Graphic()
 	:
-	m_fallback_settings_in_effect (false),
-	m_nr_update_rects  (0),
-	m_update_fullscreen(true),
+	m_fallback_settings_in_effect(false),
+	m_update(true),
 	surface_cache_(create_surface_cache(TRANSIENT_SURFACE_CACHE_SIZE)),
 	image_cache_(new ImageCache(surface_cache_.get())),
 	animation_manager_(new AnimationManager())
@@ -85,9 +83,11 @@ Graphic::Graphic()
 #else
 	const std::string icon_name = "pics/wl-ico-32.png";
 #endif
-	SDL_Surface* s = load_image_as_sdl_surface(icon_name, g_fs);
-	SDL_WM_SetIcon(s, nullptr);
-	SDL_FreeSurface(s);
+	m_sdlwindow = nullptr;
+	m_sdl_screen = nullptr;
+	m_sdl_renderer = nullptr;
+	m_sdl_texture = nullptr;
+	m_glcontext = nullptr;
 }
 
 void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
@@ -96,7 +96,6 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 	// Set video mode using SDL. First collect the flags
 	int32_t flags = 0;
 	g_opengl = false;
-	SDL_Surface * sdlsurface = nullptr;
 
 	if (opengl) {
 		log("Graphics: Trying opengl\n");
@@ -105,52 +104,72 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 		// here instead of relying on SDL to give us whatever.
 
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-		flags |= SDL_OPENGL;
+		flags |= SDL_WINDOW_OPENGL;
 	}
 
 	if (fullscreen) {
-		flags |= SDL_FULLSCREEN;
+		flags |= SDL_WINDOW_FULLSCREEN;
 		log("Graphics: Trying FULLSCREEN\n");
 	}
 
 	log("Graphics: Try to set Videomode %ux%u 32 Bit\n", w, h);
 	// Here we actually set the video mode
-	sdlsurface = SDL_SetVideoMode(w, h, 32, flags);
-
+	m_sdlwindow = SDL_CreateWindow("Widelands Window",
+											 SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, flags);
+	if (opengl) {
+		// TODO(sirver): this context needs to be created also for fallback settings,
+		// otherwise SDL_GetWindowFlags() will return SDL_WINDOW_OPENGL,
+		// though if you call any gl function, the system crashes.
+		m_glcontext = SDL_GL_CreateContext(m_sdlwindow);
+		if (m_glcontext) {
+			SDL_GL_MakeCurrent(m_sdlwindow, m_glcontext);
+		}
+	}
 	// If we tried opengl and it was not successful try without opengl
-	if (!sdlsurface && opengl)
+	if ((!m_sdlwindow || !m_glcontext) && opengl)
 	{
 		log("Graphics: Could not set videomode: %s, trying without opengl\n", SDL_GetError());
-		flags &= ~SDL_OPENGL;
-		sdlsurface = SDL_SetVideoMode(w, h, 32, flags);
+		flags &= ~SDL_WINDOW_OPENGL;
+		m_sdlwindow = SDL_CreateWindow("Widelands Window",
+												 SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, flags);
 	}
 
-	if (!sdlsurface)
-	{
+	if (!m_sdlwindow) {
 		log
 			("Graphics: Could not set videomode: %s, trying minimum graphics settings\n",
 			 SDL_GetError());
-		flags &= ~SDL_FULLSCREEN;
-		sdlsurface = SDL_SetVideoMode
-			(FALLBACK_GRAPHICS_WIDTH, FALLBACK_GRAPHICS_HEIGHT, FALLBACK_GRAPHICS_DEPTH, flags);
+		flags &= ~SDL_WINDOW_FULLSCREEN;
+		m_sdlwindow = SDL_CreateWindow("Widelands Window",
+												 SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+												 kFallbackGraphicsWidth, kFallbackGraphicsHeight, flags);
 		m_fallback_settings_in_effect = true;
-		if (!sdlsurface)
+		if (!m_sdlwindow) {
 			throw wexception
 				("Graphics: could not set video mode: %s", SDL_GetError());
+		}
 	}
+
+#ifndef _WIN32
+	const std::string icon_name = "pics/wl-ico-128.png";
+#else
+	const std::string icon_name = "pics/wl-ico-32.png";
+#endif
+	SDL_Surface* s = load_image_as_sdl_surface(icon_name, g_fs);
+	SDL_SetWindowIcon(m_sdlwindow, s);
+	SDL_FreeSurface(s);
 
 	// setting the videomode was successful. Print some information now
 	log("Graphics: Setting video mode was successful\n");
 
-	if (opengl && 0 != (sdlsurface->flags & SDL_GL_DOUBLEBUFFER))
+	if (opengl && 0 != (SDL_GetWindowFlags(m_sdlwindow) & SDL_GL_DOUBLEBUFFER))
 		log("Graphics: OPENGL DOUBLE BUFFERING ENABLED\n");
-	if (0 != (sdlsurface->flags & SDL_FULLSCREEN))
+	if (0 != (SDL_GetWindowFlags(m_sdlwindow) & SDL_WINDOW_FULLSCREEN))
 		log("Graphics: FULLSCREEN ENABLED\n");
 
 	bool use_arb = true;
 	const char * extensions = nullptr;
 
-	if (0 != (sdlsurface->flags & SDL_OPENGL)) {
+	if (opengl && 0 != (SDL_GetWindowFlags(m_sdlwindow) & SDL_WINDOW_OPENGL)) {
 		//  We have successful opened an opengl screen. Print some information
 		//  about opengl and set the rendering capabilities.
 		log ("Graphics: OpenGL: OpenGL enabled\n");
@@ -160,7 +179,8 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 		glewExperimental = GL_TRUE;
 		GLenum err = glewInit();
 		if (err != GLEW_OK) {
-			log("glewInit returns %i\nYour OpenGL installation must be __very__ broken.\n", err);
+			log("glewInit returns %i\nYour OpenGL installation must be __very__ broken. %s\n",
+				 err, glewGetErrorString(err));
 			throw wexception("glewInit returns %i: Broken OpenGL installation.", err);
 		}
 
@@ -175,23 +195,22 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 			("Graphics: Neither GL_ARB_framebuffer_object or GL_EXT_framebuffer_object supported! "
 			"Switching off OpenGL!\n"
 			);
-			flags &= ~SDL_OPENGL;
+			flags &= ~SDL_WINDOW_OPENGL;
 			m_fallback_settings_in_effect = true;
-
-			// One must never free the screen surface of SDL (using
-			// SDL_FreeSurface) as it is owned by SDL itself, therefore the next
-			// call does not leak memory.
-			sdlsurface = SDL_SetVideoMode
-				(FALLBACK_GRAPHICS_WIDTH, FALLBACK_GRAPHICS_HEIGHT, FALLBACK_GRAPHICS_DEPTH, flags);
+			SDL_DestroyWindow(m_sdlwindow);
+			m_sdlwindow = SDL_CreateWindow("Widelands Window",
+													 SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+													 kFallbackGraphicsWidth, kFallbackGraphicsHeight, flags);
 			m_fallback_settings_in_effect = true;
-			if (!sdlsurface)
+			if (!m_sdlwindow) {
 				throw wexception("Graphics: could not set video mode: %s", SDL_GetError());
+			}
 		}
 	}
 	Surface::display_format_is_now_defined();
 
 	// Redoing the check, because fallback settings might mean we no longer use OpenGL.
-	if (0 != (sdlsurface->flags & SDL_OPENGL)) {
+	if (opengl && 0 != (SDL_GetWindowFlags(m_sdlwindow) & SDL_WINDOW_OPENGL)) {
 		//  We now really have a working opengl screen...
 		g_opengl = true;
 
@@ -236,48 +255,26 @@ DIAG_ON ("-Wold-style-cast")
 	}
 
 	/* Information about the video capabilities. */
-	const SDL_VideoInfo* info = SDL_GetVideoInfo();
-	char videodrvused[16];
-	SDL_VideoDriverName(videodrvused, 16);
+	SDL_DisplayMode disp_mode;
+	SDL_GetWindowDisplayMode(m_sdlwindow, &disp_mode);
+	const char * videodrvused = SDL_GetCurrentVideoDriver();
 	log
 		("**** GRAPHICS REPORT ****\n"
 		 " VIDEO DRIVER %s\n"
-		 " hw surface possible %d\n"
-		 " window manager available %d\n"
-		 " blitz_hw %d\n"
-		 " blitz_hw_CC %d\n"
-		 " blitz_hw_A %d\n"
-		 " blitz_sw %d\n"
-		 " blitz_sw_CC %d\n"
-		 " blitz_sw_A %d\n"
-		 " blitz_fill %d\n"
-		 " video_mem %d\n"
-		 " vfmt %p\n"
+		 " pixel fmt %u\n"
 		 " size %d %d\n"
 		 "**** END GRAPHICS REPORT ****\n",
 		 videodrvused,
-		 info->hw_available,
-		 info->wm_available,
-		 info->blit_hw,
-		 info->blit_hw_CC,
-		 info->blit_hw_A,
-		 info->blit_sw,
-		 info->blit_sw_CC,
-		 info->blit_sw_A,
-		 info->blit_fill,
-		 info->video_mem,
-		 info->vfmt,
-		 info->current_w, info->current_h);
+		 disp_mode.format,
+		 disp_mode.w, disp_mode.h);
 
-	log("Graphics: flags: %x\n", sdlsurface->flags);
+	log("Graphics: flags: %u\n", SDL_GetWindowFlags(m_sdlwindow));
 
 	assert
-		(sdlsurface->format->BytesPerPixel == 2 ||
-		 sdlsurface->format->BytesPerPixel == 4);
+			(SDL_BYTESPERPIXEL(disp_mode.format) == 2 ||
+			 SDL_BYTESPERPIXEL(disp_mode.format) == 4);
 
-	SDL_WM_SetCaption
-		(("Widelands " + build_id() + '(' + build_type() + ')').c_str(),
-		 "Widelands");
+	SDL_SetWindowTitle(m_sdlwindow, ("Widelands " + build_id() + '(' + build_type() + ')').c_str());
 
 	if (g_opengl) {
 		glViewport(0, 0, w, h);
@@ -303,7 +300,8 @@ DIAG_ON ("-Wold-style-cast")
 		// Clear the screen before running the game.
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		SDL_GL_SwapBuffers();
+		SDL_GL_SetSwapInterval(1);
+		SDL_GL_SwapWindow(m_sdlwindow);
 		glEnable(GL_TEXTURE_2D);
 
 		GLSurfaceTexture::initialize(use_arb);
@@ -313,12 +311,18 @@ DIAG_ON ("-Wold-style-cast")
 	{
 		screen_.reset(new GLSurfaceScreen(w, h));
 	}
-	else
-	{
-		screen_.reset(new SDLSurface(sdlsurface, false));
+	else {
+		m_sdl_renderer =  SDL_CreateRenderer(m_sdlwindow, -1, 0);
+		uint32_t rmask, gmask, bmask, amask;
+		int bpp;
+		SDL_PixelFormatEnumToMasks(SDL_PIXELFORMAT_ARGB8888, &bpp, &rmask, &gmask, &bmask, &amask);
+		m_sdl_screen = SDL_CreateRGBSurface(0, w, h, bpp, rmask, gmask, bmask, amask);
+		m_sdl_texture = SDL_CreateTexture(m_sdl_renderer,
+													 SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING,
+													 w, h);
+		screen_.reset(new SDLSurface(m_sdl_screen, false));
 	}
 
-	m_sdl_screen = sdlsurface;
 	m_rendertarget.reset(new RenderTarget(screen_.get()));
 
 	pic_road_normal_.reset(load_image("world/pics/roadt_normal.png"));
@@ -337,8 +341,25 @@ void Graphic::cleanup() {
 	if (UI::g_fh)
 		UI::g_fh->flush();
 
-	if (g_opengl)
+	if (g_opengl) {
 		GLSurfaceTexture::cleanup();
+	}
+	if (m_sdl_texture) {
+		SDL_DestroyTexture(m_sdl_texture);
+		m_sdl_texture = nullptr;
+	}
+	if (m_sdl_screen) {
+		SDL_FreeSurface(m_sdl_screen);
+		m_sdl_screen = nullptr;
+	}
+	if (m_sdlwindow) {
+		SDL_DestroyWindow(m_sdlwindow);
+		m_sdlwindow = nullptr;
+	}
+	if (m_glcontext) {
+		SDL_GL_DeleteContext(m_glcontext);
+		m_glcontext = nullptr;
+	}
 }
 
 Graphic::~Graphic()
@@ -364,7 +385,7 @@ int32_t Graphic::get_yres()
 
 bool Graphic::is_fullscreen()
 {
-	return m_sdl_screen->flags & SDL_FULLSCREEN;
+	return SDL_GetWindowFlags(m_sdlwindow) & SDL_WINDOW_FULLSCREEN;
 }
 
 /**
@@ -390,32 +411,16 @@ void Graphic::toggle_fullscreen()
 	// Note: Not all Images are cached in the ImageCache, at time of me writing
 	// this, only InMemoryImage does not safe itself in the ImageCache. And this
 	// should only be a problem for Images loaded from maps.
-	SDL_WM_ToggleFullScreen(m_sdl_screen);
-}
-
-/**
- * Mark the entire screen for refreshing
-*/
-void Graphic::update_fullscreen()
-{
-	m_update_fullscreen = true;
-}
-
-/**
- * Mark a rectangle for refreshing
-*/
-void Graphic::update_rectangle(int32_t x, int32_t y, int32_t w, int32_t h)
-{
-	if (m_nr_update_rects >= MAX_RECTS) {
-		m_update_fullscreen = true;
-		return;
+	if (SDL_GetWindowFlags(m_sdlwindow) & SDL_WINDOW_FULLSCREEN) {
+		SDL_SetWindowFullscreen(m_sdlwindow, 0);
+	} else {
+		SDL_SetWindowFullscreen(m_sdlwindow, SDL_WINDOW_FULLSCREEN);
 	}
-	m_update_fullscreen = true;
-	m_update_rects[m_nr_update_rects].x = x;
-	m_update_rects[m_nr_update_rects].y = y;
-	m_update_rects[m_nr_update_rects].w = w;
-	m_update_rects[m_nr_update_rects].h = h;
-	++m_nr_update_rects;
+}
+
+
+void Graphic::update() {
+	m_update = true;
 }
 
 /**
@@ -423,7 +428,7 @@ void Graphic::update_rectangle(int32_t x, int32_t y, int32_t w, int32_t h)
 */
 bool Graphic::need_update() const
 {
-	return m_nr_update_rects || m_update_fullscreen;
+	return  m_update;
 }
 
 /**
@@ -431,24 +436,19 @@ bool Graphic::need_update() const
  *
  * \param force update whole screen
 */
-void Graphic::refresh(bool force)
+void Graphic::refresh()
 {
 	if (g_opengl) {
-		SDL_GL_SwapBuffers();
-		m_update_fullscreen = false;
-		m_nr_update_rects = 0;
+		SDL_GL_SwapWindow(m_sdlwindow);
+		m_update = false;
 		return;
 	}
 
-	if (force || m_update_fullscreen) {
-		//flip defaults to SDL_UpdateRect(m_surface, 0, 0, 0, 0);
-		SDL_Flip(m_sdl_screen);
-	} else
-		SDL_UpdateRects
-			(m_sdl_screen, m_nr_update_rects, m_update_rects);
-
-	m_update_fullscreen = false;
-	m_nr_update_rects = 0;
+	SDL_UpdateTexture(m_sdl_texture, nullptr, m_sdl_screen->pixels, m_sdl_screen->pitch);
+	SDL_RenderClear(m_sdl_renderer);
+	SDL_RenderCopy(m_sdl_renderer, m_sdl_texture, nullptr, nullptr);
+	SDL_RenderPresent(m_sdl_renderer);
+	m_update = false;
 }
 
 
@@ -464,7 +464,11 @@ void Graphic::save_png(const Image* image, StreamWrite * sw) const {
 
 uint32_t Graphic::new_maptexture(const std::vector<std::string>& texture_files, const uint32_t frametime)
 {
-	m_maptextures.emplace_back(new Texture(texture_files, frametime, *m_sdl_screen->format));
+	SDL_PixelFormat* pixel_fmt = SDL_AllocFormat(SDL_PIXELFORMAT_ARGB8888);
+	m_maptextures.emplace_back(new Texture(texture_files, frametime, *pixel_fmt));
+	if (pixel_fmt) {
+		SDL_FreeFormat(pixel_fmt);
+	}
 	return m_maptextures.size(); // ID 1 is at m_maptextures[0]
 }
 

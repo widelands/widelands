@@ -737,9 +737,9 @@ void FieldActionWindow::act_ripflag()
 	if (upcast(Widelands::Flag, flag, m_node.field->get_immovable())) {
 		if (Building * const building = flag->get_building()) {
 			if (building->get_playercaps() & Building::PCap_Bulldoze) {
-				if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) {
+				if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
 					ref_cast<Game, EditorGameBase>(egbase).send_player_bulldoze
-						(*flag, get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL));
+						(*flag, get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL));
 				}
 				else {
 					show_bulldoze_confirm
@@ -750,7 +750,7 @@ void FieldActionWindow::act_ripflag()
 			}
 		} else {
 			ref_cast<Game, EditorGameBase>(egbase).send_player_bulldoze
-					(*flag, get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL));
+					(*flag, get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL));
 			ibase().need_complete_redraw();
 		}
 	}
@@ -795,7 +795,7 @@ void FieldActionWindow::act_removeroad()
 	Widelands::EditorGameBase & egbase = ibase().egbase();
 	if (upcast(Widelands::Road, road, egbase.map().get_immovable(m_node)))
 		ref_cast<Game, EditorGameBase>(egbase).send_player_bulldoze
-			(*road, get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL));
+			(*road, get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL));
 	ibase().need_complete_redraw();
 	okdialog();
 }

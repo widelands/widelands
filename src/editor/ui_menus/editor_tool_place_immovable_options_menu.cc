@@ -19,7 +19,7 @@
 
 #include "editor/ui_menus/editor_tool_place_immovable_options_menu.h"
 
-#include <SDL_keysym.h>
+#include <SDL_keycode.h>
 
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"

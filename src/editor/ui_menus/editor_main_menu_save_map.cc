@@ -67,6 +67,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 			 get_inner_w() / 2 - spacing, get_inner_h() - spacing - offsy - 60);
 	m_ls->clicked.connect(boost::bind(&MainMenuSaveMap::clicked_item, this, _1));
 	m_ls->double_clicked.connect(boost::bind(&MainMenuSaveMap::double_clicked_item, this, _1));
+	m_ls->focus();
 	m_editbox =
 		new UI::EditBox
 			(this,

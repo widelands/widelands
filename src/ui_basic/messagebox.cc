@@ -133,14 +133,14 @@ bool WLMessageBox::handle_mouserelease(const uint8_t, int32_t, int32_t)
 	return true;
 }
 
-bool WLMessageBox::handle_key(bool down, SDL_keysym code)
+bool WLMessageBox::handle_key(bool down, SDL_Keysym code)
 {
 	if (!down) {
 		return false;
 	}
 
 	switch (code.sym) {
-		case SDLK_KP_ENTER:
+		case SDL_SCANCODE_KP_ENTER:
 		case SDLK_RETURN:
 			pressed_yes();
 			pressed_ok();

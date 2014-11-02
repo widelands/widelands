@@ -118,6 +118,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 		(Columns::Size,
 		 boost::bind
 		 	(&BuildingStatisticsMenu::compare_building_size, this, _1, _2));
+	m_table.focus();
 
 	//  toggle when to run button
 	m_progbar.set_total(100);
