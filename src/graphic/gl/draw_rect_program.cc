@@ -52,13 +52,6 @@ void main() {
 }
 )";
 
-// Converts the pixel (x, y) in a texture of the given 'width' and 'height'
-// into an OpenGL point.
-inline void pixel_to_gl(const int width, const int height, float* x, float* y) {
-	*x = (*x / width) * 2. - 1.;
-	*y = 1. - (*y / height) * 2.;
-}
-
 }  // namespace
 
 // static
@@ -97,7 +90,7 @@ DrawRectProgram::DrawRectProgram() {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void DrawRectProgram::draw(const int w, const int h, const Rect& rectangle, const RGBColor& color) {
+void DrawRectProgram::draw(const FloatRect& gl_dst_rect, const RGBColor& color) {
 	glUseProgram(gl_program_.object());
 	glEnableVertexAttribArray(attr_position_);
 	glBindBuffer(GL_ARRAY_BUFFER, gl_array_buffer_.object());
@@ -109,14 +102,7 @@ void DrawRectProgram::draw(const int w, const int h, const Rect& rectangle, cons
 								 sizeof(PerVertexData),
 								 reinterpret_cast<void*>(0));
 
-	float x1 = rectangle.x + 0.5;
-	float y1 = rectangle.y + 0.5;
-	pixel_to_gl(w, h, &x1, &y1);
-	float x2 = rectangle.x + rectangle.w - 0.5;
-	float y2 = rectangle.y + rectangle.h - 0.5;
-	pixel_to_gl(w, h, &x2, &y2);
-
-	glUniform4f(u_rect_, x1, y1, x2 - x1, y2 - y1);
+	glUniform4f(u_rect_, gl_dst_rect.x, gl_dst_rect.y, gl_dst_rect.w, gl_dst_rect.h);
 	glUniform3i(u_color_, color.r, color.g, color.b);
 
 	glLineWidth(1.);

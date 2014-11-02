@@ -59,20 +59,6 @@ void main() {
 }
 )";
 
-// NOCOM(#sirver): move to common code.
-// Converts the pixel (x, y) in a texture of the given 'width' and 'height'
-// into an OpenGL point.
-inline void pixel_to_gl(const int width, const int height, float* x, float* y) {
-	*x = (*x / width) * 2. - 1.;
-	*y = (*y / height) * 2. - 1.;
-}
-
-// Converts the pixel (x, y) in a texture to a gl coordinate in [0, 1].
-inline void pixel_to_gl_texture(const int width, const int height, float* x, float* y) {
-	*x = (*x / width);
-	*y = (*y / height);
-}
-
 }  // namespace
 
 // static

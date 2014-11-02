@@ -38,17 +38,29 @@ public:
 	uint8_t * get_pixels() const override;
 	void set_pixel(uint16_t x, uint16_t y, uint32_t clr) override;
 	uint32_t get_pixel(uint16_t x, uint16_t y) override;
-
 	void blit(const Point&, const Surface*, const Rect& srcrc, Composite cm) override;
 	void fill_rect(const Rect&, const RGBAColor&) override;
 	void draw_rect(const Rect&, const RGBColor&) override;
 	void brighten_rect(const Rect&, int32_t factor) override;
-
 	virtual void draw_line
 		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor&, uint8_t width) override;
 
 protected:
+	// Converts the given pixel into an OpenGl point. This might
+	// need some flipping of axis, depending if you want to render
+	// on the screen or not.
 	virtual void pixel_to_gl(float* x, float* y) = 0;
+
+	// Convert the 'rect' in pixel space into opengl space.
+	enum class ConversionMode {
+		// Convert the rect as given.
+		kExact,
+
+		// Convert the rect so that the borders are in the center
+		// of the pixels.
+		kMidPoint,
+	};
+	FloatRect to_opengl(const Rect& rect, ConversionMode mode);
 
 	/// Logical width and height of the surface
 	uint16_t m_w, m_h;

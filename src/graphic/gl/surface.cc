@@ -60,16 +60,24 @@ void GLSurface::set_pixel(uint16_t x, uint16_t y, uint32_t clr) {
 	*(reinterpret_cast<uint32_t *>(data)) = clr;
 }
 
-/**
- * Draws the outline of a rectangle
- */
+FloatRect GLSurface::to_opengl(const Rect& rect, ConversionMode mode) {
+	const float delta = mode == ConversionMode::kExact ? 0. : 0.5;
+	float x1 = rect.x + delta;
+	float y1 = rect.y + delta;
+	pixel_to_gl(&x1, &y1);
+	float x2 = rect.x + rect.w - delta;
+	float y2 = rect.y + rect.h - delta;
+	pixel_to_gl(&x2, &y2);
+
+	return FloatRect(x1, y1, x2 - x1, y2 - y1);
+}
+
 void GLSurface::draw_rect(const Rect& rc, const RGBColor& clr)
 {
 	assert(g_opengl);
-
-	DrawRectProgram::instance().draw(width(), height(), rc, clr);
+	glViewport(0, 0, width(), height());
+	DrawRectProgram::instance().draw(to_opengl(rc, ConversionMode::kMidPoint), clr);
 }
-
 
 /**
  * Draws a filled rectangle
@@ -180,24 +188,9 @@ void GLSurface::blit
 
 	assert(g_opengl);
 
-	FloatRect gl_dst_rect, gl_src_rect;
-
-	// Destination Rectangle.
-	{
-		float x1 = dst.x;
-		float y1 = dst.y;
-		pixel_to_gl(&x1, &y1);
-		float x2 = dst.x + srcrc.w;
-		float y2 = dst.y + srcrc.h;
-		pixel_to_gl(&x2, &y2);
-		gl_dst_rect.x = x1;
-		gl_dst_rect.y = y1;
-		gl_dst_rect.w = x2 - x1;
-		gl_dst_rect.h = y2 - y1;
-	}
-
 	// Source Rectangle.
 	const GLSurfaceTexture* const texture = static_cast<const GLSurfaceTexture*>(image);
+	FloatRect gl_src_rect;
 	{
 		float x1 = srcrc.x;
 		float y1 = srcrc.y;
@@ -211,6 +204,7 @@ void GLSurface::blit
 		gl_src_rect.h = y2 - y1;
 	}
 
-	// NOCOM(#sirver): eventually, do not mess with glBlend
+	const FloatRect gl_dst_rect = to_opengl(Rect(dst.x, dst.y, srcrc.w, srcrc.h), ConversionMode::kExact);
+
 	BlitProgram::instance().draw(gl_dst_rect, gl_src_rect, texture->get_gl_texture(), cm);
 }

@@ -29,9 +29,9 @@ public:
 	// Returns the (singleton) instance of this class.
 	static DrawRectProgram& instance();
 
-	// Draws a (non-solid) 'rectangle' in 'color' into the currently activated
-	// framebuffer. The framebuffer must have dimensions 'w' and 'h'.
-	void draw(const int w, const int h, const Rect& rectangle, const RGBColor& color);
+	// Draws a (non-solid) rect in 'color' into the currently activated
+	// framebuffer.
+	void draw(const FloatRect& gl_dst_rect, const RGBColor& color);
 
 private:
 	DrawRectProgram();
