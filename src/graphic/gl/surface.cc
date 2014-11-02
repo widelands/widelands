@@ -75,7 +75,6 @@ FloatRect GLSurface::to_opengl(const Rect& rect, ConversionMode mode) {
 
 void GLSurface::draw_rect(const Rect& rc, const RGBColor& clr)
 {
-	assert(g_opengl);
 	glViewport(0, 0, width(), height());
 	DrawRectProgram::instance().draw(to_opengl(rc, ConversionMode::kMidPoint), clr);
 }
@@ -84,7 +83,6 @@ void GLSurface::draw_rect(const Rect& rc, const RGBColor& clr)
  * Draws a filled rectangle
  */
 void GLSurface::fill_rect(const Rect& rc, const RGBAColor& clr) {
-	assert(g_opengl);
 	glViewport(0, 0, width(), height());
 	FillRectProgram::instance().draw(to_opengl(rc, ConversionMode::kExact), clr);
 }
@@ -97,53 +95,25 @@ void GLSurface::brighten_rect(const Rect& rc, const int32_t factor)
 	if (!factor)
 		return;
 
-	assert(rc.x >= 0);
-	assert(rc.y >= 0);
-	assert(rc.w >= 1);
-	assert(rc.h >= 1);
-	assert(g_opengl);
+	glViewport(0, 0, width(), height());
 
+	// The simple trick here is to fill the rect, but using a different glBlendFunc that will sum
+	// src and target (or subtract them if factor is negative).
 	if (factor < 0) {
-		if (!g_gr->caps().gl.blendequation)
-			return;
-
 		glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
 	}
 
-	/* glBlendFunc is a very nice feature of opengl. You can specify how the
-	* color is calculated.
-	*
-	* glBlendFunc(GL_ONE, GL_ONE) means the following:
-	* Rnew = Rdest + Rsrc
-	* Gnew = Gdest + Gsrc
-	* Bnew = Bdest + Bsrc
-	* Anew = Adest + Asrc
-	* where Xnew is the new calculated color for destination, Xdest is the old
-	* color of the destination and Xsrc is the color of the source.
-	*/
-	glDisable(GL_TEXTURE_2D);
 	glBlendFunc(GL_ONE, GL_ONE);
 
-	// And now simply draw a rect with factor as the color
-	// (this is the source color) over the region
-	glBegin(GL_QUADS); {
-		glColor4f
-			((std::abs(factor) / 256.0f),
-			 (std::abs(factor) / 256.0f),
-			 (std::abs(factor) / 256.0f),
-			 0);
-		glVertex2f(rc.x,        rc.y);
-		glVertex2f(rc.x + rc.w, rc.y);
-		glVertex2f(rc.x + rc.w, rc.y + rc.h);
-		glVertex2f(rc.x,        rc.y + rc.h);
-	} glEnd();
+	const int delta = std::abs(factor);
+	FillRectProgram::instance().draw(
+	   to_opengl(rc, ConversionMode::kExact), RGBAColor(delta, delta, delta, 0));
 
-	if (factor < 0)
+	if (factor < 0) {
 		glBlendEquation(GL_FUNC_ADD);
+	}
 
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-	glEnable(GL_TEXTURE_2D);
 }
 
 void GLSurface::draw_line
@@ -173,8 +143,6 @@ void GLSurface::blit
 	(const Point& dst, const Surface* image, const Rect& srcrc, Composite cm)
 {
 	glViewport(0, 0, width(), height());
-
-	assert(g_opengl);
 
 	// Source Rectangle.
 	const GLSurfaceTexture* const texture = static_cast<const GLSurfaceTexture*>(image);
