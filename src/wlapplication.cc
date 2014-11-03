@@ -764,23 +764,12 @@ void WLApplication::init_language() {
 	// Initialize locale and grab "widelands" textdomain
 	i18n::init_locale();
 
-	if (s.has_val("localedir")) {
-		//TODO(code review): Should this still be possible, or do we want to tie it with
-		//datadir so that people using --datadir will also load locales from that?
-		// NOCOM(#codereview): I think that we have to keep it separate, but I am
-		// not 100% sure. I think some linux distributions (i.e. debian) need to
-		// have locales in another directory as data. Otherwise, I would much
-		// appreciate this to be merged into datadir.
-		// Localedir has been specified on the command line or in the config file.
-		i18n::set_localedir(s.get_safe_string("localedir"));
-	} else {
-		// Use default localedir, as configured at compile time.
-		std::string localedir = std::string(INSTALL_DATADIR) + "/locale";
-		if (!PATHS_ARE_ABSOLUTE) {
-			localedir = relative_to_executable_to_absolute(localedir);
-		}
-		i18n::set_localedir(localedir);
+	// Use default localedir, residing in INSTALL_DATADIR which was configured at compile time.
+	std::string localedir = std::string(INSTALL_DATADIR) + "/locale";
+	if (!PATHS_ARE_ABSOLUTE) {
+		localedir = relative_to_executable_to_absolute(localedir);
 	}
+	i18n::set_localedir(localedir);
 	i18n::grab_textdomain("widelands");
 
 	// Set locale corresponding to selected language
