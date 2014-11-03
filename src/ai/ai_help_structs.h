@@ -229,12 +229,10 @@ struct BuildableField {
 	int16_t military_stationed_;
 	// stationed (manned) military buildings nearby
 	int16_t military_unstationed_;
-	//// some buildings must be postponed bit //NOCOM ???
-	// int32_t prohibited_till_;
-	//// and then some must be forced
-	// int32_t forced_after_;
 	bool is_portspace_;
-	bool portspace_nearby_;
+	//bool portspace_nearby_; // to prohibit buildings near a portspace Not needed?
+	bool port_nearby_;  //to increase priority if a port is nearby,
+	//especially for new colonies
 
 	std::vector<uint8_t> consumers_nearby_;
 	std::vector<uint8_t> producers_nearby_;
@@ -267,7 +265,7 @@ struct BuildableField {
 	     military_presence_(0),
 	     military_stationed_(0),
 	     is_portspace_(false),
-	     portspace_nearby_(false) {
+	     port_nearby_(false) {
 	}
 };
 

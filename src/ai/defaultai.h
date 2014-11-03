@@ -267,6 +267,8 @@ private:
 	int32_t next_attack_waittime_;  // second till the next attack consideration
 	// bool building_ships ;			// a "semaphore" for shipyards whether to keep building ships
 	bool seafaring_economy;  // false by default, until first port space is found
+	uint32_t colony_scan_area_;  //distance from a possible port that is scanned for owned territory
+								// it decreases with failed scans
 	int32_t spots_;          // sum of buildable fields
 
 	enum { REPRIORITIZE, STOPSHIPYARD, STARTSHIPYARD };
