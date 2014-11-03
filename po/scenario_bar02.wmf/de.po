@@ -1,21 +1,22 @@
 # Widelands po/scenario_t03.wmf/de.po
 # Copyright (C) 2005-2009 Widelands Development Team
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2009.
-#
+# Fabian Mack <wl-zocker@t-online.de>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-10-29 10:08+0000\n"
-"PO-Revision-Date: 2014-07-27 16:51+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
-"Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
+"PO-Revision-Date: 2014-11-03 01:20+0000\n"
+"Last-Translator: wl-zocker <Unknown>\n"
+"Language-Team: widelands-dev\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-30 05:43+0000\n"
-"X-Generator: Launchpad (build 17203)\n"
+"X-Launchpad-Export-Date: 2014-11-03 05:52+0000\n"
+"X-Generator: Launchpad (build 17211)\n"
+"Language: de\n"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:21
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:23
@@ -76,6 +77,9 @@ msgid ""
 "Build a donjon at the north-east border of your territory to get greater "
 "visual range and to protect your people from sudden attacks by enemies."
 msgstr ""
+"Baue einen Wachturm im Nordosten deines Territoriums, um einen größeren "
+"Sichtradius zu haben und um dein Volk vor plötzlichen Angriffen deiner "
+"Feinde zu beschützen."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:56
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:58
@@ -145,6 +149,8 @@ msgid ""
 "Build a helm smithy to the west of the mountains to provide your soldiers "
 "with better armor."
 msgstr ""
+"Baue eine Helmschmiede westlich der Berge, um deine Soldaten mit einer "
+"besseren Rüstung zu versorgen."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:95
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:97
@@ -196,7 +202,7 @@ msgstr "Baue eine Waffenproduktion"
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:126
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:128
 msgid "Build a helm smithy"
-msgstr ""
+msgstr "Baue eine Helmschmiede"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:135
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:137
@@ -239,7 +245,7 @@ msgstr "Nahe der Heimat"
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:167
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:300
 msgid "Thron looks worried…"
-msgstr ""
+msgstr "Thron sieht besorgt aus …"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:159
 msgid ""
@@ -290,7 +296,7 @@ msgstr "Zweifel"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:174
 msgid "Boldreth is shaking his head…"
-msgstr ""
+msgstr "Boldreth schüttelt den Kopf …"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:175
 msgid ""
@@ -473,6 +479,12 @@ msgid ""
 "our farmers seems to be very clever – he already got some crops to grow in "
 "this cold soil."
 msgstr ""
+"Boldreth hat Recht! Wir haben nicht genug Nahrung, um einen langen, kalten "
+"Winter zu überstehen. Wir sollten damit beginnen, einen Brunnen, eine "
+"Fischer- und eine Jagdhütte zu bauen. Und wenn wir genug Platz finden, "
+"sollten wir auch einen Bauernhof und eine Bäckerei bauen. Einer unserer "
+"Bauern scheint sehr schlau zu sein – er hat Getreide gefunden, das in dieser "
+"kalten Erde wächst."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:234
 msgid "Food Economy Completed"
@@ -498,6 +510,10 @@ msgid ""
 "range over the area around our hall to protect our people from sudden "
 "attacks."
 msgstr ""
+"Thron hat mir erzählt, dass er Spuren im Schnee nordöstlich unseren Siedlung "
+"entdeckt hat. Er hat uns beauftragt, einen Wachturm zu bauen, um einen "
+"größeren Sichtbereich im Gebiet um uns herum zu haben, damit wir unsere "
+"Leute vor Überraschenden Angriffen schützen können."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:249
 msgid "Further Exploration"
@@ -513,6 +529,13 @@ msgid ""
 "am sure that there are a thousand greater dangers out there than the unknown "
 "tracks."
 msgstr ""
+"Die erste Befestigung, die Thron verlangt hat, ist soeben fertig geworden. "
+"Im Moment versucht er denen Glauben und Vertrauen zu bringen, die innerhalb "
+"der Mauern unseres neuen Standorts wohnen, den wir „Ondun“ genannt haben, "
+"was in der alten Sprache „die, die warten“ bedeutet. Aber Thron ist noch "
+"nicht zufrieden – und ich verstehe seine Befürchtungen vollkommen: Die "
+"Wälder sind tief und die Grenze zu Al’thunran ist nah. Ich bin sicher, es "
+"gibt tausend größere Gefahren dort draußen als die unbekannte Fährte."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:253
 msgid ""
@@ -538,6 +561,11 @@ msgid ""
 "I remember, most of the mountains west of Al’thunran hold coal and some "
 "metal ores."
 msgstr ""
+"Ich habe soeben mit dem Führer unserer Patrouille gesprochen. Er erzählte "
+"mir, dass sie einige Berge nordöstlich und östlich unseres Territoriums "
+"gefunden haben. Mit ein wenig Glück wird uns dies eine neue Gelegenheit "
+"bieten, um unsere Männer wieder zu bewaffnen. Soweit ich mich erinnere, "
+"enthalten die Berge westlich von Al’thunran Kohle und einige Metallerze."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:267
 msgid "Mining Economy Completed"
@@ -567,6 +595,12 @@ msgid ""
 "chance to secure the mountains from enemy hands: we must build a fortress to "
 "the east of the mountains!"
 msgstr ""
+"Boldreth und ich haben soeben das Gebiet um die drei Berge herum erkundet. "
+"Das entscheidende strategische Problem des Gebiets scheint zu sein, dass es "
+"zwei größere Pässe gibt – einen nördlich und einen südlich des zentralen "
+"Bergs. Diese Durchgänge sind recht schwierig zu kontrollieren, daher scheint "
+"mir, wir haben nur eine Möglichkeit, unsere Berge vor feindlichen "
+"Übergriffen zu schützen: Wir müssen eine Festung östlich der Berge bauen!"
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:282
 msgid "Fortress Completed"
@@ -594,6 +628,10 @@ msgid ""
 "there are still a lot of men and women waiting in our hall to get a task, so "
 "they can help our soldiers to prepare for the war to come."
 msgstr ""
+"Unsere Minenwirtschaft scheint gut zu laufen, das sind gute Neuigkeiten! "
+"Jedoch gibt es noch viele Männer und Frauen, die in unserem Hauptgebäude auf "
+"eine Aufgabe warten, mit der sie unseren Soldaten dabei helfen können, sich "
+"auf den kommenden Krieg vorzubereiten."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:293
 msgid ""
@@ -636,6 +674,14 @@ msgid ""
 "my hands, and I will not hesitate to rebuild it with all the strength my "
 "people have. I can’t wait to see it again in its old beauty."
 msgstr ""
+"Nichts von der Schönheit, an die ich mich erinnere, ist geblieben; nur "
+"Ruinen bleiben von der alten Hauptstadt. Ich bin kummervoll, aber auch "
+"erleichtert. Ich habe niemals gehofft, Al'thunrans alte Schönheit wieder zu "
+"sehen – vor nur einigen Monaten fragte ich mich, ob ich jemals wieder einen "
+"Fuß dorthin setzen könnte. Jetzt ist die alte Stadt zurück in meinen Händen, "
+"und ich werde nicht zögern, sie mit der ganzen Kraft meiner Leute wieder "
+"aufzubauen. Ich kann es nicht erwarten, sie in ihrer alten Schönheit wieder "
+"zu sehen."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:304
 msgid "Victory"
@@ -646,6 +692,9 @@ msgid ""
 "You have completed the last mission of the Barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
 msgstr ""
+"Du hast die letzte Mission der Einführungskampagne der Barbaren "
+"abgeschlossen. Wenn du möchtest, kannst du weiterspielen oder mit der "
+"nächsten Kampagne fortfahren."
 
 #: ../../campaigns/bar02.wmf/scripting/texts.lua:310
 msgid "Military Assault"

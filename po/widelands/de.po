@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-10-29 10:08+0000\n"
-"PO-Revision-Date: 2014-10-30 04:47+0000\n"
+"PO-Revision-Date: 2014-11-02 13:44+0000\n"
 "Last-Translator: wl-zocker <Unknown>\n"
 "Language-Team: widelands-dev\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-31 05:38+0000\n"
+"X-Launchpad-Export-Date: 2014-11-03 05:52+0000\n"
 "X-Generator: Launchpad (build 17211)\n"
 "Language: de\n"
 
@@ -4123,7 +4123,7 @@ msgstr "HP: 8/8  AT: 8/8  DE: 8/8  EV: 8/8"
 
 #: ../../src/wui/soldierlist.cc:417
 msgid "Prefer Rookies"
-msgstr "Bevorzuge einfache Soldaten"
+msgstr "Bevorzuge Neulinge"
 
 #: ../../src/wui/soldierlist.cc:419
 msgid "Prefer Heroes"
