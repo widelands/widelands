@@ -902,6 +902,13 @@ void WLApplication::parse_commandline
 		std::string opt = argv[i];
 		std::string value;
 
+		if (!opt.compare(0, 5, "-psn_")) {
+			// Mac OS passes this on the commandline when launched from finder.
+			// SDL1 removed it for us (apparently), but SDL2 does no longer, so we
+			// have to do this ourselves.
+			continue;
+		}
+
 		//are we looking at an option at all?
 		if (opt.compare(0, 2, "--"))
 			throw ParameterError();
