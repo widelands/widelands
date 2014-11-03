@@ -718,7 +718,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		}
 	}
 
-	// folowing is done allways (regardless of military or not)
+	// the following is done always (regardless of military or not)
 
 	// we get immovables with higher radius
 	immovables.clear();
@@ -731,6 +731,7 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 	field.military_presence_ = 0;
 
 	for (uint32_t i = 0; i < immovables.size(); ++i) {
+
 		const BaseImmovable& base_immovable = *immovables.at(i).object;
 
 		// testing if it is enemy-owned field
@@ -1844,7 +1845,7 @@ bool DefaultAI::improve_roads(int32_t gametime) {
 	}
 
 	// now we rotate economies and flags to get one flag to go on with
-	if (economies.size() == 0) {
+	if (economies.empty()) {
 		return check_economies();
 	}
 
@@ -2278,7 +2279,6 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	if (enhancement != INVALID_INDEX && (site.bo->cnt_built_ - site.bo->unoccupied_) > 1) {
 
 		BuildingIndex enbld = INVALID_INDEX;  // to get rid of this
-		BuildingObserver* bestbld = nullptr;
 
 		// Only enhance buildings that are allowed (scenario mode)
 		// do not do decisions to fast
@@ -2286,6 +2286,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 
 			const BuildingDescr& bld = *tribe_->get_building_descr(enhancement);
 			BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
+			BuildingObserver* bestbld = nullptr;
 
 			if (gametime - en_bo.construction_decision_time_ >= kBuildingMinInterval &&
 			    (en_bo.cnt_under_construction_ + en_bo.unoccupied_) == 0) {
@@ -2489,7 +2490,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	// remaining buildings without inputs and not supporting ones (fishers only left probably and
 	// huters)
 
-	if (site.bo->inputs_.size() == 0 && site.bo->production_hint_ < 0 &&
+	if (site.bo->inputs_.empty() && site.bo->production_hint_ < 0 &&
 	    site.site->can_start_working() && !site.bo->space_consumer_ &&
 	    site.site->get_statistics_percent() < 10 &&
 	    ((game().get_gametime() - site.built_time_) > 10 * 60 * 1000)) {
@@ -3235,20 +3236,32 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 	// now we test all players which one are 'attackable'
 	for (uint8_t j = 1; j <= plr_in_game; ++j) {
 		if (pn == j) {
-			player_attackable[j - 1] = false;
+			player_attackable.at(j - 1) = false;
 			continue;
 		}
 
-		if (genstats[j - 1].miltary_strength.back() == 0) {
-			// to avoid improbable zero division
-			player_attackable[j - 1] = true;
-			any_attackable = true;
-		} else if ((genstats[pn - 1].miltary_strength.back() * 100 /
-		            genstats[j - 1].miltary_strength.back()) > treshold_ratio) {
-			player_attackable[j - 1] = true;
-			any_attackable = true;
-		} else {
-			player_attackable[j - 1] = false;
+		try {
+			// It seems that under some circumstances genstats can be empty.
+			// So, to avoid crash, the AI tests its content first.
+			if (genstats.at(j - 1).miltary_strength.empty()) {
+				log("ComputerPlayer(%d): miltary_strength is empty\n", player_number());
+				player_attackable.at(j - 1) = false;
+			// Avoid division by zero
+			} else if (genstats.at(j - 1).miltary_strength.back() == 0) {
+				player_attackable.at(j - 1) = true;
+				any_attackable = true;
+			// Check threshold
+			} else if ((genstats.at(pn - 1).miltary_strength.back() * 100 /
+							genstats.at(j - 1).miltary_strength.back()) > treshold_ratio) {
+				player_attackable.at(j - 1) = true;
+				any_attackable = true;
+			} else {
+				player_attackable.at(j - 1) = false;
+			}
+		} catch (const std::out_of_range&) {
+			log("ComputerPlayer(%d): genstats entry missing - size :%d\n",
+				 player_number(), static_cast<unsigned int>(genstats.size()));
+			player_attackable.at(j - 1) = false;
 		}
 	}
 

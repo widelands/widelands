@@ -14,9 +14,9 @@ wl_library(graphic_text
     sdl_ttf_font.h
     textstream.cc
     textstream.h
-  USES_SDL
-  USES_SDL_TTF
-  USES_SDL_GFX
+  USES_SDL2
+  USES_SDL2_TTF
+  USES_SDL2_GFX
   DEPENDS
     base_exceptions
     base_geometry

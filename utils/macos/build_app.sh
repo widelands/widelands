@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e 
+set -e
 
 if [ "$#" == "0" ]; then
 	echo "Usage: $0 <bzr_repo_directory>"
@@ -35,7 +35,7 @@ function MakeDMG {
    cp $SOURCE_DIR/COPYING  $DESTINATION/COPYING.txt
 
    echo "Creating DMG ..."
-   hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_64bit_$WLVERSION.dmg" 
+   hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_64bit_$WLVERSION.dmg"
 }
 
 function MakeAppPackage {
@@ -88,8 +88,8 @@ EOF
    cp -a src/widelands $DESTINATION/Widelands.app/Contents/MacOS/
 
    echo "Stripping binary ..."
-   strip -u -r $DESTINATION/Widelands.app/Contents/MacOS/widelands 
-	
+   strip -u -r $DESTINATION/Widelands.app/Contents/MacOS/widelands
+
    echo "Copying dynamic libraries ..."
    dylibbundler -od -b -x $DESTINATION/Widelands.app/Contents/MacOS/widelands  -d $DESTINATION/Widelands.app/Contents/libs
 }
@@ -106,26 +106,26 @@ function BuildWidelands() {
       -DWL_PATHS_ARE_ABSOLUTE:STRING="false" \
       -DCMAKE_PREFIX_PATH:PATH="/usr/local" \
       \
-      -DSDL_LIBRARY:STRING="-L/usr/local/lib /usr/local/lib/libSDLmain.a /usr/local/lib/libSDL.a -Wl,-framework,OpenGL -Wl,-framework,Cocoa -Wl,-framework,ApplicationServices -Wl,-framework,Carbon -Wl,-framework,AudioToolbox -Wl,-framework,AudioUnit -Wl,-framework,IOKit" \
-      -DSDL_INCLUDE_DIR:PATH="/usr/local/include/SDL" \
+      -DSDL2_LIBRARY:STRING="-L/usr/local/lib /usr/local/lib/libSDL2main.a /usr/local/lib/libSDL2.a -Wl,-framework,OpenGL -Wl,-framework,Cocoa -Wl,-framework,ApplicationServices -Wl,-framework,Carbon -Wl,-framework,AudioToolbox -Wl,-framework,AudioUnit -Wl,-framework,IOKit" \
+      -DSDL2_INCLUDE_DIR:PATH="/usr/local/include/SDL2" \
       \
-      -DSDLIMAGE_LIBRARY:STRING="-Wl,/usr/local/lib/libSDL_image.a -Wl,/usr/local/lib/libjpeg.a" \
-      -DSDLIMAGE_INCLUDE_DIR:PATH="/usr/local/include/SDL" \
+      -DSDL2IMAGE_LIBRARY:STRING="-Wl,/usr/local/lib/libSDL2_image.a -Wl,/usr/local/lib/libjpeg.a" \
+      -DSDL2IMAGE_INCLUDE_DIR:PATH="/usr/local/include/SDL2" \
       \
       -DPNG_LIBRARY:FILEPATH="/usr/local/opt/libpng/lib/libpng.a" \
       -DPNG_INCLUDE_DIR:PATH="/usr/local/opt/libpng/include" \
       \
-      -DSDLTTF_LIBRARY:STRING="-Wl,/usr/local/opt/freetype/lib/libfreetype.a -Wl,/usr/local/lib/libbz2.a -Wl,/usr/local/lib/libSDL_ttf.a" \
-      -DSDLTTF_INCLUDE_DIR:PATH="/usr/local/include/SDL" \
+      -DSDL2TTF_LIBRARY:STRING="-Wl,/usr/local/opt/freetype/lib/libfreetype.a -Wl,/usr/local/lib/libbz2.a -Wl,/usr/local/lib/libSDL2_ttf.a" \
+      -DSDL2TTF_INCLUDE_DIR:PATH="/usr/local/include/SDL2" \
       \
-      -DSDLGFX_LIBRARY:FILEPATH="/usr/local/lib/libSDL_gfx.a" \
-      -DSDLGFX_INCLUDE_DIR:PATH="/usr/local/include/SDL" \
+      -DSDL2GFX_LIBRARY:FILEPATH="/usr/local/lib/libSDL2_gfx.a" \
+      -DSDL2GFX_INCLUDE_DIR:PATH="/usr/local/include/SDL2" \
       \
-      -DSDLMIXER_LIBRARY:STRING="-Wl,/usr/local/lib/libvorbisfile.a -Wl,/usr/local/lib/libogg.a -Wl,/usr/local/lib/libvorbis.a -Wl,/usr/local/lib/libSDL_mixer.a" \
-      -DSDLMIXER_INCLUDE_DIR:PATH="/usr/local/include/SDL" \
+      -DSDL2MIXER_LIBRARY:STRING="-Wl,/usr/local/lib/libvorbisfile.a -Wl,/usr/local/lib/libogg.a -Wl,/usr/local/lib/libvorbis.a -Wl,/usr/local/lib/libSDL2_mixer.a" \
+      -DSDL2MIXER_INCLUDE_DIR:PATH="/usr/local/include/SDL2" \
       \
-      -DSDLNET_LIBRARY:FILEPATH="/usr/local/lib/libSDL_net.a" \
-      -DSDLNET_INCLUDE_DIR:PATH="/usr/local/include/SDL" \
+      -DSDL2NET_LIBRARY:FILEPATH="/usr/local/lib/libSDL2_net.a" \
+      -DSDL2NET_INCLUDE_DIR:PATH="/usr/local/include/SDL2" \
       \
       -DINTL_LIBRARY:STRING="-Wl,/usr/local/opt/libiconv/lib/libiconv.a -Wl,/usr/local/opt/gettext/lib/libintl.a" \
       -DINTL_INCLUDE_DIR:PATH="/usr/local/opt/gettext/include" \

@@ -66,7 +66,7 @@ public:
 	void set_sel_radius_and_update_menu(uint32_t);
 
 	//  Handle UI elements.
-	bool handle_key(bool down, SDL_keysym) override;
+	bool handle_key(bool down, SDL_Keysym) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
 

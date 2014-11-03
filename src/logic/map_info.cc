@@ -28,7 +28,7 @@
 #include "config.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
-#include "graphic/render/minimaprenderer.h"
+#include "graphic/minimap_renderer.h"
 #include "graphic/surface.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"

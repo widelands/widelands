@@ -355,3 +355,30 @@ function close_windows()
       v:close()
    end
 end
+
+
+-- RST
+-- .. function:: wait_for_roadbuilding()
+--
+-- 	Sleeps while player is in roadbuilding mode.
+--
+-- 	:returns: :const:`nil`
+--
+function wait_for_roadbuilding()
+	while (wl.ui.MapView().is_building_road) do sleep(2000) end
+end
+
+
+-- RST
+-- .. function:: wait_for_roadbuilding_and_scroll(f[, T = 1000])
+--
+-- 	Sleeps while player is in roadbuilding mode, then calls
+--    scroll_smoothly_to(f[, T = 1000]).
+--
+--    :returns: an :class:`array` with the intermediate points that were
+--       targeted
+--
+function wait_for_roadbuilding_and_scroll(f, g_T)
+	wait_for_roadbuilding()
+	return scroll_smoothly_to(f, g_T)
+end

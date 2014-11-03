@@ -75,7 +75,7 @@ private:
 struct FullscreenMenuLoadMapOrGame : public FullscreenMenuBase {
 	FullscreenMenuLoadMapOrGame(bool sortdesc = false);
 
-	bool handle_key(bool down, SDL_keysym code) override;
+	bool handle_key(bool down, SDL_Keysym code) override;
 
 protected:
 	virtual void clicked_ok() {end_modal(1);}

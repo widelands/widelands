@@ -8,12 +8,12 @@ would be in the stoneage, if not for using these files :-).
 
 The Widelands Development Team thanks the following projects:
 
-    libSDL
-    libSDL_mixer
-    libSDL_net
-    libSDL_image
-    libSDL_ttf
-    * All files from SDL-Project
+    libSDL2
+    libSDL2_mixer
+    libSDL2_net
+    libSDL2_image
+    libSDL2_ttf
+    * All files from SDL2-Project
     * Project can be found at http://www.libsdl.org/
 
 
