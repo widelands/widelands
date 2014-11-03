@@ -13,14 +13,4 @@ p1 = wl.Game().players[1]
 
 include "map:scripting/starting_conditions.lua"
 include "map:scripting/texts.lua"
-
--- Some messages that spare some typing
-function send_msg(msg)
-   if not msg.h then msg.h = 400 end
-   p1:message_box(msg.title, msg.body, msg)
-end
-function add_obj(t)
-   return p1:add_objective(t.name, t.title, t.body)
-end
-
 include "map:scripting/mission_thread.lua"

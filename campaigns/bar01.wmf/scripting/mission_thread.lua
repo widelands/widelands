@@ -10,10 +10,10 @@ enhance_buildings_done = false
 build_materials_done = false
 cattle_farm_done = false
 
-
 -- =====================================================
 -- First messages to the player at beginning of mission
 -- =====================================================
+
 function introduction_thread()
    sleep(2000)
 
