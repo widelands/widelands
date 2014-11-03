@@ -77,6 +77,7 @@ EncyclopediaWindow::EncyclopediaWindow
 			/** TRANSLATORS: Column title in the Tribal Wares Encyclopedia */
 			(wareColumnWidth, ngettext("Consumed Ware Type", "Consumed Ware Types", 0));
 	condTable.add_column (quantityColumnWidth, _("Quantity"));
+	condTable.focus();
 
 	fill_wares();
 

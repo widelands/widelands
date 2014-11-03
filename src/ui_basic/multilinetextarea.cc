@@ -192,12 +192,9 @@ void MultilineTextarea::draw(RenderTarget & dst)
 	}
 }
 
-bool MultilineTextarea::handle_mousepress
-	(uint8_t const btn, int32_t const x, int32_t const y)
-{
-	return
-		btn == SDL_BUTTON_WHEELUP || btn == SDL_BUTTON_WHEELDOWN ?
-		m_scrollbar.handle_mousepress(btn, x, y) : false;
+
+bool MultilineTextarea::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
+	return m_scrollbar.handle_mousewheel(which, x, y);
 }
 
 void MultilineTextarea::scroll_to_top() {

@@ -26,20 +26,6 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "sound/sound_handler.h"
 
-namespace {
-	// The behaviour of whether SDL_Mixer frees the RW it uses was
-	// changed with SDL_Mixer version 1.2.12, this
-	// check is so that we don't have a memory leak in the new version.
-	// TODO(unknown): Once we can demand that everyone use
-	// SDL_Mixer version >= 1.2.12, this function should be removed,
-	// and all usages replaced supposing it's true.
-	bool have_to_free_rw() {
-		return
-			SDL_VERSIONNUM(SDL_MIXER_MAJOR_VERSION, SDL_MIXER_MINOR_VERSION, SDL_MIXER_PATCHLEVEL) >=
-			SDL_VERSIONNUM(1, 2, 12);
-	}
-}
-
 /// Prepare infrastructure for reading song files from disk
 Songset::Songset() : m_(nullptr), rwops_(nullptr) {}
 
@@ -52,8 +38,7 @@ Songset::~Songset()
 		Mix_FreeMusic(m_);
 
 	if (rwops_) {
-		if (have_to_free_rw())
-			SDL_FreeRW(rwops_);
+		SDL_FreeRW(rwops_);
 		fr_.close();
 	}
 }
@@ -98,8 +83,7 @@ Mix_Music * Songset::get_song()
 	}
 
 	if (rwops_) {
-		if (have_to_free_rw())
-			SDL_FreeRW(rwops_);
+		SDL_FreeRW(rwops_);
 		rwops_ = nullptr;
 		fr_.close();
 	}
@@ -115,7 +99,7 @@ Mix_Music * Songset::get_song()
 		return nullptr;
 
 	if (rwops_)
-		m_ = Mix_LoadMUS_RW(rwops_);
+		m_ = Mix_LoadMUS_RW(rwops_, 0);
 
 	if (m_)
 		log("SoundHandler: loaded song \"%s\"\n", filename.c_str());

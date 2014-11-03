@@ -22,7 +22,7 @@
 
 #include <memory>
 
-#include <SDL_keysym.h>
+#include <SDL_keycode.h>
 
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
@@ -135,7 +135,7 @@ protected:
 	void minimap_warp(int32_t x, int32_t y);
 
 	void draw_overlay(RenderTarget &) override;
-	bool handle_key(bool down, SDL_keysym) override;
+	bool handle_key(bool down, SDL_Keysym) override;
 
 	void unset_sel_picture();
 	void set_sel_picture(const char * const);

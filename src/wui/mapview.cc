@@ -20,10 +20,10 @@
 #include "wui/mapview.h"
 
 #include "base/macros.h"
+#include "graphic/gl/game_renderer.h"
 #include "graphic/graphic.h"
-#include "graphic/render/gamerenderer_gl.h"
-#include "graphic/render/gamerenderer_sdl.h"
 #include "graphic/rendertarget.h"
+#include "graphic/sdl/game_renderer.h"
 #include "logic/map.h"
 #include "logic/player.h"
 #include "wlapplication.h"
@@ -98,10 +98,10 @@ void MapView::draw(RenderTarget & dst)
 
 	if (!m_renderer) {
 		if (g_opengl) {
-			m_renderer.reset(new GameRendererGL());
+			m_renderer.reset(new GlGameRenderer());
 		} else
 		{
-			m_renderer.reset(new GameRendererSDL());
+			m_renderer.reset(new SdlGameRenderer());
 		}
 	}
 	if (upcast(InteractivePlayer const, interactive_player, &intbase())) {
@@ -192,7 +192,7 @@ bool MapView::handle_mousemove
 	if (!intbase().get_sel_freeze())
 		track_sel(Point(x, y));
 
-	g_gr->update_fullscreen();
+	g_gr->update();
 	return true;
 }
 
