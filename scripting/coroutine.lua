@@ -52,8 +52,8 @@ end
 --
 --    This must be called inside a coroutine. This will put the coroutine to
 --    sleep. Widelands will wake it at the absolute time given. If this time is
---    already in the past (that is at < :func:`wl.Game().time`), the
---    coroutine will be woken at :func:`wl.Game().time instead.
+--    already in the past (that is at < :func:`wl.Game.time`), the
+--    coroutine will be woken at :func:`wl.Game.time` instead.
 --
 --    :arg at: when to wake this coroutine
 --    :type at: :class:`integer`
@@ -63,4 +63,3 @@ function wake_me(at)
    if (at < wl.Game().time) then at = wl.Game().time  end
    coroutine.yield(at)
 end
-
