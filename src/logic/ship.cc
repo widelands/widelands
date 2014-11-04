@@ -640,44 +640,75 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 		case EXP_COLONIZING: {
 			assert(m_expedition->seen_port_buildspaces && !m_expedition->seen_port_buildspaces->empty());
 			BaseImmovable * baim = game.map()[m_expedition->seen_port_buildspaces->front()].get_immovable();
-			assert(baim);
-			upcast(ConstructionSite, cs, baim);
+			if (baim){
+				upcast(ConstructionSite, cs, baim);
 
-			for (int i = m_items.size() - 1; i >= 0; --i) {
-				WareInstance * ware;
-				Worker * worker;
-				m_items.at(i).get(game, &ware, &worker);
-				if (ware) {
-					// no, we don't transfer the wares, we create new ones out of air and remove the old ones ;)
-					WaresQueue & wq = cs->waresqueue(ware->descr_index());
-					const uint32_t max = wq.get_max_fill();
-					const uint32_t cur = wq.get_filled();
-					assert(max > cur);
-					wq.set_filled(cur + 1);
-					m_items.at(i).remove(game);
-					m_items.resize(i);
-					break;
-				} else {
-					assert(worker);
-					worker->set_economy(nullptr);
-					worker->set_location(cs);
-					worker->set_position(game, cs->get_position());
-					worker->reset_tasks(game);
-					PartiallyFinishedBuilding::request_builder_callback
-						(game, *cs->get_builder_request(), worker->descr().worker_index(), worker, *cs);
-					m_items.resize(i);
+				for (int i = m_items.size() - 1; i >= 0; --i) {
+					WareInstance * ware;
+					Worker * worker;
+					m_items.at(i).get(game, &ware, &worker);
+					if (ware) {
+						// no, we don't transfer the wares, we create new ones out of air and remove the old ones ;)
+						WaresQueue & wq = cs->waresqueue(ware->descr_index());
+						const uint32_t max = wq.get_max_fill();
+						const uint32_t cur = wq.get_filled();
+						assert(max > cur);
+						wq.set_filled(cur + 1);
+						m_items.at(i).remove(game);
+						m_items.resize(i);
+						break;
+					} else {
+						assert(worker);
+						worker->set_economy(nullptr);
+						worker->set_location(cs);
+						worker->set_position(game, cs->get_position());
+						worker->reset_tasks(game);
+						PartiallyFinishedBuilding::request_builder_callback
+							(game, *cs->get_builder_request(), worker->descr().worker_index(), worker, *cs);
+						m_items.resize(i);
+					}
 				}
-			}
-			if (m_items.empty()) {
+				//if (m_items.empty()) {  //NOCOM clean the mess here
+					//m_ship_state = TRANSPORT; // That's it, expedition finished
+	
+					//init_fleet(game);
+					//m_expedition.reset(nullptr);
+	
+					//if (upcast(InteractiveGameBase, igb, game.get_ibase()))
+						//refresh_window(*igb);
+				//}
+				//return start_task_idle(game, descr().main_animation(), 1500); // unload the next item
+			} else {  //it seems that port constructionsite has dissapeared
+				// Send a message to the player, that a port constructionsite is gone
+				std::string msg_head = _("Port Constructionsite Gone");
+				std::string msg_body = _("Unloading of wares failed, returning back a port.");
+				send_message(game, "exp_port_space", msg_head, msg_body, "port.png");
+				send_signal(game, "cancel_expedition");
+			}	
+			
+			if ( m_items.empty() || !baim) { //we are done, either way
 				m_ship_state = TRANSPORT; // That's it, expedition finished
 
+				// Bring us back into a fleet and a economy.
 				init_fleet(game);
+	
+				//for case that there are any workers left on board
+				// (applicable when port construction space is lost)
+				Worker * worker;
+				for (ShippingItem& item : m_items) {
+					item.get(game, nullptr, &worker);
+					if (worker) {
+						worker->reset_tasks(game);
+						worker->start_task_shipping(game, nullptr);
+					}
+				}
+				
 				m_expedition.reset(nullptr);
-
+	
 				if (upcast(InteractiveGameBase, igb, game.get_ibase()))
 					refresh_window(*igb);
+				return start_task_idle(game, descr().main_animation(), 1500);
 			}
-			return start_task_idle(game, descr().main_animation(), 1500); // unload the next item
 		}
 
 		default: {
@@ -833,9 +864,11 @@ void Ship::exp_explore_island (Game &, bool clockwise) {
 void Ship::exp_cancel (Game & game) {
 	// Running colonization has the highest priority before cancelation
 	// + cancelation only works if an expedition is actually running
+	printf("  Running cancel expedition\n");
 	if ((m_ship_state == EXP_COLONIZING) || !state_is_expedition())
 		return;
 	send_signal(game, "cancel_expedition");
+	printf("  cancel_expedition signal sent\n");
 
 	// The workers were hold in an idle state so that they did not try
 	// to become fugitive or run to the next warehouse. But now, we

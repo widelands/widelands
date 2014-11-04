@@ -160,6 +160,7 @@ private:
 	bool marine_notification_processing(int32_t);
 	uint32_t get_stocklevel_by_hint(size_t);
 	uint32_t get_stocklevel(BuildingObserver&);
+	uint32_t get_warehoused_stock(Widelands::WareIndex wt);
 	uint32_t get_stocklevel(Widelands::WareIndex);  // count all direct outputs_
 	void check_helpersites(int32_t);
 	void review_wares_targets(int32_t);
