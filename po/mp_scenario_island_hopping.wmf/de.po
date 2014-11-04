@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-10-29 10:08+0000\n"
-"PO-Revision-Date: 2014-03-12 13:21+0000\n"
-"Last-Translator: Mirian Margiani <Unknown>\n"
+"PO-Revision-Date: 2014-11-03 20:16+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-30 05:56+0000\n"
-"X-Generator: Launchpad (build 17203)\n"
+"X-Launchpad-Export-Date: 2014-11-04 05:48+0000\n"
+"X-Generator: Launchpad (build 17211)\n"
 "Language: de\n"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/first_island.lua:70
@@ -44,8 +44,8 @@ msgstr[1] "%s Stämme"
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:118
 msgid "%s Plank"
 msgid_plural "%s Planks"
-msgstr[0] "%s Planke"
-msgstr[1] "%s Planken"
+msgstr[0] "%s Brett"
+msgstr[1] "%s Bretter"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:120
 msgid "%s Stone"
@@ -105,11 +105,11 @@ msgid ""
 "headquarters on a second island, which will contain all wares from your "
 "first headquarters."
 msgstr ""
-"Inselspringen ist ein traditioneller Wettbewerb in der Atlantischen Kultur. "
+"Inselspringen ist ein traditioneller Wettbewerb in der atlantischen Kultur. "
 "Die Regeln sind einfach: Du startest mit einem Hauptquartier auf einer "
-"Insel. Wenn du ein Schloss im Zielgebiet der ersten Insel fertigstellst "
+"Insel. Wenn du eine Burg im Zielgebiet der ersten Insel fertigstellst, "
 "bekommst du ein Hauptquartier auf der zweiten Insel, dass alle Waren "
-"einhältst, die du auf der ersten Insel gesammelt hast."
+"enthält, die du auf der ersten Insel gesammelt hast."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:15
 msgid ""
@@ -117,9 +117,9 @@ msgid ""
 "a third headquarters on the third island. You must build a castle at the "
 "center of the third island and hold it for 20 minutes to win the game."
 msgstr ""
-"Wenn du ein Schloss im Zielgebiet auf der zweiten Insel fertigstellst "
-"bekommst du ein Hauptquartier auf der dritten Insel. Du musst ein Schloss "
-"auf der dritten Insel fertigstellen und 20 Minuten halten, um das Spiel zu "
+"Wenn du eine Burg im Zielgebiet auf der zweiten Insel fertigstellst, "
+"bekommst du ein Hauptquartier auf der dritten Insel. Du musst eine Burg auf "
+"der dritten Insel fertigstellen und 20 Minuten halten, um das Spiel zu "
 "gewinnen."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:20
@@ -130,7 +130,7 @@ msgid ""
 msgstr ""
 "Immer wenn Du ein Ziel auf der Insel erreichst, bekommst Du zusätzliche "
 "Waren; abhängig davon, wieviele Spieler vor Dir schon das Ziel erreicht "
-"haben. Je früher Du das Ziel erreichst, desto weniger Waren erhälst Du. "
+"haben. Je früher Du das Ziel erreichst, desto weniger Waren erhältst Du. "
 "Weiter unten erfährst Du die Details."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:23
@@ -147,7 +147,9 @@ msgstr ""
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:28
 msgid "Finally, be careful not to waste your quartz and diamonds."
-msgstr "Endlich, sei vorsichtig und verschwende nicht Quarz und Diamanten."
+msgstr ""
+"Schließlich: Sei vorsichtig und verschwende deine Bergkristalle und "
+"Diamanten nicht."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:30
 msgid "Finish Rewards"
