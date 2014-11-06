@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-11-05 06:16+0000\n"
+"X-Launchpad-Export-Date: 2014-11-06 05:42+0000\n"
 "X-Generator: Launchpad (build 17223)\n"
 "Language: gd\n"
 
@@ -4299,6 +4299,3 @@ msgstr "Lean air"
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr "Meadhanaich am prìomh shealladh air seo"
-
-#~ msgid "Invalid path to file in cconfig: %s"
-#~ msgstr "Slighe mhì-dhligheach dhan fhaidhle ann an cconfig: %s"

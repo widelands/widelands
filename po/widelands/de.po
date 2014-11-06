@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-10-29 10:08+0000\n"
-"PO-Revision-Date: 2014-11-02 13:44+0000\n"
+"PO-Revision-Date: 2014-11-05 18:24+0000\n"
 "Last-Translator: wl-zocker <Unknown>\n"
 "Language-Team: widelands-dev\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-11-03 05:52+0000\n"
-"X-Generator: Launchpad (build 17211)\n"
+"X-Launchpad-Export-Date: 2014-11-06 05:42+0000\n"
+"X-Generator: Launchpad (build 17223)\n"
 "Language: de\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -2692,7 +2692,7 @@ msgstr "Spielmodus: %s."
 
 #: ../../src/ui_fsmenu/loadgame.cc:154
 msgid "Numbers are the number of players."
-msgstr ""
+msgstr "Die Zahl gibt die Anzahl der Spieler an."
 
 #. * TRANSLATORS: Game Mode table column when choosing a game/replay to load.
 #. * TRANSLATORS: Keep this to 5 letters maximum.
@@ -3081,7 +3081,7 @@ msgstr "Spieloptionen"
 
 #: ../../src/ui_fsmenu/options.cc:218
 msgid "Use single watchwindow mode"
-msgstr ""
+msgstr "Zeige nur ein Beobachtungsfenster"
 
 #: ../../src/ui_fsmenu/options.cc:228
 msgid "Start building road after placing a flag"
@@ -3692,7 +3692,7 @@ msgstr "Zeige allgemeine Informationen über Widelands und Tastenkürzel"
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_options_menu.cc:90
 msgid "Show the distribution licence document"
-msgstr ""
+msgstr "Zeige das Lizenzdokument"
 
 #: ../../src/wui/game_options_menu.cc:97
 msgid "Authors"
