@@ -157,7 +157,7 @@ private:
 	bool check_mines_(int32_t);
 	bool check_militarysites(int32_t);
 	bool marine_main_decisions(int32_t);
-	bool marine_notification_processing(int32_t);
+	bool check_ships(int32_t);
 	uint32_t get_stocklevel_by_hint(size_t);
 	uint32_t get_stocklevel(BuildingObserver&);
 	uint32_t get_warehoused_stock(Widelands::WareIndex wt);
@@ -180,7 +180,7 @@ private:
 	void lose_immovable(const Widelands::PlayerImmovable&);
 	void gain_building(Widelands::Building&);
 	void lose_building(const Widelands::Building&);
-	void expedition_management(ShipObserver&, const Widelands::NoteShipMessage::Message);
+	void expedition_management(ShipObserver&);
 	// bool pick_farest_portspace(Widelands::Ship&);
 	void out_of_resources_site(const Widelands::ProductionSite&);
 
