@@ -230,9 +230,9 @@ struct BuildableField {
 	// stationed (manned) military buildings nearby
 	int16_t military_unstationed_;
 	bool is_portspace_;
-	//bool portspace_nearby_; // to prohibit buildings near a portspace Not needed?
-	bool port_nearby_;  //to increase priority if a port is nearby,
-	//especially for new colonies
+	// bool portspace_nearby_; // to prohibit buildings near a portspace Not needed?
+	bool port_nearby_;  // to increase priority if a port is nearby,
+	// especially for new colonies
 
 	std::vector<uint8_t> consumers_nearby_;
 	std::vector<uint8_t> producers_nearby_;
@@ -333,7 +333,6 @@ struct BuildingObserver {
 
 	int32_t mines_;           // type of resource it mines_
 	uint16_t mines_percent_;  // % of res it can mine
-
 	uint32_t current_stats_;
 
 	std::vector<int16_t> inputs_;
@@ -392,13 +391,13 @@ struct ShipObserver {
 	Widelands::Ship* ship;
 	Widelands::Coords expedition_start_point_;
 	std::unordered_set<uint32_t> visited_spots_;
-	bool island_circ_direction=true; // a ship circumvents all island in the same direction
-	};
+	bool island_circ_direction = true;  // a ship circumvents all island in the same direction
+};
 
 struct WareObserver {
 	uint8_t producers_;
 	uint8_t consumers_;
 	uint8_t preciousness_;
-	};
+};
 
 #endif  // end of include guard: WL_AI_AI_HELP_STRUCTS_H
