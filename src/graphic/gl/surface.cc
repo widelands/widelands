@@ -132,7 +132,6 @@ void GLSurface::draw_line
 	DrawLineProgram::instance().draw(gl_x1, gl_y1, gl_x2, gl_y2, color, gwidth);
 }
 
-// NOCOM(#sirver): consolidate these functions. there are too many.
 // Converts the pixel (x, y) in a texture to a gl coordinate in [0, 1].
 inline void pixel_to_gl_texture(const int width, const int height, float* x, float* y) {
 	*x = (*x / width);

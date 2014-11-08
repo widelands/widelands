@@ -26,6 +26,15 @@
 #include "graphic/gl/surface.h"
 #include "graphic/gl/utils.h"
 #include "graphic/graphic.h"
+#include "graphic/sdl/utils.h"
+
+namespace  {
+
+bool is_bgr_surface(const SDL_PixelFormat& fmt) {
+	return (fmt.Bmask == 0x000000ff && fmt.Gmask == 0x0000ff00 && fmt.Rmask == 0x00ff0000);
+}
+
+}  // namespace
 
 GLuint GLSurfaceTexture::gl_framebuffer_id_;
 
@@ -72,18 +81,17 @@ GLSurfaceTexture::GLSurfaceTexture(SDL_Surface * surface, bool intensity)
 {
 	init(surface->w, surface->h);
 
-	// Convert image data
+	// Convert image data. BGR Surface support is an extension for
+	// OpenGL ES 2, which we rather not rely on. So we convert our
+	// surfaces in software.
+	// TODO(sirver): SDL_TTF returns all data in BGR format. If we
+	// use freetype directly we might be able to avoid that.
 	uint8_t bpp = surface->format->BytesPerPixel;
 
-	if
-		(surface->format->palette ||
-		 m_w != static_cast<uint32_t>(surface->w) ||
-		 m_h != static_cast<uint32_t>(surface->h) ||
-		 (bpp != 3 && bpp != 4))
-	{
-		SDL_Surface * converted = SDL_CreateRGBSurface
-			(SDL_SWSURFACE, m_w, m_h,
-			 32, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
+	if (surface->format->palette || m_w != static_cast<uint32_t>(surface->w) ||
+	    m_h != static_cast<uint32_t>(surface->h) || (bpp != 3 && bpp != 4) ||
+	    is_bgr_surface(*surface->format)) {
+		SDL_Surface* converted = empty_sdl_surface(m_w, m_h);
 		assert(converted);
 		SDL_SetSurfaceAlphaMod(converted,  SDL_ALPHA_OPAQUE);
 		SDL_SetSurfaceBlendMode(converted, SDL_BLENDMODE_NONE);
@@ -95,53 +103,7 @@ GLSurfaceTexture::GLSurfaceTexture(SDL_Surface * surface, bool intensity)
 		bpp = surface->format->BytesPerPixel;
 	}
 
-	const SDL_PixelFormat & fmt = *surface->format;
-	GLenum pixels_format;
-
-	glPushAttrib(GL_PIXEL_MODE_BIT);
-
-	if (bpp == 4) {
-		if
-			(fmt.Rmask == 0x000000ff && fmt.Gmask == 0x0000ff00 &&
-			 fmt.Bmask == 0x00ff0000)
-		{
-			if (fmt.Amask == 0xff000000) {
-				pixels_format = GL_RGBA;
-			} else {
-				pixels_format = GL_RGBA;
-				// Read four bytes per pixel but ignore the alpha value
-				glPixelTransferi(GL_ALPHA_SCALE, 0.0f);
-				glPixelTransferi(GL_ALPHA_BIAS, 1.0f);
-			}
-		} else if
-			(fmt.Bmask == 0x000000ff && fmt.Gmask == 0x0000ff00 &&
-			 fmt.Rmask == 0x00ff0000)
-		{
-			if (fmt.Amask == 0xff000000) {
-				pixels_format = GL_BGRA;
-			} else {
-				pixels_format = GL_BGRA;
-				// Read four bytes per pixel but ignore the alpha value
-				glPixelTransferi(GL_ALPHA_SCALE, 0.0f);
-				glPixelTransferi(GL_ALPHA_BIAS, 1.0f);
-			}
-		} else
-			throw wexception("OpenGL: Unknown pixel format");
-	} else  if (bpp == 3) {
-		if
-			(fmt.Rmask == 0x000000ff && fmt.Gmask == 0x0000ff00 &&
-			 fmt.Bmask == 0x00ff0000)
-		{
-			pixels_format = GL_RGB;
-		} else if
-			(fmt.Bmask == 0x000000ff && fmt.Gmask == 0x0000ff00 &&
-			 fmt.Rmask == 0x00ff0000)
-		{
-			pixels_format = GL_BGR;
-		} else
-			throw wexception("OpenGL: Unknown pixel format");
-	} else
-		throw wexception("OpenGL: Unknown pixel format");
+	const GLenum pixels_format = bpp == 4 ? GL_RGBA : GL_RGB;
 
 	SDL_LockSurface(surface);
 
@@ -151,8 +113,6 @@ GLSurfaceTexture::GLSurfaceTexture(SDL_Surface * surface, bool intensity)
 
 	SDL_UnlockSurface(surface);
 	SDL_FreeSurface(surface);
-
-	glPopAttrib();
 }
 
 GLSurfaceTexture::~GLSurfaceTexture()
