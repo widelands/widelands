@@ -226,7 +226,6 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 													 w, h);
 		screen_.reset(new SDLSurface(m_sdl_screen, false));
 	}
-
 	m_rendertarget.reset(new RenderTarget(screen_.get()));
 
 	pic_road_normal_.reset(load_image("world/pics/roadt_normal.png"));
