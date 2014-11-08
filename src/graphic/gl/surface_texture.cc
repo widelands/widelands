@@ -137,7 +137,7 @@ GLSurfaceTexture::~GLSurfaceTexture()
 	glDeleteTextures(1, &m_texture);
 }
 
-void GLSurfaceTexture::pixel_to_gl(float* x, float* y) {
+void GLSurfaceTexture::pixel_to_gl(float* x, float* y) const {
 	*x = (*x / m_w) * 2. - 1.;
 	*y = (*y / m_h) * 2. - 1.;
 }

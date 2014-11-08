@@ -36,7 +36,7 @@ public:
 	const SDL_PixelFormat & format() const override;
 
 private:
-	void pixel_to_gl(float* x, float* y) override;
+	void pixel_to_gl(float* x, float* y) const override;
 
 	void swap_rows();
 };

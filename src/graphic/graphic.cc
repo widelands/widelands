@@ -121,7 +121,7 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 	if (opengl) {
 		// TODO(sirver): this context needs to be created also for fallback settings,
 		// otherwise SDL_GetWindowFlags() will return SDL_WINDOW_OPENGL,
-		// though if you call any gl function, the system crashes.
+		// though if you call any OpenGL function, the system crashes.
 		m_glcontext = SDL_GL_CreateContext(m_sdlwindow);
 		if (m_glcontext) {
 			SDL_GL_MakeCurrent(m_sdlwindow, m_glcontext);
@@ -216,29 +216,12 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 	SDL_SetWindowTitle(m_sdlwindow, ("Widelands " + build_id() + '(' + build_type() + ')').c_str());
 
 	if (g_opengl) {
-		glViewport(0, 0, w, h);
-
-		// Set up OpenGL projection matrix. This transforms opengl coordinates to
-		// screen coordinates. We set up a simple Orthogonal view which takes just
-		// the x, y coordinates and ignores the z coordinate. Note that the top and
-		// bottom values are interchanged. This is to invert the y axis to get the
-		// same coordinates as with opengl. The exact values of near and far
-		// clipping plane are not important. We draw everything with z = 0. They
-		// just must not be null and have different sign.
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		glOrtho(0, w, h, 0, -1, 1);
-
-		// Reset modelview matrix, disable depth testing (we do not need it)
-		// And select backbuffer as default drawing target
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-		glDisable(GL_DEPTH_TEST);
-		glDrawBuffer(GL_BACK);
-
 		SDL_GL_SetSwapInterval(1);
 		SDL_GL_SwapWindow(m_sdlwindow);
 
+		glDrawBuffer(GL_BACK);
+
+		glDisable(GL_DEPTH_TEST);
 		glEnable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

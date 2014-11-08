@@ -31,7 +31,8 @@ class FieldsToDraw {
 public:
 	struct Field {
 		int fx, fy;  // geometric coordinates (i.e. map coordinates that can be out of bounds).
-		float x, y;  // Pixel position relative to top left.
+		float gl_x, gl_y;  // GL Position of this field.
+		float pixel_x, pixel_y;  // Pixel position relative to top left.
 		float texture_x, texture_y;  // Texture coordinates.
 		float brightness;            // brightness of the pixel
 		uint8_t ter_r, ter_d;        // Texture index of the right and down triangle.

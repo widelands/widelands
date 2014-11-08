@@ -36,7 +36,7 @@ private:
 	DrawLineProgram();
 
 	struct PerVertexData {
-		float x, y;
+		float gl_x, gl_y;
 	};
 	static_assert(sizeof(PerVertexData) == 8, "Wrong padding.");
 

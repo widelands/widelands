@@ -29,7 +29,7 @@ GLSurfaceScreen::GLSurfaceScreen(uint16_t w, uint16_t h)
 	m_h = h;
 }
 
-void GLSurfaceScreen::pixel_to_gl(float* x, float* y) {
+void GLSurfaceScreen::pixel_to_gl(float* x, float* y) const {
 	*x = (*x / m_w) * 2. - 1.;
 	*y = 1. - (*y / m_h) * 2.;
 }

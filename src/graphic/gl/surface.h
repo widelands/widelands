@@ -42,12 +42,11 @@ public:
 	virtual void draw_line
 		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor&, uint8_t width) override;
 
-protected:
-	// Converts the given pixel into an OpenGl point. This might
-	// need some flipping of axis, depending if you want to render
-	// on the screen or not.
-	virtual void pixel_to_gl(float* x, float* y) = 0;
+	// Converts the given pixel into an OpenGl point. This might need some
+	// flipping of axis, depending if you want to render on the screen or not.
+	virtual void pixel_to_gl(float* x, float* y) const = 0;
 
+protected:
 	// Convert the 'rect' in pixel space into opengl space.
 	enum class ConversionMode {
 		// Convert the rect as given.

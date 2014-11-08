@@ -54,7 +54,7 @@ public:
 	GLuint get_gl_texture() const {return m_texture;}
 
 private:
-	void pixel_to_gl(float* x, float* y) override;
+	void pixel_to_gl(float* x, float* y) const override;
 	void init(uint16_t w, uint16_t h);
 
 	GLuint m_texture;
