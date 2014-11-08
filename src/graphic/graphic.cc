@@ -126,6 +126,8 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 		if (m_glcontext) {
 			SDL_GL_MakeCurrent(m_sdlwindow, m_glcontext);
 		}
+
+		glClear(GL_COLOR_BUFFER_BIT);
 	}
 	// If we tried opengl and it was not successful try without opengl
 	if ((!m_sdlwindow || !m_glcontext) && opengl)
@@ -225,13 +227,9 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 		glEnable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	}
 
-	if (g_opengl)
-	{
 		screen_.reset(new GLSurfaceScreen(w, h));
-	}
-	else {
+	} else {
 		m_sdl_renderer =  SDL_CreateRenderer(m_sdlwindow, -1, 0);
 		uint32_t rmask, gmask, bmask, amask;
 		int bpp;
