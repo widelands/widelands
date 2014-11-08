@@ -20,6 +20,7 @@
 #ifndef WL_GAME_IO_GAME_PRELOAD_PACKET_H
 #define WL_GAME_IO_GAME_PRELOAD_PACKET_H
 
+#include <ctime>
 #include <cstring>
 #include <string>
 
