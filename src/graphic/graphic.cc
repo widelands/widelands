@@ -216,7 +216,6 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 	SDL_SetWindowTitle(m_sdlwindow, ("Widelands " + build_id() + '(' + build_type() + ')').c_str());
 
 	if (g_opengl) {
-		// NOCOM(#sirver): clean up here and do not use the modelmatrix.
 		glViewport(0, 0, w, h);
 
 		// Set up OpenGL projection matrix. This transforms opengl coordinates to
