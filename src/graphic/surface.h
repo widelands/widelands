@@ -55,7 +55,8 @@ public:
 	/// This draws a part of another surface to this surface
 	virtual void blit(const Point&, const Surface*, const Rect& srcrc, Composite cm = CM_UseAlpha) = 0;
 
-	/// Draws a filled rect to the surface.
+	/// Draws a filled rect to the surface. No blending takes place, the values
+	//in the target are just replaced (i.e. / Composite would be CM_Copy).
 	virtual void fill_rect(const Rect&, const RGBAColor&) = 0;
 
 	/// Draws a rect (frame only) to the surface.
