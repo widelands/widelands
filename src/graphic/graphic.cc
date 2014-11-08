@@ -243,8 +243,6 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 		glEnable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-		GLSurfaceTexture::initialize();
 	}
 
 	if (g_opengl)
@@ -281,9 +279,6 @@ void Graphic::cleanup() {
 	if (UI::g_fh)
 		UI::g_fh->flush();
 
-	if (g_opengl) {
-		GLSurfaceTexture::cleanup();
-	}
 	if (m_sdl_texture) {
 		SDL_DestroyTexture(m_sdl_texture);
 		m_sdl_texture = nullptr;

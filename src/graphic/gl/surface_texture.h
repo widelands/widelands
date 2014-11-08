@@ -25,11 +25,6 @@ struct SDL_Surface;
 
 class GLSurfaceTexture : public GLSurface {
 public:
-	// Call this once before using any instance of this class and cleanup once
-	// before the program exits.
-	static void initialize();
-	static void cleanup();
-
 	GLSurfaceTexture(SDL_Surface * surface, bool intensity = false);
 	GLSurfaceTexture(int w, int h);
 
@@ -61,10 +56,7 @@ public:
 private:
 	void pixel_to_gl(float* x, float* y) override;
 	void init(uint16_t w, uint16_t h);
-	void setup_gl();
-	void reset_gl();
 
-	static GLuint gl_framebuffer_id_;
 	GLuint m_texture;
 };
 

@@ -21,6 +21,7 @@
 #include <cassert>
 
 #include "base/log.h"
+#include "base/macros.h"
 #include "base/wexception.h"
 #include "graphic/gl/blit_program.h"
 #include "graphic/gl/surface.h"
@@ -30,30 +31,46 @@
 
 namespace  {
 
+class GlFramebuffer {
+public:
+	static GlFramebuffer& instance() {
+		static GlFramebuffer gl_framebuffer;
+		return gl_framebuffer;
+	}
+
+	~GlFramebuffer() {
+		glDeleteFramebuffers(1, &gl_framebuffer_id_);
+	}
+
+	GLuint id() const {
+		return gl_framebuffer_id_;
+	}
+
+private:
+	GlFramebuffer() {
+		// Generate the framebuffer for Offscreen rendering.
+		glGenFramebuffers(1, &gl_framebuffer_id_);
+	}
+
+	GLuint gl_framebuffer_id_;
+
+	DISALLOW_COPY_AND_ASSIGN(GlFramebuffer);
+};
+
 bool is_bgr_surface(const SDL_PixelFormat& fmt) {
 	return (fmt.Bmask == 0x000000ff && fmt.Gmask == 0x0000ff00 && fmt.Rmask == 0x00ff0000);
 }
 
+inline void setup_gl(const GLuint texture) {
+	glBindFramebuffer(GL_FRAMEBUFFER, GlFramebuffer::instance().id());
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture, 0);
+}
+
+inline void reset_gl() {
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
 }  // namespace
-
-GLuint GLSurfaceTexture::gl_framebuffer_id_;
-
-/**
- * Initial global resources needed for fast offscreen rendering.
- */
-// NOCOM(#sirver): do this the first time we come by here.
-void GLSurfaceTexture::initialize() {
-	// Generate the framebuffer for Offscreen rendering.
-	glGenFramebuffers(1, &gl_framebuffer_id_);
-}
-
-/**
- * Free global resources.
- */
-// NOCOM(#sirver): wrap in a static object to guarantee cleanup.
-void GLSurfaceTexture::cleanup() {
-	glDeleteFramebuffers(1, &gl_framebuffer_id_);
-}
 
 /**
  * Initialize an OpenGL texture of the given dimensions.
@@ -186,14 +203,9 @@ void GLSurfaceTexture::draw_rect(const Rect& rectangle, const RGBColor& clr)
 	if (m_w <= 0 || m_h <= 0) {
 		return;
 	}
-	// NOCOM(#sirver): refactor common code again later.
-
-	glBindFramebuffer(GL_FRAMEBUFFER, gl_framebuffer_id_);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
-
+	setup_gl(m_texture);
 	GLSurface::draw_rect(rectangle, clr);
-
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	reset_gl();
 }
 
 
@@ -206,12 +218,9 @@ void GLSurfaceTexture::fill_rect(const Rect& rectangle, const RGBAColor& clr)
 		return;
 	}
 
-	glBindFramebuffer(GL_FRAMEBUFFER, gl_framebuffer_id_);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
-
+	setup_gl(m_texture);
 	GLSurface::fill_rect(rectangle, clr);
-
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	reset_gl();
 }
 
 /**
@@ -223,12 +232,9 @@ void GLSurfaceTexture::brighten_rect(const Rect& rectangle, const int32_t factor
 		return;
 	}
 
-	glBindFramebuffer(GL_FRAMEBUFFER, gl_framebuffer_id_);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
-
+	setup_gl(m_texture);
 	GLSurface::brighten_rect(rectangle, factor);
-
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	reset_gl();
 }
 
 void GLSurfaceTexture::draw_line
@@ -238,12 +244,9 @@ void GLSurfaceTexture::draw_line
 		return;
 	}
 
-	glBindFramebuffer(GL_FRAMEBUFFER, gl_framebuffer_id_);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
-
+	setup_gl(m_texture);
 	GLSurface::draw_line(x1, y1, x2, y2, color, gwidth);
-
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	reset_gl();
 }
 
 void GLSurfaceTexture::blit
@@ -253,18 +256,7 @@ void GLSurfaceTexture::blit
 		return;
 	}
 
-	glBindFramebuffer(GL_FRAMEBUFFER, gl_framebuffer_id_);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
-
+	setup_gl(m_texture);
 	GLSurface::blit(dst, src, srcrc, cm);
-
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-}
-
-void GLSurfaceTexture::setup_gl() {
-	// NOCOM(#sirver): fill in
-}
-
-void GLSurfaceTexture::reset_gl() {
-	// NOCOM(#sirver): fill in
+	reset_gl();
 }
