@@ -506,7 +506,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 		case SDL_KEYDOWN:
 		case SDL_KEYUP:
 			if
-				(ev.key.keysym.sym == SDL_SCANCODE_F10 &&
+				(ev.key.keysym.scancode	 == SDL_SCANCODE_F10 &&
 				 (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)))
 			{
 				//  get out of here quick
@@ -514,7 +514,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 					m_should_die = true;
 				break;
 			}
-			if (ev.key.keysym.sym == SDL_SCANCODE_F11) { //  take screenshot
+			if (ev.key.keysym.scancode == SDL_SCANCODE_F11) { //  take screenshot
 				if (ev.type == SDL_KEYDOWN)
 				{
 					if (g_fs->disk_space() < MINIMUM_DISK_SPACE) {
@@ -901,6 +901,13 @@ void WLApplication::parse_commandline
 	for (int i = 1; i < argc; ++i) {
 		std::string opt = argv[i];
 		std::string value;
+
+		if (!opt.compare(0, 5, "-psn_")) {
+			// Mac OS passes this on the commandline when launched from finder.
+			// SDL1 removed it for us (apparently), but SDL2 does no longer, so we
+			// have to do this ourselves.
+			continue;
+		}
 
 		//are we looking at an option at all?
 		if (opt.compare(0, 2, "--"))

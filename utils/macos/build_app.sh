@@ -135,10 +135,6 @@ function BuildWidelands() {
       \
       -DZLIB_LIBRARY:FILEPATH="/usr/local/opt/zlib/lib/libz.a" \
       -DZLIB_INCLUDE_DIR:PATH="/usr/local/include" \
-      \
-      -DLUA_LIBRARIES:STRING="/usr/local/lib/liblua.a" \
-      -DLUA_INCLUDE_DIR:PATH="/usr/local/include" \
-      -DLUA_LIBRARY:FILEPATH="/usr/local/lib/liblua.a"
 
    make -j2
 

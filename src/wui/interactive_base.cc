@@ -921,7 +921,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code)
 		return true;
 
 	switch (code.sym) {
-	case SDL_SCANCODE_KP_9:
+	case SDLK_KP_9:
 		if (code.mod & KMOD_NUM)
 			break;
 		/* no break */
@@ -942,7 +942,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code)
 					ctrl->toggle_paused();
 		return true;
 
-	case SDL_SCANCODE_KP_3:
+	case SDLK_KP_3:
 		if (code.mod & KMOD_NUM)
 			break;
 		/* no break */
@@ -958,7 +958,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code)
 				}
 		return true;
 #ifndef NDEBUG //  only in debug builds
-		case SDL_SCANCODE_F6:
+		case SDLK_F6:
 			if (get_display_flag(dfDebug)) {
 				GameChatMenu::create_script_console(
 					this, m_debugconsole, *DebugConsole::get_chat_provider());

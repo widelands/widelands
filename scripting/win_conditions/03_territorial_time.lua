@@ -3,6 +3,7 @@
 -- =======================================================================
 
 include "scripting/coroutine.lua" -- for sleep
+include "scripting/messages.lua"
 include "scripting/table.lua"
 include "scripting/win_condition_functions.lua"
 
@@ -231,7 +232,7 @@ return {
 				msg = msg .. "\n\n"
 				msg = msg .. game_status.body
 				msg = msg .. _status(points, "has")
-				p:send_message(game_status.title, msg, {popup = true})
+				send_message(p, game_status.title, msg, {popup = true})
 			end
 		end
 

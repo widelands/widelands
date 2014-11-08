@@ -26,7 +26,7 @@ include "scripting/table.lua"
 --
 function send_message(player, title, body, parameters)
 	if (parameters["popup"]) then
-		while (wl.ui.MapView().is_building_road) do sleep(2000) end
+		wait_for_roadbuilding()
    end
    player:send_message(title, body, parameters)
 end
@@ -45,7 +45,7 @@ end
 --                     for wl.game.Player, e.g. { field = f }.
 --
 function message_box(player, title, body, parameters)
-   while (wl.ui.MapView().is_building_road) do sleep(2000) end
+   wait_for_roadbuilding()
    -- In case the user input was forbidden for some reason, allow him to close the message box.
    -- While the message box is shown, the user cannot do anything else anyway.
    local user_input = wl.ui.get_user_input_allowed()
@@ -117,15 +117,15 @@ function message_box_objective(player, message)
    local way, x, y
 
    if message.field then
-      -- This is necessary. Otherwise, we would scroll and then wait until the road is finished.
-      -- In this time, could user can scroll elsewhere, giving weird results.
-      if not message.show_instantly then
-         while (wl.ui.MapView().is_building_road) do sleep(2000) end
-      end
       if message.jump_to_field then
          x,y = wl.ui.MapView().viewpoint_x, wl.ui.MapView().viewpoint_y
          -- player:message_box jumps, so nothing to do for us
       else
+		-- This is necessary. Otherwise, we would scroll and then wait until the road is finished.
+		-- In this time, could user can scroll elsewhere, giving weird results.
+         if not message.show_instantly then
+				wait_for_roadbuilding()
+			end
          way = scroll_smoothly_to(message.field)
       end
    end
