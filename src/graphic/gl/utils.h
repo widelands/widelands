@@ -19,8 +19,6 @@
 #ifndef WL_GRAPHIC_GL_UTILS_H
 #define WL_GRAPHIC_GL_UTILS_H
 
-#define NO_SDL_GLEXT
-
 #include <memory>
 
 #include <stdint.h>

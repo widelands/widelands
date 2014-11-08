@@ -100,10 +100,12 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 	if (opengl) {
 		log("Graphics: Trying opengl\n");
 
-		// TODO(sirver): We should explicitly request an OpenGL 2.? core context
-		// here instead of relying on SDL to give us whatever.
-
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+
+		// Request an OpenGL 2 context.
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+
 		flags |= SDL_WINDOW_OPENGL;
 	}
 
@@ -166,26 +168,10 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 	if (0 != (SDL_GetWindowFlags(m_sdlwindow) & SDL_WINDOW_FULLSCREEN))
 		log("Graphics: FULLSCREEN ENABLED\n");
 
-	const char * extensions = nullptr;
-
 	if (opengl && 0 != (SDL_GetWindowFlags(m_sdlwindow) & SDL_WINDOW_OPENGL)) {
 		//  We have successful opened an opengl screen. Print some information
 		//  about opengl and set the rendering capabilities.
 		log ("Graphics: OpenGL: OpenGL enabled\n");
-
-		// See http://stackoverflow.com/questions/13558073/program-crash-on-glgenvertexarrays-call for
-		// the next line.
-		glewExperimental = GL_TRUE;
-
-		// NOCOM(#sirver): what do we use glew for? I do not think we need it anymore.
-		GLenum err = glewInit();
-		if (err != GLEW_OK) {
-			log("glewInit returns %i\nYour OpenGL installation must be __very__ broken. %s\n",
-				 err, glewGetErrorString(err));
-			throw wexception("glewInit returns %i: Broken OpenGL installation.", err);
-		}
-
-		extensions = reinterpret_cast<const char *>(glGetString (GL_EXTENSIONS));
 	}
 	Surface::display_format_is_now_defined();
 
