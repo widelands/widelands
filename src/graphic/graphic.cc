@@ -165,16 +165,6 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 	// setting the videomode was successful. Print some information now
 	log("Graphics: Setting video mode was successful\n");
 
-	if (opengl && 0 != (SDL_GetWindowFlags(m_sdlwindow) & SDL_GL_DOUBLEBUFFER))
-		log("Graphics: OPENGL DOUBLE BUFFERING ENABLED\n");
-	if (0 != (SDL_GetWindowFlags(m_sdlwindow) & SDL_WINDOW_FULLSCREEN))
-		log("Graphics: FULLSCREEN ENABLED\n");
-
-	if (opengl && 0 != (SDL_GetWindowFlags(m_sdlwindow) & SDL_WINDOW_OPENGL)) {
-		//  We have successful opened an opengl screen. Print some information
-		//  about opengl and set the rendering capabilities.
-		log ("Graphics: OpenGL: OpenGL enabled\n");
-	}
 	Surface::display_format_is_now_defined();
 
 	// Redoing the check, because fallback settings might mean we no longer use OpenGL.
@@ -196,24 +186,20 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 	}
 
 	/* Information about the video capabilities. */
-	SDL_DisplayMode disp_mode;
-	SDL_GetWindowDisplayMode(m_sdlwindow, &disp_mode);
-	const char * videodrvused = SDL_GetCurrentVideoDriver();
-	log
-		("**** GRAPHICS REPORT ****\n"
-		 " VIDEO DRIVER %s\n"
-		 " pixel fmt %u\n"
-		 " size %d %d\n"
-		 "**** END GRAPHICS REPORT ****\n",
-		 videodrvused,
-		 disp_mode.format,
-		 disp_mode.w, disp_mode.h);
-
-	log("Graphics: flags: %u\n", SDL_GetWindowFlags(m_sdlwindow));
-
-	assert
-			(SDL_BYTESPERPIXEL(disp_mode.format) == 2 ||
-			 SDL_BYTESPERPIXEL(disp_mode.format) == 4);
+	{
+		SDL_DisplayMode disp_mode;
+		SDL_GetWindowDisplayMode(m_sdlwindow, &disp_mode);
+		log("**** GRAPHICS REPORT ****\n"
+		    " VIDEO DRIVER %s\n"
+		    " pixel fmt %u\n"
+		    " size %d %d\n"
+		    "**** END GRAPHICS REPORT ****\n",
+		    SDL_GetCurrentVideoDriver(),
+		    disp_mode.format,
+		    disp_mode.w,
+		    disp_mode.h);
+		assert(SDL_BYTESPERPIXEL(disp_mode.format) == 4);
+	}
 
 	SDL_SetWindowTitle(m_sdlwindow, ("Widelands " + build_id() + '(' + build_type() + ')').c_str());
 
