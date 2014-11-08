@@ -107,13 +107,11 @@ void Statebox::draw(RenderTarget & dst)
 		dst.blit(Point((get_inner_w() - w) / 2, (get_inner_h() - h) / 2), m_pic_graphics);
 
 		if (m_flags & Is_Checked) {
-			// NOCOM(#sirver): revert
-			dst.fill_rect
-				(Rect(Point(0, 0), get_w(), get_h()), RGBColor(255, 0, 0)/* RGBColor(229, 116,   2) */);
+			dst.draw_rect
+				(Rect(Point(0, 0), get_w(), get_h()), RGBColor(229, 116,   2));
 		} else if (m_flags & Is_Highlighted) {
-			// NOCOM(#sirver): revert
-			dst.fill_rect
-				(Rect(Point(0, 0), get_w(), get_h()), RGBColor(0, 255, 0)/* RGBColor(100, 100,  80) */);
+			dst.draw_rect
+				(Rect(Point(0, 0), get_w(), get_h()), RGBColor(100, 100,  80));
 		}
 	} else {
 		static_assert(0 <= STATEBOX_WIDTH, "assert(0 <= STATEBOX_WIDTH) failed.");

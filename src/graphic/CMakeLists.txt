@@ -90,6 +90,8 @@ wl_library(graphic
     gl/dither_program.h
     gl/draw_rect_program.cc
     gl/draw_rect_program.h
+    gl/draw_line_program.cc
+    gl/draw_line_program.h
     gl/fill_rect_program.cc
     gl/fill_rect_program.h
     gl/fields_to_draw.h

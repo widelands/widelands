@@ -228,7 +228,6 @@ void GLSurfaceTexture::draw_rect(const Rect& rectangle, const RGBColor& clr)
 	}
 	// NOCOM(#sirver): refactor common code again later.
 
-	log("#sirver draw_rect gl_framebuffer_id_: %d\n", gl_framebuffer_id_);
 	glBindFramebuffer(GL_FRAMEBUFFER, gl_framebuffer_id_);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
 
@@ -247,7 +246,6 @@ void GLSurfaceTexture::fill_rect(const Rect& rectangle, const RGBAColor& clr)
 		return;
 	}
 
-	log("#sirver fill_rect gl_framebuffer_id_: %d\n", gl_framebuffer_id_);
 	glBindFramebuffer(GL_FRAMEBUFFER, gl_framebuffer_id_);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
 
@@ -265,7 +263,6 @@ void GLSurfaceTexture::brighten_rect(const Rect& rectangle, const int32_t factor
 		return;
 	}
 
-	log("#sirver brighten_rect gl_framebuffer_id_: %d\n", gl_framebuffer_id_);
 	glBindFramebuffer(GL_FRAMEBUFFER, gl_framebuffer_id_);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
 
@@ -280,9 +277,13 @@ void GLSurfaceTexture::draw_line
 	if (m_w <= 0 || m_h <= 0) {
 		return;
 	}
-	setup_gl();
+
+	glBindFramebuffer(GL_FRAMEBUFFER, gl_framebuffer_id_);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
+
 	GLSurface::draw_line(x1, y1, x2, y2, color, gwidth);
-	reset_gl();
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 void GLSurfaceTexture::blit
@@ -292,7 +293,6 @@ void GLSurfaceTexture::blit
 		return;
 	}
 
-	log("#sirver blit gl_framebuffer_id_: %d\n", gl_framebuffer_id_);
 	glBindFramebuffer(GL_FRAMEBUFFER, gl_framebuffer_id_);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
 
@@ -302,26 +302,9 @@ void GLSurfaceTexture::blit
 }
 
 void GLSurfaceTexture::setup_gl() {
-	log("#sirver setup_gl gl_framebuffer_id_: %d\n", gl_framebuffer_id_);
-	glBindFramebuffer(GL_FRAMEBUFFER, gl_framebuffer_id_);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
-
-	// Note: we do not want to reverse y for textures, we only want this for
-	// the screen.
-	glMatrixMode(GL_PROJECTION);
-	glPushMatrix();
-	glLoadIdentity();
-	glOrtho(0, m_w, 0, m_h, -1, 1);
-
-	glPushAttrib(GL_VIEWPORT_BIT);
-	glViewport(0, 0, m_w, m_h);
+	// NOCOM(#sirver): fill in
 }
 
 void GLSurfaceTexture::reset_gl() {
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();
-
-	glPopAttrib();
+	// NOCOM(#sirver): fill in
 }

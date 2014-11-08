@@ -17,37 +17,30 @@
  *
  */
 
-#ifndef WL_GRAPHIC_GL_BLIT_PROGRAM_H
-#define WL_GRAPHIC_GL_BLIT_PROGRAM_H
+#ifndef WL_GRAPHIC_GL_DRAW_LINE_PROGRAM_H
+#define WL_GRAPHIC_GL_DRAW_LINE_PROGRAM_H
 
-#include "base/rect.h"
 #include "graphic/color.h"
-#include "graphic/gl/surface_texture.h"
 #include "graphic/gl/utils.h"
 
-class BlitProgram {
+class DrawLineProgram {
 public:
 	// Returns the (singleton) instance of this class.
-	static BlitProgram& instance();
+	static DrawLineProgram& instance();
 
-	// Draws the rectangle 'gl_src_rect' from the texture with the name
-	// 'gl_texture' to 'gl_dest_rect' in the currently bound framebuffer. All
-	// coordinates are in the OpenGL frame. The 'composite' defines if the
-	// values are copied or if alpha values are used.
-	void draw(const FloatRect& gl_dest_rect,
-	          const FloatRect& gl_src_rect,
-	          const GLuint gl_texture,
-	          const Composite composite);
+	// Draws a line from (x1, y1) to (x2, y2) which are in gl
+	// coordinates in 'color' with a 'line_width' in pixels.
+	void draw(float x1, float y1, float x2, float y2, const RGBColor& color, int line_width);
 
 private:
-	BlitProgram();
+	DrawLineProgram();
 
 	struct PerVertexData {
 		float x, y;
 	};
 	static_assert(sizeof(PerVertexData) == 8, "Wrong padding.");
 
-	// The buffer that will contain the quad for rendering.
+	// The buffer that contains the vertices for rendering.
 	Gl::Buffer gl_array_buffer_;
 
 	// The program.
@@ -57,12 +50,9 @@ private:
 	GLint attr_position_;
 
 	// Uniforms.
-	GLint u_texture_;
-	GLint u_dst_rect_;
-	GLint u_src_rect_;
+	GLint u_color_;
 
-	DISALLOW_COPY_AND_ASSIGN(BlitProgram);
+	DISALLOW_COPY_AND_ASSIGN(DrawLineProgram);
 };
 
-
-#endif  // end of include guard: WL_GRAPHIC_GL_DRAW_RECT_PROGRAM_H
+#endif  // end of include guard: WL_GRAPHIC_GL_DRAW_LINE_PROGRAM_H

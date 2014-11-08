@@ -434,7 +434,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 			  (1000.0 / m_frametime) % (1000.0 / (m_avg_usframetime / 1000)))
 			 .str(), UI_FONT_SIZE_SMALL);
 		dst.blit(Point(5, 25), UI::g_fh1->render(fps_text), CM_UseAlpha, UI::Align_Left);
-	// NOCOM(#sirver): revert this
+	// NOCOM(#sirver): revert this, this is only to check performance.
 	// }
 }
 

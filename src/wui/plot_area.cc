@@ -515,7 +515,7 @@ void DifferentialPlotArea::draw(RenderTarget & dst) {
 	const uint32_t time_ms = get_plot_time();
 	draw_diagram(time_ms, get_inner_w(), get_inner_h(), xline_length, dst);
 
-	//draw zero line
+	// draw zero line
 	dst.draw_line
 		(get_inner_w() - space_at_right,
 		 yoffset,

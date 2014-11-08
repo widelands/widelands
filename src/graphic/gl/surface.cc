@@ -25,6 +25,7 @@
 
 #include "base/macros.h"
 #include "graphic/gl/blit_program.h"
+#include "graphic/gl/draw_line_program.h"
 #include "graphic/gl/draw_rect_program.h"
 #include "graphic/gl/fill_rect_program.h"
 #include "graphic/gl/surface_texture.h"
@@ -120,21 +121,15 @@ void GLSurface::brighten_rect(const Rect& rc, const int32_t factor)
 void GLSurface::draw_line
 	(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t gwidth)
 {
+	float gl_x1 = x1 + 0.5;
+	float gl_y1 = y1 + 0.5;
+	pixel_to_gl(&gl_x1, &gl_y1);
 
-	// NOCOM(#sirver): hack. remove
-	glUseProgram(0);
+	float gl_x2 = x2 + 0.5;
+	float gl_y2 = y2 + 0.5;
+	pixel_to_gl(&gl_x2, &gl_y2);
 
-	glDisable(GL_BLEND);
-	glDisable(GL_TEXTURE_2D);
-	glLineWidth(gwidth);
-	glBegin(GL_LINES); {
-		glColor3ub(color.r, color.g, color.b);
-		glVertex2f(x1 + 0.5f, y1 + 0.5f);
-		glVertex2f(x2 + 0.5f, y2 + 0.5f);
-	} glEnd();
-
-	glEnable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);
+	DrawLineProgram::instance().draw(gl_x1, gl_y1, gl_x2, gl_y2, color, gwidth);
 }
 
 // NOCOM(#sirver): consolidate these functions. there are too many.
