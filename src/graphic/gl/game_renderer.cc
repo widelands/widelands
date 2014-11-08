@@ -140,13 +140,13 @@ void GlGameRenderer::draw() {
 	const Rect& bounding_rect = m_dst->get_rect();
 	const Point surface_offset = m_dst_offset + bounding_rect.top_left() + m_dst->get_offset();
 
-	glClear(GL_COLOR_BUFFER_BIT);
-
 	glScissor(bounding_rect.x,
 	          surface->height() - bounding_rect.y - bounding_rect.h,
 	          bounding_rect.w,
 	          bounding_rect.h);
 	glEnable(GL_SCISSOR_TEST);
+
+	glClear(GL_COLOR_BUFFER_BIT);
 
 	Map& map = m_egbase->map();
 	const uint32_t gametime = m_egbase->get_gametime();
