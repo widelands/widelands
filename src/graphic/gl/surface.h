@@ -22,10 +22,7 @@
 
 #include <memory>
 
-#define NO_SDL_GLEXT
-#include <GL/glew.h>
-#include <SDL_opengl.h>
-
+#include "graphic/gl/system_headers.h"
 #include "graphic/surface.h"
 
 class GLSurface : public Surface {

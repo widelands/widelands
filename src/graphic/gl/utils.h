@@ -23,11 +23,10 @@
 
 #include <memory>
 
-#include <GL/glew.h>
-#include <SDL_opengl.h>
 #include <stdint.h>
 
 #include "base/macros.h"
+#include "graphic/gl/system_headers.h"
 
 struct SDL_PixelFormat;
 

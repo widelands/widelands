@@ -99,6 +99,7 @@ wl_library(graphic
     gl/road_program.h
     gl/terrain_program.cc
     gl/terrain_program.h
+    gl/system_headers.h
     graphic.cc
     graphic.h
     image_transformations.cc
