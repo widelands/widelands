@@ -84,13 +84,8 @@ macro(_common_compile_tasks)
     target_link_libraries(${NAME} ${ZLIB_LIBRARY})
   endif()
 
-  # OpenGL and GLEW are one thing for us. If you use the one, you also use the
-  # other.
   if(ARG_USES_OPENGL)
-    wl_include_system_directories(${NAME} ${GLEW_INCLUDE_DIR})
-    target_link_libraries(${NAME} ${GLEW_LIBRARY})
     target_link_libraries(${NAME} ${OPENGL_gl_LIBRARY})
-    add_definitions(${GLEW_EXTRA_DEFINITIONS})
   endif()
 
   if(ARG_USES_PNG)
