@@ -169,7 +169,7 @@ void RoadProgram::draw(const FieldsToDraw& fields_to_draw) {
 		// Road to bottom right neighbor.
 		const int bln_index =
 		   fields_to_draw.calculate_index(field.fx + (field.fy & 1) - 1, field.fy + 1);
-		if (brn_index != -1) {
+		if (bln_index != -1) {
 			const Widelands::RoadType road =
 			   static_cast<Widelands::RoadType>((field.roads >> 4) & Widelands::Road_Mask);
 			if (road != Widelands::Road_None) {
