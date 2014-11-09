@@ -85,6 +85,7 @@ macro(_common_compile_tasks)
   endif()
 
   if(ARG_USES_OPENGL)
+    wl_include_system_directories(${NAME} ${OPENGL_INCLUDE_DIR})
     target_link_libraries(${NAME} ${OPENGL_gl_LIBRARY})
   endif()
 
