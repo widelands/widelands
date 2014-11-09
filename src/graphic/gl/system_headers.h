@@ -30,6 +30,7 @@
 #include <OpenGL/glext.h>
 #else
 #ifdef _WIN32
+#include <GL/glew.h>
 #include <windows.h>
 #endif
 #include <GL/gl.h>
