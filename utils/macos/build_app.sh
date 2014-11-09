@@ -130,6 +130,9 @@ function BuildWidelands() {
       -DINTL_LIBRARY:STRING="-Wl,/usr/local/opt/libiconv/lib/libiconv.a -Wl,/usr/local/opt/gettext/lib/libintl.a" \
       -DINTL_INCLUDE_DIR:PATH="/usr/local/opt/gettext/include" \
       \
+      -DGLEW_LIBRARY:FILEPATH="/usr/local/lib/libGLEW.a" \
+      -DGLEW_INCLUDE_DIR:PATH="/usr/local/include/gl" \
+      \
       -DZLIB_LIBRARY:FILEPATH="/usr/local/opt/zlib/lib/libz.a" \
       -DZLIB_INCLUDE_DIR:PATH="/usr/local/include" \
 

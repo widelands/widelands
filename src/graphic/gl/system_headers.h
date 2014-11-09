@@ -20,20 +20,20 @@
 #ifndef WL_GRAPHIC_GL_SYSTEM_HEADERS_H
 #define WL_GRAPHIC_GL_SYSTEM_HEADERS_H
 
-// This includes the correct OpenGL headers for us. Use this instead of
-// including any system OpenGL headers yourself.
+// This includes the correct OpenGL headers for us. Use this
+// instead of including any system OpenGL headers yourself.
 
-// We do not want to include SDL_opengl.h because it defines the
-// fixed pipeline only which we do not want to use.
-#ifdef __APPLE__
-#include <OpenGL/gl.h>
-#include <OpenGL/glext.h>
-#else
-#ifdef _WIN32
-#include <windows.h>
-#endif
-#include <GL/gl.h>
-#include <GL/glext.h>
-#endif
+// So, GLEW is really a crappy piece of software, but for now we
+// are stuck with it. Before making any changes here, see:
+// https://www.opengl.org/wiki/OpenGL_Loading_Library
+// and
+// http://stackoverflow.com/questions/13558073/program-crash-on-glgenvertexarrays-call.
+//
+// TODO(sirver): glbinding seems to be a sane solution to the GL
+// loading problem. (https://github.com/hpicgs/glbinding).
+
+// GLEW must be first. Do not include any other GL headers, it
+// should define all functions.
+#include <GL/glew.h>
 
 #endif  // end of include guard: WL_GRAPHIC_GL_SYSTEM_HEADERS_H

@@ -172,6 +172,16 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 		//  We now really have a working opengl screen...
 		g_opengl = true;
 
+		// See graphic/gl/system_headers.h for an explanation of the
+		// next line.
+		glewExperimental = GL_TRUE;
+		GLenum err = glewInit();
+		if (err != GLEW_OK) {
+			log("glewInit returns %i\nYour OpenGL installation must be __very__ broken. %s\n",
+				 err, glewGetErrorString(err));
+			throw wexception("glewInit returns %i: Broken OpenGL installation.", err);
+		}
+
 		log("Graphics: OpenGL: Version \"%s\"\n",
 		    reinterpret_cast<const char*>(glGetString(GL_VERSION)));
 
