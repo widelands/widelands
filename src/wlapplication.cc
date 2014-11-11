@@ -507,7 +507,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 		case SDL_KEYDOWN:
 		case SDL_KEYUP:
 			if
-				(ev.key.keysym.sym == SDL_SCANCODE_F10 &&
+				(ev.key.keysym.scancode	 == SDL_SCANCODE_F10 &&
 				 (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)))
 			{
 				//  get out of here quick
@@ -515,7 +515,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 					m_should_die = true;
 				break;
 			}
-			if (ev.key.keysym.sym == SDL_SCANCODE_F11) { //  take screenshot
+			if (ev.key.keysym.scancode == SDL_SCANCODE_F11) { //  take screenshot
 				if (ev.type == SDL_KEYDOWN)
 				{
 					if (g_fs->disk_space() < MINIMUM_DISK_SPACE) {

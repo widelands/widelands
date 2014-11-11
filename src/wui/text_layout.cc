@@ -46,7 +46,8 @@ string as_window_title(const string& txt) {
 }
 string as_uifont(const string & txt, int size, const RGBColor& clr) {
 	// UI Text is always bold due to historic reasons
-	static boost::format f("<rt><p><font face=%s size=%i bold=1 shadow=1 color=%02x%02x%02x>%s</font></p></rt>");
+	static boost::format
+			f("<rt><p><font face=%s size=%i bold=1 shadow=1 color=%02x%02x%02x>%s</font></p></rt>");
 
 	f % (WLApplication::get()->get_fontset()).serif();
 	f % size;
