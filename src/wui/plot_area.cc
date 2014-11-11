@@ -142,7 +142,7 @@ int32_t calc_how_many(uint32_t time_ms, int32_t sample_rate) {
  */
 void draw_value(const string& value, const RGBColor& color, const Point& pos, RenderTarget & dst) {
 	const Image* pic = UI::g_fh1->render(ytick_text_style(value, color));
-	dst.blit(pos, pic, CM_Normal, UI::Align_CenterRight);
+	dst.blit(pos, pic, CM_UseAlpha, UI::Align_CenterRight);
 }
 
 /**
@@ -223,7 +223,7 @@ void draw_diagram
 			(xtick_text_style((boost::format("-%u ") % (max_x / how_many_ticks * i)).str()));
 		dst.blit
 			(Point(static_cast<int32_t>(posx), inner_h - space_at_bottom + 10),
-			 xtick, CM_Normal, UI::Align_Center);
+			 xtick, CM_UseAlpha, UI::Align_Center);
 
 		posx -= sub;
 	}
@@ -242,7 +242,7 @@ void draw_diagram
 
 	//  print the used unit
 	const Image* xtick = UI::g_fh1->render(xtick_text_style(get_unit_name(unit)));
-	dst.blit(Point(2, spacing + 2), xtick, CM_Normal, UI::Align_CenterLeft);
+	dst.blit(Point(2, spacing + 2), xtick, CM_UseAlpha, UI::Align_CenterLeft);
 }
 
 }  // namespace
@@ -515,7 +515,7 @@ void DifferentialPlotArea::draw(RenderTarget & dst) {
 	const uint32_t time_ms = get_plot_time();
 	draw_diagram(time_ms, get_inner_w(), get_inner_h(), xline_length, dst);
 
-	//draw zero line
+	// draw zero line
 	dst.draw_line
 		(get_inner_w() - space_at_right,
 		 yoffset,

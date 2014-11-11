@@ -39,8 +39,8 @@ public:
 
 private:
 	struct PerVertexData {
-		float x;
-		float y;
+		float gl_x;
+		float gl_y;
 		float brightness;
 		float texture_x;
 		float texture_y;

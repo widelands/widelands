@@ -84,8 +84,16 @@ wl_library(graphic
     font_handler1.h
     game_renderer.cc
     game_renderer.h
+    gl/blit_program.cc
+    gl/blit_program.h
     gl/dither_program.cc
     gl/dither_program.h
+    gl/draw_rect_program.cc
+    gl/draw_rect_program.h
+    gl/draw_line_program.cc
+    gl/draw_line_program.h
+    gl/fill_rect_program.cc
+    gl/fill_rect_program.h
     gl/fields_to_draw.h
     gl/game_renderer.cc
     gl/game_renderer.h
@@ -93,6 +101,7 @@ wl_library(graphic
     gl/road_program.h
     gl/terrain_program.cc
     gl/terrain_program.h
+    gl/system_headers.h
     graphic.cc
     graphic.h
     image_transformations.cc

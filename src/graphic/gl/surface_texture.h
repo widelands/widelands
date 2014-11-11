@@ -25,11 +25,6 @@ struct SDL_Surface;
 
 class GLSurfaceTexture : public GLSurface {
 public:
-	// Call this once before using any instance of this class and cleanup once
-	// before the program exits.
-	static void initialize(bool use_arb);
-	static void cleanup();
-
 	GLSurfaceTexture(SDL_Surface * surface, bool intensity = false);
 	GLSurfaceTexture(int w, int h);
 
@@ -49,28 +44,20 @@ public:
 	// especially for blit which is called very often and mostly on the screen,
 	// this costs two virtual function calls which makes a notable difference in
 	// profiles.
-	void fill_rect(const Rect&, RGBAColor) override;
-	void draw_rect(const Rect&, RGBColor) override;
+	void fill_rect(const Rect&, const RGBAColor&) override;
+	void draw_rect(const Rect&, const RGBColor&) override;
 	void brighten_rect(const Rect&, int32_t factor) override;
 	virtual void draw_line
 		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor&, uint8_t width) override;
 	void blit(const Point&, const Surface*, const Rect& srcrc, Composite cm) override;
 
 	GLuint get_gl_texture() const {return m_texture;}
-	uint16_t get_tex_w() const {return m_tex_w;}
-	uint16_t get_tex_h() const {return m_tex_h;}
 
 private:
+	void pixel_to_gl(float* x, float* y) const override;
 	void init(uint16_t w, uint16_t h);
-	void setup_gl();
-	void reset_gl();
 
-	static GLuint gl_framebuffer_id_;
 	GLuint m_texture;
-
-	/// Keep the size of the opengl texture. This is necessary because some
-	/// systems support only a power of two for texture sizes.
-	uint16_t m_tex_w, m_tex_h;
 };
 
 #endif  // end of include guard: WL_GRAPHIC_GL_SURFACE_TEXTURE_H

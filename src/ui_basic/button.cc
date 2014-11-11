@@ -253,7 +253,6 @@ void Button::draw(RenderTarget & dst)
 			dst.fill_rect(Rect(Point(0, 2), 2, get_h() - 2), shade);
 			dst.fill_rect(Rect(Point(0, get_h() - 2), get_w(), get_h()), shade);
 			dst.fill_rect(Rect(Point(get_w() - 2, 0), get_w(), get_h()), shade);
-			//dst.draw_rect(Rect(Point(0, 0), get_w(), get_h()), m_clr_down);
 		}
 	}
 }
