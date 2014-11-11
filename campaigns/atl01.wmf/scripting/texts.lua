@@ -96,10 +96,10 @@ obj_make_heavy_industry_and_mining = {
 
 obj_make_training_buildings = {
    name = "obj_make_training_buildings",
-   title = _"Build training buildings for soldiers",
+   title = _"Build training sites for soldiers",
    number = 2,
-   body = objective_text(_"Soldier Training Buildings",
-		_[[Like all other tribes, the Atlanteans are also able to train soldiers: the dungeon trains attack – the major attribute of the Atlanteans – and the labyrinth trains evasion, health and defense. The items produced by the industry are used to train better soldiers in the two training buildings.]] .. paragraphdivider() ..
+   body = objective_text(_"Soldier Training Sites",
+		_[[Like all other tribes, the Atlanteans are also able to train soldiers: the dungeon trains attack – the major attribute of the Atlanteans – and the labyrinth trains evasion, health and defense. The items produced by the industry are used to train better soldiers in the two training sites.]] .. paragraphdivider() ..
       listitem_bullet(_[[Build a dungeon and a labyrinth]])
  )
 }
