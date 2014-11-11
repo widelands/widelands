@@ -1,8 +1,3 @@
-Widelands uses the excellent Free Fonts from http://dejavu-fonts.org/. The only
-change did was renaming Oblique into Italic as we do not want to make a
-difference in our code base. Following is the DejaVu License.
-
-
 Fonts are (c) Bitstream (see below). DejaVu changes are in public domain.
 Glyphs imported from Arev fonts are (c) Tavmjong Bah (see below)
 
