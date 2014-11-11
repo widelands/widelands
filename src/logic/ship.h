@@ -42,7 +42,7 @@ struct NoteShipMessage {
 
 	Ship* ship;
 
-	enum class Message {LOST, GAINED};
+	enum class Message {LOST, GAINED, WAITINGFORCOMMAND};
 	Message message;
 
 	NoteShipMessage(Ship* const init_ship, Message const init_message)

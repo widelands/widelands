@@ -199,6 +199,13 @@ void PortDock::cleanup(EditorGameBase & egbase)
 				}
 			}
 		}
+		
+		Map & map = egbase.map(); //NOCOM
+		std::vector<Coords> tmpdock = map.find_portdock(m_warehouse->get_position());//NOCOM
+		
+		printf ("  PortDock::cleanup(): removing portdock of warehouse at %3dx%3d, in memory size: %1d, actual: %1d\n",
+		m_warehouse->get_position().x,m_warehouse->get_position().y,m_warehouse->m_portdock->m_dockpoints.size(),tmpdock.size() ); //NOCOM
+		
 		m_waiting.clear();
 		m_warehouse->m_portdock = nullptr;
 	}

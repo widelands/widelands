@@ -480,15 +480,19 @@ void Warehouse::init(EditorGameBase & egbase)
 void Warehouse::init_portdock(EditorGameBase & egbase)
 {
 	molog("Setting up port dock fields\n");
+	//printf("  Setting up port dock fields at %3dx%3d\n",
+	//get_position().x,get_position().y); //NOCOM
 
 	Map & map = egbase.map();
 	std::vector<Coords> dock = map.find_portdock(get_position());
 	if (dock.empty()) {
 		log("Attempting to setup port without neighboring water.\n");
+		printf ("  Attempting to setup port without neighboring water.\n");//NOCOM
 		return;
 	}
 
 	molog("Found %" PRIuS " fields for the dock\n", dock.size());
+	printf("   ...found %" PRIuS " fields for the dock\n", dock.size()); //NOCOM
 
 	m_portdock = new PortDock(this);
 	m_portdock->set_owner(get_owner());
@@ -513,6 +517,8 @@ void Warehouse::cleanup(EditorGameBase & egbase)
 	if (egbase.objects().object_still_available(m_portdock)) {
 		m_portdock->remove(egbase);
 		m_portdock = nullptr;
+		printf ("  Warehouse::cleanup(): removing portdock of warehouse at %3dx%3d\n",
+		get_position().x,get_position().y); //NOCOM
 	}
 
 	// This will empty the stock and launch all workers including incorporated

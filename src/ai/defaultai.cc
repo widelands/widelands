@@ -183,7 +183,13 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 					   allships.erase(i);
 					   break;
 				   }
-		   }
+		   } else if (note.message == NoteShipMessage::Message::WAITINGFORCOMMAND) {
+			   for (std::list<ShipObserver>::iterator i = allships.begin(); i != allships.end(); ++i)
+				   if (i->ship == note.ship) {
+					   i->waiting_for_command_=true;
+					   break;
+				   }
+			}
 		});
 }
 
@@ -1787,8 +1793,8 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 			prio -= (maxsize - bo.desc->get_size()) * 5;
 
 			// prefer vicinity of ports (with exemption of warehouses)
-			if (bf->port_nearby_ && bo.type != BuildingObserver::WAREHOUSE) {
-				prio += 15;
+			if (bf->port_nearby_ && bo.type == BuildingObserver::MILITARYSITE) {
+				prio *= 2;
 			}
 
 			if (prio > proposed_priority) {
@@ -2162,7 +2168,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uin
 		}
 	}
 
-	if (is_remote_port_csite || stationed_military) {  // counter disabled
+	if (is_remote_port_csite || (stationed_military && game().get_gametime()%10>0) ) {  // counter disabled
 		;
 	} else if (flag.get_economy()->warehouses().empty()) {
 		eco->failed_connection_tries += 1;
@@ -2830,7 +2836,7 @@ bool DefaultAI::marine_main_decisions(int32_t const gametime) {
 	terittories_count += remote_ports_coords.size();
 
 	// NOCOM: printf to be removed before merging
-	printf(" %1d: Marine stats: PORTS: %2d, SHIPYARDS: %d, working: %d, any idle&stocked: %s, "
+	if (gametime%25==0) printf(" %1d: Marine stats: PORTS: %2d, SHIPYARDS: %d, working: %d, any idle&stocked: %s, "
 	       "EXPEDIT. in prep: %1d, progr.: %1d, new COLONIES: %1d, SHIPS: %1d\n",
 	       player_number(),
 	       ports_count,
@@ -2854,15 +2860,15 @@ bool DefaultAI::marine_main_decisions(int32_t const gametime) {
 		enough_ships = NEEDSHIP;
 	}
 
-	printf(" %1d:   state: %1d {NEEDSHIP=0,ENOUGHSHIPS=1,NOTHINGTODO=2}: ships: %2d+%1d, ports: "
-	       "%2d, comparing: %.3f %.3f\n",
-	       player_number(),
-	       enough_ships,
-	       allships.size(),
-	       working_shipyards_count,
-	       ports_count,
-	       static_cast<float>(allships.size()),
-	       static_cast<float>((terittories_count - 1) * 0.6 + ports_count * 0.75));
+	//printf(" %1d:   state: %1d {NEEDSHIP=0,ENOUGHSHIPS=1,NOTHINGTODO=2}: ships: %2d+%1d, ports: "
+	       //"%2d, comparing: %.3f %.3f\n",
+	       //player_number(),
+	       //enough_ships,
+	       //allships.size(),
+	       //working_shipyards_count,
+	       //ports_count,
+	       //static_cast<float>(allships.size()),
+	       //static_cast<float>((terittories_count - 1) * 0.6 + ports_count * 0.75));
 
 	// building a ship? if yes, find a shipyard and order it to build a ship
 	if (shipyards_count > 0 && enough_ships == NEEDSHIP && idle_shipyard_stocked &&
@@ -2926,8 +2932,21 @@ bool DefaultAI::check_ships(int32_t const gametime) {
 		for (std::list<ShipObserver>::iterator i = allships.begin(); i != allships.end(); ++i) {
 
 			// only two states need an attention
-			if (i->ship->get_ship_state() == Widelands::Ship::EXP_WAITING ||
-			    i->ship->get_ship_state() == Widelands::Ship::EXP_FOUNDPORTSPACE) {
+			if  ((i->ship->get_ship_state() == Widelands::Ship::EXP_WAITING ||
+			    i->ship->get_ship_state() == Widelands::Ship::EXP_FOUNDPORTSPACE) && 
+			    i->waiting_for_command_ == false) {
+				printf (" %1d: ship at %3dx%3d not waiting for command but in expedition waiting state\n",
+				player_number(),i->ship->get_position().x,i->ship->get_position().y);
+			}
+			// only two states need an attention
+			if  (!(i->ship->get_ship_state() == Widelands::Ship::EXP_WAITING ||
+			    i->ship->get_ship_state() == Widelands::Ship::EXP_FOUNDPORTSPACE) && 
+			    i->waiting_for_command_ == true) {
+				printf (" %1d: ship at %3dx%3d  waiting for command but not in expedition waiting state\n",
+				player_number(),i->ship->get_position().x,i->ship->get_position().y);
+			}
+			// if ships is waiting for command
+			if (i->waiting_for_command_ == true ) {
 				expedition_management(*i);
 			}
 		}
@@ -3595,24 +3614,29 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		// we score the place
 		const uint8_t spot_score = spot_scoring(so.ship->exp_port_spaces()->front());
 
-		printf(" %1d:   portspace found at %3dx%3d, score: %1d, scanned area: %2d "  // NOCOM
-		                                                                             // remove all
-		                                                                             // printfs
-		       " distance from start: %2d\n",
-		       player_number(),
-		       so.ship->exp_port_spaces()->front().x,
-		       so.ship->exp_port_spaces()->front().y,
-		       spot_score,
-		       colony_scan_area_,
-		       map.calc_distance(so.expedition_start_point_, so.ship->get_position()));
+		//printf(" %1d:   portspace found at %3dx%3d, score: %1d, scanned area: %2d "  // NOCOM
+		                                                                             //// remove all
+		                                                                             //// printfs
+		       //" distance from start: %2d\n",
+		       //player_number(),
+		       //so.ship->exp_port_spaces()->front().x,
+		       //so.ship->exp_port_spaces()->front().y,
+		       //spot_score,
+		       //colony_scan_area_,
+		       //map.calc_distance(so.expedition_start_point_, so.ship->get_position()));
 
 		if ((gametime / 10) % 8 < spot_score) {
 			const Coords last_portspace = so.ship->exp_port_spaces()->front();
-			printf("       Building colonization port here: %3dx%3d\n",
+			printf(" %1d:      Building colonization port here at %3dx%3d, ship on %3dx%3d\n",
+					player_number(),
+					so.ship->exp_port_spaces()->front().x,
+					so.ship->exp_port_spaces()->front().y,
 			       so.ship->get_position().x,
 			       so.ship->get_position().y);
 			remote_ports_coords.insert(coords_hash(last_portspace));
 			game().send_player_ship_construct_port(*so.ship, so.ship->exp_port_spaces()->front());
+			so.last_command_time=gametime;
+			so.waiting_for_command_=false;
 			// blocking the area for some time to save AI from idle attempts to built there
 			// buildings
 			MapRegion<Area<FCoords>> mr(
@@ -3638,16 +3662,20 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 
 	if (first_time_here) {
 		game().send_player_ship_explore_island(*so.ship, so.island_circ_direction);
-		printf("       first time here (%3dx%3d), continuing sailing around island\n",
-		       so.ship->get_position().x,
-		       so.ship->get_position().y);
+		so.last_command_time=gametime;
+		so.waiting_for_command_=false;
+		//printf("       first time here (%3dx%3d), continuing sailing around island\n",
+		       //so.ship->get_position().x,
+		       //so.ship->get_position().y);
 
 		// we was here but to add randomnes we might continue with expedition
 	} else if (gametime % 2 == 0) {
 		game().send_player_ship_explore_island(*so.ship, so.island_circ_direction);
-		printf("       we was here (%3dx%3d) but still continuing with sailing around island\n",
-		       so.ship->get_position().x,
-		       so.ship->get_position().y);
+		so.last_command_time=gametime;
+		so.waiting_for_command_=false;
+		//printf("       we was here (%3dx%3d) but still continuing with sailing around island\n",
+		       //so.ship->get_position().x,
+		       //so.ship->get_position().y);
 	} else {
 		// get swimable directions
 		std::vector<Direction> possible_directions;
@@ -3672,21 +3700,25 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		// we test if there is open sea
 		if (possible_directions.size() == 0) {
 			// 2.A No there is no free sea
-			printf("       we were here before: ZERO swimmable directions, continuing sailing around "
-			       "island\n");
+			//printf("       we were here before: ZERO swimmable directions, continuing sailing around "
+			       //"island\n");
 			game().send_player_ship_explore_island(*so.ship, so.island_circ_direction);
+			so.last_command_time=gametime;
+			so.waiting_for_command_=false;
 			;
 		} else {
 			// 2.B Yes, pick one of avaiable directions
 			const Direction final_direction =
 			   possible_directions.at(gametime % possible_directions.size());
 			game().send_player_ship_scout_direction(*so.ship, final_direction);
-			printf("       we were here before: scouting in direction: %1d (# of possible directions: "
-			       "%1d, now on %3dx%3d)\n",
-			       final_direction,
-			       possible_directions.size(),
-			       so.ship->get_position().x,
-			       so.ship->get_position().y);
+			so.last_command_time=gametime;
+			so.waiting_for_command_=false;
+			//printf("       we were here before: scouting in direction: %1d (# of possible directions: "
+			       //"%1d, now on %3dx%3d)\n",
+			       //final_direction,
+			       //possible_directions.size(),
+			       //so.ship->get_position().x,
+			       //so.ship->get_position().y);
 		}
 	}
 	return;
@@ -3761,6 +3793,12 @@ void DefaultAI::gain_building(Building& b) {
 			warehousesites.back().bo = &bo;
 			if (bo.is_port_) {
 				++num_ports;
+				if (Widelands::PortDock* pd = warehousesites.back().site->get_portdock()) { //NOCOM
+					printf ("  new port gained - has portdock\n");
+				} else { 
+					printf ("  new port gained - without portdock yet (%3dx%3d)\n",
+					warehousesites.back().site->get_position().x,warehousesites.back().site->get_position().y );	
+				}
 			}
 		}
 	}
@@ -4139,10 +4177,10 @@ void DefaultAI::review_wares_targets(int32_t const gametime) {
 		multiplicator = (productionsites.size() + num_ports * 5) / 5;
 	}
 
-	printf(" %2d: Ware targets review, multiplicator %3d, sites: %3d\n",
-	       player_number(),
-	       multiplicator,
-	       productionsites.size() + num_ports * 5);
+	//printf(" %2d: Ware targets review, multiplicator %3d, sites: %3d\n", NOCOM
+	       //player_number(),
+	       //multiplicator,
+	       //productionsites.size() + num_ports * 5);
 	for (EconomyObserver* observer : economies) {
 		WareIndex nritems = observer->economy.owner().tribe().get_nrwares();
 		for (Widelands::WareIndex id = 0; id < nritems; ++id) {

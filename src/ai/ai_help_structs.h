@@ -392,6 +392,9 @@ struct ShipObserver {
 	Widelands::Coords expedition_start_point_;
 	std::unordered_set<uint32_t> visited_spots_;
 	bool island_circ_direction = true;  // a ship circumvents all island in the same direction
+	bool waiting_for_command_ = false;
+	int32_t last_command_time = 0;
+	
 };
 
 struct WareObserver {

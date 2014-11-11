@@ -466,6 +466,9 @@ void Ship::ship_update_expedition(Game & game, Bob::State &) {
 			
 		}
 		m_expedition->seen_port_buildspaces.swap(temp_port_buildspaces);
+		if (new_port_space) {
+			Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::WAITINGFORCOMMAND));
+		}
 	}
 }
 
@@ -575,6 +578,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 							send_message(game, "exp_island", msg_head, msg_body,
 								"ship_explore_island_cw.png");
 							m_ship_state = EXP_WAITING;
+							Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::WAITINGFORCOMMAND));
 							return start_task_idle(game, descr().main_animation(), 1500);
 						}
 					}
@@ -629,6 +633,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 				std::string msg_body =
 					_("An expedition ship reached a coast and is waiting for further commands.");
 				send_message(game, "exp_coast", msg_head, msg_body, "ship_explore_island_cw.png");
+				Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::WAITINGFORCOMMAND));
 				return;
 			}
 		}
@@ -813,6 +818,7 @@ void Ship::start_task_expedition(Game & game) {
 	const std::string msg_head = _("Expedition Ready");
 	const std::string msg_body = _("An expedition ship is waiting for your commands.");
 	send_message(game, "exp_ready", msg_head, msg_body, "start_expedition.png");
+	Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::WAITINGFORCOMMAND));
 }
 
 /// Initializes / changes the direction of scouting to @arg direction
