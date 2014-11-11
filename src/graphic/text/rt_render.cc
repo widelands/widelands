@@ -26,9 +26,8 @@
 
 #include <SDL.h>
 #include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 
-#include "base/log.h" // NOCOM
+#include "base/log.h"
 #include "base/point.h"
 #include "base/rect.h"
 #include "graphic/image_cache.h"
@@ -37,10 +36,10 @@
 #include "graphic/text/font_io.h"
 #include "graphic/text/rt_parse.h"
 #include "graphic/text/textstream.h"
+#include "io/filesystem/filesystem_exceptions.h"
 #include "wlapplication.h"
 
 using namespace std;
-using namespace boost;
 
 namespace RT {
 
@@ -590,7 +589,7 @@ private:
 IFont& FontCache::get_font(NodeStyle& ns) {
 	UI::FontSet fontset = WLApplication::get()->get_fontset();
 
-	if(ns.font_style & IFont::BOLD && ns.font_style & IFont::ITALIC) {
+	if (ns.font_style & IFont::BOLD && ns.font_style & IFont::ITALIC) {
 		if (ns.font_face == fontset.condensed() ||
 			 ns.font_face == fontset.condensed_bold() ||
 			 ns.font_face == fontset.condensed_italic()) {
@@ -629,7 +628,14 @@ IFont& FontCache::get_font(NodeStyle& ns) {
 	if (i != m_fontmap.end())
 		return *i->second;
 
-	IFont* font = load_font(ns.font_face, ns.font_size);
+	IFont* font;
+	try {
+		font = load_font(ns.font_face, ns.font_size);
+	} catch (FileNotFoundError& e) {
+		log("Font file not found: %s\n%s\n", ns.font_face.c_str(), e.what());
+		font = load_font(fontset.serif(), ns.font_size);
+	}
+
 	m_fontmap[fd] = font;
 	return *font;
 }
@@ -971,7 +977,8 @@ TagHandler* create_taghandler(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache
 	TagHandlerMap::iterator i = map.find(tag.name());
 	if (i == map.end())
 		throw RenderError
-			((format("No Tag handler for %s. This is a bug, please submit a report.") % tag.name()).str());
+			((boost::format("No Tag handler for %s. This is a bug, please submit a report.")
+			  % tag.name()).str());
 	return i->second(tag, fc, ns, image_cache);
 }
 

@@ -21,6 +21,8 @@
 
 #include <memory>
 
+#include <boost/format.hpp>
+
 #include "base/deprecated.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
@@ -45,6 +47,7 @@
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
 #include "profile/profile.h"
+#include "wlapplication.h"
 #include "wui/interactive_gamebase.h"
 
 namespace Widelands {
@@ -903,13 +906,15 @@ void Ship::send_message
 	 const std::string & title, const std::string & description,
 	 const std::string & picture)
 {
+	const char* font_face = WLApplication::get()->get_fontset().serif().c_str();
 	std::string rt_description;
 	if (picture.size() > 3) {
-		rt_description  = "<rt image=pics/";
-		rt_description += picture;
-		rt_description += "><p font-size=14 font-face=serif>";
-	} else
-		rt_description  = "<rt><p font-size=14 font-face=serif>";
+		rt_description = (boost::format("<rt image=pics/%s><p font-face=%s font-size=14>")
+								% picture % font_face).str();
+	} else {
+		rt_description = (boost::format("<rt><p font-face=%s font-size=14>")
+								% font_face).str();
+	}
 	rt_description += description;
 	rt_description += "</p></rt>";
 

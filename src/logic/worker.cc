@@ -62,6 +62,7 @@
 #include "map_io/map_object_saver.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
+#include "wlapplication.h"
 
 namespace Widelands {
 
@@ -937,8 +938,9 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 			// that might not be around forever.
 			const std::string message =
 					(boost::format("<rt image=world/resources/pics/%s4.png>"
-										"<p font-size=14 font-face=serif>%s</p></rt>")
+										"<p font-face=%s font-size=14>%s</p></rt>")
 					 % rdescr->name().c_str()
+					 % WLApplication::get()->get_fontset().serif().c_str()
 					 % _("A geologist found resources.")).str();
 
 			//  We should add a message to the player's message queue - but only,

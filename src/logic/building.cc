@@ -22,6 +22,8 @@
 #include <cstdio>
 #include <sstream>
 
+#include <boost/format.hpp>
+
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/flag.h"
@@ -43,6 +45,7 @@
 #include "logic/worker.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
+#include "wlapplication.h"
 #include "wui/interactive_player.h"
 #include "wui/text_layout.h"
 
@@ -886,17 +889,21 @@ void Building::send_message
 	 uint32_t throttle_time,
 	 uint32_t throttle_radius)
 {
+	const char* font_face = WLApplication::get()->get_fontset().serif().c_str();
 	// TODO(sirver): add support into the font renderer to get to representative
 	// animations of buildings so that the messages can still be displayed, even
 	// after reload.
 	const std::string& img = g_gr->animations().get_animation
 		(get_ui_anim()).representative_image_from_disk().hash();
+
 	std::string rt_description;
 	rt_description.reserve
 		(strlen("<rt image=") + img.size() + 1 +
-		 strlen("<p font-size=14 font-face=serif></p>") +
+		 strlen("<p font-size=14 font-face=") +
+		 strlen(font_face) +
+		 strlen(">") +
 		 description.size() +
-		 strlen("</rt>"));
+		 strlen("</p></rt>"));
 	rt_description  = "<rt image=";
 	rt_description += img;
 	{
@@ -905,9 +912,8 @@ void Building::send_message
 		for (;                                 *it == '?'; --it)
 			*it = '0';
 	}
-	rt_description += "><p font-size=14 font-face=serif>";
-	rt_description += description;
-	rt_description += "</p></rt>";
+	rt_description = (boost::format("%s><p font-face=%s font-size=14>%s</p></rt>")
+			% rt_description % font_face % description).str();
 
 	Message * msg = new Message
 		(msgsender, game.get_gametime(), title, rt_description,
