@@ -65,6 +65,7 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
 		 get_inner_w() / 2 - spacing, get_inner_h() - spacing - offsy - 40);
 	m_ls->selected.connect(boost::bind(&MainMenuLoadMap::selected, this, _1));
 	m_ls->double_clicked.connect(boost::bind(&MainMenuLoadMap::double_clicked, this, _1));
+	m_ls->focus();
 
 	posx = get_inner_w() / 2 + spacing;
 	new UI::Textarea
@@ -75,7 +76,7 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
 	posy += 40 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, 150, 20, _("Author:"), UI::Align_CenterLeft);
+		(this, posx, posy, 150, 20, _("Authors:"), UI::Align_CenterLeft);
 	m_author =
 		new UI::Textarea
 			(this, posx + descr_label_w, posy, 200, 20, "---", UI::Align_CenterLeft);
@@ -171,13 +172,14 @@ void MainMenuLoadMap::selected(uint32_t) {
 		m_name  ->set_tooltip(map.get_name());
 		m_author->set_text(map.get_author());
 		m_descr ->set_text
-			(_(map.get_description()) + (map.get_hint().empty() ? "" : (std::string("\n") + _(map.get_hint()))));
+			(_(map.get_description()) +
+			 (map.get_hint().empty() ? "" : (std::string("\n\n") + _(map.get_hint()))));
 
 		m_nrplayers->set_text(std::to_string(static_cast<unsigned int>(map.get_nrplayers())));
 
 		m_size     ->set_text((boost::format(_("%1$ix%2$i"))
 									  % map.get_width()
-									  % map.get_height()).str().c_str());
+									  % map.get_height()).str());
 	} else {
 		m_name     ->set_text("");
 		m_name     ->set_tooltip("");
@@ -207,13 +209,12 @@ void MainMenuLoadMap::fill_list() {
 #else
 		m_parentdir = m_curdir.substr(0, m_curdir.rfind('\\'));
 #endif
-		std::string parent_string =
-				/** TRANSLATORS: Parent directory */
-				(boost::format("\\<%s\\>") % _("parent")).str();
+
 		m_ls->add
-			(parent_string.c_str(),
-			 m_parentdir.c_str(),
-			 g_gr->images().get("pics/ls_dir.png"));
+				/** TRANSLATORS: Parent directory */
+				((boost::format("\\<%s\\>") % _("parent")).str(),
+				 m_parentdir.c_str(),
+				 g_gr->images().get("pics/ls_dir.png"));
 	}
 
 	const FilenameSet::const_iterator mapfiles_end = m_mapfiles.end();
@@ -248,7 +249,7 @@ void MainMenuLoadMap::fill_list() {
 			try {
 				map_loader->preload_map(true);
 				m_ls->add
-					(FileSystem::filename_without_ext(name).c_str(),
+					(FileSystem::filename_without_ext(name),
 					 name,
 					 g_gr->images().get
 						 (dynamic_cast<WidelandsMapLoader*>(map_loader.get())

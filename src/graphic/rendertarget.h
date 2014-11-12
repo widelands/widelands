@@ -64,9 +64,9 @@ public:
 	void fill_rect(const Rect&, const RGBAColor&);
 	void brighten_rect(const Rect&, int32_t factor);
 
-	void blit(const Point& dst, const Image* image, Composite cm = CM_Normal, UI::Align = UI::Align_TopLeft);
-	void blitrect(const Point& dst, const Image* image, const Rect& src, Composite cm = CM_Normal);
-	void tile(const Rect&, const Image* image, const Point& ofs, Composite cm = CM_Normal);
+	void blit(const Point& dst, const Image* image, Composite cm = CM_UseAlpha, UI::Align = UI::Align_TopLeft);
+	void blitrect(const Point& dst, const Image* image, const Rect& src, Composite cm = CM_UseAlpha);
+	void tile(const Rect&, const Image* image, const Point& ofs, Composite cm = CM_UseAlpha);
 
 	void drawanim(const Point& dst, uint32_t animation, uint32_t time, const Widelands::Player* = 0);
 	void drawanimrect

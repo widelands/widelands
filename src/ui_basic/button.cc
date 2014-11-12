@@ -253,7 +253,6 @@ void Button::draw(RenderTarget & dst)
 			dst.fill_rect(Rect(Point(0, 2), 2, get_h() - 2), shade);
 			dst.fill_rect(Rect(Point(0, get_h() - 2), get_w(), get_h()), shade);
 			dst.fill_rect(Rect(Point(get_w() - 2, 0), get_w(), get_h()), shade);
-			//dst.draw_rect(Rect(Point(0, 0), get_w(), get_h()), m_clr_down);
 		}
 	}
 }
@@ -341,6 +340,7 @@ bool Button::handle_mouserelease(uint8_t const btn, int32_t, int32_t) {
 	}
 	return true;
 }
+
 bool Button::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_t) {
 	return true; // We handle this always by lighting up
 }

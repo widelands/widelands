@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-10-08 04:24+0000\n"
+"POT-Creation-Date: 2014-10-29 10:08+0000\n"
 "PO-Revision-Date: 2014-10-16 17:20+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-17 05:35+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-10-30 05:45+0000\n"
+"X-Generator: Launchpad (build 17203)\n"
 "Language: pl\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -295,20 +295,20 @@ msgstr "kucie zaawansowanej tarczy"
 #: ../../tribes/atlanteans/bakery/conf:27
 #: ../../tribes/atlanteans/blackroot_farm/conf:27
 #: ../../tribes/atlanteans/charcoal_kiln/conf:24
-#: ../../tribes/atlanteans/farm/conf:29
+#: ../../tribes/atlanteans/farm/conf:30
 #: ../../tribes/atlanteans/fish_breeders_house/conf:21
 #: ../../tribes/atlanteans/gold-spinning-mill/conf:24
 #: ../../tribes/atlanteans/mill/conf:31
 #: ../../tribes/atlanteans/quarry/conf:20
-#: ../../tribes/atlanteans/sawmill/conf:23
-#: ../../tribes/atlanteans/shipyard/conf:31
+#: ../../tribes/atlanteans/sawmill/conf:24
+#: ../../tribes/atlanteans/shipyard/conf:30
 #: ../../tribes/atlanteans/smelting_works/conf:31
 #: ../../tribes/atlanteans/smokery/conf:32
 #: ../../tribes/atlanteans/spiderfarm/conf:22
 #: ../../tribes/atlanteans/toolsmithy/conf:63
 #: ../../tribes/atlanteans/weaponsmithy/conf:44
-#: ../../tribes/atlanteans/weaving-mill/conf:34
-#: ../../tribes/atlanteans/well/conf:21
+#: ../../tribes/atlanteans/weaving-mill/conf:35
+#: ../../tribes/atlanteans/well/conf:23
 #: ../../tribes/atlanteans/woodcutters_house/conf:21
 msgid "working"
 msgstr "praca"
@@ -468,7 +468,7 @@ msgid "harvesting blackroot"
 msgstr "zbieranie czarnego korzenia"
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:43
-#: ../../tribes/atlanteans/farm/conf:46
+#: ../../tribes/atlanteans/farm/conf:47
 msgid "Out of Fields"
 msgstr "Brak pól"
 
@@ -567,18 +567,18 @@ msgstr ""
 "węglem. Ten wydobywany jest w kopalniach węgla lub prażony z drewna w "
 "smolarni."
 
-#: ../../tribes/atlanteans/coalmine/conf:26
-#: ../../tribes/atlanteans/crystalmine/conf:34
+#: ../../tribes/atlanteans/coalmine/conf:27
+#: ../../tribes/atlanteans/crystalmine/conf:35
 #: ../../tribes/atlanteans/goldmine/conf:27
 #: ../../tribes/atlanteans/ironmine/conf:27
 msgid "mining"
 msgstr "wydobycie"
 
-#: ../../tribes/atlanteans/coalmine/conf:43
+#: ../../tribes/atlanteans/coalmine/conf:44
 msgid "Main Coal Vein Exhausted"
 msgstr "Wyczerpano główną żyłę węgla"
 
-#: ../../tribes/atlanteans/coalmine/conf:44
+#: ../../tribes/atlanteans/coalmine/conf:45
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
@@ -1209,23 +1209,23 @@ msgstr ""
 "Mąka kukurydziana jest mielona w młynie i jest jednym z trzech składników "
 "potrzebnych do pieczenia w piekarniach Atlantydzkiego chleba."
 
-#: ../../tribes/atlanteans/crystalmine/conf:28
+#: ../../tribes/atlanteans/crystalmine/conf:29
 msgid "mining stone"
 msgstr "wydobycie kamienia"
 
-#: ../../tribes/atlanteans/crystalmine/conf:30
+#: ../../tribes/atlanteans/crystalmine/conf:31
 msgid "mining quartz"
 msgstr "wydobycie kwarcu"
 
-#: ../../tribes/atlanteans/crystalmine/conf:32
+#: ../../tribes/atlanteans/crystalmine/conf:33
 msgid "mining diamonds"
 msgstr "wydobycie diamentów"
 
-#: ../../tribes/atlanteans/crystalmine/conf:88
+#: ../../tribes/atlanteans/crystalmine/conf:89
 msgid "Main Crystal Vein Exhausted"
 msgstr "Wyczerpano główną żyłę kryształów"
 
-#: ../../tribes/atlanteans/crystalmine/conf:89
+#: ../../tribes/atlanteans/crystalmine/conf:90
 msgid ""
 "This crystal mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. You should consider dismantling or destroying it."
@@ -1284,15 +1284,15 @@ msgstr "Trenuje żołnierzy w ataku."
 msgid "Attack Training:"
 msgstr "Trening ataku:"
 
-#: ../../tribes/atlanteans/farm/conf:25
+#: ../../tribes/atlanteans/farm/conf:26
 msgid "planting corn"
 msgstr "sianie kukurydzy"
 
-#: ../../tribes/atlanteans/farm/conf:27
+#: ../../tribes/atlanteans/farm/conf:28
 msgid "harvesting corn"
 msgstr "zbieranie kukurydzy"
 
-#: ../../tribes/atlanteans/farm/conf:47
+#: ../../tribes/atlanteans/farm/conf:48
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr "Rolnik pracujący na tej farmie nie ma terenu do obsiania."
@@ -1374,7 +1374,7 @@ msgstr "Sieć rybacka używana przez rybaka produkowana jest przez warsztat."
 msgid "Plants trees."
 msgstr "Sadzi drzewa."
 
-#: ../../tribes/atlanteans/foresters_house/conf:21
+#: ../../tribes/atlanteans/foresters_house/conf:22
 msgid "planting trees"
 msgstr "sadzenie drzew"
 
@@ -1515,7 +1515,7 @@ msgstr ""
 msgid "Breeds the strong atlantean horses"
 msgstr "Hoduje potężne atlantydzkie konie."
 
-#: ../../tribes/atlanteans/horsefarm/conf:26
+#: ../../tribes/atlanteans/horsefarm/conf:25
 msgid "breeding horses"
 msgstr "hodowla koni"
 
@@ -1767,7 +1767,7 @@ msgstr ""
 "Prowadzi zwiad jak Zbigniew Zwiadowca zwiedzający niezwiedzony teren w "
 "zwiadowczej manierze."
 
-#: ../../tribes/atlanteans/scouts_house/conf:22
+#: ../../tribes/atlanteans/scouts_house/conf:21
 msgid "scouting"
 msgstr "zwiad"
 
@@ -1802,7 +1802,7 @@ msgstr "Statek pełnomorski"
 msgid "Works at the shipyard and constructs new ships."
 msgstr "Pracuje w stoczni budując nowe statki."
 
-#: ../../tribes/atlanteans/shipyard/conf:29
+#: ../../tribes/atlanteans/shipyard/conf:28
 msgid "constructing a ship"
 msgstr "budowa statku"
 
@@ -2026,23 +2026,23 @@ msgid "Produces cloth for buildings, ships and soldiers."
 msgstr ""
 "Wytwarza tkaninę do budowy statków, budynków oraz wyposażenia dla żołnierzy."
 
-#: ../../tribes/atlanteans/weaving-mill/conf:28
+#: ../../tribes/atlanteans/weaving-mill/conf:29
 msgid "weaving spidercloth"
 msgstr "tkanie pajęczej tkaniny"
 
-#: ../../tribes/atlanteans/weaving-mill/conf:30
+#: ../../tribes/atlanteans/weaving-mill/conf:31
 msgid "tailoring a tabard"
 msgstr "szycie kamizelki"
 
-#: ../../tribes/atlanteans/weaving-mill/conf:32
+#: ../../tribes/atlanteans/weaving-mill/conf:33
 msgid "tailoring a golden tabard"
 msgstr "szycie złotej kamizelki"
 
-#: ../../tribes/atlanteans/well/conf:30
+#: ../../tribes/atlanteans/well/conf:32
 msgid "Out of Water"
 msgstr "Brak wody"
 
-#: ../../tribes/atlanteans/well/conf:31
+#: ../../tribes/atlanteans/well/conf:33
 msgid ""
 "The carrier working at this well can’t find any water in his working radius."
 msgstr ""

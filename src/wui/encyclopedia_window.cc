@@ -77,6 +77,7 @@ EncyclopediaWindow::EncyclopediaWindow
 			/** TRANSLATORS: Column title in the Tribal Wares Encyclopedia */
 			(wareColumnWidth, ngettext("Consumed Ware Type", "Consumed Ware Types", 0));
 	condTable.add_column (quantityColumnWidth, _("Quantity"));
+	condTable.focus();
 
 	fill_wares();
 
@@ -99,7 +100,7 @@ void EncyclopediaWindow::fill_wares() {
 
 	for (uint32_t i = 0; i < ware_vec.size(); i++) {
 		Ware cur = ware_vec[i];
-		wares.add(cur.m_descr->descname().c_str(), cur.m_i, cur.m_descr->icon());
+		wares.add(cur.m_descr->descname(), cur.m_i, cur.m_descr->icon());
 	}
 }
 
@@ -124,7 +125,7 @@ void EncyclopediaWindow::ware_selected(uint32_t) {
 				 &&
 				 de->output_ware_types().count(wares.get_selected()))
 			{
-				prodSites.add(de->descname().c_str(), i, de->get_icon());
+				prodSites.add(de->descname(), i, de->get_icon());
 				found = true;
 			}
 		}

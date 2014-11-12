@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-10-08 04:24+0000\n"
+"POT-Creation-Date: 2014-10-29 10:08+0000\n"
 "PO-Revision-Date: 2011-08-21 14:26+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-10-09 05:38+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-10-30 05:42+0000\n"
+"X-Generator: Launchpad (build 17203)\n"
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:76
 msgid "Building lost!"
@@ -325,7 +325,7 @@ msgid "Uproar and Confusion"
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:168
-msgid "Emerging Chaos..."
+msgid "Emerging Chaos…"
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:170
@@ -333,7 +333,7 @@ msgid ""
 "Guilt-ridden, the king committed suicide. Without a monarch, the people "
 "turned to the clerics, but they had no substantial help to offer. Most "
 "accepted their fate while others tried to change the god’s mind by offering "
-"animals in his temple. But to no avail..."
+"animals in his temple. But to no avail…"
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:175
@@ -814,8 +814,8 @@ msgid ""
 "never have I seen sturdier ones – with enough room to carry all of us and "
 "some wares too. And this rescue came just in time: Lutas is about to swallow "
 "the rest of this island, the water rises faster by the hour. But we can make "
-"our escape now and start over in some country farther away... I expect a "
-"long journey, but we will find the land of Satul in the end. This is what I "
+"our escape now and start over in some country farther away… I expect a long "
+"journey, but we will find the land of Satul in the end. This is what I "
 "promised my people. And myself."
 msgstr ""
 
@@ -833,7 +833,7 @@ msgstr ""
 msgid "“%s”"
 msgstr ""
 
-#: ../../scripting/format_scenario.lua:129
+#: ../../scripting/format_scenario.lua:133
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""

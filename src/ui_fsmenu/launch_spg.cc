@@ -370,7 +370,7 @@ void FullscreenMenuLaunchSPG::set_scenario_values()
 	Widelands::Map map; //  MapLoader needs a place to put its preload data
 	std::unique_ptr<Widelands::MapLoader> map_loader(
 	   map.get_correct_loader(m_settings->settings().mapfilename));
-	map.set_filename(m_settings->settings().mapfilename.c_str());
+	map.set_filename(m_settings->settings().mapfilename);
 	map_loader->preload_map(true);
 	Widelands::PlayerNumber const nrplayers = map.get_nrplayers();
 	for (uint8_t i = 0; i < nrplayers; ++i) {

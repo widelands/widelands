@@ -7,5 +7,9 @@ world=greenland
 name=_Four Castles
 author=Winterwind
 descr=_ "Well protected in their mighty fortresses, four power-hungry warlords are completing their schemes to dominate these lands..."
-hint=_ "Suggested Teams: (blue, red) vs. (yellow, green)"
 tags="official,ffa,2teams"
+
+[teams00]
+team1=0,1
+team2=2,3
+# (blue, red) vs. (yellow, green)

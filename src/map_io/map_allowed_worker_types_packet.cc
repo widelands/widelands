@@ -59,7 +59,7 @@ void MapAllowedWorkerTypesPacket::read
 				const TribeDescr & tribe = player->tribe();
 				try {
 					Section* s = prof.get_section((boost::format("player_%u")
-															 % static_cast<unsigned int>(p)).str().c_str());
+															 % static_cast<unsigned int>(p)).str());
 					if (s == nullptr)
 						continue;
 
@@ -93,8 +93,9 @@ void MapAllowedWorkerTypesPacket::write
 	bool forbidden_worker_seen = false;
 	iterate_players_existing_const(p, egbase.map().get_nrplayers(), egbase, player) {
 		const TribeDescr & tribe = player->tribe();
-		Section & section = prof.create_section((boost::format("player_%u")
-															  % static_cast<unsigned int>(p)).str().c_str());
+		const std::string section_key = (boost::format("player_%u")
+													% static_cast<unsigned int>(p)).str();
+		Section & section = prof.create_section(section_key.c_str());
 
 		// Only write the workers which are disabled.
 		for (WareIndex b = 0; b < tribe.get_nrworkers(); ++b) {

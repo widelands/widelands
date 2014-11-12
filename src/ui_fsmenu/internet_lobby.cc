@@ -249,7 +249,7 @@ void FullscreenMenuInternetLobby::fill_games_list(const std::vector<InternetGame
 		// than one server with the same name.
 		if (games.at(i).name == localservername)
 			hostgame.set_enabled(false);
-		opengames.add(games.at(i).name.c_str(), games.at(i), pic, false, games.at(i).build_id);
+		opengames.add(games.at(i).name, games.at(i), pic, false, games.at(i).build_id);
 	}
 }
 

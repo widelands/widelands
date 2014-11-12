@@ -51,7 +51,7 @@ wl_library(ui_basic
     window.cc
     window.h
   USES_BOOST_REGEX
-  USES_SDL
+  USES_SDL2
   DEPENDS
     base_deprecated
     base_exceptions

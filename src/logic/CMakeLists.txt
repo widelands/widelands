@@ -1,7 +1,7 @@
 wl_binary(wl_map_info
   SRCS
     map_info.cc
-  USES_SDL
+  USES_SDL2
   DEPENDS
     base_log
     graphic
@@ -211,8 +211,8 @@ wl_library(logic
     world/terrain_description.h
     world/world.cc
     world/world.h
-  # TODO(sirver): Uses SDL only on WIN32 for a dirty hack.
-  USES_SDL
+  # TODO(sirver): Uses SDL2 only on WIN32 for a dirty hack.
+  USES_SDL2
   DEPENDS
     ai
     base_deprecated

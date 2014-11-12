@@ -60,13 +60,13 @@ struct BaseListselect : public Panel {
 		(const uint32_t Begin = 0,
 		 uint32_t End = std::numeric_limits<uint32_t>::max());
 	void add
-		(const char * const name,
+		(const std::string& name,
 		 uint32_t value,
 		 const Image* pic = nullptr,
 		 const bool select_this = false,
 		 const std::string & tooltip_text = std::string());
 	void add_front
-		(const char * const name,
+		(const std::string& name,
 		 const Image* pic = nullptr,
 		 const bool select_this = false,
 		 const std::string & tooltip_text = std::string());
@@ -117,7 +117,8 @@ struct BaseListselect : public Panel {
 	bool handle_mousepress  (uint8_t btn,   int32_t x, int32_t y) override;
 	bool handle_mouserelease(uint8_t btn,   int32_t x, int32_t y) override;
 	bool handle_mousemove   (uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
-	bool handle_key(bool down, SDL_keysym) override;
+	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
+	bool handle_key(bool down, SDL_Keysym) override;
 
 private:
 	static const int32_t DOUBLE_CLICK_INTERVAL = 500; // half a second
@@ -166,7 +167,7 @@ struct Listselect : public BaseListselect {
 	{}
 
 	void add
-		(const char * const name,
+		(const std::string& name,
 		 Entry value,
 		 const Image* pic = nullptr,
 		 const bool select_this = false,
@@ -176,7 +177,7 @@ struct Listselect : public BaseListselect {
 		BaseListselect::add(name, m_entry_cache.size() - 1, pic, select_this, tooltip_text);
 	}
 	void add_front
-		(const char * const name,
+		(const std::string& name,
 		 Entry value,
 		 const Image* pic = nullptr,
 		 const bool select_this = false,
@@ -221,7 +222,7 @@ struct Listselect<Entry &> : public Listselect<Entry *> {
 	{}
 
 	void add
-		(const char * const name,
+		(const std::string& name,
 		 Entry      &       value,
 		 const Image* pic = nullptr,
 		 const bool select_this = false,
@@ -230,7 +231,7 @@ struct Listselect<Entry &> : public Listselect<Entry *> {
 		Base::add(name, &value, pic, select_this, tooltip_text);
 	}
 	void add_front
-		(const char * const name,
+		(const std::string& name,
 		 Entry      &       value,
 		 const Image* pic = nullptr,
 		 const bool select_this = false,

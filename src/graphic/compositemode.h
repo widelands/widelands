@@ -28,12 +28,7 @@ enum Composite {
 	 * Perform a normal blitting operation that respects the alpha
 	 * channel if present.
 	 */
-	CM_Normal = 0,
-
-	/**
-	 * Perform a solid blit that ignores the alpha channel information.
-	 */
-	CM_Solid,
+	CM_UseAlpha = 0,
 
 	/**
 	 * Copy all pixel information, including alpha channel information.

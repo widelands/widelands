@@ -57,7 +57,6 @@
 #include "wui/text_layout.h"
 #include "wui/unique_window_handler.h"
 
-using boost::format;
 using Widelands::Area;
 using Widelands::CoordPath;
 using Widelands::Coords;
@@ -329,12 +328,12 @@ void InteractiveBase::update_speedlabel()
 					(real == 1000 ? std::string() : speed_string(real));
 			else {
 				m_label_speed.set_text(
-					(format
+					(boost::format
 						 /** TRANSLATORS: actual_speed (desired_speed) */
 						(_("%1$s (%2$s)"))
 						% speed_string(real).c_str()
 						% speed_string(desired).c_str()
-					).str().c_str()
+					).str()
 				);
 			}
 		} else
@@ -367,14 +366,22 @@ void InteractiveBase::think()
 	const uint32_t scrollval = 10;
 
 	if (keyboard_free() && Panel::allow_user_input()) {
-		if (get_key_state(SDLK_UP) || (get_key_state(SDLK_KP8) && (SDL_GetModState() ^ KMOD_NUM)))
+		if (get_key_state(SDL_SCANCODE_UP) ||
+			 (get_key_state(SDL_SCANCODE_KP_8) && (SDL_GetModState() ^ KMOD_NUM))) {
 			set_rel_viewpoint(Point(0, -scrollval), false);
-		if (get_key_state(SDLK_DOWN) || (get_key_state(SDLK_KP2) && (SDL_GetModState() ^ KMOD_NUM)))
+		}
+		if (get_key_state(SDL_SCANCODE_DOWN) ||
+			 (get_key_state(SDL_SCANCODE_KP_2) && (SDL_GetModState() ^ KMOD_NUM))) {
 			set_rel_viewpoint(Point(0,  scrollval), false);
-		if (get_key_state(SDLK_LEFT) || (get_key_state(SDLK_KP4) && (SDL_GetModState() ^ KMOD_NUM)))
+		}
+		if (get_key_state(SDL_SCANCODE_LEFT) ||
+			 (get_key_state(SDL_SCANCODE_KP_4) && (SDL_GetModState() ^ KMOD_NUM))) {
 			set_rel_viewpoint(Point(-scrollval, 0), false);
-		if (get_key_state(SDLK_RIGHT) || (get_key_state(SDLK_KP6) && (SDL_GetModState() ^ KMOD_NUM)))
+		}
+		if (get_key_state(SDL_SCANCODE_RIGHT) ||
+			 (get_key_state(SDL_SCANCODE_KP_6) && (SDL_GetModState() ^ KMOD_NUM))) {
 			set_rel_viewpoint(Point (scrollval, 0), false);
+		}
 	}
 
 	egbase().think(); // Call game logic here. The game advances.
@@ -387,7 +394,7 @@ void InteractiveBase::think()
 
 	//  The entire screen needs to be redrawn (unit movement, tile animation,
 	//  etc...)
-	g_gr->update_fullscreen();
+	g_gr->update();
 
 	update_speedlabel();
 
@@ -406,27 +413,27 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	if (get_display_flag(dfDebug) || !dynamic_cast<const Game*>(&egbase())) {
 		const std::string gametime(gametimestring(egbase().get_gametime()));
 		const std::string gametime_text = as_uifont(gametime, UI_FONT_SIZE_SMALL);
-		dst.blit(Point(5, 5), UI::g_fh1->render(gametime_text), CM_Normal, UI::Align_TopLeft);
-		static format node_format("(%i, %i)");
+		dst.blit(Point(5, 5), UI::g_fh1->render(gametime_text), CM_UseAlpha, UI::Align_TopLeft);
+		static boost::format node_format("(%i, %i)");
 
 		const std::string node_text = as_uifont
 			((node_format % m_sel.pos.node.x % m_sel.pos.node.y).str(), UI_FONT_SIZE_SMALL);
 		dst.blit(
 			Point(get_w() - 5, get_h() - 5),
 			UI::g_fh1->render(node_text),
-			CM_Normal,
+			CM_UseAlpha,
 			UI::Align_BottomRight
 		);
 	}
 
 	// Blit FPS when in debug mode.
 	if (get_display_flag(dfDebug)) {
-		static format fps_format("%5.1f fps (avg: %5.1f fps)");
+		static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
 		const std::string fps_text = as_uifont
 			((fps_format %
 			  (1000.0 / m_frametime) % (1000.0 / (m_avg_usframetime / 1000)))
 			 .str(), UI_FONT_SIZE_SMALL);
-		dst.blit(Point(5, 25), UI::g_fh1->render(fps_text), CM_Normal, UI::Align_Left);
+		dst.blit(Point(5, 25), UI::g_fh1->render(fps_text), CM_UseAlpha, UI::Align_Left);
 	}
 }
 
@@ -657,7 +664,7 @@ void InteractiveBase::finish_build_road()
 
 		if
 			(allow_user_input() &&
-			 (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)))
+			 (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)))
 		{
 			//  place flags
 			const Map & map = egbase().map();
@@ -668,7 +675,7 @@ void InteractiveBase::finish_build_road()
 			std::vector<Coords>::const_iterator const last     =
 				c_vector.end  () - 2;
 
-			if (get_key_state(SDLK_LSHIFT) || get_key_state(SDLK_RSHIFT)) {
+			if (get_key_state(SDL_SCANCODE_LSHIFT) || get_key_state(SDL_SCANCODE_RSHIFT)) {
 				for //  start to end
 					(std::vector<Coords>::const_iterator it = first;
 					 it <= last;
@@ -907,13 +914,13 @@ void InteractiveBase::roadb_remove_overlay()
 }
 
 
-bool InteractiveBase::handle_key(bool const down, SDL_keysym const code)
+bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code)
 {
 	if (m->quicknavigation->handle_key(down, code))
 		return true;
 
 	switch (code.sym) {
-	case SDLK_KP9:
+	case SDLK_KP_9:
 		if (code.mod & KMOD_NUM)
 			break;
 		/* no break */
@@ -934,7 +941,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_keysym const code)
 					ctrl->toggle_paused();
 		return true;
 
-	case SDLK_KP3:
+	case SDLK_KP_3:
 		if (code.mod & KMOD_NUM)
 			break;
 		/* no break */
@@ -993,7 +1000,7 @@ void InteractiveBase::cmd_map_object(const std::vector<std::string>& args)
 
 	if (!obj) {
 		DebugConsole::write
-			(str(format("No MapObject with serial number %1%") % serial));
+			(str(boost::format("No MapObject with serial number %1%") % serial));
 		return;
 	}
 

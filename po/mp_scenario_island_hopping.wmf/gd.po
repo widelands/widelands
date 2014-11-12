@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-10-08 04:24+0000\n"
-"PO-Revision-Date: 2014-03-08 07:15+0000\n"
+"POT-Creation-Date: 2014-10-29 10:08+0000\n"
+"PO-Revision-Date: 2014-11-04 13:46+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
-"Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
+"Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-10-09 05:51+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-11-05 06:16+0000\n"
+"X-Generator: Launchpad (build 17223)\n"
 "Language: gd\n"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/first_island.lua:70
@@ -34,7 +34,7 @@ msgstr "15 mionaidean"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:98
 msgid "Game Status"
-msgstr "Staid a' gheama"
+msgstr "Staid a’ gheama"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:116
 msgid "%s Log"
@@ -122,8 +122,8 @@ msgid ""
 "headquarters on a second island, which will contain all wares from your "
 "first headquarters."
 msgstr ""
-"'S e co-fharpais dualchasach nan Atlantach a th' ann an starraineachd nan "
-"eilean. Tha riaghailtean a' gheama simplidh: tòisichidh tu le prìomh-àras "
+"’S e co-fharpais dualchasach nan Atlantach a th’ ann an starraineachd nan "
+"eilean. Tha riaghailtean a’ gheama simplidh: tòisichidh tu le prìomh-àras "
 "air eilean. Nuair a bhios tu air caisteal a thogail air ceann thall an "
 "eilein, thèid prìomh-àras eile a thoirt dhut air eilean eile sa bhios gach "
 "stòras a tha thu air a chruinneachadh gu ruige sin."
@@ -147,7 +147,7 @@ msgid ""
 msgstr ""
 "Gach turas a choileanas tu eilean, gheibh thu duais de bhathar a-rèir co "
 "mheud cluicheadair a chrìochnaich an t-eilean mar-thà. Mar as tràithe a "
-"choileanas tu eilean 's ann as lugha de bhathar a gheibh thu. Chì thu liosta "
+"choileanas tu eilean ’s ann as lugha de bhathar a gheibh thu. Chì thu liosta "
 "de na gheibh thu gu h-ìosal."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:23
@@ -157,15 +157,15 @@ msgid ""
 "work for you, but you will only reap the benefits at the moment you reach a "
 "new island."
 msgstr ""
-"Tuig nach toir a' chiad eilean dhut ach fiodh is clachan 's nach fhaigh thu "
-"ach machair 's clach-mèinneir is gual air an dàrna eilean. Obraichidh an t-"
+"Tuig nach toir a’ chiad eilean dhut ach fiodh is clachan ’s nach fhaigh thu "
+"ach machair ’s clach-mèinneir is gual air an dàrna eilean. Obraichidh an t-"
 "eaconamaidh air na h-eileanan roimhe fhathast ach chan fhaigh thu buannachd "
 "às ach aig an àm a ruigeas tu eilean ùr."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:28
 msgid "Finally, be careful not to waste your quartz and diamonds."
 msgstr ""
-"Aig deireadh an latha, thoir an aire nach caith thu na h-èiteagan 's "
+"Aig deireadh an latha, thoir an aire nach caith thu na h-èiteagan ’s "
 "daoimeanan agad gun fheum."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:30
@@ -174,7 +174,7 @@ msgstr "Duaisean crìochnachaidh"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:31
 msgid "First Island"
-msgstr "A' chiad eilean"
+msgstr "A’ chiad eilean"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:32
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:37
@@ -202,7 +202,7 @@ msgstr "An dàrna eilean"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:45
 msgid "%1$s was the first to reach Island number %2$i."
-msgstr "Is an treubh aig %1$s a' chiad tè a ràinig eilean %2$i."
+msgstr "Is an treubh aig %1$s a’ chiad tè a ràinig eilean %2$i."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:46
 msgid "%1$s was the second to reach Island number %2$i."
@@ -225,16 +225,16 @@ msgid ""
 "%s is now King of the Hill and will win the game in 20 minutes, if nobody "
 "takes over the hill before then."
 msgstr ""
-"Is %s rìgh a' chnuic a-nis agus buannaichidh e an geama an ceann 20 mionaid "
+"Is %s rìgh a’ chnuic a-nis agus buannaichidh e an geama an ceann 20 mionaid "
 "mur gabh cuideigin eile an cnoc roimhe seo."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:56
 msgid "%s lost control of the hill."
-msgstr "Chaill %s smachd air a' chnoc."
+msgstr "Chaill %s smachd air a’ chnoc."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:58
 msgid "%1$s has been King of the Hill for %2$s!"
-msgstr "Tha %1$s air a bhith 'na rìgh a' chnuic fad %2$s a-nis!"
+msgstr "Tha %1$s air a bhith ’na rìgh a’ chnuic fad %2$s a-nis!"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:59
 msgid "%s has won the game. Congratulations!"

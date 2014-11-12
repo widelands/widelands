@@ -52,7 +52,7 @@ Table<void *>::Table
 	m_total_width     (0),
 	m_fontname        (UI_FONT_NAME),
 	m_fontsize        (UI_FONT_SIZE_SMALL),
-	m_headerheight    (15),
+	m_headerheight    (UI_FONT_SIZE_SMALL * 8 / 5),
 	m_lineheight      (g_fh->get_fontheight(m_fontname, m_fontsize)),
 	m_scrollbar       (nullptr),
 	m_scrollpos       (0),
@@ -324,17 +324,17 @@ void Table<void *>::draw(RenderTarget & dst)
 /**
  * handle key presses
  */
-bool Table<void *>::handle_key(bool down, SDL_keysym code)
+bool Table<void *>::handle_key(bool down, SDL_Keysym code)
 {
 	if (down) {
 		switch (code.sym) {
-		case SDLK_UP:
-		case SDLK_KP8:
+		case SDL_SCANCODE_UP:
+		case SDL_SCANCODE_KP_8:
 			move_selection(-1);
 			return true;
 
-		case SDLK_DOWN:
-		case SDLK_KP2:
+		case SDL_SCANCODE_DOWN:
+		case SDL_SCANCODE_KP_2:
 			move_selection(1);
 			return true;
 
@@ -344,6 +344,11 @@ bool Table<void *>::handle_key(bool down, SDL_keysym code)
 	}
 
 	return UI::Panel::handle_key(down, code);
+}
+
+
+bool Table<void *>::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
+	return m_scrollbar->handle_mousewheel(which, x, y);
 }
 
 /**
@@ -356,9 +361,6 @@ bool Table<void *>::handle_mousepress
 		focus();
 
 	switch (btn) {
-	case SDL_BUTTON_WHEELDOWN:
-	case SDL_BUTTON_WHEELUP:
-		return m_scrollbar ? m_scrollbar->handle_mousepress(btn, 0, y) : false;
 	case SDL_BUTTON_LEFT: {
 		int32_t const time = WLApplication::get()->get_time();
 

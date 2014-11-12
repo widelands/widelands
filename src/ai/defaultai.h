@@ -143,7 +143,7 @@ private:
 	bool check_militarysites(int32_t);
 	uint32_t get_stocklevel_by_hint(size_t);
 	uint32_t get_stocklevel(BuildingObserver&);
-	uint32_t get_stocklevel(size_t);  // count all direct outputs_
+	uint32_t get_stocklevel(Widelands::WareIndex);  // count all direct outputs_
 	void check_helpersites(int32_t);
 
 	int32_t recalc_with_border_range(const BuildableField&, int32_t);
@@ -229,7 +229,10 @@ private:
 	uint16_t military_last_dismantle_;
 	int32_t military_last_build_;  // sometimes expansions just stops, this is time of last military
 	                               // building build
-	int32_t spots_;                // sum of buildable fields
+	Widelands::Coords
+	   last_attack_target_;         // flag to abuilding (position) that was attacked last time
+	int32_t next_attack_waittime_;  // second till the next attack consideration
+	int32_t spots_;                 // sum of buildable fields
 
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldPossession>>
 	   field_possession_subscriber_;

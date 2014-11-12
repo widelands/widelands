@@ -49,7 +49,7 @@ std::string CampaignVisibilitySave::get_path()
 		update_campvis(savepath);
 	else {
 		Section & ca_s = ca.get_safe_section("global");
-		Profile cc("campaigns/cconfig");
+		Profile cc("campaigns/campaigns.conf");
 		Section & cc_s = cc.get_safe_section("global");
 		if (cc_s.get_int("version") > ca_s.get_int("version"))
 			update_campvis(savepath);
@@ -88,8 +88,8 @@ void CampaignVisibilitySave::update_campvis(const std::string & savepath)
 	std::string mapsection;
 	std::string cms;
 
-	// Prepare cconfig and campvis
-	Profile cconfig("campaigns/cconfig");
+	// Prepare campaigns.conf and campvis
+	Profile cconfig("campaigns/campaigns.conf");
 	Section & cconf_s = cconfig.get_safe_section("global");
 	Profile campvisr(savepath.c_str());
 	Profile campvisw(savepath.c_str());

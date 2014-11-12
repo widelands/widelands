@@ -14,7 +14,7 @@
 --
 --    :arg arrays: any number of arrays
 --    :returns: a new array with all values of all arguments
-function array_combine(...) 
+function array_combine(...)
    local t = {}
    for _,arg in ipairs{...} do
       for _,v in ipairs(arg) do
@@ -23,7 +23,7 @@ function array_combine(...)
    end
    return t
 end
-   
+
 -- RST
 -- .. function:: array_reverse(a)
 --

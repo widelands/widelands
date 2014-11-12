@@ -73,13 +73,11 @@
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/campaign_select.h"
 #include "ui_fsmenu/editor.h"
-#include "ui_fsmenu/editor_mapselect.h"
 #include "ui_fsmenu/fileview.h"
 #include "ui_fsmenu/internet_lobby.h"
 #include "ui_fsmenu/intro.h"
 #include "ui_fsmenu/launch_spg.h"
 #include "ui_fsmenu/loadgame.h"
-#include "ui_fsmenu/loadreplay.h"
 #include "ui_fsmenu/main.h"
 #include "ui_fsmenu/mapselect.h"
 #include "ui_fsmenu/multiplayer.h"
@@ -398,7 +396,7 @@ void WLApplication::run()
 				// Load the requested map
 				Widelands::Map map;
 				i18n::Textdomain td("maps");
-				map.set_filename(m_filename.c_str());
+				map.set_filename(m_filename);
 				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(m_filename);
 				if (!ml) {
 					throw WLWarning
@@ -412,7 +410,7 @@ void WLApplication::run()
 				MapData mapdata;
 				mapdata.filename = m_filename;
 				mapdata.name = map.get_name();
-				mapdata.author = map.get_author();
+				mapdata.authors.parse(map.get_author());
 				mapdata.description = map.get_description();
 				mapdata.nrplayers = map.get_nrplayers();
 				mapdata.width = map.get_width();
@@ -486,10 +484,6 @@ bool WLApplication::poll_event(SDL_Event& ev) {
 			g_sound_handler.change_music();
 		break;
 
-	case SDL_VIDEOEXPOSE:
-		// log ("SDL Video Window expose event: %i\n", ev.expose.type);
-		g_gr->update_fullscreen();
-		break;
 	default:
 		break;
 	}
@@ -506,16 +500,14 @@ void WLApplication::handle_input(InputCallback const * cb)
 		switch (ev.type) {
 		case SDL_KEYDOWN:
 		case SDL_KEYUP:
-			if
-				(ev.key.keysym.sym == SDLK_F10 &&
-				 (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)))
-			{
+			if (ev.key.keysym.scancode == SDL_SCANCODE_F10 &&
+			    (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL))) {
 				//  get out of here quick
 				if (ev.type == SDL_KEYDOWN)
 					m_should_die = true;
 				break;
 			}
-			if (ev.key.keysym.sym == SDLK_F11) { //  take screenshot
+			if (ev.key.keysym.scancode == SDL_SCANCODE_F11) { //  take screenshot
 				if (ev.type == SDL_KEYDOWN)
 				{
 					if (g_fs->disk_space() < MINIMUM_DISK_SPACE) {
@@ -527,7 +519,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 					g_fs->ensure_directory_exists(SCREENSHOT_DIR);
 					for (uint32_t nr = 0; nr < 10000; ++nr) {
 						const std::string filename = (boost::format(SCREENSHOT_DIR "/shot%04u.png")
-																% nr).str().c_str();
+																% nr).str();
 						if (g_fs->file_exists(filename))
 							continue;
 						g_gr->screenshot(filename);
@@ -541,11 +533,20 @@ void WLApplication::handle_input(InputCallback const * cb)
 			}
 			break;
 
+		case SDL_TEXTINPUT:
+			if (cb && cb->textinput) {
+				cb->textinput(ev.text.text);
+			}
+			break;
 		case SDL_MOUSEBUTTONDOWN:
 		case SDL_MOUSEBUTTONUP:
 			_handle_mousebutton(ev, cb);
 			break;
-
+		case SDL_MOUSEWHEEL:
+			if (cb && cb->mouse_wheel) {
+				cb->mouse_wheel(ev.wheel.which, ev.wheel.x, ev.wheel.y);
+			}
+			break;
 		case SDL_MOUSEMOTION:
 			m_mouse_position = Point(ev.motion.x, ev.motion.y);
 
@@ -555,7 +556,6 @@ void WLApplication::handle_input(InputCallback const * cb)
 					 ev.motion.x,    ev.motion.y,
 					 ev.motion.xrel, ev.motion.yrel);
 			break;
-
 		case SDL_QUIT:
 			m_should_die = true;
 			break;
@@ -591,7 +591,7 @@ void WLApplication::_handle_mousebutton
 		//  mouse button.
 		if
 			(ev.button.button == SDL_BUTTON_MIDDLE &&
-			 (get_key_state(SDLK_LALT) || get_key_state(SDLK_RALT)))
+			 (get_key_state(SDL_SCANCODE_LALT) || get_key_state(SDL_SCANCODE_RALT)))
 		{
 			ev.button.button = SDL_BUTTON_LEFT;
 			m_faking_middle_mouse_button = true;
@@ -624,8 +624,8 @@ int32_t WLApplication::get_time() {
 
 /// Instantaneously move the mouse cursor without creating a motion event.
 ///
-/// SDL_WarpMouse() *will* create a mousemotion event, which we do not want. As
-/// a workaround, we store the delta in m_mouse_compensate_warp and use that to
+/// SDL_WarpMouseInWindow() *will* create a mousemotion event, which we do not want.
+/// As a workaround, we store the delta in m_mouse_compensate_warp and use that to
 /// eliminate the motion event in poll_event()
 ///
 /// \param position The new mouse position
@@ -637,7 +637,10 @@ void WLApplication::warp_mouse(const Point position)
 	SDL_GetMouseState(&cur_position.x, &cur_position.y);
 	if (cur_position != position) {
 		m_mouse_compensate_warp += cur_position - position;
-		SDL_WarpMouse(position.x, position.y);
+		SDL_Window* sdl_window = g_gr->get_sdlwindow();
+		if (sdl_window) {
+			SDL_WarpMouseInWindow(sdl_window, position.x, position.y);
+		}
 	}
 }
 
@@ -652,10 +655,18 @@ void WLApplication::warp_mouse(const Point position)
  */
 void WLApplication::set_input_grab(bool grab)
 {
+	if (!g_gr) {
+		return;
+	}
+	SDL_Window * sdl_window = g_gr->get_sdlwindow();
 	if (grab) {
-		SDL_WM_GrabInput(SDL_GRAB_ON);
+		if (sdl_window) {
+			SDL_SetWindowGrab(sdl_window, SDL_TRUE);
+		}
 	} else {
-		SDL_WM_GrabInput(SDL_GRAB_OFF);
+		if (sdl_window) {
+			SDL_SetWindowGrab(sdl_window, SDL_FALSE);
+		}
 		warp_mouse(m_mouse_position); //TODO(unknown): is this redundant?
 	}
 }
@@ -697,6 +708,8 @@ void WLApplication::refresh_graphics()
 		 s.get_int("yres", DEFAULT_RESOLUTION_H),
 		 s.get_bool("fullscreen", false),
 		 s.get_bool("opengl", true));
+	// does only work with a window
+	set_input_grab(s.get_bool("inputgrab", false));
 }
 
 /**
@@ -712,7 +725,6 @@ bool WLApplication::init_settings() {
 	//then parse the commandline - overwrites conffile settings
 	handle_commandline_parameters();
 
-	set_input_grab(s.get_bool("inputgrab", false));
 	set_mouse_swap(s.get_bool("swapmouse", false));
 
 	// KLUDGE!
@@ -819,50 +831,12 @@ bool WLApplication::init_hardware() {
 	setenv("SDL_VIDEO_ALLOW_SCREENSAVER", "1", 0);
 	#endif
 
-	//try all available video drivers till we find one that matches
-	std::vector<std::string> videomode;
-	int result = -1;
-
-	//add default video mode
-#if defined(__linux__) || defined(__FreeBSD__) || defined(__OpenBSD__)
-	videomode.push_back("x11");
-#endif
-#ifdef _WIN32
-	videomode.push_back("windib");
-#endif
-#ifdef __APPLE__
-	videomode.push_back("Quartz");
-#endif
-	//if a video mode is given on the command line, add that one first
-	{
-		const char * videodrv;
-		videodrv = getenv("SDL_VIDEODRIVER");
-		if (videodrv) {
-			log("Also adding video driver %s\n", videodrv);
-			videomode.push_back(videodrv);
-		}
-	}
-	char videodrvused[26];
-	strcpy(videodrvused, "SDL_VIDEODRIVER=\0");
-	wout << videodrvused << "&" << std::endl;
-	for (int i = videomode.size() - 1; result == -1 && i >= 0; --i) {
-		strcpy(videodrvused + 16, videomode[i].c_str());
-		videodrvused[16 + videomode[i].size()] = '\0';
-		putenv(videodrvused);
-		log
-			("Graphics: Trying Video driver: %i %s %s\n",
-			 i, videomode[i].c_str(), videodrvused);
-		result = SDL_Init(sdl_flags);
-	}
-
-	if (result == -1)
+	if (SDL_Init(sdl_flags) == -1)
 		throw wexception
 			("Failed to initialize SDL, no valid video driver: %s",
 			 SDL_GetError());
 
 	SDL_ShowCursor(SDL_DISABLE);
-	SDL_EnableUNICODE(1);
-	SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 
 	refresh_graphics();
 
@@ -883,8 +857,7 @@ void WLApplication::shutdown_hardware()
 			<< std::endl;
 
 	init_graphics(0, 0, false, false);
-	SDL_QuitSubSystem
-		(SDL_INIT_TIMER|SDL_INIT_VIDEO|SDL_INIT_CDROM|SDL_INIT_JOYSTICK);
+	SDL_QuitSubSystem(SDL_INIT_TIMER|SDL_INIT_VIDEO|SDL_INIT_JOYSTICK);
 
 #ifndef _WIN32
 	// SOUND can lock up with buggy SDL/drivers. we try to do the right thing
@@ -916,6 +889,13 @@ void WLApplication::parse_commandline
 	for (int i = 1; i < argc; ++i) {
 		std::string opt = argv[i];
 		std::string value;
+
+		if (!opt.compare(0, 5, "-psn_")) {
+			// Mac OS passes this on the commandline when launched from finder.
+			// SDL1 removed it for us (apparently), but SDL2 does no longer, so we
+			// have to do this ourselves.
+			continue;
+		}
 
 		//are we looking at an option at all?
 		if (opt.compare(0, 2, "--"))
@@ -1110,16 +1090,7 @@ void WLApplication::mainmenu()
 		try {
 			switch (mm.run()) {
 			case FullscreenMenuMain::mm_playtutorial:
-				{
-					Widelands::Game game;
-					try {
-						game.run_splayer_scenario_direct("campaigns/tutorial01.wmf", "");
-					} catch (const std::exception & e) {
-						log("Fatal exception: %s\n", e.what());
-						emergency_save(game);
-						throw;
-					}
-				}
+				mainmenu_tutorial();
 				break;
 			case FullscreenMenuMain::mm_singleplayer:
 				mainmenu_singleplayer();
@@ -1181,6 +1152,34 @@ void WLApplication::mainmenu()
 #endif
 	}
 }
+
+
+/**
+ * Handle the "Play Tutorial" menu option:
+ * Show tutorial UI, let player select tutorial and run it.
+ */
+void WLApplication::mainmenu_tutorial()
+{
+	Widelands::Game game;
+	std::string filename;
+		//  Start UI for the tutorials.
+		FullscreenMenuCampaignMapSelect select_campaignmap(true);
+		select_campaignmap.set_campaign(0);
+		if (select_campaignmap.run() > 0) {
+			filename = select_campaignmap.get_map();
+		}
+	try {
+		// Load selected tutorial-map-file
+		if (filename.size())
+			game.run_splayer_scenario_direct(filename.c_str(), "");
+	} catch (const std::exception & e) {
+		log("Fatal exception: %s\n", e.what());
+		emergency_save(game);
+		throw;
+	}
+}
+
+
 
 /**
  * Run the singleplayer menu
@@ -1323,11 +1322,12 @@ void WLApplication::mainmenu_editor()
 		case FullscreenMenuEditor::Load_Map: {
 			std::string filename;
 			{
-				FullscreenMenuEditorMapSelect emsm;
+				SinglePlayerGameSettingsProvider sp;
+				FullscreenMenuMapSelect emsm(&sp, nullptr, true);
 				if (emsm.run() <= 0)
 					break;
 
-				filename = emsm.get_map();
+				filename = emsm.get_map()->filename;
 			}
 			EditorInteractive::run_editor(filename.c_str(), "");
 			return;
@@ -1410,7 +1410,9 @@ bool WLApplication::load_game()
 	Widelands::Game game;
 	std::string filename;
 
-	FullscreenMenuLoadGame ssg(game);
+	SinglePlayerGameSettingsProvider sp;
+	FullscreenMenuLoadGame ssg(game, &sp, nullptr);
+
 	if (ssg.run() > 0)
 		filename = ssg.filename();
 	else
@@ -1477,7 +1479,8 @@ void WLApplication::replay()
 {
 	Widelands::Game game;
 	if (m_filename.empty()) {
-		FullscreenMenuLoadReplay rm(game);
+		SinglePlayerGameSettingsProvider sp;
+		FullscreenMenuLoadGame rm(game, &sp, nullptr, true);
 		if (rm.run() <= 0)
 			return;
 

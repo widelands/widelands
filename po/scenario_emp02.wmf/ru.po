@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-10-08 04:24+0000\n"
+"POT-Creation-Date: 2014-10-29 10:08+0000\n"
 "PO-Revision-Date: 2010-11-22 06:37+0000\n"
 "Last-Translator: Massol <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-10-09 05:39+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-10-30 05:42+0000\n"
+"X-Generator: Launchpad (build 17203)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
@@ -336,8 +336,8 @@ msgid "Food for the Miners"
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:198
-msgid "Amalea comes in..."
-msgstr "Входит Амалия..."
+msgid "Amalea comes in…"
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:199
 msgid ""
@@ -356,7 +356,7 @@ msgstr ""
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:203
 msgid ""
 "What do you think about helping them out? I can’t tell you what we need "
-"exactly... but here are my recommendations:"
+"exactly… but here are my recommendations:"
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:209
@@ -429,8 +429,8 @@ msgid "As Time is Running By"
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:249
-msgid "7 days later..."
-msgstr "7 дней спустя..."
+msgid "7 days later…"
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:253
 msgid "A Message"
@@ -447,7 +447,7 @@ msgid ""
 "The message was addressed to me, begging me to come back to Fremil. It says "
 "that the Empire is at war with the Barbarians. They were attacked from the "
 "north by the tribe that I was forbidden to attack. It is clear to me what I "
-"must do..."
+"must do…"
 msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:259
@@ -480,7 +480,7 @@ msgstr ""
 msgid "“%s”"
 msgstr ""
 
-#: ../../scripting/format_scenario.lua:129
+#: ../../scripting/format_scenario.lua:133
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""
