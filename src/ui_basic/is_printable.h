@@ -36,7 +36,7 @@ namespace UI {
 // WLApplication::init_hardware()) instead of k.sym. Doing so needs to take the
 // current locale into account; perhaps there already is a fitting gettext
 // function?
-bool is_printable(SDL_keysym k);
+bool is_printable(SDL_Keysym k);
 
 }  // namespace UI
 

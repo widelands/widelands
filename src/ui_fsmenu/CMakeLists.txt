@@ -35,7 +35,6 @@ wl_library(ui_fsmenu
     suggested_teams_box.cc
     suggested_teams_box.h
   DEPENDS
-    base_deprecated
     base_exceptions
     base_i18n
     base_log

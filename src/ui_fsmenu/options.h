@@ -90,7 +90,7 @@ public:
 	};
 
 	/// Handle keypresses
-	bool handle_key(bool down, SDL_keysym code) override;
+	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
 	uint32_t const              m_vbutw;
@@ -147,6 +147,7 @@ private:
 	public:
 		int32_t xres;
 		int32_t yres;
+		int32_t depth;
 	};
 
 	/// All supported screen resolutions.
@@ -167,7 +168,7 @@ public:
 	};
 
 	/// Handle keypresses
-	bool handle_key(bool down, SDL_keysym code) override;
+	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
 	void update_sb_dis_panel_unit();

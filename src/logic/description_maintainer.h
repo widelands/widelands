@@ -36,6 +36,9 @@ template <typename T> struct DescriptionMaintainer {
 
 	// Returns the number of entries in the container.
 	size_t get_nitems() const {return items_.size();}
+	// TODO(sirver): Remove get_nitems().
+
+	size_t size() const {return items_.size();}
 
 	// Returns the entry with the given 'name' if it exists or nullptr.
 	T* exists(const std::string& name) const;

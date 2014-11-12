@@ -27,7 +27,7 @@ abilities = {
    position = "topright",
    title = _"Soldiers’ abilities",
    body = rt(
-      p(_[[A new soldier is created like a worker: When a military building needs a soldier, a carrier grabs the needed weapons and armor from a warehouse (or your headquarters) and walks up the road to your new building. Basic Barbarian soldiers do not use armor, they only need an ax.]]) ..
+      p(_[[A new soldier is created like a worker: when a military building needs a soldier, a carrier grabs the needed weapons and armor from a warehouse (or your headquarters) and walks up the road to your new building. Basic Barbarian soldiers do not use armor, they only need an ax.]]) ..
       p(_[[Take a look at the soldiers that are on their way to our military buildings. They look different from normal workers: they have a health bar over their head that displays their remaining health, and they have four symbols, which symbolize the individual soldier’s current levels in the four different categories: health, attack, defense and evade.]]) ..
       p(_[[If a barbarian soldier is fully trained, he has level 3 health, level 5 attack, level 0 defense and level 2 evade. This is one fearsome warrior then! The individual abilities have the following meaning:]])
    ) ..
@@ -69,7 +69,7 @@ battlearena2 = {
       h1(_"The Battle Arena Has Been Constructed") ..
       p(_[[Very good. Our battle arena has been finished, and the soldiers are already walking towards it.]]) ..
       -- Not perfectly correct (some training steps need either bread or meat), but we do not want to confuse new players
-      p(_[[The needed wares are also delivered there. For successful training, you need bread and strongbeer. Most steps additionally require either fish or meat.]] .. " " ..
+      p(_[[The needed wares are also delivered there. For successful training, you need pitta bread and strongbeer. Most steps additionally require either fish or meat.]] .. " " ..
 		_[[For more information, you can have a look at the building’s help window, accessible via the question mark in every building’s window.]]) ..
       p(_[[To learn how far your soldiers have progressed in their training, you can have a look at their icons. They are modified by red dots:]])
    ) ..
@@ -126,7 +126,7 @@ soldier_capacity = {
    title = _"Soldier capacity",
    body = rt(
       h1(_"Adjusting the number of soldiers") ..
-      p(_[[There is another way how you can control the strength of a military building: By the number of soldiers stationed there. Just click on the arrow buttons to decrease or increase the desired number of soldiers. Every buildings has a maximum capacity. In case of the barrier, it is five, for example.]]) ..
+      p(_[[There is another way how you can control the strength of a military building: by the number of soldiers stationed there. Just click on the arrow buttons to decrease or increase the desired number of soldiers. Every buildings has a maximum capacity. In case of the barrier, it is five, for example.]]) ..
       p(_[[If you wish to send a certain soldier away, you can simply click on it. It will then be replaced by another soldier.]]) ..
       p(_[[Let me also describe what the numbers in the statistics string mean. This string can contain up to three numbers, e.g. ‘1 (+5) soldier (+2)’.]]) ..
       paragraphdivider() ..
@@ -142,13 +142,13 @@ dismantle = {
    body = rt(
       h1(_"Dismantling military buildings") ..
       p(_[[You can only reduce the number of soldiers to one. The last soldier of a building will never come out (unless this building is attacked). If you want to have your soldier elsewhere, you will have to dismantle the building (buildings of an alien tribe cannot be dismantled, only be burned down).]]) ..
-      p(_[[However, destroying a military building is always linked with a risk: The land is still yours, but it is no longer protected. Any enemy that builds his own military sites can take over that land without a fight, causing your buildings to burst into flames. Furthermore, some parts of the land can now be hidden under the fog of war. You should therefore only dismantle military buildings deep inside your territory where you are safe from enemies.]]) ..
+      p(_[[However, destroying a military building is always linked with a risk: the land is still yours, but it is no longer protected. Any enemy that builds his own military sites can take over that land without a fight, causing your buildings to burst into flames. Furthermore, some parts of the land can now be hidden under the fog of war. You should therefore only dismantle military buildings deep inside your territory where you are safe from enemies.]]) ..
       p(_[[Have you seen your sentry? Since it cannot contain many soldiers and is next to a stronger barrier, it is rather useless.]]) ..
       paragraphdivider() ..
       -- TRANSLATORS: 'it' refers to the Barbarian sentry
       listitem_bullet(_[[Dismantle it.]])
    ) ..
-   rt(p(_[[You can also use this opportunity to become familiar with the other options: The heroes/rookies preference and the capacity.]])),
+   rt(p(_[[You can also use this opportunity to become familiar with the other options: the heroes/rookies preference and the capacity.]])),
    obj_name = "dismantle_sentry",
    obj_title = _"Dismantle your north-western sentry",
    obj_body = rt(

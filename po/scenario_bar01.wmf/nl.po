@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2014-10-29 08:30+0000\n"
-"PO-Revision-Date: 2014-07-27 17:02+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"POT-Creation-Date: 2014-10-29 10:08+0000\n"
+"PO-Revision-Date: 2014-10-29 18:16+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
-"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-29 06:09+0000\n"
+"X-Launchpad-Export-Date: 2014-10-30 05:43+0000\n"
 "X-Generator: Launchpad (build 17203)\n"
+"Language: nl\n"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:23
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:25
@@ -36,7 +36,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:33
 msgid "Expand north-east and build a quarry"
-msgstr ""
+msgstr "Breid noordoostelijk uit en bouw een steengroeve"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:35
 msgid "Expand north-east to the rocks"
@@ -54,11 +54,11 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:43
 msgid "Start building mines on the mountain"
-msgstr ""
+msgstr "Beginnen mijnen te bouwen op de berg"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "Build coal and iron ore mines"
-msgstr ""
+msgstr "Bouw kolen- en ijzermijnen"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:46
 msgid "Build a coal mine and an iron ore mine."
@@ -119,19 +119,20 @@ msgid ""
 "Mines can only be built on mountain terrain. Suitable places for mines are "
 "displayed as orange mine symbols."
 msgstr ""
+"Mijnen kunnen alleen in de bergen worden gebouwd. Geschikte plaatsen voor "
+"mijnen worden aangegeven met oranje symbolen."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:66
-#, fuzzy
 msgid "Provide your miners with food"
-msgstr "Verplaats het zicht met de muis"
+msgstr "Voorzie je mijnwerkers van voedsel"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:68
 msgid "Build a hunter, a gamekeeper and a tavern"
-msgstr ""
+msgstr "Bouw een jager, een jachtopzichter en een kroeg"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:69
 msgid "In order to work, your miners need food."
-msgstr ""
+msgstr "Om te kunnen werken, hebben je mijnwerkers voedsel nodig."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:70
 msgid ""
@@ -139,20 +140,26 @@ msgid ""
 "becoming extinct. The meat is then processed in a tavern into lunches for "
 "your miners."
 msgstr ""
+"Een jager kan dieren jagen terwijl een jachtopzichter ervoor zorgt dat ze "
+"niet uitsterven. Het vlees wordt dan verwerkt in een kroeg tot lunches voor "
+"je mijnwerkers."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:71
 msgid ""
 "This is only the first example of a ware which has to be refined before "
 "being used in a secondary building – others will follow."
 msgstr ""
+"Dit is slechts het eerste voorbeeld van een waar dat verwerkt moet worden "
+"voordat deze gebruikt kan worden in een secundair gebouw - anderen zullen "
+"volgen."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:77
 msgid "Bake bread"
-msgstr ""
+msgstr "Bak brood"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:79
 msgid "Build a well, a farm and a bakery"
-msgstr ""
+msgstr "Bouw een waterput, een boerderij en een bakkerij"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:80
 msgid ""
@@ -163,24 +170,24 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:86
-#, fuzzy
 msgid "Refine your mined resources"
-msgstr "Zoeken naar grondstoffen"
+msgstr "Verwerk je mijnmaterialen"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:88
-#, fuzzy
 msgid "Build a smelting works"
-msgstr "Een aansluitingsweg bouwen"
+msgstr "Bouw een hoogoven"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:89
 msgid ""
 "The iron ore your miners dig up is not usable yet – it has to be melted into "
 "iron first."
 msgstr ""
+"Het ijzererts dat je mijnwerkers opgraven is nog niet bruikbaar - het moet "
+"eerst omgesmolten worden tot ijzer."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:95
 msgid "Enhance buildings and build a micro brewery"
-msgstr ""
+msgstr "Verbeter gebouwen en bouw een kleine brouwerij"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:97
 msgid "Enhance a mine and the tavern, and build a micro brewery."
@@ -211,6 +218,10 @@ msgid ""
 "buildings. Do not enhance a building before you have enough advanced workers "
 "to operate the advanced building!"
 msgstr ""
+"Arbeiders krijgen ervaring door succesvol werk. Met genoeg ervaring zullen "
+"het geavanceerde arbeiders worden, die nodig zijn om verbeterde gebouwen te "
+"beheren. Verbeter je gebouw niet voordat je genoeg geavanceerde arbeiders "
+"hebt om het verbeterde gebouw te bedienen!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:102
 msgid ""
@@ -230,9 +241,8 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:109
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:111
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:114
-#, fuzzy
 msgid "Build a wood hardener"
-msgstr "Bouw een steengroeve"
+msgstr "Bouw een houtverharder"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:112
 msgid ""
@@ -242,10 +252,15 @@ msgid ""
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
 msgstr ""
+"Grotere en betere gebouwen - inclusief alle van militaire aard - vereisen "
+"betere bouwmaterialen. Ze kunnen niet gemaakt worden van normaal hout - het "
+"hout moet verfijnd worden tot rozenhout door een houtverharder. Vergeet "
+"nooit om een houtverharder te maken voordat je rozenhout op is, zonder kan "
+"je niet uitbreiden."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:120
 msgid "Build a lime kiln and coal economy"
-msgstr ""
+msgstr "Bouw een kalkoven en een koleneconomie"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:122
 msgid ""
@@ -258,6 +273,9 @@ msgid ""
 "blackwood. One of these is grout, which is produced out of raw stone, water "
 "and coal by a lime-burner."
 msgstr ""
+"Betere gebouwen kunnen naast rozenhout ook andere verbeterde materialen "
+"nodig hebben. Één daarvan is specie, die geproduceerd wordt uit ruwe steen, "
+"water en kolen door een kalkbrander."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:125
 msgid ""
@@ -289,9 +307,8 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:137
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:139
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:142
-#, fuzzy
 msgid "Build a reed yard"
-msgstr "Bouw een steengroeve"
+msgstr "Bouw een rietkwekerij"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:140
 msgid ""
@@ -299,13 +316,15 @@ msgid ""
 "cover roofs. Thatch reed is planted by a gardener around his building, the "
 "reed yard."
 msgstr ""
+"Het derde benodigde materiaal om gebouwen te verbeteren is dakriet, gebruikt "
+"voor het bedekken van daken. Dakriet wordt verbouwd door een rietkweker rond "
+"zijn gebouw, de rietkwekerij."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:148
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:150
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:155
-#, fuzzy
 msgid "Build a cattle farm"
-msgstr "Bouw een steengroeve"
+msgstr "Bouw een veeboerderij"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:151
 msgid ""
@@ -317,7 +336,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:153
 msgid "Oxen are bred in cattle farms out of wheat and water."
-msgstr ""
+msgstr "Ossen worden gefokt in veeboerderijen uit tarwe en water."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:165
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:175
@@ -327,7 +346,7 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:219
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:229
 msgid "The Story Begins"
-msgstr ""
+msgstr "Het verhaal begint"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:166
 msgid "Thron sighs…"
@@ -337,23 +356,31 @@ msgstr ""
 msgid ""
 "It’s been months, and we are still hiding where the forests are old and dark."
 msgstr ""
+"We zitten hier al maanden en nog steeds schuilen we waar de bossen oud en "
+"donker zijn."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:169
 msgid ""
 "My warriors hunt at day and lie awake at night – listening to the sounds of "
 "the cruel slaughter echoing from afar amongst the ancient trees."
 msgstr ""
+"Mijn strijders jagen overdag en liggen 's nachts wakker - luisterend naar de "
+"geluiden van het wrede slachten dat van ver langs de oude bomen weergalmt."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:177
 msgid ""
 "We can see the raging flames that swallow Al’thunran from here, miles away."
 msgstr ""
+"We kunnen vanaf hier de vernietigende vlammen zien, die mijlenver Al'thunran "
+"verzwelgen."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:179
 msgid ""
 "The red lights flash in the darkness and dance to the rhythm of the war "
 "drums that haunt me even in my nightmares."
 msgstr ""
+"Het rode licht flitst in het donker en danst op het ritme van het "
+"strijdtrommels die zelfs in mijn nachtmerries op me jagen."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:190
 msgid ""
@@ -361,6 +388,9 @@ msgid ""
 "senseless spilling of blood that had arisen amongst us. It pains me that his "
 "peace only endured for one generation."
 msgstr ""
+"De botten van mijn vader rusten vredig in de grond waar hij ooit het zinloze "
+"bloedvergieten dat ons volk trof heeft beëindigd. Het doet me pijn dat zijn "
+"vrede slechts een generatie heeft geduurd."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:192
 msgid ""
@@ -369,6 +399,10 @@ msgid ""
 "awake, preventing greed or despair from destroying the bonds between us as "
 "well."
 msgstr ""
+"Boldreth, mijn trouwe metgezel en vriend is een bron van vrede en troost "
+"voor mij in deze donkere tijden. Hij houdt de moed hoog voor mij en voor "
+"mijn wakkere krijgers, en zorgt er voor dat onze band niet vernietigd wordt "
+"door wanhoop en hebzucht."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:202
 msgid ""
@@ -395,6 +429,12 @@ msgid ""
 "flames. The Throne Among the Trees, the symbol of unity and peace among our "
 "kin, became the wedge that drives us apart."
 msgstr ""
+"De verhalen die ze vertellen over de daden van onze volksstam zijn droevig "
+"om te horen. Ik heb nachten wakker gelegen, rusteloos, meer moe dan gedacht "
+"dat ik zou kunnen zijn. Nog als ik mijn ogen sluit, zie ik hoe de vesting "
+"die mijn vader heeft gebouwd verwoest wordt door de vlammen. De troon tussen "
+"de bomen, het symbool van eenheid van vrede tussen onze volksstam, werd de "
+"wig die ons uiteen dreef."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:221
 msgid ""
@@ -421,6 +461,11 @@ msgid ""
 "wilderness for so long – but I never thought my brothers would engage in "
 "this senseless battle for so long either."
 msgstr ""
+"Boldreth lijkt meer en meer verscheurd naarmate de dagen verstrijken. De "
+"moed zinkt mijn maten in de schoenen als het koude seizoen nadert en we nog "
+"steeds wonen in niets meer dan hutten en barakken. Het was nooit mijn "
+"bedoeling om zo lang in de wildernis te blijven - maar ik had nooit verwacht "
+"dat mijn broers deze zinloze strijd zo lang zouden volhouden."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:233
 msgid ""
@@ -432,7 +477,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:239
 msgid "Somebody Comes up to You"
-msgstr ""
+msgstr "Iemand komt naar je toe"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:240
 msgid "An old man says…"
@@ -443,6 +488,8 @@ msgid ""
 "Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my counsel through these darkened days."
 msgstr ""
+"Gegroet, leider. Ik ben Khantrukh en heb veel winters gezien. Laat me je "
+"alstublieft door deze donkere dagen leiden met mijn advies."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:243
 msgid ""
@@ -462,7 +509,7 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:441
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:450
 msgid "The Advisor"
-msgstr ""
+msgstr "De adviseur"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:250
 msgid "Khantrukh notes…"
@@ -480,6 +527,9 @@ msgid ""
 "ancestors. We must always respect and care for them. What we take, we must "
 "give back again."
 msgstr ""
+"Maar vergeet nooit - deze bossen zijn ons erfgoed, welke aan ons zijn "
+"toevertrouwd door onze voorvaderen. Wij moeten ze altijd respecteren en "
+"verzorgen. Wat we nemen moeten we ook weer teruggeven."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:255
 msgid ""
@@ -489,7 +539,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:261
 msgid "In the Night"
-msgstr ""
+msgstr "In de nacht"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:262
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:274
@@ -502,6 +552,9 @@ msgid ""
 "north. The fires are still burning, satisfying their hunger upon my father’s "
 "legacy."
 msgstr ""
+"In een andere slapeloze nacht, ging ik de heuvel op en staarde naar het "
+"noorden. De vuren branden nog steeds, hun honger stillend met mijn vaders "
+"nalatenschap."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:265
 msgid ""
@@ -511,7 +564,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:273
 msgid "At the Tomb"
-msgstr ""
+msgstr "Bij de tombe"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:275
 msgid ""
@@ -528,7 +581,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:285
 msgid "The Other Day"
-msgstr ""
+msgstr "De volgende dag..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:286
 msgid "Thron says thoughtfully…"
@@ -539,6 +592,9 @@ msgid ""
 "Some time ago, Boldreth came to me. His advice was to move to a place closer "
 "to home – to strike at the first sign of my brothers’ forces wavering."
 msgstr ""
+"Een tijdje geleden, kwam Boldreth naar me toe. Zijn advies was om te "
+"verhuizen naar een plaats dichter bij huis - om toe te slaan bij het eerste "
+"teken van het wankelen van de troepen van mijn broers."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:289
 msgid ""
@@ -550,7 +606,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:295
 msgid "The Oath"
-msgstr ""
+msgstr "De eed"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:296
 msgid "Thron looks furious…"
@@ -562,10 +618,15 @@ msgid ""
 "the dark forest. We listened in horror as he told us of the atrocities "
 "taking place in Al’thunran."
 msgstr ""
+"Vandaag hebben mijn strijders een oude man opgepikt, die ziek en gewond door "
+"het bos zwierf. We luisterden vol afschuw toen hij ons vertelde over de "
+"gruwelijkheden die begaan worden in Al'thunran."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:299
 msgid "I hereby renew my oath – I will stop this madness at any cost!"
 msgstr ""
+"Hierbij hernieuw ik mijn gelofte - ik zal deze waanzin tegen elke prijs "
+"stoppen!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:305
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:320
@@ -577,7 +638,7 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:422
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:431
 msgid "Your Loyal Companion"
-msgstr ""
+msgstr "Je trouwe metgezel"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:306
 msgid "Brave Boldreth steps to your side…"
@@ -590,6 +651,11 @@ msgid ""
 "to Al’thunran. Too long have we waited while our brethren have fought on the "
 "battlefield, and our axes and swords have turned rusty over time."
 msgstr ""
+"Dus je wilt ons voorbereiden op een langer verblijf in deze bossen, Thron? "
+"Ik zie de wijsheid in deze actie, mijn hart verlangt echter naar een "
+"glorieuze terugkeer naar Al'Thunran. Te lang hebben we gewacht, terwijl onze "
+"broeders vochten op het slagveld, en onze bijlen en zwaarden zijn met de "
+"tijd roestig geworden."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:314
 msgid "Khantrukh joins in…"
@@ -601,6 +667,9 @@ msgid ""
 "with you. The rocks close to our camp are shrinking fast under our workers’ "
 "tools, and it is a matter of little time only before they are all gone."
 msgstr ""
+"Vergiffenis, hoofdman, maar ik heb een diepe zorg te bespreken. De rotsen "
+"bij ons kamp slinken rap onder het gereedschap van onze arbeiders en het is "
+"slechts een kwestie van weinig tijd voor ze volledig weg zijn."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:322
 msgid "Boldreth jumps up…"
@@ -620,7 +689,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:332
 msgid "Old man? Disrespectful youth!"
-msgstr ""
+msgstr "Oude man? Respectloze jeugd..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:337
 msgid "Khantrukh nods satisfied…"
@@ -628,7 +697,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:338
 msgid "At last! These rocks should last for a while."
-msgstr ""
+msgstr "Eindelijk! Deze rotsen moeten een tijd meegaan."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:343
 msgid "Boldreth exclaims…"
@@ -639,6 +708,9 @@ msgid ""
 "Just look at that! In the east is the great mountain of Kal’mavrath! I "
 "wonder what treasures nature might have hidden beneath its majestic flanks!"
 msgstr ""
+"Zie dat eens! In het oosten is de grote berg Kal'mavrath! Ik vraag me af wat "
+"voor schatten de natuur misschien onder zijn majesteuse flanken heeft "
+"verscholen!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:346
 msgid ""
@@ -646,6 +718,9 @@ msgid ""
 "once in a while! Let us send out some of those who understand the stone’s "
 "tongue to unravel the mountain’s secrets!"
 msgstr ""
+"Laten we uitbreiden naar het oosten. Er is een kans voor de ouderen om zo nu "
+"en dan nuttig te zijn! Laten we er een paar op uit sturen die  de taal van "
+"de stenen begrijpen om de geheimen van de berg te ontrafelen!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:352
 msgid "Boldreth laughs…"
@@ -656,6 +731,8 @@ msgid ""
 "By Chat’Karuth’s beard, this is amazing! Just imagine what we can use this "
 "coal and iron ore for!"
 msgstr ""
+"Bij de baard van Chat'Karuth, dit is geweldig! Probeer je eens voor te "
+"stellen wat we allemaal kunnen doen met deze steenkool en ijzererts!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:355
 msgid "It might even be enough to…"
@@ -672,6 +749,10 @@ msgid ""
 "up on the mountain in this bitter cold, and providing these supplies may not "
 "be easy."
 msgstr ""
+"Hoewel dit waar is, moeten we er later over nadenken, want nu zijn er andere "
+"obstakels. De mijnwerkers zullen zeker grotere porties voor het werk hoog in "
+"de bergen in deze bittere kou gaan vragen, en het beschikbaar stellen van "
+"deze voorraden is misschien niet eenvoudig."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:367
 msgid "Boldreth nods…"
@@ -679,7 +760,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:368
 msgid "I have to hand it to you: you are right here, old man."
-msgstr ""
+msgstr "Ik moet het toegeven: je hebt hier gelijk, oude man."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:370
 msgid ""
@@ -687,6 +768,10 @@ msgid ""
 "hunt down more of them. And, of course, the people would cheer a new tavern "
 "– hey, we might call it ‘Thron’s Pride’ or so if you want!"
 msgstr ""
+"Het lijkt erop dat er vrij veel dieren in het bos hier zijn - we zouden er "
+"op meer kunnen jagen. En, natuurlijk, de mensen zouden een nieuwe taverne "
+"toejuichen - hé, we zouden hem 'Thron's Trots' of zoiets kunnen noemen als "
+"je dat zou willen!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:376
 msgid "The elder jumps into the air…"
@@ -694,7 +779,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:377
 msgid "Wisdom commands to seek variety."
-msgstr ""
+msgstr "Wijsheid gebied ons te diversificeren."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:379
 msgid ""
@@ -709,13 +794,15 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:386
 msgid "Our hunters are out in the forests, Thron."
-msgstr ""
+msgstr "Onze jagers zijn buiten i de bossen, Thron."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:388
 msgid ""
 "I promise you, before the sun sets today you will have a magnificent meal "
 "fit for the chieftain of all clans!"
 msgstr ""
+"Ik beloof je, voor de zon vandaag ondergaat heb je een heerlijk maal, "
+"geschikt voor het hoofd van alle stammen!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:393
 msgid "Khantrukh gazes over the plains…"
@@ -727,10 +814,13 @@ msgid ""
 "the wind? And I believe the baker is just on his way here, with his most "
 "delicious bread reserved for our chieftain alone!"
 msgstr ""
+"Is het niet schitterend, het uitzicht over de gouden velden, kalm groeiend, "
+"dansend op de wind? En ik geloof dat de bakker net onderweg is, met zijn "
+"heerlijkste brood, alleen voor onze leider!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:398
 msgid "A Beautiful Morning"
-msgstr ""
+msgstr "Een prachtige ochtend"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:399
 msgid "Thron recognizes…"
@@ -743,6 +833,10 @@ msgid ""
 "Their songs filled the air until deep in the night, and they were in higher "
 "spirits still the day after."
 msgstr ""
+"Gisteren is een kroeg voor onze mensen geopend. Hoewel ik nauwelijks zin in "
+"feest heb, merkte ik hoeveel dit kleine beetje thuis voor mijn volk "
+"betekende. Hun gezang klonk tot diep in de nacht en ze waren de volgende dag "
+"in hoger sferen."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:402
 msgid ""
@@ -760,6 +854,11 @@ msgid ""
 "ore has to be melted into iron so that it is ready to be forged into "
 "whatever we want. And we need the coal to keep the smelter’s ovens burning."
 msgstr ""
+"Zo, nu we beide mijnen hebben en het voedsel om ze te voorzien, moeten we "
+"dat wat onze moedige mijnwerkers voor ons ontginnen in een nuttigere staat "
+"brengen. Het ijzererts moet tot ijzer omgesmolten worden zodat het klaar is "
+"om omgesmeed te worden in wat we maar willen. En we hebben de kolen nodig om "
+"de hoogovens brandend te houden."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:414
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:458
@@ -771,6 +870,8 @@ msgid ""
 "Our miners are digging up less and less by the day! We have to go deeper, "
 "closer to the mountain’s core, if we want more of its treasures!"
 msgstr ""
+"Onze mijnwerkers graven elke dag minder op! We moeten dieper graven, dichter "
+"bij de kern van de berg, als we meer van z'n schatten willen!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:417
 msgid ""
@@ -778,6 +879,9 @@ msgid ""
 "voluntarily into these places. We should reward this bravery with greater "
 "rations for them. And a pint of beer or two will keep their spirits high."
 msgstr ""
+"Natuurlijk, het is donker en duister op zulke diepten en maar een paar "
+"zullen vrijwillig naar deze plaatsen gaan. We moeten deze moed belonen met "
+"grotere porties. En een pint bier of twee zal hun werklust goed houden."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:423
 msgid "Boldreth seems concerned…"
@@ -789,10 +893,13 @@ msgid ""
 "warriors into some crumbling huts, and even less so in times as dangerous as "
 "ours!"
 msgstr ""
+"Zoals ik zojuist heb ontdekt, het rozenhout raakt op! We kunnen onze "
+"strijders niet in afbrokkelende hutten stoppen, en zeker niet in tijden zo "
+"gevaarlijk als de onze!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:426
 msgid "We need a wood hardener, and we need one now!"
-msgstr ""
+msgstr "We hebben een houtverharder nodig, en we hebben hem nu nodig!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:432
 msgid "Boldreth smiles…"
@@ -803,6 +910,8 @@ msgid ""
 "Well, old friend, this should ensure that our fortifications do not break "
 "down with our foes’ first battle cry! Now we can expand safely!"
 msgstr ""
+"Nou, oude vriend, dit moet ervoor zorgen dat onze verdedigingen niet zullen "
+"vallen bij de oorlogskreet van onze vijand! Nu kunnen we veilig uitbreiden!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:435
 msgid ""
@@ -810,6 +919,9 @@ msgid ""
 "thus we could, in times of need, build a fortress such as the world has "
 "never seen before!"
 msgstr ""
+"Toch zou het niet schaden om wat specie te produceren voor onze verdere "
+"veldtocht; Dan zouden we, als we het nodig hebben, een fort kunnen bouwen "
+"zoals de wereld nog nooit gezien heeft!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:442
 msgid "Khantrukh steps in…"
@@ -823,10 +935,15 @@ msgid ""
 "nights in the rain, but I just can’t find any sleep with these raindrops "
 "dripping on my face!"
 msgstr ""
+"Opperhoofd, dit is een schande! Het is goed dat we specie kunnen maken voor "
+"machtige verdedigingen en grote gebouwen - alleen behoudt dit onze daken er "
+"niet van om te lekken! Misschien houden de jongeren er van hun nachten in de "
+"regen door te brengen, maar ik kan de slaap niet vatten met regendruppels "
+"die op mijn gezicht druppelen!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:445
 msgid "Now this is a problem we should do something about!"
-msgstr ""
+msgstr "Dit is nou een probleem waar we wat aan zouden moeten doen!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:451
 msgid "Khantrukh seems relieved…"
@@ -837,10 +954,12 @@ msgid ""
 "Wonderful! Our roofs are not dripping anymore, and we have all the material "
 "we need for, well, whichever monumental building we see fit!"
 msgstr ""
+"Fantastisch! Onze daken lekken niet meer en we hebben alles wat we nodig "
+"hebben voor, wel, eigenlijk elk monumentaal gebouw dat we willen!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:457
 msgid "We Need Oxen!"
-msgstr ""
+msgstr "We hebben ossen nodig!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:459
 msgid ""
@@ -849,6 +968,10 @@ msgid ""
 "fast as we need them to. I suggest we give them some support by breeding "
 "oxen."
 msgstr ""
+"Nu ons rijk groter en groter wordt, wordt het verkeer op de weg "
+"overdonderend. Onze arme dragers kunnen de goederen niet meer zo snel "
+"vervoeren als we zouden willen. Ik stel voor dat we ze wat steun geven door "
+"ossen te fokken."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:461
 msgid ""
@@ -856,10 +979,13 @@ msgid ""
 "much stronger and very frugal: all we need is wheat and water to breed them "
 "and they will do their work on the roads loyally and reliably."
 msgstr ""
+"Het zijn verbazingwekkende dieren: De os is net zo snel als een mens maar "
+"veel sterker en erg zuinig: we hebben slechts tarwe en water nodig om ze te "
+"fokken en ze zullen hun werk op de wegen loyaal en betrouwbaar uitvoeren."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:466
 msgid "Mission Complete"
-msgstr ""
+msgstr "Missie voltooid"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:467
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:479
@@ -872,6 +998,8 @@ msgid ""
 "The other day Boldreth asked me to accompany him to the new inn. It would "
 "cheer me up, he said."
 msgstr ""
+"Gisteren vroeg Boldreth me om met hem mee te gaan naar de nieuwe herberg. "
+"Het zou me opvrolijken, zei hij."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:470
 msgid ""
@@ -880,6 +1008,11 @@ msgid ""
 "encouragement, one of my warriors ran into the inn. He had been far out in "
 "the forest for the past days and I could see how weary he was."
 msgstr ""
+"Toen ik rondkeek, zag ik hoopvolle gezichten, erop vertrouwend dat ik ze "
+"door deze donkere dagen kon leiden. Maar voordat ik enige woorden van dank "
+"of aanmoediging kon spreken, rende een van mijn krijgers de herberg in. Hij "
+"was de afgelopen dagen diep in het woud geweest en ik kon zien hoe vermoeid "
+"hij was."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:472
 msgid "The news he brought changed everything…"
@@ -887,23 +1020,27 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:473
 msgid "Victory"
-msgstr ""
+msgstr "Overwinning"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:474
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Je hebt de missie voltooid. Je kunt nu verder spelen als je wilt of anders "
+"verdergaan met de volgende missie."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:478
 msgid "One Full Moon Night"
-msgstr ""
+msgstr "Een nacht met volle maan"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:480
 msgid ""
 "One night, when the moon shone brightly, I climbed to the peak of "
 "Kal’mavrath."
 msgstr ""
+"Op een nacht, toen de maan helder scheen, klom ik naar de top van "
+"Kal'mavrath."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:482
 msgid ""
@@ -912,10 +1049,15 @@ msgid ""
 "I fear the moment I will see Al’thunran again – will there be anything but "
 "ashes and wasted ruins left of our once beautiful capital when we get there?"
 msgstr ""
+"Toen ik naar de horizon staarde, zag ik nog steeds grimmige lichtjes "
+"flakkeren in de verte. Het is ongelooflijk om te zien met welke passie mijn "
+"broeders de oorlog vechten. Ik vrees het moment dat we Al'thunran weer "
+"zullen zien - zal er iets anders over zijn dan as en vervallen ruïnes van "
+"onze ooit zo schitterende hoofdstad, als we daar aankomen?"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:486
 msgid "Another Cold Day"
-msgstr ""
+msgstr "Alweer koude dag"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:487
 msgid "Thron looks worried…"
@@ -927,26 +1069,33 @@ msgid ""
 "endure. The day we may return cannot be far anymore – it must not be far "
 "anymore."
 msgstr ""
+"De winter staat voor de deur. Velen van ons lijden onder de kou, maar we "
+"moeten volhouden. De dag dat we terugkeren kan niet ver meer zijn - mag niet "
+"ver meer zijn."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:490
 msgid ""
 "I prayed that it might get warmer again, as I prayed that the war would "
 "finally come to an end."
 msgstr ""
+"Ik heb gebeden dat het weer warmer wordt, net zoals ik gebeden heb dat deze "
+"oorlog eindelijk tot een einde kwam."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:492
 msgid "So far, it seems that neither prayer was fulfilled."
-msgstr ""
+msgstr "Tot op heden, lijkt geen van mijn gebeden verhoord."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:496
 msgid "A friendly village has joined us!"
-msgstr ""
+msgstr "Een vriendelijk dorp sluit zich bij ons aan!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:498
 msgid ""
 "We have found a village with friendly and productive people, impressed by "
 "our wealth, technology and strength."
 msgstr ""
+"We vonden een dorp met vriendelijke en productieve mensen, onder de indruk "
+"van onze weelde, technologie en kracht."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:500
 msgid ""
@@ -969,1174 +1118,3 @@ msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nieuwe opdracht"
 msgstr[1] "Nieuwe opdrachten"
-
-#~ msgid "Nice And Easy Does It All the Time"
-#~ msgstr "Goed en langzaam werkt altijd"
-
-#~ msgid ""
-#~ "I am sorry, but will I have to tear this down again. We might need the "
-#~ "space here later on. If I am too slow for you, you might want to play a "
-#~ "real game and just find everything out for yourself. Otherwise, please "
-#~ "bear with me, I am not the youngest and quickest anymore."
-#~ msgstr ""
-#~ "Het spijt me, maar ik maak dit weer ongedaan. We hebben de ruimte "
-#~ "wellicht later weer nodig. Als ik te langzaam ga, probeer dan een echt "
-#~ "spel te spelen en leer alles zelf. Anders volg mijn opdrachten, maar ik "
-#~ "ben niet meer de jongste en snelste."
-
-#~ msgid "Welcome to the Widelands Tutorial!"
-#~ msgstr "Welkom bij de Widelands oefencampagne!"
-
-#~ msgid "Welcome to Widelands!"
-#~ msgstr "Welkom bij Widelands!"
-
-#~ msgid ""
-#~ "Widelands is a slow-paced build-up strategy game with an emphasis on "
-#~ "construction, not destruction. This tutorial will guide you through the "
-#~ "basics of the game."
-#~ msgstr ""
-#~ "Widelands is een rustig opbouwend strategisch spel met de nadruk op "
-#~ "constructie, niet op destructie. Deze oefencampagne zal de basis van dit "
-#~ "spel uitleggen."
-
-#~ msgid "Dismiss this box by left-clicking on the button below."
-#~ msgstr ""
-#~ "Verwijder dit bericht door met de linkermuisknop op de onderstaande knop "
-#~ "te drukken."
-
-#~ msgid "Diving In"
-#~ msgstr "Er in duiken"
-
-#~ msgid "Let’s dive right in!"
-#~ msgstr "Laten we er meteen in duiken!"
-
-#~ msgid ""
-#~ "There are three different tribes in Widelands: the Barbarians, the Empire "
-#~ "and the Atlanteans. All tribes have a different economy, strength and "
-#~ "weaknesses, but the general gameplay is the same for all. We will play "
-#~ "the barbarians for now."
-#~ msgstr ""
-#~ "Er zijn drie verschillende stammen in Widelands: de Barbaren, het "
-#~ "Keizerrijk en de Atlantiërs. Iedere stam heeft een andere economie, "
-#~ "kracht en zwakte, maar de algemene speelwijze is het zelfde voor "
-#~ "allemaal. We spelen voorlopig met de Barbaren."
-
-#~ msgid ""
-#~ "You will usually start the game with one headquarters. This is the big "
-#~ "building with the blue flag in front of it. The headquarters is a "
-#~ "warehouse that stores wares, workers and soldiers. Some wares are needed "
-#~ "for building houses, others for making other wares. Obviously, the wares "
-#~ "in the headquarters will not last forever, so you must make sure to "
-#~ "replace them. The most important wares in the early game are the basic "
-#~ "construction wares: logs and raw stone. Let’s make sure that we do not "
-#~ "run out of logs. For this, we need a lumberjack and a hut for him to stay "
-#~ "in."
-#~ msgstr ""
-#~ "Meestal begint het spel met een hoofdkwartier. Dit is het grote gebouw "
-#~ "met de blauwe vlag ervoor. Het hoofkwartier is een magazijn dat goederen, "
-#~ "werkers en soldaten herbergt. Natuurlijk is dit niet onuitputtelijk, dus "
-#~ "is het nodig om dit aan te vullen. De meest belangrijke goederen in het "
-#~ "begin zijn de basis bouwstoffen: boomstammen en ruwe steen. Laten we er "
-#~ "zeker van zijn dat we niet zonder boomstammen komen te zitten. Hiervoor "
-#~ "hebben we een houthakker en een hut voor nodig."
-
-#~ msgid ""
-#~ "We need to find a nice place for the lumberjack’s hut. To make this "
-#~ "easier, we can activate ‘Show Building Spaces’. There are two ways you "
-#~ "can do this, either by clicking on the ‘Show Building Spaces’ button at "
-#~ "the bottom of the screen, which is the fourth one from the left. Or you "
-#~ "can use the SPACE key to toggle it."
-#~ msgstr ""
-#~ "We moeten een geschikte plek vinden voor de houthakkershut. Om dit "
-#~ "makkelijker te maken zetten we de bouwhulp aan. Er zijn twee manieren om "
-#~ "dit te doen, klik de bouwhulpknop aan de onderkant van het scherm, het is "
-#~ "de vierde van links, of gebruik de spatiebalk om de hulp aan of uit te "
-#~ "zetten."
-
-#~ msgid "Left-click the ‘OK’ button to close this box and then try it."
-#~ msgstr "Klik op de OK-knop om dit venster te sluiten en probeer het."
-
-#~ msgid "Enable the showing of building spaces"
-#~ msgstr "Zet de bouwhulp aan"
-
-#~ msgid "Show Building Spaces"
-#~ msgstr "Zet de bouwhulp aan"
-
-#~ msgid ""
-#~ "It is easier to understand what type of buildings can be built on which "
-#~ "field when the symbols for the building spaces are enabled."
-#~ msgstr ""
-#~ "Het is gemakkelijker om te begrijpen wat er mag worden gebouwd op welk "
-#~ "veld wanneer de bouwhulpsymbolen zijn ingeschakeld."
-
-#~ msgid ""
-#~ "Do so now either by pressing SPACE or by clicking the fourth button from "
-#~ "the left at the very bottom of the screen. Right-click on this window and "
-#~ "then give it a try."
-#~ msgstr ""
-#~ "Doe dit nu door hetzij op SPATIE te drukken of door op de vierde knop van "
-#~ "links op de onderkant van het scherm te klikken. Klik met de "
-#~ "rechtermuisknop op dit venster en waag dan een poging."
-
-#~ msgid "Lumberjack’s Spot"
-#~ msgstr "De houthakkers plaats"
-
-#~ msgid ""
-#~ "There you go. I will explain about all those symbols in a minute. First, "
-#~ "let me show you how to make a lumberjack’s hut and how to connect it with "
-#~ "a road. There is a sweet spot for a lumberjack right next to those trees. "
-#~ "I’ll describe the steps I will take and then ask you to click on the ‘OK’ "
-#~ "button for me to demonstrate."
-#~ msgstr ""
-#~ "Goed. Ik zal zo alles over die symbolen uitleggen. Eerst zal ik laten "
-#~ "zien hoe een houthakkershut te bouwen en deze te verbinden met een weg. "
-#~ "Er is een mooie plek voor een houthakkershut direct naast de bomen. Ik "
-#~ "zal laten zien welke stappen te nemen en vraag dan om op de OK-knop te "
-#~ "drukken om het te demonstreren."
-
-#~ msgid "Building the Lumberjack"
-#~ msgstr "De Houthakker bouwen"
-
-#~ msgid ""
-#~ "First, I’ll left-click on the symbol where I want the lumberjack’s hut to "
-#~ "be built. A window will appear where I can choose between buildings. "
-#~ "Because I’ll click a yellow house symbol – which means that its field can "
-#~ "house medium and small buildings – I am presented with all the medium "
-#~ "buildings that I can build. The lumberjack’s hut is a small building, so "
-#~ "I will go on to select the small buildings tab. Then I’ll choose the "
-#~ "lumberjack’s hut."
-#~ msgstr ""
-#~ "Eerst klik ik op het symbool waar ik een houthakkershut wil bouwen. Een "
-#~ "venster verschijnt waar ik tussen gebouwen kan kiezen. Omdat ik een geel "
-#~ "huissymbool koos, wat staat voor een plek voor gemiddelde en kleine "
-#~ "gebouwen, worden alle gemiddelde gebouwen die ik kan bouwen getoond. De "
-#~ "houthakkershut is een klein gebouw, dus zal ik het tabblad van de kleine "
-#~ "gebouwen moeten selecteren. Daar kies ik de houthakkershut."
-
-#~ msgid ""
-#~ "Click the ‘OK’ button to watch me. I’ll go really slowly: I will click – "
-#~ "then select the tab – and finally I’ll choose the building."
-#~ msgstr ""
-#~ "Klik op de OK-knop om om het te zien, ik zal klikken, langzaam eerst het "
-#~ "tabblad selecteren en uiteindelijk het gebouw kiezen."
-
-#~ msgid ""
-#~ "That won’t do yet. I still need to connect the lumberjack’s hut to the "
-#~ "rest of my road network. After ordering the construction site, I was "
-#~ "automatically put into road building mode, so all I have to do is click "
-#~ "on the blue flag in front of my headquarters."
-#~ msgstr ""
-#~ "Daarmee zijn we nog niet klaar. Ik zal de houthakkershut moeten verbinden "
-#~ "met de rest van mijn wegennetwerk. Nadat ik de bouwplaats aangemaakt heb "
-#~ "werd ik automatisch in de wegenbouwmodus gezet, dus ik hoef alleen maar "
-#~ "op de blauwe vlag voor het hoofdkwartier te klikken."
-
-#~ msgid "Waiting for the Lumberjack to Go Up"
-#~ msgstr "Wacht tot de houthakkershut staat"
-
-#~ msgid ""
-#~ "Now watch closely while a builder leaves the headquarters and goes to the "
-#~ "construction site. Also, a carrier will take position in between the two "
-#~ "blue flags and carry wares from one blue flag to the other."
-#~ msgstr ""
-#~ "Zie nu dat de bouwvakker het hoofdkwartier verlaat en naar de bouwplaats "
-#~ "gaat. Ook zal een drager zijn positie innemen tussen de twee blauwe "
-#~ "vlaggen en waren dragen van de ene naar de andere blauwe vlag."
-
-#~ msgid "Placing Another Flag"
-#~ msgstr "Nog een vlag plaatsen"
-
-#~ msgid ""
-#~ "Nice how they are working, isn’t it? But the poor carrier has a very long "
-#~ "way to go. We can make it easier for him (and more efficient for us) when "
-#~ "we place another blue flag on the road."
-#~ msgstr ""
-#~ "Mooi om te zien hoe ze werken. Maar de arme drager moet een lange weg "
-#~ "afleggen. We kunnen het makkelijker voor hem (en efficiënter voor ons) "
-#~ "maken als we nog een blauwe vlag op de weg plaatsen."
-
-#~ msgid ""
-#~ "You try it this time: click on the yellow flag symbol in between the two "
-#~ "blue flags we just placed and then click on the"
-#~ msgstr ""
-#~ "Probeer het nu zelf: klik op het gele vlagsymbool tussen de twee blauwe "
-#~ "vlaggen die we zojuist geplaatst hebben en klik dan op het"
-
-#~ msgid "build flag symbol."
-#~ msgstr "plaats vlagsymbool."
-
-#~ msgid "Build a flag to divide the road to the lumberjack"
-#~ msgstr "Plaats een vlag om de weg naar de houthakker te verdelen"
-
-#~ msgid "Build a Flag on the Road"
-#~ msgstr "Plaats een vlag op de weg"
-
-#~ msgid ""
-#~ "The shorter your road segments are, the faster your wares will be "
-#~ "transported. You should therefore make sure that your roads have as many "
-#~ "flags as possible."
-#~ msgstr ""
-#~ "Hoe korter de wegsegmenten zijn des te sneller goederen zullen worden "
-#~ "vervoerd. Plaats daarom zo veel mogelijk vlaggen op de wegen als mogelijk."
-
-#~ msgid ""
-#~ "Build a blue flag now in the middle of the road that connects your "
-#~ "headquarters to your lumberjack’s hut."
-#~ msgstr ""
-#~ "Plaats nu een blauwe vlag in het midden van de weg die het hoofdkwartier "
-#~ "met de houthakkershut verbindt."
-
-#~ msgid "Waiting For the Hut to be Finished"
-#~ msgstr "Wacht totdat de hut gebouwd is"
-
-#~ msgid "Well done! Let’s wait till the hut is finished."
-#~ msgstr "Goed gedaan! Laten we wachten tot de hut klaar is."
-
-#~ msgid ""
-#~ "If you want things to go faster, simply use the PAGE UP key on your "
-#~ "keyboard to increase the game speed. You can use PAGE DOWN to make the "
-#~ "game slower again."
-#~ msgstr ""
-#~ "Als je wilt dat alles sneller gaat gebruik dan gewoon de PAGE UP-toets op "
-#~ "het toetsenbord om de spelsnelheid te verhogen. Met  de PAGE DOWN-toets "
-#~ "kan je het spel weer langzamer laten gaan."
-
-#~ msgid "Lumberjack is Done"
-#~ msgstr "De houthakker is klaar"
-
-#~ msgid ""
-#~ "Excellent. The lumberjack’s hut is done. A lumberjack will now move in "
-#~ "and start chopping down trees, so our logs income is secured for now. Now "
-#~ "on to the raw stone."
-#~ msgstr ""
-#~ "Perfect. De houthakkershut is gebouwd. Een houthakker zal er nu intrekken "
-#~ "en beginnen met bomen omhakken, dus onze aanvoer van boomstammen is "
-#~ "voorlopig veilig. Nu naar de ruwe stenen."
-
-#~ msgid "Some Stones Were Found"
-#~ msgstr "Er zijn wat stenen gevonden"
-
-#~ msgid "Getting a Quarry Up."
-#~ msgstr "Een steengroeve opzetten."
-
-#~ msgid ""
-#~ "Stones can be mined in granite mines, but the easier way is to build a "
-#~ "quarry next to some stones lying around. As it happens, there is a pile "
-#~ "of them just to the west (left) of your headquarters. I will teach you "
-#~ "now how to move your view over there."
-#~ msgstr ""
-#~ "Stenen kunnen gedolven worden in granietmijnen, maar de gemakkelijkere "
-#~ "manier is om een steengroeve naast wat stenen te bouwen. Toevallig ligt "
-#~ "er een stapel ten westen (links) van het hoofdkwartier. Ik zal je leren "
-#~ "om het zicht hierheen te verplaatsen."
-
-#~ msgid ""
-#~ "There are two ways to move your view. The first one is using the cursor "
-#~ "keys on your keyboard. Go ahead and try this out."
-#~ msgstr ""
-#~ "Er zijn twee manier om het zicht te verplaatsen. De eerste is om de "
-#~ "pijltjestoetsen te gebruiken op het toetsenbord. Probeer dit eerst uit."
-
-#~ msgid "Click the ‘OK’ button and then move the view using the cursor keys"
-#~ msgstr ""
-#~ "Klik op de OK-knop en verplaats het zicht door middel van de "
-#~ "pijltjestoetsen"
-
-#~ msgid "Move your view with the cursor keys"
-#~ msgstr "Verplaats het zicht met de pijltjestoetsen"
-
-#~ msgid "Moving Your View"
-#~ msgstr "Verplaats het zicht"
-
-#~ msgid ""
-#~ "Moving your view is essential to get a complete overview of your whole "
-#~ "economy. There are two ways to move your view in Widelands."
-#~ msgstr ""
-#~ "Je zicht verplaatsen is essentieel om een volledig overzicht te krijgen "
-#~ "van je hele economie. Er zijn twee manieren om je zicht te verplaatsen in "
-#~ "Widelands."
-
-#~ msgid "The first one is to use the cursor keys on your keyboard."
-#~ msgstr "De eerste is door de pijltoetsen op je toetsenbord te gebruiken."
-
-#~ msgid ""
-#~ "The second one is the more common and faster one: press-and-hold the "
-#~ "right mouse button anywhere on the map, then move your mouse around and "
-#~ "you’ll see the view scroll."
-#~ msgstr ""
-#~ "De tweede wordt meer gebruikt en is sneller: druk de rechtermuisknop in "
-#~ "ergens op de kaart, en beweeg dan je muis en je ziet het scherm "
-#~ "verschuiven."
-
-#~ msgid "Other Ways to Move the View"
-#~ msgstr "Andere manieren om het scherm te verplaatsen"
-
-#~ msgid ""
-#~ "Excellent. Now there is a faster way to move, using the mouse instead:"
-#~ msgstr ""
-#~ "Perfect. Er is echter een snellere manier om te bewegen, namelijk met de "
-#~ "muis:"
-
-#~ msgid ""
-#~ "Simply right-click-and-hold anywhere on the map, then drag the mouse and "
-#~ "instead of the cursor, the view will be moved. Try it."
-#~ msgstr ""
-#~ "Houd simpelweg de rechtermuisknop ingedrukt ergens op de kaart, beweeg de "
-#~ "muis en in plaats van de cursor zal het zicht verschuiven. Probeer het."
-
-#~ msgid "Onward to the Quarry"
-#~ msgstr "Op naar de steengroeve"
-
-#~ msgid "Great. Now about that quarry..."
-#~ msgstr "Goed. Nu, over die steengroeve..."
-
-#~ msgid "How to Build a Quarry"
-#~ msgstr "Hoe bouw je een steengroeve"
-
-#~ msgid ""
-#~ "Build a quarry next to those stones here. Remember how I did it earlier?"
-#~ msgstr ""
-#~ "Bouw een steengroeve naast die stenen. Herinner je je hoe ik het eerder "
-#~ "deed?"
-
-#~ msgid ""
-#~ "Make sure that you are showing the building spaces, then just click on "
-#~ "the space were you want the building to be, choose it from the window "
-#~ "that appears and it is placed. Maybe this is a good time to explain about "
-#~ "all those building space symbols we activated earlier."
-#~ msgstr ""
-#~ "Zorg ervoor dat de bouwhulp ingeschakeld is, klik dan eenvoudigweg op de "
-#~ "plaats waar je het gebouw wilt hebben, kies het gebouw uit het venster "
-#~ "dat verschijnt en het wordt geplaatst. Misschien is het een goede tijd om "
-#~ "al die symbolen van de bouwhulp te verklaren die wij eerder hebben "
-#~ "geactiveerd."
-
-#~ msgid ""
-#~ "You can build four things on fields in Widelands: Flags, small houses, "
-#~ "medium houses and big houses. But not every field can hold everything. "
-#~ "The build space symbols ease recognition:"
-#~ msgstr ""
-#~ "Er zijn vier dingen te bouwen in Widelands: vlaggen, kleine -, gemiddelde "
-#~ "- en grote huizen. Maar niet iedere plek is is geschikt voor alles. De "
-#~ "bouwhulp helpt het herkennen:"
-
-#~ msgid "Everything can be built on the green house symbol."
-#~ msgstr "Alles kan gebouwd worden op het groene huissymbool."
-
-#~ msgid ""
-#~ "Everything except for big buildings can be built on a yellow house symbol."
-#~ msgstr ""
-#~ "Alles behalve grote gebouwen kan gebouwd worden op een geel huissymbool."
-
-#~ msgid "Red building symbols can only hold small buildings and flags."
-#~ msgstr ""
-#~ "Rode gebouwsymbolen kunnen alleen kleine gebouwen en vlaggen bevatten."
-
-#~ msgid "And finally the yellow flag symbol only allows for flags."
-#~ msgstr "En tenslotte laat het gele vlag symbool alleen vlaggen toe."
-
-#~ msgid ""
-#~ "If you place something on a field, the surrounding fields might have less "
-#~ "space for holding buildings, so choose your fields wisely."
-#~ msgstr ""
-#~ "Als je op een veld iets plaatst dan houdt de omgeving mogelijk minder "
-#~ "ruimte over voor bebouwing, dus kies verstandig."
-
-#~ msgid ""
-#~ "Now go ahead, try it. The quarry is a small building, so if you click on "
-#~ "a medium or big building symbol, you will have to select the small "
-#~ "buildings tab first to find it. Go on, check it out!"
-#~ msgstr ""
-#~ "Tijd voor actie. De steengroeve is een klein gebouw, dus wanneer je op "
-#~ "een gemiddeld of groot gebouwsymbool klikt zul je eerst het kleine "
-#~ "gebouwentabblad moeten selecteren om het te vinden. Toe, probeer het maar!"
-
-#~ msgid "Build a quarry next to the stones"
-#~ msgstr "Bouw een steengroeve naast de stenen"
-
-#~ msgid ""
-#~ "There are some stones to the west of your headquarters. Build a quarry "
-#~ "right next to them."
-#~ msgstr ""
-#~ "Er zijn enkele stenen ten westen van je hoofdkwartier. Bouw er een "
-#~ "steengroeve direct naast."
-
-#~ msgid ""
-#~ "The quarry is a small building like the lumberjack’s hut. You can "
-#~ "therefore build it on any field that shows a red, yellow or green house "
-#~ "when the building spaces symbols are enabled (Press SPACE for that)."
-#~ msgstr ""
-#~ "De steengroeve is net als de houthakkershut een klein gebouw. Je kan het "
-#~ "daarom op elk veld bouwen waar een rood, geel of groen huis te zien is "
-#~ "als de bouwhulp aanstaat (Druk daarvoor op SPATIE)."
-
-#~ msgid ""
-#~ "Just click on any house symbol next to the stones, select the small "
-#~ "buildings tab in the window that opens up, then click on the quarry "
-#~ "symbol."
-#~ msgstr ""
-#~ "Klik gewoon op een huissymbool naast de stenen, selecteer het kleine "
-#~ "gebouwentabblad in het venster dat opent, klik dan op het "
-#~ "steengroevesymbool."
-
-#~ msgid "Road Building"
-#~ msgstr "Het bouwen van wegen"
-
-#~ msgid ""
-#~ "Excellent! Directly after placing the building, you have been switched "
-#~ "into road building mode. The new road will start at the flag in front of "
-#~ "your newly placed construction site. You can enter road building mode for "
-#~ "any flag by left-clicking on a flag and selecting"
-#~ msgstr ""
-#~ "Prima! Direct na het plaatsen van een gebouw zit je in de wegenbouwmodus. "
-#~ "De nieuwe weg zal beginnen bij de vlag van de nieuw opgerichte "
-#~ "bouwplaats. Je kunt naar de wegenbouwmodus gaan door op iedere vlag te "
-#~ "klikken en selecteer dan"
-
-#~ msgid "the road building symbol."
-#~ msgstr "het wegenbouwsymbool."
-
-#~ msgid ""
-#~ "If you decide you do not want to build a road at this time, you can "
-#~ "cancel road building by clicking on the starting flag of the road and "
-#~ "selecting"
-#~ msgstr ""
-#~ "Als je besluit dat je nu geen weg wilt aanleggen, kun je dit annuleren "
-#~ "door op de beginvlag te klikken en selecteer dan"
-
-#~ msgid "the abort symbol."
-#~ msgstr "het afbreeksymbool."
-
-#~ msgid ""
-#~ "Now, about this road. Remember: we are already in road building mode "
-#~ "since you just ordered the quarry. You can either make it longer by one "
-#~ "field at a time by left-clicking multiple times on neighboring fields for "
-#~ "perfect control over the route the road takes like so:"
-#~ msgstr ""
-#~ "Nu over deze weg. We zijn al in de wegbouwmodus vanaf het moment dat je "
-#~ "de steengroeve selecteerde. Je kunt het stap voor stap langer maken door "
-#~ "meerdere keren te klikken op naburige velden voor perfecte controle over "
-#~ "de route van de weg, zo dus:"
-
-#~ msgid ""
-#~ "Or, you can directly click the flag where the road should end like so:"
-#~ msgstr ""
-#~ "Als alternatief, kun je direct op de vlag klikken waar de weg zou moeten "
-#~ "eindigen:"
-
-#~ msgid ""
-#~ "One more thing: around the field where your road would end, you can see "
-#~ "different markers. They have the following meaning:"
-#~ msgstr ""
-#~ "Nog één ding: rond het veld waar de weg zou eindigen zie je verschillende "
-#~ "markeringen. Deze hebben de volgende betekenis:"
-
-#~ msgid ""
-#~ "The terrain is flat here. Your carriers will be very swift on this "
-#~ "terrain."
-#~ msgstr ""
-#~ "Het terrein is vlak hier. Je dragers zullen erg vlug zijn op dit terrein."
-
-#~ msgid ""
-#~ "There is a small slope to climb to reach this field. This means that your "
-#~ "workers will be faster walking downhill than they will be walking uphill."
-#~ msgstr ""
-#~ "Er is een kleine helling te beklimmen om dit veld te bereiken. Dat "
-#~ "betekent dat de werkers sneller naar beneden zullen lopen dan omhoog."
-
-#~ msgid ""
-#~ "The connection between the fields is extremely steep. The speed increase "
-#~ "in one direction is huge while the slowdown in the other is also "
-#~ "substantial."
-#~ msgstr ""
-#~ "De verbinding tussen de velden is enorm stijl. De snelheidsverhoging in "
-#~ "de ene richting is enorm, terwijl de vertraging in de andere richting ook "
-#~ "substantieel is."
-
-#~ msgid ""
-#~ "Keep the slopes in mind while placing roads and use them to your "
-#~ "advantage. Also, try to keep roads as short as possible and always "
-#~ "remember to place as many flags as you can on road segments to share the "
-#~ "load better."
-#~ msgstr ""
-#~ "Houd de hellingen in gedachten bij het aanleggen van wegen en gebruik ze  "
-#~ "in je voordeel. Proberen ook om wegen zo kort mogelijk te houden en "
-#~ "altijd zo veel mogelijk vlaggen op de wegvakken te plaatsen om de "
-#~ "belasting beter te verdelen."
-
-#~ msgid ""
-#~ "Now please rebuild the road between your quarry and your headquarters. "
-#~ "We’ll wait until the quarry is completed."
-#~ msgstr ""
-#~ "Herbouw nu de weg tussen de steengroeve en het hoofdkwartier. We wachten "
-#~ "totdat de steengroeve is voltooid."
-
-#~ msgid "Connect the quarry to the headquarters"
-#~ msgstr "Verbind de steengroeve met het hoofdkwartier"
-
-#~ msgid "Connect Your Construction Site"
-#~ msgstr "Verbind je bouwplaats"
-
-#~ msgid ""
-#~ "Connect your quarry construction site to your headquarters with a road. "
-#~ "You would have been put directly into road building mode after ordering a "
-#~ "new site. But now, you aren’t."
-#~ msgstr ""
-#~ "Verbind je steengroevebouwplaats met het hoofdkwartier met behulp van een "
-#~ "weg. Bij het aanmaken van een bouwplaats ben je direct in de "
-#~ "wegenbouwmodus. Maar nu ben je dat niet."
-
-#~ msgid ""
-#~ "To build a completely new road, just click on the flag in front of your "
-#~ "construction site, click on the build road icon and then click on the "
-#~ "flag in front of your headquarters. Wait for the completion of the quarry."
-#~ msgstr ""
-#~ "Om een volledig nieuwe weg te bouwen klik op de vlag voor de bouwplaats "
-#~ "en klik om de weg te bouwen op de wegbouwknop en op de vlag voor het "
-#~ "hoofdkwartier. Wacht totdat de steengroeve af is."
-
-#~ msgid "Census and Statistics"
-#~ msgstr "Namen en statistieken"
-
-#~ msgid ""
-#~ "While we wait, I’ll quickly show you another useful feature. All "
-#~ "construction sites look the same, and some buildings look alike. It is "
-#~ "sometimes hard to tell them apart. Widelands offers a feature to show "
-#~ "label texts over the buildings. They are called the ‘census’ and you can "
-#~ "toggle them via the ‘c’ key or via the button on the ‘Watch’ tab of any "
-#~ "field."
-#~ msgstr ""
-#~ "Terwijl we wachten zal ik een andere nuttige functie tonen. Alle "
-#~ "bouwplaatsen zien er hetzelfde uit en sommige gebouwen lijken op elkaar. "
-#~ "Het is soms lastig onderscheid te maken. Widelands heeft een functie om "
-#~ "tekstlabels op de gebouwen te tonen. In het Engels noemen we dit \"census"
-#~ "\" en het kan aan/uit gezet worden met de c-toets of via de knop in het "
-#~ "bekijktabblad van ieder veld."
-
-#~ msgid ""
-#~ "Similar to this are the building statistics, which are also toggled via a "
-#~ "button on the ‘Watch’ tab of any field. The hotkey for it is ‘s’. This "
-#~ "will display information about the productivity of buildings or the "
-#~ "progress of construction sites."
-#~ msgstr ""
-#~ "Gelijk hieraan zijn er gebouwstatistieken die aan/uit worden gezet door "
-#~ "een knop op het bekijktabblad. De sneltoets hiervoor is 's'. Dit zal "
-#~ "informatie tonen over de productiviteit van gebouwen of de voortgang van "
-#~ "bouwplaatsen."
-
-#~ msgid ""
-#~ "Let me quickly enable these two for you. Remember: ‘c’ and ‘s’ are the "
-#~ "keys. Alternatively, you can click on any field without a building on it, "
-#~ "select the watch tab and then click on the corresponding buttons."
-#~ msgstr ""
-#~ "Laat me snel die twee voor je inschakelen. Vergeet niet: 'c' en 's' zijn "
-#~ "de toetsen. Als alternatief kun je klikken op ieder onbebouwd veld, "
-#~ "selecteer het bekijktabblad en klik vervolgens op de bijbehorende knoppen."
-
-#~ msgid "Now we know what’s going on. Let’s wait for this quarry to finish."
-#~ msgstr ""
-#~ "Nu weten we wat er gebeurt. Laten we wachten totdat de steengroeve af is."
-
-#~ msgid "Introducing Messages"
-#~ msgstr "Berichten introduceren"
-
-#~ msgid "Messages"
-#~ msgstr "Berichten"
-
-#~ msgid ""
-#~ "Hi, it’s me again! This time, I have sent you a message. Messages are "
-#~ "sent to you by Widelands to inform you about important events: empty "
-#~ "mines, attacks on your tribe, won or lost military buildings, resources "
-#~ "found..."
-#~ msgstr ""
-#~ "Hallo, ik ben het weer! Deze keer stuur ik een bericht. Berichten worden "
-#~ "door Widelands verstuurd om je te informeren over belangrijke "
-#~ "gebeurtenissen: lege mijnen, aanvallen op je stam, veroverde of verloren "
-#~ "militaire gebouwen, gevonden grondstoffen..."
-
-#~ msgid ""
-#~ "The message window can be toggled by the button on the very right at the "
-#~ "bottom of the screen. This button will also change appearance whenever "
-#~ "new messages are available, but there is also a bell sound played "
-#~ "whenever you receive a new message."
-#~ msgstr ""
-#~ "Het berichtenvenster kan aan- en uitgezet worden met de knop uiterst "
-#~ "rechts aan de onderkant van het scherm. Deze knop verandert van uiterlijk "
-#~ "als er een nieuw bericht binnenkomt, maar er wordt ook een belgeluid "
-#~ "weergegeven zodra er een nieuw bericht is."
-
-#~ msgid ""
-#~ "You have two messages at the moment. This one, which you are currently "
-#~ "reading, and the one that informed you that a new headquarters was added "
-#~ "to your economy. Let’s learn how to archive messages: You can check them "
-#~ "off in your inbox so that they get a tick-symbol in front of them. Then, "
-#~ "you can click the"
-#~ msgstr ""
-#~ "Er zijn momenteel twee berichten voor je. Degene die je nu leest en "
-#~ "degene die je meedeelt dat het nieuwe hoofdkwartier aan jouw economie "
-#~ "werd toegevoegd. Hier leer je hoe je berichten kunt archiveren: Je kunt "
-#~ "de berichten in jouw inbox aanvinken zodat er een V-symbool voor komt te "
-#~ "staan. Daarna kun je klikken op de"
-
-#~ msgid "archive message button to move them into your archive."
-#~ msgstr "archiefberichtknop om berichten in het archief te plaatsen."
-
-#~ msgid ""
-#~ "Archive all messages that you currently have in your inbox, including "
-#~ "this one."
-#~ msgstr ""
-#~ "Archiveer alle berichten, inclusief deze, die je op het moment in je "
-#~ "inbox hebt."
-
-#~ msgid "Archive all messages in your inbox"
-#~ msgstr "Archiveer alle berichten in je inbox"
-
-#~ msgid "Archive Your Inbox Messages"
-#~ msgstr "Archiveer berichten in je inbox"
-
-#~ msgid ""
-#~ "The message window is central to fully controlling your tribe’s fortune. "
-#~ "However, you will get a lot of messages in a real game. To keep your head "
-#~ "straight, you should try to keep the inbox empty. "
-#~ msgstr ""
-#~ "Het berichtenvenster staat centraal bij het volledig controleren van de "
-#~ "rijkdommen van je stam. In een echt spel krijg je echter veel berichten. "
-#~ "Om niet in de war te raken, moet je proberen om de inbox leeg te houden. "
-
-#~ msgid "Archive all your messages in your inbox now."
-#~ msgstr "Archiveer nu al je berichten in de inbox."
-
-#~ msgid ""
-#~ "To do so, open the message window by pressing ‘n’ or clicking the "
-#~ "rightmost button at the very bottom of the screen. Then mark all messages "
-#~ "by checking the check box in front of them. Then, click the ‘Archive All’ "
-#~ "button."
-#~ msgstr ""
-#~ "Om dit te doen, open je het berichtenvenster door op 'n' te drukken of op "
-#~ "de uiterst rechtse knop onderaan het scherm te klikken. Markeer dan alle "
-#~ "berichten door de  knop ervoor aan te vinken. Klik vervolgens op de "
-#~ "archiveer-alles-knop."
-
-#~ msgid "Closing Windows"
-#~ msgstr "Vensters sluiten"
-
-#~ msgid ""
-#~ "Excellent. By the way: closing windows in Widelands is as easy as right-"
-#~ "clicking on them. This will work with all windows except for story "
-#~ "message windows like this one. Go ahead and try it."
-#~ msgstr ""
-#~ "Prima. Overigens is het sluiten van vensters in Widelands erg makkelijk "
-#~ "door er met de rechtermuisknop op te klikken. Dit werkt voor alle "
-#~ "vensters behalve verhaallijnvensters zoals deze. Probeer maar."
-
-#~ msgid ""
-#~ "First, close this window by pressing the button below, then right-click "
-#~ "into the messages window to close it."
-#~ msgstr ""
-#~ "Sluit eerst dit venster met de knop hieronder en klik dan de vensters weg "
-#~ "met de rechter muisknop."
-
-#~ msgid "Close the messages window"
-#~ msgstr "Sluit het berichtenvenster"
-
-#~ msgid "Close the Messages Window"
-#~ msgstr "Sluit het berichtenvenster"
-
-#~ msgid ""
-#~ "All windows in Widelands can be closed by right-clicking into them. Some "
-#~ "windows can also be toggled with the buttons at the very bottom of the "
-#~ "screen."
-#~ msgstr ""
-#~ "Alle vensters in Widelands worden gesloten door ze met de rechtermuisknop "
-#~ "aan te klikken. Sommige vensters kunnen ook met de knoppen onderaan het "
-#~ "scherm worden gesloten."
-
-#~ msgid "Close the messages window now by right-clicking into it."
-#~ msgstr ""
-#~ "Sluit nu het berichtenvenster door het met de rechtermuisknop aan te "
-#~ "klikken."
-
-#~ msgid ""
-#~ "Well done! Let’s see how messages work in a real game, shall we? For "
-#~ "this, I’ll take all stones away from the poor stonemason in the quarry. "
-#~ "He will then send a message that he can’t find any in his working area "
-#~ "the next time he tries to do some work."
-#~ msgstr ""
-#~ "Goed gedaan! Laten we kijken hoe berichten werken in het echte spel. "
-#~ "Hiervoor zal ik alle stenen weghalen voor de arme steenhouwer in de "
-#~ "steengroeve. Hij zal een bericht sturen als hij niets meer kan vinden in "
-#~ "zijn werkgebied de volgende keer als hij probeert zijn werk uit te voeren."
-
-#~ msgid "Message Arrived!"
-#~ msgstr "Bericht aangekomen!"
-
-#~ msgid ""
-#~ "A message has been sent to you. See how the button at the bottom of the "
-#~ "screen has changed appearance? You can burn this quarry down now as it is "
-#~ "no longer of any use and just blocking space."
-#~ msgstr ""
-#~ "Er is een bericht naar je verstuurd. Zie je hoe de knop onderaan het "
-#~ "scherm is veranderd? De steengroeve kan nu verbrand worden omdat het niet "
-#~ "langer nodig is en slechts ruimte inneemt."
-
-#~ msgid "To do that, click on the quarry and select the destroy button."
-#~ msgstr ""
-#~ "Om dat te doen klik op de steengroeve en selecteer de vernietigingsknop."
-
-#~ msgid "Expanding Your Territory!"
-#~ msgstr "Je gebied uitbreiden!"
-
-#~ msgid ""
-#~ "There is one more thing I’d like to teach you now: Expanding your "
-#~ "territory. The place that we started with around our headquarters is "
-#~ "barely enough for a basic building infrastructure, and we do not have "
-#~ "access to mountains, which we need to mine minerals and coal. So, we have "
-#~ "to expand our territory."
-#~ msgstr ""
-#~ "Er is nog een ding dat ik nu wil onderwijzen: het uitbreiden van terrein. "
-#~ "De ruimte waarmee we starten rond het hoofdkwartier is nauwelijks genoeg "
-#~ "om een elementaire bouwinfrastructuur op te bouwen en we hebben geen "
-#~ "toegang tot bergen, die we nodig hebben voor mineralen en kolen. Dus "
-#~ "moeten we ons grondgebied uitbreiden."
-
-#~ msgid ""
-#~ "Expanding is as simple as building a military building at the edge of "
-#~ "your territory. The barbarians have a selection of different military "
-#~ "buildings: sentries, barriers, donjons, fortresses and citadels. The "
-#~ "bigger the building, the more expensive it is to build, but the more land "
-#~ "it will conquer around itself and the more soldiers can be stationed "
-#~ "there. The buildings also vary in their vision range: buildings with a "
-#~ "tower see farther than others."
-#~ msgstr ""
-#~ "Uitbreiden kan door simpelweg militaire gebouwen aan de rand van je "
-#~ "grondgebied te bouwen. De barbaren hebben enkele verschillende militaire "
-#~ "gebouwen: wachtposten, barrières, verdedigingstorens, vestingen en "
-#~ "citadels. Des te groter het gebouw, des te groter de gronduitbreiding "
-#~ "eromheen en des te meer soldaten er gestationeerd kunnen worden. De "
-#~ "gebouwen verschillen ook in zicht: gebouwen met een toren hebben verder "
-#~ "zicht dan anderen."
-
-#~ msgid ""
-#~ "As soon as a military building is manned, it will extend your land. You "
-#~ "can then burn it down again if you need the space. But note that your "
-#~ "land is then vulnerable: any military site from another player could "
-#~ "conquer the land. You therefore need military sites to keep military "
-#~ "influence over your land."
-#~ msgstr ""
-#~ "Zodra een militair gebouw wordt bemand breidt het land zich uit. Je kunt "
-#~ "het dan eventueel weer platbranden als je de plaats nodig hebt. Maar merk "
-#~ "op dat dit het land kwetsbaar maakt: elk militaire gebouw van een andere "
-#~ "speler kan dat land veroveren. Je hebt militaire gebouwen nodig om "
-#~ "militaire invloed over je land te behouden."
-
-#~ msgid ""
-#~ "Let’s try it out now: build a few military buildings on your south-"
-#~ "western border."
-#~ msgstr ""
-#~ "Probeer het nu maar: bouw een paar militaire gebouwen bij je "
-#~ "zuidwestelijke grens."
-
-#~ msgid ""
-#~ "We want to capture some of this mountain so we can search for resources "
-#~ "there. Bigger buildings will conquer more land, which can be beneficial "
-#~ "close to mountains, because you can’t build houses on mountains."
-#~ msgstr ""
-#~ "We willen iets van deze berg veroveren, zodat we daar kunnen zoeken naar "
-#~ "grondstoffen. Grotere gebouwen zullen meer land innemen, wat handig kan "
-#~ "zijn dicht bij bergen, omdat je niet kan bouwen in de bergen."
-
-#~ msgid "Conquer an area were we can build mines"
-#~ msgstr "Verover een gebied waar we mijnen kunnen bouwen"
-
-#~ msgid "Conquer the Mountain to the South-West"
-#~ msgstr "Verover de berg in het zuidwesten"
-
-#~ msgid ""
-#~ "For a full-fledged economy, we need coal, iron and gold. These can be "
-#~ "found in mountains. Conquer some area on the mountains to the south-west "
-#~ "of your headquarters by building some military buildings close to your "
-#~ "border."
-#~ msgstr ""
-#~ "Voor een volwaardige economie hebben we kolen, ijzer en goud nodig. Dit "
-#~ "kan gevonden worden in de bergen. Verover gebied in de bergen ten "
-#~ "zuidwesten van uw hoofdkwartier door enkele militaire gebouwen tegen de "
-#~ "grens te bouwen."
-
-#~ msgid ""
-#~ "You can choose from the following military buildings: sentry, donjon, "
-#~ "barrier and fortress. The bigger the building, the more expensive it is "
-#~ "to build it, but it will also conquer a bigger region. Sometimes, it is "
-#~ "useful to build a big military building next to a mountain so that you "
-#~ "can reach building sites farther up."
-#~ msgstr ""
-#~ "Je kunt kiezen uit de volgende militaire gebouwen: wachtposten, "
-#~ "barrières, verdedigingstorens, vestingen en citadels. Des te groter het "
-#~ "gebouw, des te duurder het is om te bouwen. Maar het zal ook een groter "
-#~ "grondgebied veroveren. Soms is het handig om een groot militair gebouw "
-#~ "naast een berg te bouwen om hogere velden te bereiken."
-
-#~ msgid ""
-#~ "Okay, now we own some of the area on this mountain. Mountains are very "
-#~ "important, because they contain resources: coal, iron ore, gold ore and "
-#~ "granite. Each tribe uses the resources differently, but all need mines to "
-#~ "extract the resources from the ground."
-#~ msgstr ""
-#~ "Okay, nu weten we iets over het gebied van deze berg. Bergen zijn erg "
-#~ "belangrijk, omdat ze grondstoffen bevatten: kolen, ijzererts, gouderts en "
-#~ "graniet. Elke stam gebruikt de grondstoffen anders, maar ze hebben "
-#~ "allemaal mijnen nodig om de grondstoffen te delven."
-
-#~ msgid ""
-#~ "Let’s search for resources in this mountain. First, we’ll build a road "
-#~ "onto the mountain and place a flag. Then, we will click on the flag and "
-#~ "call a geologist to it. I’ll show you how it’s done."
-#~ msgstr ""
-#~ "Laten we zoeken naar grondstoffen in deze berg. Eerst zullen we een weg "
-#~ "bouwen in de bergen en een vlag plaatsen. Vervolgens klikken we op de "
-#~ "vlag en roepen een geoloog op. Ik zal je laten zien hoe het moet."
-
-#~ msgid "Waiting for the Geologist"
-#~ msgstr "Wacht op de geoloog"
-
-#~ msgid ""
-#~ "The geologist will arrive at the flag shortly and start investigating the "
-#~ "area in his surroundings. He will place the following markers for the "
-#~ "various resources:"
-#~ msgstr ""
-#~ "De geoloog zal spoedig arriveren bij de vlag en beginnen met het gebied "
-#~ "in de omgeving te verkennen. Hij zal een van de volgende markeringen "
-#~ "plaatsen voor de verschillende grondstoffen:"
-
-#~ msgid "Let’s wait and see what the geologist finds on the mountain."
-#~ msgstr "Laten we wachten en kijken wat de geoloog op de berg gaat vinden."
-
-#~ msgid "Mining Conclusion"
-#~ msgstr "Mijnwerken conclusie"
-
-#~ msgid ""
-#~ "So our geologist found a lot of coal on this mountain. You should "
-#~ "therefore build a coal mine here. Building a mine is like building a "
-#~ "house. The building space symbol for where a mine can be built is"
-#~ msgstr ""
-#~ "Onze geologen hebben dus veel kolen gevonden in deze berg. Je zou daarom "
-#~ "op deze plek een kolenmijn moeten bouwen. Het bouwen van een mijn lijkt "
-#~ "op het bouwen van een huis. Het bouwhulpsymbool voor een te bouwen mijn is"
-
-#~ msgid "this one."
-#~ msgstr "deze."
-
-#~ msgid ""
-#~ "Note that a mine needs rations to work. Rations are produced in taverns, "
-#~ "and taverns need meat, pitta bread, and fish to produce them. You will "
-#~ "need a lot more infrastructure to get your mines working well. This "
-#~ "infrastructure also varies from tribe to tribe. We will explain them to "
-#~ "you in the introduction campaigns for the three tribes."
-#~ msgstr ""
-#~ "Merk op dat de mijnwerkers porties nodig hebben om te werken. Porties "
-#~ "worden geproduceerd in taveernes en taveernes hebben vlees, pitabrood en "
-#~ "vis nodig om ze te maken. Het vergt veel infrastructuur om de mijnen goed "
-#~ "te laten werken. Deze infrastructuur varieert van stam tot stam. Ze "
-#~ "worden bij iedere oefencampagne verklaard voor de drie stammen."
-
-#~ msgid "Warfare and Training"
-#~ msgstr "Oorlogvoering en Training"
-
-#~ msgid "Soldiers and Warfare"
-#~ msgstr "Soldaten en Oorlogvoering"
-
-#~ msgid ""
-#~ "On to the last topic now. We are going to talk about soldiers, their "
-#~ "training and their profession: warfare. As I mentioned, Widelands is "
-#~ "about building up, not burning down: therefore, warfare is also more "
-#~ "focused on economics than on military strategies."
-#~ msgstr ""
-#~ "Op naar het laatste onderwerp. We gaan praten over soldaten, hun training "
-#~ "en hun vak: oorlogsvoering. Zoals gezegd gaat Widelands over het opbouwen "
-#~ "en  niet over afbranden: daarom is oorlogsvoering meer gebaseerd op "
-#~ "economie dan op militaire strategie."
-
-#~ msgid ""
-#~ "Ok, I am going to create a little training ground for us with a training "
-#~ "camp and a warehouse to the north east of here."
-#~ msgstr ""
-#~ "Ok, ik ga een trainingsplaats maken met een trainingskamp en een magazijn "
-#~ "ten noordoosten van hier."
-
-#~ msgid ""
-#~ "If you want to come back to this south-western part of your realm, just "
-#~ "scroll here via right-button scrolling or open the minimap by clicking on "
-#~ "the"
-#~ msgstr ""
-#~ "Als je terug wilt komen naar dit zuidwestelijke deel van je rijk, ga "
-#~ "hiernaartoe door met de rechtermuisknop te slepen of open de minimap door "
-#~ "te klikken op de"
-
-#~ msgid "minimap button at the bottom of the screen."
-#~ msgstr "knop voor minikaart onderin het scherm."
-
-#~ msgid "Alternatively, you could also press ‘m’ on your keyboard."
-#~ msgstr "Ook te activeren door op 'm' te drukken op het toetsenbord."
-
-#~ msgid ""
-#~ "The minimap shows the complete map in miniature. You can directly jump to "
-#~ "any field by left-clicking on it. You can also toggle buildings, roads, "
-#~ "flags and player indicators on and off inside the minimap."
-#~ msgstr ""
-#~ "De minikaart laat je de hele kaart in het klein zien. Je kan meteen naar "
-#~ "elk gebied springen door erop te klikken. Je kan ook gebouwen, wegen, "
-#~ "vlaggen en speleraanwijzers aan- en uitschakelen op de minikaart."
-
-#~ msgid ""
-#~ "But I digress. Back to soldiers. What was I about to do? Oh yes, I wanted "
-#~ "to build a small training scenario for you. Let’s do that now."
-#~ msgstr ""
-#~ "Maar ik dwaal af. Terug naar militairen. Wat wilde ik doen? Oh ja, wilde "
-#~ "ik een klein opleidingsscenario voor u bouwen. Laten we dat nu doen."
-
-#~ msgid "Trainings Camp and Soldier Stats"
-#~ msgstr "Trainingskamp en soldaatstatistieken"
-
-#~ msgid ""
-#~ "Here we go. Take a look at the soldiers that are on their way into our "
-#~ "training camp. They look different from normal workers: they have a "
-#~ "health bar over their head that displays their remaining health, and they "
-#~ "have four symbols, which symbolize the individual soldier’s current "
-#~ "levels in the four different categories health, attack, defense and evade."
-#~ msgstr ""
-#~ "Daar gaan we. Kijk eens naar de soldaten die op weg zijn naar ons "
-#~ "trainingskamp. Ze zien er anders uit dan normale werkers: ze hebben een "
-#~ "levensbalk boven hun hoofd die hun resterende levenspunten weergeeft en "
-#~ "ze hebben vier symbolen die de niveaus van de individuele soldaten "
-#~ "symboliseren in de vier verschillende categorieën levenspunten, aanval, "
-#~ "verdediging en ontwijken."
-
-#~ msgid ""
-#~ "A soldier is created like any normal worker: a carrier grabs a tool in a "
-#~ "warehouse as soon as a request for a certain profession is not fulfilled. "
-#~ "The tool to create a barbarian soldier is an ax. Newly created soldiers "
-#~ "are of level 0. To make soldiers better in any of the four categories, "
-#~ "training is needed."
-#~ msgstr ""
-#~ "Een militair wordt gecreëerd als een normale arbeider: een drager grijpt "
-#~ "een hulpmiddel in een magazijn zodra een verzoek om een bepaald beroep "
-#~ "niet wordt vervuld. Het hulpmiddel om een barbaarse militair te  creëren "
-#~ "is een bijl. De pas gecreëerde militair is van niveau 0. Om de militair "
-#~ "in een van de vier categorieën beter te maken, is een opleiding nodig."
-
-#~ msgid ""
-#~ "Training happens in training sites like the training camp or the battle "
-#~ "arena: soldiers go there (as our little fellows are currently doing), "
-#~ "consume some wares and advance a level in one category. If a barbarian "
-#~ "soldier is fully trained, he has level 3 health, level 5 attack, level 0 "
-#~ "defense and level 2 evade. This is one fearsome warrior then! The "
-#~ "individual statistics have the following meaning:"
-#~ msgstr ""
-#~ "Trainen gebeurt in trainingsgebouwen zoals het trainingskamp of de arena: "
-#~ "de soldaten gaan daarheen (zoals onze kleine kameraden momenteel doen), "
-#~ "verbruiken sommige waren en gaan één niveau in één categorie vooruit. Als "
-#~ "een barbaarse militair volledig is opgeleid, heeft hij niveau 3 "
-#~ "levenspunten, niveau 5 aanval, niveau 0 verdediging en niveau 2 "
-#~ "ontwijken. Dit is dan een afschrikwekkende strijder! De individuele "
-#~ "statistieken hebben de volgende betekenis:"
-
-#~ msgid "Health:"
-#~ msgstr "Levenspunten:"
-
-#~ msgid "Attack:"
-#~ msgstr "Aanval:"
-
-#~ msgid ""
-#~ "The amount of damage a soldier will inflict on the enemy when an attack "
-#~ "is successful. A barbarian soldier with attack level 0 inflicts ~14 "
-#~ "points of health damage when he succeeds in hitting an enemy. For each "
-#~ "attack level, he gains 7 damage points."
-#~ msgstr ""
-#~ "De hoeveelheid schade die een soldaat aanricht bij een succesvolle aanval "
-#~ "op de vijand. Een barbaarse soldaat met aanvalsniveau 0 berokkent ~14 "
-#~ "levenspunten schade als het hem lukt een vijand te raken. Per "
-#~ "aanvalsniveau komen hier 7 punten schade bij."
-
-#~ msgid "Defense:"
-#~ msgstr "Verdediging:"
-
-#~ msgid ""
-#~ "Defense is the value that is subtracted from the attack value. The "
-#~ "barbarians cannot train in this skill and therefore have always defense "
-#~ "level 0, which means that they always get 3 points subtracted from the "
-#~ "damage inflicted. If an attacker with an attack value of 15 points hits a "
-#~ "barbarian soldier, the barbarian will lose 15 - 3 = 12 health. The 3 "
-#~ "points are subtracted because of the defense ability."
-#~ msgstr ""
-#~ "Verdediging is de waarde die wordt afgetrokken van de aanvalswaarde. De "
-#~ "Barbaren kunnen deze vaardigheid niet trainen en hebben altijd "
-#~ "verdedigingsniveau 0 wat betekend dat ze altijd 3 punten minder schade "
-#~ "oplopen. Als een aanvaller met een aanvalswaarde van 15 punten een "
-#~ "Barbaarse soldaat raakt zal de Barbaar 15 - 3 = 12 levenspunten "
-#~ "verliezen. De 3 levenspunten worden afgetrokken vanwege de "
-#~ "verdedigingsvaardigheden."
-
-#~ msgid "Evade:"
-#~ msgstr "Ontwijken:"
-
-#~ msgid ""
-#~ "Evade is the chance that the soldier is able to dodge an attack. It is "
-#~ "25% for a level 0 evade barbarian and increases in steps of 15% for each "
-#~ "level."
-#~ msgstr ""
-#~ "Ontwijken is de kans dat de militair een aanval kan ontwijken. Het is 25% "
-#~ "voor een niveau 0 Barbaar en stijgt in stappen van 15% per niveau."
-
-#~ msgid "Enhance This Fortress"
-#~ msgstr "Verbeter deze vesting"
-
-#~ msgid "Enhancing Buildings"
-#~ msgstr "Gebouwen verbeteren"
-
-#~ msgid ""
-#~ "I will create an enemy for you soon, but first let’s make sure you are "
-#~ "prepared. This fortress is already quite strong and conquers a lot of "
-#~ "space. But there is an even bigger building: the citadel."
-#~ msgstr ""
-#~ "Ik zal zo een tegenstander aanmaken, maar laat me eerst zorgen voor wat "
-#~ "voorbereiding. De vesting is al behoorlijk sterk en verovert veel ruimte. "
-#~ "Maar er is een nog groter gebouw: de citadel."
-
-#~ msgid ""
-#~ "Citadels cannot be built directly. Instead, you will have to construct a "
-#~ "fortress first and then enhance it to a citadel. To do so, click on the "
-#~ "fortress, then choose the ‘Enhance to Citadel’ button. Your soldiers will "
-#~ "leave the fortress while the construction is going on. This means that "
-#~ "your fortress will lose its military influence. If an enemy occupies a "
-#~ "military building nearby, your construction site will burn down. No "
-#~ "sweat, that won’t happen here."
-#~ msgstr ""
-#~ "De citadellen kunnen niet direct worden gebouwd. In plaats daarvan, moet "
-#~ "je eerst een vesting bouwen en het dan verbeteren naar een citadel. Om "
-#~ "dit te doen, moet u op de vesting klikken, dan kiezen voor de verbeter "
-#~ "naar citadelknop. Uw militairen zullen de citadel verlaten tijdens het "
-#~ "bouwen. Dit betekent dat je vesting geen militaire invloed meer heeft. "
-#~ "Als een vijand een militair gebouw dichtbij bouwt, kan hij je bouwwerf "
-#~ "platbranden. Geen angst, dat zal hier niet gebeuren."
-
-#~ msgid "Enhance your fortress to a citadel now."
-#~ msgstr "Breid je vesting nu uit tot een citadel."
-
-#~ msgid ""
-#~ "Remember that you can speed time up by using PAGE_UP. Building a citadel "
-#~ "takes a while."
-#~ msgstr ""
-#~ "Denk eraan dat je de tijd kunt versnellen door PAGE_UP te gebruiken. Het "
-#~ "bouwen van een citadel duurt een tijdje."
-
-#~ msgid "Enhance your fortress to a citadel"
-#~ msgstr "Breid je vesting uit tot een citadel"
-
-#~ msgid "Enhance Your Fortress"
-#~ msgstr "Verbeter je vesting"
-
-#~ msgid "Enhance your fortress to a mighty citadel."
-#~ msgstr "Breid je vesting uit tot een machtige citadel."
-
-#~ msgid ""
-#~ "The citadel can house 12 soldiers and is the biggest military building "
-#~ "the barbarians can build. It also costs a lot of resources and takes a "
-#~ "long time to build. It is most suited to guard strategically important "
-#~ "points like constricted points or mountains."
-#~ msgstr ""
-#~ "De citadel kan 12 soldaten herbergen en is het grootste militaire gebouw "
-#~ "dat de Barbaren kunnen bouwen. Het vergt ook veel tijd en grondstoffen om "
-#~ "te bouwen. Het is ideaal geschikt om strategisch belangrijke punten te "
-#~ "bewaken, zoals vernauwingen of bergen."
-
-#~ msgid "Defeat your enemy"
-#~ msgstr "Versla je vijand"
-
-#~ msgid "Defeat the Enemy"
-#~ msgstr "Versla de vijand"
-
-#~ msgid ""
-#~ "I have created a sparring partner for you: It is an empire tribe close to "
-#~ "your citadel. To attack its buildings, click on the door of a target "
-#~ "building, choose the number of soldiers that you wish to send and click "
-#~ "on the attack button. Your soldiers will come from all nearby military "
-#~ "buildings. Likewise, the defenders will come from all nearby military "
-#~ "buildings of the enemy and intercept your forces."
-#~ msgstr ""
-#~ "Ik heb een sparringpartner voor je gemaakt: Het is een stam van het "
-#~ "keizerrijk dichtbij de citadel. Om zijn gebouwen aan te vallen klik op "
-#~ "het gebouw en kies het aantal soldaten om mee aan te vallen en klik op de "
-#~ "aanvalsknop. De soldaten komen uit alle dichtbijgelegen militaire "
-#~ "gebouwen. Hetzelfde geldt voor de verdediging, ook hij zal hulp krijgen "
-#~ "van dichtbijgelegen militaire gebouwen om de soldaten te onderscheppen."
-
-#~ msgid ""
-#~ "Attack and conquer all military buildings of the enemy and destroy their "
-#~ "headquarters."
-#~ msgstr ""
-#~ "Val aan en verover alle militaire gebouwen van de vijand en vernietig z'n "
-#~ "hoofdkwartier."
-
-#~ msgid "Defeat the enemy tribe"
-#~ msgstr "Versla de vijandelijke stam"
-
-#~ msgid "Defeat Your Enemy"
-#~ msgstr "Versla je vijand"
-
-#~ msgid "Defeat the nearby enemy."
-#~ msgstr "Versla de nabijgelegen vijand."
-
-#~ msgid ""
-#~ "To attack a building, click on its doors, choose the number of attacking "
-#~ "soldiers, then send them via the ‘Attack’ button."
-#~ msgstr ""
-#~ "Om een gebouw aan te vallen, klik op zijn deuren, kies het aantal "
-#~ "aanvallende militairen, en stuur hen daarnaartoe door op de aanvalsknop "
-#~ "te klikken."
-
-#~ msgid "Conclusion"
-#~ msgstr "Conclusie"
-
-#~ msgid ""
-#~ "This concludes the tutorial. There is some stuff we have not covered here "
-#~ "– we have not even built a single production building even though "
-#~ "producing wares is the most important thing in Widelands – but you’ve "
-#~ "learned the ropes."
-#~ msgstr ""
-#~ "Dit beëindigt deze oefencampagne. Er zijn nog zaken die niet besproken "
-#~ "zijn, we hebben zelfs niet één producerend gebouw gebouwd terwijl het "
-#~ "produceren van goederen het belangrijkste is in Widelands, maar we hebben "
-#~ "de basis geleerd."
-
-#~ msgid ""
-#~ "You can learn about the remaining stuff while you go through the "
-#~ "individual tribes’ introduction campaigns. Each consists of some "
-#~ "scenarios explaining the tribe and its economy while introducing the "
-#~ "background story of Widelands. Have fun playing!"
-#~ msgstr ""
-#~ "De overige zaken kun je leren door de campagnes te spelen van de "
-#~ "individuele stammen. Elk bevat een uitleg van de stam en hun economie en "
-#~ "vertelt de achtergrond van Widelands. Veel plezier met het spelen!"
-
-#~ msgid ""
-#~ "You can continue playing this map or you can end this game whenever you "
-#~ "like. To leave this game and return to the main menu, click on the"
-#~ msgstr ""
-#~ "Je kan verder op deze kaart spelen of je kan wanneer je wilt het spel "
-#~ "beëindigen. Om dit spel te verlaten en terug te gaan naar het hoofdmenu "
-#~ "moet je klikken op het"
-
-#~ msgid ""
-#~ "‘Options’ menu button on the very left at the bottom of the screen. Then "
-#~ "click the"
-#~ msgstr ""
-#~ "'Opties' menuknop helemaal links, onderaan in het scherm. Klik daarna de"
-
-#~ msgid "‘Exit Game’ button."
-#~ msgstr "'Verlaat spel' knop."
-
-#~ msgid ""
-#~ "Thanks for playing this tutorial. Enjoy Widelands and remember to visit "
-#~ "us at"
-#~ msgstr ""
-#~ "Bedankt voor het spelen van de oefencampagne. Geniet van Widelands en "
-#~ "vergeet niet ons te bezoeken op"

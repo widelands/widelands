@@ -69,7 +69,7 @@ struct WLMessageBox : public Window {
 
 	bool handle_mousepress  (uint8_t btn, int32_t mx, int32_t my) override;
 	bool handle_mouserelease(uint8_t btn, int32_t mx, int32_t my) override;
-	bool handle_key(bool down, SDL_keysym code) override;
+	bool handle_key(bool down, SDL_Keysym code) override;
 
 protected:
 	virtual void pressed_ok();

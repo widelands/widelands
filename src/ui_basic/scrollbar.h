@@ -62,7 +62,8 @@ public:
 	uint32_t get_pagesize() const {return m_pagesize;}
 	uint32_t get_scrollpos() const {return m_pos;}
 
-	bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mousewheel(uint32_t, int32_t, int32_t y) override;
 
 	void set_force_draw(bool const t) {m_force_draw = t;}
 

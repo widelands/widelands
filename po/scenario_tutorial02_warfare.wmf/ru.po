@@ -7,27 +7,26 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2014-10-29 08:57+0000\n"
-"PO-Revision-Date: 2014-05-24 20:52+0000\n"
+"POT-Creation-Date: 2014-10-29 10:08+0000\n"
+"PO-Revision-Date: 2014-10-29 18:16+0000\n"
 "Last-Translator: Ruslan Kovtun <koutoftimer@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
-"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-10-29 06:10+0000\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Launchpad-Export-Date: 2014-10-30 05:43+0000\n"
 "X-Generator: Launchpad (build 17203)\n"
+"Language: ru\n"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:17
 msgid "Introduction"
 msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:19
-#, fuzzy
 msgid "Soldiers, Training and Warfare"
-msgstr "Солдаты и ведение войны"
+msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:20
 msgid ""
@@ -125,7 +124,8 @@ msgid "The Battle Arena"
 msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:49
-msgid "Now I have talked about training and levels. Let me elaborate on that."
+msgid ""
+"Now I have talked about training and levels. Let me elaborate on that."
 msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:50
@@ -346,9 +346,8 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:141
-#, fuzzy
 msgid "Dismantle your sentry"
-msgstr "Разгромите Вашего врага"
+msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143
 msgid "Dismantling military buildings"
@@ -461,9 +460,8 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:185
-#, fuzzy
 msgid "Defeat your Enemy"
-msgstr "Разгромите Вашего врага"
+msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:187
 msgid "Defeat the Enemy"
@@ -539,327 +537,11 @@ msgstr ""
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../scripting/format_scenario.lua:133
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
-
-#~ msgid "Welcome to the Widelands Tutorial!"
-#~ msgstr "Добро пожаловать на учебный курс Widelands!"
-
-#~ msgid "Welcome to Widelands!"
-#~ msgstr "Добро пожаловать в Widelands!"
-
-#~ msgid ""
-#~ "Widelands is a slow-paced build-up strategy game with an emphasis on "
-#~ "construction, not destruction. This tutorial will guide you through the "
-#~ "basics of the game."
-#~ msgstr ""
-#~ "Widelands - это медленная экономическая стратегия в реальном времени, "
-#~ "больше нацеленная на созидание, чем на разрушение. Этот обучающий курс "
-#~ "ознакомит Вас с основными аспектами игры."
-
-#~ msgid "Dismiss this box by left-clicking on the button below."
-#~ msgstr "Вы можете закрыть это окно нажатием кнопки, расположенной ниже."
-
-#~ msgid "Diving In"
-#~ msgstr "Введение"
-
-#~ msgid "Let’s dive right in!"
-#~ msgstr "Давайте начнём!"
-
-#~ msgid ""
-#~ "There are three different tribes in Widelands: the Barbarians, the Empire "
-#~ "and the Atlanteans. All tribes have a different economy, strength and "
-#~ "weaknesses, but the general gameplay is the same for all. We will play "
-#~ "the barbarians for now."
-#~ msgstr ""
-#~ "В Widelands есть три различных племени: варвары, атлантийцы и империя. "
-#~ "Экономика каждого племени отлична от других, у каждого племени также свои "
-#~ "достоинства и недостатки, но основной геймплей одинаков для всех. Пока мы "
-#~ "будем играть варварами."
-
-#~ msgid ""
-#~ "You will usually start the game with one headquarters. This is the big "
-#~ "building with the blue flag in front of it. The headquarters is a "
-#~ "warehouse that stores wares, workers and soldiers. Some wares are needed "
-#~ "for building houses, others for making other wares. Obviously, the wares "
-#~ "in the headquarters will not last forever, so you must make sure to "
-#~ "replace them. The most important wares in the early game are the basic "
-#~ "construction wares: logs and raw stone. Let’s make sure that we do not "
-#~ "run out of logs. For this, we need a lumberjack and a hut for him to stay "
-#~ "in."
-#~ msgstr ""
-#~ "Как правило, Вы начинаете игру с одним лишь штабом. Это большое здание с "
-#~ "синим флажком перед ним. В штабе находятся рабочие и солдаты, а также "
-#~ "хранятся товары. Одни товары нужны для строительства зданий, другие - для "
-#~ "производства других товаров. Очевидно, что запас товаров в штабе не "
-#~ "бесконечен, так что Вы должны наладить их производство. Самые нужные "
-#~ "товары в начале игры - это основные строительные материалы: брёвна и "
-#~ "камни. Давайте позаботимся о том, чтобы у нас не закончились брёвна. Для "
-#~ "этого нам нужен дровосек и хижина для него."
-
-#~ msgid ""
-#~ "We need to find a nice place for the lumberjack’s hut. To make this "
-#~ "easier, we can activate ‘Show Building Spaces’. There are two ways you "
-#~ "can do this, either by clicking on the ‘Show Building Spaces’ button at "
-#~ "the bottom of the screen, which is the fourth one from the left. Or you "
-#~ "can use the SPACE key to toggle it."
-#~ msgstr ""
-#~ "Нам нужно найти хорошее место для хижины дровосека. Чтобы упростить "
-#~ "задачу, мы можем включить отображение значков подсказок по типам "
-#~ "строений. Это можно сделать двумя способами: нажатием четвёртой слева "
-#~ "кнопки внизу экрана или клавишей ПРОБЕЛ на клавиатуре."
-
-#~ msgid "Left-click the ‘OK’ button to close this box and then try it."
-#~ msgstr ""
-#~ "Нажмите кнопку \"ОК\", чтобы закрыть это окно, затем попробуйте сделать "
-#~ "это."
-
-#~ msgid "Enable the showing of building spaces"
-#~ msgstr "Включить показ мест для зданий"
-
-#~ msgid "Show Building Spaces"
-#~ msgstr "Показать места для зданий"
-
-#~ msgid ""
-#~ "It is easier to understand what type of buildings can be built on which "
-#~ "field when the symbols for the building spaces are enabled."
-#~ msgstr ""
-#~ "Когда включен показ иконок зданий, легче понять какой тип зданий может "
-#~ "быть построен на участке земли."
-
-#~ msgid ""
-#~ "Do so now either by pressing SPACE or by clicking the fourth button from "
-#~ "the left at the very bottom of the screen. Right-click on this window and "
-#~ "then give it a try."
-#~ msgstr ""
-#~ "Сделайте это нажав ПРОБЕЛ или нажав четвертую кнопку слева на панели "
-#~ "снизу экрана. Нажмите правую кнопку мыши чтобы закрыть это окно и перейти "
-#~ "к выполнению."
-
-#~ msgid "Lumberjack’s Spot"
-#~ msgstr "Хижина лесоруба"
-
-#~ msgid ""
-#~ "There you go. I will explain about all those symbols in a minute. First, "
-#~ "let me show you how to make a lumberjack’s hut and how to connect it with "
-#~ "a road. There is a sweet spot for a lumberjack right next to those trees. "
-#~ "I’ll describe the steps I will take and then ask you to click on the ‘OK’ "
-#~ "button for me to demonstrate."
-#~ msgstr ""
-#~ "Вот вы где. Давайте я объясню вам значение этих иконок. Для начала, "
-#~ "давайте рассмотрим как создать хижину лесоруба и присоединить ее к "
-#~ "дороге. Возле этих деревьев, как раз, хорошее место для лесоруба. Далее я "
-#~ "опишу шаги, которые необходимо выполнить, и попрошу закрыть это окно для "
-#~ "демонстрации."
-
-#~ msgid "Building the Lumberjack"
-#~ msgstr "Построение хижины лесоруба"
-
-#~ msgid ""
-#~ "First, I’ll left-click on the symbol where I want the lumberjack’s hut to "
-#~ "be built. A window will appear where I can choose between buildings. "
-#~ "Because I’ll click a yellow house symbol – which means that its field can "
-#~ "house medium and small buildings – I am presented with all the medium "
-#~ "buildings that I can build. The lumberjack’s hut is a small building, so "
-#~ "I will go on to select the small buildings tab. Then I’ll choose the "
-#~ "lumberjack’s hut."
-#~ msgstr ""
-#~ "Только что, я нажал левой кнопкой мыши на иконке где я хотел расположить "
-#~ "хижину лесоруба. Далее появится окно, где я смогу выбрать здание. Так как "
-#~ "я нажал на желтый дом, который обозначает возможность построения здания "
-#~ "малых и средний размеров, мне показаны все строения малых и средних "
-#~ "размеров. Но хижина лесоруба - это здание малых размеров, поэтому я "
-#~ "перейду на вкладку малых зданий, после чего выберу хижину."
-
-#~ msgid ""
-#~ "Click the ‘OK’ button to watch me. I’ll go really slowly: I will click – "
-#~ "then select the tab – and finally I’ll choose the building."
-#~ msgstr ""
-#~ "Нажмите \"ОК\" для продолжения. Я покажу все медленно: кликну, потом "
-#~ "выберу вкладку и выберу строение."
-
-#~ msgid "Building a Connecting Road"
-#~ msgstr "Построение соединяющей дороги"
-
-#~ msgid ""
-#~ "That won’t do yet. I still need to connect the lumberjack’s hut to the "
-#~ "rest of my road network. After ordering the construction site, I was "
-#~ "automatically put into road building mode, so all I have to do is click "
-#~ "on the blue flag in front of my headquarters."
-#~ msgstr ""
-#~ "Лесоруб не приступит к работе. Я все еще должен присоединить хижину к "
-#~ "сети дорог. После приведения в порядок места строительства, я "
-#~ "автоматически войду в режим построение дорог, поэтому, все что мне надо "
-#~ "сделать это нажать на синий флаг штаба."
-
-#~ msgid "Waiting for the Lumberjack to Go Up"
-#~ msgstr "Ожидание построения хижины лесоруба"
-
-#~ msgid ""
-#~ "Now watch closely while a builder leaves the headquarters and goes to the "
-#~ "construction site. Also, a carrier will take position in between the two "
-#~ "blue flags and carry wares from one blue flag to the other."
-#~ msgstr ""
-#~ "Сейчас строитель покинет штаб и пойдет на строительную площадку. Также, "
-#~ "перевозчик начнет доставку изделий от одного синего флага к другому."
-
-#~ msgid "Placing Another Flag"
-#~ msgstr "Установка дополнительного флага"
-
-#~ msgid ""
-#~ "Nice how they are working, isn’t it? But the poor carrier has a very long "
-#~ "way to go. We can make it easier for him (and more efficient for us) when "
-#~ "we place another blue flag on the road."
-#~ msgstr ""
-#~ "На работу то как работаю другие можно смотреть вечно, но бедному "
-#~ "посыльному очень долго идти. Мы можем облегчить ему задачу (и повысить "
-#~ "эффективность) поместив дополнительный синий флаг на дороге."
-
-#~ msgid ""
-#~ "You try it this time: click on the yellow flag symbol in between the two "
-#~ "blue flags we just placed and then click on the"
-#~ msgstr ""
-#~ "Теперь ваша очередь: нажмите на желтый флаг между двумя синими, "
-#~ "расположенными только что, и нажмите на"
-
-#~ msgid "Build a flag to divide the road to the lumberjack"
-#~ msgstr "Установить флаг на тропе к хижине лесоруба"
-
-#~ msgid "Build a Flag on the Road"
-#~ msgstr "Установка флажка на дороге"
-
-#~ msgid ""
-#~ "The shorter your road segments are, the faster your wares will be "
-#~ "transported. You should therefore make sure that your roads have as many "
-#~ "flags as possible."
-#~ msgstr ""
-#~ "Чем короче дорога, тем скорее будут доставлены изделия. Поэтому, вам "
-#~ "следует убедиться, что на дороге расположено максимальное количество "
-#~ "флажков."
-
-#~ msgid ""
-#~ "Build a blue flag now in the middle of the road that connects your "
-#~ "headquarters to your lumberjack’s hut."
-#~ msgstr ""
-#~ "Установите синий флаг посредине дороги, что соединяет ваш штаб с хижиной "
-#~ "лесоруба."
-
-#~ msgid "Waiting For the Hut to be Finished"
-#~ msgstr "Ожидание строительства хижины"
-
-#~ msgid "Well done! Let’s wait till the hut is finished."
-#~ msgstr "Хорошо. Давайте подождем, когда построится хижина."
-
-#~ msgid ""
-#~ "If you want things to go faster, simply use the PAGE UP key on your "
-#~ "keyboard to increase the game speed. You can use PAGE DOWN to make the "
-#~ "game slower again."
-#~ msgstr ""
-#~ "Если хотите ускорить игру, воспользуйтесь кнопкой PAGE UP. Для замедления "
-#~ "используется кнопка PAGE DOWN."
-
-#~ msgid "Lumberjack is Done"
-#~ msgstr "Лесопилка готова."
-
-#~ msgid "Move your view with the cursor keys"
-#~ msgstr "Переместить вид курсорными клавишами"
-
-#~ msgid "Move your view with the mouse"
-#~ msgstr "Переместить вид с помощью мыши"
-
-#~ msgid "Great. Now about that quarry..."
-#~ msgstr "Замечательно. Теперь о каменоломне..."
-
-#~ msgid "Everything can be built on the green house symbol."
-#~ msgstr ""
-#~ "Любые строения могут быть построены на месте значка зелёного домика."
-
-#~ msgid ""
-#~ "Everything except for big buildings can be built on a yellow house symbol."
-#~ msgstr ""
-#~ "Любые строения, за исключением больших, могут быть построены на месте "
-#~ "жёлтого домика."
-
-#~ msgid "Red building symbols can only hold small buildings and flags."
-#~ msgstr ""
-#~ "Только малые строения и флажки могут быть установлены на месте красного "
-#~ "домика."
-
-#~ msgid "And finally the yellow flag symbol only allows for flags."
-#~ msgstr ""
-#~ "И наконец значок жёлтого флага разрешает устанавливать только флажки."
-
-#~ msgid "Build a quarry next to the stones"
-#~ msgstr "Построить каменоломню возле камней"
-
-#~ msgid "the road building symbol."
-#~ msgstr "кнопку постройки дороги."
-
-#~ msgid "the abort symbol."
-#~ msgstr "кнопку отмены."
-
-#~ msgid ""
-#~ "The terrain is flat here. Your carriers will be very swift on this "
-#~ "terrain."
-#~ msgstr ""
-#~ "Здесь местность ровная. Ваши носильщики будут двигаться очень быстро на "
-#~ "этом участке."
-
-#~ msgid "Connect the quarry to the headquarters"
-#~ msgstr "Соединить каменоломню и штаб"
-
-#~ msgid "Messages"
-#~ msgstr "Сообщения"
-
-#~ msgid "archive message button to move them into your archive."
-#~ msgstr "кнопку архивирования, для помещения их в Ваш архив."
-
-#~ msgid "Archive all messages in your inbox"
-#~ msgstr "Архивировать все полученные сообщения"
-
-#~ msgid "Close the messages window"
-#~ msgstr "Закрыть окно сообщений"
-
-#~ msgid "Conquer an area were we can build mines"
-#~ msgstr "Захватить участок пригодный под шахты"
-
-#~ msgid "a bit of coal"
-#~ msgstr "небольшие залежи угля"
-
-#~ msgid "a lot of coal"
-#~ msgstr "большие залежи угля"
-
-#~ msgid "a bit of iron"
-#~ msgstr "небольшие залежи железа"
-
-#~ msgid "a lot of iron"
-#~ msgstr "большие залежи железа"
-
-#~ msgid "a bit of gold"
-#~ msgstr "небольшие залежи золота"
-
-#~ msgid "a lot of gold"
-#~ msgstr "большие залежи золота"
-
-#~ msgid "a bit of granite"
-#~ msgstr "небольшие залежи гранита"
-
-#~ msgid "a lot of granite"
-#~ msgstr "большие залежи гранита"
-
-#~ msgid "water"
-#~ msgstr "вода"
-
-#~ msgid "nothing was found here"
-#~ msgstr "ничего не найдено здесь"
-
-#~ msgid "this one."
-#~ msgstr "вот такой."
-
-#~ msgid "Warfare and Training"
-#~ msgstr "Военные действия и военная подготовка"
+msgstr[0] "Новое задание"
+msgstr[1] "Новых задания"
+msgstr[2] "Новых заданий"

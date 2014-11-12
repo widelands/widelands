@@ -335,24 +335,18 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	m_snap_win_overlap_only          .set_state(opt.snap_win_overlap_only);
 	m_dock_windows_to_edges          .set_state(opt.dock_windows_to_edges);
 
-	//  GRAPHIC_TODO(unknown): this shouldn't be here List all resolutions
-	// take a copy to not change real video info structure
-	SDL_PixelFormat fmt = *SDL_GetVideoInfo()->vfmt;
-	fmt.BitsPerPixel = 32;
-	for
-		(const SDL_Rect * const * modes = SDL_ListModes(&fmt, SDL_SWSURFACE | SDL_FULLSCREEN);
-		 modes && *modes;
-		 ++modes)
-	{
-		const SDL_Rect & mode = **modes;
-		if (800 <= mode.w && 600 <= mode.h)
-		{
-			const ScreenResolution this_res = {mode.w, mode.h};
-			if
-				(m_resolutions.empty()
+	for (int modes = 0; modes < SDL_GetNumDisplayModes(0); ++modes) {
+		SDL_DisplayMode  mode;
+		SDL_GetDisplayMode(0, modes, & mode);
+		if (800 <= mode.w && 600 <= mode.h &&
+			 (SDL_BITSPERPIXEL(mode.format) == 32 ||
+			  SDL_BITSPERPIXEL(mode.format) == 24)) {
+			ScreenResolution this_res = {
+			   mode.w, mode.h, static_cast<int32_t>(SDL_BITSPERPIXEL(mode.format))};
+			if (this_res.depth == 24) this_res.depth = 32;
+			if (m_resolutions.empty()
 				 || this_res.xres != m_resolutions.rbegin()->xres
-				 || this_res.yres != m_resolutions.rbegin()->yres)
-			{
+				 || this_res.yres != m_resolutions.rbegin()->yres) {
 				m_resolutions.push_back(this_res);
 			}
 		}
@@ -391,6 +385,8 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 nullptr, "en" == opt.language);
 
 	add_languages_to_list(&m_language_list, opt.language);
+
+	m_language_list.focus();
 }
 
 void FullscreenMenuOptions::update_sb_autosave_unit() {
@@ -409,11 +405,11 @@ void FullscreenMenuOptions::advanced_options() {
 	}
 }
 
-bool FullscreenMenuOptions::handle_key(bool down, SDL_keysym code)
+bool FullscreenMenuOptions::handle_key(bool down, SDL_Keysym code)
 {
 	if (down) {
 		switch (code.sym) {
-			case SDLK_KP_ENTER:
+			case SDL_SCANCODE_KP_ENTER:
 			case SDLK_RETURN:
 				end_modal(static_cast<int32_t>(om_ok));
 				return true;
@@ -618,6 +614,7 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 		did_select_a_font |= cmpbool;
 		m_ui_font_list.add
 			("Widelands", UI_FONT_NAME_WIDELANDS, nullptr, cmpbool);
+		m_ui_font_list.focus();
 
 		// Fill with all left *.ttf files we find in fonts
 		FilenameSet files =
@@ -648,11 +645,11 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 	}
 }
 
-bool FullscreenMenuAdvancedOptions::handle_key(bool down, SDL_keysym code)
+bool FullscreenMenuAdvancedOptions::handle_key(bool down, SDL_Keysym code)
 {
 	if (down) {
 		switch (code.sym) {
-			case SDLK_KP_ENTER:
+			case SDL_SCANCODE_KP_ENTER:
 			case SDLK_RETURN:
 				end_modal(static_cast<int32_t>(om_ok));
 				return true;
