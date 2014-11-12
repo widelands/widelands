@@ -437,8 +437,8 @@ destroy_quarries_message = {
    body = rt(
       p(_[[You received some messages. See how the button at the bottom of the screen has changed appearance? You can destroy the quarries now as they are no longer of any use and just blocking space. To do so, there are two possibilities:]]) ..
       paragraphdivider() ..
-      listitem_bullet(_[[Burning down the quarry: This is the fastest way of clearing the space. While the worker abandons the building, the wares are lost.]]) ..
-      listitem_bullet(_[[Dismantling the quarry: A builder will walk from the headquarters to dismantle the quarry piece by piece. Thereby, you regain some of the resources you used for the construction.]])
+      listitem_bullet(_[[Burning down the quarry: this is the fastest way of clearing the space. While the worker abandons the building, the wares are lost.]]) ..
+      listitem_bullet(_[[Dismantling the quarry: a builder will walk from the headquarters to dismantle the quarry piece by piece. Thereby, you regain some of the resources you used for the construction.]])
    ),
    h = 300,
    obj_name = "destroy_quarries",
@@ -478,7 +478,7 @@ military_building_finished = {
    title = _"Military Site Occupied",
    body = rt(
       h1(_"Your territory has just grown!") ..
-      p(_[[Great. Do you see how your territory has grown since your soldiers entered the sentry?]]) ..
+      p(_[[Great. Do you see how your territory has grown since your soldiers entered your new military building?]]) ..
       p(_[[Every military building has a certain conquer area – the more expensive the building, the more land it conquers.]])
    ),
    h = 300,
