@@ -48,11 +48,20 @@ FullscreenMenuEditor::FullscreenMenuEditor() :
 		 _("Back"), "", true, false)
 {
 	new_map.sigclicked.connect
-		(boost::bind(&FullscreenMenuEditor::end_modal, boost::ref(*this), static_cast<int32_t>(MenuTarget::kNewMap)));
+			(boost::bind(
+				 &FullscreenMenuEditor::end_modal,
+				 boost::ref(*this),
+				 static_cast<int32_t>(MenuTarget::kNewMap)));
 	load_map.sigclicked.connect
-		(boost::bind(&FullscreenMenuEditor::end_modal, boost::ref(*this), static_cast<int32_t>(MenuTarget::kLoadMap)));
+			(boost::bind
+			 (&FullscreenMenuEditor::end_modal,
+			  boost::ref(*this),
+			  static_cast<int32_t>(MenuTarget::kLoadMap)));
 	back.sigclicked.connect
-		(boost::bind(&FullscreenMenuEditor::end_modal, boost::ref(*this), static_cast<int32_t>(MenuTarget::kBack)));
+			(boost::bind
+			 (&FullscreenMenuEditor::end_modal,
+			  boost::ref(*this),
+			  static_cast<int32_t>(MenuTarget::kBack)));
 
 	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
 }
