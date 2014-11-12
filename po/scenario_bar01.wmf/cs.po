@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2014-10-29 08:30+0000\n"
-"PO-Revision-Date: 2014-08-07 09:31+0000\n"
-"Last-Translator: Martin Volf <Unknown>\n"
+"POT-Creation-Date: 2014-10-29 10:08+0000\n"
+"PO-Revision-Date: 2014-10-29 18:20+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
-"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-10-29 06:09+0000\n"
+"X-Launchpad-Export-Date: 2014-10-30 05:43+0000\n"
 "X-Generator: Launchpad (build 17203)\n"
+"Language: cs\n"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:23
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:25
@@ -36,7 +36,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:33
 msgid "Expand north-east and build a quarry"
-msgstr ""
+msgstr "Rozšiř území na severovýchod a postav lom"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:35
 msgid "Expand north-east to the rocks"
@@ -54,11 +54,11 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:43
 msgid "Start building mines on the mountain"
-msgstr ""
+msgstr "Začni v horách budovat doly"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "Build coal and iron ore mines"
-msgstr ""
+msgstr "Postav uhelný důl a důl na železnou rudu"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:46
 msgid "Build a coal mine and an iron ore mine."
@@ -119,19 +119,20 @@ msgid ""
 "Mines can only be built on mountain terrain. Suitable places for mines are "
 "displayed as orange mine symbols."
 msgstr ""
+"Doly mohou být postaveny pouze na horském terénu. Vhodná místa pro výstavbu "
+"dolů jsou zobrazena jako oranžový symbol dolu."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:66
-#, fuzzy
 msgid "Provide your miners with food"
-msgstr "Posuň svůj výhled pomocí myši"
+msgstr "Zajisti jídlo pro horníky"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:68
 msgid "Build a hunter, a gamekeeper and a tavern"
-msgstr ""
+msgstr "Postav chatu pro lovce, hajného a kuchyni"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:69
 msgid "In order to work, your miners need food."
-msgstr ""
+msgstr "Aby mohli horníci těžit, musí mít co jíst."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:70
 msgid ""
@@ -139,20 +140,24 @@ msgid ""
 "becoming extinct. The meat is then processed in a tavern into lunches for "
 "your miners."
 msgstr ""
+"Lovec loví zvěř, zatímco hajný hlídá, aby zvěř nevyhynula. Maso se potom "
+"zpracuje v kuchyni na jídlo pro horníky."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:71
 msgid ""
 "This is only the first example of a ware which has to be refined before "
 "being used in a secondary building – others will follow."
 msgstr ""
+"Tohle je jen první příklad zboží, které je nutné zpracovat, než jej lze "
+"použít v druhotném zařízení - další budou následovat."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:77
 msgid "Bake bread"
-msgstr ""
+msgstr "Upeč chléb"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:79
 msgid "Build a well, a farm and a bakery"
-msgstr ""
+msgstr "Postav studnu, statek a pekárnu"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:80
 msgid ""
@@ -163,24 +168,24 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:86
-#, fuzzy
 msgid "Refine your mined resources"
-msgstr "Pátrání po surovinách"
+msgstr "Zpracuj vytěžené suroviny"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:88
-#, fuzzy
 msgid "Build a smelting works"
-msgstr "Stavba spojující cesty"
+msgstr "Postav slévárnu"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:89
 msgid ""
 "The iron ore your miners dig up is not usable yet – it has to be melted into "
 "iron first."
 msgstr ""
+"Železnou rudu přímo z dolu ještě nelze opracovávat - musí být nejdřív "
+"přetavena na železo."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:95
 msgid "Enhance buildings and build a micro brewery"
-msgstr ""
+msgstr "Vylepši budovy a postav minipivovar"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:97
 msgid "Enhance a mine and the tavern, and build a micro brewery."
@@ -211,6 +216,9 @@ msgid ""
 "buildings. Do not enhance a building before you have enough advanced workers "
 "to operate the advanced building!"
 msgstr ""
+"Dělníci získávají úspěšnou prací zkušenosti. Při dostatečné zkušenosti "
+"povýší a mohou pak používat vylešené budovy. Nepřebudovávej budovu dokud "
+"není k dispozici dostatek zkušených pracovníků, kteří ji pak budou používat!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:102
 msgid ""
@@ -230,9 +238,8 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:109
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:111
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:114
-#, fuzzy
 msgid "Build a wood hardener"
-msgstr "Postav lom"
+msgstr "Postav tesařství"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:112
 msgid ""
@@ -242,10 +249,14 @@ msgid ""
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
 msgstr ""
+"Větší a lepší budovy - včetně všech vojenských - vyžadují lepší stavební "
+"materiály. Nejdou postavit jen z klád - dřevo musí tesař vytvrdit na "
+"tvrzené. Vždy pamatuj, že musíš postavit tesařství předtím, než ti dojde "
+"tvrzené dřevo, protože bez něj nelze expandovat."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:120
 msgid "Build a lime kiln and coal economy"
-msgstr ""
+msgstr "Postav vápenku a budovu na uhlí"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:122
 msgid ""
@@ -258,6 +269,8 @@ msgid ""
 "blackwood. One of these is grout, which is produced out of raw stone, water "
 "and coal by a lime-burner."
 msgstr ""
+"Lepší budovy mohou vyžadovat kromě tvrzeného dřeva i další materiály. Jedním "
+" z nich je malta, která se vyrábí ve vápence z kamene, vody a uhlí."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:125
 msgid ""
@@ -289,9 +302,8 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:137
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:139
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:142
-#, fuzzy
 msgid "Build a reed yard"
-msgstr "Postav lom"
+msgstr "Postavit rákosové pole"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:140
 msgid ""
@@ -299,13 +311,15 @@ msgid ""
 "cover roofs. Thatch reed is planted by a gardener around his building, the "
 "reed yard."
 msgstr ""
+"Třetím materiálem nutným pro vylepšení budov je doškový rákos, užívaný pro "
+"zakrytí střechy. Doškový rákos je pěstovaný zahradníkem okolo jeho budovy, "
+"rákosového dvora."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:148
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:150
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:155
-#, fuzzy
 msgid "Build a cattle farm"
-msgstr "Postav lom"
+msgstr "Postav dobytčí farmu"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:151
 msgid ""
@@ -318,6 +332,7 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:153
 msgid "Oxen are bred in cattle farms out of wheat and water."
 msgstr ""
+"Voli jsou chovaní na dobytčích farmách, které potřebují pšenici a vodu."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:165
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:175
@@ -327,7 +342,7 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:219
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:229
 msgid "The Story Begins"
-msgstr ""
+msgstr "Příběh začíná"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:166
 msgid "Thron sighs…"
@@ -337,23 +352,30 @@ msgstr ""
 msgid ""
 "It’s been months, and we are still hiding where the forests are old and dark."
 msgstr ""
+"Už jsou to celé měsíce a stále se ukrýváme v temných a starých hvozdech."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:169
 msgid ""
 "My warriors hunt at day and lie awake at night – listening to the sounds of "
 "the cruel slaughter echoing from afar amongst the ancient trees."
 msgstr ""
+"Mí bojovníci ve dne loví a v noci bdí - poslouchají zvuky krutého vraždění, "
+"které k nám doznívají z daleka mezi prastarými stromy."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:177
 msgid ""
 "We can see the raging flames that swallow Al’thunran from here, miles away."
 msgstr ""
+"Míle odsud, míle daleko, stále vidíme zběsilé plameny, které polykají "
+"Al'thunran."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:179
 msgid ""
 "The red lights flash in the darkness and dance to the rhythm of the war "
 "drums that haunt me even in my nightmares."
 msgstr ""
+"Rudé odlesky se blýskají na nočním nebi a tančí v rytmu válečných bubnů. "
+"Jejich zvuk mě děsí i v mých nočních můrách."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:190
 msgid ""
@@ -361,6 +383,9 @@ msgid ""
 "senseless spilling of blood that had arisen amongst us. It pains me that his "
 "peace only endured for one generation."
 msgstr ""
+"Kosti mého otce odpočívají v míru na místě, na kterém kdysi ukončil "
+"nesmyslné krveprolití, které nás postihlo. Trápí mě, že mír vydržel pouhou "
+"jednu generaci."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:192
 msgid ""
@@ -369,6 +394,10 @@ msgid ""
 "awake, preventing greed or despair from destroying the bonds between us as "
 "well."
 msgstr ""
+"Boldreth, můj věrný spolubojovník a přítel z mládí, je mi v těchto temných "
+"časech oporou a zdrojem klidu a rozvahy. Je povzbuzením nejen pro mne, ale i "
+"pro mé válečníky a stará se o to, aby mezi nimi nevznikaly zbytečné šarvátky "
+"a třenice, které by ohrozily naši soudržnost."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:202
 msgid ""
@@ -395,6 +424,11 @@ msgid ""
 "flames. The Throne Among the Trees, the symbol of unity and peace among our "
 "kin, became the wedge that drives us apart."
 msgstr ""
+"Příběhy, které vypráví, jsou plné smutných skutků našich bližních. Celé noci "
+"jsem lehával a oka nezamhouřil, nespočinul, unaven více, než kdokoli může "
+"uvěřit. Přesto, kdykoli zavřu oči, vidím pevnost postavenou mým otcem jak ji "
+"sžírají plameny. Trůn mezi stromy, symbol jednoty a míru našeho lidu se stal "
+"klínem, který nás rozdělil."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:221
 msgid ""
@@ -421,6 +455,11 @@ msgid ""
 "wilderness for so long – but I never thought my brothers would engage in "
 "this senseless battle for so long either."
 msgstr ""
+"Boldreth je den ode dne skleslejší. Duch mých druhů upadá s tím, jak se "
+"přibližuje zima a my stále nebydlíme v ničem jiném, než chýších a táborech. "
+"Nikdy jsem nepředpokládal, že zůstaneme v téhle divočině tak dlouho - ale "
+"nikdy jsem také nemyslel, že se mí bratři ponoří do téhle nesmyslné bitvy na "
+"tak dlouho."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:233
 msgid ""
@@ -432,7 +471,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:239
 msgid "Somebody Comes up to You"
-msgstr ""
+msgstr "Kdosi k tobě přišel"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:240
 msgid "An old man says…"
@@ -443,6 +482,8 @@ msgid ""
 "Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my counsel through these darkened days."
 msgstr ""
+"Buď pozdraven, veliteli. Jsem Khantrukh a prožil jsem už mnoho zim. Dovol mi "
+"prosím pomoci ti radou v těchto nelehkých dobách."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:243
 msgid ""
@@ -462,7 +503,7 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:441
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:450
 msgid "The Advisor"
-msgstr ""
+msgstr "Rádce"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:250
 msgid "Khantrukh notes…"
@@ -480,6 +521,9 @@ msgid ""
 "ancestors. We must always respect and care for them. What we take, we must "
 "give back again."
 msgstr ""
+"Ale nikdy nezapomeň - tyto lesy jsou naším dědictvím, svěřené nám našimi "
+"předky. Musíme je respektovata pečovat o ně. Co si vezmeme, musíme navrátit "
+"zase zpět."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:255
 msgid ""
@@ -489,7 +533,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:261
 msgid "In the Night"
-msgstr ""
+msgstr "V noci..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:262
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:274
@@ -502,6 +546,8 @@ msgid ""
 "north. The fires are still burning, satisfying their hunger upon my father’s "
 "legacy."
 msgstr ""
+"V další bezesné noci jsem vyšel na kopec a pozoroval sever. Ohně stále hoří, "
+"uspokojujíc svůj hlad po otcově díle."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:265
 msgid ""
@@ -511,7 +557,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:273
 msgid "At the Tomb"
-msgstr ""
+msgstr "U hrobky"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:275
 msgid ""
@@ -528,7 +574,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:285
 msgid "The Other Day"
-msgstr ""
+msgstr "Další den"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:286
 msgid "Thron says thoughtfully…"
@@ -539,6 +585,8 @@ msgid ""
 "Some time ago, Boldreth came to me. His advice was to move to a place closer "
 "to home – to strike at the first sign of my brothers’ forces wavering."
 msgstr ""
+"Před nějakým časem za mnou přišel Boldreth. Radil přesunout se blíž k domovu "
+" - a udeřit při prvním náznaku pohybu bratrových vojsk."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:289
 msgid ""
@@ -550,7 +598,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:295
 msgid "The Oath"
-msgstr ""
+msgstr "Přísaha"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:296
 msgid "Thron looks furious…"
@@ -562,10 +610,14 @@ msgid ""
 "the dark forest. We listened in horror as he told us of the atrocities "
 "taking place in Al’thunran."
 msgstr ""
+"Dnes mí bojovníci našli starého muže, jak nemocný a zraněný hledal cestu "
+"lesem. Poslouchali jsme plni zděšení jeho vyprávění o krutostech, které se "
+"dějí v Al'thunran."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:299
 msgid "I hereby renew my oath – I will stop this madness at any cost!"
 msgstr ""
+"Tady obnovuji svou přísahu - musím zastavit toto šílenství za jakoukoli cenu!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:305
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:320
@@ -577,7 +629,7 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:422
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:431
 msgid "Your Loyal Companion"
-msgstr ""
+msgstr "Tvůj věrný společník"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:306
 msgid "Brave Boldreth steps to your side…"
@@ -590,6 +642,10 @@ msgid ""
 "to Al’thunran. Too long have we waited while our brethren have fought on the "
 "battlefield, and our axes and swords have turned rusty over time."
 msgstr ""
+"Tak ty nás chceš připravit na delší pobyt v těchto lesech, Thronene? Ačkoliv "
+"je toto moudré rozhodnutí, stejně mé srdce touží po slavném návratu do "
+"Al’thunran. Příliš dlouho jsme čekali zatímco naši bratři bojovali na "
+"bitevním poli a naše sekery a meče mezitím rezavěli."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:314
 msgid "Khantrukh joins in…"
@@ -601,6 +657,9 @@ msgid ""
 "with you. The rocks close to our camp are shrinking fast under our workers’ "
 "tools, and it is a matter of little time only before they are all gone."
 msgstr ""
+"Prosím o prominutí, náčelníku, ale chci s tebou mluvit o vážné věci. Skal u "
+"našeho tábora je stále méně a rychle mizí pod nářadím našich dělníků. Je "
+"pouze otázkou času, než zmizí docela."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:322
 msgid "Boldreth jumps up…"
@@ -620,7 +679,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:332
 msgid "Old man? Disrespectful youth!"
-msgstr ""
+msgstr "Starého muže? Neuctivé mládí!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:337
 msgid "Khantrukh nods satisfied…"
@@ -628,7 +687,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:338
 msgid "At last! These rocks should last for a while."
-msgstr ""
+msgstr "No konečně! Tyhle skály by měly na chvíli stačit."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:343
 msgid "Boldreth exclaims…"
@@ -639,6 +698,8 @@ msgid ""
 "Just look at that! In the east is the great mountain of Kal’mavrath! I "
 "wonder what treasures nature might have hidden beneath its majestic flanks!"
 msgstr ""
+"To je ale pohled! Na východě je majestátní hora Kal'mavrath! Zajímalo by mě, "
+"jaké poklady mohou ležet ukryté pod jejími svahy!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:346
 msgid ""
@@ -646,6 +707,9 @@ msgid ""
 "once in a while! Let us send out some of those who understand the stone’s "
 "tongue to unravel the mountain’s secrets!"
 msgstr ""
+"Další šance, jak mohou starší a zkušení prokázat, že jsou ještě užiteční! "
+"Několik našich lidí dobře rozumí tajemstvím kamení a nerostů. Pošleme je "
+"tedy na východ, ať odhalí tajemství ukrytá v hoře!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:352
 msgid "Boldreth laughs…"
@@ -656,6 +720,8 @@ msgid ""
 "By Chat’Karuth’s beard, this is amazing! Just imagine what we can use this "
 "coal and iron ore for!"
 msgstr ""
+"U brady Chat'Karutha, to je teprve něco! Jen domyslet, co se dá všechno s "
+"tímhle uhlím a železnou rudou podniknout!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:355
 msgid "It might even be enough to…"
@@ -672,6 +738,10 @@ msgid ""
 "up on the mountain in this bitter cold, and providing these supplies may not "
 "be easy."
 msgstr ""
+"To je všechno pravda, ale zamyslíme se nad tím později, když teď budeme mít "
+"jiné starosti. Horníci budou určitě požadovat větší příděly jídla za práci "
+"vysoko v horách, zvláště teď, když se ochlazuje. A dodat jim zásoby nemusí "
+"být až tak snadné."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:367
 msgid "Boldreth nods…"
@@ -679,7 +749,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:368
 msgid "I have to hand it to you: you are right here, old man."
-msgstr ""
+msgstr "Musím přiznat, že v tomhle máš pravdu, staříku."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:370
 msgid ""
@@ -687,6 +757,9 @@ msgid ""
 "hunt down more of them. And, of course, the people would cheer a new tavern "
 "– hey, we might call it ‘Thron’s Pride’ or so if you want!"
 msgstr ""
+"Vypadá to, že tu po lesích běhá dost zvěře - můžeme jich zkusit pár ulovit. "
+"A potom, každý určitě přivítá novou kuchyň - hele, co jí tak říkat 'Thronova "
+"chlouba', jak by se ti to líbilo, co?"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:376
 msgid "The elder jumps into the air…"
@@ -694,7 +767,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:377
 msgid "Wisdom commands to seek variety."
-msgstr ""
+msgstr "Moudrost nás učí hledat rozmanitost."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:379
 msgid ""
@@ -709,13 +782,15 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:386
 msgid "Our hunters are out in the forests, Thron."
-msgstr ""
+msgstr "Naši lovci jsou v lesích, Throne."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:388
 msgid ""
 "I promise you, before the sun sets today you will have a magnificent meal "
 "fit for the chieftain of all clans!"
 msgstr ""
+"Slibuji ti, že než dnes slunce zapadne, budeš mít připravenu hostinu tak "
+"bohatou, jakou by nepohrdl ani velitel všech klanů!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:393
 msgid "Khantrukh gazes over the plains…"
@@ -727,10 +802,13 @@ msgid ""
 "the wind? And I believe the baker is just on his way here, with his most "
 "delicious bread reserved for our chieftain alone!"
 msgstr ""
+"Není to nádhera? Pohled přes zlaté lány, klasy poklidně se vlnící a tančící "
+"ve větru? A myslím, že pekař tu bude co nevidět, s nejchutnějšími chlebovými "
+"plackami jen pro našeho velitele!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:398
 msgid "A Beautiful Morning"
-msgstr ""
+msgstr "Nádherné ráno"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:399
 msgid "Thron recognizes…"
@@ -743,6 +821,9 @@ msgid ""
 "Their songs filled the air until deep in the night, and they were in higher "
 "spirits still the day after."
 msgstr ""
+"Včera poprvé otevřela nová hospoda. Nemám náladu na slavení, přesto jsem si "
+"všiml, jak moc tento kousek domova znamená pro mé lidi. Jejich písně zněly "
+"pod oblohou do pozdní noci a druhý den ráno vypadali všichni spokojenější."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:402
 msgid ""
@@ -760,6 +841,11 @@ msgid ""
 "ore has to be melted into iron so that it is ready to be forged into "
 "whatever we want. And we need the coal to keep the smelter’s ovens burning."
 msgstr ""
+"No a tak teď, když máme doly i jídlo na jejich udržení v chodu, je načase "
+"převést do užitečnějšího stavu to, co pro nás naši stateční horníci získali. "
+"Máme dost železné rudy, ze které vytavíme železo a vykováme z něj cokoli "
+"budeme považovat za vhodné. Potřebujeme uhlí, aby dostatečně vyhřálo "
+"slévárenské pece."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:414
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:458
@@ -771,6 +857,8 @@ msgid ""
 "Our miners are digging up less and less by the day! We have to go deeper, "
 "closer to the mountain’s core, if we want more of its treasures!"
 msgstr ""
+"Každým dnem horníci vykopou méně a méně! Musíme hlouběji, blíže ke kořenům "
+"hory, jestli chceme získat její poklady!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:417
 msgid ""
@@ -778,6 +866,9 @@ msgid ""
 "voluntarily into these places. We should reward this bravery with greater "
 "rations for them. And a pint of beer or two will keep their spirits high."
 msgstr ""
+"V tak hlubokých tunelech je temno a zima a musíme vděčně odměnit těch "
+"nemnoho statečných, kteří se odvážně pouštějí do takových míst. Musíme jim "
+"dát větší porce jídla a žejdlík piva nebo radši dva, na udržení dobré nálady."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:423
 msgid "Boldreth seems concerned…"
@@ -789,10 +880,13 @@ msgid ""
 "warriors into some crumbling huts, and even less so in times as dangerous as "
 "ours!"
 msgstr ""
+"Právě jsem zjistil, že nám dochází tvrzené dřevo! Naši bojovníci nemůžou "
+"přebývat v nějakých vetchých chatrčích, a už vůbec ne v dobách tak "
+"nebezpečných, jako jsou ty naše!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:426
 msgid "We need a wood hardener, and we need one now!"
-msgstr ""
+msgstr "Potřebujeme tesaře a to hned!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:432
 msgid "Boldreth smiles…"
@@ -803,6 +897,8 @@ msgid ""
 "Well, old friend, this should ensure that our fortifications do not break "
 "down with our foes’ first battle cry! Now we can expand safely!"
 msgstr ""
+"Tak, příteli, tohle nám zaručí, že se naše opevnění nezřítí při prvním "
+"válečném pokřiku nepřátel! Teď můžeme rozšiřovat naše území!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:435
 msgid ""
@@ -810,6 +906,9 @@ msgid ""
 "thus we could, in times of need, build a fortress such as the world has "
 "never seen before!"
 msgstr ""
+"Přesto nemůže uškodit, když si dáme do zásoby nějakou maltu pro další "
+"výpady. Jen proto, abychom v případě nouze mohli vybudovat pevnost, jakou "
+"ještě svět neviděl!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:442
 msgid "Khantrukh steps in…"
@@ -823,10 +922,14 @@ msgid ""
 "nights in the rain, but I just can’t find any sleep with these raindrops "
 "dripping on my face!"
 msgstr ""
+"\"Náčelníku, to je nehoráznost! Dokážeme připravit maltu na mohutné opevnění "
+"i vznosné budovy - přesto, nic z toho nevyspraví naše střechy tak, aby "
+"netekly! Možná mladým nevadí, že tráví noci v dešti, ale já nedokážu usnout "
+"ani na chvíli, když mi do obličeje padají vodní kapky!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:445
 msgid "Now this is a problem we should do something about!"
-msgstr ""
+msgstr "To je problém, který musíme naléhavě řešit!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:451
 msgid "Khantrukh seems relieved…"
@@ -837,10 +940,12 @@ msgid ""
 "Wonderful! Our roofs are not dripping anymore, and we have all the material "
 "we need for, well, whichever monumental building we see fit!"
 msgstr ""
+"Báječné! Střechy už netečou a máme materiálu, no, na jakoukoli budovu si jen "
+"zamanem!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:457
 msgid "We Need Oxen!"
-msgstr ""
+msgstr "Potřebujeme osly!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:459
 msgid ""
@@ -849,6 +954,10 @@ msgid ""
 "fast as we need them to. I suggest we give them some support by breeding "
 "oxen."
 msgstr ""
+"Jak se naše území stále zvětšuje, provoz na cestách ohromně narůstá. Chudáci "
+"naši nosiči, ani kdyby se uchodili, nestačí přenášet zboží tak rychle jak "
+"potřebujeme. Navrhuji abychom jim ulehčili tím, že jim přidělíme volské "
+"povozy."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:461
 msgid ""
@@ -856,10 +965,13 @@ msgid ""
 "much stronger and very frugal: all we need is wheat and water to breed them "
 "and they will do their work on the roads loyally and reliably."
 msgstr ""
+"Jsou to skvělá zvířata: vůl je tak rychlý jako člověk a přitom je daleko "
+"silnější a navíc velice nenáročný: pro jejich chov nepotřebujeme víc, než "
+"pšenici a vodu a oni potom spolehlivě zastanou spoustu práce na cestách."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:466
 msgid "Mission Complete"
-msgstr ""
+msgstr "Mise splněna"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:467
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:479
@@ -872,6 +984,8 @@ msgid ""
 "The other day Boldreth asked me to accompany him to the new inn. It would "
 "cheer me up, he said."
 msgstr ""
+"Jednoho dne mě Boldreth přemluvil, abych jej doprovodil do nové hospody. "
+"Povzbudí mě to, sliboval."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:470
 msgid ""
@@ -880,6 +994,10 @@ msgid ""
 "encouragement, one of my warriors ran into the inn. He had been far out in "
 "the forest for the past days and I could see how weary he was."
 msgstr ""
+"Když jsem se rozhlédl, uviděl jsem tváře svých věrných druhů, kteří věří, že "
+"je dokážu provést těmito temnými dny. Avšak předtím než jsem mohl vyslovit "
+"slova vděčnosti a povzbuzení, vběhl do hospody jeden z mých bojovníků. Byl v "
+"těchto dnech daleko v lesích a bylo poznat, jak zmožený se cítil."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:472
 msgid "The news he brought changed everything…"
@@ -887,23 +1005,26 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:473
 msgid "Victory"
-msgstr ""
+msgstr "Vítězství"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:474
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Splnil jsi tuto misi. Můžeš pokračovat ve hře, nebo se přesunout do další "
+"mise."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:478
 msgid "One Full Moon Night"
-msgstr ""
+msgstr "Jedné měsíční noci"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:480
 msgid ""
 "One night, when the moon shone brightly, I climbed to the peak of "
 "Kal’mavrath."
 msgstr ""
+"Jedné noci, když svítil měsíc, jsem vystoupil na vrchol hory Kal'mavrath."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:482
 msgid ""
@@ -912,10 +1033,15 @@ msgid ""
 "I fear the moment I will see Al’thunran again – will there be anything but "
 "ashes and wasted ruins left of our once beautiful capital when we get there?"
 msgstr ""
+"Když jsem se zahleděl k horizontu, stále jsem v dálce viděl purpurové "
+"záblesky. Je až neuvěřitelné, s jakým zápalem mí bratři bojují a prodlužují "
+"tuto válku. Děsím se chvíle, kdy opět spatřím Al'thunran - bude tam ještě "
+"něco kromě popela a zbořených zdí? Na místě, kde kdysi bývalo naše nádherné "
+"město?"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:486
 msgid "Another Cold Day"
-msgstr ""
+msgstr "Další studený den"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:487
 msgid "Thron looks worried…"
@@ -927,26 +1053,32 @@ msgid ""
 "endure. The day we may return cannot be far anymore – it must not be far "
 "anymore."
 msgstr ""
+"Zima je blízko. Přestože mnozí z nás trpí chladem, musíme vydržet. Den "
+"našeho návratu už nemůže být daleko - nesmí být daleko."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:490
 msgid ""
 "I prayed that it might get warmer again, as I prayed that the war would "
 "finally come to an end."
 msgstr ""
+"Modlil jsem se, ať se země opět ohřeje, stejně jako jsem se modlil za konec "
+"této války."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:492
 msgid "So far, it seems that neither prayer was fulfilled."
-msgstr ""
+msgstr "Zatím se však nezdá, že by některá z mých modliteb byla vyslyšena."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:496
 msgid "A friendly village has joined us!"
-msgstr ""
+msgstr "Přátelská vesnice se k nám připojila!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:498
 msgid ""
 "We have found a village with friendly and productive people, impressed by "
 "our wealth, technology and strength."
 msgstr ""
+"Objevili jsme vesnici, obývanou přítelskými a pracovitými lidmi, kterým "
+"imponuje naše bohatství, technologe a síla."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:500
 msgid ""
@@ -970,1055 +1102,3 @@ msgid_plural "New Objectives"
 msgstr[0] "Nový úkol"
 msgstr[1] "Nové úkoly"
 msgstr[2] "Nové úkoly"
-
-#~ msgid "Nice And Easy Does It All the Time"
-#~ msgstr "Krásně jednoduché po celou dobu"
-
-#~ msgid ""
-#~ "I am sorry, but will I have to tear this down again. We might need the "
-#~ "space here later on. If I am too slow for you, you might want to play a "
-#~ "real game and just find everything out for yourself. Otherwise, please "
-#~ "bear with me, I am not the youngest and quickest anymore."
-#~ msgstr ""
-#~ "Omlouvám se ale budu to muset opět strhnout. Později budeme toto místo "
-#~ "potřebovat. Pokud jsem pro tebe příliš pomalý, možná by bylo lepší "
-#~ "spustit normální hru a zjistit si vše sám. V opačném případě se mnou "
-#~ "prosím zůstaň, už nejsem nejmladší ani nejrychlejší."
-
-#~ msgid "Welcome to the Widelands Tutorial!"
-#~ msgstr "Vítej v tutoriálech Widelands!"
-
-#~ msgid "Welcome to Widelands!"
-#~ msgstr "Vítej ve Widelands"
-
-#~ msgid ""
-#~ "Widelands is a slow-paced build-up strategy game with an emphasis on "
-#~ "construction, not destruction. This tutorial will guide you through the "
-#~ "basics of the game."
-#~ msgstr ""
-#~ "Widelands je budovatelská strategická v pomalém tempu s důrazem na "
-#~ "stavbu, ne ničení. Tento tutoriál tě provede základy hry."
-
-#~ msgid "Dismiss this box by left-clicking on the button below."
-#~ msgstr "Tento panel můžeš zavřít kliknutím na tlačítko dole."
-
-#~ msgid "Diving In"
-#~ msgstr "Vnoření"
-
-#~ msgid "Let’s dive right in!"
-#~ msgstr "Ponořme se do toho!"
-
-#~ msgid ""
-#~ "There are three different tribes in Widelands: the Barbarians, the Empire "
-#~ "and the Atlanteans. All tribes have a different economy, strength and "
-#~ "weaknesses, but the general gameplay is the same for all. We will play "
-#~ "the barbarians for now."
-#~ msgstr ""
-#~ "Ve Widelands jsou tři různé kmeny: barbaři, císařství a atlanťané. Každý "
-#~ "kmen má jinou ekonomiku, silné a slabé stránky, ale obecné herní principy "
-#~ "jsou stejné pro všechny. Nyní budeme hrát za barbary."
-
-#~ msgid ""
-#~ "You will usually start the game with one headquarters. This is the big "
-#~ "building with the blue flag in front of it. The headquarters is a "
-#~ "warehouse that stores wares, workers and soldiers. Some wares are needed "
-#~ "for building houses, others for making other wares. Obviously, the wares "
-#~ "in the headquarters will not last forever, so you must make sure to "
-#~ "replace them. The most important wares in the early game are the basic "
-#~ "construction wares: logs and raw stone. Let’s make sure that we do not "
-#~ "run out of logs. For this, we need a lumberjack and a hut for him to stay "
-#~ "in."
-#~ msgstr ""
-#~ "Na začátku hry máš obvykle jednu základnu. To je ta velká budova s modrou "
-#~ "vlajkou před vstupem. Základna slouží jako skladiště, kde se přechovává "
-#~ "zboží, pracovníci a vojáci. Některé zboží je potřebné ke stavbě domů, z "
-#~ "jiného se vyrábí další zboží. Zboží v základně pochopitelně nevydrží "
-#~ "navěky, proto musíš zajistit také jeho přísun. Nejdůležitějším zbožím na "
-#~ "začátku hry je základní stavební materiál: klády a kámen. Nyní zařídíme, "
-#~ "aby nám nedošly klády. K tomu potřebujeme dřevorubce a chatu, ve které "
-#~ "bude přebývat."
-
-#~ msgid ""
-#~ "We need to find a nice place for the lumberjack’s hut. To make this "
-#~ "easier, we can activate ‘Show Building Spaces’. There are two ways you "
-#~ "can do this, either by clicking on the ‘Show Building Spaces’ button at "
-#~ "the bottom of the screen, which is the fourth one from the left. Or you "
-#~ "can use the SPACE key to toggle it."
-#~ msgstr ""
-#~ "Pro dřevorubcovu chatu musíme najít hezké místo. To si můžeme usnadnit "
-#~ "tak, že aktivujeme nápovědu k výstavbě. Lze to provést dvěma způsoby: buď "
-#~ "můžeš kliknout na tlačítko nápovědy k výstavbě na spodním okraji "
-#~ "obrazovky (čtvrté zleva), nebo můžeš nápovědu přepínat pomocí mezerníku."
-
-#~ msgid "Left-click the ‘OK’ button to close this box and then try it."
-#~ msgstr ""
-#~ "Zavři tento panel kliknutím na tlačítko \"OK\" a pak si to vyzkoušej."
-
-#~ msgid "Enable the showing of building spaces"
-#~ msgstr "Zapnout zobrazení míst pro stavbu."
-
-#~ msgid "Show Building Spaces"
-#~ msgstr "Zobrazit stavební místa."
-
-#~ msgid ""
-#~ "It is easier to understand what type of buildings can be built on which "
-#~ "field when the symbols for the building spaces are enabled."
-#~ msgstr ""
-#~ "Je snazší rozeznat, jaký typ budov lze stavět na jakém políčku, když je "
-#~ "zapnuté zobrazení stavebních míst."
-
-#~ msgid ""
-#~ "Do so now either by pressing SPACE or by clicking the fourth button from "
-#~ "the left at the very bottom of the screen. Right-click on this window and "
-#~ "then give it a try."
-#~ msgstr ""
-#~ "Provede se to buď stiskem mezerníku nebo klikem na čtvrté tlačítko zleva "
-#~ "v dolní části obrazovky. Klikni pravým tlačítkem na toto okno a zkus to."
-
-#~ msgid "Lumberjack’s Spot"
-#~ msgstr "Dřevorubcovo umístění"
-
-#~ msgid ""
-#~ "There you go. I will explain about all those symbols in a minute. First, "
-#~ "let me show you how to make a lumberjack’s hut and how to connect it with "
-#~ "a road. There is a sweet spot for a lumberjack right next to those trees. "
-#~ "I’ll describe the steps I will take and then ask you to click on the ‘OK’ "
-#~ "button for me to demonstrate."
-#~ msgstr ""
-#~ "A je to. Všechny ty symboly ti vysvětlím za chvilku. Nejprve ti ukážu, "
-#~ "jak postavit chatu dřevorubce a jak ji cestou připojit k základně. Hned "
-#~ "vedle těch stromů je krásné místečko pro dřevorubce. V následujícím "
-#~ "panelu ti vysvětlím všechny kroky a jakmile klikneš na tlačítko \"OK\", "
-#~ "tak ti je i předvedu."
-
-#~ msgid "Building the Lumberjack"
-#~ msgstr "Stavba dřevorubce"
-
-#~ msgid ""
-#~ "First, I’ll left-click on the symbol where I want the lumberjack’s hut to "
-#~ "be built. A window will appear where I can choose between buildings. "
-#~ "Because I’ll click a yellow house symbol – which means that its field can "
-#~ "house medium and small buildings – I am presented with all the medium "
-#~ "buildings that I can build. The lumberjack’s hut is a small building, so "
-#~ "I will go on to select the small buildings tab. Then I’ll choose the "
-#~ "lumberjack’s hut."
-#~ msgstr ""
-#~ "Nejprve kliknu levým tlačítkem na symbol, kde chci postavit dřevorubcovu "
-#~ "chatu. Objeví se okno, kde můžu vybírat mezi budovami. Protože kliknu na "
-#~ "symbol žlutého domu - to znamená, že na pozemku pod ním lze stavět "
-#~ "středně velké a malé budovy - zobrazí se mi všechny střední budovy, které "
-#~ "mohu stavět. Chata dřevorubce je malá budova, proto se dále přepnu na "
-#~ "panel s malými budovami. Tam vyberu chatu dřevorubce."
-
-#~ msgid ""
-#~ "Click the ‘OK’ button to watch me. I’ll go really slowly: I will click – "
-#~ "then select the tab – and finally I’ll choose the building."
-#~ msgstr ""
-#~ "Klikni na tlačítko \"OK\" a sleduj mě. Budu postupovat opravdu pomalu: "
-#~ "kliknu na žlutý dům - pak změním panel - a nakonec vyberu budovu."
-
-#~ msgid ""
-#~ "That won’t do yet. I still need to connect the lumberjack’s hut to the "
-#~ "rest of my road network. After ordering the construction site, I was "
-#~ "automatically put into road building mode, so all I have to do is click "
-#~ "on the blue flag in front of my headquarters."
-#~ msgstr ""
-#~ "To ještě nestačí. Ještě musím připojit dřevorubcovu chatu ke zbytku "
-#~ "dopravní sítě. Když jsem založil staveniště, dostal jsem se automaticky "
-#~ "do režimu stavby cest, takže jediné, co musím udělat, je kliknout na "
-#~ "modrou vlajku před základnou."
-
-#~ msgid "Waiting for the Lumberjack to Go Up"
-#~ msgstr "Čekání než se postaví dřevorubec."
-
-#~ msgid ""
-#~ "Now watch closely while a builder leaves the headquarters and goes to the "
-#~ "construction site. Also, a carrier will take position in between the two "
-#~ "blue flags and carry wares from one blue flag to the other."
-#~ msgstr ""
-#~ "Pozorně teď sleduj, jak stavař vychází ze základny a míří na staveniště. "
-#~ "Své místo zaujme také nosič: postaví se mezi dvě modré vlajky a bude "
-#~ "přenášet zboží od jedné vlajky ke druhé."
-
-#~ msgid "Placing Another Flag"
-#~ msgstr "Umístění další vlajky"
-
-#~ msgid ""
-#~ "Nice how they are working, isn’t it? But the poor carrier has a very long "
-#~ "way to go. We can make it easier for him (and more efficient for us) when "
-#~ "we place another blue flag on the road."
-#~ msgstr ""
-#~ "Jde jim to hezky, že? Jenom chudák nosič musí překonávat velký kus cesty. "
-#~ "Můžeme mu to usnadnit (a docílit vyšší efektivity), když na cestu přidáme "
-#~ "další modrou vlajku."
-
-#~ msgid ""
-#~ "You try it this time: click on the yellow flag symbol in between the two "
-#~ "blue flags we just placed and then click on the"
-#~ msgstr ""
-#~ "Teď si to zkus sám: klikni na symbol žluté vlajky uprostřed cesty mezi "
-#~ "dvěma modrými vlajkami, které jsem zrovna umístil, a pak klikni na"
-
-#~ msgid "build flag symbol."
-#~ msgstr "symbol pro umístění vlajky"
-
-#~ msgid "Build a flag to divide the road to the lumberjack"
-#~ msgstr "Rozděl cestu k dřevorubci postavením vlajky"
-
-#~ msgid "Build a Flag on the Road"
-#~ msgstr "Postav vlajku na cestě"
-
-#~ msgid ""
-#~ "The shorter your road segments are, the faster your wares will be "
-#~ "transported. You should therefore make sure that your roads have as many "
-#~ "flags as possible."
-#~ msgstr ""
-#~ "Čím jsou úseky tvých cest kratší, tím rychleji je tvé zboží přepravováno. "
-#~ "Proto by jsi měl zajistit, že tvé cesty budou mít tolik vlajek, kolik je "
-#~ "jen možné."
-
-#~ msgid ""
-#~ "Build a blue flag now in the middle of the road that connects your "
-#~ "headquarters to your lumberjack’s hut."
-#~ msgstr ""
-#~ "Nyní postav modrou vlajku v prostředku cesty, která spojuje tvou hlavní "
-#~ "budovu s tvým dřevorubcem."
-
-#~ msgid "Waiting For the Hut to be Finished"
-#~ msgstr "Čekání než se chata dokončí"
-
-#~ msgid "Well done! Let’s wait till the hut is finished."
-#~ msgstr "Výborně! Počkáme, až bude chata dokončena."
-
-#~ msgid ""
-#~ "If you want things to go faster, simply use the PAGE UP key on your "
-#~ "keyboard to increase the game speed. You can use PAGE DOWN to make the "
-#~ "game slower again."
-#~ msgstr ""
-#~ "Pokud chceš věci urychlit, jednoduše stiskni na klávesnici PAGE UP a hra "
-#~ "se zrychlí. Klávesou PAGE DOWN můžeš hru zase zpomalit."
-
-#~ msgid "Lumberjack is Done"
-#~ msgstr "Dřevorubec je hotov"
-
-#~ msgid ""
-#~ "Excellent. The lumberjack’s hut is done. A lumberjack will now move in "
-#~ "and start chopping down trees, so our logs income is secured for now. Now "
-#~ "on to the raw stone."
-#~ msgstr ""
-#~ "Výborně. Dřevorubcova chajda je hotova. Dřevorubec se dá nyní do práce a "
-#~ "začne kácet stromy, takže náš přísun kmenů bude prozatím zajištěn. A teď "
-#~ "k surovému kameni."
-
-#~ msgid "Some Stones Were Found"
-#~ msgstr "Byly nalezeny nějaké kameny"
-
-#~ msgid "Getting a Quarry Up."
-#~ msgstr "Stavba lomu"
-
-#~ msgid ""
-#~ "Stones can be mined in granite mines, but the easier way is to build a "
-#~ "quarry next to some stones lying around. As it happens, there is a pile "
-#~ "of them just to the west (left) of your headquarters. I will teach you "
-#~ "now how to move your view over there."
-#~ msgstr ""
-#~ "Kameny lze těžit v žulových dolech ale je jednodušší postavit lom vedle "
-#~ "kamenů ležících v okolí. Jak to tak bývá, je zde hromada kamení na západ "
-#~ "(vlevo) od tvé hlavní budovy. Nyní tě naučím, jak se tam přesunout "
-#~ "kamerou."
-
-#~ msgid ""
-#~ "There are two ways to move your view. The first one is using the cursor "
-#~ "keys on your keyboard. Go ahead and try this out."
-#~ msgstr ""
-#~ "Jsou dva způsoby, jak přesunout kameru. První je pomocí šipek na "
-#~ "klávesnici. Tak do toho, zkus to."
-
-#~ msgid "Click the ‘OK’ button and then move the view using the cursor keys"
-#~ msgstr "Klikni na \"OK\" a pak přesuň kameru pomocí šipek na klávesnici."
-
-#~ msgid "Move your view with the cursor keys"
-#~ msgstr "Posuň svůj výhled pomocí kurzorových kláves"
-
-#~ msgid "Moving Your View"
-#~ msgstr "Posun výhledu"
-
-#~ msgid ""
-#~ "Moving your view is essential to get a complete overview of your whole "
-#~ "economy. There are two ways to move your view in Widelands."
-#~ msgstr ""
-#~ "Pohyb kamery je základ pro to abys měl přehled o své ekonomice. Jsou dva "
-#~ "způsoby jak ve Widelands lze pohybovat kamerou."
-
-#~ msgid "The first one is to use the cursor keys on your keyboard."
-#~ msgstr "První je použít šipky na klávesnici."
-
-#~ msgid ""
-#~ "The second one is the more common and faster one: press-and-hold the "
-#~ "right mouse button anywhere on the map, then move your mouse around and "
-#~ "you’ll see the view scroll."
-#~ msgstr ""
-#~ "Druhý je obvyklejší a rychlejší: stikni a drž pravé tlačítko myši "
-#~ "kdekoliv na mapě, když pohneš myší, můžeš vidět jak se tvá kamera "
-#~ "pohybuje."
-
-#~ msgid "Other Ways to Move the View"
-#~ msgstr "JIné způsoby pohybu pohledu"
-
-#~ msgid ""
-#~ "Excellent. Now there is a faster way to move, using the mouse instead:"
-#~ msgstr ""
-#~ "Výborně. Teď je tu ještě rychlejší způsob pohybu tentokrát za pomoci myši:"
-
-#~ msgid ""
-#~ "Simply right-click-and-hold anywhere on the map, then drag the mouse and "
-#~ "instead of the cursor, the view will be moved. Try it."
-#~ msgstr ""
-#~ "Jednoduše klikněte-a-držte pravým tlačítkem kdekoliv na mapě, poté "
-#~ "posuňte myší a místo aby se pohnul kurzor, pohne se celý váš pohled na "
-#~ "mapu. Zkuste si to."
-
-#~ msgid "Onward to the Quarry"
-#~ msgstr "Kupředu, k lomu"
-
-#~ msgid "Great. Now about that quarry..."
-#~ msgstr "Skvěle. Teď k tomu lomu..."
-
-#~ msgid "How to Build a Quarry"
-#~ msgstr "Jak postavit lom"
-
-#~ msgid ""
-#~ "Build a quarry next to those stones here. Remember how I did it earlier?"
-#~ msgstr ""
-#~ "Vybuduj lom poblíž kamenů které zde vidíš. Pamatuješ si, jak jsem to "
-#~ "dělal před chvílí?"
-
-#~ msgid ""
-#~ "Make sure that you are showing the building spaces, then just click on "
-#~ "the space were you want the building to be, choose it from the window "
-#~ "that appears and it is placed. Maybe this is a good time to explain about "
-#~ "all those building space symbols we activated earlier."
-#~ msgstr ""
-#~ "Ujisti se, že máš zobrazena místa pro stavby, pak klikni na místo, kam by "
-#~ "si chtěl postavit budovu, vyber budovu v okně, které se objeví a tím ji "
-#~ "umístíš. Možná je nyní vhodná doba na vysvětlení všech symbolů pro "
-#~ "výstavbu budov, které jsme před chvílí aktivovali."
-
-#~ msgid ""
-#~ "You can build four things on fields in Widelands: Flags, small houses, "
-#~ "medium houses and big houses. But not every field can hold everything. "
-#~ "The build space symbols ease recognition:"
-#~ msgstr ""
-#~ "Ve Widelands můžeš stavět 4 věci: vlajky, malé budovy, střední budovy a "
-#~ "velké budovy. Avšak ne každé pole je vhodné ke stavbě všech těchto věcí. "
-#~ "Díky nápovědě ke stavbě je snadné pole rozlišit:"
-
-#~ msgid "Everything can be built on the green house symbol."
-#~ msgstr "Na symbolu zeleného domu může být postaveno cokoliv."
-
-#~ msgid ""
-#~ "Everything except for big buildings can be built on a yellow house symbol."
-#~ msgstr ""
-#~ "Na symbolu žlutého domu může být postaveno cokoliv kromě velkých budov."
-
-#~ msgid "Red building symbols can only hold small buildings and flags."
-#~ msgstr "Červené symboly budov poskytují místo jen na malé budovy a vlajky."
-
-#~ msgid "And finally the yellow flag symbol only allows for flags."
-#~ msgstr "A konečně jen žlutý symbol vlajky umožňuje umístit vlajku."
-
-#~ msgid ""
-#~ "If you place something on a field, the surrounding fields might have less "
-#~ "space for holding buildings, so choose your fields wisely."
-#~ msgstr ""
-#~ "Pokud něco umístíš na pole, okolní pole mohou ztratit  místo na stavbu "
-#~ "budov, takže vybírej moudře."
-
-#~ msgid ""
-#~ "Now go ahead, try it. The quarry is a small building, so if you click on "
-#~ "a medium or big building symbol, you will have to select the small "
-#~ "buildings tab first to find it. Go on, check it out!"
-#~ msgstr ""
-#~ "Teď jdi a zkus si to sám. Lom je malá budova, takže když klikneš na "
-#~ "symbol střední či velké budovy, budeš muset nejprve vybrat kartu malých "
-#~ "budov, abys mohl najít tu svou. Jen si to vyzkoušej!"
-
-#~ msgid "Build a quarry next to the stones"
-#~ msgstr "Postav lom vedle kamení"
-
-#~ msgid ""
-#~ "There are some stones to the west of your headquarters. Build a quarry "
-#~ "right next to them."
-#~ msgstr "Západně od tvé hlavní budovy jsou kameny. Postav vedle nich lom."
-
-#~ msgid ""
-#~ "The quarry is a small building like the lumberjack’s hut. You can "
-#~ "therefore build it on any field that shows a red, yellow or green house "
-#~ "when the building spaces symbols are enabled (Press SPACE for that)."
-#~ msgstr ""
-#~ "Lom je malá budova stejně jako domek dřevorubce. Proto ho můžeš postavit "
-#~ "na jakémkoliv poli, které má červený, žlutý nebo zelený symbol domečku, "
-#~ "pokud jsou zobrazena stavení místa (pro jejich zobrazení stiskni "
-#~ "Mezerník)."
-
-#~ msgid ""
-#~ "Just click on any house symbol next to the stones, select the small "
-#~ "buildings tab in the window that opens up, then click on the quarry "
-#~ "symbol."
-#~ msgstr ""
-#~ "Jen klikni na jakýkoliv symbol domku vedle kamenů, vyber sekci malých "
-#~ "budov v okně které se otevře a poté klikni na symbol kamenolomu."
-
-#~ msgid "Road Building"
-#~ msgstr "Budování cest"
-
-#~ msgid ""
-#~ "Excellent! Directly after placing the building, you have been switched "
-#~ "into road building mode. The new road will start at the flag in front of "
-#~ "your newly placed construction site. You can enter road building mode for "
-#~ "any flag by left-clicking on a flag and selecting"
-#~ msgstr ""
-#~ "Výborně! Okamžitě po umístění budovy jsi v módu pro stavbu silnic. Nová "
-#~ "cesta začne na vlajce před nově umístěným staveništěm. Můžeš vstoupit do "
-#~ "módu pro stavbu silnic pro jakoukoliv vlajku tak, že na vlajku klikneš "
-#~ "levým tlačítkem a vybereš ji"
-
-#~ msgid "the road building symbol."
-#~ msgstr "symbol pro stavbu cest"
-
-#~ msgid ""
-#~ "If you decide you do not want to build a road at this time, you can "
-#~ "cancel road building by clicking on the starting flag of the road and "
-#~ "selecting"
-#~ msgstr ""
-#~ "Pokud se rozhodneš, že teď cestu stavět nechceš, můžeš stavbu cesty "
-#~ "zrušit kliknutím na startovní pozici na cestě a výběrem"
-
-#~ msgid "the abort symbol."
-#~ msgstr "symbol pro zrušení"
-
-#~ msgid ""
-#~ "Now, about this road. Remember: we are already in road building mode "
-#~ "since you just ordered the quarry. You can either make it longer by one "
-#~ "field at a time by left-clicking multiple times on neighboring fields for "
-#~ "perfect control over the route the road takes like so:"
-#~ msgstr ""
-#~ "Teď k téhle cestě. Pamatuj: jsme již v modu pro stavbu silnic od chvíle, "
-#~ "kdy jsi vydal příkaz ke stavbě lomu. Buď můžeš cestu prodloužit o jedno "
-#~ "políčko jednoduše kliknutím levým tlačítkem několikrát na sousedící "
-#~ "políčka abys měl přesnou kontrolu nad stavbou cesty, a to asi takhle:"
-
-#~ msgid ""
-#~ "Or, you can directly click the flag where the road should end like so:"
-#~ msgstr "Případně můžeš kliknout přímo na vlajku, ke které má cesta vést."
-
-#~ msgid ""
-#~ "One more thing: around the field where your road would end, you can see "
-#~ "different markers. They have the following meaning:"
-#~ msgstr ""
-#~ "Ještě jedna věc: okolo políčka kde by měla končit tvá cesta můžeš vidět "
-#~ "různé ukazatele. Mají následující význam :"
-
-#~ msgid ""
-#~ "The terrain is flat here. Your carriers will be very swift on this "
-#~ "terrain."
-#~ msgstr ""
-#~ "Zde je terén rovný. Tví nosiči budou velmi rychlí na tomto typu terénu."
-
-#~ msgid ""
-#~ "There is a small slope to climb to reach this field. This means that your "
-#~ "workers will be faster walking downhill than they will be walking uphill."
-#~ msgstr ""
-#~ "Je tu malé stoupání, které je třeba zdolat  cestou na toto pole. To "
-#~ "znamená, že tví pracovníci budou rychleji zcházet do údolí než stoupat "
-#~ "nahoru."
-
-#~ msgid ""
-#~ "The connection between the fields is extremely steep. The speed increase "
-#~ "in one direction is huge while the slowdown in the other is also "
-#~ "substantial."
-#~ msgstr ""
-#~ "Spojení mezi políčky je extrémně strmé. Nárůst rychlosti v jednom směru "
-#~ "je obrovský, zpomalení v opačném směru je ovšem také značné."
-
-#~ msgid ""
-#~ "Keep the slopes in mind while placing roads and use them to your "
-#~ "advantage. Also, try to keep roads as short as possible and always "
-#~ "remember to place as many flags as you can on road segments to share the "
-#~ "load better."
-#~ msgstr ""
-#~ "Nezapomeň na svahy když stavíš cesty a využij je ve svůj prospěch. Snaž "
-#~ "se také udržet cesty co nejkratší a dávej co nejvíce vlajek na úsek cesty "
-#~ "aby byl náklad co nejlépe rozložen."
-
-#~ msgid ""
-#~ "Now please rebuild the road between your quarry and your headquarters. "
-#~ "We’ll wait until the quarry is completed."
-#~ msgstr ""
-#~ "Nyní prosím obnov cestu mezi kamenolomem a tvou základnou. Počkáme než "
-#~ "bude kamenolom hotov."
-
-#~ msgid "Connect the quarry to the headquarters"
-#~ msgstr "Spoj lom a základnu"
-
-#~ msgid "Connect Your Construction Site"
-#~ msgstr "Připoj staveniště"
-
-#~ msgid ""
-#~ "Connect your quarry construction site to your headquarters with a road. "
-#~ "You would have been put directly into road building mode after ordering a "
-#~ "new site. But now, you aren’t."
-#~ msgstr ""
-#~ "Propoj pomocí cesty staveniště lomu se svou základnou. Po vybudování nové "
-#~ "stavby jsi hned přepnutý v módu stavění cesty. Ale to nyní nejsi."
-
-#~ msgid ""
-#~ "To build a completely new road, just click on the flag in front of your "
-#~ "construction site, click on the build road icon and then click on the "
-#~ "flag in front of your headquarters. Wait for the completion of the quarry."
-#~ msgstr ""
-#~ "Pro postavení úplně nové cesty jednoduše klikni na vlajku před "
-#~ "staveništěm, klikni na ikonu pro stavění cesty a klikni a vlajku před "
-#~ "velitelstvím. Poté počkej na dokončení stavby."
-
-#~ msgid "Census and Statistics"
-#~ msgstr "Přehled a statistiky"
-
-#~ msgid ""
-#~ "While we wait, I’ll quickly show you another useful feature. All "
-#~ "construction sites look the same, and some buildings look alike. It is "
-#~ "sometimes hard to tell them apart. Widelands offers a feature to show "
-#~ "label texts over the buildings. They are called the ‘census’ and you can "
-#~ "toggle them via the ‘c’ key or via the button on the ‘Watch’ tab of any "
-#~ "field."
-#~ msgstr ""
-#~ "Zatím, co čekáme, tak ti rychle ukážu další užitečnou věc. Všechna "
-#~ "staveniště vypadají stejně i některé budovy jsou si podobné. Občas je "
-#~ "těžké je od sebe rozeznat. Widelands nabízí funkci zobrazení jmenovek nad "
-#~ "budovami. Nazývají se \"přehled\" a můžeš je zapínat/vypínat přes klávesu "
-#~ "\"c\" nebo přes talčítko \"sledovat\" na záložce libovolného políčka."
-
-#~ msgid ""
-#~ "Similar to this are the building statistics, which are also toggled via a "
-#~ "button on the ‘Watch’ tab of any field. The hotkey for it is ‘s’. This "
-#~ "will display information about the productivity of buildings or the "
-#~ "progress of construction sites."
-#~ msgstr ""
-#~ "Podobně je to i se statistikami budov, které se dají rovněž zapínat přes "
-#~ "tlačítko \"sledovat\" na záložce libovolného políčka. Zkratka je \"s\". "
-#~ "Tímto si zobrazíš informace o produktivitě budovy nebo postupu výstavby."
-
-#~ msgid ""
-#~ "Let me quickly enable these two for you. Remember: ‘c’ and ‘s’ are the "
-#~ "keys. Alternatively, you can click on any field without a building on it, "
-#~ "select the watch tab and then click on the corresponding buttons."
-#~ msgstr ""
-#~ "Hned ti tyhle dvě zpřístupním. Pamatuj: ´c´ a ´s´ jsou ony klávesy. Další "
-#~ "možností je kliknout na políčko, kde není postavena budova, vybrat "
-#~ "záložku \"sledovat\" a poté kliknout na odpovídající tlačítko."
-
-#~ msgid "Now we know what’s going on. Let’s wait for this quarry to finish."
-#~ msgstr "Teď když víme oč tu běží. Počkáme než se dostaví lom."
-
-#~ msgid "Introducing Messages"
-#~ msgstr "Úvodní zprávy"
-
-#~ msgid "Messages"
-#~ msgstr "Zprávy"
-
-#~ msgid ""
-#~ "Hi, it’s me again! This time, I have sent you a message. Messages are "
-#~ "sent to you by Widelands to inform you about important events: empty "
-#~ "mines, attacks on your tribe, won or lost military buildings, resources "
-#~ "found..."
-#~ msgstr ""
-#~ "Ahoj, to jsem zase já! Tentokrát jsem ti poslal zprávu. Zprávy ti zasílá "
-#~ "Widelands aby tě informovalo o důležitých událostech: prázdných dolech, "
-#~ "útocích na tvůj kmen, zabraných či ztracených vojenských budovách, "
-#~ "nalezených surovinách,..."
-
-#~ msgid ""
-#~ "The message window can be toggled by the button on the very right at the "
-#~ "bottom of the screen. This button will also change appearance whenever "
-#~ "new messages are available, but there is also a bell sound played "
-#~ "whenever you receive a new message."
-#~ msgstr ""
-#~ "Okno zpráv může být zapnuto/vypnuto tlačítkem úplně vpravo na spodním "
-#~ "okraji obrazovky. Toto tlačítko také změní svůj vzhled kdykoliv ti přijde "
-#~ "nová zpráva, spolu s tím také uslyšíš zvukové upozornění."
-
-#~ msgid ""
-#~ "You have two messages at the moment. This one, which you are currently "
-#~ "reading, and the one that informed you that a new headquarters was added "
-#~ "to your economy. Let’s learn how to archive messages: You can check them "
-#~ "off in your inbox so that they get a tick-symbol in front of them. Then, "
-#~ "you can click the"
-#~ msgstr ""
-#~ "Aktuálně máš dvě zprávy. Tu, kterou právě čteš a druhou, která tě "
-#~ "informuje o postavení nové základny. Nyní se naučíme, jak archivovat "
-#~ "zprávy: Můžeš je zaškrtnout v příchozích zprávách, tím se vedle nich "
-#~ "objeví fajfka. Pak klikni na"
-
-#~ msgid "archive message button to move them into your archive."
-#~ msgstr "tlačítko \"archivovat zprávu\" přesune zprávu do archivu."
-
-#~ msgid ""
-#~ "Archive all messages that you currently have in your inbox, including "
-#~ "this one."
-#~ msgstr ""
-#~ "Archivuje všechny zprávy, které máš momentálně v příjatých zprávách, "
-#~ "včetně této."
-
-#~ msgid "Archive all messages in your inbox"
-#~ msgstr "Archivovat všechny přijaté zprávy"
-
-#~ msgid "Archive Your Inbox Messages"
-#~ msgstr "Archivuj své příchozí zprávy"
-
-#~ msgid ""
-#~ "The message window is central to fully controlling your tribe’s fortune. "
-#~ "However, you will get a lot of messages in a real game. To keep your head "
-#~ "straight, you should try to keep the inbox empty. "
-#~ msgstr ""
-#~ "Okno zpráv je základem pro plnou kontrolu jmění tvého kmene. Ale poněvadž "
-#~ "během hry budeš dostávat opravdu hodně zpráv, tak je dobré udržovat svou "
-#~ "schránku prázdnou, abys neztratil přehled. "
-
-#~ msgid "Archive all your messages in your inbox now."
-#~ msgstr "Historie všech tvých zpráv je ve tvé poště."
-
-#~ msgid ""
-#~ "To do so, open the message window by pressing ‘n’ or clicking the "
-#~ "rightmost button at the very bottom of the screen. Then mark all messages "
-#~ "by checking the check box in front of them. Then, click the ‘Archive All’ "
-#~ "button."
-#~ msgstr ""
-#~ "Za tímto účelem otevři okno zpráv stiskem \"n\" nebo klikem na tlačítko "
-#~ "nejvíce vpravo na spodku obrazovky. Následně označ všechny zprávy "
-#~ "zaškrtnutním zaškrtávátka před nimi. Poté klikni na tlačítko \"Archivovat"
-#~ "\"."
-
-#~ msgid "Closing Windows"
-#~ msgstr "Zavírání oken"
-
-#~ msgid ""
-#~ "Excellent. By the way: closing windows in Widelands is as easy as right-"
-#~ "clicking on them. This will work with all windows except for story "
-#~ "message windows like this one. Go ahead and try it."
-#~ msgstr ""
-#~ "Výborně! Mimochodem: zavření okna je ve Widelands vyřešeno jednoduše "
-#~ "kliknutím pravým tlačítkem na okno. To funguje pro všechna okna, vyjma "
-#~ "těch příběhových, jako je toto. Jen si to zkus."
-
-#~ msgid ""
-#~ "First, close this window by pressing the button below, then right-click "
-#~ "into the messages window to close it."
-#~ msgstr ""
-#~ "Nejprve zavři toto okno stisknutím tlačítka pod textem a poté klikni "
-#~ "pravým tlačítkem na okno vzkazů, abys ho zavřel."
-
-#~ msgid "Close the messages window"
-#~ msgstr "Zavřít okno zpráv"
-
-#~ msgid "Close the Messages Window"
-#~ msgstr "Zavřít okno zpráv"
-
-#~ msgid ""
-#~ "All windows in Widelands can be closed by right-clicking into them. Some "
-#~ "windows can also be toggled with the buttons at the very bottom of the "
-#~ "screen."
-#~ msgstr ""
-#~ "Všechna okna ve Widelands mohou být zavřena pravým kliknutím. Některá "
-#~ "také tlačítky ve spodní části obrazovky."
-
-#~ msgid "Close the messages window now by right-clicking into it."
-#~ msgstr "Zavři okno se zprávami pravým kliknutím do něj."
-
-#~ msgid ""
-#~ "Well done! Let’s see how messages work in a real game, shall we? For "
-#~ "this, I’ll take all stones away from the poor stonemason in the quarry. "
-#~ "He will then send a message that he can’t find any in his working area "
-#~ "the next time he tries to do some work."
-#~ msgstr ""
-#~ "Výborně! Pojďmě se podívat jak vzkazy fungují ve hře, ano? Abych ti to "
-#~ "předvedl, odeberu všechny kameny od ubohého kameníka v lomu. On ti potom "
-#~ "pošle vzkaz, že nemůže na svém pracovišti nalézt žádné kameny, jakmile se "
-#~ "bude snažit pracovat."
-
-#~ msgid "Message Arrived!"
-#~ msgstr "Přišla ti zpráva!"
-
-#~ msgid ""
-#~ "A message has been sent to you. See how the button at the bottom of the "
-#~ "screen has changed appearance? You can burn this quarry down now as it is "
-#~ "no longer of any use and just blocking space."
-#~ msgstr ""
-#~ "Byla ti odeslána zpráva. Vidíš, jak se na spodní části obrazovky změnilo "
-#~ "tlačítko? Nyní můžeš tento lom strhnout, jelikož ho již nelze využít a "
-#~ "pouze zabírá místo."
-
-#~ msgid "To do that, click on the quarry and select the destroy button."
-#~ msgstr "Za tímto účelem klikni na lom a vyber tlačítko zničit."
-
-#~ msgid "Expanding Your Territory!"
-#~ msgstr "Rozšiřování tvého území"
-
-#~ msgid ""
-#~ "There is one more thing I’d like to teach you now: Expanding your "
-#~ "territory. The place that we started with around our headquarters is "
-#~ "barely enough for a basic building infrastructure, and we do not have "
-#~ "access to mountains, which we need to mine minerals and coal. So, we have "
-#~ "to expand our territory."
-#~ msgstr ""
-#~ "Je tu jedna další věc, kterou bych tě chtěl teď naučit : Rozšiřování "
-#~ "tvého území. Oblast s kterou jsme začali okolo hlavního stanu je sotva "
-#~ "dostačující pro základní infrastrukturu, a navíc nemáme přístup k horám, "
-#~ "které potřebujeme abychom mohli těžit minerály a uhlí. A tak musíme naše "
-#~ "území rozšířit."
-
-#~ msgid ""
-#~ "Expanding is as simple as building a military building at the edge of "
-#~ "your territory. The barbarians have a selection of different military "
-#~ "buildings: sentries, barriers, donjons, fortresses and citadels. The "
-#~ "bigger the building, the more expensive it is to build, but the more land "
-#~ "it will conquer around itself and the more soldiers can be stationed "
-#~ "there. The buildings also vary in their vision range: buildings with a "
-#~ "tower see farther than others."
-#~ msgstr ""
-#~ "Expandování probíhá jednoduše stavbou vojenské budovy v rohu tvého území. "
-#~ "Barbaři mají několik různých vojenských budov: strážní věže, zábrany, "
-#~ "donjony, pevnosti a citadely. Čím větší budova, tím dražší je její "
-#~ "stavba, tím víc území zabere okolo sebe a tím více vojáků zde může být "
-#~ "umístěno. Budovy se také odlišují svým dohledem: budovy s věží vidí dále "
-#~ "než ostatní."
-
-#~ msgid ""
-#~ "As soon as a military building is manned, it will extend your land. You "
-#~ "can then burn it down again if you need the space. But note that your "
-#~ "land is then vulnerable: any military site from another player could "
-#~ "conquer the land. You therefore need military sites to keep military "
-#~ "influence over your land."
-#~ msgstr ""
-#~ "Jakmile je vojenská budova obsazena vojáky, rozšíří tvou zem. Poté ji "
-#~ "můžeš  opět zbourat, potřebuješ li staveniště. Ale pamatuj, že tvá země "
-#~ "se poté stane zranitelnou: jakákoliv vojenská budova jiného hráče může "
-#~ "zabrat tvou zem. Abys udržel svou vojenskou nadvládu nad vlastní zemí, "
-#~ "potřebuješ udržovat své vojenské budovy."
-
-#~ msgid ""
-#~ "Let’s try it out now: build a few military buildings on your south-"
-#~ "western border."
-#~ msgstr ""
-#~ "Nyní si to vyzkoušej: postav pár vojenských budov u tvé jiho-západní "
-#~ "hranice."
-
-#~ msgid ""
-#~ "We want to capture some of this mountain so we can search for resources "
-#~ "there. Bigger buildings will conquer more land, which can be beneficial "
-#~ "close to mountains, because you can’t build houses on mountains."
-#~ msgstr ""
-#~ "Chceme kus této hory zabrat abychom zde mohli pátrat po surovinách. Větší "
-#~ "budovy zaberou více země, což se může hodit blízko hor, protože na horách "
-#~ "nemůžeš stavět."
-
-#~ msgid "Conquer an area were we can build mines"
-#~ msgstr "Dobyj území kde můžeme postavit doly"
-
-#~ msgid "Conquer the Mountain to the South-West"
-#~ msgstr "Dobyj horu na jihozápadě"
-
-#~ msgid ""
-#~ "For a full-fledged economy, we need coal, iron and gold. These can be "
-#~ "found in mountains. Conquer some area on the mountains to the south-west "
-#~ "of your headquarters by building some military buildings close to your "
-#~ "border."
-#~ msgstr ""
-#~ "Pro plně funkční ekonomii potřebujeme uhlí, železo a zlato. Tyto suroviny "
-#~ "můžeš nalézt v horách. Zaber nějaké území v horách na jihozápadě od tvé "
-#~ "základy tak, že postavíš vojenskou budovu u kraje svých zemí."
-
-#~ msgid ""
-#~ "You can choose from the following military buildings: sentry, donjon, "
-#~ "barrier and fortress. The bigger the building, the more expensive it is "
-#~ "to build it, but it will also conquer a bigger region. Sometimes, it is "
-#~ "useful to build a big military building next to a mountain so that you "
-#~ "can reach building sites farther up."
-#~ msgstr ""
-#~ "Můžeš si vybrat z následujících vojenských budov : hláska, donjon, hradba "
-#~ "a pevnost. čím je budova větší, tím je dražší ji postavit, ale také "
-#~ "zabere větší oblast. Někdy může být celkem užitečné postavit velkou "
-#~ "vojenskou budovu vedle hory, takže se dostaneš ke vzdálenějším stavebním "
-#~ "místům."
-
-#~ msgid ""
-#~ "Okay, now we own some of the area on this mountain. Mountains are very "
-#~ "important, because they contain resources: coal, iron ore, gold ore and "
-#~ "granite. Each tribe uses the resources differently, but all need mines to "
-#~ "extract the resources from the ground."
-#~ msgstr ""
-#~ "Dobře, teď je část oblasti této hory naše. Hory jsou velmi důležité, "
-#~ "protože obsahují suroviny : uhlí, železnou a zlatou rudu a žulu. Každý "
-#~ "kmen využívá suroviny jinak, ale všichni potřebují doly aby mohli vytěžít "
-#~ "suroviny ze země."
-
-#~ msgid ""
-#~ "Let’s search for resources in this mountain. First, we’ll build a road "
-#~ "onto the mountain and place a flag. Then, we will click on the flag and "
-#~ "call a geologist to it. I’ll show you how it’s done."
-#~ msgstr ""
-#~ "Zkusme se podívat po surovinách v této hoře. Nejprve k hoře postavíme "
-#~ "cestu a umístíme vlajku. Poté stačí kliknout na vlajku a zavolat k ní "
-#~ "geologa. Ukážu ti jak se to dělá."
-
-#~ msgid "Waiting for the Geologist"
-#~ msgstr "Čekám na geologa"
-
-#~ msgid ""
-#~ "The geologist will arrive at the flag shortly and start investigating the "
-#~ "area in his surroundings. He will place the following markers for the "
-#~ "various resources:"
-#~ msgstr ""
-#~ "Geolog brzy dorazí k vlajce a začne prozkoumávat prostor ve svém okolí. "
-#~ "Umístí následující značky pro různé suroviny:"
-
-#~ msgid "Let’s wait and see what the geologist finds on the mountain."
-#~ msgstr "Počkejme a podíváme se co geolog najde a této hoře."
-
-#~ msgid "Mining Conclusion"
-#~ msgstr "Shrnutí těžby"
-
-#~ msgid ""
-#~ "So our geologist found a lot of coal on this mountain. You should "
-#~ "therefore build a coal mine here. Building a mine is like building a "
-#~ "house. The building space symbol for where a mine can be built is"
-#~ msgstr ""
-#~ "Náš geolog našel hodně uhlí na této hoře. Proto by jsi zde měl postavit "
-#~ "důl na uhlí. Stavba dolu je jako stavba domu. Symbol stavebního místa. "
-#~ "kde je možné postavit důl je"
-
-#~ msgid "this one."
-#~ msgstr "tento."
-
-#~ msgid ""
-#~ "Note that a mine needs rations to work. Rations are produced in taverns, "
-#~ "and taverns need meat, pitta bread, and fish to produce them. You will "
-#~ "need a lot more infrastructure to get your mines working well. This "
-#~ "infrastructure also varies from tribe to tribe. We will explain them to "
-#~ "you in the introduction campaigns for the three tribes."
-#~ msgstr ""
-#~ "Všimni si, že důl potřebuje k fungování potravinové příděly. Příděly jsou "
-#~ "vyráběny v krčmách (hospodách), krčmy potřebují maso, chléb a ryby, aby "
-#~ "mohly vyrábět. Budeš potřebovat mnohem více infrastruktury aby tvoje doly "
-#~ "pracovaly efektivně. Infrastruktura se také liší kmen od kmene. Tyto "
-#~ "rozdíly ti vysvětlíme v úvodních kampaních pro tři kmeny."
-
-#~ msgid "Warfare and Training"
-#~ msgstr "Válčení a trénování"
-
-#~ msgid "Soldiers and Warfare"
-#~ msgstr "Vojáci a Vojenství"
-
-#~ msgid ""
-#~ "On to the last topic now. We are going to talk about soldiers, their "
-#~ "training and their profession: warfare. As I mentioned, Widelands is "
-#~ "about building up, not burning down: therefore, warfare is also more "
-#~ "focused on economics than on military strategies."
-#~ msgstr ""
-#~ "A teď k poslednímu tématu. Budeme hovořit o vojácích, jejich výcviku a "
-#~ "profesích : o válčení. Jak jsem zmiňoval, Widelands jsou o tvoření, "
-#~ "nikoliv o ničení : tudíž je válčení také zaměřeno spíše na ekonomiku a "
-#~ "hospodářství, než na vojenské strategie."
-
-#~ msgid ""
-#~ "Nevertheless, warfare offers one way of challenging other players, and it "
-#~ "has some game mechanics that deserve explanation. The economies of the "
-#~ "tribes are explained in their individual tutorial campaigns."
-#~ msgstr ""
-#~ "Nicméně válčení nabízí jeden způsob jak vyzvat ostatní hráče a zakládá se "
-#~ "na několika herních principech které si zaslouží vysvětlení. Ekonomiky "
-#~ "kmené jsou vysvětleny v jejich individuálních výcvikových kampaních."
-
-#~ msgid ""
-#~ "Ok, I am going to create a little training ground for us with a training "
-#~ "camp and a warehouse to the north east of here."
-#~ msgstr ""
-#~ "Dobře, teď pro nás vytvořím malý výcvikový prostor s výcvikovým táborem a "
-#~ "skladištěm, severovýchodně odsud."
-
-#~ msgid ""
-#~ "If you want to come back to this south-western part of your realm, just "
-#~ "scroll here via right-button scrolling or open the minimap by clicking on "
-#~ "the"
-#~ msgstr ""
-#~ "Pokud se chceš vrátit zpět do této jiho-západní části tvé říše, jenom sem "
-#~ "sjeď pomocí pohybu pravým tlačítkem myši nebo otevři minimapu kliknutím na"
-
-#~ msgid "minimap button at the bottom of the screen."
-#~ msgstr "tlačítko minimapa na spodním okraji obrazovky"
-
-#~ msgid "Alternatively, you could also press ‘m’ on your keyboard."
-#~ msgstr "Nebo můžeš stisknout \"m\" na klávesnici."
-
-#~ msgid ""
-#~ "The minimap shows the complete map in miniature. You can directly jump to "
-#~ "any field by left-clicking on it. You can also toggle buildings, roads, "
-#~ "flags and player indicators on and off inside the minimap."
-#~ msgstr ""
-#~ "Minimapa ukazuje kompletní mapu ve zmenšeném měřítku. Můžeš přímo skočit "
-#~ "ma libovolné políčko tak, že na něj klikneš levým tlačítkem. V minimapě "
-#~ "můžeš také přepínat indikátory budov, cest, vlajek a hráčů."
-
-#~ msgid ""
-#~ "But I digress. Back to soldiers. What was I about to do? Oh yes, I wanted "
-#~ "to build a small training scenario for you. Let’s do that now."
-#~ msgstr ""
-#~ "Ale to jsem odbočil. Zpět k vojákům. Co jsem chtěl udělat? Ach ano, chtěl "
-#~ "jsem pro tebe vytvořit malý teréninkový scénář. Tak hurá na to."
-
-#~ msgid ""
-#~ "A soldier is created like any normal worker: a carrier grabs a tool in a "
-#~ "warehouse as soon as a request for a certain profession is not fulfilled. "
-#~ "The tool to create a barbarian soldier is an ax. Newly created soldiers "
-#~ "are of level 0. To make soldiers better in any of the four categories, "
-#~ "training is needed."
-#~ msgstr ""
-#~ "Voják je tvořen stejně jako obyčejný dělník: nosič vezme nástroj ve "
-#~ "skladišti jakmile je požadavek na určitou profesi a není splněn. Nástroj "
-#~ "pro vytvoření barbarského vojáka je sekera. Nově vytvořený voják má "
-#~ "úroveň 0. Pro vylepšení vojáka v jedné ze čtyř kategorií je nezbytný "
-#~ "trénink."
-
-#~ msgid "Health:"
-#~ msgstr "Zdraví:"
-
-#~ msgid "Attack:"
-#~ msgstr "Útok:"
-
-#~ msgid "Defense:"
-#~ msgstr "Obrana:"
-
-#~ msgid "Evade:"
-#~ msgstr "Úhyb:"
-
-#~ msgid ""
-#~ "Evade is the chance that the soldier is able to dodge an attack. It is "
-#~ "25% for a level 0 evade barbarian and increases in steps of 15% for each "
-#~ "level."
-#~ msgstr ""
-#~ "Úhyb představuje šanci, že bude voják schopen vykrýt útok. Ta představuje "
-#~ "25% pro úhyb úrovně 0 a stoupá s každou úrovní o 15%."
-
-#~ msgid "Enhance This Fortress"
-#~ msgstr "Vylepši tuto pevnost"
-
-#~ msgid "Enhancing Buildings"
-#~ msgstr "Vylepšování budov"
-
-#~ msgid ""
-#~ "I will create an enemy for you soon, but first let’s make sure you are "
-#~ "prepared. This fortress is already quite strong and conquers a lot of "
-#~ "space. But there is an even bigger building: the citadel."
-#~ msgstr ""
-#~ "Připravím ti nepřítele, jak jen to bude možné, ale nejdříve se ujišťme, "
-#~ "že jsi připraven. Tato pevnost už je docela silná a zabere mnoho území. "
-#~ "Ale je tu ještě dokonce jedna větší budova: citadela."
-
-#~ msgid ""
-#~ "Citadels cannot be built directly. Instead, you will have to construct a "
-#~ "fortress first and then enhance it to a citadel. To do so, click on the "
-#~ "fortress, then choose the ‘Enhance to Citadel’ button. Your soldiers will "
-#~ "leave the fortress while the construction is going on. This means that "
-#~ "your fortress will lose its military influence. If an enemy occupies a "
-#~ "military building nearby, your construction site will burn down. No "
-#~ "sweat, that won’t happen here."
-#~ msgstr ""
-#~ "Tvrze nelze stavět rovnou. Nejjdříve je potřeba postavit pevnost a teprve "
-#~ "tu lze vylepšit na tvrz. Pokud to chceš udělat, klikni na pevnost a pak "
-#~ "si vyber tlačítko vylepšit na tvrz. Vojáci tvrz po dobu výstavby opustí. "
-#~ "To znamená, že po tuto dobu nemá žádnou vojenskou sílu. Pokud nepřítel "
-#~ "postaví poblíž svou vojenskou budovu, tvoje budova bude zničena. Tady to "
-#~ "nehrozí."
-
-#~ msgid "Enhance your fortress to a citadel now."
-#~ msgstr "Vylepši nyní svou pevnost na tvrz."
-
-#~ msgid ""
-#~ "Remember that you can speed time up by using PAGE_UP. Building a citadel "
-#~ "takes a while."
-#~ msgstr ""
-#~ "Pamatuj, že můžeš zrychlit běh času pomocí klávesy PAGE UP, budování "
-#~ "tvrzi zabere nějaký čas."
-
-#~ msgid "Enhance your fortress to a citadel"
-#~ msgstr "Vylepši svou pevnost na tvrz"
-
-#~ msgid "Enhance Your Fortress"
-#~ msgstr "Vylepši svou pevnost"
-
-#~ msgid "Enhance your fortress to a mighty citadel."
-#~ msgstr "Vylepši si svou pevnost na mocnou citadelu."
-
-#~ msgid ""
-#~ "The citadel can house 12 soldiers and is the biggest military building "
-#~ "the barbarians can build. It also costs a lot of resources and takes a "
-#~ "long time to build. It is most suited to guard strategically important "
-#~ "points like constricted points or mountains."
-#~ msgstr ""
-#~ "Citadela může ubytovat 12 vojáků a je největší vojenskou budovou, jakou "
-#~ "mohou barbaři postavit. Také hodně stojí a její stavba dlouho trvá. "
-#~ "Nejvíce se hodí pro střežení strategicky důležitých bodů jako místa pro "
-#~ "stavby a nebo hory."
-
-#~ msgid "Defeat your enemy"
-#~ msgstr "Zdolej svého nepřítele"
-
-#~ msgid "Defeat the Enemy"
-#~ msgstr "Poraž nepřítele"
-
-#~ msgid ""
-#~ "I have created a sparring partner for you: It is an empire tribe close to "
-#~ "your citadel. To attack its buildings, click on the door of a target "
-#~ "building, choose the number of soldiers that you wish to send and click "
-#~ "on the attack button. Your soldiers will come from all nearby military "
-#~ "buildings. Likewise, the defenders will come from all nearby military "
-#~ "buildings of the enemy and intercept your forces."
-#~ msgstr ""
-#~ "Vytvořil jsem ti cvičného nepřítele: Je to imperiální kmen blízko u tvé "
-#~ "citadely. Abys mohl zaútočit na jejich budovy, klikni na dveře cílové "
-#~ "budovy, vyber počet vojáků, které si přeješ poslat a klikni na tlačítko "
-#~ "útoku. Tví vojáci vyrazí z nejbližších vojenských budov. Stejně tak "
-#~ "vyrazí vojáci obránců a střetnou se s tvými silami."
-
-#~ msgid ""
-#~ "Attack and conquer all military buildings of the enemy and destroy their "
-#~ "headquarters."
-#~ msgstr "Zaútoč a znič všechny vojenské budovy nepřítele i s jeho základnou."
-
-#~ msgid "Defeat the enemy tribe"
-#~ msgstr "Zdolej nepřátelský kmen"
-
-#~ msgid "Defeat Your Enemy"
-#~ msgstr "Zdolej svého nepřítele"
-
-#~ msgid "Defeat the nearby enemy."
-#~ msgstr "Zdolej nedalekého nepřítele."
-
-#~ msgid ""
-#~ "To attack a building, click on its doors, choose the number of attacking "
-#~ "soldiers, then send them via the ‘Attack’ button."
-#~ msgstr ""
-#~ "Útok na budovu zahájíš kliknutím na dveře, zvolíš počet útočícich vojáků "
-#~ "a kliknutím na tlačítko útok je vyšleš do boje."
-
-#~ msgid "Conclusion"
-#~ msgstr "Shrnutí"
-
-#~ msgid "‘Exit Game’ button."
-#~ msgstr "tlačítko pro ukončení hry"
-
-#~ msgid ""
-#~ "Thanks for playing this tutorial. Enjoy Widelands and remember to visit "
-#~ "us at"
-#~ msgstr ""
-#~ "Děkujeme za dohrání tohoto tutoriálu. Užij si Widelands a nezapomeň nás "
-#~ "navštívit na"

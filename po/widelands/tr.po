@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-10-28 08:26+0000\n"
+"POT-Creation-Date: 2014-10-29 10:08+0000\n"
 "PO-Revision-Date: 2014-06-18 03:08+0000\n"
 "Last-Translator: SirVer <Unknown>\n"
 "Language-Team: Turkish <tr@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-29 06:08+0000\n"
+"X-Launchpad-Export-Date: 2014-10-30 05:54+0000\n"
 "X-Generator: Launchpad (build 17203)\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -493,7 +493,7 @@ msgstr ""
 #. * TRANSLATORS: Parent directory
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:214
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:292
-#: ../../src/ui_fsmenu/mapselect.cc:411
+#: ../../src/ui_fsmenu/mapselect.cc:410
 msgid "parent"
 msgstr ""
 
@@ -917,7 +917,7 @@ msgid "Loading map"
 msgstr "Harita yükleniyor"
 
 #: ../../src/logic/game.cc:370 ../../src/logic/game.cc:403
-#: ../../src/wlapplication.cc:1505
+#: ../../src/wlapplication.cc:1524
 msgid "Loading..."
 msgstr "Yükleniyor..."
 
@@ -938,7 +938,7 @@ msgid ""
 "this problem."
 msgstr ""
 
-#: ../../src/logic/map.cc:334
+#: ../../src/logic/map.cc:333
 msgid "Player 1"
 msgstr "1. Oyuncu"
 
@@ -1463,7 +1463,7 @@ msgstr ""
 "server kapanmış."
 
 #: ../../src/network/netclient.cc:199 ../../src/network/nethost.cc:846
-#: ../../src/wlapplication.cc:1395
+#: ../../src/wlapplication.cc:1414
 msgid "Preparing game"
 msgstr "Oyun hazırlanıyor"
 
@@ -1951,13 +1951,13 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:80
 #: ../../src/ui_fsmenu/campaign_select.cc:164
-#: ../../src/ui_fsmenu/campaign_select.cc:381
+#: ../../src/ui_fsmenu/campaign_select.cc:399
 #: ../../src/ui_fsmenu/mapselect.cc:70
 msgid "Description:"
 msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:90
-#: ../../src/ui_fsmenu/campaign_select.cc:328
+#: ../../src/ui_fsmenu/campaign_select.cc:331
 #: ../../src/ui_fsmenu/loadgame.cc:117
 msgid "Return to the main menu"
 msgstr ""
@@ -1979,7 +1979,7 @@ msgid "The difficulty of this campaign"
 msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:95
-#: ../../src/ui_fsmenu/campaign_select.cc:331
+#: ../../src/ui_fsmenu/campaign_select.cc:339
 #: ../../src/ui_fsmenu/mapselect.cc:97
 msgid "Story and hints"
 msgstr ""
@@ -2022,49 +2022,91 @@ msgstr ""
 msgid "Choose a scenario"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:329
+#: ../../src/ui_fsmenu/campaign_select.cc:291
+msgid "Choose a tutorial"
+msgstr ""
+
+#: ../../src/ui_fsmenu/campaign_select.cc:333
+msgid "Play this tutorial"
+msgstr ""
+
+#: ../../src/ui_fsmenu/campaign_select.cc:334
+msgid "The name of this tutorial"
+msgstr ""
+
+#: ../../src/ui_fsmenu/campaign_select.cc:335
+msgid "What you will learn in this tutorial"
+msgstr ""
+
+#: ../../src/ui_fsmenu/campaign_select.cc:337
 msgid "Play this scenario"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:330
+#: ../../src/ui_fsmenu/campaign_select.cc:338
 msgid "The name of this scenario"
 msgstr ""
 
-#. * TRANSLATORS: Campaign scenario number table header
-#: ../../src/ui_fsmenu/campaign_select.cc:344
-msgid "#"
+#: ../../src/ui_fsmenu/campaign_select.cc:356
+msgid "The order in which the tutorials should be played"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:344
+#: ../../src/ui_fsmenu/campaign_select.cc:357
+msgid "Tutorial Name"
+msgstr ""
+
+#: ../../src/ui_fsmenu/campaign_select.cc:359
 msgid "The number of this scenario in the campaign"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:345
+#: ../../src/ui_fsmenu/campaign_select.cc:360
 msgid "Scenario Name"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:380
+#: ../../src/ui_fsmenu/campaign_select.cc:362
+msgid "#"
+msgstr ""
+
+#: ../../src/ui_fsmenu/campaign_select.cc:398
 #: ../../src/ui_fsmenu/mapselect.cc:292
 msgid "Scenario:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:396
-#, c-format
-msgid "Invalid path to file in cconfig: %s"
+#: ../../src/ui_fsmenu/campaign_select.cc:398
+msgid "Tutorial:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:404
+#: ../../src/ui_fsmenu/campaign_select.cc:414
+#, c-format
+msgid "Invalid path to file in campaigns.conf: %s"
+msgstr ""
+
+#: ../../src/ui_fsmenu/campaign_select.cc:425
+msgid "The designer of this tutorial"
+msgid_plural "The designers of this tutorial"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../src/ui_fsmenu/campaign_select.cc:428
 msgid "The designer of this scenario"
 msgid_plural "The designers of this scenario"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:406
+#: ../../src/ui_fsmenu/campaign_select.cc:431
 #: ../../src/ui_fsmenu/mapselect.cc:318
 msgid "Author:"
 msgid_plural "Authors:"
 msgstr[0] ""
 msgstr[1] ""
+
+#: ../../src/ui_fsmenu/campaign_select.cc:453
+msgid "Pick a tutorial from the list, then hit \"OK\"."
+msgstr ""
+
+#: ../../src/ui_fsmenu/campaign_select.cc:455
+msgid ""
+"You can see a description of the currently selected tutorial on the right."
+msgstr ""
 
 #: ../../src/ui_fsmenu/editor.cc:36 ../../src/ui_fsmenu/main.cc:60
 msgid "Editor"
@@ -2765,15 +2807,15 @@ msgid "Open this directory"
 msgstr ""
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
-#: ../../src/ui_fsmenu/mapselect.cc:442
+#: ../../src/ui_fsmenu/mapselect.cc:441
 msgid "Multiplayer Scenarios"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:586
+#: ../../src/ui_fsmenu/mapselect.cc:583
 msgid "Nobody"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:587
+#: ../../src/ui_fsmenu/mapselect.cc:584
 msgid ""
 "This map file is not present in your filesystem. The data shown here was "
 "sent by the server."
@@ -3016,11 +3058,11 @@ msgid ""
 "effect. Please check the graphics options!"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1167
+#: ../../src/wlapplication.cc:1158
 msgid "Game data error"
 msgstr "Oyun veri hatası"
 
-#: ../../src/wlapplication.cc:1177
+#: ../../src/wlapplication.cc:1168
 #, c-format
 msgid ""
 "\n"
@@ -3030,7 +3072,7 @@ msgid ""
 "using build %1$s (%2$s). "
 msgstr ""
 
-#: ../../src/wlapplication.cc:1184
+#: ../../src/wlapplication.cc:1175
 msgid ""
 "Please add this information to your report.\n"
 "\n"

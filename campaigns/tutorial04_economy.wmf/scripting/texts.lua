@@ -58,7 +58,7 @@ building_stat = {
    rt("image=pics/menu_toggle_menu.png",p(_[[First, you will have to open the statistics menu (you can find the corresponding button at the bottom). We will need this menu several times.]])) ..
    rt("image=pics/menu_building_stats.png",p(_[[Afterwards, choose the ‘Building statistics’.]]) ..
       paragraphdivider() ..
-      listitem_bullet(_[[Open the building statistic menu.]]) ..
+      listitem_bullet(_[[Open the building statistics window.]]) ..
       listitem_bullet(_[[When you have looked up the number of taverns, close it.]])
    ),
    h = 350,
@@ -68,9 +68,9 @@ building_stat = {
       rt("image=pics/menu_building_stats.png", p(_[[The building statistics window gives you an overview over the buildings you have.]])) ..
    rt(
       paragraphdivider() ..
-      -- TRANSLATORS: "it" refers to the building statistic window
+      -- TRANSLATORS: "it" refers to the building statistics window
       listitem_bullet(_[[Open it. You can access it from the statistics menu.]]) ..
-      listitem_arrow(_[[The statistics menu is accessed via the second button at the bottom. It provides several menus that give you information about the game.]]) ..
+      listitem_arrow(_[[The statistics menu is accessed via the second button at the bottom. It provides several windows that give you information about the game.]]) ..
       listitem_bullet(_[[Look up how many taverns you have (in the column ‘Owned’)]]) ..
       listitem_bullet(_[[Close the building statistics window when you are done.]])
    )
@@ -86,24 +86,24 @@ inventory1 = {
    rt("image=pics/menu_stock.png",p(_[[Click on the ‘Stock’ button.]])) ..
    rt(
       paragraphdivider() ..
-      listitem_arrow(_[[You can also use the hotkey ‘i’ (as in ‘inventory’) to access this menu quickly.]])
+      listitem_arrow(_[[You can also use the hotkey ‘i’ (as in ‘inventory’) to access this window quickly.]])
    ),
    h = 300,
    obj_name = "open_inventory",
    obj_title = _"Open your stock window.",
    obj_body = rt(
-      p(_[[The stock window gives you an overview over the wares you currently have.]]) ..
+      p(_[[The stock menu window gives you an overview over the wares you currently have.]]) ..
       paragraphdivider() ..
-      -- TRANSLATORS: "it" refers to the stock window
+      -- TRANSLATORS: "it" refers to the stock menu window
       listitem_bullet(_[[Open it. You can access it from the statistics menu.]]) ..
-      listitem_arrow(_[[The statistic menu is accessed via the second button at the bottom. It provides several menus that give you information about the game.]])
+      listitem_arrow(_[[The statistics menu is accessed via the second button at the bottom. It provides several windows that give you information about the game.]])
    )
 }
 
 inventory2 = {
    title = _"Stock",
    body = rt(
-      p(_[[The stock window has four tabs. The first (and currently selected) one shows you all your current wares, including those on roads, at flags and inside buildings waiting for processing.]]) ..
+      p(_[[The stock menu window has four tabs. The first (and currently selected) one shows you all your current wares, including those on roads, at flags and inside buildings waiting for processing.]]) ..
       p(_[[Looking at the rations, there are currently only five in total, probably on their way to somewhere. Five rations are not much for such a big economy.]]) ..
       p(_[[The second tab shows you all your workers, again those on roads and in buildings summed up.]]) ..
       p(_[[Now have a look at these two tabs. When you click on the]])) ..
@@ -112,9 +112,9 @@ inventory2 = {
    h = 350,
    show_instantly = true,
    obj_name = "switch_stock_tab",
-   obj_title = _"Switch to the third tab in the stock window.",
+   obj_title = _"Switch to the third tab in the stock menu window.",
    obj_body = rt(
-      p(_[[Have a look at the first two tabs in the stock window. They show all the wares and workers you have.]]) ..
+      p(_[[Have a look at the first two tabs in the stock menu window. They show all the wares and workers you have.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[When you have seen enough, switch to the third tab.]])
    ),
@@ -132,7 +132,7 @@ inventory3 = {
 }
 
 reopen_stock_menu = {
-   title = _"You closed the stock menu!",
+   title = _"You closed the stock window!",
    body = rt(
       p(_[[You have closed the stock menu window, but I have not yet finished with my explanation. Would you please reopen it and choose the third tab?]])
    ),
@@ -143,7 +143,7 @@ reopen_stock_menu = {
 
 reopen_stock_menu_obj = {
    obj_name = "open_stock_menu_again",
-   obj_title = _"Open the stock menu again.",
+   obj_title = _"Open the stock window again.",
    obj_body = rt(
       p(_[[You closed the stock menu window before I finished telling you everything about it. If you already know everything, please feel free to leave this tutorial at any time.]]) ..
       paragraphdivider() ..
@@ -158,7 +158,7 @@ build_taverns = {
    title = _"New taverns",
    body = rt(
       h1(_[[We need new taverns]]) ..
-      p(_[[Now that you have an overview, you should act. I think we should build more than one tavern – two or three are better. Remember: ss long as we don’t produce rations, our miners won’t dig for ore. And without iron, we cannot forge a single helm.]]) ..
+      p(_[[Now that you have an overview, you should act. I think we should build more than one tavern – two or three are better. Remember: as long as we don’t produce rations, our miners won’t dig for ore. And without iron, we cannot forge a single helm.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[Build at least two taverns.]])
    ),
@@ -191,7 +191,7 @@ building_priority_settings = {
    body = rt(
       h1(_[[Send the wares where they’re needed]]) ..
       p(_[[Great. Our taverns have now been built up and are supplying us with rations.]]) ..
-      p(_[[At the moment, all mines are supplied with rations. If you want to prioritize a special mine, you simply have to open its menu. In the wares tab, behind every ware, you can see ‘traffic lights’.]]) ..
+      p(_[[At the moment, all mines are supplied with rations. If you want to prioritize a special mine, you simply have to open its window. In the wares tab, behind every ware, you can see ‘traffic lights’.]]) ..
       p(_[[When you click on the red dot (low priority), the corresponding ware gets delivered less frequently. Green means that as many wares as possible should be delivered to this building, maybe because it produces something important.]]) ..
       p(_[[In our situation, you might want to work the bakeries as fast as possible because they supply our taverns, so you could set water to the highest priority for them. The other buildings (for example the donkey farm) would then get less water, but the bakery could work faster.]])
       -- we cannot check whether the user does this, so no objective
@@ -222,7 +222,7 @@ ware_stats1 = {
 ware_stats2 = {
    title = _"Ware Statistics",
    body = rt(
-      p(_[[In this window, you can select wares to see how their production or consumption has changed over time. Try it out with some wares.]]) ..
+      p(_[[In this menu window, you can select wares to see how their production or consumption has changed over time. Try it out with some wares.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[I’ll continue as soon as you click on the]])) ..
    rt("image=pics/menu_tab_wares_econ_health.png",p(_[[third tab (‘Economy Health’).]])
@@ -230,7 +230,7 @@ ware_stats2 = {
    h = 250,
    show_instantly = true,
    obj_name = "switch_ware_stat_tab_to_third",
-   obj_title = _"Switch to the third tab in the ware statistics window.",
+   obj_title = _"Switch to the third tab in the ware statistics menu window.",
    obj_body = rt(
       p(_[[The first two tabs show you the production and consumption of any ware. You can toggle them by simply clicking on them.]]) ..
       paragraphdivider() ..
@@ -249,7 +249,7 @@ ware_stats3 = {
    h = 250,
    show_instantly = true,
    obj_name = "switch_ware_stat_tab_to_forth",
-   obj_title = _"Switch to the last tab in the ware statistics window.",
+   obj_title = _"Switch to the last tab in the ware statistics menu window.",
    obj_body = rt(
       p(_[[The third tab shows you the economy health of the ware. When the value is positive, this means your stock is growing.]]) ..
       paragraphdivider() ..
@@ -279,7 +279,7 @@ ware_stats4 = {
 reopen_ware_stats1 = {
    title = _"You closed the ware statistics window!",
    body = rt(
-      p(_[[You have closed the ware statistics window, but I have not yet finished with my explanation. Would you please reopen it and choose the third tab?]])
+      p(_[[You have closed the ware statistics menu window, but I have not yet finished with my explanation. Would you please reopen it and choose the third tab?]])
    ),
    show_instantly = true,
    w = 300,
@@ -290,7 +290,7 @@ reopen_ware_stats1_obj = {
    obj_name = "open_ware_stats_menu_again1",
    obj_title = _"Open the ware statistics window again.",
    obj_body = rt(
-      p(_[[You closed the ware statistics window before I had told you everything about it. If you already know everything, please feel free to leave this tutorial at any time.]]) ..
+      p(_[[You closed the ware statistics menu window before I finished telling you everything about it. If you already know everything, please feel free to leave this tutorial at any time.]]) ..
       paragraphdivider() ..
       -- TRANSLATORS: "it" refers to the ware statistics window.
       listitem_bullet(_[[Otherwise, please reopen it and choose the third tab.]])
@@ -300,7 +300,7 @@ reopen_ware_stats1_obj = {
 reopen_ware_stats2 = {
    title = _"You closed the ware statistics window!",
    body = rt(
-      p(_[[You have closed the ware statistics window, but I have not yet finished with my explanation. Would you please reopen it and choose the fourth tab?]])
+      p(_[[You have closed the ware statistics menu window, but I have not yet finished with my explanation. Would you please reopen it and choose the fourth tab?]])
    ),
    show_instantly = true,
    w = 300,
@@ -311,10 +311,10 @@ reopen_ware_stats2_obj = {
    obj_name = "open_ware_stats_menu_again2",
    obj_title = _"Open the ware statistics window again.",
    obj_body = rt(
-      p(_[[You closed the ware statistics window before I finished telling you everything about it. If you already know everything, please feel free to leave this tutorial at any time.]]) ..
+      p(_[[You closed the ware statistics menu window before I finished telling you everything about it. If you already know everything, please feel free to leave this tutorial at any time.]]) ..
       paragraphdivider() ..
       -- TRANSLATORS: "it" refers to the ware statistics window.
-      listitem_bullet(_[[Otherwise: Please reopen it and choose the fourth tab.]])
+      listitem_bullet(_[[Otherwise, please reopen it and choose the fourth tab.]])
    )
 }
 
@@ -322,21 +322,21 @@ economy_settings1 = {
    position = "topright",
    title = _"Economy options",
    body = rt(
-      p(_[[I’ve shown you our stock window, where you could see which wares are at the warehouses. You remember?]]) ..
-      p(_[[Now I’ll tell you how you can determine how many wares you want to have. The menu for this purpose can be accessed via any flag and is called ‘Configure economy’.]])) ..
+      p(_[[I’ve shown you our stock menu window, where you could see which wares are at the warehouses. You remember?]]) ..
+      p(_[[Now I’ll tell you how you can determine how many wares you want to have. The menu window for this purpose can be accessed via any flag and is called ‘Configure economy’.]])) ..
    -- Yup, that's indeed the correct icon
    rt("image=pics/genstats_nrwares.png",p(_[[This is the icon.]])) ..
    rt(
       paragraphdivider() ..
-      listitem_bullet(_[[Open this menu.]])
+      listitem_bullet(_[[Open this window.]])
    ),
    h = 350,
    obj_name = "open_economy_settings",
-   obj_title = _"Open the ‘Configure economy’ menu.",
+   obj_title = _"Open the ‘Configure economy’ window.",
    obj_body = rt(
       paragraphdivider() ..
-      listitem_bullet(_[[Open the ‘Configure economy’ menu.]]) ..
-      listitem_arrow(_[[The menu can be accessed by clicking on any flag you own.]])
+      listitem_bullet(_[[Open the ‘Configure economy’ window.]]) ..
+      listitem_arrow(_[[The window can be accessed by clicking on any flag you own.]])
    )
 }
 
@@ -368,7 +368,7 @@ economy_settings3 = {
       paragraphdivider() ..
       listitem_bullet(_[[To be prepared for additional fortifications, you should produce 20 marble columns.]]) ..
       listitem_arrow(_[[Your stonemason will not produce marble columns when they are not needed. You have to increase the target quantity.]]) ..
-      listitem_arrow(_[[To do so, click on any flag and choose ‘Configure economy’. In this menu, you can decide how many wares of each type you wish to have in stock.]])
+      listitem_arrow(_[[To do so, click on any flag and choose ‘Configure economy’. In this menu window, you can decide how many wares of each type you wish to have in stock.]])
    )
 }
 

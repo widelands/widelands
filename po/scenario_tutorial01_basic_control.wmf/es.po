@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2014-10-29 08:57+0000\n"
+"POT-Creation-Date: 2014-10-29 10:08+0000\n"
 "PO-Revision-Date: 2012-11-17 03:23+0000\n"
 "Last-Translator: Ivan Camilo Quintero Santacruz <Unknown>\n"
 "Language-Team: Spanish <es@li.org>\n"
-"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-29 06:10+0000\n"
+"X-Launchpad-Export-Date: 2014-10-30 05:56+0000\n"
 "X-Generator: Launchpad (build 17203)\n"
+"Language: es\n"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:16
 msgid "Nice And Easy Does It All the Time"
@@ -353,7 +353,8 @@ msgid "Other Ways to Move the View"
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:203
-msgid "Excellent. Now there is a faster way to move, using the mouse instead:"
+msgid ""
+"Excellent. Now there is a faster way to move, using the mouse instead:"
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:205
@@ -419,16 +420,16 @@ msgid "Onward to the Quarry"
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:239
-#, fuzzy
 msgid "Great. Now about that quarry…"
-msgstr "Genial. Ahora sobre esa cantera..."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:247
 msgid "How to Build a Quarry"
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:249
-msgid "Build a quarry next to those rocks here. Remember how I did it earlier?"
+msgid ""
+"Build a quarry next to those rocks here. Remember how I did it earlier?"
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:250
@@ -464,10 +465,8 @@ msgstr ""
 "banderas."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:256
-#, fuzzy
 msgid "And finally, the yellow flag symbol only allows for flags."
 msgstr ""
-"Y finalmente el símbolo de la bandera amarilla solo se permite para banderas"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:258
 msgid ""
@@ -483,9 +482,8 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:263
-#, fuzzy
 msgid "Build a quarry next to the rocks"
-msgstr "Construye una cantera al lado de las piedras"
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:265
 msgid "Build a Quarry"
@@ -570,7 +568,8 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:311
-msgid "Or, you can directly click the flag where the road should end, like so:"
+msgid ""
+"Or, you can directly click the flag where the road should end, like so:"
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:320
@@ -606,7 +605,8 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:328
-msgid "Now please rebuild the road between your quarry and your headquarters."
+msgid ""
+"Now please rebuild the road between your quarry and your headquarters."
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:332
@@ -810,9 +810,8 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:436
-#, fuzzy
 msgid "Messages Arrived!"
-msgstr "Mensajes"
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:438
 msgid ""
@@ -985,63 +984,3 @@ msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""
 msgstr[1] ""
-
-#~ msgid "Conquer an area were we can build mines"
-#~ msgstr "Conquista un espacio donde podamos construir minas"
-
-#~ msgid "a bit of coal"
-#~ msgstr "un poco de carbón"
-
-#~ msgid "a lot of coal"
-#~ msgstr "un montón de carbon"
-
-#~ msgid "a bit of iron"
-#~ msgstr "un poco de hierro"
-
-#~ msgid "a lot of iron"
-#~ msgstr "un montón de hierro"
-
-#~ msgid "a bit of gold"
-#~ msgstr "un poco de oro"
-
-#~ msgid "a lot of gold"
-#~ msgstr "un montón de oro"
-
-#~ msgid "a bit of granite"
-#~ msgstr "un poco de granito"
-
-#~ msgid "a lot of granite"
-#~ msgstr "un montón de granito"
-
-#~ msgid "water"
-#~ msgstr "agua"
-
-#~ msgid "nothing was found here"
-#~ msgstr "no se encontró nada aquí"
-
-#~ msgid "this one."
-#~ msgstr "este."
-
-#~ msgid "Warfare and Training"
-#~ msgstr "La guerra y la Formación"
-
-#~ msgid "Soldiers and Warfare"
-#~ msgstr "Los soldados y la guerra"
-
-#~ msgid "Attack:"
-#~ msgstr "Ataque:"
-
-#~ msgid "Defense:"
-#~ msgstr "Defensa:"
-
-#~ msgid "Evade:"
-#~ msgstr "Evadir:"
-
-#~ msgid "Enhance your fortress to a citadel"
-#~ msgstr "Mejora tu fortaleza a una ciudadela"
-
-#~ msgid "Defeat your enemy"
-#~ msgstr "Derrota a tu enemigo"
-
-#~ msgid "Defeat the enemy tribe"
-#~ msgstr "Derrota la tribu enemiga"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-10-28 08:26+0000\n"
+"POT-Creation-Date: 2014-10-29 10:08+0000\n"
 "PO-Revision-Date: 2011-08-21 14:13+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-10-29 05:53+0000\n"
+"X-Launchpad-Export-Date: 2014-10-30 05:42+0000\n"
 "X-Generator: Launchpad (build 17203)\n"
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:76
@@ -324,7 +324,7 @@ msgid "Uproar and Confusion"
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:168
-msgid "Emerging Chaos..."
+msgid "Emerging Chaos…"
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:170
@@ -332,7 +332,7 @@ msgid ""
 "Guilt-ridden, the king committed suicide. Without a monarch, the people "
 "turned to the clerics, but they had no substantial help to offer. Most "
 "accepted their fate while others tried to change the god’s mind by offering "
-"animals in his temple. But to no avail..."
+"animals in his temple. But to no avail…"
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:175
@@ -813,8 +813,8 @@ msgid ""
 "never have I seen sturdier ones – with enough room to carry all of us and "
 "some wares too. And this rescue came just in time: Lutas is about to swallow "
 "the rest of this island, the water rises faster by the hour. But we can make "
-"our escape now and start over in some country farther away... I expect a "
-"long journey, but we will find the land of Satul in the end. This is what I "
+"our escape now and start over in some country farther away… I expect a long "
+"journey, but we will find the land of Satul in the end. This is what I "
 "promised my people. And myself."
 msgstr ""
 
@@ -832,7 +832,7 @@ msgstr ""
 msgid "“%s”"
 msgstr ""
 
-#: ../../scripting/format_scenario.lua:129
+#: ../../scripting/format_scenario.lua:133
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""

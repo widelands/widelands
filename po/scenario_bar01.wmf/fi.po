@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2014-10-29 08:30+0000\n"
-"PO-Revision-Date: 2014-03-12 12:43+0000\n"
+"POT-Creation-Date: 2014-10-29 10:08+0000\n"
+"PO-Revision-Date: 2014-10-29 18:19+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
-"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-29 06:09+0000\n"
+"X-Launchpad-Export-Date: 2014-10-30 05:43+0000\n"
 "X-Generator: Launchpad (build 17203)\n"
+"Language: fi\n"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:23
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:25
@@ -36,7 +36,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:33
 msgid "Expand north-east and build a quarry"
-msgstr ""
+msgstr "Laajennu koilliseen ja rakenna kivilouhos"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:35
 msgid "Expand north-east to the rocks"
@@ -54,7 +54,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:43
 msgid "Start building mines on the mountain"
-msgstr ""
+msgstr "Aloita kaivoksien rakentaminen vuorilla"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "Build coal and iron ore mines"
@@ -122,7 +122,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:66
 msgid "Provide your miners with food"
-msgstr ""
+msgstr "Toimita kaivostyöläisillesi ruokaa"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:68
 msgid "Build a hunter, a gamekeeper and a tavern"
@@ -147,7 +147,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:77
 msgid "Bake bread"
-msgstr ""
+msgstr "Leivo leipää"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:79
 msgid "Build a well, a farm and a bakery"
@@ -163,7 +163,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:86
 msgid "Refine your mined resources"
-msgstr ""
+msgstr "Jalosta kaivostesi tuotteita"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:88
 msgid "Build a smelting works"
@@ -227,9 +227,8 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:109
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:111
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:114
-#, fuzzy
 msgid "Build a wood hardener"
-msgstr "Rakenna kivilouhos"
+msgstr "Rakenna puunkovettaja"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:112
 msgid ""
@@ -242,7 +241,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:120
 msgid "Build a lime kiln and coal economy"
-msgstr ""
+msgstr "Rakenna kalkinpolttouuni ja hiilitalous"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:122
 msgid ""
@@ -286,9 +285,8 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:137
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:139
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:142
-#, fuzzy
 msgid "Build a reed yard"
-msgstr "Rakenna kivilouhos"
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:140
 msgid ""
@@ -300,9 +298,8 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:148
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:150
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:155
-#, fuzzy
 msgid "Build a cattle farm"
-msgstr "Rakenna kivilouhos"
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:151
 msgid ""
@@ -334,23 +331,30 @@ msgstr ""
 msgid ""
 "It’s been months, and we are still hiding where the forests are old and dark."
 msgstr ""
+"Kuukausia on kulunut, ja piilottelemme yhä siellä missä metsät ovat vanhoja "
+"ja synkkiä."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:169
 msgid ""
 "My warriors hunt at day and lie awake at night – listening to the sounds of "
 "the cruel slaughter echoing from afar amongst the ancient trees."
 msgstr ""
+"Soturini metsästävät päivisin ja makaavat valveilla öisin, kuunnellen kaukaa "
+"ikivanhojen puiden seasta kantautuvia julman verilöylyn ääniä."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:177
 msgid ""
 "We can see the raging flames that swallow Al’thunran from here, miles away."
 msgstr ""
+"Näemme Al'thunranin nielevät hirveät liekit tänne asti, kilometrien päähän."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:179
 msgid ""
 "The red lights flash in the darkness and dance to the rhythm of the war "
 "drums that haunt me even in my nightmares."
 msgstr ""
+"Punaiset valot välähtelevät pimeydessä ja tanssivat minua painajaisissanikin "
+"riivaavien sotarumpujen tahtiin."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:190
 msgid ""
@@ -418,6 +422,11 @@ msgid ""
 "wilderness for so long – but I never thought my brothers would engage in "
 "this senseless battle for so long either."
 msgstr ""
+"Boldreth näyttää yhä levottomammalta päivien kuluessa. Joukkojemme "
+"taisteluhenki murenee vähä vähältä kylmän kauden lähestyessä; asummehan yhä "
+"vaivaisissa majoissa ja tilapäisrakennelmissa. En uskonut meidän viipyvän "
+"täällä erämaassa näin kauan - mutta enhän myöskään uskonut veljieni ryhtyvän "
+"tähän järjettömään taistoon tai jatkavan sitä näin pitkään."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:233
 msgid ""
@@ -440,6 +449,8 @@ msgid ""
 "Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my counsel through these darkened days."
 msgstr ""
+"Terve, päällikkö. Olen Khantrukh, monta talvea nähnyt. Jos sallit, autan "
+"neuvoineni sinua johtamaan heimoamme läpi näiden synkkien päivien."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:243
 msgid ""
@@ -459,7 +470,7 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:441
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:450
 msgid "The Advisor"
-msgstr ""
+msgstr "Neuvonantaja"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:250
 msgid "Khantrukh notes…"
@@ -486,7 +497,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:261
 msgid "In the Night"
-msgstr ""
+msgstr "Yöllä"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:262
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:274
@@ -525,7 +536,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:285
 msgid "The Other Day"
-msgstr ""
+msgstr "Toisena päivänä"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:286
 msgid "Thron says thoughtfully…"
@@ -547,7 +558,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:295
 msgid "The Oath"
-msgstr ""
+msgstr "Vala"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:296
 msgid "Thron looks furious…"
@@ -559,10 +570,14 @@ msgid ""
 "the dark forest. We listened in horror as he told us of the atrocities "
 "taking place in Al’thunran."
 msgstr ""
+"Tänään soturini noukkivat synkästä metsästä vanhan miehen, joka harhaili "
+"sairaana ja haavoittuneena. Kuuntelimme kauhuissamme, kun hän kertoi meille "
+"hirveyksistä, joita Al'thunranissa tapahtuu."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:299
 msgid "I hereby renew my oath – I will stop this madness at any cost!"
 msgstr ""
+"Uusin täten valani - pistän tälle hulluudelle lopun hinnalla millä hyvänsä!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:305
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:320
@@ -574,7 +589,7 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:422
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:431
 msgid "Your Loyal Companion"
-msgstr ""
+msgstr "Uskollinen kumppanisi"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:306
 msgid "Brave Boldreth steps to your side…"
@@ -598,6 +613,9 @@ msgid ""
 "with you. The rocks close to our camp are shrinking fast under our workers’ "
 "tools, and it is a matter of little time only before they are all gone."
 msgstr ""
+"Pyydän anteeksi, päällikköni, mutta minun on puhuttava kanssasi vakavasta "
+"ongelmasta. Kivet leirimme lähistöllä pienenevät nopeasti työläistemme "
+"hakkujen kuluttamina, ja ei kestä kauaakaan ennen kuin ne ovat loppuneet."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:322
 msgid "Boldreth jumps up…"
@@ -617,7 +635,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:332
 msgid "Old man? Disrespectful youth!"
-msgstr ""
+msgstr "Vai että 'vanhus'? Julkea nulikka!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:337
 msgid "Khantrukh nods satisfied…"
@@ -626,6 +644,7 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:338
 msgid "At last! These rocks should last for a while."
 msgstr ""
+"Vihdoinkin! Näiden kivien pitäisi riittää tarpeisiimme joksikin aikaa."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:343
 msgid "Boldreth exclaims…"
@@ -653,6 +672,8 @@ msgid ""
 "By Chat’Karuth’s beard, this is amazing! Just imagine what we can use this "
 "coal and iron ore for!"
 msgstr ""
+"Kautta Chat'Karuthin parran, tämä on mainiota! Kuvittele, mihin kaikkeen "
+"voimmekaan käyttää tätä hiiltä ja rautamalmia!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:355
 msgid "It might even be enough to…"
@@ -724,10 +745,14 @@ msgid ""
 "the wind? And I believe the baker is just on his way here, with his most "
 "delicious bread reserved for our chieftain alone!"
 msgstr ""
+"Eikö olekin kaunis näky - kultaiset pellot, kasvamassa kaikessa rauhassa, "
+"tähkäpäät tuulessa tanssien? Ja luulenpa leipurin olevan matkalla tänne "
+"mukanaan ensimmäinen ja herkullisin leipänsä, joka on varattu yksin "
+"päälliköllemme!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:398
 msgid "A Beautiful Morning"
-msgstr ""
+msgstr "Kaunis aamu"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:399
 msgid "Thron recognizes…"
@@ -740,6 +765,10 @@ msgid ""
 "Their songs filled the air until deep in the night, and they were in higher "
 "spirits still the day after."
 msgstr ""
+"Krouvi avasi ovensa asukkaillemme eilen. Vaikka en olekaan järin "
+"juhlatuulella, huomasin kuinka paljon tämä pieni palanen kotia merkitsi "
+"väelleni. Heidän laulunsa täyttivät ilman myöhään yöhön asti, ja he olivat "
+"yleensäkin paremmalla tuulella seuraavana päivänä."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:402
 msgid ""
@@ -834,6 +863,8 @@ msgid ""
 "Wonderful! Our roofs are not dripping anymore, and we have all the material "
 "we need for, well, whichever monumental building we see fit!"
 msgstr ""
+"Erinomaista! Kattomme eivät enää vuoda, ja meillä on kaikki tarvittavat "
+"materiaalit mihin tahansa valtavankin rakennuksen tarpeisiin!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:457
 msgid "We Need Oxen!"
@@ -856,7 +887,7 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:466
 msgid "Mission Complete"
-msgstr ""
+msgstr "Tehtävä suoritettu"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:467
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:479
@@ -884,23 +915,26 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:473
 msgid "Victory"
-msgstr ""
+msgstr "Voitto"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:474
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Olet selviytynyt tästä komennuksesta. Voit halutessasi jatkaa pelaamista, "
+"tai siirtyä seuraavaan komennukseen."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:478
 msgid "One Full Moon Night"
-msgstr ""
+msgstr "Eräänä täydenkuun yönä..."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:480
 msgid ""
 "One night, when the moon shone brightly, I climbed to the peak of "
 "Kal’mavrath."
 msgstr ""
+"Eräänä yönä, kuun paistaessa kirkkaasti, kiipesin Kal'mavarathin huipulle."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:482
 msgid ""
@@ -909,10 +943,15 @@ msgid ""
 "I fear the moment I will see Al’thunran again – will there be anything but "
 "ashes and wasted ruins left of our once beautiful capital when we get there?"
 msgstr ""
+"Kun katsoin horisonttiin, näin yhä punaisten valojen tanssivan "
+"kaukaisuudessa. On uskomatonta, miten intohimoisesti sukulaiseni käyvät tätä "
+"sotaa. Pelkään jo sitä aikaa, kun näemme Al'thunranin jälleen - lieneekö "
+"siellä muuta kuin tuhkaa ja savuavia raunioita jäljellä paikasta, jossa "
+"kaunis pääkaupunkimme kerran kukoisti?"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:486
 msgid "Another Cold Day"
-msgstr ""
+msgstr "Toinen kuulas päivä"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:487
 msgid "Thron looks worried…"
@@ -924,26 +963,34 @@ msgid ""
 "endure. The day we may return cannot be far anymore – it must not be far "
 "anymore."
 msgstr ""
+"Talvi tekee tuloaan. Monet meistä kärsivät kylmyydestä mutta meidän tulee "
+"ketää. Päivä jolloin palaamme ei voi olla kaukana - Se ei voi olla kaukana "
+"enää."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:490
 msgid ""
 "I prayed that it might get warmer again, as I prayed that the war would "
 "finally come to an end."
 msgstr ""
+"Rukoilin jotta saisimme lämpimämpää ilmaa samalla kun rukoilin sodan "
+"loppumiselle."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:492
 msgid "So far, it seems that neither prayer was fulfilled."
-msgstr ""
+msgstr "Tähän mennessä kumpaakaan rukousta ei ole täytetty."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:496
 msgid "A friendly village has joined us!"
-msgstr ""
+msgstr "Ystävällismielinen kylä liittyi joukkoomme!"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:498
 msgid ""
 "We have found a village with friendly and productive people, impressed by "
 "our wealth, technology and strength."
 msgstr ""
+"Olemme löytäneet kylän, jossa asuu ystävällistä ja tuotteliasta väkeä. "
+"Rikkautemme, tietämyksemme ja voimamme on vakuuttanut heidät liittymään "
+"joukkoomme."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:500
 msgid ""
@@ -966,12 +1013,3 @@ msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""
 msgstr[1] ""
-
-#~ msgid "Welcome to Widelands!"
-#~ msgstr "Tervetuloa Widelandsiin!"
-
-#~ msgid "Messages"
-#~ msgstr "Viestit"
-
-#~ msgid "Conclusion"
-#~ msgstr "Johtopäätös"
