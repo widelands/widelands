@@ -28,7 +28,7 @@
 #include "ui_basic/window.h"
 
 namespace Widelands {
-struct WareDescr;
+class WareDescr;
 struct TribeDescr;
 }
 

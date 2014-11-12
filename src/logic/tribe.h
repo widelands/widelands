@@ -37,12 +37,12 @@ namespace Widelands {
 
 class EditorGameBase;
 class ResourceDescription;
+class WareDescr;
 class Warehouse;
 class WorkerDescr;
 class World;
 struct BuildingDescr;
 struct Event;
-struct WareDescr;
 
 /*
 Tribes

@@ -47,6 +47,15 @@ WareDescr::WareDescr
 		static_cast<uint8_t>(global_s.get_natural("preciousness", 0));
 }
 
+WareDescr::WareDescr(const LuaTable& table) :
+	MapObjectDescr(table.get_string("name"), table.get_string("descname"),
+			m_helptext(table.get_string("help"),
+			m_icon_fname(table.get_string("menu_picture")),
+{
+// NOCOM(#sirver): do we want default arguments (i.e. preciousness).
+// NOCOM(#sirver): should not know about it's tribe anymore.
+// NOCOM(#sirver): fill in the rest.
+}
 /**
  * Load all static graphics
  */

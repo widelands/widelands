@@ -49,6 +49,7 @@ class Map;
 struct ObjectManager;
 class Player;
 struct PlayerImmovable;
+class Tribe;
 struct TribeDescr;
 struct Flag;
 struct AttackController;
@@ -206,6 +207,12 @@ public:
 	// Returns the world that can be modified. Prefer world() whenever possible.
 	World* mutable_world();
 
+	// Returns the tribe.
+	const Tribe& tribe() const;
+
+	// Returns the mutable tribe. Prefer tribe() whenever possible.
+	Tribe* mutable_tribe();
+
 protected:
 	using TribeVector = std::vector<TribeDescr*>;
 	TribeVector tribes_;
@@ -256,6 +263,7 @@ private:
 	std::unique_ptr<PlayersManager> player_manager_;
 
 	std::unique_ptr<World> world_;
+	std::unique_ptr<Tribe> tribe_;
 	InteractiveBase* ibase_;
 	Map* map_;
 

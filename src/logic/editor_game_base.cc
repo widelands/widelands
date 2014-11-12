@@ -43,6 +43,7 @@
 #include "logic/playersmanager.h"
 #include "logic/roadtype.h"
 #include "logic/tribe.h"
+#include "logic/tribe/tribe.h"
 #include "logic/ware_descr.h"
 #include "logic/worker.h"
 #include "logic/world/world.h"
@@ -121,6 +122,32 @@ World* EditorGameBase::mutable_world() {
 	}
 	return world_.get();
 }
+
+const World& EditorGameBase::tribe() const {
+	// Const casts are evil, but this is essentially lazy evaluation and the
+	// caller should really not modify this.
+	return *const_cast<EditorGameBase*>(this)->mutable_tribe();
+}
+
+World* EditorGameBase::mutable_tribe() {
+	if (!tribe_) {
+		// Lazy initialization of Tribe. We need to create the pointer to the
+		// tribe immediately though, because the lua scripts need to have access
+		// to tribe through this method already.
+		ScopedTimer timer("Loading the tribe took %ums");
+		tribe_.reset(new Tribe());
+
+		try {
+			lua_->run_script("tribe/init.lua");
+		}
+		catch (const WException& e) {
+			log("Could not read tribe information: %s", e.what());
+			throw;
+		}
+	}
+	return tribe_.get();
+}
+
 
 InteractiveGameBase* EditorGameBase::get_igbase()
 {

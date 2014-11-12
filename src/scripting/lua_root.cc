@@ -28,6 +28,7 @@
 #include "logic/game_controller.h"
 #include "logic/immovable.h"
 #include "logic/tribe.h"
+#include "logic/tribe/tribe.h"
 #include "logic/world/world.h"
 #include "scripting/lua_coroutine.h"
 #include "scripting/lua_editor.h"
@@ -462,6 +463,77 @@ int LuaWorld::new_editor_immovable_category(lua_State* L) {
 		get_egbase(L).mutable_world()->add_editor_immovable_category(table);
 	}
 	catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
+/* RST
+Tribe
+-----
+
+.. class:: Tribe
+
+	// NOCOM(#sirver): document
+*/
+
+const char LuaTribe::className[] = "Tribe";
+const MethodType<LuaTribe> LuaTribe::Methods[] = {
+	METHOD(LuaTribe, new_ware_type),
+	{0, 0},
+};
+const PropertyType<LuaTribe> LuaTribe::Properties[] = {
+	{0, 0, 0},
+};
+
+
+LuaTribe::LuaTribe(lua_State * /* L */) {
+	// Nothing to do.
+}
+
+void LuaTribe::__persist(lua_State*) {
+	// Nothing to be done.
+}
+
+void LuaTribe::__unpersist(lua_State*) {
+	// Nothing to be done.
+}
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/* RST
+	.. method:: new_ware_type(table)
+
+		Adds a new ware type. Takes a single argument, a table with
+		the descriptions. See the files in tribe/ for usage examples.
+
+		:returns: :const:`nil`
+*/
+int LuaTribe::new_ware_type(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		get_egbase(L).mutable_tribe()->add_ware_type(table);
+	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
 	return 0;

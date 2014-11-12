@@ -34,10 +34,10 @@
 
 namespace Widelands {
 
-struct WareDescr;
 struct ProductionProgram;
-class Soldier;
 class Request;
+class Soldier;
+class WareDescr;
 class WaresQueue;
 class WorkerDescr;
 
