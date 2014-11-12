@@ -1204,7 +1204,8 @@ void WLApplication::mainmenu_singleplayer()
 	//  This is the code returned by UI::Panel::run() when the panel is dying.
 	//  Make sure that the program exits when the window manager says so.
 	static_assert
-		(FullscreenMenuSinglePlayer::Back == UI::Panel::dying_code, "Panel should be dying.");
+		(static_cast<int32_t>(FullscreenMenuSinglePlayer::MenuTarget::kBack) == UI::Panel::dying_code,
+		 "Panel should be dying.");
 
 	for (;;) {
 		int32_t code;
@@ -1213,17 +1214,17 @@ void WLApplication::mainmenu_singleplayer()
 			code = single_player_menu.run();
 		}
 		switch (code) {
-		case FullscreenMenuSinglePlayer::Back:
+		case static_cast<int32_t>(FullscreenMenuSinglePlayer::MenuTarget::kBack):
 			return;
-		case FullscreenMenuSinglePlayer::New_Game:
+		case static_cast<int32_t>(FullscreenMenuSinglePlayer::MenuTarget::kNewGame):
 			if (new_game())
 				return;
 			break;
-		case FullscreenMenuSinglePlayer::Load_Game:
+		case static_cast<int32_t>(FullscreenMenuSinglePlayer::MenuTarget::kLoadGame):
 			if (load_game())
 				return;
 			break;
-		case FullscreenMenuSinglePlayer::Campaign:
+		case static_cast<int32_t>(FullscreenMenuSinglePlayer::MenuTarget::kCampaign):
 			if (campaign_game())
 				return;
 			break;
@@ -1245,12 +1246,12 @@ void WLApplication::mainmenu_multiplayer()
 		bool internet = false;
 		FullscreenMenuMultiPlayer mp;
 		switch (mp.run()) {
-			case FullscreenMenuMultiPlayer::Back:
+			case static_cast<int32_t>(FullscreenMenuMultiPlayer::MenuTarget::kBack):
 				return;
-			case FullscreenMenuMultiPlayer::Metaserver:
+			case static_cast<int32_t>(FullscreenMenuMultiPlayer::MenuTarget::kMetaserver):
 				internet = true;
 				break;
-			case FullscreenMenuMultiPlayer::Lan:
+			case static_cast<int32_t>(FullscreenMenuMultiPlayer::MenuTarget::kLan):
 				break;
 			default:
 				assert(false);
@@ -1320,7 +1321,8 @@ void WLApplication::mainmenu_editor()
 	//  This is the code returned by UI::Panel::run() when the panel is dying.
 	//  Make sure that the program exits when the window manager says so.
 	static_assert
-		(FullscreenMenuEditor::Back == UI::Panel::dying_code, "Editor should be dying.");
+		(static_cast<int32_t>(FullscreenMenuEditor::MenuTarget::kBack) == UI::Panel::dying_code,
+		 "Editor should be dying.");
 
 	for (;;) {
 		int32_t code;
@@ -1329,12 +1331,12 @@ void WLApplication::mainmenu_editor()
 			code = editor_menu.run();
 		}
 		switch (code) {
-		case FullscreenMenuEditor::Back:
+		case static_cast<int32_t>(FullscreenMenuEditor::MenuTarget::kBack):
 			return;
-		case FullscreenMenuEditor::New_Map:
+		case static_cast<int32_t>(FullscreenMenuEditor::MenuTarget::kNewMap):
 			EditorInteractive::run_editor(m_filename, m_script_to_run);
 			return;
-		case FullscreenMenuEditor::Load_Map: {
+		case static_cast<int32_t>(FullscreenMenuEditor::MenuTarget::kLoadMap): {
 			std::string filename;
 			{
 				SinglePlayerGameSettingsProvider sp;

@@ -25,52 +25,44 @@
 #include "wui/text_constants.h"
 
 FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer() :
-	FullscreenMenuBase("ui_fsmenu.jpg"),
-
-// Values for alignment and size
-	m_butw (get_w() * 7 / 20),
-	m_buth (get_h() * 19 / 400),
-	m_butx ((get_w() - m_butw) / 2),
-	m_fs   (fs_small()),
-	m_fn   (ui_fn()),
+	FullscreenMenuMainMenu(),
 
 // Title
 	title
 		(this,
-		 get_w() / 2, get_h() * 3 / 40,
+		 get_w() / 2, m_title_y,
 		 _("Choose game type"), UI::Align_HCenter),
 
 // Buttons
 	metaserver
 		(this, "metaserver",
-		 m_butx, get_h() * 6 / 25, m_butw, m_buth,
-		 g_gr->images().get("pics/but1.png"),
-		 _("Internet game"), std::string(), true, false),
+		 m_butx, m_buty, m_butw, m_buth,
+		 g_gr->images().get(m_button_background),
+		 _("Internet game"), "", true, false),
 	lan
 		(this, "lan",
-		 m_butx, get_h() * 61 / 200, m_butw, m_buth,
-		 g_gr->images().get("pics/but1.png"),
-		 _("LAN / Direct IP"), std::string(), true, false),
+		 m_butx, get_y_from_preceding(metaserver) + m_padding, m_butw, m_buth,
+		 g_gr->images().get(m_button_background),
+		 _("LAN / Direct IP"), "", true, false),
 	back
 		(this, "back",
-		 m_butx, get_h() * 3 / 4, m_butw, m_buth,
-		 g_gr->images().get("pics/but0.png"),
-		 _("Back"), std::string(), true, false)
+		 m_butx, m_back_button_y, m_butw, m_buth,
+		 g_gr->images().get(m_button_background),
+		 _("Back"), "", true, false)
 {
 	metaserver.sigclicked.connect(boost::bind(&FullscreenMenuMultiPlayer::internet_login, boost::ref(*this)));
-	metaserver.set_font(font_small());
-	lan.set_font(font_small());
+
 	lan.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuMultiPlayer::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(Lan)));
-	back.set_font(font_small());
+			  static_cast<int32_t>(MenuTarget::kLan)));
+
 	back.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuMultiPlayer::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(Back)));
+			  static_cast<int32_t>(MenuTarget::kBack)));
 
-	title.set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
+	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
 
 	Section & s = g_options.pull_section("global");
 	m_auto_log = s.get_bool("auto_log", false);
@@ -115,7 +107,7 @@ void FullscreenMenuMultiPlayer::internet_login() {
 		m_nickname = s.get_string("nickname", _("nobody"));
 		m_password = s.get_string("password", "nobody");
 		m_register = s.get_bool("registered", false);
-		end_modal(Metaserver);
+		end_modal(static_cast<int32_t>(MenuTarget::kMetaserver));
 		return;
 	}
 
@@ -128,6 +120,6 @@ void FullscreenMenuMultiPlayer::internet_login() {
 		s.set_bool("registered", lb.registered());
 		s.set_bool("auto_log", lb.set_automaticlog());
 
-		end_modal(Metaserver);
+		end_modal(static_cast<int32_t>(MenuTarget::kMetaserver));
 	}
 }

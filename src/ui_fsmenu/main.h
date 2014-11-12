@@ -20,7 +20,7 @@
 #ifndef WL_UI_FSMENU_MAIN_H
 #define WL_UI_FSMENU_MAIN_H
 
-#include "ui_fsmenu/base.h"
+#include "ui_fsmenu/main_menu.h"
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
 
@@ -28,7 +28,7 @@
  * This runs the main menu. There, you can select
  * between different playmodes, exit and so on.
 */
-struct FullscreenMenuMain : public FullscreenMenuBase {
+struct FullscreenMenuMain : public FullscreenMenuMainMenu {
 	FullscreenMenuMain();
 	enum class MenuTarget: int32_t {
 		kTutorial,
@@ -43,8 +43,6 @@ struct FullscreenMenuMain : public FullscreenMenuBase {
 		kExit
 	};
 private:
-	uint32_t     m_butx, m_buty, m_butw, m_buth;
-	uint32_t     m_padding;
 	UI::Button   playtutorial;
 	UI::Button   singleplayer;
 	UI::Button   multiplayer;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,33 +17,25 @@
  *
  */
 
-#ifndef WL_UI_FSMENU_SINGLEPLAYER_H
-#define WL_UI_FSMENU_SINGLEPLAYER_H
+#ifndef WL_UI_FSMENU_MAIN_MENU_H
+#define WL_UI_FSMENU_MAIN_MENU_H
 
-#include "ui_fsmenu/main_menu.h"
-#include "ui_basic/button.h"
-#include "ui_basic/textarea.h"
+#include "ui_fsmenu/base.h"
 
 /**
- * Fullscreen Menu for SinglePlayer.
- * Here you select what game you want to play.
+ * This sets the values for alignment and size and other common properties
+ * for main menus that contain only buttons.
  */
-struct FullscreenMenuSinglePlayer : public FullscreenMenuMainMenu {
-	FullscreenMenuSinglePlayer();
+struct FullscreenMenuMainMenu : public FullscreenMenuBase {
+	FullscreenMenuMainMenu();
+	FullscreenMenuMainMenu(char const * background_image);
 
-	enum class MenuTarget: int32_t {
-		kBack = UI::Panel::dying_code,
-		kNewGame,
-		kCampaign,
-		kLoadGame
-	};
+protected:
+	uint32_t m_butx, m_buty, m_butw, m_buth;
+	uint32_t m_back_button_y, m_title_y;
+	uint32_t m_padding;
 
-private:
-	UI::Textarea title;
-	UI::Button   new_game;
-	UI::Button   campaign;
-	UI::Button   load_game;
-	UI::Button   back;
+	const std::string m_button_background;
 };
 
-#endif  // end of include guard: WL_UI_FSMENU_SINGLEPLAYER_H
+#endif  // end of include guard: WL_UI_FSMENU_MAIN_MENU_H

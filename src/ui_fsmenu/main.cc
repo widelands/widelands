@@ -26,65 +26,58 @@
 #include "graphic/graphic.h"
 
 FullscreenMenuMain::FullscreenMenuMain() :
-	FullscreenMenuBase("mainmenu.jpg"),
-
-	// Values for alignment and size
-	m_butx(get_w() * 13 / 40),
-	m_buty(get_h() * 42 / 200),
-	m_butw(get_w() * 7 / 20),
-	m_buth(get_h() * 9 / 200),
-	m_padding(m_buth / 3),
+	FullscreenMenuMainMenu("mainmenu.jpg"),
 
 // Buttons
 	playtutorial
 		(this, "play_tutorial",
-		 m_butx, m_buty, m_butw, m_buth,
-		 g_gr->images().get("pics/but3.png"),
+		 m_butx, get_h() * 42 / 200, m_butw, m_buth,
+		 g_gr->images().get(m_button_background),
 		 _("Play Tutorial"), "", true, false),
 	singleplayer
 		(this, "single_player",
 		 m_butx, get_y_from_preceding(playtutorial) + m_buth, m_butw, m_buth,
-		 g_gr->images().get("pics/but3.png"),
+		 g_gr->images().get(m_button_background),
 		 _("Single Player"), "", true, false),
 	multiplayer
 		(this, "multi_player",
 		 m_butx, get_y_from_preceding(singleplayer) + m_padding, m_butw, m_buth,
-		 g_gr->images().get("pics/but3.png"),
+		 g_gr->images().get(m_button_background),
 		 _("Multiplayer"), "", true, false),
 	replay
 		(this, "replay",
 		 m_butx, get_y_from_preceding(multiplayer) + m_padding, m_butw, m_buth,
-		 g_gr->images().get("pics/but3.png"),
+		 g_gr->images().get(m_button_background),
 		 _("Watch Replay"), "", true, false),
 	editor
 		(this, "editor",
 		 m_butx, get_y_from_preceding(replay) + m_padding, m_butw, m_buth,
-		 g_gr->images().get("pics/but3.png"),
+		 g_gr->images().get(m_button_background),
 		 _("Editor"), "", true, false),
 	options
 		(this, "options",
 		 m_butx, get_y_from_preceding(editor) + m_buth, m_butw, m_buth,
-		 g_gr->images().get("pics/but3.png"),
+		 g_gr->images().get(m_button_background),
 		 _("Options"), "", true, false),
 	readme
 		(this, "readme",
 		 m_butx, get_y_from_preceding(options) + m_buth, m_butw, m_buth,
-		 g_gr->images().get("pics/but3.png"),
+		 g_gr->images().get(m_button_background),
 		 _("View Readme"), "", true, false),
 	license
 		(this, "license",
 		 m_butx, get_y_from_preceding(readme) + m_padding, m_butw, m_buth,
-		 g_gr->images().get("pics/but3.png"),
+		 g_gr->images().get(m_button_background),
 		 _("License"), "", true, false),
 	authors
 		(this, "authors",
 		 m_butx, get_y_from_preceding(license) + m_padding, m_butw, m_buth,
-		 g_gr->images().get("pics/but3.png"),
+		 g_gr->images().get(m_button_background),
 		 _("Authors"), "", true, false),
 	exit
 		(this, "exit",
 		 m_butx, get_y_from_preceding(authors) + m_buth, m_butw, m_buth,
-		 g_gr->images().get("pics/but3.png"),
+		 g_gr->images().get(m_button_background),
 		 _("Exit Widelands"), "", true, false),
 
 // Textlabels
