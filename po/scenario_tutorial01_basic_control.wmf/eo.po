@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2014-10-29 08:57+0000\n"
+"POT-Creation-Date: 2014-10-29 10:08+0000\n"
 "PO-Revision-Date: 2014-03-09 07:55+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
-"Language: eo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-29 06:09+0000\n"
+"X-Launchpad-Export-Date: 2014-10-30 05:55+0000\n"
 "X-Generator: Launchpad (build 17203)\n"
+"Language: eo\n"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:16
 msgid "Nice And Easy Does It All the Time"
@@ -353,7 +353,8 @@ msgid "Other Ways to Move the View"
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:203
-msgid "Excellent. Now there is a faster way to move, using the mouse instead:"
+msgid ""
+"Excellent. Now there is a faster way to move, using the mouse instead:"
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:205
@@ -419,16 +420,16 @@ msgid "Onward to the Quarry"
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:239
-#, fuzzy
 msgid "Great. Now about that quarry…"
-msgstr "Bonege. Nun pri tiu ŝtonmino...."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:247
 msgid "How to Build a Quarry"
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:249
-msgid "Build a quarry next to those rocks here. Remember how I did it earlier?"
+msgid ""
+"Build a quarry next to those rocks here. Remember how I did it earlier?"
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:250
@@ -440,15 +441,11 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:251
-#, fuzzy
 msgid ""
 "You can build four things on fields in Widelands: flags, small houses, "
 "medium houses and big houses. But not every field can hold everything. The "
 "build space symbols ease recognition:"
 msgstr ""
-"Vi eblas konstrui kvar aferojn ĉe la kampoj en Widelands: Flagoj, etaj "
-"domoj, mezaj domoj kaj grandaj domoj. Sed ne ĉiu kampo subtenas ĉiajn "
-"konstruaĵojn. La helpo pri konstruado faciligas la esploradon:"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:253
 msgid "Everything can be built on the green house symbol."
@@ -464,9 +461,8 @@ msgid "Red building symbols can only hold small buildings and flags."
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:256
-#, fuzzy
 msgid "And finally, the yellow flag symbol only allows for flags."
-msgstr "Kaj finfine la flava flago simbolo nure estas permesata por flagoj"
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:258
 msgid ""
@@ -482,9 +478,8 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:263
-#, fuzzy
 msgid "Build a quarry next to the rocks"
-msgstr "Kontruu ŝtonminon apud la ŝtonoj"
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:265
 msgid "Build a Quarry"
@@ -569,7 +564,8 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:311
-msgid "Or, you can directly click the flag where the road should end, like so:"
+msgid ""
+"Or, you can directly click the flag where the road should end, like so:"
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:320
@@ -606,7 +602,8 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:328
-msgid "Now please rebuild the road between your quarry and your headquarters."
+msgid ""
+"Now please rebuild the road between your quarry and your headquarters."
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:332
@@ -814,21 +811,16 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:436
-#, fuzzy
 msgid "Messages Arrived!"
-msgstr "Masaĝo alvenis!"
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:438
-#, fuzzy
 msgid ""
 "You received some messages. See how the button at the bottom of the screen "
 "has changed appearance? You can destroy the quarries now as they are no "
 "longer of any use and just blocking space. To do so, there are two "
 "possibilities:"
 msgstr ""
-"Oni sendis mesaĝon al vi. Ĉu vi vidas kiel la butono en la suba parto de la "
-"ekrano ŝanĝis ĝian aspekton? Vi povas detrui nun ĉi tiun ŝtonminon ĉar ĝi "
-"estas ne plu uzebla kaj nur okupas spacon."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:440
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:450
@@ -993,60 +985,3 @@ msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""
 msgstr[1] ""
-
-#~ msgid "To do that, click on the quarry and select the destroy button."
-#~ msgstr "Por fari tion, klaku sur la ŝtonmino kaj elektu la butonon detrui."
-
-#~ msgid "Conquer an area were we can build mines"
-#~ msgstr "Konkeru spacon kie ni povu kontrui minojn"
-
-#~ msgid "a bit of coal"
-#~ msgstr "iomete da karbo"
-
-#~ msgid "a lot of coal"
-#~ msgstr "multe da karbo"
-
-#~ msgid "a bit of iron"
-#~ msgstr "iomete da fero"
-
-#~ msgid "a lot of iron"
-#~ msgstr "multe da fero"
-
-#~ msgid "a bit of gold"
-#~ msgstr "iomete da oro"
-
-#~ msgid "a lot of gold"
-#~ msgstr "multe da oro"
-
-#~ msgid "a bit of granite"
-#~ msgstr "iomete da granito"
-
-#~ msgid "a lot of granite"
-#~ msgstr "multe da granito"
-
-#~ msgid "water"
-#~ msgstr "akvo"
-
-#~ msgid "nothing was found here"
-#~ msgstr "nenio estis trivita ĉi tie"
-
-#~ msgid "this one."
-#~ msgstr "ĉi tiu"
-
-#~ msgid "Warfare and Training"
-#~ msgstr "Milito kaj Trejnado"
-
-#~ msgid "Soldiers and Warfare"
-#~ msgstr "Soldatoj kaj Milito"
-
-#~ msgid "Attack:"
-#~ msgstr "Ataki:"
-
-#~ msgid "Defeat your enemy"
-#~ msgstr "Venku vian malamikon"
-
-#~ msgid "Defeat the enemy tribe"
-#~ msgstr "Venku la malamikan tribon"
-
-#~ msgid "Defeat Your Enemy"
-#~ msgstr "Venku vian malamikon"
