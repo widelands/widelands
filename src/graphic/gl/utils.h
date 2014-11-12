@@ -19,15 +19,12 @@
 #ifndef WL_GRAPHIC_GL_UTILS_H
 #define WL_GRAPHIC_GL_UTILS_H
 
-#define NO_SDL_GLEXT
-
 #include <memory>
 
-#include <GL/glew.h>
-#include <SDL_opengl.h>
 #include <stdint.h>
 
 #include "base/macros.h"
+#include "graphic/gl/system_headers.h"
 
 struct SDL_PixelFormat;
 

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2014-10-29 10:08+0000\n"
+"POT-Creation-Date: 2014-11-12 11:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -2044,12 +2044,12 @@ msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:13
 msgid ""
-"\"Take 200 hits to fell a tree and you're a baby. Take 100 and you're a soldier. Take 50 and you're a hero. Take 20 and soon you will be a honorable lumberjack.\""
+"Krumta, carpenter of Chat’Karuth"
 msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:13
 msgid ""
-"Krumta, carpenter of Chat'Karuth"
+"‘Take 200 hits to fell a tree and you’re a baby. Take 100 and you’re a soldier. Take 50 and you’re a hero. Take 20 and soon you will be a honorable lumberjack.’"
 msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:16
@@ -2059,7 +2059,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:17
 msgid ""
-"The lumberjack's hut needs trees to fell within the working radius."
+"The lumberjack’s hut needs trees to fell within the working radius."
 msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:29

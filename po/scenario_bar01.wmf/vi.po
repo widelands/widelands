@@ -7,28 +7,26 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2014-10-29 08:30+0000\n"
-"PO-Revision-Date: 2014-03-13 14:11+0000\n"
+"POT-Creation-Date: 2014-10-29 10:08+0000\n"
+"PO-Revision-Date: 2014-10-29 18:04+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
-"Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-10-29 05:54+0000\n"
+"X-Launchpad-Export-Date: 2014-10-30 05:43+0000\n"
 "X-Generator: Launchpad (build 17203)\n"
+"Language: vi\n"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:23
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:25
-#, fuzzy
 msgid "Build two ranger’s huts"
-msgstr "Dựng một nhà cho người gác rừng"
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:26
-#, fuzzy
 msgid "Build a ranger’s hut next to each lumberjack’s hut."
-msgstr "Dựng một kho chứa gỗ khác"
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:27
 msgid ""
@@ -229,9 +227,8 @@ msgstr ""
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:109
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:111
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:114
-#, fuzzy
 msgid "Build a wood hardener"
-msgstr "Dựng hai xưởng khai thác đá"
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:112
 msgid ""
@@ -327,9 +324,8 @@ msgid "The Story Begins"
 msgstr "Câu chuyện bắt đầu"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:166
-#, fuzzy
 msgid "Thron sighs…"
-msgstr "Thron thở dài..."
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:167
 msgid ""
@@ -369,14 +365,11 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:202
-#, fuzzy
 msgid ""
 "As father told me, there are times to fight and times to lie and wait, "
 "trying not to fall asleep or die before the right time comes. And so I do "
 "wait."
 msgstr ""
-"Như cha đã từng bảo tôi, có những lúc chiến đấu và lúc cần phải nằm đợi, cố "
-"gắng không ngủ say hoặc chết trước khi thời cơ đến. Và vì vậy tôi... chờ đợi."
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:209
 msgid "Thron is shaking his head…"
@@ -436,9 +429,8 @@ msgid "Somebody Comes up to You"
 msgstr "Có người đến giúp bạn"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:240
-#, fuzzy
 msgid "An old man says…"
-msgstr "Một ông cụ già nói..."
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:241
 msgid ""
@@ -470,9 +462,8 @@ msgid "The Advisor"
 msgstr "Quân sư"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:250
-#, fuzzy
 msgid "Khantrukh notes…"
-msgstr "Khantrukh gật đầu..."
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:251
 msgid ""
@@ -499,9 +490,8 @@ msgstr "Trong đêm"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:262
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:274
-#, fuzzy
 msgid "Thron says…"
-msgstr "Thron nói..."
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:263
 msgid ""
@@ -538,9 +528,8 @@ msgid "The Other Day"
 msgstr "Ngày khác"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:286
-#, fuzzy
 msgid "Thron says thoughtfully…"
-msgstr "Thron ngẫm nghĩ nói..."
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:287
 msgid ""
@@ -561,9 +550,8 @@ msgid "The Oath"
 msgstr "Lời nguyền"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:296
-#, fuzzy
 msgid "Thron looks furious…"
-msgstr "Thron trông rất giận dữ..."
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:297
 msgid ""
@@ -601,9 +589,8 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:314
-#, fuzzy
 msgid "Khantrukh joins in…"
-msgstr "Khantrukh tiếp lời..."
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:315
 msgid ""
@@ -625,18 +612,16 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:331
-#, fuzzy
 msgid "Khantrukh grumbles…"
-msgstr "Khantrukh nhớ lại..."
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:332
 msgid "Old man? Disrespectful youth!"
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:337
-#, fuzzy
 msgid "Khantrukh nods satisfied…"
-msgstr "Khantrukh gật đầu..."
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:338
 msgid "At last! These rocks should last for a while."
@@ -674,9 +659,8 @@ msgid "It might even be enough to…"
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:360
-#, fuzzy
 msgid "Khantrukh interrupts…"
-msgstr "Khantrukh tiếp lời..."
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:361
 msgid ""
@@ -776,9 +760,8 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:414
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:458
-#, fuzzy
 msgid "Khantrukh speaks…"
-msgstr "Khantrukh gật đầu..."
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:415
 msgid ""
@@ -826,9 +809,8 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:442
-#, fuzzy
 msgid "Khantrukh steps in…"
-msgstr "Khantrukh tiếp lời..."
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:443
 msgid ""
@@ -879,9 +861,8 @@ msgstr "Hoàn thành nhiệm vụ"
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:467
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:479
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:497
-#, fuzzy
 msgid "Thron speaks…"
-msgstr "Thron nói..."
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:468
 msgid ""
@@ -934,9 +915,8 @@ msgid "Another Cold Day"
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:487
-#, fuzzy
 msgid "Thron looks worried…"
-msgstr "Thron trông rất giận dữ..."
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:488
 msgid ""
@@ -986,26 +966,3 @@ msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""
 msgstr[1] ""
-
-#~ msgid "Build a lumberjack’s hut"
-#~ msgstr "Dựng một kho chứa gỗ"
-
-#~ msgid ""
-#~ "Press SPACE to see where you can build. The red house symbols show you "
-#~ "where a small building – like a lumberjack’s hut – may be built."
-#~ msgstr ""
-#~ "Ấn SPACE để xem những nơi nào bạn có thể xây dựng được trên đó. Biểu "
-#~ "tượng ngôi nhà màu đỏ cho thấy bạn có thể xây một công trình nhỏ - như "
-#~ "kho chứa gỗ - ở đó."
-
-#~ msgid "Build two quarries south-west of your headquarters."
-#~ msgstr "Dựng hai xưởng khai thác đá ở phía tây nam tổng hành dinh."
-
-#~ msgid "The elder remarks..."
-#~ msgstr "Trưởng lão nhận định..."
-
-#~ msgid "The old man looks to the sky..."
-#~ msgstr "Ông già ngước nhìn bầu trời..."
-
-#~ msgid "The elder speaks..."
-#~ msgstr "Trưởng lão nói..."

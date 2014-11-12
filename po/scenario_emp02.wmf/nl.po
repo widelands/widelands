@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4556\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-10-28 08:26+0000\n"
+"POT-Creation-Date: 2014-10-29 10:08+0000\n"
 "PO-Revision-Date: 2014-04-28 16:16+0000\n"
 "Last-Translator: fk <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-29 05:54+0000\n"
+"X-Launchpad-Export-Date: 2014-10-30 05:42+0000\n"
 "X-Generator: Launchpad (build 17203)\n"
 "Language: nl\n"
 
@@ -399,8 +399,8 @@ msgid "Food for the Miners"
 msgstr "Voedsel voor de mijnwerkers"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:198
-msgid "Amalea comes in..."
-msgstr "Amalea komt binnen..."
+msgid "Amalea comes in…"
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:199
 msgid ""
@@ -425,10 +425,8 @@ msgstr ""
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:203
 msgid ""
 "What do you think about helping them out? I can’t tell you what we need "
-"exactly... but here are my recommendations:"
+"exactly… but here are my recommendations:"
 msgstr ""
-"Wat vind je ervan om ze te helpen?<br> I kan je niet zeggen wat we precies "
-"nodig hebben... maar hier zijn mijn aanbevelingen:"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:209
 msgid "The Barbarians"
@@ -523,8 +521,8 @@ msgid "As Time is Running By"
 msgstr "Terwijl de klok doortikt"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:249
-msgid "7 days later..."
-msgstr "7 dagen later..."
+msgid "7 days later…"
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:253
 msgid "A Message"
@@ -543,12 +541,8 @@ msgid ""
 "The message was addressed to me, begging me to come back to Fremil. It says "
 "that the Empire is at war with the Barbarians. They were attacked from the "
 "north by the tribe that I was forbidden to attack. It is clear to me what I "
-"must do..."
+"must do…"
 msgstr ""
-"De boodschap was gericht aan mij, mij smekend om terug te gaan naar Fremil. "
-"Er staat dat het keizerrijk in oorlog is met de barbaren. Zij werden "
-"aangevallen vanuit het noorden door de stam die mij was verboden om aan te "
-"vallen. Het is me duidelijk wat ik moet doen..."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:259
 msgid ""
@@ -587,7 +581,7 @@ msgstr ""
 msgid "“%s”"
 msgstr "\"%s\""
 
-#: ../../scripting/format_scenario.lua:129
+#: ../../scripting/format_scenario.lua:133
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nieuwe opdracht"

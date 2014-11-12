@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2014-10-29 08:57+0000\n"
+"POT-Creation-Date: 2014-10-29 10:08+0000\n"
 "PO-Revision-Date: 2014-07-27 16:49+0000\n"
 "Last-Translator: SirVer <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
-"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-29 06:09+0000\n"
+"X-Launchpad-Export-Date: 2014-10-30 05:55+0000\n"
 "X-Generator: Launchpad (build 17203)\n"
+"Language: it\n"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:16
 msgid "Nice And Easy Does It All the Time"
@@ -40,15 +40,11 @@ msgid "Welcome to Widelands!"
 msgstr "Benvenuto a Widelands!"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:29
-#, fuzzy
 msgid ""
 "Widelands is a slow-paced build-up strategy game with an emphasis on "
 "construction rather than destruction. This tutorial will guide you through "
 "the basics of the game."
 msgstr ""
-"Widelands è un gioco di lenta e costruttiva strategia con un'enfasi sulla "
-"costruzione, non sulla distruzione. Questo tutorial ti mostrerà i principi "
-"del gioco."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:31
 msgid "Dismiss this box by left-clicking on the button below."
@@ -151,8 +147,8 @@ msgstr ""
 "Ecco qua. Ti spiegherò tutti questi simboli tra un minuto. Prima, lasciami "
 "mostrarti come creare una capanna del taglialegna e come collegarla con una "
 "strada. C'è un bel posto per un taglialegna proprio accanto a quegli alberi. "
-"Ti descriverò i passi che seguirò e poi ti chiederò di premere il tasto \"OK"
-"\" in modo da mostrarteli."
+"Ti descriverò i passi che seguirò e poi ti chiederò di premere il tasto "
+"\"OK\" in modo da mostrarteli."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:70
 msgid "Building the Lumberjack"
@@ -205,7 +201,6 @@ msgstr ""
 "blu di fronte al mio quartier generale."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:95
-#, fuzzy
 msgid ""
 "That won’t do yet. I still need to connect the lumberjack’s hut to the rest "
 "of my road network. You have disabled the option ‘Start building road after "
@@ -214,11 +209,6 @@ msgid ""
 "tell you later how to do that. To build the road, all I have to do now is "
 "click on the blue flag in front of my headquarters."
 msgstr ""
-"Non funzionerà ancora. Ho ancora bisogno di connettere la capanna del "
-"boscaiolo al resto della mia rete stradale. Dopo aver organizzato un "
-"cantiere, sono stato automaticamente inserito nella modalità di costruzione "
-"delle strade, quindi tutto quello che devo fare è cliccare sulla bandiera "
-"blu di fronte al mio quartier generale."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:103
 msgid "Waiting for the Lumberjack to Go Up"
@@ -239,15 +229,11 @@ msgid "Placing Another Flag"
 msgstr "Posiziona un'altra bandiera"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:116
-#, fuzzy
 msgid ""
 "Nice how they are working, isn’t it? But the poor carrier has a very long "
 "way to go. We can make it easier for him (and more efficient for us) by "
 "placing another blue flag on the road."
 msgstr ""
-"Bello come lavorano, non è vero? Ma il povero trasportatore ha una strada "
-"veramente lunga da percorrere. Possiamo renderla più semplice per lui (e più "
-"efficiente per noi) posizionando un'altra bandiera blu sulla strada."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:118
 msgid ""
@@ -307,9 +293,8 @@ msgstr ""
 "Puoi utilizzare PAGE DOWN per rallentare di nuovo la partita."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:145
-#, fuzzy
 msgid "Waiting for the Hut to be Finished"
-msgstr "Aspettando che la capanna sia completata"
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:148
 msgid ""
@@ -325,14 +310,12 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:150
-#, fuzzy
 msgid "Now we only have to wait till the hut is finished."
-msgstr "Ben fatto! Aspettiamo finché la capanna non è completata."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:157
-#, fuzzy
 msgid "The Construction Site"
-msgstr "Connetti il tuo cantiere"
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:159
 msgid "Let's see the progress"
@@ -357,47 +340,33 @@ msgid "Lumberjack is Done"
 msgstr "Il boscaiolo è completo"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:172
-#, fuzzy
 msgid ""
 "Excellent. The lumberjack’s hut is done. A lumberjack will now move in and "
 "start chopping down trees, so our log income is secured for now. Now on to "
 "the raw stone."
 msgstr ""
-"Eccellente. La capanna del tagliaboschi è completata. Adesso un tagliaboschi "
-"arriverà e comincerà ad abbattere gli alberi, quindi le nostre entrate di "
-"tronchi sono garantite per ora. Adesso continuiamo con la pietra grezza."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:179
-#, fuzzy
 msgid "Some Rocks Were Found"
-msgstr "Sono state trovate delle pietre"
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:180
-#, fuzzy
 msgid "Getting a Quarry Up"
-msgstr "Costruire una cava."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:182
-#, fuzzy
 msgid ""
 "Stones can be mined in granite mines, but the easier way is to build a "
 "quarry next to some rocks lying around. As it happens, there is a pile of "
 "them just to the west (left) of your headquarters. I will teach you now how "
 "to move your view over there."
 msgstr ""
-"Le pietre possono essere estratte nelle miniere di granito, ma la via più "
-"facile è costruire una cava vicino a qualche pietra posata attorno. Come "
-"spesso accade, ce ne sono dei mucchi appena ad ovest (sinistra) del tuo "
-"quartier generale. Ti insegnerò come fare a muovere la tua visuale laggiù."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:184
-#, fuzzy
 msgid ""
 "There are three ways to move your view. The first one is using the cursor "
 "keys on your keyboard. Go ahead and try this out."
 msgstr ""
-"Ci sono due modi per muovere la tua visuale. Il primo è usare i tasti "
-"cursore sulla tua tastiere. Vai avanti e prova."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:185
 msgid "Click the ‘OK’ button and then move the view using the cursor keys"
@@ -413,14 +382,10 @@ msgid "Moving Your View"
 msgstr "Sposta la visuale"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:192
-#, fuzzy
 msgid ""
 "Moving your view is essential to get a complete overview of your whole "
 "economy. There are three ways to move your view in Widelands."
 msgstr ""
-"Spostare la tua visuale è essenziale per avere una completa visione "
-"d'insieme di tutta la vostra economia. Ci sono due modi per muovere la "
-"visuale in Widelands."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:194
 msgid "The first one is to use the cursor keys on your keyboard."
@@ -447,7 +412,8 @@ msgid "Other Ways to Move the View"
 msgstr "Altri modi per spostare la visuale"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:203
-msgid "Excellent. Now there is a faster way to move, using the mouse instead:"
+msgid ""
+"Excellent. Now there is a faster way to move, using the mouse instead:"
 msgstr ""
 "Eccellente. Adesso esiste un sistema più rapido per muoverti, utilizzando il "
 "mouse:"
@@ -475,11 +441,10 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:219
-#, fuzzy
 msgid ""
 "minimap button at the bottom of the screen or simply by using the keyboard "
 "shortcut ‘m’."
-msgstr "pulsante mini-mappa in basso sullo schermo."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:222
 msgid ""
@@ -523,19 +488,17 @@ msgid "Onward to the Quarry"
 msgstr "Avanti per la cava"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:239
-#, fuzzy
 msgid "Great. Now about that quarry…"
-msgstr "Ottimo. Ora per quanto riguarda quella cava..."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:247
 msgid "How to Build a Quarry"
 msgstr "Come costruire una cava"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:249
-#, fuzzy
-msgid "Build a quarry next to those rocks here. Remember how I did it earlier?"
+msgid ""
+"Build a quarry next to those rocks here. Remember how I did it earlier?"
 msgstr ""
-"Costruisci una cava accanto a queste pietre. Ricordi come hai fatto prima?"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:250
 msgid ""
@@ -546,15 +509,11 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:251
-#, fuzzy
 msgid ""
 "You can build four things on fields in Widelands: flags, small houses, "
 "medium houses and big houses. But not every field can hold everything. The "
 "build space symbols ease recognition:"
 msgstr ""
-"Puoi costruire quattro cose nei campi in Widelands: bandiere, case piccole, "
-"case medie e case grandi. Ma non ogni campo può sostenere qualsiasi cosa. "
-"L'aiuto alla costruzione facilita il riconoscimento:"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:253
 msgid "Everything can be built on the green house symbol."
@@ -573,9 +532,8 @@ msgstr ""
 "I simboli con la casa rossa possono ospitare solo piccoli edifici e bandiere."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:256
-#, fuzzy
 msgid "And finally, the yellow flag symbol only allows for flags."
-msgstr "E infine il simbolo della bandiera gialla permette solo bandiere."
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:258
 msgid ""
@@ -596,22 +554,18 @@ msgstr ""
 "edifici piccoli. Avanti, controlla!"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:263
-#, fuzzy
 msgid "Build a quarry next to the rocks"
-msgstr "Costruisci una cava vicino alle rocce"
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:265
 msgid "Build a Quarry"
 msgstr "Costruisci una cava"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:267
-#, fuzzy
 msgid ""
 "There are some rocks to the west of your headquarters. Build a quarry right "
 "next to them."
 msgstr ""
-"Ci sono alcune pietre a ovest del tuo quartier generale. Costruisci una cava "
-"vicino alla loro destra."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:268
 msgid ""
@@ -624,14 +578,10 @@ msgstr ""
 "quando l'aiuto alle costruzioni è abilitato (premi SPAZIO per attivarlo)."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:269
-#, fuzzy
 msgid ""
 "Just click on any house symbol next to the rocks, select the small buildings "
 "tab in the window that opens up, then click on the quarry symbol."
 msgstr ""
-"Basta cliccare su qualsiasi simbolo della casa vicino alle pietre, seleziona "
-"la scheda piccole costruzioni nella finestra che sia apre, clicca su il "
-"simbolo della cava."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:276
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:293
@@ -673,18 +623,12 @@ msgid "the abort symbol."
 msgstr "il simbolo annulla."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:285
-#, fuzzy
 msgid ""
 "Now, about this road. Remember: we are already in road building mode since "
 "you just ordered the quarry. You can either make it longer by one field at a "
 "time by left-clicking multiple times on neighboring fields for perfect "
 "control over the route the road takes, like so:"
 msgstr ""
-"Torniamo alla nostra strada. Ricorda: siamo già nella modalità costruzione "
-"strada da quando hai ordinato la costruzione della cava. Puoi renderla più "
-"lunga di un segmento alla volta cliccando con il sinistro più volte sui "
-"tasselli vicini per un perfetto controllo su dove vuoi che la strada passi, "
-"così:"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:295
 msgid ""
@@ -693,35 +637,23 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:299
-#, fuzzy
 msgid ""
 "If you decide that you do not want to build a road at this time, you can "
 "cancel road building by clicking on the starting flag of the road and "
 "selecting"
 msgstr ""
-"Se decidi di non voler costruire una strada ora, puoi annullare la "
-"costruzione della strada cliccando sulla bandiera di inizio della strada e "
-"selezionare"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:302
-#, fuzzy
 msgid ""
 "Now, about this road. I’ll enter the road building mode and then make it "
 "longer by one field at a time by left-clicking multiple times on neighboring "
 "fields for perfect control over the route the road takes, like so:"
 msgstr ""
-"Torniamo alla nostra strada. Ricorda: siamo già nella modalità costruzione "
-"strada da quando hai ordinato la costruzione della cava. Puoi renderla più "
-"lunga di un segmento alla volta cliccando con il sinistro più volte sui "
-"tasselli vicini per un perfetto controllo su dove vuoi che la strada passi, "
-"così:"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:311
-#, fuzzy
-msgid "Or, you can directly click the flag where the road should end, like so:"
+msgid ""
+"Or, you can directly click the flag where the road should end, like so:"
 msgstr ""
-"In alternativa, puoi cliccare direttamente la bandiera dove la strada "
-"dovrebbe finire, così."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:320
 msgid ""
@@ -757,24 +689,17 @@ msgstr ""
 "considerevole."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:326
-#, fuzzy
 msgid ""
 "Keep the slopes in mind while placing roads and use them to your advantage. "
 "Also, try to keep roads as short as possible and always remember to place as "
 "many flags as you can on road segments to share the load better. If you hold "
 "Ctrl or Shift+Ctrl while you finish the road, flags are placed automatically."
 msgstr ""
-"Tieni le piste in mente mentre posizioni le strade e usale a tuo vantaggio. "
-"Prova anche a tenere le strade il più corte possibile e ricordati sempre di "
-"posizionare più bandiere che puoi sui segmenti di strada per distribuire "
-"meglio il carico."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:328
-#, fuzzy
-msgid "Now please rebuild the road between your quarry and your headquarters."
+msgid ""
+"Now please rebuild the road between your quarry and your headquarters."
 msgstr ""
-"Ora per favore ricostruisci la strada tra la cava e il tuo quartier "
-"generale. Aspetteremo fino a quando la cava sarà completata."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:332
 msgid "Connect the quarry to the headquarters"
@@ -806,9 +731,8 @@ msgstr ""
 "della capanna del tagliapietre."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:343
-#, fuzzy
 msgid "Build a second quarry"
-msgstr "Costruisci una cava"
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:345
 msgid ""
@@ -823,9 +747,8 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:350
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:352
-#, fuzzy
 msgid "Build another quarry"
-msgstr "Costruisci una cava"
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:353
 msgid ""
@@ -867,11 +790,11 @@ msgid ""
 "display information about the productivity of buildings or the progress of "
 "construction sites."
 msgstr ""
-"Simili a queste sono le statistiche di costruzione che sono anche attivate/"
-"disattivate tramite un pulsante sulla scheda di osservazione di ogni campo. "
-"Il tasto di scelta rapida è 's'. Questo visualizzerà una stringa di "
-"informazioni riguardo la produttività degli edifici o il progresso dei siti "
-"di costruzione."
+"Simili a queste sono le statistiche di costruzione che sono anche "
+"attivate/disattivate tramite un pulsante sulla scheda di osservazione di "
+"ogni campo. Il tasto di scelta rapida è 's'. Questo visualizzerà una stringa "
+"di informazioni riguardo la produttività degli edifici o il progresso dei "
+"siti di costruzione."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:366
 msgid ""
@@ -885,10 +808,8 @@ msgstr ""
 "corrispondenti."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:372
-#, fuzzy
 msgid "Now we know what’s going on. Let’s wait for the quarries to finish."
 msgstr ""
-"Ora sappiamo cosa sta succedendo. Aspettiamo che la cava sia terminata."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:379
 msgid "Introducing Messages"
@@ -899,16 +820,11 @@ msgid "Messages"
 msgstr "Messaggi"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:382
-#, fuzzy
 msgid ""
 "Hi, it’s me again! This time, I have sent you a message. Messages are sent "
 "to you by Widelands to inform you about important events: empty mines, "
 "attacks on your tribe, won or lost military buildings, resources found…"
 msgstr ""
-"Ciao, sono ancora io! Questa volta ti ho mandato un messaggio. I messaggi ti "
-"sono spediti da Widelands per informarti di importanti eventi: miniere "
-"vuote, attacchi alla tua tribù, vincita o perdita di costruzioni militari, "
-"risorse ritrovate..."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:383
 msgid ""
@@ -987,16 +903,11 @@ msgid "Closing Windows"
 msgstr "Chiudere le finestre"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:407
-#, fuzzy
 msgid ""
 "Excellent. Do you remember how to close windows? You simply have to right-"
 "click on them. This will work with all windows except for story message "
 "windows like this one. Go ahead and try it."
 msgstr ""
-"Eccellente. A proposito: chiudere le finestre in Widelands è semplice come "
-"cliccarci con il tasto destro. Questo funziona con tutte le finestre ad "
-"eccezione di quelle con messaggi contenenti la storia come questo. Procedi e "
-"prova."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:409
 msgid ""
@@ -1021,8 +932,8 @@ msgid ""
 "screen."
 msgstr ""
 "Tutte le finestre in Widelands possono essere chiuse cliccandole con il "
-"tasto destro del mouse. Alcune finestre possono essere anche attivate/"
-"disattivate con i pulsanti nella parte inferiore dello schermo."
+"tasto destro del mouse. Alcune finestre possono essere anche "
+"attivate/disattivate con i pulsanti nella parte inferiore dello schermo."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:419
 msgid "Close the messages window now by right-clicking into it."
@@ -1031,34 +942,24 @@ msgstr ""
 "mouse."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:428
-#, fuzzy
 msgid ""
 "Well done! Let’s see how messages work in a real game, shall we? For this, "
 "I’ll take all rocks away from the poor stonemasons in the quarries. They "
 "will then send a message each that they can’t find any in their working "
 "areas the next time they try to do some work."
 msgstr ""
-"Ben fatto! Vediamo come funzionano i messaggi nella partita reale, ok? Per "
-"questo, toglierò tutte le pietre al povero marmista nella cava. Manderà poi "
-"un messaggio dicendo che non ne trova nella sua area di lavoro la prossima "
-"volta che prova a compiere qualche lavoro."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:436
-#, fuzzy
 msgid "Messages Arrived!"
-msgstr "Messaggio arrivato!"
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:438
-#, fuzzy
 msgid ""
 "You received some messages. See how the button at the bottom of the screen "
 "has changed appearance? You can destroy the quarries now as they are no "
 "longer of any use and just blocking space. To do so, there are two "
 "possibilities:"
 msgstr ""
-"Ti è stato inviato un messaggio. Vedi com'è cambiato l'aspetto del pulsante "
-"in basso allo schermo? Puoi ora incenerire la cava dato che non è più utile "
-"e sta solamente occupando dello spazio."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:440
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:450
@@ -1128,11 +1029,8 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:462
-#, fuzzy
 msgid "Let’s try it out now: build a military building on your border."
 msgstr ""
-"Proviamolo subito: costruisci qualche edificio militare verso la frontiera "
-"di sud-ovest."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:463
 msgid ""
@@ -1142,9 +1040,8 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:466
-#, fuzzy
 msgid "Expand your territory"
-msgstr "Espansione del territorio!"
+msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:468
 msgid "Make your territory grow"
@@ -1211,12 +1108,8 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:494
-#, fuzzy
 msgid "To leave this game and return to the main menu, click on the"
 msgstr ""
-"Puoi continuare a giocare in questa mappa o puoi terminare questa partita "
-"quando vuoi. Per abbandonare questa partita e ritornare al menù principale "
-"clicca sul"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:496
 msgid ""
@@ -1246,366 +1139,3 @@ msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nuovo obiettivo"
 msgstr[1] "Nuovi obiettivi"
-
-#~ msgid "To do that, click on the quarry and select the destroy button."
-#~ msgstr "Per farlo clicca sulla cava e seleziona il pulsante distruggi."
-
-#~ msgid ""
-#~ "As soon as a military building is manned, it will extend your land. You "
-#~ "can then burn it down again if you need the space. But note that your "
-#~ "land is then vulnerable: any military site from another player could "
-#~ "conquer the land. You therefore need military sites to keep military "
-#~ "influence over your land."
-#~ msgstr ""
-#~ "Appena un edificio militare è presidiato estende le tue terre. Potrai in "
-#~ "seguito distruggerlo se hai bisogno di posto. Ma tieni presente che le "
-#~ "tue terre saranno vulnerabili: qualsiasi edificio militare di un altro "
-#~ "giocatore potrà conquistarle. Quindi avrai bisogno di edifici militari "
-#~ "per mantenere l'influenza militare sulle tue terre."
-
-#~ msgid ""
-#~ "We want to capture some of this mountain so we can search for resources "
-#~ "there. Bigger buildings will conquer more land, which can be beneficial "
-#~ "close to mountains, because you can’t build houses on mountains."
-#~ msgstr ""
-#~ "Vogliamo conquistare un po' di questa montagna, in modo da potervi "
-#~ "cercare risorse. Edifici più grandi conquisteranno più territorio che, "
-#~ "vicino alle montagne, potrà tornare utile, dal momento che non puoi "
-#~ "costruire edifici sulle montagne."
-
-#~ msgid "Conquer an area were we can build mines"
-#~ msgstr "Conquista un'area in cui possiamo costruire miniere"
-
-#~ msgid "Conquer the Mountain to the South-West"
-#~ msgstr "Conquista le montagne a sud ovest"
-
-#~ msgid ""
-#~ "For a full-fledged economy, we need coal, iron and gold. These can be "
-#~ "found in mountains. Conquer some area on the mountains to the south-west "
-#~ "of your headquarters by building some military buildings close to your "
-#~ "border."
-#~ msgstr ""
-#~ "Per una vera e propria economia, abbiamo bisogno di carbone, ferro ed "
-#~ "oro. Si possono trovare sulle montagne. Conquista alcune zone sulle "
-#~ "montagne a sud-ovest del tuo quartier generale costruendo qualche "
-#~ "edificio militare vicino al tuo confine."
-
-#~ msgid ""
-#~ "You can choose from the following military buildings: sentry, donjon, "
-#~ "barrier and fortress. The bigger the building, the more expensive it is "
-#~ "to build it, but it will also conquer a bigger region. Sometimes, it is "
-#~ "useful to build a big military building next to a mountain so that you "
-#~ "can reach building sites farther up."
-#~ msgstr ""
-#~ "Puoi scegliere tra le seguenti costruzioni costruzioni militari: "
-#~ "guardiola, dongione, fortino e fortezza. Più grande è l'edificio, più "
-#~ "costoso sarà costruirlo. Ma conquisterà anche un regione più grande. "
-#~ "Qualche volta, è utile costruire una grande costruzione militare vicino "
-#~ "ad una montagna così che si possano raggiungere campi più in alto."
-
-#~ msgid "Searching for Resources"
-#~ msgstr "In cerca di risorse"
-
-#~ msgid ""
-#~ "Okay, now we own some of the area on this mountain. Mountains are very "
-#~ "important, because they contain resources: coal, iron ore, gold ore and "
-#~ "granite. Each tribe uses the resources differently, but all need mines to "
-#~ "extract the resources from the ground."
-#~ msgstr ""
-#~ "Okay, adesso controlliamo un po' di territorio su questa montagna. Le "
-#~ "montagne sono molto importanti perchè contengono risorse: minerali di "
-#~ "ferro, di oro e granito. Ogni tribù usa le risorse in maniera diversa, ma "
-#~ "tutte hanno bisogno di miniere per estrarre queste risorse."
-
-#~ msgid ""
-#~ "Let’s search for resources in this mountain. First, we’ll build a road "
-#~ "onto the mountain and place a flag. Then, we will click on the flag and "
-#~ "call a geologist to it. I’ll show you how it’s done."
-#~ msgstr ""
-#~ "Cerchiamo risorse su questa montagna. Per prima cosa, costruiremo una "
-#~ "strada su per le montagne e piazzeremo una bandiera. Poi, clicchiamo "
-#~ "sulla bandiera e vi inviamo un geologo. Ti mostro come si fa."
-
-#~ msgid "Waiting for the Geologist"
-#~ msgstr "Aspettando il geologo"
-
-#~ msgid ""
-#~ "The geologist will arrive at the flag shortly and start investigating the "
-#~ "area in his surroundings. He will place the following markers for the "
-#~ "various resources:"
-#~ msgstr ""
-#~ "Il geologo arriverà velocemente alla bandiera e comincerà a investigare "
-#~ "l'area nei suoi dintori. Piazzerà i seguenti indicatori per le varie "
-#~ "risorse:"
-
-#~ msgid "a bit of coal"
-#~ msgstr "un po' di carbone"
-
-#~ msgid "a lot of coal"
-#~ msgstr "molto carbone"
-
-#~ msgid "a bit of iron"
-#~ msgstr "un po' di ferro"
-
-#~ msgid "a lot of iron"
-#~ msgstr "molto ferro"
-
-#~ msgid "a bit of gold"
-#~ msgstr "un po' di oro"
-
-#~ msgid "a lot of gold"
-#~ msgstr "molto oro"
-
-#~ msgid "a bit of granite"
-#~ msgstr "un po' di granito"
-
-#~ msgid "a lot of granite"
-#~ msgstr "molto granito"
-
-#~ msgid "water"
-#~ msgstr "acqua"
-
-#~ msgid "nothing was found here"
-#~ msgstr "non è stato trovato nulla qui"
-
-#~ msgid "Let’s wait and see what the geologist finds on the mountain."
-#~ msgstr ""
-#~ "Aspettiamo e guardiamo cosa riescono a trovare i geologi sulla montagna."
-
-#~ msgid "Mining Conclusion"
-#~ msgstr "Estrazione conclusa"
-
-#~ msgid ""
-#~ "So our geologist found a lot of coal on this mountain. You should "
-#~ "therefore build a coal mine here. Building a mine is like building a "
-#~ "house. The building space symbol for where a mine can be built is"
-#~ msgstr ""
-#~ "Così il nostro geologo ha trovato molto carbone in questa montagna. "
-#~ "Dovresti quindi costruire una miniera di carbone qui. Costruire una "
-#~ "miniera è come costruire una casa. Il simbolo di aiuto su dove una "
-#~ "miniera può essere costruita è"
-
-#~ msgid "this one."
-#~ msgstr "questo."
-
-#~ msgid ""
-#~ "Note that a mine needs rations to work. Rations are produced in taverns, "
-#~ "and taverns need meat, pitta bread, and fish to produce them. You will "
-#~ "need a lot more infrastructure to get your mines working well. This "
-#~ "infrastructure also varies from tribe to tribe. We will explain them to "
-#~ "you in the introduction campaigns for the three tribes."
-#~ msgstr ""
-#~ "Nota che una miniera ha bisogno di razioni per lavorare. le razioni sono "
-#~ "prodotte nelle taverne e le taverne hanno bisogno di carne, pane pitta e "
-#~ "pesce per produrle. Avrai bisogno di molte più infrastrutture per far "
-#~ "funzionare bene le tue miniere. Le infrastrutture cambiano anche da tribù "
-#~ "a tribù. Ti verranno spiegate nella campagne introduttive per le tre "
-#~ "tribù."
-
-#~ msgid "Warfare and Training"
-#~ msgstr "Guerra e allenamento"
-
-#~ msgid "Soldiers and Warfare"
-#~ msgstr "Soldati e Guerra"
-
-#~ msgid ""
-#~ "On to the last topic now. We are going to talk about soldiers, their "
-#~ "training and their profession: warfare. As I mentioned, Widelands is "
-#~ "about building up, not burning down: therefore, warfare is also more "
-#~ "focused on economics than on military strategies."
-#~ msgstr ""
-#~ "L'ultimo argomento, adesso. Parleremo dei soldati, il loro addestramento "
-#~ "e la loro professione: la guerra. Come già detto, Widelands ruota intorno "
-#~ "al costruire, non al distruggere: pertanto anche la guerra è più "
-#~ "focalizzata sull'economia che sulle strategie militari."
-
-#~ msgid ""
-#~ "Ok, I am going to create a little training ground for us with a training "
-#~ "camp and a warehouse to the north east of here."
-#~ msgstr ""
-#~ "Ok, adesso creerò una piccola area di addestramento con un campo di "
-#~ "addestramento e un magazzino a nord-est da qui."
-
-#~ msgid ""
-#~ "If you want to come back to this south-western part of your realm, just "
-#~ "scroll here via right-button scrolling or open the minimap by clicking on "
-#~ "the"
-#~ msgstr ""
-#~ "Se vuoi tornare alla parte sud-occidentale del tuo regno, scorri fino a "
-#~ "lì utilizzando il tasto destro o apri la minimappa cliccando su"
-
-#~ msgid "Alternatively, you could also press ‘m’ on your keyboard."
-#~ msgstr "In alternativa potresti anche premere 'm' sulla tua tastiera."
-
-#~ msgid ""
-#~ "But I digress. Back to soldiers. What was I about to do? Oh yes, I wanted "
-#~ "to build a small training scenario for you. Let’s do that now."
-#~ msgstr ""
-#~ "Ma sto divagando. Torniamo ai soldati. Cosa stavo per fare? Ah sì, volevo "
-#~ "costruire un piccolo scenario di allenamento per te. Facciamolo adesso."
-
-#~ msgid "Trainings Camp and Soldier Stats"
-#~ msgstr "Campo di allenamento e statistiche dei soldati"
-
-#~ msgid ""
-#~ "A soldier is created like any normal worker: a carrier grabs a tool in a "
-#~ "warehouse as soon as a request for a certain profession is not fulfilled. "
-#~ "The tool to create a barbarian soldier is an ax. Newly created soldiers "
-#~ "are of level 0. To make soldiers better in any of the four categories, "
-#~ "training is needed."
-#~ msgstr ""
-#~ "Un soldato viene creato come qualsiasi lavoratore normale: un "
-#~ "trasportatore prende uno strumento in un magazzino non appena la "
-#~ "richiesta per una certa professione non è soddisfatta. Lo strumento per "
-#~ "creare un soldato barbaro è un'ascia. I soldato appena creato è di "
-#~ "livello 0. Per migliorare il soldato in una qualsiasi delle quattro "
-#~ "categorie, è necessario allenarlo."
-
-#~ msgid "Health:"
-#~ msgstr "Salute:"
-
-#~ msgid "Attack:"
-#~ msgstr "Attacca:"
-
-#~ msgid "Defense:"
-#~ msgstr "Difesa:"
-
-#~ msgid "Evade:"
-#~ msgstr "Evasione:"
-
-#~ msgid ""
-#~ "Evade is the chance that the soldier is able to dodge an attack. It is "
-#~ "25% for a level 0 evade barbarian and increases in steps of 15% for each "
-#~ "level."
-#~ msgstr ""
-#~ "L'evasione è la possibilità di un soldato di evitare un attacco. È il 25 "
-#~ "% per un barbaro al livello 0 e cresce del 15 % per ogni livello."
-
-#~ msgid "Enhance This Fortress"
-#~ msgstr "Potenzia questa fortezza"
-
-#~ msgid "Enhancing Buildings"
-#~ msgstr "Migliorare gli edifici"
-
-#~ msgid ""
-#~ "I will create an enemy for you soon, but first let’s make sure you are "
-#~ "prepared. This fortress is already quite strong and conquers a lot of "
-#~ "space. But there is an even bigger building: the citadel."
-#~ msgstr ""
-#~ "Presto ti creerò un nemico, ma prima devo assicurarmi che tu sia "
-#~ "preparato. Questa fortezza è già abbastanza robusta ed ha conquistato "
-#~ "molte terre. Ma esiste una costruzione ancora più grande: la cittadella."
-
-#~ msgid ""
-#~ "Citadels cannot be built directly. Instead, you will have to construct a "
-#~ "fortress first and then enhance it to a citadel. To do so, click on the "
-#~ "fortress, then choose the ‘Enhance to Citadel’ button. Your soldiers will "
-#~ "leave the fortress while the construction is going on. This means that "
-#~ "your fortress will lose its military influence. If an enemy occupies a "
-#~ "military building nearby, your construction site will burn down. No "
-#~ "sweat, that won’t happen here."
-#~ msgstr ""
-#~ "Le cittadelle non possono essere costruite direttamente. Devi costruire "
-#~ "una fortezza prima e poi avanzarla a cittadella. Per farlo, clicca sulla "
-#~ "fortezza, poi scegli di avanzarla con il pulsante cittadella. I tuoi "
-#~ "soldati lasceranno la cittadella mentre la costruzione procede. Questo "
-#~ "significa che la tua fortezza non avrà influenza militare. Se un nemico "
-#~ "costruisce una struttura militare nelle vicinanze, il sito della "
-#~ "costruzione potrebbe bruciare. Non temere, non succederà qui."
-
-#~ msgid "Enhance your fortress to a citadel now."
-#~ msgstr "Potenzia ora la tua fortezza in una cittadella."
-
-#~ msgid ""
-#~ "Remember that you can speed time up by using PAGE_UP. Building a citadel "
-#~ "takes a while."
-#~ msgstr ""
-#~ "Ricorda che puoi accelerare il tempo usando il tasto PAGINA_SU, la "
-#~ "costruzione di una cittadella ne richiede un po'."
-
-#~ msgid "Enhance your fortress to a citadel"
-#~ msgstr "Potenzia la tua fortezza in una cittadella"
-
-#~ msgid "Enhance Your Fortress"
-#~ msgstr "Potenzia la tua fortezza"
-
-#~ msgid "Enhance your fortress to a mighty citadel."
-#~ msgstr "Potenzia la tua fortezza in una poderosa cittadella."
-
-#~ msgid ""
-#~ "The citadel can house 12 soldiers and is the biggest military building "
-#~ "the barbarians can build. It also costs a lot of resources and takes a "
-#~ "long time to build. It is most suited to guard strategically important "
-#~ "points like constricted points or mountains."
-#~ msgstr ""
-#~ "La cittadella può ospitare 12 soldati e è la più grande costruzione "
-#~ "militare che i barbari possano costruire. Costa anche un po' e richiede "
-#~ "molto tempo per la costruzione. È più adatta per proteggere "
-#~ "strategicamente posizioni importati come punti ristretti o montagne."
-
-#~ msgid "Defeat your enemy"
-#~ msgstr "Sconfiggi il tuo nemico"
-
-#~ msgid "Defeat the Enemy"
-#~ msgstr "Sconfiggi il nemico"
-
-#~ msgid ""
-#~ "I have created a sparring partner for you: It is an empire tribe close to "
-#~ "your citadel. To attack its buildings, click on the door of a target "
-#~ "building, choose the number of soldiers that you wish to send and click "
-#~ "on the attack button. Your soldiers will come from all nearby military "
-#~ "buildings. Likewise, the defenders will come from all nearby military "
-#~ "buildings of the enemy and intercept your forces."
-#~ msgstr ""
-#~ "Ho creato un amico un po' speciale per te: È della tribù impero vicino "
-#~ "alla tua cittadella. Per attaccare questa costruzione, clicca sulla porta "
-#~ "dell'edificio bersaglio, scegli il numero di soldati che desideri mandare "
-#~ "e clicca sul pulsante attacca. I tuoi soldati arriveranno da tutte le "
-#~ "costruzioni militari delle vicinanze. Allo stesso modo, i difensori "
-#~ "arriveranno da tutte le costruzioni militari nelle vicinanze del nemico e "
-#~ "intercetteranno le tue forze."
-
-#~ msgid ""
-#~ "Attack and conquer all military buildings of the enemy and destroy their "
-#~ "headquarters."
-#~ msgstr ""
-#~ "Attacca e conquista tutti gli edifici militari del nemico e distruggi il "
-#~ "suo quartiere generale."
-
-#~ msgid "Defeat the enemy tribe"
-#~ msgstr "Sconfiggi la tribù nemica"
-
-#~ msgid "Defeat Your Enemy"
-#~ msgstr "Sconfiggi il tuo nemico"
-
-#~ msgid "Defeat the nearby enemy."
-#~ msgstr "Sconfiggi il nemico nelle vicinanze."
-
-#~ msgid ""
-#~ "To attack a building, click on its doors, choose the number of attacking "
-#~ "soldiers, then send them via the ‘Attack’ button."
-#~ msgstr ""
-#~ "Per attaccare un edificio clicca sulle sue porte, scegli il numero di "
-#~ "soldati in attacco, poi inviali tramite il pulsante di attacco."
-
-#~ msgid ""
-#~ "This concludes the tutorial. There is some stuff we have not covered here "
-#~ "– we have not even built a single production building even though "
-#~ "producing wares is the most important thing in Widelands – but you’ve "
-#~ "learned the ropes."
-#~ msgstr ""
-#~ "Questo conclude il tutorial. Ci sono degli argomenti che non abbiamo "
-#~ "affrontato qui -- non abbiamo costruito un solo edificio di produzione, "
-#~ "anche se produrre merci è la cosa più importante, in Widelands -- ma hai "
-#~ "imparato le base."
-
-#~ msgid ""
-#~ "You can learn about the remaining stuff while you go through the "
-#~ "individual tribes’ introduction campaigns. Each consists of some "
-#~ "scenarios explaining the tribe and its economy while introducing the "
-#~ "background story of Widelands. Have fun playing!"
-#~ msgstr ""
-#~ "Potrai imparare gli altri argomenti affrontando le campagne introduttive "
-#~ "delle singole tribù. Ognuna di esse consiste in alcuni scenari che "
-#~ "spiegano le tribù e la loro economia, introducendo, nel frattempo, la "
-#~ "storia di Widelands. Divertiti, giocando!"

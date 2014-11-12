@@ -150,7 +150,7 @@ void SDLSurface::unset_subwin() {
 Draws the outline of a rectangle
 ===============
 */
-void SDLSurface::draw_rect(const Rect& rc, const RGBColor clr) {
+void SDLSurface::draw_rect(const Rect& rc, const RGBColor& clr) {
 	assert(m_surface);
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
@@ -175,7 +175,7 @@ void SDLSurface::draw_rect(const Rect& rc, const RGBColor clr) {
 Draws a filled rectangle
 ===============
 */
-void SDLSurface::fill_rect(const Rect& rc, const RGBAColor clr) {
+void SDLSurface::fill_rect(const Rect& rc, const RGBAColor& clr) {
 	assert(m_surface);
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
@@ -337,7 +337,7 @@ void SDLSurface::blit
 
 	bool alpha = false;
 	uint8_t alphaval = 0;
-	if (cm == CM_Solid || cm == CM_Copy) {
+	if (cm == CM_Copy) {
 		SDL_BlendMode bm;
 		SDL_GetSurfaceBlendMode(sdlsurf, &bm);
 		alpha = bm & SDL_BLENDMODE_BLEND;
@@ -348,7 +348,7 @@ void SDLSurface::blit
 
 	SDL_BlitSurface(sdlsurf, &srcrect, m_surface, &dstrect);
 
-	if (cm == CM_Solid || cm == CM_Copy) {
+	if (cm == CM_Copy) {
 		SDL_SetSurfaceAlphaMod(sdlsurf, alphaval);
 		SDL_SetSurfaceBlendMode(sdlsurf, alpha ? SDL_BLENDMODE_BLEND : SDL_BLENDMODE_NONE);
 	}

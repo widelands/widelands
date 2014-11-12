@@ -24,6 +24,10 @@
 #include <cstdlib>
 
 #include "base/macros.h"
+#include "graphic/gl/blit_program.h"
+#include "graphic/gl/draw_line_program.h"
+#include "graphic/gl/draw_rect_program.h"
+#include "graphic/gl/fill_rect_program.h"
 #include "graphic/gl/surface_texture.h"
 #include "graphic/graphic.h"
 
@@ -58,45 +62,35 @@ void GLSurface::set_pixel(uint16_t x, uint16_t y, uint32_t clr) {
 	*(reinterpret_cast<uint32_t *>(data)) = clr;
 }
 
-/**
- * Draws the outline of a rectangle
- */
-void GLSurface::draw_rect(const Rect& rc, const RGBColor clr)
-{
-	assert(g_opengl);
-	glDisable(GL_BLEND);
-	glDisable(GL_TEXTURE_2D);
-	glLineWidth(1);
+FloatRect GLSurface::to_opengl(const Rect& rect, ConversionMode mode) {
+	const float delta = mode == ConversionMode::kExact ? 0. : 0.5;
+	float x1 = rect.x + delta;
+	float y1 = rect.y + delta;
+	pixel_to_gl(&x1, &y1);
+	float x2 = rect.x + rect.w - delta;
+	float y2 = rect.y + rect.h - delta;
+	pixel_to_gl(&x2, &y2);
 
-	glBegin(GL_LINE_LOOP); {
-		glColor3ub(clr.r, clr.g, clr.b);
-		glVertex2f(rc.x + 0.5f,        rc.y + 0.5f);
-		glVertex2f(rc.x + rc.w - 0.5f, rc.y + 0.5f);
-		glVertex2f(rc.x + rc.w - 0.5f, rc.y + rc.h - 0.5f);
-		glVertex2f(rc.x + 0.5f,        rc.y + rc.h - 0.5f);
-	} glEnd();
-	glEnable(GL_TEXTURE_2D);
+	return FloatRect(x1, y1, x2 - x1, y2 - y1);
 }
 
+void GLSurface::draw_rect(const Rect& rc, const RGBColor& clr)
+{
+	glViewport(0, 0, width(), height());
+	DrawRectProgram::instance().draw(to_opengl(rc, ConversionMode::kMidPoint), clr);
+}
 
 /**
  * Draws a filled rectangle
  */
-void GLSurface::fill_rect(const Rect& rc, const RGBAColor clr) {
-	assert(rc.x >= 0);
-	assert(rc.y >= 0);
-	assert(g_opengl);
-	glDisable(GL_TEXTURE_2D);
-	glDisable(GL_BLEND);
+void GLSurface::fill_rect(const Rect& rc, const RGBAColor& clr) {
+	glViewport(0, 0, width(), height());
 
-	glBegin(GL_QUADS); {
-		glColor4ub(clr.r, clr.g, clr.b, clr.a);
-		glVertex2f(rc.x,        rc.y);
-		glVertex2f(rc.x + rc.w, rc.y);
-		glVertex2f(rc.x + rc.w, rc.y + rc.h);
-		glVertex2f(rc.x,        rc.y + rc.h);
-	} glEnd();
-	glEnable(GL_TEXTURE_2D);
+	glBlendFunc(GL_ONE, GL_ZERO);
+
+	FillRectProgram::instance().draw(to_opengl(rc, ConversionMode::kExact), clr);
+
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 /**
@@ -107,117 +101,69 @@ void GLSurface::brighten_rect(const Rect& rc, const int32_t factor)
 	if (!factor)
 		return;
 
-	assert(rc.x >= 0);
-	assert(rc.y >= 0);
-	assert(rc.w >= 1);
-	assert(rc.h >= 1);
-	assert(g_opengl);
+	glViewport(0, 0, width(), height());
 
+	// The simple trick here is to fill the rect, but using a different glBlendFunc that will sum
+	// src and target (or subtract them if factor is negative).
 	if (factor < 0) {
-		if (!g_gr->caps().gl.blendequation)
-			return;
-
 		glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
 	}
 
-	/* glBlendFunc is a very nice feature of opengl. You can specify how the
-	* color is calculated.
-	*
-	* glBlendFunc(GL_ONE, GL_ONE) means the following:
-	* Rnew = Rdest + Rsrc
-	* Gnew = Gdest + Gsrc
-	* Bnew = Bdest + Bsrc
-	* Anew = Adest + Asrc
-	* where Xnew is the new calculated color for destination, Xdest is the old
-	* color of the destination and Xsrc is the color of the source.
-	*/
-	glEnable(GL_BLEND);
-	glDisable(GL_TEXTURE_2D);
 	glBlendFunc(GL_ONE, GL_ONE);
 
-	// And now simply draw a rect with factor as the color
-	// (this is the source color) over the region
-	glBegin(GL_QUADS); {
-		glColor4f
-			((std::abs(factor) / 256.0f),
-			 (std::abs(factor) / 256.0f),
-			 (std::abs(factor) / 256.0f),
-			 0);
-		glVertex2f(rc.x,        rc.y);
-		glVertex2f(rc.x + rc.w, rc.y);
-		glVertex2f(rc.x + rc.w, rc.y + rc.h);
-		glVertex2f(rc.x,        rc.y + rc.h);
-	} glEnd();
+	const int delta = std::abs(factor);
+	FillRectProgram::instance().draw(
+	   to_opengl(rc, ConversionMode::kExact), RGBAColor(delta, delta, delta, 0));
 
-	if (factor < 0)
+	if (factor < 0) {
 		glBlendEquation(GL_FUNC_ADD);
+	}
 
-	glEnable(GL_TEXTURE_2D);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void GLSurface::draw_line
 	(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t gwidth)
 {
-	glDisable(GL_BLEND);
-	glDisable(GL_TEXTURE_2D);
-	glLineWidth(gwidth);
-	glBegin(GL_LINES); {
-		glColor3ub(color.r, color.g, color.b);
-		glVertex2f(x1 + 0.5f, y1 + 0.5f);
-		glVertex2f(x2 + 0.5f, y2 + 0.5f);
-	} glEnd();
+	float gl_x1 = x1 + 0.5;
+	float gl_y1 = y1 + 0.5;
+	pixel_to_gl(&gl_x1, &gl_y1);
 
-	glEnable(GL_TEXTURE_2D);
+	float gl_x2 = x2 + 0.5;
+	float gl_y2 = y2 + 0.5;
+	pixel_to_gl(&gl_x2, &gl_y2);
+
+	DrawLineProgram::instance().draw(gl_x1, gl_y1, gl_x2, gl_y2, color, gwidth);
+}
+
+// Converts the pixel (x, y) in a texture to a gl coordinate in [0, 1].
+inline void pixel_to_gl_texture(const int width, const int height, float* x, float* y) {
+	*x = (*x / width);
+	*y = (*y / height);
 }
 
 void GLSurface::blit
 	(const Point& dst, const Surface* image, const Rect& srcrc, Composite cm)
 {
-	// Note: This function is highly optimized and therefore does not restore
-	// all state. It also assumes that all other glStuff restores state to make
-	// this function faster.
+	glViewport(0, 0, width(), height());
 
-	assert(g_opengl);
-	const GLSurfaceTexture& surf = *static_cast<const GLSurfaceTexture*>(image);
-
-	/* Set a texture scaling factor. Normally texture coordinates
-	* (see glBegin()...glEnd() Block below) are given in the range 0-1
-	* to avoid the calculation (and let opengl do it) the texture
-	* space is modified. glMatrixMode select which matrixconst  to manipulate
-	* (the texture transformation matrix in this case). glLoadIdentity()
-	* resets the (selected) matrix to the identity matrix. And finally
-	* glScalef() calculates the texture matrix.
-	*/
-	glMatrixMode(GL_TEXTURE);
-	glLoadIdentity();
-	glScalef
-		(1.0f / static_cast<GLfloat>(surf.get_tex_w()),
-		 1.0f / static_cast<GLfloat>(surf.get_tex_h()), 1);
-
-	// Enable Alpha blending
-	if (cm == CM_Normal) {
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	} else {
-		glDisable(GL_BLEND);
+	// Source Rectangle.
+	const GLSurfaceTexture* const texture = static_cast<const GLSurfaceTexture*>(image);
+	FloatRect gl_src_rect;
+	{
+		float x1 = srcrc.x;
+		float y1 = srcrc.y;
+		pixel_to_gl_texture(texture->width(), texture->height(), &x1, &y1);
+		float x2 = srcrc.x + srcrc.w;
+		float y2 = srcrc.y + srcrc.h;
+		pixel_to_gl_texture(texture->width(), texture->height(), &x2, &y2);
+		gl_src_rect.x = x1;
+		gl_src_rect.y = y1;
+		gl_src_rect.w = x2 - x1;
+		gl_src_rect.h = y2 - y1;
 	}
 
-	glBindTexture(GL_TEXTURE_2D, surf.get_gl_texture());
+	const FloatRect gl_dst_rect = to_opengl(Rect(dst.x, dst.y, srcrc.w, srcrc.h), ConversionMode::kExact);
 
-	glBegin(GL_QUADS); {
-		// set color white, otherwise textures get mixed with color
-		glColor3f(1.0, 1.0, 1.0);
-		// top-left
-		glTexCoord2i(srcrc.x, srcrc.y);
-		glVertex2i(dst.x, dst.y);
-		// top-right
-		glTexCoord2i(srcrc.x + srcrc.w, srcrc.y);
-		glVertex2f(dst.x + srcrc.w, dst.y);
-		// bottom-right
-		glTexCoord2i(srcrc.x + srcrc.w, srcrc.y + srcrc.h);
-		glVertex2f(dst.x + srcrc.w, dst.y + srcrc.h);
-		// bottom-left
-		glTexCoord2i(srcrc.x, srcrc.y + srcrc.h);
-		glVertex2f(dst.x, dst.y + srcrc.h);
-	} glEnd();
+	BlitProgram::instance().draw(gl_dst_rect, gl_src_rect, texture->get_gl_texture(), cm);
 }

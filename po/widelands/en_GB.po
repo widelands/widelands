@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-10-28 08:26+0000\n"
-"PO-Revision-Date: 2014-10-04 22:29+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"POT-Creation-Date: 2014-10-29 10:08+0000\n"
+"PO-Revision-Date: 2014-11-01 09:50+0000\n"
+"Last-Translator: Tinker <room101@rhima.info>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-29 06:08+0000\n"
-"X-Generator: Launchpad (build 17203)\n"
+"X-Launchpad-Export-Date: 2014-11-02 05:39+0000\n"
+"X-Generator: Launchpad (build 17211)\n"
 
 #: ../../src/ai/computer_player.cc:39
 msgid "None"
@@ -176,7 +176,7 @@ msgstr "Tools"
 #: ../../src/editor/editorinteractive.cc:92
 #: ../../src/editor/ui_menus/editor_toolsize_menu.cc:43
 msgid "Tool Size"
-msgstr ""
+msgstr "Tool Size"
 
 #: ../../src/editor/editorinteractive.cc:95
 #: ../../src/wui/interactive_player.cc:116
@@ -187,7 +187,7 @@ msgstr "Minimap"
 #: ../../src/editor/editorinteractive.cc:98
 #: ../../src/wui/interactive_player.cc:119
 msgid "Show Building Spaces (on/off)"
-msgstr ""
+msgstr "Show Building Spaces (on/off)"
 
 #: ../../src/editor/editorinteractive.cc:101
 #: ../../src/ui_fsmenu/launch_mpg.cc:171
@@ -494,7 +494,7 @@ msgstr ""
 #. * TRANSLATORS: Parent directory
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:214
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:292
-#: ../../src/ui_fsmenu/mapselect.cc:411
+#: ../../src/ui_fsmenu/mapselect.cc:410
 msgid "parent"
 msgstr ""
 
@@ -920,7 +920,7 @@ msgid "Loading map"
 msgstr "Loading map"
 
 #: ../../src/logic/game.cc:370 ../../src/logic/game.cc:403
-#: ../../src/wlapplication.cc:1505
+#: ../../src/wlapplication.cc:1524
 msgid "Loading..."
 msgstr "Loading…"
 
@@ -941,7 +941,7 @@ msgid ""
 "this problem."
 msgstr ""
 
-#: ../../src/logic/map.cc:334
+#: ../../src/logic/map.cc:333
 msgid "Player 1"
 msgstr "Player 1"
 
@@ -1018,7 +1018,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:277
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
-msgstr ""
+msgstr "the economy does not need the ware ‘%s’"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the worker ‘%s’
 #: ../../src/logic/production_program.cc:291
@@ -1031,7 +1031,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:301
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
-msgstr ""
+msgstr "the economy does not need the worker ‘%s’"
 
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "3x water":
 #. * TRANSLATORS:    %1$s = "3"
@@ -1068,7 +1068,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:373
 #, c-format
 msgid "the building doesn’t have the following wares: %s"
-msgstr ""
+msgstr "the building does not have the following wares: %s"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs experience'.
 #: ../../src/logic/production_program.cc:391
@@ -1450,7 +1450,7 @@ msgstr "Metaserver did not answer."
 
 #: ../../src/network/internet_gaming_messages.cc:55
 msgid "Your game can’t be connected to from the internet"
-msgstr ""
+msgstr "Your game cannot be connected to from the internet"
 
 #: ../../src/network/internet_gaming_messages.cc:57
 msgid ""
@@ -1467,6 +1467,10 @@ msgid ""
 "http://wl.widelands.org/wiki/InternetGaming to learn how to set up your "
 "internet connection for hosting a game online."
 msgstr ""
+"The metaserver was unable to connect to your game. Most likely it cannot be "
+"connected to from the internet! Please take a look at "
+"http://wl.widelands.org/wiki/InternetGaming to learn how to set up your "
+"internet connection for hosting a game online."
 
 #: ../../src/network/internet_gaming_messages.cc:64
 msgid ""
@@ -1485,7 +1489,7 @@ msgstr ""
 "the server shut down as you tried to connect."
 
 #: ../../src/network/netclient.cc:199 ../../src/network/nethost.cc:846
-#: ../../src/wlapplication.cc:1395
+#: ../../src/wlapplication.cc:1414
 msgid "Preparing game"
 msgstr "Preparing game"
 
@@ -1979,13 +1983,13 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:80
 #: ../../src/ui_fsmenu/campaign_select.cc:164
-#: ../../src/ui_fsmenu/campaign_select.cc:381
+#: ../../src/ui_fsmenu/campaign_select.cc:399
 #: ../../src/ui_fsmenu/mapselect.cc:70
 msgid "Description:"
 msgstr "Description:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:90
-#: ../../src/ui_fsmenu/campaign_select.cc:328
+#: ../../src/ui_fsmenu/campaign_select.cc:331
 #: ../../src/ui_fsmenu/loadgame.cc:117
 msgid "Return to the main menu"
 msgstr ""
@@ -2007,7 +2011,7 @@ msgid "The difficulty of this campaign"
 msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:95
-#: ../../src/ui_fsmenu/campaign_select.cc:331
+#: ../../src/ui_fsmenu/campaign_select.cc:339
 #: ../../src/ui_fsmenu/mapselect.cc:97
 msgid "Story and hints"
 msgstr ""
@@ -2050,49 +2054,91 @@ msgstr "Difficulty:"
 msgid "Choose a scenario"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:329
+#: ../../src/ui_fsmenu/campaign_select.cc:291
+msgid "Choose a tutorial"
+msgstr ""
+
+#: ../../src/ui_fsmenu/campaign_select.cc:333
+msgid "Play this tutorial"
+msgstr ""
+
+#: ../../src/ui_fsmenu/campaign_select.cc:334
+msgid "The name of this tutorial"
+msgstr ""
+
+#: ../../src/ui_fsmenu/campaign_select.cc:335
+msgid "What you will learn in this tutorial"
+msgstr ""
+
+#: ../../src/ui_fsmenu/campaign_select.cc:337
 msgid "Play this scenario"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:330
+#: ../../src/ui_fsmenu/campaign_select.cc:338
 msgid "The name of this scenario"
 msgstr ""
 
-#. * TRANSLATORS: Campaign scenario number table header
-#: ../../src/ui_fsmenu/campaign_select.cc:344
-msgid "#"
-msgstr "#"
+#: ../../src/ui_fsmenu/campaign_select.cc:356
+msgid "The order in which the tutorials should be played"
+msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:344
+#: ../../src/ui_fsmenu/campaign_select.cc:357
+msgid "Tutorial Name"
+msgstr ""
+
+#: ../../src/ui_fsmenu/campaign_select.cc:359
 msgid "The number of this scenario in the campaign"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:345
+#: ../../src/ui_fsmenu/campaign_select.cc:360
 msgid "Scenario Name"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:380
+#: ../../src/ui_fsmenu/campaign_select.cc:362
+msgid "#"
+msgstr "#"
+
+#: ../../src/ui_fsmenu/campaign_select.cc:398
 #: ../../src/ui_fsmenu/mapselect.cc:292
 msgid "Scenario:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:396
-#, c-format
-msgid "Invalid path to file in cconfig: %s"
-msgstr "Invalid path to file in cconfig: %s"
+#: ../../src/ui_fsmenu/campaign_select.cc:398
+msgid "Tutorial:"
+msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:404
+#: ../../src/ui_fsmenu/campaign_select.cc:414
+#, c-format
+msgid "Invalid path to file in campaigns.conf: %s"
+msgstr ""
+
+#: ../../src/ui_fsmenu/campaign_select.cc:425
+msgid "The designer of this tutorial"
+msgid_plural "The designers of this tutorial"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../src/ui_fsmenu/campaign_select.cc:428
 msgid "The designer of this scenario"
 msgid_plural "The designers of this scenario"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:406
+#: ../../src/ui_fsmenu/campaign_select.cc:431
 #: ../../src/ui_fsmenu/mapselect.cc:318
 msgid "Author:"
 msgid_plural "Authors:"
 msgstr[0] ""
 msgstr[1] ""
+
+#: ../../src/ui_fsmenu/campaign_select.cc:453
+msgid "Pick a tutorial from the list, then hit \"OK\"."
+msgstr ""
+
+#: ../../src/ui_fsmenu/campaign_select.cc:455
+msgid ""
+"You can see a description of the currently selected tutorial on the right."
+msgstr ""
 
 #: ../../src/ui_fsmenu/editor.cc:36 ../../src/ui_fsmenu/main.cc:60
 msgid "Editor"
@@ -2356,6 +2402,8 @@ msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
 msgstr ""
+"The player with the colour of the flag. If more than one client selected the "
+"same colour, these share control over the player (‘shared kingdom mode’)."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:688
 msgid ""
@@ -2399,6 +2447,10 @@ msgid ""
 "of each player (the set of buildings, wares and workers the player starts "
 "with) and the tribe and team for computer players"
 msgstr ""
+"The latter three can only be set by the hosting client by left-clicking the "
+"‘type’ button of a player. Hosting players can also set the initialisation "
+"of each player (the set of buildings, wares and workers the player starts "
+"with) and the tribe and team for computer players"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:711
 msgid ""
@@ -2795,15 +2847,15 @@ msgid "Open this directory"
 msgstr ""
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
-#: ../../src/ui_fsmenu/mapselect.cc:442
+#: ../../src/ui_fsmenu/mapselect.cc:441
 msgid "Multiplayer Scenarios"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:586
+#: ../../src/ui_fsmenu/mapselect.cc:583
 msgid "Nobody"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:587
+#: ../../src/ui_fsmenu/mapselect.cc:584
 msgid ""
 "This map file is not present in your filesystem. The data shown here was "
 "sent by the server."
@@ -3048,11 +3100,11 @@ msgstr ""
 "Your video settings could not be enabled, and fallback settings are in "
 "effect. Please check the graphics options!"
 
-#: ../../src/wlapplication.cc:1167
+#: ../../src/wlapplication.cc:1158
 msgid "Game data error"
 msgstr "Game data error"
 
-#: ../../src/wlapplication.cc:1177
+#: ../../src/wlapplication.cc:1168
 #, c-format
 msgid ""
 "\n"
@@ -3062,7 +3114,7 @@ msgid ""
 "using build %1$s (%2$s). "
 msgstr ""
 
-#: ../../src/wlapplication.cc:1184
+#: ../../src/wlapplication.cc:1175
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -3898,7 +3950,7 @@ msgstr "Scout south-westwards"
 
 #: ../../src/wui/shipwindow.cc:158
 msgid "Explore the island’s coast counter clockwise"
-msgstr ""
+msgstr "Explore the island’s coast anticlockwise"
 
 #: ../../src/wui/shipwindow.cc:164
 msgid "Scout towards the south east"
@@ -4057,4 +4109,4 @@ msgstr "Follow"
 
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
-msgstr ""
+msgstr "Centre the main view on this"

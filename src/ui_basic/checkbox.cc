@@ -101,19 +101,18 @@ void Statebox::draw(RenderTarget & dst)
 {
 	if (m_flags & Has_Custom_Picture) {
 		// center picture
-		uint16_t w = m_pic_graphics->width();
-		uint16_t h = m_pic_graphics->height();
+		const uint16_t w = m_pic_graphics->width();
+		const uint16_t h = m_pic_graphics->height();
 
-		dst.blit
-			(Point((get_inner_w() - w) / 2, (get_inner_h() - h) / 2),
-			 m_pic_graphics);
+		dst.blit(Point((get_inner_w() - w) / 2, (get_inner_h() - h) / 2), m_pic_graphics);
 
-		if (m_flags & Is_Checked)
+		if (m_flags & Is_Checked) {
 			dst.draw_rect
 				(Rect(Point(0, 0), get_w(), get_h()), RGBColor(229, 116,   2));
-		else if (m_flags & Is_Highlighted)
+		} else if (m_flags & Is_Highlighted) {
 			dst.draw_rect
 				(Rect(Point(0, 0), get_w(), get_h()), RGBColor(100, 100,  80));
+		}
 	} else {
 		static_assert(0 <= STATEBOX_WIDTH, "assert(0 <= STATEBOX_WIDTH) failed.");
 		static_assert(0 <= STATEBOX_HEIGHT, "assert(0 <= STATEBOX_HEIGHT) failed.");

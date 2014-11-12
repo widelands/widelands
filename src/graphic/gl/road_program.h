@@ -24,6 +24,7 @@
 
 #include "base/macros.h"
 #include "graphic/gl/fields_to_draw.h"
+#include "graphic/gl/surface.h"
 #include "graphic/gl/utils.h"
 #include "logic/roadtype.h"
 
@@ -32,13 +33,14 @@ public:
 	// Compiles the program. Throws on error.
 	RoadProgram();
 
-	// Draws the roads.
-	void draw(const FieldsToDraw& fields_to_draw);
+	// Draws the roads. The 'surface' is needed to convert from pixel space to
+	// GL space.
+	void draw(const GLSurface& surface, const FieldsToDraw& fields_to_draw);
 
 private:
 	struct PerVertexData {
-		float x;
-		float y;
+		float gl_x;
+		float gl_y;
 		float texture_x;
 		float texture_y;
 		float brightness;
@@ -53,7 +55,8 @@ private:
 
 	// Adds a road from 'start' to 'end' to be rendered in this frame using the
 	// correct texture for 'road_type'.
-	void add_road(const FieldsToDraw::Field& start,
+	void add_road(const GLSurface& surface,
+	              const FieldsToDraw::Field& start,
 	              const FieldsToDraw::Field& end,
 	              const Widelands::RoadType road_type);
 

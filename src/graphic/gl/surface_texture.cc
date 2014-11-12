@@ -20,55 +20,57 @@
 
 #include <cassert>
 
+#include "base/log.h"
+#include "base/macros.h"
 #include "base/wexception.h"
+#include "graphic/gl/blit_program.h"
 #include "graphic/gl/surface.h"
 #include "graphic/gl/utils.h"
 #include "graphic/graphic.h"
-
-GLuint GLSurfaceTexture::gl_framebuffer_id_;
-
-static bool use_arb_;
+#include "graphic/sdl/utils.h"
 
 namespace  {
 
-// Return the smallest power of two greater than or equal to \p x.
-uint32_t next_power_of_two(uint32_t x)
-{
-	uint32_t pot = 1;
+class GlFramebuffer {
+public:
+	static GlFramebuffer& instance() {
+		static GlFramebuffer gl_framebuffer;
+		return gl_framebuffer;
+	}
 
-	while (pot < x)
-		pot *= 2;
+	~GlFramebuffer() {
+		glDeleteFramebuffers(1, &gl_framebuffer_id_);
+	}
 
-	return pot;
+	GLuint id() const {
+		return gl_framebuffer_id_;
+	}
+
+private:
+	GlFramebuffer() {
+		// Generate the framebuffer for Offscreen rendering.
+		glGenFramebuffers(1, &gl_framebuffer_id_);
+	}
+
+	GLuint gl_framebuffer_id_;
+
+	DISALLOW_COPY_AND_ASSIGN(GlFramebuffer);
+};
+
+bool is_bgr_surface(const SDL_PixelFormat& fmt) {
+	return (fmt.Bmask == 0x000000ff && fmt.Gmask == 0x0000ff00 && fmt.Rmask == 0x00ff0000);
+}
+
+inline void setup_gl(const GLuint texture) {
+	glBindFramebuffer(GL_FRAMEBUFFER, GlFramebuffer::instance().id());
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture, 0);
+}
+
+inline void reset_gl() {
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 }  // namespace
-
-/**
- * Initial global resources needed for fast offscreen rendering.
- */
-void GLSurfaceTexture::initialize(bool use_arb) {
-	use_arb_ = use_arb;
-
-	// Generate the framebuffer for Offscreen rendering.
-	if (use_arb) {
-		glGenFramebuffers(1, &gl_framebuffer_id_);
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	} else {
-		glGenFramebuffersEXT(1, &gl_framebuffer_id_);
-		glBindFramebufferEXT(GL_FRAMEBUFFER, 0);
-	}
-}
-
-/**
- * Free global resources.
- */
-void GLSurfaceTexture::cleanup() {
-	if (use_arb_)
-		glDeleteFramebuffers(1, &gl_framebuffer_id_);
-	else
-		glDeleteFramebuffersEXT(1, &gl_framebuffer_id_);
-}
 
 /**
  * Initialize an OpenGL texture of the given dimensions.
@@ -83,7 +85,7 @@ GLSurfaceTexture::GLSurfaceTexture(int w, int h)
 		return;
 	}
 	glTexImage2D
-		(GL_TEXTURE_2D, 0, GL_RGBA, m_tex_w, m_tex_h, 0, GL_RGBA,
+		(GL_TEXTURE_2D, 0, GL_RGBA, m_w, m_h, 0, GL_RGBA,
 		 GL_UNSIGNED_BYTE, nullptr);
 }
 
@@ -96,18 +98,17 @@ GLSurfaceTexture::GLSurfaceTexture(SDL_Surface * surface, bool intensity)
 {
 	init(surface->w, surface->h);
 
-	// Convert image data
+	// Convert image data. BGR Surface support is an extension for
+	// OpenGL ES 2, which we rather not rely on. So we convert our
+	// surfaces in software.
+	// TODO(sirver): SDL_TTF returns all data in BGR format. If we
+	// use freetype directly we might be able to avoid that.
 	uint8_t bpp = surface->format->BytesPerPixel;
 
-	if
-		(surface->format->palette ||
-		 m_tex_w != static_cast<uint32_t>(surface->w) ||
-		 m_tex_h != static_cast<uint32_t>(surface->h) ||
-		 (bpp != 3 && bpp != 4))
-	{
-		SDL_Surface * converted = SDL_CreateRGBSurface
-			(SDL_SWSURFACE, m_tex_w, m_tex_h,
-			 32, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
+	if (surface->format->palette || m_w != static_cast<uint32_t>(surface->w) ||
+	    m_h != static_cast<uint32_t>(surface->h) || (bpp != 3 && bpp != 4) ||
+	    is_bgr_surface(*surface->format)) {
+		SDL_Surface* converted = empty_sdl_surface(m_w, m_h);
 		assert(converted);
 		SDL_SetSurfaceAlphaMod(converted,  SDL_ALPHA_OPAQUE);
 		SDL_SetSurfaceBlendMode(converted, SDL_BLENDMODE_NONE);
@@ -119,69 +120,26 @@ GLSurfaceTexture::GLSurfaceTexture(SDL_Surface * surface, bool intensity)
 		bpp = surface->format->BytesPerPixel;
 	}
 
-	const SDL_PixelFormat & fmt = *surface->format;
-	GLenum pixels_format;
-
-	glPushAttrib(GL_PIXEL_MODE_BIT);
-
-	if (bpp == 4) {
-		if
-			(fmt.Rmask == 0x000000ff && fmt.Gmask == 0x0000ff00 &&
-			 fmt.Bmask == 0x00ff0000)
-		{
-			if (fmt.Amask == 0xff000000) {
-				pixels_format = GL_RGBA;
-			} else {
-				pixels_format = GL_RGBA;
-				// Read four bytes per pixel but ignore the alpha value
-				glPixelTransferi(GL_ALPHA_SCALE, 0.0f);
-				glPixelTransferi(GL_ALPHA_BIAS, 1.0f);
-			}
-		} else if
-			(fmt.Bmask == 0x000000ff && fmt.Gmask == 0x0000ff00 &&
-			 fmt.Rmask == 0x00ff0000)
-		{
-			if (fmt.Amask == 0xff000000) {
-				pixels_format = GL_BGRA;
-			} else {
-				pixels_format = GL_BGRA;
-				// Read four bytes per pixel but ignore the alpha value
-				glPixelTransferi(GL_ALPHA_SCALE, 0.0f);
-				glPixelTransferi(GL_ALPHA_BIAS, 1.0f);
-			}
-		} else
-			throw wexception("OpenGL: Unknown pixel format");
-	} else  if (bpp == 3) {
-		if
-			(fmt.Rmask == 0x000000ff && fmt.Gmask == 0x0000ff00 &&
-			 fmt.Bmask == 0x00ff0000)
-		{
-			pixels_format = GL_RGB;
-		} else if
-			(fmt.Bmask == 0x000000ff && fmt.Gmask == 0x0000ff00 &&
-			 fmt.Rmask == 0x00ff0000)
-		{
-			pixels_format = GL_BGR;
-		} else
-			throw wexception("OpenGL: Unknown pixel format");
-	} else
-		throw wexception("OpenGL: Unknown pixel format");
+	const GLenum pixels_format = bpp == 4 ? GL_RGBA : GL_RGB;
 
 	SDL_LockSurface(surface);
 
 	glTexImage2D
-		(GL_TEXTURE_2D, 0, intensity ? GL_INTENSITY : GL_RGBA, m_tex_w, m_tex_h, 0,
+		(GL_TEXTURE_2D, 0, intensity ? GL_INTENSITY : GL_RGBA, m_w, m_h, 0,
 		 pixels_format, GL_UNSIGNED_BYTE, surface->pixels);
 
 	SDL_UnlockSurface(surface);
 	SDL_FreeSurface(surface);
-
-	glPopAttrib();
 }
 
 GLSurfaceTexture::~GLSurfaceTexture()
 {
 	glDeleteTextures(1, &m_texture);
+}
+
+void GLSurfaceTexture::pixel_to_gl(float* x, float* y) const {
+	*x = (*x / m_w) * 2. - 1.;
+	*y = (*y / m_h) * 2. - 1.;
 }
 
 void GLSurfaceTexture::init(uint16_t w, uint16_t h)
@@ -190,14 +148,6 @@ void GLSurfaceTexture::init(uint16_t w, uint16_t h)
 	m_h = h;
 	if (m_w <= 0 || m_h <= 0) {
 		return;
-	}
-
-	if (g_gr->caps().gl.tex_power_of_two) {
-		m_tex_w = next_power_of_two(w);
-		m_tex_h = next_power_of_two(h);
-	} else {
-		m_tex_w = w;
-		m_tex_h = h;
 	}
 
 	glGenTextures(1, &m_texture);
@@ -220,7 +170,7 @@ void GLSurfaceTexture::lock(LockMode mode) {
 	}
 	assert(!m_pixels);
 
-	m_pixels.reset(new uint8_t[m_tex_w * m_tex_h * 4]);
+	m_pixels.reset(new uint8_t[m_w * m_h * 4]);
 
 	if (mode == Lock_Normal) {
 		glBindTexture(GL_TEXTURE_2D, m_texture);
@@ -237,7 +187,7 @@ void GLSurfaceTexture::unlock(UnlockMode mode) {
 	if (mode == Unlock_Update) {
 		glBindTexture(GL_TEXTURE_2D, m_texture);
 		glTexImage2D
-			(GL_TEXTURE_2D, 0, GL_RGBA, m_tex_w, m_tex_h, 0, GL_RGBA,
+			(GL_TEXTURE_2D, 0, GL_RGBA, m_w, m_h, 0, GL_RGBA,
 			 GL_UNSIGNED_BYTE,  m_pixels.get());
 	}
 
@@ -245,16 +195,16 @@ void GLSurfaceTexture::unlock(UnlockMode mode) {
 }
 
 uint16_t GLSurfaceTexture::get_pitch() const {
-	return 4 * m_tex_w;
+	return 4 * m_w;
 }
 
-void GLSurfaceTexture::draw_rect(const Rect& rc, const RGBColor clr)
+void GLSurfaceTexture::draw_rect(const Rect& rectangle, const RGBColor& clr)
 {
 	if (m_w <= 0 || m_h <= 0) {
 		return;
 	}
-	setup_gl();
-	GLSurface::draw_rect(rc, clr);
+	setup_gl(m_texture);
+	GLSurface::draw_rect(rectangle, clr);
 	reset_gl();
 }
 
@@ -262,26 +212,28 @@ void GLSurfaceTexture::draw_rect(const Rect& rc, const RGBColor clr)
 /**
  * Draws a filled rectangle
  */
-void GLSurfaceTexture::fill_rect(const Rect& rc, const RGBAColor clr)
+void GLSurfaceTexture::fill_rect(const Rect& rectangle, const RGBAColor& clr)
 {
 	if (m_w <= 0 || m_h <= 0) {
 		return;
 	}
-	setup_gl();
-	GLSurface::fill_rect(rc, clr);
+
+	setup_gl(m_texture);
+	GLSurface::fill_rect(rectangle, clr);
 	reset_gl();
 }
 
 /**
  * Change the brightness of the given rectangle
  */
-void GLSurfaceTexture::brighten_rect(const Rect& rc, const int32_t factor)
+void GLSurfaceTexture::brighten_rect(const Rect& rectangle, const int32_t factor)
 {
 	if (m_w <= 0 || m_h <= 0) {
 		return;
 	}
-	setup_gl();
-	GLSurface::brighten_rect(rc, factor);
+
+	setup_gl(m_texture);
+	GLSurface::brighten_rect(rectangle, factor);
 	reset_gl();
 }
 
@@ -291,7 +243,8 @@ void GLSurfaceTexture::draw_line
 	if (m_w <= 0 || m_h <= 0) {
 		return;
 	}
-	setup_gl();
+
+	setup_gl(m_texture);
 	GLSurface::draw_line(x1, y1, x2, y2, color, gwidth);
 	reset_gl();
 }
@@ -302,39 +255,8 @@ void GLSurfaceTexture::blit
 	if (m_w <= 0 || m_h <= 0) {
 		return;
 	}
-	setup_gl();
+
+	setup_gl(m_texture);
 	GLSurface::blit(dst, src, srcrc, cm);
 	reset_gl();
-}
-
-void GLSurfaceTexture::setup_gl() {
-	if (use_arb_) {
-		glBindFramebuffer(GL_FRAMEBUFFER, gl_framebuffer_id_);
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
-	} else {
-		glBindFramebufferEXT(GL_FRAMEBUFFER, gl_framebuffer_id_);
-		glFramebufferTexture2DEXT(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
-	}
-
-	// Note: we do not want to reverse y for textures, we only want this for
-	// the screen.
-	glMatrixMode(GL_PROJECTION);
-	glPushMatrix();
-	glLoadIdentity();
-	glOrtho(0, get_tex_w(), 0, get_tex_h(), -1, 1);
-
-	glPushAttrib(GL_VIEWPORT_BIT);
-	glViewport(0, 0, get_tex_w(), get_tex_h());
-}
-
-void GLSurfaceTexture::reset_gl() {
-	if (use_arb_)
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	else
-		glBindFramebufferEXT(GL_FRAMEBUFFER, 0);
-
-	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();
-
-	glPopAttrib();
 }

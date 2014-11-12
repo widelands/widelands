@@ -140,13 +140,13 @@ void GlGameRenderer::draw() {
 	const Rect& bounding_rect = m_dst->get_rect();
 	const Point surface_offset = m_dst_offset + bounding_rect.top_left() + m_dst->get_offset();
 
-	glClear(GL_COLOR_BUFFER_BIT);
-
 	glScissor(bounding_rect.x,
 	          surface->height() - bounding_rect.y - bounding_rect.h,
 	          bounding_rect.w,
 	          bounding_rect.h);
 	glEnable(GL_SCISSOR_TEST);
+
+	glClear(GL_COLOR_BUFFER_BIT);
 
 	Map& map = m_egbase->map();
 	const uint32_t gametime = m_egbase->get_gametime();
@@ -169,8 +169,10 @@ void GlGameRenderer::draw() {
 
 			f.texture_x = float(x) / TEXTURE_WIDTH;
 			f.texture_y = float(y) / TEXTURE_HEIGHT;
-			f.x = x + surface_offset.x;
-			f.y = y + surface_offset.y - fcoords.field->get_height() * HEIGHT_FACTOR;
+
+			f.gl_x = f.pixel_x = x + surface_offset.x;
+			f.gl_y = f.pixel_y = y + surface_offset.y - fcoords.field->get_height() * HEIGHT_FACTOR;
+			surface->pixel_to_gl(&f.gl_x, &f.gl_y);
 
 			f.ter_d = fcoords.field->terrain_d();
 			f.ter_r = fcoords.field->terrain_r();
@@ -184,7 +186,7 @@ void GlGameRenderer::draw() {
 	const World& world = m_egbase->world();
 	terrain_program_->draw(world.terrains(), fields_to_draw);
 	dither_program_->draw(world.terrains(), fields_to_draw);
-	road_program_->draw(fields_to_draw);
+	road_program_->draw(*surface, fields_to_draw);
 
 	draw_objects();
 

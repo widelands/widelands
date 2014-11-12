@@ -32,8 +32,6 @@ using namespace Widelands;
 // Full specification:
 // http://www.opengl.org/registry/doc/GLSLangSpec.Full.1.20.8.pdf
 // We target OpenGL 2.1 for the desktop here.
-// TODO(sirver): In the end we need to replace gl_ProjectionMatrix. It is not
-// supported in ES and more modern Open GL version.
 const char kTerrainVertexShader[] = R"(
 #version 120
 
@@ -49,8 +47,7 @@ varying vec2 var_texture_position;
 void main() {
 	var_texture_position = attr_texture_position;
 	var_brightness = attr_brightness;
-	vec4 p = vec4(attr_position, 0., 1.);
-	gl_Position = gl_ProjectionMatrix * p;
+	gl_Position = vec4(attr_position, 0., 1.);
 }
 )";
 
@@ -104,7 +101,7 @@ void TerrainProgram::gl_draw(int num_vertices,
 		                      sizeof(TerrainProgram::PerVertexData),
 		                      reinterpret_cast<void*>(offset));
 	};
-	set_attrib_pointer(attr_position_, 2, offsetof(PerVertexData, x));
+	set_attrib_pointer(attr_position_, 2, offsetof(PerVertexData, gl_x));
 	set_attrib_pointer(attr_brightness_, 1, offsetof(PerVertexData, brightness));
 	set_attrib_pointer(attr_texture_position_, 2, offsetof(PerVertexData, texture_x));
 
@@ -129,8 +126,6 @@ void TerrainProgram::gl_draw(int num_vertices,
 	glDisableVertexAttribArray(attr_position_);
 	glDisableVertexAttribArray(attr_texture_position_);
 	glDisableVertexAttribArray(attr_brightness_);
-
-	glUseProgram(0);
 }
 
 void TerrainProgram::draw(const DescriptionMaintainer<TerrainDescription>& terrains,
@@ -150,8 +145,8 @@ void TerrainProgram::draw(const DescriptionMaintainer<TerrainDescription>& terra
 		PerVertexData& vertex = vertices_[current_index];
 		vertex.texture_x = field.texture_x;
 		vertex.texture_y = field.texture_y;
-		vertex.x = field.x;
-		vertex.y = field.y;
+		vertex.gl_x = field.gl_x;
+		vertex.gl_y = field.gl_y;
 		vertex.brightness = field.brightness;
 
 		// The bottom right neighbor fields_to_draw is needed for both triangles

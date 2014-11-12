@@ -30,8 +30,6 @@
 namespace  {
 
 // We target OpenGL 2.1 for the desktop here.
-// TODO(sirver): In the end we need to replace gl_ProjectionMatrix. It is not
-// supported in ES and more modern Open GL version.
 const char kRoadVertexShader[] = R"(
 #version 120
 
@@ -50,7 +48,7 @@ void main() {
 	out_texture_position = attr_texture_position;
 	out_texture_mix = attr_texture_mix;
 	out_brightness = attr_brightness;
-	gl_Position = gl_ProjectionMatrix * vec4(attr_position, 0., 1.);
+	gl_Position = vec4(attr_position, 0., 1.);
 }
 )";
 
@@ -89,12 +87,13 @@ RoadProgram::RoadProgram() {
 	u_busy_road_texture_ = glGetUniformLocation(gl_program_.object(), "u_busy_road_texture");
 }
 
-void RoadProgram::add_road(const FieldsToDraw::Field& start,
+void RoadProgram::add_road(const GLSurface& surface,
+                           const FieldsToDraw::Field& start,
                            const FieldsToDraw::Field& end,
                            const Widelands::RoadType road_type) {
 	static constexpr float kRoadThicknessInPixels = 3.;
-	const float delta_x = end.x - start.x;
-	const float delta_y = end.y - start.y;
+	const float delta_x = end.pixel_x - start.pixel_x;
+	const float delta_y = end.pixel_y - start.pixel_y;
 	const float vector_length = std::hypot(delta_x, delta_y);
 
 	// Find the reciprocal unit vector, so that we can calculate start and end
@@ -103,30 +102,37 @@ void RoadProgram::add_road(const FieldsToDraw::Field& start,
 	const float dy = delta_x / vector_length;
 
 	const float texture_mix = road_type == Widelands::Road_Normal ? 0. : 1.;
-	const PerVertexData p1 = {
-	   start.x + kRoadThicknessInPixels * dx, start.y + kRoadThicknessInPixels * dy,
+	PerVertexData p1 = {
+		start.pixel_x + kRoadThicknessInPixels * dx, start.pixel_y + kRoadThicknessInPixels * dy,
 		0., 0.,
 		start.brightness,
 		texture_mix,
 	};
-	const PerVertexData p2 = {
-	   start.x - kRoadThicknessInPixels * dx, start.y - kRoadThicknessInPixels * dy,
+	surface.pixel_to_gl(&p1.gl_x, &p1.gl_y);
+
+	PerVertexData p2 = {
+		start.pixel_x - kRoadThicknessInPixels * dx, start.pixel_y - kRoadThicknessInPixels * dy,
 		0., 1.,
 		start.brightness,
 		texture_mix,
 	};
-	const PerVertexData p3 = {
-	   end.x + kRoadThicknessInPixels * dx, end.y + kRoadThicknessInPixels * dy,
+	surface.pixel_to_gl(&p2.gl_x, &p2.gl_y);
+
+	PerVertexData p3 = {
+		end.pixel_x + kRoadThicknessInPixels * dx, end.pixel_y + kRoadThicknessInPixels * dy,
 		1., 0.,
 		end.brightness,
 		texture_mix,
 	};
-	const PerVertexData p4 = {
-	   end.x - kRoadThicknessInPixels * dx, end.y - kRoadThicknessInPixels * dy,
+	surface.pixel_to_gl(&p3.gl_x, &p3.gl_y);
+
+	PerVertexData p4 = {
+		end.pixel_x - kRoadThicknessInPixels * dx, end.pixel_y - kRoadThicknessInPixels * dy,
 		1., 1.,
 		end.brightness,
 		texture_mix,
 	};
+	surface.pixel_to_gl(&p4.gl_x, &p4.gl_y);
 
 	// As OpenGl does not support drawing quads in modern days and we have a
 	// bunch of roads that might not be neighbored, we need to add two triangles
@@ -140,7 +146,7 @@ void RoadProgram::add_road(const FieldsToDraw::Field& start,
 	vertices_.emplace_back(p4);
 }
 
-void RoadProgram::draw(const FieldsToDraw& fields_to_draw) {
+void RoadProgram::draw(const GLSurface& surface, const FieldsToDraw& fields_to_draw) {
 	vertices_.clear();
 
 	for (size_t current_index = 0; current_index < fields_to_draw.size(); ++current_index) {
@@ -152,7 +158,7 @@ void RoadProgram::draw(const FieldsToDraw& fields_to_draw) {
 			const Widelands::RoadType road =
 			   static_cast<Widelands::RoadType>(field.roads & Widelands::Road_Mask);
 			if (road != Widelands::Road_None) {
-				add_road(field, fields_to_draw.at(rn_index), road);
+				add_road(surface, field, fields_to_draw.at(rn_index), road);
 			}
 		}
 
@@ -162,7 +168,7 @@ void RoadProgram::draw(const FieldsToDraw& fields_to_draw) {
 			const Widelands::RoadType road =
 			   static_cast<Widelands::RoadType>((field.roads >> 2) & Widelands::Road_Mask);
 			if (road != Widelands::Road_None) {
-				add_road(field, fields_to_draw.at(brn_index), road);
+				add_road(surface, field, fields_to_draw.at(brn_index), road);
 			}
 		}
 
@@ -173,7 +179,7 @@ void RoadProgram::draw(const FieldsToDraw& fields_to_draw) {
 			const Widelands::RoadType road =
 			   static_cast<Widelands::RoadType>((field.roads >> 4) & Widelands::Road_Mask);
 			if (road != Widelands::Road_None) {
-				add_road(field, fields_to_draw.at(bln_index), road);
+				add_road(surface, field, fields_to_draw.at(bln_index), road);
 			}
 		}
 	}
@@ -197,7 +203,7 @@ void RoadProgram::draw(const FieldsToDraw& fields_to_draw) {
 		                      sizeof(PerVertexData),
 		                      reinterpret_cast<void*>(offset));
 	};
-	set_attrib_pointer(attr_position_, 2, offsetof(PerVertexData, x));
+	set_attrib_pointer(attr_position_, 2, offsetof(PerVertexData, gl_x));
 	set_attrib_pointer(attr_texture_position_, 2, offsetof(PerVertexData, texture_x));
 	set_attrib_pointer(attr_brightness_, 1, offsetof(PerVertexData, brightness));
 	set_attrib_pointer(attr_texture_mix_, 1, offsetof(PerVertexData, texture_mix));
@@ -226,7 +232,4 @@ void RoadProgram::draw(const FieldsToDraw& fields_to_draw) {
 	glDisableVertexAttribArray(attr_texture_mix_);
 
 	glActiveTexture(GL_TEXTURE0);
-
-	glUseProgram(0);
-
 }

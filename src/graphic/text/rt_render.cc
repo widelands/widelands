@@ -361,7 +361,7 @@ Surface* FillingTextNode::render(SurfaceCache* surface_cache) {
 	Surface* rv = Surface::create(m_w, m_h);
 	for (uint16_t curx = 0; curx < m_w; curx += t.width()) {
 		Rect srcrect(Point(0, 0), min<int>(t.width(), m_w - curx), m_h);
-		rv->blit(Point(curx, 0), &t, srcrect, CM_Solid);
+		rv->blit(Point(curx, 0), &t, srcrect, CM_Copy);
 	}
 	return rv;
 }
@@ -430,7 +430,7 @@ public:
 				dst.y = 0;
 				srcrect.w = min<int>(m_bg->width(), m_w - curx);
 				srcrect.h = m_h;
-				rv->blit(dst, m_bg->surface(), srcrect, CM_Solid);
+				rv->blit(dst, m_bg->surface(), srcrect, CM_Copy);
 			}
 		} else {
 			rv->fill_rect(Rect(0, 0, m_w, m_h), RGBAColor(255, 255, 255, 0));
@@ -490,7 +490,7 @@ public:
 					dst.x = curx; dst.y = cury;
 					src.w = min<int>(m_bg_img->width(), m_w + m_margin.left - curx);
 					src.h = min<int>(m_bg_img->height(), m_h + m_margin.top - cury);
-					rv->blit(dst, m_bg_img->surface(), src, CM_Solid);
+					rv->blit(dst, m_bg_img->surface(), src, CM_Copy);
 				}
 			}
 			set_alpha = false;
@@ -502,7 +502,7 @@ public:
 				Point dst = Point(n->x() + m_margin.left, n->y() + m_margin.top);
 				Rect src = Rect(0, 0, nsur->width(), nsur->height());
 
-				rv->blit(dst, nsur, src, set_alpha ? CM_Solid : CM_Normal);
+				rv->blit(dst, nsur, src, set_alpha ? CM_Copy : CM_UseAlpha);
 				delete nsur;
 			}
 			delete n;

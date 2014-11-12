@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2014-10-29 10:08+0000\n"
+"POT-Creation-Date: 2014-11-12 11:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -730,15 +730,13 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:440
-#: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:450
 msgid ""
-"Burning down the quarry: This is the fastest way of clearing the space. While the worker abandons the building, the wares are lost."
+"Burning down the quarry: this is the fastest way of clearing the space. While the worker abandons the building, the wares are lost."
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:441
-#: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:451
 msgid ""
-"Dismantling the quarry: A builder will walk from the headquarters to dismantle the quarry piece by piece. Thereby, you regain some of the resources you used for the construction."
+"Dismantling the quarry: a builder will walk from the headquarters to dismantle the quarry piece by piece. Thereby, you regain some of the resources you used for the construction."
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:447
@@ -749,6 +747,16 @@ msgstr ""
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:449
 msgid ""
 "There are two different ways of destroying a building: burning down and dismantling. Try them both out on your quarries."
+msgstr ""
+
+#: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:450
+msgid ""
+"Burning down the quarry: This is the fastest way of clearing the space. While the worker abandons the building, the wares are lost."
+msgstr ""
+
+#: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:451
+msgid ""
+"Dismantling the quarry: A builder will walk from the headquarters to dismantle the quarry piece by piece. Thereby, you regain some of the resources you used for the construction."
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:456
@@ -818,7 +826,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:481
 msgid ""
-"Great. Do you see how your territory has grown since your soldiers entered the sentry?"
+"Great. Do you see how your territory has grown since your soldiers entered your new military building?"
 msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:482
@@ -867,7 +875,7 @@ msgid ""
 "“%s”"
 msgstr ""
 
-#: ../../scripting/format_scenario.lua:133
+#: ../../scripting/format_scenario.lua:146
 msgid ""
 "New Objective"
 msgid_plural ""

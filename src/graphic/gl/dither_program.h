@@ -52,8 +52,8 @@ private:
 	void add_vertex(const FieldsToDraw::Field& field, int order_index, int terrain);
 
 	struct PerVertexData {
-		float x;
-		float y;
+		float gl_x;
+		float gl_y;
 		float texture_x;
 		float texture_y;
 		float brightness;

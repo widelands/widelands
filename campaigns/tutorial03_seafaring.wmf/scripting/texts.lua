@@ -21,7 +21,7 @@ intro_south = {
    body = rt(
       h1(_"Seafaring Tutorial") ..
       p(_[[Welcome back. In this tutorial, you are going to learn the most important things about seafaring, that is ships, ports, and expedition.]]) ..
-      p(_[[But let me first give you an overview about your territory: Here in the south, you have a whole economy with almost everything you need.]])
+      p(_[[But let me first give you an overview about your territory: here in the south, you have a whole economy with almost everything you need.]])
    ),
    h = 250
 }
@@ -33,7 +33,7 @@ intro_north = {
    body = rt(
       p(_[[Here in the northern part, you only have a goldmine and a warehouse. While the miners are supplied well with food, there is no way to transport the gold ore to our smelting works in the southern part.]]) ..
       p(_[[We have tried to build a road, but the mountain is too wide and too steep. We therefore have only one possibility: we need to establish a sea lane between these two parts.]]) ..
-      p(_[[But I don’t want to rush you: You have just arrived here and you would probably like to have a closer look at your camp. I will also take a short break and be back soon.]])
+      p(_[[But I don’t want to rush you: you have just arrived here and you would probably like to have a closer look at your camp. I will also take a short break and be back soon.]])
    ),
    h = 350
 }
@@ -72,7 +72,7 @@ tell_about_port_building = {
       paragraphdivider() ..
       listitem_bullet(_[[Build a port next to your castle, on the blue port space icon.]]) ..
       listitem_arrow(_[[Ports are built like normal buildings, but are only available on blue port spaces. Just click on a field with the icon and the building menu automatically offers you to build a port.]]) ..
-      listitem_arrow(_[[Although ports act as warehouses, you should not build more than necessary: They cost quartz, diamonds and gold, which makes them quite expensive.]])
+      listitem_arrow(_[[Although ports act as warehouses, you should not build more than necessary: they cost quartz, diamonds and gold, which makes them quite expensive.]])
    ),
 }
 
@@ -186,7 +186,7 @@ conclusion = {
       h1(_"Congratulations") ..
       p(_[[You’ve lead the expedition to a successful end and founded a new colony. I’ve sent out some geologists – they already report that they’ve found some iron ore.]]) ..
       p(_[[In this scenario, you’ve learned everything about seafaring: how to build ports and ships and how to send out an expedition. Remember that expeditions are sometimes the fastest way to reach essential resources – and sometimes the only one.]]) ..
-      p(_[[But I want to speak a word of warning. Ports are like headquarters: They can be attacked by a nearby enemy. While your headquarters has soldiers to defend it, your newly built port won’t. You should therefore avoid  settling next to an enemy.]]) ..
+      p(_[[But I want to speak a word of warning. Ports are like headquarters: they can be attacked by a nearby enemy. While your headquarters has soldiers to defend it, your newly built port won’t. You should therefore avoid settling next to an enemy.]]) ..
       p(_[[On this map, there is no enemy to fear. As always, you can continue playing and watch how the ships deliver wares to the island when you construct some buildings there. There is also another island where you can build a port.]])
    ),
    h = 450
