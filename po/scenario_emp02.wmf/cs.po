@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-10-28 08:26+0000\n"
+"POT-Creation-Date: 2014-10-29 10:08+0000\n"
 "PO-Revision-Date: 2014-06-05 19:49+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Widelands fixxer upper\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-10-29 05:54+0000\n"
+"X-Launchpad-Export-Date: 2014-10-30 05:42+0000\n"
 "X-Generator: Launchpad (build 17203)\n"
 "Language: cs\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -392,8 +392,8 @@ msgid "Food for the Miners"
 msgstr "Jídlo pro horníky"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:198
-msgid "Amalea comes in..."
-msgstr "Amalea přichází..."
+msgid "Amalea comes in…"
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:199
 msgid ""
@@ -417,10 +417,8 @@ msgstr ""
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:203
 msgid ""
 "What do you think about helping them out? I can’t tell you what we need "
-"exactly... but here are my recommendations:"
+"exactly… but here are my recommendations:"
 msgstr ""
-"Co si myslíš o návrhu, že bychom jim s tímto problémem pomohli?Nemohu říct "
-"naprosto přesně, co bychom potřebovali... ale mám následující návrhy:"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:209
 msgid "The Barbarians"
@@ -512,8 +510,8 @@ msgid "As Time is Running By"
 msgstr "Jak plyne čas"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:249
-msgid "7 days later..."
-msgstr "O 7 dní později..."
+msgid "7 days later…"
+msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:253
 msgid "A Message"
@@ -532,11 +530,8 @@ msgid ""
 "The message was addressed to me, begging me to come back to Fremil. It says "
 "that the Empire is at war with the Barbarians. They were attacked from the "
 "north by the tribe that I was forbidden to attack. It is clear to me what I "
-"must do..."
+"must do…"
 msgstr ""
-"Tato zpráva byla adresována mě, prosí mě abych se vrátil zpět do Fremilu. "
-"Říká se v ní, že je Říše ve válce s Barbary. Byli napadeni ze severu kmenem, "
-"na který jsem zakázal útočit. Je mi jasné, co musím udělat..."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:259
 msgid ""
@@ -574,7 +569,7 @@ msgstr ""
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../scripting/format_scenario.lua:129
+#: ../../scripting/format_scenario.lua:133
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nový úkol"

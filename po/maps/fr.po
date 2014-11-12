@@ -6,19 +6,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-10-28 08:26+0000\n"
+"POT-Creation-Date: 2014-10-29 10:08+0000\n"
 "PO-Revision-Date: 2014-04-22 12:54+0000\n"
 "Last-Translator: bouchard renaud <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-29 05:52+0000\n"
+"X-Launchpad-Export-Date: 2014-10-30 05:41+0000\n"
 "X-Generator: Launchpad (build 17203)\n"
 "Language: fr\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
-#: ../../campaigns/cconfig:101
 msgid "From Nemesis to Genesis"
 msgstr ""
 
@@ -30,138 +29,28 @@ msgstr ""
 "Après avoir accosté sur une île mystérieuse près d' Atlantide, les Atlantes "
 "restants durent lutter pour pour établir une nouvelle colonie."
 
-#: ../../campaigns/cconfig:27
-msgid "The Second Empire"
-msgstr ""
-
-#: ../../campaigns/cconfig:29
-msgid "Barbarians"
-msgstr ""
-
-#: ../../campaigns/cconfig:31
-msgid "Easy. Introduces the Barbarians"
-msgstr "Facile. Présentation des Barbares"
-
-#: ../../campaigns/cconfig:32
-msgid ""
-"When Chat’Karuth died, he was an old man, father to three strong and "
-"ambitious sons, and warlord to an army that could match any enemy willing to "
-"rise against the ancient forests. Though at the end of his glorious reign, "
-"Chat’Karuth chose his eldest son, Thron, to succeed him as the tribe’s "
-"warlord – a decision that left his two brothers unsatisfied. The old warlord "
-"knew that. As his father instructed him, Thron left the capital of "
-"Al’thunran, the home of the Throne Among the Trees, and withdrew his forces "
-"to the high hills where he buried the corpse of his father. There he swore "
-"to the gods and his father’s spirit that he’d return to re-established "
-"order. While his brothers have raged blind war against Thron and the few "
-"forces he left to secure the borders of Al’thunran, the young warlord seeks "
-"to reunite his ambitious brothers and force the tribes to march once again "
-"under a common banner."
-msgstr ""
-"Quand Chat'Karuth mourut, il était un vieil homme, père de trois forts et "
-"ambitieux garçons, seigneur de guerre d'une armée qui pouvait égaler "
-"n'importe quel ennemi voulant s'ériger contre les anciennes forêts. Mais à "
-"la fin de son glorieux règne, Chat'Karuth choisit son fils le plus âgé, "
-"Thron, pour lui succéder en tant que chef de tribu - une décision qui laissa "
-"ses deux frères insatisfaits. Le vieux guerrier le savait. Comme son père le "
-"lui avait enseigné, Thron quitta la capitale d' Al’thunran, la demeure du "
-"Trône par Delà les Arbres, et rappela ses forces vers les hautes collines où "
-"il ensevelit le corps de son père. Il jura aux dieux et à l'esprit de son "
-"père qu'il reviendrait rétablir l'ordre.  Tandis que ses frères menaient une "
-"guerre aveugle contre Thron et les quelques forces qu'il laissa pour "
-"sécuriser les frontières d' Al’thunran, le jeune chef de guerre cherchait à "
-"réunir ses deux frères ambitieux et forcer les tribus à marcher de nouveau "
-"sous une bannière commune."
-
-#: ../../campaigns/cconfig:35
-msgid "The Months of Exile"
-msgstr ""
-
-#: ../../campaigns/cconfig:37
-msgid "Empire"
-msgstr ""
-
-#: ../../campaigns/cconfig:39
-msgid "Easy. Introduces the Empire"
-msgstr "Facile. Présentation de l'Empire"
-
-#: ../../campaigns/cconfig:40
-msgid ""
-"Six months ago, Lutius – a young general of the Empire – was sent with 150 "
-"soldiers to the frontier beyond the northern forests where Barbarian tribes "
-"were crossing onto land held by the Empire. His task was to defend the "
-"Empire’s land. At first, everything was calm. He even talked to a few "
-"barbarian children and thought about a peaceful life – side by side with "
-"this archaic folk. He began to feel safer and his army began to drop their "
-"attention off the potential enemy. That was their undoing. One night in "
-"March his unprepared army was attacked by 100 barbarian footmen and was "
-"completely scattered. Only with his bare life he and a handful of his "
-"soldiers survived."
-msgstr ""
-"Il y a six mois, Lutius - un jeune général de l' Empire - a été envoyé avec "
-"150 soldats à la frontière au delà des forets du nord où les tribus barbares "
-"passaient sur les terres détenues pat l' Empire. Sa tâche était de défendre "
-"les terres de l' Empire. Au début, tout était calme. Il parla même à "
-"quelques enfants barbares et crut en une existence paisible - vivant cote à "
-"cote avec ce peuple archaïque. Il commença à se sentir  en sécurité et son "
-"armée négligea l'attention portée à son potentiel ennemi. Ceci causa leur "
-"perte. Une nuit de Mars, son armée fut attaquée à l'improviste par 100 "
-"fantassins barbares et a été complètement disséminé. NE survécurent que sa "
-"vie ruinée ainsi qu'une poignée de ses soldats."
-
-#: ../../campaigns/cconfig:43
-msgid "The Run for the Fire"
-msgstr ""
-
-#: ../../campaigns/cconfig:45
-msgid "Atlanteans"
-msgstr ""
-
-#: ../../campaigns/cconfig:47
-msgid "Challenging. Introduces the Atlanteans"
-msgstr "Difficile. Présentation des Atlantes"
-
-#: ../../campaigns/cconfig:48
-msgid ""
-"When their God lost faith in the Atlanteans and drowned their island, one "
-"woman’s struggle for justice and a second chance for her people would become "
-"the stuff of legends. Leading the remaining Atlanteans into a new future in "
-"a new part of the World, Jundlina became the most powerful human of her "
-"time, but at a high cost: her humanity and soul."
-msgstr ""
-"Quand leur dieu perdît foi en les Atlantes et submergea leur île, une femme "
-"lutta pour la justice et une seconde chance pour leur peuple de rentrer dans "
-"les légendes. Menant les Atlantes restants vers un nouveau futur dans une "
-"nouvelle partie du monde, Jundlina devint l'humaine la plus puissante de son "
-"temps, mais à un prix élevé : son humanité et son âme."
-
-#: ../../campaigns/cconfig:67
-#: ../../campaigns/t01.wmf/elemental:7
-msgid "Eyes in the Dark"
-msgstr ""
-
-#: ../../campaigns/cconfig:72
-#: ../../campaigns/t02.wmf/elemental:7
+#: ../../campaigns/bar01.wmf/elemental:8
 msgid "A Place to Call Home"
 msgstr ""
 
-#: ../../campaigns/cconfig:77
-#: ../../campaigns/t03.wmf/elemental:7
+#: ../../campaigns/bar01.wmf/elemental:10
+msgid ""
+"In this scenario, the higher production buildings including mining will be "
+"introduced."
+msgstr ""
+
+#: ../../campaigns/bar02.wmf/elemental:7
 msgid "This Land is Our Land"
 msgstr ""
 
-#: ../../campaigns/cconfig:84
-#: ../../campaigns/emp01.wmf/elemental:7
-msgid "The Strands of Malac’ Mor"
+#: ../../campaigns/bar02.wmf/elemental:9
+msgid ""
+"This tutorial explains the handling of military and training site buildings "
+"and will introduce fighting."
 msgstr ""
+"Ce tutoriel explique la gestion des bâtiments militaires et d'entraînement "
+"et vous présentera le combat."
 
-#: ../../campaigns/cconfig:89
-#: ../../campaigns/emp02.wmf/elemental:9
-msgid "An Outpost for Exile"
-msgstr ""
-
-#: ../../campaigns/cconfig:94
-#: ../../campaigns/cconfig:106
 #: ../../campaigns/dummy.wmf/elemental:7
 msgid "Not yet implemented"
 msgstr "Pas encore implémenté"
@@ -173,6 +62,10 @@ msgstr ""
 #: ../../campaigns/dummy.wmf/elemental:10
 msgid "Sorry, this map is not yet implemented."
 msgstr "Désolé, cette carte n'est pas encore implémentée."
+
+#: ../../campaigns/emp01.wmf/elemental:7
+msgid "The Strands of Malac’ Mor"
+msgstr ""
 
 #: ../../campaigns/emp01.wmf/elemental:9
 msgid ""
@@ -189,6 +82,10 @@ msgstr ""
 "réussir à échouer son navire endommagé sur un rivage désertique et inconnu "
 "et sauver ses gens. Pour l'instant."
 
+#: ../../campaigns/emp02.wmf/elemental:9
+msgid "An Outpost for Exile"
+msgstr ""
+
 #: ../../campaigns/emp02.wmf/elemental:11
 msgid ""
 "Finally the ship was repaired, so Lutius and his people returned to the "
@@ -202,40 +99,45 @@ msgstr ""
 "qui avait l'air du paradis. Fous de joie, ils débarquèrent pour explorer ce "
 "nouvel environnement."
 
-#: ../../campaigns/t01.wmf/elemental:9
-msgid ""
-"In this tutorial, the basic gameplay and control as well as basic production "
-"buildings of the Barbarians are introduced."
+#: ../../campaigns/tutorial01_basic_control.wmf/elemental:8
+msgid "Basic Control"
 msgstr ""
-"Dans ce tutoriel, les règles de jeu, les contrôles et la production de "
-"bâtiments de base des Barbares vous seront expliqués."
 
-#: ../../campaigns/t02.wmf/elemental:9
+#: ../../campaigns/tutorial01_basic_control.wmf/elemental:10
 msgid ""
-"In this scenario, the higher production buildings including mining and "
-"military expansions will be introduced."
+"In this tutorial, you will learn how to navigate in Widelands and how to "
+"build buildings and roads."
 msgstr ""
-"Dans ce scénario, les plus grands bâtiments de production incluant les mines "
-"et les extensions militaires seront présentés."
 
-#: ../../campaigns/t03.wmf/elemental:9
+#: ../../campaigns/tutorial02_warfare.wmf/elemental:8
+msgid "Warfare"
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""
-"This tutorial explains the handling of military and training site buildings "
-"and will introduce fighting."
+"In this tutorial, you will be taught the secrets of warfare: how to create "
+"soldiers, how to train them and how to lead them in battle."
 msgstr ""
-"Ce tutoriel explique la gestion des bâtiments militaires et d'entraînement "
-"et vous présentera le combat."
 
-#: ../../campaigns/tutorial01.wmf/elemental:7
-msgid "Tutorial 1"
-msgstr "Tutoriel 1"
+#: ../../campaigns/tutorial03_seafaring.wmf/elemental:8
+msgid "Seafaring"
+msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/elemental:9
+#: ../../campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
-"Basic Tutorial – a map based on Winterwind’s tutorial 1 for the Barbarians"
+"In this tutorial, you will get to know seafaring, which is how to handle "
+"ships and ports."
 msgstr ""
-"Tutoriel Basique - Une carte basée sur le tutoriel 1 Souffle hivernal pour "
-"les Barbares"
+
+#: ../../campaigns/tutorial04_economy.wmf/elemental:8
+msgid "Economy"
+msgstr ""
+
+#: ../../campaigns/tutorial04_economy.wmf/elemental:10
+msgid ""
+"In this tutorial, you will learn what option Widelands offers to adjust your "
+"economy. Recommended for players with some experience."
+msgstr ""
 
 #: ../../maps/Atoll.wmf/elemental:9
 msgid "Atoll"

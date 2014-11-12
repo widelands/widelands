@@ -828,7 +828,9 @@ bool InternetGaming::str2bool(std::string str) {
 	if ((str != "true") && (str != "false"))
 		throw WLWarning
 			(_("Conversion error"),
-			_("Conversion from std::string to bool failed. String was \"%s\""), str.c_str());
+			/** TRANSLATORS: Geeky message from the metaserver */
+			/** TRANSLATORS: This message is shown if %s isn't "true" or "false" */
+			_("Unable to determine truth value for \"%s\""), str.c_str());
 
 	return str == "true";
 }

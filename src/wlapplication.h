@@ -58,7 +58,9 @@ struct InputCallback {
 	 int32_t x, int32_t y);      // The coordinates of the mouse at release time.
 	void (*mouse_move)
 	(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	void (*key)        (bool down, SDL_keysym code);
+	void (*key)        (bool down, SDL_Keysym code);
+	void (*textinput) (const char * text);
+	void (*mouse_wheel) (uint32_t which, int32_t x, int32_t y);
 };
 
 /// You know main functions, of course. This is the main struct.
@@ -143,7 +145,7 @@ struct WLApplication {
 
 	/// Get the state of the current KeyBoard Button
 	/// \warning This function doesn't check for dumbness
-	bool get_key_state(SDLKey const key) const {return SDL_GetKeyState(nullptr)[key];}
+	bool get_key_state(SDL_Scancode const key) const {return SDL_GetKeyboardState(nullptr)[key];}
 
 	//@{
 	void warp_mouse(Point);

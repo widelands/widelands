@@ -175,7 +175,7 @@ const LineCacheEntry & FontHandler::Data::get_line(const UI::TextStyle & style, 
 void FontHandler::Data::render_line(LineCacheEntry & lce)
 {
 	TTF_Font * font = lce.style.font->get_ttf_font();
-	SDL_Color sdl_fg = {lce.style.fg.r, lce.style.fg.g, lce.style.fg.b, 0};
+	SDL_Color sdl_fg = {lce.style.fg.r, lce.style.fg.g, lce.style.fg.b, SDL_ALPHA_OPAQUE};
 
 	// Work around an Issue in SDL_TTF that dies when the surface
 	// has zero width

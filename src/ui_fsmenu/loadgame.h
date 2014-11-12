@@ -54,6 +54,7 @@ struct SavegameData {
 	std::string wincondition;
 	std::string minimap_path;
 	std::string savedatestring;
+	std::string errormessage;
 
 	uint32_t gametime;
 	uint32_t nrplayers;
@@ -76,7 +77,7 @@ struct FullscreenMenuLoadGame : public FullscreenMenuLoadMapOrGame {
 
 	void think();
 
-	bool handle_key(bool down, SDL_keysym code) override;
+	bool handle_key(bool down, SDL_Keysym code) override;
 
 protected:
 	void clicked_ok() override;
@@ -102,6 +103,8 @@ private:
 	UI::MultilineTextarea         m_ta_win_condition;
 
 	UI::Button                    m_delete;
+
+	UI::MultilineTextarea         m_ta_errormessage;
 
 	int32_t const                 m_minimap_y, m_minimap_w, m_minimap_h;
 	UI::Icon                      m_minimap_icon;

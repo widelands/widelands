@@ -117,7 +117,7 @@ void ProgressWindow::step(const std::string & description) {
 	UI::TextStyle ts(UI::TextStyle::ui_small());
 	ts.fg = PROGRESS_FONT_COLOR_FG;
 	UI::g_fh->draw_text(rt, ts, m_label_center, description, Align_Center);
-	g_gr->update_rectangle(m_label_rectangle);
+	g_gr->update();
 
 #ifdef _WIN32
 		// Pump events to prevent "not responding" on windows
@@ -131,7 +131,7 @@ void ProgressWindow::update(bool const repaint) {
 	for (IProgressVisualization * visualization : m_visualizations) {
 		visualization->update(repaint); //  let visualizations do their work
 	}
-	g_gr->refresh(false);
+	g_gr->refresh();
 }
 
 /**

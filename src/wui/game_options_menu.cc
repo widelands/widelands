@@ -182,7 +182,7 @@ void GameOptionsMenu::clicked_save_game() {
 }
 
 void GameOptionsMenu::clicked_exit_game() {
-	if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) {
+	if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
 		m_gb.end_modal(0);
 	}
 	else {

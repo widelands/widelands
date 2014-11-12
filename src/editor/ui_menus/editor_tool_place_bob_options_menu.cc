@@ -19,7 +19,7 @@
 
 #include "editor/ui_menus/editor_tool_place_bob_options_menu.h"
 
-#include <SDL_keysym.h>
+#include <SDL_keycode.h>
 
 #include "base/i18n.h"
 #include "base/macros.h"
@@ -124,7 +124,7 @@ void EditorToolPlaceBobOptionsMenu::clicked
 	//  TODO(unknown): needs is the key state at the time the mouse was clicked. See the
 	//  TODO(unknown): usage comment for get_key_state.
 	const bool multiselect =
-		get_key_state(SDLK_LCTRL) | get_key_state(SDLK_RCTRL);
+		get_key_state(SDL_SCANCODE_LCTRL) | get_key_state(SDL_SCANCODE_RCTRL);
 	if (!t && (!multiselect || m_pit.get_nr_enabled() == 1)) {
 		m_checkboxes[n]->set_state(true);
 		return;

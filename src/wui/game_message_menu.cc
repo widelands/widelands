@@ -59,6 +59,7 @@ GameMessageMenu::GameMessageMenu
 	list->add_column (60, _("Status"), "", UI::Align_HCenter);
 	list->add_column(330, _("Title"));
 	list->add_column(120, _("Time sent"));
+	list->focus();
 
 	// Buttons for message types
 	m_geologistsbtn =
@@ -337,7 +338,7 @@ void GameMessageMenu::double_clicked(uint32_t const /* t */) {
 /**
  * Handle message menu hotkeys.
  */
-bool GameMessageMenu::handle_key(bool down, SDL_keysym code)
+bool GameMessageMenu::handle_key(bool down, SDL_Keysym code)
 {
 	if (down) {
 		switch (code.sym) {
@@ -364,8 +365,7 @@ bool GameMessageMenu::handle_key(bool down, SDL_keysym code)
 		case SDLK_5:
 			filter_messages(Widelands::Message::Type::kScenario);
 			return true;
-		case SDLK_KP_PERIOD:
-
+		case SDL_SCANCODE_KP_PERIOD:
 			if (code.mod & KMOD_NUM)
 				break;
 			/* no break */

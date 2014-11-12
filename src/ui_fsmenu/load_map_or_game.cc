@@ -67,14 +67,14 @@ FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame(bool sort_descending) :
 		m_table(this, m_tablex, m_tabley, m_tablew, m_tableh, sort_descending)
 	{}
 
-bool FullscreenMenuLoadMapOrGame::handle_key(bool down, SDL_keysym code) {
+bool FullscreenMenuLoadMapOrGame::handle_key(bool down, SDL_Keysym code) {
 
 	if (!down)
 		return false;
 
 	switch (code.sym)
 	{
-		case SDLK_KP_ENTER:
+		case SDL_SCANCODE_KP_ENTER:
 		case SDLK_RETURN:
 			clicked_ok();
 			return true;

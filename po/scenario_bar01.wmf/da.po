@@ -1,21 +1,20 @@
-# Widelands po/da_DK/campaigns/t01.wmf.po
+# Widelands po/da_DK/campaigns/t02.wmf.po
 # Copyright (C) 2005-2007 Widelands Development Team
-# Erik Soe Sorensen <eriksoe@daimi.au.dk>, 2007.
+# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4374\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2014-10-29 08:30+0000\n"
-"PO-Revision-Date: 2010-08-30 23:39+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
-"Language-Team: Danish <widelands-public@lists.sourceforge.net>\n"
-"Language: da\n"
+"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"POT-Creation-Date: 2014-10-29 10:08+0000\n"
+"PO-Revision-Date: 2014-10-29 17:57+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-29 05:54+0000\n"
+"X-Launchpad-Export-Date: 2014-10-30 05:43+0000\n"
 "X-Generator: Launchpad (build 17203)\n"
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:23
@@ -458,9 +457,8 @@ msgid "The Advisor"
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:250
-#, fuzzy
 msgid "Khantrukh notes…"
-msgstr "Khantrukh nikker..."
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:251
 msgid ""
@@ -586,9 +584,8 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:314
-#, fuzzy
 msgid "Khantrukh joins in…"
-msgstr "Khantrukh fortsætter..."
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:315
 msgid ""
@@ -610,18 +607,16 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:331
-#, fuzzy
 msgid "Khantrukh grumbles…"
-msgstr "Khantrukh fortsætter..."
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:332
 msgid "Old man? Disrespectful youth!"
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:337
-#, fuzzy
 msgid "Khantrukh nods satisfied…"
-msgstr "Khantrukh nikker..."
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:338
 msgid "At last! These rocks should last for a while."
@@ -659,9 +654,8 @@ msgid "It might even be enough to…"
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:360
-#, fuzzy
 msgid "Khantrukh interrupts…"
-msgstr "Khantrukh fortsætter..."
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:361
 msgid ""
@@ -761,9 +755,8 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:414
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:458
-#, fuzzy
 msgid "Khantrukh speaks…"
-msgstr "Khantrukh nikker..."
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:415
 msgid ""
@@ -811,9 +804,8 @@ msgid ""
 msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:442
-#, fuzzy
 msgid "Khantrukh steps in…"
-msgstr "Khantrukh fortsætter..."
+msgstr ""
 
 #: ../../campaigns/bar01.wmf/scripting/texts.lua:443
 msgid ""
@@ -969,12 +961,3 @@ msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""
 msgstr[1] ""
-
-#~ msgid "The elder remarks..."
-#~ msgstr "Den gamle bemærker..."
-
-#~ msgid "The old man looks to the sky..."
-#~ msgstr "Den gamle mand ser op mod himlen..."
-
-#~ msgid "The elder speaks..."
-#~ msgstr "Den gamle siger..."

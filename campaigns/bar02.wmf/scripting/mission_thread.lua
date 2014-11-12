@@ -2,6 +2,8 @@
 --                          Various mission threads
 -- =======================================================================
 
+include "scripting/messages.lua"
+
 game = wl.Game()
 -- Mountain and frontier fields
 mountain = game.map:get_field(71,14)
@@ -22,10 +24,10 @@ end
 function remember_cattlefarm()
    sleep(100)
 
-   send_msg(cattlefarm_01)
+   campaign_message_box(cattlefarm_01)
 
    p1:allow_buildings{"cattlefarm"}
-   local o = add_obj(obj_build_cattlefarm)
+   local o = add_campaign_objective(obj_build_cattlefarm)
    while not check_for_buildings(p1, {cattlefarm = 1}) do
       sleep(1223) end
    o.done = true
@@ -34,11 +36,11 @@ end
 
 function initial_message_and_small_food_economy()
    wake_me(2000)
-   send_msg(story_msg_1)
+   campaign_message_box(story_msg_1)
 
    wake_me(120000)
-   send_msg(briefing_msg_1)
-   send_msg(order_msg_1_small_food_economy)
+   campaign_message_box(briefing_msg_1)
+   campaign_message_box(order_msg_1_small_food_economy)
 
    p1:allow_buildings{"fishers_hut",
       "hunters_hut",
@@ -50,7 +52,7 @@ function initial_message_and_small_food_economy()
       "sentry",
    }
 
-   local o = add_obj(obj_build_small_food_economy)
+   local o = add_campaign_objective(obj_build_small_food_economy)
    while not check_for_buildings(p1, {
          fishers_hut = 1,
          hunters_hut = 1,
@@ -59,7 +61,7 @@ function initial_message_and_small_food_economy()
          bakery = 1,
       }) do sleep(3413) end
    o.done = true
-   send_msg(story_note_1)
+   campaign_message_box(story_note_1)
 
    sleep(600000)  -- 10 minutes
    remember_cattlefarm()
@@ -84,8 +86,8 @@ function foottracks()
 
    local pts = scroll_smoothly_to(game.map:get_field(67,19))
 
-   send_msg(order_msg_2_build_a_donjon)
-   local o = add_obj(obj_build_a_donjon)
+   campaign_message_box(order_msg_2_build_a_donjon)
+   local o = add_campaign_objective(obj_build_a_donjon)
    p1:forbid_buildings{"sentry"}
    p1:allow_buildings{"donjon"}
 
@@ -97,9 +99,9 @@ function foottracks()
 
    while not check_for_buildings(p1, {donjon=1}) do sleep(2341) end
    o.done = true
-   send_msg(order_msg_3_explore_further)
+   campaign_message_box(order_msg_3_explore_further)
    -- "explore further" is active untill "Boldreth shout out", so the player always has one open objectve.
-   exploration_objective = add_obj(obj_explore_further)
+   exploration_objective = add_campaign_objective(obj_explore_further)
 
    p1:allow_buildings{"sentry", "barrier"}
 
@@ -127,8 +129,8 @@ function mining_and_trainingsites()
 
    local pts = scroll_smoothly_to(game.map:get_field(82,20))
 
-   send_msg(order_msg_4_build_mining_economy)
-   local o = add_obj(obj_build_mining_economy)
+   campaign_message_box(order_msg_4_build_mining_economy)
+   local o = add_campaign_objective(obj_build_mining_economy)
 
    p1:allow_buildings{
       "coalmine",
@@ -157,11 +159,11 @@ function mining_and_trainingsites()
       sleep(4139)
    end
    o.done = true
-   send_msg(story_note_2)
+   campaign_message_box(story_note_2)
 
    sleep(100000)
 
-   send_msg(order_msg_6_build_enhanced_economy_and_training)
+   campaign_message_box(order_msg_6_build_enhanced_economy_and_training)
    p1:allow_buildings{
       "axfactory",
       "warmill",
@@ -179,10 +181,10 @@ function mining_and_trainingsites()
       "warehouse",
       "brewery",
    }
-   run(check_warehouse_obj, add_obj(obj_build_a_warehouse))
-   run(check_trainingssite_obj, add_obj(obj_build_trainingssites))
-   run(check_weapon_productions_obj, add_obj(obj_build_weapon_productions))
-   run(check_helmsmithy_obj, add_obj(obj_build_a_helmsmithy))
+   run(check_warehouse_obj, add_campaign_objective(obj_build_a_warehouse))
+   run(check_trainingssite_obj, add_campaign_objective(obj_build_trainingssites))
+   run(check_weapon_productions_obj, add_campaign_objective(obj_build_weapon_productions))
+   run(check_helmsmithy_obj, add_campaign_objective(obj_build_a_helmsmithy))
 end
 
 function check_trainingssite_obj(o)
@@ -215,14 +217,14 @@ function fortress()
       sleep(7349)
    end
 
-   send_msg(order_msg_5_build_a_fortress)
-   local o = add_obj(obj_build_a_fortress)
+   campaign_message_box(order_msg_5_build_a_fortress)
+   local o = add_campaign_objective(obj_build_a_fortress)
    p1:allow_buildings{"fortress"}
 
    while #p1:get_buildings("fortress") == 0 do sleep(6523) end
 
    o.done = true
-   send_msg(story_note_3)
+   campaign_message_box(story_note_3)
 end
 
 function expansion()
@@ -235,13 +237,13 @@ function expansion()
       )
    do sleep(8374) end
 
-   send_msg(story_msg_2)
-   send_msg(story_msg_3)
-   send_msg(story_msg_4)
+   campaign_message_box(story_msg_2)
+   campaign_message_box(story_msg_3)
+   campaign_message_box(story_msg_4)
 
    sleep(20000)
-   send_msg(story_msg_5)
-   send_msg(story_msg_6)
+   campaign_message_box(story_msg_5)
+   campaign_message_box(story_msg_6)
 end
 
 -- checks if all military buildings are drestroyed (the build-in function "defeated" only checks if all warehouses are destroyed)
@@ -270,8 +272,8 @@ function kalitath()
    -- "explore further" is done
    exploration_objective.done = true
 
-   send_msg(order_msg_7_destroy_kalitaths_army)
-   local o = add_obj(obj_destroy_kalitaths_army)
+   campaign_message_box(order_msg_7_destroy_kalitaths_army)
+   local o = add_campaign_objective(obj_destroy_kalitaths_army)
 
    while not check_player_completely_defeated(p2) do
         sleep(7837)
@@ -308,9 +310,9 @@ function renegade_fortresses()
 
    local pts = scroll_smoothly_to(map:get_field(120,92))
 
-   send_msg(order_msg_7_renegade_fortification)
-   send_msg(order_msg_7_free_althunran)
-   local o = add_obj(obj_military_assault_on_althunran)
+   campaign_message_box(order_msg_7_renegade_fortification)
+   campaign_message_box(order_msg_7_free_althunran)
+   local o = add_campaign_objective(obj_military_assault_on_althunran)
 
    timed_scroll(array_reverse(pts))
    sleep(503)
@@ -335,7 +337,7 @@ function mission_complete()
 
    local pts = scroll_smoothly_to(map:get_field(4,5))
 
-   send_msg(story_msg_7)
+   campaign_message_box(story_msg_7)
 
    p1:reveal_campaign("campsect1")
 end

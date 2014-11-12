@@ -22,13 +22,13 @@
 #include <string>
 
 #include <SDL.h>
-#include <SDL_rotozoom.h>
+#include <SDL2_rotozoom.h>
 #include <boost/format.hpp>
 
 #include "base/macros.h"
 #include "graphic/color.h"
 #include "graphic/graphic.h"
-#include "graphic/render/sdl_surface.h"
+#include "graphic/sdl/surface.h"
 #include "graphic/surface.h"
 #include "graphic/surface_cache.h"
 
@@ -129,7 +129,8 @@ Surface* resize_surface(Surface* src, uint32_t w, uint32_t h) {
 			 static_cast<uint16_t>(zoomed->w), static_cast<uint16_t>(zoomed->h)
 			};  // For some reason SDL_Surface and SDL_Rect express w,h in different types
 		SDL_Rect dstrc = {0, 0, 0, 0};
-		SDL_SetAlpha(zoomed, 0, 0);
+		SDL_SetSurfaceAlphaMod(zoomed,  SDL_ALPHA_TRANSPARENT);
+		SDL_SetSurfaceBlendMode(zoomed, SDL_BLENDMODE_NONE);
 		SDL_BlitSurface(zoomed, &srcrc, placed, &dstrc); // Updates dstrc
 
 		uint32_t fillcolor = SDL_MapRGBA(zoomed->format, 0, 0, 0, 255);

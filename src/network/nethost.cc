@@ -1273,7 +1273,7 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 		}
 
 	} else if (cmd == "pwd") {
-		if (m_password.size() == 0) {
+		if (m_password.empty()) {
 			c.msg = _("This server is not password protected!");
 			send(c);
 		} else if (arg1 != m_password) {
@@ -2043,7 +2043,7 @@ void NetHost::welcome_client (uint32_t const number, std::string & playername)
 	// The client gets its own initial data set.
 	client.playernum = UserSettings::none();
 	// only used at password protected dedicated server, but better initialize always
-	client.dedicated_access = m_is_dedicated ? (m_password.size() == 0) : false;
+	client.dedicated_access = m_is_dedicated ? (m_password.empty()) : false;
 
 	if (!d->game) // just in case we allow connection of spectators/players after game start
 		for (uint32_t i = 0; i < d->settings.users.size(); ++i)

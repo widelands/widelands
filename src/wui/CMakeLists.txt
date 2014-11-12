@@ -127,7 +127,7 @@ wl_library(wui
     waresqueuedisplay.h
     watchwindow.cc
     watchwindow.h
-  USES_SDL
+  USES_SDL2
   DEPENDS
     base_deprecated
     base_exceptions

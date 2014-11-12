@@ -365,7 +365,7 @@ void InteractivePlayer::node_action()
  * \li Pause: pauses the game
  * \li Return: write chat message
 */
-bool InteractivePlayer::handle_key(bool const down, SDL_keysym const code)
+bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code)
 {
 	if (down) {
 		switch (code.sym) {
@@ -405,7 +405,7 @@ bool InteractivePlayer::handle_key(bool const down, SDL_keysym const code)
 			g_gr->toggle_fullscreen();
 			return true;
 
-		case SDLK_KP7:
+		case SDL_SCANCODE_KP_7:
 			if (code.mod & KMOD_NUM)
 				break;
 			/* no break */
@@ -413,7 +413,7 @@ bool InteractivePlayer::handle_key(bool const down, SDL_keysym const code)
 			move_view_to(game().map().get_starting_pos(m_player_number));
 			return true;
 
-		case SDLK_KP_ENTER:
+		case SDL_SCANCODE_KP_ENTER:
 		case SDLK_RETURN:
 			if (!m_chatProvider | !m_chatenabled || !is_multiplayer())
 				break;
