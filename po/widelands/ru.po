@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-10-29 10:08+0000\n"
-"PO-Revision-Date: 2014-10-18 00:57+0000\n"
+"PO-Revision-Date: 2014-11-11 18:09+0000\n"
 "Last-Translator: Александр <sa13690@yandex.ru>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-10-30 05:53+0000\n"
-"X-Generator: Launchpad (build 17203)\n"
+"X-Launchpad-Export-Date: 2014-11-12 05:36+0000\n"
+"X-Generator: Launchpad (build 17241)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -180,7 +180,7 @@ msgstr "Сервис"
 #: ../../src/editor/editorinteractive.cc:92
 #: ../../src/editor/ui_menus/editor_toolsize_menu.cc:43
 msgid "Tool Size"
-msgstr ""
+msgstr "Размер инструмента"
 
 #: ../../src/editor/editorinteractive.cc:95
 #: ../../src/wui/interactive_player.cc:116
@@ -262,7 +262,7 @@ msgstr ""
 #: ../../src/editor/tools/editor_info_tool.cc:53
 #, c-format
 msgid "Coordinates: (%1$i, %2$i)"
-msgstr ""
+msgstr "Координаты: (%1$i, %2$i)"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:60
@@ -312,11 +312,11 @@ msgstr ""
 #: ../../src/editor/tools/editor_info_tool.cc:82
 #, c-format
 msgid "Owned by: Player %u"
-msgstr ""
+msgstr "Владелец: игрок %u"
 
 #: ../../src/editor/tools/editor_info_tool.cc:85
 msgid "Owned by: —"
-msgstr ""
+msgstr "Владелец: —"
 
 #: ../../src/editor/tools/editor_info_tool.cc:88
 msgid "Has base immovable"
@@ -347,7 +347,7 @@ msgstr "Имя: %s"
 #: ../../src/editor/tools/editor_info_tool.cc:102
 #, c-format
 msgid "Texture Number: %i"
-msgstr ""
+msgstr "Номер текстуры: %i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:105
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:253
@@ -357,12 +357,12 @@ msgstr "Ресурсы:"
 #: ../../src/editor/tools/editor_info_tool.cc:112
 #, c-format
 msgid "Resource name: %s"
-msgstr ""
+msgstr "Название ресурса: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:114
 #, c-format
 msgid "Resource amount: %i"
-msgstr ""
+msgstr "Количество ресурса: %i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:117
 msgid "No resources"
@@ -376,16 +376,16 @@ msgstr "Карта:"
 #: ../../src/editor/tools/editor_info_tool.cc:123
 #, c-format
 msgid "Size: %1$ix%2$i"
-msgstr ""
+msgstr "Размер: %1$ix%2$i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:128
 #, c-format
 msgid "Players: %d"
-msgstr ""
+msgstr "Игроки: %d"
 
 #: ../../src/editor/tools/editor_info_tool.cc:131
 msgid "Players: -"
-msgstr ""
+msgstr "Игроки: -"
 
 #: ../../src/editor/tools/editor_info_tool.cc:134
 #, c-format
@@ -395,7 +395,7 @@ msgstr "Автор: %s"
 #: ../../src/editor/tools/editor_info_tool.cc:135
 #, c-format
 msgid "Descr: %s"
-msgstr ""
+msgstr "Описание: %s"
 
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:172
 msgid "Current:"
@@ -450,7 +450,7 @@ msgstr "Название:"
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:78
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:88
 msgid "Authors:"
-msgstr ""
+msgstr "Авторы:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:85
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:69
@@ -545,15 +545,15 @@ msgstr "Создать Карту"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:57
 msgid "Summer"
-msgstr ""
+msgstr "Лето"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:58
 msgid "Winter"
-msgstr ""
+msgstr "Зима"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:59
 msgid "Desert"
-msgstr ""
+msgstr "Пустыня"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:60
 msgid "Black"
