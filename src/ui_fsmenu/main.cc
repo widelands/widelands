@@ -19,6 +19,8 @@
 
 #include "ui_fsmenu/main.h"
 
+#include <boost/format.hpp>
+
 #include "base/i18n.h"
 #include "build_info.h"
 #include "graphic/graphic.h"
@@ -26,69 +28,78 @@
 FullscreenMenuMain::FullscreenMenuMain() :
 	FullscreenMenuBase("mainmenu.jpg"),
 
-// Values for alignment and size
-	m_butx (get_w() * 13 / 40),
-	m_butw (get_w() * 7 / 20),
-	m_buth (get_h() * 19 / 400),
-	wlcr   (WLCR),
+	// Values for alignment and size
+	m_butx(get_w() * 13 / 40),
+	m_buty(get_h() * 42 / 200),
+	m_butw(get_w() * 7 / 20),
+	m_buth(get_h() * 9 / 200),
+	m_padding(m_buth / 3),
 
 // Buttons
 	playtutorial
 		(this, "play_tutorial",
-		 m_butx, get_h() * 42 / 200, m_butw, m_buth,
+		 m_butx, m_buty, m_butw, m_buth,
 		 g_gr->images().get("pics/but3.png"),
-		 _("Play Tutorial"), std::string(), true, false),
+		 _("Play Tutorial"), "", true, false),
 	singleplayer
 		(this, "single_player",
-		 m_butx, get_h() * 61 / 200, m_butw, m_buth,
+		 m_butx, get_y_from_preceding(playtutorial) + m_buth, m_butw, m_buth,
 		 g_gr->images().get("pics/but3.png"),
-		 _("Single Player"), std::string(), true, false),
+		 _("Single Player"), "", true, false),
 	multiplayer
 		(this, "multi_player",
-		 m_butx, get_h() * 37 / 100, m_butw, m_buth,
+		 m_butx, get_y_from_preceding(singleplayer) + m_padding, m_butw, m_buth,
 		 g_gr->images().get("pics/but3.png"),
-		 _("Multiplayer"), std::string(), true, false),
+		 _("Multiplayer"), "", true, false),
 	replay
 		(this, "replay",
-		 m_butx, get_h() * 87 / 200, m_butw, m_buth,
+		 m_butx, get_y_from_preceding(multiplayer) + m_padding, m_butw, m_buth,
 		 g_gr->images().get("pics/but3.png"),
-		 _("Watch Replay"), std::string(), true, false),
+		 _("Watch Replay"), "", true, false),
 	editor
 		(this, "editor",
-		 m_butx, get_h() * 100 / 200, m_butw, m_buth,
+		 m_butx, get_y_from_preceding(replay) + m_padding, m_butw, m_buth,
 		 g_gr->images().get("pics/but3.png"),
-		 _("Editor"), std::string(), true, false),
+		 _("Editor"), "", true, false),
 	options
 		(this, "options",
-		 m_butx, get_h() * 119 / 200, m_butw, m_buth,
+		 m_butx, get_y_from_preceding(editor) + m_buth, m_butw, m_buth,
 		 g_gr->images().get("pics/but3.png"),
-		 _("Options"), std::string(), true, false),
+		 _("Options"), "", true, false),
 	readme
 		(this, "readme",
-		 m_butx, get_h() * 138 / 200, m_butw, m_buth,
+		 m_butx, get_y_from_preceding(options) + m_buth, m_butw, m_buth,
 		 g_gr->images().get("pics/but3.png"),
-		 _("View Readme"), std::string(), true, false),
+		 _("View Readme"), "", true, false),
 	license
 		(this, "license",
-		 m_butx, get_h() * 151 / 200, m_butw, m_buth,
+		 m_butx, get_y_from_preceding(readme) + m_padding, m_butw, m_buth,
 		 g_gr->images().get("pics/but3.png"),
-		 _("License"), std::string(), true, false),
+		 _("License"), "", true, false),
+	authors
+		(this, "authors",
+		 m_butx, get_y_from_preceding(license) + m_padding, m_butw, m_buth,
+		 g_gr->images().get("pics/but3.png"),
+		 _("Authors"), "", true, false),
 	exit
 		(this, "exit",
-		 m_butx, get_h() * 178 / 200, m_butw, m_buth,
+		 m_butx, get_y_from_preceding(authors) + m_buth, m_butw, m_buth,
 		 g_gr->images().get("pics/but3.png"),
-		 _("Exit Widelands"), std::string(), true, false),
+		 _("Exit Widelands"), "", true, false),
 
 // Textlabels
 	version
 		(this,
 		 get_w(), get_h(),
-		 _("Version ") + build_id() + '(' + build_type() + ')',
+		 /** TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release" */
+		 (boost::format(_("Version %1$s (%2$s)")) % build_id().c_str() % build_type().c_str()).str(),
 		 UI::Align_BottomRight),
 	copyright
 		(this,
 		 0, get_h() - 0.5 * m_buth,
-		 (wlcr + _("by the Widelands Development Team")).c_str(),
+		 /** TRANSLATORS: Placeholders are the copyright years */
+		 (boost::format(_("(C) %1%-%2% by the Widelands Development Team"))
+		  % kWidelandsCopyrightStart % kWidelandsCopyrightEnd).str(),
 		 UI::Align_BottomLeft),
 	gpl
 		(this,
@@ -99,51 +110,41 @@ FullscreenMenuMain::FullscreenMenuMain() :
 	playtutorial.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuMain::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(mm_playtutorial)));
+			  static_cast<int32_t>(MenuTarget::kTutorial)));
 	singleplayer.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuMain::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(mm_singleplayer)));
+			  static_cast<int32_t>(MenuTarget::kSinglePlayer)));
 	multiplayer.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuMain::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(mm_multiplayer)));
+			  static_cast<int32_t>(MenuTarget::kMultiplayer)));
 	replay.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuMain::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(mm_replay)));
+			  static_cast<int32_t>(MenuTarget::kReplay)));
 	editor.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuMain::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(mm_editor)));
+			  static_cast<int32_t>(MenuTarget::kEditor)));
 	options.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuMain::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(mm_options)));
+			  static_cast<int32_t>(MenuTarget::kOptions)));
 	readme.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuMain::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(mm_readme)));
+			  static_cast<int32_t>(MenuTarget::kReadme)));
 	license.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuMain::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(mm_license)));
+			  static_cast<int32_t>(MenuTarget::kLicense)));
+	authors.sigclicked.connect
+		(boost::bind
+			 (&FullscreenMenuMain::end_modal, boost::ref(*this),
+			  static_cast<int32_t>(MenuTarget::kAuthors)));
 	exit.sigclicked.connect
 		(boost::bind
 			 (&FullscreenMenuMain::end_modal, boost::ref(*this),
-			  static_cast<int32_t>(mm_exit)));
-
-	playtutorial.set_font(font_small());
-	singleplayer.set_font(font_small());
-	multiplayer.set_font(font_small());
-	replay.set_font(font_small());
-	editor.set_font(font_small());
-	options.set_font(font_small());
-	readme.set_font(font_small());
-	license.set_font(font_small());
-	exit.set_font(font_small());
-
-	version.set_textstyle(ts_small());
-	copyright.set_textstyle(ts_small());
-	gpl.set_textstyle(ts_small());
+			  static_cast<int32_t>(MenuTarget::kExit)));
 }

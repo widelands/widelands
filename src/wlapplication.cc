@@ -1099,38 +1099,43 @@ void WLApplication::mainmenu()
 
 		try {
 			switch (mm.run()) {
-			case FullscreenMenuMain::mm_playtutorial:
+			case static_cast<int32_t>(FullscreenMenuMain::MenuTarget::kTutorial):
 				mainmenu_tutorial();
 				break;
-			case FullscreenMenuMain::mm_singleplayer:
+			case static_cast<int32_t>(FullscreenMenuMain::MenuTarget::kSinglePlayer):
 				mainmenu_singleplayer();
 				break;
-			case FullscreenMenuMain::mm_multiplayer:
+			case static_cast<int32_t>(FullscreenMenuMain::MenuTarget::kMultiplayer):
 				mainmenu_multiplayer();
 				break;
-			case FullscreenMenuMain::mm_replay:
+			case static_cast<int32_t>(FullscreenMenuMain::MenuTarget::kReplay):
 				replay();
 				break;
-			case FullscreenMenuMain::mm_options: {
+			case static_cast<int32_t>(FullscreenMenuMain::MenuTarget::kOptions): {
 				Section & s = g_options.pull_section("global");
 				OptionsCtrl om(s);
 				break;
 			}
-			case FullscreenMenuMain::mm_readme: {
+			case static_cast<int32_t>(FullscreenMenuMain::MenuTarget::kReadme): {
 				FullscreenMenuFileView ff("txts/README.lua");
 				ff.run();
 				break;
 			}
-			case FullscreenMenuMain::mm_license: {
+			case static_cast<int32_t>(FullscreenMenuMain::MenuTarget::kLicense): {
 				FullscreenMenuFileView ff("txts/license");
 				ff.run();
 				break;
 			}
-			case FullscreenMenuMain::mm_editor:
+			case static_cast<int32_t>(FullscreenMenuMain::MenuTarget::kAuthors): {
+				FullscreenMenuFileView ff("txts/developers");
+				ff.run();
+				break;
+			}
+			case static_cast<int32_t>(FullscreenMenuMain::MenuTarget::kEditor):
 				mainmenu_editor();
 				break;
 			default:
-			case FullscreenMenuMain::mm_exit:
+			case static_cast<int32_t>(FullscreenMenuMain::MenuTarget::kExit):
 				return;
 			}
 		} catch (const WLWarning & e) {

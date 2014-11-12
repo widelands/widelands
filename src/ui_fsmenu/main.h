@@ -30,35 +30,34 @@
 */
 struct FullscreenMenuMain : public FullscreenMenuBase {
 	FullscreenMenuMain();
-	enum {
-		mm_summary,
-		mm_playtutorial,
-		mm_singleplayer,
-		mm_multiplayer,
-		mm_replay,
-		mm_editor,
-		mm_options,
-		mm_readme,
-		mm_license,
-		mm_exit
+	enum class MenuTarget: int32_t {
+		kTutorial,
+		kSinglePlayer,
+		kMultiplayer,
+		kReplay,
+		kEditor,
+		kOptions,
+		kReadme,
+		kLicense,
+		kAuthors,
+		kExit
 	};
 private:
-	uint32_t                                    m_butx;
-	uint32_t                                    m_butw;
-	uint32_t                                    m_buth;
-	std::string                                 wlcr;
-	UI::Button                     playtutorial;
-	UI::Button                     singleplayer;
-	UI::Button                     multiplayer;
-	UI::Button                     replay;
-	UI::Button                     editor;
-	UI::Button                     options;
-	UI::Button                     readme;
-	UI::Button                     license;
-	UI::Button                     exit;
-	UI::Textarea                                version;
-	UI::Textarea                                copyright;
-	UI::Textarea                                gpl;
+	uint32_t     m_butx, m_buty, m_butw, m_buth;
+	uint32_t     m_padding;
+	UI::Button   playtutorial;
+	UI::Button   singleplayer;
+	UI::Button   multiplayer;
+	UI::Button   replay;
+	UI::Button   editor;
+	UI::Button   options;
+	UI::Button   readme;
+	UI::Button   license;
+	UI::Button   authors;
+	UI::Button   exit;
+	UI::Textarea version;
+	UI::Textarea copyright;
+	UI::Textarea gpl;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_MAIN_H

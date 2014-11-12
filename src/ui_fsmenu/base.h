@@ -52,6 +52,10 @@ public:
 	UI::Font * font_small();
 	UI::Font * font_big();
 
+protected:
+	// Returns a y coordinate that can be used to position a Panel below the Panel directly above it
+	int32_t get_y_from_preceding(UI::Panel& preceding_panel);
+
 private:
 	/**
 	 * Query the configured screen resolution.
