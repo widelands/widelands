@@ -26,6 +26,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "graphic/default_resolution.h"
 #include "graphic/graphic.h"
 #include "helper.h"
@@ -52,56 +53,24 @@ struct LanguageEntry {
 };
 
 void add_languages_to_list(UI::Listselect<std::string>* list, const std::string& language) {
-
 	Section* s = &g_options.pull_section("global");
-	//TODO(code review): I don't think I change the behaviour here, but this doesn't seem to take into account whether
-	//the constant we use as base is relative or absolute. Maybe it doesn't need it?
-	//Though, this is the second time I concatenate datadir/locale so I wonder if that should be in some constant
-	//so I only have to do it once.
-	//Questions:
-	//Now that I've had time to think about this, shouldn't we be able to guarantee localedir path has already been set
-	//when we bootstrapped in wlapplication.cc?
-	//Though, it's not clear to me what the purpose of the section is, get_string seem to wrap a keybased
-	//lookup with a fallback value. Under the hood it ends up looking up the key in what looked very much like a map
-	//except it marked whether the value had been looked at (why?), and had an implementation instead of just
-	//using a map (again, why?).
-	// NOCOM(#codereview): this code only works when "localedir" is in one of
-	// the directories that we added to the LayeredFileSystem that is g_fs. If
-	// "localedir" is /usr/share/locale or something like that this code will
-	// not work I think. This makes me wonder: does selecting different languages even work on the PPA or so, and if so, is
-	// the localepath then inside the datadir? If the answer is yes, we should kill the localepath option.
-	//
-	// The further code works like this: It lists localedir/*, removes "." and
-	// ".." and asks txts/languges for the long name of the code it saw in the
-	// directory (i.e. de -> "Deutsch"). It adds the long codes to the list, but
-	// remember the related code (i.e. "de") so that the languge can be
-	// selected.
 
-	const std::string directory = std::string(INSTALL_DATADIR) + "/locale";
-	FilenameSet files = g_fs->list_directory(
-		s->get_string(
-			"localedir",
-			//TODO(code review): I'd rather avoid this workaround, but it worked at the moment.
-			directory.c_str()
-		)
-	);
 	Profile ln("txts/languages");
 	s = &ln.pull_section("languages");
 	bool own_selected = "" == language || "en" == language;
 
-	// Add translation directories to the list
+	// Add translation directories to the list.
 	std::vector<LanguageEntry> entries;
-	for (const std::string& filename : files) {
-		char const* const path = filename.c_str();
-		if (!strcmp(FileSystem::fs_filename(path), ".") ||
-		    !strcmp(FileSystem::fs_filename(path), "..") || !g_fs->is_directory(path)) {
+	while (Section::Value* value = s->get_next_val()) {
+		const std::string abbreviation = value->get_name();
+		// Only lists languages that are actually found.
+		if (!g_fs->is_directory("locale/" + abbreviation)) {
 			continue;
 		}
-
-		char const* const abbreviation = FileSystem::fs_filename(path);
-		entries.emplace_back(abbreviation, s->get_string(abbreviation, abbreviation));
+		entries.emplace_back(abbreviation, value->get_string());
 		own_selected |= abbreviation == language;
 	}
+
 	// Add currently used language manually
 	if (!own_selected) {
 		entries.emplace_back(language, s->get_string(language.c_str(), language.c_str()));

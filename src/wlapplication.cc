@@ -141,6 +141,9 @@ std::string get_executable_directory()
 	return executabledir;
 }
 
+bool is_absolute_path(const std::string& path) {
+	return path.size() >= 1 && path[0] == '/';
+}
 
 /**
  * In case that the path is defined in a relative manner to the
@@ -225,7 +228,6 @@ m_mouse_position       (0, 0),
 m_mouse_locked         (0),
 m_mouse_compensate_warp(0, 0),
 m_should_die           (false),
-m_use_default_datadir     (true),
 #ifdef _WIN32
 m_homedir(FileSystem::get_homedir() + "\\.widelands"),
 #else
@@ -251,11 +253,9 @@ m_redirected_stdio(false)
 	setup_homedir();
 	init_settings();
 
-	if (m_use_default_datadir) {
-		const std::string default_datadir = std::string(INSTALL_DATADIR);
-		log("Adding directory: %s\n", default_datadir.c_str());
-		g_fs->add_file_system(&FileSystem::create(default_datadir));
-	}
+	log("Adding directory: %s\n", m_datadir.c_str());
+	g_fs->add_file_system(&FileSystem::create(m_datadir));
+
 	init_language(); // search paths must already be set up
 	cleanup_replays();
 
@@ -776,12 +776,7 @@ void WLApplication::init_language() {
 	// Initialize locale and grab "widelands" textdomain
 	i18n::init_locale();
 
-	// Use default localedir, residing in INSTALL_DATADIR which was configured at compile time.
-	std::string localedir = std::string(INSTALL_DATADIR) + "/locale";
-	if (!PATHS_ARE_ABSOLUTE) {
-		localedir = relative_to_executable_to_absolute(localedir);
-	}
-	i18n::set_localedir(localedir);
+	i18n::set_localedir(m_datadir + "/locale");
 	i18n::grab_textdomain("widelands");
 
 	// Set locale corresponding to selected language
@@ -955,10 +950,12 @@ void WLApplication::handle_commandline_parameters()
 	}
 
 	if (m_commandline.count("datadir")) {
-		log ("Adding directory: %s\n", m_commandline["datadir"].c_str());
-		m_use_default_datadir = false;
-		g_fs->add_file_system(&FileSystem::create(m_commandline["datadir"]));
+		m_datadir = m_commandline["datadir"];
 		m_commandline.erase("datadir");
+	} else {
+		m_datadir = is_absolute_path(INSTALL_DATADIR) ?
+		               INSTALL_DATADIR :
+		               relative_to_executable_to_absolute(INSTALL_DATADIR);
 	}
 
 	if (m_commandline.count("verbose")) {

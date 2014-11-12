@@ -9,10 +9,9 @@ if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
 endif (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
 
 # Define the directory structure for installation - will be hardcoded in WL bin
-# (through config.h).
-# If not specified, we are going to use the current directory. Also on Linux.
-# Packagers (or people using make install) have to set those variables.
-wl_set_if_unset(WL_PATHS_ARE_ABSOLUTE "false")
+# (through config.h). If not specified, we are going to use the directory where
+# the executable is in. Also on Linux.
+# Packagers (or people using make install) have to set this variable to an absolute path.
 wl_set_if_unset(WL_INSTALL_DATADIR ".")
 
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
