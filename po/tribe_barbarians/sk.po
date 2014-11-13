@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-10-29 10:08+0000\n"
+"POT-Creation-Date: 2014-11-12 11:40+0000\n"
 "PO-Revision-Date: 2014-08-10 20:08+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2014-10-30 05:47+0000\n"
-"X-Generator: Launchpad (build 17203)\n"
+"X-Launchpad-Export-Date: 2014-11-13 05:47+0000\n"
+"X-Generator: Launchpad (build 17241)\n"
 "Language: sk\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -2035,25 +2035,23 @@ msgstr ""
 "budovu, prípadne postaviť lesnícku chatrč."
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:13
-msgid ""
-"\"Take 200 hits to fell a tree and you're a baby. Take 100 and you're a "
-"soldier. Take 50 and you're a hero. Take 20 and soon you will be a honorable "
-"lumberjack.\""
+msgid "Krumta, carpenter of Chat’Karuth"
 msgstr ""
-"„Zrúb strom 200 zásahmi a si dieťa. Vystač si so 100 a si vojak. Vystač si s "
-"50 a si hrdina. Vystač si s 20 a čoskoro sa z teba stane čestný drevorubač.“"
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:13
-msgid "Krumta, carpenter of Chat'Karuth"
-msgstr "Krumta, Chat'Karuthov stolár"
+msgid ""
+"‘Take 200 hits to fell a tree and you’re a baby. Take 100 and you’re a "
+"soldier. Take 50 and you’re a hero. Take 20 and soon you will be a honorable "
+"lumberjack.’"
+msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:16
 msgid "Fell trees in the surrounding area and process them into logs."
 msgstr "Rúbať stromy na okolitom území a spracovať ich na kmene."
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:17
-msgid "The lumberjack's hut needs trees to fell within the working radius."
-msgstr "Drevorubačská chatrč potrebuje vo svojej pracovnej oblasti stromy."
+msgid "The lumberjack’s hut needs trees to fell within the working radius."
+msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:29
 msgid ""

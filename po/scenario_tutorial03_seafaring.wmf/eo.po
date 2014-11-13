@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-10-29 10:08+0000\n"
+"POT-Creation-Date: 2014-11-12 11:40+0000\n"
 "PO-Revision-Date: 2012-03-05 18:49+0000\n"
 "Last-Translator: Michael Moroni <michael.moroni@openmailbox.org>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-30 05:56+0000\n"
-"X-Generator: Launchpad (build 17203)\n"
+"X-Launchpad-Export-Date: 2014-11-13 05:55+0000\n"
+"X-Generator: Launchpad (build 17241)\n"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:20
 msgid "Seafaring"
@@ -34,7 +34,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:24
 msgid ""
-"But let me first give you an overview about your territory: Here in the "
+"But let me first give you an overview about your territory: here in the "
 "south, you have a whole economy with almost everything you need."
 msgstr ""
 
@@ -58,7 +58,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:36
 msgid ""
-"But I don’t want to rush you: You have just arrived here and you would "
+"But I don’t want to rush you: you have just arrived here and you would "
 "probably like to have a closer look at your camp. I will also take a short "
 "break and be back soon."
 msgstr ""
@@ -142,7 +142,7 @@ msgstr ""
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:75
 msgid ""
 "Although ports act as warehouses, you should not build more than necessary: "
-"They cost quartz, diamonds and gold, which makes them quite expensive."
+"they cost quartz, diamonds and gold, which makes them quite expensive."
 msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:81
@@ -407,9 +407,9 @@ msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:189
 msgid ""
-"But I want to speak a word of warning. Ports are like headquarters: They can "
+"But I want to speak a word of warning. Ports are like headquarters: they can "
 "be attacked by a nearby enemy. While your headquarters has soldiers to "
-"defend it, your newly built port won’t. You should therefore avoid  settling "
+"defend it, your newly built port won’t. You should therefore avoid settling "
 "next to an enemy."
 msgstr ""
 
@@ -424,7 +424,7 @@ msgstr ""
 msgid "“%s”"
 msgstr ""
 
-#: ../../scripting/format_scenario.lua:133
+#: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""
