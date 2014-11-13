@@ -1098,44 +1098,44 @@ void WLApplication::mainmenu()
 		}
 
 		try {
-			switch (mm.run()) {
-			case static_cast<int32_t>(FullscreenMenuMain::MenuTarget::kTutorial):
+			switch (static_cast<FullscreenMenuMain::MenuTarget>(mm.run())) {
+			case FullscreenMenuMain::MenuTarget::kTutorial:
 				mainmenu_tutorial();
 				break;
-			case static_cast<int32_t>(FullscreenMenuMain::MenuTarget::kSinglePlayer):
+			case FullscreenMenuMain::MenuTarget::kSinglePlayer:
 				mainmenu_singleplayer();
 				break;
-			case static_cast<int32_t>(FullscreenMenuMain::MenuTarget::kMultiplayer):
+			case FullscreenMenuMain::MenuTarget::kMultiplayer:
 				mainmenu_multiplayer();
 				break;
-			case static_cast<int32_t>(FullscreenMenuMain::MenuTarget::kReplay):
+			case FullscreenMenuMain::MenuTarget::kReplay:
 				replay();
 				break;
-			case static_cast<int32_t>(FullscreenMenuMain::MenuTarget::kOptions): {
+			case FullscreenMenuMain::MenuTarget::kOptions: {
 				Section & s = g_options.pull_section("global");
 				OptionsCtrl om(s);
 				break;
 			}
-			case static_cast<int32_t>(FullscreenMenuMain::MenuTarget::kReadme): {
+			case FullscreenMenuMain::MenuTarget::kReadme: {
 				FullscreenMenuFileView ff("txts/README.lua");
 				ff.run();
 				break;
 			}
-			case static_cast<int32_t>(FullscreenMenuMain::MenuTarget::kLicense): {
+			case FullscreenMenuMain::MenuTarget::kLicense: {
 				FullscreenMenuFileView ff("txts/license");
 				ff.run();
 				break;
 			}
-			case static_cast<int32_t>(FullscreenMenuMain::MenuTarget::kAuthors): {
+			case FullscreenMenuMain::MenuTarget::kAuthors: {
 				FullscreenMenuFileView ff("txts/developers");
 				ff.run();
 				break;
 			}
-			case static_cast<int32_t>(FullscreenMenuMain::MenuTarget::kEditor):
+			case FullscreenMenuMain::MenuTarget::kEditor:
 				mainmenu_editor();
 				break;
 			default:
-			case static_cast<int32_t>(FullscreenMenuMain::MenuTarget::kExit):
+			case FullscreenMenuMain::MenuTarget::kExit:
 				return;
 			}
 		} catch (const WLWarning & e) {
@@ -1208,23 +1208,19 @@ void WLApplication::mainmenu_singleplayer()
 		 "Panel should be dying.");
 
 	for (;;) {
-		int32_t code;
-		{
-			FullscreenMenuSinglePlayer single_player_menu;
-			code = single_player_menu.run();
-		}
-		switch (code) {
-		case static_cast<int32_t>(FullscreenMenuSinglePlayer::MenuTarget::kBack):
+		FullscreenMenuSinglePlayer single_player_menu;
+		switch (static_cast<FullscreenMenuSinglePlayer::MenuTarget>(single_player_menu.run())) {
+		case FullscreenMenuSinglePlayer::MenuTarget::kBack:
 			return;
-		case static_cast<int32_t>(FullscreenMenuSinglePlayer::MenuTarget::kNewGame):
+		case FullscreenMenuSinglePlayer::MenuTarget::kNewGame:
 			if (new_game())
 				return;
 			break;
-		case static_cast<int32_t>(FullscreenMenuSinglePlayer::MenuTarget::kLoadGame):
+		case FullscreenMenuSinglePlayer::MenuTarget::kLoadGame:
 			if (load_game())
 				return;
 			break;
-		case static_cast<int32_t>(FullscreenMenuSinglePlayer::MenuTarget::kCampaign):
+		case FullscreenMenuSinglePlayer::MenuTarget::kCampaign:
 			if (campaign_game())
 				return;
 			break;
@@ -1245,13 +1241,13 @@ void WLApplication::mainmenu_multiplayer()
 	for (;;) { // stay in menu until player clicks "back" button
 		bool internet = false;
 		FullscreenMenuMultiPlayer mp;
-		switch (mp.run()) {
-			case static_cast<int32_t>(FullscreenMenuMultiPlayer::MenuTarget::kBack):
+		switch (static_cast<FullscreenMenuMultiPlayer::MenuTarget>(mp.run())) {
+			case FullscreenMenuMultiPlayer::MenuTarget::kBack:
 				return;
-			case static_cast<int32_t>(FullscreenMenuMultiPlayer::MenuTarget::kMetaserver):
+			case FullscreenMenuMultiPlayer::MenuTarget::kMetaserver:
 				internet = true;
 				break;
-			case static_cast<int32_t>(FullscreenMenuMultiPlayer::MenuTarget::kLan):
+			case FullscreenMenuMultiPlayer::MenuTarget::kLan:
 				break;
 			default:
 				assert(false);
@@ -1325,18 +1321,14 @@ void WLApplication::mainmenu_editor()
 		 "Editor should be dying.");
 
 	for (;;) {
-		int32_t code;
-		{
-			FullscreenMenuEditor editor_menu;
-			code = editor_menu.run();
-		}
-		switch (code) {
-		case static_cast<int32_t>(FullscreenMenuEditor::MenuTarget::kBack):
+		FullscreenMenuEditor editor_menu;
+		switch (static_cast<FullscreenMenuEditor::MenuTarget>(editor_menu.run())) {
+		case FullscreenMenuEditor::MenuTarget::kBack:
 			return;
-		case static_cast<int32_t>(FullscreenMenuEditor::MenuTarget::kNewMap):
+		case FullscreenMenuEditor::MenuTarget::kNewMap:
 			EditorInteractive::run_editor(m_filename, m_script_to_run);
 			return;
-		case static_cast<int32_t>(FullscreenMenuEditor::MenuTarget::kLoadMap): {
+		case FullscreenMenuEditor::MenuTarget::kLoadMap: {
 			std::string filename;
 			{
 				SinglePlayerGameSettingsProvider sp;
