@@ -28,13 +28,19 @@
  */
 class FullscreenMenuMainMenu : public FullscreenMenuBase {
 public:
+
+	/// Calls FullscreenMenuMainMenu(char const * background_image)
+	/// with a default background image
 	FullscreenMenuMainMenu();
+
+	/// Sets the background image and assigns values
+	/// for alignment and size, depending on screen size
 	FullscreenMenuMainMenu(char const * background_image);
 
 protected:
-	uint32_t m_butx, m_buty, m_butw, m_buth;
-	uint32_t m_back_button_y, m_title_y;
-	uint32_t m_padding;
+	const uint32_t m_butx, m_buty, m_butw, m_buth;
+	const uint32_t m_back_button_y, m_title_y;
+	const uint32_t m_padding;
 
 	const std::string m_button_background;
 };
