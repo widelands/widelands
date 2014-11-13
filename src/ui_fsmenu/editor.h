@@ -28,7 +28,8 @@
  * Fullscreen Menu for Editor.
  * Here you select what game you want to play.
  */
-struct FullscreenMenuEditor : public FullscreenMenuMainMenu {
+class FullscreenMenuEditor : public FullscreenMenuMainMenu {
+public:
 	FullscreenMenuEditor();
 
 	enum class MenuTarget: int32_t {

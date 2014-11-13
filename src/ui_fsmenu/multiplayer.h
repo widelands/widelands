@@ -29,7 +29,8 @@
  * Fullscreen Menu for MultiPlayer.
  * Here you select what game you want to play.
  */
-struct FullscreenMenuMultiPlayer : public FullscreenMenuMainMenu {
+class FullscreenMenuMultiPlayer : public FullscreenMenuMainMenu {
+public:
 	FullscreenMenuMultiPlayer();
 
 	enum class MenuTarget: int32_t {

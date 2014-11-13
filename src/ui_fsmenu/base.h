@@ -35,7 +35,8 @@ struct TextStyle;
  * A fullscreen menu is a menu which takes the full screen; it has the size
  * MENU_XRES and MENU_YRES and is a modal UI Element
  */
-struct FullscreenMenuBase : public UI::Panel {
+class FullscreenMenuBase : public UI::Panel {
+public:
 	FullscreenMenuBase(char const * bgpic);
 	~FullscreenMenuBase();
 

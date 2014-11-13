@@ -34,7 +34,8 @@
 struct NetOpenGame;
 struct NetGameInfo;
 
-struct FullscreenMenuNetSetupLAN : public FullscreenMenuBase {
+class FullscreenMenuNetSetupLAN : public FullscreenMenuBase {
+public:
 	enum {
 		CANCEL = 0,
 		HOSTGAME,

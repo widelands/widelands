@@ -28,7 +28,8 @@
  * This runs the main menu. There, you can select
  * between different playmodes, exit and so on.
 */
-struct FullscreenMenuMain : public FullscreenMenuMainMenu {
+class FullscreenMenuMain : public FullscreenMenuMainMenu {
+public:
 	FullscreenMenuMain();
 	enum class MenuTarget: int32_t {
 		kTutorial,

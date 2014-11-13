@@ -72,7 +72,8 @@ private:
 /// Select a Map, Saved Game or Replay in Fullscreen Mode.
 /// This class defines common coordinates for these UI screens.
 /// It also defines common buttons.
-struct FullscreenMenuLoadMapOrGame : public FullscreenMenuBase {
+class FullscreenMenuLoadMapOrGame : public FullscreenMenuBase {
+public:
 	FullscreenMenuLoadMapOrGame(bool sortdesc = false);
 
 	bool handle_key(bool down, SDL_Keysym code) override;

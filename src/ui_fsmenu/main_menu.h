@@ -26,7 +26,8 @@
  * This sets the values for alignment and size and other common properties
  * for main menus that contain only buttons.
  */
-struct FullscreenMenuMainMenu : public FullscreenMenuBase {
+class FullscreenMenuMainMenu : public FullscreenMenuBase {
+public:
 	FullscreenMenuMainMenu();
 	FullscreenMenuMainMenu(char const * background_image);
 

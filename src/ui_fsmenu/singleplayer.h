@@ -28,7 +28,8 @@
  * Fullscreen Menu for SinglePlayer.
  * Here you select what game you want to play.
  */
-struct FullscreenMenuSinglePlayer : public FullscreenMenuMainMenu {
+class FullscreenMenuSinglePlayer : public FullscreenMenuMainMenu {
+public:
 	FullscreenMenuSinglePlayer();
 
 	enum class MenuTarget: int32_t {
