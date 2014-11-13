@@ -40,8 +40,7 @@ MapView::MapView
 UI::Panel               (parent, x, y, w, h),
 m_intbase               (player),
 m_viewpoint             (Point(0, 0)),
-m_dragging              (false),
-m_complete_redraw_needed(true)
+m_dragging              (false)
 {}
 
 MapView::~MapView()
@@ -88,10 +87,6 @@ void MapView::draw(RenderTarget & dst)
 		// This fixes a crash with displaying an error dialog during loading.
 		if (!game->is_loaded())
 			return;
-
-		// Check if the view has changed in a game
-		if (intbase().get_player() && intbase().get_player()->has_view_changed())
-			m_complete_redraw_needed = true;
 	}
 
 	egbase.map().overlay_manager().load_graphics();
@@ -109,8 +104,6 @@ void MapView::draw(RenderTarget & dst)
 	} else {
 		m_renderer->rendermap(dst, egbase, m_viewpoint);
 	}
-
-	m_complete_redraw_needed = false;
 }
 
 void MapView::set_changeview(const MapView::ChangeViewFn & fn)
@@ -134,8 +127,6 @@ void MapView::set_viewpoint(Point vp, bool jump)
 	if (m_changeview)
 		m_changeview(vp, jump);
 	changeview(m_viewpoint.x, m_viewpoint.y);
-
-	m_complete_redraw_needed = true;
 }
 
 
