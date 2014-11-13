@@ -22,6 +22,7 @@
 
 #include "ui_fsmenu/main_menu.h"
 #include "network/internet_gaming.h"
+#include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
 
@@ -47,6 +48,7 @@ public:
 
 private:
 	UI::Textarea title;
+	UI::Box      vbox;
 	UI::Button   metaserver;
 	UI::Button*  showloginbox;
 	UI::Button   lan;

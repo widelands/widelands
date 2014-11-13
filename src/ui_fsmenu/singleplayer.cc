@@ -33,25 +33,19 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer() :
 		 _("Single Player"), UI::Align_HCenter),
 
 // Buttons
+	vbox(this, m_box_x, m_box_y, UI::Box::Vertical,
+		  m_butw, get_h() - vbox.get_y(), m_padding),
 	new_game
-		(this, "new_game",
-		 m_butx, m_buty, m_butw, m_buth,
-		 g_gr->images().get(m_button_background),
+		(&vbox, "new_game", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("New Game"), "", true, false),
 	campaign
-		(this, "campaigns",
-		 m_butx, get_y_from_preceding(new_game) + m_padding, m_butw, m_buth,
-		 g_gr->images().get(m_button_background),
+		(&vbox, "campaigns", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("Campaigns"), "", true, false),
 	load_game
-		(this, "load_game",
-		 m_butx, get_y_from_preceding(campaign) + 2 * m_buth, m_butw, m_buth,
-		 g_gr->images().get(m_button_background),
+		(&vbox, "load_game", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("Load Game"), "", true, false),
 	back
-		(this, "back",
-		 m_butx, m_back_button_y, m_butw, m_buth,
-		 g_gr->images().get(m_button_background),
+		(&vbox, "back", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("Back"), "", true, false)
 {
 	new_game.sigclicked.connect
@@ -76,4 +70,17 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer() :
 			 static_cast<int32_t>(MenuTarget::kBack)));
 
 	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
+
+	vbox.add(&new_game, UI::Box::AlignCenter);
+	vbox.add(&campaign, UI::Box::AlignCenter);
+
+	vbox.add_space(m_buth);
+
+	vbox.add(&load_game, UI::Box::AlignCenter);
+
+	vbox.add_space(6 * m_buth);
+
+	vbox.add(&back, UI::Box::AlignCenter);
+
+	vbox.set_size(m_butw, get_h() - vbox.get_y());
 }

@@ -38,8 +38,9 @@ public:
 	FullscreenMenuMainMenu(char const * background_image);
 
 protected:
-	const uint32_t m_butx, m_buty, m_butw, m_buth;
-	const uint32_t m_back_button_y, m_title_y;
+	const uint32_t m_box_x, m_box_y;
+	const uint32_t m_butw, m_buth;
+	const uint32_t m_title_y;
 	const uint32_t m_padding;
 
 	const std::string m_button_background;

@@ -28,75 +28,55 @@
 FullscreenMenuMain::FullscreenMenuMain() :
 	FullscreenMenuMainMenu("mainmenu.jpg"),
 
-// Buttons
+	// Buttons
+	// This box needs to be a bit higher than in the other menus, because we have a lot of buttons
+	vbox(this, m_box_x, m_box_y - m_buth, UI::Box::Vertical,
+		  m_butw, get_h() - vbox.get_y(), m_padding),
 	playtutorial
-		(this, "play_tutorial",
-		 m_butx, get_h() * 42 / 200, m_butw, m_buth,
-		 g_gr->images().get(m_button_background),
+		(&vbox, "play_tutorial", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("Play Tutorial"), "", true, false),
 	singleplayer
-		(this, "single_player",
-		 m_butx, get_y_from_preceding(playtutorial) + m_buth, m_butw, m_buth,
-		 g_gr->images().get(m_button_background),
+		(&vbox, "single_player", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("Single Player"), "", true, false),
 	multiplayer
-		(this, "multi_player",
-		 m_butx, get_y_from_preceding(singleplayer) + m_padding, m_butw, m_buth,
-		 g_gr->images().get(m_button_background),
+		(&vbox, "multi_player", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("Multiplayer"), "", true, false),
 	replay
-		(this, "replay",
-		 m_butx, get_y_from_preceding(multiplayer) + m_padding, m_butw, m_buth,
-		 g_gr->images().get(m_button_background),
+		(&vbox, "replay", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("Watch Replay"), "", true, false),
 	editor
-		(this, "editor",
-		 m_butx, get_y_from_preceding(replay) + m_padding, m_butw, m_buth,
-		 g_gr->images().get(m_button_background),
+		(&vbox, "editor", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("Editor"), "", true, false),
 	options
-		(this, "options",
-		 m_butx, get_y_from_preceding(editor) + m_buth, m_butw, m_buth,
-		 g_gr->images().get(m_button_background),
+		(&vbox, "options", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("Options"), "", true, false),
 	readme
-		(this, "readme",
-		 m_butx, get_y_from_preceding(options) + m_buth, m_butw, m_buth,
-		 g_gr->images().get(m_button_background),
+		(&vbox, "readme", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("View Readme"), "", true, false),
 	license
-		(this, "license",
-		 m_butx, get_y_from_preceding(readme) + m_padding, m_butw, m_buth,
-		 g_gr->images().get(m_button_background),
+		(&vbox, "license", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("License"), "", true, false),
 	authors
-		(this, "authors",
-		 m_butx, get_y_from_preceding(license) + m_padding, m_butw, m_buth,
-		 g_gr->images().get(m_button_background),
+		(&vbox, "authors", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("Authors"), "", true, false),
 	exit
-		(this, "exit",
-		 m_butx, get_y_from_preceding(authors) + m_buth, m_butw, m_buth,
-		 g_gr->images().get(m_button_background),
+		(&vbox, "exit", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("Exit Widelands"), "", true, false),
 
-// Textlabels
+	// Textlabels
 	version
-		(this,
-		 get_w(), get_h(),
+		(this, get_w(), get_h(),
 		 /** TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release" */
 		 (boost::format(_("Version %1$s (%2$s)")) % build_id().c_str() % build_type().c_str()).str(),
 		 UI::Align_BottomRight),
 	copyright
-		(this,
-		 0, get_h() - 0.5 * m_buth,
+		(this, 0, get_h() - 0.5 * m_buth,
 		 /** TRANSLATORS: Placeholders are the copyright years */
 		 (boost::format(_("(C) %1%-%2% by the Widelands Development Team"))
 		  % kWidelandsCopyrightStart % kWidelandsCopyrightEnd).str(),
 		 UI::Align_BottomLeft),
 	gpl
-		(this,
-		 0, get_h(),
+		(this, 0, get_h(),
 		 _("Licensed under the GNU General Public License V2.0"),
 		 UI::Align_BottomLeft)
 {
@@ -140,4 +120,32 @@ FullscreenMenuMain::FullscreenMenuMain() :
 		(boost::bind
 			 (&FullscreenMenuMain::end_modal, boost::ref(*this),
 			  static_cast<int32_t>(MenuTarget::kExit)));
+
+	vbox.add(&playtutorial, UI::Box::AlignCenter);
+
+	vbox.add_space(m_padding);
+
+	vbox.add(&singleplayer, UI::Box::AlignCenter);
+	vbox.add(&multiplayer, UI::Box::AlignCenter);
+	vbox.add(&replay, UI::Box::AlignCenter);
+
+	vbox.add_space(m_padding);
+
+	vbox.add(&editor, UI::Box::AlignCenter);
+
+	vbox.add_space(m_padding);
+
+	vbox.add(&options, UI::Box::AlignCenter);
+
+	vbox.add_space(m_padding);
+
+	vbox.add(&readme, UI::Box::AlignCenter);
+	vbox.add(&license, UI::Box::AlignCenter);
+	vbox.add(&authors, UI::Box::AlignCenter);
+
+	vbox.add_space(m_padding);
+
+	vbox.add(&exit, UI::Box::AlignCenter);
+
+	vbox.set_size(m_butw, get_h() - vbox.get_y());
 }

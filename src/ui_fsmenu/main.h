@@ -22,6 +22,7 @@
 
 #include "ui_fsmenu/main_menu.h"
 #include "ui_basic/button.h"
+#include "ui_basic/box.h"
 #include "ui_basic/textarea.h"
 
 /**
@@ -30,7 +31,6 @@
 */
 class FullscreenMenuMain : public FullscreenMenuMainMenu {
 public:
-	FullscreenMenuMain();
 	enum class MenuTarget: int32_t {
 		kTutorial,
 		kSinglePlayer,
@@ -43,7 +43,11 @@ public:
 		kAuthors,
 		kExit
 	};
+
+	FullscreenMenuMain();
+
 private:
+	UI::Box      vbox;
 	UI::Button   playtutorial;
 	UI::Button   singleplayer;
 	UI::Button   multiplayer;

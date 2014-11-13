@@ -26,25 +26,21 @@
 FullscreenMenuEditor::FullscreenMenuEditor() :
 	FullscreenMenuMainMenu(),
 
-// Title
+	// Title
 	title
 		(this, get_w() / 2, m_title_y, _("Editor"), UI::Align_HCenter),
 
-// Buttons
+	// Buttons
+	vbox(this, m_box_x, m_box_y, UI::Box::Vertical,
+		  m_butw, get_h() - vbox.get_y(), m_padding),
 	new_map
-		(this, "new_map",
-		 m_butx, m_buty, m_butw, m_buth,
-		 g_gr->images().get(m_button_background),
+		(&vbox, "new_map", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("New Map"), "", true, false),
 	load_map
-		(this, "load_map",
-		 m_butx, get_y_from_preceding(new_map) + m_padding, m_butw, m_buth,
-		 g_gr->images().get(m_button_background),
+		(&vbox, "load_map", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("Load Map"), "", true, false),
 	back
-		(this, "back",
-		 m_butx, m_back_button_y, m_butw, m_buth,
-		 g_gr->images().get(m_button_background),
+		(&vbox, "back", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("Back"), "", true, false)
 {
 	new_map.sigclicked.connect
@@ -64,4 +60,16 @@ FullscreenMenuEditor::FullscreenMenuEditor() :
 			  static_cast<int32_t>(MenuTarget::kBack)));
 
 	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
+
+	vbox.add(&new_map, UI::Box::AlignCenter);
+	vbox.add(&load_map, UI::Box::AlignCenter);
+
+	// Multiple add_space calls to get the same height for the back button as in the single player menu
+	vbox.add_space(m_buth);
+	vbox.add_space(m_buth);
+	vbox.add_space(6 * m_buth);
+
+	vbox.add(&back, UI::Box::AlignCenter);
+
+	vbox.set_size(m_butw, get_h() - vbox.get_y());
 }

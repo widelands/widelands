@@ -34,20 +34,16 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer() :
 		 _("Choose game type"), UI::Align_HCenter),
 
 // Buttons
+	vbox(this, m_box_x, m_box_y, UI::Box::Vertical,
+		  m_butw, get_h() - vbox.get_y(), m_padding),
 	metaserver
-		(this, "metaserver",
-		 m_butx, m_buty, m_butw, m_buth,
-		 g_gr->images().get(m_button_background),
+		(&vbox, "metaserver", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("Internet game"), "", true, false),
 	lan
-		(this, "lan",
-		 m_butx, get_y_from_preceding(metaserver) + m_padding, m_butw, m_buth,
-		 g_gr->images().get(m_button_background),
+		(&vbox, "lan", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("LAN / Direct IP"), "", true, false),
 	back
-		(this, "back",
-		 m_butx, m_back_button_y, m_butw, m_buth,
-		 g_gr->images().get(m_button_background),
+		(&vbox, "back", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
 		 _("Back"), "", true, false)
 {
 	metaserver.sigclicked.connect(boost::bind(&FullscreenMenuMultiPlayer::internet_login, boost::ref(*this)));
@@ -64,13 +60,25 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer() :
 
 	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
 
+	vbox.add(&metaserver, UI::Box::AlignCenter);
+	vbox.add(&lan, UI::Box::AlignCenter);
+
+	// Multiple add_space calls to get the same height for the back button as in the single player menu
+	vbox.add_space(m_buth);
+	vbox.add_space(m_buth);
+	vbox.add_space(6 * m_buth);
+
+	vbox.add(&back, UI::Box::AlignCenter);
+
+	vbox.set_size(m_butw, get_h() - vbox.get_y());
+
 	Section & s = g_options.pull_section("global");
 	m_auto_log = s.get_bool("auto_log", false);
 	if (m_auto_log) {
 		showloginbox =
 			new UI::Button
 				(this, "login_dialog",
-				 m_butx + m_butw + m_buth / 4, get_h() * 6 / 25, m_buth, m_buth,
+				 m_box_x + m_butw + m_buth / 4, get_h() * 6 / 25, m_buth, m_buth,
 				 g_gr->images().get("pics/but1.png"),
 				 g_gr->images().get("pics/continue.png"),
 				 _("Show login dialog"), true, false);

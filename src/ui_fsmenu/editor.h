@@ -21,6 +21,7 @@
 #define WL_UI_FSMENU_EDITOR_H
 
 #include "ui_fsmenu/main_menu.h"
+#include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
 
@@ -40,6 +41,7 @@ public:
 
 private:
 	UI::Textarea title;
+	UI::Box     vbox;
 	UI::Button   new_map;
 	UI::Button   load_map;
 	UI::Button   back;

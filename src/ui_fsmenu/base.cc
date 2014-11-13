@@ -117,7 +117,3 @@ UI::Font * FullscreenMenuBase::font_big()
 {
 	return d->textstyle_big.font;
 }
-
-int32_t FullscreenMenuBase::get_y_from_preceding(UI::Panel& preceding_panel) {
-	return preceding_panel.get_y() + preceding_panel.get_h();
-}
