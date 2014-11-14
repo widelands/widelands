@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-10-29 10:08+0000\n"
+"POT-Creation-Date: 2014-11-12 11:40+0000\n"
 "PO-Revision-Date: 2014-04-16 03:23+0000\n"
 "Last-Translator: SirVer <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-30 05:42+0000\n"
-"X-Generator: Launchpad (build 17203)\n"
+"X-Launchpad-Export-Date: 2014-11-13 05:41+0000\n"
+"X-Generator: Launchpad (build 17241)\n"
 "Language: hu\n"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:28
@@ -175,13 +175,14 @@ msgid "A New Island"
 msgstr "Egy új sziget"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:109
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:120
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:133
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:144
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:152
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:211
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:228
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:255
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:118
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:130
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:140
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:147
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:207
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:221
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:229
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:247
 msgid "Diary of Lutius"
 msgstr "Lutius naplója"
 
@@ -197,7 +198,7 @@ msgstr ""
 "már ez is derűvel tölti el lelkemet. Úgy érzem, egy nagybecsű kincsre "
 "leltünk, egy paradicsomi vidékre."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:113
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:112
 msgid ""
 "On this island, we will start our new life. We will build up an outpost for "
 "our exile, which perhaps will become a new, beautiful home for every one of "
@@ -206,11 +207,11 @@ msgstr ""
 "E szigeten új életet kezdünk. Felépítjük számkivetésünk első állását, ami "
 "bizonyára mindnyájunk új és szép otthonává válik."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:118
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:116
 msgid "The Green Forests"
 msgstr "A zöld erdők"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:121
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:119
 msgid ""
 "As Saledus and I walked through these wonderful forests in the north, we "
 "felt that our future had just begun. This land is so peaceful, good and "
@@ -220,7 +221,7 @@ msgstr ""
 "nagyszerű jövő áll előttünk. Ez a föld oly békés, jó és szép, hogy életem "
 "végéig tudnék itt élni."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:123
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:121
 msgid ""
 "But until that day, may many years pass! For now, we must concentrate on the "
 "present, and build a few lumberjack’s houses and a sawmill to produce some "
@@ -230,7 +231,7 @@ msgstr ""
 "összpontosítanunk, és építenünk kell pár favágóházat és egy fűrészmalmot, "
 "némi alapvető építőanyag termeléséhez."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:125
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:123
 msgid ""
 "But we shouldn’t forget to preserve this natural bounty. These forests "
 "should last forever, so we really should build a forester’s house too."
@@ -239,11 +240,11 @@ msgstr ""
 "erdők örökké kell, hogy tartsanak, szóval igazán építenünk kell egy "
 "erdészházat is."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:131
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:128
 msgid "The Rocks"
 msgstr "A sziklák"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:134
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:131
 msgid ""
 "Later, I walked down to the rocks in the south and looked for a place where "
 "we could build a quarry to get some hard stone for our larger buildings."
@@ -251,7 +252,7 @@ msgstr ""
 "Később elmentem a déli sziklákhoz is, és kerestem egy helyet, ahol kőfejtőt "
 "tudnánk építeni, hogy legyen némi kemény kövünk is nagyobb épületeinkhez."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:136
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:133
 msgid ""
 "Again, I felt like I was in paradise when I noticed that some marble-like "
 "stones were among the rocks. It seems that we will soon be able to build "
@@ -261,11 +262,11 @@ msgstr ""
 "követ a sziklák között. Úgy tűnik, hamarosan erős és fényűző épületeket "
 "emelhetünk, olyanokat, amilyenekhez Fremilben szoktunk."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:142
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:138
 msgid "Wood for the Colony"
 msgstr "Fa a kolóniának"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:145
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:141
 msgid ""
 "Good news! Today our wood economy was completed. Now we can be sure that we "
 "will have enough wood for our future building projects."
@@ -273,11 +274,11 @@ msgstr ""
 "Jó hír! A mai napon fagazdaságunk elkészült. Most már biztosak lehetünk "
 "abban, hogy lesz elég fánk jövőbeli építkezéseinkhez."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:150
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:145
 msgid "Stone for the Colony"
 msgstr "Kő a kolóniának"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:153
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:148
 msgid ""
 "Great! Today the building of the quarry was completed. Now we will get "
 "enough stone to construct larger buildings."
@@ -285,15 +286,15 @@ msgstr ""
 "Nagyszerű! Ma befejeződött a kőfejtő építése. Most már lesz elég kövünk "
 "nagyobb épületek emeléséhez."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:157
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:152
 msgid "Dangerous Ship Parts"
 msgstr "Veszélyes hajódarabok"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:159
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:154
 msgid "Saledus looks unhappy"
 msgstr "Saledus borúsnak tűnik"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:160
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:155
 msgid ""
 "Greetings Lutius, I don’t want to start a panic, but I found something which "
 "gives me a sinking feeling in my stomach and spreads waves of fear in my "
@@ -307,7 +308,7 @@ msgstr ""
 "ennyi maradt-e abból a hajóból. Mindenesetre a maradványok nem tűnnek "
 "réginek."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:165
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:157
 msgid ""
 "Perhaps the people aboard that ship were caught in the same storm which "
 "brought us to Malac’ Mor – and were brought to this island."
@@ -315,7 +316,7 @@ msgstr ""
 "Utasait talán épp az a vihar ragadta el, amelyik minket Malac' Morra vetett "
 "– aztán idehozta őket erre a szigetre."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:167
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:159
 msgid ""
 "I beg you to be cautious and to build some barracks or sentries around our "
 "colony."
@@ -323,22 +324,22 @@ msgstr ""
 "Kérve kérlek, légy elővigyázatos, és építs pár laktanyát vagy őrházat "
 "gyarmatunk köré."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:172
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:164
 msgid "Marble on the Mountain"
 msgstr "Márvány a hegyen"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:173
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:165
 msgid "Saledus smiles"
 msgstr "Saledus mosolyog"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:174
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:166
 msgid ""
 "Lutius, I’ve got good news for you: As I walked to the east, I found a "
 "larger mountain. I am not absolutely sure – a geologist should check if I am "
 "right – but I believe we could mine marble from some places on the mountain."
 msgstr ""
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:176
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:168
 msgid ""
 "It would be a good source for bolstering our supply of quality marble, "
 "beyond the meager quantities available from the quarry. Perhaps you were "
@@ -348,20 +349,20 @@ msgstr ""
 "mennyiségen. Valószínűleg igazad volt, mikor ezt a szigetet paradicsominak "
 "nevezted."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:179
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:170
 msgid "Let us expand to that mountain and start mining marble."
 msgstr ""
 "Terjeszkedjünk hát ki addig a hegyig, és kezdjünk márványt bányászni."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:184
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:175
 msgid "Further Mountains"
 msgstr "A többi hegy"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:185
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:176
 msgid "Saledus is amazed"
 msgstr "Saledus le van nyűgözve"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:186
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:177
 msgid ""
 "By the Gods, this is an unbelievable stroke of fortune! There are two more "
 "mountains, and it seems that one has a large quantity of coal and the other "
@@ -370,7 +371,7 @@ msgid ""
 "smithies."
 msgstr ""
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:190
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:179
 msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
 "building materials. So, let’s build a stonemason, who will cut columns from "
@@ -380,19 +381,19 @@ msgstr ""
 "lesz szükségünk. Úgyhogy építsünk is<br> egy kőfaragóházat, ahol oszlopokat "
 "faragnak a márványból."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:192
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:181
 msgid "After everything, we can now begin to live like we did in Fremil."
 msgstr "Mindezek után most már kezdhetünk úgy élni, mint Fremilben."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:197
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:186
 msgid "Food for the Miners"
 msgstr "Étel a bányászoknak"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:198
-msgid "Amalea comes in…"
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:187
+msgid "Amalea enters…"
 msgstr ""
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:199
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:188
 msgid ""
 "Hi Lutius, I hope you forgive my criticism, but it seems to me as if you "
 "forgot something."
@@ -400,7 +401,7 @@ msgstr ""
 "Üdv, Lutius, remélem, megbocsátod bírálatomat, de úgy látom, megfeledkeztél "
 "valamiről."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:200
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:190
 msgid ""
 "It’s nice, and of course a good idea, to build up mines, which will give us "
 "a more comfortable life, but the people working in the mines are unhappy "
@@ -412,17 +413,41 @@ msgstr ""
 "helyzettel. Keményen kell dolgozniuk, és nincs idejük maguknak ennivalót "
 "készíteni."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:203
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:192
 msgid ""
 "What do you think about helping them out? I can’t tell you what we need "
 "exactly… but here are my recommendations:"
 msgstr ""
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:209
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:197
+msgid "Our New Tavern"
+msgstr "Az új kocsmánk"
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:198
+msgid "Amalea smiles"
+msgstr "Amalea mosolyog"
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:199
+msgid ""
+"Greetings, my friend, I just visited our new tavern ‘At the palms’. The beer "
+"they serve is really tasty. You really should have a drink there, too."
+msgstr ""
+"Üdvözöllek, barátom, épp most látogattam meg az új »Pálmákalja« kocsmát. "
+"Nagyon finom sört kapni ott. Igazán elmehetnél te is inni egyet."
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:201
+msgid ""
+"It is good to see that we have now got a warmer and more familiar "
+"environment on our island. Thank you, Lutius."
+msgstr ""
+"Jó látni, hogy immár melegebb és családiasabb a légkör szigetünkön. Hála "
+"neked, Lutius."
+
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:205
 msgid "The Barbarians"
 msgstr "A barbárok"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:212
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:208
 msgid ""
 "By the Gods! This is absolutely terrible. It seems as if we stand close to a "
 "test – and it seems as if Saledus was right with his fear concerning the "
@@ -431,7 +456,7 @@ msgstr ""
 "Jóságos ég, ez borzasztó! Úgy látszik, próbatétel vár ránk – és úgy látszik, "
 "Saledusnak jogos volt az ijedelme az általa talált hajóronccsal kapcsolatban."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:214
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:210
 msgid ""
 "Today, as I walked down to the eastern shore, I got a shock. I caught sight "
 "of one of those hated, evil, barbarian tribes with whom we have had so many "
@@ -441,7 +466,7 @@ msgstr ""
 "figyelmes, a semmirekellő, aljas barbárok fajtájából, akikkel annyi bajunk "
 "volt azelőtt."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:217
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:212
 msgid ""
 "At first, I was naive and hoped that they were peaceful, but as soon as one "
 "of them saw me, they charged towards me and started attacking me with their "
@@ -453,17 +478,17 @@ msgstr ""
 "megmenekülnöm és elrejtőznöm, míg a sötét éjszaka oltalmában vissza nem "
 "térhettem gyarmatunkra."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:221
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:214
 msgid ""
 "Anyway, we must build up stronger military buildings as soon as possible."
 msgstr ""
 "Mindenesetre erősebb katonai épületeket kell emelnünk, amint csak lehet."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:226
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:219
 msgid "Command to Attack"
 msgstr "Parancs a támadásra"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:229
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:222
 msgid ""
 "That’s good. The first large military building is complete and the mining "
 "infrastructure is getting better and better. Now we should think about "
@@ -472,24 +497,24 @@ msgstr ""
 "Jól van. Az első nagy katonai épület elkészült, bányászgazdaságunk pedig "
 "egyre jobb. Most már arra összpontosítsunk, hogy felkészüljünk a harcra."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:235
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:240
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:227
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:233
 msgid "Victory"
 msgstr "Győzelem"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:238
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:230
 msgid ""
 "Today is a proud day. We have fought for our new home and risen victorious."
 msgstr "Dicső nap a mai. Harcoltunk új otthonunkért, és győztünk."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:239
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:232
 msgid ""
 "There are still a few barbarians hiding on our island, but I am sure that we "
 "will find them soon. Every barbarian who doesn’t attack us will be put in a "
 "boat with the other peaceful ones, and sent back to their country."
 msgstr ""
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:241
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:234
 msgid ""
 "You have established a working economy, trained new soldiers and driven the "
 "barbarians from the island."
@@ -497,19 +522,19 @@ msgstr ""
 "Minden barbárt, aki nem támad ránk, beültetünk egy hajóba, és együtt "
 "visszaküldjük őket földjükre."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:246
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:238
 msgid "As Time is Running By"
 msgstr "Ahogy az idő telik"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:249
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:241
 msgid "7 days later…"
 msgstr ""
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:253
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:245
 msgid "A Message"
 msgstr "Az üzenet"
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:256
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:248
 msgid ""
 "Today a pigeon landed on our island. It brought a message which fills me "
 "with dark thoughts and brings back my fears."
@@ -517,7 +542,7 @@ msgstr ""
 "Egy galamb érkezett ma szigetünkre. Üzenetet hozott, mely borúval tölt el és "
 "visszaidézi félelmeimet."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:258
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:250
 msgid ""
 "The message was addressed to me, begging me to come back to Fremil. It says "
 "that the Empire is at war with the Barbarians. They were attacked from the "
@@ -525,7 +550,7 @@ msgid ""
 "must do…"
 msgstr ""
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:259
+#: ../../campaigns/emp02.wmf/scripting/texts.lua:252
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
@@ -533,35 +558,11 @@ msgstr ""
 "Befejezted ezt a küldetést. Ha szeretnél, játszhatsz tovább itt is, "
 "máskülönben folytasd a következő küldetéssel."
 
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:263
-msgid "Our New Tavern"
-msgstr "Az új kocsmánk"
-
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:264
-msgid "Amalea smiles"
-msgstr "Amalea mosolyog"
-
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:265
-msgid ""
-"Greetings, my friend, I just visited our new tavern ‘At the palms’. The beer "
-"they serve is really tasty. You really should have a drink there, too."
-msgstr ""
-"Üdvözöllek, barátom, épp most látogattam meg az új »Pálmákalja« kocsmát. "
-"Nagyon finom sört kapni ott. Igazán elmehetnél te is inni egyet."
-
-#: ../../campaigns/emp02.wmf/scripting/texts.lua:267
-msgid ""
-"It is good to see that we have now got a warmer and more familiar "
-"environment on our island. Thank you, Lutius."
-msgstr ""
-"Jó látni, hogy immár melegebb és családiasabb a légkör szigetünkön. Hála "
-"neked, Lutius."
-
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
 msgstr "„%s”"
 
-#: ../../scripting/format_scenario.lua:133
+#: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""
