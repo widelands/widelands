@@ -53,6 +53,7 @@
 
 // Building of new military buildings can be restricted
 constexpr int kPushExpansion = 1;
+
 constexpr int kResourcesOrDefense = 2;
 constexpr int kDefenseOnly = 3;
 constexpr int kNoNewMilitary = 4;
@@ -134,12 +135,20 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 			   unusable_fields.push_back(note.fc);
 		   }
 		});
+	//if (!player_) {
+		//printf (" player_ not set yet\n");
+	//}
+	//printf (" received player number: %1d\n", pid);
+
 
 	// Subscribe to NoteImmovables.
 	immovable_subscriber_ =
 	   Notifications::subscribe<NoteImmovable>([this](const NoteImmovable& note) {
+		   //printf (" note owner: %1d\n",note.pi->owner().player_number()); //NOCOM
+		   //printf (" player number: %1d\n",player_->player_number()); //NOCOM		   
 		   if (note.pi->owner().player_number() != player_->player_number()) {
-			   return;
+			//if (note.pi->owner().player_number() != pid) {   
+		   return;
 		   }
 		   if (note.ownership == NoteImmovable::Ownership::GAINED) {
 			   gain_immovable(*note.pi);
@@ -152,6 +161,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 	outofresource_subscriber_ = Notifications::subscribe<NoteProductionSiteOutOfResources>(
 	   [this](const NoteProductionSiteOutOfResources& note) {
 		   if (note.ps->owner().player_number() != player_->player_number()) {
+			//if (note.ps->owner().player_number() != pid) { 
 			   return;
 		   }
 
@@ -163,6 +173,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 	shipnotes_subscriber_ =
 	   Notifications::subscribe<NoteShipMessage>([this](const NoteShipMessage& note) {
 		   if (note.ship->get_owner()->player_number() != player_->player_number()) {
+			//if (note.ship->get_owner()->player_number() != pid) {   
 			   return;
 		   }
 
@@ -217,9 +228,11 @@ DefaultAI::~DefaultAI() {
  */
 void DefaultAI::think() {
 
-	if (tribe_ == nullptr) {
+	if (tribe_ == nullptr || player_ == nullptr) {
 		late_initialization();
 	}
+
+	//printf (" think(): player number: %1d\n", player_->player_number());
 
 	const int32_t gametime = game().get_gametime();
 
@@ -2836,7 +2849,7 @@ bool DefaultAI::marine_main_decisions(int32_t const gametime) {
 	terittories_count += remote_ports_coords.size();
 
 	// NOCOM: printf to be removed before merging
-	if (gametime%25==0) printf(" %1d: Marine stats: PORTS: %2d, SHIPYARDS: %d, working: %d, any idle&stocked: %s, "
+	if (gametime%50==0) printf(" %1d: Marine stats: PORTS: %2d, SHIPYARDS: %d, working: %d, any idle&stocked: %s, "
 	       "EXPEDIT. in prep: %1d, progr.: %1d, new COLONIES: %1d, SHIPS: %1d\n",
 	       player_number(),
 	       ports_count,
@@ -2937,6 +2950,11 @@ bool DefaultAI::check_ships(int32_t const gametime) {
 			    i->waiting_for_command_ == false) {
 				printf (" %1d: ship at %3dx%3d not waiting for command but in expedition waiting state\n",
 				player_number(),i->ship->get_position().x,i->ship->get_position().y);
+				if (gametime-i->last_command_time>45*1000){ 
+					 i->waiting_for_command_ =true;
+					 printf("   as last command was %3d seconds ago, forcing command...\n",
+					 (gametime-i->last_command_time)/1000);
+				 }
 			}
 			// only two states need an attention
 			if  (!(i->ship->get_ship_state() == Widelands::Ship::EXP_WAITING ||
@@ -3555,7 +3573,9 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 	}
 
 	// if the island is too small
-	if (done.size() < 20) {
+	if (done.size() < 50) {
+		printf (" %1d:    area around %3dx%3d too small (%2d)\n",
+		player_number(),candidate_spot.x,candidate_spot.y,done.size());
 		return 0;
 	}
 
@@ -3793,12 +3813,12 @@ void DefaultAI::gain_building(Building& b) {
 			warehousesites.back().bo = &bo;
 			if (bo.is_port_) {
 				++num_ports;
-				if (Widelands::PortDock* pd = warehousesites.back().site->get_portdock()) { //NOCOM
-					printf ("  new port gained - has portdock\n");
-				} else { 
-					printf ("  new port gained - without portdock yet (%3dx%3d)\n",
-					warehousesites.back().site->get_position().x,warehousesites.back().site->get_position().y );	
-				}
+				//if (Widelands::PortDock* pd = warehousesites.back().site->get_portdock()) { //NOCOM
+					//printf ("  new port gained - has portdock\n");
+				//} else { 
+					//printf ("  new port gained - without portdock yet (%3dx%3d)\n",
+					//warehousesites.back().site->get_position().x,warehousesites.back().site->get_position().y );	
+				//}
 			}
 		}
 	}

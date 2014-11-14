@@ -492,7 +492,7 @@ void Warehouse::init_portdock(EditorGameBase & egbase)
 	}
 
 	molog("Found %" PRIuS " fields for the dock\n", dock.size());
-	printf("   ...found %" PRIuS " fields for the dock\n", dock.size()); //NOCOM
+	//printf("   ...found %" PRIuS " fields for the dock\n", dock.size()); //NOCOM
 
 	m_portdock = new PortDock(this);
 	m_portdock->set_owner(get_owner());
@@ -511,16 +511,36 @@ void Warehouse::destroy(EditorGameBase & egbase)
 	Building::destroy(egbase);
 }
 
+void Warehouse::restore_portdock_or_destroy(EditorGameBase & egbase) //NOCOM
+{
+	//re-init the portdock
+	Warehouse::init_portdock(egbase);
+	if (m_portdock) {
+		printf (" Succeded to restore portdock\n");
+	} else {
+		printf (" Failed to restore portdock, tearing down the warehouse\n");
+		Building::destroy(egbase);
+	}
+}
+
 /// Destroy the warehouse.
 void Warehouse::cleanup(EditorGameBase & egbase)
 {
+	
+	//storing object of the portdock if exists //NOCOM
+	PortDock * pd = nullptr; //NOCOM
+	
 	if (egbase.objects().object_still_available(m_portdock)) {
-		m_portdock->remove(egbase);
+		pd = m_portdock;
+		//m_portdock->remove(egbase);
 		m_portdock = nullptr;
-		printf ("  Warehouse::cleanup(): removing portdock of warehouse at %3dx%3d\n",
+		printf ("  Warehouse::cleanup(): removing warehouse at %3dx%3d (with portdock)\n",
 		get_position().x,get_position().y); //NOCOM
+	} else {
+		printf ("  Warehouse::cleanup(): removing warehouse at %3dx%3d (without portdock)\n",
+		get_position().x,get_position().y); //NOCOM	
 	}
-
+	
 	// This will empty the stock and launch all workers including incorporated
 	// ones.
 	if (upcast(Game, game, &egbase)) {
@@ -553,7 +573,23 @@ void Warehouse::cleanup(EditorGameBase & egbase)
 	player.unsee_area
 			(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
 
+	log("Message: removing %s (player %i)\n", to_string(descr().type()).c_str(), player.player_number());
+	send_message
+		(ref_cast<Game, EditorGameBase>(egbase),
+		 "warehouse",
+		 descr().descname(),
+		 (boost::format(_("A %s was destroyed."))
+		  % descr().descname().c_str()).str(),
+		 true);
+
 	Building::cleanup(egbase);
+	
+	if (pd) {
+		printf (" Warehouse removed, removing portdock now now\n");
+		pd->remove(egbase);
+	}
+	
+
 }
 
 

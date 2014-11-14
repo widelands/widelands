@@ -21,6 +21,8 @@
 
 #include <memory>
 
+#include <boost/format.hpp>
+
 #include "base/deprecated.h"
 #include "base/log.h"
 #include "economy/fleet.h"
@@ -184,8 +186,14 @@ void PortDock::init_fleet(EditorGameBase & egbase)
 
 void PortDock::cleanup(EditorGameBase & egbase)
 {
+	
+	//storing object of the warehouse if exists //NOCOM
+	Warehouse * wh = nullptr; //NOCOM
+	
 	if (egbase.objects().object_still_available(m_warehouse)) {
-		// Transfer all our wares into the warehouse.
+		
+		wh = m_warehouse; //NOCOM
+
 		if (upcast(Game, game, &egbase)) {
 			for (ShippingItem& shipping_item : m_waiting) {
 				WareInstance* ware;
@@ -199,12 +207,6 @@ void PortDock::cleanup(EditorGameBase & egbase)
 				}
 			}
 		}
-		
-		Map & map = egbase.map(); //NOCOM
-		std::vector<Coords> tmpdock = map.find_portdock(m_warehouse->get_position());//NOCOM
-		
-		printf ("  PortDock::cleanup(): removing portdock of warehouse at %3dx%3d, in memory size: %1d, actual: %1d\n",
-		m_warehouse->get_position().x,m_warehouse->get_position().y,m_warehouse->m_portdock->m_dockpoints.size(),tmpdock.size() ); //NOCOM
 		
 		m_waiting.clear();
 		m_warehouse->m_portdock = nullptr;
@@ -229,6 +231,21 @@ void PortDock::cleanup(EditorGameBase & egbase)
 	}
 
 	PlayerImmovable::cleanup(egbase);
+	
+	if (wh) {
+		if (upcast(Game, game, &egbase)) {
+			if (game->is_loaded()) {
+				Player & player = owner();
+				log ("Message: Portdock lost, trying to restore it (player %d)\n",
+				player.player_number());
+				wh->restore_portdock_or_destroy(egbase);
+				return;
+			}
+		}
+		//it seems this is not within a (running) game, destroying the port
+		printf (" Portdock removed, removing Port now now\n");
+		wh->destroy(egbase); 
+	}
 }
 
 /**
