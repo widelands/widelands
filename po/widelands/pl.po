@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-11-12 11:40+0000\n"
+"POT-Creation-Date: 2014-11-14 17:33+0000\n"
 "PO-Revision-Date: 2014-11-13 14:14+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-11-14 05:38+0000\n"
+"X-Launchpad-Export-Date: 2014-11-15 05:43+0000\n"
 "X-Generator: Launchpad (build 17241)\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -202,11 +202,11 @@ msgstr "Cofnij"
 msgid "Redo"
 msgstr "Ponów"
 
-#: ../../src/editor/editorinteractive.cc:190
+#: ../../src/editor/editorinteractive.cc:188
 msgid "Unsupported format"
 msgstr "Nieobsługiwany format"
 
-#: ../../src/editor/editorinteractive.cc:191
+#: ../../src/editor/editorinteractive.cc:189
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -215,24 +215,24 @@ msgstr ""
 "Widelands nie mogło załadować pliku \"%s\". Format pliku wygląda na "
 "nieobsługiwany."
 
-#: ../../src/editor/editorinteractive.cc:206
+#: ../../src/editor/editorinteractive.cc:204
 msgid "Creating players"
 msgstr "Tworzenie graczy"
 
-#: ../../src/editor/editorinteractive.cc:212
-#: ../../src/editor/editorinteractive.cc:600
+#: ../../src/editor/editorinteractive.cc:210
+#: ../../src/editor/editorinteractive.cc:597
 msgid "Loading graphics..."
 msgstr "Ładowanie grafiki..."
 
-#: ../../src/editor/editorinteractive.cc:258
+#: ../../src/editor/editorinteractive.cc:256
 msgid "Unsaved Map"
 msgstr "Niezapisana mapa"
 
-#: ../../src/editor/editorinteractive.cc:259
+#: ../../src/editor/editorinteractive.cc:257
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Mapa nie została zapisana, czy na pewno chcesz wyjść?"
 
-#: ../../src/editor/editorinteractive.cc:595
+#: ../../src/editor/editorinteractive.cc:592
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:147
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:510
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:178
@@ -240,7 +240,7 @@ msgstr "Mapa nie została zapisana, czy na pewno chcesz wyjść?"
 msgid "No Name"
 msgstr "Bez nazwy"
 
-#: ../../src/editor/editorinteractive.cc:596
+#: ../../src/editor/editorinteractive.cc:593
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:148
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:511
 #: ../../src/logic/map.h:181 ../../src/ui_fsmenu/netsetup_lan.cc:199
@@ -3232,33 +3232,33 @@ msgstr "Zburzyć budynek?"
 msgid "Do you really want to destroy this %s?"
 msgstr "Na pewno chcesz zniszczyć %s?"
 
-#: ../../src/wui/actionconfirm.cc:287
+#: ../../src/wui/actionconfirm.cc:286
 msgid "Dismantle building?"
 msgstr "Rozebrać budynek?"
 
-#: ../../src/wui/actionconfirm.cc:288
+#: ../../src/wui/actionconfirm.cc:287
 #, c-format
 msgid "Do you really want to dismantle this %s?"
 msgstr "Czy na pewno chcesz rozebrać %s?"
 
-#: ../../src/wui/actionconfirm.cc:348
+#: ../../src/wui/actionconfirm.cc:346
 msgid "Enhance building?"
 msgstr "Ulepszyć budynek?"
 
-#: ../../src/wui/actionconfirm.cc:349
+#: ../../src/wui/actionconfirm.cc:347
 #, c-format
 msgid "Do you really want to enhance this %s?"
 msgstr "Czy na pewno chcesz ulepszyć: %s?"
 
-#: ../../src/wui/actionconfirm.cc:401
+#: ../../src/wui/actionconfirm.cc:398
 msgid "Do you really want to sink this ship?"
 msgstr "Czy na pewno chcesz zatopić ten statek?"
 
-#: ../../src/wui/actionconfirm.cc:401 ../../src/wui/actionconfirm.cc:442
+#: ../../src/wui/actionconfirm.cc:398 ../../src/wui/actionconfirm.cc:438
 msgid "Sink the ship?"
 msgstr "Zatopić statek?"
 
-#: ../../src/wui/actionconfirm.cc:442
+#: ../../src/wui/actionconfirm.cc:438
 msgid "Do you really want to cancel the active expedition?"
 msgstr "Czy na pewno chcesz przerwać trwającą ekspedycję?"
 
