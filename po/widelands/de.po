@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-11-14 17:33+0000\n"
-"PO-Revision-Date: 2014-11-14 18:11+0000\n"
-"Last-Translator: Christian Fraß <Unknown>\n"
+"PO-Revision-Date: 2014-11-16 09:39+0000\n"
+"Last-Translator: wl-zocker <Unknown>\n"
 "Language-Team: widelands-dev\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-11-15 05:42+0000\n"
+"X-Launchpad-Export-Date: 2014-11-17 05:31+0000\n"
 "X-Generator: Launchpad (build 17241)\n"
 "Language: de\n"
 
@@ -40,7 +40,7 @@ msgstr "Defensiv"
 #: ../../src/base/i18n.cc:331
 #, c-format
 msgid "%1$s & %2$s"
-msgstr "%1$s & %2$s"
+msgstr "%1$s und %2$s"
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
