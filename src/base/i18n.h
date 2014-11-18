@@ -20,6 +20,7 @@
 #ifndef WL_BASE_I18N_H
 #define WL_BASE_I18N_H
 
+#include <cassert>
 #include <cstring>
 #include <string>
 #include <vector>
@@ -58,6 +59,109 @@ void set_localedir(std::string);
 // "or", depending on 'concatenate_with'.
 enum class ConcatenateWith {AND, OR, AMPERSAND, COMMA};
 std::string localize_item_list(const std::vector<std::string>& items, ConcatenateWith concatenate_with);
+
+
+// Contains font information for a locale
+struct FontSet {
+public:
+	// Wiriting diection of a script
+	enum class Direction: uint8_t {
+		kLeftToRight,
+		kRightToLeft
+	};
+
+	FontSet(const std::string& serif_, const std::string& serif_bold_,
+			  const std::string& serif_italic_, const std::string& serif_bold_italic_,
+			  const std::string& sans_, const std::string& sans_bold_,
+			  const std::string& sans_italic_, const std::string& sans_bold_italic_,
+			  const std::string& condensed_, const std::string& condensed_bold_,
+			  const std::string& condensed_italic_, const std::string& condensed_bold_italic_,
+			  const std::string& direction_) :
+		m_serif(serif_),
+		m_serif_bold(serif_bold_),
+		m_serif_italic(serif_italic_),
+		m_serif_bold_italic(serif_bold_italic_),
+		m_sans(sans_),
+		m_sans_bold(sans_bold_),
+		m_sans_italic(sans_italic_),
+		m_sans_bold_italic(sans_bold_italic_),
+		m_condensed(condensed_),
+		m_condensed_bold(condensed_bold_),
+		m_condensed_italic(condensed_italic_),
+		m_condensed_bold_italic(condensed_bold_italic_) {
+
+		assert(!m_serif.empty());
+		assert(!m_serif_bold.empty());
+		assert(!m_serif_italic.empty());
+		assert(!m_serif_bold_italic.empty());
+		assert(!m_sans.empty());
+		assert(!m_sans_bold.empty());
+		assert(!m_sans_italic.empty());
+		assert(!m_sans_bold_italic.empty());
+		assert(!m_condensed.empty());
+		assert(!m_condensed_bold.empty());
+		assert(!m_condensed_italic.empty());
+		assert(!m_condensed_bold_italic.empty());
+
+		if (direction_ == "rtl") {
+			m_direction = FontSet::Direction::kRightToLeft;
+		} else {
+			m_direction = FontSet::Direction::kLeftToRight;
+		}
+	}
+
+	const std::string& serif() const {return m_serif;}
+	const std::string& serif_bold() const {return m_serif_bold;}
+	const std::string& serif_italic() const {return m_serif_italic;}
+	const std::string& serif_bold_italic() const {return m_serif_bold_italic;}
+	const std::string& sans() const {return m_sans;}
+	const std::string& sans_bold() const {return m_sans_bold;}
+	const std::string& sans_italic() const {return m_sans_italic;}
+	const std::string& sans_bold_italic() const {return m_sans_bold_italic;}
+	const std::string& condensed() const {return m_condensed;}
+	const std::string& condensed_bold() const {return m_condensed_bold;}
+	const std::string& condensed_italic() const {return m_condensed_italic;}
+	const std::string& condensed_bold_italic() const {return m_condensed_bold_italic;}
+	FontSet::Direction direction() {return m_direction;}
+
+private:
+	std::string m_serif;
+	std::string m_serif_bold;
+	std::string m_serif_italic;
+	std::string m_serif_bold_italic;
+	std::string m_sans;
+	std::string m_sans_bold;
+	std::string m_sans_italic;
+	std::string m_sans_bold_italic;
+	std::string m_condensed;
+	std::string m_condensed_bold;
+	std::string m_condensed_italic;
+	std::string m_condensed_bold_italic;
+	FontSet::Direction m_direction;
+};
+
+
+class LocaleFonts {
+public:
+	static LocaleFonts* get();
+	~LocaleFonts() {
+		m_instance_flag = false;
+	}
+
+	i18n::FontSet* parse_font_for_locale(const std::string& locale);
+	const i18n::FontSet& get_fontset() const {return *m_fontset;}
+	void set_fontset(i18n::FontSet* fontset) {
+		m_fontset = fontset;
+	}
+
+private:
+	 static bool m_instance_flag;
+	 static LocaleFonts* m_singleton;
+	 LocaleFonts() {}
+
+	 i18n::FontSet* m_fontset;
+
+};
 
 }
 

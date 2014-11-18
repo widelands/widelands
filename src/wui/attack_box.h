@@ -22,6 +22,7 @@
 
 #include <list>
 
+#include "base/i18n.h"
 #include "logic/attackable.h"
 #include "logic/bob.h"
 #include "logic/player.h"
@@ -30,7 +31,6 @@
 #include "ui_basic/button.h"
 #include "ui_basic/slider.h"
 #include "ui_basic/textarea.h"
-#include "wlapplication.h"
 #include "wui/text_constants.h"
 
 using Widelands::Bob;
@@ -67,7 +67,7 @@ struct AttackBox : public UI::Box {
 			(UI::Box           & parent,
 			 std::string         str,
 			 uint32_t            alignment = UI::Box::AlignTop,
-			 const std::string & fontname = (WLApplication::get()->get_fontset()).serif(),
+			 const std::string & fontname = (i18n::LocaleFonts::get()->get_fontset()).serif(),
 			 uint32_t            fontsize = UI_FONT_SIZE_SMALL);
 		UI::Button & add_button
 			(UI::Box           & parent,

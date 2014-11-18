@@ -21,6 +21,7 @@
 
 #include <cstdio>
 #include <iostream>
+#include <memory>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
@@ -406,8 +407,9 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 
 			name = table->get_string("name");
 			sortname = table->get_string("sort_name");
-			entries.push_back(LanguageEntry(localename, name, sortname,
-													  WLApplication::get()->parse_font_for_locale(localename)->serif()));
+			entries.push_back(LanguageEntry(
+										localename, name, sortname,
+										i18n::LocaleFonts::get()->parse_font_for_locale(localename)->serif()));
 			if (localename == current_locale) {
 				selected_locale = current_locale;
 			}
@@ -757,7 +759,6 @@ void OptionsCtrl::save_options() {
 
 	WLApplication::get()->set_input_grab(opt.inputgrab);
 	i18n::set_locale(opt.language);
-	WLApplication::get()->set_fontset(WLApplication::get()->parse_font_for_locale(opt.language));
 	g_sound_handler.set_disable_music(!opt.music);
 	g_sound_handler.set_disable_fx(!opt.fx);
 }

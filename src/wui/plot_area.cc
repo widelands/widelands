@@ -32,7 +32,6 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "ui_basic/panel.h"
-#include "wlapplication.h"
 #include "wui/text_layout.h"
 
 using namespace std;
@@ -71,7 +70,7 @@ enum UNIT {
 };
 
 string ytick_text_style(const string& text, const RGBColor& clr) {
-	i18n::FontSet fontset = WLApplication::get()->get_fontset();
+	i18n::FontSet fontset = i18n::LocaleFonts::get()->get_fontset();
 	static boost::format f("<rt><p><font face=%s size=13 color=%02x%02x%02x>%s</font></p></rt>");
 	f % fontset.condensed();
 	f % int(clr.r) % int(clr.g) % int(clr.b);

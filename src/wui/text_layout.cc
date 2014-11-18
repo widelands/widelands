@@ -21,7 +21,7 @@
 
 #include <boost/format.hpp>
 
-#include "wlapplication.h"
+#include "base/i18n.h"
 #include "wui/text_constants.h"
 
 using namespace std;
@@ -31,7 +31,7 @@ string as_game_tip(const string& txt) {
 		("<rt padding_l=48 padding_t=28 padding_r=48 padding_b=28>"
 		 "<p align=center><font color=21211b face=%s size=16>%s</font></p></rt>");
 
-	f % (WLApplication::get()->get_fontset()).serif();
+	f % (i18n::LocaleFonts::get()->get_fontset()).serif();
 	f % txt;
 	return f.str();
 }
@@ -39,7 +39,7 @@ string as_game_tip(const string& txt) {
 string as_window_title(const string& txt) {
 	static boost::format f("<rt><p><font face=%s size=13 bold=1 color=%02x%02x%02x>%s</font></p></rt>");
 
-	f % (WLApplication::get()->get_fontset()).serif();
+	f % (i18n::LocaleFonts::get()->get_fontset()).serif();
 	f % int(UI_FONT_CLR_FG.r) % int(UI_FONT_CLR_FG.g) % int(UI_FONT_CLR_FG.b);
 	f % txt;
 	return f.str();
@@ -49,7 +49,7 @@ string as_uifont(const string & txt, int size, const RGBColor& clr) {
 	static boost::format
 			f("<rt><p><font face=%s size=%i bold=1 shadow=1 color=%02x%02x%02x>%s</font></p></rt>");
 
-	f % (WLApplication::get()->get_fontset()).serif();
+	f % (i18n::LocaleFonts::get()->get_fontset()).serif();
 	f % size;
 	f % int(clr.r) % int(clr.g) % int(clr.b);
 	f % txt;
@@ -59,7 +59,7 @@ string as_uifont(const string & txt, int size, const RGBColor& clr) {
 string as_tooltip(const string & txt) {
 	static boost::format f("<rt><p><font face=%s size=%i bold=1 color=%02x%02x%02x>%s</font></p></rt>");
 
-	f % (WLApplication::get()->get_fontset()).serif();
+	f % (i18n::LocaleFonts::get()->get_fontset()).serif();
 	f % UI_FONT_SIZE_SMALL;
 	f % int(UI_FONT_TOOLTIP_CLR.r) % int(UI_FONT_TOOLTIP_CLR.g) % int(UI_FONT_TOOLTIP_CLR.b);
 	f % txt;
@@ -67,10 +67,9 @@ string as_tooltip(const string & txt) {
 }
 
 string as_waresinfo(const string & txt) {
-	i18n::FontSet fontset = WLApplication::get()->get_fontset();
 	static boost::format f
 		("<rt><p><font face=%s size=10 bold=0 color=%02x%02x%02x>%s</font></p></rt>");
-	f % fontset.condensed();
+	f % (i18n::LocaleFonts::get()->get_fontset()).condensed();
 	f % int(UI_FONT_TOOLTIP_CLR.r) % int(UI_FONT_TOOLTIP_CLR.g) % int(UI_FONT_TOOLTIP_CLR.b);
 	f % txt;
 	return f.str();

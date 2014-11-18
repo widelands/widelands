@@ -22,6 +22,7 @@
 #include <boost/bind.hpp>
 
 #include "base/deprecated.h"
+#include "base/i18n.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
@@ -50,7 +51,7 @@ Table<void *>::Table
 :
 	Panel             (parent, x, y, w, h),
 	m_total_width     (0),
-	m_fontname        ((WLApplication::get()->get_fontset()).serif()),
+	m_fontname        ((i18n::LocaleFonts::get()->get_fontset()).serif()),
 	m_fontsize        (UI_FONT_SIZE_SMALL),
 	m_headerheight    (UI_FONT_SIZE_SMALL * 8 / 5),
 	m_lineheight      (g_fh->get_fontheight(m_fontname, m_fontsize)),

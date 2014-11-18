@@ -25,12 +25,17 @@
 
 #include <cstdlib>
 #include <map>
+#include <memory>
 #include <utility>
 
+#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
 #include "base/log.h"
 #include "config.h"
+#include "io/filesystem/layered_filesystem.h"
+#include "scripting/lua_table.h"
+#include "scripting/scripting.h"
 
 #ifdef __APPLE__
 # if LIBINTL_VERSION >= 0x001201
@@ -313,10 +318,10 @@ void set_locale(std::string name) {
 		bindtextdomain(domain, textdomains.back().second.c_str());
 		textdomain(domain);
 	}
+	LocaleFonts::get()->set_fontset(LocaleFonts::get()->parse_font_for_locale(name));
 }
 
 const std::string & get_locale() {return locale;}
-
 
 std::string localize_item_list(const std::vector<std::string>& items, ConcatenateWith listtype) {
 	std::string result = "";
@@ -350,6 +355,163 @@ std::string localize_item_list(const std::vector<std::string>& items, Concatenat
 		}
 	}
 	return result;
+}
+
+
+bool LocaleFonts::m_instance_flag = false;
+LocaleFonts* LocaleFonts::m_singleton = nullptr;
+
+LocaleFonts* LocaleFonts::get() {
+	if (!m_instance_flag) {
+		m_singleton = new LocaleFonts();
+		m_instance_flag = true;
+		return m_singleton;
+	} else {
+		return m_singleton;
+	}
+}
+
+
+// Loads font info from config files, depending on the localename
+i18n::FontSet* LocaleFonts::parse_font_for_locale(const std::string& localename) {
+	std::string fontsetname;
+	i18n::FontSet* fontset;
+	std::string filename;
+	LuaInterface lua;
+
+	// Read default fontset. It defines the fallback fonts and needs to always be there and complete.
+	// This way, we will always have fonts, even if we run into an exception further down.
+	std::unique_ptr<LuaTable> fonts_table(lua.run_script("i18n/fonts/fonts.lua"));
+	fonts_table->do_not_warn_about_unaccessed_keys();
+	std::unique_ptr<LuaTable> default_font_table = fonts_table->get_table("default");
+	default_font_table->do_not_warn_about_unaccessed_keys();
+	std::string serif = default_font_table->get_string("serif");
+	std::string serif_bold = default_font_table->get_string("serif_bold");
+	std::string serif_italic = default_font_table->get_string("serif_italic");
+	std::string serif_bold_italic = default_font_table->get_string("serif_bold_italic");
+	std::string sans = default_font_table->get_string("sans");
+	std::string sans_bold = default_font_table->get_string("sans_bold");
+	std::string sans_italic = default_font_table->get_string("sans_italic");
+	std::string sans_bold_italic = default_font_table->get_string("sans_bold_italic");
+	std::string condensed = default_font_table->get_string("condensed");
+	std::string condensed_bold = default_font_table->get_string("condensed_bold");
+	std::string condensed_italic = default_font_table->get_string("condensed_italic");
+	std::string condensed_bold_italic = default_font_table->get_string("condensed_bold_italic");
+	std::string direction = default_font_table->get_string("dir");
+
+	// Find out which fontset to use from the locale
+	// Locale identifiers can look like this: ca_ES@valencia.UTF-8
+	try  {
+		if (localename.empty()) {
+			std::vector<std::string> parts;
+			boost::split(parts, i18n::get_locale(), boost::is_any_of("."));
+			filename = (boost::format("i18n/locales/%s.lua") % parts[0]).str();
+
+			if (!g_fs->file_exists(filename.c_str())) {
+				boost::split(parts, parts[0], boost::is_any_of("@"));
+				filename = (boost::format("i18n/locales/%s.lua") % parts[0]).str();
+
+				if (!g_fs->file_exists(filename.c_str())) {
+					boost::split(parts, parts[0], boost::is_any_of("_"));
+					filename = (boost::format("i18n/locales/%s.lua") % parts[0]).str();
+				}
+			}
+		} else {
+			filename = (boost::format("i18n/locales/%s.lua") % localename).str().c_str();
+		}
+		// Now get the fontset name
+		if (g_fs->file_exists(filename.c_str())) {
+			try  {
+				std::unique_ptr<LuaTable> locale_table(lua.run_script(filename.c_str()));
+				locale_table->do_not_warn_about_unaccessed_keys();
+				fontsetname = locale_table->get_string("font");
+			} catch (const LuaError& err) {
+				log("Could not read locale '%s': %s\n", localename.c_str(), err.what());
+			}
+		}
+	} catch (const LuaError& err) {
+		log("Error loading locale from file '%s': %s\n", filename.c_str(), err.what());
+	}
+
+	if (fontsetname.empty()) {
+		fontsetname = "default";
+	}
+
+	// Read the fontset for the current locale.
+	// Each locale needs to define a font face for serif and sans.
+	// For everything else, there's a fallback font.
+	try {
+		std::unique_ptr<LuaTable> font_set_table = fonts_table->get_table(fontsetname.c_str());
+		font_set_table->do_not_warn_about_unaccessed_keys();
+
+		serif = font_set_table->get_string("serif");
+		if (font_set_table->has_key("serif_bold")) {
+			serif_bold = font_set_table->get_string("serif_bold");
+		} else {
+			serif_bold = serif;
+		}
+		if (font_set_table->has_key("serif_italic")) {
+			serif_italic = font_set_table->get_string("serif_italic");
+		} else {
+			serif_italic = serif;
+		}
+		if (font_set_table->has_key("serif_bold_italic")) {
+			serif_bold_italic = font_set_table->get_string("serif_bold_italic");
+		} else {
+			serif_bold_italic = serif_bold;
+		}
+
+		sans = font_set_table->get_string("sans");
+		if (font_set_table->has_key("sans_bold")) {
+			sans_bold = font_set_table->get_string("sans_bold");
+		} else {
+			sans_bold = sans;
+		}
+		if (font_set_table->has_key("sans_italic")) {
+			sans_italic = font_set_table->get_string("sans_italic");
+		} else {
+			sans_italic = sans;
+		}
+		if (font_set_table->has_key("sans_bold_italic")) {
+			sans_bold_italic = font_set_table->get_string("sans_bold_italic");
+		} else {
+			sans_bold_italic = sans_bold;
+		}
+
+		if (font_set_table->has_key("condensed")) {
+			condensed = font_set_table->get_string("condensed");
+		} else {
+			condensed = sans;
+		}
+		if (font_set_table->has_key("condensed_bold")) {
+			condensed_bold = font_set_table->get_string("condensed_bold");
+		} else {
+			condensed_bold = condensed;
+		}
+		if (font_set_table->has_key("condensed_italic")) {
+			condensed_italic = font_set_table->get_string("condensed_italic");
+		} else {
+			condensed_italic = condensed;
+		}
+		if (font_set_table->has_key("condensed_bold_italic")) {
+			condensed_bold_italic = font_set_table->get_string("condensed_bold_italic");
+		} else {
+			condensed_bold_italic = condensed_bold;
+		}
+		if (font_set_table->has_key("dir")) {
+			direction = font_set_table->get_string("dir");
+		} else {
+			direction = "ltr";
+		}
+	} catch (LuaError& err) {
+		log("Could not read font set '%s': %s\n", fontsetname.c_str(), err.what());
+	}
+
+	fontset = new i18n::FontSet(serif, serif_bold, serif_italic, serif_bold_italic,
+									  sans, sans_bold, sans_italic, sans_bold_italic,
+									  condensed, condensed_bold, condensed_italic, condensed_bold_italic,
+									  direction);
+	return fontset;
 }
 
 

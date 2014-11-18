@@ -40,7 +40,6 @@ wl_library(scripting
   DEPENDS
     base_deprecated
     base_exceptions
-    base_i18n
     base_log
     base_macros
     build_info

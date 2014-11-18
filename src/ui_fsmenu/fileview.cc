@@ -29,7 +29,6 @@
 #include "profile/profile.h"
 #include "scripting/lua_table.h"
 #include "scripting/scripting.h"
-#include "wlapplication.h"
 #include "wui/text_constants.h"
 
 
@@ -89,7 +88,7 @@ FullscreenMenuTextView::FullscreenMenuTextView
 	title.set_pos
 		(Point((get_inner_w() - title.get_w()) / 2, get_h() * 167 / 1000));
 
-	i18n::FontSet fontset = WLApplication::get()->get_fontset();
+	i18n::FontSet fontset = i18n::LocaleFonts::get()->get_fontset();
 	textview.set_font(fontset.serif(), UI_FONT_SIZE_PROSA, PROSA_FONT_CLR_FG);
 }
 
@@ -125,7 +124,7 @@ FileViewWindow::FileViewWindow
 
 	textview.set_text(content);
 
-	i18n::FontSet fontset = WLApplication::get()->get_fontset();
+	i18n::FontSet fontset = i18n::LocaleFonts::get()->get_fontset();
 	textview.set_font(fontset.serif(), UI_FONT_SIZE_PROSA, PROSA_FONT_CLR_FG);
 
 	set_inner_size(560, 240);

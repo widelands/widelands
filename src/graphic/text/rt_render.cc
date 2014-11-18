@@ -27,6 +27,7 @@
 #include <SDL.h>
 #include <boost/format.hpp>
 
+#include "base/i18n.h"
 #include "base/log.h"
 #include "base/point.h"
 #include "base/rect.h"
@@ -37,7 +38,6 @@
 #include "graphic/text/rt_parse.h"
 #include "graphic/text/textstream.h"
 #include "io/filesystem/filesystem_exceptions.h"
-#include "wlapplication.h"
 
 using namespace std;
 
@@ -587,7 +587,7 @@ private:
 };
 
 IFont& FontCache::get_font(NodeStyle& ns) {
-	i18n::FontSet fontset = WLApplication::get()->get_fontset();
+	i18n::FontSet fontset = i18n::LocaleFonts::get()->get_fontset();
 
 	if (ns.font_style & IFont::BOLD && ns.font_style & IFont::ITALIC) {
 		if (ns.font_face == fontset.condensed() ||
@@ -994,7 +994,7 @@ RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& 
 	std::unique_ptr<Tag> rt(parser_->parse(text, allowed_tags));
 
 	NodeStyle default_style = {
-		(WLApplication::get()->get_fontset()).serif(), 16,
+		(i18n::LocaleFonts::get()->get_fontset()).serif(), 16,
 		RGBColor(0, 0, 0), IFont::DEFAULT, 0, HALIGN_LEFT, VALIGN_BOTTOM,
 		""
 	};

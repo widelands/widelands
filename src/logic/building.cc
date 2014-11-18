@@ -24,6 +24,7 @@
 
 #include <boost/format.hpp>
 
+#include "base/i18n.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/flag.h"
@@ -45,7 +46,6 @@
 #include "logic/worker.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
-#include "wlapplication.h"
 #include "wui/interactive_player.h"
 #include "wui/text_layout.h"
 
@@ -889,7 +889,7 @@ void Building::send_message
 	 uint32_t throttle_time,
 	 uint32_t throttle_radius)
 {
-	const char* font_face = WLApplication::get()->get_fontset().serif().c_str();
+	const char* font_face = i18n::LocaleFonts::get()->get_fontset().serif().c_str();
 	// TODO(sirver): add support into the font renderer to get to representative
 	// animations of buildings so that the messages can still be displayed, even
 	// after reload.

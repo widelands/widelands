@@ -23,6 +23,7 @@
 
 #include <boost/format.hpp>
 
+#include "base/i18n.h"
 #include "base/macros.h"
 #include "graphic/graphic.h"
 #include "logic/soldier.h"
@@ -166,7 +167,7 @@ void AttackBox::init() {
 
 	m_text_soldiers =
 		&add_text(columnbox, buf, UI::Box::AlignCenter,
-					 (WLApplication::get()->get_fontset()).serif(),
+					 (i18n::LocaleFonts::get()->get_fontset()).serif(),
 					 UI_FONT_SIZE_ULTRASMALL);
 
 	m_slider_soldiers =

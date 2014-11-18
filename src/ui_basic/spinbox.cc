@@ -28,7 +28,6 @@
 #include "base/wexception.h"
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
-#include "wlapplication.h"
 #include "wui/text_constants.h"
 
 namespace UI {
@@ -174,7 +173,7 @@ SpinBox::SpinBox
 	m_buttons.push_back(sbi->butMinus);
 	m_buttons.push_back(sbi->butPlus);
 
-	set_font((WLApplication::get()->get_fontset()).serif(), UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG);
+	set_font((i18n::LocaleFonts::get()->get_fontset()).serif(), UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG);
 }
 
 SpinBox::~SpinBox() {

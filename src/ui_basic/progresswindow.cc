@@ -31,7 +31,6 @@
 #include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "wlapplication.h"
 #include "wui/text_constants.h"
 
 #define PROGRESS_FONT_COLOR_FG        RGBColor(128, 128, 255)
@@ -69,7 +68,7 @@ void ProgressWindow::draw_background
 		// (Re-)Load background graphics
 		m_background_pic = ImageTransformations::resize(g_gr->images().get(m_background), xres, yres);
 
-		const uint32_t h = g_fh->get_fontheight((WLApplication::get()->get_fontset()).serif(),
+		const uint32_t h = g_fh->get_fontheight((i18n::LocaleFonts::get()->get_fontset()).serif(),
 															 UI_FONT_SIZE_SMALL);
 		m_label_rectangle.x = xres / 4;
 		m_label_rectangle.w = xres / 2;
