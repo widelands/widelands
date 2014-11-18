@@ -126,7 +126,7 @@ void ChatOverlay::Impl::recompute()
 			oldest_ = log_messages_[log_idx].time;
 			// Do some richtext formatting here
 			if (now - oldest_ < CHAT_DISPLAY_TIME) {
-				UI::FontSet fontset = WLApplication::get()->get_fontset();
+				i18n::FontSet fontset = WLApplication::get()->get_fontset();
 				richtext = "<p><font face=" + fontset.serif() + " size=14 color=dddddd bold=1>"
 					+ log_messages_[log_idx].msg + "<br></font></p>" + richtext;
 			}

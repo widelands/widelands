@@ -67,7 +67,7 @@ string as_tooltip(const string & txt) {
 }
 
 string as_waresinfo(const string & txt) {
-	UI::FontSet fontset = WLApplication::get()->get_fontset();
+	i18n::FontSet fontset = WLApplication::get()->get_fontset();
 	static boost::format f
 		("<rt><p><font face=%s size=10 bold=0 color=%02x%02x%02x>%s</font></p></rt>");
 	f % fontset.condensed();

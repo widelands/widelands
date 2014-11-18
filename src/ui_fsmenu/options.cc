@@ -34,6 +34,8 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/save_handler.h"
 #include "profile/profile.h"
+#include "scripting/lua_table.h"
+#include "scripting/scripting.h"
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
 #include "wui/text_constants.h"
@@ -386,7 +388,6 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 	std::string localename;
 	std::string name;
 	std::string sortname;
-	UI::FontSet fontset;
 	std::string selected_locale;
 
 	for (const std::string& filename : files) {
@@ -398,20 +399,22 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 
 		try {
 			localename = g_fs->filename_without_ext(path);
-			Profile ln((boost::format("txts/localedata/%s.conf") % localename.c_str()).str().c_str());
-			Section& localesection = ln.pull_section("locale");
-			name = localesection.get_safe_string("name");
-			sortname = localesection.get_string("sort_name", name.c_str());
-			fontset = WLApplication::get()->parse_font_for_locale(localename);
+			LuaInterface lua;
+			std::unique_ptr<LuaTable> table(lua.run_script((boost::format("i18n/locales/%s.lua")
+																			% localename.c_str()).str()));
+			table->do_not_warn_about_unaccessed_keys();
 
-			entries.push_back(LanguageEntry(localename, name, sortname, fontset.serif()));
+			name = table->get_string("name");
+			sortname = table->get_string("sort_name");
+			entries.push_back(LanguageEntry(localename, name, sortname,
+													  WLApplication::get()->parse_font_for_locale(localename)->serif()));
 			if (localename == current_locale) {
 				selected_locale = current_locale;
 			}
 
 		} catch (const WException&) {
 			log("Could not read locale for: %s\n", localename.c_str());
-			entries.push_back(LanguageEntry(localename, localename, localename, (new UI::FontSet())->serif()));
+			entries.push_back(LanguageEntry(localename, localename, localename, kFallbackFont));
 		}
 	}
 

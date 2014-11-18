@@ -1325,17 +1325,18 @@ bool Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 }
 
 std::string Panel::ui_fn() {
-	UI::FontSet fontset = WLApplication::get()->get_fontset();
+	i18n::FontSet fontset = WLApplication::get()->get_fontset();
 
 	std::string style(fontset.serif());
-	if (g_fs->file_exists("fonts/" + style))
+	if (g_fs->file_exists("i18n/fonts/" + style)) {
 		return style;
+	}
 	log
 		("Could not find font file \"%s\"\n"
 		 "Make sure the path is given relative to Widelands font directory. "
 		 "Widelands will use standard font.\n",
 		 style.c_str());
-	return (new UI::FontSet())->serif();
+	return kFallbackFont;
 }
 
 }

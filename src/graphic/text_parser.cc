@@ -267,7 +267,7 @@ void TextParser::parse_text_attributes
 			if (key == "font-size") {
 				element.set_font_size(atoi(val.c_str()));
 			} else if (key == "font-face") {
-				UI::FontSet fontset = WLApplication::get()->get_fontset();
+				i18n::FontSet fontset = WLApplication::get()->get_fontset();
 				if (val == fontset.condensed() || val == "condensed") {
 					val = fontset.condensed();
 				} else if (val == fontset.sans() || val == "serif") {

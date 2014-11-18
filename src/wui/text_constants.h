@@ -22,6 +22,8 @@
 
 // Basic constants for often used text attributes.
 
+constexpr const char* kFallbackFont = "DejaVu/DejaVuSerif.ttf";
+
 /// Font Sizes
 #define UI_FONT_SIZE_BIG        22
 #define UI_FONT_SIZE_PROSA      18

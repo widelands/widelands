@@ -89,7 +89,7 @@ FullscreenMenuTextView::FullscreenMenuTextView
 	title.set_pos
 		(Point((get_inner_w() - title.get_w()) / 2, get_h() * 167 / 1000));
 
-	UI::FontSet fontset = WLApplication::get()->get_fontset();
+	i18n::FontSet fontset = WLApplication::get()->get_fontset();
 	textview.set_font(fontset.serif(), UI_FONT_SIZE_PROSA, PROSA_FONT_CLR_FG);
 }
 
@@ -125,7 +125,7 @@ FileViewWindow::FileViewWindow
 
 	textview.set_text(content);
 
-	UI::FontSet fontset = WLApplication::get()->get_fontset();
+	i18n::FontSet fontset = WLApplication::get()->get_fontset();
 	textview.set_font(fontset.serif(), UI_FONT_SIZE_PROSA, PROSA_FONT_CLR_FG);
 
 	set_inner_size(560, 240);

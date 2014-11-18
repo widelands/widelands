@@ -587,7 +587,7 @@ private:
 };
 
 IFont& FontCache::get_font(NodeStyle& ns) {
-	UI::FontSet fontset = WLApplication::get()->get_fontset();
+	i18n::FontSet fontset = WLApplication::get()->get_fontset();
 
 	if (ns.font_style & IFont::BOLD && ns.font_style & IFont::ITALIC) {
 		if (ns.font_face == fontset.condensed() ||

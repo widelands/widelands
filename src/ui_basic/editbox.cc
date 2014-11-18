@@ -75,7 +75,7 @@ EditBox::EditBox
 {
 	set_think(false);
 
-	UI::FontSet fontset = WLApplication::get()->get_fontset();
+	i18n::FontSet fontset = WLApplication::get()->get_fontset();
 
 	m->background = background;
 	m->fontname = fontset.serif();

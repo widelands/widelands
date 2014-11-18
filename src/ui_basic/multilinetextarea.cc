@@ -60,7 +60,7 @@ MultilineTextarea::MultilineTextarea
 
 	m_scrollbar.moved.connect(boost::bind(&MultilineTextarea::scrollpos_changed, this, _1));
 
-	UI::FontSet fontset = WLApplication::get()->get_fontset();
+	i18n::FontSet fontset = WLApplication::get()->get_fontset();
 	m_scrollbar.set_singlestepsize(g_fh->get_fontheight(fontset.serif(), UI_FONT_SIZE_SMALL));
 	m_scrollbar.set_pagesize(h - 2 * g_fh->get_fontheight(fontset.serif(), UI_FONT_SIZE_BIG));
 	m_scrollbar.set_steps(1);

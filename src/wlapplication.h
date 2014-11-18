@@ -41,7 +41,7 @@
 
 namespace Widelands {class Game;}
 
-namespace UI
+namespace i18n
 {
 
 // Contains font information for a locale
@@ -53,19 +53,13 @@ public:
 		kRightToLeft
 	};
 
-	FontSet(const std::string& serif_ = "DejaVu/DejaVuSerif.ttf",
-			  const std::string& serif_bold_ = "DejaVu/DejaVuSerif-Bold.ttf",
-			  const std::string& serif_italic_ = "DejaVu/DejaVuSerif-Italic.ttf",
-			  const std::string& serif_bold_italic_ = "DejaVu/DejaVuSerif-BoldItalic.ttf",
-			  const std::string& sans_ = "DejaVu/DejaVuSans.ttf",
-			  const std::string& sans_bold_ = "DejaVu/DejaVuSans-Bold.ttf",
-			  const std::string& sans_italic_ = "DejaVu/DejaVuSans-Oblique.ttf",
-			  const std::string& sans_bold_italic_ = "DejaVu/DejaVuSans-BoldOblique.ttf",
-			  const std::string& condensed_ = "DejaVu/DejaVuSansCondensed.ttf",
-			  const std::string& condensed_bold_ = "DejaVu/DejaVuSansCondensed-Bold.ttf",
-			  const std::string& condensed_italic_ = "DejaVu/DejaVuSansCondensed-Oblique.ttf",
-			  const std::string& condensed_bold_italic_ = "DejaVu/DejaVuSansCondensed-BoldOblique.ttf",
-			  const std::string& direction_ = "ltr") :
+	FontSet(const std::string& serif_, const std::string& serif_bold_,
+			  const std::string& serif_italic_, const std::string& serif_bold_italic_,
+			  const std::string& sans_, const std::string& sans_bold_,
+			  const std::string& sans_italic_, const std::string& sans_bold_italic_,
+			  const std::string& condensed_, const std::string& condensed_bold_,
+			  const std::string& condensed_italic_, const std::string& condensed_bold_italic_,
+			  const std::string& direction_) :
 		m_serif(serif_),
 		m_serif_bold(serif_bold_),
 		m_serif_italic(serif_italic_),
@@ -278,9 +272,9 @@ struct WLApplication {
 	void replay();
 	static void emergency_save(Widelands::Game &);
 
-	UI::FontSet parse_font_for_locale(const std::string& locale);
-	const UI::FontSet& get_fontset() const {return m_fontset;}
-	void set_fontset(UI::FontSet fontset) {
+	i18n::FontSet* parse_font_for_locale(const std::string& locale);
+	const i18n::FontSet& get_fontset() const {return *m_fontset;}
+	void set_fontset(i18n::FontSet* fontset) {
 		m_fontset = fontset;
 	}
 
@@ -356,7 +350,7 @@ private:
 
 	void _handle_mousebutton(SDL_Event &, InputCallback const *);
 
-	UI::FontSet m_fontset;
+	i18n::FontSet* m_fontset;
 
 };
 
