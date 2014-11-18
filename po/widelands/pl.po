@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-11-14 17:33+0000\n"
-"PO-Revision-Date: 2014-11-13 14:14+0000\n"
+"PO-Revision-Date: 2014-11-17 11:47+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-11-15 05:43+0000\n"
+"X-Launchpad-Export-Date: 2014-11-18 05:34+0000\n"
 "X-Generator: Launchpad (build 17241)\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -2630,7 +2630,7 @@ msgstr "Wczytaj tę grę"
 
 #: ../../src/ui_fsmenu/loadgame.cc:131
 msgid "The map that this game is based on"
-msgstr "Mapa gry"
+msgstr "Mapa, na której toczy się ta gra"
 
 #: ../../src/ui_fsmenu/loadgame.cc:132
 msgid "Delete this game"
@@ -2642,25 +2642,25 @@ msgstr "Zapisz datę"
 
 #: ../../src/ui_fsmenu/loadgame.cc:141
 msgid "The date this game was saved"
-msgstr "Data zapisu gry"
+msgstr "Data zapisu tej gry"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load.
 #. * TRANSLATORS: %s is a list of game modes.
 #: ../../src/ui_fsmenu/loadgame.cc:158
 #, c-format
 msgid "Game Mode: %s."
-msgstr ""
+msgstr "Tryb gry: %s."
 
 #: ../../src/ui_fsmenu/loadgame.cc:161
 msgid "Numbers are the number of players."
-msgstr ""
+msgstr "Liczby oznaczają liczby graczy."
 
 #. * TRANSLATORS: Game Mode table column when choosing a game/replay to load.
 #. * TRANSLATORS: Keep this to 5 letters maximum.
 #. * TRANSLATORS: A tooltip will explain if you need to use an abbreviation.
 #: ../../src/ui_fsmenu/loadgame.cc:167
 msgid "Mode"
-msgstr ""
+msgstr "Tryb"
 
 #: ../../src/ui_fsmenu/loadgame.cc:171 ../../src/ui_fsmenu/mapselect.cc:106
 msgid "Map Name"
@@ -2668,35 +2668,35 @@ msgstr "Nazwa mapy"
 
 #: ../../src/ui_fsmenu/loadgame.cc:171
 msgid "The name of the map that was played"
-msgstr ""
+msgstr "Nazwa mapy, na której toczyła się ta gra"
 
 #: ../../src/ui_fsmenu/loadgame.cc:175
 msgid "Filename"
-msgstr ""
+msgstr "Nazwa pliku"
 
 #: ../../src/ui_fsmenu/loadgame.cc:175
 msgid "The filename the game was saved under"
-msgstr ""
+msgstr "Nazwa, pod którą zapisana została ta gra"
 
 #: ../../src/ui_fsmenu/loadgame.cc:228
 msgid "Save Date:"
-msgstr ""
+msgstr "Data zapisu:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:237 ../../src/ui_fsmenu/loadgame.cc:363
 msgid "Filename:"
-msgstr ""
+msgstr "Nazwa pliku:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:241
 msgid "Do you really want to delete this replay?"
-msgstr ""
+msgstr "Czy na pewno chcesz usunąć tę powtórkę?"
 
 #: ../../src/ui_fsmenu/loadgame.cc:244
 msgid "Do you really want to delete this game?"
-msgstr ""
+msgstr "Czy na pewno chcesz usunąć tę grę?"
 
 #: ../../src/ui_fsmenu/loadgame.cc:248
 msgid "Confirm deleting file"
-msgstr ""
+msgstr "Potwierdź usunięcie pliku"
 
 #: ../../src/ui_fsmenu/loadgame.cc:280
 msgid "Gametime:"
@@ -2704,25 +2704,25 @@ msgstr "Czas gry:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:282
 msgid "Win Condition:"
-msgstr ""
+msgstr "Warunek zwycięstwa:"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay
 #. * TRANSLATORS: hour:minute
 #: ../../src/ui_fsmenu/loadgame.cc:471
 msgid "Today, %1%:%2%"
-msgstr ""
+msgstr "Dzisiaj, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay
 #. * TRANSLATORS: hour:minute
 #: ../../src/ui_fsmenu/loadgame.cc:484
 msgid "Yesterday, %1%:%2%"
-msgstr ""
+msgstr "Wczoraj, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay
 #. * TRANSLATORS: month day, year
 #: ../../src/ui_fsmenu/loadgame.cc:490
 msgid "%2% %1%, %3%"
-msgstr ""
+msgstr "%1% %2%, %3%"
 
 #. * TRANSLATORS: "Single Player" entry in the Game Mode table column.
 #. * TRANSLATORS: "Keep this to 6 letters maximum.
@@ -2730,7 +2730,7 @@ msgstr ""
 #. * TRANSLATORS: Make sure that this translation is consistent with the tooltip.
 #: ../../src/ui_fsmenu/loadgame.cc:516
 msgid "SP"
-msgstr ""
+msgstr "1 gr."
 
 #. * TRANSLATORS: "Multiplayer Host" entry in the Game Mode table column.
 #. * TRANSLATORS: "Keep this to 2 letters maximum.
@@ -2739,7 +2739,7 @@ msgstr ""
 #. * TRANSLATORS: %1% is the number of players
 #: ../../src/ui_fsmenu/loadgame.cc:524
 msgid "H (%1%)"
-msgstr ""
+msgstr "H(%1%)"
 
 #. * TRANSLATORS: "Multiplayer" entry in the Game Mode table column.
 #. * TRANSLATORS: "Keep this to 2 letters maximum.
@@ -2748,12 +2748,12 @@ msgstr ""
 #. * TRANSLATORS: %1% is the number of players
 #: ../../src/ui_fsmenu/loadgame.cc:533
 msgid "MP (%1%)"
-msgstr ""
+msgstr "WG(%1%)"
 
 #. * TRANSLATORS: Used in filenames for loading games
 #: ../../src/ui_fsmenu/loadgame.cc:546
 msgid "Autosave: %1%"
-msgstr ""
+msgstr "Autozapis: %1%"
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be loaded
 #: ../../src/ui_fsmenu/loadgame.cc:557
@@ -2761,17 +2761,19 @@ msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
 msgstr ""
+"Nie można wczytać pliku, gdyż jest on w złym formacie. Możliwe, że został on "
+"utworzony przez starszą wersję Widelands."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
 #: ../../src/ui_fsmenu/loadgame.cc:560
 msgid "Error message:"
-msgstr ""
+msgstr "Komunikat błędu:"
 
 #. * TRANSLATORS: Prefix for incompatible files in load game screens
 #: ../../src/ui_fsmenu/loadgame.cc:573 ../../src/ui_fsmenu/loadgame.cc:575
 #, c-format
 msgid "Incompatible: %s"
-msgstr ""
+msgstr "Niekompatybilny: %s"
 
 #: ../../src/ui_fsmenu/main.cc:40
 msgid "Play Tutorial"
@@ -2821,32 +2823,32 @@ msgstr "Wybierz mapę"
 
 #: ../../src/ui_fsmenu/mapselect.cc:89
 msgid "Return to the editor menu"
-msgstr ""
+msgstr "Powrót do menu edytora"
 
 #: ../../src/ui_fsmenu/mapselect.cc:92
 msgid "Return to the multiplayer game setup"
-msgstr ""
+msgstr "Powrót do ustawień gry dla wielu graczy"
 
 #: ../../src/ui_fsmenu/mapselect.cc:105
 msgid "Number of players"
-msgstr ""
+msgstr "Liczba graczy"
 
 #. * TRANSLATORS: Column title for number of players in map list
 #: ../../src/ui_fsmenu/mapselect.cc:105
 msgid "Pl."
-msgstr ""
+msgstr "Gr."
 
 #: ../../src/ui_fsmenu/mapselect.cc:106
 msgid "The name of the map or scenario"
-msgstr ""
+msgstr "Nazwa mapy lub scenariusza"
 
 #: ../../src/ui_fsmenu/mapselect.cc:108
 msgid "Size"
-msgstr ""
+msgstr "Rozmiar"
 
 #: ../../src/ui_fsmenu/mapselect.cc:108
 msgid "The size of the map (Width x Height)"
-msgstr ""
+msgstr "Rozmiar mapy (szerokość x wysokość)"
 
 #: ../../src/ui_fsmenu/mapselect.cc:136
 msgid "Show all maps"
@@ -2855,11 +2857,11 @@ msgstr "Pokazuj wszystkie mapy"
 #. * TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated.
 #: ../../src/ui_fsmenu/mapselect.cc:143
 msgid "Show original map names"
-msgstr ""
+msgstr "Pokazuj oryginalne nazwy map"
 
 #: ../../src/ui_fsmenu/mapselect.cc:152
 msgid "Official"
-msgstr ""
+msgstr "Oficjalne"
 
 #: ../../src/ui_fsmenu/mapselect.cc:153
 msgid "Unbalanced"
@@ -2867,7 +2869,7 @@ msgstr "Niezrównoważona"
 
 #: ../../src/ui_fsmenu/mapselect.cc:154
 msgid "Seafaring"
-msgstr ""
+msgstr "Z żeglarstwem"
 
 #: ../../src/ui_fsmenu/mapselect.cc:161
 msgid "Free for all"
@@ -2894,53 +2896,54 @@ msgstr "Zespoły czteroosobowe"
 #: ../../src/ui_fsmenu/mapselect.cc:306
 #, c-format
 msgid "The name of this map in your language: %s"
-msgstr ""
+msgstr "Nazwa mapy w twoim języku: %s"
 
 #. * TRANSLATORS: Tooltip in map description when translated map names are being displayed.
 #. * TRANSLATORS: %s is the English name of the map.
 #: ../../src/ui_fsmenu/mapselect.cc:312
 #, c-format
 msgid "The original name of this map: %s"
-msgstr ""
+msgstr "Oryginalna nazwa mapy: %s"
 
 #: ../../src/ui_fsmenu/mapselect.cc:316
 msgid "The name of this map"
-msgstr ""
+msgstr "Nazwa tej mapy"
 
 #: ../../src/ui_fsmenu/mapselect.cc:319
 msgid "The designer of this map"
 msgid_plural "The designers of this map"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Projektant tej mapy"
+msgstr[1] "Projektanci tej mapy"
+msgstr[2] "Projektanci tej mapy"
 
 #: ../../src/ui_fsmenu/mapselect.cc:329
 msgid "Edit this map"
-msgstr ""
+msgstr "Edytuj tę mapę"
 
 #: ../../src/ui_fsmenu/mapselect.cc:329
 msgid "Play this map"
-msgstr ""
+msgstr "Zagraj na tej mapie"
 
 #: ../../src/ui_fsmenu/mapselect.cc:332
 msgid "Directory:"
-msgstr ""
+msgstr "Katalog:"
 
 #: ../../src/ui_fsmenu/mapselect.cc:334
 msgid "The name of this directory"
-msgstr ""
+msgstr "Nazwa tego katalogu"
 
 #: ../../src/ui_fsmenu/mapselect.cc:340
 msgid "Open this directory"
-msgstr ""
+msgstr "Otwórz ten katalog"
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
 #: ../../src/ui_fsmenu/mapselect.cc:441
 msgid "Multiplayer Scenarios"
-msgstr ""
+msgstr "Scenariusze dla wielu graczy"
 
 #: ../../src/ui_fsmenu/mapselect.cc:583
 msgid "Nobody"
-msgstr ""
+msgstr "Nikt"
 
 #: ../../src/ui_fsmenu/mapselect.cc:584
 msgid ""
@@ -3182,7 +3185,7 @@ msgstr "Wczytaj grę"
 #. * TRANSLATORS: Label for the list of suggested teams when choosing a map
 #: ../../src/ui_fsmenu/suggested_teams_box.cc:87
 msgid "Suggested Teams:"
-msgstr ""
+msgstr "Sugerowane drużyny:"
 
 #: ../../src/wlapplication.cc:1075
 msgid ""
