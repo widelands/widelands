@@ -314,11 +314,11 @@ void set_locale(std::string name) {
 	if (!textdomains.empty()) {
 		char const * const domain = textdomains.back().first.c_str();
 
-		bind_textdomain_codeset (domain, "UTF-8");
+		bind_textdomain_codeset(domain, "UTF-8");
 		bindtextdomain(domain, textdomains.back().second.c_str());
 		textdomain(domain);
 	}
-	LocaleFonts::get()->set_fontset(LocaleFonts::get()->parse_font_for_locale(name));
+	LocaleFonts::get()->set_fontset();
 }
 
 const std::string & get_locale() {return locale;}
@@ -358,17 +358,14 @@ std::string localize_item_list(const std::vector<std::string>& items, Concatenat
 }
 
 
-bool LocaleFonts::m_instance_flag = false;
+// The singleton instance of LocaleFonts
 LocaleFonts* LocaleFonts::m_singleton = nullptr;
 
 LocaleFonts* LocaleFonts::get() {
-	if (!m_instance_flag) {
+	if (m_singleton == nullptr) {
 		m_singleton = new LocaleFonts();
-		m_instance_flag = true;
-		return m_singleton;
-	} else {
-		return m_singleton;
 	}
+	return m_singleton;
 }
 
 

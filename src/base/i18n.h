@@ -64,7 +64,7 @@ std::string localize_item_list(const std::vector<std::string>& items, Concatenat
 // Contains font information for a locale
 struct FontSet {
 public:
-	// Wiriting diection of a script
+	// Writing diection of a script
 	enum class Direction: uint8_t {
 		kLeftToRight,
 		kRightToLeft
@@ -141,26 +141,33 @@ private:
 };
 
 
+/// Singleton object that contains the FontSet for the currently active locale.
+/// It also has a parse function to get a FontSet for a locale that isn't currently active.
 class LocaleFonts {
 public:
-	static LocaleFonts* get();
-	~LocaleFonts() {
-		m_instance_flag = false;
-	}
 
+	/// Returns the one existing instance of this object.
+	/// Creates a new instance if none exists yet.
+	static LocaleFonts* get();
+
+	/// Parses font information for the given locale from Lua files.
+	/// Each locale in i18n/locales/ISO.lua defines which fontset to use.
+	/// The fontset definitions are in i18n/fonts
 	i18n::FontSet* parse_font_for_locale(const std::string& locale);
+
+	/// Returns the FontSet for the currently active locale
 	const i18n::FontSet& get_fontset() const {return *m_fontset;}
-	void set_fontset(i18n::FontSet* fontset) {
-		m_fontset = fontset;
+
+	/// Sets the FontSet for the currently active locale.
+	void set_fontset() {
+		m_fontset = parse_font_for_locale(get_locale());
 	}
 
 private:
-	 static bool m_instance_flag;
 	 static LocaleFonts* m_singleton;
 	 LocaleFonts() {}
 
-	 i18n::FontSet* m_fontset;
-
+	 i18n::FontSet* m_fontset; // The currently active FontSet
 };
 
 }

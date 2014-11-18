@@ -43,6 +43,7 @@
 
 namespace {
 
+// Data model for the entries in the language selection list.
 struct LanguageEntry {
 	LanguageEntry(const std::string& init_localename,
 					  const std::string& init_descname,
@@ -57,10 +58,10 @@ struct LanguageEntry {
 		return sortname < other.sortname;
 	}
 
-	std::string localename;
-	std::string descname;
-	std::string sortname;
-	std::string fontname;
+	std::string localename; // ISO code for the locale
+	std::string descname;   // Native language name
+	std::string sortname;   // ASCII Language name used for sorting
+	std::string fontname;   // Name of the font with which the language name is displayed.
 };
 
 }
@@ -378,6 +379,7 @@ void FullscreenMenuOptions::advanced_options() {
 
 void FullscreenMenuOptions::add_languages_to_list(const std::string& current_locale) {
 
+	// We want these two entries on top - the most likely user's choice and the default.
 	m_language_list.add(_("Try system language"), "", nullptr, current_locale == "");
 	m_language_list.add(_("English"), "en", nullptr, current_locale == "en");
 

@@ -143,6 +143,8 @@ private:
 	void update_sb_autosave_unit();
 	void update_sb_remove_replays_unit();
 	void advanced_options();
+
+	// Fills the language selection list
 	void add_languages_to_list(const std::string& current_locale);
 
 	class ScreenResolution {

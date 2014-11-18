@@ -31,7 +31,6 @@
 #include <stdexcept>
 #include <string>
 
-// NOCOM #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 #ifdef __APPLE__
 #include <mach-o/dyld.h>
