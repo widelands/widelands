@@ -220,7 +220,7 @@ DefaultAI::~DefaultAI() {
  */
 void DefaultAI::think() {
 
-	if (tribe_ == nullptr || player_ == nullptr) {
+	if (tribe_ == nullptr) {
 		late_initialization();
 	}
 
