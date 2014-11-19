@@ -139,7 +139,7 @@ private:
 
 	Widelands::Coords coords_unhash(uint32_t hash) {
 		Widelands::Coords coords;
-		coords.x = hash >> 16;  // NOCOM cast this???
+		coords.x = hash >> 16;  // is cast needed here???
 		coords.y = hash;
 		return coords;
 	}
@@ -270,7 +270,7 @@ private:
 	// it decreases with failed scans
 	int32_t spots_;  // sum of buildable fields
 
-	enum { REPRIORITIZE, STOPSHIPYARD, STARTSHIPYARD };
+	enum {REPRIORITIZE, STOPSHIPYARD, STARTSHIPYARD};
 	std::vector<int16_t> marineTaskQueue_;
 
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldPossession>>

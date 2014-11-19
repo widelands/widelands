@@ -155,7 +155,7 @@ struct NearFlag {
 		return cost_ > f.cost_;
 	}
 
-	bool operator==(Flag const* const f) const {
+	bool operator == (Flag const* const f) const {
 		return flag == f;
 	}
 };
@@ -394,7 +394,6 @@ struct ShipObserver {
 	bool island_circ_direction = true;  // a ship circumvents all island in the same direction
 	bool waiting_for_command_ = false;
 	int32_t last_command_time = 0;
-	
 };
 
 struct WareObserver {

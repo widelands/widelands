@@ -51,7 +51,7 @@
 
 namespace Widelands {
 
-namespace  {
+namespace {
 
 static const uint32_t WORKER_WITHOUT_COST_SPAWN_INTERVAL = 2500;
 
@@ -69,19 +69,17 @@ void remove_no_longer_existing_workers(Game& game, std::vector<Worker*>* workers
 
 }  // namespace
 
-WarehouseSupply::~WarehouseSupply()
-{
+WarehouseSupply::~WarehouseSupply() {
 	if (m_economy) {
-		log
-			("WarehouseSupply::~WarehouseSupply: Warehouse %u still belongs to "
-			 "an economy",
-			 m_warehouse->serial());
+		log("WarehouseSupply::~WarehouseSupply: Warehouse %u still belongs to "
+		    "an economy",
+		    m_warehouse->serial());
 		set_economy(nullptr);
 	}
 
 	// We're removed from the Economy. Therefore, the wares can simply
 	// be cleared out. The global inventory will be okay.
-	m_wares  .clear();
+	m_wares.clear();
 	m_workers.clear();
 }
 
@@ -97,10 +95,8 @@ void WarehouseSupply::set_nrworkers(WareIndex const i) {
 	m_workers.set_nrwares(i);
 }
 
-
 /// Add and remove our wares and the Supply to the economies as necessary.
-void WarehouseSupply::set_economy(Economy * const e)
-{
+void WarehouseSupply::set_economy(Economy* const e) {
 	if (e == m_economy)
 		return;
 
@@ -127,87 +123,74 @@ void WarehouseSupply::set_economy(Economy * const e)
 	}
 }
 
-
 /// Add wares and update the economy.
-void WarehouseSupply::add_wares(WareIndex const id, uint32_t const count)
-{
+void WarehouseSupply::add_wares(WareIndex const id, uint32_t const count) {
 	if (!count)
 		return;
 
-	if (m_economy) // No economies in the editor
+	if (m_economy)  // No economies in the editor
 		m_economy->add_wares(id, count);
 	m_wares.add(id, count);
 }
 
-
 /// Remove wares and update the economy.
-void WarehouseSupply::remove_wares(WareIndex const id, uint32_t const count)
-{
+void WarehouseSupply::remove_wares(WareIndex const id, uint32_t const count) {
 	if (!count)
 		return;
 
 	m_wares.remove(id, count);
-	if (m_economy) // No economies in the editor
+	if (m_economy)  // No economies in the editor
 		m_economy->remove_wares(id, count);
 }
 
-
 /// Add workers and update the economy.
-void WarehouseSupply::add_workers(WareIndex const id, uint32_t const count)
-{
+void WarehouseSupply::add_workers(WareIndex const id, uint32_t const count) {
 	if (!count)
 		return;
 
-	if (m_economy) // No economies in the editor
+	if (m_economy)  // No economies in the editor
 		m_economy->add_workers(id, count);
 	m_workers.add(id, count);
 }
-
 
 /**
  * Remove workers and update the economy.
  * Comments see add_workers
  */
-void WarehouseSupply::remove_workers(WareIndex const id, uint32_t const count)
-{
+void WarehouseSupply::remove_workers(WareIndex const id, uint32_t const count) {
 	if (!count)
 		return;
 
 	m_workers.remove(id, count);
-	if (m_economy) // No economies in the editor
+	if (m_economy)  // No economies in the editor
 		m_economy->remove_workers(id, count);
 }
 
 /// Return the position of the Supply, i.e. the owning Warehouse.
-PlayerImmovable * WarehouseSupply::get_position(Game &) {return m_warehouse;}
-
+PlayerImmovable* WarehouseSupply::get_position(Game&) {
+	return m_warehouse;
+}
 
 /// Warehouse supplies are never active.
-bool WarehouseSupply::is_active() const {return false;}
+bool WarehouseSupply::is_active() const {
+	return false;
+}
 
-bool WarehouseSupply::has_storage() const
-{
+bool WarehouseSupply::has_storage() const {
 	return true;
 }
 
-void WarehouseSupply::get_ware_type(WareWorker & /* type */, WareIndex & /* ware */) const
-{
-	throw wexception
-		("WarehouseSupply::get_ware_type: calling this is nonsensical");
+void WarehouseSupply::get_ware_type(WareWorker& /* type */, WareIndex& /* ware */) const {
+	throw wexception("WarehouseSupply::get_ware_type: calling this is nonsensical");
 }
 
-void WarehouseSupply::send_to_storage(Game &, Warehouse * /* wh */)
-{
+void WarehouseSupply::send_to_storage(Game&, Warehouse* /* wh */) {
 	throw wexception("WarehouseSupply::send_to_storage: should never be called");
 }
 
-uint32_t WarehouseSupply::nr_supplies
-	(const Game & game, const Request & req) const
-{
+uint32_t WarehouseSupply::nr_supplies(const Game& game, const Request& req) const {
 	if (req.get_type() == wwWORKER)
-		return
-			m_warehouse->count_workers
-				(game, req.get_index(), req.get_requirements());
+		return m_warehouse->count_workers(game, req.get_index(), req.get_requirements());
 
 	//  Calculate how many wares can be sent out - it might be that we need them
 	// ourselves. E.g. for hiring new soldiers.
@@ -217,18 +200,16 @@ uint32_t WarehouseSupply::nr_supplies
 	// of *this* warehouse + 1 (+1 is important, as else the ware would directly
 	// be taken back to the warehouse as the request of the warehouse would be
 	// highered and would have the same value as the original request)
-	int32_t const y =
-		x + (req.get_priority(0) / 100)
-		- (m_warehouse->get_priority(wwWARE, req.get_index()) / 100) - 1;
+	int32_t const y = x + (req.get_priority(0) / 100) -
+	                  (m_warehouse->get_priority(wwWARE, req.get_index()) / 100) - 1;
 	// But the number should never be higher than the number of wares available
 	if (y > x)
 		return x;
 	return (x > 0) ? x : 0;
 }
 
-
 /// Launch a ware.
-WareInstance & WarehouseSupply::launch_ware(Game & game, const Request & req) {
+WareInstance& WarehouseSupply::launch_ware(Game& game, const Request& req) {
 	if (req.get_type() != wwWARE)
 		throw wexception("WarehouseSupply::launch_ware: called for non-ware request");
 	if (!m_wares.stock(req.get_index()))
@@ -238,13 +219,9 @@ WareInstance & WarehouseSupply::launch_ware(Game & game, const Request & req) {
 }
 
 /// Launch a ware as worker.
-Worker & WarehouseSupply::launch_worker(Game & game, const Request & req)
-{
-	return
-		m_warehouse->launch_worker
-			(game, req.get_index(), req.get_requirements());
+Worker& WarehouseSupply::launch_worker(Game& game, const Request& req) {
+	return m_warehouse->launch_worker(game, req.get_index(), req.get_requirements());
 }
-
 
 /*
 ==============================
@@ -252,15 +229,16 @@ Warehouse Building
 ==============================
 */
 
-
 /// Warehouse Descr
-WarehouseDescr::WarehouseDescr
-	(char const* const _name, char const* const _descname,
-	 const std::string& directory, Profile& prof, Section& global_s, const TribeDescr& _tribe)
-	: BuildingDescr(MapObjectType::WAREHOUSE, _name, _descname, directory, prof, global_s, _tribe),
-	  m_conquers         (0),
-	  m_heal_per_second  (0)
-{
+WarehouseDescr::WarehouseDescr(char const* const _name,
+                               char const* const _descname,
+                               const std::string& directory,
+                               Profile& prof,
+                               Section& global_s,
+                               const TribeDescr& _tribe)
+   : BuildingDescr(MapObjectType::WAREHOUSE, _name, _descname, directory, prof, global_s, _tribe),
+     m_conquers(0),
+     m_heal_per_second(0) {
 	m_heal_per_second = global_s.get_safe_int("heal_per_second");
 	if ((m_conquers = prof.get_safe_section("global").get_positive("conquers", 0)))
 		m_workarea_info[m_conquers].insert(descname() + " conquer");
@@ -272,25 +250,21 @@ IMPLEMENTATION
 ==============================
 */
 
-Warehouse::Warehouse(const WarehouseDescr & warehouse_descr) :
-	Building(warehouse_descr),
-	m_supply(new WarehouseSupply(this)),
-	m_next_military_act(0),
-	m_portdock(nullptr)
-{
+Warehouse::Warehouse(const WarehouseDescr& warehouse_descr)
+   : Building(warehouse_descr),
+     m_supply(new WarehouseSupply(this)),
+     m_next_military_act(0),
+     m_portdock(nullptr) {
 	uint8_t nr_worker_types_without_cost =
-		warehouse_descr.tribe().worker_types_without_cost().size();
-	m_next_worker_without_cost_spawn =
-		new uint32_t[nr_worker_types_without_cost];
+	   warehouse_descr.tribe().worker_types_without_cost().size();
+	m_next_worker_without_cost_spawn = new uint32_t[nr_worker_types_without_cost];
 	for (int i = 0; i < nr_worker_types_without_cost; ++i) {
 		m_next_worker_without_cost_spawn[i] = never();
 	}
 	m_next_stock_remove_act = 0;
 }
 
-
-Warehouse::~Warehouse()
-{
+Warehouse::~Warehouse() {
 	delete m_supply;
 	delete[] m_next_worker_without_cost_spawn;
 }
@@ -299,22 +273,19 @@ Warehouse::~Warehouse()
  * Try to bring the given \ref PlannedWorkers up to date with our game data.
  * Return \c false if \p pw cannot be salvaged.
  */
-bool Warehouse::_load_finish_planned_worker(PlannedWorkers & pw)
-{
+bool Warehouse::_load_finish_planned_worker(PlannedWorkers& pw) {
 	if (pw.index == INVALID_INDEX || !(pw.index < m_supply->get_workers().get_nrwareids()))
 		return false;
 
-	const WorkerDescr * w_desc = descr().tribe().get_worker_descr(pw.index);
+	const WorkerDescr* w_desc = descr().tribe().get_worker_descr(pw.index);
 	if (!w_desc || !w_desc->is_buildable())
 		return false;
 
-	const WorkerDescr::Buildcost & cost = w_desc->buildcost();
+	const WorkerDescr::Buildcost& cost = w_desc->buildcost();
 	uint32_t idx = 0;
 
-	for
-		(WorkerDescr::Buildcost::const_iterator cost_it = cost.begin();
-		 cost_it != cost.end(); ++cost_it, ++idx)
-	{
+	for (WorkerDescr::Buildcost::const_iterator cost_it = cost.begin(); cost_it != cost.end();
+	     ++cost_it, ++idx) {
 		WareWorker type;
 		WareIndex ware;
 		ware = descr().tribe().ware_index(cost_it->first);
@@ -326,13 +297,10 @@ bool Warehouse::_load_finish_planned_worker(PlannedWorkers & pw)
 			return false;
 
 		if (idx < pw.requests.size()) {
-			if
-				(pw.requests[idx]->get_type() == type &&
-				 pw.requests[idx]->get_index() == ware)
+			if (pw.requests[idx]->get_type() == type && pw.requests[idx]->get_index() == ware)
 				continue;
 
-			std::vector<Request *>::iterator req_it =
-				pw.requests.begin() + idx + 1;
+			std::vector<Request*>::iterator req_it = pw.requests.begin() + idx + 1;
 			while (req_it != pw.requests.end()) {
 				if ((*req_it)->get_type() == type && (*req_it)->get_index() == ware)
 					break;
@@ -345,19 +313,16 @@ bool Warehouse::_load_finish_planned_worker(PlannedWorkers & pw)
 			}
 		}
 
-		log
-			("_load_finish_planned_worker: old savegame: "
-			 "need to create new request for '%s'\n",
-			 cost_it->first.c_str());
-		pw.requests.insert
-			(pw.requests.begin() + idx,
-			 new Request(*this, ware, &Warehouse::request_cb, type));
+		log("_load_finish_planned_worker: old savegame: "
+		    "need to create new request for '%s'\n",
+		    cost_it->first.c_str());
+		pw.requests.insert(
+		   pw.requests.begin() + idx, new Request(*this, ware, &Warehouse::request_cb, type));
 	}
 
 	while (pw.requests.size() > idx) {
-		log
-			("_load_finish_planned_worker: old savegame: "
-			 "removing outdated request.\n");
+		log("_load_finish_planned_worker: old savegame: "
+		    "removing outdated request.\n");
 		delete pw.requests.back();
 		pw.requests.pop_back();
 	}
@@ -365,32 +330,30 @@ bool Warehouse::_load_finish_planned_worker(PlannedWorkers & pw)
 	return true;
 }
 
-void Warehouse::load_finish(EditorGameBase & egbase) {
+void Warehouse::load_finish(EditorGameBase& egbase) {
 	Building::load_finish(egbase);
 
 	uint32_t next_spawn = never();
-	const std::vector<WareIndex> & worker_types_without_cost =
-		descr().tribe().worker_types_without_cost();
+	const std::vector<WareIndex>& worker_types_without_cost =
+	   descr().tribe().worker_types_without_cost();
 	for (uint8_t i = worker_types_without_cost.size(); i;) {
 		WareIndex const worker_index = worker_types_without_cost.at(--i);
-		if
-			(owner().is_worker_type_allowed(worker_index) &&
-			 m_next_worker_without_cost_spawn[i] == static_cast<uint32_t>(never()))
-		{
+		if (owner().is_worker_type_allowed(worker_index) &&
+		    m_next_worker_without_cost_spawn[i] == static_cast<uint32_t>(never())) {
 			if (next_spawn == static_cast<uint32_t>(never()))
-				next_spawn =
-					schedule_act
-						(ref_cast<Game, EditorGameBase>(egbase),
-						 WORKER_WITHOUT_COST_SPAWN_INTERVAL);
+				next_spawn = schedule_act(
+				   ref_cast<Game, EditorGameBase>(egbase), WORKER_WITHOUT_COST_SPAWN_INTERVAL);
 			m_next_worker_without_cost_spawn[i] = next_spawn;
-			log
-				("WARNING: player %u is allowed to create worker type %s but his "
-				 "%s %u at (%i, %i) does not have a next_spawn time set for that "
-				 "worker type; setting it to %u\n",
-				 owner().player_number(),
-				 descr().tribe().get_worker_descr(worker_index)->descname().c_str(),
-				 descr().descname().c_str(), serial(), get_position().x, get_position().y,
-				 next_spawn);
+			log("WARNING: player %u is allowed to create worker type %s but his "
+			    "%s %u at (%i, %i) does not have a next_spawn time set for that "
+			    "worker type; setting it to %u\n",
+			    owner().player_number(),
+			    descr().tribe().get_worker_descr(worker_index)->descname().c_str(),
+			    descr().descname().c_str(),
+			    serial(),
+			    get_position().x,
+			    get_position().y,
+			    next_spawn);
 		}
 	}
 
@@ -408,13 +371,12 @@ void Warehouse::load_finish(EditorGameBase & egbase) {
 	}
 }
 
-void Warehouse::init(EditorGameBase & egbase)
-{
+void Warehouse::init(EditorGameBase& egbase) {
 	Building::init(egbase);
 
-	WareIndex const nr_wares   = descr().tribe().get_nrwares  ();
+	WareIndex const nr_wares = descr().tribe().get_nrwares();
 	WareIndex const nr_workers = descr().tribe().get_nrworkers();
-	m_supply->set_nrwares  (nr_wares);
+	m_supply->set_nrwares(nr_wares);
 	m_supply->set_nrworkers(nr_workers);
 
 	m_ware_policy.resize(nr_wares, SP_Normal);
@@ -423,17 +385,15 @@ void Warehouse::init(EditorGameBase & egbase)
 	// Even though technically, a warehouse might be completely empty,
 	// we let warehouse see always for simplicity's sake (since there's
 	// almost always going to be a carrier inside, that shouldn't hurt).
-	Player & player = owner();
+	Player& player = owner();
 	if (upcast(Game, game, &egbase)) {
-		player.see_area
-			(Area<FCoords>
-			 (egbase.map().get_fcoords(get_position()), descr().vision_range()));
+		player.see_area(
+		   Area<FCoords>(egbase.map().get_fcoords(get_position()), descr().vision_range()));
 
 		{
-			uint32_t const act_time = schedule_act
-					(*game, WORKER_WITHOUT_COST_SPAWN_INTERVAL);
-			const std::vector<WareIndex> & worker_types_without_cost =
-				descr().tribe().worker_types_without_cost();
+			uint32_t const act_time = schedule_act(*game, WORKER_WITHOUT_COST_SPAWN_INTERVAL);
+			const std::vector<WareIndex>& worker_types_without_cost =
+			   descr().tribe().worker_types_without_cost();
 
 			for (size_t i = 0; i < worker_types_without_cost.size(); ++i) {
 				if (owner().is_worker_type_allowed(worker_types_without_cost.at(i))) {
@@ -444,30 +404,25 @@ void Warehouse::init(EditorGameBase & egbase)
 		// m_next_military_act is not touched in the loading code. Is only needed
 		// if there warehous is created in the game?  I assume it's for the
 		// conquer_radius thing
-		m_next_military_act =
-			schedule_act
-				(ref_cast<Game, EditorGameBase>(egbase), 1000);
+		m_next_military_act = schedule_act(ref_cast<Game, EditorGameBase>(egbase), 1000);
 
-		m_next_stock_remove_act =
-			schedule_act
-				(ref_cast<Game, EditorGameBase>(egbase), 4000);
+		m_next_stock_remove_act = schedule_act(ref_cast<Game, EditorGameBase>(egbase), 4000);
 
-		log("Message: adding (wh) (%s) %i \n", to_string(descr().type()).c_str(), player.player_number());
-		send_message
-			(ref_cast<Game, EditorGameBase>(egbase),
-			 "warehouse",
-			 descr().descname(),
-			 (boost::format(_("A new %s was added to your economy."))
-			  % descr().descname().c_str()).str(),
-			 true);
-		}
+		log("Message: adding (wh) (%s) %i \n",
+		    to_string(descr().type()).c_str(),
+		    player.player_number());
+		send_message(ref_cast<Game, EditorGameBase>(egbase),
+		             "warehouse",
+		             descr().descname(),
+		             (boost::format(_("A new %s was added to your economy.")) %
+		              descr().descname().c_str()).str(),
+		             true);
+	}
 
 	if (uint32_t const conquer_radius = descr().get_conquers())
-		egbase.conquer_area
-			(PlayerArea<Area<FCoords> >
-			 	(player.player_number(),
-			 	 Area<FCoords>
-			 	 	(egbase.map().get_fcoords(get_position()), conquer_radius)));
+		egbase.conquer_area(PlayerArea<Area<FCoords>>(
+		   player.player_number(),
+		   Area<FCoords>(egbase.map().get_fcoords(get_position()), conquer_radius)));
 
 	if (descr().get_isport())
 		init_portdock(egbase);
@@ -477,22 +432,19 @@ void Warehouse::init(EditorGameBase & egbase)
  * Find a contiguous set of water fields close to the port for docking
  * and initialize the @ref PortDock instance.
  */
-void Warehouse::init_portdock(EditorGameBase & egbase)
-{
+void Warehouse::init_portdock(EditorGameBase& egbase) {
 	molog("Setting up port dock fields\n");
-	//printf("  Setting up port dock fields at %3dx%3d\n",
-	//get_position().x,get_position().y); //NOCOM
 
-	Map & map = egbase.map();
+	Map& map = egbase.map();
 	std::vector<Coords> dock = map.find_portdock(get_position());
 	if (dock.empty()) {
-		log("Attempting to setup port without neighboring water.\n");
-		printf ("  Attempting to setup port without neighboring water.\n");//NOCOM
+		log("Attempting to setup port without neighboring water (coords: %3dx%3d).\n",
+		    get_position().x,
+		    get_position().y);
 		return;
 	}
 
 	molog("Found %" PRIuS " fields for the dock\n", dock.size());
-	//printf("   ...found %" PRIuS " fields for the dock\n", dock.size()); //NOCOM
 
 	m_portdock = new PortDock(this);
 	m_portdock->set_owner(get_owner());
@@ -506,41 +458,33 @@ void Warehouse::init_portdock(EditorGameBase & egbase)
 		m_portdock->set_economy(get_economy());
 }
 
-void Warehouse::destroy(EditorGameBase & egbase)
-{
+void Warehouse::destroy(EditorGameBase& egbase) {
 	Building::destroy(egbase);
 }
 
-void Warehouse::restore_portdock_or_destroy(EditorGameBase & egbase) //NOCOM
-{
-	//re-init the portdock
+// if the port still exists and we are in game we first try to restore the portdock
+void Warehouse::restore_portdock_or_destroy(EditorGameBase& egbase) {
+	// re-init the portdock
 	Warehouse::init_portdock(egbase);
-	if (m_portdock) {
-		printf (" Succeded to restore portdock\n");
-	} else {
-		printf (" Failed to restore portdock, tearing down the warehouse\n");
+	if (!m_portdock) {
+		log(" Portdock lost, removing the port now (coords: %3dx%3d)\n",
+		    get_position().x,
+		    get_position().y);
 		Building::destroy(egbase);
 	}
 }
 
 /// Destroy the warehouse.
-void Warehouse::cleanup(EditorGameBase & egbase)
-{
-	
-	//storing object of the portdock if exists //NOCOM
-	PortDock * pd = nullptr; //NOCOM
-	
+void Warehouse::cleanup(EditorGameBase& egbase) {
+
+	// storing object of the portdock if exists
+	PortDock* pd = nullptr;
+
 	if (egbase.objects().object_still_available(m_portdock)) {
 		pd = m_portdock;
-		//m_portdock->remove(egbase);
 		m_portdock = nullptr;
-		printf ("  Warehouse::cleanup(): removing warehouse at %3dx%3d (with portdock)\n",
-		get_position().x,get_position().y); //NOCOM
-	} else {
-		printf ("  Warehouse::cleanup(): removing warehouse at %3dx%3d (without portdock)\n",
-		get_position().x,get_position().y); //NOCOM	
 	}
-	
+
 	// This will empty the stock and launch all workers including incorporated
 	// ones.
 	if (upcast(Game, game, &egbase)) {
@@ -562,36 +506,31 @@ void Warehouse::cleanup(EditorGameBase & egbase)
 
 	Map& map = egbase.map();
 	if (const uint32_t conquer_radius = descr().get_conquers())
-		egbase.unconquer_area
-			(PlayerArea<Area<FCoords> >
-			 	(owner().player_number(),
-			 	 Area<FCoords>(map.get_fcoords(get_position()), conquer_radius)),
-			 m_defeating_player);
+		egbase.unconquer_area(
+		   PlayerArea<Area<FCoords>>(owner().player_number(),
+		                             Area<FCoords>(map.get_fcoords(get_position()), conquer_radius)),
+		   m_defeating_player);
 
 	// Unsee the area that we started seeing in init()
-	Player & player = owner();
-	player.unsee_area
-			(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
+	Player& player = owner();
+	player.unsee_area(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
 
-	log("Message: removing %s (player %i)\n", to_string(descr().type()).c_str(), player.player_number());
-	send_message
-		(ref_cast<Game, EditorGameBase>(egbase),
-		 "warehouse",
-		 descr().descname(),
-		 (boost::format(_("A %s was destroyed."))
-		  % descr().descname().c_str()).str(),
-		 true);
+	log("Message: removing %s (player %i)\n",
+	    to_string(descr().type()).c_str(),
+	    player.player_number());
+	send_message(ref_cast<Game, EditorGameBase>(egbase),
+	             "warehouse",
+	             descr().descname(),
+	             (boost::format(_("A %s was destroyed.")) % descr().descname().c_str()).str(),
+	             true);
 
 	Building::cleanup(egbase);
-	
+
+	// if there was a portdock, removing it now
 	if (pd) {
-		printf (" Warehouse removed, removing portdock now now\n");
 		pd->remove(egbase);
 	}
-	
-
 }
-
 
 /// Act regularly to create workers of buildable types without cost. According
 /// to intelligence, this is some highly advanced technology. Not only do the
@@ -600,12 +539,11 @@ void Warehouse::cleanup(EditorGameBase & egbase)
 /// what the hell are they doing, killing useless tribesmen! The Borg? Or just
 /// like Soylent Green? Or maybe I should just stop writing comments that late
 /// at night ;-)
-void Warehouse::act(Game & game, uint32_t const data)
-{
+void Warehouse::act(Game& game, uint32_t const data) {
 	uint32_t const gametime = game.get_gametime();
 	{
-		const std::vector<WareIndex> & worker_types_without_cost =
-			owner().tribe().worker_types_without_cost();
+		const std::vector<WareIndex>& worker_types_without_cost =
+		   owner().tribe().worker_types_without_cost();
 		for (size_t i = worker_types_without_cost.size(); i;)
 			if (m_next_worker_without_cost_spawn[--i] <= gametime) {
 				WareIndex const id = worker_types_without_cost.at(i);
@@ -623,8 +561,7 @@ void Warehouse::act(Game & game, uint32_t const data)
 						remove_workers(id, 1);
 					}
 
-					m_next_worker_without_cost_spawn[i] =
-						schedule_act(game, tdelta);
+					m_next_worker_without_cost_spawn[i] = schedule_act(game, tdelta);
 				} else
 					m_next_worker_without_cost_spawn[i] = never();
 			}
@@ -635,19 +572,15 @@ void Warehouse::act(Game & game, uint32_t const data)
 		WareIndex const ware = descr().tribe().safe_worker_index("soldier");
 
 		if (m_incorporated_workers.count(ware)) {
-			WorkerList & soldiers = m_incorporated_workers[ware];
+			WorkerList& soldiers = m_incorporated_workers[ware];
 
 			uint32_t total_heal = descr().get_heal_per_second();
 			// Using an explicit iterator, as we plan to erase some
 			// of those guys
-			for
-				(WorkerList::iterator it = soldiers.begin();
-				 it != soldiers.end();
-				 ++it)
-			{
+			for (WorkerList::iterator it = soldiers.begin(); it != soldiers.end(); ++it) {
 				// This is a safe cast: we know only soldiers can land in this
 				// slot in the incorporated array
-				Soldier * soldier = static_cast<Soldier *>(*it);
+				Soldier* soldier = static_cast<Soldier*>(*it);
 
 				//  Soldier dead ...
 				if (!soldier || soldier->get_current_hitpoints() == 0) {
@@ -660,7 +593,6 @@ void Warehouse::act(Game & game, uint32_t const data)
 					soldier->heal(total_heal);
 					continue;
 				}
-
 			}
 		}
 		m_next_military_act = schedule_act(game, 1000);
@@ -681,11 +613,9 @@ void Warehouse::act(Game & game, uint32_t const data)
 	Building::act(game, data);
 }
 
-
 /// Transfer our registration to the new economy.
-void Warehouse::set_economy(Economy * const e)
-{
-	Economy * const old = get_economy();
+void Warehouse::set_economy(Economy* const e) {
+	Economy* const old = get_economy();
 
 	if (old == e)
 		return;
@@ -699,7 +629,7 @@ void Warehouse::set_economy(Economy * const e)
 	Building::set_economy(e);
 
 	for (const PlannedWorkers& pw : m_planned_workers) {
-		for (Request * req : pw.requests) {
+		for (Request* req : pw.requests) {
 			req->set_economy(e);
 		}
 	}
@@ -711,82 +641,62 @@ void Warehouse::set_economy(Economy * const e)
 		e->add_warehouse(*this);
 }
 
-
-const WareList & Warehouse::get_wares() const
-{
+const WareList& Warehouse::get_wares() const {
 	return m_supply->get_wares();
 }
 
-
-const WareList & Warehouse::get_workers() const
-{
+const WareList& Warehouse::get_workers() const {
 	return m_supply->get_workers();
 }
 
-PlayerImmovable::Workers Warehouse::get_incorporated_workers()
-{
+PlayerImmovable::Workers Warehouse::get_incorporated_workers() {
 	PlayerImmovable::Workers all_workers;
 
 	for (const std::pair<WareIndex, WorkerList>& worker_pair : m_incorporated_workers) {
-		for (Worker * worker : worker_pair.second) {
+		for (Worker* worker : worker_pair.second) {
 			all_workers.push_back(worker);
 		}
 	}
 	return all_workers;
 }
 
-
 /// Magically create wares in this warehouse. Updates the economy accordingly.
-void Warehouse::insert_wares(WareIndex const id, uint32_t const count)
-{
+void Warehouse::insert_wares(WareIndex const id, uint32_t const count) {
 	m_supply->add_wares(id, count);
 }
 
-
 /// Magically destroy wares.
-void Warehouse::remove_wares(WareIndex const id, uint32_t const count)
-{
+void Warehouse::remove_wares(WareIndex const id, uint32_t const count) {
 	m_supply->remove_wares(id, count);
 }
 
-
 /// Magically create workers in this warehouse. Updates the economy accordingly.
-void Warehouse::insert_workers(WareIndex const id, uint32_t const count)
-{
+void Warehouse::insert_workers(WareIndex const id, uint32_t const count) {
 	m_supply->add_workers(id, count);
 }
 
-
 /// Magically destroy workers.
-void Warehouse::remove_workers(WareIndex const id, uint32_t const count)
-{
+void Warehouse::remove_workers(WareIndex const id, uint32_t const count) {
 	m_supply->remove_workers(id, count);
 }
 
-
-
 /// Launch a carrier to fetch an ware from our flag.
-bool Warehouse::fetch_from_flag(Game & game)
-{
+bool Warehouse::fetch_from_flag(Game& game) {
 	WareIndex const carrierid = descr().tribe().safe_worker_index("carrier");
 
-	if (!m_supply->stock_workers(carrierid)) // XXX yep, let's cheat
+	if (!m_supply->stock_workers(carrierid))  // XXX yep, let's cheat
 		insert_workers(carrierid, 1);
 
-	launch_worker(game, carrierid, Requirements()).start_task_fetchfromflag
-		(game);
+	launch_worker(game, carrierid, Requirements()).start_task_fetchfromflag(game);
 
 	return true;
 }
-
 
 /**
  * \return the number of workers that we can launch satisfying the given
  * requirements.
  */
-uint32_t Warehouse::count_workers
-	(const Game & /* game */, WareIndex ware, const Requirements & req)
-{
+uint32_t Warehouse::count_workers(const Game& /* game */, WareIndex ware, const Requirements& req) {
 	uint32_t sum = 0;
 
 	do {
@@ -794,7 +704,7 @@ uint32_t Warehouse::count_workers
 
 		// NOTE: This code lies about the TrainingAttributes of non-instantiated workers.
 		if (m_incorporated_workers.count(ware)) {
-			for (Worker * worker : m_incorporated_workers[ware]) {
+			for (Worker* worker : m_incorporated_workers[ware]) {
 				if (!req.check(*worker)) {
 					//  This is one of the workers in our sum.
 					//  But he is too stupid for this job
@@ -811,9 +721,7 @@ uint32_t Warehouse::count_workers
 
 /// Start a worker of a given type. The worker will
 /// be assigned a job by the caller.
-Worker & Warehouse::launch_worker
-	(Game & game, WareIndex ware, const Requirements & req)
-{
+Worker& Warehouse::launch_worker(Game& game, WareIndex ware, const Requirements& req) {
 	do {
 		if (m_supply->stock_workers(ware)) {
 			uint32_t unincorporated = m_supply->stock_workers(ware);
@@ -826,15 +734,15 @@ Worker & Warehouse::launch_worker
 				remove_no_longer_existing_workers(game, &m_incorporated_workers[ware]);
 				WorkerList& incorporated_workers = m_incorporated_workers[ware];
 
-				for (std::vector<Worker *>::iterator worker_iter = incorporated_workers.begin();
-					 worker_iter != incorporated_workers.end(); ++worker_iter)
-				{
+				for (std::vector<Worker*>::iterator worker_iter = incorporated_workers.begin();
+				     worker_iter != incorporated_workers.end();
+				     ++worker_iter) {
 					Worker* worker = *worker_iter;
 					--unincorporated;
 
 					if (req.check(*worker)) {
-						worker->reset_tasks(game);  //  forget everything you did
-						worker->set_location(this); //  back in a economy
+						worker->reset_tasks(game);   //  forget everything you did
+						worker->set_location(this);  //  back in a economy
 						incorporated_workers.erase(worker_iter);
 
 						m_supply->remove_workers(ware, 1);
@@ -849,7 +757,7 @@ Worker & Warehouse::launch_worker
 				// Create a new one
 				// NOTE: This code lies about the TrainingAttributes of the new worker
 				m_supply->remove_workers(ware, 1);
-				const WorkerDescr & workerdescr = *descr().tribe().get_worker_descr(ware);
+				const WorkerDescr& workerdescr = *descr().tribe().get_worker_descr(ware);
 				return workerdescr.create(game, owner(), this, m_position);
 			}
 		}
@@ -862,13 +770,10 @@ Worker & Warehouse::launch_worker
 		}
 	} while (ware != INVALID_INDEX);
 
-	throw wexception
-		("Warehouse::launch_worker: worker does not actually exist");
+	throw wexception("Warehouse::launch_worker: worker does not actually exist");
 }
 
-
-void Warehouse::incorporate_worker(EditorGameBase & egbase, Worker* w)
-{
+void Warehouse::incorporate_worker(EditorGameBase& egbase, Worker* w) {
 	assert(w != nullptr);
 	assert(w->get_owner() == &owner());
 
@@ -894,10 +799,10 @@ void Warehouse::incorporate_worker(EditorGameBase & egbase, Worker* w)
 
 	// Incorporate the worker
 	if (!m_incorporated_workers.count(worker_index))
-		m_incorporated_workers[worker_index] = std::vector<Worker *>();
+		m_incorporated_workers[worker_index] = std::vector<Worker*>();
 	m_incorporated_workers[worker_index].push_back(w);
 
-	w->set_location(nullptr); //  no longer in an economy
+	w->set_location(nullptr);  //  no longer in an economy
 
 	if (upcast(Game, game, &egbase)) {
 		//  Bind the worker into this house, hide him on the map.
@@ -908,9 +813,9 @@ void Warehouse::incorporate_worker(EditorGameBase & egbase, Worker* w)
 
 /// Create an instance of a ware and make sure it gets
 /// carried out of the warehouse.
-WareInstance & Warehouse::launch_ware(Game & game, WareIndex const ware_index) {
+WareInstance& Warehouse::launch_ware(Game& game, WareIndex const ware_index) {
 	// Create the ware
-	WareInstance & ware = *new WareInstance(ware_index, descr().tribe().get_ware_descr(ware_index));
+	WareInstance& ware = *new WareInstance(ware_index, descr().tribe().get_ware_descr(ware_index));
 	ware.init(game);
 	do_launch_ware(game, ware);
 
@@ -919,15 +824,13 @@ WareInstance & Warehouse::launch_ware(Game & game, WareIndex const ware_index) {
 	return ware;
 }
 
-
 /// Get a carrier to actually move this ware out of the warehouse.
-void Warehouse::do_launch_ware(Game & game, WareInstance & ware)
-{
+void Warehouse::do_launch_ware(Game& game, WareInstance& ware) {
 	// Create a carrier
 	WareIndex const carrierid = descr().tribe().worker_index("carrier");
-	const WorkerDescr & workerdescr = *descr().tribe().get_worker_descr(carrierid);
+	const WorkerDescr& workerdescr = *descr().tribe().get_worker_descr(carrierid);
 
-	Worker & worker = workerdescr.create(game, owner(), this, m_position);
+	Worker& worker = workerdescr.create(game, owner(), this, m_position);
 
 	// Yup, this is cheating.
 	if (m_supply->stock_workers(carrierid))
@@ -937,23 +840,15 @@ void Warehouse::do_launch_ware(Game & game, WareInstance & ware)
 	worker.start_task_dropoff(game, ware);
 }
 
-
-void Warehouse::incorporate_ware(EditorGameBase & egbase, WareInstance* ware)
-{
+void Warehouse::incorporate_ware(EditorGameBase& egbase, WareInstance* ware) {
 	m_supply->add_wares(ware->descr_index(), 1);
 	ware->destroy(egbase);
 }
 
-
 /// Called when a transfer for one of the idle Requests completes.
-void Warehouse::request_cb
-	(Game            &       game,
-	 Request         &,
-	 WareIndex        const ware,
-	 Worker          * const w,
-	 PlayerImmovable &       target)
-{
-	Warehouse & wh = ref_cast<Warehouse, PlayerImmovable>(target);
+void Warehouse::request_cb(
+   Game& game, Request&, WareIndex const ware, Worker* const w, PlayerImmovable& target) {
+	Warehouse& wh = ref_cast<Warehouse, PlayerImmovable>(target);
 
 	if (w) {
 		w->schedule_incorporate(game);
@@ -970,38 +865,35 @@ void Warehouse::request_cb
 /**
  * Receive a ware from a transfer that was not associated to a \ref Request.
  */
-void Warehouse::receive_ware(Game & /* game */, WareIndex ware)
-{
+void Warehouse::receive_ware(Game& /* game */, WareIndex ware) {
 	m_supply->add_wares(ware, 1);
 }
 
 /**
  * Receive a worker from a transfer that was not associated to a \ref Request.
  */
-void Warehouse::receive_worker(Game & game, Worker & worker)
-{
+void Warehouse::receive_worker(Game& game, Worker& worker) {
 	worker.schedule_incorporate(game);
 }
 
-Building & WarehouseDescr::create_object() const {
+Building& WarehouseDescr::create_object() const {
 	return *new Warehouse(*this);
 }
 
-
-bool Warehouse::can_create_worker(Game &, WareIndex const worker) const {
+bool Warehouse::can_create_worker(Game&, WareIndex const worker) const {
 	if (!(worker < m_supply->get_workers().get_nrwareids()))
-		throw wexception
-			("worker type %d does not exists (max is %d)",
-			 worker, m_supply->get_workers().get_nrwareids());
+		throw wexception("worker type %d does not exists (max is %d)",
+		                 worker,
+		                 m_supply->get_workers().get_nrwareids());
 
-	const WorkerDescr & w_desc = *descr().tribe().get_worker_descr(worker);
+	const WorkerDescr& w_desc = *descr().tribe().get_worker_descr(worker);
 	assert(&w_desc);
 	if (!w_desc.is_buildable())
 		return false;
 
 	//  see if we have the resources
 	for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {
-		const std::string & input_name = buildcost.first;
+		const std::string& input_name = buildcost.first;
 		WareIndex id_w = descr().tribe().ware_index(input_name);
 		if (id_w != INVALID_INDEX) {
 			if (m_supply->stock_wares(id_w) < buildcost.second)
@@ -1010,27 +902,26 @@ bool Warehouse::can_create_worker(Game &, WareIndex const worker) const {
 			if (m_supply->stock_workers(id_w) < buildcost.second)
 				return false;
 		} else
-			throw wexception
-				("worker type %s needs \"%s\" to be built but that is neither "
-				 "a ware type nor a worker type defined in the tribe %s",
-				 w_desc.descname().c_str(), input_name.c_str(),
-				 descr().tribe().name().c_str());
+			throw wexception("worker type %s needs \"%s\" to be built but that is neither "
+			                 "a ware type nor a worker type defined in the tribe %s",
+			                 w_desc.descname().c_str(),
+			                 input_name.c_str(),
+			                 descr().tribe().name().c_str());
 	}
 	return true;
 }
 
+void Warehouse::create_worker(Game& game, WareIndex const worker) {
+	assert(can_create_worker(game, worker));
 
-void Warehouse::create_worker(Game & game, WareIndex const worker) {
-	assert(can_create_worker (game, worker));
-
-	const WorkerDescr & w_desc = *descr().tribe().get_worker_descr(worker);
+	const WorkerDescr& w_desc = *descr().tribe().get_worker_descr(worker);
 
 	for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {
-		const std::string & input = buildcost.first;
+		const std::string& input = buildcost.first;
 		WareIndex const id_ware = descr().tribe().ware_index(input);
 		if (id_ware != INVALID_INDEX) {
-			remove_wares  (id_ware,                        buildcost.second);
-			//update statistic accordingly
+			remove_wares(id_ware, buildcost.second);
+			// update statistic accordingly
 			owner().ware_consumed(id_ware, buildcost.second);
 		} else
 			remove_workers(descr().tribe().safe_worker_index(input), buildcost.second);
@@ -1052,8 +943,7 @@ void Warehouse::create_worker(Game & game, WareIndex const worker) {
  * Return the number of workers of the given type that we plan to
  * create in this warehouse.
  */
-uint32_t Warehouse::get_planned_workers(Game & /* game */, WareIndex index) const
-{
+uint32_t Warehouse::get_planned_workers(Game& /* game */, WareIndex index) const {
 	for (const PlannedWorkers& pw : m_planned_workers) {
 		if (pw.index == index)
 			return pw.amount;
@@ -1067,23 +957,21 @@ uint32_t Warehouse::get_planned_workers(Game & /* game */, WareIndex index) cons
  *
  * This is the current stock plus any incoming transfers.
  */
-std::vector<uint32_t> Warehouse::calc_available_for_worker
-	(Game & /* game */, WareIndex index) const
-{
-	const WorkerDescr & w_desc = *descr().tribe().get_worker_descr(index);
+std::vector<uint32_t> Warehouse::calc_available_for_worker(Game& /* game */,
+                                                           WareIndex index) const {
+	const WorkerDescr& w_desc = *descr().tribe().get_worker_descr(index);
 	std::vector<uint32_t> available;
 
 	for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {
-		const std::string & input_name = buildcost.first;
+		const std::string& input_name = buildcost.first;
 		WareIndex id_w = descr().tribe().ware_index(input_name);
 		if (id_w != INVALID_INDEX) {
 			available.push_back(get_wares().stock(id_w));
 		} else if ((id_w = descr().tribe().worker_index(input_name)) != INVALID_INDEX) {
 			available.push_back(get_workers().stock(id_w));
 		} else
-			throw wexception
-				("Economy::_create_requested_worker: buildcost inconsistency '%s'",
-				 input_name.c_str());
+			throw wexception(
+			   "Economy::_create_requested_worker: buildcost inconsistency '%s'", input_name.c_str());
 	}
 
 	for (const PlannedWorkers& pw : m_planned_workers) {
@@ -1099,14 +987,12 @@ std::vector<uint32_t> Warehouse::calc_available_for_worker
 	return available;
 }
 
-
 /**
  * Set the amount of workers we plan to create
  * of the given \p index to \p amount.
  */
-void Warehouse::plan_workers(Game & game, WareIndex index, uint32_t amount)
-{
-	PlannedWorkers * pw = nullptr;
+void Warehouse::plan_workers(Game& game, WareIndex index, uint32_t amount) {
+	PlannedWorkers* pw = nullptr;
 
 	for (PlannedWorkers& planned_worker : m_planned_workers) {
 		if (planned_worker.index == index) {
@@ -1124,22 +1010,17 @@ void Warehouse::plan_workers(Game & game, WareIndex index, uint32_t amount)
 		pw->index = index;
 		pw->amount = 0;
 
-		const WorkerDescr & w_desc = *descr().tribe().get_worker_descr(pw->index);
+		const WorkerDescr& w_desc = *descr().tribe().get_worker_descr(pw->index);
 		for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {
-			const std::string & input_name = buildcost.first;
+			const std::string& input_name = buildcost.first;
 
 			WareIndex id_w = descr().tribe().ware_index(input_name);
 			if (id_w != INVALID_INDEX) {
-				pw->requests.push_back
-					(new Request
-					 (*this, id_w, &Warehouse::request_cb, wwWARE));
+				pw->requests.push_back(new Request(*this, id_w, &Warehouse::request_cb, wwWARE));
 			} else if ((id_w = descr().tribe().worker_index(input_name)) != INVALID_INDEX) {
-				pw->requests.push_back
-					(new Request
-					 (*this, id_w, &Warehouse::request_cb, wwWORKER));
+				pw->requests.push_back(new Request(*this, id_w, &Warehouse::request_cb, wwWORKER));
 			} else
-				throw wexception
-					("plan_workers: bad buildcost '%s'", input_name.c_str());
+				throw wexception("plan_workers: bad buildcost '%s'", input_name.c_str());
 		}
 	}
 
@@ -1151,10 +1032,8 @@ void Warehouse::plan_workers(Game & game, WareIndex index, uint32_t amount)
  * See if we can create the workers of the given plan,
  * and update requests accordingly.
  */
-void Warehouse::_update_planned_workers
-	(Game & game, Warehouse::PlannedWorkers & pw)
-{
-	const WorkerDescr & w_desc = *descr().tribe().get_worker_descr(pw.index);
+void Warehouse::_update_planned_workers(Game& game, Warehouse::PlannedWorkers& pw) {
+	const WorkerDescr& w_desc = *descr().tribe().get_worker_descr(pw.index);
 
 	while (pw.amount && can_create_worker(game, pw.index)) {
 		create_worker(game, pw.index);
@@ -1163,7 +1042,7 @@ void Warehouse::_update_planned_workers
 	uint32_t idx = 0;
 	for (const std::pair<std::string, uint8_t>& buildcost : w_desc.buildcost()) {
 
-		const std::string & input_name = buildcost.first;
+		const std::string& input_name = buildcost.first;
 		uint32_t supply;
 
 		WareIndex id_w = descr().tribe().ware_index(input_name);
@@ -1172,14 +1051,12 @@ void Warehouse::_update_planned_workers
 		} else if ((id_w = descr().tribe().worker_index(input_name)) != INVALID_INDEX) {
 			supply = m_supply->stock_workers(id_w);
 		} else
-			throw wexception
-				("_update_planned_workers: bad buildcost '%s'", input_name.c_str());
+			throw wexception("_update_planned_workers: bad buildcost '%s'", input_name.c_str());
 
 		if (supply >= pw.amount * buildcost.second)
 			pw.requests[idx]->set_count(0);
 		else
-			pw.requests[idx]->set_count
-				(pw.amount * buildcost.second - supply);
+			pw.requests[idx]->set_count(pw.amount * buildcost.second - supply);
 		++idx;
 	}
 
@@ -1195,8 +1072,7 @@ void Warehouse::_update_planned_workers
  * Needs to be called periodically, because some necessary supplies might arrive
  * due to idle transfers instead of by explicit request.
  */
-void Warehouse::_update_all_planned_workers(Game & game)
-{
+void Warehouse::_update_all_planned_workers(Game& game) {
 	uint32_t idx = 0;
 	while (idx < m_planned_workers.size()) {
 		_update_planned_workers(game, m_planned_workers[idx]);
@@ -1210,51 +1086,35 @@ void Warehouse::_update_all_planned_workers(Game & game)
 	}
 }
 
-void Warehouse::enable_spawn
-	(Game & game, uint8_t const worker_types_without_cost_index)
-{
-	assert
-		(m_next_worker_without_cost_spawn[worker_types_without_cost_index]
-		 ==
-		 static_cast<uint32_t>(never()));
+void Warehouse::enable_spawn(Game& game, uint8_t const worker_types_without_cost_index) {
+	assert(m_next_worker_without_cost_spawn[worker_types_without_cost_index] ==
+	       static_cast<uint32_t>(never()));
 	m_next_worker_without_cost_spawn[worker_types_without_cost_index] =
-		schedule_act(game, WORKER_WITHOUT_COST_SPAWN_INTERVAL);
+	   schedule_act(game, WORKER_WITHOUT_COST_SPAWN_INTERVAL);
 }
-void Warehouse::disable_spawn(uint8_t const worker_types_without_cost_index)
-{
-	assert
-		(m_next_worker_without_cost_spawn[worker_types_without_cost_index]
-		 !=
-		 static_cast<uint32_t>(never()));
+void Warehouse::disable_spawn(uint8_t const worker_types_without_cost_index) {
+	assert(m_next_worker_without_cost_spawn[worker_types_without_cost_index] !=
+	       static_cast<uint32_t>(never()));
 	m_next_worker_without_cost_spawn[worker_types_without_cost_index] = never();
 }
 
-
-bool Warehouse::can_attack()
-{
+bool Warehouse::can_attack() {
 	return descr().get_conquers() > 0;
 }
 
-void Warehouse::aggressor(Soldier & enemy)
-{
+void Warehouse::aggressor(Soldier& enemy) {
 	if (!descr().get_conquers())
 		return;
 
-	Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
-	Map  & map  = game.map();
-	if
-		(enemy.get_owner() == &owner() ||
-		 enemy.get_battle() ||
-		 descr().get_conquers()
-		 <=
-		 map.calc_distance(enemy.get_position(), get_position()))
+	Game& game = ref_cast<Game, EditorGameBase>(owner().egbase());
+	Map& map = game.map();
+	if (enemy.get_owner() == &owner() || enemy.get_battle() ||
+	    descr().get_conquers() <= map.calc_distance(enemy.get_position(), get_position()))
 		return;
 
-	if
-		(game.map().find_bobs
-		 	(Area<FCoords>(map.get_fcoords(base_flag().get_position()), 2),
-		 	 nullptr,
-		 	 FindBobEnemySoldier(&owner())))
+	if (game.map().find_bobs(Area<FCoords>(map.get_fcoords(base_flag().get_position()), 2),
+	                         nullptr,
+	                         FindBobEnemySoldier(&owner())))
 		return;
 
 	WareIndex const soldier_index = descr().tribe().worker_index("soldier");
@@ -1263,20 +1123,17 @@ void Warehouse::aggressor(Soldier & enemy)
 	if (!count_workers(game, soldier_index, noreq))
 		return;
 
-	Soldier & defender =
-		ref_cast<Soldier, Worker>(launch_worker(game, soldier_index, noreq));
+	Soldier& defender = ref_cast<Soldier, Worker>(launch_worker(game, soldier_index, noreq));
 	defender.start_task_defense(game, false);
 }
 
-bool Warehouse::attack(Soldier & enemy)
-{
-	Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
+bool Warehouse::attack(Soldier& enemy) {
+	Game& game = ref_cast<Game, EditorGameBase>(owner().egbase());
 	WareIndex const soldier_index = descr().tribe().worker_index("soldier");
 	Requirements noreq;
 
 	if (count_workers(game, soldier_index, noreq)) {
-		Soldier & defender =
-			ref_cast<Soldier, Worker>(launch_worker(game, soldier_index, noreq));
+		Soldier& defender = ref_cast<Soldier, Worker>(launch_worker(game, soldier_index, noreq));
 		defender.start_task_defense(game, true);
 		enemy.send_signal(game, "sleep");
 		return true;
@@ -1287,45 +1144,36 @@ bool Warehouse::attack(Soldier & enemy)
 	return false;
 }
 
-void Warehouse::PlannedWorkers::cleanup()
-{
+void Warehouse::PlannedWorkers::cleanup() {
 	while (!requests.empty()) {
 		delete requests.back();
 		requests.pop_back();
 	}
 }
 
-Warehouse::StockPolicy Warehouse::get_ware_policy(WareIndex ware) const
-{
+Warehouse::StockPolicy Warehouse::get_ware_policy(WareIndex ware) const {
 	assert(ware < m_ware_policy.size());
 	return m_ware_policy[ware];
 }
 
-Warehouse::StockPolicy Warehouse::get_worker_policy(WareIndex ware) const
-{
+Warehouse::StockPolicy Warehouse::get_worker_policy(WareIndex ware) const {
 	assert(ware < m_worker_policy.size());
 	return m_worker_policy[ware];
 }
 
-Warehouse::StockPolicy Warehouse::get_stock_policy
-	(WareWorker waretype, WareIndex wareindex) const
-{
+Warehouse::StockPolicy Warehouse::get_stock_policy(WareWorker waretype, WareIndex wareindex) const {
 	if (waretype == wwWORKER)
 		return get_worker_policy(wareindex);
 	else
 		return get_ware_policy(wareindex);
 }
 
-
-void Warehouse::set_ware_policy(WareIndex ware, Warehouse::StockPolicy policy)
-{
+void Warehouse::set_ware_policy(WareIndex ware, Warehouse::StockPolicy policy) {
 	assert(ware < m_ware_policy.size());
 	m_ware_policy[ware] = policy;
 }
 
-void Warehouse::set_worker_policy
-	(WareIndex ware, Warehouse::StockPolicy policy)
-{
+void Warehouse::set_worker_policy(WareIndex ware, Warehouse::StockPolicy policy) {
 	assert(ware < m_worker_policy.size());
 	m_worker_policy[ware] = policy;
 }
@@ -1334,8 +1182,7 @@ void Warehouse::set_worker_policy
  * Check if there are remaining wares with stock policy \ref SP_Remove,
  * and remove one of them if appropriate.
  */
-void Warehouse::check_remove_stock(Game & game)
-{
+void Warehouse::check_remove_stock(Game& game) {
 	if (base_flag().current_wares() < base_flag().total_capacity() / 2) {
 		for (WareIndex ware = 0; ware < m_ware_policy.size(); ++ware) {
 			if (get_ware_policy(ware) != SP_Remove || !get_wares().stock(ware))
@@ -1350,7 +1197,7 @@ void Warehouse::check_remove_stock(Game & game)
 		if (get_worker_policy(widx) != SP_Remove || !get_workers().stock(widx))
 			continue;
 
-		Worker & worker = launch_worker(game, widx, Requirements());
+		Worker& worker = launch_worker(game, widx, Requirements());
 		worker.start_task_leavebuilding(game, true);
 		break;
 	}
@@ -1366,36 +1213,34 @@ WaresQueue& Warehouse::waresqueue(WareIndex index) {
 /*
  * SoldierControl implementations
  */
-std::vector<Soldier *> Warehouse::present_soldiers() const
-{
-	std::vector<Soldier *> rv;
+std::vector<Soldier*> Warehouse::present_soldiers() const {
+	std::vector<Soldier*> rv;
 
 	WareIndex const ware = descr().tribe().safe_worker_index("soldier");
 	IncorporatedWorkers::const_iterator sidx = m_incorporated_workers.find(ware);
 
 	if (sidx != m_incorporated_workers.end()) {
-		const WorkerList & soldiers = sidx->second;
+		const WorkerList& soldiers = sidx->second;
 
-		for (Worker * temp_soldier: soldiers) {
-			rv.push_back(static_cast<Soldier *>(temp_soldier));
+		for (Worker* temp_soldier : soldiers) {
+			rv.push_back(static_cast<Soldier*>(temp_soldier));
 		}
 	}
 
 	return rv;
 }
-int Warehouse::incorporate_soldier(EditorGameBase & egbase, Soldier & soldier) {
+int Warehouse::incorporate_soldier(EditorGameBase& egbase, Soldier& soldier) {
 	incorporate_worker(egbase, &soldier);
 	return 0;
 }
 
-int Warehouse::outcorporate_soldier(EditorGameBase & /* egbase */, Soldier & soldier) {
+int Warehouse::outcorporate_soldier(EditorGameBase& /* egbase */, Soldier& soldier) {
 
 	WareIndex const ware = descr().tribe().safe_worker_index("soldier");
 	if (m_incorporated_workers.count(ware)) {
-		WorkerList & soldiers = m_incorporated_workers[ware];
+		WorkerList& soldiers = m_incorporated_workers[ware];
 
-		WorkerList::iterator i = std::find
-			(soldiers.begin(), soldiers.end(), &soldier);
+		WorkerList::iterator i = std::find(soldiers.begin(), soldiers.end(), &soldier);
 
 		soldiers.erase(i);
 		m_supply->remove_workers(ware, 1);
@@ -1408,13 +1253,10 @@ int Warehouse::outcorporate_soldier(EditorGameBase & /* egbase */, Soldier & sol
 	return 0;
 }
 
-void Warehouse::log_general_info(const EditorGameBase & egbase)
-{
+void Warehouse::log_general_info(const EditorGameBase& egbase) {
 	Building::log_general_info(egbase);
 
 	if (descr().get_isport())
 		molog("Port dock: %u\n", m_portdock ? m_portdock->serial() : 0);
 }
-
-
 }
