@@ -386,12 +386,6 @@ void InteractiveBase::think()
 
 	egbase().think(); // Call game logic here. The game advances.
 
-	//  Update everything so and so many milliseconds, to make sure that the
-	//  whole screen is synced (another user may have done something, and the
-	//  screen was not redrawn).
-	if (curframe & 1023) // % 1024
-		need_complete_redraw();
-
 	//  The entire screen needs to be redrawn (unit movement, tile animation,
 	//  etc...)
 	g_gr->update();
@@ -616,7 +610,6 @@ void InteractiveBase::start_build_road
 	m_road_build_player = player;
 
 	roadb_add_overlay();
-	need_complete_redraw();
 }
 
 
@@ -630,7 +623,6 @@ void InteractiveBase::abort_build_road()
 	assert(m_buildroad);
 
 	roadb_remove_overlay();
-	need_complete_redraw();
 
 	m_road_build_player = 0;
 
@@ -649,7 +641,6 @@ void InteractiveBase::finish_build_road()
 	assert(m_buildroad);
 
 	roadb_remove_overlay();
-	need_complete_redraw();
 
 	if (m_buildroad->get_nsteps()) {
 		upcast(Game, game, &egbase());
@@ -752,7 +743,6 @@ bool InteractiveBase::append_build_road(Coords const field) {
 
 	roadb_remove_overlay();
 	roadb_add_overlay();
-	need_complete_redraw();
 
 	return true;
 }

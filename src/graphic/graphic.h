@@ -63,7 +63,7 @@ public:
 	void update();
 	bool need_update() const;
 	void refresh();
-	SDL_Window* get_sdlwindow() {return m_sdlwindow;}
+	SDL_Window* get_sdlwindow() {return m_sdl_window;}
 
 	SurfaceCache& surfaces() const {return *surface_cache_.get();}
 	ImageCache& images() const {return *image_cache_.get();}
@@ -88,7 +88,6 @@ private:
 
 	bool m_fallback_settings_in_effect;
 
-protected:
 	/// This is the main screen Surface.
 	/// A RenderTarget for this can be retrieved with get_render_target()
 	std::unique_ptr<Surface> screen_;
@@ -97,7 +96,7 @@ protected:
 	/// manipulation the screen context.
 	SDL_Surface * m_sdl_screen;
 	SDL_Renderer * m_sdl_renderer;
-	SDL_Window * m_sdlwindow;
+	SDL_Window * m_sdl_window;
 	SDL_Texture * m_sdl_texture;
 	SDL_GLContext m_glcontext;
 	/// A RenderTarget for screen_. This is initialized during init()

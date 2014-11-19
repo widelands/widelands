@@ -169,8 +169,6 @@ void EditorInteractive::register_overlays() {
 				overlay_manager.register_overlay(fc, g_gr->images().get(immname), 4);
 		}
 	}
-
-	need_complete_redraw();
 }
 
 
@@ -276,7 +274,6 @@ void EditorInteractive::map_clicked(bool should_draw) {
 		(tools.current(),
 		 tools.use_tool, egbase().map(), egbase().world(),
 	     get_sel_pos(), *this, should_draw);
-	need_complete_redraw();
 	set_need_save(true);
 }
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-10-29 10:08+0000\n"
+"POT-Creation-Date: 2014-11-12 11:40+0000\n"
 "PO-Revision-Date: 2014-11-03 20:24+0000\n"
 "Last-Translator: wl-zocker <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
@@ -15,15 +15,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-11-04 05:48+0000\n"
-"X-Generator: Launchpad (build 17211)\n"
+"X-Launchpad-Export-Date: 2014-11-13 05:54+0000\n"
+"X-Generator: Launchpad (build 17241)\n"
 "Language: de\n"
 
-#: ../../campaigns/dummy.wmf/scripting/init.lua:10
+#: ../../campaigns/dummy.wmf/scripting/init.lua:11
 msgid "Not yet implemented"
 msgstr "Noch nicht fertiggestellt!"
 
-#: ../../campaigns/dummy.wmf/scripting/init.lua:11
+#: ../../campaigns/dummy.wmf/scripting/init.lua:12
 msgid "Sorry, this map is not yet implemented."
 msgstr "Es tut uns leid, aber diese Karte wurde noch nicht fertiggestellt!"
 
@@ -31,7 +31,7 @@ msgstr "Es tut uns leid, aber diese Karte wurde noch nicht fertiggestellt!"
 msgid "“%s”"
 msgstr "„%s“"
 
-#: ../../scripting/format_scenario.lua:133
+#: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Neues Ziel"
