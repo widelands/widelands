@@ -64,9 +64,6 @@
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 
-using boost::format;
-
-
 
 struct HostGameSettingsProvider : public GameSettingsProvider {
 	HostGameSettingsProvider(NetHost * const _h) : h(_h), m_lua(nullptr), m_cur_wincondition(0) {}
@@ -418,9 +415,9 @@ struct HostChatProvider : public ChatProvider {
 					} else if (num == -1) {
 						if (!h->is_dedicated())
 							c.recipient = h->get_local_playername();
-						c.msg = (format(_("The client %s could not be found.")) % arg1).str();
+						c.msg = (boost::format(_("The client %s could not be found.")) % arg1).str();
 					} else {
-						c.msg  = (format("HOST WARNING FOR %s: ") % arg1).str();
+						c.msg  = (boost::format("HOST WARNING FOR %s: ") % arg1).str();
 						c.msg += arg2;
 					}
 				}
@@ -444,12 +441,12 @@ struct HostChatProvider : public ChatProvider {
 						} else
 							c.msg = _("You can not kick the dedicated server");
 					else if (num == -1)
-						c.msg = (format(_("The client %s could not be found.")) % arg1).str();
+						c.msg = (boost::format(_("The client %s could not be found.")) % arg1).str();
 					else {
 						kickClient = num;
-						c.msg  = (format(_("Are you sure you want to kick %s?")) % arg1).str() + "<br>";
-						c.msg += (format(_("The stated reason was: %s")) % kickReason).str() + "<br>";
-						c.msg += (format(_("If yes, type: /ack_kick %s")) % arg1).str();
+						c.msg  = (boost::format(_("Are you sure you want to kick %s?")) % arg1).str() + "<br>";
+						c.msg += (boost::format(_("The stated reason was: %s")) % kickReason).str() + "<br>";
+						c.msg += (boost::format(_("If yes, type: /ack_kick %s")) % arg1).str();
 					}
 				}
 				if (!h->is_dedicated())
@@ -736,14 +733,13 @@ void NetHost::run(bool const autorun)
 		// May be the server is password protected?
 		Section & s = g_options.pull_section("global");
 		m_password  = s.get_string("dedicated_password", "");
+
 		// And we read the message of the day
-		m_dedicated_motd =
-			s.get_string
-				("dedicated_motd",
-				 (format
-					(_("This is a dedicated server. Send \"@%s help\" to get a full list of available commands."))
-					% d->localplayername)
-				.str().c_str());
+		const std::string dedicated_motd_key =
+				(boost::format
+				 (_("This is a dedicated server. Send \"@%s help\" to get a full list of available commands."))
+				 % d->localplayername).str();
+		m_dedicated_motd = s.get_string("dedicated_motd", dedicated_motd_key.c_str());
 
 		// Maybe this is the first run, so we try to setup the DedicatedLog
 		// empty strings are treated as "do not write this type of log"
@@ -901,7 +897,7 @@ void NetHost::run(bool const autorun)
 				if (d->settings.users.at(i).position != UserSettings::not_connected())
 					if (d->settings.users.at(i).name != d->localplayername) // all names, but the dedicated server
 						clients.push_back(d->settings.users.at(i).name);
-			DedicatedLog::get()->game_start(clients, game.map().get_name());
+			DedicatedLog::get()->game_start(clients, game.map().get_name().c_str());
 		}
 		game.run
 			(loaderUI.get(),
@@ -978,10 +974,12 @@ void NetHost::think()
 
 		for (uint32_t i = 0; i < d->computerplayers.size(); ++i)
 			d->computerplayers.at(i)->think();
-	} else if (m_is_dedicated)
+	} else if (m_is_dedicated) {
 		// Take care that every player gets updated during set up time
-		for (uint8_t i = 0; i < d->settings.players.size(); ++i)
+		for (uint8_t i = 0; i < d->settings.players.size(); ++i) {
 			d->npsb.refresh(i);
+		}
+	}
 }
 
 void NetHost::send_player_command(Widelands::PlayerCommand & pc)
@@ -1240,7 +1238,7 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 			return;
 		}
 		std::string temp = arg1 + " " + arg2;
-		c.msg = (format(_("%1$s told me to run the command: \"%2$s\"")) % sender % temp).str();
+		c.msg = (boost::format(_("%1$s told me to run the command: \"%2$s\"")) % sender % temp).str();
 		c.recipient = "";
 		send(c);
 		d->chat.send(temp);
@@ -1267,7 +1265,7 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 				c.msg = _("Game successfully saved!");
 			else
 				c.msg =
-					(format(_("Could not save the game to the file \"%1$s\"! (%2$s)"))
+					(boost::format(_("Could not save the game to the file \"%1$s\"! (%2$s)"))
 					 % savename % error)
 					 .str();
 			send(c);
@@ -1275,7 +1273,7 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 		}
 
 	} else if (cmd == "pwd") {
-		if (m_password.size() == 0) {
+		if (m_password.empty()) {
 			c.msg = _("This server is not password protected!");
 			send(c);
 		} else if (arg1 != m_password) {
@@ -1298,7 +1296,7 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 
 	// default
 	} else {
-		c.msg = (format(_("Unknown dedicated server command \"%s\"!")) % cmd).str();
+		c.msg = (boost::format(_("Unknown dedicated server command \"%s\"!")) % cmd).str();
 		send(c);
 	}
 }
@@ -1314,27 +1312,25 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 			FilenameSet files = g_fs->list_directory(directories.at(directories.size() - 1).c_str());
 			directories.resize(directories.size() - 1);
 			Widelands::Map map;
-			const FilenameSet & gamefiles = files;
-			for (const std::string& temp_filenames : gamefiles) {
-				char const * const name = temp_filenames.c_str();
-				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(name);
+			for (const std::string& filename : files) {
+				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(filename);
 				if (ml) {
-					map.set_filename(name);
+					map.set_filename(filename);
 					ml->preload_map(true);
 					DedicatedMapInfos info;
-					info.path     = name;
+					info.path     = filename;
 					info.players  = map.get_nrplayers();
 					info.scenario = map.scenario_types() & Widelands::Map::MP_SCENARIO;
 					d->settings.maps.push_back(info);
 				} else {
 					if
-						(g_fs->is_directory(name)
+						(g_fs->is_directory(filename)
 						&&
-						strcmp(FileSystem::fs_filename(name), ".")
+						strcmp(FileSystem::fs_filename(filename.c_str()), ".")
 						&&
-						strcmp(FileSystem::fs_filename(name), ".."))
+						strcmp(FileSystem::fs_filename(filename.c_str()), ".."))
 					{
-						directories.push_back(name);
+						directories.push_back(filename);
 					}
 				}
 			}
@@ -1984,6 +1980,9 @@ bool NetHost::write_map_transfer_info(SendPacket & s, std::string mapfilename) {
 	// needs the file.
 	s.unsigned_8(NETCMD_NEW_FILE_AVAILABLE);
 	s.string(mapfilename);
+	//Scan-build reports that access to bytes here results in a dereference of null pointer.
+	//This is a false positive.
+	//See https://bugs.launchpad.net/widelands/+bug/1198919
 	s.unsigned_32(file->bytes);
 	s.string(file->md5sum);
 	return true;
@@ -2044,7 +2043,7 @@ void NetHost::welcome_client (uint32_t const number, std::string & playername)
 	// The client gets its own initial data set.
 	client.playernum = UserSettings::none();
 	// only used at password protected dedicated server, but better initialize always
-	client.dedicated_access = m_is_dedicated ? (m_password.size() == 0) : false;
+	client.dedicated_access = m_is_dedicated ? (m_password.empty()) : false;
 
 	if (!d->game) // just in case we allow connection of spectators/players after game start
 		for (uint32_t i = 0; i < d->settings.users.size(); ++i)
@@ -2158,7 +2157,7 @@ void NetHost::welcome_client (uint32_t const number, std::string & playername)
 		if (m_password.size() > 1) {
 			c.msg += "<br>";
 			c.msg +=
-				(format
+				(boost::format
 					(_("This server is password protected. You can send the password with: \"@%s pwd PASSWORD\""))
 					% d->localplayername)
 				.str();
@@ -2281,7 +2280,7 @@ void NetHost::check_hung_clients()
 					if ((d->clients.at(i).hung_since < (time(nullptr) - 300)) && m_is_dedicated) {
 						disconnect_client(i, "CLIENT_TIMEOUTED");
 						// Try to save the game
-						std::string savename = (boost::format("save/client_hung_%i.wmf") % time(nullptr)).str();;
+						std::string savename = (boost::format("save/client_hung_%i.wmf") % time(nullptr)).str();
 						std::string * error = new std::string();
 						SaveHandler & sh = d->game->save_handler();
 						if (sh.save_game(*d->game, savename, error))
@@ -2660,7 +2659,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 					std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(path);
 					if (ml.get() != nullptr) {
 						// Yes it is a map file :)
-						map.set_filename(path.c_str());
+						map.set_filename(path);
 						ml->preload_map(true);
 						d->settings.scenario = scenario;
 						d->hp.set_map(map.get_name(), path, map.get_nrplayers(), false);

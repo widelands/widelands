@@ -3,6 +3,7 @@
 -- =======================================================================
 set_textdomain("scenario_dummy.wmf")
 
+include "scripting/messages.lua"
 include "scripting/ui.lua"
 
 p1 = wl.Game().players[1]
@@ -13,4 +14,4 @@ dummy_msg = {
    height=450,
    posy=1,
 }
-p1:message_box(dummy_msg.title, dummy_msg.body, dummy_msg)
+campaign_message_box(dummy_msg.title, dummy_msg.body, dummy_msg)

@@ -28,7 +28,7 @@
 #include "config.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
-#include "graphic/render/minimaprenderer.h"
+#include "graphic/minimap_renderer.h"
 #include "graphic/surface.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -43,7 +43,7 @@ using namespace Widelands;
 namespace  {
 
 // Setup the static objects Widelands needs to operate and initializes systems.
-void initialize() {
+void initialize(bool use_opengl) {
 	SDL_Init(SDL_INIT_VIDEO);
 
 	g_fs = new LayeredFileSystem();
@@ -55,21 +55,29 @@ void initialize() {
 #endif
 
 	g_gr = new Graphic();
-	g_gr->initialize(1, 1, false, false);
+	g_gr->initialize(1, 1, false, use_opengl);
 }
 
 }  // namespace
+
 int main(int argc, char ** argv)
 {
-	if (argc != 2) {
-		log("Need exactly one map file.\n");
+	if (!(2 <= argc && argc <= 3)) {
+		log("Usage: %s [--opengl] <map file>\n", argv[0]);
 		return 1;
 	}
 
-	const std::string map_path = argv[1];
+	bool use_opengl = false;
+	for (int i = 0; i < argc; ++i) {
+		if (std::string(argv[i]) == "--opengl") {
+			use_opengl = true;
+		}
+	}
+
+	const std::string map_path = argv[argc - 1];
 
 	try {
-		initialize();
+		initialize(use_opengl);
 
 		std::string map_dir = FileSystem::fs_dirname(map_path);
 		if (map_dir.empty()) {

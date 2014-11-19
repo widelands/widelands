@@ -61,7 +61,8 @@ struct EditBox : public Panel {
 
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
-	bool handle_key(bool down, SDL_keysym) override;
+	bool handle_key(bool down, SDL_Keysym) override;
+	bool handle_textinput(const char* text);
 
 	void draw(RenderTarget &) override;
 
@@ -69,7 +70,6 @@ private:
 	std::unique_ptr<EditBoxImpl> m;
 
 	void check_caret();
-	void insert(SDL_keysym code);
 
 	bool        m_history_active;
 	int16_t     m_history_position;

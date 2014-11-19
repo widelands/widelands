@@ -20,10 +20,10 @@
 #include "wui/mapview.h"
 
 #include "base/macros.h"
+#include "graphic/gl/game_renderer.h"
 #include "graphic/graphic.h"
-#include "graphic/render/gamerenderer_gl.h"
-#include "graphic/render/gamerenderer_sdl.h"
 #include "graphic/rendertarget.h"
+#include "graphic/sdl/game_renderer.h"
 #include "logic/map.h"
 #include "logic/player.h"
 #include "wlapplication.h"
@@ -40,8 +40,7 @@ MapView::MapView
 UI::Panel               (parent, x, y, w, h),
 m_intbase               (player),
 m_viewpoint             (Point(0, 0)),
-m_dragging              (false),
-m_complete_redraw_needed(true)
+m_dragging              (false)
 {}
 
 MapView::~MapView()
@@ -88,20 +87,16 @@ void MapView::draw(RenderTarget & dst)
 		// This fixes a crash with displaying an error dialog during loading.
 		if (!game->is_loaded())
 			return;
-
-		// Check if the view has changed in a game
-		if (intbase().get_player() && intbase().get_player()->has_view_changed())
-			m_complete_redraw_needed = true;
 	}
 
 	egbase.map().overlay_manager().load_graphics();
 
 	if (!m_renderer) {
 		if (g_opengl) {
-			m_renderer.reset(new GameRendererGL());
+			m_renderer.reset(new GlGameRenderer());
 		} else
 		{
-			m_renderer.reset(new GameRendererSDL());
+			m_renderer.reset(new SdlGameRenderer());
 		}
 	}
 	if (upcast(InteractivePlayer const, interactive_player, &intbase())) {
@@ -109,8 +104,6 @@ void MapView::draw(RenderTarget & dst)
 	} else {
 		m_renderer->rendermap(dst, egbase, m_viewpoint);
 	}
-
-	m_complete_redraw_needed = false;
 }
 
 void MapView::set_changeview(const MapView::ChangeViewFn & fn)
@@ -134,8 +127,6 @@ void MapView::set_viewpoint(Point vp, bool jump)
 	if (m_changeview)
 		m_changeview(vp, jump);
 	changeview(m_viewpoint.x, m_viewpoint.y);
-
-	m_complete_redraw_needed = true;
 }
 
 
@@ -192,7 +183,7 @@ bool MapView::handle_mousemove
 	if (!intbase().get_sel_freeze())
 		track_sel(Point(x, y));
 
-	g_gr->update_fullscreen();
+	g_gr->update();
 	return true;
 }
 

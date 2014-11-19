@@ -44,7 +44,7 @@ struct InteractiveSpectator : public InteractiveGameBase {
 
 	Widelands::Player * get_player() const override;
 
-	bool handle_key(bool down, SDL_keysym) override;
+	bool handle_key(bool down, SDL_Keysym) override;
 
 private:
 	void toggle_chat();

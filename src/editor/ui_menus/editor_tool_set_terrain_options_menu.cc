@@ -21,7 +21,7 @@
 
 #include <memory>
 
-#include <SDL_keysym.h>
+#include <SDL_keycode.h>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -78,7 +78,7 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 		const Image* tex = g_gr->images().get(
 		   g_gr->get_maptexture_data(terrain_descr.get_texture())->get_texture_image());
 		Surface* surf = Surface::create(tex->width(), tex->height());
-		surf->blit(Point(0, 0), tex->surface(), Rect(0, 0, tex->width(), tex->height()), CM_Solid);
+		surf->blit(Point(0, 0), tex->surface(), Rect(0, 0, tex->width(), tex->height()), CM_Copy);
 		Point pt(1, tex->height() - kSmallPicHeight - 1);
 
 		if (ter_is == TerrainDescription::GREEN) {
@@ -126,7 +126,7 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 	/** TRANSLATORS: %1% = terrain name, %2% = list of terrain types  */
 	const std::string tooltip = ((boost::format("%1%: %2%"))
 								  % terrain_descr.descname()
-								  % i18n::localize_item_list(tooltips, i18n::ConcatenateWith::AND)).str().c_str();
+								  % i18n::localize_item_list(tooltips, i18n::ConcatenateWith::AND)).str();
 
 	std::unique_ptr<const Image>& image = offscreen_images->back();
 	UI::Checkbox* cb = new UI::Checkbox(parent, Point(0, 0), image.get(), tooltip);

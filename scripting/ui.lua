@@ -77,7 +77,7 @@ end
 --
 --    .. code-block:: lua
 --
-include "scripting/table.lua" -- for reverse()
+--       include "scripting/table.lua" -- for reverse()
 --
 --       -- Move there in one second
 --       pts = scroll_smoothly_to(wl.Game().map:get_field(23, 42))
@@ -93,12 +93,18 @@ function timed_scroll(points, gdt)
    local dt = gdt or 20
    local mv = wl.ui.MapView()
 
+   local old_speed = wl.Game().desired_speed
+   -- Set the speed to normal speed (1.0x). Otherwise, the scrolling would also
+   -- be faster, which is probably not intended.
+   wl.Game().desired_speed = 1000
+
    for idx,p in ipairs(points) do
       mv.viewpoint_x = p.x
       mv.viewpoint_y = p.y
 
       sleep(dt)
    end
+   wl.Game().desired_speed = old_speed
 end
 
 
@@ -184,12 +190,19 @@ function timed_mouse(points, gdt)
    local dt = gdt or 20
    local mv = wl.ui.MapView()
 
+   local old_speed = wl.Game().desired_speed
+   -- Set the speed to normal speed (1.0x). Otherwise, the mouse movement would also
+   -- be faster, which is probably not intended.
+   wl.Game().desired_speed = 1000
+
    for idx,p in ipairs(points) do
       mv.mouse_position_x = p.x
       mv.mouse_position_y = p.y
 
       sleep(dt)
    end
+
+   wl.Game().desired_speed = old_speed
 end
 
 -- RST
@@ -205,8 +218,7 @@ end
 --    :arg T: Time in ms to take for the transition.
 --    :type T: :class:`integer`
 --
---    :returns: an :class:`array` with the intermediate points that were
---       targeted
+--    :returns: an :class:`array` with the intermediate points that were targeted
 function mouse_smoothly_to_pos(x, y, g_T)
    local start = {
       x = wl.ui.MapView().mouse_position_x,
@@ -341,4 +353,30 @@ function close_windows()
    for k,v in pairs(wl.ui.MapView().windows) do
       v:close()
    end
+end
+
+
+-- RST
+-- .. function:: wait_for_roadbuilding()
+--
+-- 	Sleeps while player is in roadbuilding mode.
+--
+-- 	:returns: :const:`nil`
+--
+function wait_for_roadbuilding()
+	while (wl.ui.MapView().is_building_road) do sleep(2000) end
+end
+
+
+-- RST
+-- .. function:: wait_for_roadbuilding_and_scroll(f[, T = 1000])
+--
+-- 	Sleeps while player is in roadbuilding mode, then calls
+-- 	scroll_smoothly_to(f[, T = 1000]).
+--
+--    :returns: an :class:`array` with the intermediate points that
+--       were targeted
+function wait_for_roadbuilding_and_scroll(f, g_T)
+	wait_for_roadbuilding()
+	return scroll_smoothly_to(f, g_T)
 end

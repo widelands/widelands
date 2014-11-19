@@ -570,7 +570,7 @@ void Immovable::draw_construction
 			 % UI_FONT_CLR_DARK_HEX % (boost::format(_("%i%% built")) % percent).str())
 			 .str();
 		m_construct_string = as_uifont(m_construct_string);
-		dst.blit(pos - Point(0, 48), UI::g_fh1->render(m_construct_string), CM_Normal, UI::Align_Center);
+		dst.blit(pos - Point(0, 48), UI::g_fh1->render(m_construct_string), CM_UseAlpha, UI::Align_Center);
 	}
 }
 

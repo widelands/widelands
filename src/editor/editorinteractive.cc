@@ -23,7 +23,7 @@
 #include <string>
 #include <vector>
 
-#include <SDL_keysym.h>
+#include <SDL_keycode.h>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -169,8 +169,6 @@ void EditorInteractive::register_overlays() {
 				overlay_manager.register_overlay(fc, g_gr->images().get(immname), 4);
 		}
 	}
-
-	need_complete_redraw();
 }
 
 
@@ -276,7 +274,6 @@ void EditorInteractive::map_clicked(bool should_draw) {
 		(tools.current(),
 		 tools.use_tool, egbase().map(), egbase().world(),
 	     get_sel_pos(), *this, should_draw);
-	need_complete_redraw();
 	set_need_save(true);
 }
 
@@ -344,7 +341,7 @@ void EditorInteractive::set_sel_radius_and_update_menu(uint32_t const val) {
 }
 
 
-bool EditorInteractive::handle_key(bool const down, SDL_keysym const code) {
+bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 	bool handled = InteractiveBase::handle_key(down, code);
 
 	if (down) {
@@ -393,16 +390,16 @@ bool EditorInteractive::handle_key(bool const down, SDL_keysym const code) {
 			handled = true;
 			break;
 
-		case SDLK_LSHIFT:
-		case SDLK_RSHIFT:
+		case SDL_SCANCODE_LSHIFT:
+		case SDL_SCANCODE_RSHIFT:
 			if (tools.use_tool == EditorTool::First)
 				select_tool(tools.current(), EditorTool::Second);
 			handled = true;
 			break;
 
-		case SDLK_LALT:
-		case SDLK_RALT:
-		case SDLK_MODE:
+		case SDL_SCANCODE_LALT:
+		case SDL_SCANCODE_RALT:
+		case SDL_SCANCODE_MODE:
 			if (tools.use_tool == EditorTool::First)
 				select_tool(tools.current(), EditorTool::Third);
 			handled = true;
@@ -481,11 +478,11 @@ bool EditorInteractive::handle_key(bool const down, SDL_keysym const code) {
 	} else {
 		// key up events
 		switch (code.sym) {
-		case SDLK_LSHIFT:
-		case SDLK_RSHIFT:
-		case SDLK_LALT:
-		case SDLK_RALT:
-		case SDLK_MODE:
+		case SDL_SCANCODE_LSHIFT:
+		case SDL_SCANCODE_RSHIFT:
+		case SDL_SCANCODE_LALT:
+		case SDL_SCANCODE_RALT:
+		case SDL_SCANCODE_MODE:
 			if (tools.use_tool != EditorTool::First)
 				select_tool(tools.current(), EditorTool::First);
 			handled = true;

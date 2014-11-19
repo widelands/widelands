@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-10-04 15:33+0000\n"
+"POT-Creation-Date: 2014-11-12 11:40+0000\n"
 "PO-Revision-Date: 2014-03-07 20:55+0000\n"
 "Last-Translator: Lex <teh.f4ll3n@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-10-05 05:52+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-11-13 05:54+0000\n"
+"X-Generator: Launchpad (build 17241)\n"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/first_island.lua:70
 msgid "5 minutes"
@@ -31,60 +31,60 @@ msgstr "10 минут"
 msgid "15 minutes"
 msgstr "15 минут"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:98
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:99
 msgid "Game Status"
 msgstr "Статус игры"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:116
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:117
 msgid "%s Log"
 msgid_plural "%s Logs"
 msgstr[0] "Брёвна: %s"
 msgstr[1] "Брёвна: %s"
 msgstr[2] "Брёвна: %s"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:118
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:119
 msgid "%s Plank"
 msgid_plural "%s Planks"
 msgstr[0] "Доски: %s"
 msgstr[1] "Доски: %s"
 msgstr[2] "Доски: %s"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:120
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:121
 msgid "%s Stone"
 msgid_plural "%s Stones"
 msgstr[0] "Камень: %s"
 msgstr[1] "Камень: %s"
 msgstr[2] "Камень: %s"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:122
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:123
 msgid "%s Spidercloth"
 msgid_plural "%s Spidercloths"
 msgstr[0] "Шёлк: %s"
 msgstr[1] "Шёлк: %s"
 msgstr[2] "Шёлк: %s"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:124
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:125
 msgid "%s Corn"
 msgid_plural "%s Corn"
 msgstr[0] "Кукуруза: %s"
 msgstr[1] "Кукуруза: %s"
 msgstr[2] "Кукуруза: %s"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:126
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:127
 msgid "%s Coal"
 msgid_plural "%s Coal"
 msgstr[0] "Уголь: %s"
 msgstr[1] "Уголь: %s"
 msgstr[2] "Уголь: %s"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:128
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:129
 msgid "%s Iron Ore"
 msgid_plural "%s Iron Ore"
 msgstr[0] "Железная руда: %s"
 msgstr[1] "Железная руда: %s"
 msgstr[2] "Железная руда: %s"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:130
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:131
 msgid "%s Gold Ore"
 msgid_plural "%s Gold Ore"
 msgstr[0] "Золотая руда: %s"
@@ -92,11 +92,11 @@ msgstr[1] "Золотая руда: %s"
 msgstr[2] "Золотая руда: %s"
 
 #: TRANSLATORS: number + resource name, e.g. '1 stone'
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:133
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:134
 msgid "%1$i %2$s"
 msgstr "%1$i %2$s"
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:244
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:245
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:6
 msgid "Rules"
 msgstr "Правила"

@@ -123,7 +123,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 
 	m_width = new UI::Textarea(this, posx + spacing + height, posy,
 										(boost::format(_("Width: %u"))
-										 % Widelands::MAP_DIMENSIONS[m_w]).str().c_str());
+										 % Widelands::MAP_DIMENSIONS[m_w]).str());
 
 	posy += height + 2 * spacing;
 
@@ -131,7 +131,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 
 	m_height = new UI::Textarea(this, posx + spacing + height, posy,
 										 (boost::format(_("Height: %u"))
-										  % Widelands::MAP_DIMENSIONS[m_h]).str().c_str());
+										  % Widelands::MAP_DIMENSIONS[m_h]).str());
 
 	UI::Button * heightupbtn = new UI::Button
 		(this, "height_up",
@@ -171,7 +171,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::WATER_MINUS));
 
 	m_water = new UI::Textarea(this, posx + spacing + height, posy,
-										(boost::format(_("Water: %i %%")) % m_waterval).str().c_str());
+										(boost::format(_("Water: %i %%")) % m_waterval).str());
 
 	posy += height + 2 * spacing;
 
@@ -196,7 +196,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::LAND_MINUS));
 
 	m_land = new UI::Textarea(this, posx + spacing + height, posy,
-									  (boost::format(_("Land: %i %%")) % m_landval).str().c_str());
+									  (boost::format(_("Land: %i %%")) % m_landval).str());
 
 	posy += height + 2 * spacing;
 
@@ -221,7 +221,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::WASTE_MINUS));
 
 	m_wasteland = new UI::Textarea(this, posx + spacing + height, posy,
-											 (boost::format(_("Wasteland: %i %%")) % m_wastelandval).str().c_str());
+											 (boost::format(_("Wasteland: %i %%")) % m_wastelandval).str());
 
 	posy += height + 2 * spacing;
 
@@ -230,7 +230,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	// ---------- Mountains -----------
 
 	m_mountains = new UI::Textarea(this, posx + spacing + height, posy,
-											 (boost::format(_("Mountains: %i %%")) % m_mountainsval).str().c_str());
+											 (boost::format(_("Mountains: %i %%")) % m_mountainsval).str());
 
 	posy += height + 2 * spacing;
 
@@ -317,7 +317,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 
 	m_players = new UI::Textarea(this, posx + spacing + height, posy,
 										  (boost::format(_("Players: %u"))
-											% static_cast<unsigned int>(m_pn)).str().c_str());
+											% static_cast<unsigned int>(m_pn)).str());
 
 	posy += height + 2 * spacing;
 
@@ -424,14 +424,14 @@ void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 	if (m_h <  0)                        m_h = 0;
 	if (m_h >= NUMBER_OF_MAP_DIMENSIONS) m_h = NUMBER_OF_MAP_DIMENSIONS - 1;
 
-	m_width ->set_text((boost::format(_("Width: %u")) % Widelands::MAP_DIMENSIONS[m_w]).str().c_str());
-	m_height->set_text((boost::format(_("Height: %u")) % Widelands::MAP_DIMENSIONS[m_h]).str().c_str());
-	m_water->set_text((boost::format(_("Water: %i %%")) % m_waterval).str().c_str());
-	m_land->set_text((boost::format(_("Land: %i %%")) % m_landval).str().c_str());
-	m_wasteland->set_text((boost::format(_("Wasteland: %i %%")) % m_wastelandval).str().c_str());
-	m_mountains->set_text((boost::format(_("Mountains: %i %%")) % m_mountainsval).str().c_str());
+	m_width ->set_text((boost::format(_("Width: %u")) % Widelands::MAP_DIMENSIONS[m_w]).str());
+	m_height->set_text((boost::format(_("Height: %u")) % Widelands::MAP_DIMENSIONS[m_h]).str());
+	m_water->set_text((boost::format(_("Water: %i %%")) % m_waterval).str());
+	m_land->set_text((boost::format(_("Land: %i %%")) % m_landval).str());
+	m_wasteland->set_text((boost::format(_("Wasteland: %i %%")) % m_wastelandval).str());
+	m_mountains->set_text((boost::format(_("Mountains: %i %%")) % m_mountainsval).str());
 	m_players->set_text((boost::format(_("Players: %u"))
-								% static_cast<unsigned int>(m_pn)).str().c_str());
+								% static_cast<unsigned int>(m_pn)).str());
 
 	nr_edit_box_changed();  // Update ID String
 }
@@ -519,7 +519,6 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	map.recalc_whole_map(egbase.world());
 
 	eia.set_need_save(true);
-	eia.need_complete_redraw();
 	eia.register_overlays();
 
 	die();

@@ -154,7 +154,7 @@ CritterDescr::CritterDescr(char const* const _name,
 		add_attributes(attributes, std::set<uint32_t>());
 	}
 
-	const std::string defaultpics = (boost::format("%s_walk_!!_??.png") % _name).str().c_str();
+	const std::string defaultpics = (boost::format("%s_walk_!!_??.png") % _name).str();
 	m_walk_anims.parse(*this, directory, prof, "walk", false, defaultpics);
 
 	while (Section::Value const * const v = global_s.get_next_val("program")) {

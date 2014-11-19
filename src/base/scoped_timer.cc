@@ -33,8 +33,8 @@ ScopedTimer::ScopedTimer(const std::string& message)
 
 ScopedTimer::~ScopedTimer() {
 	uint32_t ms_in_existance = SDL_GetTicks() - startime_;
-
-	log("%s\n", (boost::format(message_) % ms_in_existance).str().c_str());
+	const std::string logmessage = (boost::format(message_) % ms_in_existance).str();
+	log("%s\n", logmessage.c_str());
 }
 
 uint32_t ScopedTimer::ms_since_last_query() {

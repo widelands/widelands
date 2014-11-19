@@ -119,7 +119,7 @@ void BaseListselect::clear() {
  *       sel    if true, directly select the new entry
 */
 void BaseListselect::add
-	(char const * const   name,
+	(const std::string& name,
 	 uint32_t             entry,
 	 const Image*   pic,
 	 bool         const   sel,
@@ -130,7 +130,7 @@ void BaseListselect::add
 	er->m_entry = entry;
 	er->pic   = pic;
 	er->use_clr = false;
-	er->name    = std::string(name);
+	er->name    = name;
 	er->tooltip = tooltip_text;
 	uint32_t entry_height = 0;
 	if (!pic) {
@@ -158,7 +158,7 @@ void BaseListselect::add
 }
 
 void BaseListselect::add_front
-	(char const * const   name,
+	(const std::string& name,
 	 const Image*   pic,
 	 bool         const   sel,
 	 const std::string  & tooltip_text)
@@ -172,7 +172,7 @@ void BaseListselect::add_front
 
 	er->pic   = pic;
 	er->use_clr = false;
-	er->name    = std::string(name);
+	er->name    = name;
 	er->tooltip = tooltip_text;
 
 	uint32_t entry_height = 0;
@@ -416,14 +416,19 @@ void BaseListselect::draw(RenderTarget & dst)
 }
 
 /**
+ * Handle mouse wheel events
+ */
+bool BaseListselect::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
+	return m_scrollbar.handle_mousewheel(which, x, y);
+}
+
+/**
  * Handle mouse presses: select the appropriate entry
  */
 bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t, int32_t y)
 {
 	switch (btn) {
-	case SDL_BUTTON_WHEELDOWN:
-	case SDL_BUTTON_WHEELUP:
-		return m_scrollbar.handle_mousepress(btn, 0, y);
+
 	case SDL_BUTTON_LEFT: {
 		int32_t const time = WLApplication::get()->get_time();
 
@@ -471,15 +476,15 @@ bool BaseListselect::handle_mousemove(uint8_t, int32_t, int32_t y, int32_t, int3
 	return true;
 }
 
-bool BaseListselect::handle_key(bool const down, SDL_keysym const code) {
+bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		uint32_t selected_idx;
 		switch (code.sym) {
-		case SDLK_KP2:
+		case SDL_SCANCODE_KP_2:
 			if (code.mod & KMOD_NUM)
 				break;
 			/* no break */
-		case SDLK_DOWN:
+		case SDL_SCANCODE_DOWN:
 			selected_idx = selection_index() + 1;
 			if (selected_idx < size())
 				select(selected_idx);
@@ -489,11 +494,11 @@ bool BaseListselect::handle_key(bool const down, SDL_keysym const code) {
 				m_scrollbar.set_scrollpos(m_scrollpos);
 			}
 			return true;
-		case SDLK_KP8:
+		case SDL_SCANCODE_KP_8:
 			if (code.mod & KMOD_NUM)
 				break;
 			/* no break */
-		case SDLK_UP:
+		case SDL_SCANCODE_UP:
 			selected_idx = selection_index();
 			if (selected_idx > 0)
 				select(selected_idx - 1);

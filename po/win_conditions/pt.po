@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-10-04 15:33+0000\n"
+"POT-Creation-Date: 2014-11-12 11:40+0000\n"
 "PO-Revision-Date: 2014-03-15 03:02+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
@@ -11,8 +11,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-05 05:51+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-11-13 05:54+0000\n"
+"X-Generator: Launchpad (build 17241)\n"
 "Language: pt\n"
 
 #
@@ -100,11 +100,11 @@ msgid "The tribe or team that can defeat all others wins the game!"
 msgstr ""
 "A tribo ou equipa que conseguir derrotar todas as outras vence o jogo!"
 
-#: ../../scripting/win_conditions/02_collectors.lua:14
+#: ../../scripting/win_conditions/02_collectors.lua:15
 msgid "Collectors"
 msgstr "Recolectores"
 
-#: ../../scripting/win_conditions/02_collectors.lua:17
+#: ../../scripting/win_conditions/02_collectors.lua:18
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest number of wares at the end of 4 hours wins the game."
@@ -116,31 +116,31 @@ msgstr ""
 #
 # File: ../../scripting/win_condition_texts.lua, line: 41
 # File: ../../scripting/win_condition_texts.lua, line: 41
-#: ../../scripting/win_conditions/02_collectors.lua:20
+#: ../../scripting/win_conditions/02_collectors.lua:21
 msgid "Points"
 msgstr "Pontos"
 
-#: ../../scripting/win_conditions/02_collectors.lua:99
+#: ../../scripting/win_conditions/02_collectors.lua:100
 msgid "Status for %s"
 msgstr "Estado para %s"
 
 #: TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P", P meaning "Points'
-#: ../../scripting/win_conditions/02_collectors.lua:109
+#: ../../scripting/win_conditions/02_collectors.lua:110
 msgid "  %1$s (%2$i P) x %3$i = %4$i P"
 msgstr ""
 
-#: ../../scripting/win_conditions/02_collectors.lua:113
+#: ../../scripting/win_conditions/02_collectors.lua:114
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
 msgstr[0] ""
 msgstr[1] ""
 
 #: TRANSLATORS: Context: 'The game will end in %s.'
-#: ../../scripting/win_conditions/02_collectors.lua:127
+#: ../../scripting/win_conditions/02_collectors.lua:128
 msgid "%1$ih%2$02im"
 msgstr ""
 
-#: ../../scripting/win_conditions/02_collectors.lua:129
+#: ../../scripting/win_conditions/02_collectors.lua:130
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] ""
@@ -149,15 +149,15 @@ msgstr[1] ""
 #
 # File: ../../scripting/win_condition_texts.lua, line: 40
 # File: ../../scripting/win_condition_texts.lua, line: 40
-#: ../../scripting/win_conditions/02_collectors.lua:131
+#: ../../scripting/win_conditions/02_collectors.lua:132
 msgid "The game will end in %s."
 msgstr "O jogo irá terminar em %s."
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:13
+#: ../../scripting/win_conditions/03_territorial_lord.lua:14
 msgid "Territorial Lord"
 msgstr "Senhor do Território"
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:16
+#: ../../scripting/win_conditions/03_territorial_lord.lua:17
 msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
@@ -170,30 +170,30 @@ msgstr ""
 #
 # File: ../../scripting/win_condition_texts.lua, line: 45
 # File: ../../scripting/win_condition_texts.lua, line: 45
-#: ../../scripting/win_conditions/03_territorial_lord.lua:151
-#: ../../scripting/win_conditions/03_territorial_time.lua:23
+#: ../../scripting/win_conditions/03_territorial_lord.lua:152
+#: ../../scripting/win_conditions/03_territorial_time.lua:24
 msgid "Team %i"
 msgstr "Equipa %i"
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:153
-#: ../../scripting/win_conditions/03_territorial_time.lua:197
+#: ../../scripting/win_conditions/03_territorial_lord.lua:154
+#: ../../scripting/win_conditions/03_territorial_time.lua:198
 msgid "%s owns more than half of the map’s area."
 msgstr "%s domina mais de metade do mapa."
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:155
-#: ../../scripting/win_conditions/03_territorial_time.lua:199
+#: ../../scripting/win_conditions/03_territorial_lord.lua:156
+#: ../../scripting/win_conditions/03_territorial_time.lua:200
 msgid "You’ve still got %i minute to prevent a victory."
 msgid_plural "You’ve still got %i minutes to prevent a victory."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:160
-#: ../../scripting/win_conditions/03_territorial_time.lua:204
+#: ../../scripting/win_conditions/03_territorial_lord.lua:161
+#: ../../scripting/win_conditions/03_territorial_time.lua:205
 msgid "You own more than half of the map’s area."
 msgstr "Dominas mais de metade da área do mapa."
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:162
-#: ../../scripting/win_conditions/03_territorial_time.lua:206
+#: ../../scripting/win_conditions/03_territorial_lord.lua:163
+#: ../../scripting/win_conditions/03_territorial_time.lua:207
 msgid "Keep it for %i more minute to win the game."
 msgid_plural "Keep it for %i more minutes to win the game."
 msgstr[0] ""
@@ -201,11 +201,11 @@ msgstr[1] ""
 
 # File: ../../scripting/win_conditions/03_territorial_lord.lua, line: 13
 # File: ../../scripting/win_conditions/03_territorial_time.lua, line: 13
-#: ../../scripting/win_conditions/03_territorial_time.lua:13
+#: ../../scripting/win_conditions/03_territorial_time.lua:14
 msgid "Territorial Time"
 msgstr "Senhor do Território"
 
-#: ../../scripting/win_conditions/03_territorial_time.lua:16
+#: ../../scripting/win_conditions/03_territorial_time.lua:17
 msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
@@ -216,21 +216,21 @@ msgstr ""
 "vencedor será o jogador ou a equipa que for capaz de manter esta área pelo "
 "menos durante 20 minutos ou quem tiver mais território após 4 horas."
 
-#: ../../scripting/win_conditions/03_territorial_time.lua:21
+#: ../../scripting/win_conditions/03_territorial_time.lua:22
 msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
 msgstr ""
 
-#: ../../scripting/win_conditions/03_territorial_time.lua:22
+#: ../../scripting/win_conditions/03_territorial_time.lua:23
 msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
 msgstr ""
 
-#: ../../scripting/win_conditions/03_territorial_time.lua:220
+#: ../../scripting/win_conditions/03_territorial_time.lua:221
 msgid "Otherwise the game will end in %i minute."
 msgid_plural "Otherwise the game will end in %i minutes."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../scripting/win_conditions/03_territorial_time.lua:225
+#: ../../scripting/win_conditions/03_territorial_time.lua:226
 #: ../../scripting/win_conditions/04_wood_gnome.lua:83
 msgid "The game will end in %i minute."
 msgid_plural "The game will end in %i minutes."

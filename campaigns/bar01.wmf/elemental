@@ -1,0 +1,11 @@
+# Automatically created by Widelands bzr7199[trunk] (Release)
+
+[global]
+packet_version="1"
+map_w="64"
+map_h="64"
+nr_players="1"
+name=_"A Place to Call Home"
+author="Winterwind,wl-zocker"
+descr=_"In this scenario, the higher production buildings including mining will be introduced."
+background="campaigns/bar01.wmf/pics/background.jpg"

@@ -6,8 +6,6 @@ wl_library(ui_fsmenu
     campaign_select.h
     editor.cc
     editor.h
-    editor_mapselect.cc
-    editor_mapselect.h
     fileview.cc
     fileview.h
     internet_lobby.cc
@@ -20,8 +18,8 @@ wl_library(ui_fsmenu
     launch_spg.h
     loadgame.cc
     loadgame.h
-    loadreplay.cc
-    loadreplay.h
+    load_map_or_game.cc
+    load_map_or_game.h
     main.cc
     main.h
     mapselect.cc
@@ -34,8 +32,9 @@ wl_library(ui_fsmenu
     options.h
     singleplayer.cc
     singleplayer.h
+    suggested_teams_box.cc
+    suggested_teams_box.h
   DEPENDS
-    base_deprecated
     base_exceptions
     base_i18n
     base_log

@@ -119,7 +119,7 @@ void BuildingWindow::draw(RenderTarget & dst)
 
 	const Image* dark_frame = ImageTransformations::change_luminosity
 		(&anim.representative_image(building().owner().get_playercolor()), 1.22, true);
-	dst.blit(Point(get_inner_w() / 2, get_inner_h() / 2), dark_frame, CM_Normal, UI::Align_Center);
+	dst.blit(Point(get_inner_w() / 2, get_inner_h() / 2), dark_frame, CM_UseAlpha, UI::Align_Center);
 }
 
 /*
@@ -205,6 +205,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 						(capsbuttons, is_stopped ? "continue" : "stop", 0, 0, 34, 34,
 						 g_gr->images().get("pics/but4.png"),
 						 g_gr->images().get((is_stopped ? "pics/continue.png" : "pics/stop.png")),
+						 /** TRANSLATORS: Stop/Continue toggle button for production sites. */
 						 is_stopped ? _("Continue") : _("Stop"));
 				stopbtn->sigclicked.connect(boost::bind(&BuildingWindow::act_start_stop, boost::ref(*this)));
 				capsbuttons->add
@@ -229,7 +230,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 					const Widelands::BuildingDescr & building_descr =
 						*tribe.get_building_descr(enhancement);
 
-					std::string tooltip = (boost::format(_("Enhance to %s"))
+					std::string enhance_tooltip = (boost::format(_("Enhance to %s"))
 												  % building_descr.descname().c_str()).str()
 												 + "<br><font size=11>" + _("Construction costs:") + "</font><br>"
 												 +  waremap_to_richtext(tribe, building_descr.enhancement_cost());
@@ -239,7 +240,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 							(capsbuttons, "enhance", 0, 0, 34, 34,
 							 g_gr->images().get("pics/but4.png"),
 							 building_descr.get_icon(),
-							 tooltip);
+							 enhance_tooltip);
 
 					//  button id = building id
 				   enhancebtn->sigclicked.connect([this, enhancement] {act_enhance(enhancement);});
@@ -372,7 +373,7 @@ Callback for bulldozing request
 */
 void BuildingWindow::act_bulldoze()
 {
-	if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) {
+	if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
 		if (m_building.get_playercaps() & Widelands::Building::PCap_Bulldoze)
 			igbase().game().send_player_bulldoze(m_building);
 	}
@@ -388,7 +389,7 @@ Callback for dismantling request
 */
 void BuildingWindow::act_dismantle()
 {
-	if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) {
+	if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
 		if (m_building.get_playercaps() & Widelands::Building::PCap_Dismantle)
 			igbase().game().send_player_dismantle(m_building);
 	}
@@ -431,7 +432,7 @@ Callback for enhancement request
 */
 void BuildingWindow::act_enhance(Widelands::BuildingIndex id)
 {
-	if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) {
+	if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
 		if (m_building.get_playercaps() & Widelands::Building::PCap_Enhancable)
 			igbase().game().send_player_enhance_building(m_building, id);
 	}

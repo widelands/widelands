@@ -77,7 +77,7 @@ FullscreenMenuMain::FullscreenMenuMain() :
 		(this, "exit",
 		 m_butx, get_h() * 178 / 200, m_butw, m_buth,
 		 g_gr->images().get("pics/but3.png"),
-		 _("Exit Game"), std::string(), true, false),
+		 _("Exit Widelands"), std::string(), true, false),
 
 // Textlabels
 	version

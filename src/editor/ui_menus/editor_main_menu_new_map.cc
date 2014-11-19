@@ -62,7 +62,7 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive & parent)
 	}
 
 	m_width = new UI::Textarea(this, posx + spacing + 20, posy,
-										(boost::format(_("Width: %u")) % Widelands::MAP_DIMENSIONS[m_w]).str().c_str());
+										(boost::format(_("Width: %u")) % Widelands::MAP_DIMENSIONS[m_w]).str());
 
 	UI::Button * widthupbtn = new UI::Button
 		(this, "width_up",
@@ -82,7 +82,7 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive & parent)
 
 	m_height = new UI::Textarea(this, posx + spacing + 20, posy,
 										 (boost::format(_("Height: %u"))
-										  % Widelands::MAP_DIMENSIONS[m_h]).str().c_str());
+										  % Widelands::MAP_DIMENSIONS[m_h]).str());
 
 	UI::Button * heightupbtn = new UI::Button
 		(this, "height_up",
@@ -153,7 +153,6 @@ void MainMenuNewMap::clicked_create_map() {
 	map.recalc_whole_map(egbase.world());
 
 	eia.set_need_save(true);
-	eia.need_complete_redraw();
 
 	die();
 }

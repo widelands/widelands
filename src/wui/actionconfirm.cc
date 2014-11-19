@@ -31,7 +31,6 @@
 #include "ui_basic/window.h"
 #include "wui/interactive_player.h"
 
-using boost::format;
 
 struct ActionConfirm : public UI::Window {
 	ActionConfirm
@@ -148,7 +147,7 @@ ActionConfirm::ActionConfirm
 	new UI::MultilineTextarea
 		(this,
 		 0, 0, 200, 74,
-		 (format(message) % building.descr().descname()).str(),
+		 (boost::format(message) % building.descr().descname()).str(),
 		 UI::Align_Center);
 
 	UI::Button * okbtn =
@@ -266,8 +265,7 @@ void BulldozeConfirm::ok()
 		 (building->get_playercaps() & Widelands::Building::PCap_Bulldoze))
 	{
 		game.send_player_bulldoze
-			(*todestroy, get_key_state(SDLK_LCTRL) << get_key_state(SDLK_RCTRL));
-		iaplayer().need_complete_redraw();
+			(*todestroy, get_key_state(SDL_SCANCODE_LCTRL) << get_key_state(SDL_SCANCODE_RCTRL));
 	}
 
 	die();
@@ -327,7 +325,6 @@ void DismantleConfirm::ok()
 		 (building->get_playercaps() & Widelands::Building::PCap_Dismantle))
 	{
 		game.send_player_dismantle(*todismantle);
-		iaplayer().need_complete_redraw();
 	}
 
 	die();
@@ -388,7 +385,6 @@ void EnhanceConfirm::ok()
 		 (building->get_playercaps() & Widelands::Building::PCap_Enhancable))
 	{
 		game.send_player_enhance_building(*building, m_id);
-		iaplayer().need_complete_redraw();
 	}
 
 	die();
@@ -428,7 +424,6 @@ void ShipSinkConfirm::ok()
 
 	if (ship && iaplayer().can_act(ship->get_owner()->player_number())) {
 		game.send_player_sink_ship(*ship);
-		iaplayer().need_complete_redraw();
 	}
 
 	die();
@@ -477,7 +472,6 @@ void ShipCancelExpeditionConfirm::ok()
 		 ship->get_ship_state() != Widelands::Ship::EXP_COLONIZING)
 	{
 		game.send_player_cancel_expedition_ship(*ship);
-		iaplayer().need_complete_redraw();
 	}
 
 	die();

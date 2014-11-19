@@ -6,23 +6,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-10-04 15:33+0000\n"
+"POT-Creation-Date: 2014-11-12 11:40+0000\n"
 "PO-Revision-Date: 2014-07-03 18:29+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-05 05:38+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-11-13 05:39+0000\n"
+"X-Generator: Launchpad (build 17241)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "Language: cs\n"
 "X-Poedit-Language: Czech\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
-#: ../../campaigns/cconfig:98
-msgid "01 – From Nemesis to Genesis"
-msgstr "01 - Od Nemesis až k Genesis"
+msgid "From Nemesis to Genesis"
+msgstr ""
 
 #: ../../campaigns/atl01.wmf/elemental:11
 msgid ""
@@ -32,129 +31,43 @@ msgstr ""
 "Po přistání na tajemném ostrově blízko Atlantidy se zbývající Atlantiďané "
 "snaží vybudovat pro sebe nový domov."
 
-#: ../../campaigns/cconfig:27
-msgid "Barbarians – The Second Empire"
-msgstr "Barbaři - Druhé impérium"
-
-#: ../../campaigns/cconfig:30
-msgid "Easy. Introduces the Barbarians"
-msgstr "Jednoduché. Úvod k brabarům"
-
-#: ../../campaigns/cconfig:31
-msgid ""
-"When Chat’Karuth died, he was an old man, father to three strong and "
-"ambitious sons, and warlord to an army that could match any enemy willing to "
-"rise against the ancient forests. Though at the end of his glorious reign, "
-"Chat’Karuth chose his eldest son, Thron, to succeed him as the tribe’s "
-"warlord – a decision that left his two brothers unsatisfied. The old warlord "
-"knew that. As his father instructed him, Thron left the capital of "
-"Al’thunran, the home of the Throne Among the Trees, and withdrew his forces "
-"to the high hills where he buried the corpse of his father. There he swore "
-"to the gods and his father’s spirit that he’d return to re-established "
-"order. While his brothers have raged blind war against Thron and the few "
-"forces he left to secure the borders of Al’thunran, the young warlord seeks "
-"to reunite his ambitious brothers and force the tribes to march once again "
-"under a common banner."
+#: ../../campaigns/bar01.wmf/elemental:8
+msgid "A Place to Call Home"
 msgstr ""
-"Když Chat'Karuth zemřel, byl to již starý muž, otec tří silných a "
-"cílevědomých synů a velitem armády schopné se postavi kterémukoliv "
-"nepříteli, který by pozvedl zbraň proti prastarým lesům. Avšak když skončila "
-"doba jeho slavné vlády, Chat’Karuth předal vládu nad svým kmenem svému "
-"nejstaršímu synu Thronovi - jehož bratři s tímto rozhodnutím ovšem "
-"nesouhlasili. Starý náčelník to věděl. Podle otcových pokynů Thron opustil "
-"Al'thuranu, kde se nacházel Trůn mezi Stromy, a stáhl se se svými vojsky do "
-"vysokých kopců, kde pohřbil svého otce. Tam přísahal při bozích a duchu "
-"svého otce, že se vrátí a znovunastolí pořádek. Zatímco jeho bratři zuřivě "
-"vedli válku proti Thronovi a slabým vojskům, které zanechal střežit hranice, "
-"mladý náčelník se snaží sjednotit své bratry a přimět kmeny znovu pochodovat "
-"pod společným praporcem."
 
-#: ../../campaigns/cconfig:34
-msgid "Empire – The Months of Exile"
-msgstr "Impérium - Měsíce vyhnanství"
-
-#: ../../campaigns/cconfig:37
-msgid "Easy. Introduces the Empire"
-msgstr "Jednoduché. Úvod k Impériu"
-
-#: ../../campaigns/cconfig:38
+#: ../../campaigns/bar01.wmf/elemental:10
 msgid ""
-"Six months ago, Lutius – a young general of the Empire – was sent with 150 "
-"soldiers to the frontier beyond the northern forests where Barbarian tribes "
-"were crossing onto land held by the Empire. His task was to defend the "
-"Empire’s land. At first, everything was calm. He even talked to a few "
-"barbarian children and thought about a peaceful life – side by side with "
-"this archaic folk. He began to feel safer and his army began to drop their "
-"attention off the potential enemy. That was their undoing. One night in "
-"March his unprepared army was attacked by 100 barbarian footmen and was "
-"completely scattered. Only with his bare life he and a handful of his "
-"soldiers survived."
+"In this scenario, the higher production buildings including mining will be "
+"introduced."
 msgstr ""
-"Před šesti měsíci, Lucius - mladý generál Impéria - byl vyslán se 150 muži "
-"na hranici za severními lesy, kde barbaské kmeny přecházely do zemí Impéria. "
-"Jeho úkol byl tuto zem ubránit. Ze začátku bylo vše klidné. Dokonce hovořil "
-"s několika barbarskými dětmi a doufal v mírumilovný život po boku tohoto "
-"starobylého lidu. Cítil se bezpečně a jeho armáda přestala dávat pozor na "
-"potenciálního nepřítele. To byla jejich zkáza. Jedné březnové noci byla jeho "
-"nepřipravená armáda napadena stem barbarských pěšáků a rozprášena. S holým "
-"životem vyvázl pouze on a hrstka jeho vojáků"
 
-#: ../../campaigns/cconfig:41
-msgid "Atlanteans – The Run for the Fire"
-msgstr "Atlanťané - Závod o oheň"
+#: ../../campaigns/bar02.wmf/elemental:7
+msgid "This Land is Our Land"
+msgstr ""
 
-#: ../../campaigns/cconfig:44
-msgid "Challenging. Introduces the Atlanteans"
-msgstr "Náročný. Úvod k Atlanťanům"
-
-#: ../../campaigns/cconfig:45
+#: ../../campaigns/bar02.wmf/elemental:9
 msgid ""
-"When their God lost faith in the Atlanteans and drowned their island, one "
-"woman’s struggle for justice and a second chance for her people would become "
-"the stuff of legends. Leading the remaining Atlanteans into a new future in "
-"a new part of the World, Jundlina became the most powerful human of her "
-"time, but at a high cost: her humanity and soul."
+"This tutorial explains the handling of military and training site buildings "
+"and will introduce fighting."
 msgstr ""
-"Když bůh ztratil víru v Atlantiďany a potopil jejich ostrov, zápas jedné "
-"ženy o právo a druhou šanci pro její lid se stal legendou. Zatímco vedla "
-"zbylé Atlantiďany k nové budoucnosti v nové části světa, Jundlina se stala "
-"nejmocnější ženou své doby, ale zaplatila vysokou cenu: ztratila lidskost i "
-"svou duši."
+"Tento trénink vysvětlí práci s vojenskými a tréninkovými budovami a podíváme "
+"se i na boj."
 
-#: ../../campaigns/cconfig:64
-#: ../../campaigns/t01.wmf/elemental:7
-msgid "01 – Eyes in the Dark"
-msgstr "01 - Oči v temnotě"
-
-#: ../../campaigns/cconfig:69
-#: ../../campaigns/t02.wmf/elemental:7
-msgid "02 – A Place to Call Home"
-msgstr "02 - Místo nazývané domov"
-
-#: ../../campaigns/cconfig:74
-#: ../../campaigns/t03.wmf/elemental:7
-msgid "03 – This Land is Our Land"
-msgstr "03 - Tahle země patří nám"
-
-#: ../../campaigns/cconfig:81
-#: ../../campaigns/emp01.wmf/elemental:7
-msgid "01 – The Strands of Malac’ Mor"
-msgstr "01 - Úžiny Malac Mor"
-
-#: ../../campaigns/cconfig:86
-#: ../../campaigns/emp02.wmf/elemental:9
-msgid "02 – An Outpost for Exile"
-msgstr "02 - Útočiště pro vyhnance"
-
-#: ../../campaigns/cconfig:91
-#: ../../campaigns/cconfig:103
 #: ../../campaigns/dummy.wmf/elemental:7
 msgid "Not yet implemented"
 msgstr "Ještě nezavedeno"
 
 #: ../../campaigns/dummy.wmf/elemental:9
+msgid "Nobody"
+msgstr ""
+
+#: ../../campaigns/dummy.wmf/elemental:10
 msgid "Sorry, this map is not yet implemented."
 msgstr "Je nám líto, ale tato mapa nebyla ještě implementována"
+
+#: ../../campaigns/emp01.wmf/elemental:7
+msgid "The Strands of Malac’ Mor"
+msgstr ""
 
 #: ../../campaigns/emp01.wmf/elemental:9
 msgid ""
@@ -170,6 +83,10 @@ msgstr ""
 "megsemmisül. Csak nagy szerencsével sikerül a sérült hajót egy ismeretlen, "
 "homokos parton kikötnie, és megmentenie embereit. Egyelőre."
 
+#: ../../campaigns/emp02.wmf/elemental:9
+msgid "An Outpost for Exile"
+msgstr ""
+
 #: ../../campaigns/emp02.wmf/elemental:11
 msgid ""
 "Finally the ship was repaired, so Lutius and his people returned to the "
@@ -182,39 +99,45 @@ msgstr ""
 "přistávají na zeleném, středozemním ostrově, který vypadá jako ráj. Všichni "
 "jsou nadšení a vydávají se na průzkum tohoto nového místa pro život."
 
-#: ../../campaigns/t01.wmf/elemental:9
-msgid ""
-"In this tutorial, the basic gameplay and control as well as basic production "
-"buildings of the Barbarians are introduced."
+#: ../../campaigns/tutorial01_basic_control.wmf/elemental:8
+msgid "Basic Control"
 msgstr ""
-"V tomto tutorialu jsou představeny základní principy hry a jejího ovládání, "
-"společně se základními výrobními budovami kmene barbarů."
 
-#: ../../campaigns/t02.wmf/elemental:9
+#: ../../campaigns/tutorial01_basic_control.wmf/elemental:10
 msgid ""
-"In this scenario, the higher production buildings including mining and "
-"military expansions will be introduced."
+"In this tutorial, you will learn how to navigate in Widelands and how to "
+"build buildings and roads."
 msgstr ""
-"V této misi si představíme pokročilé výrobní budovy včetně těžby surovin a "
-"také vojenskou expanzi na další území."
 
-#: ../../campaigns/t03.wmf/elemental:9
+#: ../../campaigns/tutorial02_warfare.wmf/elemental:8
+msgid "Warfare"
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""
-"This tutorial explains the handling of military and training site buildings "
-"and will introduce fighting."
+"In this tutorial, you will be taught the secrets of warfare: how to create "
+"soldiers, how to train them and how to lead them in battle."
 msgstr ""
-"Tento trénink vysvětlí práci s vojenskými a tréninkovými budovami a podíváme "
-"se i na boj."
 
-#: ../../campaigns/tutorial01.wmf/elemental:7
-msgid "Tutorial 1"
-msgstr "Tutoriál 1"
+#: ../../campaigns/tutorial03_seafaring.wmf/elemental:8
+msgid "Seafaring"
+msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/elemental:9
+#: ../../campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
-"Basic Tutorial – a map based on Winterwind’s tutorial 1 for the Barbarians"
+"In this tutorial, you will get to know seafaring, which is how to handle "
+"ships and ports."
 msgstr ""
-"Základní tutoriál - mapa založená na Winterwindovu tutoriálu pro Barbary."
+
+#: ../../campaigns/tutorial04_economy.wmf/elemental:8
+msgid "Economy"
+msgstr ""
+
+#: ../../campaigns/tutorial04_economy.wmf/elemental:10
+msgid ""
+"In this tutorial, you will learn what option Widelands offers to adjust your "
+"economy. Recommended for players with some experience."
+msgstr ""
 
 #: ../../maps/Atoll.wmf/elemental:9
 msgid "Atoll"
@@ -223,10 +146,6 @@ msgstr "Atol"
 #: ../../maps/Atoll.wmf/elemental:11
 msgid "Who will be the real king of the big atoll?"
 msgstr "Kdo se stane pravým králem velkého atolu?"
-
-#: ../../maps/Atoll.wmf/elemental:12
-msgid "Suggested Teams: (blue, yellow) vs. (red, green)"
-msgstr "Doporučené týmy: (modrý, žlutý) proti (červený, zelený)"
 
 #: ../../maps/Calvisson.wmf/elemental:9
 msgid "Calvisson"
@@ -238,14 +157,6 @@ msgid ""
 "the ways to encompass these large territories are long and meandering, so it "
 "is easy to err into the land of the foreign clans."
 msgstr ""
-
-#: ../../maps/Calvisson.wmf/elemental:12
-msgid ""
-"Suggested Teams: blue vs. red | yellow vs. green | (blue, yellow) vs. (red, "
-"green) | (blue, green) vs. (red, yellow)"
-msgstr ""
-"Navrhované týmy: modrý vs. červený | žlutý vs. zelený | (modrý, žlutý) vs. "
-"(červený, zelený) | (modrý, zelený) vs. (červený, žlutý)"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -299,11 +210,6 @@ msgstr "Překračování horizontu"
 msgid "Man your ship and sail to the horizon."
 msgstr "Zmocni se lodi a pluj k horizontu."
 
-#: ../../maps/Crossing the horizon.wmf/elemental:12
-#: ../../maps/Rendez-Vous.wmf/elemental:10
-msgid "Suggested Teams: all ok"
-msgstr "Navrhované týmy: vše ok"
-
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
 msgstr "Pouštní turnaj"
@@ -317,12 +223,6 @@ msgstr ""
 "Čtyři kmeny bojují se svými nejbližšími sousedy o dobytí zlaté hory, která v "
 "sobě skrývá neskutečné bohatství. Budou však dva přeživší kmeny schopné se o "
 "bohatství rozumně rozdělit?"
-
-#: ../../maps/Desert Tournament.wmf/elemental:10
-#: ../../maps/Four Castles.wmf/elemental:10
-#: ../../maps/Swamp Monks.wmf/elemental:10
-msgid "Suggested Teams: (blue, red) vs. (yellow, green)"
-msgstr "Navrhované týmy : (modří, červení) vs (žlutí, zelení)"
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
@@ -349,14 +249,6 @@ msgid ""
 msgstr ""
 "Mnoho kmenů uchvátila dechberoucí krása těchto smaragdových ostrovů natolik, "
 "že se pokusily zabrat je pro sebe."
-
-#: ../../maps/Elven Forests.wmf/elemental:10
-msgid ""
-"Suggested Teams: (blue, red) vs. (yellow, green) | (blue, yellow) vs. (red, "
-"green)"
-msgstr ""
-"Doporučené týmy: (modrý, červený) proti (žlutý, zelený) nebo (modrý, žlutý) "
-"proti (červený, zelený)"
 
 #: ../../maps/Fellowships.wmf/elemental:9
 msgid "Fellowships"
@@ -437,14 +329,6 @@ msgstr ""
 "suroviny pro svůj kmen? Nápověda I: Vodu lze nalézt podél řeky. Nápověda II: "
 "Sněhulák značí další zdroje vody. Nápověda III: Každá hora obsahuje pouze "
 "jeden druh suroviny."
-
-#: ../../maps/Four Mountains.wmf/elemental:10
-msgid ""
-"Suggested Teams: (blue, red) vs. (yellow, green) | (blue, green) vs. (red, "
-"yellow)"
-msgstr ""
-"Navrhované týmy : (modří, červení) vs (žlutí, zelení)  nebo (modří, zelení) "
-"vs (červení, žlutí)"
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -571,13 +455,6 @@ msgid ""
 "long, long way to conquer all the islands. Good luck!"
 msgstr ""
 
-#: ../../maps/Long, long way.wmf/elemental:12
-msgid ""
-"Suggested Teams: blue vs. red | yellow vs. green | (blue, yellow) vs. (red, "
-"green) | (blue, yellow, black) vs. (red, green, orange) | (blue, yellow, "
-"black, purple) vs. (red, green, orange, white)"
-msgstr ""
-
 #: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
 msgid "Island Hopping"
 msgstr "Island Hopping"
@@ -592,17 +469,16 @@ msgstr ""
 "více skupin se snaží dosáhnout centra ostrovů tak rychle, jak jen je to "
 "možné, aby jako první postavili hrad na vrcholku centrální hory."
 
+#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
+msgid "Smugglers"
+msgstr ""
+
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
 msgid ""
 "Your well established smuggling routes suddenly got busy: Two other tribes "
 "have appeared and now a rivalry among smugglers has started: Which team will "
-"be the first to smuggle a certain number of wares? Teams are: Blue + Red vs. "
-"Yellow + Green."
+"be the first to smuggle a certain number of wares?"
 msgstr ""
-"Na tvých dobře zavedených pašeráckých trasách začíná být rušno. Vynořily se "
-"další dva kmeny a pašeráci mezi sebou začínají soupeřit: který tým propašuje "
-"jako první dané množství zboží? Týmy jsou: (modrý, červený) proti (žlutý, "
-"zelený)."
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"
@@ -631,10 +507,6 @@ msgstr ""
 "ukrývají nádherný a mocný poklad - Zelenou pláň. Je nesmírně těžké ji dobýt, "
 "ale tak snadné zas ztratit. Jestli ji chceš pro sebe, musís se o ní utkat s "
 "ostatními."
-
-#: ../../maps/Plateau.wmf/elemental:10
-msgid "Suggested Teams: blue vs. yellow"
-msgstr "Doporučené týmy: modrý vs. žlutý"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:7
 msgid "Rendez-Vous"
@@ -761,14 +633,6 @@ msgid ""
 msgstr ""
 "Řeka vždy poskytovala potravu i dopravu. Tentokrát bude o vládu nad touto "
 "zemí válčit osm impérií."
-
-#: ../../maps/The Nile.wmf/elemental:12
-msgid ""
-"Suggested Teams: blue vs. red | yellow vs. green | (blue, yellow) vs. (red, "
-"green) | (green, orange, white) vs. (yellow, black, purple) | (blue, orange, "
-"green) vs. (red, yellow, black) | (blue, green, orange, white) vs. (red, "
-"yellow, black, purple)"
-msgstr ""
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:7
 msgid "The Oasis Triangle"
