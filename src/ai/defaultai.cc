@@ -3148,8 +3148,7 @@ uint32_t DefaultAI::get_stocklevel(WareIndex wt) {
 }
 
 // counts produced output in warehouses (only)
-// perhaps it wil might replace get_stocklevel
-// if multiple outputs, it returns lowest value
+// perhaps it will be able to replace get_stocklevel
 uint32_t DefaultAI::get_warehoused_stock(WareIndex wt) {
 	uint32_t count = 0;
 
