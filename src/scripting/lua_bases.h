@@ -104,6 +104,9 @@ public:
 	int conquer(lua_State * L);
 	int get_workers(lua_State* L);
 	int get_wares(lua_State* L);
+	int count_roads(lua_State* L);
+	int get_road_in_dir(lua_State* L, int8_t dir);
+
 
 	/*
 	 * C methods

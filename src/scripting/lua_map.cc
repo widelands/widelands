@@ -2483,6 +2483,38 @@ const PropertyType<LuaRoad> LuaRoad::Properties[] = {
 	{nullptr, nullptr, nullptr},
 };
 
+//NOCOM should there be something to be used to generate documentation?
+int LuaFlag::get_road_in_dir(lua_State * L,int8_t dir) {
+
+		if (dir<1 || dir>6) {
+			return 0; //NOCOM 0 or 1 ??
+		}
+        EditorGameBase & egbase = get_egbase(L);
+        Flag * f = get(L, egbase);
+        if (f->get_road(dir) != nullptr)        {
+                return 0;
+        }
+
+        return
+                to_lua<LuaRoad>(L, new LuaRoad(*f->get_road(dir)));
+
+}
+
+//returns a count of roads from a flag//NOCOM
+int LuaFlag::count_roads(lua_State * L) {
+
+        EditorGameBase & egbase = get_egbase(L);
+        Flag * f = get(L, egbase);
+        uint8_t counter = 0;
+        for (uint8_t road_id = 6; road_id; --road_id) {
+                if (f->get_road(road_id) != nullptr)    {
+                        counter +=1;
+                }
+        }
+        return counter;
+}
+
+
 
 /*
  ==========================================================

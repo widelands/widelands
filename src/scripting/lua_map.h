@@ -602,6 +602,8 @@ public:
 	 */
 	int set_wares(lua_State *);
 	int get_wares(lua_State *);
+	int count_roads(lua_State *);
+	int get_road_in_dir(lua_State *, int8_t dir);
 
 	/*
 	 * C Methods
