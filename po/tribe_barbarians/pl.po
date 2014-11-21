@@ -2062,7 +2062,7 @@ msgid ""
 "lumberjack.’"
 msgstr ""
 "\"Zetnij drzewo w dwieście ciosów, a jesteś dzieckiem. Zetnij je w sto, a "
-"jesteś żołnierzem. \r\n"
+"jesteś żołnierzem. \n"
 "Zetnij je w pięćdziesiąt, a jesteś bohaterem. Zetnij je w 20, a wkrótce "
 "zostaniesz szanowanym drwalem.\""
 
