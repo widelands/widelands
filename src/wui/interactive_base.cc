@@ -403,15 +403,18 @@ Draw debug overlay when appropriate.
 */
 void InteractiveBase::draw_overlay(RenderTarget& dst) {
 
+	const Map & map = egbase().map();
+
 	// Blit node information when in debug mode.
 	if (get_display_flag(dfDebug) || !dynamic_cast<const Game*>(&egbase())) {
 		const std::string gametime(gametimestring(egbase().get_gametime()));
 		const std::string gametime_text = as_uifont(gametime, UI_FONT_SIZE_SMALL);
-		dst.blit(Point(5, 5), UI::g_fh1->render(gametime_text), CM_UseAlpha, UI::Align_TopLeft);
-		static boost::format node_format("(%i, %i)");
+		static boost::format node_format("(%3i, %3i; %2i)");
+		
+		const int32_t height=map[m_sel.pos.node].get_height();
 
 		const std::string node_text = as_uifont
-			((node_format % m_sel.pos.node.x % m_sel.pos.node.y).str(), UI_FONT_SIZE_SMALL);
+			((node_format % m_sel.pos.node.x % m_sel.pos.node.y % height).str(), UI_FONT_SIZE_SMALL);
 		dst.blit(
 			Point(get_w() - 5, get_h() - 5),
 			UI::g_fh1->render(node_text),
