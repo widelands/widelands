@@ -19,13 +19,12 @@
 
 #include "ui_basic/panel.h"
 
+// NOCOM(#sirver): check includes
 #include "base/log.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "graphic/surface.h"
-#include "graphic/surface_cache.h"
 #include "helper.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
@@ -37,40 +36,6 @@
 using namespace std;
 
 namespace UI {
-
-// Caches the image of the inner of a panel. Will redraw the Panel on cache misses.
-class Panel::CacheImage : public Image {
-public:
-	CacheImage(Panel* const panel, uint16_t w, uint16_t h) :
-		width_(w),
-		height_(h),
-		panel_(panel),
-		hash_("cache_image_" + random_string("0123456789ABCDEFGH", 32)) {}
-	virtual ~CacheImage() {}
-
-	// Implements Image.
-	uint16_t width() const override {return width_;}
-	uint16_t height() const override {return height_;}
-	const string& hash() const override {return hash_;}
-	Surface* surface() const override {
-		Surface* rv = g_gr->surfaces().get(hash_);
-		if (rv)
-			return rv;
-
-		rv = g_gr->surfaces().insert(hash_, Surface::create(width_, height_), true);
-
-		// Cache miss! We have to redraw our panel onto our surface.
-		RenderTarget inner(rv);
-		panel_->do_draw_inner(inner);
-
-		return rv;
-	}
-
-private:
-	const int16_t width_, height_;
-	Panel* const panel_;  // not owned.
-	const string hash_;
-};
 
 Panel * Panel::_modal       = nullptr;
 Panel * Panel::_g_mousegrab = nullptr;
@@ -93,7 +58,6 @@ Panel::Panel
 	:
 	_parent(nparent), _fchild(nullptr), _lchild(nullptr), _mousein(nullptr), _focus(nullptr),
 	_flags(pf_handle_mouse|pf_think|pf_visible),
-	_needdraw(false),
 	_x(nx), _y(ny), _w(nw), _h(nh),
 	_lborder(0), _rborder(0), _tborder(0), _bborder(0),
 	_border_snap_distance(0), _panel_snap_distance(0),
@@ -308,12 +272,10 @@ void Panel::set_size(const uint32_t nw, const uint32_t nh)
  * Move the panel. Panel's position is relative to the parent.
  */
 void Panel::set_pos(const Point n) {
-	bool nd = _needdraw;
 	update(0, 0, _w, _h);
 	_x = n.x;
 	_y = n.y;
 	update(0, 0, _w, _h);
-	_needdraw = nd;
 }
 
 /**
@@ -510,8 +472,6 @@ void Panel::update(int32_t x, int32_t y, int32_t w, int32_t h)
 		 y >= static_cast<int32_t>(_h) || y + h <= 0)
 		return;
 
-	_needdraw = true;
-
 	if (_parent) {
 		_parent->update_inner(x + _x, y + _y, w, h);
 	} else {
@@ -555,24 +515,6 @@ void Panel::update()
 void Panel::update_inner(int32_t x, int32_t y, int32_t w, int32_t h)
 {
 	update(x - _lborder, y - _tborder, w, h);
-}
-
-/**
- * Enable/Disable the drawing cache.
- * When the drawing cache is enabled, draw() is only called after an update()
- * has been called explicitly. Otherwise, the contents of the panel are copied
- * from an \ref Surface containing the cached image.
- *
- * \note Caching only works properly for solid panels that have no transparency.
- */
-void Panel::set_cache(bool cache)
-{
-	if (cache) {
-		_flags |= pf_cache;
-	} else {
-		_flags &= ~pf_cache;
-		_cache.reset();
-	}
 }
 
 /**
@@ -934,31 +876,12 @@ void Panel::do_draw(RenderTarget & dst)
 
 	draw_border(dst);
 
-	if (_flags & pf_cache) {
-		uint32_t innerw = _w - (_lborder + _rborder);
-		uint32_t innerh = _h - (_tborder + _bborder);
+	Rect innerwindow
+		(Point(_lborder, _tborder),
+			_w - (_lborder + _rborder), _h - (_tborder + _bborder));
 
-	if (!_cache || _cache->width() != innerw || _cache->height() != innerh) {
-			_cache.reset(new CacheImage(this, innerw, innerh));
-			_needdraw = true;
-		}
-
-		if (_needdraw) {
-			RenderTarget inner(_cache->surface());
-			do_draw_inner(inner);
-
-			_needdraw = false;
-		}
-
-		dst.blit(Point(_lborder, _tborder), _cache.get(), CM_Copy);
-	} else {
-		Rect innerwindow
-			(Point(_lborder, _tborder),
-				_w - (_lborder + _rborder), _h - (_tborder + _bborder));
-
-		if (dst.enter_window(innerwindow, nullptr, nullptr))
-			do_draw_inner(dst);
-	}
+	if (dst.enter_window(innerwindow, nullptr, nullptr))
+		do_draw_inner(dst);
 
 	dst.set_window(outerrc, outerofs);
 }
