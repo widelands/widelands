@@ -87,7 +87,7 @@ RoadProgram::RoadProgram() {
 	u_busy_road_texture_ = glGetUniformLocation(gl_program_.object(), "u_busy_road_texture");
 }
 
-void RoadProgram::add_road(const GLSurface& surface,
+void RoadProgram::add_road(const Surface& surface,
                            const FieldsToDraw::Field& start,
                            const FieldsToDraw::Field& end,
                            const Widelands::RoadType road_type) {
@@ -146,7 +146,7 @@ void RoadProgram::add_road(const GLSurface& surface,
 	vertices_.emplace_back(p4);
 }
 
-void RoadProgram::draw(const GLSurface& surface, const FieldsToDraw& fields_to_draw) {
+void RoadProgram::draw(const Surface& surface, const FieldsToDraw& fields_to_draw) {
 	vertices_.clear();
 
 	for (size_t current_index = 0; current_index < fields_to_draw.size(); ++current_index) {

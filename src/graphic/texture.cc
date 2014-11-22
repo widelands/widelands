@@ -35,15 +35,8 @@ using namespace std;
  * Currently it converts a 16 bit image to a 8 bit texture. This should
  * be changed to load a 8 bit file directly, however.
  */
-Texture::Texture(const std::vector<std::string>& texture_files,
-                 const uint32_t frametime,
-                 const SDL_PixelFormat& format)
-   : m_colormap(nullptr),
-     m_pixels(nullptr),
-     m_curframe(nullptr),
-     m_frame_num(0),
-     m_nrframes(0),
-     m_frametime(frametime) {
+Texture::Texture(const std::vector<std::string>& texture_files, const uint32_t frametime)
+   : m_frame_num(0), m_frametime(frametime) {
 	if (texture_files.empty()) {
 		throw wexception("No images for texture.");
 	}
@@ -56,7 +49,8 @@ Texture::Texture(const std::vector<std::string>& texture_files,
 		m_texture_image = fname;
 		SDL_Surface* surf = load_image_as_sdl_surface(fname, g_fs);
 		if (!surf) {
-			throw wexception("WARNING: Failed to load texture frame %s: %s\n", fname.c_str(), IMG_GetError());
+			throw wexception(
+			   "WARNING: Failed to load texture frame %s: %s\n", fname.c_str(), IMG_GetError());
 		}
 		if (surf->w != TEXTURE_WIDTH || surf->h != TEXTURE_HEIGHT) {
 			SDL_FreeSurface(surf);
@@ -67,7 +61,7 @@ Texture::Texture(const std::vector<std::string>& texture_files,
 		}
 
 		// calculate shades on the first frame
-		if (!m_nrframes) {
+		if (m_gl_textures.empty()) {
 			uint8_t top_left_pixel = static_cast<uint8_t*>(surf->pixels)[0];
 			SDL_Color top_left_pixel_color = surf->format->palette->colors[top_left_pixel];
 			for (int i = -128; i < 128; i++) {
@@ -81,20 +75,11 @@ Texture::Texture(const std::vector<std::string>& texture_files,
 
 		// Note: we except the constructor to free the SDL surface
 		GLSurfaceTexture* surface = new GLSurfaceTexture(surf);
-		m_glFrames.emplace_back(surface);
-
-		++m_nrframes;
+		m_gl_textures.emplace_back(surface);
 	}
 
-	// NOCOM(#sirver): check for unused members.
-	if (!m_nrframes)
+	if (m_gl_textures.empty())
 		throw wexception("Texture has no frames");
-}
-
-
-Texture::~Texture ()
-{
-	free(m_pixels);
 }
 
 /**
@@ -109,5 +94,5 @@ RGBColor Texture::get_minimap_color(int8_t shade) {
  */
 void Texture::animate(uint32_t time)
 {
-	m_frame_num = (time / m_frametime) % m_nrframes;
+	m_frame_num = (time / m_frametime) % m_gl_textures.size();
 }

@@ -95,11 +95,8 @@ Graphic::Graphic()
 void Graphic::initialize(int32_t w, int32_t h, bool fullscreen) {
 	cleanup();
 
-	// NOCOM(#sirver): cleanup this method
-
+	// Request an OpenGL 2 context with double buffering.
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-
-	// Request an OpenGL 2 context.
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 
@@ -110,31 +107,26 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen) {
 	}
 
 	log("Graphics: Try to set Videomode %ux%u\n", w, h);
-	// Here we actually set the video mode
-	m_sdl_window = SDL_CreateWindow("Widelands Window",
-											 SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, flags);
-
+	m_sdl_window = SDL_CreateWindow(
+	   "Widelands Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, flags);
 	if (!m_sdl_window) {
-		log
-			("Graphics: Could not set videomode: %s, trying minimum graphics settings\n",
-			 SDL_GetError());
+		log("Graphics: Could not set Videomode: %s, trying minimum graphics settings\n",
+		    SDL_GetError());
 		flags &= ~SDL_WINDOW_FULLSCREEN;
 		m_sdl_window = SDL_CreateWindow("Widelands Window",
 												 SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 												 kFallbackGraphicsWidth, kFallbackGraphicsHeight, flags);
 		m_fallback_settings_in_effect = true;
 		if (!m_sdl_window) {
-			throw wexception
-				("Graphics: could not set video mode: %s", SDL_GetError());
+			throw wexception("Graphics: could not set video mode: %s", SDL_GetError());
 		}
 	}
 
 	SDL_SetWindowTitle(m_sdl_window, ("Widelands " + build_id() + '(' + build_type() + ')').c_str());
+	set_icon(m_sdl_window);
 
 	m_glcontext = SDL_GL_CreateContext(m_sdl_window);
-	if (m_glcontext) {
-		SDL_GL_MakeCurrent(m_sdl_window, m_glcontext);
-	}
+	SDL_GL_MakeCurrent(m_sdl_window, m_glcontext);
 
 	// See graphic/gl/system_headers.h for an explanation of the
 	// next line.
@@ -158,7 +150,6 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen) {
 	log("Graphics: OpenGL: Max texture size: %u\n", glInt);
 
 	SDL_GL_SetSwapInterval(1);
-	SDL_GL_SwapWindow(m_sdl_window);
 
 	glDrawBuffer(GL_BACK);
 
@@ -169,9 +160,9 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen) {
 
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	// NOCOM(#sirver): check for unused members in graphic.
+	SDL_GL_SwapWindow(m_sdl_window);
+
 	screen_.reset(new GLSurfaceScreen(w, h));
-	set_icon(m_sdl_window);
 
 	/* Information about the video capabilities. */
 	{
@@ -188,8 +179,6 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen) {
 		    disp_mode.h);
 		assert(SDL_BYTESPERPIXEL(disp_mode.format) == 4);
 	}
-
-	Surface::display_format_is_now_defined();
 
 	m_rendertarget.reset(new RenderTarget(screen_.get()));
 
@@ -276,7 +265,6 @@ void Graphic::toggle_fullscreen()
 
 
 void Graphic::update() {
-	// NOCOM(#sirver): is this really needed? Why not redraw after a certain time?
 	m_update = true;
 }
 
@@ -312,11 +300,7 @@ void Graphic::save_png(const Image* image, StreamWrite * sw) const {
 
 uint32_t Graphic::new_maptexture(const std::vector<std::string>& texture_files, const uint32_t frametime)
 {
-	SDL_PixelFormat* pixel_fmt = SDL_AllocFormat(SDL_PIXELFORMAT_ARGB8888);
-	m_maptextures.emplace_back(new Texture(texture_files, frametime, *pixel_fmt));
-	if (pixel_fmt) {
-		SDL_FreeFormat(pixel_fmt);
-	}
+	m_maptextures.emplace_back(new Texture(texture_files, frametime));
 	return m_maptextures.size(); // ID 1 is at m_maptextures[0]
 }
 

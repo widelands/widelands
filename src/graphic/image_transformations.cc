@@ -85,7 +85,6 @@ Surface* resize_surface(Surface* src, uint32_t w, uint32_t h) {
 	// First step: compute scaling factors
 	Rect srcrect = Rect(Point(0, 0), src->width(), src->height());
 
-	// NOCOM(#sirver): resize using opengl.
 	// Second step: get source material
 	SDL_Surface * srcsdl = extract_sdl_surface(*src, srcrect);
 	bool free_source = true;

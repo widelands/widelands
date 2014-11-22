@@ -24,10 +24,10 @@
 #include "graphic/gl/dither_program.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/road_program.h"
-#include "graphic/gl/surface.h"
 #include "graphic/gl/terrain_program.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/surface.h"
 #include "graphic/texture.h"
 #include "logic/editor_game_base.h"
 #include "logic/player.h"
@@ -133,7 +133,7 @@ void GlGameRenderer::draw() {
 		road_program_.reset(new RoadProgram());
 	}
 
-	GLSurface* surface = dynamic_cast<GLSurface*>(m_dst->get_surface());
+	Surface* surface = m_dst->get_surface();
 	if (!surface)
 		return;
 

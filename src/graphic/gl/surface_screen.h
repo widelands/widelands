@@ -19,12 +19,12 @@
 #ifndef WL_GRAPHIC_GL_SURFACE_SCREEN_H
 #define WL_GRAPHIC_GL_SURFACE_SCREEN_H
 
-#include "graphic/gl/surface.h"
+#include "graphic/surface.h"
 
 /**
  * This surface represents the screen in OpenGL mode.
  */
-class GLSurfaceScreen : public GLSurface {
+class GLSurfaceScreen : public Surface {
 public:
 	GLSurfaceScreen(uint16_t w, uint16_t h);
 	virtual ~GLSurfaceScreen() {}
@@ -32,8 +32,6 @@ public:
 	/// Interface implementations
 	void lock(LockMode) override;
 	void unlock(UnlockMode) override;
-	uint16_t get_pitch() const override;
-	const SDL_PixelFormat & format() const override;
 
 private:
 	void pixel_to_gl(float* x, float* y) const override;

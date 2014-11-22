@@ -39,8 +39,6 @@ wl_library(graphic_image
 wl_library(graphic_surface
   SRCS
     compositemode.h
-    gl/surface.cc
-    gl/surface.h
     gl/surface_screen.cc
     gl/surface_screen.h
     gl/surface_texture.cc

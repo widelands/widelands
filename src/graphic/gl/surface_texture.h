@@ -19,11 +19,12 @@
 #ifndef WL_GRAPHIC_GL_SURFACE_TEXTURE_H
 #define WL_GRAPHIC_GL_SURFACE_TEXTURE_H
 
-#include "graphic/gl/surface.h"
+#include "graphic/gl/system_headers.h"
+#include "graphic/surface.h"
 
 struct SDL_Surface;
 
-class GLSurfaceTexture : public GLSurface {
+class GLSurfaceTexture : public Surface {
 public:
 	GLSurfaceTexture(SDL_Surface * surface, bool intensity = false);
 	GLSurfaceTexture(int w, int h);
@@ -34,13 +35,11 @@ public:
 	//@{
 	void lock(LockMode) override;
 	void unlock(UnlockMode) override;
-	uint16_t get_pitch() const override;
-	const SDL_PixelFormat & format() const override;
 
 	// Note: the following functions are reimplemented here though they
-	// basically only call the functions in GLSurface wrapped in calls to
+	// basically only call the functions in Surface wrapped in calls to
 	// setup_gl(), reset_gl(). The same functionality can be achieved by making
-	// those two functions virtual and calling them in GLSurface. However,
+	// those two functions virtual and calling them in Surface. However,
 	// especially for blit which is called very often and mostly on the screen,
 	// this costs two virtual function calls which makes a notable difference in
 	// profiles.

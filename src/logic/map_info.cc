@@ -49,12 +49,6 @@ void initialize() {
 	g_fs = new LayeredFileSystem();
 	g_fs->add_file_system(&FileSystem::create(INSTALL_DATADIR));
 
-	// NOCOM(#sirver): remove this and try headless (hidden window). this might not work with dummy.
-#ifdef HAS_GETENV
-	char dummy_video_env[] = "SDL_VIDEODRIVER=dummy";
-	putenv(dummy_video_env);
-#endif
-
 	g_gr = new Graphic();
 	g_gr->initialize(1, 1, false);
 }

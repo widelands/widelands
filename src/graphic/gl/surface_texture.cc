@@ -24,9 +24,9 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "graphic/gl/blit_program.h"
-#include "graphic/gl/surface.h"
 #include "graphic/gl/utils.h"
 #include "graphic/graphic.h"
+#include "graphic/surface.h"
 
 namespace  {
 
@@ -170,10 +170,6 @@ void GLSurfaceTexture::init(uint16_t w, uint16_t h)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 }
 
-const SDL_PixelFormat & GLSurfaceTexture::format() const {
-	return Gl::gl_rgba_format();
-}
-
 void GLSurfaceTexture::lock(LockMode mode) {
 	if (m_w <= 0 || m_h <= 0) {
 		return;
@@ -204,17 +200,13 @@ void GLSurfaceTexture::unlock(UnlockMode mode) {
 	m_pixels.reset(nullptr);
 }
 
-uint16_t GLSurfaceTexture::get_pitch() const {
-	return 4 * m_w;
-}
-
 void GLSurfaceTexture::draw_rect(const Rect& rectangle, const RGBColor& clr)
 {
 	if (m_w <= 0 || m_h <= 0) {
 		return;
 	}
 	setup_gl(m_texture);
-	GLSurface::draw_rect(rectangle, clr);
+	Surface::draw_rect(rectangle, clr);
 	reset_gl();
 }
 
@@ -229,7 +221,7 @@ void GLSurfaceTexture::fill_rect(const Rect& rectangle, const RGBAColor& clr)
 	}
 
 	setup_gl(m_texture);
-	GLSurface::fill_rect(rectangle, clr);
+	Surface::fill_rect(rectangle, clr);
 	reset_gl();
 }
 
@@ -243,7 +235,7 @@ void GLSurfaceTexture::brighten_rect(const Rect& rectangle, const int32_t factor
 	}
 
 	setup_gl(m_texture);
-	GLSurface::brighten_rect(rectangle, factor);
+	Surface::brighten_rect(rectangle, factor);
 	reset_gl();
 }
 
@@ -255,7 +247,7 @@ void GLSurfaceTexture::draw_line
 	}
 
 	setup_gl(m_texture);
-	GLSurface::draw_line(x1, y1, x2, y2, color, gwidth);
+	Surface::draw_line(x1, y1, x2, y2, color, gwidth);
 	reset_gl();
 }
 
@@ -267,6 +259,6 @@ void GLSurfaceTexture::blit
 	}
 
 	setup_gl(m_texture);
-	GLSurface::blit(dst, src, srcrc, cm);
+	Surface::blit(dst, src, srcrc, cm);
 	reset_gl();
 }
