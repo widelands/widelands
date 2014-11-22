@@ -997,9 +997,6 @@ inline Panel * Panel::child_at_mouse_cursor
  */
 void Panel::do_mousein(bool const inside)
 {
-	if (!_g_allow_user_input)
-		return;
-
 	if (!inside && _mousein) {
 		_mousein->do_mousein(false);
 		_mousein = nullptr;
@@ -1013,9 +1010,6 @@ void Panel::do_mousein(bool const inside)
  * Returns whether the event was processed.
  */
 bool Panel::do_mousepress(const uint8_t btn, int32_t x, int32_t y) {
-	if (!_g_allow_user_input) {
-		return true;
-	}
 	if (get_can_focus()) {
 		focus();
 	}
@@ -1049,10 +1043,6 @@ bool Panel::do_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 
 
 bool Panel::do_mousewheel(uint32_t which, int32_t x, int32_t y) {
-	if (!_g_allow_user_input) {
-		return true;
-	}
-
 	// TODO(GunChleoc): This is just a hack for focussed panels
 	// We need to find the actualy scrollable panel beneaththe mouse cursor,
 	// so we can have multiple scrollable elements on the same screen
@@ -1067,9 +1057,6 @@ bool Panel::do_mousewheel(uint32_t which, int32_t x, int32_t y) {
 
 
 bool Panel::do_mouserelease(const uint8_t btn, int32_t x, int32_t y) {
-	if (!_g_allow_user_input)
-		return true;
-
 	x -= _lborder;
 	y -= _tborder;
 	if (_g_mousegrab != this)
@@ -1086,9 +1073,6 @@ bool Panel::do_mousemove
 	(uint8_t const state,
 	 int32_t x, int32_t y, int32_t const xdiff, int32_t const ydiff)
 {
-	if (!_g_allow_user_input)
-		return true;
-
 	x -= _lborder;
 	y -= _tborder;
 	if (_g_mousegrab != this) {
@@ -1114,9 +1098,6 @@ bool Panel::do_mousemove
  */
 bool Panel::do_key(bool const down, SDL_Keysym const code)
 {
-	if (!_g_allow_user_input)
-		return true;
-
 	if (_focus && _focus->do_key(down, code)) {
 		return true;
 	}
@@ -1129,13 +1110,7 @@ bool Panel::do_key(bool const down, SDL_Keysym const code)
 	return false;
 }
 
-
-// NOCOM(#sirver): _g_allow_user_input should be renamed and we only need to check it in the ui_* handlers.
 bool Panel::do_textinput(const std::string& text) {
-	if (!_g_allow_user_input) {
-		return true;
-	}
-
 	if (_focus && _focus->do_textinput(text)) {
 		return true;
 	}
