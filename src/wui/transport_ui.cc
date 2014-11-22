@@ -64,11 +64,6 @@ struct EconomyOptionsWindow : public UI::UniqueWindow {
 			 g_gr->images().get(pic_tab_workers),
 			 new EconomyOptionsWorkerPanel(&m_tabpanel, parent, economy),
 			 _("Workers"));
-
-		// Until we can find a non-stupid way of automatically updating
-		// the window when one of the target quantities changes,
-		// simply disable caching.
-		set_cache(false);
 	}
 
 private:
