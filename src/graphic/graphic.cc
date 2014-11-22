@@ -54,14 +54,26 @@ using namespace std;
 Graphic * g_gr;
 bool g_opengl;
 
-constexpr int kFallbackGraphicsWidth = 800;
-constexpr int kFallbackGraphicsHeight = 600;
-
 namespace  {
 
 /// The size of the transient (i.e. temporary) surfaces in the cache in bytes.
 /// These are all surfaces that are not loaded from disk.
 const uint32_t TRANSIENT_SURFACE_CACHE_SIZE = 160 << 20;   // shifting converts to MB
+
+constexpr int kFallbackGraphicsWidth = 800;
+constexpr int kFallbackGraphicsHeight = 600;
+
+// Sets the icon for the application.
+void set_icon(SDL_Window* sdl_window) {
+#ifndef _WIN32
+	const std::string icon_name = "pics/wl-ico-128.png";
+#else
+	const std::string icon_name = "pics/wl-ico-32.png";
+#endif
+	SDL_Surface* s = load_image_as_sdl_surface(icon_name, g_fs);
+	SDL_SetWindowIcon(sdl_window, s);
+	SDL_FreeSurface(s);
+}
 
 }  // namespace
 
@@ -78,12 +90,7 @@ Graphic::Graphic()
 {
 	ImageTransformations::initialize();
 
-#ifndef _WIN32
-	const std::string icon_name = "pics/wl-ico-128.png";
-#else
-	const std::string icon_name = "pics/wl-ico-32.png";
-#endif
-	m_sdlwindow = nullptr;
+	m_sdl_window = nullptr;
 	m_sdl_screen = nullptr;
 	m_sdl_renderer = nullptr;
 	m_sdl_texture = nullptr;
@@ -114,61 +121,34 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 		log("Graphics: Trying FULLSCREEN\n");
 	}
 
-	log("Graphics: Try to set Videomode %ux%u 32 Bit\n", w, h);
+	log("Graphics: Try to set Videomode %ux%u\n", w, h);
 	// Here we actually set the video mode
-	m_sdlwindow = SDL_CreateWindow("Widelands Window",
+	m_sdl_window = SDL_CreateWindow("Widelands Window",
 											 SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, flags);
-	if (opengl) {
-		// TODO(sirver): this context needs to be created also for fallback settings,
-		// otherwise SDL_GetWindowFlags() will return SDL_WINDOW_OPENGL,
-		// though if you call any OpenGL function, the system crashes.
-		m_glcontext = SDL_GL_CreateContext(m_sdlwindow);
-		if (m_glcontext) {
-			SDL_GL_MakeCurrent(m_sdlwindow, m_glcontext);
-		}
 
-		glClear(GL_COLOR_BUFFER_BIT);
-	}
-	// If we tried opengl and it was not successful try without opengl
-	if ((!m_sdlwindow || !m_glcontext) && opengl)
-	{
-		log("Graphics: Could not set videomode: %s, trying without opengl\n", SDL_GetError());
-		flags &= ~SDL_WINDOW_OPENGL;
-		m_sdlwindow = SDL_CreateWindow("Widelands Window",
-												 SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, flags);
-	}
-
-	if (!m_sdlwindow) {
+	if (!m_sdl_window) {
 		log
 			("Graphics: Could not set videomode: %s, trying minimum graphics settings\n",
 			 SDL_GetError());
 		flags &= ~SDL_WINDOW_FULLSCREEN;
-		m_sdlwindow = SDL_CreateWindow("Widelands Window",
+		m_sdl_window = SDL_CreateWindow("Widelands Window",
 												 SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 												 kFallbackGraphicsWidth, kFallbackGraphicsHeight, flags);
 		m_fallback_settings_in_effect = true;
-		if (!m_sdlwindow) {
+		if (!m_sdl_window) {
 			throw wexception
 				("Graphics: could not set video mode: %s", SDL_GetError());
 		}
 	}
 
-#ifndef _WIN32
-	const std::string icon_name = "pics/wl-ico-128.png";
-#else
-	const std::string icon_name = "pics/wl-ico-32.png";
-#endif
-	SDL_Surface* s = load_image_as_sdl_surface(icon_name, g_fs);
-	SDL_SetWindowIcon(m_sdlwindow, s);
-	SDL_FreeSurface(s);
+	SDL_SetWindowTitle(m_sdl_window, ("Widelands " + build_id() + '(' + build_type() + ')').c_str());
 
-	// setting the videomode was successful. Print some information now
-	log("Graphics: Setting video mode was successful\n");
+	if (opengl) {
+		m_glcontext = SDL_GL_CreateContext(m_sdl_window);
+		if (m_glcontext) {
+			SDL_GL_MakeCurrent(m_sdl_window, m_glcontext);
+		}
 
-	Surface::display_format_is_now_defined();
-
-	// Redoing the check, because fallback settings might mean we no longer use OpenGL.
-	if (opengl && 0 != (SDL_GetWindowFlags(m_sdlwindow) & SDL_WINDOW_OPENGL)) {
 		//  We now really have a working opengl screen...
 		g_opengl = true;
 
@@ -193,12 +173,37 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 		glGetIntegerv(GL_MAX_TEXTURE_SIZE, &glInt);
 		log("Graphics: OpenGL: Max texture size: %u\n", glInt);
 
+		SDL_GL_SetSwapInterval(1);
+		SDL_GL_SwapWindow(m_sdl_window);
+
+		glDrawBuffer(GL_BACK);
+
+		glDisable(GL_DEPTH_TEST);
+		glEnable(GL_TEXTURE_2D);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		screen_.reset(new GLSurfaceScreen(w, h));
+	} else {
+		m_sdl_renderer =  SDL_CreateRenderer(m_sdl_window, -1, 0);
+		uint32_t rmask, gmask, bmask, amask;
+		int bpp;
+		SDL_PixelFormatEnumToMasks(SDL_PIXELFORMAT_ARGB8888, &bpp, &rmask, &gmask, &bmask, &amask);
+		m_sdl_screen = SDL_CreateRGBSurface(0, w, h, bpp, rmask, gmask, bmask, amask);
+		m_sdl_texture = SDL_CreateTexture(m_sdl_renderer,
+													 SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING,
+													 w, h);
+		screen_.reset(new SDLSurface(m_sdl_screen, false));
 	}
+
+	set_icon(m_sdl_window);
 
 	/* Information about the video capabilities. */
 	{
 		SDL_DisplayMode disp_mode;
-		SDL_GetWindowDisplayMode(m_sdlwindow, &disp_mode);
+		SDL_GetWindowDisplayMode(m_sdl_window, &disp_mode);
 		log("**** GRAPHICS REPORT ****\n"
 		    " VIDEO DRIVER %s\n"
 		    " pixel fmt %u\n"
@@ -211,31 +216,8 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 		assert(SDL_BYTESPERPIXEL(disp_mode.format) == 4);
 	}
 
-	SDL_SetWindowTitle(m_sdlwindow, ("Widelands " + build_id() + '(' + build_type() + ')').c_str());
+	Surface::display_format_is_now_defined();
 
-	if (g_opengl) {
-		SDL_GL_SetSwapInterval(1);
-		SDL_GL_SwapWindow(m_sdlwindow);
-
-		glDrawBuffer(GL_BACK);
-
-		glDisable(GL_DEPTH_TEST);
-		glEnable(GL_TEXTURE_2D);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-		screen_.reset(new GLSurfaceScreen(w, h));
-	} else {
-		m_sdl_renderer =  SDL_CreateRenderer(m_sdlwindow, -1, 0);
-		uint32_t rmask, gmask, bmask, amask;
-		int bpp;
-		SDL_PixelFormatEnumToMasks(SDL_PIXELFORMAT_ARGB8888, &bpp, &rmask, &gmask, &bmask, &amask);
-		m_sdl_screen = SDL_CreateRGBSurface(0, w, h, bpp, rmask, gmask, bmask, amask);
-		m_sdl_texture = SDL_CreateTexture(m_sdl_renderer,
-													 SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING,
-													 w, h);
-		screen_.reset(new SDLSurface(m_sdl_screen, false));
-	}
 	m_rendertarget.reset(new RenderTarget(screen_.get()));
 
 	pic_road_normal_.reset(load_image("world/pics/roadt_normal.png"));
@@ -262,9 +244,9 @@ void Graphic::cleanup() {
 		SDL_FreeSurface(m_sdl_screen);
 		m_sdl_screen = nullptr;
 	}
-	if (m_sdlwindow) {
-		SDL_DestroyWindow(m_sdlwindow);
-		m_sdlwindow = nullptr;
+	if (m_sdl_window) {
+		SDL_DestroyWindow(m_sdl_window);
+		m_sdl_window = nullptr;
 	}
 	if (m_glcontext) {
 		SDL_GL_DeleteContext(m_glcontext);
@@ -295,7 +277,7 @@ int32_t Graphic::get_yres()
 
 bool Graphic::is_fullscreen()
 {
-	return SDL_GetWindowFlags(m_sdlwindow) & SDL_WINDOW_FULLSCREEN;
+	return SDL_GetWindowFlags(m_sdl_window) & SDL_WINDOW_FULLSCREEN;
 }
 
 /**
@@ -321,10 +303,10 @@ void Graphic::toggle_fullscreen()
 	// Note: Not all Images are cached in the ImageCache, at time of me writing
 	// this, only InMemoryImage does not safe itself in the ImageCache. And this
 	// should only be a problem for Images loaded from maps.
-	if (SDL_GetWindowFlags(m_sdlwindow) & SDL_WINDOW_FULLSCREEN) {
-		SDL_SetWindowFullscreen(m_sdlwindow, 0);
+	if (SDL_GetWindowFlags(m_sdl_window) & SDL_WINDOW_FULLSCREEN) {
+		SDL_SetWindowFullscreen(m_sdl_window, 0);
 	} else {
-		SDL_SetWindowFullscreen(m_sdlwindow, SDL_WINDOW_FULLSCREEN);
+		SDL_SetWindowFullscreen(m_sdl_window, SDL_WINDOW_FULLSCREEN);
 	}
 }
 
@@ -349,7 +331,7 @@ bool Graphic::need_update() const
 void Graphic::refresh()
 {
 	if (g_opengl) {
-		SDL_GL_SwapWindow(m_sdlwindow);
+		SDL_GL_SwapWindow(m_sdl_window);
 		m_update = false;
 		return;
 	}

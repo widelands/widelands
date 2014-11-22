@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-10-29 10:08+0000\n"
+"POT-Creation-Date: 2014-11-14 17:33+0000\n"
 "PO-Revision-Date: 2014-03-24 13:06+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2014-10-30 05:56+0000\n"
-"X-Generator: Launchpad (build 17203)\n"
+"X-Launchpad-Export-Date: 2014-11-15 05:47+0000\n"
+"X-Generator: Launchpad (build 17241)\n"
 "Language: sk\n"
 
 #: ../../scripting/win_condition_texts.lua:2
@@ -80,11 +80,11 @@ msgstr "Samovládca"
 msgid "The tribe or team that can defeat all others wins the game!"
 msgstr "Kmeň alebo tím, ktorý dokáže poraziť ostatných, vyhráva hru!"
 
-#: ../../scripting/win_conditions/02_collectors.lua:14
+#: ../../scripting/win_conditions/02_collectors.lua:15
 msgid "Collectors"
 msgstr "Zberatelia"
 
-#: ../../scripting/win_conditions/02_collectors.lua:17
+#: ../../scripting/win_conditions/02_collectors.lua:18
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest number of wares at the end of 4 hours wins the game."
@@ -92,20 +92,20 @@ msgstr ""
 "Dostávate body za cenné výrobky vo svojich skladoch. Hráč s najväčším počtom "
 "výrobkov po uplynutí 4 hodín vyhráva hru."
 
-#: ../../scripting/win_conditions/02_collectors.lua:20
+#: ../../scripting/win_conditions/02_collectors.lua:21
 msgid "Points"
 msgstr "Body"
 
-#: ../../scripting/win_conditions/02_collectors.lua:99
+#: ../../scripting/win_conditions/02_collectors.lua:100
 msgid "Status for %s"
 msgstr "Stav pre %s"
 
 #: TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P", P meaning "Points'
-#: ../../scripting/win_conditions/02_collectors.lua:109
+#: ../../scripting/win_conditions/02_collectors.lua:110
 msgid "  %1$s (%2$i P) x %3$i = %4$i P"
 msgstr "  %1$s (%2$i b) x %3$i = %4$i b"
 
-#: ../../scripting/win_conditions/02_collectors.lua:113
+#: ../../scripting/win_conditions/02_collectors.lua:114
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
 msgstr[0] "Spolu: %i bodov"
@@ -113,26 +113,26 @@ msgstr[1] "Spolu: %i bod"
 msgstr[2] "Spolu: %i body"
 
 #: TRANSLATORS: Context: 'The game will end in %s.'
-#: ../../scripting/win_conditions/02_collectors.lua:127
+#: ../../scripting/win_conditions/02_collectors.lua:128
 msgid "%1$ih%2$02im"
 msgstr "%1$ih%2$02im"
 
-#: ../../scripting/win_conditions/02_collectors.lua:129
+#: ../../scripting/win_conditions/02_collectors.lua:130
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i minút"
 msgstr[1] "%i minúta"
 msgstr[2] "%i minúty"
 
-#: ../../scripting/win_conditions/02_collectors.lua:131
+#: ../../scripting/win_conditions/02_collectors.lua:132
 msgid "The game will end in %s."
 msgstr "Hra skončí za %s."
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:13
+#: ../../scripting/win_conditions/03_territorial_lord.lua:14
 msgid "Territorial Lord"
 msgstr "Vládca území"
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:16
+#: ../../scripting/win_conditions/03_territorial_lord.lua:17
 msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
@@ -142,42 +142,42 @@ msgstr ""
 "sa stane ten hráč alebo tím, ktorý si dokáže udržať toto územie na dobu "
 "aspoň 20 minút."
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:151
-#: ../../scripting/win_conditions/03_territorial_time.lua:23
+#: ../../scripting/win_conditions/03_territorial_lord.lua:152
+#: ../../scripting/win_conditions/03_territorial_time.lua:24
 msgid "Team %i"
 msgstr "Tím %i"
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:153
-#: ../../scripting/win_conditions/03_territorial_time.lua:197
+#: ../../scripting/win_conditions/03_territorial_lord.lua:154
+#: ../../scripting/win_conditions/03_territorial_time.lua:198
 msgid "%s owns more than half of the map’s area."
 msgstr "%s vlastní viac ako polovicu územia mapy."
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:155
-#: ../../scripting/win_conditions/03_territorial_time.lua:199
+#: ../../scripting/win_conditions/03_territorial_lord.lua:156
+#: ../../scripting/win_conditions/03_territorial_time.lua:200
 msgid "You’ve still got %i minute to prevent a victory."
 msgid_plural "You’ve still got %i minutes to prevent a victory."
 msgstr[0] "Stále máte %i minút na to, aby ste zabránili víťazstvu."
 msgstr[1] "Stále máte %i minútu na to, aby ste zabránili víťazstvu."
 msgstr[2] "Stále máte %i minúty na to, aby ste zabránili víťazstvu."
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:160
-#: ../../scripting/win_conditions/03_territorial_time.lua:204
+#: ../../scripting/win_conditions/03_territorial_lord.lua:161
+#: ../../scripting/win_conditions/03_territorial_time.lua:205
 msgid "You own more than half of the map’s area."
 msgstr "Vlastníte viac ako polovicu územia mapy."
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:162
-#: ../../scripting/win_conditions/03_territorial_time.lua:206
+#: ../../scripting/win_conditions/03_territorial_lord.lua:163
+#: ../../scripting/win_conditions/03_territorial_time.lua:207
 msgid "Keep it for %i more minute to win the game."
 msgid_plural "Keep it for %i more minutes to win the game."
 msgstr[0] "Udržte si ho ďalších %i minút a vyhráte hru."
 msgstr[1] "Udržte si ho ešte %i minútu a vyhráte hru."
 msgstr[2] "Udržte si ho ďalšie %i minúty a vyhráte hru."
 
-#: ../../scripting/win_conditions/03_territorial_time.lua:13
+#: ../../scripting/win_conditions/03_territorial_time.lua:14
 msgid "Territorial Time"
 msgstr "Územný čas"
 
-#: ../../scripting/win_conditions/03_territorial_time.lua:16
+#: ../../scripting/win_conditions/03_territorial_time.lua:17
 msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
@@ -188,22 +188,22 @@ msgstr ""
 "ten hráč alebo tím, ktorý dokáže obrániť túto oblasť po dobu aspoň 20 minút, "
 "alebo ten, ktorý bude po 4 hodinách vlastniť najviac územia."
 
-#: ../../scripting/win_conditions/03_territorial_time.lua:21
+#: ../../scripting/win_conditions/03_territorial_time.lua:22
 msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
 msgstr "%1$s vlastní %2$3.0f %% územia (%3$i z %4$i)."
 
-#: ../../scripting/win_conditions/03_territorial_time.lua:22
+#: ../../scripting/win_conditions/03_territorial_time.lua:23
 msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
 msgstr "%1$s vlastnil %2$3.0f %% územia (%3$i z %4$i)."
 
-#: ../../scripting/win_conditions/03_territorial_time.lua:220
+#: ../../scripting/win_conditions/03_territorial_time.lua:221
 msgid "Otherwise the game will end in %i minute."
 msgid_plural "Otherwise the game will end in %i minutes."
 msgstr[0] "V opačnom prípade hra skončí za %i minút."
 msgstr[1] "V opačnom prípade hra skončí za %i minútu."
 msgstr[2] "V opačnom prípade hra skončí za %i minúty."
 
-#: ../../scripting/win_conditions/03_territorial_time.lua:225
+#: ../../scripting/win_conditions/03_territorial_time.lua:226
 #: ../../scripting/win_conditions/04_wood_gnome.lua:83
 msgid "The game will end in %i minute."
 msgid_plural "The game will end in %i minutes."

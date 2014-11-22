@@ -169,8 +169,6 @@ void EditorInteractive::register_overlays() {
 				overlay_manager.register_overlay(fc, g_gr->images().get(immname), 4);
 		}
 	}
-
-	need_complete_redraw();
 }
 
 
@@ -253,13 +251,17 @@ void EditorInteractive::think() {
 
 void EditorInteractive::exit() {
 	if (m_need_save) {
-		UI::WLMessageBox mmb
-		(this,
-		 _("Unsaved Map"),
-		 _("The map has not been saved, do you really want to quit?"),
-		 UI::WLMessageBox::YESNO);
-		if (mmb.run() == 0)
-			return;
+		if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
+			end_modal(0);
+		} else {
+			UI::WLMessageBox mmb
+			(this,
+			 _("Unsaved Map"),
+			 _("The map has not been saved, do you really want to quit?"),
+			 UI::WLMessageBox::YESNO);
+			if (mmb.run() == 0)
+				return;
+		}
 	}
 	end_modal(0);
 }
@@ -276,7 +278,6 @@ void EditorInteractive::map_clicked(bool should_draw) {
 		(tools.current(),
 		 tools.use_tool, egbase().map(), egbase().world(),
 	     get_sel_pos(), *this, should_draw);
-	need_complete_redraw();
 	set_need_save(true);
 }
 

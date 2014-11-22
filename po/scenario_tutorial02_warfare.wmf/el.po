@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2014-10-29 10:08+0000\n"
+"POT-Creation-Date: 2014-11-14 17:33+0000\n"
 "PO-Revision-Date: 2014-10-29 18:16+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Greek <el@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-30 05:43+0000\n"
-"X-Generator: Launchpad (build 17203)\n"
+"X-Launchpad-Export-Date: 2014-11-15 05:35+0000\n"
+"X-Generator: Launchpad (build 17241)\n"
 "Language: el\n"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:17
@@ -49,7 +49,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:30
 msgid ""
-"A new soldier is created like a worker: When a military building needs a "
+"A new soldier is created like a worker: when a military building needs a "
 "soldier, a carrier grabs the needed weapons and armor from a warehouse (or "
 "your headquarters) and walks up the road to your new building. Basic "
 "Barbarian soldiers do not use armor, they only need an ax."
@@ -172,7 +172,8 @@ msgstr ""
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:72
 msgid ""
 "The needed wares are also delivered there. For successful training, you need "
-"bread and strongbeer. Most steps additionally require either fish or meat."
+"pitta bread and strongbeer. Most steps additionally require either fish or "
+"meat."
 msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:73
@@ -305,7 +306,7 @@ msgstr ""
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:129
 msgid ""
 "There is another way how you can control the strength of a military "
-"building: By the number of soldiers stationed there. Just click on the arrow "
+"building: by the number of soldiers stationed there. Just click on the arrow "
 "buttons to decrease or increase the desired number of soldiers. Every "
 "buildings has a maximum capacity. In case of the barrier, it is five, for "
 "example."
@@ -362,7 +363,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:145
 msgid ""
-"However, destroying a military building is always linked with a risk: The "
+"However, destroying a military building is always linked with a risk: the "
 "land is still yours, but it is no longer protected. Any enemy that builds "
 "his own military sites can take over that land without a fight, causing your "
 "buildings to burst into flames. Furthermore, some parts of the land can now "
@@ -384,7 +385,7 @@ msgstr ""
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:151
 msgid ""
 "You can also use this opportunity to become familiar with the other options: "
-"The heroes/rookies preference and the capacity."
+"the heroes/rookies preference and the capacity."
 msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:153
@@ -538,7 +539,7 @@ msgstr ""
 msgid "“%s”"
 msgstr ""
 
-#: ../../scripting/format_scenario.lua:133
+#: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""

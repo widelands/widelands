@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-10-29 10:08+0000\n"
+"POT-Creation-Date: 2014-11-14 17:33+0000\n"
 "PO-Revision-Date: 2011-11-09 10:42+0000\n"
 "Last-Translator: pyaehtetaung <Unknown>\n"
 "Language-Team: Burmese <my@li.org>\n"
@@ -15,14 +15,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-10-30 05:56+0000\n"
-"X-Generator: Launchpad (build 17203)\n"
+"X-Launchpad-Export-Date: 2014-11-15 05:47+0000\n"
+"X-Generator: Launchpad (build 17241)\n"
 
-#: ../../campaigns/dummy.wmf/scripting/init.lua:10
+#: ../../campaigns/dummy.wmf/scripting/init.lua:11
 msgid "Not yet implemented"
 msgstr "မပြီးစီးသေးပါ။"
 
-#: ../../campaigns/dummy.wmf/scripting/init.lua:11
+#: ../../campaigns/dummy.wmf/scripting/init.lua:12
 msgid "Sorry, this map is not yet implemented."
 msgstr "ဝမ်းနည်းပါတယ္။ဤ မြေပုံ မပြီးစီးသေးပါ။"
 
@@ -30,7 +30,7 @@ msgstr "ဝမ်းနည်းပါတယ္။ဤ မြေပုံ မပ�
 msgid "“%s”"
 msgstr ""
 
-#: ../../scripting/format_scenario.lua:133
+#: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""
