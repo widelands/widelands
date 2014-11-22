@@ -3663,7 +3663,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		}
 
 		// we test if there is open sea
-		if (possible_directions.size() == 0) {
+		if (possible_directions.empty()) {
 			// 2.A No there is no open sea
 			game().send_player_ship_explore_island(*so.ship, so.island_circ_direction);
 			so.last_command_time = gametime;
