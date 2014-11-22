@@ -146,8 +146,6 @@ void GlGameRenderer::draw() {
 	          bounding_rect.h);
 	glEnable(GL_SCISSOR_TEST);
 
-	glClear(GL_COLOR_BUFFER_BIT);
-
 	Map& map = m_egbase->map();
 	const uint32_t gametime = m_egbase->get_gametime();
 
