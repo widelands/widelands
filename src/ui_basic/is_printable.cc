@@ -21,6 +21,7 @@
 
 namespace UI {
 
+	// NOCOM(#sirver): who uses this?
 bool is_printable(SDL_Keysym k) {
 	return (k.sym == SDLK_TAB) || ((k.sym >= SDLK_SPACE) && (k.sym <= SDLK_z)) ||
 			 ((k.sym >= SDL_SCANCODE_KP_0) && (k.sym <= SDL_SCANCODE_KP_EQUALS));

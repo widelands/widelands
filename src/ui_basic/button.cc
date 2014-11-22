@@ -58,12 +58,14 @@ Button::Button //  for textual buttons
 	m_clr_down      (229, 161, 2),
 	m_draw_caret    (false)
 {
-	set_think(false);
+	set_thinks(false);
 
 	if (m_pic_background)
 		set_cache(true);
 }
 
+// NOCOM(#sirver): only buttons and windows cache themselves, they
+// should be quick to draw anyways. remove caching.
 
 Button::Button //  for pictorial buttons
 	(Panel * const parent,
@@ -90,7 +92,7 @@ Button::Button //  for pictorial buttons
 	m_clr_down      (229, 161, 2),
 	m_draw_caret    (false)
 {
-	set_think(false);
+	set_thinks(false);
 
 	if (m_pic_background)
 		set_cache(true);
@@ -148,7 +150,7 @@ void Button::set_enabled(bool const on)
 	else {
 		if (m_pressed) {
 			m_pressed = false;
-			set_think(false);
+			set_thinks(false);
 			grab_mouse(false);
 		}
 		m_enabled = false;
@@ -313,7 +315,7 @@ bool Button::handle_mousepress(uint8_t const btn, int32_t, int32_t) {
 		if (m_repeating) {
 			m_time_nextact =
 				WLApplication::get()->get_time() + MOUSE_BUTTON_AUTOREPEAT_DELAY;
-			set_think(true);
+			set_thinks(true);
 		}
 	}
 	update();
@@ -326,7 +328,7 @@ bool Button::handle_mouserelease(uint8_t const btn, int32_t, int32_t) {
 
 	if (m_pressed) {
 		m_pressed = false;
-		set_think(false);
+		set_thinks(false);
 		grab_mouse(false);
 		update();
 		if (m_highlighted && m_enabled) {

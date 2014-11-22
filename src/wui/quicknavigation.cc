@@ -93,6 +93,7 @@ bool QuickNavigation::handle_key(bool down, SDL_Keysym key)
 	if (!down)
 		return false;
 
+	// NOCOM(#sirver): do this with a switch.
 	if (key.sym >= SDLK_0 && key.sym <= SDLK_9) {
 		unsigned int which = key.sym - SDLK_0;
 		assert(which < 10);

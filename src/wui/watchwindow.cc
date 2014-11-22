@@ -147,7 +147,6 @@ WatchWindow::WatchWindow
 
 	add_view(coords);
 	next_view(true);
-	set_cache(false);
 }
 
 /**

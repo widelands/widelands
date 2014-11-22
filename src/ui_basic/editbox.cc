@@ -23,6 +23,7 @@
 
 #include <SDL_keycode.h>
 
+#include "base/log.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
@@ -72,7 +73,7 @@ EditBox::EditBox
 	m_history_active(false),
 	m_history_position(-1)
 {
-	set_think(false);
+	set_thinks(false);
 
 	m->background = background;
 	m->fontname = UI_FONT_NAME;
@@ -87,7 +88,7 @@ EditBox::EditBox
 
 	set_handle_mouse(true);
 	set_can_focus(true);
-	set_handle_textinput(true);
+	set_handle_textinput();
 
 	// Initialize history as empty string
 	for (uint8_t i = 0; i < CHAT_HISTORY_SIZE; ++i)
@@ -223,6 +224,7 @@ bool EditBox::handle_mouserelease(const uint8_t btn, int32_t, int32_t)
 // real unicode.
 bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 {
+	log("#sirver code: %d\n", code);
 	if (down) {
 		switch (code.sym) {
 		case SDLK_ESCAPE:
@@ -233,7 +235,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 			//let the panel handle the tab key
 			return false;
 
-		case SDL_SCANCODE_KP_ENTER:
+		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 			// Save history if active and text is not empty
 			if (m_history_active) {
@@ -247,7 +249,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 			ok();
 			return true;
 
-		case SDL_SCANCODE_KP_PERIOD:
+		case SDLK_KP_PERIOD:
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
@@ -270,12 +272,12 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 			}
 			return true;
 
-		case SDL_SCANCODE_KP_4:
+		case SDLK_KP_4:
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
 			/* no break */
-		case SDL_SCANCODE_LEFT:
+		case SDLK_LEFT:
 			if (m->caret > 0) {
 				while ((m->text[--m->caret] & 0xc0) == 0x80) {};
 				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
@@ -289,12 +291,12 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 			}
 			return true;
 
-		case SDL_SCANCODE_KP_6:
+		case SDLK_KP_6:
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
 			/* no break */
-		case SDL_SCANCODE_RIGHT:
+		case SDLK_RIGHT:
 			if (m->caret < m->text.size()) {
 				while ((m->text[++m->caret] & 0xc0) == 0x80) {};
 				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
@@ -313,7 +315,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 			}
 			return true;
 
-		case SDL_SCANCODE_KP_7:
+		case SDLK_KP_7:
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
@@ -327,7 +329,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 			}
 			return true;
 
-		case SDL_SCANCODE_KP_1:
+		case SDLK_KP_1:
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
@@ -340,12 +342,12 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 			}
 			return true;
 
-		case SDL_SCANCODE_KP_8:
+		case SDLK_KP_8:
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
 			/* no break */
-		case SDL_SCANCODE_UP:
+		case SDLK_UP:
 			// Load entry from history if active and text is not empty
 			if (m_history_active) {
 				if (m_history_position > CHAT_HISTORY_SIZE - 2)
@@ -359,12 +361,12 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 			}
 			return true;
 
-		case SDL_SCANCODE_KP_2:
+		case SDLK_KP_2:
 			if (code.mod & KMOD_NUM) {
 				break;
 			}
 			/* no break */
-		case SDL_SCANCODE_DOWN:
+		case SDLK_DOWN:
 			// Load entry from history if active and text is not equivalent to the current one
 			if (m_history_active) {
 				if (m_history_position < 1)
@@ -386,11 +388,11 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 	return false;
 }
 
-bool EditBox::handle_textinput(const char * ntext) {
-	const std::string help(ntext);
-	if ((m->text.size() +  help.length()) < m->maxLength) {
-		m->text.insert(m->caret, help);
-		m->caret += help.length();
+bool EditBox::handle_textinput(const std::string& input_text) {
+	log("#sirver input_text: %s\n", input_text.c_str());
+	if ((m->text.size() +  input_text.length()) < m->maxLength) {
+		m->text.insert(m->caret, input_text);
+		m->caret += input_text.length();
 		check_caret();
 		changed();
 		update();

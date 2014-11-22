@@ -22,6 +22,7 @@
 
 #include <SDL.h>
 
+// NOCOM(#sirver): this is unused. remove.
 namespace UI {
 
 /**

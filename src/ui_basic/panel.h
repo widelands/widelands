@@ -57,10 +57,11 @@ namespace UI {
  * its desired size changes, this automatically changes the actual size (which then invokes
  * \ref layout and \ref move_inside_parent).
  */
-struct Panel : boost::signals2::trackable {
+class Panel : public boost::signals2::trackable {
+public:
 	enum {
 		pf_handle_mouse = 1, ///< receive mouse events
-		pf_think = 2, ///< call think() function during run
+		pf_thinks = 2, ///< call think() function during run
 		pf_top_on_click = 4, ///< bring panel on top when clicked inside it
 		pf_die = 8, ///< this panel needs to die
 		pf_child_die = 16, ///< a child needs to die
@@ -75,8 +76,8 @@ struct Panel : boost::signals2::trackable {
 		/// whether widget panels should be cached when possible
 		pf_cache = 1024,
 		/// whether widget wants to receive unicode textinput messages
-		pf_textinput = 2048,
-	}; // TODO(unknown): Turn this into separate bool flags
+		pf_handle_textinput = 2048,
+	};
 
 	Panel
 		(Panel * const nparent,
@@ -190,7 +191,7 @@ struct Panel : boost::signals2::trackable {
 		(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	virtual bool handle_mousewheel(uint32_t which, int32_t x, int32_t y);
 	virtual bool handle_key(bool down, SDL_Keysym);
-	virtual bool handle_textinput(const char* text);
+	virtual bool handle_textinput(const std::string& text);
 	virtual bool handle_alt_drag(int32_t x, int32_t y);
 	virtual bool handle_tooltip();
 
@@ -207,7 +208,6 @@ struct Panel : boost::signals2::trackable {
 	bool get_key_state(SDL_Scancode) const;
 
 	void set_handle_mouse(bool yes);
-	bool get_handle_mouse() const {return _flags & pf_handle_mouse;}
 	void grab_mouse(bool grab);
 
 	void set_can_focus(bool yes);
@@ -217,9 +217,6 @@ struct Panel : boost::signals2::trackable {
 		return (_parent->_focus == this);
 	}
 	virtual void focus(bool topcaller = true);
-
-	void set_think(bool yes);
-	bool get_think() const {return _flags & pf_think;}
 
 	void set_top_on_click(bool const on) {
 		if (on)
@@ -235,15 +232,20 @@ struct Panel : boost::signals2::trackable {
 	void set_tooltip(const std::string& text) {_tooltip = text;}
 	const std::string& tooltip() const {return _tooltip;}
 
-	void set_handle_textinput(bool on) {
-		on ? _flags |= pf_textinput : _flags &= ~pf_textinput;
-	}
-	bool get_handle_textinput() const {return _flags & pf_textinput;}
-
 	///\return the current set UI font
 	std::string ui_fn();
 
 protected:
+	// This panel will never receive keypresses (do_key), instead
+	// textinput will be passed on (do_textinput).
+	void set_handle_textinput() {
+		_flags |= pf_handle_textinput;
+	}
+
+	// Defines if think() should be called repeatedly. This is true on construction.
+	void set_thinks(bool yes);
+
+
 	virtual void die();
 	bool keyboard_free() {return !(_focus);}
 
@@ -257,7 +259,16 @@ protected:
 
 private:
 	class CacheImage;
-	friend class CacheImage;
+
+	bool handles_mouse() const {
+		return (_flags & pf_handle_mouse) != 0;
+	}
+	bool handles_textinput() const {
+		return (_flags & pf_handle_textinput) != 0;
+	}
+	bool thinks() const {
+		return (_flags & pf_thinks) != 0;
+	}
 
 	void check_child_death();
 
@@ -274,7 +285,7 @@ private:
 		(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	bool do_mousewheel(uint32_t which, int32_t x, int32_t y);
 	bool do_key(bool down, SDL_Keysym code);
-	bool do_textinput(const char* text);
+	bool do_textinput(const std::string& text);
 	bool do_tooltip();
 
 	static Panel * ui_trackmouse(int32_t & x, int32_t & y);
@@ -284,7 +295,7 @@ private:
 		(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	static void ui_mousewheel(uint32_t which, int32_t x, int32_t y);
 	static void ui_key(bool down, SDL_Keysym code);
-	static void ui_textinput(const char* text);
+	static void ui_textinput(const std::string& text);
 
 	Panel * _parent;
 	Panel * _next, * _prev;

@@ -399,6 +399,7 @@ std::string ProductionProgram::ActReturn::WorkersNeedExperience::description_neg
 }
 
 
+// NOCOM(#sirver): some methos in here should be static
 ProductionProgram::ActReturn::Condition * create_economy_condition
 	(char * & parameters, const TribeDescr & tribe)
 {
