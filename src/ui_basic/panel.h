@@ -23,7 +23,6 @@
 
 #include <cassert>
 #include <cstring>
-#include <memory>
 #include <string>
 
 #include <SDL_keyboard.h>
@@ -73,8 +72,6 @@ public:
 		pf_dock_windows_to_edges = 256,
 		/// whether any change in the desired size should propagate to the actual size
 		pf_layout_toplevel = 512,
-		/// whether widget panels should be cached when possible
-		pf_cache = 1024,
 		/// whether widget wants to receive unicode textinput messages
 		pf_handle_textinput = 2048,
 	};
@@ -175,7 +172,6 @@ public:
 	void update(int32_t x, int32_t y, int32_t w, int32_t h);
 	void update();
 	void update_inner(int32_t x, int32_t y, int32_t w, int32_t h);
-	void set_cache(bool enable);
 
 	// Events
 	virtual void think();
@@ -258,8 +254,6 @@ protected:
 	static bool draw_tooltip(RenderTarget &, const std::string & text);
 
 private:
-	class CacheImage;
-
 	bool handles_mouse() const {
 		return (_flags & pf_handle_mouse) != 0;
 	}
@@ -304,8 +298,6 @@ private:
 	Panel * _focus; //  keyboard focus
 
 	uint32_t _flags;
-	std::unique_ptr<const Image> _cache;
-	bool _needdraw;
 
 	/**
 	 * The outer rectangle is defined by (_x, _y, _w, _h)

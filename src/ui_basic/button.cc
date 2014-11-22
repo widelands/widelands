@@ -59,9 +59,6 @@ Button::Button //  for textual buttons
 	m_draw_caret    (false)
 {
 	set_thinks(false);
-
-	if (m_pic_background)
-		set_cache(true);
 }
 
 Button::Button //  for pictorial buttons
@@ -90,9 +87,6 @@ Button::Button //  for pictorial buttons
 	m_draw_caret    (false)
 {
 	set_thinks(false);
-
-	if (m_pic_background)
-		set_cache(true);
 }
 
 
