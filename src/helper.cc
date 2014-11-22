@@ -26,7 +26,6 @@
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
-#include <boost/random.hpp>
 
 using namespace std;
 
@@ -39,16 +38,6 @@ vector<string> split_string(const string& s, const char* const separators) {
 		result.push_back(s.substr(pos, endpos - pos));
 	}
 	return result;
-}
-
-static boost::mt19937 random_generator;
-string random_string(const string& chars, int nlen) {
-	boost::uniform_int<> index_dist(0, chars.size() - 1);
-	std::unique_ptr<char[]> buffer(new char[nlen]);
-	for (int i = 0; i < nlen; ++i) {
-		buffer[i] = chars[index_dist(random_generator)];
-	}
-	return string(buffer.get(), nlen);
 }
 
 char* next_word(char* & p, bool& reached_end, char const terminator) {
