@@ -19,13 +19,10 @@
 
 #include "ui_basic/panel.h"
 
-// NOCOM(#sirver): check includes
 #include "base/log.h"
-#include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "helper.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
