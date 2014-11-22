@@ -187,7 +187,6 @@ struct Panel : boost::signals2::trackable {
 	virtual bool handle_mousewheel(uint32_t which, int32_t x, int32_t y);
 	virtual bool handle_key(bool down, SDL_Keysym);
 	virtual bool handle_textinput(const char* text);
-	virtual bool handle_alt_drag(int32_t x, int32_t y);
 	virtual bool handle_tooltip();
 
 	/// \returns whether a certain given is currently down.
