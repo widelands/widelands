@@ -223,7 +223,6 @@ bool EditBox::handle_mouserelease(const uint8_t btn, int32_t, int32_t)
 // real unicode.
 bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 {
-	log("#sirver code: %d\n", code);
 	if (down) {
 		switch (code.sym) {
 		case SDLK_ESCAPE:
@@ -388,7 +387,6 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code)
 }
 
 bool EditBox::handle_textinput(const std::string& input_text) {
-	log("#sirver input_text: %s\n", input_text.c_str());
 	if ((m->text.size() +  input_text.length()) < m->maxLength) {
 		m->text.insert(m->caret, input_text);
 		m->caret += input_text.length();

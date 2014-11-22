@@ -64,9 +64,6 @@ Button::Button //  for textual buttons
 		set_cache(true);
 }
 
-// NOCOM(#sirver): only buttons and windows cache themselves, they
-// should be quick to draw anyways. remove caching.
-
 Button::Button //  for pictorial buttons
 	(Panel * const parent,
 	 const std::string & name,

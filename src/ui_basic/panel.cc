@@ -1024,7 +1024,6 @@ bool Panel::do_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	if (_flags & pf_top_on_click)
 		move_to_top();
 
-	// NOCOM(#sirver): handle_alt_drag is not working for me. Remove?
 	//  TODO(unknown): This code is erroneous. It checks the current key state. What it
 	//  needs is the key state at the time the mouse was clicked. See the
 	//  usage comment for get_key_state.
@@ -1148,8 +1147,6 @@ bool Panel::do_textinput(const std::string& text) {
 	return handle_textinput(text);
 }
 
-// NOCOM(#sirver): rename variables with leading _
-
 bool Panel::do_tooltip()
 {
 	if (_mousein && _mousein->do_tooltip()) {
@@ -1165,7 +1162,6 @@ bool Panel::get_key_state(const SDL_Scancode key) const
 {
 	return WLApplication::get()->get_key_state(key);
 }
-
 
 /**
  * Determine which panel is to receive a mouse event.
