@@ -195,7 +195,7 @@ ShipWindow::ShipWindow(InteractiveGameBase & igb, Ship & ship) :
 		buttons->add(m_btn_cancel_expedition, 0, false);
 	}
 	set_center_panel(vbox);
-	set_think(true);
+	set_thinks(true);
 
 	center_to_parent();
 	move_out_of_the_way();

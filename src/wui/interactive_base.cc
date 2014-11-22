@@ -261,7 +261,6 @@ OverlayManager::JobId InteractiveBase::show_work_area
 		case 3: wa_index = 0; break;
 		default:
 			throw wexception("Encountered unexpected WorkareaInfo size %i", workareas_nrs);
-			break;
 	}
 	Widelands::Map & map = m_egbase.map();
 	OverlayManager & overlay_manager = map.overlay_manager();

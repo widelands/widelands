@@ -59,7 +59,7 @@ struct InputCallback {
 	void (*mouse_move)
 	(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	void (*key)        (bool down, SDL_Keysym code);
-	void (*textinput) (const char * text);
+	void (*textinput) (const std::string& text);
 	void (*mouse_wheel) (uint32_t which, int32_t x, int32_t y);
 };
 

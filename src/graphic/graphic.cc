@@ -295,7 +295,6 @@ RenderTarget * Graphic::get_render_target()
 */
 void Graphic::toggle_fullscreen()
 {
-	log("Try SDL_WM_ToggleFullScreen...\n");
 	// TODO(unknown): implement proper fullscreening here. The way it can work is to
 	// recreate SurfaceCache but keeping ImageCache around. Then exiting and
 	// reinitalizing the SDL Video Mode should just work: all surface are

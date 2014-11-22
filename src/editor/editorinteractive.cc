@@ -394,16 +394,16 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			handled = true;
 			break;
 
-		case SDL_SCANCODE_LSHIFT:
-		case SDL_SCANCODE_RSHIFT:
+		case SDLK_LSHIFT:
+		case SDLK_RSHIFT:
 			if (tools.use_tool == EditorTool::First)
 				select_tool(tools.current(), EditorTool::Second);
 			handled = true;
 			break;
 
-		case SDL_SCANCODE_LALT:
-		case SDL_SCANCODE_RALT:
-		case SDL_SCANCODE_MODE:
+		case SDLK_LALT:
+		case SDLK_RALT:
+		case SDLK_MODE:
 			if (tools.use_tool == EditorTool::First)
 				select_tool(tools.current(), EditorTool::Third);
 			handled = true;
@@ -470,6 +470,7 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 				m_history.undo_action(egbase().world());
 			handled = true;
 			break;
+
 		case SDLK_y:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 				m_history.redo_action(egbase().world());
@@ -477,16 +478,15 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			break;
 		default:
 			break;
-
 		}
 	} else {
 		// key up events
 		switch (code.sym) {
-		case SDL_SCANCODE_LSHIFT:
-		case SDL_SCANCODE_RSHIFT:
-		case SDL_SCANCODE_LALT:
-		case SDL_SCANCODE_RALT:
-		case SDL_SCANCODE_MODE:
+		case SDLK_LSHIFT:
+		case SDLK_RSHIFT:
+		case SDLK_LALT:
+		case SDLK_RALT:
+		case SDLK_MODE:
 			if (tools.use_tool != EditorTool::First)
 				select_tool(tools.current(), EditorTool::First);
 			handled = true;

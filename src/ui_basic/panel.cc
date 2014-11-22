@@ -54,7 +54,7 @@ Panel::Panel
 	 const std::string & tooltip_text)
 	:
 	_parent(nparent), _fchild(nullptr), _lchild(nullptr), _mousein(nullptr), _focus(nullptr),
-	_flags(pf_handle_mouse|pf_think|pf_visible),
+	_flags(pf_handle_mouse|pf_thinks|pf_visible),
 	_x(nx), _y(ny), _w(nw), _h(nh),
 	_lborder(0), _rborder(0), _tborder(0), _bborder(0),
 	_border_snap_distance(0), _panel_snap_distance(0),
@@ -525,11 +525,11 @@ void Panel::think()
 
 /**
  * Descend the panel hierarchy and call the \ref think() function of all
- * (grand-)children for which set_think(false) has not been called.
+ * (grand-)children for which set_thinks(false) has not been called.
  */
 void Panel::do_think()
 {
-	if (get_think())
+	if (thinks())
 		think();
 
 	for (Panel * child = _fchild; child; child = child->_next)
@@ -658,7 +658,7 @@ bool Panel::handle_key(bool down, SDL_Keysym code)
 }
 
 
-bool Panel::handle_textinput(const char *) {
+bool Panel::handle_textinput(const std::string& /* text */) {
 	return false;
 }
 
@@ -727,18 +727,17 @@ void Panel::set_can_focus(bool const yes)
  * Grabs the keyboard focus, if it can,
  * topcaller identifies widget at the beginning of the recursion
  */
-void Panel::focus(bool topcaller)
+void Panel::focus(const bool topcaller)
 {
-	// this assert was deleted, because
-	// it happens, that a child can focus, but a parent
-	// can't. but focus is called recursivly
-	// assert(get_can_focus());
-
 	if (topcaller) {
-		if (get_handle_textinput()) {
-			if (!SDL_IsTextInputActive()) SDL_StartTextInput();
+		if (handles_textinput()) {
+			if (!SDL_IsTextInputActive()) {
+				SDL_StartTextInput();
+			}
 		} else {
-			if (SDL_IsTextInputActive()) SDL_StopTextInput();
+			if (SDL_IsTextInputActive()) {
+				SDL_StopTextInput();
+			}
 		}
 	}
 
@@ -758,12 +757,12 @@ void Panel::focus(bool topcaller)
  *
  * \param yes true if the panel's think function should be called
  */
-void Panel::set_think(bool const yes)
+void Panel::set_thinks(bool const yes)
 {
 	if (yes)
-		_flags |= pf_think;
+		_flags |= pf_thinks;
 	else
-		_flags &= ~pf_think;
+		_flags &= ~pf_thinks;
 }
 
 /**
@@ -882,7 +881,7 @@ inline Panel * Panel::child_at_mouse_cursor
 {
 
 	for (; child; child = child->_next) {
-		if (!child->get_handle_mouse() || !child->is_visible())
+		if (!child->handles_mouse() || !child->is_visible())
 			continue;
 		if
 			(x < child->_x + static_cast<int32_t>(child->_w) && x >= child->_x
@@ -906,9 +905,6 @@ inline Panel * Panel::child_at_mouse_cursor
  */
 void Panel::do_mousein(bool const inside)
 {
-	if (!_g_allow_user_input)
-		return;
-
 	if (!inside && _mousein) {
 		_mousein->do_mousein(false);
 		_mousein = nullptr;
@@ -922,9 +918,6 @@ void Panel::do_mousein(bool const inside)
  * Returns whether the event was processed.
  */
 bool Panel::do_mousepress(const uint8_t btn, int32_t x, int32_t y) {
-	if (!_g_allow_user_input) {
-		return true;
-	}
 	if (get_can_focus()) {
 		focus();
 	}
@@ -947,10 +940,6 @@ bool Panel::do_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 
 
 bool Panel::do_mousewheel(uint32_t which, int32_t x, int32_t y) {
-	if (!_g_allow_user_input) {
-		return true;
-	}
-
 	// TODO(GunChleoc): This is just a hack for focussed panels
 	// We need to find the actualy scrollable panel beneaththe mouse cursor,
 	// so we can have multiple scrollable elements on the same screen
@@ -965,9 +954,6 @@ bool Panel::do_mousewheel(uint32_t which, int32_t x, int32_t y) {
 
 
 bool Panel::do_mouserelease(const uint8_t btn, int32_t x, int32_t y) {
-	if (!_g_allow_user_input)
-		return true;
-
 	x -= _lborder;
 	y -= _tborder;
 	if (_g_mousegrab != this)
@@ -984,9 +970,6 @@ bool Panel::do_mousemove
 	(uint8_t const state,
 	 int32_t x, int32_t y, int32_t const xdiff, int32_t const ydiff)
 {
-	if (!_g_allow_user_input)
-		return true;
-
 	x -= _lborder;
 	y -= _tborder;
 	if (_g_mousegrab != this) {
@@ -1012,30 +995,29 @@ bool Panel::do_mousemove
  */
 bool Panel::do_key(bool const down, SDL_Keysym const code)
 {
-	if (!_g_allow_user_input)
+	if (_focus && _focus->do_key(down, code)) {
 		return true;
-
-	if (_focus) {
-		if (_focus->do_key(down, code))
-			return true;
 	}
 
-	return handle_key(down, code);
+	// If we handle text, it does not matter if we handled this key
+	// or not, it should not propagate.
+	if (handle_key(down, code) || handles_textinput()) {
+		return true;
+	}
+	return false;
 }
 
-
-bool Panel::do_textinput(const char * text) {
-	if (!_g_allow_user_input) {
+bool Panel::do_textinput(const std::string& text) {
+	if (_focus && _focus->do_textinput(text)) {
 		return true;
 	}
-	if (_focus) {
-		if (_focus->do_textinput(text)) {
-			return true;
-		}
+
+	if (!handles_textinput()) {
+		return false;
 	}
+
 	return handle_textinput(text);
 }
-
 
 bool Panel::do_tooltip()
 {
@@ -1052,7 +1034,6 @@ bool Panel::get_key_state(const SDL_Scancode key) const
 {
 	return WLApplication::get()->get_key_state(key);
 }
-
 
 /**
  * Determine which panel is to receive a mouse event.
@@ -1177,7 +1158,7 @@ void Panel::ui_key(bool const down, SDL_Keysym const code)
 /**
  * Input callback function. Pass the textinput event to the currently modal panel
  */
-void Panel::ui_textinput(const char * text) {
+void Panel::ui_textinput(const std::string& text) {
 	if (!_g_allow_user_input) {
 		return;
 	}

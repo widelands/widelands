@@ -81,7 +81,7 @@ BuildingWindow::BuildingWindow
 	// so that overriding create_capsbuttons() works
 
 	set_center_panel(vbox);
-	set_think(true);
+	set_thinks(true);
 	set_fastclick_panel(this);
 
 	show_workarea();

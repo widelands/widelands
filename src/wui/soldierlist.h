@@ -23,7 +23,7 @@
 class InteractiveGameBase;
 
 namespace UI {
-struct Panel;
+class Panel;
 }
 
 namespace Widelands {

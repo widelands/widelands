@@ -408,7 +408,7 @@ bool FullscreenMenuOptions::handle_key(bool down, SDL_Keysym code)
 {
 	if (down) {
 		switch (code.sym) {
-			case SDL_SCANCODE_KP_ENTER:
+			case SDLK_KP_ENTER:
 			case SDLK_RETURN:
 				end_modal(static_cast<int32_t>(om_ok));
 				return true;
@@ -648,7 +648,7 @@ bool FullscreenMenuAdvancedOptions::handle_key(bool down, SDL_Keysym code)
 {
 	if (down) {
 		switch (code.sym) {
-			case SDL_SCANCODE_KP_ENTER:
+			case SDLK_KP_ENTER:
 			case SDLK_RETURN:
 				end_modal(static_cast<int32_t>(om_ok));
 				return true;
