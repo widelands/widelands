@@ -73,7 +73,7 @@ public:
 		/// whether any change in the desired size should propagate to the actual size
 		pf_layout_toplevel = 512,
 		/// whether widget wants to receive unicode textinput messages
-		pf_handle_textinput = 2048,
+		pf_handle_textinput = 1024,
 	};
 
 	Panel
