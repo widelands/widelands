@@ -27,9 +27,19 @@
 #include "graphic/gl/surface.h"
 #include "graphic/gl/utils.h"
 #include "graphic/graphic.h"
-#include "graphic/sdl/utils.h"
 
 namespace  {
+
+namespace {
+
+// NOCOM(#sirver): method is duplicated.
+SDL_Surface* empty_sdl_surface(int16_t w, int16_t h) {
+	SDL_Surface* const surface =
+	   SDL_CreateRGBSurface(SDL_SWSURFACE, w, h, 32, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
+	return surface;
+}
+
+}  // namespace
 
 class GlFramebuffer {
 public:

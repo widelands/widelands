@@ -47,10 +47,6 @@ wl_library(graphic_surface
     gl/surface_texture.h
     gl/utils.cc
     gl/utils.h
-    sdl/surface.cc
-    sdl/surface.h
-    sdl/utils.cc
-    sdl/utils.h
     surface.cc
     surface.h
     surface_cache.cc
@@ -114,11 +110,6 @@ wl_library(graphic
     rendertarget.h
     richtext.cc
     richtext.h
-    sdl/game_renderer.cc
-    sdl/game_renderer.h
-    sdl/terrain.cc
-    sdl/terrain.h
-    sdl/vertex.h
     text_parser.cc
     text_parser.h
     texture.cc

@@ -23,7 +23,6 @@
 #include <SDL_ttf.h>
 #include <boost/format.hpp>
 
-#include "graphic/sdl/utils.h"
 #include "graphic/surface.h"
 #include "graphic/surface_cache.h"
 #include "graphic/text/rt_errors.h"
@@ -35,6 +34,16 @@ static const int SHADOW_OFFSET = 1;
 static const SDL_Color SHADOW_CLR = {0, 0, 0, SDL_ALPHA_OPAQUE};
 
 namespace RT {
+
+namespace  {
+
+SDL_Surface * empty_sdl_surface(int16_t w, int16_t h) {
+	SDL_Surface* const surface =
+	   SDL_CreateRGBSurface(SDL_SWSURFACE, w, h, 32, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
+	return surface;
+}
+
+}  // namespace
 
 SdlTtfFont::SdlTtfFont(TTF_Font * font, const string& face, int ptsize, string* ttf_memory_block) :
 	font_(font), style_(TTF_STYLE_NORMAL), font_name_(face), ptsize_(ptsize),

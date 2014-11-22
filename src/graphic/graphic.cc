@@ -40,7 +40,6 @@
 #include "graphic/image_io.h"
 #include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
-#include "graphic/sdl/surface.h"
 #include "graphic/surface_cache.h"
 #include "graphic/texture.h"
 #include "io/fileread.h"
@@ -52,7 +51,6 @@
 using namespace std;
 
 Graphic * g_gr;
-bool g_opengl;
 
 namespace  {
 
@@ -91,31 +89,21 @@ Graphic::Graphic()
 	ImageTransformations::initialize();
 
 	m_sdl_window = nullptr;
-	m_sdl_screen = nullptr;
-	m_sdl_renderer = nullptr;
-	m_sdl_texture = nullptr;
 	m_glcontext = nullptr;
 }
 
-void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
+void Graphic::initialize(int32_t w, int32_t h, bool fullscreen) {
 	cleanup();
 
-	// Set video mode using SDL. First collect the flags
-	int32_t flags = 0;
-	g_opengl = false;
+	// NOCOM(#sirver): cleanup this method
 
-	if (opengl) {
-		log("Graphics: Trying opengl\n");
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
-		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	// Request an OpenGL 2 context.
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 
-		// Request an OpenGL 2 context.
-		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
-		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
-
-		flags |= SDL_WINDOW_OPENGL;
-	}
-
+	int32_t flags = SDL_WINDOW_OPENGL;
 	if (fullscreen) {
 		flags |= SDL_WINDOW_FULLSCREEN;
 		log("Graphics: Trying FULLSCREEN\n");
@@ -143,61 +131,46 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 
 	SDL_SetWindowTitle(m_sdl_window, ("Widelands " + build_id() + '(' + build_type() + ')').c_str());
 
-	if (opengl) {
-		m_glcontext = SDL_GL_CreateContext(m_sdl_window);
-		if (m_glcontext) {
-			SDL_GL_MakeCurrent(m_sdl_window, m_glcontext);
-		}
-
-		//  We now really have a working opengl screen...
-		g_opengl = true;
-
-		// See graphic/gl/system_headers.h for an explanation of the
-		// next line.
-		glewExperimental = GL_TRUE;
-		GLenum err = glewInit();
-		if (err != GLEW_OK) {
-			log("glewInit returns %i\nYour OpenGL installation must be __very__ broken. %s\n",
-				 err, glewGetErrorString(err));
-			throw wexception("glewInit returns %i: Broken OpenGL installation.", err);
-		}
-
-		log("Graphics: OpenGL: Version \"%s\"\n",
-		    reinterpret_cast<const char*>(glGetString(GL_VERSION)));
-
-		GLboolean glBool;
-		glGetBooleanv(GL_DOUBLEBUFFER, &glBool);
-		log("Graphics: OpenGL: Double buffering %s\n", (glBool == GL_TRUE) ? "enabled" : "disabled");
-
-		GLint glInt;
-		glGetIntegerv(GL_MAX_TEXTURE_SIZE, &glInt);
-		log("Graphics: OpenGL: Max texture size: %u\n", glInt);
-
-		SDL_GL_SetSwapInterval(1);
-		SDL_GL_SwapWindow(m_sdl_window);
-
-		glDrawBuffer(GL_BACK);
-
-		glDisable(GL_DEPTH_TEST);
-		glEnable(GL_TEXTURE_2D);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-		glClear(GL_COLOR_BUFFER_BIT);
-
-		screen_.reset(new GLSurfaceScreen(w, h));
-	} else {
-		m_sdl_renderer =  SDL_CreateRenderer(m_sdl_window, -1, 0);
-		uint32_t rmask, gmask, bmask, amask;
-		int bpp;
-		SDL_PixelFormatEnumToMasks(SDL_PIXELFORMAT_ARGB8888, &bpp, &rmask, &gmask, &bmask, &amask);
-		m_sdl_screen = SDL_CreateRGBSurface(0, w, h, bpp, rmask, gmask, bmask, amask);
-		m_sdl_texture = SDL_CreateTexture(m_sdl_renderer,
-													 SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING,
-													 w, h);
-		screen_.reset(new SDLSurface(m_sdl_screen, false));
+	m_glcontext = SDL_GL_CreateContext(m_sdl_window);
+	if (m_glcontext) {
+		SDL_GL_MakeCurrent(m_sdl_window, m_glcontext);
 	}
 
+	// See graphic/gl/system_headers.h for an explanation of the
+	// next line.
+	glewExperimental = GL_TRUE;
+	GLenum err = glewInit();
+	if (err != GLEW_OK) {
+		log("glewInit returns %i\nYour OpenGL installation must be __very__ broken. %s\n",
+			 err, glewGetErrorString(err));
+		throw wexception("glewInit returns %i: Broken OpenGL installation.", err);
+	}
+
+	log("Graphics: OpenGL: Version \"%s\"\n",
+		 reinterpret_cast<const char*>(glGetString(GL_VERSION)));
+
+	GLboolean glBool;
+	glGetBooleanv(GL_DOUBLEBUFFER, &glBool);
+	log("Graphics: OpenGL: Double buffering %s\n", (glBool == GL_TRUE) ? "enabled" : "disabled");
+
+	GLint glInt;
+	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &glInt);
+	log("Graphics: OpenGL: Max texture size: %u\n", glInt);
+
+	SDL_GL_SetSwapInterval(1);
+	SDL_GL_SwapWindow(m_sdl_window);
+
+	glDrawBuffer(GL_BACK);
+
+	glDisable(GL_DEPTH_TEST);
+	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	// NOCOM(#sirver): check for unused members in graphic.
+	screen_.reset(new GLSurfaceScreen(w, h));
 	set_icon(m_sdl_window);
 
 	/* Information about the video capabilities. */
@@ -236,14 +209,6 @@ void Graphic::cleanup() {
 	if (UI::g_fh)
 		UI::g_fh->flush();
 
-	if (m_sdl_texture) {
-		SDL_DestroyTexture(m_sdl_texture);
-		m_sdl_texture = nullptr;
-	}
-	if (m_sdl_screen) {
-		SDL_FreeSurface(m_sdl_screen);
-		m_sdl_screen = nullptr;
-	}
 	if (m_sdl_window) {
 		SDL_DestroyWindow(m_sdl_window);
 		m_sdl_window = nullptr;
@@ -311,6 +276,7 @@ void Graphic::toggle_fullscreen()
 
 
 void Graphic::update() {
+	// NOCOM(#sirver): is this really needed? Why not redraw after a certain time?
 	m_update = true;
 }
 
@@ -329,16 +295,7 @@ bool Graphic::need_update() const
 */
 void Graphic::refresh()
 {
-	if (g_opengl) {
-		SDL_GL_SwapWindow(m_sdl_window);
-		m_update = false;
-		return;
-	}
-
-	SDL_UpdateTexture(m_sdl_texture, nullptr, m_sdl_screen->pixels, m_sdl_screen->pitch);
-	SDL_RenderClear(m_sdl_renderer);
-	SDL_RenderCopy(m_sdl_renderer, m_sdl_texture, nullptr, nullptr);
-	SDL_RenderPresent(m_sdl_renderer);
+	SDL_GL_SwapWindow(m_sdl_window);
 	m_update = false;
 }
 

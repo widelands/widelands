@@ -22,10 +22,6 @@
 #include <SDL.h>
 
 #include "graphic/gl/surface_texture.h"
-#include "graphic/sdl/surface.h"
-#include "graphic/sdl/utils.h"
-
-extern bool g_opengl;
 
 namespace {
 
@@ -47,15 +43,10 @@ void Surface::display_format_is_now_defined() {
 }
 
 Surface* Surface::create(SDL_Surface* surf) {
-	if (g_opengl) {
-		return new GLSurfaceTexture(surf);
-	}
-	return new SDLSurface(maybe_convert_to_diplay_format(surf));
+	return new GLSurfaceTexture(surf);
 }
 
+// NOCOM(#sirver): kill opengl option
 Surface* Surface::create(uint16_t w, uint16_t h) {
-	if (g_opengl) {
-		return new GLSurfaceTexture(w, h);
-	}
-	return new SDLSurface(empty_sdl_surface(w, h));
+	return new GLSurfaceTexture(w, h);
 }

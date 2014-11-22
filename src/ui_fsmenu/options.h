@@ -54,7 +54,6 @@ public:
 		uint32_t maxfps;
 		uint32_t remove_replays;
 		bool remove_syncstreams;
-		bool opengl;
 		bool transparent_chat;
 
 		// advanced options
@@ -197,8 +196,6 @@ private:
 	UI::MultilineTextarea       m_label_nozip;
 	UI::Checkbox                m_remove_syncstreams;
 	UI::MultilineTextarea       m_label_remove_syncstreams;
-	UI::Checkbox                m_opengl;
-	UI::MultilineTextarea       m_label_opengl;
 
 	OptionsCtrl::OptionsStruct  os;
 };

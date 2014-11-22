@@ -676,7 +676,7 @@ void WLApplication::set_input_grab(bool grab)
  * with the given resolution.
  * Throws an exception on failure.
  */
-void WLApplication::init_graphics(int32_t w, int32_t h, bool fullscreen, bool opengl)
+void WLApplication::init_graphics(int32_t w, int32_t h, bool fullscreen)
 {
 	if (!w && !h) { // shutdown.
 		delete g_gr;
@@ -687,13 +687,10 @@ void WLApplication::init_graphics(int32_t w, int32_t h, bool fullscreen, bool op
 
 	if (!g_gr) {
 		g_gr = new Graphic();
-		g_gr->initialize(w, h, fullscreen, opengl);
+		g_gr->initialize(w, h, fullscreen);
 	} else {
-		if
-			(g_gr->get_xres() != w || g_gr->get_yres() != h
-				|| g_gr->is_fullscreen() != fullscreen || g_opengl != opengl)
-		{
-			g_gr->initialize(w, h, fullscreen, opengl);
+		if (g_gr->get_xres() != w || g_gr->get_yres() != h || g_gr->is_fullscreen() != fullscreen) {
+			g_gr->initialize(w, h, fullscreen);
 		}
 	}
 }
@@ -703,11 +700,9 @@ void WLApplication::refresh_graphics()
 	Section & s = g_options.pull_section("global");
 
 	//  Switch to the new graphics system now, if necessary.
-	init_graphics
-		(s.get_int("xres", DEFAULT_RESOLUTION_W),
-		 s.get_int("yres", DEFAULT_RESOLUTION_H),
-		 s.get_bool("fullscreen", false),
-		 s.get_bool("opengl", true));
+	init_graphics(s.get_int("xres", DEFAULT_RESOLUTION_W),
+	              s.get_int("yres", DEFAULT_RESOLUTION_H),
+	              s.get_bool("fullscreen", false));
 	// does only work with a window
 	set_input_grab(s.get_bool("inputgrab", false));
 }
@@ -732,7 +727,6 @@ bool WLApplication::init_settings() {
 	// Profile needs support for a Syntax definition to solve this in a
 	// sensible way
 	s.get_bool("fullscreen");
-	s.get_bool("opengl");
 	s.get_int("xres");
 	s.get_int("yres");
 	s.get_int("border_snap_distance");
@@ -851,7 +845,7 @@ void WLApplication::shutdown_hardware()
 			"alive!"
 			<< std::endl;
 
-	init_graphics(0, 0, false, false);
+	init_graphics(0, 0, false);
 	SDL_QuitSubSystem(SDL_INIT_TIMER|SDL_INIT_VIDEO|SDL_INIT_JOYSTICK);
 
 #ifndef _WIN32

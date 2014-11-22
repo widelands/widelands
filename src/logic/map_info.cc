@@ -43,19 +43,20 @@ using namespace Widelands;
 namespace  {
 
 // Setup the static objects Widelands needs to operate and initializes systems.
-void initialize(bool use_opengl) {
+void initialize() {
 	SDL_Init(SDL_INIT_VIDEO);
 
 	g_fs = new LayeredFileSystem();
 	g_fs->add_file_system(&FileSystem::create(INSTALL_DATADIR));
 
+	// NOCOM(#sirver): remove this and try headless (hidden window). this might not work with dummy.
 #ifdef HAS_GETENV
 	char dummy_video_env[] = "SDL_VIDEODRIVER=dummy";
 	putenv(dummy_video_env);
 #endif
 
 	g_gr = new Graphic();
-	g_gr->initialize(1, 1, false, use_opengl);
+	g_gr->initialize(1, 1, false);
 }
 
 }  // namespace
@@ -63,21 +64,14 @@ void initialize(bool use_opengl) {
 int main(int argc, char ** argv)
 {
 	if (!(2 <= argc && argc <= 3)) {
-		log("Usage: %s [--opengl] <map file>\n", argv[0]);
+		log("Usage: %s <map file>\n", argv[0]);
 		return 1;
-	}
-
-	bool use_opengl = false;
-	for (int i = 0; i < argc; ++i) {
-		if (std::string(argv[i]) == "--opengl") {
-			use_opengl = true;
-		}
 	}
 
 	const std::string map_path = argv[argc - 1];
 
 	try {
-		initialize(use_opengl);
+		initialize();
 
 		std::string map_dir = FileSystem::fs_dirname(map_path);
 		if (map_dir.empty()) {

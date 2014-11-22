@@ -35,7 +35,6 @@ class AnimationManager;
 class RenderTarget;
 class Surface;
 class SurfaceCache;
-struct SDL_Surface;
 class StreamWrite;
 struct Texture;
 
@@ -51,8 +50,7 @@ public:
 	~Graphic();
 
 	// Initialize or reinitialize the graphics system. Throws on error.
-	void initialize
-		(int32_t w, int32_t h, bool fullscreen, bool opengl);
+	void initialize(int32_t w, int32_t h, bool fullscreen);
 
 	int32_t get_xres();
 	int32_t get_yres();
@@ -94,10 +92,7 @@ private:
 	/// This saves a copy of the screen SDL_Surface. This is needed for
 	/// opengl rendering as the SurfaceOpenGL does not use it. It allows
 	/// manipulation the screen context.
-	SDL_Surface * m_sdl_screen;
-	SDL_Renderer * m_sdl_renderer;
 	SDL_Window * m_sdl_window;
-	SDL_Texture * m_sdl_texture;
 	SDL_GLContext m_glcontext;
 	/// A RenderTarget for screen_. This is initialized during init()
 	std::unique_ptr<RenderTarget> m_rendertarget;
@@ -120,6 +115,5 @@ private:
 };
 
 extern Graphic * g_gr;
-extern bool g_opengl;
 
 #endif  // end of include guard: WL_GRAPHIC_GRAPHIC_H
