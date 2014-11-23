@@ -45,33 +45,25 @@
 * changed to load 8 bit bitmaps directly.
 */
 struct Texture {
-	Texture(const std::vector<std::string>& texture_files,
-	        uint32_t frametime,
-	        const SDL_PixelFormat&);
-	~Texture();
+	Texture(const std::vector<std::string>& texture_files, uint32_t frametime);
 
-	const std::string & get_texture_image() const {return m_texture_image;}
-
-	uint8_t * get_pixels   () const {return m_pixels;}
-	uint8_t * get_curpixels() const {return m_curframe;}
-	void    * get_colormap () const {return m_colormap->get_colormap();}
+	const std::string& get_texture_image() const {
+		return m_texture_image;
+	}
+	uint32_t get_texture() const {
+		return m_gl_textures.at(m_frame_num)->get_gl_texture();
+	}
 
 	RGBColor get_minimap_color(int8_t shade);
 
 	void animate(uint32_t time);
-	uint32_t get_texture() const
-		{return m_glFrames.at(m_frame_num)->get_gl_texture();}
 
 private:
-	std::unique_ptr<Colormap> m_colormap;
-	uint8_t   * m_pixels;
 	RGBColor    m_minimap_colors[256];
-	uint8_t   * m_curframe;
 	int32_t     m_frame_num;
 	std::string m_texture_image;
-	uint32_t    m_nrframes;
 	uint32_t    m_frametime;
-	std::vector<std::unique_ptr<GLSurfaceTexture>> m_glFrames;
+	std::vector<std::unique_ptr<GLSurfaceTexture>> m_gl_textures;
 };
 
 #endif  // end of include guard: WL_GRAPHIC_TEXTURE_H

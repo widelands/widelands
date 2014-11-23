@@ -28,8 +28,6 @@
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 
-extern bool g_opengl;
-
 using namespace std;
 
 /**
@@ -37,15 +35,8 @@ using namespace std;
  * Currently it converts a 16 bit image to a 8 bit texture. This should
  * be changed to load a 8 bit file directly, however.
  */
-Texture::Texture(const std::vector<std::string>& texture_files,
-                 const uint32_t frametime,
-                 const SDL_PixelFormat& format)
-   : m_colormap(nullptr),
-     m_pixels(nullptr),
-     m_curframe(nullptr),
-     m_frame_num(0),
-     m_nrframes(0),
-     m_frametime(frametime) {
+Texture::Texture(const std::vector<std::string>& texture_files, const uint32_t frametime)
+   : m_frame_num(0), m_frametime(frametime) {
 	if (texture_files.empty()) {
 		throw wexception("No images for texture.");
 	}
@@ -58,7 +49,8 @@ Texture::Texture(const std::vector<std::string>& texture_files,
 		m_texture_image = fname;
 		SDL_Surface* surf = load_image_as_sdl_surface(fname, g_fs);
 		if (!surf) {
-			throw wexception("WARNING: Failed to load texture frame %s: %s\n", fname.c_str(), IMG_GetError());
+			throw wexception(
+			   "WARNING: Failed to load texture frame %s: %s\n", fname.c_str(), IMG_GetError());
 		}
 		if (surf->w != TEXTURE_WIDTH || surf->h != TEXTURE_HEIGHT) {
 			SDL_FreeSurface(surf);
@@ -69,7 +61,7 @@ Texture::Texture(const std::vector<std::string>& texture_files,
 		}
 
 		// calculate shades on the first frame
-		if (!m_nrframes) {
+		if (m_gl_textures.empty()) {
 			uint8_t top_left_pixel = static_cast<uint8_t*>(surf->pixels)[0];
 			SDL_Color top_left_pixel_color = surf->format->palette->colors[top_left_pixel];
 			for (int i = -128; i < 128; i++) {
@@ -80,71 +72,11 @@ Texture::Texture(const std::vector<std::string>& texture_files,
 				m_minimap_colors[shade] = RGBColor(r, g, b);
 			}
 		}
-
-		if (g_opengl) {
-			// Note: we except the constructor to free the SDL surface
-			GLSurfaceTexture* surface = new GLSurfaceTexture(surf);
-			m_glFrames.emplace_back(surface);
-
-			++m_nrframes;
-			continue;
-		}
-
-		// Determine color map if it's the first frame
-		if (!m_nrframes) {
-			if (surf->format->BitsPerPixel != 8) {
-				throw wexception("Terrain %s is not 8 bits per pixel.", fname.c_str());
-			}
-			m_colormap.reset(new Colormap(*surf->format->palette->colors, format));
-		}
-
-		// Convert to our palette
-		SDL_Palette palette;
-		SDL_PixelFormat fmt;
-
-		palette.ncolors = 256;
-		palette.colors = m_colormap->get_palette();
-
-		memset(&fmt, 0, sizeof(fmt));
-		fmt.BitsPerPixel = 8;
-		fmt.BytesPerPixel = 1;
-		fmt.palette = &palette;
-
-		SDL_Surface * const cv = SDL_ConvertSurface(surf, &fmt, 0);
-
-		// Add the frame
-		uint8_t* new_ptr =
-			static_cast<uint8_t *>
-				(realloc
-				 	(m_pixels, TEXTURE_WIDTH * TEXTURE_HEIGHT * (m_nrframes + 1)));
-		if (!new_ptr)
-			throw wexception("Out of memory.");
-		m_pixels = new_ptr;
-
-
-		m_curframe = &m_pixels[TEXTURE_WIDTH * TEXTURE_HEIGHT * m_nrframes];
-		++m_nrframes;
-
-		SDL_LockSurface(cv);
-
-		for (int32_t y = 0; y < TEXTURE_HEIGHT; ++y)
-			memcpy
-				(m_curframe + y * TEXTURE_WIDTH,
-				 static_cast<uint8_t *>(cv->pixels) + y * cv->pitch,
-				 TEXTURE_WIDTH);
-		SDL_UnlockSurface(cv);
-		SDL_FreeSurface(cv);
-		SDL_FreeSurface(surf);
+		m_gl_textures.emplace_back(new GLSurfaceTexture(surf));
 	}
 
-	if (!m_nrframes)
+	if (m_gl_textures.empty())
 		throw wexception("Texture has no frames");
-}
-
-
-Texture::~Texture ()
-{
-	free(m_pixels);
 }
 
 /**
@@ -159,8 +91,5 @@ RGBColor Texture::get_minimap_color(int8_t shade) {
  */
 void Texture::animate(uint32_t time)
 {
-	m_frame_num = (time / m_frametime) % m_nrframes;
-	if (g_opengl)
-		return;
-	m_curframe = &m_pixels[TEXTURE_WIDTH * TEXTURE_HEIGHT * m_frame_num];
+	m_frame_num = (time / m_frametime) % m_gl_textures.size();
 }

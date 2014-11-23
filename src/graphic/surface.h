@@ -20,6 +20,8 @@
 #ifndef WL_GRAPHIC_SURFACE_H
 #define WL_GRAPHIC_SURFACE_H
 
+#include <memory>
+
 #include "base/macros.h"
 #include "base/rect.h"
 #include "graphic/color.h"
@@ -31,13 +33,6 @@
  */
 class Surface  {
 public:
-	// Surfaces can either be converted to display format on creation or kept in
-	// the format they were created. The only reason not to convert to display
-	// format is when no display format is defined - trying will then crash the
-	// program. This is only the case when SDL_SetVideoMode() has never been
-	// called, so call this method after you called SDL_SetVideoMode.
-	static void display_format_is_now_defined();
-
 	// Create a new surface from an SDL_Surface. Ownership is taken.
 	static Surface* create(SDL_Surface*);
 
@@ -49,26 +44,26 @@ public:
 	virtual ~Surface() {}
 
 	/// Dimensions.
-	virtual uint16_t width() const = 0;
-	virtual uint16_t height() const = 0;
+	uint16_t width() const;
+	uint16_t height() const;
 
 	/// This draws a part of another surface to this surface
-	virtual void blit(const Point&, const Surface*, const Rect& srcrc, Composite cm = CM_UseAlpha) = 0;
+	virtual void blit(const Point&, const Surface*, const Rect& srcrc, Composite cm = CM_UseAlpha);
 
 	/// Draws a filled rect to the surface. No blending takes place, the values
 	//in the target are just replaced (i.e. / Composite would be CM_Copy).
-	virtual void fill_rect(const Rect&, const RGBAColor&) = 0;
+	virtual void fill_rect(const Rect&, const RGBAColor&);
 
 	/// Draws a rect (frame only) to the surface.
-	virtual void draw_rect(const Rect&, const RGBColor&) = 0;
+	virtual void draw_rect(const Rect&, const RGBColor&);
 
 	/// draw a line to the surface
 	virtual void draw_line
-		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t width = 1) = 0;
+		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t width = 1);
 
 	/// makes a rectangle on the surface brighter (or darker).
 	/// @note this is slow in SDL mode. Use with care
-	virtual void brighten_rect(const Rect&, int32_t factor) = 0;
+	virtual void brighten_rect(const Rect&, int32_t factor);
 
 	/// The functions below are for direct pixel access. This should be used
 	/// only very sparingly as / it is potentially expensive (especially for
@@ -105,7 +100,21 @@ public:
 	};
 
 	/// This returns the pixel format for direct pixel access.
-	virtual const SDL_PixelFormat & format() const = 0;
+	const SDL_PixelFormat & format() const;
+
+	/**
+	 * \return Pitch of the raw pixel data, i.e. the number of bytes
+	 * contained in each image row. This can be strictly larger than
+	 * bytes per pixel times the width.
+	 */
+	uint16_t get_pitch() const;
+
+	/**
+	 * \return Pointer to the raw pixel data.
+	 *
+	 * \warning May only be called inside lock/unlock pairs.
+	 */
+	uint8_t * get_pixels() const;
 
 	/**
 	 * Lock/Unlock pairs must guard any of the direct pixel access using the
@@ -113,29 +122,34 @@ public:
 	 *
 	 * \note Lock/Unlock pairs cannot be nested.
 	 */
-	//@{
 	virtual void lock(LockMode) = 0;
 	virtual void unlock(UnlockMode) = 0;
-	//@}
 
-	//@{
-	virtual uint32_t get_pixel(uint16_t x, uint16_t y) = 0;
-	virtual void set_pixel(uint16_t x, uint16_t y, uint32_t clr) = 0;
-	//@}
+	uint32_t get_pixel(uint16_t x, uint16_t y);
+	void set_pixel(uint16_t x, uint16_t y, uint32_t clr);
 
-	/**
-	 * \return Pitch of the raw pixel data, i.e. the number of bytes
-	 * contained in each image row. This can be strictly larger than
-	 * bytes per pixel times the width.
-	 */
-	virtual uint16_t get_pitch() const = 0;
+	// Converts the given pixel into an OpenGl point. This might
+	// need some flipping of axis, depending if you want to render
+	// on the screen or not.
+	virtual void pixel_to_gl(float* x, float* y) const = 0;
 
-	/**
-	 * \return Pointer to the raw pixel data.
-	 *
-	 * \warning May only be called inside lock/unlock pairs.
-	 */
-	virtual uint8_t * get_pixels() const = 0;
+protected:
+	// Convert the 'rect' in pixel space into opengl space.
+	enum class ConversionMode {
+		// Convert the rect as given.
+		kExact,
+
+		// Convert the rect so that the borders are in the center
+		// of the pixels.
+		kMidPoint,
+	};
+	FloatRect to_opengl(const Rect& rect, ConversionMode mode);
+
+	/// Logical width and height of the surface
+	uint16_t m_w, m_h;
+
+	/// Pixel data, while the texture is locked
+	std::unique_ptr<uint8_t[]> m_pixels;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(Surface);

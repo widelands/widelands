@@ -28,7 +28,6 @@
 #include "base/macros.h"
 #include "graphic/color.h"
 #include "graphic/graphic.h"
-#include "graphic/sdl/surface.h"
 #include "graphic/surface.h"
 #include "graphic/surface_cache.h"
 
@@ -87,15 +86,8 @@ Surface* resize_surface(Surface* src, uint32_t w, uint32_t h) {
 	Rect srcrect = Rect(Point(0, 0), src->width(), src->height());
 
 	// Second step: get source material
-	SDL_Surface * srcsdl = nullptr;
+	SDL_Surface * srcsdl = extract_sdl_surface(*src, srcrect);
 	bool free_source = true;
-	if (upcast(const SDLSurface, sdlsrcsurf, src)) {
-		srcsdl = sdlsrcsurf->get_sdl_surface();
-		free_source = false;
-	} else {
-		// This is in OpenGL
-		srcsdl = extract_sdl_surface(*src, srcrect);
-	}
 
 	// If we actually shrink a surface, ballpark the zoom so that the shrinking
 	// effect is weakened.

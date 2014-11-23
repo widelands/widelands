@@ -36,21 +36,22 @@ wl_library(graphic_image
     graphic_surface
 )
 
+wl_library(graphic_sdl_utils
+  SRCS
+    sdl_utils.h
+    sdl_utils.cc
+  USES_SDL2
+)
+
 wl_library(graphic_surface
   SRCS
     compositemode.h
-    gl/surface.cc
-    gl/surface.h
     gl/surface_screen.cc
     gl/surface_screen.h
     gl/surface_texture.cc
     gl/surface_texture.h
     gl/utils.cc
     gl/utils.h
-    sdl/surface.cc
-    sdl/surface.h
-    sdl/utils.cc
-    sdl/utils.h
     surface.cc
     surface.h
     surface_cache.cc
@@ -58,12 +59,13 @@ wl_library(graphic_surface
   USES_OPENGL
   USES_SDL2
   DEPENDS
-    base_macros
     base_exceptions
     base_geometry
     base_log
+    base_macros
     graphic
     graphic_color
+    graphic_sdl_utils
 )
 
 wl_library(graphic
@@ -114,11 +116,6 @@ wl_library(graphic
     rendertarget.h
     richtext.cc
     richtext.h
-    sdl/game_renderer.cc
-    sdl/game_renderer.h
-    sdl/terrain.cc
-    sdl/terrain.h
-    sdl/vertex.h
     text_parser.cc
     text_parser.h
     texture.cc
@@ -150,7 +147,6 @@ wl_library(graphic
     io_stream
     logic
     profile
-    random
     scripting
     sound
     ui_basic

@@ -555,14 +555,6 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 		 get_w() - 2 * m_hmargin - m_remove_syncstreams.get_w() - m_padding, 40,
 		 _("Remove Syncstream dumps on startup"), UI::Align_VCenter),
 
-	m_opengl (this, Point(m_hmargin,
-								 m_label_remove_syncstreams.get_y() +
-								 m_label_remove_syncstreams.get_h() + m_padding)),
-	m_label_opengl
-		(this,
-		 m_hmargin + m_opengl.get_w() + m_padding, m_opengl.get_y(),
-		 get_w() - 2 * m_hmargin - m_opengl.get_w() - m_padding, 40,
-		 _("OpenGL rendering"), UI::Align_VCenter),
 	os(opt)
 {
 	for (UI::Button* temp_button : m_sb_dis_panel.get_buttons()) {
@@ -594,7 +586,6 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 	m_message_sound        .set_state(opt.message_sound);
 	m_nozip                .set_state(opt.nozip);
 	m_remove_syncstreams   .set_state(opt.remove_syncstreams);
-	m_opengl               .set_state(opt.opengl);
 	m_transparent_chat     .set_state(opt.transparent_chat);
 
 	// Fill the font list.
@@ -678,7 +669,6 @@ OptionsCtrl::OptionsStruct FullscreenMenuAdvancedOptions::get_values() {
 	os.panel_snap_distance  = m_sb_dis_panel.get_value();
 	os.border_snap_distance = m_sb_dis_border.get_value();
 	os.remove_syncstreams   = m_remove_syncstreams.get_state();
-	os.opengl               = m_opengl.get_state();
 	os.transparent_chat     = m_transparent_chat.get_state();
 	return os;
 }
@@ -734,7 +724,6 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct() {
 	opt.panel_snap_distance = m_opt_section.get_int("panel_snap_distance", 0);
 	opt.remove_replays = m_opt_section.get_int("remove_replays", 0);
 	opt.remove_syncstreams = m_opt_section.get_bool("remove_syncstreams", true);
-	opt.opengl = m_opt_section.get_bool("opengl", true);
 	opt.transparent_chat = m_opt_section.get_bool("transparent_chat", true);
 	return opt;
 }
@@ -766,7 +755,6 @@ void OptionsCtrl::save_options() {
 
 	m_opt_section.set_int("remove_replays",         opt.remove_replays);
 	m_opt_section.set_bool("remove_syncstreams",    opt.remove_syncstreams);
-	m_opt_section.set_bool("opengl",                opt.opengl);
 	m_opt_section.set_bool("transparent_chat",      opt.transparent_chat);
 
 	WLApplication::get()->set_input_grab(opt.inputgrab);

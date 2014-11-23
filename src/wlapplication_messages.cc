@@ -99,8 +99,7 @@ void show_usage(const std::string& build_id, const std::string& build_type)
 		<< _(" --yres=[...]         Height of the window in pixel.") << endl
 			/** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
 			/** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain */
-		<< _(" --opengl=[true|false]\n"
-			  "                      Enables OpenGL rendering") << endl << endl
+		<< endl
 		<< _("Options for the internal window manager:") << endl
 		<< _(" --border_snap_distance=[0 ...]\n"
 			  "                      Move a window to the edge of the screen\n"

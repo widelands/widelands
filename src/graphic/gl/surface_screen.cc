@@ -52,10 +52,6 @@ void GLSurfaceScreen::swap_rows()
 	}
 }
 
-const SDL_PixelFormat & GLSurfaceScreen::format() const {
-	return Gl::gl_rgba_format();
-}
-
 void GLSurfaceScreen::lock(Surface::LockMode mode)
 {
 	assert(!m_pixels);
@@ -84,8 +80,4 @@ void GLSurfaceScreen::unlock(Surface::UnlockMode mode)
 	}
 
 	m_pixels.reset(nullptr);
-}
-
-uint16_t GLSurfaceScreen::get_pitch() const {
-	return 4 * m_w;
 }

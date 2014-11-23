@@ -23,7 +23,7 @@
 #include <SDL_ttf.h>
 #include <boost/format.hpp>
 
-#include "graphic/sdl/utils.h"
+#include "graphic/sdl_utils.h"
 #include "graphic/surface.h"
 #include "graphic/surface_cache.h"
 #include "graphic/text/rt_errors.h"
