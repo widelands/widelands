@@ -28,6 +28,8 @@
 
 #include "base/rect.h"
 #include "graphic/image_cache.h"
+#include "notifications/notifications.h"
+#include "notifications/note_ids.h"
 
 #define MAX_RECTS 20
 
@@ -38,6 +40,15 @@ class SurfaceCache;
 class StreamWrite;
 struct Texture;
 
+// Will be send whenever the resolution changes.
+struct GraphicResolutionChanged {
+	CAN_BE_SEND_AS_NOTE(NoteId::GraphicResolutionChanged)
+
+	// New width and height in pixels.
+	int width;
+	int height;
+};
+
 /**
  * This class is a kind of Swiss Army knife for your graphics need. It
  * initializes the graphic system and provides access to resolutions. It has an
@@ -46,18 +57,21 @@ struct Texture;
  */
 class Graphic {
 public:
-	Graphic();
+	// Creates a new graphic mode with the given resolution if fullscreen is
+	// false, otherwise a window that fills the screen.
+	Graphic(int window_mode_w, int window_mode_height, bool fullscreen);
 	~Graphic();
 
-	// Initialize or reinitialize the graphics system. Throws on error.
-	void initialize(int32_t w, int32_t h, bool fullscreen);
+	// Gets and sets the resolution.
+	void change_resolution(int w, int h);
+	int get_xres();
+	int get_yres();
 
-	int32_t get_xres();
-	int32_t get_yres();
-	bool is_fullscreen();
+	// Changes the window to be fullscreen or not.
+	bool fullscreen();
+	void set_fullscreen(bool);
 
 	RenderTarget * get_render_target();
-	void toggle_fullscreen();
 	void update();
 	bool need_update() const;
 	void refresh();
@@ -79,12 +93,13 @@ public:
 
 	Surface& get_road_texture(int32_t roadtex);
 
-	bool check_fallback_settings_in_effect();
-
 private:
-	void cleanup();
+	// Called when the resolution (might) have changed.
+	void resolution_changed();
 
-	bool m_fallback_settings_in_effect;
+	// The height & width of the window should we be in window mode.
+	int m_window_mode_width;
+	int m_window_mode_height;
 
 	/// This is the main screen Surface.
 	/// A RenderTarget for this can be retrieved with get_render_target()
