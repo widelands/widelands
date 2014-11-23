@@ -63,7 +63,7 @@ Table<void *>::Table
 	m_sort_column     (0),
 	m_sort_descending (descending)
 {
-	set_think(false);
+	set_thinks(false);
 	set_can_focus(true);
 }
 
@@ -329,13 +329,13 @@ bool Table<void *>::handle_key(bool down, SDL_Keysym code)
 {
 	if (down) {
 		switch (code.sym) {
-		case SDL_SCANCODE_UP:
-		case SDL_SCANCODE_KP_8:
+		case SDLK_UP:
+		case SDLK_KP_8:
 			move_selection(-1);
 			return true;
 
-		case SDL_SCANCODE_DOWN:
-		case SDL_SCANCODE_KP_2:
+		case SDLK_DOWN:
+		case SDLK_KP_2:
 			move_selection(1);
 			return true;
 

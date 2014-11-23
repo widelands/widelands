@@ -60,7 +60,7 @@ struct InputCallback {
 	void (*mouse_move)
 	(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	void (*key)        (bool down, SDL_Keysym code);
-	void (*textinput) (const char * text);
+	void (*textinput) (const std::string& text);
 	void (*mouse_wheel) (uint32_t which, int32_t x, int32_t y);
 };
 
@@ -188,7 +188,7 @@ struct WLApplication {
 	void replay();
 	static void emergency_save(Widelands::Game &);
 
-protected:
+private:
 	WLApplication(int argc, char const * const * argv);
 
 	bool poll_event(SDL_Event &);
@@ -246,13 +246,14 @@ protected:
 	///true if an external entity wants us to quit
 	bool   m_should_die;
 
-	//do we want to search the default places for widelands installs
-	bool   m_use_default_datadir;
 	std::string m_homedir;
 
 	/// flag indicating if stdout and stderr have been redirected
 	bool m_redirected_stdio;
-private:
+
+	/// Absolute path to the data directory.
+	std::string m_datadir;
+
 	///Holds this process' one and only instance of WLApplication, if it was
 	///created already. nullptr otherwise.
 	///\note This is private on purpose. Read the class documentation.

@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-11-12 11:40+0000\n"
-"PO-Revision-Date: 2014-11-12 20:42+0000\n"
-"Last-Translator: Fenris Wolf <fenris.kcf@googlemail.com>\n"
+"POT-Creation-Date: 2014-11-14 17:33+0000\n"
+"PO-Revision-Date: 2014-11-18 17:09+0000\n"
+"Last-Translator: wl-zocker <Unknown>\n"
 "Language-Team: widelands-dev\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-11-13 05:50+0000\n"
-"X-Generator: Launchpad (build 17241)\n"
+"X-Launchpad-Export-Date: 2014-11-19 05:25+0000\n"
+"X-Generator: Launchpad (build 17252)\n"
 "Language: de\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -203,11 +203,11 @@ msgstr "Rückgängig"
 msgid "Redo"
 msgstr "Wiederherstellen"
 
-#: ../../src/editor/editorinteractive.cc:190
+#: ../../src/editor/editorinteractive.cc:188
 msgid "Unsupported format"
 msgstr "Nicht unterstütztes Format"
 
-#: ../../src/editor/editorinteractive.cc:191
+#: ../../src/editor/editorinteractive.cc:189
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -216,24 +216,24 @@ msgstr ""
 "Widelands konnte die Datei „%s“ nicht laden. Das Dateiformat scheint "
 "inkompatibel zu sein."
 
-#: ../../src/editor/editorinteractive.cc:206
+#: ../../src/editor/editorinteractive.cc:204
 msgid "Creating players"
 msgstr "Spieler erstellen"
 
-#: ../../src/editor/editorinteractive.cc:212
-#: ../../src/editor/editorinteractive.cc:600
+#: ../../src/editor/editorinteractive.cc:210
+#: ../../src/editor/editorinteractive.cc:597
 msgid "Loading graphics..."
 msgstr "Lade Grafiken ..."
 
-#: ../../src/editor/editorinteractive.cc:258
+#: ../../src/editor/editorinteractive.cc:256
 msgid "Unsaved Map"
 msgstr "Ungespeicherte Karte"
 
-#: ../../src/editor/editorinteractive.cc:259
+#: ../../src/editor/editorinteractive.cc:257
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Die Karte wurde noch nicht gespeichert. Willst du wirklich aufhören?"
 
-#: ../../src/editor/editorinteractive.cc:595
+#: ../../src/editor/editorinteractive.cc:592
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:147
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:510
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:178
@@ -241,7 +241,7 @@ msgstr "Die Karte wurde noch nicht gespeichert. Willst du wirklich aufhören?"
 msgid "No Name"
 msgstr "Kein Name"
 
-#: ../../src/editor/editorinteractive.cc:596
+#: ../../src/editor/editorinteractive.cc:593
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:148
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:511
 #: ../../src/logic/map.h:181 ../../src/ui_fsmenu/netsetup_lan.cc:199
@@ -2812,7 +2812,7 @@ msgstr "Fehlermeldung:"
 #: ../../src/ui_fsmenu/loadgame.cc:573 ../../src/ui_fsmenu/loadgame.cc:575
 #, c-format
 msgid "Incompatible: %s"
-msgstr "Unanwendbar: %s"
+msgstr "Inkompatibel: %s"
 
 #: ../../src/ui_fsmenu/main.cc:40
 msgid "Play Tutorial"
@@ -3274,33 +3274,33 @@ msgstr "Gebäude zerstören?"
 msgid "Do you really want to destroy this %s?"
 msgstr "Möchtest du das Gebäude %s wirklich zerstören?"
 
-#: ../../src/wui/actionconfirm.cc:287
+#: ../../src/wui/actionconfirm.cc:286
 msgid "Dismantle building?"
 msgstr "Gebäude abreißen?"
 
-#: ../../src/wui/actionconfirm.cc:288
+#: ../../src/wui/actionconfirm.cc:287
 #, c-format
 msgid "Do you really want to dismantle this %s?"
 msgstr "%s wirklich abreißen?"
 
-#: ../../src/wui/actionconfirm.cc:348
+#: ../../src/wui/actionconfirm.cc:346
 msgid "Enhance building?"
 msgstr "Gebäude ausbauen?"
 
-#: ../../src/wui/actionconfirm.cc:349
+#: ../../src/wui/actionconfirm.cc:347
 #, c-format
 msgid "Do you really want to enhance this %s?"
 msgstr "%s wirklich ausbauen?"
 
-#: ../../src/wui/actionconfirm.cc:401
+#: ../../src/wui/actionconfirm.cc:398
 msgid "Do you really want to sink this ship?"
 msgstr "Möchtest du dieses Schiff wirklich versenken?"
 
-#: ../../src/wui/actionconfirm.cc:401 ../../src/wui/actionconfirm.cc:442
+#: ../../src/wui/actionconfirm.cc:398 ../../src/wui/actionconfirm.cc:438
 msgid "Sink the ship?"
 msgstr "Schiff versenken?"
 
-#: ../../src/wui/actionconfirm.cc:442
+#: ../../src/wui/actionconfirm.cc:438
 msgid "Do you really want to cancel the active expedition?"
 msgstr "Möchtest du wirklich die aktive Expedition abbrechen?"
 

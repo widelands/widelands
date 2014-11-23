@@ -53,7 +53,7 @@ MultilineTextarea::MultilineTextarea
 	m_scrollmode(ScrollNormal)
 {
 	assert(scrollbar_w() <= w);
-	set_think(false);
+	set_thinks(false);
 
 	//  do not allow vertical alignment as it does not make sense
 	m_align = static_cast<Align>(align & Align_Horizontal);

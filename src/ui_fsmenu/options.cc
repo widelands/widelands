@@ -64,8 +64,7 @@ struct LanguageEntry {
 	std::string fontname;   // Name of the font with which the language name is displayed.
 };
 
-}
-
+}  // namespace
 
 FullscreenMenuOptions::FullscreenMenuOptions
 		(OptionsCtrl::OptionsStruct opt)
@@ -383,8 +382,9 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 	m_language_list.add(_("Try system language"), "", nullptr, current_locale == "");
 	m_language_list.add(_("English"), "en", nullptr, current_locale == "en");
 
-	Section* s = &g_options.pull_section("global");
-	FilenameSet files = g_fs->list_directory(s->get_string("localedir", INSTALL_LOCALEDIR));
+	// We start with the locale directory so we can pick up locales
+	// that don't have a configuration file yet.
+	FilenameSet files = g_fs->list_directory("locale");
 
 	// Add translation directories to the list
 	std::vector<LanguageEntry> entries;
@@ -454,7 +454,7 @@ bool FullscreenMenuOptions::handle_key(bool down, SDL_Keysym code)
 {
 	if (down) {
 		switch (code.sym) {
-			case SDL_SCANCODE_KP_ENTER:
+			case SDLK_KP_ENTER:
 			case SDLK_RETURN:
 				end_modal(static_cast<int32_t>(om_ok));
 				return true;
@@ -639,7 +639,7 @@ bool FullscreenMenuAdvancedOptions::handle_key(bool down, SDL_Keysym code)
 {
 	if (down) {
 		switch (code.sym) {
-			case SDL_SCANCODE_KP_ENTER:
+			case SDLK_KP_ENTER:
 			case SDLK_RETURN:
 				end_modal(static_cast<int32_t>(om_ok));
 				return true;
