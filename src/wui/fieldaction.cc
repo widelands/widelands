@@ -751,7 +751,6 @@ void FieldActionWindow::act_ripflag()
 		} else {
 			ref_cast<Game, EditorGameBase>(egbase).send_player_bulldoze
 					(*flag, get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL));
-			ibase().need_complete_redraw();
 		}
 	}
 }
@@ -796,7 +795,6 @@ void FieldActionWindow::act_removeroad()
 	if (upcast(Widelands::Road, road, egbase.map().get_immovable(m_node)))
 		ref_cast<Game, EditorGameBase>(egbase).send_player_bulldoze
 			(*road, get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL));
-	ibase().need_complete_redraw();
 	okdialog();
 }
 

@@ -101,7 +101,6 @@ Window::Window
 	set_border
 		(VT_B_PIXMAP_THICKNESS, VT_B_PIXMAP_THICKNESS,
 		 TP_B_PIXMAP_THICKNESS, BT_B_PIXMAP_THICKNESS);
-	set_cache(true);
 	set_top_on_click(true);
 	set_layout_toplevel(true);
 }
@@ -461,17 +460,6 @@ bool Window::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 		grab_mouse(false);
 		_dragging = false;
 	}
-	return true;
-}
-
-bool Window::handle_alt_drag(int32_t mx, int32_t my)
-{
-	_dragging = true;
-	_drag_start_win_x = get_x();
-	_drag_start_win_y = get_y();
-	_drag_start_mouse_x = get_x() + get_lborder() + mx;
-	_drag_start_mouse_y = get_y() + get_tborder() + my;
-	grab_mouse(true);
 	return true;
 }
 

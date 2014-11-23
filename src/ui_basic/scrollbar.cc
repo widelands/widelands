@@ -63,7 +63,7 @@ Scrollbar::Scrollbar
 		(g_gr->images().get("pics/scrollbar_background.png")),
 	m_pic_buttons   (g_gr->images().get("pics/but3.png"))
 {
-	set_think(true);
+	set_thinks(true);
 }
 
 

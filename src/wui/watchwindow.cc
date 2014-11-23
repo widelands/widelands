@@ -147,7 +147,6 @@ WatchWindow::WatchWindow
 
 	add_view(coords);
 	next_view(true);
-	set_cache(false);
 }
 
 /**
@@ -220,15 +219,6 @@ void WatchWindow::show_view(bool) {
 
 WatchWindow::~WatchWindow() {
 	g_watch_window = nullptr;
-
-	//  If we are destructed because our parent is destructed, our parent may
-	//  not be an InteractiveGameBase any more (it may just be an UI::Panel).
-	//  Then calling InteractiveGameBase::need_complete_redraw on our parent
-	//  would be erroneous. Therefore this check is required. (As always, great
-	//  care is required when destructors are misused to do anything else than
-	//  releasing resources.)
-	if (upcast(InteractiveGameBase, igbase, get_parent()))
-		igbase->need_complete_redraw();
 }
 
 
@@ -265,8 +255,6 @@ void WatchWindow::think()
 				(pos - Point(mapview.get_w() / 2, mapview.get_h() / 2), false);
 		}
 	}
-
-	mapview.need_complete_redraw(); //  make sure that the view gets updated
 }
 
 

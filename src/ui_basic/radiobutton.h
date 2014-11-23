@@ -27,7 +27,7 @@
 
 namespace UI {
 
-struct Panel;
+class Panel;
 
 struct Radiogroup;
 

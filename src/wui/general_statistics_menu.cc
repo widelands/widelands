@@ -63,8 +63,6 @@ m_selected_information(0)
 	set_center_panel(&m_box);
 	m_box.set_border(5, 5, 5, 5);
 
-	set_cache(false);
-
 	// Setup plot data
 	m_plot.set_sample_rate(STATISTICS_SAMPLE_TIME);
 	m_plot.set_plotmode(WuiPlotArea::PLOTMODE_ABSOLUTE);
