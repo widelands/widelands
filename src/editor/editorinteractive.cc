@@ -169,8 +169,6 @@ void EditorInteractive::register_overlays() {
 				overlay_manager.register_overlay(fc, g_gr->images().get(immname), 4);
 		}
 	}
-
-	need_complete_redraw();
 }
 
 
@@ -253,13 +251,17 @@ void EditorInteractive::think() {
 
 void EditorInteractive::exit() {
 	if (m_need_save) {
-		UI::WLMessageBox mmb
-		(this,
-		 _("Unsaved Map"),
-		 _("The map has not been saved, do you really want to quit?"),
-		 UI::WLMessageBox::YESNO);
-		if (mmb.run() == 0)
-			return;
+		if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
+			end_modal(0);
+		} else {
+			UI::WLMessageBox mmb
+			(this,
+			 _("Unsaved Map"),
+			 _("The map has not been saved, do you really want to quit?"),
+			 UI::WLMessageBox::YESNO);
+			if (mmb.run() == 0)
+				return;
+		}
 	}
 	end_modal(0);
 }
@@ -276,7 +278,6 @@ void EditorInteractive::map_clicked(bool should_draw) {
 		(tools.current(),
 		 tools.use_tool, egbase().map(), egbase().world(),
 	     get_sel_pos(), *this, should_draw);
-	need_complete_redraw();
 	set_need_save(true);
 }
 
@@ -393,16 +394,16 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			handled = true;
 			break;
 
-		case SDL_SCANCODE_LSHIFT:
-		case SDL_SCANCODE_RSHIFT:
+		case SDLK_LSHIFT:
+		case SDLK_RSHIFT:
 			if (tools.use_tool == EditorTool::First)
 				select_tool(tools.current(), EditorTool::Second);
 			handled = true;
 			break;
 
-		case SDL_SCANCODE_LALT:
-		case SDL_SCANCODE_RALT:
-		case SDL_SCANCODE_MODE:
+		case SDLK_LALT:
+		case SDLK_RALT:
+		case SDLK_MODE:
 			if (tools.use_tool == EditorTool::First)
 				select_tool(tools.current(), EditorTool::Third);
 			handled = true;
@@ -469,6 +470,7 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 				m_history.undo_action(egbase().world());
 			handled = true;
 			break;
+
 		case SDLK_y:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 				m_history.redo_action(egbase().world());
@@ -476,16 +478,15 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			break;
 		default:
 			break;
-
 		}
 	} else {
 		// key up events
 		switch (code.sym) {
-		case SDL_SCANCODE_LSHIFT:
-		case SDL_SCANCODE_RSHIFT:
-		case SDL_SCANCODE_LALT:
-		case SDL_SCANCODE_RALT:
-		case SDL_SCANCODE_MODE:
+		case SDLK_LSHIFT:
+		case SDLK_RSHIFT:
+		case SDLK_LALT:
+		case SDLK_RALT:
+		case SDLK_MODE:
 			if (tools.use_tool != EditorTool::First)
 				select_tool(tools.current(), EditorTool::First);
 			handled = true;

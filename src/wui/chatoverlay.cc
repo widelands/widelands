@@ -77,7 +77,7 @@ ChatOverlay::ChatOverlay
 	Section & s = g_options.pull_section("global");
 	m->transparent_ = s.get_bool("transparent_chat", true);
 
-	set_think(true);
+	set_thinks(true);
 }
 
 ChatOverlay::~ChatOverlay()

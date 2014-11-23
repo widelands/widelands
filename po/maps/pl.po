@@ -6,20 +6,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-10-29 10:08+0000\n"
-"PO-Revision-Date: 2014-08-16 09:04+0000\n"
+"POT-Creation-Date: 2014-11-14 17:33+0000\n"
+"PO-Revision-Date: 2014-11-17 11:58+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-30 05:41+0000\n"
-"X-Generator: Launchpad (build 17203)\n"
+"X-Launchpad-Export-Date: 2014-11-18 05:34+0000\n"
+"X-Generator: Launchpad (build 17241)\n"
 "Language: pl\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
 msgid "From Nemesis to Genesis"
-msgstr ""
+msgstr "Od zagłady do genezy"
 
 #: ../../campaigns/atl01.wmf/elemental:11
 msgid ""
@@ -31,17 +31,19 @@ msgstr ""
 
 #: ../../campaigns/bar01.wmf/elemental:8
 msgid "A Place to Call Home"
-msgstr ""
+msgstr "Miejsce zwane domem"
 
 #: ../../campaigns/bar01.wmf/elemental:10
 msgid ""
 "In this scenario, the higher production buildings including mining will be "
 "introduced."
 msgstr ""
+"W tym scenariuszu wprowadzone zostają zaawansowane budynki produkcyjne, w "
+"tym kopalnie."
 
 #: ../../campaigns/bar02.wmf/elemental:7
 msgid "This Land is Our Land"
-msgstr ""
+msgstr "Ta ziemia jest nasza"
 
 #: ../../campaigns/bar02.wmf/elemental:9
 msgid ""
@@ -57,7 +59,7 @@ msgstr "Jeszcze nie zaimplementowane"
 
 #: ../../campaigns/dummy.wmf/elemental:9
 msgid "Nobody"
-msgstr ""
+msgstr "Nikt"
 
 #: ../../campaigns/dummy.wmf/elemental:10
 msgid "Sorry, this map is not yet implemented."
@@ -65,7 +67,7 @@ msgstr "Przepraszamy, mapa nie jest jeszcze zaimplementowana."
 
 #: ../../campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
-msgstr ""
+msgstr "Brzegi Malac' Mor"
 
 #: ../../campaigns/emp01.wmf/elemental:9
 msgid ""
@@ -83,7 +85,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
-msgstr ""
+msgstr "Strażnica dla wygnańca"
 
 #: ../../campaigns/emp02.wmf/elemental:11
 msgid ""
@@ -99,43 +101,51 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
-msgstr ""
+msgstr "Podstawy sterowania"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/elemental:10
 msgid ""
 "In this tutorial, you will learn how to navigate in Widelands and how to "
 "build buildings and roads."
 msgstr ""
+"W tym samouczku nauczysz się podstaw nawigacji w Widelands oraz budowy "
+"budynków i dróg."
 
 #: ../../campaigns/tutorial02_warfare.wmf/elemental:8
 msgid "Warfare"
-msgstr ""
+msgstr "Wojskowość"
 
 #: ../../campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
 "soldiers, how to train them and how to lead them in battle."
 msgstr ""
+"W tym scenariuszu poznasz sekrety prowadzenia wojny: tworzenia żołnierzy, "
+"trenowania ich i prowadzenia ich do boju."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/elemental:8
 msgid "Seafaring"
-msgstr ""
+msgstr "Żeglarstwo"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports."
 msgstr ""
+"W tym samouczku poznasz żeglarstwo, to jest tworzenie i wykorzystanie "
+"statków i portów."
 
 #: ../../campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy"
-msgstr ""
+msgstr "Ekonomia"
 
 #: ../../campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
 "In this tutorial, you will learn what option Widelands offers to adjust your "
 "economy. Recommended for players with some experience."
 msgstr ""
+"W tym samouczku poznasz możliwości regulowania ekonomii oferowane przez "
+"Widelands. Zalecany graczom o pewnym doświadczeniu."
 
 #: ../../maps/Atoll.wmf/elemental:9
 msgid "Atoll"
@@ -477,7 +487,7 @@ msgstr ""
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
 msgid "Smugglers"
-msgstr ""
+msgstr "Przemytnicy"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
 msgid ""
@@ -485,6 +495,9 @@ msgid ""
 "have appeared and now a rivalry among smugglers has started: Which team will "
 "be the first to smuggle a certain number of wares?"
 msgstr ""
+"Twoje zaufane szlaki przemytnicze nagle stały się tłoczne - pojawiły się dwa "
+"nowe plemiona rozpoczynając rywalizację pomiędzy szmuglerami. Który zespół "
+"jako pierwszy zdoła przemycić dość towarów?"
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"

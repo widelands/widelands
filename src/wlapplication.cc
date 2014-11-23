@@ -141,6 +141,9 @@ std::string get_executable_directory()
 	return executabledir;
 }
 
+bool is_absolute_path(const std::string& path) {
+	return path.size() >= 1 && path[0] == '/';
+}
 
 /**
  * In case that the path is defined in a relative manner to the
@@ -225,7 +228,6 @@ m_mouse_position       (0, 0),
 m_mouse_locked         (0),
 m_mouse_compensate_warp(0, 0),
 m_should_die           (false),
-m_use_default_datadir     (true),
 #ifdef _WIN32
 m_homedir(FileSystem::get_homedir() + "\\.widelands"),
 #else
@@ -251,16 +253,9 @@ m_redirected_stdio(false)
 	setup_homedir();
 	init_settings();
 
-	if (m_use_default_datadir) {
-		std::string install_prefix = INSTALL_PREFIX;
-		if (!PATHS_ARE_ABSOLUTE) {
-			install_prefix = relative_to_executable_to_absolute(install_prefix);
-		}
-		const std::string default_datadir =
-		   install_prefix + "/" + std::string(INSTALL_DATADIR);
-		log("Adding directory: %s\n", default_datadir.c_str());
-		g_fs->add_file_system(&FileSystem::create(default_datadir));
-	}
+	log("Adding directory: %s\n", m_datadir.c_str());
+	g_fs->add_file_system(&FileSystem::create(m_datadir));
+
 	init_language(); // search paths must already be set up
 	cleanup_replays();
 
@@ -505,14 +500,14 @@ void WLApplication::handle_input(InputCallback const * cb)
 		switch (ev.type) {
 		case SDL_KEYDOWN:
 		case SDL_KEYUP:
-			if (ev.key.keysym.scancode == SDL_SCANCODE_F10 &&
+			if (ev.key.keysym.sym == SDLK_F10 &&
 			    (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL))) {
 				//  get out of here quick
 				if (ev.type == SDL_KEYDOWN)
 					m_should_die = true;
 				break;
 			}
-			if (ev.key.keysym.scancode == SDL_SCANCODE_F11) { //  take screenshot
+			if (ev.key.keysym.sym == SDLK_F11) { //  take screenshot
 				if (ev.type == SDL_KEYDOWN)
 				{
 					if (g_fs->disk_space() < MINIMUM_DISK_SPACE) {
@@ -781,17 +776,7 @@ void WLApplication::init_language() {
 	// Initialize locale and grab "widelands" textdomain
 	i18n::init_locale();
 
-	if (s.has_val("localedir")) {
-		// Localedir has been specified on the command line or in the config file.
-		i18n::set_localedir(s.get_safe_string("localedir"));
-	} else {
-		// Use default localedir, as configured at compile time.
-		std::string localedir = INSTALL_LOCALEDIR;
-		if (!PATHS_ARE_ABSOLUTE) {
-			localedir = relative_to_executable_to_absolute(localedir);
-		}
-		i18n::set_localedir(localedir);
-	}
+	i18n::set_localedir(m_datadir + "/locale");
 	i18n::grab_textdomain("widelands");
 
 	// Set locale corresponding to selected language
@@ -965,10 +950,12 @@ void WLApplication::handle_commandline_parameters()
 	}
 
 	if (m_commandline.count("datadir")) {
-		log ("Adding directory: %s\n", m_commandline["datadir"].c_str());
-		m_use_default_datadir = false;
-		g_fs->add_file_system(&FileSystem::create(m_commandline["datadir"]));
+		m_datadir = m_commandline["datadir"];
 		m_commandline.erase("datadir");
+	} else {
+		m_datadir = is_absolute_path(INSTALL_DATADIR) ?
+		               INSTALL_DATADIR :
+		               relative_to_executable_to_absolute(INSTALL_DATADIR);
 	}
 
 	if (m_commandline.count("verbose")) {

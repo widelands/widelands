@@ -26,6 +26,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "graphic/default_resolution.h"
 #include "graphic/graphic.h"
 #include "helper.h"
@@ -52,26 +53,24 @@ struct LanguageEntry {
 };
 
 void add_languages_to_list(UI::Listselect<std::string>* list, const std::string& language) {
-
 	Section* s = &g_options.pull_section("global");
-	FilenameSet files = g_fs->list_directory(s->get_string("localedir", INSTALL_LOCALEDIR));
+
 	Profile ln("txts/languages");
 	s = &ln.pull_section("languages");
 	bool own_selected = "" == language || "en" == language;
 
-	// Add translation directories to the list
+	// Add translation directories to the list.
 	std::vector<LanguageEntry> entries;
-	for (const std::string& filename : files) {
-		char const* const path = filename.c_str();
-		if (!strcmp(FileSystem::fs_filename(path), ".") ||
-		    !strcmp(FileSystem::fs_filename(path), "..") || !g_fs->is_directory(path)) {
+	while (Section::Value* value = s->get_next_val()) {
+		const std::string abbreviation = value->get_name();
+		// Only lists languages that are actually found.
+		if (!g_fs->is_directory("locale/" + abbreviation)) {
 			continue;
 		}
-
-		char const* const abbreviation = FileSystem::fs_filename(path);
-		entries.emplace_back(abbreviation, s->get_string(abbreviation, abbreviation));
+		entries.emplace_back(abbreviation, value->get_string());
 		own_selected |= abbreviation == language;
 	}
+
 	// Add currently used language manually
 	if (!own_selected) {
 		entries.emplace_back(language, s->get_string(language.c_str(), language.c_str()));
@@ -409,7 +408,7 @@ bool FullscreenMenuOptions::handle_key(bool down, SDL_Keysym code)
 {
 	if (down) {
 		switch (code.sym) {
-			case SDL_SCANCODE_KP_ENTER:
+			case SDLK_KP_ENTER:
 			case SDLK_RETURN:
 				end_modal(static_cast<int32_t>(om_ok));
 				return true;
@@ -649,7 +648,7 @@ bool FullscreenMenuAdvancedOptions::handle_key(bool down, SDL_Keysym code)
 {
 	if (down) {
 		switch (code.sym) {
-			case SDL_SCANCODE_KP_ENTER:
+			case SDLK_KP_ENTER:
 			case SDLK_RETURN:
 				end_modal(static_cast<int32_t>(om_ok));
 				return true;

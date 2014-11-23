@@ -33,7 +33,7 @@ Icon::Icon
 	m_pic(picture_id)
 {
 	set_handle_mouse(false);
-	set_think(false);
+	set_thinks(false);
 }
 
 void Icon::set_icon(const Image* picture_id) {

@@ -70,7 +70,7 @@ Slider::Slider
 	m_bar_size       (bar_size),
 	m_cursor_size (cursor_size)
 {
-	set_think(false);
+	set_thinks(false);
 	calc_cursor_pos();
 }
 

@@ -94,6 +94,7 @@ wl_library(map_io
     build_info
     economy
     graphic
+    graphic_image_io
     graphic_surface
     helper
     io_fileread
