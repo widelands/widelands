@@ -365,14 +365,14 @@ bool GameMessageMenu::handle_key(bool down, SDL_Keysym code)
 		case SDLK_5:
 			filter_messages(Widelands::Message::Type::kScenario);
 			return true;
-		case SDL_SCANCODE_KP_PERIOD:
-			if (code.mod & KMOD_NUM)
-				break;
-			/* no break */
 		case SDLK_DELETE:
 			archive_or_restore();
 			return true;
-
+		case SDL_SCANCODE_KP_PERIOD:
+		case SDLK_KP_PERIOD:
+			if (code.mod & KMOD_NUM)
+				break;
+			/* no break */
 		default:
 			break; // not handled
 		}

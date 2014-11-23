@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2014-10-29 10:08+0000\n"
+"POT-Creation-Date: 2014-11-14 17:33+0000\n"
 "PO-Revision-Date: 2014-10-30 04:48+0000\n"
 "Last-Translator: wl-zocker <Unknown>\n"
 "Language-Team: widelands-dev\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-10-31 05:38+0000\n"
-"X-Generator: Launchpad (build 17211)\n"
+"X-Launchpad-Export-Date: 2014-11-15 05:46+0000\n"
+"X-Generator: Launchpad (build 17241)\n"
 "Language: de\n"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:16
@@ -1081,24 +1081,17 @@ msgstr ""
 "Um das zu tun, gibt es zwei Möglichkeiten:"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:440
-#: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:450
 msgid ""
-"Burning down the quarry: This is the fastest way of clearing the space. "
+"Burning down the quarry: this is the fastest way of clearing the space. "
 "While the worker abandons the building, the wares are lost."
 msgstr ""
-"Den Steinbruch abbrennen: Das ist der schnellste Weg, um den Platz nutzen zu "
-"können. Der Arbeiter verlässt das Gebäude, aber die Waren sind verloren."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:441
-#: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:451
 msgid ""
-"Dismantling the quarry: A builder will walk from the headquarters to "
+"Dismantling the quarry: a builder will walk from the headquarters to "
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
 msgstr ""
-"Den Steinbruch abreißen: Ein Bauarbeiter kommt von deinem Hauptquartier, um "
-"den Steinbruch Stück für Stück abzureißen. Dabei erhältst du einige "
-"Rohstoffe, die du für den Bau verwendet hast, zurück."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:447
 msgid ""
@@ -1115,6 +1108,24 @@ msgid ""
 msgstr ""
 "Es gibt zwei Möglichkeiten, ein Gebäude zu zerstören: es niederzubrennen und "
 "es abzureißen. Probiere beides an deinen Steinbrüchen aus."
+
+#: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:450
+msgid ""
+"Burning down the quarry: This is the fastest way of clearing the space. "
+"While the worker abandons the building, the wares are lost."
+msgstr ""
+"Den Steinbruch abbrennen: Das ist der schnellste Weg, um den Platz nutzen zu "
+"können. Der Arbeiter verlässt das Gebäude, aber die Waren sind verloren."
+
+#: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:451
+msgid ""
+"Dismantling the quarry: A builder will walk from the headquarters to "
+"dismantle the quarry piece by piece. Thereby, you regain some of the "
+"resources you used for the construction."
+msgstr ""
+"Den Steinbruch abreißen: Ein Bauarbeiter kommt von deinem Hauptquartier, um "
+"den Steinbruch Stück für Stück abzureißen. Dabei erhältst du einige "
+"Rohstoffe, die du für den Bau verwendet hast, zurück."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:456
 msgid "Expanding Your Territory!"
@@ -1224,10 +1235,8 @@ msgstr "Dein Territorium ist soeben größer geworden!"
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:481
 msgid ""
 "Great. Do you see how your territory has grown since your soldiers entered "
-"the sentry?"
+"your new military building?"
 msgstr ""
-"Großartig. Siehst du, wie dein Gebiet größer geworden ist, als die Soldaten "
-"das Militärgebäude betreten haben?"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:482
 msgid ""
@@ -1289,7 +1298,7 @@ msgstr ""
 msgid "“%s”"
 msgstr "„%s“"
 
-#: ../../scripting/format_scenario.lua:133
+#: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Neues Ziel"

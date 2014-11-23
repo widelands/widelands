@@ -78,7 +78,6 @@ struct MapView : public UI::Panel {
 		(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
 
 	void track_sel(Point m);
-	void need_complete_redraw() {m_complete_redraw_needed = true;}
 
 protected:
 	InteractiveBase & intbase() const {return m_intbase;}
@@ -91,7 +90,6 @@ private:
 	ChangeViewFn m_changeview;
 	Point              m_viewpoint;
 	bool               m_dragging;
-	bool               m_complete_redraw_needed;
 };
 
 

@@ -90,8 +90,7 @@ EditorPlayerMenu::EditorPlayerMenu
 	}
 	update();
 
-	set_think(true);
-
+	set_thinks(true);
 }
 
 /**
