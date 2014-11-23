@@ -36,6 +36,13 @@ wl_library(graphic_image
     graphic_surface
 )
 
+wl_library(graphic_sdl_utils
+  SRCS
+    sdl_utils.h
+    sdl_utils.cc
+  USES_SDL2
+)
+
 wl_library(graphic_surface
   SRCS
     compositemode.h
@@ -52,12 +59,13 @@ wl_library(graphic_surface
   USES_OPENGL
   USES_SDL2
   DEPENDS
-    base_macros
     base_exceptions
     base_geometry
     base_log
+    base_macros
     graphic
     graphic_color
+    graphic_sdl_utils
 )
 
 wl_library(graphic
@@ -139,7 +147,6 @@ wl_library(graphic
     io_stream
     logic
     profile
-    random
     scripting
     sound
     ui_basic
