@@ -36,6 +36,8 @@
 #include "graphic/diranimations.h"
 #include "graphic/font_handler.h"
 #include "graphic/gl/surface_screen.h"
+#include "graphic/gl/surface_texture.h"
+#include "graphic/gl/system_headers.h"
 #include "graphic/image.h"
 #include "graphic/image_io.h"
 #include "graphic/image_transformations.h"
@@ -181,9 +183,6 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen) {
 	}
 
 	m_rendertarget.reset(new RenderTarget(screen_.get()));
-
-	pic_road_normal_.reset(load_image("world/pics/roadt_normal.png"));
-	pic_road_busy_.reset(load_image("world/pics/roadt_busy.png"));
 }
 
 bool Graphic::check_fallback_settings_in_effect()
@@ -335,14 +334,4 @@ Texture * Graphic::get_maptexture_data(uint32_t id)
 
 	assert(id < m_maptextures.size());
 	return m_maptextures[id].get();
-}
-
-/**
- * Retrives the texture of the road type.
- * \return The road texture
- */
-Surface& Graphic::get_road_texture(int32_t roadtex)
-{
-	return
-		roadtex == Widelands::Road_Normal ? *pic_road_normal_.get() : *pic_road_busy_.get();
 }

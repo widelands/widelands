@@ -21,8 +21,8 @@
 
 #include <memory>
 
+#include "graphic/gl/surface_texture.h"
 #include "graphic/image.h"
-#include "graphic/surface.h"
 
 using namespace std;
 
@@ -38,7 +38,7 @@ using namespace std;
 // or prepare for core dumps.
 class InMemoryImage : public Image {
 public:
-	InMemoryImage(const string& ghash, Surface* surf) :
+	InMemoryImage(const string& ghash, GLSurfaceTexture* surf) :
 		hash_(ghash), surf_(surf) {}
 	virtual ~InMemoryImage() {
 	}
@@ -49,13 +49,13 @@ public:
 	// Note: hash will mostly be dummy values for this implementation. It should
 	// not wind up in ImageCache, otherwise the ownership question is not clear.
 	const string& hash() const override {return hash_;}
-	Surface* surface() const override {return surf_.get();}
+	GLSurfaceTexture* surface() const override {return surf_.get();}
 
 private:
 	const string hash_;
-	std::unique_ptr<Surface> surf_;
+	std::unique_ptr<GLSurfaceTexture> surf_;
 };
 
-const Image* new_in_memory_image(const string& hash, Surface* surf) {
+const Image* new_in_memory_image(const string& hash, GLSurfaceTexture* surf) {
 	return new InMemoryImage(hash, surf);
 }

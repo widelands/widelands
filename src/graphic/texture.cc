@@ -24,6 +24,7 @@
 #include "base/deprecated.h"
 #include "base/log.h"
 #include "base/wexception.h"
+#include "graphic/gl/surface_texture.h"
 #include "graphic/image_io.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -82,17 +83,19 @@ Texture::Texture(const std::vector<std::string>& texture_files, const uint32_t f
 		throw wexception("Texture has no frames");
 }
 
-/**
- * Return the basic terrain colour to be used in the minimap.
-*/
 RGBColor Texture::get_minimap_color(int8_t shade) {
 	return m_minimap_colors[128 + shade];
 }
 
-/**
- * Set the current frame according to the game time.
- */
 void Texture::animate(uint32_t time)
 {
 	m_frame_num = (time / m_frametime) % m_gl_textures.size();
+}
+
+const std::string& Texture::get_texture_image() const {
+	return m_texture_image;
+}
+
+const GLSurfaceTexture& Texture::surface() const {
+	return *m_gl_textures.at(m_frame_num);
 }

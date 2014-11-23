@@ -22,8 +22,9 @@
 
 #include "base/rect.h"
 #include "graphic/color.h"
-#include "graphic/gl/surface_texture.h"
 #include "graphic/gl/utils.h"
+// NOCOM(#sirver): rename to composite
+#include "graphic/compositemode.h"
 
 class BlitProgram {
 public:

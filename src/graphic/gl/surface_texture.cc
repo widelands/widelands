@@ -242,7 +242,7 @@ void GLSurfaceTexture::draw_line
 }
 
 void GLSurfaceTexture::blit
-	(const Point& dst, const Surface* src, const Rect& srcrc, Composite cm)
+	(const Point& dst, const GLSurfaceTexture* src, const Rect& srcrc, Composite cm)
 {
 	if (m_w <= 0 || m_h <= 0) {
 		return;

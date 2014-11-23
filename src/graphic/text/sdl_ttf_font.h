@@ -37,7 +37,7 @@ public:
 	virtual ~SdlTtfFont();
 
 	void dimensions(const std::string&, int, uint16_t * w, uint16_t * h) override;
-	const Surface& render(const std::string&, const RGBColor& clr, int, SurfaceCache*) override;
+	const GLSurfaceTexture& render(const std::string&, const RGBColor& clr, int, SurfaceCache*) override;
 	uint16_t ascent(int) const override;
 
 private:

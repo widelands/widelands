@@ -74,12 +74,14 @@ void main() {
 )";
 
 // Returns the texture mask for the dithering step.
+// NOCOM(#sirver): only load once.
+// NOCOM(#sirver): rename GLSurfaceTexture and ~GLSurfaceScreen
 const GLSurfaceTexture* get_dither_edge_texture() {
 	constexpr char kFilename[] = "world/pics/edge.png";
-	constexpr char kCacheName[] =  "gltex#world/pics/edge.png";
+	constexpr char kCacheName[] = "gltex#world/pics/edge.png";
 
-	if (Surface* surface = g_gr->surfaces().get(kCacheName))
-		return dynamic_cast<GLSurfaceTexture*>(surface);
+	if (GLSurfaceTexture* surface = g_gr->surfaces().get(kCacheName))
+		return surface;
 
 	SDL_Surface* sdlsurf = load_image_as_sdl_surface(kFilename, g_fs);
 	GLSurfaceTexture* edgetexture = new GLSurfaceTexture(sdlsurf, true);
@@ -234,9 +236,10 @@ void DitherProgram::draw(const DescriptionMaintainer<TerrainDescription>& terrai
 		if (current_data.empty()) {
 			continue;
 		}
-		glBindTexture(
-		   GL_TEXTURE_2D,
-		   g_gr->get_maptexture_data(terrains.get_unmutable(i).get_texture())->get_texture());
+		glBindTexture(GL_TEXTURE_2D,
+		              g_gr->get_maptexture_data(terrains.get_unmutable(i).get_texture())
+		                 ->surface()
+		                 .get_gl_texture());
 
 		glBufferData(GL_ARRAY_BUFFER,
 		             sizeof(PerVertexData) * current_data.size(),

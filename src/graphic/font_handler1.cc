@@ -25,11 +25,11 @@
 #include <boost/utility.hpp>
 
 #include "base/wexception.h"
+#include "graphic/gl/surface_texture.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/image_cache.h"
 #include "graphic/rendertarget.h"
-#include "graphic/surface.h"
 #include "graphic/surface_cache.h"
 #include "graphic/text/rt_errors.h"
 #include "graphic/text/rt_render.h"
@@ -58,8 +58,8 @@ public:
 	uint16_t width() const override {return surface()->width();}
 	uint16_t height() const override {return surface()->height();}
 	const string& hash() const override {return hash_;}
-	Surface* surface() const override {
-		Surface* surf = surface_cache_->get(hash_);
+	GLSurfaceTexture* surface() const override {
+		GLSurfaceTexture* surf = surface_cache_->get(hash_);
 		if (surf)
 			return surf;
 

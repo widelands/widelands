@@ -26,10 +26,10 @@
 
 #include "base/log.h"
 #include "config.h"
+#include "graphic/gl/surface_texture.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
 #include "graphic/minimap_renderer.h"
-#include "graphic/surface.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
@@ -88,7 +88,8 @@ int main(int argc, char ** argv)
 		ml->preload_map(true);
 		ml->load_map_complete(egbase, true);
 
-		std::unique_ptr<Surface> minimap(draw_minimap(egbase, nullptr, Point(0, 0), MiniMapLayer::Terrain));
+		std::unique_ptr<GLSurfaceTexture> minimap(
+		   draw_minimap(egbase, nullptr, Point(0, 0), MiniMapLayer::Terrain));
 
 		// Write minimap
 		{

@@ -29,8 +29,9 @@
 #include "graphic/color.h"
 #include "graphic/image.h"
 
-class SurfaceCache;
+class GLSurfaceTexture;
 class ImageCache;
+class SurfaceCache;
 
 namespace RT {
 
@@ -58,7 +59,7 @@ public:
 	virtual ~IFont() {}
 
 	virtual void dimensions(const std::string&, int, uint16_t *, uint16_t *) = 0;
-	virtual const Surface& render(const std::string&, const RGBColor& clr, int, SurfaceCache*) = 0;
+	virtual const GLSurfaceTexture& render(const std::string&, const RGBColor& clr, int, SurfaceCache*) = 0;
 
 	virtual uint16_t ascent(int) const = 0;
 };
@@ -87,7 +88,7 @@ public:
 	// Render the given string in the given width. Restricts the allowed tags to
 	// the ones in TagSet. The renderer does not do caching in the SurfaceCache
 	// for its individual nodes, but the font render does.
-	Surface* render(const std::string&, uint16_t width, const TagSet& tagset = TagSet());
+	GLSurfaceTexture* render(const std::string&, uint16_t width, const TagSet& tagset = TagSet());
 
 	// Returns a reference map of the clickable hyperlinks in the image. This
 	// will do no caching and needs to do all layouting, so do not call this too

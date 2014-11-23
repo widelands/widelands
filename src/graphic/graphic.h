@@ -39,10 +39,10 @@ class StreamWrite;
 struct Texture;
 
 /**
- * This class is a kind of Swiss Army knife for your graphics need. It
- * initializes the graphic system and provides access to resolutions. It has an
- * Animation, Image and Surface cache and owns the road textures. It also
- * offers functionality to save a screenshot.
+ * This class is a kind of Swiss Army knife for your graphics need.
+ * It initializes the graphic system and provides access to
+ * resolutions. It owns an Animation, Image and Surface cache. It
+ * also offers functionality to save a screenshot.
  */
 class Graphic {
 public:
@@ -77,8 +77,6 @@ public:
 	void screenshot(const std::string& fname) const;
 	Texture * get_maptexture_data(uint32_t id);
 
-	Surface& get_road_texture(int32_t roadtex);
-
 	bool check_fallback_settings_in_effect();
 
 private:
@@ -106,10 +104,6 @@ private:
 	std::unique_ptr<ImageCache> image_cache_;
 	/// This holds all animations.
 	std::unique_ptr<AnimationManager> animation_manager_;
-
-	// The texture needed to draw roads.
-	std::unique_ptr<Surface> pic_road_normal_;
-	std::unique_ptr<Surface> pic_road_busy_;
 
 	std::vector<std::unique_ptr<Texture>> m_maptextures;
 };

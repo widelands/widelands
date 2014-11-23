@@ -23,9 +23,9 @@
 #include <string>
 
 #include "base/log.h"
+#include "graphic/gl/surface_texture.h"
 #include "graphic/image.h"
 #include "graphic/image_io.h"
-#include "graphic/surface.h"
 #include "graphic/surface_cache.h"
 
 namespace  {
@@ -37,7 +37,7 @@ public:
 	FromDiskImage(const std::string& filename, SurfaceCache* surface_cache) :
 		filename_(filename),
 		surface_cache_(surface_cache) {
-			Surface* surf = reload_image_();
+			GLSurfaceTexture* surf = reload_image_();
 			w_ = surf->width();
 			h_ = surf->height();
 		}
@@ -47,16 +47,16 @@ public:
 	uint16_t width() const override {return w_; }
 	uint16_t height() const override {return h_;}
 	const std::string& hash() const override {return filename_;}
-	Surface* surface() const override {
-		Surface* surf = surface_cache_->get(filename_);
+	GLSurfaceTexture* surface() const override {
+		GLSurfaceTexture* surf = surface_cache_->get(filename_);
 		if (surf)
 			return surf;
 		return reload_image_();
 	}
 
 private:
-	Surface* reload_image_() const {
-		Surface* surf = surface_cache_->insert(filename_, load_image(filename_), false);
+	GLSurfaceTexture* reload_image_() const {
+		GLSurfaceTexture* surf = surface_cache_->insert(filename_, load_image(filename_), false);
 		return surf;
 	}
 	uint16_t w_, h_;

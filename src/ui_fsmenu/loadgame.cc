@@ -32,11 +32,11 @@
 #include "base/time_string.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
+#include "graphic/gl/surface_texture.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
 #include "graphic/image_transformations.h"
 #include "graphic/in_memory_image.h"
-#include "graphic/surface.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
@@ -317,7 +317,7 @@ void FullscreenMenuLoadGame::entry_selected()
 			if (!minimap_path.empty()) {
 				try {
 					// Load the image
-					std::unique_ptr<Surface> surface(
+					std::unique_ptr<GLSurfaceTexture> surface(
 								load_image(
 									minimap_path,
 									std::unique_ptr<FileSystem>(g_fs->make_sub_file_system(gamedata.filename)).get()));

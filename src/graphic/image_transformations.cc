@@ -27,8 +27,8 @@
 
 #include "base/macros.h"
 #include "graphic/color.h"
+#include "graphic/gl/surface_texture.h"
 #include "graphic/graphic.h"
-#include "graphic/surface.h"
 #include "graphic/surface_cache.h"
 
 using namespace std;
@@ -44,7 +44,7 @@ uint32_t luminance_table_b[0x100];
  * Create and return an \ref SDL_Surface that contains the given sub-rectangle
  * of the given pixel region.
  */
-SDL_Surface* extract_sdl_surface(Surface & surf, Rect srcrect)
+SDL_Surface* extract_sdl_surface(GLSurfaceTexture & surf, Rect srcrect)
 {
 	assert(srcrect.x >= 0);
 	assert(srcrect.y >= 0);
@@ -79,7 +79,7 @@ SDL_Surface* extract_sdl_surface(Surface & surf, Rect srcrect)
 /**
  * Produces a resized version of the specified image
  */
-Surface* resize_surface(Surface* src, uint32_t w, uint32_t h) {
+GLSurfaceTexture* resize_surface(GLSurfaceTexture* src, uint32_t w, uint32_t h) {
 	assert(w != src->width() || h != src->height());
 
 	// First step: compute scaling factors
@@ -146,20 +146,20 @@ Surface* resize_surface(Surface* src, uint32_t w, uint32_t h) {
 		zoomed = placed;
 	}
 
-	return Surface::create(zoomed);
+	return new GLSurfaceTexture(zoomed);
 }
 
 /**
  * Create a grayed version of the given surface.
  */
-Surface* gray_out_surface(Surface* surf) {
+GLSurfaceTexture* gray_out_surface(GLSurfaceTexture* surf) {
 	assert(surf);
 
 	uint16_t w = surf->width();
 	uint16_t h = surf->height();
 	const SDL_PixelFormat & origfmt = surf->format();
 
-	Surface* dest = Surface::create(w, h);
+	GLSurfaceTexture* dest = new GLSurfaceTexture(w, h);
 	const SDL_PixelFormat & destfmt = dest->format();
 
 	surf->lock(Surface::Lock_Normal);
@@ -193,14 +193,14 @@ Surface* gray_out_surface(Surface* surf) {
 /**
  * Creates an image with changed luminosity from the given surface.
  */
-Surface* change_luminosity_of_surface(Surface* surf, float factor, bool halve_alpha) {
+GLSurfaceTexture* change_luminosity_of_surface(GLSurfaceTexture* surf, float factor, bool halve_alpha) {
 	assert(surf);
 
 	uint16_t w = surf->width();
 	uint16_t h = surf->height();
 	const SDL_PixelFormat & origfmt = surf->format();
 
-	Surface* dest = Surface::create(w, h);
+	GLSurfaceTexture* dest = new GLSurfaceTexture(w, h);
 	const SDL_PixelFormat & destfmt = dest->format();
 
 	surf->lock(Surface::Lock_Normal);
@@ -229,8 +229,10 @@ Surface* change_luminosity_of_surface(Surface* surf, float factor, bool halve_al
 
 // Encodes the given Image into the corresponding image for player color.
 // Takes the neutral set of images and the player color mask.
-Surface* make_playerclr_surface(Surface& orig_surface, Surface& pcmask_surface, const RGBColor& color) {
-	Surface* new_surface = Surface::create(orig_surface.width(), orig_surface.height());
+GLSurfaceTexture* make_playerclr_surface(GLSurfaceTexture& orig_surface,
+                                         GLSurfaceTexture& pcmask_surface,
+                                         const RGBColor& color) {
+	GLSurfaceTexture* new_surface = new GLSurfaceTexture(orig_surface.width(), orig_surface.height());
 
 	const SDL_PixelFormat & fmt = orig_surface.format();
 	const SDL_PixelFormat & fmt_pc = pcmask_surface.format();
@@ -300,8 +302,8 @@ public:
 	uint16_t width() const override {return original_.width();}
 	uint16_t height() const override {return original_.height();}
 	const string& hash() const override {return hash_;}
-	Surface* surface() const override {
-		Surface* surf = surface_cache_->get(hash_);
+	GLSurfaceTexture* surface() const override {
+		GLSurfaceTexture* surf = surface_cache_->get(hash_);
 		if (surf)
 			return surf;
 
@@ -310,7 +312,7 @@ public:
 		return surf;
 	}
 
-	virtual Surface* recalculate_surface() const = 0;
+	virtual GLSurfaceTexture* recalculate_surface() const = 0;
 
 protected:
 	const string hash_;
@@ -334,8 +336,8 @@ public:
 	uint16_t height() const override {return h_;}
 
 	// Implements TransformedImage.
-	Surface* recalculate_surface() const override {
-		Surface* rv = resize_surface(original_.surface(), w_, h_);
+	GLSurfaceTexture* recalculate_surface() const override {
+		GLSurfaceTexture* rv = resize_surface(original_.surface(), w_, h_);
 		return rv;
 	}
 
@@ -352,7 +354,7 @@ public:
 	virtual ~GrayedOutImage() {}
 
 	// Implements TransformedImage.
-	Surface* recalculate_surface() const override {
+	GLSurfaceTexture* recalculate_surface() const override {
 		return gray_out_surface(original_.surface());
 	}
 };
@@ -370,7 +372,7 @@ public:
 	virtual ~ChangeLuminosityImage() {}
 
 	// Implements TransformedImage.
-	Surface* recalculate_surface() const override {
+	GLSurfaceTexture* recalculate_surface() const override {
 		return change_luminosity_of_surface(original_.surface(), factor_, halve_alpha_);
 	}
 
@@ -391,7 +393,7 @@ public:
 	virtual ~PlayerColoredImage() {}
 
 	// Implements TransformedImage.
-	Surface* recalculate_surface() const override {
+	GLSurfaceTexture* recalculate_surface() const override {
 		return make_playerclr_surface(*original_.surface(), *mask_.surface(), color_);
 	}
 

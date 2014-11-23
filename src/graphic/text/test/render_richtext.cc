@@ -31,9 +31,9 @@
 
 #include "base/log.h"
 #include "config.h"
+#include "graphic/gl/surface_texture.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
-#include "graphic/surface.h"
 #include "graphic/text/rt_errors.h"
 #include "graphic/text/test/render.h"
 #include "io/filesystem/filesystem.h"
@@ -136,7 +136,8 @@ int main(int argc, char** argv) {
 	StandaloneRenderer standalone_renderer;
 
 	try {
-		std::unique_ptr<Surface> surf(standalone_renderer.renderer()->render(txt, w, allowed_tags));
+		std::unique_ptr<GLSurfaceTexture> surf(
+		   standalone_renderer.renderer()->render(txt, w, allowed_tags));
 
 		std::unique_ptr<FileSystem> fs(&FileSystem::create("."));
 		std::unique_ptr<StreamWrite> sw(fs->open_stream_write(outname));

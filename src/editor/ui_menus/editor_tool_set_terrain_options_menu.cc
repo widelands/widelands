@@ -27,10 +27,10 @@
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_set_terrain_tool.h"
+#include "graphic/gl/surface_texture.h"
 #include "graphic/graphic.h"
 #include "graphic/in_memory_image.h"
 #include "graphic/rendertarget.h"
-#include "graphic/surface.h"
 #include "graphic/texture.h"
 #include "logic/map.h"
 #include "logic/world/editor_category.h"
@@ -77,7 +77,7 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 
 		const Image* tex = g_gr->images().get(
 		   g_gr->get_maptexture_data(terrain_descr.get_texture())->get_texture_image());
-		Surface* surf = Surface::create(tex->width(), tex->height());
+		GLSurfaceTexture* surf = new GLSurfaceTexture(tex->width(), tex->height());
 		surf->blit(Point(0, 0), tex->surface(), Rect(0, 0, tex->width(), tex->height()), CM_Copy);
 		Point pt(1, tex->height() - kSmallPicHeight - 1);
 

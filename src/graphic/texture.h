@@ -27,35 +27,29 @@
 #include <stdint.h>
 
 #include "graphic/colormap.h"
-#include "graphic/gl/surface_texture.h"
+
+class GLSurfaceTexture;
 
 /// Textures have a fixed size and are squares.
 /// TEXTURE_HEIGHT is just defined for easier understanding of the code.
 #define TEXTURE_WIDTH 64
 #define TEXTURE_HEIGHT TEXTURE_WIDTH
 
-/** struct Texture
-*
-* Texture represents are terrain texture, which is strictly
-* TEXTURE_WIDTH by TEXTURE_HEIGHT pixels in size. It uses 8 bit color, and
-* a pointer to the corresponding palette and color lookup table is
-* provided.
-*
-* Currently, this is initialized from a 16 bit bitmap. This should be
-* changed to load 8 bit bitmaps directly.
-*/
+// Texture represents are terrain texture, which is strictly TEXTURE_WIDTH by
+// TEXTURE_HEIGHT pixels in size.
 struct Texture {
 	Texture(const std::vector<std::string>& texture_files, uint32_t frametime);
 
-	const std::string& get_texture_image() const {
-		return m_texture_image;
-	}
-	uint32_t get_texture() const {
-		return m_gl_textures.at(m_frame_num)->get_gl_texture();
-	}
+	// Returns the path to a representative image for this texture.
+	const std::string& get_texture_image() const;
 
+	// Returns the surface for the current animation phase.
+	const GLSurfaceTexture& surface() const;
+
+	// Return the basic terrain colour to be used in the minimap.
 	RGBColor get_minimap_color(int8_t shade);
 
+	// Set the current frame according to the game time.
 	void animate(uint32_t time);
 
 private:

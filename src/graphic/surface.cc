@@ -35,15 +35,6 @@
 #include "graphic/graphic.h"
 
 
-Surface* Surface::create(SDL_Surface* surf) {
-	return new GLSurfaceTexture(surf);
-}
-
-Surface* Surface::create(uint16_t w, uint16_t h) {
-	return new GLSurfaceTexture(w, h);
-}
-
-
 uint16_t Surface::width() const {
 	return m_w;
 }
@@ -167,7 +158,7 @@ inline void pixel_to_gl_texture(const int width, const int height, float* x, flo
 }
 
 void Surface::blit
-	(const Point& dst, const Surface* image, const Rect& srcrc, Composite cm)
+	(const Point& dst, const GLSurfaceTexture* image, const Rect& srcrc, Composite cm)
 {
 	glViewport(0, 0, width(), height());
 

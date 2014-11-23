@@ -26,7 +26,7 @@
 
 #include "base/macros.h"
 
-class Surface;
+class GLSurfaceTexture;
 
 // Caches Surfaces. It contains surfaces which must not be deleted and
 // transient surfaces that are always free to be deleted - somebody else must
@@ -44,14 +44,14 @@ public:
 	virtual void flush() = 0;
 
 	/// Returns an entry if it is cached, nullptr otherwise.
-	virtual Surface* get(const std::string& hash) = 0;
+	virtual GLSurfaceTexture* get(const std::string& hash) = 0;
 
 	// Inserts this entry into the SurfaceCache. asserts() that there is no
 	// entry with this hash already cached. Returns the given Surface for
 	// convenience. If 'transient' is false, this surface will not be deleted
 	// automatically - use this if surfaces are around for a long time and
 	// recreation is expensive (i.e. images loaded from disk).
-	virtual Surface* insert(const std::string& hash, Surface*, bool transient) = 0;
+	virtual GLSurfaceTexture* insert(const std::string& hash, GLSurfaceTexture*, bool transient) = 0;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(SurfaceCache);

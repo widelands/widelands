@@ -26,7 +26,7 @@
 
 #include <SDL.h>
 
-#include "graphic/surface.h"
+#include "graphic/gl/surface_texture.h"
 
 using namespace std;
 
@@ -41,18 +41,18 @@ public:
 
 	// Implements SurfaceCache.
 	void flush() override;
-	Surface* get(const string& hash) override;
-	Surface* insert(const string& hash, Surface*, bool) override;
+	GLSurfaceTexture* get(const string& hash) override;
+	GLSurfaceTexture* insert(const string& hash, GLSurfaceTexture*, bool) override;
 
 private:
 	void drop();
 
 	using AccessHistory = list<string>;
 	struct Entry {
-		Entry(Surface* gs, const AccessHistory::iterator& it, bool transient) :
+		Entry(GLSurfaceTexture* gs, const AccessHistory::iterator& it, bool transient) :
 			surface(gs), is_transient(transient), last_access(SDL_GetTicks()), list_iterator(it) {}
 
-		std::unique_ptr<Surface> surface;
+		std::unique_ptr<GLSurfaceTexture> surface;
 		bool is_transient;
 		uint32_t last_access;  // Mainly for debugging and analysis.
 		const AccessHistory::iterator list_iterator;  // Only valid if is_transient is true.
@@ -78,7 +78,7 @@ void SurfaceCacheImpl::flush() {
 	used_transient_memory_ = 0;
 }
 
-Surface* SurfaceCacheImpl::get(const string& hash) {
+GLSurfaceTexture* SurfaceCacheImpl::get(const string& hash) {
 	const Container::iterator it = entries_.find(hash);
 	if (it == entries_.end())
 		return nullptr;
@@ -92,7 +92,7 @@ Surface* SurfaceCacheImpl::get(const string& hash) {
 	return it->second->surface.get();
 }
 
-Surface* SurfaceCacheImpl::insert(const string& hash, Surface* surf, bool transient) {
+GLSurfaceTexture* SurfaceCacheImpl::insert(const string& hash, GLSurfaceTexture* surf, bool transient) {
 	assert(entries_.find(hash) == entries_.end());
 
 	if (transient) {

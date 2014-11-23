@@ -24,10 +24,10 @@
 #include "base/macros.h"
 #include "economy/flag.h"
 #include "economy/road.h"
+#include "graphic/gl/surface_texture.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/in_memory_image.h"
-#include "graphic/surface.h"
 #include "graphic/texture.h"
 #include "logic/field.h"
 #include "logic/map.h"
@@ -154,7 +154,7 @@ bool is_minimap_frameborder
 
 // Does the actual work of drawing the minimap.
 void draw_minimap_int
-	(Surface* surface, const Widelands::EditorGameBase& egbase,
+	(GLSurfaceTexture* surface, const Widelands::EditorGameBase& egbase,
 	 const Widelands::Player* player, const Point& viewpoint, MiniMapLayer layers)
 {
 	const Widelands::Map & map = egbase.map();
@@ -258,7 +258,7 @@ void draw_minimap_int
 
 }  // namespace
 
-std::unique_ptr<Surface> draw_minimap(const EditorGameBase& egbase,
+std::unique_ptr<GLSurfaceTexture> draw_minimap(const EditorGameBase& egbase,
                                       const Player* player,
                                       const Point& viewpoint,
                                       MiniMapLayer layers) {
@@ -270,7 +270,7 @@ std::unique_ptr<Surface> draw_minimap(const EditorGameBase& egbase,
 	const int16_t map_w = (layers & MiniMapLayer::Zoom2) ? map.get_width() * 2 : map.get_width();
 	const int16_t map_h = (layers & MiniMapLayer::Zoom2) ? map.get_height() * 2 : map.get_height();
 
-	Surface* surface = Surface::create(map_w, map_h);
+	GLSurfaceTexture* surface = new GLSurfaceTexture(map_w, map_h);
 	assert(surface->format().BytesPerPixel == sizeof(uint32_t));
 
 	surface->fill_rect(Rect(0, 0, surface->width(), surface->height()), RGBAColor(0, 0, 0, 255));
@@ -280,7 +280,7 @@ std::unique_ptr<Surface> draw_minimap(const EditorGameBase& egbase,
 
 	surface->unlock(Surface::Unlock_Update);
 
-	return std::unique_ptr<Surface>(surface);
+	return std::unique_ptr<GLSurfaceTexture>(surface);
 }
 
 void write_minimap_image
@@ -309,7 +309,7 @@ void write_minimap_image
 	viewpoint.y -= map_h / 2;
 
 	// Render minimap
-	std::unique_ptr<Surface> surface(draw_minimap(egbase, player, viewpoint, layers));
+	std::unique_ptr<GLSurfaceTexture> surface(draw_minimap(egbase, player, viewpoint, layers));
 	std::unique_ptr<const Image> image(new_in_memory_image("minimap", surface.release()));
 	g_gr->save_png(image.get(), streamwrite);
 	image.reset();

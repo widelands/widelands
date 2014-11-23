@@ -26,7 +26,12 @@ struct SDL_Surface;
 
 class GLSurfaceTexture : public Surface {
 public:
+	// Create a new surface from an SDL_Surface. If intensity is true, an GL_INTENSITY texture
+	// is created. Ownership is taken.
 	GLSurfaceTexture(SDL_Surface * surface, bool intensity = false);
+
+	// Create a new empty (that is randomly filled) Surface with the given
+	// dimensions.
 	GLSurfaceTexture(int w, int h);
 
 	virtual ~GLSurfaceTexture();
@@ -48,7 +53,10 @@ public:
 	void brighten_rect(const Rect&, int32_t factor) override;
 	virtual void draw_line
 		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor&, uint8_t width) override;
-	void blit(const Point&, const Surface*, const Rect& srcrc, Composite cm) override;
+	void blit(const Point&,
+	          const GLSurfaceTexture*,
+	          const Rect& srcrc,
+	          Composite cm = CM_UseAlpha) override;
 
 	GLuint get_gl_texture() const {return m_texture;}
 

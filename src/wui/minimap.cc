@@ -22,11 +22,11 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "graphic/gl/surface_texture.h"
 #include "graphic/graphic.h"
 #include "graphic/in_memory_image.h"
 #include "graphic/minimap_renderer.h"
 #include "graphic/rendertarget.h"
-#include "graphic/surface.h"
 #include "logic/map.h"
 #include "wui/interactive_player.h"
 #include "wui/mapviewpixelconstants.h"
@@ -63,7 +63,7 @@ void MiniMap::View::set_view_pos(const int32_t x, const int32_t y)
 
 void MiniMap::View::draw(RenderTarget & dst)
 {
-	std::unique_ptr<Surface> surface(
+	std::unique_ptr<GLSurfaceTexture> surface(
 	   draw_minimap(m_ibase.egbase(),
 	                m_ibase.get_player(),
 	                (*m_flags) & (MiniMapLayer::Zoom2) ?
