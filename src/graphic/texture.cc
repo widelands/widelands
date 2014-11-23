@@ -73,10 +73,7 @@ Texture::Texture(const std::vector<std::string>& texture_files, const uint32_t f
 				m_minimap_colors[shade] = RGBColor(r, g, b);
 			}
 		}
-
-		// Note: we except the constructor to free the SDL surface
-		GLSurfaceTexture* surface = new GLSurfaceTexture(surf);
-		m_gl_textures.emplace_back(surface);
+		m_gl_textures.emplace_back(new GLSurfaceTexture(surf));
 	}
 
 	if (m_gl_textures.empty())
