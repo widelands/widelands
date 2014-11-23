@@ -230,7 +230,6 @@ struct BuildableField {
 	// stationed (manned) military buildings nearby
 	int16_t military_unstationed_;
 	bool is_portspace_;
-	// bool portspace_nearby_; // to prohibit buildings near a portspace Not needed?
 	bool port_nearby_;  // to increase priority if a port is nearby,
 	// especially for new colonies
 

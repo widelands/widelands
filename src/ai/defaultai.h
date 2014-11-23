@@ -181,7 +181,6 @@ private:
 	void gain_building(Widelands::Building&);
 	void lose_building(const Widelands::Building&);
 	void expedition_management(ShipObserver&);
-	// bool pick_farest_portspace(Widelands::Ship&);
 	void out_of_resources_site(const Widelands::ProductionSite&);
 
 	bool check_supply(const BuildingObserver&);

@@ -153,7 +153,6 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 	outofresource_subscriber_ = Notifications::subscribe<NoteProductionSiteOutOfResources>(
 	   [this](const NoteProductionSiteOutOfResources& note) {
 			if (note.ps->owner().player_number() != player_->player_number()) {
-			   // if (note.ps->owner().player_number() != pid) {
 			   return;
 		   }
 
@@ -165,7 +164,6 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 	shipnotes_subscriber_ =
 	   Notifications::subscribe<NoteShipMessage>([this](const NoteShipMessage& note) {
 			if (note.ship->get_owner()->player_number() != player_->player_number()) {
-			   // if (note.ship->get_owner()->player_number() != pid) {
 			   return;
 		   }
 
@@ -682,7 +680,6 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 			// blocking fields in vicinity
 			MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(field.coords), 3));
 			do {
-				// const Coords coords = map.get_fcoords(*(mr.location().field));
 				const int32_t hash = coords_hash(map.get_fcoords(*(mr.location().field)));
 				if (port_reserved_coords.count(hash) == 0)
 					port_reserved_coords.insert(hash);
@@ -1941,7 +1938,6 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 			block_time = 25 * 1000;
 			block_area = 6;
 		}
-		// Map& map = game().map();
 
 		MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(proposed_coords), block_area));
 		do {
@@ -2156,7 +2152,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uin
 		// obviously it has no warehouse/road network to connect to
 		if (upcast(ConstructionSite const, constructionsite, flag.get_building())) {
 			BuildingObserver& bo = get_building_observer(
-			   constructionsite->building().name().c_str());  // constructionsite->building();
+			   constructionsite->building().name().c_str());
 			if (bo.is_port_ &&
 			    remote_ports_coords.count(coords_hash(flag.get_building()->get_position())) > 0) {
 				is_remote_port_csite = true;
@@ -4143,7 +4139,6 @@ void DefaultAI::review_wares_targets(int32_t const gametime) {
 	for (EconomyObserver* observer : economies) {
 		WareIndex nritems = observer->economy.owner().tribe().get_nrwares();
 		for (Widelands::WareIndex id = 0; id < nritems; ++id) {
-			// const Economy::TargetQuantity & tq = observer->economy.ware_target_quantity(id);
 			const uint16_t default_target = tribe_->get_ware_descr(id)->default_target_quantity();
 
 			game().send_player_command(*new Widelands::CmdSetWareTargetQuantity(
