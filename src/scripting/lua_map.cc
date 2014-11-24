@@ -2451,6 +2451,35 @@ int LuaFlag::get_wares(lua_State * L) {
 	return 1;
 }
 
+//NOCOM 
+/* RST
+	.. attribute:: roads
+
+		(RO) Array of roads leading to the flag. Directions
+		can be tr,r,br,bl,l and tl
+		 
+		:returns: The array of 'direction:road', if any
+*/
+int LuaFlag::get_roads(lua_State * L) {
+
+		const std::vector<std::string> directions = {"tr", "r", "br", "bl", "l", "tl"};
+	
+		lua_newtable(L);
+		
+        EditorGameBase & egbase = get_egbase(L);
+        Flag * f = get(L, egbase);
+        
+        for (uint32_t i=1; i<=6; i++){
+ 	       if (f->get_road(i) != nullptr)        {
+                lua_pushstring(L,directions.at(i-1));
+                upcasted_map_object_to_lua(L, f->get_road(i));
+                lua_rawset(L,-3);
+        	}
+		}
+        return 1;
+
+}
+
 /*
  ==========================================================
  C METHODS
@@ -2482,38 +2511,6 @@ const PropertyType<LuaRoad> LuaRoad::Properties[] = {
 	PROP_RO(LuaRoad, road_type),
 	{nullptr, nullptr, nullptr},
 };
-
-//NOCOM should there be something to be used to generate documentation?
-int LuaFlag::get_road_in_dir(lua_State * L,int8_t dir) {
-
-		if (dir<1 || dir>6) {
-			return 0; //NOCOM 0 or 1 ??
-		}
-        EditorGameBase & egbase = get_egbase(L);
-        Flag * f = get(L, egbase);
-        if (f->get_road(dir) != nullptr)        {
-                return 0;
-        }
-
-        return
-                to_lua<LuaRoad>(L, new LuaRoad(*f->get_road(dir)));
-
-}
-
-//returns a count of roads from a flag//NOCOM
-int LuaFlag::count_roads(lua_State * L) {
-
-        EditorGameBase & egbase = get_egbase(L);
-        Flag * f = get(L, egbase);
-        uint8_t counter = 0;
-        for (uint8_t road_id = 6; road_id; --road_id) {
-                if (f->get_road(road_id) != nullptr)    {
-                        counter +=1;
-                }
-        }
-        return counter;
-}
-
 
 
 /*
