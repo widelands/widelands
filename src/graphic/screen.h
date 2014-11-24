@@ -16,18 +16,18 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef WL_GRAPHIC_GL_SURFACE_SCREEN_H
-#define WL_GRAPHIC_GL_SURFACE_SCREEN_H
+#ifndef WL_GRAPHIC_SCREEN_H
+#define WL_GRAPHIC_SCREEN_H
 
 #include "graphic/surface.h"
 
 /**
  * This surface represents the screen in OpenGL mode.
  */
-class GLSurfaceScreen : public Surface {
+class Screen : public Surface {
 public:
-	GLSurfaceScreen(uint16_t w, uint16_t h);
-	virtual ~GLSurfaceScreen() {}
+	Screen(uint16_t w, uint16_t h);
+	virtual ~Screen() {}
 
 	/// Interface implementations
 	void lock(LockMode) override;
@@ -39,4 +39,4 @@ private:
 	void swap_rows();
 };
 
-#endif  // end of include guard:
+#endif  // end of include guard: WL_GRAPHIC_SCREEN_H

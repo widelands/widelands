@@ -35,13 +35,13 @@
 #include "graphic/animation.h"
 #include "graphic/diranimations.h"
 #include "graphic/font_handler.h"
-#include "graphic/gl/surface_screen.h"
 #include "graphic/gl/surface_texture.h"
 #include "graphic/gl/system_headers.h"
 #include "graphic/image.h"
 #include "graphic/image_io.h"
 #include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
+#include "graphic/screen.h"
 #include "graphic/surface_cache.h"
 #include "graphic/terrain_texture.h"
 #include "io/fileread.h"
@@ -208,7 +208,7 @@ void Graphic::resolution_changed() {
 	int new_w, new_h;
 	SDL_GetWindowSize(m_sdl_window, &new_w, &new_h);
 
-	screen_.reset(new GLSurfaceScreen(new_w, new_h));
+	screen_.reset(new Screen(new_w, new_h));
 	m_rendertarget.reset(new RenderTarget(screen_.get()));
 
 	Notifications::publish(GraphicResolutionChanged{new_w, new_h});
