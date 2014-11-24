@@ -36,9 +36,9 @@
 class AnimationManager;
 class RenderTarget;
 class Surface;
-class SurfaceCache;
+class TextureCache;
 class StreamWrite;
-struct Texture;
+struct TerrainTexture;
 
 // Will be send whenever the resolution changes.
 struct GraphicResolutionChanged {
@@ -50,10 +50,10 @@ struct GraphicResolutionChanged {
 };
 
 /**
- * This class is a kind of Swiss Army knife for your graphics need. It
- * initializes the graphic system and provides access to resolutions. It has an
- * Animation, Image and Surface cache and owns the road textures. It also
- * offers functionality to save a screenshot.
+ * This class is a kind of Swiss Army knife for your graphics need.
+ * It initializes the graphic system and provides access to
+ * resolutions. It owns an Animation, Image and Surface cache. It
+ * also offers functionality to save a screenshot.
  */
 class Graphic {
 public:
@@ -77,21 +77,19 @@ public:
 	void refresh();
 	SDL_Window* get_sdlwindow() {return m_sdl_window;}
 
-	SurfaceCache& surfaces() const {return *surface_cache_.get();}
+	TextureCache& textures() const {return *texture_cache_.get();}
 	ImageCache& images() const {return *image_cache_.get();}
 	AnimationManager& animations() const {return *animation_manager_.get();}
 
 	void save_png(const Image*, StreamWrite*) const;
 
-	// Creates a new Texture() with the given 'frametime' and using the given
+	// Creates a new TerrainTexture() with the given 'frametime' and using the given
 	// 'texture_files' as the images for it and returns it id.
 	uint32_t new_maptexture(const std::vector<std::string>& texture_files, uint32_t frametime);
 	void animate_maptextures(uint32_t time);
 
 	void screenshot(const std::string& fname) const;
-	Texture * get_maptexture_data(uint32_t id);
-
-	Surface& get_road_texture(int32_t roadtex);
+	TerrainTexture * get_maptexture_data(uint32_t id);
 
 private:
 	// Called when the resolution (might) have changed.
@@ -114,19 +112,15 @@ private:
 	/// This marks the complete screen for updating.
 	bool m_update;
 
-	/// Volatile cache of Hardware dependant surfaces.
-	std::unique_ptr<SurfaceCache> surface_cache_;
+	/// Volatile cache of Hardware dependant textures.
+	std::unique_ptr<TextureCache> texture_cache_;
 	/// Non-volatile cache of hardware independent images. The use the
-	/// surface_cache_ to cache their pixel data.
+	/// texture_cache_ to cache their pixel data.
 	std::unique_ptr<ImageCache> image_cache_;
 	/// This holds all animations.
 	std::unique_ptr<AnimationManager> animation_manager_;
 
-	// The texture needed to draw roads.
-	std::unique_ptr<Surface> pic_road_normal_;
-	std::unique_ptr<Surface> pic_road_busy_;
-
-	std::vector<std::unique_ptr<Texture>> m_maptextures;
+	std::vector<std::unique_ptr<TerrainTexture>> m_maptextures;
 };
 
 extern Graphic * g_gr;

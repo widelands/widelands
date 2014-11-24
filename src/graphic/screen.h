@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 by the Widelands Development Team
+ * Copyright 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -14,26 +14,29 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
- *
  */
 
-#ifndef WL_GRAPHIC_COMPOSITEMODE_H
-#define WL_GRAPHIC_COMPOSITEMODE_H
+#ifndef WL_GRAPHIC_SCREEN_H
+#define WL_GRAPHIC_SCREEN_H
+
+#include "graphic/surface.h"
 
 /**
- * Defines composition operations performed while blitting.
+ * This surface represents the screen in OpenGL mode.
  */
-enum Composite {
-	/**
-	 * Perform a normal blitting operation that respects the alpha
-	 * channel if present.
-	 */
-	CM_UseAlpha = 0,
+class Screen : public Surface {
+public:
+	Screen(uint16_t w, uint16_t h);
+	virtual ~Screen() {}
 
-	/**
-	 * Copy all pixel information, including alpha channel information.
-	 */
-	CM_Copy
+	/// Interface implementations
+	void lock(LockMode) override;
+	void unlock(UnlockMode) override;
+
+private:
+	void pixel_to_gl(float* x, float* y) const override;
+
+	void swap_rows();
 };
 
-#endif  // end of include guard: WL_GRAPHIC_COMPOSITEMODE_H
+#endif  // end of include guard: WL_GRAPHIC_SCREEN_H

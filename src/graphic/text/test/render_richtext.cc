@@ -33,9 +33,9 @@
 #include "config.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
-#include "graphic/surface.h"
 #include "graphic/text/rt_errors.h"
 #include "graphic/text/test/render.h"
+#include "graphic/texture.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
@@ -135,11 +135,12 @@ int main(int argc, char** argv) {
 	StandaloneRenderer standalone_renderer;
 
 	try {
-		std::unique_ptr<Surface> surf(standalone_renderer.renderer()->render(txt, w, allowed_tags));
+		std::unique_ptr<Texture> texture(
+		   standalone_renderer.renderer()->render(txt, w, allowed_tags));
 
 		std::unique_ptr<FileSystem> fs(&FileSystem::create("."));
 		std::unique_ptr<StreamWrite> sw(fs->open_stream_write(outname));
-		if (!save_surface_to_png(surf.get(), sw.get())) {
+		if (!save_surface_to_png(texture.get(), sw.get())) {
 			std::cout << "Could not encode PNG." << std::endl;
 		}
 	} catch (RT::Exception& e) {

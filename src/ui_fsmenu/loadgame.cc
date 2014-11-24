@@ -36,7 +36,7 @@
 #include "graphic/image_io.h"
 #include "graphic/image_transformations.h"
 #include "graphic/in_memory_image.h"
-#include "graphic/surface.h"
+#include "graphic/texture.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
@@ -317,13 +317,13 @@ void FullscreenMenuLoadGame::entry_selected()
 			if (!minimap_path.empty()) {
 				try {
 					// Load the image
-					std::unique_ptr<Surface> surface(
+					std::unique_ptr<Texture> texture(
 								load_image(
 									minimap_path,
 									std::unique_ptr<FileSystem>(g_fs->make_sub_file_system(gamedata.filename)).get()));
 
 					m_minimap_image.reset(new_in_memory_image(std::string(gamedata.filename + minimap_path),
-																			surface.release()));
+																			texture.release()));
 
 					// Scale it
 					double scale = double(m_minimap_w) / m_minimap_image->width();
@@ -337,7 +337,7 @@ void FullscreenMenuLoadGame::entry_selected()
 					const Image* resized = ImageTransformations::resize(m_minimap_image.get(), w, h);
 					// keeps our in_memory_image around and give to icon the one
 					// from resize that is handled by the cache. It is still linked to our
-					// surface
+					// texture.
 					m_minimap_icon.set_size(w, h);
 
 					// Center the minimap in the available space

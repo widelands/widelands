@@ -24,9 +24,9 @@
 #include <boost/format.hpp>
 
 #include "graphic/sdl_utils.h"
-#include "graphic/surface.h"
-#include "graphic/surface_cache.h"
 #include "graphic/text/rt_errors.h"
+#include "graphic/texture.h"
+#include "graphic/texture_cache.h"
 
 using namespace std;
 using namespace boost;
@@ -58,13 +58,13 @@ void SdlTtfFont::dimensions(const string& txt, int style, uint16_t * gw, uint16_
 	*gw = w; *gh = h;
 }
 
-const Surface& SdlTtfFont::render
-	(const string& txt, const RGBColor& clr, int style, SurfaceCache* surface_cache) {
+const Texture& SdlTtfFont::render
+	(const string& txt, const RGBColor& clr, int style, TextureCache* texture_cache) {
 	const string hash =
 		(boost::format("%s:%s:%i:%02x%02x%02x:%i") % font_name_ % ptsize_ % txt %
 		 static_cast<int>(clr.r) % static_cast<int>(clr.g) % static_cast<int>(clr.b) % style)
 			.str();
-	const Surface* rv = surface_cache->get(hash);
+	const Texture* rv = texture_cache->get(hash);
 	if (rv) return *rv;
 
 	m_set_style(style);
@@ -120,7 +120,7 @@ const Surface& SdlTtfFont::render
 	if (!text_surface)
 		throw RenderError((format("Rendering '%s' gave the error: %s") % txt % TTF_GetError()).str());
 
-	return *surface_cache->insert(hash, Surface::create(text_surface), true);
+	return *texture_cache->insert(hash, new Texture(text_surface), true);
 }
 
 uint16_t SdlTtfFont::ascent(int style) const {

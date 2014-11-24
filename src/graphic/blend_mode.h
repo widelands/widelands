@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 by the Widelands Development Team
+ * Copyright (C) 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -14,29 +14,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
  */
 
-#ifndef WL_GRAPHIC_GL_SURFACE_SCREEN_H
-#define WL_GRAPHIC_GL_SURFACE_SCREEN_H
+#ifndef WL_GRAPHIC_BLEND_MODE_H
+#define WL_GRAPHIC_BLEND_MODE_H
 
-#include "graphic/surface.h"
+// Defines blending during blitting.
+enum BlendMode {
+	// Perform a normal blitting operation that respects the alpha channel if
+	// present.
+	UseAlpha = 0,
 
-/**
- * This surface represents the screen in OpenGL mode.
- */
-class GLSurfaceScreen : public Surface {
-public:
-	GLSurfaceScreen(uint16_t w, uint16_t h);
-	virtual ~GLSurfaceScreen() {}
-
-	/// Interface implementations
-	void lock(LockMode) override;
-	void unlock(UnlockMode) override;
-
-private:
-	void pixel_to_gl(float* x, float* y) const override;
-
-	void swap_rows();
+	// Copy all pixel information, including alpha channel information.
+	Copy
 };
 
-#endif  // end of include guard:
+#endif  // end of include guard: WL_GRAPHIC_BLEND_MODE_H

@@ -23,7 +23,7 @@
 
 #include "graphic/graphic.h"
 #include "graphic/in_memory_image.h"
-#include "graphic/surface.h"
+#include "graphic/texture.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
@@ -67,7 +67,7 @@ void MapExtradataPacket::read(FileSystem& fs, bool const skip) {
 							IMG_Load_RW(SDL_RWFromMem(fr.data(0), fr.get_size()), 1);
 						if (!surf)
 							continue; //  Illegal pic. Skip it.
-						image = g_gr->images().insert(new_in_memory_image(hash, Surface::create(surf)));
+						image = g_gr->images().insert(new_in_memory_image(hash, new Texture(surf)));
 					} else {
 						image = g_gr->images().get(hash);
 					}

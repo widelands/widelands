@@ -24,8 +24,10 @@
 
 #include "base/macros.h"
 #include "base/rect.h"
+#include "graphic/blend_mode.h"
 #include "graphic/color.h"
-#include "graphic/compositemode.h"
+
+class Texture;
 
 /**
  * Interface to a basic surfaces that can be used as destination for blitting and drawing.
@@ -33,13 +35,6 @@
  */
 class Surface  {
 public:
-	// Create a new surface from an SDL_Surface. Ownership is taken.
-	static Surface* create(SDL_Surface*);
-
-	// Create a new empty (that is randomly filled) Surface with the given
-	// dimensions.
-	static Surface* create(uint16_t w, uint16_t h);
-
 	Surface() = default;
 	virtual ~Surface() {}
 
@@ -48,10 +43,13 @@ public:
 	uint16_t height() const;
 
 	/// This draws a part of another surface to this surface
-	virtual void blit(const Point&, const Surface*, const Rect& srcrc, Composite cm = CM_UseAlpha);
+	virtual void blit(const Point&,
+	                  const Texture*,
+	                  const Rect& srcrc,
+	                  BlendMode blend_mode = BlendMode::UseAlpha);
 
 	/// Draws a filled rect to the surface. No blending takes place, the values
-	//in the target are just replaced (i.e. / Composite would be CM_Copy).
+	// in the target are just replaced (i.e. / BlendMode would be BlendMode::Copy).
 	virtual void fill_rect(const Rect&, const RGBAColor&);
 
 	/// Draws a rect (frame only) to the surface.

@@ -45,17 +45,17 @@ wl_library(graphic_sdl_utils
 
 wl_library(graphic_surface
   SRCS
-    compositemode.h
-    gl/surface_screen.cc
-    gl/surface_screen.h
-    gl/surface_texture.cc
-    gl/surface_texture.h
+    blend_mode.h
     gl/utils.cc
     gl/utils.h
+    screen.cc
+    screen.h
     surface.cc
     surface.h
-    surface_cache.cc
-    surface_cache.h
+    texture.cc
+    texture.h
+    texture_cache.cc
+    texture_cache.h
   USES_OPENGL
   USES_SDL2
   DEPENDS
@@ -90,20 +90,20 @@ wl_library(graphic
     gl/blit_program.h
     gl/dither_program.cc
     gl/dither_program.h
-    gl/draw_rect_program.cc
-    gl/draw_rect_program.h
     gl/draw_line_program.cc
     gl/draw_line_program.h
+    gl/draw_rect_program.cc
+    gl/draw_rect_program.h
+    gl/fields_to_draw.h
     gl/fill_rect_program.cc
     gl/fill_rect_program.h
-    gl/fields_to_draw.h
     gl/game_renderer.cc
     gl/game_renderer.h
     gl/road_program.cc
     gl/road_program.h
+    gl/system_headers.h
     gl/terrain_program.cc
     gl/terrain_program.h
-    gl/system_headers.h
     graphic.cc
     graphic.h
     image_transformations.cc
@@ -116,10 +116,10 @@ wl_library(graphic
     rendertarget.h
     richtext.cc
     richtext.h
+    terrain_texture.cc
+    terrain_texture.h
     text_parser.cc
     text_parser.h
-    texture.cc
-    texture.h
     wordwrap.cc
     wordwrap.h
   USES_OPENGL
@@ -146,6 +146,7 @@ wl_library(graphic
     io_filesystem
     io_stream
     logic
+    notifications
     profile
     scripting
     sound
