@@ -23,9 +23,9 @@
 
 #include "base/log.h"
 #include "graphic/gl/fields_to_draw.h"
-#include "graphic/gl/surface_texture.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
+#include "graphic/texture.h"
 #include "logic/roadtype.h"
 
 namespace  {

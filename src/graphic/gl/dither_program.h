@@ -27,7 +27,7 @@
 #include "logic/description_maintainer.h"
 #include "logic/world/terrain_description.h"
 
-class GLSurfaceTexture;
+class Texture;
 
 class DitherProgram {
 public:
@@ -83,7 +83,7 @@ private:
 	GLint u_dither_texture_;
 
 	// The texture mask for the dithering step.
-	std::unique_ptr<GLSurfaceTexture> dither_mask_;
+	std::unique_ptr<Texture> dither_mask_;
 
 	// Objects below are here to avoid memory allocations on each frame, they
 	// could theoretically also always be recreated. Index as follows:

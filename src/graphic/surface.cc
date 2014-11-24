@@ -30,9 +30,9 @@
 #include "graphic/gl/draw_line_program.h"
 #include "graphic/gl/draw_rect_program.h"
 #include "graphic/gl/fill_rect_program.h"
-#include "graphic/gl/surface_texture.h"
 #include "graphic/gl/utils.h"
 #include "graphic/graphic.h"
+#include "graphic/texture.h"
 
 
 uint16_t Surface::width() const {
@@ -158,12 +158,11 @@ inline void pixel_to_gl_texture(const int width, const int height, float* x, flo
 }
 
 void Surface::blit
-	(const Point& dst, const GLSurfaceTexture* image, const Rect& srcrc, Composite cm)
+	(const Point& dst, const Texture* texture, const Rect& srcrc, Composite cm)
 {
 	glViewport(0, 0, width(), height());
 
 	// Source Rectangle.
-	const GLSurfaceTexture* const texture = static_cast<const GLSurfaceTexture*>(image);
 	FloatRect gl_src_rect;
 	{
 		float x1 = srcrc.x;

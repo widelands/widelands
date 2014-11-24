@@ -20,9 +20,9 @@
 #include "graphic/gl/terrain_program.h"
 
 #include "graphic/gl/fields_to_draw.h"
-#include "graphic/gl/surface_texture.h"
 #include "graphic/graphic.h"
 #include "graphic/terrain_texture.h"
+#include "graphic/texture.h"
 
 namespace  {
 
@@ -120,7 +120,7 @@ void TerrainProgram::gl_draw(int num_vertices,
 		}
 		glBindTexture(GL_TEXTURE_2D,
 		              g_gr->get_maptexture_data(terrains.get_unmutable(i).get_texture())
-		                 ->surface()
+		                 ->texture()
 		                 .get_gl_texture());
 		glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, indices.data());
 	}

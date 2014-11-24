@@ -26,7 +26,7 @@
 
 #include "base/macros.h"
 
-class GLSurfaceTexture;
+class Texture;
 
 /**
  * Interface to a bitmap that can act as the source of a rendering
@@ -41,7 +41,7 @@ public:
 	virtual uint16_t height() const = 0;
 
 	// Internal functions needed for caching.
-	virtual GLSurfaceTexture* surface() const = 0;
+	virtual Texture* texture() const = 0;
 	virtual const std::string& hash() const = 0;
 
 	DISALLOW_COPY_AND_ASSIGN(Image);

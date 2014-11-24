@@ -23,23 +23,23 @@
 #include <string>
 
 #include "base/log.h"
-#include "graphic/gl/surface_texture.h"
 #include "graphic/image.h"
 #include "graphic/image_io.h"
-#include "graphic/surface_cache.h"
+#include "graphic/texture.h"
+#include "graphic/texture_cache.h"
 
 namespace  {
 
 // Image Implementation that loads images from disc when they should be drawn.
-// Uses SurfaceCache. These images are meant to be cached in ImageCache.
+// Uses TextureCache. These images are meant to be cached in ImageCache.
 class FromDiskImage : public Image {
 public:
-	FromDiskImage(const std::string& filename, SurfaceCache* surface_cache) :
+	FromDiskImage(const std::string& filename, TextureCache* texture_cache) :
 		filename_(filename),
-		surface_cache_(surface_cache) {
-			GLSurfaceTexture* surf = reload_image_();
-			w_ = surf->width();
-			h_ = surf->height();
+		texture_cache_(texture_cache) {
+			Texture* texture = reload_image_();
+			w_ = texture->width();
+			h_ = texture->height();
 		}
 	virtual ~FromDiskImage() {}
 
@@ -47,27 +47,27 @@ public:
 	uint16_t width() const override {return w_; }
 	uint16_t height() const override {return h_;}
 	const std::string& hash() const override {return filename_;}
-	GLSurfaceTexture* surface() const override {
-		GLSurfaceTexture* surf = surface_cache_->get(filename_);
-		if (surf)
-			return surf;
+	Texture* texture() const override {
+		Texture* texture = texture_cache_->get(filename_);
+		if (texture)
+			return texture;
 		return reload_image_();
 	}
 
 private:
-	GLSurfaceTexture* reload_image_() const {
-		GLSurfaceTexture* surf = surface_cache_->insert(filename_, load_image(filename_), false);
-		return surf;
+	Texture* reload_image_() const {
+		Texture* texture = texture_cache_->insert(filename_, load_image(filename_), false);
+		return texture;
 	}
 	uint16_t w_, h_;
 	const std::string filename_;
 
-	SurfaceCache* const surface_cache_;  // Not owned.
+	TextureCache* const texture_cache_;  // Not owned.
 };
 
 }  // namespace
 
-ImageCache::ImageCache(SurfaceCache* const surface_cache) : surface_cache_(surface_cache) {
+ImageCache::ImageCache(TextureCache* const texture_cache) : texture_cache_(texture_cache) {
 }
 
 ImageCache::~ImageCache() {
@@ -90,7 +90,7 @@ const Image* ImageCache::insert(const Image* image) {
 const Image* ImageCache::get(const std::string& hash) {
 	ImageMap::const_iterator it = images_.find(hash);
 	if (it == images_.end()) {
-		images_.insert(make_pair(hash, new FromDiskImage(hash, surface_cache_)));
+		images_.insert(make_pair(hash, new FromDiskImage(hash, texture_cache_)));
 		return get(hash);
 	}
 	return it->second;

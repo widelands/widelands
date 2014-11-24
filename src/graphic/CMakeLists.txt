@@ -46,16 +46,16 @@ wl_library(graphic_sdl_utils
 wl_library(graphic_surface
   SRCS
     compositemode.h
-    gl/surface_texture.cc
-    gl/surface_texture.h
     gl/utils.cc
     gl/utils.h
     screen.cc
     screen.h
     surface.cc
     surface.h
-    surface_cache.cc
-    surface_cache.h
+    texture.cc
+    texture.h
+    texture_cache.cc
+    texture_cache.h
   USES_OPENGL
   USES_SDL2
   DEPENDS

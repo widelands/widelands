@@ -16,25 +16,25 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef WL_GRAPHIC_GL_SURFACE_TEXTURE_H
-#define WL_GRAPHIC_GL_SURFACE_TEXTURE_H
+#ifndef WL_GRAPHIC_TEXTURE_H
+#define WL_GRAPHIC_TEXTURE_H
 
 #include "graphic/gl/system_headers.h"
 #include "graphic/surface.h"
 
 struct SDL_Surface;
 
-class GLSurfaceTexture : public Surface {
+class Texture : public Surface {
 public:
 	// Create a new surface from an SDL_Surface. If intensity is true, an GL_INTENSITY texture
 	// is created. Ownership is taken.
-	GLSurfaceTexture(SDL_Surface * surface, bool intensity = false);
+	Texture(SDL_Surface * surface, bool intensity = false);
 
 	// Create a new empty (that is randomly filled) Surface with the given
 	// dimensions.
-	GLSurfaceTexture(int w, int h);
+	Texture(int w, int h);
 
-	virtual ~GLSurfaceTexture();
+	virtual ~Texture();
 
 	/// Interface implementation
 	//@{
@@ -54,7 +54,7 @@ public:
 	virtual void draw_line
 		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor&, uint8_t width) override;
 	void blit(const Point&,
-	          const GLSurfaceTexture*,
+	          const Texture*,
 	          const Rect& srcrc,
 	          Composite cm = CM_UseAlpha) override;
 
@@ -67,4 +67,4 @@ private:
 	GLuint m_texture;
 };
 
-#endif  // end of include guard: WL_GRAPHIC_GL_SURFACE_TEXTURE_H
+#endif  // end of include guard: WL_GRAPHIC_TEXTURE_H

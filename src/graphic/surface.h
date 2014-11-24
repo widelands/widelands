@@ -27,7 +27,7 @@
 #include "graphic/color.h"
 #include "graphic/compositemode.h"
 
-class GLSurfaceTexture;
+class Texture;
 
 /**
  * Interface to a basic surfaces that can be used as destination for blitting and drawing.
@@ -43,7 +43,7 @@ public:
 	uint16_t height() const;
 
 	/// This draws a part of another surface to this surface
-	virtual void blit(const Point&, const GLSurfaceTexture*, const Rect& srcrc, Composite cm = CM_UseAlpha);
+	virtual void blit(const Point&, const Texture*, const Rect& srcrc, Composite cm = CM_UseAlpha);
 
 	/// Draws a filled rect to the surface. No blending takes place, the values
 	//in the target are just replaced (i.e. / Composite would be CM_Copy).

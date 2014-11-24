@@ -36,7 +36,7 @@ class StandaloneRenderer {
 		RT::Renderer* renderer();
 
 	private:
-		std::unique_ptr<SurfaceCache> surface_cache_;
+		std::unique_ptr<TextureCache> texture_cache_;
 		std::unique_ptr<ImageCache> image_cache_;
 		std::unique_ptr<RT::Renderer> renderer_;
 };

@@ -30,12 +30,12 @@
 
 #include "base/point.h"
 #include "base/rect.h"
-#include "graphic/gl/surface_texture.h"
 #include "graphic/image_cache.h"
 #include "graphic/image_io.h"
 #include "graphic/text/font_io.h"
 #include "graphic/text/rt_parse.h"
 #include "graphic/text/textstream.h"
+#include "graphic/texture.h"
 
 
 using namespace std;
@@ -108,7 +108,7 @@ public:
 	virtual uint16_t width() = 0;
 	virtual uint16_t height() = 0;
 	virtual uint16_t hotspot_y() = 0;
-	virtual GLSurfaceTexture* render(SurfaceCache* surface_cache) = 0;
+	virtual Texture* render(TextureCache* texture_cache) = 0;
 
 	virtual bool is_non_mandatory_space() {return false;}
 	virtual bool is_expanding() {return false;}
@@ -313,7 +313,7 @@ public:
 		return rv;
 	}
 
-	GLSurfaceTexture* render(SurfaceCache* surface_cache) override;
+	Texture* render(TextureCache* texture_cache) override;
 
 protected:
 	uint16_t m_w, m_h;
@@ -330,9 +330,9 @@ TextNode::TextNode(IFont& font, NodeStyle& ns, const string& txt)
 uint16_t TextNode::hotspot_y() {
 	return m_font.ascent(m_s.font_style);
 }
-GLSurfaceTexture* TextNode::render(SurfaceCache* surface_cache) {
-	const GLSurfaceTexture& img = m_font.render(m_txt, m_s.font_color, m_s.font_style, surface_cache);
-	GLSurfaceTexture* rv = new GLSurfaceTexture(img.width(), img.height());
+Texture* TextNode::render(TextureCache* texture_cache) {
+	const Texture& img = m_font.render(m_txt, m_s.font_color, m_s.font_style, texture_cache);
+	Texture* rv = new Texture(img.width(), img.height());
 	rv->blit(Point(0, 0), &img, Rect(0, 0, img.width(), img.height()), CM_Copy);
 	return rv;
 }
@@ -348,7 +348,7 @@ public:
 			m_w = w;
 		}
 	virtual ~FillingTextNode() {}
-	GLSurfaceTexture* render(SurfaceCache*) override;
+	Texture* render(TextureCache*) override;
 
 	bool is_expanding() override {return m_expanding;}
 	void set_w(uint16_t w) override {m_w = w;}
@@ -356,9 +356,9 @@ public:
 private:
 	bool m_expanding;
 };
-GLSurfaceTexture* FillingTextNode::render(SurfaceCache* surface_cache) {
-	const GLSurfaceTexture& t = m_font.render(m_txt, m_s.font_color, m_s.font_style, surface_cache);
-	GLSurfaceTexture* rv = new GLSurfaceTexture(m_w, m_h);
+Texture* FillingTextNode::render(TextureCache* texture_cache) {
+	const Texture& t = m_font.render(m_txt, m_s.font_color, m_s.font_style, texture_cache);
+	Texture* rv = new Texture(m_w, m_h);
 	for (uint16_t curx = 0; curx < m_w; curx += t.width()) {
 		Rect srcrect(Point(0, 0), min<int>(t.width(), m_w - curx), m_h);
 		rv->blit(Point(curx, 0), &t, srcrect, CM_Copy);
@@ -375,13 +375,13 @@ public:
 	WordSpacerNode(IFont& font, NodeStyle& ns) : TextNode(font, ns, " ") {}
 	static void show_spaces(bool t) {m_show_spaces = t;}
 
-	GLSurfaceTexture* render(SurfaceCache* surface_cache) override {
+	Texture* render(TextureCache* texture_cache) override {
 		if (m_show_spaces) {
-			GLSurfaceTexture* rv = new GLSurfaceTexture(m_w, m_h);
+			Texture* rv = new Texture(m_w, m_h);
 			rv->fill_rect(Rect(0, 0, m_w, m_h), RGBAColor(0xff, 0, 0, 0xff));
 			return rv;
 		}
-		return TextNode::render(surface_cache);
+		return TextNode::render(texture_cache);
 	}
 	bool is_non_mandatory_space() override {return true;}
 
@@ -400,7 +400,7 @@ public:
 	uint16_t height() override {return 0;}
 	uint16_t width() override {return INFINITE_WIDTH; }
 	uint16_t hotspot_y() override {return 0;}
-	GLSurfaceTexture* render(SurfaceCache* /* surface_cache */) override {
+	Texture* render(TextureCache* /* texture_cache */) override {
 		assert(false);
 		throw RenderError("This should never be called. This is a bug, please submit a report.");
 	}
@@ -418,8 +418,8 @@ public:
 	uint16_t height() override {return m_h;}
 	uint16_t width() override {return m_w;}
 	uint16_t hotspot_y() override {return m_h;}
-	GLSurfaceTexture* render(SurfaceCache* /* surface_cache */) override {
-		GLSurfaceTexture* rv = new GLSurfaceTexture(m_w, m_h);
+	Texture* render(TextureCache* /* texture_cache */) override {
+		Texture* rv = new Texture(m_w, m_h);
 
 		// Draw background image (tiling)
 		if (m_bg) {
@@ -430,7 +430,7 @@ public:
 				dst.y = 0;
 				srcrect.w = min<int>(m_bg->width(), m_w - curx);
 				srcrect.h = m_h;
-				rv->blit(dst, m_bg->surface(), srcrect, CM_Copy);
+				rv->blit(dst, m_bg->texture(), srcrect, CM_Copy);
 			}
 		} else {
 			rv->fill_rect(Rect(0, 0, m_w, m_h), RGBAColor(255, 255, 255, 0));
@@ -468,8 +468,8 @@ public:
 	uint16_t width() override {return m_w + m_margin.left + m_margin.right;}
 	uint16_t height() override {return m_h + m_margin.top + m_margin.bottom;}
 	uint16_t hotspot_y() override {return height();}
-	GLSurfaceTexture* render(SurfaceCache* surface_cache) override {
-		GLSurfaceTexture* rv = new GLSurfaceTexture(width(), height());
+	Texture* render(TextureCache* texture_cache) override {
+		Texture* rv = new Texture(width(), height());
 		rv->fill_rect(Rect(0, 0, rv->width(), rv->height()), RGBAColor(255, 255, 255, 0));
 
 		// Draw Solid background Color
@@ -490,20 +490,20 @@ public:
 					dst.x = curx; dst.y = cury;
 					src.w = min<int>(m_bg_img->width(), m_w + m_margin.left - curx);
 					src.h = min<int>(m_bg_img->height(), m_h + m_margin.top - cury);
-					rv->blit(dst, m_bg_img->surface(), src, CM_Copy);
+					rv->blit(dst, m_bg_img->texture(), src, CM_Copy);
 				}
 			}
 			set_alpha = false;
 		}
 
 		for (RenderNode* n : m_nodes_to_render) {
-			GLSurfaceTexture* nsur = n->render(surface_cache);
-			if (nsur) {
+			Texture* node_texture = n->render(texture_cache);
+			if (node_texture) {
 				Point dst = Point(n->x() + m_margin.left, n->y() + m_margin.top);
-				Rect src = Rect(0, 0, nsur->width(), nsur->height());
+				Rect src = Rect(0, 0, node_texture->width(), node_texture->height());
 
-				rv->blit(dst, nsur, src, set_alpha ? CM_Copy : CM_UseAlpha);
-				delete nsur;
+				rv->blit(dst, node_texture, src, set_alpha ? CM_Copy : CM_UseAlpha);
+				delete node_texture;
 			}
 			delete n;
 		}
@@ -545,15 +545,15 @@ public:
 	uint16_t width() override {return m_image.width();}
 	uint16_t height() override {return m_image.height();}
 	uint16_t hotspot_y() override {return m_image.height();}
-	GLSurfaceTexture* render(SurfaceCache* surface_cache) override;
+	Texture* render(TextureCache* texture_cache) override;
 
 private:
 	const Image& m_image;
 };
 
-GLSurfaceTexture* ImgRenderNode::render(SurfaceCache* /* surface_cache */) {
-	GLSurfaceTexture* rv = new GLSurfaceTexture(m_image.width(), m_image.height());
-	rv->blit(Point(0, 0), m_image.surface(), Rect(0, 0, m_image.width(), m_image.height()), CM_Copy);
+Texture* ImgRenderNode::render(TextureCache* /* texture_cache */) {
+	Texture* rv = new Texture(m_image.width(), m_image.height());
+	rv->blit(Point(0, 0), m_image.texture(), Rect(0, 0, m_image.width(), m_image.height()), CM_Copy);
 	return rv;
 }
 // End: Helper Stuff
@@ -946,9 +946,9 @@ TagHandler* create_taghandler(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache
 	return i->second(tag, fc, ns, image_cache);
 }
 
-Renderer::Renderer(ImageCache* image_cache, SurfaceCache* surface_cache) :
+Renderer::Renderer(ImageCache* image_cache, TextureCache* texture_cache) :
 	font_cache_(new FontCache()), parser_(new Parser()),
-	image_cache_(image_cache), surface_cache_(surface_cache) {
+	image_cache_(image_cache), texture_cache_(texture_cache) {
 }
 
 Renderer::~Renderer() {
@@ -976,10 +976,10 @@ RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& 
 	return nodes[0];
 }
 
-GLSurfaceTexture* Renderer::render(const string& text, uint16_t width, const TagSet& allowed_tags) {
+Texture* Renderer::render(const string& text, uint16_t width, const TagSet& allowed_tags) {
 	std::unique_ptr<RenderNode> node(layout_(text, width, allowed_tags));
 
-	return node->render(surface_cache_);
+	return node->render(texture_cache_);
 }
 
 IRefMap* Renderer::make_reference_map(const string& text, uint16_t width, const TagSet& allowed_tags) {

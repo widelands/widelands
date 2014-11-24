@@ -36,7 +36,7 @@
 class AnimationManager;
 class RenderTarget;
 class Surface;
-class SurfaceCache;
+class TextureCache;
 class StreamWrite;
 struct TerrainTexture;
 
@@ -77,7 +77,7 @@ public:
 	void refresh();
 	SDL_Window* get_sdlwindow() {return m_sdl_window;}
 
-	SurfaceCache& surfaces() const {return *surface_cache_.get();}
+	TextureCache& surfaces() const {return *texture_cache_.get();}
 	ImageCache& images() const {return *image_cache_.get();}
 	AnimationManager& animations() const {return *animation_manager_.get();}
 
@@ -113,9 +113,9 @@ private:
 	bool m_update;
 
 	/// Volatile cache of Hardware dependant surfaces.
-	std::unique_ptr<SurfaceCache> surface_cache_;
+	std::unique_ptr<TextureCache> texture_cache_;
 	/// Non-volatile cache of hardware independent images. The use the
-	/// surface_cache_ to cache their pixel data.
+	/// texture_cache_ to cache their pixel data.
 	std::unique_ptr<ImageCache> image_cache_;
 	/// This holds all animations.
 	std::unique_ptr<AnimationManager> animation_manager_;

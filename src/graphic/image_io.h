@@ -25,7 +25,7 @@
 #include "base/wexception.h"
 
 class FileSystem;
-class GLSurfaceTexture;
+class Texture;
 class StreamWrite;
 class Surface;
 struct SDL_Surface;
@@ -44,7 +44,7 @@ public:
 };
 
 /// Loads the image 'fn' from 'fs'.
-GLSurfaceTexture* load_image(const std::string& fn, FileSystem* fs = nullptr);
+Texture* load_image(const std::string& fn, FileSystem* fs = nullptr);
 
 /// Loads the image 'fn' from 'fs' into an SDL_Surface. Caller must SDL_FreeSurface() the returned value.
 SDL_Surface* load_image_as_sdl_surface(const std::string& fn, FileSystem* fs = nullptr);

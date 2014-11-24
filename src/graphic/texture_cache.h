@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_GRAPHIC_SURFACE_CACHE_H
-#define WL_GRAPHIC_SURFACE_CACHE_H
+#ifndef WL_GRAPHIC_TEXTURE_CACHE_H
+#define WL_GRAPHIC_TEXTURE_CACHE_H
 
 #include <string>
 
@@ -26,7 +26,7 @@
 
 #include "base/macros.h"
 
-class GLSurfaceTexture;
+class Texture;
 
 // Caches Surfaces. It contains surfaces which must not be deleted and
 // transient surfaces that are always free to be deleted - somebody else must
@@ -35,32 +35,32 @@ class GLSurfaceTexture;
 // Nobody in Widelands should hold onto a Surface they get from this class,
 // instead, they should use it only temporarily and rerequest it whenever they
 // need it.
-class SurfaceCache {
+class TextureCache {
 public:
-	SurfaceCache() {}
-	virtual ~SurfaceCache() {}
+	TextureCache() {}
+	virtual ~TextureCache() {}
 
 	/// Deletes all surfaces in the cache leaving it as if it were just created.
 	virtual void flush() = 0;
 
 	/// Returns an entry if it is cached, nullptr otherwise.
-	virtual GLSurfaceTexture* get(const std::string& hash) = 0;
+	virtual Texture* get(const std::string& hash) = 0;
 
-	// Inserts this entry into the SurfaceCache. asserts() that there is no
+	// Inserts this entry into the TextureCache. asserts() that there is no
 	// entry with this hash already cached. Returns the given Surface for
 	// convenience. If 'transient' is false, this surface will not be deleted
 	// automatically - use this if surfaces are around for a long time and
 	// recreation is expensive (i.e. images loaded from disk).
-	virtual GLSurfaceTexture* insert(const std::string& hash, GLSurfaceTexture*, bool transient) = 0;
+	virtual Texture* insert(const std::string& hash, Texture*, bool transient) = 0;
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(SurfaceCache);
+	DISALLOW_COPY_AND_ASSIGN(TextureCache);
 };
 
 // Create a new Cache whichs combined pixels in all transient surfaces are
 // always below the given limit (Note: there is overhead for class members
 // which is not counted as the pixels make up the bulk of the size of a
 // surface).
-SurfaceCache* create_surface_cache(uint32_t transient_memory_in_bytes);
+TextureCache* create_texture_cache(uint32_t transient_memory_in_bytes);
 
-#endif  // end of include guard: WL_GRAPHIC_SURFACE_CACHE_H
+#endif  // end of include guard: WL_GRAPHIC_TEXTURE_CACHE_H

@@ -21,10 +21,10 @@
 
 #include "base/wexception.h"
 #include "graphic/gl/fields_to_draw.h"
-#include "graphic/gl/surface_texture.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
 #include "graphic/terrain_texture.h"
+#include "graphic/texture.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 
@@ -89,7 +89,7 @@ DitherProgram::DitherProgram() {
 	u_terrain_texture_ = glGetUniformLocation(gl_program_.object(), "u_terrain_texture");
 
 	SDL_Surface* sdlsurf = load_image_as_sdl_surface("world/pics/edge.png", g_fs);
-	dither_mask_.reset(new GLSurfaceTexture(sdlsurf, true));
+	dither_mask_.reset(new Texture(sdlsurf, true));
 }
 
 DitherProgram::~DitherProgram() {}
@@ -227,7 +227,7 @@ void DitherProgram::draw(const DescriptionMaintainer<TerrainDescription>& terrai
 		}
 		glBindTexture(GL_TEXTURE_2D,
 		              g_gr->get_maptexture_data(terrains.get_unmutable(i).get_texture())
-		                 ->surface()
+		                 ->texture()
 		                 .get_gl_texture());
 
 		glBufferData(GL_ARRAY_BUFFER,

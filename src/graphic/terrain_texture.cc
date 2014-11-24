@@ -24,8 +24,8 @@
 #include "base/deprecated.h"
 #include "base/log.h"
 #include "base/wexception.h"
-#include "graphic/gl/surface_texture.h"
 #include "graphic/image_io.h"
+#include "graphic/texture.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 
@@ -48,13 +48,13 @@ TerrainTexture::TerrainTexture(const std::vector<std::string>& texture_files, co
 		}
 
 		m_texture_image = fname;
-		SDL_Surface* surf = load_image_as_sdl_surface(fname, g_fs);
-		if (!surf) {
+		SDL_Surface* sdl_surface = load_image_as_sdl_surface(fname, g_fs);
+		if (!sdl_surface) {
 			throw wexception(
 			   "WARNING: Failed to load texture frame %s: %s\n", fname.c_str(), IMG_GetError());
 		}
-		if (surf->w != kTextureWidth || surf->h != kTextureHeight) {
-			SDL_FreeSurface(surf);
+		if (sdl_surface->w != kTextureWidth || sdl_surface->h != kTextureHeight) {
+			SDL_FreeSurface(sdl_surface);
 			throw wexception("WARNING: %s: texture must be %ix%i pixels big\n",
 			                 fname.c_str(),
 			                 kTextureWidth,
@@ -62,9 +62,9 @@ TerrainTexture::TerrainTexture(const std::vector<std::string>& texture_files, co
 		}
 
 		// calculate shades on the first frame
-		if (m_gl_textures.empty()) {
-			uint8_t top_left_pixel = static_cast<uint8_t*>(surf->pixels)[0];
-			SDL_Color top_left_pixel_color = surf->format->palette->colors[top_left_pixel];
+		if (m_textures.empty()) {
+			uint8_t top_left_pixel = static_cast<uint8_t*>(sdl_surface->pixels)[0];
+			SDL_Color top_left_pixel_color = sdl_surface->format->palette->colors[top_left_pixel];
 			for (int i = -128; i < 128; i++) {
 				const int shade = 128 + i;
 				int32_t r = std::min<int32_t>((top_left_pixel_color.r * shade) >> 7, 255);
@@ -73,10 +73,10 @@ TerrainTexture::TerrainTexture(const std::vector<std::string>& texture_files, co
 				m_minimap_colors[shade] = RGBColor(r, g, b);
 			}
 		}
-		m_gl_textures.emplace_back(new GLSurfaceTexture(surf));
+		m_textures.emplace_back(new Texture(sdl_surface));
 	}
 
-	if (m_gl_textures.empty())
+	if (m_textures.empty())
 		throw wexception("TerrainTexture has no frames");
 }
 
@@ -86,13 +86,13 @@ RGBColor TerrainTexture::get_minimap_color(int8_t shade) {
 
 void TerrainTexture::animate(uint32_t time)
 {
-	m_frame_num = (time / m_frametime) % m_gl_textures.size();
+	m_frame_num = (time / m_frametime) % m_textures.size();
 }
 
 const std::string& TerrainTexture::get_texture_image() const {
 	return m_texture_image;
 }
 
-const GLSurfaceTexture& TerrainTexture::surface() const {
-	return *m_gl_textures.at(m_frame_num);
+const Texture& TerrainTexture::texture() const {
+	return *m_textures.at(m_frame_num);
 }

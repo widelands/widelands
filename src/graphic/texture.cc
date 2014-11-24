@@ -16,7 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "graphic/gl/surface_texture.h"
+#include "graphic/texture.h"
 
 #include <cassert>
 
@@ -77,7 +77,7 @@ inline void reset_gl() {
  *
  * The initial data of the texture is undefined.
  */
-GLSurfaceTexture::GLSurfaceTexture(int w, int h)
+Texture::Texture(int w, int h)
 {
 	init(w, h);
 
@@ -94,7 +94,7 @@ GLSurfaceTexture::GLSurfaceTexture(int w, int h)
  *
  * \note Takes ownership of the given surface.
  */
-GLSurfaceTexture::GLSurfaceTexture(SDL_Surface * surface, bool intensity)
+Texture::Texture(SDL_Surface * surface, bool intensity)
 {
 	init(surface->w, surface->h);
 
@@ -132,17 +132,17 @@ GLSurfaceTexture::GLSurfaceTexture(SDL_Surface * surface, bool intensity)
 	SDL_FreeSurface(surface);
 }
 
-GLSurfaceTexture::~GLSurfaceTexture()
+Texture::~Texture()
 {
 	glDeleteTextures(1, &m_texture);
 }
 
-void GLSurfaceTexture::pixel_to_gl(float* x, float* y) const {
+void Texture::pixel_to_gl(float* x, float* y) const {
 	*x = (*x / m_w) * 2. - 1.;
 	*y = (*y / m_h) * 2. - 1.;
 }
 
-void GLSurfaceTexture::init(uint16_t w, uint16_t h)
+void Texture::init(uint16_t w, uint16_t h)
 {
 	m_w = w;
 	m_h = h;
@@ -160,7 +160,7 @@ void GLSurfaceTexture::init(uint16_t w, uint16_t h)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 }
 
-void GLSurfaceTexture::lock(LockMode mode) {
+void Texture::lock(LockMode mode) {
 	if (m_w <= 0 || m_h <= 0) {
 		return;
 	}
@@ -174,7 +174,7 @@ void GLSurfaceTexture::lock(LockMode mode) {
 	}
 }
 
-void GLSurfaceTexture::unlock(UnlockMode mode) {
+void Texture::unlock(UnlockMode mode) {
 	if (m_w <= 0 || m_h <= 0) {
 		return;
 	}
@@ -190,7 +190,7 @@ void GLSurfaceTexture::unlock(UnlockMode mode) {
 	m_pixels.reset(nullptr);
 }
 
-void GLSurfaceTexture::draw_rect(const Rect& rectangle, const RGBColor& clr)
+void Texture::draw_rect(const Rect& rectangle, const RGBColor& clr)
 {
 	if (m_w <= 0 || m_h <= 0) {
 		return;
@@ -204,7 +204,7 @@ void GLSurfaceTexture::draw_rect(const Rect& rectangle, const RGBColor& clr)
 /**
  * Draws a filled rectangle
  */
-void GLSurfaceTexture::fill_rect(const Rect& rectangle, const RGBAColor& clr)
+void Texture::fill_rect(const Rect& rectangle, const RGBAColor& clr)
 {
 	if (m_w <= 0 || m_h <= 0) {
 		return;
@@ -218,7 +218,7 @@ void GLSurfaceTexture::fill_rect(const Rect& rectangle, const RGBAColor& clr)
 /**
  * Change the brightness of the given rectangle
  */
-void GLSurfaceTexture::brighten_rect(const Rect& rectangle, const int32_t factor)
+void Texture::brighten_rect(const Rect& rectangle, const int32_t factor)
 {
 	if (m_w <= 0 || m_h <= 0) {
 		return;
@@ -229,7 +229,7 @@ void GLSurfaceTexture::brighten_rect(const Rect& rectangle, const int32_t factor
 	reset_gl();
 }
 
-void GLSurfaceTexture::draw_line
+void Texture::draw_line
 	(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t gwidth)
 {
 	if (m_w <= 0 || m_h <= 0) {
@@ -241,8 +241,8 @@ void GLSurfaceTexture::draw_line
 	reset_gl();
 }
 
-void GLSurfaceTexture::blit
-	(const Point& dst, const GLSurfaceTexture* src, const Rect& srcrc, Composite cm)
+void Texture::blit
+	(const Point& dst, const Texture* src, const Rect& srcrc, Composite cm)
 {
 	if (m_w <= 0 || m_h <= 0) {
 		return;

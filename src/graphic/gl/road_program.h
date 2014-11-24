@@ -28,7 +28,7 @@
 #include "graphic/gl/utils.h"
 #include "logic/roadtype.h"
 
-class GLSurfaceTexture;
+class Texture;
 class Surface;
 
 class RoadProgram {
@@ -84,8 +84,8 @@ private:
 	std::vector<PerVertexData> vertices_;
 
 	// The road textures.
-	std::unique_ptr<GLSurfaceTexture> normal_road_texture_;
-	std::unique_ptr<GLSurfaceTexture> busy_road_texture_;
+	std::unique_ptr<Texture> normal_road_texture_;
+	std::unique_ptr<Texture> busy_road_texture_;
 
 	DISALLOW_COPY_AND_ASSIGN(RoadProgram);
 };

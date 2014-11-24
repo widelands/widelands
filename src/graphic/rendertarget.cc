@@ -175,7 +175,7 @@ void RenderTarget::blit(const Point& dst, const Image* image, Composite cm, UI::
 	Rect srcrc(Point(0, 0), image->width(), image->height());
 
 	if (to_surface_geometry(&dstpoint, &srcrc))
-		m_surface->blit(dstpoint, image->surface(), srcrc, cm);
+		m_surface->blit(dstpoint, image->texture(), srcrc, cm);
 }
 
 /**
@@ -196,7 +196,7 @@ void RenderTarget::blitrect
 
 	Point dstpt(dst);
 	if (to_surface_geometry(&dstpt, &srcrc))
-		m_surface->blit(dstpt, image->surface(), srcrc, cm);
+		m_surface->blit(dstpt, image->texture(), srcrc, cm);
 }
 
 /**
@@ -251,7 +251,7 @@ void RenderTarget::tile(const Rect& rect, const Image* image, const Point& gofs,
 				if (tx + srcrc.w > r.w)
 					srcrc.w = r.w - tx;
 
-				m_surface->blit(r.top_left() + Point(tx, ty), image->surface(), srcrc, cm);
+				m_surface->blit(r.top_left() + Point(tx, ty), image->texture(), srcrc, cm);
 
 				tx += srcrc.w;
 

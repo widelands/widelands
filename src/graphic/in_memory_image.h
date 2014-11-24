@@ -22,9 +22,9 @@
 
 #include <string>
 
-class GLSurfaceTexture;
+class Texture;
 class Image;
 
-const Image* new_in_memory_image(const std::string& hash, GLSurfaceTexture* surf);
+const Image* new_in_memory_image(const std::string& hash, Texture* texture);
 
 #endif  // end of include guard: WL_GRAPHIC_IN_MEMORY_IMAGE_H

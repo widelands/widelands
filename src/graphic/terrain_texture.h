@@ -28,7 +28,7 @@
 
 #include "graphic/colormap.h"
 
-class GLSurfaceTexture;
+class Texture;
 
 /// TerrainTextures have a fixed size and are squares.
 constexpr int kTextureWidth = 64;
@@ -42,8 +42,8 @@ struct TerrainTexture {
 	// Returns the path to a representative image for this texture.
 	const std::string& get_texture_image() const;
 
-	// Returns the surface for the current animation phase.
-	const GLSurfaceTexture& surface() const;
+	// Returns the texture for the current animation phase.
+	const Texture& texture() const;
 
 	// Return the basic terrain colour to be used in the minimap.
 	RGBColor get_minimap_color(int8_t shade);
@@ -56,7 +56,7 @@ private:
 	int32_t     m_frame_num;
 	std::string m_texture_image;
 	uint32_t    m_frametime;
-	std::vector<std::unique_ptr<GLSurfaceTexture>> m_gl_textures;
+	std::vector<std::unique_ptr<Texture>> m_textures;
 };
 
 #endif  // end of include guard: WL_GRAPHIC_TERRAIN_TEXTURE_H

@@ -35,15 +35,15 @@
 #include "graphic/animation.h"
 #include "graphic/diranimations.h"
 #include "graphic/font_handler.h"
-#include "graphic/gl/surface_texture.h"
 #include "graphic/gl/system_headers.h"
 #include "graphic/image.h"
 #include "graphic/image_io.h"
 #include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
 #include "graphic/screen.h"
-#include "graphic/surface_cache.h"
 #include "graphic/terrain_texture.h"
+#include "graphic/texture.h"
+#include "graphic/texture_cache.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
@@ -59,7 +59,7 @@ namespace  {
 
 /// The size of the transient (i.e. temporary) surfaces in the cache in bytes.
 /// These are all surfaces that are not loaded from disk.
-const uint32_t TRANSIENT_SURFACE_CACHE_SIZE = 160 << 20;   // shifting converts to MB
+const uint32_t TRANSIENT_TEXTURE_CACHE_SIZE = 160 << 20;   // shifting converts to MB
 
 // Sets the icon for the application.
 void set_icon(SDL_Window* sdl_window) {
@@ -82,8 +82,8 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool fullscreen)
    : m_window_mode_width(window_mode_w),
      m_window_mode_height(window_mode_h),
      m_update(true),
-     surface_cache_(create_surface_cache(TRANSIENT_SURFACE_CACHE_SIZE)),
-     image_cache_(new ImageCache(surface_cache_.get())),
+     texture_cache_(create_texture_cache(TRANSIENT_TEXTURE_CACHE_SIZE)),
+     image_cache_(new ImageCache(texture_cache_.get())),
      animation_manager_(new AnimationManager())
 {
 	ImageTransformations::initialize();
@@ -163,7 +163,7 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool fullscreen)
 Graphic::~Graphic()
 {
 	m_maptextures.clear();
-	surface_cache_->flush();
+	texture_cache_->flush();
 	// TODO(unknown): this should really not be needed, but currently is :(
 	if (UI::g_fh)
 		UI::g_fh->flush();
@@ -300,7 +300,7 @@ void Graphic::refresh()
  * @param sw a StreamWrite where the png is written to
  */
 void Graphic::save_png(const Image* image, StreamWrite * sw) const {
-	save_surface_to_png(image->surface(), sw);
+	save_surface_to_png(image->texture(), sw);
 }
 
 uint32_t Graphic::new_maptexture(const std::vector<std::string>& texture_files, const uint32_t frametime)

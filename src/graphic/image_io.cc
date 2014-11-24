@@ -26,7 +26,7 @@
 #include <png.h>
 
 #include "base/wexception.h"
-#include "graphic/gl/surface_texture.h"
+#include "graphic/texture.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
@@ -47,8 +47,8 @@ void png_flush_function(png_structp png_ptr) {
 
 }  // namespace
 
-GLSurfaceTexture* load_image(const std::string& fname, FileSystem* fs) {
-	return new GLSurfaceTexture(load_image_as_sdl_surface(fname, fs));
+Texture* load_image(const std::string& fname, FileSystem* fs) {
+	return new Texture(load_image_as_sdl_surface(fname, fs));
 }
 
 SDL_Surface* load_image_as_sdl_surface(const std::string& fname, FileSystem* fs) {

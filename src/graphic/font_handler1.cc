@@ -25,15 +25,15 @@
 #include <boost/utility.hpp>
 
 #include "base/wexception.h"
-#include "graphic/gl/surface_texture.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/image_cache.h"
 #include "graphic/rendertarget.h"
-#include "graphic/surface_cache.h"
 #include "graphic/text/rt_errors.h"
 #include "graphic/text/rt_render.h"
 #include "graphic/text/sdl_ttf_font.h"
+#include "graphic/texture.h"
+#include "graphic/texture_cache.h"
 #include "io/filesystem/filesystem.h"
 
 
@@ -47,24 +47,24 @@ namespace {
 class RTImage : public Image {
 public:
 	RTImage
-		(const string& ghash, SurfaceCache* surface_cache, RT::Renderer*
+		(const string& ghash, TextureCache* texture_cache, RT::Renderer*
 		 rt_renderer, const string& text, uint16_t gwidth)
-		: hash_(ghash), text_(text), width_(gwidth), surface_cache_(surface_cache),
+		: hash_(ghash), text_(text), width_(gwidth), texture_cache_(texture_cache),
 		  rt_renderer_(rt_renderer)
 	{}
 	virtual ~RTImage() {}
 
 	// Implements Image.
-	uint16_t width() const override {return surface()->width();}
-	uint16_t height() const override {return surface()->height();}
+	uint16_t width() const override {return texture()->width();}
+	uint16_t height() const override {return texture()->height();}
 	const string& hash() const override {return hash_;}
-	GLSurfaceTexture* surface() const override {
-		GLSurfaceTexture* surf = surface_cache_->get(hash_);
+	Texture* texture() const override {
+		Texture* surf = texture_cache_->get(hash_);
 		if (surf)
 			return surf;
 
 		surf = rt_renderer_->render(text_, width_);
-		surface_cache_->insert(hash_, surf, true);
+		texture_cache_->insert(hash_, surf, true);
 		return surf;
 	}
 
@@ -74,7 +74,7 @@ private:
 	uint16_t width_;
 
 	// Nothing owned.
-	SurfaceCache* const surface_cache_;
+	TextureCache* const texture_cache_;
 	RT::Renderer* const rt_renderer_;
 };
 
@@ -87,8 +87,8 @@ namespace UI {
 // be a problem.
 class FontHandler1 : public IFontHandler1 {
 public:
-	FontHandler1(ImageCache* image_cache, SurfaceCache* surface_cache, RT::Renderer* renderer) :
-		surface_cache_(surface_cache), image_cache_(image_cache), renderer_(renderer) {}
+	FontHandler1(ImageCache* image_cache, TextureCache* texture_cache, RT::Renderer* renderer) :
+		texture_cache_(texture_cache), image_cache_(image_cache), renderer_(renderer) {}
 	virtual ~FontHandler1() {}
 
 	const Image* render(const string& text, uint16_t w = 0) override {
@@ -97,14 +97,14 @@ public:
 		if (image_cache_->has(hash))
 			return image_cache_->get(hash);
 
-		std::unique_ptr<RTImage> image(new RTImage(hash, surface_cache_, renderer_.get(), text, w));
-		image->surface(); // force the rich text to get rendered in case there is an exception thrown.
+		std::unique_ptr<RTImage> image(new RTImage(hash, texture_cache_, renderer_.get(), text, w));
+		image->texture(); // force the rich text to get rendered in case there is an exception thrown.
 
 		return image_cache_->insert(image.release());
 	}
 
 private:
-	SurfaceCache* const surface_cache_;  // not owned
+	TextureCache* const texture_cache_;  // not owned
 	ImageCache* const image_cache_;  // not owned
 	std::unique_ptr<RT::Renderer> renderer_;
 };
