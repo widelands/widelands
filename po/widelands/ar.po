@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-11-12 11:40+0000\n"
+"POT-Creation-Date: 2014-11-14 17:33+0000\n"
 "PO-Revision-Date: 2014-10-04 22:12+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n % 100 >= "
 "3 && n % 100 <= 10 ? 3 : n % 100 >= 11 && n % 100 <= 99 ? 4 : 5;\n"
-"X-Launchpad-Export-Date: 2014-11-13 05:49+0000\n"
+"X-Launchpad-Export-Date: 2014-11-15 05:41+0000\n"
 "X-Generator: Launchpad (build 17241)\n"
 "Language: ar\n"
 
@@ -205,35 +205,35 @@ msgstr "تراجع"
 msgid "Redo"
 msgstr "إعاده"
 
-#: ../../src/editor/editorinteractive.cc:190
+#: ../../src/editor/editorinteractive.cc:188
 msgid "Unsupported format"
 msgstr "صيغة غير مدعومة"
 
-#: ../../src/editor/editorinteractive.cc:191
+#: ../../src/editor/editorinteractive.cc:189
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr "وايد لاند غير قادرة على فتح الملف \"%s\". يبدو ان الملف غير مكتمل."
 
-#: ../../src/editor/editorinteractive.cc:206
+#: ../../src/editor/editorinteractive.cc:204
 msgid "Creating players"
 msgstr "يُنشىء اللاعبين"
 
-#: ../../src/editor/editorinteractive.cc:212
-#: ../../src/editor/editorinteractive.cc:600
+#: ../../src/editor/editorinteractive.cc:210
+#: ../../src/editor/editorinteractive.cc:597
 msgid "Loading graphics..."
 msgstr "يُحمل الرسوميات..."
 
-#: ../../src/editor/editorinteractive.cc:258
+#: ../../src/editor/editorinteractive.cc:256
 msgid "Unsaved Map"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:259
+#: ../../src/editor/editorinteractive.cc:257
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "هذه الخريطه لم تُحفظ بعد ، اترغب حقاً بالخروج؟"
 
-#: ../../src/editor/editorinteractive.cc:595
+#: ../../src/editor/editorinteractive.cc:592
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:147
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:510
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:178
@@ -241,7 +241,7 @@ msgstr "هذه الخريطه لم تُحفظ بعد ، اترغب حقاً با
 msgid "No Name"
 msgstr "بدون إسم"
 
-#: ../../src/editor/editorinteractive.cc:596
+#: ../../src/editor/editorinteractive.cc:593
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:148
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:511
 #: ../../src/logic/map.h:181 ../../src/ui_fsmenu/netsetup_lan.cc:199
@@ -3110,33 +3110,33 @@ msgstr "تدمير المبنى؟"
 msgid "Do you really want to destroy this %s?"
 msgstr "أمتأكد من رغبتك فى تدمير هذا الـ %s؟"
 
-#: ../../src/wui/actionconfirm.cc:287
+#: ../../src/wui/actionconfirm.cc:286
 msgid "Dismantle building?"
 msgstr "تفكيك المبنى؟"
 
-#: ../../src/wui/actionconfirm.cc:288
+#: ../../src/wui/actionconfirm.cc:287
 #, c-format
 msgid "Do you really want to dismantle this %s?"
 msgstr "أمتأكد من رغبتك فى تفكيك هذا الـ %s؟"
 
-#: ../../src/wui/actionconfirm.cc:348
+#: ../../src/wui/actionconfirm.cc:346
 msgid "Enhance building?"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:349
+#: ../../src/wui/actionconfirm.cc:347
 #, c-format
 msgid "Do you really want to enhance this %s?"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:401
+#: ../../src/wui/actionconfirm.cc:398
 msgid "Do you really want to sink this ship?"
 msgstr "أمتأكد من رغبتك فى إغراق هذه السفينه؟"
 
-#: ../../src/wui/actionconfirm.cc:401 ../../src/wui/actionconfirm.cc:442
+#: ../../src/wui/actionconfirm.cc:398 ../../src/wui/actionconfirm.cc:438
 msgid "Sink the ship?"
 msgstr "إغراق السفينه؟"
 
-#: ../../src/wui/actionconfirm.cc:442
+#: ../../src/wui/actionconfirm.cc:438
 msgid "Do you really want to cancel the active expedition?"
 msgstr ""
 

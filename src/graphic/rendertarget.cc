@@ -166,7 +166,7 @@ void RenderTarget::brighten_rect(const Rect& rect, int32_t factor)
  * If the source surface contains a alpha channel this is used during
  * the blit.
  */
-void RenderTarget::blit(const Point& dst, const Image* image, Composite cm, UI::Align align)
+void RenderTarget::blit(const Point& dst, const Image* image, BlendMode blend_mode, UI::Align align)
 {
 	Point dstpoint(dst);
 
@@ -175,14 +175,14 @@ void RenderTarget::blit(const Point& dst, const Image* image, Composite cm, UI::
 	Rect srcrc(Point(0, 0), image->width(), image->height());
 
 	if (to_surface_geometry(&dstpoint, &srcrc))
-		m_surface->blit(dstpoint, image->surface(), srcrc, cm);
+		m_surface->blit(dstpoint, image->texture(), srcrc, blend_mode);
 }
 
 /**
  * Like \ref blit, but use only a sub-rectangle of the source image.
  */
 void RenderTarget::blitrect
-	(const Point& dst, const Image* image, const Rect& gsrcrc, Composite cm)
+	(const Point& dst, const Image* image, const Rect& gsrcrc, BlendMode blend_mode)
 {
 	assert(0 <= gsrcrc.x);
 	assert(0 <= gsrcrc.y);
@@ -196,7 +196,7 @@ void RenderTarget::blitrect
 
 	Point dstpt(dst);
 	if (to_surface_geometry(&dstpt, &srcrc))
-		m_surface->blit(dstpt, image->surface(), srcrc, cm);
+		m_surface->blit(dstpt, image->texture(), srcrc, blend_mode);
 }
 
 /**
@@ -205,7 +205,7 @@ void RenderTarget::blitrect
  * The pixel from ofs inside image is placed at the top-left corner of
  * the filled rectangle.
  */
-void RenderTarget::tile(const Rect& rect, const Image* image, const Point& gofs, Composite cm)
+void RenderTarget::tile(const Rect& rect, const Image* image, const Point& gofs, BlendMode blend_mode)
 {
 	int32_t srcw = image->width();
 	int32_t srch = image->height();
@@ -251,7 +251,7 @@ void RenderTarget::tile(const Rect& rect, const Image* image, const Point& gofs,
 				if (tx + srcrc.w > r.w)
 					srcrc.w = r.w - tx;
 
-				m_surface->blit(r.top_left() + Point(tx, ty), image->surface(), srcrc, cm);
+				m_surface->blit(r.top_left() + Point(tx, ty), image->texture(), srcrc, blend_mode);
 
 				tx += srcrc.w;
 

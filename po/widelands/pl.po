@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-11-12 11:40+0000\n"
-"PO-Revision-Date: 2014-10-20 12:18+0000\n"
+"POT-Creation-Date: 2014-11-14 17:33+0000\n"
+"PO-Revision-Date: 2014-11-17 11:47+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-11-13 05:51+0000\n"
+"X-Launchpad-Export-Date: 2014-11-18 05:34+0000\n"
 "X-Generator: Launchpad (build 17241)\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -39,7 +39,7 @@ msgstr "Defensywne"
 #: ../../src/base/i18n.cc:331
 #, c-format
 msgid "%1$s & %2$s"
-msgstr ""
+msgstr "%1$s i %2$s"
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
@@ -202,11 +202,11 @@ msgstr "Cofnij"
 msgid "Redo"
 msgstr "Ponów"
 
-#: ../../src/editor/editorinteractive.cc:190
+#: ../../src/editor/editorinteractive.cc:188
 msgid "Unsupported format"
 msgstr "Nieobsługiwany format"
 
-#: ../../src/editor/editorinteractive.cc:191
+#: ../../src/editor/editorinteractive.cc:189
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -215,24 +215,24 @@ msgstr ""
 "Widelands nie mogło załadować pliku \"%s\". Format pliku wygląda na "
 "nieobsługiwany."
 
-#: ../../src/editor/editorinteractive.cc:206
+#: ../../src/editor/editorinteractive.cc:204
 msgid "Creating players"
 msgstr "Tworzenie graczy"
 
-#: ../../src/editor/editorinteractive.cc:212
-#: ../../src/editor/editorinteractive.cc:600
+#: ../../src/editor/editorinteractive.cc:210
+#: ../../src/editor/editorinteractive.cc:597
 msgid "Loading graphics..."
 msgstr "Ładowanie grafiki..."
 
-#: ../../src/editor/editorinteractive.cc:258
+#: ../../src/editor/editorinteractive.cc:256
 msgid "Unsaved Map"
 msgstr "Niezapisana mapa"
 
-#: ../../src/editor/editorinteractive.cc:259
+#: ../../src/editor/editorinteractive.cc:257
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Mapa nie została zapisana, czy na pewno chcesz wyjść?"
 
-#: ../../src/editor/editorinteractive.cc:595
+#: ../../src/editor/editorinteractive.cc:592
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:147
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:510
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:178
@@ -240,7 +240,7 @@ msgstr "Mapa nie została zapisana, czy na pewno chcesz wyjść?"
 msgid "No Name"
 msgstr "Bez nazwy"
 
-#: ../../src/editor/editorinteractive.cc:596
+#: ../../src/editor/editorinteractive.cc:593
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:148
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:511
 #: ../../src/logic/map.h:181 ../../src/ui_fsmenu/netsetup_lan.cc:199
@@ -447,7 +447,7 @@ msgstr "Nazwa:"
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:78
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:89
 msgid "Authors:"
-msgstr ""
+msgstr "Autorzy:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:86
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:69
@@ -956,7 +956,7 @@ msgstr "Gracz 1"
 
 #: ../../src/logic/map.h:182
 msgid "No description defined"
-msgstr ""
+msgstr "Brak opisu"
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to
 #. * TRANSLATORS: %2% is the maximum number of soldier slots in the building
@@ -1423,7 +1423,7 @@ msgstr "Błąd konwersji"
 #: ../../src/network/internet_gaming.cc:833
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
-msgstr ""
+msgstr "Nie wiem, czy \"%s\" to prawda czy fałsz"
 
 #: ../../src/network/internet_gaming_messages.cc:42
 #, c-format
@@ -1967,7 +1967,7 @@ msgstr "wyłącz"
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
 #: ../../src/scripting/lua_game.cc:987
 msgid "%1% (%2%)"
-msgstr ""
+msgstr "%1% (%2%)"
 
 #: ../../src/ui_basic/helpwindow.cc:48 ../../src/ui_basic/helpwindow.cc:191
 #, c-format
@@ -2010,7 +2010,7 @@ msgstr "Zmniejsz wartość o 10"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:50
 msgid "Choose a campaign"
-msgstr ""
+msgstr "Wybierz kampanię"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:80
 #: ../../src/ui_fsmenu/campaign_select.cc:164
@@ -2023,38 +2023,38 @@ msgstr "Opis:"
 #: ../../src/ui_fsmenu/campaign_select.cc:331
 #: ../../src/ui_fsmenu/loadgame.cc:124
 msgid "Return to the main menu"
-msgstr ""
+msgstr "Powrót do menu głównego"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:91
 msgid "Play this campaign"
-msgstr ""
+msgstr "Zagraj w tę kampanię"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:92
 msgid "The name of this campaign"
-msgstr ""
+msgstr "Nazwa kampanii"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:93
 msgid "The tribe you will be playing"
-msgstr ""
+msgstr "Plemię, którym będziesz grać"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:94
 msgid "The difficulty of this campaign"
-msgstr ""
+msgstr "Poziom trudności kampanii"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:95
 #: ../../src/ui_fsmenu/campaign_select.cc:339
 #: ../../src/ui_fsmenu/mapselect.cc:97
 msgid "Story and hints"
-msgstr ""
+msgstr "Fabuła i wskazówki"
 
 #. * TRANSLATORS: Campaign difficulty table header
 #: ../../src/ui_fsmenu/campaign_select.cc:109
 msgid "Diff."
-msgstr ""
+msgstr "Trud."
 
 #: ../../src/ui_fsmenu/campaign_select.cc:109
 msgid "Difficulty"
-msgstr ""
+msgstr "Poziom trudności"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:110
 #: ../../src/wui/multiplayersetupgroup.cc:451
@@ -2063,19 +2063,19 @@ msgstr "Plemię"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:110
 msgid "Tribe Name"
-msgstr ""
+msgstr "Nazwa plemienia"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:111
 msgid "Campaign Name"
-msgstr ""
+msgstr "Nazwa kampanii"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:161
 msgid "Campaign Name:"
-msgstr ""
+msgstr "Nazwa kampanii:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:162
 msgid "Tribe:"
-msgstr ""
+msgstr "Plemię:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:163
 msgid "Difficulty:"
@@ -2083,47 +2083,47 @@ msgstr "Poziom trudności:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:291
 msgid "Choose a scenario"
-msgstr ""
+msgstr "Wybierz scenariusz"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:291
 msgid "Choose a tutorial"
-msgstr ""
+msgstr "Wybierz samouczek"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:333
 msgid "Play this tutorial"
-msgstr ""
+msgstr "Zagraj w ten samouczek"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:334
 msgid "The name of this tutorial"
-msgstr ""
+msgstr "Nazwa samouczka"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:335
 msgid "What you will learn in this tutorial"
-msgstr ""
+msgstr "Materiał przerabiany w samouczku"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:337
 msgid "Play this scenario"
-msgstr ""
+msgstr "Zagraj w ten scenariusz"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:338
 msgid "The name of this scenario"
-msgstr ""
+msgstr "Nazwa scenariusza"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:356
 msgid "The order in which the tutorials should be played"
-msgstr ""
+msgstr "Zalecana kolejność przechodzenia samouczków"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:357
 msgid "Tutorial Name"
-msgstr ""
+msgstr "Nazwa samouczka"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:359
 msgid "The number of this scenario in the campaign"
-msgstr ""
+msgstr "Numer scenariusza w kampanii"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:360
 msgid "Scenario Name"
-msgstr ""
+msgstr "Nazwa scenariusza"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:362
 msgid "#"
@@ -2132,44 +2132,47 @@ msgstr "#"
 #: ../../src/ui_fsmenu/campaign_select.cc:398
 #: ../../src/ui_fsmenu/mapselect.cc:292
 msgid "Scenario:"
-msgstr ""
+msgstr "Scenariusz:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:398
 msgid "Tutorial:"
-msgstr ""
+msgstr "Samouczek:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:414
 #, c-format
 msgid "Invalid path to file in campaigns.conf: %s"
-msgstr ""
+msgstr "Błędna ścieżka do pliku w campaigns.conf: %s"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:425
 msgid "The designer of this tutorial"
 msgid_plural "The designers of this tutorial"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Projektant samouczka"
+msgstr[1] "Projektanci samouczka"
+msgstr[2] "Projektanci samouczka"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:428
 msgid "The designer of this scenario"
 msgid_plural "The designers of this scenario"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Projektant scenariusza"
+msgstr[1] "Projektantci scenariusza"
+msgstr[2] "Projektanci scenariusza"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:431
 #: ../../src/ui_fsmenu/mapselect.cc:318
 msgid "Author:"
 msgid_plural "Authors:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Autor:"
+msgstr[1] "Autorzy:"
+msgstr[2] "Autorzy:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:453
 msgid "Pick a tutorial from the list, then hit \"OK\"."
-msgstr ""
+msgstr "Wybierz scenariusz z listy i naciśnij \"OK\"."
 
 #: ../../src/ui_fsmenu/campaign_select.cc:455
 msgid ""
 "You can see a description of the currently selected tutorial on the right."
-msgstr ""
+msgstr "Po prawej znajdziesz opis wybranego obecnie scenariusza."
 
 #: ../../src/ui_fsmenu/editor.cc:36 ../../src/ui_fsmenu/main.cc:60
 msgid "Editor"
@@ -2586,7 +2589,7 @@ msgstr "Wybierz powtórkę"
 
 #: ../../src/ui_fsmenu/loadgame.cc:59
 msgid "Choose a saved game"
-msgstr ""
+msgstr "Wybierz zapisaną grę"
 
 #: ../../src/ui_fsmenu/loadgame.cc:97
 #: ../../src/wui/game_main_menu_save_game.cc:110
@@ -2595,69 +2598,69 @@ msgstr "Usuń"
 
 #: ../../src/ui_fsmenu/loadgame.cc:119
 msgid "The time that elapsed inside this game"
-msgstr ""
+msgstr "Czas, jaki upłynął w grze"
 
 #: ../../src/ui_fsmenu/loadgame.cc:120
 msgid "The number of players"
-msgstr ""
+msgstr "Licba graczy"
 
 #: ../../src/ui_fsmenu/loadgame.cc:121
 msgid "The win condition that was set for this game"
-msgstr ""
+msgstr "Warunki zwycięstwa w grze"
 
 #: ../../src/ui_fsmenu/loadgame.cc:125
 msgid "Load this replay"
-msgstr ""
+msgstr "Wczytaj tę powtórkę"
 
 #: ../../src/ui_fsmenu/loadgame.cc:126
 msgid "The map that this replay is based on"
-msgstr ""
+msgstr "Mapa powtórki"
 
 #: ../../src/ui_fsmenu/loadgame.cc:127
 msgid "Delete this replay"
-msgstr ""
+msgstr "Usuń tę powtórkę"
 
 #: ../../src/ui_fsmenu/loadgame.cc:129 ../../src/ui_fsmenu/mapselect.cc:94
 msgid "Return to the single player menu"
-msgstr ""
+msgstr "Powrót do menu jednego gracza"
 
 #: ../../src/ui_fsmenu/loadgame.cc:130
 msgid "Load this game"
-msgstr ""
+msgstr "Wczytaj tę grę"
 
 #: ../../src/ui_fsmenu/loadgame.cc:131
 msgid "The map that this game is based on"
-msgstr ""
+msgstr "Mapa, na której toczy się ta gra"
 
 #: ../../src/ui_fsmenu/loadgame.cc:132
 msgid "Delete this game"
-msgstr ""
+msgstr "Usuń tę grę"
 
 #: ../../src/ui_fsmenu/loadgame.cc:141
 msgid "Save Date"
-msgstr ""
+msgstr "Zapisz datę"
 
 #: ../../src/ui_fsmenu/loadgame.cc:141
 msgid "The date this game was saved"
-msgstr ""
+msgstr "Data zapisu tej gry"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load.
 #. * TRANSLATORS: %s is a list of game modes.
 #: ../../src/ui_fsmenu/loadgame.cc:158
 #, c-format
 msgid "Game Mode: %s."
-msgstr ""
+msgstr "Tryb gry: %s."
 
 #: ../../src/ui_fsmenu/loadgame.cc:161
 msgid "Numbers are the number of players."
-msgstr ""
+msgstr "Liczby oznaczają liczby graczy."
 
 #. * TRANSLATORS: Game Mode table column when choosing a game/replay to load.
 #. * TRANSLATORS: Keep this to 5 letters maximum.
 #. * TRANSLATORS: A tooltip will explain if you need to use an abbreviation.
 #: ../../src/ui_fsmenu/loadgame.cc:167
 msgid "Mode"
-msgstr ""
+msgstr "Tryb"
 
 #: ../../src/ui_fsmenu/loadgame.cc:171 ../../src/ui_fsmenu/mapselect.cc:106
 msgid "Map Name"
@@ -2665,35 +2668,35 @@ msgstr "Nazwa mapy"
 
 #: ../../src/ui_fsmenu/loadgame.cc:171
 msgid "The name of the map that was played"
-msgstr ""
+msgstr "Nazwa mapy, na której toczyła się ta gra"
 
 #: ../../src/ui_fsmenu/loadgame.cc:175
 msgid "Filename"
-msgstr ""
+msgstr "Nazwa pliku"
 
 #: ../../src/ui_fsmenu/loadgame.cc:175
 msgid "The filename the game was saved under"
-msgstr ""
+msgstr "Nazwa, pod którą zapisana została ta gra"
 
 #: ../../src/ui_fsmenu/loadgame.cc:228
 msgid "Save Date:"
-msgstr ""
+msgstr "Data zapisu:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:237 ../../src/ui_fsmenu/loadgame.cc:363
 msgid "Filename:"
-msgstr ""
+msgstr "Nazwa pliku:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:241
 msgid "Do you really want to delete this replay?"
-msgstr ""
+msgstr "Czy na pewno chcesz usunąć tę powtórkę?"
 
 #: ../../src/ui_fsmenu/loadgame.cc:244
 msgid "Do you really want to delete this game?"
-msgstr ""
+msgstr "Czy na pewno chcesz usunąć tę grę?"
 
 #: ../../src/ui_fsmenu/loadgame.cc:248
 msgid "Confirm deleting file"
-msgstr ""
+msgstr "Potwierdź usunięcie pliku"
 
 #: ../../src/ui_fsmenu/loadgame.cc:280
 msgid "Gametime:"
@@ -2701,25 +2704,25 @@ msgstr "Czas gry:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:282
 msgid "Win Condition:"
-msgstr ""
+msgstr "Warunek zwycięstwa:"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay
 #. * TRANSLATORS: hour:minute
 #: ../../src/ui_fsmenu/loadgame.cc:471
 msgid "Today, %1%:%2%"
-msgstr ""
+msgstr "Dzisiaj, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay
 #. * TRANSLATORS: hour:minute
 #: ../../src/ui_fsmenu/loadgame.cc:484
 msgid "Yesterday, %1%:%2%"
-msgstr ""
+msgstr "Wczoraj, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay
 #. * TRANSLATORS: month day, year
 #: ../../src/ui_fsmenu/loadgame.cc:490
 msgid "%2% %1%, %3%"
-msgstr ""
+msgstr "%1% %2%, %3%"
 
 #. * TRANSLATORS: "Single Player" entry in the Game Mode table column.
 #. * TRANSLATORS: "Keep this to 6 letters maximum.
@@ -2727,7 +2730,7 @@ msgstr ""
 #. * TRANSLATORS: Make sure that this translation is consistent with the tooltip.
 #: ../../src/ui_fsmenu/loadgame.cc:516
 msgid "SP"
-msgstr ""
+msgstr "1 gr."
 
 #. * TRANSLATORS: "Multiplayer Host" entry in the Game Mode table column.
 #. * TRANSLATORS: "Keep this to 2 letters maximum.
@@ -2736,7 +2739,7 @@ msgstr ""
 #. * TRANSLATORS: %1% is the number of players
 #: ../../src/ui_fsmenu/loadgame.cc:524
 msgid "H (%1%)"
-msgstr ""
+msgstr "H(%1%)"
 
 #. * TRANSLATORS: "Multiplayer" entry in the Game Mode table column.
 #. * TRANSLATORS: "Keep this to 2 letters maximum.
@@ -2745,12 +2748,12 @@ msgstr ""
 #. * TRANSLATORS: %1% is the number of players
 #: ../../src/ui_fsmenu/loadgame.cc:533
 msgid "MP (%1%)"
-msgstr ""
+msgstr "WG(%1%)"
 
 #. * TRANSLATORS: Used in filenames for loading games
 #: ../../src/ui_fsmenu/loadgame.cc:546
 msgid "Autosave: %1%"
-msgstr ""
+msgstr "Autozapis: %1%"
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be loaded
 #: ../../src/ui_fsmenu/loadgame.cc:557
@@ -2758,17 +2761,19 @@ msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
 msgstr ""
+"Nie można wczytać pliku, gdyż jest on w złym formacie. Możliwe, że został on "
+"utworzony przez starszą wersję Widelands."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
 #: ../../src/ui_fsmenu/loadgame.cc:560
 msgid "Error message:"
-msgstr ""
+msgstr "Komunikat błędu:"
 
 #. * TRANSLATORS: Prefix for incompatible files in load game screens
 #: ../../src/ui_fsmenu/loadgame.cc:573 ../../src/ui_fsmenu/loadgame.cc:575
 #, c-format
 msgid "Incompatible: %s"
-msgstr ""
+msgstr "Niekompatybilny: %s"
 
 #: ../../src/ui_fsmenu/main.cc:40
 msgid "Play Tutorial"
@@ -2818,32 +2823,32 @@ msgstr "Wybierz mapę"
 
 #: ../../src/ui_fsmenu/mapselect.cc:89
 msgid "Return to the editor menu"
-msgstr ""
+msgstr "Powrót do menu edytora"
 
 #: ../../src/ui_fsmenu/mapselect.cc:92
 msgid "Return to the multiplayer game setup"
-msgstr ""
+msgstr "Powrót do ustawień gry dla wielu graczy"
 
 #: ../../src/ui_fsmenu/mapselect.cc:105
 msgid "Number of players"
-msgstr ""
+msgstr "Liczba graczy"
 
 #. * TRANSLATORS: Column title for number of players in map list
 #: ../../src/ui_fsmenu/mapselect.cc:105
 msgid "Pl."
-msgstr ""
+msgstr "Gr."
 
 #: ../../src/ui_fsmenu/mapselect.cc:106
 msgid "The name of the map or scenario"
-msgstr ""
+msgstr "Nazwa mapy lub scenariusza"
 
 #: ../../src/ui_fsmenu/mapselect.cc:108
 msgid "Size"
-msgstr ""
+msgstr "Rozmiar"
 
 #: ../../src/ui_fsmenu/mapselect.cc:108
 msgid "The size of the map (Width x Height)"
-msgstr ""
+msgstr "Rozmiar mapy (szerokość x wysokość)"
 
 #: ../../src/ui_fsmenu/mapselect.cc:136
 msgid "Show all maps"
@@ -2852,11 +2857,11 @@ msgstr "Pokazuj wszystkie mapy"
 #. * TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated.
 #: ../../src/ui_fsmenu/mapselect.cc:143
 msgid "Show original map names"
-msgstr ""
+msgstr "Pokazuj oryginalne nazwy map"
 
 #: ../../src/ui_fsmenu/mapselect.cc:152
 msgid "Official"
-msgstr ""
+msgstr "Oficjalne"
 
 #: ../../src/ui_fsmenu/mapselect.cc:153
 msgid "Unbalanced"
@@ -2864,7 +2869,7 @@ msgstr "Niezrównoważona"
 
 #: ../../src/ui_fsmenu/mapselect.cc:154
 msgid "Seafaring"
-msgstr ""
+msgstr "Z żeglarstwem"
 
 #: ../../src/ui_fsmenu/mapselect.cc:161
 msgid "Free for all"
@@ -2891,53 +2896,54 @@ msgstr "Zespoły czteroosobowe"
 #: ../../src/ui_fsmenu/mapselect.cc:306
 #, c-format
 msgid "The name of this map in your language: %s"
-msgstr ""
+msgstr "Nazwa mapy w twoim języku: %s"
 
 #. * TRANSLATORS: Tooltip in map description when translated map names are being displayed.
 #. * TRANSLATORS: %s is the English name of the map.
 #: ../../src/ui_fsmenu/mapselect.cc:312
 #, c-format
 msgid "The original name of this map: %s"
-msgstr ""
+msgstr "Oryginalna nazwa mapy: %s"
 
 #: ../../src/ui_fsmenu/mapselect.cc:316
 msgid "The name of this map"
-msgstr ""
+msgstr "Nazwa tej mapy"
 
 #: ../../src/ui_fsmenu/mapselect.cc:319
 msgid "The designer of this map"
 msgid_plural "The designers of this map"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Projektant tej mapy"
+msgstr[1] "Projektanci tej mapy"
+msgstr[2] "Projektanci tej mapy"
 
 #: ../../src/ui_fsmenu/mapselect.cc:329
 msgid "Edit this map"
-msgstr ""
+msgstr "Edytuj tę mapę"
 
 #: ../../src/ui_fsmenu/mapselect.cc:329
 msgid "Play this map"
-msgstr ""
+msgstr "Zagraj na tej mapie"
 
 #: ../../src/ui_fsmenu/mapselect.cc:332
 msgid "Directory:"
-msgstr ""
+msgstr "Katalog:"
 
 #: ../../src/ui_fsmenu/mapselect.cc:334
 msgid "The name of this directory"
-msgstr ""
+msgstr "Nazwa tego katalogu"
 
 #: ../../src/ui_fsmenu/mapselect.cc:340
 msgid "Open this directory"
-msgstr ""
+msgstr "Otwórz ten katalog"
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
 #: ../../src/ui_fsmenu/mapselect.cc:441
 msgid "Multiplayer Scenarios"
-msgstr ""
+msgstr "Scenariusze dla wielu graczy"
 
 #: ../../src/ui_fsmenu/mapselect.cc:583
 msgid "Nobody"
-msgstr ""
+msgstr "Nikt"
 
 #: ../../src/ui_fsmenu/mapselect.cc:584
 msgid ""
@@ -3179,7 +3185,7 @@ msgstr "Wczytaj grę"
 #. * TRANSLATORS: Label for the list of suggested teams when choosing a map
 #: ../../src/ui_fsmenu/suggested_teams_box.cc:87
 msgid "Suggested Teams:"
-msgstr ""
+msgstr "Sugerowane drużyny:"
 
 #: ../../src/wlapplication.cc:1075
 msgid ""
@@ -3229,33 +3235,33 @@ msgstr "Zburzyć budynek?"
 msgid "Do you really want to destroy this %s?"
 msgstr "Na pewno chcesz zniszczyć %s?"
 
-#: ../../src/wui/actionconfirm.cc:287
+#: ../../src/wui/actionconfirm.cc:286
 msgid "Dismantle building?"
 msgstr "Rozebrać budynek?"
 
-#: ../../src/wui/actionconfirm.cc:288
+#: ../../src/wui/actionconfirm.cc:287
 #, c-format
 msgid "Do you really want to dismantle this %s?"
 msgstr "Czy na pewno chcesz rozebrać %s?"
 
-#: ../../src/wui/actionconfirm.cc:348
+#: ../../src/wui/actionconfirm.cc:346
 msgid "Enhance building?"
 msgstr "Ulepszyć budynek?"
 
-#: ../../src/wui/actionconfirm.cc:349
+#: ../../src/wui/actionconfirm.cc:347
 #, c-format
 msgid "Do you really want to enhance this %s?"
 msgstr "Czy na pewno chcesz ulepszyć: %s?"
 
-#: ../../src/wui/actionconfirm.cc:401
+#: ../../src/wui/actionconfirm.cc:398
 msgid "Do you really want to sink this ship?"
 msgstr "Czy na pewno chcesz zatopić ten statek?"
 
-#: ../../src/wui/actionconfirm.cc:401 ../../src/wui/actionconfirm.cc:442
+#: ../../src/wui/actionconfirm.cc:398 ../../src/wui/actionconfirm.cc:438
 msgid "Sink the ship?"
 msgstr "Zatopić statek?"
 
-#: ../../src/wui/actionconfirm.cc:442
+#: ../../src/wui/actionconfirm.cc:438
 msgid "Do you really want to cancel the active expedition?"
 msgstr "Czy na pewno chcesz przerwać trwającą ekspedycję?"
 

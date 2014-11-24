@@ -74,7 +74,7 @@ bool FullscreenMenuLoadMapOrGame::handle_key(bool down, SDL_Keysym code) {
 
 	switch (code.sym)
 	{
-		case SDL_SCANCODE_KP_ENTER:
+		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 			clicked_ok();
 			return true;

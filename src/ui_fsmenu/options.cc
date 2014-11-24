@@ -26,6 +26,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "graphic/default_resolution.h"
 #include "graphic/graphic.h"
 #include "helper.h"
@@ -52,26 +53,22 @@ struct LanguageEntry {
 };
 
 void add_languages_to_list(UI::Listselect<std::string>* list, const std::string& language) {
-
-	Section* s = &g_options.pull_section("global");
-	FilenameSet files = g_fs->list_directory(s->get_string("localedir", INSTALL_LOCALEDIR));
 	Profile ln("txts/languages");
-	s = &ln.pull_section("languages");
+	Section* s = &ln.pull_section("languages");
 	bool own_selected = "" == language || "en" == language;
 
-	// Add translation directories to the list
+	// Add translation directories to the list.
 	std::vector<LanguageEntry> entries;
-	for (const std::string& filename : files) {
-		char const* const path = filename.c_str();
-		if (!strcmp(FileSystem::fs_filename(path), ".") ||
-		    !strcmp(FileSystem::fs_filename(path), "..") || !g_fs->is_directory(path)) {
+	while (Section::Value* value = s->get_next_val()) {
+		const std::string abbreviation = value->get_name();
+		// Only lists languages that are actually found.
+		if (!g_fs->is_directory("locale/" + abbreviation)) {
 			continue;
 		}
-
-		char const* const abbreviation = FileSystem::fs_filename(path);
-		entries.emplace_back(abbreviation, s->get_string(abbreviation, abbreviation));
+		entries.emplace_back(abbreviation, value->get_string());
 		own_selected |= abbreviation == language;
 	}
+
 	// Add currently used language manually
 	if (!own_selected) {
 		entries.emplace_back(language, s->get_string(language.c_str(), language.c_str()));
@@ -409,7 +406,7 @@ bool FullscreenMenuOptions::handle_key(bool down, SDL_Keysym code)
 {
 	if (down) {
 		switch (code.sym) {
-			case SDL_SCANCODE_KP_ENTER:
+			case SDLK_KP_ENTER:
 			case SDLK_RETURN:
 				end_modal(static_cast<int32_t>(om_ok));
 				return true;
@@ -558,14 +555,6 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 		 get_w() - 2 * m_hmargin - m_remove_syncstreams.get_w() - m_padding, 40,
 		 _("Remove Syncstream dumps on startup"), UI::Align_VCenter),
 
-	m_opengl (this, Point(m_hmargin,
-								 m_label_remove_syncstreams.get_y() +
-								 m_label_remove_syncstreams.get_h() + m_padding)),
-	m_label_opengl
-		(this,
-		 m_hmargin + m_opengl.get_w() + m_padding, m_opengl.get_y(),
-		 get_w() - 2 * m_hmargin - m_opengl.get_w() - m_padding, 40,
-		 _("OpenGL rendering"), UI::Align_VCenter),
 	os(opt)
 {
 	for (UI::Button* temp_button : m_sb_dis_panel.get_buttons()) {
@@ -597,7 +586,6 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 	m_message_sound        .set_state(opt.message_sound);
 	m_nozip                .set_state(opt.nozip);
 	m_remove_syncstreams   .set_state(opt.remove_syncstreams);
-	m_opengl               .set_state(opt.opengl);
 	m_transparent_chat     .set_state(opt.transparent_chat);
 
 	// Fill the font list.
@@ -649,7 +637,7 @@ bool FullscreenMenuAdvancedOptions::handle_key(bool down, SDL_Keysym code)
 {
 	if (down) {
 		switch (code.sym) {
-			case SDL_SCANCODE_KP_ENTER:
+			case SDLK_KP_ENTER:
 			case SDLK_RETURN:
 				end_modal(static_cast<int32_t>(om_ok));
 				return true;
@@ -681,7 +669,6 @@ OptionsCtrl::OptionsStruct FullscreenMenuAdvancedOptions::get_values() {
 	os.panel_snap_distance  = m_sb_dis_panel.get_value();
 	os.border_snap_distance = m_sb_dis_border.get_value();
 	os.remove_syncstreams   = m_remove_syncstreams.get_state();
-	os.opengl               = m_opengl.get_state();
 	os.transparent_chat     = m_transparent_chat.get_state();
 	return os;
 }
@@ -737,7 +724,6 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct() {
 	opt.panel_snap_distance = m_opt_section.get_int("panel_snap_distance", 0);
 	opt.remove_replays = m_opt_section.get_int("remove_replays", 0);
 	opt.remove_syncstreams = m_opt_section.get_bool("remove_syncstreams", true);
-	opt.opengl = m_opt_section.get_bool("opengl", true);
 	opt.transparent_chat = m_opt_section.get_bool("transparent_chat", true);
 	return opt;
 }
@@ -769,7 +755,6 @@ void OptionsCtrl::save_options() {
 
 	m_opt_section.set_int("remove_replays",         opt.remove_replays);
 	m_opt_section.set_bool("remove_syncstreams",    opt.remove_syncstreams);
-	m_opt_section.set_bool("opengl",                opt.opengl);
 	m_opt_section.set_bool("transparent_chat",      opt.transparent_chat);
 
 	WLApplication::get()->set_input_grab(opt.inputgrab);
