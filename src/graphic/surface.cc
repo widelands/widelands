@@ -158,7 +158,7 @@ inline void pixel_to_gl_texture(const int width, const int height, float* x, flo
 }
 
 void Surface::blit
-	(const Point& dst, const Texture* texture, const Rect& srcrc, Composite cm)
+	(const Point& dst, const Texture* texture, const Rect& srcrc, BlendMode blend_mode)
 {
 	glViewport(0, 0, width(), height());
 
@@ -179,5 +179,5 @@ void Surface::blit
 
 	const FloatRect gl_dst_rect = to_opengl(Rect(dst.x, dst.y, srcrc.w, srcrc.h), ConversionMode::kExact);
 
-	BlitProgram::instance().draw(gl_dst_rect, gl_src_rect, texture->get_gl_texture(), cm);
+	BlitProgram::instance().draw(gl_dst_rect, gl_src_rect, texture->get_gl_texture(), blend_mode);
 }

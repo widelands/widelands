@@ -17,23 +17,17 @@
  *
  */
 
-#ifndef WL_GRAPHIC_COMPOSITEMODE_H
-#define WL_GRAPHIC_COMPOSITEMODE_H
+#ifndef WL_GRAPHIC_BLEND_MODE_H
+#define WL_GRAPHIC_BLEND_MODE_H
 
-/**
- * Defines composition operations performed while blitting.
- */
-enum Composite {
-	/**
-	 * Perform a normal blitting operation that respects the alpha
-	 * channel if present.
-	 */
-	CM_UseAlpha = 0,
+// Defines blending during blitting.
+enum BlendMode {
+	// Perform a normal blitting operation that respects the alpha channel if
+	// present.
+	UseAlpha = 0,
 
-	/**
-	 * Copy all pixel information, including alpha channel information.
-	 */
-	CM_Copy
+	// Copy all pixel information, including alpha channel information.
+	Copy
 };
 
-#endif  // end of include guard: WL_GRAPHIC_COMPOSITEMODE_H
+#endif  // end of include guard: WL_GRAPHIC_BLEND_MODE_H

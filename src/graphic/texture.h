@@ -56,7 +56,7 @@ public:
 	void blit(const Point&,
 	          const Texture*,
 	          const Rect& srcrc,
-	          Composite cm = CM_UseAlpha) override;
+	          BlendMode blend_mode = BlendMode::UseAlpha) override;
 
 	GLuint get_gl_texture() const {return m_texture;}
 

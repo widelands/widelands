@@ -45,7 +45,7 @@ wl_library(graphic_sdl_utils
 
 wl_library(graphic_surface
   SRCS
-    compositemode.h
+    blend_mode.h
     gl/utils.cc
     gl/utils.h
     screen.cc

@@ -24,8 +24,8 @@
 
 #include "base/macros.h"
 #include "base/rect.h"
+#include "graphic/blend_mode.h"
 #include "graphic/color.h"
-#include "graphic/compositemode.h"
 
 class Texture;
 
@@ -43,10 +43,13 @@ public:
 	uint16_t height() const;
 
 	/// This draws a part of another surface to this surface
-	virtual void blit(const Point&, const Texture*, const Rect& srcrc, Composite cm = CM_UseAlpha);
+	virtual void blit(const Point&,
+	                  const Texture*,
+	                  const Rect& srcrc,
+	                  BlendMode blend_mode = BlendMode::UseAlpha);
 
 	/// Draws a filled rect to the surface. No blending takes place, the values
-	//in the target are just replaced (i.e. / Composite would be CM_Copy).
+	// in the target are just replaced (i.e. / BlendMode would be BlendMode::Copy).
 	virtual void fill_rect(const Rect&, const RGBAColor&);
 
 	/// Draws a rect (frame only) to the surface.

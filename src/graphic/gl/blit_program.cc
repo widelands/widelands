@@ -97,7 +97,7 @@ BlitProgram::BlitProgram() {
 void BlitProgram::draw(const FloatRect& gl_dest_rect,
                        const FloatRect& gl_src_rect,
                        const GLuint gl_texture,
-                       const Composite composite) {
+                       const BlendMode blend_mode) {
 	glUseProgram(gl_program_.object());
 	glEnableVertexAttribArray(attr_position_);
 	glBindBuffer(GL_ARRAY_BUFFER, gl_array_buffer_.object());
@@ -117,13 +117,13 @@ void BlitProgram::draw(const FloatRect& gl_dest_rect,
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, gl_texture);
 
-	if (composite == CM_Copy) {
+	if (blend_mode == BlendMode::Copy) {
 		glBlendFunc(GL_ONE, GL_ZERO);
 	}
 
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
-	if (composite == CM_Copy) {
+	if (blend_mode == BlendMode::Copy) {
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 
