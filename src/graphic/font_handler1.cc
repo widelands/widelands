@@ -42,7 +42,7 @@ using namespace boost;
 
 namespace {
 
-// An Image implementation that recreates a rich text surface when needed on
+// An Image implementation that recreates a rich text texture when needed on
 // the fly. It is meant to be saved into the ImageCache.
 class RTImage : public Image {
 public:
@@ -111,7 +111,7 @@ private:
 
 IFontHandler1 * create_fonthandler(Graphic* gr) {
 	return new FontHandler1(
-	   &gr->images(), &gr->surfaces(), new RT::Renderer(&gr->images(), &gr->surfaces()));
+	   &gr->images(), &gr->textures(), new RT::Renderer(&gr->images(), &gr->textures()));
 }
 
 IFontHandler1 * g_fh1 = nullptr;

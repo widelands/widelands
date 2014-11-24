@@ -89,7 +89,7 @@ Texture* resize_surface(Texture* src, uint32_t w, uint32_t h) {
 	SDL_Surface * srcsdl = extract_sdl_surface(*src, srcrect);
 	bool free_source = true;
 
-	// If we actually shrink a surface, ballpark the zoom so that the shrinking
+	// If we actually shrink a texture, ballpark the zoom so that the shrinking
 	// effect is weakened.
 	int factor = 1;
 	while ((static_cast<double>(w) * factor / srcsdl->w) < 1. ||
@@ -150,7 +150,7 @@ Texture* resize_surface(Texture* src, uint32_t w, uint32_t h) {
 }
 
 /**
- * Create a grayed version of the given surface.
+ * Create a grayed version of the given texture.
  */
 Texture* gray_out_texture(Texture* texture) {
 	assert(texture);
@@ -191,7 +191,7 @@ Texture* gray_out_texture(Texture* texture) {
 }
 
 /**
- * Creates an image with changed luminosity from the given surface.
+ * Creates an image with changed luminosity from the given texture.
  */
 Texture* change_luminosity_of_texture(Texture* texture, float factor, bool halve_alpha) {
 	assert(texture);
@@ -427,7 +427,7 @@ const Image* resize(const Image* original, uint16_t w, uint16_t h) {
 	if (g_gr->images().has(new_hash))
 		return g_gr->images().get(new_hash);
 	return
-		g_gr->images().insert(new ResizedImage(new_hash, *original, &g_gr->surfaces(), w, h));
+		g_gr->images().insert(new ResizedImage(new_hash, *original, &g_gr->textures(), w, h));
 }
 
 const Image* gray_out(const Image* original) {
@@ -435,7 +435,7 @@ const Image* gray_out(const Image* original) {
 	if (g_gr->images().has(new_hash))
 		return g_gr->images().get(new_hash);
 	return
-		g_gr->images().insert(new GrayedOutImage(new_hash, *original, &g_gr->surfaces()));
+		g_gr->images().insert(new GrayedOutImage(new_hash, *original, &g_gr->textures()));
 }
 
 const Image* change_luminosity(const Image* original, float factor, bool halve_alpha) {
@@ -445,7 +445,7 @@ const Image* change_luminosity(const Image* original, float factor, bool halve_a
 		return g_gr->images().get(new_hash);
 	return
 		g_gr->images().insert
-			(new ChangeLuminosityImage(new_hash, *original, &g_gr->surfaces(), factor, halve_alpha));
+			(new ChangeLuminosityImage(new_hash, *original, &g_gr->textures(), factor, halve_alpha));
 }
 
 const Image* player_colored(const RGBColor& clr, const Image* original, const Image* mask) {
@@ -457,7 +457,7 @@ const Image* player_colored(const RGBColor& clr, const Image* original, const Im
 		return g_gr->images().get(new_hash);
 	return
 		g_gr->images().insert
-			(new PlayerColoredImage(new_hash, *original, &g_gr->surfaces(), clr, *mask));
+			(new PlayerColoredImage(new_hash, *original, &g_gr->textures(), clr, *mask));
 }
 
 }  // namespace ImageTransformations
