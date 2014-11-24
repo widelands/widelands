@@ -20,14 +20,19 @@
 #ifndef WL_GRAPHIC_GL_DITHER_PROGRAM_H
 #define WL_GRAPHIC_GL_DITHER_PROGRAM_H
 
+#include <memory>
+
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
 #include "logic/description_maintainer.h"
 #include "logic/world/terrain_description.h"
 
+class GLSurfaceTexture;
+
 class DitherProgram {
 public:
 	DitherProgram();
+	~DitherProgram();
 
 	// Draws the terrain.
 	void draw(const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
@@ -76,6 +81,9 @@ private:
 	// Uniforms.
 	GLint u_terrain_texture_;
 	GLint u_dither_texture_;
+
+	// The texture mask for the dithering step.
+	std::unique_ptr<GLSurfaceTexture> dither_mask_;
 
 	// Objects below are here to avoid memory allocations on each frame, they
 	// could theoretically also always be recreated. Index as follows:

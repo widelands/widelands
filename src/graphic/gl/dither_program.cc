@@ -24,7 +24,6 @@
 #include "graphic/gl/surface_texture.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
-#include "graphic/surface_cache.h"
 #include "graphic/texture.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -73,21 +72,6 @@ void main() {
 }
 )";
 
-// Returns the texture mask for the dithering step.
-// NOCOM(#sirver): only load once.
-// NOCOM(#sirver): rename GLSurfaceTexture and ~GLSurfaceScreen
-const GLSurfaceTexture* get_dither_edge_texture() {
-	constexpr char kFilename[] = "world/pics/edge.png";
-	constexpr char kCacheName[] = "gltex#world/pics/edge.png";
-
-	if (GLSurfaceTexture* surface = g_gr->surfaces().get(kCacheName))
-		return surface;
-
-	SDL_Surface* sdlsurf = load_image_as_sdl_surface(kFilename, g_fs);
-	GLSurfaceTexture* edgetexture = new GLSurfaceTexture(sdlsurf, true);
-	g_gr->surfaces().insert(kCacheName, edgetexture, false);
-	return edgetexture;
-}
 
 }  // namespace
 
@@ -103,7 +87,12 @@ DitherProgram::DitherProgram() {
 
 	u_dither_texture_ = glGetUniformLocation(gl_program_.object(), "u_dither_texture");
 	u_terrain_texture_ = glGetUniformLocation(gl_program_.object(), "u_terrain_texture");
+
+	SDL_Surface* sdlsurf = load_image_as_sdl_surface("world/pics/edge.png", g_fs);
+	dither_mask_.reset(new GLSurfaceTexture(sdlsurf, true));
 }
+
+DitherProgram::~DitherProgram() {}
 
 void DitherProgram::add_vertex(const FieldsToDraw::Field& field,
                                const int order_index,
@@ -222,7 +211,7 @@ void DitherProgram::draw(const DescriptionMaintainer<TerrainDescription>& terrai
 	// Set the sampler texture unit to 0
 	glActiveTexture(GL_TEXTURE0);
 	glUniform1i(u_dither_texture_, 0);
-	glBindTexture(GL_TEXTURE_2D, get_dither_edge_texture()->get_gl_texture());
+	glBindTexture(GL_TEXTURE_2D, dither_mask_->get_gl_texture());
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
 
