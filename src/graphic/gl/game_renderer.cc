@@ -28,7 +28,7 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"
-#include "graphic/texture.h"
+#include "graphic/terrain_texture.h"
 #include "logic/editor_game_base.h"
 #include "logic/player.h"
 #include "logic/world/world.h"
@@ -165,8 +165,8 @@ void GlGameRenderer::draw() {
 			map.normalize_coords(coords);
 			const FCoords& fcoords = map.get_fcoords(coords);
 
-			f.texture_x = float(x) / TEXTURE_WIDTH;
-			f.texture_y = float(y) / TEXTURE_HEIGHT;
+			f.texture_x = float(x) / kTextureWidth;
+			f.texture_y = float(y) / kTextureHeight;
 
 			f.gl_x = f.pixel_x = x + surface_offset.x;
 			f.gl_y = f.pixel_y = y + surface_offset.y - fcoords.field->get_height() * HEIGHT_FACTOR;

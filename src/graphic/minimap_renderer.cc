@@ -28,7 +28,7 @@
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/in_memory_image.h"
-#include "graphic/texture.h"
+#include "graphic/terrain_texture.h"
 #include "logic/field.h"
 #include "logic/map.h"
 #include "logic/player.h"

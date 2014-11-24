@@ -43,7 +43,7 @@
 #include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface_cache.h"
-#include "graphic/texture.h"
+#include "graphic/terrain_texture.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
@@ -305,7 +305,7 @@ void Graphic::save_png(const Image* image, StreamWrite * sw) const {
 
 uint32_t Graphic::new_maptexture(const std::vector<std::string>& texture_files, const uint32_t frametime)
 {
-	m_maptextures.emplace_back(new Texture(texture_files, frametime));
+	m_maptextures.emplace_back(new TerrainTexture(texture_files, frametime));
 	return m_maptextures.size(); // ID 1 is at m_maptextures[0]
 }
 
@@ -334,7 +334,7 @@ void Graphic::screenshot(const string& fname) const
  * Retrieve the map texture with the given number
  * \return the actual texture data associated with the given ID.
  */
-Texture * Graphic::get_maptexture_data(uint32_t id)
+TerrainTexture * Graphic::get_maptexture_data(uint32_t id)
 {
 	--id; // ID 1 is at m_maptextures[0]
 

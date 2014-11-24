@@ -31,7 +31,7 @@
 #include "graphic/graphic.h"
 #include "graphic/in_memory_image.h"
 #include "graphic/rendertarget.h"
-#include "graphic/texture.h"
+#include "graphic/terrain_texture.h"
 #include "logic/map.h"
 #include "logic/world/editor_category.h"
 #include "logic/world/terrain_description.h"

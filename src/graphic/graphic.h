@@ -38,7 +38,7 @@ class RenderTarget;
 class Surface;
 class SurfaceCache;
 class StreamWrite;
-struct Texture;
+struct TerrainTexture;
 
 // Will be send whenever the resolution changes.
 struct GraphicResolutionChanged {
@@ -83,13 +83,13 @@ public:
 
 	void save_png(const Image*, StreamWrite*) const;
 
-	// Creates a new Texture() with the given 'frametime' and using the given
+	// Creates a new TerrainTexture() with the given 'frametime' and using the given
 	// 'texture_files' as the images for it and returns it id.
 	uint32_t new_maptexture(const std::vector<std::string>& texture_files, uint32_t frametime);
 	void animate_maptextures(uint32_t time);
 
 	void screenshot(const std::string& fname) const;
-	Texture * get_maptexture_data(uint32_t id);
+	TerrainTexture * get_maptexture_data(uint32_t id);
 
 private:
 	// Called when the resolution (might) have changed.
@@ -120,7 +120,7 @@ private:
 	/// This holds all animations.
 	std::unique_ptr<AnimationManager> animation_manager_;
 
-	std::vector<std::unique_ptr<Texture>> m_maptextures;
+	std::vector<std::unique_ptr<TerrainTexture>> m_maptextures;
 };
 
 extern Graphic * g_gr;

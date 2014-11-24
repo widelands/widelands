@@ -90,20 +90,20 @@ wl_library(graphic
     gl/blit_program.h
     gl/dither_program.cc
     gl/dither_program.h
-    gl/draw_rect_program.cc
-    gl/draw_rect_program.h
     gl/draw_line_program.cc
     gl/draw_line_program.h
+    gl/draw_rect_program.cc
+    gl/draw_rect_program.h
+    gl/fields_to_draw.h
     gl/fill_rect_program.cc
     gl/fill_rect_program.h
-    gl/fields_to_draw.h
     gl/game_renderer.cc
     gl/game_renderer.h
     gl/road_program.cc
     gl/road_program.h
+    gl/system_headers.h
     gl/terrain_program.cc
     gl/terrain_program.h
-    gl/system_headers.h
     graphic.cc
     graphic.h
     image_transformations.cc
@@ -116,10 +116,10 @@ wl_library(graphic
     rendertarget.h
     richtext.cc
     richtext.h
+    terrain_texture.cc
+    terrain_texture.h
     text_parser.cc
     text_parser.h
-    texture.cc
-    texture.h
     wordwrap.cc
     wordwrap.h
   USES_OPENGL

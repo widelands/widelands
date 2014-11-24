@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_GRAPHIC_TEXTURE_H
-#define WL_GRAPHIC_TEXTURE_H
+#ifndef WL_GRAPHIC_TERRAIN_TEXTURE_H
+#define WL_GRAPHIC_TERRAIN_TEXTURE_H
 
 #include <memory>
 #include <string>
@@ -30,15 +30,14 @@
 
 class GLSurfaceTexture;
 
-/// Textures have a fixed size and are squares.
-/// TEXTURE_HEIGHT is just defined for easier understanding of the code.
-#define TEXTURE_WIDTH 64
-#define TEXTURE_HEIGHT TEXTURE_WIDTH
+/// TerrainTextures have a fixed size and are squares.
+constexpr int kTextureWidth = 64;
+constexpr int kTextureHeight = kTextureWidth;
 
-// Texture represents are terrain texture, which is strictly TEXTURE_WIDTH by
-// TEXTURE_HEIGHT pixels in size.
-struct Texture {
-	Texture(const std::vector<std::string>& texture_files, uint32_t frametime);
+// TerrainTexture represents are terrain texture, which is strictly kTextureWidth by
+// kTextureHeight pixels in size.
+struct TerrainTexture {
+	TerrainTexture(const std::vector<std::string>& texture_files, uint32_t frametime);
 
 	// Returns the path to a representative image for this texture.
 	const std::string& get_texture_image() const;
@@ -60,4 +59,4 @@ private:
 	std::vector<std::unique_ptr<GLSurfaceTexture>> m_gl_textures;
 };
 
-#endif  // end of include guard: WL_GRAPHIC_TEXTURE_H
+#endif  // end of include guard: WL_GRAPHIC_TERRAIN_TEXTURE_H

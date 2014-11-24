@@ -17,7 +17,7 @@
  *
  */
 
-#include "graphic/texture.h"
+#include "graphic/terrain_texture.h"
 
 #include <SDL_image.h>
 
@@ -36,7 +36,7 @@ using namespace std;
  * Currently it converts a 16 bit image to a 8 bit texture. This should
  * be changed to load a 8 bit file directly, however.
  */
-Texture::Texture(const std::vector<std::string>& texture_files, const uint32_t frametime)
+TerrainTexture::TerrainTexture(const std::vector<std::string>& texture_files, const uint32_t frametime)
    : m_frame_num(0), m_frametime(frametime) {
 	if (texture_files.empty()) {
 		throw wexception("No images for texture.");
@@ -53,12 +53,12 @@ Texture::Texture(const std::vector<std::string>& texture_files, const uint32_t f
 			throw wexception(
 			   "WARNING: Failed to load texture frame %s: %s\n", fname.c_str(), IMG_GetError());
 		}
-		if (surf->w != TEXTURE_WIDTH || surf->h != TEXTURE_HEIGHT) {
+		if (surf->w != kTextureWidth || surf->h != kTextureHeight) {
 			SDL_FreeSurface(surf);
 			throw wexception("WARNING: %s: texture must be %ix%i pixels big\n",
 			                 fname.c_str(),
-			                 TEXTURE_WIDTH,
-			                 TEXTURE_HEIGHT);
+			                 kTextureWidth,
+			                 kTextureHeight);
 		}
 
 		// calculate shades on the first frame
@@ -77,22 +77,22 @@ Texture::Texture(const std::vector<std::string>& texture_files, const uint32_t f
 	}
 
 	if (m_gl_textures.empty())
-		throw wexception("Texture has no frames");
+		throw wexception("TerrainTexture has no frames");
 }
 
-RGBColor Texture::get_minimap_color(int8_t shade) {
+RGBColor TerrainTexture::get_minimap_color(int8_t shade) {
 	return m_minimap_colors[128 + shade];
 }
 
-void Texture::animate(uint32_t time)
+void TerrainTexture::animate(uint32_t time)
 {
 	m_frame_num = (time / m_frametime) % m_gl_textures.size();
 }
 
-const std::string& Texture::get_texture_image() const {
+const std::string& TerrainTexture::get_texture_image() const {
 	return m_texture_image;
 }
 
-const GLSurfaceTexture& Texture::surface() const {
+const GLSurfaceTexture& TerrainTexture::surface() const {
 	return *m_gl_textures.at(m_frame_num);
 }

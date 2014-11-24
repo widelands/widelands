@@ -24,7 +24,7 @@
 #include "graphic/gl/surface_texture.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
-#include "graphic/texture.h"
+#include "graphic/terrain_texture.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 

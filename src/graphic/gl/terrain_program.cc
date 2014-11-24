@@ -22,7 +22,7 @@
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/surface_texture.h"
 #include "graphic/graphic.h"
-#include "graphic/texture.h"
+#include "graphic/terrain_texture.h"
 
 namespace  {
 
