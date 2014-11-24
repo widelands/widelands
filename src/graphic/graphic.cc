@@ -48,6 +48,7 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
 #include "logic/roadtype.h"
+#include "notifications/notifications.h"
 #include "ui_basic/progresswindow.h"
 
 using namespace std;
@@ -59,9 +60,6 @@ namespace  {
 /// The size of the transient (i.e. temporary) surfaces in the cache in bytes.
 /// These are all surfaces that are not loaded from disk.
 const uint32_t TRANSIENT_SURFACE_CACHE_SIZE = 160 << 20;   // shifting converts to MB
-
-constexpr int kFallbackGraphicsWidth = 800;
-constexpr int kFallbackGraphicsHeight = 600;
 
 // Sets the icon for the application.
 void set_icon(SDL_Window* sdl_window) {
@@ -80,49 +78,30 @@ void set_icon(SDL_Window* sdl_window) {
 /**
  * Initialize the SDL video mode.
 */
-Graphic::Graphic()
-	:
-	m_fallback_settings_in_effect(false),
-	m_update(true),
-	surface_cache_(create_surface_cache(TRANSIENT_SURFACE_CACHE_SIZE)),
-	image_cache_(new ImageCache(surface_cache_.get())),
-	animation_manager_(new AnimationManager())
+Graphic::Graphic(int window_mode_w, int window_mode_h, bool fullscreen)
+   : m_window_mode_width(window_mode_w),
+     m_window_mode_height(window_mode_h),
+     m_update(true),
+     surface_cache_(create_surface_cache(TRANSIENT_SURFACE_CACHE_SIZE)),
+     image_cache_(new ImageCache(surface_cache_.get())),
+     animation_manager_(new AnimationManager())
 {
 	ImageTransformations::initialize();
-
-	m_sdl_window = nullptr;
-	m_glcontext = nullptr;
-}
-
-void Graphic::initialize(int32_t w, int32_t h, bool fullscreen) {
-	cleanup();
 
 	// Request an OpenGL 2 context with double buffering.
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 
-	int32_t flags = SDL_WINDOW_OPENGL;
-	if (fullscreen) {
-		flags |= SDL_WINDOW_FULLSCREEN;
-		log("Graphics: Trying FULLSCREEN\n");
-	}
-
-	log("Graphics: Try to set Videomode %ux%u\n", w, h);
-	m_sdl_window = SDL_CreateWindow(
-	   "Widelands Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, flags);
-	if (!m_sdl_window) {
-		log("Graphics: Could not set Videomode: %s, trying minimum graphics settings\n",
-		    SDL_GetError());
-		flags &= ~SDL_WINDOW_FULLSCREEN;
-		m_sdl_window = SDL_CreateWindow("Widelands Window",
-												 SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-												 kFallbackGraphicsWidth, kFallbackGraphicsHeight, flags);
-		m_fallback_settings_in_effect = true;
-		if (!m_sdl_window) {
-			throw wexception("Graphics: could not set video mode: %s", SDL_GetError());
-		}
-	}
+	log("Graphics: Try to set Videomode %ux%u\n", m_window_mode_width, m_window_mode_height);
+	m_sdl_window = SDL_CreateWindow("Widelands Window",
+	                                SDL_WINDOWPOS_UNDEFINED,
+	                                SDL_WINDOWPOS_UNDEFINED,
+	                                m_window_mode_width,
+	                                m_window_mode_height,
+	                                SDL_WINDOW_OPENGL);
+	resolution_changed();
+	set_fullscreen(fullscreen);
 
 	SDL_SetWindowTitle(m_sdl_window, ("Widelands " + build_id() + '(' + build_type() + ')').c_str());
 	set_icon(m_sdl_window);
@@ -164,8 +143,6 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen) {
 
 	SDL_GL_SwapWindow(m_sdl_window);
 
-	screen_.reset(new GLSurfaceScreen(w, h));
-
 	/* Information about the video capabilities. */
 	{
 		SDL_DisplayMode disp_mode;
@@ -181,16 +158,10 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen) {
 		    disp_mode.h);
 		assert(SDL_BYTESPERPIXEL(disp_mode.format) == 4);
 	}
-
-	m_rendertarget.reset(new RenderTarget(screen_.get()));
 }
 
-bool Graphic::check_fallback_settings_in_effect()
+Graphic::~Graphic()
 {
-	return m_fallback_settings_in_effect;
-}
-
-void Graphic::cleanup() {
 	m_maptextures.clear();
 	surface_cache_->flush();
 	// TODO(unknown): this should really not be needed, but currently is :(
@@ -207,15 +178,10 @@ void Graphic::cleanup() {
 	}
 }
 
-Graphic::~Graphic()
-{
-	cleanup();
-}
-
 /**
  * Return the screen x resolution
 */
-int32_t Graphic::get_xres()
+int Graphic::get_xres()
 {
 	return screen_->width();
 }
@@ -223,14 +189,31 @@ int32_t Graphic::get_xres()
 /**
  * Return the screen x resolution
 */
-int32_t Graphic::get_yres()
+int Graphic::get_yres()
 {
 	return screen_->height();
 }
 
-bool Graphic::is_fullscreen()
-{
-	return SDL_GetWindowFlags(m_sdl_window) & SDL_WINDOW_FULLSCREEN;
+void Graphic::change_resolution(int w, int h) {
+	m_window_mode_width = w;
+	m_window_mode_height = h;
+
+	if (!fullscreen()) {
+		SDL_SetWindowSize(m_sdl_window, w, h);
+		resolution_changed();
+	}
+}
+
+void Graphic::resolution_changed() {
+	int new_w, new_h;
+	SDL_GetWindowSize(m_sdl_window, &new_w, &new_h);
+
+	screen_.reset(new GLSurfaceScreen(new_w, new_h));
+	m_rendertarget.reset(new RenderTarget(screen_.get()));
+
+	Notifications::publish(GraphicResolutionChanged{new_w, new_h});
+
+	update();
 }
 
 /**
@@ -239,27 +222,39 @@ bool Graphic::is_fullscreen()
 RenderTarget * Graphic::get_render_target()
 {
 	m_rendertarget->reset();
-
 	return m_rendertarget.get();
 }
 
-/**
- * Switch from fullscreen to windowed mode or vice-versa
-*/
-void Graphic::toggle_fullscreen()
+bool Graphic::fullscreen()
 {
-	// TODO(unknown): implement proper fullscreening here. The way it can work is to
-	// recreate SurfaceCache but keeping ImageCache around. Then exiting and
-	// reinitalizing the SDL Video Mode should just work: all surface are
-	// recreated dynamically and correctly.
-	// Note: Not all Images are cached in the ImageCache, at time of me writing
-	// this, only InMemoryImage does not safe itself in the ImageCache. And this
-	// should only be a problem for Images loaded from maps.
-	if (SDL_GetWindowFlags(m_sdl_window) & SDL_WINDOW_FULLSCREEN) {
-		SDL_SetWindowFullscreen(m_sdl_window, 0);
-	} else {
-		SDL_SetWindowFullscreen(m_sdl_window, SDL_WINDOW_FULLSCREEN);
+	uint32_t flags = SDL_GetWindowFlags(m_sdl_window);
+	return (flags & SDL_WINDOW_FULLSCREEN) || (flags & SDL_WINDOW_FULLSCREEN_DESKTOP);
+}
+
+void Graphic::set_fullscreen(const bool value)
+{
+	if (value == fullscreen()) {
+		return;
 	}
+
+	// Widelands is not resolution agnostic, so when we set fullscreen, we want
+	// it at the full resolution of the desktop and we want to know about the
+	// true resolution (SDL supports hiding the true resolution from the
+	// application). Since SDL ignores requests to change the size of the window
+	// whet fullscreen, we do it when in windowed mode.
+	if (value) {
+		SDL_DisplayMode display_mode;
+		SDL_GetDesktopDisplayMode(SDL_GetWindowDisplayIndex(m_sdl_window), &display_mode);
+		SDL_SetWindowSize(m_sdl_window, display_mode.w, display_mode.h);
+
+		SDL_SetWindowFullscreen(m_sdl_window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+	} else {
+		SDL_SetWindowFullscreen(m_sdl_window, 0);
+
+		// Next line does not work. See comment in refresh().
+		SDL_SetWindowSize(m_sdl_window, m_window_mode_width, m_window_mode_height);
+	}
+	resolution_changed();
 }
 
 
@@ -282,6 +277,17 @@ bool Graphic::need_update() const
 */
 void Graphic::refresh()
 {
+	// Setting the window size immediately after going out of fullscreen does
+	// not work properly. We work around this issue by resizing the window in
+	// refresh() when in window mode.
+	if (!fullscreen()) {
+		int true_width, true_height;
+		SDL_GetWindowSize(m_sdl_window, &true_width, &true_height);
+		if (true_width != m_window_mode_width || true_height != m_window_mode_height) {
+			SDL_SetWindowSize(m_sdl_window, m_window_mode_width, m_window_mode_height);
+		}
+	}
+
 	SDL_GL_SwapWindow(m_sdl_window);
 	m_update = false;
 }
