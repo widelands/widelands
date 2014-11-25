@@ -23,6 +23,7 @@
 
 #include "base/deprecated.h"
 #include "base/log.h"
+#include "economy/economy.h" //NOCOM needed?
 #include "economy/wares_queue.h"
 #include "graphic/graphic.h"
 #include "logic/carrier.h"
@@ -2343,6 +2344,9 @@ const MethodType<LuaFlag> LuaFlag::Methods[] = {
 	{nullptr, nullptr},
 };
 const PropertyType<LuaFlag> LuaFlag::Properties[] = {
+	PROP_RO(LuaFlag, roads),
+	PROP_RO(LuaFlag, building),	
+	PROP_RO(LuaFlag, has_warehouse),	
 	{nullptr, nullptr, nullptr},
 };
 
@@ -2352,7 +2356,75 @@ const PropertyType<LuaFlag> LuaFlag::Properties[] = {
  PROPERTIES
  ==========================================================
  */
+//NOCOM 
+/* RST
+	.. attribute:: roads
 
+		(RO) Array of roads leading to the flag. Directions
+		can be tr,r,br,bl,l and tl
+		 
+		:returns: The array of 'direction:road', if any
+*/
+int LuaFlag::get_roads(lua_State * L) {
+
+		const std::vector<std::string> directions = {"tr", "r", "br", "bl", "l", "tl"};
+	
+		lua_newtable(L);
+		
+        EditorGameBase & egbase = get_egbase(L);
+        Flag * f = get(L, egbase);
+        
+        for (uint32_t i=1; i<=6; i++){
+ 	       if (f->get_road(i) != nullptr)  {
+                lua_pushstring(L,directions.at(i-1));
+                upcasted_map_object_to_lua(L, f->get_road(i));
+                lua_rawset(L,-3);
+        	}
+		}
+        return 1;
+
+}
+/* RST
+	.. attribute:: building
+
+		(RO) building belonging to the flag
+*/
+int LuaFlag::get_building(lua_State * L) {
+
+	EditorGameBase & egbase = get_egbase(L);
+	Flag * f = get(L, egbase);
+	
+	PlayerImmovable * building = f->get_building();
+	if (!building)  {
+		return 0;
+	} else {
+		upcasted_map_object_to_lua(L, building);
+	}
+	return 1;
+
+}
+/* RST
+	.. attribute:: has_warehouse
+
+		(RO) does the economy has a warehouse? (~is a flag
+		connected to any warehouse?)
+		
+		
+		: returns number of warehouses, or nil if no warehouse
+*/
+int LuaFlag::get_has_warehouse(lua_State * L) {
+
+	EditorGameBase & egbase = get_egbase(L);
+	Flag * f = get(L, egbase);
+	int32_t warehouses = f->get_economy()->warehouses().size();
+
+	if (warehouses==0) {
+		return 0;
+	} else {
+		lua_pushint32(L,warehouses);
+	}
+	return 1;
+}
 /*
  ==========================================================
  LUA METHODS
@@ -2449,35 +2521,6 @@ int LuaFlag::get_wares(lua_State * L) {
 		}
 	}
 	return 1;
-}
-
-//NOCOM 
-/* RST
-	.. attribute:: roads
-
-		(RO) Array of roads leading to the flag. Directions
-		can be tr,r,br,bl,l and tl
-		 
-		:returns: The array of 'direction:road', if any
-*/
-int LuaFlag::get_roads(lua_State * L) {
-
-		const std::vector<std::string> directions = {"tr", "r", "br", "bl", "l", "tl"};
-	
-		lua_newtable(L);
-		
-        EditorGameBase & egbase = get_egbase(L);
-        Flag * f = get(L, egbase);
-        
-        for (uint32_t i=1; i<=6; i++){
- 	       if (f->get_road(i) != nullptr)        {
-                lua_pushstring(L,directions.at(i-1));
-                upcasted_map_object_to_lua(L, f->get_road(i));
-                lua_rawset(L,-3);
-        	}
-		}
-        return 1;
-
 }
 
 /*
@@ -3689,7 +3732,8 @@ int LuaField::set_resource_amount(lua_State * L) {
 		report_error(L, "Illegal amount: %i, must be >= 0 and <= %i", amount, max_amount);
 
 	field->set_resources(res, amount);
-
+	field->set_starting_res_amount(amount); //NOCOM Bug #1281823
+	
 	return 0;
 }
 
