@@ -3660,6 +3660,7 @@ int LuaField::set_resource_amount(lua_State * L) {
 		report_error(L, "Illegal amount: %i, must be >= 0 and <= %i", amount, max_amount);
 
 	field->set_resources(res, amount);
+	field->set_starting_res_amount(amount);
 
 	return 0;
 }
