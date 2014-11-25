@@ -138,6 +138,7 @@ function new_objectives(...)
    local sum = 0
    local s = ""
    for idx,obj in ipairs{...} do
+      -- NOCOM(#codereview): This has changed semantics. sum is now unused and obj.body is used differently. Intended? If so, remove sum.
    	s = rt("<p font-size=10> <br></p>" ..
 	   "<p font=serif font-size=18 font-weight=bold font-color=D1D1D1>"
 	   .. ngettext("New Objective", "New Objectives", obj.number) .. "</p>")
@@ -145,4 +146,3 @@ function new_objectives(...)
    end
    return s
 end
-

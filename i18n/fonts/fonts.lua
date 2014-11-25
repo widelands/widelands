@@ -1,5 +1,4 @@
 return {
-
    -- This is the default set and always needs to be complete.
 	default = {
 		serif = "DejaVu/DejaVuSerif.ttf",

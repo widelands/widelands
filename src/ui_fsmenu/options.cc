@@ -411,6 +411,7 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 			sortname = table->get_string("sort_name");
 			entries.push_back(LanguageEntry(
 										localename, name, sortname,
+										// NOCOM(#codereview): You are leaking memory here. the returned value is never deleted. Please read up on unique_ptrs and use them more often.
 										i18n::LocaleFonts::get()->parse_font_for_locale(localename)->serif()));
 			if (localename == current_locale) {
 				selected_locale = current_locale;

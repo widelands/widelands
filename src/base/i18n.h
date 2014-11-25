@@ -70,6 +70,8 @@ public:
 		kRightToLeft
 	};
 
+	// NOCOM(#codereview): pull out into a separate file. This also has nothing to do with i18n per se, it is an interface to fonts.
+	// NOCOM(#codereview): Do not implement anything in the header if possible, always implement in the .cc file.
 	FontSet(const std::string& serif_, const std::string& serif_bold_,
 			  const std::string& serif_italic_, const std::string& serif_bold_italic_,
 			  const std::string& sans_, const std::string& sans_bold_,
@@ -110,6 +112,8 @@ public:
 		}
 	}
 
+	// NOCOM(#codereview): Exceptions are super short getters like these. But even those I personally prefer to have in the cc file,
+	// so that this is just the interface and easy to understand.
 	const std::string& serif() const {return m_serif;}
 	const std::string& serif_bold() const {return m_serif_bold;}
 	const std::string& serif_italic() const {return m_serif_italic;}
@@ -122,9 +126,10 @@ public:
 	const std::string& condensed_bold() const {return m_condensed_bold;}
 	const std::string& condensed_italic() const {return m_condensed_italic;}
 	const std::string& condensed_bold_italic() const {return m_condensed_bold_italic;}
-	FontSet::Direction direction() {return m_direction;}
+	FontSet::Direction direction() const {return m_direction;}
 
 private:
+	// NOCOM(#codereview): these can all be const.
 	std::string m_serif;
 	std::string m_serif_bold;
 	std::string m_serif_italic;
@@ -148,6 +153,7 @@ public:
 
 	/// Returns the one existing instance of this object.
 	/// Creates a new instance if none exists yet.
+	// NOCOM(#codereview): In other places we use instance(). WLApplication uses get(). We should consolidate (in trunk and merge here). I prefer instance() as it gives a clear indication that we are dealing with a Singleton.
 	static LocaleFonts* get();
 
 	/// Parses font information for the given locale from Lua files.
@@ -156,16 +162,17 @@ public:
 	i18n::FontSet* parse_font_for_locale(const std::string& locale);
 
 	/// Returns the FontSet for the currently active locale
+	// NOCOM(#codereview): drop the get? fontset().
 	const i18n::FontSet& get_fontset() const {return *m_fontset;}
 
 	/// Sets the FontSet for the currently active locale.
+	// NOCOM(#codereview): set_* means that the user should pass a value. reload? update?
 	void set_fontset() {
 		m_fontset = parse_font_for_locale(get_locale());
 	}
 
 private:
-	 static LocaleFonts* m_singleton;
-	 LocaleFonts() {}
+	 LocaleFonts() = default;
 
 	 i18n::FontSet* m_fontset; // The currently active FontSet
 };
