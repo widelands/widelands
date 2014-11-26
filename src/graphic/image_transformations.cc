@@ -64,7 +64,7 @@ SDL_Surface* extract_sdl_surface(Texture & texture, Rect srcrect)
 	uint8_t * srcpix = texture.get_pixels() + srcpitch * srcrect.y + fmt.BytesPerPixel * srcrect.x;
 	uint8_t * dstpix = static_cast<uint8_t *>(dest->pixels);
 
-	for (uint32_t y = 0; y < srcrect.h; ++y) {
+	for (int y = 0; y < srcrect.h; ++y) {
 		memcpy(dstpix, srcpix, rowsize);
 		srcpix += srcpitch;
 		dstpix += dest->pitch;
