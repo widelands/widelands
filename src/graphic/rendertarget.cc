@@ -231,7 +231,7 @@ void RenderTarget::tile(const Rect& rect, const Image* image, const Point& gofs,
 			ofs.y += srch;
 
 		// Blit the image into the rectangle
-		uint32_t ty = 0;
+		int ty = 0;
 
 		while (ty < r.h) {
 			uint32_t tx = 0;
@@ -337,7 +337,7 @@ bool RenderTarget::clip(Rect & r) const
 	r.y += m_offset.y;
 
 	if (r.x < 0) {
-		if (r.w <= static_cast<uint32_t>(-r.x))
+		if (r.w <= -r.x)
 			return false;
 
 		r.w += r.x;
@@ -346,20 +346,20 @@ bool RenderTarget::clip(Rect & r) const
 	}
 
 	if (r.x + r.w > m_rect.w) {
-		if (static_cast<int32_t>(m_rect.w) <= r.x)
+		if (m_rect.w <= r.x)
 			return false;
 		r.w = m_rect.w - r.x;
 	}
 
 	if (r.y < 0) {
-		if (r.h <= static_cast<uint32_t>(-r.y))
+		if (r.h <= -r.y)
 			return false;
 		r.h += r.y;
 		r.y = 0;
 	}
 
 	if (r.y + r.h > m_rect.h) {
-		if (static_cast<int32_t>(m_rect.h) <= r.y)
+		if (m_rect.h <= r.y)
 			return false;
 		r.h = m_rect.h - r.y;
 	}
@@ -382,7 +382,7 @@ bool RenderTarget::to_surface_geometry(Point* dst, Rect* srcrc) const
 
 	// Clipping
 	if (dst->x < 0) {
-		if (srcrc->w <= static_cast<uint32_t>(-dst->x))
+		if (srcrc->w <= -dst->x)
 			return false;
 		srcrc->x -= dst->x;
 		srcrc->w += dst->x;
@@ -390,13 +390,13 @@ bool RenderTarget::to_surface_geometry(Point* dst, Rect* srcrc) const
 	}
 
 	if (dst->x + srcrc->w > m_rect.w) {
-		if (static_cast<int32_t>(m_rect.w) <= dst->x)
+		if (m_rect.w <= dst->x)
 			return false;
 		srcrc->w = m_rect.w - dst->x;
 	}
 
 	if (dst->y < 0) {
-		if (srcrc->h <= static_cast<uint32_t>(-dst->y))
+		if (srcrc->h <= -dst->y)
 			return false;
 		srcrc->y -= dst->y;
 		srcrc->h += dst->y;
@@ -404,7 +404,7 @@ bool RenderTarget::to_surface_geometry(Point* dst, Rect* srcrc) const
 	}
 
 	if (dst->y + srcrc->h > m_rect.h) {
-		if (static_cast<int32_t>(m_rect.h) <= dst->y)
+		if (m_rect.h <= dst->y)
 			return false;
 		srcrc->h = m_rect.h - dst->y;
 	}
