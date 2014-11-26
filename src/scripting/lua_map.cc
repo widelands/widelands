@@ -3501,6 +3501,7 @@ const PropertyType<LuaField> LuaField::Properties[] = {
 	PROP_RO(LuaField, viewpoint_y),
 	PROP_RW(LuaField, resource),
 	PROP_RW(LuaField, resource_amount),
+	PROP_RO(LuaField, starting_resource_amount),
 	PROP_RO(LuaField, claimers),
 	PROP_RO(LuaField, owner),
 	{nullptr, nullptr, nullptr},
@@ -3664,7 +3665,17 @@ int LuaField::set_resource_amount(lua_State * L) {
 
 	return 0;
 }
+/* RST
+	.. attribute:: starting_resource_amount
 
+		(RO) Starting value of resource. It is set be resource_amount
+
+		:see also: :attr:`resource`
+*/
+int LuaField::get_starting_resource_amount(lua_State * L) {
+	lua_pushuint32(L, fcoords(L).field->get_starting_res_amount());
+	return 1;
+}
 /* RST
 	.. attribute:: immovable
 
