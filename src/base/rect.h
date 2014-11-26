@@ -43,7 +43,7 @@ struct GenericRect {
 
 	/// The bottom right point of this rectangle.
 	GenericPoint<T> bottom_right() const {
-		return top_left() + Point(w, h);
+		return GenericPoint<T>(x + w, y + h);
 	}
 
 	/// Returns true if this rectangle contains the given point.
