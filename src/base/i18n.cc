@@ -50,11 +50,6 @@
 # endif
 #endif
 
-// NOCOM(#codereview): For a lack of a better place: I love the lua scripts in i18n/locales/*.lua, but I do not understand why you are not simply putting everything in one file: i18n/locales.lua: return {
-//    ast = { name = "A", ... }, de = { name = ... }
-//  }
-//  Stating and parsing that many files is potentially slow and one file is easier to understand.
-
 extern int _nl_msg_cat_cntr;
 
 namespace i18n {
@@ -363,7 +358,6 @@ std::string localize_item_list(const std::vector<std::string>& items, Concatenat
 }
 
 
-// NOCOM(#codereview): this is a preferable design to the static pointer in the class. a) you do not need a pointer and b) the class is actually deleted when the program exits.
 LocaleFonts* LocaleFonts::get() {
 	static LocaleFonts locale_fonts;
 	return &locale_fonts;
@@ -458,72 +452,29 @@ i18n::FontSet* LocaleFonts::parse_font_for_locale(const std::string& localename)
 		// For everything else, there's a fallback font.
 		try {
 			std::unique_ptr<LuaTable> font_set_table = fonts_table->get_table(fontsetname.c_str());
+			font_set_table->do_not_warn_about_unaccessed_keys();
 
-			// NOCOM(#sirver): Add a stand alone function
-			// get_string_with_default(LuaTable, key, default) into the lua_table.h
-			// file. do not put it into LuaTable though as it is not part of a
-			// minimal interface.
 			serif = font_set_table->get_string("serif");
-			if (font_set_table->has_key("serif_bold")) {
-				serif_bold = font_set_table->get_string("serif_bold");
-			} else {
-				serif_bold = serif;
-			}
-			if (font_set_table->has_key("serif_italic")) {
-				serif_italic = font_set_table->get_string("serif_italic");
-			} else {
-				serif_italic = serif;
-			}
-			if (font_set_table->has_key("serif_bold_italic")) {
-				serif_bold_italic = font_set_table->get_string("serif_bold_italic");
-			} else {
-				serif_bold_italic = serif_bold;
-			}
+			serif_bold = get_string_with_default(*font_set_table, "serif_bold", serif);
+			serif_italic = get_string_with_default(*font_set_table, "serif_italic", serif);
+			serif_bold_italic = get_string_with_default(*font_set_table, "serif_bold_italic", serif_bold);
 
 			// NOCOM(#codereview): you can pull out more methods here: void set_font_values("sans", &sans_bold, &sans_italic, &sans_bold_italic) and reuse that for all others.
+			// NOCOM(#gunchleoc): I don't see how that would make things easier to read
+			// - I would need to give the method interface the key names as well as the variable names, and add a special case for condensed.
+			// Maybe that wasn't obvious before with all the conditional statements I had.
 			sans = font_set_table->get_string("sans");
-			if (font_set_table->has_key("sans_bold")) {
-				sans_bold = font_set_table->get_string("sans_bold");
-			} else {
-				sans_bold = sans;
-			}
-			if (font_set_table->has_key("sans_italic")) {
-				sans_italic = font_set_table->get_string("sans_italic");
-			} else {
-				sans_italic = sans;
-			}
-			if (font_set_table->has_key("sans_bold_italic")) {
-				sans_bold_italic = font_set_table->get_string("sans_bold_italic");
-			} else {
-				sans_bold_italic = sans_bold;
-			}
+			sans_bold = get_string_with_default(*font_set_table, "serif_bold", sans);
+			sans_italic = get_string_with_default(*font_set_table, "sans_italic", sans);
+			sans_bold_italic = get_string_with_default(*font_set_table, "sans_bold_italic", sans_bold);
 
-			if (font_set_table->has_key("condensed")) {
-				condensed = font_set_table->get_string("condensed");
-			} else {
-				condensed = sans;
-			}
-			if (font_set_table->has_key("condensed_bold")) {
-				condensed_bold = font_set_table->get_string("condensed_bold");
-			} else {
-				condensed_bold = condensed;
-			}
-			if (font_set_table->has_key("condensed_italic")) {
-				condensed_italic = font_set_table->get_string("condensed_italic");
-			} else {
-				condensed_italic = condensed;
-			}
-			if (font_set_table->has_key("condensed_bold_italic")) {
-				condensed_bold_italic = font_set_table->get_string("condensed_bold_italic");
-			} else {
-				condensed_bold_italic = condensed_bold;
-			}
+			condensed = get_string_with_default(*font_set_table, "condensed", sans);
+			condensed_bold = get_string_with_default(*font_set_table, "condensed_bold", condensed);
+			condensed_italic = get_string_with_default(*font_set_table, "condensed_italic", condensed);
+			condensed_bold_italic = get_string_with_default(*font_set_table, "condensed", condensed_bold);
 
-			if (font_set_table->has_key("dir")) {
-				direction = font_set_table->get_string("dir");
-			} else {
-				direction = "ltr";
-			}
+			direction = get_string_with_default(*font_set_table, "dir", "ltr");
+
 		} catch (LuaError& err) {
 			log("Could not read font set '%s': %s\n", fontsetname.c_str(), err.what());
 		}
@@ -531,7 +482,6 @@ i18n::FontSet* LocaleFonts::parse_font_for_locale(const std::string& localename)
 	} catch (const LuaError& err) {
 		log("Could not read locales information from file: %s\n", err.what());
 	}
-
 
 	fontset = new i18n::FontSet(serif, serif_bold, serif_italic, serif_bold_italic,
 									  sans, sans_bold, sans_italic, sans_bold_italic,
