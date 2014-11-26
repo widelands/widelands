@@ -139,8 +139,6 @@ UI::UniqueWindow
 	(&parent, "ware_statistics", &registry, 400, 270, _("Ware Statistics")),
 m_parent(&parent)
 {
-	set_cache(false);
-
 	uint8_t const nr_wares = parent.get_player()->tribe().get_nrwares();
 
 	//init color sets

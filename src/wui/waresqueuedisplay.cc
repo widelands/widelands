@@ -74,7 +74,7 @@ m_show_only(show_only)
 
 	max_size_changed();
 
-	set_think(true);
+	set_thinks(true);
 }
 
 WaresQueueDisplay::~WaresQueueDisplay()

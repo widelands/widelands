@@ -24,15 +24,17 @@
 
 #include <SDL_keycode.h>
 
+#include "graphic/graphic.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
+#include "notifications/notifications.h"
+#include "ui_basic/box.h"
+#include "ui_basic/textarea.h"
+#include "ui_basic/unique_window.h"
 #include "wui/chatoverlay.h"
 #include "wui/debugconsole.h"
 #include "wui/mapview.h"
 #include "wui/overlay_manager.h"
-#include "ui_basic/box.h"
-#include "ui_basic/textarea.h"
-#include "ui_basic/unique_window.h"
 
 namespace Widelands {struct CoordPath;}
 
@@ -179,6 +181,9 @@ private:
 	} m_sel;
 
 	std::unique_ptr<InteractiveBaseInternals> m;
+
+	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
+	   graphic_resolution_changed_subscriber_;
 	Widelands::EditorGameBase & m_egbase;
 	uint32_t m_display_flags;
 	uint32_t          m_lastframe;         //  system time (milliseconds)

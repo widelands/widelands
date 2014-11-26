@@ -24,11 +24,11 @@
 #include "graphic/gl/dither_program.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/road_program.h"
-#include "graphic/gl/surface.h"
 #include "graphic/gl/terrain_program.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "graphic/texture.h"
+#include "graphic/surface.h"
+#include "graphic/terrain_texture.h"
 #include "logic/editor_game_base.h"
 #include "logic/player.h"
 #include "logic/world/world.h"
@@ -133,7 +133,7 @@ void GlGameRenderer::draw() {
 		road_program_.reset(new RoadProgram());
 	}
 
-	GLSurface* surface = dynamic_cast<GLSurface*>(m_dst->get_surface());
+	Surface* surface = m_dst->get_surface();
 	if (!surface)
 		return;
 
@@ -145,8 +145,6 @@ void GlGameRenderer::draw() {
 	          bounding_rect.w,
 	          bounding_rect.h);
 	glEnable(GL_SCISSOR_TEST);
-
-	glClear(GL_COLOR_BUFFER_BIT);
 
 	Map& map = m_egbase->map();
 	const uint32_t gametime = m_egbase->get_gametime();
@@ -167,8 +165,8 @@ void GlGameRenderer::draw() {
 			map.normalize_coords(coords);
 			const FCoords& fcoords = map.get_fcoords(coords);
 
-			f.texture_x = float(x) / TEXTURE_WIDTH;
-			f.texture_y = float(y) / TEXTURE_HEIGHT;
+			f.texture_x = float(x) / kTextureWidth;
+			f.texture_y = float(y) / kTextureHeight;
 
 			f.gl_x = f.pixel_x = x + surface_offset.x;
 			f.gl_y = f.pixel_y = y + surface_offset.y - fcoords.field->get_height() * HEIGHT_FACTOR;

@@ -21,6 +21,7 @@
 
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/graphic.h"
+#include "graphic/terrain_texture.h"
 #include "graphic/texture.h"
 
 namespace  {
@@ -117,9 +118,10 @@ void TerrainProgram::gl_draw(int num_vertices,
 		if (indices.empty()) {
 			continue;
 		}
-		glBindTexture(
-		   GL_TEXTURE_2D,
-		   g_gr->get_maptexture_data(terrains.get_unmutable(i).get_texture())->get_texture());
+		glBindTexture(GL_TEXTURE_2D,
+		              g_gr->get_maptexture_data(terrains.get_unmutable(i).get_texture())
+		                 ->texture()
+		                 .get_gl_texture());
 		glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, indices.data());
 	}
 

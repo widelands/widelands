@@ -79,12 +79,7 @@ struct InteractiveBaseInternals {
 };
 
 InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
-   : MapView(nullptr,
-              0,
-              0,
-              global_s.get_int("xres", DEFAULT_RESOLUTION_W),
-              global_s.get_int("yres", DEFAULT_RESOLUTION_H),
-              *this),
+   : MapView(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres(), *this),
      // Initialize chatoveraly before the toolbar so it is below
      m_show_workarea_preview(global_s.get_bool("workareapreview", true)),
      m_chatOverlay(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
@@ -107,10 +102,19 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      m_label_speed(this, get_w(), 1, std::string(), UI::Align_TopRight),
      unique_window_handler_(new UniqueWindowHandler()),
      // Start at idx 0 for 2 enhancements, idx 3 for 1, idx 5 if none
-		m_workarea_pics
-		{g_gr->images().get("pics/workarea123.png"), g_gr->images().get("pics/workarea23.png"),
-		g_gr->images().get("pics/workarea3.png"), g_gr->images().get("pics/workarea12.png"),
-		g_gr->images().get("pics/workarea2.png"), g_gr->images().get("pics/workarea1.png")} {
+     m_workarea_pics{g_gr->images().get("pics/workarea123.png"),
+                     g_gr->images().get("pics/workarea23.png"),
+                     g_gr->images().get("pics/workarea3.png"),
+                     g_gr->images().get("pics/workarea12.png"),
+                     g_gr->images().get("pics/workarea2.png"),
+                     g_gr->images().get("pics/workarea1.png")} {
+
+	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
+	   [this](const GraphicResolutionChanged& message) {
+		   set_size(message.width, message.height);
+		   adjust_toolbar_position();
+		});
+
 	m_toolbar.set_layout_toplevel(true);
 	m->quicknavigation->set_setview
 		(boost::bind(&MapView::set_viewpoint, this, _1, true));
@@ -261,7 +265,6 @@ OverlayManager::JobId InteractiveBase::show_work_area
 		case 3: wa_index = 0; break;
 		default:
 			throw wexception("Encountered unexpected WorkareaInfo size %i", workareas_nrs);
-			break;
 	}
 	Widelands::Map & map = m_egbase.map();
 	OverlayManager & overlay_manager = map.overlay_manager();
@@ -432,7 +435,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		dst.blit(
 			Point(get_w() - 5, get_h() - 5),
 			UI::g_fh1->render(node_text),
-			CM_UseAlpha,
+			BlendMode::UseAlpha,
 			UI::Align_BottomRight
 			);
 	}

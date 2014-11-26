@@ -81,7 +81,7 @@ m_value(this, "199", UI::Align_Center)
 	m_decrease.set_repeating(true);
 	m_increase.set_repeating(true);
 
-	set_think(true);
+	set_thinks(true);
 }
 
 void SoldierCapacityControl::think()
