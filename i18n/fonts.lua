@@ -1,3 +1,17 @@
+-- This file defines the font sets available for different languages.
+--
+-- Define which fontset you wish to use for your language in locales.lua.
+--
+-- The "default" font set covers all possible font styles.
+--
+-- Your font might not have all of these available. In this case, it is
+-- sufficient to define "serif" and "sans", a fallback scheme is in place.
+-- But do define everything your fontset has.
+--
+-- When adding a new fontset, also make sure you have all pertinent license
+-- and source information collected in its folder.
+
+
 return {
    -- This is the default set and always needs to be complete.
 	default = {

@@ -393,34 +393,41 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 	std::string sortname;
 	std::string selected_locale;
 
-	for (const std::string& filename : files) {
-		char const* const path = filename.c_str();
-		if (!strcmp(FileSystem::fs_filename(path), ".") ||
-			 !strcmp(FileSystem::fs_filename(path), "..") || !g_fs->is_directory(path)) {
-			continue;
-		}
+	try {
+		LuaInterface lua;
+		std::unique_ptr<LuaTable> all_locales(lua.run_script("i18n/locales.lua"));
+		all_locales->do_not_warn_about_unaccessed_keys(); // We are only reading partial information as needed
 
-		try {
-			localename = g_fs->filename_without_ext(path);
-			LuaInterface lua;
-			std::unique_ptr<LuaTable> table(lua.run_script((boost::format("i18n/locales/%s.lua")
-																			% localename.c_str()).str()));
-			table->do_not_warn_about_unaccessed_keys();
-
-			name = table->get_string("name");
-			sortname = table->get_string("sort_name");
-			entries.push_back(LanguageEntry(
-										localename, name, sortname,
-										// NOCOM(#codereview): You are leaking memory here. the returned value is never deleted. Please read up on unique_ptrs and use them more often.
-										i18n::LocaleFonts::get()->parse_font_for_locale(localename)->serif()));
-			if (localename == current_locale) {
-				selected_locale = current_locale;
+		for (const std::string& filename : files) {
+			char const* const path = filename.c_str();
+			if (!strcmp(FileSystem::fs_filename(path), ".") ||
+				 !strcmp(FileSystem::fs_filename(path), "..") || !g_fs->is_directory(path)) {
+				continue;
 			}
 
-		} catch (const WException&) {
-			log("Could not read locale for: %s\n", localename.c_str());
-			entries.push_back(LanguageEntry(localename, localename, localename, kFallbackFont));
+			try {
+				localename = g_fs->filename_without_ext(path);
+
+				std::unique_ptr<LuaTable> table = all_locales->get_table(localename);
+				table->do_not_warn_about_unaccessed_keys();
+
+				name = table->get_string("name");
+				sortname = table->get_string("sort_name");
+				entries.push_back(LanguageEntry(
+											localename, name, sortname,
+											// NOCOM(#codereview): You are leaking memory here. the returned value is never deleted. Please read up on unique_ptrs and use them more often.
+											i18n::LocaleFonts::get()->parse_font_for_locale(localename)->serif()));
+				if (localename == current_locale) {
+					selected_locale = current_locale;
+				}
+
+			} catch (const WException&) {
+				log("Could not read locale for: %s\n", localename.c_str());
+				entries.push_back(LanguageEntry(localename, localename, localename, kFallbackFont));
+			}
 		}
+	} catch (const LuaError& err) {
+		log("Could not read locales information from file: %s\n", err.what());
 	}
 
 	std::sort(entries.begin(), entries.end());

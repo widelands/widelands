@@ -327,6 +327,7 @@ void set_locale(std::string name) {
 
 const std::string & get_locale() {return locale;}
 
+
 std::string localize_item_list(const std::vector<std::string>& items, ConcatenateWith listtype) {
 	std::string result = "";
 	for (std::vector<std::string>::const_iterator it = items.begin(); it != items.end(); ++it) {
@@ -395,18 +396,17 @@ LocaleFonts* LocaleFonts::get() {
 // Loads font info from config files, depending on the localename
 // NOCOM(#codereview): return a unique_ptr<Fontset>, otherwise ownership is unclear. Who deletes that?
 i18n::FontSet* LocaleFonts::parse_font_for_locale(const std::string& localename) {
-	std::string fontsetname;
+	std::string fontsetname = "default";
+	std::string actual_localename = localename;
 	i18n::FontSet* fontset;
-	std::string filename;
 	LuaInterface lua;
 
 	// Read default fontset. It defines the fallback fonts and needs to always be there and complete.
 	// This way, we will always have fonts, even if we run into an exception further down.
-	std::unique_ptr<LuaTable> fonts_table(lua.run_script("i18n/fonts/fonts.lua"));
-	// NOCOM(#codereview): it should warn, right? You are accessing all the keys.
-	fonts_table->do_not_warn_about_unaccessed_keys();
+	std::unique_ptr<LuaTable> fonts_table(lua.run_script("i18n/fonts.lua"));
+	fonts_table->do_not_warn_about_unaccessed_keys();  // We are only reading partial information as needed
+
 	std::unique_ptr<LuaTable> default_font_table = fonts_table->get_table("default");
-	default_font_table->do_not_warn_about_unaccessed_keys();
 	std::string serif = default_font_table->get_string("serif");
 	std::string serif_bold = default_font_table->get_string("serif_bold");
 	std::string serif_italic = default_font_table->get_string("serif_italic");
@@ -421,120 +421,117 @@ i18n::FontSet* LocaleFonts::parse_font_for_locale(const std::string& localename)
 	std::string condensed_bold_italic = default_font_table->get_string("condensed_bold_italic");
 	std::string direction = default_font_table->get_string("dir");
 
-	// Find out which fontset to use from the locale
-	// Locale identifiers can look like this: ca_ES@valencia.UTF-8
 	try  {
+		std::unique_ptr<LuaTable> all_locales(lua.run_script(("i18n/locales.lua")));
+		all_locales->do_not_warn_about_unaccessed_keys();
+
+		// Locale identifiers can look like this: ca_ES@valencia.UTF-8
 		if (localename.empty()) {
 			std::vector<std::string> parts;
 			boost::split(parts, i18n::get_locale(), boost::is_any_of("."));
-			filename = (boost::format("i18n/locales/%s.lua") % parts[0]).str();
+			actual_localename = parts[0];
 
-			if (!g_fs->file_exists(filename.c_str())) {
+			if (!all_locales->has_key(actual_localename.c_str())) {
 				boost::split(parts, parts[0], boost::is_any_of("@"));
-				filename = (boost::format("i18n/locales/%s.lua") % parts[0]).str();
+				actual_localename = parts[0];
 
-				if (!g_fs->file_exists(filename.c_str())) {
+				if (!all_locales->has_key(actual_localename.c_str())) {
 					boost::split(parts, parts[0], boost::is_any_of("_"));
-					filename = (boost::format("i18n/locales/%s.lua") % parts[0]).str();
+					actual_localename = parts[0];
 				}
 			}
-		} else {
-			filename = (boost::format("i18n/locales/%s.lua") % localename).str().c_str();
 		}
-		// Now get the fontset name
-		if (g_fs->file_exists(filename.c_str())) {
+
+		// Find out which fontset to use from the locale
+		if (all_locales->has_key(actual_localename)) {
 			try  {
-				std::unique_ptr<LuaTable> locale_table(lua.run_script(filename.c_str()));
+				std::unique_ptr<LuaTable> locale_table = all_locales->get_table(actual_localename);
 				locale_table->do_not_warn_about_unaccessed_keys();
 				fontsetname = locale_table->get_string("font");
 			} catch (const LuaError& err) {
-				log("Could not read locale '%s': %s\n", localename.c_str(), err.what());
+				log("Error loading locale '%s' from file: %s\n", actual_localename.c_str(), err.what());
 			}
 		}
+
+		// Read the fontset for the current locale.
+		// Each locale needs to define a font face for serif and sans.
+		// For everything else, there's a fallback font.
+		try {
+			std::unique_ptr<LuaTable> font_set_table = fonts_table->get_table(fontsetname.c_str());
+
+			// NOCOM(#sirver): Add a stand alone function
+			// get_string_with_default(LuaTable, key, default) into the lua_table.h
+			// file. do not put it into LuaTable though as it is not part of a
+			// minimal interface.
+			serif = font_set_table->get_string("serif");
+			if (font_set_table->has_key("serif_bold")) {
+				serif_bold = font_set_table->get_string("serif_bold");
+			} else {
+				serif_bold = serif;
+			}
+			if (font_set_table->has_key("serif_italic")) {
+				serif_italic = font_set_table->get_string("serif_italic");
+			} else {
+				serif_italic = serif;
+			}
+			if (font_set_table->has_key("serif_bold_italic")) {
+				serif_bold_italic = font_set_table->get_string("serif_bold_italic");
+			} else {
+				serif_bold_italic = serif_bold;
+			}
+
+			// NOCOM(#codereview): you can pull out more methods here: void set_font_values("sans", &sans_bold, &sans_italic, &sans_bold_italic) and reuse that for all others.
+			sans = font_set_table->get_string("sans");
+			if (font_set_table->has_key("sans_bold")) {
+				sans_bold = font_set_table->get_string("sans_bold");
+			} else {
+				sans_bold = sans;
+			}
+			if (font_set_table->has_key("sans_italic")) {
+				sans_italic = font_set_table->get_string("sans_italic");
+			} else {
+				sans_italic = sans;
+			}
+			if (font_set_table->has_key("sans_bold_italic")) {
+				sans_bold_italic = font_set_table->get_string("sans_bold_italic");
+			} else {
+				sans_bold_italic = sans_bold;
+			}
+
+			if (font_set_table->has_key("condensed")) {
+				condensed = font_set_table->get_string("condensed");
+			} else {
+				condensed = sans;
+			}
+			if (font_set_table->has_key("condensed_bold")) {
+				condensed_bold = font_set_table->get_string("condensed_bold");
+			} else {
+				condensed_bold = condensed;
+			}
+			if (font_set_table->has_key("condensed_italic")) {
+				condensed_italic = font_set_table->get_string("condensed_italic");
+			} else {
+				condensed_italic = condensed;
+			}
+			if (font_set_table->has_key("condensed_bold_italic")) {
+				condensed_bold_italic = font_set_table->get_string("condensed_bold_italic");
+			} else {
+				condensed_bold_italic = condensed_bold;
+			}
+
+			if (font_set_table->has_key("dir")) {
+				direction = font_set_table->get_string("dir");
+			} else {
+				direction = "ltr";
+			}
+		} catch (LuaError& err) {
+			log("Could not read font set '%s': %s\n", fontsetname.c_str(), err.what());
+		}
+
 	} catch (const LuaError& err) {
-		log("Error loading locale from file '%s': %s\n", filename.c_str(), err.what());
+		log("Could not read locales information from file: %s\n", err.what());
 	}
 
-	if (fontsetname.empty()) {
-		// NOCOM(#codereview): instead of here, set this at construction and kick this check.
-		fontsetname = "default";
-	}
-
-	// Read the fontset for the current locale.
-	// Each locale needs to define a font face for serif and sans.
-	// For everything else, there's a fallback font.
-	try {
-		std::unique_ptr<LuaTable> font_set_table = fonts_table->get_table(fontsetname.c_str());
-		font_set_table->do_not_warn_about_unaccessed_keys();
-
-		// NOCOM(#sirver): Add a stand alone function
-		// get_string_with_default(LuaTable, key, default) into the lua_table.h
-		// file. do not put it into LuaTable though as it is not part of a
-		// minimal interface.
-		serif = font_set_table->get_string("serif");
-		if (font_set_table->has_key("serif_bold")) {
-			serif_bold = font_set_table->get_string("serif_bold");
-		} else {
-			serif_bold = serif;
-		}
-		if (font_set_table->has_key("serif_italic")) {
-			serif_italic = font_set_table->get_string("serif_italic");
-		} else {
-			serif_italic = serif;
-		}
-		if (font_set_table->has_key("serif_bold_italic")) {
-			serif_bold_italic = font_set_table->get_string("serif_bold_italic");
-		} else {
-			serif_bold_italic = serif_bold;
-		}
-
-		// NOCOM(#codereview): you can pull out more methods here: void set_font_values("sans", &sans_bold, &sans_italic, &sans_bold_italic) and reuse that for all others.
-		sans = font_set_table->get_string("sans");
-		if (font_set_table->has_key("sans_bold")) {
-			sans_bold = font_set_table->get_string("sans_bold");
-		} else {
-			sans_bold = sans;
-		}
-		if (font_set_table->has_key("sans_italic")) {
-			sans_italic = font_set_table->get_string("sans_italic");
-		} else {
-			sans_italic = sans;
-		}
-		if (font_set_table->has_key("sans_bold_italic")) {
-			sans_bold_italic = font_set_table->get_string("sans_bold_italic");
-		} else {
-			sans_bold_italic = sans_bold;
-		}
-
-		if (font_set_table->has_key("condensed")) {
-			condensed = font_set_table->get_string("condensed");
-		} else {
-			condensed = sans;
-		}
-		if (font_set_table->has_key("condensed_bold")) {
-			condensed_bold = font_set_table->get_string("condensed_bold");
-		} else {
-			condensed_bold = condensed;
-		}
-		if (font_set_table->has_key("condensed_italic")) {
-			condensed_italic = font_set_table->get_string("condensed_italic");
-		} else {
-			condensed_italic = condensed;
-		}
-		if (font_set_table->has_key("condensed_bold_italic")) {
-			condensed_bold_italic = font_set_table->get_string("condensed_bold_italic");
-		} else {
-			condensed_bold_italic = condensed_bold;
-		}
-
-		if (font_set_table->has_key("dir")) {
-			direction = font_set_table->get_string("dir");
-		} else {
-			direction = "ltr";
-		}
-	} catch (LuaError& err) {
-		log("Could not read font set '%s': %s\n", fontsetname.c_str(), err.what());
-	}
 
 	fontset = new i18n::FontSet(serif, serif_bold, serif_italic, serif_bold_italic,
 									  sans, sans_bold, sans_italic, sans_bold_italic,

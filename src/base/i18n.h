@@ -54,7 +54,6 @@ const std::string & get_locale();
 
 void set_localedir(std::string);
 
-
 // Localize a list of 'items'. The last 2 items are concatenated with "and" or
 // "or", depending on 'concatenate_with'.
 enum class ConcatenateWith {AND, OR, AMPERSAND, COMMA};
