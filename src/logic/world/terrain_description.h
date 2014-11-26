@@ -53,7 +53,11 @@ public:
 	/// The name showed to users of Widelands. Usually translated.
 	const std::string& descname() const;
 
+
+	const std::vector<std::string>& texture_paths() const;
+
 	/// Returns the texture index for this terrain.
+	// NOCOM(#sirver): kill or change
 	uint32_t get_texture() const;
 
 	/// Returns the type of terrain this is (water, walkable, and so on).
@@ -100,12 +104,12 @@ private:
 	std::vector<uint8_t> valid_resources_;
 	int8_t default_resource_index_;
 	int32_t default_resource_amount_;
-	const std::vector<std::string> texture_paths_;
 	int32_t dither_layer_;
 	uint32_t texture_;  ///< renderer's texture
 	double temperature_;
 	double fertility_;
 	double humidity_;
+	std::vector<std::string> texture_paths_;
 
 	DISALLOW_COPY_AND_ASSIGN(TerrainDescription);
 };

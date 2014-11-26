@@ -27,6 +27,10 @@
 #include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
+#include "graphic/image_io.h"
+#include "graphic/sub_texture.h"
+#include "graphic/texture.h"
+#include "graphic/texture_atlas.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
@@ -52,6 +56,35 @@ World::World()
 }
 
 World::~World() {
+}
+
+// NOCOM(#sirver): it feels wrong that this is here.
+void World::postload() {
+	// NOCOM(#sirver): figure this out, maybe just grow organically.
+	TextureAtlas ta(1024, 1024);
+
+	// These will be deleted at the end of the method.
+	std::vector<std::unique_ptr<Texture>> individual_textures_;
+
+	for (size_t i = 0; i < terrains_->size(); ++i) {
+		const TerrainDescription& terrain = terrains_->get_unmutable(i);
+		for (const std::string& texture_name : terrain.texture_paths()) {
+			log("#sirver texture_name: %s\n", texture_name.c_str());
+			individual_textures_.emplace_back(new Texture(load_image_as_sdl_surface(texture_name)));
+			ta.add(*individual_textures_.back());
+		}
+	}
+	// NOCOM(#sirver): should be some member
+
+	std::vector<std::unique_ptr<SubTexture>> sub_textures_;
+	std::unique_ptr<Texture> terrain_texture_ = ta.pack(&sub_textures_);
+
+	// NOCOM(#sirver): remove
+	FileWrite fw;
+	save_surface_to_png(terrain_texture_.get(), &fw);
+	fw.write(*g_fs, "texture_atlas.png");
+
+	// NOCOM(#sirver): distribute the textures to the terrain_descriptions.
 }
 
 const DescriptionMaintainer<TerrainDescription>& World::terrains() const {

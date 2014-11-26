@@ -309,6 +309,7 @@ uint32_t Graphic::new_maptexture(const std::vector<std::string>& texture_files, 
 	return m_maptextures.size(); // ID 1 is at m_maptextures[0]
 }
 
+// NOCOM(#sirver): remove animate_maptextures and some other stuff.
 /**
  * Advance frames for animated textures
 */

@@ -86,19 +86,19 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
 		throw GameDataError("%s: temperature is not in Kelvin.", name_.c_str());
 	}
 
-	const std::vector<std::string> textures =
+	 texture_paths_ =
 	   table.get_table("textures")->array_entries<std::string>();
 	int frame_length = FRAME_LENGTH;
-	if (textures.empty()) {
+	if (texture_paths_.empty()) {
 		throw GameDataError("Terrain %s has no images.", name_.c_str());
-	} else if (textures.size() == 1) {
+	} else if (texture_paths_.size() == 1) {
 		if (table.has_key("fps")) {
 			throw GameDataError("Terrain %s with one images must not have fps.", name_.c_str());
 		}
 	} else {
 		frame_length = 1000 / get_positive_int(table, "fps");
 	}
-	texture_ = g_gr->new_maptexture(textures, frame_length);
+	texture_ = g_gr->new_maptexture(texture_paths_, frame_length);
 
 	for (const std::string& resource :
 	     table.get_table("valid_resources")->array_entries<std::string>()) {
@@ -123,6 +123,10 @@ TerrainDescription::~TerrainDescription() {
 
 uint32_t TerrainDescription::get_texture() const {
 	return texture_;
+}
+
+const std::vector<std::string>& TerrainDescription::texture_paths() const {
+	return texture_paths_;
 }
 
 TerrainDescription::Type TerrainDescription::get_is() const {

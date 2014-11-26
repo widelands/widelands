@@ -230,6 +230,7 @@ wl_library(logic
     game_io
     graphic
     graphic_color
+    graphic_texture_atlas
     helper
     io_fileread
     io_filesystem

@@ -50,6 +50,8 @@ wl_library(graphic_surface
     gl/utils.h
     screen.cc
     screen.h
+    sub_texture.cc
+    sub_texture.h
     surface.cc
     surface.h
     texture.cc
@@ -66,6 +68,15 @@ wl_library(graphic_surface
     graphic
     graphic_color
     graphic_sdl_utils
+)
+
+wl_library(graphic_texture_atlas
+  SRCS
+    texture_atlas.h
+    texture_atlas.cc
+  DEPENDS
+    graphic_surface
+    base_log
 )
 
 wl_library(graphic

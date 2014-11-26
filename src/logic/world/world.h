@@ -26,6 +26,8 @@
 #include "logic/bob.h"
 #include "logic/description_maintainer.h"
 
+class LuaInterface;
+
 namespace Widelands {
 
 class EditorCategory;
@@ -40,7 +42,7 @@ struct ImmovableDescr;
 class World {
 public:
 	World();
-	~World();  // Defined in .cc because all forward declarations are known then.
+	~World();
 
 	// TODO(sirver): Refactor these to only return the description_maintainer so that world
 	// becomes a pure container.
@@ -82,6 +84,9 @@ public:
 	/// Access to the editor categories.
 	const DescriptionMaintainer<EditorCategory>& editor_terrain_categories() const;
 	const DescriptionMaintainer<EditorCategory>& editor_immovable_categories() const;
+
+	// NOCOM(#sirver): document
+	void postload();
 
 private:
 	std::unique_ptr<DescriptionMaintainer<BobDescr>> bobs_;
