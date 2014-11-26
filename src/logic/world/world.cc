@@ -69,7 +69,6 @@ void World::postload() {
 	for (size_t i = 0; i < terrains_->size(); ++i) {
 		const TerrainDescription& terrain = terrains_->get_unmutable(i);
 		for (const std::string& texture_name : terrain.texture_paths()) {
-			log("#sirver texture_name: %s\n", texture_name.c_str());
 			individual_textures_.emplace_back(new Texture(load_image_as_sdl_surface(texture_name)));
 			ta.add(*individual_textures_.back());
 		}

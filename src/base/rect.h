@@ -26,8 +26,8 @@ struct Rect {
 	/// Generates a degenerate Rect at (0, 0) with no height or width.
 	Rect();
 
-	Rect(int32_t x, int32_t y, uint32_t width, uint32_t height);
-	Rect(const Point& p, uint32_t width, uint32_t height);
+	Rect(int x, int y, int width, int height);
+	Rect(const Point& p, int width, int height);
 
 	/// The top left point of this rectangle.
 	Point top_left() const;
@@ -39,8 +39,8 @@ struct Rect {
 	/// The bottom and right borders of the rectangle are considered to be excluded.
 	bool contains(const Point& pt) const;
 
-	int32_t x, y;
-	uint32_t w, h;
+	int x, y;
+	int w, h;
 };
 
 // TODO(sirver): Use a templated type for all kinds of rects.

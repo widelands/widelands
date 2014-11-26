@@ -22,10 +22,10 @@
 Rect::Rect() : x(0), y(0), w(0), h(0) {
 }
 
-Rect::Rect(int32_t gx, int32_t gy, uint32_t W, uint32_t H) : x(gx), y(gy), w(W), h(H) {
+Rect::Rect(int gx, int gy, int W, int H) : x(gx), y(gy), w(W), h(H) {
 }
 
-Rect::Rect(const Point& p, uint32_t W, uint32_t H) : Rect(p.x, p.y, W, H) {
+Rect::Rect(const Point& p, int W, int H) : Rect(p.x, p.y, W, H) {
 }
 
 Point Rect::top_left() const {
@@ -37,6 +37,5 @@ Point Rect::bottom_right() const {
 }
 
 bool Rect::contains(const Point& pt) const {
-	return pt.x >= x && pt.x < x + static_cast<int32_t>(w) && pt.y >= y &&
-	       pt.y < y + static_cast<int32_t>(h);
+	return pt.x >= x && pt.x < x + w && pt.y >= y && pt.y < y + h;
 }

@@ -40,31 +40,31 @@ public:
 
 private:
 	struct Node {
-		Node(const Rect& init_r) : used(false), r(init_r) {
-		}
+		Node(const Rect& init_r);
+		void split(int w, int h);
 
 		bool used;
 		Rect r;
 		std::unique_ptr<Node> right;
 		std::unique_ptr<Node> down;
-
-		void split(uint32_t w, uint32_t h);
 	};
 
 	struct Block {
-		Block(int init_index, uint32_t width, uint32_t height, const Texture* init_texture)
-		   : index(init_index), r(0, 0, width, height), texture(init_texture) {
+		Block(int init_index, const Texture* init_texture)
+		   : index(init_index), texture(init_texture) {
 		}
 
 		int index;
-		Rect r;
 		const Texture* texture;
 		Node* node;
 	};
 
-	static Node* find_node(Node* root, uint32_t w, uint32_t h);
+	static Node* find_node(Node* root, int w, int h);
 
 	int next_index_;
+	int required_w_;
+	int required_h_;
+
 	// Unpacked items.
 	std::vector<Block> blocks_;
 

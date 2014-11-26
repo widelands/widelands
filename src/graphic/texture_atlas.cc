@@ -17,10 +17,32 @@
  *
  */
 
-#include "base/log.h"
 #include "graphic/texture_atlas.h"
 
+#include <cassert>
 #include <memory>
+
+#include "base/log.h"
+
+TextureAtlas::Node::Node(const Rect& init_r) : used(false), r(init_r) {
+	// log("#sirver init_r.x: %d,init_r.y: %d,init_r.w: %d,init_r.h: %d\n",
+		 // init_r.x,
+		 // init_r.y,
+		 // init_r.w,
+		 // init_r.h);
+}
+void TextureAtlas::Node::split(int item_w, int item_h) {
+	assert(!used);
+
+	down.reset(new Node(Rect(r.x, r.y + item_h, r.w, r.h - item_h)));
+	right.reset(new Node(Rect(r.x + item_w, r.y, r.w - item_w, item_h)));
+	used = true;
+
+	// Note: we do not change the size of the root. It is not needed
+	// for the remaining algorithm, but we use it to remember the
+	// size of the full canvas.
+}
+
 
 TextureAtlas::TextureAtlas(int, int) :
 	next_index_(0)
@@ -28,50 +50,50 @@ TextureAtlas::TextureAtlas(int, int) :
 }
 
 void TextureAtlas::add(const Texture& texture) {
-	blocks_.emplace_back(next_index_++, texture.width(), texture.height(), &texture);
+	blocks_.emplace_back(next_index_++, &texture);
 }
 
 // static
-TextureAtlas::Node* TextureAtlas::find_node(Node* root, uint32_t w, uint32_t h) {
-	if (root->used) {
-		Node* child_node = find_node(root->right.get(), w, h);
+TextureAtlas::Node* TextureAtlas::find_node(Node* node, int w, int h) {
+	if (node->used) {
+		Node* child_node = find_node(node->right.get(), w, h);
 		if (child_node != nullptr) {
 			return child_node;
 		}
-		return find_node(root->down.get(), w, h);
+		return find_node(node->down.get(), w, h);
+	}
+	assert(!node->used);
+
+	if ((w <= node->r.w) && (h <= node->r.h)) {
+		return node;
 	}
 
-	if (w <= root->r.w && h <= root->r.h) {
-		return root;
-	}
-
-	// NOCOM(#sirver): this is fatal.
 	return nullptr;
-}
-
-void TextureAtlas::Node::split(uint32_t item_w, uint32_t item_h) {
-	used = true;
-	down.reset(new Node(Rect(r.x, r.y + item_h, r.w, r.h - item_h)));
-	right.reset(new Node(Rect(r.x + item_w, r.y, r.w - item_w, r.h)));
 }
 
 std::unique_ptr<Texture> TextureAtlas::pack(std::vector<std::unique_ptr<SubTexture>>* subtextures) {
 
 	std::sort(blocks_.begin(), blocks_.end(), [](const Block& i, const Block& j) {
-		return std::max(i.r.w, i.r.h) > std::max(j.r.w, j.r.h);
+		return std::max(i.texture->width(), i.texture->height()) >
+		       std::max(j.texture->width(), j.texture->height());
 	});
 
-	log("#sirver blocks_.size(): %d\n", blocks_.size());
 	// NOCOM(#sirver): make this grow.
-	uint32_t current_w = 1024;
-	uint32_t current_h = 1024;
+	int current_w = 1024;
+	int current_h = 1024;
 
 	Node root(Rect(0, 0, current_w, current_h));
 
 	// NOCOM(#sirver): make sure nodes contains something.
 	for (Block& block : blocks_) {
-		Node* fitting_node = find_node(&root, block.r.w, block.r.h);
-		fitting_node->split(block.r.w, block.r.h);
+		Node* fitting_node = find_node(&root, block.texture->width(), block.texture->height());
+		fitting_node->split(block.texture->width(), block.texture->height());
+		log("#sirver    fitting_node->x: %d,fitting_node->y: %d,fitting_node->w: %d,fitting_node->h: "
+		    "%d\n",
+		    fitting_node->r.x,
+		    fitting_node->r.y,
+		    fitting_node->r.w,
+		    fitting_node->r.h);
 		block.node = fitting_node;
 	}
 
