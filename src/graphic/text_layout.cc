@@ -25,6 +25,7 @@
 #include <boost/format.hpp>
 
 #include "base/utf8.h"
+#include "graphic/font_handler1.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 
@@ -33,7 +34,7 @@ std::string as_game_tip(const std::string& txt) {
 		("<rt padding_l=48 padding_t=28 padding_r=48 padding_b=28>"
 		 "<p align=center><font color=21211b face=%s size=16>%s</font></p></rt>");
 
-	f % (UI::LocaleFonts::get()->get_fontset()).serif();
+	f % (UI::g_fh1->fontset()).serif();
 	f % txt;
 	return f.str();
 }
@@ -41,7 +42,7 @@ std::string as_game_tip(const std::string& txt) {
 std::string as_window_title(const std::string& txt) {
 	static boost::format f("<rt><p><font face=%s size=13 bold=1 color=%02x%02x%02x>%s</font></p></rt>");
 
-	f % (UI::LocaleFonts::get()->get_fontset()).serif();
+	f % (UI::g_fh1->fontset()).serif();
 	f % int(UI_FONT_CLR_FG.r) % int(UI_FONT_CLR_FG.g) % int(UI_FONT_CLR_FG.b);
 	f % txt;
 	return f.str();
@@ -51,7 +52,7 @@ std::string as_uifont(const std::string & txt, int size, const RGBColor& clr) {
 	static boost::format
 			f("<rt><p><font face=%s size=%i bold=1 shadow=1 color=%02x%02x%02x>%s</font></p></rt>");
 
-	f % (UI::LocaleFonts::get()->get_fontset()).serif();
+	f % (UI::g_fh1->fontset()).serif();
 	f % size;
 	f % int(clr.r) % int(clr.g) % int(clr.b);
 	f % txt;
@@ -61,7 +62,7 @@ std::string as_uifont(const std::string & txt, int size, const RGBColor& clr) {
 std::string as_tooltip(const std::string & txt) {
 	static boost::format f("<rt><p><font face=%s size=%i bold=1 color=%02x%02x%02x>%s</font></p></rt>");
 
-	f % (UI::LocaleFonts::get()->get_fontset()).serif();
+	f % (UI::g_fh1->fontset()).serif();
 	f % UI_FONT_SIZE_SMALL;
 	f % int(UI_FONT_TOOLTIP_CLR.r) % int(UI_FONT_TOOLTIP_CLR.g) % int(UI_FONT_TOOLTIP_CLR.b);
 	f % txt;
@@ -71,7 +72,7 @@ std::string as_tooltip(const std::string & txt) {
 std::string as_waresinfo(const std::string & txt) {
 	static boost::format f
 		("<rt><p><font face=%s size=10 bold=0 color=%02x%02x%02x>%s</font></p></rt>");
-	f % (UI::LocaleFonts::get()->get_fontset()).condensed();
+	f % (UI::g_fh1->fontset()).condensed();
 	f % int(UI_FONT_TOOLTIP_CLR.r) % int(UI_FONT_TOOLTIP_CLR.g) % int(UI_FONT_TOOLTIP_CLR.b);
 	f % txt;
 	return f.str();
@@ -146,7 +147,7 @@ const TextStyle & TextStyle::ui_big()
 {
 	static TextStyle style;
 
-	style.font = Font::get((LocaleFonts::get()->get_fontset()).serif(), UI_FONT_SIZE_BIG);
+	style.font = Font::get(UI::g_fh1->fontset().serif(), UI_FONT_SIZE_BIG);
 	style.fg = UI_FONT_CLR_FG;
 	style.bold = true;
 
@@ -157,7 +158,7 @@ const TextStyle & TextStyle::ui_small()
 {
 	static TextStyle style;
 
-	style.font = Font::get((LocaleFonts::get()->get_fontset()).serif(), UI_FONT_SIZE_SMALL);
+	style.font = Font::get(UI::g_fh1->fontset().serif(), UI_FONT_SIZE_SMALL);
 	style.fg = UI_FONT_CLR_FG;
 	style.bold = true;
 
@@ -168,7 +169,7 @@ const TextStyle & TextStyle::ui_ultrasmall()
 {
 	static TextStyle style;
 
-	style.font = Font::get((LocaleFonts::get()->get_fontset()).serif(), UI_FONT_SIZE_ULTRASMALL);
+	style.font = Font::get(UI::g_fh1->fontset().serif(), UI_FONT_SIZE_ULTRASMALL);
 	style.fg = UI_FONT_CLR_FG;
 	style.bold = true;
 

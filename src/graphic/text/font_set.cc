@@ -60,21 +60,7 @@ const std::string& FontSet::condensed_italic() const {return condensed_italic_;}
 const std::string& FontSet::condensed_bold_italic() const {return condensed_bold_italic_;}
 const FontSet::Direction& FontSet::direction() const {return direction_;}
 
-// NOCOM(#codereview):
-// I think this class should not be a Singleton, but instead live in WLApplication or the
-// FontHandler. Most places that use it right now already use the font handler
-// and it can forward the API or expose the fontset. Classes that use FontSet explicitly should get
-// it passed in.
-//
-// After looking some more at the code I find LocaleFonts unnecessary. Give
-// FontSet the ability to parse itself, via new FontSet(localename) (remember
-// deletion of this class tough) and let FontHandler own the current one and
-// update it when needed - you can also introduce a notification
-// "LocaleUpdated" and FontHandler updates the FontSet on that. This is quite
-// clean and loosely coupled.
-
 // Loads font info from config files, depending on the localename
-// NOCOM(#codereview): return a unique_ptr<Fontset>, otherwise ownership is unclear. Who deletes that?
 void FontSet::parse_font_for_locale(const std::string& localename) {
 	std::string fontsetname = "default";
 	std::string actual_localename = localename;
@@ -174,12 +160,6 @@ void FontSet::parse_font_for_locale(const std::string& localename) {
 	} else {
 		direction_ = FontSet::Direction::kLeftToRight;
 	}
-}
-
-
-LocaleFonts* LocaleFonts::get() {
-	static LocaleFonts locale_fonts;
-	return &locale_fonts;
 }
 
 }

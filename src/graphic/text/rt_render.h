@@ -28,6 +28,7 @@
 
 #include "graphic/color.h"
 #include "graphic/image.h"
+#include "graphic/text/font_set.h"
 
 class SurfaceCache;
 class ImageCache;

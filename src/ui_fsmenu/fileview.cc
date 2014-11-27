@@ -24,6 +24,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 
 #include "graphic/graphic.h"
+#include "graphic/font_handler1.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 #include "io/filesystem/filesystem.h"
@@ -87,8 +88,7 @@ FullscreenMenuTextView::FullscreenMenuTextView
 	title.set_pos
 		(Point((get_inner_w() - title.get_w()) / 2, get_h() * 167 / 1000));
 
-	UI::FontSet fontset = UI::LocaleFonts::get()->get_fontset();
-	textview.set_font(fontset.serif(), UI_FONT_SIZE_PROSA, PROSA_FONT_CLR_FG);
+	textview.set_font(UI::g_fh1->fontset().serif(), UI_FONT_SIZE_PROSA, PROSA_FONT_CLR_FG);
 }
 
 void FullscreenMenuTextView::set_text(const std::string & text)
@@ -122,9 +122,7 @@ FileViewWindow::FileViewWindow
 	read_text(filename, &title_text, &content);
 
 	textview.set_text(content);
-
-	UI::FontSet fontset = UI::LocaleFonts::get()->get_fontset();
-	textview.set_font(fontset.serif(), UI_FONT_SIZE_PROSA, PROSA_FONT_CLR_FG);
+	textview.set_font(UI::g_fh1->fontset().serif(), UI_FONT_SIZE_PROSA, PROSA_FONT_CLR_FG);
 
 	set_inner_size(560, 240);
 

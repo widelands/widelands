@@ -71,32 +71,6 @@ private:
 	FontSet::Direction direction_;
 };
 
-
-/// Singleton object that contains the FontSet for the currently active locale.
-/// It also has a parse function to get a FontSet for a locale that isn't currently active.
-class LocaleFonts {
-public:
-
-	/// Returns the one existing instance of this object.
-	/// Creates a new instance if none exists yet.
-	// NOCOM(#codereview): In other places we use instance(). WLApplication uses get(). We should consolidate (in trunk and merge here). I prefer instance() as it gives a clear indication that we are dealing with a Singleton.
-	static LocaleFonts* get();
-
-	/// Returns the FontSet for the currently active locale
-	// NOCOM(#codereview): drop the get? fontset().
-	const UI::FontSet& get_fontset() const {return *fontset_;}
-
-	/// Sets the FontSet for the currently active locale.
-	void set_fontset(const std::string& localename) {
-		fontset_ = new FontSet(localename);
-	}
-
-private:
-	 LocaleFonts() = default;
-
-	 UI::FontSet* fontset_; // The currently active FontSet
-};
-
 }
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_FONT_SET_H

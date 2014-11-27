@@ -24,6 +24,7 @@
 #include <SDL_keycode.h>
 
 #include "graphic/font_handler.h"
+#include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
@@ -73,10 +74,8 @@ EditBox::EditBox
 {
 	set_thinks(false);
 
-	UI::FontSet fontset = UI::LocaleFonts::get()->get_fontset();
-
 	m->background = background;
-	m->fontname = fontset.serif();
+	m->fontname = UI::g_fh1->fontset().serif();
 	m->fontsize = UI_FONT_SIZE_SMALL;
 	m->fontcolor = UI_FONT_CLR_FG;
 

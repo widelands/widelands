@@ -26,6 +26,7 @@
 #include "base/deprecated.h"
 #include "base/i18n.h"
 #include "graphic/font_handler.h"
+#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
@@ -68,7 +69,7 @@ void ProgressWindow::draw_background
 		// (Re-)Load background graphics
 		m_background_pic = ImageTransformations::resize(g_gr->images().get(m_background), xres, yres);
 
-		const uint32_t h = g_fh->get_fontheight((UI::LocaleFonts::get()->get_fontset()).serif(),
+		const uint32_t h = g_fh->get_fontheight(UI::g_fh1->fontset().serif(),
 															 UI_FONT_SIZE_SMALL);
 		m_label_rectangle.x = xres / 4;
 		m_label_rectangle.w = xres / 2;

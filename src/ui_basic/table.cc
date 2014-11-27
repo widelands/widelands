@@ -51,7 +51,7 @@ Table<void *>::Table
 :
 	Panel             (parent, x, y, w, h),
 	m_total_width     (0),
-	m_fontname        ((UI::LocaleFonts::get()->get_fontset()).serif()),
+	m_fontname        (UI::g_fh1->fontset().serif()),
 	m_fontsize        (UI_FONT_SIZE_SMALL),
 	m_headerheight    (UI_FONT_SIZE_SMALL * 8 / 5),
 	m_lineheight      (g_fh->get_fontheight(m_fontname, m_fontsize)),

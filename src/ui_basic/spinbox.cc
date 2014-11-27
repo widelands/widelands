@@ -26,6 +26,7 @@
 #include "base/deprecated.h"
 #include "base/i18n.h"
 #include "base/wexception.h"
+#include "graphic/font_handler1.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 #include "ui_basic/button.h"
@@ -174,7 +175,7 @@ SpinBox::SpinBox
 	m_buttons.push_back(sbi->butMinus);
 	m_buttons.push_back(sbi->butPlus);
 
-	set_font((UI::LocaleFonts::get()->get_fontset()).serif(), UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG);
+	set_font(UI::g_fh1->fontset().serif(), UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG);
 }
 
 SpinBox::~SpinBox() {

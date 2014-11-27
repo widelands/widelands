@@ -5,7 +5,7 @@ wl_library(graphic_text
     font_io.cc
     font_io.h
     font_set.cc
-    font_set.h # NOCOM own library?
+    font_set.h
     rt_errors.h
     rt_errors_impl.h
     rt_parse.cc
@@ -28,5 +28,5 @@ wl_library(graphic_text
     graphic_surface
     io_fileread
     io_filesystem
-    scripting # NOCOM for reading font_set
+    scripting
 )

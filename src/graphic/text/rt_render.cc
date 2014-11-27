@@ -588,7 +588,7 @@ private:
 };
 
 IFont& FontCache::get_font(NodeStyle& ns) {
-	UI::FontSet fontset = UI::LocaleFonts::get()->get_fontset();
+	UI::FontSet fontset = UI::g_fh1->fontset();
 
 	if (ns.font_style & IFont::BOLD && ns.font_style & IFont::ITALIC) {
 		if (ns.font_face == fontset.condensed() ||
@@ -995,7 +995,7 @@ RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& 
 	std::unique_ptr<Tag> rt(parser_->parse(text, allowed_tags));
 
 	NodeStyle default_style = {
-		(UI::LocaleFonts::get()->get_fontset()).serif(), 16,
+		UI::g_fh1->fontset().serif(), 16,
 		RGBColor(0, 0, 0), IFont::DEFAULT, 0, HALIGN_LEFT, VALIGN_BOTTOM,
 		""
 	};

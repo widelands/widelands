@@ -29,6 +29,7 @@
 #include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/default_resolution.h"
+#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
@@ -767,7 +768,7 @@ void OptionsCtrl::save_options() {
 
 	WLApplication::get()->set_input_grab(opt.inputgrab);
 	i18n::set_locale(opt.language);
-	UI::LocaleFonts::get()->set_fontset(opt.language);
+	UI::g_fh1->load_locale_fonts();
 	g_sound_handler.set_disable_music(!opt.music);
 	g_sound_handler.set_disable_fx(!opt.fx);
 }

@@ -782,7 +782,6 @@ void WLApplication::init_language() {
 	// Set locale corresponding to selected language
 	std::string language = s.get_string("language", "");
 	i18n::set_locale(language);
-	UI::LocaleFonts::get()->set_fontset(i18n::get_locale());
 }
 
 /**

@@ -24,6 +24,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/utility.hpp>
 
+#include "base/i18n.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
@@ -88,7 +89,8 @@ namespace UI {
 class FontHandler1 : public IFontHandler1 {
 public:
 	FontHandler1(ImageCache* image_cache, SurfaceCache* surface_cache, RT::Renderer* renderer) :
-		surface_cache_(surface_cache), image_cache_(image_cache), renderer_(renderer) {}
+		surface_cache_(surface_cache), image_cache_(image_cache),
+		fontset_(new UI::FontSet(i18n::get_locale())), renderer_(renderer) {}
 	virtual ~FontHandler1() {}
 
 	const Image* render(const string& text, uint16_t w = 0) override {
@@ -103,15 +105,25 @@ public:
 		return image_cache_->insert(image.release());
 	}
 
+	const UI::FontSet& fontset() const {
+		return *fontset_;
+	}
+
+	void load_locale_fonts() {
+		fontset_ = new UI::FontSet(i18n::get_locale());
+	}
+
 private:
 	SurfaceCache* const surface_cache_;  // not owned
 	ImageCache* const image_cache_;  // not owned
+	UI::FontSet* fontset_; // The currently active FontSet
 	std::unique_ptr<RT::Renderer> renderer_;
 };
 
 IFontHandler1 * create_fonthandler(Graphic* gr) {
+
 	return new FontHandler1(
-	   &gr->images(), &gr->surfaces(), new RT::Renderer(&gr->images(), &gr->surfaces()));
+		&gr->images(), &gr->surfaces(), new RT::Renderer(&gr->images(), &gr->surfaces()));
 }
 
 IFontHandler1 * g_fh1 = nullptr;

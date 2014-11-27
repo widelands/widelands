@@ -27,6 +27,7 @@
 #include "base/log.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
+#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
@@ -83,7 +84,7 @@ HelpWindow::HelpWindow
 		 g_gr->images().get("pics/but0.png"),
 		 _("OK"), std::string(), true, false);
 	btn->sigclicked.connect(boost::bind(&HelpWindow::pressed_ok, boost::ref(*this)));
-	btn->set_font(Font::get((UI::LocaleFonts::get()->get_fontset()).serif(),
+	btn->set_font(Font::get((UI::g_fh1->fontset()).serif(),
 									(fontsize < 12 ? 12 : fontsize)));
 
 	textarea->set_size(in_width - 10, in_height - 10 - (2 * but_height));

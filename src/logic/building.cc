@@ -888,7 +888,7 @@ void Building::send_message
 	 uint32_t throttle_time,
 	 uint32_t throttle_radius)
 {
-	const char* font_face = UI::LocaleFonts::get()->get_fontset().serif().c_str();
+	const char* font_face = UI::g_fh1->fontset().serif().c_str();
 	// TODO(sirver): add support into the font renderer to get to representative
 	// animations of buildings so that the messages can still be displayed, even
 	// after reload.

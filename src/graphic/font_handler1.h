@@ -21,11 +21,13 @@
 #ifndef WL_GRAPHIC_FONT_HANDLER1_H
 #define WL_GRAPHIC_FONT_HANDLER1_H
 
+#include <memory>
 #include <string>
 
 #include "base/macros.h"
 #include "base/point.h"
 #include "graphic/align.h"
+#include "graphic/text/font_set.h"
 
 
 class FileSystem;
@@ -47,6 +49,12 @@ public:
 	 * ownership remains with this class. Will throw on error.
 	 */
 	virtual const Image* render(const std::string& text, uint16_t w = 0) = 0;
+
+	/// Returns the font handler's current FontSet
+	virtual const UI::FontSet& fontset() const = 0;
+
+	/// Loads the FontSet for the currently active locale into the font handler.
+	virtual void load_locale_fonts() = 0;
 
 	DISALLOW_COPY_AND_ASSIGN(IFontHandler1);
 };
