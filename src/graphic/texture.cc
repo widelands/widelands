@@ -128,17 +128,12 @@ Texture::Texture(const GLuint texture, const Rect& subrect, int parent_w, int pa
 
 	m_texture = texture;
 	m_owns_texture = false;
-	// NOCOM(#sirver): some explanation?
+
 	m_texture_coordinates.w = static_cast<float>(m_w - 1) / parent_w;
 	m_texture_coordinates.h = static_cast<float>(m_h - 1) / parent_h;
 	m_texture_coordinates.x = (static_cast<float>(subrect.x) + 0.5) / parent_w;
 	m_texture_coordinates.y = (static_cast<float>(subrect.y) + 0.5) / parent_h;
 
-	log("#sirver parent_w: %d,parent_h: %d\n", parent_w, parent_h);
-	log("#sirver m_texture_coordinates.x: %.3f\n", m_texture_coordinates.x);
-	log("#sirver m_texture_coordinates.y: %.3f\n", m_texture_coordinates.y);
-	log("#sirver m_texture_coordinates.w: %.3f\n", m_texture_coordinates.w);
-	log("#sirver m_texture_coordinates.h: %.3f\n", m_texture_coordinates.h);
 	// NOCOM(#sirver): some stuff is not no longer correctly supported, i.e. pixel access and locking.
 	// NOCOM(#sirver): also the blit program
 }

@@ -76,9 +76,7 @@ private:
 	// True if we own the texture, i.e. if we need to delete it.
 	bool m_owns_texture;
 
-	// Bounding box in texture coordinates in m_texture. This is in
-	// GLCoordinates which start at the bottom left, so top_left() will actually
-	// be bottom left.
+	// Texture coordinates in m_texture.
 	FloatRect m_texture_coordinates;
 
 	GLuint m_texture;
