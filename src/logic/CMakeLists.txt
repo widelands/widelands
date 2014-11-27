@@ -230,6 +230,7 @@ wl_library(logic
     game_io
     graphic
     graphic_color
+    graphic_text_layout
     helper
     io_fileread
     io_filesystem
@@ -248,5 +249,4 @@ wl_library(logic
     ui_basic
     widelands_ball_of_mud
     wui
-    wui_text_layout
 )

@@ -29,13 +29,13 @@
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/text/font_set.h"
+#include "graphic/text_constants.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/building.h"
 #include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
-#include "wui/text_constants.h"
 
 namespace UI {
 

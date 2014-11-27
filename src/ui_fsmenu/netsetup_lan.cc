@@ -22,10 +22,10 @@
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "graphic/graphic.h"
+#include "graphic/text_constants.h"
 #include "network/constants.h"
 #include "network/network.h"
 #include "profile/profile.h"
-#include "wui/text_constants.h"
 
 FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN () :
 	FullscreenMenuBase("ui_fsmenu.jpg"), //  TODO(unknown): change this

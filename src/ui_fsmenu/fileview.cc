@@ -25,12 +25,11 @@
 
 #include "graphic/graphic.h"
 #include "graphic/text/font_set.h"
+#include "graphic/text_constants.h"
 #include "io/filesystem/filesystem.h"
 #include "profile/profile.h"
 #include "scripting/lua_table.h"
 #include "scripting/scripting.h"
-#include "wui/text_constants.h"
-
 
 namespace {
 bool read_text(const std::string& filename, std::string* title, std::string* content) {

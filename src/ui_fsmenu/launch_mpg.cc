@@ -26,6 +26,7 @@
 #include "base/i18n.h"
 #include "base/warning.h"
 #include "graphic/graphic.h"
+#include "graphic/text_constants.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/constants.h"
 #include "logic/game.h"
@@ -43,7 +44,6 @@
 #include "ui_fsmenu/mapselect.h"
 #include "wui/gamechatpanel.h"
 #include "wui/multiplayersetupgroup.h"
-#include "wui/text_constants.h"
 
 /// Simple user interaction window for selecting either map, save or cancel
 struct MapOrSaveSelectionWindow : public UI::Window {

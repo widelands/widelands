@@ -26,13 +26,13 @@
 #include "base/log.h"
 #include "base/macros.h"
 #include "graphic/graphic.h"
+#include "graphic/text_constants.h"
 #include "network/constants.h"
 #include "network/internet_gaming.h"
 #include "network/netclient.h"
 #include "network/nethost.h"
 #include "profile/profile.h"
 #include "ui_basic/messagebox.h"
-#include "wui/text_constants.h"
 
 FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	(char const * const nick, char const * const pwd, bool registered)

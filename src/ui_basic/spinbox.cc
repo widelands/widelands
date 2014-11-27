@@ -27,9 +27,9 @@
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "graphic/text/font_set.h"
+#include "graphic/text_constants.h"
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
-#include "wui/text_constants.h"
 
 namespace UI {
 

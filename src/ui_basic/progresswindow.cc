@@ -25,18 +25,17 @@
 
 #include "base/deprecated.h"
 #include "base/i18n.h"
-#include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/font_set.h"
+#include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "wui/text_constants.h"
 
 #define PROGRESS_FONT_COLOR_FG        RGBColor(128, 128, 255)
 #define PROGRESS_FONT_COLOR_BG        RGBColor(64, 64, 0)
-//#define PROGRESS_FONT_COLOR PROGRESS_FONT_COLOR_FG, PROGRESS_FONT_COLOR_BG // not used
 #define PROGRESS_STATUS_RECT_PADDING  2
 #define PROGRESS_STATUS_BORDER_X      2
 #define PROGRESS_STATUS_BORDER_Y      2

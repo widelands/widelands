@@ -24,7 +24,6 @@
 
 #include "base/deprecated.h"
 #include "base/macros.h"
-#include "graphic/font.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "logic/building.h"

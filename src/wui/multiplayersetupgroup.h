@@ -26,11 +26,11 @@
 #include <string>
 
 #include "graphic/text/font_set.h"
+#include "graphic/text_constants.h"
 #include "network/network_player_settings_backend.h"
 #include "ui_basic/box.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/textarea.h"
-#include "wui/text_constants.h"
 
 #define MAXCLIENTS 64
 

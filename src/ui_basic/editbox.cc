@@ -23,12 +23,11 @@
 
 #include <SDL_keycode.h>
 
-#include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/font_set.h"
+#include "graphic/text_constants.h"
 #include "ui_basic/mouse_constants.h"
-#include "wui/text_constants.h"
 
 namespace UI {
 

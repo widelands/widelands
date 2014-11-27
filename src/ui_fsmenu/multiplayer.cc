@@ -20,9 +20,9 @@
 #include "ui_fsmenu/multiplayer.h"
 
 #include "base/i18n.h"
+#include "graphic/text_constants.h"
 #include "profile/profile.h"
 #include "wui/login_box.h"
-#include "wui/text_constants.h"
 
 FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer() :
 	FullscreenMenuBase("ui_fsmenu.jpg"),

@@ -37,6 +37,7 @@
 #include "graphic/image_transformations.h"
 #include "graphic/in_memory_image.h"
 #include "graphic/surface.h"
+#include "graphic/text_constants.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
@@ -45,8 +46,6 @@
 #include "logic/replay.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/messagebox.h"
-#include "wui/text_constants.h"
-
 
 FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	(Widelands::Game & g, GameSettingsProvider * gsp, GameController * gc, bool is_replay) :

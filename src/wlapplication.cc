@@ -50,6 +50,7 @@
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/text/font_set.h"
+#include "graphic/text_constants.h"
 #include "helper.h"
 #include "io/dedicated_log.h"
 #include "io/filesystem/disk_filesystem.h"
@@ -88,7 +89,6 @@
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
-#include "wui/text_constants.h"
 
 #define MINIMUM_DISK_SPACE 250000000lu
 #define SCREENSHOT_DIR "screenshots"

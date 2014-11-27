@@ -26,11 +26,10 @@
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
+#include "graphic/text_constants.h"
 #include "logic/campaign_visibility.h"
 #include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"
-#include "wui/text_constants.h"
-
 
 /*
  * UI 1 - Selection of Campaign

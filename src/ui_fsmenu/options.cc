@@ -31,6 +31,7 @@
 #include "graphic/default_resolution.h"
 #include "graphic/graphic.h"
 #include "graphic/text/font_set.h"
+#include "graphic/text_constants.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/save_handler.h"
@@ -39,7 +40,6 @@
 #include "scripting/scripting.h"
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
-#include "wui/text_constants.h"
 
 namespace {
 

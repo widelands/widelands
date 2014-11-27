@@ -28,12 +28,12 @@
 #include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/request.h"
-#include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/font_set.h"
+#include "graphic/text_layout.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/constructionsite.h"
@@ -47,7 +47,6 @@
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "wui/interactive_player.h"
-#include "wui/text_layout.h"
 
 namespace Widelands {
 

@@ -17,14 +17,14 @@
  *
  */
 
-#ifndef WL_WUI_TEXT_LAYOUT_H
-#define WL_WUI_TEXT_LAYOUT_H
+#ifndef WL_GRAPHIC_TEXT_LAYOUT_H
+#define WL_GRAPHIC_TEXT_LAYOUT_H
 
 #include <string>
 
+#include "graphic/font.h"
 #include "graphic/color.h"
-#include "wui/text_constants.h"
-
+#include "graphic/text_constants.h"
 
 /**
  * Checks it the given string is RichText or not. Does not do validity checking.
@@ -44,4 +44,53 @@ std::string as_waresinfo(const std::string&);
 std::string as_window_title(const std::string&);
 std::string as_game_tip(const std::string&);
 
-#endif  // end of include guard: WL_WUI_TEXT_LAYOUT_H
+namespace UI {
+
+/**
+ * Text style combines font with other characteristics like color
+ * and style (italics, bold).
+ */
+// TODO(GunChleoc): This struct will disappear with the old font handler
+struct TextStyle {
+	TextStyle() :
+		font(nullptr),
+		fg(255, 255, 255),
+		bold(false),
+		italics(false),
+		underline(false)
+	{}
+
+	static TextStyle makebold(Font * font, RGBColor fg) {
+		TextStyle ts;
+		ts.font = font;
+		ts.bold = true;
+		ts.fg = fg;
+		return ts;
+	}
+
+	static const TextStyle & ui_big();
+	static const TextStyle & ui_small();
+	static const TextStyle & ui_ultrasmall();
+	uint32_t calc_bare_width(const std::string & text) const;
+	void calc_bare_height_heuristic(const std::string & text, int32_t & miny, int32_t & maxy) const;
+	void setup() const;
+
+	Font * font;
+	RGBColor fg;
+	bool bold : 1;
+	bool italics : 1;
+	bool underline : 1;
+
+	bool operator== (const TextStyle & o) const {
+		return
+			font == o.font && fg == o.fg &&
+			bold == o.bold && italics == o.italics && underline == o.underline;
+	}
+	bool operator!= (const TextStyle & o) const {
+		return !(*this == o);
+	}
+};
+
+} // namespace UI
+
+#endif  // end of include guard: WL_GRAPHIC_TEXT_LAYOUT_H

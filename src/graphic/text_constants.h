@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_WUI_TEXT_CONSTANTS_H
-#define WL_WUI_TEXT_CONSTANTS_H
+#ifndef WL_GRAPHIC_TEXT_CONSTANTS_H
+#define WL_GRAPHIC_TEXT_CONSTANTS_H
 
 // Basic constants for often used text attributes.
 
@@ -51,4 +51,4 @@ constexpr const char* kFallbackFont = "DejaVu/DejaVuSerif.ttf";
 #define UI_FONT_CLR_GOOD_HEX      "00bb00"
 #define UI_FONT_CLR_IDLE_HEX      "0090ff"
 
-#endif  // end of include guard: WL_WUI_TEXT_CONSTANTS_H
+#endif  // end of include guard: WL_GRAPHIC_TEXT_CONSTANTS_H

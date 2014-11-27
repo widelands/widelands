@@ -1,12 +1,3 @@
-wl_library(wui_text_layout
-  SRCS
-    text_layout.cc
-    text_layout.h
-    text_constants.h
-  DEPENDS
-    graphic_color
-)
-
 wl_library(wui_chat_ui
   SRCS
     chatoverlay.cc
@@ -143,6 +134,7 @@ wl_library(wui
     graphic_color
     graphic_image
     graphic_surface
+    graphic_text_layout
     io_fileread
     io_filesystem
     logic
@@ -158,5 +150,4 @@ wl_library(wui
     ui_fsmenu
     widelands_ball_of_mud
     wui_chat_ui
-    wui_text_layout
 )

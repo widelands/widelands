@@ -23,6 +23,7 @@
 #include <list>
 
 #include "graphic/text/font_set.h"
+#include "graphic/text_constants.h"
 #include "logic/attackable.h"
 #include "logic/bob.h"
 #include "logic/player.h"
@@ -31,7 +32,6 @@
 #include "ui_basic/button.h"
 #include "ui_basic/slider.h"
 #include "ui_basic/textarea.h"
-#include "wui/text_constants.h"
 
 using Widelands::Bob;
 using Widelands::Building;

@@ -23,9 +23,10 @@
 
 #include "graphic/font_handler.h"
 #include "graphic/richtext.h"
-#include "graphic/wordwrap.h"
 #include "graphic/text/font_set.h"
-#include "wui/text_constants.h"
+#include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
+#include "graphic/wordwrap.h"
 
 namespace UI {
 

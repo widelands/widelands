@@ -32,6 +32,8 @@
 #include "graphic/default_resolution.h"
 #include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 #include "logic/checkstep.h"
 #include "logic/cmd_queue.h"
 #include "logic/game.h"
@@ -53,8 +55,6 @@
 #include "wui/minimap.h"
 #include "wui/overlay_manager.h"
 #include "wui/quicknavigation.h"
-#include "wui/text_constants.h"
-#include "wui/text_layout.h"
 #include "wui/unique_window_handler.h"
 
 using Widelands::Area;
