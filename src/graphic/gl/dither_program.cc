@@ -19,19 +19,13 @@
 
 #include "graphic/gl/dither_program.h"
 
-// NOCOM(#sirver): check includes.
 #include "base/wexception.h"
 #include "graphic/gl/fields_to_draw.h"
-#include "graphic/graphic.h"
 #include "graphic/image_io.h"
-#include "graphic/terrain_texture.h"
 #include "graphic/texture.h"
-#include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 
 namespace  {
-
-using namespace Widelands;
 
 const char kDitherVertexShader[] = R"(
 #version 120
@@ -78,7 +72,6 @@ void main() {
 }
 )";
 
-
 }  // namespace
 
 DitherProgram::DitherProgram() {
@@ -99,6 +92,8 @@ DitherProgram::DitherProgram() {
 	glBindTexture(GL_TEXTURE_2D, dither_mask_->get_gl_texture());
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
@@ -148,7 +143,8 @@ void DitherProgram::maybe_add_dithering_triangle(
 	if (my_terrain == other_terrain) {
 		return;
 	}
-	const TerrainDescription& other_terrain_description = terrains.get_unmutable(other_terrain);
+	const Widelands::TerrainDescription& other_terrain_description =
+	   terrains.get_unmutable(other_terrain);
 	if (terrains.get_unmutable(my_terrain).dither_layer() <
 	    other_terrain_description.dither_layer()) {
 		const FloatPoint texture_offset =
@@ -215,7 +211,7 @@ void DitherProgram::gl_draw(int gl_texture, float texture_w, float texture_h) {
 }
 
 void DitherProgram::draw(const uint32_t gametime,
-                         const DescriptionMaintainer<TerrainDescription>& terrains,
+                         const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
                          const FieldsToDraw& fields_to_draw) {
 	// This method expects that all terrains have the same dimensions and that
 	// all are packed into the same texture atlas, i.e. all are in the same GL

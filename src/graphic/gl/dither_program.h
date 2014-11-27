@@ -22,7 +22,7 @@
 
 #include <memory>
 
-#include "base/rect.h"
+#include "base/point.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
 #include "logic/description_maintainer.h"
@@ -41,7 +41,7 @@ public:
 	          const FieldsToDraw& fields_to_draw);
 
 private:
-	// Adds the triangle between the indexes (which index 'fields_to_draw' to
+	// Adds the triangle between the indexes (which index 'fields_to_draw') to
 	// vertices_ if the my_terrain != other_terrain and the dither_layer()
 	// agree.
 	void maybe_add_dithering_triangle(
@@ -55,7 +55,8 @@ private:
 	   int other_terrain);
 
 	// Adds the 'field' as an vertex to the 'vertices_'. The 'order_index'
-	// defines which texture position will be used for this vertix.
+	// defines which texture position in the dithering texture will be used for
+	// this vertex.
 	void add_vertex(const FieldsToDraw::Field& field, int order_index, const FloatPoint& texture_offset);
 
 	struct PerVertexData {

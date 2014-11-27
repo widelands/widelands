@@ -19,7 +19,6 @@
 
 #include "graphic/gl/terrain_program.h"
 
-#include "base/log.h" // NOCOM(#sirver): what
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/texture.h"
 
@@ -171,7 +170,6 @@ void TerrainProgram::draw(uint32_t gametime,
 		if (bln_index != -1) {
 			const FloatPoint texture_offset =
 			   terrains.get_unmutable(field.ter_d).get_texture(gametime).texture_coordinates().top_left();
-			log("#sirver texture_offset.x: %f,texture_offset.y: %f\n", texture_offset.x, texture_offset.y);
 			add_vertex(fields_to_draw.at(current_index), texture_offset);
 			add_vertex(fields_to_draw.at(bln_index), texture_offset);
 			add_vertex(fields_to_draw.at(brn_index), texture_offset);
