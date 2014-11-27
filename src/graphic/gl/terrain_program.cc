@@ -69,8 +69,7 @@ varying vec2 var_texture_offset;
 void main() {
 	vec4 clr = texture2D(u_terrain_texture, var_texture_offset + u_texture_dimensions.xy * fract(var_texture_position));
 	clr.rgb *= var_brightness;
-	// gl_FragColor = clr;
-	gl_FragColor = vec4(vec3(clr), 1.);
+	gl_FragColor = clr;
 }
 )";
 
@@ -79,11 +78,10 @@ void main() {
 TerrainProgram::TerrainProgram() {
 	gl_program_.build(kTerrainVertexShader, kTerrainFragmentShader);
 
-	attr_position_ = glGetAttribLocation(gl_program_.object(), "attr_position");
-	attr_texture_position_ =
-	   glGetAttribLocation(gl_program_.object(), "attr_texture_position");
 	attr_brightness_ = glGetAttribLocation(gl_program_.object(), "attr_brightness");
+	attr_position_ = glGetAttribLocation(gl_program_.object(), "attr_position");
 	attr_texture_offset_ = glGetAttribLocation(gl_program_.object(), "attr_texture_offset");
+	attr_texture_position_ = glGetAttribLocation(gl_program_.object(), "attr_texture_position");
 
 	u_terrain_texture_ = glGetUniformLocation(gl_program_.object(), "u_terrain_texture");
 	u_texture_dimensions_ = glGetUniformLocation(gl_program_.object(), "u_texture_dimensions");
@@ -92,10 +90,10 @@ TerrainProgram::TerrainProgram() {
 void TerrainProgram::gl_draw(int gl_texture, float texture_w, float texture_h) {
 	glUseProgram(gl_program_.object());
 
-	glEnableVertexAttribArray(attr_position_);
-	glEnableVertexAttribArray(attr_texture_position_);
 	glEnableVertexAttribArray(attr_brightness_);
+	glEnableVertexAttribArray(attr_position_);
 	glEnableVertexAttribArray(attr_texture_offset_);
+	glEnableVertexAttribArray(attr_texture_position_);
 
 	glBindBuffer(GL_ARRAY_BUFFER, gl_array_buffer_.object());
 	glBufferData(GL_ARRAY_BUFFER,
@@ -111,25 +109,25 @@ void TerrainProgram::gl_draw(int gl_texture, float texture_w, float texture_h) {
 		                      sizeof(TerrainProgram::PerVertexData),
 		                      reinterpret_cast<void*>(offset));
 	};
-	set_attrib_pointer(attr_position_, 2, offsetof(PerVertexData, gl_x));
 	set_attrib_pointer(attr_brightness_, 1, offsetof(PerVertexData, brightness));
-	set_attrib_pointer(attr_texture_position_, 2, offsetof(PerVertexData, texture_x));
+	set_attrib_pointer(attr_position_, 2, offsetof(PerVertexData, gl_x));
 	set_attrib_pointer(attr_texture_offset_, 2, offsetof(PerVertexData, texture_offset_x));
+	set_attrib_pointer(attr_texture_position_, 2, offsetof(PerVertexData, texture_x));
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-	glUniform2f(u_texture_dimensions_, texture_w, texture_h);
-
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, gl_texture);
+
 	glUniform1i(u_terrain_texture_, 0);
+	glUniform2f(u_texture_dimensions_, texture_w, texture_h);
 
 	glDrawArrays(GL_TRIANGLES, 0, vertices_.size());
 
-	glDisableVertexAttribArray(attr_position_);
-	glDisableVertexAttribArray(attr_texture_position_);
 	glDisableVertexAttribArray(attr_brightness_);
+	glDisableVertexAttribArray(attr_position_);
 	glDisableVertexAttribArray(attr_texture_offset_);
+	glDisableVertexAttribArray(attr_texture_position_);
 }
 
 void TerrainProgram::draw(const DescriptionMaintainer<TerrainDescription>& terrains,
@@ -139,9 +137,7 @@ void TerrainProgram::draw(const DescriptionMaintainer<TerrainDescription>& terra
 	}
 	vertices_.clear();
 
-	GLuint gl_texture = 0;
-	float texture_w, texture_h;
-
+	// NOCOM(#sirver): add explanation about textures being in one atlas.
 	// NOCOM(#sirver): pull out into methods.
 	const auto add_vertex =
 	   [this](const FieldsToDraw::Field& field, const FloatRect& texture_coordinates) {
@@ -156,19 +152,10 @@ void TerrainProgram::draw(const DescriptionMaintainer<TerrainDescription>& terra
 
 	// NOCOM(#sirver): check that loaded terrain has the correct size
 	const auto add_triangle =
-	   [add_vertex, &terrains, this, &gl_texture, &texture_w, &texture_h, &fields_to_draw](
+	   [add_vertex, &terrains, this, &fields_to_draw](
 	      int terrain, int index1, int index2, int index3) {
 		const Texture& texture = terrains.get_unmutable(terrain).get_texture();
 		const FloatRect& texture_coordinates = texture.texture_coordinates();
-		if (gl_texture != 0 && gl_texture != texture.get_gl_texture()) {
-			throw wexception(
-			   "Not all terrain textures are in the same texture atlas (i.e. same texture).");
-		}
-		// NOCOM(#sirver): pull this out?
-		gl_texture = texture.get_gl_texture();
-		texture_w = texture_coordinates.w;
-		texture_h = texture_coordinates.h;
-
 		add_vertex(fields_to_draw.at(index1), texture_coordinates);
 		add_vertex(fields_to_draw.at(index2), texture_coordinates);
 		add_vertex(fields_to_draw.at(index3), texture_coordinates);
@@ -199,5 +186,6 @@ void TerrainProgram::draw(const DescriptionMaintainer<TerrainDescription>& terra
 		}
 	}
 
-	gl_draw(gl_texture, texture_w, texture_h);
+	const Texture& texture = terrains.get_unmutable(0).get_texture();
+	gl_draw(texture.get_gl_texture(), texture.texture_coordinates().w, texture.texture_coordinates().h);
 }
