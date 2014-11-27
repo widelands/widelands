@@ -1212,7 +1212,7 @@ std::string Panel::ui_fn() {
 		 "Make sure the path is given relative to Widelands font directory. "
 		 "Widelands will use standard font.\n",
 		 style.c_str());
-	return kFallbackFont;
+	return UI::FontSet::kFallbackFont;
 }
 
 }

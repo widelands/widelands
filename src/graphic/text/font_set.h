@@ -22,6 +22,8 @@
 
 #include <string>
 
+#include "scripting/lua_table.h"
+
 namespace UI {
 
 // Contains font information for a locale
@@ -32,6 +34,8 @@ struct FontSet {
 		kLeftToRight,
 		kRightToLeft
 	};
+
+	static constexpr const char* kFallbackFont = "DejaVu/DejaVuSerif.ttf";
 
 	/// Create the fontset for a locale from configuration file
 	FontSet(const std::string& localename);
@@ -55,6 +59,14 @@ private:
 	/// Each locale in i18n/locales.lua defines which fontset to use.
 	/// The fontset definitions are in i18n/fonts.lua
 	void parse_font_for_locale(const std::string& localename);
+
+	/// Reads and sets the fonts from table, using fallback as the fallback font file.
+	void set_fonts(const LuaTable& table, const std::string& fallback);
+
+	/// Helper function for set_fonts. key is "serif", "sans" or "condensed".
+	void set_font_group(const LuaTable& table, const std::string& key, const std::string& fallback,
+							  std::string* basic, std::string* bold,
+							  std::string* italic, std::string* bold_italic);
 
 	std::string serif_;
 	std::string serif_bold_;

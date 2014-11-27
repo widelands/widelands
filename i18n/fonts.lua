@@ -5,7 +5,7 @@
 -- The "default" font set covers all possible font styles.
 --
 -- Your font might not have all of these available. In this case, it is
--- sufficient to define "serif" and "sans", a fallback scheme is in place.
+-- sufficient to define "serif" at the least, a fallback scheme is in place.
 -- But do define everything your fontset has.
 --
 -- When adding a new fontset, also make sure you have all pertinent license
@@ -27,24 +27,21 @@ return {
 		condensed_bold = "DejaVu/DejaVuSansCondensed-Bold.ttf",
 		condensed_italic = "DejaVu/DejaVuSansCondensed-Oblique.ttf",
 		condensed_bold_italic = "DejaVu/DejaVuSansCondensed-BoldOblique.ttf",
-		dir = "ltr"
+		direction = "ltr"
 	},
 
 	arabic = {
 		serif = "FaKacstBook/FaKacstBook.ttf",
-		sans = "FaKacstBook/FaKacstBook.ttf",
-		dir = "rtl"
+		direction = "rtl"
 	},
 
 	cjk = {
 		serif = "MicroHei/wqy-microhei.ttc",
-		sans = "MicroHei/wqy-microhei.ttc"
 	},
 
 	devanagari = {
 		serif = "nakula.ttf",
-		sans = "nakula.ttf",
-		dir = "rtl"
+		direction = "rtl"
 	},
 
 	hebrew = {
@@ -54,16 +51,14 @@ return {
 		sans = "Culmus/TaameyFrankCLM-Medium.ttf",
 		sans_bold = "TaameyFrankCLM-Bold.ttf",
 		sans_italic = "Culmus/TaameyFrankCLM-MediumOblique.ttf",
-		dir = "rtl"
+		direction = "rtl"
 	},
 
 	myanmar = {
 		serif = "mmrCensus.ttf",
-		sans = "mmrCensus.ttf"
 	},
 
 	sinhala = {
 		serif = "Sinhala/lklug.ttf",
-		sans = "Sinhala/lklug.ttf"
 	}
 }
