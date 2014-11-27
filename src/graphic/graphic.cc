@@ -19,37 +19,22 @@
 
 #include "graphic/graphic.h"
 
-#include <cstring>
-#include <iostream>
-#include <memory>
-
-#include <SDL_image.h>
-
-#include "base/deprecated.h"
-#include "base/i18n.h"
 #include "base/log.h"
-#include "base/macros.h"
 #include "base/wexception.h"
 #include "build_info.h"
-#include "config.h"
-#include "graphic/animation.h"
-#include "graphic/diranimations.h"
 #include "graphic/font_handler.h"
+#include "graphic/animation.h"
+#include "graphic/texture.h"
 #include "graphic/gl/system_headers.h"
 #include "graphic/image.h"
 #include "graphic/image_io.h"
 #include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
 #include "graphic/screen.h"
-#include "graphic/terrain_texture.h"
-#include "graphic/texture.h"
 #include "graphic/texture_cache.h"
-#include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
-#include "logic/roadtype.h"
 #include "notifications/notifications.h"
-#include "ui_basic/progresswindow.h"
 
 using namespace std;
 

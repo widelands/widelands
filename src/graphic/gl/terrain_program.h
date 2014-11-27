@@ -22,7 +22,7 @@
 
 #include <vector>
 
-#include "base/rect.h"
+#include "base/point.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
 #include "logic/description_maintainer.h"
@@ -40,22 +40,6 @@ public:
 
 private:
 	struct PerVertexData {
-		PerVertexData(float init_gl_x,
-		              float init_gl_y,
-		              float init_brightness,
-		              float init_texture_x,
-		              float init_texture_y,
-		              float init_texture_offset_x,
-		              float init_texture_offset_y)
-		   : gl_x(init_gl_x),
-		     gl_y(init_gl_y),
-		     brightness(init_brightness),
-		     texture_x(init_texture_x),
-		     texture_y(init_texture_y),
-		     texture_offset_x(init_texture_offset_x),
-		     texture_offset_y(init_texture_offset_y) {
-		}
-
 		float gl_x;
 		float gl_y;
 		float brightness;
@@ -69,13 +53,13 @@ private:
 	void gl_draw(int gl_texture, float texture_w, float texture_h);
 
 	// Adds a vertex to the end of vertices with data from 'field' and 'texture_coordinates'.
-	void add_vertex(const FieldsToDraw::Field& field, const FloatRect& texture_coordinates);
-
-	// The buffer that will contain 'vertices_' for rendering.
-	Gl::Buffer gl_array_buffer_;
+	void add_vertex(const FieldsToDraw::Field& field, const FloatPoint& texture_coordinates);
 
 	// The program used for drawing the terrain.
 	Gl::Program gl_program_;
+
+	// The buffer that will contain 'vertices_' for rendering.
+	Gl::Buffer gl_array_buffer_;
 
 	// Attributes.
 	GLint attr_brightness_;
@@ -89,10 +73,6 @@ private:
 
 	// Objects below are kept around to avoid memory allocations on each frame.
 	// They could theoretically also be recreated.
-
-	// A map from terrain index in world.terrains() to vertices_
-	// that have this terrain type.
-	// NOCOM(#sirver): fix comments
 	std::vector<PerVertexData> vertices_;
 
 	DISALLOW_COPY_AND_ASSIGN(TerrainProgram);

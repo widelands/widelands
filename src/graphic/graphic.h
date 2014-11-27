@@ -38,7 +38,6 @@ class RenderTarget;
 class Surface;
 class TextureCache;
 class StreamWrite;
-struct TerrainTexture;
 
 // Will be send whenever the resolution changes.
 struct GraphicResolutionChanged {

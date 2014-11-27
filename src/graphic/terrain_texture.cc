@@ -19,8 +19,6 @@
 
 #include "graphic/terrain_texture.h"
 
-#include <SDL_image.h>
-
 #include "base/deprecated.h"
 #include "base/log.h"
 #include "base/wexception.h"
@@ -49,10 +47,7 @@ TerrainTexture::TerrainTexture(const std::vector<std::string>& texture_files, co
 
 		m_texture_image = fname;
 		SDL_Surface* sdl_surface = load_image_as_sdl_surface(fname, g_fs);
-		if (!sdl_surface) {
-			throw wexception(
-			   "WARNING: Failed to load texture frame %s: %s\n", fname.c_str(), IMG_GetError());
-		}
+
 		if (sdl_surface->w != kTextureWidth || sdl_surface->h != kTextureHeight) {
 			SDL_FreeSurface(sdl_surface);
 			throw wexception("WARNING: %s: texture must be %ix%i pixels big\n",

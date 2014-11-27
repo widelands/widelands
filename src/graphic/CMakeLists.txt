@@ -28,7 +28,6 @@ wl_library(graphic_image
     image_cache.cc
     image_cache.h
   USES_SDL2
-  USES_SDL2_IMAGE
   DEPENDS
     base_log
     base_macros
@@ -134,7 +133,6 @@ wl_library(graphic
   USES_OPENGL
   USES_SDL2
   USES_SDL2_GFX
-  USES_SDL2_IMAGE
   USES_SDL2_TTF
   DEPENDS
     base_deprecated

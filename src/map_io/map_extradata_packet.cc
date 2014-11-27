@@ -19,6 +19,7 @@
 
 #include "map_io/map_extradata_packet.h"
 
+// NOCOM(#sirver): figure out why this uses SDL_Image?
 #include <SDL_image.h>
 
 #include "graphic/graphic.h"

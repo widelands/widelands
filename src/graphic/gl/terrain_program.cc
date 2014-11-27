@@ -19,6 +19,7 @@
 
 #include "graphic/gl/terrain_program.h"
 
+#include "base/log.h" // NOCOM(#sirver): what
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/texture.h"
 
@@ -35,15 +36,15 @@ const char kTerrainVertexShader[] = R"(
 #version 120
 
 // Attributes.
-attribute vec2 attr_position;
-attribute vec2 attr_texture_position;
 attribute float attr_brightness;
+attribute vec2 attr_position;
 attribute vec2 attr_texture_offset;
+attribute vec2 attr_texture_position;
 
 // Output of vertex shader.
 varying float var_brightness;
-varying vec2 var_texture_position;
 varying vec2 var_texture_offset;
+varying vec2 var_texture_position;
 
 void main() {
 	var_texture_position = attr_texture_position;
@@ -64,7 +65,7 @@ varying vec2 var_texture_position;
 varying vec2 var_texture_offset;
 
 void main() {
-	vec4 clr = texture2D(u_terrain_texture, var_texture_offset + u_texture_dimensions.xy * fract(var_texture_position));
+	vec4 clr = texture2D(u_terrain_texture, var_texture_offset + u_texture_dimensions * fract(var_texture_position));
 	clr.rgb *= var_brightness;
 	gl_FragColor = clr;
 }
@@ -121,6 +122,8 @@ void TerrainProgram::gl_draw(int gl_texture, float texture_w, float texture_h) {
 
 	glDrawArrays(GL_TRIANGLES, 0, vertices_.size());
 
+	glBindTexture(GL_TEXTURE_2D, 0);
+
 	glDisableVertexAttribArray(attr_brightness_);
 	glDisableVertexAttribArray(attr_position_);
 	glDisableVertexAttribArray(attr_texture_offset_);
@@ -128,14 +131,17 @@ void TerrainProgram::gl_draw(int gl_texture, float texture_w, float texture_h) {
 }
 
 void TerrainProgram::add_vertex(const FieldsToDraw::Field& field,
-                                const FloatRect& texture_coordinates) {
-	   vertices_.emplace_back(field.gl_x,
-		                       field.gl_y,
-		                       field.brightness,
-		                       field.texture_x,
-		                       field.texture_y,
-		                       texture_coordinates.x,
-		                       texture_coordinates.y);
+                                const FloatPoint& texture_offset) {
+	vertices_.emplace_back();
+	PerVertexData& back = vertices_.back();
+
+	back.gl_x = field.gl_x;
+	back.gl_y = field.gl_y;
+	back.brightness = field.brightness;
+	back.texture_x = field.texture_x;
+	back.texture_y = field.texture_y;
+	back.texture_offset_x = texture_offset.x;
+	back.texture_offset_y = texture_offset.y;
 }
 
 void TerrainProgram::draw(uint32_t gametime,
@@ -163,21 +169,22 @@ void TerrainProgram::draw(uint32_t gametime,
 		const int bln_index =
 		   fields_to_draw.calculate_index(field.fx + (field.fy & 1) - 1, field.fy + 1);
 		if (bln_index != -1) {
-			const FloatRect& texture_coordinates =
-			   terrains.get_unmutable(field.ter_d).get_texture(gametime).texture_coordinates();
-			add_vertex(fields_to_draw.at(current_index), texture_coordinates);
-			add_vertex(fields_to_draw.at(bln_index), texture_coordinates);
-			add_vertex(fields_to_draw.at(brn_index), texture_coordinates);
+			const FloatPoint texture_offset =
+			   terrains.get_unmutable(field.ter_d).get_texture(gametime).texture_coordinates().top_left();
+			log("#sirver texture_offset.x: %f,texture_offset.y: %f\n", texture_offset.x, texture_offset.y);
+			add_vertex(fields_to_draw.at(current_index), texture_offset);
+			add_vertex(fields_to_draw.at(bln_index), texture_offset);
+			add_vertex(fields_to_draw.at(brn_index), texture_offset);
 		}
 
 		// Right triangle.
 		const int rn_index = fields_to_draw.calculate_index(field.fx + 1, field.fy);
 		if (rn_index != -1) {
-			const FloatRect& texture_coordinates =
-			   terrains.get_unmutable(field.ter_r).get_texture(gametime).texture_coordinates();
-			add_vertex(fields_to_draw.at(current_index), texture_coordinates);
-			add_vertex(fields_to_draw.at(brn_index), texture_coordinates);
-			add_vertex(fields_to_draw.at(rn_index), texture_coordinates);
+			const FloatPoint texture_offset =
+			   terrains.get_unmutable(field.ter_r).get_texture(gametime).texture_coordinates().top_left();
+			add_vertex(fields_to_draw.at(current_index), texture_offset);
+			add_vertex(fields_to_draw.at(brn_index), texture_offset);
+			add_vertex(fields_to_draw.at(rn_index), texture_offset);
 		}
 	}
 

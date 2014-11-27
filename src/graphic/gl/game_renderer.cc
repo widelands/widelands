@@ -186,8 +186,8 @@ void GlGameRenderer::draw() {
 
 	const World& world = m_egbase->world();
 	terrain_program_->draw(gametime, world.terrains(), fields_to_draw);
-	// NOCOM(#sirver): bring back.
 	// dither_program_->draw(gametime, world.terrains(), fields_to_draw);
+	// NOCOM(#sirver): bring back.
 	// road_program_->draw(*surface, fields_to_draw);
 
 	// draw_objects();
