@@ -133,9 +133,6 @@ Texture::Texture(const GLuint texture, const Rect& subrect, int parent_w, int pa
 	m_texture_coordinates.h = static_cast<float>(m_h - 1) / parent_h;
 	m_texture_coordinates.x = (static_cast<float>(subrect.x) + 0.5) / parent_w;
 	m_texture_coordinates.y = (static_cast<float>(subrect.y) + 0.5) / parent_h;
-
-	// NOCOM(#sirver): some stuff is not no longer correctly supported, i.e. pixel access and locking.
-	// NOCOM(#sirver): also the blit program
 }
 
 Texture::~Texture()
@@ -178,13 +175,20 @@ void Texture::lock(LockMode mode) {
 	if (m_w <= 0 || m_h <= 0) {
 		return;
 	}
-	assert(!m_pixels);
+
+	if (m_pixels) {
+		throw wexception("Called lock() on locked surface.");
+	}
+	if (!m_owns_texture) {
+		throw wexception("A surface that does not own its pixels can not be locked..");
+	}
 
 	m_pixels.reset(new uint8_t[m_w * m_h * 4]);
 
 	if (mode == Lock_Normal) {
 		glBindTexture(GL_TEXTURE_2D, m_texture);
 		glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_pixels.get());
+		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 }
 
@@ -199,6 +203,7 @@ void Texture::unlock(UnlockMode mode) {
 		glTexImage2D
 			(GL_TEXTURE_2D, 0, GL_RGBA, m_w, m_h, 0, GL_RGBA,
 			 GL_UNSIGNED_BYTE,  m_pixels.get());
+		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 	m_pixels.reset(nullptr);

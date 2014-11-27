@@ -120,7 +120,6 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
 	editor_category_ = world.editor_terrain_categories().get(editor_category_index);
 }
 
-// NOCOM(#sirver): check header for graphic.cc/.h. It should no longer need the world.
 TerrainDescription::~TerrainDescription() {
 }
 
@@ -191,6 +190,21 @@ double TerrainDescription::humidity() const {
 
 double TerrainDescription::fertility() const {
 	return fertility_;
+}
+
+void TerrainDescription::set_minimap_color(const RGBColor& color) {
+	for (int i = -128; i < 128; i++) {
+		const int shade = 128 + i;
+		int new_r = std::min<int>((color.r * shade) >> 7, 255);
+		int new_g = std::min<int>((color.g * shade) >> 7, 255);
+		int new_b = std::min<int>((color.b * shade) >> 7, 255);
+		minimap_colors_[shade] = RGBColor(new_r, new_g, new_b);
+	}
+}
+
+const RGBColor& TerrainDescription::get_minimap_color(int shade) {
+	assert(-128 <= shade && shade <= 127);
+	return minimap_colors_[128 + shade];
 }
 
 }  // namespace Widelands

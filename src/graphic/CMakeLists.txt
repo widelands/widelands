@@ -124,8 +124,6 @@ wl_library(graphic
     rendertarget.h
     richtext.cc
     richtext.h
-    terrain_texture.cc
-    terrain_texture.h
     text_parser.cc
     text_parser.h
     wordwrap.cc

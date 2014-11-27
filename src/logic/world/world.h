@@ -86,8 +86,9 @@ public:
 	const DescriptionMaintainer<EditorCategory>& editor_terrain_categories() const;
 	const DescriptionMaintainer<EditorCategory>& editor_immovable_categories() const;
 
-	// NOCOM(#sirver): document
-	void postload();
+	// Load the graphics for the world. Animations are loaded on
+	// demand.
+	void load_graphis();
 
 private:
 	std::unique_ptr<DescriptionMaintainer<BobDescr>> bobs_;

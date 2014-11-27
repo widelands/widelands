@@ -28,7 +28,6 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"
-#include "graphic/terrain_texture.h"
 #include "logic/editor_game_base.h"
 #include "logic/player.h"
 #include "logic/world/world.h"

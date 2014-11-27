@@ -25,6 +25,7 @@
 #include <vector>
 
 #include "base/macros.h"
+#include "graphic/color.h"
 #include "logic/widelands.h"
 #include "logic/world/resource_description.h"
 
@@ -35,6 +36,10 @@ namespace Widelands {
 
 class EditorCategory;
 class World;
+
+/// TerrainTextures have a fixed size and are squares.
+constexpr int kTextureWidth = 64;
+constexpr int kTextureHeight = kTextureWidth;
 
 class TerrainDescription {
 public:
@@ -62,6 +67,13 @@ public:
 	/// Returns the texture for the given gametime.
 	const Texture& get_texture(uint32_t gametime) const;
 	void add_texture(std::unique_ptr<Texture> texture);
+
+	// Sets the base minimap color.
+	void set_minimap_color(const RGBColor& color);
+
+	// Return the basic terrain colour to be used in the minimap.
+	// 'shade' must be a brightness value, i.e. in [-128, 127].
+	const RGBColor& get_minimap_color(int shade);
 
 	/// Returns the type of terrain this is (water, walkable, and so on).
 	Type get_is() const;
@@ -114,6 +126,7 @@ private:
 	double humidity_;
 	std::vector<std::string> texture_paths_;
 	std::vector<std::unique_ptr<Texture>> textures_;
+	RGBColor    minimap_colors_[256];
 
 	DISALLOW_COPY_AND_ASSIGN(TerrainDescription);
 };

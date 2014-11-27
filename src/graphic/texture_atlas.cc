@@ -25,12 +25,8 @@
 #include "base/log.h"
 
 TextureAtlas::Node::Node(const Rect& init_r) : used(false), r(init_r) {
-	// log("#sirver init_r.x: %d,init_r.y: %d,init_r.w: %d,init_r.h: %d\n",
-		 // init_r.x,
-		 // init_r.y,
-		 // init_r.w,
-		 // init_r.h);
 }
+
 void TextureAtlas::Node::split(int item_w, int item_h) {
 	assert(!used);
 
@@ -88,12 +84,6 @@ std::unique_ptr<Texture> TextureAtlas::pack(std::vector<std::unique_ptr<Texture>
 	for (Block& block : blocks_) {
 		Node* fitting_node = find_node(&root, block.texture->width(), block.texture->height());
 		fitting_node->split(block.texture->width(), block.texture->height());
-		log("#sirver    fitting_node->x: %d,fitting_node->y: %d,fitting_node->w: %d,fitting_node->h: "
-		    "%d\n",
-		    fitting_node->r.x,
-		    fitting_node->r.y,
-		    fitting_node->r.w,
-		    fitting_node->r.h);
 		block.node = fitting_node;
 	}
 

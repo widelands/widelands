@@ -57,8 +57,7 @@ World::World()
 World::~World() {
 }
 
-// NOCOM(#sirver): it feels wrong that this is here.
-void World::postload() {
+void World::load_graphis() {
 	// NOCOM(#sirver): figure this out, maybe just grow organically.
 	TextureAtlas ta(1024, 1024);
 
@@ -66,29 +65,32 @@ void World::postload() {
 	std::vector<std::unique_ptr<Texture>> individual_textures_;
 
 	for (size_t i = 0; i < terrains_->size(); ++i) {
-		const TerrainDescription& terrain = terrains_->get_unmutable(i);
-		for (const std::string& texture_name : terrain.texture_paths()) {
-			individual_textures_.emplace_back(new Texture(load_image_as_sdl_surface(texture_name)));
+		TerrainDescription* terrain = terrains_->get_mutable(i);
+		for (size_t j = 0; j < terrain->texture_paths().size(); ++j) {
+			SDL_Surface* sdl_surface = load_image_as_sdl_surface(terrain->texture_paths()[j]);
+
+			// Set the minimap color on the first loaded image.
+			if (j == 0) {
+				uint8_t top_left_pixel = static_cast<uint8_t*>(sdl_surface->pixels)[0];
+				const SDL_Color top_left_pixel_color =
+				   sdl_surface->format->palette->colors[top_left_pixel];
+				terrain->set_minimap_color(
+				   RGBColor(top_left_pixel_color.r, top_left_pixel_color.g, top_left_pixel_color.b));
+			}
+			individual_textures_.emplace_back(new Texture(sdl_surface));
 			ta.add(*individual_textures_.back());
 		}
 	}
 
 	std::vector<std::unique_ptr<Texture>> textures;
 
-	// NOCOM(#sirver): should be some member
 	terrain_texture_ = ta.pack(&textures);
-	assert(textures.size() == 198); // NOCOM(#sirver): reomve
-
-	// NOCOM(#sirver): remove
-	FileWrite fw;
-	save_surface_to_png(terrain_texture_.get(), &fw);
-	fw.write(*g_fs, "texture_atlas.png");
 
 	// NOCOM(#sirver): check that loaded terrain has the correct size
 
 	int next_texture_to_move = 0;
 	for (size_t i = 0; i < terrains_->size(); ++i) {
-		TerrainDescription* terrain = terrains_->get(i);
+		TerrainDescription* terrain = terrains_->get_mutable(i);
 		for (size_t j = 0; j < terrain->texture_paths().size(); ++j) {
 			terrain->add_texture(std::move(textures.at(next_texture_to_move++)));
 		}

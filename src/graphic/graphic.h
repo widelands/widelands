@@ -20,13 +20,10 @@
 #ifndef WL_GRAPHIC_GRAPHIC_H
 #define WL_GRAPHIC_GRAPHIC_H
 
-#include <map>
 #include <memory>
-#include <vector>
 
 #include <SDL.h>
 
-#include "base/rect.h"
 #include "graphic/image_cache.h"
 #include "notifications/notifications.h"
 #include "notifications/note_ids.h"
