@@ -21,10 +21,10 @@
 
 #include <memory>
 
-#include "base/i18n.h"
 #include "chat/chat.h"
 #include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text/font_set.h"
 #include "graphic/text/rt_errors.h"
 #include "profile/profile.h"
 #include "wui/chat_msg_layout.h"
@@ -126,7 +126,7 @@ void ChatOverlay::Impl::recompute()
 			oldest_ = log_messages_[log_idx].time;
 			// Do some richtext formatting here
 			if (now - oldest_ < CHAT_DISPLAY_TIME) {
-				i18n::FontSet fontset = i18n::LocaleFonts::get()->get_fontset();
+				UI::FontSet fontset = UI::LocaleFonts::get()->get_fontset();
 				richtext = "<p><font face=" + fontset.serif() + " size=14 color=dddddd bold=1>"
 					+ log_messages_[log_idx].msg + "<br></font></p>" + richtext;
 			}

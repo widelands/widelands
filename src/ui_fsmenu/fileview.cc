@@ -23,8 +23,8 @@
 
 #include <boost/algorithm/string/predicate.hpp>
 
-#include "base/i18n.h"
 #include "graphic/graphic.h"
+#include "graphic/text/font_set.h"
 #include "io/filesystem/filesystem.h"
 #include "profile/profile.h"
 #include "scripting/lua_table.h"
@@ -88,7 +88,7 @@ FullscreenMenuTextView::FullscreenMenuTextView
 	title.set_pos
 		(Point((get_inner_w() - title.get_w()) / 2, get_h() * 167 / 1000));
 
-	i18n::FontSet fontset = i18n::LocaleFonts::get()->get_fontset();
+	UI::FontSet fontset = UI::LocaleFonts::get()->get_fontset();
 	textview.set_font(fontset.serif(), UI_FONT_SIZE_PROSA, PROSA_FONT_CLR_FG);
 }
 
@@ -124,7 +124,7 @@ FileViewWindow::FileViewWindow
 
 	textview.set_text(content);
 
-	i18n::FontSet fontset = i18n::LocaleFonts::get()->get_fontset();
+	UI::FontSet fontset = UI::LocaleFonts::get()->get_fontset();
 	textview.set_font(fontset.serif(), UI_FONT_SIZE_PROSA, PROSA_FONT_CLR_FG);
 
 	set_inner_size(560, 240);

@@ -25,8 +25,8 @@
 #include <vector>
 
 #include "base/deprecated.h"
-#include "base/i18n.h"
 #include "base/log.h"
+#include "graphic/text/font_set.h"
 #include "helper.h"
 
 namespace UI {
@@ -53,7 +53,7 @@ TextBlock::TextBlock() {
 	m_font_weight = "normal";
 	m_font_style = "normal";
 	m_font_decoration = "none";
-	m_font_face = (i18n::LocaleFonts::get()->get_fontset()).sans();
+	m_font_face = (UI::LocaleFonts::get()->get_fontset()).sans();
 	m_line_spacing = 0;
 }
 
@@ -267,7 +267,7 @@ void TextParser::parse_text_attributes
 			if (key == "font-size") {
 				element.set_font_size(atoi(val.c_str()));
 			} else if (key == "font-face") {
-				i18n::FontSet fontset = i18n::LocaleFonts::get()->get_fontset();
+				UI::FontSet fontset = UI::LocaleFonts::get()->get_fontset();
 				if (val == fontset.condensed() || val == "condensed") {
 					val = fontset.condensed();
 				} else if (val == fontset.sans() || val == "serif") {

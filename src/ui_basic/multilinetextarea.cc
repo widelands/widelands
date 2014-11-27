@@ -21,10 +21,10 @@
 
 #include <boost/bind.hpp>
 
-#include "base/i18n.h"
 #include "graphic/font_handler.h"
 #include "graphic/richtext.h"
 #include "graphic/wordwrap.h"
+#include "graphic/text/font_set.h"
 #include "wui/text_constants.h"
 
 namespace UI {
@@ -60,7 +60,7 @@ MultilineTextarea::MultilineTextarea
 
 	m_scrollbar.moved.connect(boost::bind(&MultilineTextarea::scrollpos_changed, this, _1));
 
-	i18n::FontSet fontset = i18n::LocaleFonts::get()->get_fontset();
+	UI::FontSet fontset = UI::LocaleFonts::get()->get_fontset();
 	m_scrollbar.set_singlestepsize(g_fh->get_fontheight(fontset.serif(), UI_FONT_SIZE_SMALL));
 	m_scrollbar.set_pagesize(h - 2 * g_fh->get_fontheight(fontset.serif(), UI_FONT_SIZE_BIG));
 	m_scrollbar.set_steps(1);

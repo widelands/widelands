@@ -24,7 +24,6 @@
 
 #include <boost/format.hpp>
 
-#include "base/i18n.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/flag.h"
@@ -34,6 +33,7 @@
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text/font_set.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/constructionsite.h"
@@ -889,7 +889,7 @@ void Building::send_message
 	 uint32_t throttle_time,
 	 uint32_t throttle_radius)
 {
-	const char* font_face = i18n::LocaleFonts::get()->get_fontset().serif().c_str();
+	const char* font_face = UI::LocaleFonts::get()->get_fontset().serif().c_str();
 	// TODO(sirver): add support into the font renderer to get to representative
 	// animations of buildings so that the messages can still be displayed, even
 	// after reload.

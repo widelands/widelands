@@ -19,7 +19,6 @@ wl_library(base_exceptions
     base_macros
 )
 
-# NOCOMMIT(#codereview): this now depends on stuff outside of base, so it is no longer base in that sense. It seems to me that scripting is something that breaks into base scripting (the parameter dictionary for example) and higher scripting and it might move here. Not sure where io_filesystem comes into place. I can not suggest a clear way forward right now, but this smells.
 wl_library(base_i18n
   SRCS
     i18n.h
@@ -30,7 +29,6 @@ wl_library(base_i18n
     base_log
     base_macros
     io_filesystem
-    scripting
 )
 
 wl_library(base_geometry

@@ -26,11 +26,11 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
-#include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/default_resolution.h"
 #include "graphic/graphic.h"
+#include "graphic/text/font_set.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/save_handler.h"
@@ -413,9 +413,8 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 
 				name = table->get_string("name");
 				sortname = table->get_string("sort_name");
-				std::unique_ptr<i18n::FontSet>
-						fontset(i18n::LocaleFonts::get()->parse_font_for_locale(localename));
-				entries.push_back(LanguageEntry( localename, name, sortname, fontset->serif()));
+				std::unique_ptr<UI::FontSet> fontset(new UI::FontSet(localename));
+				entries.push_back(LanguageEntry(localename, name, sortname, fontset->serif()));
 				if (localename == current_locale) {
 					selected_locale = current_locale;
 				}
@@ -768,6 +767,7 @@ void OptionsCtrl::save_options() {
 
 	WLApplication::get()->set_input_grab(opt.inputgrab);
 	i18n::set_locale(opt.language);
+	UI::LocaleFonts::get()->set_fontset(opt.language);
 	g_sound_handler.set_disable_music(!opt.music);
 	g_sound_handler.set_disable_fx(!opt.fx);
 }

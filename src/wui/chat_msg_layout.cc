@@ -21,9 +21,9 @@
 
 #include <boost/format.hpp>
 
-#include "base/i18n.h"
 #include "chat/chat.h"
 #include "graphic/color.h"
+#include "graphic/text/font_set.h"
 #include "logic/constants.h"
 #include "logic/player.h"
 
@@ -45,7 +45,7 @@ std::string color(const int16_t playern)
 
 // TODO(sirver): remove as soon as old text renderer is gone.
 std::string format_as_old_richtext(const ChatMessage& chat_message) {
-	const char* font_face = i18n::LocaleFonts::get()->get_fontset().serif().c_str();
+	const char* font_face = UI::LocaleFonts::get()->get_fontset().serif().c_str();
 	std::string message = "<p font-color=#33ff33 font-size=9>";
 
 	// Escape richtext characters
@@ -144,7 +144,7 @@ std::string format_as_old_richtext(const ChatMessage& chat_message) {
 
 // Returns a richtext string that can be displayed to the user.
 std::string format_as_richtext(const ChatMessage& chat_message) {
-	const char* font_face = i18n::LocaleFonts::get()->get_fontset().serif().c_str();
+	const char* font_face = UI::LocaleFonts::get()->get_fontset().serif().c_str();
 	std::string message = "<p><font color=33ff33 size=9>";
 
 	// Escape richtext characters

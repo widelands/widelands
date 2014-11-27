@@ -25,17 +25,12 @@
 
 #include <cstdlib>
 #include <map>
-#include <memory>
 #include <utility>
 
-#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
 #include "base/log.h"
 #include "config.h"
-#include "io/filesystem/layered_filesystem.h"
-#include "scripting/lua_table.h"
-#include "scripting/scripting.h"
 
 #ifdef __APPLE__
 # if LIBINTL_VERSION >= 0x001201
@@ -49,6 +44,7 @@
 #  define SETLOCALE std::setlocale
 # endif
 #endif
+
 
 extern int _nl_msg_cat_cntr;
 
@@ -317,7 +313,6 @@ void set_locale(std::string name) {
 		bindtextdomain(domain, textdomains.back().second.c_str());
 		textdomain(domain);
 	}
-	LocaleFonts::get()->set_fontset();
 }
 
 const std::string & get_locale() {return locale;}
@@ -355,139 +350,6 @@ std::string localize_item_list(const std::vector<std::string>& items, Concatenat
 		}
 	}
 	return result;
-}
-
-
-LocaleFonts* LocaleFonts::get() {
-	static LocaleFonts locale_fonts;
-	return &locale_fonts;
-}
-
-
-// NOCOM(#codereview): This class is pretty complex and deserves it's own
-// library. That also solves the issue that it drags dependency into base.
-
-// NOCOM(#codereview): This being a singleton is problematic. Singleton is one
-// of the most dangerous patterns to use, see
-// http://geekswithblogs.net/AngelEyes/archive/2013/09/08/singleton-i-love-you-but-youre-bringing-me-down-re-uploaded.aspx
-// and the links in that document.
-//
-// Where it smells really badly here is that tons of code now depend on this
-// singleton being around. One example: The richtext renderer now doesn not
-// work anymore without all the Widelands fonts being around.
-// I think this class should not be a Singleton, but instead live in WLApplication or the
-// FontHandler. Most places that use it right now already use the font handler
-// and it can forward the API or expose the fontset. Classes that use FontSet explicitly should get
-// it passed in.
-//
-// After looking some more at the code I find LocaleFonts unnecessary. Give
-// FontSet the ability to parse itself, via new FontSet(localename) (remember
-// deletion of this class tough) and let FontHandler own the current one and
-// update it when needed - you can also introduce a notification
-// "LocaleUpdated" and FontHandler updates the FontSet on that. This is quite
-// clean and loosely coupled.
-
-// Loads font info from config files, depending on the localename
-// NOCOM(#codereview): return a unique_ptr<Fontset>, otherwise ownership is unclear. Who deletes that?
-i18n::FontSet* LocaleFonts::parse_font_for_locale(const std::string& localename) {
-	std::string fontsetname = "default";
-	std::string actual_localename = localename;
-	i18n::FontSet* fontset;
-	LuaInterface lua;
-
-	// Read default fontset. It defines the fallback fonts and needs to always be there and complete.
-	// This way, we will always have fonts, even if we run into an exception further down.
-	std::unique_ptr<LuaTable> fonts_table(lua.run_script("i18n/fonts.lua"));
-	fonts_table->do_not_warn_about_unaccessed_keys();  // We are only reading partial information as needed
-
-	std::unique_ptr<LuaTable> default_font_table = fonts_table->get_table("default");
-	std::string serif = default_font_table->get_string("serif");
-	std::string serif_bold = default_font_table->get_string("serif_bold");
-	std::string serif_italic = default_font_table->get_string("serif_italic");
-	std::string serif_bold_italic = default_font_table->get_string("serif_bold_italic");
-	std::string sans = default_font_table->get_string("sans");
-	std::string sans_bold = default_font_table->get_string("sans_bold");
-	std::string sans_italic = default_font_table->get_string("sans_italic");
-	std::string sans_bold_italic = default_font_table->get_string("sans_bold_italic");
-	std::string condensed = default_font_table->get_string("condensed");
-	std::string condensed_bold = default_font_table->get_string("condensed_bold");
-	std::string condensed_italic = default_font_table->get_string("condensed_italic");
-	std::string condensed_bold_italic = default_font_table->get_string("condensed_bold_italic");
-	std::string direction = default_font_table->get_string("dir");
-
-	try  {
-		std::unique_ptr<LuaTable> all_locales(lua.run_script(("i18n/locales.lua")));
-		all_locales->do_not_warn_about_unaccessed_keys();
-
-		// Locale identifiers can look like this: ca_ES@valencia.UTF-8
-		if (localename.empty()) {
-			std::vector<std::string> parts;
-			boost::split(parts, i18n::get_locale(), boost::is_any_of("."));
-			actual_localename = parts[0];
-
-			if (!all_locales->has_key(actual_localename.c_str())) {
-				boost::split(parts, parts[0], boost::is_any_of("@"));
-				actual_localename = parts[0];
-
-				if (!all_locales->has_key(actual_localename.c_str())) {
-					boost::split(parts, parts[0], boost::is_any_of("_"));
-					actual_localename = parts[0];
-				}
-			}
-		}
-
-		// Find out which fontset to use from the locale
-		if (all_locales->has_key(actual_localename)) {
-			try  {
-				std::unique_ptr<LuaTable> locale_table = all_locales->get_table(actual_localename);
-				locale_table->do_not_warn_about_unaccessed_keys();
-				fontsetname = locale_table->get_string("font");
-			} catch (const LuaError& err) {
-				log("Error loading locale '%s' from file: %s\n", actual_localename.c_str(), err.what());
-			}
-		}
-
-		// Read the fontset for the current locale.
-		// Each locale needs to define a font face for serif and sans.
-		// For everything else, there's a fallback font.
-		try {
-			std::unique_ptr<LuaTable> font_set_table = fonts_table->get_table(fontsetname.c_str());
-			font_set_table->do_not_warn_about_unaccessed_keys();
-
-			serif = font_set_table->get_string("serif");
-			serif_bold = get_string_with_default(*font_set_table, "serif_bold", serif);
-			serif_italic = get_string_with_default(*font_set_table, "serif_italic", serif);
-			serif_bold_italic = get_string_with_default(*font_set_table, "serif_bold_italic", serif_bold);
-
-			// NOCOM(#codereview): you can pull out more methods here: void set_font_values("sans", &sans_bold, &sans_italic, &sans_bold_italic) and reuse that for all others.
-			// NOCOM(#gunchleoc): I don't see how that would make things easier to read
-			// - I would need to give the method interface the key names as well as the variable names, and add a special case for condensed.
-			// Maybe that wasn't obvious before with all the conditional statements I had.
-			sans = font_set_table->get_string("sans");
-			sans_bold = get_string_with_default(*font_set_table, "serif_bold", sans);
-			sans_italic = get_string_with_default(*font_set_table, "sans_italic", sans);
-			sans_bold_italic = get_string_with_default(*font_set_table, "sans_bold_italic", sans_bold);
-
-			condensed = get_string_with_default(*font_set_table, "condensed", sans);
-			condensed_bold = get_string_with_default(*font_set_table, "condensed_bold", condensed);
-			condensed_italic = get_string_with_default(*font_set_table, "condensed_italic", condensed);
-			condensed_bold_italic = get_string_with_default(*font_set_table, "condensed", condensed_bold);
-
-			direction = get_string_with_default(*font_set_table, "dir", "ltr");
-
-		} catch (LuaError& err) {
-			log("Could not read font set '%s': %s\n", fontsetname.c_str(), err.what());
-		}
-
-	} catch (const LuaError& err) {
-		log("Could not read locales information from file: %s\n", err.what());
-	}
-
-	fontset = new i18n::FontSet(serif, serif_bold, serif_italic, serif_bold_italic,
-									  sans, sans_bold, sans_italic, sans_bold_italic,
-									  condensed, condensed_bold, condensed_italic, condensed_bold_italic,
-									  direction);
-	return fontset;
 }
 
 

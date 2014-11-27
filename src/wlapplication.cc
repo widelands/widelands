@@ -49,6 +49,7 @@
 #include "graphic/default_resolution.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
+#include "graphic/text/font_set.h"
 #include "helper.h"
 #include "io/dedicated_log.h"
 #include "io/filesystem/disk_filesystem.h"
@@ -781,6 +782,7 @@ void WLApplication::init_language() {
 	// Set locale corresponding to selected language
 	std::string language = s.get_string("language", "");
 	i18n::set_locale(language);
+	UI::LocaleFonts::get()->set_fontset(i18n::get_locale());
 }
 
 /**

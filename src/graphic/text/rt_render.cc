@@ -27,14 +27,15 @@
 #include <SDL.h>
 #include <boost/format.hpp>
 
-#include "base/i18n.h"
 #include "base/log.h"
 #include "base/point.h"
 #include "base/rect.h"
+#include "graphic/font_handler1.h"
 #include "graphic/image_cache.h"
 #include "graphic/image_io.h"
 #include "graphic/surface.h"
 #include "graphic/text/font_io.h"
+#include "graphic/text/font_set.h"
 #include "graphic/text/rt_parse.h"
 #include "graphic/text/textstream.h"
 #include "io/filesystem/filesystem_exceptions.h"
@@ -587,7 +588,7 @@ private:
 };
 
 IFont& FontCache::get_font(NodeStyle& ns) {
-	i18n::FontSet fontset = i18n::LocaleFonts::get()->get_fontset();
+	UI::FontSet fontset = UI::LocaleFonts::get()->get_fontset();
 
 	if (ns.font_style & IFont::BOLD && ns.font_style & IFont::ITALIC) {
 		if (ns.font_face == fontset.condensed() ||
@@ -994,7 +995,7 @@ RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& 
 	std::unique_ptr<Tag> rt(parser_->parse(text, allowed_tags));
 
 	NodeStyle default_style = {
-		(i18n::LocaleFonts::get()->get_fontset()).serif(), 16,
+		(UI::LocaleFonts::get()->get_fontset()).serif(), 16,
 		RGBColor(0, 0, 0), IFont::DEFAULT, 0, HALIGN_LEFT, VALIGN_BOTTOM,
 		""
 	};

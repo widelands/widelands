@@ -24,11 +24,11 @@
 
 #include <boost/format.hpp>
 
-#include "base/i18n.h"
 #include "base/log.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
+#include "graphic/text/font_set.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/building.h"
 #include "scripting/lua_table.h"
@@ -83,7 +83,7 @@ HelpWindow::HelpWindow
 		 g_gr->images().get("pics/but0.png"),
 		 _("OK"), std::string(), true, false);
 	btn->sigclicked.connect(boost::bind(&HelpWindow::pressed_ok, boost::ref(*this)));
-	btn->set_font(Font::get((i18n::LocaleFonts::get()->get_fontset()).serif(),
+	btn->set_font(Font::get((UI::LocaleFonts::get()->get_fontset()).serif(),
 									(fontsize < 12 ? 12 : fontsize)));
 
 	textarea->set_size(in_width - 10, in_height - 10 - (2 * but_height));

@@ -23,10 +23,10 @@
 
 #include <SDL_keycode.h>
 
-#include "base/i18n.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text/font_set.h"
 #include "ui_basic/mouse_constants.h"
 #include "wui/text_constants.h"
 
@@ -74,7 +74,7 @@ EditBox::EditBox
 {
 	set_thinks(false);
 
-	i18n::FontSet fontset = i18n::LocaleFonts::get()->get_fontset();
+	UI::FontSet fontset = UI::LocaleFonts::get()->get_fontset();
 
 	m->background = background;
 	m->fontname = fontset.serif();

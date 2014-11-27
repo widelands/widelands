@@ -23,9 +23,9 @@
 
 #include <boost/format.hpp>
 
-#include "base/i18n.h"
 #include "base/macros.h"
 #include "graphic/graphic.h"
+#include "graphic/text/font_set.h"
 #include "logic/soldier.h"
 #include "wui/text_constants.h"
 
@@ -167,7 +167,7 @@ void AttackBox::init() {
 
 	m_text_soldiers =
 		&add_text(columnbox, buf, UI::Box::AlignCenter,
-					 (i18n::LocaleFonts::get()->get_fontset()).serif(),
+					 (UI::LocaleFonts::get()->get_fontset()).serif(),
 					 UI_FONT_SIZE_ULTRASMALL);
 
 	m_slider_soldiers =

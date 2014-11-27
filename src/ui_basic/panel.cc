@@ -19,11 +19,11 @@
 
 #include "ui_basic/panel.h"
 
-#include "base/i18n.h"
 #include "base/log.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text/font_set.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
@@ -1204,7 +1204,7 @@ bool Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 }
 
 std::string Panel::ui_fn() {
-	i18n::FontSet fontset = i18n::LocaleFonts::get()->get_fontset();
+	UI::FontSet fontset = UI::LocaleFonts::get()->get_fontset();
 
 	std::string style(fontset.serif());
 	if (g_fs->file_exists("i18n/fonts/" + style)) {

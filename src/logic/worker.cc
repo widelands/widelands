@@ -25,7 +25,6 @@
 
 #include <boost/format.hpp>
 
-#include "base/i18n.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
@@ -34,6 +33,7 @@
 #include "economy/road.h"
 #include "economy/transfer.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text/font_set.h"
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -940,7 +940,7 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 					(boost::format("<rt image=world/resources/pics/%s4.png>"
 										"<p font-face=%s font-size=14>%s</p></rt>")
 					 % rdescr->name().c_str()
-					 % i18n::LocaleFonts::get()->get_fontset().serif().c_str()
+					 % UI::LocaleFonts::get()->get_fontset().serif().c_str()
 					 % _("A geologist found resources.")).str();
 
 			//  We should add a message to the player's message queue - but only,

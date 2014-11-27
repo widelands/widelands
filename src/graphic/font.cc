@@ -21,8 +21,8 @@
 
 #include <map>
 
-#include "base/i18n.h"
 #include "base/utf8.h"
+#include "graphic/text/font_set.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "wui/text_constants.h"
 
@@ -217,7 +217,7 @@ Font * Font::ui_big()
 {
 	Font * font = nullptr;
 	if (!font)
-		font = Font::get((i18n::LocaleFonts::get()->get_fontset()).serif(), UI_FONT_SIZE_BIG);
+		font = Font::get((LocaleFonts::get()->get_fontset()).serif(), UI_FONT_SIZE_BIG);
 	return font;
 }
 
@@ -225,7 +225,7 @@ Font * Font::ui_small()
 {
 	Font * font = nullptr;
 	if (!font)
-		font = Font::get((i18n::LocaleFonts::get()->get_fontset()).serif(), UI_FONT_SIZE_SMALL);
+		font = Font::get((LocaleFonts::get()->get_fontset()).serif(), UI_FONT_SIZE_SMALL);
 	return font;
 }
 
@@ -233,7 +233,7 @@ Font * Font::ui_ultrasmall()
 {
 	Font * font = nullptr;
 	if (!font)
-		font = Font::get((i18n::LocaleFonts::get()->get_fontset()).serif(), UI_FONT_SIZE_ULTRASMALL);
+		font = Font::get((LocaleFonts::get()->get_fontset()).serif(), UI_FONT_SIZE_ULTRASMALL);
 	return font;
 }
 

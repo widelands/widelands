@@ -24,12 +24,12 @@
 #include <boost/bind.hpp>
 
 #include "base/deprecated.h"
-#include "base/i18n.h"
 #include "base/log.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text/font_set.h"
 #include "wlapplication.h"
 #include "wui/text_constants.h"
 
@@ -50,14 +50,14 @@ BaseListselect::BaseListselect
 	 Align const align, bool const show_check)
 	:
 	Panel(parent, x, y, w, h),
-	m_lineheight(g_fh->get_fontheight((i18n::LocaleFonts::get()->get_fontset()).serif(), UI_FONT_SIZE_SMALL)),
+	m_lineheight(g_fh->get_fontheight((UI::LocaleFonts::get()->get_fontset()).serif(), UI_FONT_SIZE_SMALL)),
 	m_scrollbar      (this, get_w() - 24, 0, 24, h, false),
 	m_scrollpos     (0),
 	m_selection     (no_selection_index()),
 	m_last_click_time(-10000),
 	m_last_selection(no_selection_index()),
 	m_show_check(show_check),
-	m_fontname((i18n::LocaleFonts::get()->get_fontset()).serif()),
+	m_fontname((UI::LocaleFonts::get()->get_fontset()).serif()),
 	m_fontsize(UI_FONT_SIZE_SMALL)
 {
 	set_thinks(false);
