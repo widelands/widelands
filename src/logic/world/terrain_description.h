@@ -59,9 +59,8 @@ public:
 
 	const std::vector<std::string>& texture_paths() const;
 
-	/// Returns the texture index for this terrain.
-	// NOCOM(#sirver): kill or change
-	const Texture& get_texture() const;
+	/// Returns the texture for the given gametime.
+	const Texture& get_texture(uint32_t gametime) const;
 	void add_texture(std::unique_ptr<Texture> texture);
 
 	/// Returns the type of terrain this is (water, walkable, and so on).
@@ -78,7 +77,7 @@ public:
 
 	/// Returns the resource index that can by default always be found in this
 	/// terrain.
-	int8_t get_default_resource() const;
+	int get_default_resource() const;
 
 	/// Returns the default amount of resources you can find in this terrain.
 	int32_t get_default_resource_amount() const;
@@ -106,9 +105,10 @@ private:
 	const EditorCategory* editor_category_;  ///< not owned.
 	Type is_;
 	std::vector<uint8_t> valid_resources_;
-	int8_t default_resource_index_;
-	int32_t default_resource_amount_;
-	int32_t dither_layer_;
+	int default_resource_index_;
+	int default_resource_amount_;
+	int dither_layer_;
+	int frame_length_;
 	double temperature_;
 	double fertility_;
 	double humidity_;

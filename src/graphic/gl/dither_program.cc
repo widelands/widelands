@@ -143,7 +143,8 @@ void DitherProgram::maybe_add_dithering_triangle(
 	}
 }
 
-void DitherProgram::draw(const DescriptionMaintainer<TerrainDescription>& terrains,
+void DitherProgram::draw(const uint32_t gametime,
+                         const DescriptionMaintainer<TerrainDescription>& terrains,
                          const FieldsToDraw& fields_to_draw) {
 	glUseProgram(gl_program_.object());
 
@@ -225,7 +226,7 @@ void DitherProgram::draw(const DescriptionMaintainer<TerrainDescription>& terrai
 		if (current_data.empty()) {
 			continue;
 		}
-		glBindTexture(GL_TEXTURE_2D, terrains.get_unmutable(i).get_texture().get_gl_texture());
+		glBindTexture(GL_TEXTURE_2D, terrains.get_unmutable(i).get_texture(gametime).get_gl_texture());
 		glBufferData(GL_ARRAY_BUFFER,
 		             sizeof(PerVertexData) * current_data.size(),
 		             current_data.data(),

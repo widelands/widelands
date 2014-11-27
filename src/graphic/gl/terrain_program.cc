@@ -19,10 +19,7 @@
 
 #include "graphic/gl/terrain_program.h"
 
-#include "base/log.h"
 #include "graphic/gl/fields_to_draw.h"
-#include "graphic/graphic.h"
-#include "graphic/terrain_texture.h"
 #include "graphic/texture.h"
 
 namespace  {
@@ -130,36 +127,26 @@ void TerrainProgram::gl_draw(int gl_texture, float texture_w, float texture_h) {
 	glDisableVertexAttribArray(attr_texture_position_);
 }
 
-void TerrainProgram::draw(const DescriptionMaintainer<TerrainDescription>& terrains,
-                          const FieldsToDraw& fields_to_draw) {
-	if (vertices_.size() < fields_to_draw.size() * 3) {
-		vertices_.reserve(fields_to_draw.size() * 3);
-	}
-	vertices_.clear();
-
-	// NOCOM(#sirver): add explanation about textures being in one atlas.
-	// NOCOM(#sirver): pull out into methods.
-	const auto add_vertex =
-	   [this](const FieldsToDraw::Field& field, const FloatRect& texture_coordinates) {
-		vertices_.emplace_back(field.gl_x,
+void TerrainProgram::add_vertex(const FieldsToDraw::Field& field,
+                                const FloatRect& texture_coordinates) {
+	   vertices_.emplace_back(field.gl_x,
 		                       field.gl_y,
 		                       field.brightness,
 		                       field.texture_x,
 		                       field.texture_y,
 		                       texture_coordinates.x,
 		                       texture_coordinates.y);
-	};
+}
 
-	// NOCOM(#sirver): check that loaded terrain has the correct size
-	const auto add_triangle =
-	   [add_vertex, &terrains, this, &fields_to_draw](
-	      int terrain, int index1, int index2, int index3) {
-		const Texture& texture = terrains.get_unmutable(terrain).get_texture();
-		const FloatRect& texture_coordinates = texture.texture_coordinates();
-		add_vertex(fields_to_draw.at(index1), texture_coordinates);
-		add_vertex(fields_to_draw.at(index2), texture_coordinates);
-		add_vertex(fields_to_draw.at(index3), texture_coordinates);
-	};
+void TerrainProgram::draw(uint32_t gametime,
+                          const DescriptionMaintainer<TerrainDescription>& terrains,
+                          const FieldsToDraw& fields_to_draw) {
+	// This method expects that all terrains have the same dimensions and that
+	// all are packed into the same texture atlas, i.e. all are in the same GL
+	// texture. It does not check for this invariance for speeds sake.
+
+	vertices_.clear();
+	vertices_.reserve(fields_to_draw.size() * 3);
 
 	for (size_t current_index = 0; current_index < fields_to_draw.size(); ++current_index) {
 		const FieldsToDraw::Field& field = fields_to_draw.at(current_index);
@@ -176,16 +163,24 @@ void TerrainProgram::draw(const DescriptionMaintainer<TerrainDescription>& terra
 		const int bln_index =
 		   fields_to_draw.calculate_index(field.fx + (field.fy & 1) - 1, field.fy + 1);
 		if (bln_index != -1) {
-			add_triangle(field.ter_d, current_index, bln_index, brn_index);
+			const FloatRect& texture_coordinates =
+			   terrains.get_unmutable(field.ter_d).get_texture(gametime).texture_coordinates();
+			add_vertex(fields_to_draw.at(current_index), texture_coordinates);
+			add_vertex(fields_to_draw.at(bln_index), texture_coordinates);
+			add_vertex(fields_to_draw.at(brn_index), texture_coordinates);
 		}
 
 		// Right triangle.
 		const int rn_index = fields_to_draw.calculate_index(field.fx + 1, field.fy);
 		if (rn_index != -1) {
-			add_triangle(field.ter_r, current_index, brn_index, rn_index);
+			const FloatRect& texture_coordinates =
+			   terrains.get_unmutable(field.ter_r).get_texture(gametime).texture_coordinates();
+			add_vertex(fields_to_draw.at(current_index), texture_coordinates);
+			add_vertex(fields_to_draw.at(brn_index), texture_coordinates);
+			add_vertex(fields_to_draw.at(rn_index), texture_coordinates);
 		}
 	}
 
-	const Texture& texture = terrains.get_unmutable(0).get_texture();
+	const Texture& texture = terrains.get_unmutable(0).get_texture(0);
 	gl_draw(texture.get_gl_texture(), texture.texture_coordinates().w, texture.texture_coordinates().h);
 }

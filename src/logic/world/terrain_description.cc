@@ -91,7 +91,7 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
 
 	 texture_paths_ =
 	   table.get_table("textures")->array_entries<std::string>();
-	int frame_length = FRAME_LENGTH;
+	frame_length_ = FRAME_LENGTH;
 	if (texture_paths_.empty()) {
 		throw GameDataError("Terrain %s has no images.", name_.c_str());
 	} else if (texture_paths_.size() == 1) {
@@ -99,9 +99,8 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
 			throw GameDataError("Terrain %s with one images must not have fps.", name_.c_str());
 		}
 	} else {
-		frame_length = 1000 / get_positive_int(table, "fps");
+		frame_length_ = 1000 / get_positive_int(table, "fps");
 	}
-	// NOCOM(#sirver): hold on to frame_length.
 
 	for (const std::string& resource :
 	     table.get_table("valid_resources")->array_entries<std::string>()) {
@@ -125,10 +124,8 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
 TerrainDescription::~TerrainDescription() {
 }
 
-const Texture& TerrainDescription::get_texture() const {
-	assert(textures_.size()); // NOCOM(#sirver): remove
-	// NOCOM(#sirver): think about animation.
-	return *textures_.at(0);
+const Texture& TerrainDescription::get_texture(uint32_t gametime) const {
+	return *textures_.at((gametime / frame_length_) % textures_.size());
 }
 
 void TerrainDescription::add_texture(std::unique_ptr<Texture> texture) {
@@ -163,7 +160,7 @@ int TerrainDescription::get_num_valid_resources() const {
 	return valid_resources_.size();
 }
 
-bool TerrainDescription::is_resource_valid(const int32_t res) const {
+bool TerrainDescription::is_resource_valid(const int res) const {
 	for (const uint8_t resource_index : valid_resources_) {
 		if (resource_index == res) {
 			return true;
@@ -172,15 +169,15 @@ bool TerrainDescription::is_resource_valid(const int32_t res) const {
 	return false;
 }
 
-int8_t TerrainDescription::get_default_resource() const {
+int TerrainDescription::get_default_resource() const {
 	return default_resource_index_;
 }
 
-int32_t TerrainDescription::get_default_resource_amount() const {
+int TerrainDescription::get_default_resource_amount() const {
 	return default_resource_amount_;
 }
 
-int32_t TerrainDescription::dither_layer() const {
+int TerrainDescription::dither_layer() const {
 	return dither_layer_;
 }
 

@@ -84,6 +84,7 @@ RGBColor TerrainTexture::get_minimap_color(int8_t shade) {
 	return m_minimap_colors[128 + shade];
 }
 
+// NOCOM(#sirver): kill
 void TerrainTexture::animate(uint32_t time)
 {
 	m_frame_num = (time / m_frametime) % m_textures.size();

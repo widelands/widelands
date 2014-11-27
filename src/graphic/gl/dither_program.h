@@ -35,7 +35,8 @@ public:
 	~DitherProgram();
 
 	// Draws the terrain.
-	void draw(const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
+	void draw(uint32_t gametime,
+	          const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
 	          const FieldsToDraw& fields_to_draw);
 
 private:

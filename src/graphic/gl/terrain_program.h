@@ -22,11 +22,12 @@
 
 #include <vector>
 
+#include "base/rect.h"
+#include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
 #include "logic/description_maintainer.h"
 #include "logic/world/terrain_description.h"
 
-class FieldsToDraw;
 
 class TerrainProgram {
 public:
@@ -34,7 +35,7 @@ public:
 	TerrainProgram();
 
 	// Draws the terrain.
-	void draw(const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
+	void draw(uint32_t gametime, const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
 	          const FieldsToDraw& fields_to_draw);
 
 private:
@@ -66,6 +67,9 @@ private:
 	static_assert(sizeof(PerVertexData) == 28, "Wrong padding.");
 
 	void gl_draw(int gl_texture, float texture_w, float texture_h);
+
+	// Adds a vertex to the end of vertices with data from 'field' and 'texture_coordinates'.
+	void add_vertex(const FieldsToDraw::Field& field, const FloatRect& texture_coordinates);
 
 	// The buffer that will contain 'vertices_' for rendering.
 	Gl::Buffer gl_array_buffer_;

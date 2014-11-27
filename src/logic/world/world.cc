@@ -84,6 +84,8 @@ void World::postload() {
 	save_surface_to_png(terrain_texture_.get(), &fw);
 	fw.write(*g_fs, "texture_atlas.png");
 
+	// NOCOM(#sirver): check that loaded terrain has the correct size
+
 	int next_texture_to_move = 0;
 	for (size_t i = 0; i < terrains_->size(); ++i) {
 		TerrainDescription* terrain = terrains_->get(i);
