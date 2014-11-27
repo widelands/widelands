@@ -36,7 +36,6 @@ wl_library(base_geometry
     point.h
     point.cc
     rect.h
-    rect.cc
 )
 
 wl_library(base_md5

@@ -23,7 +23,6 @@
 #include "graphic/gl/game_renderer.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "graphic/sdl/game_renderer.h"
 #include "logic/map.h"
 #include "logic/player.h"
 #include "wlapplication.h"
@@ -92,12 +91,7 @@ void MapView::draw(RenderTarget & dst)
 	egbase.map().overlay_manager().load_graphics();
 
 	if (!m_renderer) {
-		if (g_opengl) {
-			m_renderer.reset(new GlGameRenderer());
-		} else
-		{
-			m_renderer.reset(new SdlGameRenderer());
-		}
+		m_renderer.reset(new GlGameRenderer());
 	}
 	if (upcast(InteractivePlayer const, interactive_player, &intbase())) {
 		m_renderer->rendermap(dst, egbase, interactive_player->player(), m_viewpoint);

@@ -24,8 +24,8 @@
 
 #include "base/rect.h"
 #include "graphic/align.h"
+#include "graphic/blend_mode.h"
 #include "graphic/color.h"
-#include "graphic/compositemode.h"
 #include "graphic/image.h"
 
 class Surface;
@@ -64,9 +64,20 @@ public:
 	void fill_rect(const Rect&, const RGBAColor&);
 	void brighten_rect(const Rect&, int32_t factor);
 
-	void blit(const Point& dst, const Image* image, Composite cm = CM_UseAlpha, UI::Align = UI::Align_TopLeft);
-	void blitrect(const Point& dst, const Image* image, const Rect& src, Composite cm = CM_UseAlpha);
-	void tile(const Rect&, const Image* image, const Point& ofs, Composite cm = CM_UseAlpha);
+	void blit(const Point& dst,
+	          const Image* image,
+	          BlendMode blend_mode = BlendMode::UseAlpha,
+	          UI::Align = UI::Align_TopLeft);
+
+	void blitrect(const Point& dst,
+	              const Image* image,
+	              const Rect& src,
+	              BlendMode blend_mode = BlendMode::UseAlpha);
+
+	void tile(const Rect&,
+	          const Image* image,
+	          const Point& ofs,
+	          BlendMode blend_mode = BlendMode::UseAlpha);
 
 	void drawanim(const Point& dst, uint32_t animation, uint32_t time, const Widelands::Player* = 0);
 	void drawanimrect

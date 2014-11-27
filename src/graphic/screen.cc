@@ -16,20 +16,20 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "graphic/gl/surface_screen.h"
+#include "graphic/screen.h"
 
 #include <algorithm>
 #include <cassert>
 
 #include "graphic/gl/utils.h"
 
-GLSurfaceScreen::GLSurfaceScreen(uint16_t w, uint16_t h)
+Screen::Screen(uint16_t w, uint16_t h)
 {
 	m_w = w;
 	m_h = h;
 }
 
-void GLSurfaceScreen::pixel_to_gl(float* x, float* y) const {
+void Screen::pixel_to_gl(float* x, float* y) const {
 	*x = (*x / m_w) * 2. - 1.;
 	*y = 1. - (*y / m_h) * 2.;
 }
@@ -38,7 +38,7 @@ void GLSurfaceScreen::pixel_to_gl(float* x, float* y) const {
  * Swap order of rows in m_pixels, to compensate for the upside-down nature of the
  * OpenGL coordinate system.
  */
-void GLSurfaceScreen::swap_rows()
+void Screen::swap_rows()
 {
 	uint8_t * begin_row = m_pixels.get();
 	uint8_t * end_row = m_pixels.get() + (m_w * (m_h - 1) * 4);
@@ -52,11 +52,7 @@ void GLSurfaceScreen::swap_rows()
 	}
 }
 
-const SDL_PixelFormat & GLSurfaceScreen::format() const {
-	return Gl::gl_rgba_format();
-}
-
-void GLSurfaceScreen::lock(Surface::LockMode mode)
+void Screen::lock(Surface::LockMode mode)
 {
 	assert(!m_pixels);
 
@@ -74,7 +70,7 @@ void GLSurfaceScreen::lock(Surface::LockMode mode)
 	}
 }
 
-void GLSurfaceScreen::unlock(Surface::UnlockMode mode)
+void Screen::unlock(Surface::UnlockMode mode)
 {
 	assert(m_pixels);
 
@@ -84,8 +80,4 @@ void GLSurfaceScreen::unlock(Surface::UnlockMode mode)
 	}
 
 	m_pixels.reset(nullptr);
-}
-
-uint16_t GLSurfaceScreen::get_pitch() const {
-	return 4 * m_w;
 }

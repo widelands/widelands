@@ -22,9 +22,10 @@
 
 #include <memory>
 
-#include "graphic/rendertarget.h"
+#include "base/point.h"
 
 class StreamWrite;
+class Texture;
 
 namespace Widelands {
 	class Player;
@@ -56,7 +57,7 @@ inline MiniMapLayer operator ^ (MiniMapLayer left, MiniMapLayer right) {
 /// Render the minimap. If player is not nullptr, it renders from that player's
 /// point of view.
 /// \param viewpoint: top left corner in map coordinates
-std::unique_ptr<Surface> draw_minimap
+std::unique_ptr<Texture> draw_minimap
 	(const Widelands::EditorGameBase& egbase, const Widelands::Player* player,
 	 const Point& viewpoint, MiniMapLayer layers);
 

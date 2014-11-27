@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2014 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,13 +17,12 @@
  *
  */
 
-#ifndef WL_GRAPHIC_SDL_UTILS_H
-#define WL_GRAPHIC_SDL_UTILS_H
+#include "graphic/sdl_utils.h"
 
-#include <stdint.h>
+#include <SDL.h>
 
-struct SDL_Surface;
-
-SDL_Surface * empty_sdl_surface(int16_t w, int16_t h);
-
-#endif  // end of include guard: WL_GRAPHIC_SDL_UTILS_H
+SDL_Surface* empty_sdl_surface(int16_t w, int16_t h) {
+	SDL_Surface* const surface =
+	   SDL_CreateRGBSurface(SDL_SWSURFACE, w, h, 32, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
+	return surface;
+}

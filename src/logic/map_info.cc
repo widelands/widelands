@@ -29,7 +29,7 @@
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
 #include "graphic/minimap_renderer.h"
-#include "graphic/surface.h"
+#include "graphic/texture.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
@@ -43,19 +43,13 @@ using namespace Widelands;
 namespace  {
 
 // Setup the static objects Widelands needs to operate and initializes systems.
-void initialize(bool use_opengl) {
+void initialize() {
 	SDL_Init(SDL_INIT_VIDEO);
 
 	g_fs = new LayeredFileSystem();
 	g_fs->add_file_system(&FileSystem::create(INSTALL_DATADIR));
 
-#ifdef HAS_GETENV
-	char dummy_video_env[] = "SDL_VIDEODRIVER=dummy";
-	putenv(dummy_video_env);
-#endif
-
-	g_gr = new Graphic();
-	g_gr->initialize(1, 1, false, use_opengl);
+	g_gr = new Graphic(1, 1, false);
 }
 
 }  // namespace
@@ -63,21 +57,14 @@ void initialize(bool use_opengl) {
 int main(int argc, char ** argv)
 {
 	if (!(2 <= argc && argc <= 3)) {
-		log("Usage: %s [--opengl] <map file>\n", argv[0]);
+		log("Usage: %s <map file>\n", argv[0]);
 		return 1;
-	}
-
-	bool use_opengl = false;
-	for (int i = 0; i < argc; ++i) {
-		if (std::string(argv[i]) == "--opengl") {
-			use_opengl = true;
-		}
 	}
 
 	const std::string map_path = argv[argc - 1];
 
 	try {
-		initialize(use_opengl);
+		initialize();
 
 		std::string map_dir = FileSystem::fs_dirname(map_path);
 		if (map_dir.empty()) {
@@ -100,7 +87,8 @@ int main(int argc, char ** argv)
 		ml->preload_map(true);
 		ml->load_map_complete(egbase, true);
 
-		std::unique_ptr<Surface> minimap(draw_minimap(egbase, nullptr, Point(0, 0), MiniMapLayer::Terrain));
+		std::unique_ptr<Texture> minimap(
+		   draw_minimap(egbase, nullptr, Point(0, 0), MiniMapLayer::Terrain));
 
 		// Write minimap
 		{

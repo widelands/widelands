@@ -30,8 +30,9 @@
 #include "graphic/image.h"
 #include "graphic/text/font_set.h"
 
-class SurfaceCache;
+class Texture;
 class ImageCache;
+class TextureCache;
 
 namespace RT {
 
@@ -59,7 +60,7 @@ public:
 	virtual ~IFont() {}
 
 	virtual void dimensions(const std::string&, int, uint16_t *, uint16_t *) = 0;
-	virtual const Surface& render(const std::string&, const RGBColor& clr, int, SurfaceCache*) = 0;
+	virtual const Texture& render(const std::string&, const RGBColor& clr, int, TextureCache*) = 0;
 
 	virtual uint16_t ascent(int) const = 0;
 };
@@ -82,13 +83,13 @@ using TagSet = std::set<std::string>;
 class Renderer {
 public:
 	// Ownership is not taken.
-	Renderer(ImageCache* image_cache, SurfaceCache* surface_cache);
+	Renderer(ImageCache* image_cache, TextureCache* texture_cache);
 	~Renderer();
 
 	// Render the given string in the given width. Restricts the allowed tags to
-	// the ones in TagSet. The renderer does not do caching in the SurfaceCache
+	// the ones in TagSet. The renderer does not do caching in the TextureCache
 	// for its individual nodes, but the font render does.
-	Surface* render(const std::string&, uint16_t width, const TagSet& tagset = TagSet());
+	Texture* render(const std::string&, uint16_t width, const TagSet& tagset = TagSet());
 
 	// Returns a reference map of the clickable hyperlinks in the image. This
 	// will do no caching and needs to do all layouting, so do not call this too
@@ -101,7 +102,7 @@ private:
 	std::unique_ptr<FontCache> font_cache_;
 	std::unique_ptr<Parser> parser_;
 	ImageCache* const image_cache_;  // Not owned.
-	SurfaceCache* const surface_cache_;  // Not owned.
+	TextureCache* const texture_cache_;  // Not owned.
 };
 
 }

@@ -7,6 +7,7 @@ wl_binary(wl_render_richtext
     render_richtext.cc
   DEPENDS
     base_log
+    graphic
     graphic_image_io
     graphic_surface
     graphic_text

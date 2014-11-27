@@ -734,7 +734,7 @@ void Building::draw_help
 	if (dpyflags & InteractiveBase::dfShowCensus) {
 		const std::string info = info_string(igbase.building_census_format());
 		if (!info.empty()) {
-			dst.blit(pos - Point(0, 48), UI::g_fh1->render(info), CM_UseAlpha, UI::Align_Center);
+			dst.blit(pos - Point(0, 48), UI::g_fh1->render(info), BlendMode::UseAlpha, UI::Align_Center);
 		}
 	}
 
@@ -746,7 +746,7 @@ void Building::draw_help
 				return;
 		const std::string info = info_string(igbase.building_statistics_format());
 		if (!info.empty()) {
-			dst.blit(pos - Point(0, 35), UI::g_fh1->render(info), CM_UseAlpha, UI::Align_Center);
+			dst.blit(pos - Point(0, 35), UI::g_fh1->render(info), BlendMode::UseAlpha, UI::Align_Center);
 		}
 	}
 }
