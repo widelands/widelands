@@ -243,8 +243,6 @@ void EditorInteractive::think() {
 	frametime = m_realtime - lasttime;
 
 	egbase().get_gametime_pointer() += frametime;
-
-	g_gr->animate_maptextures(egbase().get_gametime());
 }
 
 

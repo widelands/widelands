@@ -19,6 +19,7 @@
 #ifndef WL_GRAPHIC_TEXTURE_H
 #define WL_GRAPHIC_TEXTURE_H
 
+#include "base/rect.h"
 #include "graphic/gl/system_headers.h"
 #include "graphic/surface.h"
 
@@ -33,6 +34,10 @@ public:
 	// Create a new empty (that is randomly filled) Surface with the given
 	// dimensions.
 	Texture(int w, int h);
+
+	// Create a logical texture that is a 'subrect' (in Pixel) in
+	// another texture. Ownership of 'texture' is not taken.
+	Texture(const GLuint texture, const Rect& subrect, int parent_w, int parent_h);
 
 	virtual ~Texture();
 
@@ -60,9 +65,21 @@ public:
 
 	GLuint get_gl_texture() const {return m_texture;}
 
+	const FloatRect& texture_coordinates() const {
+		return m_texture_coordinates;
+	}
+
 private:
 	void pixel_to_gl(float* x, float* y) const override;
 	void init(uint16_t w, uint16_t h);
+
+	// True if we own the texture, i.e. if we need to delete it.
+	bool m_owns_texture;
+
+	// Bounding box in texture coordinates in m_texture. This is in
+	// GLCoordinates which start at the bottom left, so top_left() will actually
+	// be bottom left.
+	FloatRect m_texture_coordinates;
 
 	GLuint m_texture;
 };

@@ -19,6 +19,7 @@
 
 #include "graphic/gl/terrain_program.h"
 
+#include "base/log.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/graphic.h"
 #include "graphic/terrain_texture.h"
@@ -38,16 +39,19 @@ const char kTerrainVertexShader[] = R"(
 
 // Attributes.
 attribute vec2 attr_position;
-attribute float attr_brightness;
 attribute vec2 attr_texture_position;
+attribute float attr_brightness;
+attribute vec2 attr_texture_offset;
 
 // Output of vertex shader.
 varying float var_brightness;
 varying vec2 var_texture_position;
+varying vec2 var_texture_offset;
 
 void main() {
 	var_texture_position = attr_texture_position;
 	var_brightness = attr_brightness;
+	var_texture_offset = attr_texture_offset;
 	gl_Position = vec4(attr_position, 0., 1.);
 }
 )";
@@ -56,14 +60,17 @@ const char kTerrainFragmentShader[] = R"(
 #version 120
 
 uniform sampler2D u_terrain_texture;
+uniform vec2 u_texture_dimensions;
 
 varying float var_brightness;
 varying vec2 var_texture_position;
+varying vec2 var_texture_offset;
 
 void main() {
-	vec4 clr = texture2D(u_terrain_texture, var_texture_position);
+	vec4 clr = texture2D(u_terrain_texture, var_texture_offset + u_texture_dimensions.xy * fract(var_texture_position));
 	clr.rgb *= var_brightness;
-	gl_FragColor = clr;
+	// gl_FragColor = clr;
+	gl_FragColor = vec4(vec3(clr), 1.);
 }
 )";
 
@@ -76,21 +83,23 @@ TerrainProgram::TerrainProgram() {
 	attr_texture_position_ =
 	   glGetAttribLocation(gl_program_.object(), "attr_texture_position");
 	attr_brightness_ = glGetAttribLocation(gl_program_.object(), "attr_brightness");
+	attr_texture_offset_ = glGetAttribLocation(gl_program_.object(), "attr_texture_offset");
 
 	u_terrain_texture_ = glGetUniformLocation(gl_program_.object(), "u_terrain_texture");
+	u_texture_dimensions_ = glGetUniformLocation(gl_program_.object(), "u_texture_dimensions");
 }
 
-void TerrainProgram::gl_draw(int num_vertices,
-                             const DescriptionMaintainer<TerrainDescription>& terrains) {
+void TerrainProgram::gl_draw(int gl_texture, float texture_w, float texture_h) {
 	glUseProgram(gl_program_.object());
 
 	glEnableVertexAttribArray(attr_position_);
 	glEnableVertexAttribArray(attr_texture_position_);
 	glEnableVertexAttribArray(attr_brightness_);
+	glEnableVertexAttribArray(attr_texture_offset_);
 
 	glBindBuffer(GL_ARRAY_BUFFER, gl_array_buffer_.object());
 	glBufferData(GL_ARRAY_BUFFER,
-	             sizeof(TerrainProgram::PerVertexData) * num_vertices,
+	             sizeof(TerrainProgram::PerVertexData) * vertices_.size(),
 	             vertices_.data(),
 	             GL_STREAM_DRAW);
 
@@ -105,51 +114,68 @@ void TerrainProgram::gl_draw(int num_vertices,
 	set_attrib_pointer(attr_position_, 2, offsetof(PerVertexData, gl_x));
 	set_attrib_pointer(attr_brightness_, 1, offsetof(PerVertexData, brightness));
 	set_attrib_pointer(attr_texture_position_, 2, offsetof(PerVertexData, texture_x));
+	set_attrib_pointer(attr_texture_offset_, 2, offsetof(PerVertexData, texture_offset_x));
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-	// Set the sampler texture unit to 0
+	glUniform2f(u_texture_dimensions_, texture_w, texture_h);
+
 	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, gl_texture);
 	glUniform1i(u_terrain_texture_, 0);
 
-	// Which triangles to draw?
-	for (size_t i = 0; i < terrains_to_indices_.size(); ++i) {
-		const auto& indices = terrains_to_indices_[i];
-		if (indices.empty()) {
-			continue;
-		}
-		glBindTexture(GL_TEXTURE_2D,
-		              g_gr->get_maptexture_data(terrains.get_unmutable(i).get_texture())
-		                 ->texture()
-		                 .get_gl_texture());
-		glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, indices.data());
-	}
+	glDrawArrays(GL_TRIANGLES, 0, vertices_.size());
 
 	glDisableVertexAttribArray(attr_position_);
 	glDisableVertexAttribArray(attr_texture_position_);
 	glDisableVertexAttribArray(attr_brightness_);
+	glDisableVertexAttribArray(attr_texture_offset_);
 }
 
 void TerrainProgram::draw(const DescriptionMaintainer<TerrainDescription>& terrains,
                           const FieldsToDraw& fields_to_draw) {
-	if (vertices_.size() < fields_to_draw.size()) {
-		vertices_.resize(fields_to_draw.size());
-		terrains_to_indices_.resize(terrains.size());
+	if (vertices_.size() < fields_to_draw.size() * 3) {
+		vertices_.reserve(fields_to_draw.size() * 3);
 	}
-	for (auto& container : terrains_to_indices_) {
-		container.clear();
-		container.reserve(fields_to_draw.size());
-	}
+	vertices_.clear();
+
+	GLuint gl_texture = 0;
+	float texture_w, texture_h;
+
+	// NOCOM(#sirver): pull out into methods.
+	const auto add_vertex =
+	   [this](const FieldsToDraw::Field& field, const FloatRect& texture_coordinates) {
+		vertices_.emplace_back(field.gl_x,
+		                       field.gl_y,
+		                       field.brightness,
+		                       field.texture_x,
+		                       field.texture_y,
+		                       texture_coordinates.x,
+		                       texture_coordinates.y);
+	};
+
+	// NOCOM(#sirver): check that loaded terrain has the correct size
+	const auto add_triangle =
+	   [add_vertex, &terrains, this, &gl_texture, &texture_w, &texture_h, &fields_to_draw](
+	      int terrain, int index1, int index2, int index3) {
+		const Texture& texture = terrains.get_unmutable(terrain).get_texture();
+		const FloatRect& texture_coordinates = texture.texture_coordinates();
+		if (gl_texture != 0 && gl_texture != texture.get_gl_texture()) {
+			throw wexception(
+			   "Not all terrain textures are in the same texture atlas (i.e. same texture).");
+		}
+		// NOCOM(#sirver): pull this out?
+		gl_texture = texture.get_gl_texture();
+		texture_w = texture_coordinates.w;
+		texture_h = texture_coordinates.h;
+
+		add_vertex(fields_to_draw.at(index1), texture_coordinates);
+		add_vertex(fields_to_draw.at(index2), texture_coordinates);
+		add_vertex(fields_to_draw.at(index3), texture_coordinates);
+	};
 
 	for (size_t current_index = 0; current_index < fields_to_draw.size(); ++current_index) {
 		const FieldsToDraw::Field& field = fields_to_draw.at(current_index);
-
-		PerVertexData& vertex = vertices_[current_index];
-		vertex.texture_x = field.texture_x;
-		vertex.texture_y = field.texture_y;
-		vertex.gl_x = field.gl_x;
-		vertex.gl_y = field.gl_y;
-		vertex.brightness = field.brightness;
 
 		// The bottom right neighbor fields_to_draw is needed for both triangles
 		// associated with this field. If it is not in fields_to_draw, there is no need to
@@ -163,19 +189,15 @@ void TerrainProgram::draw(const DescriptionMaintainer<TerrainDescription>& terra
 		const int bln_index =
 		   fields_to_draw.calculate_index(field.fx + (field.fy & 1) - 1, field.fy + 1);
 		if (bln_index != -1) {
-			terrains_to_indices_[field.ter_d].push_back(current_index);
-			terrains_to_indices_[field.ter_d].push_back(bln_index);
-			terrains_to_indices_[field.ter_d].push_back(brn_index);
+			add_triangle(field.ter_d, current_index, bln_index, brn_index);
 		}
 
 		// Right triangle.
 		const int rn_index = fields_to_draw.calculate_index(field.fx + 1, field.fy);
 		if (rn_index != -1) {
-			terrains_to_indices_[field.ter_r].push_back(current_index);
-			terrains_to_indices_[field.ter_r].push_back(brn_index);
-			terrains_to_indices_[field.ter_r].push_back(rn_index);
+			add_triangle(field.ter_r, current_index, brn_index, rn_index);
 		}
 	}
 
-	gl_draw(fields_to_draw.size(), terrains);
+	gl_draw(gl_texture, texture_w, texture_h);
 }

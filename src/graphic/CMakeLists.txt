@@ -50,8 +50,6 @@ wl_library(graphic_surface
     gl/utils.h
     screen.cc
     screen.h
-    sub_texture.cc
-    sub_texture.h
     surface.cc
     surface.h
     texture.cc

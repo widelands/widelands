@@ -165,8 +165,11 @@ void GlGameRenderer::draw() {
 			map.normalize_coords(coords);
 			const FCoords& fcoords = map.get_fcoords(coords);
 
-			f.texture_x = float(x) / kTextureWidth;
-			f.texture_y = float(y) / kTextureHeight;
+			// NOCOM(#sirver): rename in texture_offset_x or something?
+			float texture_offset_x = float(x) / kTextureWidth;
+			float texture_offset_y = float(y) / kTextureHeight;
+			f.texture_x = texture_offset_x;  // NOCOM(#sirver): experiment with fract() in the shader
+			f.texture_y = texture_offset_y;
 
 			f.gl_x = f.pixel_x = x + surface_offset.x;
 			f.gl_y = f.pixel_y = y + surface_offset.y - fcoords.field->get_height() * HEIGHT_FACTOR;
@@ -183,10 +186,11 @@ void GlGameRenderer::draw() {
 
 	const World& world = m_egbase->world();
 	terrain_program_->draw(world.terrains(), fields_to_draw);
-	dither_program_->draw(world.terrains(), fields_to_draw);
-	road_program_->draw(*surface, fields_to_draw);
+	// NOCOM(#sirver): bring back.
+	// dither_program_->draw(world.terrains(), fields_to_draw);
+	// road_program_->draw(*surface, fields_to_draw);
 
-	draw_objects();
+	// draw_objects();
 
 	glDisable(GL_SCISSOR_TEST);
 }

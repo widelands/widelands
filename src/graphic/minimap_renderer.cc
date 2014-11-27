@@ -61,9 +61,10 @@ inline uint32_t calc_minimap_color
 	uint32_t pixelcolor = 0;
 
 	if (layers & MiniMapLayer::Terrain) {
-		const RGBColor color =
-		   g_gr->get_maptexture_data(egbase.world().terrain_descr(f.field->terrain_d()).get_texture())
-		      ->get_minimap_color(f.field->get_brightness());
+		// NOCOM(#sirver): bring this back.
+		const RGBColor color;
+			// g_gr->get_maptexture_data(egbase.world().terrain_descr(f.field->terrain_d()).get_texture())
+				// ->get_minimap_color(f.field->get_brightness());
 
 		pixelcolor = SDL_MapRGBA(&format, color.r, color.g, color.b, 255);
 	}

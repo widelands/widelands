@@ -20,13 +20,16 @@
 #ifndef WL_LOGIC_WORLD_TERRAIN_DESCRIPTION_H
 #define WL_LOGIC_WORLD_TERRAIN_DESCRIPTION_H
 
+#include <memory>
 #include <string>
+#include <vector>
 
 #include "base/macros.h"
 #include "logic/widelands.h"
 #include "logic/world/resource_description.h"
 
 class LuaTable;
+class Texture;
 
 namespace Widelands {
 
@@ -58,7 +61,8 @@ public:
 
 	/// Returns the texture index for this terrain.
 	// NOCOM(#sirver): kill or change
-	uint32_t get_texture() const;
+	const Texture& get_texture() const;
+	void add_texture(std::unique_ptr<Texture> texture);
 
 	/// Returns the type of terrain this is (water, walkable, and so on).
 	Type get_is() const;
@@ -105,11 +109,11 @@ private:
 	int8_t default_resource_index_;
 	int32_t default_resource_amount_;
 	int32_t dither_layer_;
-	uint32_t texture_;  ///< renderer's texture
 	double temperature_;
 	double fertility_;
 	double humidity_;
 	std::vector<std::string> texture_paths_;
+	std::vector<std::unique_ptr<Texture>> textures_;
 
 	DISALLOW_COPY_AND_ASSIGN(TerrainDescription);
 };

@@ -75,52 +75,53 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 		if (ter_is != check[checkfor])
 			continue;
 
-		const Image* tex = g_gr->images().get(
-		   g_gr->get_maptexture_data(terrain_descr.get_texture())->get_texture_image());
-		Texture* texture = new Texture(tex->width(), tex->height());
-		texture->blit(Point(0, 0), tex->texture(), Rect(0, 0, tex->width(), tex->height()), BlendMode::Copy);
-		Point pt(1, tex->height() - kSmallPicHeight - 1);
+		// NOCOM(#sirver): this is broken
+		// const Image* tex = g_gr->images().get(
+			// g_gr->get_maptexture_data(terrain_descr.get_texture())->get_texture_image());
+		// Texture* texture = new Texture(tex->width(), tex->height());
+		// texture->blit(Point(0, 0), tex->texture(), Rect(0, 0, tex->width(), tex->height()), BlendMode::Copy);
+		// Point pt(1, tex->height() - kSmallPicHeight - 1);
 
-		if (ter_is == TerrainDescription::GREEN) {
-			texture->blit(pt, green->texture(), Rect(0, 0, green->width(), green->height()));
-			pt.x += kSmallPicWidth + 1;
-			/** TRANSLATORS: This is a terrain type tooltip in the editor */
-			tooltips.push_back(_("arable"));
-		} else {
-			if (ter_is & TerrainDescription::WATER) {
-				texture->blit(pt, water->texture(), Rect(0, 0, water->width(), water->height()));
-				pt.x += kSmallPicWidth + 1;
-				/** TRANSLATORS: This is a terrain type tooltip in the editor */
-				tooltips.push_back(_("aquatic"));
-			}
-			else if (ter_is & TerrainDescription::MOUNTAIN) {
-				texture->blit(pt, mountain->texture(), Rect(0, 0, mountain->width(), mountain->height()));
-				pt.x += kSmallPicWidth + 1;
-				/** TRANSLATORS: This is a terrain type tooltip in the editor */
-				tooltips.push_back(_("mountainous"));
-			}
-			if (ter_is & TerrainDescription::ACID) {
-				texture->blit(pt, dead->texture(), Rect(0, 0, dead->width(), dead->height()));
-				pt.x += kSmallPicWidth + 1;
-				/** TRANSLATORS: This is a terrain type tooltip in the editor */
-				tooltips.push_back(_("dead"));
-			}
-			if (ter_is & TerrainDescription::UNPASSABLE) {
-				texture->blit(
-				   pt, unpassable->texture(), Rect(0, 0, unpassable->width(), unpassable->height()));
-				pt.x += kSmallPicWidth + 1;
-				/** TRANSLATORS: This is a terrain type tooltip in the editor */
-				tooltips.push_back(_("unpassable"));
-			}
-			if (ter_is & TerrainDescription::DRY) {
-				texture->blit(pt, dry->texture(), Rect(0, 0, dry->width(), dry->height()));
-				/** TRANSLATORS: This is a terrain type tooltip in the editor */
-				 tooltips.push_back(_("treeless"));
-			}
-		}
+		// if (ter_is == TerrainDescription::GREEN) {
+			// texture->blit(pt, green->texture(), Rect(0, 0, green->width(), green->height()));
+			// pt.x += kSmallPicWidth + 1;
+			// [>* TRANSLATORS: This is a terrain type tooltip in the editor <]
+			// tooltips.push_back(_("arable"));
+		// } else {
+			// if (ter_is & TerrainDescription::WATER) {
+				// texture->blit(pt, water->texture(), Rect(0, 0, water->width(), water->height()));
+				// pt.x += kSmallPicWidth + 1;
+				// [>* TRANSLATORS: This is a terrain type tooltip in the editor <]
+				// tooltips.push_back(_("aquatic"));
+			// }
+			// else if (ter_is & TerrainDescription::MOUNTAIN) {
+				// texture->blit(pt, mountain->texture(), Rect(0, 0, mountain->width(), mountain->height()));
+				// pt.x += kSmallPicWidth + 1;
+				// [>* TRANSLATORS: This is a terrain type tooltip in the editor <]
+				// tooltips.push_back(_("mountainous"));
+			// }
+			// if (ter_is & TerrainDescription::ACID) {
+				// texture->blit(pt, dead->texture(), Rect(0, 0, dead->width(), dead->height()));
+				// pt.x += kSmallPicWidth + 1;
+				// [>* TRANSLATORS: This is a terrain type tooltip in the editor <]
+				// tooltips.push_back(_("dead"));
+			// }
+			// if (ter_is & TerrainDescription::UNPASSABLE) {
+				// texture->blit(
+					// pt, unpassable->texture(), Rect(0, 0, unpassable->width(), unpassable->height()));
+				// pt.x += kSmallPicWidth + 1;
+				// [>* TRANSLATORS: This is a terrain type tooltip in the editor <]
+				// tooltips.push_back(_("unpassable"));
+			// }
+			// if (ter_is & TerrainDescription::DRY) {
+				// texture->blit(pt, dry->texture(), Rect(0, 0, dry->width(), dry->height()));
+				// [>* TRANSLATORS: This is a terrain type tooltip in the editor <]
+				 // tooltips.push_back(_("treeless"));
+			// }
+		// }
 
 		// Make sure we delete this later on.
-		offscreen_images->emplace_back(new_in_memory_image("dummy_hash", texture));
+		// offscreen_images->emplace_back(new_in_memory_image("dummy_hash", texture));
 		break;
 	}
 	/** TRANSLATORS: %1% = terrain name, %2% = list of terrain types  */

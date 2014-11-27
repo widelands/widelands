@@ -23,7 +23,6 @@
 #include <memory>
 #include <vector>
 
-#include "graphic/sub_texture.h"
 #include "graphic/texture.h"
 
 // A 2d bin packer based on the blog post
@@ -36,7 +35,7 @@ public:
 	// NOCOM(#sirver): document
 	void add(const Texture& texture);
 
-	std::unique_ptr<Texture> pack(std::vector<std::unique_ptr<SubTexture>>* subtextures);
+	std::unique_ptr<Texture> pack(std::vector<std::unique_ptr<Texture>>* textures);
 
 private:
 	struct Node {

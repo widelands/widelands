@@ -19,9 +19,12 @@
 
 #include "logic/world/terrain_description.h"
 
+#include <memory>
+
 #include <boost/format.hpp>
 
 #include "graphic/graphic.h"
+#include "graphic/texture.h"
 #include "logic/game_data_error.h"
 #include "logic/world/editor_category.h"
 #include "logic/world/world.h"
@@ -98,7 +101,7 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
 	} else {
 		frame_length = 1000 / get_positive_int(table, "fps");
 	}
-	texture_ = g_gr->new_maptexture(texture_paths_, frame_length);
+	// NOCOM(#sirver): hold on to frame_length.
 
 	for (const std::string& resource :
 	     table.get_table("valid_resources")->array_entries<std::string>()) {
@@ -118,11 +121,18 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
 	editor_category_ = world.editor_terrain_categories().get(editor_category_index);
 }
 
+// NOCOM(#sirver): check header for graphic.cc/.h. It should no longer need the world.
 TerrainDescription::~TerrainDescription() {
 }
 
-uint32_t TerrainDescription::get_texture() const {
-	return texture_;
+const Texture& TerrainDescription::get_texture() const {
+	assert(textures_.size()); // NOCOM(#sirver): remove
+	// NOCOM(#sirver): think about animation.
+	return *textures_.at(0);
+}
+
+void TerrainDescription::add_texture(std::unique_ptr<Texture> texture) {
+	textures_.emplace_back(std::move(texture));
 }
 
 const std::vector<std::string>& TerrainDescription::texture_paths() const {

@@ -39,16 +39,33 @@ public:
 
 private:
 	struct PerVertexData {
+		PerVertexData(float init_gl_x,
+		              float init_gl_y,
+		              float init_brightness,
+		              float init_texture_x,
+		              float init_texture_y,
+		              float init_texture_offset_x,
+		              float init_texture_offset_y)
+		   : gl_x(init_gl_x),
+		     gl_y(init_gl_y),
+		     brightness(init_brightness),
+		     texture_x(init_texture_x),
+		     texture_y(init_texture_y),
+		     texture_offset_x(init_texture_offset_x),
+		     texture_offset_y(init_texture_offset_y) {
+		}
+
 		float gl_x;
 		float gl_y;
 		float brightness;
 		float texture_x;
 		float texture_y;
+		float texture_offset_x;
+		float texture_offset_y;
 	};
-	static_assert(sizeof(PerVertexData) == 20, "Wrong padding.");
+	static_assert(sizeof(PerVertexData) == 28, "Wrong padding.");
 
-	void gl_draw(int num_vertices,
-	             const DescriptionMaintainer<Widelands::TerrainDescription>& terrains);
+	void gl_draw(int gl_texture, float texture_w, float texture_h);
 
 	// The buffer that will contain 'vertices_' for rendering.
 	Gl::Buffer gl_array_buffer_;
@@ -57,22 +74,22 @@ private:
 	Gl::Program gl_program_;
 
 	// Attributes.
-	GLint attr_position_;
-	GLint attr_texture_position_;
 	GLint attr_brightness_;
+	GLint attr_position_;
+	GLint attr_texture_offset_;
+	GLint attr_texture_position_;
 
 	// Uniforms.
 	GLint u_terrain_texture_;
+	GLint u_texture_dimensions_;
 
 	// Objects below are kept around to avoid memory allocations on each frame.
 	// They could theoretically also be recreated.
 
-	// All vertices that are going to get rendered this frame.
-	std::vector<PerVertexData> vertices_;
-
-	// A map from terrain index in world.terrains() to indices in 'vertices_'
+	// A map from terrain index in world.terrains() to vertices_
 	// that have this terrain type.
-	std::vector<std::vector<uint16_t>> terrains_to_indices_;
+	// NOCOM(#sirver): fix comments
+	std::vector<PerVertexData> vertices_;
 
 	DISALLOW_COPY_AND_ASSIGN(TerrainProgram);
 };

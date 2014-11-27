@@ -28,7 +28,6 @@
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
-#include "graphic/sub_texture.h"
 #include "graphic/texture.h"
 #include "graphic/texture_atlas.h"
 #include "io/fileread.h"
@@ -73,17 +72,25 @@ void World::postload() {
 			ta.add(*individual_textures_.back());
 		}
 	}
-	// NOCOM(#sirver): should be some member
 
-	std::vector<std::unique_ptr<SubTexture>> sub_textures_;
-	std::unique_ptr<Texture> terrain_texture_ = ta.pack(&sub_textures_);
+	std::vector<std::unique_ptr<Texture>> textures;
+
+	// NOCOM(#sirver): should be some member
+	terrain_texture_ = ta.pack(&textures);
+	assert(textures.size() == 198); // NOCOM(#sirver): reomve
 
 	// NOCOM(#sirver): remove
 	FileWrite fw;
 	save_surface_to_png(terrain_texture_.get(), &fw);
 	fw.write(*g_fs, "texture_atlas.png");
 
-	// NOCOM(#sirver): distribute the textures to the terrain_descriptions.
+	int next_texture_to_move = 0;
+	for (size_t i = 0; i < terrains_->size(); ++i) {
+		TerrainDescription* terrain = terrains_->get(i);
+		for (size_t j = 0; j < terrain->texture_paths().size(); ++j) {
+			terrain->add_texture(std::move(textures.at(next_texture_to_move++)));
+		}
+	}
 }
 
 const DescriptionMaintainer<TerrainDescription>& World::terrains() const {

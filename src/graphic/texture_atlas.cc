@@ -71,7 +71,7 @@ TextureAtlas::Node* TextureAtlas::find_node(Node* node, int w, int h) {
 	return nullptr;
 }
 
-std::unique_ptr<Texture> TextureAtlas::pack(std::vector<std::unique_ptr<SubTexture>>* subtextures) {
+std::unique_ptr<Texture> TextureAtlas::pack(std::vector<std::unique_ptr<Texture>>* textures) {
 
 	std::sort(blocks_.begin(), blocks_.end(), [](const Block& i, const Block& j) {
 		return std::max(i.texture->width(), i.texture->height()) >
@@ -97,14 +97,20 @@ std::unique_ptr<Texture> TextureAtlas::pack(std::vector<std::unique_ptr<SubTextu
 		block.node = fitting_node;
 	}
 
-	// NOCOM(#sirver): block only needs w and h. And that can be methos forwards from the texture.
 	std::unique_ptr<Texture> packed_texture(new Texture(current_w, current_h));
 	packed_texture->fill_rect(Rect(0, 0, current_w, current_h), RGBAColor(0, 0, 0, 0));
+
+	// NOCOM(#sirver): sort block by index.
 
 	for (Block& block : blocks_) {
 		packed_texture->blit(block.node->r.top_left(),
 		                     block.texture,
 		                     Rect(0, 0, block.texture->width(), block.texture->height()));
+		textures->emplace_back(new Texture(
+		   packed_texture->get_gl_texture(),
+		   Rect(block.node->r.top_left(), block.texture->width(), block.texture->height()),
+		   current_w,
+		   current_h));
 	}
 	return packed_texture;
 }
