@@ -201,8 +201,8 @@ void MapFlagdataPacket::read
 										 0,
 										 Flag::flag_job_request_callback,
 										 wwWORKER);
-								f.request->read
-									(fr, ref_cast<Game, EditorGameBase>(egbase), mol);
+								upcast(Game, game, &egbase);
+								f.request->read(fr, *game, mol);
 							} else {
 								f.request = nullptr;
 							}
@@ -301,8 +301,8 @@ void MapFlagdataPacket::write
 			for (const Flag::FlagJob& temp_job : flag_jobs) {
 				if (temp_job.request) {
 					fw.unsigned_8(1);
-					temp_job.request->write
-						(fw, ref_cast<Game, EditorGameBase>(egbase), mos);
+					upcast(Game, game, &egbase);
+					temp_job.request->write(fw, *game, mos);
 				} else
 					fw.unsigned_8(0);
 
