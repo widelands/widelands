@@ -58,4 +58,5 @@ wl_library(scripting
     third_party_eris
     ui_basic
     wui
+    wui_mapview_pixelfunctions
 )

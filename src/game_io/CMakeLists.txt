@@ -36,4 +36,6 @@ wl_library(game_io
     profile
     scripting
     wui
+    wui_mapview_pixelfunctions
+    wui_overlay_manager
 )

@@ -251,5 +251,7 @@ wl_library(logic
     ui_basic
     widelands_ball_of_mud
     wui
+    wui_mapview_pixelfunctions
+    wui_overlay_manager
     wui_text_layout
 )
