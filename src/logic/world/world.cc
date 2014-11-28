@@ -57,7 +57,7 @@ World::World()
 World::~World() {
 }
 
-void World::load_graphis() {
+void World::load_graphics() {
 	// NOCOM(#sirver): figure this out, maybe just grow organically.
 	TextureAtlas ta(1024, 1024);
 
@@ -85,8 +85,6 @@ void World::load_graphis() {
 	std::vector<std::unique_ptr<Texture>> textures;
 
 	terrain_texture_ = ta.pack(&textures);
-
-	// NOCOM(#sirver): check that loaded terrain has the correct size
 
 	int next_texture_to_move = 0;
 	for (size_t i = 0; i < terrains_->size(); ++i) {

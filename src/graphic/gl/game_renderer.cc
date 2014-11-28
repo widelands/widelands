@@ -164,8 +164,8 @@ void GlGameRenderer::draw() {
 			map.normalize_coords(coords);
 			const FCoords& fcoords = map.get_fcoords(coords);
 
-			f.texture_x = float(x) / kTextureWidth;
-			f.texture_y = float(y) / kTextureHeight;
+			f.texture_x = float(x) / kTextureSideLength;
+			f.texture_y = float(y) / kTextureSideLength;
 
 			f.gl_x = f.pixel_x = x + surface_offset.x;
 			f.gl_y = f.pixel_y = y + surface_offset.y - fcoords.field->get_height() * HEIGHT_FACTOR;
@@ -180,7 +180,6 @@ void GlGameRenderer::draw() {
 		}
 	}
 
-	// NOCOM(#sirver): consolidate with base class.
 	const World& world = m_egbase->world();
 	terrain_program_->draw(gametime, world.terrains(), fields_to_draw);
 	dither_program_->draw(gametime, world.terrains(), fields_to_draw);

@@ -32,9 +32,14 @@ public:
 	// Create a TextureAtlas that is backed by one Texture of the given size.
 	TextureAtlas(int width, int height);
 
-	// NOCOM(#sirver): document
+	// Add 'texture' as one of the textures to be packed. Ownership is
+	// not taken, but 'texture' must be valid until pack() has been
+	// called.
 	void add(const Texture& texture);
 
+	// Packs the textures and returns the packed texture. 'textures'
+	// contains the individual sub textures (that do not own their
+	// memory) in the order they have been added by 'add'.
 	std::unique_ptr<Texture> pack(std::vector<std::unique_ptr<Texture>>* textures);
 
 private:

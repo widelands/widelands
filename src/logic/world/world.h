@@ -88,7 +88,7 @@ public:
 
 	// Load the graphics for the world. Animations are loaded on
 	// demand.
-	void load_graphis();
+	void load_graphics();
 
 private:
 	std::unique_ptr<DescriptionMaintainer<BobDescr>> bobs_;

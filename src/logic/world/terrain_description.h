@@ -38,8 +38,7 @@ class EditorCategory;
 class World;
 
 /// TerrainTextures have a fixed size and are squares.
-constexpr int kTextureWidth = 64;
-constexpr int kTextureHeight = kTextureWidth;
+constexpr int kTextureSideLength = 64;
 
 class TerrainDescription {
 public:

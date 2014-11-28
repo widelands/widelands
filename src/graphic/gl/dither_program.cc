@@ -65,7 +65,8 @@ varying vec2 var_texture_position;
 varying vec2 var_texture_offset;
 
 void main() {
-	vec4 clr = texture2D(u_terrain_texture, var_texture_offset + u_texture_dimensions * fract(var_texture_position));
+	vec4 clr = texture2D(u_terrain_texture,
+			var_texture_offset + u_texture_dimensions * fract(var_texture_position));
 	clr.rgb *= var_brightness;
 	clr.a = 1. - texture2D(u_dither_texture, var_dither_texture_position).a;
 	gl_FragColor = clr;

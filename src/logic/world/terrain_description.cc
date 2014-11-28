@@ -128,6 +128,9 @@ const Texture& TerrainDescription::get_texture(uint32_t gametime) const {
 }
 
 void TerrainDescription::add_texture(std::unique_ptr<Texture> texture) {
+	if (texture->width() != kTextureSideLength || texture->height() != kTextureSideLength) {
+		throw wexception("Tried to add a texture with wrong size.");
+	}
 	textures_.emplace_back(std::move(texture));
 }
 

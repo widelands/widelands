@@ -119,8 +119,7 @@ World* EditorGameBase::mutable_world() {
 			throw;
 		}
 
-		// NOCOM(#sirver): uarrl
-		world_->postload();
+		world_->load_graphics();
 	}
 	return world_.get();
 }

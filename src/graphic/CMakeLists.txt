@@ -155,7 +155,6 @@ wl_library(graphic
     profile
     scripting
     sound
-    ui_basic
     wui
     wui_text_layout
 )
