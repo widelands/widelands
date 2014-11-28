@@ -330,13 +330,12 @@ void DefaultAI::late_initialization() {
 
 		// Read all interesting data from ware producing buildings
 		if (typeid(bld) == typeid(ProductionSiteDescr)) {
-			const ProductionSiteDescr& prod =
-			   ref_cast<ProductionSiteDescr const, BuildingDescr const>(bld);
+			upcast(ProductionSiteDescr const, prod, &bld);
 			bo.type = bld.get_ismine() ? BuildingObserver::MINE : BuildingObserver::PRODUCTIONSITE;
-			for (const WareAmount& temp_input : prod.inputs()) {
+			for (const WareAmount& temp_input : prod->inputs()) {
 				bo.inputs_.push_back(temp_input.first);
 			}
-			for (const WareIndex& temp_output : prod.output_ware_types()) {
+			for (const WareIndex& temp_output : prod->output_ware_types()) {
 				bo.outputs_.push_back(temp_output);
 			}
 
@@ -370,9 +369,8 @@ void DefaultAI::late_initialization() {
 		// non critical are excluded (see below)
 		if (typeid(bld) == typeid(MilitarySiteDescr)) {
 			bo.type = BuildingObserver::MILITARYSITE;
-			const MilitarySiteDescr& milit =
-			   ref_cast<MilitarySiteDescr const, BuildingDescr const>(bld);
-			for (const std::pair<unsigned char, unsigned char>& temp_buildcosts : milit.buildcost()) {
+			upcast(MilitarySiteDescr const, milit, &bld);
+			for (const std::pair<unsigned char, unsigned char>& temp_buildcosts : milit->buildcost()) {
 				// bellow are non-critical wares
 				if (tribe_->ware_index("log") == temp_buildcosts.first ||
 				    tribe_->ware_index("blackwood") == temp_buildcosts.first ||
@@ -3007,8 +3005,9 @@ void DefaultAI::gain_building(Building& b) {
 	BuildingObserver& bo = get_building_observer(b.descr().name().c_str());
 
 	if (bo.type == BuildingObserver::CONSTRUCTIONSITE) {
+		upcast(ConstructionSite const, constructionsite, &b);
 		BuildingObserver& target_bo =
-		   get_building_observer(ref_cast<ConstructionSite, Building>(b).building().name().c_str());
+			get_building_observer(constructionsite->building().name().c_str());
 		++target_bo.cnt_under_construction_;
 		++num_constructionsites_;
 		if (target_bo.type == BuildingObserver::PRODUCTIONSITE) {
@@ -3024,8 +3023,9 @@ void DefaultAI::gain_building(Building& b) {
 		++bo.cnt_built_;
 
 		if (bo.type == BuildingObserver::PRODUCTIONSITE) {
+			upcast(ProductionSite, productionsite, &b);
 			productionsites.push_back(ProductionSiteObserver());
-			productionsites.back().site = &ref_cast<ProductionSite, Building>(b);
+			productionsites.back().site = productionsite;
 			productionsites.back().bo = &bo;
 			productionsites.back().built_time_ = game().get_gametime();
 			productionsites.back().unoccupied_till_ = game().get_gametime();
@@ -3038,8 +3038,9 @@ void DefaultAI::gain_building(Building& b) {
 			for (uint32_t i = 0; i < bo.inputs_.size(); ++i)
 				++wares.at(bo.inputs_.at(i)).consumers_;
 		} else if (bo.type == BuildingObserver::MINE) {
+			upcast(ProductionSite, productionsite, &b);
 			mines_.push_back(ProductionSiteObserver());
-			mines_.back().site = &ref_cast<ProductionSite, Building>(b);
+			mines_.back().site = productionsite;
 			mines_.back().bo = &bo;
 			mines_.back().built_time_ = game().get_gametime();
 
@@ -3049,8 +3050,9 @@ void DefaultAI::gain_building(Building& b) {
 			for (uint32_t i = 0; i < bo.inputs_.size(); ++i)
 				++wares.at(bo.inputs_.at(i)).consumers_;
 		} else if (bo.type == BuildingObserver::MILITARYSITE) {
+			upcast(MilitarySite, militarysite, &b);
 			militarysites.push_back(MilitarySiteObserver());
-			militarysites.back().site = &ref_cast<MilitarySite, Building>(b);
+			militarysites.back().site = militarysite;
 			militarysites.back().bo = &bo;
 			militarysites.back().checks = bo.desc->get_size();
 			militarysites.back().enemies_nearby_ = true;
@@ -3066,8 +3068,9 @@ void DefaultAI::lose_building(const Building& b) {
 	BuildingObserver& bo = get_building_observer(b.descr().name().c_str());
 
 	if (bo.type == BuildingObserver::CONSTRUCTIONSITE) {
-		BuildingObserver& target_bo = get_building_observer(
-		   ref_cast<ConstructionSite const, Building const>(b).building().name().c_str());
+		upcast(ConstructionSite const, constructionsite, &b);
+		BuildingObserver& target_bo =
+				get_building_observer(constructionsite->building().name().c_str());
 		--target_bo.cnt_under_construction_;
 		--num_constructionsites_;
 		if (target_bo.type == BuildingObserver::PRODUCTIONSITE) {
