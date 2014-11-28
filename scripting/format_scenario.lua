@@ -135,12 +135,14 @@ end
 --       objective text & title.
 --
 function new_objectives(...)
+   local sum = 0
    local s = ""
    for idx,obj in ipairs{...} do
-   	s = rt("<p font-size=10> <br></p>" ..
-	   "<p font=serif font-size=18 font-weight=bold font-color=D1D1D1>"
-	   .. ngettext("New Objective", "New Objectives", obj.number) .. "</p>")
-	   .. obj.body
+   	s = s .. obj.body
+      sum = sum + obj.number
    end
-   return s
+   return rt("<p font-size=10> <br></p>" ..
+	   "<p font=serif font-size=18 font-weight=bold font-color=D1D1D1>"
+	   .. ngettext("New Objective", "New Objectives", sum) .. "</p>") .. s
 end
+
