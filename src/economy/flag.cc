@@ -640,15 +640,16 @@ void Flag::call_carrier
 	}
 
 	// Deal with the normal (flag) case
-	ref_cast<Flag const, PlayerImmovable const>(*nextstep);
+	upcast(Flag const, nextflag, nextstep);
 
 	for (int32_t dir = 1; dir <= 6; ++dir) {
 		Road * const road = get_road(dir);
 		Flag *       other;
 		Road::FlagId flagid;
 
-		if (!road)
+		if (!road) {
 			continue;
+		}
 
 		if (&road->get_flag(Road::FlagStart) == this) {
 			flagid = Road::FlagStart;
@@ -658,12 +659,14 @@ void Flag::call_carrier
 			other = &road->get_flag(Road::FlagStart);
 		}
 
-		if (other != nextstep)
+		if (other != nextflag) {
 			continue;
+		}
 
 		// Yes, this is the road we want; inform it
-		if (road->notify_ware(game, flagid))
+		if (road->notify_ware(game, flagid)) {
 			return;
+		}
 
 		// If the road doesn't react to the ware immediately, we try other roads:
 		// They might lead to the same flag!
@@ -791,24 +794,24 @@ void Flag::flag_job_request_callback
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {
-	Flag & flag = ref_cast<Flag, PlayerImmovable>(target);
+	upcast(Flag, flag, &target);
 
 	assert(w);
 
-	for (FlagJobs::iterator flag_iter = flag.m_flag_jobs.begin();
-		  flag_iter != flag.m_flag_jobs.end();
+	for (FlagJobs::iterator flag_iter = flag->m_flag_jobs.begin();
+		  flag_iter != flag->m_flag_jobs.end();
 		  ++flag_iter) {
 		if (flag_iter->request == &rq) {
 			delete &rq;
 
 			w->start_task_program(game, flag_iter->program);
 
-			flag.m_flag_jobs.erase(flag_iter);
+			flag->m_flag_jobs.erase(flag_iter);
 			return;
 		}
 	}
 
-	flag.molog("BUG: flag_job_request_callback: worker not found in list\n");
+	flag->molog("BUG: flag_job_request_callback: worker not found in list\n");
 }
 
 void Flag::log_general_info(const Widelands::EditorGameBase & egbase)

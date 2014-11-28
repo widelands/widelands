@@ -1034,19 +1034,17 @@ void Economy::_handle_active_supplies(Game & game)
 */
 void Economy::balance(uint32_t const timerid)
 {
-	if (m_request_timerid != timerid)
+	if (m_request_timerid != timerid) {
 		return;
+	}
 	++m_request_timerid;
 
-	Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
+	upcast(Game, game, &owner().egbase());
 
 	_check_splits();
-
-	_create_requested_workers (game);
-
-	_balance_requestsupply(game);
-
-	_handle_active_supplies(game);
+	_create_requested_workers(*game);
+	_balance_requestsupply(*game);
+	_handle_active_supplies(*game);
 }
 
 }
