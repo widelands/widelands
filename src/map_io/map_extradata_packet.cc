@@ -19,9 +19,8 @@
 
 #include "map_io/map_extradata_packet.h"
 
-#include <SDL_image.h>
-
 #include "graphic/graphic.h"
+#include "graphic/image_io.h"
 #include "graphic/in_memory_image.h"
 #include "graphic/texture.h"
 #include "io/fileread.h"
@@ -60,13 +59,7 @@ void MapExtradataPacket::read(FileSystem& fs, bool const skip) {
 					const std::string hash = std::string("map:") + FileSystem::fs_filename(pname->c_str());
 					const Image* image = nullptr;
 					if (!g_gr->images().has(hash)) {
-						FileRead fr;
-
-						fr.open(fs, *pname);
-						SDL_Surface * const surf =
-							IMG_Load_RW(SDL_RWFromMem(fr.data(0), fr.get_size()), 1);
-						if (!surf)
-							continue; //  Illegal pic. Skip it.
+						SDL_Surface* surf = load_image_as_sdl_surface(*pname, &fs);
 						image = g_gr->images().insert(new_in_memory_image(hash, new Texture(surf)));
 					} else {
 						image = g_gr->images().get(hash);
