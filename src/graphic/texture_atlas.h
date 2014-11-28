@@ -23,6 +23,7 @@
 #include <memory>
 #include <vector>
 
+#include "base/macros.h"
 #include "graphic/texture.h"
 
 // A 2d bin packer based on the blog post
@@ -51,6 +52,8 @@ private:
 		Rect r;
 		std::unique_ptr<Node> right;
 		std::unique_ptr<Node> down;
+
+		DISALLOW_COPY_AND_ASSIGN(Node);
 	};
 
 	struct Block {
@@ -66,8 +69,6 @@ private:
 	static Node* find_node(Node* root, int w, int h);
 
 	int next_index_;
-	int required_w_;
-	int required_h_;
 
 	// Unpacked items.
 	std::vector<Block> blocks_;

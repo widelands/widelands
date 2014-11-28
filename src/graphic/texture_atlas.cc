@@ -23,6 +23,7 @@
 #include <memory>
 
 #include "base/log.h"
+#include "base/wexception.h"
 
 TextureAtlas::Node::Node(const Rect& init_r) : used(false), r(init_r) {
 }
@@ -68,29 +69,74 @@ TextureAtlas::Node* TextureAtlas::find_node(Node* node, int w, int h) {
 }
 
 std::unique_ptr<Texture> TextureAtlas::pack(std::vector<std::unique_ptr<Texture>>* textures) {
+	if (blocks_.empty()) {
+		throw wexception("Called pack() without blocks.");
+	}
 
 	std::sort(blocks_.begin(), blocks_.end(), [](const Block& i, const Block& j) {
 		return std::max(i.texture->width(), i.texture->height()) >
 		       std::max(j.texture->width(), j.texture->height());
 	});
 
-	// NOCOM(#sirver): make this grow.
-	int current_w = 1024;
-	int current_h = 1024;
+	std::unique_ptr<Node> root(
+	   new Node(Rect(0, 0, blocks_.begin()->texture->width(), blocks_.begin()->texture->height())));
 
-	Node root(Rect(0, 0, current_w, current_h));
+	// TODO(sirver): when growing, keep maximum size of gl textures in mind.
+	const auto grow_right = [&root](int delta_w) {
+		std::unique_ptr<Node> new_root(new Node(Rect(0, 0, root->r.w + delta_w, root->r.h)));
+		new_root->used = true;
+		new_root->right.reset(new Node(Rect(root->r.w, 0, delta_w, root->r.h)));
+		new_root->down.reset(root.release());
+		root.reset(new_root.release());
+	};
 
-	// NOCOM(#sirver): make sure nodes contains something.
+	const auto grow_down = [&root](int delta_h) {
+		std::unique_ptr<Node> new_root(new Node(Rect(0, 0, root->r.w, root->r.h + delta_h)));
+		new_root->used = true;
+		new_root->down.reset(new Node(Rect(0, root->r.h, root->r.w, delta_h)));
+		new_root->right.reset(root.release());
+		root.reset(new_root.release());
+	};
+
 	for (Block& block : blocks_) {
-		Node* fitting_node = find_node(&root, block.texture->width(), block.texture->height());
-		fitting_node->split(block.texture->width(), block.texture->height());
+		const int block_width = block.texture->width();
+		const int block_height = block.texture->height();
+
+		Node* fitting_node = find_node(root.get(), block_width, block_height);
+		if (fitting_node == nullptr) {
+			// Atlas is not big enough to contain this. Grow it and try again.
+			bool can_grow_down = (block_width <= root->r.w);
+			bool can_grow_right = (block_height <= root->r.h);
+
+			// Attempt to keep the texture square-ish.
+			bool should_grow_right = can_grow_right && (root->r.h >= root->r.w + block_width);
+			bool should_grow_down = can_grow_down && (root->r.w >= root->r.h + block_height);
+
+			if (should_grow_right) {
+				grow_right(block_width);
+			} else if (should_grow_down) {
+				grow_down(block_height);
+			} else if (can_grow_right) {
+				grow_right(block_width);
+			} else if (can_grow_down) {
+				grow_down(block_height);
+			}
+			fitting_node = find_node(root.get(), block_width, block_height);
+		}
+		if (!fitting_node) {
+			throw wexception("Unable to fit node in texture atlas.");
+		}
+		fitting_node->split(block_width, block_height);
 		block.node = fitting_node;
 	}
 
-	std::unique_ptr<Texture> packed_texture(new Texture(current_w, current_h));
-	packed_texture->fill_rect(Rect(0, 0, current_w, current_h), RGBAColor(0, 0, 0, 0));
+	std::unique_ptr<Texture> packed_texture(new Texture(root->r.w, root->r.h));
+	packed_texture->fill_rect(Rect(0, 0, root->r.w, root->r.h), RGBAColor(0, 0, 0, 0));
 
-	// NOCOM(#sirver): sort block by index.
+	// Sort blocks by index so that they come back in the correct ordering.
+	std::sort(blocks_.begin(), blocks_.end(), [](const Block& i, const Block& j) {
+		return i.index < j.index;
+	});
 
 	for (Block& block : blocks_) {
 		packed_texture->blit(block.node->r.top_left(),
@@ -99,8 +145,8 @@ std::unique_ptr<Texture> TextureAtlas::pack(std::vector<std::unique_ptr<Texture>
 		textures->emplace_back(new Texture(
 		   packed_texture->get_gl_texture(),
 		   Rect(block.node->r.top_left(), block.texture->width(), block.texture->height()),
-		   current_w,
-		   current_h));
+		   root->r.w,
+		   root->r.h));
 	}
 	return packed_texture;
 }

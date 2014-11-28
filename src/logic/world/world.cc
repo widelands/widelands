@@ -86,6 +86,12 @@ void World::load_graphics() {
 
 	terrain_texture_ = ta.pack(&textures);
 
+	// NOCOM(#sirver): remove
+	// NOCOM(#sirver): check headers.
+	FileWrite fw;
+	save_surface_to_png(terrain_texture_.get(), &fw);
+	fw.write(*g_fs, "texture_atlas.png");
+
 	int next_texture_to_move = 0;
 	for (size_t i = 0; i < terrains_->size(); ++i) {
 		TerrainDescription* terrain = terrains_->get_mutable(i);
