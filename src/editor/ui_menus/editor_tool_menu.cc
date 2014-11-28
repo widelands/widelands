@@ -98,38 +98,37 @@ UI::UniqueWindow(&parent, "tool_menu", &registry, 350, 400, _("Tools"))
 void EditorToolMenu::changed_to() {
 	const int32_t n = m_radioselect.get_state();
 
-	EditorInteractive & parent =
-		ref_cast<EditorInteractive, UI::Panel>(*get_parent());
+	upcast(EditorInteractive, eia, get_parent());
 
 	EditorTool                * current_tool_pointer = nullptr;
 	UI::UniqueWindow::Registry * current_registry_pointer = nullptr;
 	switch (n) {
 	case 0:
-		current_tool_pointer     = &parent.tools.increase_height;
-		current_registry_pointer = &parent.m_heightmenu;
+		current_tool_pointer     = &eia->tools.increase_height;
+		current_registry_pointer = &eia->m_heightmenu;
 		break;
 	case 1:
-		current_tool_pointer     = &parent.tools.noise_height;
-		current_registry_pointer = &parent.m_noise_heightmenu;
+		current_tool_pointer     = &eia->tools.noise_height;
+		current_registry_pointer = &eia->m_noise_heightmenu;
 		break;
 	case 2:
-		current_tool_pointer     = &parent.tools.set_terrain;
-		current_registry_pointer = &parent.m_terrainmenu;
+		current_tool_pointer     = &eia->tools.set_terrain;
+		current_registry_pointer = &eia->m_terrainmenu;
 		break;
 	case 3:
-		current_tool_pointer     = &parent.tools.place_immovable;
-		current_registry_pointer = &parent.m_immovablemenu;
+		current_tool_pointer     = &eia->tools.place_immovable;
+		current_registry_pointer = &eia->m_immovablemenu;
 		break;
 	case 4:
-		current_tool_pointer     = &parent.tools.place_bob;
-		current_registry_pointer = &parent.m_bobmenu;
+		current_tool_pointer     = &eia->tools.place_bob;
+		current_registry_pointer = &eia->m_bobmenu;
 		break;
 	case 5:
-		current_tool_pointer     = &parent.tools.increase_resources;
-		current_registry_pointer = &parent.m_resourcesmenu;
+		current_tool_pointer     = &eia->tools.increase_resources;
+		current_registry_pointer = &eia->m_resourcesmenu;
 		break;
 	case 6:
-		current_tool_pointer     = &parent.tools.set_port_space;
+		current_tool_pointer     = &eia->tools.set_port_space;
 		current_registry_pointer = nullptr; // no need for a window
 		break;
 	default:
@@ -137,13 +136,13 @@ void EditorToolMenu::changed_to() {
 		break;
 	}
 
-	parent.select_tool(*current_tool_pointer, EditorTool::First);
-	if (current_tool_pointer == &parent.tools.set_port_space) {
+	eia->select_tool(*current_tool_pointer, EditorTool::First);
+	if (current_tool_pointer == &eia->tools.set_port_space) {
 		// Set correct overlay
-		Widelands::Map & map = parent.egbase().map();
+		Widelands::Map & map = eia->egbase().map();
 		map.overlay_manager().register_overlay_callback_function(
 				boost::bind(&editor_Tool_set_port_space_callback, _1, boost::ref(map)));
-		map.recalc_whole_map(parent.egbase().world());
+		map.recalc_whole_map(eia->egbase().world());
 		update();
 	}
 
@@ -158,38 +157,38 @@ void EditorToolMenu::changed_to() {
 			switch (n) { //  create window
 			case 0:
 				new EditorToolChangeHeightOptionsMenu
-					(parent,
-					parent.tools.increase_height,
+					(*eia,
+					eia->tools.increase_height,
 					*current_registry_pointer);
 				break;
 			case 1:
 				new EditorToolNoiseHeightOptionsMenu
-					(parent,
-					parent.tools.noise_height,
+					(*eia,
+					eia->tools.noise_height,
 					*current_registry_pointer);
 				break;
 			case 2:
 				new EditorToolSetTerrainOptionsMenu
-					(parent,
-					parent.tools.set_terrain,
+					(*eia,
+					eia->tools.set_terrain,
 					*current_registry_pointer);
 				break;
 			case 3:
 				new EditorToolPlaceImmovableOptionsMenu
-					(parent,
-					parent.tools.place_immovable,
+					(*eia,
+					eia->tools.place_immovable,
 					*current_registry_pointer);
 				break;
 			case 4:
 				new EditorToolPlaceBobOptionsMenu
-					(parent,
-					parent.tools.place_bob,
+					(*eia,
+					eia->tools.place_bob,
 					*current_registry_pointer);
 				break;
 			case 5:
 				new EditorToolChangeResourcesOptionsMenu
-					(parent,
-					parent.tools.increase_resources,
+					(*eia,
+					eia->tools.increase_resources,
 					*current_registry_pointer);
 				break;
 			default:

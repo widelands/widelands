@@ -35,6 +35,6 @@ EditorToolOptionsMenu::EditorToolOptionsMenu
 
 
 void EditorToolOptionsMenu::select_correct_tool() {
-	ref_cast<EditorInteractive, UI::Panel>(*get_parent())
-		.select_tool(*m_current_pointer, EditorTool::First);
+	upcast(EditorInteractive, eia, get_parent());
+	eia->select_tool(*m_current_pointer, EditorTool::First);
 }

@@ -29,9 +29,9 @@
 #include "graphic/graphic.h"
 
 inline EditorInteractive & EditorToolsizeMenu::eia() {
-	return ref_cast<EditorInteractive, UI::Panel>(*get_parent());
+	upcast(EditorInteractive, result, get_parent());
+	return *result;
 }
-
 
 /**
  * Create all the buttons etc...

@@ -146,7 +146,8 @@ void MainMenuLoadMap::clicked_ok() {
 		m_mapfiles.clear();
 		fill_list();
 	} else {
-		ref_cast<EditorInteractive, UI::Panel>(*get_parent()).load(filename);
+		upcast(EditorInteractive, eia, get_parent());
+		eia->load(filename);
 		die();
 	}
 }
