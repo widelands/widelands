@@ -6,6 +6,7 @@ wl_binary(wl_map_info
     base_log
     graphic
     graphic_image_io
+    graphic_minimap_renderer
     graphic_surface
     io_fileread
     io_filesystem

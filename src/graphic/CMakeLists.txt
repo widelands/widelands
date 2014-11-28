@@ -102,6 +102,20 @@ wl_library(graphic_game_renderer
     wui_overlay_manager
 )
 
+wl_library(graphic_minimap_renderer
+  SRCS
+    minimap_renderer.cc
+    minimap_renderer.h
+  DEPENDS
+    base_geometry
+    base_macros
+    economy
+    graphic
+    graphic_image
+    graphic_surface
+    logic
+    wui_mapview_pixelfunctions
+)
 
 wl_library(graphic
   SRCS
@@ -109,6 +123,7 @@ wl_library(graphic
     align.h
     animation.cc
     animation.h
+    # NOCOMMIT(#sirver): kill colormap
     colormap.cc
     colormap.h
     default_resolution.h
@@ -134,9 +149,6 @@ wl_library(graphic
     image_transformations.h
     in_memory_image.cc
     in_memory_image.h
-    # NOCOMMIT(#sirver): pull out into separate lib.
-    minimap_renderer.cc
-    minimap_renderer.h
     rendertarget.cc
     rendertarget.h
     richtext.cc
@@ -157,7 +169,6 @@ wl_library(graphic
     base_log
     base_macros
     build_info
-    economy
     graphic_color
     graphic_image
     graphic_image_io
@@ -172,7 +183,6 @@ wl_library(graphic
     profile
     scripting
     sound
-    wui_mapview_pixelfunctions
     wui_overlay_manager
     wui_text_layout
 )
