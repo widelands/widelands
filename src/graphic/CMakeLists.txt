@@ -106,8 +106,6 @@ wl_library(graphic
     gl/fields_to_draw.h
     gl/fill_rect_program.cc
     gl/fill_rect_program.h
-    gl/game_renderer.cc
-    gl/game_renderer.h
     gl/road_program.cc
     gl/road_program.h
     gl/system_headers.h
