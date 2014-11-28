@@ -301,14 +301,12 @@ void Critter::program_update(Game & game, State & state)
 	}
 
 	for (;;) {
-		const CritterProgram & program =
-			ref_cast<CritterProgram const, BobProgramBase const>
-				(*state.program);
+		upcast(CritterProgram const, program, state.program);
 
-		if (state.ivar1 >= program.get_size())
+		if (state.ivar1 >= program->get_size())
 			return pop_task(game);
 
-		const CritterAction & action = program[state.ivar1];
+		const CritterAction & action = (*program)[state.ivar1];
 
 		if ((this->*(action.function))(game, state, action))
 			return;

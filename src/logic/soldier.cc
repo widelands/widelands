@@ -700,12 +700,8 @@ void Soldier::start_animation
 	 uint32_t const time)
 {
 	molog("[soldier] starting animation %s", animname);
-	return
-		start_task_idle
-			(ref_cast<Game, EditorGameBase>(egbase),
-			 descr().get_rand_anim
-			 	(ref_cast<Game, EditorGameBase>(egbase), animname),
-			 time);
+	upcast(Game, game, &egbase);
+	return start_task_idle(*game, descr().get_rand_anim(*game, animname), time);
 }
 
 
@@ -748,14 +744,17 @@ Battle * Soldier::get_battle()
  */
 bool Soldier::can_be_challenged()
 {
-	if (m_hp_current < 1)  //< Soldier is dead!
+	if (m_hp_current < 1) {  //< Soldier is dead!
 		return false;
-	if (!is_on_battlefield())
+	}
+	if (!is_on_battlefield()) {
 		return false;
-	if (!m_battle)
+	}
+	if (!m_battle) {
 		return true;
-	return
-		!m_battle->locked(ref_cast<Game, EditorGameBase>(owner().egbase()));
+	}
+	upcast(Game, game, &owner().egbase());
+	return !m_battle->locked(*game);
 }
 
 /**
@@ -1805,11 +1804,8 @@ void Soldier::send_space_signals(Game & game)
 			 FindImmovableAttackable());
 
 		for (BaseImmovable * temp_attackable : attackables) {
-			if
-				(ref_cast<PlayerImmovable const, BaseImmovable const>(*temp_attackable)
-				 .get_owner()->player_number()
-				 ==
-				 land_owner) {
+			upcast(PlayerImmovable const, imm, temp_attackable);
+			if (imm->get_owner()->player_number() == land_owner) {
 				dynamic_cast<Attackable &>(*temp_attackable).aggressor(*this);
 			}
 		}

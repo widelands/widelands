@@ -181,9 +181,10 @@ private:
 
 /// If you find a better way to do this that doesn't cost a virtual function
 /// or additional member variable, go ahead
-#define MO_DESCR(type) \
-public: const type & descr() const { \
-		return ref_cast<type const, MapObjectDescr const>(*m_descr);          \
+#define MO_DESCR(type)                     \
+public: const type & descr() const {       \
+		upcast(type const, result, m_descr); \
+		return *result;                      \
    }                                                                          \
 
 class MapObject {
@@ -311,7 +312,8 @@ public:
 		MapObjectLoader & mol   () {return *m_mol;}
 		MapObject            * get_object() {return m_object;}
 		template<typename T> T & get() {
-			return ref_cast<T, MapObject>(*m_object);
+			upcast(T, result, m_object);
+			return *result;
 		}
 
 	protected:

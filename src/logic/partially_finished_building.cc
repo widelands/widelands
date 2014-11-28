@@ -201,15 +201,15 @@ void PartiallyFinishedBuilding::request_builder_callback
 {
 	assert(w);
 
-	PartiallyFinishedBuilding & b = ref_cast<PartiallyFinishedBuilding, PlayerImmovable>(target);
+	upcast(PartiallyFinishedBuilding, b, &target);
 
-	b.m_builder = w;
+	b->m_builder = w;
 
 	delete &rq;
-	b.m_builder_request = nullptr;
+	b->m_builder_request = nullptr;
 
 	w->start_task_buildingwork(game);
-	b.set_seeing(true);
+	b->set_seeing(true);
 }
 
 

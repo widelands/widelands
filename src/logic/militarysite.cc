@@ -335,9 +335,9 @@ MilitarySite::drop_least_suited_soldier(bool new_soldier_has_arrived, Soldier * 
 		// Now I know that the new guy is worthy.
 		if (nullptr != kickoutCandidate)
 		{
-			Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
-			kickoutCandidate->reset_tasks(game);
-			kickoutCandidate->start_task_leavebuilding(game, true);
+			upcast(Game, game, &owner().egbase());
+			kickoutCandidate->reset_tasks(*game);
+			kickoutCandidate->start_task_leavebuilding(*game, true);
 			return true;
 		}
 	}
@@ -355,10 +355,10 @@ MilitarySite::incorporate_upgraded_soldier(EditorGameBase & egbase, Soldier & s)
 	// Call to drop_least routine has side effects: it tries to drop a soldier. Order is important!
 	if (stationed_soldiers().size() < m_capacity || drop_least_suited_soldier(true, &s))
 	{
-		Game & game = ref_cast<Game, EditorGameBase>(egbase);
+		upcast(Game, game, &egbase);
 		s.set_location(this);
-		s.reset_tasks(game);
-		s.start_task_buildingwork(game);
+		s.reset_tasks(*game);
+		s.start_task_buildingwork(*game);
 		return true;
 	}
 	return false;
@@ -376,10 +376,9 @@ void MilitarySite::request_soldier_callback
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {
-	MilitarySite & msite = ref_cast<MilitarySite, PlayerImmovable>(target);
-	Soldier      & s     = ref_cast<Soldier,      Worker>         (*w);
-
-	msite.incorporate_soldier(game, s);
+	upcast(MilitarySite, msite, &target);
+	upcast(Soldier, s, w);
+	msite->incorporate_soldier(game, *s);
 }
 
 
@@ -409,11 +408,11 @@ void MilitarySite::update_normal_soldier_request()
 	}
 
 	if (m_capacity < present.size()) {
-		Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
+		upcast(Game, game, &owner().egbase());
 		for (uint32_t i = 0; i < present.size() - m_capacity; ++i) {
 			Soldier & soldier = *present[i];
-			soldier.reset_tasks(game);
-			soldier.start_task_leavebuilding(game, true);
+			soldier.reset_tasks(*game);
+			soldier.start_task_leavebuilding(*game, true);
 		}
 	}
 }
@@ -716,7 +715,7 @@ void MilitarySite::set_soldier_capacity(uint32_t const capacity) {
 
 void MilitarySite::drop_soldier(Soldier & soldier)
 {
-	Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
+	upcast(Game, game, &owner().egbase());
 
 	if (!is_present(soldier)) {
 		// This can happen when the "drop soldier" player command is delayed
@@ -729,8 +728,8 @@ void MilitarySite::drop_soldier(Soldier & soldier)
 		return;
 	}
 
-	soldier.reset_tasks(game);
-	soldier.start_task_leavebuilding(game, true);
+	soldier.reset_tasks(*game);
+	soldier.start_task_leavebuilding(*game, true);
 
 	update_soldier_request();
 }
@@ -754,8 +753,8 @@ bool MilitarySite::can_attack()
 
 void MilitarySite::aggressor(Soldier & enemy)
 {
-	Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
-	Map  & map  = game.map();
+	upcast(Game, game, &owner().egbase());
+	Map  & map  = game->map();
 	if
 		(enemy.get_owner() == &owner() ||
 		 enemy.get_battle() ||
@@ -784,7 +783,7 @@ void MilitarySite::aggressor(Soldier & enemy)
 				sj.enemy = &enemy;
 				sj.stayhome = false;
 				m_soldierjobs.push_back(sj);
-				temp_soldier->update_task_buildingwork(game);
+				temp_soldier->update_task_buildingwork(*game);
 				return;
 			}
 		}
@@ -792,12 +791,12 @@ void MilitarySite::aggressor(Soldier & enemy)
 
 	// Inform the player, that we are under attack by adding a new entry to the
 	// message queue - a sound will automatically be played.
-	notify_player(game, true);
+	notify_player(*game, true);
 }
 
 bool MilitarySite::attack(Soldier & enemy)
 {
-	Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
+	upcast(Game, game, &owner().egbase());
 
 	std::vector<Soldier *> present = present_soldiers();
 	Soldier * defender = nullptr;
@@ -832,11 +831,11 @@ bool MilitarySite::attack(Soldier & enemy)
 		sj.stayhome = true;
 		m_soldierjobs.push_back(sj);
 
-		defender->update_task_buildingwork(game);
+		defender->update_task_buildingwork(*game);
 
 		// Inform the player, that we are under attack by adding a new entry to
 		// the message queue - a sound will automatically be played.
-		notify_player(game);
+		notify_player(*game);
 
 		return true;
 	} else {
@@ -844,7 +843,7 @@ bool MilitarySite::attack(Soldier & enemy)
 		const Coords coords = get_position();
 		{
 			send_message
-				(game,
+				(*game,
 				 "site_lost",
 				 _("Militarysite lost!"),
 				 descr().m_defeated_enemy_str,
@@ -855,11 +854,11 @@ bool MilitarySite::attack(Soldier & enemy)
 		// we still hold the bigger military presence in that area (e.g. if there
 		// is a fortress one or two points away from our sentry, the fortress has
 		// a higher presence and thus the enemy can just burn down the sentry.
-		if (military_presence_kept(game)) {
+		if (military_presence_kept(*game)) {
 			// Okay we still got the higher military presence, so the attacked
 			// militarysite will be destroyed.
 			set_defeating_player(enemy.owner().player_number());
-			schedule_destroy(game);
+			schedule_destroy(*game);
 			return false;
 		}
 
@@ -889,16 +888,16 @@ bool MilitarySite::attack(Soldier & enemy)
 
 		// Now we destroy the old building before we place the new one.
 		set_defeating_player(enemy.owner().player_number());
-		schedule_destroy(game);
+		schedule_destroy(*game);
 
 		enemyplayer->force_building(coords, former_buildings);
-		BaseImmovable * const newimm = game.map()[coords].get_immovable();
+		BaseImmovable * const newimm = game->map()[coords].get_immovable();
 		upcast(MilitarySite, newsite, newimm);
-		newsite->reinit_after_conqueration(game);
+		newsite->reinit_after_conqueration(*game);
 
 		// Of course we should inform the victorious player as well
 		newsite->send_message
-			(game,
+			(*game,
 			 "site_defeated",
 			 _("Enemy at site defeated!"),
 			 newsite->descr().m_defeated_you_str,
@@ -991,8 +990,8 @@ void MilitarySite::send_attacker
 	sj.stayhome = false;
 	m_soldierjobs.push_back(sj);
 
-	soldier.update_task_buildingwork
-		(ref_cast<Game, EditorGameBase>(owner().egbase()));
+	upcast(Game, game, &owner().egbase());
+	soldier.update_task_buildingwork(*game);
 }
 
 

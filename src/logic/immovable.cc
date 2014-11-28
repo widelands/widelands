@@ -619,7 +619,7 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 {
 	BaseImmovable::Loader::load(fr);
 
-	Immovable & imm = ref_cast<Immovable, MapObject>(*get_object());
+	upcast(Immovable, imm, get_object());
 
 	if (version >= 5) {
 		PlayerNumber pn = fr.unsigned_8();
@@ -627,29 +627,29 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 			Player * plr = egbase().get_player(pn);
 			if (!plr)
 				throw GameDataError("Immovable::load: player %u does not exist", pn);
-			imm.set_owner(plr);
+			imm->set_owner(plr);
 		}
 	}
 
 	// Position
-	imm.m_position = read_coords_32(&fr, egbase().map().extent());
-	imm.set_position(egbase(), imm.m_position);
+	imm->m_position = read_coords_32(&fr, egbase().map().extent());
+	imm->set_position(egbase(), imm->m_position);
 
 	// Animation
 	char const * const animname = fr.c_string();
 	try {
-		imm.m_anim = imm.descr().get_animation(animname);
+		imm->m_anim = imm->descr().get_animation(animname);
 	} catch (const MapObjectDescr::AnimationNonexistent &) {
-		imm.m_anim = imm.descr().main_animation();
+		imm->m_anim = imm->descr().main_animation();
 		log
 			("Warning: (%s) Animation \"%s\" not found, using animation %s).\n",
-			 imm.descr().name().c_str(), animname, imm.descr().get_animation_name(imm.m_anim).c_str());
+			 imm->descr().name().c_str(), animname, imm->descr().get_animation_name(imm->m_anim).c_str());
 	}
-	imm.m_animstart = fr.signed_32();
+	imm->m_animstart = fr.signed_32();
 	if (version >= 4) {
-		imm.m_anim_construction_total = fr.unsigned_32();
-		if (imm.m_anim_construction_total)
-			imm.m_anim_construction_done = fr.unsigned_32();
+		imm->m_anim_construction_total = fr.unsigned_32();
+		if (imm->m_anim_construction_total)
+			imm->m_anim_construction_done = fr.unsigned_32();
 	}
 
 	{ //  program
@@ -664,14 +664,14 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 			if (program_name.empty())
 				program_name = "program";
 		}
-		imm.m_program = imm.descr().get_program(program_name);
+		imm->m_program = imm->descr().get_program(program_name);
 	}
-	imm.m_program_ptr = fr.unsigned_32();
+	imm->m_program_ptr = fr.unsigned_32();
 
-	if (!imm.m_program) {
-		imm.m_program_ptr = 0;
+	if (!imm->m_program) {
+		imm->m_program_ptr = 0;
 	} else {
-		if (imm.m_program_ptr >= imm.m_program->size()) {
+		if (imm->m_program_ptr >= imm->m_program->size()) {
 			// Try to not fail if the program of some immovable has changed
 			// significantly.
 			// Note that in some cases, the immovable may end up broken despite
@@ -679,20 +679,20 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 			log
 				("Warning: Immovable '%s', size of program '%s' seems to have "
 				 "changed.\n",
-				 imm.descr().name().c_str(), imm.m_program->name().c_str());
-			imm.m_program_ptr = 0;
+				 imm->descr().name().c_str(), imm->m_program->name().c_str());
+			imm->m_program_ptr = 0;
 		}
 	}
 
-	imm.m_program_step = fr.signed_32();
+	imm->m_program_step = fr.signed_32();
 
 	if (version >= 3)
-		imm.m_reserved_by_worker = fr.unsigned_8();
+		imm->m_reserved_by_worker = fr.unsigned_8();
 
 	if (version >= 4) {
 		std::string dataname = fr.c_string();
 		if (!dataname.empty()) {
-			imm.set_action_data(ImmovableActionData::load(fr, imm, dataname));
+			imm->set_action_data(ImmovableActionData::load(fr, *imm, dataname));
 		}
 	}
 }

@@ -244,11 +244,11 @@ Building & BuildingDescr::create_constructionsite() const
 	BuildingDescr const * const descr =
 		m_tribe.get_building_descr
 			(m_tribe.safe_building_index("constructionsite"));
-	ConstructionSite & csite =
-		ref_cast<ConstructionSite, MapObject>(descr->create_object());
-	csite.set_building(*this);
 
-	return csite;
+	upcast(ConstructionSite, csite, &descr->create_object());
+	csite->set_building(*this);
+
+	return *csite;
 }
 
 
@@ -724,25 +724,24 @@ Draw overlay help strings when enabled.
 void Building::draw_help
 	(const EditorGameBase& game, RenderTarget& dst, const FCoords&, const Point& pos)
 {
-	const InteractiveGameBase & igbase =
-		ref_cast<InteractiveGameBase const, InteractiveBase const>
-			(*game.get_ibase());
-	uint32_t const dpyflags = igbase.get_display_flags();
+	upcast(InteractiveGameBase const, igbase, game.get_ibase());
+
+	uint32_t const dpyflags = igbase->get_display_flags();
 
 	if (dpyflags & InteractiveBase::dfShowCensus) {
-		const std::string info = info_string(igbase.building_census_format());
+		const std::string info = info_string(igbase->building_census_format());
 		if (!info.empty()) {
 			dst.blit(pos - Point(0, 48), UI::g_fh1->render(info), BlendMode::UseAlpha, UI::Align_Center);
 		}
 	}
 
 	if (dpyflags & InteractiveBase::dfShowStatistics) {
-		if (upcast(InteractivePlayer const, iplayer, &igbase))
+		if (upcast(InteractivePlayer const, iplayer, igbase))
 			if
 				(!iplayer->player().see_all() &&
 				 iplayer->player().is_hostile(*get_owner()))
 				return;
-		const std::string info = info_string(igbase.building_statistics_format());
+		const std::string info = info_string(igbase->building_statistics_format());
 		if (!info.empty()) {
 			dst.blit(pos - Point(0, 35), UI::g_fh1->render(info), BlendMode::UseAlpha, UI::Align_Center);
 		}

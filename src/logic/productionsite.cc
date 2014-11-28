@@ -517,10 +517,10 @@ void ProductionSite::request_worker_callback
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {
-	ProductionSite & psite = ref_cast<ProductionSite, PlayerImmovable>(target);
+	upcast(ProductionSite, psite, &target);
 
 	assert(w);
-	assert(w->get_location(game) == &psite);
+	assert(w->get_location(game) == psite);
 
 	// If there is more than one working position, it's possible, that different level workers are
 	// requested and therefor possible, that a higher qualified worker answers a request for a lower
@@ -531,7 +531,7 @@ void ProductionSite::request_worker_callback
 	// placed on the slot that originally requested the arrived worker.
 	bool worker_placed = false;
 	WareIndex     idx = w->descr().worker_index();
-	for (WorkingPosition * wp = psite.m_working_positions;; ++wp) {
+	for (WorkingPosition * wp = psite->m_working_positions;; ++wp) {
 		if (wp->worker_request == &rq) {
 			if (wp->worker_request->get_index() == idx) {
 				// Place worker
@@ -542,16 +542,16 @@ void ProductionSite::request_worker_callback
 				// Set new request for this slot
 				WareIndex workerid = wp->worker_request->get_index();
 				delete wp->worker_request;
-				wp->worker_request = &psite.request_worker(workerid);
+				wp->worker_request = &psite->request_worker(workerid);
 			}
 			break;
 		}
 	}
 	while (!worker_placed) {
 		{
-			uint8_t nwp = psite.descr().nr_working_positions();
+			uint8_t nwp = psite->descr().nr_working_positions();
 			uint8_t pos = 0;
-			WorkingPosition * wp = psite.m_working_positions;
+			WorkingPosition * wp = psite->m_working_positions;
 			for (; pos < nwp; ++wp, ++pos) {
 				// Find a fitting slot
 				if (!wp->worker && !worker_placed)
@@ -565,10 +565,10 @@ void ProductionSite::request_worker_callback
 		}
 		if (!worker_placed) {
 			// Find the next smaller version of this worker
-			WareIndex nuwo    = psite.descr().tribe().get_nrworkers();
+			WareIndex nuwo    = psite->descr().tribe().get_nrworkers();
 			WareIndex current = WareIndex(static_cast<size_t>(0));
 			for (; current < nuwo; ++current) {
-				WorkerDescr const * worker = psite.descr().tribe().get_worker_descr(current);
+				WorkerDescr const * worker = psite->descr().tribe().get_worker_descr(current);
 				if (worker->becomes() == idx) {
 					idx = current;
 					break;
@@ -578,8 +578,8 @@ void ProductionSite::request_worker_callback
 				throw
 					wexception
 						("Something went wrong! No fitting place for worker %s in %s at (%u, %u) found!",
-						 w->descr().descname().c_str(), psite.descr().descname().c_str(),
-						 psite.get_position().x, psite.get_position().y);
+						 w->descr().descname().c_str(), psite->descr().descname().c_str(),
+						 psite->get_position().x, psite->get_position().y);
 		}
 	}
 
@@ -588,8 +588,8 @@ void ProductionSite::request_worker_callback
 	// primary worker if the worker that has just arrived is
 	// the last one we need to start working.
 	w->start_task_idle(game, 0, -1);
-	psite.try_start_working(game);
-	psite.workers_changed();
+	psite->try_start_working(game);
+	psite->workers_changed();
 }
 
 
@@ -765,14 +765,13 @@ bool ProductionSite::get_building_work
 			const WorkerDescr & worker_descr =
 				*descr().tribe().get_worker_descr(worker_type_with_count.first);
 			{
-				Worker & recruit =
-					ref_cast<Worker, Bob>(worker_descr.create_object());
-				recruit.set_owner(&worker.owner());
-				recruit.set_position(game, worker.get_position());
-				recruit.init(game);
-				recruit.set_location(this);
-				recruit.start_task_leavebuilding(game, true);
-				worker.start_task_releaserecruit(game, recruit);
+				upcast(Worker, recruit, &worker_descr.create_object());
+				recruit->set_owner(&worker.owner());
+				recruit->set_position(game, worker.get_position());
+				recruit->init(game);
+				recruit->set_location(this);
+				recruit->start_task_leavebuilding(game, true);
+				worker.start_task_releaserecruit(game, *recruit);
 			}
 		}
 		assert(worker_type_with_count.second);

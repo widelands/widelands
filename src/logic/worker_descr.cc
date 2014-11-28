@@ -177,12 +177,12 @@ Worker & WorkerDescr::create
 	 Coords             const coords)
 const
 {
-	Worker & worker = ref_cast<Worker, MapObject>(create_object());
-	worker.set_owner(&owner);
-	worker.set_location(location);
-	worker.set_position(egbase, coords);
-	worker.init(egbase);
-	return worker;
+	upcast(Worker, worker, &create_object());
+	worker->set_owner(&owner);
+	worker->set_location(location);
+	worker->set_position(egbase, coords);
+	worker->init(egbase);
+	return *worker;
 }
 
 

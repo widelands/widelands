@@ -377,11 +377,10 @@ void Warehouse::load_finish(EditorGameBase & egbase) {
 			(owner().is_worker_type_allowed(worker_index) &&
 			 m_next_worker_without_cost_spawn[i] == static_cast<uint32_t>(never()))
 		{
-			if (next_spawn == static_cast<uint32_t>(never()))
-				next_spawn =
-					schedule_act
-						(ref_cast<Game, EditorGameBase>(egbase),
-						 WORKER_WITHOUT_COST_SPAWN_INTERVAL);
+			upcast(Game, game, &egbase);
+			if (next_spawn == static_cast<uint32_t>(never())) {
+				next_spawn = schedule_act(*game, WORKER_WITHOUT_COST_SPAWN_INTERVAL);
+			}
 			m_next_worker_without_cost_spawn[i] = next_spawn;
 			log
 				("WARNING: player %u is allowed to create worker type %s but his "
@@ -444,17 +443,13 @@ void Warehouse::init(EditorGameBase & egbase)
 		// m_next_military_act is not touched in the loading code. Is only needed
 		// if there warehous is created in the game?  I assume it's for the
 		// conquer_radius thing
-		m_next_military_act =
-			schedule_act
-				(ref_cast<Game, EditorGameBase>(egbase), 1000);
+		m_next_military_act = schedule_act(*game, 1000);
 
-		m_next_stock_remove_act =
-			schedule_act
-				(ref_cast<Game, EditorGameBase>(egbase), 4000);
+		m_next_stock_remove_act = schedule_act(*game, 4000);
 
 		log("Message: adding (wh) (%s) %i \n", to_string(descr().type()).c_str(), player.player_number());
 		send_message
-			(ref_cast<Game, EditorGameBase>(egbase),
+			(*game,
 			 "warehouse",
 			 descr().descname(),
 			 (boost::format(_("A new %s was added to your economy."))
@@ -911,17 +906,17 @@ void Warehouse::request_cb
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {
-	Warehouse & wh = ref_cast<Warehouse, PlayerImmovable>(target);
+	upcast(Warehouse, wh, &target);
 
 	if (w) {
 		w->schedule_incorporate(game);
 	} else {
-		wh.m_supply->add_wares(ware, 1);
+		wh->m_supply->add_wares(ware, 1);
 
 		// This ware may be used to build planned workers,
 		// so it seems like a good idea to update the associated requests
 		// and use the ware before it is sent away again.
-		wh._update_all_planned_workers(game);
+		wh->_update_all_planned_workers(game);
 	}
 }
 
@@ -1198,8 +1193,8 @@ void Warehouse::aggressor(Soldier & enemy)
 	if (!descr().get_conquers())
 		return;
 
-	Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
-	Map  & map  = game.map();
+	upcast(Game, game, &owner().egbase());
+	Map  & map  = game->map();
 	if
 		(enemy.get_owner() == &owner() ||
 		 enemy.get_battle() ||
@@ -1209,7 +1204,7 @@ void Warehouse::aggressor(Soldier & enemy)
 		return;
 
 	if
-		(game.map().find_bobs
+		(game->map().find_bobs
 		 	(Area<FCoords>(map.get_fcoords(base_flag().get_position()), 2),
 		 	 nullptr,
 		 	 FindBobEnemySoldier(&owner())))
@@ -1218,30 +1213,28 @@ void Warehouse::aggressor(Soldier & enemy)
 	WareIndex const soldier_index = descr().tribe().worker_index("soldier");
 	Requirements noreq;
 
-	if (!count_workers(game, soldier_index, noreq))
+	if (!count_workers(*game, soldier_index, noreq))
 		return;
 
-	Soldier & defender =
-		ref_cast<Soldier, Worker>(launch_worker(game, soldier_index, noreq));
-	defender.start_task_defense(game, false);
+	upcast(Soldier, defender, &launch_worker(*game, soldier_index, noreq));
+	defender->start_task_defense(*game, false);
 }
 
 bool Warehouse::attack(Soldier & enemy)
 {
-	Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
+	upcast(Game, game, &owner().egbase());
 	WareIndex const soldier_index = descr().tribe().worker_index("soldier");
 	Requirements noreq;
 
-	if (count_workers(game, soldier_index, noreq)) {
-		Soldier & defender =
-			ref_cast<Soldier, Worker>(launch_worker(game, soldier_index, noreq));
-		defender.start_task_defense(game, true);
-		enemy.send_signal(game, "sleep");
+	if (count_workers(*game, soldier_index, noreq)) {
+		upcast(Soldier, defender, &launch_worker(*game, soldier_index, noreq));
+		defender->start_task_defense(*game, true);
+		enemy.send_signal(*game, "sleep");
 		return true;
 	}
 
 	set_defeating_player(enemy.owner().player_number());
-	schedule_destroy(game);
+	schedule_destroy(*game);
 	return false;
 }
 

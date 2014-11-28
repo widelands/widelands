@@ -149,8 +149,10 @@ void Bob::init(EditorGameBase & egbase)
  */
 void Bob::cleanup(EditorGameBase & egbase)
 {
-	while (!m_stack.empty()) //  bobs in the editor do not have tasks
-		do_pop_task(ref_cast<Game, EditorGameBase>(egbase));
+	while (!m_stack.empty()) { //  bobs in the editor do not have tasks
+		upcast(Game, game, &egbase);
+		do_pop_task(*game);
+	}
 
 	set_owner(nullptr); // implicitly remove ourselves from owner's map
 
