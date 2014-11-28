@@ -1,5 +1,8 @@
 add_subdirectory(text)
 
+# TODO(sirver): Separate this directory into a base directory and one
+# that is Widelands aware (can include logic stuff).
+
 wl_library(graphic_color
   SRCS
     color.h
@@ -123,9 +126,6 @@ wl_library(graphic
     align.h
     animation.cc
     animation.h
-    # NOCOMMIT(#sirver): kill colormap
-    colormap.cc
-    colormap.h
     default_resolution.h
     diranimations.h
     font.cc
