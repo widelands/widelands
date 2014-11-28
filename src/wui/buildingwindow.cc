@@ -378,7 +378,8 @@ void BuildingWindow::act_bulldoze()
 			igbase().game().send_player_bulldoze(m_building);
 	}
 	else {
-		show_bulldoze_confirm(ref_cast<InteractivePlayer, InteractiveGameBase>(igbase()), m_building);
+		upcast(InteractivePlayer, iaplayer, &igbase());
+		show_bulldoze_confirm(*iaplayer, m_building);
 	}
 }
 
@@ -394,7 +395,8 @@ void BuildingWindow::act_dismantle()
 			igbase().game().send_player_dismantle(m_building);
 	}
 	else {
-		show_dismantle_confirm(ref_cast<InteractivePlayer, InteractiveGameBase>(igbase()), m_building);
+		upcast(InteractivePlayer, iaplayer, &igbase());
+		show_dismantle_confirm(*iaplayer, m_building);
 	}
 }
 
@@ -437,10 +439,8 @@ void BuildingWindow::act_enhance(Widelands::BuildingIndex id)
 			igbase().game().send_player_enhance_building(m_building, id);
 	}
 	else {
-		show_enhance_confirm
-			(ref_cast<InteractivePlayer, InteractiveGameBase>(igbase()),
-			 m_building,
-			 id);
+		upcast(InteractivePlayer, iaplayer, &igbase());
+		show_enhance_confirm(*iaplayer, m_building, id);
 	}
 }
 

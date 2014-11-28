@@ -53,7 +53,8 @@ Widelands::Game * InteractiveGameBase::get_game() const
 
 Widelands::Game & InteractiveGameBase::    game() const
 {
-	return ref_cast<Widelands::Game, Widelands::EditorGameBase>(egbase());
+	upcast(Widelands::Game, result, &egbase());
+	return *result;
 }
 
 void InteractiveGameBase::set_chat_provider(ChatProvider & chat)

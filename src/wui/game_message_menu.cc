@@ -35,7 +35,8 @@ using Widelands::MessageId;
 using Widelands::MessageQueue;
 
 inline InteractivePlayer & GameMessageMenu::iplayer() const {
-	return ref_cast<InteractivePlayer, UI::Panel>(*get_parent());
+	upcast(InteractivePlayer, result, get_parent());
+	return *result;
 }
 
 

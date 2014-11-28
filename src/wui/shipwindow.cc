@@ -295,7 +295,8 @@ void ShipWindow::act_sink()
 		m_igbase.game().send_player_sink_ship(m_ship);
 	}
 	else {
-		show_ship_sink_confirm(ref_cast<InteractivePlayer, InteractiveGameBase>(m_igbase), m_ship);
+		upcast(InteractivePlayer, iaplayer, &m_igbase);
+		show_ship_sink_confirm(*iaplayer, m_ship);
 	}
 }
 
@@ -306,8 +307,8 @@ void ShipWindow::act_cancel_expedition()
 		m_igbase.game().send_player_cancel_expedition_ship(m_ship);
 	}
 	else {
-		show_ship_cancel_expedition_confirm
-			(ref_cast<InteractivePlayer, InteractiveGameBase>(m_igbase), m_ship);
+		upcast(InteractivePlayer, iaplayer, &m_igbase);
+		show_ship_cancel_expedition_confirm(*iaplayer, m_ship);
 	}
 }
 

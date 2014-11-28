@@ -78,11 +78,8 @@ Make sure the window is redrawn when necessary.
 void DismantleSiteWindow::think()
 {
 	BuildingWindow::think();
-
-	const Widelands::DismantleSite & ds =
-		ref_cast<Widelands::DismantleSite, Widelands::Building>(building());
-
-	m_progress->set_state(ds.get_built_per64k());
+	upcast(Widelands::DismantleSite, ds, &building());
+	m_progress->set_state(ds->get_built_per64k());
 }
 
 

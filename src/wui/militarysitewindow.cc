@@ -38,7 +38,8 @@ struct MilitarySiteWindow : public BuildingWindow {
 		 UI::Window *       & registry);
 
 	MilitarySite & militarysite() {
-		return ref_cast<MilitarySite, Widelands::Building>(building());
+		upcast(MilitarySite, result, &building());
+		return *result;
 	}
 
 protected:

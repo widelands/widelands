@@ -177,7 +177,8 @@ public:
 	~FieldActionWindow();
 
 	InteractiveBase & ibase() {
-		return ref_cast<InteractiveBase, UI::Panel>(*get_parent());
+		upcast(InteractiveBase, result, get_parent());
+		return *result;
 	}
 
 	void think() override;
@@ -656,8 +657,8 @@ Open a watch window for the given field and delete self.
 */
 void FieldActionWindow::act_watch()
 {
-	show_watch_window
-		(ref_cast<InteractiveGameBase, InteractiveBase>(ibase()), m_node);
+	upcast(InteractiveGameBase, igbase, &ibase());
+	show_watch_window(*igbase, m_node);
 	okdialog();
 }
 
@@ -710,9 +711,10 @@ void FieldActionWindow::act_buildflag()
 
 	if (ibase().is_building_road())
 		ibase().finish_build_road();
-	else if (game)
-		ref_cast<InteractivePlayer, InteractiveBase>(ibase())
-			.set_flag_to_connect(m_node);
+	else if (game) {
+		upcast(InteractivePlayer, iaplayer, &ibase());
+		iaplayer->set_flag_to_connect(m_node);
+	}
 
 	okdialog();
 }
@@ -734,22 +736,22 @@ void FieldActionWindow::act_ripflag()
 {
 	okdialog();
 	Widelands::EditorGameBase & egbase = ibase().egbase();
+	upcast(Game, game, &egbase);
+	upcast(InteractivePlayer, iaplayer, &ibase());
+
 	if (upcast(Widelands::Flag, flag, m_node.field->get_immovable())) {
 		if (Building * const building = flag->get_building()) {
 			if (building->get_playercaps() & Building::PCap_Bulldoze) {
 				if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
-					ref_cast<Game, EditorGameBase>(egbase).send_player_bulldoze
+					game->send_player_bulldoze
 						(*flag, get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL));
 				}
 				else {
-					show_bulldoze_confirm
-						(ref_cast<InteractivePlayer, InteractiveBase>(ibase()),
-						 *building,
-						 flag);
+					show_bulldoze_confirm(*iaplayer, *building, flag);
 				}
 			}
 		} else {
-			ref_cast<Game, EditorGameBase>(egbase).send_player_bulldoze
+			game->send_player_bulldoze
 					(*flag, get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL));
 		}
 	}
@@ -792,9 +794,11 @@ Remove the road at the given field
 void FieldActionWindow::act_removeroad()
 {
 	Widelands::EditorGameBase & egbase = ibase().egbase();
-	if (upcast(Widelands::Road, road, egbase.map().get_immovable(m_node)))
-		ref_cast<Game, EditorGameBase>(egbase).send_player_bulldoze
+	if (upcast(Widelands::Road, road, egbase.map().get_immovable(m_node))) {
+		upcast(Game, game, &ibase().egbase());
+		game->send_player_bulldoze
 			(*road, get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL));
+	}
 	okdialog();
 }
 
@@ -806,15 +810,12 @@ Start construction of the building with the give description index
 */
 void FieldActionWindow::act_build(Widelands::BuildingIndex idx)
 {
-	Widelands::Game & game = ref_cast<Game, EditorGameBase>(ibase().egbase());
-	game.send_player_build
-		(ref_cast<InteractivePlayer, InteractiveBase>(ibase()).player_number(),
-		 m_node,
-		 Widelands::BuildingIndex(idx));
-	ibase().reference_player_tribe
-		(m_plr->player_number(), &m_plr->tribe());
-	ref_cast<InteractivePlayer, InteractiveBase>(ibase()).set_flag_to_connect
-		(game.map().br_n(m_node));
+	upcast(Game, game, &ibase().egbase());
+	upcast(InteractivePlayer, iaplayer, &ibase());
+
+	game->send_player_build(iaplayer->player_number(), m_node, Widelands::BuildingIndex(idx));
+	ibase().reference_player_tribe(m_plr->player_number(), &m_plr->tribe());
+	iaplayer->set_flag_to_connect(game->map().br_n(m_node));
 	okdialog();
 }
 
@@ -848,10 +849,10 @@ Call a geologist on this flag.
 */
 void FieldActionWindow::act_geologist()
 {
-	Game & game = ref_cast<Game, EditorGameBase>(ibase().egbase());
-	if (upcast(Widelands::Flag, flag, game.map().get_immovable(m_node)))
-		game.send_player_flagaction (*flag);
-
+	upcast(Game, game, &ibase().egbase());
+	if (upcast(Widelands::Flag, flag, game->map().get_immovable(m_node))) {
+		game->send_player_flagaction (*flag);
+	}
 	okdialog();
 }
 
@@ -863,15 +864,16 @@ void FieldActionWindow::act_geologist()
  */
 void FieldActionWindow::act_attack ()
 {
-	Game & game = ref_cast<Game, EditorGameBase>(ibase().egbase());
-
 	assert(m_attack_box);
-	if (upcast(Building, building, game.map().get_immovable(m_node)))
-		if (m_attack_box->soldiers() > 0)
-			game.send_player_enemyflagaction(
+	upcast(Game, game, &ibase().egbase());
+	if (upcast(Building, building, game->map().get_immovable(m_node)))
+		if (m_attack_box->soldiers() > 0) {
+			upcast(InteractivePlayer const, iaplayer, &ibase());
+			game->send_player_enemyflagaction(
 			   building->base_flag(),
-			   ref_cast<const InteractivePlayer, const InteractiveBase>(ibase()).player_number(),
+				iaplayer->player_number(),
 			   m_attack_box->soldiers() /*  number of soldiers */);
+		}
 	okdialog();
 }
 
@@ -933,8 +935,8 @@ void show_field_action
 			finish = true;
 		else if (dynamic_cast<const Widelands::Road *>(i))
 			if (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG) {
-				ref_cast<Game, EditorGameBase>(player->egbase())
-					.send_player_build_flag(player->player_number(), target);
+				upcast(Game, game, &player->egbase());
+				game->send_player_build_flag(player->player_number(), target);
 				finish = true;
 			}
 		if (finish)

@@ -47,7 +47,8 @@ struct BuildingWindow : public UI::Window {
 	Widelands::Building & building() {return m_building;}
 
 	InteractiveGameBase & igbase() const {
-		return ref_cast<InteractiveGameBase, UI::Panel>(*get_parent());
+		upcast(InteractiveGameBase, result, get_parent());
+		return *result;
 	}
 
 	void draw(RenderTarget &) override;
