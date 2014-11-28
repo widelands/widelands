@@ -72,8 +72,9 @@ wl_library(graphic_texture_atlas
     texture_atlas.h
     texture_atlas.cc
   DEPENDS
+    base_exceptions
+    base_macros
     graphic_surface
-    base_log
 )
 
 wl_library(graphic

@@ -19,29 +19,18 @@
 
 #include "logic/world/world.h"
 
-#include <iostream>
 #include <memory>
-#include <sstream>
 
-#include "base/i18n.h"
-#include "base/log.h"
-#include "base/wexception.h"
-#include "graphic/graphic.h"
 #include "graphic/image_io.h"
 #include "graphic/texture.h"
 #include "graphic/texture_atlas.h"
-#include "io/fileread.h"
-#include "io/filesystem/layered_filesystem.h"
-#include "io/filewrite.h"
+#include "logic/bob.h"
 #include "logic/critter.h"
 #include "logic/game_data_error.h"
 #include "logic/immovable.h"
-#include "logic/parse_map_object_types.h"
-#include "logic/widelands.h"
 #include "logic/world/editor_category.h"
 #include "logic/world/resource_description.h"
 #include "logic/world/terrain_description.h"
-#include "profile/profile.h"
 
 namespace Widelands {
 
@@ -58,8 +47,7 @@ World::~World() {
 }
 
 void World::load_graphics() {
-	// NOCOM(#sirver): figure this out, maybe just grow organically.
-	TextureAtlas ta(1024, 1024);
+	TextureAtlas ta;
 
 	// These will be deleted at the end of the method.
 	std::vector<std::unique_ptr<Texture>> individual_textures_;
@@ -83,14 +71,7 @@ void World::load_graphics() {
 	}
 
 	std::vector<std::unique_ptr<Texture>> textures;
-
 	terrain_texture_ = ta.pack(&textures);
-
-	// NOCOM(#sirver): remove
-	// NOCOM(#sirver): check headers.
-	FileWrite fw;
-	save_surface_to_png(terrain_texture_.get(), &fw);
-	fw.write(*g_fs, "texture_atlas.png");
 
 	int next_texture_to_move = 0;
 	for (size_t i = 0; i < terrains_->size(); ++i) {

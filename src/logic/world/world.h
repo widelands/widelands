@@ -23,14 +23,16 @@
 #include <memory>
 
 #include "base/macros.h"
-#include "logic/bob.h"
 #include "logic/description_maintainer.h"
+#include "logic/widelands.h"
 
 class LuaInterface;
+class LuaTable;
 class Texture;
 
 namespace Widelands {
 
+class BobDescr;
 class EditorCategory;
 class EditorGameBase;
 class ResourceDescription;

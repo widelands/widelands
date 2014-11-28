@@ -30,8 +30,7 @@
 // http://codeincomplete.com/posts/2011/5/7/bin_packing/.
 class TextureAtlas {
 public:
-	// Create a TextureAtlas that is backed by one Texture of the given size.
-	TextureAtlas(int width, int height);
+	TextureAtlas();
 
 	// Add 'texture' as one of the textures to be packed. Ownership is
 	// not taken, but 'texture' must be valid until pack() has been

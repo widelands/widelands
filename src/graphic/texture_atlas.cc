@@ -22,7 +22,6 @@
 #include <cassert>
 #include <memory>
 
-#include "base/log.h"
 #include "base/wexception.h"
 
 TextureAtlas::Node::Node(const Rect& init_r) : used(false), r(init_r) {
@@ -41,7 +40,7 @@ void TextureAtlas::Node::split(int item_w, int item_h) {
 }
 
 
-TextureAtlas::TextureAtlas(int, int) :
+TextureAtlas::TextureAtlas() :
 	next_index_(0)
 {
 }
@@ -73,6 +72,8 @@ std::unique_ptr<Texture> TextureAtlas::pack(std::vector<std::unique_ptr<Texture>
 		throw wexception("Called pack() without blocks.");
 	}
 
+	// Sort blocks by their biggest side length. This heuristically gives the
+	// best packing.
 	std::sort(blocks_.begin(), blocks_.end(), [](const Block& i, const Block& j) {
 		return std::max(i.texture->width(), i.texture->height()) >
 		       std::max(j.texture->width(), j.texture->height());
