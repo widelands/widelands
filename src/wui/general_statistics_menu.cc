@@ -285,7 +285,7 @@ m_selected_information(0)
 
 GeneralStatisticsMenu::~GeneralStatisticsMenu() {
 	upcast(InteractiveGameBase, igbase, get_parent());
-	Game & game =igbase->game();
+	Game & game = igbase->game();
 	if (game.is_loaded()) {
 		// Save informations for recreation, if window is reopened
 		m_my_registry->selected_information = m_selected_information;

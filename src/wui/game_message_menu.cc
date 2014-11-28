@@ -21,7 +21,7 @@
 
 #include <boost/bind.hpp>
 
-#include "base/deprecated.h"
+#include "base/macros.h"
 #include "base/time_string.h"
 #include "graphic/graphic.h"
 #include "logic/instances.h"

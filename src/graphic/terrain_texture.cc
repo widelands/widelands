@@ -21,7 +21,6 @@
 
 #include <SDL_image.h>
 
-#include "base/deprecated.h"
 #include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/image_io.h"

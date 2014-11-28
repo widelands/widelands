@@ -19,7 +19,6 @@
 
 #include "economy/flag.h"
 
-#include "base/deprecated.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"

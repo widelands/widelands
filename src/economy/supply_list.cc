@@ -19,7 +19,6 @@
 
 #include "economy/supply_list.h"
 
-#include "base/deprecated.h"
 #include "base/wexception.h"
 #include "economy/request.h"
 #include "economy/supply.h"

@@ -25,7 +25,6 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
-#include "base/deprecated.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "config.h"

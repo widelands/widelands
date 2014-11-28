@@ -30,7 +30,6 @@
 #include <boost/unordered_map.hpp>
 #include <boost/signals2.hpp>
 
-#include "base/deprecated.h"
 #include "base/log.h"
 #include "base/macros.h"
 #include "logic/cmd_queue.h"

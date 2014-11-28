@@ -21,7 +21,7 @@
 
 #include <memory>
 
-#include "base/deprecated.h"
+#include "base/macros.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/fleet.h"

@@ -19,8 +19,8 @@
 
 #include "logic/worker_descr.h"
 
-#include "base/deprecated.h"
 #include "base/i18n.h"
+#include "base/macros.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "logic/carrier.h"
