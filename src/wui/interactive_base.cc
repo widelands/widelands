@@ -446,7 +446,10 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 			((fps_format %
 			  (1000.0 / m_frametime) % (1000.0 / (m_avg_usframetime / 1000)))
 			 .str(), UI_FONT_SIZE_SMALL);
-		dst.blit(Point(5, (is_game) ? 25 : 5), UI::g_fh1->render(fps_text), BlendMode::UseAlpha, UI::Align_Left);
+		dst.blit(Point(5, (is_game) ? 25 : 5),
+		         UI::g_fh1->render(fps_text),
+		         BlendMode::UseAlpha,
+		         UI::Align_Left);
 	}
 }
 

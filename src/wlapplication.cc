@@ -483,48 +483,63 @@ bool WLApplication::poll_event(SDL_Event& ev) {
 	return true;
 }
 
-/**
- * Pump the event queue, get packets from the network, etc...
- */
+bool WLApplication::handle_key(const SDL_Keycode& keycode, int modifiers) {
+	const bool ctrl = (modifiers & KMOD_LCTRL) || (modifiers & KMOD_RCTRL);
+	switch (keycode) {
+	case SDLK_F10:
+		// exits the game.
+		if (ctrl) {
+			m_should_die = true;
+		}
+		return true;
+
+	case SDLK_F11:
+		// Takes a screenshot.
+		if (ctrl) {
+			if (g_fs->disk_space() < MINIMUM_DISK_SPACE) {
+				log("Omitting screenshot because diskspace is lower than %luMB\n",
+				    MINIMUM_DISK_SPACE / (1000 * 1000));
+				break;
+			}
+			g_fs->ensure_directory_exists(SCREENSHOT_DIR);
+			for (uint32_t nr = 0; nr < 10000; ++nr) {
+				const std::string filename = (boost::format(SCREENSHOT_DIR "/shot%04u.png") % nr).str();
+				if (g_fs->file_exists(filename)) {
+					continue;
+				}
+				g_gr->screenshot(filename);
+				break;
+			}
+		}
+		return true;
+
+	case SDLK_f:
+		// toggle fullscreen
+		g_gr->set_fullscreen(!g_gr->fullscreen());
+		return true;
+
+	default:
+		break;
+	}
+	return false;
+}
+
+// NOCOM(#sirver): fullscreen menu must listen to resolution changes.
+// NOCOM(#sirver): screen
 void WLApplication::handle_input(InputCallback const * cb)
 {
 	SDL_Event ev;
 	while (poll_event(ev)) {
 		switch (ev.type) {
-		case SDL_KEYDOWN:
-		case SDL_KEYUP:
-			if (ev.key.keysym.sym == SDLK_F10 &&
-			    (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL))) {
-				//  get out of here quick
-				if (ev.type == SDL_KEYDOWN)
-					m_should_die = true;
-				break;
-			}
-			if (ev.key.keysym.sym == SDLK_F11) { //  take screenshot
-				if (ev.type == SDL_KEYDOWN)
-				{
-					if (g_fs->disk_space() < MINIMUM_DISK_SPACE) {
-						log
-							("Omitting screenshot because diskspace is lower than %luMB\n",
-							 MINIMUM_DISK_SPACE / (1000 * 1000));
-						break;
-					}
-					g_fs->ensure_directory_exists(SCREENSHOT_DIR);
-					for (uint32_t nr = 0; nr < 10000; ++nr) {
-						const std::string filename = (boost::format(SCREENSHOT_DIR "/shot%04u.png")
-																% nr).str();
-						if (g_fs->file_exists(filename))
-							continue;
-						g_gr->screenshot(filename);
-						break;
-					}
-				}
-				break;
-			}
+		case SDL_KEYDOWN: {
+			bool handled = false;
 			if (cb && cb->key) {
-				cb->key(ev.type == SDL_KEYDOWN, ev.key.keysym);
+				handled = cb->key(ev.type == SDL_KEYDOWN, ev.key.keysym);
 			}
-			break;
+			if (!handled) {
+				handle_key(ev.key.keysym.sym, ev.key.keysym.mod);
+			}
+		} break;
 
 		case SDL_TEXTINPUT:
 			if (cb && cb->textinput) {
