@@ -27,6 +27,8 @@
 #include <cstring>
 #include <string>
 
+#include <boost/format.hpp>
+
 #include "base/wexception.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/zip_exceptions.h"
@@ -43,7 +45,7 @@ m_zipfile    (nullptr),
 m_unzipfile  (nullptr),
 m_oldzip     (false),
 m_zipfilename(zipfile),
-m_basenamezip(FS_Filename(zipfile.c_str())),
+m_basenamezip(fs_filename(zipfile.c_str())),
 m_basename   ()
 {
 	// TODO(unknown): check OS permissions on whether the file is writable
@@ -54,13 +56,13 @@ m_basename   ()
  */
 ZipFilesystem::~ZipFilesystem()
 {
-	m_Close();
+	m_close();
 }
 
 /**
  * Return true if this directory is writable.
  */
-bool ZipFilesystem::IsWritable() const {
+bool ZipFilesystem::is_writable() const {
 	return true; // should be checked in constructor
 }
 
@@ -69,8 +71,8 @@ bool ZipFilesystem::IsWritable() const {
  * pathname) in the results. There doesn't seem to be an even remotely
  * cross-platform way of doing this
  */
-std::set<std::string> ZipFilesystem::ListDirectory(const std::string& path_in) {
-	m_OpenUnzip();
+std::set<std::string> ZipFilesystem::list_directory(const std::string& path_in) {
+	m_open_unzip();
 
 	assert(path_in.size()); //  prevent invalid read below
 
@@ -95,7 +97,7 @@ std::set<std::string> ZipFilesystem::ListDirectory(const std::string& path_in) {
 			 nullptr, 0, nullptr, 0);
 
 		std::string complete_filename = strip_basename(filename_inzip);
-		std::string filename = FS_Filename(complete_filename.c_str());
+		std::string filename = fs_filename(complete_filename.c_str());
 		std::string filepath =
 			complete_filename.substr
 				(0, complete_filename.size() - filename.size());
@@ -118,9 +120,9 @@ std::set<std::string> ZipFilesystem::ListDirectory(const std::string& path_in) {
  * Returns true if the given file exists, and false if it doesn't.
  * Also returns false if the pathname is invalid
  */
-bool ZipFilesystem::FileExists(const std::string & path) {
+bool ZipFilesystem::file_exists(const std::string & path) {
 	try {
-		m_OpenUnzip(); //  TODO(unknown): check return value
+		m_open_unzip(); //  TODO(unknown): check return value
 	} catch (...) {
 		return false;
 	}
@@ -159,9 +161,9 @@ bool ZipFilesystem::FileExists(const std::string & path) {
  * Returns true if the given file is a directory, and false if it doesn't.
  * Also returns false if the pathname is invalid
  */
-bool ZipFilesystem::IsDirectory(const std::string & path) {
+bool ZipFilesystem::is_directory(const std::string & path) {
 
-	if (!FileExists(path))
+	if (!file_exists(path))
 		return false;
 
 	unz_file_info file_info;
@@ -177,13 +179,13 @@ bool ZipFilesystem::IsDirectory(const std::string & path) {
 /**
  * Create a sub filesystem out of this filesystem
  */
-FileSystem * ZipFilesystem::MakeSubFileSystem(const std::string & path) {
-	m_OpenUnzip();
+FileSystem * ZipFilesystem::make_sub_file_system(const std::string & path) {
+	m_open_unzip();
 
-	assert(FileExists(path));
-	assert(IsDirectory(path));
+	assert(file_exists(path));
+	assert(is_directory(path));
 
-	m_Close();
+	m_close();
 
 	std::string localpath = path;
 
@@ -198,23 +200,23 @@ FileSystem * ZipFilesystem::MakeSubFileSystem(const std::string & path) {
 
 /**
  * Make a new Subfilesystem in this
- * \throw ZipOperation_error
+ * \throw ZipOperationError
  */
 // TODO(unknown): type should be recognized automatically,
-// see Filesystem::Create
-FileSystem * ZipFilesystem::CreateSubFileSystem(const std::string & path, Type const type)
+// see Filesystem::create
+FileSystem * ZipFilesystem::create_sub_file_system(const std::string & path, Type const type)
 {
-	assert(!FileExists(path));
+	assert(!file_exists(path));
 
 	if (type != FileSystem::DIR)
-		throw ZipOperation_error
-			("ZipFilesystem::CreateSubFileSystem",
+		throw ZipOperationError
+			("ZipFilesystem::create_sub_file_system",
 			 path, m_zipfilename,
 			 "can not create ZipFilesystem inside another ZipFilesystem");
 
-	EnsureDirectoryExists(path);
+	ensure_directory_exists(path);
 
-	m_Close();
+	m_close();
 
 	std::string localpath = path;
 
@@ -229,11 +231,11 @@ FileSystem * ZipFilesystem::CreateSubFileSystem(const std::string & path, Type c
 }
 /**
  * Remove a number of files
- * kthrow ZipOperation_error
+ * \throw ZipOperationError
  */
-void ZipFilesystem::Unlink(const std::string & filename) {
-	throw ZipOperation_error
-		("ZipFilesystem::Unlink",
+void ZipFilesystem::fs_unlink(const std::string & filename) {
+	throw ZipOperationError
+		("ZipFilesystem::unlink",
 		 filename,
 		 m_zipfilename,
 		 "unlinking is not supported inside zipfiles");
@@ -243,11 +245,11 @@ void ZipFilesystem::Unlink(const std::string & filename) {
  * Create this directory if it doesn't exist, throws an error
  * if the dir can't be created or if a file with this name exists
  */
-void ZipFilesystem::EnsureDirectoryExists(const std::string & dirname) {
-	if (FileExists(dirname) && IsDirectory(dirname))
+void ZipFilesystem::ensure_directory_exists(const std::string & dirname) {
+	if (file_exists(dirname) && is_directory(dirname))
 		return;
 
-	MakeDirectory(dirname);
+	make_directory(dirname);
 }
 
 /**
@@ -255,11 +257,11 @@ void ZipFilesystem::EnsureDirectoryExists(const std::string & dirname) {
  * if a file is in the way or if the creation fails.
  *
  * Pleas note, this function does not honor parents,
- * MakeDirectory("onedir/otherdir/onemoredir") will fail
+ * make_directory("onedir/otherdir/onemoredir") will fail
  * if either ondir or otherdir is missing
  */
-void ZipFilesystem::MakeDirectory(const std::string & dirname) {
-	m_OpenZip();
+void ZipFilesystem::make_directory(const std::string & dirname) {
+	m_open_zip();
 
 	zip_fileinfo zi;
 
@@ -295,24 +297,24 @@ void ZipFilesystem::MakeDirectory(const std::string & dirname) {
 	case ZIP_OK:
 		break;
 	case ZIP_ERRNO:
-		throw File_error
-			("ZipFilesystem::MakeDirectory", complete_filename, strerror(errno));
+		throw FileError
+			("ZipFilesystem::make_directory", complete_filename, strerror(errno));
 	default:
-		throw File_error
-			("ZipFilesystem::MakeDirectory", complete_filename);
+		throw FileError
+			("ZipFilesystem::make_directory", complete_filename);
 	}
 
 	zipCloseFileInZip(m_zipfile);
 }
 
 /**
- * Read the given file into alloced memory; called by FileRead::Open.
- * \throw FileNotFound_error if the file couldn't be opened.
+ * Read the given file into alloced memory; called by FileRead::open.
+ * \throw FileNotFoundError if the file couldn't be opened.
  */
-void * ZipFilesystem::Load(const std::string & fname, size_t & length) {
-	if (!FileExists(fname.c_str()) || IsDirectory(fname.c_str()))
-		throw ZipOperation_error
-			("ZipFilesystem::Load",
+void * ZipFilesystem::load(const std::string & fname, size_t & length) {
+	if (!file_exists(fname.c_str()) || is_directory(fname.c_str()))
+		throw ZipOperationError
+			("ZipFilesystem::load",
 			 fname,
 			 m_zipfilename,
 			 "could not open file from zipfile");
@@ -327,13 +329,9 @@ void * ZipFilesystem::Load(const std::string & fname, size_t & length) {
 			break;
 		if (len < 0) {
 			unzCloseCurrentFile(m_unzipfile);
-			char buf[200];
-			snprintf(buf, sizeof(buf), "read error %i", len);
-			throw ZipOperation_error
-				("ZipFilesystem::Load",
-				 fname,
-				 m_zipfilename,
-				 buf);
+			const std::string errormessage = (boost::format("read error %i") % len).str();
+			throw ZipOperationError
+				("ZipFilesystem::load", fname, m_zipfilename, errormessage.c_str());
 		}
 
 		totallen += len;
@@ -357,13 +355,13 @@ void * ZipFilesystem::Load(const std::string & fname, size_t & length) {
  * Write the given block of memory to the repository.
  * Throws an exception if it fails.
  */
-void ZipFilesystem::Write
+void ZipFilesystem::write
 	(const std::string & fname, void const * const data, int32_t const length)
 {
 	std::string filename = fname;
 	std::replace(filename.begin(), filename.end(), '\\', '/');
 
-	m_OpenZip();
+	m_open_zip();
 
 	zip_fileinfo zi;
 
@@ -388,19 +386,19 @@ void ZipFilesystem::Write
 	case ZIP_OK:
 		break;
 	default:
-		throw ZipOperation_error
-			("ZipFilesystem::Write", complete_filename, m_zipfilename);
+		throw ZipOperationError
+			("ZipFilesystem::write", complete_filename, m_zipfilename);
 	}
 
 	switch (zipWriteInFileInZip (m_zipfile, data, length)) {
 	case ZIP_OK:
 		break;
 	case ZIP_ERRNO:
-		throw File_error
-			("ZipFilesystem::Write", complete_filename, strerror(errno));
+		throw FileError
+			("ZipFilesystem::write", complete_filename, strerror(errno));
 	default:
-		throw File_error
-			("ZipFilesystem::Write", complete_filename);
+		throw FileError
+			("ZipFilesystem::write", complete_filename);
 	}
 
 	zipCloseFileInZip(m_zipfile);
@@ -413,41 +411,41 @@ void ZipFilesystem::Write
 ZipFilesystem::ZipStreamRead::ZipStreamRead(zipFile file, ZipFilesystem* zipfs)
 : m_unzipfile(file), m_zipfs(zipfs) {}
 ZipFilesystem::ZipStreamRead::~ZipStreamRead() {
-	m_zipfs->m_Close();
+	m_zipfs->m_close();
 }
 
-size_t ZipFilesystem::ZipStreamRead::Data(void* data, size_t bufsize)
+size_t ZipFilesystem::ZipStreamRead::data(void* read_data, size_t bufsize)
 {
-	int copied = unzReadCurrentFile(m_unzipfile, data, bufsize);
+	int copied = unzReadCurrentFile(m_unzipfile, read_data, bufsize);
 	if (copied < 0) {
-		throw new _data_error("Failed to read from zip file");
+		throw new DataError("Failed to read from zip file");
 	}
 	if (copied == 0) {
-		throw new _data_error("End of file reaced while reading zip");
+		throw new DataError("End of file reaced while reading zip");
 	}
 	return copied;
 }
-bool ZipFilesystem::ZipStreamRead::EndOfFile() const
+bool ZipFilesystem::ZipStreamRead::end_of_file() const
 {
 	return unzReadCurrentFile(m_unzipfile, nullptr, 1) == 0;
 }
 
-StreamRead* ZipFilesystem::OpenStreamRead(const std::string& fname) {
-	if (!FileExists(fname.c_str()) || IsDirectory(fname.c_str()))
-		throw ZipOperation_error
-			("ZipFilesystem::Load",
+StreamRead* ZipFilesystem::open_stream_read(const std::string& fname) {
+	if (!file_exists(fname.c_str()) || is_directory(fname.c_str()))
+		throw ZipOperationError
+			("ZipFilesystem::load",
 			 fname,
 			 m_zipfilename,
 			 "could not open file from zipfile");
 
 	int32_t method;
-	m_OpenUnzip();
+	m_open_unzip();
 	int result = unzOpenCurrentFile3(m_unzipfile, &method, nullptr, 1, nullptr);
 	switch (result) {
 		case ZIP_OK:
 			break;
 		default:
-			throw ZipOperation_error
+			throw ZipOperationError
 				("ZipFilesystem: Failed to open streamwrite", fname, m_zipfilename);
 	}
 	return new ZipStreamRead(m_unzipfile, this);
@@ -461,12 +459,12 @@ ZipFilesystem::ZipStreamWrite::ZipStreamWrite(zipFile file, ZipFilesystem* zipfs
 : m_zipfile(file), m_zipfs(zipfs) {}
 ZipFilesystem::ZipStreamWrite::~ZipStreamWrite()
 {
-	m_zipfs->m_Close();
+	m_zipfs->m_close();
 }
 
-void ZipFilesystem::ZipStreamWrite::Data(const void* const data, const size_t size)
+void ZipFilesystem::ZipStreamWrite::data(const void* const write_data, const size_t size)
 {
-	int result = zipWriteInFileInZip(m_zipfile, data, size);
+	int result = zipWriteInFileInZip(m_zipfile, write_data, size);
 	switch (result) {
 		case ZIP_OK:
 			break;
@@ -475,8 +473,8 @@ void ZipFilesystem::ZipStreamWrite::Data(const void* const data, const size_t si
 	}
 }
 
-StreamWrite * ZipFilesystem::OpenStreamWrite(const std::string & fname) {
-	m_OpenZip();
+StreamWrite * ZipFilesystem::open_stream_write(const std::string & fname) {
+	m_open_zip();
 
 	zip_fileinfo zi;
 
@@ -500,7 +498,7 @@ StreamWrite * ZipFilesystem::OpenStreamWrite(const std::string & fname) {
 	case ZIP_OK:
 		break;
 	default:
-		throw ZipOperation_error
+		throw ZipOperationError
 			("ZipFilesystem: Failed to open streamwrite", complete_filename, m_zipfilename);
 	}
 	return new ZipStreamWrite(m_zipfile, this);
@@ -510,7 +508,7 @@ StreamWrite * ZipFilesystem::OpenStreamWrite(const std::string & fname) {
 /**
  * Private Functions below
  */
-void ZipFilesystem::m_Close() {
+void ZipFilesystem::m_close() {
 	if (m_state == STATE_ZIPPING)
 		zipClose(m_zipfile, nullptr);
 	else if (m_state == STATE_UNZIPPPING)
@@ -522,11 +520,11 @@ void ZipFilesystem::m_Close() {
 /**
  * Open a zipfile for compressing
  */
-void ZipFilesystem::m_OpenZip() {
+void ZipFilesystem::m_open_zip() {
 	if (m_state == STATE_ZIPPING)
 		return;
 
-	m_Close();
+	m_close();
 
 	m_zipfile = zipOpen(m_zipfilename.c_str(), APPEND_STATUS_ADDINZIP);
 	if (!m_zipfile) {
@@ -539,27 +537,27 @@ void ZipFilesystem::m_OpenZip() {
 
 /**
  * Open a zipfile for extraction
- * \throw FileType_error
+ * \throw FileTypeError
  */
-void ZipFilesystem::m_OpenUnzip() {
+void ZipFilesystem::m_open_unzip() {
 	if (m_state == STATE_UNZIPPPING)
 		return;
 
-	m_Close();
+	m_close();
 
 	m_unzipfile = unzOpen(m_zipfilename.c_str());
 	if (!m_unzipfile)
-		throw FileType_error
-			("ZipFilesystem::m_OpenUnzip", m_zipfilename, "not a .zip file");
+		throw FileTypeError
+			("ZipFilesystem::m_open_unzip", m_zipfilename, "not a .zip file");
 
 	m_state = STATE_UNZIPPPING;
 }
 
-void ZipFilesystem::Rename(const std::string &, const std::string &) {
+void ZipFilesystem::fs_rename(const std::string &, const std::string &) {
 	throw wexception("rename inside zip FS is not implemented yet");
 }
 
-unsigned long long ZipFilesystem::DiskSpace() {
+unsigned long long ZipFilesystem::disk_space() {
 	return 0;
 }
 

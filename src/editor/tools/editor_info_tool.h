@@ -23,15 +23,15 @@
 #include "editor/tools/editor_tool.h"
 
 /// A simple tool to show information about the clicked node.
-struct Editor_Info_Tool : public Editor_Tool {
-	Editor_Info_Tool() : Editor_Tool(*this, *this, false) {
+struct EditorInfoTool : public EditorTool {
+	EditorInfoTool() : EditorTool(*this, *this, false) {
 	}
 
 	int32_t handle_click_impl(Widelands::Map& map,
 	                          const Widelands::World& world,
-	                          Widelands::Node_and_Triangle<> center,
-	                          Editor_Interactive& parent,
-	                          Editor_Action_Args& args) override;
+	                          Widelands::NodeAndTriangle<> center,
+	                          EditorInteractive& parent,
+	                          EditorActionArgs& args) override;
 
 	char const* get_sel_impl() const override {
 		return "pics/fsel_editor_info.png";

@@ -24,12 +24,12 @@
 
 
 
-Cmd_NetCheckSync::Cmd_NetCheckSync(int32_t const dt, SyncCallback * const cb) :
+CmdNetCheckSync::CmdNetCheckSync(int32_t const dt, SyncCallback * const cb) :
 Command (dt), m_callback(cb)
 {}
 
 
-void Cmd_NetCheckSync::execute (Widelands::Game &) {
+void CmdNetCheckSync::execute (Widelands::Game &) {
 	m_callback->syncreport();
 }
 
@@ -99,7 +99,7 @@ int32_t NetworkTime::networktime() const
 	return m_networktime;
 }
 
-void NetworkTime::recv(int32_t const ntime)
+void NetworkTime::receive(int32_t const ntime)
 {
 	if (ntime < m_networktime)
 		throw wexception("NetworkTime: Time appears to be running backwards.");
@@ -124,14 +124,14 @@ void NetworkTime::recv(int32_t const ntime)
 
 SendPacket::SendPacket () {}
 
-void SendPacket::Data(const void * const data, const size_t size)
+void SendPacket::data(const void * const packet_data, const size_t size)
 {
 	if (buffer.empty()) {
 		buffer.push_back (0); //  this will finally be the length of the packet
 		buffer.push_back (0);
 	}
 	for (size_t idx = 0; idx < size; ++idx)
-		buffer.push_back(static_cast<const uint8_t *>(data)[idx]);
+		buffer.push_back(static_cast<const uint8_t *>(packet_data)[idx]);
 }
 
 void SendPacket::send (TCPsocket sock)
@@ -170,18 +170,18 @@ RecvPacket::RecvPacket (Deserializer & des)
 	des.queue.erase(des.queue.begin(), des.queue.begin() + size);
 }
 
-size_t RecvPacket::Data(void * const data, size_t const bufsize)
+size_t RecvPacket::data(void * const packet_data, size_t const bufsize)
 {
 	if (m_index + bufsize > buffer.size())
 		throw wexception("Packet too short");
 
 	for (size_t read = 0; read < bufsize; ++read)
-		static_cast<uint8_t *>(data)[read] = buffer[m_index++];
+		static_cast<uint8_t *>(packet_data)[read] = buffer[m_index++];
 
 	return bufsize;
 }
 
-bool RecvPacket::EndOfFile() const
+bool RecvPacket::end_of_file() const
 {
 	return m_index < buffer.size();
 }

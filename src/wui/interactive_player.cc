@@ -60,14 +60,12 @@
 
 using Widelands::Building;
 using Widelands::Map;
-using boost::format;
-
 
 namespace  {
 
 // This function is the callback for recalculation of field overlays
-int32_t Int_Player_overlay_callback_function
-	(Widelands::TCoords<Widelands::FCoords> const c, Interactive_Player& iap)
+int32_t int_player_overlay_callback_function
+	(Widelands::TCoords<Widelands::FCoords> const c, InteractivePlayer& iap)
 {
 	assert(iap.get_player());
 	return iap.get_player()->get_buildcaps(c);
@@ -75,15 +73,15 @@ int32_t Int_Player_overlay_callback_function
 
 }  // namespace
 
-Interactive_Player::Interactive_Player
+InteractivePlayer::InteractivePlayer
 	(Widelands::Game        &       _game,
 	 Section                &       global_s,
-	 Widelands::Player_Number const plyn,
+	 Widelands::PlayerNumber const plyn,
 	 bool                     const multiplayer)
 	:
-	Interactive_GameBase (_game, global_s, NONE, multiplayer, multiplayer),
+	InteractiveGameBase (_game, global_s, NONE, multiplayer, multiplayer),
 	m_auto_roadbuild_mode(global_s.get_bool("auto_roadbuild_mode", true)),
-	m_flag_to_connect(Widelands::Coords::Null()),
+	m_flag_to_connect(Widelands::Coords::null()),
 
 // Chat is different, as m_chatProvider needs to be checked when toggling
 // Buildhelp is different as it does not toggle a UniqueWindow
@@ -128,7 +126,7 @@ m_toggle_help
 
 {
 	m_toggle_chat.sigclicked.connect
-		(boost::bind(&Interactive_Player::toggle_chat, this));
+		(boost::bind(&InteractivePlayer::toggle_chat, this));
 	m_toggle_options_menu.sigclicked.connect
 		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_options)));
 	m_toggle_statistics_menu.sigclicked.connect
@@ -136,9 +134,9 @@ m_toggle_help
 	m_toggle_objectives.sigclicked.connect
 		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_objectives)));
 	m_toggle_minimap.sigclicked.connect
-		(boost::bind(&Interactive_Player::toggle_minimap, this));
+		(boost::bind(&InteractivePlayer::toggle_minimap, this));
 	m_toggle_buildhelp.sigclicked.connect
-		(boost::bind(&Interactive_Player::toggle_buildhelp, this));
+		(boost::bind(&InteractivePlayer::toggle_buildhelp, this));
 	m_toggle_message_menu.sigclicked.connect
 		(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(m_message_menu)));
 	m_toggle_help.sigclicked.connect
@@ -161,7 +159,7 @@ m_toggle_help
 	m_toolbar.add(&m_toggle_message_menu,    UI::Box::AlignLeft);
 
 	set_player_number(plyn);
-	fieldclicked.connect(boost::bind(&Interactive_Player::node_action, this));
+	fieldclicked.connect(boost::bind(&InteractivePlayer::node_action, this));
 
 	adjust_toolbar_position();
 
@@ -187,16 +185,16 @@ m_toggle_help
 	};
 	m_objectives.open_window = [this] {new GameObjectivesMenu(this, m_objectives);};
 	m_message_menu.open_window = [this] {new GameMessageMenu(*this, m_message_menu);};
-	m_mainm_windows.stock.open_window = [this] {new Stock_Menu(*this, m_mainm_windows.stock);};
+	m_mainm_windows.stock.open_window = [this] {new StockMenu(*this, m_mainm_windows.stock);};
 
 #ifndef NDEBUG //  only in debug builds
 	addCommand
 		("switchplayer",
-		 boost::bind(&Interactive_Player::cmdSwitchPlayer, this, _1));
+		 boost::bind(&InteractivePlayer::cmdSwitchPlayer, this, _1));
 #endif
 }
 
-Interactive_Player::~Interactive_Player() {
+InteractivePlayer::~InteractivePlayer() {
 #define DEINIT_BTN_HOOKS(registry, btn)                                                            \
 	registry.on_create = 0;                                                                         \
 	registry.on_delete = 0;
@@ -216,14 +214,14 @@ Interactive_Player::~Interactive_Player() {
 Called just before the game starts, after postload, init and gfxload
 ===============
 */
-void Interactive_Player::start()
+void InteractivePlayer::start()
 {
 	postload();
 }
 
-void Interactive_Player::think()
+void InteractivePlayer::think()
 {
-	Interactive_Base::think();
+	InteractiveBase::think();
 
 	if (m_flag_to_connect) {
 		Widelands::Field & field = egbase().map()[m_flag_to_connect];
@@ -240,13 +238,13 @@ void Interactive_Player::think()
 					m_fieldaction.window = nullptr;
 					warp_mouse_to_node(m_flag_to_connect);
 					set_sel_pos
-						(Widelands::Node_and_Triangle<>
+						(Widelands::NodeAndTriangle<>
 						 	(m_flag_to_connect,
 						 	 Widelands::TCoords<>
 						 	 	(m_flag_to_connect, Widelands::TCoords<>::D)));
 					start_build_road(m_flag_to_connect, field.get_owned_by());
 				}
-			m_flag_to_connect = Widelands::Coords::Null();
+			m_flag_to_connect = Widelands::Coords::null();
 		}
 	}
 	if (is_multiplayer()) {
@@ -275,17 +273,17 @@ void Interactive_Player::think()
  * Called for every game after loading (from a savegame or just from a map
  * during single/multiplayer/scenario).
  */
-void Interactive_Player::postload()
+void InteractivePlayer::postload()
 {
 	Map & map = egbase().map();
 	OverlayManager & overlay_manager = map.overlay_manager();
 	overlay_manager.show_buildhelp(false);
 	overlay_manager.register_overlay_callback_function
-			(boost::bind(&Int_Player_overlay_callback_function, _1, boost::ref(*this)));
+			(boost::bind(&int_player_overlay_callback_function, _1, boost::ref(*this)));
 
 	// Connect buildhelp button to reflect build help state. Needs to be
 	// done here rather than in the constructor as the map is not present then.
-	// This code assumes that the Interactive_Player object lives longer than
+	// This code assumes that the InteractivePlayer object lives longer than
 	// the overlay_manager. Otherwise remove the hook in the deconstructor.
 	egbase().map().overlay_manager().onBuildHelpToggle =
 		boost::bind(&UI::Button::set_perm_pressed, &m_toggle_buildhelp, _1);
@@ -302,8 +300,8 @@ void Interactive_Player::postload()
 }
 
 
-void Interactive_Player::popup_message
-	(Widelands::Message_Id const id, const Widelands::Message & message)
+void InteractivePlayer::popup_message
+	(Widelands::MessageId const id, const Widelands::Message & message)
 {
 	m_message_menu.create();
 	ref_cast<GameMessageMenu, UI::UniqueWindow>(*m_message_menu.window)
@@ -312,29 +310,29 @@ void Interactive_Player::popup_message
 
 
 //  Toolbar button callback functions.
-void Interactive_Player::toggle_chat() {
+void InteractivePlayer::toggle_chat() {
 	if (m_chat.window)
 		delete m_chat.window;
 	else if (m_chatProvider)
 		GameChatMenu::create_chat_console(this, m_chat, *m_chatProvider);
 }
 
-bool Interactive_Player::can_see(Widelands::Player_Number const p) const
+bool InteractivePlayer::can_see(Widelands::PlayerNumber const p) const
 {
 	return p == player_number() || player().see_all();
 }
-bool Interactive_Player::can_act(Widelands::Player_Number const p) const
+bool InteractivePlayer::can_act(Widelands::PlayerNumber const p) const
 {
 	return p == player_number();
 }
-Widelands::Player_Number Interactive_Player::player_number() const
+Widelands::PlayerNumber InteractivePlayer::player_number() const
 {
 	return m_player_number;
 }
 
 
 /// Player has clicked on the given node; bring up the context menu.
-void Interactive_Player::node_action()
+void InteractivePlayer::node_action()
 {
 	const Map & map = egbase().map();
 	if (1 < player().vision(Map::get_index(get_sel_pos().node, map.get_width())))
@@ -367,7 +365,7 @@ void Interactive_Player::node_action()
  * \li Pause: pauses the game
  * \li Return: write chat message
 */
-bool Interactive_Player::handle_key(bool const down, SDL_keysym const code)
+bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code)
 {
 	if (down) {
 		switch (code.sym) {
@@ -397,17 +395,17 @@ bool Interactive_Player::handle_key(bool const down, SDL_keysym const code)
 
 		case SDLK_s:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
-				new Game_Main_Menu_Save_Game(*this, m_mainm_windows.savegame);
+				new GameMainMenuSaveGame(*this, m_mainm_windows.savegame);
 			else
 				set_display_flag
 					(dfShowStatistics, !get_display_flag(dfShowStatistics));
 			return true;
 
 		case SDLK_f:
-			g_gr->toggle_fullscreen();
+			g_gr->set_fullscreen(!g_gr->fullscreen());
 			return true;
 
-		case SDLK_KP7:
+		case SDLK_KP_7:
 			if (code.mod & KMOD_NUM)
 				break;
 			/* no break */
@@ -429,14 +427,14 @@ bool Interactive_Player::handle_key(bool const down, SDL_keysym const code)
 		}
 	}
 
-	return Interactive_GameBase::handle_key(down, code);
+	return InteractiveGameBase::handle_key(down, code);
 }
 
 /**
  * Set the player and the visibility to this
  * player
  */
-void Interactive_Player::set_player_number(uint32_t const n) {
+void InteractivePlayer::set_player_number(uint32_t const n) {
 	m_player_number = n;
 }
 
@@ -445,9 +443,9 @@ void Interactive_Player::set_player_number(uint32_t const n) {
  * Cleanup any game-related data before loading a new game
  * while a game is currently playing.
  */
-void Interactive_Player::cleanup_for_load() {}
+void InteractivePlayer::cleanup_for_load() {}
 
-void Interactive_Player::cmdSwitchPlayer(const std::vector<std::string> & args)
+void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string> & args)
 {
 	if (args.size() != 2) {
 		DebugConsole::write("Usage: switchplayer <nr>");
@@ -456,26 +454,26 @@ void Interactive_Player::cmdSwitchPlayer(const std::vector<std::string> & args)
 
 	int const n = atoi(args[1].c_str());
 	if (n < 1 || n > MAX_PLAYERS || !game().get_player(n)) {
-		DebugConsole::write(str(format("Player #%1% does not exist.") % n));
+		DebugConsole::write(str(boost::format("Player #%1% does not exist.") % n));
 		return;
 	}
 
 	DebugConsole::write
 		(str
-		 	(format("Switching from #%1% to #%2%.")
+			(boost::format("Switching from #%1% to #%2%.")
 		 	 % static_cast<int>(m_player_number) % n));
 	m_player_number = n;
 	Map              &       map             = egbase().map();
 	OverlayManager  &       overlay_manager = map.overlay_manager();
 	Widelands::Extent  const extent          = map.extent         ();
-	for (Widelands::Y_Coordinate y = 0; y < extent.h; ++y)
-		for (Widelands::X_Coordinate x = 0; x < extent.w; ++x)
+	for (uint16_t y = 0; y < extent.h; ++y)
+		for (uint16_t x = 0; x < extent.w; ++x)
 			overlay_manager.recalc_field_overlays
 				(map.get_fcoords(Widelands::Coords(x, y)));
 	if
 		(UI::UniqueWindow * const building_statistics_window =
 		 	m_mainm_windows.building_stats.window)
-		ref_cast<Building_Statistics_Menu, UI::UniqueWindow>
+		ref_cast<BuildingStatisticsMenu, UI::UniqueWindow>
 			(*building_statistics_window)
 			.update();
 }

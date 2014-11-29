@@ -42,8 +42,8 @@
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
 #include "logic/widelands_geometry_io.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 #include "profile/profile.h"
 #include "wui/interactive_gamebase.h"
 
@@ -52,7 +52,7 @@ namespace Widelands {
 ShipDescr::ShipDescr
 	(const char * given_name, const char * gdescname,
 	 const std::string & directory, Profile & prof, Section & global_s,
-	 const Tribe_Descr & gtribe)
+	 const TribeDescr & gtribe)
 	:
 	BobDescr(MapObjectType::SHIP, given_name, gdescname, &gtribe)
 {
@@ -92,11 +92,11 @@ Ship::~Ship() {
 	close_window();
 }
 
-PortDock* Ship::get_destination(Editor_Game_Base& egbase) const {
+PortDock* Ship::get_destination(EditorGameBase& egbase) const {
 	return m_destination.get(egbase);
 }
 
-PortDock* Ship::get_lastdock(Editor_Game_Base& egbase) const {
+PortDock* Ship::get_lastdock(EditorGameBase& egbase) const {
 	return m_lastdock.get(egbase);
 }
 
@@ -108,7 +108,7 @@ void Ship::init_auto_task(Game & game) {
 	start_task_ship(game);
 }
 
-void Ship::init(Editor_Game_Base & egbase) {
+void Ship::init(EditorGameBase & egbase) {
 	Bob::init(egbase);
 	init_fleet(egbase);
 }
@@ -118,7 +118,7 @@ void Ship::init(Editor_Game_Base & egbase) {
  * The fleet code will automatically merge us into a larger
  * fleet, if one is reachable.
  */
-void Ship::init_fleet(Editor_Game_Base & egbase) {
+void Ship::init_fleet(EditorGameBase & egbase) {
 	assert(get_owner() != nullptr);
 	Fleet * fleet = new Fleet(*get_owner());
 	fleet->add_ship(this);
@@ -126,7 +126,7 @@ void Ship::init_fleet(Editor_Game_Base & egbase) {
 	// fleet calls the set_fleet function appropriately
 }
 
-void Ship::cleanup(Editor_Game_Base & egbase) {
+void Ship::cleanup(EditorGameBase & egbase) {
 	if (m_fleet) {
 		m_fleet->remove_ship(egbase, this);
 	}
@@ -285,7 +285,7 @@ bool Ship::ship_update_transport(Game & game, Bob::State &) {
 		if (m_fleet->get_path(*lastdock, *dst, path)) {
 			uint32_t closest_idx = std::numeric_limits<uint32_t>::max();
 			uint32_t closest_dist = std::numeric_limits<uint32_t>::max();
-			Coords closest_target(Coords::Null());
+			Coords closest_target(Coords::null());
 
 			Coords cur(path.get_start());
 			for (uint32_t idx = 0; idx <= path.get_nsteps(); ++idx) {
@@ -370,11 +370,11 @@ void Ship::ship_update_expedition(Game & game, Bob::State &) {
 				// NOTE territory, as "clearing" is not yet implemented.
 				// NOTE further it checks, whether there is a Player_immovable on one of the fields.
 				// TODO(unknown): handle this more gracefully concering opposing players
-				Player_Number pn = get_owner()->player_number();
+				PlayerNumber pn = get_owner()->player_number();
 				FCoords coord = fc;
 				bool invalid = false;
 				for (uint8_t step = 0; !invalid && step < 5; ++step) {
-					if (coord.field->get_owned_by() != Neutral() && coord.field->get_owned_by() != pn) {
+					if (coord.field->get_owned_by() != neutral() && coord.field->get_owned_by() != pn) {
 						invalid = true;
 						continue;
 					}
@@ -654,7 +654,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 					worker->set_location(cs);
 					worker->set_position(game, cs->get_position());
 					worker->reset_tasks(game);
-					Partially_Finished_Building::request_builder_callback
+					PartiallyFinishedBuilding::request_builder_callback
 						(game, *cs->get_builder_request(), worker->descr().worker_index(), worker, *cs);
 					m_items.resize(i);
 				}
@@ -665,7 +665,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 				init_fleet(game);
 				m_expedition.reset(nullptr);
 
-				if (upcast(Interactive_GameBase, igb, game.get_ibase()))
+				if (upcast(InteractiveGameBase, igb, game.get_ibase()))
 					refresh_window(*igb);
 			}
 			return start_task_idle(game, descr().main_animation(), 1500); // unload the next item
@@ -803,7 +803,7 @@ void Ship::exp_scout_direction(Game &, uint8_t direction) {
 /// @note only called via player command
 void Ship::exp_construct_port (Game &, const Coords& c) {
 	assert(m_expedition);
-	Building_Index port_idx = get_owner()->tribe().safe_building_index("port");
+	BuildingIndex port_idx = get_owner()->tribe().safe_building_index("port");
 	get_owner()->force_csite(c, port_idx);
 	m_ship_state = EXP_COLONIZING;
 }
@@ -853,7 +853,7 @@ void Ship::exp_cancel (Game & game) {
 	m_expedition.reset(nullptr);
 
 	// And finally update our ship window
-	if (upcast(Interactive_GameBase, igb, game.get_ibase()))
+	if (upcast(InteractiveGameBase, igb, game.get_ibase()))
 		refresh_window(*igb);
 }
 
@@ -869,7 +869,7 @@ void Ship::sink_ship (Game & game) {
 	close_window();
 }
 
-void Ship::log_general_info(const Editor_Game_Base & egbase)
+void Ship::log_general_info(const EditorGameBase & egbase)
 {
 	Bob::log_general_info(egbase);
 
@@ -914,8 +914,7 @@ void Ship::send_message
 	rt_description += "</p></rt>";
 
 	Message * msg = new Message
-		(msgsender, game.get_gametime(), 60 * 60 * 1000,
-		 title, rt_description, get_position(), m_serial);
+		(msgsender, game.get_gametime(), title, rt_description, get_position(), m_serial);
 
 	get_owner()->add_message(game, *msg);
 }
@@ -950,7 +949,7 @@ void Ship::Loader::load(FileRead & fr, uint8_t version)
 	if (version >= 2) {
 		// The state the ship is in
 		if (version >= 3) {
-			m_ship_state = fr.Unsigned8();
+			m_ship_state = fr.unsigned_8();
 
 			// Expedition specific data
 			if
@@ -965,28 +964,28 @@ void Ship::Loader::load(FileRead & fr, uint8_t version)
 				m_expedition.reset(new Expedition());
 				// Currently seen port build spaces
 				m_expedition->seen_port_buildspaces.reset(new std::list<Coords>());
-				uint8_t numofports = fr.Unsigned8();
+				uint8_t numofports = fr.unsigned_8();
 				for (uint8_t i = 0; i < numofports; ++i)
-					m_expedition->seen_port_buildspaces->push_back(ReadCoords32(&fr));
+					m_expedition->seen_port_buildspaces->push_back(read_coords_32(&fr));
 				// Swimability of the directions
 				for (uint8_t i = 0; i < LAST_DIRECTION; ++i)
-					m_expedition->swimable[i] = (fr.Unsigned8() == 1);
+					m_expedition->swimable[i] = (fr.unsigned_8() == 1);
 				// whether scouting or exploring
-				m_expedition->island_exploration = fr.Unsigned8() == 1;
+				m_expedition->island_exploration = fr.unsigned_8() == 1;
 				// current direction
-				m_expedition->direction = fr.Unsigned8();
+				m_expedition->direction = fr.unsigned_8();
 				// Start coordinates of an island exploration
-				m_expedition->exploration_start = ReadCoords32(&fr);
+				m_expedition->exploration_start = read_coords_32(&fr);
 				// Whether the exploration is done clockwise or counter clockwise
-				m_expedition->clockwise = fr.Unsigned8() == 1;
+				m_expedition->clockwise = fr.unsigned_8() == 1;
 			}
 		} else
 			m_ship_state = TRANSPORT;
 
-		m_lastdock = fr.Unsigned32();
-		m_destination = fr.Unsigned32();
+		m_lastdock = fr.unsigned_32();
+		m_destination = fr.unsigned_32();
 
-		m_items.resize(fr.Unsigned32());
+		m_items.resize(fr.unsigned_32());
 		for (ShippingItem::Loader& item_loader : m_items) {
 			item_loader.load(fr);
 		}
@@ -1037,33 +1036,33 @@ void Ship::Loader::load_finish()
 
 
 MapObject::Loader * Ship::load
-	(Editor_Game_Base & egbase, MapMapObjectLoader & mol, FileRead & fr)
+	(EditorGameBase & egbase, MapObjectLoader & mol, FileRead & fr)
 {
 	std::unique_ptr<Loader> loader(new Loader);
 
 	try {
 		// The header has been peeled away by the caller
 
-		uint8_t const version = fr.Unsigned8();
+		uint8_t const version = fr.unsigned_8();
 		if (1 <= version && version <= SHIP_SAVEGAME_VERSION) {
-			std::string owner = fr.CString();
-			std::string name = fr.CString();
+			std::string owner = fr.c_string();
+			std::string name = fr.c_string();
 			const ShipDescr * descr = nullptr;
 
 			egbase.manually_load_tribe(owner);
 
-			if (const Tribe_Descr * tribe = egbase.get_tribe(owner))
+			if (const TribeDescr * tribe = egbase.get_tribe(owner))
 				descr = dynamic_cast<const ShipDescr *>
 					(tribe->get_bob_descr(name));
 
 			if (!descr)
-				throw game_data_error
+				throw GameDataError
 					("undefined ship %s/%s", owner.c_str(), name.c_str());
 
 			loader->init(egbase, mol, descr->create_object());
 			loader->load(fr, version);
 		} else
-			throw game_data_error("unknown/unhandled version %u", version);
+			throw GameDataError("unknown/unhandled version %u", version);
 	} catch (const std::exception & e) {
 		throw wexception("loading ship: %s", e.what());
 	}
@@ -1072,48 +1071,48 @@ MapObject::Loader * Ship::load
 }
 
 void Ship::save
-	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
+	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(HeaderShip);
-	fw.Unsigned8(SHIP_SAVEGAME_VERSION);
+	fw.unsigned_8(HeaderShip);
+	fw.unsigned_8(SHIP_SAVEGAME_VERSION);
 
-	fw.CString(descr().get_owner_tribe()->name());
-	fw.CString(descr().name());
+	fw.c_string(descr().get_owner_tribe()->name());
+	fw.c_string(descr().name());
 
 	Bob::save(egbase, mos, fw);
 
 	// state the ship is in
-	fw.Unsigned8(m_ship_state);
+	fw.unsigned_8(m_ship_state);
 
 	// expedition specific data
 	if (state_is_expedition()) {
 		// currently seen port buildspaces
 		assert(m_expedition->seen_port_buildspaces);
-		fw.Unsigned8(m_expedition->seen_port_buildspaces->size());
+		fw.unsigned_8(m_expedition->seen_port_buildspaces->size());
 		for
 			(std::list<Coords>::const_iterator it = m_expedition->seen_port_buildspaces->begin();
 			 it != m_expedition->seen_port_buildspaces->end();
 			 ++it)
 		{
-			WriteCoords32(&fw, *it);
+			write_coords_32(&fw, *it);
 		}
 		// swimability of the directions
 		for (uint8_t i = 0; i < LAST_DIRECTION; ++i)
-			fw.Unsigned8(m_expedition->swimable[i] ? 1 : 0);
+			fw.unsigned_8(m_expedition->swimable[i] ? 1 : 0);
 		// whether scouting or exploring
-		fw.Unsigned8(m_expedition->island_exploration ? 1 : 0);
+		fw.unsigned_8(m_expedition->island_exploration ? 1 : 0);
 		// current direction
-		fw.Unsigned8(m_expedition->direction);
+		fw.unsigned_8(m_expedition->direction);
 		// Start coordinates of an island exploration
-		WriteCoords32(&fw, m_expedition->exploration_start);
+		write_coords_32(&fw, m_expedition->exploration_start);
 		// Whether the exploration is done clockwise or counter clockwise
-		fw.Unsigned8(m_expedition->clockwise ? 1 : 0);
+		fw.unsigned_8(m_expedition->clockwise ? 1 : 0);
 	}
 
-	fw.Unsigned32(mos.get_object_file_index_or_zero(m_lastdock.get(egbase)));
-	fw.Unsigned32(mos.get_object_file_index_or_zero(m_destination.get(egbase)));
+	fw.unsigned_32(mos.get_object_file_index_or_zero(m_lastdock.get(egbase)));
+	fw.unsigned_32(mos.get_object_file_index_or_zero(m_destination.get(egbase)));
 
-	fw.Unsigned32(m_items.size());
+	fw.unsigned_32(m_items.size());
 	for (ShippingItem& shipping_item : m_items) {
 		shipping_item.save(egbase, mos, fw);
 	}

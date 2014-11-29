@@ -21,7 +21,8 @@
 
 #include <memory>
 
-#include <SDL_keysym.h>
+#include <SDL_keycode.h>
+#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
@@ -29,7 +30,7 @@
 #include "graphic/graphic.h"
 #include "graphic/in_memory_image.h"
 #include "graphic/rendertarget.h"
-#include "graphic/surface.h"
+#include "graphic/terrain_texture.h"
 #include "graphic/texture.h"
 #include "logic/map.h"
 #include "logic/world/editor_category.h"
@@ -66,6 +67,9 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 
 	constexpr int kSmallPicHeight = 20;
 	constexpr int kSmallPicWidth = 20;
+
+	std::vector<std::string> tooltips;
+
 	for (size_t checkfor = 0; check[checkfor] >= 0; ++checkfor) {
 		const TerrainDescription::Type ter_is = terrain_descr.get_is();
 		if (ter_is != check[checkfor])
@@ -73,53 +77,71 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 
 		const Image* tex = g_gr->images().get(
 		   g_gr->get_maptexture_data(terrain_descr.get_texture())->get_texture_image());
-		Surface* surf = Surface::create(tex->width(), tex->height());
-		surf->blit(Point(0, 0), tex->surface(), Rect(0, 0, tex->width(), tex->height()), CM_Solid);
+		Texture* texture = new Texture(tex->width(), tex->height());
+		texture->blit(Point(0, 0), tex->texture(), Rect(0, 0, tex->width(), tex->height()), BlendMode::Copy);
 		Point pt(1, tex->height() - kSmallPicHeight - 1);
 
 		if (ter_is == TerrainDescription::GREEN) {
-			surf->blit(pt, green->surface(), Rect(0, 0, green->width(), green->height()));
+			texture->blit(pt, green->texture(), Rect(0, 0, green->width(), green->height()));
 			pt.x += kSmallPicWidth + 1;
+			/** TRANSLATORS: This is a terrain type tooltip in the editor */
+			tooltips.push_back(_("arable"));
 		} else {
 			if (ter_is & TerrainDescription::WATER) {
-				surf->blit(pt, water->surface(), Rect(0, 0, water->width(), water->height()));
+				texture->blit(pt, water->texture(), Rect(0, 0, water->width(), water->height()));
 				pt.x += kSmallPicWidth + 1;
+				/** TRANSLATORS: This is a terrain type tooltip in the editor */
+				tooltips.push_back(_("aquatic"));
 			}
-			if (ter_is & TerrainDescription::MOUNTAIN) {
-				surf->blit(pt, mountain->surface(), Rect(0, 0, mountain->width(), mountain->height()));
+			else if (ter_is & TerrainDescription::MOUNTAIN) {
+				texture->blit(pt, mountain->texture(), Rect(0, 0, mountain->width(), mountain->height()));
 				pt.x += kSmallPicWidth + 1;
+				/** TRANSLATORS: This is a terrain type tooltip in the editor */
+				tooltips.push_back(_("mountainous"));
 			}
 			if (ter_is & TerrainDescription::ACID) {
-				surf->blit(pt, dead->surface(), Rect(0, 0, dead->width(), dead->height()));
+				texture->blit(pt, dead->texture(), Rect(0, 0, dead->width(), dead->height()));
 				pt.x += kSmallPicWidth + 1;
+				/** TRANSLATORS: This is a terrain type tooltip in the editor */
+				tooltips.push_back(_("dead"));
 			}
 			if (ter_is & TerrainDescription::UNPASSABLE) {
-				surf->blit(
-				   pt, unpassable->surface(), Rect(0, 0, unpassable->width(), unpassable->height()));
+				texture->blit(
+				   pt, unpassable->texture(), Rect(0, 0, unpassable->width(), unpassable->height()));
 				pt.x += kSmallPicWidth + 1;
+				/** TRANSLATORS: This is a terrain type tooltip in the editor */
+				tooltips.push_back(_("unpassable"));
 			}
-			if (ter_is & TerrainDescription::DRY)
-				surf->blit(pt, dry->surface(), Rect(0, 0, dry->width(), dry->height()));
+			if (ter_is & TerrainDescription::DRY) {
+				texture->blit(pt, dry->texture(), Rect(0, 0, dry->width(), dry->height()));
+				/** TRANSLATORS: This is a terrain type tooltip in the editor */
+				 tooltips.push_back(_("treeless"));
+			}
 		}
+
 		// Make sure we delete this later on.
-		offscreen_images->emplace_back(new_in_memory_image("dummy_hash", surf));
+		offscreen_images->emplace_back(new_in_memory_image("dummy_hash", texture));
 		break;
 	}
+	/** TRANSLATORS: %1% = terrain name, %2% = list of terrain types  */
+	const std::string tooltip = ((boost::format("%1%: %2%"))
+								  % terrain_descr.descname()
+								  % i18n::localize_item_list(tooltips, i18n::ConcatenateWith::AND)).str();
 
 	std::unique_ptr<const Image>& image = offscreen_images->back();
-	UI::Checkbox* cb = new UI::Checkbox(parent, Point(0, 0), image.get());
+	UI::Checkbox* cb = new UI::Checkbox(parent, Point(0, 0), image.get(), tooltip);
 	cb->set_desired_size(image->width() + 1, image->height() + 1);
 	return cb;
 }
 
 }  // namespace
 
-Editor_Tool_Set_Terrain_Options_Menu::Editor_Tool_Set_Terrain_Options_Menu(
-   Editor_Interactive& parent, Editor_Set_Terrain_Tool& tool, UI::UniqueWindow::Registry& registry)
-   : Editor_Tool_Options_Menu(parent, registry, 0, 0, _("Terrain Select")) {
+EditorToolSetTerrainOptionsMenu::EditorToolSetTerrainOptionsMenu(
+   EditorInteractive& parent, EditorSetTerrainTool& tool, UI::UniqueWindow::Registry& registry)
+   : EditorToolOptionsMenu(parent, registry, 0, 0, _("Terrain Select")) {
 	const Widelands::World& world = parent.egbase().world();
 	multi_select_menu_.reset(
-	   new CategorizedItemSelectionMenu<Widelands::TerrainDescription, Editor_Set_Terrain_Tool>(
+	   new CategorizedItemSelectionMenu<Widelands::TerrainDescription, EditorSetTerrainTool>(
 	      this,
 	      world.editor_terrain_categories(),
 	      world.terrains(),
@@ -131,5 +153,5 @@ Editor_Tool_Set_Terrain_Options_Menu::Editor_Tool_Set_Terrain_Options_Menu(
 	set_center_panel(multi_select_menu_.get());
 }
 
-Editor_Tool_Set_Terrain_Options_Menu::~Editor_Tool_Set_Terrain_Options_Menu() {
+EditorToolSetTerrainOptionsMenu::~EditorToolSetTerrainOptionsMenu() {
 }

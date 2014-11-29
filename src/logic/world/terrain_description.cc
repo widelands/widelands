@@ -33,7 +33,7 @@ namespace Widelands {
 namespace  {
 
 // Parse a terrain type from the giving string.
-TerrainDescription::Type TerrainTypeFromString(const std::string& type) {
+TerrainDescription::Type terrain_type_from_string(const std::string& type) {
 	if (type == "green") {
 		return TerrainDescription::GREEN;
 	}
@@ -68,7 +68,7 @@ TerrainDescription::Type TerrainTypeFromString(const std::string& type) {
 TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::World& world)
    : name_(table.get_string("name")),
      descname_(table.get_string("descname")),
-     is_(TerrainTypeFromString(table.get_string("is"))),
+	  is_(terrain_type_from_string(table.get_string("is"))),
      default_resource_index_(world.get_resource(table.get_string("default_resource").c_str())),
      default_resource_amount_(table.get_int("default_resource_amount")),
      dither_layer_(table.get_int("dither_layer")),
@@ -77,23 +77,23 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
      humidity_(table.get_double("humidity")) {
 
 	if (!(0 <= fertility_ && fertility_ <= 1.)) {
-		throw game_data_error("%s: fertility is not in [0, 1].", name_.c_str());
+		throw GameDataError("%s: fertility is not in [0, 1].", name_.c_str());
 	}
 	if (!(0 <= humidity_ && humidity_ <= 1.)) {
-		throw game_data_error("%s: humidity is not in [0, 1].", name_.c_str());
+		throw GameDataError("%s: humidity is not in [0, 1].", name_.c_str());
 	}
 	if (temperature_ < 0) {
-		throw game_data_error("%s: temperature is not in Kelvin.", name_.c_str());
+		throw GameDataError("%s: temperature is not in Kelvin.", name_.c_str());
 	}
 
 	const std::vector<std::string> textures =
 	   table.get_table("textures")->array_entries<std::string>();
 	int frame_length = FRAME_LENGTH;
 	if (textures.empty()) {
-		throw game_data_error("Terrain %s has no images.", name_.c_str());
+		throw GameDataError("Terrain %s has no images.", name_.c_str());
 	} else if (textures.size() == 1) {
 		if (table.has_key("fps")) {
-			throw game_data_error("Terrain %s with one images must not have fps.", name_.c_str());
+			throw GameDataError("Terrain %s with one images must not have fps.", name_.c_str());
 		}
 	} else {
 		frame_length = 1000 / get_positive_int(table, "fps");
@@ -106,13 +106,13 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
 	}
 
 	if (default_resource_amount_ > 0 && !is_resource_valid(default_resource_index_)) {
-		throw game_data_error("Default resource is not in valid resources.\n");
+		throw GameDataError("Default resource is not in valid resources.\n");
 	}
 
 	int editor_category_index =
 	   world.editor_terrain_categories().get_index(table.get_string("editor_category"));
 	if (editor_category_index < 0) {
-		throw game_data_error(
+		throw GameDataError(
 		   "Unknown editor_category: %s\n", table.get_string("editor_category").c_str());
 	}
 	editor_category_ = world.editor_terrain_categories().get(editor_category_index);
@@ -141,7 +141,7 @@ const EditorCategory& TerrainDescription::editor_category() const {
 	return *editor_category_;
 }
 
-Resource_Index TerrainDescription::get_valid_resource(uint8_t index) const {
+ResourceIndex TerrainDescription::get_valid_resource(uint8_t index) const {
 	return valid_resources_[index];
 }
 

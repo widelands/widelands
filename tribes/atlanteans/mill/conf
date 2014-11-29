@@ -3,7 +3,7 @@ output=corn_flour
 output=blackroot_flour
 
 [aihints]
-build_material=false
+prohibited_till=600
 
 [buildcost]
 log=3

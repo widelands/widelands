@@ -10,7 +10,7 @@ tribes:new_ware_type{
    default_target_quantity = 20,
    preciousness = 1,
    -- TRANSLATORS: Helptext for a ware
-   helptext = _"The Atlantean fires in smelting works, armorsmithies and weaponsmithies are fed with coal. This coal is mined in coal mines or produced out of logs by a charcoal kiln.",
+   helptext = _"The Atlantean fires in smelting works, armor smithies and weapon smithies are fed with coal. This coal is mined in coal mines or produced out of logs by a charcoal kiln.",
    animations = {
       idle = {
          pictures = { dirname .. "idle.png" },

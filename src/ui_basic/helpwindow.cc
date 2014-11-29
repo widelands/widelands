@@ -20,6 +20,7 @@
 #include "ui_basic/helpwindow.h"
 
 #include <memory>
+#include <string>
 
 #include <boost/format.hpp>
 
@@ -36,9 +37,6 @@
 #include "ui_basic/window.h"
 #include "wui/text_constants.h"
 
-
-using boost::format;
-
 namespace UI {
 
 HelpWindow::HelpWindow
@@ -47,11 +45,11 @@ HelpWindow::HelpWindow
 	 uint32_t fontsize,
 	 uint32_t width, uint32_t height)
 	:
-	Window(parent, "help_window", 0, 0, 20, 20, (boost::format(_("Help: %s")) % caption).str().c_str()),
-	textarea(new Multiline_Textarea(this, 5, 5, 30, 30, std::string(), Align_Left)),
-	m_h1((format("%u") % (fontsize < 12 ? 18 : fontsize * 3 / 2)).str()),
-	m_h2((format("%u") % (fontsize < 12 ? 12 : fontsize)).str()),
-	m_p ((format("%u") % (fontsize < 12 ? 10  : fontsize * 5 / 6)).str()),
+	Window(parent, "help_window", 0, 0, 20, 20, (boost::format(_("Help: %s")) % caption).str()),
+	textarea(new MultilineTextarea(this, 5, 5, 30, 30, std::string(), Align_Left)),
+	m_h1(std::to_string(fontsize < 12 ? 18 : fontsize * 3 / 2)),
+	m_h2(std::to_string(fontsize < 12 ? 12 : fontsize)),
+	m_p (std::to_string(fontsize < 12 ? 10  : fontsize * 5 / 6)),
 	m_fn(ui_fn().substr(0, ui_fn().size() - 4)) // Font file - .ttf
 {
 	// Begin the text with the caption
@@ -84,7 +82,7 @@ HelpWindow::HelpWindow
 		 in_width / 3, but_height,
 		 g_gr->images().get("pics/but0.png"),
 		 _("OK"), std::string(), true, false);
-	btn->sigclicked.connect(boost::bind(&HelpWindow::pressedOk, boost::ref(*this)));
+	btn->sigclicked.connect(boost::bind(&HelpWindow::pressed_ok, boost::ref(*this)));
 	btn->set_font(Font::get(UI_FONT_NAME, (fontsize < 12 ? 12 : fontsize)));
 
 	textarea->set_size(in_width - 10, in_height - 10 - (2 * but_height));
@@ -156,7 +154,7 @@ bool HelpWindow::handle_mousepress(const uint8_t btn, int32_t, int32_t)
 {
 	if (btn == SDL_BUTTON_RIGHT) {
 		play_click();
-		pressedOk();
+		pressed_ok();
 	}
 	return true;
 }
@@ -166,7 +164,7 @@ bool HelpWindow::handle_mouserelease(const uint8_t, int32_t, int32_t)
 	return true;
 }
 
-void HelpWindow::pressedOk()
+void HelpWindow::pressed_ok()
 {
 	if (is_modal())
 		end_modal(0);
@@ -190,8 +188,8 @@ LuaTextHelpWindow::LuaTextHelpWindow
 	 uint32_t width, uint32_t height)
 	:
 	UI::UniqueWindow(parent, "help_window", &reg, width, height,
-			(boost::format(_("Help: %s")) % building_description.descname()).str().c_str()),
-	textarea(new Multiline_Textarea(this, 5, 5, width - 10, height -10, std::string(), Align_Left))
+			(boost::format(_("Help: %s")) % building_description.descname()).str()),
+	textarea(new MultilineTextarea(this, 5, 5, width - 10, height -10, std::string(), Align_Left))
 {
 	try {
 		std::unique_ptr<LuaTable> t(

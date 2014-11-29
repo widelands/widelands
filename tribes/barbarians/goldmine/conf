@@ -3,9 +3,9 @@ output=gold_ore
 enhancement=deep_goldmine
 
 [aihints]
-build_material=false
 mines=gold
 mines_percent=30
+prohibited_till=1200
 
 [buildcost]
 log=4

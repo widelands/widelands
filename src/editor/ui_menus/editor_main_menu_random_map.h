@@ -22,6 +22,7 @@
 
 #include <vector>
 
+#include "base/macros.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/window.h"
@@ -30,7 +31,7 @@ namespace Widelands {
 	struct UniqueRandomMapInfo;
 }
 
-struct Editor_Interactive;
+struct EditorInteractive;
 namespace UI {
 template <typename T, typename ID> struct IDButton;
 struct Textarea;
@@ -41,10 +42,10 @@ struct Textarea;
  * the user to choose the new world and a few other
  * things like size, world ....
 */
-struct Main_Menu_New_Random_Map : public UI::Window {
-	Main_Menu_New_Random_Map(Editor_Interactive &);
+struct MainMenuNewRandomMap : public UI::Window {
+	MainMenuNewRandomMap(EditorInteractive &);
 
-	typedef enum {
+	enum class ButtonId: uint8_t {
 		MAP_W_PLUS,
 		MAP_W_MINUS,
 		MAP_H_PLUS,
@@ -60,13 +61,28 @@ struct Main_Menu_New_Random_Map : public UI::Window {
 		SWITCH_ISLAND_MODE,
 		SWITCH_RES,
 		SWITCH_WORLD
-	} ButtonID;
+	};
 
 private:
 	struct WorldDescription {
 		std::string name;
 		std::string descrname;
 	};
+
+	void button_clicked(ButtonId);
+	void clicked_create_map();
+	void id_edit_box_changed();
+	void nr_edit_box_changed();
+
+	// Ensures that the sum of our landmass is >= 0% and <= 100%, and changes
+	// values as necessary.
+	// \param clicked_button: The button that was clicked to change the values.
+	//                        This function makes sure that after the normalization,
+	//                        the value related to the button will still be set
+	//                        as requested by the user.
+	void normalize_landmass(MainMenuNewRandomMap::ButtonId clicked_button);
+
+	void set_map_info(Widelands::UniqueRandomMapInfo & mapInfo) const;
 
 	const std::vector<WorldDescription> m_world_descriptions;
 	int m_current_world;
@@ -76,7 +92,8 @@ private:
 	UI::Button * m_world;
 	UI::Checkbox * m_island_mode;
 	UI::Button * m_goButton;
-	int32_t m_w, m_h, m_landval, m_waterval, m_wastelandval;
+	int32_t m_w, m_h;
+	int32_t m_landval, m_waterval, m_wastelandval, m_mountainsval;
 	uint8_t m_pn;
 	uint32_t m_mapNumber;
 	uint32_t m_res_amount;
@@ -85,12 +102,7 @@ private:
 	UI::EditBox * m_nrEditbox;
 	UI::EditBox * m_idEditbox;
 
-	void button_clicked(ButtonID);
-	void clicked_create_map();
-	void id_edit_box_changed();
-	void nr_edit_box_changed();
-
-	void set_map_info(Widelands::UniqueRandomMapInfo & mapInfo) const;
+	DISALLOW_COPY_AND_ASSIGN(MainMenuNewRandomMap);
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_RANDOM_MAP_H

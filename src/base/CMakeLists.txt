@@ -35,7 +35,6 @@ wl_library(base_geometry
     point.h
     point.cc
     rect.h
-    rect.cc
 )
 
 wl_library(base_md5
@@ -58,7 +57,7 @@ wl_library(base_scoped_timer
   SRCS
     scoped_timer.h
     scoped_timer.cc
-  USES_SDL
+  USES_SDL2
   DEPENDS
     base_log
     base_macros
@@ -68,4 +67,6 @@ wl_library(base_time_string
   SRCS
     time_string.h
     time_string.cc
+  DEPENDS
+    base_i18n
 )

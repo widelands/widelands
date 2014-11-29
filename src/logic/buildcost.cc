@@ -27,11 +27,11 @@
 
 namespace Widelands {
 
-void Buildcost::parse(const Tribe_Descr & tribe, Section & buildcost_s)
+void Buildcost::parse(const TribeDescr & tribe, Section & buildcost_s)
 {
 	while (Section::Value const * const val = buildcost_s.get_next_val())
 		try {
-			Ware_Index const idx = tribe.ware_index(val->get_name());
+			WareIndex const idx = tribe.ware_index(val->get_name());
 			if (idx != INVALID_INDEX) {
 				if (count(idx))
 					throw wexception
@@ -40,11 +40,11 @@ void Buildcost::parse(const Tribe_Descr & tribe, Section & buildcost_s)
 				int32_t const value = val->get_int();
 				if (value < 1 || 255 < value)
 					throw wexception("count is out of range 1 .. 255");
-				insert(std::pair<Ware_Index, uint8_t>(idx, value));
+				insert(std::pair<WareIndex, uint8_t>(idx, value));
 			} else
 				throw wexception
 					("tribe does not define a ware type with this name");
-		} catch (const _wexception & e) {
+		} catch (const WException & e) {
 			throw wexception
 				("[buildcost] \"%s=%s\": %s",
 				 val->get_name(), val->get_string(), e.what());
@@ -62,28 +62,28 @@ uint32_t Buildcost::total() const
 	return sum;
 }
 
-void Buildcost::save(FileWrite& fw, const Widelands::Tribe_Descr& tribe) const {
+void Buildcost::save(FileWrite& fw, const Widelands::TribeDescr& tribe) const {
 	for (const_iterator it = begin(); it != end(); ++it) {
-		fw.CString(tribe.get_ware_descr(it->first)->name());
-		fw.Unsigned8(it->second);
+		fw.c_string(tribe.get_ware_descr(it->first)->name());
+		fw.unsigned_8(it->second);
 	}
-	fw.CString("");
+	fw.c_string("");
 }
 
-void Buildcost::load(FileRead& fr, const Widelands::Tribe_Descr& tribe) {
+void Buildcost::load(FileRead& fr, const Widelands::TribeDescr& tribe) {
 	clear();
 
 	for (;;) {
-		std::string name = fr.CString();
+		std::string name = fr.c_string();
 		if (name.empty())
 			break;
 
-		Ware_Index index = tribe.ware_index(name);
+		WareIndex index = tribe.ware_index(name);
 		if (index == INVALID_INDEX) {
 			log("buildcost: tribe %s does not define ware %s", tribe.name().c_str(), name.c_str());
-			fr.Unsigned8();
+			fr.unsigned_8();
 		} else {
-			(*this)[index] = fr.Unsigned8();
+			(*this)[index] = fr.unsigned_8();
 		}
 	}
 }

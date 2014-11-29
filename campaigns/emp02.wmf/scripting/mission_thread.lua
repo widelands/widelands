@@ -1,21 +1,24 @@
 -- =======================================================================
---                              Mission Threads                             
+--                              Mission Threads
 -- =======================================================================
+
+include "scripting/messages.lua"
+
 function building_materials()
    sleep(200)
-   send_msg(diary_page_5)
+   campaign_message_box(diary_page_5)
 
    local map = wl.Game().map
    local forests = map:get_field(17,10)
    p1:reveal_fields(forests:region(6))
    -- Hide again in 5 seconds
    run(function() sleep(5000) p1:hide_fields(forests:region(6)) end)
-   
-   -- Show the trees
-   scroll_smoothly_to(forests)
 
-   send_msg(diary_page_5_1)
-   local o_woodeconomy = add_obj(obj_build_woodeconomy)
+   -- Show the trees
+   wait_for_roadbuilding_and_scroll(forests)
+
+   campaign_message_box(diary_page_5_1)
+   local o_woodeconomy = add_campaign_objective(obj_build_woodeconomy)
    -- Check for completing of the woodeconomy
    run(function()
       while not check_for_buildings(p1, {
@@ -24,21 +27,21 @@ function building_materials()
          sawmill = 1,
       }) do sleep(2342) end
 
-      send_msg(diary_page_6)
+      campaign_message_box(diary_page_6)
       o_woodeconomy.done = true
    end)
 
 
    -- Show the stones
-   scroll_smoothly_to(map:get_field(14,25))
-   send_msg(diary_page_5_2)
-   local o_quarry = add_obj(obj_build_quarry)
+   wait_for_roadbuilding_and_scroll(map:get_field(14,25))
+   campaign_message_box(diary_page_5_2)
+   local o_quarry = add_campaign_objective(obj_build_quarry)
    -- Check for completeness of the quarry
    run(function()
       while not check_for_buildings(p1, {quarry=1}) do sleep(3423) end
       o_quarry.done = true
 
-      send_msg(diary_page_7)
+      campaign_message_box(diary_page_7)
    end)
 end
 
@@ -57,8 +60,8 @@ function food_thread()
       if s > 0 then break end
       sleep(2344)
    end
-   
-   send_msg(amalea_1)
+
+   campaign_message_box(amalea_1)
    p1:allow_buildings{
       "well",
       "farm",
@@ -73,12 +76,12 @@ function food_thread()
       "inn",
       "fishers_house",
    }
-   local o = add_obj(obj_build_Food_infrastructure)
+   local o = add_campaign_objective(obj_build_food_infrastructure)
 
    -- Run easter egg: Amalea says something when Tavern is done
-   run(function() 
+   run(function()
       while #p1:get_buildings("tavern") < 1 do sleep(2349) end
-      send_msg(amalea_2)
+      campaign_message_box(amalea_2)
    end)
 
    while true do
@@ -110,15 +113,15 @@ function mining_infrastructure()
    local iron_mountain = wl.Game().map:get_field(38,37)
    p1:reveal_fields(coal_mountain:region(6))
    p1:reveal_fields(iron_mountain:region(6))
-   run(function() sleep(5000) 
+   run(function() sleep(5000)
       p1:hide_fields(coal_mountain:region(6))
       p1:hide_fields(iron_mountain:region(6))
    end)
 
    local move_point = wl.Game().map:get_field(49,22)
-   scroll_smoothly_to(move_point)
+   wait_for_roadbuilding_and_scroll(move_point)
 
-   send_msg(saledus_3)
+   campaign_message_box(saledus_3)
    p1:allow_buildings{
       "coalmine",
       "deep_coalmine",
@@ -132,8 +135,8 @@ function mining_infrastructure()
       "charcoal_kiln",
    }
 
-   local o = add_obj(obj_build_mining_infrastructure)
-   -- Wait for the infrastructure to come up 
+   local o = add_campaign_objective(obj_build_mining_infrastructure)
+   -- Wait for the infrastructure to come up
    while true do
       local rv = p1:get_buildings{
          "coalmine",
@@ -168,10 +171,10 @@ function expand_and_build_marblemine()
    run(function() sleep(10000) p1:hide_fields(shipparts:region(5)) end)
 
    -- Move to the shipparts
-   local pts = scroll_smoothly_to(shipparts)
+   local pts = wait_for_roadbuilding_and_scroll(shipparts)
 
-   send_msg(saledus_1)
-   local o = add_obj(obj_build_military_buildings)
+   campaign_message_box(saledus_1)
+   local o = add_campaign_objective(obj_build_military_buildings)
    p1:allow_buildings{"barracks", "sentry"}
 
    -- Go back to where we were
@@ -180,17 +183,17 @@ function expand_and_build_marblemine()
    -- sleep while not owning 26, 21
    while wl.Game().map:get_field(26,21).owner ~= p1 do sleep(3243) end
    o.done = true
-   
+
    -- Marble Mountains
    local marblemountains = wl.Game().map:get_field(35,19)
    p1:reveal_fields(marblemountains:region(5))
    run(function() sleep(10000) p1:hide_fields(marblemountains:region(5)) end)
 
-   pts = scroll_smoothly_to(marblemountains)
+   pts = wait_for_roadbuilding_and_scroll(marblemountains)
 
-   send_msg(saledus_2)
+   campaign_message_box(saledus_2)
    p1:allow_buildings{"marblemine", "deep_marblemine"}
-   o = add_obj(obj_build_marblemine)
+   o = add_campaign_objective(obj_build_marblemine)
    run(function() while not check_for_buildings(p1, {marblemine = 1})
       do sleep(2133) end  o.done = true end)
 
@@ -220,10 +223,10 @@ function barbarians_thread()
    )
    p1:reveal_fields(barbarians)
    run(function() sleep(5000) p1:hide_fields(barbarians) end)
-   scroll_smoothly_to(wl.Game().map:get_field(59, 55))
+   wait_for_roadbuilding_and_scroll(wl.Game().map:get_field(59, 55))
 
-   send_msg(diary_page_8)
-   local o = add_obj(obj_build_bigger_military_buildings)
+   campaign_message_box(diary_page_8)
+   local o = add_campaign_objective(obj_build_bigger_military_buildings)
    p1:allow_buildings{"outpost", "barrier", "tower"}
    p2:allow_buildings{"quarry"}
 
@@ -241,10 +244,10 @@ function barbarians_thread()
    while not mining_infrastructure_done do
       sleep(2343)
    end
-   send_msg(diary_page_9)
+   campaign_message_box(diary_page_9)
    p1:allow_buildings{"fortress"}
 
-   o = add_obj(obj_remove_the_barbarians)
+   o = add_campaign_objective(obj_remove_the_barbarians)
    -- Wait for the fortress to come up
    while not check_for_buildings(p1, {fortress=1},
       wl.Game().map:get_field(60,65):region(6))
@@ -253,9 +256,9 @@ function barbarians_thread()
    o.done = true
 
    -- Show victory message
-   send_msg(diary_page_10)
-   send_msg(seven_days_later)
-   send_msg(diary_page_11)
+   campaign_message_box(diary_page_10)
+   campaign_message_box(seven_days_later)
+   campaign_message_box(diary_page_11)
 
    p1:reveal_campaign("campsect2")
    p1:reveal_scenario("empiretut02")

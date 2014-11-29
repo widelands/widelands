@@ -23,19 +23,19 @@
 #include "io/filesystem/filesystem.h"
 #include "ui_basic/window.h"
 
-struct Editor_Interactive;
+struct EditorInteractive;
 namespace UI {
 struct Button;
 template <typename T> struct Listselect;
 struct Textarea;
-struct Multiline_Textarea;
+struct MultilineTextarea;
 }
 
 /**
  * Choose a filename and save your brand new created map
 */
-struct Main_Menu_Load_Map : public UI::Window {
-	Main_Menu_Load_Map(Editor_Interactive &);
+struct MainMenuLoadMap : public UI::Window {
+	MainMenuLoadMap(EditorInteractive &);
 
 private:
 	void clicked_ok();
@@ -44,15 +44,16 @@ private:
 
 	void fill_list();
 
-	UI::Textarea * m_name, * m_author, * m_size, * m_nrplayers;
-	UI::Multiline_Textarea * m_descr;
+	UI::MultilineTextarea * m_name;
+	UI::Textarea * m_author, * m_size, * m_nrplayers;
+	UI::MultilineTextarea * m_descr;
 	UI::Listselect<const char *> * m_ls;
 	UI::Button * m_ok_btn;
 
 	std::string m_basedir;
 	std::string m_curdir;
 	std::string m_parentdir;
-	filenameset_t m_mapfiles;
+	FilenameSet m_mapfiles;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_EDITOR_MAIN_MENU_LOAD_MAP_H

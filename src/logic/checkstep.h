@@ -48,7 +48,7 @@ private:
 			 StepId  id)
 			const
 			= 0;
-		virtual bool reachabledest(Map &, const FCoords & dest) const = 0;
+		virtual bool reachable_dest(Map &, const FCoords & dest) const = 0;
 	};
 	template<typename T>
 	struct Capsule : public BaseCapsule {
@@ -62,8 +62,8 @@ private:
 		{
 			return op.allowed(map, start, end, dir, id);
 		}
-		bool reachabledest(Map & map, const FCoords & dest) const override {
-			return op.reachabledest(map, dest);
+		bool reachable_dest(Map & map, const FCoords & dest) const override {
+			return op.reachable_dest(map, dest);
 		}
 
 		const T op;
@@ -71,7 +71,7 @@ private:
 
 	boost::shared_ptr<BaseCapsule> capsule;
 
-	static const CheckStep & alwaysfalse();
+	static const CheckStep & always_false();
 
 public:
 	CheckStep();
@@ -96,8 +96,8 @@ public:
 	 * \return \c true if the destination field can be reached at all
 	 * (e.g. return false for land-based bobs when dest is in water).
 	 */
-	bool reachabledest(Map & map, const FCoords & dest) const {
-		return capsule->reachabledest(map, dest);
+	bool reachable_dest(Map & map, const FCoords & dest) const {
+		return capsule->reachable_dest(map, dest);
 	}
 };
 
@@ -114,7 +114,7 @@ struct CheckStepAnd {
 		 int32_t           dir,
 		 CheckStep::StepId id)
 		const;
-	bool reachabledest(Map &, FCoords dest) const;
+	bool reachable_dest(Map &, FCoords dest) const;
 
 private:
 	std::vector<CheckStep> subs;
@@ -133,7 +133,7 @@ struct CheckStepDefault {
 	bool allowed
 		(Map &, FCoords start, FCoords end, int32_t dir, CheckStep::StepId)
 		const;
-	bool reachabledest(Map &, FCoords dest) const;
+	bool reachable_dest(Map &, FCoords dest) const;
 
 private:
 	uint8_t m_movecaps;
@@ -152,7 +152,7 @@ struct CheckStepWalkOn {
 	bool allowed
 		(Map &, FCoords start, FCoords end, int32_t dir, CheckStep::StepId)
 		const;
-	bool reachabledest(Map &, FCoords dest) const;
+	bool reachable_dest(Map &, FCoords dest) const;
 
 private:
 	uint8_t m_movecaps;
@@ -175,7 +175,7 @@ struct CheckStepRoad {
 	bool allowed
 		(Map &, FCoords start, FCoords end, int32_t dir, CheckStep::StepId)
 		const;
-	bool reachabledest(Map &, FCoords dest) const;
+	bool reachable_dest(Map &, FCoords dest) const;
 
 private:
 	const Player & m_player;
@@ -191,14 +191,14 @@ struct CheckStepLimited {
 	bool allowed
 		(Map &, FCoords start, FCoords end, int32_t dir, CheckStep::StepId)
 		const;
-	bool reachabledest(Map &, FCoords dest) const;
+	bool reachable_dest(Map &, FCoords dest) const;
 
 private:
-	// It is OK to use Coords::ordering_functor because the ordering of the set
+	// It is OK to use Coords::OrderingFunctor because the ordering of the set
 	// does not matter, as long as it is system independent (for parallel
 	// simulation).
 	// The only thing that matters is whether a location is in the set.
-	std::set<Coords, Coords::ordering_functor> m_allowed_locations;
+	std::set<Coords, Coords::OrderingFunctor> m_allowed_locations;
 };
 
 

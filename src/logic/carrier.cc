@@ -532,7 +532,7 @@ int32_t Carrier::find_closest_flag(Game & game)
 	startpath.truncate(curidx);
 	startpath.reverse();
 
-	endpath.starttrim(curidx);
+	endpath.trim_start(curidx);
 
 	map.calc_cost(startpath, &startcost, nullptr);
 	map.calc_cost(endpath,   &endcost,   nullptr);
@@ -569,7 +569,7 @@ bool Carrier::start_task_walktoflag
 			(game, path, idx, descr().get_right_walk_anims(does_carry_ware()));
 }
 
-void Carrier::log_general_info(const Widelands::Editor_Game_Base & egbase)
+void Carrier::log_general_info(const Widelands::EditorGameBase & egbase)
 {
 	molog("Carrier at %i,%i\n", get_position().x, get_position().y);
 
@@ -596,12 +596,12 @@ void Carrier::Loader::load(FileRead & fr)
 {
 	Worker::Loader::load(fr);
 
-	uint8_t version = fr.Unsigned8();
+	uint8_t version = fr.unsigned_8();
 	if (version != CARRIER_SAVEGAME_VERSION)
-		throw game_data_error("unknown/unhandled version %u", version);
+		throw GameDataError("unknown/unhandled version %u", version);
 
 	Carrier & carrier = get<Carrier>();
-	carrier.m_promised_pickup_to = fr.Signed32();
+	carrier.m_promised_pickup_to = fr.signed_32();
 }
 
 const Bob::Task * Carrier::Loader::get_task(const std::string & name)
@@ -617,12 +617,12 @@ Carrier::Loader * Carrier::create_loader()
 }
 
 void Carrier::do_save
-	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
+	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	Worker::do_save(egbase, mos, fw);
 
-	fw.Unsigned8(CARRIER_SAVEGAME_VERSION);
-	fw.Signed32(m_promised_pickup_to);
+	fw.unsigned_8(CARRIER_SAVEGAME_VERSION);
+	fw.signed_32(m_promised_pickup_to);
 }
 
 /**

@@ -37,7 +37,7 @@ static char const * pic_max_fill_indicator = "pics/max_fill_indicator.png";
 WaresQueueDisplay::WaresQueueDisplay
 	(UI::Panel * const parent,
 	 int32_t const x, int32_t const y,
-	 Interactive_GameBase  & igb,
+	 InteractiveGameBase  & igb,
 	 Widelands::Building   & building,
 	 Widelands::WaresQueue * const queue,
 	 bool show_only)
@@ -74,7 +74,7 @@ m_show_only(show_only)
 
 	max_size_changed();
 
-	set_think(true);
+	set_thinks(true);
 }
 
 WaresQueueDisplay::~WaresQueueDisplay()

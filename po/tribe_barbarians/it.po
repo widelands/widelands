@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-08-05 11:10+0000\n"
-"PO-Revision-Date: 2014-08-31 12:20+0000\n"
-"Last-Translator: Guybrush88 <Unknown>\n"
+"POT-Creation-Date: 2014-11-21 09:46+0000\n"
+"PO-Revision-Date: 2014-10-27 13:44+0000\n"
+"Last-Translator: Davidus <davide97@gmail.com>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-09-01 05:48+0000\n"
-"X-Generator: Launchpad (build 17176)\n"
+"X-Launchpad-Export-Date: 2014-11-22 04:41+0000\n"
+"X-Generator: Launchpad (build 17252)\n"
 "Language: it\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -38,25 +38,25 @@ msgstr "I tuoi soldati hanno sconfitto il nemico nella caserma."
 #: ../../global/militarysites/barrier.empire/conf:8
 #: ../../tribes/barbarians/barrier/conf:7
 msgid "Your barrier discovered an aggressor."
-msgstr ""
+msgstr "La tua barriera ha scoperto un aggressore."
 
 #: ../../global/militarysites/barrier.barbarians/conf:9
 #: ../../global/militarysites/barrier.empire/conf:9
 #: ../../tribes/barbarians/barrier/conf:8
 msgid "Your barrier is under attack."
-msgstr ""
+msgstr "La tua barriera è sotto attacco"
 
 #: ../../global/militarysites/barrier.barbarians/conf:10
 #: ../../global/militarysites/barrier.empire/conf:10
 #: ../../tribes/barbarians/barrier/conf:9
 msgid "The enemy defeated your soldiers at the barrier."
-msgstr ""
+msgstr "Il nemico ha sconfitto i tuoi soldati nella barriera"
 
 #: ../../global/militarysites/barrier.barbarians/conf:11
 #: ../../global/militarysites/barrier.empire/conf:11
 #: ../../tribes/barbarians/barrier/conf:10
 msgid "Your soldiers defeated the enemy at the barrier."
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto il nemico nella barriera."
 
 #: ../../global/militarysites/castle.atlanteans/conf:8
 #: ../../global/militarysites/castle.empire/conf:8
@@ -101,22 +101,22 @@ msgstr "I tuoi soldati hanno sconfitto il nemico nella cittadella."
 #: ../../global/militarysites/donjon.barbarians/conf:9
 #: ../../tribes/barbarians/donjon/conf:8
 msgid "Your donjon discovered an aggressor."
-msgstr "Il tuo mastio ha scoperto un aggressore."
+msgstr "Il tuo dongione ha scoperto un aggressore."
 
 #: ../../global/militarysites/donjon.barbarians/conf:10
 #: ../../tribes/barbarians/donjon/conf:9
 msgid "Your donjon is under attack."
-msgstr "Il tuo mastio è sotto attacco."
+msgstr "Il tuo dongione è sotto attacco."
 
 #: ../../global/militarysites/donjon.barbarians/conf:11
 #: ../../tribes/barbarians/donjon/conf:10
 msgid "The enemy defeated your soldiers at the donjon."
-msgstr "Il nemico ha sconfitto i tuoi soldati nel mastio."
+msgstr "Il nemico ha sconfitto i tuoi soldati nel dongione."
 
 #: ../../global/militarysites/donjon.barbarians/conf:12
 #: ../../tribes/barbarians/donjon/conf:11
 msgid "Your soldiers defeated the enemy at the donjon."
-msgstr "I tuoi soldati hanno sconfitto il nemico nel mastio."
+msgstr "I tuoi soldati hanno sconfitto il nemico nel dongione."
 
 #: ../../global/militarysites/fortress.barbarians/conf:8
 #: ../../global/militarysites/fortress.empire/conf:8
@@ -144,19 +144,19 @@ msgstr "I tuoi soldati hanno sconfitto il nemico nella fortezza."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:8
 msgid "Your guardhall discovered an aggressor."
-msgstr ""
+msgstr "Il tuo posto di guardia ha scoperto un aggressore."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:9
 msgid "Your guardhall is under attack."
-msgstr ""
+msgstr "Il tuo posto di guardia è sotto attacco"
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:10
 msgid "The enemy defeated your soldiers at the guardhall."
-msgstr ""
+msgstr "Il nemico ha sconfitto i tuoi soldati nel posto di guardia"
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:11
 msgid "Your soldiers defeated the enemy at the guardhall."
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto il nemico nel posto di guardia"
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:8
 msgid "Your guardhouse discovered an aggressor."
@@ -192,19 +192,19 @@ msgstr "I tuoi soldati hanno sconfitto il nemico nella torre alta."
 
 #: ../../global/militarysites/outpost.empire/conf:8
 msgid "Your outpost discovered an aggressor."
-msgstr ""
+msgstr "Il tuo avamposto ha scoperto un aggressore."
 
 #: ../../global/militarysites/outpost.empire/conf:9
 msgid "Your outpost is under attack."
-msgstr ""
+msgstr "Il tuo avamposto è sotto attacco"
 
 #: ../../global/militarysites/outpost.empire/conf:10
 msgid "The enemy defeated your soldiers at the outpost."
-msgstr ""
+msgstr "Il nemico ha sconfitto i tuoi soldati nell' avamposto"
 
 #: ../../global/militarysites/outpost.empire/conf:11
 msgid "Your soldiers defeated the enemy at the outpost."
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto i nemici nell' avamposto"
 
 #: ../../global/militarysites/sentry.barbarians/conf:8
 #: ../../global/militarysites/sentry.empire/conf:8
@@ -274,22 +274,22 @@ msgstr ""
 "L'ascia è l'arma di base dei barbari. Tutti i giovani soldati ne sono "
 "equipaggiati."
 
-#: ../../tribes/barbarians/axfactory/conf:33
-#: ../../tribes/barbarians/warmill/conf:37
+#: ../../tribes/barbarians/axfactory/conf:32
+#: ../../tribes/barbarians/warmill/conf:36
 msgid "forging an ax"
 msgstr "sta forgiando un'ascia"
 
-#: ../../tribes/barbarians/axfactory/conf:35
-#: ../../tribes/barbarians/warmill/conf:39
+#: ../../tribes/barbarians/axfactory/conf:34
+#: ../../tribes/barbarians/warmill/conf:38
 msgid "forging a sharp ax"
 msgstr "sta forgiando un'ascia affilata"
 
-#: ../../tribes/barbarians/axfactory/conf:37
-#: ../../tribes/barbarians/warmill/conf:41
+#: ../../tribes/barbarians/axfactory/conf:36
+#: ../../tribes/barbarians/warmill/conf:40
 msgid "forging a broad ax"
 msgstr "sta forgiando un'ascia grande"
 
-#: ../../tribes/barbarians/axfactory/conf:39
+#: ../../tribes/barbarians/axfactory/conf:38
 #: ../../tribes/barbarians/bakery/conf:27
 #: ../../tribes/barbarians/big_inn/conf:34
 #: ../../tribes/barbarians/charcoal_kiln/conf:24
@@ -302,10 +302,10 @@ msgstr "sta forgiando un'ascia grande"
 #: ../../tribes/barbarians/lumberjacks_hut/conf:19
 #: ../../tribes/barbarians/metalworks/conf:59
 #: ../../tribes/barbarians/quarry/conf:19
-#: ../../tribes/barbarians/reed_yard/conf:24
-#: ../../tribes/barbarians/shipyard/conf:30
+#: ../../tribes/barbarians/reed_yard/conf:25
+#: ../../tribes/barbarians/shipyard/conf:29
 #: ../../tribes/barbarians/smelting_works/conf:34
-#: ../../tribes/barbarians/warmill/conf:49
+#: ../../tribes/barbarians/warmill/conf:48
 #: ../../tribes/barbarians/well/conf:19
 msgid "working"
 msgstr "sta lavorando"
@@ -488,7 +488,7 @@ msgid ""
 msgstr ""
 
 #: ../../tribes/barbarians/battlearena/conf:34
-#: ../../tribes/barbarians/trainingcamp/conf:44
+#: ../../tribes/barbarians/trainingcamp/conf:47
 msgid "sleeping"
 msgstr "sta dormendo"
 
@@ -560,7 +560,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/big_inn/conf:28
 #: ../../tribes/barbarians/inn/conf:28
-#: ../../tribes/barbarians/tavern/conf:30
+#: ../../tribes/barbarians/tavern/conf:29
 msgid "preparing a ration"
 msgstr "sta preparando una razione"
 
@@ -647,7 +647,7 @@ msgstr "Trasporta oggetti lungo la starda"
 msgid "Breeds the strong oxen that help with transporting wares."
 msgstr ""
 
-#: ../../tribes/barbarians/cattlefarm/conf:26
+#: ../../tribes/barbarians/cattlefarm/conf:25
 msgid "rearing cattle"
 msgstr ""
 
@@ -690,7 +690,7 @@ msgid ""
 "buildings: lime kiln, smelting works, axfactory, war mill, and helm smithy."
 msgstr ""
 
-#: ../../tribes/barbarians/coalmine/conf:25
+#: ../../tribes/barbarians/coalmine/conf:26
 #: ../../tribes/barbarians/deep_coalmine/conf:28
 #: ../../tribes/barbarians/deep_goldmine/conf:28
 #: ../../tribes/barbarians/deep_oremine/conf:28
@@ -698,18 +698,18 @@ msgstr ""
 #: ../../tribes/barbarians/deeper_goldmine/conf:27
 #: ../../tribes/barbarians/deeper_oremine/conf:27
 #: ../../tribes/barbarians/goldmine/conf:26
-#: ../../tribes/barbarians/granitemine/conf:23
+#: ../../tribes/barbarians/granitemine/conf:24
 #: ../../tribes/barbarians/oremine/conf:26
 msgid "mining"
 msgstr "sta scavando nella miniera"
 
-#: ../../tribes/barbarians/coalmine/conf:36
+#: ../../tribes/barbarians/coalmine/conf:37
 #: ../../tribes/barbarians/deep_coalmine/conf:42
 #: ../../tribes/barbarians/deeper_coalmine/conf:41
 msgid "Main Coal Vein Exhausted"
 msgstr "Vena principale di carbone esaurita"
 
-#: ../../tribes/barbarians/coalmine/conf:37
+#: ../../tribes/barbarians/coalmine/conf:38
 #: ../../tribes/barbarians/deep_coalmine/conf:43
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1521,7 +1521,7 @@ msgid "harvesting wheat"
 msgstr "sta coltivando del grano"
 
 #: ../../tribes/barbarians/farm/conf:43
-#: ../../tribes/barbarians/reed_yard/conf:40
+#: ../../tribes/barbarians/reed_yard/conf:41
 msgid "Out of Fields"
 msgstr "Campi esauriti"
 
@@ -1655,11 +1655,11 @@ msgid ""
 "and armor."
 msgstr ""
 
-#: ../../tribes/barbarians/granitemine/conf:34
+#: ../../tribes/barbarians/granitemine/conf:35
 msgid "Main Granite Vein Exhausted"
 msgstr "Vena principale di granito esaurita"
 
-#: ../../tribes/barbarians/granitemine/conf:35
+#: ../../tribes/barbarians/granitemine/conf:36
 msgid ""
 "This granite mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. This mine can’t be enhanced any further, so you "
@@ -1882,14 +1882,14 @@ msgid ""
 msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:13
-msgid ""
-"\"Take 200 hits to fell a tree and you're a baby. Take 100 and you're a "
-"soldier. Take 50 and you're a hero. Take 20 and soon you will be a honorable "
-"lumberjack.\""
+msgid "Krumta, carpenter of Chat’Karuth"
 msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:13
-msgid "Krumta, carpenter of Chat'Karuth"
+msgid ""
+"‘Take 200 hits to fell a tree and you’re a baby. Take 100 and you’re a "
+"soldier. Take 50 and you’re a hero. Take 20 and soon you will be a honorable "
+"lumberjack.’"
 msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:16
@@ -1897,7 +1897,7 @@ msgid "Fell trees in the surrounding area and process them into logs."
 msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:17
-msgid "The lumberjack's hut needs trees to fell within the working radius."
+msgid "The lumberjack’s hut needs trees to fell within the working radius."
 msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:29
@@ -2117,15 +2117,15 @@ msgstr ""
 "Le pietre grezze sono un materiale di costruzione di base dei barbari. Sono "
 "prodotte in cave e miniere di granito."
 
-#: ../../tribes/barbarians/reed_yard/conf:20
+#: ../../tribes/barbarians/reed_yard/conf:21
 msgid "planting reed"
 msgstr ""
 
-#: ../../tribes/barbarians/reed_yard/conf:22
+#: ../../tribes/barbarians/reed_yard/conf:23
 msgid "harvesting reed"
 msgstr ""
 
-#: ../../tribes/barbarians/reed_yard/conf:41
+#: ../../tribes/barbarians/reed_yard/conf:42
 msgid ""
 "The gardener working at this reed yard has no cleared soil to plant his "
 "seeds."
@@ -2163,7 +2163,7 @@ msgstr ""
 "Esploratori come Scotty l'esploratore esplorano le aree non esplorate alla "
 "maniera degli esploratori."
 
-#: ../../tribes/barbarians/scouts_hut/conf:22
+#: ../../tribes/barbarians/scouts_hut/conf:21
 msgid "scouting"
 msgstr "sta esplorando"
 
@@ -2209,7 +2209,7 @@ msgstr "Una valida nave"
 msgid "Works at the shipyard and constructs new ships."
 msgstr "Lavora al cantiere navale e costruisce navi."
 
-#: ../../tribes/barbarians/shipyard/conf:28
+#: ../../tribes/barbarians/shipyard/conf:27
 msgid "constructing a ship"
 msgstr "sta costruendo una nave"
 
@@ -2272,35 +2272,35 @@ msgstr ""
 msgid "Trains the soldiers."
 msgstr "Allena i soldati."
 
-#: ../../tribes/barbarians/trainingcamp/conf:46
+#: ../../tribes/barbarians/trainingcamp/conf:49
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr ""
 
-#: ../../tribes/barbarians/trainingcamp/conf:48
+#: ../../tribes/barbarians/trainingcamp/conf:51
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr ""
 
-#: ../../tribes/barbarians/trainingcamp/conf:50
+#: ../../tribes/barbarians/trainingcamp/conf:53
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr ""
 
-#: ../../tribes/barbarians/trainingcamp/conf:52
+#: ../../tribes/barbarians/trainingcamp/conf:55
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr ""
 
-#: ../../tribes/barbarians/trainingcamp/conf:54
+#: ../../tribes/barbarians/trainingcamp/conf:57
 msgid "upgrading soldier attack from level 4 to level 5"
 msgstr ""
 
-#: ../../tribes/barbarians/trainingcamp/conf:56
+#: ../../tribes/barbarians/trainingcamp/conf:59
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr ""
 
-#: ../../tribes/barbarians/trainingcamp/conf:58
+#: ../../tribes/barbarians/trainingcamp/conf:61
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr ""
 
-#: ../../tribes/barbarians/trainingcamp/conf:60
+#: ../../tribes/barbarians/trainingcamp/conf:63
 msgid "upgrading soldier health from level 2 to level 3"
 msgstr ""
 
@@ -2349,15 +2349,15 @@ msgid ""
 "soldiers from health level 1 to level 2."
 msgstr ""
 
-#: ../../tribes/barbarians/warmill/conf:43
+#: ../../tribes/barbarians/warmill/conf:42
 msgid "forging a bronze ax"
 msgstr "sta forgiando un'ascia di bronzo"
 
-#: ../../tribes/barbarians/warmill/conf:45
+#: ../../tribes/barbarians/warmill/conf:44
 msgid "forging a battle ax"
 msgstr "sta forgiando un'ascia da battaglia"
 
-#: ../../tribes/barbarians/warmill/conf:47
+#: ../../tribes/barbarians/warmill/conf:46
 msgid "forging a warrior’s ax"
 msgstr "sta forgiando un'ascia da guerriero"
 

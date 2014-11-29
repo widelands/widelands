@@ -2,7 +2,7 @@ size=small
 output=gold_yarn
 
 [aihints]
-build_material=false
+prohibited_till=600
 
 [buildcost]
 log=2

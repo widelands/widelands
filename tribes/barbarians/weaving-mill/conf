@@ -2,7 +2,7 @@ size=big
 output=cloth
 
 [aihints]
-build_material=false
+prohibited_till=1200
 
 [buildcost]
 log=5

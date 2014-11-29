@@ -8,7 +8,7 @@ tribes:new_ware_type{
    genericname = _"beer",
    tribe = "empire",
    default_target_quantity = 15,
-   preciousness = 2,
+   preciousness = 5,
    -- TRANSLATORS: Helptext for a ware
    helptext = _"This beer is produced in a brewery out of wheat and water. It is consumed by miners in coal and iron ore mines.",
    animations = {

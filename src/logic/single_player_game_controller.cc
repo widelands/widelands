@@ -31,7 +31,7 @@
 SinglePlayerGameController::SinglePlayerGameController
 	(Widelands::Game        &       game,
 	 bool                     const useai,
-	 Widelands::Player_Number const local)
+	 Widelands::PlayerNumber const local)
 	: m_game          (game),
 	m_useai           (useai),
 	m_lastframe       (WLApplication::get()->get_time()),
@@ -64,12 +64,12 @@ void SinglePlayerGameController::think()
 	else if (frametime > 1000)
 		frametime = 1000;
 
-	frametime = frametime * realSpeed() / 1000;
+	frametime = frametime * real_speed() / 1000;
 
 	m_time = m_game.get_gametime() + frametime;
 
 	if (m_useai && m_game.is_loaded()) {
-		const Widelands::Player_Number nr_players = m_game.map().get_nrplayers();
+		const Widelands::PlayerNumber nr_players = m_game.map().get_nrplayers();
 		iterate_players_existing(p, nr_players, m_game, plr)
 			if (p != m_local) {
 
@@ -77,31 +77,31 @@ void SinglePlayerGameController::think()
 					m_computerplayers.resize(p);
 				if (!m_computerplayers[p - 1])
 					m_computerplayers[p - 1] =
-						Computer_Player::getImplementation
-							(plr->getAI())->instantiate(m_game, p);
+						ComputerPlayer::get_implementation
+							(plr->get_ai())->instantiate(m_game, p);
 				m_computerplayers[p - 1]->think();
 			}
 	}
 }
 
-void SinglePlayerGameController::sendPlayerCommand
+void SinglePlayerGameController::send_player_command
 	(Widelands::PlayerCommand & pc)
 {
 	pc.set_cmdserial(++m_player_cmdserial);
 	m_game.enqueue_command (&pc);
 }
 
-int32_t SinglePlayerGameController::getFrametime()
+int32_t SinglePlayerGameController::get_frametime()
 {
 	return m_time - m_game.get_gametime();
 }
 
-std::string SinglePlayerGameController::getGameDescription()
+GameController::GameType SinglePlayerGameController::get_game_type()
 {
-	return "singleplayer";
+	return GameController::GameType::SINGLEPLAYER;
 }
 
-uint32_t SinglePlayerGameController::realSpeed()
+uint32_t SinglePlayerGameController::real_speed()
 {
 	if (m_paused)
 		return 0;
@@ -109,22 +109,22 @@ uint32_t SinglePlayerGameController::realSpeed()
 		return m_speed;
 }
 
-uint32_t SinglePlayerGameController::desiredSpeed()
+uint32_t SinglePlayerGameController::desired_speed()
 {
 	return m_speed;
 }
 
-void SinglePlayerGameController::setDesiredSpeed(uint32_t const speed)
+void SinglePlayerGameController::set_desired_speed(uint32_t const speed)
 {
 	m_speed = speed;
 }
 
-bool SinglePlayerGameController::isPaused()
+bool SinglePlayerGameController::is_paused()
 {
 	return m_paused;
 }
 
-void SinglePlayerGameController::setPaused(bool paused)
+void SinglePlayerGameController::set_paused(bool paused)
 {
 	m_paused = paused;
 }

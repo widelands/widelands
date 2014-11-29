@@ -26,7 +26,7 @@
 #include "ui_basic/textarea.h"
 #include "ui_basic/window.h"
 
-Main_Menu_Save_Map_Make_Directory::Main_Menu_Save_Map_Make_Directory
+MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory
 	(UI::Panel * const parent, char const * dirname)
 :
 UI::Window(parent, "make_directory", 0, 0, 230, 120, _("Make Directory"))
@@ -42,9 +42,9 @@ UI::Window(parent, "make_directory", 0, 0, 230, 120, _("Make Directory"))
 		new UI::EditBox
 			(this, spacing, posy, get_inner_w() - 2 * spacing, 20,
 			 g_gr->images().get("pics/but1.png"));
-	m_edit->setText(dirname);
+	m_edit->set_text(dirname);
 	m_dirname = dirname;
-	m_edit->changed.connect(boost::bind(&Main_Menu_Save_Map_Make_Directory::edit_changed, this));
+	m_edit->changed.connect(boost::bind(&MainMenuSaveMapMakeDirectory::edit_changed, this));
 
 	posy = get_inner_h() - 30;
 
@@ -57,7 +57,7 @@ UI::Window(parent, "make_directory", 0, 0, 230, 120, _("Make Directory"))
 		 std::string(),
 		 m_dirname.size());
 	m_ok_button->sigclicked.connect
-		(boost::bind(&Main_Menu_Save_Map_Make_Directory::end_modal, boost::ref(*this), 1));
+		(boost::bind(&MainMenuSaveMapMakeDirectory::end_modal, boost::ref(*this), 1));
 
 	UI::Button * cancelbtn = new UI::Button
 		(this, "cancel",
@@ -65,7 +65,7 @@ UI::Window(parent, "make_directory", 0, 0, 230, 120, _("Make Directory"))
 		 g_gr->images().get("pics/but1.png"),
 		 _("Cancel"));
 	cancelbtn->sigclicked.connect
-		(boost::bind(&Main_Menu_Save_Map_Make_Directory::end_modal, boost::ref(*this), 0));
+		(boost::bind(&MainMenuSaveMapMakeDirectory::end_modal, boost::ref(*this), 0));
 
 	center_to_parent();
 }
@@ -74,7 +74,7 @@ UI::Window(parent, "make_directory", 0, 0, 230, 120, _("Make Directory"))
 /**
  * Editbox changed
  */
-void Main_Menu_Save_Map_Make_Directory::edit_changed() {
+void MainMenuSaveMapMakeDirectory::edit_changed() {
 	const std::string & text = m_edit->text();
 	if (text.size()) {
 		m_ok_button->set_enabled(true);

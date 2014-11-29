@@ -6,21 +6,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-08-05 09:15+0000\n"
+"POT-Creation-Date: 2014-11-21 09:46+0000\n"
 "PO-Revision-Date: 2014-04-16 03:37+0000\n"
 "Last-Translator: SirVer <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-06 05:39+0000\n"
-"X-Generator: Launchpad (build 17147)\n"
+"X-Launchpad-Export-Date: 2014-11-22 04:37+0000\n"
+"X-Generator: Launchpad (build 17252)\n"
 "Language: hu\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
-#: ../../campaigns/cconfig:98
-msgid "01 – From Nemesis to Genesis"
-msgstr "01 – Pusztulásból teremtésbe"
+msgid "From Nemesis to Genesis"
+msgstr ""
 
 #: ../../campaigns/atl01.wmf/elemental:11
 msgid ""
@@ -30,130 +29,43 @@ msgstr ""
 "Miután a megmaradt atlantisziak egy rejtélyes szigeten kötnek ki Atlantisz "
 "közelében, új otthon építésén fáradoznak."
 
-#: ../../campaigns/cconfig:27
-msgid "Barbarians – The Second Empire"
-msgstr "Barbárok - A második birodalom"
-
-#: ../../campaigns/cconfig:30
-msgid "Easy. Introduces the Barbarians"
-msgstr "Könnyű. Bemutatja a barbárokat"
-
-#: ../../campaigns/cconfig:31
-msgid ""
-"When Chat’Karuth died, he was an old man, father to three strong and "
-"ambitious sons, and warlord to an army that could match any enemy willing to "
-"rise against the ancient forests. Though at the end of his glorious reign, "
-"Chat’Karuth chose his eldest son, Thron, to succeed him as the tribe’s "
-"warlord – a decision that left his two brothers unsatisfied. The old warlord "
-"knew that. As his father instructed him, Thron left the capital of "
-"Al’thunran, the home of the Throne Among the Trees, and withdrew his forces "
-"to the high hills where he buried the corpse of his father. There he swore "
-"to the gods and his father’s spirit that he’d return to re-established "
-"order. While his brothers have raged blind war against Thron and the few "
-"forces he left to secure the borders of Al’thunran, the young warlord seeks "
-"to reunite his ambitious brothers and force the tribes to march once again "
-"under a common banner."
+#: ../../campaigns/bar01.wmf/elemental:8
+msgid "A Place to Call Home"
 msgstr ""
-"Amikor Chat'Karuth meghalt, nagyon öreg, három erős és törekvő fiú apja és "
-"egy erős hadúr volt, olyan hadsereggel, amely bármelyik ellenséget képes "
-"legyőzni, amely szembe mer szállni az ősi erdővel. Dicső uralkodása után, "
-"Chat'Karuth a legidősebb fiára hagyta a trónt - ezzel magára haragítva másik "
-"két fiát. Az öreg hadúr tudta ezt. Ahogy az apja meghagyta neki, Thron "
-"elhagyta Al'thunran fővárosát, a korona otthonát a fák között, és "
-"visszavonta erőit a magas hegyekbe, ahol eltemette apját és megesküdött az "
-"Isteneknek, hogy egy nap visszatér és helyreállítja a rendet. Amíg testvérei "
-"vak háborút indítottak Thron és katonái ellen, akiket hátrahagyott, hogy "
-"megvédjék Al'thunran határát, a fiatal hadúr igyekezett maga mellé állítani "
-"nagyravágyó testvéreit, hogy a törzseket újra egy zászló alatt egyesíthesse."
 
-#: ../../campaigns/cconfig:34
-msgid "Empire – The Months of Exile"
-msgstr "Birodalom – Hónapok számkivetésben"
-
-#: ../../campaigns/cconfig:37
-msgid "Easy. Introduces the Empire"
-msgstr "Könnyű. A birodalom bemutatása"
-
-#: ../../campaigns/cconfig:38
+#: ../../campaigns/bar01.wmf/elemental:10
 msgid ""
-"Six months ago, Lutius – a young general of the Empire – was sent with 150 "
-"soldiers to the frontier beyond the northern forests where Barbarian tribes "
-"were crossing onto land held by the Empire. His task was to defend the "
-"Empire’s land. At first, everything was calm. He even talked to a few "
-"barbarian children and thought about a peaceful life – side by side with "
-"this archaic folk. He began to feel safer and his army began to drop their "
-"attention off the potential enemy. That was their undoing. One night in "
-"March his unprepared army was attacked by 100 barbarian footmen and was "
-"completely scattered. Only with his bare life he and a handful of his "
-"soldiers survived."
+"In this scenario, the higher production buildings including mining will be "
+"introduced."
 msgstr ""
-"Hat hónappal ezelőtt Lutiust – a Birodalom egy ifjú tábornokát – százötven "
-"katonával az északi erdőkön túli határvidékre küldték, ahol barbár törzsek "
-"léptek a Birodalom földjére. Feladata volt a Birodalom területének védelme. "
-"Kezdetben minden nyugodt volt. Még néhány barbár gyermekkel is "
-"elbeszélgetett, és egy békés életről álmodozott – egymás mellett élve ezzel "
-"az ősi törzzsel. Kezdte magát biztonságban érezni, és katonái egyre inkább "
-"figyelmen kívül hagyták a lehetséges ellenséget. Ezt nem kellett volna. Egy "
-"márciusi éjszakán száz barbár gyalogos megtámadta a felkészületlen sereget, "
-"mire az teljesen szétzilálódott. Csak Lutius és egy maroknyi katonája "
-"menekült meg."
 
-#: ../../campaigns/cconfig:41
-msgid "Atlanteans – The Run for the Fire"
-msgstr "Atlantisziak – Hajsza a tűz után"
+#: ../../campaigns/bar02.wmf/elemental:7
+msgid "This Land is Our Land"
+msgstr ""
 
-#: ../../campaigns/cconfig:44
-msgid "Challenging. Introduces the Atlanteans"
-msgstr "Kihívás. Az atlantisziak bemutatása"
-
-#: ../../campaigns/cconfig:45
+#: ../../campaigns/bar02.wmf/elemental:9
 msgid ""
-"When their God lost faith in the Atlanteans and drowned their island, one "
-"woman’s struggle for justice and a second chance for her people would become "
-"the stuff of legends. Leading the remaining Atlanteans into a new future in "
-"a new part of the World, Jundlina became the most powerful human of her "
-"time, but at a high cost: her humanity and soul."
+"This tutorial explains the handling of military and training site buildings "
+"and will introduce fighting."
 msgstr ""
-"Mikor a nagy Isten csalódott az atlantisziakban, és szigetüket "
-"elsüllyesztette, egy asszony küzdelme az igazságért és egy új esélyért "
-"népének, legendává lett. Jundlina, ki a megmaradt atlantisziakat a világ egy "
-"új részére, új jövőbe vezette, kora leghatalmasabb embere lett – de ezért "
-"nagy árat fizetett: emberségét és lelkét."
+"Ez az oktatójáték elmagyarázza a katonai és kiképzőépületek kezelését, és "
+"bemutatja a harcot."
 
-#: ../../campaigns/cconfig:64
-#: ../../campaigns/t01.wmf/elemental:7
-msgid "01 – Eyes in the Dark"
-msgstr "01 - Szempárok a sötétben"
-
-#: ../../campaigns/cconfig:69
-#: ../../campaigns/t02.wmf/elemental:7
-msgid "02 – A Place to Call Home"
-msgstr "02 - Egy hely, amit otthonnak hívunk"
-
-#: ../../campaigns/cconfig:74
-#: ../../campaigns/t03.wmf/elemental:7
-msgid "03 – This Land is Our Land"
-msgstr "03 - Ez a föld a miénk"
-
-#: ../../campaigns/cconfig:81
-#: ../../campaigns/emp01.wmf/elemental:7
-msgid "01 – The Strands of Malac’ Mor"
-msgstr "01 – Malac' Mor partjai"
-
-#: ../../campaigns/cconfig:86
-#: ../../campaigns/emp02.wmf/elemental:9
-msgid "02 – An Outpost for Exile"
-msgstr "02 – A számkivetés előőrse"
-
-#: ../../campaigns/cconfig:91
-#: ../../campaigns/cconfig:103
 #: ../../campaigns/dummy.wmf/elemental:7
 msgid "Not yet implemented"
 msgstr "Még nem készült el"
 
 #: ../../campaigns/dummy.wmf/elemental:9
+msgid "Nobody"
+msgstr ""
+
+#: ../../campaigns/dummy.wmf/elemental:10
 msgid "Sorry, this map is not yet implemented."
 msgstr "Még nem készült el."
+
+#: ../../campaigns/emp01.wmf/elemental:7
+msgid "The Strands of Malac’ Mor"
+msgstr ""
 
 #: ../../campaigns/emp01.wmf/elemental:9
 msgid ""
@@ -169,6 +81,10 @@ msgstr ""
 "megsemmisül. Csak nagy szerencsével sikerül a sérült hajót egy ismeretlen, "
 "homokos parton kikötnie, és megmentenie embereit. Egyelőre."
 
+#: ../../campaigns/emp02.wmf/elemental:9
+msgid "An Outpost for Exile"
+msgstr ""
+
 #: ../../campaigns/emp02.wmf/elemental:11
 msgid ""
 "Finally the ship was repaired, so Lutius and his people returned to the "
@@ -181,40 +97,45 @@ msgstr ""
 "zöld, mediterrán, paradicsomi szigeten. Elragadtatva felfedezőútra indulnak "
 "ezen az új lakhelyen."
 
-#: ../../campaigns/t01.wmf/elemental:9
-msgid ""
-"In this tutorial, the basic gameplay and control as well as basic production "
-"buildings of the Barbarians are introduced."
-msgstr ""
-"Ez az oktatójáték az alapvető játékmenetet és irányítást, továbbá a barbárok "
-"egyszerűbb termelő épületeit mutatja be."
-
-#: ../../campaigns/t02.wmf/elemental:9
-msgid ""
-"In this scenario, the higher production buildings including mining and "
-"military expansions will be introduced."
-msgstr ""
-"Ez a pálya a nagyobb termelő épületeket, például a bányákat, illetve a "
-"katonai terjeszkedést mutatja be."
-
-#: ../../campaigns/t03.wmf/elemental:9
-msgid ""
-"This tutorial explains the handling of military and training site buildings "
-"and will introduce fighting."
-msgstr ""
-"Ez az oktatójáték elmagyarázza a katonai és kiképzőépületek kezelését, és "
-"bemutatja a harcot."
-
-#: ../../campaigns/tutorial01.wmf/elemental:7
-msgid "Tutorial 1"
+#: ../../campaigns/tutorial01_basic_control.wmf/elemental:8
+msgid "Basic Control"
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/elemental:9
+#: ../../campaigns/tutorial01_basic_control.wmf/elemental:10
 msgid ""
-"Basic Tutorial – a map based on Winterwind’s tutorial 1 for the Barbarians"
+"In this tutorial, you will learn how to navigate in Widelands and how to "
+"build buildings and roads."
 msgstr ""
-"Alap oktatójáték - a térkép a Winterwind első oktatójátékának barbáros "
-"pályáján alapul."
+
+#: ../../campaigns/tutorial02_warfare.wmf/elemental:8
+msgid "Warfare"
+msgstr ""
+
+#: ../../campaigns/tutorial02_warfare.wmf/elemental:10
+msgid ""
+"In this tutorial, you will be taught the secrets of warfare: how to create "
+"soldiers, how to train them and how to lead them in battle."
+msgstr ""
+
+#: ../../campaigns/tutorial03_seafaring.wmf/elemental:8
+msgid "Seafaring"
+msgstr ""
+
+#: ../../campaigns/tutorial03_seafaring.wmf/elemental:10
+msgid ""
+"In this tutorial, you will get to know seafaring, which is how to handle "
+"ships and ports."
+msgstr ""
+
+#: ../../campaigns/tutorial04_economy.wmf/elemental:8
+msgid "Economy"
+msgstr ""
+
+#: ../../campaigns/tutorial04_economy.wmf/elemental:10
+msgid ""
+"In this tutorial, you will learn what option Widelands offers to adjust your "
+"economy. Recommended for players with some experience."
+msgstr ""
 
 #: ../../maps/Atoll.wmf/elemental:9
 msgid "Atoll"
@@ -223,10 +144,6 @@ msgstr "Atoll"
 #: ../../maps/Atoll.wmf/elemental:11
 msgid "Who will be the real king of the big atoll?"
 msgstr "Ki lesz a nagy atoll igazi királya?"
-
-#: ../../maps/Atoll.wmf/elemental:12
-msgid "Suggested Teams: (blue, yellow) vs. (red, green)"
-msgstr "Javasolt csapatok: (kék, sárga) kontra (piros, zöld)."
 
 #: ../../maps/Calvisson.wmf/elemental:9
 msgid "Calvisson"
@@ -241,14 +158,6 @@ msgstr ""
 "Öröm ezen a gönyörű hasadékvidéken letelepedni. De csak hosszú és kanyargó "
 "utakon lehet körüljárni e nagy területet, így könnyen idegen klánok földjére "
 "tévedhet az ember."
-
-#: ../../maps/Calvisson.wmf/elemental:12
-msgid ""
-"Suggested Teams: blue vs. red | yellow vs. green | (blue, yellow) vs. (red, "
-"green) | (blue, green) vs. (red, yellow)"
-msgstr ""
-"Javasolt csapatok: kék kontra piros, sárga kontra zöld, (kék, sárga) kontra "
-"(piros, zöld), (kék, zöld) kontra (piros, sárga)."
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -301,11 +210,6 @@ msgstr "Átkelés a horizonton"
 msgid "Man your ship and sail to the horizon."
 msgstr "Legénység a fedélzetre, és irány a horizont!"
 
-#: ../../maps/Crossing the horizon.wmf/elemental:12
-#: ../../maps/Rendez-Vous.wmf/elemental:10
-msgid "Suggested Teams: all ok"
-msgstr "Javasolt csapatok: mindenhogy megfelelő."
-
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
 msgstr "Sivatagi bajnokság"
@@ -319,12 +223,6 @@ msgstr ""
 "Négy törzs küzd a legközelebbi szomszédja oldalán, hogy az elsők legyenek, "
 "akik elérik az arany hegyét, ami hihetetlen gazdagságot ígér. De vajon a két "
 "megmaradt képes bölcsen megosztani a forrásokat?"
-
-#: ../../maps/Desert Tournament.wmf/elemental:10
-#: ../../maps/Four Castles.wmf/elemental:10
-#: ../../maps/Swamp Monks.wmf/elemental:10
-msgid "Suggested Teams: (blue, red) vs. (yellow, green)"
-msgstr "Javasolt csapatok: (kék, piros) kontra (sárga, zöld)."
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
@@ -351,14 +249,6 @@ msgid ""
 msgstr ""
 "E smaragdzöld erdők lélegzetelállító bája számos törzset csábított arra, "
 "hogy megpróbálják magukévá tenni a vidéket."
-
-#: ../../maps/Elven Forests.wmf/elemental:10
-msgid ""
-"Suggested Teams: (blue, red) vs. (yellow, green) | (blue, yellow) vs. (red, "
-"green)"
-msgstr ""
-"Javasolt csapatok: (kék, piros) kontra (sárga, zöld), vagy (kék, sárga) "
-"kontra (piros, zöld)."
 
 #: ../../maps/Fellowships.wmf/elemental:9
 msgid "Fellowships"
@@ -438,14 +328,6 @@ msgstr ""
 "kaparintja meg magának kincseiket? Megjegyzések: (1) Vizet a folyó mellett "
 "találni. (2) A hóemberek további vízforrásokat jelölnek. (3) Minden hegy "
 "csak egy ásványt rejt."
-
-#: ../../maps/Four Mountains.wmf/elemental:10
-msgid ""
-"Suggested Teams: (blue, red) vs. (yellow, green) | (blue, green) vs. (red, "
-"yellow)"
-msgstr ""
-"Javasolt csapatok: (kék, piros) kontra (sárga, zöld), vagy (kék, zöld) "
-"kontra (piros, sárga)."
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -580,16 +462,6 @@ msgstr ""
 "„Az merre van?” – „Ezer mérföldre innen.” (Porgy és Bess) Hosszú, hosszú "
 "utat kell megtenned, hogy meghódítsd az összes szigetet. Sok szerencsét!"
 
-#: ../../maps/Long, long way.wmf/elemental:12
-msgid ""
-"Suggested Teams: blue vs. red | yellow vs. green | (blue, yellow) vs. (red, "
-"green) | (blue, yellow, black) vs. (red, green, orange) | (blue, yellow, "
-"black, purple) vs. (red, green, orange, white)"
-msgstr ""
-"Javasolt csapatok: kék kontra piros, sárga kontra zöld, (kék, sárga) kontra "
-"(piros, zöld), (kék, sárga, fekete) kontra (piros, zöld, narancs), (kék, "
-"sárga, fekete, lila) kontra (piros, zöld, narancs, fehér)."
-
 #: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
 msgid "Island Hopping"
 msgstr "Szigetugrás"
@@ -604,17 +476,16 @@ msgstr ""
 "melynek során két vagy több csoport igyekszik eljutni a középső szigetre, "
 "minél gyorsabban, hogy elsőként építhessen egy várat a középső hegy tetejére."
 
+#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
+msgid "Smugglers"
+msgstr ""
+
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
 msgid ""
 "Your well established smuggling routes suddenly got busy: Two other tribes "
 "have appeared and now a rivalry among smugglers has started: Which team will "
-"be the first to smuggle a certain number of wares? Teams are: Blue + Red vs. "
-"Yellow + Green."
+"be the first to smuggle a certain number of wares?"
 msgstr ""
-"Jólszervezett csempészútvonalaid hirtelen mozgalmasabbá váltak: két másik "
-"törzs jelent meg, így versengés indult a csempészek között: melyik csapat "
-"csempészik át hamarabb egy bizonyos mennyiségű árut? Csapatok: (kék, piros) "
-"kontra (sárga, zöld)."
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"
@@ -642,10 +513,6 @@ msgstr ""
 "Egy hatalmas hegyekkel zsúfolt szigeten állsz, ami csodás és gazdag kincset "
 "rejt a közepén - a zöld fennsíkot, amit nehéz meghódítani, de könnyű "
 "elveszíteni. Ha meg akarod szerezni, figyelj oda a többi klánra."
-
-#: ../../maps/Plateau.wmf/elemental:10
-msgid "Suggested Teams: blue vs. yellow"
-msgstr "Javasolt csapatok: kék kontra sárga."
 
 #: ../../maps/Rendez-Vous.wmf/elemental:7
 msgid "Rendez-Vous"
@@ -775,18 +642,6 @@ msgid ""
 msgstr ""
 "A folyó mindig biztosít élelmet és érintkezést. Ezúttal nyolc birodalom "
 "harcol a vidék uralmáért."
-
-#: ../../maps/The Nile.wmf/elemental:12
-msgid ""
-"Suggested Teams: blue vs. red | yellow vs. green | (blue, yellow) vs. (red, "
-"green) | (green, orange, white) vs. (yellow, black, purple) | (blue, orange, "
-"green) vs. (red, yellow, black) | (blue, green, orange, white) vs. (red, "
-"yellow, black, purple)"
-msgstr ""
-"Javasolt csapatok: kék kontra piros, sárga kontra zöld, (kék, sárga) kontra "
-"(piros, zöld), (zöld, narancs, fehér) kontra (sárga, fekete, lila), (kék, "
-"narancs, zöld) kontra (piros, sárga, fekete), (kék, zöld, narancs, fehér) "
-"kontra (piros, sárga, fekete, lila)."
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:7
 msgid "The Oasis Triangle"

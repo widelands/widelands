@@ -67,7 +67,7 @@ struct HelpWindow : public Window {
 	void add_picture_li(std::string text, std::string picpath);
 
 protected:
-	virtual void pressedOk();
+	virtual void pressed_ok();
 
 private:
 	enum State {
@@ -75,7 +75,7 @@ private:
 		HEADING = 1
 	} lastentry;
 
-	std::unique_ptr<Multiline_Textarea> textarea;
+	std::unique_ptr<MultilineTextarea> textarea;
 	std::string const m_h1, m_h2, m_p; // font sizes
 	std::string const m_fn; // font name
 	std::string m_text;
@@ -95,7 +95,7 @@ struct LuaTextHelpWindow : public UI::UniqueWindow {
 	~LuaTextHelpWindow();
 
 private:
-	std::unique_ptr<Multiline_Textarea> textarea;
+	std::unique_ptr<MultilineTextarea> textarea;
 };
 
 }

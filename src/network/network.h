@@ -44,8 +44,8 @@ struct SyncCallback {
  * This non-gamelogic command is used by \ref NetHost and \ref NetClient
  * to schedule taking a synchronization hash.
  */
-struct Cmd_NetCheckSync : public Widelands::Command {
-	Cmd_NetCheckSync (int32_t dt, SyncCallback *);
+struct CmdNetCheckSync : public Widelands::Command {
+	CmdNetCheckSync (int32_t dt, SyncCallback *);
 
 	void execute (Widelands::Game &) override;
 
@@ -59,7 +59,7 @@ private:
 /**
  * Keeping track of network time: This class answers the question of how
  * far the local simulation time should proceed, given the history of network
- * time messages forwarded to the \ref recv() method.
+ * time messages forwarded to the \ref receive() method.
  *
  * In general, the time progresses as fast as given by the speed, but we
  * introduce some elasticity to catch up with the network time if necessary,
@@ -75,7 +75,7 @@ public:
 	void think(uint32_t speed);
 	int32_t time() const;
 	int32_t networktime() const;
-	void recv(int32_t ntime);
+	void receive(int32_t ntime);
 
 private:
 	int32_t m_networktime;
@@ -98,7 +98,7 @@ struct SendPacket : public StreamWrite {
 	void send (TCPsocket);
 	void reset ();
 
-	void Data(void const * data, size_t size) override;
+	void data(void const * data, size_t size) override;
 
 private:
 	std::vector<uint8_t> buffer;
@@ -112,8 +112,8 @@ struct RecvPacket : public StreamRead {
 public:
 	RecvPacket(Deserializer &);
 
-	size_t Data(void * data, size_t bufsize) override;
-	bool EndOfFile() const override;
+	size_t data(void * data, size_t bufsize) override;
+	bool end_of_file() const override;
 
 private:
 	std::vector<uint8_t> buffer;

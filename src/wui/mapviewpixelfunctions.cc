@@ -128,7 +128,7 @@ uint32_t MapviewPixelFunctions::calc_pix_distance
 }
 
 
-Node_and_Triangle<> MapviewPixelFunctions::calc_node_and_triangle
+NodeAndTriangle<> MapviewPixelFunctions::calc_node_and_triangle
 	(const Map & map, uint32_t x, uint32_t y)
 {
 	const uint16_t mapwidth = map.get_width();
@@ -137,7 +137,7 @@ Node_and_Triangle<> MapviewPixelFunctions::calc_node_and_triangle
 	const uint32_t map_end_screen_y = get_map_end_screen_y(map);
 	while (x >= map_end_screen_x) x -= map_end_screen_x;
 	while (y >= map_end_screen_y) y -= map_end_screen_y;
-	Node_and_Triangle<> result;
+	NodeAndTriangle<> result;
 
 	const uint16_t col_number = x / (TRIANGLE_WIDTH / 2);
 	uint16_t row_number = y /  TRIANGLE_HEIGHT, next_row_number;

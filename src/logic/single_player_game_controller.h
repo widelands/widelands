@@ -27,19 +27,18 @@
 class SinglePlayerGameController : public GameController {
 public:
 	SinglePlayerGameController
-		(Widelands::Game &, bool useai, Widelands::Player_Number local);
+		(Widelands::Game &, bool useai, Widelands::PlayerNumber local);
 	~SinglePlayerGameController();
 
 	void think() override;
-	void sendPlayerCommand(Widelands::PlayerCommand &) override;
-	int32_t getFrametime() override;
-	std::string getGameDescription() override;
-
-	uint32_t realSpeed() override;
-	uint32_t desiredSpeed() override;
-	void setDesiredSpeed(uint32_t speed) override;
-	bool isPaused() override;
-	void setPaused(bool paused) override;
+	void send_player_command(Widelands::PlayerCommand &) override;
+	int32_t get_frametime() override;
+	GameController::GameType get_game_type() override;
+	uint32_t real_speed() override;
+	uint32_t desired_speed() override;
+	void set_desired_speed(uint32_t speed) override;
+	bool is_paused() override;
+	void set_paused(bool paused) override;
 	void report_result(uint8_t player, Widelands::PlayerEndResult result, const std::string & info) override;
 
 private:
@@ -50,8 +49,8 @@ private:
 	uint32_t m_speed; ///< current game speed, in milliseconds per second
 	bool m_paused;
 	uint32_t m_player_cmdserial;
-	Widelands::Player_Number m_local;
-	std::vector<Computer_Player *> m_computerplayers;
+	Widelands::PlayerNumber m_local;
+	std::vector<ComputerPlayer *> m_computerplayers;
 };
 
 #endif  // end of include guard: WL_LOGIC_SINGLE_PLAYER_GAME_CONTROLLER_H

@@ -36,13 +36,13 @@ namespace Widelands {
 //
 // class Cmd_Queue
 //
-Cmd_Queue::Cmd_Queue(Game & game) :
+CmdQueue::CmdQueue(Game & game) :
 	m_game(game),
 	nextserial(0),
 	m_ncmds(0),
-	m_cmds(CMD_QUEUE_BUCKET_SIZE, std::priority_queue<cmditem>()) {}
+	m_cmds(CMD_QUEUE_BUCKET_SIZE, std::priority_queue<CmdItem>()) {}
 
-Cmd_Queue::~Cmd_Queue()
+CmdQueue::~CmdQueue()
 {
 	flush();
 }
@@ -53,10 +53,10 @@ Cmd_Queue::~Cmd_Queue()
  */
 // TODO(unknown): ...but game loading while in game is not possible!
 // Note: Order of destruction of Items is not guaranteed
-void Cmd_Queue::flush() {
+void CmdQueue::flush() {
 	uint32_t cbucket = 0;
 	while (m_ncmds && cbucket < CMD_QUEUE_BUCKET_SIZE) {
-		std::priority_queue<cmditem> & current_cmds = m_cmds[cbucket];
+		std::priority_queue<CmdItem> & current_cmds = m_cmds[cbucket];
 
 		while (!current_cmds.empty()) {
 			Command * cmd = current_cmds.top().cmd;
@@ -74,9 +74,9 @@ void Cmd_Queue::flush() {
 Insert a new command into the queue; it will be executed at the given time
 ===============
 */
-void Cmd_Queue::enqueue (Command * const cmd)
+void CmdQueue::enqueue (Command * const cmd)
 {
-	cmditem ci;
+	CmdItem ci;
 
 	ci.cmd = cmd;
 	if (upcast(PlayerCommand, plcmd, cmd)) {
@@ -98,12 +98,12 @@ void Cmd_Queue::enqueue (Command * const cmd)
 	++ m_ncmds;
 }
 
-int32_t Cmd_Queue::run_queue(int32_t const interval, int32_t & game_time_var) {
+int32_t CmdQueue::run_queue(int32_t const interval, int32_t & game_time_var) {
 	int32_t const final = game_time_var + interval;
 	int32_t cnt = 0;
 
 	while (game_time_var < final) {
-		std::priority_queue<cmditem> & current_cmds = m_cmds[game_time_var % CMD_QUEUE_BUCKET_SIZE];
+		std::priority_queue<CmdItem> & current_cmds = m_cmds[game_time_var % CMD_QUEUE_BUCKET_SIZE];
 
 		while (!current_cmds.empty()) {
 			Command & c = *current_cmds.top().cmd;
@@ -117,9 +117,9 @@ int32_t Cmd_Queue::run_queue(int32_t const interval, int32_t & game_time_var) {
 			if (dynamic_cast<GameLogicCommand *>(&c)) {
 				StreamWrite & ss = m_game.syncstream();
 				static uint8_t const tag[] = {0xde, 0xad, 0x00};
-				ss.Data(tag, 3); // provide an easy-to-find pattern as debugging aid
-				ss.Unsigned32(c.duetime());
-				ss.Unsigned32(c.id());
+				ss.data(tag, 3); // provide an easy-to-find pattern as debugging aid
+				ss.unsigned_32(c.duetime());
+				ss.unsigned_32(c.id());
 			}
 
 			c.execute (m_game);
@@ -146,21 +146,21 @@ Command::~Command () {}
  *
  * \note This function must be called by deriving objects that override it.
  */
-void GameLogicCommand::Write
+void GameLogicCommand::write
 	(FileWrite & fw,
 #ifndef NDEBUG
-	 Editor_Game_Base & egbase,
+	 EditorGameBase & egbase,
 #else
-	 Editor_Game_Base &,
+	 EditorGameBase &,
 #endif
-	 MapMapObjectSaver &)
+	 MapObjectSaver &)
 {
 	// First version
-	fw.Unsigned16(BASE_CMD_VERSION);
+	fw.unsigned_16(BASE_CMD_VERSION);
 
 	// Write duetime
 	assert(egbase.get_gametime() <= duetime());
-	fw.Unsigned32(duetime());
+	fw.unsigned_32(duetime());
 }
 
 /**
@@ -168,22 +168,22 @@ void GameLogicCommand::Write
  *
  * \note This function must be called by deriving objects that override it.
  */
-void GameLogicCommand::Read
-	(FileRead & fr, Editor_Game_Base & egbase, MapMapObjectLoader &)
+void GameLogicCommand::read
+	(FileRead & fr, EditorGameBase & egbase, MapObjectLoader &)
 {
 	try {
-		uint16_t const packet_version = fr.Unsigned16();
+		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == BASE_CMD_VERSION) {
-			set_duetime(fr.Unsigned32());
+			set_duetime(fr.unsigned_32());
 			int32_t const gametime = egbase.get_gametime();
 			if (duetime() < gametime)
-				throw game_data_error
+				throw GameDataError
 					("duetime (%i) < gametime (%i)", duetime(), gametime);
 		} else
-			throw game_data_error
+			throw GameDataError
 				("unknown/unhandled version %u", packet_version);
-	} catch (const _wexception & e) {
-		throw game_data_error("game logic: %s", e.what());
+	} catch (const WException & e) {
+		throw GameDataError("game logic: %s", e.what());
 	}
 }
 

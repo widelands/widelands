@@ -24,19 +24,19 @@
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
 
-struct Editor_Interactive;
-struct Editor_Increase_Height_Tool;
+struct EditorInteractive;
+struct EditorIncreaseHeightTool;
 
-struct Editor_Tool_Change_Height_Options_Menu :
-	public Editor_Tool_Options_Menu
+struct EditorToolChangeHeightOptionsMenu :
+	public EditorToolOptionsMenu
 {
-	Editor_Tool_Change_Height_Options_Menu
-		(Editor_Interactive          &,
-		 Editor_Increase_Height_Tool &,
+	EditorToolChangeHeightOptionsMenu
+		(EditorInteractive          &,
+		 EditorIncreaseHeightTool &,
 		 UI::UniqueWindow::Registry  &);
 
 private:
-	Editor_Increase_Height_Tool & m_increase_tool;
+	EditorIncreaseHeightTool & m_increase_tool;
 	UI::Textarea                  m_change_by_label;
 	UI::Button       m_change_by_increase, m_change_by_decrease;
 	UI::Textarea                  m_change_by_value;

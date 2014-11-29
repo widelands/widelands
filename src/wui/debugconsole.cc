@@ -29,7 +29,7 @@
 namespace DebugConsole {
 
 struct Console : public ChatProvider, public Handler {
-	typedef std::map<std::string, Handler::HandlerFn> CommandMap;
+	using CommandMap = std::map<std::string, Handler::HandlerFn>;
 
 	std::vector<ChatMessage> messages;
 	CommandMap commands;
@@ -86,7 +86,7 @@ struct Console : public ChatProvider, public Handler {
 		it->second(arg);
 	}
 
-	const std::vector<ChatMessage> & getMessages() const override
+	const std::vector<ChatMessage> & get_messages() const override
 	{
 		return messages;
 	}
@@ -116,7 +116,7 @@ extern Console g_console;  // To shup up clang.
 // TODO(sirver): should instead be in a static function that returns pointer to static object
 Console g_console;
 
-ChatProvider * getChatProvider()
+ChatProvider * get_chat_provider()
 {
 	return &g_console;
 }

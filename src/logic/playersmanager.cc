@@ -30,19 +30,19 @@
 
 namespace Widelands {
 
-Players_Manager::Players_Manager(Editor_Game_Base& egbase) :
+PlayersManager::PlayersManager(EditorGameBase& egbase) :
 m_egbase(egbase),
 m_number_of_players(0)
 {
 	memset(m_players, 0, sizeof(m_players));
 }
 
-Players_Manager::~Players_Manager()
+PlayersManager::~PlayersManager()
 {
 	cleanup();
 }
 
-void Players_Manager::cleanup()
+void PlayersManager::cleanup()
 {
 	const Player * const * const players_end = m_players + MAX_PLAYERS;
 	for (Player * * p = m_players; p < players_end; ++p) {
@@ -53,7 +53,7 @@ void Players_Manager::cleanup()
 }
 
 
-void Players_Manager::remove_player(Player_Number plnum)
+void PlayersManager::remove_player(PlayerNumber plnum)
 {
 	assert(1 <= plnum);
 	assert(plnum <= MAX_PLAYERS);
@@ -62,14 +62,14 @@ void Players_Manager::remove_player(Player_Number plnum)
 	if (p) {
 		delete p;
 		p = nullptr;
-		if (plnum <= UserSettings::highestPlayernum()) {
+		if (plnum <= UserSettings::highest_playernum()) {
 			m_number_of_players--;
 		}
 	}
 }
 
-Player* Players_Manager::add_player
-	(Player_Number       const player_number,
+Player* PlayersManager::add_player
+	(PlayerNumber       const player_number,
 	 uint8_t             const initialization_index,
 	 const std::string &       tribe,
 	 const std::string &       name,
@@ -81,7 +81,7 @@ Player* Players_Manager::add_player
 	Player * & p = m_players[player_number - 1];
 	if (p) {
 		delete p;
-		if (player_number <= UserSettings::highestPlayernum()) {
+		if (player_number <= UserSettings::highest_playernum()) {
 			m_number_of_players--;
 		}
 	}
@@ -92,13 +92,13 @@ Player* Players_Manager::add_player
 		 m_egbase.manually_load_tribe(tribe),
 		 name);
 	p->set_team_number(team);
-	if (player_number <= UserSettings::highestPlayernum()) {
+	if (player_number <= UserSettings::highest_playernum()) {
 		m_number_of_players++;
 	}
 	return p;
 }
 
-void Players_Manager::add_player_end_status(const PlayerEndStatus& status)
+void PlayersManager::add_player_end_status(const PlayerEndStatus& status)
 {
 	// Ensure we don't have a status for it yet
 	std::vector<PlayerEndStatus>::iterator it;

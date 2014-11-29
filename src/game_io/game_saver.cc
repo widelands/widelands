@@ -21,58 +21,58 @@
 
 #include "base/log.h"
 #include "base/scoped_timer.h"
-#include "game_io/game_cmd_queue_data_packet.h"
-#include "game_io/game_game_class_data_packet.h"
-#include "game_io/game_interactive_player_data_packet.h"
-#include "game_io/game_map_data_packet.h"
-#include "game_io/game_player_economies_data_packet.h"
-#include "game_io/game_player_info_data_packet.h"
-#include "game_io/game_preload_data_packet.h"
+#include "game_io/game_class_packet.h"
+#include "game_io/game_cmd_queue_packet.h"
+#include "game_io/game_interactive_player_packet.h"
+#include "game_io/game_map_packet.h"
+#include "game_io/game_player_economies_packet.h"
+#include "game_io/game_player_info_packet.h"
+#include "game_io/game_preload_packet.h"
 #include "io/filesystem/filesystem.h"
 #include "logic/game.h"
 
 namespace Widelands {
 
-Game_Saver::Game_Saver(FileSystem & fs, Game & game) : m_fs(fs), m_game(game) {
+GameSaver::GameSaver(FileSystem & fs, Game & game) : m_fs(fs), m_game(game) {
 }
 
 
 /*
  * The core save function
  */
-void Game_Saver::save() {
-	ScopedTimer timer("Game_Saver::save() took %ums");
+void GameSaver::save() {
+	ScopedTimer timer("GameSaver::save() took %ums");
 
-	m_fs.EnsureDirectoryExists("binary");
+	m_fs.ensure_directory_exists("binary");
 
 	log("Game: Writing Preload Data ... ");
-	{Game_Preload_Data_Packet                    p; p.Write(m_fs, m_game, nullptr);}
+	{GamePreloadPacket                    p; p.write(m_fs, m_game, nullptr);}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing Game Class Data ... ");
-	{Game_Game_Class_Data_Packet                 p; p.Write(m_fs, m_game, nullptr);}
+	{GameClassPacket                 p; p.write(m_fs, m_game, nullptr);}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing Player Info ... ");
-	{Game_Player_Info_Data_Packet                p; p.Write(m_fs, m_game, nullptr);}
+	{GamePlayerInfoPacket                p; p.write(m_fs, m_game, nullptr);}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing Map Data!\n");
-	Game_Map_Data_Packet                         M; M.Write(m_fs, m_game, nullptr);
+	GameMapPacket                         M; M.write(m_fs, m_game, nullptr);
 	log("Game: Writing Map Data took %ums\n", timer.ms_since_last_query());
 
-	MapMapObjectSaver * const mos = M.get_map_object_saver();
+	MapObjectSaver * const mos = M.get_map_object_saver();
 
 	log("Game: Writing Player Economies Info ... ");
-	{Game_Player_Economies_Data_Packet           p; p.Write(m_fs, m_game, mos);}
+	{GamePlayerEconomiesPacket           p; p.write(m_fs, m_game, mos);}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing Command Queue Data ... ");
-	{Game_Cmd_Queue_Data_Packet                  p; p.Write(m_fs, m_game, mos);}
+	{GameCmdQueuePacket                  p; p.write(m_fs, m_game, mos);}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing Interactive Player Data ... ");
-	{Game_Interactive_Player_Data_Packet         p; p.Write(m_fs, m_game, mos);}
+	{GameInteractivePlayerPacket         p; p.write(m_fs, m_game, mos);}
 	log("took %ums\n", timer.ms_since_last_query());
 }
 

@@ -31,11 +31,11 @@ class FileWrite;
 namespace Widelands {
 
 class Economy;
-class Editor_Game_Base;
+class EditorGameBase;
 struct Flag;
 class Game;
-class MapMapObjectLoader;
-struct MapMapObjectSaver;
+class MapObjectLoader;
+struct MapObjectSaver;
 struct PlayerImmovable;
 class RequestList;
 struct Requirements;
@@ -63,14 +63,14 @@ public:
 	friend class Economy;
 	friend class RequestList;
 
-	typedef void (*callback_t)
-		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
+	using CallbackFn = void (*)
+		(Game &, Request &, WareIndex, Worker *, PlayerImmovable &);
 
-	Request(PlayerImmovable & target, Ware_Index, callback_t, WareWorker);
+	Request(PlayerImmovable & target, WareIndex, CallbackFn, WareWorker);
 	~Request();
 
 	PlayerImmovable & target() const {return m_target;}
-	Ware_Index get_index() const {return m_index;}
+	WareIndex get_index() const {return m_index;}
 	WareWorker get_type() const {return m_type;}
 	uint32_t get_count() const {return m_count;}
 	uint32_t get_open_count() const {return m_count - m_transfers.size();}
@@ -93,8 +93,8 @@ public:
 
 	void start_transfer(Game &, Supply &);
 
-	void Read (FileRead  &, Game &, MapMapObjectLoader &);
-	void Write(FileWrite &, Game &, MapMapObjectSaver  &) const;
+	void read (FileRead  &, Game &, MapObjectLoader &);
+	void write(FileWrite &, Game &, MapObjectSaver  &) const;
 	Worker * get_transfer_worker();
 
 	//  callbacks for WareInstance/Worker code
@@ -105,14 +105,14 @@ public:
 	const Requirements & get_requirements () const {return m_requirements;}
 
 private:
-	int32_t get_base_required_time(Editor_Game_Base &, uint32_t nr) const;
+	int32_t get_base_required_time(EditorGameBase &, uint32_t nr) const;
 public:
 	void cancel_transfer(uint32_t idx);
 private:
 	void remove_transfer(uint32_t idx);
 	uint32_t find_transfer(Transfer &);
 
-	typedef std::vector<Transfer *> TransferList;
+	using TransferList = std::vector<Transfer *>;
 
 	WareWorker m_type;
 
@@ -126,10 +126,10 @@ private:
 	ConstructionSite * m_target_constructionsite;
 
 	Economy         * m_economy;
-	Ware_Index        m_index;             //  the index of the ware descr
+	WareIndex        m_index;             //  the index of the ware descr
 	uint32_t          m_count;             //  how many do we need in total
 
-	callback_t        m_callbackfn;        //  called on request success
+	CallbackFn        m_callbackfn;        //  called on request success
 
 	//  when do we need the first ware (can be in the past)
 	int32_t           m_required_time;

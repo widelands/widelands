@@ -41,7 +41,7 @@
 #include "graphic/image_cache.h"
 #include "graphic/image_transformations.h"
 #include "graphic/surface.h"
-#include "graphic/surface_cache.h"
+#include "graphic/texture_cache.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/bob.h"
 #include "logic/instances.h"
@@ -58,7 +58,6 @@ namespace  {
 /// A class that makes iteration over filename_?.png templates easy.
 class NumberGlob {
 public:
-	typedef uint32_t type;
 	NumberGlob(const std::string& pictmp);
 
 	/// If there is a next filename, puts it in 's' and returns true.
@@ -174,7 +173,7 @@ NonPackedAnimation::NonPackedAnimation(const string& directory, Section& section
 	if (fps > 0)
 		frametime_ = 1000 / fps;
 
-	hotspot_ = section.get_Point("hotspot");
+	hotspot_ = section.get_point("hotspot");
 
 	//  In the filename template, the last sequence of '?' characters (if any)
 	//  is replaced with a number, for example the template "idle_??" is
@@ -194,12 +193,12 @@ NonPackedAnimation::NonPackedAnimation(const string& directory, Section& section
 	string filename_wo_ext;
 	while (glob.next(&filename_wo_ext)) {
 		const string filename = filename_wo_ext + ".png";
-		if (!g_fs->FileExists(filename))
+		if (!g_fs->file_exists(filename))
 			break;
 		image_files_.push_back(filename);
 
 		const string pc_filename = filename_wo_ext + "_pc.png";
-		if (g_fs->FileExists(pc_filename)) {
+		if (g_fs->file_exists(pc_filename)) {
 			hasplrclrs_ = true;
 			pc_mask_image_files_.push_back(pc_filename);
 		}
@@ -325,7 +324,7 @@ void NonPackedAnimation::blit
 	assert(target);
 
 	const Image& frame = get_frame(time, clr);
-	target->blit(dst, frame.surface(), srcrc);
+	target->blit(dst, frame.texture(), srcrc);
 }
 
 const Image& NonPackedAnimation::get_frame(uint32_t time, const RGBColor* playercolor) const {

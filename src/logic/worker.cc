@@ -23,6 +23,8 @@
 #include <memory>
 #include <tuple>
 
+#include <boost/format.hpp>
+
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
@@ -56,8 +58,8 @@
 #include "logic/world/resource_description.h"
 #include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
 
@@ -79,7 +81,7 @@ bool Worker::run_createware(Game & game, State & state, const Action & action)
 	}
 
 	Player & player = *get_owner();
-	Ware_Index const wareid(action.iparam1);
+	WareIndex const wareid(action.iparam1);
 	WareInstance & ware =
 		*new WareInstance(wareid, descr().tribe().get_ware_descr(wareid));
 	ware.init(game);
@@ -110,10 +112,10 @@ bool Worker::run_mine(Game & game, State & state, const Action & action)
 	Map & map = game.map();
 
 	//Make sure that the specified resource is available in this world
-	Resource_Index const res =
+	ResourceIndex const res =
 		game.world().get_resource(action.sparam1.c_str());
 	if (static_cast<int8_t>(res) == -1) //  TODO(unknown): ARGH!!
-		throw game_data_error
+		throw GameDataError
 			(_
 			 	("should mine resource %s, which does not exist in world; tribe "
 			 	 "is not compatible with world"),
@@ -215,10 +217,10 @@ bool Worker::run_breed(Game & game, State & state, const Action & action)
 	Map & map = game.map();
 
 	//Make sure that the specified resource is available in this world
-	Resource_Index const res =
+	ResourceIndex const res =
 		game.world().get_resource(action.sparam1.c_str());
 	if (static_cast<int8_t>(res) == -1) //  TODO(unknown): ARGH!!
-		throw game_data_error
+		throw GameDataError
 			(_
 			 	("should breed resource type %s, which does not exist in world; "
 			 	 "tribe is not compatible with world"),
@@ -426,7 +428,7 @@ bool Worker::run_findobject(Game & game, State & state, const Action & action)
 					else
 					{
 						Coords const coord = imm->get_position();
-						Map_Index mapidx = map.get_index(coord, map.get_width());
+						MapIndex mapidx = map.get_index(coord, map.get_width());
 						Vision const visible = owner().vision(mapidx);
 						if (!visible) {
 							list.erase(list.begin() + idx);
@@ -611,7 +613,7 @@ bool Worker::run_findspace(Game & game, State & state, const Action & action)
 bool Worker::run_walk(Game & game, State & state, const Action & action)
 {
 	BaseImmovable const * const imm = game.map()[get_position()].get_immovable();
-	Coords dest(Coords::Null());
+	Coords dest(Coords::null());
 	bool forceonlast = false;
 	int32_t max_steps = -1;
 
@@ -801,13 +803,13 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 	};
 
 	if (action.sparamv.size() != 1) {
-			throw game_data_error("plant takes only one argument.");
+			throw GameDataError("plant takes only one argument.");
 	}
 
 	std::vector<std::string> const list(split_string(action.sparamv[0], ":"));
 
 	if (list.size() != 2) {
-		throw game_data_error("plant takes either tribe:<immovable> or attrib:<attribute>");
+		throw GameDataError("plant takes either tribe:<immovable> or attrib:<attribute>");
 	}
 
 	if (list[0] == "attrib") {
@@ -931,15 +933,13 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 	{
 		// Geologist also sends a message notifying the player
 		if (rdescr->detectable() && position.field->get_resources_amount()) {
-			char message[1024];
 			// TODO(sirver): this is very wrong: It assumes a directory layout
 			// that might not be around forever.
-			snprintf(message,
-			         sizeof(message),
-			         "<rt image=world/resources/pics/%s4.png>"
-			         "<p font-size=14 font-face=DejaVuSerif>%s</p></rt>",
-			         rdescr->name().c_str(),
-			         _("A geologist found resources."));
+			const std::string message =
+					(boost::format("<rt image=world/resources/pics/%s4.png>"
+										"<p font-size=14 font-face=DejaVuSerif>%s</p></rt>")
+					 % rdescr->name().c_str()
+					 % _("A geologist found resources.")).str();
 
 			//  We should add a message to the player's message queue - but only,
 			//  if there is not already a similar one in list.
@@ -947,7 +947,7 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 				(game,
 				 *new Message
 				 	("geologist " + rdescr->name(), // e.g. "geologist gold"
-				 	 game.get_gametime(), 60 * 60 * 1000,
+					 game.get_gametime(),
 				 	 rdescr->descname(),
 				 	 message,
 				 	 position,
@@ -956,7 +956,7 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 				 300000, 8);
 		}
 
-		const Tribe_Descr & t = descr().tribe();
+		const TribeDescr & t = descr().tribe();
 		game.create_immovable
 			(position,
 			 t.get_resource_indicator
@@ -975,7 +975,7 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
  * Demand from the g_sound_handler to play a certain sound effect.
  * Whether the effect actually gets played is decided only by the sound server.
  */
-bool Worker::run_playFX(Game & game, State & state, const Action & action)
+bool Worker::run_playfx(Game & game, State & state, const Action & action)
 {
 	g_sound_handler.play_fx(action.sparam1, get_position(), action.iparam1);
 
@@ -1006,7 +1006,7 @@ bool Worker::run_construct(Game & game, State & state, const Action & /* action 
 		return true;
 	}
 
-	Ware_Index wareindex = ware->descr_index();
+	WareIndex wareindex = ware->descr_index();
 	if (!imm->construct_ware(game, wareindex)) {
 		molog("run_construct: construct_ware failed");
 		send_signal(game, "fail");
@@ -1044,7 +1044,7 @@ Worker::~Worker()
 
 
 /// Log basic information.
-void Worker::log_general_info(const Editor_Game_Base & egbase)
+void Worker::log_general_info(const EditorGameBase & egbase)
 {
 	Bob::log_general_info(egbase);
 
@@ -1082,7 +1082,7 @@ void Worker::log_general_info(const Editor_Game_Base & egbase)
  */
 void Worker::set_location(PlayerImmovable * const location)
 {
-	assert(!location || Object_Ptr(location).get(owner().egbase()));
+	assert(!location || ObjectPointer(location).get(owner().egbase()));
 
 	PlayerImmovable * const oldlocation = get_location(owner().egbase());
 	if (oldlocation == location)
@@ -1116,7 +1116,7 @@ void Worker::set_location(PlayerImmovable * const location)
 			// Interrupt whatever we've been doing.
 			set_economy(nullptr);
 
-			Editor_Game_Base & egbase = owner().egbase();
+			EditorGameBase & egbase = owner().egbase();
 			if (upcast(Game, game, &egbase)) {
 				send_signal (*game, "location");
 			}
@@ -1154,7 +1154,7 @@ void Worker::set_economy(Economy * const economy)
 /**
  * Initialize the worker
  */
-void Worker::init(Editor_Game_Base & egbase)
+void Worker::init(EditorGameBase & egbase)
 {
 	Bob::init(egbase);
 
@@ -1171,7 +1171,7 @@ void Worker::init(Editor_Game_Base & egbase)
 /**
  * Remove the worker.
  */
-void Worker::cleanup(Editor_Game_Base & egbase)
+void Worker::cleanup(EditorGameBase & egbase)
 {
 	WareInstance * const ware = get_carried_ware(egbase);
 
@@ -1205,7 +1205,7 @@ void Worker::cleanup(Editor_Game_Base & egbase)
  * fetch_carried_ware()).
  */
 void Worker::set_carried_ware
-	(Editor_Game_Base & egbase, WareInstance * const ware)
+	(EditorGameBase & egbase, WareInstance * const ware)
 {
 	if (WareInstance * const oldware = get_carried_ware(egbase)) {
 		oldware->cleanup(egbase);
@@ -1222,7 +1222,7 @@ void Worker::set_carried_ware
 /**
  * Stop carrying the current ware, and return a pointer to it.
  */
-WareInstance * Worker::fetch_carried_ware(Editor_Game_Base & game)
+WareInstance * Worker::fetch_carried_ware(EditorGameBase & game)
 {
 	WareInstance * const ware = get_carried_ware(game);
 
@@ -1241,7 +1241,7 @@ WareInstance * Worker::fetch_carried_ware(Editor_Game_Base & game)
  */
 void Worker::schedule_incorporate(Game & game)
 {
-	game.cmdqueue().enqueue (new Cmd_Incorporate(game.get_gametime(), this));
+	game.cmdqueue().enqueue (new CmdIncorporate(game.get_gametime(), this));
 	return skip_act();
 }
 
@@ -1284,7 +1284,7 @@ void Worker::create_needed_experience(Game & /* game */)
  * of the worker by one, if he reaches
  * needed_experience he levels
  */
-Ware_Index Worker::gain_experience(Game & game) {
+WareIndex Worker::gain_experience(Game & game) {
 	return descr().get_needed_experience() == -1 || ++m_current_exp < descr().get_needed_experience() ?
 	          INVALID_INDEX :
 	          level(game);
@@ -1295,7 +1295,7 @@ Ware_Index Worker::gain_experience(Game & game) {
  * Level this worker to the next higher level. this includes creating a
  * new worker with his propertys and removing this worker
  */
-Ware_Index Worker::level(Game & game) {
+WareIndex Worker::level(Game & game) {
 
 	// We do not really remove this worker, all we do
 	// is to overwrite his description with the new one and to
@@ -1304,9 +1304,9 @@ Ware_Index Worker::level(Game & game) {
 	// worker and can fullfill the same jobs (which should be given in all
 	// circumstances)
 	assert(descr().becomes());
-	const Tribe_Descr & t = descr().tribe();
-	Ware_Index const old_index = t.worker_index(descr().name());
-	Ware_Index const new_index = descr().becomes();
+	const TribeDescr & t = descr().tribe();
+	WareIndex const old_index = t.worker_index(descr().name());
+	WareIndex const new_index = descr().becomes();
 	m_descr = t.get_worker_descr(new_index);
 	assert(new_index != INVALID_INDEX);
 
@@ -1543,6 +1543,9 @@ void Worker::transfer_update(Game & game, State & /* state */) {
 				("MO(%u): [transfer]: from road to bad nextstep %u",
 				 serial(), nextstep->serial());
 	} else
+		//Scan-build reports Called C++ object pointer is null here.
+		//This is a false positive.
+		//See https://bugs.launchpad.net/widelands/+bug/1198918
 		throw wexception
 			("MO(%u): location %u has bad type",
 			 serial(), location->serial());
@@ -1836,18 +1839,17 @@ void Worker::return_update(Game & game, State & state)
 		 	 descr().get_right_walk_anims(does_carry_ware())))
 	{
 		molog("[return]: Failed to return\n");
-		char buffer[2048];
-		snprintf
-			(buffer, sizeof(buffer),
-			 _ ("Your %s can't find a way home and will likely die."),
-			 descr().descname().c_str());
+		const std::string message =
+				(boost::format(_("Your %s can't find a way home and will likely die."))
+				 % descr().descname().c_str()).str();
+
 		owner().add_message
 			(game,
 			 *new Message
 			 	("game engine",
-			 	 game.get_gametime(), Forever(),
+				 game.get_gametime(),
 			 	 _("Worker got lost!"),
-			 	 buffer,
+				 message,
 			 	 get_position()),
 				 m_serial);
 		set_location(nullptr);
@@ -2837,7 +2839,7 @@ void Worker::scout_update(Game & game, State & state)
 				const std::vector<Coords>::size_type lidx = game.logic_rand() % list.size();
 				Coords const coord = list[lidx];
 				list.erase(list.begin() + lidx);
-				Map_Index idx = map.get_index(coord, map.get_width());
+				MapIndex idx = map.get_index(coord, map.get_width());
 				Vision const visible = owner().vision(idx);
 
 				// If the field is not yet discovered, go there
@@ -2897,7 +2899,7 @@ void Worker::scout_update(Game & game, State & state)
 }
 
 void Worker::draw_inner
-	(const Editor_Game_Base& game, RenderTarget& dst, const Point& drawpos)
+	(const EditorGameBase& game, RenderTarget& dst, const Point& drawpos)
 	const
 {
 	dst.drawanim
@@ -2919,7 +2921,7 @@ void Worker::draw_inner
  * Draw the worker, taking the carried ware into account.
  */
 void Worker::draw
-	(const Editor_Game_Base & game, RenderTarget & dst, const Point& pos) const
+	(const EditorGameBase & game, RenderTarget & dst, const Point& pos) const
 {
 	if (get_current_anim())
 		draw_inner(game, dst, calc_drawpos(game, pos));
@@ -2945,19 +2947,19 @@ void Worker::Loader::load(FileRead & fr)
 {
 	Bob::Loader::load(fr);
 
-	uint8_t version = fr.Unsigned8();
+	uint8_t version = fr.unsigned_8();
 	if (!(1 <= version && version <= WORKER_SAVEGAME_VERSION))
-		throw game_data_error("unknown/unhandled version %u", version);
+		throw GameDataError("unknown/unhandled version %u", version);
 
 	Worker & worker = get<Worker>();
-	m_location = fr.Unsigned32();
-	m_carried_ware = fr.Unsigned32();
-	worker.m_current_exp = fr.Signed32();
+	m_location = fr.unsigned_32();
+	m_carried_ware = fr.unsigned_32();
+	worker.m_current_exp = fr.signed_32();
 
 	if (version >= 2) {
-		if (fr.Unsigned8()) {
+		if (fr.unsigned_8()) {
 			worker.m_transfer =
-				new Transfer(ref_cast<Game, Editor_Game_Base>(egbase()), worker);
+				new Transfer(ref_cast<Game, EditorGameBase>(egbase()), worker);
 			worker.m_transfer->read(fr, m_transfer);
 		}
 	}
@@ -3031,18 +3033,18 @@ Worker::Loader * Worker::create_loader()
  * the appropriate actual load functions are called.
  */
 MapObject::Loader * Worker::load
-	(Editor_Game_Base & egbase, MapMapObjectLoader & mol, FileRead & fr)
+	(EditorGameBase & egbase, MapObjectLoader & mol, FileRead & fr)
 {
 	try {
 		// header has already been read by caller
-		std::string tribename = fr.CString();
-		std::string name = fr.CString();
+		std::string tribename = fr.c_string();
+		std::string name = fr.c_string();
 
 		egbase.manually_load_tribe(tribename);
 
-		const Tribe_Descr * tribe = egbase.get_tribe(tribename);
+		const TribeDescr * tribe = egbase.get_tribe(tribename);
 		if (!tribe)
-			throw game_data_error("unknown tribe '%s'", tribename.c_str());
+			throw GameDataError("unknown tribe '%s'", tribename.c_str());
 
 		const WorkerDescr * descr =
 			tribe->get_worker_descr(tribe->safe_worker_index(name));
@@ -3063,11 +3065,11 @@ MapObject::Loader * Worker::load
  * \warning Do not override this function, override \ref do_save instead.
  */
 void Worker::save
-	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
+	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(HeaderWorker);
-	fw.CString(descr().tribe().name());
-	fw.CString(descr().name());
+	fw.unsigned_8(HeaderWorker);
+	fw.c_string(descr().tribe().name());
+	fw.c_string(descr().name());
 
 	do_save(egbase, mos, fw);
 }
@@ -3080,20 +3082,20 @@ void Worker::save
  * Override this function in derived classes.
  */
 void Worker::do_save
-	(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
+	(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
 	Bob::save(egbase, mos, fw);
 
-	fw.Unsigned8(WORKER_SAVEGAME_VERSION);
-	fw.Unsigned32(mos.get_object_file_index_or_zero(m_location.get(egbase)));
-	fw.Unsigned32(mos.get_object_file_index_or_zero(m_carried_ware.get(egbase)));
-	fw.Signed32(m_current_exp);
+	fw.unsigned_8(WORKER_SAVEGAME_VERSION);
+	fw.unsigned_32(mos.get_object_file_index_or_zero(m_location.get(egbase)));
+	fw.unsigned_32(mos.get_object_file_index_or_zero(m_carried_ware.get(egbase)));
+	fw.signed_32(m_current_exp);
 
 	if (m_transfer) {
-		fw.Unsigned8(1);
+		fw.unsigned_8(1);
 		m_transfer->write(mos, fw);
 	} else {
-		fw.Unsigned8(0);
+		fw.unsigned_8(0);
 	}
 }
 

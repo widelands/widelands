@@ -116,7 +116,7 @@ end
 function setup_statistics_hook()
 	if hooks == nil then hooks = {} end
 	hooks.custom_statistic = {
-      name = _ "Wares Smuggled",
+      name = _"Wares Smuggled",
       pic = "map:genstats_wares_smuggled.png",
       calculator = function(p)
          return points[p.team]

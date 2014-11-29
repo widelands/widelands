@@ -33,15 +33,15 @@ namespace Widelands {class Player;}
  * for this player for this scenario. Used to throttle AI and
  * to advance technology slowly through the missions
  */
-struct Editor_Player_Menu_Allowed_Buildings_Menu : public UI::UniqueWindow {
-	Editor_Player_Menu_Allowed_Buildings_Menu
+struct EditorPlayerMenuAllowedBuildingsMenu : public UI::UniqueWindow {
+	EditorPlayerMenuAllowedBuildingsMenu
 		(UI::Panel * parent, Widelands::Player &, UI::UniqueWindow::Registry *);
-	virtual ~Editor_Player_Menu_Allowed_Buildings_Menu();
+	virtual ~EditorPlayerMenuAllowedBuildingsMenu();
 
 private:
 	Widelands::Player & m_player;
 	UI::Textarea              m_allowed_label, m_forbidden_label;
-	UI::Listselect<Widelands::Building_Index> m_allowed, m_forbidden;
+	UI::Listselect<Widelands::BuildingIndex> m_allowed, m_forbidden;
 	UI::Button   m_forbid_button, m_allow_button;
 	void allowed_selected        (uint32_t);
 	void forbidden_selected      (uint32_t);

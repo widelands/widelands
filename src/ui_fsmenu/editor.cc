@@ -23,8 +23,8 @@
 #include "graphic/graphic.h"
 #include "wui/text_constants.h"
 
-Fullscreen_Menu_Editor::Fullscreen_Menu_Editor() :
-	Fullscreen_Menu_Base("singleplmenu.jpg"),
+FullscreenMenuEditor::FullscreenMenuEditor() :
+	FullscreenMenuBase("ui_fsmenu.jpg"),
 
 // Values for alignment and size
 	m_butw (get_w() * 7 / 20),
@@ -53,11 +53,11 @@ Fullscreen_Menu_Editor::Fullscreen_Menu_Editor() :
 		 _("Back"), std::string(), true, false)
 {
 	new_map.sigclicked.connect
-		(boost::bind(&Fullscreen_Menu_Editor::end_modal, boost::ref(*this), static_cast<int32_t>(New_Map)));
+		(boost::bind(&FullscreenMenuEditor::end_modal, boost::ref(*this), static_cast<int32_t>(New_Map)));
 	load_map.sigclicked.connect
-		(boost::bind(&Fullscreen_Menu_Editor::end_modal, boost::ref(*this), static_cast<int32_t>(Load_Map)));
+		(boost::bind(&FullscreenMenuEditor::end_modal, boost::ref(*this), static_cast<int32_t>(Load_Map)));
 	back.sigclicked.connect
-		(boost::bind(&Fullscreen_Menu_Editor::end_modal, boost::ref(*this), static_cast<int32_t>(Back)));
+		(boost::bind(&FullscreenMenuEditor::end_modal, boost::ref(*this), static_cast<int32_t>(Back)));
 
 	new_map.set_font(font_small());
 	load_map.set_font(font_small());

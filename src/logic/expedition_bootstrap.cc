@@ -26,8 +26,8 @@
 #include "io/filewrite.h"
 #include "logic/player.h"
 #include "logic/warehouse.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 #include "wui/interactive_gamebase.h"
 
 namespace Widelands {
@@ -67,7 +67,7 @@ void ExpeditionBootstrap::is_ready(Game & game) {
 }
 
 // static
-void ExpeditionBootstrap::ware_callback(Game& game, WaresQueue*, Ware_Index, void* const data)
+void ExpeditionBootstrap::ware_callback(Game& game, WaresQueue*, WareIndex, void* const data)
 {
 	ExpeditionBootstrap* eb = static_cast<ExpeditionBootstrap *>(data);
 	eb->is_ready(game);
@@ -75,7 +75,7 @@ void ExpeditionBootstrap::ware_callback(Game& game, WaresQueue*, Ware_Index, voi
 
 // static
 void ExpeditionBootstrap::worker_callback
-	(Game& game, Request& r, Ware_Index, Worker* worker, PlayerImmovable& pi) {
+	(Game& game, Request& r, WareIndex, Worker* worker, PlayerImmovable& pi) {
 	Warehouse* warehouse = static_cast<Warehouse *>(&pi);
 
 	warehouse->get_portdock()->expedition_bootstrap()->handle_worker_callback(game, r, worker);
@@ -113,7 +113,7 @@ void ExpeditionBootstrap::start() {
 	// Load the buildcosts for the port building + builder
 	Warehouse* const warehouse = portdock_->get_warehouse();
 
-	const std::map<Ware_Index, uint8_t>& buildcost = warehouse->descr().buildcost();
+	const std::map<WareIndex, uint8_t>& buildcost = warehouse->descr().buildcost();
 	size_t const buildcost_size = buildcost.size();
 
 	// Issue request for wares for this expedition.
@@ -121,7 +121,7 @@ void ExpeditionBootstrap::start() {
 	// But this is really a premature optimization and should probably be
 	// handled in the economy code.
 	wares_.resize(buildcost_size);
-	std::map<Ware_Index, uint8_t>::const_iterator it = buildcost.begin();
+	std::map<WareIndex, uint8_t>::const_iterator it = buildcost.begin();
 	for (size_t i = 0; i < buildcost_size; ++i, ++it) {
 		WaresQueue* wq = new WaresQueue(*warehouse, it->first, it->second);
 		wq->set_callback(ware_callback, this);
@@ -137,7 +137,7 @@ void ExpeditionBootstrap::start() {
 	);
 
 	// Update the user interface
-	if (upcast(Interactive_GameBase, igb, warehouse->owner().egbase().get_ibase()))
+	if (upcast(InteractiveGameBase, igb, warehouse->owner().egbase().get_ibase()))
 		warehouse->refresh_options(*igb);
 }
 
@@ -159,11 +159,11 @@ void ExpeditionBootstrap::cancel(Game& game) {
 	workers_.clear();
 
 	// Update the user interface
-	if (upcast(Interactive_GameBase, igb, warehouse->owner().egbase().get_ibase()))
+	if (upcast(InteractiveGameBase, igb, warehouse->owner().egbase().get_ibase()))
 		warehouse->refresh_options(*igb);
 }
 
-void ExpeditionBootstrap::cleanup(Editor_Game_Base& /* egbase */) {
+void ExpeditionBootstrap::cleanup(EditorGameBase& /* egbase */) {
 	// This will delete all the requests. We do nothing with the workers as we
 	// do not own them.
 	workers_.clear();
@@ -174,7 +174,7 @@ void ExpeditionBootstrap::cleanup(Editor_Game_Base& /* egbase */) {
 	wares_.clear();
 }
 
-WaresQueue& ExpeditionBootstrap::waresqueue(Ware_Index index) const {
+WaresQueue& ExpeditionBootstrap::waresqueue(WareIndex index) const {
 	for (const std::unique_ptr<WaresQueue>& wq : wares_) {
 		if (wq->get_ware() == index) {
 			return *wq.get();
@@ -216,11 +216,11 @@ void ExpeditionBootstrap::set_economy(Economy* new_economy) {
 }
 
 void ExpeditionBootstrap::get_waiting_workers_and_wares
-	(Game& game, const Tribe_Descr& tribe, std::vector<Worker*>* return_workers,
+	(Game& game, const TribeDescr& tribe, std::vector<Worker*>* return_workers,
 	 std::vector<WareInstance*>* return_wares)
 {
 	for (std::unique_ptr<WaresQueue>& wq : wares_) {
-		const Ware_Index ware_index = wq->get_ware();
+		const WareIndex ware_index = wq->get_ware();
 		for (uint32_t j = 0; j < wq->get_filled(); ++j) {
 			WareInstance* temp = new WareInstance(ware_index, tribe.get_ware_descr(ware_index));
 			temp->init(game);
@@ -240,53 +240,53 @@ void ExpeditionBootstrap::get_waiting_workers_and_wares
 	cleanup(game);
 }
 
-void ExpeditionBootstrap::save(FileWrite& fw, Game& game, MapMapObjectSaver& mos) {
+void ExpeditionBootstrap::save(FileWrite& fw, Game& game, MapObjectSaver& mos) {
 	// Expedition workers
-	fw.Unsigned8(workers_.size());
+	fw.unsigned_8(workers_.size());
 	for (std::unique_ptr<ExpeditionWorker>& ew : workers_) {
-		fw.Unsigned8(ew->request.get() != nullptr);
+		fw.unsigned_8(ew->request.get() != nullptr);
 		if (ew->request.get() != nullptr) {
-			ew->request->Write(fw, game, mos);
+			ew->request->write(fw, game, mos);
 		} else {
 			assert(mos.is_object_known(*ew->worker));
-			fw.Unsigned32(mos.get_object_file_index(*ew->worker));
+			fw.unsigned_32(mos.get_object_file_index(*ew->worker));
 		}
 	}
 
 	// Expedition WaresQueues
-	fw.Unsigned8(wares_.size());
+	fw.unsigned_8(wares_.size());
 	for (std::unique_ptr<WaresQueue>& wq : wares_) {
-		wq->Write(fw, game, mos);
+		wq->write(fw, game, mos);
 	}
 }
 
 void ExpeditionBootstrap::load
 	(uint32_t warehouse_packet_version, Warehouse& warehouse, FileRead& fr,
-	 Game& game, MapMapObjectLoader& mol)
+	 Game& game, MapObjectLoader& mol)
 {
 	assert(warehouse_packet_version >= 6);
 
 	// Expedition workers
-	const uint8_t num_workers = fr.Unsigned8();
+	const uint8_t num_workers = fr.unsigned_8();
 	for (uint8_t i = 0; i < num_workers; ++i) {
 		workers_.emplace_back(new ExpeditionWorker(nullptr));
-		if (fr.Unsigned8() == 1) {
+		if (fr.unsigned_8() == 1) {
 			Request* worker_request = new Request
 			  (warehouse, 0, ExpeditionBootstrap::worker_callback, wwWORKER);
 			workers_.back()->request.reset(worker_request);
-			worker_request->Read(fr, game, mol);
+			worker_request->read(fr, game, mol);
 			workers_.back()->worker = nullptr;
 		} else {
-			workers_.back()->worker = &mol.get<Worker>(fr.Unsigned32());
+			workers_.back()->worker = &mol.get<Worker>(fr.unsigned_32());
 		}
 	}
 
 	// Expedition WaresQueues
 	assert(wares_.empty());
-	const uint8_t num_wares = fr.Unsigned8();
+	const uint8_t num_wares = fr.unsigned_8();
 	for (uint8_t i = 0; i < num_wares; ++i) {
 		WaresQueue * wq = new WaresQueue(warehouse, INVALID_INDEX, 0);
-		wq->Read(fr, game, mol);
+		wq->read(fr, game, mol);
 		wq->set_callback(ware_callback, this);
 
 		if (wq->get_ware() == INVALID_INDEX) {

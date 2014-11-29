@@ -1,7 +1,7 @@
 wl_binary(wl_map_info
   SRCS
     map_info.cc
-  USES_SDL
+  USES_SDL2
   DEPENDS
     base_log
     graphic
@@ -76,8 +76,8 @@ wl_library(logic
     checkstep.h
     cmd_calculate_statistics.cc
     cmd_calculate_statistics.h
-    cmd_expire_message.cc
-    cmd_expire_message.h
+    cmd_delete_message.cc
+    cmd_delete_message.h
     cmd_incorporate.cc
     cmd_incorporate.h
     cmd_luacoroutine.cc
@@ -176,7 +176,7 @@ wl_library(logic
     soldier.h
     soldier_counts.h
     soldiercontrol.h
-    tattribute.h
+    training_attribute.h
     trainingsite.cc
     trainingsite.h
     tribe.cc
@@ -211,8 +211,8 @@ wl_library(logic
     world/terrain_description.h
     world/world.cc
     world/world.h
-  # TODO(sirver): Uses SDL only on WIN32 for a dirty hack.
-  USES_SDL
+  # TODO(sirver): Uses SDL2 only on WIN32 for a dirty hack.
+  USES_SDL2
   DEPENDS
     ai
     base_deprecated

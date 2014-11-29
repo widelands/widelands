@@ -2,6 +2,8 @@
 --                              Smuggling logic
 -- =======================================================================
 
+include "scripting/messages.lua"
+
 -- =================
 -- Helper functions
 -- =================
@@ -91,13 +93,13 @@ function wait_for_established_route(route_descr)
    )
    for idx,plr in ipairs(game.players) do
       if plr.number ~= receiving_wh.owner.number and plr.number ~= sending_wh.owner.number then
-         plr:send_message(_ "Game Status", non_team_message, {popup=true})
+         send_message(plr, _"Game Status", non_team_message, {popup=true})
       end
    end
-   receiving_wh.owner:send_message(_ "Game Status",
+   send_message(receiving_wh.owner, _"Game Status",
       smuggling_route_established_receiver:format(points), {popup=true, field=receiving_wh.fields[1]}
    )
-   sending_wh.owner:send_message(_ "Game Status",
+   send_message(sending_wh.owner, _"Game Status",
       smuggling_route_established_sender:format(points), {popup=true, field=sending_wh.fields[1]}
    )
 

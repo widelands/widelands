@@ -59,7 +59,7 @@ BaseListselect::BaseListselect
 	m_fontname(UI_FONT_NAME),
 	m_fontsize(UI_FONT_SIZE_SMALL)
 {
-	set_think(false);
+	set_thinks(false);
 
 	//  do not allow vertical alignment as it does not make sense
 	m_align = static_cast<Align>(align & Align_Horizontal);
@@ -98,7 +98,7 @@ BaseListselect::~BaseListselect()
  * Remove all entries from the listselect
 */
 void BaseListselect::clear() {
-	for (Entry_Record * entry : m_entry_records) {
+	for (EntryRecord * entry : m_entry_records) {
 		delete entry;
 	}
 	m_entry_records.clear();
@@ -119,18 +119,18 @@ void BaseListselect::clear() {
  *       sel    if true, directly select the new entry
 */
 void BaseListselect::add
-	(char const * const   name,
+	(const std::string& name,
 	 uint32_t             entry,
 	 const Image*   pic,
 	 bool         const   sel,
 	 const std::string  & tooltip_text)
 {
-	Entry_Record * er = new Entry_Record();
+	EntryRecord * er = new EntryRecord();
 
 	er->m_entry = entry;
 	er->pic   = pic;
 	er->use_clr = false;
-	er->name    = std::string(name);
+	er->name    = name;
 	er->tooltip = tooltip_text;
 	uint32_t entry_height = 0;
 	if (!pic) {
@@ -158,21 +158,21 @@ void BaseListselect::add
 }
 
 void BaseListselect::add_front
-	(char const * const   name,
+	(const std::string& name,
 	 const Image*   pic,
 	 bool         const   sel,
 	 const std::string  & tooltip_text)
 {
-	Entry_Record * er = new Entry_Record();
+	EntryRecord * er = new EntryRecord();
 
 	er->m_entry = 0;
-	for (Entry_Record * temp_entry : m_entry_records) {
+	for (EntryRecord * temp_entry : m_entry_records) {
 		++(temp_entry)->m_entry;
 	}
 
 	er->pic   = pic;
 	er->use_clr = false;
-	er->name    = std::string(name);
+	er->name    = name;
 	er->tooltip = tooltip_text;
 
 	uint32_t entry_height = 0;
@@ -232,8 +232,8 @@ void BaseListselect::sort(const uint32_t Begin, uint32_t End)
 		End = size();
 	for (uint32_t i = Begin; i < End; ++i)
 		for (uint32_t j = i + 1; j < End; ++j) {
-			Entry_Record * const eri = m_entry_records[i];
-			Entry_Record * const erj = m_entry_records[j];
+			EntryRecord * const eri = m_entry_records[i];
+			EntryRecord * const erj = m_entry_records[j];
 			if (strcmp(eri->name.c_str(), erj->name.c_str()) > 0) {
 				if      (m_selection == i)
 					m_selection = j;
@@ -313,7 +313,7 @@ bool BaseListselect::has_selection() const
 uint32_t BaseListselect::get_selected() const
 {
 	if (m_selection == no_selection_index())
-		throw No_Selection();
+		throw NoSelection();
 
 	return m_entry_records[m_selection]->m_entry;
 }
@@ -326,7 +326,7 @@ uint32_t BaseListselect::get_selected() const
 void BaseListselect::remove_selected()
 {
 	if (m_selection == no_selection_index())
-		throw No_Selection();
+		throw NoSelection();
 
 	remove(m_selection);
 }
@@ -363,7 +363,7 @@ void BaseListselect::draw(RenderTarget & dst)
 		if (y >= static_cast<int32_t>(get_h()))
 			break;
 
-		const Entry_Record & er = *m_entry_records[idx];
+		const EntryRecord & er = *m_entry_records[idx];
 
 		// Highlight the current selected entry
 		if (idx == m_selection) {
@@ -416,14 +416,19 @@ void BaseListselect::draw(RenderTarget & dst)
 }
 
 /**
+ * Handle mouse wheel events
+ */
+bool BaseListselect::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
+	return m_scrollbar.handle_mousewheel(which, x, y);
+}
+
+/**
  * Handle mouse presses: select the appropriate entry
  */
 bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t, int32_t y)
 {
 	switch (btn) {
-	case SDL_BUTTON_WHEELDOWN:
-	case SDL_BUTTON_WHEELUP:
-		return m_scrollbar.handle_mousepress(btn, 0, y);
+
 	case SDL_BUTTON_LEFT: {
 		int32_t const time = WLApplication::get()->get_time();
 
@@ -471,11 +476,11 @@ bool BaseListselect::handle_mousemove(uint8_t, int32_t, int32_t y, int32_t, int3
 	return true;
 }
 
-bool BaseListselect::handle_key(bool const down, SDL_keysym const code) {
+bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		uint32_t selected_idx;
 		switch (code.sym) {
-		case SDLK_KP2:
+		case SDLK_KP_2:
 			if (code.mod & KMOD_NUM)
 				break;
 			/* no break */
@@ -489,7 +494,7 @@ bool BaseListselect::handle_key(bool const down, SDL_keysym const code) {
 				m_scrollbar.set_scrollpos(m_scrollpos);
 			}
 			return true;
-		case SDLK_KP8:
+		case SDLK_KP_8:
 			if (code.mod & KMOD_NUM)
 				break;
 			/* no break */

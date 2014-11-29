@@ -45,7 +45,7 @@ struct Button;
 ///   3. uintptr_t.
 template<typename Entry> class Table {
 public:
-	struct Entry_Record {
+	struct EntryRecord {
 	};
 
 	Table
@@ -77,25 +77,25 @@ public:
 		 uint32_t End   = std::numeric_limits<uint32_t>::max());
 	void remove(uint32_t);
 
-	Entry_Record & add(void * const entry, const bool select_this = false);
+	EntryRecord & add(void * const entry, const bool select_this = false);
 
 	uint32_t size() const;
 	Entry operator[](uint32_t) const;
 	static uint32_t no_selection_index();
 	bool has_selection() const;
 	uint32_t selection_index() const;
-	Entry_Record & get_record(uint32_t) const;
-	static Entry get(const Entry_Record &);
-	Entry_Record * find(Entry) const;
+	EntryRecord & get_record(uint32_t) const;
+	static Entry get(const EntryRecord &);
+	EntryRecord * find(Entry) const;
 
 	void select(uint32_t);
 	void move_selection(int32_t offset);
-	struct No_Selection : public std::exception {
+	struct NoSelection : public std::exception {
 		char const * what() const noexcept override {
 			return "UI::Table<Entry>: No selection";
 		}
 	};
-	Entry_Record & get_selected_record() const;
+	EntryRecord & get_selected_record() const;
 	Entry get_selected() const;
 
 	///  Return the total height (text + spacing) occupied by a single line.
@@ -107,13 +107,14 @@ public:
 	void draw(RenderTarget &);
 	bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y);
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y);
-	virtual bool handle_key(bool down, SDL_keysym code);
+	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y);
+	virtual bool handle_key(bool down, SDL_Keysym code);
 };
 
 template <> class Table<void *> : public Panel {
 public:
-	struct Entry_Record {
-		Entry_Record(void * entry);
+	struct EntryRecord {
+		EntryRecord(void * entry);
 
 		void set_picture
 			(uint8_t col, const Image* pic, const std::string & = std::string());
@@ -153,7 +154,7 @@ public:
 	 *
 	 * \return \c true if the first item is strictly less than the second
 	 */
-	typedef boost::function<bool (uint32_t, uint32_t)> CompareFn;
+	using CompareFn = boost::function<bool (uint32_t, uint32_t)>;
 
 	Table
 		(Panel * parent,
@@ -187,7 +188,7 @@ public:
 	void set_font(const std::string & fontname, int32_t const fontsize) {
 		m_fontname = fontname;
 		m_fontsize = fontsize;
-		m_headerheight = fontsize * 6 / 5;
+		m_headerheight = fontsize * 8 / 5;
 	}
 
 	void sort
@@ -195,7 +196,7 @@ public:
 		 uint32_t End   = std::numeric_limits<uint32_t>::max());
 	void remove(uint32_t);
 
-	Entry_Record & add(void * entry = nullptr, bool select = false);
+	EntryRecord & add(void * entry = nullptr, bool select = false);
 
 	uint32_t size() const {return m_entry_records.size();}
 	void * operator[](uint32_t const i) const {
@@ -209,29 +210,29 @@ public:
 		return m_selection != no_selection_index();
 	}
 	uint32_t selection_index() const {return m_selection;}
-	Entry_Record & get_record(uint32_t const n) const {
+	EntryRecord & get_record(uint32_t const n) const {
 		assert(n < m_entry_records.size());
 		return *m_entry_records[n];
 	}
-	static void * get(const Entry_Record & er) {return er.entry();}
-	Entry_Record * find(const void * entry) const;
+	static void * get(const EntryRecord & er) {return er.entry();}
+	EntryRecord * find(const void * entry) const;
 
 	void select(uint32_t);
 	void move_selection(int32_t offset);
-	struct No_Selection : public std::exception {
+	struct NoSelection : public std::exception {
 		char const * what() const noexcept override {
 			return "UI::Table<void *>: No selection";
 		}
 	};
-	Entry_Record & get_selected_record() const {
+	EntryRecord & get_selected_record() const {
 		if (m_selection == no_selection_index())
-			throw No_Selection();
+			throw NoSelection();
 		assert(m_selection < m_entry_records.size());
 		return *m_entry_records.at(m_selection);
 	}
 	void remove_selected() {
 		if (m_selection == no_selection_index())
-			throw No_Selection();
+			throw NoSelection();
 		remove(m_selection);
 	}
 	void * get_selected() const {return get_selected_record().entry();}
@@ -243,7 +244,8 @@ public:
 	void draw(RenderTarget &) override;
 	bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
-	bool handle_key(bool down, SDL_keysym code) override;
+	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
+	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
 	bool default_compare_checkbox(uint32_t column, uint32_t a, uint32_t b);
@@ -251,7 +253,7 @@ private:
 	bool sort_helper(uint32_t a, uint32_t b);
 
 	struct Column;
-	typedef std::vector<Column> Columns;
+	using Columns = std::vector<Column>;
 	struct Column {
 		Button                 * btn;
 		uint32_t                              width;
@@ -277,8 +279,8 @@ private:
 	bool               m_sort_descending;
 
 	void header_button_clicked(Columns::size_type);
-	typedef std::vector<Entry_Record *> Entry_Record_vector;
-	Entry_Record_vector m_entry_records;
+	using EntryRecordVector = std::vector<EntryRecord *>;
+	EntryRecordVector m_entry_records;
 	void set_scrollpos(int32_t pos);
 };
 
@@ -287,7 +289,7 @@ template <typename Entry>
 {
 public:
 
-	typedef Table<void *> Base;
+	using Base = Table<void *>;
 	Table
 		(Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
@@ -295,7 +297,7 @@ public:
 		: Base(parent, x, y, w, h, descending)
 	{}
 
-	Entry_Record & add
+	EntryRecord & add
 		(Entry const * const entry = 0, bool const select_this = false)
 	{
 		return Base::add(const_cast<Entry *>(entry), select_this);
@@ -305,7 +307,7 @@ public:
 		return static_cast<Entry const *>(Base::operator[](i));
 	}
 
-	static Entry const * get(const Entry_Record & er) {
+	static Entry const * get(const EntryRecord & er) {
 		return static_cast<Entry const *>(er.entry());
 	}
 
@@ -316,7 +318,7 @@ public:
 
 template <typename Entry> class Table<Entry * const> : public Table<void *> {
 public:
-	typedef Table<void *> Base;
+	using Base = Table<void *>;
 	Table
 		(Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
@@ -324,7 +326,7 @@ public:
 		: Base(parent, x, y, w, h, descending)
 	{}
 
-	Entry_Record & add(Entry * const entry = 0, bool const select_this = false)
+	EntryRecord & add(Entry * const entry = 0, bool const select_this = false)
 	{
 		return Base::add(entry, select_this);
 	}
@@ -333,7 +335,7 @@ public:
 		return static_cast<Entry *>(Base::operator[](i));
 	}
 
-	static Entry * get(const Entry_Record & er) {
+	static Entry * get(const EntryRecord & er) {
 		return static_cast<Entry *>(er.entry());
 	}
 
@@ -344,7 +346,7 @@ public:
 
 template <typename Entry> class Table<const Entry &> : public Table<void *> {
 public:
-	typedef Table<void *> Base;
+	using Base = Table<void *>;
 	Table
 		(Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
@@ -352,7 +354,7 @@ public:
 		: Base(parent, x, y, w, h, descending)
 	{}
 
-	Entry_Record & add(const Entry & entry, bool const select_this = false) {
+	EntryRecord & add(const Entry & entry, bool const select_this = false) {
 		return Base::add(&const_cast<Entry &>(entry), select_this);
 	}
 
@@ -360,11 +362,11 @@ public:
 		return *static_cast<Entry const *>(Base::operator[](i));
 	}
 
-	static const Entry & get(const Entry_Record & er) {
+	static const Entry & get(const EntryRecord & er) {
 		return *static_cast<Entry const *>(er.entry());
 	}
 
-	Entry_Record * find(const Entry & entry) const {
+	EntryRecord * find(const Entry & entry) const {
 		return Base::find(&entry);
 	}
 
@@ -375,7 +377,7 @@ public:
 
 template <typename Entry> class Table<Entry &> : public Table<void *> {
 public:
-	typedef Table<void *> Base;
+	using Base = Table<void *>;
 	Table
 		(Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
@@ -383,7 +385,7 @@ public:
 		: Base(parent, x, y, w, h, descending)
 	{}
 
-	Entry_Record & add(Entry & entry, bool const select_this = false) {
+	EntryRecord & add(Entry & entry, bool const select_this = false) {
 		return Base::add(&entry, select_this);
 	}
 
@@ -391,11 +393,11 @@ public:
 		return *static_cast<Entry *>(Base::operator[](i));
 	}
 
-	static Entry & get(const Entry_Record & er) {
+	static Entry & get(const EntryRecord & er) {
 		return *static_cast<Entry *>(er.entry());
 	}
 
-	Entry_Record * find(Entry & entry) const {return Base::find(&entry);}
+	EntryRecord * find(Entry & entry) const {return Base::find(&entry);}
 
 	Entry & get_selected() const {
 		return *static_cast<Entry *>(Base::get_selected());
@@ -405,7 +407,7 @@ public:
 static_assert(sizeof(void *) == sizeof(uintptr_t), "assert(sizeof(void *) == sizeof(uintptr_t)) failed.");
 template <> class Table<uintptr_t> : public Table<void *> {
 public:
-	typedef Table<void *> Base;
+	using Base = Table<void *>;
 	Table
 		(Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
@@ -413,18 +415,18 @@ public:
 		: Base(parent, x, y, w, h, descending)
 	{}
 
-	Entry_Record & add(uintptr_t const entry, bool const select_this = false) {
+	EntryRecord & add(uintptr_t const entry, bool const select_this = false) {
 		return Base::add(reinterpret_cast<void *>(entry), select_this);
 	}
 
 	uintptr_t operator[](uint32_t const i) const {
 		return reinterpret_cast<uintptr_t>(Base::operator[](i));
 	}
-	static uintptr_t get(const Entry_Record & er) {
+	static uintptr_t get(const EntryRecord & er) {
 		return reinterpret_cast<uintptr_t>(er.entry());
 	}
 
-	Entry_Record * find(uintptr_t const entry) const {
+	EntryRecord * find(uintptr_t const entry) const {
 		return Base::find(reinterpret_cast<void const *>(entry));
 	}
 
@@ -434,7 +436,7 @@ public:
 };
 template <> class Table<uintptr_t const> : public Table<uintptr_t> {
 public:
-	typedef Table<uintptr_t> Base;
+	using Base = Table<uintptr_t>;
 	Table
 		(Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,

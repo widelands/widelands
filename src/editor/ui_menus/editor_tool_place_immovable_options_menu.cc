@@ -19,7 +19,7 @@
 
 #include "editor/ui_menus/editor_tool_place_immovable_options_menu.h"
 
-#include <SDL_keysym.h>
+#include <SDL_keycode.h>
 
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
@@ -51,14 +51,14 @@ UI::Checkbox* create_immovable_checkbox(UI::Panel* parent, const ImmovableDescr&
 
 }  // namespace
 
-Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Menu(
-   Editor_Interactive& parent,
-   Editor_Place_Immovable_Tool& tool,
+EditorToolPlaceImmovableOptionsMenu::EditorToolPlaceImmovableOptionsMenu(
+   EditorInteractive& parent,
+   EditorPlaceImmovableTool& tool,
    UI::UniqueWindow::Registry& registry)
-   : Editor_Tool_Options_Menu(parent, registry, 0, 0, _("Immovable Select")) {
+   : EditorToolOptionsMenu(parent, registry, 0, 0, _("Immovable Select")) {
 	const Widelands::World& world = parent.egbase().world();
 	multi_select_menu_.reset(
-	   new CategorizedItemSelectionMenu<Widelands::ImmovableDescr, Editor_Place_Immovable_Tool>(
+	   new CategorizedItemSelectionMenu<Widelands::ImmovableDescr, EditorPlaceImmovableTool>(
 	      this,
 	      world.editor_immovable_categories(),
 	      world.immovables(),
@@ -70,5 +70,5 @@ Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Me
 	set_center_panel(multi_select_menu_.get());
 }
 
-Editor_Tool_Place_Immovable_Options_Menu::~Editor_Tool_Place_Immovable_Options_Menu() {
+EditorToolPlaceImmovableOptionsMenu::~EditorToolPlaceImmovableOptionsMenu() {
 }

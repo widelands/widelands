@@ -50,18 +50,19 @@ struct EditBox : public Panel {
 	boost::signals2::signal<void ()> cancel;
 
 	const std::string & text() const;
-	void setText(const std::string &);
-	uint32_t maxLength() const;
-	void setMaxLength(uint32_t);
+	void set_text(const std::string &);
+	uint32_t max_length() const;
+	void set_max_length(uint32_t);
 	Align align() const;
-	void setAlign(Align);
+	void set_align(Align);
 	void set_font(const std::string & name, int32_t size, RGBColor color);
 
 	void activate_history(bool activate) {m_history_active = activate;}
 
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
-	bool handle_key(bool down, SDL_keysym) override;
+	bool handle_key(bool down, SDL_Keysym) override;
+	bool handle_textinput(const std::string& text);
 
 	void draw(RenderTarget &) override;
 
@@ -69,7 +70,6 @@ private:
 	std::unique_ptr<EditBoxImpl> m;
 
 	void check_caret();
-	void insert(SDL_keysym code);
 
 	bool        m_history_active;
 	int16_t     m_history_position;

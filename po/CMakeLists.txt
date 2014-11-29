@@ -1,17 +1,6 @@
-if (${CMAKE_BUILD_TYPE} STREQUAL Release)
-  add_custom_target (
+add_custom_target (
     lang ALL
-  )
-else (${CMAKE_BUILD_TYPE} STREQUAL Release)
-  add_custom_target (
-    lang_dummy ALL
-    COMMAND ${CMAKE_COMMAND}  -E make_directory ${CMAKE_BINARY_DIR}/locale
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-  )
-  add_custom_target (
-    lang
-  )
-endif (${CMAKE_BUILD_TYPE} STREQUAL Release)
+)
 
 macro(CreateLocale locale_name)
   set (commands "")
@@ -48,18 +37,14 @@ macro(CreateLocale locale_name)
 endmacro(CreateLocale locale_name)
 
 set (languages_found "")
-if (DEFINED WL_LINGUAS AND NOT WL_LINGUAS STREQUAL "")
-  set(languages_found ${WL_LINGUAS})
-else (DEFINED WL_LINGUAS AND NOT WL_LINGUAS STREQUAL "")
-  file (GLOB_RECURSE pofiles *.po)
-  foreach(pofile ${pofiles})
-    get_filename_component(pofile ${pofile} NAME_WE)
-    list(APPEND languages_found ${pofile})
-  endforeach(pofile ${pofiles})
+file (GLOB_RECURSE pofiles *.po)
+foreach(pofile ${pofiles})
+  get_filename_component(pofile ${pofile} NAME_WE)
+  list(APPEND languages_found ${pofile})
+endforeach(pofile ${pofiles})
 
-  list(SORT languages_found)
-  list(REMOVE_DUPLICATES languages_found)
-endif (DEFINED WL_LINGUAS AND NOT WL_LINGUAS STREQUAL "")
+list(SORT languages_found)
+list(REMOVE_DUPLICATES languages_found)
 
 foreach(language ${languages_found})
   CreateLocale(${language})

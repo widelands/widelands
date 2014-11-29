@@ -25,10 +25,10 @@
 #include "logic/widelands_geometry.h"
 
 /// Increases the resources of a node by a value.
-struct Editor_Increase_Resources_Tool : public Editor_Tool {
-	Editor_Increase_Resources_Tool(Editor_Decrease_Resources_Tool& the_decrease_tool,
-	                               Editor_Set_Resources_Tool& the_set_to_tool)
-	   : Editor_Tool(the_decrease_tool, the_set_to_tool),
+struct EditorIncreaseResourcesTool : public EditorTool {
+	EditorIncreaseResourcesTool(EditorDecreaseResourcesTool& the_decrease_tool,
+											 EditorSetResourcesTool& the_set_to_tool)
+	   : EditorTool(the_decrease_tool, the_set_to_tool),
 	     m_decrease_tool(the_decrease_tool),
 	     m_set_tool(the_set_to_tool),
 	     m_change_by(1),
@@ -37,17 +37,17 @@ struct Editor_Increase_Resources_Tool : public Editor_Tool {
 
 	int32_t handle_click_impl(Widelands::Map& map,
 	                          const Widelands::World& world,
-	                          Widelands::Node_and_Triangle<> center,
-	                          Editor_Interactive& parent,
-	                          Editor_Action_Args& args) override;
+	                          Widelands::NodeAndTriangle<> center,
+	                          EditorInteractive& parent,
+	                          EditorActionArgs& args) override;
 
 	int32_t handle_undo_impl(Widelands::Map& map,
 	                         const Widelands::World& world,
-	                         Widelands::Node_and_Triangle<> center,
-	                         Editor_Interactive& parent,
-	                         Editor_Action_Args& args) override;
+	                         Widelands::NodeAndTriangle<> center,
+	                         EditorInteractive& parent,
+	                         EditorActionArgs& args) override;
 
-	Editor_Action_Args format_args_impl(Editor_Interactive & parent) override;
+	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
 
 	char const * get_sel_impl() const override {
 		return "pics/fsel_editor_increase_resources.png";
@@ -55,24 +55,24 @@ struct Editor_Increase_Resources_Tool : public Editor_Tool {
 
 	int32_t get_change_by() const        {return m_change_by;}
 	void set_change_by(const int32_t n)  {m_change_by = n;}
-	Widelands::Resource_Index get_cur_res() const {return m_cur_res;}
-	void set_cur_res(Widelands::Resource_Index const res) {
+	Widelands::ResourceIndex get_cur_res() const {return m_cur_res;}
+	void set_cur_res(Widelands::ResourceIndex const res) {
 		m_cur_res = res;
 	}
 
-	Editor_Decrease_Resources_Tool & decrease_tool() const {
+	EditorDecreaseResourcesTool & decrease_tool() const {
 		return m_decrease_tool;
 	}
-	Editor_Set_Resources_Tool    &   set_tool() const {return m_set_tool;}
+	EditorSetResourcesTool    &   set_tool() const {return m_set_tool;}
 
 private:
-	Editor_Decrease_Resources_Tool & m_decrease_tool;
-	Editor_Set_Resources_Tool& m_set_tool;
+	EditorDecreaseResourcesTool & m_decrease_tool;
+	EditorSetResourcesTool& m_set_tool;
 	int32_t m_change_by;
-	Widelands::Resource_Index m_cur_res;
+	Widelands::ResourceIndex m_cur_res;
 };
 
-int32_t Editor_Change_Resource_Tool_Callback
+int32_t editor_change_resource_tool_callback
 	(const Widelands::TCoords<Widelands::FCoords>& c, Widelands::Map& map,
 	 const Widelands::World& world, int32_t const curres);
 

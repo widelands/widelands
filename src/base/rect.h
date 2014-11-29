@@ -22,25 +22,40 @@
 
 #include "base/point.h"
 
-struct Rect {
+template <typename T>
+struct GenericRect {
 	/// Generates a degenerate Rect at (0, 0) with no height or width.
-	Rect();
+	GenericRect() : GenericRect(T(0), T(0), T(0), T(0)) {
+	}
 
-	Rect(int32_t x, int32_t y, uint32_t width, uint32_t height);
-	Rect(const Point& p, uint32_t width, uint32_t height);
+	GenericRect(const T& gx, const T& gy, const T& W, const T& H) : x(gx), y(gy), w(W), h(H) {
+	}
+
+	template <typename PointType>
+	GenericRect(const GenericPoint<PointType>& p, const T& width, const T& height)
+	   : GenericRect(T(p.x), T(p.y), width, height) {
+	}
 
 	/// The top left point of this rectangle.
-	Point top_left() const;
+	GenericPoint<T> top_left() const {
+		return GenericPoint<T>(x, y);
+	}
 
 	/// The bottom right point of this rectangle.
-	Point bottom_right() const;
+	GenericPoint<T> bottom_right() const {
+		return GenericPoint<T>(x + w, y + h);
+	}
 
 	/// Returns true if this rectangle contains the given point.
 	/// The bottom and right borders of the rectangle are considered to be excluded.
-	bool contains(const Point& pt) const;
+	template <typename PointType> bool contains(const GenericPoint<PointType>& pt) const {
+		return T(pt.x) >= x && T(pt.x) < x + w && T(pt.y) >= y && T(pt.y) < y + h;
+	}
 
-	int32_t x, y;
-	uint32_t w, h;
+	T x, y, w, h;
 };
+
+using Rect = GenericRect<int>;
+using FloatRect = GenericRect<float>;
 
 #endif  // end of include guard: WL_BASE_RECT_H

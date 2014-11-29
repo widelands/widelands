@@ -29,13 +29,13 @@
  * Fullscreen Menu for MultiPlayer.
  * Here you select what game you want to play.
  */
-struct Fullscreen_Menu_MultiPlayer : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_MultiPlayer();
+struct FullscreenMenuMultiPlayer : public FullscreenMenuBase {
+	FullscreenMenuMultiPlayer();
 
 	enum {Back = dying_code, Metaserver, Lan};
 
-	void showInternetLogin();
-	void internetLogin();
+	void show_internet_login();
+	void internet_login();
 	std::string get_nickname() {return m_nickname;}
 	std::string get_password() {return m_password;}
 	bool registered()          {return m_register;}

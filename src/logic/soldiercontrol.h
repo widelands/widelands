@@ -42,30 +42,30 @@ struct SoldierControl {
 	/**
 	 * \return a list of soldiers that are currently present in the building.
 	 */
-	virtual std::vector<Soldier *> presentSoldiers() const = 0;
+	virtual std::vector<Soldier *> present_soldiers() const = 0;
 
 	/**
 	 * \return a list of soldiers that are currently stationed in the building.
 	 */
-	virtual std::vector<Soldier *> stationedSoldiers() const = 0;
+	virtual std::vector<Soldier *> stationed_soldiers() const = 0;
 
 	/**
 	 * \return the minimum number of soldiers that this building can be
 	 * configured to hold.
 	 */
-	virtual uint32_t minSoldierCapacity() const = 0;
+	virtual uint32_t min_soldier_capacity() const = 0;
 
 	/**
 	 * \return the maximum number of soldiers that this building can be
 	 * configured to hold.
 	 */
-	virtual uint32_t maxSoldierCapacity() const = 0;
+	virtual uint32_t max_soldier_capacity() const = 0;
 
 	/**
 	 * \return the number of soldiers this building is configured to hold
 	 * right now.
 	 */
-	virtual uint32_t soldierCapacity() const = 0;
+	virtual uint32_t soldier_capacity() const = 0;
 
 	/**
 	 * Sets the capacity for soldiers of this building.
@@ -73,19 +73,19 @@ struct SoldierControl {
 	 * New soldiers will be requested and old soldiers will be evicted
 	 * as necessary.
 	 */
-	virtual void setSoldierCapacity(uint32_t capacity) = 0;
+	virtual void set_soldier_capacity(uint32_t capacity) = 0;
 
 	void changeSoldierCapacity(int32_t const difference) {
-		uint32_t const old_capacity = soldierCapacity();
+		uint32_t const old_capacity = soldier_capacity();
 		uint32_t const new_capacity =
 			std::min
 				(static_cast<uint32_t>
 				 	(std::max
 				 	 	(static_cast<int32_t>(old_capacity) + difference,
-				 	 	 static_cast<int32_t>(minSoldierCapacity()))),
-				 maxSoldierCapacity());
+				 	 	 static_cast<int32_t>(min_soldier_capacity()))),
+				 max_soldier_capacity());
 		if (old_capacity != new_capacity)
-			setSoldierCapacity(new_capacity);
+			set_soldier_capacity(new_capacity);
 	}
 
 	/**
@@ -95,20 +95,20 @@ struct SoldierControl {
 	 * \note This has no effect if the soldier is currently involved in a battle
 	 * or otherwise blocked from leaving the building.
 	 */
-	virtual void dropSoldier(Soldier &) = 0;
+	virtual void drop_soldier(Soldier &) = 0;
 
 	/**
 	 * Add a new soldier into this site. Returns -1 if there is no space
 	 * for him, 0 on success
 	 */
-	virtual int incorporateSoldier(Editor_Game_Base &, Soldier &) = 0;
+	virtual int incorporate_soldier(EditorGameBase &, Soldier &) = 0;
 
 	/**
 	 * Remove a soldier from the internal list. Most SoldierControls will be
 	 * informed by the soldier when it is removed, but WareHouses for example
 	 * will not.
 	 */
-	virtual int outcorporateSoldier(Editor_Game_Base &, Soldier &) {return 0;}
+	virtual int outcorporate_soldier(EditorGameBase &, Soldier &) {return 0;}
 
 protected:
 	virtual ~SoldierControl() {}

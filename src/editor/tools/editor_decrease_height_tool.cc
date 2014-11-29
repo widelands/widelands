@@ -27,11 +27,11 @@
 #include "logic/mapregion.h"
 
 /// Decreases the heights by a value. Chages surrounding nodes if necessary.
-int32_t Editor_Decrease_Height_Tool::handle_click_impl(Widelands::Map& map,
+int32_t EditorDecreaseHeightTool::handle_click_impl(Widelands::Map& map,
                                                        const Widelands::World& world,
-                                                       Widelands::Node_and_Triangle<> center,
-                                                       Editor_Interactive& /* parent */,
-                                                       Editor_Action_Args& args) {
+                                                       Widelands::NodeAndTriangle<> center,
+                                                       EditorInteractive& /* parent */,
+                                                       EditorActionArgs& args) {
 	if (args.origHights.empty()) {
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,
@@ -47,12 +47,12 @@ int32_t Editor_Decrease_Height_Tool::handle_click_impl(Widelands::Map& map,
 	   -args.change_by);
 }
 
-int32_t Editor_Decrease_Height_Tool::handle_undo_impl
+int32_t EditorDecreaseHeightTool::handle_undo_impl
 	(Widelands::Map & map,
 	 const Widelands::World& world,
-	Widelands::Node_and_Triangle<> center,
-	Editor_Interactive & /* parent */,
-	Editor_Action_Args & args)
+	Widelands::NodeAndTriangle<> center,
+	EditorInteractive & /* parent */,
+	EditorActionArgs & args)
 {
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 	(map,
@@ -72,9 +72,9 @@ int32_t Editor_Decrease_Height_Tool::handle_undo_impl
 	return mr.radius() + 1;
 }
 
-Editor_Action_Args Editor_Decrease_Height_Tool::format_args_impl(Editor_Interactive & parent)
+EditorActionArgs EditorDecreaseHeightTool::format_args_impl(EditorInteractive & parent)
 {
-	Editor_Action_Args a(parent);
+	EditorActionArgs a(parent);
 	a.change_by = m_change_by;
 	return a;
 }

@@ -26,7 +26,7 @@
 #include <png.h>
 
 #include "base/wexception.h"
-#include "graphic/surface.h"
+#include "graphic/texture.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
@@ -35,36 +35,36 @@ namespace {
 
 // A helper function for save_surface_to_png. Writes the compressed data to
 // the StreamWrite.
-void png_write_function(png_structp png_ptr, png_bytep data, png_size_t length) {
-	static_cast<StreamWrite*>(png_get_io_ptr(png_ptr))->Data(data, length);
+void png_write_function(png_structp png_ptr, png_bytep png_data, png_size_t length) {
+	static_cast<StreamWrite*>(png_get_io_ptr(png_ptr))->data(png_data, length);
 }
 
 // A helper function for save_surface_to_png.
 // Flush function to avoid crashes with default libpng flush function
 void png_flush_function(png_structp png_ptr) {
-	static_cast<StreamWrite*>(png_get_io_ptr(png_ptr))->Flush();
+	static_cast<StreamWrite*>(png_get_io_ptr(png_ptr))->flush();
 }
 
 }  // namespace
 
-Surface* load_image(const std::string& fname, FileSystem* fs) {
-	return Surface::create(load_image_as_sdl_surface(fname, fs));
+Texture* load_image(const std::string& fname, FileSystem* fs) {
+	return new Texture(load_image_as_sdl_surface(fname, fs));
 }
 
 SDL_Surface* load_image_as_sdl_surface(const std::string& fname, FileSystem* fs) {
 	FileRead fr;
 	bool found;
 	if (fs) {
-		found = fr.TryOpen(*fs, fname);
+		found = fr.try_open(*fs, fname);
 	} else {
-		found = fr.TryOpen(*g_fs, fname);
+		found = fr.try_open(*g_fs, fname);
 	}
 
 	if (!found) {
 		throw ImageNotFound(fname);
 	}
 
-	SDL_Surface* sdlsurf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
+	SDL_Surface* sdlsurf = IMG_Load_RW(SDL_RWFromMem(fr.data(0), fr.get_size()), 1);
 	if (!sdlsurf) {
 		throw ImageLoadingError(fname.c_str(), IMG_GetError());
 	}
@@ -104,7 +104,7 @@ bool save_surface_to_png(Surface* surface, StreamWrite* sw) {
 	             surface->width(),
 	             surface->height(),
 	             8,
-	             PNG_COLOR_TYPE_RGB_ALPHA,
+	             PNG_COLOR_TYPE_RGB,
 	             PNG_INTERLACE_NONE,
 	             PNG_COMPRESSION_TYPE_DEFAULT,
 	             PNG_FILTER_TYPE_DEFAULT);
@@ -114,7 +114,7 @@ bool save_surface_to_png(Surface* surface, StreamWrite* sw) {
 	{
 		const uint16_t surf_w = surface->width();
 		const uint16_t surf_h = surface->height();
-		const uint32_t row_size = 4 * surf_w;
+		const uint32_t row_size = 3 * surf_w;
 
 		std::unique_ptr<png_byte[]> row(new png_byte[row_size]);
 
@@ -127,10 +127,9 @@ bool save_surface_to_png(Surface* surface, StreamWrite* sw) {
 			for (uint32_t x = 0; x < surf_w; ++x) {
 				RGBAColor color;
 				color.set(fmt, surface->get_pixel(x, y));
-				row[4 * x] = color.r;
-				row[4 * x + 1] = color.g;
-				row[4 * x + 2] = color.b;
-				row[4 * x + 3] = color.a;
+				row[3 * x] = color.r;
+				row[3 * x + 1] = color.g;
+				row[3 * x + 2] = color.b;
 			}
 
 			png_write_row(png_ptr, row.get());

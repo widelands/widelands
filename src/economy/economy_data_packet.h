@@ -26,15 +26,15 @@ class FileWrite;
 namespace Widelands {
 class Economy;
 class Game;
-class MapMapObjectLoader;
-struct MapMapObjectSaver;
+class MapObjectLoader;
+struct MapObjectSaver;
 
 class EconomyDataPacket {
 	public:
 		EconomyDataPacket(Economy * e) : m_eco(e) {}
 
-		void Read(FileRead &);
-		void Write(FileWrite &);
+		void read(FileRead &);
+		void write(FileWrite &);
 
 	private:
 		Economy * m_eco;

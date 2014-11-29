@@ -7,7 +7,6 @@ enhanced_building=yes
 enhancement=warmill
 
 [aihints]
-build_material=false
 
 [enhancement_cost]
 log=1

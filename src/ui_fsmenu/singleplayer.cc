@@ -23,8 +23,8 @@
 #include "graphic/graphic.h"
 #include "wui/text_constants.h"
 
-Fullscreen_Menu_SinglePlayer::Fullscreen_Menu_SinglePlayer() :
-Fullscreen_Menu_Base("singleplmenu.jpg"),
+FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer() :
+FullscreenMenuBase("ui_fsmenu.jpg"),
 
 // Values for alignment and size
 	m_butw (get_w() * 7 / 20),
@@ -63,21 +63,21 @@ Fullscreen_Menu_Base("singleplmenu.jpg"),
 {
 	new_game.sigclicked.connect
 		(boost::bind
-			(&Fullscreen_Menu_SinglePlayer::end_modal,
+			(&FullscreenMenuSinglePlayer::end_modal,
 			 boost::ref(*this),
 			 static_cast<int32_t>(New_Game)));
 	campaign.sigclicked.connect
 		(boost::bind
-			(&Fullscreen_Menu_SinglePlayer::end_modal,
+			(&FullscreenMenuSinglePlayer::end_modal,
 			 boost::ref(*this),
 			 static_cast<int32_t>(Campaign)));
 	load_game.sigclicked.connect
 		(boost::bind
-			(&Fullscreen_Menu_SinglePlayer::end_modal,
+			(&FullscreenMenuSinglePlayer::end_modal,
 			 boost::ref(*this),
 			 static_cast<int32_t>(Load_Game)));
 	back.sigclicked.connect
-		(boost::bind(&Fullscreen_Menu_SinglePlayer::end_modal, boost::ref(*this), static_cast<int32_t>(Back)));
+		(boost::bind(&FullscreenMenuSinglePlayer::end_modal, boost::ref(*this), static_cast<int32_t>(Back)));
 
 	back.set_font(font_small());
 	new_game.set_font(font_small());

@@ -30,7 +30,7 @@ struct RNG;
 namespace Widelands {
 
 class Map;
-class Editor_Game_Base;
+class EditorGameBase;
 
 /**
  * This helper class repesents the complete map initialization
@@ -43,7 +43,7 @@ class Editor_Game_Base;
  */
 struct UniqueRandomMapInfo {
 
-	enum Resource_Amount
+	enum ResourceAmount
 	{
 		raLow    = 0,
 		raMedium = 1,
@@ -53,25 +53,25 @@ struct UniqueRandomMapInfo {
 	uint32_t mapNumber;
 	uint32_t w;
 	uint32_t h;
-	Resource_Amount resource_amount;
+	ResourceAmount resource_amount;
 	std::string world_name;
 
 	double        waterRatio;     //  How much of the map is water?
 	double        landRatio;      //  How much of the map is land?
 	double        wastelandRatio; //  How much of the "land" is wasteland?
-	Player_Number numPlayers;     //  number of player to generate
+	PlayerNumber numPlayers;     //  number of player to generate
 	bool          islandMode;     //  whether the world will be an island
 
 	//  other stuff
-	static bool setFromIdString
+	static bool set_from_id_string
 		(UniqueRandomMapInfo & mapInfo_out, const std::string & mapIdString);
-	static void generateIdString
+	static void generate_id_string
 		(std::string & mapIdsString_out, const UniqueRandomMapInfo & mapInfo);
 
 private:
-	static int  mapIdCharToNumber(char);
-	static char mapIdNumberToChar(int32_t);
-	static uint16_t generateWorldNameHash(const std::string &);
+	static int  map_id_char_to_number(char);
+	static char map_id_number_to_char(int32_t);
+	static uint16_t generate_world_name_hash(const std::string &);
 };
 
 
@@ -79,7 +79,7 @@ struct MapGenerator {
 
 	MapGenerator
 		(Map & map, const UniqueRandomMapInfo & mapInfo,
-		 Editor_Game_Base & egbase);
+		 EditorGameBase & egbase);
 
 	void create_random_map();
 
@@ -104,7 +104,7 @@ private:
 	static uint32_t * generate_random_value_map
 		(uint32_t w, uint32_t h, RNG & rng);
 
-	Terrain_Index figure_out_terrain
+	TerrainIndex figure_out_terrain
 		(uint32_t                  * const random2,
 		 uint32_t                  * const random3,
 		 uint32_t                  * const random4,
@@ -116,7 +116,7 @@ private:
 	std::unique_ptr<const MapGenInfo> map_gen_info_;
 	Map& map_;
 	const UniqueRandomMapInfo& map_info_;
-	Editor_Game_Base& egbase_;
+	EditorGameBase& egbase_;
 };
 
 }

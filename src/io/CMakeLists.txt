@@ -7,7 +7,7 @@ wl_library(io_stream
     streamread.h
     streamwrite.cc
     streamwrite.h
-  USES_SDL
+  USES_SDL2
   DEPENDS
     base_exceptions
     base_macros

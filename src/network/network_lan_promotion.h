@@ -34,7 +34,7 @@
 #define LAN_GAME_CLOSED                0
 #define LAN_GAME_OPEN                  1
 
-struct Net_Game_Info {
+struct NetGameInfo {
 	char          magic       [6];
 	uint8_t version;
 	uint8_t state;
@@ -44,22 +44,22 @@ struct Net_Game_Info {
 	char          map        [32];
 };
 
-struct Net_Open_Game {
+struct NetOpenGame {
 	in_addr_t     address;
 	in_port_t     port;
-	Net_Game_Info info;
+	NetGameInfo info;
 };
 
-struct LAN_Base {
+struct LanBase {
 protected:
-	LAN_Base ();
-	~LAN_Base ();
+	LanBase ();
+	~LanBase ();
 
 	void bind (uint16_t);
 
 	bool avail ();
 
-	ssize_t recv (void *, size_t, sockaddr_in *);
+	ssize_t receive (void *, size_t, sockaddr_in *);
 
 	void send (void const *, size_t, sockaddr_in const *);
 	void broadcast (void const *, size_t, uint16_t);
@@ -70,37 +70,37 @@ private:
 	std::list<in_addr_t> broadcast_addresses;
 };
 
-struct LAN_Game_Promoter : public LAN_Base {
-	LAN_Game_Promoter ();
-	~LAN_Game_Promoter ();
+struct LanGamePromoter : public LanBase {
+	LanGamePromoter ();
+	~LanGamePromoter ();
 
 	void run ();
 
 	void set_map (char const *);
 
 private:
-	Net_Game_Info gameinfo;
+	NetGameInfo gameinfo;
 	bool          needupdate;
 };
 
-struct LAN_Game_Finder:LAN_Base {
+struct LanGameFinder:LanBase {
 	enum {
 		GameOpened,
 		GameClosed,
 		GameUpdated
 	};
 
-	LAN_Game_Finder ();
+	LanGameFinder ();
 
 	void reset ();
 	void run ();
 
-	void set_callback (void(*)(int32_t, Net_Open_Game const *, void *), void *);
+	void set_callback (void(*)(int32_t, NetOpenGame const *, void *), void *);
 
 private:
-	std::list<Net_Open_Game *> opengames;
+	std::list<NetOpenGame *> opengames;
 
-	void (*callback) (int32_t, Net_Open_Game const *, void *);
+	void (*callback) (int32_t, NetOpenGame const *, void *);
 	void                     * userdata;
 };
 

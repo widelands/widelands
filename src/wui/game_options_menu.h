@@ -22,19 +22,21 @@
 
 #include "wui/interactive_gamebase.h"
 #include "ui_basic/button.h"
+#include "ui_basic/messagebox.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
+
 
 // The GameOptionsMenu is a rather dumb window with lots of buttons
 struct GameOptionsMenu : public UI::UniqueWindow {
 	GameOptionsMenu
-		(Interactive_GameBase &,
+		(InteractiveGameBase &,
 		 UI::UniqueWindow::Registry &,
-		 Interactive_GameBase::Game_Main_Menu_Windows &);
+		 InteractiveGameBase::GameMainMenuWindows &);
 
 private:
-	Interactive_GameBase                         & m_gb;
-	Interactive_GameBase::Game_Main_Menu_Windows & m_windows;
+	InteractiveGameBase                         & m_gb;
+	InteractiveGameBase::GameMainMenuWindows & m_windows;
 	UI::Button readme;
 	UI::Button license;
 	UI::Button authors;

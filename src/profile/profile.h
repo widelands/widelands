@@ -76,12 +76,12 @@ public:
 		bool get_bool() const;
 		char const * get_string() const {return m_value;}
 		char       * get_string()       {return m_value;}
-		Point  get_Point () const;
+		Point  get_point () const;
 
 		void set_string(char const *);
 	};
 
-	typedef std::vector<Value> Value_list;
+	using ValueList = std::vector<Value>;
 
 	Section(Profile *, char const * name);
 	Section(const Section &);
@@ -119,7 +119,7 @@ public:
 	const char *             get_string
 		(char             const * name,
 		 char             const * def = nullptr);
-	Point                    get_Point
+	Point                    get_point
 		(char             const * name,
 		 Point                    def = Point (0, 0));
 
@@ -170,7 +170,7 @@ private:
 	Profile  * m_profile;
 	bool       m_used;
 	std::string m_section_name;
-	Value_list m_values;
+	ValueList m_values;
 };
 
 /**
@@ -233,8 +233,8 @@ public:
 
 private:
 	std::string m_filename;
-	typedef std::vector<Section> Section_list;
-	Section_list m_sections;
+	using SectionList = std::vector<Section>;
+	SectionList m_sections;
 	int32_t m_error_level;
 
 	DISALLOW_COPY_AND_ASSIGN(Profile);

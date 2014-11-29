@@ -28,7 +28,7 @@
 #include "base/macros.h"
 #include "graphic/image.h"
 
-class SurfaceCache;
+class TextureCache;
 
 // For historic reasons, most part of the Widelands code base expect that an
 // Image stays valid for the whole duration of the program run. This class is
@@ -40,7 +40,7 @@ class SurfaceCache;
 class ImageCache {
 public:
 	// Does not take ownership.
-	ImageCache(SurfaceCache* surface_cache);
+	ImageCache(TextureCache* texture_cache);
 	~ImageCache();
 
 	// Insert the given Image into the cache. The hash is defined by Image's hash()
@@ -57,10 +57,10 @@ public:
 	bool has(const std::string& hash) const;
 
 private:
-	typedef std::map<std::string, const Image*> ImageMap;
+	using ImageMap = std::map<std::string, const Image*>;
 
 	ImageMap images_;  /// hash of cached filename/image pairs
-	SurfaceCache* const surface_cache_;  // Not owned.
+	TextureCache* const texture_cache_;  // Not owned.
 
 	DISALLOW_COPY_AND_ASSIGN(ImageCache);
 };

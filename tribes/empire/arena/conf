@@ -19,7 +19,7 @@ marblecolumn=1
 
 
 [working positions]
-carrier=1
+trainer=1
 
 [soldier evade]
 min_level=0

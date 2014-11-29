@@ -5,7 +5,7 @@ output=chain_armor
 output=plate_armor
 
 [aihints]
-build_material=false
+prohibited_till=900
 
 [buildcost]
 log=2

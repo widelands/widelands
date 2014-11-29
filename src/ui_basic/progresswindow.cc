@@ -93,7 +93,7 @@ void ProgressWindow::draw_background
 /// Set a picture to render in the background
 void ProgressWindow::set_background(const std::string & file_name) {
 	RenderTarget & rt = *g_gr->get_render_target();
-	if (!file_name.empty() && g_fs->FileExists(file_name)) {
+	if (!file_name.empty() && g_fs->file_exists(file_name)) {
 		m_background = file_name;
 	} else {
 		m_background = "pics/progress.png";
@@ -117,7 +117,7 @@ void ProgressWindow::step(const std::string & description) {
 	UI::TextStyle ts(UI::TextStyle::ui_small());
 	ts.fg = PROGRESS_FONT_COLOR_FG;
 	UI::g_fh->draw_text(rt, ts, m_label_center, description, Align_Center);
-	g_gr->update_rectangle(m_label_rectangle);
+	g_gr->update();
 
 #ifdef _WIN32
 		// Pump events to prevent "not responding" on windows
@@ -131,7 +131,7 @@ void ProgressWindow::update(bool const repaint) {
 	for (IProgressVisualization * visualization : m_visualizations) {
 		visualization->update(repaint); //  let visualizations do their work
 	}
-	g_gr->refresh(false);
+	g_gr->refresh();
 }
 
 /**

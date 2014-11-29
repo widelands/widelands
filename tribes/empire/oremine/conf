@@ -3,9 +3,9 @@ output=iron_ore
 enhancement=deep_oremine
 
 [aihints]
-build_material=false
 mines=iron
 mines_percent=50
+prohibited_till=900
 
 [buildcost]
 log=4

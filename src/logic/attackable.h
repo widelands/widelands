@@ -50,7 +50,7 @@ struct Attackable {
 	 * This should only return false for military sites that have not
 	 * been occupied yet.
 	 */
-	virtual bool canAttack() = 0;
+	virtual bool can_attack() = 0;
 
 	/**
 	 * Called by an enemy soldier that enters a node with distance

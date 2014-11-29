@@ -23,8 +23,8 @@
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 
 /*
 ==============================================================================
@@ -54,7 +54,7 @@ void Route::init(int32_t totalcost)
  * Every route has at least one flag.
 */
 Flag & Route::get_flag
-	(Editor_Game_Base & egbase, std::vector<Flag *>::size_type const idx)
+	(EditorGameBase & egbase, std::vector<Flag *>::size_type const idx)
 {
 	assert(idx < m_route.size());
 	return *m_route[idx].get(egbase);
@@ -63,7 +63,7 @@ Flag & Route::get_flag
 /**
  * Remove the first count steps from the route.
 */
-void Route::starttrim(int32_t count)
+void Route::trim_start(int32_t count)
 {
 	assert(count < static_cast<int32_t>(m_route.size()));
 
@@ -91,10 +91,10 @@ void Route::load(LoadData & data, FileRead & fr)
 {
 	m_route.clear();
 
-	m_totalcost = fr.Signed32();
-	uint32_t nsteps = fr.Unsigned16();
+	m_totalcost = fr.signed_32();
+	uint32_t nsteps = fr.unsigned_16();
 	for (uint32_t step = 0; step < nsteps; ++step)
-		data.flags.push_back(fr.Unsigned32());
+		data.flags.push_back(fr.unsigned_32());
 }
 
 
@@ -102,12 +102,12 @@ void Route::load(LoadData & data, FileRead & fr)
  * load_pointers phase of loading: This is responsible for filling
  * in the \ref Flag pointers. Must be called after \ref load.
  */
-void Route::load_pointers(const LoadData & data, MapMapObjectLoader & mol) {
+void Route::load_pointers(const LoadData & data, MapObjectLoader & mol) {
 	for (uint32_t i = 0; i < data.flags.size(); ++i) {
 		uint32_t const flag_serial = data.flags.size();
 		try {
 			m_route.push_back(&mol.get<Flag>(flag_serial));
-		} catch (const _wexception & e) {
+		} catch (const WException & e) {
 			throw wexception("Route flag #%u (%u): %s", i, flag_serial, e.what());
 		}
 	}
@@ -118,18 +118,18 @@ void Route::load_pointers(const LoadData & data, MapMapObjectLoader & mol) {
  * Save the route to the given file.
  */
 void Route::save
-	(FileWrite & fw, Editor_Game_Base & egbase, MapMapObjectSaver & mos)
+	(FileWrite & fw, EditorGameBase & egbase, MapObjectSaver & mos)
 {
-	fw.Signed32(get_totalcost());
-	fw.Unsigned16(m_route.size());
+	fw.signed_32(get_totalcost());
+	fw.unsigned_16(m_route.size());
 	for
-		(std::vector<Object_Ptr>::size_type idx = 0;
+		(std::vector<ObjectPointer>::size_type idx = 0;
 		 idx < m_route.size();
 		 ++idx)
 	{
 		Flag & flag = get_flag(egbase, idx);
 		assert(mos.is_object_known(flag));
-		fw.Unsigned32(mos.get_object_file_index(flag));
+		fw.unsigned_32(mos.get_object_file_index(flag));
 	}
 }
 

@@ -31,15 +31,14 @@
 namespace Widelands {
 
 //  Type definitions for the game logic.
+using TribeIndex = uint8_t;
 
-typedef uint8_t Tribe_Index;
+using MilitaryInfluence = uint16_t;
 
-typedef uint16_t Military_Influence;
-
-typedef uint8_t  Player_Number; /// 5 bits used, so 0 .. 31
-inline Player_Number Neutral() {return 0;}
+using PlayerNumber = uint8_t; /// 5 bits used, so 0 .. 31
+inline PlayerNumber neutral() {return 0;}
 #define iterate_player_numbers(p, nr_players) \
-   for (Widelands::Player_Number p = 1; p < nr_players + 1; ++p)
+	for (Widelands::PlayerNumber p = 1; p < nr_players + 1; ++p)
 
 /**
  * Every player has a team number. Team number 0 is special,
@@ -47,37 +46,37 @@ inline Player_Number Neutral() {return 0;}
  *
  * Players having the same positive team number are allied.
  */
-typedef uint8_t TeamNumber;
+using TeamNumber = uint8_t;
 
-typedef uint8_t  Terrain_Index;
-typedef uint8_t  Resource_Index;  /// 4 bits used, so 0 .. 15.
-typedef uint8_t  Resource_Amount; /// 4 bits used, so 0 .. 15.
+using TerrainIndex = uint8_t;
+using ResourceIndex = uint8_t;  /// 4 bits used, so 0 .. 15.
+using ResourceAmount = uint8_t; /// 4 bits used, so 0 .. 15.
 
-typedef uint16_t Vision;
+using Vision = uint16_t;
 
-typedef int32_t Time; // TODO(unknown): should be unsigned
-inline Time Never() {return 0xffffffff;}
+using Time = int32_t; // TODO(unknown): should be unsigned
+inline Time never() {return 0xffffffff;}
 
-typedef uint32_t Duration;
-inline Duration Forever() {return 0xffffffff;}
+using Duration = uint32_t;
+inline Duration endless() {return 0xffffffff;}
 
-typedef uint32_t Serial; /// Serial number for MapObject.
+using Serial = uint32_t; /// Serial number for MapObject.
 
 constexpr uint8_t INVALID_INDEX = std::numeric_limits<uint8_t>::max();
-typedef uint8_t Ware_Index;
-typedef uint8_t Building_Index;
-typedef uint8_t Direction;
+using WareIndex = uint8_t;
+using BuildingIndex = uint8_t;
+using Direction = uint8_t;
 
-struct Soldier_Strength {
+struct SoldierStrength {
 	uint8_t hp, attack, defense, evade;
-	bool operator== (const Soldier_Strength & other) const {
+	bool operator== (const SoldierStrength & other) const {
 		return
 			hp      == other.hp      &&
 			attack  == other.attack  &&
 			defense == other.defense &&
 			evade   == other.evade;
 	}
-	bool operator<  (const Soldier_Strength & other) const {
+	bool operator<  (const SoldierStrength & other) const {
 		return
 			hp      <  other.hp ||
 			(hp      == other.hp &&

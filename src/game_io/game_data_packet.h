@@ -27,8 +27,8 @@ class FileSystem;
 namespace Widelands {
 
 class Game;
-class MapMapObjectLoader;
-struct MapMapObjectSaver;
+class MapObjectLoader;
+struct MapObjectSaver;
 
 /*
 ========================================
@@ -38,10 +38,10 @@ saved game file. it is an abstract base class
 
 ========================================
 */
-struct Game_Data_Packet {
-	virtual ~Game_Data_Packet() {}
-	virtual void Read (FileSystem &, Game &, MapMapObjectLoader * = nullptr) = 0;
-	virtual void Write(FileSystem &, Game &, MapMapObjectSaver  * = nullptr) = 0;
+struct GameDataPacket {
+	virtual ~GameDataPacket() {}
+	virtual void read (FileSystem &, Game &, MapObjectLoader * = nullptr) = 0;
+	virtual void write(FileSystem &, Game &, MapObjectSaver  * = nullptr) = 0;
 };
 
 }

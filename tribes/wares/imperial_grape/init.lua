@@ -8,7 +8,7 @@ tribes:new_ware_type{
    genericname = _"grapes",
    tribe = "empire",
    default_target_quantity = 20,
-   preciousness = 2,
+   preciousness = 9,
    -- TRANSLATORS: Helptext for a ware
    helptext = _"These grapes are the base for a tasty wine. They are harvested in a vineyard and processed in a winery.",
    animations = {

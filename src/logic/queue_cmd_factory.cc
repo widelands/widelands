@@ -31,78 +31,78 @@
 
 namespace Widelands {
 
-GameLogicCommand & Queue_Cmd_Factory::create_correct_queue_command
+GameLogicCommand & QueueCmdFactory::create_correct_queue_command
 	(uint32_t const id)
 {
 	switch (id) {
 	case QUEUE_CMD_BUILD:
-		return *new Cmd_Build                     ();
+		return *new CmdBuild                     ();
 	case QUEUE_CMD_FLAG:
-		return *new Cmd_BuildFlag                 ();
+		return *new CmdBuildFlag                 ();
 	case QUEUE_CMD_BUILDROAD:
-		return *new Cmd_BuildRoad                 ();
+		return *new CmdBuildRoad                 ();
 	case QUEUE_CMD_FLAGACTION:
-		return *new Cmd_FlagAction                ();
+		return *new CmdFlagAction                ();
 	case QUEUE_CMD_STOPBUILDING:
-		return *new Cmd_StartStopBuilding         ();
+		return *new CmdStartStopBuilding         ();
 	case QUEUE_CMD_PORT_START_EXPEDITION:
-		return *new Cmd_StartOrCancelExpedition   ();
+		return *new CmdStartOrCancelExpedition   ();
 	case QUEUE_CMD_SHIP_CONSTRUCT_PORT:
-		return *new Cmd_ShipConstructPort         ();
+		return *new CmdShipConstructPort         ();
 	case QUEUE_CMD_SHIP_SCOUT:
-		return *new Cmd_ShipScoutDirection        ();
+		return *new CmdShipScoutDirection        ();
 	case QUEUE_CMD_SHIP_EXPLORE:
-		return *new Cmd_ShipExploreIsland         ();
+		return *new CmdShipExploreIsland         ();
 	case QUEUE_CMD_SHIP_SINK:
-		return *new Cmd_ShipSink                  ();
+		return *new CmdShipSink                  ();
 	case QUEUE_CMD_SHIP_CANCELEXPEDITION:
-		return *new Cmd_ShipCancelExpedition      ();
+		return *new CmdShipCancelExpedition      ();
 	case QUEUE_CMD_ENHANCEBUILDING:
-		return *new Cmd_EnhanceBuilding           ();
+		return *new CmdEnhanceBuilding           ();
 	case QUEUE_CMD_BULLDOZE:
-		return *new Cmd_Bulldoze                  ();
+		return *new CmdBulldoze                  ();
 	case QUEUE_CMD_DROPSOLDIER:
-		return *new Cmd_DropSoldier               ();
+		return *new CmdDropSoldier               ();
 	case QUEUE_CMD_CHANGESOLDIERCAPACITY:
-		return *new Cmd_ChangeSoldierCapacity     ();
+		return *new CmdChangeSoldierCapacity     ();
 	case QUEUE_CMD_ENEMYFLAGACTION:
-		return *new Cmd_EnemyFlagAction           ();
+		return *new CmdEnemyFlagAction           ();
 	case QUEUE_CMD_SETWAREPRIORITY:
-		return *new Cmd_SetWarePriority           ();
+		return *new CmdSetWarePriority           ();
 	case QUEUE_CMD_SETWARETARGETQUANTITY:
-		return *new Cmd_SetWareTargetQuantity     ();
+		return *new CmdSetWareTargetQuantity     ();
 	case QUEUE_CMD_RESETWARETARGETQUANTITY:
-		return *new Cmd_ResetWareTargetQuantity   ();
+		return *new CmdResetWareTargetQuantity   ();
 	case QUEUE_CMD_SETWORKERTARGETQUANTITY:
-		return *new Cmd_SetWorkerTargetQuantity   ();
+		return *new CmdSetWorkerTargetQuantity   ();
 	case QUEUE_CMD_RESETWORKERTARGETQUANTITY:
-		return *new Cmd_ResetWorkerTargetQuantity ();
+		return *new CmdResetWorkerTargetQuantity ();
 	case QUEUE_CMD_MESSAGESETSTATUSREAD:
-		return *new Cmd_MessageSetStatusRead      ();
+		return *new CmdMessageSetStatusRead      ();
 	case QUEUE_CMD_MESSAGESETSTATUSARCHIVED:
-		return *new Cmd_MessageSetStatusArchived  ();
+		return *new CmdMessageSetStatusArchived  ();
 	case QUEUE_CMD_DESTROY_MAPOBJECT:
 		return *new CmdDestroyMapObject        ();
 	case QUEUE_CMD_ACT:
-		return *new Cmd_Act                       ();
+		return *new CmdAct                       ();
 	case QUEUE_CMD_INCORPORATE:
-		return *new Cmd_Incorporate               ();
+		return *new CmdIncorporate               ();
 	case QUEUE_CMD_LUASCRIPT:
-		return *new Cmd_LuaScript                 ();
+		return *new CmdLuaScript                 ();
 	case QUEUE_CMD_LUACOROUTINE:
-		return *new Cmd_LuaCoroutine              ();
+		return *new CmdLuaCoroutine              ();
 	case QUEUE_CMD_CALCULATE_STATISTICS :
-		return *new Cmd_CalculateStatistics       ();
+		return *new CmdCalculateStatistics       ();
 	case QUEUE_CMD_CALL_ECONOMY_BALANCE:
-		return *new Cmd_Call_Economy_Balance      ();
+		return *new CmdCallEconomyBalance      ();
 	case QUEUE_CMD_SETWAREMAXFILL:
-		return *new Cmd_SetWareMaxFill            ();
+		return *new CmdSetWareMaxFill            ();
 	case QUEUE_CMD_DISMANTLEBUILDING:
-		return *new Cmd_DismantleBuilding         ();
+		return *new CmdDismantleBuilding         ();
 	case QUEUE_CMD_EVICTWORKER:
-		return *new Cmd_EvictWorker();
+		return *new CmdEvictWorker();
 	case QUEUE_CMD_MILITARYSITESETSOLDIERPREFERENCE:
-		return *new Cmd_MilitarySiteSetSoldierPreference();
+		return *new CmdMilitarySiteSetSoldierPreference();
 	default:
 		throw wexception("Unknown Queue_Cmd_Id in file: %u", id);
 	}

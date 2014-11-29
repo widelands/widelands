@@ -29,70 +29,70 @@
 #include "logic/map.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
+#include "map_io/map_allowed_building_types_packet.h"
+#include "map_io/map_allowed_worker_types_packet.h"
+#include "map_io/map_bob_packet.h"
+#include "map_io/map_building_packet.h"
+#include "map_io/map_buildingdata_packet.h"
+#include "map_io/map_elemental_packet.h"
+#include "map_io/map_exploration_packet.h"
+#include "map_io/map_extradata_packet.h"
+#include "map_io/map_flag_packet.h"
+#include "map_io/map_flagdata_packet.h"
+#include "map_io/map_heights_packet.h"
+#include "map_io/map_node_ownership_packet.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_packet.h"
+#include "map_io/map_objective_packet.h"
+#include "map_io/map_player_names_and_tribes_packet.h"
+#include "map_io/map_player_position_packet.h"
+#include "map_io/map_players_messages_packet.h"
+#include "map_io/map_players_view_packet.h"
+#include "map_io/map_port_spaces_packet.h"
+#include "map_io/map_resources_packet.h"
+#include "map_io/map_road_packet.h"
+#include "map_io/map_roaddata_packet.h"
+#include "map_io/map_scripting_packet.h"
+#include "map_io/map_terrain_packet.h"
+#include "map_io/map_version_packet.h"
 #include "map_io/one_world_legacy_lookup_table.h"
-#include "map_io/widelands_map_allowed_building_types_data_packet.h"
-#include "map_io/widelands_map_allowed_worker_types_data_packet.h"
-#include "map_io/widelands_map_bob_data_packet.h"
-#include "map_io/widelands_map_building_data_packet.h"
-#include "map_io/widelands_map_buildingdata_data_packet.h"
-#include "map_io/widelands_map_elemental_data_packet.h"
-#include "map_io/widelands_map_exploration_data_packet.h"
-#include "map_io/widelands_map_extradata_data_packet.h"
-#include "map_io/widelands_map_flag_data_packet.h"
-#include "map_io/widelands_map_flagdata_data_packet.h"
-#include "map_io/widelands_map_heights_data_packet.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_node_ownership_data_packet.h"
-#include "map_io/widelands_map_object_packet.h"
-#include "map_io/widelands_map_objective_data_packet.h"
-#include "map_io/widelands_map_player_names_and_tribes_data_packet.h"
-#include "map_io/widelands_map_player_position_data_packet.h"
-#include "map_io/widelands_map_players_messages_data_packet.h"
-#include "map_io/widelands_map_players_view_data_packet.h"
-#include "map_io/widelands_map_port_spaces_data_packet.h"
-#include "map_io/widelands_map_resources_data_packet.h"
-#include "map_io/widelands_map_road_data_packet.h"
-#include "map_io/widelands_map_roaddata_data_packet.h"
-#include "map_io/widelands_map_scripting_data_packet.h"
-#include "map_io/widelands_map_terrain_data_packet.h"
-#include "map_io/widelands_map_version_data_packet.h"
 
 namespace Widelands {
 
-WL_Map_Loader::WL_Map_Loader(FileSystem* fs, Map * const m)
-	: Map_Loader("", *m), m_fs(fs)
+WidelandsMapLoader::WidelandsMapLoader(FileSystem* fs, Map * const m)
+	: MapLoader("", *m), m_fs(fs)
 {
 	m->filesystem_.reset(fs);
 }
 
 
-WL_Map_Loader::~WL_Map_Loader() {
+WidelandsMapLoader::~WidelandsMapLoader() {
 }
 
 /**
  * Preloads a map so that the map class returns valid data for all it's
  * get_info() functions (_width, _nrplayers..)
  */
-int32_t WL_Map_Loader::preload_map(bool const scenario) {
+int32_t WidelandsMapLoader::preload_map(bool const scenario) {
 	assert(get_state() != STATE_LOADED);
 
 	m_map.cleanup();
 
 	{
-		Map_Elemental_Data_Packet mp;
-		mp.Pre_Read(*m_fs, &m_map);
+		MapElementalPacket mp;
+		mp.pre_read(*m_fs, &m_map);
 		m_old_world_name = mp.old_world_name();
 	}
 
 	{
-		Map_Player_Names_And_Tribes_Data_Packet p;
-		p.Pre_Read(*m_fs, &m_map, !scenario);
+		MapPlayerNamesAndTribesPacket p;
+		p.pre_read(*m_fs, &m_map, !scenario);
 	}
 	// No scripting/init.lua file -> not playable as scenario
 	Map::ScenarioTypes m = Map::NO_SCENARIO;
-	if (m_fs->FileExists("scripting/init.lua"))
+	if (m_fs->file_exists("scripting/init.lua"))
 		m |= Map::SP_SCENARIO;
-	if (m_fs->FileExists("scripting/multiplayer_init.lua"))
+	if (m_fs->file_exists("scripting/multiplayer_init.lua"))
 		m |= Map::MP_SCENARIO;
 	m_map.set_scenario_types(m);
 
@@ -104,20 +104,20 @@ int32_t WL_Map_Loader::preload_map(bool const scenario) {
 /*
  * Load the complete map and make sure that it runs without problems
  */
-int32_t WL_Map_Loader::load_map_complete
-	(Editor_Game_Base & egbase, bool const scenario)
+int32_t WidelandsMapLoader::load_map_complete
+	(EditorGameBase & egbase, bool const scenario)
 {
-	ScopedTimer timer("WL_Map_Loader::load_map_complete() took %ums");
+	ScopedTimer timer("WidelandsMapLoader::load_map_complete() took %ums");
 
 	preload_map(scenario);
 	m_map.set_size(m_map.m_width, m_map.m_height);
-	m_mol.reset(new MapMapObjectLoader());
+	m_mol.reset(new MapObjectLoader());
 
 	// MANDATORY PACKETS
 	// PRELOAD DATA BEGIN
 	log("Reading Elemental Data ... ");
-	Map_Elemental_Data_Packet elemental_data_packet;
-	elemental_data_packet.Read(*m_fs, egbase, !scenario, *m_mol);
+	MapElementalPacket elemental_data_packet;
+	elemental_data_packet.read(*m_fs, egbase, !scenario, *m_mol);
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	egbase.allocate_player_maps(); //  Can do this now that map size is known.
@@ -125,90 +125,90 @@ int32_t WL_Map_Loader::load_map_complete
 	//  now player names and tribes
 	log("Reading Player Names And Tribe Data ... ");
 	{
-		Map_Player_Names_And_Tribes_Data_Packet p;
-		p.Read(*m_fs, egbase, !scenario, *m_mol);
+		MapPlayerNamesAndTribesPacket p;
+		p.read(*m_fs, egbase, !scenario, *m_mol);
 	}
 	log("took %ums\n ", timer.ms_since_last_query());
 	// PRELOAD DATA END
 
-	if (m_fs->FileExists("port_spaces")) {
+	if (m_fs->file_exists("port_spaces")) {
 		log("Reading Port Spaces Data ... ");
 
-		Map_Port_Spaces_Data_Packet p;
-		p.Read(*m_fs, egbase, !scenario, *m_mol);
+		MapPortSpacesPacket p;
+		p.read(*m_fs, egbase, !scenario, *m_mol);
 
 		log("took %ums\n ", timer.ms_since_last_query());
 	}
 
 	log("Reading Heights Data ... ");
-	{Map_Heights_Data_Packet        p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{MapHeightsPacket        p; p.read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	std::unique_ptr<OneWorldLegacyLookupTable> lookup_table
 		(create_one_world_legacy_lookup_table(m_old_world_name));
 	log("Reading Terrain Data ... ");
-	{Map_Terrain_Data_Packet p; p.Read(*m_fs, egbase, *lookup_table);}
+	{MapTerrainPacket p; p.read(*m_fs, egbase, *lookup_table);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	MapObjectPacket mapobjects;
 
 	log("Reading Map Objects ... ");
-	mapobjects.Read(*m_fs, egbase, *m_mol, *lookup_table);
+	mapobjects.read(*m_fs, egbase, *m_mol, *lookup_table);
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Player Start Position Data ... ");
 	{
-		Map_Player_Position_Data_Packet p;
-		p.Read(*m_fs, egbase, !scenario, *m_mol);
+		MapPlayerPositionPacket p;
+		p.read(*m_fs, egbase, !scenario, *m_mol);
 	}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	// This call must stay around forever since this was the way critters have
 	// been saved into the map before 2010. Most of the maps we ship are still
 	// old in that sense and most maps on the homepage too.
-	if (m_fs->FileExists("binary/bob")) {
+	if (m_fs->file_exists("binary/bob")) {
 		log("Reading (legacy) Bob Data ... ");
 		{
-			Map_Bob_Data_Packet p;
-			p.Read(*m_fs, egbase, *m_mol, *lookup_table);
+			MapBobPacket p;
+			p.read(*m_fs, egbase, *m_mol, *lookup_table);
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 	}
 
 	log("Reading Resources Data ... ");
-	{Map_Resources_Data_Packet      p; p.Read(*m_fs, egbase, *lookup_table);}
+	{MapResourcesPacket      p; p.read(*m_fs, egbase, *lookup_table);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	//  NON MANDATORY PACKETS BELOW THIS POINT
 	log("Reading Map Extra Data ... ");
-	{Map_Extradata_Data_Packet      p; p.Read(*m_fs, !scenario);}
+	{MapExtradataPacket      p; p.read(*m_fs, !scenario);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Map Version Data ... ");
-	{Map_Version_Data_Packet      p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{MapVersionPacket      p; p.read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 
 	log("Reading Allowed Worker Types Data ... ");
 	{
-		Map_Allowed_Worker_Types_Data_Packet p;
-		p.Read(*m_fs, egbase, !scenario, *m_mol);
+		MapAllowedWorkerTypesPacket p;
+		p.read(*m_fs, egbase, !scenario, *m_mol);
 	}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Allowed Building Types Data ... ");
 	{
-		Map_Allowed_Building_Types_Data_Packet p;
-		p.Read(*m_fs, egbase, !scenario, *m_mol);
+		MapAllowedBuildingTypesPacket p;
+		p.read(*m_fs, egbase, !scenario, *m_mol);
 	}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Node Ownership Data ... ");
-	{Map_Node_Ownership_Data_Packet p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{MapNodeOwnershipPacket p; p.read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Exploration Data ... ");
-	{Map_Exploration_Data_Packet    p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{MapExplorationPacket    p; p.read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	//  !!!!!!!!!! NOTE
@@ -216,32 +216,32 @@ int32_t WL_Map_Loader::load_map_complete
 	//  this order without knowing what you do
 	//  EXISTENT PACKETS
 	log("Reading Flag Data ... ");
-	{Map_Flag_Data_Packet           p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{MapFlagPacket           p; p.read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Road Data ... ");
-	{Map_Road_Data_Packet           p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{MapRoadPacket           p; p.read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Building Data ... ");
-	{Map_Building_Data_Packet       p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{MapBuildingPacket       p; p.read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	//  DATA PACKETS
 	log("Reading Flagdata Data ... ");
-	{Map_Flagdata_Data_Packet       p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{MapFlagdataPacket       p; p.read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Roaddata Data ... ");
-	{Map_Roaddata_Data_Packet       p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{MapRoaddataPacket       p; p.read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Buildingdata Data ... ");
-	{Map_Buildingdata_Data_Packet   p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{MapBuildingdataPacket   p; p.read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Second and third phase loading Map Objects ... ");
-	mapobjects.LoadFinish();
+	mapobjects.load_finish();
 	{
 		const Field & fields_end = map()[map().max_index()];
 		for (Field * field = &map()[0]; field < &fields_end; ++field)
@@ -258,7 +258,7 @@ int32_t WL_Map_Loader::load_map_complete
 	//  NOTE DO NOT CHANGE THE PLACE UNLESS YOU KNOW WHAT ARE YOU DOING
 	//  Must be loaded after every kind of object that can see.
 	log("Reading Players View Data ... ");
-	{Map_Players_View_Data_Packet   p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{MapPlayersViewPacket   p; p.read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	//  This must come before anything that references messages, such as:
@@ -266,18 +266,18 @@ int32_t WL_Map_Loader::load_map_complete
 	//      Cmd_MessageSetStatusRead and Cmd_MessageSetStatusArchived)
 	log("Reading Player Message Data ... ");
 	{
-		Map_Players_Messages_Data_Packet p;
-		p.Read(*m_fs, egbase, !scenario, *m_mol);
+		MapPlayersMessagesPacket p;
+		p.read(*m_fs, egbase, !scenario, *m_mol);
 	}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	//  Objectives
 	log("Reading Objective Data ... ");
-	{MapObjectiveDataPacket      p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{MapObjectivePacket      p; p.read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	log("Reading Scripting Data ... ");
-	{Map_Scripting_Data_Packet      p; p.Read(*m_fs, egbase, !scenario, *m_mol);}
+	{MapScriptingPacket      p; p.read(*m_fs, egbase, !scenario, *m_mol);}
 	log("took %ums\n ", timer.ms_since_last_query());
 
 	if (m_mol->get_nr_unloaded_objects())

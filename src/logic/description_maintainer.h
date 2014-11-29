@@ -36,6 +36,9 @@ template <typename T> struct DescriptionMaintainer {
 
 	// Returns the number of entries in the container.
 	size_t get_nitems() const {return items_.size();}
+	// TODO(sirver): Remove get_nitems().
+
+	size_t size() const {return items_.size();}
 
 	// Returns the entry with the given 'name' if it exists or nullptr.
 	T* exists(const std::string& name) const;
@@ -65,7 +68,7 @@ template <typename T> struct DescriptionMaintainer {
 	}
 
 private:
-	typedef std::map<std::string, int> NameToIndexMap;
+	using NameToIndexMap = std::map<std::string, int>;
 	std::vector<std::unique_ptr<T>> items_;
 	NameToIndexMap name_to_index_;
 };

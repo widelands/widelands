@@ -24,9 +24,9 @@
 #include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "graphic/in_memory_image.h"
-#include "graphic/render/minimaprenderer.h"
+#include "graphic/minimap_renderer.h"
 #include "graphic/rendertarget.h"
-#include "graphic/surface.h"
+#include "graphic/texture.h"
 #include "logic/map.h"
 #include "wui/interactive_player.h"
 #include "wui/mapviewpixelconstants.h"
@@ -35,7 +35,7 @@
 MiniMap::View::View
 	(UI::Panel & parent, MiniMapLayer * flags,
 	 int32_t const x, int32_t const y, uint32_t const, uint32_t const,
-	 Interactive_Base & ibase)
+	 InteractiveBase & ibase)
 :
 	UI::Panel       (&parent, x, y, 10, 10),
 	m_ibase       (ibase),
@@ -63,15 +63,15 @@ void MiniMap::View::set_view_pos(const int32_t x, const int32_t y)
 
 void MiniMap::View::draw(RenderTarget & dst)
 {
-	std::unique_ptr<Surface> surface(
+	std::unique_ptr<Texture> texture(
 	   draw_minimap(m_ibase.egbase(),
 	                m_ibase.get_player(),
 	                (*m_flags) & (MiniMapLayer::Zoom2) ?
 	                   Point((m_viewx - get_w() / 4), (m_viewy - get_h() / 4)) :
 	                   Point((m_viewx - get_w() / 2), (m_viewy - get_h() / 2)),
 	                *m_flags | MiniMapLayer::ViewWindow));
-	// Give ownership of the surface to the new image
-	std::unique_ptr<const Image> im(new_in_memory_image("minimap", surface.release()));
+	// Give ownership of the texture to the new image
+	std::unique_ptr<const Image> im(new_in_memory_image("minimap", texture.release()));
 	dst.blit(Point(), im.get());
 	im.reset();
 }
@@ -137,7 +137,7 @@ inline uint32_t MiniMap::but_w                    () const {
 	return m_view.get_w() / number_of_buttons_per_row();
 }
 inline uint32_t MiniMap::but_h                    () const {return 20;}
-MiniMap::MiniMap(Interactive_Base & ibase, Registry * const registry)
+MiniMap::MiniMap(InteractiveBase & ibase, Registry * const registry)
 :
 	UI::UniqueWindow(&ibase, "minimap", registry, 0, 0, _("Map")),
 	m_view(*this, &registry->flags, 0, 0, 0, 0, ibase),
@@ -186,8 +186,6 @@ MiniMap::MiniMap(Interactive_Base & ibase, Registry * const registry)
 	button_bldns.sigclicked.connect(
 	   boost::bind(&MiniMap::toggle, boost::ref(*this), MiniMapLayer::Building));
 	button_zoom.sigclicked.connect(boost::bind(&MiniMap::toggle, boost::ref(*this), MiniMapLayer::Zoom2));
-
-	set_cache(false);
 
 	resize();
 

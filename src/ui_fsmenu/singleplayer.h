@@ -28,8 +28,8 @@
  * Fullscreen Menu for SinglePlayer.
  * Here you select what game you want to play.
  */
-struct Fullscreen_Menu_SinglePlayer : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_SinglePlayer();
+struct FullscreenMenuSinglePlayer : public FullscreenMenuBase {
+	FullscreenMenuSinglePlayer();
 
 	enum {Back = dying_code, New_Game, Campaign, Load_Game};
 

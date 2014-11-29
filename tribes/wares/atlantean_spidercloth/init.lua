@@ -8,7 +8,7 @@ tribes:new_ware_type{
    genericname = _"spidercloth",
    tribe = "atlanteans",
    default_target_quantity = 20,
-   preciousness = 1,
+   preciousness = 5,
    -- TRANSLATORS: Helptext for a ware
    helptext = _"Spidercloth is made out of spideryarn in a weaving mill. It is used in the toolsmithy and the shipyard. Also some higher developed buildings need spidercloth for their construction.",
    animations = {

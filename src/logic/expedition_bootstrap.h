@@ -29,9 +29,9 @@
 namespace Widelands {
 
 class Economy;
-class Editor_Game_Base;
+class EditorGameBase;
 class Game;
-class MapMapObjectLoader;
+class MapObjectLoader;
 class PortDock;
 class Request;
 class WareInstance;
@@ -58,7 +58,7 @@ public:
 	// expedition. Ownership is transferred and the object is in an undefined
 	// state after this and must be deleted.
 	void get_waiting_workers_and_wares
-		(Game&, const Tribe_Descr&, std::vector<Worker*>* return_workers,
+		(Game&, const TribeDescr&, std::vector<Worker*>* return_workers,
 		 std::vector<WareInstance*>* return_wares);
 
 	// Returns the wares currently in stock.
@@ -68,24 +68,24 @@ public:
 	void set_economy(Economy* economy);
 
 	// Returns the waresqueue for this ware.
-	WaresQueue& waresqueue(Ware_Index index) const;
+	WaresQueue& waresqueue(WareIndex index) const;
 
 	// Delete all wares we currently handle.
-	void cleanup(Editor_Game_Base& egbase);
+	void cleanup(EditorGameBase& egbase);
 
 	// Save/Load this into a file. The actual data is stored in the buildingdata
 	// packet, and there in the warehouse data packet.
 	void load
 		(uint32_t warehouse_packet_version, Warehouse& warehouse,
-		 FileRead& fr, Game& game, MapMapObjectLoader& mol);
-	void save(FileWrite& fw, Game& game, MapMapObjectSaver& mos);
+		 FileRead& fr, Game& game, MapObjectLoader& mol);
+	void save(FileWrite& fw, Game& game, MapObjectSaver& mos);
 
 private:
 	struct ExpeditionWorker;
 
 	// Handles arriving workers and wares.
-	static void worker_callback(Game&, Request& r, Ware_Index, Worker*, PlayerImmovable&);
-	static void ware_callback(Game& game, WaresQueue*, Ware_Index, void* const data);
+	static void worker_callback(Game&, Request& r, WareIndex, Worker*, PlayerImmovable&);
+	static void ware_callback(Game& game, WaresQueue*, WareIndex, void* const data);
 	void handle_worker_callback(Game &, Request &, Worker *);
 
 	// Tests if all wares for the expedition have arrived. If so, informs the portdock.

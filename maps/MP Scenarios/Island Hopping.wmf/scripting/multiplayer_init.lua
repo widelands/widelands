@@ -2,8 +2,9 @@
 -- Island Hopping Fun Map Scripting
 -- =================================
 include "scripting/coroutine.lua"
-include "scripting/infrastructure.lua"
 include "scripting/formatting.lua"
+include "scripting/infrastructure.lua"
+include "scripting/messages.lua"
 include "scripting/objective_utils.lua"
 
 -- ==========
@@ -95,7 +96,7 @@ hill = map:get_field(0,0):region(3)
 -- Sends a game status message to all players
 function send_to_all(text)
    for idx,plr in ipairs(game.players) do
-      plr:send_message(_ "Game Status", text, {popup=true})
+      send_message(plr, _ "Game Status", text, {popup=true})
    end
 end
 

@@ -27,7 +27,7 @@
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 
-class Interactive_GameBase;
+class InteractiveGameBase;
 namespace Widelands
 {
 class Game;
@@ -37,7 +37,7 @@ class Game;
 class GameSummaryScreen : public UI::UniqueWindow {
 public:
 	GameSummaryScreen
-		(Interactive_GameBase * parent, UI::UniqueWindow::Registry * r);
+		(InteractiveGameBase * parent, UI::UniqueWindow::Registry * r);
 
 	bool handle_mousepress(uint8_t btn, int32_t mx, int32_t my) override;
 private:
@@ -51,7 +51,8 @@ private:
 	UI::Textarea *  m_title_area;
 	UI::Textarea *  m_gametime_label;
 	UI::Textarea *  m_gametime_value;
-	UI::Multiline_Textarea *  m_info_area;
+	UI::Textarea *  m_info_area_label;
+	UI::MultilineTextarea *  m_info_area;
 	UI::Button *    m_continue_button;
 	UI::Button *    m_stop_button;
 	UI::Table<uintptr_t const> *     m_players_table;

@@ -34,8 +34,8 @@
 #include "logic/ship.h"
 #include "logic/warehouse.h"
 #include "logic/widelands_geometry_io.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 #include "wui/interactive_gamebase.h"
 
 namespace Widelands {
@@ -106,7 +106,7 @@ bool PortDock::get_passable() const
 }
 
 PortDock::PositionList PortDock::get_positions
-	(const Editor_Game_Base &) const
+	(const EditorGameBase &) const
 {
 	return m_dockpoints;
 }
@@ -154,12 +154,12 @@ void PortDock::set_economy(Economy * e)
 
 
 void PortDock::draw
-		(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&)
+		(const EditorGameBase &, RenderTarget &, const FCoords&, const Point&)
 {
 	// do nothing
 }
 
-void PortDock::init(Editor_Game_Base & egbase)
+void PortDock::init(EditorGameBase & egbase)
 {
 	PlayerImmovable::init(egbase);
 
@@ -174,7 +174,7 @@ void PortDock::init(Editor_Game_Base & egbase)
  * Create our initial singleton @ref Fleet. The fleet code ensures
  * that we merge with a larger fleet when possible.
  */
-void PortDock::init_fleet(Editor_Game_Base & egbase)
+void PortDock::init_fleet(EditorGameBase & egbase)
 {
 	Fleet * fleet = new Fleet(owner());
 	fleet->add_port(egbase, this);
@@ -182,7 +182,7 @@ void PortDock::init_fleet(Editor_Game_Base & egbase)
 	// Note: the Fleet calls our set_fleet automatically
 }
 
-void PortDock::cleanup(Editor_Game_Base & egbase)
+void PortDock::cleanup(EditorGameBase & egbase)
 {
 	if (egbase.objects().object_still_available(m_warehouse)) {
 		// Transfer all our wares into the warehouse.
@@ -344,7 +344,7 @@ void PortDock::ship_arrived(Game & game, Ship & ship)
 			// The expedition goods are now on the ship, so from now on it is independent from the port
 			// and thus we switch the port to normal, so we could even start a new expedition,
 			cancel_expedition(game);
-			if (upcast(Interactive_GameBase, igb, game.get_ibase()))
+			if (upcast(InteractiveGameBase, igb, game.get_ibase()))
 				ship.refresh_window(*igb);
 			return m_fleet->update(game);
 		}
@@ -393,7 +393,7 @@ void PortDock::set_need_ship(Game & game, bool need)
 /**
  * Return the number of wares or workers of the given type that are waiting at the dock.
  */
-uint32_t PortDock::count_waiting(WareWorker waretype, Ware_Index wareindex)
+uint32_t PortDock::count_waiting(WareWorker waretype, WareIndex wareindex)
 {
 	uint32_t count = 0;
 
@@ -446,7 +446,7 @@ void PortDock::cancel_expedition(Game & game) {
 }
 
 
-void PortDock::log_general_info(const Editor_Game_Base & egbase)
+void PortDock::log_general_info(const EditorGameBase & egbase)
 {
 	PlayerImmovable::log_general_info(egbase);
 
@@ -478,29 +478,29 @@ void PortDock::Loader::load(FileRead & fr, uint8_t version)
 
 	PortDock & pd = get<PortDock>();
 
-	m_warehouse = fr.Unsigned32();
-	uint16_t nrdockpoints = fr.Unsigned16();
+	m_warehouse = fr.unsigned_32();
+	uint16_t nrdockpoints = fr.unsigned_16();
 
 	pd.m_dockpoints.resize(nrdockpoints);
 	for (uint16_t i = 0; i < nrdockpoints; ++i) {
-		pd.m_dockpoints[i] = ReadCoords32(&fr, egbase().map().extent());
+		pd.m_dockpoints[i] = read_coords_32(&fr, egbase().map().extent());
 		pd.set_position(egbase(), pd.m_dockpoints[i]);
 	}
 
 	if (version >= 2) {
-		pd.m_need_ship = fr.Unsigned8();
+		pd.m_need_ship = fr.unsigned_8();
 
-		m_waiting.resize(fr.Unsigned32());
+		m_waiting.resize(fr.unsigned_32());
 		for (ShippingItem::Loader& shipping_loader : m_waiting) {
 			shipping_loader.load(fr);
 		}
 
 		if (version >= 3) {
 			// All the other expedition specific stuff is saved in the warehouse.
-			if (fr.Unsigned8()) {  // Do we have an expedition?
+			if (fr.unsigned_8()) {  // Do we have an expedition?
 				pd.m_expedition_bootstrap.reset(new ExpeditionBootstrap(&pd));
 			}
-			pd.m_expedition_ready = (fr.Unsigned8() == 1) ? true : false;
+			pd.m_expedition_ready = (fr.unsigned_8() == 1) ? true : false;
 		} else {
 			pd.m_expedition_ready = false;
 		}
@@ -538,19 +538,19 @@ void PortDock::Loader::load_finish()
 }
 
 MapObject::Loader * PortDock::load
-	(Editor_Game_Base & egbase, MapMapObjectLoader & mol, FileRead & fr)
+	(EditorGameBase & egbase, MapObjectLoader & mol, FileRead & fr)
 {
 	std::unique_ptr<Loader> loader(new Loader);
 
 	try {
 		// The header has been peeled away by the caller
 
-		uint8_t const version = fr.Unsigned8();
+		uint8_t const version = fr.unsigned_8();
 		if (1 <= version && version <= PORTDOCK_SAVEGAME_VERSION) {
 			loader->init(egbase, mol, *new PortDock(nullptr));
 			loader->load(fr, version);
 		} else
-			throw game_data_error("unknown/unhandled version %u", version);
+			throw GameDataError("unknown/unhandled version %u", version);
 	} catch (const std::exception & e) {
 		throw wexception("loading portdock: %s", e.what());
 	}
@@ -558,29 +558,29 @@ MapObject::Loader * PortDock::load
 	return loader.release();
 }
 
-void PortDock::save(Editor_Game_Base & egbase, MapMapObjectSaver & mos, FileWrite & fw)
+void PortDock::save(EditorGameBase & egbase, MapObjectSaver & mos, FileWrite & fw)
 {
-	fw.Unsigned8(HeaderPortDock);
-	fw.Unsigned8(PORTDOCK_SAVEGAME_VERSION);
+	fw.unsigned_8(HeaderPortDock);
+	fw.unsigned_8(PORTDOCK_SAVEGAME_VERSION);
 
 	PlayerImmovable::save(egbase, mos, fw);
 
-	fw.Unsigned32(mos.get_object_file_index(*m_warehouse));
-	fw.Unsigned16(m_dockpoints.size());
+	fw.unsigned_32(mos.get_object_file_index(*m_warehouse));
+	fw.unsigned_16(m_dockpoints.size());
 	for (const Coords& coords: m_dockpoints) {
-		WriteCoords32(&fw, coords);
+		write_coords_32(&fw, coords);
 	}
 
-	fw.Unsigned8(m_need_ship);
+	fw.unsigned_8(m_need_ship);
 
-	fw.Unsigned32(m_waiting.size());
+	fw.unsigned_32(m_waiting.size());
 	for (ShippingItem& shipping_item : m_waiting) {
 		shipping_item.save(egbase, mos, fw);
 	}
 
 	// Expedition specific stuff
-	fw.Unsigned8(m_expedition_bootstrap.get() != nullptr ? 1 : 0);
-	fw.Unsigned8(m_expedition_ready ? 1 : 0);
+	fw.unsigned_8(m_expedition_bootstrap.get() != nullptr ? 1 : 0);
+	fw.unsigned_8(m_expedition_ready ? 1 : 0);
 }
 
 } // namespace Widelands

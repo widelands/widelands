@@ -24,37 +24,37 @@
 #include "ui_basic/unique_window.h"
 
 namespace Widelands {
-class Editor_Game_Base;
+class EditorGameBase;
 }  // namespace Widelands
 
 /**
  * This places immovables on the map
  */
 // TODO(unknown):  Implement undo for this tool
-struct Editor_Make_Infrastructure_Tool : public Editor_Tool {
-	Editor_Make_Infrastructure_Tool() : Editor_Tool(*this, *this, false), m_player(0) {}
+struct EditorMakeInfrastructureTool : public EditorTool {
+	EditorMakeInfrastructureTool() : EditorTool(*this, *this, false), m_player(0) {}
 
-	void set_player(Widelands::Player_Number const n)
+	void set_player(Widelands::PlayerNumber const n)
 		{m_player = n;}
-	Widelands::Player_Number get_player() const
+	Widelands::PlayerNumber get_player() const
 		{return m_player;}
 
 	int32_t handle_click_impl(Widelands::Map& map,
 	                          const Widelands::World& world,
-	                          Widelands::Node_and_Triangle<> center,
-	                          Editor_Interactive& parent,
-	                          Editor_Action_Args& args) override;
+	                          Widelands::NodeAndTriangle<> center,
+	                          EditorInteractive& parent,
+	                          EditorActionArgs& args) override;
 
 	const char * get_sel_impl() const override
 		{return "pics/fsel.png";} //  Standard sel icon, most complex tool of all
 
 private:
-	Widelands::Player_Number m_player;
+	Widelands::PlayerNumber m_player;
 	UI::UniqueWindow::Registry m_registry;
 };
 
-int32_t Editor_Make_Infrastructure_Tool_Callback
+int32_t editor_make_infrastructure_tool_callback
 	(const Widelands::TCoords<Widelands::FCoords>& c,
-	 Widelands::Editor_Game_Base& egbase, int32_t const player);
+	 Widelands::EditorGameBase& egbase, int32_t const player);
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_MAKE_INFRASTRUCTURE_TOOL_H

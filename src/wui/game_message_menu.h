@@ -32,25 +32,25 @@ namespace Widelands {
 class Game;
 struct Message;
 }
-class Interactive_Player;
+class InteractivePlayer;
 
 ///  Shows the not already fulfilled objectives.
 struct GameMessageMenu : public UI::UniqueWindow {
-	GameMessageMenu(Interactive_Player &, UI::UniqueWindow::Registry &);
+	GameMessageMenu(InteractivePlayer &, UI::UniqueWindow::Registry &);
 
 	/// Shows a newly created message. Assumes that the message is not yet in
 	/// the list (the message was added to the queue after the last time think()
 	/// was executed.
-	void show_new_message(Widelands::Message_Id, const Widelands::Message &);
+	void show_new_message(Widelands::MessageId, const Widelands::Message &);
 
 	enum Mode {Inbox, Archive};
 	void think() override;
-	bool handle_key(bool down, SDL_keysym code) override;
+	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
 	enum Cols {ColSelect, ColStatus, ColTitle, ColTimeSent};
 
-	Interactive_Player & iplayer() const;
+	InteractivePlayer & iplayer() const;
 	void selected(uint32_t);
 	void double_clicked(uint32_t);
 
@@ -60,10 +60,10 @@ private:
 	void archive_or_restore();
 	void toggle_mode();
 	void center_view();
-	void update_record(UI::Table<uintptr_t>::Entry_Record & er, const Widelands::Message &);
+	void update_record(UI::Table<uintptr_t>::EntryRecord & er, const Widelands::Message &);
 
 	UI::Table<uintptr_t> * list;
-	UI::Multiline_Textarea message_body;
+	UI::MultilineTextarea message_body;
 	UI::Button * m_archivebtn;
 	UI::Button * m_togglemodebtn;
 	UI::Button * m_centerviewbtn;

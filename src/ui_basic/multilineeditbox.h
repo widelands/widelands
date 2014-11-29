@@ -32,10 +32,10 @@ struct TextStyle;
 
 /**
  * A panel that allows entering multi-line string, i.e. like a hybrid between
- * @ref Editbox and @ref Multiline_Textarea
+ * @ref Editbox and @ref MultilineTextarea
  */
-struct Multiline_Editbox : public Panel {
-	Multiline_Editbox
+struct MultilineEditbox : public Panel {
+	MultilineEditbox
 		(Panel *, int32_t x, int32_t y, uint32_t w, uint32_t h, const std::string & text);
 
 	boost::signals2::signal<void ()> changed;
@@ -47,16 +47,16 @@ struct Multiline_Editbox : public Panel {
 	void set_maximum_bytes(uint32_t n);
 	uint32_t get_maximum_bytes() const;
 
-	void focus() override;
+	void focus(bool topcaller = true) override;
 
 protected:
 	void draw(RenderTarget &) override;
 
-	bool handle_key(bool down, SDL_keysym) override;
+	bool handle_key(bool down, SDL_Keysym) override;
+	bool handle_textinput(const std::string& text);
 
 private:
 	void scrollpos_changed(int32_t);
-	void insert(SDL_keysym code);
 
 	struct Data;
 	std::unique_ptr<Data> d;

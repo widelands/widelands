@@ -24,85 +24,85 @@
 
 namespace Widelands {
 
-Direction ReadDirection8(StreamRead* fr) {
-	uint8_t const d = fr->Unsigned8();
+Direction read_direction_8(StreamRead* fr) {
+	uint8_t const d = fr->unsigned_8();
 	if (d == 0)
-		throw direction_is_null();
+		throw DirectionIsNull();
 	if (6 < d)
-		throw direction_invalid(d);
+		throw DirectionInvalid(d);
 	return d;
 }
 
-Direction ReadDirection8_allow_null(StreamRead* fr) {
-	uint8_t const d = fr->Unsigned8();
+Direction read_direction_8_allow_null(StreamRead* fr) {
+	uint8_t const d = fr->unsigned_8();
 	if (6 < d)
-		throw direction_invalid(d);
+		throw DirectionInvalid(d);
 	return d;
 }
 
-Map_Index ReadMap_Index32(StreamRead* fr, const Map_Index max) {
-	uint32_t const i = fr->Unsigned32();
+MapIndex read_map_index_32(StreamRead* fr, const MapIndex max) {
+	uint32_t const i = fr->unsigned_32();
 	if (max <= i)
-		throw exceeded_max_index(max, i);
+		throw ExceededMaxIndex(max, i);
 	return i;
 }
 
-Coords ReadCoords32(StreamRead* stream_read) {
-	uint16_t const x = stream_read->Unsigned16();
-	uint16_t const y = stream_read->Unsigned16();
+Coords read_coords_32(StreamRead* stream_read) {
+	uint16_t const x = stream_read->unsigned_16();
+	uint16_t const y = stream_read->unsigned_16();
 	return Coords(x, y);
 }
 
-Coords ReadCoords32(StreamRead* stream_read, const Extent& extent) {
-	uint16_t const x = stream_read->Unsigned16();
-	uint16_t const y = stream_read->Unsigned16();
+Coords read_coords_32(StreamRead* stream_read, const Extent& extent) {
+	uint16_t const x = stream_read->unsigned_16();
+	uint16_t const y = stream_read->unsigned_16();
 	if (extent.w <= x)
-		throw exceeded_width(extent.w, x);
+		throw ExceededWidth(extent.w, x);
 	if (extent.h <= y)
-		throw exceeded_height(extent.h, y);
+		throw ExceededHeight(extent.h, y);
 	return Coords(x, y);
 }
 
-Coords ReadCoords32_allow_null(StreamRead* fr, const Extent& extent) {
-	uint16_t const x = fr->Unsigned16();
-	uint16_t const y = fr->Unsigned16();
+Coords read_coords_32_allow_null(StreamRead* fr, const Extent& extent) {
+	uint16_t const x = fr->unsigned_16();
+	uint16_t const y = fr->unsigned_16();
 	const Coords result(x, y);
 	if (result) {
 		if (extent.w <= x)
-			throw exceeded_width(extent.w, x);
+			throw ExceededWidth(extent.w, x);
 		if (extent.h <= y)
-			throw exceeded_height(extent.h, y);
+			throw ExceededHeight(extent.h, y);
 	}
 	return result;
 }
 
-Area<Coords, uint16_t> ReadArea48(StreamRead* fr, const Extent& extent) {
-	Coords const c = ReadCoords32(fr, extent);
-	uint16_t const r = fr->Unsigned16();
+Area<Coords, uint16_t> read_area_48(StreamRead* fr, const Extent& extent) {
+	Coords const c = read_coords_32(fr, extent);
+	uint16_t const r = fr->unsigned_16();
 	return Area<Coords, uint16_t>(c, r);
 }
 
-void WriteDirection8(StreamWrite* wr, Direction const d) {
+void write_direction_8(StreamWrite* wr, Direction const d) {
 	assert(0 < d);
 	assert(d <= 6);
-	wr->Data(&d, 1);
+	wr->data(&d, 1);
 }
 
-void WriteDirection8_allow_null(StreamWrite* wr, Direction const d) {
+void write_direction_8_allow_null(StreamWrite* wr, Direction const d) {
 	assert(d <= 6);
-	wr->Data(&d, 1);
+	wr->data(&d, 1);
 }
 
-void WriteCoords32(StreamWrite* wr, const Coords& c) {
+void write_coords_32(StreamWrite* wr, const Coords& c) {
 	assert(static_cast<uint16_t>(c.x) < 0x8000 || c.x == -1);
 	assert(static_cast<uint16_t>(c.y) < 0x8000 || c.y == -1);
-	wr->Unsigned16(c.x);
-	wr->Unsigned16(c.y);
+	wr->unsigned_16(c.x);
+	wr->unsigned_16(c.y);
 }
 
-void WriteArea48(StreamWrite* wr, Area<Coords, uint16_t> const area) {
-	WriteCoords32(wr, area);
-	wr->Unsigned16(area.radius);
+void write_area_48(StreamWrite* wr, Area<Coords, uint16_t> const area) {
+	write_coords_32(wr, area);
+	wr->unsigned_16(area.radius);
 }
 
 }  // namespace Widelands

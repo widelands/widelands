@@ -8,7 +8,7 @@ tribes:new_ware_type{
    genericname = _"cornflour",
    tribe = "atlanteans",
    default_target_quantity = 15,
-   preciousness = 2,
+   preciousness = 7,
    -- TRANSLATORS: Helptext for a ware
    helptext = _"Cornflour is produced in a mill out of corn and is one of three parts of the Atlantean bread produced in bakeries.",
    animations = {

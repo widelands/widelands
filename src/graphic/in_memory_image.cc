@@ -22,15 +22,15 @@
 #include <memory>
 
 #include "graphic/image.h"
-#include "graphic/surface.h"
+#include "graphic/texture.h"
 
 using namespace std;
 
 // An Image implementation the does !not! cache its Surface in the
-// SurfaceCache. Avoid using this whenever possible and also do not store it in
+// TextureCache. Avoid using this whenever possible and also do not store it in
 // the ImageCache.
 //
-// This is only used when the surface can not be easily recalculated on the fly
+// This is only used when the texture can not be easily recalculated on the fly
 // or if ownership of the image is managed by the caller itself. Note that this
 // is always tricky because Widelands assumes in many places that Images can be
 // relied to exist forever. So when you pass out a pointer to your
@@ -38,24 +38,24 @@ using namespace std;
 // or prepare for core dumps.
 class InMemoryImage : public Image {
 public:
-	InMemoryImage(const string& ghash, Surface* surf) :
-		hash_(ghash), surf_(surf) {}
+	InMemoryImage(const string& ghash, Texture* texture) :
+		hash_(ghash), texture_(texture) {}
 	virtual ~InMemoryImage() {
 	}
 
 	// Implements Image.
-	uint16_t width() const override {return surf_->width();}
-	uint16_t height() const override {return surf_->height();}
+	uint16_t width() const override {return texture_->width();}
+	uint16_t height() const override {return texture_->height();}
 	// Note: hash will mostly be dummy values for this implementation. It should
 	// not wind up in ImageCache, otherwise the ownership question is not clear.
 	const string& hash() const override {return hash_;}
-	Surface* surface() const override {return surf_.get();}
+	Texture* texture() const override {return texture_.get();}
 
 private:
 	const string hash_;
-	std::unique_ptr<Surface> surf_;
+	std::unique_ptr<Texture> texture_;
 };
 
-const Image* new_in_memory_image(const string& hash, Surface* surf) {
-	return new InMemoryImage(hash, surf);
+const Image* new_in_memory_image(const string& hash, Texture* texture) {
+	return new InMemoryImage(hash, texture);
 }

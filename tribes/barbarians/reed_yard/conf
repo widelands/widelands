@@ -3,6 +3,7 @@ output=thatch_reed
 
 [aihints]
 space_consumer=true
+forced_after=0
 
 [buildcost]
 log=5

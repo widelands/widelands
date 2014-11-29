@@ -41,9 +41,9 @@
 namespace Widelands {class Game;}
 
 ///Thrown if a commandline parameter is faulty
-struct Parameter_error : public std::runtime_error {
-	explicit Parameter_error() : std::runtime_error("") {}
-	explicit Parameter_error(std::string text)
+struct ParameterError : public std::runtime_error {
+	explicit ParameterError() : std::runtime_error("") {}
+	explicit ParameterError(std::string text)
 		: std::runtime_error(text)
 	{}
 };
@@ -58,7 +58,9 @@ struct InputCallback {
 	 int32_t x, int32_t y);      // The coordinates of the mouse at release time.
 	void (*mouse_move)
 	(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	void (*key)        (bool down, SDL_keysym code);
+	void (*key)        (bool down, SDL_Keysym code);
+	void (*textinput) (const std::string& text);
+	void (*mouse_wheel) (uint32_t which, int32_t x, int32_t y);
 };
 
 /// You know main functions, of course. This is the main struct.
@@ -143,7 +145,7 @@ struct WLApplication {
 
 	/// Get the state of the current KeyBoard Button
 	/// \warning This function doesn't check for dumbness
-	bool get_key_state(SDLKey const key) const {return SDL_GetKeyState(nullptr)[key];}
+	bool get_key_state(SDL_Scancode const key) const {return SDL_GetKeyboardState(nullptr)[key];}
 
 	//@{
 	void warp_mouse(Point);
@@ -162,18 +164,14 @@ struct WLApplication {
 	void set_mouse_lock(const bool locked) {m_mouse_locked = locked;}
 	//@}
 
-	void init_graphics(int32_t w, int32_t h, bool fullscreen, bool opengl);
 
-	/**
-	 * Refresh the graphics from the latest options.
-	 *
-	 * \note See caveats for \ref init_graphics()
-	 */
+	// Refresh the graphics settings with the latest options.
 	void refresh_graphics();
 
 	void handle_input(InputCallback const *);
 
 	void mainmenu();
+	void mainmenu_tutorial();
 	void mainmenu_singleplayer();
 	void mainmenu_multiplayer();
 	void mainmenu_editor();
@@ -183,19 +181,15 @@ struct WLApplication {
 	bool campaign_game();
 	void replay();
 
-	static void show_usage();
-
 	static void emergency_save(Widelands::Game &);
 
-protected:
+private:
 	WLApplication(int argc, char const * const * argv);
 
 	bool poll_event(SDL_Event &);
 
 	bool init_settings();
 	void init_language();
-	std::string find_relative_locale_path(std::string localedir);
-	std::string get_executable_path();
 	void shutdown_settings();
 
 	bool init_hardware();
@@ -204,7 +198,6 @@ protected:
 	void parse_commandline(int argc, char const * const * argv);
 	void handle_commandline_parameters();
 
-	void setup_searchpaths(std::string argv0);
 	void setup_homedir();
 
 	void cleanup_replays();
@@ -212,9 +205,7 @@ protected:
 	bool redirect_output(std::string path = "");
 
 	/**
-	 * The commandline, conveniently repackaged
-	 * This is usually not empty, it contains at least the tuple
-	 * {"EXENAME", argv0}
+	 * The commandline, conveniently repackaged.
 	 */
 	std::map<std::string, std::string> m_commandline;
 
@@ -250,20 +241,20 @@ protected:
 	///true if an external entity wants us to quit
 	bool   m_should_die;
 
-	//do we want to search the default places for widelands installs
-	bool   m_default_datadirs;
 	std::string m_homedir;
 
 	/// flag indicating if stdout and stderr have been redirected
 	bool m_redirected_stdio;
-private:
+
+	/// Absolute path to the data directory.
+	std::string m_datadir;
+
 	///Holds this process' one and only instance of WLApplication, if it was
 	///created already. nullptr otherwise.
 	///\note This is private on purpose. Read the class documentation.
 	static WLApplication * the_singleton;
 
 	void _handle_mousebutton(SDL_Event &, InputCallback const *);
-
 };
 
 #endif  // end of include guard: WL_WLAPPLICATION_H

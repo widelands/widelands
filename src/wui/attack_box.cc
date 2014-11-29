@@ -19,6 +19,10 @@
 
 #include "wui/attack_box.h"
 
+#include <string>
+
+#include <boost/format.hpp>
+
 #include "base/macros.h"
 #include "graphic/graphic.h"
 #include "logic/soldier.h"
@@ -54,7 +58,7 @@ uint32_t AttackBox::get_max_attackers() {
 	assert(m_pl);
 
 	if (upcast(Building, building, m_map->get_immovable(*m_node)))
-		return m_pl->findAttackSoldiers(building->base_flag());
+		return m_pl->find_attack_soldiers(building->base_flag());
 	return 0;
 }
 
@@ -119,7 +123,6 @@ void AttackBox::update_attack() {
 	assert(m_less_soldiers);
 	assert(m_add_soldiers);
 
-	char buf[20];
 	int32_t max_attackers = get_max_attackers();
 
 	if (m_slider_soldiers->get_max_value() != max_attackers)
@@ -129,11 +132,12 @@ void AttackBox::update_attack() {
 	m_add_soldiers->set_enabled(max_attackers > m_slider_soldiers->get_value());
 	m_less_soldiers  ->set_enabled(m_slider_soldiers->get_value() > 0);
 
-	sprintf(buf, "%u / %u", m_slider_soldiers->get_value(), max_attackers);
-	m_text_soldiers->set_text(buf);
+	/** TRANSLATORS: %1% of %2% soldiers. Used in Attack box. */
+	m_text_soldiers->set_text((boost::format(_("%1% / %2%"))
+									  % m_slider_soldiers->get_value()
+									  % max_attackers).str());
 
-	sprintf(buf, "%u", max_attackers);
-	m_add_soldiers->set_title(buf);
+	m_add_soldiers->set_title(std::to_string(max_attackers));
 }
 
 void AttackBox::init() {

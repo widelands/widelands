@@ -32,17 +32,17 @@
 #include "ui_basic/window.h"
 
 /// Show a window with information about the pointed at node and triangle.
-int32_t Editor_Info_Tool::handle_click_impl(Widelands::Map& map,
+int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
 					    const Widelands::World& world,
-					    Widelands::Node_and_Triangle<> center,
-					    Editor_Interactive& parent,
-					    Editor_Action_Args& /* args */) {
+					    Widelands::NodeAndTriangle<> center,
+					    EditorInteractive& parent,
+					    EditorActionArgs& /* args */) {
 	UI::Window * const w =
 	    new UI::Window
 	(&parent, "field_information", 30, 30, 400, 200,
 	 _("Field Information"));
-	UI::Multiline_Textarea * const multiline_textarea =
-	    new UI::Multiline_Textarea
+	UI::MultilineTextarea * const multiline_textarea =
+	    new UI::MultilineTextarea
 	(w, 0, 0, w->get_inner_w(), w->get_inner_h());
 
 	Widelands::Field & f = map[center.node];
@@ -78,10 +78,9 @@ int32_t Editor_Info_Tool::handle_click_impl(Widelands::Map& map,
 	buf += std::string("• ") + (boost::format(_("Caps:%s")) % temp).str() + "\n";
 
 	if (f.get_owned_by() > 0) {
-		buf += std::string("• ");
-		char buf1[1024];
-		snprintf(buf1, sizeof(buf1), _("Owned by: %u"), f.get_owned_by());
-		buf += std::string(buf1) + "\n";
+		buf += std::string("• ") +
+				 (boost::format(_("Owned by: Player %u"))
+				  % static_cast<unsigned int>(f.get_owned_by())).str() + "\n";
 	} else {
 		buf += std::string("• ") + _("Owned by: —") + "\n";
 	}
@@ -105,7 +104,7 @@ int32_t Editor_Info_Tool::handle_click_impl(Widelands::Map& map,
 	// *** Resources info
 	buf += std::string("\n") + _("Resources:") + "\n";
 
-	Widelands::Resource_Index ridx = f.get_resources();
+	Widelands::ResourceIndex ridx = f.get_resources();
 	int ramount = f.get_resources_amount();
 
 	if (ramount > 0) {
@@ -120,7 +119,7 @@ int32_t Editor_Info_Tool::handle_click_impl(Widelands::Map& map,
 
 	// *** Map info
 	buf += std::string("\n") + _("Map:") + "\n";
-	buf += "• " + (boost::format(_("Name: %s")) % map.get_name()).str() + "\n";
+	buf += "• " + (boost::format(_("Name: %s")) % map.get_name().c_str()).str() + "\n";
 	buf += "• " + (boost::format(_("Size: %1$ix%2$i"))
 					 % map.get_width() % map.get_height()).str() + "\n";
 
@@ -133,7 +132,7 @@ int32_t Editor_Info_Tool::handle_click_impl(Widelands::Map& map,
 	}
 
 	buf += "• " + (boost::format(_("Author: %s")) % map.get_author()).str() + "\n";
-	buf += "• " + (boost::format(_("Descr: %s")) % map.get_description()).str() + "\n";
+	buf += "• " + (boost::format(_("Descr: %s")) % map.get_description().c_str()).str() + "\n";
 
 	multiline_textarea->set_text(buf.c_str());
 

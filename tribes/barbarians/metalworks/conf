@@ -12,8 +12,8 @@ output=shovel
 enhancement=axfactory
 
 [aihints]
-build_material=false
-is_basic=true
+forced_after=300
+prohibited_till=120
 
 [buildcost]
 log=1

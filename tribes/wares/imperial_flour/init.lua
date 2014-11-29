@@ -8,7 +8,7 @@ tribes:new_ware_type{
    genericname = _"flour",
    tribe = "empire",
    default_target_quantity = 20,
-   preciousness = 3,
+   preciousness = 5,
    -- TRANSLATORS: Helptext for a ware
    helptext = _"Flour is produced by the mill out of wheat and is needed in the bakery to produce the tasty Empire bread.",
    animations = {

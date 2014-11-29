@@ -58,12 +58,12 @@ private:
  * road.
  */
 struct Road : public PlayerImmovable {
-	friend class Map_Roaddata_Data_Packet; // For saving
-	friend class Map_Road_Data_Packet; // For init()
+	friend class MapRoaddataPacket; // For saving
+	friend class MapRoadPacket; // For init()
 
 	const RoadDescr& descr() const;
 
-	static bool IsRoadDescr(MapObjectDescr const *);
+	static bool is_road_descr(MapObjectDescr const *);
 
 	enum FlagId {
 		FlagStart = 0,
@@ -82,7 +82,7 @@ struct Road : public PlayerImmovable {
 	virtual ~Road();
 
 	static Road & create
-		(Editor_Game_Base &,
+		(EditorGameBase &,
 		 Flag & start, Flag & end, const Path &);
 
 	Flag & get_flag(FlagId const flag) const {return *m_flags[flag];}
@@ -90,7 +90,7 @@ struct Road : public PlayerImmovable {
 	uint8_t get_roadtype() const {return m_type;}
 	int32_t  get_size    () const override;
 	bool get_passable() const override;
-	PositionList get_positions(const Editor_Game_Base &) const override;
+	PositionList get_positions(const EditorGameBase &) const override;
 
 	Flag & base_flag() override;
 
@@ -108,25 +108,25 @@ struct Road : public PlayerImmovable {
 	void remove_worker(Worker &) override;
 	void assign_carrier(Carrier &, uint8_t);
 
-	void log_general_info(const Editor_Game_Base &) override;
+	void log_general_info(const EditorGameBase &) override;
 
 protected:
-	void init(Editor_Game_Base &) override;
-	void cleanup(Editor_Game_Base &) override;
+	void init(EditorGameBase &) override;
+	void cleanup(EditorGameBase &) override;
 
-	void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) override;
+	void draw(const EditorGameBase &, RenderTarget &, const FCoords&, const Point&) override;
 
 private:
-	void _set_path(Editor_Game_Base &, const Path &);
+	void _set_path(EditorGameBase &, const Path &);
 
-	void _mark_map(Editor_Game_Base &);
-	void _unmark_map(Editor_Game_Base &);
+	void _mark_map(EditorGameBase &);
+	void _unmark_map(EditorGameBase &);
 
-	void _link_into_flags(Editor_Game_Base &);
+	void _link_into_flags(EditorGameBase &);
 
 	void _request_carrier(CarrierSlot &);
 	static void _request_carrier_callback
-		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
+		(Game &, Request &, WareIndex, Worker *, PlayerImmovable &);
 
 private:
 
@@ -147,7 +147,7 @@ private:
 	Path       m_path;       ///< path goes from start to end
 	uint32_t   m_idle_index; ///< index into path where carriers should idle
 
-	typedef std::vector<CarrierSlot> SlotVector;
+	using SlotVector = std::vector<CarrierSlot>;
 	SlotVector m_carrier_slots;
 };
 

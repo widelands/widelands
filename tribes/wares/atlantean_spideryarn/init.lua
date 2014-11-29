@@ -8,7 +8,7 @@ tribes:new_ware_type{
    genericname = _"spideryarn",
    tribe = "atlanteans",
    default_target_quantity = 10,
-   preciousness = 2,
+   preciousness = 11,
    -- TRANSLATORS: Helptext for a ware
    helptext = _"This yarn is produced by spiders, which are bred by spider farms. It is processed into spidercloth in a weaving mill.",
    animations = {

@@ -26,59 +26,62 @@
 
 LoginBox::LoginBox(Panel & parent)
 :
-Window(&parent, "login_box", 0, 0, 500, 210, _("Metaserver login"))
+Window(&parent, "login_box", 0, 0, 500, 220, _("Metaserver login"))
 {
 	center_to_parent();
 
-	ta_nickname = new UI::Textarea(this, 10, 5, _("Nickname:"));
+	int32_t margin = 10;
+
+	ta_nickname = new UI::Textarea(this, margin, margin, _("Nickname:"));
 	eb_nickname =
 		new UI::EditBox
-			(this, 150, 5, 330, 20,
+			(this, 150, margin, 330, 20,
 			 g_gr->images().get("pics/but2.png"), UI::Align_Left);
 
-	ta_password = new UI::Textarea(this, 10, 40, _("Password:"));
+	ta_password = new UI::Textarea(this, margin, 40, _("Password:"));
 	eb_password =
 		new UI::EditBox
 			(this, 150, 40, 330, 20,
 			 g_gr->images().get("pics/but2.png"), UI::Align_Left);
 
 	pwd_warning =
-		new UI::Multiline_Textarea
-			(this, 10, 65, 505, 50,
+		new UI::MultilineTextarea
+			(this, margin, 65, 505, 50,
 			 _("WARNING: Password will be shown and saved readable!"),
 			 UI::Align_Left);
 
-	cb_register = new UI::Checkbox(this, Point(10, 110));
+	cb_register = new UI::Checkbox(this, Point(margin, 110));
 	ta_register =
 		new UI::Textarea(this, 40, 110, _("Log in to a registered account"));
 
-	cb_auto_log = new UI::Checkbox(this, Point(10, 135));
-	ta_auto_log = new UI::Textarea
-		(this, 40, 135,
+	cb_auto_log = new UI::Checkbox(this, Point(margin, 135));
+	ta_auto_log = new UI::MultilineTextarea
+		(this, 40, 135, get_inner_w() - cb_auto_log->get_w() - margin, 35,
 		 _("Automatically use this login information from now on."));
 
 	UI::Button * loginbtn = new UI::Button
 		(this, "login",
-		 (get_inner_w() / 2 - 200) / 2, 175, 200, 20,
+		 (get_inner_w() / 2 - 200) / 2, get_inner_h() - 20 - margin,
+		 200, 20,
 		 g_gr->images().get("pics/but0.png"),
 		 _("Login"));
-	loginbtn->sigclicked.connect(boost::bind(&LoginBox::pressedLogin, boost::ref(*this)));
+	loginbtn->sigclicked.connect(boost::bind(&LoginBox::pressed_login, boost::ref(*this)));
 	UI::Button * cancelbtn = new UI::Button
 		(this, "cancel",
-		 (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2, 175, 200, 20,
+		 (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2, loginbtn->get_y(), 200, 20,
 		 g_gr->images().get("pics/but1.png"),
 		 _("Cancel"));
-	cancelbtn->sigclicked.connect(boost::bind(&LoginBox::pressedCancel, boost::ref(*this)));
+	cancelbtn->sigclicked.connect(boost::bind(&LoginBox::pressed_cancel, boost::ref(*this)));
 
 	Section & s = g_options.pull_section("global");
-	eb_nickname->setText(s.get_string("nickname", _("nobody")));
-	eb_password->setText(s.get_string("password", ""));
+	eb_nickname->set_text(s.get_string("nickname", _("nobody")));
+	eb_password->set_text(s.get_string("password", ""));
 	cb_register->set_state(s.get_bool("registered", false));
 }
 
 
 /// called, if "login" is pressed
-void LoginBox::pressedLogin()
+void LoginBox::pressed_login()
 {
 	// Check if all needed input fields are valid
 	if (eb_nickname->text().empty()) {
@@ -108,7 +111,7 @@ void LoginBox::pressedLogin()
 
 
 /// Called if "cancel" was pressed
-void LoginBox::pressedCancel()
+void LoginBox::pressed_cancel()
 {
 	end_modal(0);
 }

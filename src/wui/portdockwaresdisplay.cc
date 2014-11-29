@@ -39,7 +39,7 @@ namespace {
 struct PortDockWaresDisplay : AbstractWaresDisplay {
 	PortDockWaresDisplay(Panel * parent, uint32_t width, PortDock & pd, Widelands::WareWorker type);
 
-	std::string info_for_ware(Widelands::Ware_Index ware) override;
+	std::string info_for_ware(Widelands::WareIndex ware) override;
 
 private:
 	PortDock & m_portdock;
@@ -53,7 +53,7 @@ PortDockWaresDisplay::PortDockWaresDisplay
 	set_inner_size(width, 0);
 }
 
-std::string PortDockWaresDisplay::info_for_ware(Widelands::Ware_Index ware)
+std::string PortDockWaresDisplay::info_for_ware(Widelands::WareIndex ware)
 {
 	uint32_t count = m_portdock.count_waiting(get_type(), ware);
 	return boost::lexical_cast<std::string>(count);
@@ -71,7 +71,7 @@ AbstractWaresDisplay * create_portdock_wares_display
 }
 
 /// Create a panel that displays the wares and the builder waiting for the expedition to start.
-UI::Box * create_portdock_expedition_display(UI::Panel * parent, Warehouse & wh, Interactive_GameBase & igb)
+UI::Box * create_portdock_expedition_display(UI::Panel * parent, Warehouse & wh, InteractiveGameBase & igb)
 {
 	UI::Box & box = *new UI::Box(parent, 0, 0, UI::Box::Vertical);
 

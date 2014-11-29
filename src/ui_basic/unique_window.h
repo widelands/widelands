@@ -26,7 +26,7 @@
 #include "ui_basic/window.h"
 
 namespace UI {
-struct Panel;
+class Panel;
 
 
 /**

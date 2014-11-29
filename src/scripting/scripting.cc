@@ -77,9 +77,9 @@ int check_return_value_for_errors(lua_State* L, int rv) {
 
 // Setup the basic Widelands functions and pushes egbase into the Lua registry
 // so that it is available for all the other Lua functions.
-void setup_for_editor_and_game(lua_State* L, Widelands::Editor_Game_Base * g) {
+void setup_for_editor_and_game(lua_State* L, Widelands::EditorGameBase * g) {
 	LuaBases::luaopen_wlbases(L);
-	LuaMap::luaopen_wlmap(L);
+	LuaMaps::luaopen_wlmap(L);
 	LuaUi::luaopen_wlui(L);
 
 	// Push the editor game base
@@ -129,11 +129,11 @@ run_string_as_script(lua_State* L, const std::string& identifier, const std::str
 
 // Reads the 'filename' from the 'fs' and returns its content.
 std::string get_file_content(FileSystem* fs, const std::string& filename) {
-	if (!fs || !fs->FileExists(filename)) {
+	if (!fs || !fs->file_exists(filename)) {
 		throw LuaScriptNotExistingError(filename);
 	}
 	size_t length;
-	void* input_data = fs->Load(filename, length);
+	void* input_data = fs->load(filename, length);
 	const std::string data(static_cast<char*>(input_data));
 	// make sure the input_data is freed
 	free(input_data);
@@ -232,7 +232,7 @@ std::unique_ptr<LuaTable> LuaInterface::get_hook(const std::string& name) {
  * LuaEditorInterface
  * ===========================
  */
-LuaEditorInterface::LuaEditorInterface(Widelands::Editor_Game_Base* g)
+LuaEditorInterface::LuaEditorInterface(Widelands::EditorGameBase* g)
 	: m_factory(new EditorFactory())
 {
 	setup_for_editor_and_game(m_L, g);
@@ -336,7 +336,7 @@ void LuaGameInterface::write_coroutine(FileWrite& fw, LuaCoroutine* cr) {
 
 
 void LuaGameInterface::read_global_env
-	(FileRead & fr, Widelands::MapMapObjectLoader & mol,
+	(FileRead & fr, Widelands::MapObjectLoader & mol,
 	 uint32_t size)
 {
 	// Clean out the garbage before loading.
@@ -375,7 +375,7 @@ void LuaGameInterface::read_global_env
 }
 
 uint32_t LuaGameInterface::write_global_env
-	(FileWrite & fw, Widelands::MapMapObjectSaver & mos)
+	(FileWrite & fw, Widelands::MapObjectSaver & mos)
 {
 	// Clean out the garbage before writing.
 	lua_gc(m_L, LUA_GCCOLLECT, 0);

@@ -58,12 +58,8 @@ Button::Button //  for textual buttons
 	m_clr_down      (229, 161, 2),
 	m_draw_caret    (false)
 {
-	set_think(false);
-
-	if (m_pic_background)
-		set_cache(true);
+	set_thinks(false);
 }
-
 
 Button::Button //  for pictorial buttons
 	(Panel * const parent,
@@ -90,10 +86,7 @@ Button::Button //  for pictorial buttons
 	m_clr_down      (229, 161, 2),
 	m_draw_caret    (false)
 {
-	set_think(false);
-
-	if (m_pic_background)
-		set_cache(true);
+	set_thinks(false);
 }
 
 
@@ -148,7 +141,7 @@ void Button::set_enabled(bool const on)
 	else {
 		if (m_pressed) {
 			m_pressed = false;
-			set_think(false);
+			set_thinks(false);
 			grab_mouse(false);
 		}
 		m_enabled = false;
@@ -253,7 +246,6 @@ void Button::draw(RenderTarget & dst)
 			dst.fill_rect(Rect(Point(0, 2), 2, get_h() - 2), shade);
 			dst.fill_rect(Rect(Point(0, get_h() - 2), get_w(), get_h()), shade);
 			dst.fill_rect(Rect(Point(get_w() - 2, 0), get_w(), get_h()), shade);
-			//dst.draw_rect(Rect(Point(0, 0), get_w(), get_h()), m_clr_down);
 		}
 	}
 }
@@ -314,7 +306,7 @@ bool Button::handle_mousepress(uint8_t const btn, int32_t, int32_t) {
 		if (m_repeating) {
 			m_time_nextact =
 				WLApplication::get()->get_time() + MOUSE_BUTTON_AUTOREPEAT_DELAY;
-			set_think(true);
+			set_thinks(true);
 		}
 	}
 	update();
@@ -327,7 +319,7 @@ bool Button::handle_mouserelease(uint8_t const btn, int32_t, int32_t) {
 
 	if (m_pressed) {
 		m_pressed = false;
-		set_think(false);
+		set_thinks(false);
 		grab_mouse(false);
 		update();
 		if (m_highlighted && m_enabled) {
@@ -341,6 +333,7 @@ bool Button::handle_mouserelease(uint8_t const btn, int32_t, int32_t) {
 	}
 	return true;
 }
+
 bool Button::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_t) {
 	return true; // We handle this always by lighting up
 }

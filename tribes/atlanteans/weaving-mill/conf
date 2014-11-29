@@ -4,7 +4,8 @@ output=tabard
 output=golden_tabard
 
 [aihints]
-is_basic=true
+forced_after=60
+prohibited_till=60
 
 [buildcost]
 log=3

@@ -33,10 +33,10 @@ class FileRead;
 class FileWrite;
 
 namespace Widelands {
-	class Editor_Game_Base;
+	class EditorGameBase;
 	class Game;
-	class MapMapObjectLoader;
-	struct MapMapObjectSaver;
+	class MapObjectLoader;
+	struct MapObjectSaver;
 }
 
 class EditorFactory;
@@ -62,7 +62,7 @@ protected:
 
 class LuaEditorInterface : public LuaInterface {
 public:
-	LuaEditorInterface(Widelands::Editor_Game_Base * g);
+	LuaEditorInterface(Widelands::EditorGameBase * g);
 	virtual ~LuaEditorInterface();
 
 private:
@@ -80,9 +80,9 @@ public:
 
 	// Input output for the global game state.
 	void read_global_env
-		(FileRead &, Widelands::MapMapObjectLoader &, uint32_t);
+		(FileRead &, Widelands::MapObjectLoader &, uint32_t);
 	uint32_t write_global_env
-		(FileWrite &, Widelands::MapMapObjectSaver &);
+		(FileWrite &, Widelands::MapObjectSaver &);
 
 private:
 	std::unique_ptr<GameFactory> m_factory;

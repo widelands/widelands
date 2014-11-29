@@ -33,15 +33,15 @@ Icon::Icon
 	m_pic(picture_id)
 {
 	set_handle_mouse(false);
-	set_think(false);
+	set_thinks(false);
 }
 
-void Icon::setIcon(const Image* picture_id) {
+void Icon::set_icon(const Image* picture_id) {
 	m_pic = picture_id;
 	update();
 }
 
-void Icon::setFrame(const RGBColor& color)
+void Icon::set_frame(const RGBColor& color)
 {
 	m_draw_frame = true;
 	m_framecolor.r = color.r;
@@ -49,7 +49,7 @@ void Icon::setFrame(const RGBColor& color)
 	m_framecolor.b = color.b;
 }
 
-void Icon::setNoFrame()
+void Icon::set_no_frame()
 {
 	m_draw_frame = false;
 }

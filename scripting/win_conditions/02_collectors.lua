@@ -3,8 +3,9 @@
 -- =======================================================================
 
 include "scripting/coroutine.lua" -- for sleep
-include "scripting/table.lua"
+include "scripting/messages.lua"
 include "scripting/formatting.lua"
+include "scripting/table.lua"
 include "scripting/win_condition_functions.lua"
 
 set_textdomain("win_conditions")
@@ -138,7 +139,7 @@ return {
       end
 
       for idx, plr in ipairs(plrs) do
-         plr:send_message(game_status.title, "<rt>" .. msg .. "</rt>")
+			send_message(plr, game_status.title,  "<rt>" .. msg .. "</rt>", {popup = true})
       end
    end
 
