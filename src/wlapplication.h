@@ -164,13 +164,8 @@ struct WLApplication {
 	void set_mouse_lock(const bool locked) {m_mouse_locked = locked;}
 	//@}
 
-	void init_graphics(int32_t w, int32_t h, bool fullscreen, bool opengl);
 
-	/**
-	 * Refresh the graphics from the latest options.
-	 *
-	 * \note See caveats for \ref init_graphics()
-	 */
+	// Refresh the graphics settings with the latest options.
 	void refresh_graphics();
 
 	void handle_input(InputCallback const *);

@@ -26,7 +26,7 @@
 #include "base/wexception.h"
 #include "graphic/image_io.h"
 #include "graphic/minimap_renderer.h"
-#include "graphic/surface.h"
+#include "graphic/texture.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
@@ -217,7 +217,7 @@ void MapSaver::save() {
 
 	// Write minimap
 	{
-		std::unique_ptr<Surface> minimap(
+		std::unique_ptr<Texture> minimap(
 		   draw_minimap(m_egbase, nullptr, Point(0, 0), MiniMapLayer::Terrain));
 		FileWrite fw;
 		save_surface_to_png(minimap.get(), &fw);
