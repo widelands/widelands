@@ -27,7 +27,7 @@
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/in_memory_image.h"
-#include "graphic/surface.h"
+#include "graphic/terrain_texture.h"
 #include "graphic/texture.h"
 #include "logic/field.h"
 #include "logic/map.h"
@@ -154,16 +154,16 @@ bool is_minimap_frameborder
 
 // Does the actual work of drawing the minimap.
 void draw_minimap_int
-	(Surface* surface, const Widelands::EditorGameBase& egbase,
+	(Texture* texture, const Widelands::EditorGameBase& egbase,
 	 const Widelands::Player* player, const Point& viewpoint, MiniMapLayer layers)
 {
 	const Widelands::Map & map = egbase.map();
 
-	uint8_t* const pixels = surface->get_pixels();
-	const SDL_PixelFormat& format = surface->format();
-	const uint16_t pitch = surface->get_pitch();
-	const uint16_t surface_h = surface->height();
-	const uint16_t surface_w = surface->width();
+	uint8_t* const pixels = texture->get_pixels();
+	const SDL_PixelFormat& format = texture->format();
+	const uint16_t pitch = texture->get_pitch();
+	const uint16_t surface_h = texture->height();
+	const uint16_t surface_w = texture->width();
 
 	// size of the display frame
 	int32_t xsize = g_gr->get_xres() / TRIANGLE_WIDTH / 2;
@@ -258,29 +258,29 @@ void draw_minimap_int
 
 }  // namespace
 
-std::unique_ptr<Surface> draw_minimap(const EditorGameBase& egbase,
+std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
                                       const Player* player,
                                       const Point& viewpoint,
                                       MiniMapLayer layers) {
 	// First create a temporary SDL Surface to draw the minimap.
 	// TODO(unknown): Currently the minimap is redrawn every frame. That is not really
-	//       necesary. The created surface could be cached and only redrawn two
+	//       necesary. The created texture could be cached and only redrawn two
 	//       or three times per second
 	const Map& map = egbase.map();
 	const int16_t map_w = (layers & MiniMapLayer::Zoom2) ? map.get_width() * 2 : map.get_width();
 	const int16_t map_h = (layers & MiniMapLayer::Zoom2) ? map.get_height() * 2 : map.get_height();
 
-	Surface* surface = Surface::create(map_w, map_h);
-	assert(surface->format().BytesPerPixel == sizeof(uint32_t));
+	Texture* texture = new Texture(map_w, map_h);
+	assert(texture->format().BytesPerPixel == sizeof(uint32_t));
 
-	surface->fill_rect(Rect(0, 0, surface->width(), surface->height()), RGBAColor(0, 0, 0, 255));
-	surface->lock(Surface::Lock_Normal);
+	texture->fill_rect(Rect(0, 0, texture->width(), texture->height()), RGBAColor(0, 0, 0, 255));
+	texture->lock(Surface::Lock_Normal);
 
-	draw_minimap_int(surface, egbase, player, viewpoint, layers);
+	draw_minimap_int(texture, egbase, player, viewpoint, layers);
 
-	surface->unlock(Surface::Unlock_Update);
+	texture->unlock(Surface::Unlock_Update);
 
-	return std::unique_ptr<Surface>(surface);
+	return std::unique_ptr<Texture>(texture);
 }
 
 void write_minimap_image
@@ -309,8 +309,8 @@ void write_minimap_image
 	viewpoint.y -= map_h / 2;
 
 	// Render minimap
-	std::unique_ptr<Surface> surface(draw_minimap(egbase, player, viewpoint, layers));
-	std::unique_ptr<const Image> image(new_in_memory_image("minimap", surface.release()));
+	std::unique_ptr<Texture> texture(draw_minimap(egbase, player, viewpoint, layers));
+	std::unique_ptr<const Image> image(new_in_memory_image("minimap", texture.release()));
 	g_gr->save_png(image.get(), streamwrite);
 	image.reset();
 }

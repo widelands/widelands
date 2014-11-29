@@ -25,9 +25,9 @@
 #include <string>
 
 #include "graphic/image_cache.h"
-#include "graphic/surface_cache.h"
 #include "graphic/text/rt_render.h"
 #include "graphic/text/test/paths.h"
+#include "graphic/texture_cache.h"
 #include "io/filesystem/layered_filesystem.h"
 
 StandaloneRenderer::StandaloneRenderer() {
@@ -35,9 +35,9 @@ StandaloneRenderer::StandaloneRenderer() {
 	g_fs->add_file_system(&FileSystem::create(WIDELANDS_DATA_DIR));
 	g_fs->add_file_system(&FileSystem::create(RICHTEXT_DATA_DIR));
 
-	surface_cache_.reset(create_surface_cache(500 << 20));  // 500 MB
-	image_cache_.reset(new ImageCache(surface_cache_.get()));
-	renderer_.reset(new RT::Renderer(image_cache_.get(), surface_cache_.get()));
+	texture_cache_.reset(create_texture_cache(500 << 20));  // 500 MB
+	image_cache_.reset(new ImageCache(texture_cache_.get()));
+	renderer_.reset(new RT::Renderer(image_cache_.get(), texture_cache_.get()));
 }
 
 StandaloneRenderer::~StandaloneRenderer() {

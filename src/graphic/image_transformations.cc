@@ -28,9 +28,8 @@
 #include "base/macros.h"
 #include "graphic/color.h"
 #include "graphic/graphic.h"
-#include "graphic/sdl/surface.h"
-#include "graphic/surface.h"
-#include "graphic/surface_cache.h"
+#include "graphic/texture.h"
+#include "graphic/texture_cache.h"
 
 using namespace std;
 
@@ -45,34 +44,34 @@ uint32_t luminance_table_b[0x100];
  * Create and return an \ref SDL_Surface that contains the given sub-rectangle
  * of the given pixel region.
  */
-SDL_Surface* extract_sdl_surface(Surface & surf, Rect srcrect)
+SDL_Surface* extract_sdl_surface(Texture & texture, Rect srcrect)
 {
 	assert(srcrect.x >= 0);
 	assert(srcrect.y >= 0);
-	assert(srcrect.x + srcrect.w <= surf.width());
-	assert(srcrect.y + srcrect.h <= surf.height());
+	assert(srcrect.x + srcrect.w <= texture.width());
+	assert(srcrect.y + srcrect.h <= texture.height());
 
-	const SDL_PixelFormat & fmt = surf.format();
+	const SDL_PixelFormat & fmt = texture.format();
 	SDL_Surface * dest = SDL_CreateRGBSurface
 		(SDL_SWSURFACE, srcrect.w, srcrect.h,
 		 fmt.BitsPerPixel, fmt.Rmask, fmt.Gmask, fmt.Bmask, fmt.Amask);
 
-	surf.lock(Surface::Lock_Normal);
+	texture.lock(Surface::Lock_Normal);
 	SDL_LockSurface(dest);
 
-	uint32_t srcpitch = surf.get_pitch();
+	uint32_t srcpitch = texture.get_pitch();
 	uint32_t rowsize = srcrect.w * fmt.BytesPerPixel;
-	uint8_t * srcpix = surf.get_pixels() + srcpitch * srcrect.y + fmt.BytesPerPixel * srcrect.x;
+	uint8_t * srcpix = texture.get_pixels() + srcpitch * srcrect.y + fmt.BytesPerPixel * srcrect.x;
 	uint8_t * dstpix = static_cast<uint8_t *>(dest->pixels);
 
-	for (uint32_t y = 0; y < srcrect.h; ++y) {
+	for (int y = 0; y < srcrect.h; ++y) {
 		memcpy(dstpix, srcpix, rowsize);
 		srcpix += srcpitch;
 		dstpix += dest->pitch;
 	}
 
 	SDL_UnlockSurface(dest);
-	surf.unlock(Surface::Unlock_NoChange);
+	texture.unlock(Surface::Unlock_NoChange);
 
 	return dest;
 }
@@ -80,24 +79,17 @@ SDL_Surface* extract_sdl_surface(Surface & surf, Rect srcrect)
 /**
  * Produces a resized version of the specified image
  */
-Surface* resize_surface(Surface* src, uint32_t w, uint32_t h) {
+Texture* resize_surface(Texture* src, uint32_t w, uint32_t h) {
 	assert(w != src->width() || h != src->height());
 
 	// First step: compute scaling factors
 	Rect srcrect = Rect(Point(0, 0), src->width(), src->height());
 
 	// Second step: get source material
-	SDL_Surface * srcsdl = nullptr;
+	SDL_Surface * srcsdl = extract_sdl_surface(*src, srcrect);
 	bool free_source = true;
-	if (upcast(const SDLSurface, sdlsrcsurf, src)) {
-		srcsdl = sdlsrcsurf->get_sdl_surface();
-		free_source = false;
-	} else {
-		// This is in OpenGL
-		srcsdl = extract_sdl_surface(*src, srcrect);
-	}
 
-	// If we actually shrink a surface, ballpark the zoom so that the shrinking
+	// If we actually shrink a texture, ballpark the zoom so that the shrinking
 	// effect is weakened.
 	int factor = 1;
 	while ((static_cast<double>(w) * factor / srcsdl->w) < 1. ||
@@ -154,29 +146,29 @@ Surface* resize_surface(Surface* src, uint32_t w, uint32_t h) {
 		zoomed = placed;
 	}
 
-	return Surface::create(zoomed);
+	return new Texture(zoomed);
 }
 
 /**
- * Create a grayed version of the given surface.
+ * Create a grayed version of the given texture.
  */
-Surface* gray_out_surface(Surface* surf) {
-	assert(surf);
+Texture* gray_out_texture(Texture* texture) {
+	assert(texture);
 
-	uint16_t w = surf->width();
-	uint16_t h = surf->height();
-	const SDL_PixelFormat & origfmt = surf->format();
+	uint16_t w = texture->width();
+	uint16_t h = texture->height();
+	const SDL_PixelFormat & origfmt = texture->format();
 
-	Surface* dest = Surface::create(w, h);
+	Texture* dest = new Texture(w, h);
 	const SDL_PixelFormat & destfmt = dest->format();
 
-	surf->lock(Surface::Lock_Normal);
+	texture->lock(Surface::Lock_Normal);
 	dest->lock(Surface::Lock_Discard);
 	for (uint32_t y = 0; y < h; ++y) {
 		for (uint32_t x = 0; x < w; ++x) {
 			RGBAColor color;
 
-			color.set(origfmt, surf->get_pixel(x, y));
+			color.set(origfmt, texture->get_pixel(x, y));
 
 			//  Halve the opacity to give some difference for image that are
 			//  grayscale to begin with.
@@ -192,32 +184,32 @@ Surface* gray_out_surface(Surface* surf) {
 			dest->set_pixel(x, y, color.map(destfmt));
 		}
 	}
-	surf->unlock(Surface::Unlock_NoChange);
+	texture->unlock(Surface::Unlock_NoChange);
 	dest->unlock(Surface::Unlock_Update);
 
 	return dest;
 }
 
 /**
- * Creates an image with changed luminosity from the given surface.
+ * Creates an image with changed luminosity from the given texture.
  */
-Surface* change_luminosity_of_surface(Surface* surf, float factor, bool halve_alpha) {
-	assert(surf);
+Texture* change_luminosity_of_texture(Texture* texture, float factor, bool halve_alpha) {
+	assert(texture);
 
-	uint16_t w = surf->width();
-	uint16_t h = surf->height();
-	const SDL_PixelFormat & origfmt = surf->format();
+	uint16_t w = texture->width();
+	uint16_t h = texture->height();
+	const SDL_PixelFormat & origfmt = texture->format();
 
-	Surface* dest = Surface::create(w, h);
+	Texture* dest = new Texture(w, h);
 	const SDL_PixelFormat & destfmt = dest->format();
 
-	surf->lock(Surface::Lock_Normal);
+	texture->lock(Surface::Lock_Normal);
 	dest->lock(Surface::Lock_Discard);
 	for (uint32_t y = 0; y < h; ++y) {
 		for (uint32_t x = 0; x < w; ++x) {
 			RGBAColor color;
 
-			color.set(origfmt, surf->get_pixel(x, y));
+			color.set(origfmt, texture->get_pixel(x, y));
 
 			if (halve_alpha)
 				color.a >>= 1;
@@ -229,7 +221,7 @@ Surface* change_luminosity_of_surface(Surface* surf, float factor, bool halve_al
 			dest->set_pixel(x, y, color.map(destfmt));
 		}
 	}
-	surf->unlock(Surface::Unlock_NoChange);
+	texture->unlock(Surface::Unlock_NoChange);
 	dest->unlock(Surface::Unlock_Update);
 
 	return dest;
@@ -237,26 +229,28 @@ Surface* change_luminosity_of_surface(Surface* surf, float factor, bool halve_al
 
 // Encodes the given Image into the corresponding image for player color.
 // Takes the neutral set of images and the player color mask.
-Surface* make_playerclr_surface(Surface& orig_surface, Surface& pcmask_surface, const RGBColor& color) {
-	Surface* new_surface = Surface::create(orig_surface.width(), orig_surface.height());
+Texture* make_playerclr_texture(Texture& original_texture,
+                                         Texture& pcmask_texture,
+                                         const RGBColor& color) {
+	Texture* new_texture = new Texture(original_texture.width(), original_texture.height());
 
-	const SDL_PixelFormat & fmt = orig_surface.format();
-	const SDL_PixelFormat & fmt_pc = pcmask_surface.format();
-	const SDL_PixelFormat & destfmt = new_surface->format();
+	const SDL_PixelFormat & fmt = original_texture.format();
+	const SDL_PixelFormat & fmt_pc = pcmask_texture.format();
+	const SDL_PixelFormat & destfmt = new_texture->format();
 
-	orig_surface.lock(Surface::Lock_Normal);
-	pcmask_surface.lock(Surface::Lock_Normal);
-	new_surface->lock(Surface::Lock_Discard);
+	original_texture.lock(Surface::Lock_Normal);
+	pcmask_texture.lock(Surface::Lock_Normal);
+	new_texture->lock(Surface::Lock_Discard);
 	// This could be done significantly faster, but since we
 	// cache the result, let's keep it simple for now.
-	for (uint32_t y = 0; y < orig_surface.height(); ++y) {
-		for (uint32_t x = 0; x < orig_surface.width(); ++x) {
+	for (uint32_t y = 0; y < original_texture.height(); ++y) {
+		for (uint32_t x = 0; x < original_texture.width(); ++x) {
 			RGBAColor source;
 			RGBAColor mask;
 			RGBAColor product;
 
-			source.set(fmt, orig_surface.get_pixel(x, y));
-			mask.set(fmt_pc, pcmask_surface.get_pixel(x, y));
+			source.set(fmt, original_texture.get_pixel(x, y));
+			mask.set(fmt_pc, pcmask_texture.get_pixel(x, y));
 
 			if
 				(uint32_t const influence =
@@ -285,45 +279,45 @@ Surface* make_playerclr_surface(Surface& orig_surface, Surface& pcmask_surface, 
 					product = source;
 				}
 
-			new_surface->set_pixel(x, y, product.map(destfmt));
+			new_texture->set_pixel(x, y, product.map(destfmt));
 		}
 	}
-	orig_surface.unlock(Surface::Unlock_NoChange);
-	pcmask_surface.unlock(Surface::Unlock_NoChange);
-	new_surface->unlock(Surface::Unlock_Update);
+	original_texture.unlock(Surface::Unlock_NoChange);
+	pcmask_texture.unlock(Surface::Unlock_NoChange);
+	new_texture->unlock(Surface::Unlock_Update);
 
-	return new_surface;
+	return new_texture;
 }
 
 // An Image implementation that is the transformation of another Image. Uses
-// the SurfaceCache to avoid recalculating the transformation too often. No
+// the TextureCache to avoid recalculating the transformation too often. No
 // ownerships are taken.
 class TransformedImage : public Image {
 public:
-	TransformedImage(const string& ghash, const Image& original, SurfaceCache* surface_cache) :
-		hash_(ghash), original_(original), surface_cache_(surface_cache) {}
+	TransformedImage(const string& ghash, const Image& original, TextureCache* texture_cache) :
+		hash_(ghash), original_(original), texture_cache_(texture_cache) {}
 	virtual ~TransformedImage() {}
 
 	// Implements Image.
 	uint16_t width() const override {return original_.width();}
 	uint16_t height() const override {return original_.height();}
 	const string& hash() const override {return hash_;}
-	Surface* surface() const override {
-		Surface* surf = surface_cache_->get(hash_);
-		if (surf)
-			return surf;
+	Texture* texture() const override {
+		Texture* texture = texture_cache_->get(hash_);
+		if (texture)
+			return texture;
 
-		surf = recalculate_surface();
-		surface_cache_->insert(hash_, surf, true);
-		return surf;
+		texture = recalculate_texture();
+		texture_cache_->insert(hash_, texture, true);
+		return texture;
 	}
 
-	virtual Surface* recalculate_surface() const = 0;
+	virtual Texture* recalculate_texture() const = 0;
 
 protected:
 	const string hash_;
 	const Image& original_;
-	SurfaceCache* const surface_cache_;  // not owned
+	TextureCache* const texture_cache_;  // not owned
 };
 
 // A resized copy of an Image.
@@ -331,8 +325,8 @@ class ResizedImage : public TransformedImage {
 public:
 	ResizedImage
 		(const string& ghash, const Image& original,
-		 SurfaceCache* surface_cache, uint16_t w, uint16_t h)
-		: TransformedImage(ghash, original, surface_cache), w_(w), h_(h) {
+		 TextureCache* texture_cache, uint16_t w, uint16_t h)
+		: TransformedImage(ghash, original, texture_cache), w_(w), h_(h) {
 			assert(w != original.width() || h != original.height());
 	}
 	virtual ~ResizedImage() {}
@@ -342,8 +336,8 @@ public:
 	uint16_t height() const override {return h_;}
 
 	// Implements TransformedImage.
-	Surface* recalculate_surface() const override {
-		Surface* rv = resize_surface(original_.surface(), w_, h_);
+	Texture* recalculate_texture() const override {
+		Texture* rv = resize_surface(original_.texture(), w_, h_);
 		return rv;
 	}
 
@@ -354,14 +348,14 @@ private:
 // A grayed out copy of an Image.
 class GrayedOutImage : public TransformedImage {
 public:
-	GrayedOutImage(const string& ghash, const Image& original, SurfaceCache* surface_cache) :
-		TransformedImage(ghash, original, surface_cache)
+	GrayedOutImage(const string& ghash, const Image& original, TextureCache* texture_cache) :
+		TransformedImage(ghash, original, texture_cache)
 	{}
 	virtual ~GrayedOutImage() {}
 
 	// Implements TransformedImage.
-	Surface* recalculate_surface() const override {
-		return gray_out_surface(original_.surface());
+	Texture* recalculate_texture() const override {
+		return gray_out_texture(original_.texture());
 	}
 };
 
@@ -370,16 +364,16 @@ class ChangeLuminosityImage : public TransformedImage {
 public:
 	ChangeLuminosityImage
 		(const string& ghash, const Image& original,
-		 SurfaceCache* surface_cache, float factor, bool halve_alpha)
-		: TransformedImage(ghash, original, surface_cache),
+		 TextureCache* texture_cache, float factor, bool halve_alpha)
+		: TransformedImage(ghash, original, texture_cache),
 		  factor_(factor),
 		  halve_alpha_(halve_alpha)
 	{}
 	virtual ~ChangeLuminosityImage() {}
 
 	// Implements TransformedImage.
-	Surface* recalculate_surface() const override {
-		return change_luminosity_of_surface(original_.surface(), factor_, halve_alpha_);
+	Texture* recalculate_texture() const override {
+		return change_luminosity_of_texture(original_.texture(), factor_, halve_alpha_);
 	}
 
 private:
@@ -393,14 +387,14 @@ class PlayerColoredImage : public TransformedImage {
 public:
 	PlayerColoredImage
 		(const string& ghash, const Image& original,
-		 SurfaceCache* surface_cache, const RGBColor& color, const Image& mask)
-		: TransformedImage(ghash, original, surface_cache), color_(color), mask_(mask)
+		 TextureCache* texture_cache, const RGBColor& color, const Image& mask)
+		: TransformedImage(ghash, original, texture_cache), color_(color), mask_(mask)
 		{}
 	virtual ~PlayerColoredImage() {}
 
 	// Implements TransformedImage.
-	Surface* recalculate_surface() const override {
-		return make_playerclr_surface(*original_.surface(), *mask_.surface(), color_);
+	Texture* recalculate_texture() const override {
+		return make_playerclr_texture(*original_.texture(), *mask_.texture(), color_);
 	}
 
 private:
@@ -433,7 +427,7 @@ const Image* resize(const Image* original, uint16_t w, uint16_t h) {
 	if (g_gr->images().has(new_hash))
 		return g_gr->images().get(new_hash);
 	return
-		g_gr->images().insert(new ResizedImage(new_hash, *original, &g_gr->surfaces(), w, h));
+		g_gr->images().insert(new ResizedImage(new_hash, *original, &g_gr->textures(), w, h));
 }
 
 const Image* gray_out(const Image* original) {
@@ -441,7 +435,7 @@ const Image* gray_out(const Image* original) {
 	if (g_gr->images().has(new_hash))
 		return g_gr->images().get(new_hash);
 	return
-		g_gr->images().insert(new GrayedOutImage(new_hash, *original, &g_gr->surfaces()));
+		g_gr->images().insert(new GrayedOutImage(new_hash, *original, &g_gr->textures()));
 }
 
 const Image* change_luminosity(const Image* original, float factor, bool halve_alpha) {
@@ -451,7 +445,7 @@ const Image* change_luminosity(const Image* original, float factor, bool halve_a
 		return g_gr->images().get(new_hash);
 	return
 		g_gr->images().insert
-			(new ChangeLuminosityImage(new_hash, *original, &g_gr->surfaces(), factor, halve_alpha));
+			(new ChangeLuminosityImage(new_hash, *original, &g_gr->textures(), factor, halve_alpha));
 }
 
 const Image* player_colored(const RGBColor& clr, const Image* original, const Image* mask) {
@@ -463,7 +457,7 @@ const Image* player_colored(const RGBColor& clr, const Image* original, const Im
 		return g_gr->images().get(new_hash);
 	return
 		g_gr->images().insert
-			(new PlayerColoredImage(new_hash, *original, &g_gr->surfaces(), clr, *mask));
+			(new PlayerColoredImage(new_hash, *original, &g_gr->textures(), clr, *mask));
 }
 
 }  // namespace ImageTransformations

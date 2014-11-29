@@ -264,7 +264,7 @@ bool InteractiveSpectator::handle_key(bool const down, SDL_Keysym const code)
 			return true;
 
 		case SDLK_f:
-			g_gr->toggle_fullscreen();
+			g_gr->set_fullscreen(!g_gr->fullscreen());
 			return true;
 
 		case SDLK_RETURN:

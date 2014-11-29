@@ -422,7 +422,7 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			break;
 
 		case SDLK_f:
-			g_gr->toggle_fullscreen();
+			g_gr->set_fullscreen(!g_gr->fullscreen());
 			handled = true;
 			break;
 

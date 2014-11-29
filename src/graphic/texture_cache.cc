@@ -17,7 +17,7 @@
  *
  */
 
-#include "graphic/surface_cache.h"
+#include "graphic/texture_cache.h"
 
 #include <cassert>
 #include <list>
@@ -26,33 +26,33 @@
 
 #include <SDL.h>
 
-#include "graphic/surface.h"
+#include "graphic/texture.h"
 
 using namespace std;
 
 // I took inspiration from http://timday.bitbucket.org/lru.html, but our use
 // case here is a little different.
 namespace  {
-class SurfaceCacheImpl : public SurfaceCache {
+class TextureCacheImpl : public TextureCache {
 public:
-	SurfaceCacheImpl(uint32_t max_transient_memory) :
+	TextureCacheImpl(uint32_t max_transient_memory) :
 		max_transient_memory_(max_transient_memory), used_transient_memory_(0) {}
-	virtual ~SurfaceCacheImpl();
+	virtual ~TextureCacheImpl();
 
-	// Implements SurfaceCache.
+	// Implements TextureCache.
 	void flush() override;
-	Surface* get(const string& hash) override;
-	Surface* insert(const string& hash, Surface*, bool) override;
+	Texture* get(const string& hash) override;
+	Texture* insert(const string& hash, Texture*, bool) override;
 
 private:
 	void drop();
 
 	using AccessHistory = list<string>;
 	struct Entry {
-		Entry(Surface* gs, const AccessHistory::iterator& it, bool transient) :
-			surface(gs), is_transient(transient), last_access(SDL_GetTicks()), list_iterator(it) {}
+		Entry(Texture* gs, const AccessHistory::iterator& it, bool transient) :
+			texture(gs), is_transient(transient), last_access(SDL_GetTicks()), list_iterator(it) {}
 
-		std::unique_ptr<Surface> surface;
+		std::unique_ptr<Texture> texture;
 		bool is_transient;
 		uint32_t last_access;  // Mainly for debugging and analysis.
 		const AccessHistory::iterator list_iterator;  // Only valid if is_transient is true.
@@ -65,11 +65,11 @@ private:
 	AccessHistory access_history_;
 };
 
-SurfaceCacheImpl::~SurfaceCacheImpl() {
+TextureCacheImpl::~TextureCacheImpl() {
 	flush();
 }
 
-void SurfaceCacheImpl::flush() {
+void TextureCacheImpl::flush() {
 	for (Container::iterator it = entries_.begin(); it != entries_.end(); ++it) {
 		delete it->second;
 	}
@@ -78,7 +78,7 @@ void SurfaceCacheImpl::flush() {
 	used_transient_memory_ = 0;
 }
 
-Surface* SurfaceCacheImpl::get(const string& hash) {
+Texture* TextureCacheImpl::get(const string& hash) {
 	const Container::iterator it = entries_.find(hash);
 	if (it == entries_.end())
 		return nullptr;
@@ -89,30 +89,29 @@ Surface* SurfaceCacheImpl::get(const string& hash) {
 		access_history_.splice(access_history_.end(), access_history_, it->second->list_iterator);
 		it->second->last_access = SDL_GetTicks();
 	}
-	return it->second->surface.get();
+	return it->second->texture.get();
 }
 
-Surface* SurfaceCacheImpl::insert(const string& hash, Surface* surf, bool transient) {
+Texture* TextureCacheImpl::insert(const string& hash, Texture* texture, bool transient) {
 	assert(entries_.find(hash) == entries_.end());
 
 	if (transient) {
-		const uint32_t surface_size = surf->width() * surf->height() * 4;
-		while (used_transient_memory_ + surface_size > max_transient_memory_) {
+		const uint32_t texture_size = texture->width() * texture->height() * 4;
+		while (used_transient_memory_ + texture_size > max_transient_memory_) {
 			drop();
 		}
 
 		// Record hash as most-recently-used.
 		AccessHistory::iterator it = access_history_.insert(access_history_.end(), hash);
-		used_transient_memory_ += surface_size;
-		entries_.insert(make_pair(hash, new Entry(surf, it, true)));
+		used_transient_memory_ += texture_size;
+		entries_.insert(make_pair(hash, new Entry(texture, it, true)));
 	} else {
-		entries_.insert(make_pair(hash, new Entry(surf, access_history_.end(), false)));
+		entries_.insert(make_pair(hash, new Entry(texture, access_history_.end(), false)));
 	}
-
-	return surf;
+	return texture;
 }
 
-void SurfaceCacheImpl::drop() {
+void TextureCacheImpl::drop() {
 	assert(!access_history_.empty());
 
 	// Identify least recently used key
@@ -120,8 +119,8 @@ void SurfaceCacheImpl::drop() {
 	assert(it != entries_.end());
 	assert(it->second->is_transient);
 
-	const uint32_t surface_size = it->second->surface->width() * it->second->surface->height() * 4;
-	used_transient_memory_ -= surface_size;
+	const uint32_t texture_size = it->second->texture->width() * it->second->texture->height() * 4;
+	used_transient_memory_ -= texture_size;
 
 	// Erase both elements to completely purge record
 	delete it->second;
@@ -131,6 +130,6 @@ void SurfaceCacheImpl::drop() {
 
 }  // namespace
 
-SurfaceCache* create_surface_cache(uint32_t transient_memory_in_bytes) {
-	return new SurfaceCacheImpl(transient_memory_in_bytes);
+TextureCache* create_texture_cache(uint32_t transient_memory_in_bytes) {
+	return new TextureCacheImpl(transient_memory_in_bytes);
 }
