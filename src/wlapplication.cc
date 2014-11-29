@@ -525,7 +525,7 @@ bool WLApplication::handle_key(const SDL_Keycode& keycode, int modifiers) {
 }
 
 // NOCOM(#sirver): fullscreen menu must listen to resolution changes.
-// NOCOM(#sirver): screen
+// NOCOM(#sirver): Intro changes from fullscreen again.
 void WLApplication::handle_input(InputCallback const * cb)
 {
 	SDL_Event ev;
