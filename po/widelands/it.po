@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-11-14 17:33+0000\n"
+"POT-Creation-Date: 2014-11-21 09:46+0000\n"
 "PO-Revision-Date: 2014-10-18 05:04+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-11-15 05:42+0000\n"
-"X-Generator: Launchpad (build 17241)\n"
+"X-Launchpad-Export-Date: 2014-11-22 04:45+0000\n"
+"X-Generator: Launchpad (build 17252)\n"
 "X-Poedit-Country: ITALY\n"
 "Language: it\n"
 "X-Poedit-Language: Italian\n"
@@ -223,19 +223,19 @@ msgid "Creating players"
 msgstr "Creazione dei giocatori"
 
 #: ../../src/editor/editorinteractive.cc:210
-#: ../../src/editor/editorinteractive.cc:597
+#: ../../src/editor/editorinteractive.cc:601
 msgid "Loading graphics..."
 msgstr "Caricamento della grafica in corso..."
 
-#: ../../src/editor/editorinteractive.cc:256
+#: ../../src/editor/editorinteractive.cc:259
 msgid "Unsaved Map"
 msgstr "Mappa non salvata"
 
-#: ../../src/editor/editorinteractive.cc:257
+#: ../../src/editor/editorinteractive.cc:260
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "La mappa non è stata salvata, vuoi davvero uscire?"
 
-#: ../../src/editor/editorinteractive.cc:592
+#: ../../src/editor/editorinteractive.cc:596
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:147
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:510
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:178
@@ -243,7 +243,7 @@ msgstr "La mappa non è stata salvata, vuoi davvero uscire?"
 msgid "No Name"
 msgstr "Senza nome"
 
-#: ../../src/editor/editorinteractive.cc:593
+#: ../../src/editor/editorinteractive.cc:597
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:148
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:511
 #: ../../src/logic/map.h:181 ../../src/ui_fsmenu/netsetup_lan.cc:199

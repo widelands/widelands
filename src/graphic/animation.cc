@@ -41,7 +41,7 @@
 #include "graphic/image_cache.h"
 #include "graphic/image_transformations.h"
 #include "graphic/surface.h"
-#include "graphic/surface_cache.h"
+#include "graphic/texture_cache.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/bob.h"
 #include "logic/instances.h"
@@ -324,7 +324,7 @@ void NonPackedAnimation::blit
 	assert(target);
 
 	const Image& frame = get_frame(time, clr);
-	target->blit(dst, frame.surface(), srcrc);
+	target->blit(dst, frame.texture(), srcrc);
 }
 
 const Image& NonPackedAnimation::get_frame(uint32_t time, const RGBColor* playercolor) const {

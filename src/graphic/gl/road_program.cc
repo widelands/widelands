@@ -24,6 +24,7 @@
 #include "base/log.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/graphic.h"
+#include "graphic/image_io.h"
 #include "graphic/texture.h"
 #include "logic/roadtype.h"
 
@@ -85,9 +86,15 @@ RoadProgram::RoadProgram() {
 
 	u_normal_road_texture_ = glGetUniformLocation(gl_program_.object(), "u_normal_road_texture");
 	u_busy_road_texture_ = glGetUniformLocation(gl_program_.object(), "u_busy_road_texture");
+
+	normal_road_texture_.reset(load_image("world/pics/roadt_normal.png"));
+	busy_road_texture_.reset(load_image("world/pics/roadt_busy.png"));
 }
 
-void RoadProgram::add_road(const GLSurface& surface,
+RoadProgram::~RoadProgram() {
+}
+
+void RoadProgram::add_road(const Surface& surface,
                            const FieldsToDraw::Field& start,
                            const FieldsToDraw::Field& end,
                            const Widelands::RoadType road_type) {
@@ -146,7 +153,7 @@ void RoadProgram::add_road(const GLSurface& surface,
 	vertices_.emplace_back(p4);
 }
 
-void RoadProgram::draw(const GLSurface& surface, const FieldsToDraw& fields_to_draw) {
+void RoadProgram::draw(const Surface& surface, const FieldsToDraw& fields_to_draw) {
 	vertices_.clear();
 
 	for (size_t current_index = 0; current_index < fields_to_draw.size(); ++current_index) {
@@ -211,17 +218,12 @@ void RoadProgram::draw(const GLSurface& surface, const FieldsToDraw& fields_to_d
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	// Bind the textures.
-	const GLuint rt_normal = dynamic_cast<const GLSurfaceTexture&>(
-	                      g_gr->get_road_texture(Widelands::Road_Normal)).get_gl_texture();
-	const GLuint rt_busy = dynamic_cast<const GLSurfaceTexture&>(
-	                    g_gr->get_road_texture(Widelands::Road_Busy)).get_gl_texture();
-
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, rt_normal);
+	glBindTexture(GL_TEXTURE_2D, normal_road_texture_->get_gl_texture());
 	glUniform1i(u_normal_road_texture_, 0);
 
 	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, rt_busy);
+	glBindTexture(GL_TEXTURE_2D, busy_road_texture_->get_gl_texture());
 	glUniform1i(u_busy_road_texture_, 1);
 
 	glDrawArrays(GL_TRIANGLES, 0, vertices_.size());

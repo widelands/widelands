@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2014 by the Widelands Development Team
+ * Copyright 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,30 +13,30 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "base/rect.h"
+#ifndef WL_GRAPHIC_SCREEN_H
+#define WL_GRAPHIC_SCREEN_H
 
-Rect::Rect() : x(0), y(0), w(0), h(0) {
-}
+#include "graphic/surface.h"
 
-Rect::Rect(int32_t gx, int32_t gy, uint32_t W, uint32_t H) : x(gx), y(gy), w(W), h(H) {
-}
+/**
+ * This surface represents the screen in OpenGL mode.
+ */
+class Screen : public Surface {
+public:
+	Screen(uint16_t w, uint16_t h);
+	virtual ~Screen() {}
 
-Rect::Rect(const Point& p, uint32_t W, uint32_t H) : Rect(p.x, p.y, W, H) {
-}
+	/// Interface implementations
+	void lock(LockMode) override;
+	void unlock(UnlockMode) override;
 
-Point Rect::top_left() const {
-	return Point(x, y);
-}
+private:
+	void pixel_to_gl(float* x, float* y) const override;
 
-Point Rect::bottom_right() const {
-	return top_left() + Point(w, h);
-}
+	void swap_rows();
+};
 
-bool Rect::contains(const Point& pt) const {
-	return pt.x >= x && pt.x < x + static_cast<int32_t>(w) && pt.y >= y &&
-	       pt.y < y + static_cast<int32_t>(h);
-}
+#endif  // end of include guard: WL_GRAPHIC_SCREEN_H
