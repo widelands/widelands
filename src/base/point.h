@@ -66,10 +66,11 @@ template <typename T> struct GenericPoint {
 		return *this;
 	}
 
-	int x, y;
+	T x, y;
 };
 
 using Point = GenericPoint<int>;
+using FloatPoint = GenericPoint<float>;
 
 /// Returns the point in the middle between a and b (rounded to integer
 /// values).
