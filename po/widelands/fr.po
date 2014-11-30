@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-11-21 09:46+0000\n"
+"POT-Creation-Date: 2014-11-29 07:58+0000\n"
 "PO-Revision-Date: 2014-10-18 05:16+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-11-22 04:44+0000\n"
-"X-Generator: Launchpad (build 17252)\n"
+"X-Launchpad-Export-Date: 2014-11-30 04:43+0000\n"
+"X-Generator: Launchpad (build 17267)\n"
 "Language: fr\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -479,8 +479,8 @@ msgstr "OK"
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:127
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:135
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:66
-#: ../../src/ui_fsmenu/launch_mpg.cc:88 ../../src/ui_fsmenu/options.cc:113
-#: ../../src/ui_fsmenu/options.cc:474
+#: ../../src/ui_fsmenu/launch_mpg.cc:88 ../../src/ui_fsmenu/options.cc:110
+#: ../../src/ui_fsmenu/options.cc:471
 #: ../../src/wui/game_main_menu_save_game.cc:102 ../../src/wui/login_box.cc:73
 msgid "Cancel"
 msgstr "Annuler"
@@ -690,16 +690,16 @@ msgid "Number of Players"
 msgstr "Nombre de Joueurs"
 
 #. * TRANSLATORS: Default player name, e.g. Player 1
-#: ../../src/editor/ui_menus/editor_player_menu.cc:211
+#: ../../src/editor/ui_menus/editor_player_menu.cc:210
 #, c-format
 msgid "Player %s"
 msgstr "Joueur %s"
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:327
+#: ../../src/editor/ui_menus/editor_player_menu.cc:326
 msgid "Error!"
 msgstr "Erreur!"
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:329
+#: ../../src/editor/ui_menus/editor_player_menu.cc:328
 msgid ""
 "Cannot remove player. It is referenced someplace. Remove all buildings and "
 "animals that depend on this player and try again."
@@ -927,7 +927,7 @@ msgid "Loading map"
 msgstr "Chargement de la carte"
 
 #: ../../src/logic/game.cc:370 ../../src/logic/game.cc:403
-#: ../../src/wlapplication.cc:1506
+#: ../../src/wlapplication.cc:1445
 msgid "Loading..."
 msgstr "Chargement..."
 
@@ -1019,26 +1019,26 @@ msgstr ""
 "Widelands pour résoudre ce problème."
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the ware ‘%s’
-#: ../../src/logic/production_program.cc:269
+#: ../../src/logic/production_program.cc:335
 #, c-format
 msgid "the economy needs the ware ‘%s’"
 msgstr "l'économie à besoin de '%s'"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy doesn’t need the ware ‘%s’
-#: ../../src/logic/production_program.cc:277
+#: ../../src/logic/production_program.cc:343
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
 msgstr "l'économie n'à pas besoin de '%s'"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the worker ‘%s’
-#: ../../src/logic/production_program.cc:291
+#: ../../src/logic/production_program.cc:357
 #, c-format
 msgid "the economy needs the worker ‘%s’"
 msgstr "l'économie à besoin d'un '%s'"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
 #. * TRANSLATORS:      ... because the economy doesn’t need the worker ‘%s’
-#: ../../src/logic/production_program.cc:301
+#: ../../src/logic/production_program.cc:367
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
 msgstr "l'économie n'à pas besoin d'un '%s'"
@@ -1059,34 +1059,34 @@ msgstr "l'économie n'à pas besoin d'un '%s'"
 #. * TRANSLATORS: This is an item in a list of workers, e.g. "Recruited 2x Ox":
 #. * TRANSLATORS:    %1$i = "2"
 #. * TRANSLATORS:    %2$s = "Ox"
-#: ../../src/logic/production_program.cc:345
-#: ../../src/logic/production_program.cc:367
-#: ../../src/logic/production_program.cc:947
-#: ../../src/logic/production_program.cc:1065
-#: ../../src/logic/production_program.cc:1160
+#: ../../src/logic/production_program.cc:411
+#: ../../src/logic/production_program.cc:433
+#: ../../src/logic/production_program.cc:946
+#: ../../src/logic/production_program.cc:1064
+#: ../../src/logic/production_program.cc:1159
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$ix %2$s"
 
 #. * TRANSLATORS: %s is a list of wares
-#: ../../src/logic/production_program.cc:351
+#: ../../src/logic/production_program.cc:417
 #, c-format
 msgid "the building has the following wares: %s"
 msgstr "Le bâtiment a les marchandises suivantes: %s"
 
 #. * TRANSLATORS: %s is a list of wares
-#: ../../src/logic/production_program.cc:373
+#: ../../src/logic/production_program.cc:439
 #, c-format
 msgid "the building doesn’t have the following wares: %s"
 msgstr "Le bâtiment n'a pas les marchandises suivantes: %s"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs experience'.
-#: ../../src/logic/production_program.cc:391
+#: ../../src/logic/production_program.cc:457
 msgid "a worker needs experience"
 msgstr "un travailleur a besoin d'expérience."
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers need no experience'.
-#: ../../src/logic/production_program.cc:398
+#: ../../src/logic/production_program.cc:464
 msgid "the workers need no experience"
 msgstr "le travailleur n'a pas besoin d'expérience."
 
@@ -1098,27 +1098,27 @@ msgstr "le travailleur n'a pas besoin d'expérience."
 #. * TRANSLATORS: This appears in the hover text on buildings. Please test these in context
 #. * TRANSLATORS: on a development build if you can, and let us know if there are any issues
 #. * TRANSLATORS: we need to address for your language.
-#: ../../src/logic/production_program.cc:579
-#: ../../src/logic/production_program.cc:970
+#: ../../src/logic/production_program.cc:578
+#: ../../src/logic/production_program.cc:969
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr "N'a pas commencé à %1$s parce que %2$s"
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware ‘%s’"
-#: ../../src/logic/production_program.cc:586
+#: ../../src/logic/production_program.cc:585
 #, c-format
 msgid "Completed %1$s because %2$s"
 msgstr "A fini %1$s parce que %2$s"
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware ‘%s’"
-#: ../../src/logic/production_program.cc:593
+#: ../../src/logic/production_program.cc:592
 #, c-format
 msgid "Skipped %1$s because %2$s"
 msgstr "N'a pas fait %1$s parce que %2$s"
 
 #. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta bread is missing'
-#: ../../src/logic/production_program.cc:958
+#: ../../src/logic/production_program.cc:957
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -1126,29 +1126,29 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. * TRANSLATORS: %s is a list of wares
-#: ../../src/logic/production_program.cc:1074
+#: ../../src/logic/production_program.cc:1073
 #, c-format
 msgid "Produced %s"
 msgstr "Produit %s"
 
 #. * TRANSLATORS: %s is a list of workers
-#: ../../src/logic/production_program.cc:1169
+#: ../../src/logic/production_program.cc:1168
 #, c-format
 msgid "Recruited %s"
 msgstr "recruté %s"
 
 #. * TRANSLATORS: %1$s = production site name, %2$s = production program name, %3$s = resource
-#: ../../src/logic/production_program.cc:1231
+#: ../../src/logic/production_program.cc:1230
 #, c-format
 msgid "%1$s %2$s mine %3$s"
 msgstr "%1$s %2$s mine %3$s"
 
-#: ../../src/logic/production_program.cc:1393
+#: ../../src/logic/production_program.cc:1392
 msgid "No soldier to train!"
 msgstr "Pas de soldat à entraîner!"
 
-#: ../../src/logic/production_program.cc:1401
-#: ../../src/logic/production_program.cc:1486
+#: ../../src/logic/production_program.cc:1400
+#: ../../src/logic/production_program.cc:1485
 msgid "No soldier found for this training level!"
 msgstr "Pas de soldats trouvé pour ce niveau d'entrainement!"
 
@@ -1515,7 +1515,7 @@ msgstr ""
 "ou bien le serveur a été éteint pendant que vous tentiez de vous y connecter."
 
 #: ../../src/network/netclient.cc:199 ../../src/network/nethost.cc:846
-#: ../../src/wlapplication.cc:1396
+#: ../../src/wlapplication.cc:1335
 msgid "Preparing game"
 msgstr "Préparation de la partie"
 
@@ -3031,155 +3031,151 @@ msgstr "Ouvert"
 msgid "Closed"
 msgstr "Fermé"
 
-#: ../../src/ui_fsmenu/options.cc:108 ../../src/ui_fsmenu/options.cc:485
+#: ../../src/ui_fsmenu/options.cc:105 ../../src/ui_fsmenu/options.cc:482
 msgid "Advanced Options"
 msgstr "Options avancées"
 
-#: ../../src/ui_fsmenu/options.cc:118 ../../src/ui_fsmenu/options.cc:479
+#: ../../src/ui_fsmenu/options.cc:115 ../../src/ui_fsmenu/options.cc:476
 msgid "Apply"
 msgstr "Appliquer"
 
-#: ../../src/ui_fsmenu/options.cc:124
+#: ../../src/ui_fsmenu/options.cc:121
 msgid "General Options"
 msgstr "Options générales"
 
-#: ../../src/ui_fsmenu/options.cc:130
+#: ../../src/ui_fsmenu/options.cc:127
 msgid "In-game resolution"
 msgstr "Résolution de jeu"
 
-#: ../../src/ui_fsmenu/options.cc:146
+#: ../../src/ui_fsmenu/options.cc:143
 msgid "Fullscreen"
 msgstr "Plein écran"
 
-#: ../../src/ui_fsmenu/options.cc:157
+#: ../../src/ui_fsmenu/options.cc:154
 msgid "Grab Input"
 msgstr "Capturer l'entrée"
 
-#: ../../src/ui_fsmenu/options.cc:164
+#: ../../src/ui_fsmenu/options.cc:161
 msgid "Maximum FPS:"
 msgstr "FPS maximum:"
 
-#: ../../src/ui_fsmenu/options.cc:177
+#: ../../src/ui_fsmenu/options.cc:174
 msgid "Language"
 msgstr "Langue"
 
-#: ../../src/ui_fsmenu/options.cc:193
+#: ../../src/ui_fsmenu/options.cc:190
 msgid "Enable Music"
 msgstr "Activer la musique"
 
-#: ../../src/ui_fsmenu/options.cc:203
+#: ../../src/ui_fsmenu/options.cc:200
 msgid "Enable Sound"
 msgstr "Activer le son"
 
-#: ../../src/ui_fsmenu/options.cc:210
+#: ../../src/ui_fsmenu/options.cc:207
 msgid "In-game Options"
 msgstr "Options de jeu"
 
-#: ../../src/ui_fsmenu/options.cc:218
+#: ../../src/ui_fsmenu/options.cc:215
 msgid "Use single watchwindow mode"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:228
+#: ../../src/ui_fsmenu/options.cc:225
 msgid "Start building road after placing a flag"
 msgstr "Commence à construire une route après avoir placé un drapeau"
 
-#: ../../src/ui_fsmenu/options.cc:239
+#: ../../src/ui_fsmenu/options.cc:236
 msgid "Show buildings area preview"
 msgstr "Montrer un aperçu des zones de constructions"
 
-#: ../../src/ui_fsmenu/options.cc:250
+#: ../../src/ui_fsmenu/options.cc:247
 msgid "Snap windows only when overlapping"
 msgstr "N'ajuster les fenêtres que si elles se chevauchent"
 
-#: ../../src/ui_fsmenu/options.cc:260
+#: ../../src/ui_fsmenu/options.cc:257
 msgid "Dock windows to edges"
 msgstr "Ranger les fenêtres contre les bords"
 
 #. * TRANSLATORS: Options: Save game automatically every:
 #. * TRANSLATORS: This will have a number added in front of it
-#: ../../src/ui_fsmenu/options.cc:269 ../../src/ui_fsmenu/options.cc:393
+#: ../../src/ui_fsmenu/options.cc:266 ../../src/ui_fsmenu/options.cc:390
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minute"
 msgstr[1] "minutes"
 
-#: ../../src/ui_fsmenu/options.cc:277
+#: ../../src/ui_fsmenu/options.cc:274
 msgid "Save game automatically every"
 msgstr "Sauvegarde automatique toutes les"
 
 #. * TRANSLATORS: Options: Remove Replays older than:
 #. * TRANSLATORS: This will have a number added in front of it
-#: ../../src/ui_fsmenu/options.cc:287 ../../src/ui_fsmenu/options.cc:397
+#: ../../src/ui_fsmenu/options.cc:284 ../../src/ui_fsmenu/options.cc:394
 msgid "day"
 msgid_plural "days"
 msgstr[0] "jour"
 msgstr[1] "jours"
 
-#: ../../src/ui_fsmenu/options.cc:295
+#: ../../src/ui_fsmenu/options.cc:292
 msgid "Remove replays older than:"
 msgstr ""
 
 #. * TRANSLATORS Options: Save game automatically every:
-#: ../../src/ui_fsmenu/options.cc:307
+#: ../../src/ui_fsmenu/options.cc:304
 msgid "Off"
 msgstr "Arrêt"
 
 #. * TRANSLATORS Options: Remove Replays older than:
-#: ../../src/ui_fsmenu/options.cc:315
+#: ../../src/ui_fsmenu/options.cc:312
 msgid "Never"
 msgstr "Jamais"
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
-#: ../../src/ui_fsmenu/options.cc:362 ../../src/ui_fsmenu/options.cc:368
+#: ../../src/ui_fsmenu/options.cc:359 ../../src/ui_fsmenu/options.cc:365
 msgid "%1% x %2%"
 msgstr "%1% x %2%"
 
-#: ../../src/ui_fsmenu/options.cc:380
+#: ../../src/ui_fsmenu/options.cc:377
 msgid "Try system language"
 msgstr "Essayer la langue du système"
 
-#: ../../src/ui_fsmenu/options.cc:491
+#: ../../src/ui_fsmenu/options.cc:488
 msgid "Main menu font:"
 msgstr "Police de caractères du menu:"
 
-#: ../../src/ui_fsmenu/options.cc:501
+#: ../../src/ui_fsmenu/options.cc:498
 msgid "Distance for windows to snap to other panels:"
 msgstr "Distance pour que la fenêtre se colle à d'autres"
 
-#: ../../src/ui_fsmenu/options.cc:505
+#: ../../src/ui_fsmenu/options.cc:502
 msgid "Distance for windows to snap to borders:"
 msgstr "Distance pour que la fenêtre se colle au bord"
 
-#: ../../src/ui_fsmenu/options.cc:512 ../../src/ui_fsmenu/options.cc:519
-#: ../../src/ui_fsmenu/options.cc:668 ../../src/ui_fsmenu/options.cc:672
+#: ../../src/ui_fsmenu/options.cc:509 ../../src/ui_fsmenu/options.cc:516
+#: ../../src/ui_fsmenu/options.cc:656 ../../src/ui_fsmenu/options.cc:660
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] "pixel"
 msgstr[1] "pixels"
 
-#: ../../src/ui_fsmenu/options.cc:529
+#: ../../src/ui_fsmenu/options.cc:526
 msgid "Show in-game chat with transparent background"
 msgstr "Afficher le chat en ligne avec un fond transparent"
 
-#: ../../src/ui_fsmenu/options.cc:539
+#: ../../src/ui_fsmenu/options.cc:536
 msgid "Play a sound at message arrival."
 msgstr "Jouer un son à l'arrivée d'un message."
 
-#: ../../src/ui_fsmenu/options.cc:549
+#: ../../src/ui_fsmenu/options.cc:546
 msgid "Do not zip widelands data files (maps, replays and savegames)."
 msgstr ""
 "Ne pas zipper les fichiers de données de Widelands (cartes, replays et "
 "sauvegardes)."
 
-#: ../../src/ui_fsmenu/options.cc:559
+#: ../../src/ui_fsmenu/options.cc:556
 msgid "Remove Syncstream dumps on startup"
 msgstr "Empêcher la vidange de Syncstream au démarrage"
 
-#: ../../src/ui_fsmenu/options.cc:568
-msgid "OpenGL rendering"
-msgstr "Rendu OpenGL"
-
-#: ../../src/ui_fsmenu/options.cc:608
+#: ../../src/ui_fsmenu/options.cc:596
 msgid "DejaVuSerif (Default)"
 msgstr "DejaVuSerif (Défaut)"
 
@@ -3200,19 +3196,11 @@ msgstr "Charger une partie"
 msgid "Suggested Teams:"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1075
-msgid ""
-"Your video settings could not be enabled, and fallback settings are in "
-"effect. Please check the graphics options!"
-msgstr ""
-"Vos paramètres vidéo n'ont pas pu être activés, et les paramètres de secours "
-"sont effectifs. Veuillez vérifier les options graphiques !"
-
-#: ../../src/wlapplication.cc:1140
+#: ../../src/wlapplication.cc:1079
 msgid "Game data error"
 msgstr "Erreur de données du jeu"
 
-#: ../../src/wlapplication.cc:1150
+#: ../../src/wlapplication.cc:1089
 #, c-format
 msgid ""
 "\n"
@@ -3227,7 +3215,7 @@ msgstr ""
 "Widelands, Vous trouverez les messages relatifs dans la sortie standard "
 "(stdout.txt sur windows). Vous utilisez la version %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1157
+#: ../../src/wlapplication.cc:1096
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -3546,7 +3534,7 @@ msgid "Ware Statistics"
 msgstr "Statistiques des marchandises"
 
 #: ../../src/wui/game_main_menu.cc:65 ../../src/wui/stock_menu.cc:40
-#: ../../src/wui/ware_statistics_menu.cc:210 ../../src/wui/waresdisplay.cc:58
+#: ../../src/wui/ware_statistics_menu.cc:208 ../../src/wui/waresdisplay.cc:58
 msgid "Stock"
 msgstr "Stock"
 
@@ -3782,64 +3770,64 @@ msgstr "L'équipe %|1$u| a gagné!"
 msgid "Score"
 msgstr "Score"
 
-#: ../../src/wui/general_statistics_menu.cc:179
+#: ../../src/wui/general_statistics_menu.cc:177
 msgid "Land"
 msgstr "Terrain"
 
-#: ../../src/wui/general_statistics_menu.cc:187
+#: ../../src/wui/general_statistics_menu.cc:185
 #: ../../src/wui/transport_ui.cc:66 ../../src/wui/warehousewindow.cc:211
 msgid "Workers"
 msgstr "Ouvriers"
 
-#: ../../src/wui/general_statistics_menu.cc:195 ../../src/wui/minimap.cc:174
+#: ../../src/wui/general_statistics_menu.cc:193 ../../src/wui/minimap.cc:174
 msgid "Buildings"
 msgstr "Bâtiments"
 
-#: ../../src/wui/general_statistics_menu.cc:203
+#: ../../src/wui/general_statistics_menu.cc:201
 #: ../../src/wui/productionsitewindow.cc:68 ../../src/wui/transport_ui.cc:61
 #: ../../src/wui/warehousewindow.cc:201
 msgid "Wares"
 msgstr "Marchandises"
 
-#: ../../src/wui/general_statistics_menu.cc:211
+#: ../../src/wui/general_statistics_menu.cc:209
 msgid "Productivity"
 msgstr "Productivité"
 
-#: ../../src/wui/general_statistics_menu.cc:219
+#: ../../src/wui/general_statistics_menu.cc:217
 msgid "Casualties"
 msgstr "Pertes"
 
-#: ../../src/wui/general_statistics_menu.cc:227
+#: ../../src/wui/general_statistics_menu.cc:225
 msgid "Kills"
 msgstr "Victimes"
 
-#: ../../src/wui/general_statistics_menu.cc:235
+#: ../../src/wui/general_statistics_menu.cc:233
 msgid "Military buildings lost"
 msgstr "Bâtiments militaires perdus"
 
-#: ../../src/wui/general_statistics_menu.cc:243
+#: ../../src/wui/general_statistics_menu.cc:241
 msgid "Military buildings defeated"
 msgstr "Bâtiments militaires vaincus"
 
-#: ../../src/wui/general_statistics_menu.cc:251
+#: ../../src/wui/general_statistics_menu.cc:249
 msgid "Civilian buildings lost"
 msgstr "Bâtiments civils perdus"
 
-#: ../../src/wui/general_statistics_menu.cc:259
+#: ../../src/wui/general_statistics_menu.cc:257
 msgid "Military"
 msgstr "Militaire"
 
-#: ../../src/wui/interactive_base.cc:313
+#: ../../src/wui/interactive_base.cc:316
 msgid "PAUSE"
 msgstr "PAUSE"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/wui/interactive_base.cc:333
+#: ../../src/wui/interactive_base.cc:336
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
 
-#: ../../src/wui/interactive_base.cc:340
+#: ../../src/wui/interactive_base.cc:343
 msgid "NO GAME CONTROLLER"
 msgstr "PAS DE CONTRÔLEUR DE JEU"
 
@@ -4157,27 +4145,27 @@ msgstr "Soldats en cours d'entraînement"
 msgid "Economy options"
 msgstr "Options concernant l'économie"
 
-#: ../../src/wui/transport_ui.cc:147 ../../src/wui/transport_ui.cc:243
+#: ../../src/wui/transport_ui.cc:142 ../../src/wui/transport_ui.cc:238
 msgid "Decrease target"
 msgstr "Baisser la valeur cible"
 
-#: ../../src/wui/transport_ui.cc:149 ../../src/wui/transport_ui.cc:245
+#: ../../src/wui/transport_ui.cc:144 ../../src/wui/transport_ui.cc:240
 msgid "Increase target"
 msgstr "Augmenter la valeur cible"
 
-#: ../../src/wui/transport_ui.cc:152 ../../src/wui/transport_ui.cc:248
+#: ../../src/wui/transport_ui.cc:147 ../../src/wui/transport_ui.cc:243
 msgid "Reset to default"
 msgstr "Réinitialiser aux valeurs par défaut"
 
-#: ../../src/wui/ware_statistics_menu.cc:178
+#: ../../src/wui/ware_statistics_menu.cc:176
 msgid "Production"
 msgstr "Production"
 
-#: ../../src/wui/ware_statistics_menu.cc:189
+#: ../../src/wui/ware_statistics_menu.cc:187
 msgid "Consumption"
 msgstr "Consommation"
 
-#: ../../src/wui/ware_statistics_menu.cc:200
+#: ../../src/wui/ware_statistics_menu.cc:198
 msgid "Economy Health"
 msgstr "Santé économique"
 
