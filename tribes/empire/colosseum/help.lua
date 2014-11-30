@@ -26,7 +26,7 @@ return {
 		"fulltrained-evade", "fulltrained") ..
 
 	rt(h3(_"Evade Training:")) ..
-	dependencies_training_food("empire", { {"fish", "meat"}, {"bread"}}) ..
+	dependencies_training_food("empire", { {"fish", "meat"}, {"bread_empire"}}) ..
 
 	--Workers Section
 	building_help_crew_string("empire", building_description) ..

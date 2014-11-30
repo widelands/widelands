@@ -6,12 +6,12 @@ prohibited_till=1200
 
 [buildcost]
 log=2
-stone=3
+granite=3
 planks=1
 
 [return_on_dismantle]
 log=2
-stone=2
+granite=2
 
 [working positions]
 charcoal_burner=1

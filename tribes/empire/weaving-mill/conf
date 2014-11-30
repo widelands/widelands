@@ -3,12 +3,12 @@ output=cloth
 
 [buildcost]
 log=3
-stone=4
+granite=4
 marble=1
 
 [return_on_dismantle]
 log=1
-stone=3
+granite=3
 
 [working positions]
 weaver=1

@@ -9,13 +9,13 @@ prohibited_till=120
 
 [buildcost]
 log=3
-stone=2
+granite=2
 planks=2
 spidercloth=1
 
 [return_on_dismantle]
 log=1
-stone=1
+granite=1
 planks=1
 
 [working positions]

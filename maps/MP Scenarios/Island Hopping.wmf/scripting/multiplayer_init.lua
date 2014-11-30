@@ -56,19 +56,19 @@ _finish_areas = {
 _finish_rewards = {
    { -- Island 1
       { -- 1st to finish
-         log = 25, planks = 15, stone = 10,
+         log = 25, planks = 15, granite = 10,
          spidercloth = 5, corn = 20,
       },
       { -- 2st to finish
-         log = 45, planks = 30, stone = 20,
+         log = 45, planks = 30, granite = 20,
          spidercloth = 7, corn = 25,
       },
       { -- 3rd to finish
-         log = 65, planks = 45, stone = 30,
+         log = 65, planks = 45, granite = 30,
          spidercloth = 9, corn = 30,
       },
       { -- 4th to finish
-         log = 85, planks = 50, stone = 40,
+         log = 85, planks = 50, granite = 40,
          spidercloth = 11, corn = 35,
       }
    },
@@ -117,8 +117,8 @@ function getplural(count, resource)
       return ngettext("%s Log","%s Logs",count):bformat(count)
    elseif  resource == "planks" then
       return ngettext("%s Plank","%s Planks",count):bformat(count)
-   elseif  resource == "stone" then
-      return ngettext("%s Stone","%s Stones",count):bformat(count)
+   elseif  resource == "granite" then
+      return ngettext("%s Granite","%s Granite",count):bformat(count)
    elseif  resource == "spidercloth" then
       return ngettext("%s Spidercloth","%s Spidercloths",count):bformat(count)
    elseif  resource == "corn" then
@@ -169,20 +169,20 @@ function place_headquarters()
             diamond = 7,
             iron_ore = 5,
             quartz = 9,
-            stone = 50,
-            spideryarn = 9,
+            granite = 50,
+            spider_silk = 9,
             log = 20,
             coal = 12,
             gold = 4,
-            gold_yarn = 6,
+            gold_thread = 6,
             iron = 8,
             planks = 45,
             spidercloth = 5,
             blackroot = 5,
             blackroot_flour = 12,
-            bread = 8,
+            bread_atlanteans = 8,
             corn = 5,
-            corn_flour = 12,
+            cornmeal = 12,
             fish = 3,
             meat = 3,
             smoked_fish = 6,
@@ -201,7 +201,7 @@ function place_headquarters()
             scythe = 4,
             shovel = 9,
             tabard = 5,
-            light_trident = 5,
+            trident_light = 5,
          },
          workers = {
             armorsmith = 1,

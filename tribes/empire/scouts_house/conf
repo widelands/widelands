@@ -4,7 +4,7 @@ size=small
 
 [buildcost]
 log=2
-stone=1
+granite=1
 
 [return_on_dismantle]
 log=1

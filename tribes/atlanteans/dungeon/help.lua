@@ -26,9 +26,9 @@ return {
 		"fulltrained-attack", "fulltrained") ..
 
 	rt(h3(_"Attack Training:")) ..
-	dependencies_training_food("atlanteans", { {"smoked_fish", "smoked_meat"}, {"bread"}}) ..
+	dependencies_training_food("atlanteans", { {"smoked_fish", "smoked_meat"}, {"bread_atlanteans"}}) ..
 	dependencies_training_weapons("atlanteans", building_description, "and",
-		{"long_trident", "steel_trident", "double_trident", "heavy_double_trident"}, "weaponsmithy") ..
+		{"trident_long", "trident_steel", "trident_double", "trident_heavy_double"}, "weaponsmithy") ..
 
 	--Workers Section
 	building_help_crew_string("atlanteans", building_description) ..

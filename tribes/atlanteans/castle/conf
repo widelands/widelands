@@ -17,7 +17,7 @@ prohibited_till=1800
 
 [buildcost]
 planks=4
-stone=7
+granite=7
 log=5
 spidercloth=2
 diamond=1
@@ -25,7 +25,7 @@ quartz=1
 
 [return_on_dismantle]
 planks=2
-stone=5
+granite=5
 log=2
 
 [idle]

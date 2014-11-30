@@ -15,10 +15,10 @@ defeated_you_string=_Your soldiers defeated the enemy at the high tower.
 [enhancement_cost]
 log=1
 planks=1
-stone=2
+granite=2
 
 [return_on_dismantle_on_enhanced]
-stone=1
+granite=1
 
 [idle]
 pics=high_tower_i_??.png

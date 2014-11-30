@@ -27,14 +27,14 @@ return {
 		"untrained+evade", "fulltrained") ..
 
 	rt(h3(_"Attack Training:")) ..
-	dependencies_training_food("barbarians", { {"fish", "meat"}, {"pitta_bread"}}) ..
-	dependencies_training_weapons("barbarians", building_description, "and", {"sharpax", "broadax"}, "axfactory") ..
+	dependencies_training_food("barbarians", { {"fish", "meat"}, {"bread_barbarians"}}) ..
+	dependencies_training_weapons("barbarians", building_description, "and", {"ax_sharp", "ax_broad"}, "axfactory") ..
 	dependencies_training_weapons("barbarians", building_description, "or",
-		{"sharpax", "broadax", "bronzeax", "battleax", "warriorsax"}, "warmill") ..
+		{"ax_sharp", "ax_broad", "ax_bronze", "ax_battle", "ax_warriors"}, "warmill") ..
 
 	rt(h3(_"Health Training:")) ..
-	dependencies_training_food("barbarians", { {"fish", "meat"}, {"pitta_bread"}}) ..
-	dependencies_training_weapons("barbarians", building_description, "and", {"helm", "mask", "warhelm"}, "helmsmithy") ..
+	dependencies_training_food("barbarians", { {"fish", "meat"}, {"bread_barbarians"}}) ..
+	dependencies_training_weapons("barbarians", building_description, "and", {"helmet", "helmet_mask", "helmet_warhelm"}, "helmsmithy") ..
 
 	--Workers Section
 	building_help_crew_string("barbarians", building_description) ..

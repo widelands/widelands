@@ -6,12 +6,12 @@ prohibited_till=600
 
 [buildcost]
 log=2
-stone=2
-wood=2
+granite=2
+planks=2
 
 [return_on_dismantle]
 log=1
-stone=2
+granite=2
 
 [working positions]
 shepherd=1

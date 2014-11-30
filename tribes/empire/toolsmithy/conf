@@ -1,5 +1,5 @@
 size=medium
-output=ax
+output=ax_empire
 output=bread_paddle
 output=fire_tongs
 output=fishing_rod
@@ -18,12 +18,12 @@ prohibited_till=120
 
 [buildcost]
 log=1
-stone=2
+granite=2
 marble=2
-marblecolumn=1
+marble_column=1
 
 [return_on_dismantle]
-stone=1
+granite=1
 marble=2
 
 [working positions]
@@ -62,12 +62,12 @@ produce_shovel=_making a shovel
 work=_working
 
 [produce_ax]
-return=skipped unless economy needs ax
+return=skipped unless economy needs ax_empire
 sleep=32000
 consume=iron log
 playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
-produce=ax
+produce=ax_empire
 
 [produce_basket]
 return=skipped unless economy needs basket

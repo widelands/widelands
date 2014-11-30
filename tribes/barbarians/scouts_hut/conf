@@ -4,11 +4,11 @@ size=small
 
 [buildcost]
 log=2
-raw_stone=1
+granite=1
 
 [return_on_dismantle]
 log=1
-raw_stone=1
+granite=1
 
 [inputs]
 ration=2

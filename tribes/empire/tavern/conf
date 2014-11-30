@@ -7,13 +7,13 @@ forced_after=900
 prohibited_till=300
 
 [buildcost]
-wood=2
-stone=2
+planks=2
+granite=2
 marble=1
 
 [return_on_dismantle]
-wood=1
-stone=1
+planks=1
+granite=1
 marble=1
 
 [working positions]
@@ -21,7 +21,7 @@ innkeeper=1
 
 [inputs]
 fish=5
-bread=5
+bread_empire=5
 meat=5
 
 [programs]
@@ -31,7 +31,7 @@ work=_preparing a ration
 [work]
 sleep=14000
 return=skipped unless economy needs ration
-consume=bread,fish,meat
+consume=bread_empire,fish,meat
 animate=working 19000
 produce=ration
 

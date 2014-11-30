@@ -1,7 +1,7 @@
 size=big
 output=spidercloth
 output=tabard
-output=golden_tabard
+output=tabard_golden
 
 [aihints]
 forced_after=60
@@ -9,20 +9,20 @@ prohibited_till=60
 
 [buildcost]
 log=3
-stone=4
+granite=4
 planks=2
 
 [return_on_dismantle]
 log=1
-stone=3
+granite=3
 planks=1
 
 [working positions]
 weaver=1
 
 [inputs]
-spideryarn=8
-gold_yarn=4
+spider_silk=8
+gold_thread=4
 
 [programs]
 # TRANSLATORS: "Completed/Skipped/Did not start weaving spidercloth because ...
@@ -30,35 +30,35 @@ produce_spidercloth=_weaving spidercloth
 # TRANSLATORS: "Completed/Skipped/Did not start tailoring a tabard because ...
 produce_tabard=_tailoring a tabard
 # TRANSLATORS: "Completed/Skipped/Did not start tailoring a golden tabard because ...
-produce_golden_tabard=_tailoring a golden tabard
+produce_tabard_golden=_tailoring a golden tabard
 # TRANSLATORS: "Completed/Skipped/Did not start working because ...
 work=_working
 
 [produce_spidercloth]
 return=skipped unless economy needs spidercloth
 sleep=20000
-consume=spideryarn
+consume=spider_silk
 animate=working 20000
 produce=spidercloth
 
 [produce_tabard]
 return=skipped unless economy needs tabard
 sleep=20000
-consume=spideryarn
+consume=spider_silk
 animate=working 20000
 produce=tabard
 
-[produce_golden_tabard]
-return=skipped unless economy needs golden_tabard
+[produce_tabard_golden]
+return=skipped unless economy needs tabard_golden
 sleep=20000
-consume=spideryarn gold_yarn
+consume=spider_silk gold_thread
 animate=working 20000
-produce=golden_tabard
+produce=tabard_golden
 
 [work]
 call=produce_spidercloth
 call=produce_tabard
-call=produce_golden_tabard
+call=produce_tabard_golden
 return=skipped
 
 [idle]

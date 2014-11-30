@@ -116,8 +116,8 @@ function reveal_village()
             meat = 30
          }
       },
-      {"inn", 55, 28, wares = {pittabread = 4, meat = 4}},
-      {"tavern", 57, 28, wares = {pittabread=4, meat = 4}},
+      {"inn", 55, 28, wares = {bread_barbarians = 4, meat = 4}},
+      {"tavern", 57, 28, wares = {bread_barbarians=4, meat = 4}},
       {"well", 52, 30},
       {"farm", 54, 33},
       {"bakery", 51, 35, wares = {wheat = 6, water = 6}},

@@ -8,11 +8,11 @@ mines=iron
 
 [enhancement_cost]
 log=4
-wood=2
+planks=2
 
 [return_on_dismantle_on_enhanced]
 log=2
-wood=1
+planks=1
 
 [working positions]
 master-miner=1

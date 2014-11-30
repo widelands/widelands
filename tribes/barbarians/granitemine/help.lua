@@ -14,8 +14,8 @@ return {
 
 	--General Section
 	building_help_general_string("barbarians", building_description,
-		_"Carve raw stone out of the rock in mountain terrain.",
-		_"This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more raw stone.":bformat("5%") .. "<br>" .. _"It cannot be upgraded.") ..
+		_"Carve granite out of the rock in mountain terrain.",
+		_"This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more granite.":bformat("5%") .. "<br>" .. _"It cannot be upgraded.") ..
 
 	--Dependencies
 	building_help_dependencies_production("barbarians", building_description, true) ..
@@ -27,7 +27,7 @@ return {
 	building_help_building_section("barbarians", building_description) ..
 
 	--Production Section
-	building_help_production_section(_"If the food supply is steady, this mine can produce raw stone in %s on average.":format(
+	building_help_production_section(_"If the food supply is steady, this mine can produce granite in %s on average.":format(
 		ngettext("%d second", "%d seconds", 20):bformat(20)
 	))
   end

@@ -12,16 +12,16 @@ defeated_enemy_string=_The enemy defeated your soldiers at the castle.
 defeated_you_string=_Your soldiers defeated the enemy at the castle.
 
 [enhancement_cost]
-wood=5
-marblecolumn=4
+planks=5
+marble_column=4
 marble=4
-stone=2
+granite=2
 
 [return_on_dismantle_on_enhanced]
-wood=2
-marblecolumn=2
+planks=2
+marble_column=2
 marble=3
-stone=1
+granite=1
 
 [idle]
 pics=castle_i_??.png

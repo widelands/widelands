@@ -6,12 +6,12 @@ renews_map_resource=log
 
 [buildcost]
 log=1
-wood=1
-stone=1
+planks=1
+granite=1
 
 [return_on_dismantle]
-wood=1
-stone=1
+planks=1
+granite=1
 
 [working positions]
 forester=1

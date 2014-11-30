@@ -8,20 +8,20 @@ forced_after=900
 [buildcost]
 log=3
 blackwood=2
-raw_stone=1
+granite=1
 thatch_reed=1
 
 [return_on_dismantle]
 log=1
 blackwood=1
-raw_stone=1
+granite=1
 
 [working positions]
 innkeeper=1
 
 [inputs]
 fish=4
-pitta_bread=4
+bread_barbarians=4
 meat=4
 
 [programs]
@@ -31,7 +31,7 @@ work=_preparing a ration
 [work]
 sleep=14000
 return=skipped unless economy needs ration
-consume=fish,pitta_bread,meat
+consume=fish,bread_barbarians,meat
 animate=working 19000
 produce=ration
 

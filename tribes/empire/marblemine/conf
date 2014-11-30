@@ -1,6 +1,6 @@
 size=mine
 output=marble
-output=stone
+output=granite
 enhancement=deep_marblemine
 
 [aihints]
@@ -10,11 +10,11 @@ prohibited_till=450
 
 [buildcost]
 log=4
-wood=2
+planks=2
 
 [return_on_dismantle]
 log=2
-wood=1
+planks=1
 
 [working positions]
 miner=1
@@ -26,32 +26,32 @@ wine=6
 [programs]
 # TRANSLATORS: "Completed/Skipped/Did not start mining marble because ...
 mine_marble=_mining marble
-# TRANSLATORS: "Completed/Skipped/Did not start mining stone because ...
-mine_stone=_mining stone
+# TRANSLATORS: "Completed/Skipped/Did not start mining granite because ...
+mine_granite=_mining granite
 # TRANSLATORS: "Completed/Skipped/Did not start working because ...
 work=_working
 
 [mine_marble]
 sleep=20000
-return=skipped unless economy needs marble or economy needs stone
+return=skipped unless economy needs marble or economy needs granite
 consume=wine ration
 animate=working 20000
 mine=granite 2 50 5 17
 produce=marble:2
 animate=working 20000
 mine=granite 2 50 5 17
-produce=marble stone
+produce=marble granite
 
-[mine_stone]
+[mine_granite]
 sleep=20000
-return=skipped unless economy needs marble or economy needs stone
+return=skipped unless economy needs marble or economy needs granite
 consume=ration wine
 animate=working 20000
 mine=granite 2 50 5 17
-produce=stone marble
+produce=granite marble
 animate=working 20000
 mine=granite 2 50 5 17
-produce=stone:2
+produce=granite:2
 
 [out_of_resource_notification]
 title=_Main Marble Vein Exhausted
@@ -59,7 +59,7 @@ message=_This marble mine’s main vein is exhausted. Expect strongly diminished
 
 [work]
 call=mine_marble
-call=mine_stone
+call=mine_granite
 return=skipped
 
 [idle]

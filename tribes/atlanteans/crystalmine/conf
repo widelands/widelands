@@ -1,7 +1,7 @@
 size=mine
 output=diamond
 output=quartz
-output=stone
+output=granite
 
 [aihints]
 mines=granite
@@ -20,13 +20,13 @@ planks=2
 miner=3
 
 [inputs]
-bread=10
+bread_atlanteans=10
 smoked_fish=10
 smoked_meat=6
 
 [programs]
-# TRANSLATORS: "Completed/Skipped/Did not start mining stone because ...
-mine_stone=_mining stone
+# TRANSLATORS: "Completed/Skipped/Did not start mining granite because ...
+mine_granite=_mining granite
 # TRANSLATORS: "Completed/Skipped/Did not start mining quartz because ...
 mine_quartz=_mining quartz
 # TRANSLATORS: "Completed/Skipped/Did not start mining diamonds because ...
@@ -34,41 +34,41 @@ mine_diamond=_mining diamonds
 # TRANSLATORS: "Completed/Skipped/Did not start mining because ...
 work=_mining
 
-[mine_stone]
-return=skipped unless economy needs stone or economy needs quartz or economy needs diamond
+[mine_granite]
+return=skipped unless economy needs granite or economy needs quartz or economy needs diamond
 sleep=45000
-consume=smoked_fish,smoked_meat:2 bread:2
+consume=smoked_fish,smoked_meat:2 bread_atlanteans:2
 animate=working 20000
 mine=granite 4 100 5 2
-produce=stone:2
+produce=granite:2
 animate=working 20000
 mine=granite 4 100 5 2
-produce=stone:2
+produce=granite:2
 animate=working 20000
 mine=granite 4 100 5 2
-produce=stone
+produce=granite
 animate=working 20000
 mine=granite 4 100 5 2
 produce=quartz
 
 [mine_quartz]
-return=skipped unless economy needs stone or economy needs quartz or economy needs diamond
+return=skipped unless economy needs granite or economy needs quartz or economy needs diamond
 sleep=45000
-consume=smoked_fish,smoked_meat:2 bread:2
+consume=smoked_fish,smoked_meat:2 bread_atlanteans:2
 animate=working 20000
 mine=granite 4 100 5 2
-produce=stone:2
+produce=granite:2
 animate=working 20000
 mine=granite 4 100 5 2
-produce=stone quartz
+produce=granite quartz
 animate=working 20000
 mine=granite 4 100 5 2
 produce=quartz:2
 
 [mine_diamond]
-return=skipped unless economy needs stone or economy needs quartz or economy needs diamond
+return=skipped unless economy needs granite or economy needs quartz or economy needs diamond
 sleep=45000
-consume=smoked_fish,smoked_meat:2 bread:2
+consume=smoked_fish,smoked_meat:2 bread_atlanteans:2
 animate=working 20000
 mine=granite 4 100 5 2
 produce=diamond
@@ -77,10 +77,10 @@ mine=granite 4 100 5 2
 produce=diamond
 animate=working 20000
 mine=granite 4 100 5 2
-produce=stone
+produce=granite
 
 [work]
-call=mine_stone
+call=mine_granite
 call=mine_quartz
 call=mine_diamond
 return=skipped

@@ -9,11 +9,11 @@ prohibited_till=1200
 
 [buildcost]
 log=4
-wood=2
+planks=2
 
 [return_on_dismantle]
 log=2
-wood=1
+planks=1
 
 [working positions]
 miner=1

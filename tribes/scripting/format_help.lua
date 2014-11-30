@@ -385,8 +385,7 @@ function building_help_dependencies_production(tribename, building_description, 
 			-- Need to hack this, because resource != produced ware.
 			local resi_name = ware_description.name
 			if(resi_name == "iron_ore") then resi_name = "iron"
-			elseif(resi_name == "raw_stone") then resi_name = "granite"
-			elseif(resi_name == "stone") then resi_name = "granite"
+			elseif(resi_name == "granite") then resi_name = "granite"
 			elseif(resi_name == "diamond") then resi_name = "granite"
 			elseif(resi_name == "quartz") then resi_name = "granite"
 			elseif(resi_name == "marble") then resi_name = "granite"

@@ -17,18 +17,18 @@ mountain_conqueror=true
 prohibited_till=1500
 
 [buildcost]
-wood=5
+planks=5
 log=2
-stone=8
+granite=8
 marble=2
-marblecolumn=2
+marble_column=2
 
 [return_on_dismantle]
-wood=2
+planks=2
 log=1
-stone=5
+granite=5
 marble=1
-marblecolumn=1
+marble_column=1
 
 [idle]
 pics=fortress_i_??.png

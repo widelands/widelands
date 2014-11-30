@@ -1,5 +1,5 @@
 size=small
-output=raw_stone
+output=granite
 
 [aihints]
 forced_after=0
@@ -19,8 +19,8 @@ stonemason=1
 work=_working
 
 [work]
-worker=cut   # This order is on purpose so that the productivity
-sleep=25000  # drops fast once all stones are gone.
+worker=cut_granite  # This order is on purpose so that the productivity
+sleep=25000         # drops fast once all rocks are gone.
 
 [out_of_resource_notification]
 title=_Out of Rocks

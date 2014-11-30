@@ -5,7 +5,7 @@ heal_per_second=170
 [buildcost]
 log=3
 blackwood=3
-raw_stone=5
+granite=5
 grout=2
 iron=2
 thatch_reed=4
@@ -14,7 +14,7 @@ gold=2
 [return_on_dismantle]
 log=1
 blackwood=2
-raw_stone=3
+granite=3
 grout=1
 iron=1
 thatch_reed=1

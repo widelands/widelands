@@ -1,5 +1,5 @@
 size=medium
-output=wood
+output=planks
 
 [aihints]
 forced_after=60
@@ -7,12 +7,12 @@ prohibited_till=60
 
 [buildcost]
 log=2
-stone=1
-wood=1
+granite=1
+planks=1
 
 [return_on_dismantle]
 log=1
-stone=1
+granite=1
 
 [working positions]
 carpenter=1
@@ -26,11 +26,11 @@ work=_working
 
 [work]
 sleep=16500 # much faster than barbarians hardener
-return=skipped unless economy needs wood
+return=skipped unless economy needs planks
 consume=log:2
 playFX=../../../sound/sawmill/sawmill 180
 animate=working 20000 # much more faster than barbarians hardener
-produce=wood
+produce=planks
 
 [idle]
 pics=sawmill_i_??.png  # ???

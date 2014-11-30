@@ -18,7 +18,7 @@ innkeeper=2
 
 [inputs]
 fish=4
-pitta_bread=4
+bread_barbarians=4
 meat=4
 stout=4
 beer=4
@@ -36,19 +36,19 @@ work=_working
 [produce_ration]
 return=skipped unless economy needs ration
 sleep=33000
-consume=fish,pitta_bread,meat
+consume=fish,bread_barbarians,meat
 produce=ration
 
 [produce_snack]
 return=skipped unless economy needs snack
 sleep=35000
-consume=pitta_bread fish,meat beer
+consume=bread_barbarians fish,meat beer
 produce=snack
 
 [produce_meal]
 return=skipped unless economy needs meal
 sleep=37000
-consume=pitta_bread fish,meat stout
+consume=bread_barbarians fish,meat stout
 produce=meal
 
 [work]

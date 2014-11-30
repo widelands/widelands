@@ -6,12 +6,12 @@ prohibited_till=1200
 
 [buildcost]
 log=5
-raw_stone=2
+granite=2
 thatch_reed=2
 
 [return_on_dismantle]
 log=2
-raw_stone=2
+granite=2
 
 [working positions]
 weaver=1

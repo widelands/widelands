@@ -6,11 +6,11 @@ forced_after=0
 
 [buildcost]
 log=3
-raw_stone=1
+granite=1
 
 [return_on_dismantle]
 log=1
-raw_stone=1
+granite=1
 
 [working positions] #  like lumberjack
 lumberjack=1

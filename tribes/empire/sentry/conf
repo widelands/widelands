@@ -16,20 +16,20 @@ fighting=true
 mountain_conqueror=true
 
 [buildcost]
-wood=1
+planks=1
 log=1
-stone=1
+granite=1
 
 [return_on_dismantle]
-stone=1
-wood=1
+granite=1
+planks=1
 
 [enhancement_cost]
-wood=1
-stone=1
+planks=1
+granite=1
 
 [return_on_dismantle_on_enhanced]
-stone=1
+granite=1
 
 [idle]
 pics=sentry_i_??.png

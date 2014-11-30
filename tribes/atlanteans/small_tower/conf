@@ -16,11 +16,11 @@ fighting=true
 [buildcost]
 log=1
 planks=2
-stone=2
+granite=2
 
 [return_on_dismantle]
 planks=1
-stone=1
+granite=1
 
 [idle]
 pics=small_tower_i_??.png

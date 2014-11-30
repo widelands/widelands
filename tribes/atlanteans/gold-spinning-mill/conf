@@ -1,17 +1,17 @@
 size=small
-output=gold_yarn
+output=gold_thread
 
 [aihints]
 prohibited_till=600
 
 [buildcost]
 log=2
-stone=1
+granite=1
 planks=1
 
 [return_on_dismantle]
 log=1
-stone=1
+granite=1
 
 [working positions]
 carrier=1
@@ -25,10 +25,10 @@ work=_working
 
 [work]
 sleep=15000
-return=skipped unless economy needs gold_yarn
+return=skipped unless economy needs gold_thread
 consume=gold
 animate=working 25000
-produce=gold_yarn
+produce=gold_thread
 
 [idle]
 pics=gold-spinning-mill_i_??.png  # ???

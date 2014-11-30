@@ -4,7 +4,7 @@ size=small
 
 [buildcost]
 log=2
-stone=1
+granite=1
 
 [return_on_dismantle]
 log=1
@@ -14,7 +14,7 @@ scout=1
 
 [inputs]
 smoked_fish=2
-bread=2
+bread_atlanteans=2
 
 [programs]
 # TRANSLATORS: "Completed/Skipped/Did not start scouting because ...
@@ -25,7 +25,7 @@ sleep=30000
 consume=smoked_fish
 worker=scout
 sleep=30000
-consume=bread
+consume=bread_atlanteans
 worker=scout
 
 [idle]

@@ -6,12 +6,12 @@ recruitment=true
 
 [buildcost]
 log=2
-stone=2
+granite=2
 planks=1
 
 [return_on_dismantle]
 log=1
-stone=2
+granite=2
 
 [working positions]
 horsebreeder=1

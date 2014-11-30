@@ -40,7 +40,7 @@ return {
             meal = 4,
             pick = 8,
             ration = 12,
-            raw_stone = 34,
+            granite = 34,
             scythe = 6,
             shovel = 4,
             snack = 3,
@@ -67,7 +67,7 @@ return {
 
       place_building_in_region(plr, "battlearena", sf:region(12), {
          wares = {
-            pitta_bread = 8,
+            bread_barbarians = 8,
             fish = 6,
             meat = 6,
          }
@@ -88,7 +88,7 @@ return {
          wares = { log = 1 },
       })
       place_building_in_region(plr, "lime_kiln", sf:region(12), {
-         wares = { raw_stone = 6, coal = 3 },
+         wares = { granite = 6, coal = 3 },
       })
    end) then
       plr:send_message(_"Not enough space", _(

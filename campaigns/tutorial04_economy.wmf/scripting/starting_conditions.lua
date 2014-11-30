@@ -5,13 +5,13 @@
 plr:forbid_buildings{"scouts_house"} -- otherwise, player could scout and attack the enemy when he should not
 
 function init_player()
-   -- a headquarters without helms, lances, ores and coal
+   -- a headquarters without helms, spears, ores and coal
    prefilled_buildings(plr, { "headquarters", sf.x, sf.y,
       wares = {
-         ax = 6,
+         ax_empire = 6,
          bread_paddle = 2,
          basket = 2,
-         bread = 28,
+         bread_empire = 28,
          cloth = 5,
          fire_tongs = 2,
          fish = 6,
@@ -22,7 +22,7 @@ function init_player()
          hunting_spear = 2,
          kitchen_tools = 4,
          marble = 25,
-         marblecolumn = 6,
+         marble_column = 6,
          meal = 4,
          meat = 6,
          pick = 8,
@@ -30,12 +30,12 @@ function init_player()
          saw = 2,
          scythe = 5,
          shovel = 6,
-         stone = 40,
+         granite = 40,
          log = 60,
          water = 12,
          wheat = 24,
          wine = 8,
-         wood = 45,
+         planks = 45,
          wool = 2,
       },
       workers = {
@@ -102,7 +102,7 @@ function init_player()
       {"smelting_works",110,38, wares = {}},
       {"smelting_works",111,43, wares = {}},
       {"toolsmithy",104,64, wares = {log = 8}},
-      {"weaponsmithy",113,40, wares = {wood = 8}},
+      {"weaponsmithy",113,40, wares = {planks = 8}},
       {"armorsmithy",112,37, wares = {cloth = 8}},
       {"farm",105,70},
       {"farm",101,71},

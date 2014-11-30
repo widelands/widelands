@@ -8,10 +8,10 @@ prohibited_till=50
 [buildcost]
 log=1
 planks=1
-stone=1
+granite=1
 
 [return_on_dismantle]
-stone=1
+granite=1
 log=1
 
 [working positions]

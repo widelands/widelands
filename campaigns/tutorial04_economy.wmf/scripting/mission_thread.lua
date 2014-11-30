@@ -108,7 +108,7 @@ function plan_the_future()
    message_box_objective(plr, economy_settings2)
    o = message_box_objective(plr, economy_settings3)
 
-   while sf.immovable:get_wares("marblecolumn") < 12 do sleep(500) end
+   while sf.immovable:get_wares("marble_column") < 12 do sleep(500) end
    -- wait that the player has really changed the target quantity
 
    o.visible = false
@@ -118,7 +118,7 @@ function plan_the_future()
    local enough_wares = false
    while not enough_wares do
       if (warehouse_field.immovable and (warehouse_field.immovable.descr.name == "warehouse")) then
-         if warehouse_field.immovable:get_wares("marblecolumn") >= 20 then
+         if warehouse_field.immovable:get_wares("marble_column") >= 20 then
             enough_wares = true
          end
       end

@@ -20,7 +20,7 @@ prefilled_buildings(p1,
       blackwood = 3,
       grout = 2,
       iron = 2,
-      raw_stone = 5,
+      granite = 5,
       thatch_reed = 4,
       log = 3,
    },
@@ -85,7 +85,7 @@ function check_wares_in_port_are_all_there(args)
    assert_equal(2, wares.gold)
    assert_equal(2, wares.grout)
    assert_equal(2, wares.iron)
-   assert_equal(5, wares.raw_stone)
+   assert_equal(5, wares.granite)
    assert_equal(4, wares.thatch_reed)
    -- We do not check for logs here as they might be carried out of the
    -- warehouse already when we check (because they might get requested by the

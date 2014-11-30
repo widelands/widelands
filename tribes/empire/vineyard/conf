@@ -6,13 +6,13 @@ space_consumer=true
 forced_after=120
 
 [buildcost]
-wood=2
-stone=1
+planks=2
+granite=1
 marble=2
-marblecolumn=2
+marble_column=2
 
 [return_on_dismantle]
-wood=1
+planks=1
 marble=2
 
 [working positions]

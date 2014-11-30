@@ -6,13 +6,13 @@ needs_water=true
 [buildcost]
 log=3
 planks=2
-stone=3
+granite=3
 spidercloth=2
 
 [return_on_dismantle]
 log=1
 planks=1
-stone=2
+granite=2
 spidercloth=1
 
 [working positions]

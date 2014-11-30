@@ -6,15 +6,15 @@ forced_after=900
 prohibited_till=60
 
 [buildcost]
-wood=1
-stone=1
+planks=1
+granite=1
 marble=2
-marblecolumn=1
+marble_column=1
 
 [return_on_dismantle]
-stone=1
+granite=1
 marble=1
-marblecolumn=1
+marble_column=1
 
 [working positions] #  like brewery
 brewer=1

@@ -9,11 +9,11 @@ mines_percent=30
 
 [buildcost]
 log=4
-raw_stone=2
+granite=2
 
 [return_on_dismantle]
 log=2
-raw_stone=1
+granite=1
 
 [working positions]
 miner=1

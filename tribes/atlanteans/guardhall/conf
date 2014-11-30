@@ -15,13 +15,13 @@ fighting=true
 [buildcost]
 log=2
 planks=3
-stone=4
+granite=4
 diamond=1
 
 [return_on_dismantle]
 log=1
 planks=1
-stone=3
+granite=3
 
 [idle]
 pics=guardhall_i_??.png

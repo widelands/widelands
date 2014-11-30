@@ -26,17 +26,17 @@ return {
 		"untrained+attack", "fulltrained") ..
 
 	rt(h3(_"Defense Training:")) ..
-	dependencies_training_food("atlanteans", { {"smoked_fish", "smoked_meat"}, {"bread"}}) ..
+	dependencies_training_food("atlanteans", { {"smoked_fish", "smoked_meat"}, {"bread_atlanteans"}}) ..
 	dependencies_training_weapons("atlanteans", building_description, "and",
-		{"steel_shield", "advanced_shield"}, "armorsmithy") ..
+		{"shield_steel", "shield_advanced"}, "armorsmithy") ..
 
 	rt(h3(_"Evade Training:")) ..
 	dependencies_training_food("atlanteans", { {"smoked_fish", "smoked_meat"}}) ..
 
 	rt(h3(_"Health Training:")) ..
-	dependencies_training_food("atlanteans", { {"smoked_fish", "smoked_meat"}, {"bread"}}) ..
+	dependencies_training_food("atlanteans", { {"smoked_fish", "smoked_meat"}, {"bread_atlanteans"}}) ..
 	dependencies_training_weapons("atlanteans", building_description, "and",
-		{"golden_tabard"}, "weaving-mill") ..
+		{"tabard_golden"}, "weaving-mill") ..
 
 	--Workers Section
 	building_help_crew_string("atlanteans", building_description) ..

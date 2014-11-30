@@ -5,7 +5,7 @@ heal_per_second=170
 [buildcost]
 log=3
 planks=3
-stone=4
+granite=4
 diamond=1
 quartz=1
 spidercloth=3
@@ -14,7 +14,7 @@ gold=2
 [return_on_dismantle]
 log=1
 planks=1
-stone=2
+granite=2
 spidercloth=1
 gold=1
 

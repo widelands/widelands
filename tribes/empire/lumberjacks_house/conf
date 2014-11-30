@@ -7,11 +7,11 @@ logproducer=true
 
 [buildcost]
 log=2
-wood=1
+planks=1
 
 [return_on_dismantle]
 log=1
-wood=1
+planks=1
 
 [working positions]
 lumberjack=1

@@ -1,13 +1,13 @@
 size=big
-output=spideryarn
+output=spider_silk
 
 [buildcost]
 log=2
-stone=2
+granite=2
 planks=2
 
 [return_on_dismantle]
-stone=1
+granite=1
 planks=1
 
 [working positions]
@@ -23,10 +23,10 @@ work=_working
 
 [work]
 sleep=25000
-return=skipped unless economy needs spideryarn
+return=skipped unless economy needs spider_silk
 consume=corn water
 animate=working 30000
-produce=spideryarn
+produce=spider_silk
 
 [idle]
 pics=spiderfarm_i_??.png  # ???

@@ -19,8 +19,8 @@ return {
 	--Building Section
 	-- This building can both be upgraded or built directly.
 	-- Display build cost, upgrade cost, and dismantle costs for both versions.
-	-- Dismantle returns for upgraded version: 2 stone, 1 wood, 1 marble
-	-- Dismantle returns for built version: 1 stone, 1 log, 1 wood
+	-- Dismantle returns for upgraded version: 2 granite, 1 planks, 1 marble
+	-- Dismantle returns for built version: 1 granite, 1 log, 1 planks
 	building_help_building_section("empire", building_description, "outpost", {"outpost"})
    end
 }

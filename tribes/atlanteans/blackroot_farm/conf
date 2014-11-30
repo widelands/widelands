@@ -7,12 +7,12 @@ space_consumer=true
 
 [buildcost]
 planks=3
-stone=2
+granite=2
 log=4
 
 [return_on_dismantle]
 planks=1
-stone=2
+granite=2
 log=1
 
 [working positions]

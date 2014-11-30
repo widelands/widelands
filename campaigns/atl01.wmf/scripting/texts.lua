@@ -58,9 +58,9 @@ obj_make_food_infrastructure = {
 		_[[Food is very important for mines and military training areas. Establish a well working food environment by building at least one farm, one blackroot farm and a mill. The two kinds of flour together with water from a well will be baked into bread in a bakery, so build a bakery and a well, too.]] .. paragraphdivider() ..
       _[[The other two important food wares are smoked fish and smoked meat. Raw meat is delivered from a hunter. A fisher gets the fish out of the sea while a fish breeder makes sure that a school of fish does not go extinct by breeding more. Make sure that there are always fish left, otherwise the fish breeder won’t be able to breed new ones. The smoking happens in a smokery, you will need at least two of those.]] .. paragraphdivider() ..
       listitem_bullet(_[[Build a farm and a blackroot farm]]) ..
-      listitem_bullet(_[[Build a mill to make cornflour and blackroot flour]]) ..
+      listitem_bullet(_[[Build a mill to make cornmeal and blackroot flour]]) ..
       listitem_bullet(_[[Build a well]]) ..
-      listitem_bullet(_[[Build a bakery to bake bread from cornflour, blackroot flour and water]]) ..
+      listitem_bullet(_[[Build a bakery to bake bread from cornmeal, blackroot flour and water]]) ..
       listitem_bullet(_[[Build a hunter’s house to get raw meat]]) ..
       listitem_bullet(_[[Build a fisher’s house close to water to get raw fish]]) ..
       listitem_bullet(_[[Build a fish breeder’s house close to the fisher to make sure the fish do not die out]]) ..
@@ -73,7 +73,7 @@ obj_spidercloth_production = {
    title = _"Build a spider farm and a weaving mill",
    number = 3,
    body = objective_text(_"Spidercloth Production",
-		_[[The weavers produce spidercloth and tabards in the weaving mill. Spidercloth is needed for the construction of some buildings and clothing, while tabards are the uniforms of soldiers. The weaving mill needs gold yarn and spideryarn as raw material. Spideryarn is produced by the spider farm, while gold yarn is produced by the gold spinning mill out of gold.]] .. paragraphdivider() ..
+		_[[The weavers produce spidercloth and tabards in the weaving mill. Spidercloth is needed for the construction of some buildings and clothing, while tabards are the uniforms of soldiers. The weaving mill needs gold thread and spider silk as raw material. Spider silk is produced by the spider farm, while gold thread is produced by the gold spinning mill out of gold.]] .. paragraphdivider() ..
       listitem_bullet(_[[Build a weaving mill]]) ..
       listitem_bullet(_[[Build a spider farm]]) ..
       listitem_bullet(_[[Build a gold spinning mill]])

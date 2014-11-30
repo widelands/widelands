@@ -14,7 +14,7 @@ return {
 
 	--General Section
 	building_help_general_string("empire", building_description,
-		_"Digs marble and stones out of the ground in mountain terrain.") ..
+		_"Digs marble and granite out of the ground in mountain terrain.") ..
 
 	--Dependencies
 	building_help_dependencies_production("empire", building_description) ..

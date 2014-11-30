@@ -1,17 +1,17 @@
 help=_Cuts raw pieces of granite out of rocks.
-program=cut_stone
+program=cut_granite
 
 [buildcost]
 pick=1
 carrier=1
 
-[cut_stone]
+[cut_granite]
 0=findobject attrib:granite radius:6
 1=walk object
 2=playFX ../../../sound/stonecutting/stonecutter 192
 3=animation hacking 10000
 4=object shrink
-5=createware stone
+5=createware granite
 6=return
 
 [idle]

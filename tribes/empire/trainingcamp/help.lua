@@ -27,14 +27,14 @@ return {
 		"untrained+evade", "fulltrained") ..
 
 	rt(h3(_"Attack Training:")) ..
-	dependencies_training_food("empire", { {"fish", "meat"}, {"bread"}}) ..
+	dependencies_training_food("empire", { {"fish", "meat"}, {"bread_empire"}}) ..
 	dependencies_training_weapons("empire", building_description, "and",
-		{"lance", "advanced_lance", "heavy_lance", "war_lance"}, "weaponsmithy") ..
+		{"spear", "spear_advanced", "spear_heavy", "spear_war"}, "weaponsmithy") ..
 
 	rt(h3(_"Health Training:")) ..
-	dependencies_training_food("empire", { {"fish", "meat"}, {"bread"}}) ..
+	dependencies_training_food("empire", { {"fish", "meat"}, {"bread_empire"}}) ..
 	dependencies_training_weapons("empire", building_description, "and",
-		{"helm", "armor", "chain_armor", "plate_armor"}, "armorsmithy") ..
+		{"armor_helmet", "armor", "armor_chain", "armor_gilded"}, "armorsmithy") ..
 
 	--Workers Section
 	building_help_crew_string("empire", building_description) ..

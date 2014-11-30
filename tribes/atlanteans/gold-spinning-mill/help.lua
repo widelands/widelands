@@ -14,7 +14,7 @@ return {
 
 	--General Section
 	building_help_general_string("atlanteans", building_description,
-		_"Spins goldyarn out of gold.") ..
+		_"Spins gold thread out of gold.") ..
 
 	--Dependencies
 	building_help_dependencies_production("atlanteans", building_description) ..

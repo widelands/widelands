@@ -10,7 +10,7 @@ carrier2=horse
 icon=pics/icon.png
 # Wares and workers positions in wares window. Columns are separated by ;,
 # Entries in the columns separated by ,
-wares_order=stone, log, planks, spideryarn, spidercloth; fish, smoked_fish, meat, smoked_meat, water, corn, corn_flour, blackroot, blackroot_flour, bread; quartz, diamond, coal, iron_ore, iron, gold_ore, gold; pick, saw, shovel, hammer, milking_tongs, fishing_net, bucket, hunting_bow, hook_pole, scythe, bread_paddle, fire_tongs; light_trident, long_trident, steel_trident, double_trident, heavy_double_trident,steel_shield, advanced_shield, tabard, gold_yarn, golden_tabard
+wares_order=granite, log, planks, spider_silk, spidercloth; fish, smoked_fish, meat, smoked_meat, water, corn, cornmeal, blackroot, blackroot_flour, bread_atlanteans; quartz, diamond, coal, iron_ore, iron, gold_ore, gold; pick, saw, shovel, hammer, milking_tongs, fishing_net, bucket, hunting_bow, hook_pole, scythe, bread_paddle, fire_tongs; trident_light, trident_long, trident_steel, trident_double, trident_heavy_double,shield_steel, shield_advanced, tabard, gold_thread, tabard_golden
 
 workers_order=carrier, horse, horsebreeder; stonecutter, woodcutter, sawyer, forester, builder, spiderbreeder, weaver, shipwright; fisher, fish_breeder, hunter, smoker, farmer, blackroot_farmer, miller, baker; geologist, miner, charcoal_burner, smelter; toolsmith; soldier, trainer, weaponsmith, armorsmith, scout
 
@@ -49,52 +49,6 @@ resi_iron2=_Resource indicator: Iron (much)
 resi_none=_Resource indicator: No resource
 resi_water1=_Resource indicator: Water
 shipconstruction=_Ship Construction Site
-
-[ware types]
-advanced_shield=_Advanced Shield
-bread_paddle=_Bread Paddle
-blackroot_flour=_Blackroot Flour
-blackroot=_Blackroot
-bread=_Bread
-bucket=_Buckets
-coal=_Coal
-corn_flour=_Cornflour
-corn=_Corn
-diamond=_Diamond
-double_trident=_Double Trident
-fire_tongs=_Fire Tongs
-fishing_net=_Fishing Net
-fish=_Fish
-golden_tabard=_Golden Tabard
-gold_ore=_Gold Ore
-gold=_Gold
-gold_yarn=_Gold Yarn
-hammer=_Hammer
-heavy_double_trident=_Heavy Double Trident
-hook_pole=_Hook pole
-hunting_bow=_Hunting Bow
-iron_ore=_Iron Ore
-iron=_Iron
-light_trident=_Light Trident
-long_trident=_Long Trident
-meat=_Meat
-milking_tongs=_Milking Tongs
-quartz=_Quartz
-pick=_Pick
-planks=_Planks
-saw=_Saw
-scythe=_Scythe
-shovel=_Shovel
-smoked_fish=_Smoked Fish
-smoked_meat=_Smoked Meat
-spidercloth=_Spidercloth
-spideryarn=_Spideryarn
-steel_shield=_Steel Shield
-steel_trident=_Steel Trident
-stone=_Stone
-tabard=_Tabard
-log=_Log
-water=_Water
 
 [carrier types]
 carrier=_Carrier

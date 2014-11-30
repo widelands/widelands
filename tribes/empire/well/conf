@@ -7,7 +7,7 @@ prohibited_till=60
 
 [buildcost]
 log=2
-stone=1
+granite=1
 marble=1
 
 [return_on_dismantle]

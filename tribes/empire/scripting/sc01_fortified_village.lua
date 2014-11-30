@@ -24,9 +24,9 @@ return {
    if not pcall(function()
       place_building_in_region(plr, "warehouse", sf:region(7), {
          wares = {
-            helmet = 2,
-            wood_lance = 5,
-            ax = 6,
+            armor_helmet = 2,
+            spear_wooden = 5,
+            ax_empire = 6,
             bread_paddle = 2,
             basket = 2,
             fire_tongs = 2,
@@ -39,19 +39,19 @@ return {
             iron_ore = 5,
             kitchen_tools = 4,
             marble = 25,
-            marblecolumn = 6,
+            marble_column = 6,
             meal = 4,
             pick = 8,
             ration = 12,
             saw = 2,
             scythe = 5,
             shovel = 6,
-            stone = 40,
+            granite = 40,
             log = 29,
             water = 12,
             wheat = 4,
             wine = 8,
-            wood = 37,
+            planks = 37,
             wool = 2,
          },
          workers = {
@@ -73,7 +73,7 @@ return {
 
       place_building_in_region(plr, "colosseum", sf:region(11), {
          wares = {
-            bread = 8,
+            bread_empire = 8,
             fish = 4,
             meat = 4,
          },
@@ -83,7 +83,7 @@ return {
          wares = {
             fish = 2,
             meat = 2,
-            helmet = 2,
+            armor_helmet = 2,
          },
       })
 
@@ -104,7 +104,7 @@ return {
       place_building_in_region(plr, "weaponsmithy", sf:region(11), {
          wares = {
             coal = 4,
-            wood = 8,
+            planks = 8,
          }
       })
 

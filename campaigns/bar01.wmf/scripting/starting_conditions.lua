@@ -27,13 +27,13 @@ hq:set_wares{
    meal=4,
    meat=6,
    pick=14,
-   pittabread=8,
+   bread_barbarians=8,
    ration=12,
-   raw_stone=40,
+   granite=40,
    scythe=6,
    shovel=4,
    snack=3,
-   thatchreed=24,
+   thatch_reed=24,
    log=80,
 }
 hq:set_workers{

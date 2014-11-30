@@ -4,7 +4,7 @@ trainer_patience=16
 
 [buildcost]
 planks=2
-stone=4
+granite=4
 diamond=2
 quartz=2
 spidercloth=2
@@ -13,7 +13,7 @@ log=4
 
 [return_on_dismantle]
 planks=1
-stone=3
+granite=3
 diamond=1
 quartz=1
 gold=1
@@ -23,13 +23,13 @@ log=1
 trainer=1
 
 [inputs]
-bread=10
+bread_atlanteans=10
 smoked_fish=6
 smoked_meat=6
-long_trident=4
-steel_trident=4
-double_trident=4
-heavy_double_trident=4
+trident_long=4
+trident_steel=4
+trident_double=4
+trident_heavy_double=4
 
 [soldier attack]
 min_level=0
@@ -50,28 +50,28 @@ check_soldier=soldier attack 9    # dummy check to get sleep rated as skipped - 
 check_soldier=soldier attack 0
 sleep=30000
 check_soldier=soldier attack 0
-consume=bread smoked_fish,smoked_meat long_trident
+consume=bread_atlanteans smoked_fish,smoked_meat trident_long
 train=soldier attack 0 1
 
 [upgrade_soldier_attack_1]
 check_soldier=soldier attack 1
 sleep=30000
 check_soldier=soldier attack 1
-consume=bread smoked_fish,smoked_meat steel_trident
+consume=bread_atlanteans smoked_fish,smoked_meat trident_steel
 train=soldier attack 1 2
 
 [upgrade_soldier_attack_2]
 check_soldier=soldier attack 2
 sleep=30000
 check_soldier=soldier attack 2
-consume=bread smoked_fish,smoked_meat double_trident
+consume=bread_atlanteans smoked_fish,smoked_meat trident_double
 train=soldier attack 2 3
 
 [upgrade_soldier_attack_3]
 check_soldier=soldier attack 3
 sleep=30000
 check_soldier=soldier attack 3
-consume=bread smoked_fish,smoked_meat heavy_double_trident
+consume=bread_atlanteans smoked_fish,smoked_meat trident_heavy_double
 train=soldier attack 3 4
 
 [idle]

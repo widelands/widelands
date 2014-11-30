@@ -12,10 +12,10 @@ defeated_you_string=_Your soldiers defeated the enemy at the barracks.
 
 [buildcost]
 log=1
-wood=2
+planks=2
 
 [return_on_dismantle]
-wood=1
+planks=1
 
 [idle]
 pics=barracks_i_??.png

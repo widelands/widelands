@@ -14,7 +14,7 @@ return {
 
 	--General Section
 	building_help_general_string("barbarians", building_description,
-		_[[The Lime Kiln processes Raw Stones to make ‘Grout’, a substance that solidifies and so reinforces masonry.]],
+		_[[The Lime Kiln processes granite to make ‘Grout’, a substance that solidifies and so reinforces masonry.]],
 		_"The Lime Kiln’s output will only go to construction sites that need it. Those are predominantly houses that work with fire, and some military sites.") ..
 
 	--Dependencies

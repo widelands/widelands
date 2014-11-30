@@ -6,11 +6,11 @@ prohibited_till=900
 
 [buildcost]
 log=4
-raw_stone=1
+granite=1
 
 [return_on_dismantle]
 log=1
-raw_stone=1
+granite=1
 
 [working positions]
 gamekeeper=1

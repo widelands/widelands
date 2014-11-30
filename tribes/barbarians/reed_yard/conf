@@ -7,11 +7,11 @@ forced_after=0
 
 [buildcost]
 log=5
-raw_stone=2
+granite=2
 
 [return_on_dismantle]
 log=2
-raw_stone=1
+granite=1
 
 [working positions]
 gardener=1

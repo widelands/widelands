@@ -8,13 +8,13 @@ forced_after=500
 [buildcost]
 log=3
 blackwood=2
-raw_stone=3
+granite=3
 thatch_reed=2
 
 [return_on_dismantle]
 log=1
 blackwood=1
-raw_stone=2
+granite=2
 
 [working positions]
 brewer=1

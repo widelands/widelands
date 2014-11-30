@@ -4,14 +4,14 @@ trainer_patience=5
 
 [buildcost]
 log=6
-raw_stone=4
+granite=4
 grout=6
 gold=4
 thatch_reed=3
 
 [return_on_dismantle]
 log=3
-raw_stone=2
+granite=2
 grout=2
 gold=2
 
@@ -19,17 +19,17 @@ gold=2
 trainer=1
 
 [inputs]
-pitta_bread=10
+bread_barbarians=10
 fish=6
 meat=6
-sharpax=2
-broadax=2
-bronzeax=2
-battleax=2
-warriorsax=2
+ax_sharp=2
+ax_broad=2
+ax_bronze=2
+ax_battle=2
+ax_warriors=2
 helmet=2
-mask=2
-warhelm=2
+helmet_mask=2
+helmet_warhelm=2
 
 [soldier attack]
 min_level=0
@@ -70,56 +70,56 @@ check_soldier=soldier attack 9    # dummy check to get sleep rated as skipped - 
 check_soldier=soldier attack 0 # Fails when aren't any soldier of level 0 attack
 sleep=30000
 check_soldier=soldier attack 0 # Because the soldier can be expulsed by the player
-consume=sharpax fish,meat pitta_bread
+consume=ax_sharp fish,meat bread_barbarians
 train=soldier attack 0 1
 
 [upgrade_soldier_attack_1]
 check_soldier=soldier attack 1
 sleep=30000
 check_soldier=soldier attack 1
-consume=broadax fish,meat pitta_bread
+consume=ax_broad fish,meat bread_barbarians
 train=soldier attack 1 2
 
 [upgrade_soldier_attack_2]
 check_soldier=soldier attack 2
 sleep=30000
 check_soldier=soldier attack 2
-consume=bronzeax fish,meat pitta_bread
+consume=ax_bronze fish,meat bread_barbarians
 train=soldier attack 2 3
 
 [upgrade_soldier_attack_3]
 check_soldier=soldier attack 3
 sleep=30000
 check_soldier=soldier attack 3
-consume=battleax fish,meat:2 pitta_bread
+consume=ax_battle fish,meat:2 bread_barbarians
 train=soldier attack 3 4
 
 [upgrade_soldier_attack_4]
 check_soldier=soldier attack 4
 sleep=30000
 check_soldier=soldier attack 4
-consume=warriorsax fish,meat pitta_bread:2
+consume=ax_warriors fish,meat bread_barbarians:2
 train=soldier attack 4 5
 
 [upgrade_soldier_hp_0]
 check_soldier=soldier hp 0
 sleep=30000
 check_soldier=soldier hp 0
-consume=helmet fish,meat,pitta_bread
+consume=helmet fish,meat,bread_barbarians
 train=soldier hp 0 1
 
 [upgrade_soldier_hp_1]
 check_soldier=soldier hp 1
 sleep=30000
 check_soldier=soldier hp 1
-consume=mask fish,meat pitta_bread
+consume=helmet_mask fish,meat bread_barbarians
 train=soldier hp 1 2
 
 [upgrade_soldier_hp_2]
 check_soldier=soldier hp 2
 sleep=30000
 check_soldier=soldier hp 2
-consume=warhelm fish,meat:2 pitta_bread
+consume=helmet_warhelm fish,meat:2 bread_barbarians
 train=soldier hp 2 3
 
 [idle]

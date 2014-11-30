@@ -14,13 +14,13 @@ defeated_you_string=_Your soldiers defeated the enemy at the citadel.
 [enhancement_cost]
 blackwood=9
 log=5
-raw_stone=4
+granite=4
 grout=2
 
 [return_on_dismantle_on_enhanced]
 blackwood=4
 log=2
-raw_stone=3
+granite=3
 grout=1
 
 [idle]

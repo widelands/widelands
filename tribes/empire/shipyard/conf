@@ -5,20 +5,20 @@ needs_water=true
 
 [buildcost]
 log=3
-wood=2
-stone=3
+planks=2
+granite=3
 cloth=2
 
 [return_on_dismantle]
 log=1
-stone=2
+granite=2
 cloth=1
 
 [working positions]
 shipwright=1
 
 [inputs]
-wood=10
+planks=10
 log=2
 cloth=4
 

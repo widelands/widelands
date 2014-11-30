@@ -19,13 +19,13 @@ prohibited_till=1800
 [buildcost]
 blackwood=9
 log=5
-raw_stone=4
+granite=4
 grout=2
 
 [return_on_dismantle]
 blackwood=4
 log=2
-raw_stone=2
+granite=2
 grout=1
 
 [idle]

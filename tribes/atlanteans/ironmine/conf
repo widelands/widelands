@@ -18,7 +18,7 @@ planks=2
 miner=3
 
 [inputs]
-bread=10
+bread_atlanteans=10
 smoked_fish=10
 smoked_meat=6
 
@@ -29,7 +29,7 @@ work=_mining
 [work]
 sleep=45000
 return=skipped unless economy needs iron_ore
-consume=smoked_fish,smoked_meat:2 bread:2
+consume=smoked_fish,smoked_meat:2 bread_atlanteans:2
 animate=working 20000
 mine=iron 4 100 5 2
 produce=iron_ore

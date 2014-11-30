@@ -10,7 +10,7 @@ carrier2=donkey
 icon=pics/icon.png
 # Wares and workers positions in wares window. Columns are separated by ;,
 # Entries in the columns separated by ,
-wares_order=stone, log, wood, wool,cloth;   fish,meat, water, wheat, flour, bread, beer, grape, wine, ration, meal;  marble, marblecolumn, coal, iron_ore, iron, gold_ore, gold;    pick, ax, saw, shovel, hammer, fishing_rod, hunting_spear, scythe, bread_paddle, basket, kitchen_tools, fire_tongs;   wood_lance, lance, advanced_lance, heavy_lance, war_lance, helmet, armor, chain_armor, plate_armor
+wares_order=granite, log, planks, wool,cloth;   fish,meat, water, wheat, flour, bread_empire, beer, grape, wine, ration, meal;  marble, marble_column, coal, iron_ore, iron, gold_ore, gold;    pick, ax_empire, saw, shovel, hammer, fishing_rod, hunting_spear, scythe, bread_paddle, basket, kitchen_tools, fire_tongs;   spear_wooden, spear, spear_advanced, spear_heavy, spear_war, armor_helmet, armor, armor_chain, armor_gilded
 
 workers_order=carrier, donkey, donkeybreeder;   stonemason, carpenter, lumberjack, forester, builder, shepherd, weaver, shipwright; fisher, hunter, farmer, miller, baker, brewer, pig-breeder, vinefarmer, innkeeper; geologist, miner, master-miner, charcoal_burner, smelter; toolsmith; soldier, trainer, weaponsmith, armorsmith, scout
 
@@ -48,52 +48,6 @@ wine0s=_Vine (small)
 wine0t=_Vine (tiny)
 wine1=_Vine (ripe)
 shipconstruction=_Ship Construction Site
-
-[ware types]
-advanced_lance=_Advanced Lance
-armor=_Armor
-ax=_Ax
-bread_paddle=_Bread Paddle
-basket=_Basket
-beer=_Beer
-bread=_Bread
-chain_armor=_Chain Armor
-cloth=_Cloth
-coal=_Coal
-fire_tongs=_Fire Tongs
-fish=_Fish
-fishing_rod=_Fishing Rod
-flour=_Flour
-gold=_Gold
-gold_ore=_Gold Ore
-grape=_Grape
-hammer=_Hammer
-heavy_lance=_Heavy Lance
-helmet=_Helmet
-hunting_spear=_Hunting Spear
-iron=_Iron
-iron_ore=_Iron Ore
-kitchen_tools=_Kitchen Tools
-lance=_Lance
-marblecolumn=_Marble Column
-marble=_Marble
-meal=_Meal
-meat=_Meat
-pick=_Pick
-plate_armor=_Plate Armor
-ration=_Ration
-saw=_Saw
-scythe=_Scythe
-shovel=_Shovel
-stone=_Stones
-log=_Log
-war_lance=_War-Lance
-water=_Water
-wheat=_Wheat
-wine=_Wine
-wood=_Wood
-wood_lance=_Wood Lance
-wool=_Wool
 
 [carrier types]
 carrier=_Carrier

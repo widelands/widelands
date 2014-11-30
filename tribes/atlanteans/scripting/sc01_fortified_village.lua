@@ -26,16 +26,16 @@ return {
             diamond = 7,
             iron_ore = 5,
             quartz = 9,
-            stone = 50,
-            spideryarn = 9,
+            granite = 50,
+            spider_silk = 9,
             log = 13,
-            gold_yarn = 6,
+            gold_thread = 6,
             planks = 45,
             spidercloth = 5,
             blackroot = 5,
             blackroot_flour = 12,
             corn = 5,
-            corn_flour = 12,
+            cornmeal = 12,
             fish = 3,
             meat = 3,
             water = 12,
@@ -52,7 +52,7 @@ return {
             scythe = 4,
             shovel = 9,
             tabard = 5,
-            light_trident = 5,
+            trident_light = 5,
          },
          workers = {
             blackroot_farmer = 1,
@@ -74,14 +74,14 @@ return {
 
       place_building_in_region(plr, "labyrinth", sf:region(11), {
          wares = {
-            bread = 4,
+            bread_atlanteans = 4,
             smoked_fish = 3,
             smoked_meat = 3,
          }
       })
 
       place_building_in_region(plr, "dungeon", sf:region(11), {
-         wares = {bread = 4, smoked_fish = 3, smoked_meat = 3}
+         wares = {bread_atlanteans = 4, smoked_fish = 3, smoked_meat = 3}
       })
 
       place_building_in_region(plr, "armorsmithy", sf:region(11), {

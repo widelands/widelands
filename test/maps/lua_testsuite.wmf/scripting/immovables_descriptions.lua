@@ -175,7 +175,7 @@ end
 
 function test_descr:test_output_ware_types()
 	local building_description = egbase:get_building_description("barbarians","bakery")
-	assert_equal("pitta_bread", building_description.output_ware_types[1].name)
+	assert_equal("bread_barbarians", building_description.output_ware_types[1].name)
 	building_description = egbase:get_building_description("barbarians","gamekeepers_hut")
 	assert_equal(nil, building_description.output_ware_types[1])
 end

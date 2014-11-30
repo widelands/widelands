@@ -19,11 +19,11 @@ prohibited_till=1500
 [buildcost]
 blackwood=7
 log=1
-raw_stone=4
+granite=4
 
 [return_on_dismantle]
 blackwood=3
-raw_stone=3
+granite=3
 
 [idle]
 pics=donjon_i_??.png

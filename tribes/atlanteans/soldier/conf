@@ -44,7 +44,7 @@ die_e=die_e
 
 [buildcost]
 tabard=1
-light_trident=1
+trident_light=1
 carrier=1
 
 [idle]

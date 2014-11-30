@@ -39,7 +39,7 @@ function flag_tests:test_no_wares_on_creation_array_arg()
    local rv = self.f:get_wares{"log", "coal"}
    assert_equal(0, rv.log)
    assert_equal(0, rv.coal)
-   assert_equal(nil, rv.raw_stone)
+   assert_equal(nil, rv.granite)
 end
 function flag_tests:test_set_wares_two_args()
    self.f:set_wares("log", 3)
@@ -91,7 +91,7 @@ end
 flag_tests_get_ware = lunit.TestCase("flag tests: get_ware")
 function flag_tests_get_ware:setup()
    self.f = player1:place_flag(map:get_field(13,10), 1)
-   self.f:set_wares{log = 2, raw_stone = 2, coal = 1}
+   self.f:set_wares{log = 2, granite = 2, coal = 1}
 end
 function flag_tests_get_ware:teardown()
    pcall(self.f.remove, self.f)
@@ -100,7 +100,7 @@ end
 function flag_tests_get_ware:test_get_ware_all()
    local rv = self.f:get_wares("all")
    assert_equal(2, rv.log)
-   assert_equal(2, rv.raw_stone)
+   assert_equal(2, rv.granite)
    assert_equal(1, rv.coal)
    assert_equal(nil, rv.fish)
    local c = 0
@@ -113,19 +113,19 @@ function flag_tests_get_ware:test_get_ware_one_returns_number()
 end
 function flag_tests_get_ware:test_get_ware_one()
    assert_equal(2, self.f:get_wares("log"))
-   assert_equal(2, self.f:get_wares("raw_stone"))
+   assert_equal(2, self.f:get_wares("granite"))
    assert_equal(1, self.f:get_wares("coal"))
 end
 function flag_tests_get_ware:test_get_ware_one()
    assert_equal(2, self.f:get_wares("log"))
-   assert_equal(2, self.f:get_wares("raw_stone"))
+   assert_equal(2, self.f:get_wares("granite"))
    assert_equal(1, self.f:get_wares("coal"))
 end
 
 function flag_tests_get_ware:test_get_ware_many()
-   local rv = self.f:get_wares{"log", "raw_stone"}
+   local rv = self.f:get_wares{"log", "granite"}
    assert_equal(2, rv.log)
-   assert_equal(2, rv.raw_stone)
+   assert_equal(2, rv.granite)
    assert_equal(nil, rv.coal)
    local c = 0
    for name,cnt in pairs(rv) do c = c+cnt end

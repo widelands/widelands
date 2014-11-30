@@ -18,13 +18,13 @@ prohibited_till=120
 [buildcost]
 log=1
 blackwood=1
-raw_stone=2
+granite=2
 grout=1
 thatch_reed=1
 
 [return_on_dismantle]
 blackwood=1
-raw_stone=1
+granite=1
 grout=1
 
 [working positions]

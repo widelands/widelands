@@ -1,5 +1,5 @@
 size=small
-output=stone
+output=granite
 output=marble
 
 [aihints]
@@ -8,7 +8,7 @@ stoneproducer=true
 
 [buildcost]
 log=2
-wood=1
+planks=1
 
 [return_on_dismantle]
 log=1
@@ -18,27 +18,27 @@ stonemason=1
 
 [programs]
 # TRANSLATORS: "Completed/Skipped/Did not start quarrying stone because ...
-mine_stone=_quarrying stone
+mine_granite=_quarrying granite
 # TRANSLATORS: "Completed/Skipped/Did not start quarrying marble because ...
 mine_marble=_quarrying marble
 # TRANSLATORS: "Completed/Skipped/Did not start working because ...
 work=_working
 
-[mine_stone]
-worker=cut_stone  # This order is on purpose so that the productivity
-sleep=25000       # drops fast once all stones are gone.
+[mine_granite]
+worker=cut_granite  # This order is on purpose so that the productivity
+sleep=25000        # drops fast once all stones are gone.
 
 [mine_marble]
 worker=cut_marble  # This order is on purpose so that the productivity
 sleep=25000        # drops fast once all stones are gone.
 
 [work]
-call=mine_stone
-call=mine_stone
-call=mine_stone
+call=mine_granite
+call=mine_granite
+call=mine_granite
 call=mine_marble # 2 of 7 times it finds marble
-call=mine_stone
-call=mine_stone
+call=mine_granite
+call=mine_granite
 call=mine_marble # 2 of 7 times it finds marble
 return=skipped
 

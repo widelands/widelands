@@ -1,5 +1,5 @@
 size=medium
-output=marblecolumn
+output=marble_column
 
 [aihints]
 forced_after=300
@@ -7,12 +7,12 @@ prohibited_till=120
 
 [buildcost]
 log=1
-wood=1
-stone=1
+planks=1
+granite=1
 marble=3 # someone who works on marble should like marble
 
 [return_on_dismantle]
-stone=1
+granite=1
 marble=2
 
 [working positions] #  like quarry
@@ -27,11 +27,11 @@ work=_working
 
 [work]
 sleep=50000
-return=skipped unless economy needs marblecolumn
+return=skipped unless economy needs marble_column
 consume=marble:2
 playFX=../../../sound/stonecutting/stonemason 192
 animate=working 32000
-produce=marblecolumn
+produce=marble_column
 
 [idle]
 pics=stonemasons_house_i_??.png  # ???
