@@ -329,13 +329,14 @@ void DefaultAI::late_initialization() {
 		}
 
 		// Read all interesting data from ware producing buildings
-		if (typeid(bld) == typeid(ProductionSiteDescr)) {
-			upcast(ProductionSiteDescr const, prod, &bld);
+		if (bld.type() == MapObjectType::PRODUCTIONSITE) {
+			const ProductionSiteDescr& prod =
+					dynamic_cast<const ProductionSiteDescr&>(bld);
 			bo.type = bld.get_ismine() ? BuildingObserver::MINE : BuildingObserver::PRODUCTIONSITE;
-			for (const WareAmount& temp_input : prod->inputs()) {
+			for (const WareAmount& temp_input : prod.inputs()) {
 				bo.inputs_.push_back(temp_input.first);
 			}
-			for (const WareIndex& temp_output : prod->output_ware_types()) {
+			for (const WareIndex& temp_output : prod.output_ware_types()) {
 				bo.outputs_.push_back(temp_output);
 			}
 
@@ -367,10 +368,11 @@ void DefaultAI::late_initialization() {
 		// now for every military building, we fill critical_built_mat_ vector
 		// with critical construction wares
 		// non critical are excluded (see below)
-		if (typeid(bld) == typeid(MilitarySiteDescr)) {
+		if (bld.type() == MapObjectType::MILITARYSITE) {
 			bo.type = BuildingObserver::MILITARYSITE;
-			upcast(MilitarySiteDescr const, milit, &bld);
-			for (const std::pair<unsigned char, unsigned char>& temp_buildcosts : milit->buildcost()) {
+			const MilitarySiteDescr& milit =
+				dynamic_cast<const MilitarySiteDescr&>(bld);
+			for (const std::pair<unsigned char, unsigned char>& temp_buildcosts : milit.buildcost()) {
 				// bellow are non-critical wares
 				if (tribe_->ware_index("log") == temp_buildcosts.first ||
 				    tribe_->ware_index("blackwood") == temp_buildcosts.first ||
@@ -385,17 +387,17 @@ void DefaultAI::late_initialization() {
 			continue;
 		}
 
-		if (typeid(bld) == typeid(WarehouseDescr)) {
+		if (bld.type() == MapObjectType::WAREHOUSE) {
 			bo.type = BuildingObserver::WAREHOUSE;
 			continue;
 		}
 
-		if (typeid(bld) == typeid(TrainingSiteDescr)) {
+		if (bld.type() == MapObjectType::TRAININGSITE) {
 			bo.type = BuildingObserver::TRAININGSITE;
 			continue;
 		}
 
-		if (typeid(bld) == typeid(ConstructionSiteDescr)) {
+		if (bld.type() == MapObjectType::CONSTRUCTIONSITE) {
 			bo.type = BuildingObserver::CONSTRUCTIONSITE;
 			continue;
 		}
@@ -3005,9 +3007,8 @@ void DefaultAI::gain_building(Building& b) {
 	BuildingObserver& bo = get_building_observer(b.descr().name().c_str());
 
 	if (bo.type == BuildingObserver::CONSTRUCTIONSITE) {
-		upcast(ConstructionSite const, constructionsite, &b);
 		BuildingObserver& target_bo =
-			get_building_observer(constructionsite->building().name().c_str());
+		   get_building_observer(dynamic_cast<ConstructionSite&>(b).building().name().c_str());
 		++target_bo.cnt_under_construction_;
 		++num_constructionsites_;
 		if (target_bo.type == BuildingObserver::PRODUCTIONSITE) {
@@ -3023,9 +3024,8 @@ void DefaultAI::gain_building(Building& b) {
 		++bo.cnt_built_;
 
 		if (bo.type == BuildingObserver::PRODUCTIONSITE) {
-			upcast(ProductionSite, productionsite, &b);
 			productionsites.push_back(ProductionSiteObserver());
-			productionsites.back().site = productionsite;
+			productionsites.back().site = &dynamic_cast<ProductionSite&>(b);
 			productionsites.back().bo = &bo;
 			productionsites.back().built_time_ = game().get_gametime();
 			productionsites.back().unoccupied_till_ = game().get_gametime();
@@ -3038,9 +3038,8 @@ void DefaultAI::gain_building(Building& b) {
 			for (uint32_t i = 0; i < bo.inputs_.size(); ++i)
 				++wares.at(bo.inputs_.at(i)).consumers_;
 		} else if (bo.type == BuildingObserver::MINE) {
-			upcast(ProductionSite, productionsite, &b);
 			mines_.push_back(ProductionSiteObserver());
-			mines_.back().site = productionsite;
+			mines_.back().site = &dynamic_cast<ProductionSite&>(b);
 			mines_.back().bo = &bo;
 			mines_.back().built_time_ = game().get_gametime();
 
@@ -3050,9 +3049,8 @@ void DefaultAI::gain_building(Building& b) {
 			for (uint32_t i = 0; i < bo.inputs_.size(); ++i)
 				++wares.at(bo.inputs_.at(i)).consumers_;
 		} else if (bo.type == BuildingObserver::MILITARYSITE) {
-			upcast(MilitarySite, militarysite, &b);
 			militarysites.push_back(MilitarySiteObserver());
-			militarysites.back().site = militarysite;
+			militarysites.back().site = &dynamic_cast<MilitarySite&>(b);
 			militarysites.back().bo = &bo;
 			militarysites.back().checks = bo.desc->get_size();
 			militarysites.back().enemies_nearby_ = true;
@@ -3068,9 +3066,8 @@ void DefaultAI::lose_building(const Building& b) {
 	BuildingObserver& bo = get_building_observer(b.descr().name().c_str());
 
 	if (bo.type == BuildingObserver::CONSTRUCTIONSITE) {
-		upcast(ConstructionSite const, constructionsite, &b);
-		BuildingObserver& target_bo =
-				get_building_observer(constructionsite->building().name().c_str());
+		BuildingObserver& target_bo = get_building_observer(
+			dynamic_cast<const ConstructionSite&>(b).building().name().c_str());
 		--target_bo.cnt_under_construction_;
 		--num_constructionsites_;
 		if (target_bo.type == BuildingObserver::PRODUCTIONSITE) {
@@ -3223,9 +3220,11 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 	// military sites to be manned.
 	// If we have no mines yet, we need to preserve some soldiers for further
 	// expansion (if enemy allows this)
+	// TODO(sirver): this next line is completely unreadable and maybe even wrong given the
+	// precedence of ?: and +. Replace through some if/else.
 	int32_t needed_margin = (mines_.size() < 6) ?
-	                           (6 - mines_.size()) * 3 :
-	                           0 + 2 + (type_ == NORMAL) ? 4 : 0 + (type_ == DEFENSIVE) ? 8 : 0;
+	                           ((6 - mines_.size()) * 3) :
+	                           0 + 2 + ((type_ == NORMAL) ? 4 : 0 + ((type_ == DEFENSIVE) ? 8 : 0));
 	const int32_t current_margin =
 	   genstats[pn - 1].miltary_strength.back() - militarysites.size() - num_milit_constructionsites;
 

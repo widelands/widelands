@@ -37,8 +37,7 @@ struct TrainingSiteWindow : public ProductionSiteWindow {
 		(InteractiveGameBase & parent, TrainingSite &, UI::Window * & registry);
 
 	TrainingSite & trainingsite() {
-		upcast(TrainingSite, result, &building());
-		return *result;
+		return dynamic_cast<TrainingSite&>(building());
 	}
 
 protected:

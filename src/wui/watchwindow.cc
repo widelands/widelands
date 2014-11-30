@@ -56,8 +56,7 @@ struct WatchWindow : public UI::Window {
 	~WatchWindow();
 
 	Widelands::Game & game() const {
-		upcast(InteractiveGameBase, igbase, get_parent());
-		return igbase->game();
+		return dynamic_cast<InteractiveGameBase&>(*get_parent()).game();
 	}
 
 	boost::signals2::signal<void (Point)> warp_mainview;

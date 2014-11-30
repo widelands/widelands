@@ -31,8 +31,7 @@ struct ProductionSiteWindow : public BuildingWindow {
 		 UI::Window *         & registry);
 
 	Widelands::ProductionSite & productionsite() {
-		upcast(Widelands::ProductionSite, result, &building());
-		return *result;
+		return dynamic_cast<Widelands::ProductionSite&>(building());
 	}
 	void update_worker_table();
 protected:

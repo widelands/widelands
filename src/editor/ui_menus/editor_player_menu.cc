@@ -39,8 +39,7 @@
 #define UNDEFINED_TRIBE_NAME "<undefined>"
 
 inline EditorInteractive & EditorPlayerMenu::eia() {
-	upcast(EditorInteractive, result, get_parent());
-	return *result;
+	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
 
 EditorPlayerMenu::EditorPlayerMenu

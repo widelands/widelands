@@ -301,12 +301,13 @@ void Critter::program_update(Game & game, State & state)
 	}
 
 	for (;;) {
-		upcast(CritterProgram const, program, state.program);
+		const CritterProgram & program =
+			dynamic_cast<const CritterProgram&>(*state.program);
 
-		if (state.ivar1 >= program->get_size())
+		if (state.ivar1 >= program.get_size())
 			return pop_task(game);
 
-		const CritterAction & action = (*program)[state.ivar1];
+		const CritterAction & action = program[state.ivar1];
 
 		if ((this->*(action.function))(game, state, action))
 			return;

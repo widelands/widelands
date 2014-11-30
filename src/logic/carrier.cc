@@ -101,13 +101,14 @@ void Carrier::road_update(Game & game, State & state)
 		}
 	}
 
-	upcast(Road, road, get_location(game));
+	Road & road = dynamic_cast<Road&>(*get_location(game));
 
 	// Move into idle position if necessary
-	if (start_task_movepath
+	if
+		(start_task_movepath
 		 	(game,
-			 road->get_path(),
-			 road->get_idle_index(),
+		 	 road.get_path(),
+		 	 road.get_idle_index(),
 		 	 descr().get_right_walk_anims(does_carry_ware())))
 		return;
 
@@ -126,9 +127,9 @@ void Carrier::road_update(Game & game, State & state)
 void Carrier::road_pop(Game & game, State & /* state */)
 {
 	if (m_promised_pickup_to != NOONE && get_location(game)) {
-		upcast(Road, road, get_location(game));
-		Flag & flag      = road->get_flag(static_cast<Road::FlagId>(m_promised_pickup_to));
-		Flag & otherflag = road->get_flag(static_cast<Road::FlagId>(m_promised_pickup_to ^ 1));
+		Road & road      = dynamic_cast<Road&>(*get_location(game));
+		Flag & flag      = road.get_flag(static_cast<Road::FlagId>(m_promised_pickup_to));
+		Flag & otherflag = road.get_flag(static_cast<Road::FlagId>(m_promised_pickup_to ^ 1));
 
 		flag.cancel_pickup(game, otherflag);
 	}
@@ -184,10 +185,10 @@ void Carrier::transport_update(Game & game, State & state)
 		pickup_from_flag(game, state);
 
 	else {
-		upcast(Road, road, get_location(game));
+		Road & road = dynamic_cast<Road&>(*get_location(game));
 		// If the ware should go to the building attached to our flag, walk
 		// directly into said building
-		Flag & flag = road->get_flag(static_cast<Road::FlagId>(state.ivar1 ^ 1));
+		Flag & flag = road.get_flag(static_cast<Road::FlagId>(state.ivar1 ^ 1));
 
 		WareInstance & ware = *get_carried_ware(game);
 		assert(ware.get_location(game) == this);
@@ -238,11 +239,10 @@ void Carrier::deliver_to_building(Game & game, State & state)
 				molog
 					("[Carrier]: Building switch from under us, return to road.\n");
 
-				upcast(Road, road, get_location(game));
 				state.ivar1 =
 					&building->base_flag()
 					==
-					&road->get_flag
+					&dynamic_cast<Road&>(*get_location(game)).get_flag
 						(static_cast<Road::FlagId>(0));
 				break;
 			}
@@ -276,9 +276,9 @@ void Carrier::pickup_from_flag(Game & game, State & state)
 
 		m_promised_pickup_to = NOONE;
 
-		upcast(Road, road, get_location(game));
-		Flag & flag      = road->get_flag(static_cast<Road::FlagId>(ivar1));
-		Flag & otherflag = road->get_flag(static_cast<Road::FlagId>(ivar1 ^ 1));
+		Road & road      = dynamic_cast<Road&>(*get_location(game));
+		Flag & flag      = road.get_flag(static_cast<Road::FlagId>(ivar1));
+		Flag & otherflag = road.get_flag(static_cast<Road::FlagId>(ivar1 ^ 1));
 
 		// Are there wares to move between our flags?
 		if (WareInstance * const ware = flag.fetch_pending_ware(game, otherflag))
@@ -304,15 +304,15 @@ void Carrier::pickup_from_flag(Game & game, State & state)
 void Carrier::drop_ware(Game & game, State & state)
 {
 	WareInstance * other = nullptr;
-	upcast(Road, road, get_location(game));
-	Flag & flag = road->get_flag(static_cast<Road::FlagId>(state.ivar1 ^ 1));
+	Road & road = dynamic_cast<Road&>(*get_location(game));
+	Flag & flag = road.get_flag(static_cast<Road::FlagId>(state.ivar1 ^ 1));
 
 	if (m_promised_pickup_to == (state.ivar1 ^ 1)) {
 		// If there's an ware we acked, we can drop ours even if the flag is
 		// flooded
 		other =
 			flag.fetch_pending_ware
-				(game, road->get_flag(static_cast<Road::FlagId>(state.ivar1)));
+				(game, road.get_flag(static_cast<Road::FlagId>(state.ivar1)));
 
 		if (!other && !flag.has_capacity()) {
 			molog
@@ -375,11 +375,11 @@ void Carrier::enter_building(Game & game, State & state)
 bool Carrier::swap_or_wait(Game & game, State & state)
 {
 	// Road that employs us
-	upcast(Road, road, get_location(game));
+	Road & road = dynamic_cast<Road&>(*get_location(game));
 	// Flag we are delivering to
-	Flag & flag = road->get_flag(static_cast<Road::FlagId>(state.ivar1 ^ 1));
+	Flag & flag = road.get_flag(static_cast<Road::FlagId>(state.ivar1 ^ 1));
 	// The other flag of our road
-	Flag & otherflag = road->get_flag(static_cast<Road::FlagId>(state.ivar1));
+	Flag & otherflag = road.get_flag(static_cast<Road::FlagId>(state.ivar1));
 
 
 	if (m_promised_pickup_to == (state.ivar1 ^ 1)) {
@@ -455,18 +455,18 @@ bool Carrier::notify_ware(Game & game, int32_t const flag)
  */
 void Carrier::find_pending_ware(Game & game)
 {
-	upcast(Road, road, get_location(game));
+	Road & road = dynamic_cast<Road&>(*get_location(game));
 	uint32_t havewarebits = 0;
 
 	assert(m_promised_pickup_to == NOONE);
 
-	if (road->get_flag(Road::FlagStart).has_pending_ware
-			(game, road->get_flag(Road::FlagEnd))) {
+	if (road.get_flag(Road::FlagStart).has_pending_ware
+			(game, road.get_flag(Road::FlagEnd))) {
 		havewarebits |= 1;
 	}
 
-	if (road->get_flag(Road::FlagEnd).has_pending_ware
-			(game, road->get_flag(Road::FlagStart))) {
+	if (road.get_flag(Road::FlagEnd).has_pending_ware
+			(game, road.get_flag(Road::FlagStart))) {
 		havewarebits |= 2;
 	}
 
@@ -480,8 +480,8 @@ void Carrier::find_pending_ware(Game & game)
 		m_promised_pickup_to = START_FLAG;
 		if
 			(!
-			 road->get_flag(Road::FlagStart).ack_pickup
-				(game, road->get_flag(Road::FlagEnd)))
+			 road.get_flag(Road::FlagStart).ack_pickup
+			 	(game, road.get_flag(Road::FlagEnd)))
 			throw wexception
 				("Carrier::find_pending_ware: start flag is messed up");
 
@@ -489,8 +489,8 @@ void Carrier::find_pending_ware(Game & game)
 		m_promised_pickup_to = END_FLAG;
 		if
 			(!
-			 road->get_flag(Road::FlagEnd).ack_pickup
-				(game, road->get_flag(Road::FlagStart)))
+			 road.get_flag(Road::FlagEnd).ack_pickup
+			 	(game, road.get_flag(Road::FlagStart)))
 			throw wexception("Carrier::find_pending_ware: end flag is messed up");
 	}
 }
@@ -502,8 +502,8 @@ void Carrier::find_pending_ware(Game & game)
 int32_t Carrier::find_closest_flag(Game & game)
 {
 	Map & map = game.map();
-	upcast(Road, road, get_location(game));
-	CoordPath startpath(map, road->get_path());
+	CoordPath startpath
+		(map, dynamic_cast<Road&>(*get_location(game)).get_path());
 
 	CoordPath endpath;
 	int32_t startcost, endcost;
@@ -550,8 +550,8 @@ int32_t Carrier::find_closest_flag(Game & game)
 bool Carrier::start_task_walktoflag
 	(Game & game, int32_t const flag, bool const offset)
 {
-	upcast(Road, road, get_location(game));
-	const Path & path = road->get_path();
+	const Path & path =
+		dynamic_cast<Road&>(*get_location(game)).get_path();
 	int32_t idx;
 
 	if (!flag) {

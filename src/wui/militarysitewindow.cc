@@ -38,8 +38,7 @@ struct MilitarySiteWindow : public BuildingWindow {
 		 UI::Window *       & registry);
 
 	MilitarySite & militarysite() {
-		upcast(MilitarySite, result, &building());
-		return *result;
+		return dynamic_cast<MilitarySite&>(building());
 	}
 
 protected:

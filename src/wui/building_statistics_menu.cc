@@ -65,8 +65,7 @@
 namespace Columns {enum {Name, Size, Prod, Owned, Build};}
 
 inline InteractivePlayer & BuildingStatisticsMenu::iplayer() const {
-	upcast(InteractivePlayer, result, get_parent());
-	return *result;
+	return dynamic_cast<InteractivePlayer&>(*get_parent());
 }
 
 BuildingStatisticsMenu::BuildingStatisticsMenu
@@ -419,10 +418,11 @@ void BuildingStatisticsMenu::update() {
 				++nr_build;
 			else {
 				++nr_owned;
-				if (productionsite) {
-					upcast(Widelands::ProductionSite, psite, map[vec[l].pos].get_immovable());
-					total_prod += psite->get_statistics_percent();
-				}
+				if (productionsite)
+					total_prod +=
+						dynamic_cast<Widelands::ProductionSite&>
+							(*map[vec[l].pos].get_immovable())
+						.get_statistics_percent();
 			}
 		}
 

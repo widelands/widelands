@@ -284,8 +284,7 @@ m_selected_information(0)
 }
 
 GeneralStatisticsMenu::~GeneralStatisticsMenu() {
-	upcast(InteractiveGameBase, igbase, get_parent());
-	Game & game = igbase->game();
+	Game & game = dynamic_cast<InteractiveGameBase&>(*get_parent()).game();
 	if (game.is_loaded()) {
 		// Save informations for recreation, if window is reopened
 		m_my_registry->selected_information = m_selected_information;
@@ -321,8 +320,9 @@ void GeneralStatisticsMenu::cb_changed_to(int32_t const id)
  * The radiogroup has changed
  */
 void GeneralStatisticsMenu::radiogroup_changed(int32_t const id) {
-	upcast(InteractiveGameBase, igbase, get_parent());
-	size_t const statistics_size = igbase->game().get_general_statistics().size();
+	size_t const statistics_size =
+		dynamic_cast<InteractiveGameBase&>(*get_parent()).game()
+		.get_general_statistics().size();
 	for (uint32_t i = 0; i < statistics_size; ++i)
 		if (m_cbs[i]) {
 			m_plot.show_plot

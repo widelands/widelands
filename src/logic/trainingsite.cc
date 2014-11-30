@@ -341,13 +341,13 @@ void TrainingSite::request_soldier_callback
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {
-	upcast(TrainingSite, tsite, &target);
-	upcast(Soldier, s, w);
+	TrainingSite& tsite = dynamic_cast<TrainingSite&>(target);
+	Soldier& s = dynamic_cast<Soldier&>(*w);
 
-	assert(s->get_location(game) == tsite);
-	assert(tsite->m_soldier_request == &rq);
+	assert(s.get_location(game) == &tsite);
+	assert(tsite.m_soldier_request == &rq);
 
-	tsite->incorporate_soldier(game, *s);
+	tsite.incorporate_soldier(game, s);
 }
 
 /*
@@ -416,7 +416,7 @@ void TrainingSite::set_soldier_capacity(uint32_t const capacity) {
  */
 void TrainingSite::drop_soldier(Soldier & soldier)
 {
-	upcast(Game, game, &owner().egbase());
+	Game & game = dynamic_cast<Game&>(owner().egbase());
 
 	std::vector<Soldier *>::iterator it =
 		std::find(m_soldiers.begin(), m_soldiers.end(), &soldier);
@@ -427,11 +427,11 @@ void TrainingSite::drop_soldier(Soldier & soldier)
 
 	m_soldiers.erase(it);
 
-	soldier.reset_tasks(*game);
-	soldier.start_task_leavebuilding(*game, true);
+	soldier.reset_tasks(game);
+	soldier.start_task_leavebuilding(game, true);
 
 	// Schedule, so that we can call new soldiers on next act()
-	schedule_act(*game, 100);
+	schedule_act(game, 100);
 }
 
 

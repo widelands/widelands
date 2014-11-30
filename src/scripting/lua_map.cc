@@ -444,10 +444,11 @@ int do_get_soldiers(lua_State* L, const Widelands::SoldierControl& sc, const Tri
 			lua_rawset(L, -3);
 		}
 	} else {
-		upcast(SoldierDescr const, soldier_descr, tribe.get_worker_descr(tribe.worker_index("soldier")));
+		const SoldierDescr& soldier_descr = dynamic_cast<const SoldierDescr&>
+			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
 
 		// Only return the number of those requested
-		const SoldierMapDescr wanted = unbox_lua_soldier_description(L, 2, *soldier_descr);
+		const SoldierMapDescr wanted = unbox_lua_soldier_description(L, 2, soldier_descr);
 		uint32_t rv = 0;
 		for (const Soldier* s : soldiers) {
 			SoldierMapDescr sd
@@ -468,8 +469,10 @@ int do_set_soldiers
 	assert(owner != nullptr);
 
 	const TribeDescr& tribe = owner->tribe();
-	upcast(SoldierDescr const, soldier_descr, tribe.get_worker_descr(tribe.worker_index("soldier")));
-	SoldiersMap setpoints = m_parse_set_soldiers_arguments(L, *soldier_descr);
+	const SoldierDescr& soldier_descr =  //  soldiers
+		dynamic_cast<const SoldierDescr&>
+			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
+	SoldiersMap setpoints = m_parse_set_soldiers_arguments(L, soldier_descr);
 
 	// Get information about current soldiers
 	const std::vector<Soldier*> curs = sc->stationed_soldiers();
@@ -514,11 +517,12 @@ int do_set_soldiers
 			}
 		} else if (d > 0) {
 			for (; d; --d) {
-				upcast(Soldier, soldier, &soldier_descr->create(egbase, *owner, nullptr, building_position));
-				soldier->set_level
+				Soldier& soldier = dynamic_cast<Soldier&>
+					(soldier_descr.create(egbase, *owner, nullptr, building_position));
+				soldier.set_level
 					(sp.first.hp, sp.first.at, sp.first.de, sp.first.ev);
-				if (sc->incorporate_soldier(egbase, *soldier)) {
-					soldier->remove(egbase);
+				if (sc->incorporate_soldier(egbase, soldier)) {
+					soldier.remove(egbase);
 					report_error(L, "No space left for soldier!");
 				}
 			}
@@ -2582,13 +2586,14 @@ int LuaRoad::create_new_worker
 	for (Path::StepVector::size_type i = 0; i < idle_index; ++i)
 		egbase.map().get_neighbour(idle_position, path[i], &idle_position);
 
-	upcast(Carrier, carrier, &wdes->create(egbase, r.owner(), &r, idle_position));
+	Carrier& carrier = dynamic_cast<Carrier&>
+		(wdes->create(egbase, r.owner(), &r, idle_position));
 
 	if (upcast(Game, game, &egbase)) {
-		carrier->start_task_road(*game);
+		carrier.start_task_road(*game);
 	}
 
-	r.assign_carrier(*carrier, 0);
+	r.assign_carrier(carrier, 0);
 	return 0;
 }
 

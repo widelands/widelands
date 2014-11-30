@@ -483,8 +483,9 @@ void MainMenuNewRandomMap::normalize_landmass(ButtonId clicked_button) {
 }
 
 void MainMenuNewRandomMap::clicked_create_map() {
-	upcast(EditorInteractive, eia, get_parent());
-	Widelands::EditorGameBase & egbase = eia->egbase();
+	EditorInteractive & eia =
+		dynamic_cast<EditorInteractive&>(*get_parent());
+	Widelands::EditorGameBase & egbase = eia.egbase();
 	Widelands::Map              & map    = egbase.map();
 	UI::ProgressWindow loader;
 
@@ -517,8 +518,8 @@ void MainMenuNewRandomMap::clicked_create_map() {
 
 	map.recalc_whole_map(egbase.world());
 
-	eia->set_need_save(true);
-	eia->register_overlays();
+	eia.set_need_save(true);
+	eia.register_overlays();
 
 	die();
 }

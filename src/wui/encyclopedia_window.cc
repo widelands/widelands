@@ -51,8 +51,7 @@ constexpr uint32_t wareColumnWidth = 250;
 using namespace Widelands;
 
 inline InteractivePlayer & EncyclopediaWindow::iaplayer() const {
-	upcast(InteractivePlayer, result, get_parent());
-	return *result;
+	return dynamic_cast<InteractivePlayer&>(*get_parent());
 }
 
 

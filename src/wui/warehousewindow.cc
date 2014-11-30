@@ -176,8 +176,7 @@ struct WarehouseWindow : public BuildingWindow {
 		(InteractiveGameBase & parent, Warehouse &, UI::Window * & registry);
 
 	Warehouse & warehouse() {
-		upcast(Warehouse, result, &building());
-		return *result;
+		return dynamic_cast<Warehouse&>(building());
 	}
 };
 

@@ -46,8 +46,7 @@ struct ActionConfirm : public UI::Window {
 		 Widelands::Ship & ship);
 
 	InteractivePlayer & iaplayer() const {
-		upcast(InteractivePlayer, result, get_parent());
-		return *result;
+		return dynamic_cast<InteractivePlayer&>(*get_parent());
 	}
 
 	virtual void think() = 0;

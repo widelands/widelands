@@ -275,7 +275,6 @@ bool InteractiveSpectator::handle_key(bool const down, SDL_Keysym const code)
 			if (!m_chat.window)
 				GameChatMenu::create_chat_console(this, m_chat, *m_chatProvider);
 
-			// NOCOM(#gunchleoc): Compiler did not like upcast. Is dynamic_cast OK?
 			dynamic_cast<GameChatMenu*>(m_chat.window)->enter_chat_message();
 			return true;
 

@@ -1031,8 +1031,7 @@ void Ship::Loader::load_finish()
 	// economy of all workers we're transporting so that they are in the correct
 	// economy. Also, we might are on an expedition which means that we just now
 	// created the economy of this ship and must inform all wares.
-	upcast(Game, game, &egbase());
-	ship.set_economy(*game, ship.m_economy);
+	ship.set_economy(dynamic_cast<Game&>(egbase()), ship.m_economy);
 }
 
 

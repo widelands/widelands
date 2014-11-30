@@ -182,8 +182,7 @@ private:
 /// or additional member variable, go ahead
 #define MO_DESCR(type)                     \
 public: const type & descr() const {       \
-		upcast(type const, result, m_descr); \
-		return *result;                      \
+		return dynamic_cast<const type&>(*m_descr); \
    }                                                                          \
 
 class MapObject {
@@ -311,8 +310,7 @@ public:
 		MapObjectLoader & mol   () {return *m_mol;}
 		MapObject            * get_object() {return m_object;}
 		template<typename T> T & get() {
-			upcast(T, result, m_object);
-			return *result;
+			return dynamic_cast<T&>(*m_object);
 		}
 
 	protected:

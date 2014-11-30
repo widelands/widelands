@@ -172,16 +172,16 @@ void ConstructionSite::cleanup(EditorGameBase & egbase)
 		Building & b =
 			m_building->create(egbase, owner(), m_position, false, false, m_old_buildings);
 		if (Worker * const builder = m_builder.get(egbase)) {
-			upcast(Game, game, &egbase);
-			builder->reset_tasks(*game);
+			builder->reset_tasks(dynamic_cast<Game&>(egbase));
 			builder->set_location(&b);
 		}
 		// Open the new building window if needed
 		if (m_optionswindow) {
 			Point window_position = m_optionswindow->get_pos();
 			hide_options();
-			upcast(InteractiveGameBase, igbase, egbase.get_ibase());
-			b.show_options(*igbase, false, window_position);
+			InteractiveGameBase & igbase =
+				dynamic_cast<InteractiveGameBase&>(*egbase.get_ibase());
+			b.show_options(igbase, false, window_position);
 		}
 	}
 }

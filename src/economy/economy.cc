@@ -1039,12 +1039,15 @@ void Economy::balance(uint32_t const timerid)
 	}
 	++m_request_timerid;
 
-	upcast(Game, game, &owner().egbase());
+	Game & game = dynamic_cast<Game&>(owner().egbase());
 
 	_check_splits();
-	_create_requested_workers(*game);
-	_balance_requestsupply(*game);
-	_handle_active_supplies(*game);
+
+	_create_requested_workers (game);
+
+	_balance_requestsupply(game);
+
+	_handle_active_supplies(game);
 }
 
 }

@@ -20,7 +20,6 @@
 #include "logic/worker_descr.h"
 
 #include "base/i18n.h"
-#include "base/macros.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "logic/carrier.h"
@@ -177,12 +176,12 @@ Worker & WorkerDescr::create
 	 Coords             const coords)
 const
 {
-	upcast(Worker, worker, &create_object());
-	worker->set_owner(&owner);
-	worker->set_location(location);
-	worker->set_position(egbase, coords);
-	worker->init(egbase);
-	return *worker;
+	Worker & worker = dynamic_cast<Worker&>(create_object());
+	worker.set_owner(&owner);
+	worker.set_location(location);
+	worker.set_position(egbase, coords);
+	worker.init(egbase);
+	return worker;
 }
 
 

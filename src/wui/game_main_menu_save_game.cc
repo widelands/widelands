@@ -35,8 +35,7 @@
 #include "wui/interactive_gamebase.h"
 
 InteractiveGameBase & GameMainMenuSaveGame::igbase() {
-	upcast(InteractiveGameBase, result, get_parent());
-	return *result;
+	return dynamic_cast<InteractiveGameBase&>(*get_parent());
 }
 
 #define WINDOW_WIDTH                                                        440
@@ -263,8 +262,7 @@ struct SaveWarnMessageBox : public UI::WLMessageBox {
 	{}
 
 	GameMainMenuSaveGame & menu_save_game() {
-		upcast(GameMainMenuSaveGame, result, get_parent());
-		return *result;
+		return dynamic_cast<GameMainMenuSaveGame&>(*get_parent());
 	}
 
 
@@ -330,8 +328,7 @@ struct DeletionMessageBox : public UI::WLMessageBox {
 	void pressed_yes() override
 	{
 		g_fs->fs_unlink(m_filename);
-		upcast(GameMainMenuSaveGame, panel, get_parent());
-		panel->fill_list();
+		dynamic_cast<GameMainMenuSaveGame&>(*get_parent()).fill_list();
 		die();
 	}
 

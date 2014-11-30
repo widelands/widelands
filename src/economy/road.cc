@@ -382,14 +382,15 @@ void Road::_request_carrier_callback
 {
 	assert(w);
 
-	upcast(Road, road, &target);
-	upcast(Carrier, carrier, w);
+	Road& road = dynamic_cast<Road&>(target);
 
-	for (CarrierSlot& slot : road->m_carrier_slots) {
+	for (CarrierSlot& slot : road.m_carrier_slots) {
 		if (slot.carrier_request == &rq) {
+			Carrier & carrier = dynamic_cast<Carrier&> (*w);
 			slot.carrier_request = nullptr;
-			slot.carrier = carrier;
-			carrier->start_task_road(game);
+			slot.carrier = &carrier;
+
+			carrier.start_task_road(game);
 			delete &rq;
 			return;
 		}
@@ -401,7 +402,7 @@ void Road::_request_carrier_callback
 	 */
 	log
 		("Road(%u): got a request_callback but do not have the request\n",
-		 road->serial());
+		 road.serial());
 	delete &rq;
 	w->start_task_gowarehouse(game);
 }

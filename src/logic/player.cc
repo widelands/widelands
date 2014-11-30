@@ -201,14 +201,14 @@ void Player::create_default_infrastructure() {
 		const TribeDescr::Initialization & initialization =
 			tribe().initialization(m_initialization_index);
 
-		upcast(Game, game, &egbase());
+		Game & game = dynamic_cast<Game&>(egbase());
 
 		// Run the corresponding script
-		std::unique_ptr<LuaTable> table(game->lua().run_script(initialization.script));
+		std::unique_ptr<LuaTable> table(game.lua().run_script(initialization.script));
 		table->do_not_warn_about_unaccessed_keys();
 		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
 		cr->push_arg(this);
-		game->enqueue_command(new CmdLuaCoroutine(game->get_gametime(), cr.release()));
+		game.enqueue_command(new CmdLuaCoroutine(game.get_gametime(), cr.release()));
 
 		// Check if other starting positions are shared in and initialize them as well
 		for (uint8_t n = 0; n < m_further_shared_in_player.size(); ++n) {
@@ -216,12 +216,12 @@ void Player::create_default_infrastructure() {
 
 			// Run the corresponding script
 			std::unique_ptr<LuaCoroutine> ncr =
-				game->lua()
+				game.lua()
 					.run_script(tribe().initialization(m_further_initializations.at(n)).script)
 					->get_coroutine("func");
 			ncr->push_arg(this);
 			ncr->push_arg(further_pos);
-			game->enqueue_command(new CmdLuaCoroutine(game->get_gametime(), ncr.release()));
+			game.enqueue_command(new CmdLuaCoroutine(game.get_gametime(), ncr.release()));
 		}
 	} else
 		throw WLWarning
@@ -485,8 +485,7 @@ Road & Player::force_road(const Path & path) {
 		log("Clearing for road at (%i, %i)\n", c.x, c.y);
 
 		//  Make sure that the player owns the area around.
-		upcast(Game, game, &egbase());
-		game->conquer_area_no_building
+		dynamic_cast<Game&>(egbase()).conquer_area_no_building
 			(PlayerArea<Area<FCoords> >(player_number(), Area<FCoords>(c, 1)));
 
 		if (BaseImmovable * const immovable = c.field->get_immovable()) {
@@ -776,9 +775,8 @@ Perform an action on the given flag.
 void Player::flagaction(Flag & flag)
 {
 	if (&flag.owner() == this) { //  Additional security check.
-		upcast(Game, game, &egbase());
 		flag.add_flag_job
-			(*game,
+			(dynamic_cast<Game&>(egbase()),
 			 tribe().worker_index("geologist"),
 			 "expedition");
 	}

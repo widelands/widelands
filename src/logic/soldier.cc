@@ -700,8 +700,8 @@ void Soldier::start_animation
 	 uint32_t const time)
 {
 	molog("[soldier] starting animation %s", animname);
-	upcast(Game, game, &egbase);
-	return start_task_idle(*game, descr().get_rand_anim(*game, animname), time);
+	Game& game = dynamic_cast<Game&>(egbase);
+	return start_task_idle(game, descr().get_rand_anim(game, animname), time);
 }
 
 
@@ -753,8 +753,7 @@ bool Soldier::can_be_challenged()
 	if (!m_battle) {
 		return true;
 	}
-	upcast(Game, game, &owner().egbase());
-	return !m_battle->locked(*game);
+	return !m_battle->locked(dynamic_cast<Game&>(owner().egbase()));
 }
 
 /**
@@ -1804,8 +1803,11 @@ void Soldier::send_space_signals(Game & game)
 			 FindImmovableAttackable());
 
 		for (BaseImmovable * temp_attackable : attackables) {
-			upcast(PlayerImmovable const, imm, temp_attackable);
-			if (imm->get_owner()->player_number() == land_owner) {
+			if
+				(dynamic_cast<const PlayerImmovable&>(*temp_attackable)
+				 .get_owner()->player_number()
+				 ==
+				 land_owner) {
 				dynamic_cast<Attackable &>(*temp_attackable).aggressor(*this);
 			}
 		}

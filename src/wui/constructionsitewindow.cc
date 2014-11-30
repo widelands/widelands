@@ -84,8 +84,11 @@ Make sure the window is redrawn when necessary.
 void ConstructionSiteWindow::think()
 {
 	BuildingWindow::think();
-	upcast(Widelands::ConstructionSite, cs, &building());
-	m_progress->set_state(cs->get_built_per64k());
+
+	const Widelands::ConstructionSite & cs =
+		dynamic_cast<Widelands::ConstructionSite&>(building());
+
+	m_progress->set_state(cs.get_built_per64k());
 }
 
 

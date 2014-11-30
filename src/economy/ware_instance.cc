@@ -560,8 +560,8 @@ void WareInstance::Loader::load(FileRead & fr)
 	m_location = fr.unsigned_32();
 	m_transfer_nextstep = fr.unsigned_32();
 	if (fr.unsigned_8()) {
-		upcast(Game, game, &egbase());
-		ware.m_transfer = new Transfer(*game, ware);
+		ware.m_transfer =
+			new Transfer(dynamic_cast<Game&>(egbase()), ware);
 		ware.m_transfer->read(fr, m_transfer);
 	}
 }

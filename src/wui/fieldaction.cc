@@ -177,8 +177,7 @@ public:
 	~FieldActionWindow();
 
 	InteractiveBase & ibase() {
-		upcast(InteractiveBase, result, get_parent());
-		return *result;
+		return dynamic_cast<InteractiveBase&>(*get_parent());
 	}
 
 	void think() override;

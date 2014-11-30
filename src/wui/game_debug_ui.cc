@@ -133,8 +133,7 @@ struct MapObjectDebugWindow : public UI::Window {
 	MapObjectDebugWindow(InteractiveBase & parent, Widelands::MapObject &);
 
 	InteractiveBase & ibase() {
-		upcast(InteractiveBase, result, get_parent());
-		return *result;
+		return dynamic_cast<InteractiveBase&>(*get_parent());
 	}
 
 	void think() override;
@@ -213,8 +212,7 @@ struct FieldDebugWindow : public UI::Window {
 	FieldDebugWindow(InteractiveBase & parent, Widelands::Coords);
 
 	InteractiveBase & ibase() {
-		upcast(InteractiveBase, result, get_parent());
-		return *result;
+		return dynamic_cast<InteractiveBase&>(*get_parent());
 	}
 
 	void think() override;
@@ -275,7 +273,9 @@ void FieldDebugWindow::think()
 	UI::Window::think();
 
 	// Select information about the field itself
-	const Widelands::EditorGameBase & egbase = ibase().egbase();
+	const Widelands::EditorGameBase & egbase =
+		dynamic_cast<const InteractiveBase&>(*get_parent())
+		.egbase();
 	{
 		Widelands::PlayerNumber const owner = m_coords.field->get_owned_by();
 		str += (boost::format("(%i, %i)\nheight: %u\nowner: %u\n")

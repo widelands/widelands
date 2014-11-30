@@ -38,8 +38,7 @@ const static int BUTTON_WIDTH = 20;
 const static int BUTTON_HEIGHT = 20;
 
 inline EditorInteractive & EditorToolChangeResourcesOptionsMenu::eia() {
-	upcast(EditorInteractive, result, get_parent());
-	return *result;
+	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
 
 

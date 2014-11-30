@@ -21,7 +21,6 @@
 
 #include <boost/bind.hpp>
 
-#include "base/macros.h"
 #include "base/time_string.h"
 #include "graphic/graphic.h"
 #include "logic/instances.h"
@@ -35,8 +34,7 @@ using Widelands::MessageId;
 using Widelands::MessageQueue;
 
 inline InteractivePlayer & GameMessageMenu::iplayer() const {
-	upcast(InteractivePlayer, result, get_parent());
-	return *result;
+	return dynamic_cast<InteractivePlayer&>(*get_parent());
 }
 
 

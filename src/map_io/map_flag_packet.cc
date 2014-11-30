@@ -106,10 +106,12 @@ void MapFlagPacket::read
 						//  packet. We always create this, no matter what skip is
 						//  since we have to read the data packets. We delete this
 						//  object later again, if it is not wanted.
-						upcast(Game, game, &egbase);
 						mol.register_object<Flag>
 							(serial,
-							 *new Flag(*game, egbase.player(owner), fc));
+							 *new Flag
+							 	(dynamic_cast<Game&>(egbase),
+							 	 egbase.player(owner),
+							 	 fc));
 					} catch (const WException & e) {
 						throw GameDataError
 							("%u (at (%i, %i), owned by player %u): %s",

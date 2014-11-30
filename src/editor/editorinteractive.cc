@@ -340,8 +340,7 @@ void EditorInteractive::set_sel_radius_and_update_menu(uint32_t const val) {
 		return;
 	}
 	if (UI::UniqueWindow * const w = m_toolsizemenu.window) {
-		upcast(EditorToolsizeMenu, tool_size_menu, w);
-		tool_size_menu->update(val);
+		dynamic_cast<EditorToolsizeMenu&>(*w).update(val);
 	} else {
 		set_sel_radius(val);
 	}

@@ -639,7 +639,7 @@ void Flag::call_carrier
 	}
 
 	// Deal with the normal (flag) case
-	upcast(Flag const, nextflag, nextstep);
+	const Flag& nextflag = dynamic_cast<const Flag&>(*nextstep);
 
 	for (int32_t dir = 1; dir <= 6; ++dir) {
 		Road * const road = get_road(dir);
@@ -658,7 +658,7 @@ void Flag::call_carrier
 			other = &road->get_flag(Road::FlagStart);
 		}
 
-		if (other != nextflag) {
+		if (other != &nextflag) {
 			continue;
 		}
 
@@ -793,24 +793,24 @@ void Flag::flag_job_request_callback
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {
-	upcast(Flag, flag, &target);
+	Flag & flag = dynamic_cast<Flag&>(target);
 
 	assert(w);
 
-	for (FlagJobs::iterator flag_iter = flag->m_flag_jobs.begin();
-		  flag_iter != flag->m_flag_jobs.end();
+	for (FlagJobs::iterator flag_iter = flag.m_flag_jobs.begin();
+		  flag_iter != flag.m_flag_jobs.end();
 		  ++flag_iter) {
 		if (flag_iter->request == &rq) {
 			delete &rq;
 
 			w->start_task_program(game, flag_iter->program);
 
-			flag->m_flag_jobs.erase(flag_iter);
+			flag.m_flag_jobs.erase(flag_iter);
 			return;
 		}
 	}
 
-	flag->molog("BUG: flag_job_request_callback: worker not found in list\n");
+	flag.molog("BUG: flag_job_request_callback: worker not found in list\n");
 }
 
 void Flag::log_general_info(const Widelands::EditorGameBase & egbase)

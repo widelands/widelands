@@ -304,8 +304,8 @@ void InteractivePlayer::popup_message
 	(Widelands::MessageId const id, const Widelands::Message & message)
 {
 	m_message_menu.create();
-	upcast(GameMessageMenu, menu, m_message_menu.window);
-	menu->show_new_message(id, message);
+	dynamic_cast<GameMessageMenu&>(*m_message_menu.window)
+	.show_new_message(id, message);
 }
 
 
@@ -470,9 +470,10 @@ void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string> & args)
 		for (uint16_t x = 0; x < extent.w; ++x)
 			overlay_manager.recalc_field_overlays
 				(map.get_fcoords(Widelands::Coords(x, y)));
-	if (UI::UniqueWindow * const building_statistics_window =
-		 m_mainm_windows.building_stats.window) {
-		upcast(BuildingStatisticsMenu, menu, building_statistics_window);
-		menu->update();
-	}
+	if
+		(UI::UniqueWindow * const building_statistics_window =
+		 	m_mainm_windows.building_stats.window)
+		dynamic_cast<BuildingStatisticsMenu&>
+			(*building_statistics_window)
+			.update();
 }
