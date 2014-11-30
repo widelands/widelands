@@ -1,26 +1,25 @@
-# Esperanto translation for widelands
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# Georgian translation for widelands
+# Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
 # This file is distributed under the same license as the widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-# GunChleoc <fios@foramnagaidhlig.net>, 2014.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
-"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-11-21 09:46+0000\n"
-"PO-Revision-Date: 2014-07-12 11:50+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
-"Language-Team: Widelands fixxer upper\n"
+"PO-Revision-Date: 2014-11-25 08:15+0000\n"
+"Last-Translator: Gabriel Margiani <Unknown>\n"
+"Language-Team: Georgian <ka@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-11-22 04:50+0000\n"
+"X-Launchpad-Export-Date: 2014-11-26 05:42+0000\n"
 "X-Generator: Launchpad (build 17252)\n"
-"Language: eo\n"
 
 #: ../../world/critters/badger/init.lua:14
 msgid "Badger"
-msgstr "Melo"
+msgstr ""
 
 #: ../../world/critters/brownbear/init.lua:14
 msgid "Brown bear"
@@ -28,27 +27,27 @@ msgstr ""
 
 #: ../../world/critters/bunny/init.lua:13
 msgid "Bunny"
-msgstr "Kuniklo"
+msgstr ""
 
 #: ../../world/critters/chamois/init.lua:14
 msgid "Chamois"
-msgstr "Ĉamo"
+msgstr ""
 
 #: ../../world/critters/deer/init.lua:14
 msgid "Deer"
-msgstr "Cervo"
+msgstr ""
 
 #: ../../world/critters/duck/init.lua:18
 msgid "Duck"
-msgstr "Anaso"
+msgstr ""
 
 #: ../../world/critters/elk/init.lua:14
 msgid "Elk"
-msgstr "Kanada cervo"
+msgstr ""
 
 #: ../../world/critters/fox/init.lua:14
 msgid "Fox"
-msgstr "Vulpo"
+msgstr ""
 
 #: ../../world/critters/lynx/init.lua:14
 msgid "Lynx"
@@ -56,15 +55,15 @@ msgstr ""
 
 #: ../../world/critters/marten/init.lua:14
 msgid "Marten"
-msgstr "Marteso"
+msgstr ""
 
 #: ../../world/critters/reindeer/init.lua:14
 msgid "Reindeer"
-msgstr "Boaco"
+msgstr ""
 
 #: ../../world/critters/sheep/init.lua:18
 msgid "Sheep"
-msgstr "Ŝafo"
+msgstr ""
 
 #: ../../world/critters/stag/init.lua:14
 msgid "Stag"
@@ -76,11 +75,11 @@ msgstr ""
 
 #: ../../world/critters/wisent/init.lua:14
 msgid "Wisent"
-msgstr "Bizono"
+msgstr ""
 
 #: ../../world/critters/wolf/init.lua:14
 msgid "Wolf"
-msgstr ""
+msgstr "მგელი"
 
 #: ../../world/immovables/bush1/init.lua:5
 #: ../../world/immovables/bush2/init.lua:5
@@ -88,20 +87,20 @@ msgstr ""
 #: ../../world/immovables/bush4/init.lua:5
 #: ../../world/immovables/bush5/init.lua:5
 msgid "Bush"
-msgstr "Arbusto"
+msgstr ""
 
 #: ../../world/immovables/cactus1/init.lua:5
 #: ../../world/immovables/cactus2/init.lua:5
 #: ../../world/immovables/cactus3/init.lua:5
 #: ../../world/immovables/cactus4/init.lua:5
 msgid "Cactus"
-msgstr "Kakto"
+msgstr ""
 
 #: ../../world/immovables/grass1/init.lua:5
 #: ../../world/immovables/grass2/init.lua:5
 #: ../../world/immovables/grass3/init.lua:5
 msgid "Grass"
-msgstr "Herbo"
+msgstr "ბალახი"
 
 #: ../../world/immovables/manmade/bar-ruin00/init.lua:5
 #: ../../world/immovables/manmade/bar-ruin01/init.lua:5
@@ -123,12 +122,12 @@ msgstr ""
 
 #: ../../world/immovables/manmade/snowman/init.lua:5
 msgid "Snowman"
-msgstr "Neĝhomo"
+msgstr ""
 
 #: ../../world/immovables/mushroom1/init.lua:5
 #: ../../world/immovables/mushroom2/init.lua:5
 msgid "Mushroom"
-msgstr "Fungo"
+msgstr ""
 
 #: ../../world/immovables/pebble1/init.lua:5
 #: ../../world/immovables/pebble2/init.lua:5
@@ -137,12 +136,12 @@ msgstr "Fungo"
 #: ../../world/immovables/pebble5/init.lua:5
 #: ../../world/immovables/pebble6/init.lua:5
 msgid "Pebble"
-msgstr "Ŝtoneto"
+msgstr ""
 
 #: ../../world/immovables/skeleton1/init.lua:5
 #: ../../world/immovables/skeleton3/init.lua:5
 msgid "Skeleton"
-msgstr "Skeleto"
+msgstr ""
 
 #: ../../world/immovables/skeleton2/init.lua:5
 #: ../../world/immovables/skeleton4/init.lua:5
@@ -312,11 +311,11 @@ msgstr ""
 #: ../../world/immovables/trees/deadtree5/init.lua:5
 #: ../../world/immovables/trees/deadtree6/init.lua:5
 msgid "Dead Tree"
-msgstr "Morta arbo"
+msgstr ""
 
 #: ../../world/immovables/trees/fallentree/init.lua:12
 msgid "Fallen Tree"
-msgstr "Falinta arbo"
+msgstr ""
 
 #: ../../world/immovables/trees/larch/init.lua:12
 msgid "Larch (Sapling)"
@@ -628,11 +627,11 @@ msgstr ""
 
 #: ../../world/init.lua:23
 msgid "Standing Stones"
-msgstr "Starantaj ŝtonoj"
+msgstr ""
 
 #: ../../world/init.lua:29
 msgid "Stones"
-msgstr "Sxtono"
+msgstr ""
 
 #: ../../world/init.lua:35
 msgid "Coniferous Trees"
@@ -656,28 +655,28 @@ msgstr ""
 
 #: ../../world/resources/init.lua:5
 msgid "Coal"
-msgstr "Karbo"
+msgstr ""
 
 #: ../../world/resources/init.lua:18
 msgid "Gold"
-msgstr "Oro"
+msgstr ""
 
 #: ../../world/resources/init.lua:31
 msgid "Iron"
-msgstr "Fero"
+msgstr ""
 
 #: ../../world/resources/init.lua:44
 msgid "Granite"
-msgstr "Granito"
+msgstr ""
 
 #: ../../world/resources/init.lua:57
 #: ../../world/terrains/init.lua:284
 msgid "Water"
-msgstr "Akvo"
+msgstr ""
 
 #: ../../world/resources/init.lua:67
 msgid "Fish"
-msgstr "Fiŝo"
+msgstr ""
 
 #: ../../world/terrains/init.lua:4
 msgid "Summer"
@@ -693,7 +692,7 @@ msgstr ""
 
 #: ../../world/terrains/init.lua:19
 msgid "Desert"
-msgstr "Dezerto"
+msgstr ""
 
 #: ../../world/terrains/init.lua:33
 msgid "Meadow 1"
@@ -749,12 +748,12 @@ msgstr ""
 
 #: ../../world/terrains/init.lua:238
 msgid "Beach"
-msgstr "Plaĝo"
+msgstr ""
 
 #: ../../world/terrains/init.lua:253
 #: ../../world/terrains/init.lua:608
 msgid "Snow"
-msgstr "Neĝo"
+msgstr ""
 
 #: ../../world/terrains/init.lua:268
 msgid "Lava"
@@ -842,7 +841,7 @@ msgstr ""
 
 #: ../../world/terrains/init.lua:683
 msgid "Ice"
-msgstr "Glacio"
+msgstr ""
 
 #: ../../world/terrains/init.lua:698
 msgid "Beach (Winter)"
