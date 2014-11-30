@@ -513,10 +513,13 @@ bool WLApplication::handle_key(const SDL_Keycode& keycode, int modifiers) {
 		}
 		return true;
 
-	case SDLK_f:
+	case SDLK_f: {
 		// toggle fullscreen
-		g_gr->set_fullscreen(!g_gr->fullscreen());
+		bool value = !g_gr->fullscreen();
+		g_gr->set_fullscreen(value);
+		g_options.pull_section("global").set_bool("fullscreen", value);
 		return true;
+	}
 
 	default:
 		break;
@@ -524,8 +527,6 @@ bool WLApplication::handle_key(const SDL_Keycode& keycode, int modifiers) {
 	return false;
 }
 
-// NOCOM(#sirver): fullscreen menu must listen to resolution changes.
-// NOCOM(#sirver): Intro changes from fullscreen again.
 void WLApplication::handle_input(InputCallback const * cb)
 {
 	SDL_Event ev;
