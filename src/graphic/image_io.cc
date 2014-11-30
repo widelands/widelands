@@ -71,7 +71,7 @@ SDL_Surface* load_image_as_sdl_surface(const std::string& fname, FileSystem* fs)
 	return sdlsurf;
 }
 
-bool save_surface_to_png(Surface* surface, StreamWrite* sw) {
+bool save_surface_to_png(Surface* surface, StreamWrite* sw, COLOR_TYPE color_type) {
 	png_structp png_ptr = png_create_write_struct(
 	   PNG_LIBPNG_VER_STRING, static_cast<png_voidp>(nullptr), nullptr, nullptr);
 
