@@ -123,22 +123,28 @@ bool save_surface_to_png(Surface* surface, StreamWrite* sw, COLOR_TYPE color_typ
 		surface->lock(Surface::Lock_Normal);
 
 		// Write each row
-		for (uint32_t y = 0; y < surf_h; ++y) {
-			for (uint32_t x = 0; x < surf_w; ++x) {
-				RGBAColor color;
-				color.set(fmt, surface->get_pixel(x, y));
-				if (color_type == COLOR_TYPE::RGB) {
-						row[3 * x] = color.r;
-						row[3 * x + 1] = color.g;
-						row[3 * x + 2] = color.b;
-				} else {
+		RGBAColor color;
+		if (color_type == COLOR_TYPE::RGB) {
+			for (uint32_t y = 0; y < surf_h; ++y) {
+				for (uint32_t x = 0; x < surf_w; ++x) {
+					color.set(fmt, surface->get_pixel(x, y));
+					row[3 * x] = color.r;
+					row[3 * x + 1] = color.g;
+					row[3 * x + 2] = color.b;
+				}
+				png_write_row(png_ptr, row.get());
+			}
+		} else {
+			for (uint32_t y = 0; y < surf_h; ++y) {
+				for (uint32_t x = 0; x < surf_w; ++x) {
+					color.set(fmt, surface->get_pixel(x, y));
 					row[4 * x] = color.r;
 					row[4 * x + 1] = color.g;
 					row[4 * x + 2] = color.b;
 					row[4 * x + 3] = color.a;
 				}
+				png_write_row(png_ptr, row.get());
 			}
-			png_write_row(png_ptr, row.get());
 		}
 		surface->unlock(Surface::Unlock_NoChange);
 	}
