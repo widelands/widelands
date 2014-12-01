@@ -1056,12 +1056,12 @@ void WLApplication::mainmenu()
 				break;
 			}
 			case FullscreenMenuMain::mm_readme: {
-				FullscreenMenuFileView ff("txts/README.lua");
+				FullscreenMenuFileView ff("data/txts/README.lua");
 				ff.run();
 				break;
 			}
 			case FullscreenMenuMain::mm_license: {
-				FullscreenMenuFileView ff("txts/license");
+				FullscreenMenuFileView ff("data/txts/license");
 				ff.run();
 				break;
 			}

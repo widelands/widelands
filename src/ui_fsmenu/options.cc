@@ -53,7 +53,7 @@ struct LanguageEntry {
 };
 
 void add_languages_to_list(UI::Listselect<std::string>* list, const std::string& language) {
-	Profile ln("txts/languages");
+	Profile ln("data/i18n/languages");
 	Section* s = &ln.pull_section("languages");
 	bool own_selected = "" == language || "en" == language;
 

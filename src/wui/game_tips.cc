@@ -61,7 +61,7 @@ GameTips::~GameTips() {
 /// Loads tips out of \var filename
 void GameTips::load_tips(std::string name)
 {
-	std::string filename = "txts/tips/" + name + ".tip";
+	std::string filename = "data/txts/tips/" + name + ".tip";
 	try {
 		Profile prof(filename.c_str());
 		while (Section * const s = prof.get_next_section(nullptr)) {

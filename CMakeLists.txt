@@ -233,7 +233,7 @@ install(
     data/campaigns
     data/global
     data/tribes
-    txts
+    data/txts
     world
     data/pics
     data/scripting
