@@ -25,7 +25,6 @@
 
 #include <SDL_image.h>
 
-#include "base/deprecated.h"
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"

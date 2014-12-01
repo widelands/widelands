@@ -302,7 +302,7 @@ void InteractivePlayer::popup_message
 	(Widelands::MessageId const id, const Widelands::Message & message)
 {
 	m_message_menu.create();
-	ref_cast<GameMessageMenu, UI::UniqueWindow>(*m_message_menu.window)
+	dynamic_cast<GameMessageMenu&>(*m_message_menu.window)
 	.show_new_message(id, message);
 }
 
@@ -471,7 +471,7 @@ void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string> & args)
 	if
 		(UI::UniqueWindow * const building_statistics_window =
 		 	m_mainm_windows.building_stats.window)
-		ref_cast<BuildingStatisticsMenu, UI::UniqueWindow>
+		dynamic_cast<BuildingStatisticsMenu&>
 			(*building_statistics_window)
 			.update();
 }

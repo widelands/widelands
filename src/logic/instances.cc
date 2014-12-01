@@ -24,7 +24,6 @@
 #include <cstring>
 #include <string>
 
-#include "base/deprecated.h"
 #include "base/log.h"
 #include "base/wexception.h"
 #include "io/fileread.h"

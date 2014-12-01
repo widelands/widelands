@@ -23,7 +23,6 @@ wl_library(network
   USES_SDL2_NET
   DEPENDS
     ai
-    base_deprecated
     base_exceptions
     base_i18n
     base_log

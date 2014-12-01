@@ -20,7 +20,6 @@
 #ifndef WL_ECONOMY_ROUTEASTAR_H
 #define WL_ECONOMY_ROUTEASTAR_H
 
-#include "base/deprecated.h"
 #include "economy/itransport_cost_calculator.h"
 #include "economy/routing_node.h"
 

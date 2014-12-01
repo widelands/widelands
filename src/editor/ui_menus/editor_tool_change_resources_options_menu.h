@@ -37,6 +37,7 @@ struct EditorToolChangeResourcesOptionsMenu :
 		 UI::UniqueWindow::Registry     &);
 
 private:
+	EditorInteractive & eia();
 	void selected();
 	enum Button {
 		Change_By_Increase, Change_By_Decrease,
