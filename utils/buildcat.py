@@ -50,12 +50,12 @@ MAINPOTS = [
         "../../data/scripting/win_condition_texts.lua",
     ]),
     ("world/world", [
-        "../../world/*.lua",
-        "../../world/*/*.lua",
-        "../../world/*/*/*.lua",
-        "../../world/*/*/*/*.lua",
-        "../../world/*/*/*/*/*.lua",
-        "../../world/*/*/*/*/*/*.lua",
+        "../../data/world/*.lua",
+        "../../data/world/*/*.lua",
+        "../../data/world/*/*/*.lua",
+        "../../data/world/*/*/*/*.lua",
+        "../../data/world/*/*/*/*/*.lua",
+        "../../data/world/*/*/*/*/*/*.lua",
     ]),
     ("tribes/tribes", [
         "../../data/tribes/scripting/*.lua",

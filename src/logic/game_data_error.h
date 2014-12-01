@@ -24,7 +24,7 @@
 
 namespace Widelands {
 
-/// Exceptiont that is thrown when game data (world/tribe definitions, maps,
+/// Exception that is thrown when game data (world/tribe definitions, maps,
 /// savegames or replays) are erroneous.
 struct GameDataError : public WException {
 	explicit GameDataError(char const * fmt, ...) PRINTF_FORMAT(2, 3);

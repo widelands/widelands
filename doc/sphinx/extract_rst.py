@@ -25,7 +25,7 @@ def _find_basedir():
     Widelands. Return the base directory and the source/ directory."""
     curdir = p.abspath(p.dirname(__file__))
     source_dir = p.join(curdir, "source")
-    while not (p.exists(p.join(curdir, "data/tribes")) and p.exists(p.join(curdir, "world"))):
+    while not (p.exists(p.join(curdir, "data/tribes")) and p.exists(p.join(curdir, "data/world"))):
         curdir = p.abspath(p.join(curdir, p.pardir))
     return source_dir, curdir
 source_dir, base_dir = _find_basedir()

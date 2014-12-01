@@ -88,7 +88,7 @@ DitherProgram::DitherProgram() {
 	u_dither_texture_ = glGetUniformLocation(gl_program_.object(), "u_dither_texture");
 	u_terrain_texture_ = glGetUniformLocation(gl_program_.object(), "u_terrain_texture");
 
-	SDL_Surface* sdlsurf = load_image_as_sdl_surface("world/pics/edge.png", g_fs);
+	SDL_Surface* sdlsurf = load_image_as_sdl_surface("data/world/pics/edge.png", g_fs);
 	dither_mask_.reset(new Texture(sdlsurf, true));
 }
 

@@ -87,8 +87,8 @@ RoadProgram::RoadProgram() {
 	u_normal_road_texture_ = glGetUniformLocation(gl_program_.object(), "u_normal_road_texture");
 	u_busy_road_texture_ = glGetUniformLocation(gl_program_.object(), "u_busy_road_texture");
 
-	normal_road_texture_.reset(load_image("world/pics/roadt_normal.png"));
-	busy_road_texture_.reset(load_image("world/pics/roadt_busy.png"));
+	normal_road_texture_.reset(load_image("data/world/pics/roadt_normal.png"));
+	busy_road_texture_.reset(load_image("data/world/pics/roadt_busy.png"));
 }
 
 RoadProgram::~RoadProgram() {

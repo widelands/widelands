@@ -100,7 +100,7 @@ Source: ..\..\..\data\pics\*;       DestDir: {app}\data\pics\;      Flags: recur
 Source: ..\..\..\data\sound\*;      DestDir: {app}\data\sound\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Sound"
 Source: ..\..\..\data\tribes\*;     DestDir: {app}\data\tribes\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: ..\..\..\data\txts\*;       DestDir: {app}\data\txts\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
-Source: ..\..\..\world\*;     DestDir: {app}\world\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
+Source: ..\..\..\data\world\*;     DestDir: {app}\data\world\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: ..\..\..\data\global\*;     DestDir: {app}\data\global\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: ..\..\..\*.dll;                                  DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
 Source: ..\..\..\widelands.exe;                          DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
@@ -129,16 +129,8 @@ Name: {group}\{#Copying};                    Filename: {app}\{#Copying}
 Filename: {app}\{#ExeName}; Description: {cm:LaunchProgram,{#Name}}; Flags: nowait postinstall skipifsilent
 
 [InstallDelete]
-Type: filesandordirs; Name: {app}\data\campaigns\*
-Type: filesandordirs; Name: {app}\data\global\*
+Type: filesandordirs; Name: {app}\data\*
 Type: filesandordirs; Name: {app}\locale\*
-Type: filesandordirs; Name: {app}\data\maps\*
-Type: filesandordirs; Name: {app}\data\pics\*
-Type: filesandordirs; Name: {app}\data\scripting\*
-Type: filesandordirs; Name: {app}\data\sound\*
-Type: filesandordirs; Name: {app}\data\tribes\*
-Type: filesandordirs; Name: {app}\data\txts\*
-Type: filesandordirs; Name: {app}\world\*
 
 [UninstallDelete]
 Type: files; Name: {app}\{#UrlName}

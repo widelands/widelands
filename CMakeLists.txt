@@ -234,7 +234,7 @@ install(
     data/global
     data/tribes
     data/txts
-    world
+    data/world
     data/pics
     data/scripting
   DESTINATION ${WL_INSTALL_DATADIR}/data
@@ -244,8 +244,8 @@ install(
 
 install(
   DIRECTORY
-    data/i18n/fonts
-  DESTINATION ${WL_INSTALL_DATADIR}/data/i18n
+    data/i18n
+  DESTINATION ${WL_INSTALL_DATADIR}/data
   CONFIGURATIONS Debug;Release
   COMPONENT InternationalizationDataFiles
 )
