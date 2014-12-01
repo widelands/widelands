@@ -34,7 +34,7 @@ struct EditorInfoTool : public EditorTool {
 	                          EditorActionArgs& args) override;
 
 	char const* get_sel_impl() const override {
-		return "pics/fsel_editor_info.png";
+		return "data/pics/fsel_editor_info.png";
 	}
 };
 

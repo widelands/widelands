@@ -36,47 +36,47 @@ FullscreenMenuMain::FullscreenMenuMain() :
 	playtutorial
 		(this, "play_tutorial",
 		 m_butx, get_h() * 42 / 200, m_butw, m_buth,
-		 g_gr->images().get("pics/but3.png"),
+		 g_gr->images().get("data/pics/but3.png"),
 		 _("Play Tutorial"), std::string(), true, false),
 	singleplayer
 		(this, "single_player",
 		 m_butx, get_h() * 61 / 200, m_butw, m_buth,
-		 g_gr->images().get("pics/but3.png"),
+		 g_gr->images().get("data/pics/but3.png"),
 		 _("Single Player"), std::string(), true, false),
 	multiplayer
 		(this, "multi_player",
 		 m_butx, get_h() * 37 / 100, m_butw, m_buth,
-		 g_gr->images().get("pics/but3.png"),
+		 g_gr->images().get("data/pics/but3.png"),
 		 _("Multiplayer"), std::string(), true, false),
 	replay
 		(this, "replay",
 		 m_butx, get_h() * 87 / 200, m_butw, m_buth,
-		 g_gr->images().get("pics/but3.png"),
+		 g_gr->images().get("data/pics/but3.png"),
 		 _("Watch Replay"), std::string(), true, false),
 	editor
 		(this, "editor",
 		 m_butx, get_h() * 100 / 200, m_butw, m_buth,
-		 g_gr->images().get("pics/but3.png"),
+		 g_gr->images().get("data/pics/but3.png"),
 		 _("Editor"), std::string(), true, false),
 	options
 		(this, "options",
 		 m_butx, get_h() * 119 / 200, m_butw, m_buth,
-		 g_gr->images().get("pics/but3.png"),
+		 g_gr->images().get("data/pics/but3.png"),
 		 _("Options"), std::string(), true, false),
 	readme
 		(this, "readme",
 		 m_butx, get_h() * 138 / 200, m_butw, m_buth,
-		 g_gr->images().get("pics/but3.png"),
+		 g_gr->images().get("data/pics/but3.png"),
 		 _("View Readme"), std::string(), true, false),
 	license
 		(this, "license",
 		 m_butx, get_h() * 151 / 200, m_butw, m_buth,
-		 g_gr->images().get("pics/but3.png"),
+		 g_gr->images().get("data/pics/but3.png"),
 		 _("License"), std::string(), true, false),
 	exit
 		(this, "exit",
 		 m_butx, get_h() * 178 / 200, m_butw, m_buth,
-		 g_gr->images().get("pics/but3.png"),
+		 g_gr->images().get("data/pics/but3.png"),
 		 _("Exit Widelands"), std::string(), true, false),
 
 // Textlabels

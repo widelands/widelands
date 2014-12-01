@@ -52,37 +52,37 @@ EditorMainMenu::EditorMainMenu
 	m_button_new_map
 		(this, "new_map",
 		 hmargin, vmargin + 0 * (height + vspacing), width, height,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("data/pics/but1.png"),
 		 _("New Map")),
 	m_button_new_random_map
 		(this, "new_random_map",
 		 hmargin, vmargin + 1 * (height + vspacing), width, height,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("data/pics/but1.png"),
 		 _("New Random Map")),
 	m_button_load_map
 		(this, "load_map",
 		 hmargin, vmargin + 2 * (height + vspacing), width, height,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("data/pics/but1.png"),
 		 _("Load Map")),
 	m_button_save_map
 		(this, "save_map",
 		 hmargin, vmargin + 3 * (height + vspacing), width, height,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("data/pics/but1.png"),
 		 _("Save Map")),
 	m_button_map_options
 		(this, "map_options",
 		 hmargin, vmargin + 4 * (height + vspacing), width, height,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("data/pics/but1.png"),
 		 _("Map Options")),
 	m_button_view_readme
 		(this, "readme",
 		 hmargin, vmargin + 5 * (height + vspacing), width, height,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("data/pics/but1.png"),
 		 _("View Readme")),
 	m_button_exit_editor
 		(this, "exit",
 		 hmargin, vmargin + 6 * (height + vspacing), width, height,
-		 g_gr->images().get("pics/but0.png"),
+		 g_gr->images().get("data/pics/but0.png"),
 		 _("Exit Editor"))
 {
 	m_button_new_map.sigclicked.connect(boost::bind(&EditorMainMenu::new_map_btn, this));

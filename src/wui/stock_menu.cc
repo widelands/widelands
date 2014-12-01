@@ -27,12 +27,12 @@
 #include "ui_basic/tabpanel.h"
 #include "wui/interactive_player.h"
 
-static const char pic_tab_wares[] = "pics/menu_tab_wares.png";
-static const char pic_tab_workers[] = "pics/menu_tab_workers.png";
+static const char pic_tab_wares[] = "data/pics/menu_tab_wares.png";
+static const char pic_tab_workers[] = "data/pics/menu_tab_workers.png";
 static const char pic_tab_wares_warehouse[] =
-	 "pics/menu_tab_wares_warehouse.png";
+	 "data/pics/menu_tab_wares_warehouse.png";
 static const char pic_tab_workers_warehouse[] =
-	 "pics/menu_tab_workers_warehouse.png";
+	 "data/pics/menu_tab_workers_warehouse.png";
 
 StockMenu::StockMenu
 	(InteractivePlayer & plr, UI::UniqueWindow::Registry & registry)
@@ -42,7 +42,7 @@ m_player(plr)
 {
 	UI::TabPanel * tabs =
 		 new UI::TabPanel
-			 (this, 0, 0, g_gr->images().get("pics/but1.png"));
+			 (this, 0, 0, g_gr->images().get("data/pics/but1.png"));
 	set_center_panel(tabs);
 
 	m_all_wares = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWARE, false);

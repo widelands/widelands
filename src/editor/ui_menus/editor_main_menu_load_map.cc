@@ -113,7 +113,7 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
 		(this, "ok",
 		 posx, posy,
 		 get_inner_w() / 4 - 1.5 * spacing, 20,
-		 g_gr->images().get("pics/but0.png"),
+		 g_gr->images().get("data/pics/but0.png"),
 		 _("OK"),
 		 std::string(),
 		 false);
@@ -123,7 +123,7 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
 		(this, "cancel",
 		 posx + get_inner_w() / 4 - spacing / 2, posy,
 		 get_inner_w() / 4 - 1.5 * spacing, 20,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("data/pics/but1.png"),
 		 _("Cancel"));
 	cancelbtn->sigclicked.connect(boost::bind(&MainMenuLoadMap::die, this));
 
@@ -214,7 +214,7 @@ void MainMenuLoadMap::fill_list() {
 				/** TRANSLATORS: Parent directory */
 				((boost::format("\\<%s\\>") % _("parent")).str(),
 				 m_parentdir.c_str(),
-				 g_gr->images().get("pics/ls_dir.png"));
+				 g_gr->images().get("data/pics/ls_dir.png"));
 	}
 
 	const FilenameSet::const_iterator mapfiles_end = m_mapfiles.end();
@@ -233,7 +233,7 @@ void MainMenuLoadMap::fill_list() {
 		m_ls->add
 			(FileSystem::fs_filename(name),
 			 name,
-			 g_gr->images().get("pics/ls_dir.png"));
+			 g_gr->images().get("data/pics/ls_dir.png"));
 	}
 
 	Widelands::Map map;
@@ -253,7 +253,7 @@ void MainMenuLoadMap::fill_list() {
 					 name,
 					 g_gr->images().get
 						 (dynamic_cast<WidelandsMapLoader*>(map_loader.get())
-							? "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
+							? "data/pics/ls_wlmap.png" : "data/pics/ls_s2map.png"));
 			} catch (const WException &) {} //  we simply skip illegal entries
 		}
 	}

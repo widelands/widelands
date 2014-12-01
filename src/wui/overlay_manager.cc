@@ -269,12 +269,12 @@ void OverlayManager::load_graphics() {
 
 	OverlayInfo * buildhelp_info = m_buildhelp_infos;
 	static const char * filenames[] = {
-		"pics/set_flag.png",
-		"pics/small.png",
-		"pics/medium.png",
-		"pics/big.png",
-		"pics/mine.png",
-		"pics/port.png"
+		"data/pics/set_flag.png",
+		"data/pics/small.png",
+		"data/pics/medium.png",
+		"data/pics/big.png",
+		"data/pics/mine.png",
+		"data/pics/port.png"
 	};
 	const char * const * filename = filenames;
 

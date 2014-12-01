@@ -58,7 +58,7 @@ FullscreenMenuBase::FullscreenMenuBase(char const * const bgpic)
 	d(new Data)
 {
 	// Load background graphics
-	const std::string bgpicpath = (boost::format("pics/%s") % bgpic).str();
+	const std::string bgpicpath = (boost::format("data/pics/%s") % bgpic).str();
 	d->res_background = ImageTransformations::resize(g_gr->images().get(bgpicpath), get_w(), get_h());
 
 	d->textstyle_small = UI::TextStyle::ui_small();

@@ -57,12 +57,12 @@ FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame(bool sort_descending) :
 		m_back
 		  (this, "back",
 			m_right_column_x, m_buty, m_butw, m_buth,
-			g_gr->images().get("pics/but0.png"),
+			g_gr->images().get("data/pics/but0.png"),
 			_("Back"), std::string(), true, false),
 		m_ok
 		  (this, "ok",
 			get_w() - m_right_column_margin - m_butw, m_buty, m_butw, m_buth,
-			g_gr->images().get("pics/but2.png"),
+			g_gr->images().get("data/pics/but2.png"),
 			_("OK"), std::string(), false, false),
 		m_table(this, m_tablex, m_tabley, m_tablew, m_tableh, sort_descending)
 	{}

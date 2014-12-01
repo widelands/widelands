@@ -237,13 +237,13 @@ private:
 	AttackBox * m_attack_box;
 };
 
-static const char * const pic_tab_buildroad  = "pics/menu_tab_buildroad.png";
-static const char * const pic_tab_watch      = "pics/menu_tab_watch.png";
+static const char * const pic_tab_buildroad  = "data/pics/menu_tab_buildroad.png";
+static const char * const pic_tab_watch      = "data/pics/menu_tab_watch.png";
 static const char * const pic_tab_buildhouse[] = {
-	"pics/menu_tab_buildsmall.png",
-	"pics/menu_tab_buildmedium.png",
-	"pics/menu_tab_buildbig.png",
-	"pics/menu_tab_buildport.png"
+	"data/pics/menu_tab_buildsmall.png",
+	"data/pics/menu_tab_buildmedium.png",
+	"data/pics/menu_tab_buildbig.png",
+	"data/pics/menu_tab_buildport.png"
 };
 static const std::string tooltip_tab_build[] = {
 	_("Build small building"),
@@ -254,21 +254,21 @@ static const std::string tooltip_tab_build[] = {
 static const std::string name_tab_build[] = {"small", "medium", "big", "port"};
 
 
-static const char * const pic_tab_buildmine  = "pics/menu_tab_buildmine.png";
+static const char * const pic_tab_buildmine  = "data/pics/menu_tab_buildmine.png";
 
-static const char * const pic_buildroad      = "pics/menu_build_way.png";
-static const char * const pic_remroad        = "pics/menu_rem_way.png";
-static const char * const pic_buildflag      = "pics/menu_build_flag.png";
-static const char * const pic_ripflag        = "pics/menu_rip_flag.png";
-static const char * const pic_watchfield     = "pics/menu_watch_field.png";
-static const char * const pic_showcensus     = "pics/menu_show_census.png";
-static const char * const pic_showstatistics = "pics/menu_show_statistics.png";
-static const char * const pic_debug          = "pics/menu_debug.png";
-static const char * const pic_abort          = "pics/menu_abort.png";
-static const char * const pic_geologist      = "pics/menu_geologist.png";
+static const char * const pic_buildroad      = "data/pics/menu_build_way.png";
+static const char * const pic_remroad        = "data/pics/menu_rem_way.png";
+static const char * const pic_buildflag      = "data/pics/menu_build_flag.png";
+static const char * const pic_ripflag        = "data/pics/menu_rip_flag.png";
+static const char * const pic_watchfield     = "data/pics/menu_watch_field.png";
+static const char * const pic_showcensus     = "data/pics/menu_show_census.png";
+static const char * const pic_showstatistics = "data/pics/menu_show_statistics.png";
+static const char * const pic_debug          = "data/pics/menu_debug.png";
+static const char * const pic_abort          = "data/pics/menu_abort.png";
+static const char * const pic_geologist      = "data/pics/menu_geologist.png";
 
-static const char * const pic_tab_attack     = "pics/menu_tab_attack.png";
-static const char * const pic_attack         = "pics/menu_attack.png";
+static const char * const pic_tab_attack     = "data/pics/menu_tab_attack.png";
+static const char * const pic_attack         = "data/pics/menu_attack.png";
 
 
 /*
@@ -286,7 +286,7 @@ FieldActionWindow::FieldActionWindow
 	m_map(&ib->egbase().map()),
 	m_overlay_manager(*m_map->get_overlay_manager()),
 	m_node(ib->get_sel_pos().node, &(*m_map)[ib->get_sel_pos().node]),
-	m_tabpanel(this, 0, 0, g_gr->images().get("pics/but1.png")),
+	m_tabpanel(this, 0, 0, g_gr->images().get("data/pics/but1.png")),
 	m_fastclick(true),
 	m_best_tab(0),
 	m_workarea_preview_job_id(0),
@@ -384,7 +384,7 @@ void FieldActionWindow::add_buttons_auto()
 			if (dynamic_cast<Game const *>(&ibase().egbase())) {
 				add_button
 					(buildbox, "configure_economy",
-					 "pics/genstats_nrwares.png",
+					 "data/pics/genstats_nrwares.png",
 					 &FieldActionWindow::act_configure_economy,
 					 _("Configure economy"));
 				if (can_act)
@@ -626,7 +626,7 @@ UI::Button & FieldActionWindow::add_button
 		*new UI::Button
 			(box, name,
 			 0, 0, 34, 34,
-			 g_gr->images().get("pics/but2.png"),
+			 g_gr->images().get("data/pics/but2.png"),
 			 g_gr->images().get(picname),
 			 tooltip_text);
 	button.sigclicked.connect(boost::bind(fn, this));

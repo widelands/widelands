@@ -41,8 +41,8 @@ using Widelands::WareIndex;
 using Widelands::WorkerDescr;
 
 
-static const char pic_tab_wares[] = "pics/menu_tab_wares.png";
-static const char pic_tab_workers[] = "pics/menu_tab_workers.png";
+static const char pic_tab_wares[] = "data/pics/menu_tab_wares.png";
+static const char pic_tab_workers[] = "data/pics/menu_tab_workers.png";
 
 struct EconomyOptionsWindow : public UI::UniqueWindow {
 	EconomyOptionsWindow(InteractiveGameBase & parent, Economy & economy)
@@ -50,7 +50,7 @@ struct EconomyOptionsWindow : public UI::UniqueWindow {
 		UI::UniqueWindow
 			(&parent, "economy_options", &economy.optionswindow_registry(), 0, 0,
 			 _("Economy options")),
-		m_tabpanel(this, 0, 0, g_gr->images().get("pics/but1.png"))
+		m_tabpanel(this, 0, 0, g_gr->images().get("data/pics/but1.png"))
 	{
 		set_center_panel(&m_tabpanel);
 
@@ -135,7 +135,7 @@ private:
 	b = new UI::Button                                    \
 		 (buttons, #callback,                                       \
 		  0, 0, 34, 34,                                             \
-		  g_gr->images().get("pics/but4.png"),            \
+		  g_gr->images().get("data/pics/but4.png"),            \
 		  text, tooltip, m_can_act);                                \
 	b->sigclicked.connect(boost::bind(&EconomyOptionsWarePanel::callback, this)); \
 	buttons->add(b, UI::Box::AlignCenter);
@@ -230,7 +230,7 @@ private:
 	b = new UI::Button                                      \
 		 (buttons, #callback,                                         \
 		  0, 0, 34, 34,                                               \
-		  g_gr->images().get("pics/but4.png"),              \
+		  g_gr->images().get("data/pics/but4.png"),              \
 		  text, tooltip, m_can_act);                                  \
 	b->sigclicked.connect(boost::bind(&EconomyOptionsWorkerPanel::callback, this)); \
 	buttons->add(b, UI::Box::AlignCenter);

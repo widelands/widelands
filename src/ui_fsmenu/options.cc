@@ -101,17 +101,17 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	m_advanced_options
 		(this, "advanced_options",
 		 get_w() * 9 / 80, get_h() * 19 / 20, m_butw, m_buth,
-		 g_gr->images().get("pics/but2.png"),
+		 g_gr->images().get("data/pics/but2.png"),
 		 _("Advanced Options"), std::string(), true, false),
 	m_cancel
 		(this, "cancel",
 		 get_w() * 51 / 80, get_h() * 19 / 20, m_butw, m_buth,
-		 g_gr->images().get("pics/but0.png"),
+		 g_gr->images().get("data/pics/but0.png"),
 		 _("Cancel"), std::string(), true, false),
 	m_apply
 		(this, "apply",
 		 get_w() * 3 / 8, get_h() * 19 / 20, m_butw, m_buth,
-		 g_gr->images().get("pics/but2.png"),
+		 g_gr->images().get("data/pics/but2.png"),
 		 _("Apply"), std::string(), true, false),
 
 	// Title
@@ -164,7 +164,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 m_hmargin + m_reslist.get_w() - 80, m_label_maxfps.get_y(),
 		 80, m_vbutw,
 		 opt.maxfps, 0, 99, "",
-		 g_gr->images().get("pics/but1.png")),
+		 g_gr->images().get("data/pics/but1.png")),
 
 
 	// First options block 'general options', second column
@@ -264,7 +264,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 /** TRANSLATORS: Options: Save game automatically every: */
 		 /** TRANSLATORS: This will have a number added in front of it */
 		 opt.autosave / 60, 0, 100, ngettext("minute", "minutes", opt.autosave / 60),
-		 g_gr->images().get("pics/but1.png"), true),
+		 g_gr->images().get("data/pics/but1.png"), true),
 	m_label_autosave
 		(this,
 		 m_dock_windows_to_edges.get_x(),
@@ -282,7 +282,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 /** TRANSLATORS: Options: Remove Replays older than: */
 		 /** TRANSLATORS: This will have a number added in front of it */
 		 opt.remove_replays, 0, 365, ngettext("day", "days", opt.remove_replays),
-		 g_gr->images().get("pics/but1.png"), true),
+		 g_gr->images().get("data/pics/but1.png"), true),
 	m_label_remove_replays
 		(this,
 		 m_label_autosave.get_x(),
@@ -467,12 +467,12 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 	m_cancel
 		(this, "cancel",
 		 get_w() * 41 / 80, get_h() * 19 / 20, m_butw, m_buth,
-		 g_gr->images().get("pics/but0.png"),
+		 g_gr->images().get("data/pics/but0.png"),
 		 _("Cancel"), std::string(), true, false),
 	m_apply
 		(this, "apply",
 		 get_w() / 4,   get_h() * 19 / 20, m_butw, m_buth,
-		 g_gr->images().get("pics/but2.png"),
+		 g_gr->images().get("data/pics/but2.png"),
 		 _("Apply"), std::string(), true, false),
 
 // Title
@@ -507,14 +507,14 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 			 get_w() - m_hmargin - (get_w() / 5), m_label_snap_dis_panel.get_y(),
 			 get_w() / 5, m_vbutw,
 			 opt.panel_snap_distance, 0, 99, ngettext("pixel", "pixels", opt.panel_snap_distance),
-			 g_gr->images().get("pics/but1.png")),
+			 g_gr->images().get("data/pics/but1.png")),
 
 	m_sb_dis_border
 			(this,
 			 get_w() - m_hmargin - (get_w() / 5), m_label_snap_dis_border.get_y(),
 			 get_w() / 5, m_vbutw,
 			 opt.border_snap_distance, 0, 99, ngettext("pixel", "pixels", opt.border_snap_distance),
-			 g_gr->images().get("pics/but1.png")),
+			 g_gr->images().get("data/pics/but1.png")),
 
 	m_transparent_chat (this, Point(m_hmargin,
 											  m_label_snap_dis_border.get_y() +

@@ -115,7 +115,7 @@ void SuggestedTeamsBox::show(const std::vector<Widelands::Map::SuggestedTeamLine
 
 				for (uint16_t player : team) {
 					assert(player < MAX_PLAYERS);
-					const std::string player_filename = (boost::format("pics/fsel_editor_set_player_0%i_pos.png")
+					const std::string player_filename = (boost::format("data/pics/fsel_editor_set_player_0%i_pos.png")
 																	 % (++player)).str().c_str();
 					player_icon = new UI::Icon(m_lineup_box, 0, 0, 20, 20,
 																	 g_gr->images().get(player_filename));

@@ -89,13 +89,13 @@ InteractivePlayer::InteractivePlayer
 
 #define INIT_BTN_this(picture, name, tooltip)                       \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
- g_gr->images().get("pics/" picture ".png"),                      \
+ g_gr->images().get("data/pics/" picture ".png"),                      \
  tooltip                                                                      \
 
 
 #define INIT_BTN(picture, name, tooltip)                            \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
- g_gr->images().get("pics/" picture ".png"),                      \
+ g_gr->images().get("data/pics/" picture ".png"),                      \
  tooltip                                                                      \
 
 
@@ -250,13 +250,13 @@ void InteractivePlayer::think()
 		m_toggle_chat.set_enabled(m_chatenabled);
 	}
 	{
-		char const * msg_icon = "pics/menu_toggle_oldmessage_menu.png";
+		char const * msg_icon = "data/pics/menu_toggle_oldmessage_menu.png";
 		std::string msg_tooltip = _("Messages");
 		if
 			(uint32_t const nr_new_messages =
 			 	player().messages().nr_messages(Widelands::Message::New))
 		{
-			msg_icon    = "pics/menu_toggle_newmessage_menu.png";
+			msg_icon    = "data/pics/menu_toggle_newmessage_menu.png";
 			msg_tooltip =
 			   (boost::format(ngettext("%u new message", "%u new messages", nr_new_messages)) %
 			    nr_new_messages).str();

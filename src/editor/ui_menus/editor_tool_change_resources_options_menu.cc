@@ -59,15 +59,15 @@ EditorToolChangeResourcesOptionsMenu
 		 get_inner_w() - hmargin() - BUTTON_WIDTH,
 		 m_change_by_label.get_y() + m_change_by_label.get_h() + spacing(),
 		 BUTTON_WIDTH, BUTTON_HEIGHT,
-		 g_gr->images().get("pics/but1.png"),
-		 g_gr->images().get("pics/scrollbar_up.png")),
+		 g_gr->images().get("data/pics/but1.png"),
+		 g_gr->images().get("data/pics/scrollbar_up.png")),
 	m_change_by_decrease
 		(this, "decr_change_by",
 		 hmargin(),
 		 m_change_by_increase.get_y(),
 		 BUTTON_WIDTH, BUTTON_HEIGHT,
-		 g_gr->images().get("pics/but1.png"),
-		 g_gr->images().get("pics/scrollbar_down.png")),
+		 g_gr->images().get("data/pics/but1.png"),
+		 g_gr->images().get("data/pics/scrollbar_down.png")),
 	m_change_by_value
 		(this,
 		 m_change_by_increase.get_x() + m_change_by_increase.get_w() +
@@ -90,14 +90,14 @@ EditorToolChangeResourcesOptionsMenu
 		 m_change_by_increase.get_x(),
 		 m_set_to_label.get_y() + m_set_to_label.get_h() + vspacing(),
 		 BUTTON_WIDTH, BUTTON_HEIGHT,
-		 g_gr->images().get("pics/but1.png"),
-		 g_gr->images().get("pics/scrollbar_up.png")),
+		 g_gr->images().get("data/pics/but1.png"),
+		 g_gr->images().get("data/pics/scrollbar_up.png")),
 	m_set_to_decrease
 		(this, "decr_set_to",
 		 hmargin(),
 		 m_set_to_increase.get_y(), BUTTON_WIDTH, BUTTON_HEIGHT,
-		 g_gr->images().get("pics/but1.png"),
-		 g_gr->images().get("pics/scrollbar_down.png")),
+		 g_gr->images().get("data/pics/but1.png"),
+		 g_gr->images().get("data/pics/scrollbar_down.png")),
 	m_set_to_value
 		(this,
 		 m_change_by_value.get_x(), m_set_to_increase.get_y(),

@@ -127,8 +127,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 		new UI::Button
 			(this, "previous_owned",
 			 JUMP_PREV_BUTTON_X, OWNED_Y, 24, 24,
-			 g_gr->images().get("pics/but4.png"),
-			 g_gr->images().get("pics/scrollbar_left.png"),
+			 g_gr->images().get("data/pics/but4.png"),
+			 g_gr->images().get("data/pics/scrollbar_left.png"),
 			 _("Show previous"),
 			 false);
 	m_btn[PrevOwned]->sigclicked.connect
@@ -138,8 +138,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 		new UI::Button
 			(this, "next_owned",
 			 JUMP_NEXT_BUTTON_X, OWNED_Y, 24, 24,
-			 g_gr->images().get("pics/but4.png"),
-			 g_gr->images().get("pics/scrollbar_right.png"),
+			 g_gr->images().get("data/pics/but4.png"),
+			 g_gr->images().get("data/pics/scrollbar_right.png"),
 			 _("Show next"),
 			 false);
 	m_btn[NextOwned]->sigclicked.connect
@@ -149,8 +149,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 		new UI::Button
 			(this, "previous_constructed",
 			 JUMP_PREV_BUTTON_X, IN_BUILD_Y, 24, 24,
-			 g_gr->images().get("pics/but4.png"),
-			 g_gr->images().get("pics/scrollbar_left.png"),
+			 g_gr->images().get("data/pics/but4.png"),
+			 g_gr->images().get("data/pics/scrollbar_left.png"),
 			 _("Show previous"),
 			 false);
 	m_btn[PrevConstruction]->sigclicked.connect
@@ -160,8 +160,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 		new UI::Button
 			(this, "next_constructed",
 			 JUMP_NEXT_BUTTON_X, IN_BUILD_Y, 24, 24,
-			 g_gr->images().get("pics/but4.png"),
-			 g_gr->images().get("pics/scrollbar_right.png"),
+			 g_gr->images().get("data/pics/but4.png"),
+			 g_gr->images().get("data/pics/scrollbar_right.png"),
 			 _("Show next"),
 			 false);
 	m_btn[NextConstruction]->sigclicked.connect
@@ -171,8 +171,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 		new UI::Button
 			(this, "previous_unproductive",
 			 JUMP_PREV_BUTTON_X, UNPRODUCTIVE_Y, 24, 24,
-			 g_gr->images().get("pics/but4.png"),
-			 g_gr->images().get("pics/scrollbar_left.png"),
+			 g_gr->images().get("data/pics/but4.png"),
+			 g_gr->images().get("data/pics/scrollbar_left.png"),
 			 _("Show previous"),
 			 false);
 	m_btn[PrevUnproductive]->sigclicked.connect
@@ -182,8 +182,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 		new UI::Button
 			(this, "next_unproductive",
 			 JUMP_NEXT_BUTTON_X, UNPRODUCTIVE_Y, 24, 24,
-			 g_gr->images().get("pics/but4.png"),
-			 g_gr->images().get("pics/scrollbar_right.png"),
+			 g_gr->images().get("data/pics/but4.png"),
+			 g_gr->images().get("data/pics/scrollbar_right.png"),
 			 _("Show next"),
 			 false);
 	m_btn[NextUnproductive]->sigclicked.connect
@@ -442,21 +442,21 @@ void BuildingStatisticsMenu::update() {
 			(Columns::Name, building.get_icon(), building.descname());
 
 		{
-			char const * pic = "pics/novalue.png";
+			char const * pic = "data/pics/novalue.png";
 			if (building.get_ismine()) {
-				pic = "pics/menu_tab_buildmine.png";
+				pic = "data/pics/menu_tab_buildmine.png";
 			} else if (building.get_isport()) {
-				pic = "pics/menu_tab_buildport.png";
+				pic = "data/pics/menu_tab_buildport.png";
 			}
 			else switch (building.get_size()) {
 			case Widelands::BaseImmovable::SMALL:
-				pic = "pics/menu_tab_buildsmall.png";
+				pic = "data/pics/menu_tab_buildsmall.png";
 				break;
 			case Widelands::BaseImmovable::MEDIUM:
-				pic = "pics/menu_tab_buildmedium.png";
+				pic = "data/pics/menu_tab_buildmedium.png";
 				break;
 			case Widelands::BaseImmovable::BIG:
-				pic = "pics/menu_tab_buildbig.png";
+				pic = "data/pics/menu_tab_buildbig.png";
 				break;
 			default:
 				assert(false);

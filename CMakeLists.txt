@@ -235,7 +235,7 @@ install(
     tribes
     txts
     world
-    pics
+    data/pics
     data/scripting
   DESTINATION ${WL_INSTALL_DATADIR}/data
   CONFIGURATIONS Debug;Release

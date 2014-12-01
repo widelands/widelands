@@ -43,22 +43,22 @@ FullscreenMenuBase("ui_fsmenu.jpg"),
 	new_game
 		(this, "new_game",
 		 m_butx, get_h() * 6 / 25, m_butw, m_buth,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("data/pics/but1.png"),
 		 _("New Game"), std::string(), true, false),
 	campaign
 		(this, "campaigns",
 		 m_butx, get_h() * 61 / 200, m_butw, m_buth,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("data/pics/but1.png"),
 		 _("Campaigns"), std::string(), true, false),
 	load_game
 		(this, "load_game",
 		 m_butx, get_h() * 87 / 200, m_butw, m_buth,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("data/pics/but1.png"),
 		 _("Load Game"), std::string(), true, false),
 	back
 		(this, "back",
 		 m_butx, get_h() * 3 / 4, m_butw, m_buth,
-		 g_gr->images().get("pics/but0.png"),
+		 g_gr->images().get("data/pics/but0.png"),
 		 _("Back"), std::string(), true, false)
 {
 	new_game.sigclicked.connect

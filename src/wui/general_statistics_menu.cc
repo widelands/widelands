@@ -145,13 +145,13 @@ m_selected_information(0)
 	iterate_players_existing_novar(p, nr_players, game) ++plr_in_game;
 
 	iterate_players_existing_const(p, nr_players, game, player) {
-		const std::string pic = (boost::format("pics/genstats_enable_plr_%02u.png")
+		const std::string pic = (boost::format("data/pics/genstats_enable_plr_%02u.png")
 										 % static_cast<unsigned int>(p)).str();
 		UI::Button & cb =
 			*new UI::Button
 				(hbox1, "playerbutton",
 				 0, 0, 25, 25,
-				 g_gr->images().get("pics/but4.png"),
+				 g_gr->images().get("data/pics/but4.png"),
 				 g_gr->images().get(pic),
 				 player->get_name().c_str());
 		cb.sigclicked.connect
@@ -173,7 +173,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("pics/genstats_landsize.png"),
+		 g_gr->images().get("data/pics/genstats_landsize.png"),
 		 _("Land"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -181,7 +181,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("pics/genstats_nrworkers.png"),
+		 g_gr->images().get("data/pics/genstats_nrworkers.png"),
 		 _("Workers"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -189,7 +189,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("pics/genstats_nrbuildings.png"),
+		 g_gr->images().get("data/pics/genstats_nrbuildings.png"),
 		 _("Buildings"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -197,7 +197,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("pics/genstats_nrwares.png"),
+		 g_gr->images().get("data/pics/genstats_nrwares.png"),
 		 _("Wares"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -205,7 +205,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("pics/genstats_productivity.png"),
+		 g_gr->images().get("data/pics/genstats_productivity.png"),
 		 _("Productivity"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -213,7 +213,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("pics/genstats_casualties.png"),
+		 g_gr->images().get("data/pics/genstats_casualties.png"),
 		 _("Casualties"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -221,7 +221,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("pics/genstats_kills.png"),
+		 g_gr->images().get("data/pics/genstats_kills.png"),
 		 _("Kills"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -229,7 +229,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("pics/genstats_msites_lost.png"),
+		 g_gr->images().get("data/pics/genstats_msites_lost.png"),
 		 _("Military buildings lost"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -237,7 +237,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("pics/genstats_msites_defeated.png"),
+		 g_gr->images().get("data/pics/genstats_msites_defeated.png"),
 		 _("Military buildings defeated"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -245,7 +245,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("pics/genstats_civil_blds_lost.png"),
+		 g_gr->images().get("data/pics/genstats_civil_blds_lost.png"),
 		 _("Civilian buildings lost"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -253,7 +253,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("pics/genstats_militarystrength.png"),
+		 g_gr->images().get("data/pics/genstats_militarystrength.png"),
 		 _("Military"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -277,7 +277,7 @@ m_selected_information(0)
 	m_box.add
 		(new WuiPlotAreaSlider
 			(&m_box, m_plot, 0, 0, 100, 45,
-			 g_gr->images().get("pics/but1.png"))
+			 g_gr->images().get("data/pics/but1.png"))
 		, UI::Box::AlignTop
 		, true);
 

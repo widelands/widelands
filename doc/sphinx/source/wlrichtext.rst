@@ -35,7 +35,7 @@ Valid attributes for ``<rt>`` are:
 
 image
    The name of a image to use, can be prefixed with ``map:`` which instructs
-   widelands to load the image from the ``pics/`` directory inside the map of
+   widelands to load the image from the ``data/pics/`` directory inside the map of
    this scenario.
 
 image-align
@@ -94,7 +94,7 @@ Here is a small example of a fancy message send to the user via the
 
    wl.Game().players[1]:send_message(
       "Hi",
-      "<rt image=pics/wl-ico-128.png image-align=center></rt>" ..
+      "<rt image=data/pics/wl-ico-128.png image-align=center></rt>" ..
       "<rt text-align=center>" ..
       "<p font-weight=bold font-decoration=underline font-style=italic font-size=24>" ..
          "YOU so rock dude!" ..

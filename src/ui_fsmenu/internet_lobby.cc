@@ -80,23 +80,23 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	joingame
 		(this, "join_game",
 		 get_w() * 17 / 25, get_h() * 55 / 100, m_butw, m_buth,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("data/pics/but1.png"),
 		 _("Join this game"), std::string(), false, false),
 	hostgame
 		(this, "host_game",
 		 get_w() * 17 / 25, get_h() * 81 / 100, m_butw, m_buth,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("data/pics/but1.png"),
 		 _("Open a new game"), std::string(), true, false),
 	back
 		(this, "back",
 		 get_w() * 17 / 25, get_h() * 90 / 100, m_butw, m_buth,
-		 g_gr->images().get("pics/but0.png"),
+		 g_gr->images().get("data/pics/but0.png"),
 		 _("Back"), std::string(), true, false),
 
 // Edit boxes
 	servername
 		(this, get_w() * 17 / 25, get_h() * 68 / 100, m_butw, m_buth,
-		 g_gr->images().get("pics/but2.png")),
+		 g_gr->images().get("data/pics/but2.png")),
 
 // List
 	clientsonline
@@ -158,11 +158,11 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 		% "<rt><p><font underline=yes>"
 		% _("User Status")
 		% "</font><br>"
-		% "<img src=pics/roadb_yellow.png> "
+		% "<img src=data/pics/roadb_yellow.png> "
 		% _("Registered")
-		% "<br><img src=pics/roadb_green.png> "
+		% "<br><img src=data/pics/roadb_green.png> "
 		% _("Administrator")
-		% "<br><img src=pics/roadb_red.png> "
+		% "<br><img src=data/pics/roadb_red.png> "
 		% _("Unregistered")
 		%  "</p></rt>").str();
 	clientsonline .add_column(22, "*", t_tip);
@@ -237,12 +237,12 @@ void FullscreenMenuInternetLobby::fill_games_list(const std::vector<InternetGame
 		const Image* pic;
 		if (games.at(i).connectable) {
 			if (games.at(i).build_id == build_id())
-				pic = g_gr->images().get("pics/continue.png");
+				pic = g_gr->images().get("data/pics/continue.png");
 			else {
-				pic = g_gr->images().get("pics/different.png");
+				pic = g_gr->images().get("data/pics/different.png");
 			}
 		} else {
-			pic = g_gr->images().get("pics/stop.png");
+			pic = g_gr->images().get("data/pics/stop.png");
 		}
 		// If one of the servers has the same name as the local name of the
 		// clients server, we disable the 'hostgame' button to avoid having more
@@ -292,16 +292,16 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 		const Image* pic;
 		switch (convert_clienttype(client.type)) {
 			case 0: // UNREGISTERED
-				pic = g_gr->images().get("pics/roadb_red.png");
+				pic = g_gr->images().get("data/pics/roadb_red.png");
 				er.set_picture(0, pic);
 				break;
 			case 1: // REGISTERED
-				pic = g_gr->images().get("pics/roadb_yellow.png");
+				pic = g_gr->images().get("data/pics/roadb_yellow.png");
 				er.set_picture(0, pic);
 				break;
 			case 2: // SUPERUSER
 			case 3: // BOT
-				pic = g_gr->images().get("pics/roadb_green.png");
+				pic = g_gr->images().get("data/pics/roadb_green.png");
 				er.set_color(RGBColor(0, 255, 0));
 				er.set_picture(0, pic);
 				break;

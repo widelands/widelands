@@ -41,7 +41,7 @@ struct SpinBox : public Panel {
 		 int32_t startval, int32_t minval, int32_t maxval,
 		 const std::string & unit             = std::string(),
 		 const Image* buttonbackground =
-		 	g_gr->images().get("pics/but2.png"),
+			g_gr->images().get("data/pics/but2.png"),
 		 bool big = false,
 		 Align align = Align_Center);
 	~SpinBox();

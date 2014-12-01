@@ -43,7 +43,7 @@ struct EditorSetResourcesTool : public EditorTool {
 	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
 
 	char const * get_sel_impl() const override {
-		return "pics/fsel_editor_set_resources.png";
+		return "data/pics/fsel_editor_set_resources.png";
 	}
 
 	uint8_t get_set_to() const       {return m_set_to;}

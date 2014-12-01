@@ -80,7 +80,7 @@ HelpWindow::HelpWindow
 		(this, "ok",
 		 in_width / 3, in_height - but_height * 3 / 2,
 		 in_width / 3, but_height,
-		 g_gr->images().get("pics/but0.png"),
+		 g_gr->images().get("data/pics/but0.png"),
 		 _("OK"), std::string(), true, false);
 	btn->sigclicked.connect(boost::bind(&HelpWindow::pressed_ok, boost::ref(*this)));
 	btn->set_font(Font::get(UI_FONT_NAME, (fontsize < 12 ? 12 : fontsize)));

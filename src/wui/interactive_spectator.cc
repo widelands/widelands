@@ -44,7 +44,7 @@ InteractiveSpectator::InteractiveSpectator
 
 #define INIT_BTN(picture, name, tooltip)                            \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
- g_gr->images().get("pics/" picture ".png"),                      \
+ g_gr->images().get("data/pics/" picture ".png"),                      \
  tooltip                                                                      \
 
 	m_toggle_chat

@@ -77,7 +77,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase & e) :
 
 #define INIT_BUTTON(picture, name, tooltip)                         \
 	TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
-	g_gr->images().get("pics/" picture ".png"),                      \
+	g_gr->images().get("data/pics/" picture ".png"),                      \
 	tooltip                                                                      \
 
 	m_toggle_main_menu
@@ -146,7 +146,7 @@ void EditorInteractive::register_overlays() {
 	//  Starting locations
 	Widelands::PlayerNumber const nr_players = map.get_nrplayers();
 	assert(nr_players <= 99); //  2 decimal digits
-	char fname[] = "pics/editor_player_00_starting_pos.png";
+	char fname[] = "data/pics/editor_player_00_starting_pos.png";
 	iterate_player_numbers(p, nr_players) {
 		if (fname[20] == '9') {fname[20] = '0'; ++fname[19];} else ++fname[20];
 		if (Widelands::Coords const sp = map.get_starting_pos(p)) {
@@ -190,7 +190,7 @@ void EditorInteractive::load(const std::string & filename) {
 			 filename.c_str());
 	ml->preload_map(true);
 
-	UI::ProgressWindow loader_ui("pics/editor.jpg");
+	UI::ProgressWindow loader_ui("data/pics/editor.jpg");
 	std::vector<std::string> tipstext;
 	tipstext.push_back("editor");
 
@@ -581,7 +581,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 	EditorInteractive eia(editor);
 	editor.set_ibase(&eia); // TODO(unknown): get rid of this
 	{
-		UI::ProgressWindow loader_ui("pics/editor.jpg");
+		UI::ProgressWindow loader_ui("data/pics/editor.jpg");
 		std::vector<std::string> tipstext;
 		tipstext.push_back("editor");
 		GameTips editortips(loader_ui, tipstext);

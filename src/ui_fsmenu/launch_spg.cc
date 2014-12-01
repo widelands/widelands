@@ -58,22 +58,22 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG
 	m_select_map
 		(this, "select_map",
 		 get_w() * 7 / 10, get_h() * 3 / 10, m_butw, m_buth,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("data/pics/but1.png"),
 		 _("Select map"), std::string(), false, false),
 	m_wincondition
 		(this, "win_condition",
 		 get_w() * 7 / 10, get_h() * 4 / 10 + m_buth, m_butw, m_buth,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("data/pics/but1.png"),
 		 "", std::string(), false, false),
 	m_back
 		(this, "back",
 		 get_w() * 7 / 10, get_h() * 17 / 20, m_butw, m_buth,
-		 g_gr->images().get("pics/but0.png"),
+		 g_gr->images().get("data/pics/but0.png"),
 		 _("Back"), std::string(), true, false),
 	m_ok
 		(this, "ok",
 		 get_w() * 7 / 10, get_h() * 9 / 10, m_butw, m_buth,
-		 g_gr->images().get("pics/but2.png"),
+		 g_gr->images().get("data/pics/but2.png"),
 		 _("Start game"), std::string(), false, false),
 
 // Text labels
@@ -159,12 +159,12 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG
 	uint32_t y = get_h() * 3 / 10 - m_buth;
 	char posIco[42];
 	for (uint32_t i = 0; i < MAX_PLAYERS; ++i) {
-		sprintf(posIco, "pics/fsel_editor_set_player_0%i_pos.png", i + 1);
+		sprintf(posIco, "data/pics/fsel_editor_set_player_0%i_pos.png", i + 1);
 		m_pos[i] =
 			new UI::Button
 				(this, "switch_to_position",
 				 get_w() / 100, y += m_buth, get_h() * 17 / 500, get_h() * 17 / 500,
-				 g_gr->images().get("pics/but1.png"),
+				 g_gr->images().get("data/pics/but1.png"),
 				 g_gr->images().get(posIco),
 				 _("Switch to position"), false);
 		m_pos[i]->sigclicked.connect

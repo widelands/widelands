@@ -82,7 +82,7 @@ int32_t EditorSetStartingPosTool::handle_click_impl(Widelands::Map& map,
 
 		Widelands::Coords const old_sp = map.get_starting_pos(m_current_player);
 
-		char picname[] = "pics/editor_player_00_starting_pos.png";
+		char picname[] = "data/pics/editor_player_00_starting_pos.png";
 		picname[19] += m_current_player / 10;
 		picname[20] += m_current_player % 10;
 		const Image* pic = g_gr->images().get(picname);

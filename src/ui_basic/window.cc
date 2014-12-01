@@ -84,15 +84,15 @@ Window::Window
 		_drag_start_win_x(0), _drag_start_win_y(0),
 		_drag_start_mouse_x(0), _drag_start_mouse_y(0),
 		m_pic_lborder
-			(g_gr->images().get("pics/win_l_border.png")),
+			(g_gr->images().get("data/pics/win_l_border.png")),
 		m_pic_rborder
-			(g_gr->images().get("pics/win_r_border.png")),
+			(g_gr->images().get("data/pics/win_r_border.png")),
 		m_pic_top
-			(g_gr->images().get("pics/win_top.png")),
+			(g_gr->images().get("data/pics/win_top.png")),
 		m_pic_bottom
-			(g_gr->images().get("pics/win_bot.png")),
+			(g_gr->images().get("data/pics/win_bot.png")),
 		m_pic_background
-			(g_gr->images().get("pics/win_bg.png")),
+			(g_gr->images().get("data/pics/win_bg.png")),
 		m_center_panel(nullptr),
 		m_fastclick_panel(nullptr)
 {

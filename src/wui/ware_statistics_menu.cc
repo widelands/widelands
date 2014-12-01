@@ -39,10 +39,10 @@
 
 #define INACTIVE 0
 
-static const char pic_tab_production[] = "pics/menu_tab_wares_production.png";
-static const char pic_tab_consumption[] = "pics/menu_tab_wares_consumption.png";
-static const char pic_tab_economy[] = "pics/menu_tab_wares_econ_health.png";
-static const char pic_tab_stock[] = "pics/menu_tab_wares_stock.png"; // TODO(unknown): replace place holder
+static const char pic_tab_production[] = "data/pics/menu_tab_wares_production.png";
+static const char pic_tab_consumption[] = "data/pics/menu_tab_wares_consumption.png";
+static const char pic_tab_economy[] = "data/pics/menu_tab_wares_econ_health.png";
+static const char pic_tab_stock[] = "data/pics/menu_tab_wares_stock.png"; // TODO(unknown): replace place holder
 
 static const RGBColor colors[] = {
 	RGBColor(115, 115, 115), //inactive
@@ -161,7 +161,7 @@ m_parent(&parent)
 
 	UI::TabPanel * tabs =
 		 new UI::TabPanel
-			 (box, spacing, 0, g_gr->images().get("pics/but1.png"));
+			 (box, spacing, 0, g_gr->images().get("data/pics/but1.png"));
 
 
 	m_plot_production =
@@ -255,7 +255,7 @@ m_parent(&parent)
 		(new WuiPlotGenericAreaSlider
 			(this, *m_plot_production, this,
 			0, 0, 100, 45,
-			g_gr->images().get("pics/but1.png")),
+			g_gr->images().get("data/pics/but1.png")),
 		 UI::Box::AlignLeft, true);
 
 }

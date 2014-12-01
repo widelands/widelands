@@ -73,7 +73,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 			(this,
 			 posx, posy + get_inner_h() - spacing - offsy - 60 + 3,
 			 get_inner_w() / 2 - spacing, 20,
-			 g_gr->images().get("pics/but1.png"), UI::Align::Align_Left);
+			 g_gr->images().get("data/pics/but1.png"), UI::Align::Align_Left);
 	m_editbox->set_text(parent.egbase().map().get_name());
 	m_editbox->changed.connect(boost::bind(&MainMenuSaveMap::edit_box_changed, this));
 
@@ -123,7 +123,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 		(this, "ok",
 		 posx, posy,
 		 get_inner_w() / 4 - 1.5 * spacing, 20,
-		 g_gr->images().get("pics/but0.png"),
+		 g_gr->images().get("data/pics/but0.png"),
 		 _("OK"));
 	m_ok_btn->sigclicked.connect(boost::bind(&MainMenuSaveMap::clicked_ok, boost::ref(*this)));
 
@@ -131,14 +131,14 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 		(this, "cancel",
 		 posx + get_inner_w() / 4 - spacing / 2, posy,
 		 get_inner_w() / 4 - 1.5 * spacing, 20,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("data/pics/but1.png"),
 		 _("Cancel"));
 	cancelbtn->sigclicked.connect(boost::bind(&MainMenuSaveMap::die, boost::ref(*this)));
 
 	UI::Button * make_directorybtn = new UI::Button
 		(this, "make_directory",
 		 spacing, posy, 185, 20,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("data/pics/but1.png"),
 		 _("Make Directory"));
 	make_directorybtn->sigclicked.connect
 		(boost::bind(&MainMenuSaveMap::clicked_make_directory, boost::ref(*this)));
@@ -292,7 +292,7 @@ void MainMenuSaveMap::fill_list() {
 				/** TRANSLATORS: Parent directory */
 				((boost::format("\\<%s\\>") % _("parent")).str(),
 				 m_parentdir.c_str(),
-				 g_gr->images().get("pics/ls_dir.png"));
+				 g_gr->images().get("data/pics/ls_dir.png"));
 	}
 
 	const FilenameSet::const_iterator mapfiles_end = m_mapfiles.end();
@@ -311,7 +311,7 @@ void MainMenuSaveMap::fill_list() {
 		m_ls->add
 			(FileSystem::fs_filename(name),
 			 name,
-			 g_gr->images().get("pics/ls_dir.png"));
+			 g_gr->images().get("data/pics/ls_dir.png"));
 	}
 
 	Widelands::Map map;
@@ -331,7 +331,7 @@ void MainMenuSaveMap::fill_list() {
 				m_ls->add
 					(FileSystem::filename_without_ext(name),
 					 name,
-					 g_gr->images().get("pics/ls_wlmap.png"));
+					 g_gr->images().get("data/pics/ls_wlmap.png"));
 			} catch (const WException &) {} //  we simply skip illegal entries
 		}
 	}

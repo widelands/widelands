@@ -134,10 +134,10 @@ int32_t FullscreenMenuCampaignSelect::get_campaign()
 
 /// Pictorial descriptions of difficulty levels.
 static char const * const difficulty_picture_filenames[] = {
-	"pics/novalue.png",
-	"pics/easy.png",
-	"pics/challenging.png",
-	"pics/hard.png"
+	"data/pics/novalue.png",
+	"data/pics/easy.png",
+	"data/pics/challenging.png",
+	"data/pics/hard.png"
 };
 
 
@@ -496,7 +496,7 @@ void FullscreenMenuCampaignMapSelect::fill_table()
 
 			UI::Table<uintptr_t>::EntryRecord& tableEntry = m_table.add(i);
 			tableEntry.set_string(0, (boost::format("%u") % scenario_data.index).str());
-			tableEntry.set_picture(1, g_gr->images().get("pics/ls_wlmap.png"), scenario_data.name);
+			tableEntry.set_picture(1, g_gr->images().get("data/pics/ls_wlmap.png"), scenario_data.name);
 		}
 
 		// Increase counter & mapsection

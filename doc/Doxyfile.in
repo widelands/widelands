@@ -698,7 +698,7 @@ EXCLUDE_PATTERNS       = */.svn/* \
                          locale \
                          data/maps \
                          data/music \
-                         pics \
+                         data/pics \
                          po \
                          utils \
                          tribes \

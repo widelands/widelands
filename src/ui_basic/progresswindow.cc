@@ -95,7 +95,7 @@ void ProgressWindow::set_background(const std::string & file_name) {
 	if (!file_name.empty() && g_fs->file_exists(file_name)) {
 		m_background = file_name;
 	} else {
-		m_background = "pics/progress.png";
+		m_background = "data/pics/progress.png";
 	}
 	m_background_pic = nullptr;
 	draw_background(rt, g_gr->get_xres(), g_gr->get_yres());

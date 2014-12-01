@@ -29,7 +29,7 @@
 #include "wui/text_layout.h"
 
 #define DEFAULT_INTERVAL 5  // seconds
-#define BG_IMAGE "pics/tips_bg.png"
+#define BG_IMAGE "data/pics/tips_bg.png"
 
 GameTips::GameTips
 	(UI::ProgressWindow & progressWindow, const std::vector<std::string>& names)

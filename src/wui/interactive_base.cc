@@ -100,12 +100,12 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      m_road_build_player(0),
      unique_window_handler_(new UniqueWindowHandler()),
      // Start at idx 0 for 2 enhancements, idx 3 for 1, idx 5 if none
-     m_workarea_pics{g_gr->images().get("pics/workarea123.png"),
-                     g_gr->images().get("pics/workarea23.png"),
-                     g_gr->images().get("pics/workarea3.png"),
-                     g_gr->images().get("pics/workarea12.png"),
-                     g_gr->images().get("pics/workarea2.png"),
-                     g_gr->images().get("pics/workarea1.png")} {
+	  m_workarea_pics{g_gr->images().get("data/pics/workarea123.png"),
+							g_gr->images().get("data/pics/workarea23.png"),
+							g_gr->images().get("data/pics/workarea3.png"),
+							g_gr->images().get("data/pics/workarea12.png"),
+							g_gr->images().get("data/pics/workarea2.png"),
+							g_gr->images().get("data/pics/workarea1.png")} {
 
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 	   [this](const GraphicResolutionChanged& message) {
@@ -134,7 +134,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 
 	//  Having this in the initializer list (before Sys_InitGraphics) will give
 	//  funny results.
-	m_sel.pic = g_gr->images().get("pics/fsel.png");
+	m_sel.pic = g_gr->images().get("data/pics/fsel.png");
 
 	setDefaultCommand (boost::bind(&InteractiveBase::cmd_lua, this, _1));
 	addCommand
@@ -229,7 +229,7 @@ void InteractiveBase::set_sel_picture(const char * const file) {
 	set_sel_pos(get_sel_pos()); //  redraw
 }
 void InteractiveBase::unset_sel_picture() {
-	set_sel_picture("pics/fsel.png");
+	set_sel_picture("data/pics/fsel.png");
 }
 
 
@@ -818,15 +818,15 @@ void InteractiveBase::roadb_add_overlay()
 		const char * name = nullptr;
 
 		if (slope <= -4)
-			name = "pics/roadb_reddown.png";
+			name = "data/pics/roadb_reddown.png";
 		else if (slope <= -2)
-			name = "pics/roadb_yellowdown.png";
+			name = "data/pics/roadb_yellowdown.png";
 		else if (slope < 2)
-			name = "pics/roadb_green.png";
+			name = "data/pics/roadb_green.png";
 		else if (slope < 4)
-			name = "pics/roadb_yellow.png";
+			name = "data/pics/roadb_yellow.png";
 		else
-			name = "pics/roadb_red.png";
+			name = "data/pics/roadb_red.png";
 
 		egbase().map().overlay_manager().register_overlay
 			(neighb,

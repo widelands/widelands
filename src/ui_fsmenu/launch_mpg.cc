@@ -64,7 +64,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		UI::Button * btn = new UI::Button
 			(this, "map",
 			 space, y, butw, buth,
-			 g_gr->images().get("pics/but0.png"),
+			 g_gr->images().get("data/pics/but0.png"),
 			 _("Map"), _("Select a map"), true, false);
 		btn->sigclicked.connect
 			(boost::bind
@@ -74,7 +74,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn = new UI::Button
 			(this, "saved_game",
 			 space, y + buth + space, butw, buth,
-			 g_gr->images().get("pics/but0.png"),
+			 g_gr->images().get("data/pics/but0.png"),
 			 _("Saved game"), _("Select a saved game"), true, false);
 		btn->sigclicked.connect
 			(boost::bind
@@ -84,7 +84,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn = new UI::Button
 			(this, "cancel",
 			 space + butw / 4, y + 3 * buth + 2 * space, butw / 2, buth,
-			 g_gr->images().get("pics/but1.png"),
+			 g_gr->images().get("data/pics/but1.png"),
 			 _("Cancel"), _("Cancel selection"), true, false);
 		btn->sigclicked.connect
 			(boost::bind
@@ -126,29 +126,29 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 	m_change_map_or_save
 		(this, "change_map_or_save",
 		 m_right_column_x + m_butw - m_buth, get_h() * 3 / 20, m_buth, m_buth,
-		 g_gr->images().get("pics/but1.png"),
-		 g_gr->images().get("pics/menu_toggle_minimap.png"),
+		 g_gr->images().get("data/pics/but1.png"),
+		 g_gr->images().get("data/pics/menu_toggle_minimap.png"),
 		 _("Change map or saved game"), false, false),
 	m_ok
 		(this, "ok",
 		 m_right_column_x, get_h() * 12 / 20 - 2 * m_label_height, m_butw, m_buth,
-		 g_gr->images().get("pics/but2.png"),
+		 g_gr->images().get("data/pics/but2.png"),
 		 _("Start game"), std::string(), false, false),
 	m_back
 		(this, "back",
 		 m_right_column_x, get_h() * 218 / 240, m_butw, m_buth,
-		 g_gr->images().get("pics/but0.png"),
+		 g_gr->images().get("data/pics/but0.png"),
 		 _("Back"), std::string(), true, false),
 	m_wincondition
 		(this, "win_condition",
 		 m_right_column_x, get_h() * 11 / 20 - 2 * m_label_height, m_butw, m_buth,
-		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("data/pics/but1.png"),
 		 "", std::string(), false, false),
 	m_help_button
 		(this, "help",
 		 m_right_column_x + m_butw - m_buth, get_h() / 100, m_buth, m_buth,
-		 g_gr->images().get("pics/but1.png"),
-		 g_gr->images().get("pics/menu_help.png"),
+		 g_gr->images().get("data/pics/but1.png"),
+		 g_gr->images().get("data/pics/menu_help.png"),
 		 _("Show the help window"), true, false),
 
 // Text labels
@@ -683,24 +683,24 @@ void FullscreenMenuLaunchMPG::help_clicked() {
 		(_
 		 ("The player with the color of the flag. If more than one client selected the same color, these "
 		  "share control over the player (‘shared kingdom mode’)."),
-		 "pics/genstats_enable_plr_08.png");
+		 "data/pics/genstats_enable_plr_08.png");
 	m_help->add_picture_li
 		(_("Spectator mode, meaning you can see everything, but cannot control any player"),
-		"pics/menu_tab_watch.png");
+		"data/pics/menu_tab_watch.png");
 	m_help->add_heading(_("Player settings"));
 	m_help->add_paragraph
 		(_
 		 ("In the middle are the settings for the players. To start a game, each player must be one of the "
 		  "following:"));
 	m_help->add_picture_li
-		(_("Connected to one or more clients (see ‘Client settings’)."), "pics/genstats_nrworkers.png");
+		(_("Connected to one or more clients (see ‘Client settings’)."), "data/pics/genstats_nrworkers.png");
 	m_help->add_picture_li
 		(_
 		 ("Connected to a computer player (the face in the picture as well as the mouse hover texts "
 		  "indicate the strength of the currently selected computer player)."),
-		"pics/ai_Normal.png");
-	m_help->add_picture_li(_("Set as shared in starting position for another player."), "pics/shared_in.png");
-	m_help->add_picture_li(_("Closed."), "pics/stop.png");
+		"data/pics/ai_Normal.png");
+	m_help->add_picture_li(_("Set as shared in starting position for another player."), "data/pics/shared_in.png");
+	m_help->add_picture_li(_("Closed."), "data/pics/stop.png");
 	m_help->add_block
 		(_
 		 ("The latter three can only be set by the hosting client by left-clicking the ‘type’ button of a "
