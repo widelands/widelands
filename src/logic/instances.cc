@@ -19,6 +19,7 @@
 
 #include "logic/instances.h"
 
+#include <algorithm>
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>
