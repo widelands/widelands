@@ -84,7 +84,6 @@ wl_library(map_io
     map_terrain_packet.h
     map_version_packet.cc
     map_version_packet.h
-  USES_SDL2_IMAGE
   DEPENDS
     base_exceptions
     base_log
