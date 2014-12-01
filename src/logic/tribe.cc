@@ -61,7 +61,7 @@ TribeDescr::TribeDescr
 	(const std::string & tribename, EditorGameBase & egbase)
 	: m_name(tribename)
 {
-	std::string path = "tribes/";
+	std::string path = "data/tribes/";
 	try {
 		path            += tribename;
 
@@ -298,7 +298,7 @@ void TribeDescr::load_graphics()
 bool TribeDescr::exists_tribe
 	(const std::string & name, TribeBasicInfo * const info)
 {
-	std::string buf = "tribes/";
+	std::string buf = "data/tribes/";
 	buf            += name;
 	buf            += "/conf";
 
@@ -312,7 +312,7 @@ bool TribeDescr::exists_tribe
 				info->uiposition =
 					prof.get_safe_section("tribe").get_int("uiposition", 0);
 
-				std::string path = "tribes/" + name + "/scripting";
+				std::string path = "data/tribes/" + name + "/scripting";
 				for (const std::string& script :
 					  filter(g_fs->list_directory(path),
 				            [](const string& fn) {return boost::ends_with(fn, ".lua");})) {
@@ -345,14 +345,14 @@ std::vector<std::string> TribeDescr::get_all_tribenames() {
 
 	//  get all tribes
 	std::vector<TribeBasicInfo> tribes;
-	FilenameSet m_tribes = g_fs->list_directory("tribes");
+	FilenameSet m_tribes = g_fs->list_directory("data/tribes");
 	for
 		(FilenameSet::iterator pname = m_tribes.begin();
 		 pname != m_tribes.end();
 		 ++pname)
 	{
 		TribeBasicInfo info;
-		if (TribeDescr::exists_tribe(pname->substr(7), &info))
+		if (TribeDescr::exists_tribe(g_fs->fs_filename((*pname).c_str()), &info))
 			tribes.push_back(info);
 	}
 
@@ -368,14 +368,15 @@ std::vector<TribeBasicInfo> TribeDescr::get_all_tribe_infos() {
 	std::vector<TribeBasicInfo> tribes;
 
 	//  get all tribes
-	FilenameSet m_tribes = g_fs->list_directory("tribes");
+	FilenameSet m_tribes = g_fs->list_directory("data/tribes");
 	for
 		(FilenameSet::iterator pname = m_tribes.begin();
 		 pname != m_tribes.end();
 		 ++pname)
 	{
 		TribeBasicInfo info;
-		if (TribeDescr::exists_tribe(pname->substr(7), &info))
+
+		if (TribeDescr::exists_tribe(g_fs->fs_filename((*pname).c_str()), &info))
 			tribes.push_back(info);
 	}
 

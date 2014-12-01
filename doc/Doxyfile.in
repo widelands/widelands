@@ -701,7 +701,7 @@ EXCLUDE_PATTERNS       = */.svn/* \
                          data/pics \
                          po \
                          utils \
-                         tribes \
+                         data/tribes \
                          txts \
                          worlds \
                          .git

@@ -45,16 +45,16 @@ obj_build_mines = {
       listitem_bullet(_"Build a coal mine and an iron ore mine.") ..
       listitem_arrow(_"To do so, place a flag up on the mountain’s flank to the east (on mountain terrain though, not mountain meadow). When you click on the new flag, you can send geologists there. Because the flag is on a mountain, the geologists will search for ores; otherwise, they would search for water. Then build a mine for both kinds of resources that he will find, choosing the appropriate mine to be built:") ..
 		"</rt>" ..
-		rt("image=tribes/barbarians/resi_coal1/resi_00.png", p(_"a bit of coal")) ..
-		rt("image=tribes/barbarians/resi_coal2/resi_00.png", p(_"a lot of coal")) ..
-		rt("image=tribes/barbarians/resi_iron1/resi_00.png", p(_"a bit of iron")) ..
-		rt("image=tribes/barbarians/resi_iron2/resi_00.png", p(_"a lot of iron")) ..
-		rt("image=tribes/barbarians/resi_gold1/resi_00.png", p(_"a bit of gold")) ..
-		rt("image=tribes/barbarians/resi_gold2/resi_00.png", p(_"a lot of gold")) ..
-		rt("image=tribes/barbarians/resi_granite1/resi_00.png", p(_"a bit of granite")) ..
-		rt("image=tribes/barbarians/resi_granite2/resi_00.png", p(_"a lot of granite")) ..
-		rt("image=tribes/barbarians/resi_water1/resi_00.png", p(_"water")) ..
-		rt("image=tribes/barbarians/resi_none/resi_00.png", p(_"nothing was found here")) ..
+		rt("image=data/tribes/barbarians/resi_coal1/resi_00.png", p(_"a bit of coal")) ..
+		rt("image=data/tribes/barbarians/resi_coal2/resi_00.png", p(_"a lot of coal")) ..
+		rt("image=data/tribes/barbarians/resi_iron1/resi_00.png", p(_"a bit of iron")) ..
+		rt("image=data/tribes/barbarians/resi_iron2/resi_00.png", p(_"a lot of iron")) ..
+		rt("image=data/tribes/barbarians/resi_gold1/resi_00.png", p(_"a bit of gold")) ..
+		rt("image=data/tribes/barbarians/resi_gold2/resi_00.png", p(_"a lot of gold")) ..
+		rt("image=data/tribes/barbarians/resi_granite1/resi_00.png", p(_"a bit of granite")) ..
+		rt("image=data/tribes/barbarians/resi_granite2/resi_00.png", p(_"a lot of granite")) ..
+		rt("image=data/tribes/barbarians/resi_water1/resi_00.png", p(_"water")) ..
+		rt("image=data/tribes/barbarians/resi_none/resi_00.png", p(_"nothing was found here")) ..
 		"<rt>" ..
 			p(_[[Mines can only be built on mountain terrain. Suitable places for mines are displayed as orange mine symbols.]]))
 }

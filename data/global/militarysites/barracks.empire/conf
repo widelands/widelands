@@ -12,5 +12,5 @@ defeated_you_string=_Your soldiers defeated the enemy at the barracks.
 
 
 [idle]
-pics=../../../tribes/empire/barracks/barracks_i_??.png
+pics=../../../data/tribes/empire/barracks/barracks_i_??.png
 hotspot=38 60

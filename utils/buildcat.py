@@ -60,7 +60,7 @@ MAINPOTS = [
         "../../world/*/*/*/*/*/*.lua",
     ]),
     ("tribes/tribes", [
-        "../../tribes/scripting/*.lua",
+        "../../data/tribes/scripting/*.lua",
     ]),
 ]
 
@@ -92,27 +92,27 @@ ITERATIVEPOTS = [
     ("mp_scenario_%(name)s/mp_scenario_%(name)s", "data/maps/MP Scenarios/",
          [ "../../data/maps/MP Scenarios/%(name)s/scripting/*.lua", ]
     ),
-    ("tribe_atlanteans/tribe_atlanteans", "tribes/",
-        ["../../tribes/atlanteans/conf",
-         "../../tribes/atlanteans/*/conf",
-         "../../tribes/atlanteans/scripting/*.lua",
-         "../../tribes/atlanteans/*/help.lua",
+    ("tribe_atlanteans/tribe_atlanteans", "data/tribes/",
+        ["../../data/tribes/atlanteans/conf",
+         "../../data/tribes/atlanteans/*/conf",
+         "../../data/tribes/atlanteans/scripting/*.lua",
+         "../../data/tribes/atlanteans/*/help.lua",
          "../../data/global/militarysites/*/conf"
     ]
     ),
-    ("tribe_barbarians/tribe_barbarians", "tribes/",
-        ["../../tribes/barbarians/conf",
-         "../../tribes/barbarians/*/conf",
-         "../../tribes/barbarians/scripting/*.lua",
-         "../../tribes/barbarians/*/help.lua",
+    ("tribe_barbarians/tribe_barbarians", "data/tribes/",
+        ["../../data/tribes/barbarians/conf",
+         "../../data/tribes/barbarians/*/conf",
+         "../../data/tribes/barbarians/scripting/*.lua",
+         "../../data/tribes/barbarians/*/help.lua",
          "../../data/global/militarysites/*/conf"
     ]
     ),
-    ("tribe_empire/tribe_empire", "tribes/",
-        ["../../tribes/empire/conf",
-         "../../tribes/empire/*/conf",
-         "../../tribes/empire/scripting/*.lua",
-         "../../tribes/empire/*/help.lua",
+    ("tribe_empire/tribe_empire", "data/tribes/",
+        ["../../data/tribes/empire/conf",
+         "../../data/tribes/empire/*/conf",
+         "../../data/tribes/empire/scripting/*.lua",
+         "../../data/tribes/empire/*/help.lua",
          "../../data/global/militarysites/*/conf"
     ]
     ),

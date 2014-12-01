@@ -12,5 +12,5 @@ defeated_you_string=_Your soldiers defeated the enemy at the barrier.
 
 
 [idle]
-pics=../../../tribes/empire/barrier/barrier_i_??.png
+pics=../../../data/tribes/empire/barrier/barrier_i_??.png
 hotspot=55 80

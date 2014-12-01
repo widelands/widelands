@@ -328,7 +328,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 				tribe->set_tooltip(random.c_str());
 				tribe->set_pic(m_tribepics[random]);
 			} else {
-				std::string tribepath("tribes/" + player_setting.tribe);
+				std::string tribepath("data/tribes/" + player_setting.tribe);
 				if (!m_tribenames[player_setting.tribe].size()) {
 					// get tribes name and picture
 					Profile prof((tribepath + "/conf").c_str(), nullptr, "tribe_" + player_setting.tribe);
@@ -360,8 +360,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		else if (settings.savegame)
 			init->set_title(_("Savegame"));
 		else {
-			std::string tribepath("tribes/" + player_setting.tribe);
-			i18n::Textdomain td(tribepath); // for translated initialisation
+			std::string tribepath("data/tribes/" + player_setting.tribe);
+			// for translated initialisation
+			i18n::Textdomain td(textdomain(std::string("tribe_" + player_setting.tribe).c_str()));
 			for (const TribeBasicInfo& tribeinfo : settings.tribes) {
 				if (tribeinfo.name == player_setting.tribe) {
 					init->set_title(_(tribeinfo.initializations.at(player_setting.initialization_index).second));

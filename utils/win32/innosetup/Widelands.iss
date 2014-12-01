@@ -98,7 +98,7 @@ Source: ..\..\..\data\maps\*;       DestDir: {app}\data\maps\;      Flags: recur
 Source: ..\..\..\data\music\*;      DestDir: {app}\data\music\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ;                  Components: " Music"
 Source: ..\..\..\data\pics\*;       DestDir: {app}\data\pics\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: ..\..\..\data\sound\*;      DestDir: {app}\data\sound\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Sound"
-Source: ..\..\..\tribes\*;     DestDir: {app}\tribes\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
+Source: ..\..\..\data\tribes\*;     DestDir: {app}\data\tribes\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: ..\..\..\txts\*;       DestDir: {app}\txts\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: ..\..\..\world\*;     DestDir: {app}\world\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: ..\..\..\data\global\*;     DestDir: {app}\data\global\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
@@ -136,7 +136,7 @@ Type: filesandordirs; Name: {app}\data\maps\*
 Type: filesandordirs; Name: {app}\data\pics\*
 Type: filesandordirs; Name: {app}\data\scripting\*
 Type: filesandordirs; Name: {app}\data\sound\*
-Type: filesandordirs; Name: {app}\tribes\*
+Type: filesandordirs; Name: {app}\data\tribes\*
 Type: filesandordirs; Name: {app}\txts\*
 Type: filesandordirs; Name: {app}\world\*
 

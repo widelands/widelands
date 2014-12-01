@@ -184,7 +184,7 @@ void PlayerDescriptionGroup::refresh()
 				title = _("Human");
 			}
 			d->btnPlayerType->set_title(title);
-			std::string tribepath("tribes/" + player.tribe);
+			std::string tribepath("data/tribes/" + player.tribe);
 			if (!m_tribenames[player.tribe].size()) {
 				// get translated tribesname
 				Profile prof
@@ -199,7 +199,7 @@ void PlayerDescriptionGroup::refresh()
 			}
 
 			{
-				i18n::Textdomain td(tribepath); // for translated initialisation
+				i18n::Textdomain td(std::string("tribe_") + player.tribe); // for translated initialisation
 				for (const TribeBasicInfo& tribeinfo : settings.tribes) {
 					if (tribeinfo.name == player.tribe) {
 						d->btnPlayerInit->set_title

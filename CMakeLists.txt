@@ -232,7 +232,7 @@ install(
   DIRECTORY
     data/campaigns
     data/global
-    tribes
+    data/tribes
     txts
     world
     data/pics
