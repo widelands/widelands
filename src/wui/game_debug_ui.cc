@@ -360,7 +360,7 @@ void FieldDebugWindow::think()
 	{
 		Widelands::ResourceIndex ridx = m_coords.field->get_resources();
 		int ramount = m_coords.field->get_resources_amount();
-		int startingAmount = m_coords.field->get_starting_res_amount();
+		int startingAmount = m_coords.field->get_initial_res_amount();
 
 		str += (boost::format("Resource: %s\n")
 				  % ibase().egbase().world().get_resource(ridx)->name().c_str()).str();

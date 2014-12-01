@@ -3661,7 +3661,7 @@ int LuaField::set_resource_amount(lua_State * L) {
 		report_error(L, "Illegal amount: %i, must be >= 0 and <= %i", amount, max_amount);
 
 	field->set_resources(res, amount);
-	field->set_starting_res_amount(amount);
+	field->set_initial_res_amount(amount);
 
 	return 0;
 }
@@ -3673,7 +3673,7 @@ int LuaField::set_resource_amount(lua_State * L) {
 		:see also: :attr:`resource`
 */
 int LuaField::get_starting_resource_amount(lua_State * L) {
-	lua_pushuint32(L, fcoords(L).field->get_starting_res_amount());
+	lua_pushuint32(L, fcoords(L).field->get_initial_res_amount());
 	return 1;
 }
 /* RST
