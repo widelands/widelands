@@ -96,8 +96,6 @@ InteractiveSpectator::InteractiveSpectator
 	// Setup all screen elements
 	fieldclicked.connect(boost::bind(&InteractiveSpectator::node_action, this));
 
-	set_display_flag(dfSpeed, true);
-
 #define INIT_BTN_HOOKS(registry, btn)                                                              \
 	registry.on_create = std::bind(&UI::Button::set_perm_pressed, &btn, true);                      \
 	registry.on_delete = std::bind(&UI::Button::set_perm_pressed, &btn, false);                     \
