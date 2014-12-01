@@ -606,7 +606,7 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 
 		// Fill with all left *.ttf files we find in fonts
 		FilenameSet files =
-		   filter(g_fs->list_directory("fonts"),
+		   filter(g_fs->list_directory("data/i18n/fonts"),
 		          [](const std::string& fn) {return boost::ends_with(fn, ".ttf");});
 
 		for

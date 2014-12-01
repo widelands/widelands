@@ -692,7 +692,7 @@ EXCLUDE_SYMLINKS       = NO
 
 EXCLUDE_PATTERNS       = */.svn/* \
                          build \
-                         fonts \
+                         data\i18n \
                          data\campaigns \
                          doc \
                          locale \

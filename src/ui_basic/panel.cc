@@ -1210,7 +1210,7 @@ std::string Panel::ui_fn() {
 		return UI_FONT_NAME_SERIF;
 	if (style == "sans")
 		return UI_FONT_NAME_SANS;
-	if (g_fs->file_exists("fonts/" + style))
+	if (g_fs->file_exists("data/i18n/fonts/" + style))
 		return style;
 	log
 		("Could not find font file \"%s\"\n"
