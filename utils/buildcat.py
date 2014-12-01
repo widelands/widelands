@@ -30,9 +30,11 @@ MAINPOTS = [
         "../../data/campaigns/cconfig",
         "../../data/campaigns/*/elemental"
     ] ),
-    ( "texts/texts", ["../../data/txts/*",
-                  "../../data/txts/*/*"
-    ] ),
+    ( "texts/texts", ["../../data/txts/license",
+                  "../../data/txts/*.lua",
+                  "../../data/txts/developers",
+                  "../../data/txts/editor_readme",
+                  "../../data/txts/tips/*.tip"] ),
     ( "widelands/widelands", [
                     "../../src/wlapplication.cc",
                     "../../src/*/*.cc",
