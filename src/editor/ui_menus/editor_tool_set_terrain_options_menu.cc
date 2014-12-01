@@ -30,7 +30,6 @@
 #include "graphic/graphic.h"
 #include "graphic/in_memory_image.h"
 #include "graphic/rendertarget.h"
-#include "graphic/terrain_texture.h"
 #include "graphic/texture.h"
 #include "logic/map.h"
 #include "logic/world/editor_category.h"
@@ -75,11 +74,12 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 		if (ter_is != check[checkfor])
 			continue;
 
-		const Image* tex = g_gr->images().get(
-		   g_gr->get_maptexture_data(terrain_descr.get_texture())->get_texture_image());
-		Texture* texture = new Texture(tex->width(), tex->height());
-		texture->blit(Point(0, 0), tex->texture(), Rect(0, 0, tex->width(), tex->height()), BlendMode::Copy);
-		Point pt(1, tex->height() - kSmallPicHeight - 1);
+		const Texture& terrain_texture = terrain_descr.get_texture(0);
+		Texture* texture = new Texture(terrain_texture.width(), terrain_texture.height());
+		texture->blit(Point(0, 0),
+		              &terrain_texture,
+		              Rect(0, 0, terrain_texture.width(), terrain_texture.height()));
+		Point pt(1, terrain_texture.height() - kSmallPicHeight - 1);
 
 		if (ter_is == TerrainDescription::GREEN) {
 			texture->blit(pt, green->texture(), Rect(0, 0, green->width(), green->height()));

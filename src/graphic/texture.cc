@@ -72,11 +72,6 @@ inline void reset_gl() {
 
 }  // namespace
 
-/**
- * Initialize an OpenGL texture of the given dimensions.
- *
- * The initial data of the texture is undefined.
- */
 Texture::Texture(int w, int h)
 {
 	init(w, h);
@@ -89,11 +84,6 @@ Texture::Texture(int w, int h)
 		 GL_UNSIGNED_BYTE, nullptr);
 }
 
-/**
- * Initialize an OpenGL texture with the contents of the given surface.
- *
- * \note Takes ownership of the given surface.
- */
 Texture::Texture(SDL_Surface * surface, bool intensity)
 {
 	init(surface->w, surface->h);
@@ -132,9 +122,28 @@ Texture::Texture(SDL_Surface * surface, bool intensity)
 	SDL_FreeSurface(surface);
 }
 
+Texture::Texture(const GLuint texture, const Rect& subrect, int parent_w, int parent_h) {
+	if (parent_w == 0 || parent_h == 0) {
+		throw wexception("Created a sub Texture with zero height and width parent.");
+	}
+
+	m_w = subrect.w;
+	m_h = subrect.h;
+
+	m_texture = texture;
+	m_owns_texture = false;
+
+	m_texture_coordinates.w = static_cast<float>(m_w - 1) / parent_w;
+	m_texture_coordinates.h = static_cast<float>(m_h - 1) / parent_h;
+	m_texture_coordinates.x = (static_cast<float>(subrect.x) + 0.5) / parent_w;
+	m_texture_coordinates.y = (static_cast<float>(subrect.y) + 0.5) / parent_h;
+}
+
 Texture::~Texture()
 {
-	glDeleteTextures(1, &m_texture);
+	if (m_owns_texture) {
+		glDeleteTextures(1, &m_texture);
+	}
 }
 
 void Texture::pixel_to_gl(float* x, float* y) const {
@@ -150,6 +159,12 @@ void Texture::init(uint16_t w, uint16_t h)
 		return;
 	}
 
+	m_owns_texture = true;
+	m_texture_coordinates.x = 0.f;
+	m_texture_coordinates.y = 0.f;
+	m_texture_coordinates.w = 1.f;
+	m_texture_coordinates.h = 1.f;
+
 	glGenTextures(1, &m_texture);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 
@@ -164,13 +179,20 @@ void Texture::lock(LockMode mode) {
 	if (m_w <= 0 || m_h <= 0) {
 		return;
 	}
-	assert(!m_pixels);
+
+	if (m_pixels) {
+		throw wexception("Called lock() on locked surface.");
+	}
+	if (!m_owns_texture) {
+		throw wexception("A surface that does not own its pixels can not be locked..");
+	}
 
 	m_pixels.reset(new uint8_t[m_w * m_h * 4]);
 
 	if (mode == Lock_Normal) {
 		glBindTexture(GL_TEXTURE_2D, m_texture);
 		glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_pixels.get());
+		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 }
 
@@ -185,6 +207,7 @@ void Texture::unlock(UnlockMode mode) {
 		glTexImage2D
 			(GL_TEXTURE_2D, 0, GL_RGBA, m_w, m_h, 0, GL_RGBA,
 			 GL_UNSIGNED_BYTE,  m_pixels.get());
+		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 	m_pixels.reset(nullptr);

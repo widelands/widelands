@@ -19,6 +19,7 @@
 
 #include "logic/tribe.h"
 
+#include <algorithm>
 #include <iostream>
 #include <memory>
 

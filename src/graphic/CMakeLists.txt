@@ -28,7 +28,6 @@ wl_library(graphic_image
     image_cache.cc
     image_cache.h
   USES_SDL2
-  USES_SDL2_IMAGE
   DEPENDS
     base_log
     base_macros
@@ -66,6 +65,16 @@ wl_library(graphic_surface
     graphic
     graphic_color
     graphic_sdl_utils
+)
+
+wl_library(graphic_texture_atlas
+  SRCS
+    texture_atlas.h
+    texture_atlas.cc
+  DEPENDS
+    base_exceptions
+    base_macros
+    graphic_surface
 )
 
 wl_library(graphic
@@ -116,8 +125,6 @@ wl_library(graphic
     rendertarget.h
     richtext.cc
     richtext.h
-    terrain_texture.cc
-    terrain_texture.h
     text_parser.cc
     text_parser.h
     wordwrap.cc
@@ -125,7 +132,6 @@ wl_library(graphic
   USES_OPENGL
   USES_SDL2
   USES_SDL2_GFX
-  USES_SDL2_IMAGE
   USES_SDL2_TTF
   DEPENDS
     base_exceptions
@@ -149,7 +155,6 @@ wl_library(graphic
     profile
     scripting
     sound
-    ui_basic
     wui
     wui_text_layout
 )
