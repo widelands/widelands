@@ -23,7 +23,6 @@
 #include <sys/time.h>
 #endif
 
-#include "base/deprecated.h"
 #include "base/i18n.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"

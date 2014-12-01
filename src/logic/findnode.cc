@@ -19,7 +19,6 @@
 
 #include "logic/findnode.h"
 
-#include "base/deprecated.h"
 #include "base/wexception.h"
 #include "logic/field.h"
 #include "logic/immovable.h"

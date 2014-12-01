@@ -234,7 +234,7 @@ void RenderTarget::tile(const Rect& rect, const Image* image, const Point& gofs,
 		int ty = 0;
 
 		while (ty < r.h) {
-			uint32_t tx = 0;
+			int tx = 0;
 			int32_t tofsx = ofs.x;
 			Rect srcrc;
 

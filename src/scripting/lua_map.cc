@@ -21,8 +21,8 @@
 
 #include <boost/format.hpp>
 
-#include "base/deprecated.h"
 #include "base/log.h"
+#include "base/macros.h"
 #include "economy/wares_queue.h"
 #include "graphic/graphic.h"
 #include "logic/carrier.h"
@@ -444,7 +444,7 @@ int do_get_soldiers(lua_State* L, const Widelands::SoldierControl& sc, const Tri
 			lua_rawset(L, -3);
 		}
 	} else {
-		const SoldierDescr& soldier_descr = ref_cast<SoldierDescr const, WorkerDescr const>
+		const SoldierDescr& soldier_descr = dynamic_cast<const SoldierDescr&>
 			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
 
 		// Only return the number of those requested
@@ -470,7 +470,7 @@ int do_set_soldiers
 
 	const TribeDescr& tribe = owner->tribe();
 	const SoldierDescr& soldier_descr =  //  soldiers
-		ref_cast<SoldierDescr const, WorkerDescr const>
+		dynamic_cast<const SoldierDescr&>
 			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
 	SoldiersMap setpoints = m_parse_set_soldiers_arguments(L, soldier_descr);
 
@@ -517,7 +517,7 @@ int do_set_soldiers
 			}
 		} else if (d > 0) {
 			for (; d; --d) {
-				Soldier& soldier = ref_cast<Soldier, Worker>
+				Soldier& soldier = dynamic_cast<Soldier&>
 					(soldier_descr.create(egbase, *owner, nullptr, building_position));
 				soldier.set_level
 					(sp.first.hp, sp.first.at, sp.first.de, sp.first.ev);
@@ -2586,11 +2586,12 @@ int LuaRoad::create_new_worker
 	for (Path::StepVector::size_type i = 0; i < idle_index; ++i)
 		egbase.map().get_neighbour(idle_position, path[i], &idle_position);
 
-	Carrier & carrier = ref_cast<Carrier, Worker>
-		(wdes->create (egbase, r.owner(), &r, idle_position));
+	Carrier& carrier = dynamic_cast<Carrier&>
+		(wdes->create(egbase, r.owner(), &r, idle_position));
 
-	if (upcast(Game, game, &egbase))
+	if (upcast(Game, game, &egbase)) {
 		carrier.start_task_road(*game);
+	}
 
 	r.assign_carrier(carrier, 0);
 	return 0;

@@ -22,7 +22,6 @@
 #include <cstdio>
 #include <memory>
 
-#include "base/deprecated.h"
 #include "base/log.h"
 #include "base/wexception.h"
 #include "io/fileread.h"

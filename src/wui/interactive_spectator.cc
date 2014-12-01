@@ -96,8 +96,6 @@ InteractiveSpectator::InteractiveSpectator
 	// Setup all screen elements
 	fieldclicked.connect(boost::bind(&InteractiveSpectator::node_action, this));
 
-	set_display_flag(dfSpeed, true);
-
 #define INIT_BTN_HOOKS(registry, btn)                                                              \
 	registry.on_create = std::bind(&UI::Button::set_perm_pressed, &btn, true);                      \
 	registry.on_delete = std::bind(&UI::Button::set_perm_pressed, &btn, false);                     \
@@ -275,8 +273,7 @@ bool InteractiveSpectator::handle_key(bool const down, SDL_Keysym const code)
 			if (!m_chat.window)
 				GameChatMenu::create_chat_console(this, m_chat, *m_chatProvider);
 
-			ref_cast<GameChatMenu, UI::UniqueWindow>(*m_chat.window)
-				.enter_chat_message();
+			dynamic_cast<GameChatMenu*>(m_chat.window)->enter_chat_message();
 			return true;
 
 		default:

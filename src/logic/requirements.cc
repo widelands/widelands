@@ -19,7 +19,6 @@
 
 #include "logic/requirements.h"
 
-#include "base/deprecated.h"
 #include "base/i18n.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"

@@ -20,6 +20,7 @@
 #include "logic/editor_game_base.h"
 
 #include <algorithm>
+#include <memory>
 #include <set>
 
 #include "base/i18n.h"
@@ -113,11 +114,12 @@ World* EditorGameBase::mutable_world() {
 
 		try {
 			lua_->run_script("world/init.lua");
-		}
-		catch (const WException& e) {
+		} catch (const WException& e) {
 			log("Could not read world information: %s", e.what());
 			throw;
 		}
+
+		world_->load_graphics();
 	}
 	return world_.get();
 }

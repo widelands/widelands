@@ -284,7 +284,7 @@ m_selected_information(0)
 }
 
 GeneralStatisticsMenu::~GeneralStatisticsMenu() {
-	Game & game = ref_cast<InteractiveGameBase, UI::Panel>(*get_parent()).game();
+	Game & game = dynamic_cast<InteractiveGameBase&>(*get_parent()).game();
 	if (game.is_loaded()) {
 		// Save informations for recreation, if window is reopened
 		m_my_registry->selected_information = m_selected_information;
@@ -321,7 +321,7 @@ void GeneralStatisticsMenu::cb_changed_to(int32_t const id)
  */
 void GeneralStatisticsMenu::radiogroup_changed(int32_t const id) {
 	size_t const statistics_size =
-		ref_cast<InteractiveGameBase, UI::Panel>(*get_parent()).game()
+		dynamic_cast<InteractiveGameBase&>(*get_parent()).game()
 		.get_general_statistics().size();
 	for (uint32_t i = 0; i < statistics_size; ++i)
 		if (m_cbs[i]) {

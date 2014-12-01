@@ -162,15 +162,26 @@ void Surface::blit
 {
 	glViewport(0, 0, width(), height());
 
-	// Source Rectangle.
+	// Source Rectangle. We have to take into account that the texture might be
+	// a subtexture in another bigger texture. So we first figure out the pixel
+	// coordinates given it is a full texture (values between 0 and 1) and then
+	// adjust these for the texture coordinates in the parent texture.
 	FloatRect gl_src_rect;
 	{
+		const FloatRect& texture_coordinates = texture->texture_coordinates();
+
 		float x1 = srcrc.x;
 		float y1 = srcrc.y;
 		pixel_to_gl_texture(texture->width(), texture->height(), &x1, &y1);
+		x1 = texture_coordinates.x + x1 * texture_coordinates.w;
+		y1 = texture_coordinates.y + y1 * texture_coordinates.h;
+
 		float x2 = srcrc.x + srcrc.w;
 		float y2 = srcrc.y + srcrc.h;
 		pixel_to_gl_texture(texture->width(), texture->height(), &x2, &y2);
+		x2 = texture_coordinates.x + x2 * texture_coordinates.w;
+		y2 = texture_coordinates.y + y2 * texture_coordinates.h;
+
 		gl_src_rect.x = x1;
 		gl_src_rect.y = y1;
 		gl_src_rect.w = x2 - x1;

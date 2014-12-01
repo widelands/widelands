@@ -10,7 +10,6 @@ wl_library(sound
   USES_SDL2
   USES_SDL2_MIXER
   DEPENDS
-    base_deprecated
     base_i18n
     base_log
     graphic

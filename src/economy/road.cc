@@ -382,11 +382,11 @@ void Road::_request_carrier_callback
 {
 	assert(w);
 
-	Road    & road    = ref_cast<Road,    PlayerImmovable>(target);
+	Road& road = dynamic_cast<Road&>(target);
 
 	for (CarrierSlot& slot : road.m_carrier_slots) {
 		if (slot.carrier_request == &rq) {
-			Carrier & carrier = ref_cast<Carrier, Worker> (*w);
+			Carrier & carrier = dynamic_cast<Carrier&> (*w);
 			slot.carrier_request = nullptr;
 			slot.carrier = &carrier;
 
