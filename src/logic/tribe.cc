@@ -352,7 +352,7 @@ std::vector<std::string> TribeDescr::get_all_tribenames() {
 		 ++pname)
 	{
 		TribeBasicInfo info;
-		if (TribeDescr::exists_tribe(g_fs->fs_filename((*pname).c_str()), &info))
+		if (TribeDescr::exists_tribe(g_fs->fs_filename(pname->c_str()), &info))
 			tribes.push_back(info);
 	}
 
@@ -376,7 +376,7 @@ std::vector<TribeBasicInfo> TribeDescr::get_all_tribe_infos() {
 	{
 		TribeBasicInfo info;
 
-		if (TribeDescr::exists_tribe(g_fs->fs_filename((*pname).c_str()), &info))
+		if (TribeDescr::exists_tribe(g_fs->fs_filename(pname->c_str()), &info))
 			tribes.push_back(info);
 	}
 

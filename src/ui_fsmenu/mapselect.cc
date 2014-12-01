@@ -570,7 +570,9 @@ void FullscreenMenuMapSelect::fill_table()
 				te.set_string(col_players, (boost::format("(%i)") % mapdata.nrplayers).str());
 				te.set_picture
 					(col_name,
-					 g_gr->images().get((mapdata.scenario ? "data/pics/ls_wlscenario.png" : "data/pics/ls_wlmap.png")),
+					 g_gr->images().get((mapdata.scenario ?
+													"data/pics/ls_wlscenario.png" :
+													"data/pics/ls_wlmap.png")),
 					 mapdata.name.c_str());
 				te.set_string(col_size, (boost::format("%u x %u") % mapdata.width % mapdata.height).str());
 

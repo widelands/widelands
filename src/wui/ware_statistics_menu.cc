@@ -42,7 +42,8 @@
 static const char pic_tab_production[] = "data/pics/menu_tab_wares_production.png";
 static const char pic_tab_consumption[] = "data/pics/menu_tab_wares_consumption.png";
 static const char pic_tab_economy[] = "data/pics/menu_tab_wares_econ_health.png";
-static const char pic_tab_stock[] = "data/pics/menu_tab_wares_stock.png"; // TODO(unknown): replace place holder
+static const char pic_tab_stock[] = "data/pics/menu_tab_wares_stock.png";
+// TODO(unknown): replace place holder
 
 static const RGBColor colors[] = {
 	RGBColor(115, 115, 115), //inactive

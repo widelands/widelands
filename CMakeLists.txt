@@ -1,4 +1,4 @@
-# NOCOM fix up
+# NOCOM fix datadir
 project (widelands)
 
 cmake_minimum_required (VERSION 2.8.7)
@@ -232,6 +232,7 @@ install(
   DIRECTORY
     data/campaigns
     data/global
+    data/i18n
     data/tribes
     data/txts
     data/world
@@ -240,14 +241,6 @@ install(
   DESTINATION ${WL_INSTALL_DATADIR}/data
   CONFIGURATIONS Debug;Release
   COMPONENT CoreDataFiles
-)
-
-install(
-  DIRECTORY
-    data/i18n
-  DESTINATION ${WL_INSTALL_DATADIR}/data
-  CONFIGURATIONS Debug;Release
-  COMPONENT InternationalizationDataFiles
 )
 
 install(

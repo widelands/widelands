@@ -699,7 +699,8 @@ void FullscreenMenuLaunchMPG::help_clicked() {
 		 ("Connected to a computer player (the face in the picture as well as the mouse hover texts "
 		  "indicate the strength of the currently selected computer player)."),
 		"data/pics/ai_Normal.png");
-	m_help->add_picture_li(_("Set as shared in starting position for another player."), "data/pics/shared_in.png");
+	m_help->add_picture_li(_("Set as shared in starting position for another player."),
+								  "data/pics/shared_in.png");
 	m_help->add_picture_li(_("Closed."), "data/pics/stop.png");
 	m_help->add_block
 		(_
