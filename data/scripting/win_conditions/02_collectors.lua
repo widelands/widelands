@@ -2,15 +2,15 @@
 --                         Collectors Win condition
 -- =======================================================================
 
-include "scripting/coroutine.lua" -- for sleep
-include "scripting/messages.lua"
-include "scripting/formatting.lua"
-include "scripting/table.lua"
-include "scripting/win_condition_functions.lua"
+include "data/scripting/coroutine.lua" -- for sleep
+include "data/scripting/messages.lua"
+include "data/scripting/formatting.lua"
+include "data/scripting/table.lua"
+include "data/scripting/win_condition_functions.lua"
 
 set_textdomain("win_conditions")
 
-include "scripting/win_condition_texts.lua"
+include "data/scripting/win_condition_texts.lua"
 
 local wc_name = _ "Collectors"
 local wc_version = 2

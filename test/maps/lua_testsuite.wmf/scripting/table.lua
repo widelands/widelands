@@ -1,4 +1,4 @@
-include "scripting/table.lua"
+include "data/scripting/table.lua"
 
 test_table = lunit.TestCase("Auxilary table tests")
 function test_table:test_combine()

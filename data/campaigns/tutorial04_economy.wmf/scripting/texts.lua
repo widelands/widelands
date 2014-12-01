@@ -6,8 +6,8 @@
 -- Some formating functions
 -- =========================
 
-include "scripting/formatting.lua"
-include "scripting/format_scenario.lua"
+include "data/scripting/formatting.lua"
+include "data/scripting/format_scenario.lua"
 
 
 -- =============

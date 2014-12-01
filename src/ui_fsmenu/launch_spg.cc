@@ -129,7 +129,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG
 
 	m_lua = new LuaInterface();
 	std::set<std::string> win_conditions =
-	   filter(g_fs->list_directory("scripting/win_conditions"),
+	   filter(g_fs->list_directory("data/scripting/win_conditions"),
 	          [](const std::string& fn) {return boost::ends_with(fn, ".lua");});
 
 	m_win_condition_scripts.insert(

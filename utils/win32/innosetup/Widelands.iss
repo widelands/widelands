@@ -134,7 +134,7 @@ Type: filesandordirs; Name: {app}\data\global\*
 Type: filesandordirs; Name: {app}\locale\*
 Type: filesandordirs; Name: {app}\data\maps\*
 Type: filesandordirs; Name: {app}\pics\*
-Type: filesandordirs; Name: {app}\scripting\*
+Type: filesandordirs; Name: {app}\data\scripting\*
 Type: filesandordirs; Name: {app}\data\sound\*
 Type: filesandordirs; Name: {app}\tribes\*
 Type: filesandordirs; Name: {app}\txts\*

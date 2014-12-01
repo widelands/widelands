@@ -230,13 +230,13 @@ add_subdirectory(src)
 # install files to the correct locations here
 install(
   DIRECTORY
-    campaigns
-    global
+    data/campaigns
+    data/global
     tribes
     txts
     world
     pics
-    scripting
+    data/scripting
   DESTINATION ${WL_INSTALL_DATADIR}/data
   CONFIGURATIONS Debug;Release
   COMPONENT CoreDataFiles
@@ -244,7 +244,7 @@ install(
 
 install(
   DIRECTORY
-    i18n/fonts
+    data/i18n/fonts
   DESTINATION ${WL_INSTALL_DATADIR}/data/i18n
   CONFIGURATIONS Debug;Release
   COMPONENT InternationalizationDataFiles

@@ -1,7 +1,7 @@
 -- =======================================================================
 --                                Set test
 -- =======================================================================
-include "scripting/set.lua"
+include "data/scripting/set.lua"
 
 set_basic_tests = lunit.TestCase("Set Basics")
 function set_basic_tests:test_creation()

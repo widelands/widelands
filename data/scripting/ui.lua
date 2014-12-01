@@ -1,4 +1,4 @@
-include "scripting/coroutine.lua"
+include "data/scripting/coroutine.lua"
 
 -- RST
 -- ui.lua
@@ -77,7 +77,7 @@ end
 --
 --    .. code-block:: lua
 --
---       include "scripting/table.lua" -- for reverse()
+--       include "data/scripting/table.lua" -- for reverse()
 --
 --       -- Move there in one second
 --       pts = scroll_smoothly_to(wl.Game().map:get_field(23, 42))

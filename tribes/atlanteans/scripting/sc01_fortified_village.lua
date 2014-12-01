@@ -2,7 +2,7 @@
 --                    Castle Village Starting Conditions
 -- =======================================================================
 
-include "scripting/infrastructure.lua"
+include "data/scripting/infrastructure.lua"
 
 set_textdomain("tribe_atlanteans")
 

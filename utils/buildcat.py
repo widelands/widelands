@@ -48,8 +48,8 @@ MAINPOTS = [
                     "../../src/wlapplication_messages.h",
     ] ),
     ( "win_conditions/win_conditions", [
-        "../../scripting/win_conditions/*.lua",
-        "../../scripting/win_condition_texts.lua",
+        "../../data/scripting/win_conditions/*.lua",
+        "../../data/scripting/win_condition_texts.lua",
     ]),
     ("world/world", [
         "../../world/*.lua",
@@ -83,7 +83,7 @@ ITERATIVEPOTS = [
          ["../../data/campaigns/%(name)s/extra_data",
           "../../data/campaigns/%(name)s/objective",
           "../../data/campaigns/%(name)s/scripting/*.lua",
-          "../../scripting/format_scenario.lua"
+          "../../data/scripting/format_scenario.lua"
          ]
     ),
     ("map_%(name)s/map_%(name)s", "data/maps/",

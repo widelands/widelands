@@ -1,6 +1,6 @@
 -- The Barbarian Weaving Mill
 
-include "scripting/formatting.lua"
+include "data/scripting/formatting.lua"
 include "tribes/scripting/format_help.lua"
 
 set_textdomain("tribe_barbarians")

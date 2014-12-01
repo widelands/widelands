@@ -126,7 +126,7 @@ NetClient::NetClient
 
 	// Temporarily register win condition scripts to get the default
 	std::set<std::string> win_condition_scripts =
-		filter(g_fs->list_directory("scripting/win_conditions"),
+		filter(g_fs->list_directory("data/scripting/win_conditions"),
 	          [](const std::string& fn) {return boost::ends_with(fn, ".lua");});
 	assert(win_condition_scripts.size());
 	d->settings.win_condition_script = *win_condition_scripts.begin();

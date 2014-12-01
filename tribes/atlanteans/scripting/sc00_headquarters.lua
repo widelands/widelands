@@ -2,7 +2,7 @@
 --              Headquarters Starting Conditions for Atlanteans
 -- =======================================================================
 
-include "scripting/infrastructure.lua"
+include "data/scripting/infrastructure.lua"
 
 set_textdomain("tribe_atlanteans")
 

@@ -2,7 +2,7 @@
 --                    Start conditions for Citadel Village
 -- =======================================================================
 
-include "scripting/infrastructure.lua"
+include "data/scripting/infrastructure.lua"
 
 set_textdomain("tribe_barbarians")
 

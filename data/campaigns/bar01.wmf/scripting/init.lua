@@ -4,10 +4,10 @@
 
 set_textdomain("scenario_bar01.wmf")
 
-include "scripting/coroutine.lua"
-include "scripting/objective_utils.lua"
-include "scripting/infrastructure.lua"
-include "scripting/messages.lua"
+include "data/scripting/coroutine.lua"
+include "data/scripting/objective_utils.lua"
+include "data/scripting/infrastructure.lua"
+include "data/scripting/messages.lua"
 
 -- ==========
 -- Constants

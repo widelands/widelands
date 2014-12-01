@@ -12,21 +12,21 @@ Scenarios
 ^^^^^^^^^
 
 The most prominent usage of Lua is in scenarios: All scenario logic is
-scripted using Lua. How this works is described in the :ref:`scenario_tutorial`. 
+scripted using Lua. How this works is described in the :ref:`scenario_tutorial`.
 
 Initializations of Tribes in non-scenario games
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 At the beginning of non scenario games, the player has a choice to use
 different starting conditions. There is the very essential one that just sets
-a hq and some starting wares and there are more sophisticated ones. 
+a hq and some starting wares and there are more sophisticated ones.
 
-Adding new ones is simple. All you have to do is to create a new script in 
+Adding new ones is simple. All you have to do is to create a new script in
 the ``scripting`` directory of a tribe. The script should return a :class:`table`
 with two keys: ``name`` is the name for this start condition shown to the user
 and ``func`` is the function that will be called. This function takes on
 argument, a :class:`~wl.game.Player` for which to create the initial
-infrastructure. 
+infrastructure.
 
 A small example. Let's assume we want to add an initialization to the
 barbarians that gives the player 80 logs, but not at once but one by one
@@ -39,7 +39,7 @@ order in which the starting conditions are listed. Let's write the script:
    use("aux", "coroutine")  -- For convenience function sleep()
 
    -- Set the textdomain, so that all strings given to the _() function are
-   -- properly translated. 
+   -- properly translated.
    set_textdomain("tribe_barbarians")
 
    -- Now for the array we must return
@@ -53,7 +53,7 @@ order in which the starting conditions are listed. Let's write the script:
          local hq = player:place_building("headquarters", player.starting_field)
 
          -- Now add one log to the hq every 250 ms
-         for i=1,80 do 
+         for i=1,80 do
             hq:set_wares("log", hq:get_wares("log") + 1)
             sleep(250)
          end
@@ -68,10 +68,10 @@ Win conditions
 In non player scenarios, win conditions define when one single player has won
 a game. The definitions of win conditions is very similar to defining
 initializations: We have to create a Lua script in
-``/scripting/win_conditions`` which returns an array with ``name``,
+``/data/scripting/win_conditions`` which returns an array with ``name``,
 ``description`` and ``func``. Let's also make up a quick example: The first
 player to have 200 logs in his HQ wins the game. All others loose. Save the
-following file as ``/scripting/win_conditions/havest_logs.lua``.
+following file as ``/data/scripting/win_conditions/havest_logs.lua``.
 
 .. code-block:: lua
 
@@ -83,7 +83,7 @@ following file as ``/scripting/win_conditions/havest_logs.lua``.
    return {
       name = _ "Harvest logs",
       description = _ "The first player with 200 logs wins!",
-      func = function() 
+      func = function()
          -- Find all valid players.
          local plrs = wl.Game().players
 
@@ -102,7 +102,7 @@ following file as ``/scripting/win_conditions/havest_logs.lua``.
                end
             end
          end
-               
+
          -- Send the winner a hurray message, the losers a boo
          for idx,p in ipairs(losers) do
             p:send_message(_"You lost!", _"You lost this game!")
@@ -116,7 +116,7 @@ Hooks
 
 Hooks are called by widelands when a certain event happened.  They are a
 rather recent implementation and therefore still limited. More hooks might be
-implemented in the future. 
+implemented in the future.
 
 You set a hook by setting a field in the global variable ``hooks`` which must
 be a dictionary. The only valid hook currently is the ``custom_statistic``
@@ -126,7 +126,7 @@ also be used in some missions in the future. To define a new statistic, use
 something like this:
 
 .. code-block:: lua
-   
+
    hooks = {}
    hooks.custom_statistic = {
       name = _ "Unchanging statistic",
@@ -160,7 +160,7 @@ This makes for excellent cheating in debug builds, but note that this is for
 debug purposes only -- in network games running Lua commands this way will
 desync and therefore crash the game and also replays where you changed the
 game state via the debug console will not work. It is very useful
-for debugging scenarios though. 
+for debugging scenarios though.
 
 Regression testing infrastructure
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

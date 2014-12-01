@@ -1,4 +1,4 @@
-include "scripting/lunit.lua"
+include "data/scripting/lunit.lua"
 
 -- ============
 -- Basic tests

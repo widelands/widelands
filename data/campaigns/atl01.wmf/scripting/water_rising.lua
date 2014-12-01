@@ -2,7 +2,7 @@
 --                        Water rising Functionality
 -- =======================================================================
 
-include "scripting/set.lua"
+include "data/scripting/set.lua"
 
 -- ================
 -- Helper function

@@ -1,4 +1,4 @@
-include "scripting/messages.lua"
+include "data/scripting/messages.lua"
 
 function mission_thread()
    sleep(100) -- This is needed for yet unknown reasons

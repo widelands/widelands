@@ -86,7 +86,7 @@ if __name__ == '__main__':
 
         replace_auxilary_toc(
             filter(lambda a: a, [
-                extract_rst_from_lua(i) for i in glob(p.join(base_dir, "scripting", "*.lua"))
+                extract_rst_from_lua(i) for i in glob(p.join(base_dir, "data/scripting", "*.lua"))
             ])
         )
 
