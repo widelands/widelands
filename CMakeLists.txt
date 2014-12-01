@@ -260,8 +260,8 @@ install(
 
 install(
   DIRECTORY
-    music
-	sound
+    data/music
+    data/sound
   DESTINATION ${WL_INSTALL_DATADIR}/data
   CONFIGURATIONS Debug;Release
   COMPONENT MusicFiles

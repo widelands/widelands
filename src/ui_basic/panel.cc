@@ -788,15 +788,15 @@ void Panel::die()
  */
 void Panel::play_click()
 {
-	g_sound_handler.play_fx("sound/click", 128, PRIO_ALWAYS_PLAY);
+	g_sound_handler.play_fx("click", 128, PRIO_ALWAYS_PLAY);
 }
 void Panel::play_new_chat_message()
 {
-	g_sound_handler.play_fx("sound/lobby_chat", 128, PRIO_ALWAYS_PLAY);
+	g_sound_handler.play_fx("lobby_chat", 128, PRIO_ALWAYS_PLAY);
 }
 void Panel::play_new_chat_member()
 {
-	g_sound_handler.play_fx("sound/lobby_freshmen", 128, PRIO_ALWAYS_PLAY);
+	g_sound_handler.play_fx("lobby_freshmen", 128, PRIO_ALWAYS_PLAY);
 }
 
 

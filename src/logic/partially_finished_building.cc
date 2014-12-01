@@ -73,7 +73,7 @@ void PartiallyFinishedBuilding::init(EditorGameBase & egbase) {
 	if (upcast(Game, game, &egbase))
 		request_builder(*game);
 
-	g_sound_handler.play_fx("sound/create_construction_site", m_position, 255);
+	g_sound_handler.play_fx("create_construction_site", m_position, 255);
 }
 
 /*

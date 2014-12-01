@@ -95,9 +95,9 @@ Source: ..\..\..\data\campaigns\*;  DestDir: {app}\data\campaigns\; Flags: recur
 Source: ..\..\..\data\i18n\fonts\*;      DestDir: {app}\data\i18n\fonts\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: ..\..\..\locale\*;     DestDir: {app}\locale\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: ..\..\..\data\maps\*;       DestDir: {app}\data\maps\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ;                  Components: " Maps"
-Source: ..\..\..\music\*;      DestDir: {app}\music\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ;                  Components: " Music"
+Source: ..\..\..\data\music\*;      DestDir: {app}\data\music\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ;                  Components: " Music"
 Source: ..\..\..\pics\*;       DestDir: {app}\pics\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
-Source: ..\..\..\sound\*;      DestDir: {app}\sound\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Sound"
+Source: ..\..\..\data\sound\*;      DestDir: {app}\data\sound\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Sound"
 Source: ..\..\..\tribes\*;     DestDir: {app}\tribes\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: ..\..\..\txts\*;       DestDir: {app}\txts\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: ..\..\..\world\*;     DestDir: {app}\world\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
@@ -135,7 +135,7 @@ Type: filesandordirs; Name: {app}\locale\*
 Type: filesandordirs; Name: {app}\data\maps\*
 Type: filesandordirs; Name: {app}\pics\*
 Type: filesandordirs; Name: {app}\scripting\*
-Type: filesandordirs; Name: {app}\sound\*
+Type: filesandordirs; Name: {app}\data\sound\*
 Type: filesandordirs; Name: {app}\tribes\*
 Type: filesandordirs; Name: {app}\txts\*
 Type: filesandordirs; Name: {app}\world\*

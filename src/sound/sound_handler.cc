@@ -202,9 +202,9 @@ void SoundHandler::read_config()
 
 	random_order_    =  s.get_bool("sound_random_order", true);
 
-	register_song("music", "intro");
-	register_song("music", "menu");
-	register_song("music", "ingame");
+	register_song("", "intro");
+	register_song("", "menu");
+	register_song("", "ingame");
 }
 
 /** Load systemwide sound fx into memory.
@@ -213,22 +213,22 @@ void SoundHandler::read_config()
 */
 void SoundHandler::load_system_sounds()
 {
-	load_fx_if_needed("sound", "click", "sound/click");
-	load_fx_if_needed("sound", "create_construction_site", "sound/create_construction_site");
-	load_fx_if_needed("sound", "message", "sound/message");
-	load_fx_if_needed("sound/military", "under_attack", "sound/military/under_attack");
-	load_fx_if_needed("sound/military", "site_occupied", "sound/military/site_occupied");
-	load_fx_if_needed("sound", "lobby_chat", "sound/lobby_chat");
-	load_fx_if_needed("sound", "lobby_freshmen", "sound/lobby_freshmen");
+	load_fx_if_needed("", "click", "click");
+	load_fx_if_needed("", "create_construction_site", "create_construction_site");
+	load_fx_if_needed("", "message", "message");
+	load_fx_if_needed("military", "under_attack", "military/under_attack");
+	load_fx_if_needed("military", "site_occupied", "military/site_occupied");
+	load_fx_if_needed("", "lobby_chat", "lobby_chat");
+	load_fx_if_needed("", "lobby_freshmen", "lobby_freshmen");
 }
 
 /** Load a sound effect. One sound effect can consist of several audio files
  * named EFFECT_XX.ogg, where XX is between 00 and 99.
  *
- * Subdirectories of and files under BASENAME_XX can be named anything you want.
+ * Subdirectories of and files under FILENAME_XX can be named anything you want.
  *
- * \param dir        The directory where the audio files reside
- * \param basename   Name from which filenames will be formed
+ * \param dir        The relative directory where the audio files reside in data/sound
+ * \param filename   Name from which filenames will be formed
  *                   (BASENAME_XX.ogg);
  *                   also the name used with \ref play_fx
 */
@@ -247,10 +247,11 @@ void SoundHandler::load_fx_if_needed
 
 	fxs_[fx_name] = new FXset();
 
-	// filename can be relative to dir.
-	const std::string full_path = dir + "/" + filename;
+	// filename is relative to dir.
+	const std::string full_path = "data/sound/" + dir + (dir.empty() ? "" : "/") + filename;
 	const std::string basename = FileSystem::fs_filename(full_path.c_str());
 	const std::string dirname = FileSystem::fs_dirname(full_path);
+
 	boost::regex re(basename + "_\\d+\\.ogg");
 	files = filter(g_fs->list_directory(dirname), [&re](const std::string& fn) {
 		return boost::regex_match(FileSystem::fs_filename(fn.c_str()), re);
@@ -515,7 +516,7 @@ void SoundHandler::register_song
 
 	FilenameSet files;
 
-	files = filter(g_fs->list_directory(dir), [&basename](const std::string& fn) {
+	files = filter(g_fs->list_directory("data/music/" + dir), [&basename](const std::string& fn) {
 		const std::string only_filename = FileSystem::fs_filename(fn.c_str());
 		return boost::starts_with(only_filename, basename) && boost::ends_with(only_filename, ".ogg");
 	});
