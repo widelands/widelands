@@ -19,7 +19,6 @@
 
 #include "logic/worker_descr.h"
 
-#include "base/deprecated.h"
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
@@ -177,7 +176,7 @@ Worker & WorkerDescr::create
 	 Coords             const coords)
 const
 {
-	Worker & worker = ref_cast<Worker, MapObject>(create_object());
+	Worker & worker = dynamic_cast<Worker&>(create_object());
 	worker.set_owner(&owner);
 	worker.set_location(location);
 	worker.set_position(egbase, coords);

@@ -29,7 +29,7 @@
 #include "graphic/graphic.h"
 
 inline EditorInteractive & EditorToolsizeMenu::eia() {
-	return ref_cast<EditorInteractive, UI::Panel>(*get_parent());
+	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
 
 

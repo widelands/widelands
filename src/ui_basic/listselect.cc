@@ -23,7 +23,6 @@
 
 #include <boost/bind.hpp>
 
-#include "base/deprecated.h"
 #include "base/log.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
