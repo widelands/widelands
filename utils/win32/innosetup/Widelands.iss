@@ -101,7 +101,7 @@ Source: ..\..\..\sound\*;      DestDir: {app}\sound\;     Flags: recursesubdirs 
 Source: ..\..\..\tribes\*;     DestDir: {app}\tribes\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: ..\..\..\txts\*;       DestDir: {app}\txts\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: ..\..\..\world\*;     DestDir: {app}\world\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
-Source: ..\..\..\global\*;     DestDir: {app}\global\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
+Source: ..\..\..\data\global\*;     DestDir: {app}\data\global\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: ..\..\..\*.dll;                                  DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
 Source: ..\..\..\widelands.exe;                          DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
 Source: ..\..\..\ChangeLog;                              DestDir: {app};            Flags: ignoreversion; DestName: ChangeLog.txt;                              Components: " Widelands"
@@ -130,7 +130,7 @@ Filename: {app}\{#ExeName}; Description: {cm:LaunchProgram,{#Name}}; Flags: nowa
 
 [InstallDelete]
 Type: filesandordirs; Name: {app}\data\campaigns\*
-Type: filesandordirs; Name: {app}\global\*
+Type: filesandordirs; Name: {app}\data\global\*
 Type: filesandordirs; Name: {app}\locale\*
 Type: filesandordirs; Name: {app}\maps\*
 Type: filesandordirs; Name: {app}\pics\*

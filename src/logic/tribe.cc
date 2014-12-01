@@ -153,10 +153,10 @@ TribeDescr::TribeDescr
 			PARSE_MAP_OBJECT_TYPES_END;
 
 
-			// global militarysites are in /global not in /tribes
+			// global militarysites are in /data/global not in /tribes
 			std::string temp                = path;
 			std::string::size_type sizetemp = base_path_size;
-			path           = "global/militarysites/";
+			path           = "data/global/militarysites/";
 			base_path_size = path.size();
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("global militarysite")

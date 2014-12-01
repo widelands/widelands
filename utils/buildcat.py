@@ -97,7 +97,7 @@ ITERATIVEPOTS = [
          "../../tribes/atlanteans/*/conf",
          "../../tribes/atlanteans/scripting/*.lua",
          "../../tribes/atlanteans/*/help.lua",
-         "../../global/militarysites/*/conf"
+         "../../data/global/militarysites/*/conf"
     ]
     ),
     ("tribe_barbarians/tribe_barbarians", "tribes/",
@@ -105,7 +105,7 @@ ITERATIVEPOTS = [
          "../../tribes/barbarians/*/conf",
          "../../tribes/barbarians/scripting/*.lua",
          "../../tribes/barbarians/*/help.lua",
-         "../../global/militarysites/*/conf"
+         "../../data/global/militarysites/*/conf"
     ]
     ),
     ("tribe_empire/tribe_empire", "tribes/",
@@ -113,7 +113,7 @@ ITERATIVEPOTS = [
          "../../tribes/empire/*/conf",
          "../../tribes/empire/scripting/*.lua",
          "../../tribes/empire/*/help.lua",
-         "../../global/militarysites/*/conf"
+         "../../data/global/militarysites/*/conf"
     ]
     ),
 ]
