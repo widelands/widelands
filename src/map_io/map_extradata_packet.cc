@@ -59,8 +59,7 @@ void MapExtradataPacket::read(FileSystem& fs, bool const skip) {
 					const std::string hash = std::string("map:") + FileSystem::fs_filename(pname->c_str());
 					const Image* image = nullptr;
 					if (!g_gr->images().has(hash)) {
-						SDL_Surface* surf = load_image_as_sdl_surface(*pname, &fs);
-						image = g_gr->images().insert(new_in_memory_image(hash, new Texture(surf)));
+						image = g_gr->images().insert(new_in_memory_image(hash, load_image(*pname, &fs)));
 					} else {
 						image = g_gr->images().get(hash);
 					}
