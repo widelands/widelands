@@ -91,7 +91,7 @@ Name: desktopicon;     Description: {cm:CreateDesktopIcon};     GroupDescription
 Name: quicklaunchicon; Description: {cm:CreateQuickLaunchIcon}; GroupDescription: {cm:AdditionalIcons}; Flags: unchecked
 
 [Files]
-Source: ..\..\..\campaigns\*;  DestDir: {app}\campaigns\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
+Source: ..\..\..\data\campaigns\*;  DestDir: {app}\data\campaigns\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: ..\..\..\fonts\*;      DestDir: {app}\fonts\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: ..\..\..\locale\*;     DestDir: {app}\locale\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: ..\..\..\maps\*;       DestDir: {app}\maps\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ;                  Components: " Maps"
@@ -129,7 +129,7 @@ Name: {group}\{#Copying};                    Filename: {app}\{#Copying}
 Filename: {app}\{#ExeName}; Description: {cm:LaunchProgram,{#Name}}; Flags: nowait postinstall skipifsilent
 
 [InstallDelete]
-Type: filesandordirs; Name: {app}\campaigns\*
+Type: filesandordirs; Name: {app}\data\campaigns\*
 Type: filesandordirs; Name: {app}\global\*
 Type: filesandordirs; Name: {app}\locale\*
 Type: filesandordirs; Name: {app}\maps\*

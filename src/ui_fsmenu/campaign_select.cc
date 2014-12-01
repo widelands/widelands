@@ -192,7 +192,7 @@ void FullscreenMenuCampaignSelect::fill_table()
 	m_table.clear();
 
 	// Read in the campaign config
-	Profile prof("campaigns/campaigns.conf", nullptr, "maps");
+	Profile prof("data/campaigns/campaigns.conf", nullptr, "maps");
 	Section & s = prof.get_safe_section("global");
 
 	// Read in campvis-file
@@ -447,7 +447,7 @@ void FullscreenMenuCampaignMapSelect::fill_table()
 	Profile* prof;
 	std::string campsection;
 	if (m_is_tutorial) {
-		prof = new Profile("campaigns/tutorials.conf", nullptr, "maps");
+		prof = new Profile("data/campaigns/tutorials.conf", nullptr, "maps");
 
 		// Set subtitle of the page
 		const std::string subtitle1 = _("Pick a tutorial from the list, then hit \"OK\".");
@@ -459,7 +459,7 @@ void FullscreenMenuCampaignMapSelect::fill_table()
 		campsection = "tutorials";
 
 	} else {
-		prof = new Profile("campaigns/campaigns.conf", nullptr, "maps");
+		prof = new Profile("data/campaigns/campaigns.conf", nullptr, "maps");
 
 		Section & global_s = prof->get_safe_section("global");
 

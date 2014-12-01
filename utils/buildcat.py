@@ -27,8 +27,8 @@ MAINPOTS = [
     ( "maps/maps", [
         "../../maps/*/elemental",
         "../../maps/*/*/elemental",
-        "../../campaigns/cconfig",
-        "../../campaigns/*/elemental"
+        "../../data/campaigns/cconfig",
+        "../../data/campaigns/*/elemental"
     ] ),
     ( "texts/texts", ["../../txts/license",
                   "../../txts/*.lua",
@@ -79,10 +79,10 @@ MAINPOTS = [
 # For every instance found of a given type, '%s' in this values is replaced
 # with the name of the instance.
 ITERATIVEPOTS = [
-    ("scenario_%(name)s/scenario_%(name)s", "campaigns/",
-         ["../../campaigns/%(name)s/extra_data",
-          "../../campaigns/%(name)s/objective",
-          "../../campaigns/%(name)s/scripting/*.lua",
+    ("scenario_%(name)s/scenario_%(name)s", "data/campaigns/",
+         ["../../data/campaigns/%(name)s/extra_data",
+          "../../data/campaigns/%(name)s/objective",
+          "../../data/campaigns/%(name)s/scripting/*.lua",
           "../../scripting/format_scenario.lua"
          ]
     ),

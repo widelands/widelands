@@ -341,6 +341,6 @@ Handling Long Strings
 
 If you have a really long string, e.g. a dialog stretching over multiple sentences, check if there is a logical place where you could split this into two separate strings for translators. We don't have a "break after x characters" rule for this; please use common sense here. It is easier for translators to translate smaller chunks, and if you should have to change the string later on, e.g. to fix a typo, you will break less translations. The strings will be put into the translation files in the same order as they appear in the source code, so the context will remain intact for the translators.
 
-Also, please hide all formatting control characers from our translators. This includes HTML tags as well as new lines in the code! For an example, have a look at ``campaigns/atl01.wmf/scripting/texts.lua``
+Also, please hide all formatting control characers from our translators. This includes HTML tags as well as new lines in the code! For an example, have a look at ``data/campaigns/atl01.wmf/scripting/texts.lua``
 
 .. vim:ft=rst:spelllang=en:spell
