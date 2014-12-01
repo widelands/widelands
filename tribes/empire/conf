@@ -10,7 +10,7 @@ carrier2=donkey
 icon=pics/icon.png
 # Wares and workers positions in wares window. Columns are separated by ;,
 # Entries in the columns separated by ,
-wares_order=granite, log, planks, wool,cloth;   fish,meat, water, wheat, flour, bread_empire, beer, grape, wine, ration, meal;  marble, marble_column, coal, iron_ore, iron, gold_ore, gold;    pick, ax_empire, saw, shovel, hammer, fishing_rod, hunting_spear, scythe, bread_paddle, basket, kitchen_tools, fire_tongs;   spear_wooden, spear, spear_advanced, spear_heavy, spear_war, armor_helmet, armor, armor_chain, armor_gilded
+wares_order=granite, log, planks, wool,cloth;   fish,meat, water, wheat, flour, bread_empire, beer, grape, wine, ration, meal;  marble, marble_column, coal, iron_ore, iron, gold_ore, gold;    pick, felling_ax, saw, shovel, hammer, fishing_rod, hunting_spear, scythe, bread_paddle, basket, kitchen_tools, fire_tongs;   spear_wooden, spear, spear_advanced, spear_heavy, spear_war, armor_helmet, armor, armor_chain, armor_gilded
 
 workers_order=carrier, donkey, donkeybreeder;   stonemason, carpenter, lumberjack, forester, builder, shepherd, weaver, shipwright; fisher, hunter, farmer, miller, baker, brewer, pig-breeder, vinefarmer, innkeeper; geologist, miner, master-miner, charcoal_burner, smelter; toolsmith; soldier, trainer, weaponsmith, armorsmith, scout
 

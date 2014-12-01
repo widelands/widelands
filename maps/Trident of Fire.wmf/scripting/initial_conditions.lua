@@ -168,7 +168,7 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 			   wares = {
 				 helmet = 4,
 				 spear_wooden = 5,
-				 ax_empire = 6,
+				 felling_ax = 6,
 				 bread_paddle = 2,
 				 basket = 2,
 				 bread_empire = 8,

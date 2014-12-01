@@ -13,7 +13,7 @@ prefilled_buildings(p1,
       wares = {
          helmet = 4,
          spear_wooden = 5,
-         ax_empire = 6,
+         felling_ax = 6,
          bread_paddle = 2,
          basket = 1,
          bread_empire = 8,

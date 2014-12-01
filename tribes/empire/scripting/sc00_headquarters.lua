@@ -22,7 +22,7 @@ return {
       wares = {
          armor_helmet = 4,
          spear_wooden = 5,
-         ax_empire = 6,
+         felling_ax = 6,
          bread_paddle = 2,
          basket = 2,
          bread_empire = 8,

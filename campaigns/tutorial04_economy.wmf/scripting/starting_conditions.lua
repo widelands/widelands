@@ -8,7 +8,7 @@ function init_player()
    -- a headquarters without helms, spears, ores and coal
    prefilled_buildings(plr, { "headquarters", sf.x, sf.y,
       wares = {
-         ax_empire = 6,
+         felling_ax = 6,
          bread_paddle = 2,
          basket = 2,
          bread_empire = 28,
