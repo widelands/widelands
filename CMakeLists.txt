@@ -1,4 +1,4 @@
-# NOCOM fix up datadir
+# NOCOM fix up
 project (widelands)
 
 cmake_minimum_required (VERSION 2.8.7)
@@ -231,22 +231,29 @@ add_subdirectory(src)
 install(
   DIRECTORY
     campaigns
-    fonts
     global
     tribes
     txts
     world
     pics
     scripting
-  DESTINATION ${WL_INSTALL_DATADIR}
+  DESTINATION ${WL_INSTALL_DATADIR}/data
   CONFIGURATIONS Debug;Release
   COMPONENT CoreDataFiles
 )
 
 install(
   DIRECTORY
-    maps
-  DESTINATION ${WL_INSTALL_DATADIR}
+    i18n/fonts
+  DESTINATION ${WL_INSTALL_DATADIR}/data/i18n
+  CONFIGURATIONS Debug;Release
+  COMPONENT InternationalizationDataFiles
+)
+
+install(
+  DIRECTORY
+    data/maps
+  DESTINATION ${WL_INSTALL_DATADIR}/data
   CONFIGURATIONS Debug;Release
   COMPONENT MapFiles
 )
@@ -255,7 +262,7 @@ install(
   DIRECTORY
     music
 	sound
-  DESTINATION ${WL_INSTALL_DATADIR}
+  DESTINATION ${WL_INSTALL_DATADIR}/data
   CONFIGURATIONS Debug;Release
   COMPONENT MusicFiles
 )

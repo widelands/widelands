@@ -692,11 +692,11 @@ EXCLUDE_SYMLINKS       = NO
 
 EXCLUDE_PATTERNS       = */.svn/* \
                          build \
-                         data\i18n \
-                         data\campaigns \
+                         data/i18n \
+                         data/campaigns \
                          doc \
                          locale \
-                         maps \
+                         data/maps \
                          music \
                          pics \
                          po \

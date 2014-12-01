@@ -25,8 +25,8 @@ import confgettext
 # to let .po[t] comments point to somewhere useful
 MAINPOTS = [
     ( "maps/maps", [
-        "../../maps/*/elemental",
-        "../../maps/*/*/elemental",
+        "../../data/maps/*/elemental",
+        "../../data/maps/*/*/elemental",
         "../../data/campaigns/cconfig",
         "../../data/campaigns/*/elemental"
     ] ),
@@ -86,11 +86,11 @@ ITERATIVEPOTS = [
           "../../scripting/format_scenario.lua"
          ]
     ),
-    ("map_%(name)s/map_%(name)s", "maps/",
-         [ "../../maps/%(name)s/scripting/*.lua", ]
+    ("map_%(name)s/map_%(name)s", "data/maps/",
+         [ "../../data/maps/%(name)s/scripting/*.lua", ]
     ),
-    ("mp_scenario_%(name)s/mp_scenario_%(name)s", "maps/MP Scenarios/",
-         [ "../../maps/MP Scenarios/%(name)s/scripting/*.lua", ]
+    ("mp_scenario_%(name)s/mp_scenario_%(name)s", "data/maps/MP Scenarios/",
+         [ "../../data/maps/MP Scenarios/%(name)s/scripting/*.lua", ]
     ),
     ("tribe_atlanteans/tribe_atlanteans", "tribes/",
         ["../../tribes/atlanteans/conf",

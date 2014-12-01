@@ -79,7 +79,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	m_is_scenario(false),
 
 	// Runtime variables
-	m_curdir("maps"), m_basedir("maps"),
+	m_curdir("data/maps"), m_basedir("data/maps"),
 
 	m_settings(settings),
 	m_ctrl(ctrl)
@@ -372,7 +372,7 @@ void FullscreenMenuMapSelect::entry_selected()
  * be taken to sort uncompressed maps (which look like and really are
  * directories) with the files.
  *
- * The search starts in \ref m_curdir ("..../maps") and there is no possibility
+ * The search starts in \ref m_curdir ("..../data/maps") and there is no possibility
  * to move further up. If the user moves down into subdirectories, we insert an
  * entry to move back up.
  *
@@ -436,7 +436,7 @@ void FullscreenMenuMapSelect::fill_table()
 
 			MapData mapdata;
 			mapdata.filename = name;
-			if (strcmp (name, "maps/MP Scenarios") == 0) {
+			if (strcmp (name, "data/maps/MP Scenarios") == 0) {
 				/** TRANSLATORS: Directory name for MP Scenarios in map selection */
 				mapdata.localized_name = _("Multiplayer Scenarios");
 			} else {

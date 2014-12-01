@@ -127,8 +127,8 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
 		 _("Cancel"));
 	cancelbtn->sigclicked.connect(boost::bind(&MainMenuLoadMap::die, this));
 
-	m_basedir = "maps";
-	m_curdir  = "maps";
+	m_basedir = "data/maps";
+	m_curdir  = "data/maps";
 
 	fill_list();
 

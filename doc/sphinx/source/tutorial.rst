@@ -273,7 +273,7 @@ to communicate with each other.
 Preparing Strings for Translation
 ---------------------------------
 
-If you want your scenario to be translatable into different languages, it is important to keep in mind that languages differ widely in their grammar. This entails that word forms and word order will change, and some languages have more than one plural form. So, here are some pointers for good string design. For examples for the formatting discussed here, have a look at ``maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua`` in the source code.
+If you want your scenario to be translatable into different languages, it is important to keep in mind that languages differ widely in their grammar. This entails that word forms and word order will change, and some languages have more than one plural form. So, here are some pointers for good string design. For examples for the formatting discussed here, have a look at ``data/maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua`` in the source code.
 
 Marking a String for Translation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

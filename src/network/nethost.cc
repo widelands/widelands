@@ -1307,7 +1307,7 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 	if (d->settings.maps.empty()) {
 		// Read in maps
 		std::vector<std::string> directories;
-		directories.push_back("maps");
+		directories.push_back("data/maps");
 		while (!directories.empty()) {
 			FilenameSet files = g_fs->list_directory(directories.at(directories.size() - 1).c_str());
 			directories.resize(directories.size() - 1);

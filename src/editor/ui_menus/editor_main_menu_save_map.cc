@@ -144,8 +144,8 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 		(boost::bind(&MainMenuSaveMap::clicked_make_directory, boost::ref(*this)));
 
 
-	m_basedir = "maps";
-	m_curdir  = "maps";
+	m_basedir = "data/maps";
+	m_curdir  = "data/maps";
 
 	fill_list();
 	edit_box_changed();
