@@ -3220,9 +3220,11 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 	// military sites to be manned.
 	// If we have no mines yet, we need to preserve some soldiers for further
 	// expansion (if enemy allows this)
+	// TODO(sirver): this next line is completely unreadable and maybe even wrong given the
+	// precedence of ?: and +. Replace through some if/else.
 	int32_t needed_margin = (mines_.size() < 6) ?
-	                           (6 - mines_.size()) * 3 :
-	                           0 + 2 + (type_ == NORMAL) ? 4 : 0 + (type_ == DEFENSIVE) ? 8 : 0;
+	                           ((6 - mines_.size()) * 3) :
+	                           0 + 2 + ((type_ == NORMAL) ? 4 : 0 + ((type_ == DEFENSIVE) ? 8 : 0));
 	const int32_t current_margin =
 	   genstats[pn - 1].miltary_strength.back() - militarysites.size() - num_milit_constructionsites;
 
