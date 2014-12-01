@@ -123,6 +123,10 @@ Texture::Texture(SDL_Surface * surface, bool intensity)
 }
 
 Texture::Texture(const GLuint texture, const Rect& subrect, int parent_w, int parent_h) {
+	if (parent_w == 0 || parent_h == 0) {
+		throw wexception("Created a sub Texture with zero height and width parent.");
+	}
+
 	m_w = subrect.w;
 	m_h = subrect.h;
 
