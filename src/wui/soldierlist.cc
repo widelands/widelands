@@ -22,7 +22,6 @@
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
 
-#include "base/deprecated.h"
 #include "base/macros.h"
 #include "graphic/font.h"
 #include "graphic/graphic.h"

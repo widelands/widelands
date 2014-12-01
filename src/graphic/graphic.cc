@@ -284,7 +284,7 @@ void Graphic::refresh()
  * @param sw a StreamWrite where the png is written to
  */
 void Graphic::save_png(const Image* image, StreamWrite * sw) const {
-	save_surface_to_png(image->texture(), sw);
+	save_surface_to_png(image->texture(), sw, COLOR_TYPE::RGBA);
 }
 
 /**
@@ -294,6 +294,6 @@ void Graphic::screenshot(const string& fname) const
 {
 	log("Save screenshot to %s\n", fname.c_str());
 	StreamWrite * sw = g_fs->open_stream_write(fname);
-	save_surface_to_png(screen_.get(), sw);
+	save_surface_to_png(screen_.get(), sw, COLOR_TYPE::RGB);
 	delete sw;
 }

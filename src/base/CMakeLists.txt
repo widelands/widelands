@@ -45,13 +45,6 @@ wl_library(base_md5
     base_macros
 )
 
-# TODO(sirver): this library should be deleted.
-wl_library(base_deprecated
-  SRCS
-    deprecated.h
-    deprecated.cc
-  DEPENDS
-)
 
 wl_library(base_scoped_timer
   SRCS

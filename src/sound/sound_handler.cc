@@ -28,7 +28,6 @@
 #include <windows.h>
 #endif
 
-#include "base/deprecated.h"
 #include "base/i18n.h"
 #include "base/log.h"
 #include "graphic/graphic.h"

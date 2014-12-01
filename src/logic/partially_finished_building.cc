@@ -201,7 +201,7 @@ void PartiallyFinishedBuilding::request_builder_callback
 {
 	assert(w);
 
-	PartiallyFinishedBuilding & b = ref_cast<PartiallyFinishedBuilding, PlayerImmovable>(target);
+	PartiallyFinishedBuilding & b = dynamic_cast<PartiallyFinishedBuilding&>(target);
 
 	b.m_builder = w;
 
