@@ -80,6 +80,15 @@ void ImageCatalog::init()  {
 	insert(Keys::kEditorPlayerStartingPos7, "editor_player_07_starting_pos.png");
 	insert(Keys::kEditorPlayerStartingPos8, "editor_player_08_starting_pos.png");
 	insert(Keys::kEditorPlayerStartingPosMax, "editor_player_08_starting_pos.png");
+	insert(Keys::kFilesDirectory, "ls_dir.png");
+	insert(Keys::kFilesWLMap, "ls_wlmap.png");
+	insert(Keys::kFilesS2Map, "ls_s2map.png");
+	insert(Keys::kFilesScenario, "ls_wlscenario.png");
+	insert(Keys::kScrollbarUp, "scrollbar_up.png");
+	insert(Keys::kScrollbarDown, "scrollbar_down.png");
+	insert(Keys::kScrollbarLeft, "scrollbar_left.png");
+	insert(Keys::kScrollbarRight, "scrollbar_right.png");
+	insert(Keys::kScrollbarBackground, "scrollbar_background.png");
 
 
 }

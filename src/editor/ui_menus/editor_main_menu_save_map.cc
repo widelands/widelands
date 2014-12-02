@@ -292,7 +292,7 @@ void MainMenuSaveMap::fill_list() {
 				/** TRANSLATORS: Parent directory */
 				((boost::format("\\<%s\\>") % _("parent")).str(),
 				 m_parentdir.c_str(),
-				 g_gr->images().get("data/pics/ls_dir.png"));
+				 g_gr->cataloged_image(ImageCatalog::Keys::kFilesDirectory));
 	}
 
 	const FilenameSet::const_iterator mapfiles_end = m_mapfiles.end();
@@ -311,7 +311,7 @@ void MainMenuSaveMap::fill_list() {
 		m_ls->add
 			(FileSystem::fs_filename(name),
 			 name,
-			 g_gr->images().get("data/pics/ls_dir.png"));
+			 g_gr->cataloged_image(ImageCatalog::Keys::kFilesDirectory));
 	}
 
 	Widelands::Map map;
@@ -331,7 +331,7 @@ void MainMenuSaveMap::fill_list() {
 				m_ls->add
 					(FileSystem::filename_without_ext(name),
 					 name,
-					 g_gr->images().get("data/pics/ls_wlmap.png"));
+					 g_gr->cataloged_image(ImageCatalog::Keys::kFilesWLMap));
 			} catch (const WException &) {} //  we simply skip illegal entries
 		}
 	}

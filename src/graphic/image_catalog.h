@@ -75,6 +75,15 @@ public:
 		kEditorPlayerStartingPos7,
 		kEditorPlayerStartingPos8,
 		kEditorPlayerStartingPosMax,
+		kFilesDirectory,
+		kFilesWLMap,
+		kFilesS2Map,
+		kFilesScenario,
+		kScrollbarUp,
+		kScrollbarDown,
+		kScrollbarLeft,
+		kScrollbarRight,
+		kScrollbarBackground
 	};
 
 	/// The base directory for the images in this catalog.

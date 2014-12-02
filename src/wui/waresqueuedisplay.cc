@@ -232,7 +232,7 @@ void WaresQueueDisplay::update_max_fill_buttons() {
 		(this, "decrease_max_fill",
 		 x, y, WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
-		 g_gr->images().get("data/pics/scrollbar_left.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarLeft),
 		 _("Decrease the number of wares you want to be stored here."));
 	m_decrease_max_fill->sigclicked.connect
 		(boost::bind(&WaresQueueDisplay::decrease_max_fill_clicked, boost::ref(*this)));
@@ -242,7 +242,7 @@ void WaresQueueDisplay::update_max_fill_buttons() {
 		(this, "increase_max_fill",
 		 x, y, WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
-		 g_gr->images().get("data/pics/scrollbar_right.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarRight),
 		 _("Increase the number of wares you want to be stored here."));
 	m_increase_max_fill->sigclicked.connect
 		(boost::bind(&WaresQueueDisplay::increase_max_fill_clicked, boost::ref(*this)));

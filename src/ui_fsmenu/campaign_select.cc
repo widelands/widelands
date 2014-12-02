@@ -496,7 +496,7 @@ void FullscreenMenuCampaignMapSelect::fill_table()
 
 			UI::Table<uintptr_t>::EntryRecord& tableEntry = m_table.add(i);
 			tableEntry.set_string(0, (boost::format("%u") % scenario_data.index).str());
-			tableEntry.set_picture(1, g_gr->images().get("data/pics/ls_wlmap.png"), scenario_data.name);
+			tableEntry.set_picture(1, g_gr->cataloged_image(ImageCatalog::Keys::kFilesWLMap), scenario_data.name);
 		}
 
 		// Increase counter & mapsection

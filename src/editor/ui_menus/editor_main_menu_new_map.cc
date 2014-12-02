@@ -68,14 +68,14 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive & parent)
 		(this, "width_up",
 		 get_inner_w() - spacing - 20, posy, 20, 20,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
-		 g_gr->images().get("data/pics/scrollbar_up.png"));
+		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarUp));
 	widthupbtn->sigclicked.connect(boost::bind(&MainMenuNewMap::button_clicked, this, 0));
 
 	UI::Button * widthdownbtn = new UI::Button
 		(this, "width_down",
 		 posx, posy, 20, 20,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
-		 g_gr->images().get("data/pics/scrollbar_down.png"));
+		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarDown));
 	widthdownbtn->sigclicked.connect(boost::bind(&MainMenuNewMap::button_clicked, this, 1));
 
 	posy += 20 + spacing + spacing;
@@ -88,14 +88,14 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive & parent)
 		(this, "height_up",
 		 get_inner_w() - spacing - 20, posy, 20, 20,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
-		 g_gr->images().get("data/pics/scrollbar_up.png"));
+		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarUp));
 	heightupbtn->sigclicked.connect(boost::bind(&MainMenuNewMap::button_clicked, this, 2));
 
 	UI::Button * heightdownbtn = new UI::Button
 		(this, "height_down",
 		 posx, posy, 20, 20,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
-		 g_gr->images().get("data/pics/scrollbar_down.png"));
+		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarDown));
 	heightdownbtn->sigclicked.connect(boost::bind(&MainMenuNewMap::button_clicked, this, 3));
 
 	posy += 20 + spacing + spacing;

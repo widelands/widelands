@@ -50,7 +50,7 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu
 		 m_change_by_label.get_y() + m_change_by_label.get_h() + spacing(),
 		 width, height,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
-		 g_gr->images().get("data/pics/scrollbar_up.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarUp),
 		 std::string(),
 		 increase_tool.get_change_by() < MAX_FIELD_HEIGHT_DIFF),
 	m_change_by_decrease
@@ -59,7 +59,7 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu
 		 m_change_by_increase.get_y(),
 		 width, height,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
-		 g_gr->images().get("data/pics/scrollbar_down.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarDown),
 		 std::string(),
 		 1 < increase_tool.get_change_by()),
 	m_change_by_value
@@ -86,7 +86,7 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu
 		 m_set_to_label.get_y() + m_set_to_label.get_h() + vspacing(),
 		 width, height,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
-		 g_gr->images().get("data/pics/scrollbar_up.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarUp),
 		 std::string(),
 		 increase_tool.set_tool().get_interval().min < MAX_FIELD_HEIGHT),
 	m_set_to_decrease
@@ -95,7 +95,7 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu
 		 m_set_to_increase.get_y(),
 		 width, height,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
-		 g_gr->images().get("data/pics/scrollbar_down.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarDown),
 		 std::string(),
 		 0 < increase_tool.set_tool().get_interval().min),
 	m_set_to_value

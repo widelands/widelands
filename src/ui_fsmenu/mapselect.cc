@@ -414,7 +414,7 @@ void FullscreenMenuMapSelect::fill_table()
 
 			te.set_string(col_players, "");
 			te.set_picture
-				(col_name,  g_gr->images().get("data/pics/ls_dir.png"),
+				(col_name,  g_gr->cataloged_image(ImageCatalog::Keys::kFilesDirectory),
 				mapdata.localized_name);
 			te.set_string(col_size, "");
 
@@ -447,7 +447,7 @@ void FullscreenMenuMapSelect::fill_table()
 			UI::Table<uintptr_t const>::EntryRecord & te = m_table.add(m_maps_data.size() - 1);
 
 			te.set_string(col_players, "");
-			te.set_picture(col_name, g_gr->images().get("data/pics/ls_dir.png"), mapdata.localized_name);
+			te.set_picture(col_name, g_gr->cataloged_image(ImageCatalog::Keys::kFilesDirectory), mapdata.localized_name);
 			te.set_string(col_size, "");
 
 			++ndirs;
@@ -512,10 +512,11 @@ void FullscreenMenuMapSelect::fill_table()
 						map_displayname = mapdata.name;
 					}
 					te.set_picture
-						(col_name,  g_gr->images().get
+						(col_name,  g_gr->cataloged_image
 						 (dynamic_cast<WidelandsMapLoader*>(ml.get()) ?
-							  (mapdata.scenario ? "data/pics/ls_wlscenario.png" : "data/pics/ls_wlmap.png") :
-						"data/pics/ls_s2map.png"),
+							  (mapdata.scenario ? ImageCatalog::Keys::kFilesScenario :
+														 ImageCatalog::Keys::kFilesWLMap) :
+							  ImageCatalog::Keys::kFilesS2Map),
 						map_displayname);
 
 					te.set_string(col_size, (boost::format("%u x %u") % mapdata.width % mapdata.height).str());
@@ -570,9 +571,9 @@ void FullscreenMenuMapSelect::fill_table()
 				te.set_string(col_players, (boost::format("(%i)") % mapdata.nrplayers).str());
 				te.set_picture
 					(col_name,
-					 g_gr->images().get((mapdata.scenario ?
-													"data/pics/ls_wlscenario.png" :
-													"data/pics/ls_wlmap.png")),
+					 g_gr->cataloged_image((mapdata.scenario ?
+														ImageCatalog::Keys::kFilesScenario :
+														ImageCatalog::Keys::kFilesWLMap)),
 					 mapdata.name.c_str());
 				te.set_string(col_size, (boost::format("%u x %u") % mapdata.width % mapdata.height).str());
 
@@ -597,8 +598,8 @@ void FullscreenMenuMapSelect::fill_table()
 
 				te.set_string(col_players, (boost::format("(%i)") % mapdata.nrplayers).str());
 				te.set_picture
-					(col_name, g_gr->images().get
-					 ((mapdata.scenario ? "data/pics/ls_wlscenario.png" : "data/pics/ls_wlmap.png")),
+					(col_name, g_gr->cataloged_image
+					 ((mapdata.scenario ? ImageCatalog::Keys::kFilesScenario : ImageCatalog::Keys::kFilesWLMap)),
 					 mapdata.name.c_str());
 				te.set_string(col_size, (boost::format("%u x %u") % mapdata.width % mapdata.height).str());
 			}

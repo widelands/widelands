@@ -62,7 +62,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu
 		 m_lower_label.get_y(),
 		 width, height,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
-		 g_gr->images().get("data/pics/scrollbar_down.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarDown),
 		 std::string(),
 		 0 < noise_tool.get_interval().min),
 	m_lower_increase
@@ -71,7 +71,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu
 		 m_lower_label.get_y(),
 		 width, height,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
-		 g_gr->images().get("data/pics/scrollbar_up.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarUp),
 		 std::string(),
 		 noise_tool.get_interval().min < MAX_FIELD_HEIGHT),
 	m_upper_decrease
@@ -80,7 +80,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu
 		 m_upper_label.get_y(),
 		 width, height,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
-		 g_gr->images().get("data/pics/scrollbar_down.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarDown),
 		 std::string(),
 		 0 < noise_tool.get_interval().max),
 	m_upper_increase
@@ -89,7 +89,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu
 		 m_upper_label.get_y(),
 		 width, height,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
-		 g_gr->images().get("data/pics/scrollbar_up.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarUp),
 		 std::string(),
 		 noise_tool.get_interval().max < MAX_FIELD_HEIGHT),
 	m_set_label
@@ -104,7 +104,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu
 		 m_set_label.get_y(),
 		 width, height,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
-		 g_gr->images().get("data/pics/scrollbar_down.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarDown),
 		 std::string(),
 		 0 < noise_tool.set_tool().get_interval().min),
 	m_setto_increase
@@ -113,7 +113,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu
 		 m_set_label.get_y(),
 		 width, height,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
-		 g_gr->images().get("data/pics/scrollbar_up.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarUp),
 		 std::string(),
 		 noise_tool.set_tool().get_interval().max < MAX_FIELD_HEIGHT)
 {
