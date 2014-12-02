@@ -128,7 +128,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 		if (category_picture->width() > kCategoryImageSize ||
 		    category_picture->height() > kCategoryImageSize) {
 			category_picture =
-			   ImageTransformations::resize(category_picture, kCategoryImageSize, kCategoryImageSize);
+			   ImageTransformations::resize_this_image(category_picture, kCategoryImageSize, kCategoryImageSize);
 		}
 		tab_panel->add(category.name(), category_picture, vertical, category.descname());
 	}

@@ -419,7 +419,8 @@ void initialize() {
 		}
 }
 
-const Image* resize(const Image* original, uint16_t w, uint16_t h) {
+// NOCOM(#sirver): kill
+const Image* resize_this_image(const Image* original, uint16_t w, uint16_t h) {
 	if (original->width() == w && original->height() == h)
 		return original;
 

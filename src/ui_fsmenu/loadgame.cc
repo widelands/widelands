@@ -334,7 +334,7 @@ void FullscreenMenuLoadGame::entry_selected()
 					if (scale > 1.0) scale = 1.0; // Don't make the image too big; fuzziness will result
 					uint16_t w = scale * m_minimap_image->width();
 					uint16_t h = scale * m_minimap_image->height();
-					const Image* resized = ImageTransformations::resize(m_minimap_image.get(), w, h);
+					const Image* resized = ImageTransformations::resize_this_image(m_minimap_image.get(), w, h);
 					// keeps our in_memory_image around and give to icon the one
 					// from resize that is handled by the cache. It is still linked to our
 					// texture.

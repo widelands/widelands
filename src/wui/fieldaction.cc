@@ -109,7 +109,8 @@ void BuildGrid::add(Widelands::BuildingIndex id)
 	const uint16_t image_w = anim_frame.width();
 	const uint16_t image_h = anim_frame.height();
 	double ratio = BUILDMENU_IMAGE_SIZE / std::max(image_w, image_h);
-	const Image* menu_image = ImageTransformations::resize(&anim_frame, image_w * ratio, image_h * ratio);
+	const Image* menu_image =
+	   ImageTransformations::resize_this_image(&anim_frame, image_w * ratio, image_h * ratio);
 	UI::IconGrid::add
 		(descr.name(), menu_image,
 		 reinterpret_cast<void *>(id),

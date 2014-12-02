@@ -265,7 +265,7 @@ void Texture::draw_line
 }
 
 void Texture::blit
-	(const Point& dst, const Texture* src, const Rect& srcrc, BlendMode blend_mode)
+	(const Rect& dst, const Texture* src, const Rect& srcrc, BlendMode blend_mode)
 {
 	if (m_w <= 0 || m_h <= 0) {
 		return;
