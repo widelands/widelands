@@ -106,7 +106,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	m_cancel
 		(this, "cancel",
 		 get_w() * 51 / 80, get_h() * 19 / 20, m_butw, m_buth,
-		 g_gr->images().get("data/pics/but0.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
 		 _("Cancel"), std::string(), true, false),
 	m_apply
 		(this, "apply",
@@ -467,7 +467,7 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 	m_cancel
 		(this, "cancel",
 		 get_w() * 41 / 80, get_h() * 19 / 20, m_butw, m_buth,
-		 g_gr->images().get("data/pics/but0.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
 		 _("Cancel"), std::string(), true, false),
 	m_apply
 		(this, "apply",

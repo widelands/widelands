@@ -105,7 +105,7 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive & parent)
 	UI::Button * createbtn = new UI::Button
 		(this, "create_map",
 		 posx, posy, width, height,
-		 g_gr->images().get("data/pics/but0.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
 		 _("Create Map"));
 	createbtn->sigclicked.connect(boost::bind(&MainMenuNewMap::clicked_create_map, this));
 }

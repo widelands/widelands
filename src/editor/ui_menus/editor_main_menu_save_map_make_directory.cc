@@ -52,7 +52,7 @@ UI::Window(parent, "make_directory", 0, 0, 230, 120, _("Make Directory"))
 		UI::Button
 		(this, "ok",
 		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
-		 g_gr->images().get("data/pics/but0.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
 		 _("OK"),
 		 std::string(),
 		 m_dirname.size());

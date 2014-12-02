@@ -90,7 +90,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	back
 		(this, "back",
 		 get_w() * 17 / 25, get_h() * 90 / 100, m_butw, m_buth,
-		 g_gr->images().get("data/pics/but0.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
 		 _("Back"), std::string(), true, false),
 
 // Edit boxes

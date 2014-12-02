@@ -27,6 +27,8 @@ wl_library(graphic_image
     image.h
     image_cache.cc
     image_cache.h
+    image_catalog.cc
+    image_catalog.h
   USES_SDL2
   USES_SDL2_IMAGE
   DEPENDS

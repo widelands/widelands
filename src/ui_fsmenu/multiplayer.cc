@@ -54,7 +54,7 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer() :
 	back
 		(this, "back",
 		 m_butx, get_h() * 3 / 4, m_butw, m_buth,
-		 g_gr->images().get("data/pics/but0.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
 		 _("Back"), std::string(), true, false)
 {
 	metaserver.sigclicked.connect(boost::bind(&FullscreenMenuMultiPlayer::internet_login, boost::ref(*this)));

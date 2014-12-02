@@ -64,7 +64,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		UI::Button * btn = new UI::Button
 			(this, "map",
 			 space, y, butw, buth,
-			 g_gr->images().get("data/pics/but0.png"),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
 			 _("Map"), _("Select a map"), true, false);
 		btn->sigclicked.connect
 			(boost::bind
@@ -74,7 +74,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn = new UI::Button
 			(this, "saved_game",
 			 space, y + buth + space, butw, buth,
-			 g_gr->images().get("data/pics/but0.png"),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
 			 _("Saved game"), _("Select a saved game"), true, false);
 		btn->sigclicked.connect
 			(boost::bind
@@ -137,7 +137,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 	m_back
 		(this, "back",
 		 m_right_column_x, get_h() * 218 / 240, m_butw, m_buth,
-		 g_gr->images().get("data/pics/but0.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
 		 _("Back"), std::string(), true, false),
 	m_wincondition
 		(this, "win_condition",

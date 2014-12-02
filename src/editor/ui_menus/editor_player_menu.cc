@@ -144,7 +144,7 @@ void EditorPlayerMenu::update() {
 			m_plr_names[p - 1] =
 				new UI::EditBox
 					(this, posx, posy, 140, size,
-					 g_gr->images().get("data/pics/but0.png"));
+					 g_gr->cataloged_image(ImageCatalog::Keys::kButton0));
 			m_plr_names[p - 1]->changed.connect
 				(boost::bind(&EditorPlayerMenu::name_changed, this, p - 1));
 			posx += 140 + spacing;
@@ -156,7 +156,7 @@ void EditorPlayerMenu::update() {
 				new UI::Button
 					(this, "tribe",
 					 posx, posy, 140, size,
-					 g_gr->images().get("data/pics/but0.png"),
+					 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
 					 "");
 			m_plr_set_tribes_buts[p - 1]->sigclicked.connect
 				(boost::bind(&EditorPlayerMenu::player_tribe_clicked, boost::ref(*this), p - 1));
@@ -180,7 +180,7 @@ void EditorPlayerMenu::update() {
 				new UI::Button
 					(this, "starting_pos",
 					 posx, posy, size, size,
-					 g_gr->images().get("data/pics/but0.png"),
+					 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
 					 nullptr,
 					 "");
 			m_plr_set_pos_buts[p - 1]->sigclicked.connect

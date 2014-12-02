@@ -83,6 +83,7 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool fullscreen)
      m_update(true),
      texture_cache_(create_texture_cache(TRANSIENT_TEXTURE_CACHE_SIZE)),
      image_cache_(new ImageCache(texture_cache_.get())),
+	  image_catalog_(new ImageCatalog()),
      animation_manager_(new AnimationManager())
 {
 	ImageTransformations::initialize();
@@ -289,6 +290,9 @@ void Graphic::refresh()
 
 	SDL_GL_SwapWindow(m_sdl_window);
 	m_update = false;
+}
+const Image* Graphic::cataloged_image(const ImageCatalog::Keys& key) {
+	return images().get(image_catalog_.get()->filepath(key));
 }
 
 

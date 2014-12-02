@@ -113,7 +113,7 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
 		(this, "ok",
 		 posx, posy,
 		 get_inner_w() / 4 - 1.5 * spacing, 20,
-		 g_gr->images().get("data/pics/but0.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
 		 _("OK"),
 		 std::string(),
 		 false);

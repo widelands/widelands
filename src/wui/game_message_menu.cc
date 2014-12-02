@@ -62,7 +62,7 @@ GameMessageMenu::GameMessageMenu
 		new UI::Button
 			(this, "clear_selection",
 			 5, 5, 140, 25,
-			 g_gr->images().get("data/pics/but0.png"),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
 			 _("Clear"), _("Clear selection"));
 	clearselectionbtn->sigclicked.connect
 		(boost::bind(&GameMessageMenu::do_clear_selection, this));
@@ -71,7 +71,7 @@ GameMessageMenu::GameMessageMenu
 		new UI::Button
 			(this, "invert_selection",
 			 150, 5, 140, 25,
-			 g_gr->images().get("data/pics/but0.png"),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
 			 _("Invert"), _("Invert selection"));
 	invertselectionbtn->sigclicked.connect
 		(boost::bind(&GameMessageMenu::do_invert_selection, this));

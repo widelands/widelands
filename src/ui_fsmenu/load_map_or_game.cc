@@ -57,7 +57,7 @@ FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame(bool sort_descending) :
 		m_back
 		  (this, "back",
 			m_right_column_x, m_buty, m_butw, m_buth,
-			g_gr->images().get("data/pics/but0.png"),
+			g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
 			_("Back"), std::string(), true, false),
 		m_ok
 		  (this, "ok",

@@ -28,6 +28,7 @@
 
 #include "base/rect.h"
 #include "graphic/image_cache.h"
+#include "graphic/image_catalog.h"
 #include "notifications/notifications.h"
 #include "notifications/note_ids.h"
 
@@ -78,7 +79,15 @@ public:
 	SDL_Window* get_sdlwindow() {return m_sdl_window;}
 
 	TextureCache& textures() const {return *texture_cache_.get();}
+
+	// Returns all cached images. Use cataloged_image instead of this function
+	// if the image is registered there.
+	// NOCOM this is mostly called followed by .get(filename). Write a wrapper.
 	ImageCache& images() const {return *image_cache_.get();}
+
+	// Uses catalog 'key' to fetch an image from images().
+	const Image* cataloged_image(const ImageCatalog::Keys& key);
+
 	AnimationManager& animations() const {return *animation_manager_.get();}
 
 	void save_png(const Image*, StreamWrite*) const;
@@ -117,6 +126,8 @@ private:
 	/// Non-volatile cache of hardware independent images. The use the
 	/// texture_cache_ to cache their pixel data.
 	std::unique_ptr<ImageCache> image_cache_;
+	/// Maps images from keys to filenames.
+	std::unique_ptr<ImageCatalog> image_catalog_;
 	/// This holds all animations.
 	std::unique_ptr<AnimationManager> animation_manager_;
 
