@@ -15,11 +15,11 @@ function field_resources_tests:test_starting_resource_in_editor()
 	-- making sure that (set_)	resource_amount sets also starting resource 
 	assert_equal("coal", self.f.resource)
 	self.f.resource_amount=10
-	assert_equal(self.f.starting_resource_amount, self.f.resource_amount)
-	assert_equal(10, self.f.starting_resource_amount)
+	assert_equal(self.f.initial_resource_amount, self.f.resource_amount)
+	assert_equal(10, self.f.initial_resource_amount)
 	self.f.resource_amount=20
-	assert_equal(self.f.starting_resource_amount, self.f.resource_amount)
-	assert_equal(20, self.f.starting_resource_amount)
+	assert_equal(self.f.initial_resource_amount, self.f.resource_amount)
+	assert_equal(20, self.f.initial_resource_amount)
 end
 
 
