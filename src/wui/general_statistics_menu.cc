@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -145,14 +143,12 @@ m_selected_information(0)
 	iterate_players_existing_novar(p, nr_players, game) ++plr_in_game;
 
 	iterate_players_existing_const(p, nr_players, game, player) {
-		const std::string pic = (boost::format("data/pics/genstats_enable_plr_%02u.png")
-										 % static_cast<unsigned int>(p)).str();
 		UI::Button & cb =
 			*new UI::Button
 				(hbox1, "playerbutton",
 				 0, 0, 25, 25,
 				 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
-				 g_gr->images().get(pic),
+				 g_gr->cataloged_image(g_gr->image_catalog().player_stats(p)),
 				 player->get_name().c_str());
 		cb.sigclicked.connect
 			(boost::bind(&GeneralStatisticsMenu::cb_changed_to, this, p));

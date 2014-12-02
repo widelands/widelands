@@ -22,6 +22,7 @@
 
 #include <string>
 #include <map>
+#include <vector>
 
 #include "base/macros.h"
 
@@ -55,7 +56,6 @@ public:
 		kSelectEditorSetPortSpace,
 		kSelectEditorUnsetPortSpace,
 		kSelectEditorSetResources,
-		kSelectEditorSetStartingPosMin,
 		kSelectEditorSetStartingPos1,
 		kSelectEditorSetStartingPos2,
 		kSelectEditorSetStartingPos3,
@@ -64,8 +64,6 @@ public:
 		kSelectEditorSetStartingPos6,
 		kSelectEditorSetStartingPos7,
 		kSelectEditorSetStartingPos8,
-		kSelectEditorSetStartingPosMax,
-		kEditorPlayerStartingPosMin,
 		kEditorPlayerStartingPos1,
 		kEditorPlayerStartingPos2,
 		kEditorPlayerStartingPos3,
@@ -74,7 +72,6 @@ public:
 		kEditorPlayerStartingPos6,
 		kEditorPlayerStartingPos7,
 		kEditorPlayerStartingPos8,
-		kEditorPlayerStartingPosMax,
 		kFilesDirectory,
 		kFilesWLMap,
 		kFilesS2Map,
@@ -83,7 +80,15 @@ public:
 		kScrollbarDown,
 		kScrollbarLeft,
 		kScrollbarRight,
-		kScrollbarBackground
+		kScrollbarBackground,
+		kStatsPlayer1,
+		kStatsPlayer2,
+		kStatsPlayer3,
+		kStatsPlayer4,
+		kStatsPlayer5,
+		kStatsPlayer6,
+		kStatsPlayer7,
+		kStatsPlayer8,
 	};
 
 	/// The base directory for the images in this catalog.
@@ -99,6 +104,12 @@ public:
 
 	bool has_key(ImageCatalog::Keys key) const;
 
+	// Convenience functions to get correct key for a 'player_number'.
+	// 1 <= 'player_number' <= MAX_PLAYERS.
+	ImageCatalog::Keys player_position_small(int player_number);
+	ImageCatalog::Keys player_position_big(int player_number);
+	ImageCatalog::Keys player_stats(int player_number);
+
 private:
 	/// This function registers a filename for each member of ImageCatalog::Keys.
 	void init();
@@ -106,6 +117,11 @@ private:
 	/// Inserts an image into the catalog for the 'key'.
 	/// The 'filename' is the relative path starting from kBaseDir.
 	void insert(ImageCatalog::Keys key, const std::string& filename);
+
+	// These vectors hold keys for the convenience functions.
+	const std::vector<ImageCatalog::Keys> player_positions_big_;
+	const std::vector<ImageCatalog::Keys> player_positions_small_;
+	const std::vector<ImageCatalog::Keys> player_stats_;
 
 	std::map<ImageCatalog::Keys, std::string> entries_;
 

@@ -157,15 +157,14 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG
 	m_ok.set_font(font_small());
 
 	uint32_t y = get_h() * 3 / 10 - m_buth;
-	char posIco[42];
 	for (uint32_t i = 0; i < MAX_PLAYERS; ++i) {
-		sprintf(posIco, "data/pics/fsel_editor_set_player_0%i_pos.png", i + 1);
+		const Image* position_icon = g_gr->cataloged_image(g_gr->image_catalog().player_position_small(i + 1));
 		m_pos[i] =
 			new UI::Button
 				(this, "switch_to_position",
 				 get_w() / 100, y += m_buth, get_h() * 17 / 500, get_h() * 17 / 500,
 				 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
-				 g_gr->images().get(posIco),
+				 position_icon,
 				 _("Switch to position"), false);
 		m_pos[i]->sigclicked.connect
 			(boost::bind(&FullscreenMenuLaunchSPG::switch_to_position, boost::ref(*this), i));

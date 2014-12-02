@@ -683,7 +683,7 @@ void FullscreenMenuLaunchMPG::help_clicked() {
 		(_
 		 ("The player with the color of the flag. If more than one client selected the same color, these "
 		  "share control over the player (‘shared kingdom mode’)."),
-		 "data/pics/genstats_enable_plr_08.png");
+		 g_gr->image_catalog().filepath(ImageCatalog::Keys::kStatsPlayer8));
 	m_help->add_picture_li
 		(_("Spectator mode, meaning you can see everything, but cannot control any player"),
 		"data/pics/menu_tab_watch.png");

@@ -23,10 +23,37 @@
 #include <map>
 #include <string>
 
-#include "base/log.h"
+#include "base/log.h" // NOCOM
 #include "io/filesystem/layered_filesystem.h"
 
-ImageCatalog::ImageCatalog() {
+ImageCatalog::ImageCatalog() :
+	player_positions_big_({
+								Keys::kEditorPlayerStartingPos1,
+								Keys::kEditorPlayerStartingPos2,
+								Keys::kEditorPlayerStartingPos3,
+								Keys::kEditorPlayerStartingPos4,
+								Keys::kEditorPlayerStartingPos5,
+								Keys::kEditorPlayerStartingPos6,
+								Keys::kEditorPlayerStartingPos7,
+								Keys::kEditorPlayerStartingPos8}),
+	player_positions_small_({
+									Keys::kSelectEditorSetStartingPos1,
+									Keys::kSelectEditorSetStartingPos2,
+									Keys::kSelectEditorSetStartingPos3,
+									Keys::kSelectEditorSetStartingPos4,
+									Keys::kSelectEditorSetStartingPos5,
+									Keys::kSelectEditorSetStartingPos6,
+									Keys::kSelectEditorSetStartingPos7,
+									Keys::kSelectEditorSetStartingPos8}),
+	player_stats_({
+					  Keys::kStatsPlayer1,
+					  Keys::kStatsPlayer2,
+					  Keys::kStatsPlayer3,
+					  Keys::kStatsPlayer4,
+					  Keys::kStatsPlayer5,
+					  Keys::kStatsPlayer6,
+					  Keys::kStatsPlayer7,
+					  Keys::kStatsPlayer8}) {
 	init();
 }
 
@@ -60,26 +87,22 @@ void ImageCatalog::init()  {
 	insert(Keys::kSelectEditorSetPortSpace, "fsel_editor_set_port_space.png");
 	insert(Keys::kSelectEditorUnsetPortSpace, "fsel_editor_unset_port_space.png");
 	insert(Keys::kSelectEditorSetResources, "fsel_editor_set_resources.png");
-	insert(Keys::kSelectEditorSetStartingPosMin, "fsel_editor_set_player_01_pos.png");
-	insert(Keys::kSelectEditorSetStartingPos1, "fsel_editor_set_player_01_pos.png");
-	insert(Keys::kSelectEditorSetStartingPos2, "fsel_editor_set_player_02_pos.png");
-	insert(Keys::kSelectEditorSetStartingPos3, "fsel_editor_set_player_03_pos.png");
-	insert(Keys::kSelectEditorSetStartingPos4, "fsel_editor_set_player_04_pos.png");
-	insert(Keys::kSelectEditorSetStartingPos5, "fsel_editor_set_player_05_pos.png");
-	insert(Keys::kSelectEditorSetStartingPos6, "fsel_editor_set_player_06_pos.png");
-	insert(Keys::kSelectEditorSetStartingPos7, "fsel_editor_set_player_07_pos.png");
-	insert(Keys::kSelectEditorSetStartingPos8, "fsel_editor_set_player_08_pos.png");
-	insert(Keys::kSelectEditorSetStartingPosMax, "fsel_editor_set_player_08_pos.png");
-	insert(Keys::kEditorPlayerStartingPosMin, "editor_player_01_starting_pos.png");
-	insert(Keys::kEditorPlayerStartingPos1, "editor_player_01_starting_pos.png");
-	insert(Keys::kEditorPlayerStartingPos2, "editor_player_02_starting_pos.png");
-	insert(Keys::kEditorPlayerStartingPos3, "editor_player_03_starting_pos.png");
-	insert(Keys::kEditorPlayerStartingPos4, "editor_player_04_starting_pos.png");
-	insert(Keys::kEditorPlayerStartingPos5, "editor_player_05_starting_pos.png");
-	insert(Keys::kEditorPlayerStartingPos6, "editor_player_06_starting_pos.png");
-	insert(Keys::kEditorPlayerStartingPos7, "editor_player_07_starting_pos.png");
-	insert(Keys::kEditorPlayerStartingPos8, "editor_player_08_starting_pos.png");
-	insert(Keys::kEditorPlayerStartingPosMax, "editor_player_08_starting_pos.png");
+	insert(Keys::kSelectEditorSetStartingPos1, "players/fsel_editor_set_player_01_pos.png");
+	insert(Keys::kSelectEditorSetStartingPos2, "players/fsel_editor_set_player_02_pos.png");
+	insert(Keys::kSelectEditorSetStartingPos3, "players/fsel_editor_set_player_03_pos.png");
+	insert(Keys::kSelectEditorSetStartingPos4, "players/fsel_editor_set_player_04_pos.png");
+	insert(Keys::kSelectEditorSetStartingPos5, "players/fsel_editor_set_player_05_pos.png");
+	insert(Keys::kSelectEditorSetStartingPos6, "players/fsel_editor_set_player_06_pos.png");
+	insert(Keys::kSelectEditorSetStartingPos7, "players/fsel_editor_set_player_07_pos.png");
+	insert(Keys::kSelectEditorSetStartingPos8, "players/fsel_editor_set_player_08_pos.png");
+	insert(Keys::kEditorPlayerStartingPos1, "players/editor_player_01_starting_pos.png");
+	insert(Keys::kEditorPlayerStartingPos2, "players/editor_player_02_starting_pos.png");
+	insert(Keys::kEditorPlayerStartingPos3, "players/editor_player_03_starting_pos.png");
+	insert(Keys::kEditorPlayerStartingPos4, "players/editor_player_04_starting_pos.png");
+	insert(Keys::kEditorPlayerStartingPos5, "players/editor_player_05_starting_pos.png");
+	insert(Keys::kEditorPlayerStartingPos6, "players/editor_player_06_starting_pos.png");
+	insert(Keys::kEditorPlayerStartingPos7, "players/editor_player_07_starting_pos.png");
+	insert(Keys::kEditorPlayerStartingPos8, "players/editor_player_08_starting_pos.png");
 	insert(Keys::kFilesDirectory, "ls_dir.png");
 	insert(Keys::kFilesWLMap, "ls_wlmap.png");
 	insert(Keys::kFilesS2Map, "ls_s2map.png");
@@ -89,8 +112,14 @@ void ImageCatalog::init()  {
 	insert(Keys::kScrollbarLeft, "scrollbar_left.png");
 	insert(Keys::kScrollbarRight, "scrollbar_right.png");
 	insert(Keys::kScrollbarBackground, "scrollbar_background.png");
-
-
+	insert(Keys::kStatsPlayer1, "players/genstats_enable_plr_01.png");
+	insert(Keys::kStatsPlayer2, "players/genstats_enable_plr_02.png");
+	insert(Keys::kStatsPlayer3, "players/genstats_enable_plr_03.png");
+	insert(Keys::kStatsPlayer4, "players/genstats_enable_plr_04.png");
+	insert(Keys::kStatsPlayer5, "players/genstats_enable_plr_05.png");
+	insert(Keys::kStatsPlayer6, "players/genstats_enable_plr_06.png");
+	insert(Keys::kStatsPlayer7, "players/genstats_enable_plr_07.png");
+	insert(Keys::kStatsPlayer8, "players/genstats_enable_plr_08.png");
 }
 
 void ImageCatalog::insert(Keys key, const std::string& filename) {
@@ -106,4 +135,22 @@ const std::string& ImageCatalog::filepath(Keys key) const {
 
 bool ImageCatalog::has_key(Keys key) const {
 	return entries_.count(key) == 1;
+}
+
+ImageCatalog::Keys ImageCatalog::player_position_small(int player_number) {
+	assert(0 < player_number);
+	assert(player_number <= static_cast<int>(player_positions_small_.size()));
+	return player_positions_small_.at(player_number - 1);
+}
+
+ImageCatalog::Keys ImageCatalog::player_position_big(int player_number) {
+	assert(0 < player_number && player_number);
+	assert(player_number <= static_cast<int>(player_positions_big_.size()));
+	return player_positions_big_.at(player_number - 1);
+}
+
+ImageCatalog::Keys ImageCatalog::player_stats(int player_number) {
+	assert(0 < player_number);
+	assert(player_number <= static_cast<int>(player_stats_.size()));
+	return player_stats_.at(player_number - 1);
 }

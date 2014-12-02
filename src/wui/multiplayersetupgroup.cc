@@ -115,25 +115,24 @@ struct MultiPlayerClientGroup : public UI::Box {
 		} else {
 			name->set_text(us.name);
 			if (m_save != us.position) {
-				std::string pic;
+				const Image* pic;
 				std::string temp_tooltip;
 				if (us.position < UserSettings::highest_playernum()) {
-					pic = (boost::format("data/pics/genstats_enable_plr_0%u.png")
-							  % static_cast<unsigned int>(us.position + 1)).str();
+					pic = g_gr->cataloged_image(g_gr->image_catalog().player_stats(us.position + 1));
 					temp_tooltip = (boost::format(_("Player %u"))
 										 % static_cast<unsigned int>(us.position + 1)).str();
 				} else {
-					pic = "data/pics/menu_tab_watch.png";
+					pic = g_gr->images().get("data/pics/menu_tab_watch.png");
 					temp_tooltip = _("Spectator");
 				}
 
 				// Either Button if changeable OR text if not
 				if (m_id == s->settings().usernum) {
-					type->set_pic(g_gr->images().get(pic));
+					type->set_pic(pic);
 					type->set_tooltip(temp_tooltip);
 					type->set_visible(true);
 				} else {
-					type_icon->set_icon(g_gr->images().get(pic));
+					type_icon->set_icon(pic);
 					type_icon->set_tooltip(temp_tooltip);
 					type_icon->set_visible(true);
 				}
@@ -173,11 +172,10 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	{
 		set_size(w, h);
 
-		const std::string pic = (boost::format("data/pics/fsel_editor_set_player_0%i_pos.png")
-										 % static_cast<unsigned int>(id + 1)).str();
-		player =
-			new UI::Icon(this, 0, 0, h, h, g_gr->images().get(pic));
+		const Image* position_icon = g_gr->cataloged_image(g_gr->image_catalog().player_position_small(id + 1));
+		player = new UI::Icon(this, 0, 0, h, h, position_icon);
 		add(player, UI::Box::AlignCenter);
+
 		type = new UI::Button
 			(this, "player_type",
 			 0, 0, h, h,
@@ -287,10 +285,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			type ->set_tooltip(_("Shared in"));
 			type ->set_pic(g_gr->images().get("data/pics/shared_in.png"));
 
-			const std::string pic = (boost::format("data/pics/fsel_editor_set_player_0%u_pos.png")
-											 % static_cast<unsigned int>(player_setting.shared_in)).str();
-
-			tribe->set_pic(g_gr->images().get(pic));
+			const Image* position_icon = g_gr->cataloged_image
+												  (g_gr->image_catalog().player_position_small(player_setting.shared_in));
+			tribe->set_pic(position_icon);
 			tribe->set_tooltip((boost::format(_("Player %u"))
 									  % static_cast<unsigned int>(player_setting.shared_in)).str());
 

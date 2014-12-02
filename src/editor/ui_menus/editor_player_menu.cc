@@ -186,10 +186,8 @@ void EditorPlayerMenu::update() {
 			m_plr_set_pos_buts[p - 1]->sigclicked.connect
 				(boost::bind(&EditorPlayerMenu::set_starting_pos_clicked, boost::ref(*this), p));
 		}
-		const std::string text = (boost::format("data/pics/fsel_editor_set_player_%d%d_pos.png")
-										  % (p / 10)
-										  % (p % 10)).str();
-		m_plr_set_pos_buts[p - 1]->set_pic(g_gr->images().get(text));
+		ImageCatalog::Keys key = g_gr->image_catalog().player_position_small(p);
+		m_plr_set_pos_buts[p - 1]->set_pic(g_gr->cataloged_image(key));
 		posy += size + spacing;
 	}
 	set_inner_size(get_inner_w(), posy + spacing);
@@ -227,10 +225,8 @@ void EditorPlayerMenu::clicked_remove_last_player() {
 	if (!eia().is_player_tribe_referenced(old_nr_players)) {
 		if (const Widelands::Coords sp = map.get_starting_pos(old_nr_players)) {
 			//  Remove starting position marker.
-			const std::string picsname = (boost::format("data/pics/editor_player_%d%d_starting_pos.png")
-								  % (old_nr_players / 10)
-								  % (old_nr_players % 10)).str();
-			map.overlay_manager().remove_overlay(sp, g_gr->images().get(picsname));
+			const Image* pic = g_gr->cataloged_image(g_gr->image_catalog().player_position_big(old_nr_players));
+			map.overlay_manager().remove_overlay(sp, pic);
 		}
 	}
 	map.set_nrplayers(nr_players);
@@ -423,12 +419,8 @@ void EditorPlayerMenu::make_infrastructure_clicked(uint8_t n) {
 
 		// Remove the player overlay from this starting pos.
 		// A HQ is overlay enough
-		std::string picsname = "data/pics/editor_player_";
-		picsname += static_cast<char>((n / 10) + 0x30);
-		picsname += static_cast<char>((n % 10) + 0x30);
-		picsname += "_starting_pos.png";
-		overlay_manager.remove_overlay
-			(start_pos, g_gr->images().get(picsname));
+		const Image* pic = g_gr->cataloged_image(g_gr->image_catalog().player_position_big(n));
+		overlay_manager.remove_overlay(start_pos, pic);
 	}
 
 	parent.select_tool(parent.tools.make_infrastructure, EditorTool::First);

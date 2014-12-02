@@ -19,8 +19,6 @@
 
 #include "editor/tools/editor_set_starting_pos_tool.h"
 
-#include <boost/format.hpp>
-
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_tool.h"
 #include "graphic/graphic.h"
@@ -61,7 +59,7 @@ EditorSetStartingPosTool::EditorSetStartingPosTool()
 	: EditorTool(*this, *this, false), m_current_sel_pic(ImageCatalog::Keys::kUnknownImage)
 {
 	m_current_player = 0;
-	fsel_picsname = ImageCatalog::Keys::kSelectEditorSetStartingPosMin;
+	fsel_picsname = ImageCatalog::Keys::kSelectEditorSetStartingPos1;
 }
 
 int32_t EditorSetStartingPosTool::handle_click_impl(Widelands::Map& map,
@@ -84,47 +82,7 @@ int32_t EditorSetStartingPosTool::handle_click_impl(Widelands::Map& map,
 
 		Widelands::Coords const old_sp = map.get_starting_pos(m_current_player);
 
-		ImageCatalog::Keys key = ImageCatalog::Keys::kEditorPlayerStartingPosMin;
-		switch(m_current_player) {
-			case 1 : {
-				key = ImageCatalog::Keys::kEditorPlayerStartingPos1;
-				break;
-			}
-			case 2 : {
-				key = ImageCatalog::Keys::kEditorPlayerStartingPos2;
-				break;
-			}
-			case 3 : {
-				key = ImageCatalog::Keys::kEditorPlayerStartingPos3;
-				break;
-			}
-			case 4 : {
-				key = ImageCatalog::Keys::kEditorPlayerStartingPos4;
-				break;
-			}
-			case 5 : {
-				key = ImageCatalog::Keys::kEditorPlayerStartingPos5;
-				break;
-			}
-			case 6 : {
-				key = ImageCatalog::Keys::kEditorPlayerStartingPos6;
-				break;
-			}
-			case 7 : {
-				key = ImageCatalog::Keys::kEditorPlayerStartingPos7;
-				break;
-			}
-			case 8 : {
-				key = ImageCatalog::Keys::kEditorPlayerStartingPos8;
-				break;
-			}
-			default: {
-				log("Invalid player number: %d\n", m_current_player);
-				assert(false);
-			}
-		}
-
-		const Image* pic = g_gr->cataloged_image(key);
+		const Image* pic = g_gr->cataloged_image(g_gr->image_catalog().player_position_big(m_current_player));
 
 		//  check if field is valid
 		if (editor_tool_set_starting_pos_callback(map.get_fcoords(center.node), map)) {
@@ -153,46 +111,6 @@ Widelands::PlayerNumber EditorSetStartingPosTool::get_current_player
 
 void EditorSetStartingPosTool::set_current_player(int32_t const i) {
 	m_current_player = i;
-	ImageCatalog::Keys key = ImageCatalog::Keys::kSelectEditorSetStartingPosMin;
-	switch(m_current_player) {
-		case 1 : {
-			key = ImageCatalog::Keys::kSelectEditorSetStartingPos1;
-			break;
-		}
-		case 2 : {
-			key = ImageCatalog::Keys::kSelectEditorSetStartingPos2;
-			break;
-		}
-		case 3 : {
-			key = ImageCatalog::Keys::kSelectEditorSetStartingPos3;
-			break;
-		}
-		case 4 : {
-			key = ImageCatalog::Keys::kSelectEditorSetStartingPos4;
-			break;
-		}
-		case 5 : {
-			key = ImageCatalog::Keys::kSelectEditorSetStartingPos5;
-			break;
-		}
-		case 6 : {
-			key = ImageCatalog::Keys::kSelectEditorSetStartingPos6;
-			break;
-		}
-		case 7 : {
-			key = ImageCatalog::Keys::kSelectEditorSetStartingPos7;
-			break;
-		}
-		case 8 : {
-			key = ImageCatalog::Keys::kSelectEditorSetStartingPos8;
-			break;
-		}
-		default: {
-			log("Invalid player number: %d\n", m_current_player);
-			assert(false);
-		}
-	}
-
-	fsel_picsname = key;
+	fsel_picsname = g_gr->image_catalog().player_position_small(m_current_player);
 	m_current_sel_pic = fsel_picsname;
 }

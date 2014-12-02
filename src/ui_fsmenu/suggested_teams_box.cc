@@ -22,8 +22,6 @@
 #include <set>
 #include <string>
 
-#include <boost/format.hpp>
-
 #include "graphic/graphic.h"
 
 namespace UI {
@@ -115,11 +113,8 @@ void SuggestedTeamsBox::show(const std::vector<Widelands::Map::SuggestedTeamLine
 
 				for (uint16_t player : team) {
 					assert(player < MAX_PLAYERS);
-					const std::string player_filename =
-							(boost::format("data/pics/fsel_editor_set_player_0%i_pos.png")
-							 % (++player)).str().c_str();
-					player_icon = new UI::Icon(m_lineup_box, 0, 0, 20, 20,
-																	 g_gr->images().get(player_filename));
+					const Image* position_icon = g_gr->cataloged_image(g_gr->image_catalog().player_position_small(++player));
+					player_icon = new UI::Icon(m_lineup_box, 0, 0, 20, 20, position_icon);
 					player_icon->set_visible(true);
 					player_icon->set_no_frame();
 					m_lineup_box->add(player_icon, UI::Box::AlignLeft);

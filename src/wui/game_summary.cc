@@ -144,10 +144,7 @@ void GameSummaryScreen::fill_data()
 		UI::Table<uintptr_t const>::EntryRecord & te
 			= m_players_table->add(i);
 		// Player name & pic
-		std::string pic_path =
-			(boost::format("data/pics/genstats_enable_plr_0%|1$u|.png")
-			 % static_cast<unsigned int>(pes.player)).str();
-		const Image* pic = g_gr->images().get(pic_path);
+		const Image* pic = g_gr->cataloged_image(g_gr->image_catalog().player_stats(pes.player));
 		te.set_picture(0, pic, p->get_name());
 		// Team
 		std::string team_str =
