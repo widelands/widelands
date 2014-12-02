@@ -39,12 +39,12 @@ FullscreenMenuEditor::FullscreenMenuEditor() :
 	new_map
 		(this, "new_map",
 		 m_butx, get_h() * 6 / 25, m_butw, m_buth,
-		 g_gr->images().get("data/pics/but1.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
 		 _("New Map"), std::string(), true, false),
 	load_map
 		(this, "load_map",
 		 m_butx, get_h() * 61 / 200, m_butw, m_buth,
-		 g_gr->images().get("data/pics/but1.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
 		 _("Load Map"), std::string(), true, false),
 	back
 		(this, "back",

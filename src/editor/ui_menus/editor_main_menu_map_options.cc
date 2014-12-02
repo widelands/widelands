@@ -63,7 +63,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent)
 			(this,
 			 posx + ta->get_w() + spacing, posy,
 			 get_inner_w() - (posx + ta->get_w() + spacing) - spacing, 20,
-			 g_gr->images().get("data/pics/but1.png"));
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton1));
 	m_name->changed.connect(boost::bind(&MainMenuMapOptions::changed, this, 0));
 	posy += height + spacing;
 	ta = new UI::Textarea(this, posx, posy - 2, _("Size:"));
@@ -81,7 +81,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent)
 			(this,
 			 posx + ta->get_w() + spacing, posy,
 			 get_inner_w() - (posx + ta->get_w() + spacing) - spacing, 20,
-			 g_gr->images().get("data/pics/but1.png"));
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton1));
 	m_author->changed.connect(boost::bind(&MainMenuMapOptions::changed, this, 1));
 	posy += height + spacing;
 	m_descr =

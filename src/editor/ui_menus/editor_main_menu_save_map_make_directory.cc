@@ -41,7 +41,7 @@ UI::Window(parent, "make_directory", 0, 0, 230, 120, _("Make Directory"))
 	m_edit =
 		new UI::EditBox
 			(this, spacing, posy, get_inner_w() - 2 * spacing, 20,
-			 g_gr->images().get("data/pics/but1.png"));
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton1));
 	m_edit->set_text(dirname);
 	m_dirname = dirname;
 	m_edit->changed.connect(boost::bind(&MainMenuSaveMapMakeDirectory::edit_changed, this));
@@ -62,7 +62,7 @@ UI::Window(parent, "make_directory", 0, 0, 230, 120, _("Make Directory"))
 	UI::Button * cancelbtn = new UI::Button
 		(this, "cancel",
 		 get_inner_w() / 2 + spacing, posy, 80, 20,
-		 g_gr->images().get("data/pics/but1.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
 		 _("Cancel"));
 	cancelbtn->sigclicked.connect
 		(boost::bind(&MainMenuSaveMapMakeDirectory::end_modal, boost::ref(*this), 0));

@@ -100,7 +100,7 @@ WLMessageBox::WLMessageBox
 			(this, "no",
 			 (get_inner_w() / 2 - 120) / 2 + get_inner_w() / 2, get_inner_h() - 30,
 			 120, 20,
-			 g_gr->images().get("data/pics/but1.png"),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
 			 _("No"));
 		nobtn->sigclicked.connect(boost::bind(&WLMessageBox::pressed_no, boost::ref(*this)));
 	}

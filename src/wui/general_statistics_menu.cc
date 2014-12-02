@@ -151,7 +151,7 @@ m_selected_information(0)
 			*new UI::Button
 				(hbox1, "playerbutton",
 				 0, 0, 25, 25,
-				 g_gr->images().get("data/pics/but4.png"),
+				 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
 				 g_gr->images().get(pic),
 				 player->get_name().c_str());
 		cb.sigclicked.connect
@@ -277,7 +277,7 @@ m_selected_information(0)
 	m_box.add
 		(new WuiPlotAreaSlider
 			(&m_box, m_plot, 0, 0, 100, 45,
-			 g_gr->images().get("data/pics/but1.png"))
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton1))
 		, UI::Box::AlignTop
 		, true);
 

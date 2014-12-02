@@ -64,7 +64,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 			type = new UI::Button
 				(this, "client_type",
 				 0, 0, h, h,
-				 g_gr->images().get("data/pics/but1.png"),
+				 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
 				 std::string(), std::string(), true, false);
 			type->sigclicked.connect
 				(boost::bind
@@ -181,7 +181,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		type = new UI::Button
 			(this, "player_type",
 			 0, 0, h, h,
-			 g_gr->images().get("data/pics/but1.png"),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
 			 std::string(), std::string(), true, false);
 		type->sigclicked.connect
 			(boost::bind
@@ -191,7 +191,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		tribe = new UI::Button
 			(this, "player_tribe",
 			 0, 0, h, h,
-			 g_gr->images().get("data/pics/but1.png"),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
 			 std::string(), std::string(), true, false);
 		tribe->sigclicked.connect
 			(boost::bind
@@ -202,7 +202,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		init = new UI::Button
 			(this, "player_init",
 			 0, 0, w - 4 * h, h,
-			 g_gr->images().get("data/pics/but1.png"),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
 			 std::string(), std::string(), true, false);
 		init->sigclicked.connect
 			(boost::bind
@@ -212,7 +212,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		team = new UI::Button
 			(this, "player_team",
 			 0, 0, h, h,
-			 g_gr->images().get("data/pics/but1.png"),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
 			 std::string(), std::string(), true, false);
 		team->sigclicked.connect
 			(boost::bind

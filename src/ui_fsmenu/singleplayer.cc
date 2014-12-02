@@ -43,17 +43,17 @@ FullscreenMenuBase("ui_fsmenu.jpg"),
 	new_game
 		(this, "new_game",
 		 m_butx, get_h() * 6 / 25, m_butw, m_buth,
-		 g_gr->images().get("data/pics/but1.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
 		 _("New Game"), std::string(), true, false),
 	campaign
 		(this, "campaigns",
 		 m_butx, get_h() * 61 / 200, m_butw, m_buth,
-		 g_gr->images().get("data/pics/but1.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
 		 _("Campaigns"), std::string(), true, false),
 	load_game
 		(this, "load_game",
 		 m_butx, get_h() * 87 / 200, m_butw, m_buth,
-		 g_gr->images().get("data/pics/but1.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
 		 _("Load Game"), std::string(), true, false),
 	back
 		(this, "back",

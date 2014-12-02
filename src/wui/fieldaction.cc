@@ -286,7 +286,7 @@ FieldActionWindow::FieldActionWindow
 	m_map(&ib->egbase().map()),
 	m_overlay_manager(*m_map->get_overlay_manager()),
 	m_node(ib->get_sel_pos().node, &(*m_map)[ib->get_sel_pos().node]),
-	m_tabpanel(this, 0, 0, g_gr->images().get("data/pics/but1.png")),
+	m_tabpanel(this, 0, 0, g_gr->cataloged_image(ImageCatalog::Keys::kButton1)),
 	m_fastclick(true),
 	m_best_tab(0),
 	m_workarea_preview_job_id(0),
@@ -626,7 +626,7 @@ UI::Button & FieldActionWindow::add_button
 		*new UI::Button
 			(box, name,
 			 0, 0, 34, 34,
-			 g_gr->images().get("data/pics/but2.png"),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton2),
 			 g_gr->images().get(picname),
 			 tooltip_text);
 	button.sigclicked.connect(boost::bind(fn, this));

@@ -109,7 +109,7 @@ UI::Button & AttackBox::add_button
 		new UI::Button
 			(&parent, text,
 			 8, 8, 26, 26,
-			 g_gr->images().get("data/pics/but2.png"),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton2),
 			 text,
 			 tooltip_text);
 	button->sigclicked.connect(boost::bind(fn, boost::ref(*this)));
@@ -172,7 +172,7 @@ void AttackBox::init() {
 			(columnbox,
 			 100, 10,
 			 0, max_attackers, max_attackers > 0 ? 1 : 0,
-			 "data/pics/but2.png",
+			 "data/pics/but2.png", // NOCOM use catalog key
 			 _("Number of soldiers"));
 
 	m_slider_soldiers->changed.connect(boost::bind(&AttackBox::update_attack, this));

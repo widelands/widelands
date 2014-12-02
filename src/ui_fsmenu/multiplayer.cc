@@ -44,12 +44,12 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer() :
 	metaserver
 		(this, "metaserver",
 		 m_butx, get_h() * 6 / 25, m_butw, m_buth,
-		 g_gr->images().get("data/pics/but1.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
 		 _("Internet game"), std::string(), true, false),
 	lan
 		(this, "lan",
 		 m_butx, get_h() * 61 / 200, m_butw, m_buth,
-		 g_gr->images().get("data/pics/but1.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
 		 _("LAN / Direct IP"), std::string(), true, false),
 	back
 		(this, "back",
@@ -79,7 +79,7 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer() :
 			new UI::Button
 				(this, "login_dialog",
 				 m_butx + m_butw + m_buth / 4, get_h() * 6 / 25, m_buth, m_buth,
-				 g_gr->images().get("data/pics/but1.png"),
+				 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
 				 g_gr->images().get("data/pics/continue.png"),
 				 _("Show login dialog"), true, false);
 		showloginbox->sigclicked.connect

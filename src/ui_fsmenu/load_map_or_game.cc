@@ -62,7 +62,7 @@ FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame(bool sort_descending) :
 		m_ok
 		  (this, "ok",
 			get_w() - m_right_column_margin - m_butw, m_buty, m_butw, m_buth,
-			g_gr->images().get("data/pics/but2.png"),
+			g_gr->cataloged_image(ImageCatalog::Keys::kButton2),
 			_("OK"), std::string(), false, false),
 		m_table(this, m_tablex, m_tabley, m_tablew, m_tableh, sort_descending)
 	{}

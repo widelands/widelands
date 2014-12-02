@@ -103,7 +103,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu
 		 get_inner_w() - 2 * width - hspacing(),
 		 m_set_label.get_y(),
 		 width, height,
-		 g_gr->images().get("data/pics/but1.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
 		 g_gr->images().get("data/pics/scrollbar_down.png"),
 		 std::string(),
 		 0 < noise_tool.set_tool().get_interval().min),
@@ -112,7 +112,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu
 		 get_inner_w() - width - hspacing(),
 		 m_set_label.get_y(),
 		 width, height,
-		 g_gr->images().get("data/pics/but1.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
 		 g_gr->images().get("data/pics/scrollbar_up.png"),
 		 std::string(),
 		 noise_tool.set_tool().get_interval().max < MAX_FIELD_HEIGHT)

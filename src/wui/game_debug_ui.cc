@@ -154,7 +154,7 @@ MapObjectDebugWindow::MapObjectDebugWindow
 	m_object          (&obj),
 	m_tabs
 		(this, 0, 0,
-		 g_gr->images().get("data/pics/but1.png"))
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1))
 {
 	m_serial = obj.serial();
 	set_title(std::to_string(m_serial));

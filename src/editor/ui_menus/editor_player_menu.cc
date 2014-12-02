@@ -50,14 +50,14 @@ EditorPlayerMenu::EditorPlayerMenu
 	m_add_player
 		(this, "add_player",
 		 get_inner_w() - 5 - 20, 5, 20, 20,
-		 g_gr->images().get("data/pics/but1.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
 		 g_gr->images().get("data/pics/scrollbar_up.png"),
 		 _("Add player"),
 		 parent.egbase().map().get_nrplayers() < MAX_PLAYERS),
 	m_remove_last_player
 		(this, "remove_last_player",
 		 5, 5, 20, 20,
-		 g_gr->images().get("data/pics/but1.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
 		 g_gr->images().get("data/pics/scrollbar_down.png"),
 		 _("Remove last player"),
 		 1 < parent.egbase().map().get_nrplayers())

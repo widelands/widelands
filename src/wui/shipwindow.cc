@@ -267,7 +267,7 @@ UI::Button * ShipWindow::make_button
 	UI::Button * btn =
 		new UI::Button
 			(parent, name, 0, 0, 34, 34,
-			 g_gr->images().get("data/pics/but4.png"),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
 			 g_gr->images().get(picname),
 			 title);
 	btn->sigclicked.connect(callback);

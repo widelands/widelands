@@ -80,12 +80,12 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	joingame
 		(this, "join_game",
 		 get_w() * 17 / 25, get_h() * 55 / 100, m_butw, m_buth,
-		 g_gr->images().get("data/pics/but1.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
 		 _("Join this game"), std::string(), false, false),
 	hostgame
 		(this, "host_game",
 		 get_w() * 17 / 25, get_h() * 81 / 100, m_butw, m_buth,
-		 g_gr->images().get("data/pics/but1.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
 		 _("Open a new game"), std::string(), true, false),
 	back
 		(this, "back",
@@ -96,7 +96,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 // Edit boxes
 	servername
 		(this, get_w() * 17 / 25, get_h() * 68 / 100, m_butw, m_buth,
-		 g_gr->images().get("data/pics/but2.png")),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton2)),
 
 // List
 	clientsonline

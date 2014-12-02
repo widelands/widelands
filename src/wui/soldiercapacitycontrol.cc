@@ -62,11 +62,11 @@ m_igb(igb),
 m_building(building),
 m_decrease
 	(this, "decrease", 0, 0, 32, 32,
-	 g_gr->images().get("data/pics/but4.png"),
+	 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
 	 g_gr->images().get("data/pics/menu_down_train.png"), _("Decrease capacity")),
 m_increase
 	(this, "increase", 0, 0, 32, 32,
-	 g_gr->images().get("data/pics/but4.png"),
+	 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
 	 g_gr->images().get("data/pics/menu_up_train.png"), _("Increase capacity")),
 m_value(this, "199", UI::Align_Center)
 {

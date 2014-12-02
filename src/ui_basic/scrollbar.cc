@@ -61,7 +61,7 @@ Scrollbar::Scrollbar
 		(g_gr->images().get(horiz ? "data/pics/scrollbar_right.png" : "data/pics/scrollbar_down.png")),
 	m_pic_background
 		(g_gr->images().get("data/pics/scrollbar_background.png")),
-	m_pic_buttons   (g_gr->images().get("data/pics/but3.png"))
+	m_pic_buttons   (g_gr->cataloged_image(ImageCatalog::Keys::kButton3))
 {
 	set_thinks(true);
 }

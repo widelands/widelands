@@ -127,7 +127,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 		new UI::Button
 			(this, "previous_owned",
 			 JUMP_PREV_BUTTON_X, OWNED_Y, 24, 24,
-			 g_gr->images().get("data/pics/but4.png"),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
 			 g_gr->images().get("data/pics/scrollbar_left.png"),
 			 _("Show previous"),
 			 false);
@@ -138,7 +138,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 		new UI::Button
 			(this, "next_owned",
 			 JUMP_NEXT_BUTTON_X, OWNED_Y, 24, 24,
-			 g_gr->images().get("data/pics/but4.png"),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
 			 g_gr->images().get("data/pics/scrollbar_right.png"),
 			 _("Show next"),
 			 false);
@@ -149,7 +149,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 		new UI::Button
 			(this, "previous_constructed",
 			 JUMP_PREV_BUTTON_X, IN_BUILD_Y, 24, 24,
-			 g_gr->images().get("data/pics/but4.png"),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
 			 g_gr->images().get("data/pics/scrollbar_left.png"),
 			 _("Show previous"),
 			 false);
@@ -160,7 +160,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 		new UI::Button
 			(this, "next_constructed",
 			 JUMP_NEXT_BUTTON_X, IN_BUILD_Y, 24, 24,
-			 g_gr->images().get("data/pics/but4.png"),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
 			 g_gr->images().get("data/pics/scrollbar_right.png"),
 			 _("Show next"),
 			 false);
@@ -171,7 +171,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 		new UI::Button
 			(this, "previous_unproductive",
 			 JUMP_PREV_BUTTON_X, UNPRODUCTIVE_Y, 24, 24,
-			 g_gr->images().get("data/pics/but4.png"),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
 			 g_gr->images().get("data/pics/scrollbar_left.png"),
 			 _("Show previous"),
 			 false);
@@ -182,7 +182,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 		new UI::Button
 			(this, "next_unproductive",
 			 JUMP_NEXT_BUTTON_X, UNPRODUCTIVE_Y, 24, 24,
-			 g_gr->images().get("data/pics/but4.png"),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
 			 g_gr->images().get("data/pics/scrollbar_right.png"),
 			 _("Show next"),
 			 false);

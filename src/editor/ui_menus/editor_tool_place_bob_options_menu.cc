@@ -44,7 +44,7 @@ EditorToolPlaceBobOptionsMenu::EditorToolPlaceBobOptionsMenu
 :
 EditorToolOptionsMenu(parent, registry, 100, 100, _("Animals")),
 
-m_tabpanel          (this, 0, 0, g_gr->images().get("data/pics/but1.png")),
+m_tabpanel          (this, 0, 0, g_gr->cataloged_image(ImageCatalog::Keys::kButton1)),
 m_pit               (pit),
 m_click_recursion_protect(false)
 {

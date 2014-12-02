@@ -58,12 +58,12 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN () :
 	joingame
 		(this, "join_game",
 		 get_w() * 16 / 25, get_h() * 5333 / 10000, m_butw, m_buth,
-		 g_gr->images().get("data/pics/but1.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
 		 _("Join this game"), std::string(), true, false),
 	hostgame
 		(this, "host_game",
 		 get_w() * 16 / 25, get_h() * 6083 / 10000, m_butw, m_buth,
-		 g_gr->images().get("data/pics/but1.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
 		 _("Host a new game"), std::string(), true, false),
 	back
 		(this, "back",
@@ -73,17 +73,17 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN () :
 	loadlasthost
 		(this, "load_previous_host",
 		 get_w() * 171 / 200, get_h() * 19 / 40, m_buth, m_buth,
-		 g_gr->images().get("data/pics/but1.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
 		 g_gr->images().get("data/pics/menu_load_game.png"),
 		 _("Load previous host"), true, false),
 
 // Edit boxes
 	playername
 		(this, get_w() * 16 / 25, get_h() * 3333 / 10000, m_butw,       m_buth,
-		 g_gr->images().get("data/pics/but2.png")),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton2)),
 	hostname
 		(this, get_w() * 16 / 25, get_h() * 19 / 40,  get_w() * 17 / 80, m_buth,
-		 g_gr->images().get("data/pics/but2.png")),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton2)),
 
 // List
 	opengames

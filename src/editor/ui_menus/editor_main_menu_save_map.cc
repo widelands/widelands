@@ -73,7 +73,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 			(this,
 			 posx, posy + get_inner_h() - spacing - offsy - 60 + 3,
 			 get_inner_w() / 2 - spacing, 20,
-			 g_gr->images().get("data/pics/but1.png"), UI::Align::Align_Left);
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton1), UI::Align::Align_Left);
 	m_editbox->set_text(parent.egbase().map().get_name());
 	m_editbox->changed.connect(boost::bind(&MainMenuSaveMap::edit_box_changed, this));
 
@@ -131,14 +131,14 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 		(this, "cancel",
 		 posx + get_inner_w() / 4 - spacing / 2, posy,
 		 get_inner_w() / 4 - 1.5 * spacing, 20,
-		 g_gr->images().get("data/pics/but1.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
 		 _("Cancel"));
 	cancelbtn->sigclicked.connect(boost::bind(&MainMenuSaveMap::die, boost::ref(*this)));
 
 	UI::Button * make_directorybtn = new UI::Button
 		(this, "make_directory",
 		 spacing, posy, 185, 20,
-		 g_gr->images().get("data/pics/but1.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
 		 _("Make Directory"));
 	make_directorybtn->sigclicked.connect
 		(boost::bind(&MainMenuSaveMap::clicked_make_directory, boost::ref(*this)));

@@ -162,7 +162,7 @@ m_parent(&parent)
 
 	UI::TabPanel * tabs =
 		 new UI::TabPanel
-			 (box, spacing, 0, g_gr->images().get("data/pics/but1.png"));
+			 (box, spacing, 0, g_gr->cataloged_image(ImageCatalog::Keys::kButton1));
 
 
 	m_plot_production =
@@ -256,7 +256,7 @@ m_parent(&parent)
 		(new WuiPlotGenericAreaSlider
 			(this, *m_plot_production, this,
 			0, 0, 100, 45,
-			g_gr->images().get("data/pics/but1.png")),
+			g_gr->cataloged_image(ImageCatalog::Keys::kButton1)),
 		 UI::Box::AlignLeft, true);
 
 }

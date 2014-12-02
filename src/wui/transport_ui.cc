@@ -50,7 +50,7 @@ struct EconomyOptionsWindow : public UI::UniqueWindow {
 		UI::UniqueWindow
 			(&parent, "economy_options", &economy.optionswindow_registry(), 0, 0,
 			 _("Economy options")),
-		m_tabpanel(this, 0, 0, g_gr->images().get("data/pics/but1.png"))
+		m_tabpanel(this, 0, 0, g_gr->cataloged_image(ImageCatalog::Keys::kButton1))
 	{
 		set_center_panel(&m_tabpanel);
 
@@ -135,7 +135,7 @@ private:
 	b = new UI::Button                                    \
 		 (buttons, #callback,                                       \
 		  0, 0, 34, 34,                                             \
-		  g_gr->images().get("data/pics/but4.png"),            \
+		  g_gr->cataloged_image(ImageCatalog::Keys::kButton4),            \
 		  text, tooltip, m_can_act);                                \
 	b->sigclicked.connect(boost::bind(&EconomyOptionsWarePanel::callback, this)); \
 	buttons->add(b, UI::Box::AlignCenter);
@@ -230,7 +230,7 @@ private:
 	b = new UI::Button                                      \
 		 (buttons, #callback,                                         \
 		  0, 0, 34, 34,                                               \
-		  g_gr->images().get("data/pics/but4.png"),              \
+		  g_gr->cataloged_image(ImageCatalog::Keys::kButton4),              \
 		  text, tooltip, m_can_act);                                  \
 	b->sigclicked.connect(boost::bind(&EconomyOptionsWorkerPanel::callback, this)); \
 	buttons->add(b, UI::Box::AlignCenter);

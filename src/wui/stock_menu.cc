@@ -42,7 +42,7 @@ m_player(plr)
 {
 	UI::TabPanel * tabs =
 		 new UI::TabPanel
-			 (this, 0, 0, g_gr->images().get("data/pics/but1.png"));
+			 (this, 0, 0, g_gr->cataloged_image(ImageCatalog::Keys::kButton1));
 	set_center_panel(tabs);
 
 	m_all_wares = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWARE, false);

@@ -154,7 +154,7 @@ ActionConfirm::ActionConfirm
 		new UI::Button
 			(this, "ok",
 			 6, 80, 80, 34,
-			 g_gr->images().get("data/pics/but4.png"),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
 			 g_gr->images().get("data/pics/menu_okay.png"));
 	okbtn->sigclicked.connect(boost::bind(&ActionConfirm::ok, this));
 
@@ -162,7 +162,7 @@ ActionConfirm::ActionConfirm
 		new UI::Button
 			(this, "abort",
 			 114, 80, 80, 34,
-			 g_gr->images().get("data/pics/but4.png"),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
 			 g_gr->images().get("data/pics/menu_abort.png"));
 	cancelbtn->sigclicked.connect(boost::bind(&ActionConfirm::die, this));
 
@@ -190,7 +190,7 @@ ActionConfirm::ActionConfirm
 		new UI::Button
 			(this, "ok",
 			 6, 80, 80, 34,
-			 g_gr->images().get("data/pics/but4.png"),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
 			 g_gr->images().get("data/pics/menu_okay.png"));
 	okbtn->sigclicked.connect(boost::bind(&ActionConfirm::ok, this));
 
@@ -198,7 +198,7 @@ ActionConfirm::ActionConfirm
 		new UI::Button
 			(this, "abort",
 			 114, 80, 80, 34,
-			 g_gr->images().get("data/pics/but4.png"),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
 			 g_gr->images().get("data/pics/menu_abort.png"));
 	cancelbtn->sigclicked.connect(boost::bind(&ActionConfirm::die, this));
 

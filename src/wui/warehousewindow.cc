@@ -128,7 +128,7 @@ WarehouseWaresPanel::WarehouseWaresPanel
 #define ADD_POLICY_BUTTON(policy, policyname, tooltip)                                           \
 		b = new UI::Button                                                             \
 			(buttons, #policy, 0, 0, 34, 34,                                                  \
-			 g_gr->images().get("data/pics/but4.png"),                                   \
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),                                   \
 			 g_gr->images().get("data/pics/stock_policy_button_" #policy ".png"),      \
 			 tooltip),                                                                        \
 		b->sigclicked.connect \

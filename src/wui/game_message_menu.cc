@@ -80,7 +80,7 @@ GameMessageMenu::GameMessageMenu
 		new UI::Button
 			(this, "archive_or_restore_selected_messages",
 			 295, 5, 25, 25,
-			 g_gr->images().get("data/pics/but2.png"),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton2),
 			 g_gr->images().get("data/pics/message_archive.png"),
 			 _("Archive selected messages"));
 	m_archivebtn->sigclicked.connect
@@ -90,7 +90,7 @@ GameMessageMenu::GameMessageMenu
 		new UI::Button
 			(this, "toggle_between_inbox_or_archive",
 			 325, 5, 190, 25,
-			 g_gr->images().get("data/pics/but2.png"),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton2),
 			 _("Show Archive"));
 	m_togglemodebtn->sigclicked.connect
 		(boost::bind(&GameMessageMenu::toggle_mode, this));
@@ -99,7 +99,7 @@ GameMessageMenu::GameMessageMenu
 		new UI::Button
 			(this, "center_main_mapview_on_location",
 			 550, 5, 25, 25,
-			 g_gr->images().get("data/pics/but2.png"),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton2),
 			 g_gr->images().get("data/pics/menu_goto.png"),
 			 _("center main mapview on location"),
 			 false);

@@ -36,47 +36,47 @@ FullscreenMenuMain::FullscreenMenuMain() :
 	playtutorial
 		(this, "play_tutorial",
 		 m_butx, get_h() * 42 / 200, m_butw, m_buth,
-		 g_gr->images().get("data/pics/but3.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton3),
 		 _("Play Tutorial"), std::string(), true, false),
 	singleplayer
 		(this, "single_player",
 		 m_butx, get_h() * 61 / 200, m_butw, m_buth,
-		 g_gr->images().get("data/pics/but3.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton3),
 		 _("Single Player"), std::string(), true, false),
 	multiplayer
 		(this, "multi_player",
 		 m_butx, get_h() * 37 / 100, m_butw, m_buth,
-		 g_gr->images().get("data/pics/but3.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton3),
 		 _("Multiplayer"), std::string(), true, false),
 	replay
 		(this, "replay",
 		 m_butx, get_h() * 87 / 200, m_butw, m_buth,
-		 g_gr->images().get("data/pics/but3.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton3),
 		 _("Watch Replay"), std::string(), true, false),
 	editor
 		(this, "editor",
 		 m_butx, get_h() * 100 / 200, m_butw, m_buth,
-		 g_gr->images().get("data/pics/but3.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton3),
 		 _("Editor"), std::string(), true, false),
 	options
 		(this, "options",
 		 m_butx, get_h() * 119 / 200, m_butw, m_buth,
-		 g_gr->images().get("data/pics/but3.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton3),
 		 _("Options"), std::string(), true, false),
 	readme
 		(this, "readme",
 		 m_butx, get_h() * 138 / 200, m_butw, m_buth,
-		 g_gr->images().get("data/pics/but3.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton3),
 		 _("View Readme"), std::string(), true, false),
 	license
 		(this, "license",
 		 m_butx, get_h() * 151 / 200, m_butw, m_buth,
-		 g_gr->images().get("data/pics/but3.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton3),
 		 _("License"), std::string(), true, false),
 	exit
 		(this, "exit",
 		 m_butx, get_h() * 178 / 200, m_butw, m_buth,
-		 g_gr->images().get("data/pics/but3.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton3),
 		 _("Exit Widelands"), std::string(), true, false),
 
 // Textlabels

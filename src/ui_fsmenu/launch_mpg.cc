@@ -84,7 +84,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn = new UI::Button
 			(this, "cancel",
 			 space + butw / 4, y + 3 * buth + 2 * space, butw / 2, buth,
-			 g_gr->images().get("data/pics/but1.png"),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
 			 _("Cancel"), _("Cancel selection"), true, false);
 		btn->sigclicked.connect
 			(boost::bind
@@ -126,13 +126,13 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 	m_change_map_or_save
 		(this, "change_map_or_save",
 		 m_right_column_x + m_butw - m_buth, get_h() * 3 / 20, m_buth, m_buth,
-		 g_gr->images().get("data/pics/but1.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
 		 g_gr->images().get("data/pics/menu_toggle_minimap.png"),
 		 _("Change map or saved game"), false, false),
 	m_ok
 		(this, "ok",
 		 m_right_column_x, get_h() * 12 / 20 - 2 * m_label_height, m_butw, m_buth,
-		 g_gr->images().get("data/pics/but2.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton2),
 		 _("Start game"), std::string(), false, false),
 	m_back
 		(this, "back",
@@ -142,12 +142,12 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 	m_wincondition
 		(this, "win_condition",
 		 m_right_column_x, get_h() * 11 / 20 - 2 * m_label_height, m_butw, m_buth,
-		 g_gr->images().get("data/pics/but1.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
 		 "", std::string(), false, false),
 	m_help_button
 		(this, "help",
 		 m_right_column_x + m_butw - m_buth, get_h() / 100, m_buth, m_buth,
-		 g_gr->images().get("data/pics/but1.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
 		 g_gr->images().get("data/pics/menu_help.png"),
 		 _("Show the help window"), true, false),
 
