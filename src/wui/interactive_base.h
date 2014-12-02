@@ -138,8 +138,10 @@ protected:
 	void draw_overlay(RenderTarget &) override;
 	bool handle_key(bool down, SDL_Keysym) override;
 
+	// Uses 'key' to fetch and set the sel_picture from the ImageCatalog.
+	void set_sel_picture(ImageCatalog::Keys key);
 	void unset_sel_picture();
-	void set_sel_picture(const char * const);
+
 	void adjust_toolbar_position() {
 		m_toolbar.set_pos
 			(Point((get_inner_w() - m_toolbar.get_w()) >> 1, get_inner_h() - 34));

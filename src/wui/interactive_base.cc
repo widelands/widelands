@@ -224,12 +224,12 @@ void InteractiveBase::set_sel_radius(const uint32_t n) {
 /*
  * Set/Unset sel picture
  */
-void InteractiveBase::set_sel_picture(const char * const file) {
-	m_sel.pic = g_gr->images().get(file);
+void InteractiveBase::set_sel_picture(ImageCatalog::Keys key) {
+	m_sel.pic = g_gr->cataloged_image(key);
 	set_sel_pos(get_sel_pos()); //  redraw
 }
 void InteractiveBase::unset_sel_picture() {
-	set_sel_picture("data/pics/fsel.png");
+	set_sel_picture(ImageCatalog::Keys::kSelect);
 }
 
 

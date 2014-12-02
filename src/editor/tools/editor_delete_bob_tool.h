@@ -40,8 +40,8 @@ struct EditorDeleteBobTool : public EditorTool {
 
 	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
 
-	char const * get_sel_impl() const override {
-		return "data/pics/fsel_editor_delete.png";
+	ImageCatalog::Keys get_sel_impl() const override {
+		return ImageCatalog::Keys::kSelectEditorDelete;
 	}
 };
 

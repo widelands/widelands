@@ -42,15 +42,59 @@ void ImageCatalog::init()  {
 	insert(Keys::kButton2, "but2.png");
 	insert(Keys::kButton3, "but3.png");
 	insert(Keys::kButton4, "but4.png");
+	insert(Keys::kButtonMenuOK, "menu_okay.png");
+	insert(Keys::kButtonMenuAbort, "menu_abort.png");
+	insert(Keys::kLoadscreenEditor, "editor.jpg");
+	insert(Keys::kSelect, "fsel.png");
+	insert(Keys::kSelectEditorDelete, "fsel_editor_delete.png");
+	insert(Keys::kSelectEditorHeightDecrease, "fsel_editor_decrease_height.png");
+	insert(Keys::kSelectEditorHeightIncrease, "fsel_editor_increase_height.png");
+	insert(Keys::kSelectEditorResourcesDecrease, "fsel_editor_decrease_resources.png");
+	insert(Keys::kSelectEditorResourcesIncrease, "fsel_editor_increase_resources.png");
+	insert(Keys::kSelectEditorResourcesDelete, "fsel_editor_delete.png");
+	insert(Keys::kSelectEditorInfo, "fsel_editor_info.png");
+	insert(Keys::kSelectEditorNoiseHeight, "fsel_editor_noise_height.png");
+	insert(Keys::kSelectEditorPlaceBob, "fsel_editor_place_bob.png");
+	insert(Keys::kSelectEditorPlaceImmovable, "fsel_editor_place_immovable.png");
+	insert(Keys::kSelectEditorSetHeight, "fsel_editor_set_height.png");
+	insert(Keys::kSelectEditorSetPortSpace, "fsel_editor_set_port_space.png");
+	insert(Keys::kSelectEditorUnsetPortSpace, "fsel_editor_unset_port_space.png");
+	insert(Keys::kSelectEditorSetResources, "fsel_editor_set_resources.png");
+	insert(Keys::kSelectEditorSetStartingPosMin, "fsel_editor_set_player_01_pos.png");
+	insert(Keys::kSelectEditorSetStartingPos1, "fsel_editor_set_player_01_pos.png");
+	insert(Keys::kSelectEditorSetStartingPos2, "fsel_editor_set_player_02_pos.png");
+	insert(Keys::kSelectEditorSetStartingPos3, "fsel_editor_set_player_03_pos.png");
+	insert(Keys::kSelectEditorSetStartingPos4, "fsel_editor_set_player_04_pos.png");
+	insert(Keys::kSelectEditorSetStartingPos5, "fsel_editor_set_player_05_pos.png");
+	insert(Keys::kSelectEditorSetStartingPos6, "fsel_editor_set_player_06_pos.png");
+	insert(Keys::kSelectEditorSetStartingPos7, "fsel_editor_set_player_07_pos.png");
+	insert(Keys::kSelectEditorSetStartingPos8, "fsel_editor_set_player_08_pos.png");
+	insert(Keys::kSelectEditorSetStartingPosMax, "fsel_editor_set_player_08_pos.png");
+	insert(Keys::kEditorPlayerStartingPosMin, "editor_player_01_starting_pos.png");
+	insert(Keys::kEditorPlayerStartingPos1, "editor_player_01_starting_pos.png");
+	insert(Keys::kEditorPlayerStartingPos2, "editor_player_02_starting_pos.png");
+	insert(Keys::kEditorPlayerStartingPos3, "editor_player_03_starting_pos.png");
+	insert(Keys::kEditorPlayerStartingPos4, "editor_player_04_starting_pos.png");
+	insert(Keys::kEditorPlayerStartingPos5, "editor_player_05_starting_pos.png");
+	insert(Keys::kEditorPlayerStartingPos6, "editor_player_06_starting_pos.png");
+	insert(Keys::kEditorPlayerStartingPos7, "editor_player_07_starting_pos.png");
+	insert(Keys::kEditorPlayerStartingPos8, "editor_player_08_starting_pos.png");
+	insert(Keys::kEditorPlayerStartingPosMax, "editor_player_08_starting_pos.png");
+
+
 }
 
-void ImageCatalog::insert(const Keys& key, const std::string& filename)  {
+void ImageCatalog::insert(Keys key, const std::string& filename) {
 	const std::string path = kBaseDir + filename;
 	assert(g_fs->file_exists(path));
 	entries_.emplace(key, path);
 }
 
-const std::string& ImageCatalog::filepath(const Keys& key) const {
-	assert(entries_.count(key) == 1);
+const std::string& ImageCatalog::filepath(Keys key) const {
+	assert(has_key(key));
 	return entries_.at(key);
+}
+
+bool ImageCatalog::has_key(Keys key) const {
+	return entries_.count(key) == 1;
 }

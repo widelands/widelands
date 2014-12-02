@@ -37,7 +37,7 @@ struct EditorSetStartingPosTool : public EditorTool {
 	                          Widelands::NodeAndTriangle<>,
 	                          EditorInteractive&,
 	                          EditorActionArgs&) override;
-	char const * get_sel_impl() const override
+	ImageCatalog::Keys get_sel_impl() const override
 		{return m_current_sel_pic;}
 
 	Widelands::PlayerNumber get_current_player() const;
@@ -45,8 +45,8 @@ struct EditorSetStartingPosTool : public EditorTool {
 	bool has_size_one() const override {return true;}
 
 private:
-	std::string fsel_picsname;
-	char const * m_current_sel_pic;
+	ImageCatalog::Keys fsel_picsname;
+	ImageCatalog::Keys m_current_sel_pic;
 };
 
 int32_t editor_tool_set_starting_pos_callback

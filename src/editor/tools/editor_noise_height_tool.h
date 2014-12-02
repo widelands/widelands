@@ -48,8 +48,8 @@ struct EditorNoiseHeightTool : public EditorTool {
 
 	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
 
-	char const * get_sel_impl() const override {
-		return "data/pics/fsel_editor_noise_height.png";
+	ImageCatalog::Keys get_sel_impl() const override {
+		return ImageCatalog::Keys::kSelectEditorNoiseHeight;
 	}
 
 	Widelands::HeightInterval get_interval() const {

@@ -40,8 +40,8 @@ struct EditorDecreaseHeightTool : public EditorTool {
 
 	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
 
-	char const * get_sel_impl() const override {
-		return "data/pics/fsel_editor_decrease_height.png";
+	ImageCatalog::Keys get_sel_impl() const override {
+		return ImageCatalog::Keys::kSelectEditorHeightDecrease;
 	}
 
 	int32_t get_change_by() const {return m_change_by;}

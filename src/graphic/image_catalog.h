@@ -31,11 +31,50 @@ class ImageCatalog {
 public:
 	/// The keys to fetch the image filenames.
 	enum class Keys {
+		kUnknownImage, // This is the key for a nonexistent image. Do not add this to the entries.
 		kButton0,
 		kButton1,
 		kButton2,
 		kButton3,
 		kButton4,
+		kButtonMenuOK,
+		kButtonMenuAbort,
+		kLoadscreenEditor,
+		kSelect,
+		kSelectEditorDelete,
+		kSelectEditorHeightDecrease,
+		kSelectEditorHeightIncrease,
+		kSelectEditorResourcesDecrease,
+		kSelectEditorResourcesIncrease,
+		kSelectEditorResourcesDelete,
+		kSelectEditorInfo,
+		kSelectEditorNoiseHeight,
+		kSelectEditorPlaceBob,
+		kSelectEditorPlaceImmovable,
+		kSelectEditorSetHeight,
+		kSelectEditorSetPortSpace,
+		kSelectEditorUnsetPortSpace,
+		kSelectEditorSetResources,
+		kSelectEditorSetStartingPosMin,
+		kSelectEditorSetStartingPos1,
+		kSelectEditorSetStartingPos2,
+		kSelectEditorSetStartingPos3,
+		kSelectEditorSetStartingPos4,
+		kSelectEditorSetStartingPos5,
+		kSelectEditorSetStartingPos6,
+		kSelectEditorSetStartingPos7,
+		kSelectEditorSetStartingPos8,
+		kSelectEditorSetStartingPosMax,
+		kEditorPlayerStartingPosMin,
+		kEditorPlayerStartingPos1,
+		kEditorPlayerStartingPos2,
+		kEditorPlayerStartingPos3,
+		kEditorPlayerStartingPos4,
+		kEditorPlayerStartingPos5,
+		kEditorPlayerStartingPos6,
+		kEditorPlayerStartingPos7,
+		kEditorPlayerStartingPos8,
+		kEditorPlayerStartingPosMax,
 	};
 
 	/// The base directory for the images in this catalog.
@@ -47,7 +86,9 @@ public:
 
 	/// Returns the filepath starting from the Widelands root
 	/// for the image associated with 'key'.
-	const std::string& filepath(const ImageCatalog::Keys& key) const;
+	const std::string& filepath(ImageCatalog::Keys key) const;
+
+	bool has_key(ImageCatalog::Keys key) const;
 
 private:
 	/// This function registers a filename for each member of ImageCatalog::Keys.
@@ -55,7 +96,7 @@ private:
 
 	/// Inserts an image into the catalog for the 'key'.
 	/// The 'filename' is the relative path starting from kBaseDir.
-	void insert(const ImageCatalog::Keys& key, const std::string& filename);
+	void insert(ImageCatalog::Keys key, const std::string& filename);
 
 	std::map<ImageCatalog::Keys, std::string> entries_;
 

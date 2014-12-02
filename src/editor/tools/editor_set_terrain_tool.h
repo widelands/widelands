@@ -40,7 +40,9 @@ struct EditorSetTerrainTool : public EditorTool, public MultiSelect {
 
 	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
 
-	char const * get_sel_impl() const override {return "data/pics/fsel.png";}
+	ImageCatalog::Keys get_sel_impl() const override {
+		return ImageCatalog::Keys::kSelect;
+	}
 	bool operates_on_triangles() const override {return true;}
 };
 

@@ -74,7 +74,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase & e) :
 	m_realtime(WLApplication::get()->get_time()),
 	m_left_mouse_button_is_down(false),
 	m_history(m_undo, m_redo),
-
+// NOCOM use catalog
 #define INIT_BUTTON(picture, name, tooltip)                         \
 	TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
 	g_gr->images().get("data/pics/" picture ".png"),                      \
@@ -191,7 +191,7 @@ void EditorInteractive::load(const std::string & filename) {
 			 filename.c_str());
 	ml->preload_map(true);
 
-	UI::ProgressWindow loader_ui("data/pics/editor.jpg");
+	UI::ProgressWindow loader_ui("data/pics/editor.jpg"); // NOCOM use catalog
 	std::vector<std::string> tipstext;
 	tipstext.push_back("editor");
 
@@ -516,10 +516,12 @@ void EditorInteractive::select_tool
 	tools.current_pointer = &primary;
 	tools.use_tool        = which;
 
-	if (char const * const sel_pic = primary.get_sel(which))
-		set_sel_picture(sel_pic);
-	else
+	ImageCatalog::Keys sel_key = primary.get_sel(which);
+	if (g_gr->image_catalog().has_key(sel_key)) {
+		set_sel_picture(sel_key);
+	} else {
 		unset_sel_picture();
+	}
 	set_sel_triangles(primary.operates_on_triangles());
 }
 
@@ -582,7 +584,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 	EditorInteractive eia(editor);
 	editor.set_ibase(&eia); // TODO(unknown): get rid of this
 	{
-		UI::ProgressWindow loader_ui("data/pics/editor.jpg");
+		UI::ProgressWindow loader_ui("data/pics/editor.jpg"); // NOCOM use catalog
 		std::vector<std::string> tipstext;
 		tipstext.push_back("editor");
 		GameTips editortips(loader_ui, tipstext);

@@ -43,7 +43,9 @@ struct EditorPlaceBobTool : public EditorTool, public MultiSelect {
 
 	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
 
-	char const * get_sel_impl() const override {return "data/pics/fsel_editor_place_bob.png";}
+	ImageCatalog::Keys get_sel_impl() const override {
+		return ImageCatalog::Keys::kSelectEditorPlaceBob;
+	}
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_EDITOR_PLACE_BOB_TOOL_H

@@ -24,6 +24,9 @@
 
 #include "base/macros.h"
 #include "editor/tools/editor_action_args.h"
+#include "graphic/graphic.h"
+#include "graphic/image.h"
+#include "graphic/image_catalog.h"
 #include "logic/widelands_geometry.h"
 
 struct EditorInteractive;
@@ -66,7 +69,7 @@ public:
 		    .handle_undo_impl(map, world, center, parent, args);
 	}
 
-	const char * get_sel(const ToolIndex i) {
+	ImageCatalog::Keys get_sel(const ToolIndex i) {
 		return
 		    (i == First ? *this : i == Second ? m_second : m_third)
 		    .get_sel_impl();
@@ -95,7 +98,7 @@ public:
 	                                 EditorActionArgs&) {
 		return 0;
 	}  // non unduable tools don't need to implement this.
-	virtual const char * get_sel_impl() const = 0;
+	virtual ImageCatalog::Keys get_sel_impl() const = 0;
 	virtual bool operates_on_triangles() const {return false;}
 
 protected:

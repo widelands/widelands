@@ -23,9 +23,6 @@
 #include "editor/tools/editor_tool.h"
 #include "logic/widelands.h"
 
-#define FSEL_ESPS_FILENAME "data/pics/fsel_editor_set_port_space.png"
-#define FSEL_EUPS_FILENAME "data/pics/fsel_editor_unset_port_space.png"
-
 /// Unsets a buildspace for ports.
 class EditorUnsetPortSpaceTool : public EditorTool {
 public:
@@ -43,7 +40,9 @@ public:
 	                         EditorInteractive& parent,
 	                         EditorActionArgs& args) override;
 
-	char const * get_sel_impl() const override {return FSEL_EUPS_FILENAME;}
+	ImageCatalog::Keys get_sel_impl() const override {
+		return ImageCatalog::Keys::kSelectEditorUnsetPortSpace;
+	}
 };
 
 
@@ -64,7 +63,9 @@ public:
 	                         EditorInteractive& parent,
 	                         EditorActionArgs& args) override;
 
-	char const * get_sel_impl() const override {return FSEL_ESPS_FILENAME;}
+	ImageCatalog::Keys get_sel_impl() const override {
+		return ImageCatalog::Keys::kSelectEditorSetPortSpace;
+	}
 };
 
 int32_t editor_Tool_set_port_space_callback
