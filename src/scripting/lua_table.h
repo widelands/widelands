@@ -211,9 +211,8 @@ template <typename KeyType> uint32_t get_positive_int(const LuaTable& table, con
 	return static_cast<uint32_t>(value);
 }
 
-/// Uses key to fetch a string value from table.
-/// If table does not have an entry for key, returns
-/// default_value instead.
+/// Uses 'key' to fetch a string value from 'table'. If table does not have an
+/// entry for key, returns 'default_value' instead.
 const std::string get_string_with_default(const LuaTable& table,
 														const std::string& key,
 														const std::string& default_value);

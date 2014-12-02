@@ -46,6 +46,7 @@ wl_library(ui_fsmenu
     graphic_image
     graphic_image_io
     graphic_surface
+    graphic_text
     graphic_text_layout
     helper
     io_filesystem

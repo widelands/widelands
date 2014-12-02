@@ -1,20 +1,15 @@
--- This file contains basic information on all locales.
---
--- Locales are identified by their ISO code.
---
--- The "name" is used to display the locale in the Options menu.
---
--- The "sort_name" is used to define the language's position on the list
--- in the Options menu.
---
--- The "font" entry defines the font set used, including the script's direction.
--- Available font sets are defined in the fonts.lua file.
-
 return {
-
+   -- Locales are identified by their ISO code.
 	ar =  {
+      -- Used to display the locale in the Options menu.
 		name = "العربية",
+
+      -- Defines the language's position on the list in the Options
+      -- menu.
 		sort_name = "Al-ʿArabiyyah",
+
+      -- The font set used, including the script's direction. See
+      -- i18n/fonts.lua.
 		font = "arabic"
 	},
 

@@ -46,7 +46,7 @@ std::string color(const int16_t playern)
 
 // TODO(sirver): remove as soon as old text renderer is gone.
 std::string format_as_old_richtext(const ChatMessage& chat_message) {
-	const char* font_face = UI::g_fh1->fontset().serif().c_str();
+	const std::string& font_face = UI::g_fh1->fontset().serif();
 	std::string message = "<p font-color=#33ff33 font-size=9>";
 
 	// Escape richtext characters
@@ -145,7 +145,7 @@ std::string format_as_old_richtext(const ChatMessage& chat_message) {
 
 // Returns a richtext string that can be displayed to the user.
 std::string format_as_richtext(const ChatMessage& chat_message) {
-	const char* font_face = UI::g_fh1->fontset().serif().c_str();
+	const std::string& font_face = UI::g_fh1->fontset().serif();
 	std::string message = "<p><font color=33ff33 size=9>";
 
 	// Escape richtext characters

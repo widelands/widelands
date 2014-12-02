@@ -13,7 +13,10 @@ wl_library(graphic_text_layout
     text_layout.h
     text_constants.h
   DEPENDS
+    base_i18n
+    graphic
     graphic_color
+    graphic_text
 )
 
 

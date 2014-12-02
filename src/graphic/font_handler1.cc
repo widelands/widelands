@@ -111,6 +111,8 @@ public:
 	}
 
 	void load_locale_fonts() {
+		// NOCOM(#codereview): you never delete fontset_. A class owning an object
+		// (like this) should always use unique_ptr<> instead of bare pointer. The current code leaks memory.
 		fontset_ = new UI::FontSet(i18n::get_locale());
 	}
 

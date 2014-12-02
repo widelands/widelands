@@ -28,7 +28,6 @@ wl_library(base_i18n
   DEPENDS
     base_log
     base_macros
-    io_filesystem
 )
 
 wl_library(base_geometry

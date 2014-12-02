@@ -20,12 +20,14 @@ wl_library(graphic_text
   USES_SDL2_TTF
   USES_SDL2_GFX
   DEPENDS
-    graphic_sdl_utils
     base_exceptions
     base_geometry
+    base_log
+    graphic
     graphic_color
     graphic_image
     graphic_image_io
+    graphic_sdl_utils
     graphic_surface
     io_fileread
     io_filesystem

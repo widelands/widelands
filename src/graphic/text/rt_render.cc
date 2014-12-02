@@ -587,6 +587,11 @@ private:
 	FontMap m_fontmap;
 };
 
+// NOCOM(#codereview): I think these changes broke the stand alone rich text
+// renderer in graphic/text/test/render.cc due to the singleton g_fh1 not being
+// created there yet (as it has been unused). Can you recreated the renderer
+// when the locale changes? If so, you could just pass the fontset() to it and
+// not depend on the singleton here.
 IFont& FontCache::get_font(NodeStyle& ns) {
 	UI::FontSet fontset = UI::g_fh1->fontset();
 
@@ -633,7 +638,7 @@ IFont& FontCache::get_font(NodeStyle& ns) {
 	try {
 		font = load_font(ns.font_face, ns.font_size);
 	} catch (FileNotFoundError& e) {
-		log("Font file not found: %s\n%s\n", ns.font_face.c_str(), e.what());
+		log("Font file not found. Falling back to serif: %s\n%s\n", ns.font_face.c_str(), e.what());
 		font = load_font(fontset.serif(), ns.font_size);
 	}
 

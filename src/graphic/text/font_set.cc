@@ -90,11 +90,11 @@ void FontSet::parse_font_for_locale(const std::string& localename) {
 			boost::split(parts, i18n::get_locale(), boost::is_any_of("."));
 			actual_localename = parts[0];
 
-			if (!all_locales->has_key(actual_localename.c_str())) {
+			if (!all_locales->has_key(actual_localename)) {
 				boost::split(parts, parts[0], boost::is_any_of("@"));
 				actual_localename = parts[0];
 
-				if (!all_locales->has_key(actual_localename.c_str())) {
+				if (!all_locales->has_key(actual_localename)) {
 					boost::split(parts, parts[0], boost::is_any_of("_"));
 					actual_localename = parts[0];
 				}
@@ -110,12 +110,11 @@ void FontSet::parse_font_for_locale(const std::string& localename) {
 
 				// Read the fontset for the current locale.
 				try {
-					std::unique_ptr<LuaTable> font_set_table = fonts_table->get_table(fontsetname.c_str());
+					std::unique_ptr<LuaTable> font_set_table = fonts_table->get_table(fontsetname);
 					font_set_table->do_not_warn_about_unaccessed_keys();
 
 					set_fonts(*font_set_table, serif_);
 					direction_string = get_string_with_default(*font_set_table, "direction", "ltr");
-
 				} catch (LuaError& err) {
 					log("Could not read font set '%s': %s\n", fontsetname.c_str(), err.what());
 				}
@@ -127,6 +126,7 @@ void FontSet::parse_font_for_locale(const std::string& localename) {
 		log("Could not read locales information from file: %s\n", err.what());
 	}
 
+	// NOCOM(#codereview): throw on unknown string?
 	if (direction_string == "rtl") {
 		direction_ = FontSet::Direction::kRightToLeft;
 	} else {
@@ -134,6 +134,7 @@ void FontSet::parse_font_for_locale(const std::string& localename) {
 	}
 }
 
+// NOCOM(#codereview): this is already documented in the Lua file. remove?
 // Each locale needs to define a font face for serif.
 // For everything else, there's a fallback font.
 void FontSet::set_fonts(const LuaTable& table, const std::string& fallback) {
@@ -150,7 +151,6 @@ void FontSet::set_fonts(const LuaTable& table, const std::string& fallback) {
 void FontSet::set_font_group(const LuaTable& table, const std::string& key, const std::string& fallback,
 									  std::string* basic, std::string* bold,
 									  std::string* italic, std::string* bold_italic) {
-
 	*basic = get_string_with_default(table, key, fallback);
 	*bold = get_string_with_default(table, (boost::format("%s_bold") % key).str(), *basic);
 	*italic = get_string_with_default(table, (boost::format("%s_italic") % key).str(), *basic);

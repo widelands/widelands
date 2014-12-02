@@ -907,7 +907,7 @@ void Ship::send_message
 	 const std::string & title, const std::string & description,
 	 const std::string & picture)
 {
-	const char* font_face = UI::g_fh1->fontset().serif().c_str();
+	const std::string& font_face = UI::g_fh1->fontset().serif();
 	std::string rt_description;
 	if (picture.size() > 3) {
 		rt_description = (boost::format("<rt image=pics/%s><p font-face=%s font-size=14>")

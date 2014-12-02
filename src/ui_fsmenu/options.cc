@@ -378,60 +378,60 @@ void FullscreenMenuOptions::advanced_options() {
 }
 
 void FullscreenMenuOptions::add_languages_to_list(const std::string& current_locale) {
-
 	// We want these two entries on top - the most likely user's choice and the default.
 	m_language_list.add(_("Try system language"), "", nullptr, current_locale == "");
 	m_language_list.add(_("English"), "en", nullptr, current_locale == "en");
 
-	// We start with the locale directory so we can pick up locales
-	// that don't have a configuration file yet.
-	FilenameSet files = g_fs->list_directory("locale");
-
-	// Add translation directories to the list
-	std::vector<LanguageEntry> entries;
-	std::string localename;
-	std::string name;
-	std::string sortname;
-	std::string selected_locale;
-
+	// NOCOM(#codereview): I changed this, because the nesting was confusing. Please check if you
+	// like it better that way too.
+	std::unique_ptr<LuaTable> all_locales;
 	try {
 		LuaInterface lua;
-		std::unique_ptr<LuaTable> all_locales(lua.run_script("i18n/locales.lua"));
+		all_locales = lua.run_script("i18n/locales.lua");
 		all_locales->do_not_warn_about_unaccessed_keys(); // We are only reading partial information as needed
-
-		for (const std::string& filename : files) {
-			char const* const path = filename.c_str();
-			if (!strcmp(FileSystem::fs_filename(path), ".") ||
-				 !strcmp(FileSystem::fs_filename(path), "..") || !g_fs->is_directory(path)) {
-				continue;
-			}
-
-			try {
-				localename = g_fs->filename_without_ext(path);
-
-				std::unique_ptr<LuaTable> table = all_locales->get_table(localename);
-				table->do_not_warn_about_unaccessed_keys();
-
-				name = table->get_string("name");
-				sortname = table->get_string("sort_name");
-				std::unique_ptr<UI::FontSet> fontset(new UI::FontSet(localename));
-				entries.push_back(LanguageEntry(localename, name, sortname, fontset->serif()));
-				if (localename == current_locale) {
-					selected_locale = current_locale;
-				}
-
-			} catch (const WException&) {
-				log("Could not read locale for: %s\n", localename.c_str());
-				entries.push_back(LanguageEntry(localename, localename, localename, UI::FontSet::kFallbackFont));
-			}
-		}
 	} catch (const LuaError& err) {
 		log("Could not read locales information from file: %s\n", err.what());
+		return; // Nothing more can be done now.
+	}
+	assert(all_locales != nullptr);
+
+	// We start with the locale directory so we can pick up locales
+	// that don't have a configuration file yet.
+	std::vector<LanguageEntry> entries;
+	std::string selected_locale;
+	for (const std::string& filename : g_fs->list_directory("locale")) {
+		char const* const path = filename.c_str();
+		if (!strcmp(FileSystem::fs_filename(path), ".") ||
+		    !strcmp(FileSystem::fs_filename(path), "..") || !g_fs->is_directory(path)) {
+			continue;
+		}
+
+		const std::string localename = g_fs->filename_without_ext(path);
+		try {
+			std::unique_ptr<LuaTable> table = all_locales->get_table(localename);
+			table->do_not_warn_about_unaccessed_keys();
+
+			// NOCOM(#codereview): always define identifiers on first use if possible and in the most
+			// local scope.
+			const std::string name = table->get_string("name");
+			const std::string sortname = table->get_string("sort_name");
+			std::unique_ptr<UI::FontSet> fontset(new UI::FontSet(localename));
+			entries.push_back(LanguageEntry(localename, name, sortname, fontset->serif()));
+			if (localename == current_locale) {
+				selected_locale = current_locale;
+			}
+		} catch (const WException&) {
+			log("Could not read locale for: %s\n", localename.c_str());
+			entries.push_back(
+			   LanguageEntry(localename, localename, localename, UI::FontSet::kFallbackFont));
+		}
 	}
 
 	std::sort(entries.begin(), entries.end());
 
 	// Locale identifiers can look like this: ca_ES@valencia.UTF-8
+	// NOCOM(#codereview): This method already does a lot of work. You could
+	// pull the next block out into a function in an anon namespace?
 	if (selected_locale.empty()) {
 		std::vector<std::string> parts;
 		boost::split(parts, current_locale, boost::is_any_of("."));

@@ -53,7 +53,10 @@ public:
 	/// Returns the font handler's current FontSet
 	virtual const UI::FontSet& fontset() const = 0;
 
-	/// Loads the FontSet for the currently active locale into the font handler.
+	/// Loads the FontSet for the currently active locale into the
+	/// font handler. This needs to be called after the language of the
+	/// game has changed.
+	// NOCOM(#codereview): reinitialize_fontset? reload_fontset?
 	virtual void load_locale_fonts() = 0;
 
 	DISALLOW_COPY_AND_ASSIGN(IFontHandler1);

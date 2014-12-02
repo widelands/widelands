@@ -12,6 +12,7 @@
 -- and source information collected in its folder.
 
 
+-- NOCOM(#codereview): just a suggestion, but document the members and if the are required in the first entry (as I did in locales.lua). that way it is more likely that new entries will also get documented in the future and it is less verbose and more contextual.
 return {
    -- This is the default set and always needs to be complete.
 	default = {

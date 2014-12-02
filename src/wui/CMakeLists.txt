@@ -134,6 +134,7 @@ wl_library(wui
     graphic_color
     graphic_image
     graphic_surface
+    graphic_text
     graphic_text_layout
     io_fileread
     io_filesystem

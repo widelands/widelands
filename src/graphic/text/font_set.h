@@ -30,7 +30,7 @@ namespace UI {
 struct FontSet {
 
 	// Writing direction of a script
-	enum class Direction : int {
+	enum class Direction {
 		kLeftToRight,
 		kRightToLeft
 	};
@@ -55,12 +55,14 @@ struct FontSet {
 	const FontSet::Direction& direction() const;
 
 private:
+	// NOCOM(#codereview): fix comment.
 	/// Parses font information for the given locale from Lua files.
 	/// Each locale in i18n/locales.lua defines which fontset to use.
 	/// The fontset definitions are in i18n/fonts.lua
 	void parse_font_for_locale(const std::string& localename);
 
-	/// Reads and sets the fonts from table, using fallback as the fallback font file.
+	// NOCOM(#codereview): I always put arguments in '', so they are identifiable as arguments in the comments.
+	/// Reads and sets the fonts from 'table', using 'fallback' as the fallback font file.
 	void set_fonts(const LuaTable& table, const std::string& fallback);
 
 	/// Helper function for set_fonts. key is "serif", "sans" or "condensed".
