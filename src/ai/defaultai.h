@@ -156,8 +156,8 @@ private:
 	bool check_trainingsites(int32_t);
 	bool check_mines_(int32_t);
 	bool check_militarysites(int32_t);
-	bool marine_main_decisions(int32_t);
-	bool check_ships(int32_t);
+	bool marine_main_decisions(uint32_t);
+	bool check_ships(uint32_t);
 	uint32_t get_stocklevel_by_hint(size_t);
 	uint32_t get_stocklevel(BuildingObserver&);
 	uint32_t get_warehoused_stock(Widelands::WareIndex wt);
@@ -232,8 +232,8 @@ private:
 	int32_t next_productionsite_check_due_;
 	int32_t next_mine_check_due_;
 	int32_t next_militarysite_check_due_;
-	int32_t next_ship_check_due;
-	int32_t next_marine_decisions_due;
+	uint32_t next_ship_check_due;
+	uint32_t next_marine_decisions_due;
 	int32_t next_attack_consideration_due_;
 	int32_t next_trainingsites_check_due_;
 	int32_t next_bf_check_due_;

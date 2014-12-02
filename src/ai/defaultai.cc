@@ -6,7 +6,7 @@
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,n
+ * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -399,7 +399,7 @@ void DefaultAI::late_initialization() {
 		// Read all interesting data from ware producing buildings
 		if (typeid(bld) == typeid(ProductionSiteDescr)) {
 			const ProductionSiteDescr& prod =
-			   ref_cast<ProductionSiteDescr const, BuildingDescr const>(bld);
+			   dynamic_cast<const ProductionSiteDescr&>(bld);
 			bo.type = bld.get_ismine() ? BuildingObserver::MINE : BuildingObserver::PRODUCTIONSITE;
 			for (const WareAmount& temp_input : prod.inputs()) {
 				bo.inputs_.push_back(temp_input.first);
@@ -446,7 +446,7 @@ void DefaultAI::late_initialization() {
 		if (typeid(bld) == typeid(MilitarySiteDescr)) {
 			bo.type = BuildingObserver::MILITARYSITE;
 			const MilitarySiteDescr& milit =
-			   ref_cast<MilitarySiteDescr const, BuildingDescr const>(bld);
+			   dynamic_cast<const MilitarySiteDescr&>(bld);
 			for (const std::pair<unsigned char, unsigned char>& temp_buildcosts : milit.buildcost()) {
 				// bellow are non-critical wares
 				if (tribe_->ware_index("log") == temp_buildcosts.first ||
@@ -470,7 +470,7 @@ void DefaultAI::late_initialization() {
 		if (typeid(bld) == typeid(TrainingSiteDescr)) {
 			bo.type = BuildingObserver::TRAININGSITE;
 			const TrainingSiteDescr& train =
-			   ref_cast<TrainingSiteDescr const, BuildingDescr const>(bld);
+			   dynamic_cast<const TrainingSiteDescr&>(bld);
 			for (const WareAmount& temp_input : train.inputs()) {
 				bo.inputs_.push_back(temp_input.first);
 			}
@@ -691,11 +691,9 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 
 	// testing if a port is nearby, such field will get a priority boost
 	uint16_t nearest_distance = std::numeric_limits<uint16_t>::max();
-	for (std::list<WarehouseSiteObserver>::iterator wh_iter = warehousesites.begin();
-	     wh_iter != warehousesites.end();
-	     ++wh_iter) {
+	for (const WarehouseSiteObserver& wh_obs : warehousesites) {
 		const uint16_t actual_distance =
-		   map.calc_distance(field.coords, wh_iter->site->get_position());
+		   map.calc_distance(field.coords, wh_obs.site->get_position());
 		if (nearest_distance > actual_distance) {
 			nearest_distance = actual_distance;
 		}
@@ -1014,7 +1012,6 @@ void DefaultAI::update_productionsite_stats(int32_t const gametime) {
 //   (there should be no upgrade when there are not two buildings of the same type)
 // - algorigthm is trying to take into account actual utlization of buildings
 //   (the one shown in GUI/game is not reliable, it calculates own statistics)
-// * military buildings have own strategy, split into two situations:spot
 // * military buildings have own strategy, split into two situations:
 // - there is no enemy
 // - there is an enemy
@@ -1133,7 +1130,7 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 		}
 
 	// testing big military buildings, whether critical construction
-	// material is available (at lest in amount of
+	// material is available (at least in amount of
 	// 2/3 of default target amount)
 	for (uint32_t j = 0; j < buildings_.size(); ++j) {
 
@@ -1726,11 +1723,9 @@ bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
 				// iterating over current warehouses and testing a distance
 				// getting distance to nearest warehouse and adding it to a score
 				uint16_t nearest_distance = std::numeric_limits<uint16_t>::max();
-				for (std::list<WarehouseSiteObserver>::iterator wh_iter = warehousesites.begin();
-				     wh_iter != warehousesites.end();
-				     ++wh_iter) {
+				for (const WarehouseSiteObserver& wh_obs : warehousesites) {
 					const uint16_t actual_distance =
-					   map.calc_distance(bf->coords, wh_iter->site->get_position());
+					   map.calc_distance(bf->coords, wh_obs.site->get_position());
 					if (nearest_distance > actual_distance) {
 						nearest_distance = actual_distance;
 					}
@@ -2160,7 +2155,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uin
 		}
 
 		// second exemption is when a military buiding was conquered, it
-		// might be just too far from near connected builging
+		// might be just too far from near connected building
 		if (Building* b = flag.get_building()) {
 			if (upcast(MilitarySite, militb, b)) {
 				if (militb->present_soldiers().size() > 0) {
@@ -2747,7 +2742,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 // and makes two decisions:
 // - build a ship
 // - start preparation for expedition
-bool DefaultAI::marine_main_decisions(int32_t const gametime) {
+bool DefaultAI::marine_main_decisions(uint32_t const gametime) {
 	if (gametime < next_marine_decisions_due) {
 		return false;
 	}
@@ -2764,46 +2759,43 @@ bool DefaultAI::marine_main_decisions(int32_t const gametime) {
 	uint16_t working_shipyards_count = 0;
 	uint16_t expeditions_in_prep = 0;
 	uint16_t expeditions_in_progress = 0;
-	uint16_t terittories_count = 1;
+	uint16_t territories_count = 1;
 	bool idle_shipyard_stocked = false;
 
-	// goes over all wareouses (these includes ports)
-	for (std::list<WarehouseSiteObserver>::iterator wh_iter = warehousesites.begin();
-	     wh_iter != warehousesites.end();
-	     ++wh_iter) {
-
-		if (wh_iter->bo->is_port_) {
+	// goes over all warehouses (these includes ports)
+	for (const WarehouseSiteObserver& wh_obs : warehousesites) {
+		if (wh_obs.bo->is_port_) {
 			ports_count += 1;
-			if (Widelands::PortDock* pd = wh_iter->site->get_portdock()) {
+			if (Widelands::PortDock* pd = wh_obs.site->get_portdock()) {
 				if (pd->expedition_started()) {
 					expeditions_in_prep += 1;
 				}
 			} else {
 				log("  there is a port without portdock at %3dx%3d?\n",
-				    wh_iter->site->get_position().x,
-				    wh_iter->site->get_position().y);
+				    wh_obs.site->get_position().x,
+				    wh_obs.site->get_position().y);
 			}
 		}
 	}
 
 	// goes over productionsites and gets status of shipyards
-	for (std::list<ProductionSiteObserver>::iterator ps_iter = productionsites.begin();
-	     ps_iter != productionsites.end();
-	     ++ps_iter) {
-
-		if (ps_iter->bo->is_shipyard_) {
+	//for (std::list<ProductionSiteObserver>::iterator ps_iter = productionsites.begin();
+	     //ps_iter != productionsites.end();
+	     //++ps_iter) {
+		for (const ProductionSiteObserver& ps_obs : productionsites) {
+		if (ps_obs.bo->is_shipyard_) {
 			shipyards_count += 1;
-			if (!ps_iter->site->is_stopped()) {
+			if (!ps_obs.site->is_stopped()) {
 				working_shipyards_count += 1;
 			}
 			// counting stocks
 			uint8_t stocked_wares = 0;
-			std::vector<WaresQueue*> const warequeues = ps_iter->site->warequeues();
+			std::vector<WaresQueue*> const warequeues = ps_obs.site->warequeues();
 			size_t const nr_warequeues = warequeues.size();
 			for (size_t i = 0; i < nr_warequeues; ++i) {
 				stocked_wares += warequeues[i]->get_filled();
 			}
-			if (stocked_wares == 16 && ps_iter->site->is_stopped()) {
+			if (stocked_wares == 16 && ps_obs.site->is_stopped()) {
 				idle_shipyard_stocked = true;
 			}
 		}
@@ -2835,17 +2827,17 @@ bool DefaultAI::marine_main_decisions(int32_t const gametime) {
 			break;
 		}
 	}
-	terittories_count += remote_ports_coords.size();
+	territories_count += remote_ports_coords.size();
 
 	enum {NEEDSHIP = 0, ENOUGHSHIPS = 1, DONOTHING = 2 };
 
 	// now we must compare ports vs ships to decide if new ship is needed or new expedition can start
 	uint8_t enough_ships = DONOTHING;
 	if (static_cast<float>(allships.size()) >
-	    static_cast<float>((terittories_count - 1) * 0.6 + ports_count * 0.75)) {
+	    static_cast<float>((territories_count - 1) * 0.6 + ports_count * 0.75)) {
 		enough_ships = ENOUGHSHIPS;
 	} else if (static_cast<float>(allships.size()) <
-	           static_cast<float>((terittories_count - 1) * 0.6 + ports_count * 0.75)) {
+	           static_cast<float>((territories_count - 1) * 0.6 + ports_count * 0.75)) {
 		enough_ships = NEEDSHIP;
 	}
 
@@ -2853,16 +2845,13 @@ bool DefaultAI::marine_main_decisions(int32_t const gametime) {
 	if (shipyards_count > 0 && enough_ships == NEEDSHIP && idle_shipyard_stocked &&
 	    ports_count > 0) {
 
-		for (std::list<ProductionSiteObserver>::iterator ps_iter = productionsites.begin();
-		     ps_iter != productionsites.end();
-		     ++ps_iter) {
-
-			if (ps_iter->bo->is_shipyard_ && ps_iter->site->can_start_working() &&
-			    ps_iter->site->is_stopped()) {
+		for (const ProductionSiteObserver& ps_obs : productionsites) {
+			if (ps_obs.bo->is_shipyard_ && ps_obs.site->can_start_working() &&
+			    ps_obs.site->is_stopped()) {
 				// make sure it is fully stocked
 				// counting stocks
 				uint8_t stocked_wares = 0;
-				std::vector<WaresQueue*> const warequeues = ps_iter->site->warequeues();
+				std::vector<WaresQueue*> const warequeues = ps_obs.site->warequeues();
 				size_t const nr_warequeues = warequeues.size();
 				for (size_t i = 0; i < nr_warequeues; ++i) {
 					stocked_wares += warequeues[i]->get_filled();
@@ -2871,7 +2860,7 @@ bool DefaultAI::marine_main_decisions(int32_t const gametime) {
 					continue;
 				}
 
-				game().send_player_start_stop_building(*ps_iter->site);
+				game().send_player_start_stop_building(*ps_obs.site);
 				return true;
 			}
 		}
@@ -2881,12 +2870,10 @@ bool DefaultAI::marine_main_decisions(int32_t const gametime) {
 	if (ports_count > 0 && enough_ships == ENOUGHSHIPS && expeditions_in_prep == 0 &&
 	    expeditions_in_progress == 0) {
 		// we need to find a port
-		for (std::list<WarehouseSiteObserver>::iterator wh_iter = warehousesites.begin();
-		     wh_iter != warehousesites.end();
-		     ++wh_iter) {
+		for (const WarehouseSiteObserver& wh_obs : warehousesites) {
 
-			if (wh_iter->bo->is_port_) {
-				game().send_player_start_or_cancel_expedition(*wh_iter->site);
+			if (wh_obs.bo->is_port_) {
+				game().send_player_start_or_cancel_expedition(*wh_obs.site);
 				return true;
 			}
 		}
@@ -2895,7 +2882,7 @@ bool DefaultAI::marine_main_decisions(int32_t const gametime) {
 }
 
 // This identifies ships that are waiting for command
-bool DefaultAI::check_ships(int32_t const gametime) {
+bool DefaultAI::check_ships(uint32_t const gametime) {
 	if (gametime < next_ship_check_due) {
 		return false;
 	}
@@ -3683,7 +3670,7 @@ void DefaultAI::gain_building(Building& b) {
 
 	if (bo.type == BuildingObserver::CONSTRUCTIONSITE) {
 		BuildingObserver& target_bo =
-		   get_building_observer(ref_cast<ConstructionSite, Building>(b).building().name().c_str());
+		   get_building_observer(dynamic_cast<const ConstructionSite&>(b).building().name().c_str());
 		++target_bo.cnt_under_construction_;
 		++num_constructionsites_;
 		if (target_bo.type == BuildingObserver::PRODUCTIONSITE) {
@@ -3700,7 +3687,7 @@ void DefaultAI::gain_building(Building& b) {
 
 		if (bo.type == BuildingObserver::PRODUCTIONSITE) {
 			productionsites.push_back(ProductionSiteObserver());
-			productionsites.back().site = &ref_cast<ProductionSite, Building>(b);
+			productionsites.back().site = &dynamic_cast<ProductionSite&>(b);
 			productionsites.back().bo = &bo;
 			productionsites.back().built_time_ = game().get_gametime();
 			productionsites.back().unoccupied_till_ = game().get_gametime();
@@ -3718,7 +3705,7 @@ void DefaultAI::gain_building(Building& b) {
 				++wares.at(bo.inputs_.at(i)).consumers_;
 		} else if (bo.type == BuildingObserver::MINE) {
 			mines_.push_back(ProductionSiteObserver());
-			mines_.back().site = &ref_cast<ProductionSite, Building>(b);
+			mines_.back().site = &dynamic_cast<ProductionSite&>(b);
 			mines_.back().bo = &bo;
 			mines_.back().built_time_ = game().get_gametime();
 
@@ -3729,20 +3716,20 @@ void DefaultAI::gain_building(Building& b) {
 				++wares.at(bo.inputs_.at(i)).consumers_;
 		} else if (bo.type == BuildingObserver::MILITARYSITE) {
 			militarysites.push_back(MilitarySiteObserver());
-			militarysites.back().site = &ref_cast<MilitarySite, Building>(b);
+			militarysites.back().site = &dynamic_cast<MilitarySite&>(b);
 			militarysites.back().bo = &bo;
 			militarysites.back().checks = bo.desc->get_size();
 			militarysites.back().enemies_nearby_ = true;
 
 		} else if (bo.type == BuildingObserver::TRAININGSITE) {
 			trainingsites.push_back(TrainingSiteObserver());
-			trainingsites.back().site = &ref_cast<TrainingSite, Building>(b);
+			trainingsites.back().site = &dynamic_cast<TrainingSite&>(b);
 			trainingsites.back().bo = &bo;
 
 		} else if (bo.type == BuildingObserver::WAREHOUSE) {
 			++numof_warehouses_;
 			warehousesites.push_back(WarehouseSiteObserver());
-			warehousesites.back().site = &ref_cast<Warehouse, Building>(b);
+			warehousesites.back().site = &dynamic_cast<Warehouse&>(b);
 			warehousesites.back().bo = &bo;
 			if (bo.is_port_) {
 				++num_ports;
@@ -3757,7 +3744,7 @@ void DefaultAI::lose_building(const Building& b) {
 
 	if (bo.type == BuildingObserver::CONSTRUCTIONSITE) {
 		BuildingObserver& target_bo = get_building_observer(
-		   ref_cast<ConstructionSite const, Building const>(b).building().name().c_str());
+		   dynamic_cast<const ConstructionSite&>(b).building().name().c_str());
 		--target_bo.cnt_under_construction_;
 		--num_constructionsites_;
 		if (target_bo.type == BuildingObserver::PRODUCTIONSITE) {
