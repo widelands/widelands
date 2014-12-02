@@ -211,7 +211,14 @@ void RenderTarget::blitrect_scale(const Rect& dst,
                                   const Rect& src,
                                   const BlendMode blend_mode) {
 
-	m_surface->blit(dst, image->texture(), src, blend_mode);
+	Point destination_point(dst.x, dst.y);
+	Rect srcrect(src);
+	if (to_surface_geometry(&destination_point, &srcrect)) {
+		m_surface->blit(Rect(destination_point.x, destination_point.y, dst.w, dst.h),
+		                image->texture(),
+		                src,
+		                blend_mode);
+	}
 }
 
 /**
