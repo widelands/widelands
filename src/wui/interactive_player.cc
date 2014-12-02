@@ -163,8 +163,6 @@ m_toggle_help
 
 	adjust_toolbar_position();
 
-	set_display_flag(dfSpeed, true);
-
 #define INIT_BTN_HOOKS(registry, btn)                                        \
  registry.on_create = std::bind(&UI::Button::set_perm_pressed, &btn, true);  \
  registry.on_delete = std::bind(&UI::Button::set_perm_pressed, &btn, false); \
@@ -304,7 +302,7 @@ void InteractivePlayer::popup_message
 	(Widelands::MessageId const id, const Widelands::Message & message)
 {
 	m_message_menu.create();
-	ref_cast<GameMessageMenu, UI::UniqueWindow>(*m_message_menu.window)
+	dynamic_cast<GameMessageMenu&>(*m_message_menu.window)
 	.show_new_message(id, message);
 }
 
@@ -402,10 +400,10 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code)
 			return true;
 
 		case SDLK_f:
-			g_gr->toggle_fullscreen();
+			g_gr->set_fullscreen(!g_gr->fullscreen());
 			return true;
 
-		case SDL_SCANCODE_KP_7:
+		case SDLK_KP_7:
 			if (code.mod & KMOD_NUM)
 				break;
 			/* no break */
@@ -413,7 +411,7 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code)
 			move_view_to(game().map().get_starting_pos(m_player_number));
 			return true;
 
-		case SDL_SCANCODE_KP_ENTER:
+		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 			if (!m_chatProvider | !m_chatenabled || !is_multiplayer())
 				break;
@@ -473,7 +471,7 @@ void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string> & args)
 	if
 		(UI::UniqueWindow * const building_statistics_window =
 		 	m_mainm_windows.building_stats.window)
-		ref_cast<BuildingStatisticsMenu, UI::UniqueWindow>
+		dynamic_cast<BuildingStatisticsMenu&>
 			(*building_statistics_window)
 			.update();
 }

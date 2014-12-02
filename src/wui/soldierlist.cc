@@ -22,7 +22,6 @@
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
 
-#include "base/deprecated.h"
 #include "base/macros.h"
 #include "graphic/font.h"
 #include "graphic/graphic.h"
@@ -129,7 +128,7 @@ m_last_animate_time(0)
 
 	set_size(m_cols * m_icon_width, m_rows * m_icon_height);
 	set_desired_size(m_cols * m_icon_width, m_rows * m_icon_height);
-	set_think(true);
+	set_thinks(true);
 
 	// Initialize the icons
 	uint32_t row = 0;

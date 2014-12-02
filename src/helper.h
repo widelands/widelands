@@ -42,10 +42,6 @@ char* next_word(char* & p, bool& reached_end, char terminator = ' ');
 std::vector<std::string> split_string
 	(const std::string &, char const * separators);
 
-/// Generate a random string of given size out of the given alphabet.
-// TODO(sirver): consolidate with random.h/random.cc
-std::string random_string(const std::string& chars, int nlen);
-
 // A functional container filtering (by copying the values). Returns a new
 // ContainerType that  contains all values where 'test' returned true.
 template <typename ContainerType, class UnaryPredicate>

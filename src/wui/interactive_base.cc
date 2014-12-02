@@ -79,12 +79,7 @@ struct InteractiveBaseInternals {
 };
 
 InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
-   : MapView(nullptr,
-              0,
-              0,
-              global_s.get_int("xres", DEFAULT_RESOLUTION_W),
-              global_s.get_int("yres", DEFAULT_RESOLUTION_H),
-              *this),
+   : MapView(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres(), *this),
      // Initialize chatoveraly before the toolbar so it is below
      m_show_workarea_preview(global_s.get_bool("workareapreview", true)),
      m_chatOverlay(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
@@ -103,14 +98,24 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      m_road_buildhelp_overlay_jobid(0),
      m_buildroad(nullptr),
      m_road_build_player(0),
-     m_label_speed_shadow(this, get_w() - 1, 0, std::string(), UI::Align_TopRight),
-     m_label_speed(this, get_w(), 1, std::string(), UI::Align_TopRight),
      unique_window_handler_(new UniqueWindowHandler()),
      // Start at idx 0 for 2 enhancements, idx 3 for 1, idx 5 if none
-		m_workarea_pics
-		{g_gr->images().get("pics/workarea123.png"), g_gr->images().get("pics/workarea23.png"),
-		g_gr->images().get("pics/workarea3.png"), g_gr->images().get("pics/workarea12.png"),
-		g_gr->images().get("pics/workarea2.png"), g_gr->images().get("pics/workarea1.png")} {
+     m_workarea_pics{g_gr->images().get("pics/workarea123.png"),
+                     g_gr->images().get("pics/workarea23.png"),
+                     g_gr->images().get("pics/workarea3.png"),
+                     g_gr->images().get("pics/workarea12.png"),
+                     g_gr->images().get("pics/workarea2.png"),
+                     g_gr->images().get("pics/workarea1.png")} {
+
+	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
+	   [this](const GraphicResolutionChanged& message) {
+		   set_size(message.width, message.height);
+
+		   m_chatOverlay->set_size(get_w() / 2, get_h() - 25);
+		   m_chatOverlay->recompute();
+		   adjust_toolbar_position();
+		});
+
 	m_toolbar.set_layout_toplevel(true);
 	m->quicknavigation->set_setview
 		(boost::bind(&MapView::set_viewpoint, this, _1, true));
@@ -127,19 +132,9 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 	set_dock_windows_to_edges
 		(global_s.get_bool("dock_windows_to_edges", false));
 
-	//  Switch to the new graphics system now, if necessary.
-	WLApplication::get()->refresh_graphics();
-
 	//  Having this in the initializer list (before Sys_InitGraphics) will give
 	//  funny results.
 	m_sel.pic = g_gr->images().get("pics/fsel.png");
-
-	m_label_speed.set_visible(false);
-	m_label_speed_shadow.set_visible(false);
-
-	UI::TextStyle style_shadow = m_label_speed.get_textstyle();
-	style_shadow.fg = RGBColor(0, 0, 0);
-	m_label_speed_shadow.set_textstyle(style_shadow);
 
 	setDefaultCommand (boost::bind(&InteractiveBase::cmd_lua, this, _1));
 	addCommand
@@ -261,7 +256,6 @@ OverlayManager::JobId InteractiveBase::show_work_area
 		case 3: wa_index = 0; break;
 		default:
 			throw wexception("Encountered unexpected WorkareaInfo size %i", workareas_nrs);
-			break;
 	}
 	Widelands::Map & map = m_egbase.map();
 	OverlayManager & overlay_manager = map.overlay_manager();
@@ -302,51 +296,6 @@ void InteractiveBase::hide_work_area(OverlayManager::JobId job_id) {
  * Default implementation does nothing.
  */
 void InteractiveBase::postload() {}
-
-static std::string speed_string(uint32_t const speed)
-{
-	if (speed) {
-		return (boost::format("%u.%ux")
-				  % (speed / 1000)
-				  % (speed / 100 % 10)).str();
-	}
-	return _("PAUSE");
-}
-
-/**
- * Bring the label that display in-game speed uptodate.
- */
-void InteractiveBase::update_speedlabel()
-{
-	if (get_display_flag(dfSpeed)) {
-		upcast(Game, game, &m_egbase);
-		if (game && game->game_controller()) {
-			uint32_t const real    = game->game_controller()->real_speed   ();
-			uint32_t const desired = game->game_controller()->desired_speed();
-			if (real == desired)
-				m_label_speed.set_text
-					(real == 1000 ? std::string() : speed_string(real));
-			else {
-				m_label_speed.set_text(
-					(boost::format
-						 /** TRANSLATORS: actual_speed (desired_speed) */
-						(_("%1$s (%2$s)"))
-						% speed_string(real).c_str()
-						% speed_string(desired).c_str()
-					).str()
-				);
-			}
-		} else
-			m_label_speed.set_text(_("NO GAME CONTROLLER"));
-		m_label_speed.set_visible(true);
-	} else
-		m_label_speed.set_visible(false);
-
-	m_label_speed_shadow.set_text(m_label_speed.get_text());
-	m_label_speed_shadow.set_visible(m_label_speed.is_visible());
-
-}
-
 
 /*
 ===============
@@ -390,8 +339,6 @@ void InteractiveBase::think()
 	//  etc...)
 	g_gr->update();
 
-	update_speedlabel();
-
 	UI::Panel::think();
 }
 
@@ -403,21 +350,32 @@ Draw debug overlay when appropriate.
 */
 void InteractiveBase::draw_overlay(RenderTarget& dst) {
 
-	// Blit node information when in debug mode.
-	if (get_display_flag(dfDebug) || !dynamic_cast<const Game*>(&egbase())) {
-		const std::string gametime(gametimestring(egbase().get_gametime()));
-		const std::string gametime_text = as_uifont(gametime, UI_FONT_SIZE_SMALL);
-		dst.blit(Point(5, 5), UI::g_fh1->render(gametime_text), CM_UseAlpha, UI::Align_TopLeft);
-		static boost::format node_format("(%i, %i)");
+	const Map & map = egbase().map();
+	const bool is_game = dynamic_cast<const Game*>(&egbase());
 
-		const std::string node_text = as_uifont
-			((node_format % m_sel.pos.node.x % m_sel.pos.node.y).str(), UI_FONT_SIZE_SMALL);
+	// Blit node information when in debug mode.
+	if (get_display_flag(dfDebug) || !is_game) {
+		std::string node_text;
+		if (is_game) {
+			const std::string gametime(gametimestring(egbase().get_gametime()));
+			const std::string gametime_text = as_uifont(gametime, UI_FONT_SIZE_SMALL);
+			dst.blit(Point(5, 5), UI::g_fh1->render(gametime_text), BlendMode::UseAlpha, UI::Align_TopLeft);
+
+			static boost::format node_format("(%i, %i)");
+			node_text = as_uifont
+				((node_format % m_sel.pos.node.x % m_sel.pos.node.y).str(), UI_FONT_SIZE_SMALL);
+		} else { //this is an editor
+			static boost::format node_format("(%i, %i, %i)");
+			const int32_t height = map[m_sel.pos.node].get_height();
+			node_text = as_uifont
+				((node_format % m_sel.pos.node.x % m_sel.pos.node.y % height).str(), UI_FONT_SIZE_SMALL);
+		}
+
 		dst.blit(
 			Point(get_w() - 5, get_h() - 5),
 			UI::g_fh1->render(node_text),
-			CM_UseAlpha,
-			UI::Align_BottomRight
-		);
+			BlendMode::UseAlpha,
+			UI::Align_BottomRight);
 	}
 
 	// Blit FPS when in debug mode.
@@ -427,7 +385,10 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 			((fps_format %
 			  (1000.0 / m_frametime) % (1000.0 / (m_avg_usframetime / 1000)))
 			 .str(), UI_FONT_SIZE_SMALL);
-		dst.blit(Point(5, 25), UI::g_fh1->render(fps_text), CM_UseAlpha, UI::Align_Left);
+		dst.blit(Point(5, (is_game) ? 25 : 5),
+		         UI::g_fh1->render(fps_text),
+		         BlendMode::UseAlpha,
+		         UI::Align_Left);
 	}
 }
 
@@ -570,8 +531,6 @@ Change the display flags that modify the view of the map.
 void InteractiveBase::set_display_flags(uint32_t flags)
 {
 	m_display_flags = flags;
-
-	update_speedlabel();
 }
 
 
@@ -591,8 +550,6 @@ void InteractiveBase::set_display_flag(uint32_t const flag, bool const on)
 
 	if (on)
 		m_display_flags |= flag;
-
-	update_speedlabel();
 }
 
 /*
@@ -909,53 +866,51 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code)
 	if (m->quicknavigation->handle_key(down, code))
 		return true;
 
-	switch (code.sym) {
-	case SDLK_KP_9:
-		if (code.mod & KMOD_NUM)
-			break;
+	if (down) {
+		switch (code.sym) {
+		case SDLK_KP_9:
+			if (code.mod & KMOD_NUM)
+				break;
 		/* no break */
-	case SDLK_PAGEUP:
-		if (!get_display_flag(dfSpeed))
-			break;
-
-		if (down)
-			if (upcast(Game, game, &m_egbase))
-				if (GameController * const ctrl = game->game_controller())
+		case SDLK_PAGEUP:
+			if (upcast(Game, game, &m_egbase)) {
+				if (GameController* const ctrl = game->game_controller()) {
 					ctrl->set_desired_speed(ctrl->desired_speed() + 1000);
-		return true;
+				}
+			}
+			return true;
 
-	case SDLK_PAUSE:
-		if (down)
-			if (upcast(Game, game, &m_egbase))
-				if (GameController * const ctrl = game->game_controller())
+		case SDLK_PAUSE:
+			if (upcast(Game, game, &m_egbase)) {
+				if (GameController* const ctrl = game->game_controller()) {
 					ctrl->toggle_paused();
-		return true;
+				}
+			}
+			return true;
 
-	case SDLK_KP_3:
-		if (code.mod & KMOD_NUM)
-			break;
+		case SDLK_KP_3:
+			if (code.mod & KMOD_NUM)
+				break;
 		/* no break */
-	case SDLK_PAGEDOWN:
-		if (!get_display_flag(dfSpeed))
-			break;
-
-		if (down)
-			if (upcast(Widelands::Game, game, &m_egbase))
-				if (GameController * const ctrl = game->game_controller()) {
+		case SDLK_PAGEDOWN:
+			if (upcast(Widelands::Game, game, &m_egbase)) {
+				if (GameController* const ctrl = game->game_controller()) {
 					uint32_t const speed = ctrl->desired_speed();
 					ctrl->set_desired_speed(1000 < speed ? speed - 1000 : 0);
 				}
-		return true;
-#ifndef NDEBUG //  only in debug builds
+			}
+			return true;
+#ifndef NDEBUG  //  only in debug builds
 		case SDLK_F6:
 			if (get_display_flag(dfDebug)) {
 				GameChatMenu::create_script_console(
-					this, m_debugconsole, *DebugConsole::get_chat_provider());
+				   this, m_debugconsole, *DebugConsole::get_chat_provider());
 			}
 			return true;
 #endif
-	default:
-		break;
+		default:
+			break;
+		}
 	}
 
 	return MapView::handle_key(down, code);

@@ -141,6 +141,9 @@ std::string get_executable_directory()
 	return executabledir;
 }
 
+bool is_absolute_path(const std::string& path) {
+	return path.size() >= 1 && path[0] == '/';
+}
 
 /**
  * In case that the path is defined in a relative manner to the
@@ -225,7 +228,6 @@ m_mouse_position       (0, 0),
 m_mouse_locked         (0),
 m_mouse_compensate_warp(0, 0),
 m_should_die           (false),
-m_use_default_datadir     (true),
 #ifdef _WIN32
 m_homedir(FileSystem::get_homedir() + "\\.widelands"),
 #else
@@ -242,7 +244,6 @@ m_redirected_stdio(false)
 		m_homedir = m_commandline["homedir"];
 		m_commandline.erase("homedir");
 	}
-	bool dedicated = m_commandline.count("dedicated");
 #ifdef REDIRECT_OUTPUT
 	if (!redirect_output())
 		redirect_output(m_homedir);
@@ -251,31 +252,21 @@ m_redirected_stdio(false)
 	setup_homedir();
 	init_settings();
 
-	if (m_use_default_datadir) {
-		std::string install_prefix = INSTALL_PREFIX;
-		if (!PATHS_ARE_ABSOLUTE) {
-			install_prefix = relative_to_executable_to_absolute(install_prefix);
-		}
-		const std::string default_datadir =
-		   install_prefix + "/" + std::string(INSTALL_DATADIR);
-		log("Adding directory: %s\n", default_datadir.c_str());
-		g_fs->add_file_system(&FileSystem::create(default_datadir));
-	}
+	log("Adding directory: %s\n", m_datadir.c_str());
+	g_fs->add_file_system(&FileSystem::create(m_datadir));
+
 	init_language(); // search paths must already be set up
 	cleanup_replays();
 
-	if (!dedicated) {
-		// handling of graphics
-		init_hardware();
+	// handling of graphics
+	init_hardware();
 
-		if (TTF_Init() == -1)
-			throw wexception
-				("True Type library did not initialize: %s\n", TTF_GetError());
+	if (TTF_Init() == -1)
+		throw wexception
+			("True Type library did not initialize: %s\n", TTF_GetError());
 
-		UI::g_fh = new UI::FontHandler();
-		UI::g_fh1 = UI::create_fonthandler(g_gr);
-	} else
-		g_gr = nullptr;
+	UI::g_fh = new UI::FontHandler();
+	UI::g_fh1 = UI::create_fonthandler(g_gr);
 
 	if (SDLNet_Init() == -1)
 		throw wexception("SDLNet_Init failed: %s\n", SDLNet_GetError());
@@ -445,9 +436,6 @@ void WLApplication::run()
 
 		g_sound_handler.change_music("menu", 1000);
 		mainmenu();
-
-		delete g_gr;
-		g_gr = nullptr;
 	}
 
 	g_sound_handler.stop_music(500);
@@ -505,14 +493,14 @@ void WLApplication::handle_input(InputCallback const * cb)
 		switch (ev.type) {
 		case SDL_KEYDOWN:
 		case SDL_KEYUP:
-			if (ev.key.keysym.scancode == SDL_SCANCODE_F10 &&
+			if (ev.key.keysym.sym == SDLK_F10 &&
 			    (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL))) {
 				//  get out of here quick
 				if (ev.type == SDL_KEYDOWN)
 					m_should_die = true;
 				break;
 			}
-			if (ev.key.keysym.scancode == SDL_SCANCODE_F11) { //  take screenshot
+			if (ev.key.keysym.sym == SDLK_F11) { //  take screenshot
 				if (ev.type == SDL_KEYDOWN)
 				{
 					if (g_fs->disk_space() < MINIMUM_DISK_SPACE) {
@@ -676,43 +664,14 @@ void WLApplication::set_input_grab(bool grab)
 	}
 }
 
-/**
- * Initialize the graphics subsystem (or shutdown, if w and h are 0)
- * with the given resolution.
- * Throws an exception on failure.
- */
-void WLApplication::init_graphics(int32_t w, int32_t h, bool fullscreen, bool opengl)
-{
-	if (!w && !h) { // shutdown.
-		delete g_gr;
-		g_gr = nullptr;
-		return;
-	}
-	assert(w > 0 && h > 0);
-
-	if (!g_gr) {
-		g_gr = new Graphic();
-		g_gr->initialize(w, h, fullscreen, opengl);
-	} else {
-		if
-			(g_gr->get_xres() != w || g_gr->get_yres() != h
-				|| g_gr->is_fullscreen() != fullscreen || g_opengl != opengl)
-		{
-			g_gr->initialize(w, h, fullscreen, opengl);
-		}
-	}
-}
-
 void WLApplication::refresh_graphics()
 {
 	Section & s = g_options.pull_section("global");
 
-	//  Switch to the new graphics system now, if necessary.
-	init_graphics
-		(s.get_int("xres", DEFAULT_RESOLUTION_W),
-		 s.get_int("yres", DEFAULT_RESOLUTION_H),
-		 s.get_bool("fullscreen", false),
-		 s.get_bool("opengl", true));
+	g_gr->change_resolution(
+	   s.get_int("xres", DEFAULT_RESOLUTION_W), s.get_int("yres", DEFAULT_RESOLUTION_H));
+	g_gr->set_fullscreen(s.get_bool("fullscreen", false));
+
 	// does only work with a window
 	set_input_grab(s.get_bool("inputgrab", false));
 }
@@ -737,7 +696,6 @@ bool WLApplication::init_settings() {
 	// Profile needs support for a Syntax definition to solve this in a
 	// sensible way
 	s.get_bool("fullscreen");
-	s.get_bool("opengl");
 	s.get_int("xres");
 	s.get_int("yres");
 	s.get_int("border_snap_distance");
@@ -781,17 +739,7 @@ void WLApplication::init_language() {
 	// Initialize locale and grab "widelands" textdomain
 	i18n::init_locale();
 
-	if (s.has_val("localedir")) {
-		// Localedir has been specified on the command line or in the config file.
-		i18n::set_localedir(s.get_safe_string("localedir"));
-	} else {
-		// Use default localedir, as configured at compile time.
-		std::string localedir = INSTALL_LOCALEDIR;
-		if (!PATHS_ARE_ABSOLUTE) {
-			localedir = relative_to_executable_to_absolute(localedir);
-		}
-		i18n::set_localedir(localedir);
-	}
+	i18n::set_localedir(m_datadir + "/locale");
 	i18n::grab_textdomain("widelands");
 
 	// Set locale corresponding to selected language
@@ -848,7 +796,9 @@ bool WLApplication::init_hardware() {
 
 	SDL_ShowCursor(SDL_DISABLE);
 
-	refresh_graphics();
+	g_gr = new Graphic(s.get_int("xres", DEFAULT_RESOLUTION_W),
+	                   s.get_int("yres", DEFAULT_RESOLUTION_H),
+	                   s.get_bool("fullscreen", false));
 
 	// Start the audio subsystem
 	// must know the locale before calling this!
@@ -859,14 +809,9 @@ bool WLApplication::init_hardware() {
 
 void WLApplication::shutdown_hardware()
 {
-	if (g_gr)
-		wout
-			<<
-			"WARNING: Hardware shutting down although graphics system is still "
-			"alive!"
-			<< std::endl;
+	delete g_gr;
+	g_gr = nullptr;
 
-	init_graphics(0, 0, false, false);
 	SDL_QuitSubSystem(SDL_INIT_TIMER|SDL_INIT_VIDEO|SDL_INIT_JOYSTICK);
 
 #ifndef _WIN32
@@ -965,10 +910,12 @@ void WLApplication::handle_commandline_parameters()
 	}
 
 	if (m_commandline.count("datadir")) {
-		log ("Adding directory: %s\n", m_commandline["datadir"].c_str());
-		m_use_default_datadir = false;
-		g_fs->add_file_system(&FileSystem::create(m_commandline["datadir"]));
+		m_datadir = m_commandline["datadir"];
 		m_commandline.erase("datadir");
+	} else {
+		m_datadir = is_absolute_path(INSTALL_DATADIR) ?
+		               INSTALL_DATADIR :
+		               relative_to_executable_to_absolute(INSTALL_DATADIR);
 	}
 
 	if (m_commandline.count("verbose")) {
@@ -1067,14 +1014,6 @@ void WLApplication::mainmenu()
 {
 	std::string messagetitle;
 	std::string message;
-
-	if (g_gr->check_fallback_settings_in_effect())
-	{
-		messagetitle = "Fallback settings in effect";
-		message = _
-			("Your video settings could not be enabled, and fallback settings are in effect. "
-				"Please check the graphics options!");
-	}
 
 	for (;;) {
 		// Refresh graphics system in case we just changed resolution.

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-11-12 11:40+0000\n"
-"PO-Revision-Date: 2014-11-11 09:27+0000\n"
+"POT-Creation-Date: 2014-11-21 09:46+0000\n"
+"PO-Revision-Date: 2014-11-14 02:30+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-11-13 05:53+0000\n"
-"X-Generator: Launchpad (build 17241)\n"
+"X-Launchpad-Export-Date: 2014-11-22 04:48+0000\n"
+"X-Generator: Launchpad (build 17252)\n"
 "Language: gd\n"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:18
@@ -137,7 +137,7 @@ msgstr "Tagh “Stadastaireachd nan togalach” an uairsin."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:61
 msgid "Open the building statistics window."
-msgstr ""
+msgstr "Fosgail uinneag stadastaireachd nan togalach."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:62
 msgid "When you have looked up the number of taverns, close it."
@@ -172,6 +172,8 @@ msgid ""
 "The statistics menu is accessed via the second button at the bottom. It "
 "provides several windows that give you information about the game."
 msgstr ""
+"Inntrigidh tu clàr-taice na stadastaireachd leis an dàrna putan aig a’ "
+"bhonn. Bheir e iomadh uinneag dhut le fiosrachadh mun gheama."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:74
 msgid "Look up how many taverns you have (in the column ‘Owned’)"
@@ -210,6 +212,8 @@ msgid ""
 "You can also use the hotkey ‘i’ (as in ‘inventory’) to access this window "
 "quickly."
 msgstr ""
+"’S urrainn dhut an t-iuchair “i” (mar “iomlan”) a chleachdadh cuideachd gus "
+"an uinneag seo inntrigeadh gu luath."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:93
 msgid "Open your stock window."
@@ -220,6 +224,8 @@ msgid ""
 "The stock menu window gives you an overview over the wares you currently "
 "have."
 msgstr ""
+"Bheir uinneag clàr-taice an stòrais foir-shealladh dhut air a’ bhathar a th’ "
+"agad an-dràsta."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:106
 msgid ""
@@ -227,6 +233,10 @@ msgid ""
 "shows you all your current wares, including those on roads, at flags and "
 "inside buildings waiting for processing."
 msgstr ""
+"Tha ceithir taba ann an uinneag clàr-taice an stòrais. Seallaidh a’ chiad "
+"fhear (a chaidh a thaghadh dhut) am bathar gu lèir a th’ agad an-dràsta, a’ "
+"gabhail a-steach na tha air na rathaidean, aig brataich agus a’ feitheamh "
+"taobh a-staigh thogalaichean gus an tèid a chleachdadh."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:107
 msgid ""
@@ -256,13 +266,15 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:115
 msgid "Switch to the third tab in the stock menu window."
-msgstr ""
+msgstr "Tagh an treas taba ann an uinneag clàr-taice an stòrais."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:117
 msgid ""
 "Have a look at the first two tabs in the stock menu window. They show all "
 "the wares and workers you have."
 msgstr ""
+"Thoir sùil air a’ chiad dà thaba ann an uinneag clàr-taice an stòrais. "
+"Seallaidh iad am bathar ’s an luchd-obrach gu lèir a th’ agad dhut."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:119
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:237
@@ -293,7 +305,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:135
 msgid "You closed the stock window!"
-msgstr ""
+msgstr "Dhùin thu uinneag an stòrais!"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:137
 msgid ""
@@ -305,7 +317,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:146
 msgid "Open the stock window again."
-msgstr ""
+msgstr "Fosgail uinneag an stòrais a-rithist."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:148
 msgid ""
@@ -339,6 +351,11 @@ msgid ""
 "produce rations, our miners won’t dig for ore. And without iron, we cannot "
 "forge a single helm."
 msgstr ""
+"Nise on a tha am fiosrachadh agad, bu chòir dhut rudeigin a dhèanamh. "
+"Saoilidh mi gum bu chòir dhuinn barrachd air aon taigh-tàirn a thogail. "
+"Thoir an aire: cho fad ’s nach dèan sinn greimeag, cha tochail na mèinnearan "
+"againn airson cloiche-iarainn. Agus gun iarainn, chan urrainn dhuinn clogaid "
+"sam bith a dhèanamh."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:163
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:171
@@ -420,6 +437,10 @@ msgid ""
 "prioritize a special mine, you simply have to open its window. In the wares "
 "tab, behind every ware, you can see ‘traffic lights’."
 msgstr ""
+"Tha thu a’ cur greimeagan dhan a h-uile mèinn an-dràsta. Ma tha thu airson "
+"prìomhachas a thoirt air aon dhiubh gu sònraichte, feumaidh tu an uinneag "
+"aice fhosgladh. Ann an taba a’ bhathair, an cois gach bathair, chì thu "
+"“solasan-trafaig”."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:195
 msgid ""
@@ -481,6 +502,9 @@ msgid ""
 "In this menu window, you can select wares to see how their production or "
 "consumption has changed over time. Try it out with some wares."
 msgstr ""
+"San uinneag clàir-thaice seo, ’s urrainn dhut bathar a thaghadh ach am faic "
+"thu mar a dh’atharraich an dèanadas ’s an caitheamh rè ama. Feuch ris le "
+"bathar no dhà."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:227
 msgid "I’ll continue as soon as you click on the"
@@ -493,6 +517,7 @@ msgstr "an treas taba (“Slàinte an eaconamaidh”)."
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:233
 msgid "Switch to the third tab in the ware statistics menu window."
 msgstr ""
+"Tagh an treas taba ann an uinneag clàr-taice stadastaireachd nam bathar."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:235
 msgid ""
@@ -527,6 +552,8 @@ msgstr ""
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:252
 msgid "Switch to the last tab in the ware statistics menu window."
 msgstr ""
+"Tagh an taba mu dheireadh ann an uinneag clàr-taice stadastaireachd nam "
+"bathar."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:254
 msgid ""
@@ -588,6 +615,9 @@ msgid ""
 "You have closed the ware statistics menu window, but I have not yet finished "
 "with my explanation. Would you please reopen it and choose the third tab?"
 msgstr ""
+"Dhùin thu uinneag clàr-taice stadastaireachd nam bathar, ach chan eil mi "
+"deiseil leis na mìneachaidhean agam. Am fosgail thu a-rithist i agus an tagh "
+"thu an treas taba?"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:291
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:312
@@ -601,17 +631,24 @@ msgid ""
 "everything about it. If you already know everything, please feel free to "
 "leave this tutorial at any time."
 msgstr ""
+"Dhùin thu uinneag clàr-taice stadastaireachd nam bathar mus robh mi deiseil "
+"leis na mìneachaidhean agam. Ma tha thu eòlach air a h-uile rud mar-thà, tha "
+"thu làn di-beathte an t-oideachadh seo fhàgail uair sam bith."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:303
 msgid ""
 "You have closed the ware statistics menu window, but I have not yet finished "
 "with my explanation. Would you please reopen it and choose the fourth tab?"
 msgstr ""
+"Dhùin thu uinneag clàr-taice stadastaireachd nam bathar, ach chan eil mi "
+"deiseil leis na mìneachaidhean agam. Am fosgail thu a-rithist i agus an tagh "
+"thu an ceathramh taba?"
 
 #: TRANSLATORS: "it" refers to the ware statistics window.
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:317
 msgid "Otherwise, please reopen it and choose the fourth tab."
 msgstr ""
+"Mur eil, feuch am fosgail thu a-rithist i agus tagh an ceathramh taba."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:323
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:344
@@ -624,6 +661,8 @@ msgid ""
 "I’ve shown you our stock menu window, where you could see which wares are at "
 "the warehouses. You remember?"
 msgstr ""
+"Sheall mi uinneag clàr-taice an stòrais againn dhut far am faca tu dè am "
+"bathar a bha sna taighean-stòrais. A bheil cuimhne agad?"
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:326
 msgid ""
@@ -631,6 +670,9 @@ msgid ""
 "menu window for this purpose can be accessed via any flag and is called "
 "‘Configure economy’."
 msgstr ""
+"Innsidh mi dhut a-nis mar a shuidhicheas tu cò mheud bathar a tha thu ag "
+"iarraidh. Gheibh thu greim air an uinneag clàir-thaice air a shon le bratach "
+"sam bith agus ’s e “Rèitich an eaconamaidh” a tha air."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:328
 msgid "This is the icon."
@@ -638,16 +680,18 @@ msgstr "Seo an ìomhaigheag."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:331
 msgid "Open this window."
-msgstr ""
+msgstr "Fosgail an uinneag seo."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:335
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:338
 msgid "Open the ‘Configure economy’ window."
-msgstr ""
+msgstr "Fosgail an uinneag “Rèitich an eaconamaidh”."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:339
 msgid "The window can be accessed by clicking on any flag you own."
 msgstr ""
+"Gheibh thu greim air an uinneag ’s tu a’ briogadh air bratach sam bith a tha "
+"leatsa."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:346
 msgid ""
@@ -769,6 +813,9 @@ msgid ""
 "To do so, click on any flag and choose ‘Configure economy’. In this menu "
 "window, you can decide how many wares of each type you wish to have in stock."
 msgstr ""
+"Gus seo a dhèanamh, briog air bratach sam bith agus tagh “Rèitich an "
+"eaconamaidh”. San uinneag clàir-thaice ud, ’s urrainn dhut cur romhad co "
+"mheud bathar de gach seòrsa a tha thu airson glèidheadh san stòras agad."
 
 #: ../../campaigns/tutorial04_economy.wmf/scripting/texts.lua:378
 msgid "Warehouse Preferences"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2010, 2012 by the Widelands Development Team
+ * Copyright 2010-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -14,64 +14,72 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
- *
  */
 
 #ifndef WL_GRAPHIC_TEXTURE_H
 #define WL_GRAPHIC_TEXTURE_H
 
-#include <memory>
-#include <string>
-#include <vector>
+#include "base/rect.h"
+#include "graphic/gl/system_headers.h"
+#include "graphic/surface.h"
 
-#include <stdint.h>
+struct SDL_Surface;
 
-#include "graphic/colormap.h"
-#include "graphic/gl/surface_texture.h"
+class Texture : public Surface {
+public:
+	// Create a new surface from an SDL_Surface. If intensity is true, an GL_INTENSITY texture
+	// is created. Ownership is taken.
+	Texture(SDL_Surface * surface, bool intensity = false);
 
-/// Textures have a fixed size and are squares.
-/// TEXTURE_HEIGHT is just defined for easier understanding of the code.
-#define TEXTURE_WIDTH 64
-#define TEXTURE_HEIGHT TEXTURE_WIDTH
+	// Create a new empty (that is randomly filled) Surface with the given
+	// dimensions.
+	Texture(int w, int h);
 
-/** struct Texture
-*
-* Texture represents are terrain texture, which is strictly
-* TEXTURE_WIDTH by TEXTURE_HEIGHT pixels in size. It uses 8 bit color, and
-* a pointer to the corresponding palette and color lookup table is
-* provided.
-*
-* Currently, this is initialized from a 16 bit bitmap. This should be
-* changed to load 8 bit bitmaps directly.
-*/
-struct Texture {
-	Texture(const std::vector<std::string>& texture_files,
-	        uint32_t frametime,
-	        const SDL_PixelFormat&);
-	~Texture();
+	// Create a logical texture that is a 'subrect' (in Pixel) in
+	// another texture. Ownership of 'texture' is not taken.
+	Texture(const GLuint texture, const Rect& subrect, int parent_w, int parent_h);
 
-	const std::string & get_texture_image() const {return m_texture_image;}
+	virtual ~Texture();
 
-	uint8_t * get_pixels   () const {return m_pixels;}
-	uint8_t * get_curpixels() const {return m_curframe;}
-	void    * get_colormap () const {return m_colormap->get_colormap();}
+	/// Interface implementation
+	//@{
+	void lock(LockMode) override;
+	void unlock(UnlockMode) override;
 
-	RGBColor get_minimap_color(int8_t shade);
+	// Note: the following functions are reimplemented here though they
+	// basically only call the functions in Surface wrapped in calls to
+	// setup_gl(), reset_gl(). The same functionality can be achieved by making
+	// those two functions virtual and calling them in Surface. However,
+	// especially for blit which is called very often and mostly on the screen,
+	// this costs two virtual function calls which makes a notable difference in
+	// profiles.
+	void fill_rect(const Rect&, const RGBAColor&) override;
+	void draw_rect(const Rect&, const RGBColor&) override;
+	void brighten_rect(const Rect&, int32_t factor) override;
+	virtual void draw_line
+		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor&, uint8_t width) override;
+	void blit(const Point&,
+	          const Texture*,
+	          const Rect& srcrc,
+	          BlendMode blend_mode = BlendMode::UseAlpha) override;
 
-	void animate(uint32_t time);
-	uint32_t get_texture() const
-		{return m_glFrames.at(m_frame_num)->get_gl_texture();}
+	GLuint get_gl_texture() const {return m_texture;}
+
+	const FloatRect& texture_coordinates() const {
+		return m_texture_coordinates;
+	}
 
 private:
-	std::unique_ptr<Colormap> m_colormap;
-	uint8_t   * m_pixels;
-	RGBColor    m_minimap_colors[256];
-	uint8_t   * m_curframe;
-	int32_t     m_frame_num;
-	std::string m_texture_image;
-	uint32_t    m_nrframes;
-	uint32_t    m_frametime;
-	std::vector<std::unique_ptr<GLSurfaceTexture>> m_glFrames;
+	void pixel_to_gl(float* x, float* y) const override;
+	void init(uint16_t w, uint16_t h);
+
+	// True if we own the texture, i.e. if we need to delete it.
+	bool m_owns_texture;
+
+	// Texture coordinates in m_texture.
+	FloatRect m_texture_coordinates;
+
+	GLuint m_texture;
 };
 
 #endif  // end of include guard: WL_GRAPHIC_TEXTURE_H

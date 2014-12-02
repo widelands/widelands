@@ -195,7 +195,7 @@ ShipWindow::ShipWindow(InteractiveGameBase & igb, Ship & ship) :
 		buttons->add(m_btn_cancel_expedition, 0, false);
 	}
 	set_center_panel(vbox);
-	set_think(true);
+	set_thinks(true);
 
 	center_to_parent();
 	move_out_of_the_way();
@@ -295,7 +295,7 @@ void ShipWindow::act_sink()
 		m_igbase.game().send_player_sink_ship(m_ship);
 	}
 	else {
-		show_ship_sink_confirm(ref_cast<InteractivePlayer, InteractiveGameBase>(m_igbase), m_ship);
+		show_ship_sink_confirm(dynamic_cast<InteractivePlayer&>(m_igbase), m_ship);
 	}
 }
 
@@ -307,7 +307,7 @@ void ShipWindow::act_cancel_expedition()
 	}
 	else {
 		show_ship_cancel_expedition_confirm
-			(ref_cast<InteractivePlayer, InteractiveGameBase>(m_igbase), m_ship);
+			(dynamic_cast<InteractivePlayer&>(m_igbase), m_ship);
 	}
 }
 

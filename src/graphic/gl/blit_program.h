@@ -21,8 +21,8 @@
 #define WL_GRAPHIC_GL_BLIT_PROGRAM_H
 
 #include "base/rect.h"
+#include "graphic/blend_mode.h"
 #include "graphic/color.h"
-#include "graphic/gl/surface_texture.h"
 #include "graphic/gl/utils.h"
 
 class BlitProgram {
@@ -32,12 +32,12 @@ public:
 
 	// Draws the rectangle 'gl_src_rect' from the texture with the name
 	// 'gl_texture' to 'gl_dest_rect' in the currently bound framebuffer. All
-	// coordinates are in the OpenGL frame. The 'composite' defines if the
+	// coordinates are in the OpenGL frame. The 'blend_mode' defines if the
 	// values are copied or if alpha values are used.
 	void draw(const FloatRect& gl_dest_rect,
 	          const FloatRect& gl_src_rect,
 	          const GLuint gl_texture,
-	          const Composite composite);
+	          const BlendMode blend_mode);
 
 private:
 	BlitProgram();

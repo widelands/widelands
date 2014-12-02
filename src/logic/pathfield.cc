@@ -19,7 +19,6 @@
 
 #include "logic/pathfield.h"
 
-#include "base/deprecated.h"
 #include "base/wexception.h"
 
 namespace Widelands {

@@ -215,7 +215,6 @@ wl_library(logic
   USES_SDL2
   DEPENDS
     ai
-    base_deprecated
     base_exceptions
     base_geometry
     base_i18n
@@ -230,6 +229,9 @@ wl_library(logic
     game_io
     graphic
     graphic_color
+    graphic_image_io
+    graphic_surface
+    graphic_texture_atlas
     helper
     io_fileread
     io_filesystem

@@ -20,22 +20,26 @@
 #ifndef WL_GRAPHIC_GL_ROAD_PROGRAM_H
 #define WL_GRAPHIC_GL_ROAD_PROGRAM_H
 
+#include <memory>
 #include <vector>
 
 #include "base/macros.h"
 #include "graphic/gl/fields_to_draw.h"
-#include "graphic/gl/surface.h"
 #include "graphic/gl/utils.h"
 #include "logic/roadtype.h"
+
+class Texture;
+class Surface;
 
 class RoadProgram {
 public:
 	// Compiles the program. Throws on error.
 	RoadProgram();
+	~RoadProgram();
 
 	// Draws the roads. The 'surface' is needed to convert from pixel space to
 	// GL space.
-	void draw(const GLSurface& surface, const FieldsToDraw& fields_to_draw);
+	void draw(const Surface& surface, const FieldsToDraw& fields_to_draw);
 
 private:
 	struct PerVertexData {
@@ -55,7 +59,7 @@ private:
 
 	// Adds a road from 'start' to 'end' to be rendered in this frame using the
 	// correct texture for 'road_type'.
-	void add_road(const GLSurface& surface,
+	void add_road(const Surface& surface,
 	              const FieldsToDraw::Field& start,
 	              const FieldsToDraw::Field& end,
 	              const Widelands::RoadType road_type);
@@ -78,6 +82,10 @@ private:
 
 	// All vertices that get rendered this frame.
 	std::vector<PerVertexData> vertices_;
+
+	// The road textures.
+	std::unique_ptr<Texture> normal_road_texture_;
+	std::unique_ptr<Texture> busy_road_texture_;
 
 	DISALLOW_COPY_AND_ASSIGN(RoadProgram);
 };

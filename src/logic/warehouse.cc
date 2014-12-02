@@ -23,7 +23,6 @@
 
 #include <boost/format.hpp>
 
-#include "base/deprecated.h"
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
@@ -338,11 +337,13 @@ void Warehouse::load_finish(EditorGameBase& egbase) {
 	   descr().tribe().worker_types_without_cost();
 	for (uint8_t i = worker_types_without_cost.size(); i;) {
 		WareIndex const worker_index = worker_types_without_cost.at(--i);
-		if (owner().is_worker_type_allowed(worker_index) &&
-		    m_next_worker_without_cost_spawn[i] == static_cast<uint32_t>(never())) {
-			if (next_spawn == static_cast<uint32_t>(never()))
-				next_spawn = schedule_act(
-				   ref_cast<Game, EditorGameBase>(egbase), WORKER_WITHOUT_COST_SPAWN_INTERVAL);
+		if
+			(owner().is_worker_type_allowed(worker_index) &&
+			 m_next_worker_without_cost_spawn[i] == static_cast<uint32_t>(never()))
+		{
+			if (next_spawn == static_cast<uint32_t>(never())) {
+				next_spawn = schedule_act(dynamic_cast<Game&>(egbase), WORKER_WITHOUT_COST_SPAWN_INTERVAL);
+			}
 			m_next_worker_without_cost_spawn[i] = next_spawn;
 			log("WARNING: player %u is allowed to create worker type %s but his "
 			    "%s %u at (%i, %i) does not have a next_spawn time set for that "
@@ -404,20 +405,19 @@ void Warehouse::init(EditorGameBase& egbase) {
 		// m_next_military_act is not touched in the loading code. Is only needed
 		// if there warehous is created in the game?  I assume it's for the
 		// conquer_radius thing
-		m_next_military_act = schedule_act(ref_cast<Game, EditorGameBase>(egbase), 1000);
+		m_next_military_act = schedule_act(*game, 1000);
 
-		m_next_stock_remove_act = schedule_act(ref_cast<Game, EditorGameBase>(egbase), 4000);
+		m_next_stock_remove_act = schedule_act(*game, 4000);
 
-		log("Message: adding (wh) (%s) %i \n",
-		    to_string(descr().type()).c_str(),
-		    player.player_number());
-		send_message(ref_cast<Game, EditorGameBase>(egbase),
-		             "warehouse",
-		             descr().descname(),
-		             (boost::format(_("A new %s was added to your economy.")) %
-		              descr().descname().c_str()).str(),
-		             true);
-	}
+		log("Message: adding (wh) (%s) %i \n", to_string(descr().type()).c_str(), player.player_number());
+		send_message
+			(*game,
+			 "warehouse",
+			 descr().descname(),
+			 (boost::format(_("A new %s was added to your economy."))
+			  % descr().descname().c_str()).str(),
+			 true);
+		}
 
 	if (uint32_t const conquer_radius = descr().get_conquers())
 		egbase.conquer_area(PlayerArea<Area<FCoords>>(
@@ -515,14 +515,16 @@ void Warehouse::cleanup(EditorGameBase& egbase) {
 	Player& player = owner();
 	player.unsee_area(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
 
-	log("Message: removing %s (player %i)\n",
-	    to_string(descr().type()).c_str(),
-	    player.player_number());
-	send_message(ref_cast<Game, EditorGameBase>(egbase),
-	             "warehouse",
-	             descr().descname(),
-	             (boost::format(_("A %s was destroyed.")) % descr().descname().c_str()).str(),
-	             true);
+	if (upcast(Game, game, &egbase)) {
+		log("Message: removing %s (player %i)\n",
+		    to_string(descr().type()).c_str(),
+		    player.player_number());
+		send_message(*game,
+		             "warehouse",
+		             descr().descname(),
+		             (boost::format(_("A %s was destroyed.")) % descr().descname().c_str()).str(),
+		             true);
+	}
 
 	Building::cleanup(egbase);
 
@@ -846,9 +848,14 @@ void Warehouse::incorporate_ware(EditorGameBase& egbase, WareInstance* ware) {
 }
 
 /// Called when a transfer for one of the idle Requests completes.
-void Warehouse::request_cb(
-   Game& game, Request&, WareIndex const ware, Worker* const w, PlayerImmovable& target) {
-	Warehouse& wh = ref_cast<Warehouse, PlayerImmovable>(target);
+void Warehouse::request_cb
+	(Game            &       game,
+	 Request         &,
+	 WareIndex        const ware,
+	 Worker          * const w,
+	 PlayerImmovable &       target)
+{
+	Warehouse & wh = dynamic_cast<Warehouse&>(target);
 
 	if (w) {
 		w->schedule_incorporate(game);
@@ -1106,10 +1113,14 @@ void Warehouse::aggressor(Soldier& enemy) {
 	if (!descr().get_conquers())
 		return;
 
-	Game& game = ref_cast<Game, EditorGameBase>(owner().egbase());
-	Map& map = game.map();
-	if (enemy.get_owner() == &owner() || enemy.get_battle() ||
-	    descr().get_conquers() <= map.calc_distance(enemy.get_position(), get_position()))
+	Game & game = dynamic_cast<Game&>(owner().egbase());
+	Map  & map  = game.map();
+	if
+		(enemy.get_owner() == &owner() ||
+		 enemy.get_battle() ||
+		 descr().get_conquers()
+		 <=
+		 map.calc_distance(enemy.get_position(), get_position()))
 		return;
 
 	if (game.map().find_bobs(Area<FCoords>(map.get_fcoords(base_flag().get_position()), 2),
@@ -1123,17 +1134,18 @@ void Warehouse::aggressor(Soldier& enemy) {
 	if (!count_workers(game, soldier_index, noreq))
 		return;
 
-	Soldier& defender = ref_cast<Soldier, Worker>(launch_worker(game, soldier_index, noreq));
+	Soldier & defender = dynamic_cast<Soldier&>(launch_worker(game, soldier_index, noreq));
 	defender.start_task_defense(game, false);
 }
 
-bool Warehouse::attack(Soldier& enemy) {
-	Game& game = ref_cast<Game, EditorGameBase>(owner().egbase());
+bool Warehouse::attack(Soldier & enemy)
+{
+	Game & game = dynamic_cast<Game&>(owner().egbase());
 	WareIndex const soldier_index = descr().tribe().worker_index("soldier");
 	Requirements noreq;
 
 	if (count_workers(game, soldier_index, noreq)) {
-		Soldier& defender = ref_cast<Soldier, Worker>(launch_worker(game, soldier_index, noreq));
+		Soldier & defender = dynamic_cast<Soldier&>(launch_worker(game, soldier_index, noreq));
 		defender.start_task_defense(game, true);
 		enemy.send_signal(game, "sleep");
 		return true;

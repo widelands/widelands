@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-11-12 11:40+0000\n"
-"PO-Revision-Date: 2014-08-24 15:13+0000\n"
+"POT-Creation-Date: 2014-11-21 09:46+0000\n"
+"PO-Revision-Date: 2014-11-21 21:50+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-11-13 05:47+0000\n"
-"X-Generator: Launchpad (build 17241)\n"
+"X-Launchpad-Export-Date: 2014-11-22 04:41+0000\n"
+"X-Generator: Launchpad (build 17252)\n"
 "Language: pl\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -2053,7 +2053,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:13
 msgid "Krumta, carpenter of Chat’Karuth"
-msgstr ""
+msgstr "Krumta, stolarz Chat'Karutha"
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:13
 msgid ""
@@ -2061,6 +2061,10 @@ msgid ""
 "soldier. Take 50 and you’re a hero. Take 20 and soon you will be a honorable "
 "lumberjack.’"
 msgstr ""
+"\"Zetnij drzewo w dwieście ciosów, a jesteś dzieckiem. Zetnij je w sto, a "
+"jesteś żołnierzem. \n"
+"Zetnij je w pięćdziesiąt, a jesteś bohaterem. Zetnij je w 20, a wkrótce "
+"zostaniesz szanowanym drwalem.\""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:16
 msgid "Fell trees in the surrounding area and process them into logs."
@@ -2068,7 +2072,7 @@ msgstr "Ścina okoliczne drzewa i obrąbuje je do postaci kłód."
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:17
 msgid "The lumberjack’s hut needs trees to fell within the working radius."
-msgstr ""
+msgstr "Chata drwala potrzebuje drzew do ścinania w swoim obszarze pracy."
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:29
 msgid ""

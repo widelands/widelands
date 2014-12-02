@@ -24,15 +24,17 @@
 
 #include <SDL_keycode.h>
 
+#include "graphic/graphic.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
+#include "notifications/notifications.h"
+#include "ui_basic/box.h"
+#include "ui_basic/textarea.h"
+#include "ui_basic/unique_window.h"
 #include "wui/chatoverlay.h"
 #include "wui/debugconsole.h"
 #include "wui/mapview.h"
 #include "wui/overlay_manager.h"
-#include "ui_basic/box.h"
-#include "ui_basic/textarea.h"
-#include "ui_basic/unique_window.h"
 
 namespace Widelands {struct CoordPath;}
 
@@ -51,7 +53,6 @@ public:
 		dfShowCensus     = 1, ///< show census report on buildings
 		dfShowStatistics = 2, ///< show statistics report on buildings
 		dfDebug          = 4, ///< general debugging info
-		dfSpeed          = 8, ///< show game speed and speed controls
 	};
 
 	// Manages all UniqueWindows.
@@ -153,7 +154,6 @@ private:
 	void roadb_remove_overlay();
 	void cmd_map_object(const std::vector<std::string> & args);
 	void cmd_lua(const std::vector<std::string> & args);
-	void update_speedlabel();
 
 	struct SelData {
 		SelData
@@ -179,6 +179,9 @@ private:
 	} m_sel;
 
 	std::unique_ptr<InteractiveBaseInternals> m;
+
+	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
+	   graphic_resolution_changed_subscriber_;
 	Widelands::EditorGameBase & m_egbase;
 	uint32_t m_display_flags;
 	uint32_t          m_lastframe;         //  system time (milliseconds)
@@ -189,9 +192,6 @@ private:
 	OverlayManager::JobId m_road_buildhelp_overlay_jobid;
 	Widelands::CoordPath  * m_buildroad;         //  path for the new road
 	Widelands::PlayerNumber m_road_build_player;
-
-	UI::Textarea m_label_speed_shadow;
-	UI::Textarea m_label_speed;
 
 	UI::UniqueWindow::Registry m_debugconsole;
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;

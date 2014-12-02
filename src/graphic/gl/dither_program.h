@@ -20,24 +20,32 @@
 #ifndef WL_GRAPHIC_GL_DITHER_PROGRAM_H
 #define WL_GRAPHIC_GL_DITHER_PROGRAM_H
 
+#include <memory>
+
+#include "base/point.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
 #include "logic/description_maintainer.h"
 #include "logic/world/terrain_description.h"
 
+class Texture;
+
 class DitherProgram {
 public:
 	DitherProgram();
+	~DitherProgram();
 
 	// Draws the terrain.
-	void draw(const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
+	void draw(uint32_t gametime,
+	          const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
 	          const FieldsToDraw& fields_to_draw);
 
 private:
-	// Adds the triangle between the indexes (which index 'fields_to_draw' to
+	// Adds the triangle between the indexes (which index 'fields_to_draw') to
 	// vertices_ if the my_terrain != other_terrain and the dither_layer()
 	// agree.
 	void maybe_add_dithering_triangle(
+	   uint32_t gametime,
 	   const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
 	   const FieldsToDraw& fields_to_draw,
 	   int idx1,
@@ -46,10 +54,10 @@ private:
 	   int my_terrain,
 	   int other_terrain);
 
-	// Adds the 'field' as an vertex to the 'vertices_' entry for 'terrain'. The
-	// 'order_index' defines which texture position will be used for this
-	// vertcx.
-	void add_vertex(const FieldsToDraw::Field& field, int order_index, int terrain);
+	// Adds the 'field' as an vertex to the 'vertices_'. The 'order_index'
+	// defines which texture position in the dithering texture will be used for
+	// this vertex.
+	void add_vertex(const FieldsToDraw::Field& field, int order_index, const FloatPoint& texture_offset);
 
 	struct PerVertexData {
 		float gl_x;
@@ -59,7 +67,12 @@ private:
 		float brightness;
 		float dither_texture_x;
 		float dither_texture_y;
+		float texture_offset_x;
+		float texture_offset_y;
 	};
+
+	// Call through to GL.
+	void gl_draw(int gl_texture, float texture_w, float texture_h);
 
 	// The program used for drawing the terrain.
 	Gl::Program gl_program_;
@@ -68,19 +81,23 @@ private:
 	Gl::Buffer gl_array_buffer_;
 
 	// Attributes.
-	GLint attr_position_;
-	GLint attr_texture_position_;
-	GLint attr_dither_texture_position_;
 	GLint attr_brightness_;
+	GLint attr_dither_texture_position_;
+	GLint attr_position_;
+	GLint attr_texture_offset_;
+	GLint attr_texture_position_;
 
 	// Uniforms.
-	GLint u_terrain_texture_;
 	GLint u_dither_texture_;
+	GLint u_terrain_texture_;
+	GLint u_texture_dimensions_;
+
+	// The texture mask for the dithering step.
+	std::unique_ptr<Texture> dither_mask_;
 
 	// Objects below are here to avoid memory allocations on each frame, they
-	// could theoretically also always be recreated. Index as follows:
-	// vertices_[terrain_index][vertex_index]
-	std::vector<std::vector<PerVertexData>> vertices_;
+	// could theoretically also always be recreated.
+	std::vector<PerVertexData> vertices_;
 };
 
 #endif  // end of include guard: WL_GRAPHIC_GL_DITHER_PROGRAM_H

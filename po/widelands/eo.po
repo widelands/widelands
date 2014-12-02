@@ -3,20 +3,22 @@
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 # GunChleoc <fios@foramnagaidhlig.net>, 2014.
+# Christian Fraß <fenris.kcf@gmail.com>, 2014.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-11-12 11:40+0000\n"
-"PO-Revision-Date: 2014-11-12 20:36+0000\n"
+"POT-Creation-Date: 2014-11-21 09:46+0000\n"
+"PO-Revision-Date: 2014-11-15 08:14+0000\n"
 "Last-Translator: Fenris Wolf <fenris.kcf@googlemail.com>\n"
-"Language-Team: Widelands fixxer upper\n"
+"Language-Team: Esperanto <translation-team-eo@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-11-13 05:49+0000\n"
-"X-Generator: Launchpad (build 17241)\n"
+"X-Launchpad-Export-Date: 2014-11-22 04:44+0000\n"
+"X-Generator: Launchpad (build 17252)\n"
 "Language: eo\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -71,7 +73,7 @@ msgstr "%1$s kaj %2$s"
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:95
 msgid "Jan"
-msgstr ""
+msgstr "Jan"
 
 #. * TRANSLATORS: February. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
@@ -203,35 +205,36 @@ msgstr "Malfari"
 msgid "Redo"
 msgstr "Refari"
 
-#: ../../src/editor/editorinteractive.cc:190
+#: ../../src/editor/editorinteractive.cc:188
 msgid "Unsupported format"
 msgstr "Nesubtenata formato"
 
-#: ../../src/editor/editorinteractive.cc:191
+#: ../../src/editor/editorinteractive.cc:189
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr ""
+"Widelands ne povis ŝargi la dosieron \"%s\". La formato ŝajnas esti nekongrua"
 
-#: ../../src/editor/editorinteractive.cc:206
+#: ../../src/editor/editorinteractive.cc:204
 msgid "Creating players"
 msgstr "Kreanta ludantojn"
 
-#: ../../src/editor/editorinteractive.cc:212
-#: ../../src/editor/editorinteractive.cc:600
+#: ../../src/editor/editorinteractive.cc:210
+#: ../../src/editor/editorinteractive.cc:601
 msgid "Loading graphics..."
 msgstr "Ŝarganta grafikon"
 
-#: ../../src/editor/editorinteractive.cc:258
+#: ../../src/editor/editorinteractive.cc:259
 msgid "Unsaved Map"
 msgstr "Nekonservata mapo"
 
-#: ../../src/editor/editorinteractive.cc:259
+#: ../../src/editor/editorinteractive.cc:260
 msgid "The map has not been saved, do you really want to quit?"
-msgstr "La mapo ne estas konservita, ĉu vi vere volas eliri?"
+msgstr "La mapo ne estis konservita; ĉu vi vere volas eliri?"
 
-#: ../../src/editor/editorinteractive.cc:595
+#: ../../src/editor/editorinteractive.cc:596
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:147
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:510
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:178
@@ -239,7 +242,7 @@ msgstr "La mapo ne estas konservita, ĉu vi vere volas eliri?"
 msgid "No Name"
 msgstr "Nenia nomo"
 
-#: ../../src/editor/editorinteractive.cc:596
+#: ../../src/editor/editorinteractive.cc:597
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:148
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:511
 #: ../../src/logic/map.h:181 ../../src/ui_fsmenu/netsetup_lan.cc:199
@@ -316,23 +319,23 @@ msgstr "Posedaĵo de: —"
 
 #: ../../src/editor/tools/editor_info_tool.cc:88
 msgid "Has base immovable"
-msgstr ""
+msgstr "Havas baz-konstruaĵon"
 
 #: ../../src/editor/tools/editor_info_tool.cc:88
 msgid "No base immovable"
-msgstr ""
+msgstr "Nenia baz-konstruaĵo"
 
 #: ../../src/editor/tools/editor_info_tool.cc:91
 msgid "Has animals"
-msgstr ""
+msgstr "Havas bestojn"
 
 #: ../../src/editor/tools/editor_info_tool.cc:91
 msgid "No animals"
-msgstr ""
+msgstr "Neniaj bestoj"
 
 #: ../../src/editor/tools/editor_info_tool.cc:95
 msgid "Terrain:"
-msgstr ""
+msgstr "Lando:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:101
 #: ../../src/editor/tools/editor_info_tool.cc:122
@@ -343,26 +346,26 @@ msgstr "Nomo: %s"
 #: ../../src/editor/tools/editor_info_tool.cc:102
 #, c-format
 msgid "Texture Number: %i"
-msgstr ""
+msgstr "Teksturo-identigilo: %i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:105
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:253
 msgid "Resources:"
-msgstr "Risurcoj:"
+msgstr "Krudmaterialoj:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:112
 #, c-format
 msgid "Resource name: %s"
-msgstr ""
+msgstr "Krudmaterial-nomo: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:114
 #, c-format
 msgid "Resource amount: %i"
-msgstr ""
+msgstr "Krudmaterial-provizo: %i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:117
 msgid "No resources"
-msgstr ""
+msgstr "Neniaj krudmaterialoj"
 
 #: ../../src/editor/tools/editor_info_tool.cc:121
 #: ../../src/ui_fsmenu/mapselect.cc:294
@@ -462,7 +465,7 @@ msgstr "Ludantoj:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:101
 msgid "Descr:"
-msgstr ""
+msgstr "Priskribo:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:117
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:127
@@ -472,7 +475,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/load_map_or_game.cc:66
 #: ../../src/wui/game_main_menu_save_game.cc:92
 msgid "OK"
-msgstr "Bone"
+msgstr "Apliki"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:127
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:135
@@ -481,41 +484,43 @@ msgstr "Bone"
 #: ../../src/ui_fsmenu/options.cc:474
 #: ../../src/wui/game_main_menu_save_game.cc:102 ../../src/wui/login_box.cc:73
 msgid "Cancel"
-msgstr ""
+msgstr "Nuligi"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:180
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:119
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:239
 #, c-format
 msgid "%1$ix%2$i"
-msgstr ""
+msgstr "%1$ix%2$i"
 
 #. * TRANSLATORS: Parent directory
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:215
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:293
 #: ../../src/ui_fsmenu/mapselect.cc:410
 msgid "parent"
-msgstr ""
+msgstr "origino"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:60
 #: ../../src/ui_fsmenu/loadgame.cc:279
 #: ../../src/wui/game_main_menu_save_game.cc:65
 msgid "Map Name:"
-msgstr ""
+msgstr "Map-nomo:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:74
 msgid "Nr Players:"
-msgstr ""
+msgstr "Nombro da ludantoj:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:100
 msgid "Set origin"
-msgstr ""
+msgstr "Agordi originon"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:102
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the top-"
 "left corner of a generated minimap."
 msgstr ""
+"Agordi la pozicion, kiu havu la koordinatojn (0, 0). Tiu estos la maldekstra "
+"supra angulo de la generita mapo."
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:65
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:131
@@ -535,59 +540,59 @@ msgstr "Alto: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:109
 msgid "Create Map"
-msgstr ""
+msgstr "Krei mapon"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:57
 msgid "Summer"
-msgstr ""
+msgstr "Somero"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:58
 msgid "Winter"
-msgstr ""
+msgstr "Vintro"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:59
 msgid "Desert"
-msgstr ""
+msgstr "Dezerto"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:60
 msgid "Black"
-msgstr ""
+msgstr "Nigra"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:78
 msgid "Random Number:"
-msgstr ""
+msgstr "Hazarda nombro:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:174
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:429
 #, c-format
 msgid "Water: %i %%"
-msgstr ""
+msgstr "Akvo: %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:199
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:430
 #, c-format
 msgid "Land: %i %%"
-msgstr ""
+msgstr "Tero: %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:224
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:431
 #, c-format
 msgid "Wasteland: %i %%"
-msgstr ""
+msgstr "Malgrasa lando: %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:233
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:432
 #, c-format
 msgid "Mountains: %i %%"
-msgstr ""
+msgstr "Montoj: %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:246
 msgid "Island mode:"
-msgstr ""
+msgstr "Insula modo:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:256
 msgid "Low"
-msgstr ""
+msgstr "Malalta"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:257
 #: ../../src/logic/building.cc:531
@@ -596,11 +601,11 @@ msgstr "Meza"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:258
 msgid "High"
-msgstr ""
+msgstr "Alta"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:284
 msgid "Map ID:"
-msgstr ""
+msgstr "Map-identigilo:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:319
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:433
@@ -610,29 +615,29 @@ msgstr "Ludantoj: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:332
 msgid "Generate Map"
-msgstr ""
+msgstr "Generi mapon"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:513
 msgid "Generating random map..."
-msgstr ""
+msgstr "Generanta hazardan mapon..."
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:110
 msgid "Descr: "
-msgstr ""
+msgstr "Priskribo: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:142
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:32
 msgid "Make Directory"
-msgstr ""
+msgstr "Krei dosierujon"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:202
 msgid "unnamed"
-msgstr ""
+msgstr "nenomita"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:248
 #, c-format
 msgid "Directory: %s"
-msgstr ""
+msgstr "Dosierujo: %s"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:250
 msgid "directory"
@@ -640,18 +645,18 @@ msgstr "dosierujo"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:252
 msgid "Not a map file"
-msgstr ""
+msgstr "Tiu ne estas map-dosiero"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:380
 #: ../../src/wui/game_main_menu_save_game.cc:258
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
-msgstr ""
+msgstr "Dosiero kun la nomo ‘%s’ jam ekzistas. Ĉu anstataŭigi?"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:383
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:403
 msgid "Error Saving Map!"
-msgstr ""
+msgstr "Eraro dum konservado de mapo!"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:399
 msgid ""
@@ -660,22 +665,26 @@ msgid ""
 "\n"
 "Reason given:\n"
 msgstr ""
+"Eraro dum konservado de mapo!\n"
+"Konservita map-dosiero eble estas difekta!\n"
+"\n"
+"Kaŭzo:\n"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:38
 msgid "Enter Directory Name: "
-msgstr ""
+msgstr "Entajpu dosier-nomon: "
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:45
 msgid "Player Options"
-msgstr ""
+msgstr "Ludant-opcioj"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:51
 msgid "Add player"
-msgstr ""
+msgstr "Aldoni ludanton"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:58
 msgid "Remove last player"
-msgstr ""
+msgstr "Forigi lastan ludanton"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:73
 msgid "Number of Players"
@@ -696,79 +705,81 @@ msgid ""
 "Cannot remove player. It is referenced someplace. Remove all buildings and "
 "animals that depend on this player and try again."
 msgstr ""
+"Ne eblis forigi la ludanton, ĉar ankoraŭ ekzistas rilato al li. Forigu ĉiujn "
+"konstruaĵojn kaj bestojn, kiuj dependas je tiu ludanto kaj provu denove!"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:57
 msgid "Allowed Buildings"
-msgstr ""
+msgstr "Permesitaj konstruaĵoj"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:62
 msgid "Allowed Buildings:"
-msgstr ""
+msgstr "Permesitaj konstruaĵoj:"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:68
 msgid "Forbidden Buildings:"
-msgstr ""
+msgstr "Malpermesitaj konstruaĵoj:"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:85
 msgid "Forbid"
-msgstr ""
+msgstr "Malpermesi"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:94
 msgid "Allow"
-msgstr ""
+msgstr "Permesi"
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:41
 msgid "Height Tools Options"
-msgstr ""
+msgstr "Altec-ilaj opcioj"
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:46
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:51
 msgid "Increase/Decrease Value"
-msgstr ""
+msgstr "Pliigi/malpliigi valoron"
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:82
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:82
 msgid "Set Value"
-msgstr ""
+msgstr "Agordi valoron"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:47
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:70
 msgid "Resources"
-msgstr "Risurcoj"
+msgstr "Krudmaterialoj"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:101
 msgid "Current Selection"
-msgstr ""
+msgstr "Nuna elektaĵo"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:65
 msgid "Change height"
-msgstr ""
+msgstr "Ŝanĝi alton"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:66
 msgid "Noise height"
-msgstr ""
+msgstr "Difusigi alton"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:67
 #: ../../src/wui/minimap.cc:150
 msgid "Terrain"
-msgstr ""
+msgstr "Lando"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
 msgid "Immovables"
-msgstr ""
+msgstr "Konstruaĵoj"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:69
 #: ../../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:45
 msgid "Animals"
-msgstr ""
+msgstr "Bestoj"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:71
 msgid "Set port space"
-msgstr ""
+msgstr "Agordi haven-spacon"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:45
 msgid "Noise Height Options"
-msgstr ""
+msgstr "Alt-difusigad-opcioj"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:148
 #, c-format
@@ -783,7 +794,7 @@ msgstr "Maksimumo: %u"
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:154
 #, c-format
 msgid "Set value: %u"
-msgstr ""
+msgstr "Agordi valoron: %u"
 
 #: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:58
 msgid "Immovable Select"
@@ -792,32 +803,32 @@ msgstr ""
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:88
 msgid "arable"
-msgstr ""
+msgstr "kultivebla"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:94
 msgid "aquatic"
-msgstr ""
+msgstr "Akvuma"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:100
 msgid "mountainous"
-msgstr ""
+msgstr "Montuma"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:106
 msgid "dead"
-msgstr ""
+msgstr "morta"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:113
 msgid "unpassable"
-msgstr ""
+msgstr "netransirebla"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:118
 msgid "treeless"
-msgstr ""
+msgstr "senarba"
 
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:141
 msgid "Terrain Select"
@@ -826,27 +837,27 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_toolsize_menu.cc:76
 #, c-format
 msgid "Current Size: %u"
-msgstr ""
+msgstr "Nuna amplekso: %u"
 
 #: ../../src/io/dedicated_log.cc:68 ../../src/network/internet_gaming.cc:849
 msgid "unknown"
-msgstr ""
+msgstr "nekonata"
 
 #: ../../src/logic/building.cc:524
 msgid "mine"
-msgstr ""
+msgstr "mieno"
 
 #: ../../src/logic/building.cc:525
 msgid "small"
-msgstr ""
+msgstr "malgranda"
 
 #: ../../src/logic/building.cc:526
 msgid "big"
-msgstr ""
+msgstr "granda"
 
 #: ../../src/logic/building.cc:526
 msgid "medium"
-msgstr ""
+msgstr "mezgranda"
 
 #: ../../src/logic/building.cc:529
 msgid "Mine"
@@ -863,7 +874,7 @@ msgstr "Granda"
 #: ../../src/logic/constructionsite.cc:88 ../../src/logic/immovable.cc:570
 #, c-format
 msgid "%i%% built"
-msgstr ""
+msgstr "%i%% konstruita"
 
 #: ../../src/logic/dismantlesite.cc:99
 #, c-format
@@ -876,7 +887,7 @@ msgstr "Ŝarganta mund-datumojn"
 
 #: ../../src/logic/editor_game_base.cc:279
 msgid "Loading tribes"
-msgstr ""
+msgstr "Ŝarganta tribojn"
 
 #. * TRANSLATORS: Win condition for this game has not been set.
 #: ../../src/logic/game.cc:143
@@ -885,12 +896,12 @@ msgstr "Neagordita"
 
 #: ../../src/logic/game.cc:229
 msgid "Preloading a map"
-msgstr ""
+msgstr "Praŝarganta mapon"
 
 #: ../../src/logic/game.cc:239
 #, c-format
 msgid "Adding player %u"
-msgstr ""
+msgstr "Aldonanta ludanton %u"
 
 #: ../../src/logic/game.cc:247 ../../src/logic/game.cc:339
 #: ../../src/ui_fsmenu/launch_mpg.cc:302 ../../src/ui_fsmenu/launch_spg.cc:241
@@ -901,20 +912,20 @@ msgstr "Scenaro"
 
 #: ../../src/logic/game.cc:253
 msgid "Loading a map"
-msgstr ""
+msgstr "Ŝarganta mapon"
 
 #: ../../src/logic/game.cc:280 ../../src/logic/game.cc:357
 #: ../../src/logic/game.cc:386
 msgid "Preloading map"
-msgstr ""
+msgstr "Praŝarganta mapon"
 
 #: ../../src/logic/game.cc:294
 msgid "Configuring players"
-msgstr ""
+msgstr "Formanta ludantojn"
 
 #: ../../src/logic/game.cc:328
 msgid "Loading map"
-msgstr ""
+msgstr "Ŝarganta mapon"
 
 #: ../../src/logic/game.cc:370 ../../src/logic/game.cc:403
 #: ../../src/wlapplication.cc:1506
@@ -923,11 +934,11 @@ msgstr "Ŝargante..."
 
 #: ../../src/logic/game.cc:471
 msgid "Creating player infrastructure"
-msgstr ""
+msgstr "Kreanta ludant-instalaĵon"
 
 #: ../../src/logic/game.cc:484 ../../src/logic/player.cc:228
 msgid "Missing starting position"
-msgstr ""
+msgstr "Mankas komenc-pozicio"
 
 #: ../../src/logic/game.cc:486
 #, c-format
@@ -937,6 +948,9 @@ msgid ""
 "You can manually add a starting position with the Widelands Editor to fix "
 "this problem."
 msgstr ""
+"Widelands ne povis lanĉi la ludon, ĉar ludanto %u ne havas komenc-pozicion.\n"
+"Vi povas aldoni komenc-pozicion mane per la Widelands-redaktilo por elimini "
+"tiun problemon."
 
 #: ../../src/logic/map.cc:333
 msgid "Player 1"
@@ -944,52 +958,52 @@ msgstr "Ludanto 1"
 
 #: ../../src/logic/map.h:182
 msgid "No description defined"
-msgstr ""
+msgstr "Nenia priskribo disponebla"
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to
 #. * TRANSLATORS: %2% is the maximum number of soldier slots in the building
 #: ../../src/logic/militarysite.cc:125
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% soldato (+%2%)"
+msgstr[1] "%1% soldatoj (+%2%)"
 
 #: ../../src/logic/militarysite.cc:130
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u soldato"
+msgstr[1] "%u soldatoj"
 
 #: ../../src/logic/militarysite.cc:139
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) soldato (+%3%)"
+msgstr[1] "%1%(+%2%) soldatoj (+%3%)"
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to
 #. * TRANSLATORS: %2% are currently open soldier slots in the building
 #: ../../src/logic/militarysite.cc:144
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) soldato"
+msgstr[1] "%1%(+%2%) soldatoj"
 
 #: ../../src/logic/militarysite.cc:849
 msgid "Militarysite lost!"
-msgstr ""
+msgstr "Militista konstruaĵo perdita!"
 
 #: ../../src/logic/militarysite.cc:903
 msgid "Enemy at site defeated!"
-msgstr ""
+msgstr "Malamiko venkita en militista konstruajo!"
 
 #: ../../src/logic/militarysite.cc:953
 msgid "You are under attack"
-msgstr ""
+msgstr "Vi estas atakata"
 
 #: ../../src/logic/objective.h:36
 msgid "no descr"
-msgstr ""
+msgstr "nenia priskribo"
 
 #: ../../src/logic/player.cc:230
 #, c-format
@@ -999,31 +1013,34 @@ msgid ""
 "You can manually add a starting position with Widelands Editor, to fix this "
 "problem."
 msgstr ""
+"Widelands ne povis lanĉi la ludon, ĉar ludanto %u ne havas komenc-pozicion.\n"
+"Vi povas aldoni komenc-pozicion mane per la Widelands-redaktilo por elimini "
+"tiun problemon."
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the ware ‘%s’
 #: ../../src/logic/production_program.cc:269
 #, c-format
 msgid "the economy needs the ware ‘%s’"
-msgstr ""
+msgstr "la ekonomio bezonas la varon ‘%s’"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy doesn’t need the ware ‘%s’
 #: ../../src/logic/production_program.cc:277
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
-msgstr ""
+msgstr "la ekonomio ne bezonas la varon ‘%s’"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the worker ‘%s’
 #: ../../src/logic/production_program.cc:291
 #, c-format
 msgid "the economy needs the worker ‘%s’"
-msgstr ""
+msgstr "la ekonomio bezonas la laboriston ‘%s’"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
 #. * TRANSLATORS:      ... because the economy doesn’t need the worker ‘%s’
 #: ../../src/logic/production_program.cc:301
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
-msgstr ""
+msgstr "la ekonomio ne bezonas la laboriston ‘%s’"
 
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "3x water":
 #. * TRANSLATORS:    %1$s = "3"
@@ -1048,29 +1065,29 @@ msgstr ""
 #: ../../src/logic/production_program.cc:1160
 #, c-format
 msgid "%1$ix %2$s"
-msgstr ""
+msgstr "%1$ix %2$s"
 
 #. * TRANSLATORS: %s is a list of wares
 #: ../../src/logic/production_program.cc:351
 #, c-format
 msgid "the building has the following wares: %s"
-msgstr ""
+msgstr "la konstruaĵo entenas la jenajn varojn: %s"
 
 #. * TRANSLATORS: %s is a list of wares
 #: ../../src/logic/production_program.cc:373
 #, c-format
 msgid "the building doesn’t have the following wares: %s"
-msgstr ""
+msgstr "la konstruaĵo ne entenas la jenajn varojn: %s"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs experience'.
 #: ../../src/logic/production_program.cc:391
 msgid "a worker needs experience"
-msgstr ""
+msgstr "laboristo bezonas sperton"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers need no experience'.
 #: ../../src/logic/production_program.cc:398
 msgid "the workers need no experience"
-msgstr ""
+msgstr "la laboristoj ne bezonas pli da sperto"
 
 #. * TRANSLATORS: "Did not start working because the economy needs the ware ‘%s’"
 #. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
@@ -1084,19 +1101,19 @@ msgstr ""
 #: ../../src/logic/production_program.cc:970
 #, c-format
 msgid "Did not start %1$s because %2$s"
-msgstr ""
+msgstr "%1$s ne lanĉita ĉar %2$s"
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware ‘%s’"
 #: ../../src/logic/production_program.cc:586
 #, c-format
 msgid "Completed %1$s because %2$s"
-msgstr ""
+msgstr "%1$s estis kompletigita ĉar %2$s"
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware ‘%s’"
 #: ../../src/logic/production_program.cc:593
 #, c-format
 msgid "Skipped %1$s because %2$s"
-msgstr ""
+msgstr "%1$s ellasita ĉar %2$s"
 
 #. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta bread is missing'
@@ -1104,20 +1121,20 @@ msgstr ""
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%s mankas"
+msgstr[1] "%s mankas"
 
 #. * TRANSLATORS: %s is a list of wares
 #: ../../src/logic/production_program.cc:1074
 #, c-format
 msgid "Produced %s"
-msgstr ""
+msgstr "%s estis produktita"
 
 #. * TRANSLATORS: %s is a list of workers
 #: ../../src/logic/production_program.cc:1169
 #, c-format
 msgid "Recruited %s"
-msgstr ""
+msgstr "%s soldatiĝis"
 
 #. * TRANSLATORS: %1$s = production site name, %2$s = production program name, %3$s = resource
 #: ../../src/logic/production_program.cc:1231
@@ -3104,33 +3121,33 @@ msgstr ""
 msgid "Do you really want to destroy this %s?"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:287
+#: ../../src/wui/actionconfirm.cc:286
 msgid "Dismantle building?"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:288
+#: ../../src/wui/actionconfirm.cc:287
 #, c-format
 msgid "Do you really want to dismantle this %s?"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:348
+#: ../../src/wui/actionconfirm.cc:346
 msgid "Enhance building?"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:349
+#: ../../src/wui/actionconfirm.cc:347
 #, c-format
 msgid "Do you really want to enhance this %s?"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:401
+#: ../../src/wui/actionconfirm.cc:398
 msgid "Do you really want to sink this ship?"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:401 ../../src/wui/actionconfirm.cc:442
+#: ../../src/wui/actionconfirm.cc:398 ../../src/wui/actionconfirm.cc:438
 msgid "Sink the ship?"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:442
+#: ../../src/wui/actionconfirm.cc:438
 msgid "Do you really want to cancel the active expedition?"
 msgstr ""
 

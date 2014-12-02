@@ -19,10 +19,16 @@
 
 #include "map_io/map_saver.h"
 
+#include <memory>
+
 #include "base/log.h"
 #include "base/scoped_timer.h"
 #include "base/wexception.h"
+#include "graphic/image_io.h"
+#include "graphic/minimap_renderer.h"
+#include "graphic/texture.h"
 #include "io/filesystem/filesystem.h"
+#include "io/filewrite.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/player.h"
@@ -208,6 +214,15 @@ void MapSaver::save() {
 #ifndef NDEBUG
 	m_mos->detect_unsaved_objects();
 #endif
+
+	// Write minimap
+	{
+		std::unique_ptr<Texture> minimap(
+		   draw_minimap(m_egbase, nullptr, Point(0, 0), MiniMapLayer::Terrain));
+		FileWrite fw;
+		save_surface_to_png(minimap.get(), &fw, COLOR_TYPE::RGBA);
+		fw.write(m_fs, "minimap.png");
+	}
 }
 
 }

@@ -561,7 +561,7 @@ void WareInstance::Loader::load(FileRead & fr)
 	m_transfer_nextstep = fr.unsigned_32();
 	if (fr.unsigned_8()) {
 		ware.m_transfer =
-			new Transfer(ref_cast<Game, EditorGameBase>(egbase()), ware);
+			new Transfer(dynamic_cast<Game&>(egbase()), ware);
 		ware.m_transfer->read(fr, m_transfer);
 	}
 }

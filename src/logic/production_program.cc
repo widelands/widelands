@@ -54,7 +54,6 @@ namespace Widelands {
 
 namespace {
 
-
 /**
  * Convert std::string to any sstream-compatible type
  *
@@ -136,6 +135,73 @@ bool match_force_skip(char* & candidate, const char* pattern) {
 
 	return false;
 }
+
+ProductionProgram::ActReturn::Condition * create_economy_condition
+	(char * & parameters, const TribeDescr & tribe)
+{
+	try {
+		if (match_force_skip(parameters, "needs"))
+			try {
+				bool reached_end;
+				char const * const type_name = next_word(parameters, reached_end);
+				WareIndex index = tribe.ware_index(type_name);
+				if (index != INVALID_INDEX) {
+					tribe.set_ware_type_has_demand_check(index);
+					return
+						new ProductionProgram::ActReturn::EconomyNeedsWare
+							(index);
+				} else if ((index = tribe.worker_index(type_name)) != INVALID_INDEX) {
+					tribe.set_worker_type_has_demand_check(index);
+					return
+						new ProductionProgram::ActReturn::EconomyNeedsWorker
+							(index);
+				} else
+					throw GameDataError
+						("expected %s but found \"%s\"",
+						 "ware type or worker type", type_name);
+			} catch (const WException & e) {
+				throw GameDataError("needs: %s", e.what());
+			}
+		else
+			throw GameDataError
+				("expected %s but found \"%s\"", "\"needs\"", parameters);
+	} catch (const WException & e) {
+		throw GameDataError("economy: %s", e.what());
+	}
+}
+
+
+ProductionProgram::ActReturn::Condition * create_site_condition
+	(char * & parameters, const ProductionSiteDescr & descr)
+{
+	try {
+		if (match_force_skip(parameters, "has"))
+			return
+				new ProductionProgram::ActReturn::SiteHas(parameters, descr);
+		else
+			throw GameDataError
+				("expected %s but found \"%s\"", "\"has\"", parameters);
+	} catch (const WException & e) {
+		throw GameDataError("site: %s", e.what());
+	}
+}
+
+
+ProductionProgram::ActReturn::Condition * create_workers_condition
+	(char * & parameters)
+{
+	try {
+		if (match(parameters, "need experience"))
+			return new ProductionProgram::ActReturn::WorkersNeedExperience;
+		else
+			throw GameDataError
+				("expected %s but found \"%s\"",
+				 "\"need experience\"", parameters);
+	} catch (const WException & e) {
+		throw GameDataError("workers: %s", e.what());
+	}
+}
+
 
 
 }  // namespace
@@ -396,73 +462,6 @@ std::string ProductionProgram::ActReturn::WorkersNeedExperience::description_neg
 {
 	/** TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers need no experience'. */
 	return _("the workers need no experience");
-}
-
-
-ProductionProgram::ActReturn::Condition * create_economy_condition
-	(char * & parameters, const TribeDescr & tribe)
-{
-	try {
-		if (match_force_skip(parameters, "needs"))
-			try {
-				bool reached_end;
-				char const * const type_name = next_word(parameters, reached_end);
-				WareIndex index = tribe.ware_index(type_name);
-				if (index != INVALID_INDEX) {
-					tribe.set_ware_type_has_demand_check(index);
-					return
-						new ProductionProgram::ActReturn::EconomyNeedsWare
-							(index);
-				} else if ((index = tribe.worker_index(type_name)) != INVALID_INDEX) {
-					tribe.set_worker_type_has_demand_check(index);
-					return
-						new ProductionProgram::ActReturn::EconomyNeedsWorker
-							(index);
-				} else
-					throw GameDataError
-						("expected %s but found \"%s\"",
-						 "ware type or worker type", type_name);
-			} catch (const WException & e) {
-				throw GameDataError("needs: %s", e.what());
-			}
-		else
-			throw GameDataError
-				("expected %s but found \"%s\"", "\"needs\"", parameters);
-	} catch (const WException & e) {
-		throw GameDataError("economy: %s", e.what());
-	}
-}
-
-
-ProductionProgram::ActReturn::Condition * create_site_condition
-	(char * & parameters, const ProductionSiteDescr & descr)
-{
-	try {
-		if (match_force_skip(parameters, "has"))
-			return
-				new ProductionProgram::ActReturn::SiteHas(parameters, descr);
-		else
-			throw GameDataError
-				("expected %s but found \"%s\"", "\"has\"", parameters);
-	} catch (const WException & e) {
-		throw GameDataError("site: %s", e.what());
-	}
-}
-
-
-ProductionProgram::ActReturn::Condition * create_workers_condition
-	(char * & parameters)
-{
-	try {
-		if (match(parameters, "need experience"))
-			return new ProductionProgram::ActReturn::WorkersNeedExperience;
-		else
-			throw GameDataError
-				("expected %s but found \"%s\"",
-				 "\"need experience\"", parameters);
-	} catch (const WException & e) {
-		throw GameDataError("workers: %s", e.what());
-	}
 }
 
 

@@ -81,7 +81,7 @@ BuildingWindow::BuildingWindow
 	// so that overriding create_capsbuttons() works
 
 	set_center_panel(vbox);
-	set_think(true);
+	set_thinks(true);
 	set_fastclick_panel(this);
 
 	show_workarea();
@@ -119,7 +119,7 @@ void BuildingWindow::draw(RenderTarget & dst)
 
 	const Image* dark_frame = ImageTransformations::change_luminosity
 		(&anim.representative_image(building().owner().get_playercolor()), 1.22, true);
-	dst.blit(Point(get_inner_w() / 2, get_inner_h() / 2), dark_frame, CM_UseAlpha, UI::Align_Center);
+	dst.blit(Point(get_inner_w() / 2, get_inner_h() / 2), dark_frame, BlendMode::UseAlpha, UI::Align_Center);
 }
 
 /*
@@ -378,7 +378,7 @@ void BuildingWindow::act_bulldoze()
 			igbase().game().send_player_bulldoze(m_building);
 	}
 	else {
-		show_bulldoze_confirm(ref_cast<InteractivePlayer, InteractiveGameBase>(igbase()), m_building);
+		show_bulldoze_confirm(dynamic_cast<InteractivePlayer&>(igbase()), m_building);
 	}
 }
 
@@ -394,7 +394,7 @@ void BuildingWindow::act_dismantle()
 			igbase().game().send_player_dismantle(m_building);
 	}
 	else {
-		show_dismantle_confirm(ref_cast<InteractivePlayer, InteractiveGameBase>(igbase()), m_building);
+		show_dismantle_confirm(dynamic_cast<InteractivePlayer&>(igbase()), m_building);
 	}
 }
 
@@ -438,7 +438,7 @@ void BuildingWindow::act_enhance(Widelands::BuildingIndex id)
 	}
 	else {
 		show_enhance_confirm
-			(ref_cast<InteractivePlayer, InteractiveGameBase>(igbase()),
+			(dynamic_cast<InteractivePlayer&>(igbase()),
 			 m_building,
 			 id);
 	}

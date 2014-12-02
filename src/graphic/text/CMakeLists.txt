@@ -18,6 +18,7 @@ wl_library(graphic_text
   USES_SDL2_TTF
   USES_SDL2_GFX
   DEPENDS
+    graphic_sdl_utils
     base_exceptions
     base_geometry
     graphic_color
