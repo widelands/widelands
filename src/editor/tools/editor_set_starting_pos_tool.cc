@@ -19,6 +19,8 @@
 
 #include "editor/tools/editor_set_starting_pos_tool.h"
 
+#include <boost/format.hpp>
+
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_tool.h"
 #include "graphic/graphic.h"
@@ -59,7 +61,8 @@ EditorSetStartingPosTool::EditorSetStartingPosTool()
 	: EditorTool(*this, *this, false), m_current_sel_pic(nullptr)
 {
 	m_current_player = 0;
-	strcpy(fsel_picsname, FSEL_PIC_FILENAME);
+	fsel_picsname = (boost::format("data/pics/fsel_editor_set_player_%d%d_pos.png")
+						  % 0 % 0).str();
 }
 
 int32_t EditorSetStartingPosTool::handle_click_impl(Widelands::Map& map,
@@ -82,9 +85,9 @@ int32_t EditorSetStartingPosTool::handle_click_impl(Widelands::Map& map,
 
 		Widelands::Coords const old_sp = map.get_starting_pos(m_current_player);
 
-		char picname[] = "data/pics/editor_player_00_starting_pos.png";
-		picname[19] += m_current_player / 10;
-		picname[20] += m_current_player % 10;
+		const std::string picname = (boost::format("data/pics/editor_player_%d%d_starting_pos.png")
+							  % (m_current_player / 10)
+							  % (m_current_player % 10)).str();
 		const Image* pic = g_gr->images().get(picname);
 
 		//  check if field is valid
@@ -114,8 +117,8 @@ Widelands::PlayerNumber EditorSetStartingPosTool::get_current_player
 
 void EditorSetStartingPosTool::set_current_player(int32_t const i) {
 	m_current_player = i;
-
-	fsel_picsname[28] = '0' + m_current_player / 10;
-	fsel_picsname[29] = '0' + m_current_player % 10;
-	m_current_sel_pic = fsel_picsname;
+	fsel_picsname = (boost::format("data/pics/fsel_editor_set_player_%d%d_pos.png")
+						  % (m_current_player / 10)
+						  % (m_current_player % 10)).str();
+	m_current_sel_pic = fsel_picsname.c_str();
 }

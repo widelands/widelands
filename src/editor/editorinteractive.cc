@@ -146,11 +146,12 @@ void EditorInteractive::register_overlays() {
 	//  Starting locations
 	Widelands::PlayerNumber const nr_players = map.get_nrplayers();
 	assert(nr_players <= 99); //  2 decimal digits
-	char fname[] = "data/pics/editor_player_00_starting_pos.png";
 	iterate_player_numbers(p, nr_players) {
-		if (fname[20] == '9') {fname[20] = '0'; ++fname[19];} else ++fname[20];
 		if (Widelands::Coords const sp = map.get_starting_pos(p)) {
-			const Image* pic = g_gr->images().get(fname);
+			const std::string picname = (boost::format("data/pics/editor_player_%d%d_starting_pos.png")
+								  % (p / 10)
+								  % (p % 10)).str();
+			const Image* pic = g_gr->images().get(picname);
 			assert(pic);
 			map.overlay_manager().register_overlay
 				(sp, pic, 8, Point(pic->width() / 2, STARTING_POS_HOTSPOT_Y));

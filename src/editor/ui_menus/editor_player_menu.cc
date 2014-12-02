@@ -186,9 +186,9 @@ void EditorPlayerMenu::update() {
 			m_plr_set_pos_buts[p - 1]->sigclicked.connect
 				(boost::bind(&EditorPlayerMenu::set_starting_pos_clicked, boost::ref(*this), p));
 		}
-		char text[] = "data/pics/fsel_editor_set_player_00_pos.png";
-		text[28] += p / 10;
-		text[29] += p % 10;
+		const std::string text = (boost::format("data/pics/fsel_editor_set_player_%d%d_pos.png")
+										  % (p / 10)
+										  % (p % 10)).str();
 		m_plr_set_pos_buts[p - 1]->set_pic(g_gr->images().get(text));
 		posy += size + spacing;
 	}
@@ -227,11 +227,10 @@ void EditorPlayerMenu::clicked_remove_last_player() {
 	if (!eia().is_player_tribe_referenced(old_nr_players)) {
 		if (const Widelands::Coords sp = map.get_starting_pos(old_nr_players)) {
 			//  Remove starting position marker.
-			char picsname[] = "data/pics/editor_player_00_starting_pos.png";
-			picsname[19] += old_nr_players / 10;
-			picsname[20] += old_nr_players % 10;
-			map.overlay_manager().remove_overlay
-				(sp, g_gr->images().get(picsname));
+			const std::string picsname = (boost::format("data/pics/editor_player_%d%d_starting_pos.png")
+								  % (old_nr_players / 10)
+								  % (old_nr_players % 10)).str();
+			map.overlay_manager().remove_overlay(sp, g_gr->images().get(picsname));
 		}
 	}
 	map.set_nrplayers(nr_players);
