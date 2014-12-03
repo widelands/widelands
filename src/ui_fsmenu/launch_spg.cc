@@ -158,13 +158,16 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG
 
 	uint32_t y = get_h() * 3 / 10 - m_buth;
 	for (uint32_t i = 0; i < MAX_PLAYERS; ++i) {
-		const Image* position_icon = g_gr->cataloged_image(g_gr->image_catalog().player_position_small(i + 1));
+		ImageCatalog::Keys offset = ImageCatalog::Keys::kSelectEditorSetStartingPos1;
+		const Image* player_image =
+				g_gr->cataloged_image(static_cast<ImageCatalog::Keys>(i + static_cast<uint8_t>(offset)));
+
 		m_pos[i] =
 			new UI::Button
 				(this, "switch_to_position",
 				 get_w() / 100, y += m_buth, get_h() * 17 / 500, get_h() * 17 / 500,
 				 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
-				 position_icon,
+				 player_image,
 				 _("Switch to position"), false);
 		m_pos[i]->sigclicked.connect
 			(boost::bind(&FullscreenMenuLaunchSPG::switch_to_position, boost::ref(*this), i));

@@ -115,24 +115,26 @@ struct MultiPlayerClientGroup : public UI::Box {
 		} else {
 			name->set_text(us.name);
 			if (m_save != us.position) {
-				const Image* pic;
+				const Image* player_image;
 				std::string temp_tooltip;
 				if (us.position < UserSettings::highest_playernum()) {
-					pic = g_gr->cataloged_image(g_gr->image_catalog().player_stats(us.position + 1));
+					ImageCatalog::Keys offset = ImageCatalog::Keys::kStatsPlayer1;
+					player_image = g_gr->cataloged_image(static_cast<ImageCatalog::Keys>(us.position +
+																									static_cast<uint8_t>(offset)));
 					temp_tooltip = (boost::format(_("Player %u"))
 										 % static_cast<unsigned int>(us.position + 1)).str();
 				} else {
-					pic = g_gr->images().get("data/pics/menu_tab_watch.png");
+					player_image = g_gr->images().get("data/pics/menu_tab_watch.png");
 					temp_tooltip = _("Spectator");
 				}
 
 				// Either Button if changeable OR text if not
 				if (m_id == s->settings().usernum) {
-					type->set_pic(pic);
+					type->set_pic(player_image);
 					type->set_tooltip(temp_tooltip);
 					type->set_visible(true);
 				} else {
-					type_icon->set_icon(pic);
+					type_icon->set_icon(player_image);
 					type_icon->set_tooltip(temp_tooltip);
 					type_icon->set_visible(true);
 				}
@@ -172,8 +174,10 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	{
 		set_size(w, h);
 
-		const Image* position_icon = g_gr->cataloged_image(g_gr->image_catalog().player_position_small(id + 1));
-		player = new UI::Icon(this, 0, 0, h, h, position_icon);
+		ImageCatalog::Keys offset = ImageCatalog::Keys::kSelectEditorSetStartingPos1;
+		const Image* player_image =
+				g_gr->cataloged_image(static_cast<ImageCatalog::Keys>(id + static_cast<uint8_t>(offset)));
+		player = new UI::Icon(this, 0, 0, h, h, player_image);
 		add(player, UI::Box::AlignCenter);
 
 		type = new UI::Button
@@ -285,9 +289,12 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			type ->set_tooltip(_("Shared in"));
 			type ->set_pic(g_gr->images().get("data/pics/shared_in.png"));
 
-			const Image* position_icon = g_gr->cataloged_image
-												  (g_gr->image_catalog().player_position_small(player_setting.shared_in));
-			tribe->set_pic(position_icon);
+			ImageCatalog::Keys offset = ImageCatalog::Keys::kSelectEditorSetStartingPos1;
+			const Image* player_image =
+					g_gr->cataloged_image(static_cast<ImageCatalog::Keys>(player_setting.shared_in - 1 +
+																							static_cast<uint8_t>(offset)));
+
+			tribe->set_pic(player_image);
 			tribe->set_tooltip((boost::format(_("Player %u"))
 									  % static_cast<unsigned int>(player_setting.shared_in)).str());
 

@@ -26,34 +26,7 @@
 #include "base/log.h" // NOCOM
 #include "io/filesystem/layered_filesystem.h"
 
-ImageCatalog::ImageCatalog() :
-	player_positions_big_({
-								Keys::kEditorPlayerStartingPos1,
-								Keys::kEditorPlayerStartingPos2,
-								Keys::kEditorPlayerStartingPos3,
-								Keys::kEditorPlayerStartingPos4,
-								Keys::kEditorPlayerStartingPos5,
-								Keys::kEditorPlayerStartingPos6,
-								Keys::kEditorPlayerStartingPos7,
-								Keys::kEditorPlayerStartingPos8}),
-	player_positions_small_({
-									Keys::kSelectEditorSetStartingPos1,
-									Keys::kSelectEditorSetStartingPos2,
-									Keys::kSelectEditorSetStartingPos3,
-									Keys::kSelectEditorSetStartingPos4,
-									Keys::kSelectEditorSetStartingPos5,
-									Keys::kSelectEditorSetStartingPos6,
-									Keys::kSelectEditorSetStartingPos7,
-									Keys::kSelectEditorSetStartingPos8}),
-	player_stats_({
-					  Keys::kStatsPlayer1,
-					  Keys::kStatsPlayer2,
-					  Keys::kStatsPlayer3,
-					  Keys::kStatsPlayer4,
-					  Keys::kStatsPlayer5,
-					  Keys::kStatsPlayer6,
-					  Keys::kStatsPlayer7,
-					  Keys::kStatsPlayer8}) {
+ImageCatalog::ImageCatalog() {
 	init();
 }
 
@@ -135,22 +108,4 @@ const std::string& ImageCatalog::filepath(Keys key) const {
 
 bool ImageCatalog::has_key(Keys key) const {
 	return entries_.count(key) == 1;
-}
-
-ImageCatalog::Keys ImageCatalog::player_position_small(int player_number) {
-	assert(0 < player_number);
-	assert(player_number <= static_cast<int>(player_positions_small_.size()));
-	return player_positions_small_.at(player_number - 1);
-}
-
-ImageCatalog::Keys ImageCatalog::player_position_big(int player_number) {
-	assert(0 < player_number && player_number);
-	assert(player_number <= static_cast<int>(player_positions_big_.size()));
-	return player_positions_big_.at(player_number - 1);
-}
-
-ImageCatalog::Keys ImageCatalog::player_stats(int player_number) {
-	assert(0 < player_number);
-	assert(player_number <= static_cast<int>(player_stats_.size()));
-	return player_stats_.at(player_number - 1);
 }

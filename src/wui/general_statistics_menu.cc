@@ -143,12 +143,15 @@ m_selected_information(0)
 	iterate_players_existing_novar(p, nr_players, game) ++plr_in_game;
 
 	iterate_players_existing_const(p, nr_players, game, player) {
+		ImageCatalog::Keys offset = ImageCatalog::Keys::kStatsPlayer1;
+		const Image* player_image =
+				g_gr->cataloged_image(static_cast<ImageCatalog::Keys>(p - 1 + static_cast<uint8_t>(offset)));
 		UI::Button & cb =
 			*new UI::Button
 				(hbox1, "playerbutton",
 				 0, 0, 25, 25,
 				 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
-				 g_gr->cataloged_image(g_gr->image_catalog().player_stats(p)),
+				 player_image,
 				 player->get_name().c_str());
 		cb.sigclicked.connect
 			(boost::bind(&GeneralStatisticsMenu::cb_changed_to, this, p));

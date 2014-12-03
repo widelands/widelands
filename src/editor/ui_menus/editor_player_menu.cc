@@ -186,8 +186,11 @@ void EditorPlayerMenu::update() {
 			m_plr_set_pos_buts[p - 1]->sigclicked.connect
 				(boost::bind(&EditorPlayerMenu::set_starting_pos_clicked, boost::ref(*this), p));
 		}
-		ImageCatalog::Keys key = g_gr->image_catalog().player_position_small(p);
-		m_plr_set_pos_buts[p - 1]->set_pic(g_gr->cataloged_image(key));
+		ImageCatalog::Keys offset = ImageCatalog::Keys::kSelectEditorSetStartingPos1;
+		const Image* player_image =
+				g_gr->cataloged_image(static_cast<ImageCatalog::Keys>(p - 1 + static_cast<uint8_t>(offset)));
+
+		m_plr_set_pos_buts[p - 1]->set_pic(player_image);
 		posy += size + spacing;
 	}
 	set_inner_size(get_inner_w(), posy + spacing);
@@ -225,12 +228,17 @@ void EditorPlayerMenu::clicked_remove_last_player() {
 	if (!eia().is_player_tribe_referenced(old_nr_players)) {
 		if (const Widelands::Coords sp = map.get_starting_pos(old_nr_players)) {
 			//  Remove starting position marker.
-			const Image* pic = g_gr->cataloged_image(g_gr->image_catalog().player_position_big(old_nr_players));
-			map.overlay_manager().remove_overlay(sp, pic);
+			ImageCatalog::Keys offset = ImageCatalog::Keys::kEditorPlayerStartingPos1;
+			const Image* player_image =
+					g_gr->cataloged_image(static_cast<ImageCatalog::Keys>(old_nr_players - 1 +
+																							static_cast<uint8_t>(offset)));
+			map.overlay_manager().remove_overlay(sp, player_image);
 		}
 	}
 	map.set_nrplayers(nr_players);
 	m_remove_last_player.set_enabled(1 < nr_players);
+
+	// TODO(GunChleoc): Player selection tool isn't updated, it has the wrong color.
 
 	update();
 	// TODO(SirVer): Take steps when the player is referenced someplace. Not
@@ -419,8 +427,10 @@ void EditorPlayerMenu::make_infrastructure_clicked(uint8_t n) {
 
 		// Remove the player overlay from this starting pos.
 		// A HQ is overlay enough
-		const Image* pic = g_gr->cataloged_image(g_gr->image_catalog().player_position_big(n));
-		overlay_manager.remove_overlay(start_pos, pic);
+		ImageCatalog::Keys offset = ImageCatalog::Keys::kEditorPlayerStartingPos1;
+		const Image* player_image =
+				g_gr->cataloged_image(static_cast<ImageCatalog::Keys>(n - 1 + static_cast<uint8_t>(offset)));
+		overlay_manager.remove_overlay(start_pos, player_image);
 	}
 
 	parent.select_tool(parent.tools.make_infrastructure, EditorTool::First);

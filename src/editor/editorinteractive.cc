@@ -148,10 +148,12 @@ void EditorInteractive::register_overlays() {
 	assert(nr_players <= MAX_PLAYERS);
 	iterate_player_numbers(p, nr_players) {
 		if (Widelands::Coords const sp = map.get_starting_pos(p)) {
-			const Image* pic = g_gr->cataloged_image(g_gr->image_catalog().player_position_big(p));
-			assert(pic);
+			ImageCatalog::Keys offset = ImageCatalog::Keys::kEditorPlayerStartingPos1;
+			const Image* player_image =
+					g_gr->cataloged_image(static_cast<ImageCatalog::Keys>(p - 1 + static_cast<uint8_t>(offset)));
+
 			map.overlay_manager().register_overlay
-				(sp, pic, 8, Point(pic->width() / 2, STARTING_POS_HOTSPOT_Y));
+				(sp, player_image, 8, Point(player_image->width() / 2, STARTING_POS_HOTSPOT_Y));
 		}
 	}
 

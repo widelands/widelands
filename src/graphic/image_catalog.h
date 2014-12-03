@@ -32,7 +32,7 @@ class ImageCatalog {
 public:
 	/// The keys to fetch the image filenames.
 	enum class Keys {
-		kUnknownImage, // This is the key for a nonexistent image. Do not add this to the entries.
+		kUnknownImage = 0, // This is the key for a nonexistent image. Do not add this to the entries.
 		kButton0,
 		kButton1,
 		kButton2,
@@ -56,7 +56,7 @@ public:
 		kSelectEditorSetPortSpace,
 		kSelectEditorUnsetPortSpace,
 		kSelectEditorSetResources,
-		kSelectEditorSetStartingPos1,
+		kSelectEditorSetStartingPos1, // Keep player icons in ascending order
 		kSelectEditorSetStartingPos2,
 		kSelectEditorSetStartingPos3,
 		kSelectEditorSetStartingPos4,
@@ -64,7 +64,7 @@ public:
 		kSelectEditorSetStartingPos6,
 		kSelectEditorSetStartingPos7,
 		kSelectEditorSetStartingPos8,
-		kEditorPlayerStartingPos1,
+		kEditorPlayerStartingPos1, // Keep player icons in ascending order
 		kEditorPlayerStartingPos2,
 		kEditorPlayerStartingPos3,
 		kEditorPlayerStartingPos4,
@@ -81,7 +81,7 @@ public:
 		kScrollbarLeft,
 		kScrollbarRight,
 		kScrollbarBackground,
-		kStatsPlayer1,
+		kStatsPlayer1, // Keep player icons in ascending order
 		kStatsPlayer2,
 		kStatsPlayer3,
 		kStatsPlayer4,
@@ -104,12 +104,6 @@ public:
 
 	bool has_key(ImageCatalog::Keys key) const;
 
-	// Convenience functions to get correct key for a 'player_number'.
-	// 1 <= 'player_number' <= MAX_PLAYERS.
-	ImageCatalog::Keys player_position_small(int player_number);
-	ImageCatalog::Keys player_position_big(int player_number);
-	ImageCatalog::Keys player_stats(int player_number);
-
 private:
 	/// This function registers a filename for each member of ImageCatalog::Keys.
 	void init();
@@ -118,11 +112,7 @@ private:
 	/// The 'filename' is the relative path starting from kBaseDir.
 	void insert(ImageCatalog::Keys key, const std::string& filename);
 
-	// These vectors hold keys for the convenience functions.
-	const std::vector<ImageCatalog::Keys> player_positions_big_;
-	const std::vector<ImageCatalog::Keys> player_positions_small_;
-	const std::vector<ImageCatalog::Keys> player_stats_;
-
+	/// Container for the key - filename mapping.
 	std::map<ImageCatalog::Keys, std::string> entries_;
 
 	DISALLOW_COPY_AND_ASSIGN(ImageCatalog);
