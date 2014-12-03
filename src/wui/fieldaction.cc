@@ -52,11 +52,7 @@ using Widelands::Building;
 using Widelands::EditorGameBase;
 using Widelands::Game;
 
-#define BG_CELL_WIDTH  34 // extents of one cell
-#define BG_CELL_HEIGHT 34
-
-//sizes for the images in the build menu (containing building icons)
-#define BUILDMENU_IMAGE_SIZE 30. // used for width and height
+constexpr int kBuildGridCellSize = 50;
 
 // The BuildGrid presents a selection of buildable buildings
 struct BuildGrid : public UI::IconGrid {
@@ -86,7 +82,7 @@ private:
 BuildGrid::BuildGrid(
 		UI::Panel* parent, const RGBColor& player_color, const Widelands::TribeDescr& tribe,
 		int32_t x, int32_t y, int32_t cols) :
-	UI::IconGrid(parent, x, y, BG_CELL_WIDTH, BG_CELL_HEIGHT, cols),
+	UI::IconGrid(parent, x, y, kBuildGridCellSize, kBuildGridCellSize, cols),
 	player_color_(player_color),
 	tribe_(tribe)
 {
@@ -104,18 +100,13 @@ void BuildGrid::add(Widelands::BuildingIndex id)
 {
 	const Widelands::BuildingDescr & descr =
 		*tribe_.get_building_descr(Widelands::BuildingIndex(id));
-	const Image& anim_frame = g_gr->animations().get_animation(descr.get_animation("idle"))
-		.representative_image(player_color_);
-	const uint16_t image_w = anim_frame.width();
-	const uint16_t image_h = anim_frame.height();
-	double ratio = BUILDMENU_IMAGE_SIZE / std::max(image_w, image_h);
-	const Image* menu_image =
-	   ImageTransformations::resize_this_image(&anim_frame, image_w * ratio, image_h * ratio);
-	UI::IconGrid::add
-		(descr.name(), menu_image,
-		 reinterpret_cast<void *>(id),
-		 descr.descname() + "<br><font size=11>" + _("Construction costs:") + "</font><br>" +
-			waremap_to_richtext(tribe_, descr.buildcost()));
+	UI::IconGrid::add(
+	   descr.name(),
+	   &g_gr->animations().get_animation(descr.get_animation("idle")).representative_image(
+	      player_color_),
+	   reinterpret_cast<void*>(id),
+	   descr.descname() + "<br><font size=11>" + _("Construction costs:") + "</font><br>" +
+	      waremap_to_richtext(tribe_, descr.buildcost()));
 }
 
 
@@ -330,7 +321,7 @@ void FieldActionWindow::init()
 
 	// Now force the mouse onto the first button
 	set_mouse_pos
-		(Point(17 + BG_CELL_WIDTH * m_best_tab, m_fastclick ? 51 : 17));
+		(Point(17 + kBuildGridCellSize * m_best_tab, m_fastclick ? 51 : 17));
 
 	// Will only do something if we explicitly set another fast click panel
 	// than the first button

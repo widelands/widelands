@@ -32,6 +32,9 @@
 
 namespace UI {
 
+// Margin around image. The image will be scaled down to fit into this rectangle with preserving size.
+constexpr int kButtonImageMargin = 2;
+
 Button::Button //  for textual buttons
 	(Panel * const parent,
 	 const std::string & name,
@@ -169,16 +172,21 @@ void Button::draw(RenderTarget & dst)
 
 	//  if we got a picture, draw it centered
 	if (m_pic_custom) {
-		uint16_t cpw = m_pic_custom->width();
-		uint16_t cph = m_pic_custom->height();
+		// NOCOM(#sirver): hier gehts weiter.
+		// NOCOM(#sirver): editor testen.
+		const int max_image_w = get_w() - 2 * kButtonImageMargin;
+		const int max_image_h = get_h() - 2 * kButtonImageMargin;
+		double image_scale =
+		   std::min(1.,
+		            std::min(static_cast<double>(max_image_w) / m_pic_custom->width(),
+		                     static_cast<double>(max_image_h) / m_pic_custom->height()));
+		int blit_width = image_scale * m_pic_custom->width();
+		int blit_height = image_scale * m_pic_custom->height();
 
-		//  ">> 1" is almost like "/ 2", but simpler for signed types (difference
-		//  is that -1 >> 1 is -1 but -1 / 2 is 0).
-		dst.blit
-			(Point
-			 	((get_w() - static_cast<int32_t>(cpw)) >> 1,
-			 	 (get_h() - static_cast<int32_t>(cph)) >> 1),
-			 m_enabled ? m_pic_custom : m_pic_custom_disabled);
+		dst.blitrect_scale(
+		   Rect((get_w() - blit_width) / 2, (get_h() - blit_height) / 2, blit_width, blit_height),
+		   m_enabled ? m_pic_custom : m_pic_custom_disabled,
+		   Rect(0, 0, m_pic_custom->width(), m_pic_custom->height()));
 
 	} else if (m_title.length()) {
 		//  otherwise draw title string centered

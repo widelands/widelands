@@ -122,15 +122,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 			horizontal->add_space(kSpacing);
 			++nitems_handled;
 		}
-
-		const Image* category_picture = category.picture();
-		const int kCategoryImageSize = 24;
-		if (category_picture->width() > kCategoryImageSize ||
-		    category_picture->height() > kCategoryImageSize) {
-			category_picture =
-			   ImageTransformations::resize_this_image(category_picture, kCategoryImageSize, kCategoryImageSize);
-		}
-		tab_panel->add(category.name(), category_picture, vertical, category.descname());
+		tab_panel->add(category.name(), category.picture(), vertical, category.descname());
 	}
 	add(&current_selection_names_, UI::Align_Center, true);
 }
