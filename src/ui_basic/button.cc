@@ -172,8 +172,6 @@ void Button::draw(RenderTarget & dst)
 
 	//  if we got a picture, draw it centered
 	if (m_pic_custom) {
-		// NOCOM(#sirver): hier gehts weiter.
-		// NOCOM(#sirver): editor testen.
 		const int max_image_w = get_w() - 2 * kButtonImageMargin;
 		const int max_image_h = get_h() - 2 * kButtonImageMargin;
 		double image_scale =

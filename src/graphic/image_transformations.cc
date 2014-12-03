@@ -22,7 +22,6 @@
 #include <string>
 
 #include <SDL.h>
-#include <SDL2_rotozoom.h>
 #include <boost/format.hpp>
 
 #include "base/macros.h"
@@ -320,31 +319,6 @@ protected:
 	TextureCache* const texture_cache_;  // not owned
 };
 
-// A resized copy of an Image.
-class ResizedImage : public TransformedImage {
-public:
-	ResizedImage
-		(const string& ghash, const Image& original,
-		 TextureCache* texture_cache, uint16_t w, uint16_t h)
-		: TransformedImage(ghash, original, texture_cache), w_(w), h_(h) {
-			assert(w != original.width() || h != original.height());
-	}
-	virtual ~ResizedImage() {}
-
-	// Overwrites TransformedImage.
-	uint16_t width() const override {return w_;}
-	uint16_t height() const override {return h_;}
-
-	// Implements TransformedImage.
-	Texture* recalculate_texture() const override {
-		Texture* rv = resize_surface(original_.texture(), w_, h_);
-		return rv;
-	}
-
-private:
-	uint16_t w_, h_;
-};
-
 // A grayed out copy of an Image.
 class GrayedOutImage : public TransformedImage {
 public:
@@ -417,18 +391,6 @@ void initialize() {
 			luminance_table_g[i] = g;
 			luminance_table_b[i] = b;
 		}
-}
-
-// NOCOM(#sirver): kill
-const Image* resize_this_image(const Image* original, uint16_t w, uint16_t h) {
-	if (original->width() == w && original->height() == h)
-		return original;
-
-	const string new_hash = (boost::format("%s:%i:%i") % original->hash() % w % h).str();
-	if (g_gr->images().has(new_hash))
-		return g_gr->images().get(new_hash);
-	return
-		g_gr->images().insert(new ResizedImage(new_hash, *original, &g_gr->textures(), w, h));
 }
 
 const Image* gray_out(const Image* original) {

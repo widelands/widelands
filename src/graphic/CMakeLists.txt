@@ -131,7 +131,6 @@ wl_library(graphic
     wordwrap.h
   USES_OPENGL
   USES_SDL2
-  USES_SDL2_GFX
   USES_SDL2_TTF
   DEPENDS
     base_exceptions

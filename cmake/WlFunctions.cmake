@@ -10,7 +10,6 @@ macro(_parse_common_args ARGS)
     USES_OPENGL
     USES_PNG
     USES_SDL2
-    USES_SDL2_GFX
     USES_SDL2_IMAGE
     USES_SDL2_MIXER
     USES_SDL2_NET
@@ -116,11 +115,6 @@ macro(_common_compile_tasks)
   if(ARG_USES_SDL2_IMAGE)
     wl_include_system_directories(${NAME} ${SDL2IMAGE_INCLUDE_DIR})
     target_link_libraries(${NAME} ${SDL2IMAGE_LIBRARY})
-  endif()
-
-  if(ARG_USES_SDL2_GFX)
-    wl_include_system_directories(${NAME} ${SDL2GFX_INCLUDE_DIR})
-    target_link_libraries(${NAME} ${SDL2GFX_LIBRARY})
   endif()
 
   if(ARG_USES_SDL2_TTF)

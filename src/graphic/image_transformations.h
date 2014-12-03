@@ -37,9 +37,6 @@ void initialize();
 // safe to call the methods with the same arguments multiple times without
 // construction cost.
 
-// Returns a resized image of the original.
-const Image* resize_this_image(const Image* original, uint16_t w, uint16_t h);
-
 // Returns a grayed out image of the original.
 const Image* gray_out(const Image* original);
 
