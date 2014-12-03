@@ -216,7 +216,7 @@ private:
 	UI::Button & add_button
 		(UI::Box *,
 		 const char * name,
-		 const char * picname,
+		 const Image* image,
 		 void (FieldActionWindow::*fn)(),
 		 const std::string & tooltip_text,
 		 bool repeating = false);
@@ -264,11 +264,8 @@ static const char * const pic_watchfield     = "data/pics/menu_watch_field.png";
 static const char * const pic_showcensus     = "data/pics/menu_show_census.png";
 static const char * const pic_showstatistics = "data/pics/menu_show_statistics.png";
 static const char * const pic_debug          = "data/pics/menu_debug.png";
-static const char * const pic_abort          = "data/pics/wui/menu_abort.png"; // NOCOM use catalog
 static const char * const pic_geologist      = "data/pics/menu_geologist.png";
-
 static const char * const pic_tab_attack     = "data/pics/menu_tab_attack.png";
-static const char * const pic_attack         = "data/pics/menu_attack.png";
 
 
 /*
@@ -364,7 +361,7 @@ void FieldActionWindow::add_buttons_auto()
 			if (can_act) {
 				add_button
 					(buildbox, "build_road",
-					 pic_buildroad,
+					 g_gr->images().get(pic_buildroad),
 					 &FieldActionWindow::act_buildroad,
 					 _("Build road"));
 
@@ -376,7 +373,7 @@ void FieldActionWindow::add_buttons_auto()
 					 (building->get_playercaps() & Building::PCap_Bulldoze))
 					add_button
 						(buildbox, "rip_flag",
-						 pic_ripflag,
+						 g_gr->images().get(pic_ripflag),
 						 &FieldActionWindow::act_ripflag,
 						 _("Destroy this flag"));
 			}
@@ -384,13 +381,13 @@ void FieldActionWindow::add_buttons_auto()
 			if (dynamic_cast<Game const *>(&ibase().egbase())) {
 				add_button
 					(buildbox, "configure_economy",
-					 g_gr->image_catalog().filepath(ImageCatalog::Keys::kStatsWaresNumber).c_str(),
+					 g_gr->cataloged_image(ImageCatalog::Keys::kStatsWaresNumber),
 					 &FieldActionWindow::act_configure_economy,
 					 _("Configure economy"));
 				if (can_act)
 					add_button
 						(buildbox, "geologist",
-						 pic_geologist,
+						 g_gr->images().get(pic_geologist),
 						 &FieldActionWindow::act_geologist,
 						 _("Send geologist to explore site"));
 			}
@@ -408,14 +405,14 @@ void FieldActionWindow::add_buttons_auto()
 			if ((m_fastclick = buildcaps & Widelands::BUILDCAPS_FLAG))
 				add_button
 					(buildbox, "build_flag",
-					 pic_buildflag,
+					 g_gr->images().get(pic_buildflag),
 					 &FieldActionWindow::act_buildflag,
 					 _("Place a flag"));
 
 			if (can_act && dynamic_cast<const Widelands::Road *>(imm))
 				add_button
 					(buildbox, "destroy_road",
-					 pic_remroad,
+					 g_gr->images().get(pic_remroad),
 					 &FieldActionWindow::act_removeroad,
 					 _("Destroy a road"));
 		}
@@ -433,25 +430,25 @@ void FieldActionWindow::add_buttons_auto()
 	if (dynamic_cast<const Game *>(&ibase().egbase())) {
 		add_button
 			(&watchbox, "watch",
-			 pic_watchfield,
+			 g_gr->images().get(pic_watchfield),
 			 &FieldActionWindow::act_watch,
 			 _("Watch field in a separate window"));
 		add_button
 			(&watchbox, "statistics",
-			 pic_showstatistics,
+			 g_gr->images().get(pic_showstatistics),
 			 &FieldActionWindow::act_show_statistics,
 			 _("Toggle building statistics display"));
 	}
 	add_button
 		(&watchbox, "census",
-		 pic_showcensus,
+		 g_gr->images().get(pic_showcensus),
 		 &FieldActionWindow::act_show_census,
 		 _("Toggle building label display"));
 
 	if (ibase().get_display_flag(InteractiveBase::dfDebug))
 		add_button
 			(&watchbox, "debug",
-			 pic_debug,
+			 g_gr->images().get(pic_debug),
 			 &FieldActionWindow::act_debug,
 			 _("Debug window"));
 
@@ -481,7 +478,7 @@ void FieldActionWindow::add_buttons_attack ()
 			set_fastclick_panel
 				(&add_button
 				 (&a_box, "attack",
-				  pic_attack,
+				  g_gr->cataloged_image(ImageCatalog::Keys::kBuildingAttack),
 				  &FieldActionWindow::act_attack,
 				  _("Start attack")));
 		}
@@ -588,11 +585,13 @@ void FieldActionWindow::add_buttons_road(bool flag)
 	if (flag)
 		add_button
 			(&buildbox, "build_flag",
-			 pic_buildflag, &FieldActionWindow::act_buildflag, _("Build flag"));
+			 g_gr->images().get(pic_buildflag),
+			 &FieldActionWindow::act_buildflag, _("Build flag"));
 
 	add_button
 		(&buildbox, "cancel_road",
-		 pic_abort, &FieldActionWindow::act_abort_buildroad, _("Cancel road"));
+		 g_gr->cataloged_image(ImageCatalog::Keys::kButtonMenuAbort),
+		 &FieldActionWindow::act_abort_buildroad, _("Cancel road"));
 
 	// Add the box as tab
 	add_tab("roads", pic_tab_buildroad, &buildbox, _("Build roads"));
@@ -617,7 +616,7 @@ uint32_t FieldActionWindow::add_tab
 UI::Button & FieldActionWindow::add_button
 	(UI::Box           * const box,
 	 const char        * const name,
-	 const char        * const picname,
+	 const Image*              image,
 	 void (FieldActionWindow::*fn)(),
 	 const std::string & tooltip_text,
 	 bool                repeating)
@@ -627,7 +626,7 @@ UI::Button & FieldActionWindow::add_button
 			(box, name,
 			 0, 0, 34, 34,
 			 g_gr->cataloged_image(ImageCatalog::Keys::kButton2),
-			 g_gr->images().get(picname),
+			 image,
 			 tooltip_text);
 	button.sigclicked.connect(boost::bind(fn, this));
 	button.set_repeating(repeating);

@@ -32,19 +32,6 @@
 #include "wui/interactive_player.h"
 #include "wui/itemwaresdisplay.h"
 
-static const char pic_goto[] = "data/pics/menu_ship_goto.png";
-static const char pic_destination[] = "data/pics/menu_ship_destination.png";
-static const char pic_sink[]     = "data/pics/menu_ship_sink.png";
-static const char pic_cancel_expedition[] = "data/pics/menu_ship_cancel_expedition.png";
-static const char pic_explore_cw[]  = "data/pics/ship_explore_island_cw.png";
-static const char pic_explore_ccw[] = "data/pics/ship_explore_island_ccw.png";
-static const char pic_scout_nw[] = "data/pics/ship_scout_nw.png";
-static const char pic_scout_ne[] = "data/pics/ship_scout_ne.png";
-static const char pic_scout_w[]  = "data/pics/ship_scout_w.png";
-static const char pic_scout_e[]  = "data/pics/ship_scout_e.png";
-static const char pic_scout_sw[] = "data/pics/ship_scout_sw.png";
-static const char pic_scout_se[] = "data/pics/ship_scout_se.png";
-static const char pic_construct_port[] = "data/pics/fsel_editor_set_port_space.png"; // NOCOM use catalog
 
 namespace Widelands {
 
@@ -61,7 +48,7 @@ struct ShipWindow : UI::Window {
 		(UI::Panel * parent,
 		 const std::string & name,
 		 const std::string & title,
-		 const std::string & picname,
+		 ImageCatalog::Keys image_key,
 		 boost::function<void()> callback);
 
 	void act_goto();
@@ -113,55 +100,58 @@ ShipWindow::ShipWindow(InteractiveGameBase & igb, Ship & ship) :
 
 		m_btn_scout[WALK_NW - 1] =
 			make_button
-				(exp_top, "scnw", _("Scout towards the north west"), pic_scout_nw,
+				(exp_top, "scnw", _("Scout towards the north west"), ImageCatalog::Keys::kShipScoutNorthWest,
 				 boost::bind(&ShipWindow::act_scout_towards, this, WALK_NW));
 		exp_top->add(m_btn_scout[WALK_NW - 1], 0, false);
 
 		m_btn_explore_island_cw =
 			make_button
-				(exp_top, "expcw", _("Explore the island’s coast clockwise"), pic_explore_cw,
+				(exp_top, "expcw", _("Explore the island’s coast clockwise"),
+				 ImageCatalog::Keys::kShipExploreClockwise,
 				 boost::bind(&ShipWindow::act_explore_island, this, true));
 		exp_top->add(m_btn_explore_island_cw, 0, false);
 
 		m_btn_scout[WALK_NE - 1] =
 			make_button
-				(exp_top, "scne", _("Scout towards the north east"), pic_scout_ne,
+				(exp_top, "scne", _("Scout towards the north east"), ImageCatalog::Keys::kShipScoutNorthEast,
 				 boost::bind(&ShipWindow::act_scout_towards, this, WALK_NE));
 		exp_top->add(m_btn_scout[WALK_NE - 1], 0, false);
 
 		m_btn_scout[WALK_W - 1] =
 			make_button
-				(exp_mid, "scw", _("Scout towards the west"), pic_scout_w,
+				(exp_mid, "scw", _("Scout towards the west"), ImageCatalog::Keys::kShipScoutWest,
 				 boost::bind(&ShipWindow::act_scout_towards, this, WALK_W));
 		exp_mid->add(m_btn_scout[WALK_W - 1], 0, false);
 
 		m_btn_construct_port =
 			make_button
-				(exp_mid, "buildport", _("Construct a port at the current location"), pic_construct_port,
+				(exp_mid, "buildport", _("Construct a port at the current location"),
+				 ImageCatalog::Keys::kEditorToolPortSpaceSet,
 				 boost::bind(&ShipWindow::act_construct_port, this));
 		exp_mid->add(m_btn_construct_port, 0, false);
 
 		m_btn_scout[WALK_E - 1] =
 			make_button
-				(exp_mid, "sce", _("Scout towards the east"), pic_scout_e,
+				(exp_mid, "sce", _("Scout towards the east"), ImageCatalog::Keys::kShipScoutEast,
 				 boost::bind(&ShipWindow::act_scout_towards, this, WALK_E));
 		exp_mid->add(m_btn_scout[WALK_E - 1], 0, false);
 
 		m_btn_scout[WALK_SW - 1] =
 			make_button
-				(exp_bot, "scsw", _("Scout towards the south west"), pic_scout_sw,
+				(exp_bot, "scsw", _("Scout towards the south west"), ImageCatalog::Keys::kShipScoutSouthWest,
 				 boost::bind(&ShipWindow::act_scout_towards, this, WALK_SW));
 		exp_bot->add(m_btn_scout[WALK_SW - 1], 0, false);
 
 		m_btn_explore_island_ccw =
 			make_button
-				(exp_bot, "expccw", _("Explore the island’s coast counter clockwise"), pic_explore_ccw,
+				(exp_bot, "expccw", _("Explore the island’s coast counter clockwise"),
+				 ImageCatalog::Keys::kShipExploreCounterclockwise,
 				 boost::bind(&ShipWindow::act_explore_island, this, false));
 		exp_bot->add(m_btn_explore_island_ccw, 0, false);
 
 		m_btn_scout[WALK_SE - 1] =
 			make_button
-				(exp_bot, "scse", _("Scout towards the south east"), pic_scout_se,
+				(exp_bot, "scse", _("Scout towards the south east"), ImageCatalog::Keys::kShipScoutSouthEast,
 				 boost::bind(&ShipWindow::act_scout_towards, this, WALK_SE));
 		exp_bot->add(m_btn_scout[WALK_SE - 1], 0, false);
 
@@ -173,25 +163,27 @@ ShipWindow::ShipWindow(InteractiveGameBase & igb, Ship & ship) :
 
 	m_btn_goto =
 		make_button
-			(buttons, "goto", _("Go to ship"), pic_goto,
+			(buttons, "goto", _("Go to ship"), ImageCatalog::Keys::kShipGoto,
 			 boost::bind(&ShipWindow::act_goto, this));
 	buttons->add(m_btn_goto, 0, false);
 	m_btn_destination =
 		make_button
-			(buttons, "destination", _("Go to destination"), pic_destination,
+			(buttons, "destination", _("Go to destination"), ImageCatalog::Keys::kShipDestination,
 			 boost::bind(&ShipWindow::act_destination, this));
 	m_btn_destination->set_enabled(false);
 	buttons->add(m_btn_destination, 0, false);
 
 	m_btn_sink =
 		make_button
-			(buttons, "sink", _("Sink the ship"), pic_sink, boost::bind(&ShipWindow::act_sink, this));
+			(buttons, "sink", _("Sink the ship"), ImageCatalog::Keys::kShipSink,
+			 boost::bind(&ShipWindow::act_sink, this));
 	buttons->add(m_btn_sink, 0, false);
 	if (m_ship.state_is_expedition()) {
 		m_btn_cancel_expedition =
 			make_button
-				(buttons, "cancel_expedition", _("Cancel the Expedition"), pic_cancel_expedition,
-				boost::bind(&ShipWindow::act_cancel_expedition, this));
+				(buttons, "cancel_expedition", _("Cancel the Expedition"),
+				 ImageCatalog::Keys::kShipExpeditionCancel,
+				 boost::bind(&ShipWindow::act_cancel_expedition, this));
 		buttons->add(m_btn_cancel_expedition, 0, false);
 	}
 	set_center_panel(vbox);
@@ -262,13 +254,13 @@ void ShipWindow::think()
 
 UI::Button * ShipWindow::make_button
 	(UI::Panel * parent, const std::string & name, const std::string & title,
-	 const std::string & picname, boost::function<void()> callback)
+	 ImageCatalog::Keys image_key, boost::function<void()> callback)
 {
 	UI::Button * btn =
 		new UI::Button
 			(parent, name, 0, 0, 34, 34,
 			 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
-			 g_gr->images().get(picname),
+			 g_gr->cataloged_image(image_key),
 			 title);
 	btn->sigclicked.connect(callback);
 	return btn;

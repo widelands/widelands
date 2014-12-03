@@ -80,7 +80,7 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer() :
 				(this, "login_dialog",
 				 m_butx + m_butw + m_buth / 4, get_h() * 6 / 25, m_buth, m_buth,
 				 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
-				 g_gr->images().get("data/pics/continue.png"),
+				 g_gr->cataloged_image(ImageCatalog::Keys::kActionContinue),
 				 _("Show login dialog"), true, false);
 		showloginbox->sigclicked.connect
 			(boost::bind

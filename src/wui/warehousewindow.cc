@@ -33,11 +33,6 @@ static const char pic_tab_wares[] = "data/pics/menu_tab_wares.png";
 static const char pic_tab_workers[] = "data/pics/menu_tab_workers.png";
 static const char pic_tab_dock_wares[] = "data/pics/menu_tab_wares_dock.png";
 static const char pic_tab_dock_workers[] = "data/pics/menu_tab_workers_dock.png";
-static const char pic_tab_expedition[] = "data/pics/start_expedition.png";
-
-static const char pic_policy_prefer[] = "data/pics/stock_policy_prefer.png";
-static const char pic_policy_dontstock[] = "data/pics/stock_policy_dontstock.png";
-static const char pic_policy_remove[] = "data/pics/stock_policy_remove.png";
 
 /**
  * Extends the wares display to show and modify stock policy of items.
@@ -79,9 +74,18 @@ void WarehouseWaresDisplay::draw_ware(RenderTarget & dst, Widelands::WareIndex w
 	const Image* pic;
 
 	switch (policy) {
-	case Warehouse::SP_Prefer: pic = g_gr->images().get(pic_policy_prefer); break;
-	case Warehouse::SP_DontStock: pic = g_gr->images().get(pic_policy_dontstock); break;
-	case Warehouse::SP_Remove: pic = g_gr->images().get(pic_policy_remove); break;
+		case Warehouse::SP_Prefer: {
+			pic = g_gr->cataloged_image(ImageCatalog::Keys::kBuildingStockPolicyPrefer);
+			break;
+		}
+		case Warehouse::SP_DontStock: {
+			pic = g_gr->cataloged_image(ImageCatalog::Keys::kBuildingStockPolicyDontStock);
+			break;
+		}
+		case Warehouse::SP_Remove: {
+			pic = g_gr->cataloged_image(ImageCatalog::Keys::kBuildingStockPolicyRemove);
+			break;
+		}
 	default:
 		// don't draw anything for the normal policy
 		return;
@@ -125,20 +129,28 @@ WarehouseWaresPanel::WarehouseWaresPanel
 		UI::Button * b;
 		add(buttons, UI::Box::AlignLeft);
 
-#define ADD_POLICY_BUTTON(policy, policyname, tooltip)                                           \
+#define ADD_POLICY_BUTTON(policy, policyname, image_key, tooltip)                                           \
 		b = new UI::Button                                                             \
 			(buttons, #policy, 0, 0, 34, 34,                                                  \
 			 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),                                   \
-			 g_gr->images().get("data/pics/stock_policy_button_" #policy ".png"),      \
+			 g_gr->cataloged_image(image_key),      \
 			 tooltip),                                                                        \
 		b->sigclicked.connect \
 			(boost::bind(&WarehouseWaresPanel::set_policy, this, Warehouse::SP_##policyname)), \
 		buttons->add(b, UI::Box::AlignCenter);
 
-		ADD_POLICY_BUTTON(normal, Normal, _("Normal policy"))
-		ADD_POLICY_BUTTON(prefer, Prefer, _("Preferably store selected wares here"))
-		ADD_POLICY_BUTTON(dontstock, DontStock, _("Do not store selected wares here"))
-		ADD_POLICY_BUTTON(remove, Remove, _("Remove selected wares from here"))
+		ADD_POLICY_BUTTON(normal, Normal,
+								ImageCatalog::Keys::kBuildingStockPolicyNormalButton,
+								_("Normal policy"))
+		ADD_POLICY_BUTTON(prefer, Prefer,
+								ImageCatalog::Keys::kBuildingStockPolicyPreferButton,
+								_("Preferably store selected wares here"))
+		ADD_POLICY_BUTTON(dontstock, DontStock,
+								ImageCatalog::Keys::kBuildingStockPolicyDontStockButton,
+								_("Do not store selected wares here"))
+		ADD_POLICY_BUTTON(remove, Remove,
+								ImageCatalog::Keys::kBuildingStockPolicyRemoveButton,
+								_("Remove selected wares from here"))
 	}
 }
 
@@ -224,7 +236,7 @@ WarehouseWindow::WarehouseWindow
 		if (pd->expedition_started()) {
 			get_tabs()->add
 				("expedition_wares_queue",
-				 g_gr->images().get(pic_tab_expedition),
+				 g_gr->cataloged_image(ImageCatalog::Keys::kDockExpeditionStart),
 				 create_portdock_expedition_display(get_tabs(), warehouse(), igbase()),
 				 _("Expedition"));
 		}

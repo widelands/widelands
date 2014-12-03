@@ -701,7 +701,7 @@ void FullscreenMenuLaunchMPG::help_clicked() {
 		"data/pics/ai_Normal.png");
 	m_help->add_picture_li(_("Set as shared in starting position for another player."),
 								  "data/pics/shared_in.png");
-	m_help->add_picture_li(_("Closed."), "data/pics/stop.png");
+	m_help->add_picture_li(_("Closed."), g_gr->image_catalog().filepath(ImageCatalog::Keys::kActionStop));
 	m_help->add_block
 		(_
 		 ("The latter three can only be set by the hosting client by left-clicking the ‘type’ button of a "

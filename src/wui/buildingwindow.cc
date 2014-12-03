@@ -42,8 +42,6 @@
 #include "wui/unique_window_handler.h"
 #include "wui/waresqueuedisplay.h"
 
-static const char * pic_bulldoze           = "data/pics/menu_bld_bulldoze.png";
-static const char * pic_dismantle          = "data/pics/menu_bld_dismantle.png";
 static const char * pic_debug              = "data/pics/menu_debug.png";
 
 
@@ -177,8 +175,8 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 					UI::Button * expeditionbtn =
 						new UI::Button
 							(capsbuttons, "cancel_expedition", 0, 0, 34, 34,
-							g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
-							g_gr->images().get("data/pics/cancel_expedition.png"),
+							 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
+							 g_gr->cataloged_image(ImageCatalog::Keys::kDockExpeditionCancel),
 							_("Cancel the expedition"));
 					expeditionbtn->sigclicked.connect
 						(boost::bind(&BuildingWindow::act_start_or_cancel_expedition, boost::ref(*this)));
@@ -187,8 +185,8 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 					UI::Button * expeditionbtn =
 						new UI::Button
 							(capsbuttons, "start_expedition", 0, 0, 34, 34,
-							g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
-							g_gr->images().get("data/pics/start_expedition.png"),
+							 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
+							 g_gr->cataloged_image(ImageCatalog::Keys::kDockExpeditionStart),
 							_("Start an expedition"));
 					expeditionbtn->sigclicked.connect
 						(boost::bind(&BuildingWindow::act_start_or_cancel_expedition, boost::ref(*this)));
@@ -204,7 +202,9 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 					new UI::Button
 						(capsbuttons, is_stopped ? "continue" : "stop", 0, 0, 34, 34,
 						 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
-						 g_gr->images().get((is_stopped ? "data/pics/continue.png" : "data/pics/stop.png")),
+						 is_stopped ?
+							 g_gr->cataloged_image(ImageCatalog::Keys::kActionContinue) :
+							 g_gr->cataloged_image(ImageCatalog::Keys::kActionStop),
 						 /** TRANSLATORS: Stop/Continue toggle button for production sites. */
 						 is_stopped ? _("Continue") : _("Stop"));
 				stopbtn->sigclicked.connect(boost::bind(&BuildingWindow::act_start_stop, boost::ref(*this)));
@@ -256,7 +256,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 				new UI::Button
 					(capsbuttons, "destroy", 0, 0, 34, 34,
 					 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
-					 g_gr->images().get(pic_bulldoze),
+					 g_gr->cataloged_image(ImageCatalog::Keys::kBuildingBulldoze),
 					 _("Destroy"));
 			destroybtn->sigclicked.connect
 				(boost::bind(&BuildingWindow::act_bulldoze, boost::ref(*this)));
@@ -274,7 +274,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 				new UI::Button
 					(capsbuttons, "dismantle", 0, 0, 34, 34,
 					 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
-					 g_gr->images().get(pic_dismantle),
+					 g_gr->cataloged_image(ImageCatalog::Keys::kBuildingDismantle),
 					 std::string(_("Dismantle")) + "<br><font size=11>" + _("Returns:") + "</font><br>" +
 						 waremap_to_richtext(owner.tribe(), wares));
 			dismantlebtn->sigclicked.connect(boost::bind(&BuildingWindow::act_dismantle, boost::ref(*this)));
@@ -306,7 +306,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 				(capsbuttons, "workarea",
 				 0, 0, 34, 34,
 				 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
-				 g_gr->images().get("data/pics/workarea123.png"),
+				 g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysWorkarea123),
 				 _("Hide work area"));
 			m_toggle_workarea->sigclicked.connect
 				(boost::bind(&BuildingWindow::toggle_workarea, boost::ref(*this)));

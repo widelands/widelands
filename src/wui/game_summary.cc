@@ -75,7 +75,7 @@ m_game(parent->game())
 		(buttonBox, "continue_button",
 		 0, 0, 35, 35,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
-		 g_gr->images().get("data/pics/continue.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kActionContinue),
 		 _("Continue playing"));
 	buttonBox->add(m_continue_button, UI::Box::AlignRight);
 	buttonBox->add_space(PADDING);

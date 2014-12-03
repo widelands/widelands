@@ -787,7 +787,8 @@ void Ship::start_task_expedition(Game & game) {
 	// Send a message to the player, that an expedition is ready to go
 	const std::string msg_head = _("Expedition Ready");
 	const std::string msg_body = _("An expedition ship is waiting for your commands.");
-	send_message(game, "exp_ready", msg_head, msg_body, "start_expedition.png");
+	send_message(game, "exp_ready", msg_head, msg_body,
+					 g_gr->image_catalog().filepath(ImageCatalog::Keys::kDockExpeditionStart));
 }
 
 /// Initializes / changes the direction of scouting to @arg direction

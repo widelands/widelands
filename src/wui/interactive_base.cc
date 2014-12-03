@@ -100,12 +100,12 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      m_road_build_player(0),
      unique_window_handler_(new UniqueWindowHandler()),
      // Start at idx 0 for 2 enhancements, idx 3 for 1, idx 5 if none
-	  m_workarea_pics{g_gr->images().get("data/pics/workarea123.png"),
-							g_gr->images().get("data/pics/workarea23.png"),
-							g_gr->images().get("data/pics/workarea3.png"),
-							g_gr->images().get("data/pics/workarea12.png"),
-							g_gr->images().get("data/pics/workarea2.png"),
-							g_gr->images().get("data/pics/workarea1.png")} {
+	  m_workarea_pics{g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysWorkarea123),
+							g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysWorkarea23),
+							g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysWorkarea3),
+							g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysWorkarea12),
+							g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysWorkarea2),
+							g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysWorkarea1)} {
 
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 	   [this](const GraphicResolutionChanged& message) {
@@ -815,22 +815,22 @@ void InteractiveBase::roadb_add_overlay()
 		else
 			slope = endpos.field->get_height() - neighb.field->get_height();
 
-		const char * name = nullptr;
+		const Image* road_image = nullptr;
 
 		if (slope <= -4)
-			name = "data/pics/roadb_reddown.png";
+			road_image = g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysRoadbuildingSteepDecending);
 		else if (slope <= -2)
-			name = "data/pics/roadb_yellowdown.png";
+			road_image = g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysRoadbuildingDecending);
 		else if (slope < 2)
-			name = "data/pics/roadb_green.png";
+			road_image = g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysRoadbuildingLevel);
 		else if (slope < 4)
-			name = "data/pics/roadb_yellow.png";
+			road_image = g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysRoadbuildingAscending);
 		else
-			name = "data/pics/roadb_red.png";
+			road_image = g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysRoadbuildingSteepAscending);
 
 		egbase().map().overlay_manager().register_overlay
 			(neighb,
-			 g_gr->images().get(name),
+			 road_image,
 			 7,
 			 Point::invalid(),
 			 m_road_buildhelp_overlay_jobid);

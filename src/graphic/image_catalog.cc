@@ -65,6 +65,10 @@ void ImageCatalog::init()  {
 	insert(Keys::kListSecond, "ui_basic/list_second_entry.png"); // NOCOM unused?
 	insert(Keys::kListThird, "ui_basic/list_third_entry.png"); // NOCOM unused?
 	insert(Keys::kListSelected, "ui_basic/list_selected.png");
+	insert(Keys::kActionContinue, "ui_basic/continue.png");
+	insert(Keys::kActionDifferent, "ui_basic/different.png");
+	insert(Keys::kActionStop, "ui_basic/stop.png");
+
 
 	// wui
 	insert(Keys::kWindowBackground, "wui/window_background.png");
@@ -139,6 +143,68 @@ void ImageCatalog::init()  {
 	insert(Keys::kStatsProductivity, "wui/stats/genstats_productivity.png");
 	insert(Keys::kStatsTrees, "wui/stats/genstats_trees.png");
 
+	// minimap
+	insert(Keys::kMinimapBuildings, "wui/minimap/button_bldns.png");
+	insert(Keys::kMinimapFlags, "wui/minimap/button_flags.png");
+	insert(Keys::kMinimapOwner, "wui/minimap/button_owner.png");
+	insert(Keys::kMinimapRoads, "wui/minimap/button_roads.png");
+	insert(Keys::kMinimapTerrain, "wui/minimap/button_terrn.png");
+	insert(Keys::kMinimapZoom, "wui/minimap/button_zoom.png");
+
+	// overlays
+	insert(Keys::kOverlaysMapSpot, "wui/overlays/map_spot.png");
+	insert(Keys::kOverlaysPlotMine, "wui/overlays/mine.png");
+	insert(Keys::kOverlaysPlotBig, "wui/overlays/big.png");
+	insert(Keys::kOverlaysPlotMedium, "wui/overlays/medium.png");
+	insert(Keys::kOverlaysPlotSmall, "wui/overlays/small.png");
+	insert(Keys::kOverlaysPlotPort, "wui/overlays/port.png");
+	insert(Keys::kOverlaysRoadbuildingLevel, "wui/overlays/roadb_green.png");
+	insert(Keys::kOverlaysRoadbuildingSteepAscending, "wui/overlays/roadb_red.png");
+	insert(Keys::kOverlaysRoadbuildingSteepDecending, "wui/overlays/roadb_reddown.png");
+	insert(Keys::kOverlaysRoadbuildingAscending, "wui/overlays/roadb_yellow.png");
+	insert(Keys::kOverlaysRoadbuildingDecending, "wui/overlays/roadb_yellowdown.png");
+	insert(Keys::kOverlaysFlag, "wui/overlays/set_flag.png");
+	insert(Keys::kOverlaysWorkarea1, "wui/overlays/workarea1.png");
+	insert(Keys::kOverlaysWorkarea2, "wui/overlays/workarea2.png");
+	insert(Keys::kOverlaysWorkarea3, "wui/overlays/workarea3.png");
+	insert(Keys::kOverlaysWorkarea12, "wui/overlays/workarea12.png");
+	insert(Keys::kOverlaysWorkarea23, "wui/overlays/workarea23.png");
+	insert(Keys::kOverlaysWorkarea123, "wui/overlays/workarea123.png");
+
+	// ship
+	insert(Keys::kShipExploreCounterclockwise, "wui/ship/ship_explore_island_ccw.png");
+	insert(Keys::kShipExploreClockwise, "wui/ship/ship_explore_island_cw.png");
+	insert(Keys::kShipScoutEast, "wui/ship/ship_scout_e.png");
+	insert(Keys::kShipScoutNorthEast, "wui/ship/ship_scout_ne.png");
+	insert(Keys::kShipScoutNorthWest, "wui/ship/ship_scout_nw.png");
+	insert(Keys::kShipScoutSouthEast, "wui/ship/ship_scout_se.png");
+	insert(Keys::kShipScoutSouthWest, "wui/ship/ship_scout_sw.png");
+	insert(Keys::kShipScoutWest, "wui/ship/ship_scout_w.png");
+	insert(Keys::kShipExpeditionCancel, "wui/ship/menu_ship_cancel_expedition.png");
+	insert(Keys::kShipDestination, "wui/ship/menu_ship_destination.png");
+	insert(Keys::kShipGoto, "wui/ship/menu_ship_goto.png");
+	insert(Keys::kShipSink, "wui/ship/menu_ship_sink.png");
+
+	// buildings
+	insert(Keys::kDockExpeditionStart, "wui/buildings/start_expedition.png");
+	insert(Keys::kDockExpeditionCancel, "wui/buildings/cancel_expedition.png");
+	insert(Keys::kBuildingPriorityHigh, "wui/buildings/high_priority_button.png");
+	insert(Keys::kBuildingPriorityNormal, "wui/buildings/normal_priority_button.png");
+	insert(Keys::kBuildingPriorityLow, "wui/buildings/low_priority_button.png");
+	insert(Keys::kBuildingMaxFillIndicator, "wui/buildings/max_fill_indicator.png");
+	insert(Keys::kBuildingAttack, "wui/buildings/menu_attack.png");
+	insert(Keys::kBuildingBulldoze, "wui/buildings/menu_bld_bulldoze.png");
+	insert(Keys::kBuildingDismantle, "wui/buildings/menu_bld_dismantle.png");
+	insert(Keys::kBuildingSoldierDrop, "wui/buildings/menu_drop_soldier.png");
+	insert(Keys::kBuildingSoldierHeroes, "wui/buildings/prefer_heroes.png");
+	insert(Keys::kBuildingSoldierRookies, "wui/buildings/prefer_rookies.png");
+	insert(Keys::kBuildingStockPolicyDontStockButton, "wui/buildings/stock_policy_button_dontstock.png");
+	insert(Keys::kBuildingStockPolicyNormalButton, "wui/buildings/stock_policy_button_normal.png");
+	insert(Keys::kBuildingStockPolicyPreferButton, "wui/buildings/stock_policy_button_prefer.png");
+	insert(Keys::kBuildingStockPolicyRemoveButton, "wui/buildings/stock_policy_button_remove.png");
+	insert(Keys::kBuildingStockPolicyDontStock, "wui/buildings/stock_policy_dontstock.png");
+	insert(Keys::kBuildingStockPolicyPrefer, "wui/buildings/stock_policy_prefer.png");
+	insert(Keys::kBuildingStockPolicyRemove, "wui/buildings/stock_policy_remove.png");
 
 	// players
 	insert(Keys::kPlayerStartingPosSmall1, "players/fsel_editor_set_player_01_pos.png");

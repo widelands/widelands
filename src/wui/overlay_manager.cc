@@ -268,27 +268,27 @@ void OverlayManager::load_graphics() {
 		return;
 
 	OverlayInfo * buildhelp_info = m_buildhelp_infos;
-	static const char * filenames[] = {
-		"data/pics/set_flag.png",
-		"data/pics/small.png",
-		"data/pics/medium.png",
-		"data/pics/big.png",
-		"data/pics/mine.png",
-		"data/pics/port.png"
+	static const Image * image_files[] = {
+		g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysFlag),
+		g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysPlotSmall),
+		g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysPlotMedium),
+		g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysPlotBig),
+		g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysPlotMine),
+		g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysPlotPort)
 	};
-	const char * const * filename = filenames;
+	const Image * const * image_file = image_files;
 
 	//  Special case for flag, which has a different formula for hotspot_y.
-	buildhelp_info->pic = g_gr->images().get(*filename);
+	buildhelp_info->pic = *image_file;
 	buildhelp_info->hotspot = Point(buildhelp_info->pic->width() / 2, buildhelp_info->pic->height() - 1);
 
 	const OverlayInfo * const buildhelp_infos_end =
 		buildhelp_info + Widelands::Field::Buildhelp_None;
 	for (;;) { // The other buildhelp overlays.
-		++buildhelp_info, ++filename;
+		++buildhelp_info, ++image_file;
 		if (buildhelp_info == buildhelp_infos_end)
 			break;
-		buildhelp_info->pic = g_gr->images().get(*filename);
+		buildhelp_info->pic = *image_file;
 		buildhelp_info->hotspot = Point(buildhelp_info->pic->width() / 2, buildhelp_info->pic->height() / 2);
 	}
 

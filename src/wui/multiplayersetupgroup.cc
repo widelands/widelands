@@ -265,7 +265,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		type->set_enabled(typeaccess);
 		if (player_setting.state == PlayerSettings::stateClosed) {
 			type ->set_tooltip(_("Closed"));
-			type ->set_pic(g_gr->images().get("data/pics/stop.png"));
+			type ->set_pic(g_gr->cataloged_image(ImageCatalog::Keys::kActionStop));
 			team ->set_visible(false);
 			team ->set_enabled(false);
 			tribe->set_visible(false);
@@ -276,7 +276,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			return;
 		} else if (player_setting.state == PlayerSettings::stateOpen) {
 			type ->set_tooltip(_("Open"));
-			type ->set_pic(g_gr->images().get("data/pics/continue.png"));
+			type ->set_pic(g_gr->cataloged_image(ImageCatalog::Keys::kActionContinue));
 			team ->set_visible(false);
 			team ->set_enabled(false);
 			tribe->set_visible(false);

@@ -94,7 +94,7 @@ ProductionSiteWindow::ProductionSiteWindow
 			UI::Button * evict_button = new UI::Button
 							(m_worker_caps, "evict", 0, 0, 34, 34,
 							 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
-							 g_gr->images().get("data/pics/menu_drop_soldier.png"),
+							 g_gr->cataloged_image(ImageCatalog::Keys::kBuildingSoldierDrop),
 							 _("Terminate the employment of the selected worker"));
 			evict_button->sigclicked.connect
 					(boost::bind(&ProductionSiteWindow::evict_worker, boost::ref(*this)));

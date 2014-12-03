@@ -237,12 +237,12 @@ void FullscreenMenuInternetLobby::fill_games_list(const std::vector<InternetGame
 		const Image* pic;
 		if (games.at(i).connectable) {
 			if (games.at(i).build_id == build_id())
-				pic = g_gr->images().get("data/pics/continue.png");
+				pic = g_gr->cataloged_image(ImageCatalog::Keys::kActionContinue);
 			else {
-				pic = g_gr->images().get("data/pics/different.png");
+				pic = pic = g_gr->cataloged_image(ImageCatalog::Keys::kActionDifferent);
 			}
 		} else {
-			pic = g_gr->images().get("data/pics/stop.png");
+			pic = pic = g_gr->cataloged_image(ImageCatalog::Keys::kActionStop);
 		}
 		// If one of the servers has the same name as the local name of the
 		// clients server, we disable the 'hostgame' button to avoid having more
@@ -292,16 +292,16 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 		const Image* pic;
 		switch (convert_clienttype(client.type)) {
 			case 0: // UNREGISTERED
-				pic = g_gr->images().get("data/pics/roadb_red.png");
+				pic = pic = g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysRoadbuildingSteepAscending);
 				er.set_picture(0, pic);
 				break;
 			case 1: // REGISTERED
-				pic = g_gr->images().get("data/pics/roadb_yellow.png");
+				pic = pic = g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysRoadbuildingAscending);
 				er.set_picture(0, pic);
 				break;
 			case 2: // SUPERUSER
 			case 3: // BOT
-				pic = g_gr->images().get("data/pics/roadb_green.png");
+				pic = g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysRoadbuildingLevel);
 				er.set_color(RGBColor(0, 255, 0));
 				er.set_picture(0, pic);
 				break;
