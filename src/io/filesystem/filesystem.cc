@@ -63,11 +63,6 @@
 FileSystem::FileSystem()
 {
 	m_root = "";
-#ifdef _WIN32
-	m_filesep = '\\';
-#else
-	m_filesep = '/';
-#endif
 }
 
 
@@ -95,7 +90,7 @@ bool FileSystem::is_path_absolute(const std::string & path) const {
 	}
 #endif
 	assert(root_size < path_size); //  Otherwise an invalid read happens below.
-	if (path[root_size] != m_filesep)
+	if (path[root_size] != file_separator())
 		return false;
 
 	return true;
@@ -120,7 +115,7 @@ std::string FileSystem::fix_cross_file(const std::string & path) const {
 #else
 		if (temp == "\\")
 #endif
-			fixedPath.at(i) = m_filesep;
+			fixedPath.at(i) = file_separator();
 		// As a security measure, eat all:
 		// * tildes
 		// * double dots
@@ -141,7 +136,8 @@ std::string FileSystem::fix_cross_file(const std::string & path) const {
 /**
  * \return The process' current working directory
  */
-std::string FileSystem::get_working_directory() const {
+// static
+std::string FileSystem::get_working_directory() {
 	char cwd[PATH_MAX + 1];
 	char * const result = getcwd(cwd, PATH_MAX);
 	if (! result)
@@ -150,6 +146,14 @@ std::string FileSystem::get_working_directory() const {
 	return std::string(cwd);
 }
 
+// static
+char FileSystem::file_separator() {
+#ifdef _WIN32
+	return '\\';
+#else
+	return '/';
+#endif
+}
 
 // TODO(unknown): Write homedir detection for non-getenv-systems
 std::string FileSystem::get_homedir()
@@ -246,19 +250,19 @@ std::string FileSystem::canonicalize_name(std::string path) const {
 	}
 #endif
 
-	fs_tokenize(path, m_filesep, std::inserter(components, components.begin()));
+	fs_tokenize(path, file_separator(), std::inserter(components, components.begin()));
 
 	//tilde expansion
 	if (!components.empty() && *components.begin() == "~") {
 		components.erase(components.begin());
 		fs_tokenize
 			(get_homedir(),
-			 m_filesep,
+			 file_separator(),
 			 std::inserter(components, components.begin()));
 	} else if (!is_path_absolute(path))
 		//  make relative paths absolute (so that "../../foo" can work)
 		fs_tokenize
-			(m_root.empty() ? get_working_directory() : m_root, m_filesep,
+			(m_root.empty() ? get_working_directory() : m_root, file_separator(),
 			 std::inserter(components, components.begin()));
 
 	//clean up the path

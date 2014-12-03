@@ -45,6 +45,15 @@ void png_flush_function(png_structp png_ptr) {
 	static_cast<StreamWrite*>(png_get_io_ptr(png_ptr))->flush();
 }
 
+inline void ensure_sdl_image_is_initialized() {
+	static bool is_initialized = false;
+	if (!is_initialized) {
+		IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
+		is_initialized = true;
+	}
+}
+
+
 }  // namespace
 
 Texture* load_image(const std::string& fname, FileSystem* fs) {
@@ -52,6 +61,8 @@ Texture* load_image(const std::string& fname, FileSystem* fs) {
 }
 
 SDL_Surface* load_image_as_sdl_surface(const std::string& fname, FileSystem* fs) {
+	ensure_sdl_image_is_initialized();
+
 	FileRead fr;
 	bool found;
 	if (fs) {

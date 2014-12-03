@@ -41,27 +41,19 @@ FullscreenMenuBase
 ==============================================================================
 */
 
-struct FullscreenMenuBase::Data {
-	UI::TextStyle textstyle_small;
-	UI::TextStyle textstyle_big;
-	std::string background_image;
-};
-
 /**
  * Initialize a pre-game menu
  *
  * Args: bgpic  name of the background picture
  */
-FullscreenMenuBase::FullscreenMenuBase(char const * const bgpic)
-	: UI::Panel(nullptr, 0, 0, gr_x(), gr_y()),
-	d(new Data)
-{
-	d->textstyle_small = UI::TextStyle::ui_small();
-	d->textstyle_small.font = UI::Font::get(ui_fn(), fs_small());
+FullscreenMenuBase::FullscreenMenuBase(char const* const bgpic)
+   : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()) {
+	textstyle_small_ = UI::TextStyle::ui_small();
+	textstyle_small_.font = UI::Font::get(ui_fn(), fs_small());
 
-	d->textstyle_big = UI::TextStyle::ui_big();
-	d->textstyle_big.font = UI::Font::get(ui_fn(), fs_big());
-	d->background_image = (boost::format("pics/%s") % bgpic).str();
+	textstyle_big_ = UI::TextStyle::ui_big();
+	textstyle_big_.font = UI::Font::get(ui_fn(), fs_big());
+	background_image_ = (boost::format("pics/%s") % bgpic).str();
 }
 
 FullscreenMenuBase::~FullscreenMenuBase()
@@ -73,19 +65,9 @@ FullscreenMenuBase::~FullscreenMenuBase()
  * Draw the background / splash screen
 */
 void FullscreenMenuBase::draw(RenderTarget & dst) {
-	const Image* bg = g_gr->images().get(d->background_image);
+	const Image* bg = g_gr->images().get(background_image_);
 	dst.blitrect_scale(Rect(0, 0, get_w(), get_h()), bg, Rect(0, 0, bg->width(), bg->height()));
 }
-
-
-uint32_t FullscreenMenuBase::gr_x() {
-	return g_gr->get_xres();
-}
-
-uint32_t FullscreenMenuBase::gr_y() {
-	return g_gr->get_yres();
-}
-
 
 uint32_t FullscreenMenuBase::fs_small() {
 	return UI_FONT_SIZE_SMALL * get_h() / 600;
@@ -97,20 +79,20 @@ uint32_t FullscreenMenuBase::fs_big() {
 
 UI::TextStyle & FullscreenMenuBase::ts_small()
 {
-	return d->textstyle_small;
+	return textstyle_small_;
 }
 
 UI::TextStyle & FullscreenMenuBase::ts_big()
 {
-	return d->textstyle_big;
+	return textstyle_big_;
 }
 
 UI::Font * FullscreenMenuBase::font_small()
 {
-	return d->textstyle_small.font;
+	return textstyle_small_.font;
 }
 
 UI::Font * FullscreenMenuBase::font_big()
 {
-	return d->textstyle_big.font;
+	return textstyle_big_.font;
 }
