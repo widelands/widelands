@@ -59,7 +59,7 @@ EditorSetStartingPosTool::EditorSetStartingPosTool()
 	: EditorTool(*this, *this, false), m_current_sel_pic(ImageCatalog::Keys::kUnknownImage)
 {
 	m_current_player = 0;
-	fsel_picsname = ImageCatalog::Keys::kSelectEditorSetStartingPos1;
+	fsel_picsname = ImageCatalog::Keys::kPlayerStartingPosSmall1;
 }
 
 int32_t EditorSetStartingPosTool::handle_click_impl(Widelands::Map& map,
@@ -82,7 +82,7 @@ int32_t EditorSetStartingPosTool::handle_click_impl(Widelands::Map& map,
 
 		Widelands::Coords const old_sp = map.get_starting_pos(m_current_player);
 
-		ImageCatalog::Keys offset = ImageCatalog::Keys::kEditorPlayerStartingPos1;
+		ImageCatalog::Keys offset = ImageCatalog::Keys::kPlayerStartingPosBig1;
 		const Image* player_image =
 				g_gr->cataloged_image(static_cast<ImageCatalog::Keys>(m_current_player - 1 +
 																						static_cast<uint8_t>(offset)));
@@ -113,7 +113,7 @@ Widelands::PlayerNumber EditorSetStartingPosTool::get_current_player
 
 void EditorSetStartingPosTool::set_current_player(int32_t const i) {
 	m_current_player = i;
-	ImageCatalog::Keys offset = ImageCatalog::Keys::kSelectEditorSetStartingPos1;
+	ImageCatalog::Keys offset = ImageCatalog::Keys::kPlayerStartingPosSmall1;
 	fsel_picsname = static_cast<ImageCatalog::Keys>(m_current_player - 1 + static_cast<uint8_t>(offset));
 
 	m_current_sel_pic = fsel_picsname;

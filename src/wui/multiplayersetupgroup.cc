@@ -118,7 +118,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 				const Image* player_image;
 				std::string temp_tooltip;
 				if (us.position < UserSettings::highest_playernum()) {
-					ImageCatalog::Keys offset = ImageCatalog::Keys::kStatsPlayer1;
+					ImageCatalog::Keys offset = ImageCatalog::Keys::kPlayerFlag1;
 					player_image = g_gr->cataloged_image(static_cast<ImageCatalog::Keys>(us.position +
 																									static_cast<uint8_t>(offset)));
 					temp_tooltip = (boost::format(_("Player %u"))
@@ -174,7 +174,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	{
 		set_size(w, h);
 
-		ImageCatalog::Keys offset = ImageCatalog::Keys::kSelectEditorSetStartingPos1;
+		ImageCatalog::Keys offset = ImageCatalog::Keys::kPlayerStartingPosSmall1;
 		const Image* player_image =
 				g_gr->cataloged_image(static_cast<ImageCatalog::Keys>(id + static_cast<uint8_t>(offset)));
 		player = new UI::Icon(this, 0, 0, h, h, player_image);
@@ -289,7 +289,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			type ->set_tooltip(_("Shared in"));
 			type ->set_pic(g_gr->images().get("data/pics/shared_in.png"));
 
-			ImageCatalog::Keys offset = ImageCatalog::Keys::kSelectEditorSetStartingPos1;
+			ImageCatalog::Keys offset = ImageCatalog::Keys::kPlayerStartingPosSmall1;
 			const Image* player_image =
 					g_gr->cataloged_image(static_cast<ImageCatalog::Keys>(player_setting.shared_in - 1 +
 																							static_cast<uint8_t>(offset)));

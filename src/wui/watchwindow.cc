@@ -136,7 +136,7 @@ WatchWindow::WatchWindow
 				(this, "close",
 				 w - 34, h - 34, 34, 34,
 				 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
-				 g_gr->images().get("data/pics/menu_abort.png"),
+				 g_gr->cataloged_image(ImageCatalog::Keys::kButtonMenuAbort),
 				 _("Close"));
 		closebtn->sigclicked.connect(boost::bind(&WatchWindow::close_cur_view, this));
 	}

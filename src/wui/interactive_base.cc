@@ -134,7 +134,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 
 	//  Having this in the initializer list (before Sys_InitGraphics) will give
 	//  funny results.
-	m_sel.pic = g_gr->images().get("data/pics/fsel.png");
+	m_sel.pic = g_gr->cataloged_image(ImageCatalog::Keys::kSelect);
 
 	setDefaultCommand (boost::bind(&InteractiveBase::cmd_lua, this, _1));
 	addCommand

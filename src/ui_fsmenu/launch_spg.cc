@@ -158,7 +158,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG
 
 	uint32_t y = get_h() * 3 / 10 - m_buth;
 	for (uint32_t i = 0; i < MAX_PLAYERS; ++i) {
-		ImageCatalog::Keys offset = ImageCatalog::Keys::kSelectEditorSetStartingPos1;
+		ImageCatalog::Keys offset = ImageCatalog::Keys::kPlayerStartingPosSmall1;
 		const Image* player_image =
 				g_gr->cataloged_image(static_cast<ImageCatalog::Keys>(i + static_cast<uint8_t>(offset)));
 

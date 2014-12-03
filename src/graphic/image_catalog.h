@@ -33,15 +33,31 @@ public:
 	/// The keys to fetch the image filenames.
 	enum class Keys {
 		kUnknownImage = 0, // This is the key for a nonexistent image. Do not add this to the entries.
+
+		// ui_basic
 		kButton0,
 		kButton1,
 		kButton2,
 		kButton3,
 		kButton4,
+		kFilesDirectory,
+		kFilesWLMap,
+		kFilesS2Map,
+		kFilesScenario,
+		kScrollbarUp,
+		kScrollbarDown,
+		kScrollbarLeft,
+		kScrollbarRight,
+		kScrollbarBackground,
+		kSelect,
+
+		// wui
 		kButtonMenuOK,
 		kButtonMenuAbort,
+
+		// loadscreen
 		kLoadscreenEditor,
-		kSelect,
+
 		kSelectEditorDelete,
 		kSelectEditorHeightDecrease,
 		kSelectEditorHeightIncrease,
@@ -56,39 +72,32 @@ public:
 		kSelectEditorSetPortSpace,
 		kSelectEditorUnsetPortSpace,
 		kSelectEditorSetResources,
-		kSelectEditorSetStartingPos1, // Keep player icons in ascending order
-		kSelectEditorSetStartingPos2,
-		kSelectEditorSetStartingPos3,
-		kSelectEditorSetStartingPos4,
-		kSelectEditorSetStartingPos5,
-		kSelectEditorSetStartingPos6,
-		kSelectEditorSetStartingPos7,
-		kSelectEditorSetStartingPos8,
-		kEditorPlayerStartingPos1, // Keep player icons in ascending order
-		kEditorPlayerStartingPos2,
-		kEditorPlayerStartingPos3,
-		kEditorPlayerStartingPos4,
-		kEditorPlayerStartingPos5,
-		kEditorPlayerStartingPos6,
-		kEditorPlayerStartingPos7,
-		kEditorPlayerStartingPos8,
-		kFilesDirectory,
-		kFilesWLMap,
-		kFilesS2Map,
-		kFilesScenario,
-		kScrollbarUp,
-		kScrollbarDown,
-		kScrollbarLeft,
-		kScrollbarRight,
-		kScrollbarBackground,
-		kStatsPlayer1, // Keep player icons in ascending order
-		kStatsPlayer2,
-		kStatsPlayer3,
-		kStatsPlayer4,
-		kStatsPlayer5,
-		kStatsPlayer6,
-		kStatsPlayer7,
-		kStatsPlayer8,
+
+		// players
+		kPlayerStartingPosSmall1, // Keep player icons in ascending order
+		kPlayerStartingPosSmall2,
+		kPlayerStartingPosSmall3,
+		kPlayerStartingPosSmall4,
+		kPlayerStartingPosSmall5,
+		kPlayerStartingPosSmall6,
+		kPlayerStartingPosSmall7,
+		kPlayerStartingPosSmall8,
+		kPlayerStartingPosBig1, // Keep player icons in ascending order
+		kPlayerStartingPosBig2,
+		kPlayerStartingPosBig3,
+		kPlayerStartingPosBig4,
+		kPlayerStartingPosBig5,
+		kPlayerStartingPosBig6,
+		kPlayerStartingPosBig7,
+		kPlayerStartingPosBig8,
+		kPlayerFlag1, // Keep player icons in ascending order
+		kPlayerFlag2,
+		kPlayerFlag3,
+		kPlayerFlag4,
+		kPlayerFlag5,
+		kPlayerFlag6,
+		kPlayerFlag7,
+		kPlayerFlag8,
 	};
 
 	/// The base directory for the images in this catalog.

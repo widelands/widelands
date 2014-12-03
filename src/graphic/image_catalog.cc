@@ -37,15 +37,30 @@ ImageCatalog::~ImageCatalog() {
 // Register all images here
 void ImageCatalog::init()  {
 	entries_.clear();
-	insert(Keys::kButton0, "but0.png");
-	insert(Keys::kButton1, "but1.png");
-	insert(Keys::kButton2, "but2.png");
-	insert(Keys::kButton3, "but3.png");
-	insert(Keys::kButton4, "but4.png");
-	insert(Keys::kButtonMenuOK, "menu_okay.png");
-	insert(Keys::kButtonMenuAbort, "menu_abort.png");
-	insert(Keys::kLoadscreenEditor, "editor.jpg");
-	insert(Keys::kSelect, "fsel.png");
+	// ui_basic
+	insert(Keys::kButton0, "ui_basic/but0.png");
+	insert(Keys::kButton1, "ui_basic/but1.png");
+	insert(Keys::kButton2, "ui_basic/but2.png");
+	insert(Keys::kButton3, "ui_basic/but3.png");
+	insert(Keys::kButton4, "ui_basic/but4.png");
+	insert(Keys::kFilesDirectory, "ui_basic/ls_dir.png");
+	insert(Keys::kFilesWLMap, "ui_basic/ls_wlmap.png");
+	insert(Keys::kFilesS2Map, "ui_basic/ls_s2map.png");
+	insert(Keys::kFilesScenario, "ui_basic/ls_wlscenario.png");
+	insert(Keys::kScrollbarUp, "ui_basic/scrollbar_up.png");
+	insert(Keys::kScrollbarDown, "ui_basic/scrollbar_down.png");
+	insert(Keys::kScrollbarLeft, "ui_basic/scrollbar_left.png");
+	insert(Keys::kScrollbarRight, "ui_basic/scrollbar_right.png");
+	insert(Keys::kScrollbarBackground, "ui_basic/scrollbar_background.png");
+	insert(Keys::kSelect, "ui_basic/fsel.png");
+
+	// wui
+	insert(Keys::kButtonMenuOK, "wui/menu_okay.png");
+	insert(Keys::kButtonMenuAbort, "wui/menu_abort.png");
+
+	// loadscreen
+	insert(Keys::kLoadscreenEditor, "loadscreen/editor.jpg");
+
 	insert(Keys::kSelectEditorDelete, "fsel_editor_delete.png");
 	insert(Keys::kSelectEditorHeightDecrease, "fsel_editor_decrease_height.png");
 	insert(Keys::kSelectEditorHeightIncrease, "fsel_editor_increase_height.png");
@@ -60,39 +75,32 @@ void ImageCatalog::init()  {
 	insert(Keys::kSelectEditorSetPortSpace, "fsel_editor_set_port_space.png");
 	insert(Keys::kSelectEditorUnsetPortSpace, "fsel_editor_unset_port_space.png");
 	insert(Keys::kSelectEditorSetResources, "fsel_editor_set_resources.png");
-	insert(Keys::kSelectEditorSetStartingPos1, "players/fsel_editor_set_player_01_pos.png");
-	insert(Keys::kSelectEditorSetStartingPos2, "players/fsel_editor_set_player_02_pos.png");
-	insert(Keys::kSelectEditorSetStartingPos3, "players/fsel_editor_set_player_03_pos.png");
-	insert(Keys::kSelectEditorSetStartingPos4, "players/fsel_editor_set_player_04_pos.png");
-	insert(Keys::kSelectEditorSetStartingPos5, "players/fsel_editor_set_player_05_pos.png");
-	insert(Keys::kSelectEditorSetStartingPos6, "players/fsel_editor_set_player_06_pos.png");
-	insert(Keys::kSelectEditorSetStartingPos7, "players/fsel_editor_set_player_07_pos.png");
-	insert(Keys::kSelectEditorSetStartingPos8, "players/fsel_editor_set_player_08_pos.png");
-	insert(Keys::kEditorPlayerStartingPos1, "players/editor_player_01_starting_pos.png");
-	insert(Keys::kEditorPlayerStartingPos2, "players/editor_player_02_starting_pos.png");
-	insert(Keys::kEditorPlayerStartingPos3, "players/editor_player_03_starting_pos.png");
-	insert(Keys::kEditorPlayerStartingPos4, "players/editor_player_04_starting_pos.png");
-	insert(Keys::kEditorPlayerStartingPos5, "players/editor_player_05_starting_pos.png");
-	insert(Keys::kEditorPlayerStartingPos6, "players/editor_player_06_starting_pos.png");
-	insert(Keys::kEditorPlayerStartingPos7, "players/editor_player_07_starting_pos.png");
-	insert(Keys::kEditorPlayerStartingPos8, "players/editor_player_08_starting_pos.png");
-	insert(Keys::kFilesDirectory, "ls_dir.png");
-	insert(Keys::kFilesWLMap, "ls_wlmap.png");
-	insert(Keys::kFilesS2Map, "ls_s2map.png");
-	insert(Keys::kFilesScenario, "ls_wlscenario.png");
-	insert(Keys::kScrollbarUp, "scrollbar_up.png");
-	insert(Keys::kScrollbarDown, "scrollbar_down.png");
-	insert(Keys::kScrollbarLeft, "scrollbar_left.png");
-	insert(Keys::kScrollbarRight, "scrollbar_right.png");
-	insert(Keys::kScrollbarBackground, "scrollbar_background.png");
-	insert(Keys::kStatsPlayer1, "players/genstats_enable_plr_01.png");
-	insert(Keys::kStatsPlayer2, "players/genstats_enable_plr_02.png");
-	insert(Keys::kStatsPlayer3, "players/genstats_enable_plr_03.png");
-	insert(Keys::kStatsPlayer4, "players/genstats_enable_plr_04.png");
-	insert(Keys::kStatsPlayer5, "players/genstats_enable_plr_05.png");
-	insert(Keys::kStatsPlayer6, "players/genstats_enable_plr_06.png");
-	insert(Keys::kStatsPlayer7, "players/genstats_enable_plr_07.png");
-	insert(Keys::kStatsPlayer8, "players/genstats_enable_plr_08.png");
+
+	// players
+	insert(Keys::kPlayerStartingPosSmall1, "players/fsel_editor_set_player_01_pos.png");
+	insert(Keys::kPlayerStartingPosSmall2, "players/fsel_editor_set_player_02_pos.png");
+	insert(Keys::kPlayerStartingPosSmall3, "players/fsel_editor_set_player_03_pos.png");
+	insert(Keys::kPlayerStartingPosSmall4, "players/fsel_editor_set_player_04_pos.png");
+	insert(Keys::kPlayerStartingPosSmall5, "players/fsel_editor_set_player_05_pos.png");
+	insert(Keys::kPlayerStartingPosSmall6, "players/fsel_editor_set_player_06_pos.png");
+	insert(Keys::kPlayerStartingPosSmall7, "players/fsel_editor_set_player_07_pos.png");
+	insert(Keys::kPlayerStartingPosSmall8, "players/fsel_editor_set_player_08_pos.png");
+	insert(Keys::kPlayerStartingPosBig1, "players/editor_player_01_starting_pos.png");
+	insert(Keys::kPlayerStartingPosBig2, "players/editor_player_02_starting_pos.png");
+	insert(Keys::kPlayerStartingPosBig3, "players/editor_player_03_starting_pos.png");
+	insert(Keys::kPlayerStartingPosBig4, "players/editor_player_04_starting_pos.png");
+	insert(Keys::kPlayerStartingPosBig5, "players/editor_player_05_starting_pos.png");
+	insert(Keys::kPlayerStartingPosBig6, "players/editor_player_06_starting_pos.png");
+	insert(Keys::kPlayerStartingPosBig7, "players/editor_player_07_starting_pos.png");
+	insert(Keys::kPlayerStartingPosBig8, "players/editor_player_08_starting_pos.png");
+	insert(Keys::kPlayerFlag1, "players/genstats_enable_plr_01.png");
+	insert(Keys::kPlayerFlag2, "players/genstats_enable_plr_02.png");
+	insert(Keys::kPlayerFlag3, "players/genstats_enable_plr_03.png");
+	insert(Keys::kPlayerFlag4, "players/genstats_enable_plr_04.png");
+	insert(Keys::kPlayerFlag5, "players/genstats_enable_plr_05.png");
+	insert(Keys::kPlayerFlag6, "players/genstats_enable_plr_06.png");
+	insert(Keys::kPlayerFlag7, "players/genstats_enable_plr_07.png");
+	insert(Keys::kPlayerFlag8, "players/genstats_enable_plr_08.png");
 }
 
 void ImageCatalog::insert(Keys key, const std::string& filename) {

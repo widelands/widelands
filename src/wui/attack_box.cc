@@ -172,7 +172,7 @@ void AttackBox::init() {
 			(columnbox,
 			 100, 10,
 			 0, max_attackers, max_attackers > 0 ? 1 : 0,
-			 "data/pics/but2.png", // NOCOM use catalog key
+			 g_gr->image_catalog().filepath(ImageCatalog::Keys::kButton2).c_str(),
 			 _("Number of soldiers"));
 
 	m_slider_soldiers->changed.connect(boost::bind(&AttackBox::update_attack, this));

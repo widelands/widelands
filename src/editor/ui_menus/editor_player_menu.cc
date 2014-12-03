@@ -186,7 +186,7 @@ void EditorPlayerMenu::update() {
 			m_plr_set_pos_buts[p - 1]->sigclicked.connect
 				(boost::bind(&EditorPlayerMenu::set_starting_pos_clicked, boost::ref(*this), p));
 		}
-		ImageCatalog::Keys offset = ImageCatalog::Keys::kSelectEditorSetStartingPos1;
+		ImageCatalog::Keys offset = ImageCatalog::Keys::kPlayerStartingPosSmall1;
 		const Image* player_image =
 				g_gr->cataloged_image(static_cast<ImageCatalog::Keys>(p - 1 + static_cast<uint8_t>(offset)));
 
@@ -228,7 +228,7 @@ void EditorPlayerMenu::clicked_remove_last_player() {
 	if (!eia().is_player_tribe_referenced(old_nr_players)) {
 		if (const Widelands::Coords sp = map.get_starting_pos(old_nr_players)) {
 			//  Remove starting position marker.
-			ImageCatalog::Keys offset = ImageCatalog::Keys::kEditorPlayerStartingPos1;
+			ImageCatalog::Keys offset = ImageCatalog::Keys::kPlayerStartingPosBig1;
 			const Image* player_image =
 					g_gr->cataloged_image(static_cast<ImageCatalog::Keys>(old_nr_players - 1 +
 																							static_cast<uint8_t>(offset)));
@@ -427,7 +427,7 @@ void EditorPlayerMenu::make_infrastructure_clicked(uint8_t n) {
 
 		// Remove the player overlay from this starting pos.
 		// A HQ is overlay enough
-		ImageCatalog::Keys offset = ImageCatalog::Keys::kEditorPlayerStartingPos1;
+		ImageCatalog::Keys offset = ImageCatalog::Keys::kPlayerStartingPosBig1;
 		const Image* player_image =
 				g_gr->cataloged_image(static_cast<ImageCatalog::Keys>(n - 1 + static_cast<uint8_t>(offset)));
 		overlay_manager.remove_overlay(start_pos, player_image);

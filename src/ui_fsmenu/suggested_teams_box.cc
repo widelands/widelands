@@ -113,7 +113,7 @@ void SuggestedTeamsBox::show(const std::vector<Widelands::Map::SuggestedTeamLine
 
 				for (uint16_t player : team) {
 					assert(player < MAX_PLAYERS);
-					ImageCatalog::Keys offset = ImageCatalog::Keys::kSelectEditorSetStartingPos1;
+					ImageCatalog::Keys offset = ImageCatalog::Keys::kPlayerStartingPosSmall1;
 					const Image* player_image =
 							g_gr->cataloged_image(static_cast<ImageCatalog::Keys>(player +
 																									static_cast<uint8_t>(offset)));

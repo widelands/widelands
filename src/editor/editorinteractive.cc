@@ -148,7 +148,7 @@ void EditorInteractive::register_overlays() {
 	assert(nr_players <= MAX_PLAYERS);
 	iterate_player_numbers(p, nr_players) {
 		if (Widelands::Coords const sp = map.get_starting_pos(p)) {
-			ImageCatalog::Keys offset = ImageCatalog::Keys::kEditorPlayerStartingPos1;
+			ImageCatalog::Keys offset = ImageCatalog::Keys::kPlayerStartingPosBig1;
 			const Image* player_image =
 					g_gr->cataloged_image(static_cast<ImageCatalog::Keys>(p - 1 + static_cast<uint8_t>(offset)));
 
@@ -190,7 +190,7 @@ void EditorInteractive::load(const std::string & filename) {
 			 filename.c_str());
 	ml->preload_map(true);
 
-	UI::ProgressWindow loader_ui("data/pics/editor.jpg"); // NOCOM use catalog
+	UI::ProgressWindow loader_ui(g_gr->image_catalog().filepath(ImageCatalog::Keys::kLoadscreenEditor));
 	std::vector<std::string> tipstext;
 	tipstext.push_back("editor");
 
@@ -583,7 +583,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 	EditorInteractive eia(editor);
 	editor.set_ibase(&eia); // TODO(unknown): get rid of this
 	{
-		UI::ProgressWindow loader_ui("data/pics/editor.jpg"); // NOCOM use catalog
+		UI::ProgressWindow loader_ui(g_gr->image_catalog().filepath(ImageCatalog::Keys::kLoadscreenEditor));
 		std::vector<std::string> tipstext;
 		tipstext.push_back("editor");
 		GameTips editortips(loader_ui, tipstext);
