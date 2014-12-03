@@ -835,7 +835,7 @@ void NetHost::run(bool const autorun)
 			}
 		} else {
 			loaderUI.reset(new UI::ProgressWindow(g_gr->image_catalog()
-															  .filepath(ImageCatalog::Keys::kFullscreenSplash)));
+															  .filepath(ImageCatalog::Keys::kLoadscreen)));
 			std::vector<std::string> tipstext;
 			tipstext.push_back("general_game");
 			tipstext.push_back("multiplayer");

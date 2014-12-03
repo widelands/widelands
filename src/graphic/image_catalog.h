@@ -83,12 +83,12 @@ public:
 		kFullscreenLaunchMPG,
 		kFullscreenMain,
 		kFullscreenOptions,
-		kFullscreenSplash,
 
 		//loadscreens
 		kLoadscreen,
 		kLoadscreenEditor,
 		kLoadscreenTips,
+		kLoadscreenSplash,
 
 		// editor
 		kEditorUndo,

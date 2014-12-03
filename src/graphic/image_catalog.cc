@@ -87,12 +87,12 @@ void ImageCatalog::init()  {
 	insert(Keys::kFullscreenLaunchMPG, "ui_fsmenu/launch_mpg_menu.jpg");
 	insert(Keys::kFullscreenMain, "ui_fsmenu/mainmenu.jpg");
 	insert(Keys::kFullscreenOptions, "ui_fsmenu/optionsmenu.jpg");
-	insert(Keys::kFullscreenSplash, "ui_fsmenu/splash.jpg");
 
 	// loadscreens
 	insert(Keys::kLoadscreen, "loadscreens/progress.png");
 	insert(Keys::kLoadscreenEditor, "loadscreens/editor.jpg");
 	insert(Keys::kLoadscreenTips, "loadscreens/tips_bg.png");
+	insert(Keys::kLoadscreenSplash, "loadscreens/splash.jpg");
 
 	// editor
 	insert(Keys::kEditorRedo, "wui/editor/editor_redo.png");
