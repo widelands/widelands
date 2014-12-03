@@ -63,9 +63,9 @@ const uint32_t TRANSIENT_TEXTURE_CACHE_SIZE = 160 << 20;   // shifting converts 
 // Sets the icon for the application.
 void set_icon(SDL_Window* sdl_window) {
 #ifndef _WIN32
-	const std::string icon_name = "data/pics/wl-ico-128.png";
+	const std::string icon_name = g_gr->image_catalog().filepath(ImageCatalog::Keys::kLogoWidelands128);
 #else
-	const std::string icon_name = "data/pics/wl-ico-32.png";
+	const std::string icon_name = g_gr->image_catalog().filepath(ImageCatalog::Keys::kLogoWidelands32);
 #endif
 	SDL_Surface* s = load_image_as_sdl_surface(icon_name, g_fs);
 	SDL_SetWindowIcon(sdl_window, s);

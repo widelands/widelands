@@ -120,6 +120,18 @@ void ImageCatalog::init()  {
 	insert(Keys::kPlayerFlag6, "players/genstats_enable_plr_06.png");
 	insert(Keys::kPlayerFlag7, "players/genstats_enable_plr_07.png");
 	insert(Keys::kPlayerFlag8, "players/genstats_enable_plr_08.png");
+
+	// logos
+	insert(Keys::kLogoEditor16, "logos/WL-Editor-16.png");
+	insert(Keys::kLogoEditor32, "logos/WL-Editor-32.png");
+	insert(Keys::kLogoEditor64, "logos/WL-Editor-64.png");
+	insert(Keys::kLogoEditor128, "logos/WL-Editor-128.png");
+	insert(Keys::kLogoWidelands16, "logos/wl-ico-16.png");
+	insert(Keys::kLogoWidelands32, "logos/wl-ico-32.png");
+	insert(Keys::kLogoWidelands48, "logos/wl-ico-48.png");
+	insert(Keys::kLogoWidelands64, "logos/wl-ico-64.png");
+	insert(Keys::kLogoWidelands128, "logos/wl-ico-128.png");
+	insert(Keys::kLogoWidelandsLogo, "logos/wl-logo-64.png");
 }
 
 void ImageCatalog::insert(Keys key, const std::string& filename) {

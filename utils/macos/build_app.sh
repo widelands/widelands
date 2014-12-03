@@ -47,7 +47,7 @@ function MakeAppPackage {
    mkdir $DESTINATION/Widelands.app/Contents/
    mkdir $DESTINATION/Widelands.app/Contents/Resources/
    mkdir $DESTINATION/Widelands.app/Contents/MacOS/
-   cp $SOURCE_DIR/data/pics/widelands.icns $DESTINATION/Widelands.app/Contents/Resources/widelands.icns
+   cp $SOURCE_DIR/data/pics/logos/widelands.icns $DESTINATION/Widelands.app/Contents/Resources/widelands.icns
    ln -s /Applications $DESTINATION/Applications
 
    cat > $DESTINATION/Widelands.app/Contents/Info.plist << EOF

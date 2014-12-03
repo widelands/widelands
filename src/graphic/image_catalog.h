@@ -115,6 +115,18 @@ public:
 		kPlayerFlag6,
 		kPlayerFlag7,
 		kPlayerFlag8,
+
+		// logos
+		kLogoEditor16,
+		kLogoEditor32,
+		kLogoEditor64,
+		kLogoEditor128,
+		kLogoWidelands16,
+		kLogoWidelands32,
+		kLogoWidelands48,
+		kLogoWidelands64,
+		kLogoWidelands128,
+		kLogoWidelandsLogo,
 	};
 
 	/// The base directory for the images in this catalog.
