@@ -172,7 +172,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("data/pics/genstats_landsize.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kStatsLandsize),
 		 _("Land"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -180,7 +180,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("data/pics/genstats_nrworkers.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kStatsWorkersNumber),
 		 _("Workers"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -188,7 +188,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("data/pics/genstats_nrbuildings.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kStatsBuildingsNumber),
 		 _("Buildings"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -196,7 +196,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("data/pics/genstats_nrwares.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kStatsWaresNumber),
 		 _("Wares"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -204,7 +204,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("data/pics/genstats_productivity.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kStatsProductivity),
 		 _("Productivity"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -212,7 +212,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("data/pics/genstats_casualties.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kStatsCasualties),
 		 _("Casualties"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -220,7 +220,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("data/pics/genstats_kills.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kStatsKills),
 		 _("Kills"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -228,7 +228,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("data/pics/genstats_msites_lost.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kStatsMilitarySitesLost),
 		 _("Military buildings lost"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -236,7 +236,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("data/pics/genstats_msites_defeated.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kStatsMilitarySitesDefeated),
 		 _("Military buildings defeated"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -244,7 +244,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("data/pics/genstats_civil_blds_lost.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kStatsBuildingsLost),
 		 _("Civilian buildings lost"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -252,7 +252,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->images().get("data/pics/genstats_militarystrength.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kStatsMilitaryStrength),
 		 _("Military"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);

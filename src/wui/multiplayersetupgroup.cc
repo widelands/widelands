@@ -321,7 +321,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 				}
 			} else { // PlayerSettings::stateHuman
 				title = _("Human");
-				pic += "genstats_nrworkers.png";
+				pic = g_gr->image_catalog().filepath(ImageCatalog::Keys::kStatsWorkersNumber);
 			}
 			type->set_tooltip(title.c_str());
 			type->set_pic(g_gr->images().get(pic));

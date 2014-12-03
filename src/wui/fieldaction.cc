@@ -384,7 +384,7 @@ void FieldActionWindow::add_buttons_auto()
 			if (dynamic_cast<Game const *>(&ibase().egbase())) {
 				add_button
 					(buildbox, "configure_economy",
-					 "data/pics/genstats_nrwares.png",
+					 g_gr->image_catalog().filepath(ImageCatalog::Keys::kStatsWaresNumber).c_str(),
 					 &FieldActionWindow::act_configure_economy,
 					 _("Configure economy"));
 				if (can_act)

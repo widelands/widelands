@@ -124,6 +124,22 @@ void ImageCatalog::init()  {
 	insert(Keys::kEditorToolResourcesIncrease, "wui/editor/fsel_editor_increase_resources.png");
 	insert(Keys::kEditorToolResourcesSet, "wui/editor/fsel_editor_set_resources.png");
 
+	// stats
+	insert(Keys::kStatsCasualties, "wui/stats/genstats_casualties.png");
+	insert(Keys::kStatsBuildingsLost, "wui/stats/genstats_civil_blds_lost.png");
+	insert(Keys::kStatsKills, "wui/stats/genstats_kills.png");
+	insert(Keys::kStatsLandsize, "wui/stats/genstats_landsize.png");
+	insert(Keys::kStatsMilitaryStrength, "wui/stats/genstats_militarystrength.png");
+	insert(Keys::kStatsMilitarySitesDefeated, "wui/stats/genstats_msites_defeated.png");
+	insert(Keys::kStatsMilitarySitesLost, "wui/stats/genstats_msites_lost.png");
+	insert(Keys::kStatsBuildingsNumber, "wui/stats/genstats_nrbuildings.png");
+	insert(Keys::kStatsWaresNumber, "wui/stats/genstats_nrwares.png");
+	insert(Keys::kStatsWorkersNumber, "wui/stats/genstats_nrworkers.png");
+	insert(Keys::kStatsPoints, "wui/stats/genstats_points.png");
+	insert(Keys::kStatsProductivity, "wui/stats/genstats_productivity.png");
+	insert(Keys::kStatsTrees, "wui/stats/genstats_trees.png");
+
+
 	// players
 	insert(Keys::kPlayerStartingPosSmall1, "players/fsel_editor_set_player_01_pos.png");
 	insert(Keys::kPlayerStartingPosSmall2, "players/fsel_editor_set_player_02_pos.png");
@@ -166,6 +182,7 @@ void ImageCatalog::init()  {
 void ImageCatalog::insert(Keys key, const std::string& filename) {
 	const std::string path = kBaseDir + filename;
 	log("NOCOM cataloging image: %s\n",path.c_str());
+	assert(!has_key(key));
 	assert(g_fs->file_exists(path));
 	entries_.emplace(key, path);
 }

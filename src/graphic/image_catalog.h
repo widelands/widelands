@@ -121,6 +121,21 @@ public:
 		kEditorToolResourcesIncrease,
 		kEditorToolResourcesSet,
 
+		// stats
+		kStatsCasualties,
+		kStatsBuildingsLost,
+		kStatsKills,
+		kStatsLandsize,
+		kStatsMilitaryStrength,
+		kStatsMilitarySitesDefeated,
+		kStatsMilitarySitesLost,
+		kStatsBuildingsNumber,
+		kStatsWaresNumber,
+		kStatsWorkersNumber,
+		kStatsPoints,
+		kStatsProductivity,
+		kStatsTrees,
+
 		// players
 		kPlayerStartingPosSmall1, // Keep player icons in ascending order
 		kPlayerStartingPosSmall2,
