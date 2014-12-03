@@ -74,7 +74,7 @@ m_click_recursion_protect(false)
 	}
 
 	const Image* tab_icon =
-		g_gr->images().get("data/pics/list_first_entry.png");
+		g_gr->cataloged_image(ImageCatalog::Keys::kListFirst);
 	Point pos;
 	uint32_t cur_x = bobs_in_row;
 	int32_t i = 0;

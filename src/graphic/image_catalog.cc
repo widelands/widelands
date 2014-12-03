@@ -17,6 +17,8 @@
  *
  */
 
+// NOCOM write a test
+
 #include "graphic/image_catalog.h"
 
 #include <cassert>
@@ -53,8 +55,25 @@ void ImageCatalog::init()  {
 	insert(Keys::kScrollbarRight, "ui_basic/scrollbar_right.png");
 	insert(Keys::kScrollbarBackground, "ui_basic/scrollbar_background.png");
 	insert(Keys::kSelect, "ui_basic/fsel.png");
+	insert(Keys::kCaret, "ui_basic/caret.png");
+	insert(Keys::kCheckbox, "ui_basic/checkbox.png"); // NOCOM unused?
+	insert(Keys::kCheckboxChecked, "ui_basic/checkbox_checked.png");
+	insert(Keys::kCheckboxEmpty, "ui_basic/checkbox_empty.png");
+	insert(Keys::kCheckboxLight, "ui_basic/checkbox_light.png");
+	insert(Keys::kCursor, "ui_basic/cursor.png");
+	insert(Keys::kCursor2, "ui_basic/cursor2.png"); // NOCOM unused?
+	insert(Keys::kCursorClick, "ui_basic/cursor_click.png");
+	insert(Keys::kListFirst, "ui_basic/list_first_entry.png");
+	insert(Keys::kListSecond, "ui_basic/list_second_entry.png"); // NOCOM unused?
+	insert(Keys::kListThird, "ui_basic/list_third_entry.png"); // NOCOM unused?
+	insert(Keys::kListSelected, "ui_basic/list_selected.png");
 
 	// wui
+	insert(Keys::kWindowBackground, "wui/window_background.png");
+	insert(Keys::kWindowBorderTop, "wui/window_top.png");
+	insert(Keys::kWindowBorderLeft, "wui/window_left.png");
+	insert(Keys::kWindowBorderRight, "wui/window_right.png");
+	insert(Keys::kWindowBorderBottom, "wui/window_bottom.png");
 	insert(Keys::kButtonMenuOK, "wui/menu_okay.png");
 	insert(Keys::kButtonMenuAbort, "wui/menu_abort.png");
 
@@ -109,6 +128,7 @@ void ImageCatalog::insert(Keys key, const std::string& filename) {
 	entries_.emplace(key, path);
 }
 
+// NOCOM try to get rid of this.
 const std::string& ImageCatalog::filepath(Keys key) const {
 	assert(has_key(key));
 	return entries_.at(key);

@@ -183,8 +183,9 @@ void Table<void *>::EntryRecord::set_checked
 	_data & cell = m_data.at(col);
 
 	cell.d_checked = checked;
-	cell.d_picture =
-		g_gr->images().get(checked ? "data/pics/checkbox_checked.png" : "data/pics/checkbox_empty.png");
+	cell.d_picture = checked ?
+							  g_gr->cataloged_image(ImageCatalog::Keys::kCheckboxChecked) :
+							  g_gr->cataloged_image(ImageCatalog::Keys::kCheckboxEmpty);
 }
 
 void Table<void *>::EntryRecord::toggle(uint8_t const col)
@@ -477,7 +478,7 @@ Table<void *>::EntryRecord & Table<void *>::add
 	for (size_t i = 0; i < m_columns.size(); ++i)
 		if (m_columns.at(i).is_checkbox_column) {
 			result.m_data.at(i).d_picture =
-				g_gr->images().get("data/pics/checkbox_empty.png");
+				g_gr->cataloged_image(ImageCatalog::Keys::kCheckboxEmpty);
 		}
 
 	m_scrollbar->set_steps

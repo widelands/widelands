@@ -47,7 +47,7 @@ Statebox::Statebox
 		m_pic_graphics = pic;
 	} else
 		m_pic_graphics =
-			g_gr->images().get("data/pics/checkbox_light.png");
+			g_gr->cataloged_image(ImageCatalog::Keys::kCheckboxLight);
 }
 
 
