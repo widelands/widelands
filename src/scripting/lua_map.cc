@@ -3662,7 +3662,12 @@ int LuaField::set_resource_amount(lua_State * L) {
 		report_error(L, "Illegal amount: %i, must be >= 0 and <= %i", amount, max_amount);
 
 	field->set_resources(res, amount);
-	field->set_initial_res_amount(amount);
+	//in editor, reset also initial amount
+	EditorGameBase & egbase = get_egbase(L);
+	upcast(Game, game, &egbase);
+	if (!game) {
+		field->set_initial_res_amount(amount);
+	}
 
 	return 0;
 }
