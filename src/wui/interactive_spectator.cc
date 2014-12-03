@@ -261,10 +261,6 @@ bool InteractiveSpectator::handle_key(bool const down, SDL_Keysym const code)
 					(dfShowStatistics, !get_display_flag(dfShowStatistics));
 			return true;
 
-		case SDLK_f:
-			g_gr->set_fullscreen(!g_gr->fullscreen());
-			return true;
-
 		case SDLK_RETURN:
 		case SDLK_KP_ENTER:
 			if (!m_chatProvider | !m_chatenabled)
