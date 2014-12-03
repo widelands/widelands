@@ -45,7 +45,7 @@ void png_flush_function(png_structp png_ptr) {
 	static_cast<StreamWrite*>(png_get_io_ptr(png_ptr))->flush();
 }
 
-inline bool ensure_sdl_image_is_initialized() {
+inline void ensure_sdl_image_is_initialized() {
 	static bool is_initialized = false;
 	if (!is_initialized) {
 		IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
