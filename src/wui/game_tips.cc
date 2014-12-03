@@ -29,7 +29,6 @@
 #include "wui/text_layout.h"
 
 #define DEFAULT_INTERVAL 5  // seconds
-#define BG_IMAGE "data/pics/tips_bg.png"
 
 GameTips::GameTips
 	(UI::ProgressWindow & progressWindow, const std::vector<std::string>& names)
@@ -105,7 +104,7 @@ void GameTips::stop() {
 
 void GameTips::show_tip(int32_t index) {
 	// try to load a background
-	const Image* pic_background = g_gr->images().get(BG_IMAGE);
+	const Image* pic_background = g_gr->cataloged_image(ImageCatalog::Keys::kLoadscreenTips);
 	assert(pic_background);
 
 	RenderTarget & rt = *g_gr->get_render_target();

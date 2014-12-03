@@ -53,13 +53,12 @@ struct FullscreenMenuBase::Data {
  *
  * Args: bgpic  name of the background picture
  */
-FullscreenMenuBase::FullscreenMenuBase(char const * const bgpic)
+FullscreenMenuBase::FullscreenMenuBase(const std::string& bgpic)
 	: UI::Panel(nullptr, 0, 0, gr_x(), gr_y()),
 	d(new Data)
 {
 	// Load background graphics
-	const std::string bgpicpath = (boost::format("data/pics/%s") % bgpic).str();
-	d->res_background = ImageTransformations::resize(g_gr->images().get(bgpicpath), get_w(), get_h());
+	d->res_background = ImageTransformations::resize(g_gr->images().get(bgpic), get_w(), get_h());
 
 	d->textstyle_small = UI::TextStyle::ui_small();
 	d->textstyle_small.font = UI::Font::get(ui_fn(), fs_small());

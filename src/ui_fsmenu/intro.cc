@@ -20,10 +20,11 @@
 #include "ui_fsmenu/intro.h"
 
 #include "base/i18n.h"
+#include "graphic/graphic.h"
 
 
 FullscreenMenuIntro::FullscreenMenuIntro()
-	: FullscreenMenuBase("splash.jpg"),
+	: FullscreenMenuBase(g_gr->image_catalog().filepath(ImageCatalog::Keys::kFullscreenSplash)),
 
 // Text area
 m_message

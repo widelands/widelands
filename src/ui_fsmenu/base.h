@@ -36,7 +36,7 @@ struct TextStyle;
  * MENU_XRES and MENU_YRES and is a modal UI Element
  */
 struct FullscreenMenuBase : public UI::Panel {
-	FullscreenMenuBase(char const * bgpic);
+	FullscreenMenuBase(const std::string& bgpic);
 	~FullscreenMenuBase();
 
 	void draw(RenderTarget &) override;

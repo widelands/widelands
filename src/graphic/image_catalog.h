@@ -72,9 +72,22 @@ public:
 		kButtonMenuOK,
 		kButtonMenuAbort,
 
-		// loadscreen
-		kLoadscreenEditor,
+		// ui_fsmenu
+		kFullscreen,
+		kFullscreenChooseMap,
+		kFullscreenFileWiew,
+		kFullscreenInternet,
+		kFullscreenLaunchMPG,
+		kFullscreenMain,
+		kFullscreenOptions,
+		kFullscreenSplash,
 
+		//loadscreens
+		kLoadscreen,
+		kLoadscreenEditor,
+		kLoadscreenTips,
+
+		// editor
 		kSelectEditorDelete,
 		kSelectEditorHeightDecrease,
 		kSelectEditorHeightIncrease,

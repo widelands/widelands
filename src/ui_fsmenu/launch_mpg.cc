@@ -108,7 +108,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 	(GameSettingsProvider * const settings, GameController * const ctrl)
 	:
-	FullscreenMenuBase("launchMPGmenu.jpg"),
+	FullscreenMenuBase(g_gr->image_catalog().filepath(ImageCatalog::Keys::kFullscreenLaunchMPG)),
 
 // Values for alignment and size
 	m_butw (get_w() / 4),

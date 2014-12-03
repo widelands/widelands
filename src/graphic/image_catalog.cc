@@ -77,9 +77,22 @@ void ImageCatalog::init()  {
 	insert(Keys::kButtonMenuOK, "wui/menu_okay.png");
 	insert(Keys::kButtonMenuAbort, "wui/menu_abort.png");
 
-	// loadscreen
-	insert(Keys::kLoadscreenEditor, "loadscreen/editor.jpg");
+	// ui_fsmenu
+	insert(Keys::kFullscreen, "ui_fsmenu/ui_fsmenu.jpg");
+	insert(Keys::kFullscreenChooseMap, "ui_fsmenu/choosemapmenu.jpg");
+	insert(Keys::kFullscreenFileWiew, "ui_fsmenu/fileviewmenu.jpg");
+	insert(Keys::kFullscreenInternet, "ui_fsmenu/internetmenu.jpg");
+	insert(Keys::kFullscreenLaunchMPG, "ui_fsmenu/launch_mpg_menu.jpg");
+	insert(Keys::kFullscreenMain, "ui_fsmenu/mainmenu.jpg");
+	insert(Keys::kFullscreenOptions, "ui_fsmenu/optionsmenu.jpg");
+	insert(Keys::kFullscreenSplash, "ui_fsmenu/splash.jpg");
 
+	// loadscreens
+	insert(Keys::kLoadscreen, "loadscreens/progress.jpg");
+	insert(Keys::kLoadscreenEditor, "loadscreens/editor.jpg");
+	insert(Keys::kLoadscreenTips, "loadscreens/tips_bg.png");
+
+	// editor
 	insert(Keys::kSelectEditorDelete, "fsel_editor_delete.png");
 	insert(Keys::kSelectEditorHeightDecrease, "fsel_editor_decrease_height.png");
 	insert(Keys::kSelectEditorHeightIncrease, "fsel_editor_increase_height.png");
@@ -94,7 +107,26 @@ void ImageCatalog::init()  {
 	insert(Keys::kSelectEditorSetPortSpace, "fsel_editor_set_port_space.png");
 	insert(Keys::kSelectEditorUnsetPortSpace, "fsel_editor_unset_port_space.png");
 	insert(Keys::kSelectEditorSetResources, "fsel_editor_set_resources.png");
-
+/*
+	insert(Keys::kEditorTerrainDead, "terrain_dead.png");
+	insert(Keys::kEditorTerrainDry, "terrain_dry.png");
+	insert(Keys::kEditorTerrainGreen, "terrain_green.png");
+	insert(Keys::kEditorTerrainMountain, "terrain_mountain.png");
+	insert(Keys::kEditorTerrainUnpassable, "terrain_unpassable.png");
+	insert(Keys::kEditorTerrainWater, "terrain_water.png");
+	insert(Keys::kEditorRedo, "editor_redo.png");
+	insert(Keys::kEditorUndo, "editor_undo.png");
+	insert(Keys::kEditorMenuPlayer, "editor_menu_player_menu.png");
+	insert(Keys::kEditorMenuToolSize, "editor_menu_set_toolsize_menu.png");
+	insert(Keys::kEditorMenuTool, "editor_menu_toggle_tool_menu.png");
+	insert(Keys::kEditorMenuToolHeight, "editor_menu_tool_change_height.png");
+	insert(Keys::kEditorMenuToolResources, "editor_menu_tool_change_resources.png");
+	insert(Keys::kEditorMenuToolNoiseHeight, "editor_menu_tool_noise_height.png");
+	insert(Keys::kEditorMenuToolBob, "editor_menu_tool_place_bob.png");
+	insert(Keys::kEditorMenuToolImmovable, "editor_menu_tool_place_immovable.png");
+	insert(Keys::kEditorMenuToolPortSpace, "editor_menu_tool_set_port_space.png");
+	insert(Keys::kEditorMenuToolTerrain, "editor_menu_tool_set_terrain.png");
+*/
 	// players
 	insert(Keys::kPlayerStartingPosSmall1, "players/fsel_editor_set_player_01_pos.png");
 	insert(Keys::kPlayerStartingPosSmall2, "players/fsel_editor_set_player_02_pos.png");
