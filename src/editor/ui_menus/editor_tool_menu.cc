@@ -58,17 +58,17 @@ UI::UniqueWindow(&parent, "tool_menu", &registry, 350, 400, _("Tools"))
    m_radioselect.add_button                                                   \
       (this,                                                                  \
        pos,                                                                   \
-		 g_gr->images().get("data/pics/editor_menu_tool_" pic ".png"),       \
+		 pic,                                                                   \
        tooltip);                                                              \
    pos.x += width + spacing;                                                  \
 
-	ADD_BUTTON("change_height",    _("Change height"));
-	ADD_BUTTON("noise_height",     _("Noise height"));
-	ADD_BUTTON("set_terrain",      _("Terrain"));
-	ADD_BUTTON("place_immovable",  _("Immovables"));
-	ADD_BUTTON("place_bob",        _("Animals"));
-	ADD_BUTTON("change_resources", _("Resources"));
-	ADD_BUTTON("set_port_space",   _("Set port space"));
+	ADD_BUTTON(g_gr->cataloged_image(ImageCatalog::Keys::kEditorMenuToolHeight), _("Change height"));
+	ADD_BUTTON(g_gr->cataloged_image(ImageCatalog::Keys::kEditorMenuToolNoiseHeight), _("Noise height"));
+	ADD_BUTTON(g_gr->cataloged_image(ImageCatalog::Keys::kEditorMenuToolTerrain), _("Terrain"));
+	ADD_BUTTON(g_gr->cataloged_image(ImageCatalog::Keys::kEditorMenuToolImmovable), _("Immovables"));
+	ADD_BUTTON(g_gr->cataloged_image(ImageCatalog::Keys::kEditorMenuToolBob), _("Animals"));
+	ADD_BUTTON(g_gr->cataloged_image(ImageCatalog::Keys::kEditorMenuToolResources), _("Resources"));
+	ADD_BUTTON(g_gr->cataloged_image(ImageCatalog::Keys::kEditorMenuToolPortSpace), _("Set port space"));
 
 	set_inner_size
 		(offs.x + (width + spacing) * num_tools, offs.y + (height + spacing));

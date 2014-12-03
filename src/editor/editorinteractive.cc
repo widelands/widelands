@@ -74,37 +74,39 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase & e) :
 	m_realtime(WLApplication::get()->get_time()),
 	m_left_mouse_button_is_down(false),
 	m_history(m_undo, m_redo),
-// NOCOM use catalog
-#define INIT_BUTTON(picture, name, tooltip)                         \
-	TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
-	g_gr->images().get("data/pics/" picture ".png"),                      \
-	tooltip                                                                      \
 
 	m_toggle_main_menu
-	(INIT_BUTTON
-	 ("menu_toggle_menu", "menu", _("Menu"))),
+	(TOOLBAR_BUTTON_COMMON_PARAMETERS("menu"),
+	 g_gr->images().get("data/pics/menu_toggle_menu.png"),
+	 _("Menu")),
 	m_toggle_tool_menu
-	(INIT_BUTTON
-	 ("editor_menu_toggle_tool_menu", "tools", _("Tools"))),
+	(TOOLBAR_BUTTON_COMMON_PARAMETERS("tools"),
+	 g_gr->cataloged_image(ImageCatalog::Keys::kEditorMenuTools),
+	 _("Tools")),
 	m_toggle_toolsize_menu
-	(INIT_BUTTON
-	 ("editor_menu_set_toolsize_menu", "toolsize",
-	  _("Tool Size"))),
+	(TOOLBAR_BUTTON_COMMON_PARAMETERS("toolsize"),
+	 g_gr->cataloged_image(ImageCatalog::Keys::kEditorMenuToolSize),
+	 _("Tool Size")),
 	m_toggle_minimap
-	(INIT_BUTTON
-	 ("menu_toggle_minimap", "minimap", _("Minimap"))),
+	(TOOLBAR_BUTTON_COMMON_PARAMETERS("minimap"),
+	 g_gr->images().get("data/pics/menu_toggle_minimap.png"),
+	 _("Minimap")),
 	m_toggle_buildhelp
-	(INIT_BUTTON
-	 ("menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"))),
+	(TOOLBAR_BUTTON_COMMON_PARAMETERS("buildhelp"),
+	 g_gr->images().get("data/pics/menu_toggle_buildhelp.png"),
+	 _("Show Building Spaces (on/off)")),
 	m_toggle_player_menu
-	(INIT_BUTTON
-	 ("editor_menu_player_menu", "players", _("Players"))),
+	(TOOLBAR_BUTTON_COMMON_PARAMETERS("players"),
+	 g_gr->cataloged_image(ImageCatalog::Keys::kEditorMenuPlayer),
+	 _("Players")),
 	m_undo
-	(INIT_BUTTON
-	 ("editor_undo", "undo", _("Undo"))),
+	(TOOLBAR_BUTTON_COMMON_PARAMETERS("undo"),
+	 g_gr->cataloged_image(ImageCatalog::Keys::kEditorUndo),
+	 _("Undo")),
 	m_redo
-	(INIT_BUTTON
-	 ("editor_redo", "redo", _("Redo")))
+	(TOOLBAR_BUTTON_COMMON_PARAMETERS("redo"),
+	 g_gr->cataloged_image(ImageCatalog::Keys::kEditorRedo),
+	 _("Redo"))
 {
 	m_toggle_main_menu.sigclicked.connect(boost::bind(&EditorInteractive::toggle_mainmenu, this));
 	m_toggle_tool_menu.sigclicked.connect(boost::bind(&EditorInteractive::tool_menu_btn, this));

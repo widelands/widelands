@@ -41,7 +41,7 @@ struct EditorDeleteBobTool : public EditorTool {
 	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
 
 	ImageCatalog::Keys get_sel_impl() const override {
-		return ImageCatalog::Keys::kSelectEditorDelete;
+		return ImageCatalog::Keys::kEditorToolDelete;
 	}
 };
 

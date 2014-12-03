@@ -41,7 +41,7 @@ public:
 	                         EditorActionArgs& args) override;
 
 	ImageCatalog::Keys get_sel_impl() const override {
-		return ImageCatalog::Keys::kSelectEditorUnsetPortSpace;
+		return ImageCatalog::Keys::kEditorToolPortSpaceSetSet;
 	}
 };
 
@@ -64,7 +64,7 @@ public:
 	                         EditorActionArgs& args) override;
 
 	ImageCatalog::Keys get_sel_impl() const override {
-		return ImageCatalog::Keys::kSelectEditorSetPortSpace;
+		return ImageCatalog::Keys::kEditorToolPortSpaceSet;
 	}
 };
 

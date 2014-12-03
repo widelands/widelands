@@ -17,8 +17,6 @@
  *
  */
 
-// NOCOM write a test
-// NOCOM write test
 #include "graphic/image_catalog.h"
 
 #include <cassert>
@@ -88,45 +86,44 @@ void ImageCatalog::init()  {
 	insert(Keys::kFullscreenSplash, "ui_fsmenu/splash.jpg");
 
 	// loadscreens
-	insert(Keys::kLoadscreen, "loadscreens/progress.jpg");
+	insert(Keys::kLoadscreen, "loadscreens/progress.png");
 	insert(Keys::kLoadscreenEditor, "loadscreens/editor.jpg");
 	insert(Keys::kLoadscreenTips, "loadscreens/tips_bg.png");
 
 	// editor
-	insert(Keys::kSelectEditorDelete, "fsel_editor_delete.png");
-	insert(Keys::kSelectEditorHeightDecrease, "fsel_editor_decrease_height.png");
-	insert(Keys::kSelectEditorHeightIncrease, "fsel_editor_increase_height.png");
-	insert(Keys::kSelectEditorResourcesDecrease, "fsel_editor_decrease_resources.png");
-	insert(Keys::kSelectEditorResourcesIncrease, "fsel_editor_increase_resources.png");
-	insert(Keys::kSelectEditorResourcesDelete, "fsel_editor_delete.png");
-	insert(Keys::kSelectEditorInfo, "fsel_editor_info.png");
-	insert(Keys::kSelectEditorNoiseHeight, "fsel_editor_noise_height.png");
-	insert(Keys::kSelectEditorPlaceBob, "fsel_editor_place_bob.png");
-	insert(Keys::kSelectEditorPlaceImmovable, "fsel_editor_place_immovable.png");
-	insert(Keys::kSelectEditorSetHeight, "fsel_editor_set_height.png");
-	insert(Keys::kSelectEditorSetPortSpace, "fsel_editor_set_port_space.png");
-	insert(Keys::kSelectEditorUnsetPortSpace, "fsel_editor_unset_port_space.png");
-	insert(Keys::kSelectEditorSetResources, "fsel_editor_set_resources.png");
-/*
-	insert(Keys::kEditorTerrainDead, "terrain_dead.png");
-	insert(Keys::kEditorTerrainDry, "terrain_dry.png");
-	insert(Keys::kEditorTerrainGreen, "terrain_green.png");
-	insert(Keys::kEditorTerrainMountain, "terrain_mountain.png");
-	insert(Keys::kEditorTerrainUnpassable, "terrain_unpassable.png");
-	insert(Keys::kEditorTerrainWater, "terrain_water.png");
-	insert(Keys::kEditorRedo, "editor_redo.png");
-	insert(Keys::kEditorUndo, "editor_undo.png");
-	insert(Keys::kEditorMenuPlayer, "editor_menu_player_menu.png");
-	insert(Keys::kEditorMenuToolSize, "editor_menu_set_toolsize_menu.png");
-	insert(Keys::kEditorMenuTool, "editor_menu_toggle_tool_menu.png");
-	insert(Keys::kEditorMenuToolHeight, "editor_menu_tool_change_height.png");
-	insert(Keys::kEditorMenuToolResources, "editor_menu_tool_change_resources.png");
-	insert(Keys::kEditorMenuToolNoiseHeight, "editor_menu_tool_noise_height.png");
-	insert(Keys::kEditorMenuToolBob, "editor_menu_tool_place_bob.png");
-	insert(Keys::kEditorMenuToolImmovable, "editor_menu_tool_place_immovable.png");
-	insert(Keys::kEditorMenuToolPortSpace, "editor_menu_tool_set_port_space.png");
-	insert(Keys::kEditorMenuToolTerrain, "editor_menu_tool_set_terrain.png");
-*/
+	insert(Keys::kEditorRedo, "wui/editor/editor_redo.png");
+	insert(Keys::kEditorUndo, "wui/editor/editor_undo.png");
+	insert(Keys::kEditorMenuPlayer, "wui/editor/editor_menu_player_menu.png");
+	insert(Keys::kEditorMenuToolBob, "wui/editor/editor_menu_tool_place_bob.png");
+	insert(Keys::kEditorMenuToolHeight, "wui/editor/editor_menu_tool_change_height.png");
+	insert(Keys::kEditorMenuToolImmovable, "wui/editor/editor_menu_tool_place_immovable.png");
+	insert(Keys::kEditorMenuToolNoiseHeight, "wui/editor/editor_menu_tool_noise_height.png");
+	insert(Keys::kEditorMenuToolPortSpace, "wui/editor/editor_menu_tool_set_port_space.png");
+	insert(Keys::kEditorMenuToolResources, "wui/editor/editor_menu_tool_change_resources.png");
+	insert(Keys::kEditorMenuTools, "wui/editor/editor_menu_toggle_tool_menu.png");
+	insert(Keys::kEditorMenuToolSize, "wui/editor/editor_menu_set_toolsize_menu.png");
+	insert(Keys::kEditorMenuToolTerrain, "wui/editor/editor_menu_tool_set_terrain.png");
+	insert(Keys::kEditorTerrainDead, "wui/editor/terrain_dead.png");
+	insert(Keys::kEditorTerrainDry, "wui/editor/terrain_dry.png");
+	insert(Keys::kEditorTerrainGreen, "wui/editor/terrain_green.png");
+	insert(Keys::kEditorTerrainMountain, "wui/editor/terrain_mountain.png");
+	insert(Keys::kEditorTerrainUnpassable, "wui/editor/terrain_unpassable.png");
+	insert(Keys::kEditorTerrainWater, "wui/editor/terrain_water.png");
+	insert(Keys::kEditorToolBob, "wui/editor/fsel_editor_place_bob.png");
+	insert(Keys::kEditorToolDelete, "wui/editor/fsel_editor_delete.png");
+	insert(Keys::kEditorToolHeight, "wui/editor/fsel_editor_set_height.png");
+	insert(Keys::kEditorToolHeightDecrease, "wui/editor/fsel_editor_decrease_height.png");
+	insert(Keys::kEditorToolHeightIncrease, "wui/editor/fsel_editor_increase_height.png");
+	insert(Keys::kEditorToolImmovable, "wui/editor/fsel_editor_place_immovable.png");
+	insert(Keys::kEditorToolInfo, "wui/editor/fsel_editor_info.png");
+	insert(Keys::kEditorToolNoiseHeight, "wui/editor/fsel_editor_noise_height.png");
+	insert(Keys::kEditorToolPortSpaceSet, "wui/editor/fsel_editor_set_port_space.png");
+	insert(Keys::kEditorToolPortSpaceSetSet, "wui/editor/fsel_editor_unset_port_space.png");
+	insert(Keys::kEditorToolResourcesDecrease, "wui/editor/fsel_editor_decrease_resources.png");
+	insert(Keys::kEditorToolResourcesDelete, "wui/editor/fsel_editor_delete.png");
+	insert(Keys::kEditorToolResourcesIncrease, "wui/editor/fsel_editor_increase_resources.png");
+	insert(Keys::kEditorToolResourcesSet, "wui/editor/fsel_editor_set_resources.png");
+
 	// players
 	insert(Keys::kPlayerStartingPosSmall1, "players/fsel_editor_set_player_01_pos.png");
 	insert(Keys::kPlayerStartingPosSmall2, "players/fsel_editor_set_player_02_pos.png");
@@ -168,6 +165,7 @@ void ImageCatalog::init()  {
 
 void ImageCatalog::insert(Keys key, const std::string& filename) {
 	const std::string path = kBaseDir + filename;
+	log("NOCOM cataloging image: %s\n",path.c_str());
 	assert(g_fs->file_exists(path));
 	entries_.emplace(key, path);
 }

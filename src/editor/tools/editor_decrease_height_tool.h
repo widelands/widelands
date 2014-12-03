@@ -41,7 +41,7 @@ struct EditorDecreaseHeightTool : public EditorTool {
 	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
 
 	ImageCatalog::Keys get_sel_impl() const override {
-		return ImageCatalog::Keys::kSelectEditorHeightDecrease;
+		return ImageCatalog::Keys::kEditorToolHeightDecrease;
 	}
 
 	int32_t get_change_by() const {return m_change_by;}
