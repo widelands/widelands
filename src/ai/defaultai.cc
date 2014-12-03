@@ -815,7 +815,6 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 			field.stones_nearby_ = 0;
 
 			for (uint32_t j = 0; j < immovables.size(); ++j) {
-				// const BaseImmovable & base_immovable = *immovables.at(i).object;
 				if (immovables.at(j).object->has_attribute(stone_attr)) {
 					++field.stones_nearby_;
 				}
@@ -1017,7 +1016,7 @@ void DefaultAI::update_productionsite_stats(int32_t const gametime) {
 // - there is an enemy
 //   Currently more military buildings are built then needed
 //   and "optimalization" (dismantling not needed buildings) is done afterwards
-bool DefaultAI::construct_building(int32_t gametime) {  // (int32_t gametime)
+bool DefaultAI::construct_building(int32_t gametime) {
 	//  Just used for easy checking whether a mine or something else was built.
 	bool mine = false;
 	bool field_blocked = false;
@@ -2321,7 +2320,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uin
 		int32_t const hash_walk =
 		   nf_walk_it->flag->get_position().x << 16 | nf_walk_it->flag->get_position().y;
 		if (lookuptable.count(hash_walk) > 0) {
-			// iterting over nearflags
+			// iterating over nearflags
 			for (std::vector<NearFlag>::iterator nf_it = nearflags.begin(); nf_it != nearflags.end();
 			     ++nf_it) {
 				int32_t const hash =
@@ -2690,7 +2689,7 @@ bool DefaultAI::check_productionsites(int32_t gametime) {
 	}
 
 	// remaining buildings without inputs and not supporting ones (fishers only left probably and
-	// huters)
+	// hunters)
 
 	if (site.bo->inputs_.empty() && site.bo->production_hint_ < 0 &&
 	    site.site->can_start_working() && !site.bo->space_consumer_ &&
@@ -2779,10 +2778,7 @@ bool DefaultAI::marine_main_decisions(uint32_t const gametime) {
 	}
 
 	// goes over productionsites and gets status of shipyards
-	//for (std::list<ProductionSiteObserver>::iterator ps_iter = productionsites.begin();
-	     //ps_iter != productionsites.end();
-	     //++ps_iter) {
-		for (const ProductionSiteObserver& ps_obs : productionsites) {
+	for (const ProductionSiteObserver& ps_obs : productionsites) {
 		if (ps_obs.bo->is_shipyard_) {
 			shipyards_count += 1;
 			if (!ps_obs.site->is_stopped()) {
@@ -3061,7 +3057,7 @@ void DefaultAI::check_ware_necessity(BuildingObserver& bo,
                                      int16_t* max_preciousness,
                                      int16_t* max_needed_preciousness) {
 
-	// reseting values
+	// resetting values
 	*output_is_needed = false;
 	*max_preciousness = 0;
 	*max_needed_preciousness = 0;
@@ -3592,7 +3588,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 			so.waiting_for_command_ = false;
 			// blocking the area for some time to save AI from idle attempts to built there
 			// buildings
-			// TODO(anybody): how long it takes to build a port?
+			// TODO(TiborB): how long it takes to build a port?
 			// I used 5 minutes
 			MapRegion<Area<FCoords>> mr(
 			   game().map(), Area<FCoords>(map.get_fcoords(so.ship->exp_port_spaces()->front()), 8));
@@ -3833,7 +3829,7 @@ void DefaultAI::lose_building(const Building& b) {
 }
 
 // Checks that supply line exists for given building.
-// Recurcsively verify that all inputs_ have a producer.
+// Recursively verify that all inputs_ have a producer.
 // TODO(unknown): this function leads to periodic freezes of ~1 second on big games on my system.
 // TODO(unknown): It needs profiling and optimization.
 // NOTE: This is not needed anymore and it seems it is not missed neither
@@ -3864,7 +3860,7 @@ bool DefaultAI::check_supply(const BuildingObserver& bo) {
 
 bool DefaultAI::consider_attack(int32_t const gametime) {
 
-	// we presume that we are not attacking so we extend waitperiod
+	// we assume that we are not attacking so we extend waitperiod
 	// in case of attack the variable will be decreased below
 	// this is intended to save some CPU and add randomness in attacking
 	// and also differentiate according to type
@@ -3987,7 +3983,7 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 
 	for (uint32_t position = gametime % test_every; position < militarysites.size();
 	     position += test_every) {
-		// checked_own_ms_tmp += 1;
+
 		std::list<MilitarySiteObserver>::iterator mso = militarysites.begin();
 		std::advance(mso, position);
 
@@ -4033,7 +4029,6 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 						continue;
 					}
 
-					// target_buildings.push_back(immovables.at(j));
 					const int32_t soldiers_difference =
 					   player_->find_attack_soldiers(bld->base_flag()) - bld->present_soldiers().size();
 
@@ -4078,7 +4073,7 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 		}
 	}
 
-	// we allways try to attack warehouse first
+	// we always try to attack warehouse first
 	if (best_wh_target != nullptr && gametime % 2 == 0) {
 		// attacking with all attack-ready soldiers
 		int32_t attackers = player_->find_attack_soldiers(best_wh_target->base_flag());
