@@ -70,9 +70,9 @@ void Statebox::set_enabled(bool const enabled)
 	set_flags(Is_Enabled, enabled);
 
 	if (!(m_flags & Has_Custom_Picture)) {
-		m_pic_graphics = g_gr->images().get(enabled ?
-															"data/pics/checkbox_light.png" :
-															"data/pics/checkbox.png");
+		m_pic_graphics = enabled ?
+								  g_gr->cataloged_image(ImageCatalog::Keys::kCheckboxLight) :
+								  g_gr->cataloged_image(ImageCatalog::Keys::kCheckbox);
 		set_flags
 			(Is_Highlighted, (m_flags & Is_Highlighted) && (m_flags & Is_Enabled));
 	}

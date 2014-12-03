@@ -18,7 +18,7 @@
  */
 
 // NOCOM write a test
-
+// NOCOM write test
 #include "graphic/image_catalog.h"
 
 #include <cassert>
@@ -56,7 +56,7 @@ void ImageCatalog::init()  {
 	insert(Keys::kScrollbarBackground, "ui_basic/scrollbar_background.png");
 	insert(Keys::kSelect, "ui_basic/fsel.png");
 	insert(Keys::kCaret, "ui_basic/caret.png");
-	insert(Keys::kCheckbox, "ui_basic/checkbox.png"); // NOCOM unused?
+	insert(Keys::kCheckbox, "ui_basic/checkbox.png");
 	insert(Keys::kCheckboxChecked, "ui_basic/checkbox_checked.png");
 	insert(Keys::kCheckboxEmpty, "ui_basic/checkbox_empty.png");
 	insert(Keys::kCheckboxLight, "ui_basic/checkbox_light.png");

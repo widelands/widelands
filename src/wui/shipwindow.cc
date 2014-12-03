@@ -44,8 +44,7 @@ static const char pic_scout_w[]  = "data/pics/ship_scout_w.png";
 static const char pic_scout_e[]  = "data/pics/ship_scout_e.png";
 static const char pic_scout_sw[] = "data/pics/ship_scout_sw.png";
 static const char pic_scout_se[] = "data/pics/ship_scout_se.png";
-static const char * pic_construct_port =
-		g_gr->image_catalog().filepath(ImageCatalog::Keys::kSelectEditorSetPortSpace).c_str();
+static const char pic_construct_port[] = "data/pics/fsel_editor_set_port_space.png"; // NOCOM use catalog
 
 namespace Widelands {
 

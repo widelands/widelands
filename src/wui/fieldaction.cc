@@ -264,8 +264,7 @@ static const char * const pic_watchfield     = "data/pics/menu_watch_field.png";
 static const char * const pic_showcensus     = "data/pics/menu_show_census.png";
 static const char * const pic_showstatistics = "data/pics/menu_show_statistics.png";
 static const char * const pic_debug          = "data/pics/menu_debug.png";
-static const char * const pic_abort          =
-		g_gr->image_catalog().filepath(ImageCatalog::Keys::kButtonMenuAbort).c_str();
+static const char * const pic_abort          = "data/pics/wui/menu_abort.png"; // NOCOM use catalog
 static const char * const pic_geologist      = "data/pics/menu_geologist.png";
 
 static const char * const pic_tab_attack     = "data/pics/menu_tab_attack.png";
