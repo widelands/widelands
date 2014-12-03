@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-11-29 07:58+0000\n"
-"PO-Revision-Date: 2014-07-16 15:43+0000\n"
+"PO-Revision-Date: 2014-12-02 19:45+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-11-30 04:35+0000\n"
-"X-Generator: Launchpad (build 17267)\n"
+"X-Launchpad-Export-Date: 2014-12-03 05:25+0000\n"
+"X-Generator: Launchpad (build 17274)\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
 msgid "From Nemesis to Genesis"
@@ -41,7 +41,7 @@ msgstr ""
 
 #: ../../campaigns/bar02.wmf/elemental:7
 msgid "This Land is Our Land"
-msgstr ""
+msgstr "Dette landet er vårt land"
 
 #: ../../campaigns/bar02.wmf/elemental:9
 msgid ""
@@ -55,7 +55,7 @@ msgstr "Ikke lagt til ennå"
 
 #: ../../campaigns/dummy.wmf/elemental:9
 msgid "Nobody"
-msgstr ""
+msgstr "Ingen"
 
 #: ../../campaigns/dummy.wmf/elemental:10
 msgid "Sorry, this map is not yet implemented."
@@ -76,7 +76,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
-msgstr ""
+msgstr "En eksil-utpost"
 
 #: ../../campaigns/emp02.wmf/elemental:11
 msgid ""
@@ -88,43 +88,49 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
-msgstr ""
+msgstr "Grunnleggende kontroll"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/elemental:10
 msgid ""
 "In this tutorial, you will learn how to navigate in Widelands and how to "
 "build buildings and roads."
 msgstr ""
+"I denne innføringen vil du lære å navigere deg rundt i Widelands, samt bygge "
+"bygninger og veier."
 
 #: ../../campaigns/tutorial02_warfare.wmf/elemental:8
 msgid "Warfare"
-msgstr ""
+msgstr "Krigføring"
 
 #: ../../campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
 "soldiers, how to train them and how to lead them in battle."
 msgstr ""
+"I denne innføringen vil du få et innblikk i krigføringens hemmeligheter: "
+"hvordan lage soldater, trene dem og lede dem i strid."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/elemental:8
 msgid "Seafaring"
-msgstr ""
+msgstr "Sjøfart"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports."
-msgstr ""
+msgstr "I denne innføring vil du bli kjent med sjøfart, skip og havner."
 
 #: ../../campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy"
-msgstr ""
+msgstr "Økonomi"
 
 #: ../../campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
 "In this tutorial, you will learn what option Widelands offers to adjust your "
 "economy. Recommended for players with some experience."
 msgstr ""
+"I denne innføringen vil du lære om hvilke økonomivalg Widelands gir deg "
+"mulighet til å justert. Anbefalt for spillere med litt erfaring."
 
 #: ../../maps/Atoll.wmf/elemental:9
 msgid "Atoll"
@@ -452,7 +458,7 @@ msgstr ""
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:9
 msgid "Smugglers"
-msgstr ""
+msgstr "Smuglere"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
 msgid ""
