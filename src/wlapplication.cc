@@ -35,6 +35,7 @@
 #include <SDL_image.h>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
+#include <boost/regex.hpp>
 #ifdef __APPLE__
 #include <mach-o/dyld.h>
 #include <unistd.h>
@@ -145,7 +146,8 @@ std::string get_executable_directory()
 }
 
 bool is_absolute_path(const std::string& path) {
-	return path.size() >= 1 && path[0] == '/';
+	boost::regex re("^/|\\w:");
+	return boost::regex_search(path.c_str(), re);
 }
 
 // Returns the absolute path of 'path' which might be relative.
