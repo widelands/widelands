@@ -323,6 +323,7 @@ void NonPackedAnimation::blit
 	assert(target);
 
 	const Image& frame = get_frame(time, clr);
+	// NOCOM(#sirver): use new blend mode here.
 	target->blit(
 	   Rect(dst.x, dst.y, srcrc.w, srcrc.h), frame.texture(), srcrc, 1., BlendMode::UseAlpha);
 }
