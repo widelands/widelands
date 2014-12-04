@@ -48,7 +48,8 @@ class LuaInterface;
  *    3  - multi player savegame
  *    4  - multi player scenario savegame <- not yet implemented
  */
-struct FullscreenMenuLaunchMPG : public FullscreenMenuBase {
+class FullscreenMenuLaunchMPG : public FullscreenMenuBase {
+public:
 	FullscreenMenuLaunchMPG(GameSettingsProvider *, GameController *);
 	~FullscreenMenuLaunchMPG();
 

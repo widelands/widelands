@@ -22,6 +22,8 @@ wl_library(ui_fsmenu
     load_map_or_game.h
     main.cc
     main.h
+    main_menu.cc
+    main_menu.h
     mapselect.cc
     mapselect.h
     multiplayer.cc

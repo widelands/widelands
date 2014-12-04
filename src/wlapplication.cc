@@ -35,6 +35,7 @@
 #include <SDL_image.h>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
+#include <boost/regex.hpp>
 #ifdef __APPLE__
 #include <mach-o/dyld.h>
 #include <unistd.h>
@@ -145,7 +146,8 @@ std::string get_executable_directory()
 }
 
 bool is_absolute_path(const std::string& path) {
-	return path.size() >= 1 && path[0] == '/';
+	boost::regex re("^/|\\w:");
+	return boost::regex_search(path.c_str(), re);
 }
 
 // Returns the absolute path of 'path' which might be relative.
@@ -1065,39 +1067,44 @@ void WLApplication::mainmenu()
 		}
 
 		try {
-			switch (mm.run()) {
-			case FullscreenMenuMain::mm_playtutorial:
+			switch (static_cast<FullscreenMenuMain::MenuTarget>(mm.run())) {
+			case FullscreenMenuMain::MenuTarget::kTutorial:
 				mainmenu_tutorial();
 				break;
-			case FullscreenMenuMain::mm_singleplayer:
+			case FullscreenMenuMain::MenuTarget::kSinglePlayer:
 				mainmenu_singleplayer();
 				break;
-			case FullscreenMenuMain::mm_multiplayer:
+			case FullscreenMenuMain::MenuTarget::kMultiplayer:
 				mainmenu_multiplayer();
 				break;
-			case FullscreenMenuMain::mm_replay:
+			case FullscreenMenuMain::MenuTarget::kReplay:
 				replay();
 				break;
-			case FullscreenMenuMain::mm_options: {
+			case FullscreenMenuMain::MenuTarget::kOptions: {
 				Section & s = g_options.pull_section("global");
 				OptionsCtrl om(s);
 				break;
 			}
-			case FullscreenMenuMain::mm_readme: {
+			case FullscreenMenuMain::MenuTarget::kReadme: {
 				FullscreenMenuFileView ff("txts/README.lua");
 				ff.run();
 				break;
 			}
-			case FullscreenMenuMain::mm_license: {
+			case FullscreenMenuMain::MenuTarget::kLicense: {
 				FullscreenMenuFileView ff("txts/license");
 				ff.run();
 				break;
 			}
-			case FullscreenMenuMain::mm_editor:
+			case FullscreenMenuMain::MenuTarget::kAuthors: {
+				FullscreenMenuFileView ff("txts/developers");
+				ff.run();
+				break;
+			}
+			case FullscreenMenuMain::MenuTarget::kEditor:
 				mainmenu_editor();
 				break;
 			default:
-			case FullscreenMenuMain::mm_exit:
+			case FullscreenMenuMain::MenuTarget::kExit:
 				return;
 			}
 		} catch (const WLWarning & e) {
@@ -1166,26 +1173,23 @@ void WLApplication::mainmenu_singleplayer()
 	//  This is the code returned by UI::Panel::run() when the panel is dying.
 	//  Make sure that the program exits when the window manager says so.
 	static_assert
-		(FullscreenMenuSinglePlayer::Back == UI::Panel::dying_code, "Panel should be dying.");
+		(static_cast<int32_t>(FullscreenMenuSinglePlayer::MenuTarget::kBack) == UI::Panel::dying_code,
+		 "Panel should be dying.");
 
 	for (;;) {
-		int32_t code;
-		{
-			FullscreenMenuSinglePlayer single_player_menu;
-			code = single_player_menu.run();
-		}
-		switch (code) {
-		case FullscreenMenuSinglePlayer::Back:
+		FullscreenMenuSinglePlayer single_player_menu;
+		switch (static_cast<FullscreenMenuSinglePlayer::MenuTarget>(single_player_menu.run())) {
+		case FullscreenMenuSinglePlayer::MenuTarget::kBack:
 			return;
-		case FullscreenMenuSinglePlayer::New_Game:
+		case FullscreenMenuSinglePlayer::MenuTarget::kNewGame:
 			if (new_game())
 				return;
 			break;
-		case FullscreenMenuSinglePlayer::Load_Game:
+		case FullscreenMenuSinglePlayer::MenuTarget::kLoadGame:
 			if (load_game())
 				return;
 			break;
-		case FullscreenMenuSinglePlayer::Campaign:
+		case FullscreenMenuSinglePlayer::MenuTarget::kCampaign:
 			if (campaign_game())
 				return;
 			break;
@@ -1206,13 +1210,13 @@ void WLApplication::mainmenu_multiplayer()
 	for (;;) { // stay in menu until player clicks "back" button
 		bool internet = false;
 		FullscreenMenuMultiPlayer mp;
-		switch (mp.run()) {
-			case FullscreenMenuMultiPlayer::Back:
+		switch (static_cast<FullscreenMenuMultiPlayer::MenuTarget>(mp.run())) {
+			case FullscreenMenuMultiPlayer::MenuTarget::kBack:
 				return;
-			case FullscreenMenuMultiPlayer::Metaserver:
+			case FullscreenMenuMultiPlayer::MenuTarget::kMetaserver:
 				internet = true;
 				break;
-			case FullscreenMenuMultiPlayer::Lan:
+			case FullscreenMenuMultiPlayer::MenuTarget::kLan:
 				break;
 			default:
 				assert(false);
@@ -1282,21 +1286,18 @@ void WLApplication::mainmenu_editor()
 	//  This is the code returned by UI::Panel::run() when the panel is dying.
 	//  Make sure that the program exits when the window manager says so.
 	static_assert
-		(FullscreenMenuEditor::Back == UI::Panel::dying_code, "Editor should be dying.");
+		(static_cast<int32_t>(FullscreenMenuEditor::MenuTarget::kBack) == UI::Panel::dying_code,
+		 "Editor should be dying.");
 
 	for (;;) {
-		int32_t code;
-		{
-			FullscreenMenuEditor editor_menu;
-			code = editor_menu.run();
-		}
-		switch (code) {
-		case FullscreenMenuEditor::Back:
+		FullscreenMenuEditor editor_menu;
+		switch (static_cast<FullscreenMenuEditor::MenuTarget>(editor_menu.run())) {
+		case FullscreenMenuEditor::MenuTarget::kBack:
 			return;
-		case FullscreenMenuEditor::New_Map:
+		case FullscreenMenuEditor::MenuTarget::kNewMap:
 			EditorInteractive::run_editor(m_filename, m_script_to_run);
 			return;
-		case FullscreenMenuEditor::Load_Map: {
+		case FullscreenMenuEditor::MenuTarget::kLoadMap: {
 			std::string filename;
 			{
 				SinglePlayerGameSettingsProvider sp;
