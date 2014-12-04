@@ -20,49 +20,67 @@
 #ifndef WL_GRAPHIC_GL_BLIT_PROGRAM_H
 #define WL_GRAPHIC_GL_BLIT_PROGRAM_H
 
+#include <memory>
+
+#include "base/macros.h"
 #include "base/rect.h"
 #include "graphic/blend_mode.h"
 #include "graphic/color.h"
-#include "graphic/gl/utils.h"
+#include "graphic/gl/system_headers.h"
 
-class BlitProgram {
+class BlitProgram;
+
+class VanillaBlitProgram {
 public:
 	// Returns the (singleton) instance of this class.
-	static BlitProgram& instance();
+	static VanillaBlitProgram& instance();
+	~VanillaBlitProgram();
+
+	// Draws the rectangle 'gl_src_rect' from the texture with the name
+	// 'gl_texture' to 'gl_dest_rect' in the currently bound framebuffer. All alpha
+	// values are multiplied by 'opacity' during the blit.
+	// All coordinates are in the OpenGL frame. The 'blend_mode' defines if the
+	// values are copied or if alpha values are used.
+	void draw(const FloatRect& gl_dest_rect,
+	          const FloatRect& gl_src_rect,
+	          const GLuint gl_texture,
+				 float opacity,
+	          const BlendMode blend_mode);
+
+private:
+	VanillaBlitProgram();
+
+	std::unique_ptr<BlitProgram> blit_program_;
+
+	DISALLOW_COPY_AND_ASSIGN(VanillaBlitProgram);
+};
+
+class GrayBlitProgram {
+public:
+	// Returns the (singleton) instance of this class.
+	static GrayBlitProgram& instance();
+	~GrayBlitProgram();
 
 	// Draws the rectangle 'gl_src_rect' from the texture with the name
 	// 'gl_texture' to 'gl_dest_rect' in the currently bound framebuffer. All
 	// coordinates are in the OpenGL frame. The 'blend_mode' defines if the
 	// values are copied or if alpha values are used.
+	// The image is converted to grayscale during blit.
 	void draw(const FloatRect& gl_dest_rect,
 	          const FloatRect& gl_src_rect,
 	          const GLuint gl_texture,
-	          const BlendMode blend_mode);
+				 float opacity,
+	          float luminosity_factor);
 
 private:
-	BlitProgram();
+	GrayBlitProgram();
 
-	struct PerVertexData {
-		float gl_x, gl_y;
-	};
-	static_assert(sizeof(PerVertexData) == 8, "Wrong padding.");
-
-	// The buffer that will contain the quad for rendering.
-	Gl::Buffer gl_array_buffer_;
-
-	// The program.
-	Gl::Program gl_program_;
-
-	// Attributes.
-	GLint attr_position_;
+	std::unique_ptr<BlitProgram> blit_program_;
 
 	// Uniforms.
-	GLint u_texture_;
-	GLint u_dst_rect_;
-	GLint u_src_rect_;
+	GLint u_luminosity_factor_;
 
-	DISALLOW_COPY_AND_ASSIGN(BlitProgram);
+	DISALLOW_COPY_AND_ASSIGN(GrayBlitProgram);
 };
-
 
 #endif  // end of include guard: WL_GRAPHIC_GL_DRAW_RECT_PROGRAM_H

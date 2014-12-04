@@ -78,13 +78,17 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 		Texture* texture = new Texture(terrain_texture.width(), terrain_texture.height());
 		texture->blit(Rect(0, 0, terrain_texture.width(), terrain_texture.height()),
 		              &terrain_texture,
-		              Rect(0, 0, terrain_texture.width(), terrain_texture.height()));
+		              Rect(0, 0, terrain_texture.width(), terrain_texture.height()),
+		              1.,
+		              BlendMode::UseAlpha);
 		Point pt(1, terrain_texture.height() - kSmallPicHeight - 1);
 
 		if (ter_is == TerrainDescription::GREEN) {
 			texture->blit(Rect(pt.x, pt.y, green->width(), green->height()),
 			              green->texture(),
-			              Rect(0, 0, green->width(), green->height()));
+			              Rect(0, 0, green->width(), green->height()),
+			              1.,
+			              BlendMode::UseAlpha);
 			pt.x += kSmallPicWidth + 1;
 			/** TRANSLATORS: This is a terrain type tooltip in the editor */
 			tooltips.push_back(_("arable"));
@@ -92,7 +96,9 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 			if (ter_is & TerrainDescription::WATER) {
 				texture->blit(Rect(pt.x, pt.y, water->width(), water->height()),
 				              water->texture(),
-				              Rect(0, 0, water->width(), water->height()));
+				              Rect(0, 0, water->width(), water->height()),
+				              1.,
+				              BlendMode::UseAlpha);
 				pt.x += kSmallPicWidth + 1;
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
 				tooltips.push_back(_("aquatic"));
@@ -100,7 +106,9 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 			else if (ter_is & TerrainDescription::MOUNTAIN) {
 				texture->blit(Rect(pt.x, pt.y, mountain->width(), mountain->height()),
 				              mountain->texture(),
-				              Rect(0, 0, mountain->width(), mountain->height()));
+				              Rect(0, 0, mountain->width(), mountain->height()),
+				              1.,
+				              BlendMode::UseAlpha);
 				pt.x += kSmallPicWidth + 1;
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
 				tooltips.push_back(_("mountainous"));
@@ -108,7 +116,9 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 			if (ter_is & TerrainDescription::ACID) {
 				texture->blit(Rect(pt.x, pt.y, dead->width(), dead->height()),
 				              dead->texture(),
-				              Rect(0, 0, dead->width(), dead->height()));
+				              Rect(0, 0, dead->width(), dead->height()),
+				              1.,
+				              BlendMode::UseAlpha);
 				pt.x += kSmallPicWidth + 1;
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
 				tooltips.push_back(_("dead"));
@@ -116,7 +126,9 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 			if (ter_is & TerrainDescription::UNPASSABLE) {
 				texture->blit(Rect(pt.x, pt.y, unpassable->width(), unpassable->height()),
 				              unpassable->texture(),
-				              Rect(0, 0, unpassable->width(), unpassable->height()));
+				              Rect(0, 0, unpassable->width(), unpassable->height()),
+				              1.,
+				              BlendMode::UseAlpha);
 				pt.x += kSmallPicWidth + 1;
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
 				tooltips.push_back(_("unpassable"));
@@ -124,7 +136,9 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 			if (ter_is & TerrainDescription::DRY) {
 				texture->blit(Rect(pt.x, pt.y, dry->width(), dry->height()),
 				              dry->texture(),
-				              Rect(0, 0, dry->width(), dry->height()));
+				              Rect(0, 0, dry->width(), dry->height()),
+				              1.,
+				              BlendMode::UseAlpha);
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
 				 tooltips.push_back(_("treeless"));
 			}

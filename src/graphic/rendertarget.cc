@@ -173,11 +173,11 @@ void RenderTarget::blit(const Point& dst, const Image* image, BlendMode blend_mo
 	Rect srcrc(Point(0, 0), image->width(), image->height());
 
 	if (to_surface_geometry(&destination_point, &srcrc)) {
-		m_surface->blit(
-		   Rect(destination_point.x, destination_point.y, srcrc.w, srcrc.h),
-		   image->texture(),
-		   srcrc,
-		   blend_mode);
+		m_surface->blit(Rect(destination_point.x, destination_point.y, srcrc.w, srcrc.h),
+		                image->texture(),
+		                srcrc,
+		                1.,
+		                blend_mode);
 	}
 }
 
@@ -199,25 +199,44 @@ void RenderTarget::blitrect
 
 	Point destination_point(dst);
 	if (to_surface_geometry(&destination_point, &srcrc))
-		m_surface->blit(
-		   Rect(destination_point.x, destination_point.y, srcrc.w, srcrc.h),
-		   image->texture(),
-		   srcrc,
-		   blend_mode);
+		m_surface->blit(Rect(destination_point.x, destination_point.y, srcrc.w, srcrc.h),
+		                image->texture(),
+		                srcrc,
+		                1.,
+		                blend_mode);
 }
 
 void RenderTarget::blitrect_scale(const Rect& dst,
                                   const Image* image,
-                                  const Rect& src,
+                                  const Rect& source_rect,
+											 const float opacity,
                                   const BlendMode blend_mode) {
 
 	Point destination_point(dst.x, dst.y);
-	Rect srcrect(src);
+	Rect srcrect(source_rect);
 	if (to_surface_geometry(&destination_point, &srcrect)) {
 		m_surface->blit(Rect(destination_point.x, destination_point.y, dst.w, dst.h),
 		                image->texture(),
-		                src,
+		                source_rect,
+							 opacity,
 		                blend_mode);
+	}
+}
+
+void RenderTarget::blitrect_scale_gray(const Rect& destination_rect,
+                                       const Image* image,
+                                       const Rect& source_rect,
+                                       float opacity,
+                                       float luminosity_factor) {
+	Point destination_point(destination_rect.x, destination_rect.y);
+	Rect srcrect(source_rect);
+	if (to_surface_geometry(&destination_point, &srcrect)) {
+		m_surface->blit_gray(
+		   Rect(destination_point.x, destination_point.y, destination_rect.w, destination_rect.h),
+		   image->texture(),
+		   source_rect,
+		   opacity,
+		   luminosity_factor);
 	}
 }
 
@@ -274,7 +293,7 @@ void RenderTarget::tile(const Rect& rect, const Image* image, const Point& gofs,
 					srcrc.w = r.w - tx;
 
 				const Rect dst_rect(r.x + tx, r.y + ty, srcrc.w, srcrc.h);
-				m_surface->blit(dst_rect, image->texture(), srcrc, blend_mode);
+				m_surface->blit(dst_rect, image->texture(), srcrc, 1., blend_mode);
 
 				tx += srcrc.w;
 

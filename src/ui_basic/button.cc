@@ -184,7 +184,9 @@ void Button::draw(RenderTarget & dst)
 		dst.blitrect_scale(
 		   Rect((get_w() - blit_width) / 2, (get_h() - blit_height) / 2, blit_width, blit_height),
 		   m_enabled ? m_pic_custom : m_pic_custom_disabled,
-		   Rect(0, 0, m_pic_custom->width(), m_pic_custom->height()));
+		   Rect(0, 0, m_pic_custom->width(), m_pic_custom->height()),
+		   1.,
+		   BlendMode::UseAlpha);
 
 	} else if (m_title.length()) {
 		//  otherwise draw title string centered
