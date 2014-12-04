@@ -87,15 +87,12 @@ public:
 	                    float opacity,
 	                    BlendMode blend_mode);
 
-	// Like blitrect_scale, but the image is converted to grayscale
-	// and all grayscale values are multiplied with
-	// 'luminosity_factor' to make the image brighter or darker. Alpha
-	// is always used on blending.
-	void blitrect_scale_gray(const Rect& destination_rect,
-	                    const Image* image,
-	                    const Rect& source_rect,
-	                    float opacity,
-							  float luminosity_factor);
+	// NOCOM(#sirver): rename GrayBlitProgram
+	// Like blitrect_scale. See GrayBlitProgram for details.
+	void blitrect_scale_monocrome(const Rect& destination_rect,
+	                              const Image* image,
+	                              const Rect& source_rect,
+	                              const RGBAColor& blend);
 
 	void tile(const Rect&,
 	          const Image* image,

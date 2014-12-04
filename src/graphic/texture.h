@@ -63,11 +63,8 @@ public:
 	          const Rect& srcrc,
 				 float opacity,
 	          BlendMode blend_mode) override;
-	void blit_gray(const Rect& dst,
-	               const Texture*,
-	               const Rect& srcrc,
-	               const float opacity,
-	               float opacity_factor) override;
+	void
+	blit_monocrome(const Rect& dst, const Texture*, const Rect& srcrc, const RGBAColor& blend) override;
 
 	GLuint get_gl_texture() const {return m_texture;}
 

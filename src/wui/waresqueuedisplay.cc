@@ -150,12 +150,10 @@ void WaresQueueDisplay::draw(RenderTarget & dst)
 				BlendMode::UseAlpha);
 	}
 	for (; nr_empty_to_draw; --nr_empty_to_draw, point.x += CellWidth + CellSpacing) {
-		dst.blitrect_scale_gray(
-				Rect(point.x, point.y, m_icon->width(), m_icon->height()),
-				m_icon,
-				Rect(0, 0, m_icon->width(), m_icon->height()),
-				0.5,
-				0.65);
+		dst.blitrect_scale_monocrome(Rect(point.x, point.y, m_icon->width(), m_icon->height()),
+		                        m_icon,
+		                        Rect(0, 0, m_icon->width(), m_icon->height()),
+		                        RGBAColor(166, 166, 166, 127));
 	}
 
 	if (!m_show_only) {

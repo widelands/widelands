@@ -63,14 +63,12 @@ public:
 
 	// Draws the rectangle 'gl_src_rect' from the texture with the name
 	// 'gl_texture' to 'gl_dest_rect' in the currently bound framebuffer. All
-	// coordinates are in the OpenGL frame. The 'blend_mode' defines if the
-	// values are copied or if alpha values are used.
-	// The image is converted to grayscale during blit.
+	// coordinates are in the OpenGL frame. The image is first converted to
+	// luminance, then all values are multiplied with blend.
 	void draw(const FloatRect& gl_dest_rect,
 	          const FloatRect& gl_src_rect,
 	          const GLuint gl_texture,
-				 float opacity,
-	          float luminosity_factor);
+				 const RGBAColor& blend);
 
 private:
 	GrayBlitProgram();
@@ -78,7 +76,7 @@ private:
 	std::unique_ptr<BlitProgram> blit_program_;
 
 	// Uniforms.
-	GLint u_luminosity_factor_;
+	GLint u_blend_;
 
 	DISALLOW_COPY_AND_ASSIGN(GrayBlitProgram);
 };

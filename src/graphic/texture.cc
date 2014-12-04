@@ -276,16 +276,16 @@ void Texture::blit
 	reset_gl();
 }
 
-void Texture::blit_gray(const Rect& dst,
+// NOCOM(#sirver): check spelling of monocrome
+void Texture::blit_monocrome(const Rect& dst,
                         const Texture* src,
                         const Rect& srcrc,
-                        float opacity,
-                        const float opacity_factor) {
+                        const RGBAColor& blend) {
 	if (m_w <= 0 || m_h <= 0) {
 		return;
 	}
 
 	setup_gl(m_texture);
-	Surface::blit_gray(dst, src, srcrc, opacity, opacity_factor);
+	Surface::blit_monocrome(dst, src, srcrc, blend);
 	reset_gl();
 }

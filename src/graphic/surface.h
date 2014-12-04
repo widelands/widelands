@@ -50,11 +50,10 @@ public:
 	                  BlendMode blend_mode);
 
 	/// This draws a grayed out version.
-	virtual void blit_gray(const Rect& dst,
+	virtual void blit_monocrome(const Rect& dst,
 	                  const Texture*,
 	                  const Rect& srcrc,
-							const float opacity,
-	                  float opacity_factor);
+	                  const RGBAColor& multiplier);
 
 	/// Draws a filled rect to the surface. No blending takes place, the values
 	// in the target are just replaced (i.e. / BlendMode would be BlendMode::Copy).

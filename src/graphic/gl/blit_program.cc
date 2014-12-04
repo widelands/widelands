@@ -61,18 +61,19 @@ void main() {
 const char kGrayBlitFragmentShader[] = R"(
 #version 120
 
-uniform float u_luminosity_factor;
 uniform float u_opacity;
 uniform sampler2D u_texture;
+uniform vec3 u_blend;
 
 varying vec2 out_texture_coordinate;
 
 void main() {
 	vec4 texture_color = texture2D(u_texture, out_texture_coordinate);
-	// See http://en.wikipedia.org/wiki/YUV.
-	float luminance = dot(vec3(0.299, 0.587, 0.114), texture_color.rgb) * u_luminosity_factor;
 
-	gl_FragColor = vec4(vec3(luminance), u_opacity * texture_color.a);
+	// See http://en.wikipedia.org/wiki/YUV.
+	float luminance = dot(vec3(0.299, 0.587, 0.114), texture_color.rgb);
+
+	gl_FragColor = vec4(vec3(luminance) * u_blend, u_opacity * texture_color.a);
 }
 )";
 
@@ -226,17 +227,16 @@ GrayBlitProgram::~GrayBlitProgram() {
 GrayBlitProgram::GrayBlitProgram() {
 	blit_program_.reset(new BlitProgram(kGrayBlitFragmentShader));
 
-	u_luminosity_factor_ = glGetUniformLocation(blit_program_->program_object(), "u_luminosity_factor");
+	u_blend_ = glGetUniformLocation(blit_program_->program_object(), "u_blend");
 }
 
 void GrayBlitProgram::draw(const FloatRect& gl_dest_rect,
                        const FloatRect& gl_src_rect,
                        const GLuint gl_texture,
-							  const float opacity,
-                       const float luminosity_factor) {
-	blit_program_->activate(gl_dest_rect, gl_src_rect, gl_texture, opacity, BlendMode::UseAlpha);
+							  const RGBAColor& blend) {
+	blit_program_->activate(gl_dest_rect, gl_src_rect, gl_texture, blend.a / 255., BlendMode::UseAlpha);
 
-	glUniform1f(u_luminosity_factor_, luminosity_factor);
+	glUniform3f(u_blend_, blend.r / 255., blend.g / 255., blend.b / 255.);
 
 	blit_program_->draw_and_deactivate(BlendMode::UseAlpha);
 }
