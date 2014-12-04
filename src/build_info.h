@@ -20,9 +20,10 @@
 #ifndef WL_BUILD_INFO_H
 #define WL_BUILD_INFO_H
 
-#define WLCR "(C) 2002-2014 "
-
 #include <string>
+
+constexpr uint16_t kWidelandsCopyrightStart = 2002;
+constexpr uint16_t kWidelandsCopyrightEnd = 2014;
 
 ///\return the build id which is automagically created from the checkout's
 ///revision number or the VERSION file

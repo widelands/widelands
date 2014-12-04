@@ -22,6 +22,7 @@
 
 #include <cstring>
 #include <map>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -265,11 +266,11 @@ protected:
 	bool random_order_;
 
 	/// A collection of songsets
-	using SongsetMap = std::map<std::string, Songset *>;
+	using SongsetMap = std::map<std::string, std::unique_ptr<Songset>>;
 	SongsetMap songs_;
 
 	/// A collection of effect sets
-	using FXsetMap = std::map<std::string, FXset *>;
+	using FXsetMap = std::map<std::string, std::unique_ptr<FXset>>;
 	FXsetMap fxs_;
 
 	/// List of currently playing effects, and the channel each one is on

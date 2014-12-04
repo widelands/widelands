@@ -138,7 +138,7 @@ void MapGenerator::generate_resources(uint32_t const* const random1,
 		res_val /= 3;
 		if (editor_change_resource_tool_callback(fc, map_, world, res_idx)) {
 			fc.field->set_resources(res_idx, res_val);
-			fc.field->set_starting_res_amount(res_val);
+			fc.field->set_initial_res_amount(res_val);
 		}
 	};
 

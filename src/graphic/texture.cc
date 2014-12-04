@@ -123,6 +123,10 @@ Texture::Texture(SDL_Surface * surface, bool intensity)
 }
 
 Texture::Texture(const GLuint texture, const Rect& subrect, int parent_w, int parent_h) {
+	if (parent_w == 0 || parent_h == 0) {
+		throw wexception("Created a sub Texture with zero height and width parent.");
+	}
+
 	m_w = subrect.w;
 	m_h = subrect.h;
 
@@ -261,7 +265,7 @@ void Texture::draw_line
 }
 
 void Texture::blit
-	(const Point& dst, const Texture* src, const Rect& srcrc, BlendMode blend_mode)
+	(const Rect& dst, const Texture* src, const Rect& srcrc, BlendMode blend_mode)
 {
 	if (m_w <= 0 || m_h <= 0) {
 		return;

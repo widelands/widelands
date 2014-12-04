@@ -159,7 +159,7 @@ private:
 						m_economy.ware_target_quantity(id);
 					if (1 < tq.permanent) {
 						Widelands::Player & player = m_economy.owner();
-						Game & game = ref_cast<Game, EditorGameBase>(player.egbase());
+						Game & game = dynamic_cast<Game&>(player.egbase());
 						game.send_player_command
 							(*new Widelands::CmdSetWareTargetQuantity
 								(game.get_gametime(), player.player_number(),
@@ -181,7 +181,7 @@ private:
 					const Economy::TargetQuantity & tq =
 						m_economy.ware_target_quantity(id);
 					Widelands::Player & player = m_economy.owner();
-					Game & game = ref_cast<Game, EditorGameBase>(player.egbase());
+					Game & game = dynamic_cast<Game&>(player.egbase());
 					game.send_player_command
 						(*new Widelands::CmdSetWareTargetQuantity
 							(game.get_gametime(), player.player_number(),
@@ -200,7 +200,7 @@ private:
 			{
 				if (m_display.ware_selected(id)) {
 					Widelands::Player & player = m_economy.owner();
-					Game & game = ref_cast<Game, EditorGameBase>(player.egbase());
+					Game & game = dynamic_cast<Game&>(player.egbase());
 					game.send_player_command
 						(*new Widelands::CmdResetWareTargetQuantity
 							(game.get_gametime(), player.player_number(),
@@ -256,7 +256,7 @@ private:
 						m_economy.worker_target_quantity(id);
 					if (1 < tq.permanent) {
 						Widelands::Player & player = m_economy.owner();
-						Game & game = ref_cast<Game, EditorGameBase>(player.egbase());
+						Game & game = dynamic_cast<Game&>(player.egbase());
 						game.send_player_command
 							(*new Widelands::CmdSetWorkerTargetQuantity
 								(game.get_gametime(), player.player_number(),
@@ -278,7 +278,7 @@ private:
 					const Economy::TargetQuantity & tq =
 						m_economy.worker_target_quantity(id);
 					Widelands::Player & player = m_economy.owner();
-					Game & game = ref_cast<Game, EditorGameBase>(player.egbase());
+					Game & game = dynamic_cast<Game&>(player.egbase());
 					game.send_player_command
 						(*new Widelands::CmdSetWorkerTargetQuantity
 							(game.get_gametime(), player.player_number(),
@@ -296,7 +296,7 @@ private:
 			{
 				if (m_display.ware_selected(id)) {
 					Widelands::Player & player = m_economy.owner();
-					Game & game = ref_cast<Game, EditorGameBase>(player.egbase());
+					Game & game = dynamic_cast<Game&>(player.egbase());
 					game.send_player_command
 						(*new Widelands::CmdResetWorkerTargetQuantity
 							(game.get_gametime(), player.player_number(),
@@ -313,11 +313,10 @@ private:
 // users can register for change updates. The registry should be
 // moved to InteractivePlayer or some other UI component.
 void Economy::show_options_window() {
-	if (m_optionswindow_registry.window)
+	if (m_optionswindow_registry.window) {
 		m_optionswindow_registry.window->move_to_top();
-	else
-		new EconomyOptionsWindow
-			(ref_cast<InteractiveGameBase, InteractiveBase>
-			 	(*owner().egbase().get_ibase()),
-			 *this);
+	} else {
+		new EconomyOptionsWindow(dynamic_cast<InteractiveGameBase&>
+			 	(*owner().egbase().get_ibase()), *this);
+	}
 }

@@ -52,11 +52,7 @@ using Widelands::Building;
 using Widelands::EditorGameBase;
 using Widelands::Game;
 
-#define BG_CELL_WIDTH  34 // extents of one cell
-#define BG_CELL_HEIGHT 34
-
-//sizes for the images in the build menu (containing building icons)
-#define BUILDMENU_IMAGE_SIZE 30. // used for width and height
+constexpr int kBuildGridCellSize = 50;
 
 // The BuildGrid presents a selection of buildable buildings
 struct BuildGrid : public UI::IconGrid {
@@ -86,7 +82,7 @@ private:
 BuildGrid::BuildGrid(
 		UI::Panel* parent, const RGBColor& player_color, const Widelands::TribeDescr& tribe,
 		int32_t x, int32_t y, int32_t cols) :
-	UI::IconGrid(parent, x, y, BG_CELL_WIDTH, BG_CELL_HEIGHT, cols),
+	UI::IconGrid(parent, x, y, kBuildGridCellSize, kBuildGridCellSize, cols),
 	player_color_(player_color),
 	tribe_(tribe)
 {
@@ -104,17 +100,13 @@ void BuildGrid::add(Widelands::BuildingIndex id)
 {
 	const Widelands::BuildingDescr & descr =
 		*tribe_.get_building_descr(Widelands::BuildingIndex(id));
-	const Image& anim_frame = g_gr->animations().get_animation(descr.get_animation("idle"))
-		.representative_image(player_color_);
-	const uint16_t image_w = anim_frame.width();
-	const uint16_t image_h = anim_frame.height();
-	double ratio = BUILDMENU_IMAGE_SIZE / std::max(image_w, image_h);
-	const Image* menu_image = ImageTransformations::resize(&anim_frame, image_w * ratio, image_h * ratio);
-	UI::IconGrid::add
-		(descr.name(), menu_image,
-		 reinterpret_cast<void *>(id),
-		 descr.descname() + "<br><font size=11>" + _("Construction costs:") + "</font><br>" +
-			waremap_to_richtext(tribe_, descr.buildcost()));
+	UI::IconGrid::add(
+	   descr.name(),
+	   &g_gr->animations().get_animation(descr.get_animation("idle")).representative_image(
+	      player_color_),
+	   reinterpret_cast<void*>(id),
+	   descr.descname() + "<br><font size=11>" + _("Construction costs:") + "</font><br>" +
+	      waremap_to_richtext(tribe_, descr.buildcost()));
 }
 
 
@@ -177,7 +169,7 @@ public:
 	~FieldActionWindow();
 
 	InteractiveBase & ibase() {
-		return ref_cast<InteractiveBase, UI::Panel>(*get_parent());
+		return dynamic_cast<InteractiveBase&>(*get_parent());
 	}
 
 	void think() override;
@@ -329,7 +321,7 @@ void FieldActionWindow::init()
 
 	// Now force the mouse onto the first button
 	set_mouse_pos
-		(Point(17 + BG_CELL_WIDTH * m_best_tab, m_fastclick ? 51 : 17));
+		(Point(17 + kBuildGridCellSize * m_best_tab, m_fastclick ? 51 : 17));
 
 	// Will only do something if we explicitly set another fast click panel
 	// than the first button
@@ -656,8 +648,8 @@ Open a watch window for the given field and delete self.
 */
 void FieldActionWindow::act_watch()
 {
-	show_watch_window
-		(ref_cast<InteractiveGameBase, InteractiveBase>(ibase()), m_node);
+	upcast(InteractiveGameBase, igbase, &ibase());
+	show_watch_window(*igbase, m_node);
 	okdialog();
 }
 
@@ -710,9 +702,10 @@ void FieldActionWindow::act_buildflag()
 
 	if (ibase().is_building_road())
 		ibase().finish_build_road();
-	else if (game)
-		ref_cast<InteractivePlayer, InteractiveBase>(ibase())
-			.set_flag_to_connect(m_node);
+	else if (game) {
+		upcast(InteractivePlayer, iaplayer, &ibase());
+		iaplayer->set_flag_to_connect(m_node);
+	}
 
 	okdialog();
 }
@@ -734,22 +727,22 @@ void FieldActionWindow::act_ripflag()
 {
 	okdialog();
 	Widelands::EditorGameBase & egbase = ibase().egbase();
+	upcast(Game, game, &egbase);
+	upcast(InteractivePlayer, iaplayer, &ibase());
+
 	if (upcast(Widelands::Flag, flag, m_node.field->get_immovable())) {
 		if (Building * const building = flag->get_building()) {
 			if (building->get_playercaps() & Building::PCap_Bulldoze) {
 				if (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL)) {
-					ref_cast<Game, EditorGameBase>(egbase).send_player_bulldoze
+					game->send_player_bulldoze
 						(*flag, get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL));
 				}
 				else {
-					show_bulldoze_confirm
-						(ref_cast<InteractivePlayer, InteractiveBase>(ibase()),
-						 *building,
-						 flag);
+					show_bulldoze_confirm(*iaplayer, *building, flag);
 				}
 			}
 		} else {
-			ref_cast<Game, EditorGameBase>(egbase).send_player_bulldoze
+			game->send_player_bulldoze
 					(*flag, get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL));
 		}
 	}
@@ -792,9 +785,11 @@ Remove the road at the given field
 void FieldActionWindow::act_removeroad()
 {
 	Widelands::EditorGameBase & egbase = ibase().egbase();
-	if (upcast(Widelands::Road, road, egbase.map().get_immovable(m_node)))
-		ref_cast<Game, EditorGameBase>(egbase).send_player_bulldoze
+	if (upcast(Widelands::Road, road, egbase.map().get_immovable(m_node))) {
+		upcast(Game, game, &ibase().egbase());
+		game->send_player_bulldoze
 			(*road, get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL));
+	}
 	okdialog();
 }
 
@@ -806,15 +801,12 @@ Start construction of the building with the give description index
 */
 void FieldActionWindow::act_build(Widelands::BuildingIndex idx)
 {
-	Widelands::Game & game = ref_cast<Game, EditorGameBase>(ibase().egbase());
-	game.send_player_build
-		(ref_cast<InteractivePlayer, InteractiveBase>(ibase()).player_number(),
-		 m_node,
-		 Widelands::BuildingIndex(idx));
-	ibase().reference_player_tribe
-		(m_plr->player_number(), &m_plr->tribe());
-	ref_cast<InteractivePlayer, InteractiveBase>(ibase()).set_flag_to_connect
-		(game.map().br_n(m_node));
+	upcast(Game, game, &ibase().egbase());
+	upcast(InteractivePlayer, iaplayer, &ibase());
+
+	game->send_player_build(iaplayer->player_number(), m_node, Widelands::BuildingIndex(idx));
+	ibase().reference_player_tribe(m_plr->player_number(), &m_plr->tribe());
+	iaplayer->set_flag_to_connect(game->map().br_n(m_node));
 	okdialog();
 }
 
@@ -848,10 +840,10 @@ Call a geologist on this flag.
 */
 void FieldActionWindow::act_geologist()
 {
-	Game & game = ref_cast<Game, EditorGameBase>(ibase().egbase());
-	if (upcast(Widelands::Flag, flag, game.map().get_immovable(m_node)))
-		game.send_player_flagaction (*flag);
-
+	upcast(Game, game, &ibase().egbase());
+	if (upcast(Widelands::Flag, flag, game->map().get_immovable(m_node))) {
+		game->send_player_flagaction (*flag);
+	}
 	okdialog();
 }
 
@@ -863,15 +855,16 @@ void FieldActionWindow::act_geologist()
  */
 void FieldActionWindow::act_attack ()
 {
-	Game & game = ref_cast<Game, EditorGameBase>(ibase().egbase());
-
 	assert(m_attack_box);
-	if (upcast(Building, building, game.map().get_immovable(m_node)))
-		if (m_attack_box->soldiers() > 0)
-			game.send_player_enemyflagaction(
+	upcast(Game, game, &ibase().egbase());
+	if (upcast(Building, building, game->map().get_immovable(m_node)))
+		if (m_attack_box->soldiers() > 0) {
+			upcast(InteractivePlayer const, iaplayer, &ibase());
+			game->send_player_enemyflagaction(
 			   building->base_flag(),
-			   ref_cast<const InteractivePlayer, const InteractiveBase>(ibase()).player_number(),
+				iaplayer->player_number(),
 			   m_attack_box->soldiers() /*  number of soldiers */);
+		}
 	okdialog();
 }
 
@@ -933,8 +926,8 @@ void show_field_action
 			finish = true;
 		else if (dynamic_cast<const Widelands::Road *>(i))
 			if (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG) {
-				ref_cast<Game, EditorGameBase>(player->egbase())
-					.send_player_build_flag(player->player_number(), target);
+				upcast(Game, game, &player->egbase());
+				game->send_player_build_flag(player->player_number(), target);
 				finish = true;
 			}
 		if (finish)

@@ -162,19 +162,22 @@ void RenderTarget::brighten_rect(const Rect& rect, int32_t factor)
  * Blits a Image on another Surface
  *
  * This blit function copies the pixels to the destination surface.
- * If the source surface contains a alpha channel this is used during
- * the blit.
  */
 void RenderTarget::blit(const Point& dst, const Image* image, BlendMode blend_mode, UI::Align align)
 {
-	Point dstpoint(dst);
+	Point destination_point(dst);
 
-	UI::correct_for_align(align, image->width(), image->height(), &dstpoint);
+	UI::correct_for_align(align, image->width(), image->height(), &destination_point);
 
 	Rect srcrc(Point(0, 0), image->width(), image->height());
 
-	if (to_surface_geometry(&dstpoint, &srcrc))
-		m_surface->blit(dstpoint, image->texture(), srcrc, blend_mode);
+	if (to_surface_geometry(&destination_point, &srcrc)) {
+		m_surface->blit(
+		   Rect(destination_point.x, destination_point.y, srcrc.w, srcrc.h),
+		   image->texture(),
+		   srcrc,
+		   blend_mode);
+	}
 }
 
 /**
@@ -193,9 +196,28 @@ void RenderTarget::blitrect
 	           std::min<int32_t>(image->width() - gsrcrc.x, gsrcrc.w),
 	           std::min<int32_t>(image->height() - gsrcrc.y, gsrcrc.h));
 
-	Point dstpt(dst);
-	if (to_surface_geometry(&dstpt, &srcrc))
-		m_surface->blit(dstpt, image->texture(), srcrc, blend_mode);
+	Point destination_point(dst);
+	if (to_surface_geometry(&destination_point, &srcrc))
+		m_surface->blit(
+		   Rect(destination_point.x, destination_point.y, srcrc.w, srcrc.h),
+		   image->texture(),
+		   srcrc,
+		   blend_mode);
+}
+
+void RenderTarget::blitrect_scale(const Rect& dst,
+                                  const Image* image,
+                                  const Rect& src,
+                                  const BlendMode blend_mode) {
+
+	Point destination_point(dst.x, dst.y);
+	Rect srcrect(src);
+	if (to_surface_geometry(&destination_point, &srcrect)) {
+		m_surface->blit(Rect(destination_point.x, destination_point.y, dst.w, dst.h),
+		                image->texture(),
+		                src,
+		                blend_mode);
+	}
 }
 
 /**
@@ -233,7 +255,7 @@ void RenderTarget::tile(const Rect& rect, const Image* image, const Point& gofs,
 		int ty = 0;
 
 		while (ty < r.h) {
-			uint32_t tx = 0;
+			int tx = 0;
 			int32_t tofsx = ofs.x;
 			Rect srcrc;
 
@@ -250,7 +272,8 @@ void RenderTarget::tile(const Rect& rect, const Image* image, const Point& gofs,
 				if (tx + srcrc.w > r.w)
 					srcrc.w = r.w - tx;
 
-				m_surface->blit(r.top_left() + Point(tx, ty), image->texture(), srcrc, blend_mode);
+				const Rect dst_rect(r.x + tx, r.y + ty, srcrc.w, srcrc.h);
+				m_surface->blit(dst_rect, image->texture(), srcrc, blend_mode);
 
 				tx += srcrc.w;
 
@@ -282,12 +305,12 @@ void RenderTarget::drawanim
 {
 	const Animation& anim = g_gr->animations().get_animation(animation);
 
-	Point dstpt = dst - anim.hotspot();
+	Point destination_point = dst - anim.hotspot();
 
 	Rect srcrc(Point(0, 0), anim.width(), anim.height());
 
-	if (to_surface_geometry(&dstpt, &srcrc))
-		anim.blit(time, dstpt, srcrc, player ? &player->get_playercolor() : NULL, m_surface);
+	if (to_surface_geometry(&destination_point, &srcrc))
+		anim.blit(time, destination_point, srcrc, player ? &player->get_playercolor() : NULL, m_surface);
 
 	//  Look if there is a sound effect registered for this frame and trigger
 	//  the effect (see SoundHandler::stereo_position).
@@ -302,13 +325,13 @@ void RenderTarget::drawanimrect
 {
 	const Animation& anim = g_gr->animations().get_animation(animation);
 
-	Point dstpt = dst - anim.hotspot();
-	dstpt += gsrcrc.top_left();
+	Point destination_point = dst - anim.hotspot();
+	destination_point += gsrcrc.top_left();
 
 	Rect srcrc(gsrcrc);
 
-	if (to_surface_geometry(&dstpt, &srcrc))
-		anim.blit(time, dstpt, srcrc, player ? &player->get_playercolor() : NULL, m_surface);
+	if (to_surface_geometry(&destination_point, &srcrc))
+		anim.blit(time, destination_point, srcrc, player ? &player->get_playercolor() : NULL, m_surface);
 }
 
 /**

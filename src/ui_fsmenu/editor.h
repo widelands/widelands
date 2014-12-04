@@ -20,7 +20,8 @@
 #ifndef WL_UI_FSMENU_EDITOR_H
 #define WL_UI_FSMENU_EDITOR_H
 
-#include "ui_fsmenu/base.h"
+#include "ui_fsmenu/main_menu.h"
+#include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
 
@@ -28,19 +29,18 @@
  * Fullscreen Menu for Editor.
  * Here you select what game you want to play.
  */
-struct FullscreenMenuEditor : public FullscreenMenuBase {
+class FullscreenMenuEditor : public FullscreenMenuMainMenu {
+public:
 	FullscreenMenuEditor();
 
-	enum {Back = dying_code, New_Map, Load_Map};
+	enum class MenuTarget { kBack = UI::Panel::dying_code, kNewMap, kLoadMap };
 
 private:
-	uint32_t                                      m_butw;
-	uint32_t                                      m_buth;
-	uint32_t                                      m_butx;
-	UI::Textarea                                  title;
-	UI::Button                       new_map;
-	UI::Button                       load_map;
-	UI::Button                       back;
+	UI::Textarea title;
+	UI::Box     vbox;
+	UI::Button   new_map;
+	UI::Button   load_map;
+	UI::Button   back;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_EDITOR_H

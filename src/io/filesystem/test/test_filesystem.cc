@@ -34,7 +34,7 @@ static std::string Win32Path(std::string s)
 	if (!s.empty() && s[0] == '\\')
 	{
 		// Insert drive letter part from current working directory
-		std::string cwd = RealFSImpl("").get_working_directory();
+		std::string cwd = FileSystem::get_working_directory();
 		s.insert(0, cwd.substr(0, 2));
 	}
 	return s;
@@ -190,4 +190,3 @@ BOOST_AUTO_TEST_CASE(test_canonicalize_name_home_expansion) {
 }
 #endif
 BOOST_AUTO_TEST_SUITE_END()
-

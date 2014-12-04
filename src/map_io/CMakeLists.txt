@@ -85,7 +85,6 @@ wl_library(map_io
     map_version_packet.cc
     map_version_packet.h
   DEPENDS
-    base_deprecated
     base_exceptions
     base_log
     base_macros

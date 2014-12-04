@@ -62,9 +62,9 @@ m_click_recursion_protect(false)
 
 	uint32_t width = 0, height = 0;
 	for (int32_t j = 0; j < nr_bobs; ++j) {
-		const Image& pic =
-			g_gr->animations().get_animation(world.get_bob_descr(j)->main_animation())
-				.representative_image(RGBColor(0, 0, 0));
+		const Image& pic = g_gr->animations()
+		                      .get_animation(world.get_bob_descr(j)->main_animation())
+		                      .representative_image_from_disk();
 		uint16_t w = pic.width();
 		uint16_t h = pic.height();
 		if (w > width)
@@ -89,12 +89,13 @@ m_click_recursion_protect(false)
 
 		const Widelands::BobDescr & descr = *world.get_bob_descr(i);
 		upcast(Widelands::CritterDescr const, critter_descr, &descr);
-		UI::Checkbox & cb = *new UI::Checkbox
-			(box,
-			 pos,
-			 &g_gr->animations().get_animation(descr.main_animation())
-				.representative_image(RGBColor(0, 0, 0)),
-			 critter_descr ? critter_descr->descname() : std::string());
+		UI::Checkbox& cb =
+		   *new UI::Checkbox(box,
+		                     pos,
+		                     &g_gr->animations()
+		                         .get_animation(descr.main_animation())
+		                         .representative_image_from_disk(),
+		                     critter_descr ? critter_descr->descname() : std::string());
 
 		cb.set_desired_size(width, height);
 		cb.set_state(m_pit.is_enabled(i));

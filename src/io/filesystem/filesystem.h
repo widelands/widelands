@@ -111,10 +111,14 @@ public:
 
 	// basic path/filename manipulation
 	std::string fix_cross_file(const std::string &) const;
-	char file_separator() {return m_filesep;}
-	std::string get_working_directory() const;
 	std::string canonicalize_name(std::string path) const;
 	bool is_path_absolute(const std::string & path) const;
+
+	// Returns the path separator, i.e. \ on windows and / everywhere else.
+	static char file_separator();
+
+	// Returns the working directory of the process.
+	static std::string get_working_directory();
 
 	///Given a filename, return the name with any path stripped off.
 	static const char * fs_filename(const char * n);
@@ -136,9 +140,6 @@ protected:
 	///How to address the fs' topmost component (e.g. "" on Unix, "D:" on win32)
 	///\warning This is should \e not contain filesep!
 	std::string m_root;
-
-	///Character used to separate filename components
-	char m_filesep;
 
 #ifdef _WIN32
 private:
