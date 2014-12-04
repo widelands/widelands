@@ -35,9 +35,6 @@
 
 using Widelands::ProductionSite;
 
-static char const * pic_tab_wares = "data/pics/menu_tab_wares.png";
-static char const * pic_tab_workers = "data/pics/menu_list_workers.png";
-
 /*
 ===============
 Create the window and its panels, add it to the registry.
@@ -64,7 +61,7 @@ ProductionSiteWindow::ProductionSiteWindow
 				 UI::Box::AlignLeft);
 
 		get_tabs()->add
-			("wares", g_gr->images().get(pic_tab_wares),
+			("wares", g_gr->cataloged_image(ImageCatalog::Keys::kBuildingTabWares),
 			 prod_box, _("Wares"));
 	}
 
@@ -104,7 +101,7 @@ ProductionSiteWindow::ProductionSiteWindow
 		worker_box->add(m_worker_table, UI::Box::AlignLeft, true);
 		worker_box->add(m_worker_caps, UI::Box::AlignLeft, true);
 		get_tabs()->add
-			("workers", g_gr->images().get(pic_tab_workers),
+			("workers", g_gr->cataloged_image(ImageCatalog::Keys::kBuildingTabWorkers),
 			 worker_box,
 			 (ngettext("Worker", "Workers", productionsite().descr().nr_working_positions()))
 			);

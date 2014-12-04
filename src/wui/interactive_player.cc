@@ -87,42 +87,42 @@ InteractivePlayer::InteractivePlayer
 // Buildhelp is different as it does not toggle a UniqueWindow
 // Minimap is different as it warps and stuff
 
-#define INIT_BTN_this(picture, name, tooltip)                       \
+#define INIT_BTN_this(image_key, name, tooltip)                       \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
- g_gr->images().get("data/pics/" picture ".png"),                      \
+ g_gr->cataloged_image(image_key),                      \
  tooltip                                                                      \
 
 
-#define INIT_BTN(picture, name, tooltip)                            \
+#define INIT_BTN(image_key, name, tooltip)                            \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
- g_gr->images().get("data/pics/" picture ".png"),                      \
+ g_gr->cataloged_image(image_key),                      \
  tooltip                                                                      \
 
 
 m_toggle_chat
 	(INIT_BTN_this
-	 ("menu_chat", "chat", _("Chat"))),
+	 (ImageCatalog::Keys::kMenuChat, "chat", _("Chat"))),
 m_toggle_options_menu
 	(INIT_BTN
-	 ("menu_options_menu", "options_menu", _("Options"))),
+	 (ImageCatalog::Keys::kMenuOptions, "options_menu", _("Options"))),
 m_toggle_statistics_menu
 	(INIT_BTN
-	 ("menu_toggle_menu", "statistics_menu", _("Statistics"))),
+	 (ImageCatalog::Keys::kMenuStatistics, "statistics_menu", _("Statistics"))),
 m_toggle_objectives
 	(INIT_BTN
-	 ("menu_objectives", "objectives", _("Objectives"))),
+	 (ImageCatalog::Keys::kMenuObjectives, "objectives", _("Objectives"))),
 m_toggle_minimap
 	(INIT_BTN_this
-	 ("menu_toggle_minimap", "minimap", _("Minimap"))),
+	 (ImageCatalog::Keys::kMenuMinimap, "minimap", _("Minimap"))),
 m_toggle_buildhelp
 	(INIT_BTN_this
-	 ("menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"))),
+	 (ImageCatalog::Keys::kMenuBuildhelp, "buildhelp", _("Show Building Spaces (on/off)"))),
 m_toggle_message_menu
 	(INIT_BTN
-	 ("menu_toggle_oldmessage_menu", "messages", _("Messages"))),
+	 (ImageCatalog::Keys::kMenuMessagesOld, "messages", _("Messages"))),
 m_toggle_help
 	(INIT_BTN
-	 ("menu_help", "help", _("Tribal Ware Encyclopedia")))
+	 (ImageCatalog::Keys::kHelp, "help", _("Tribal Ware Encyclopedia")))
 
 {
 	m_toggle_chat.sigclicked.connect
@@ -250,18 +250,19 @@ void InteractivePlayer::think()
 		m_toggle_chat.set_enabled(m_chatenabled);
 	}
 	{
-		char const * msg_icon = "data/pics/menu_toggle_oldmessage_menu.png";
+		ImageCatalog::Keys image_key = ImageCatalog::Keys::kMenuMessagesOld;
+
 		std::string msg_tooltip = _("Messages");
 		if
 			(uint32_t const nr_new_messages =
 			 	player().messages().nr_messages(Widelands::Message::New))
 		{
-			msg_icon    = "data/pics/menu_toggle_newmessage_menu.png";
+			image_key = ImageCatalog::Keys::kMenuMessagesNew;
 			msg_tooltip =
 			   (boost::format(ngettext("%u new message", "%u new messages", nr_new_messages)) %
 			    nr_new_messages).str();
 		}
-		m_toggle_message_menu.set_pic(g_gr->images().get(msg_icon));
+		m_toggle_message_menu.set_pic(g_gr->cataloged_image(image_key));
 		m_toggle_message_menu.set_tooltip(msg_tooltip);
 	}
 }

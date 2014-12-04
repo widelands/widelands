@@ -74,7 +74,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 		} else { // just a shown client
 			type_icon = new UI::Icon
 				(this, 0, 0, h, h,
-				 g_gr->images().get("data/pics/menu_tab_watch.png"));
+				 g_gr->cataloged_image(ImageCatalog::Keys::kFieldTabWatch));
 			add(type_icon, UI::Box::AlignCenter);
 		}
 
@@ -124,7 +124,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 					temp_tooltip = (boost::format(_("Player %u"))
 										 % static_cast<unsigned int>(us.position + 1)).str();
 				} else {
-					player_image = g_gr->images().get("data/pics/menu_tab_watch.png");
+					player_image = g_gr->cataloged_image(ImageCatalog::Keys::kFieldTabWatch);
 					temp_tooltip = _("Spectator");
 				}
 
@@ -287,7 +287,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			return;
 		} else if (player_setting.state == PlayerSettings::stateShared) {
 			type ->set_tooltip(_("Shared in"));
-			type ->set_pic(g_gr->images().get("data/pics/shared_in.png"));
+			type ->set_pic(g_gr->cataloged_image(ImageCatalog::Keys::kFullscreenSharedIn));
 
 			ImageCatalog::Keys offset = ImageCatalog::Keys::kPlayerStartingPosSmall1;
 			const Image* player_image =
@@ -305,18 +305,20 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			tribe->set_enabled(true);
 		} else {
 			std::string title;
-			std::string pic = "data/pics/";
+			std::string pic;
 			if (player_setting.state == PlayerSettings::stateComputer) {
 				if (player_setting.ai.empty()) {
 					title = _("Computer");
-					pic += "novalue.png";
+					pic = g_gr->image_catalog().filepath(ImageCatalog::Keys::kNoValue);
 				} else {
 					if (player_setting.random_ai) {
 						title = (boost::format(_("AI: %s")) % _("Random")).str();
-						pic += "ai_Random.png";
+						pic = g_gr->image_catalog().filepath(ImageCatalog::Keys::kAiRandom);
 					} else {
 						title = (boost::format(_("AI: %s")) % _(player_setting.ai)).str();
-						pic += "ai_" + player_setting.ai + ".png";
+						// TODO(GunChleoc): We should use the image catalog instead.
+						pic = (boost::format("data/pics/ai/%s.png")
+								 % player_setting.ai.c_str()).str();
 					}
 				}
 			} else { // PlayerSettings::stateHuman
@@ -328,7 +330,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			if (player_setting.random_tribe) {
 				std::string random = _("Random");
 				if (!m_tribenames["random"].size())
-					m_tribepics[random] = g_gr->images().get("data/pics/random.png");
+					m_tribepics[random] = g_gr->cataloged_image(ImageCatalog::Keys::kFullscreenRandomTribe);
 				tribe->set_tooltip(random.c_str());
 				tribe->set_pic(m_tribepics[random]);
 			} else {

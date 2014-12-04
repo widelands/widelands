@@ -154,17 +154,17 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 
 	// prepare the lists
 	clientsonline .set_font(m_fn, m_fs);
-	std::string t_tip = (boost::format("%s%s%s%s%s%s%s%s%s%s")
-		% "<rt><p><font underline=yes>"
+	std::string t_tip = (boost::format("<rt><p><font underline=yes>%s</font>"
+												  "<br><img src=%s> %s"
+												  "<br><img src=%s> %s"
+												  "<br><img src=%s> %s</p></rt>")
 		% _("User Status")
-		% "</font><br>"
-		% "<img src=data/pics/roadb_yellow.png> "
+		% g_gr->image_catalog().filepath(ImageCatalog::Keys::kOverlaysRoadbuildingAscending).c_str()
 		% _("Registered")
-		% "<br><img src=data/pics/roadb_green.png> "
+		% g_gr->image_catalog().filepath(ImageCatalog::Keys::kOverlaysRoadbuildingLevel).c_str()
 		% _("Administrator")
-		% "<br><img src=data/pics/roadb_red.png> "
-		% _("Unregistered")
-		%  "</p></rt>").str();
+		% g_gr->image_catalog().filepath(ImageCatalog::Keys::kOverlaysRoadbuildingSteepAscending).c_str()
+		% _("Unregistered")).str();
 	clientsonline .add_column(22, "*", t_tip);
 	clientsonline .add_column((m_lisw - 22) * 3 / 8, _("Name"));
 	clientsonline .add_column((m_lisw - 22) * 2 / 8, _("Points"));
@@ -239,10 +239,10 @@ void FullscreenMenuInternetLobby::fill_games_list(const std::vector<InternetGame
 			if (games.at(i).build_id == build_id())
 				pic = g_gr->cataloged_image(ImageCatalog::Keys::kActionContinue);
 			else {
-				pic = pic = g_gr->cataloged_image(ImageCatalog::Keys::kActionDifferent);
+				pic = g_gr->cataloged_image(ImageCatalog::Keys::kActionDifferent);
 			}
 		} else {
-			pic = pic = g_gr->cataloged_image(ImageCatalog::Keys::kActionStop);
+			pic = g_gr->cataloged_image(ImageCatalog::Keys::kActionStop);
 		}
 		// If one of the servers has the same name as the local name of the
 		// clients server, we disable the 'hostgame' button to avoid having more
@@ -292,11 +292,11 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 		const Image* pic;
 		switch (convert_clienttype(client.type)) {
 			case 0: // UNREGISTERED
-				pic = pic = g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysRoadbuildingSteepAscending);
+				pic = g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysRoadbuildingSteepAscending);
 				er.set_picture(0, pic);
 				break;
 			case 1: // REGISTERED
-				pic = pic = g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysRoadbuildingAscending);
+				pic = g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysRoadbuildingAscending);
 				er.set_picture(0, pic);
 				break;
 			case 2: // SUPERUSER

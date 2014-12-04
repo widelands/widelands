@@ -27,8 +27,6 @@
 #include "ui_basic/progressbar.h"
 #include "ui_basic/tabpanel.h"
 
-static const char pic_tab_wares[] = "data/pics/menu_tab_wares.png";
-
 /**
  * Status window for construction sites.
  */
@@ -72,7 +70,7 @@ ConstructionSiteWindow::ConstructionSiteWindow
 			 UI::Box::AlignLeft);
 
 
-	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
+	get_tabs()->add("wares",g_gr->cataloged_image(ImageCatalog::Keys::kBuildingTabWares), &box, _("Building materials"));
 }
 
 

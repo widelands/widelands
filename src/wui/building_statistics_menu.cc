@@ -442,27 +442,27 @@ void BuildingStatisticsMenu::update() {
 			(Columns::Name, building.get_icon(), building.descname());
 
 		{
-			char const * pic = "data/pics/novalue.png";
+			ImageCatalog::Keys image_key = ImageCatalog::Keys::kNoValue;
 			if (building.get_ismine()) {
-				pic = "data/pics/menu_tab_buildmine.png";
+				image_key = ImageCatalog::Keys::kFieldTabBuildMine;
 			} else if (building.get_isport()) {
-				pic = "data/pics/menu_tab_buildport.png";
+				image_key = ImageCatalog::Keys::kFieldTabBuildPort;
 			}
 			else switch (building.get_size()) {
-			case Widelands::BaseImmovable::SMALL:
-				pic = "data/pics/menu_tab_buildsmall.png";
-				break;
-			case Widelands::BaseImmovable::MEDIUM:
-				pic = "data/pics/menu_tab_buildmedium.png";
-				break;
-			case Widelands::BaseImmovable::BIG:
-				pic = "data/pics/menu_tab_buildbig.png";
-				break;
-			default:
-				assert(false);
-				break;
+				case Widelands::BaseImmovable::SMALL:
+					image_key = ImageCatalog::Keys::kFieldTabBuildSmall;
+					break;
+				case Widelands::BaseImmovable::MEDIUM:
+					image_key = ImageCatalog::Keys::kFieldTabBuildMedium;
+					break;
+				case Widelands::BaseImmovable::BIG:
+					image_key = ImageCatalog::Keys::kFieldTabBuildBig;
+					break;
+				default:
+					assert(false);
+					break;
 			}
-			te->set_picture(Columns::Size, g_gr->images().get(pic));
+			te->set_picture(Columns::Size, g_gr->cataloged_image(image_key));
 		}
 
 		if (productionsite && nr_owned) {

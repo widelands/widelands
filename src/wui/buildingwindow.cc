@@ -42,9 +42,6 @@
 #include "wui/unique_window_handler.h"
 #include "wui/waresqueuedisplay.h"
 
-static const char * pic_debug              = "data/pics/menu_debug.png";
-
-
 BuildingWindow::BuildingWindow
 	(InteractiveGameBase & parent,
 	 Widelands::Building  & b,
@@ -321,7 +318,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 				new UI::Button
 					(capsbuttons, "debug", 0, 0, 34, 34,
 					 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
-					 g_gr->images().get(pic_debug),
+					 g_gr->cataloged_image(ImageCatalog::Keys::kFieldDebug),
 					 _("Debug"));
 			debugbtn->sigclicked.connect(boost::bind(&BuildingWindow::act_debug, boost::ref(*this)));
 			capsbuttons->add
@@ -333,7 +330,8 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 			new UI::Button
 				(capsbuttons, "goto", 0, 0, 34, 34,
 				 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
-				 g_gr->images().get("data/pics/menu_goto.png"), _("Center view on this"));
+				 g_gr->cataloged_image(ImageCatalog::Keys::kMenuGoto),
+				 _("Center view on this"));
 		gotobtn->sigclicked.connect(boost::bind(&BuildingWindow::clicked_goto, boost::ref(*this)));
 		capsbuttons->add
 			(gotobtn,
@@ -350,7 +348,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 				new UI::Button
 					(capsbuttons, "help", 0, 0, 34, 34,
 					 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
-					 g_gr->images().get("data/pics/menu_help.png"),
+					 g_gr->cataloged_image(ImageCatalog::Keys::kHelp),
 					 _("Help"));
 
 			UI::UniqueWindow::Registry& registry =

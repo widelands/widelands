@@ -105,7 +105,7 @@ WatchWindow::WatchWindow
 			(this, "follow",
 			 0, h - 34, 34, 34,
 			 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
-			 g_gr->images().get("data/pics/menu_watch_follow.png"),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kMenuWatch),
 			 _("Follow"));
 	followbtn->sigclicked.connect(boost::bind(&WatchWindow::do_follow, this));
 
@@ -114,7 +114,7 @@ WatchWindow::WatchWindow
 			(this, "center_mainview_here",
 			 34, h - 34, 34, 34,
 			 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
-			 g_gr->images().get("data/pics/menu_goto.png"),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kMenuGoto),
 			 _("Center the main view on this"));
 	gotobtn->sigclicked.connect(boost::bind(&WatchWindow::do_goto, this));
 

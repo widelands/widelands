@@ -40,10 +40,6 @@ using Widelands::WareDescr;
 using Widelands::WareIndex;
 using Widelands::WorkerDescr;
 
-
-static const char pic_tab_wares[] = "data/pics/menu_tab_wares.png";
-static const char pic_tab_workers[] = "data/pics/menu_tab_workers.png";
-
 struct EconomyOptionsWindow : public UI::UniqueWindow {
 	EconomyOptionsWindow(InteractiveGameBase & parent, Economy & economy)
 		:
@@ -56,12 +52,12 @@ struct EconomyOptionsWindow : public UI::UniqueWindow {
 
 		m_tabpanel.add
 			("wares",
-			 g_gr->images().get(pic_tab_wares),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kBuildingTabWarehouseWares),
 			 new EconomyOptionsWarePanel(&m_tabpanel, parent, economy),
 			 _("Wares"));
 		m_tabpanel.add
 			("workers",
-			 g_gr->images().get(pic_tab_workers),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kBuildingTabWarehouseWorkers),
 			 new EconomyOptionsWorkerPanel(&m_tabpanel, parent, economy),
 			 _("Workers"));
 	}

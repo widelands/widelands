@@ -109,7 +109,7 @@ void Widelands::MapObject::create_debug_panels
 	(const Widelands::EditorGameBase & egbase, UI::TabPanel & tabs)
 {
 	tabs.add
-		("debug", g_gr->images().get("data/pics/menu_debug.png"),
+		("debug", g_gr->cataloged_image(ImageCatalog::Keys::kFieldDebug),
 		 new MapObjectDebugPanel(tabs, egbase, *this));
 }
 

@@ -24,8 +24,6 @@
 #include "ui_basic/tabpanel.h"
 #include "wui/buildingwindow.h"
 
-static const char pic_tab_wares[] = "data/pics/menu_tab_wares.png";
-
 /**
  * Status window for dismantle sites.
  */
@@ -66,7 +64,7 @@ DismantleSiteWindow::DismantleSiteWindow
 	for (uint32_t i = 0; i < cs.get_nrwaresqueues(); ++i)
 		BuildingWindow::create_ware_queue_panel(&box, cs, cs.get_waresqueue(i), true);
 
-	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
+	get_tabs()->add("wares", g_gr->cataloged_image(ImageCatalog::Keys::kBuildingTabWares), &box, _("Building materials"));
 }
 
 

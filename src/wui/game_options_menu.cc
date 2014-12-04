@@ -112,7 +112,7 @@ GameOptionsMenu::GameOptionsMenu
 		 vmargin() + 4 * (20 + vspacing()) + 2 * vgap(),
 		 buttonw(1), 35,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
-		 g_gr->images().get("data/pics/menu_save_game.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kMenuOptionsSave),
 		 /** TRANSLATORS: Button tooltip */
 		 _("Save Game")),
 	exit_game
@@ -122,7 +122,7 @@ GameOptionsMenu::GameOptionsMenu
 		 35 + vspacing(),
 		 buttonw(1), 35,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
-		 g_gr->images().get("data/pics/menu_exit_game.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kMenuOptionsExit),
 		 /** TRANSLATORS: Button tooltip */
 		 _("Exit Game"))
 {

@@ -34,6 +34,10 @@ public:
 	enum class Keys {
 		kUnknownImage = 0, // This is the key for a nonexistent image. Do not add this to the entries.
 
+		// general
+		kNoValue,
+		kHelp,
+
 		// ui_basic
 		kButton0,
 		kButton1,
@@ -56,11 +60,8 @@ public:
 		kCheckboxEmpty,
 		kCheckboxLight,
 		kCursor,
-		kCursor2,
 		kCursorClick,
 		kListFirst,
-		kListSecond,
-		kListThird,
 		kListSelected,
 		kActionContinue,
 		kActionDifferent,
@@ -74,6 +75,9 @@ public:
 		kWindowBorderBottom,
 		kButtonMenuOK,
 		kButtonMenuAbort,
+		kBackgroundPlot,
+		kBackgroundButtonFlat,
+		kBackgroundButtonFlatSelected,
 
 		// ui_fsmenu
 		kFullscreen,
@@ -83,12 +87,25 @@ public:
 		kFullscreenLaunchMPG,
 		kFullscreenMain,
 		kFullscreenOptions,
+		kFullscreenDifficulty2,
+		kFullscreenDifficulty3,
+		kFullscreenDifficulty4,
+		kFullscreenRandomTribe,
+		kFullscreenSharedIn,
+		kFullscreenLoadGame,
 
 		//loadscreens
 		kLoadscreen,
 		kLoadscreenEditor,
 		kLoadscreenTips,
 		kLoadscreenSplash,
+
+		// ai
+		kAiAggressive,
+		kAiDefensive,
+		kAiNone,
+		kAiNormal,
+		kAiRandom,
 
 		// editor
 		kEditorUndo,
@@ -138,6 +155,13 @@ public:
 		kStatsPoints,
 		kStatsProductivity,
 		kStatsTrees,
+		kStatsTabWaresConsumption,
+		kStatsTabWaresProduction,
+		kStatsTabWaresEconomyHealth,
+		kStatsTabWaresStock,
+		kStatsTabWarehouseWares,
+		kStatsTabWarehouseWorkers,
+
 
 		// minimap
 		kMinimapBuildings,
@@ -201,6 +225,60 @@ public:
 		kBuildingStockPolicyDontStock,
 		kBuildingStockPolicyPrefer,
 		kBuildingStockPolicyRemove,
+		kBuildingTabWares,
+		kBuildingTabWorkers,
+		kBuildingTabMilitary,
+		kBuildingTabDockWares,
+		kBuildingTabDockWorkers,
+		kBuildingTabWarehouseWares,
+		kBuildingTabWarehouseWorkers,
+		kBuildingSoldierCapacityDecrease,
+		kBuildingSoldierCapacityIncrease,
+
+
+		// fieldaction
+		kFieldTabBuildRoad,
+		kFieldTabWatch,
+		kFieldTabBuildSmall,
+		kFieldTabBuildMedium,
+		kFieldTabBuildBig,
+		kFieldTabBuildPort,
+		kFieldTabBuildMine,
+		kFieldRoadBuild,
+		kFieldRoadDestroy,
+		kFieldFlagBuild,
+		kFieldFlagDestroy,
+		kFieldWatch,
+		kFieldCensus,
+		kFieldStatistics,
+		kFieldDebug,
+		kFieldGeologist,
+		kFieldAttack,
+
+		// messages
+		kMessageArchived,
+		kMessageNew,
+		kMessageRead,
+		kMessageActionRestore,
+		kMessageActionArchive,
+
+		// menus
+		kMenuBuildhelp,
+		kMenuChat,
+		kMenuGoto,
+		kMenuMessagesNew,
+		kMenuMessagesOld,
+		kMenuMinimap,
+		kMenuObjectives,
+		kMenuOptions,
+		kMenuOptionsExit,
+		kMenuOptionsSave,
+		kMenuStatistics,
+		kMenuStatsBuilding,
+		kMenuStatsGeneral,
+		kMenuStatsStock,
+		kMenuStatsWare,
+		kMenuWatch,
 
 		// players
 		kPlayerStartingPosSmall1, // Keep player icons in ascending order

@@ -75,7 +75,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN () :
 		(this, "load_previous_host",
 		 get_w() * 171 / 200, get_h() * 19 / 40, m_buth, m_buth,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
-		 g_gr->images().get("data/pics/menu_load_game.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kFullscreenLoadGame),
 		 _("Load previous host"), true, false),
 
 // Edit boxes

@@ -127,7 +127,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 		(this, "change_map_or_save",
 		 m_right_column_x + m_butw - m_buth, get_h() * 3 / 20, m_buth, m_buth,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
-		 g_gr->images().get("data/pics/menu_toggle_minimap.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kMenuMinimap),
 		 _("Change map or saved game"), false, false),
 	m_ok
 		(this, "ok",
@@ -148,7 +148,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 		(this, "help",
 		 m_right_column_x + m_butw - m_buth, get_h() / 100, m_buth, m_buth,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
-		 g_gr->images().get("data/pics/menu_help.png"),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kHelp),
 		 _("Show the help window"), true, false),
 
 // Text labels
@@ -683,24 +683,25 @@ void FullscreenMenuLaunchMPG::help_clicked() {
 		(_
 		 ("The player with the color of the flag. If more than one client selected the same color, these "
 		  "share control over the player (‘shared kingdom mode’)."),
-		 g_gr->image_catalog().filepath(ImageCatalog::Keys::kPlayerFlag8));
+		 g_gr->image_catalog().filepath(ImageCatalog::Keys::kEditorToolPortSpaceSet));
 	m_help->add_picture_li
 		(_("Spectator mode, meaning you can see everything, but cannot control any player"),
-		"data/pics/menu_tab_watch.png");
+		g_gr->image_catalog().filepath(ImageCatalog::Keys::kMenuWatch));
 	m_help->add_heading(_("Player settings"));
 	m_help->add_paragraph
 		(_
 		 ("In the middle are the settings for the players. To start a game, each player must be one of the "
 		  "following:"));
 	m_help->add_picture_li
-		(_("Connected to one or more clients (see ‘Client settings’)."), "data/pics/genstats_nrworkers.png");
+		(_("Connected to one or more clients (see ‘Client settings’)."),
+		 g_gr->image_catalog().filepath(ImageCatalog::Keys::kStatsWorkersNumber));
 	m_help->add_picture_li
 		(_
 		 ("Connected to a computer player (the face in the picture as well as the mouse hover texts "
 		  "indicate the strength of the currently selected computer player)."),
-		"data/pics/ai_Normal.png");
+		g_gr->image_catalog().filepath(ImageCatalog::Keys::kAiNormal));
 	m_help->add_picture_li(_("Set as shared in starting position for another player."),
-								  "data/pics/shared_in.png");
+								  g_gr->image_catalog().filepath(ImageCatalog::Keys::kFullscreenSharedIn));
 	m_help->add_picture_li(_("Closed."), g_gr->image_catalog().filepath(ImageCatalog::Keys::kActionStop));
 	m_help->add_block
 		(_

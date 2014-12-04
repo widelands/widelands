@@ -39,12 +39,6 @@
 
 #define INACTIVE 0
 
-static const char pic_tab_production[] = "data/pics/menu_tab_wares_production.png";
-static const char pic_tab_consumption[] = "data/pics/menu_tab_wares_consumption.png";
-static const char pic_tab_economy[] = "data/pics/menu_tab_wares_econ_health.png";
-static const char pic_tab_stock[] = "data/pics/menu_tab_wares_stock.png";
-// TODO(unknown): replace place holder
-
 static const RGBColor colors[] = {
 	RGBColor(115, 115, 115), //inactive
 	RGBColor(255,   0,   0),
@@ -173,7 +167,7 @@ m_parent(&parent)
 	m_plot_production->set_plotmode(WuiPlotArea::PLOTMODE_RELATIVE);
 
 	tabs->add
-		("production", g_gr->images().get(pic_tab_production),
+		("production", g_gr->cataloged_image(ImageCatalog::Keys::kStatsTabWaresProduction),
 			m_plot_production, _("Production"));
 
 	m_plot_consumption =
@@ -184,7 +178,7 @@ m_parent(&parent)
 	m_plot_consumption->set_plotmode(WuiPlotArea::PLOTMODE_RELATIVE);
 
 	tabs->add
-		("consumption", g_gr->images().get(pic_tab_consumption),
+		("consumption", g_gr->cataloged_image(ImageCatalog::Keys::kStatsTabWaresConsumption),
 			m_plot_consumption, _("Consumption"));
 
 	m_plot_economy =
@@ -195,7 +189,7 @@ m_parent(&parent)
 	m_plot_economy->set_plotmode(WuiPlotArea::PLOTMODE_RELATIVE);
 
 	tabs->add
-		("economy_health", g_gr->images().get(pic_tab_economy),
+		("economy_health", g_gr->cataloged_image(ImageCatalog::Keys::kStatsTabWaresEconomyHealth),
 			m_plot_economy, _("Economy Health"));
 
 	m_plot_stock = new WuiPlotArea
@@ -205,7 +199,7 @@ m_parent(&parent)
 	m_plot_stock->set_plotmode(WuiPlotArea::PLOTMODE_ABSOLUTE);
 
 	tabs->add
-		("stock", g_gr->images().get(pic_tab_stock),
+		("stock", g_gr->cataloged_image(ImageCatalog::Keys::kStatsTabWaresStock),
 			m_plot_stock, _("Stock"));
 
 	tabs->activate(0);

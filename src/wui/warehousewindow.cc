@@ -29,11 +29,6 @@
 
 using Widelands::Warehouse;
 
-static const char pic_tab_wares[] = "data/pics/menu_tab_wares.png";
-static const char pic_tab_workers[] = "data/pics/menu_tab_workers.png";
-static const char pic_tab_dock_wares[] = "data/pics/menu_tab_wares_dock.png";
-static const char pic_tab_dock_workers[] = "data/pics/menu_tab_workers_dock.png";
-
 /**
  * Extends the wares display to show and modify stock policy of items.
  */
@@ -203,7 +198,7 @@ WarehouseWindow::WarehouseWindow
 {
 	get_tabs()->add
 		("wares",
-		 g_gr->images().get(pic_tab_wares),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kBuildingTabWarehouseWares),
 		 new WarehouseWaresPanel
 			(get_tabs(),
 			 Width,
@@ -213,7 +208,7 @@ WarehouseWindow::WarehouseWindow
 		 _("Wares"));
 	get_tabs()->add
 		("workers",
-		 g_gr->images().get(pic_tab_workers),
+		 g_gr->cataloged_image(ImageCatalog::Keys::kBuildingTabWarehouseWorkers),
 		 new WarehouseWaresPanel
 			(get_tabs(),
 			 Width,
@@ -225,12 +220,12 @@ WarehouseWindow::WarehouseWindow
 	if (Widelands::PortDock * pd = wh.get_portdock()) {
 		get_tabs()->add
 			("dock_wares",
-			 g_gr->images().get(pic_tab_dock_wares),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kBuildingTabDockWares),
 			 create_portdock_wares_display(get_tabs(), Width, *pd, Widelands::wwWARE),
 			 _("Wares in dock"));
 		get_tabs()->add
 			("dock_workers",
-			 g_gr->images().get(pic_tab_dock_workers),
+			 g_gr->cataloged_image(ImageCatalog::Keys::kBuildingTabDockWorkers),
 			 create_portdock_wares_display(get_tabs(), Width, *pd, Widelands::wwWORKER),
 			 _("Workers in dock"));
 		if (pd->expedition_started()) {

@@ -26,8 +26,6 @@
 
 using Widelands::MilitarySite;
 
-static char const * pic_tab_military = "data/pics/menu_tab_military.png";
-
 /**
  * Status window for \ref MilitarySite
  */
@@ -54,7 +52,7 @@ MilitarySiteWindow::MilitarySiteWindow
 BuildingWindow(parent, ms, registry)
 {
 	get_tabs()->add
-		("soldiers", g_gr->images().get(pic_tab_military),
+		("soldiers", g_gr->cataloged_image(ImageCatalog::Keys::kBuildingTabMilitary),
 		 create_soldier_list(*get_tabs(), parent, militarysite()),
 		 _("Soldiers"));
 }

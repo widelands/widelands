@@ -14,5 +14,6 @@ wl_library(ai
     base_log
     profile
     base_i18n
+    graphic_image_catalog
     logic
 )

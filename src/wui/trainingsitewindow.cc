@@ -27,8 +27,6 @@
 using Widelands::TrainingSite;
 using Widelands::atrAttack;
 
-static char const * pic_tab_military = "data/pics/menu_tab_military.png";
-
 /**
  * Status window for \ref TrainingSite
  */
@@ -53,7 +51,7 @@ TrainingSiteWindow::TrainingSiteWindow
 ProductionSiteWindow  (parent, ts, registry)
 {
 	get_tabs()->add
-		("soldiers", g_gr->images().get(pic_tab_military),
+		("soldiers", g_gr->cataloged_image(ImageCatalog::Keys::kBuildingTabMilitary),
 		 create_soldier_list(*get_tabs(), parent, trainingsite()),
 		 _("Soldiers in training"));
 }

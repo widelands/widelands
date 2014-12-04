@@ -22,18 +22,23 @@ wl_library(graphic_image_io
     io_stream
 )
 
+wl_library(graphic_image_catalog
+  SRCS
+    image_catalog.cc
+    image_catalog.h
+)
+
 wl_library(graphic_image
   SRCS
     image.h
     image_cache.cc
     image_cache.h
-    image_catalog.cc
-    image_catalog.h
   USES_SDL2
   USES_SDL2_IMAGE
   DEPENDS
     base_log
     base_macros
+    graphic_image_catalog
     graphic_image_io
     graphic_surface
 )

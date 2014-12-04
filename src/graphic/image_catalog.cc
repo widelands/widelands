@@ -37,6 +37,11 @@ ImageCatalog::~ImageCatalog() {
 // Register all images here
 void ImageCatalog::init()  {
 	entries_.clear();
+
+	// general
+	insert(Keys::kNoValue, "novalue.png");
+	insert(Keys::kHelp, "menu_help.png");
+
 	// ui_basic
 	insert(Keys::kButton0, "ui_basic/but0.png");
 	insert(Keys::kButton1, "ui_basic/but1.png");
@@ -59,11 +64,8 @@ void ImageCatalog::init()  {
 	insert(Keys::kCheckboxEmpty, "ui_basic/checkbox_empty.png");
 	insert(Keys::kCheckboxLight, "ui_basic/checkbox_light.png");
 	insert(Keys::kCursor, "ui_basic/cursor.png");
-	insert(Keys::kCursor2, "ui_basic/cursor2.png"); // NOCOM unused?
 	insert(Keys::kCursorClick, "ui_basic/cursor_click.png");
 	insert(Keys::kListFirst, "ui_basic/list_first_entry.png");
-	insert(Keys::kListSecond, "ui_basic/list_second_entry.png"); // NOCOM unused?
-	insert(Keys::kListThird, "ui_basic/list_third_entry.png"); // NOCOM unused?
 	insert(Keys::kListSelected, "ui_basic/list_selected.png");
 	insert(Keys::kActionContinue, "ui_basic/continue.png");
 	insert(Keys::kActionDifferent, "ui_basic/different.png");
@@ -78,6 +80,9 @@ void ImageCatalog::init()  {
 	insert(Keys::kWindowBorderBottom, "wui/window_bottom.png");
 	insert(Keys::kButtonMenuOK, "wui/menu_okay.png");
 	insert(Keys::kButtonMenuAbort, "wui/menu_abort.png");
+	insert(Keys::kBackgroundPlot, "wui/plot_area_bg.png");
+	insert(Keys::kBackgroundButtonFlat, "wui/ware_list_bg.png");
+	insert(Keys::kBackgroundButtonFlatSelected, "wui/ware_list_bg_selected.png");
 
 	// ui_fsmenu
 	insert(Keys::kFullscreen, "ui_fsmenu/ui_fsmenu.jpg");
@@ -87,12 +92,26 @@ void ImageCatalog::init()  {
 	insert(Keys::kFullscreenLaunchMPG, "ui_fsmenu/launch_mpg_menu.jpg");
 	insert(Keys::kFullscreenMain, "ui_fsmenu/mainmenu.jpg");
 	insert(Keys::kFullscreenOptions, "ui_fsmenu/optionsmenu.jpg");
+	insert(Keys::kFullscreenDifficulty2, "ui_fsmenu/easy.png");
+	insert(Keys::kFullscreenDifficulty3, "ui_fsmenu/challenging.png");
+	insert(Keys::kFullscreenDifficulty4, "ui_fsmenu/hard.png");
+	insert(Keys::kFullscreenRandomTribe, "ui_fsmenu/random.png");
+	insert(Keys::kFullscreenSharedIn, "ui_fsmenu/shared_in.png");
+	insert(Keys::kFullscreenLoadGame, "ui_fsmenu/menu_load_game.png");
 
 	// loadscreens
 	insert(Keys::kLoadscreen, "loadscreens/progress.png");
 	insert(Keys::kLoadscreenEditor, "loadscreens/editor.jpg");
 	insert(Keys::kLoadscreenTips, "loadscreens/tips_bg.png");
 	insert(Keys::kLoadscreenSplash, "loadscreens/splash.jpg");
+
+	// ai
+	 // NOCOM Need to change the Network packets to use all of these.
+	insert(Keys::kAiAggressive, "ai/Aggressive.png");
+	insert(Keys::kAiDefensive, "ai/Defensive.png");
+	insert(Keys::kAiNone, "ai/None.png");
+	insert(Keys::kAiNormal, "ai/Normal.png");
+	insert(Keys::kAiRandom, "ai/Random.png");
 
 	// editor
 	insert(Keys::kEditorRedo, "wui/editor/editor_redo.png");
@@ -142,6 +161,12 @@ void ImageCatalog::init()  {
 	insert(Keys::kStatsPoints, "wui/stats/genstats_points.png");
 	insert(Keys::kStatsProductivity, "wui/stats/genstats_productivity.png");
 	insert(Keys::kStatsTrees, "wui/stats/genstats_trees.png");
+	insert(Keys::kStatsTabWaresConsumption, "wui/stats/menu_tab_wares_consumption.png");
+	insert(Keys::kStatsTabWaresProduction, "wui/stats/menu_tab_wares_production.png");
+	insert(Keys::kStatsTabWaresEconomyHealth, "wui/stats/menu_tab_wares_econ_health.png");
+	insert(Keys::kStatsTabWaresStock, "wui/stats/menu_tab_wares_stock.png");
+	insert(Keys::kStatsTabWarehouseWares, "wui/stats/menu_tab_wares_warehouse.png");
+	insert(Keys::kStatsTabWarehouseWorkers, "wui/stats/menu_tab_workers_warehouse.png");
 
 	// minimap
 	insert(Keys::kMinimapBuildings, "wui/minimap/button_bldns.png");
@@ -205,6 +230,59 @@ void ImageCatalog::init()  {
 	insert(Keys::kBuildingStockPolicyDontStock, "wui/buildings/stock_policy_dontstock.png");
 	insert(Keys::kBuildingStockPolicyPrefer, "wui/buildings/stock_policy_prefer.png");
 	insert(Keys::kBuildingStockPolicyRemove, "wui/buildings/stock_policy_remove.png");
+	insert(Keys::kBuildingTabWares, "wui/buildings/menu_tab_wares.png");
+	insert(Keys::kBuildingTabWorkers, "wui/buildings/menu_list_workers.png");
+	insert(Keys::kBuildingTabMilitary, "wui/buildings/menu_tab_military.png");
+	insert(Keys::kBuildingTabDockWares, "wui/buildings/menu_tab_wares_dock.png");
+	insert(Keys::kBuildingTabDockWorkers, "wui/buildings/menu_tab_workers_dock.png");
+	insert(Keys::kBuildingTabWarehouseWares, "wui/buildings/menu_tab_wares.png");
+	insert(Keys::kBuildingTabWarehouseWorkers, "wui/buildings/menu_tab_workers.png");
+	insert(Keys::kBuildingSoldierCapacityDecrease, "wui/buildings/menu_down_train.png");
+	insert(Keys::kBuildingSoldierCapacityIncrease, "wui/buildings/menu_up_train.png");
+
+	// fieldaction
+	insert(Keys::kFieldTabBuildRoad, "wui/fieldaction/menu_tab_buildroad.png");
+	insert(Keys::kFieldTabWatch, "wui/fieldaction/menu_tab_watch.png");
+	insert(Keys::kFieldTabBuildSmall, "wui/fieldaction/menu_tab_buildsmall.png");
+	insert(Keys::kFieldTabBuildMedium, "wui/fieldaction/menu_tab_buildmedium.png");
+	insert(Keys::kFieldTabBuildBig, "wui/fieldaction/menu_tab_buildbig.png");
+	insert(Keys::kFieldTabBuildPort, "wui/fieldaction/menu_tab_buildport.png");
+	insert(Keys::kFieldTabBuildMine, "wui/fieldaction/menu_tab_buildmine.png");
+	insert(Keys::kFieldRoadBuild, "wui/fieldaction/menu_build_way.png");
+	insert(Keys::kFieldRoadDestroy, "wui/fieldaction/menu_rem_way.png");
+	insert(Keys::kFieldFlagBuild, "wui/fieldaction/menu_build_flag.png");
+	insert(Keys::kFieldFlagDestroy, "wui/fieldaction/menu_rip_flag.png");
+	insert(Keys::kFieldWatch, "wui/fieldaction/menu_watch_field.png");
+	insert(Keys::kFieldCensus, "wui/fieldaction/menu_show_census.png");
+	insert(Keys::kFieldStatistics, "wui/fieldaction/menu_show_statistics.png");
+	insert(Keys::kFieldDebug, "wui/fieldaction/menu_debug.png");
+	insert(Keys::kFieldGeologist, "wui/fieldaction/menu_geologist.png");
+	insert(Keys::kFieldAttack, "wui/fieldaction/menu_tab_attack.png");
+
+	// messages
+	insert(Keys::kMessageArchived, "wui/messages/message_archived.png");
+	insert(Keys::kMessageNew, "wui/messages/message_new.png");
+	insert(Keys::kMessageRead, "wui/messages/message_read.png");
+	insert(Keys::kMessageActionRestore, "wui/messages/message_restore.png");
+	insert(Keys::kMessageActionArchive, "wui/messages/message_archive.png");
+
+	// menus
+	insert(Keys::kMenuBuildhelp, "wui/menus/menu_toggle_buildhelp.png");
+	insert(Keys::kMenuChat, "wui/menus/menu_chat.png");
+	insert(Keys::kMenuGoto, "wui/menus/menu_goto.png");
+	insert(Keys::kMenuMessagesNew, "wui/menus/menu_toggle_newmessage_menu.png");
+	insert(Keys::kMenuMessagesOld, "wui/menus/menu_toggle_oldmessage_menu.png");
+	insert(Keys::kMenuMinimap, "wui/menus/menu_toggle_minimap.png");
+	insert(Keys::kMenuObjectives, "wui/menus/menu_objectives.png");
+	insert(Keys::kMenuOptions, "wui/menus/menu_options_menu.png");
+	insert(Keys::kMenuOptionsExit, "wui/menus/menu_exit_game.png");
+	insert(Keys::kMenuOptionsSave, "wui/menus/menu_save_game.png");
+	insert(Keys::kMenuStatistics, "wui/menus/menu_toggle_menu.png");
+	insert(Keys::kMenuStatsBuilding, "wui/menus/menu_building_stats.png");
+	insert(Keys::kMenuStatsGeneral, "wui/menus/menu_general_stats.png");
+	insert(Keys::kMenuStatsStock, "wui/menus/menu_stock.png");
+	insert(Keys::kMenuStatsWare, "wui/menus/menu_ware_stats.png");
+	insert(Keys::kMenuWatch, "wui/menus/menu_watch_follow.png");
 
 	// players
 	insert(Keys::kPlayerStartingPosSmall1, "players/fsel_editor_set_player_01_pos.png");

@@ -38,6 +38,9 @@
  *
  */
 struct FullscreenMenuCampaignSelect : public FullscreenMenuLoadMapOrGame {
+
+	static constexpr int kMaxDifficulty = 4;
+
 	FullscreenMenuCampaignSelect();
 
 	int32_t get_campaign();

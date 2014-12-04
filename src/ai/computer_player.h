@@ -24,6 +24,7 @@
 #include <vector>
 
 #include "base/macros.h"
+#include "graphic/image_catalog.h"
 #include "logic/widelands.h"
 
 namespace Widelands {
@@ -52,6 +53,7 @@ struct ComputerPlayer {
 	 */
 	struct Implementation {
 		std::string name;
+		ImageCatalog::Keys image_key;
 		virtual ~Implementation() {}
 		virtual ComputerPlayer * instantiate
 			(Widelands::Game &, Widelands::PlayerNumber) const = 0;

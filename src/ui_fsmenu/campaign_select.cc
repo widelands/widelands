@@ -133,11 +133,11 @@ int32_t FullscreenMenuCampaignSelect::get_campaign()
 }
 
 /// Pictorial descriptions of difficulty levels.
-static char const * const difficulty_picture_filenames[] = {
-	"data/pics/novalue.png",
-	"data/pics/easy.png",
-	"data/pics/challenging.png",
-	"data/pics/hard.png"
+static const std::vector<ImageCatalog::Keys> difficulty_picture_keys = {
+	ImageCatalog::Keys::kNoValue,
+	ImageCatalog::Keys::kFullscreenDifficulty2,
+	ImageCatalog::Keys::kFullscreenDifficulty3,
+	ImageCatalog::Keys::kFullscreenDifficulty4
 };
 
 
@@ -221,14 +221,7 @@ void FullscreenMenuCampaignSelect::fill_table()
 		if (c.get_bool(csection.c_str())) {
 
 			uint32_t difficulty = s.get_int(cdifficulty.c_str());
-			if
-				(sizeof (difficulty_picture_filenames)
-				 /
-				 sizeof(*difficulty_picture_filenames)
-				 <=
-				 difficulty) {
-				difficulty = 0;
-			}
+			difficulty < difficulty_picture_keys.size() ? difficulty : 0;
 
 			CampaignListData campaign_data;
 
@@ -241,7 +234,7 @@ void FullscreenMenuCampaignSelect::fill_table()
 			m_campaigns_data.push_back(campaign_data);
 
 			UI::Table<uintptr_t>::EntryRecord& tableEntry = m_table.add(i);
-			tableEntry.set_picture(0, g_gr->images().get(difficulty_picture_filenames[difficulty]));
+			tableEntry.set_picture(0, g_gr->cataloged_image(difficulty_picture_keys.at(difficulty)));
 			tableEntry.set_string(1, campaign_data.tribename);
 			tableEntry.set_string(2, campaign_data.name);
 		}

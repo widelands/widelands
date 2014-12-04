@@ -77,7 +77,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase & e) :
 
 	m_toggle_main_menu
 	(TOOLBAR_BUTTON_COMMON_PARAMETERS("menu"),
-	 g_gr->images().get("data/pics/menu_toggle_menu.png"),
+	 g_gr->cataloged_image(ImageCatalog::Keys::kMenuOptions),
 	 _("Menu")),
 	m_toggle_tool_menu
 	(TOOLBAR_BUTTON_COMMON_PARAMETERS("tools"),
@@ -89,11 +89,11 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase & e) :
 	 _("Tool Size")),
 	m_toggle_minimap
 	(TOOLBAR_BUTTON_COMMON_PARAMETERS("minimap"),
-	 g_gr->images().get("data/pics/menu_toggle_minimap.png"),
+	 g_gr->cataloged_image(ImageCatalog::Keys::kMenuMinimap),
 	 _("Minimap")),
 	m_toggle_buildhelp
 	(TOOLBAR_BUTTON_COMMON_PARAMETERS("buildhelp"),
-	 g_gr->images().get("data/pics/menu_toggle_buildhelp.png"),
+	 g_gr->cataloged_image(ImageCatalog::Keys::kMenuBuildhelp),
 	 _("Show Building Spaces (on/off)")),
 	m_toggle_player_menu
 	(TOOLBAR_BUTTON_COMMON_PARAMETERS("players"),
