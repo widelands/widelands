@@ -33,7 +33,7 @@ class FullscreenMenuEditor : public FullscreenMenuMainMenu {
 public:
 	FullscreenMenuEditor();
 
-	enum class MenuTarget { kBack = UI::Panel::dying_code, kNewMap, kLoadMap };
+	enum class MenuTarget {kBack = UI::Panel::dying_code, kNewMap, kLoadMap};
 
 private:
 	UI::Textarea title;

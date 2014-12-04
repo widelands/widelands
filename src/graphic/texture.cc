@@ -80,8 +80,8 @@ Texture::Texture(int w, int h)
 		return;
 	}
 	glTexImage2D
-        (GL_TEXTURE_2D, 0, static_cast<GLint>(GL_RGBA), m_w, m_h, 0, GL_RGBA,
-            GL_UNSIGNED_BYTE, nullptr);
+		(GL_TEXTURE_2D, 0, static_cast<GLint>(GL_RGBA), m_w, m_h, 0, GL_RGBA,
+			GL_UNSIGNED_BYTE, nullptr);
 }
 
 Texture::Texture(SDL_Surface * surface, bool intensity)
@@ -171,8 +171,8 @@ void Texture::init(uint16_t w, uint16_t h)
 	// set texture filter to use linear filtering. This looks nicer for resized
 	// texture. Most textures and images are not resized so the filtering
 	// makes no difference
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, static_cast<GLint>(GL_LINEAR));
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, static_cast<GLint>(GL_LINEAR));
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, static_cast<GLint>(GL_LINEAR));
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, static_cast<GLint>(GL_LINEAR));
 }
 
 void Texture::lock(LockMode mode) {

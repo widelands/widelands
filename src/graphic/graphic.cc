@@ -97,7 +97,7 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool fullscreen)
 	// See graphic/gl/system_headers.h for an explanation of the
 	// next line.
 #ifdef USE_GLBINDING
-    Binding::initialize();
+	Binding::initialize();
 #else
 	glewExperimental = GL_TRUE;
 	GLenum err = glewInit();
