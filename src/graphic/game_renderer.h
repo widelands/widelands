@@ -24,7 +24,6 @@
 
 #include "base/macros.h"
 #include "base/point.h"
-#include "graphic/gl/utils.h"
 
 namespace Widelands {
 	class Player;

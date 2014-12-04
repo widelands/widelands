@@ -45,11 +45,28 @@ wl_library(graphic_sdl_utils
   USES_SDL2
 )
 
+wl_library(graphic_gl_utils
+  SRCS
+    gl/system_headers.h
+    gl/utils.cc
+    gl/utils.h
+  DEPENDS
+    base_exceptions
+    base_log
+    base_macros
+)
+
 wl_library(graphic_surface
   SRCS
     blend_mode.h
-    gl/utils.cc
-    gl/utils.h
+    gl/blit_program.cc
+    gl/blit_program.h
+    gl/draw_line_program.cc
+    gl/draw_line_program.h
+    gl/draw_rect_program.cc
+    gl/draw_rect_program.h
+    gl/fill_rect_program.cc
+    gl/fill_rect_program.h
     screen.cc
     screen.h
     surface.cc
@@ -67,6 +84,7 @@ wl_library(graphic_surface
     base_macros
     graphic
     graphic_color
+    graphic_gl_utils
     graphic_sdl_utils
 )
 
@@ -97,6 +115,7 @@ wl_library(graphic_game_renderer
     base_log
     base_macros
     graphic
+    graphic_gl_utils
     graphic_image_io
     graphic_surface
     io_filesystem
@@ -134,15 +153,6 @@ wl_library(graphic
     font_handler.h
     font_handler1.cc
     font_handler1.h
-    gl/blit_program.cc
-    gl/blit_program.h
-    gl/draw_line_program.cc
-    gl/draw_line_program.h
-    gl/draw_rect_program.cc
-    gl/draw_rect_program.h
-    gl/fill_rect_program.cc
-    gl/fill_rect_program.h
-    gl/system_headers.h
     graphic.cc
     graphic.h
     image_transformations.cc
@@ -168,6 +178,7 @@ wl_library(graphic
     base_macros
     build_info
     graphic_color
+    graphic_gl_utils
     graphic_image
     graphic_image_io
     graphic_surface
