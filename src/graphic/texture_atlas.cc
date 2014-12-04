@@ -19,6 +19,7 @@
 
 #include "graphic/texture_atlas.h"
 
+#include <algorithm>
 #include <cassert>
 #include <memory>
 
