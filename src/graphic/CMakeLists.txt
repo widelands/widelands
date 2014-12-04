@@ -1,5 +1,8 @@
 add_subdirectory(text)
 
+# TODO(sirver): Separate this directory into a base directory and one
+# that is Widelands aware (can include logic stuff).
+
 wl_library(graphic_color
   SRCS
     color.h
@@ -77,14 +80,52 @@ wl_library(graphic_texture_atlas
     graphic_surface
 )
 
+wl_library(graphic_game_renderer
+  SRCS
+    game_renderer.cc
+    game_renderer.h
+    gl/dither_program.cc
+    gl/dither_program.h
+    gl/fields_to_draw.h
+    gl/road_program.cc
+    gl/road_program.h
+    gl/terrain_program.cc
+    gl/terrain_program.h
+  DEPENDS
+    base_exceptions
+    base_geometry
+    base_log
+    base_macros
+    graphic
+    graphic_image_io
+    graphic_surface
+    io_filesystem
+    logic
+    wui_mapview_pixelfunctions
+    wui_overlay_manager
+)
+
+wl_library(graphic_minimap_renderer
+  SRCS
+    minimap_renderer.cc
+    minimap_renderer.h
+  DEPENDS
+    base_geometry
+    base_macros
+    economy
+    graphic
+    graphic_image
+    graphic_surface
+    logic
+    wui_mapview_pixelfunctions
+)
+
 wl_library(graphic
   SRCS
     align.cc
     align.h
     animation.cc
     animation.h
-    colormap.cc
-    colormap.h
     default_resolution.h
     diranimations.h
     font.cc
@@ -93,34 +134,21 @@ wl_library(graphic
     font_handler.h
     font_handler1.cc
     font_handler1.h
-    game_renderer.cc
-    game_renderer.h
     gl/blit_program.cc
     gl/blit_program.h
-    gl/dither_program.cc
-    gl/dither_program.h
     gl/draw_line_program.cc
     gl/draw_line_program.h
     gl/draw_rect_program.cc
     gl/draw_rect_program.h
-    gl/fields_to_draw.h
     gl/fill_rect_program.cc
     gl/fill_rect_program.h
-    gl/game_renderer.cc
-    gl/game_renderer.h
-    gl/road_program.cc
-    gl/road_program.h
     gl/system_headers.h
-    gl/terrain_program.cc
-    gl/terrain_program.h
     graphic.cc
     graphic.h
     image_transformations.cc
     image_transformations.h
     in_memory_image.cc
     in_memory_image.h
-    minimap_renderer.cc
-    minimap_renderer.h
     rendertarget.cc
     rendertarget.h
     richtext.cc
@@ -139,7 +167,6 @@ wl_library(graphic
     base_log
     base_macros
     build_info
-    economy
     graphic_color
     graphic_image
     graphic_image_io
@@ -154,6 +181,6 @@ wl_library(graphic
     profile
     scripting
     sound
-    wui
+    wui_overlay_manager
     wui_text_layout
 )
