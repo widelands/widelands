@@ -17,27 +17,33 @@
  *
  */
 
-#ifndef WL_UI_FSMENU_INTRO_H
-#define WL_UI_FSMENU_INTRO_H
+#ifndef WL_UI_FSMENU_MAIN_MENU_H
+#define WL_UI_FSMENU_MAIN_MENU_H
 
 #include "ui_fsmenu/base.h"
-#include "ui_basic/textarea.h"
 
 /**
- * Fullscreen Menu with Splash Screen (at the moment).
- * This simply waits modal for a click and in the meantime
- * shows the splash screen
+ * This sets the values for alignment and size and other common properties
+ * for main menus that contain only buttons.
  */
-class FullscreenMenuIntro : public FullscreenMenuBase {
+class FullscreenMenuMainMenu : public FullscreenMenuBase {
 public:
-	FullscreenMenuIntro();
+
+	/// Calls FullscreenMenuMainMenu(char const * background_image)
+	/// with a default background image
+	FullscreenMenuMainMenu();
+
+	/// Sets the background image and assigns values
+	/// for alignment and size, depending on screen size
+	FullscreenMenuMainMenu(char const * background_image);
 
 protected:
-	bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y) override;
-	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
-	bool handle_key(bool down, SDL_Keysym) override;
-private:
-	UI::Textarea m_message;
+	const uint32_t m_box_x, m_box_y;
+	const uint32_t m_butw, m_buth;
+	const uint32_t m_title_y;
+	const uint32_t m_padding;
+
+	const std::string m_button_background;
 };
 
-#endif  // end of include guard: WL_UI_FSMENU_INTRO_H
+#endif  // end of include guard: WL_UI_FSMENU_MAIN_MENU_H

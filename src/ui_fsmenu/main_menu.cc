@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,27 +17,21 @@
  *
  */
 
-#ifndef WL_UI_FSMENU_INTRO_H
-#define WL_UI_FSMENU_INTRO_H
+#include "ui_fsmenu/main_menu.h"
 
-#include "ui_fsmenu/base.h"
-#include "ui_basic/textarea.h"
+FullscreenMenuMainMenu::FullscreenMenuMainMenu():
+	FullscreenMenuMainMenu("ui_fsmenu.jpg")
+	{}
 
-/**
- * Fullscreen Menu with Splash Screen (at the moment).
- * This simply waits modal for a click and in the meantime
- * shows the splash screen
- */
-class FullscreenMenuIntro : public FullscreenMenuBase {
-public:
-	FullscreenMenuIntro();
+FullscreenMenuMainMenu::FullscreenMenuMainMenu(const char* background_image):
+	FullscreenMenuBase(background_image),
 
-protected:
-	bool handle_mousepress  (uint8_t btn, int32_t x, int32_t y) override;
-	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
-	bool handle_key(bool down, SDL_Keysym) override;
-private:
-	UI::Textarea m_message;
-};
-
-#endif  // end of include guard: WL_UI_FSMENU_INTRO_H
+	// Values for alignment and size
+	m_box_x(get_w() * 13 / 40),
+	m_box_y(get_h() * 6 / 25),
+	m_butw(get_w() * 7 / 20),
+	m_buth(get_h() * 9 / 200),
+	m_title_y(get_h() * 3 / 40),
+	m_padding(m_buth / 3),
+	m_button_background("pics/but3.png")
+{}

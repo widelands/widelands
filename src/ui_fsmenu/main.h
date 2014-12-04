@@ -20,45 +20,47 @@
 #ifndef WL_UI_FSMENU_MAIN_H
 #define WL_UI_FSMENU_MAIN_H
 
-#include "ui_fsmenu/base.h"
+#include "ui_fsmenu/main_menu.h"
 #include "ui_basic/button.h"
+#include "ui_basic/box.h"
 #include "ui_basic/textarea.h"
 
 /**
  * This runs the main menu. There, you can select
  * between different playmodes, exit and so on.
 */
-struct FullscreenMenuMain : public FullscreenMenuBase {
-	FullscreenMenuMain();
-	enum {
-		mm_summary,
-		mm_playtutorial,
-		mm_singleplayer,
-		mm_multiplayer,
-		mm_replay,
-		mm_editor,
-		mm_options,
-		mm_readme,
-		mm_license,
-		mm_exit
+class FullscreenMenuMain : public FullscreenMenuMainMenu {
+public:
+	enum class MenuTarget: int32_t {
+		kTutorial,
+		kSinglePlayer,
+		kMultiplayer,
+		kReplay,
+		kEditor,
+		kOptions,
+		kReadme,
+		kLicense,
+		kAuthors,
+		kExit
 	};
+
+	FullscreenMenuMain();
+
 private:
-	uint32_t                                    m_butx;
-	uint32_t                                    m_butw;
-	uint32_t                                    m_buth;
-	std::string                                 wlcr;
-	UI::Button                     playtutorial;
-	UI::Button                     singleplayer;
-	UI::Button                     multiplayer;
-	UI::Button                     replay;
-	UI::Button                     editor;
-	UI::Button                     options;
-	UI::Button                     readme;
-	UI::Button                     license;
-	UI::Button                     exit;
-	UI::Textarea                                version;
-	UI::Textarea                                copyright;
-	UI::Textarea                                gpl;
+	UI::Box      vbox;
+	UI::Button   playtutorial;
+	UI::Button   singleplayer;
+	UI::Button   multiplayer;
+	UI::Button   replay;
+	UI::Button   editor;
+	UI::Button   options;
+	UI::Button   readme;
+	UI::Button   license;
+	UI::Button   authors;
+	UI::Button   exit;
+	UI::Textarea version;
+	UI::Textarea copyright;
+	UI::Textarea gpl;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_MAIN_H
