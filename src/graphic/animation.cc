@@ -323,7 +323,7 @@ void NonPackedAnimation::blit
 	assert(target);
 
 	const Image& frame = get_frame(time, clr);
-	target->blit(dst, frame.texture(), srcrc);
+	target->blit(Rect(dst.x, dst.y, srcrc.w, srcrc.h), frame.texture(), srcrc);
 }
 
 const Image& NonPackedAnimation::get_frame(uint32_t time, const RGBColor* playercolor) const {

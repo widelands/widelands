@@ -22,7 +22,6 @@
 #include <string>
 
 #include <SDL.h>
-#include <SDL2_rotozoom.h>
 #include <boost/format.hpp>
 
 #include "base/macros.h"
@@ -74,79 +73,6 @@ SDL_Surface* extract_sdl_surface(Texture & texture, Rect srcrect)
 	texture.unlock(Surface::Unlock_NoChange);
 
 	return dest;
-}
-
-/**
- * Produces a resized version of the specified image
- */
-Texture* resize_surface(Texture* src, uint32_t w, uint32_t h) {
-	assert(w != src->width() || h != src->height());
-
-	// First step: compute scaling factors
-	Rect srcrect = Rect(Point(0, 0), src->width(), src->height());
-
-	// Second step: get source material
-	SDL_Surface * srcsdl = extract_sdl_surface(*src, srcrect);
-	bool free_source = true;
-
-	// If we actually shrink a texture, ballpark the zoom so that the shrinking
-	// effect is weakened.
-	int factor = 1;
-	while ((static_cast<double>(w) * factor / srcsdl->w) < 1. ||
-	       (static_cast<double>(h) * factor / srcsdl->h) < 1.) {
-		++factor;
-	}
-	if (factor > 2) {
-		SDL_Surface* temp = shrinkSurface(srcsdl, factor - 1, factor - 1);
-		if (free_source) {
-			SDL_FreeSurface(srcsdl);
-		}
-		srcsdl = temp;
-		free_source = true;
-	}
-
-	// Third step: perform the zoom and placement
-	SDL_Surface* zoomed = zoomSurface(srcsdl, double(w) / srcsdl->w, double(h) / srcsdl->h, 1);
-
-	if (free_source)
-		SDL_FreeSurface(srcsdl);
-
-	if (uint32_t(zoomed->w) != w || uint32_t(zoomed->h) != h) {
-		const SDL_PixelFormat & fmt = *zoomed->format;
-		SDL_Surface * placed = SDL_CreateRGBSurface
-			(SDL_SWSURFACE, w, h,
-			 fmt.BitsPerPixel, fmt.Rmask, fmt.Gmask, fmt.Bmask, fmt.Amask);
-		SDL_Rect srcrc =
-			{0, 0,
-			 static_cast<uint16_t>(zoomed->w), static_cast<uint16_t>(zoomed->h)
-			};  // For some reason SDL_Surface and SDL_Rect express w,h in different types
-		SDL_Rect dstrc = {0, 0, 0, 0};
-		SDL_SetSurfaceAlphaMod(zoomed,  SDL_ALPHA_TRANSPARENT);
-		SDL_SetSurfaceBlendMode(zoomed, SDL_BLENDMODE_NONE);
-		SDL_BlitSurface(zoomed, &srcrc, placed, &dstrc); // Updates dstrc
-
-		uint32_t fillcolor = SDL_MapRGBA(zoomed->format, 0, 0, 0, 255);
-
-		if (zoomed->w < placed->w) {
-			dstrc.x = zoomed->w;
-			dstrc.y = 0;
-			dstrc.w = placed->w - zoomed->w;
-			dstrc.h = zoomed->h;
-			SDL_FillRect(placed, &dstrc, fillcolor);
-		}
-		if (zoomed->h < placed->h) {
-			dstrc.x = 0;
-			dstrc.y = zoomed->h;
-			dstrc.w = placed->w;
-			dstrc.h = placed->h - zoomed->h;
-			SDL_FillRect(placed, &dstrc, fillcolor);
-		}
-
-		SDL_FreeSurface(zoomed);
-		zoomed = placed;
-	}
-
-	return new Texture(zoomed);
 }
 
 /**
@@ -320,31 +246,6 @@ protected:
 	TextureCache* const texture_cache_;  // not owned
 };
 
-// A resized copy of an Image.
-class ResizedImage : public TransformedImage {
-public:
-	ResizedImage
-		(const string& ghash, const Image& original,
-		 TextureCache* texture_cache, uint16_t w, uint16_t h)
-		: TransformedImage(ghash, original, texture_cache), w_(w), h_(h) {
-			assert(w != original.width() || h != original.height());
-	}
-	virtual ~ResizedImage() {}
-
-	// Overwrites TransformedImage.
-	uint16_t width() const override {return w_;}
-	uint16_t height() const override {return h_;}
-
-	// Implements TransformedImage.
-	Texture* recalculate_texture() const override {
-		Texture* rv = resize_surface(original_.texture(), w_, h_);
-		return rv;
-	}
-
-private:
-	uint16_t w_, h_;
-};
-
 // A grayed out copy of an Image.
 class GrayedOutImage : public TransformedImage {
 public:
@@ -417,17 +318,6 @@ void initialize() {
 			luminance_table_g[i] = g;
 			luminance_table_b[i] = b;
 		}
-}
-
-const Image* resize(const Image* original, uint16_t w, uint16_t h) {
-	if (original->width() == w && original->height() == h)
-		return original;
-
-	const string new_hash = (boost::format("%s:%i:%i") % original->hash() % w % h).str();
-	if (g_gr->images().has(new_hash))
-		return g_gr->images().get(new_hash);
-	return
-		g_gr->images().insert(new ResizedImage(new_hash, *original, &g_gr->textures(), w, h));
 }
 
 const Image* gray_out(const Image* original) {

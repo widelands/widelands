@@ -54,7 +54,7 @@ public:
 private:
 	UI::TextStyle textstyle_big_;
 	UI::TextStyle textstyle_small_;
-	const Image* background_;
+	std::string background_image_;
 };
 
 

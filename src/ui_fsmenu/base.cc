@@ -27,7 +27,6 @@
 #include "base/wexception.h"
 #include "graphic/font.h"
 #include "graphic/graphic.h"
-#include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
 #include "io/filesystem/filesystem.h"
 #include "profile/profile.h"
@@ -49,15 +48,12 @@ FullscreenMenuBase
  */
 FullscreenMenuBase::FullscreenMenuBase(char const* const bgpic)
    : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()) {
-	// Load background graphics
-	const std::string bgpicpath = (boost::format("pics/%s") % bgpic).str();
-	background_ = ImageTransformations::resize(g_gr->images().get(bgpicpath), get_w(), get_h());
-
 	textstyle_small_ = UI::TextStyle::ui_small();
 	textstyle_small_.font = UI::Font::get(ui_fn(), fs_small());
 
 	textstyle_big_ = UI::TextStyle::ui_big();
 	textstyle_big_.font = UI::Font::get(ui_fn(), fs_big());
+	background_image_ = (boost::format("pics/%s") % bgpic).str();
 }
 
 FullscreenMenuBase::~FullscreenMenuBase()
@@ -69,7 +65,8 @@ FullscreenMenuBase::~FullscreenMenuBase()
  * Draw the background / splash screen
 */
 void FullscreenMenuBase::draw(RenderTarget & dst) {
-	dst.blit(Point(0, 0), background_);
+	const Image* bg = g_gr->images().get(background_image_);
+	dst.blitrect_scale(Rect(0, 0, get_w(), get_h()), bg, Rect(0, 0, bg->width(), bg->height()));
 }
 
 uint32_t FullscreenMenuBase::fs_small() {

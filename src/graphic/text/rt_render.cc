@@ -333,7 +333,10 @@ uint16_t TextNode::hotspot_y() {
 Texture* TextNode::render(TextureCache* texture_cache) {
 	const Texture& img = m_font.render(m_txt, m_s.font_color, m_s.font_style, texture_cache);
 	Texture* rv = new Texture(img.width(), img.height());
-	rv->blit(Point(0, 0), &img, Rect(0, 0, img.width(), img.height()), BlendMode::Copy);
+	rv->blit(Rect(0, 0, img.width(), img.height()),
+	         &img,
+	         Rect(0, 0, img.width(), img.height()),
+	         BlendMode::Copy);
 	return rv;
 }
 
@@ -361,7 +364,7 @@ Texture* FillingTextNode::render(TextureCache* texture_cache) {
 	Texture* rv = new Texture(m_w, m_h);
 	for (uint16_t curx = 0; curx < m_w; curx += t.width()) {
 		Rect srcrect(Point(0, 0), min<int>(t.width(), m_w - curx), m_h);
-		rv->blit(Point(curx, 0), &t, srcrect, BlendMode::Copy);
+		rv->blit(Rect(curx, 0, srcrect.w, srcrect.h), &t, srcrect, BlendMode::Copy);
 	}
 	return rv;
 }
@@ -423,13 +426,13 @@ public:
 
 		// Draw background image (tiling)
 		if (m_bg) {
-			Point dst;
+			Rect dst;
 			Rect srcrect(Point(0, 0), 1, 1);
 			for (uint16_t curx = 0; curx < m_w; curx += m_bg->width()) {
 				dst.x = curx;
 				dst.y = 0;
-				srcrect.w = min<int>(m_bg->width(), m_w - curx);
-				srcrect.h = m_h;
+				srcrect.w = dst.w = min<int>(m_bg->width(), m_w - curx);
+				srcrect.h = dst.h = m_h;
 				rv->blit(dst, m_bg->texture(), srcrect, BlendMode::Copy);
 			}
 		} else {
@@ -482,14 +485,15 @@ public:
 
 		// Draw background image (tiling)
 		if (m_bg_img) {
-			Point dst;
+			Rect dst;
 			Rect src(0, 0, 0, 0);
 
 			for (uint16_t cury = m_margin.top; cury < m_h + m_margin.top; cury += m_bg_img->height()) {
 				for (uint16_t curx = m_margin.left; curx < m_w + m_margin.left; curx += m_bg_img->width()) {
-					dst.x = curx; dst.y = cury;
-					src.w = min<int>(m_bg_img->width(), m_w + m_margin.left - curx);
-					src.h = min<int>(m_bg_img->height(), m_h + m_margin.top - cury);
+					dst.x = curx;
+					dst.y = cury;
+					src.w = dst.w = min<int>(m_bg_img->width(), m_w + m_margin.left - curx);
+					src.h = dst.h = min<int>(m_bg_img->height(), m_h + m_margin.top - cury);
 					rv->blit(dst, m_bg_img->texture(), src, BlendMode::Copy);
 				}
 			}
@@ -499,7 +503,10 @@ public:
 		for (RenderNode* n : m_nodes_to_render) {
 			Texture* node_texture = n->render(texture_cache);
 			if (node_texture) {
-				Point dst = Point(n->x() + m_margin.left, n->y() + m_margin.top);
+				Rect dst = Rect(n->x() + m_margin.left,
+				                n->y() + m_margin.top,
+				                node_texture->width(),
+				                node_texture->height());
 				Rect src = Rect(0, 0, node_texture->width(), node_texture->height());
 
 				rv->blit(dst, node_texture, src, set_alpha ? BlendMode::Copy : BlendMode::UseAlpha);
@@ -553,7 +560,10 @@ private:
 
 Texture* ImgRenderNode::render(TextureCache* /* texture_cache */) {
 	Texture* rv = new Texture(m_image.width(), m_image.height());
-	rv->blit(Point(0, 0), m_image.texture(), Rect(0, 0, m_image.width(), m_image.height()), BlendMode::Copy);
+	rv->blit(Rect(0, 0, m_image.width(), m_image.height()),
+	         m_image.texture(),
+	         Rect(0, 0, m_image.width(), m_image.height()),
+	         BlendMode::Copy);
 	return rv;
 }
 // End: Helper Stuff
