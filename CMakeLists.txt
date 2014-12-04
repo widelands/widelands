@@ -39,7 +39,6 @@ find_package(Boost 1.48
 
 find_package (PythonInterp REQUIRED)
 
-find_package(GLEW REQUIRED)
 find_package(Gettext REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(PNG REQUIRED)

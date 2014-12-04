@@ -96,6 +96,9 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool fullscreen)
 
 	// See graphic/gl/system_headers.h for an explanation of the
 	// next line.
+#ifdef USE_GLBINDING
+    Binding::initialize();
+#else
 	glewExperimental = GL_TRUE;
 	GLenum err = glewInit();
 	if (err != GLEW_OK) {
@@ -103,6 +106,7 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool fullscreen)
 			 err, glewGetErrorString(err));
 		throw wexception("glewInit returns %i: Broken OpenGL installation.", err);
 	}
+#endif
 
 	log("Graphics: OpenGL: Version \"%s\"\n",
 		 reinterpret_cast<const char*>(glGetString(GL_VERSION)));
