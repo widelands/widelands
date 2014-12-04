@@ -2383,6 +2383,7 @@ int LuaFlag::get_roads(lua_State * L) {
 		return 1;
 
 }
+
 /* RST
 	.. attribute:: building
 
@@ -2402,6 +2403,7 @@ int LuaFlag::get_building(lua_State * L) {
 	return 1;
 
 }
+
 /* RST
 	.. attribute:: has_warehouse
 
