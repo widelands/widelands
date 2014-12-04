@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-11-29 07:58+0000\n"
-"PO-Revision-Date: 2014-08-03 12:33+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"PO-Revision-Date: 2014-12-03 20:11+0000\n"
+"Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-11-30 04:42+0000\n"
-"X-Generator: Launchpad (build 17267)\n"
+"X-Launchpad-Export-Date: 2014-12-04 05:28+0000\n"
+"X-Generator: Launchpad (build 17274)\n"
 "Language: nb\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -285,7 +285,7 @@ msgstr ""
 #: ../../tribes/empire/colosseum/conf:36
 #: ../../tribes/empire/trainingcamp/conf:47
 msgid "sleeping"
-msgstr ""
+msgstr "sover"
 
 #: ../../tribes/empire/arena/conf:32
 #: ../../tribes/empire/colosseum/conf:38
@@ -446,15 +446,15 @@ msgstr "Lager rustninger til soldatene."
 
 #: ../../tribes/empire/armorsmithy/conf:32
 msgid "forging a helm"
-msgstr ""
+msgstr "smir en hjelm"
 
 #: ../../tribes/empire/armorsmithy/conf:34
 msgid "forging an armor"
-msgstr ""
+msgstr "smir en rustning"
 
 #: ../../tribes/empire/armorsmithy/conf:36
 msgid "forging a chain armor"
-msgstr ""
+msgstr "smir en ringbrynje"
 
 #: ../../tribes/empire/armorsmithy/conf:38
 msgid "forging a plate armor"
@@ -479,7 +479,7 @@ msgstr ""
 #: ../../tribes/empire/well/conf:22
 #: ../../tribes/empire/winery/conf:27
 msgid "working"
-msgstr ""
+msgstr "arbeider"
 
 #: ../../tribes/empire/armorsmithy/help.lua:13
 #: ../../tribes/empire/bakery/help.lua:13
@@ -604,7 +604,7 @@ msgstr "Produserer øl eller vin."
 
 #: ../../tribes/empire/brewery/conf:26
 msgid "brewing"
-msgstr ""
+msgstr "brygger"
 
 #: ../../tribes/empire/builder/conf:1
 msgid "Works at construction sites to raise new buildings."
