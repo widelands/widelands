@@ -24,7 +24,6 @@
 #include "base/macros.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
-#include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
 #include "logic/constructionsite.h"
 #include "logic/dismantlesite.h"

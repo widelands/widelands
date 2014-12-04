@@ -24,7 +24,6 @@
 #include "economy/request.h"
 #include "economy/wares_queue.h"
 #include "graphic/graphic.h"
-#include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
 #include "logic/player.h"
 #include "wui/interactive_gamebase.h"

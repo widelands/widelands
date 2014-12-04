@@ -37,9 +37,6 @@ void initialize();
 // safe to call the methods with the same arguments multiple times without
 // construction cost.
 
-// Returns a grayed out image of the original.
-const Image* gray_out(const Image* original);
-
 // Encodes the given Image into the corresponding image with a player color.
 // Takes the image and the player color mask and the new color the image should
 // be tainted in.

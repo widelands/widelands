@@ -34,7 +34,6 @@
 #include "game_io/game_preload_packet.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
-#include "graphic/image_transformations.h"
 #include "graphic/in_memory_image.h"
 #include "graphic/texture.h"
 #include "helper.h"

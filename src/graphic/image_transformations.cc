@@ -39,47 +39,6 @@ uint32_t luminance_table_r[0x100];
 uint32_t luminance_table_g[0x100];
 uint32_t luminance_table_b[0x100];
 
-/**
- * Create a grayed version of the given texture.
- */
-Texture* gray_out_texture(Texture* texture) {
-	assert(texture);
-
-	uint16_t w = texture->width();
-	uint16_t h = texture->height();
-	const SDL_PixelFormat & origfmt = texture->format();
-
-	Texture* dest = new Texture(w, h);
-	const SDL_PixelFormat & destfmt = dest->format();
-
-	texture->lock(Surface::Lock_Normal);
-	dest->lock(Surface::Lock_Discard);
-	for (uint32_t y = 0; y < h; ++y) {
-		for (uint32_t x = 0; x < w; ++x) {
-			RGBAColor color;
-
-			color.set(origfmt, texture->get_pixel(x, y));
-
-			//  Halve the opacity to give some difference for image that are
-			//  grayscale to begin with.
-			color.a >>= 1;
-
-			color.r = color.g = color.b =
-				(luminance_table_r[color.r] +
-				 luminance_table_g[color.g] +
-				 luminance_table_b[color.b] +
-				 8388608U) //  compensate for truncation:  .5 * 2^24
-				>> 24;
-
-			dest->set_pixel(x, y, color.map(destfmt));
-		}
-	}
-	texture->unlock(Surface::Unlock_NoChange);
-	dest->unlock(Surface::Unlock_Update);
-
-	return dest;
-}
-
 // Encodes the given Image into the corresponding image for player color.
 // Takes the neutral set of images and the player color mask.
 Texture* make_playerclr_texture(Texture& original_texture,
@@ -173,20 +132,6 @@ protected:
 	TextureCache* const texture_cache_;  // not owned
 };
 
-// A grayed out copy of an Image.
-class GrayedOutImage : public TransformedImage {
-public:
-	GrayedOutImage(const string& ghash, const Image& original, TextureCache* texture_cache) :
-		TransformedImage(ghash, original, texture_cache)
-	{}
-	virtual ~GrayedOutImage() {}
-
-	// Implements TransformedImage.
-	Texture* recalculate_texture() const override {
-		return gray_out_texture(original_.texture());
-	}
-};
-
 // A copy with applied player colors. Also needs a mask - ownership is not
 // taken.
 class PlayerColoredImage : public TransformedImage {
@@ -223,14 +168,6 @@ void initialize() {
 			luminance_table_g[i] = g;
 			luminance_table_b[i] = b;
 		}
-}
-
-const Image* gray_out(const Image* original) {
-	const string new_hash = original->hash() + ":greyed_out";
-	if (g_gr->images().has(new_hash))
-		return g_gr->images().get(new_hash);
-	return
-		g_gr->images().insert(new GrayedOutImage(new_hash, *original, &g_gr->textures()));
 }
 
 const Image* player_colored(const RGBColor& clr, const Image* original, const Image* mask) {
