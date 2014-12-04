@@ -29,6 +29,29 @@ wl_library(wui_chat_ui
     wui
 )
 
+wl_library(wui_overlay_manager
+  SRCS
+    overlay_manager.cc
+    overlay_manager.h
+  DEPENDS
+    base_geometry
+    graphic
+    logic
+    logic_widelands_geometry
+)
+
+wl_library(wui_mapview_pixelfunctions
+  SRCS
+    mapviewpixelconstants.h
+    mapviewpixelfunctions.cc
+    mapviewpixelfunctions.h
+    vector.h
+  DEPENDS
+    base_geometry
+    logic
+    logic_widelands_geometry
+)
+
 wl_library(wui
   SRCS
     actionconfirm.cc
@@ -83,16 +106,11 @@ wl_library(wui
     logmessage.h
     mapview.cc
     mapview.h
-    mapviewpixelconstants.h
-    mapviewpixelfunctions.cc
-    mapviewpixelfunctions.h
     militarysitewindow.cc
     minimap.cc
     minimap.h
     multiplayersetupgroup.cc
     multiplayersetupgroup.h
-    overlay_manager.cc
-    overlay_manager.h
     playerdescrgroup.cc
     playerdescrgroup.h
     plot_area.cc
@@ -117,7 +135,6 @@ wl_library(wui
     transport_ui.cc
     unique_window_handler.cc
     unique_window_handler.h
-    vector.h
     ware_statistics_menu.cc
     ware_statistics_menu.h
     warehousewindow.cc
@@ -140,7 +157,9 @@ wl_library(wui
     game_io
     graphic
     graphic_color
+    graphic_game_renderer
     graphic_image
+    graphic_minimap_renderer
     graphic_surface
     io_fileread
     io_filesystem
@@ -157,5 +176,7 @@ wl_library(wui
     ui_fsmenu
     widelands_ball_of_mud
     wui_chat_ui
+    wui_mapview_pixelfunctions
+    wui_overlay_manager
     wui_text_layout
 )
