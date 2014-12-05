@@ -258,33 +258,32 @@ FieldActionWindow::FieldActionWindow
 	m_map(&ib->egbase().map()),
 	m_overlay_manager(*m_map->get_overlay_manager()),
 	m_node(ib->get_sel_pos().node, &(*m_map)[ib->get_sel_pos().node]),
-	m_tabpanel(this, 0, 0, g_gr->cataloged_image(ImageCatalog::Keys::kButton1)),
+	m_tabpanel(this, 0, 0, ImageCatalog::Keys::kButton1),
 	m_fastclick(true),
 	m_best_tab(0),
 	m_workarea_preview_job_id(0),
-	m_attack_box(nullptr)
-{
+	m_attack_box(nullptr) {
 	ib->set_sel_freeze(true);
-
-
 	set_center_panel(&m_tabpanel);
 }
 
 
 FieldActionWindow::~FieldActionWindow()
 {
-	if (m_workarea_preview_job_id)
+	if (m_workarea_preview_job_id) {
 		m_overlay_manager.remove_overlay(m_workarea_preview_job_id);
+	}
 	ibase().set_sel_freeze(false);
 	delete m_attack_box;
 }
 
 
 void FieldActionWindow::think() {
-	if
-		(m_plr && m_plr->vision(m_node.field - &ibase().egbase().map()[0]) <= 1
-		 && !m_plr->see_all())
+	if(m_plr
+			&& m_plr->vision(m_node.field - &ibase().egbase().map()[0]) <= 1
+			&& !m_plr->see_all()) {
 		die();
+	}
 }
 
 

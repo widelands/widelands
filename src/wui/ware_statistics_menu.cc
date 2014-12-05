@@ -156,7 +156,7 @@ m_parent(&parent)
 
 	UI::TabPanel * tabs =
 		 new UI::TabPanel
-			 (box, spacing, 0, g_gr->cataloged_image(ImageCatalog::Keys::kButton1));
+			 (box, spacing, 0, ImageCatalog::Keys::kButton1);
 
 
 	m_plot_production =

@@ -152,9 +152,7 @@ MapObjectDebugWindow::MapObjectDebugWindow
 	UI::Window        (&parent, "map_object_debug", 0, 0, 100, 100, ""),
 	m_log_general_info(true),
 	m_object          (&obj),
-	m_tabs
-		(this, 0, 0,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1))
+	m_tabs            (this, 0, 0, ImageCatalog::Keys::kButton1)
 {
 	m_serial = obj.serial();
 	set_title(std::to_string(m_serial));

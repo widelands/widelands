@@ -19,6 +19,7 @@
 
 #include "ui_basic/tabpanel.h"
 
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "ui_basic/mouse_constants.h"
 
@@ -78,22 +79,22 @@ void Tab::activate() {
 TabPanel::TabPanel
 	(Panel * const parent,
 	 int32_t const x, int32_t const y,
-	 const Image* background)
+	 const ImageCatalog::Keys background_image_key)
 	:
 	Panel            (parent, x, y, 0, 0),
 	m_active         (0),
 	m_highlight      (-1),
-	m_pic_background (background)
+	background_image_key_(background_image_key)
 {}
 TabPanel::TabPanel
 	(Panel * const parent,
 	 int32_t const x, int32_t const y, int32_t const w, int32_t const h,
-	 const Image* background)
+	 const ImageCatalog::Keys background_image_key)
 	:
 	Panel            (parent, x, y, w, h),
 	m_active         (0),
 	m_highlight      (-1),
-	m_pic_background (background)
+	background_image_key_(background_image_key)
 {}
 
 /**
@@ -209,16 +210,17 @@ void TabPanel::draw(RenderTarget & dst)
 	static_assert(2 < kTabPanelButtonSize, "assert(2 < kTabPanelButtonSize) failed.");
 	static_assert(4 < kTabPanelButtonSize, "assert(4 < kTabPanelButtonSize) failed.");
 
-	if (m_pic_background) {
+	if (background_image_key_ != ImageCatalog::Keys::kUnknownImage) {
+		const Image* background_image = g_gr->cataloged_image(background_image_key_);
 		dst.tile
 			(Rect(Point(0, 0), m_tabs.size() * kTabPanelButtonSize, kTabPanelButtonSize - 2),
-			 m_pic_background, Point(get_x(), get_y()));
+			 background_image, Point(get_x(), get_y()));
 		assert(kTabPanelButtonSize - 2 <= get_h());
 		dst.tile
 			(Rect
 			 (Point(0, kTabPanelButtonSize - 2),
 			  get_w(), get_h() - kTabPanelButtonSize + 2),
-			 m_pic_background,
+			 background_image,
 			 Point(get_x(), get_y() + kTabPanelButtonSize - 2));
 	}
 

@@ -46,7 +46,7 @@ struct EconomyOptionsWindow : public UI::UniqueWindow {
 		UI::UniqueWindow
 			(&parent, "economy_options", &economy.optionswindow_registry(), 0, 0,
 			 _("Economy options")),
-		m_tabpanel(this, 0, 0, g_gr->cataloged_image(ImageCatalog::Keys::kButton1))
+		m_tabpanel(this, 0, 0, ImageCatalog::Keys::kButton1)
 	{
 		set_center_panel(&m_tabpanel);
 
