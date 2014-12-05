@@ -335,7 +335,7 @@ void RichText::parse(const std::string & rtext)
 		text.images_height = 0;
 		text.images_width = 0;
 
-		for(const std::string& image_filename : cur_block_images) {
+		for (const std::string& image_filename : cur_block_images) {
 			const Image* image;
 			if (!g_fs->file_exists(image_filename) && !boost::starts_with(image_filename, "map:")) {
 				image = g_gr->images().get(g_gr->image_catalog().kBaseDir + image_filename);

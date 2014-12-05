@@ -568,7 +568,8 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 							std::string msg_head = _("Island Circumnavigated");
 							std::string msg_body = _("An expedition ship sailed around its"
 										 " island without any events.");
-							send_message(game, "exp_island", msg_head, msg_body, ImageCatalog::Key::kShipExploreClockwise);
+							send_message(game, "exp_island", msg_head, msg_body,
+											 ImageCatalog::Key::kShipExploreClockwise);
 							m_ship_state = EXP_WAITING;
 							return start_task_idle(game, descr().main_animation(), 1500);
 						}
@@ -906,9 +907,10 @@ void Ship::send_message(Game & game, const std::string & msgsender,
 	rt_description += description;
 	rt_description += "</p></rt>";
 
-	Message msg(msgsender, game.get_gametime(), title, rt_description, get_position(), m_serial);
+	Message * msg = new Message
+		(msgsender, game.get_gametime(), title, rt_description, get_position(), m_serial);
 
-	get_owner()->add_message(game, msg);
+	get_owner()->add_message(game, *msg);
 }
 
 

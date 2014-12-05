@@ -210,7 +210,7 @@ void TabPanel::draw(RenderTarget & dst)
 	static_assert(2 < kTabPanelButtonSize, "assert(2 < kTabPanelButtonSize) failed.");
 	static_assert(4 < kTabPanelButtonSize, "assert(4 < kTabPanelButtonSize) failed.");
 
-	if (background_image_key_ != ImageCatalog::Key::kUnknownImage) {
+	if (g_gr->image_catalog().has_key(background_image_key_)) {
 		const Image* background_image = g_gr->cataloged_image(background_image_key_);
 		dst.tile
 			(Rect(Point(0, 0), m_tabs.size() * kTabPanelButtonSize, kTabPanelButtonSize - 2),

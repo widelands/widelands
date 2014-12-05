@@ -279,9 +279,9 @@ FieldActionWindow::~FieldActionWindow()
 
 
 void FieldActionWindow::think() {
-	if(m_plr
-			&& m_plr->vision(m_node.field - &ibase().egbase().map()[0]) <= 1
-			&& !m_plr->see_all()) {
+	if (m_plr
+		 && m_plr->vision(m_node.field - &ibase().egbase().map()[0]) <= 1
+		 && !m_plr->see_all()) {
 		die();
 	}
 }
