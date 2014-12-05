@@ -20,6 +20,8 @@
 #ifndef WL_GRAPHIC_IMAGE_CATALOG_H
 #define WL_GRAPHIC_IMAGE_CATALOG_H
 
+// NOCOM(GunChleoc): Review this class
+
 #include <string>
 #include <map>
 #include <vector>

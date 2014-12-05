@@ -45,6 +45,8 @@ struct Button : public NamedPanel {
 		 const std::string & tooltip_text = std::string(),
 		 bool const _enabled = true,
 		 bool const flat    = false);
+	// NOCOM(GunChleoc): Review these constructors. The foreground image can come from Lua/conf, so we need to operate with the filename here.
+	// I have also changed the background image for other ui_basic classes over to the new system.
 	Button /// for pictorial buttons
 		(Panel * const parent,
 		 const std::string & name,

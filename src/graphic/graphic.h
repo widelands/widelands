@@ -81,6 +81,7 @@ public:
 	ImageCache& images() const {return *image_cache_.get();}
 
 	// Uses catalog 'key' to fetch an image from images().
+	// NOCOM(GunChleoc): Review these 2 functions
 	const Image* cataloged_image(ImageCatalog::Key key);
 	ImageCatalog& image_catalog() const {return *image_catalog_.get();}
 

@@ -118,6 +118,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 				const Image* player_image;
 				std::string temp_tooltip;
 				if (us.position < UserSettings::highest_playernum()) {
+					// NOCOM(GunChleoc): Review this
 					ImageCatalog::Key offset = ImageCatalog::Key::kPlayerFlag1;
 					player_image = g_gr->cataloged_image(static_cast<ImageCatalog::Key>(us.position +
 																									static_cast<uint8_t>(offset)));
@@ -317,6 +318,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					} else {
 						title = (boost::format(_("AI: %s")) % _(player_setting.ai)).str();
 						// TODO(GunChleoc): We should use the image catalog instead.
+						// NOCOM(GunChleoc): Review this. I could not get these to play ball easily, so I decided to leave this one.
 						pic = (boost::format("data/images/ai/%s.png")
 								 % player_setting.ai.c_str()).str();
 					}
