@@ -12,5 +12,5 @@ defeated_you_string=_Your soldiers defeated the enemy at the fortress.
 
 
 [idle]
-pics=../../../data/tribes/empire/fortress/fortress_i_??.png
+pics=../../../tribes/empire/fortress/fortress_i_??.png
 hotspot=90 106

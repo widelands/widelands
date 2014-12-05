@@ -12,5 +12,5 @@ defeated_you_string=_Your soldiers defeated the enemy at the castle.
 
 
 [idle]
-pics=../../../data/tribes/empire/castle/castle_i_??.png
+pics=../../../tribes/empire/castle/castle_i_??.png
 hotspot=90 106

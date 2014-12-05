@@ -13,5 +13,5 @@ defeated_you_string=_Your soldiers defeated the enemy at the tower.
 
 
 [idle]
-pics=../../../data/tribes/atlanteans/tower/tower_i_??.png
+pics=../../../tribes/atlanteans/tower/tower_i_??.png
 hotspot=55 70

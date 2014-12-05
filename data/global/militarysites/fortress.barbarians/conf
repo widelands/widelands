@@ -12,6 +12,6 @@ defeated_you_string=_Your soldiers defeated the enemy at the fortress.
 
 
 [idle]
-pics=../../../data/tribes/barbarians/fortress/fortress_i_??.png
+pics=../../../tribes/barbarians/fortress/fortress_i_??.png
 hotspot=103 80
 fps=10

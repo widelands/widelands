@@ -69,8 +69,10 @@ ConstructionSiteWindow::ConstructionSiteWindow
 			(new WaresQueueDisplay(&box, 0, 0, igbase(), cs, cs.get_waresqueue(i)),
 			 UI::Box::AlignLeft);
 
-
-	get_tabs()->add("wares",g_gr->cataloged_image(ImageCatalog::Keys::kBuildingTabWares), &box, _("Building materials"));
+	get_tabs()->add("wares",
+						 g_gr->cataloged_image(ImageCatalog::Keys::kBuildingTabWares),
+						 &box,
+						 _("Building materials"));
 }
 
 

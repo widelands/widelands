@@ -56,9 +56,11 @@ Scrollbar::Scrollbar
 	m_time_nextact  (0),
 	m_knob_grabdelta(0),
 	m_pic_minus
-		(g_gr->cataloged_image(horiz ? ImageCatalog::Keys::kScrollbarLeft : ImageCatalog::Keys::kScrollbarUp)),
+		(g_gr->cataloged_image(horiz ? ImageCatalog::Keys::kScrollbarLeft :
+												 ImageCatalog::Keys::kScrollbarUp)),
 	m_pic_plus
-		(g_gr->cataloged_image(horiz ? ImageCatalog::Keys::kScrollbarRight : ImageCatalog::Keys::kScrollbarDown)),
+		(g_gr->cataloged_image(horiz ? ImageCatalog::Keys::kScrollbarRight :
+												 ImageCatalog::Keys::kScrollbarDown)),
 	m_pic_background
 		(g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarBackground)),
 	m_pic_buttons   (g_gr->cataloged_image(ImageCatalog::Keys::kButton3))

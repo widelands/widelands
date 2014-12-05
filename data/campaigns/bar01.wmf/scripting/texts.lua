@@ -118,7 +118,7 @@ obj_better_material_2 = {
       _([[You can obtain water by building a well upon a water source, which your geologists can discover when you send them to any flag that is not on a mountain.]])
       ..paragraphdivider() ..
       "</p></rt>" ..
-      rt("image=data/pics/menu_geologist.png", p(_"In order to call a geologist to search for water, click on a flag in the area that you want him to search and then on the button labeled ‘Send geologist to explore site’.")
+      rt("image=wui/fieldaction/menu_geologist.png", p(_"In order to call a geologist to search for water, click on a flag in the area that you want him to search and then on the button labeled ‘Send geologist to explore site’.")
       .. paragraphdivider() ..
       _([[Coal can be obtained by building a charcoal kiln or a coal mine. Burning charcoal out of logs is slow. You should only build a charcoal kiln when no coal is available.]])
       .. paragraphdivider() ..

@@ -5,7 +5,7 @@ set_textdomain("texts")
 return {
    title = _ "README",
    text =
-rt("image=data/pics/wl-logo-64.png image-align=center text-align=center") ..
+rt("image=logos//wl-logo-64.png image-align=center text-align=center") ..
 rt("text-align=center",
    p("font-size=38 font-face=Widelands/Widelands font-color=#2F9131",
 [[Widelands]]

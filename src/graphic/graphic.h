@@ -82,7 +82,6 @@ public:
 
 	// Returns all cached images. Use cataloged_image instead of this function
 	// if the image is registered there.
-	// NOCOM this is mostly called followed by .get(filename). Write a wrapper.
 	ImageCache& images() const {return *image_cache_.get();}
 
 	// Uses catalog 'key' to fetch an image from images().

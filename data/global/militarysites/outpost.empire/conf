@@ -12,5 +12,5 @@ defeated_you_string=_Your soldiers defeated the enemy at the outpost.
 
 
 [idle]
-pics=../../../data/tribes/empire/outpost/outpost_i_??.png
+pics=../../../tribes/empire/outpost/outpost_i_??.png
 hotspot=60 80

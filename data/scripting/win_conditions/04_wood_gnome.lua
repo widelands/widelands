@@ -104,7 +104,7 @@ return {
 	if hooks == nil then hooks = {} end
 	hooks.custom_statistic = {
 		name = wc_trees_owned,
-		pic = "data/pics/genstats_trees.png",
+		pic = "wui/stats/genstats_trees.png",
 		calculator = function(p)
 			local pts = _calc_points(p)
 			return pts[p.number]

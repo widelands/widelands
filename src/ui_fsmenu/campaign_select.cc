@@ -221,7 +221,9 @@ void FullscreenMenuCampaignSelect::fill_table()
 		if (c.get_bool(csection.c_str())) {
 
 			uint32_t difficulty = s.get_int(cdifficulty.c_str());
-			difficulty < difficulty_picture_keys.size() ? difficulty : 0;
+			if (difficulty >= difficulty_picture_keys.size()) {
+				difficulty = 0;
+			}
 
 			CampaignListData campaign_data;
 
@@ -489,7 +491,9 @@ void FullscreenMenuCampaignMapSelect::fill_table()
 
 			UI::Table<uintptr_t>::EntryRecord& tableEntry = m_table.add(i);
 			tableEntry.set_string(0, (boost::format("%u") % scenario_data.index).str());
-			tableEntry.set_picture(1, g_gr->cataloged_image(ImageCatalog::Keys::kFilesWLMap), scenario_data.name);
+			tableEntry.set_picture(1,
+										  g_gr->cataloged_image(ImageCatalog::Keys::kFilesWLMap),
+										  scenario_data.name);
 		}
 
 		// Increase counter & mapsection

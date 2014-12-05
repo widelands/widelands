@@ -76,7 +76,7 @@ function dependencies_basic(images, text)
 
 	local string = "image=" .. images[1]
 	for k,v in ipairs({table.unpack(images,2)}) do
-		string = string .. ";data/pics/arrow-right.png;" .. v
+		string = string .. ";richtext/arrow-right.png;" .. v
 	end
 
 	return rt(string, text)
@@ -99,7 +99,7 @@ function dependencies(items, text)
 	end
 	local string = "image=" .. items[1].icon_name
 	for k,v in ipairs({table.unpack(items,2)}) do
-		string = string .. ";data/pics/arrow-right.png;" ..  v.icon_name
+		string = string .. ";richtext/arrow-right.png;" ..  v.icon_name
 	end
 	return rt(string, p(text))
 end
@@ -122,7 +122,7 @@ function dependencies_resi(tribename, resource, items, text)
 	end
 	string = "image=data/tribes/" .. tribename .. "/" .. resource  .. "/resi_00.png"
 	for k,v in ipairs({table.unpack(items)}) do
-		string = string .. ";data/pics/arrow-right.png;" ..  v.icon_name
+		string = string .. ";richtext/arrow-right.png;" ..  v.icon_name
 	end
 	return rt(string, p(text))
 end
@@ -482,16 +482,16 @@ function building_help_building_section(tribename, building_description, enhance
 
 	-- Space required
 	if (building_description.is_mine) then
-		result = result .. text_line(_"Space required:",_"Mine plot","data/pics/mine.png")
+		result = result .. text_line(_"Space required:",_"Mine plot","wui/overlays/mine.png")
 	elseif (building_description.is_port) then
-		result = result .. text_line(_"Space required:",_"Port plot","data/pics/port.png")
+		result = result .. text_line(_"Space required:",_"Port plot","wui/overlays/port.png")
 	else
 		if (building_description.size == 1) then
-			result = result .. text_line(_"Space required:",_"Small plot","data/pics/small.png")
+			result = result .. text_line(_"Space required:",_"Small plot","wui/overlays/small.png")
 		elseif (building_description.size == 2) then
-			result = result .. text_line(_"Space required:",_"Medium plot","data/pics/medium.png")
+			result = result .. text_line(_"Space required:",_"Medium plot","wui/overlays/medium.png")
 		elseif (building_description.size == 3) then
-			result = result .. text_line(_"Space required:",_"Big plot","data/pics/big.png")
+			result = result .. text_line(_"Space required:",_"Big plot","wui/overlays/big.png")
 		else
 			result = result .. p(_"Space required:" .. _"Unknown")
 		end

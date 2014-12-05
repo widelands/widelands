@@ -447,7 +447,9 @@ void FullscreenMenuMapSelect::fill_table()
 			UI::Table<uintptr_t const>::EntryRecord & te = m_table.add(m_maps_data.size() - 1);
 
 			te.set_string(col_players, "");
-			te.set_picture(col_name, g_gr->cataloged_image(ImageCatalog::Keys::kFilesDirectory), mapdata.localized_name);
+			te.set_picture(col_name,
+								g_gr->cataloged_image(ImageCatalog::Keys::kFilesDirectory),
+								mapdata.localized_name);
 			te.set_string(col_size, "");
 
 			++ndirs;
