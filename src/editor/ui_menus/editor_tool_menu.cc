@@ -62,13 +62,13 @@ UI::UniqueWindow(&parent, "tool_menu", &registry, 350, 400, _("Tools"))
        tooltip);                                                              \
    pos.x += width + spacing;                                                  \
 
-	ADD_BUTTON(g_gr->cataloged_image(ImageCatalog::Keys::kEditorMenuToolHeight), _("Change height"));
-	ADD_BUTTON(g_gr->cataloged_image(ImageCatalog::Keys::kEditorMenuToolNoiseHeight), _("Noise height"));
-	ADD_BUTTON(g_gr->cataloged_image(ImageCatalog::Keys::kEditorMenuToolTerrain), _("Terrain"));
-	ADD_BUTTON(g_gr->cataloged_image(ImageCatalog::Keys::kEditorMenuToolImmovable), _("Immovables"));
-	ADD_BUTTON(g_gr->cataloged_image(ImageCatalog::Keys::kEditorMenuToolBob), _("Animals"));
-	ADD_BUTTON(g_gr->cataloged_image(ImageCatalog::Keys::kEditorMenuToolResources), _("Resources"));
-	ADD_BUTTON(g_gr->cataloged_image(ImageCatalog::Keys::kEditorMenuToolPortSpace), _("Set port space"));
+	ADD_BUTTON(g_gr->cataloged_image(ImageCatalog::Key::kEditorMenuToolHeight), _("Change height"));
+	ADD_BUTTON(g_gr->cataloged_image(ImageCatalog::Key::kEditorMenuToolNoiseHeight), _("Noise height"));
+	ADD_BUTTON(g_gr->cataloged_image(ImageCatalog::Key::kEditorMenuToolTerrain), _("Terrain"));
+	ADD_BUTTON(g_gr->cataloged_image(ImageCatalog::Key::kEditorMenuToolImmovable), _("Immovables"));
+	ADD_BUTTON(g_gr->cataloged_image(ImageCatalog::Key::kEditorMenuToolBob), _("Animals"));
+	ADD_BUTTON(g_gr->cataloged_image(ImageCatalog::Key::kEditorMenuToolResources), _("Resources"));
+	ADD_BUTTON(g_gr->cataloged_image(ImageCatalog::Key::kEditorMenuToolPortSpace), _("Set port space"));
 
 	set_inner_size
 		(offs.x + (width + spacing) * num_tools, offs.y + (height + spacing));

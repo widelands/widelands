@@ -42,26 +42,26 @@ m_windows     (windows),
 general_stats
 	(this, "general_stats",
 	 posx(0, 4), posy(0, 3), buttonw(4), buttonh(1),
-	 ImageCatalog::Keys::kButton4,
-	 g_gr->cataloged_image(ImageCatalog::Keys::kMenuStatsGeneral),
+	 ImageCatalog::Key::kButton4,
+	 g_gr->cataloged_image(ImageCatalog::Key::kMenuStatsGeneral),
 	 _("General Statistics")),
 ware_stats
 	(this, "ware_stats",
 	 posx(1, 4), posy(0, 3), buttonw(4), buttonh(1),
-	 ImageCatalog::Keys::kButton4,
-	 g_gr->cataloged_image(ImageCatalog::Keys::kMenuStatsWare),
+	 ImageCatalog::Key::kButton4,
+	 g_gr->cataloged_image(ImageCatalog::Key::kMenuStatsWare),
 	 _("Ware Statistics")),
 building_stats
 	(this, "building_stats",
 	 posx(2, 4), posy(0, 3), buttonw(4), buttonh(1),
-	 ImageCatalog::Keys::kButton4,
-	 g_gr->cataloged_image(ImageCatalog::Keys::kMenuStatsBuilding),
+	 ImageCatalog::Key::kButton4,
+	 g_gr->cataloged_image(ImageCatalog::Key::kMenuStatsBuilding),
 	 _("Building Statistics")),
 stock
 	(this, "stock",
 	 posx(3, 4), posy(0, 3), buttonw(4), buttonh(1),
-	 ImageCatalog::Keys::kButton4,
-	 g_gr->cataloged_image(ImageCatalog::Keys::kMenuStatsStock),
+	 ImageCatalog::Key::kButton4,
+	 g_gr->cataloged_image(ImageCatalog::Key::kMenuStatsStock),
 	 _("Stock"))
 {
 	general_stats.sigclicked.connect

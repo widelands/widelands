@@ -26,7 +26,7 @@
 #include "graphic/graphic.h"
 
 FullscreenMenuMain::FullscreenMenuMain() :
-	FullscreenMenuMainMenu(ImageCatalog::Keys::kFullscreenMain),
+	FullscreenMenuMainMenu(ImageCatalog::Key::kFullscreenMain),
 
 	// Buttons
 	// This box needs to be a bit higher than in the other menus, because we have a lot of buttons

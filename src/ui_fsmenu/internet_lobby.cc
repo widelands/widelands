@@ -37,7 +37,7 @@
 FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	(char const * const nick, char const * const pwd, bool registered)
 :
-	FullscreenMenuBase(ImageCatalog::Keys::kFullscreenInternet),
+	FullscreenMenuBase(ImageCatalog::Key::kFullscreenInternet),
 
 // Values for alignment and size
 	m_butx (get_w() * 13 / 40),
@@ -80,23 +80,23 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	joingame
 		(this, "join_game",
 		 get_w() * 17 / 25, get_h() * 55 / 100, m_butw, m_buth,
-		 ImageCatalog::Keys::kButton1,
+		 ImageCatalog::Key::kButton1,
 		 _("Join this game"), std::string(), false, false),
 	hostgame
 		(this, "host_game",
 		 get_w() * 17 / 25, get_h() * 81 / 100, m_butw, m_buth,
-		 ImageCatalog::Keys::kButton1,
+		 ImageCatalog::Key::kButton1,
 		 _("Open a new game"), std::string(), true, false),
 	back
 		(this, "back",
 		 get_w() * 17 / 25, get_h() * 90 / 100, m_butw, m_buth,
-		 ImageCatalog::Keys::kButton0,
+		 ImageCatalog::Key::kButton0,
 		 _("Back"), std::string(), true, false),
 
 // Edit boxes
 	servername
 		(this, get_w() * 17 / 25, get_h() * 68 / 100, m_butw, m_buth,
-		 ImageCatalog::Keys::kButton2),
+		 ImageCatalog::Key::kButton2),
 
 // List
 	clientsonline
@@ -159,11 +159,11 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 												  "<br><img src=%s> %s"
 												  "<br><img src=%s> %s</p></rt>")
 		% _("User Status")
-		% g_gr->image_catalog().filepath(ImageCatalog::Keys::kOverlaysRoadbuildingAscending).c_str()
+		% g_gr->image_catalog().filepath(ImageCatalog::Key::kOverlaysRoadbuildingAscending).c_str()
 		% _("Registered")
-		% g_gr->image_catalog().filepath(ImageCatalog::Keys::kOverlaysRoadbuildingLevel).c_str()
+		% g_gr->image_catalog().filepath(ImageCatalog::Key::kOverlaysRoadbuildingLevel).c_str()
 		% _("Administrator")
-		% g_gr->image_catalog().filepath(ImageCatalog::Keys::kOverlaysRoadbuildingSteepAscending).c_str()
+		% g_gr->image_catalog().filepath(ImageCatalog::Key::kOverlaysRoadbuildingSteepAscending).c_str()
 		% _("Unregistered")).str();
 	clientsonline .add_column(22, "*", t_tip);
 	clientsonline .add_column((m_lisw - 22) * 3 / 8, _("Name"));
@@ -237,12 +237,12 @@ void FullscreenMenuInternetLobby::fill_games_list(const std::vector<InternetGame
 		const Image* pic;
 		if (games.at(i).connectable) {
 			if (games.at(i).build_id == build_id())
-				pic = g_gr->cataloged_image(ImageCatalog::Keys::kActionContinue);
+				pic = g_gr->cataloged_image(ImageCatalog::Key::kActionContinue);
 			else {
-				pic = g_gr->cataloged_image(ImageCatalog::Keys::kActionDifferent);
+				pic = g_gr->cataloged_image(ImageCatalog::Key::kActionDifferent);
 			}
 		} else {
-			pic = g_gr->cataloged_image(ImageCatalog::Keys::kActionStop);
+			pic = g_gr->cataloged_image(ImageCatalog::Key::kActionStop);
 		}
 		// If one of the servers has the same name as the local name of the
 		// clients server, we disable the 'hostgame' button to avoid having more
@@ -292,16 +292,16 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 		const Image* pic;
 		switch (convert_clienttype(client.type)) {
 			case 0: // UNREGISTERED
-				pic = g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysRoadbuildingSteepAscending);
+				pic = g_gr->cataloged_image(ImageCatalog::Key::kOverlaysRoadbuildingSteepAscending);
 				er.set_picture(0, pic);
 				break;
 			case 1: // REGISTERED
-				pic = g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysRoadbuildingAscending);
+				pic = g_gr->cataloged_image(ImageCatalog::Key::kOverlaysRoadbuildingAscending);
 				er.set_picture(0, pic);
 				break;
 			case 2: // SUPERUSER
 			case 3: // BOT
-				pic = g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysRoadbuildingLevel);
+				pic = g_gr->cataloged_image(ImageCatalog::Key::kOverlaysRoadbuildingLevel);
 				er.set_color(RGBColor(0, 255, 0));
 				er.set_picture(0, pic);
 				break;

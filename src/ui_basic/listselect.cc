@@ -71,7 +71,7 @@ BaseListselect::BaseListselect
 
 	if (show_check) {
 		uint32_t pic_h;
-		m_check_pic = g_gr->cataloged_image(ImageCatalog::Keys::kListSelected);
+		m_check_pic = g_gr->cataloged_image(ImageCatalog::Key::kListSelected);
 		m_max_pic_width = m_check_pic->width();
 		pic_h = m_check_pic->height();
 		if (pic_h > m_lineheight)

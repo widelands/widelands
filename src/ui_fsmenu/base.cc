@@ -46,7 +46,7 @@ FullscreenMenuBase
  *
  * Args: background_image_key ImageCatalog key for the background picture
  */
-FullscreenMenuBase::FullscreenMenuBase(ImageCatalog::Keys background_image_key)
+FullscreenMenuBase::FullscreenMenuBase(ImageCatalog::Key background_image_key)
    : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()) {
 	textstyle_small_ = UI::TextStyle::ui_small();
 	textstyle_small_.font = UI::Font::get(ui_fn(), fs_small());

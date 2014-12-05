@@ -361,8 +361,8 @@ void AbstractWaresDisplay::draw_ware
 
 	//  draw a background
 	const Image* bgpic = draw_selected ?
-									g_gr->cataloged_image(ImageCatalog::Keys::kBackgroundButtonFlatSelected):
-									g_gr->cataloged_image(ImageCatalog::Keys::kBackgroundButtonFlat);
+									g_gr->cataloged_image(ImageCatalog::Key::kBackgroundButtonFlatSelected):
+									g_gr->cataloged_image(ImageCatalog::Key::kBackgroundButtonFlat);
 
 	uint16_t w = bgpic->width();
 

@@ -67,15 +67,15 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive & parent)
 	UI::Button * widthupbtn = new UI::Button
 		(this, "width_up",
 		 get_inner_w() - spacing - 20, posy, 20, 20,
-		 ImageCatalog::Keys::kButton1,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarUp));
+		 ImageCatalog::Key::kButton1,
+		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarUp));
 	widthupbtn->sigclicked.connect(boost::bind(&MainMenuNewMap::button_clicked, this, 0));
 
 	UI::Button * widthdownbtn = new UI::Button
 		(this, "width_down",
 		 posx, posy, 20, 20,
-		 ImageCatalog::Keys::kButton1,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarDown));
+		 ImageCatalog::Key::kButton1,
+		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarDown));
 	widthdownbtn->sigclicked.connect(boost::bind(&MainMenuNewMap::button_clicked, this, 1));
 
 	posy += 20 + spacing + spacing;
@@ -87,15 +87,15 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive & parent)
 	UI::Button * heightupbtn = new UI::Button
 		(this, "height_up",
 		 get_inner_w() - spacing - 20, posy, 20, 20,
-		 ImageCatalog::Keys::kButton1,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarUp));
+		 ImageCatalog::Key::kButton1,
+		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarUp));
 	heightupbtn->sigclicked.connect(boost::bind(&MainMenuNewMap::button_clicked, this, 2));
 
 	UI::Button * heightdownbtn = new UI::Button
 		(this, "height_down",
 		 posx, posy, 20, 20,
-		 ImageCatalog::Keys::kButton1,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarDown));
+		 ImageCatalog::Key::kButton1,
+		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarDown));
 	heightdownbtn->sigclicked.connect(boost::bind(&MainMenuNewMap::button_clicked, this, 3));
 
 	posy += 20 + spacing + spacing;
@@ -105,7 +105,7 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive & parent)
 	UI::Button * createbtn = new UI::Button
 		(this, "create_map",
 		 posx, posy, width, height,
-		 ImageCatalog::Keys::kButton0,
+		 ImageCatalog::Key::kButton0,
 		 _("Create Map"));
 	createbtn->sigclicked.connect(boost::bind(&MainMenuNewMap::clicked_create_map, this));
 }

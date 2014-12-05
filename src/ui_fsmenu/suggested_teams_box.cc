@@ -113,9 +113,9 @@ void SuggestedTeamsBox::show(const std::vector<Widelands::Map::SuggestedTeamLine
 
 				for (uint16_t player : team) {
 					assert(player < MAX_PLAYERS);
-					ImageCatalog::Keys offset = ImageCatalog::Keys::kPlayerStartingPosSmall1;
+					ImageCatalog::Key offset = ImageCatalog::Key::kPlayerStartingPosSmall1;
 					const Image* player_image =
-							g_gr->cataloged_image(static_cast<ImageCatalog::Keys>(player +
+							g_gr->cataloged_image(static_cast<ImageCatalog::Key>(player +
 																									static_cast<uint8_t>(offset)));
 
 					player_icon = new UI::Icon(m_lineup_box, 0, 0, 20, 20, player_image);

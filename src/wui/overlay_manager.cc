@@ -269,12 +269,12 @@ void OverlayManager::load_graphics() {
 
 	OverlayInfo * buildhelp_info = m_buildhelp_infos;
 	static const Image * image_files[] = {
-		g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysFlag),
-		g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysPlotSmall),
-		g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysPlotMedium),
-		g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysPlotBig),
-		g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysPlotMine),
-		g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysPlotPort)
+		g_gr->cataloged_image(ImageCatalog::Key::kOverlaysFlag),
+		g_gr->cataloged_image(ImageCatalog::Key::kOverlaysPlotSmall),
+		g_gr->cataloged_image(ImageCatalog::Key::kOverlaysPlotMedium),
+		g_gr->cataloged_image(ImageCatalog::Key::kOverlaysPlotBig),
+		g_gr->cataloged_image(ImageCatalog::Key::kOverlaysPlotMine),
+		g_gr->cataloged_image(ImageCatalog::Key::kOverlaysPlotPort)
 	};
 	const Image * const * image_file = image_files;
 

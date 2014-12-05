@@ -133,11 +133,11 @@ int32_t FullscreenMenuCampaignSelect::get_campaign()
 }
 
 /// Pictorial descriptions of difficulty levels.
-static const std::vector<ImageCatalog::Keys> difficulty_picture_keys = {
-	ImageCatalog::Keys::kNoValue,
-	ImageCatalog::Keys::kFullscreenDifficulty2,
-	ImageCatalog::Keys::kFullscreenDifficulty3,
-	ImageCatalog::Keys::kFullscreenDifficulty4
+static const std::vector<ImageCatalog::Key> difficulty_picture_keys = {
+	ImageCatalog::Key::kNoValue,
+	ImageCatalog::Key::kFullscreenDifficulty2,
+	ImageCatalog::Key::kFullscreenDifficulty3,
+	ImageCatalog::Key::kFullscreenDifficulty4
 };
 
 
@@ -492,7 +492,7 @@ void FullscreenMenuCampaignMapSelect::fill_table()
 			UI::Table<uintptr_t>::EntryRecord& tableEntry = m_table.add(i);
 			tableEntry.set_string(0, (boost::format("%u") % scenario_data.index).str());
 			tableEntry.set_picture(1,
-										  g_gr->cataloged_image(ImageCatalog::Keys::kFilesWLMap),
+										  g_gr->cataloged_image(ImageCatalog::Key::kFilesWLMap),
 										  scenario_data.name);
 		}
 

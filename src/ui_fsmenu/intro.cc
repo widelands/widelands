@@ -24,7 +24,7 @@
 
 
 FullscreenMenuIntro::FullscreenMenuIntro()
-	: FullscreenMenuBase(ImageCatalog::Keys::kLoadscreenSplash),
+	: FullscreenMenuBase(ImageCatalog::Key::kLoadscreenSplash),
 
 // Text area
 m_message

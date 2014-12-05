@@ -44,7 +44,7 @@ EditorToolPlaceBobOptionsMenu::EditorToolPlaceBobOptionsMenu
 :
 EditorToolOptionsMenu(parent, registry, 100, 100, _("Animals")),
 
-m_tabpanel          (this, 0, 0, ImageCatalog::Keys::kButton1),
+m_tabpanel          (this, 0, 0, ImageCatalog::Key::kButton1),
 m_pit               (pit),
 m_click_recursion_protect(false)
 {
@@ -74,7 +74,7 @@ m_click_recursion_protect(false)
 	}
 
 	const Image* tab_icon =
-		g_gr->cataloged_image(ImageCatalog::Keys::kListFirst);
+		g_gr->cataloged_image(ImageCatalog::Key::kListFirst);
 	Point pos;
 	uint32_t cur_x = bobs_in_row;
 	int32_t i = 0;

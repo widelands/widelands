@@ -143,14 +143,14 @@ m_selected_information(0)
 	iterate_players_existing_novar(p, nr_players, game) ++plr_in_game;
 
 	iterate_players_existing_const(p, nr_players, game, player) {
-		ImageCatalog::Keys offset = ImageCatalog::Keys::kPlayerFlag1;
+		ImageCatalog::Key offset = ImageCatalog::Key::kPlayerFlag1;
 		const Image* player_image =
-				g_gr->cataloged_image(static_cast<ImageCatalog::Keys>(p - 1 + static_cast<uint8_t>(offset)));
+				g_gr->cataloged_image(static_cast<ImageCatalog::Key>(p - 1 + static_cast<uint8_t>(offset)));
 		UI::Button & cb =
 			*new UI::Button
 				(hbox1, "playerbutton",
 				 0, 0, 25, 25,
-				 ImageCatalog::Keys::kButton4,
+				 ImageCatalog::Key::kButton4,
 				 player_image,
 				 player->get_name().c_str());
 		cb.sigclicked.connect
@@ -172,7 +172,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->cataloged_image(ImageCatalog::Keys::kStatsLandsize),
+		 g_gr->cataloged_image(ImageCatalog::Key::kStatsLandsize),
 		 _("Land"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -180,7 +180,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->cataloged_image(ImageCatalog::Keys::kStatsWorkersNumber),
+		 g_gr->cataloged_image(ImageCatalog::Key::kStatsWorkersNumber),
 		 _("Workers"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -188,7 +188,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->cataloged_image(ImageCatalog::Keys::kStatsBuildingsNumber),
+		 g_gr->cataloged_image(ImageCatalog::Key::kStatsBuildingsNumber),
 		 _("Buildings"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -196,7 +196,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->cataloged_image(ImageCatalog::Keys::kStatsWaresNumber),
+		 g_gr->cataloged_image(ImageCatalog::Key::kStatsWaresNumber),
 		 _("Wares"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -204,7 +204,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->cataloged_image(ImageCatalog::Keys::kStatsProductivity),
+		 g_gr->cataloged_image(ImageCatalog::Key::kStatsProductivity),
 		 _("Productivity"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -212,7 +212,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->cataloged_image(ImageCatalog::Keys::kStatsCasualties),
+		 g_gr->cataloged_image(ImageCatalog::Key::kStatsCasualties),
 		 _("Casualties"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -220,7 +220,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->cataloged_image(ImageCatalog::Keys::kStatsKills),
+		 g_gr->cataloged_image(ImageCatalog::Key::kStatsKills),
 		 _("Kills"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -228,7 +228,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->cataloged_image(ImageCatalog::Keys::kStatsMilitarySitesLost),
+		 g_gr->cataloged_image(ImageCatalog::Key::kStatsMilitarySitesLost),
 		 _("Military buildings lost"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -236,7 +236,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->cataloged_image(ImageCatalog::Keys::kStatsMilitarySitesDefeated),
+		 g_gr->cataloged_image(ImageCatalog::Key::kStatsMilitarySitesDefeated),
 		 _("Military buildings defeated"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -244,7 +244,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->cataloged_image(ImageCatalog::Keys::kStatsBuildingsLost),
+		 g_gr->cataloged_image(ImageCatalog::Key::kStatsBuildingsLost),
 		 _("Civilian buildings lost"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -252,7 +252,7 @@ m_selected_information(0)
 	m_radiogroup.add_button
 		(hbox2,
 		 Point(0, 0),
-		 g_gr->cataloged_image(ImageCatalog::Keys::kStatsMilitaryStrength),
+		 g_gr->cataloged_image(ImageCatalog::Key::kStatsMilitaryStrength),
 		 _("Military"),
 		 &btn);
 	hbox2->add(btn, UI::Box::AlignLeft, false, true);
@@ -273,7 +273,7 @@ m_selected_information(0)
 
 	m_box.add(hbox2, UI::Box::AlignTop, true);
 
-	m_box.add(new WuiPlotAreaSlider(&m_box, m_plot, 0, 0, 100, 45, ImageCatalog::Keys::kButton1),
+	m_box.add(new WuiPlotAreaSlider(&m_box, m_plot, 0, 0, 100, 45, ImageCatalog::Key::kButton1),
 				 UI::Box::AlignTop, true);
 
 }

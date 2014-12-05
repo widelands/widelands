@@ -45,8 +45,8 @@ struct EditorPlaceImmovableTool : public EditorTool, public MultiSelect {
 
 	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
 
-	ImageCatalog::Keys get_sel_impl() const override {
-		return ImageCatalog::Keys::kEditorToolImmovable;
+	ImageCatalog::Key get_sel_impl() const override {
+		return ImageCatalog::Key::kEditorToolImmovable;
 	}
 };
 

@@ -41,7 +41,7 @@ MiniMap::View::View
 	m_ibase       (ibase),
 	m_viewx       (0),
 	m_viewy       (0),
-	m_pic_map_spot(g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysMapSpot)),
+	m_pic_map_spot(g_gr->cataloged_image(ImageCatalog::Key::kOverlaysMapSpot)),
 	m_flags       (flags)
 {}
 
@@ -145,38 +145,38 @@ MiniMap::MiniMap(InteractiveBase & ibase, Registry * const registry)
 	button_terrn
 		(this, "terrain",
 		 but_w() * 0, m_view.get_h() + but_h() * 0, but_w(), but_h(),
-		 ImageCatalog::Keys::kButton0,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kMinimapTerrain),
+		 ImageCatalog::Key::kButton0,
+		 g_gr->cataloged_image(ImageCatalog::Key::kMinimapTerrain),
 		 _("Terrain")),
 	button_owner
 		(this, "owner",
 		 but_w() * 1, m_view.get_h() + but_h() * 0, but_w(), but_h(),
-		 ImageCatalog::Keys::kButton0,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kMinimapOwner),
+		 ImageCatalog::Key::kButton0,
+		 g_gr->cataloged_image(ImageCatalog::Key::kMinimapOwner),
 		 _("Owner")),
 	button_flags
 		(this, "flags",
 		 but_w() * 2, m_view.get_h() + but_h() * 0, but_w(), but_h(),
-		 ImageCatalog::Keys::kButton0,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kMinimapFlags),
+		 ImageCatalog::Key::kButton0,
+		 g_gr->cataloged_image(ImageCatalog::Key::kMinimapFlags),
 		 _("Flags")),
 	button_roads
 		(this, "roads",
 		 but_w() * 0, m_view.get_h() + but_h() * 1, but_w(), but_h(),
-		 ImageCatalog::Keys::kButton0,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kMinimapRoads),
+		 ImageCatalog::Key::kButton0,
+		 g_gr->cataloged_image(ImageCatalog::Key::kMinimapRoads),
 		 _("Roads")),
 	button_bldns
 		(this, "buildings",
 		 but_w() * 1, m_view.get_h() + but_h() * 1, but_w(), but_h(),
-		 ImageCatalog::Keys::kButton0,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kMinimapBuildings),
+		 ImageCatalog::Key::kButton0,
+		 g_gr->cataloged_image(ImageCatalog::Key::kMinimapBuildings),
 		 _("Buildings")),
 	button_zoom
 		(this, "zoom",
 		 but_w() * 2, m_view.get_h() + but_h() * 1, but_w(), but_h(),
-		 ImageCatalog::Keys::kButton0,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kMinimapZoom),
+		 ImageCatalog::Key::kButton0,
+		 g_gr->cataloged_image(ImageCatalog::Key::kMinimapZoom),
 		 _("Zoom"))
 {
 	button_terrn.sigclicked.connect(boost::bind(&MiniMap::toggle, boost::ref(*this), MiniMapLayer::Terrain));

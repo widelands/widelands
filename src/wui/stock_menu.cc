@@ -35,30 +35,30 @@ m_player(plr)
 {
 	UI::TabPanel * tabs =
 		 new UI::TabPanel
-			 (this, 0, 0, ImageCatalog::Keys::kButton1);
+			 (this, 0, 0, ImageCatalog::Key::kButton1);
 	set_center_panel(tabs);
 
 	m_all_wares = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWARE, false);
 	tabs->add
-		("total_wares", g_gr->cataloged_image(ImageCatalog::Keys::kBuildingTabWarehouseWares),
+		("total_wares", g_gr->cataloged_image(ImageCatalog::Key::kBuildingTabWarehouseWares),
 		 m_all_wares, _("Wares (total)"));
 
 	m_all_workers = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWORKER, false);
 	tabs->add
-		("workers_total", g_gr->cataloged_image(ImageCatalog::Keys::kBuildingTabWarehouseWorkers),
+		("workers_total", g_gr->cataloged_image(ImageCatalog::Key::kBuildingTabWarehouseWorkers),
 		 m_all_workers, _("Workers (total)"));
 
 	m_warehouse_wares = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWARE, false);
 	tabs->add
 		("wares_in_warehouses",
-		 g_gr->cataloged_image(ImageCatalog::Keys::kStatsTabWarehouseWares),
+		 g_gr->cataloged_image(ImageCatalog::Key::kStatsTabWarehouseWares),
 		 m_warehouse_wares, _("Wares in warehouses")
 	);
 
 	m_warehouse_workers = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWORKER, false);
 	tabs->add
 		("workers_in_warehouses",
-		 g_gr->cataloged_image(ImageCatalog::Keys::kStatsTabWarehouseWorkers),
+		 g_gr->cataloged_image(ImageCatalog::Key::kStatsTabWarehouseWorkers),
 		 m_warehouse_workers, _("Workers in warehouses")
 	);
 }

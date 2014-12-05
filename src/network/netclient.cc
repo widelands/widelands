@@ -188,7 +188,7 @@ void NetClient::run ()
 
 	try {
 		UI::ProgressWindow * loaderUI =
-				new UI::ProgressWindow(ImageCatalog::Keys::kLoadscreen);
+				new UI::ProgressWindow(ImageCatalog::Key::kLoadscreen);
 		std::vector<std::string> tipstext;
 		tipstext.push_back("general_game");
 		tipstext.push_back("multiplayer");

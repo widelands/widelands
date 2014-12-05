@@ -43,8 +43,8 @@ struct EditorPlaceBobTool : public EditorTool, public MultiSelect {
 
 	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
 
-	ImageCatalog::Keys get_sel_impl() const override {
-		return ImageCatalog::Keys::kEditorToolBob;
+	ImageCatalog::Key get_sel_impl() const override {
+		return ImageCatalog::Key::kEditorToolBob;
 	}
 };
 

@@ -59,15 +59,15 @@ EditorToolChangeResourcesOptionsMenu
 		 get_inner_w() - hmargin() - BUTTON_WIDTH,
 		 m_change_by_label.get_y() + m_change_by_label.get_h() + spacing(),
 		 BUTTON_WIDTH, BUTTON_HEIGHT,
-		 ImageCatalog::Keys::kButton1,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarUp)),
+		 ImageCatalog::Key::kButton1,
+		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarUp)),
 	m_change_by_decrease
 		(this, "decr_change_by",
 		 hmargin(),
 		 m_change_by_increase.get_y(),
 		 BUTTON_WIDTH, BUTTON_HEIGHT,
-		 ImageCatalog::Keys::kButton1,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarDown)),
+		 ImageCatalog::Key::kButton1,
+		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarDown)),
 	m_change_by_value
 		(this,
 		 m_change_by_increase.get_x() + m_change_by_increase.get_w() +
@@ -90,14 +90,14 @@ EditorToolChangeResourcesOptionsMenu
 		 m_change_by_increase.get_x(),
 		 m_set_to_label.get_y() + m_set_to_label.get_h() + vspacing(),
 		 BUTTON_WIDTH, BUTTON_HEIGHT,
-		 ImageCatalog::Keys::kButton1,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarUp)),
+		 ImageCatalog::Key::kButton1,
+		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarUp)),
 	m_set_to_decrease
 		(this, "decr_set_to",
 		 hmargin(),
 		 m_set_to_increase.get_y(), BUTTON_WIDTH, BUTTON_HEIGHT,
-		 ImageCatalog::Keys::kButton1,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarDown)),
+		 ImageCatalog::Key::kButton1,
+		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarDown)),
 	m_set_to_value
 		(this,
 		 m_change_by_value.get_x(), m_set_to_increase.get_y(),

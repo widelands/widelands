@@ -277,7 +277,7 @@ void Graphic::refresh()
 	m_update = false;
 }
 
-const Image* Graphic::cataloged_image(ImageCatalog::Keys key) {
+const Image* Graphic::cataloged_image(ImageCatalog::Key key) {
 	return images().get(image_catalog_.get()->filepath(key));
 }
 

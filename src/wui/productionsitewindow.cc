@@ -61,7 +61,7 @@ ProductionSiteWindow::ProductionSiteWindow
 				 UI::Box::AlignLeft);
 
 		get_tabs()->add
-			("wares", g_gr->cataloged_image(ImageCatalog::Keys::kBuildingTabWares),
+			("wares", g_gr->cataloged_image(ImageCatalog::Key::kBuildingTabWares),
 			 prod_box, _("Wares"));
 	}
 
@@ -90,8 +90,8 @@ ProductionSiteWindow::ProductionSiteWindow
 			m_worker_caps->add_inf_space();
 			UI::Button * evict_button = new UI::Button
 							(m_worker_caps, "evict", 0, 0, 34, 34,
-							 ImageCatalog::Keys::kButton4,
-							 g_gr->cataloged_image(ImageCatalog::Keys::kBuildingSoldierDrop),
+							 ImageCatalog::Key::kButton4,
+							 g_gr->cataloged_image(ImageCatalog::Key::kBuildingSoldierDrop),
 							 _("Terminate the employment of the selected worker"));
 			evict_button->sigclicked.connect
 					(boost::bind(&ProductionSiteWindow::evict_worker, boost::ref(*this)));
@@ -101,7 +101,7 @@ ProductionSiteWindow::ProductionSiteWindow
 		worker_box->add(m_worker_table, UI::Box::AlignLeft, true);
 		worker_box->add(m_worker_caps, UI::Box::AlignLeft, true);
 		get_tabs()->add
-			("workers", g_gr->cataloged_image(ImageCatalog::Keys::kBuildingTabWorkers),
+			("workers", g_gr->cataloged_image(ImageCatalog::Key::kBuildingTabWorkers),
 			 worker_box,
 			 (ngettext("Worker", "Workers", productionsite().descr().nr_working_positions()))
 			);

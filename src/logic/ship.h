@@ -210,7 +210,7 @@ private:
 	void set_fleet(Fleet * fleet);
 
 	void send_message
-		(Game &, const std::string &, const std::string &, const std::string &, ImageCatalog::Keys image_key);
+		(Game &, const std::string &, const std::string &, const std::string &, ImageCatalog::Key image_key);
 
 	UI::Window * m_window;
 

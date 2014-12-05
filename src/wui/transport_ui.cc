@@ -46,18 +46,18 @@ struct EconomyOptionsWindow : public UI::UniqueWindow {
 		UI::UniqueWindow
 			(&parent, "economy_options", &economy.optionswindow_registry(), 0, 0,
 			 _("Economy options")),
-		m_tabpanel(this, 0, 0, ImageCatalog::Keys::kButton1)
+		m_tabpanel(this, 0, 0, ImageCatalog::Key::kButton1)
 	{
 		set_center_panel(&m_tabpanel);
 
 		m_tabpanel.add
 			("wares",
-			 g_gr->cataloged_image(ImageCatalog::Keys::kBuildingTabWarehouseWares),
+			 g_gr->cataloged_image(ImageCatalog::Key::kBuildingTabWarehouseWares),
 			 new EconomyOptionsWarePanel(&m_tabpanel, parent, economy),
 			 _("Wares"));
 		m_tabpanel.add
 			("workers",
-			 g_gr->cataloged_image(ImageCatalog::Keys::kBuildingTabWarehouseWorkers),
+			 g_gr->cataloged_image(ImageCatalog::Key::kBuildingTabWarehouseWorkers),
 			 new EconomyOptionsWorkerPanel(&m_tabpanel, parent, economy),
 			 _("Workers"));
 	}
@@ -131,7 +131,7 @@ private:
 	b = new UI::Button                                    \
 		 (buttons, #callback,                                       \
 		  0, 0, 34, 34,                                             \
-		  ImageCatalog::Keys::kButton4,            \
+		  ImageCatalog::Key::kButton4,            \
 		  text, tooltip, m_can_act);                                \
 	b->sigclicked.connect(boost::bind(&EconomyOptionsWarePanel::callback, this)); \
 	buttons->add(b, UI::Box::AlignCenter);
@@ -227,7 +227,7 @@ private:
 	b = new UI::Button                                      \
 		 (buttons, #callback,                                         \
 		  0, 0, 34, 34,                                               \
-		  ImageCatalog::Keys::kButton4,              \
+		  ImageCatalog::Key::kButton4,              \
 		  text, tooltip, m_can_act);                                  \
 	b->sigclicked.connect(boost::bind(&EconomyOptionsWorkerPanel::callback, this)); \
 	buttons->add(b, UI::Box::AlignCenter);

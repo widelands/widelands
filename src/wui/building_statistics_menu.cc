@@ -127,8 +127,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 		new UI::Button
 			(this, "previous_owned",
 			 JUMP_PREV_BUTTON_X, OWNED_Y, 24, 24,
-			 ImageCatalog::Keys::kButton4,
-			 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarLeft),
+			 ImageCatalog::Key::kButton4,
+			 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarLeft),
 			 _("Show previous"),
 			 false);
 	m_btn[PrevOwned]->sigclicked.connect
@@ -138,8 +138,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 		new UI::Button
 			(this, "next_owned",
 			 JUMP_NEXT_BUTTON_X, OWNED_Y, 24, 24,
-			 ImageCatalog::Keys::kButton4,
-			 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarRight),
+			 ImageCatalog::Key::kButton4,
+			 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarRight),
 			 _("Show next"),
 			 false);
 	m_btn[NextOwned]->sigclicked.connect
@@ -149,8 +149,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 		new UI::Button
 			(this, "previous_constructed",
 			 JUMP_PREV_BUTTON_X, IN_BUILD_Y, 24, 24,
-			 ImageCatalog::Keys::kButton4,
-			 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarLeft),
+			 ImageCatalog::Key::kButton4,
+			 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarLeft),
 			 _("Show previous"),
 			 false);
 	m_btn[PrevConstruction]->sigclicked.connect
@@ -160,8 +160,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 		new UI::Button
 			(this, "next_constructed",
 			 JUMP_NEXT_BUTTON_X, IN_BUILD_Y, 24, 24,
-			 ImageCatalog::Keys::kButton4,
-			 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarRight),
+			 ImageCatalog::Key::kButton4,
+			 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarRight),
 			 _("Show next"),
 			 false);
 	m_btn[NextConstruction]->sigclicked.connect
@@ -171,8 +171,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 		new UI::Button
 			(this, "previous_unproductive",
 			 JUMP_PREV_BUTTON_X, UNPRODUCTIVE_Y, 24, 24,
-			 ImageCatalog::Keys::kButton4,
-			 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarLeft),
+			 ImageCatalog::Key::kButton4,
+			 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarLeft),
 			 _("Show previous"),
 			 false);
 	m_btn[PrevUnproductive]->sigclicked.connect
@@ -182,8 +182,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu
 		new UI::Button
 			(this, "next_unproductive",
 			 JUMP_NEXT_BUTTON_X, UNPRODUCTIVE_Y, 24, 24,
-			 ImageCatalog::Keys::kButton4,
-			 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarRight),
+			 ImageCatalog::Key::kButton4,
+			 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarRight),
 			 _("Show next"),
 			 false);
 	m_btn[NextUnproductive]->sigclicked.connect
@@ -442,21 +442,21 @@ void BuildingStatisticsMenu::update() {
 			(Columns::Name, building.get_icon(), building.descname());
 
 		{
-			ImageCatalog::Keys image_key = ImageCatalog::Keys::kNoValue;
+			ImageCatalog::Key image_key = ImageCatalog::Key::kNoValue;
 			if (building.get_ismine()) {
-				image_key = ImageCatalog::Keys::kFieldTabBuildMine;
+				image_key = ImageCatalog::Key::kFieldTabBuildMine;
 			} else if (building.get_isport()) {
-				image_key = ImageCatalog::Keys::kFieldTabBuildPort;
+				image_key = ImageCatalog::Key::kFieldTabBuildPort;
 			}
 			else switch (building.get_size()) {
 				case Widelands::BaseImmovable::SMALL:
-					image_key = ImageCatalog::Keys::kFieldTabBuildSmall;
+					image_key = ImageCatalog::Key::kFieldTabBuildSmall;
 					break;
 				case Widelands::BaseImmovable::MEDIUM:
-					image_key = ImageCatalog::Keys::kFieldTabBuildMedium;
+					image_key = ImageCatalog::Key::kFieldTabBuildMedium;
 					break;
 				case Widelands::BaseImmovable::BIG:
-					image_key = ImageCatalog::Keys::kFieldTabBuildBig;
+					image_key = ImageCatalog::Key::kFieldTabBuildBig;
 					break;
 				default:
 					assert(false);

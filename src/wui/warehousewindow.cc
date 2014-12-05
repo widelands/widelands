@@ -70,15 +70,15 @@ void WarehouseWaresDisplay::draw_ware(RenderTarget & dst, Widelands::WareIndex w
 
 	switch (policy) {
 		case Warehouse::SP_Prefer: {
-			pic = g_gr->cataloged_image(ImageCatalog::Keys::kBuildingStockPolicyPrefer);
+			pic = g_gr->cataloged_image(ImageCatalog::Key::kBuildingStockPolicyPrefer);
 			break;
 		}
 		case Warehouse::SP_DontStock: {
-			pic = g_gr->cataloged_image(ImageCatalog::Keys::kBuildingStockPolicyDontStock);
+			pic = g_gr->cataloged_image(ImageCatalog::Key::kBuildingStockPolicyDontStock);
 			break;
 		}
 		case Warehouse::SP_Remove: {
-			pic = g_gr->cataloged_image(ImageCatalog::Keys::kBuildingStockPolicyRemove);
+			pic = g_gr->cataloged_image(ImageCatalog::Key::kBuildingStockPolicyRemove);
 			break;
 		}
 	default:
@@ -127,7 +127,7 @@ WarehouseWaresPanel::WarehouseWaresPanel
 #define ADD_POLICY_BUTTON(policy, policyname, image_key, tooltip)                                           \
 		b = new UI::Button                                                             \
 			(buttons, #policy, 0, 0, 34, 34,                                                  \
-			 ImageCatalog::Keys::kButton4,                                   \
+			 ImageCatalog::Key::kButton4,                                   \
 			 g_gr->cataloged_image(image_key),      \
 			 tooltip),                                                                        \
 		b->sigclicked.connect \
@@ -135,16 +135,16 @@ WarehouseWaresPanel::WarehouseWaresPanel
 		buttons->add(b, UI::Box::AlignCenter);
 
 		ADD_POLICY_BUTTON(normal, Normal,
-								ImageCatalog::Keys::kBuildingStockPolicyNormalButton,
+								ImageCatalog::Key::kBuildingStockPolicyNormalButton,
 								_("Normal policy"))
 		ADD_POLICY_BUTTON(prefer, Prefer,
-								ImageCatalog::Keys::kBuildingStockPolicyPreferButton,
+								ImageCatalog::Key::kBuildingStockPolicyPreferButton,
 								_("Preferably store selected wares here"))
 		ADD_POLICY_BUTTON(dontstock, DontStock,
-								ImageCatalog::Keys::kBuildingStockPolicyDontStockButton,
+								ImageCatalog::Key::kBuildingStockPolicyDontStockButton,
 								_("Do not store selected wares here"))
 		ADD_POLICY_BUTTON(remove, Remove,
-								ImageCatalog::Keys::kBuildingStockPolicyRemoveButton,
+								ImageCatalog::Key::kBuildingStockPolicyRemoveButton,
 								_("Remove selected wares from here"))
 	}
 }
@@ -198,7 +198,7 @@ WarehouseWindow::WarehouseWindow
 {
 	get_tabs()->add
 		("wares",
-		 g_gr->cataloged_image(ImageCatalog::Keys::kBuildingTabWarehouseWares),
+		 g_gr->cataloged_image(ImageCatalog::Key::kBuildingTabWarehouseWares),
 		 new WarehouseWaresPanel
 			(get_tabs(),
 			 Width,
@@ -208,7 +208,7 @@ WarehouseWindow::WarehouseWindow
 		 _("Wares"));
 	get_tabs()->add
 		("workers",
-		 g_gr->cataloged_image(ImageCatalog::Keys::kBuildingTabWarehouseWorkers),
+		 g_gr->cataloged_image(ImageCatalog::Key::kBuildingTabWarehouseWorkers),
 		 new WarehouseWaresPanel
 			(get_tabs(),
 			 Width,
@@ -220,18 +220,18 @@ WarehouseWindow::WarehouseWindow
 	if (Widelands::PortDock * pd = wh.get_portdock()) {
 		get_tabs()->add
 			("dock_wares",
-			 g_gr->cataloged_image(ImageCatalog::Keys::kBuildingTabDockWares),
+			 g_gr->cataloged_image(ImageCatalog::Key::kBuildingTabDockWares),
 			 create_portdock_wares_display(get_tabs(), Width, *pd, Widelands::wwWARE),
 			 _("Wares in dock"));
 		get_tabs()->add
 			("dock_workers",
-			 g_gr->cataloged_image(ImageCatalog::Keys::kBuildingTabDockWorkers),
+			 g_gr->cataloged_image(ImageCatalog::Key::kBuildingTabDockWorkers),
 			 create_portdock_wares_display(get_tabs(), Width, *pd, Widelands::wwWORKER),
 			 _("Workers in dock"));
 		if (pd->expedition_started()) {
 			get_tabs()->add
 				("expedition_wares_queue",
-				 g_gr->cataloged_image(ImageCatalog::Keys::kDockExpeditionStart),
+				 g_gr->cataloged_image(ImageCatalog::Key::kDockExpeditionStart),
 				 create_portdock_expedition_display(get_tabs(), warehouse(), igbase()),
 				 _("Expedition"));
 		}

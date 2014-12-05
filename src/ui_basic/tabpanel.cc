@@ -79,7 +79,7 @@ void Tab::activate() {
 TabPanel::TabPanel
 	(Panel * const parent,
 	 int32_t const x, int32_t const y,
-	 const ImageCatalog::Keys background_image_key)
+	 const ImageCatalog::Key background_image_key)
 	:
 	Panel            (parent, x, y, 0, 0),
 	m_active         (0),
@@ -89,7 +89,7 @@ TabPanel::TabPanel
 TabPanel::TabPanel
 	(Panel * const parent,
 	 int32_t const x, int32_t const y, int32_t const w, int32_t const h,
-	 const ImageCatalog::Keys background_image_key)
+	 const ImageCatalog::Key background_image_key)
 	:
 	Panel            (parent, x, y, w, h),
 	m_active         (0),
@@ -210,7 +210,7 @@ void TabPanel::draw(RenderTarget & dst)
 	static_assert(2 < kTabPanelButtonSize, "assert(2 < kTabPanelButtonSize) failed.");
 	static_assert(4 < kTabPanelButtonSize, "assert(4 < kTabPanelButtonSize) failed.");
 
-	if (background_image_key_ != ImageCatalog::Keys::kUnknownImage) {
+	if (background_image_key_ != ImageCatalog::Key::kUnknownImage) {
 		const Image* background_image = g_gr->cataloged_image(background_image_key_);
 		dst.tile
 			(Rect(Point(0, 0), m_tabs.size() * kTabPanelButtonSize, kTabPanelButtonSize - 2),

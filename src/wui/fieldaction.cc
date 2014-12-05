@@ -202,13 +202,13 @@ public:
 private:
 	uint32_t add_tab
 		(const std::string & name,
-		 ImageCatalog::Keys image_key,
+		 ImageCatalog::Key image_key,
 		 UI::Panel * panel,
 		 const std::string & tooltip_text = "");
 	UI::Button & add_button
 		(UI::Box *,
 		 const char * name,
-		 ImageCatalog::Keys image_key,
+		 ImageCatalog::Key image_key,
 		 void (FieldActionWindow::*fn)(),
 		 const std::string & tooltip_text,
 		 bool repeating = false);
@@ -229,11 +229,11 @@ private:
 	AttackBox * m_attack_box;
 };
 
-static const ImageCatalog::Keys pic_tab_buildhouse[] = {
-	ImageCatalog::Keys::kFieldTabBuildSmall,
-	ImageCatalog::Keys::kFieldTabBuildMedium,
-	ImageCatalog::Keys::kFieldTabBuildBig,
-	ImageCatalog::Keys::kFieldTabBuildPort
+static const ImageCatalog::Key pic_tab_buildhouse[] = {
+	ImageCatalog::Key::kFieldTabBuildSmall,
+	ImageCatalog::Key::kFieldTabBuildMedium,
+	ImageCatalog::Key::kFieldTabBuildBig,
+	ImageCatalog::Key::kFieldTabBuildPort
 };
 static const std::string tooltip_tab_build[] = {
 	_("Build small building"),
@@ -258,7 +258,7 @@ FieldActionWindow::FieldActionWindow
 	m_map(&ib->egbase().map()),
 	m_overlay_manager(*m_map->get_overlay_manager()),
 	m_node(ib->get_sel_pos().node, &(*m_map)[ib->get_sel_pos().node]),
-	m_tabpanel(this, 0, 0, ImageCatalog::Keys::kButton1),
+	m_tabpanel(this, 0, 0, ImageCatalog::Key::kButton1),
 	m_fastclick(true),
 	m_best_tab(0),
 	m_workarea_preview_job_id(0),
@@ -335,7 +335,7 @@ void FieldActionWindow::add_buttons_auto()
 			if (can_act) {
 				add_button
 					(buildbox, "build_road",
-					 ImageCatalog::Keys::kFieldRoadBuild,
+					 ImageCatalog::Key::kFieldRoadBuild,
 					 &FieldActionWindow::act_buildroad,
 					 _("Build road"));
 
@@ -347,7 +347,7 @@ void FieldActionWindow::add_buttons_auto()
 					 (building->get_playercaps() & Building::PCap_Bulldoze))
 					add_button
 						(buildbox, "rip_flag",
-						 ImageCatalog::Keys::kFieldFlagDestroy,
+						 ImageCatalog::Key::kFieldFlagDestroy,
 						 &FieldActionWindow::act_ripflag,
 						 _("Destroy this flag"));
 			}
@@ -355,13 +355,13 @@ void FieldActionWindow::add_buttons_auto()
 			if (dynamic_cast<Game const *>(&ibase().egbase())) {
 				add_button
 					(buildbox, "configure_economy",
-					 ImageCatalog::Keys::kStatsWaresNumber,
+					 ImageCatalog::Key::kStatsWaresNumber,
 					 &FieldActionWindow::act_configure_economy,
 					 _("Configure economy"));
 				if (can_act)
 					add_button
 						(buildbox, "geologist",
-						 ImageCatalog::Keys::kFieldGeologist,
+						 ImageCatalog::Key::kFieldGeologist,
 						 &FieldActionWindow::act_geologist,
 						 _("Send geologist to explore site"));
 			}
@@ -379,14 +379,14 @@ void FieldActionWindow::add_buttons_auto()
 			if ((m_fastclick = buildcaps & Widelands::BUILDCAPS_FLAG))
 				add_button
 					(buildbox, "build_flag",
-					 ImageCatalog::Keys::kFieldFlagBuild,
+					 ImageCatalog::Key::kFieldFlagBuild,
 					 &FieldActionWindow::act_buildflag,
 					 _("Place a flag"));
 
 			if (can_act && dynamic_cast<const Widelands::Road *>(imm))
 				add_button
 					(buildbox, "destroy_road",
-					 ImageCatalog::Keys::kFieldRoadDestroy,
+					 ImageCatalog::Key::kFieldRoadDestroy,
 					 &FieldActionWindow::act_removeroad,
 					 _("Destroy a road"));
 		}
@@ -404,33 +404,33 @@ void FieldActionWindow::add_buttons_auto()
 	if (dynamic_cast<const Game *>(&ibase().egbase())) {
 		add_button
 			(&watchbox, "watch",
-			 ImageCatalog::Keys::kFieldWatch,
+			 ImageCatalog::Key::kFieldWatch,
 			 &FieldActionWindow::act_watch,
 			 _("Watch field in a separate window"));
 		add_button
 			(&watchbox, "statistics",
-			 ImageCatalog::Keys::kFieldStatistics,
+			 ImageCatalog::Key::kFieldStatistics,
 			 &FieldActionWindow::act_show_statistics,
 			 _("Toggle building statistics display"));
 	}
 	add_button
 		(&watchbox, "census",
-		 ImageCatalog::Keys::kFieldCensus,
+		 ImageCatalog::Key::kFieldCensus,
 		 &FieldActionWindow::act_show_census,
 		 _("Toggle building label display"));
 
 	if (ibase().get_display_flag(InteractiveBase::dfDebug))
 		add_button
 			(&watchbox, "debug",
-			 ImageCatalog::Keys::kFieldDebug,
+			 ImageCatalog::Key::kFieldDebug,
 			 &FieldActionWindow::act_debug,
 			 _("Debug window"));
 
 	// Add tabs
 	if (buildbox && buildbox->get_nritems())
-		add_tab("roads", ImageCatalog::Keys::kFieldTabBuildRoad, buildbox, _("Build road"));
+		add_tab("roads", ImageCatalog::Key::kFieldTabBuildRoad, buildbox, _("Build road"));
 
-	add_tab("watch", ImageCatalog::Keys::kFieldTabWatch, &watchbox, _("Watch"));
+	add_tab("watch", ImageCatalog::Key::kFieldTabWatch, &watchbox, _("Watch"));
 
 }
 
@@ -452,14 +452,14 @@ void FieldActionWindow::add_buttons_attack ()
 			set_fastclick_panel
 				(&add_button
 				 (&a_box, "attack",
-				  ImageCatalog::Keys::kBuildingAttack,
+				  ImageCatalog::Key::kBuildingAttack,
 				  &FieldActionWindow::act_attack,
 				  _("Start attack")));
 		}
 	}
 
 	if (a_box.get_nritems()) { //  add tab
-		add_tab("attack", ImageCatalog::Keys::kFieldAttack, &a_box, _("Attack"));
+		add_tab("attack", ImageCatalog::Key::kFieldAttack, &a_box, _("Attack"));
 	}
 }
 
@@ -543,7 +543,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, const RGBColor& pla
 	if (bbg_mine)
 		m_tabpanel.activate
 			(m_best_tab = add_tab
-				("mines", ImageCatalog::Keys::kFieldTabBuildMine, bbg_mine, _("Build mines")));
+				("mines", ImageCatalog::Key::kFieldTabBuildMine, bbg_mine, _("Build mines")));
 }
 
 
@@ -559,16 +559,16 @@ void FieldActionWindow::add_buttons_road(bool flag)
 	if (flag)
 		add_button
 			(&buildbox, "build_flag",
-			 ImageCatalog::Keys::kFieldFlagBuild,
+			 ImageCatalog::Key::kFieldFlagBuild,
 			 &FieldActionWindow::act_buildflag, _("Build flag"));
 
 	add_button
 		(&buildbox, "cancel_road",
-		 ImageCatalog::Keys::kButtonMenuAbort,
+		 ImageCatalog::Key::kButtonMenuAbort,
 		 &FieldActionWindow::act_abort_buildroad, _("Cancel road"));
 
 	// Add the box as tab
-	add_tab("roads", ImageCatalog::Keys::kFieldRoadBuild, &buildbox, _("Build roads"));
+	add_tab("roads", ImageCatalog::Key::kFieldRoadBuild, &buildbox, _("Build roads"));
 }
 
 
@@ -578,7 +578,7 @@ Convenience function: Adds a new tab to the main tab panel
 ===============
 */
 uint32_t FieldActionWindow::add_tab
-	(const std::string & name, ImageCatalog::Keys image_key,
+	(const std::string & name, ImageCatalog::Key image_key,
 	 UI::Panel * panel, const std::string & tooltip_text)
 {
 	return
@@ -590,7 +590,7 @@ uint32_t FieldActionWindow::add_tab
 UI::Button & FieldActionWindow::add_button
 	(UI::Box           * const box,
 	 const char        * const name,
-	 ImageCatalog::Keys        image_key,
+	 ImageCatalog::Key        image_key,
 	 void (FieldActionWindow::*fn)(),
 	 const std::string & tooltip_text,
 	 bool                repeating)
@@ -599,7 +599,7 @@ UI::Button & FieldActionWindow::add_button
 		*new UI::Button
 			(box, name,
 			 0, 0, 34, 34,
-			 ImageCatalog::Keys::kButton2,
+			 ImageCatalog::Key::kButton2,
 			 g_gr->cataloged_image(image_key),
 			 tooltip_text);
 	button.sigclicked.connect(boost::bind(fn, this));

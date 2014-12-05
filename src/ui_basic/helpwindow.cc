@@ -80,7 +80,7 @@ HelpWindow::HelpWindow
 		(this, "ok",
 		 in_width / 3, in_height - but_height * 3 / 2,
 		 in_width / 3, but_height,
-		 ImageCatalog::Keys::kButton0,
+		 ImageCatalog::Key::kButton0,
 		 _("OK"), std::string(), true, false);
 	btn->sigclicked.connect(boost::bind(&HelpWindow::pressed_ok, boost::ref(*this)));
 	btn->set_font(Font::get(UI_FONT_NAME, (fontsize < 12 ? 12 : fontsize)));
@@ -134,7 +134,7 @@ void HelpWindow::add_block(std::string block) {
 	lastentry = BLOCK;
 }
 
-void HelpWindow::add_picture_li(std::string block, ImageCatalog::Keys image_key) {
+void HelpWindow::add_picture_li(std::string block, ImageCatalog::Key image_key) {
 	m_text += "<rt image=";
 	m_text += " image-align=left><p font-face=";
 	m_text += g_gr->image_catalog().filepath(image_key);

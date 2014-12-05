@@ -414,7 +414,7 @@ void FullscreenMenuMapSelect::fill_table()
 
 			te.set_string(col_players, "");
 			te.set_picture
-				(col_name,  g_gr->cataloged_image(ImageCatalog::Keys::kFilesDirectory),
+				(col_name,  g_gr->cataloged_image(ImageCatalog::Key::kFilesDirectory),
 				mapdata.localized_name);
 			te.set_string(col_size, "");
 
@@ -448,7 +448,7 @@ void FullscreenMenuMapSelect::fill_table()
 
 			te.set_string(col_players, "");
 			te.set_picture(col_name,
-								g_gr->cataloged_image(ImageCatalog::Keys::kFilesDirectory),
+								g_gr->cataloged_image(ImageCatalog::Key::kFilesDirectory),
 								mapdata.localized_name);
 			te.set_string(col_size, "");
 
@@ -516,9 +516,9 @@ void FullscreenMenuMapSelect::fill_table()
 					te.set_picture
 						(col_name,  g_gr->cataloged_image
 						 (dynamic_cast<WidelandsMapLoader*>(ml.get()) ?
-							  (mapdata.scenario ? ImageCatalog::Keys::kFilesScenario :
-														 ImageCatalog::Keys::kFilesWLMap) :
-							  ImageCatalog::Keys::kFilesS2Map),
+							  (mapdata.scenario ? ImageCatalog::Key::kFilesScenario :
+														 ImageCatalog::Key::kFilesWLMap) :
+							  ImageCatalog::Key::kFilesS2Map),
 						map_displayname);
 
 					te.set_string(col_size, (boost::format("%u x %u") % mapdata.width % mapdata.height).str());
@@ -574,8 +574,8 @@ void FullscreenMenuMapSelect::fill_table()
 				te.set_picture
 					(col_name,
 					 g_gr->cataloged_image((mapdata.scenario ?
-														ImageCatalog::Keys::kFilesScenario :
-														ImageCatalog::Keys::kFilesWLMap)),
+														ImageCatalog::Key::kFilesScenario :
+														ImageCatalog::Key::kFilesWLMap)),
 					 mapdata.name.c_str());
 				te.set_string(col_size, (boost::format("%u x %u") % mapdata.width % mapdata.height).str());
 
@@ -601,7 +601,7 @@ void FullscreenMenuMapSelect::fill_table()
 				te.set_string(col_players, (boost::format("(%i)") % mapdata.nrplayers).str());
 				te.set_picture
 					(col_name, g_gr->cataloged_image
-					 ((mapdata.scenario ? ImageCatalog::Keys::kFilesScenario : ImageCatalog::Keys::kFilesWLMap)),
+					 ((mapdata.scenario ? ImageCatalog::Key::kFilesScenario : ImageCatalog::Key::kFilesWLMap)),
 					 mapdata.name.c_str());
 				te.set_string(col_size, (boost::format("%u x %u") % mapdata.width % mapdata.height).str());
 			}

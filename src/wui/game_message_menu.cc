@@ -62,7 +62,7 @@ GameMessageMenu::GameMessageMenu
 		new UI::Button
 			(this, "clear_selection",
 			 5, 5, 140, 25,
-			 ImageCatalog::Keys::kButton0,
+			 ImageCatalog::Key::kButton0,
 			 _("Clear"), _("Clear selection"));
 	clearselectionbtn->sigclicked.connect
 		(boost::bind(&GameMessageMenu::do_clear_selection, this));
@@ -71,7 +71,7 @@ GameMessageMenu::GameMessageMenu
 		new UI::Button
 			(this, "invert_selection",
 			 150, 5, 140, 25,
-			 ImageCatalog::Keys::kButton0,
+			 ImageCatalog::Key::kButton0,
 			 _("Invert"), _("Invert selection"));
 	invertselectionbtn->sigclicked.connect
 		(boost::bind(&GameMessageMenu::do_invert_selection, this));
@@ -80,8 +80,8 @@ GameMessageMenu::GameMessageMenu
 		new UI::Button
 			(this, "archive_or_restore_selected_messages",
 			 295, 5, 25, 25,
-			 ImageCatalog::Keys::kButton2,
-			 g_gr->cataloged_image(ImageCatalog::Keys::kMessageActionArchive),
+			 ImageCatalog::Key::kButton2,
+			 g_gr->cataloged_image(ImageCatalog::Key::kMessageActionArchive),
 			 _("Archive selected messages"));
 	m_archivebtn->sigclicked.connect
 		(boost::bind(&GameMessageMenu::archive_or_restore, this));
@@ -90,7 +90,7 @@ GameMessageMenu::GameMessageMenu
 		new UI::Button
 			(this, "toggle_between_inbox_or_archive",
 			 325, 5, 190, 25,
-			 ImageCatalog::Keys::kButton2,
+			 ImageCatalog::Key::kButton2,
 			 _("Show Archive"));
 	m_togglemodebtn->sigclicked.connect
 		(boost::bind(&GameMessageMenu::toggle_mode, this));
@@ -99,8 +99,8 @@ GameMessageMenu::GameMessageMenu
 		new UI::Button
 			(this, "center_main_mapview_on_location",
 			 550, 5, 25, 25,
-			 ImageCatalog::Keys::kButton2,
-			 g_gr->cataloged_image(ImageCatalog::Keys::kMenuGoto),
+			 ImageCatalog::Key::kButton2,
+			 g_gr->cataloged_image(ImageCatalog::Key::kMenuGoto),
 			 _("center main mapview on location"),
 			 false);
 	m_centerviewbtn->sigclicked.connect(boost::bind(&GameMessageMenu::center_view, this));
@@ -132,10 +132,10 @@ bool GameMessageMenu::status_compare(uint32_t a, uint32_t b)
 	return false; // shouldn't happen
 }
 
-static constexpr ImageCatalog::Keys status_picture_keys[] = {
-	ImageCatalog::Keys::kMessageNew,
-	ImageCatalog::Keys::kMessageRead,
-	ImageCatalog::Keys::kMessageArchived,
+static constexpr ImageCatalog::Key status_picture_keys[] = {
+	ImageCatalog::Key::kMessageNew,
+	ImageCatalog::Key::kMessageRead,
+	ImageCatalog::Key::kMessageArchived,
 };
 
 void GameMessageMenu::show_new_message
@@ -358,14 +358,14 @@ void GameMessageMenu::toggle_mode()
 	case Inbox:
 		mode = Archive;
 		set_title(_("Messages: Archive"));
-		m_archivebtn->set_image(g_gr->cataloged_image(ImageCatalog::Keys::kMessageActionRestore));
+		m_archivebtn->set_image(g_gr->cataloged_image(ImageCatalog::Key::kMessageActionRestore));
 		m_archivebtn->set_tooltip(_("Restore selected messages"));
 		m_togglemodebtn->set_title(_("Show Inbox"));
 		break;
 	case Archive:
 		mode = Inbox;
 		set_title(_("Messages: Inbox"));
-		m_archivebtn->set_image(g_gr->cataloged_image(ImageCatalog::Keys::kMessageActionArchive));
+		m_archivebtn->set_image(g_gr->cataloged_image(ImageCatalog::Key::kMessageActionArchive));
 		m_archivebtn->set_tooltip(_("Archive selected messages"));
 		m_togglemodebtn->set_title(_("Show Archive"));
 		break;

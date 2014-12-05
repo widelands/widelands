@@ -120,7 +120,7 @@ struct WuiPlotAreaSlider : public UI::DiscreteSlider {
 		(Panel * const parent,
 		 WuiPlotArea & plot_area,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-		 const ImageCatalog::Keys background_image_key,
+		 const ImageCatalog::Key background_image_key,
 		 const std::string & tooltip_text = std::string(),
 		 const uint32_t cursor_size = 20,
 		 const bool enabled = true)

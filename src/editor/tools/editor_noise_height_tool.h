@@ -48,8 +48,8 @@ struct EditorNoiseHeightTool : public EditorTool {
 
 	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
 
-	ImageCatalog::Keys get_sel_impl() const override {
-		return ImageCatalog::Keys::kEditorToolNoiseHeight;
+	ImageCatalog::Key get_sel_impl() const override {
+		return ImageCatalog::Key::kEditorToolNoiseHeight;
 	}
 
 	Widelands::HeightInterval get_interval() const {

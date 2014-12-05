@@ -154,16 +154,16 @@ ActionConfirm::ActionConfirm
 		new UI::Button
 			(this, "ok",
 			 6, 80, 80, 34,
-			 ImageCatalog::Keys::kButton4,
-			 g_gr->cataloged_image(ImageCatalog::Keys::kButtonMenuOK));
+			 ImageCatalog::Key::kButton4,
+			 g_gr->cataloged_image(ImageCatalog::Key::kButtonMenuOK));
 	okbtn->sigclicked.connect(boost::bind(&ActionConfirm::ok, this));
 
 	UI::Button * cancelbtn =
 		new UI::Button
 			(this, "abort",
 			 114, 80, 80, 34,
-			 ImageCatalog::Keys::kButton4,
-			 g_gr->cataloged_image(ImageCatalog::Keys::kButtonMenuAbort));
+			 ImageCatalog::Key::kButton4,
+			 g_gr->cataloged_image(ImageCatalog::Key::kButtonMenuAbort));
 	cancelbtn->sigclicked.connect(boost::bind(&ActionConfirm::die, this));
 
 	center_to_parent();
@@ -190,16 +190,16 @@ ActionConfirm::ActionConfirm
 		new UI::Button
 			(this, "ok",
 			 6, 80, 80, 34,
-			 ImageCatalog::Keys::kButton4,
-			 g_gr->cataloged_image(ImageCatalog::Keys::kButtonMenuOK));
+			 ImageCatalog::Key::kButton4,
+			 g_gr->cataloged_image(ImageCatalog::Key::kButtonMenuOK));
 	okbtn->sigclicked.connect(boost::bind(&ActionConfirm::ok, this));
 
 	UI::Button * cancelbtn =
 		new UI::Button
 			(this, "abort",
 			 114, 80, 80, 34,
-			 ImageCatalog::Keys::kButton4,
-			 g_gr->cataloged_image(ImageCatalog::Keys::kButtonMenuAbort));
+			 ImageCatalog::Key::kButton4,
+			 g_gr->cataloged_image(ImageCatalog::Key::kButtonMenuAbort));
 	cancelbtn->sigclicked.connect(boost::bind(&ActionConfirm::die, this));
 
 	center_to_parent();

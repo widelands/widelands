@@ -109,7 +109,7 @@ void Widelands::MapObject::create_debug_panels
 	(const Widelands::EditorGameBase & egbase, UI::TabPanel & tabs)
 {
 	tabs.add
-		("debug", g_gr->cataloged_image(ImageCatalog::Keys::kFieldDebug),
+		("debug", g_gr->cataloged_image(ImageCatalog::Key::kFieldDebug),
 		 new MapObjectDebugPanel(tabs, egbase, *this));
 }
 
@@ -152,7 +152,7 @@ MapObjectDebugWindow::MapObjectDebugWindow
 	UI::Window        (&parent, "map_object_debug", 0, 0, 100, 100, ""),
 	m_log_general_info(true),
 	m_object          (&obj),
-	m_tabs            (this, 0, 0, ImageCatalog::Keys::kButton1)
+	m_tabs            (this, 0, 0, ImageCatalog::Key::kButton1)
 {
 	m_serial = obj.serial();
 	set_title(std::to_string(m_serial));
@@ -241,7 +241,7 @@ FieldDebugWindow::FieldDebugWindow
 	m_ui_immovable
 		(this, "immovable",
 		 0, 280, 214, 24,
-		 ImageCatalog::Keys::kButton0,
+		 ImageCatalog::Key::kButton0,
 		 ""),
 
 	m_ui_bobs(this, 0, 304, 214, 96)

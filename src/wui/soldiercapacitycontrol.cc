@@ -62,13 +62,13 @@ m_igb(igb),
 m_building(building),
 m_decrease
 	(this, "decrease", 0, 0, 32, 32,
-	 ImageCatalog::Keys::kButton4,
-	 g_gr->cataloged_image(ImageCatalog::Keys::kBuildingSoldierCapacityDecrease),
+	 ImageCatalog::Key::kButton4,
+	 g_gr->cataloged_image(ImageCatalog::Key::kBuildingSoldierCapacityDecrease),
 	 _("Decrease capacity")),
 m_increase
 	(this, "increase", 0, 0, 32, 32,
-	 ImageCatalog::Keys::kButton4,
-	 g_gr->cataloged_image(ImageCatalog::Keys::kBuildingSoldierCapacityIncrease),
+	 ImageCatalog::Key::kButton4,
+	 g_gr->cataloged_image(ImageCatalog::Key::kBuildingSoldierCapacityIncrease),
 	 _("Increase capacity")),
 m_value(this, "199", UI::Align_Center)
 {

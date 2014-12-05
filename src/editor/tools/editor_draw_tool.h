@@ -42,8 +42,8 @@ struct EditorDrawTool : public EditorTool {
 
 	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
 
-	ImageCatalog::Keys get_sel_impl() const override {
-		return ImageCatalog::Keys::kUnknownImage;
+	ImageCatalog::Key get_sel_impl() const override {
+		return ImageCatalog::Key::kUnknownImage;
 	}
 
 	void add_action(EditorToolAction ac, EditorActionArgs & args);

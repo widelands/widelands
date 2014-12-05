@@ -459,7 +459,7 @@ void Ship::ship_update_expedition(Game & game, Bob::State &) {
 			// Send a message to the player, that a new port space was found
 			std::string msg_head = _("Port Space Found");
 			std::string msg_body = _("An expedition ship found a new port build space.");
-			send_message(game, "exp_port_space", msg_head, msg_body, ImageCatalog::Keys::kOverlaysPlotPort);
+			send_message(game, "exp_port_space", msg_head, msg_body, ImageCatalog::Key::kOverlaysPlotPort);
 		}
 		m_expedition->seen_port_buildspaces.swap(temp_port_buildspaces);
 	}
@@ -568,7 +568,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 							std::string msg_head = _("Island Circumnavigated");
 							std::string msg_body = _("An expedition ship sailed around its"
 										 " island without any events.");
-							send_message(game, "exp_island", msg_head, msg_body, ImageCatalog::Keys::kShipExploreClockwise);
+							send_message(game, "exp_island", msg_head, msg_body, ImageCatalog::Key::kShipExploreClockwise);
 							m_ship_state = EXP_WAITING;
 							return start_task_idle(game, descr().main_animation(), 1500);
 						}
@@ -623,7 +623,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 				std::string msg_head = _("Coast Reached");
 				std::string msg_body =
 					_("An expedition ship reached a coast and is waiting for further commands.");
-				send_message(game, "exp_coast", msg_head, msg_body, ImageCatalog::Keys::kShipExploreClockwise);
+				send_message(game, "exp_coast", msg_head, msg_body, ImageCatalog::Key::kShipExploreClockwise);
 				return;
 			}
 		}
@@ -786,7 +786,7 @@ void Ship::start_task_expedition(Game & game) {
 	// Send a message to the player, that an expedition is ready to go
 	const std::string msg_head = _("Expedition Ready");
 	const std::string msg_body = _("An expedition ship is waiting for your commands.");
-	send_message(game, "exp_ready", msg_head, msg_body, ImageCatalog::Keys::kDockExpeditionStart);
+	send_message(game, "exp_ready", msg_head, msg_body, ImageCatalog::Key::kDockExpeditionStart);
 }
 
 /// Initializes / changes the direction of scouting to @arg direction
@@ -899,7 +899,7 @@ void Ship::log_general_info(const EditorGameBase & egbase)
  */
 void Ship::send_message(Game & game, const std::string & msgsender,
 								const std::string & title, const std::string & description,
-								ImageCatalog::Keys image_key) {
+								ImageCatalog::Key image_key) {
 	std::string rt_description  = "<rt image=";
 	rt_description += g_gr->image_catalog().filepath(image_key);
 	rt_description += "><p font-size=14 font-face=DejaVuSerif>";

@@ -50,15 +50,15 @@ EditorPlayerMenu::EditorPlayerMenu
 	m_add_player
 		(this, "add_player",
 		 get_inner_w() - 5 - 20, 5, 20, 20,
-		 ImageCatalog::Keys::kButton1,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarUp),
+		 ImageCatalog::Key::kButton1,
+		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarUp),
 		 _("Add player"),
 		 parent.egbase().map().get_nrplayers() < MAX_PLAYERS),
 	m_remove_last_player
 		(this, "remove_last_player",
 		 5, 5, 20, 20,
-		 ImageCatalog::Keys::kButton1,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarDown),
+		 ImageCatalog::Key::kButton1,
+		 g_gr->cataloged_image(ImageCatalog::Key::kScrollbarDown),
 		 _("Remove last player"),
 		 1 < parent.egbase().map().get_nrplayers())
 {
@@ -144,7 +144,7 @@ void EditorPlayerMenu::update() {
 			m_plr_names[p - 1] =
 				new UI::EditBox
 					(this, posx, posy, 140, size,
-					 ImageCatalog::Keys::kButton0);
+					 ImageCatalog::Key::kButton0);
 			m_plr_names[p - 1]->changed.connect
 				(boost::bind(&EditorPlayerMenu::name_changed, this, p - 1));
 			posx += 140 + spacing;
@@ -156,7 +156,7 @@ void EditorPlayerMenu::update() {
 				new UI::Button
 					(this, "tribe",
 					 posx, posy, 140, size,
-					 ImageCatalog::Keys::kButton0,
+					 ImageCatalog::Key::kButton0,
 					 "");
 			m_plr_set_tribes_buts[p - 1]->sigclicked.connect
 				(boost::bind(&EditorPlayerMenu::player_tribe_clicked, boost::ref(*this), p - 1));
@@ -180,15 +180,15 @@ void EditorPlayerMenu::update() {
 				new UI::Button
 					(this, "starting_pos",
 					 posx, posy, size, size,
-					 ImageCatalog::Keys::kButton0,
+					 ImageCatalog::Key::kButton0,
 					 nullptr,
 					 "");
 			m_plr_set_pos_buts[p - 1]->sigclicked.connect
 				(boost::bind(&EditorPlayerMenu::set_starting_pos_clicked, boost::ref(*this), p));
 		}
-		ImageCatalog::Keys offset = ImageCatalog::Keys::kPlayerStartingPosSmall1;
+		ImageCatalog::Key offset = ImageCatalog::Key::kPlayerStartingPosSmall1;
 		const Image* player_image =
-				g_gr->cataloged_image(static_cast<ImageCatalog::Keys>(p - 1 + static_cast<uint8_t>(offset)));
+				g_gr->cataloged_image(static_cast<ImageCatalog::Key>(p - 1 + static_cast<uint8_t>(offset)));
 
 		m_plr_set_pos_buts[p - 1]->set_image(player_image);
 		posy += size + spacing;
@@ -228,9 +228,9 @@ void EditorPlayerMenu::clicked_remove_last_player() {
 	if (!eia().is_player_tribe_referenced(old_nr_players)) {
 		if (const Widelands::Coords sp = map.get_starting_pos(old_nr_players)) {
 			//  Remove starting position marker.
-			ImageCatalog::Keys offset = ImageCatalog::Keys::kPlayerStartingPosBig1;
+			ImageCatalog::Key offset = ImageCatalog::Key::kPlayerStartingPosBig1;
 			const Image* player_image =
-					g_gr->cataloged_image(static_cast<ImageCatalog::Keys>(old_nr_players - 1 +
+					g_gr->cataloged_image(static_cast<ImageCatalog::Key>(old_nr_players - 1 +
 																							static_cast<uint8_t>(offset)));
 			map.overlay_manager().remove_overlay(sp, player_image);
 		}
@@ -427,9 +427,9 @@ void EditorPlayerMenu::make_infrastructure_clicked(uint8_t n) {
 
 		// Remove the player overlay from this starting pos.
 		// A HQ is overlay enough
-		ImageCatalog::Keys offset = ImageCatalog::Keys::kPlayerStartingPosBig1;
+		ImageCatalog::Key offset = ImageCatalog::Key::kPlayerStartingPosBig1;
 		const Image* player_image =
-				g_gr->cataloged_image(static_cast<ImageCatalog::Keys>(n - 1 + static_cast<uint8_t>(offset)));
+				g_gr->cataloged_image(static_cast<ImageCatalog::Key>(n - 1 + static_cast<uint8_t>(offset)));
 		overlay_manager.remove_overlay(start_pos, player_image);
 	}
 

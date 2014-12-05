@@ -93,7 +93,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 		(this, "delete",
 		 m_right_column_x, m_buty - m_buth - 2 * m_padding,
 		 m_butw, m_buth,
-		 ImageCatalog::Keys::kButton0,
+		 ImageCatalog::Key::kButton0,
 		 _("Delete"), std::string(), false, false),
 
 	m_ta_errormessage

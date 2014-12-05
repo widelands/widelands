@@ -70,7 +70,7 @@ ConstructionSiteWindow::ConstructionSiteWindow
 			 UI::Box::AlignLeft);
 
 	get_tabs()->add("wares",
-						 g_gr->cataloged_image(ImageCatalog::Keys::kBuildingTabWares),
+						 g_gr->cataloged_image(ImageCatalog::Key::kBuildingTabWares),
 						 &box,
 						 _("Building materials"));
 }

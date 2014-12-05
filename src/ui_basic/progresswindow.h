@@ -47,7 +47,7 @@ struct IProgressVisualization {
 
 /// Manages a progress window on the screen.
 struct ProgressWindow {
-	ProgressWindow(ImageCatalog::Keys background_image_key = ImageCatalog::Keys::kLoadscreen);
+	ProgressWindow(ImageCatalog::Key background_image_key = ImageCatalog::Key::kLoadscreen);
 	~ProgressWindow();
 
 	/// Register additional visualization (tips/hints, animation, etc)

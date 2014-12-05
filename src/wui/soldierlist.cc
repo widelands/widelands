@@ -414,11 +414,11 @@ m_infotext(this, _("Click soldier to send away"))
 	if (upcast(Widelands::MilitarySite, ms, &building)) {
 		m_soldier_preference.add_button
 			(buttons, Point(0, 0),
-			 g_gr->cataloged_image(ImageCatalog::Keys::kBuildingSoldierHeroes),
+			 g_gr->cataloged_image(ImageCatalog::Key::kBuildingSoldierHeroes),
 			 _("Prefer Rookies"));
 		m_soldier_preference.add_button
 			(buttons, Point(32, 0),
-			 g_gr->cataloged_image(ImageCatalog::Keys::kBuildingSoldierHeroes),
+			 g_gr->cataloged_image(ImageCatalog::Key::kBuildingSoldierHeroes),
 			 _("Prefer Heroes"));
 		UI::Radiobutton* button = m_soldier_preference.get_first_button();
 		while (button) {

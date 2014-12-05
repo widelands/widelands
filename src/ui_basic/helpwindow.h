@@ -65,7 +65,7 @@ struct HelpWindow : public Window {
 	void add_heading   (std::string text);
 	void add_paragraph (std::string text);
 	void add_block     (std::string text);
-	void add_picture_li(std::string text, ImageCatalog::Keys image_key);
+	void add_picture_li(std::string text, ImageCatalog::Key image_key);
 
 protected:
 	virtual void pressed_ok();

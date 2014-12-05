@@ -52,7 +52,7 @@ MilitarySiteWindow::MilitarySiteWindow
 BuildingWindow(parent, ms, registry)
 {
 	get_tabs()->add
-		("soldiers", g_gr->cataloged_image(ImageCatalog::Keys::kBuildingTabMilitary),
+		("soldiers", g_gr->cataloged_image(ImageCatalog::Key::kBuildingTabMilitary),
 		 create_soldier_list(*get_tabs(), parent, militarysite()),
 		 _("Soldiers"));
 }

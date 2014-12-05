@@ -36,7 +36,7 @@ class Image;
  */
 class FullscreenMenuBase : public UI::Panel {
 public:
-	FullscreenMenuBase(ImageCatalog::Keys background_image_key);
+	FullscreenMenuBase(ImageCatalog::Key background_image_key);
 	virtual ~FullscreenMenuBase();
 
 	void draw(RenderTarget &) override;
@@ -55,7 +55,7 @@ public:
 private:
 	UI::TextStyle textstyle_big_;
 	UI::TextStyle textstyle_small_;
-	ImageCatalog::Keys background_image_key_;
+	ImageCatalog::Key background_image_key_;
 };
 
 

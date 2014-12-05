@@ -74,7 +74,7 @@ d(new PlayerDescriptionGroupImpl)
 	d->btnPlayerType = new UI::Button
 		(this, "player_type",
 		 xplayertype, 0, xplayertribe - xplayertype - 2, h / 2,
-		 ImageCatalog::Keys::kButton1,
+		 ImageCatalog::Key::kButton1,
 		 std::string(), std::string(),
 		 true, false);
 	d->btnPlayerType->sigclicked.connect
@@ -83,7 +83,7 @@ d(new PlayerDescriptionGroupImpl)
 	d->btnPlayerTeam = new UI::Button
 		(this, "player_team",
 		 xplayerteam, h / 2, xplayerinit - xplayerteam - 2, h / 2,
-		 ImageCatalog::Keys::kButton1,
+		 ImageCatalog::Key::kButton1,
 		 std::string(), std::string(),
 		 true, false);
 	d->btnPlayerTeam->sigclicked.connect
@@ -92,7 +92,7 @@ d(new PlayerDescriptionGroupImpl)
 	d->btnPlayerTribe = new UI::Button
 		(this, "player_tribe",
 		 xplayertribe, 0, w - xplayertribe, h / 2,
-		 ImageCatalog::Keys::kButton1,
+		 ImageCatalog::Key::kButton1,
 		 std::string(), std::string(),
 		 true, false);
 	d->btnPlayerTribe->sigclicked.connect
@@ -101,7 +101,7 @@ d(new PlayerDescriptionGroupImpl)
 	d->btnPlayerInit = new UI::Button
 		(this, "player_initialization",
 		 xplayerinit, h / 2, w - xplayerinit, h / 2,
-		 ImageCatalog::Keys::kButton1,
+		 ImageCatalog::Key::kButton1,
 		 std::string(), _("Initialization"),
 		 true, false);
 	d->btnPlayerInit->sigclicked.connect

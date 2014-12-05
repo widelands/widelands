@@ -182,7 +182,7 @@ void draw_diagram
 	// first, tile the background
 	dst.tile
 		(Rect(Point(0, 0), inner_w, inner_h),
-		 g_gr->cataloged_image(ImageCatalog::Keys::kBackgroundPlot), Point(0, 0));
+		 g_gr->cataloged_image(ImageCatalog::Key::kBackgroundPlot), Point(0, 0));
 
 	// Draw coordinate system
 	// X Axis

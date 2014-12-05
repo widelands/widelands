@@ -42,7 +42,7 @@ struct EditBox : public Panel {
 	EditBox
 		(Panel *,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
-		 const ImageCatalog::Keys background_image_key = ImageCatalog::Keys::kButton2,
+		 const ImageCatalog::Key background_image_key = ImageCatalog::Key::kButton2,
 		 Align align = Align_Center);
 	virtual ~EditBox();
 

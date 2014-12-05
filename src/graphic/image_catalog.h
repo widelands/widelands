@@ -31,7 +31,7 @@
 class ImageCatalog {
 public:
 	/// The keys to fetch the image filenames.
-	enum class Keys {
+	enum class Key {
 		kUnknownImage = 0, // This is the key for a nonexistent image. Do not add this to the entries.
 
 		// general
@@ -327,20 +327,20 @@ public:
 
 	/// Returns the filepath starting from the Widelands root
 	/// for the image associated with 'key'.
-	const std::string& filepath(ImageCatalog::Keys key) const;
+	const std::string& filepath(ImageCatalog::Key key) const;
 
-	bool has_key(ImageCatalog::Keys key) const;
+	bool has_key(ImageCatalog::Key key) const;
 
 private:
-	/// This function registers a filename for each member of ImageCatalog::Keys.
+	/// This function registers a filename for each member of ImageCatalog::Key.
 	void init();
 
 	/// Inserts an image into the catalog for the 'key'.
 	/// The 'filename' is the relative path starting from kBaseDir.
-	void insert(ImageCatalog::Keys key, const std::string& filename);
+	void insert(ImageCatalog::Key key, const std::string& filename);
 
 	/// Container for the key - filename mapping.
-	std::map<ImageCatalog::Keys, std::string> entries_;
+	std::map<ImageCatalog::Key, std::string> entries_;
 
 	DISALLOW_COPY_AND_ASSIGN(ImageCatalog);
 };

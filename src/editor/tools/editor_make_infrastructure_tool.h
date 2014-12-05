@@ -45,9 +45,9 @@ struct EditorMakeInfrastructureTool : public EditorTool {
 	                          EditorInteractive& parent,
 	                          EditorActionArgs& args) override;
 
-	ImageCatalog::Keys get_sel_impl() const override {
+	ImageCatalog::Key get_sel_impl() const override {
 		 //  Standard sel icon, most complex tool of all
-		return ImageCatalog::Keys::kSelect;
+		return ImageCatalog::Key::kSelect;
 	}
 
 private:

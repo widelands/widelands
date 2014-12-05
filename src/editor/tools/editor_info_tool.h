@@ -33,8 +33,8 @@ struct EditorInfoTool : public EditorTool {
 	                          EditorInteractive& parent,
 	                          EditorActionArgs& args) override;
 
-	ImageCatalog::Keys get_sel_impl() const override {
-		return ImageCatalog::Keys::kEditorToolInfo;
+	ImageCatalog::Key get_sel_impl() const override {
+		return ImageCatalog::Key::kEditorToolInfo;
 	}
 };
 

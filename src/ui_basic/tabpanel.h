@@ -70,12 +70,12 @@ struct TabPanel : public Panel {
 	friend struct Tab;
 
 	TabPanel(Panel * parent, int32_t x, int32_t y,
-				const ImageCatalog::Keys background_image_key = ImageCatalog::Keys::kUnknownImage);
+				const ImageCatalog::Key background_image_key = ImageCatalog::Key::kUnknownImage);
 	// For Fullscreen menus
 	TabPanel
 		(Panel * parent,
 		 int32_t x, int32_t y, int32_t w, int32_t h,
-		 const ImageCatalog::Keys background_image_key = ImageCatalog::Keys::kUnknownImage);
+		 const ImageCatalog::Key background_image_key = ImageCatalog::Key::kUnknownImage);
 
 	uint32_t add
 		(const std::string & name,
@@ -109,7 +109,7 @@ private:
 	uint32_t         m_active;         ///< index of the currently active tab
 	int32_t          m_highlight;      ///< index of the highlighted button
 
-	const ImageCatalog::Keys background_image_key_; ///< picture used to draw background
+	const ImageCatalog::Key background_image_key_; ///< picture used to draw background
 };
 }
 

@@ -101,28 +101,28 @@ InteractivePlayer::InteractivePlayer
 
 m_toggle_chat
 	(INIT_BTN_this
-	 (ImageCatalog::Keys::kMenuChat, "chat", _("Chat"))),
+	 (ImageCatalog::Key::kMenuChat, "chat", _("Chat"))),
 m_toggle_options_menu
 	(INIT_BTN
-	 (ImageCatalog::Keys::kMenuOptions, "options_menu", _("Options"))),
+	 (ImageCatalog::Key::kMenuOptions, "options_menu", _("Options"))),
 m_toggle_statistics_menu
 	(INIT_BTN
-	 (ImageCatalog::Keys::kMenuStatistics, "statistics_menu", _("Statistics"))),
+	 (ImageCatalog::Key::kMenuStatistics, "statistics_menu", _("Statistics"))),
 m_toggle_objectives
 	(INIT_BTN
-	 (ImageCatalog::Keys::kMenuObjectives, "objectives", _("Objectives"))),
+	 (ImageCatalog::Key::kMenuObjectives, "objectives", _("Objectives"))),
 m_toggle_minimap
 	(INIT_BTN_this
-	 (ImageCatalog::Keys::kMenuMinimap, "minimap", _("Minimap"))),
+	 (ImageCatalog::Key::kMenuMinimap, "minimap", _("Minimap"))),
 m_toggle_buildhelp
 	(INIT_BTN_this
-	 (ImageCatalog::Keys::kMenuBuildhelp, "buildhelp", _("Show Building Spaces (on/off)"))),
+	 (ImageCatalog::Key::kMenuBuildhelp, "buildhelp", _("Show Building Spaces (on/off)"))),
 m_toggle_message_menu
 	(INIT_BTN
-	 (ImageCatalog::Keys::kMenuMessagesOld, "messages", _("Messages"))),
+	 (ImageCatalog::Key::kMenuMessagesOld, "messages", _("Messages"))),
 m_toggle_help
 	(INIT_BTN
-	 (ImageCatalog::Keys::kHelp, "help", _("Tribal Ware Encyclopedia")))
+	 (ImageCatalog::Key::kHelp, "help", _("Tribal Ware Encyclopedia")))
 
 {
 	m_toggle_chat.sigclicked.connect
@@ -250,14 +250,14 @@ void InteractivePlayer::think()
 		m_toggle_chat.set_enabled(m_chatenabled);
 	}
 	{
-		ImageCatalog::Keys image_key = ImageCatalog::Keys::kMenuMessagesOld;
+		ImageCatalog::Key image_key = ImageCatalog::Key::kMenuMessagesOld;
 
 		std::string msg_tooltip = _("Messages");
 		if
 			(uint32_t const nr_new_messages =
 			 	player().messages().nr_messages(Widelands::Message::New))
 		{
-			image_key = ImageCatalog::Keys::kMenuMessagesNew;
+			image_key = ImageCatalog::Key::kMenuMessagesNew;
 			msg_tooltip =
 			   (boost::format(ngettext("%u new message", "%u new messages", nr_new_messages)) %
 			    nr_new_messages).str();

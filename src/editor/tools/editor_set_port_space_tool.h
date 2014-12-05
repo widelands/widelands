@@ -40,8 +40,8 @@ public:
 	                         EditorInteractive& parent,
 	                         EditorActionArgs& args) override;
 
-	ImageCatalog::Keys get_sel_impl() const override {
-		return ImageCatalog::Keys::kEditorToolPortSpaceSetSet;
+	ImageCatalog::Key get_sel_impl() const override {
+		return ImageCatalog::Key::kEditorToolPortSpaceSetSet;
 	}
 };
 
@@ -63,8 +63,8 @@ public:
 	                         EditorInteractive& parent,
 	                         EditorActionArgs& args) override;
 
-	ImageCatalog::Keys get_sel_impl() const override {
-		return ImageCatalog::Keys::kEditorToolPortSpaceSet;
+	ImageCatalog::Key get_sel_impl() const override {
+		return ImageCatalog::Key::kEditorToolPortSpaceSet;
 	}
 };
 

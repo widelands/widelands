@@ -104,7 +104,7 @@ void GameTips::stop() {
 
 void GameTips::show_tip(int32_t index) {
 	// try to load a background
-	const Image* pic_background = g_gr->cataloged_image(ImageCatalog::Keys::kLoadscreenTips);
+	const Image* pic_background = g_gr->cataloged_image(ImageCatalog::Key::kLoadscreenTips);
 	assert(pic_background);
 
 	RenderTarget & rt = *g_gr->get_render_target();

@@ -77,35 +77,35 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase & e) :
 
 	m_toggle_main_menu
 	(TOOLBAR_BUTTON_COMMON_PARAMETERS("menu"),
-	 g_gr->cataloged_image(ImageCatalog::Keys::kMenuOptions),
+	 g_gr->cataloged_image(ImageCatalog::Key::kMenuOptions),
 	 _("Menu")),
 	m_toggle_tool_menu
 	(TOOLBAR_BUTTON_COMMON_PARAMETERS("tools"),
-	 g_gr->cataloged_image(ImageCatalog::Keys::kEditorMenuTools),
+	 g_gr->cataloged_image(ImageCatalog::Key::kEditorMenuTools),
 	 _("Tools")),
 	m_toggle_toolsize_menu
 	(TOOLBAR_BUTTON_COMMON_PARAMETERS("toolsize"),
-	 g_gr->cataloged_image(ImageCatalog::Keys::kEditorMenuToolSize),
+	 g_gr->cataloged_image(ImageCatalog::Key::kEditorMenuToolSize),
 	 _("Tool Size")),
 	m_toggle_minimap
 	(TOOLBAR_BUTTON_COMMON_PARAMETERS("minimap"),
-	 g_gr->cataloged_image(ImageCatalog::Keys::kMenuMinimap),
+	 g_gr->cataloged_image(ImageCatalog::Key::kMenuMinimap),
 	 _("Minimap")),
 	m_toggle_buildhelp
 	(TOOLBAR_BUTTON_COMMON_PARAMETERS("buildhelp"),
-	 g_gr->cataloged_image(ImageCatalog::Keys::kMenuBuildhelp),
+	 g_gr->cataloged_image(ImageCatalog::Key::kMenuBuildhelp),
 	 _("Show Building Spaces (on/off)")),
 	m_toggle_player_menu
 	(TOOLBAR_BUTTON_COMMON_PARAMETERS("players"),
-	 g_gr->cataloged_image(ImageCatalog::Keys::kEditorMenuPlayer),
+	 g_gr->cataloged_image(ImageCatalog::Key::kEditorMenuPlayer),
 	 _("Players")),
 	m_undo
 	(TOOLBAR_BUTTON_COMMON_PARAMETERS("undo"),
-	 g_gr->cataloged_image(ImageCatalog::Keys::kEditorUndo),
+	 g_gr->cataloged_image(ImageCatalog::Key::kEditorUndo),
 	 _("Undo")),
 	m_redo
 	(TOOLBAR_BUTTON_COMMON_PARAMETERS("redo"),
-	 g_gr->cataloged_image(ImageCatalog::Keys::kEditorRedo),
+	 g_gr->cataloged_image(ImageCatalog::Key::kEditorRedo),
 	 _("Redo"))
 {
 	m_toggle_main_menu.sigclicked.connect(boost::bind(&EditorInteractive::toggle_mainmenu, this));
@@ -150,9 +150,9 @@ void EditorInteractive::register_overlays() {
 	assert(nr_players <= MAX_PLAYERS);
 	iterate_player_numbers(p, nr_players) {
 		if (Widelands::Coords const sp = map.get_starting_pos(p)) {
-			ImageCatalog::Keys offset = ImageCatalog::Keys::kPlayerStartingPosBig1;
+			ImageCatalog::Key offset = ImageCatalog::Key::kPlayerStartingPosBig1;
 			const Image* player_image =
-					g_gr->cataloged_image(static_cast<ImageCatalog::Keys>(p - 1 + static_cast<uint8_t>(offset)));
+					g_gr->cataloged_image(static_cast<ImageCatalog::Key>(p - 1 + static_cast<uint8_t>(offset)));
 
 			map.overlay_manager().register_overlay
 				(sp, player_image, 8, Point(player_image->width() / 2, STARTING_POS_HOTSPOT_Y));
@@ -192,7 +192,7 @@ void EditorInteractive::load(const std::string & filename) {
 			 filename.c_str());
 	ml->preload_map(true);
 
-	UI::ProgressWindow loader_ui(ImageCatalog::Keys::kLoadscreenEditor);
+	UI::ProgressWindow loader_ui(ImageCatalog::Key::kLoadscreenEditor);
 	std::vector<std::string> tipstext;
 	tipstext.push_back("editor");
 
@@ -510,7 +510,7 @@ void EditorInteractive::select_tool
 	tools.current_pointer = &primary;
 	tools.use_tool        = which;
 
-	ImageCatalog::Keys sel_key = primary.get_sel(which);
+	ImageCatalog::Key sel_key = primary.get_sel(which);
 	if (g_gr->image_catalog().has_key(sel_key)) {
 		set_sel_picture(sel_key);
 	} else {
@@ -578,7 +578,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 	EditorInteractive eia(editor);
 	editor.set_ibase(&eia); // TODO(unknown): get rid of this
 	{
-		UI::ProgressWindow loader_ui(ImageCatalog::Keys::kLoadscreenEditor);
+		UI::ProgressWindow loader_ui(ImageCatalog::Key::kLoadscreenEditor);
 		std::vector<std::string> tipstext;
 		tipstext.push_back("editor");
 		GameTips editortips(loader_ui, tipstext);

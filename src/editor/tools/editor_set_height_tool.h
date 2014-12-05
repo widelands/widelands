@@ -44,8 +44,8 @@ struct EditorSetHeightTool : public EditorTool {
 
 	EditorActionArgs format_args_impl(EditorInteractive & parent) override;
 
-	ImageCatalog::Keys get_sel_impl() const override {
-		return ImageCatalog::Keys::kEditorToolHeight;
+	ImageCatalog::Key get_sel_impl() const override {
+		return ImageCatalog::Key::kEditorToolHeight;
 	}
 
 	Widelands::HeightInterval get_interval() const {

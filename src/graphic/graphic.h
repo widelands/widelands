@@ -81,7 +81,7 @@ public:
 	ImageCache& images() const {return *image_cache_.get();}
 
 	// Uses catalog 'key' to fetch an image from images().
-	const Image* cataloged_image(ImageCatalog::Keys key);
+	const Image* cataloged_image(ImageCatalog::Key key);
 	ImageCatalog& image_catalog() const {return *image_catalog_.get();}
 
 	AnimationManager& animations() const {return *animation_manager_.get();}

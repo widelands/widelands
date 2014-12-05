@@ -142,8 +142,8 @@ int32_t Panel::run()
 	while (Panel * const p = forefather->_parent)
 		forefather = p;
 
-	s_default_cursor = g_gr->cataloged_image(ImageCatalog::Keys::kCursor);
-	s_default_cursor_click = g_gr->cataloged_image(ImageCatalog::Keys::kCursorClick);
+	s_default_cursor = g_gr->cataloged_image(ImageCatalog::Key::kCursor);
+	s_default_cursor_click = g_gr->cataloged_image(ImageCatalog::Key::kCursorClick);
 
 	// Loop
 	_running = true;

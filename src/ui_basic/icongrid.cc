@@ -32,7 +32,7 @@ struct IconGridButton : public Button {
 		(IconGrid         & parent,
 		 const std::string & name,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
-		 const ImageCatalog::Keys background_image_key,
+		 const ImageCatalog::Key background_image_key,
 		 const Image* foreground_image,
 		 uint32_t callback_argument_id,
 		 const std::string & tooltip_text)
@@ -105,7 +105,7 @@ int32_t IconGrid::add
 	UI::Button * btn = new IconGridButton
 		(*this, name,
 		 x, y, m_cell_width, m_cell_height,
-		 ImageCatalog::Keys::kBackgroundButtonFlat, pic,
+		 ImageCatalog::Key::kBackgroundButtonFlat, pic,
 		 idx, tooltip_text);
 	btn->sigclicked.connect(boost::bind(&IconGrid::clicked_button, this, idx));
 

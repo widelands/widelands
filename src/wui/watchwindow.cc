@@ -104,8 +104,8 @@ WatchWindow::WatchWindow
 		new UI::Button
 			(this, "follow",
 			 0, h - 34, 34, 34,
-			 ImageCatalog::Keys::kButton0,
-			 g_gr->cataloged_image(ImageCatalog::Keys::kMenuWatch),
+			 ImageCatalog::Key::kButton0,
+			 g_gr->cataloged_image(ImageCatalog::Key::kMenuWatch),
 			 _("Follow"));
 	followbtn->sigclicked.connect(boost::bind(&WatchWindow::do_follow, this));
 
@@ -113,8 +113,8 @@ WatchWindow::WatchWindow
 		new UI::Button
 			(this, "center_mainview_here",
 			 34, h - 34, 34, 34,
-			 ImageCatalog::Keys::kButton0,
-			 g_gr->cataloged_image(ImageCatalog::Keys::kMenuGoto),
+			 ImageCatalog::Key::kButton0,
+			 g_gr->cataloged_image(ImageCatalog::Key::kMenuGoto),
 			 _("Center the main view on this"));
 	gotobtn->sigclicked.connect(boost::bind(&WatchWindow::do_goto, this));
 
@@ -124,7 +124,7 @@ WatchWindow::WatchWindow
 				new UI::Button
 					(this, "view",
 					 74 + (17 * i), 200 - 34, 17, 34,
-					 ImageCatalog::Keys::kButton0,
+					 ImageCatalog::Key::kButton0,
 					 "-", std::string(),
 					 false);
 			view_btns[i]->sigclicked.connect
@@ -135,8 +135,8 @@ WatchWindow::WatchWindow
 			new UI::Button
 				(this, "close",
 				 w - 34, h - 34, 34, 34,
-				 ImageCatalog::Keys::kButton0,
-				 g_gr->cataloged_image(ImageCatalog::Keys::kButtonMenuAbort),
+				 ImageCatalog::Key::kButton0,
+				 g_gr->cataloged_image(ImageCatalog::Key::kButtonMenuAbort),
 				 _("Close"));
 		closebtn->sigclicked.connect(boost::bind(&WatchWindow::close_cur_view, this));
 	}

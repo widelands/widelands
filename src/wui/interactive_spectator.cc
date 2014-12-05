@@ -48,17 +48,17 @@ InteractiveSpectator::InteractiveSpectator
  tooltip                                                                      \
 
 	m_toggle_chat
-		(INIT_BTN(ImageCatalog::Keys::kMenuChat, "chat", _("Chat"))),
+		(INIT_BTN(ImageCatalog::Key::kMenuChat, "chat", _("Chat"))),
 	m_exit
-		(INIT_BTN(ImageCatalog::Keys::kMenuOptionsExit, "exit_replay", _("Exit Replay"))),
+		(INIT_BTN(ImageCatalog::Key::kMenuOptionsExit, "exit_replay", _("Exit Replay"))),
 	m_save
-		(INIT_BTN(ImageCatalog::Keys::kMenuOptionsSave, "save_game", _("Save Game"))),
+		(INIT_BTN(ImageCatalog::Key::kMenuOptionsSave, "save_game", _("Save Game"))),
 	m_toggle_options_menu
-		(INIT_BTN(ImageCatalog::Keys::kMenuOptions, "options_menu", _("Options"))),
+		(INIT_BTN(ImageCatalog::Key::kMenuOptions, "options_menu", _("Options"))),
 	m_toggle_statistics
-		(INIT_BTN(ImageCatalog::Keys::kMenuStatsGeneral, "general_stats", _("Statistics"))),
+		(INIT_BTN(ImageCatalog::Key::kMenuStatsGeneral, "general_stats", _("Statistics"))),
 	m_toggle_minimap
-		(INIT_BTN(ImageCatalog::Keys::kMenuMinimap, "minimap", _("Minimap")))
+		(INIT_BTN(ImageCatalog::Key::kMenuMinimap, "minimap", _("Minimap")))
 {
 	m_toggle_chat.sigclicked.connect(boost::bind(&InteractiveSpectator::toggle_chat, this));
 	m_exit.sigclicked.connect(boost::bind(&InteractiveSpectator::exit_btn, this));

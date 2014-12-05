@@ -74,16 +74,16 @@ m_game(parent->game())
 	m_continue_button = new UI::Button
 		(buttonBox, "continue_button",
 		 0, 0, 35, 35,
-		 ImageCatalog::Keys::kButton4,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kActionContinue),
+		 ImageCatalog::Key::kButton4,
+		 g_gr->cataloged_image(ImageCatalog::Key::kActionContinue),
 		 _("Continue playing"));
 	buttonBox->add(m_continue_button, UI::Box::AlignRight);
 	buttonBox->add_space(PADDING);
 	m_stop_button = new UI::Button
 		(buttonBox, "stop_button",
 		 0, 0, 35, 35,
-		 ImageCatalog::Keys::kButton4,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kMenuOptionsExit),
+		 ImageCatalog::Key::kButton4,
+		 g_gr->cataloged_image(ImageCatalog::Key::kMenuOptionsExit),
 		_("Exit Game"));
 	buttonBox->add(m_stop_button, UI::Box::AlignRight);
 	buttonBox->add_space(PADDING);
@@ -144,9 +144,9 @@ void GameSummaryScreen::fill_data()
 		UI::Table<uintptr_t const>::EntryRecord & te
 			= m_players_table->add(i);
 		// Player name & pic
-		ImageCatalog::Keys offset = ImageCatalog::Keys::kPlayerFlag1;
+		ImageCatalog::Key offset = ImageCatalog::Key::kPlayerFlag1;
 		const Image* player_image =
-				g_gr->cataloged_image(static_cast<ImageCatalog::Keys>(pes.player - 1 +
+				g_gr->cataloged_image(static_cast<ImageCatalog::Key>(pes.player - 1 +
 																						static_cast<uint8_t>(offset)));
 		te.set_picture(0, player_image, p->get_name());
 		// Team

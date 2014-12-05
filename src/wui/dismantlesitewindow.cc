@@ -65,7 +65,7 @@ DismantleSiteWindow::DismantleSiteWindow
 		BuildingWindow::create_ware_queue_panel(&box, cs, cs.get_waresqueue(i), true);
 
 	get_tabs()->add("wares",
-						 g_gr->cataloged_image(ImageCatalog::Keys::kBuildingTabWares),
+						 g_gr->cataloged_image(ImageCatalog::Key::kBuildingTabWares),
 						 &box,
 						 _("Building materials"));
 }

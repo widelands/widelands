@@ -172,8 +172,8 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 					UI::Button * expeditionbtn =
 						new UI::Button
 							(capsbuttons, "cancel_expedition", 0, 0, 34, 34,
-							 ImageCatalog::Keys::kButton4,
-							 g_gr->cataloged_image(ImageCatalog::Keys::kDockExpeditionCancel),
+							 ImageCatalog::Key::kButton4,
+							 g_gr->cataloged_image(ImageCatalog::Key::kDockExpeditionCancel),
 							_("Cancel the expedition"));
 					expeditionbtn->sigclicked.connect
 						(boost::bind(&BuildingWindow::act_start_or_cancel_expedition, boost::ref(*this)));
@@ -182,8 +182,8 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 					UI::Button * expeditionbtn =
 						new UI::Button
 							(capsbuttons, "start_expedition", 0, 0, 34, 34,
-							 ImageCatalog::Keys::kButton4,
-							 g_gr->cataloged_image(ImageCatalog::Keys::kDockExpeditionStart),
+							 ImageCatalog::Key::kButton4,
+							 g_gr->cataloged_image(ImageCatalog::Key::kDockExpeditionStart),
 							_("Start an expedition"));
 					expeditionbtn->sigclicked.connect
 						(boost::bind(&BuildingWindow::act_start_or_cancel_expedition, boost::ref(*this)));
@@ -198,10 +198,10 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 				UI::Button * stopbtn =
 					new UI::Button
 						(capsbuttons, is_stopped ? "continue" : "stop", 0, 0, 34, 34,
-						 ImageCatalog::Keys::kButton4,
+						 ImageCatalog::Key::kButton4,
 						 is_stopped ?
-							 g_gr->cataloged_image(ImageCatalog::Keys::kActionContinue) :
-							 g_gr->cataloged_image(ImageCatalog::Keys::kActionStop),
+							 g_gr->cataloged_image(ImageCatalog::Key::kActionContinue) :
+							 g_gr->cataloged_image(ImageCatalog::Key::kActionStop),
 						 /** TRANSLATORS: Stop/Continue toggle button for production sites. */
 						 is_stopped ? _("Continue") : _("Stop"));
 				stopbtn->sigclicked.connect(boost::bind(&BuildingWindow::act_start_stop, boost::ref(*this)));
@@ -235,7 +235,7 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 					UI::Button * enhancebtn =
 						new UI::Button
 							(capsbuttons, "enhance", 0, 0, 34, 34,
-							 ImageCatalog::Keys::kButton4,
+							 ImageCatalog::Key::kButton4,
 							 building_descr.get_icon(),
 							 enhance_tooltip);
 
@@ -252,8 +252,8 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 			UI::Button * destroybtn =
 				new UI::Button
 					(capsbuttons, "destroy", 0, 0, 34, 34,
-					 ImageCatalog::Keys::kButton4,
-					 g_gr->cataloged_image(ImageCatalog::Keys::kBuildingBulldoze),
+					 ImageCatalog::Key::kButton4,
+					 g_gr->cataloged_image(ImageCatalog::Key::kBuildingBulldoze),
 					 _("Destroy"));
 			destroybtn->sigclicked.connect
 				(boost::bind(&BuildingWindow::act_bulldoze, boost::ref(*this)));
@@ -270,8 +270,8 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 			UI::Button * dismantlebtn =
 				new UI::Button
 					(capsbuttons, "dismantle", 0, 0, 34, 34,
-					 ImageCatalog::Keys::kButton4,
-					 g_gr->cataloged_image(ImageCatalog::Keys::kBuildingDismantle),
+					 ImageCatalog::Key::kButton4,
+					 g_gr->cataloged_image(ImageCatalog::Key::kBuildingDismantle),
 					 std::string(_("Dismantle")) + "<br><font size=11>" + _("Returns:") + "</font><br>" +
 						 waremap_to_richtext(owner.tribe(), wares));
 			dismantlebtn->sigclicked.connect(boost::bind(&BuildingWindow::act_dismantle, boost::ref(*this)));
@@ -302,8 +302,8 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 			m_toggle_workarea = new UI::Button
 				(capsbuttons, "workarea",
 				 0, 0, 34, 34,
-				 ImageCatalog::Keys::kButton4,
-				 g_gr->cataloged_image(ImageCatalog::Keys::kOverlaysWorkarea123),
+				 ImageCatalog::Key::kButton4,
+				 g_gr->cataloged_image(ImageCatalog::Key::kOverlaysWorkarea123),
 				 _("Hide work area"));
 			m_toggle_workarea->sigclicked.connect
 				(boost::bind(&BuildingWindow::toggle_workarea, boost::ref(*this)));
@@ -317,8 +317,8 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 			UI::Button * debugbtn =
 				new UI::Button
 					(capsbuttons, "debug", 0, 0, 34, 34,
-					 ImageCatalog::Keys::kButton4,
-					 g_gr->cataloged_image(ImageCatalog::Keys::kFieldDebug),
+					 ImageCatalog::Key::kButton4,
+					 g_gr->cataloged_image(ImageCatalog::Key::kFieldDebug),
 					 _("Debug"));
 			debugbtn->sigclicked.connect(boost::bind(&BuildingWindow::act_debug, boost::ref(*this)));
 			capsbuttons->add
@@ -329,8 +329,8 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 		UI::Button * gotobtn =
 			new UI::Button
 				(capsbuttons, "goto", 0, 0, 34, 34,
-				 ImageCatalog::Keys::kButton4,
-				 g_gr->cataloged_image(ImageCatalog::Keys::kMenuGoto),
+				 ImageCatalog::Key::kButton4,
+				 g_gr->cataloged_image(ImageCatalog::Key::kMenuGoto),
 				 _("Center view on this"));
 		gotobtn->sigclicked.connect(boost::bind(&BuildingWindow::clicked_goto, boost::ref(*this)));
 		capsbuttons->add
@@ -347,8 +347,8 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 			UI::Button * helpbtn =
 				new UI::Button
 					(capsbuttons, "help", 0, 0, 34, 34,
-					 ImageCatalog::Keys::kButton4,
-					 g_gr->cataloged_image(ImageCatalog::Keys::kHelp),
+					 ImageCatalog::Key::kButton4,
+					 g_gr->cataloged_image(ImageCatalog::Key::kHelp),
 					 _("Help"));
 
 			UI::UniqueWindow::Registry& registry =
