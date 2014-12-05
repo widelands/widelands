@@ -22,6 +22,7 @@
 
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "ui_basic/mouse_constants.h"
 
@@ -51,7 +52,7 @@ Slider::Slider
 	(Panel * const parent,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 	 const int32_t min_value, const int32_t max_value, const int32_t value,
-	 const Image* background_picture_id,
+	 const ImageCatalog::Keys background_image_key,
 	 const std::string & tooltip_text,
 	 const uint32_t cursor_size,
 	 const bool enabled,
@@ -64,7 +65,7 @@ Slider::Slider
 	m_highlighted    (false),
 	m_pressed        (false),
 	m_enabled        (enabled),
-	m_pic_background (background_picture_id),
+	background_image_key_ (background_image_key),
 	m_x_gap          (x_gap),
 	m_y_gap          (y_gap),
 	m_bar_size       (bar_size),
@@ -149,7 +150,9 @@ void Slider::draw_cursor
 	RGBColor black(0, 0, 0);
 
 	dst.tile //  background
-		(Rect(Point(x, y), w, h), m_pic_background, Point(get_x(), get_y()));
+		(Rect(Point(x, y), w, h),
+		 g_gr->cataloged_image(background_image_key_),
+		 Point(get_x(), get_y()));
 
 	if (m_highlighted)
 		dst.brighten_rect(Rect(Point(x, y), w, h), MOUSE_OVER_BRIGHT_FACTOR);
@@ -552,7 +555,7 @@ DiscreteSlider::DiscreteSlider
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 	 const std::vector<std::string> labels_in,
 	 uint32_t m_value,
-	 const Image* background_picture_id,
+	 const ImageCatalog::Keys background_image_key,
 	 const std::string & tooltip_text,
 	 const uint32_t cursor_size,
 	 const bool enabled)
@@ -565,7 +568,7 @@ DiscreteSlider::DiscreteSlider
 		 w - (w / labels_in.size()) + cursor_size,
 		 h - UI::Font::ui_small()->lineskip() - 2,
 		 0, labels_in.size() - 1, m_value,
-		 background_picture_id,
+		 background_image_key,
 		 tooltip_text,
 		 cursor_size,
 		 enabled),

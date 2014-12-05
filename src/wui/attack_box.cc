@@ -76,7 +76,7 @@ UI::Slider & AttackBox::add_slider
 			 0, 0,
 			 width, height,
 			 min, max, initial,
-			 g_gr->cataloged_image(image_key),
+			 image_key,
 			 hint);
 	parent.add(&result, UI::Box::AlignCenter);
 	return result;

@@ -273,12 +273,8 @@ m_selected_information(0)
 
 	m_box.add(hbox2, UI::Box::AlignTop, true);
 
-	m_box.add
-		(new WuiPlotAreaSlider
-			(&m_box, m_plot, 0, 0, 100, 45,
-			 g_gr->cataloged_image(ImageCatalog::Keys::kButton1))
-		, UI::Box::AlignTop
-		, true);
+	m_box.add(new WuiPlotAreaSlider(&m_box, m_plot, 0, 0, 100, 45, ImageCatalog::Keys::kButton1),
+				 UI::Box::AlignTop, true);
 
 }
 

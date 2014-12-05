@@ -250,7 +250,7 @@ m_parent(&parent)
 		(new WuiPlotGenericAreaSlider
 			(this, *m_plot_production, this,
 			0, 0, 100, 45,
-			g_gr->cataloged_image(ImageCatalog::Keys::kButton1)),
+			ImageCatalog::Keys::kButton1),
 		 UI::Box::AlignLeft, true);
 
 }
