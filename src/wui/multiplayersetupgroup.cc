@@ -317,7 +317,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					} else {
 						title = (boost::format(_("AI: %s")) % _(player_setting.ai)).str();
 						// TODO(GunChleoc): We should use the image catalog instead.
-						pic = (boost::format("data/pics/ai/%s.png")
+						pic = (boost::format("data/images/ai/%s.png")
 								 % player_setting.ai.c_str()).str();
 					}
 				}

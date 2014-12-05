@@ -235,7 +235,7 @@ install(
     data/tribes
     data/txts
     data/world
-    data/pics
+    data/images
     data/scripting
   DESTINATION ${WL_INSTALL_DATADIR}/data
   CONFIGURATIONS Debug;Release

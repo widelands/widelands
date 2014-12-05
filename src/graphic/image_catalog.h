@@ -319,7 +319,7 @@ public:
 	};
 
 	/// The base directory for the images in this catalog.
-	static constexpr const char* kBaseDir = "data/pics/";
+	static constexpr const char* kBaseDir = "data/images/";
 
 	/// The constructor will map keys to filenames.
 	ImageCatalog();
