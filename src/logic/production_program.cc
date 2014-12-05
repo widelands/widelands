@@ -1254,7 +1254,7 @@ void ProductionProgram::ActMine::execute
 			uint8_t  fres   = mr.location().field->get_resources();
 			uint32_t amount = mr.location().field->get_resources_amount();
 			uint32_t start_amount =
-				mr.location().field->get_starting_res_amount();
+				mr.location().field->get_initial_res_amount();
 
 			if (fres != m_resource) {
 				amount       = 0;

@@ -245,8 +245,6 @@ void EditorInteractive::think() {
 	frametime = m_realtime - lasttime;
 
 	egbase().get_gametime_pointer() += frametime;
-
-	g_gr->animate_maptextures(egbase().get_gametime());
 }
 
 
@@ -422,11 +420,6 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			set_display_flag
 			(InteractiveBase::dfShowCensus,
 			 !get_display_flag(InteractiveBase::dfShowCensus));
-			handled = true;
-			break;
-
-		case SDLK_f:
-			g_gr->set_fullscreen(!g_gr->fullscreen());
 			handled = true;
 			break;
 

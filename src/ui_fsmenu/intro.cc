@@ -51,5 +51,5 @@ bool FullscreenMenuIntro::handle_key(bool const down, SDL_Keysym const code)
 	if (down && code.sym == SDLK_ESCAPE)
 		end_modal(0);
 
-	return true;
+	return false;
 }

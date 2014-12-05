@@ -20,7 +20,7 @@
 #ifndef WL_GRAPHIC_GAME_RENDERER_H
 #define WL_GRAPHIC_GAME_RENDERER_H
 
-#include <boost/utility.hpp>
+#include <memory>
 
 #include "base/macros.h"
 #include "base/point.h"
@@ -30,7 +30,11 @@ namespace Widelands {
 	class EditorGameBase;
 }
 
+class DitherProgram;
 class RenderTarget;
+class RoadProgram;
+class TerrainProgram;
+
 
 /**
  * This abstract base class renders the main game view into an
@@ -45,56 +49,41 @@ class RenderTarget;
 class GameRenderer {
 public:
 	GameRenderer();
-	virtual ~GameRenderer();
+	~GameRenderer();
 
-	/**
-	 * Renders the map from a player's point of view into the
-	 * given drawing window.
-	 *
-	 * @param viewofs is the offset of the upper left corner of
-	 * the window into the map, in pixels.
-	 */
-	void rendermap
-		(RenderTarget & dst,
-		 const Widelands::EditorGameBase &       egbase,
-		 const Widelands::Player           &       player,
-		 const Point                       &       viewofs);
+	// Renders the map from a player's point of view into the given
+	// drawing window. 'view_offset' is the offset of the upper left
+	// corner of the window into the map, in pixels.
+	void rendermap(RenderTarget& dst,
+	               const Widelands::EditorGameBase& egbase,
+	               const Point& view_offset,
+	               const Widelands::Player& player);
 
-	/**
-	 * Renders the map from an omniscient perspective.
-	 * This is used for spectators, players that see all, and in the editor.
-	 */
-	void rendermap
-		(RenderTarget & dst,
-		 const Widelands::EditorGameBase & egbase,
-		 const Point                       & viewofs);
-
-protected:
-	virtual void draw() = 0;
-
-	void draw_objects();
-
-	/**
-	 * The following variables, which are setup by @ref rendermap,
-	 * are only valid during rendering,
-	 * and should be treated as read-only by derived classes.
-	 */
-	/*@{*/
-	RenderTarget * m_dst;
-	Widelands::EditorGameBase const * m_egbase;
-	Widelands::Player const * m_player;
-
-	/// Translation from map pixel coordinates to @ref m_dst pixel coordinates
-	Point m_dst_offset;
-
-	int32_t m_minfx;
-	int32_t m_minfy;
-	int32_t m_maxfx;
-	int32_t m_maxfy;
-	/*@}*/
+	// Renders the map from an omniscient perspective. This is used
+	// for spectators, players that see all, and in the editor.
+	void rendermap(RenderTarget& dst, const Widelands::EditorGameBase& egbase, const Point& view_offset);
 
 private:
-	void draw_wrapper();
+	static std::unique_ptr<TerrainProgram> terrain_program_;
+	static std::unique_ptr<DitherProgram> dither_program_;
+	static std::unique_ptr<RoadProgram> road_program_;
+
+	// Draw the map for the given parameters (see rendermap). 'player'
+	// can be nullptr in which case the whole map is drawn.
+	void draw(RenderTarget& dst,
+	          const Widelands::EditorGameBase& egbase,
+	          const Point& view_offset,
+	          const Widelands::Player* player);
+
+	// Draws the objects (animations & overlays).
+	void draw_objects(RenderTarget& dst,
+	                  const Widelands::EditorGameBase& egbase,
+	                  const Point& view_offset,
+	                  const Widelands::Player* player,
+	                  int minfx,
+	                  int maxfx,
+	                  int minfy,
+	                  int maxfy);
 
 	DISALLOW_COPY_AND_ASSIGN(GameRenderer);
 };

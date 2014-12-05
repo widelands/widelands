@@ -49,6 +49,8 @@ class Player;
  * \note If the sub-window would be empty/invisible, \ref enter_window() returns
  * false and doesn't change the window state at all.
 */
+// TODO(sirver): remove window functions and merge with surface once
+// the old richtext renderer is gone.
 class RenderTarget {
 public:
 	RenderTarget(Surface*);
@@ -73,6 +75,12 @@ public:
 	              const Image* image,
 	              const Rect& src,
 	              BlendMode blend_mode = BlendMode::UseAlpha);
+
+	void blitrect_scale(
+			const Rect& dst,
+			const Image* image,
+			const Rect& src,
+			BlendMode blend_mode = BlendMode::UseAlpha);
 
 	void tile(const Rect&,
 	          const Image* image,

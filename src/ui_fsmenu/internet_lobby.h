@@ -35,8 +35,8 @@
 #include "ui_basic/textarea.h"
 #include "wui/gamechatpanel.h"
 
-struct FullscreenMenuInternetLobby : public FullscreenMenuBase {
-
+class FullscreenMenuInternetLobby : public FullscreenMenuBase {
+public:
 	FullscreenMenuInternetLobby (const char *, const char *, bool);
 
 	void think() override;

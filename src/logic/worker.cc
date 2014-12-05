@@ -235,7 +235,7 @@ bool Worker::run_breed(Game & game, State & state, const Action & action)
 	do {
 		uint8_t fres  = mr.location().field->get_resources();
 		uint32_t amount =
-			mr.location().field->get_starting_res_amount() -
+			mr.location().field->get_initial_res_amount() -
 			mr.location().field->get_resources_amount   ();
 
 		// In the future, we might want to support amount = 0 for
@@ -278,7 +278,7 @@ bool Worker::run_breed(Game & game, State & state, const Action & action)
 			continue;
 
 		uint32_t amount =
-			mr.location().field->get_starting_res_amount() -
+			mr.location().field->get_initial_res_amount() -
 			mr.location().field->get_resources_amount   ();
 
 		pick -= 8 * amount;
@@ -288,7 +288,7 @@ bool Worker::run_breed(Game & game, State & state, const Action & action)
 			--amount;
 
 			mr.location().field->set_resources
-				(res, mr.location().field->get_starting_res_amount() - amount);
+				(res, mr.location().field->get_initial_res_amount() - amount);
 			break;
 		}
 	} while (mr.advance(map));

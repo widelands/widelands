@@ -27,7 +27,6 @@
 #include "base/wexception.h"
 #include "graphic/font.h"
 #include "graphic/graphic.h"
-#include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
 #include "io/filesystem/filesystem.h"
 #include "profile/profile.h"
@@ -42,29 +41,19 @@ FullscreenMenuBase
 ==============================================================================
 */
 
-struct FullscreenMenuBase::Data {
-	const Image* res_background;
-	UI::TextStyle textstyle_small;
-	UI::TextStyle textstyle_big;
-};
-
 /**
  * Initialize a pre-game menu
  *
- * Args: bgpic  name of the background picture
+ * Args: background_image_key ImageCatalog key for the background picture
  */
 FullscreenMenuBase::FullscreenMenuBase(ImageCatalog::Keys background_image_key)
-	: UI::Panel(nullptr, 0, 0, gr_x(), gr_y()),
-	d(new Data)
-{
-	// Load background graphics
-	d->res_background = ImageTransformations::resize(g_gr->cataloged_image(background_image_key), get_w(), get_h());
+   : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()) {
+	textstyle_small_ = UI::TextStyle::ui_small();
+	textstyle_small_.font = UI::Font::get(ui_fn(), fs_small());
 
-	d->textstyle_small = UI::TextStyle::ui_small();
-	d->textstyle_small.font = UI::Font::get(ui_fn(), fs_small());
-
-	d->textstyle_big = UI::TextStyle::ui_big();
-	d->textstyle_big.font = UI::Font::get(ui_fn(), fs_big());
+	textstyle_big_ = UI::TextStyle::ui_big();
+	textstyle_big_.font = UI::Font::get(ui_fn(), fs_big());
+	background_image_key_ = background_image_key;
 }
 
 FullscreenMenuBase::~FullscreenMenuBase()
@@ -76,18 +65,9 @@ FullscreenMenuBase::~FullscreenMenuBase()
  * Draw the background / splash screen
 */
 void FullscreenMenuBase::draw(RenderTarget & dst) {
-	dst.blit(Point(0, 0), d->res_background);
+	const Image* bg = g_gr->cataloged_image(background_image_key_);
+	dst.blitrect_scale(Rect(0, 0, get_w(), get_h()), bg, Rect(0, 0, bg->width(), bg->height()));
 }
-
-
-uint32_t FullscreenMenuBase::gr_x() {
-	return g_gr->get_xres();
-}
-
-uint32_t FullscreenMenuBase::gr_y() {
-	return g_gr->get_yres();
-}
-
 
 uint32_t FullscreenMenuBase::fs_small() {
 	return UI_FONT_SIZE_SMALL * get_h() / 600;
@@ -99,20 +79,20 @@ uint32_t FullscreenMenuBase::fs_big() {
 
 UI::TextStyle & FullscreenMenuBase::ts_small()
 {
-	return d->textstyle_small;
+	return textstyle_small_;
 }
 
 UI::TextStyle & FullscreenMenuBase::ts_big()
 {
-	return d->textstyle_big;
+	return textstyle_big_;
 }
 
 UI::Font * FullscreenMenuBase::font_small()
 {
-	return d->textstyle_small.font;
+	return textstyle_small_.font;
 }
 
 UI::Font * FullscreenMenuBase::font_big()
 {
-	return d->textstyle_big.font;
+	return textstyle_big_.font;
 }

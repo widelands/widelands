@@ -21,4 +21,5 @@ wl_library(sound
     profile
     random
     wui
+    wui_mapview_pixelfunctions
 )

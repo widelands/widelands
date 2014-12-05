@@ -334,11 +334,6 @@ void FullscreenMenuLoadGame::entry_selected()
 					if (scale > 1.0) scale = 1.0; // Don't make the image too big; fuzziness will result
 					uint16_t w = scale * m_minimap_image->width();
 					uint16_t h = scale * m_minimap_image->height();
-					const Image* resized = ImageTransformations::resize(m_minimap_image.get(), w, h);
-					// keeps our in_memory_image around and give to icon the one
-					// from resize that is handled by the cache. It is still linked to our
-					// texture.
-					m_minimap_icon.set_size(w, h);
 
 					// Center the minimap in the available space
 					int32_t xpos = m_right_column_x + (get_w() - m_right_column_margin - w - m_right_column_x) / 2;
@@ -351,10 +346,11 @@ void FullscreenMenuLoadGame::entry_selected()
 						ypos += (m_minimap_h - h) / 2;
 					}
 
+					m_minimap_icon.set_size(w, h);
 					m_minimap_icon.set_pos(Point(xpos, ypos));
 					m_minimap_icon.set_frame(UI_FONT_CLR_FG);
 					m_minimap_icon.set_visible(true);
-					m_minimap_icon.set_icon(resized);
+					m_minimap_icon.set_icon(m_minimap_image.get());
 				} catch (const std::exception & e) {
 					log("Failed to load the minimap image : %s\n", e.what());
 				}

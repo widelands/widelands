@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2013 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,32 +17,21 @@
  *
  */
 
-#ifndef WL_GRAPHIC_GL_GAME_RENDERER_H
-#define WL_GRAPHIC_GL_GAME_RENDERER_H
+#include "ui_fsmenu/main_menu.h"
 
-#include <memory>
+FullscreenMenuMainMenu::FullscreenMenuMainMenu():
+	FullscreenMenuMainMenu(ImageCatalog::Keys::kFullscreen)
+	{}
 
-#include "graphic/game_renderer.h"
-#include "graphic/gl/utils.h"
+FullscreenMenuMainMenu::FullscreenMenuMainMenu(ImageCatalog::Keys background_image_key):
+	FullscreenMenuBase(background_image_key),
 
-class TerrainProgram;
-class DitherProgram;
-class RoadProgram;
-
-/**
- * OpenGL implementation of @ref GameRenderer.
- */
-class GlGameRenderer : public GameRenderer {
-public:
-	GlGameRenderer();
-	virtual ~GlGameRenderer();
-
-private:
-	static std::unique_ptr<TerrainProgram> terrain_program_;
-	static std::unique_ptr<DitherProgram> dither_program_;
-	static std::unique_ptr<RoadProgram> road_program_;
-
-	void draw() override;
-};
-
-#endif  // end of include guard: WL_GRAPHIC_GL_GAME_RENDERER_H
+	// Values for alignment and size
+	m_box_x(get_w() * 13 / 40),
+	m_box_y(get_h() * 6 / 25),
+	m_butw(get_w() * 7 / 20),
+	m_buth(get_h() * 9 / 200),
+	m_title_y(get_h() * 3 / 40),
+	m_padding(m_buth / 3),
+	m_button_background(ImageCatalog::Keys::kButton3)
+{}

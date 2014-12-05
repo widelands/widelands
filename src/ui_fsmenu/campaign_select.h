@@ -37,11 +37,11 @@
  * UI 1 - Selection of Campaign
  *
  */
-struct FullscreenMenuCampaignSelect : public FullscreenMenuLoadMapOrGame {
+class FullscreenMenuCampaignSelect : public FullscreenMenuLoadMapOrGame {
+public:
+	FullscreenMenuCampaignSelect();
 
 	static constexpr int kMaxDifficulty = 4;
-
-	FullscreenMenuCampaignSelect();
 
 	int32_t get_campaign();
 
@@ -89,7 +89,8 @@ private:
  * UI 2 - Selection of a map
  *
  */
-struct FullscreenMenuCampaignMapSelect : public FullscreenMenuLoadMapOrGame {
+class FullscreenMenuCampaignMapSelect : public FullscreenMenuLoadMapOrGame {
+public:
 	FullscreenMenuCampaignMapSelect(bool is_tutorial = false);
 
 	std::string get_map();

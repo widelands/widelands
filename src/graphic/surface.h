@@ -43,7 +43,7 @@ public:
 	uint16_t height() const;
 
 	/// This draws a part of another surface to this surface
-	virtual void blit(const Point&,
+	virtual void blit(const Rect& dst,
 	                  const Texture*,
 	                  const Rect& srcrc,
 	                  BlendMode blend_mode = BlendMode::UseAlpha);

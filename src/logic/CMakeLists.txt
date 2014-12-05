@@ -6,6 +6,7 @@ wl_binary(wl_map_info
     base_log
     graphic
     graphic_image_io
+    graphic_minimap_renderer
     graphic_surface
     io_fileread
     io_filesystem
@@ -229,6 +230,9 @@ wl_library(logic
     game_io
     graphic
     graphic_color
+    graphic_image_io
+    graphic_surface
+    graphic_texture_atlas
     helper
     io_fileread
     io_filesystem
@@ -247,5 +251,7 @@ wl_library(logic
     ui_basic
     widelands_ball_of_mud
     wui
+    wui_mapview_pixelfunctions
+    wui_overlay_manager
     wui_text_layout
 )
