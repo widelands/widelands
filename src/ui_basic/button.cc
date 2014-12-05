@@ -22,6 +22,7 @@
 #include "base/log.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
+#include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
@@ -39,7 +40,7 @@ Button::Button //  for textual buttons
 	(Panel * const parent,
 	 const std::string & name,
 	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
-	 const Image* bg_pic,
+	 const ImageCatalog::Keys background_image_key,
 	 const std::string & title_text,
 	 const std::string & tooltip_text,
 	 bool const _enabled, bool const flat)
@@ -54,9 +55,9 @@ Button::Button //  for textual buttons
 	m_draw_flat_background(false),
 	m_time_nextact  (0),
 	m_title         (title_text),
-	m_pic_background(bg_pic),
-	m_pic_custom    (nullptr),
-	m_pic_custom_disabled(nullptr),
+	background_image_(g_gr->cataloged_image(background_image_key)),
+	foreground_image_(nullptr),
+	foreground_image_disabled_(nullptr),
 	m_font(UI::Font::ui_small()),
 	m_clr_down      (229, 161, 2),
 	m_draw_caret    (false)
@@ -68,8 +69,8 @@ Button::Button //  for pictorial buttons
 	(Panel * const parent,
 	 const std::string & name,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-	 const Image* bg_pic,
-	 const Image* fg_pic,
+	 const ImageCatalog::Keys background_image_key,
+	 const Image* foreground_image,
 	 const std::string & tooltip_text,
 	 bool const _enabled, bool const flat)
 	:
@@ -82,9 +83,11 @@ Button::Button //  for pictorial buttons
 	m_flat          (flat),
 	m_draw_flat_background(false),
 	m_time_nextact  (0),
-	m_pic_background(bg_pic),
-	m_pic_custom    (fg_pic),
-	m_pic_custom_disabled(fg_pic ? ImageTransformations::gray_out(fg_pic) : nullptr),
+	background_image_(g_gr->cataloged_image(background_image_key)),
+	foreground_image_    (foreground_image),
+	foreground_image_disabled_(foreground_image ?
+									 ImageTransformations::gray_out(foreground_image) :
+									 nullptr),
 	m_font(UI::Font::ui_small()),
 	m_clr_down      (229, 161, 2),
 	m_draw_caret    (false)
@@ -101,15 +104,15 @@ Button::~Button()
 /**
  * Sets a new picture for the Button.
 */
-void Button::set_pic(const Image* pic)
+void Button::set_image(const Image* foreground)
 {
 	m_title.clear();
 
-	if (m_pic_custom == pic)
+	if (foreground_image_ == foreground)
 		return;
 
-	m_pic_custom = pic;
-	m_pic_custom_disabled = ImageTransformations::gray_out(pic);
+	foreground_image_ = foreground;
+	foreground_image_disabled_ = ImageTransformations::gray_out(foreground);
 
 	update();
 }
@@ -122,7 +125,7 @@ void Button::set_title(const std::string & title) {
 	if (m_title == title)
 		return;
 
-	m_pic_custom = nullptr;
+	foreground_image_ = nullptr;
 	m_title      = title;
 
 	update();
@@ -161,9 +164,9 @@ void Button::draw(RenderTarget & dst)
 {
 	// Draw the background
 	if (!m_flat || m_draw_flat_background) {
-		assert(m_pic_background);
+		assert(background_image_);
 		dst.fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 255));
-		dst.tile(Rect(Point(0, 0), get_w(), get_h()), m_pic_background, Point(get_x(), get_y()));
+		dst.tile(Rect(Point(0, 0), get_w(), get_h()), background_image_, Point(get_x(), get_y()));
 	}
 
 	if (m_enabled && m_highlighted && !m_flat)
@@ -171,20 +174,20 @@ void Button::draw(RenderTarget & dst)
 			(Rect(Point(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 
 	//  if we got a picture, draw it centered
-	if (m_pic_custom) {
+	if (foreground_image_) {
 		const int max_image_w = get_w() - 2 * kButtonImageMargin;
 		const int max_image_h = get_h() - 2 * kButtonImageMargin;
 		double image_scale =
 		   std::min(1.,
-		            std::min(static_cast<double>(max_image_w) / m_pic_custom->width(),
-		                     static_cast<double>(max_image_h) / m_pic_custom->height()));
-		int blit_width = image_scale * m_pic_custom->width();
-		int blit_height = image_scale * m_pic_custom->height();
+						std::min(static_cast<double>(max_image_w) / foreground_image_->width(),
+									static_cast<double>(max_image_h) / foreground_image_->height()));
+		int blit_width = image_scale * foreground_image_->width();
+		int blit_height = image_scale * foreground_image_->height();
 
 		dst.blitrect_scale(
 		   Rect((get_w() - blit_width) / 2, (get_h() - blit_height) / 2, blit_width, blit_height),
-		   m_enabled ? m_pic_custom : m_pic_custom_disabled,
-		   Rect(0, 0, m_pic_custom->width(), m_pic_custom->height()));
+			m_enabled ? foreground_image_ : foreground_image_disabled_,
+			Rect(0, 0, foreground_image_->width(), foreground_image_->height()));
 
 	} else if (m_title.length()) {
 		//  otherwise draw title string centered

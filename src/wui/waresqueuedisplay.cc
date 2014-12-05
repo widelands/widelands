@@ -232,7 +232,7 @@ void WaresQueueDisplay::update_max_fill_buttons() {
 	m_decrease_max_fill = new UI::Button
 		(this, "decrease_max_fill",
 		 x, y, WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
+		 ImageCatalog::Keys::kButton4,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarLeft),
 		 _("Decrease the number of wares you want to be stored here."));
 	m_decrease_max_fill->sigclicked.connect
@@ -242,7 +242,7 @@ void WaresQueueDisplay::update_max_fill_buttons() {
 	m_increase_max_fill = new UI::Button
 		(this, "increase_max_fill",
 		 x, y, WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
+		 ImageCatalog::Keys::kButton4,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarRight),
 		 _("Increase the number of wares you want to be stored here."));
 	m_increase_max_fill->sigclicked.connect

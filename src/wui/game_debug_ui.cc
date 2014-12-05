@@ -243,7 +243,7 @@ FieldDebugWindow::FieldDebugWindow
 	m_ui_immovable
 		(this, "immovable",
 		 0, 280, 214, 24,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
+		 ImageCatalog::Keys::kButton0,
 		 ""),
 
 	m_ui_bobs(this, 0, 304, 214, 96)

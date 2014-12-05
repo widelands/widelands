@@ -262,7 +262,7 @@ void InteractivePlayer::think()
 			   (boost::format(ngettext("%u new message", "%u new messages", nr_new_messages)) %
 			    nr_new_messages).str();
 		}
-		m_toggle_message_menu.set_pic(g_gr->cataloged_image(image_key));
+		m_toggle_message_menu.set_image(g_gr->cataloged_image(image_key));
 		m_toggle_message_menu.set_tooltip(msg_tooltip);
 	}
 }

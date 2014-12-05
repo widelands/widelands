@@ -80,17 +80,17 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	joingame
 		(this, "join_game",
 		 get_w() * 17 / 25, get_h() * 55 / 100, m_butw, m_buth,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 _("Join this game"), std::string(), false, false),
 	hostgame
 		(this, "host_game",
 		 get_w() * 17 / 25, get_h() * 81 / 100, m_butw, m_buth,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 _("Open a new game"), std::string(), true, false),
 	back
 		(this, "back",
 		 get_w() * 17 / 25, get_h() * 90 / 100, m_butw, m_buth,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
+		 ImageCatalog::Keys::kButton0,
 		 _("Back"), std::string(), true, false),
 
 // Edit boxes

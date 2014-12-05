@@ -600,7 +600,7 @@ UI::Button & FieldActionWindow::add_button
 		*new UI::Button
 			(box, name,
 			 0, 0, 34, 34,
-			 g_gr->cataloged_image(ImageCatalog::Keys::kButton2),
+			 ImageCatalog::Keys::kButton2,
 			 g_gr->cataloged_image(image_key),
 			 tooltip_text);
 	button.sigclicked.connect(boost::bind(fn, this));

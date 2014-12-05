@@ -145,37 +145,37 @@ MiniMap::MiniMap(InteractiveBase & ibase, Registry * const registry)
 	button_terrn
 		(this, "terrain",
 		 but_w() * 0, m_view.get_h() + but_h() * 0, but_w(), but_h(),
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
+		 ImageCatalog::Keys::kButton0,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kMinimapTerrain),
 		 _("Terrain")),
 	button_owner
 		(this, "owner",
 		 but_w() * 1, m_view.get_h() + but_h() * 0, but_w(), but_h(),
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
+		 ImageCatalog::Keys::kButton0,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kMinimapOwner),
 		 _("Owner")),
 	button_flags
 		(this, "flags",
 		 but_w() * 2, m_view.get_h() + but_h() * 0, but_w(), but_h(),
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
+		 ImageCatalog::Keys::kButton0,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kMinimapFlags),
 		 _("Flags")),
 	button_roads
 		(this, "roads",
 		 but_w() * 0, m_view.get_h() + but_h() * 1, but_w(), but_h(),
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
+		 ImageCatalog::Keys::kButton0,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kMinimapRoads),
 		 _("Roads")),
 	button_bldns
 		(this, "buildings",
 		 but_w() * 1, m_view.get_h() + but_h() * 1, but_w(), but_h(),
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
+		 ImageCatalog::Keys::kButton0,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kMinimapBuildings),
 		 _("Buildings")),
 	button_zoom
 		(this, "zoom",
 		 but_w() * 2, m_view.get_h() + but_h() * 1, but_w(), but_h(),
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
+		 ImageCatalog::Keys::kButton0,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kMinimapZoom),
 		 _("Zoom"))
 {

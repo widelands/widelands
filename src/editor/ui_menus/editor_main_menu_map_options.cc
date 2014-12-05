@@ -96,7 +96,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive & parent)
 		new UI::Button
 			(this, "set_origin",
 			 5, get_inner_h() - 25, get_inner_w() - 10, 20,
-			 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
+			 ImageCatalog::Keys::kButton0,
 			 _("Set origin"),
 			 _
 				("Set the position that will have the coordinates (0, 0). This will "

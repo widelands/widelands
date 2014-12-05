@@ -57,12 +57,12 @@ FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame(bool sort_descending) :
 		m_back
 		  (this, "back",
 			m_right_column_x, m_buty, m_butw, m_buth,
-			g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
+			ImageCatalog::Keys::kButton0,
 			_("Back"), std::string(), true, false),
 		m_ok
 		  (this, "ok",
 			get_w() - m_right_column_margin - m_butw, m_buty, m_butw, m_buth,
-			g_gr->cataloged_image(ImageCatalog::Keys::kButton2),
+			ImageCatalog::Keys::kButton2,
 			_("OK"), std::string(), false, false),
 		m_table(this, m_tablex, m_tabley, m_tablew, m_tableh, sort_descending)
 	{}

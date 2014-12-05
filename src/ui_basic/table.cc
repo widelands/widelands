@@ -103,7 +103,7 @@ void Table<void *>::add_column
 				new Button
 					(this, title,
 					 complete_width, 0, width, m_headerheight,
-					 g_gr->cataloged_image(ImageCatalog::Keys::kButton3),
+					 ImageCatalog::Keys::kButton3,
 					 title, tooltip_string, true, false);
 			c.btn->sigclicked.connect
 				(boost::bind(&Table::header_button_clicked, boost::ref(*this), m_columns.size()));
@@ -152,7 +152,7 @@ void Table<void *>::set_column_title(uint8_t const col, const std::string & titl
 			new Button
 				(this, title,
 				 complete_width, 0, column.width, m_headerheight,
-				 g_gr->cataloged_image(ImageCatalog::Keys::kButton3),
+				 ImageCatalog::Keys::kButton3,
 				 title, "", true, false);
 		column.btn->sigclicked.connect
 			(boost::bind(&Table::header_button_clicked, boost::ref(*this), col));

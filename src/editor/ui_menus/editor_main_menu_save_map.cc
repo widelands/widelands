@@ -123,7 +123,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 		(this, "ok",
 		 posx, posy,
 		 get_inner_w() / 4 - 1.5 * spacing, 20,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
+		 ImageCatalog::Keys::kButton0,
 		 _("OK"));
 	m_ok_btn->sigclicked.connect(boost::bind(&MainMenuSaveMap::clicked_ok, boost::ref(*this)));
 
@@ -131,14 +131,14 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 		(this, "cancel",
 		 posx + get_inner_w() / 4 - spacing / 2, posy,
 		 get_inner_w() / 4 - 1.5 * spacing, 20,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 _("Cancel"));
 	cancelbtn->sigclicked.connect(boost::bind(&MainMenuSaveMap::die, boost::ref(*this)));
 
 	UI::Button * make_directorybtn = new UI::Button
 		(this, "make_directory",
 		 spacing, posy, 185, 20,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 _("Make Directory"));
 	make_directorybtn->sigclicked.connect
 		(boost::bind(&MainMenuSaveMap::clicked_make_directory, boost::ref(*this)));

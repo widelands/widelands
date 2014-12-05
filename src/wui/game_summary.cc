@@ -74,7 +74,7 @@ m_game(parent->game())
 	m_continue_button = new UI::Button
 		(buttonBox, "continue_button",
 		 0, 0, 35, 35,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
+		 ImageCatalog::Keys::kButton4,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kActionContinue),
 		 _("Continue playing"));
 	buttonBox->add(m_continue_button, UI::Box::AlignRight);
@@ -82,7 +82,7 @@ m_game(parent->game())
 	m_stop_button = new UI::Button
 		(buttonBox, "stop_button",
 		 0, 0, 35, 35,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
+		 ImageCatalog::Keys::kButton4,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kMenuOptionsExit),
 		_("Exit Game"));
 	buttonBox->add(m_stop_button, UI::Box::AlignRight);

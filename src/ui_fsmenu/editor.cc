@@ -34,13 +34,13 @@ FullscreenMenuEditor::FullscreenMenuEditor() :
 	vbox(this, m_box_x, m_box_y, UI::Box::Vertical,
 		  m_butw, get_h() - vbox.get_y(), m_padding),
 	new_map
-		(&vbox, "new_map", 0, 0, m_butw, m_buth, g_gr->cataloged_image(m_button_background),
+		(&vbox, "new_map", 0, 0, m_butw, m_buth, m_button_background,
 		 _("New Map"), "", true, false),
 	load_map
-		(&vbox, "load_map", 0, 0, m_butw, m_buth, g_gr->cataloged_image(m_button_background),
+		(&vbox, "load_map", 0, 0, m_butw, m_buth, m_button_background,
 		 _("Load Map"), "", true, false),
 	back
-		(&vbox, "back", 0, 0, m_butw, m_buth, g_gr->cataloged_image(m_button_background),
+		(&vbox, "back", 0, 0, m_butw, m_buth, m_button_background,
 		 _("Back"), "", true, false)
 {
 	new_map.sigclicked.connect

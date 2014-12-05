@@ -71,7 +71,7 @@ FullscreenMenuTextView::FullscreenMenuTextView
 	close_button
 		(this, "close",
 		 get_w() * 3 / 8, get_h() * 9 / 10, get_w() / 4, get_h() * 9 / 200,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
+		 ImageCatalog::Keys::kButton0,
 		 _("Close"), std::string(), true, false)
 {
 	close_button.sigclicked.connect(boost::bind(&FullscreenMenuTextView::end_modal, boost::ref(*this), 0));

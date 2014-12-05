@@ -108,7 +108,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	UI::Button * widthupbtn = new UI::Button
 		(this, "width_up",
 		 get_inner_w() - spacing - height, posy, height, height,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarUp));
 	widthupbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::MAP_W_PLUS));
@@ -116,7 +116,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	UI::Button * widthdownbtn = new UI::Button
 		(this, "width_down",
 		 posx, posy, height, height,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarDown));
 	widthdownbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::MAP_W_MINUS));
@@ -136,7 +136,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	UI::Button * heightupbtn = new UI::Button
 		(this, "height_up",
 		 get_inner_w() - spacing - height, posy, height, height,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarUp));
 	heightupbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::MAP_H_PLUS));
@@ -144,7 +144,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	UI::Button * heightdownbtn = new UI::Button
 		(this, "height_down",
 		 posx, posy, height, height,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarDown));
 	heightdownbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::MAP_H_MINUS));
@@ -157,7 +157,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	UI::Button * waterupbtn = new UI::Button
 		(this, "water_up",
 		 get_inner_w() - spacing - height, posy, height, height,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarUp));
 	waterupbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::WATER_PLUS));
@@ -165,7 +165,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	UI::Button * waterdownbtn = new UI::Button
 		(this, "water_down",
 		 posx, posy, height, height,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarDown));
 	waterdownbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::WATER_MINUS));
@@ -182,7 +182,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	UI::Button * landupbtn = new UI::Button
 		(this, "land_up",
 		 get_inner_w() - spacing - height, posy, height, height,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarUp));
 	landupbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::LAND_PLUS));
@@ -190,7 +190,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	UI::Button * landdownbtn = new UI::Button
 		(this, "land_down",
 		 posx, posy, height, height,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarDown));
 	landdownbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::LAND_MINUS));
@@ -207,7 +207,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	UI::Button * wastelandupbtn = new UI::Button
 		(this, "wasteland_up",
 		 get_inner_w() - spacing - height, posy, height, height,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarUp));
 	wastelandupbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::WASTE_PLUS));
@@ -215,7 +215,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	UI::Button * wastelanddownbtn = new UI::Button
 		(this, "wasteland_down",
 		 posx, posy, height, height,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarDown));
 	wastelanddownbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::WASTE_MINUS));
@@ -262,7 +262,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	m_res = new UI::Button
 		(this, "resources",
 		 posx, posy, width, height,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 m_res_amounts[m_res_amount].c_str());
 	m_res->sigclicked.connect(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::SWITCH_RES));
 
@@ -272,7 +272,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	m_world = new UI::Button
 		(this, "world",
 		 posx, posy, width, height,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 m_world_descriptions[m_current_world].descrname);
 	m_world->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::SWITCH_WORLD));
@@ -302,7 +302,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	UI::Button * playerupbtn = new UI::Button
 		(this, "player_up",
 		 get_inner_w() - spacing - height, posy, height, height,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarUp));
 	playerupbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::PLAYER_PLUS));
@@ -310,7 +310,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	UI::Button * playerdownbtn = new UI::Button
 		(this, "player_down",
 		 posx, posy, height, height,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarDown));
 	playerdownbtn->sigclicked.connect
 		(boost::bind(&MainMenuNewRandomMap::button_clicked, this, ButtonId::PLAYER_MINUS));
@@ -328,7 +328,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	m_goButton = new UI::Button
 		(this, "generate_map",
 		 posx, posy, width, height,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
+		 ImageCatalog::Keys::kButton0,
 		 _("Generate Map"));
 	m_goButton->sigclicked.connect(boost::bind(&MainMenuNewRandomMap::clicked_create_map, this));
 	posy += height + spacing;

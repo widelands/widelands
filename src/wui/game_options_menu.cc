@@ -75,7 +75,7 @@ GameOptionsMenu::GameOptionsMenu
 		 posx(0, 1),
 		 vmargin() + 0 * (20 + vspacing()) + 0 * vgap(),
 		 buttonw(1), 20,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
+		 ImageCatalog::Keys::kButton4,
 		 _("README"),
 		/** TRANSLATORS: Button tooltip */
 		_("Show general information about Widelands and keyboard shortcuts")),
@@ -84,7 +84,7 @@ GameOptionsMenu::GameOptionsMenu
 		 posx(0, 1),
 		 vmargin() + 1 * (20 + vspacing()) + 0 * vgap(),
 		 buttonw(1), 20,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
+		 ImageCatalog::Keys::kButton4,
 		 _("License"),
 		/** TRANSLATORS: Button tooltip */
 		_("Show the distribution licence document")),
@@ -93,7 +93,7 @@ GameOptionsMenu::GameOptionsMenu
 		 posx(0, 1),
 		 vmargin() + 2 * (20 + vspacing()) + 0 * vgap(),
 		 buttonw(1), 20,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
+		 ImageCatalog::Keys::kButton4,
 		 _("Authors"),
 		/** TRANSLATORS: Button tooltip */
 		_("Show information about the Widelands Development Team")),
@@ -102,7 +102,7 @@ GameOptionsMenu::GameOptionsMenu
 		 posx(0, 1),
 		 vmargin() + 3 * (20 + vspacing()) + 1 * vgap(),
 		 buttonw(1), 20,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
+		 ImageCatalog::Keys::kButton4,
 		 _("Sound Options"),
 		/** TRANSLATORS: Button tooltip */
 		_("Set sound effect and music options")),
@@ -111,7 +111,7 @@ GameOptionsMenu::GameOptionsMenu
 		 posx(0, 1),
 		 vmargin() + 4 * (20 + vspacing()) + 2 * vgap(),
 		 buttonw(1), 35,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
+		 ImageCatalog::Keys::kButton4,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kMenuOptionsSave),
 		 /** TRANSLATORS: Button tooltip */
 		 _("Save Game")),
@@ -121,7 +121,7 @@ GameOptionsMenu::GameOptionsMenu
 		 vmargin() + 4 * (20 + vspacing()) + 2 * vgap() +
 		 35 + vspacing(),
 		 buttonw(1), 35,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
+		 ImageCatalog::Keys::kButton4,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kMenuOptionsExit),
 		 /** TRANSLATORS: Button tooltip */
 		 _("Exit Game"))

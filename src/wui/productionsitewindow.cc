@@ -90,7 +90,7 @@ ProductionSiteWindow::ProductionSiteWindow
 			m_worker_caps->add_inf_space();
 			UI::Button * evict_button = new UI::Button
 							(m_worker_caps, "evict", 0, 0, 34, 34,
-							 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
+							 ImageCatalog::Keys::kButton4,
 							 g_gr->cataloged_image(ImageCatalog::Keys::kBuildingSoldierDrop),
 							 _("Terminate the employment of the selected worker"));
 			evict_button->sigclicked.connect

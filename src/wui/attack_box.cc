@@ -109,7 +109,7 @@ UI::Button & AttackBox::add_button
 		new UI::Button
 			(&parent, text,
 			 8, 8, 26, 26,
-			 g_gr->cataloged_image(ImageCatalog::Keys::kButton2),
+			 ImageCatalog::Keys::kButton2,
 			 text,
 			 tooltip_text);
 	button->sigclicked.connect(boost::bind(fn, boost::ref(*this)));

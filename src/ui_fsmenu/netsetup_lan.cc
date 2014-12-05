@@ -58,22 +58,22 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN () :
 	joingame
 		(this, "join_game",
 		 get_w() * 16 / 25, get_h() * 5333 / 10000, m_butw, m_buth,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 _("Join this game"), std::string(), true, false),
 	hostgame
 		(this, "host_game",
 		 get_w() * 16 / 25, get_h() * 6083 / 10000, m_butw, m_buth,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 _("Host a new game"), std::string(), true, false),
 	back
 		(this, "back",
 		 get_w() * 16 / 25, get_h() * 8333 / 10000, m_butw, m_buth,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
+		 ImageCatalog::Keys::kButton0,
 		 _("Back"), std::string(), true, false),
 	loadlasthost
 		(this, "load_previous_host",
 		 get_w() * 171 / 200, get_h() * 19 / 40, m_buth, m_buth,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kFullscreenLoadGame),
 		 _("Load previous host"), true, false),
 

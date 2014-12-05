@@ -33,34 +33,34 @@ FullscreenMenuMain::FullscreenMenuMain() :
 	vbox(this, m_box_x, m_box_y - m_buth, UI::Box::Vertical,
 		  m_butw, get_h() - vbox.get_y(), m_padding),
 	playtutorial
-		(&vbox, "play_tutorial", 0, 0, m_butw, m_buth, g_gr->cataloged_image(m_button_background),
+		(&vbox, "play_tutorial", 0, 0, m_butw, m_buth, m_button_background,
 		 _("Play Tutorial"), "", true, false),
 	singleplayer
-		(&vbox, "single_player", 0, 0, m_butw, m_buth, g_gr->cataloged_image(m_button_background),
+		(&vbox, "single_player", 0, 0, m_butw, m_buth, m_button_background,
 		 _("Single Player"), "", true, false),
 	multiplayer
-		(&vbox, "multi_player", 0, 0, m_butw, m_buth, g_gr->cataloged_image(m_button_background),
+		(&vbox, "multi_player", 0, 0, m_butw, m_buth, m_button_background,
 		 _("Multiplayer"), "", true, false),
 	replay
-		(&vbox, "replay", 0, 0, m_butw, m_buth, g_gr->cataloged_image(m_button_background),
+		(&vbox, "replay", 0, 0, m_butw, m_buth, m_button_background,
 		 _("Watch Replay"), "", true, false),
 	editor
-		(&vbox, "editor", 0, 0, m_butw, m_buth, g_gr->cataloged_image(m_button_background),
+		(&vbox, "editor", 0, 0, m_butw, m_buth, m_button_background,
 		 _("Editor"), "", true, false),
 	options
-		(&vbox, "options", 0, 0, m_butw, m_buth, g_gr->cataloged_image(m_button_background),
+		(&vbox, "options", 0, 0, m_butw, m_buth, m_button_background,
 		 _("Options"), "", true, false),
 	readme
-		(&vbox, "readme", 0, 0, m_butw, m_buth, g_gr->cataloged_image(m_button_background),
+		(&vbox, "readme", 0, 0, m_butw, m_buth, m_button_background,
 		 _("View Readme"), "", true, false),
 	license
-		(&vbox, "license", 0, 0, m_butw, m_buth, g_gr->cataloged_image(m_button_background),
+		(&vbox, "license", 0, 0, m_butw, m_buth, m_button_background,
 		 _("License"), "", true, false),
 	authors
-		(&vbox, "authors", 0, 0, m_butw, m_buth, g_gr->cataloged_image(m_button_background),
+		(&vbox, "authors", 0, 0, m_butw, m_buth, m_button_background,
 		 _("Authors"), "", true, false),
 	exit
-		(&vbox, "exit", 0, 0, m_butw, m_buth, g_gr->cataloged_image(m_button_background),
+		(&vbox, "exit", 0, 0, m_butw, m_buth, m_button_background,
 		 _("Exit Widelands"), "", true, false),
 
 	// Textlabels

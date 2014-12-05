@@ -150,7 +150,7 @@ m_selected_information(0)
 			*new UI::Button
 				(hbox1, "playerbutton",
 				 0, 0, 25, 25,
-				 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
+				 ImageCatalog::Keys::kButton4,
 				 player_image,
 				 player->get_name().c_str());
 		cb.sigclicked.connect

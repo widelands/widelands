@@ -88,7 +88,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame
 		new UI::Button
 			(this, "ok",
 			 DESCRIPTION_X, OK_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-			 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
+			 ImageCatalog::Keys::kButton4,
 			 _("OK"),
 			 std::string(),
 			 false);
@@ -98,7 +98,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame
 		new UI::Button
 			(this, "cancel",
 			 DESCRIPTION_X, CANCEL_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-			 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
+			 ImageCatalog::Keys::kButton4,
 			 _("Cancel"));
 	cancelbtn->sigclicked.connect(boost::bind(&GameMainMenuSaveGame::die, this));
 
@@ -106,7 +106,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame
 		new UI::Button
 			(this, "delete",
 			 DESCRIPTION_X, DELETE_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-			 g_gr->cataloged_image(ImageCatalog::Keys::kButton4),
+			 ImageCatalog::Keys::kButton4,
 			 _("Delete"));
 	deletebtn->sigclicked.connect(boost::bind(&GameMainMenuSaveGame::delete_clicked, this));
 

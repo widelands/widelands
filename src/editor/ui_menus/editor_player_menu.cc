@@ -50,14 +50,14 @@ EditorPlayerMenu::EditorPlayerMenu
 	m_add_player
 		(this, "add_player",
 		 get_inner_w() - 5 - 20, 5, 20, 20,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarUp),
 		 _("Add player"),
 		 parent.egbase().map().get_nrplayers() < MAX_PLAYERS),
 	m_remove_last_player
 		(this, "remove_last_player",
 		 5, 5, 20, 20,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kScrollbarDown),
 		 _("Remove last player"),
 		 1 < parent.egbase().map().get_nrplayers())
@@ -156,7 +156,7 @@ void EditorPlayerMenu::update() {
 				new UI::Button
 					(this, "tribe",
 					 posx, posy, 140, size,
-					 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
+					 ImageCatalog::Keys::kButton0,
 					 "");
 			m_plr_set_tribes_buts[p - 1]->sigclicked.connect
 				(boost::bind(&EditorPlayerMenu::player_tribe_clicked, boost::ref(*this), p - 1));
@@ -180,7 +180,7 @@ void EditorPlayerMenu::update() {
 				new UI::Button
 					(this, "starting_pos",
 					 posx, posy, size, size,
-					 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
+					 ImageCatalog::Keys::kButton0,
 					 nullptr,
 					 "");
 			m_plr_set_pos_buts[p - 1]->sigclicked.connect
@@ -190,7 +190,7 @@ void EditorPlayerMenu::update() {
 		const Image* player_image =
 				g_gr->cataloged_image(static_cast<ImageCatalog::Keys>(p - 1 + static_cast<uint8_t>(offset)));
 
-		m_plr_set_pos_buts[p - 1]->set_pic(player_image);
+		m_plr_set_pos_buts[p - 1]->set_image(player_image);
 		posy += size + spacing;
 	}
 	set_inner_size(get_inner_w(), posy + spacing);

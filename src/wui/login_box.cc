@@ -63,13 +63,13 @@ Window(&parent, "login_box", 0, 0, 500, 220, _("Metaserver login"))
 		(this, "login",
 		 (get_inner_w() / 2 - 200) / 2, get_inner_h() - 20 - margin,
 		 200, 20,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
+		 ImageCatalog::Keys::kButton0,
 		 _("Login"));
 	loginbtn->sigclicked.connect(boost::bind(&LoginBox::pressed_login, boost::ref(*this)));
 	UI::Button * cancelbtn = new UI::Button
 		(this, "cancel",
 		 (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2, loginbtn->get_y(), 200, 20,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 _("Cancel"));
 	cancelbtn->sigclicked.connect(boost::bind(&LoginBox::pressed_cancel, boost::ref(*this)));
 

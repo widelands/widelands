@@ -58,22 +58,22 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG
 	m_select_map
 		(this, "select_map",
 		 get_w() * 7 / 10, get_h() * 3 / 10, m_butw, m_buth,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 _("Select map"), std::string(), false, false),
 	m_wincondition
 		(this, "win_condition",
 		 get_w() * 7 / 10, get_h() * 4 / 10 + m_buth, m_butw, m_buth,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 "", std::string(), false, false),
 	m_back
 		(this, "back",
 		 get_w() * 7 / 10, get_h() * 17 / 20, m_butw, m_buth,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
+		 ImageCatalog::Keys::kButton0,
 		 _("Back"), std::string(), true, false),
 	m_ok
 		(this, "ok",
 		 get_w() * 7 / 10, get_h() * 9 / 10, m_butw, m_buth,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton2),
+		 ImageCatalog::Keys::kButton2,
 		 _("Start game"), std::string(), false, false),
 
 // Text labels
@@ -166,7 +166,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG
 			new UI::Button
 				(this, "switch_to_position",
 				 get_w() / 100, y += m_buth, get_h() * 17 / 500, get_h() * 17 / 500,
-				 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+				 ImageCatalog::Keys::kButton1,
 				 player_image,
 				 _("Switch to position"), false);
 		m_pos[i]->sigclicked.connect

@@ -113,7 +113,7 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
 		(this, "ok",
 		 posx, posy,
 		 get_inner_w() / 4 - 1.5 * spacing, 20,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
+		 ImageCatalog::Keys::kButton0,
 		 _("OK"),
 		 std::string(),
 		 false);
@@ -123,7 +123,7 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive & parent)
 		(this, "cancel",
 		 posx + get_inner_w() / 4 - spacing / 2, posy,
 		 get_inner_w() / 4 - 1.5 * spacing, 20,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 _("Cancel"));
 	cancelbtn->sigclicked.connect(boost::bind(&MainMenuLoadMap::die, this));
 

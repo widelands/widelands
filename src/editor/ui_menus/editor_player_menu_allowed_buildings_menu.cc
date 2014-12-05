@@ -80,7 +80,7 @@ EditorPlayerMenuAllowedBuildingsMenu
 		 m_allowed.get_y()
 		 + (list_height - middle_button_height * 2 - vspacing) / 2,
 		 middle_button_width, middle_button_height,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 ("->"),
 		 _("Forbid"),
 		 false),
@@ -89,7 +89,7 @@ EditorPlayerMenuAllowedBuildingsMenu
 		 m_forbid_button.get_x(),
 		 m_forbid_button.get_y() + middle_button_height + vspacing,
 		 middle_button_width, middle_button_height,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 ("<-"),
 		 _("Allow"),
 		 false)

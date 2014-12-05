@@ -64,7 +64,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		UI::Button * btn = new UI::Button
 			(this, "map",
 			 space, y, butw, buth,
-			 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
+			 ImageCatalog::Keys::kButton0,
 			 _("Map"), _("Select a map"), true, false);
 		btn->sigclicked.connect
 			(boost::bind
@@ -74,7 +74,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn = new UI::Button
 			(this, "saved_game",
 			 space, y + buth + space, butw, buth,
-			 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
+			 ImageCatalog::Keys::kButton0,
 			 _("Saved game"), _("Select a saved game"), true, false);
 		btn->sigclicked.connect
 			(boost::bind
@@ -84,7 +84,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn = new UI::Button
 			(this, "cancel",
 			 space + butw / 4, y + 3 * buth + 2 * space, butw / 2, buth,
-			 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+			 ImageCatalog::Keys::kButton1,
 			 _("Cancel"), _("Cancel selection"), true, false);
 		btn->sigclicked.connect
 			(boost::bind
@@ -126,28 +126,28 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 	m_change_map_or_save
 		(this, "change_map_or_save",
 		 m_right_column_x + m_butw - m_buth, get_h() * 3 / 20, m_buth, m_buth,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kMenuMinimap),
 		 _("Change map or saved game"), false, false),
 	m_ok
 		(this, "ok",
 		 m_right_column_x, get_h() * 12 / 20 - 2 * m_label_height, m_butw, m_buth,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton2),
+		 ImageCatalog::Keys::kButton2,
 		 _("Start game"), std::string(), false, false),
 	m_back
 		(this, "back",
 		 m_right_column_x, get_h() * 218 / 240, m_butw, m_buth,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton0),
+		 ImageCatalog::Keys::kButton0,
 		 _("Back"), std::string(), true, false),
 	m_wincondition
 		(this, "win_condition",
 		 m_right_column_x, get_h() * 11 / 20 - 2 * m_label_height, m_butw, m_buth,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 "", std::string(), false, false),
 	m_help_button
 		(this, "help",
 		 m_right_column_x + m_butw - m_buth, get_h() / 100, m_buth, m_buth,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton1),
+		 ImageCatalog::Keys::kButton1,
 		 g_gr->cataloged_image(ImageCatalog::Keys::kHelp),
 		 _("Show the help window"), true, false),
 

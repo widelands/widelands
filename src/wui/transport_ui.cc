@@ -131,7 +131,7 @@ private:
 	b = new UI::Button                                    \
 		 (buttons, #callback,                                       \
 		  0, 0, 34, 34,                                             \
-		  g_gr->cataloged_image(ImageCatalog::Keys::kButton4),            \
+		  ImageCatalog::Keys::kButton4,            \
 		  text, tooltip, m_can_act);                                \
 	b->sigclicked.connect(boost::bind(&EconomyOptionsWarePanel::callback, this)); \
 	buttons->add(b, UI::Box::AlignCenter);
@@ -222,11 +222,12 @@ private:
 			add(buttons, UI::Box::AlignLeft);
 
 			UI::Button * b = nullptr;
+
 #define ADD_WORKER_BUTTON(callback, text, tooltip)                  \
 	b = new UI::Button                                      \
 		 (buttons, #callback,                                         \
 		  0, 0, 34, 34,                                               \
-		  g_gr->cataloged_image(ImageCatalog::Keys::kButton4),              \
+		  ImageCatalog::Keys::kButton4,              \
 		  text, tooltip, m_can_act);                                  \
 	b->sigclicked.connect(boost::bind(&EconomyOptionsWorkerPanel::callback, this)); \
 	buttons->add(b, UI::Box::AlignCenter);
