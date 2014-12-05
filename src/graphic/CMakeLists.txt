@@ -50,6 +50,8 @@ wl_library(graphic_gl_utils
     gl/system_headers.h
     gl/utils.cc
     gl/utils.h
+  USES_SDL2
+  USES_OPENGL
   DEPENDS
     base_exceptions
     base_log
