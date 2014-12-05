@@ -41,7 +41,7 @@ UI::Window(parent, "make_directory", 0, 0, 230, 120, _("Make Directory"))
 	m_edit =
 		new UI::EditBox
 			(this, spacing, posy, get_inner_w() - 2 * spacing, 20,
-			 g_gr->cataloged_image(ImageCatalog::Keys::kButton1));
+			 ImageCatalog::Keys::kButton1);
 	m_edit->set_text(dirname);
 	m_dirname = dirname;
 	m_edit->changed.connect(boost::bind(&MainMenuSaveMapMakeDirectory::edit_changed, this));

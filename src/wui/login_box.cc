@@ -36,13 +36,13 @@ Window(&parent, "login_box", 0, 0, 500, 220, _("Metaserver login"))
 	eb_nickname =
 		new UI::EditBox
 			(this, 150, margin, 330, 20,
-			 g_gr->cataloged_image(ImageCatalog::Keys::kButton2), UI::Align_Left);
+			 ImageCatalog::Keys::kButton2, UI::Align_Left);
 
 	ta_password = new UI::Textarea(this, margin, 40, _("Password:"));
 	eb_password =
 		new UI::EditBox
 			(this, 150, 40, 330, 20,
-			 g_gr->cataloged_image(ImageCatalog::Keys::kButton2), UI::Align_Left);
+			 ImageCatalog::Keys::kButton2, UI::Align_Left);
 
 	pwd_warning =
 		new UI::MultilineTextarea

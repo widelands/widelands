@@ -144,7 +144,7 @@ void EditorPlayerMenu::update() {
 			m_plr_names[p - 1] =
 				new UI::EditBox
 					(this, posx, posy, 140, size,
-					 g_gr->cataloged_image(ImageCatalog::Keys::kButton0));
+					 ImageCatalog::Keys::kButton0);
 			m_plr_names[p - 1]->changed.connect
 				(boost::bind(&EditorPlayerMenu::name_changed, this, p - 1));
 			posx += 140 + spacing;

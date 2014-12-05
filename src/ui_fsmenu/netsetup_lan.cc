@@ -80,10 +80,10 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN () :
 // Edit boxes
 	playername
 		(this, get_w() * 16 / 25, get_h() * 3333 / 10000, m_butw,       m_buth,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton2)),
+		 ImageCatalog::Keys::kButton2),
 	hostname
 		(this, get_w() * 16 / 25, get_h() * 19 / 40,  get_w() * 17 / 80, m_buth,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton2)),
+		 ImageCatalog::Keys::kButton2),
 
 // List
 	opengames

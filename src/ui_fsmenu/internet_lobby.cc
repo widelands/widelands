@@ -96,7 +96,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 // Edit boxes
 	servername
 		(this, get_w() * 17 / 25, get_h() * 68 / 100, m_butw, m_buth,
-		 g_gr->cataloged_image(ImageCatalog::Keys::kButton2)),
+		 ImageCatalog::Keys::kButton2),
 
 // List
 	clientsonline

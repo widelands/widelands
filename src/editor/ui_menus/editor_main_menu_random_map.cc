@@ -78,12 +78,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	new UI::Textarea(this, posx, posy, _("Random Number:"));
 	posy += height + spacing;
 
-	m_nrEditbox =
-		new UI::EditBox
-			(this,
-			 posx, posy,
-			 width, height,
-			 g_gr->cataloged_image(ImageCatalog::Keys::kButton1));
+	m_nrEditbox = new UI::EditBox(this, posx, posy, width, height, ImageCatalog::Keys::kButton1);
 	m_nrEditbox->changed.connect
 		(boost::bind(&MainMenuNewRandomMap::nr_edit_box_changed, this));
 	RNG rng;
@@ -284,12 +279,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent) :
 	new UI::Textarea(this, posx, posy, _("Map ID:"));
 	posy += height + spacing;
 
-	m_idEditbox =
-		new UI::EditBox
-			(this,
-			 posx, posy,
-			 width, height,
-			 g_gr->cataloged_image(ImageCatalog::Keys::kButton1));
+	m_idEditbox = new UI::EditBox(this, posx, posy, width, height, ImageCatalog::Keys::kButton1);
 	m_idEditbox->set_text("abcd-efgh-ijkl-mnop");
 	m_idEditbox->changed.connect
 		(boost::bind(&MainMenuNewRandomMap::id_edit_box_changed, this));

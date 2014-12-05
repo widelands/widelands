@@ -43,7 +43,7 @@ struct EditBoxImpl {
 	/*@}*/
 
 	/// Background tile style.
-	const Image* background;
+	ImageCatalog::Keys background_image_key_;
 
 	/// Maximum number of characters in the input
 	uint32_t maxLength;
@@ -64,7 +64,7 @@ struct EditBoxImpl {
 EditBox::EditBox
 	(Panel * const parent,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-	 const Image* background,
+	 const ImageCatalog::Keys background_image_key,
 	 Align _align)
 	:
 	Panel(parent, x, y, w, h),
@@ -74,7 +74,7 @@ EditBox::EditBox
 {
 	set_thinks(false);
 
-	m->background = background;
+	m->background_image_key_ = background_image_key;
 	m->fontname = UI_FONT_NAME;
 	m->fontsize = UI_FONT_SIZE_SMALL;
 	m->fontcolor = UI_FONT_CLR_FG;
@@ -404,7 +404,7 @@ void EditBox::draw(RenderTarget & odst)
 	// Draw the background
 	dst.tile
 		(Rect(Point(0, 0), get_w(), get_h()),
-		 m->background,
+		 g_gr->cataloged_image(m->background_image_key_),
 		 Point(get_x(), get_y()));
 
 	// Draw border.

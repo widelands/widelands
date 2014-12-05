@@ -80,7 +80,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame
 	m_editbox =
 		new UI::EditBox
 			(this, HSPACING, EDITBOX_Y, LIST_WIDTH, EDITBOX_HEIGHT,
-			 g_gr->cataloged_image(ImageCatalog::Keys::kButton1));
+			 ImageCatalog::Keys::kButton1);
 	m_editbox->changed.connect(boost::bind(&GameMainMenuSaveGame::edit_box_changed, this));
 	m_editbox->ok.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
 

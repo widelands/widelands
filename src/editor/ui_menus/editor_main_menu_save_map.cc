@@ -73,7 +73,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive & parent)
 			(this,
 			 posx, posy + get_inner_h() - spacing - offsy - 60 + 3,
 			 get_inner_w() / 2 - spacing, 20,
-			 g_gr->cataloged_image(ImageCatalog::Keys::kButton1), UI::Align::Align_Left);
+			 ImageCatalog::Keys::kButton1, UI::Align::Align_Left);
 	m_editbox->set_text(parent.egbase().map().get_name());
 	m_editbox->changed.connect(boost::bind(&MainMenuSaveMap::edit_box_changed, this));
 
