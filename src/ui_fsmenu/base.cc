@@ -53,12 +53,12 @@ struct FullscreenMenuBase::Data {
  *
  * Args: bgpic  name of the background picture
  */
-FullscreenMenuBase::FullscreenMenuBase(const std::string& bgpic)
+FullscreenMenuBase::FullscreenMenuBase(ImageCatalog::Keys background_image_key)
 	: UI::Panel(nullptr, 0, 0, gr_x(), gr_y()),
 	d(new Data)
 {
 	// Load background graphics
-	d->res_background = ImageTransformations::resize(g_gr->images().get(bgpic), get_w(), get_h());
+	d->res_background = ImageTransformations::resize(g_gr->cataloged_image(background_image_key), get_w(), get_h());
 
 	d->textstyle_small = UI::TextStyle::ui_small();
 	d->textstyle_small.font = UI::Font::get(ui_fn(), fs_small());

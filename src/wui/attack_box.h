@@ -22,6 +22,7 @@
 
 #include <list>
 
+#include "graphic/image_catalog.h"
 #include "logic/attackable.h"
 #include "logic/bob.h"
 #include "logic/player.h"
@@ -60,7 +61,7 @@ struct AttackBox : public UI::Box {
 			 uint32_t      width,
 			 uint32_t      height,
 			 uint32_t      min, uint32_t max, uint32_t initial,
-			 char const  * picname,
+			 ImageCatalog::Keys image_key,
 			 char const  * hint);
 		UI::Textarea & add_text
 			(UI::Box           & parent,

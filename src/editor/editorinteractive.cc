@@ -192,7 +192,7 @@ void EditorInteractive::load(const std::string & filename) {
 			 filename.c_str());
 	ml->preload_map(true);
 
-	UI::ProgressWindow loader_ui(g_gr->image_catalog().filepath(ImageCatalog::Keys::kLoadscreenEditor));
+	UI::ProgressWindow loader_ui(ImageCatalog::Keys::kLoadscreenEditor);
 	std::vector<std::string> tipstext;
 	tipstext.push_back("editor");
 
@@ -585,7 +585,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 	EditorInteractive eia(editor);
 	editor.set_ibase(&eia); // TODO(unknown): get rid of this
 	{
-		UI::ProgressWindow loader_ui(g_gr->image_catalog().filepath(ImageCatalog::Keys::kLoadscreenEditor));
+		UI::ProgressWindow loader_ui(ImageCatalog::Keys::kLoadscreenEditor);
 		std::vector<std::string> tipstext;
 		tipstext.push_back("editor");
 		GameTips editortips(loader_ui, tipstext);

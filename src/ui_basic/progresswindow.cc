@@ -42,11 +42,11 @@
 
 namespace UI {
 
-ProgressWindow::ProgressWindow(const std::string & background)
+ProgressWindow::ProgressWindow(ImageCatalog::Keys background_image_key)
 	: m_xres(0), m_yres(0),
 	m_background_pic(nullptr)
 {
-	set_background(background);
+	set_background(g_gr->image_catalog().filepath(background_image_key));
 	step(_("Preparing..."));
 }
 

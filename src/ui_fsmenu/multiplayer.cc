@@ -25,7 +25,7 @@
 #include "wui/text_constants.h"
 
 FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer() :
-	FullscreenMenuBase(g_gr->image_catalog().filepath(ImageCatalog::Keys::kFullscreen)),
+	FullscreenMenuBase(ImageCatalog::Keys::kFullscreen),
 
 // Values for alignment and size
 	m_butw (get_w() * 7 / 20),

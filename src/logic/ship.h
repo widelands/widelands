@@ -27,6 +27,7 @@
 #include "logic/bob.h"
 #include "economy/shippingitem.h"
 #include "graphic/diranimations.h"
+#include "graphic/image_catalog.h"
 
 namespace UI {class Window;}
 class InteractiveGameBase;
@@ -209,7 +210,7 @@ private:
 	void set_fleet(Fleet * fleet);
 
 	void send_message
-		(Game &, const std::string &, const std::string &, const std::string &, const std::string &);
+		(Game &, const std::string &, const std::string &, const std::string &, ImageCatalog::Keys image_key);
 
 	UI::Window * m_window;
 

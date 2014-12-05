@@ -23,6 +23,7 @@
 #include <memory>
 
 #include "graphic/align.h"
+#include "graphic/image_catalog.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/unique_window.h"
 #include "ui_basic/window.h"
@@ -64,7 +65,7 @@ struct HelpWindow : public Window {
 	void add_heading   (std::string text);
 	void add_paragraph (std::string text);
 	void add_block     (std::string text);
-	void add_picture_li(std::string text, std::string picpath);
+	void add_picture_li(std::string text, ImageCatalog::Keys image_key);
 
 protected:
 	virtual void pressed_ok();

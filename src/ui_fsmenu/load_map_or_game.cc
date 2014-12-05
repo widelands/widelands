@@ -36,7 +36,7 @@
 /// This class defines common coordinates for these UI screens.
 /// It also defines common buttons.
 FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame(bool sort_descending) :
-		FullscreenMenuBase(g_gr->image_catalog().filepath(ImageCatalog::Keys::kFullscreenChooseMap)),
+		FullscreenMenuBase(ImageCatalog::Keys::kFullscreenChooseMap),
 
 		// Values for alignment and size
 		m_padding(4),

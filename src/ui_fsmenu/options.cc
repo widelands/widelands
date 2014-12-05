@@ -85,7 +85,7 @@ void add_languages_to_list(UI::Listselect<std::string>* list, const std::string&
 FullscreenMenuOptions::FullscreenMenuOptions
 		(OptionsCtrl::OptionsStruct opt)
 	:
-	FullscreenMenuBase(g_gr->image_catalog().filepath(ImageCatalog::Keys::kFullscreenOptions)),
+	FullscreenMenuBase(ImageCatalog::Keys::kFullscreenOptions),
 
 // Values for alignment and size
 	m_vbutw   (get_h() * 333 / 10000),
@@ -452,7 +452,7 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 	(OptionsCtrl::OptionsStruct const opt)
 	:
-	FullscreenMenuBase(g_gr->image_catalog().filepath(ImageCatalog::Keys::kFullscreen)),
+	FullscreenMenuBase(ImageCatalog::Keys::kFullscreen),
 
 // Values for alignment and size
 	m_vbutw   (get_h() * 333 / 10000),

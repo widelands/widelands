@@ -108,7 +108,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG
 	(GameSettingsProvider * const settings, GameController * const ctrl)
 	:
-	FullscreenMenuBase(g_gr->image_catalog().filepath(ImageCatalog::Keys::kFullscreenLaunchMPG)),
+	FullscreenMenuBase(ImageCatalog::Keys::kFullscreenLaunchMPG),
 
 // Values for alignment and size
 	m_butw (get_w() / 4),
@@ -683,10 +683,10 @@ void FullscreenMenuLaunchMPG::help_clicked() {
 		(_
 		 ("The player with the color of the flag. If more than one client selected the same color, these "
 		  "share control over the player (‘shared kingdom mode’)."),
-		 g_gr->image_catalog().filepath(ImageCatalog::Keys::kEditorToolPortSpaceSet));
+		 ImageCatalog::Keys::kEditorToolPortSpaceSet);
 	m_help->add_picture_li
 		(_("Spectator mode, meaning you can see everything, but cannot control any player"),
-		g_gr->image_catalog().filepath(ImageCatalog::Keys::kMenuWatch));
+		 ImageCatalog::Keys::kMenuWatch);
 	m_help->add_heading(_("Player settings"));
 	m_help->add_paragraph
 		(_
@@ -694,15 +694,14 @@ void FullscreenMenuLaunchMPG::help_clicked() {
 		  "following:"));
 	m_help->add_picture_li
 		(_("Connected to one or more clients (see ‘Client settings’)."),
-		 g_gr->image_catalog().filepath(ImageCatalog::Keys::kStatsWorkersNumber));
+		 ImageCatalog::Keys::kStatsWorkersNumber);
 	m_help->add_picture_li
 		(_
 		 ("Connected to a computer player (the face in the picture as well as the mouse hover texts "
-		  "indicate the strength of the currently selected computer player)."),
-		g_gr->image_catalog().filepath(ImageCatalog::Keys::kAiNormal));
+		  "indicate the strength of the currently selected computer player)."), ImageCatalog::Keys::kAiNormal);
 	m_help->add_picture_li(_("Set as shared in starting position for another player."),
-								  g_gr->image_catalog().filepath(ImageCatalog::Keys::kFullscreenSharedIn));
-	m_help->add_picture_li(_("Closed."), g_gr->image_catalog().filepath(ImageCatalog::Keys::kActionStop));
+								  ImageCatalog::Keys::kFullscreenSharedIn);
+	m_help->add_picture_li(_("Closed."), ImageCatalog::Keys::kActionStop);
 	m_help->add_block
 		(_
 		 ("The latter three can only be set by the hosting client by left-clicking the ‘type’ button of a "

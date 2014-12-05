@@ -23,6 +23,7 @@
 #include <string>
 #include <memory>
 
+#include "graphic/image_catalog.h"
 #include "ui_basic/panel.h"
 
 namespace UI {
@@ -36,7 +37,7 @@ struct TextStyle;
  * MENU_XRES and MENU_YRES and is a modal UI Element
  */
 struct FullscreenMenuBase : public UI::Panel {
-	FullscreenMenuBase(const std::string& bgpic);
+	FullscreenMenuBase(ImageCatalog::Keys background_image_key);
 	~FullscreenMenuBase();
 
 	void draw(RenderTarget &) override;

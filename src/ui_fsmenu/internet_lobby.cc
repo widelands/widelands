@@ -37,7 +37,7 @@
 FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	(char const * const nick, char const * const pwd, bool registered)
 :
-	FullscreenMenuBase(g_gr->image_catalog().filepath(ImageCatalog::Keys::kFullscreenInternet)),
+	FullscreenMenuBase(ImageCatalog::Keys::kFullscreenInternet),
 
 // Values for alignment and size
 	m_butx (get_w() * 13 / 40),

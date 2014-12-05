@@ -28,8 +28,7 @@
 #include "wui/text_constants.h"
 
 FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN () :
-	//  TODO(unknown): change this
-	FullscreenMenuBase(g_gr->image_catalog().filepath(ImageCatalog::Keys::kFullscreen)),
+	FullscreenMenuBase(ImageCatalog::Keys::kFullscreen),
 
 // Values for alignment and size
 	m_butx (get_w() * 13 / 40),

@@ -26,6 +26,7 @@
 
 #include "base/point.h"
 #include "base/rect.h"
+#include "graphic/image_catalog.h"
 
 class Image;
 class RenderTarget;
@@ -46,7 +47,7 @@ struct IProgressVisualization {
 
 /// Manages a progress window on the screen.
 struct ProgressWindow {
-	ProgressWindow(const std::string & background = std::string());
+	ProgressWindow(ImageCatalog::Keys background_image_key = ImageCatalog::Keys::kLoadscreen);
 	~ProgressWindow();
 
 	/// Register additional visualization (tips/hints, animation, etc)

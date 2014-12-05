@@ -59,7 +59,7 @@ bool read_text(const std::string& filename, std::string* title, std::string* con
 FullscreenMenuTextView::FullscreenMenuTextView
 	(const std::string & filename)
 	:
-	FullscreenMenuBase(g_gr->image_catalog().filepath(ImageCatalog::Keys::kFullscreenFileWiew)),
+	FullscreenMenuBase(ImageCatalog::Keys::kFullscreenFileWiew),
 
 	title (this, get_w() * 3 / 50, get_h() / 10),
 

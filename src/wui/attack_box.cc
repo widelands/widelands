@@ -67,7 +67,7 @@ UI::Slider & AttackBox::add_slider
 	 uint32_t          width,
 	 uint32_t          height,
 	 uint32_t          min, uint32_t max, uint32_t initial,
-	 char      const * picname,
+	 ImageCatalog::Keys image_key,
 	 char      const * hint)
 {
 	UI::HorizontalSlider & result =
@@ -76,7 +76,7 @@ UI::Slider & AttackBox::add_slider
 			 0, 0,
 			 width, height,
 			 min, max, initial,
-			 g_gr->images().get(picname),
+			 g_gr->cataloged_image(image_key),
 			 hint);
 	parent.add(&result, UI::Box::AlignCenter);
 	return result;
@@ -172,7 +172,7 @@ void AttackBox::init() {
 			(columnbox,
 			 100, 10,
 			 0, max_attackers, max_attackers > 0 ? 1 : 0,
-			 g_gr->image_catalog().filepath(ImageCatalog::Keys::kButton2).c_str(),
+			 ImageCatalog::Keys::kButton2,
 			 _("Number of soldiers"));
 
 	m_slider_soldiers->changed.connect(boost::bind(&AttackBox::update_attack, this));
