@@ -265,13 +265,27 @@ void Texture::draw_line
 }
 
 void Texture::blit
-	(const Rect& dst, const Texture* src, const Rect& srcrc, BlendMode blend_mode)
+	(const Rect& dst, const Texture* src, const Rect& srcrc, float opacity, BlendMode blend_mode)
 {
 	if (m_w <= 0 || m_h <= 0) {
 		return;
 	}
 
 	setup_gl(m_texture);
-	Surface::blit(dst, src, srcrc, blend_mode);
+	Surface::blit(dst, src, srcrc, opacity, blend_mode);
+	reset_gl();
+}
+
+void Texture::blit_gray(const Rect& dst,
+                        const Texture* src,
+                        const Rect& srcrc,
+                        float opacity,
+                        const float opacity_factor) {
+	if (m_w <= 0 || m_h <= 0) {
+		return;
+	}
+
+	setup_gl(m_texture);
+	Surface::blit_gray(dst, src, srcrc, opacity, opacity_factor);
 	reset_gl();
 }

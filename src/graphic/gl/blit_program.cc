@@ -22,6 +22,7 @@
 #include <vector>
 
 #include "base/log.h"
+#include "graphic/gl/utils.h"
 
 namespace  {
 
@@ -43,32 +44,87 @@ void main() {
 }
 )";
 
-const char kBlitFragmentShader[] = R"(
+const char kVanillaBlitFragmentShader[] = R"(
 #version 120
 
+uniform float u_opacity;
 uniform sampler2D u_texture;
 
 varying vec2 out_texture_coordinate;
 
 void main() {
-	gl_FragColor = texture2D(u_texture, out_texture_coordinate);
+	vec4 color = texture2D(u_texture, out_texture_coordinate);
+	gl_FragColor = vec4(color.rgb, u_opacity * color.a);
+}
+)";
+
+const char kGrayBlitFragmentShader[] = R"(
+#version 120
+
+uniform float u_luminosity_factor;
+uniform float u_opacity;
+uniform sampler2D u_texture;
+
+varying vec2 out_texture_coordinate;
+
+void main() {
+	vec4 texture_color = texture2D(u_texture, out_texture_coordinate);
+	// See http://en.wikipedia.org/wiki/YUV.
+	float luminance = dot(vec3(0.299, 0.587, 0.114), texture_color.rgb) * u_luminosity_factor;
+
+	gl_FragColor = vec4(vec3(luminance), u_opacity * texture_color.a);
 }
 )";
 
 }  // namespace
 
-// static
-BlitProgram& BlitProgram::instance() {
-	static BlitProgram blit_program;
-	return blit_program;
-}
+class BlitProgram {
+public:
+	BlitProgram(const std::string& fragment_shader);
 
-BlitProgram::BlitProgram() {
-	gl_program_.build(kBlitVertexShader, kBlitFragmentShader);
+	void activate(const FloatRect& gl_dest_rect,
+	              const FloatRect& gl_src_rect,
+	              const GLuint gl_texture,
+					  const float opacity,
+	              const BlendMode blend_mode);
+
+	void draw();
+	void draw_and_deactivate(BlendMode blend_mode);
+
+	GLuint program_object() const {
+		return gl_program_.object();
+	}
+
+private:
+	struct PerVertexData {
+		float gl_x, gl_y;
+	};
+	static_assert(sizeof(PerVertexData) == 8, "Wrong padding.");
+
+	// The buffer that will contain the quad for rendering.
+	Gl::Buffer gl_array_buffer_;
+
+	// The program.
+	Gl::Program gl_program_;
+
+	// Attributes.
+	GLint attr_position_;
+
+	// Uniforms.
+	GLint u_dst_rect_;
+	GLint u_opacity_;
+	GLint u_src_rect_;
+	GLint u_texture_;
+	DISALLOW_COPY_AND_ASSIGN(BlitProgram);
+};
+
+BlitProgram::BlitProgram(const std::string& fragment_shader) {
+	gl_program_.build(kBlitVertexShader, fragment_shader.c_str());
 
 	attr_position_ = glGetAttribLocation(gl_program_.object(), "attr_position");
 
 	u_texture_ = glGetUniformLocation(gl_program_.object(), "u_texture");
+	u_opacity_ = glGetUniformLocation(gl_program_.object(), "u_opacity");
 	u_dst_rect_ = glGetUniformLocation(gl_program_.object(), "u_dst_rect");
 	u_src_rect_ = glGetUniformLocation(gl_program_.object(), "u_src_rect");
 
@@ -94,9 +150,10 @@ BlitProgram::BlitProgram() {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void BlitProgram::draw(const FloatRect& gl_dest_rect,
+void BlitProgram::activate(const FloatRect& gl_dest_rect,
                        const FloatRect& gl_src_rect,
                        const GLuint gl_texture,
+							  const float opacity,
                        const BlendMode blend_mode) {
 	glUseProgram(gl_program_.object());
 	glEnableVertexAttribArray(attr_position_);
@@ -111,6 +168,7 @@ void BlitProgram::draw(const FloatRect& gl_dest_rect,
 
 
 	glUniform1i(u_texture_, 0);
+	glUniform1f(u_opacity_, opacity);
 	glUniform4f(u_dst_rect_, gl_dest_rect.x, gl_dest_rect.y, gl_dest_rect.w, gl_dest_rect.h);
 	glUniform4f(u_src_rect_, gl_src_rect.x, gl_src_rect.y, gl_src_rect.w, gl_src_rect.h);
 
@@ -120,7 +178,9 @@ void BlitProgram::draw(const FloatRect& gl_dest_rect,
 	if (blend_mode == BlendMode::Copy) {
 		glBlendFunc(GL_ONE, GL_ZERO);
 	}
+}
 
+void BlitProgram::draw_and_deactivate(BlendMode blend_mode) {
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
 	if (blend_mode == BlendMode::Copy) {
@@ -129,4 +189,54 @@ void BlitProgram::draw(const FloatRect& gl_dest_rect,
 
 	glDisableVertexAttribArray(attr_position_);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+// static
+VanillaBlitProgram& VanillaBlitProgram::instance() {
+	static VanillaBlitProgram blit_program;
+	return blit_program;
+}
+
+VanillaBlitProgram::~VanillaBlitProgram() {
+}
+
+VanillaBlitProgram::VanillaBlitProgram() {
+	blit_program_.reset(new BlitProgram(kVanillaBlitFragmentShader));
+}
+
+
+void VanillaBlitProgram::draw(const FloatRect& gl_dest_rect,
+                       const FloatRect& gl_src_rect,
+                       const GLuint gl_texture,
+							  const float opacity,
+                       const BlendMode blend_mode) {
+	blit_program_->activate(gl_dest_rect, gl_src_rect, gl_texture, opacity, blend_mode);
+	blit_program_->draw_and_deactivate(blend_mode);
+}
+
+// static
+GrayBlitProgram& GrayBlitProgram::instance() {
+	static GrayBlitProgram blit_program;
+	return blit_program;
+}
+
+GrayBlitProgram::~GrayBlitProgram() {
+}
+
+GrayBlitProgram::GrayBlitProgram() {
+	blit_program_.reset(new BlitProgram(kGrayBlitFragmentShader));
+
+	u_luminosity_factor_ = glGetUniformLocation(blit_program_->program_object(), "u_luminosity_factor");
+}
+
+void GrayBlitProgram::draw(const FloatRect& gl_dest_rect,
+                       const FloatRect& gl_src_rect,
+                       const GLuint gl_texture,
+							  const float opacity,
+                       const float luminosity_factor) {
+	blit_program_->activate(gl_dest_rect, gl_src_rect, gl_texture, opacity, BlendMode::UseAlpha);
+
+	glUniform1f(u_luminosity_factor_, luminosity_factor);
+
+	blit_program_->draw_and_deactivate(BlendMode::UseAlpha);
 }

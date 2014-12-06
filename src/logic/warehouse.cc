@@ -376,7 +376,6 @@ void Warehouse::load_finish(EditorGameBase & egbase) {
 			(owner().is_worker_type_allowed(worker_index) &&
 			 m_next_worker_without_cost_spawn[i] == static_cast<uint32_t>(never()))
 		{
-			upcast(Game, game, &egbase);
 			if (next_spawn == static_cast<uint32_t>(never())) {
 				next_spawn = schedule_act(dynamic_cast<Game&>(egbase), WORKER_WITHOUT_COST_SPAWN_INTERVAL);
 			}

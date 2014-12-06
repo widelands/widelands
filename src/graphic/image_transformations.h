@@ -37,14 +37,6 @@ void initialize();
 // safe to call the methods with the same arguments multiple times without
 // construction cost.
 
-// Returns a grayed out image of the original.
-const Image* gray_out(const Image* original);
-
-// Returns an image with a modified luminosity by 'factor' and alpha value than
-// the original. If 'halve_alpha' is true, the opacity will be halfed,
-// otherwise it will not be touched.
-const Image* change_luminosity(const Image* original, float factor, bool halve_alpha);
-
 // Encodes the given Image into the corresponding image with a player color.
 // Takes the image and the player color mask and the new color the image should
 // be tainted in.

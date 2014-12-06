@@ -24,7 +24,6 @@
 #include "base/macros.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
-#include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
 #include "logic/constructionsite.h"
 #include "logic/dismantlesite.h"
@@ -117,9 +116,17 @@ void BuildingWindow::draw(RenderTarget & dst)
 
 	const Animation& anim = g_gr->animations().get_animation(building().get_ui_anim());
 
-	const Image* dark_frame = ImageTransformations::change_luminosity
-		(&anim.representative_image(building().owner().get_playercolor()), 1.22, true);
-	dst.blit(Point(get_inner_w() / 2, get_inner_h() / 2), dark_frame, BlendMode::UseAlpha, UI::Align_Center);
+	const Image* image =
+	   &anim.representative_image(building().owner().get_playercolor());
+
+	dst.blitrect_scale(Rect((get_inner_w() - image->width()) / 2,
+	                        (get_inner_h() - image->height()) / 2,
+	                        image->width(),
+	                        image->height()),
+	                   image,
+	                   Rect(0, 0, image->width(), image->height()),
+	                   0.5,
+	                   BlendMode::UseAlpha);
 }
 
 /*

@@ -336,6 +336,7 @@ Texture* TextNode::render(TextureCache* texture_cache) {
 	rv->blit(Rect(0, 0, img.width(), img.height()),
 	         &img,
 	         Rect(0, 0, img.width(), img.height()),
+	         1.,
 	         BlendMode::Copy);
 	return rv;
 }
@@ -364,7 +365,7 @@ Texture* FillingTextNode::render(TextureCache* texture_cache) {
 	Texture* rv = new Texture(m_w, m_h);
 	for (uint16_t curx = 0; curx < m_w; curx += t.width()) {
 		Rect srcrect(Point(0, 0), min<int>(t.width(), m_w - curx), m_h);
-		rv->blit(Rect(curx, 0, srcrect.w, srcrect.h), &t, srcrect, BlendMode::Copy);
+		rv->blit(Rect(curx, 0, srcrect.w, srcrect.h), &t, srcrect, 1., BlendMode::Copy);
 	}
 	return rv;
 }
@@ -433,7 +434,7 @@ public:
 				dst.y = 0;
 				srcrect.w = dst.w = min<int>(m_bg->width(), m_w - curx);
 				srcrect.h = dst.h = m_h;
-				rv->blit(dst, m_bg->texture(), srcrect, BlendMode::Copy);
+				rv->blit(dst, m_bg->texture(), srcrect, 1., BlendMode::Copy);
 			}
 		} else {
 			rv->fill_rect(Rect(0, 0, m_w, m_h), RGBAColor(255, 255, 255, 0));
@@ -494,7 +495,7 @@ public:
 					dst.y = cury;
 					src.w = dst.w = min<int>(m_bg_img->width(), m_w + m_margin.left - curx);
 					src.h = dst.h = min<int>(m_bg_img->height(), m_h + m_margin.top - cury);
-					rv->blit(dst, m_bg_img->texture(), src, BlendMode::Copy);
+					rv->blit(dst, m_bg_img->texture(), src, 1., BlendMode::Copy);
 				}
 			}
 			set_alpha = false;
@@ -509,7 +510,7 @@ public:
 				                node_texture->height());
 				Rect src = Rect(0, 0, node_texture->width(), node_texture->height());
 
-				rv->blit(dst, node_texture, src, set_alpha ? BlendMode::Copy : BlendMode::UseAlpha);
+				rv->blit(dst, node_texture, src, 1., set_alpha ? BlendMode::Copy : BlendMode::UseAlpha);
 				delete node_texture;
 			}
 			delete n;
@@ -563,6 +564,7 @@ Texture* ImgRenderNode::render(TextureCache* /* texture_cache */) {
 	rv->blit(Rect(0, 0, m_image.width(), m_image.height()),
 	         m_image.texture(),
 	         Rect(0, 0, m_image.width(), m_image.height()),
+				1.,
 	         BlendMode::Copy);
 	return rv;
 }

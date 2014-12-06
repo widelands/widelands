@@ -21,7 +21,7 @@
 #define WL_GRAPHIC_BLEND_MODE_H
 
 // Defines blending during blitting.
-enum BlendMode {
+enum class BlendMode {
 	// Perform a normal blitting operation that respects the alpha channel if
 	// present.
 	UseAlpha = 0,
