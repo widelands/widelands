@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-11-29 07:58+0000\n"
-"PO-Revision-Date: 2011-03-24 08:19+0000\n"
-"Last-Translator: Sonnrain <Unknown>\n"
+"POT-Creation-Date: 2014-12-05 11:30+0000\n"
+"PO-Revision-Date: 2014-12-06 03:24+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-11-30 04:38+0000\n"
-"X-Generator: Launchpad (build 17267)\n"
+"X-Launchpad-Export-Date: 2014-12-06 05:38+0000\n"
+"X-Generator: Launchpad (build 17274)\n"
 
 #: ../../txts/README.lua:6
 msgid "README"
@@ -305,8 +305,8 @@ msgid ""
 msgstr ""
 
 #: ../../txts/developers:1
-msgid "Development"
-msgstr "progressus"
+msgid "Authors"
+msgstr ""
 
 #: ../../txts/developers:3
 msgid "Widelands Development Team"
@@ -818,3 +818,6 @@ msgid ""
 msgstr ""
 "Ludoresne computrales molestiores putidiores? Visita nostrum situm "
 "interretialem www.Widelands. org nominatum et ludas cum aliis ludoribus."
+
+#~ msgid "Development"
+#~ msgstr "progressus"
