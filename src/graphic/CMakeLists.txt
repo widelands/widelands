@@ -145,8 +145,6 @@ wl_library(graphic
     gl/system_headers.h
     graphic.cc
     graphic.h
-    image_transformations.cc
-    image_transformations.h
     in_memory_image.cc
     in_memory_image.h
     rendertarget.cc

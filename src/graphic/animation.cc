@@ -38,7 +38,6 @@
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/image_cache.h"
-#include "graphic/image_transformations.h"
 #include "graphic/surface.h"
 #include "graphic/texture_cache.h"
 #include "io/filesystem/layered_filesystem.h"
