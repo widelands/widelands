@@ -106,20 +106,16 @@ public:
 		return image_cache_->insert(image.release());
 	}
 
-	const UI::FontSet& fontset() const {
-		return *fontset_;
-	}
+	UI::FontSet& fontset() const {return *fontset_.get();}
 
 	void load_locale_fonts() {
-		// NOCOM(#codereview): you never delete fontset_. A class owning an object
-		// (like this) should always use unique_ptr<> instead of bare pointer. The current code leaks memory.
-		fontset_ = new UI::FontSet(i18n::get_locale());
+		fontset_.reset(new UI::FontSet(i18n::get_locale()));
 	}
 
 private:
 	TextureCache* const texture_cache_;  // not owned
 	ImageCache* const image_cache_;  // not owned
-	UI::FontSet* fontset_; // The currently active FontSet
+	unique_ptr<UI::FontSet> fontset_; // The currently active FontSet
 	std::unique_ptr<RT::Renderer> renderer_;
 };
 
