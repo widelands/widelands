@@ -33,6 +33,7 @@
 class ImageCatalog {
 public:
 	/// The keys to fetch the image filenames.
+	// NOCOM(#codereview): this gives me a ton of questions: is it save to delete an entry from this set or are the keys send over the network or saved to disk? What is the benefit of an integer over a string?
 	enum class Key {
 		kUnknownImage = 0, // This is the key for a nonexistent image. Do not add this to the entries.
 
@@ -342,6 +343,7 @@ private:
 	void insert(ImageCatalog::Key key, const std::string& filename);
 
 	/// Container for the key - filename mapping.
+	// NOCOM(#codereview): use an unordered_map
 	std::map<ImageCatalog::Key, std::string> entries_;
 
 	DISALLOW_COPY_AND_ASSIGN(ImageCatalog);

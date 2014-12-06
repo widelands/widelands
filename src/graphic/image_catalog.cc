@@ -30,11 +30,13 @@ ImageCatalog::ImageCatalog() {
 }
 
 ImageCatalog::~ImageCatalog() {
+	// NOCOM(#codereview): this happens when it is deleted, so not necessary.
 	entries_.clear();
 }
 
 // Register all images here
 void ImageCatalog::init()  {
+	// NOCOM(#codereview): should be empty to start with. Also, why not do it in the constructor if you call init() from there anyways?
 	entries_.clear();
 
 	// general
