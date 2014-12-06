@@ -127,7 +127,6 @@ public:
 	uint16_t nr_frames() const override;
 	uint32_t frametime() const override;
 	const Point& hotspot() const override;
-	const Image& representative_image(const RGBColor& clr) const override;
 	const Image& representative_image_from_disk() const override;
 	virtual void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*)
 	   const override;
@@ -140,9 +139,6 @@ private:
 
 	// Load the needed graphics from disk.
 	void load_graphics();
-
-	// Returns the given frame image with the given clr (if not NULL).
-	const Image& get_frame(uint32_t time, const RGBColor* playercolor = NULL) const;
 
 	uint32_t frametime_;
 	Point hotspot_;
@@ -302,12 +298,9 @@ const Point& NonPackedAnimation::hotspot() const {
 	return hotspot_;
 }
 
-const Image& NonPackedAnimation::representative_image(const RGBColor& clr) const {
-	return get_frame(0, &clr);
-}
-
 const Image& NonPackedAnimation::representative_image_from_disk() const {
-	return get_frame(0, nullptr);
+	ensure_graphics_are_loaded();
+	return *frames_[0];
 }
 
 void NonPackedAnimation::trigger_soundfx(uint32_t time, uint32_t stereo_position) const {
@@ -341,19 +334,6 @@ void NonPackedAnimation::blit
 		                     srcrc,
 		                     *clr);
 	}
-}
-
-const Image& NonPackedAnimation::get_frame(uint32_t time, const RGBColor* playercolor) const {
-	ensure_graphics_are_loaded();
-	const uint32_t framenumber = time / frametime_ % nr_frames();
-	assert(framenumber < nr_frames());
-	const Image* original = frames_[framenumber];
-
-	if (!hasplrclrs_ || !playercolor)
-		return *original;
-
-	assert(frames_.size() == pcmasks_.size());
-	return *ImageTransformations::player_colored(*playercolor, original, pcmasks_[framenumber]);
 }
 
 }  // namespace

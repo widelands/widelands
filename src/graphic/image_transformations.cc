@@ -32,6 +32,7 @@
 
 using namespace std;
 
+// NOCOM(#sirver): delete this file.
 namespace {
 
 // This table is used to transform colors.

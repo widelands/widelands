@@ -293,7 +293,7 @@ void Texture::blit_blended(const Rect& dst,
                            const Texture* image,
                            const Texture* mask,
                            const Rect& srcrc,
-                           const RGBColor& blend) override {
+                           const RGBColor& blend) {
 	if (m_w <= 0 || m_h <= 0) {
 		return;
 	}
