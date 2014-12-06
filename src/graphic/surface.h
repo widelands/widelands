@@ -49,17 +49,16 @@ public:
 							const float opacity,
 	                  BlendMode blend_mode);
 
-	/// This draws a grayed out version.
+	/// This draws a grayed out version. See MonochromeBlitProgram.
 	virtual void blit_monochrome(const Rect& dst,
 	                  const Texture*,
 	                  const Rect& srcrc,
 	                  const RGBAColor& multiplier);
 
-	// NOCOM(#sirver): document
-	// NOCOM(#sirver): implement in texture
+	/// This draws a playercolor blended image. See BlendedBlitProgram.
 	virtual void blit_blended(const Rect& dst,
-	                  const Texture*,
-							const Texture*,
+	                  const Texture* image,
+							const Texture* mask,
 	                  const Rect& srcrc,
 	                  const RGBColor& blend);
 

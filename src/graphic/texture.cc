@@ -276,7 +276,6 @@ void Texture::blit
 	reset_gl();
 }
 
-// NOCOM(#sirver): check spelling of monochrome
 void Texture::blit_monochrome(const Rect& dst,
                         const Texture* src,
                         const Rect& srcrc,
@@ -287,5 +286,19 @@ void Texture::blit_monochrome(const Rect& dst,
 
 	setup_gl(m_texture);
 	Surface::blit_monochrome(dst, src, srcrc, blend);
+	reset_gl();
+}
+
+void Texture::blit_blended(const Rect& dst,
+                           const Texture* image,
+                           const Texture* mask,
+                           const Rect& srcrc,
+                           const RGBColor& blend) override {
+	if (m_w <= 0 || m_h <= 0) {
+		return;
+	}
+
+	setup_gl(m_texture);
+	Surface::blit_blended(dst, image, mask, srcrc, blend);
 	reset_gl();
 }
