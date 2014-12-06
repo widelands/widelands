@@ -20,7 +20,6 @@
 #ifndef WL_WUI_GAME_MAIN_MENU_SAVE_GAME_H
 #define WL_WUI_GAME_MAIN_MENU_SAVE_GAME_H
 
-#include "base/deprecated.h"
 #include "base/i18n.h"
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"

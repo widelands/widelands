@@ -70,7 +70,6 @@ struct TextStyle {
 
 	static const TextStyle & ui_big();
 	static const TextStyle & ui_small();
-	static const TextStyle & ui_ultrasmall();
 	uint32_t calc_bare_width(const std::string & text) const;
 	void calc_bare_height_heuristic(const std::string & text, int32_t & miny, int32_t & maxy) const;
 	void setup() const;

@@ -247,7 +247,7 @@ Building & BuildingDescr::create_constructionsite() const
 		m_tribe.get_building_descr
 			(m_tribe.safe_building_index("constructionsite"));
 	ConstructionSite & csite =
-		ref_cast<ConstructionSite, MapObject>(descr->create_object());
+		dynamic_cast<ConstructionSite&>(descr->create_object());
 	csite.set_building(*this);
 
 	return csite;
@@ -727,8 +727,7 @@ void Building::draw_help
 	(const EditorGameBase& game, RenderTarget& dst, const FCoords&, const Point& pos)
 {
 	const InteractiveGameBase & igbase =
-		ref_cast<InteractiveGameBase const, InteractiveBase const>
-			(*game.get_ibase());
+		dynamic_cast<const InteractiveGameBase&>(*game.get_ibase());
 	uint32_t const dpyflags = igbase.get_display_flags();
 
 	if (dpyflags & InteractiveBase::dfShowCensus) {

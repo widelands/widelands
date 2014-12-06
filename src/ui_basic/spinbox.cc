@@ -23,7 +23,6 @@
 
 #include <boost/format.hpp>
 
-#include "base/deprecated.h"
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "graphic/font_handler1.h"

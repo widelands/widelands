@@ -165,15 +165,4 @@ const TextStyle & TextStyle::ui_small()
 	return style;
 }
 
-const TextStyle & TextStyle::ui_ultrasmall()
-{
-	static TextStyle style;
-
-	style.font = Font::get(UI::g_fh1->fontset().serif(), UI_FONT_SIZE_ULTRASMALL);
-	style.fg = UI_FONT_CLR_FG;
-	style.bold = true;
-
-	return style;
-}
-
 } // namespace UI

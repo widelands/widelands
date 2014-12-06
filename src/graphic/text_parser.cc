@@ -24,7 +24,6 @@
 #include <string>
 #include <vector>
 
-#include "base/deprecated.h"
 #include "base/log.h"
 #include "graphic/font_handler1.h"
 #include "graphic/text/font_set.h"

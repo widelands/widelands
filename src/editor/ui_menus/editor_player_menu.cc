@@ -38,6 +38,10 @@
 
 #define UNDEFINED_TRIBE_NAME "<undefined>"
 
+inline EditorInteractive & EditorPlayerMenu::eia() {
+	return dynamic_cast<EditorInteractive&>(*get_parent());
+}
+
 EditorPlayerMenu::EditorPlayerMenu
 	(EditorInteractive & parent, UI::UniqueWindow::Registry & registry)
 	:
@@ -108,9 +112,7 @@ void EditorPlayerMenu::update() {
 	if (is_minimal())
 		return;
 
-	Widelands::Map & map =
-		ref_cast<EditorInteractive const, UI::Panel const>(*get_parent())
-		.egbase().map();
+	Widelands::Map & map = eia().egbase().map();
 	Widelands::PlayerNumber const nr_players = map.get_nrplayers();
 	{
 		assert(nr_players <= 99); //  2 decimal digits
@@ -194,9 +196,7 @@ void EditorPlayerMenu::update() {
 }
 
 void EditorPlayerMenu::clicked_add_player() {
-	EditorInteractive & menu =
-		ref_cast<EditorInteractive, UI::Panel>(*get_parent());
-	Widelands::Map & map = menu.egbase().map();
+	Widelands::Map & map = eia().egbase().map();
 	Widelands::PlayerNumber const nr_players = map.get_nrplayers() + 1;
 	assert(nr_players <= MAX_PLAYERS);
 	map.set_nrplayers(nr_players);
@@ -211,7 +211,7 @@ void EditorPlayerMenu::clicked_add_player() {
 		map.set_scenario_player_name(nr_players, name);
 	}
 	map.set_scenario_player_tribe(nr_players, m_tribes[0]);
-	menu.set_need_save(true);
+	eia().set_need_save(true);
 	m_add_player        .set_enabled(nr_players < MAX_PLAYERS);
 	m_remove_last_player.set_enabled(true);
 	update();
@@ -219,14 +219,12 @@ void EditorPlayerMenu::clicked_add_player() {
 
 
 void EditorPlayerMenu::clicked_remove_last_player() {
-	EditorInteractive & menu =
-		ref_cast<EditorInteractive, UI::Panel>(*get_parent());
-	Widelands::Map & map = menu.egbase().map();
+	Widelands::Map & map = eia().egbase().map();
 	Widelands::PlayerNumber const old_nr_players = map.get_nrplayers();
 	Widelands::PlayerNumber const nr_players     = old_nr_players - 1;
 	assert(1 <= nr_players);
 
-	if (!menu.is_player_tribe_referenced(old_nr_players)) {
+	if (!eia().is_player_tribe_referenced(old_nr_players)) {
 		if (const Widelands::Coords sp = map.get_starting_pos(old_nr_players)) {
 			//  Remove starting position marker.
 			char picsname[] = "pics/editor_player_00_starting_pos.png";
@@ -306,9 +304,8 @@ called when a button is clicked
  * Player Tribe Button clicked
  */
 void EditorPlayerMenu::player_tribe_clicked(uint8_t n) {
-	EditorInteractive & menu =
-		ref_cast<EditorInteractive, UI::Panel>(*get_parent());
-	if (!menu.is_player_tribe_referenced(n + 1)) {
+	EditorInteractive& menu = eia();
+		if (!menu.is_player_tribe_referenced(n + 1)) {
 		std::string t = m_plr_set_tribes_buts[n]->get_title();
 		if (!Widelands::TribeDescr::exists_tribe(t))
 			throw wexception
@@ -338,8 +335,7 @@ void EditorPlayerMenu::player_tribe_clicked(uint8_t n) {
  * Set Current Start Position button selected
  */
 void EditorPlayerMenu::set_starting_pos_clicked(uint8_t n) {
-	EditorInteractive & menu =
-		ref_cast<EditorInteractive, UI::Panel>(*get_parent());
+	EditorInteractive& menu = eia();
 	//  jump to the current node
 	Widelands::Map & map = menu.egbase().map();
 	if (Widelands::Coords const sp = map.get_starting_pos(n))
@@ -366,8 +362,7 @@ void EditorPlayerMenu::set_starting_pos_clicked(uint8_t n) {
 void EditorPlayerMenu::name_changed(int32_t m) {
 	//  Player name has been changed.
 	std::string text = m_plr_names[m]->text();
-	EditorInteractive & menu =
-		ref_cast<EditorInteractive, UI::Panel>(*get_parent());
+	EditorInteractive& menu = eia();
 	Widelands::Map & map = menu.egbase().map();
 	if (text == "") {
 		text = map.get_scenario_player_name(m + 1);

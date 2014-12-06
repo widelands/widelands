@@ -44,6 +44,7 @@ public:
 	virtual ~EditorPlayerMenu() {}
 
 private:
+	EditorInteractive & eia();
 	UI::UniqueWindow::Registry m_allow_buildings_menu;
 	UI::Textarea * m_nr_of_players_ta;
 	UI::EditBox * m_plr_names[MAX_PLAYERS];

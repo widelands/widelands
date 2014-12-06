@@ -24,43 +24,52 @@
 #include "graphic/text_constants.h"
 
 FullscreenMenuEditor::FullscreenMenuEditor() :
-	FullscreenMenuBase("ui_fsmenu.jpg"),
+	FullscreenMenuMainMenu(),
 
-// Values for alignment and size
-	m_butw (get_w() * 7 / 20),
-	m_buth (get_h() * 19 / 400),
-	m_butx ((get_w() - m_butw) / 2),
-
-// Title
+	// Title
 	title
-		(this, get_w() / 2, get_h() * 3 / 40, _("Editor"), UI::Align_HCenter),
+		(this, get_w() / 2, m_title_y, _("Editor"), UI::Align_HCenter),
 
-// Buttons
+	// Buttons
+	vbox(this, m_box_x, m_box_y, UI::Box::Vertical,
+		  m_butw, get_h() - vbox.get_y(), m_padding),
 	new_map
-		(this, "new_map",
-		 m_butx, get_h() * 6 / 25, m_butw, m_buth,
-		 g_gr->images().get("pics/but1.png"),
-		 _("New Map"), std::string(), true, false),
+		(&vbox, "new_map", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
+		 _("New Map"), "", true, false),
 	load_map
-		(this, "load_map",
-		 m_butx, get_h() * 61 / 200, m_butw, m_buth,
-		 g_gr->images().get("pics/but1.png"),
-		 _("Load Map"), std::string(), true, false),
+		(&vbox, "load_map", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
+		 _("Load Map"), "", true, false),
 	back
-		(this, "back",
-		 m_butx, get_h() * 3 / 4, m_butw, m_buth,
-		 g_gr->images().get("pics/but0.png"),
-		 _("Back"), std::string(), true, false)
+		(&vbox, "back", 0, 0, m_butw, m_buth, g_gr->images().get(m_button_background),
+		 _("Back"), "", true, false)
 {
 	new_map.sigclicked.connect
-		(boost::bind(&FullscreenMenuEditor::end_modal, boost::ref(*this), static_cast<int32_t>(New_Map)));
+			(boost::bind(
+				 &FullscreenMenuEditor::end_modal,
+				 boost::ref(*this),
+				 static_cast<int32_t>(MenuTarget::kNewMap)));
 	load_map.sigclicked.connect
-		(boost::bind(&FullscreenMenuEditor::end_modal, boost::ref(*this), static_cast<int32_t>(Load_Map)));
+			(boost::bind
+			 (&FullscreenMenuEditor::end_modal,
+			  boost::ref(*this),
+			  static_cast<int32_t>(MenuTarget::kLoadMap)));
 	back.sigclicked.connect
-		(boost::bind(&FullscreenMenuEditor::end_modal, boost::ref(*this), static_cast<int32_t>(Back)));
+			(boost::bind
+			 (&FullscreenMenuEditor::end_modal,
+			  boost::ref(*this),
+			  static_cast<int32_t>(MenuTarget::kBack)));
 
-	new_map.set_font(font_small());
-	load_map.set_font(font_small());
-	back.set_font(font_small());
 	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
+
+	vbox.add(&new_map, UI::Box::AlignCenter);
+	vbox.add(&load_map, UI::Box::AlignCenter);
+
+	// Multiple add_space calls to get the same height for the back button as in the single player menu
+	vbox.add_space(m_buth);
+	vbox.add_space(m_buth);
+	vbox.add_space(6 * m_buth);
+
+	vbox.add(&back, UI::Box::AlignCenter);
+
+	vbox.set_size(m_butw, get_h() - vbox.get_y());
 }

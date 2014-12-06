@@ -87,11 +87,9 @@ bool FullscreenMenuLoadMapOrGame::handle_key(bool down, SDL_Keysym code) {
 	return FullscreenMenuBase::handle_key(down, code);
 }
 
-
 int32_t FullscreenMenuLoadMapOrGame::get_y_from_preceding(UI::Panel& preceding_panel) {
 	return preceding_panel.get_y() + preceding_panel.get_h();
 }
-
 
 int32_t FullscreenMenuLoadMapOrGame::get_right_column_w(int32_t x) {
 	return get_w() - m_right_column_margin - x;

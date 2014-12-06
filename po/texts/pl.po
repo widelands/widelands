@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-11-21 09:46+0000\n"
+"POT-Creation-Date: 2014-11-29 07:58+0000\n"
 "PO-Revision-Date: 2014-11-17 12:04+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-11-22 04:39+0000\n"
-"X-Generator: Launchpad (build 17252)\n"
+"X-Launchpad-Export-Date: 2014-11-30 04:38+0000\n"
+"X-Generator: Launchpad (build 17267)\n"
 
 #: ../../txts/README.lua:6
 msgid "README"
@@ -897,21 +897,13 @@ msgstr ""
 
 #: ../../txts/tips/general_game.tip:46
 msgid ""
-"Pressing and holding the ALT GR key lets you drag the window below the mouse "
-"pointer."
-msgstr ""
-"Przytrzymanie prawego klawisza ALT pozwala na przesuwanie okna, na którym "
-"znajduje się kursor myszy."
-
-#: ../../txts/tips/general_game.tip:50
-msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first "
 "junction."
 msgstr ""
 "Jeśli przytrzymasz Ctrl podczas usuwania drogi, usuniesz wszystkie flagi do "
 "pierwszego skrzyżowania."
 
-#: ../../txts/tips/general_game.tip:54
+#: ../../txts/tips/general_game.tip:50
 msgid ""
 "New soldiers are recruited in the headquarters or a warehouse if all needed "
 "tools are available. Training sites are for improving their abilities."
@@ -920,7 +912,7 @@ msgstr ""
 "dostępne są wszystkie potrzebne narzędzia. Budynki treningowe służą do "
 "ćwiczenia ich umiejętności."
 
-#: ../../txts/tips/general_game.tip:58
+#: ../../txts/tips/general_game.tip:54
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
@@ -928,11 +920,11 @@ msgstr ""
 "Jeśli należysz do ryzykantów, możesz przytrzymać Ctrl przy wydawaniu rozkazu "
 "rozbiórki , zburzenia lub rozbudowy budynku, by ominąć okno potwierdzenia."
 
-#: ../../txts/tips/general_game.tip:62
+#: ../../txts/tips/general_game.tip:58
 msgid "Press I to quickly toggle the display of your stock inventory."
 msgstr "Wciśnij I, aby otworzyć okno posiadanych zapasów."
 
-#: ../../txts/tips/general_game.tip:66
+#: ../../txts/tips/general_game.tip:62
 msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."

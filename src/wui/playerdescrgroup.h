@@ -42,8 +42,7 @@ struct PlayerDescriptionGroup : public UI::Panel {
 		(UI::Panel * parent,
 		 int32_t x, int32_t y, int32_t w, int32_t h,
 		 GameSettingsProvider * settings,
-		 uint32_t plnum,
-		 UI::Font * font);
+		 uint32_t plnum);
 	~PlayerDescriptionGroup();
 
 	void refresh();

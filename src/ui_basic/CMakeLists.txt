@@ -50,7 +50,6 @@ wl_library(ui_basic
   USES_BOOST_REGEX
   USES_SDL2
   DEPENDS
-    base_deprecated
     base_exceptions
     base_geometry
     base_i18n

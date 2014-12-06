@@ -19,6 +19,7 @@
 #ifndef WL_GRAPHIC_TEXTURE_H
 #define WL_GRAPHIC_TEXTURE_H
 
+#include "base/rect.h"
 #include "graphic/gl/system_headers.h"
 #include "graphic/surface.h"
 
@@ -33,6 +34,10 @@ public:
 	// Create a new empty (that is randomly filled) Surface with the given
 	// dimensions.
 	Texture(int w, int h);
+
+	// Create a logical texture that is a 'subrect' (in Pixel) in
+	// another texture. Ownership of 'texture' is not taken.
+	Texture(const GLuint texture, const Rect& subrect, int parent_w, int parent_h);
 
 	virtual ~Texture();
 
@@ -53,16 +58,26 @@ public:
 	void brighten_rect(const Rect&, int32_t factor) override;
 	virtual void draw_line
 		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor&, uint8_t width) override;
-	void blit(const Point&,
+	void blit(const Rect& dstretc,
 	          const Texture*,
 	          const Rect& srcrc,
 	          BlendMode blend_mode = BlendMode::UseAlpha) override;
 
 	GLuint get_gl_texture() const {return m_texture;}
 
+	const FloatRect& texture_coordinates() const {
+		return m_texture_coordinates;
+	}
+
 private:
 	void pixel_to_gl(float* x, float* y) const override;
 	void init(uint16_t w, uint16_t h);
+
+	// True if we own the texture, i.e. if we need to delete it.
+	bool m_owns_texture;
+
+	// Texture coordinates in m_texture.
+	FloatRect m_texture_coordinates;
 
 	GLuint m_texture;
 };

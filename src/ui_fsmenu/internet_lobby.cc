@@ -133,10 +133,6 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 			 (&FullscreenMenuInternetLobby::clicked_back,
 			  boost::ref(*this)));
 
-	back.set_font(font_small());
-	joingame.set_font(font_small());
-	hostgame.set_font(font_small());
-
 	// Set the texts and style of UI elements
 	Section & s = g_options.pull_section("global"); //  for playername
 

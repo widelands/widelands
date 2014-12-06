@@ -83,7 +83,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect
 	m_settings(settings),
 	m_ctrl(ctrl)
 {
-	m_title.set_textstyle(ts_big());
+	m_title.set_textstyle(UI::TextStyle::ui_big());
 	if (m_is_editor) {
 		m_back.set_tooltip(_("Return to the editor menu"));
 	} else {

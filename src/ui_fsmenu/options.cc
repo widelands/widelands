@@ -19,6 +19,7 @@
 
 #include "ui_fsmenu/options.h"
 
+#include <algorithm>
 #include <cstdio>
 #include <iostream>
 #include <memory>
@@ -324,7 +325,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 					 boost::ref(*this)));
 	}
 
-	m_title           .set_textstyle(ts_big());
+	m_title           .set_textstyle(UI::TextStyle::ui_big());
 	m_fullscreen      .set_state(opt.fullscreen);
 	m_inputgrab       .set_state(opt.inputgrab);
 	m_music           .set_state(opt.music);
@@ -332,7 +333,7 @@ FullscreenMenuOptions::FullscreenMenuOptions
 	m_fx              .set_state(opt.fx);
 	m_fx              .set_enabled(!g_sound_handler.lock_audio_disabling_);
 
-	m_label_game_options             .set_textstyle(ts_big());
+	m_label_game_options             .set_textstyle(UI::TextStyle::ui_big());
 	m_single_watchwin                .set_state(opt.single_watchwin);
 	m_auto_roadbuild_mode            .set_state(opt.auto_roadbuild_mode);
 	m_show_workarea_preview          .set_state(opt.show_warea);
@@ -630,7 +631,7 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 			 boost::ref(*this),
 			 static_cast<int32_t>(om_ok)));
 
-	m_title                .set_textstyle(ts_big());
+	m_title                .set_textstyle(UI::TextStyle::ui_big());
 	m_message_sound        .set_state(opt.message_sound);
 	m_nozip                .set_state(opt.nozip);
 	m_remove_syncstreams   .set_state(opt.remove_syncstreams);

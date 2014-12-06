@@ -76,8 +76,6 @@ FullscreenMenuTextView::FullscreenMenuTextView
 {
 	close_button.sigclicked.connect(boost::bind(&FullscreenMenuTextView::end_modal, boost::ref(*this), 0));
 
-	close_button.set_font(font_small());
-
 	std::string content, title_text;
 	read_text(filename, &title_text, &content);
 

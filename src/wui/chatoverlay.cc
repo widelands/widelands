@@ -102,6 +102,10 @@ void ChatOverlay::think()
 	}
 }
 
+void ChatOverlay::recompute() {
+	m->recompute();
+}
+
 /**
  * Recompute the chat message display.
  */

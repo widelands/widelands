@@ -38,7 +38,6 @@ wl_library(scripting
     scripting.h
   USES_BOOST_REGEX
   DEPENDS
-    base_deprecated
     base_exceptions
     base_log
     base_macros
@@ -57,4 +56,5 @@ wl_library(scripting
     third_party_eris
     ui_basic
     wui
+    wui_mapview_pixelfunctions
 )

@@ -237,7 +237,7 @@ bool Worker::run_breed(Game & game, State & state, const Action & action)
 	do {
 		uint8_t fres  = mr.location().field->get_resources();
 		uint32_t amount =
-			mr.location().field->get_starting_res_amount() -
+			mr.location().field->get_initial_res_amount() -
 			mr.location().field->get_resources_amount   ();
 
 		// In the future, we might want to support amount = 0 for
@@ -280,7 +280,7 @@ bool Worker::run_breed(Game & game, State & state, const Action & action)
 			continue;
 
 		uint32_t amount =
-			mr.location().field->get_starting_res_amount() -
+			mr.location().field->get_initial_res_amount() -
 			mr.location().field->get_resources_amount   ();
 
 		pick -= 8 * amount;
@@ -290,7 +290,7 @@ bool Worker::run_breed(Game & game, State & state, const Action & action)
 			--amount;
 
 			mr.location().field->set_resources
-				(res, mr.location().field->get_starting_res_amount() - amount);
+				(res, mr.location().field->get_initial_res_amount() - amount);
 			break;
 		}
 	} while (mr.advance(map));
@@ -620,7 +620,7 @@ bool Worker::run_walk(Game & game, State & state, const Action & action)
 	int32_t max_steps = -1;
 
 	// First of all, make sure we're outside
-	if (imm == &ref_cast<Building, PlayerImmovable>(*get_location(game))) {
+	if (imm == &dynamic_cast<Building&>(*get_location(game))) {
 		start_task_leavebuilding(game, false);
 		return true;
 	}
@@ -903,9 +903,6 @@ bool Worker::run_removeobject(Game & game, State & state, const Action &)
  */
 bool Worker::run_geologist(Game & game, State & state, const Action & action)
 {
-	// assert that location is of the right type.
-	ref_cast<Flag const, PlayerImmovable const>(*get_location(game));
-
 	molog
 		("  Start Geologist (%i attempts, %i radius -> %s)\n",
 		 action.iparam1, action.iparam2, action.sparam1.c_str());
@@ -1905,8 +1902,7 @@ void Worker::program_update(Game & game, State & state)
 	}
 
 	for (;;) {
-		const WorkerProgram & program =
-			ref_cast<WorkerProgram const, BobProgramBase const>(*state.program);
+		const WorkerProgram & program = dynamic_cast<const WorkerProgram&>(*state.program);
 
 		if (static_cast<uint32_t>(state.ivar1) >= program.get_size())
 			return pop_task(game);
@@ -2086,7 +2082,7 @@ void Worker::dropoff_update(Game & game, State &)
 	WareInstance * ware = get_carried_ware(game);
 	BaseImmovable * const location = game.map()[get_position()].get_immovable();
 #ifndef NDEBUG
-	Building & ploc = ref_cast<Building, PlayerImmovable>(*get_location(game));
+	Building & ploc = dynamic_cast<Building&>(*get_location(game));
 	assert(&ploc == location || &ploc.base_flag() == location);
 #endif
 
@@ -2208,11 +2204,9 @@ void Worker::fetchfromflag_update(Game & game, State & state)
 
 		// The ware has decided that it doesn't want to go to us after all
 		// In order to return to the warehouse, we're switching to State_DropOff
-		if
-			(WareInstance * const ware =
-			 	ref_cast<Flag, PlayerImmovable>(*location).fetch_pending_ware
-			 		(game, employer))
+		if (WareInstance * const ware = dynamic_cast<Flag&>(*location).fetch_pending_ware(game, employer)) {
 			set_carried_ware(game, ware);
+		}
 
 		set_animation(game, descr().get_animation("idle"));
 		return schedule_act(game, 20);
@@ -2370,14 +2364,11 @@ const Bob::Task Worker::taskLeavebuilding = {
  */
 void Worker::start_task_leavebuilding(Game & game, bool const changelocation)
 {
-	Building & building =
-		ref_cast<Building, PlayerImmovable>(*get_location(game));
-
 	// Set the wait task
 	push_task(game, taskLeavebuilding);
 	State & state = top_state();
 	state.ivar1   = changelocation;
-	state.objvar1 = &building;
+	state.objvar1 = &dynamic_cast<Building&>(*get_location(game));
 }
 
 
@@ -2440,8 +2431,9 @@ void Worker::leavebuilding_pop(Game & game, State & state)
 	//  The if-statement is needed because this is (unfortunately) also called
 	//  when the Worker is deallocated when shutting down the simulation. Then
 	//  the building might not exist any more.
-	if (MapObject * const building = state.objvar1.get(game))
-		ref_cast<Building, MapObject>(*building).leave_skip(game, *this);
+	if (MapObject * const building = state.objvar1.get(game)) {
+		dynamic_cast<Building&>(*building).leave_skip(game, *this);
+	}
 }
 
 
@@ -2547,7 +2539,7 @@ void Worker::fugitive_update(Game & game, State & state)
 		molog("[fugitive]: found a flag connected to warehouse(s)\n");
 		for (const ImmovableFound& tmp_flag : flags) {
 
-			Flag & flag = ref_cast<Flag, BaseImmovable>(*tmp_flag.object);
+			Flag & flag = dynamic_cast<Flag&>(*tmp_flag.object);
 
 			if (game.logic_rand() % 2 == 0)
 				continue;
@@ -2654,7 +2646,7 @@ void Worker::geologist_update(Game & game, State & state)
 	const World & world = game.world();
 	Area<FCoords> owner_area
 		(map.get_fcoords
-		 	(ref_cast<Flag, PlayerImmovable>(*get_location(game)).get_position()),
+		 	(dynamic_cast<Flag&>(*get_location(game)).get_position()),
 		 state.ivar2);
 
 	// Check if it's not time to go home
@@ -2801,12 +2793,10 @@ void Worker::start_task_scout
 	state.ivar2   = game.get_gametime() + time;
 
 	// first get out
-	Building & building =
-		ref_cast<Building, PlayerImmovable>(*get_location(game));
 	push_task(game, taskLeavebuilding);
 	State & stateLeave = top_state();
 	stateLeave.ivar1 = false;
-	stateLeave.objvar1 = &building;
+	stateLeave.objvar1 = &dynamic_cast<Building&>(*get_location(game));
 }
 
 
@@ -2961,8 +2951,7 @@ void Worker::Loader::load(FileRead & fr)
 
 	if (version >= 2) {
 		if (fr.unsigned_8()) {
-			worker.m_transfer =
-				new Transfer(ref_cast<Game, EditorGameBase>(egbase()), worker);
+			worker.m_transfer = new Transfer(dynamic_cast<Game&>(egbase()), worker);
 			worker.m_transfer->read(fr, m_transfer);
 		}
 	}

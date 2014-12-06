@@ -6,6 +6,7 @@ wl_binary(wl_map_info
     base_log
     graphic
     graphic_image_io
+    graphic_minimap_renderer
     graphic_surface
     io_fileread
     io_filesystem
@@ -215,7 +216,6 @@ wl_library(logic
   USES_SDL2
   DEPENDS
     ai
-    base_deprecated
     base_exceptions
     base_geometry
     base_i18n
@@ -232,6 +232,9 @@ wl_library(logic
     graphic_color
     graphic_text
     graphic_text_layout
+    graphic_image_io
+    graphic_surface
+    graphic_texture_atlas
     helper
     io_fileread
     io_filesystem
@@ -250,4 +253,6 @@ wl_library(logic
     ui_basic
     widelands_ball_of_mud
     wui
+    wui_mapview_pixelfunctions
+    wui_overlay_manager
 )

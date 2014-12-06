@@ -613,9 +613,6 @@ void Game::think()
 		// the timings of savings.
 		cmdqueue().run_queue(m_ctrl->get_frametime(), get_gametime_pointer());
 
-		if (g_gr) // not in dedicated server mode
-			g_gr->animate_maptextures(get_gametime());
-
 		// check if autosave is needed
 		m_savehandler.think(*this, WLApplication::get()->get_time());
 	}
