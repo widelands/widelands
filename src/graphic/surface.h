@@ -55,6 +55,14 @@ public:
 	                  const Rect& srcrc,
 	                  const RGBAColor& multiplier);
 
+	// NOCOM(#sirver): document
+	// NOCOM(#sirver): implement in texture
+	virtual void blit_blended(const Rect& dst,
+	                  const Texture*,
+							const Texture*,
+	                  const Rect& srcrc,
+	                  const RGBColor& blend);
+
 	/// Draws a filled rect to the surface. No blending takes place, the values
 	// in the target are just replaced (i.e. / BlendMode would be BlendMode::Copy).
 	virtual void fill_rect(const Rect&, const RGBAColor&);

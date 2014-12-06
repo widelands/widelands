@@ -81,4 +81,32 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(GrayBlitProgram);
 };
 
+class BlendedBlitProgram {
+public:
+	// Returns the (singleton) instance of this class.
+	static BlendedBlitProgram& instance();
+	~BlendedBlitProgram();
+
+	// Draws the rectangle 'gl_src_rect' from the texture with the name
+	// 'gl_texture_image' to 'gl_dest_rect' in the currently bound framebuffer. All
+	// coordinates are in the OpenGL frame. The 'gl_texture_mask' is used to selectively apply
+	// the 'blend'. This is used for blitting player colored images.
+	void draw(const FloatRect& gl_dest_rect,
+	          const FloatRect& gl_src_rect,
+	          const GLuint gl_texture_image,
+	          const GLuint gl_texture_mask,
+				 const RGBAColor& blend);
+
+private:
+	BlendedBlitProgram();
+
+	std::unique_ptr<BlitProgram> blit_program_;
+
+	// Uniforms.
+	GLint u_blend_;
+	GLint u_mask_;
+
+	DISALLOW_COPY_AND_ASSIGN(BlendedBlitProgram);
+};
+
 #endif  // end of include guard: WL_GRAPHIC_GL_DRAW_RECT_PROGRAM_H

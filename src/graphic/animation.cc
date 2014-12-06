@@ -135,6 +135,9 @@ public:
 
 
 private:
+	// Loads the graphics if they are not yet loaded.
+	void ensure_graphics_are_loaded() const;
+
 	// Load the needed graphics from disk.
 	void load_graphics();
 
@@ -231,6 +234,12 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 	}
 }
 
+void NonPackedAnimation::ensure_graphics_are_loaded() const {
+	if (frames_.empty()) {
+		const_cast<NonPackedAnimation*>(this)->load_graphics();
+	}
+}
+
 void NonPackedAnimation::load_graphics() {
 	if (image_files_.empty())
 		throw wexception("animation without pictures.");
@@ -271,23 +280,17 @@ void NonPackedAnimation::load_graphics() {
 }
 
 uint16_t NonPackedAnimation::width() const {
-	if (frames_.empty()) {
-		const_cast<NonPackedAnimation*>(this)->load_graphics();
-	}
+	ensure_graphics_are_loaded();
 	return frames_[0]->width();
 }
 
 uint16_t NonPackedAnimation::height() const {
-	if (frames_.empty()) {
-		const_cast<NonPackedAnimation*>(this)->load_graphics();
-	}
+	ensure_graphics_are_loaded();
 	return frames_[0]->height();
 }
 
 uint16_t NonPackedAnimation::nr_frames() const {
-	if (frames_.empty()) {
-		const_cast<NonPackedAnimation*>(this)->load_graphics();
-	}
+	ensure_graphics_are_loaded();
 	return frames_.size();
 }
 
@@ -322,16 +325,26 @@ void NonPackedAnimation::blit
 {
 	assert(target);
 
-	const Image& frame = get_frame(time, clr);
-	// NOCOM(#sirver): use new blend mode here.
-	target->blit(
-	   Rect(dst.x, dst.y, srcrc.w, srcrc.h), frame.texture(), srcrc, 1., BlendMode::UseAlpha);
+	const int idx = time / frametime_ % nr_frames();
+	assert(idx < nr_frames());
+
+	if (!hasplrclrs_ || clr == nullptr) {
+		target->blit(Rect(dst.x, dst.y, srcrc.w, srcrc.h),
+		             frames_.at(idx)->texture(),
+		             srcrc,
+		             1.,
+		             BlendMode::UseAlpha);
+	} else {
+		target->blit_blended(Rect(dst.x, dst.y, srcrc.w, srcrc.h),
+		                     frames_.at(idx)->texture(),
+		                     pcmasks_.at(idx)->texture(),
+		                     srcrc,
+		                     *clr);
+	}
 }
 
 const Image& NonPackedAnimation::get_frame(uint32_t time, const RGBColor* playercolor) const {
-	if (frames_.empty()) {
-		const_cast<NonPackedAnimation*>(this)->load_graphics();
-	}
+	ensure_graphics_are_loaded();
 	const uint32_t framenumber = time / frametime_ % nr_frames();
 	assert(framenumber < nr_frames());
 	const Image* original = frames_[framenumber];
