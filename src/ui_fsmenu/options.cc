@@ -378,54 +378,55 @@ void FullscreenMenuOptions::advanced_options() {
 }
 
 void FullscreenMenuOptions::add_languages_to_list(const std::string& current_locale) {
+
 	// We want these two entries on top - the most likely user's choice and the default.
 	m_language_list.add(_("Try system language"), "", nullptr, current_locale == "");
 	m_language_list.add(_("English"), "en", nullptr, current_locale == "en");
 
-	// NOCOM(#codereview): I changed this, because the nesting was confusing. Please check if you
-	// like it better that way too.
-	std::unique_ptr<LuaTable> all_locales;
-	try {
-		LuaInterface lua;
-		all_locales = lua.run_script("i18n/locales.lua");
-		all_locales->do_not_warn_about_unaccessed_keys(); // We are only reading partial information as needed
-	} catch (const LuaError& err) {
-		log("Could not read locales information from file: %s\n", err.what());
-		return; // Nothing more can be done now.
-	}
-	assert(all_locales != nullptr);
-
 	// We start with the locale directory so we can pick up locales
 	// that don't have a configuration file yet.
+	FilenameSet files = g_fs->list_directory("locale");
+
+	// Add translation directories to the list
 	std::vector<LanguageEntry> entries;
+	std::string localename;
 	std::string selected_locale;
-	for (const std::string& filename : g_fs->list_directory("locale")) {
-		char const* const path = filename.c_str();
-		if (!strcmp(FileSystem::fs_filename(path), ".") ||
-		    !strcmp(FileSystem::fs_filename(path), "..") || !g_fs->is_directory(path)) {
-			continue;
-		}
 
-		const std::string localename = g_fs->filename_without_ext(path);
-		try {
-			std::unique_ptr<LuaTable> table = all_locales->get_table(localename);
-			table->do_not_warn_about_unaccessed_keys();
+	try {  // Begin read locales table
+		LuaInterface lua;
+		std::unique_ptr<LuaTable> all_locales(lua.run_script("i18n/locales.lua"));
+		all_locales->do_not_warn_about_unaccessed_keys(); // We are only reading partial information as needed
 
-			// NOCOM(#codereview): always define identifiers on first use if possible and in the most
-			// local scope.
-			const std::string name = table->get_string("name");
-			const std::string sortname = table->get_string("sort_name");
-			std::unique_ptr<UI::FontSet> fontset(new UI::FontSet(localename));
-			entries.push_back(LanguageEntry(localename, name, sortname, fontset->serif()));
-			if (localename == current_locale) {
-				selected_locale = current_locale;
+		for (const std::string& filename : files) {  // Begin scan locales directory
+			char const* const path = filename.c_str();
+			if (!strcmp(FileSystem::fs_filename(path), ".") ||
+				 !strcmp(FileSystem::fs_filename(path), "..") || !g_fs->is_directory(path)) {
+				continue;
 			}
-		} catch (const WException&) {
-			log("Could not read locale for: %s\n", localename.c_str());
-			entries.push_back(
-			   LanguageEntry(localename, localename, localename, UI::FontSet::kFallbackFont));
-		}
-	}
+
+			try {  // Begin read locale from table
+				localename = g_fs->filename_without_ext(path);
+
+				std::unique_ptr<LuaTable> table = all_locales->get_table(localename);
+				table->do_not_warn_about_unaccessed_keys();
+
+				const std::string name = table->get_string("name");
+				const std::string sortname = table->get_string("sort_name");
+				std::unique_ptr<UI::FontSet> fontset(new UI::FontSet(localename));
+				entries.push_back(LanguageEntry(localename, name, sortname, fontset->serif()));
+				if (localename == current_locale) {
+					selected_locale = current_locale;
+				}
+
+			} catch (const WException&) {
+				log("Could not read locale for: %s\n", localename.c_str());
+				entries.push_back(LanguageEntry(localename, localename, localename, UI::FontSet::kFallbackFont));
+			}  // End read locale from table
+		}  // End scan locales directory
+	} catch (const LuaError& err) {
+		log("Could not read locales information from file: %s\n", err.what());
+		return;  // Nothing more can be done now.
+	}  // End read locales table
 
 	std::sort(entries.begin(), entries.end());
 
@@ -756,7 +757,7 @@ void OptionsCtrl::save_options() {
 
 	WLApplication::get()->set_input_grab(opt.inputgrab);
 	i18n::set_locale(opt.language);
-	UI::g_fh1->load_locale_fonts();
+	// NOCOMUI::g_fh1->load_locale_fonts();
 	g_sound_handler.set_disable_music(!opt.music);
 	g_sound_handler.set_disable_fx(!opt.fx);
 }
