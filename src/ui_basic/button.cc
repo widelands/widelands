@@ -185,7 +185,7 @@ void Button::draw(RenderTarget & dst)
 		   1.,
 		   BlendMode::UseAlpha);
 		} else {
-			dst.blitrect_scale_monocrome(
+			dst.blitrect_scale_monochrome(
 			   Rect((get_w() - blit_width) / 2, (get_h() - blit_height) / 2, blit_width, blit_height),
 			   m_pic_custom,
 			   Rect(0, 0, m_pic_custom->width(), m_pic_custom->height()),

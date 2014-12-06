@@ -55,11 +55,11 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(VanillaBlitProgram);
 };
 
-class GrayBlitProgram {
+class MonochromeBlitProgram {
 public:
 	// Returns the (singleton) instance of this class.
-	static GrayBlitProgram& instance();
-	~GrayBlitProgram();
+	static MonochromeBlitProgram& instance();
+	~MonochromeBlitProgram();
 
 	// Draws the rectangle 'gl_src_rect' from the texture with the name
 	// 'gl_texture' to 'gl_dest_rect' in the currently bound framebuffer. All
@@ -71,14 +71,14 @@ public:
 				 const RGBAColor& blend);
 
 private:
-	GrayBlitProgram();
+	MonochromeBlitProgram();
 
 	std::unique_ptr<BlitProgram> blit_program_;
 
 	// Uniforms.
 	GLint u_blend_;
 
-	DISALLOW_COPY_AND_ASSIGN(GrayBlitProgram);
+	DISALLOW_COPY_AND_ASSIGN(MonochromeBlitProgram);
 };
 
 class BlendedBlitProgram {

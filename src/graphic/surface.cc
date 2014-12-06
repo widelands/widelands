@@ -200,7 +200,7 @@ void Surface::blit
 	   gl_dst_rect, gl_src_rect, texture->get_gl_texture(), opacity, blend_mode);
 }
 
-void Surface::blit_monocrome(const Rect& dst_rect,
+void Surface::blit_monochrome(const Rect& dst_rect,
                              const Texture* texture,
                              const Rect& src_rect,
                              const RGBAColor& blend) {
@@ -209,7 +209,7 @@ void Surface::blit_monocrome(const Rect& dst_rect,
 	FloatRect gl_dst_rect, gl_src_rect;
 	src_and_dst_rect_to_gl(texture, dst_rect, src_rect, &gl_dst_rect, &gl_src_rect);
 
-	GrayBlitProgram::instance().draw(
+	MonochromeBlitProgram::instance().draw(
 	   gl_dst_rect, gl_src_rect, texture->get_gl_texture(), blend);
 }
 

@@ -221,14 +221,14 @@ void RenderTarget::blitrect_scale(const Rect& dst,
 	}
 }
 
-void RenderTarget::blitrect_scale_monocrome(const Rect& destination_rect,
+void RenderTarget::blitrect_scale_monochrome(const Rect& destination_rect,
                                        const Image* image,
                                        const Rect& source_rect,
 													const RGBAColor& blend) {
 	Point destination_point(destination_rect.x, destination_rect.y);
 	Rect srcrect(source_rect);
 	if (to_surface_geometry(&destination_point, &srcrect)) {
-		m_surface->blit_monocrome(
+		m_surface->blit_monochrome(
 		   Rect(destination_point.x, destination_point.y, destination_rect.w, destination_rect.h),
 		   image->texture(),
 		   source_rect,

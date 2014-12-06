@@ -87,12 +87,11 @@ public:
 	                    float opacity,
 	                    BlendMode blend_mode);
 
-	// NOCOM(#sirver): rename GrayBlitProgram
-	// Like blitrect_scale. See GrayBlitProgram for details.
-	void blitrect_scale_monocrome(const Rect& destination_rect,
-	                              const Image* image,
-	                              const Rect& source_rect,
-	                              const RGBAColor& blend);
+	// Like blitrect_scale. See MonochromeBlitProgram for details.
+	void blitrect_scale_monochrome(const Rect& destination_rect,
+	                               const Image* image,
+	                               const Rect& source_rect,
+	                               const RGBAColor& blend);
 
 	void tile(const Rect&,
 	          const Image* image,

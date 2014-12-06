@@ -50,7 +50,7 @@ public:
 	                  BlendMode blend_mode);
 
 	/// This draws a grayed out version.
-	virtual void blit_monocrome(const Rect& dst,
+	virtual void blit_monochrome(const Rect& dst,
 	                  const Texture*,
 	                  const Rect& srcrc,
 	                  const RGBAColor& multiplier);

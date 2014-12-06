@@ -58,7 +58,7 @@ void main() {
 }
 )";
 
-const char kGrayBlitFragmentShader[] = R"(
+const char kMonochromeBlitFragmentShader[] = R"(
 #version 120
 
 uniform float u_opacity;
@@ -238,21 +238,21 @@ void VanillaBlitProgram::draw(const FloatRect& gl_dest_rect,
 }
 
 // static
-GrayBlitProgram& GrayBlitProgram::instance() {
-	static GrayBlitProgram blit_program;
+MonochromeBlitProgram& MonochromeBlitProgram::instance() {
+	static MonochromeBlitProgram blit_program;
 	return blit_program;
 }
 
-GrayBlitProgram::~GrayBlitProgram() {
+MonochromeBlitProgram::~MonochromeBlitProgram() {
 }
 
-GrayBlitProgram::GrayBlitProgram() {
-	blit_program_.reset(new BlitProgram(kGrayBlitFragmentShader));
+MonochromeBlitProgram::MonochromeBlitProgram() {
+	blit_program_.reset(new BlitProgram(kMonochromeBlitFragmentShader));
 
 	u_blend_ = glGetUniformLocation(blit_program_->program_object(), "u_blend");
 }
 
-void GrayBlitProgram::draw(const FloatRect& gl_dest_rect,
+void MonochromeBlitProgram::draw(const FloatRect& gl_dest_rect,
                        const FloatRect& gl_src_rect,
                        const GLuint gl_texture,
 							  const RGBAColor& blend) {
