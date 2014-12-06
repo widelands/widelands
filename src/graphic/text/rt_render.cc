@@ -592,6 +592,8 @@ private:
 // created there yet (as it has been unused). Can you recreated the renderer
 // when the locale changes? If so, you could just pass the fontset() to it and
 // not depend on the singleton here.
+// NOCOM(GunChleoc): fh1 is created in wlapplication.cc:269.
+// I have switched the oder now so that is gets created before g_fh.
 IFont& FontCache::get_font(NodeStyle& ns) {
 	UI::FontSet fontset = UI::g_fh1->fontset();
 

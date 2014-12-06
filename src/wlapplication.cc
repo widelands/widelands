@@ -266,8 +266,8 @@ m_redirected_stdio(false)
 		throw wexception
 			("True Type library did not initialize: %s\n", TTF_GetError());
 
+	UI::g_fh1 = UI::create_fonthandler(g_gr); // This will create the fontset, so loading it first.
 	UI::g_fh = new UI::FontHandler();
-	UI::g_fh1 = UI::create_fonthandler(g_gr);
 
 	if (SDLNet_Init() == -1)
 		throw wexception("SDLNet_Init failed: %s\n", SDLNet_GetError());

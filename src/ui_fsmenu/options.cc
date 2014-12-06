@@ -65,6 +65,28 @@ struct LanguageEntry {
 	std::string fontname;   // Name of the font with which the language name is displayed.
 };
 
+// Locale identifiers can look like this: ca_ES@valencia.UTF-8
+// The contents of 'selected_locale' will be changed to match the 'current_locale'
+void find_selected_locale(std::string* selected_locale, const std::string& current_locale) {
+	if (selected_locale->empty()) {
+		std::vector<std::string> parts;
+		boost::split(parts, current_locale, boost::is_any_of("."));
+		if (current_locale  == parts[0]) {
+			*selected_locale = current_locale;
+		} else {
+			boost::split(parts, parts[0], boost::is_any_of("@"));
+			if (current_locale  == parts[0]) {
+				*selected_locale = current_locale;
+			} else {
+				boost::split(parts, parts[0], boost::is_any_of("_"));
+				if (current_locale  == parts[0]) {
+					*selected_locale = current_locale;
+				}
+			}
+		}
+	}
+}
+
 }  // namespace
 
 FullscreenMenuOptions::FullscreenMenuOptions
@@ -414,6 +436,7 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 				const std::string sortname = table->get_string("sort_name");
 				std::unique_ptr<UI::FontSet> fontset(new UI::FontSet(localename));
 				entries.push_back(LanguageEntry(localename, name, sortname, fontset->serif()));
+
 				if (localename == current_locale) {
 					selected_locale = current_locale;
 				}
@@ -428,29 +451,9 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 		return;  // Nothing more can be done now.
 	}  // End read locales table
 
+	find_selected_locale(&selected_locale, current_locale);
+
 	std::sort(entries.begin(), entries.end());
-
-	// Locale identifiers can look like this: ca_ES@valencia.UTF-8
-	// NOCOM(#codereview): This method already does a lot of work. You could
-	// pull the next block out into a function in an anon namespace?
-	if (selected_locale.empty()) {
-		std::vector<std::string> parts;
-		boost::split(parts, current_locale, boost::is_any_of("."));
-		if (current_locale  == parts[0]) {
-			selected_locale = current_locale;
-		} else {
-			boost::split(parts, parts[0], boost::is_any_of("@"));
-			if (current_locale  == parts[0]) {
-				selected_locale = current_locale;
-			} else {
-				boost::split(parts, parts[0], boost::is_any_of("_"));
-				if (current_locale  == parts[0]) {
-					selected_locale = current_locale;
-				}
-			}
-		}
-	}
-
 	for (const LanguageEntry& entry : entries) {
 		m_language_list.add(entry.descname.c_str(), entry.localename, nullptr,
 									entry.localename == selected_locale, "", entry.fontname);
@@ -757,7 +760,7 @@ void OptionsCtrl::save_options() {
 
 	WLApplication::get()->set_input_grab(opt.inputgrab);
 	i18n::set_locale(opt.language);
-	// NOCOMUI::g_fh1->load_locale_fonts();
+	UI::g_fh1->reinitialize_fontset();
 	g_sound_handler.set_disable_music(!opt.music);
 	g_sound_handler.set_disable_fx(!opt.fx);
 }

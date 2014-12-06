@@ -126,17 +126,18 @@ void FontSet::parse_font_for_locale(const std::string& localename) {
 		log("Could not read locales information from file: %s\n", err.what());
 	}
 
-	// NOCOM(#codereview): throw on unknown string?
-	if (direction_string == "rtl") {
+	if (direction_string == "ltr") {
+		direction_ = FontSet::Direction::kLeftToRight;
+	} else if (direction_string == "rtl") {
 		direction_ = FontSet::Direction::kRightToLeft;
 	} else {
+		log("Unknown script direction '%s'. Using to left-to-right rendering.\n", direction_string.c_str());
 		direction_ = FontSet::Direction::kLeftToRight;
 	}
 }
 
-// NOCOM(#codereview): this is already documented in the Lua file. remove?
-// Each locale needs to define a font face for serif.
-// For everything else, there's a fallback font.
+
+// The documentation on the fonts fallback scheme is in the 'i18n/fonts.lua' data file.
 void FontSet::set_fonts(const LuaTable& table, const std::string& fallback) {
 	set_font_group(table, "serif", fallback,
 						&serif_, &serif_bold_, &serif_italic_, &serif_bold_italic_);

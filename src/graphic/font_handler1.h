@@ -56,8 +56,7 @@ public:
 	/// Loads the FontSet for the currently active locale into the
 	/// font handler. This needs to be called after the language of the
 	/// game has changed.
-	// NOCOM(#codereview): reinitialize_fontset? reload_fontset?
-	virtual void load_locale_fonts() = 0;
+	virtual void reinitialize_fontset() = 0;
 
 	DISALLOW_COPY_AND_ASSIGN(IFontHandler1);
 };

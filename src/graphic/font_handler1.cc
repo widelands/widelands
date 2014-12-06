@@ -108,7 +108,7 @@ public:
 
 	UI::FontSet& fontset() const {return *fontset_.get();}
 
-	void load_locale_fonts() {
+	void reinitialize_fontset() {
 		fontset_.reset(new UI::FontSet(i18n::get_locale()));
 	}
 

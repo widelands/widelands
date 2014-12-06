@@ -46,9 +46,7 @@ class RenderNode;
  * Fonts in our sense are defined by the general font shape (given by the font
  * name) and the size of the font. Note that Bold and Italic are special in the
  * regard that we expect that this is already handled by the Font File, so, the
- * font loader directly loads DejaVuSerifBold.ttf for example.
- * // NOCOM(#codereview): You changed the font name in this comment and now it
- * seems no longer correct to me. Please doublecheck.
+ * font loader directly loads DejaVuSerif-Bold.ttf for example.
  */
 class IFont {
 public:
