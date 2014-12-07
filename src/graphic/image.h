@@ -25,6 +25,7 @@
 #include <stdint.h>
 
 #include "base/macros.h"
+#include "base/rect.h"
 
 class Texture;
 
@@ -37,9 +38,13 @@ public:
 	Image() = default;
 	virtual ~Image() {}
 
-	virtual uint16_t width() const = 0;
-	virtual uint16_t height() const = 0;
-	virtual Texture* texture() const = 0;
+	virtual int width() const = 0;
+	virtual int height() const = 0;
+
+	// NOCOM(#sirver): really, only Texture should implement these.
+	// NOCOM(#sirver): document.
+	virtual int get_gl_texture() const = 0;
+	virtual const FloatRect& texture_coordinates() const = 0;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(Image);

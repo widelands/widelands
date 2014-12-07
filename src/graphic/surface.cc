@@ -67,7 +67,7 @@ inline void pixel_to_gl_texture(const int width, const int height, float* x, flo
 // Convert 'dst' and 'srcrc' from pixel space into opengl space, taking into
 // account that we might be a subtexture in a bigger texture.
 void src_and_dst_rect_to_gl(const Surface& surface,
-                            const Texture* texture,
+                            const Image& image,
                             const Rect& dst_rect,
                             const Rect& src_rect,
                             FloatRect* gl_dst_rect,
@@ -76,17 +76,17 @@ void src_and_dst_rect_to_gl(const Surface& surface,
 	// a subtexture in another bigger texture. So we first figure out the pixel
 	// coordinates given it is a full texture (values between 0 and 1) and then
 	// adjust these for the texture coordinates in the parent texture.
-	const FloatRect& texture_coordinates = texture->texture_coordinates();
+	const FloatRect& texture_coordinates = image.texture_coordinates();
 
 	float x1 = src_rect.x;
 	float y1 = src_rect.y;
-	pixel_to_gl_texture(texture->width(), texture->height(), &x1, &y1);
+	pixel_to_gl_texture(image.width(), image.height(), &x1, &y1);
 	x1 = texture_coordinates.x + x1 * texture_coordinates.w;
 	y1 = texture_coordinates.y + y1 * texture_coordinates.h;
 
 	float x2 = src_rect.x + src_rect.w;
 	float y2 = src_rect.y + src_rect.h;
-	pixel_to_gl_texture(texture->width(), texture->height(), &x2, &y2);
+	pixel_to_gl_texture(image.width(), image.height(), &x2, &y2);
 	x2 = texture_coordinates.x + x2 * texture_coordinates.w;
 	y2 = texture_coordinates.y + y2 * texture_coordinates.h;
 
@@ -101,11 +101,11 @@ void src_and_dst_rect_to_gl(const Surface& surface,
 }  // namespace
 
 
-uint16_t Surface::width() const {
+int Surface::width() const {
 	return m_w;
 }
 
-uint16_t Surface::height() const {
+int Surface::height() const {
 	return m_h;
 }
 
@@ -180,7 +180,7 @@ void brighten_rect(const Rect& rc, const int32_t factor, Surface * surface)
 }
 
 void draw_line
-	(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t gwidth, Surface * surface)
+	(int x1, int y1, int x2, int y2, const RGBColor& color, int gwidth, Surface * surface)
 {
 	surface->setup_gl();
 	glViewport(0, 0, surface->width(), surface->height());
@@ -197,7 +197,7 @@ void draw_line
 }
 
 void blit_monochrome(const Rect& dst_rect,
-                     const Texture* texture,
+                     const Image& image,
                      const Rect& src_rect,
                      const RGBAColor& blend,
                      Surface* surface) {
@@ -205,15 +205,15 @@ void blit_monochrome(const Rect& dst_rect,
 	glViewport(0, 0, surface->width(), surface->height());
 
 	FloatRect gl_dst_rect, gl_src_rect;
-	src_and_dst_rect_to_gl(*surface, texture, dst_rect, src_rect, &gl_dst_rect, &gl_src_rect);
+	src_and_dst_rect_to_gl(*surface, image, dst_rect, src_rect, &gl_dst_rect, &gl_src_rect);
 
 	MonochromeBlitProgram::instance().draw(
-	   gl_dst_rect, gl_src_rect, texture->get_gl_texture(), blend);
+	   gl_dst_rect, gl_src_rect, image.get_gl_texture(), blend);
 }
 
 void blit_blended(const Rect& dst_rect,
-                  const Texture* texture,
-                  const Texture* mask,
+                  const Image& image,
+                  const Image& mask,
                   const Rect& src_rect,
                   const RGBColor& blend,
                   Surface* surface) {
@@ -221,10 +221,10 @@ void blit_blended(const Rect& dst_rect,
 	glViewport(0, 0, surface->width(), surface->height());
 
 	FloatRect gl_dst_rect, gl_src_rect;
-	src_and_dst_rect_to_gl(*surface, texture, dst_rect, src_rect, &gl_dst_rect, &gl_src_rect);
+	src_and_dst_rect_to_gl(*surface, image, dst_rect, src_rect, &gl_dst_rect, &gl_src_rect);
 
 	BlendedBlitProgram::instance().draw(
-	   gl_dst_rect, gl_src_rect, texture->get_gl_texture(), mask->get_gl_texture(), blend);
+	   gl_dst_rect, gl_src_rect, image.get_gl_texture(), mask.get_gl_texture(), blend);
 }
 
 void draw_rect(const Rect& rc, const RGBColor& clr, Surface* surface) {
@@ -234,7 +234,7 @@ void draw_rect(const Rect& rc, const RGBColor& clr, Surface* surface) {
 }
 
 void blit(const Rect& dst_rect,
-          const Texture* texture,
+          const Image& image,
           const Rect& src_rect,
           float opacity,
           BlendMode blend_mode,
@@ -243,8 +243,8 @@ void blit(const Rect& dst_rect,
 	surface->setup_gl();
 
 	FloatRect gl_dst_rect, gl_src_rect;
-	src_and_dst_rect_to_gl(*surface, texture, dst_rect, src_rect, &gl_dst_rect, &gl_src_rect);
+	src_and_dst_rect_to_gl(*surface, image, dst_rect, src_rect, &gl_dst_rect, &gl_src_rect);
 
 	VanillaBlitProgram::instance().draw(
-	   gl_dst_rect, gl_src_rect, texture->get_gl_texture(), opacity, blend_mode);
+	   gl_dst_rect, gl_src_rect, image.get_gl_texture(), opacity, blend_mode);
 }

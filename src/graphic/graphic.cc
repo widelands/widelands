@@ -280,8 +280,8 @@ void Graphic::refresh()
  * @param surf The Surface to save
  * @param sw a StreamWrite where the png is written to
  */
-void Graphic::save_png(const Image* image, StreamWrite * sw) const {
-	save_surface_to_png(image->texture(), sw, COLOR_TYPE::RGBA);
+void Graphic::save_png(Texture* texture, StreamWrite * sw) const {
+	save_surface_to_png(texture, sw, COLOR_TYPE::RGBA);
 }
 
 /**

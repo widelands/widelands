@@ -77,7 +77,7 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 		const Texture& terrain_texture = terrain_descr.get_texture(0);
 		Texture* texture = new Texture(terrain_texture.width(), terrain_texture.height());
 		blit(Rect(0, 0, terrain_texture.width(), terrain_texture.height()),
-		              &terrain_texture,
+		              terrain_texture,
 		              Rect(0, 0, terrain_texture.width(), terrain_texture.height()),
 		              1.,
 		              BlendMode::UseAlpha, texture);
@@ -85,7 +85,7 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 
 		if (ter_is == TerrainDescription::GREEN) {
 			blit(Rect(pt.x, pt.y, green->width(), green->height()),
-			     green->texture(),
+			     *green,
 			     Rect(0, 0, green->width(), green->height()),
 			     1.,
 			     BlendMode::UseAlpha,
@@ -96,7 +96,7 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 		} else {
 			if (ter_is & TerrainDescription::WATER) {
 				blit(Rect(pt.x, pt.y, water->width(), water->height()),
-				     water->texture(),
+				     *water,
 				     Rect(0, 0, water->width(), water->height()),
 				     1.,
 				     BlendMode::UseAlpha,
@@ -107,7 +107,7 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 			}
 			else if (ter_is & TerrainDescription::MOUNTAIN) {
 				blit(Rect(pt.x, pt.y, mountain->width(), mountain->height()),
-				     mountain->texture(),
+				     *mountain,
 				     Rect(0, 0, mountain->width(), mountain->height()),
 				     1.,
 				     BlendMode::UseAlpha,
@@ -118,7 +118,7 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 			}
 			if (ter_is & TerrainDescription::ACID) {
 				blit(Rect(pt.x, pt.y, dead->width(), dead->height()),
-				     dead->texture(),
+				     *dead,
 				     Rect(0, 0, dead->width(), dead->height()),
 				     1.,
 				     BlendMode::UseAlpha,
@@ -129,7 +129,7 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 			}
 			if (ter_is & TerrainDescription::UNPASSABLE) {
 				blit(Rect(pt.x, pt.y, unpassable->width(), unpassable->height()),
-				     unpassable->texture(),
+				     *unpassable,
 				     Rect(0, 0, unpassable->width(), unpassable->height()),
 				     1.,
 				     BlendMode::UseAlpha,
@@ -140,7 +140,7 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 			}
 			if (ter_is & TerrainDescription::DRY) {
 				blit(Rect(pt.x, pt.y, dry->width(), dry->height()),
-				     dry->texture(),
+				     *dry,
 				     Rect(0, 0, dry->width(), dry->height()),
 				     1.,
 				     BlendMode::UseAlpha,

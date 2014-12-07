@@ -176,7 +176,7 @@ void RenderTarget::blit(const Point& dst, const Image* image, BlendMode blend_mo
 
 	if (to_surface_geometry(&destination_point, &srcrc)) {
 		::blit(Rect(destination_point.x, destination_point.y, srcrc.w, srcrc.h),
-		     image->texture(),
+		     *image,
 		     srcrc,
 		     1.,
 		     blend_mode,
@@ -203,7 +203,7 @@ void RenderTarget::blitrect
 	Point destination_point(dst);
 	if (to_surface_geometry(&destination_point, &srcrc))
 		::blit(Rect(destination_point.x, destination_point.y, srcrc.w, srcrc.h),
-		       image->texture(),
+		       *image,
 		       srcrc,
 		       1.,
 		       blend_mode,
@@ -220,7 +220,7 @@ void RenderTarget::blitrect_scale(const Rect& dst,
 	Rect srcrect(source_rect);
 	if (to_surface_geometry(&destination_point, &srcrect)) {
 		::blit(Rect(destination_point.x, destination_point.y, dst.w, dst.h),
-		       image->texture(),
+		       *image,
 		       source_rect,
 		       opacity,
 		       blend_mode,
@@ -237,7 +237,7 @@ void RenderTarget::blitrect_scale_monochrome(const Rect& destination_rect,
 	if (to_surface_geometry(&destination_point, &srcrect)) {
 		blit_monochrome(
 		   Rect(destination_point.x, destination_point.y, destination_rect.w, destination_rect.h),
-		   image->texture(),
+		   *image,
 		   source_rect,
 		   blend,
 		   m_surface);
@@ -297,7 +297,7 @@ void RenderTarget::tile(const Rect& rect, const Image* image, const Point& gofs,
 					srcrc.w = r.w - tx;
 
 				const Rect dst_rect(r.x + tx, r.y + ty, srcrc.w, srcrc.h);
-				::blit(dst_rect, image->texture(), srcrc, 1., blend_mode, m_surface);
+				::blit(dst_rect, *image, srcrc, 1., blend_mode, m_surface);
 
 				tx += srcrc.w;
 

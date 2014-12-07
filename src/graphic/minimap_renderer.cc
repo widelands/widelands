@@ -25,8 +25,6 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "graphic/graphic.h"
-#include "graphic/image.h"
-#include "graphic/in_memory_image.h"
 #include "graphic/texture.h"
 #include "logic/field.h"
 #include "logic/map.h"
@@ -308,7 +306,5 @@ void write_minimap_image
 
 	// Render minimap
 	std::unique_ptr<Texture> texture(draw_minimap(egbase, player, viewpoint, layers));
-	std::unique_ptr<const Image> image(new_in_memory_image(texture.release()));
-	g_gr->save_png(image.get(), streamwrite);
-	image.reset();
+	g_gr->save_png(texture.get(), streamwrite);
 }

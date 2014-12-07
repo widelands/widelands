@@ -47,8 +47,11 @@ public:
 	void setup_gl() override;
 	void pixel_to_gl(float* x, float* y) const override;
 
-	GLuint get_gl_texture() const {return m_texture;}
-	const FloatRect& texture_coordinates() const {
+	// NOCOM(#sirver): do not implement this here.
+	int get_gl_texture() const override {
+		return m_texture;
+	}
+	const FloatRect& texture_coordinates() const override {
 		return m_texture_coordinates;
 	}
 

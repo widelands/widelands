@@ -48,16 +48,26 @@ class RTImage : public Image {
 public:
 	RTImage
 		(const string& ghash, TextureCache* texture_cache, RT::Renderer*
-		 rt_renderer, const string& text, uint16_t gwidth)
+		 rt_renderer, const string& text, int gwidth)
 		: hash_(ghash), text_(text), width_(gwidth), texture_cache_(texture_cache),
 		  rt_renderer_(rt_renderer)
 	{}
 	virtual ~RTImage() {}
 
 	// Implements Image.
-	uint16_t width() const override {return texture()->width();}
-	uint16_t height() const override {return texture()->height();}
-	Texture* texture() const override {
+	int width() const override {return texture()->width();}
+	int height() const override {return texture()->height();}
+
+	int get_gl_texture() const override {
+		return texture()->get_gl_texture();
+	}
+
+	const FloatRect& texture_coordinates() const override {
+		return texture()->texture_coordinates();
+	}
+
+private:
+	Texture* texture() const {
 		Texture* surf = texture_cache_->get(hash_);
 		if (surf)
 			return surf;
@@ -67,10 +77,9 @@ public:
 		return surf;
 	}
 
-private:
 	const string hash_;
 	const string text_;
-	uint16_t width_;
+	int width_;
 
 	// Nothing owned.
 	TextureCache* const texture_cache_;
@@ -97,7 +106,7 @@ public:
 			return image_cache_->get(hash);
 
 		std::unique_ptr<RTImage> image(new RTImage(hash, texture_cache_, renderer_.get(), text, w));
-		image->texture(); // force the rich text to get rendered in case there is an exception thrown.
+		image->width(); // force the rich text to get rendered in case there is an exception thrown.
 
 		return image_cache_->insert(hash, std::move(image));
 	}

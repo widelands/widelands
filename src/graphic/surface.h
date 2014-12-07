@@ -26,6 +26,7 @@
 #include "base/rect.h"
 #include "graphic/blend_mode.h"
 #include "graphic/color.h"
+#include "graphic/image.h"
 
 class Texture;
 
@@ -33,14 +34,14 @@ class Texture;
  * Interface to a basic surfaces that can be used as destination for blitting and drawing.
  * It also allows low level pixel access.
  */
-class Surface {
+class Surface : public Image {
 public:
 	Surface() = default;
 	virtual ~Surface() {}
 
 	/// Dimensions.
-	uint16_t width() const;
-	uint16_t height() const;
+	int width() const;
+	int height() const;
 
 	/// The functions below are for direct pixel access. This should be used
 	/// only very sparingly as / it is potentially expensive (especially for
@@ -114,7 +115,6 @@ public:
 	virtual void setup_gl() = 0;
 
 protected:
-
 	/// Logical width and height of the surface
 	uint16_t m_w, m_h;
 
@@ -130,30 +130,30 @@ void draw_rect(const Rect&, const RGBColor&, Surface* destination);
 
 /// This draws a part of 'texture' to 'surface'.
 void blit
-	(const Rect& dst, const Texture*, const Rect& srcrc, const float opacity,
-	 BlendMode blend_mode, Surface* surface);
+	(const Rect& dst, const Image&, const Rect& srcrc, const float opacity,
+	 BlendMode blend_mode, Surface* destination);
 
 /// This draws a grayed out version. See MonochromeBlitProgram.
 void
 blit_monochrome
-	(const Rect& dst, const Texture*, const Rect& srcrc,
-	 const RGBAColor& multiplier, Surface* surface);
+	(const Rect& dst, const Image&, const Rect& srcrc,
+	 const RGBAColor& multiplier, Surface* destination);
 
 /// This draws a playercolor blended image. See BlendedBlitProgram.
 void blit_blended
-	(const Rect& dst, const Texture* image, const Texture* mask, const Rect&
-	 srcrc, const RGBColor& blend, Surface* surface);
+	(const Rect& dst, const Image& image, const Image& mask, const Rect&
+	 srcrc, const RGBColor& blend, Surface* destination);
 
-/// Draws a filled rect to the surface. No blending takes place, the values
+/// Draws a filled rect to the destination. No blending takes place, the values
 // in the target are just replaced (i.e. / BlendMode would be BlendMode::Copy).
-void fill_rect(const Rect&, const RGBAColor&, Surface* surface);
+void fill_rect(const Rect&, const RGBAColor&, Surface* destination);
 
-/// draw a line to the surface
+/// draw a line to the destination
 void draw_line
-	(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color,
-	 uint8_t width, Surface* surface);
+	(int x1, int y1, int x2, int y2, const RGBColor& color,
+	 int width, Surface* destination);
 
-/// makes a rectangle on the surface brighter (or darker).
-void brighten_rect(const Rect&, int32_t factor, Surface* surface);
+/// makes a rectangle on the destination brighter (or darker).
+void brighten_rect(const Rect&, int factor, Surface* destination);
 
 #endif  // end of include guard: WL_GRAPHIC_SURFACE_H

@@ -77,7 +77,7 @@ public:
 	ImageCache& images() const {return *image_cache_.get();}
 	AnimationManager& animations() const {return *animation_manager_.get();}
 
-	void save_png(const Image*, StreamWrite*) const;
+	void save_png(Texture*, StreamWrite*) const;
 
 	void screenshot(const std::string& fname) const;
 

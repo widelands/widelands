@@ -36,6 +36,7 @@ using namespace std;
 // relied to exist forever. So when you pass out a pointer to your
 // InMemoryImage, be prepared to keep it valid forever, or check all callsites
 // or prepare for core dumps.
+// NOCOM(#sirver): kill.
 class InMemoryImage : public Image {
 public:
 	InMemoryImage(Texture* texture) :
@@ -44,9 +45,15 @@ public:
 	}
 
 	// Implements Image.
-	uint16_t width() const override {return texture_->width();}
-	uint16_t height() const override {return texture_->height();}
-	Texture* texture() const override {return texture_.get();}
+	int width() const override {return texture_->width();}
+	int height() const override {return texture_->height();}
+
+	int get_gl_texture() const override {
+		return texture_->get_gl_texture();
+	}
+	const FloatRect& texture_coordinates() const override {
+		return texture_->texture_coordinates();
+	}
 
 private:
 	std::unique_ptr<Texture> texture_;

@@ -21,6 +21,7 @@
 #include <algorithm>
 #include <cassert>
 
+#include "base/wexception.h"
 #include "graphic/gl/utils.h"
 
 Screen::Screen(uint16_t w, uint16_t h)
@@ -84,4 +85,12 @@ void Screen::unlock(Surface::UnlockMode mode)
 
 void Screen::setup_gl() {
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+int Screen::get_gl_texture() const {
+	throw wexception("get_gl_texture() is not implemented for Screen.");
+}
+
+const FloatRect& Screen::texture_coordinates() const {
+	throw wexception("texture_coordinates() is not implemented for Screen.");
 }
