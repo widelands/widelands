@@ -101,14 +101,6 @@ void src_and_dst_rect_to_gl(const Surface& surface,
 }  // namespace
 
 
-int Surface::width() const {
-	return m_w;
-}
-
-int Surface::height() const {
-	return m_h;
-}
-
 void fill_rect(const Rect& rc, const RGBAColor& clr, Surface* surface) {
 	surface->setup_gl();
 	glViewport(0, 0, surface->width(), surface->height());

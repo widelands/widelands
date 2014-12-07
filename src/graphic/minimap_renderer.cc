@@ -269,7 +269,7 @@ std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
 	assert(texture->format().BytesPerPixel == sizeof(uint32_t));
 
 	fill_rect(Rect(0, 0, texture->width(), texture->height()), RGBAColor(0, 0, 0, 255), texture);
-	texture->lock(Texture::Lock_Normal);
+	texture->lock();
 
 	draw_minimap_int(texture, egbase, player, viewpoint, layers);
 

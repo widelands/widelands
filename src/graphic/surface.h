@@ -30,31 +30,24 @@
 
 class Texture;
 
-/**
- * Interface to a basic surfaces that can be used as destination for blitting and drawing.
- * It also allows low level pixel access.
- */
-class Surface : public Image {
+// Interface to a basic surfaces that can be used as destination for blitting
+// and drawing. It also allows low level pixel access.
+class Surface {
 public:
 	Surface() = default;
 	virtual ~Surface() {}
 
 	/// Dimensions.
-	int width() const;
-	int height() const;
+	virtual int width() const = 0;
+	virtual int height() const = 0;
 
 	// Converts the given pixel into an OpenGl point. This might
 	// need some flipping of axis, depending if you want to render
 	// on the screen or not.
 	virtual void pixel_to_gl(float* x, float* y) const = 0;
 
-	// NOCOM(#sirver): what
+	// Setups OpenGL to render to this surface.
 	virtual void setup_gl() = 0;
-
-	// NOCOM(#sirver): move to child classes
-protected:
-	/// Logical width and height of the surface
-	uint16_t m_w, m_h;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(Surface);

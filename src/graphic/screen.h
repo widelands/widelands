@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/macros.h"
 #include "graphic/surface.h"
 
 /**
@@ -28,20 +29,24 @@
  */
 class Screen : public Surface {
 public:
-	Screen(uint16_t w, uint16_t h);
+	Screen(int w, int h);
 	virtual ~Screen() {}
 
-	// Implements Image
-	int get_gl_texture() const override;
-	const FloatRect& texture_coordinates() const override;
-
 	// Implements Surface.
+	int width() const override;
+	int height() const override;
 	void setup_gl() override;
 	void pixel_to_gl(float* x, float* y) const override;
 
-	// Reads out the current pixels in the framebuffer and returns them as a
-	// texture for screenshots. This is a very slow process, so use with care.
+	// Reads out the current pixels in the framebuffer and returns
+	// them as a texture for screenshots. This is a very slow process,
+	// so use with care.
 	std::unique_ptr<Texture> to_texture() const;
+
+private:
+	const int m_w, m_h;
+
+	DISALLOW_COPY_AND_ASSIGN(Screen);
 };
 
 #endif  // end of include guard: WL_GRAPHIC_SCREEN_H

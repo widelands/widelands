@@ -87,9 +87,8 @@ Texture::Texture(SDL_Surface * surface, bool intensity)
 	// use freetype directly we might be able to avoid that.
 	uint8_t bpp = surface->format->BytesPerPixel;
 
-	if (surface->format->palette || m_w != static_cast<uint32_t>(surface->w) ||
-	    m_h != static_cast<uint32_t>(surface->h) || (bpp != 3 && bpp != 4) ||
-	    is_bgr_surface(*surface->format)) {
+	if (surface->format->palette || m_w != surface->w || m_h != surface->h ||
+	    (bpp != 3 && bpp != 4) || is_bgr_surface(*surface->format)) {
 		SDL_Surface* converted = empty_sdl_surface(m_w, m_h);
 		assert(converted);
 		SDL_SetSurfaceAlphaMod(converted,  SDL_ALPHA_OPAQUE);
@@ -138,6 +137,22 @@ Texture::~Texture()
 	}
 }
 
+int Texture::width() const {
+	return m_w;
+}
+
+int Texture::height() const {
+	return m_h;
+}
+
+int Texture::get_gl_texture() const {
+	return m_texture;
+}
+
+const FloatRect& Texture::texture_coordinates() const {
+	return m_texture_coordinates;
+}
+
 void Texture::pixel_to_gl(float* x, float* y) const {
 	*x = (*x / m_w) * 2. - 1.;
 	*y = (*y / m_h) * 2. - 1.;
@@ -167,7 +182,7 @@ void Texture::init(uint16_t w, uint16_t h)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 }
 
-void Texture::lock(LockMode mode) {
+void Texture::lock() {
 	if (m_w <= 0 || m_h <= 0) {
 		return;
 	}
@@ -181,11 +196,9 @@ void Texture::lock(LockMode mode) {
 
 	m_pixels.reset(new uint8_t[m_w * m_h * 4]);
 
-	if (mode == Lock_Normal) {
-		glBindTexture(GL_TEXTURE_2D, m_texture);
-		glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_pixels.get());
-		glBindTexture(GL_TEXTURE_2D, 0);
-	}
+	glBindTexture(GL_TEXTURE_2D, m_texture);
+	glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_pixels.get());
+	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void Texture::unlock(UnlockMode mode) {

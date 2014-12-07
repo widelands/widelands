@@ -131,7 +131,7 @@ bool save_to_png(Texture* texture, StreamWrite* sw, ColorType color_type) {
 
 		// Write each row
 		const SDL_PixelFormat& fmt = texture->format();
-		texture->lock(Texture::Lock_Normal);
+		texture->lock();
 
 		// Write each row
 		RGBAColor color;

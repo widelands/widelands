@@ -26,10 +26,7 @@
 #include "graphic/gl/utils.h"
 #include "graphic/texture.h"
 
-Screen::Screen(uint16_t w, uint16_t h)
-{
-	m_w = w;
-	m_h = h;
+Screen::Screen(int w, int h) : m_w(w), m_h(h) {
 }
 
 void Screen::pixel_to_gl(float* x, float* y) const {
@@ -41,12 +38,12 @@ void Screen::setup_gl() {
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-int Screen::get_gl_texture() const {
-	throw wexception("get_gl_texture() is not implemented for Screen.");
+int Screen::width() const {
+	return m_w;
 }
 
-const FloatRect& Screen::texture_coordinates() const {
-	throw wexception("texture_coordinates() is not implemented for Screen.");
+int Screen::height() const {
+	return m_h;
 }
 
 std::unique_ptr<Texture> Screen::to_texture() const {
@@ -58,7 +55,7 @@ std::unique_ptr<Texture> Screen::to_texture() const {
 	uint8_t* begin_row = pixels.get();
 	uint8_t* end_row = pixels.get() + (m_w * (m_h - 1) * 4);
 	while (begin_row < end_row) {
-		for (uint16_t x = 0; x < m_w * 4; ++x) {
+		for (int x = 0; x < m_w * 4; ++x) {
 			std::swap(begin_row[x], end_row[x]);
 		}
 		begin_row += m_w * 4;

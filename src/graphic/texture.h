@@ -27,7 +27,7 @@
 
 struct SDL_Surface;
 
-class Texture : public Surface {
+class Texture : public Surface, public Image {
 public:
 	// Create a new surface from an SDL_Surface. If intensity is true, an GL_INTENSITY texture
 	// is created. Ownership is taken.
@@ -44,34 +44,14 @@ public:
 	virtual ~Texture();
 
 	// Implements Surface
+	int width() const override;
+	int height() const override;
 	void setup_gl() override;
 	void pixel_to_gl(float* x, float* y) const override;
 
-	// NOCOM(#sirver): do not implement this here.
-	int get_gl_texture() const override {
-		return m_texture;
-	}
-	const FloatRect& texture_coordinates() const override {
-		return m_texture_coordinates;
-	}
-
-	/// The functions below are for direct pixel access. This should be used
-	/// only very sparingly as / it is potentially expensive (especially for
-	/// OpenGL). At the moment, only the code inside graphic / is actually using
-	/// this.
-	enum LockMode {
-		/**
-		 * Normal mode preserves pre-existing pixel data so that it can
-		 * be read or modified.
-		 */
-		Lock_Normal = 0,
-
-		/**
-		 * Discard mode discards pre-existing pixel data. All pixels
-		 * will be undefined unless they are re-written.
-		 */
-		Lock_Discard
-	};
+	// Implements Image.
+	int get_gl_texture() const override;
+	const FloatRect& texture_coordinates() const override;
 
 	enum UnlockMode {
 		/**
@@ -92,35 +72,29 @@ public:
 	/// This returns the pixel format for direct pixel access.
 	const SDL_PixelFormat & format() const;
 
-	/**
-	 * \return Pitch of the raw pixel data, i.e. the number of bytes
-	 * contained in each image row. This can be strictly larger than
-	 * bytes per pixel times the width.
-	 */
+	// Number of bytes per row.
 	uint16_t get_pitch() const;
 
-	/**
-	 * \return Pointer to the raw pixel data.
-	 *
-	 * \warning May only be called inside lock/unlock pairs.
-	 */
+	// Pointer to the raw pixel data. May only be called inside lock/unlock
+	// pairs.
 	uint8_t * get_pixels() const;
 
-	/**
-	 * Lock/Unlock pairs must guard any of the direct pixel access using the
-	 * functions below.
-	 *
-	 * \note Lock/Unlock pairs cannot be nested.
-	 */
-	void lock(LockMode);
+	// Lock/Unlock pairs must guard any of the direct pixel access using the
+	// functions below. Lock/Unlock pairs cannot be nested.
+	void lock();
 	void unlock(UnlockMode);
 
+	// Returns the color of the pixel as a value as defined by 'format()'.
 	uint32_t get_pixel(uint16_t x, uint16_t y);
-	void set_pixel(uint16_t x, uint16_t y, uint32_t clr);
 
+	// Sets the pixel to the 'clr'.
+	void set_pixel(uint16_t x, uint16_t y, uint32_t clr);
 
 private:
 	void init(uint16_t w, uint16_t h);
+
+	// Width and height.
+	int m_w, m_h;
 
 	// True if we own the texture, i.e. if we need to delete it.
 	bool m_owns_texture;
@@ -132,6 +106,8 @@ private:
 
 	/// Pixel data, while the texture is locked
 	std::unique_ptr<uint8_t[]> m_pixels;
+
+	DISALLOW_COPY_AND_ASSIGN(Texture);
 };
 
 #endif  // end of include guard: WL_GRAPHIC_TEXTURE_H
