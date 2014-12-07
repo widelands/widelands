@@ -67,7 +67,7 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool fullscreen)
      m_window_mode_height(window_mode_h),
      m_update(true),
      texture_cache_(create_texture_cache(TRANSIENT_TEXTURE_CACHE_SIZE)),
-     image_cache_(new ImageCache(texture_cache_.get())),
+     image_cache_(new ImageCache()),
      animation_manager_(new AnimationManager())
 {
 	// Request an OpenGL 2 context with double buffering.

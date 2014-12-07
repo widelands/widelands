@@ -20,11 +20,11 @@
 #ifndef WL_GRAPHIC_IN_MEMORY_IMAGE_H
 #define WL_GRAPHIC_IN_MEMORY_IMAGE_H
 
-#include <string>
+#include <memory>
 
 class Texture;
 class Image;
 
-const Image* new_in_memory_image(const std::string& hash, Texture* texture);
+std::unique_ptr<const Image> new_in_memory_image(Texture* texture);
 
 #endif  // end of include guard: WL_GRAPHIC_IN_MEMORY_IMAGE_H

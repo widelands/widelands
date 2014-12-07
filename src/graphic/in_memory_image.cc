@@ -38,24 +38,20 @@ using namespace std;
 // or prepare for core dumps.
 class InMemoryImage : public Image {
 public:
-	InMemoryImage(const string& ghash, Texture* texture) :
-		hash_(ghash), texture_(texture) {}
+	InMemoryImage(Texture* texture) :
+		texture_(texture) {}
 	virtual ~InMemoryImage() {
 	}
 
 	// Implements Image.
 	uint16_t width() const override {return texture_->width();}
 	uint16_t height() const override {return texture_->height();}
-	// Note: hash will mostly be dummy values for this implementation. It should
-	// not wind up in ImageCache, otherwise the ownership question is not clear.
-	const string& hash() const override {return hash_;}
 	Texture* texture() const override {return texture_.get();}
 
 private:
-	const string hash_;
 	std::unique_ptr<Texture> texture_;
 };
 
-const Image* new_in_memory_image(const string& hash, Texture* texture) {
-	return new InMemoryImage(hash, texture);
+std::unique_ptr<const Image> new_in_memory_image(Texture* texture) {
+	return std::unique_ptr<const Image>(new InMemoryImage(texture));
 }

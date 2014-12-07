@@ -33,7 +33,7 @@ class Texture;
  * Interface to a basic surfaces that can be used as destination for blitting and drawing.
  * It also allows low level pixel access.
  */
-class Surface  {
+class Surface {
 public:
 	Surface() = default;
 	virtual ~Surface() {}
