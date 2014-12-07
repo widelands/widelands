@@ -233,11 +233,14 @@ void FullscreenMenuCampaignSelect::fill_table()
 			CampaignListData campaign_data;
 
 			campaign_data.index = i;
-			campaign_data.name = s.get_string(cname.c_str(), "");
-			campaign_data.tribename = s.get_string(ctribename.c_str(), "");
+
+			i18n::Textdomain td("maps");
+			campaign_data.name = _(s.get_string(cname.c_str(), ""));
+			campaign_data.tribename = _(s.get_string(ctribename.c_str(), ""));
 			campaign_data.difficulty = difficulty;
-			campaign_data.difficulty_description = s.get_string(cdiff_descr.c_str(), "");
-			campaign_data.description = s.get_string(cdescription.c_str(), "");
+			campaign_data.difficulty_description = _(s.get_string(cdiff_descr.c_str(), ""));
+			campaign_data.description = _(s.get_string(cdescription.c_str(), ""));
+
 			m_campaigns_data.push_back(campaign_data);
 
 			UI::Table<uintptr_t>::EntryRecord& tableEntry = m_table.add(i);
@@ -464,15 +467,17 @@ void FullscreenMenuCampaignMapSelect::fill_table()
 		Section & global_s = prof->get_safe_section("global");
 
 		// Set subtitle of the page
-		const std::string campaign_name = (boost::format("campname%u") % campaign).str();
-		const std::string campaign_tribe = (boost::format("camptribe%u") % campaign).str();
-		m_subtitle.set_text((boost::format("%s — %s")
-									% global_s.get_string(campaign_tribe.c_str())
-									% global_s.get_string(campaign_name.c_str())).str());
+		const char* campaign_tribe = _(global_s.get_string(
+													 (boost::format("camptribe%u") % campaign).str().c_str()));
+		const char* campaign_name;
+		{
+			i18n::Textdomain td("maps");
+			campaign_name = _(global_s.get_string((boost::format("campname%u") % campaign).str().c_str()));
+		}
+		m_subtitle.set_text((boost::format("%s — %s") % campaign_tribe % campaign_name).str());
 
 		// Get section of campaign-maps
-		const std::string campaign_section = (boost::format("campsect%u") % campaign).str();
-		campsection = global_s.get_string(campaign_section.c_str());
+		campsection = global_s.get_string((boost::format("campsect%u") % campaign).str().c_str());
 	}
 
 	// Create the entry we use to load the section of the map
