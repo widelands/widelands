@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-12-06 05:44+0000\n"
+"X-Launchpad-Export-Date: 2014-12-07 05:35+0000\n"
 "X-Generator: Launchpad (build 17274)\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -4134,12 +4134,3 @@ msgstr "追跡"
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr "ここに視点移動"
-
-#~ msgid "Texture Number: %i"
-#~ msgstr "テクスチャ番号 %i"
-
-#~ msgid "Version "
-#~ msgstr "バージョン "
-
-#~ msgid "by the Widelands Development Team"
-#~ msgstr "by Widelands開発チーム"

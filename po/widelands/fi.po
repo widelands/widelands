@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-12-06 05:44+0000\n"
+"X-Launchpad-Export-Date: 2014-12-07 05:34+0000\n"
 "X-Generator: Launchpad (build 17274)\n"
 "X-Poedit-Country: FINLAND\n"
 "Language: fi\n"
@@ -4169,17 +4169,3 @@ msgstr "Seuraa"
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr "Keskitä päänäkymä tähän"
-
-#~ msgid "Texture Number: %i"
-#~ msgstr "Tekstuurinumero: %i"
-
-# Todo: ei näin
-#~ msgid "Version "
-#~ msgstr "Versio "
-
-#~ msgid "by the Widelands Development Team"
-#~ msgstr "Widelands-kehittäjätiimi"
-
-# TODO: trans-comment! controller?
-#~ msgid "NO GAME CONTROLLER"
-#~ msgstr "EI PELIKONTROLLERIA"

@@ -13,7 +13,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-06 05:38+0000\n"
+"X-Launchpad-Export-Date: 2014-12-07 05:33+0000\n"
 "X-Generator: Launchpad (build 17274)\n"
 
 #: ../../txts/README.lua:6
@@ -963,6 +963,3 @@ msgstr ""
 "Nasi gracze komputerowi są zbyt nudni? Odwiedź naszą stronę na "
 "www.widelands.org (po angielsku) i spotkaj innych graczy, aby z nimi zagrać "
 "online."
-
-#~ msgid "Development"
-#~ msgstr "Osoby związane z Widelands"

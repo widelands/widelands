@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2014-12-06 05:46+0000\n"
+"X-Launchpad-Export-Date: 2014-12-07 05:36+0000\n"
 "X-Generator: Launchpad (build 17274)\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -4088,12 +4088,3 @@ msgstr "Sledi"
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "Version "
-#~ msgstr "Različica "
-
-#~ msgid "by the Widelands Development Team"
-#~ msgstr "Razvojna Ekipa Widelands"
-
-#~ msgid "NO GAME CONTROLLER"
-#~ msgstr "BREZ NADZORNIKA IGRE"

@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n % 100 >= "
 "3 && n % 100 <= 10 ? 3 : n % 100 >= 11 && n % 100 <= 99 ? 4 : 5;\n"
-"X-Launchpad-Export-Date: 2014-12-06 05:43+0000\n"
+"X-Launchpad-Export-Date: 2014-12-07 05:33+0000\n"
 "X-Generator: Launchpad (build 17274)\n"
 "Language: ar\n"
 
@@ -4073,9 +4073,3 @@ msgstr ""
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "Version "
-#~ msgstr "اﻹصدار "
-
-#~ msgid "by the Widelands Development Team"
-#~ msgstr "مُقدم لك من قِبَل فريق تطوير وايد لاندس"

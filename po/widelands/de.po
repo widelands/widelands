@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-12-06 05:44+0000\n"
+"X-Launchpad-Export-Date: 2014-12-07 05:34+0000\n"
 "X-Generator: Launchpad (build 17274)\n"
 "Language: de\n"
 
@@ -4238,15 +4238,3 @@ msgstr "Folge"
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr "Zentriere die Ansicht hierauf"
-
-#~ msgid "Texture Number: %i"
-#~ msgstr "Texturnummer: %i"
-
-#~ msgid "Version "
-#~ msgstr "Version "
-
-#~ msgid "by the Widelands Development Team"
-#~ msgstr "Widelands Entwicklungsteam"
-
-#~ msgid "NO GAME CONTROLLER"
-#~ msgstr "KEIN KONTROLLGERÄT"

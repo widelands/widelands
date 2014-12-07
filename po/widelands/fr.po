@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-12-06 05:44+0000\n"
+"X-Launchpad-Export-Date: 2014-12-07 05:34+0000\n"
 "X-Generator: Launchpad (build 17274)\n"
 "Language: fr\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -4218,15 +4218,3 @@ msgstr "Suivre"
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr "Centrer la vue principale sur ceci"
-
-#~ msgid "Texture Number: %i"
-#~ msgstr "Numéro de texture: %i"
-
-#~ msgid "Version "
-#~ msgstr "Version "
-
-#~ msgid "by the Widelands Development Team"
-#~ msgstr "par l'équipe de développement de Widelands"
-
-#~ msgid "NO GAME CONTROLLER"
-#~ msgstr "PAS DE CONTRÔLEUR DE JEU"
