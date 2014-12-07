@@ -29,13 +29,13 @@ public:
 	Screen(uint16_t w, uint16_t h);
 	virtual ~Screen() {}
 
-	/// Interface implementations
+	// Implements Surface
 	void lock(LockMode) override;
 	void unlock(UnlockMode) override;
-
-private:
+	void setup_gl() override;
 	void pixel_to_gl(float* x, float* y) const override;
 
+private:
 	void swap_rows();
 };
 

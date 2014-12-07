@@ -41,44 +41,18 @@ public:
 
 	virtual ~Texture();
 
-	/// Interface implementation
-	//@{
+	// Implements Surface
 	void lock(LockMode) override;
 	void unlock(UnlockMode) override;
-
-	// Note: the following functions are reimplemented here though they
-	// basically only call the functions in Surface wrapped in calls to
-	// setup_gl(), reset_gl(). The same functionality can be achieved by making
-	// those two functions virtual and calling them in Surface. However,
-	// especially for blit which is called very often and mostly on the screen,
-	// this costs two virtual function calls which makes a notable difference in
-	// profiles.
-	void fill_rect(const Rect&, const RGBAColor&) override;
-	void draw_rect(const Rect&, const RGBColor&) override;
-	void brighten_rect(const Rect&, int32_t factor) override;
-	virtual void draw_line
-		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor&, uint8_t width) override;
-	void blit(const Rect& dstretc,
-	          const Texture*,
-	          const Rect& srcrc,
-				 float opacity,
-	          BlendMode blend_mode) override;
-	void
-	blit_monochrome(const Rect& dst, const Texture*, const Rect& srcrc, const RGBAColor& blend) override;
-	void blit_blended(const Rect& dst,
-	                  const Texture* image,
-	                  const Texture* mask,
-	                  const Rect& srcrc,
-	                  const RGBColor& blend) override;
+	void setup_gl() override;
+	void pixel_to_gl(float* x, float* y) const override;
 
 	GLuint get_gl_texture() const {return m_texture;}
-
 	const FloatRect& texture_coordinates() const {
 		return m_texture_coordinates;
 	}
 
 private:
-	void pixel_to_gl(float* x, float* y) const override;
 	void init(uint16_t w, uint16_t h);
 
 	// True if we own the texture, i.e. if we need to delete it.

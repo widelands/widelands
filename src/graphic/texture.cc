@@ -61,14 +61,6 @@ bool is_bgr_surface(const SDL_PixelFormat& fmt) {
 	return (fmt.Bmask == 0x000000ff && fmt.Gmask == 0x0000ff00 && fmt.Rmask == 0x00ff0000);
 }
 
-inline void setup_gl(const GLuint texture) {
-	glBindFramebuffer(GL_FRAMEBUFFER, GlFramebuffer::instance().id());
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture, 0);
-}
-
-inline void reset_gl() {
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-}
 
 }  // namespace
 
@@ -213,92 +205,7 @@ void Texture::unlock(UnlockMode mode) {
 	m_pixels.reset(nullptr);
 }
 
-void Texture::draw_rect(const Rect& rectangle, const RGBColor& clr)
-{
-	if (m_w <= 0 || m_h <= 0) {
-		return;
-	}
-	setup_gl(m_texture);
-	Surface::draw_rect(rectangle, clr);
-	reset_gl();
-}
-
-
-/**
- * Draws a filled rectangle
- */
-void Texture::fill_rect(const Rect& rectangle, const RGBAColor& clr)
-{
-	if (m_w <= 0 || m_h <= 0) {
-		return;
-	}
-
-	setup_gl(m_texture);
-	Surface::fill_rect(rectangle, clr);
-	reset_gl();
-}
-
-/**
- * Change the brightness of the given rectangle
- */
-void Texture::brighten_rect(const Rect& rectangle, const int32_t factor)
-{
-	if (m_w <= 0 || m_h <= 0) {
-		return;
-	}
-
-	setup_gl(m_texture);
-	Surface::brighten_rect(rectangle, factor);
-	reset_gl();
-}
-
-void Texture::draw_line
-	(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t gwidth)
-{
-	if (m_w <= 0 || m_h <= 0) {
-		return;
-	}
-
-	setup_gl(m_texture);
-	Surface::draw_line(x1, y1, x2, y2, color, gwidth);
-	reset_gl();
-}
-
-void Texture::blit
-	(const Rect& dst, const Texture* src, const Rect& srcrc, float opacity, BlendMode blend_mode)
-{
-	if (m_w <= 0 || m_h <= 0) {
-		return;
-	}
-
-	setup_gl(m_texture);
-	Surface::blit(dst, src, srcrc, opacity, blend_mode);
-	reset_gl();
-}
-
-void Texture::blit_monochrome(const Rect& dst,
-                        const Texture* src,
-                        const Rect& srcrc,
-                        const RGBAColor& blend) {
-	if (m_w <= 0 || m_h <= 0) {
-		return;
-	}
-
-	setup_gl(m_texture);
-	Surface::blit_monochrome(dst, src, srcrc, blend);
-	reset_gl();
-}
-
-void Texture::blit_blended(const Rect& dst,
-                           const Texture* image,
-                           const Texture* mask,
-                           const Rect& srcrc,
-                           const RGBColor& blend) {
-	if (m_w <= 0 || m_h <= 0) {
-		return;
-	}
-
-	setup_gl(m_texture);
-	Surface::blit_blended(dst, image, mask, srcrc, blend);
-	reset_gl();
+void Texture::setup_gl() {
+	glBindFramebuffer(GL_FRAMEBUFFER, GlFramebuffer::instance().id());
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
 }

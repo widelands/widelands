@@ -139,8 +139,9 @@ void RenderTarget::draw_line
 void RenderTarget::draw_rect(const Rect& rect, const RGBColor& clr)
 {
 	Rect r(rect);
-	if (clip(r))
-		m_surface->draw_rect(r, clr);
+	if (clip(r)) {
+		::draw_rect(r, clr, m_surface);
+	}
 }
 
 void RenderTarget::fill_rect(const Rect& rect, const RGBAColor& clr)

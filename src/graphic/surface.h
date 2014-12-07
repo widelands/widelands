@@ -66,9 +66,6 @@ public:
 	// in the target are just replaced (i.e. / BlendMode would be BlendMode::Copy).
 	virtual void fill_rect(const Rect&, const RGBAColor&);
 
-	/// Draws a rect (frame only) to the surface.
-	virtual void draw_rect(const Rect&, const RGBColor&);
-
 	/// draw a line to the surface
 	virtual void draw_line
 		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t width = 1);
@@ -144,25 +141,10 @@ public:
 	// on the screen or not.
 	virtual void pixel_to_gl(float* x, float* y) const = 0;
 
+	// NOCOM(#sirver): what
+	virtual void setup_gl() = 0;
+
 protected:
-	// Convert the 'rect' in pixel space into opengl space.
-	enum class ConversionMode {
-		// Convert the rect as given.
-		kExact,
-
-		// Convert the rect so that the borders are in the center
-		// of the pixels.
-		kMidPoint,
-	};
-	FloatRect to_opengl(const Rect& rect, ConversionMode mode);
-
-	// Convert 'dst' and 'srcrc' from pixel space into opengl space, taking into
-	// account that we might be a subtexture in a bigger texture.
-	void src_and_dst_rect_to_gl(const Texture* texture,
-	                            const Rect& dst,
-	                            const Rect& srcrc,
-	                            FloatRect* gl_dst_rect,
-	                            FloatRect* gl_src_rect);
 
 	/// Logical width and height of the surface
 	uint16_t m_w, m_h;
@@ -173,5 +155,9 @@ protected:
 private:
 	DISALLOW_COPY_AND_ASSIGN(Surface);
 };
+
+// Draws a rect (frame only) to the surface.
+void draw_rect(const Rect&, const RGBColor&, Surface* destination);
+
 
 #endif  // end of include guard: WL_GRAPHIC_SURFACE_H

@@ -81,3 +81,7 @@ void Screen::unlock(Surface::UnlockMode mode)
 
 	m_pixels.reset(nullptr);
 }
+
+void Screen::setup_gl() {
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
