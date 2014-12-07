@@ -333,11 +333,12 @@ void NonPackedAnimation::blit
 		     BlendMode::UseAlpha,
 		     target);
 	} else {
-		target->blit_blended(Rect(dst.x, dst.y, srcrc.w, srcrc.h),
-		                     frames_.at(idx)->texture(),
-		                     pcmasks_.at(idx)->texture(),
-		                     srcrc,
-		                     *clr);
+		blit_blended(Rect(dst.x, dst.y, srcrc.w, srcrc.h),
+		             frames_.at(idx)->texture(),
+		             pcmasks_.at(idx)->texture(),
+		             srcrc,
+		             *clr,
+		             target);
 	}
 }
 

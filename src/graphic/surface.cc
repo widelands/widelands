@@ -141,30 +141,24 @@ void Surface::set_pixel(uint16_t x, uint16_t y, uint32_t clr) {
 	*(reinterpret_cast<uint32_t *>(data)) = clr;
 }
 
-/**
- * Draws a filled rectangle
- */
-void Surface::fill_rect(const Rect& rc, const RGBAColor& clr) {
-	setup_gl();
-	glViewport(0, 0, width(), height());
+void fill_rect(const Rect& rc, const RGBAColor& clr, Surface* surface) {
+	surface->setup_gl();
+	glViewport(0, 0, surface->width(), surface->height());
 
 	glBlendFunc(GL_ONE, GL_ZERO);
 
-	FillRectProgram::instance().draw(to_opengl(*this, rc, ConversionMode::kExact), clr);
+	FillRectProgram::instance().draw(to_opengl(*surface, rc, ConversionMode::kExact), clr);
 
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
-/**
- * Change the brightness of the given rectangle
- */
-void Surface::brighten_rect(const Rect& rc, const int32_t factor)
+void brighten_rect(const Rect& rc, const int32_t factor, Surface * surface)
 {
 	if (!factor)
 		return;
 
-	setup_gl();
-	glViewport(0, 0, width(), height());
+	surface->setup_gl();
+	glViewport(0, 0, surface->width(), surface->height());
 
 	// The simple trick here is to fill the rect, but using a different glBlendFunc that will sum
 	// src and target (or subtract them if factor is negative).
@@ -176,7 +170,7 @@ void Surface::brighten_rect(const Rect& rc, const int32_t factor)
 
 	const int delta = std::abs(factor);
 	FillRectProgram::instance().draw(
-	   to_opengl(*this, rc, ConversionMode::kExact), RGBAColor(delta, delta, delta, 0));
+	   to_opengl(*surface, rc, ConversionMode::kExact), RGBAColor(delta, delta, delta, 0));
 
 	if (factor < 0) {
 		glBlendEquation(GL_FUNC_ADD);
@@ -185,47 +179,49 @@ void Surface::brighten_rect(const Rect& rc, const int32_t factor)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
-void Surface::draw_line
-	(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t gwidth)
+void draw_line
+	(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t gwidth, Surface * surface)
 {
-	setup_gl();
-	glViewport(0, 0, width(), height());
+	surface->setup_gl();
+	glViewport(0, 0, surface->width(), surface->height());
 
 	float gl_x1 = x1 + 0.5;
 	float gl_y1 = y1 + 0.5;
-	pixel_to_gl(&gl_x1, &gl_y1);
+	surface->pixel_to_gl(&gl_x1, &gl_y1);
 
 	float gl_x2 = x2 + 0.5;
 	float gl_y2 = y2 + 0.5;
-	pixel_to_gl(&gl_x2, &gl_y2);
+	surface->pixel_to_gl(&gl_x2, &gl_y2);
 
 	DrawLineProgram::instance().draw(gl_x1, gl_y1, gl_x2, gl_y2, color, gwidth);
 }
 
-void Surface::blit_monochrome(const Rect& dst_rect,
-                             const Texture* texture,
-                             const Rect& src_rect,
-                             const RGBAColor& blend) {
-	setup_gl();
-	glViewport(0, 0, width(), height());
+void blit_monochrome(const Rect& dst_rect,
+                     const Texture* texture,
+                     const Rect& src_rect,
+                     const RGBAColor& blend,
+                     Surface* surface) {
+	surface->setup_gl();
+	glViewport(0, 0, surface->width(), surface->height());
 
 	FloatRect gl_dst_rect, gl_src_rect;
-	src_and_dst_rect_to_gl(*this, texture, dst_rect, src_rect, &gl_dst_rect, &gl_src_rect);
+	src_and_dst_rect_to_gl(*surface, texture, dst_rect, src_rect, &gl_dst_rect, &gl_src_rect);
 
 	MonochromeBlitProgram::instance().draw(
 	   gl_dst_rect, gl_src_rect, texture->get_gl_texture(), blend);
 }
 
-void Surface::blit_blended(const Rect& dst_rect,
-                           const Texture* texture,
-                           const Texture* mask,
-                           const Rect& src_rect,
-                           const RGBColor& blend) {
-	setup_gl();
-	glViewport(0, 0, width(), height());
+void blit_blended(const Rect& dst_rect,
+                  const Texture* texture,
+                  const Texture* mask,
+                  const Rect& src_rect,
+                  const RGBColor& blend,
+                  Surface* surface) {
+	surface->setup_gl();
+	glViewport(0, 0, surface->width(), surface->height());
 
 	FloatRect gl_dst_rect, gl_src_rect;
-	src_and_dst_rect_to_gl(*this, texture, dst_rect, src_rect, &gl_dst_rect, &gl_src_rect);
+	src_and_dst_rect_to_gl(*surface, texture, dst_rect, src_rect, &gl_dst_rect, &gl_src_rect);
 
 	BlendedBlitProgram::instance().draw(
 	   gl_dst_rect, gl_src_rect, texture->get_gl_texture(), mask->get_gl_texture(), blend);
