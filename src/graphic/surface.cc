@@ -109,38 +109,6 @@ int Surface::height() const {
 	return m_h;
 }
 
-uint8_t * Surface::get_pixels() const
-{
-	return m_pixels.get();
-}
-
-uint32_t Surface::get_pixel(uint16_t x, uint16_t y) {
-	assert(m_pixels);
-	assert(x < m_w);
-	assert(y < m_h);
-
-	uint8_t * data = &m_pixels[y * get_pitch() + 4 * x];
-	return *(reinterpret_cast<uint32_t *>(data));
-}
-
-uint16_t Surface::get_pitch() const {
-	return 4 * m_w;
-}
-
-const SDL_PixelFormat & Surface::format() const {
-	return Gl::gl_rgba_format();
-}
-
-
-void Surface::set_pixel(uint16_t x, uint16_t y, uint32_t clr) {
-	assert(m_pixels);
-	assert(x < m_w);
-	assert(y < m_h);
-
-	uint8_t * data = &m_pixels[y * get_pitch() + 4 * x];
-	*(reinterpret_cast<uint32_t *>(data)) = clr;
-}
-
 void fill_rect(const Rect& rc, const RGBAColor& clr, Surface* surface) {
 	surface->setup_gl();
 	glViewport(0, 0, surface->width(), surface->height());

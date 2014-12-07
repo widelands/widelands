@@ -31,13 +31,13 @@ public:
 	Screen(uint16_t w, uint16_t h);
 	virtual ~Screen() {}
 
-	// Implements Surface
-	void lock(LockMode) override;
-	void unlock(UnlockMode) override;
-	void setup_gl() override;
-	void pixel_to_gl(float* x, float* y) const override;
+	// Implements Image
 	int get_gl_texture() const override;
 	const FloatRect& texture_coordinates() const override;
+
+	// Implements Surface.
+	void setup_gl() override;
+	void pixel_to_gl(float* x, float* y) const override;
 
 	// Reads out the current pixels in the framebuffer and returns them as a
 	// texture for screenshots. This is a very slow process, so use with care.

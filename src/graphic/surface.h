@@ -43,69 +43,6 @@ public:
 	int width() const;
 	int height() const;
 
-	/// The functions below are for direct pixel access. This should be used
-	/// only very sparingly as / it is potentially expensive (especially for
-	/// OpenGL). At the moment, only the code inside graphic / is actually using
-	/// this.
-	enum LockMode {
-		/**
-		 * Normal mode preserves pre-existing pixel data so that it can
-		 * be read or modified.
-		 */
-		Lock_Normal = 0,
-
-		/**
-		 * Discard mode discards pre-existing pixel data. All pixels
-		 * will be undefined unless they are re-written.
-		 */
-		Lock_Discard
-	};
-
-	enum UnlockMode {
-		/**
-		 * Update mode will ensure that any changes in the pixel data
-		 * will appear in subsequent operations.
-		 */
-		Unlock_Update = 0,
-
-		/**
-		 * NoChange mode indicates that the caller changed no pixel data.
-		 *
-		 * \note If the caller did change pixel data but specifies NoChange
-		 * mode, the results are undefined.
-		 */
-		Unlock_NoChange
-	};
-
-	/// This returns the pixel format for direct pixel access.
-	const SDL_PixelFormat & format() const;
-
-	/**
-	 * \return Pitch of the raw pixel data, i.e. the number of bytes
-	 * contained in each image row. This can be strictly larger than
-	 * bytes per pixel times the width.
-	 */
-	uint16_t get_pitch() const;
-
-	/**
-	 * \return Pointer to the raw pixel data.
-	 *
-	 * \warning May only be called inside lock/unlock pairs.
-	 */
-	uint8_t * get_pixels() const;
-
-	/**
-	 * Lock/Unlock pairs must guard any of the direct pixel access using the
-	 * functions below.
-	 *
-	 * \note Lock/Unlock pairs cannot be nested.
-	 */
-	virtual void lock(LockMode) = 0;
-	virtual void unlock(UnlockMode) = 0;
-
-	uint32_t get_pixel(uint16_t x, uint16_t y);
-	void set_pixel(uint16_t x, uint16_t y, uint32_t clr);
-
 	// Converts the given pixel into an OpenGl point. This might
 	// need some flipping of axis, depending if you want to render
 	// on the screen or not.
@@ -114,12 +51,10 @@ public:
 	// NOCOM(#sirver): what
 	virtual void setup_gl() = 0;
 
+	// NOCOM(#sirver): move to child classes
 protected:
 	/// Logical width and height of the surface
 	uint16_t m_w, m_h;
-
-	/// Pixel data, while the texture is locked
-	std::unique_ptr<uint8_t[]> m_pixels;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(Surface);

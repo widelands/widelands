@@ -205,6 +205,39 @@ void Texture::unlock(UnlockMode mode) {
 	m_pixels.reset(nullptr);
 }
 
+uint8_t * Texture::get_pixels() const
+{
+	return m_pixels.get();
+}
+
+uint32_t Texture::get_pixel(uint16_t x, uint16_t y) {
+	assert(m_pixels);
+	assert(x < m_w);
+	assert(y < m_h);
+
+	uint8_t * data = &m_pixels[y * get_pitch() + 4 * x];
+	return *(reinterpret_cast<uint32_t *>(data));
+}
+
+uint16_t Texture::get_pitch() const {
+	return 4 * m_w;
+}
+
+const SDL_PixelFormat & Texture::format() const {
+	return Gl::gl_rgba_format();
+}
+
+
+void Texture::set_pixel(uint16_t x, uint16_t y, uint32_t clr) {
+	assert(m_pixels);
+	assert(x < m_w);
+	assert(y < m_h);
+
+	uint8_t * data = &m_pixels[y * get_pitch() + 4 * x];
+	*(reinterpret_cast<uint32_t *>(data)) = clr;
+}
+
+
 void Texture::setup_gl() {
 	glBindFramebuffer(GL_FRAMEBUFFER, GlFramebuffer::instance().id());
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);

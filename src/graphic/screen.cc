@@ -37,34 +37,6 @@ void Screen::pixel_to_gl(float* x, float* y) const {
 	*y = 1. - (*y / m_h) * 2.;
 }
 
-void Screen::lock(Surface::LockMode mode)
-{
-	assert(!m_pixels);
-
-	m_pixels.reset(new uint8_t[m_w * m_h * 4]);
-
-	if (mode == Lock_Normal) {
-		// TODO(unknown): terrain dither picture somehow leave the alpha
-		// channel with non-1 values, so it is cleared before
-		// accessing pixels.
-		glColorMask(false, false, false, true);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glColorMask(true, true, true, true);
-		glReadPixels(0, 0, m_w, m_h, GL_RGBA, GL_UNSIGNED_BYTE, m_pixels.get());
-	}
-}
-
-void Screen::unlock(Surface::UnlockMode mode)
-{
-	assert(m_pixels);
-
-	if (mode == Unlock_Update) {
-		glDrawPixels(m_w, m_h, GL_RGBA, GL_UNSIGNED_BYTE, m_pixels.get());
-	}
-
-	m_pixels.reset(nullptr);
-}
-
 void Screen::setup_gl() {
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }

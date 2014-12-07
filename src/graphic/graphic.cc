@@ -283,7 +283,7 @@ void Graphic::refresh()
  * @param sw a StreamWrite where the png is written to
  */
 void Graphic::save_png(Texture* texture, StreamWrite * sw) const {
-	save_surface_to_png(texture, sw, COLOR_TYPE::RGBA);
+	save_to_png(texture, sw, ColorType::RGBA);
 }
 
 /**
@@ -293,5 +293,5 @@ void Graphic::screenshot(const string& fname) const
 {
 	log("Save screenshot to %s\n", fname.c_str());
 	std::unique_ptr<StreamWrite> sw(g_fs->open_stream_write(fname));
-	save_surface_to_png(screen_->to_texture().get(), sw.get(), COLOR_TYPE::RGB);
+	save_to_png(screen_->to_texture().get(), sw.get(), ColorType::RGB);
 }

@@ -258,7 +258,6 @@ std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
                                       const Player* player,
                                       const Point& viewpoint,
                                       MiniMapLayer layers) {
-	// First create a temporary SDL Surface to draw the minimap.
 	// TODO(unknown): Currently the minimap is redrawn every frame. That is not really
 	//       necesary. The created texture could be cached and only redrawn two
 	//       or three times per second
@@ -270,11 +269,11 @@ std::unique_ptr<Texture> draw_minimap(const EditorGameBase& egbase,
 	assert(texture->format().BytesPerPixel == sizeof(uint32_t));
 
 	fill_rect(Rect(0, 0, texture->width(), texture->height()), RGBAColor(0, 0, 0, 255), texture);
-	texture->lock(Surface::Lock_Normal);
+	texture->lock(Texture::Lock_Normal);
 
 	draw_minimap_int(texture, egbase, player, viewpoint, layers);
 
-	texture->unlock(Surface::Unlock_Update);
+	texture->unlock(Texture::Unlock_Update);
 
 	return std::unique_ptr<Texture>(texture);
 }
