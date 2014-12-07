@@ -202,19 +202,6 @@ void Surface::draw_line
 	DrawLineProgram::instance().draw(gl_x1, gl_y1, gl_x2, gl_y2, color, gwidth);
 }
 
-void Surface::blit
-	(const Rect& dst_rect, const Texture* texture, const Rect& src_rect, float opacity, BlendMode blend_mode)
-{
-	glViewport(0, 0, width(), height());
-	setup_gl();
-
-	FloatRect gl_dst_rect, gl_src_rect;
-	src_and_dst_rect_to_gl(*this, texture, dst_rect, src_rect, &gl_dst_rect, &gl_src_rect);
-
-	VanillaBlitProgram::instance().draw(
-	   gl_dst_rect, gl_src_rect, texture->get_gl_texture(), opacity, blend_mode);
-}
-
 void Surface::blit_monochrome(const Rect& dst_rect,
                              const Texture* texture,
                              const Rect& src_rect,
@@ -248,4 +235,20 @@ void draw_rect(const Rect& rc, const RGBColor& clr, Surface* surface) {
 	surface->setup_gl();
 	glViewport(0, 0, surface->width(), surface->height());
 	DrawRectProgram::instance().draw(to_opengl(*surface, rc, ConversionMode::kMidPoint), clr);
+}
+
+void blit(const Rect& dst_rect,
+          const Texture* texture,
+          const Rect& src_rect,
+          float opacity,
+          BlendMode blend_mode,
+          Surface* surface) {
+	glViewport(0, 0, surface->width(), surface->height());
+	surface->setup_gl();
+
+	FloatRect gl_dst_rect, gl_src_rect;
+	src_and_dst_rect_to_gl(*surface, texture, dst_rect, src_rect, &gl_dst_rect, &gl_src_rect);
+
+	VanillaBlitProgram::instance().draw(
+	   gl_dst_rect, gl_src_rect, texture->get_gl_texture(), opacity, blend_mode);
 }

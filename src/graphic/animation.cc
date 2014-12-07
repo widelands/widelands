@@ -326,11 +326,12 @@ void NonPackedAnimation::blit
 	assert(idx < nr_frames());
 
 	if (!hasplrclrs_ || clr == nullptr) {
-		target->blit(Rect(dst.x, dst.y, srcrc.w, srcrc.h),
-		             frames_.at(idx)->texture(),
-		             srcrc,
-		             1.,
-		             BlendMode::UseAlpha);
+		::blit(Rect(dst.x, dst.y, srcrc.w, srcrc.h),
+		     frames_.at(idx)->texture(),
+		     srcrc,
+		     1.,
+		     BlendMode::UseAlpha,
+		     target);
 	} else {
 		target->blit_blended(Rect(dst.x, dst.y, srcrc.w, srcrc.h),
 		                     frames_.at(idx)->texture(),

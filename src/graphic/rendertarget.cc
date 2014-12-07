@@ -172,11 +172,12 @@ void RenderTarget::blit(const Point& dst, const Image* image, BlendMode blend_mo
 	Rect srcrc(Point(0, 0), image->width(), image->height());
 
 	if (to_surface_geometry(&destination_point, &srcrc)) {
-		m_surface->blit(Rect(destination_point.x, destination_point.y, srcrc.w, srcrc.h),
-		                image->texture(),
-		                srcrc,
-		                1.,
-		                blend_mode);
+		::blit(Rect(destination_point.x, destination_point.y, srcrc.w, srcrc.h),
+		     image->texture(),
+		     srcrc,
+		     1.,
+		     blend_mode,
+		     m_surface);
 	}
 }
 
@@ -198,11 +199,12 @@ void RenderTarget::blitrect
 
 	Point destination_point(dst);
 	if (to_surface_geometry(&destination_point, &srcrc))
-		m_surface->blit(Rect(destination_point.x, destination_point.y, srcrc.w, srcrc.h),
-		                image->texture(),
-		                srcrc,
-		                1.,
-		                blend_mode);
+		::blit(Rect(destination_point.x, destination_point.y, srcrc.w, srcrc.h),
+		       image->texture(),
+		       srcrc,
+		       1.,
+		       blend_mode,
+		       m_surface);
 }
 
 void RenderTarget::blitrect_scale(const Rect& dst,
@@ -214,11 +216,12 @@ void RenderTarget::blitrect_scale(const Rect& dst,
 	Point destination_point(dst.x, dst.y);
 	Rect srcrect(source_rect);
 	if (to_surface_geometry(&destination_point, &srcrect)) {
-		m_surface->blit(Rect(destination_point.x, destination_point.y, dst.w, dst.h),
-		                image->texture(),
-		                source_rect,
-							 opacity,
-		                blend_mode);
+		::blit(Rect(destination_point.x, destination_point.y, dst.w, dst.h),
+		       image->texture(),
+		       source_rect,
+		       opacity,
+		       blend_mode,
+		       m_surface);
 	}
 }
 
@@ -290,7 +293,7 @@ void RenderTarget::tile(const Rect& rect, const Image* image, const Point& gofs,
 					srcrc.w = r.w - tx;
 
 				const Rect dst_rect(r.x + tx, r.y + ty, srcrc.w, srcrc.h);
-				m_surface->blit(dst_rect, image->texture(), srcrc, 1., blend_mode);
+				::blit(dst_rect, image->texture(), srcrc, 1., blend_mode, m_surface);
 
 				tx += srcrc.w;
 

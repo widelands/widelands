@@ -42,13 +42,6 @@ public:
 	uint16_t width() const;
 	uint16_t height() const;
 
-	/// This draws a part of another surface to this surface
-	virtual void blit(const Rect& dst,
-	                  const Texture*,
-	                  const Rect& srcrc,
-							const float opacity,
-	                  BlendMode blend_mode);
-
 	/// This draws a grayed out version. See MonochromeBlitProgram.
 	virtual void blit_monochrome(const Rect& dst,
 	                  const Texture*,
@@ -159,5 +152,9 @@ private:
 // Draws a rect (frame only) to the surface.
 void draw_rect(const Rect&, const RGBColor&, Surface* destination);
 
+/// This draws a part of 'texture' to 'surface'.
+void blit
+	(const Rect& dst, const Texture*, const Rect& srcrc, const float opacity,
+	 BlendMode blend_mode, Surface* surface);
 
 #endif  // end of include guard: WL_GRAPHIC_SURFACE_H
