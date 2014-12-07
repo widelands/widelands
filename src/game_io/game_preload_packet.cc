@@ -26,7 +26,6 @@
 
 #include "base/time_string.h"
 #include "graphic/graphic.h"
-#include "graphic/in_memory_image.h"
 #include "graphic/minimap_renderer.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"

@@ -19,6 +19,8 @@
 
 #include "graphic/graphic.h"
 
+#include <memory>
+
 #include "base/log.h"
 #include "base/wexception.h"
 #include "build_info.h"
@@ -290,7 +292,6 @@ void Graphic::save_png(Texture* texture, StreamWrite * sw) const {
 void Graphic::screenshot(const string& fname) const
 {
 	log("Save screenshot to %s\n", fname.c_str());
-	StreamWrite * sw = g_fs->open_stream_write(fname);
-	save_surface_to_png(screen_.get(), sw, COLOR_TYPE::RGB);
-	delete sw;
+	std::unique_ptr<StreamWrite> sw(g_fs->open_stream_write(fname));
+	save_surface_to_png(screen_->to_texture().get(), sw.get(), COLOR_TYPE::RGB);
 }

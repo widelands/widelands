@@ -19,10 +19,12 @@
 #ifndef WL_GRAPHIC_SCREEN_H
 #define WL_GRAPHIC_SCREEN_H
 
+#include <memory>
+
 #include "graphic/surface.h"
 
 /**
- * This surface represents the screen in OpenGL mode.
+ * The screen.
  */
 class Screen : public Surface {
 public:
@@ -37,8 +39,9 @@ public:
 	int get_gl_texture() const override;
 	const FloatRect& texture_coordinates() const override;
 
-private:
-	void swap_rows();
+	// Reads out the current pixels in the framebuffer and returns them as a
+	// texture for screenshots. This is a very slow process, so use with care.
+	std::unique_ptr<Texture> to_texture() const;
 };
 
 #endif  // end of include guard: WL_GRAPHIC_SCREEN_H

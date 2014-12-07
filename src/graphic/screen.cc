@@ -20,9 +20,11 @@
 
 #include <algorithm>
 #include <cassert>
+#include <memory>
 
 #include "base/wexception.h"
 #include "graphic/gl/utils.h"
+#include "graphic/texture.h"
 
 Screen::Screen(uint16_t w, uint16_t h)
 {
@@ -33,24 +35,6 @@ Screen::Screen(uint16_t w, uint16_t h)
 void Screen::pixel_to_gl(float* x, float* y) const {
 	*x = (*x / m_w) * 2. - 1.;
 	*y = 1. - (*y / m_h) * 2.;
-}
-
-/**
- * Swap order of rows in m_pixels, to compensate for the upside-down nature of the
- * OpenGL coordinate system.
- */
-void Screen::swap_rows()
-{
-	uint8_t * begin_row = m_pixels.get();
-	uint8_t * end_row = m_pixels.get() + (m_w * (m_h - 1) * 4);
-
-	while (begin_row < end_row) {
-		for (uint16_t x = 0; x < m_w * 4; ++x)
-			std::swap(begin_row[x], end_row[x]);
-
-		begin_row += m_w * 4;
-		end_row -= m_w * 4;
-	}
 }
 
 void Screen::lock(Surface::LockMode mode)
@@ -67,7 +51,6 @@ void Screen::lock(Surface::LockMode mode)
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glColorMask(true, true, true, true);
 		glReadPixels(0, 0, m_w, m_h, GL_RGBA, GL_UNSIGNED_BYTE, m_pixels.get());
-		swap_rows();
 	}
 }
 
@@ -76,7 +59,6 @@ void Screen::unlock(Surface::UnlockMode mode)
 	assert(m_pixels);
 
 	if (mode == Unlock_Update) {
-		swap_rows();
 		glDrawPixels(m_w, m_h, GL_RGBA, GL_UNSIGNED_BYTE, m_pixels.get());
 	}
 
@@ -93,4 +75,36 @@ int Screen::get_gl_texture() const {
 
 const FloatRect& Screen::texture_coordinates() const {
 	throw wexception("texture_coordinates() is not implemented for Screen.");
+}
+
+std::unique_ptr<Texture> Screen::to_texture() const {
+	std::unique_ptr<uint8_t[]> pixels(new uint8_t[m_w * m_h * 4]);
+	glReadPixels(0, 0, m_w, m_h, GL_RGBA, GL_UNSIGNED_BYTE, pixels.get());
+
+	// Swap order of rows in m_pixels, to compensate for the upside-down nature of the
+	// OpenGL coordinate system.
+	uint8_t* begin_row = pixels.get();
+	uint8_t* end_row = pixels.get() + (m_w * (m_h - 1) * 4);
+	while (begin_row < end_row) {
+		for (uint16_t x = 0; x < m_w * 4; ++x) {
+			std::swap(begin_row[x], end_row[x]);
+		}
+		begin_row += m_w * 4;
+		end_row -= m_w * 4;
+	}
+
+	// Ownership of pixels is not taken here. But the Texture() transfers it to
+	// the GPU, frees the SDL surface and after that we are free to free
+	// 'pixels'.
+	SDL_Surface* surface = SDL_CreateRGBSurfaceFrom(pixels.get(),
+	                                                m_w,
+	                                                m_h,
+	                                                32,
+	                                                m_w * 4,
+	                                                0x000000ff,
+	                                                0x0000ff00,
+	                                                0x00ff0000,
+	                                                0xff000000);
+
+	return std::unique_ptr<Texture>(new Texture(surface));
 }

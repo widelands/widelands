@@ -54,4 +54,7 @@ SDL_Surface* load_image_as_sdl_surface(const std::string& fn, FileSystem* fs = n
 /// Saves the 'surface' to 'sw' as a PNG.
 bool save_surface_to_png(Surface* surface, StreamWrite* sw, COLOR_TYPE color_type);
 
+/// Saves the 'blob' of RGB or RGBA data to 'sw' as a PNG.
+bool save_png(std::unique_ptr<uint8_t[]> blob, int width, int height, StreamWrite* sw, COLOR_TYPE color_type);
+
 #endif  // end of include guard: WL_GRAPHIC_IMAGE_IO_H

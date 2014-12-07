@@ -32,9 +32,9 @@
 
 class AnimationManager;
 class RenderTarget;
-class Surface;
-class TextureCache;
+class Screen;
 class StreamWrite;
+class TextureCache;
 
 // Will be send whenever the resolution changes.
 struct GraphicResolutionChanged {
@@ -91,7 +91,7 @@ private:
 
 	/// This is the main screen Surface.
 	/// A RenderTarget for this can be retrieved with get_render_target()
-	std::unique_ptr<Surface> screen_;
+	std::unique_ptr<Screen> screen_;
 	/// This saves a copy of the screen SDL_Surface. This is needed for
 	/// opengl rendering as the SurfaceOpenGL does not use it. It allows
 	/// manipulation the screen context.

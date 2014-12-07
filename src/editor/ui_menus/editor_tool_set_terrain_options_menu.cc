@@ -28,7 +28,6 @@
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_set_terrain_tool.h"
 #include "graphic/graphic.h"
-#include "graphic/in_memory_image.h"
 #include "graphic/rendertarget.h"
 #include "graphic/texture.h"
 #include "logic/map.h"
@@ -151,7 +150,7 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 		}
 
 		// Make sure we delete this later on.
-		offscreen_images->emplace_back(new_in_memory_image(texture));
+		offscreen_images->emplace_back(texture);
 		break;
 	}
 	/** TRANSLATORS: %1% = terrain name, %2% = list of terrain types  */
