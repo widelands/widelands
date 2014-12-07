@@ -38,8 +38,8 @@ using namespace std;
 // or prepare for core dumps.
 class InMemoryImage : public Image {
 public:
-	InMemoryImage(const string& ghash, Texture* texture) :
-		hash_(ghash), texture_(texture) {}
+	InMemoryImage(const string& ghash, Texture* init_texture) :
+		hash_(ghash), texture_(init_texture) {}
 	virtual ~InMemoryImage() {
 	}
 

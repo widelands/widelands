@@ -115,13 +115,14 @@ public:
 	uint16_t height() const override {return original_.height();}
 	const string& hash() const override {return hash_;}
 	Texture* texture() const override {
-		Texture* texture = texture_cache_->get(hash_);
-		if (texture)
-			return texture;
+		Texture* result = texture_cache_->get(hash_);
+		if (result) {
+			return result;
+		}
 
-		texture = recalculate_texture();
-		texture_cache_->insert(hash_, texture, true);
-		return texture;
+		result = recalculate_texture();
+		texture_cache_->insert(hash_, result, true);
+		return result;
 	}
 
 	virtual Texture* recalculate_texture() const = 0;
