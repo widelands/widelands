@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ## This script will fix translations in the translation branch
 ## and then push the fix to the translations branch on Launchpad.
 ## Afterwards, the translations branch will be merged into trunk,
@@ -5,28 +7,17 @@
 
 set -e # Exit as soon as any line in the bash script fails.
 
-# Move up if we're in the utils directory.
-TEST=`(ls | grep "buildcat.py")`
-if [ $TEST = "buildcat.py" ]; then
-	echo "Leaving the utils dir"
+# Move up if we're not in the base directory.
+if [ -d "../utils" ]; then
 	cd ..
 fi
 
 echo "We are in the following directory:"
 pwd
 
-# Make sure 'utils/buildcat.py' is there.
-TEST=`(ls utils | grep "buildcat.py")`
-if [ $TEST != "buildcat.py" ]; then
-	echo "Unable to find 'utils/buildcat.py'."
-	echo "Make sure you start this script from Widelands' base or utils directory.";
-	exit;
-fi
-
-# Make sure 'utils/remove_lf_in_translations.py' is there.
-TEST=`(ls utils | grep "remove_lf_in_translations.py")`
-if [ $TEST != "remove_lf_in_translations.py" ]; then
-	echo "Unable to find 'utils/remove_lf_in_translations.py'."
+# Make sure 'utils/buildcat.py' and 'utils/remove_lf_in_translations.py' are there.
+if [ ! -f "utils/buildcat.py" -o ! -f "utils/remove_lf_in_translations.py" ]; then
+	echo "Unable to find 'utils/buildcat.py' or 'utils/remove_lf_in_translations.py'."
 	echo "Make sure you start this script from Widelands' base or utils directory.";
 	exit;
 fi
