@@ -38,11 +38,13 @@ public:
 	Image() = default;
 	virtual ~Image() {}
 
+	// Dimensions of this Image in pixels.
 	virtual int width() const = 0;
 	virtual int height() const = 0;
 
-	// NOCOM(#sirver): really, only Texture should implement these.
-	// NOCOM(#sirver): document.
+	// OpenGL texture and texture coordinates backing this Image. This can
+	// change at any time, so do not hold one to this value for more than one
+	// frame.
 	virtual int get_gl_texture() const = 0;
 	virtual const FloatRect& texture_coordinates() const = 0;
 

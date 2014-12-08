@@ -58,7 +58,7 @@ wl_library(ui_basic
     base_macros
     graphic
     graphic_color
-    graphic_image
+    graphic_surface
     io_filesystem
     # TODO(sirver): should not depend on logic
     logic

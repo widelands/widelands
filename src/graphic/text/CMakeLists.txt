@@ -21,7 +21,7 @@ wl_library(graphic_text
     base_exceptions
     base_geometry
     graphic_color
-    graphic_image
+    graphic_image_cache
     graphic_image_io
     graphic_surface
     io_fileread

@@ -24,6 +24,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/utility.hpp>
 
+#include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
@@ -42,16 +43,25 @@ using namespace boost;
 
 namespace {
 
+/// The size of the richtext surface cache in bytes. All work that the richtext
+//renderer does is / cached in this cache until it overflows.
+const uint32_t RICHTEXT_SURFACE_CACHE = 160 << 20;   // shifting converts to MB
+
 // An Image implementation that recreates a rich text texture when needed on
 // the fly. It is meant to be saved into the ImageCache.
 class RTImage : public Image {
 public:
-	RTImage
-		(const string& ghash, TextureCache* texture_cache, RT::Renderer*
-		 rt_renderer, const string& text, int gwidth)
-		: hash_(ghash), text_(text), width_(gwidth), texture_cache_(texture_cache),
-		  rt_renderer_(rt_renderer)
-	{}
+	RTImage(const string& ghash,
+	        TextureCache* texture_cache,
+	        RT::Renderer* rt_renderer,
+	        const string& text,
+	        int gwidth)
+	   : hash_(ghash),
+	     text_(text),
+	     width_(gwidth),
+	     texture_cache_(texture_cache),
+	     rt_renderer_(rt_renderer) {
+	}
 	virtual ~RTImage() {}
 
 	// Implements Image.
@@ -95,8 +105,11 @@ namespace UI {
 // be a problem.
 class FontHandler1 : public IFontHandler1 {
 public:
-	FontHandler1(ImageCache* image_cache, TextureCache* texture_cache, RT::Renderer* renderer) :
-		texture_cache_(texture_cache), image_cache_(image_cache), renderer_(renderer) {}
+	FontHandler1(ImageCache* image_cache)
+	   : texture_cache_(create_texture_cache(RICHTEXT_SURFACE_CACHE)),
+	     renderer_(new RT::Renderer(image_cache, texture_cache_.get())),
+	     image_cache_(image_cache) {
+	}
 	virtual ~FontHandler1() {}
 
 	const Image* render(const string& text, uint16_t w = 0) override {
@@ -105,21 +118,21 @@ public:
 		if (image_cache_->has(hash))
 			return image_cache_->get(hash);
 
-		std::unique_ptr<RTImage> image(new RTImage(hash, texture_cache_, renderer_.get(), text, w));
+		std::unique_ptr<RTImage> image(
+		   new RTImage(hash, texture_cache_.get(), renderer_.get(), text, w));
 		image->width(); // force the rich text to get rendered in case there is an exception thrown.
 
 		return image_cache_->insert(hash, std::move(image));
 	}
 
 private:
-	TextureCache* const texture_cache_;  // not owned
-	ImageCache* const image_cache_;  // not owned
+	std::unique_ptr<TextureCache> texture_cache_;
 	std::unique_ptr<RT::Renderer> renderer_;
+	ImageCache* const image_cache_;  // not owned
 };
 
 IFontHandler1 * create_fonthandler(Graphic* gr) {
-	return new FontHandler1(
-	   &gr->images(), &gr->textures(), new RT::Renderer(&gr->images(), &gr->textures()));
+	return new FontHandler1(&gr->images());
 }
 
 IFontHandler1 * g_fh1 = nullptr;

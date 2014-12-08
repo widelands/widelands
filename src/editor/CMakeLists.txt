@@ -90,7 +90,6 @@ wl_library(editor
     base_macros
     base_scoped_timer
     graphic
-    graphic_image
     graphic_surface
     io_filesystem
     logic

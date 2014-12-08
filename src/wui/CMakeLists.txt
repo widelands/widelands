@@ -158,7 +158,6 @@ wl_library(wui
     graphic
     graphic_color
     graphic_game_renderer
-    graphic_image
     graphic_minimap_renderer
     graphic_surface
     io_fileread

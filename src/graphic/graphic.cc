@@ -32,7 +32,6 @@
 #include "graphic/rendertarget.h"
 #include "graphic/screen.h"
 #include "graphic/texture.h"
-#include "graphic/texture_cache.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
 #include "notifications/notifications.h"
@@ -42,10 +41,6 @@ using namespace std;
 Graphic * g_gr;
 
 namespace  {
-
-/// The size of the transient (i.e. temporary) surfaces in the cache in bytes.
-/// These are all surfaces that are not loaded from disk.
-const uint32_t TRANSIENT_TEXTURE_CACHE_SIZE = 160 << 20;   // shifting converts to MB
 
 // Sets the icon for the application.
 void set_icon(SDL_Window* sdl_window) {
@@ -68,7 +63,6 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool fullscreen)
    : m_window_mode_width(window_mode_w),
      m_window_mode_height(window_mode_h),
      m_update(true),
-     texture_cache_(create_texture_cache(TRANSIENT_TEXTURE_CACHE_SIZE)),
      image_cache_(new ImageCache()),
      animation_manager_(new AnimationManager())
 {
@@ -146,7 +140,6 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool fullscreen)
 
 Graphic::~Graphic()
 {
-	texture_cache_->flush();
 	// TODO(unknown): this should really not be needed, but currently is :(
 	if (UI::g_fh)
 		UI::g_fh->flush();

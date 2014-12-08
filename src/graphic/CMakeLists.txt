@@ -25,9 +25,8 @@ wl_library(graphic_image_io
     io_stream
 )
 
-wl_library(graphic_image
+wl_library(graphic_image_cache
   SRCS
-    image.h
     image_cache.cc
     image_cache.h
   USES_SDL2
@@ -69,6 +68,7 @@ wl_library(graphic_surface
     gl/draw_rect_program.h
     gl/fill_rect_program.cc
     gl/fill_rect_program.h
+    image.h
     screen.cc
     screen.h
     surface.cc
@@ -135,7 +135,6 @@ wl_library(graphic_minimap_renderer
     base_macros
     economy
     graphic
-    graphic_image
     graphic_surface
     logic
     wui_mapview_pixelfunctions
@@ -177,7 +176,7 @@ wl_library(graphic
     build_info
     graphic_color
     graphic_gl_utils
-    graphic_image
+    graphic_image_cache
     graphic_image_io
     graphic_surface
     graphic_text

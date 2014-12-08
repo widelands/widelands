@@ -28,13 +28,10 @@
 #include "notifications/notifications.h"
 #include "notifications/note_ids.h"
 
-#define MAX_RECTS 20
-
 class AnimationManager;
 class RenderTarget;
 class Screen;
 class StreamWrite;
-class TextureCache;
 
 // Will be send whenever the resolution changes.
 struct GraphicResolutionChanged {
@@ -73,7 +70,6 @@ public:
 	void refresh();
 	SDL_Window* get_sdlwindow() {return m_sdl_window;}
 
-	TextureCache& textures() const {return *texture_cache_.get();}
 	ImageCache& images() const {return *image_cache_.get();}
 	AnimationManager& animations() const {return *animation_manager_.get();}
 
@@ -102,11 +98,9 @@ private:
 	/// This marks the complete screen for updating.
 	bool m_update;
 
-	/// Volatile cache of Hardware dependant textures.
-	std::unique_ptr<TextureCache> texture_cache_;
-	/// Non-volatile cache of hardware independent images. The use the
-	/// texture_cache_ to cache their pixel data.
+	/// Non-volatile cache of independent images.
 	std::unique_ptr<ImageCache> image_cache_;
+
 	/// This holds all animations.
 	std::unique_ptr<AnimationManager> animation_manager_;
 };
