@@ -38,7 +38,6 @@
 #ifdef USE_GLBINDING
 #   include <glbinding/gl/gl.h>
 #   include <glbinding/Binding.h>
-using namespace glbinding;
 using namespace gl;
 #else
 #   include <GL/glew.h>
