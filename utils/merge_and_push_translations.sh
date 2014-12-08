@@ -9,11 +9,9 @@ set -e # Exit as soon as any line in the bash script fails.
 
 # Move up if we're not in the base directory.
 if [ -d "../utils" ]; then
-	cd ..
+	pushd ..
+	EXTRAPUSH=1 # We will need an extra popd on the bottom.
 fi
-
-echo "We are in the following directory:"
-pwd
 
 # Make sure 'utils/buildcat.py' and 'utils/remove_lf_in_translations.py' are there.
 if [ ! -f "utils/buildcat.py" -o ! -f "utils/remove_lf_in_translations.py" ]; then
@@ -36,13 +34,13 @@ fi
 set -x # Print all commands.
 
 # Fix LF in translation branch.
-cd ../translations && bzr pull
+pushd ../translations && bzr pull
 utils/remove_lf_in_translations.py
 bzr commit -m "Fixed LF in translations." || true
 bzr push lp:~widelands-dev/widelands/translations
 
 # Merge translations.
-cd ../trunk && bzr pull
+pushd ../trunk && bzr pull
 bzr merge lp:~widelands-dev/widelands/translations
 bzr commit -m "Merged translations."
 
@@ -50,3 +48,14 @@ bzr commit -m "Merged translations."
 utils/buildcat.py
 bzr commit -m "Updated catalogues."
 bzr push lp:widelands
+
+set +x # Stop printing all commands.
+
+popd
+popd
+
+if [ $EXTRAPUSH ]; then
+   popd
+fi
+
+echo "Finished updating translations."
