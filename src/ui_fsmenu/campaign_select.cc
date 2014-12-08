@@ -234,12 +234,14 @@ void FullscreenMenuCampaignSelect::fill_table()
 
 			campaign_data.index = i;
 
-			i18n::Textdomain td("maps");
-			campaign_data.name = _(s.get_string(cname.c_str(), ""));
-			campaign_data.tribename = _(s.get_string(ctribename.c_str(), ""));
-			campaign_data.difficulty = difficulty;
-			campaign_data.difficulty_description = _(s.get_string(cdiff_descr.c_str(), ""));
-			campaign_data.description = _(s.get_string(cdescription.c_str(), ""));
+			{
+				i18n::Textdomain td("maps");
+				campaign_data.name = _(s.get_string(cname.c_str(), ""));
+				campaign_data.tribename = _(s.get_string(ctribename.c_str(), ""));
+				campaign_data.difficulty = difficulty;
+				campaign_data.difficulty_description = _(s.get_string(cdiff_descr.c_str(), ""));
+				campaign_data.description = _(s.get_string(cdescription.c_str(), ""));
+			}
 
 			m_campaigns_data.push_back(campaign_data);
 
@@ -433,9 +435,11 @@ void FullscreenMenuCampaignMapSelect::entry_selected() {
 		}
 		m_label_author.set_text(ngettext("Author:", "Authors:", authors.get_number()));
 
-		i18n::Textdomain td("maps");
-		m_ta_mapname.set_text(_(map.get_name()));
-		m_ta_description.set_text(_(map.get_description()));
+		{
+			i18n::Textdomain td("maps");
+			m_ta_mapname.set_text(_(map.get_name()));
+			m_ta_description.set_text(_(map.get_description()));
+		}
 		m_ta_description.scroll_to_top();
 	}
 }
