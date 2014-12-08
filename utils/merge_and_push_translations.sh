@@ -10,7 +10,6 @@ set -e # Exit as soon as any line in the bash script fails.
 # Move up if we're not in the base directory.
 if [ -d "../utils" ]; then
 	pushd ..
-	EXTRAPUSH=1 # We will need an extra popd on the bottom.
 fi
 
 # Make sure 'utils/buildcat.py' and 'utils/remove_lf_in_translations.py' are there.
@@ -48,14 +47,3 @@ bzr commit -m "Merged translations."
 utils/buildcat.py
 bzr commit -m "Updated catalogues."
 bzr push lp:widelands
-
-set +x # Stop printing all commands.
-
-popd
-popd
-
-if [ $EXTRAPUSH ]; then
-   popd
-fi
-
-echo "Finished updating translations."
