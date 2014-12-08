@@ -23,7 +23,6 @@
 
 #include <boost/format.hpp>
 
-#include "base/deprecated.h"
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
@@ -377,11 +376,9 @@ void Warehouse::load_finish(EditorGameBase & egbase) {
 			(owner().is_worker_type_allowed(worker_index) &&
 			 m_next_worker_without_cost_spawn[i] == static_cast<uint32_t>(never()))
 		{
-			if (next_spawn == static_cast<uint32_t>(never()))
-				next_spawn =
-					schedule_act
-						(ref_cast<Game, EditorGameBase>(egbase),
-						 WORKER_WITHOUT_COST_SPAWN_INTERVAL);
+			if (next_spawn == static_cast<uint32_t>(never())) {
+				next_spawn = schedule_act(dynamic_cast<Game&>(egbase), WORKER_WITHOUT_COST_SPAWN_INTERVAL);
+			}
 			m_next_worker_without_cost_spawn[i] = next_spawn;
 			log
 				("WARNING: player %u is allowed to create worker type %s but his "
@@ -444,33 +441,29 @@ void Warehouse::init(EditorGameBase & egbase)
 		// m_next_military_act is not touched in the loading code. Is only needed
 		// if there warehous is created in the game?  I assume it's for the
 		// conquer_radius thing
-		m_next_military_act =
-			schedule_act
-				(ref_cast<Game, EditorGameBase>(egbase), 1000);
+		m_next_military_act = schedule_act(*game, 1000);
 
-		m_next_stock_remove_act =
-			schedule_act
-				(ref_cast<Game, EditorGameBase>(egbase), 4000);
+		m_next_stock_remove_act = schedule_act(*game, 4000);
 
 		log("Message: adding (wh) (%s) %i \n", to_string(descr().type()).c_str(), player.player_number());
 
 		if (descr().name() == "port") {
 			send_message
-				(ref_cast<Game, EditorGameBase>(egbase),
+				(*game,
 				 Message::Type::kSeafaring,
 				 descr().descname(),
 				 _("A new port was added to your economy."),
 				 true);
 		} else if (descr().name() == "headquarters") {
 			send_message
-				(ref_cast<Game, EditorGameBase>(egbase),
+				(*game,
 				 Message::Type::kEconomy,
 				 descr().descname(),
 				 _("A new headquarters was added to your economy."),
 				 true);
 		} else {
 			send_message
-				(ref_cast<Game, EditorGameBase>(egbase),
+				(*game,
 				 Message::Type::kEconomy,
 				 descr().descname(),
 				 _("A new warehouse was added to your economy."),
@@ -927,7 +920,7 @@ void Warehouse::request_cb
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {
-	Warehouse & wh = ref_cast<Warehouse, PlayerImmovable>(target);
+	Warehouse & wh = dynamic_cast<Warehouse&>(target);
 
 	if (w) {
 		w->schedule_incorporate(game);
@@ -1214,7 +1207,7 @@ void Warehouse::aggressor(Soldier & enemy)
 	if (!descr().get_conquers())
 		return;
 
-	Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
+	Game & game = dynamic_cast<Game&>(owner().egbase());
 	Map  & map  = game.map();
 	if
 		(enemy.get_owner() == &owner() ||
@@ -1237,20 +1230,18 @@ void Warehouse::aggressor(Soldier & enemy)
 	if (!count_workers(game, soldier_index, noreq))
 		return;
 
-	Soldier & defender =
-		ref_cast<Soldier, Worker>(launch_worker(game, soldier_index, noreq));
+	Soldier & defender = dynamic_cast<Soldier&>(launch_worker(game, soldier_index, noreq));
 	defender.start_task_defense(game, false);
 }
 
 bool Warehouse::attack(Soldier & enemy)
 {
-	Game & game = ref_cast<Game, EditorGameBase>(owner().egbase());
+	Game & game = dynamic_cast<Game&>(owner().egbase());
 	WareIndex const soldier_index = descr().tribe().worker_index("soldier");
 	Requirements noreq;
 
 	if (count_workers(game, soldier_index, noreq)) {
-		Soldier & defender =
-			ref_cast<Soldier, Worker>(launch_worker(game, soldier_index, noreq));
+		Soldier & defender = dynamic_cast<Soldier&>(launch_worker(game, soldier_index, noreq));
 		defender.start_task_defense(game, true);
 		enemy.send_signal(game, "sleep");
 		return true;

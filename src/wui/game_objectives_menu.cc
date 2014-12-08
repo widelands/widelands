@@ -31,7 +31,7 @@ using namespace Widelands;
 
 
 inline InteractivePlayer & GameObjectivesMenu::iplayer() const {
-	return ref_cast<InteractivePlayer, UI::Panel>(*get_parent());
+	return dynamic_cast<InteractivePlayer&>(*get_parent());
 }
 
 

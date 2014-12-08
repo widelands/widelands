@@ -24,7 +24,6 @@
 #include <string>
 #include <vector>
 
-#include "base/deprecated.h"
 #include "base/log.h"
 #include "helper.h"
 

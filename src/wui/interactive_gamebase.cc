@@ -19,13 +19,31 @@
 
 #include "wui/interactive_gamebase.h"
 
+#include <boost/format.hpp>
+
 #include "base/macros.h"
+#include "graphic/font_handler1.h"
+#include "graphic/rendertarget.h"
 #include "logic/findbob.h"
 #include "logic/game.h"
+#include "logic/game_controller.h"
 #include "logic/player.h"
 #include "logic/ship.h"
 #include "profile/profile.h"
 #include "wui/game_summary.h"
+#include "wui/text_constants.h"
+#include "wui/text_layout.h"
+
+namespace {
+
+std::string speed_string(int const speed) {
+	if (speed) {
+		return (boost::format("%u.%ux") % (speed / 1000) % (speed / 100 % 10)).str();
+	}
+	return _("PAUSE");
+}
+
+}  // namespace
 
 InteractiveGameBase::InteractiveGameBase
 	(Widelands::Game & _game, Section & global_s,
@@ -53,7 +71,7 @@ Widelands::Game * InteractiveGameBase::get_game() const
 
 Widelands::Game & InteractiveGameBase::    game() const
 {
-	return ref_cast<Widelands::Game, Widelands::EditorGameBase>(egbase());
+	return dynamic_cast<Widelands::Game&>(egbase());
 }
 
 void InteractiveGameBase::set_chat_provider(ChatProvider & chat)
@@ -68,6 +86,37 @@ ChatProvider * InteractiveGameBase::get_chat_provider()
 {
 	return m_chatProvider;
 }
+
+void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
+	InteractiveBase::draw_overlay(dst);
+
+	GameController* game_controller = game().game_controller();
+	// Display the gamespeed.
+	if (game_controller != nullptr) {
+		std::string game_speed;
+		uint32_t const real = game_controller->real_speed();
+		uint32_t const desired = game_controller->desired_speed();
+		if (real == desired) {
+			if (real != 1000) {
+				game_speed = as_uifont(speed_string(real), UI_FONT_SIZE_SMALL);
+			}
+		} else {
+			game_speed = as_uifont((boost::format
+											/** TRANSLATORS: actual_speed (desired_speed) */
+											(_("%1$s (%2$s)")) %
+											speed_string(real) % speed_string(desired)).str(),
+										  UI_FONT_SIZE_SMALL);
+		}
+
+		if (!game_speed.empty()) {
+			dst.blit(Point(get_w() - 5,  5),
+						UI::g_fh1->render(game_speed),
+						BlendMode::UseAlpha,
+						UI::Align_TopRight);
+		}
+	}
+}
+
 
 /**
  * See if we can reasonably open a ship window at the current selection position.

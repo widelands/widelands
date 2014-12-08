@@ -19,7 +19,6 @@
 
 #include "logic/findnode.h"
 
-#include "base/deprecated.h"
 #include "base/wexception.h"
 #include "logic/field.h"
 #include "logic/immovable.h"
@@ -127,7 +126,7 @@ bool FindNodeResourceBreedable::accept
 	if (m_resource != coord.field->get_resources()) {
 		return false;
 	}
-	if (coord.field->get_resources_amount() < coord.field->get_starting_res_amount()) {
+	if (coord.field->get_resources_amount() < coord.field->get_initial_res_amount()) {
 		return true;
 	}
 	for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
@@ -135,7 +134,7 @@ bool FindNodeResourceBreedable::accept
 		if
 			(m_resource == neighb.field->get_resources()
 			 &&
-			 neighb.field->get_resources_amount() < neighb.field->get_starting_res_amount())
+			 neighb.field->get_resources_amount() < neighb.field->get_initial_res_amount())
 		{
 			return true;
 		}

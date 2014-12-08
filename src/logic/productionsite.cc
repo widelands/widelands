@@ -517,7 +517,7 @@ void ProductionSite::request_worker_callback
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {
-	ProductionSite & psite = ref_cast<ProductionSite, PlayerImmovable>(target);
+	ProductionSite & psite = dynamic_cast<ProductionSite&>(target);
 
 	assert(w);
 	assert(w->get_location(game) == &psite);
@@ -766,7 +766,7 @@ bool ProductionSite::get_building_work
 				*descr().tribe().get_worker_descr(worker_type_with_count.first);
 			{
 				Worker & recruit =
-					ref_cast<Worker, Bob>(worker_descr.create_object());
+					dynamic_cast<Worker&>(worker_descr.create_object());
 				recruit.set_owner(&worker.owner());
 				recruit.set_position(game, worker.get_position());
 				recruit.init(game);

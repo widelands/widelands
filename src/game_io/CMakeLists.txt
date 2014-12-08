@@ -27,6 +27,7 @@ wl_library(game_io
     base_time_string
     economy
     graphic
+    graphic_minimap_renderer
     io_fileread
     io_filesystem
     logic
@@ -36,4 +37,6 @@ wl_library(game_io
     profile
     scripting
     wui
+    wui_mapview_pixelfunctions
+    wui_overlay_manager
 )

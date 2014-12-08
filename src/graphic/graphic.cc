@@ -19,21 +19,10 @@
 
 #include "graphic/graphic.h"
 
-#include <cstring>
-#include <iostream>
-#include <memory>
-
-#include <SDL_image.h>
-
-#include "base/deprecated.h"
-#include "base/i18n.h"
 #include "base/log.h"
-#include "base/macros.h"
 #include "base/wexception.h"
 #include "build_info.h"
-#include "config.h"
 #include "graphic/animation.h"
-#include "graphic/diranimations.h"
 #include "graphic/font_handler.h"
 #include "graphic/gl/system_headers.h"
 #include "graphic/image.h"
@@ -41,15 +30,11 @@
 #include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
 #include "graphic/screen.h"
-#include "graphic/terrain_texture.h"
 #include "graphic/texture.h"
 #include "graphic/texture_cache.h"
-#include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
-#include "logic/roadtype.h"
 #include "notifications/notifications.h"
-#include "ui_basic/progresswindow.h"
 
 using namespace std;
 
@@ -78,7 +63,7 @@ void set_icon(SDL_Window* sdl_window) {
 /**
  * Initialize the SDL video mode.
 */
-Graphic::Graphic(int window_mode_w, int window_mode_h, bool fullscreen)
+Graphic::Graphic(int window_mode_w, int window_mode_h, bool init_fullscreen)
    : m_window_mode_width(window_mode_w),
      m_window_mode_height(window_mode_h),
      m_update(true),
@@ -101,7 +86,7 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool fullscreen)
 	                                m_window_mode_height,
 	                                SDL_WINDOW_OPENGL);
 	resolution_changed();
-	set_fullscreen(fullscreen);
+	set_fullscreen(init_fullscreen);
 
 	SDL_SetWindowTitle(m_sdl_window, ("Widelands " + build_id() + '(' + build_type() + ')').c_str());
 	set_icon(m_sdl_window);
@@ -162,7 +147,6 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool fullscreen)
 
 Graphic::~Graphic()
 {
-	m_maptextures.clear();
 	texture_cache_->flush();
 	// TODO(unknown): this should really not be needed, but currently is :(
 	if (UI::g_fh)
@@ -300,23 +284,7 @@ void Graphic::refresh()
  * @param sw a StreamWrite where the png is written to
  */
 void Graphic::save_png(const Image* image, StreamWrite * sw) const {
-	save_surface_to_png(image->texture(), sw);
-}
-
-uint32_t Graphic::new_maptexture(const std::vector<std::string>& texture_files, const uint32_t frametime)
-{
-	m_maptextures.emplace_back(new TerrainTexture(texture_files, frametime));
-	return m_maptextures.size(); // ID 1 is at m_maptextures[0]
-}
-
-/**
- * Advance frames for animated textures
-*/
-void Graphic::animate_maptextures(uint32_t time)
-{
-	for (uint32_t i = 0; i < m_maptextures.size(); ++i) {
-		m_maptextures[i]->animate(time);
-	}
+	save_surface_to_png(image->texture(), sw, COLOR_TYPE::RGBA);
 }
 
 /**
@@ -326,18 +294,6 @@ void Graphic::screenshot(const string& fname) const
 {
 	log("Save screenshot to %s\n", fname.c_str());
 	StreamWrite * sw = g_fs->open_stream_write(fname);
-	save_surface_to_png(screen_.get(), sw);
+	save_surface_to_png(screen_.get(), sw, COLOR_TYPE::RGB);
 	delete sw;
-}
-
-/**
- * Retrieve the map texture with the given number
- * \return the actual texture data associated with the given ID.
- */
-TerrainTexture * Graphic::get_maptexture_data(uint32_t id)
-{
-	--id; // ID 1 is at m_maptextures[0]
-
-	assert(id < m_maptextures.size());
-	return m_maptextures[id].get();
 }

@@ -50,7 +50,7 @@ void Field::set_brightness
 		b = -128;
 	else if (b >  127)
 		b =  127;
-	brightness = static_cast<int8_t>(b); //TODO(unknown): ARGH !!
+	brightness = static_cast<int8_t>(b);
 }
 
 }

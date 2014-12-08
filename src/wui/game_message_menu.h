@@ -20,7 +20,6 @@
 #ifndef WL_WUI_GAME_MESSAGE_MENU_H
 #define WL_WUI_GAME_MESSAGE_MENU_H
 
-#include "base/deprecated.h"
 #include "base/i18n.h"
 #include "logic/message.h"
 #include "logic/message_queue.h"

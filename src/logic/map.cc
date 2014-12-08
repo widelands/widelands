@@ -272,10 +272,10 @@ void Map::recalc_default_resources(const World& world) {
 
 			if (res == -1 || !amount) {
 				f.field->set_resources(0, 0);
-				f.field->set_starting_res_amount(0);
+				f.field->set_initial_res_amount(0);
 			} else {
 				f.field->set_resources(res, amount);
-				f.field->set_starting_res_amount(amount);
+				f.field->set_initial_res_amount(amount);
 			}
 
 		}

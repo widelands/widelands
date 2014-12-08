@@ -201,7 +201,7 @@ void Player::create_default_infrastructure() {
 		const TribeDescr::Initialization & initialization =
 			tribe().initialization(m_initialization_index);
 
-		Game & game = ref_cast<Game, EditorGameBase>(egbase());
+		Game & game = dynamic_cast<Game&>(egbase());
 
 		// Run the corresponding script
 		std::unique_ptr<LuaTable> table(game.lua().run_script(initialization.script));
@@ -485,7 +485,7 @@ Road & Player::force_road(const Path & path) {
 		log("Clearing for road at (%i, %i)\n", c.x, c.y);
 
 		//  Make sure that the player owns the area around.
-		ref_cast<Game, EditorGameBase>(egbase()).conquer_area_no_building
+		dynamic_cast<Game&>(egbase()).conquer_area_no_building
 			(PlayerArea<Area<FCoords> >(player_number(), Area<FCoords>(c, 1)));
 
 		if (BaseImmovable * const immovable = c.field->get_immovable()) {
@@ -774,11 +774,12 @@ Perform an action on the given flag.
 */
 void Player::flagaction(Flag & flag)
 {
-	if (&flag.owner() == this) //  Additional security check.
+	if (&flag.owner() == this) { //  Additional security check.
 		flag.add_flag_job
-			(ref_cast<Game, EditorGameBase>(egbase()),
+			(dynamic_cast<Game&>(egbase()),
 			 tribe().worker_index("geologist"),
 			 "expedition");
+	}
 }
 
 

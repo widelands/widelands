@@ -19,6 +19,7 @@
 
 #include "ui_fsmenu/options.h"
 
+#include <algorithm>
 #include <cstdio>
 #include <iostream>
 

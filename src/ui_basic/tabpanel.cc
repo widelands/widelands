@@ -23,11 +23,15 @@
 #include "ui_basic/mouse_constants.h"
 
 namespace UI {
-#define TP_BUTTON_WIDTH     34
-#define TP_BUTTON_HEIGHT    34
+
+// Button size of tab buttons in pixels.
+constexpr int kTabPanelButtonSize = 34;
+
+// Margin around image. The image will be scaled down to fit into this rectangle with preserving size.
+constexpr int kTabPanelImageMargin = 2;
 
 //  height of the bar separating buttons and tab contents
-#define TP_SEPARATOR_HEIGHT  4
+constexpr int kTabPanelSeparatorHeight = 4;
 
 /*
  * =================
@@ -43,8 +47,8 @@ Tab::Tab
 	 Panel             * const gpanel)
 	:
 	NamedPanel
-		(parent, name, id * TP_BUTTON_WIDTH, 0, TP_BUTTON_WIDTH,
-		 TP_BUTTON_HEIGHT, gtooltip),
+		(parent, name, id * kTabPanelButtonSize, 0, kTabPanelButtonSize,
+		 kTabPanelButtonSize, gtooltip),
 	m_parent(parent),
 	m_id(id),
 	pic(gpic),
@@ -102,7 +106,7 @@ void TabPanel::layout()
 		uint32_t h = get_h();
 
 		// avoid excessive craziness in case there is a wraparound
-		h = std::min(h, h - (TP_BUTTON_HEIGHT + TP_SEPARATOR_HEIGHT));
+		h = std::min(h, h - (kTabPanelButtonSize + kTabPanelSeparatorHeight));
 		panel->set_size(get_w(), h);
 	}
 }
@@ -116,8 +120,8 @@ void TabPanel::update_desired_size()
 	uint32_t h;
 
 	// size of button row
-	w = TP_BUTTON_WIDTH * m_tabs.size();
-	h = TP_BUTTON_HEIGHT + TP_SEPARATOR_HEIGHT;
+	w = kTabPanelButtonSize * m_tabs.size();
+	h = kTabPanelButtonSize + kTabPanelSeparatorHeight;
 
 	// size of contents
 	if (m_active < m_tabs.size()) {
@@ -156,7 +160,7 @@ uint32_t TabPanel::add
 	uint32_t id = m_tabs.size();
 	m_tabs.push_back(new Tab(this, id, name, pic, tooltip_text, panel));
 
-	panel->set_pos(Point(0, TP_BUTTON_HEIGHT + TP_SEPARATOR_HEIGHT));
+	panel->set_pos(Point(0, kTabPanelButtonSize + kTabPanelSeparatorHeight));
 	panel->set_visible(id == m_active);
 	update_desired_size();
 
@@ -202,70 +206,83 @@ void TabPanel::draw(RenderTarget & dst)
 	uint32_t x;
 
 	// draw the background
-	static_assert(2 < TP_BUTTON_WIDTH, "assert(2 < TP_BUTTON_WIDTH) failed.");
-	static_assert(4 < TP_BUTTON_HEIGHT, "assert(4 < TP_BUTTON_HEIGHT) failed.");
+	static_assert(2 < kTabPanelButtonSize, "assert(2 < kTabPanelButtonSize) failed.");
+	static_assert(4 < kTabPanelButtonSize, "assert(4 < kTabPanelButtonSize) failed.");
 
 	if (m_pic_background) {
 		dst.tile
-			(Rect(Point(0, 0), m_tabs.size() * TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT - 2),
+			(Rect(Point(0, 0), m_tabs.size() * kTabPanelButtonSize, kTabPanelButtonSize - 2),
 			 m_pic_background, Point(get_x(), get_y()));
-		assert(TP_BUTTON_HEIGHT - 2 <= get_h());
+		assert(kTabPanelButtonSize - 2 <= get_h());
 		dst.tile
 			(Rect
-			 (Point(0, TP_BUTTON_HEIGHT - 2),
-			  get_w(), get_h() - TP_BUTTON_HEIGHT + 2),
+			 (Point(0, kTabPanelButtonSize - 2),
+			  get_w(), get_h() - kTabPanelButtonSize + 2),
 			 m_pic_background,
-			 Point(get_x(), get_y() + TP_BUTTON_HEIGHT - 2));
+			 Point(get_x(), get_y() + kTabPanelButtonSize - 2));
 	}
 
 	// draw the buttons
-	for (idx = 0, x = 0; idx < m_tabs.size(); idx++, x += TP_BUTTON_WIDTH) {
+	for (idx = 0, x = 0; idx < m_tabs.size(); idx++, x += kTabPanelButtonSize) {
 		if (m_highlight == static_cast<int32_t>(idx))
 			dst.brighten_rect
-				(Rect(Point(x, 0), TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT),
+				(Rect(Point(x, 0), kTabPanelButtonSize, kTabPanelButtonSize),
 				 MOUSE_OVER_BRIGHT_FACTOR);
 
 		// Draw the icon
 		assert(m_tabs[idx]->pic);
-		uint16_t cpw = m_tabs[idx]->pic->width();
-		uint16_t cph = m_tabs[idx]->pic->height();
-		dst.blit
-			(Point(x + (TP_BUTTON_WIDTH - cpw) / 2, (TP_BUTTON_HEIGHT - cph) / 2),
-			 m_tabs[idx]->pic);
+
+		// Scale the image down if needed, but keep the ratio.
+		constexpr int kMaxImageSize = kTabPanelButtonSize - 2 * kTabPanelImageMargin;
+		double image_scale =
+		   std::min(1.,
+		            std::min(static_cast<double>(kMaxImageSize) / m_tabs[idx]->pic->width(),
+		                     static_cast<double>(kMaxImageSize) / m_tabs[idx]->pic->height()));
+
+		uint16_t picture_width = image_scale * m_tabs[idx]->pic->width();
+		uint16_t picture_height = image_scale * m_tabs[idx]->pic->height();
+		dst.blitrect_scale(Rect(x + (kTabPanelButtonSize - picture_width) / 2,
+		                        (kTabPanelButtonSize - picture_height) / 2,
+		                        picture_width,
+		                        picture_height),
+		                   m_tabs[idx]->pic,
+		                   Rect(0, 0, m_tabs[idx]->pic->width(), m_tabs[idx]->pic->height()),
+		                   1.,
+		                   BlendMode::UseAlpha);
 
 		// Draw top part of border
 		RGBColor black(0, 0, 0);
 
 		dst.brighten_rect
-			(Rect(Point(x, 0), TP_BUTTON_WIDTH, 2), BUTTON_EDGE_BRIGHT_FACTOR);
+			(Rect(Point(x, 0), kTabPanelButtonSize, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		dst.brighten_rect
-			(Rect(Point(x, 2), 2, TP_BUTTON_HEIGHT - 4),
+			(Rect(Point(x, 2), 2, kTabPanelButtonSize - 4),
 			 BUTTON_EDGE_BRIGHT_FACTOR);
 		dst.fill_rect
-			(Rect(Point(x + TP_BUTTON_WIDTH - 2, 2), 1, TP_BUTTON_HEIGHT - 4),
+			(Rect(Point(x + kTabPanelButtonSize - 2, 2), 1, kTabPanelButtonSize - 4),
 			 black);
 		dst.fill_rect
-			(Rect(Point(x + TP_BUTTON_WIDTH - 1, 1), 1, TP_BUTTON_HEIGHT - 3),
+			(Rect(Point(x + kTabPanelButtonSize - 1, 1), 1, kTabPanelButtonSize - 3),
 			 black);
 
 		// Draw bottom part
 		if (m_active != idx)
 			dst.brighten_rect
-				(Rect(Point(x, TP_BUTTON_HEIGHT - 2), TP_BUTTON_WIDTH, 2),
+				(Rect(Point(x, kTabPanelButtonSize - 2), kTabPanelButtonSize, 2),
 				 2 * BUTTON_EDGE_BRIGHT_FACTOR);
 		else {
 			dst.brighten_rect
-				(Rect(Point(x, TP_BUTTON_HEIGHT - 2), 2, 2),
+				(Rect(Point(x, kTabPanelButtonSize - 2), 2, 2),
 				 BUTTON_EDGE_BRIGHT_FACTOR);
 
 			dst.brighten_rect
-				(Rect(Point(x + TP_BUTTON_WIDTH - 2, TP_BUTTON_HEIGHT - 2), 2, 2),
+				(Rect(Point(x + kTabPanelButtonSize - 2, kTabPanelButtonSize - 2), 2, 2),
 				 2 * BUTTON_EDGE_BRIGHT_FACTOR);
 			dst.fill_rect
-				(Rect(Point(x + TP_BUTTON_WIDTH - 2, TP_BUTTON_HEIGHT - 1), 1, 1),
+				(Rect(Point(x + kTabPanelButtonSize - 2, kTabPanelButtonSize - 1), 1, 1),
 				 black);
 			dst.fill_rect
-				(Rect(Point(x + TP_BUTTON_WIDTH - 2, TP_BUTTON_HEIGHT - 2), 2, 1),
+				(Rect(Point(x + kTabPanelButtonSize - 2, kTabPanelButtonSize - 2), 2, 1),
 				 black);
 		}
 	}
@@ -273,7 +290,7 @@ void TabPanel::draw(RenderTarget & dst)
 	// draw the remaining separator
 	assert(x <= static_cast<uint32_t>(get_w()));
 	dst.brighten_rect
-		(Rect(Point(x, TP_BUTTON_HEIGHT - 2), get_w() - x, 2),
+		(Rect(Point(x, kTabPanelButtonSize - 2), get_w() - x, 2),
 		 2 * BUTTON_EDGE_BRIGHT_FACTOR);
 }
 
@@ -285,7 +302,7 @@ void TabPanel::handle_mousein(bool inside)
 {
 	if (!inside && m_highlight >= 0) {
 		update
-			(m_highlight * TP_BUTTON_WIDTH, 0, TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT);
+			(m_highlight * kTabPanelButtonSize, 0, kTabPanelButtonSize, kTabPanelButtonSize);
 
 		m_highlight = -1;
 	}
@@ -300,10 +317,10 @@ bool TabPanel::handle_mousemove
 {
 	int32_t hl;
 
-	if (y < 0 || y >= TP_BUTTON_HEIGHT)
+	if (y < 0 || y >= kTabPanelButtonSize)
 		hl = -1;
 	else {
-		hl = x / TP_BUTTON_WIDTH;
+		hl = x / kTabPanelButtonSize;
 
 		if (m_tabs.size() <= static_cast<size_t>(hl))
 			hl = -1;
@@ -316,11 +333,11 @@ bool TabPanel::handle_mousemove
 		}
 		if (m_highlight >= 0)
 			update
-				(m_highlight * TP_BUTTON_WIDTH, 0,
-				 TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT);
+				(m_highlight * kTabPanelButtonSize, 0,
+				 kTabPanelButtonSize, kTabPanelButtonSize);
 		if (hl >= 0)
 			update
-				(hl * TP_BUTTON_WIDTH, 0, TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT);
+				(hl * kTabPanelButtonSize, 0, kTabPanelButtonSize, kTabPanelButtonSize);
 
 		m_highlight = hl;
 	}
@@ -335,10 +352,10 @@ bool TabPanel::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT) {
 		int32_t id;
 
-		if (y >= TP_BUTTON_HEIGHT)
+		if (y >= kTabPanelButtonSize)
 			return false;
 
-		id = x / TP_BUTTON_WIDTH;
+		id = x / kTabPanelButtonSize;
 
 		if (static_cast<size_t>(id) < m_tabs.size()) {
 			activate(id);
