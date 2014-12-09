@@ -604,6 +604,9 @@ private:
 // not depend on the singleton here.
 // NOCOM(GunChleoc): fh1 is created in wlapplication.cc:269.
 // I have switched the oder now so that is gets created before g_fh.
+// NOCOM(#codereview): this still crashes for me:
+// ./build/debug/src/graphic/text/test/wl_render_richtext 373 blub.png src/graphic/text/test/data/sub_fixedwidth_floatright/input00.txt
+// You made the richtext renderer dependant on UI::g_fh1, but this singleton is not created in the StandaloneRenderer in src/graphic/text/rt_render.cc, so the standalone renderer is no longer working. Pass the fontset in the constructor and recreate g_fh1 if the options change?
 IFont& FontCache::get_font(NodeStyle& ns) {
 	UI::FontSet fontset = UI::g_fh1->fontset();
 
