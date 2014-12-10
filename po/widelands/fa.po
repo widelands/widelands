@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-12-09 05:40+0000\n"
+"X-Launchpad-Export-Date: 2014-12-10 05:27+0000\n"
 "X-Generator: Launchpad (build 17283)\n"
 "Language: fa\n"
 
@@ -4065,6 +4065,3 @@ msgstr ""
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "Player %i"
-#~ msgstr "بازیکن %i"
