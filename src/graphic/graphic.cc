@@ -59,7 +59,7 @@ void set_icon(SDL_Window* sdl_window) {
 /**
  * Initialize the SDL video mode.
 */
-Graphic::Graphic(int window_mode_w, int window_mode_h, bool fullscreen)
+Graphic::Graphic(int window_mode_w, int window_mode_h, bool init_fullscreen)
    : m_window_mode_width(window_mode_w),
      m_window_mode_height(window_mode_h),
      m_update(true),
@@ -79,7 +79,7 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool fullscreen)
 	                                m_window_mode_height,
 	                                SDL_WINDOW_OPENGL);
 	resolution_changed();
-	set_fullscreen(fullscreen);
+	set_fullscreen(init_fullscreen);
 
 	SDL_SetWindowTitle(m_sdl_window, ("Widelands " + build_id() + '(' + build_type() + ')').c_str());
 	set_icon(m_sdl_window);
