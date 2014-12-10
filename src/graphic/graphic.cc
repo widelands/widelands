@@ -27,7 +27,6 @@
 #include "graphic/gl/system_headers.h"
 #include "graphic/image.h"
 #include "graphic/image_io.h"
-#include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
 #include "graphic/screen.h"
 #include "graphic/texture.h"
@@ -71,8 +70,6 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool init_fullscreen)
      image_cache_(new ImageCache(texture_cache_.get())),
      animation_manager_(new AnimationManager())
 {
-	ImageTransformations::initialize();
-
 	// Request an OpenGL 2 context with double buffering.
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);

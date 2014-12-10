@@ -68,11 +68,6 @@ public:
 	/// so the caller has to adjust for the hotspot himself.
 	virtual const Point& hotspot() const = 0;
 
-	// An image frame that shows the first animation frame, colored using the
-	// 'player_clr'. This can be used in the UI (e.g. buildingwindow) to
-	// represent this image.
-	virtual const Image& representative_image(const RGBColor& player_clr) const = 0;
-
 	// An image frame that is guaranteed to be a path to a file on disc. This is
 	// a clutch needed to make sure that messages can always be displayed, even
 	// no image processing has taken place before.

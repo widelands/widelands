@@ -185,12 +185,11 @@ void Button::draw(RenderTarget & dst)
 		   1.,
 		   BlendMode::UseAlpha);
 		} else {
-			dst.blitrect_scale_gray(
+			dst.blitrect_scale_monochrome(
 			   Rect((get_w() - blit_width) / 2, (get_h() - blit_height) / 2, blit_width, blit_height),
 			   m_pic_custom,
 			   Rect(0, 0, m_pic_custom->width(), m_pic_custom->height()),
-			   0.5 /* opacity */,
-			   1. /* luminosity_factor */);
+			   RGBAColor(255, 255, 255, 127));
 		}
 
 	} else if (m_title.length()) {

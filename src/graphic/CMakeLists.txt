@@ -157,8 +157,6 @@ wl_library(graphic
     font_handler1.h
     graphic.cc
     graphic.h
-    image_transformations.cc
-    image_transformations.h
     in_memory_image.cc
     in_memory_image.h
     rendertarget.cc

@@ -276,16 +276,29 @@ void Texture::blit
 	reset_gl();
 }
 
-void Texture::blit_gray(const Rect& dst,
+void Texture::blit_monochrome(const Rect& dst,
                         const Texture* src,
                         const Rect& srcrc,
-                        float opacity,
-                        const float opacity_factor) {
+                        const RGBAColor& blend) {
 	if (m_w <= 0 || m_h <= 0) {
 		return;
 	}
 
 	setup_gl(m_texture);
-	Surface::blit_gray(dst, src, srcrc, opacity, opacity_factor);
+	Surface::blit_monochrome(dst, src, srcrc, blend);
+	reset_gl();
+}
+
+void Texture::blit_blended(const Rect& dst,
+                           const Texture* image,
+                           const Texture* mask,
+                           const Rect& srcrc,
+                           const RGBColor& blend) {
+	if (m_w <= 0 || m_h <= 0) {
+		return;
+	}
+
+	setup_gl(m_texture);
+	Surface::blit_blended(dst, image, mask, srcrc, blend);
 	reset_gl();
 }

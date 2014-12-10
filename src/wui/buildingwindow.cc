@@ -114,16 +114,15 @@ void BuildingWindow::draw(RenderTarget & dst)
 {
 	UI::Window::draw(dst);
 
+	// TODO(sirver): chang this to directly blit the animation. This needs support for or removal of
+	// RenderTarget.
 	const Animation& anim = g_gr->animations().get_animation(building().get_ui_anim());
-
-	const Image* image =
-	   &anim.representative_image(building().owner().get_playercolor());
-
+	const Image* image = &anim.representative_image_from_disk();
 	dst.blitrect_scale(Rect((get_inner_w() - image->width()) / 2,
 	                        (get_inner_h() - image->height()) / 2,
 	                        image->width(),
 	                        image->height()),
-	                   image,
+	                   &anim.representative_image_from_disk(),
 	                   Rect(0, 0, image->width(), image->height()),
 	                   0.5,
 	                   BlendMode::UseAlpha);

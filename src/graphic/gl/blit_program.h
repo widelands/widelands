@@ -55,32 +55,58 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(VanillaBlitProgram);
 };
 
-class GrayBlitProgram {
+class MonochromeBlitProgram {
 public:
 	// Returns the (singleton) instance of this class.
-	static GrayBlitProgram& instance();
-	~GrayBlitProgram();
+	static MonochromeBlitProgram& instance();
+	~MonochromeBlitProgram();
 
 	// Draws the rectangle 'gl_src_rect' from the texture with the name
 	// 'gl_texture' to 'gl_dest_rect' in the currently bound framebuffer. All
-	// coordinates are in the OpenGL frame. The 'blend_mode' defines if the
-	// values are copied or if alpha values are used.
-	// The image is converted to grayscale during blit.
+	// coordinates are in the OpenGL frame. The image is first converted to
+	// luminance, then all values are multiplied with blend.
 	void draw(const FloatRect& gl_dest_rect,
 	          const FloatRect& gl_src_rect,
 	          const GLuint gl_texture,
-				 float opacity,
-	          float luminosity_factor);
+				 const RGBAColor& blend);
 
 private:
-	GrayBlitProgram();
+	MonochromeBlitProgram();
 
 	std::unique_ptr<BlitProgram> blit_program_;
 
 	// Uniforms.
-	GLint u_luminosity_factor_;
+	GLint u_blend_;
 
-	DISALLOW_COPY_AND_ASSIGN(GrayBlitProgram);
+	DISALLOW_COPY_AND_ASSIGN(MonochromeBlitProgram);
+};
+
+class BlendedBlitProgram {
+public:
+	// Returns the (singleton) instance of this class.
+	static BlendedBlitProgram& instance();
+	~BlendedBlitProgram();
+
+	// Draws the rectangle 'gl_src_rect' from the texture with the name
+	// 'gl_texture_image' to 'gl_dest_rect' in the currently bound framebuffer. All
+	// coordinates are in the OpenGL frame. The 'gl_texture_mask' is used to selectively apply
+	// the 'blend'. This is used for blitting player colored images.
+	void draw(const FloatRect& gl_dest_rect,
+	          const FloatRect& gl_src_rect,
+	          const GLuint gl_texture_image,
+	          const GLuint gl_texture_mask,
+				 const RGBAColor& blend);
+
+private:
+	BlendedBlitProgram();
+
+	std::unique_ptr<BlitProgram> blit_program_;
+
+	// Uniforms.
+	GLint u_blend_;
+	GLint u_mask_;
+
+	DISALLOW_COPY_AND_ASSIGN(BlendedBlitProgram);
 };
 
 #endif  // end of include guard: WL_GRAPHIC_GL_DRAW_RECT_PROGRAM_H
