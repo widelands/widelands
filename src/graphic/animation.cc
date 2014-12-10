@@ -127,6 +127,7 @@ public:
 	uint32_t frametime() const override;
 	const Point& hotspot() const override;
 	const Image& representative_image_from_disk() const override;
+	const std::string& representative_image_from_disk_filename() const override;
 	virtual void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*)
 	   const override;
 	void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const override;
@@ -300,6 +301,10 @@ const Point& NonPackedAnimation::hotspot() const {
 const Image& NonPackedAnimation::representative_image_from_disk() const {
 	ensure_graphics_are_loaded();
 	return *frames_[0];
+}
+
+const std::string& NonPackedAnimation::representative_image_from_disk_filename() const {
+	return image_files_[0];
 }
 
 void NonPackedAnimation::trigger_soundfx(uint32_t time, uint32_t stereo_position) const {

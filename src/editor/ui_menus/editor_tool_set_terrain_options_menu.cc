@@ -145,7 +145,7 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 		}
 
 		// Make sure we delete this later on.
-		offscreen_images->emplace_back(new_in_memory_image("dummy_hash", texture));
+		offscreen_images->emplace_back(new_in_memory_image(texture));
 		break;
 	}
 	/** TRANSLATORS: %1% = terrain name, %2% = list of terrain types  */

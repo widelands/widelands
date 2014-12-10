@@ -56,8 +56,8 @@ inline void ensure_sdl_image_is_initialized() {
 
 }  // namespace
 
-Texture* load_image(const std::string& fname, FileSystem* fs) {
-	return new Texture(load_image_as_sdl_surface(fname, fs));
+std::unique_ptr<Texture> load_image(const std::string& fname, FileSystem* fs) {
+	return std::unique_ptr<Texture>(new Texture(load_image_as_sdl_surface(fname, fs)));
 }
 
 SDL_Surface* load_image_as_sdl_surface(const std::string& fname, FileSystem* fs) {

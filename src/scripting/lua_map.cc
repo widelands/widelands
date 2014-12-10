@@ -1097,8 +1097,7 @@ int LuaMapObjectDescription::get_name(lua_State * L) {
 */
 int LuaMapObjectDescription::get_representative_image(lua_State * L) {
 	const std::string& filepath = g_gr->animations().get_animation
-		(get()->get_animation("idle")).representative_image_from_disk().hash();
-
+		(get()->get_animation("idle")).representative_image_from_disk_filename();
 	lua_pushstring(L, filepath);
 	return 1;
 }
