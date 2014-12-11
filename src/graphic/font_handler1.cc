@@ -109,6 +109,7 @@ public:
 
 	void reinitialize_fontset() {
 		fontset_.reset(new UI::FontSet(i18n::get_locale()));
+		renderer_.reset(new RT::Renderer(image_cache_, texture_cache_, fontset_.get()));
 	}
 
 private:
@@ -121,7 +122,8 @@ private:
 IFontHandler1 * create_fonthandler(Graphic* gr) {
 
 	return new FontHandler1(
-	   &gr->images(), &gr->textures(), new RT::Renderer(&gr->images(), &gr->textures()));
+		&gr->images(), &gr->textures(), new RT::Renderer(&gr->images(), &gr->textures(),
+																		 new UI::FontSet(i18n::get_locale())));
 }
 
 IFontHandler1 * g_fh1 = nullptr;

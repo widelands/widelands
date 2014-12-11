@@ -83,7 +83,7 @@ using TagSet = std::set<std::string>;
 class Renderer {
 public:
 	// Ownership is not taken.
-	Renderer(ImageCache* image_cache, TextureCache* texture_cache);
+	Renderer(ImageCache* image_cache, TextureCache* texture_cache, UI::FontSet* fontset);
 	~Renderer();
 
 	// Render the given string in the given width. Restricts the allowed tags to
@@ -103,6 +103,7 @@ private:
 	std::unique_ptr<Parser> parser_;
 	ImageCache* const image_cache_;  // Not owned.
 	TextureCache* const texture_cache_;  // Not owned.
+	UI::FontSet* const fontset_;  // Not owned.
 };
 
 }

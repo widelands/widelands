@@ -30,7 +30,6 @@
 #include "base/log.h"
 #include "base/point.h"
 #include "base/rect.h"
-#include "graphic/font_handler1.h"
 #include "graphic/image_cache.h"
 #include "graphic/image_io.h"
 #include "graphic/text/font_io.h"
@@ -63,6 +62,7 @@ struct Borders {
 };
 
 struct NodeStyle {
+	UI::FontSet* fontset;
 	string font_face;
 	uint16_t font_size;
 	RGBColor font_color;
@@ -599,49 +599,39 @@ private:
 	FontMap m_fontmap;
 };
 
-// NOCOM(#codereview): I think these changes broke the stand alone rich text
-// renderer in graphic/text/test/render.cc due to the singleton g_fh1 not being
-// created there yet (as it has been unused). Can you recreated the renderer
-// when the locale changes? If so, you could just pass the fontset() to it and
-// not depend on the singleton here.
-// NOCOM(GunChleoc): fh1 is created in wlapplication.cc:269.
-// I have switched the oder now so that is gets created before g_fh.
-// NOCOM(#codereview): this still crashes for me:
-// ./build/debug/src/graphic/text/test/wl_render_richtext 373 blub.png src/graphic/text/test/data/sub_fixedwidth_floatright/input00.txt
-// You made the richtext renderer dependant on UI::g_fh1, but this singleton is not created in the StandaloneRenderer in src/graphic/text/rt_render.cc, so the standalone renderer is no longer working. Pass the fontset in the constructor and recreate g_fh1 if the options change?
+
 IFont& FontCache::get_font(NodeStyle& ns) {
-	UI::FontSet fontset = UI::g_fh1->fontset();
 
 	if (ns.font_style & IFont::BOLD && ns.font_style & IFont::ITALIC) {
-		if (ns.font_face == fontset.condensed() ||
-			 ns.font_face == fontset.condensed_bold() ||
-			 ns.font_face == fontset.condensed_italic()) {
-			ns.font_face = fontset.condensed_bold_italic();
-		} else if (ns.font_face == fontset.serif() ||
-					  ns.font_face == fontset.serif_bold() ||
-					  ns.font_face == fontset.serif_italic()) {
-			ns.font_face = fontset.serif_bold_italic();
+		if (ns.font_face == ns.fontset->condensed() ||
+			 ns.font_face == ns.fontset->condensed_bold() ||
+			 ns.font_face == ns.fontset->condensed_italic()) {
+			ns.font_face = ns.fontset->condensed_bold_italic();
+		} else if (ns.font_face == ns.fontset->serif() ||
+					  ns.font_face == ns.fontset->serif_bold() ||
+					  ns.font_face == ns.fontset->serif_italic()) {
+			ns.font_face = ns.fontset->serif_bold_italic();
 		} else {
-			ns.font_face = fontset.sans_bold_italic();
+			ns.font_face = ns.fontset->sans_bold_italic();
 		}
 		ns.font_style &= ~IFont::ITALIC;
 		ns.font_style &= ~IFont::BOLD;
 	} else if (ns.font_style & IFont::BOLD) {
-		if (ns.font_face == fontset.condensed()) {
-			ns.font_face = fontset.condensed_bold();
-		} else if (ns.font_face == fontset.serif()) {
-			ns.font_face = fontset.serif_bold();
+		if (ns.font_face == ns.fontset->condensed()) {
+			ns.font_face = ns.fontset->condensed_bold();
+		} else if (ns.font_face == ns.fontset->serif()) {
+			ns.font_face = ns.fontset->serif_bold();
 		} else {
-			ns.font_face = fontset.sans_bold();
+			ns.font_face = ns.fontset->sans_bold();
 		}
 		ns.font_style &= ~IFont::BOLD;
 	} else if (ns.font_style & IFont::ITALIC) {
-		if (ns.font_face == fontset.condensed()) {
-			ns.font_face = fontset.condensed_italic();
-		} else if (ns.font_face == fontset.serif()) {
-			ns.font_face = fontset.serif_italic();
+		if (ns.font_face == ns.fontset->condensed()) {
+			ns.font_face = ns.fontset->condensed_italic();
+		} else if (ns.font_face == ns.fontset->serif()) {
+			ns.font_face = ns.fontset->serif_italic();
 		} else {
-			ns.font_face = fontset.sans_italic();
+			ns.font_face = ns.fontset->sans_italic();
 		}
 		ns.font_style &= ~IFont::ITALIC;
 	}
@@ -656,7 +646,7 @@ IFont& FontCache::get_font(NodeStyle& ns) {
 		font = load_font(ns.font_face, ns.font_size);
 	} catch (FileNotFoundError& e) {
 		log("Font file not found. Falling back to serif: %s\n%s\n", ns.font_face.c_str(), e.what());
-		font = load_font(fontset.serif(), ns.font_size);
+		font = load_font(ns.fontset->serif(), ns.font_size);
 	}
 
 	m_fontmap[fd] = font;
@@ -1005,9 +995,9 @@ TagHandler* create_taghandler(Tag& tag, FontCache& fc, NodeStyle& ns, ImageCache
 	return i->second(tag, fc, ns, image_cache);
 }
 
-Renderer::Renderer(ImageCache* image_cache, TextureCache* texture_cache) :
+Renderer::Renderer(ImageCache* image_cache, TextureCache* texture_cache, UI::FontSet* fontset) :
 	font_cache_(new FontCache()), parser_(new Parser()),
-	image_cache_(image_cache), texture_cache_(texture_cache) {
+	image_cache_(image_cache), texture_cache_(texture_cache), fontset_(fontset) {
 }
 
 Renderer::~Renderer() {
@@ -1017,7 +1007,7 @@ RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& 
 	std::unique_ptr<Tag> rt(parser_->parse(text, allowed_tags));
 
 	NodeStyle default_style = {
-		UI::g_fh1->fontset().serif(), 16,
+		fontset_, fontset_->serif(), 16,
 		RGBColor(0, 0, 0), IFont::DEFAULT, 0, HALIGN_LEFT, VALIGN_BOTTOM,
 		""
 	};
