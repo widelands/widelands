@@ -54,13 +54,21 @@ void Icon::set_no_frame()
 	m_draw_frame = false;
 }
 
-
-
 void Icon::draw(RenderTarget & dst) {
 	if (m_pic) {
-		int32_t w = (get_w() - m_pic->width()) / 2;
-		int32_t h = (get_h() - m_pic->height()) / 2;
-		dst.blit(Point(w, h), m_pic);
+		double scale = std::min(static_cast<double>(get_w()) / m_pic->width(),
+		                        static_cast<double>(get_h()) / m_pic->height());
+		scale = std::min(1., scale);
+
+		int width = scale * get_w();
+		int height = scale * get_h();
+		int x = (get_w() - width) / 2;
+		int y = (get_h() - height) / 2;
+		dst.blitrect_scale(Rect(x, y, width, height),
+		                   m_pic,
+		                   Rect(0, 0, m_pic->width(), m_pic->height()),
+		                   1.,
+		                   BlendMode::UseAlpha);
 	}
 	if (m_draw_frame) {
 		dst.draw_rect(Rect(0, 0, get_w(), get_h()), m_framecolor);

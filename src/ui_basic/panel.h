@@ -282,13 +282,13 @@ private:
 	bool do_tooltip();
 
 	static Panel * ui_trackmouse(int32_t & x, int32_t & y);
-	static void ui_mousepress  (const uint8_t button, int32_t x, int32_t y);
-	static void ui_mouserelease(const uint8_t button, int32_t x, int32_t y);
-	static void ui_mousemove
+	static bool ui_mousepress  (const uint8_t button, int32_t x, int32_t y);
+	static bool ui_mouserelease(const uint8_t button, int32_t x, int32_t y);
+	static bool ui_mousemove
 		(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	static void ui_mousewheel(uint32_t which, int32_t x, int32_t y);
-	static void ui_key(bool down, SDL_Keysym code);
-	static void ui_textinput(const std::string& text);
+	static bool ui_mousewheel(uint32_t which, int32_t x, int32_t y);
+	static bool ui_key(bool down, SDL_Keysym code);
+	static bool ui_textinput(const std::string& text);
 
 	Panel * _parent;
 	Panel * _next, * _prev;

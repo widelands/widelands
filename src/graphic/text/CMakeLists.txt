@@ -16,7 +16,6 @@ wl_library(graphic_text
     textstream.h
   USES_SDL2
   USES_SDL2_TTF
-  USES_SDL2_GFX
   DEPENDS
     graphic_sdl_utils
     base_exceptions

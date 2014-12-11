@@ -194,43 +194,21 @@ void MapBuildingdataPacket::read
 					//  Set economy now, some stuff below will count on this.
 					building.set_economy(building.m_flag->get_economy());
 
+					Game& game = dynamic_cast<Game&>(egbase);
+
 					if (upcast(ConstructionSite, constructionsite, &building)) {
-						read_constructionsite
-							(*constructionsite,
-							 fr,
-							 ref_cast<Game, EditorGameBase>(egbase),
-							 mol);
+						read_constructionsite(*constructionsite, fr, game, mol);
 					} else if (upcast(DismantleSite, dms, &building)) {
-						read_dismantlesite
-							(*dms,
-							 fr,
-							 ref_cast<Game, EditorGameBase>(egbase),
-							 mol);
+						read_dismantlesite(*dms, fr, game, mol);
 					} else if (upcast(Warehouse, warehouse, &building)) {
-						read_warehouse
-							(*warehouse,
-							 fr,
-							 ref_cast<Game, EditorGameBase>(egbase),
-							 mol);
+						read_warehouse(*warehouse, fr, game, mol);
 					} else if (upcast(ProductionSite, productionsite, &building)) {
 						if (upcast(MilitarySite, militarysite, productionsite)) {
-							read_militarysite
-								(*militarysite,
-								 fr,
-								 ref_cast<Game, EditorGameBase>(egbase),
-								 mol);
+							read_militarysite(*militarysite, fr, game, mol);
 						} else if (upcast(TrainingSite, trainingsite, productionsite)) {
-							read_trainingsite
-								(*trainingsite,
-								 fr,
-								 ref_cast<Game, EditorGameBase>(egbase),
-								 mol);
+							read_trainingsite(*trainingsite, fr, game, mol);
 						} else {
-							read_productionsite
-								(*productionsite,
-								 fr,
-								 ref_cast<Game, EditorGameBase>(egbase),
-								 mol);
+							read_productionsite(*productionsite, fr, game, mol);
 						}
 					} else {
 						//  type of building is not one of (or derived from)
@@ -238,8 +216,7 @@ void MapBuildingdataPacket::read
 						assert(false);
 					}
 					if (packet_version < 3) {
-						read_formerbuildings_v2
-							(building, fr, ref_cast<Game, EditorGameBase>(egbase), mol);
+						read_formerbuildings_v2(building, fr, game, mol);
 					}
 
 					mol.mark_object_as_loaded(building);
@@ -1137,7 +1114,7 @@ void MapBuildingdataPacket::write
 	Map & map = egbase.map();
 	const uint32_t mapwidth = map.get_width();
 	MapIndex const max_index = map.max_index();
-	for (MapIndex i = 0; i < max_index; ++i)
+	for (MapIndex i = 0; i < max_index; ++i) {
 		if (upcast(Building const, building, map[i].get_immovable())) {
 			assert(mos.is_object_known(*building));
 
@@ -1190,52 +1167,32 @@ void MapBuildingdataPacket::write
 				fw.unsigned_8(is_stopped);
 			}
 
-			if (upcast(ConstructionSite const, constructionsite, building))
-				write_constructionsite
-					(*constructionsite,
-					 fw,
-					 ref_cast<Game, EditorGameBase>(egbase),
-					 mos);
-			else if (upcast(DismantleSite const, dms, building))
-				write_dismantlesite
-					(*dms,
-					 fw,
-					 ref_cast<Game, EditorGameBase>(egbase),
-					 mos);
-			else if (upcast(Warehouse const, warehouse, building))
-				write_warehouse
-					(*warehouse,
-					 fw,
-					 ref_cast<Game, EditorGameBase>(egbase),
-					 mos);
-			else if (upcast(ProductionSite const, productionsite, building)) {
-				if (upcast(MilitarySite const, militarysite, productionsite))
-					write_militarysite
-						(*militarysite,
-						 fw,
-						 ref_cast<Game, EditorGameBase>(egbase),
-						 mos);
-				else if (upcast(TrainingSite const, trainingsite, productionsite))
-					write_trainingsite
-						(*trainingsite,
-						 fw,
-						 ref_cast<Game, EditorGameBase>(egbase),
-						 mos);
-				else
-					write_productionsite
-						(*productionsite,
-						 fw,
-						 ref_cast<Game, EditorGameBase>(egbase),
-						 mos);
+			Game& game = dynamic_cast<Game&>(egbase);
+
+			if (upcast(ConstructionSite const, constructionsite, building)) {
+				write_constructionsite(*constructionsite, fw, game, mos);
+			} else if (upcast(DismantleSite const, dms, building)) {
+				write_dismantlesite(*dms, fw, game, mos);
+			} else if (upcast(Warehouse const, warehouse, building)) {
+				write_warehouse (*warehouse, fw, game, mos);
+			} else if (upcast(ProductionSite const, productionsite, building)) {
+				if (upcast(MilitarySite const, militarysite, productionsite)) {
+					write_militarysite(*militarysite, fw, game, mos);
+				}
+				else if (upcast(TrainingSite const, trainingsite, productionsite)) {
+					write_trainingsite(*trainingsite, fw, game, mos);
+				}
+				else {
+					write_productionsite(*productionsite, fw, game, mos);
+				}
 			} else {
 				assert(false);
 				//  type of building is not one of (or derived from)
 				//  {ConstructionSite, Warehouse, ProductionSite}
 			}
-
 			mos.mark_object_as_saved(*building);
 		}
-
+	}
 	fw.write(fs, "binary/building_data");
 }
 

@@ -38,6 +38,26 @@ function MakeDMG {
    hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_64bit_$WLVERSION.dmg"
 }
 
+function FixDependencies {
+   binary=$1; shift
+
+   echo "Copying dynamic libraries for ${binary} ..."
+
+   dylibbundler -b -of \
+      -p '@executable_path/' \
+      -d $DESTINATION/Widelands.app/Contents/MacOS \
+      -x $DESTINATION/Widelands.app/Contents/MacOS/${binary} 
+}
+
+function CopyAndFixDependencies {
+   path=$1; shift
+
+   cp $path "$DESTINATION/Widelands.app/Contents/MacOS/"
+   chmod 644 "$DESTINATION/Widelands.app/Contents/MacOS/$(basename ${path})"
+
+   FixDependencies "$(basename ${path})"
+}
+
 function MakeAppPackage {
    echo "Making $DESTINATION/Widelands.app now."
    rm -Rf $DESTINATION/
@@ -90,51 +110,31 @@ EOF
    echo "Stripping binary ..."
    strip -u -r $DESTINATION/Widelands.app/Contents/MacOS/widelands
 
-   echo "Copying dynamic libraries ..."
-   dylibbundler -od -b -x $DESTINATION/Widelands.app/Contents/MacOS/widelands  -d $DESTINATION/Widelands.app/Contents/libs
+   FixDependencies widelands
+
+   echo "Copying dynamic libraries for SDL_image ... "
+   pushd $DESTINATION/Widelands.app/Contents/MacOS/
+   ln -s libpng*.dylib libpng.dylib
+   popd
+   CopyAndFixDependencies "/usr/local/lib/libjpeg.dylib"  
+
+   echo "Copying dynamic libraries for SDL_mixer ... "
+   CopyAndFixDependencies /usr/local/lib/libogg.dylib  
+   CopyAndFixDependencies /usr/local/lib/libvorbis.dylib 
+   CopyAndFixDependencies /usr/local/lib/libvorbisfile.dylib 
 }
 
 function BuildWidelands() {
-   cmake $SOURCE_DIR $GENERATOR \
+   cmake $SOURCE_DIR -G Ninja \
       -DCMAKE_CXX_COMPILER:FILEPATH="$(cd $(dirname $0); pwd)/compiler_wrapper.sh" \
       -DCMAKE_OSX_DEPLOYMENT_TARGET:STRING="10.7" \
       -DCMAKE_OSX_SYSROOT:PATH="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk" \
       -DCMAKE_INSTALL_PREFIX:PATH="$DESTINATION/Widelands.app/Contents/MacOS" \
       -DCMAKE_OSX_ARCHITECTURES:STRING="x86_64" \
       -DCMAKE_BUILD_TYPE:STRING="$TYPE" \
-      -DCMAKE_PREFIX_PATH:PATH="/usr/local" \
-      \
-      -DSDL2_LIBRARY:STRING="-L/usr/local/lib /usr/local/lib/libSDL2main.a /usr/local/lib/libSDL2.a -Wl,-framework,OpenGL -Wl,-framework,Cocoa -Wl,-framework,ApplicationServices -Wl,-framework,Carbon -Wl,-framework,AudioToolbox -Wl,-framework,AudioUnit -Wl,-framework,IOKit" \
-      -DSDL2_INCLUDE_DIR:PATH="/usr/local/include/SDL2" \
-      \
-      -DSDL2IMAGE_LIBRARY:STRING="-Wl,/usr/local/lib/libSDL2_image.a -Wl,/usr/local/lib/libjpeg.a" \
-      -DSDL2IMAGE_INCLUDE_DIR:PATH="/usr/local/include/SDL2" \
-      \
-      -DPNG_LIBRARY:FILEPATH="/usr/local/opt/libpng/lib/libpng.a" \
-      -DPNG_INCLUDE_DIR:PATH="/usr/local/opt/libpng/include" \
-      \
-      -DSDL2TTF_LIBRARY:STRING="-Wl,/usr/local/opt/freetype/lib/libfreetype.a -Wl,/usr/local/lib/libbz2.a -Wl,/usr/local/lib/libSDL2_ttf.a" \
-      -DSDL2TTF_INCLUDE_DIR:PATH="/usr/local/include/SDL2" \
-      \
-      -DSDL2GFX_LIBRARY:FILEPATH="/usr/local/lib/libSDL2_gfx.a" \
-      -DSDL2GFX_INCLUDE_DIR:PATH="/usr/local/include/SDL2" \
-      \
-      -DSDL2MIXER_LIBRARY:STRING="-Wl,/usr/local/lib/libvorbisfile.a -Wl,/usr/local/lib/libogg.a -Wl,/usr/local/lib/libvorbis.a -Wl,/usr/local/lib/libSDL2_mixer.a" \
-      -DSDL2MIXER_INCLUDE_DIR:PATH="/usr/local/include/SDL2" \
-      \
-      -DSDL2NET_LIBRARY:FILEPATH="/usr/local/lib/libSDL2_net.a" \
-      -DSDL2NET_INCLUDE_DIR:PATH="/usr/local/include/SDL2" \
-      \
-      -DINTL_LIBRARY:STRING="-Wl,/usr/local/opt/libiconv/lib/libiconv.a -Wl,/usr/local/opt/gettext/lib/libintl.a" \
-      -DINTL_INCLUDE_DIR:PATH="/usr/local/opt/gettext/include" \
-      \
-      -DGLEW_LIBRARY:FILEPATH="/usr/local/lib/libGLEW.a" \
-      -DGLEW_INCLUDE_DIR:PATH="/usr/local/include/gl" \
-      \
-      -DZLIB_LIBRARY:FILEPATH="/usr/local/opt/zlib/lib/libz.a" \
-      -DZLIB_INCLUDE_DIR:PATH="/usr/local/include" \
+      -DCMAKE_PREFIX_PATH:PATH="/usr/local"
 
-   make -j2
+   ninja
 
    echo "Done building."
 }

@@ -41,7 +41,6 @@ wl_library(economy
     wares_queue.cc
     wares_queue.h
   DEPENDS
-    base_deprecated
     base_exceptions
     base_log
     base_macros

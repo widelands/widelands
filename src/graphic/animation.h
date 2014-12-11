@@ -68,15 +68,11 @@ public:
 	/// so the caller has to adjust for the hotspot himself.
 	virtual const Point& hotspot() const = 0;
 
-	// An image frame that shows the first animation frame, colored using the
-	// 'player_clr'. This can be used in the UI (e.g. buildingwindow) to
-	// represent this image.
-	virtual const Image& representative_image(const RGBColor& player_clr) const = 0;
-
 	// An image frame that is guaranteed to be a path to a file on disc. This is
 	// a clutch needed to make sure that messages can always be displayed, even
 	// no image processing has taken place before.
 	virtual const Image& representative_image_from_disk() const = 0;
+	virtual const std::string& representative_image_from_disk_filename() const = 0;
 
 	/// Blit the animation frame that should be displayed at the given time index
 	/// so that the given point is at the top left of the frame. Srcrc defines

@@ -84,6 +84,8 @@ public:
 	void show_game_summary();
 
 protected:
+	void draw_overlay(RenderTarget &) override;
+
 	GameMainMenuWindows m_mainm_windows;
 	ChatProvider           * m_chatProvider;
 	std::string              m_building_census_format;

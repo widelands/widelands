@@ -20,13 +20,10 @@
 #ifndef WL_GRAPHIC_GRAPHIC_H
 #define WL_GRAPHIC_GRAPHIC_H
 
-#include <map>
 #include <memory>
-#include <vector>
 
 #include <SDL.h>
 
-#include "base/rect.h"
 #include "graphic/image_cache.h"
 #include "notifications/notifications.h"
 #include "notifications/note_ids.h"
@@ -38,7 +35,6 @@ class RenderTarget;
 class Surface;
 class TextureCache;
 class StreamWrite;
-struct TerrainTexture;
 
 // Will be send whenever the resolution changes.
 struct GraphicResolutionChanged {
@@ -83,13 +79,7 @@ public:
 
 	void save_png(const Image*, StreamWrite*) const;
 
-	// Creates a new TerrainTexture() with the given 'frametime' and using the given
-	// 'texture_files' as the images for it and returns it id.
-	uint32_t new_maptexture(const std::vector<std::string>& texture_files, uint32_t frametime);
-	void animate_maptextures(uint32_t time);
-
 	void screenshot(const std::string& fname) const;
-	TerrainTexture * get_maptexture_data(uint32_t id);
 
 private:
 	// Called when the resolution (might) have changed.
@@ -119,8 +109,6 @@ private:
 	std::unique_ptr<ImageCache> image_cache_;
 	/// This holds all animations.
 	std::unique_ptr<AnimationManager> animation_manager_;
-
-	std::vector<std::unique_ptr<TerrainTexture>> m_maptextures;
 };
 
 extern Graphic * g_gr;

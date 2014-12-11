@@ -46,7 +46,7 @@
 #include "ui_basic/textarea.h"
 
 inline EditorInteractive & MainMenuSaveMap::eia() {
-	return ref_cast<EditorInteractive, UI::Panel>(*get_parent());
+	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
 
 

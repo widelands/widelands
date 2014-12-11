@@ -39,6 +39,9 @@ struct ChatOverlay : public UI::Panel {
 	void draw(RenderTarget &) override;
 	void think() override;
 
+	// Check is position and size is still correct.
+	void recompute();
+
 private:
 	struct Impl;
 	std::unique_ptr<Impl> m;

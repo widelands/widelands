@@ -133,7 +133,7 @@ struct MapObjectDebugWindow : public UI::Window {
 	MapObjectDebugWindow(InteractiveBase & parent, Widelands::MapObject &);
 
 	InteractiveBase & ibase() {
-		return ref_cast<InteractiveBase, UI::Panel>(*get_parent());
+		return dynamic_cast<InteractiveBase&>(*get_parent());
 	}
 
 	void think() override;
@@ -212,7 +212,7 @@ struct FieldDebugWindow : public UI::Window {
 	FieldDebugWindow(InteractiveBase & parent, Widelands::Coords);
 
 	InteractiveBase & ibase() {
-		return ref_cast<InteractiveBase, UI::Panel>(*get_parent());
+		return dynamic_cast<InteractiveBase&>(*get_parent());
 	}
 
 	void think() override;
@@ -274,7 +274,7 @@ void FieldDebugWindow::think()
 
 	// Select information about the field itself
 	const Widelands::EditorGameBase & egbase =
-		ref_cast<InteractiveBase const, UI::Panel const>(*get_parent())
+		dynamic_cast<const InteractiveBase&>(*get_parent())
 		.egbase();
 	{
 		Widelands::PlayerNumber const owner = m_coords.field->get_owned_by();
@@ -360,12 +360,12 @@ void FieldDebugWindow::think()
 	{
 		Widelands::ResourceIndex ridx = m_coords.field->get_resources();
 		int ramount = m_coords.field->get_resources_amount();
-		int startingAmount = m_coords.field->get_starting_res_amount();
+		int initial_amount = m_coords.field->get_initial_res_amount();
 
 		str += (boost::format("Resource: %s\n")
 				  % ibase().egbase().world().get_resource(ridx)->name().c_str()).str();
 
-		str += (boost::format("  Amount: %i/%i\n") % ramount % startingAmount).str();
+		str += (boost::format("  Amount: %i/%i\n") % ramount % initial_amount).str();
 	}
 
 	m_ui_field.set_text(str.c_str());

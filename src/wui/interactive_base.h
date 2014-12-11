@@ -53,7 +53,6 @@ public:
 		dfShowCensus     = 1, ///< show census report on buildings
 		dfShowStatistics = 2, ///< show statistics report on buildings
 		dfDebug          = 4, ///< general debugging info
-		dfSpeed          = 8, ///< show game speed and speed controls
 	};
 
 	// Manages all UniqueWindows.
@@ -155,7 +154,6 @@ private:
 	void roadb_remove_overlay();
 	void cmd_map_object(const std::vector<std::string> & args);
 	void cmd_lua(const std::vector<std::string> & args);
-	void update_speedlabel();
 
 	struct SelData {
 		SelData
@@ -194,9 +192,6 @@ private:
 	OverlayManager::JobId m_road_buildhelp_overlay_jobid;
 	Widelands::CoordPath  * m_buildroad;         //  path for the new road
 	Widelands::PlayerNumber m_road_build_player;
-
-	UI::Textarea m_label_speed_shadow;
-	UI::Textarea m_label_speed;
 
 	UI::UniqueWindow::Registry m_debugconsole;
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;

@@ -62,13 +62,10 @@ struct ProgressWindow {
 
 private:
 	using VisualizationArray = std::vector<IProgressVisualization *>;
-	uint32_t  m_xres;
-	uint32_t  m_yres;
 	Point m_label_center;
 	Rect  m_label_rectangle;
 	VisualizationArray m_visualizations;
 	std::string m_background;
-	const Image* m_background_pic;
 
 	void draw_background(RenderTarget & rt, uint32_t xres, uint32_t yres);
 	void update(bool repaint);

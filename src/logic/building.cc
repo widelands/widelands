@@ -245,7 +245,7 @@ Building & BuildingDescr::create_constructionsite() const
 		m_tribe.get_building_descr
 			(m_tribe.safe_building_index("constructionsite"));
 	ConstructionSite & csite =
-		ref_cast<ConstructionSite, MapObject>(descr->create_object());
+		dynamic_cast<ConstructionSite&>(descr->create_object());
 	csite.set_building(*this);
 
 	return csite;
@@ -725,8 +725,7 @@ void Building::draw_help
 	(const EditorGameBase& game, RenderTarget& dst, const FCoords&, const Point& pos)
 {
 	const InteractiveGameBase & igbase =
-		ref_cast<InteractiveGameBase const, InteractiveBase const>
-			(*game.get_ibase());
+		dynamic_cast<const InteractiveGameBase&>(*game.get_ibase());
 	uint32_t const dpyflags = igbase.get_display_flags();
 
 	if (dpyflags & InteractiveBase::dfShowCensus) {
@@ -890,7 +889,7 @@ void Building::send_message
 	// animations of buildings so that the messages can still be displayed, even
 	// after reload.
 	const std::string& img = g_gr->animations().get_animation
-		(get_ui_anim()).representative_image_from_disk().hash();
+		(get_ui_anim()).representative_image_from_disk_filename();
 	std::string rt_description;
 	rt_description.reserve
 		(strlen("<rt image=") + img.size() + 1 +

@@ -21,8 +21,8 @@
 
 #include <boost/format.hpp>
 
-#include "base/deprecated.h"
 #include "base/log.h"
+#include "base/macros.h"
 #include "economy/wares_queue.h"
 #include "graphic/graphic.h"
 #include "logic/carrier.h"
@@ -444,7 +444,7 @@ int do_get_soldiers(lua_State* L, const Widelands::SoldierControl& sc, const Tri
 			lua_rawset(L, -3);
 		}
 	} else {
-		const SoldierDescr& soldier_descr = ref_cast<SoldierDescr const, WorkerDescr const>
+		const SoldierDescr& soldier_descr = dynamic_cast<const SoldierDescr&>
 			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
 
 		// Only return the number of those requested
@@ -470,7 +470,7 @@ int do_set_soldiers
 
 	const TribeDescr& tribe = owner->tribe();
 	const SoldierDescr& soldier_descr =  //  soldiers
-		ref_cast<SoldierDescr const, WorkerDescr const>
+		dynamic_cast<const SoldierDescr&>
 			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
 	SoldiersMap setpoints = m_parse_set_soldiers_arguments(L, soldier_descr);
 
@@ -517,7 +517,7 @@ int do_set_soldiers
 			}
 		} else if (d > 0) {
 			for (; d; --d) {
-				Soldier& soldier = ref_cast<Soldier, Worker>
+				Soldier& soldier = dynamic_cast<Soldier&>
 					(soldier_descr.create(egbase, *owner, nullptr, building_position));
 				soldier.set_level
 					(sp.first.hp, sp.first.at, sp.first.de, sp.first.ev);
@@ -1097,8 +1097,7 @@ int LuaMapObjectDescription::get_name(lua_State * L) {
 */
 int LuaMapObjectDescription::get_representative_image(lua_State * L) {
 	const std::string& filepath = g_gr->animations().get_animation
-		(get()->get_animation("idle")).representative_image_from_disk().hash();
-
+		(get()->get_animation("idle")).representative_image_from_disk_filename();
 	lua_pushstring(L, filepath);
 	return 1;
 }
@@ -2586,11 +2585,12 @@ int LuaRoad::create_new_worker
 	for (Path::StepVector::size_type i = 0; i < idle_index; ++i)
 		egbase.map().get_neighbour(idle_position, path[i], &idle_position);
 
-	Carrier & carrier = ref_cast<Carrier, Worker>
-		(wdes->create (egbase, r.owner(), &r, idle_position));
+	Carrier& carrier = dynamic_cast<Carrier&>
+		(wdes->create(egbase, r.owner(), &r, idle_position));
 
-	if (upcast(Game, game, &egbase))
+	if (upcast(Game, game, &egbase)) {
 		carrier.start_task_road(*game);
+	}
 
 	r.assign_carrier(carrier, 0);
 	return 0;
@@ -3501,6 +3501,7 @@ const PropertyType<LuaField> LuaField::Properties[] = {
 	PROP_RO(LuaField, viewpoint_y),
 	PROP_RW(LuaField, resource),
 	PROP_RW(LuaField, resource_amount),
+	PROP_RO(LuaField, initial_resource_amount),
 	PROP_RO(LuaField, claimers),
 	PROP_RO(LuaField, owner),
 	{nullptr, nullptr, nullptr},
@@ -3660,10 +3661,26 @@ int LuaField::set_resource_amount(lua_State * L) {
 		report_error(L, "Illegal amount: %i, must be >= 0 and <= %i", amount, max_amount);
 
 	field->set_resources(res, amount);
+	//in editor, reset also initial amount
+	EditorGameBase & egbase = get_egbase(L);
+	upcast(Game, game, &egbase);
+	if (!game) {
+		field->set_initial_res_amount(amount);
+	}
 
 	return 0;
 }
+/* RST
+	.. attribute:: initial_resource_amount
 
+		(RO) Starting value of resource. It is set be resource_amount
+
+		:see also: :attr:`resource`
+*/
+int LuaField::get_initial_resource_amount(lua_State * L) {
+	lua_pushuint32(L, fcoords(L).field->get_initial_res_amount());
+	return 1;
+}
 /* RST
 	.. attribute:: immovable
 

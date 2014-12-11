@@ -39,11 +39,9 @@ public:
 
 	virtual uint16_t width() const = 0;
 	virtual uint16_t height() const = 0;
-
-	// Internal functions needed for caching.
 	virtual Texture* texture() const = 0;
-	virtual const std::string& hash() const = 0;
 
+private:
 	DISALLOW_COPY_AND_ASSIGN(Image);
 };
 
