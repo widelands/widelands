@@ -22,6 +22,7 @@
 
 #include <cstring>
 #include <string>
+#include <unordered_map>
 
 #include <stdint.h>
 
@@ -57,45 +58,46 @@ public:
 	WareDescr(const LuaTable& t);
 	~WareDescr() override {}
 
-	const TribeDescr & tribe() const {return m_tribe;}
+	/// Returns the ware's generic mass name. Needed in the production programs.
+	const std::string& generic_name() const;
 
-	/// \return index to ware's icon inside picture stack
-	const Image* icon() const {return m_icon;}
-	std::string icon_name() const {return m_icon_fname;}
+	/// Returns the preciousness of the ware, or kInvalidWare if the tribe doesn't use the ware.
+	/// It is used by the computer player.
+	int preciousness(const std::string& tribename) const;
+
+	/// How much of the ware type an economy should store in warehouses.
+	/// The special value kInvalidWare means that the target quantity of this ware type will never be checked and should
+	/// not be configurable.
+	int default_target_quantity(const std::string& tribename) const;
 
 	/// \return ware's localized descriptive text
-	const std::string & helptext() const {return m_helptext;}
+	/// Prepends the default helptext to the 'tribename''s specific text if there is any.
+	const std::string& helptext(const std::string tribename) const;
 
-	/// How much of the ware type that an economy should store in warehouses.
-	/// The special value std::numeric_limits<uint32_t>::max() means that the
-	/// the target quantity of this ware type will never be checked and should
-	/// not be configurable.
-	uint32_t default_target_quantity() const {return m_default_target_quantity;}
-
-	bool has_demand_check() const {
-		return default_target_quantity() != std::numeric_limits<uint32_t>::max();
-	}
-
-	/// Called when a demand check for this ware type is encountered during
-	/// parsing. If there was no default target quantity set in the ware type's
-	/// configuration, set the default value 1.
-	void set_has_demand_check() {
-		if (m_default_target_quantity == std::numeric_limits<uint32_t>::max())
-			m_default_target_quantity = 1;
-	}
+	/// \return index to ware's icon inside picture stack
+	const Image* icon() const {return icon_;}
+	std::string icon_name() const {return icon_fname_;}
 
 	virtual void load_graphics();
 
-	/// returns the preciousness of the ware. It is used by the computer player
-	uint8_t preciousness() const {return m_preciousness;}
+	bool has_demand_check(const std::string& tribename) const;
+
+	/// Called when a demand check for this ware type is encountered during
+	/// parsing. If there was no default target quantity set in the ware type's
+	/// configuration for the 'tribename', sets the default value to 1.
+	void set_has_demand_check(const std::string& tribename);
 
 private:
-	const TribeDescr & m_tribe;
-	std::string m_helptext;   ///< Long descriptive text
-	uint32_t    m_default_target_quantity;
-	std::string m_icon_fname; ///< Filename of ware's main picture
-	const Image* m_icon;       ///< Index of ware's picture in picture stack
-	uint8_t     m_preciousness;
+	const std::string generic_name_;
+	// tribename, quantity. No default.
+	std::unordered_map<std::string, int> default_target_quantities_;
+	// tribename, preciousness. No default.
+	std::unordered_map<std::string, int> preciousnesses_;
+	// tribename or "default", helptext
+	std::unordered_map<std::string, std::string> helptexts_; ///< Long descriptive texts
+
+	std::string icon_fname_; ///< Filename of ware's main picture
+	const Image* icon_;       ///< Index of ware's picture in picture stack
 	DISALLOW_COPY_AND_ASSIGN(WareDescr);
 };
 
