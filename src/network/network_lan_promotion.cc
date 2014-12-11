@@ -22,7 +22,6 @@
 #include <cstdio>
 #include <cstring>
 
-#include "base/deprecated.h"
 #include "base/log.h"
 #include "base/macros.h"
 #include "build_info.h"

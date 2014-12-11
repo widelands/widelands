@@ -71,7 +71,7 @@ void MiniMap::View::draw(RenderTarget & dst)
 	                   Point((m_viewx - get_w() / 2), (m_viewy - get_h() / 2)),
 	                *m_flags | MiniMapLayer::ViewWindow));
 	// Give ownership of the texture to the new image
-	std::unique_ptr<const Image> im(new_in_memory_image("minimap", texture.release()));
+	std::unique_ptr<const Image> im(new_in_memory_image(texture.release()));
 	dst.blit(Point(), im.get());
 	im.reset();
 }
@@ -98,7 +98,7 @@ bool MiniMap::View::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 
 	m_ibase.egbase().map().normalize_coords(c);
 
-	ref_cast<MiniMap, UI::Panel>(*get_parent()).warpview(c.x * TRIANGLE_WIDTH, c.y * TRIANGLE_HEIGHT);
+	dynamic_cast<MiniMap&>(*get_parent()).warpview(c.x * TRIANGLE_WIDTH, c.y * TRIANGLE_HEIGHT);
 
 	return true;
 }

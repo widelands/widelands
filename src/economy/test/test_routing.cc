@@ -22,7 +22,6 @@
 #include <boost/bind.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include "base/deprecated.h"
 #include "economy/flag.h"
 #include "economy/iroute.h"
 #include "economy/itransport_cost_calculator.h"

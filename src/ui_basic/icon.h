@@ -26,7 +26,8 @@
 namespace UI {
 
 /**
- * A simple icon drawn in the center of the area
+ * A simple icon drawn in the center of the area. If the image is
+ * bigger than the icon, the image will be scaled to fit.
 */
 struct Icon : public Panel {
 	Icon

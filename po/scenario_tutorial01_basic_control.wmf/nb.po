@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2014-11-14 17:33+0000\n"
-"PO-Revision-Date: 2014-03-30 10:51+0000\n"
+"POT-Creation-Date: 2014-12-05 11:30+0000\n"
+"PO-Revision-Date: 2014-12-03 20:45+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-11-15 05:46+0000\n"
-"X-Generator: Launchpad (build 17241)\n"
+"X-Launchpad-Export-Date: 2014-12-06 05:48+0000\n"
+"X-Generator: Launchpad (build 17274)\n"
 "Language: nb\n"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:16
@@ -270,11 +270,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:157
 msgid "The Construction Site"
-msgstr ""
+msgstr "Byggeplassen"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:159
 msgid "Let's see the progress"
-msgstr ""
+msgstr "La oss se på fremgangen"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:160
 msgid ""
@@ -282,6 +282,8 @@ msgid ""
 "that are still missing grayed out. You can also see the progress of this "
 "construction site."
 msgstr ""
+"Hvis du klikker på byggeplassen, åpnes et lite vindu. Du kan se at varer som "
+"mangler er grået ut. Du kan også følge fremgangen for denne byggeplassen."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:162
 msgid ""
@@ -289,6 +291,9 @@ msgid ""
 "be closed that way, except the ones with instructions, like this one. Try it "
 "out!"
 msgstr ""
+"For å lukke vinduet, simpelthen høyreklikk på det. Alle vinduer i Widelands "
+"kan lukkes på denne måten, unntatt de med instruksjoner, som dette. Prøv det "
+"ut!"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:169
 msgid "Lumberjack is Done"
@@ -386,12 +391,12 @@ msgstr "Flytte synsfeltet med musen"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:215
 msgid "Use the minimap"
-msgstr ""
+msgstr "Bruke minikartet"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:217
 msgid ""
 "Very good. And now about the minimap. You can open it by clicking on the"
-msgstr ""
+msgstr "Veldig bra. Og nå til minikartet. Du kan åpne det ved å klikke på"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:219
 msgid ""
@@ -417,7 +422,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:228
 msgid "Learn to use the minimap"
-msgstr ""
+msgstr "Bruk av minikartet"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:231
 msgid ""
@@ -441,7 +446,7 @@ msgstr "Videre til steinbruddet"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:239
 msgid "Great. Now about that quarry…"
-msgstr ""
+msgstr "Flott. Så var det det steinbruddet..."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:247
 msgid "How to Build a Quarry"
@@ -502,7 +507,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:263
 msgid "Build a quarry next to the rocks"
-msgstr ""
+msgstr "Bygg et steinbrudd ved siden av steinene"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:265
 msgid "Build a Quarry"
@@ -513,6 +518,8 @@ msgid ""
 "There are some rocks to the west of your headquarters. Build a quarry right "
 "next to them."
 msgstr ""
+"Det er noen steiner vest for hovedkvarteret ditt. Bygg et steinbrudd like "
+"ved."
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:268
 msgid ""
@@ -836,7 +843,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:436
 msgid "Messages Arrived!"
-msgstr ""
+msgstr "Melding mottatt!"
 
 #: ../../campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:438
 msgid ""

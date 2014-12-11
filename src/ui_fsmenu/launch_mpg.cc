@@ -491,14 +491,11 @@ void FullscreenMenuLaunchMPG::refresh()
 		}
 	} else {
 		// Write client infos
-		std::string temp =
-			(settings.playernum > -1) && (settings.playernum < MAX_PLAYERS)
-			?
-			(boost::format(_("Player %i")) % (settings.playernum + 1)).str()
-			:
-			_("Spectator");
-		temp  = (boost::format(_("At the moment you are %s")) % temp.c_str()).str();
-		m_client_info.set_text(temp);
+		std::string client_info =
+			(settings.playernum >= 0) && (settings.playernum < MAX_PLAYERS) ?
+					(boost::format(_("You are Player %i.")) % (settings.playernum + 1)).str() :
+					_("You are a spectator.");
+		m_client_info.set_text(client_info);
 	}
 
 	m_ok.set_enabled(m_settings->can_launch());

@@ -22,9 +22,10 @@
 
 #include <memory>
 
+#include "base/point.h"
+
 class StreamWrite;
 class Texture;
-struct Point;
 
 namespace Widelands {
 	class Player;

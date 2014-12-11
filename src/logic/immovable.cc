@@ -25,7 +25,6 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
-#include "base/deprecated.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "config.h"
@@ -619,7 +618,7 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 {
 	BaseImmovable::Loader::load(fr);
 
-	Immovable & imm = ref_cast<Immovable, MapObject>(*get_object());
+	Immovable & imm = dynamic_cast<Immovable&>(*get_object());
 
 	if (version >= 5) {
 		PlayerNumber pn = fr.unsigned_8();

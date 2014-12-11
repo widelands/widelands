@@ -30,7 +30,6 @@
 #include <boost/unordered_map.hpp>
 #include <boost/signals2.hpp>
 
-#include "base/deprecated.h"
 #include "base/log.h"
 #include "base/macros.h"
 #include "logic/cmd_queue.h"
@@ -181,9 +180,9 @@ private:
 
 /// If you find a better way to do this that doesn't cost a virtual function
 /// or additional member variable, go ahead
-#define MO_DESCR(type) \
-public: const type & descr() const { \
-		return ref_cast<type const, MapObjectDescr const>(*m_descr);          \
+#define MO_DESCR(type)                     \
+public: const type & descr() const {       \
+		return dynamic_cast<const type&>(*m_descr); \
    }                                                                          \
 
 class MapObject {
@@ -311,7 +310,7 @@ public:
 		MapObjectLoader & mol   () {return *m_mol;}
 		MapObject            * get_object() {return m_object;}
 		template<typename T> T & get() {
-			return ref_cast<T, MapObject>(*m_object);
+			return dynamic_cast<T&>(*m_object);
 		}
 
 	protected:

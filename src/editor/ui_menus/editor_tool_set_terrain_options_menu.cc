@@ -30,7 +30,6 @@
 #include "graphic/graphic.h"
 #include "graphic/in_memory_image.h"
 #include "graphic/rendertarget.h"
-#include "graphic/terrain_texture.h"
 #include "graphic/texture.h"
 #include "logic/map.h"
 #include "logic/world/editor_category.h"
@@ -75,52 +74,78 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 		if (ter_is != check[checkfor])
 			continue;
 
-		const Image* tex = g_gr->images().get(
-		   g_gr->get_maptexture_data(terrain_descr.get_texture())->get_texture_image());
-		Texture* texture = new Texture(tex->width(), tex->height());
-		texture->blit(Point(0, 0), tex->texture(), Rect(0, 0, tex->width(), tex->height()), BlendMode::Copy);
-		Point pt(1, tex->height() - kSmallPicHeight - 1);
+		const Texture& terrain_texture = terrain_descr.get_texture(0);
+		Texture* texture = new Texture(terrain_texture.width(), terrain_texture.height());
+		texture->blit(Rect(0, 0, terrain_texture.width(), terrain_texture.height()),
+		              &terrain_texture,
+		              Rect(0, 0, terrain_texture.width(), terrain_texture.height()),
+		              1.,
+		              BlendMode::UseAlpha);
+		Point pt(1, terrain_texture.height() - kSmallPicHeight - 1);
 
 		if (ter_is == TerrainDescription::GREEN) {
-			texture->blit(pt, green->texture(), Rect(0, 0, green->width(), green->height()));
+			texture->blit(Rect(pt.x, pt.y, green->width(), green->height()),
+			              green->texture(),
+			              Rect(0, 0, green->width(), green->height()),
+			              1.,
+			              BlendMode::UseAlpha);
 			pt.x += kSmallPicWidth + 1;
 			/** TRANSLATORS: This is a terrain type tooltip in the editor */
 			tooltips.push_back(_("arable"));
 		} else {
 			if (ter_is & TerrainDescription::WATER) {
-				texture->blit(pt, water->texture(), Rect(0, 0, water->width(), water->height()));
+				texture->blit(Rect(pt.x, pt.y, water->width(), water->height()),
+				              water->texture(),
+				              Rect(0, 0, water->width(), water->height()),
+				              1.,
+				              BlendMode::UseAlpha);
 				pt.x += kSmallPicWidth + 1;
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
 				tooltips.push_back(_("aquatic"));
 			}
 			else if (ter_is & TerrainDescription::MOUNTAIN) {
-				texture->blit(pt, mountain->texture(), Rect(0, 0, mountain->width(), mountain->height()));
+				texture->blit(Rect(pt.x, pt.y, mountain->width(), mountain->height()),
+				              mountain->texture(),
+				              Rect(0, 0, mountain->width(), mountain->height()),
+				              1.,
+				              BlendMode::UseAlpha);
 				pt.x += kSmallPicWidth + 1;
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
 				tooltips.push_back(_("mountainous"));
 			}
 			if (ter_is & TerrainDescription::ACID) {
-				texture->blit(pt, dead->texture(), Rect(0, 0, dead->width(), dead->height()));
+				texture->blit(Rect(pt.x, pt.y, dead->width(), dead->height()),
+				              dead->texture(),
+				              Rect(0, 0, dead->width(), dead->height()),
+				              1.,
+				              BlendMode::UseAlpha);
 				pt.x += kSmallPicWidth + 1;
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
 				tooltips.push_back(_("dead"));
 			}
 			if (ter_is & TerrainDescription::UNPASSABLE) {
-				texture->blit(
-				   pt, unpassable->texture(), Rect(0, 0, unpassable->width(), unpassable->height()));
+				texture->blit(Rect(pt.x, pt.y, unpassable->width(), unpassable->height()),
+				              unpassable->texture(),
+				              Rect(0, 0, unpassable->width(), unpassable->height()),
+				              1.,
+				              BlendMode::UseAlpha);
 				pt.x += kSmallPicWidth + 1;
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
 				tooltips.push_back(_("unpassable"));
 			}
 			if (ter_is & TerrainDescription::DRY) {
-				texture->blit(pt, dry->texture(), Rect(0, 0, dry->width(), dry->height()));
+				texture->blit(Rect(pt.x, pt.y, dry->width(), dry->height()),
+				              dry->texture(),
+				              Rect(0, 0, dry->width(), dry->height()),
+				              1.,
+				              BlendMode::UseAlpha);
 				/** TRANSLATORS: This is a terrain type tooltip in the editor */
 				 tooltips.push_back(_("treeless"));
 			}
 		}
 
 		// Make sure we delete this later on.
-		offscreen_images->emplace_back(new_in_memory_image("dummy_hash", texture));
+		offscreen_images->emplace_back(new_in_memory_image(texture));
 		break;
 	}
 	/** TRANSLATORS: %1% = terrain name, %2% = list of terrain types  */

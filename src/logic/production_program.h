@@ -28,7 +28,6 @@
 
 #include <stdint.h>
 
-#include "base/deprecated.h"
 #include "base/log.h"
 #include "base/macros.h"
 #include "logic/bill_of_materials.h"

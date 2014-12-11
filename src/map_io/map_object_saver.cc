@@ -19,7 +19,6 @@
 
 #include "map_io/map_object_saver.h"
 
-#include "base/deprecated.h"
 #include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/fleet.h"

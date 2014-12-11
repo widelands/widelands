@@ -27,7 +27,6 @@
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/in_memory_image.h"
-#include "graphic/terrain_texture.h"
 #include "graphic/texture.h"
 #include "logic/field.h"
 #include "logic/map.h"
@@ -61,9 +60,8 @@ inline uint32_t calc_minimap_color
 	uint32_t pixelcolor = 0;
 
 	if (layers & MiniMapLayer::Terrain) {
-		const RGBColor color =
-		   g_gr->get_maptexture_data(egbase.world().terrain_descr(f.field->terrain_d()).get_texture())
-		      ->get_minimap_color(f.field->get_brightness());
+		const RGBColor& color =  egbase.world().terrain_descr(f.field->terrain_d()).get_minimap_color(
+		   f.field->get_brightness());
 
 		pixelcolor = SDL_MapRGBA(&format, color.r, color.g, color.b, 255);
 	}
@@ -310,7 +308,7 @@ void write_minimap_image
 
 	// Render minimap
 	std::unique_ptr<Texture> texture(draw_minimap(egbase, player, viewpoint, layers));
-	std::unique_ptr<const Image> image(new_in_memory_image("minimap", texture.release()));
+	std::unique_ptr<const Image> image(new_in_memory_image(texture.release()));
 	g_gr->save_png(image.get(), streamwrite);
 	image.reset();
 }

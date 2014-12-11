@@ -23,6 +23,7 @@
 #ifndef _WIN32
 #include <csignal>
 #endif
+#include <cstdlib>
 #include <cstring>
 #include <ctime>
 #include <fstream>
@@ -31,10 +32,13 @@
 #include <stdexcept>
 #include <string>
 
+#include <SDL_image.h>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/format.hpp>
+#include <boost/regex.hpp>
 #ifdef __APPLE__
 #include <mach-o/dyld.h>
+#include <unistd.h>
 #endif
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -142,27 +146,35 @@ std::string get_executable_directory()
 }
 
 bool is_absolute_path(const std::string& path) {
-	return path.size() >= 1 && path[0] == '/';
+	boost::regex re("^/|\\w:");
+	return boost::regex_search(path.c_str(), re);
 }
 
-/**
- * In case that the path is defined in a relative manner to the
- * executable file.
- *
- * Track down the executable file and append the path.
- */
-std::string relative_to_executable_to_absolute(const std::string& path)
+// Returns the absolute path of 'path' which might be relative.
+std::string absolute_path_if_not_windows(const std::string& path)
 {
 #ifndef _WIN32
 	char buffer[PATH_MAX];
-	realpath((get_executable_directory() + path).c_str(), buffer);
-	log("full path: %s\n", buffer);
+	realpath(path.c_str(), buffer);
+	log("Realpath: %s\n", buffer);
 	return std::string(buffer);
 #else
 	return path;
 #endif
 }
 
+// On Mac OS, we bundle the shared libraries that Widelands needs directly in
+// the executable directory. This is so that SDL_Image and SDL_Mixer can load
+// them dynamically. Unfortunately, linking them statically has led to problems
+// in the past.
+//
+// Changing LD_LIBRARY_PATH does not work, so we resort to the hack of chdir()
+// in the directory so that dlopen() finds the library.
+void changedir_on_mac() {
+#ifdef __APPLE__
+	chdir(get_executable_directory().c_str());
+#endif
+}
 }  // namespace
 
 void WLApplication::setup_homedir() {
@@ -256,6 +268,7 @@ m_redirected_stdio(false)
 	g_fs->add_file_system(&FileSystem::create(m_datadir));
 
 	init_language(); // search paths must already be set up
+	changedir_on_mac();
 	cleanup_replays();
 
 	// handling of graphics
@@ -483,48 +496,64 @@ bool WLApplication::poll_event(SDL_Event& ev) {
 	return true;
 }
 
-/**
- * Pump the event queue, get packets from the network, etc...
- */
+bool WLApplication::handle_key(const SDL_Keycode& keycode, int modifiers) {
+	const bool ctrl = (modifiers & KMOD_LCTRL) || (modifiers & KMOD_RCTRL);
+	switch (keycode) {
+	case SDLK_F10:
+		// exits the game.
+		if (ctrl) {
+			m_should_die = true;
+		}
+		return true;
+
+	case SDLK_F11:
+		// Takes a screenshot.
+		if (ctrl) {
+			if (g_fs->disk_space() < MINIMUM_DISK_SPACE) {
+				log("Omitting screenshot because diskspace is lower than %luMB\n",
+				    MINIMUM_DISK_SPACE / (1000 * 1000));
+				break;
+			}
+			g_fs->ensure_directory_exists(SCREENSHOT_DIR);
+			for (uint32_t nr = 0; nr < 10000; ++nr) {
+				const std::string filename = (boost::format(SCREENSHOT_DIR "/shot%04u.png") % nr).str();
+				if (g_fs->file_exists(filename)) {
+					continue;
+				}
+				g_gr->screenshot(filename);
+				break;
+			}
+		}
+		return true;
+
+	case SDLK_f: {
+		// toggle fullscreen
+		bool value = !g_gr->fullscreen();
+		g_gr->set_fullscreen(value);
+		g_options.pull_section("global").set_bool("fullscreen", value);
+		return true;
+	}
+
+	default:
+		break;
+	}
+	return false;
+}
+
 void WLApplication::handle_input(InputCallback const * cb)
 {
 	SDL_Event ev;
 	while (poll_event(ev)) {
 		switch (ev.type) {
-		case SDL_KEYDOWN:
-		case SDL_KEYUP:
-			if (ev.key.keysym.sym == SDLK_F10 &&
-			    (get_key_state(SDL_SCANCODE_LCTRL) || get_key_state(SDL_SCANCODE_RCTRL))) {
-				//  get out of here quick
-				if (ev.type == SDL_KEYDOWN)
-					m_should_die = true;
-				break;
-			}
-			if (ev.key.keysym.sym == SDLK_F11) { //  take screenshot
-				if (ev.type == SDL_KEYDOWN)
-				{
-					if (g_fs->disk_space() < MINIMUM_DISK_SPACE) {
-						log
-							("Omitting screenshot because diskspace is lower than %luMB\n",
-							 MINIMUM_DISK_SPACE / (1000 * 1000));
-						break;
-					}
-					g_fs->ensure_directory_exists(SCREENSHOT_DIR);
-					for (uint32_t nr = 0; nr < 10000; ++nr) {
-						const std::string filename = (boost::format(SCREENSHOT_DIR "/shot%04u.png")
-																% nr).str();
-						if (g_fs->file_exists(filename))
-							continue;
-						g_gr->screenshot(filename);
-						break;
-					}
-				}
-				break;
-			}
+		case SDL_KEYDOWN: {
+			bool handled = false;
 			if (cb && cb->key) {
-				cb->key(ev.type == SDL_KEYDOWN, ev.key.keysym);
+				handled = cb->key(ev.type == SDL_KEYDOWN, ev.key.keysym);
 			}
-			break;
+			if (!handled) {
+				handle_key(ev.key.keysym.sym, ev.key.keysym.mod);
+			}
+		} break;
 
 		case SDL_TEXTINPUT:
 			if (cb && cb->textinput) {
@@ -800,8 +829,6 @@ bool WLApplication::init_hardware() {
 	                   s.get_int("yres", DEFAULT_RESOLUTION_H),
 	                   s.get_bool("fullscreen", false));
 
-	// Start the audio subsystem
-	// must know the locale before calling this!
 	g_sound_handler.init(); //  TODO(unknown): memory leak!
 
 	return true;
@@ -812,8 +839,6 @@ void WLApplication::shutdown_hardware()
 	delete g_gr;
 	g_gr = nullptr;
 
-	SDL_QuitSubSystem(SDL_INIT_TIMER|SDL_INIT_VIDEO|SDL_INIT_JOYSTICK);
-
 #ifndef _WIN32
 	// SOUND can lock up with buggy SDL/drivers. we try to do the right thing
 	// but if it doesn't happen we will kill widelands anyway in 5 seconds.
@@ -823,6 +848,7 @@ void WLApplication::shutdown_hardware()
 
 	g_sound_handler.shutdown();
 
+	SDL_QuitSubSystem(SDL_INIT_TIMER|SDL_INIT_VIDEO|SDL_INIT_JOYSTICK);
 }
 
 /**
@@ -915,7 +941,11 @@ void WLApplication::handle_commandline_parameters()
 	} else {
 		m_datadir = is_absolute_path(INSTALL_DATADIR) ?
 		               INSTALL_DATADIR :
-		               relative_to_executable_to_absolute(INSTALL_DATADIR);
+		               get_executable_directory() + INSTALL_DATADIR;
+	}
+	if (!is_absolute_path(m_datadir)) {
+		m_datadir = absolute_path_if_not_windows(FileSystem::get_working_directory() +
+		                                         FileSystem::file_separator() + m_datadir);
 	}
 
 	if (m_commandline.count("verbose")) {
@@ -1037,39 +1067,44 @@ void WLApplication::mainmenu()
 		}
 
 		try {
-			switch (mm.run()) {
-			case FullscreenMenuMain::mm_playtutorial:
+			switch (static_cast<FullscreenMenuMain::MenuTarget>(mm.run())) {
+			case FullscreenMenuMain::MenuTarget::kTutorial:
 				mainmenu_tutorial();
 				break;
-			case FullscreenMenuMain::mm_singleplayer:
+			case FullscreenMenuMain::MenuTarget::kSinglePlayer:
 				mainmenu_singleplayer();
 				break;
-			case FullscreenMenuMain::mm_multiplayer:
+			case FullscreenMenuMain::MenuTarget::kMultiplayer:
 				mainmenu_multiplayer();
 				break;
-			case FullscreenMenuMain::mm_replay:
+			case FullscreenMenuMain::MenuTarget::kReplay:
 				replay();
 				break;
-			case FullscreenMenuMain::mm_options: {
+			case FullscreenMenuMain::MenuTarget::kOptions: {
 				Section & s = g_options.pull_section("global");
 				OptionsCtrl om(s);
 				break;
 			}
-			case FullscreenMenuMain::mm_readme: {
+			case FullscreenMenuMain::MenuTarget::kReadme: {
 				FullscreenMenuFileView ff("txts/README.lua");
 				ff.run();
 				break;
 			}
-			case FullscreenMenuMain::mm_license: {
+			case FullscreenMenuMain::MenuTarget::kLicense: {
 				FullscreenMenuFileView ff("txts/license");
 				ff.run();
 				break;
 			}
-			case FullscreenMenuMain::mm_editor:
+			case FullscreenMenuMain::MenuTarget::kAuthors: {
+				FullscreenMenuFileView ff("txts/developers");
+				ff.run();
+				break;
+			}
+			case FullscreenMenuMain::MenuTarget::kEditor:
 				mainmenu_editor();
 				break;
 			default:
-			case FullscreenMenuMain::mm_exit:
+			case FullscreenMenuMain::MenuTarget::kExit:
 				return;
 			}
 		} catch (const WLWarning & e) {
@@ -1138,26 +1173,23 @@ void WLApplication::mainmenu_singleplayer()
 	//  This is the code returned by UI::Panel::run() when the panel is dying.
 	//  Make sure that the program exits when the window manager says so.
 	static_assert
-		(FullscreenMenuSinglePlayer::Back == UI::Panel::dying_code, "Panel should be dying.");
+		(static_cast<int32_t>(FullscreenMenuSinglePlayer::MenuTarget::kBack) == UI::Panel::dying_code,
+		 "Panel should be dying.");
 
 	for (;;) {
-		int32_t code;
-		{
-			FullscreenMenuSinglePlayer single_player_menu;
-			code = single_player_menu.run();
-		}
-		switch (code) {
-		case FullscreenMenuSinglePlayer::Back:
+		FullscreenMenuSinglePlayer single_player_menu;
+		switch (static_cast<FullscreenMenuSinglePlayer::MenuTarget>(single_player_menu.run())) {
+		case FullscreenMenuSinglePlayer::MenuTarget::kBack:
 			return;
-		case FullscreenMenuSinglePlayer::New_Game:
+		case FullscreenMenuSinglePlayer::MenuTarget::kNewGame:
 			if (new_game())
 				return;
 			break;
-		case FullscreenMenuSinglePlayer::Load_Game:
+		case FullscreenMenuSinglePlayer::MenuTarget::kLoadGame:
 			if (load_game())
 				return;
 			break;
-		case FullscreenMenuSinglePlayer::Campaign:
+		case FullscreenMenuSinglePlayer::MenuTarget::kCampaign:
 			if (campaign_game())
 				return;
 			break;
@@ -1178,13 +1210,13 @@ void WLApplication::mainmenu_multiplayer()
 	for (;;) { // stay in menu until player clicks "back" button
 		bool internet = false;
 		FullscreenMenuMultiPlayer mp;
-		switch (mp.run()) {
-			case FullscreenMenuMultiPlayer::Back:
+		switch (static_cast<FullscreenMenuMultiPlayer::MenuTarget>(mp.run())) {
+			case FullscreenMenuMultiPlayer::MenuTarget::kBack:
 				return;
-			case FullscreenMenuMultiPlayer::Metaserver:
+			case FullscreenMenuMultiPlayer::MenuTarget::kMetaserver:
 				internet = true;
 				break;
-			case FullscreenMenuMultiPlayer::Lan:
+			case FullscreenMenuMultiPlayer::MenuTarget::kLan:
 				break;
 			default:
 				assert(false);
@@ -1254,21 +1286,18 @@ void WLApplication::mainmenu_editor()
 	//  This is the code returned by UI::Panel::run() when the panel is dying.
 	//  Make sure that the program exits when the window manager says so.
 	static_assert
-		(FullscreenMenuEditor::Back == UI::Panel::dying_code, "Editor should be dying.");
+		(static_cast<int32_t>(FullscreenMenuEditor::MenuTarget::kBack) == UI::Panel::dying_code,
+		 "Editor should be dying.");
 
 	for (;;) {
-		int32_t code;
-		{
-			FullscreenMenuEditor editor_menu;
-			code = editor_menu.run();
-		}
-		switch (code) {
-		case FullscreenMenuEditor::Back:
+		FullscreenMenuEditor editor_menu;
+		switch (static_cast<FullscreenMenuEditor::MenuTarget>(editor_menu.run())) {
+		case FullscreenMenuEditor::MenuTarget::kBack:
 			return;
-		case FullscreenMenuEditor::New_Map:
+		case FullscreenMenuEditor::MenuTarget::kNewMap:
 			EditorInteractive::run_editor(m_filename, m_script_to_run);
 			return;
-		case FullscreenMenuEditor::Load_Map: {
+		case FullscreenMenuEditor::MenuTarget::kLoadMap: {
 			std::string filename;
 			{
 				SinglePlayerGameSettingsProvider sp;

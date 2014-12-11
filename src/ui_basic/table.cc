@@ -21,7 +21,6 @@
 
 #include <boost/bind.hpp>
 
-#include "base/deprecated.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"

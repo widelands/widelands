@@ -19,47 +19,6 @@
 
 #include "base/point.h"
 
-#include <limits>
-
-Point::Point() : x(0), y(0) {}
-
-Point::Point(const int32_t px, const int32_t py) : x(px), y(py) {}
-
-Point Point::invalid() {
-	return Point(std::numeric_limits<int32_t>::max(), std::numeric_limits<int32_t>::max());
-}
-
-bool Point::operator == (const Point& other) const {
-	return x == other.x && y == other.y;
-}
-bool Point::operator != (const Point& other) const {
-	return !(*this == other);
-}
-
-Point Point::operator +(const Point& other) const {
-	return Point(x + other.x, y + other.y);
-}
-
-Point Point::operator -() const {
-	return Point(-x, -y);
-}
-
-Point Point::operator -(const Point& other) const {
-	return Point(x - other.x, y - other.y);
-}
-
-Point& Point::operator += (const Point& other) {
-	x += other.x;
-	y += other.y;
-	return *this;
-}
-
-Point& Point::operator -= (const Point& other) {
-	x -= other.x;
-	y -= other.y;
-	return *this;
-}
-
 Point middle(const Point& a, const Point& b) {
-	return Point((a.x + b.x) >> 1, (a.y + b.y) >> 1);
+	return Point((a.x + b.x) / 2, (a.y + b.y) / 2);
 }

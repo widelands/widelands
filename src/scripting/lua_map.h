@@ -948,6 +948,7 @@ public:
 	int set_resource(lua_State *);
 	int get_resource_amount(lua_State *);
 	int set_resource_amount(lua_State *);
+	int get_initial_resource_amount(lua_State *);
 	int get_claimers(lua_State *);
 	int get_owner(lua_State *);
 

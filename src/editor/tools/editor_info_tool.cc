@@ -99,7 +99,6 @@ int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
 	   center.triangle.t == Widelands::TCoords<>::D ? tf.terrain_d() : tf.terrain_r());
 
 	buf += "• " + (boost::format(_("Name: %s")) % ter.descname()).str() + "\n";
-	buf += "• " + (boost::format(_("Texture Number: %i")) % ter.get_texture()).str() + "\n";
 
 	// *** Resources info
 	buf += std::string("\n") + _("Resources:") + "\n";
