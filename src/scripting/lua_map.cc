@@ -2346,7 +2346,6 @@ const MethodType<LuaFlag> LuaFlag::Methods[] = {
 const PropertyType<LuaFlag> LuaFlag::Properties[] = {
 	PROP_RO(LuaFlag, roads),
 	PROP_RO(LuaFlag, building),
-	PROP_RO(LuaFlag, has_warehouse),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -2381,7 +2380,6 @@ int LuaFlag::get_roads(lua_State * L) {
 			}
 		}
 		return 1;
-
 }
 
 /* RST
@@ -2402,28 +2400,6 @@ int LuaFlag::get_building(lua_State * L) {
 	}
 	return 1;
 
-}
-
-/* RST
-	.. attribute:: has_warehouse
-
-		(RO) does the economy has a warehouse? (~is a flag
-		connected to any warehouse?)
-
-		: returns number of warehouses, or nil if no warehouse
-*/
-int LuaFlag::get_has_warehouse(lua_State * L) {
-
-	EditorGameBase & egbase = get_egbase(L);
-	Flag * f = get(L, egbase);
-	int32_t warehouses = f->get_economy()->warehouses().size();
-
-	if (warehouses == 0) {
-		return 0;
-	} else {
-		lua_pushint32(L, warehouses);
-	}
-	return 1;
 }
 /*
  ==========================================================

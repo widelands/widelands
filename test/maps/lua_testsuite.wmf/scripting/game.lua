@@ -22,6 +22,6 @@ function flag_tests:roads_test()
    self.f2 = self.f1.fields[1].brn.brn.brn.immovable
    assert_not_nil(self.f2.roads.tl)
    assert_not_nil(self.f2.roads.tl.start_flag)
-   assert_not_nil(self.f2.has_warehouse)
    assert_not_nil(self.f1.building)
+   assert_equal(self.f2.debug_economy,self.w.debug_economy)
 end

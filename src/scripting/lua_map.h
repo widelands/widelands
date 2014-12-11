@@ -597,24 +597,11 @@ public:
 	 * Properties
 	 */
 	// NOCOM(#codereview): Why are these methods in this class? They belong in LuaFlag in lua_map, right?
-	int get_roads(lua_State* L);
+	// this is LuaFlag, is not it? //NOCOM
+	int get_roads(lua_State * L);
 	// NOCOM(#codereview): add a test for this method.
-	int get_building(lua_State* L);
-
-	// NOCOM(#codereview): This method is a bad idea. While roads and building are indeed properties of a flag, if the economy
-	// of the flag has a warehouse is definitively not something that should be exposed this way. There are two ways to go about this
-	// problem, a correct and a quick one:
-	// 1) the correct one would be to wrap economy for lua and give each playerimmovable a property that exposes it, something like
-	// map:get_field(1,1).immovable.economy:get_buildings("warehouse") -> count the length to answer the question.
-	// 2) the quick one: do not wrap the economy, but just return an economy id
-	// that can be compared. This is already implemented as a non stable API
-	// which can always be replaced by 1. You can use flag.debug_economy and
-	// player:get_buildings("warehouse") to check if any warehouse has the same
-	// debug_economy.
-	// Tl/dr: remove this method, use debug_economy instead. If you feel like it
-	// wrap economy (in a separate branch).
-	int get_has_warehouse(lua_State* L);
-
+	// see game.lua    //NOCOM
+	int get_building(lua_State * L);
 	/*
 	 * Lua Methods
 	 */
