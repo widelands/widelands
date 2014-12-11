@@ -22,7 +22,6 @@
 #include <boost/format.hpp>
 
 #include "base/log.h"
-//#include "economy/economy.h" NOCOM - is needed?
 #include "base/macros.h"
 #include "economy/wares_queue.h"
 #include "graphic/graphic.h"
