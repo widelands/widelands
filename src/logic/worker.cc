@@ -32,9 +32,7 @@
 #include "economy/portdock.h"
 #include "economy/road.h"
 #include "economy/transfer.h"
-#include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
-#include "graphic/text/font_set.h"
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -936,9 +934,8 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 			// that might not be around forever.
 			const std::string message =
 					(boost::format("<rt image=world/resources/pics/%s4.png>"
-										"<p font-face=%s font-size=14>%s</p></rt>")
+										"<p font-face=serif font-size=14>%s</p></rt>")
 					 % rdescr->name().c_str()
-					 % UI::g_fh1->fontset().serif()
 					 % _("A geologist found resources.")).str();
 
 			//  We should add a message to the player's message queue - but only,

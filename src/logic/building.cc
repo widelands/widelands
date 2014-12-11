@@ -887,7 +887,6 @@ void Building::send_message
 	 uint32_t throttle_time,
 	 uint32_t throttle_radius)
 {
-	const std::string& font_face = UI::g_fh1->fontset().serif().c_str();
 	// TODO(sirver): add support into the font renderer to get to representative
 	// animations of buildings so that the messages can still be displayed, even
 	// after reload.
@@ -896,9 +895,7 @@ void Building::send_message
 	std::string rt_description;
 	rt_description.reserve
 		(strlen("<rt image=") + img.size() + 1 +
-		 strlen("<p font-size=14 font-face=") +
-		 font_face.size() +
-		 strlen(">") +
+		 strlen("<p font-size=14 font-face=serif>") +
 		 description.size() +
 		 strlen("</p></rt>"));
 	rt_description  = "<rt image=";
@@ -909,8 +906,8 @@ void Building::send_message
 		for (;                                 *it == '?'; --it)
 			*it = '0';
 	}
-	rt_description = (boost::format("%s><p font-face=%s font-size=14>%s</p></rt>")
-			% rt_description % font_face % description).str();
+	rt_description = (boost::format("%s><p font-face=serif font-size=14>%s</p></rt>")
+			% rt_description % description).str();
 
 	Message * msg = new Message
 		(msgsender, game.get_gametime(), title, rt_description,

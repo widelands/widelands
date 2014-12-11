@@ -32,17 +32,15 @@
 std::string as_game_tip(const std::string& txt) {
 	static boost::format f
 		("<rt padding_l=48 padding_t=28 padding_r=48 padding_b=28>"
-		 "<p align=center><font color=21211b face=%s size=16>%s</font></p></rt>");
+		 "<p align=center><font color=21211b face=serif size=16>%s</font></p></rt>");
 
-	f % (UI::g_fh1->fontset()).serif();
 	f % txt;
 	return f.str();
 }
 
 std::string as_window_title(const std::string& txt) {
-	static boost::format f("<rt><p><font face=%s size=13 bold=1 color=%02x%02x%02x>%s</font></p></rt>");
+	static boost::format f("<rt><p><font face=serif size=13 bold=1 color=%02x%02x%02x>%s</font></p></rt>");
 
-	f % (UI::g_fh1->fontset()).serif();
 	f % int(UI_FONT_CLR_FG.r) % int(UI_FONT_CLR_FG.g) % int(UI_FONT_CLR_FG.b);
 	f % txt;
 	return f.str();
@@ -50,9 +48,8 @@ std::string as_window_title(const std::string& txt) {
 std::string as_uifont(const std::string & txt, int size, const RGBColor& clr) {
 	// UI Text is always bold due to historic reasons
 	static boost::format
-			f("<rt><p><font face=%s size=%i bold=1 shadow=1 color=%02x%02x%02x>%s</font></p></rt>");
+			f("<rt><p><font face=serif size=%i bold=1 shadow=1 color=%02x%02x%02x>%s</font></p></rt>");
 
-	f % (UI::g_fh1->fontset()).serif();
 	f % size;
 	f % int(clr.r) % int(clr.g) % int(clr.b);
 	f % txt;
@@ -60,9 +57,8 @@ std::string as_uifont(const std::string & txt, int size, const RGBColor& clr) {
 }
 
 std::string as_tooltip(const std::string & txt) {
-	static boost::format f("<rt><p><font face=%s size=%i bold=1 color=%02x%02x%02x>%s</font></p></rt>");
+	static boost::format f("<rt><p><font face=serif size=%i bold=1 color=%02x%02x%02x>%s</font></p></rt>");
 
-	f % (UI::g_fh1->fontset()).serif();
 	f % UI_FONT_SIZE_SMALL;
 	f % int(UI_FONT_TOOLTIP_CLR.r) % int(UI_FONT_TOOLTIP_CLR.g) % int(UI_FONT_TOOLTIP_CLR.b);
 	f % txt;
@@ -71,8 +67,7 @@ std::string as_tooltip(const std::string & txt) {
 
 std::string as_waresinfo(const std::string & txt) {
 	static boost::format f
-		("<rt><p><font face=%s size=10 bold=0 color=%02x%02x%02x>%s</font></p></rt>");
-	f % (UI::g_fh1->fontset()).condensed();
+		("<rt><p><font face=condensed size=10 bold=0 color=%02x%02x%02x>%s</font></p></rt>");
 	f % int(UI_FONT_TOOLTIP_CLR.r) % int(UI_FONT_TOOLTIP_CLR.g) % int(UI_FONT_TOOLTIP_CLR.b);
 	f % txt;
 	return f.str();

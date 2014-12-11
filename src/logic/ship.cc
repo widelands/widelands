@@ -29,9 +29,7 @@
 #include "economy/fleet.h"
 #include "economy/portdock.h"
 #include "economy/wares_queue.h"
-#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
-#include "graphic/text/font_set.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/constructionsite.h"
@@ -907,14 +905,12 @@ void Ship::send_message
 	 const std::string & title, const std::string & description,
 	 const std::string & picture)
 {
-	const std::string& font_face = UI::g_fh1->fontset().serif();
 	std::string rt_description;
 	if (picture.size() > 3) {
-		rt_description = (boost::format("<rt image=pics/%s><p font-face=%s font-size=14>")
-								% picture % font_face).str();
+		rt_description = (boost::format("<rt image=pics/%s><p font-face=serif font-size=14>")
+								% picture).str();
 	} else {
-		rt_description = (boost::format("<rt><p font-face=%s font-size=14>")
-								% font_face).str();
+		rt_description = "<rt><p font-face=serif font-size=14>";
 	}
 	rt_description += description;
 	rt_description += "</p></rt>";

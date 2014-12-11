@@ -30,7 +30,6 @@
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/panel.h"
 
@@ -70,8 +69,7 @@ enum UNIT {
 };
 
 string ytick_text_style(const string& text, const RGBColor& clr) {
-	static boost::format f("<rt><p><font face=%s size=13 color=%02x%02x%02x>%s</font></p></rt>");
-	f % UI::g_fh1->fontset().condensed();
+	static boost::format f("<rt><p><font face=condensed size=13 color=%02x%02x%02x>%s</font></p></rt>");
 	f % int(clr.r) % int(clr.g) % int(clr.b);
 	f % text;
 	return f.str();
