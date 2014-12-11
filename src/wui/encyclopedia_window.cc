@@ -108,7 +108,7 @@ void EncyclopediaWindow::ware_selected(uint32_t) {
 	const TribeDescr & tribe = iaplayer().player().tribe();
 	selectedWare = tribe.get_ware_descr(wares.get_selected());
 
-	descrTxt.set_text(selectedWare->helptext());
+	descrTxt.set_text(selectedWare->helptext(tribe.name()));
 
 	prodSites.clear();
 	condTable.clear();

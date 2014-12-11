@@ -451,7 +451,7 @@ WaresDisplay::~WaresDisplay()
 }
 
 std::string WaresDisplay::info_for_ware(Widelands::WareIndex ware) {
-	uint32_t totalstock = 0;
+	int totalstock = 0;
 	for (Widelands::WareIndex i = 0; i < m_warelists.size(); ++i)
 		totalstock += m_warelists[i]->stock(ware);
 	return boost::lexical_cast<std::string>(totalstock);

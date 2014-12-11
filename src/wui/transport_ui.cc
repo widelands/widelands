@@ -81,17 +81,16 @@ private:
 			 AbstractWaresDisplay(parent, x, y, tribe, type, selectable),
 			 m_economy(economy)
 		{
+			const Widelands::TribeDescr& owner_tribe = m_economy.owner().tribe();
 			if (type == Widelands::wwWORKER) {
-				WareIndex nr_wares = m_economy.owner().tribe().get_nrworkers();
-				for (WareIndex i = 0; i < nr_wares; ++i) {
-					if (!m_economy.owner().tribe().get_worker_descr(i)->has_demand_check()) {
+				for (WareIndex i = 0; i < owner_tribe.get_nrworkers(); ++i) {
+					if (!owner_tribe.get_worker_descr(i)->has_demand_check()) {
 						hide_ware(i);
 					}
 				}
 			} else {
-				WareIndex nr_wares = m_economy.owner().tribe().get_nrwares();
-				for (WareIndex i = 0; i < nr_wares; ++i) {
-					if (!m_economy.owner().tribe().get_ware_descr(i)->has_demand_check()) {
+				for (WareIndex i = 0; i < owner_tribe.get_nrwares(); ++i) {
+					if (!owner_tribe.get_ware_descr(i)->has_demand_check(owner_tribe.name())) {
 						hide_ware(i);
 					}
 				}

@@ -146,7 +146,7 @@ ProductionProgram::ActReturn::Condition * create_economy_condition
 				char const * const type_name = next_word(parameters, reached_end);
 				WareIndex index = tribe.ware_index(type_name);
 				if (index != INVALID_INDEX) {
-					tribe.set_ware_type_has_demand_check(index);
+					tribe.set_ware_type_has_demand_check(index, tribe.name());
 					return
 						new ProductionProgram::ActReturn::EconomyNeedsWare
 							(index);

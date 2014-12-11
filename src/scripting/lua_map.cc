@@ -33,6 +33,7 @@
 #include "logic/mapregion.h"
 #include "logic/player.h"
 #include "logic/soldier.h"
+#include "logic/tribes/tribes.h"
 #include "logic/warelist.h"
 #include "logic/widelands_geometry.h"
 #include "logic/world/resource_description.h"
@@ -1743,17 +1744,14 @@ const PropertyType<LuaWareDescription> LuaWareDescription::Properties[] = {
 
 void LuaWareDescription::__persist(lua_State* L) {
 	const WareDescr* descr = get();
-	PERS_STRING("tribe", descr->tribe().name());
 	PERS_STRING("name", descr->name());
 }
 
 void LuaWareDescription::__unpersist(lua_State* L) {
-	std::string name, tribe_name;
-	UNPERS_STRING("tribe", tribe_name);
+	std::string name;
 	UNPERS_STRING("name", name);
-	const TribeDescr* tribe = get_egbase(L).get_tribe(tribe_name);
-	WareIndex idx = tribe->safe_ware_index(name.c_str());
-	set_description_pointer(tribe->get_ware_descr(idx));
+	WareIndex idx = get_egbase(L).tribes().safe_ware_index(name.c_str());
+	set_description_pointer(get_egbase(L).tribes().get_ware_descr(idx));
 }
 
 

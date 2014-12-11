@@ -85,8 +85,8 @@ struct TribeDescr {
 	WareDescr const * get_ware_descr(const WareIndex& index) const {
 		return m_wares.get(index);
 	}
-	void set_ware_type_has_demand_check(const WareIndex& index) const {
-		m_wares.get(index)->set_has_demand_check();
+	void set_ware_type_has_demand_check(const WareIndex& index, const std::string& tribename) const {
+		m_wares.get(index)->set_has_demand_check(tribename);
 	}
 	void set_worker_type_has_demand_check(const WareIndex& index) const {
 		m_workers.get(index)->set_has_demand_check();

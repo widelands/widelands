@@ -63,7 +63,7 @@ inline Duration endless() {return 0xffffffff;}
 using Serial = uint32_t; /// Serial number for MapObject.
 
 constexpr uint8_t INVALID_INDEX = std::numeric_limits<uint8_t>::max();
-using WareIndex = uint8_t;
+using WareIndex = int;
 using BuildingIndex = uint8_t;
 using Direction = uint8_t;
 

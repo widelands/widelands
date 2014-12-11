@@ -17,13 +17,46 @@
  *
  */
 
-#include "logic/tribe/tribe.h"
+#include "logic/tribes/tribes.h"
 
 #include "logic/ware_descr.h"
 
-Tribe::Tribe() : wares_(new DescriptionMaintainer<WareDescr>()) {
+namespace Widelands {
+
+Tribes::Tribes() : wares_(new DescriptionMaintainer<WareDescr>()) {
 }
 
-void Tribe::add_ware_type(const LuaTable& t) {
+void Tribes::add_ware_type(const LuaTable& t) {
 	wares_->add(new WareDescr(t));
 }
+
+WareIndex Tribes::get_nrwares() const {
+	return wares_.get_nitems();
+}
+
+WareIndex Tribes::safe_ware_index(const std::string& warename) const {
+	const WareIndex result = ware_index(warename);
+	if (result == -1) {
+		throw GameDataError("Unknown ware type \"%s\"", warename.c_str());
+	}
+	return result;
+}
+
+WareIndex Tribes::ware_index(const std::string& warename) const {
+	int result = -1;
+	for (size_t i = 0; i < wares_.get_nitems(); ++i) {
+		if (wares_.get(i)->name() == warename.name()) {
+			return result;
+		}
+	}
+}
+
+WareDescr const * Tribes::get_ware_descr(WareIndex ware_index) const {
+	return wares_.get(ware_index);
+}
+
+void set_ware_type_has_demand_check(WareIndex ware_index, const std::string& tribename) const {
+	wares_.get(ware_index)->set_has_demand_check(tribename);
+}
+
+} // namespace Widelands

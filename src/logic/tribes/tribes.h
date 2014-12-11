@@ -26,6 +26,8 @@
 #include "logic/description_maintainer.h"
 #include "scripting/lua_table.h"
 
+constexpr const Widelands::WareIndex kInvalidWare = -1;
+
 namespace Widelands {
 
 class WareDescr;
@@ -38,6 +40,16 @@ public:
 
 	/// Adds this ware type to the tribe description.
 	void add_ware_type(const LuaTable& table);
+
+	// NOCOM(#GunChleoc): Do we want all wares for all tribes here?
+	WareIndex get_nrwares() const;
+
+	WareIndex safe_ware_index(const std::string & warename) const;
+	WareIndex ware_index(const std::string & warename) const;
+
+	WareDescr const * get_ware_descr(WareIndex ware_index) const;
+
+	void set_ware_type_has_demand_check(WareIndex ware_index, const std::string& tribename);
 
 private:
 	std::unique_ptr<DescriptionMaintainer<WareDescr>> wares_;
