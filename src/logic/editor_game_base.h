@@ -49,6 +49,7 @@ class Map;
 struct ObjectManager;
 class Player;
 struct PlayerImmovable;
+class Tribes;
 struct TribeDescr;
 struct Flag;
 struct AttackController;
@@ -105,7 +106,7 @@ public:
 	void remove_player(PlayerNumber);
 	Player* add_player(PlayerNumber,
 	                   uint8_t initialization_index,
-	                   const std::string& tribe,
+							 const std::string& tribes,
 	                   const std::string& name,
 	                   TeamNumber team = 0);
 	Player* get_player(int32_t n) const;
@@ -161,7 +162,7 @@ public:
 	void remove_trackpointer(uint32_t serial);
 
 	// Manually load a tribe into memory. Used by the editor
-	const TribeDescr& manually_load_tribe(const std::string& tribe);
+	const TribeDescr& manually_load_tribe(const std::string& tribes);
 	const TribeDescr& manually_load_tribe(PlayerNumber const p) {
 		return manually_load_tribe(map().get_scenario_player_tribe(p));
 	}
@@ -205,6 +206,12 @@ public:
 
 	// Returns the world that can be modified. Prefer world() whenever possible.
 	World* mutable_world();
+
+	// Returns the tribe.
+	const Tribes& tribes() const;
+
+	// Returns the mutable tribe. Prefer tribes() whenever possible.
+	Tribes* mutable_tribes();
 
 protected:
 	using TribeVector = std::vector<TribeDescr*>;
@@ -256,6 +263,7 @@ private:
 	std::unique_ptr<PlayersManager> player_manager_;
 
 	std::unique_ptr<World> world_;
+	std::unique_ptr<Tribes> tribe_;
 	InteractiveBase* ibase_;
 	Map* map_;
 

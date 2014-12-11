@@ -212,6 +212,8 @@ wl_library(logic
     world/terrain_description.h
     world/world.cc
     world/world.h
+    tribes/tribes.h
+    tribes/tribes.cc
   # TODO(sirver): Uses SDL2 only on WIN32 for a dirty hack.
   USES_SDL2
   DEPENDS

@@ -122,6 +122,31 @@ public:
 	 */
 };
 
+class LuaTribes : public LuaRootModuleClass {
+public:
+	LUNA_CLASS_HEAD(LuaTribes);
+	const char * get_modulename() override {return "";}
+
+	LuaTribes() {}
+	LuaTribes(lua_State * L);
+
+	void __persist(lua_State * L) override;
+	void __unpersist(lua_State * L) override;
+
+	/*
+	 * Properties
+	 */
+
+	/*
+	 * Lua methods
+	 */
+	int new_ware_type(lua_State* L);
+
+	/*
+	 * C methods
+	 */
+};
+
 void luaopen_wlroot(lua_State *, bool in_editor);
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_ROOT_H

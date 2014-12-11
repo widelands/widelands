@@ -41,9 +41,9 @@
 namespace Widelands {
 	struct SoldierDescr;
 	struct BuildingDescr;
-	struct WareDescr;
-	class WorkerDescr;
 	class Bob;
+	class WareDescr;
+	class WorkerDescr;
 }
 
 namespace LuaMaps {

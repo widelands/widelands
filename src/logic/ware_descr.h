@@ -27,10 +27,12 @@
 
 #include "base/macros.h"
 #include "logic/instances.h"
+#include "scripting/lua_table.h"
 
+class Image;
+class LuaTable;
 class Profile;
 class Section;
-class Image;
 
 #define WARE_MENU_PIC_WIDTH   24  //< Default width for ware's menu icons
 #define WARE_MENU_PIC_HEIGHT  24  //< Default height for ware's menu icons
@@ -45,11 +47,14 @@ struct TribeDescr;
  * Wares can be stored in warehouses. They can be transferred across an
  * Economy. They can be traded.
 */
-struct WareDescr : public MapObjectDescr {
+class WareDescr : public MapObjectDescr {
+public:
 	WareDescr
 		(const TribeDescr & tribe, char const * const name,
 		 char const * const descname, const std::string & directory,
+
 		 Profile &, Section & global_s);
+	WareDescr(const LuaTable& t);
 	~WareDescr() override {}
 
 	const TribeDescr & tribe() const {return m_tribe;}
