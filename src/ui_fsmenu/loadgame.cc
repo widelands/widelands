@@ -34,7 +34,6 @@
 #include "game_io/game_preload_packet.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
-#include "graphic/image_transformations.h"
 #include "graphic/in_memory_image.h"
 #include "graphic/text_constants.h"
 #include "graphic/texture.h"
@@ -321,8 +320,7 @@ void FullscreenMenuLoadGame::entry_selected()
 									minimap_path,
 									std::unique_ptr<FileSystem>(g_fs->make_sub_file_system(gamedata.filename)).get()));
 
-					m_minimap_image.reset(new_in_memory_image(std::string(gamedata.filename + minimap_path),
-																			texture.release()));
+					m_minimap_image = new_in_memory_image(texture.release());
 
 					// Scale it
 					double scale = double(m_minimap_w) / m_minimap_image->width();

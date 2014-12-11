@@ -107,7 +107,6 @@ protected:
 
 	const Image* m_pic_background; //  background texture (picture ID)
 	const Image* m_pic_custom;     //  custom icon on the button
-	const Image* m_pic_custom_disabled;
 	UI::TextStyle m_textstyle;
 
 	RGBColor    m_clr_down; //  color of border while a flat button is "down"

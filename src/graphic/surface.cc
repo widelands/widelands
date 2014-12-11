@@ -157,39 +157,70 @@ inline void pixel_to_gl_texture(const int width, const int height, float* x, flo
 	*y = (*y / height);
 }
 
-void Surface::blit
-	(const Rect& dst, const Texture* texture, const Rect& srcrc, BlendMode blend_mode)
-{
-	glViewport(0, 0, width(), height());
-
+void Surface::src_and_dst_rect_to_gl(const Texture* texture,
+               const Rect& dst_rect,
+               const Rect& src_rect,
+               FloatRect* gl_dst_rect,
+               FloatRect* gl_src_rect) {
 	// Source Rectangle. We have to take into account that the texture might be
 	// a subtexture in another bigger texture. So we first figure out the pixel
 	// coordinates given it is a full texture (values between 0 and 1) and then
 	// adjust these for the texture coordinates in the parent texture.
-	FloatRect gl_src_rect;
-	{
-		const FloatRect& texture_coordinates = texture->texture_coordinates();
+	const FloatRect& texture_coordinates = texture->texture_coordinates();
 
-		float x1 = srcrc.x;
-		float y1 = srcrc.y;
-		pixel_to_gl_texture(texture->width(), texture->height(), &x1, &y1);
-		x1 = texture_coordinates.x + x1 * texture_coordinates.w;
-		y1 = texture_coordinates.y + y1 * texture_coordinates.h;
+	float x1 = src_rect.x;
+	float y1 = src_rect.y;
+	pixel_to_gl_texture(texture->width(), texture->height(), &x1, &y1);
+	x1 = texture_coordinates.x + x1 * texture_coordinates.w;
+	y1 = texture_coordinates.y + y1 * texture_coordinates.h;
 
-		float x2 = srcrc.x + srcrc.w;
-		float y2 = srcrc.y + srcrc.h;
-		pixel_to_gl_texture(texture->width(), texture->height(), &x2, &y2);
-		x2 = texture_coordinates.x + x2 * texture_coordinates.w;
-		y2 = texture_coordinates.y + y2 * texture_coordinates.h;
+	float x2 = src_rect.x + src_rect.w;
+	float y2 = src_rect.y + src_rect.h;
+	pixel_to_gl_texture(texture->width(), texture->height(), &x2, &y2);
+	x2 = texture_coordinates.x + x2 * texture_coordinates.w;
+	y2 = texture_coordinates.y + y2 * texture_coordinates.h;
 
-		gl_src_rect.x = x1;
-		gl_src_rect.y = y1;
-		gl_src_rect.w = x2 - x1;
-		gl_src_rect.h = y2 - y1;
-	}
+	gl_src_rect->x = x1;
+	gl_src_rect->y = y1;
+	gl_src_rect->w = x2 - x1;
+	gl_src_rect->h = y2 - y1;
 
-	const FloatRect gl_dst_rect =
-	   to_opengl(Rect(dst.x, dst.y, dst.w, dst.h), ConversionMode::kExact);
+	*gl_dst_rect = to_opengl(dst_rect, ConversionMode::kExact);
+}
 
-	BlitProgram::instance().draw(gl_dst_rect, gl_src_rect, texture->get_gl_texture(), blend_mode);
+void Surface::blit
+	(const Rect& dst_rect, const Texture* texture, const Rect& src_rect, float opacity, BlendMode blend_mode)
+{
+	glViewport(0, 0, width(), height());
+
+	FloatRect gl_dst_rect, gl_src_rect;
+	src_and_dst_rect_to_gl(texture, dst_rect, src_rect, &gl_dst_rect, &gl_src_rect);
+
+	VanillaBlitProgram::instance().draw(
+	   gl_dst_rect, gl_src_rect, texture->get_gl_texture(), opacity, blend_mode);
+}
+
+void Surface::blit_monochrome(const Rect& dst_rect,
+                             const Texture* texture,
+                             const Rect& src_rect,
+                             const RGBAColor& blend) {
+	glViewport(0, 0, width(), height());
+
+	FloatRect gl_dst_rect, gl_src_rect;
+	src_and_dst_rect_to_gl(texture, dst_rect, src_rect, &gl_dst_rect, &gl_src_rect);
+
+	MonochromeBlitProgram::instance().draw(
+	   gl_dst_rect, gl_src_rect, texture->get_gl_texture(), blend);
+}
+
+void Surface::blit_blended(const Rect& dst_rect,
+                           const Texture* texture,
+                           const Texture* mask,
+                           const Rect& src_rect,
+                           const RGBColor& blend) {
+	FloatRect gl_dst_rect, gl_src_rect;
+	src_and_dst_rect_to_gl(texture, dst_rect, src_rect, &gl_dst_rect, &gl_src_rect);
+
+	BlendedBlitProgram::instance().draw(
+	   gl_dst_rect, gl_src_rect, texture->get_gl_texture(), mask->get_gl_texture(), blend);
 }

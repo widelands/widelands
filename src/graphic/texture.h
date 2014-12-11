@@ -61,7 +61,15 @@ public:
 	void blit(const Rect& dstretc,
 	          const Texture*,
 	          const Rect& srcrc,
-	          BlendMode blend_mode = BlendMode::UseAlpha) override;
+				 float opacity,
+	          BlendMode blend_mode) override;
+	void
+	blit_monochrome(const Rect& dst, const Texture*, const Rect& srcrc, const RGBAColor& blend) override;
+	void blit_blended(const Rect& dst,
+	                  const Texture* image,
+	                  const Texture* mask,
+	                  const Rect& srcrc,
+	                  const RGBColor& blend) override;
 
 	GLuint get_gl_texture() const {return m_texture;}
 

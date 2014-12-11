@@ -33,7 +33,7 @@ class Texture;
  * Interface to a basic surfaces that can be used as destination for blitting and drawing.
  * It also allows low level pixel access.
  */
-class Surface  {
+class Surface {
 public:
 	Surface() = default;
 	virtual ~Surface() {}
@@ -46,7 +46,21 @@ public:
 	virtual void blit(const Rect& dst,
 	                  const Texture*,
 	                  const Rect& srcrc,
-	                  BlendMode blend_mode = BlendMode::UseAlpha);
+							const float opacity,
+	                  BlendMode blend_mode);
+
+	/// This draws a grayed out version. See MonochromeBlitProgram.
+	virtual void blit_monochrome(const Rect& dst,
+	                  const Texture*,
+	                  const Rect& srcrc,
+	                  const RGBAColor& multiplier);
+
+	/// This draws a playercolor blended image. See BlendedBlitProgram.
+	virtual void blit_blended(const Rect& dst,
+	                  const Texture* image,
+							const Texture* mask,
+	                  const Rect& srcrc,
+	                  const RGBColor& blend);
 
 	/// Draws a filled rect to the surface. No blending takes place, the values
 	// in the target are just replaced (i.e. / BlendMode would be BlendMode::Copy).
@@ -60,7 +74,6 @@ public:
 		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t width = 1);
 
 	/// makes a rectangle on the surface brighter (or darker).
-	/// @note this is slow in SDL mode. Use with care
 	virtual void brighten_rect(const Rect&, int32_t factor);
 
 	/// The functions below are for direct pixel access. This should be used
@@ -142,6 +155,14 @@ protected:
 		kMidPoint,
 	};
 	FloatRect to_opengl(const Rect& rect, ConversionMode mode);
+
+	// Convert 'dst' and 'srcrc' from pixel space into opengl space, taking into
+	// account that we might be a subtexture in a bigger texture.
+	void src_and_dst_rect_to_gl(const Texture* texture,
+	                            const Rect& dst,
+	                            const Rect& srcrc,
+	                            FloatRect* gl_dst_rect,
+	                            FloatRect* gl_src_rect);
 
 	/// Logical width and height of the surface
 	uint16_t m_w, m_h;

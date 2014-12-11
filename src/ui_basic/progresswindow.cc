@@ -69,7 +69,8 @@ void ProgressWindow::draw_background
 	m_label_rectangle.h = h + 2 * PROGRESS_STATUS_RECT_PADDING;
 
 	const Image* bg = g_gr->images().get(m_background);
-	rt.blitrect_scale(Rect(0, 0, xres, yres), bg, Rect(0, 0, bg->width(), bg->height()));
+	rt.blitrect_scale(
+	   Rect(0, 0, xres, yres), bg, Rect(0, 0, bg->width(), bg->height()), 1., BlendMode::UseAlpha);
 
 	Rect border_rect = m_label_rectangle;
 	border_rect.x -= PROGRESS_STATUS_BORDER_X;

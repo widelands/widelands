@@ -63,7 +63,11 @@ FullscreenMenuBase::~FullscreenMenuBase()
 */
 void FullscreenMenuBase::draw(RenderTarget & dst) {
 	const Image* bg = g_gr->images().get(background_image_);
-	dst.blitrect_scale(Rect(0, 0, get_w(), get_h()), bg, Rect(0, 0, bg->width(), bg->height()));
+	dst.blitrect_scale(Rect(0, 0, get_w(), get_h()),
+	                   bg,
+	                   Rect(0, 0, bg->width(), bg->height()),
+	                   1.,
+	                   BlendMode::UseAlpha);
 }
 
 uint32_t FullscreenMenuBase::fs_small() {

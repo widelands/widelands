@@ -892,8 +892,7 @@ void Building::send_message
 	// animations of buildings so that the messages can still be displayed, even
 	// after reload.
 	const std::string& img = g_gr->animations().get_animation
-		(get_ui_anim()).representative_image_from_disk().hash();
-
+		(get_ui_anim()).representative_image_from_disk_filename();
 	std::string rt_description;
 	rt_description.reserve
 		(strlen("<rt image=") + img.size() + 1 +

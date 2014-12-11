@@ -78,7 +78,6 @@ private:
 	Widelands::WareIndex   m_ware_index;
 	Widelands::WareWorker m_ware_type;
 	const Image* m_icon;            //< Index to ware's picture
-	const Image* m_icon_grey;
 	const Image* m_max_fill_indicator;
 
 

@@ -76,11 +76,22 @@ public:
 	              const Rect& src,
 	              BlendMode blend_mode = BlendMode::UseAlpha);
 
-	void blitrect_scale(
-			const Rect& dst,
-			const Image* image,
-			const Rect& src,
-			BlendMode blend_mode = BlendMode::UseAlpha);
+	// Blits the 'source_rect' from 'image' into the
+	// 'destination_rect' in this rendertarget. All alpha values are
+	// multiplied with 'opacity' before blitting. The 'blend_mode'
+	// defines if values are blended with whats already there or just
+	// copied over.
+	void blitrect_scale(const Rect& destination_rect,
+	                    const Image* image,
+	                    const Rect& source_rect,
+	                    float opacity,
+	                    BlendMode blend_mode);
+
+	// Like blitrect_scale. See MonochromeBlitProgram for details.
+	void blitrect_scale_monochrome(const Rect& destination_rect,
+	                               const Image* image,
+	                               const Rect& source_rect,
+	                               const RGBAColor& blend);
 
 	void tile(const Rect&,
 	          const Image* image,

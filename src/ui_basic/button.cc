@@ -22,7 +22,6 @@
 #include "base/log.h"
 #include "graphic/font_handler.h"
 #include "graphic/image.h"
-#include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
@@ -55,7 +54,6 @@ Button::Button //  for textual buttons
 	m_title         (title_text),
 	m_pic_background(bg_pic),
 	m_pic_custom    (nullptr),
-	m_pic_custom_disabled(nullptr),
 	m_textstyle(UI::TextStyle::ui_small()),
 	m_clr_down      (229, 161, 2),
 	m_draw_caret    (false)
@@ -83,7 +81,6 @@ Button::Button //  for pictorial buttons
 	m_time_nextact  (0),
 	m_pic_background(bg_pic),
 	m_pic_custom    (fg_pic),
-	m_pic_custom_disabled(fg_pic ? ImageTransformations::gray_out(fg_pic) : nullptr),
 	m_textstyle(UI::TextStyle::ui_small()),
 	m_clr_down      (229, 161, 2),
 	m_draw_caret    (false)
@@ -108,7 +105,6 @@ void Button::set_pic(const Image* pic)
 		return;
 
 	m_pic_custom = pic;
-	m_pic_custom_disabled = ImageTransformations::gray_out(pic);
 
 	update();
 }
@@ -180,10 +176,20 @@ void Button::draw(RenderTarget & dst)
 		int blit_width = image_scale * m_pic_custom->width();
 		int blit_height = image_scale * m_pic_custom->height();
 
+		if (m_enabled) {
 		dst.blitrect_scale(
 		   Rect((get_w() - blit_width) / 2, (get_h() - blit_height) / 2, blit_width, blit_height),
-		   m_enabled ? m_pic_custom : m_pic_custom_disabled,
-		   Rect(0, 0, m_pic_custom->width(), m_pic_custom->height()));
+		   m_pic_custom,
+		   Rect(0, 0, m_pic_custom->width(), m_pic_custom->height()),
+		   1.,
+		   BlendMode::UseAlpha);
+		} else {
+			dst.blitrect_scale_monochrome(
+			   Rect((get_w() - blit_width) / 2, (get_h() - blit_height) / 2, blit_width, blit_height),
+			   m_pic_custom,
+			   Rect(0, 0, m_pic_custom->width(), m_pic_custom->height()),
+			   RGBAColor(255, 255, 255, 127));
+		}
 
 	} else if (m_title.length()) {
 		//  otherwise draw title string centered

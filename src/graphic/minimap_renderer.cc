@@ -308,7 +308,7 @@ void write_minimap_image
 
 	// Render minimap
 	std::unique_ptr<Texture> texture(draw_minimap(egbase, player, viewpoint, layers));
-	std::unique_ptr<const Image> image(new_in_memory_image("minimap", texture.release()));
+	std::unique_ptr<const Image> image(new_in_memory_image(texture.release()));
 	g_gr->save_png(image.get(), streamwrite);
 	image.reset();
 }
