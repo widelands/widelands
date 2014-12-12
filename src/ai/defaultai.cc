@@ -50,7 +50,6 @@
 #include "logic/world/world.h"
 #include "profile/profile.h"
 
-
 // Building of new military buildings can be restricted
 constexpr int kPushExpansion = 1;
 
@@ -104,7 +103,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
      next_attack_consideration_due_(300000),
      next_trainingsites_check_due_(15 * 60 * 1000),
      next_bf_check_due_(1000),
-     next_wares_review_due_(5 * 60 * 1000),  // review
+     next_wares_review_due_(15 * 60 * 1000),
      inhibit_road_building_(0),
      time_of_last_construction_(0),
      enemy_last_seen_(-2 * 60 * 1000),
@@ -117,8 +116,8 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
      resource_necessity_water_needed_(false),
      unstationed_milit_buildings_(0),
      military_last_dismantle_(0),
-	 military_last_build_(-60 * 1000),
-	 last_attack_target_(
+     military_last_build_(-60 * 1000),
+	last_attack_target_(
         std::numeric_limits<uint16_t>::max(), std::numeric_limits<uint16_t>::max()),
      next_attack_waittime_(10),
      seafaring_economy(false),
@@ -138,7 +137,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 
 	// Subscribe to NoteImmovables.
 	immovable_subscriber_ =
-	   Notifications::subscribe<NoteImmovable>([this](const NoteImmovable& note) {
+		Notifications::subscribe<NoteImmovable>([this](const NoteImmovable& note) {
 			if (note.pi->owner().player_number() != player_->player_number()) {
 			   return;
 		   }
@@ -167,8 +166,11 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 			   return;
 		   }
 
-			if (note.message == NoteShipMessage::Message::GAINED) {
-			   marineTaskQueue_.push_back(STOPSHIPYARD);
+			switch (note.message) {
+
+			case NoteShipMessage::Message::kGained:
+
+			   marineTaskQueue_.push_back(kStopShipyard);
 
 			   allships.push_back(ShipObserver());
 			   allships.back().ship = note.ship;
@@ -177,19 +179,27 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 			   } else {
 				   allships.back().island_circ_direction = false;
 			   }
+				break;
 
-		   } else if (note.message == NoteShipMessage::Message::LOST) {
-			   for (std::list<ShipObserver>::iterator i = allships.begin(); i != allships.end(); ++i)
+			case NoteShipMessage::Message::kLost:
+			   for (std::list<ShipObserver>::iterator i = allships.begin(); i != allships.end(); ++i) {
 					if (i->ship == note.ship) {
 					   allships.erase(i);
 					   break;
-				   }
-		   } else if (note.message == NoteShipMessage::Message::WAITINGFORCOMMAND) {
-			   for (std::list<ShipObserver>::iterator i = allships.begin(); i != allships.end(); ++i)
+					}
+			   }
+			   break;
+
+			case NoteShipMessage::Message::kWaitingForCommand:
+			   for (std::list<ShipObserver>::iterator i = allships.begin(); i != allships.end(); ++i) {
 					if (i->ship == note.ship) {
 					   i->waiting_for_command_ = true;
 					   break;
 				   }
+			   }
+			   break;
+		   default:
+				;
 		   }
 		});
 }
@@ -398,8 +408,7 @@ void DefaultAI::late_initialization() {
 
 		// Read all interesting data from ware producing buildings
 		if (bld.type() == MapObjectType::PRODUCTIONSITE) {
-			const ProductionSiteDescr& prod =
-					dynamic_cast<const ProductionSiteDescr&>(bld);
+			const ProductionSiteDescr& prod = dynamic_cast<const ProductionSiteDescr&>(bld);
 			bo.type = bld.get_ismine() ? BuildingObserver::MINE : BuildingObserver::PRODUCTIONSITE;
 			for (const WareAmount& temp_input : prod.inputs()) {
 				bo.inputs_.push_back(temp_input.first);
@@ -445,8 +454,7 @@ void DefaultAI::late_initialization() {
 		// non critical are excluded (see below)
 		if (bld.type() == MapObjectType::MILITARYSITE) {
 			bo.type = BuildingObserver::MILITARYSITE;
-			const MilitarySiteDescr& milit =
-				dynamic_cast<const MilitarySiteDescr&>(bld);
+			const MilitarySiteDescr& milit = dynamic_cast<const MilitarySiteDescr&>(bld);
 			for (const std::pair<unsigned char, unsigned char>& temp_buildcosts : milit.buildcost()) {
 				// bellow are non-critical wares
 				if (tribe_->ware_index("log") == temp_buildcosts.first ||
@@ -469,8 +477,7 @@ void DefaultAI::late_initialization() {
 
 		if (bld.type() == MapObjectType::TRAININGSITE) {
 			bo.type = BuildingObserver::TRAININGSITE;
-			const TrainingSiteDescr& train =
-			   dynamic_cast<const TrainingSiteDescr&>(bld);
+			const TrainingSiteDescr& train = dynamic_cast<const TrainingSiteDescr&>(bld);
 			for (const WareAmount& temp_input : train.inputs()) {
 				bo.inputs_.push_back(temp_input.first);
 			}
@@ -536,7 +543,7 @@ void DefaultAI::update_all_buildable_fields(const int32_t gametime) {
 	       i < 25) {
 		BuildableField& bf = *buildable_fields.front();
 
-		//  check whether we lost ownership of the node
+		//  check whether we kLost ownership of the node
 		if (bf.coords.field->get_owned_by() != player_number()) {
 			delete &bf;
 			buildable_fields.pop_front();
@@ -574,7 +581,7 @@ void DefaultAI::update_all_mineable_fields(const int32_t gametime) {
 	       i < 40) {
 		MineableField* mf = mineable_fields.front();
 
-		//  check whether we lost ownership of the node
+		//  check whether we kLost ownership of the node
 		if (mf->coords.field->get_owned_by() != player_number()) {
 			delete mf;
 			mineable_fields.pop_front();
@@ -612,7 +619,7 @@ void DefaultAI::update_all_not_buildable_fields() {
 	}
 
 	for (uint32_t i = 0; i < maxchecks; ++i) {
-		//  check whether we lost ownership of the node
+		//  check whether we kLost ownership of the node
 		if (unusable_fields.front().field->get_owned_by() != pn) {
 			unusable_fields.pop_front();
 			continue;
@@ -673,7 +680,9 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 		}
 	}
 
-	if (!field.is_portspace_) {  // if we know it no need to do it once more
+	// if curent port is a portspace we need add near fields to a list
+	// of fields prohibited for buildings
+	if (!field.is_portspace_) {  // if we know it, no need to do it once more
 		if (player_->get_buildcaps(field.coords) & BUILDCAPS_PORT) {
 			field.is_portspace_ = true;
 			seafaring_economy = true;
@@ -684,19 +693,14 @@ void DefaultAI::update_buildable_field(BuildableField& field, uint16_t range, bo
 				if (port_reserved_coords.count(hash) == 0)
 					port_reserved_coords.insert(hash);
 			} while (mr.advance(map));
-		} else {
-			field.is_portspace_ = false;
 		}
 	}
 
 	// testing if a port is nearby, such field will get a priority boost
 	uint16_t nearest_distance = std::numeric_limits<uint16_t>::max();
 	for (const WarehouseSiteObserver& wh_obs : warehousesites) {
-		const uint16_t actual_distance =
-		   map.calc_distance(field.coords, wh_obs.site->get_position());
-		if (nearest_distance > actual_distance) {
-			nearest_distance = actual_distance;
-		}
+		const uint16_t actual_distance = map.calc_distance(field.coords, wh_obs.site->get_position());
+		nearest_distance = std::min(nearest_distance, actual_distance);
 	}
 	if (nearest_distance < 15) {
 		field.port_nearby_ = true;
@@ -1513,10 +1517,10 @@ bool DefaultAI::construct_building(int32_t gametime) {
 					} else if (bo.cnt_built_ == 1 && game().get_gametime() > 40 * 60 * 1000 &&
 					           bo.desc->enhancement() != INVALID_INDEX && !mines_.empty()) {
 						prio += 10;
-					} else if (bo.is_shipyard_ && seafaring_economy) {
-						;
-					} else if (bo.is_shipyard_ && !seafaring_economy) {
-						continue;
+					} else if (bo.is_shipyard_) {
+						if (!seafaring_economy) {
+							continue;
+						}
 					} else if (!output_is_needed) {
 						continue;
 					} else if (bo.cnt_built_ == 0 && game().get_gametime() > 40 * 60 * 1000) {
@@ -1750,7 +1754,7 @@ bool DefaultAI::construct_building(int32_t gametime) {
 					continue;
 				}
 
-				if (virtual_mines<3) {
+				if (virtual_mines < 3) {
 					continue;
 				}
 
@@ -1780,8 +1784,7 @@ bool DefaultAI::construct_building(int32_t gametime) {
 
 			// testing also vicinity
 			if (!bo.is_port_) {
-				const int32_t hash = bf->coords.x << 16 | bf->coords.y;
-				if (port_reserved_coords.count(hash) > 0) {
+				if (port_reserved_coords.count(coords_hash(bf->coords)) > 0) {
 					continue;
 				}
 			}
@@ -2145,8 +2148,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uin
 		// first very special case - lonesome port (in the phase of constructionsite)
 		// obviously it has no warehouse/road network to connect to
 		if (upcast(ConstructionSite const, constructionsite, flag.get_building())) {
-			BuildingObserver& bo = get_building_observer(
-			   constructionsite->building().name().c_str());
+			BuildingObserver& bo = get_building_observer(constructionsite->building().name().c_str());
 			if (bo.is_port_ &&
 			    remote_ports_coords.count(coords_hash(flag.get_building()->get_position())) > 0) {
 				is_remote_port_csite = true;
@@ -2235,7 +2237,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uin
 			}
 
 			// now make sure that this field has not been processed yet
-			const int32_t hash = reachable_coords.x << 16 | reachable_coords.y;
+			const uint32_t hash = coords_hash(reachable_coords);
 			if (lookuptable.count(hash) == 0) {
 				lookuptable.insert(hash);
 
@@ -2317,14 +2319,12 @@ bool DefaultAI::create_shortcut_road(const Flag& flag, uint16_t checkradius, uin
 	for (std::vector<NearFlag>::iterator nf_walk_it = nearflags_tmp.begin();
 	     nf_walk_it != nearflags_tmp.end();
 	     ++nf_walk_it) {
-		int32_t const hash_walk =
-		   nf_walk_it->flag->get_position().x << 16 | nf_walk_it->flag->get_position().y;
+		uint32_t const hash_walk = coords_hash(nf_walk_it->flag->get_position());
 		if (lookuptable.count(hash_walk) > 0) {
 			// iterating over nearflags
 			for (std::vector<NearFlag>::iterator nf_it = nearflags.begin(); nf_it != nearflags.end();
 			     ++nf_it) {
-				int32_t const hash =
-				   nf_it->flag->get_position().x << 16 | nf_it->flag->get_position().y;
+				uint32_t const hash = coords_hash(nf_it->flag->get_position());
 				if (hash == hash_walk) {
 					// decreasing "cost" (of walking via roads)
 					if (nf_it->cost_ > nf_walk_it->cost_) {
@@ -2825,20 +2825,20 @@ bool DefaultAI::marine_main_decisions(uint32_t const gametime) {
 	}
 	territories_count += remote_ports_coords.size();
 
-	enum {NEEDSHIP = 0, ENOUGHSHIPS = 1, DONOTHING = 2 };
+	enum {kNeedShip = 0, kEnoughShips = 1, kDoNothing = 2 };
 
 	// now we must compare ports vs ships to decide if new ship is needed or new expedition can start
-	uint8_t enough_ships = DONOTHING;
+	uint8_t enough_ships = kDoNothing;
 	if (static_cast<float>(allships.size()) >
 	    static_cast<float>((territories_count - 1) * 0.6 + ports_count * 0.75)) {
-		enough_ships = ENOUGHSHIPS;
+		enough_ships = kEnoughShips;
 	} else if (static_cast<float>(allships.size()) <
 	           static_cast<float>((territories_count - 1) * 0.6 + ports_count * 0.75)) {
-		enough_ships = NEEDSHIP;
+		enough_ships = kNeedShip;
 	}
 
 	// building a ship? if yes, find a shipyard and order it to build a ship
-	if (shipyards_count > 0 && enough_ships == NEEDSHIP && idle_shipyard_stocked &&
+	if (shipyards_count > 0 && enough_ships == kNeedShip && idle_shipyard_stocked &&
 	    ports_count > 0) {
 
 		for (const ProductionSiteObserver& ps_obs : productionsites) {
@@ -2863,7 +2863,7 @@ bool DefaultAI::marine_main_decisions(uint32_t const gametime) {
 	}
 
 	// starting an expedition? if yes, find a port and order it to start an expedition
-	if (ports_count > 0 && enough_ships == ENOUGHSHIPS && expeditions_in_prep == 0 &&
+	if (ports_count > 0 && enough_ships == kEnoughShips && expeditions_in_prep == 0 &&
 	    expeditions_in_progress == 0) {
 		// we need to find a port
 		for (const WarehouseSiteObserver& wh_obs : warehousesites) {
@@ -2907,11 +2907,6 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 					    (gametime - i->last_command_time) / 1000);
 				}
 			}
-			// only two states need an attention
-			if (!(i->ship->get_ship_state() == Widelands::Ship::EXP_WAITING ||
-			      i->ship->get_ship_state() == Widelands::Ship::EXP_FOUNDPORTSPACE) &&
-			    i->waiting_for_command_) {
-			}
 			// if ships is waiting for command
 			if (i->waiting_for_command_) {
 				expedition_management(*i);
@@ -2921,7 +2916,7 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 
 	// processing marineTaskQueue_
 	while (!marineTaskQueue_.empty()) {
-		if (marineTaskQueue_.back() == STOPSHIPYARD) {
+		if (marineTaskQueue_.back() == kStopShipyard) {
 			// iterate over all production sites searching for shipyard
 			for (std::list<ProductionSiteObserver>::iterator site = productionsites.begin();
 			     site != productionsites.end();
@@ -2934,7 +2929,7 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 			}
 		}
 
-		if (marineTaskQueue_.back() == REPRIORITIZE) {
+		if (marineTaskQueue_.back() == kReprioritize) {
 			for (std::list<ProductionSiteObserver>::iterator site = productionsites.begin();
 			     site != productionsites.end();
 			     ++site) {
@@ -3690,8 +3685,8 @@ void DefaultAI::gain_building(Building& b) {
 			productionsites.back().stats_zero_ = 0;
 			productionsites.back().no_resources_count = 0;
 			if (bo.is_shipyard_) {
-				marineTaskQueue_.push_back(STOPSHIPYARD);
-				marineTaskQueue_.push_back(REPRIORITIZE);
+				marineTaskQueue_.push_back(kStopShipyard);
+				marineTaskQueue_.push_back(kReprioritize);
 			}
 
 			for (uint32_t i = 0; i < bo.outputs_.size(); ++i)
@@ -3739,8 +3734,8 @@ void DefaultAI::lose_building(const Building& b) {
 	BuildingObserver& bo = get_building_observer(b.descr().name().c_str());
 
 	if (bo.type == BuildingObserver::CONSTRUCTIONSITE) {
-		BuildingObserver& target_bo = get_building_observer(
-			dynamic_cast<const ConstructionSite&>(b).building().name().c_str());
+		BuildingObserver& target_bo =
+		   get_building_observer(dynamic_cast<const ConstructionSite&>(b).building().name().c_str());
 		--target_bo.cnt_under_construction_;
 		--num_constructionsites_;
 		if (target_bo.type == BuildingObserver::PRODUCTIONSITE) {
@@ -3943,13 +3938,13 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 			if (genstats.at(j - 1).miltary_strength.empty()) {
 				log("ComputerPlayer(%d): miltary_strength is empty\n", player_number());
 				player_attackable.at(j - 1) = false;
-			// Avoid division by zero
+				// Avoid division by zero
 			} else if (genstats.at(j - 1).miltary_strength.back() == 0) {
 				player_attackable.at(j - 1) = true;
 				any_attackable = true;
-			// Check threshold
+				// Check threshold
 			} else if ((genstats.at(pn - 1).miltary_strength.back() * 100 /
-							genstats.at(j - 1).miltary_strength.back()) > treshold_ratio) {
+			            genstats.at(j - 1).miltary_strength.back()) > treshold_ratio) {
 				player_attackable.at(j - 1) = true;
 				any_attackable = true;
 			} else {
@@ -3957,7 +3952,8 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 			}
 		} catch (const std::out_of_range&) {
 			log("ComputerPlayer(%d): genstats entry missing - size :%d\n",
-				 player_number(), static_cast<unsigned int>(genstats.size()));
+			    player_number(),
+			    static_cast<unsigned int>(genstats.size()));
 			player_attackable.at(j - 1) = false;
 		}
 	}
@@ -4003,10 +3999,8 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 		for (uint32_t j = 0; j < immovables.size(); ++j) {
 
 			// skip if in irrelevant_immovables
-			const uint32_t hash = immovables.at(j).coords.x << 16 | immovables.at(j).coords.y;
-			if (irrelevant_immovables.count(hash) > 0) {
-				continue;
-			} else {
+			const uint32_t hash = coords_hash(immovables.at(j).coords);
+			if (irrelevant_immovables.count(hash) == 0) {
 				irrelevant_immovables.insert(hash);
 			}
 

@@ -22,13 +22,14 @@
 
 #include <map>
 #include <memory>
+#include <unordered_set>
+
 
 #include "ai/ai_help_structs.h"
 #include "ai/computer_player.h"
 #include "base/i18n.h"
 #include "logic/immovable.h"
 #include "logic/ship.h"
-#include <unordered_set>
 
 namespace Widelands {
 struct Road;
@@ -269,7 +270,7 @@ private:
 	// it decreases with failed scans
 	int32_t spots_;  // sum of buildable fields
 
-	enum {REPRIORITIZE, STOPSHIPYARD, STARTSHIPYARD};
+	enum {kReprioritize, kStopShipyard, kStapShipyard};
 	std::vector<int16_t> marineTaskQueue_;
 
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldPossession>>

@@ -21,6 +21,7 @@
 #define WL_AI_AI_HELP_STRUCTS_H
 
 #include <list>
+#include <unordered_set>
 
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -33,7 +34,6 @@
 #include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
 #include "logic/ship.h"
-#include <unordered_set>
 
 namespace Widelands {
 

@@ -105,7 +105,7 @@ void Ship::init_auto_task(Game& game) {
 void Ship::init(EditorGameBase& egbase) {
 	Bob::init(egbase);
 	init_fleet(egbase);
-	Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::GAINED));
+	Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::kGained));
 }
 
 /**
@@ -131,7 +131,7 @@ void Ship::cleanup(EditorGameBase& egbase) {
 		m_items.pop_back();
 	}
 
-	Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::LOST));
+	Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::kLost));
 
 	Bob::cleanup(egbase);
 }
@@ -454,7 +454,7 @@ void Ship::ship_update_expedition(Game& game, Bob::State&) {
 		}
 		m_expedition->seen_port_buildspaces.swap(temp_port_buildspaces);
 		if (new_port_space) {
-			Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::WAITINGFORCOMMAND));
+			Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::kWaitingForCommand));
 		}
 	}
 }
@@ -569,7 +569,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 						   game, "exp_island", msg_head, msg_body, "ship_explore_island_cw.png");
 						m_ship_state = EXP_WAITING;
 						Notifications::publish(
-						   NoteShipMessage(this, NoteShipMessage::Message::WAITINGFORCOMMAND));
+						   NoteShipMessage(this, NoteShipMessage::Message::kWaitingForCommand));
 						return start_task_idle(game, descr().main_animation(), 1500);
 					}
 				}
@@ -626,7 +626,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			std::string msg_body =
 			   _("An expedition ship reached a coast and is waiting for further commands.");
 			send_message(game, "exp_coast", msg_head, msg_body, "ship_explore_island_cw.png");
-			Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::WAITINGFORCOMMAND));
+			Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::kWaitingForCommand));
 			return;
 		}
 	}
@@ -678,7 +678,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			init_fleet(game);
 
 			// for case that there are any workers left on board
-			// (applicable when port construction space is lost)
+			// (applicable when port construction space is kLost)
 			Worker* worker;
 			for (ShippingItem& item : m_items) {
 				item.get(game, nullptr, &worker);
@@ -813,7 +813,7 @@ void Ship::start_task_expedition(Game& game) {
 	const std::string msg_head = _("Expedition Ready");
 	const std::string msg_body = _("An expedition ship is waiting for your commands.");
 	send_message(game, "exp_ready", msg_head, msg_body, "start_expedition.png");
-	Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::WAITINGFORCOMMAND));
+	Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::kWaitingForCommand));
 }
 
 /// Initializes / changes the direction of scouting to @arg direction
