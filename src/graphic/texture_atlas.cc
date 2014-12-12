@@ -141,9 +141,13 @@ std::unique_ptr<Texture> TextureAtlas::pack(std::vector<std::unique_ptr<Texture>
 	});
 
 	for (Block& block : blocks_) {
-		packed_texture->blit(block.node->r.top_left(),
-		                     block.texture,
-		                     Rect(0, 0, block.texture->width(), block.texture->height()));
+		packed_texture->blit(
+		   Rect(block.node->r.x, block.node->r.y, block.texture->width(), block.texture->height()),
+		   block.texture,
+		   Rect(0, 0, block.texture->width(), block.texture->height()),
+		   1.,
+		   BlendMode::UseAlpha);
+
 		textures->emplace_back(new Texture(
 		   packed_texture->get_gl_texture(),
 		   Rect(block.node->r.top_left(), block.texture->width(), block.texture->height()),

@@ -58,10 +58,18 @@ public:
 	void brighten_rect(const Rect&, int32_t factor) override;
 	virtual void draw_line
 		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor&, uint8_t width) override;
-	void blit(const Point&,
+	void blit(const Rect& dstretc,
 	          const Texture*,
 	          const Rect& srcrc,
-	          BlendMode blend_mode = BlendMode::UseAlpha) override;
+				 float opacity,
+	          BlendMode blend_mode) override;
+	void
+	blit_monochrome(const Rect& dst, const Texture*, const Rect& srcrc, const RGBAColor& blend) override;
+	void blit_blended(const Rect& dst,
+	                  const Texture* image,
+	                  const Texture* mask,
+	                  const Rect& srcrc,
+	                  const RGBColor& blend) override;
 
 	GLuint get_gl_texture() const {return m_texture;}
 

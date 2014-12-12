@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-11-21 09:46+0000\n"
-"PO-Revision-Date: 2014-07-17 05:21+0000\n"
+"POT-Creation-Date: 2014-12-05 11:30+0000\n"
+"PO-Revision-Date: 2014-12-06 03:14+0000\n"
 "Last-Translator: Midori <midori.tj@gmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-11-22 04:39+0000\n"
-"X-Generator: Launchpad (build 17252)\n"
+"X-Launchpad-Export-Date: 2014-12-07 05:32+0000\n"
+"X-Generator: Launchpad (build 17274)\n"
 
 #: ../../txts/README.lua:6
 msgid "README"
@@ -362,8 +362,8 @@ msgstr ""
 "またWindowsではWidelandsのインストールフォルダ下にあるreplaysサブディレクトリに保存されます。"
 
 #: ../../txts/developers:1
-msgid "Development"
-msgstr "開発者"
+msgid "Authors"
+msgstr ""
 
 #: ../../txts/developers:3
 msgid "Widelands Development Team"
@@ -926,15 +926,6 @@ msgstr ""
 
 #: ../../txts/tips/general_game.tip:46
 msgid ""
-"Pressing and holding the ALT GR key lets you drag the window below the mouse "
-"pointer."
-msgstr ""
-"右Altキーを押したままにしていると、\n"
-"マウスポインタ下のウィンドウを\n"
-"ドラッグできます。"
-
-#: ../../txts/tips/general_game.tip:50
-msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first "
 "junction."
 msgstr ""
@@ -942,7 +933,7 @@ msgstr ""
 "最初の交差点までのすべての旗を\n"
 "削除します。"
 
-#: ../../txts/tips/general_game.tip:54
+#: ../../txts/tips/general_game.tip:50
 msgid ""
 "New soldiers are recruited in the headquarters or a warehouse if all needed "
 "tools are available. Training sites are for improving their abilities."
@@ -951,7 +942,7 @@ msgstr ""
 "新兵士は本拠地か倉庫に収容されます。 \n"
 "訓練施設が彼らの能力を向上させます。"
 
-#: ../../txts/tips/general_game.tip:58
+#: ../../txts/tips/general_game.tip:54
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
@@ -961,14 +952,14 @@ msgstr ""
 "Ctrlキーを押しながらクリックすれば\n"
 "その確認をスキップできます。"
 
-#: ../../txts/tips/general_game.tip:62
+#: ../../txts/tips/general_game.tip:58
 msgid "Press I to quickly toggle the display of your stock inventory."
 msgstr ""
 "ストックインベントリの表示を\n"
 "素早く切り替えるには、\n"
 "Iキーを押します。"
 
-#: ../../txts/tips/general_game.tip:66
+#: ../../txts/tips/general_game.tip:62
 msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."

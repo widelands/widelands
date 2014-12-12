@@ -1097,8 +1097,7 @@ int LuaMapObjectDescription::get_name(lua_State * L) {
 */
 int LuaMapObjectDescription::get_representative_image(lua_State * L) {
 	const std::string& filepath = g_gr->animations().get_animation
-		(get()->get_animation("idle")).representative_image_from_disk().hash();
-
+		(get()->get_animation("idle")).representative_image_from_disk_filename();
 	lua_pushstring(L, filepath);
 	return 1;
 }
@@ -3502,6 +3501,7 @@ const PropertyType<LuaField> LuaField::Properties[] = {
 	PROP_RO(LuaField, viewpoint_y),
 	PROP_RW(LuaField, resource),
 	PROP_RW(LuaField, resource_amount),
+	PROP_RO(LuaField, initial_resource_amount),
 	PROP_RO(LuaField, claimers),
 	PROP_RO(LuaField, owner),
 	{nullptr, nullptr, nullptr},
@@ -3661,10 +3661,26 @@ int LuaField::set_resource_amount(lua_State * L) {
 		report_error(L, "Illegal amount: %i, must be >= 0 and <= %i", amount, max_amount);
 
 	field->set_resources(res, amount);
+	//in editor, reset also initial amount
+	EditorGameBase & egbase = get_egbase(L);
+	upcast(Game, game, &egbase);
+	if (!game) {
+		field->set_initial_res_amount(amount);
+	}
 
 	return 0;
 }
+/* RST
+	.. attribute:: initial_resource_amount
 
+		(RO) Starting value of resource. It is set be resource_amount
+
+		:see also: :attr:`resource`
+*/
+int LuaField::get_initial_resource_amount(lua_State * L) {
+	lua_pushuint32(L, fcoords(L).field->get_initial_res_amount());
+	return 1;
+}
 /* RST
 	.. attribute:: immovable
 

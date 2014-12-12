@@ -27,7 +27,6 @@
 #include "graphic/gl/system_headers.h"
 #include "graphic/image.h"
 #include "graphic/image_io.h"
-#include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
 #include "graphic/screen.h"
 #include "graphic/texture.h"
@@ -63,16 +62,14 @@ void set_icon(SDL_Window* sdl_window) {
 /**
  * Initialize the SDL video mode.
 */
-Graphic::Graphic(int window_mode_w, int window_mode_h, bool fullscreen)
+Graphic::Graphic(int window_mode_w, int window_mode_h, bool init_fullscreen)
    : m_window_mode_width(window_mode_w),
      m_window_mode_height(window_mode_h),
      m_update(true),
      texture_cache_(create_texture_cache(TRANSIENT_TEXTURE_CACHE_SIZE)),
-     image_cache_(new ImageCache(texture_cache_.get())),
+     image_cache_(new ImageCache()),
      animation_manager_(new AnimationManager())
 {
-	ImageTransformations::initialize();
-
 	// Request an OpenGL 2 context with double buffering.
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
@@ -86,7 +83,7 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool fullscreen)
 	                                m_window_mode_height,
 	                                SDL_WINDOW_OPENGL);
 	resolution_changed();
-	set_fullscreen(fullscreen);
+	set_fullscreen(init_fullscreen);
 
 	SDL_SetWindowTitle(m_sdl_window, ("Widelands " + build_id() + '(' + build_type() + ')').c_str());
 	set_icon(m_sdl_window);

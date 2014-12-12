@@ -1,5 +1,5 @@
 -- =======================================================================
---                                Field test                               
+--                                Field test
 -- =======================================================================
 field_tests = lunit.TestCase("Field access")
 function field_tests:test_access()
@@ -30,8 +30,8 @@ function field_tests:test_access_yisnegativ()
    assert_error("y is negativ", function() map:get_field(25, -12) end)
 end
 function field_tests:test_direct_change_impossible()
-   assert_error("c.x should be read only", function() c.x = 12 end) 
-   assert_error("c.y should be read only", function() c.y = 12 end) 
+   assert_error("c.x should be read only", function() c.x = 12 end)
+   assert_error("c.y should be read only", function() c.y = 12 end)
 end
 function field_tests:test_hash()
    assert_equal("25_40", map:get_field(25,40).__hash)
@@ -158,7 +158,7 @@ function field_tests:test_hollow_region_radius_one()
 end
 
 -- ==========
--- Resources 
+-- Resources
 -- ==========
 field_resources_tests = lunit.TestCase("Field resources test")
 function field_resources_tests:setup()
@@ -172,7 +172,7 @@ function field_resources_tests:teardown()
    self.f.terr = self._terr
    self.f.terd = self._terd
    self.f.resource = self._res
-   self.f.resource_amount = self._amount 
+   self.f.resource_amount = self._amount
 end
 
 function field_resources_tests:test_set_resource_amount()
@@ -198,7 +198,7 @@ function field_resources_tests:test_set_resource_type_illegal_resource()
 end
 
 -- ==========
--- Fieldcaps 
+-- Fieldcaps
 -- ==========
 field_caps_tests = lunit.TestCase("Field caps tests")
 
@@ -305,7 +305,7 @@ function field_owner_tests:_owner_ship_helper_func(p1, p2)
    local s2 = p2:place_building("sentry", f, false, true)
    s2:set_soldiers({0,0,0,0}, 1)
    self.pis[#self.pis + 1] = f.brn.immovable
-   
+
    -- Still owned by first player, second player has same military influence
    local o = map:get_field(10,10).claimers
    assert_equal(2, #o)
@@ -349,4 +349,3 @@ function field_owner_tests:test_just_one_flag()
    assert_equal(0, #f.claimers)
    assert_equal(player1, map:get_field(15,37).owner)
 end
-

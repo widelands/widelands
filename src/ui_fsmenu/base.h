@@ -23,21 +23,20 @@
 #include <string>
 #include <memory>
 
+#include "graphic/font.h"
 #include "ui_basic/panel.h"
 
-namespace UI {
-struct Font;
-struct TextStyle;
-}
+class Image;
 
 /**
  * This class is the base class for a fullscreen menu.
  * A fullscreen menu is a menu which takes the full screen; it has the size
  * MENU_XRES and MENU_YRES and is a modal UI Element
  */
-struct FullscreenMenuBase : public UI::Panel {
+class FullscreenMenuBase : public UI::Panel {
+public:
 	FullscreenMenuBase(char const * bgpic);
-	~FullscreenMenuBase();
+	virtual ~FullscreenMenuBase();
 
 	void draw(RenderTarget &) override;
 
@@ -53,14 +52,9 @@ public:
 	UI::Font * font_big();
 
 private:
-	/**
-	 * Query the configured screen resolution.
-	 */
-	uint32_t gr_x();
-	uint32_t gr_y();
-
-	struct Data;
-	std::unique_ptr<Data> d;
+	UI::TextStyle textstyle_big_;
+	UI::TextStyle textstyle_small_;
+	std::string background_image_;
 };
 
 

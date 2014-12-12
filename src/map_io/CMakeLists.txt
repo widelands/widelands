@@ -93,6 +93,7 @@ wl_library(map_io
     economy
     graphic
     graphic_image_io
+    graphic_minimap_renderer
     graphic_surface
     helper
     io_fileread

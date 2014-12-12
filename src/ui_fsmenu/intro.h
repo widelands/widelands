@@ -28,7 +28,8 @@
  * This simply waits modal for a click and in the meantime
  * shows the splash screen
  */
-struct FullscreenMenuIntro : public FullscreenMenuBase {
+class FullscreenMenuIntro : public FullscreenMenuBase {
+public:
 	FullscreenMenuIntro();
 
 protected:

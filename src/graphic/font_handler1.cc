@@ -57,7 +57,6 @@ public:
 	// Implements Image.
 	uint16_t width() const override {return texture()->width();}
 	uint16_t height() const override {return texture()->height();}
-	const string& hash() const override {return hash_;}
 	Texture* texture() const override {
 		Texture* surf = texture_cache_->get(hash_);
 		if (surf)
@@ -100,7 +99,7 @@ public:
 		std::unique_ptr<RTImage> image(new RTImage(hash, texture_cache_, renderer_.get(), text, w));
 		image->texture(); // force the rich text to get rendered in case there is an exception thrown.
 
-		return image_cache_->insert(image.release());
+		return image_cache_->insert(hash, std::move(image));
 	}
 
 private:

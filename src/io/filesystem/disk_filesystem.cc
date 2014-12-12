@@ -288,7 +288,7 @@ void RealFSImpl::ensure_directory_exists(const std::string & dirname)
 	try {
 		std::string::size_type it = 0;
 		while (it < dirname.size()) {
-			it = dirname.find(m_filesep, it);
+			it = dirname.find(file_separator(), it);
 
 			FileSystemPath fspath(canonicalize_name(dirname.substr(0, it)));
 			if (fspath.m_exists && !fspath.m_isDirectory)

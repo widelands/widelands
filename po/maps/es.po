@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-11-21 09:46+0000\n"
-"PO-Revision-Date: 2013-11-16 04:13+0000\n"
+"POT-Creation-Date: 2014-12-05 11:30+0000\n"
+"PO-Revision-Date: 2014-12-01 00:47+0000\n"
 "Last-Translator: Joseph Molina <joey_011092@hotmail.com>\n"
 "Language-Team: Spanish/Spain <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-11-22 04:37+0000\n"
-"X-Generator: Launchpad (build 17252)\n"
+"X-Launchpad-Export-Date: 2014-12-06 05:36+0000\n"
+"X-Generator: Launchpad (build 17274)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -188,7 +188,7 @@ msgstr ""
 
 #: ../../maps/Crossing the horizon.wmf/elemental:11
 msgid "Man your ship and sail to the horizon."
-msgstr ""
+msgstr "Tripula tu embarcación y navega hacia el horizonte."
 
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
@@ -351,7 +351,7 @@ msgstr ""
 
 #: ../../maps/Kings and Queens.wmf/elemental:9
 msgid "Kings and Queens"
-msgstr ""
+msgstr "Reyes y Reinas"
 
 #: ../../maps/Kings and Queens.wmf/elemental:11
 msgid ""
@@ -391,7 +391,7 @@ msgstr ""
 
 #: ../../maps/Long, long way.wmf/elemental:9
 msgid "Long, long way"
-msgstr ""
+msgstr "Largo, largo camino."
 
 #: ../../maps/Long, long way.wmf/elemental:11
 msgid ""
@@ -553,7 +553,7 @@ msgstr ""
 
 #: ../../maps/The Nile.wmf/elemental:9
 msgid "The Nile"
-msgstr ""
+msgstr "El Nilo"
 
 #: ../../maps/The Nile.wmf/elemental:11
 msgid ""
@@ -652,7 +652,7 @@ msgstr ""
 
 #: ../../maps/Trident of Fire.wmf/elemental:9
 msgid "Trident of Fire"
-msgstr ""
+msgstr "Tridente de Fuego"
 
 #: ../../maps/Trident of Fire.wmf/elemental:11
 msgid ""
@@ -670,7 +670,7 @@ msgstr ""
 
 #: ../../maps/Twin Lagoons.wmf/elemental:9
 msgid "Twin Lagoons"
-msgstr ""
+msgstr "Lagunas Gemelas"
 
 #: ../../maps/Twin Lagoons.wmf/elemental:11
 msgid ""
@@ -704,7 +704,7 @@ msgstr ""
 
 #: ../../maps/Volcanic Winter.wmf/elemental:9
 msgid "Volcanic Winter"
-msgstr ""
+msgstr "Invierno Volcanico"
 
 #: ../../maps/Volcanic Winter.wmf/elemental:11
 msgid ""
