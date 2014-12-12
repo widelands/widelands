@@ -67,12 +67,6 @@ deeper_goldmine=_Deeper Gold Mine
 deep_goldmine=_Deep Gold Mine
 goldmine=_Gold Mine
 
-[trainingsite types]
-battlearena=_Battle Arena
-trainingcamp=_Training Camp
-
-
-
 dirname = path.dirname(__file__)
 
 tribes:new_tribe {
@@ -240,5 +234,9 @@ tribes:new_tribe {
 		"barbarians_fortress",
 		"barbarians_sentry",
 		"barbarians_tower",
+	},
+	trainingsites = {
+		"barbarians_battlearena",
+		"barbarians_trainingcamp",
 	}
 }

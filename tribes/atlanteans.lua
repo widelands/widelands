@@ -57,11 +57,6 @@ coalmine=_Coal Mine
 ironmine=_Iron Mine
 goldmine=_Gold Mine
 
-[trainingsite types]
-dungeon=_Dungeon
-labyrinth=_Labyrinth
-
-
 dirname = path.dirname(__file__)
 
 tribes:new_tribe {
@@ -230,5 +225,9 @@ tribes:new_tribe {
 		"atlanteans_tower",
 		"atlanteans_tower_high",
 		"atlanteans_tower_small"
+	},
+	trainingsites = {
+		"atlanteans_dungeon",
+		"atlanteans_labyrinth",
 	}
 }

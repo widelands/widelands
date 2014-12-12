@@ -272,3 +272,16 @@ include "tribes/militarysites/empire/fortress/init.lua"
 include "tribes/militarysites/empire/outpost/init.lua"
 include "tribes/militarysites/empire/sentry/init.lua"
 include "tribes/militarysites/empire/tower/init.lua"
+
+
+-- ===================================
+--    Trainingsites
+-- ===================================
+
+include "tribes/trainingites/atlanteans/dungeon/init.lua"
+include "tribes/trainingites/atlanteans/labyrinth/init.lua"
+include "tribes/trainingites/barbarians/battlearena/init.lua"
+include "tribes/trainingites/barbarians/trainingcamp/init.lua"
+include "tribes/trainingites/empire/arena/init.lua"
+include "tribes/trainingites/empire/colosseum/init.lua"
+include "tribes/trainingites/empire/trainingcamp/init.lua"

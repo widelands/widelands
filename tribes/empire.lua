@@ -68,12 +68,6 @@ deep_goldmine=_Deep Gold Mine
 goldmine=_Gold Mine
 
 
-[trainingsite types]
-colosseum=_Colosseum
-arena=_Arena
-trainingcamp=_Training Camp
-
-
 dirname = path.dirname(__file__)
 
 tribes:new_tribe {
@@ -244,5 +238,10 @@ tribes:new_tribe {
 		"empire_outpost",
 		"empire_sentry",
 		"empire_tower",
+	},
+	trainingsites = {
+		"empire_arena",
+		"empire_colosseum",
+		"empire_trainingcamp",
 	}
 }
