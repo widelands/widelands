@@ -120,7 +120,7 @@ function dependencies_resi(tribename, resource, items, text)
 	if not text then
 		text = ""
 	end
-	string = "image=tribes/" .. tribename .. "/" .. resource  .. "/resi_00.png"
+	string = "image=tribes/" .. tribename .. "/" .. resource  .. "/idle_00.png"
 	for k,v in ipairs({table.unpack(items)}) do
 		string = string .. ";pics/arrow-right.png;" ..  v.icon_name
 	end
@@ -385,10 +385,10 @@ function building_help_dependencies_production(tribename, building_description, 
 			-- Need to hack this, because resource != produced ware.
 			local resi_name = ware_description.name
 			if(resi_name == "iron_ore") then resi_name = "iron"
-			elseif(resi_name == "granite") then resi_name = "granite"
-			elseif(resi_name == "diamond") then resi_name = "granite"
-			elseif(resi_name == "quartz") then resi_name = "granite"
-			elseif(resi_name == "marble") then resi_name = "granite"
+			elseif(resi_name == "granite") then resi_name = "stones"
+			elseif(resi_name == "diamond") then resi_name = "stones"
+			elseif(resi_name == "quartz") then resi_name = "stones"
+			elseif(resi_name == "marble") then resi_name = "stones"
 			elseif(resi_name == "gold_ore") then resi_name = "gold" end
 			result = result .. dependencies_resi(
 				tribename,
