@@ -40,6 +40,8 @@ struct FontSet {
 	/// Create the fontset for a locale from configuration file
 	FontSet(const std::string& localename);
 
+	/// All functions below return the path of the font file used for the given
+	/// style.
 	const std::string& serif() const;
 	const std::string& serif_bold() const;
 	const std::string& serif_italic() const;

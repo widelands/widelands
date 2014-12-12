@@ -22,6 +22,7 @@ wl_library(graphic_text
     base_exceptions
     base_geometry
     base_log
+    base_macros
     graphic_color
     graphic_image
     graphic_image_io
