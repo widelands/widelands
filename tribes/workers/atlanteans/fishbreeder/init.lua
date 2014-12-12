@@ -1,0 +1,37 @@
+dirname = path.dirname(__file__)
+
+animations = {
+   idle = {
+      pictures = { dirname .. "waiting_\\d+.png" },
+      hotspot = { 8, 22 }
+   }
+}
+add_worker_animations(animations, "walk", dirname, "walk", {11, 23}, 20)
+add_worker_animations(animations, "walkload", dirname, "walk", {11, 23}, 20)
+add_worker_animations(animations, "freeing", dirname, "freeing", {10, 19}, 10)
+
+
+tribes:new_worker_type {
+   name = "atlanteans_fishbreeder",
+   -- TRANSLATORS: This is a worker name used in lists of workers
+   descname = _"Fish Breeder",
+
+   buildcost = {
+		atlanteans_carrier = 1,
+		bucket = 1
+	},
+
+	programs = {
+		breed = {
+			"findspace size:any radius:7 breed resource:fish",
+			"walk coords",
+			"animation freeing 3000 # Play a freeing animation",
+			"breed fish 1",
+			"return"
+		}
+	}
+
+	-- TRANSLATORS: Helptext for a worker: Fish Breeder
+   helptext = _"Breeds fish.",
+   animations = animations,
+}

@@ -2,10 +2,6 @@
 
 [tribe]
 
-# Workers positions in wares window. Columns are separated by ;,
-# Entries in the columns separated by ,
-workers_order=carrier, horse, horsebreeder; stonecutter, woodcutter, sawyer, forester, builder, spiderbreeder, weaver, shipwright; fisher, fish_breeder, hunter, smoker, farmer, blackroot_farmer, miller, baker; geologist, miner, charcoal_burner, smelter; toolsmith; soldier, trainer, weaponsmith, armorsmith, scout
-
 # Some blue fires would be fine, but just an idea
 [frontier]
 pics=pics/frontier_??.png
@@ -16,41 +12,6 @@ hotspot=3 12
 pics=pics/flag_??.png
 hotspot=15 35
 fps=10
-
-[carrier types]
-carrier=_Carrier
-horse=_Horse
-
-[soldier types]
-soldier=_Soldier
-
-[worker types]
-armorsmith=_Armorsmith
-baker=_Baker
-blackroot_farmer=_Blackroot Farmer
-builder=_Builder
-charcoal_burner=_Charcoal Burner
-shipwright=_Shipwright
-farmer=_Farmer
-fish_breeder=_Fish Breeder
-fisher=_Fisher
-forester=_Forester
-geologist=_Geologist
-hunter=_Hunter
-miller=_Miller
-miner=_Miner
-sawyer=_Sawyer
-smelter=_Smelter
-smoker=_Smoker
-spiderbreeder=_Spider Breeder
-stonecutter=_Stonecutter
-toolsmith=_Toolsmith
-trainer=_Trainer
-weaponsmith=_Weaponsmith
-weaver=_Weaver
-woodcutter=_Woodcutter
-scout=_Scout
-horsebreeder=_Horse Breeder
 
 [ship types]
 ship=_Ship
@@ -109,7 +70,6 @@ crystalmine=_Crystal Mine
 coalmine=_Coal Mine
 ironmine=_Iron Mine
 goldmine=_Gold Mine
-
 
 [militarysite types]
 guardhouse=_Guardhouse
@@ -189,7 +149,7 @@ tribes:new_tribe {
 			"fire_tongs"
 		}
 		{
-			-- Weapons & Armor
+			-- Military
 			"trident_light",
 			"trident_long",
 			"trident_steel",
@@ -202,6 +162,66 @@ tribes:new_tribe {
 			"tabard_golden"
 		}
 	},
+
+   -- Workers positions in wares windows.
+   -- This also gives us the information which workers the tribe uses.
+   -- Each subtable is a column in the wares windows.
+   workers_order = {
+		{
+			-- Carriers
+			"atlanteans_carrier",
+			"atlanteans_horse",
+			"atlanteans_horsebreeder"
+		},
+		{
+			-- Building Materials
+			"atlanteans_stonecutter",
+			"atlanteans_woodcutter",
+			"atlanteans_sawyer",
+			"atlanteans_forester",
+			"atlanteans_builder",
+			"atlanteans_spiderbreeder",
+			"atlanteans_weaver",
+			"atlanteans_shipwright"
+		},
+		{
+			-- Food
+			"atlanteans_fisher",
+			"atlanteans_fishbreeder",
+			"atlanteans_hunter",
+			"atlanteans_smoker",
+			"atlanteans_farmer",
+			"atlanteans_blackroot_farmer",
+			"atlanteans_miller",
+			"atlanteans_baker"
+		},
+		{
+			-- Mining
+			"atlanteans_geologist",
+			"atlanteans_miner",
+			"atlanteans_charcoal_burner",
+			"atlanteans_smelter"
+		}
+		{
+			-- Tools
+			"atlanteans_toolsmith"
+		}
+		{
+			-- Military
+			"atlanteans_soldier",
+			"atlanteans_trainer",
+			"atlanteans_weaponsmith",
+			"atlanteans_armorsmith",
+			"atlanteans_scout"
+		}
+	},
+   carriers = {
+		"atlanteans_carrier",
+		"atlanteans_horse",
+   },
+   soldiers = {
+		"atlanteans_soldier"
+   },
    immovables = {
 		"ashes",
 		"blackrootfield_tiny",

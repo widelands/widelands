@@ -1,0 +1,40 @@
+dirname = path.dirname(__file__)
+
+animations = {
+   idle = {
+      pictures = { dirname .. "idle_\\d+.png" },
+      hotspot = { 8, 22 }
+   }
+}
+add_worker_animations(animations, "walk", dirname, "walk", {16, 31}, 10)
+add_worker_animations(animations, "walkload", dirname, "walkload", {13, 29}, 10)
+add_worker_animations(animations, "sawing", dirname, "sawing", {22, 19}, 10)
+
+
+tribes:new_worker_type {
+   name = "atlanteans_woodcutter",
+   -- TRANSLATORS: This is a worker name used in lists of workers
+   descname = _"Woodcutter",
+
+   buildcost = {
+		atlanteans_carrier = 1,
+		saw = 1
+	},
+
+	programs = {
+		harvest = {
+			"findobject attrib:tree radius:10",
+			"walk object",
+			"playFX ../../../sound/sawmill/sawmill 230",
+			"animation sawing 10000",
+			"object fall",
+			"animation idle 2000",
+			"createware log",
+			"return"
+		}
+	}
+
+	-- TRANSLATORS: Helptext for a worker: Woodcutter
+   helptext = _"Fells trees.",
+   animations = animations,
+}
