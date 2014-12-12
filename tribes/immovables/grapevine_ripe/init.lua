@@ -5,7 +5,7 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = _"Grapevine (ripe)",
    size = "medium",
-   attrib = "grown_vine",
+   attrib = "ripe_grapes",
    programs = {
 		program = {
 			"animate=idle 500000",

@@ -3,26 +3,26 @@ dirname = path.dirname(__file__)
 animations = {
    idle = {
       pictures = { dirname .. "idle_\\d+.png" },
-      hotspot = { 10, 23 },
+      hotspot = { 9, 21 },
       fps = 10
    },
    hacking = {
       pictures = { dirname .. "hacking_\\d+.png" },
-      hotspot = { 12, 20 },
+      hotspot = { 11, 18 },
       fps = 10
    }
 }
-add_worker_animations(animations, "walk", dirname, "walk", {11, 23}, 10)
-add_worker_animations(animations, "walkload", dirname, "walk", {11, 23}, 10)
+add_worker_animations(animations, "walk", dirname, "walk", {9, 21}, 10)
+add_worker_animations(animations, "walkload", dirname, "walk", {9, 21}, 10)
 
 
 tribes:new_worker_type {
-   name = "atlanteans_geologist",
+   name = "barbarians_geologist",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = _"Geologist",
 
    buildcost = {
-		atlanteans_carrier = 1,
+		barbarians_carrier = 1,
 		hammer = 1
 	},
 

@@ -5,7 +5,7 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = _"Reed (ripe)",
    size = "small",
-   attrib = "grown_reed",
+   attrib = "ripe_reed",
    programs = {
 		program = {
 			"animate=idle 500000",

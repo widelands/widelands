@@ -1,0 +1,21 @@
+dirname = path.dirname(__file__)
+
+animations = {
+   idle = {
+      pictures = { dirname .. "idle_\\d+.png" },
+      hotspot = { 3, 22 },
+   }
+}
+add_worker_animations(animations, "walk", dirname, "walk", {6, 22}, 10)
+add_worker_animations(animations, "walkload", dirname, "walkload", {9, 23}, 10)
+
+
+tribes:new_worker_type {
+   name = "barbarians_blacksmith_master",
+   -- TRANSLATORS: This is a worker name used in lists of workers
+   descname = _"Master Blacksmith",
+
+	-- TRANSLATORS: Helptext for a worker: Master Blacksmith
+   helptext = _"Produces weapons for soldiers and tools for workers.",
+   animations = animations,
+}

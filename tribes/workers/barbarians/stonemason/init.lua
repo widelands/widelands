@@ -3,25 +3,26 @@ dirname = path.dirname(__file__)
 animations = {
    idle = {
       pictures = { dirname .. "idle_\\d+.png" },
-      hotspot = { 7, 20 }
+      hotspot = { 8, 21 },
+      fps = 10
    },
    hacking = {
       pictures = { dirname .. "hacking_\\d+.png" },
-      hotspot = { 10, 19 },
+      hotspot = { 8, 21 },
       fps = 10
    }
 }
-add_worker_animations(animations, "walk", dirname, "walk", {10, 21}, 10)
-add_worker_animations(animations, "walkload", dirname, "walkload", {10, 23}, 10)
+add_worker_animations(animations, "walk", dirname, "walk", {9, 24}, 10)
+add_worker_animations(animations, "walkload", dirname, "walkload", {7, 22}, 10)
 
 
 tribes:new_worker_type {
-   name = "atlanteans_stonecutter",
+   name = "barbarians_stonemason",
    -- TRANSLATORS: This is a worker name used in lists of workers
-   descname = _"Stonecutter",
+   descname = _"Stonemason",
 
    buildcost = {
-		atlanteans_carrier = 1,
+		barbarians_carrier = 1,
 		pick = 1
 	},
 
@@ -37,7 +38,7 @@ tribes:new_worker_type {
 		}
 	},
 
-	-- TRANSLATORS: Helptext for a worker: Stonecutter
-   helptext = _"Cuts blocks of granite out of rocks.",
+	-- TRANSLATORS: Helptext for a worker: Stonemason
+   helptext = _"Cuts raw pieces of granite out of rocks.",
    animations = animations,
 }

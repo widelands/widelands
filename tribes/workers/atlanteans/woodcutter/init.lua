@@ -4,11 +4,15 @@ animations = {
    idle = {
       pictures = { dirname .. "idle_\\d+.png" },
       hotspot = { 8, 22 }
+   },
+   sawing = {
+      pictures = { dirname .. "sawing_\\d+.png" },
+      hotspot = { 22, 19 },
+      fps = 10
    }
 }
 add_worker_animations(animations, "walk", dirname, "walk", {16, 31}, 10)
 add_worker_animations(animations, "walkload", dirname, "walkload", {13, 29}, 10)
-add_worker_animations(animations, "sawing", dirname, "sawing", {22, 19}, 10)
 
 
 tribes:new_worker_type {

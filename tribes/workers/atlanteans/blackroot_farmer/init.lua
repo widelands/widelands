@@ -4,13 +4,25 @@ animations = {
    idle = {
       pictures = { dirname .. "idle_\\d+.png" },
       hotspot = { 9, 24 },
+   },
+   planting = {
+      pictures = { dirname .. "plant_\\d+.png" },
+      hotspot = { 13, 32 },
+      fps = 10
+   },
+   harvesting = {
+      pictures = { dirname .. "harvest_\\d+.png" },
+      hotspot = { 13, 32 },
+      fps = 10
+   },
+   gathering = {
+      pictures = { dirname .. "gather_\\d+.png" },
+      hotspot = { 13, 32 },
+      fps = 10
    }
 }
 add_worker_animations(animations, "walk", dirname, "walk", {13, 24}, 10)
 add_worker_animations(animations, "walkload", dirname, "walk", {13, 24}, 10)
-add_worker_animations(animations, "planting", dirname, "plant", {13, 32}, 10)
-add_worker_animations(animations, "harvesting", dirname, "harvest", {13, 32}, 10)
-add_worker_animations(animations, "gathering", dirname, "gather", {13, 32}, 10)
 
 
 tribes:new_worker_type {
@@ -28,12 +40,12 @@ tribes:new_worker_type {
 			"findspace size:any radius:2",
 			"walk coords",
 			"animation planting 4000",
-			"plant tribe:blackrootfield_t",
+			"plant tribe:blackrootfield_tiny",
 			"animation planting 4000",
 			"return"
 		},
 		harvest = {
-			"findobject attrib:blackrootfield radius:2",
+			"findobject attrib:ripe_blackroot radius:2",
 			"walk object",
 			"animation harvesting 10000",
 			"object harvest",

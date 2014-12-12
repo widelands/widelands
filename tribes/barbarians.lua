@@ -2,11 +2,6 @@
 
 [tribe]
 
-# Workers positions in wares window. Columns are separated by ;,
-# Entries in the columns separated by ,
-workers_order=carrier, ox, cattlebreeder; stonemason, lumberjack, ranger, builder, lime-burner, gardener, weaver, shipwright; fisher , hunter , gamekeeper, farmer, baker, brewer, master-brewer, innkeeper; geologist,miner, chief-miner, master-miner, charcoal_burner, smelter; blacksmith, master-blacksmith; soldier, trainer, helmsmith, scout
-
-
 [frontier]
 pics=pics/frontier_??.png
 hotspot=1 19
@@ -17,42 +12,6 @@ pics=pics/flag_??.png
 hotspot=10 38
 fps=5
 
-[carrier types]
-carrier=_Carrier
-ox=_Ox
-
-[soldier types]
-soldier=_Soldier
-
-[worker types]
-baker=_Baker
-master-blacksmith=_Master Blacksmith
-blacksmith=_Blacksmith
-master-brewer=_Master Brewer
-brewer=_Brewer
-builder=_Builder
-charcoal_burner=_Charcoal Burner
-master-miner=_Master Miner
-chief-miner=_Chief Miner
-farmer=_Farmer
-gardener=_Gardener
-fisher=_Fisher
-gamekeeper=_Gamekeeper
-geologist=_Geologist
-helmsmith=_Helmsmith
-hunter=_Hunter
-innkeeper=_Innkeeper
-lime-burner=_Lime-Burner
-lumberjack=_Lumberjack
-miner=_Miner
-ranger=_Ranger
-shipwright=_Shipwright
-smelter=_Smelter
-stonemason=_Stonemason
-trainer=_Trainer
-weaver=_Weaver
-scout=_Scout
-cattlebreeder=_Cattle Breeder
 
 [ship types]
 ship=_Ship
@@ -209,6 +168,70 @@ tribes:new_tribe {
 			 "helmet_warhelm"
 		}
 	},
+
+	-- Workers positions in wares windows.
+   -- This also gives us the information which workers the tribe uses.
+   -- Each subtable is a column in the wares windows.
+   -- NOCOM(#GunChleoc): We have worker, carrier and solder types here.
+   -- Maybe we need an extra list after all.
+   workers_order = {
+		{
+			-- Carriers
+			"barbarians_carrier",
+			"barbarians_ox",
+			"barbarians_cattlebreeder"
+		},
+		{
+			-- Building Materials
+			"barbarians_stonemason",
+			"barbarians_lumberjack",
+			"barbarians_ranger",
+			"barbarians_builder",
+			"barbarians_lime_burner",
+			"barbarians_gardener",
+			"barbarians_weaver",
+			"barbarians_shipwright"
+		},
+		{
+			-- Food
+			"barbarians_fisher",
+			"barbarians_hunter",
+			"barbarians_gamekeeper",
+			"barbarians_farmer"
+			"barbarians_baker",
+			"barbarians_brewer",
+			"barbarians_brewer_master",
+			"barbarians_innkeeper"
+		},
+		{
+			-- Mining
+			"barbarians_geologist",
+			"barbarians_miner",
+			"barbarians_miner_chief"
+			"barbarians_miner_master",
+			"barbarians_charcoal_burner",
+			"barbarians_smelter"
+		}
+		{
+			-- Tools
+			"barbarians_blacksmith",
+			"barbarians_blacksmith_master"
+		}
+		{
+			-- Military
+			"barbarians_soldier",
+			"barbarians_trainer",
+			"barbarians_helmsmith",
+			"barbarians_scout"
+		}
+	},
+   carriers = {
+		"barbarians_carrier",
+		"barbarians_ox"
+   },
+   soldiers = {
+		"barbarians_soldier",
+   },
    immovables = {
 		"ashes",
 		"destroyed_building",

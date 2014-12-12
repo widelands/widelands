@@ -1,0 +1,33 @@
+dirname = path.dirname(__file__)
+
+animations = {
+   idle = {
+      pictures = { dirname .. "waiting_\\d+.png" },
+      hotspot = { 11, 22 },
+      fps = 10
+   },
+   work = {
+      pictures = { dirname .. "work_\\d+.png" },
+      sfx = "../../../sound/hammering/hammering",
+      hotspot = { 10, 22 },
+      fps = 10
+   }
+}
+add_worker_animations(animations, "walk", dirname, "walk", {7, 22}, 10)
+add_worker_animations(animations, "walkload", dirname, "walk", {7, 22}, 10)
+
+
+tribes:new_worker_type {
+   name = "barbarians_builder",
+   -- TRANSLATORS: This is a worker name used in lists of workers
+   descname = _"Builder",
+
+   buildcost = {
+		barbarians_carrier = 1,
+		hammer = 1
+	},
+
+	-- TRANSLATORS: Helptext for a worker: Builder
+   helptext = _"Works at construction sites to raise new buildings.",
+   animations = animations,
+}

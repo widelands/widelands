@@ -16,9 +16,6 @@ tribes:new_carrier_type {
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = _"Carrier",
 
-   buildcost = {
-	},
-
 	-- TRANSLATORS: Helptext for a worker: Carrier
    helptext = _"Carries items along your roads.",
    animations = animations,

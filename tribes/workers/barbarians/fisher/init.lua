@@ -3,26 +3,27 @@ dirname = path.dirname(__file__)
 animations = {
    idle = {
       pictures = { dirname .. "idle_\\d+.png" },
-      hotspot = { 2, 20 },
+      hotspot = { 9, 39 },
+      fps = 10
    },
    fishing = {
       pictures = { dirname .. "fishing_\\d+.png" },
-      hotspot = { 10, 21 },
+      hotspot = { 9, 39 },
       fps = 10
    }
 }
-add_worker_animations(animations, "walk", dirname, "walk", {8, 21}, 20)
-add_worker_animations(animations, "walkload", dirname, "walkload", {8, 20}, 10)
+add_worker_animations(animations, "walk", dirname, "walk", {10, 38}, 10)
+add_worker_animations(animations, "walkload", dirname, "walk", {10, 38}, 10)
 
 
 tribes:new_worker_type {
-   name = "atlanteans_fisher",
+   name = "barbarians_fisher",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = _"Fisher",
 
    buildcost = {
-		atlanteans_carrier = 1,
-		fishing_net = 1
+		barbarians_carrier = 1,
+		fishing_rod = 1
 	},
 
 	programs = {
@@ -39,6 +40,6 @@ tribes:new_worker_type {
 	},
 
 	-- TRANSLATORS: Helptext for a worker: Fisher
-   helptext = _"The fisher fishes delicious fish.",
+   helptext = _"Catches fish in the sea.",
    animations = animations,
 }
