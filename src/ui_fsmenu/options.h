@@ -35,6 +35,7 @@
 class FullscreenMenuOptions;
 class Section;
 
+
 class OptionsCtrl {
 public:
 	struct OptionsStruct {
@@ -142,6 +143,9 @@ private:
 	void update_sb_remove_replays_unit();
 	void advanced_options();
 
+	// Fills the language selection list
+	void add_languages_to_list(const std::string& current_locale);
+
 	class ScreenResolution {
 	public:
 		int32_t xres;
@@ -179,12 +183,9 @@ private:
 	uint32_t const              m_hmargin;
 	uint32_t const              m_padding;
 	uint32_t const              m_space;
-	uint32_t const              m_offset_first_group;
 
 	UI::Button                  m_cancel, m_apply;
 	UI::Textarea                m_title;
-	UI::Textarea                m_label_ui_font;
-	UI::Listselect<std::string> m_ui_font_list;
 
 	UI::Textarea                m_label_snap_dis_panel, m_label_snap_dis_border;
 	UI::SpinBox                 m_sb_dis_panel, m_sb_dis_border;

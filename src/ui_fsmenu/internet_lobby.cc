@@ -26,13 +26,13 @@
 #include "base/log.h"
 #include "base/macros.h"
 #include "graphic/graphic.h"
+#include "graphic/text_constants.h"
 #include "network/constants.h"
 #include "network/internet_gaming.h"
 #include "network/netclient.h"
 #include "network/nethost.h"
 #include "profile/profile.h"
 #include "ui_basic/messagebox.h"
-#include "wui/text_constants.h"
 
 FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 	(char const * const nick, char const * const pwd, bool registered)
@@ -132,10 +132,6 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby
 		(boost::bind
 			 (&FullscreenMenuInternetLobby::clicked_back,
 			  boost::ref(*this)));
-
-	back.set_font(font_small());
-	joingame.set_font(font_small());
-	hostgame.set_font(font_small());
 
 	// Set the texts and style of UI elements
 	Section & s = g_options.pull_section("global"); //  for playername

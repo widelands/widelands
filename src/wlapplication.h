@@ -27,6 +27,7 @@
 #endif
 #endif
 
+#include <cassert>
 #include <cstring>
 #include <map>
 #include <stdexcept>
@@ -181,7 +182,6 @@ struct WLApplication {
 	bool load_game();
 	bool campaign_game();
 	void replay();
-
 	static void emergency_save(Widelands::Game &);
 
 private:

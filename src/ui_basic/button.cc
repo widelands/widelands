@@ -20,14 +20,13 @@
 #include "ui_basic/button.h"
 
 #include "base/log.h"
-#include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
 #include "wlapplication.h"
-#include "wui/text_constants.h"
-
 
 namespace UI {
 
@@ -55,7 +54,7 @@ Button::Button //  for textual buttons
 	m_title         (title_text),
 	m_pic_background(bg_pic),
 	m_pic_custom    (nullptr),
-	m_font(UI::Font::ui_small()),
+	m_textstyle(UI::TextStyle::ui_small()),
 	m_clr_down      (229, 161, 2),
 	m_draw_caret    (false)
 {
@@ -82,7 +81,7 @@ Button::Button //  for pictorial buttons
 	m_time_nextact  (0),
 	m_pic_background(bg_pic),
 	m_pic_custom    (fg_pic),
-	m_font(UI::Font::ui_small()),
+	m_textstyle(UI::TextStyle::ui_small()),
 	m_clr_down      (229, 161, 2),
 	m_draw_caret    (false)
 {
@@ -194,13 +193,11 @@ void Button::draw(RenderTarget & dst)
 
 	} else if (m_title.length()) {
 		//  otherwise draw title string centered
-		UI::TextStyle ts;
-		ts.font = m_font;
-		ts.bold = true;
-		ts.fg = m_enabled ? UI_FONT_CLR_FG : UI_FONT_CLR_DISABLED;
+
+		m_textstyle.fg = m_enabled ? UI_FONT_CLR_FG : UI_FONT_CLR_DISABLED;
 
 		UI::g_fh->draw_text
-			(dst, ts, Point(get_w() / 2, get_h() / 2),
+			(dst, m_textstyle, Point(get_w() / 2, get_h() / 2),
 			 m_title, Align_Center,
 			 m_draw_caret ? m_title.length() : std::numeric_limits<uint32_t>::max());
 	}

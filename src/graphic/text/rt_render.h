@@ -28,6 +28,7 @@
 
 #include "graphic/color.h"
 #include "graphic/image.h"
+#include "graphic/text/font_set.h"
 
 class Texture;
 class ImageCache;
@@ -45,7 +46,7 @@ class RenderNode;
  * Fonts in our sense are defined by the general font shape (given by the font
  * name) and the size of the font. Note that Bold and Italic are special in the
  * regard that we expect that this is already handled by the Font File, so, the
- * font loader directly loads DejaVuSerifBoldItalic.ttf for example.
+ * font loader directly loads DejaVuSerif-Bold.ttf for example.
  */
 class IFont {
 public:
@@ -82,7 +83,7 @@ using TagSet = std::set<std::string>;
 class Renderer {
 public:
 	// Ownership is not taken.
-	Renderer(ImageCache* image_cache, TextureCache* texture_cache);
+	Renderer(ImageCache* image_cache, TextureCache* texture_cache, UI::FontSet* fontset);
 	~Renderer();
 
 	// Render the given string in the given width. Restricts the allowed tags to
@@ -102,6 +103,7 @@ private:
 	std::unique_ptr<Parser> parser_;
 	ImageCache* const image_cache_;  // Not owned.
 	TextureCache* const texture_cache_;  // Not owned.
+	UI::FontSet* const fontset_;  // Not owned.
 };
 
 }

@@ -35,6 +35,7 @@
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
 #include "graphic/in_memory_image.h"
+#include "graphic/text_constants.h"
 #include "graphic/texture.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -44,8 +45,6 @@
 #include "logic/replay.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/messagebox.h"
-#include "wui/text_constants.h"
-
 
 FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	(Widelands::Game & g, GameSettingsProvider * gsp, GameController * gc, bool is_replay) :
@@ -114,7 +113,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 	m_settings(gsp),
 	m_ctrl(gc)
 {
-	m_title.set_textstyle(ts_big());
+	m_title.set_textstyle(UI::TextStyle::ui_big());
 	m_ta_gametime.set_tooltip(_("The time that elapsed inside this game"));
 	m_ta_players.set_tooltip(_("The number of players"));
 	m_ta_win_condition.set_tooltip(_("The win condition that was set for this game"));

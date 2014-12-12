@@ -21,6 +21,8 @@
 
 #include <memory>
 
+#include <boost/format.hpp>
+
 #include "base/macros.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
@@ -905,11 +907,11 @@ void Ship::send_message
 {
 	std::string rt_description;
 	if (picture.size() > 3) {
-		rt_description  = "<rt image=pics/";
-		rt_description += picture;
-		rt_description += "><p font-size=14 font-face=DejaVuSerif>";
-	} else
-		rt_description  = "<rt><p font-size=14 font-face=DejaVuSerif>";
+		rt_description = (boost::format("<rt image=pics/%s><p font-face=serif font-size=14>")
+								% picture).str();
+	} else {
+		rt_description = "<rt><p font-face=serif font-size=14>";
+	}
 	rt_description += description;
 	rt_description += "</p></rt>";
 

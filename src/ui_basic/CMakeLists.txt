@@ -1,4 +1,3 @@
-
 wl_library(ui_basic
   SRCS
     box.cc
@@ -59,6 +58,8 @@ wl_library(ui_basic
     graphic
     graphic_color
     graphic_image
+    graphic_text
+    graphic_text_layout
     io_filesystem
     # TODO(sirver): should not depend on logic
     logic
@@ -66,5 +67,4 @@ wl_library(ui_basic
     scripting
     sound
     widelands_ball_of_mud
-    wui_text_layout
 )

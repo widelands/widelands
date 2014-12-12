@@ -309,7 +309,7 @@ void set_locale(std::string name) {
 	if (!textdomains.empty()) {
 		char const * const domain = textdomains.back().first.c_str();
 
-		bind_textdomain_codeset (domain, "UTF-8");
+		bind_textdomain_codeset(domain, "UTF-8");
 		bindtextdomain(domain, textdomains.back().second.c_str());
 		textdomain(domain);
 	}
