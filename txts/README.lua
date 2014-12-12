@@ -75,7 +75,7 @@ _"PAGEUP: increases game speed" .. "<br>"
 .. _"F6: shows the debug console (only in debug-builds)" .. "<br>"
 .. _"CTRL+F10: quits the game immediately" .. "<br>"
 .. _"CTRL+Leftclick: skips confirmation dialogs" .. "<br>"
-.. _"F11: takes a screenshot"
+.. _"CTRL+F11: takes a screenshot"
    ) .. p(_
 [[In the message window, the following additional shortcuts are available:]]
    ) .. p(
