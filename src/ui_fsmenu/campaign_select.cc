@@ -26,11 +26,10 @@
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
+#include "graphic/text_constants.h"
 #include "logic/campaign_visibility.h"
 #include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"
-#include "wui/text_constants.h"
-
 
 /*
  * UI 1 - Selection of Campaign
@@ -86,7 +85,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect() :
 		 get_right_column_w(m_right_column_x + m_indent),
 		 m_buty - get_y_from_preceding(m_label_description) - 4 * m_padding)
 {
-	m_title.set_textstyle(ts_big());
+	m_title.set_textstyle(UI::TextStyle::ui_big());
 	m_back.set_tooltip(_("Return to the main menu"));
 	m_ok.set_tooltip(_("Play this campaign"));
 	m_ta_campname.set_tooltip(_("The name of this campaign"));
@@ -332,7 +331,7 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutoria
 
 	m_is_tutorial(is_tutorial)
 {
-	m_title.set_textstyle(ts_big());
+	m_title.set_textstyle(UI::TextStyle::ui_big());
 	m_back.set_tooltip(_("Return to the main menu"));
 	if (m_is_tutorial) {
 		m_ok.set_tooltip(_("Play this tutorial"));

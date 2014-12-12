@@ -337,12 +337,11 @@ void Warehouse::load_finish(EditorGameBase& egbase) {
 	   descr().tribe().worker_types_without_cost();
 	for (uint8_t i = worker_types_without_cost.size(); i;) {
 		WareIndex const worker_index = worker_types_without_cost.at(--i);
-		if
-			(owner().is_worker_type_allowed(worker_index) &&
-			 m_next_worker_without_cost_spawn[i] == static_cast<uint32_t>(never()))
-		{
+		if (owner().is_worker_type_allowed(worker_index) &&
+		    m_next_worker_without_cost_spawn[i] == static_cast<uint32_t>(never())) {
 			if (next_spawn == static_cast<uint32_t>(never())) {
-				next_spawn = schedule_act(dynamic_cast<Game&>(egbase), WORKER_WITHOUT_COST_SPAWN_INTERVAL);
+				next_spawn =
+				   schedule_act(dynamic_cast<Game&>(egbase), WORKER_WITHOUT_COST_SPAWN_INTERVAL);
 			}
 			m_next_worker_without_cost_spawn[i] = next_spawn;
 			log("WARNING: player %u is allowed to create worker type %s but his "
@@ -409,15 +408,16 @@ void Warehouse::init(EditorGameBase& egbase) {
 
 		m_next_stock_remove_act = schedule_act(*game, 4000);
 
-		log("Message: adding (wh) (%s) %i \n", to_string(descr().type()).c_str(), player.player_number());
-		send_message
-			(*game,
-			 "warehouse",
-			 descr().descname(),
-			 (boost::format(_("A new %s was added to your economy."))
-			  % descr().descname().c_str()).str(),
-			 true);
-		}
+		log("Message: adding (wh) (%s) %i \n",
+		    to_string(descr().type()).c_str(),
+		    player.player_number());
+		send_message(*game,
+		             "warehouse",
+		             descr().descname(),
+		             (boost::format(_("A new %s was added to your economy.")) %
+		              descr().descname().c_str()).str(),
+		             true);
+	}
 
 	if (uint32_t const conquer_radius = descr().get_conquers())
 		egbase.conquer_area(PlayerArea<Area<FCoords>>(
@@ -848,14 +848,9 @@ void Warehouse::incorporate_ware(EditorGameBase& egbase, WareInstance* ware) {
 }
 
 /// Called when a transfer for one of the idle Requests completes.
-void Warehouse::request_cb
-	(Game            &       game,
-	 Request         &,
-	 WareIndex        const ware,
-	 Worker          * const w,
-	 PlayerImmovable &       target)
-{
-	Warehouse & wh = dynamic_cast<Warehouse&>(target);
+void Warehouse::request_cb(
+   Game& game, Request&, WareIndex const ware, Worker* const w, PlayerImmovable& target) {
+	Warehouse& wh = dynamic_cast<Warehouse&>(target);
 
 	if (w) {
 		w->schedule_incorporate(game);
@@ -1113,14 +1108,10 @@ void Warehouse::aggressor(Soldier& enemy) {
 	if (!descr().get_conquers())
 		return;
 
-	Game & game = dynamic_cast<Game&>(owner().egbase());
-	Map  & map  = game.map();
-	if
-		(enemy.get_owner() == &owner() ||
-		 enemy.get_battle() ||
-		 descr().get_conquers()
-		 <=
-		 map.calc_distance(enemy.get_position(), get_position()))
+	Game& game = dynamic_cast<Game&>(owner().egbase());
+	Map& map = game.map();
+	if (enemy.get_owner() == &owner() || enemy.get_battle() ||
+	    descr().get_conquers() <= map.calc_distance(enemy.get_position(), get_position()))
 		return;
 
 	if (game.map().find_bobs(Area<FCoords>(map.get_fcoords(base_flag().get_position()), 2),
@@ -1134,18 +1125,17 @@ void Warehouse::aggressor(Soldier& enemy) {
 	if (!count_workers(game, soldier_index, noreq))
 		return;
 
-	Soldier & defender = dynamic_cast<Soldier&>(launch_worker(game, soldier_index, noreq));
+	Soldier& defender = dynamic_cast<Soldier&>(launch_worker(game, soldier_index, noreq));
 	defender.start_task_defense(game, false);
 }
 
-bool Warehouse::attack(Soldier & enemy)
-{
-	Game & game = dynamic_cast<Game&>(owner().egbase());
+bool Warehouse::attack(Soldier& enemy) {
+	Game& game = dynamic_cast<Game&>(owner().egbase());
 	WareIndex const soldier_index = descr().tribe().worker_index("soldier");
 	Requirements noreq;
 
 	if (count_workers(game, soldier_index, noreq)) {
-		Soldier & defender = dynamic_cast<Soldier&>(launch_worker(game, soldier_index, noreq));
+		Soldier& defender = dynamic_cast<Soldier&>(launch_worker(game, soldier_index, noreq));
 		defender.start_task_defense(game, true);
 		enemy.send_signal(game, "sleep");
 		return true;

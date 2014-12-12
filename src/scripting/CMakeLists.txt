@@ -39,7 +39,6 @@ wl_library(scripting
   USES_BOOST_REGEX
   DEPENDS
     base_exceptions
-    base_i18n
     base_log
     base_macros
     build_info

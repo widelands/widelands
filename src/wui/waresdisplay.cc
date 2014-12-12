@@ -25,16 +25,15 @@
 
 #include "base/i18n.h"
 #include "base/wexception.h"
-#include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_layout.h"
 #include "logic/editor_game_base.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/worker.h"
-#include "wui/text_layout.h"
 
 const int WARE_MENU_INFO_SIZE = 12;
 

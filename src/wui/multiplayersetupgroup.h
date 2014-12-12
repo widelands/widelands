@@ -25,11 +25,13 @@
 #include <memory>
 #include <string>
 
+#include "graphic/font_handler1.h"
+#include "graphic/text/font_set.h"
+#include "graphic/text_constants.h"
 #include "network/network_player_settings_backend.h"
 #include "ui_basic/box.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/textarea.h"
-#include "wui/text_constants.h"
 
 #define MAXCLIENTS 64
 
@@ -51,7 +53,7 @@ struct MultiPlayerSetupGroup : public UI::Panel {
 		 int32_t x, int32_t y, int32_t w, int32_t h,
 		 GameSettingsProvider * settings,
 		 uint32_t butw, uint32_t buth,
-		 const std::string & fname = UI_FONT_NAME,
+		 const std::string & fname = UI::g_fh1->fontset().serif(),
 		 uint32_t fsize = UI_FONT_SIZE_SMALL);
 	~MultiPlayerSetupGroup();
 

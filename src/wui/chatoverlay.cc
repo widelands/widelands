@@ -129,7 +129,7 @@ void ChatOverlay::Impl::recompute()
 			oldest_ = log_messages_[log_idx].time;
 			// Do some richtext formatting here
 			if (now - oldest_ < CHAT_DISPLAY_TIME) {
-				richtext = "<p><font face=DejaVuSerif size=14 color=dddddd bold=1>"
+				richtext = "<p><font face=serif size=14 color=dddddd bold=1>"
 					+ log_messages_[log_idx].msg + "<br></font></p>" + richtext;
 			}
 			log_idx--;

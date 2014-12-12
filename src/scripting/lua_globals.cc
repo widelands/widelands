@@ -23,7 +23,6 @@
 
 #include <boost/format.hpp>
 
-#include "base/i18n.h"
 #include "build_info.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"

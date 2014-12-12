@@ -23,12 +23,12 @@
 
 #include <SDL_keycode.h>
 
-#include "base/log.h"
-#include "graphic/font.h"
 #include "graphic/font_handler.h"
+#include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text/font_set.h"
+#include "graphic/text_constants.h"
 #include "ui_basic/mouse_constants.h"
-#include "wui/text_constants.h"
 
 namespace UI {
 
@@ -75,7 +75,7 @@ EditBox::EditBox
 	set_thinks(false);
 
 	m->background = background;
-	m->fontname = UI_FONT_NAME;
+	m->fontname = UI::g_fh1->fontset().serif();
 	m->fontsize = UI_FONT_SIZE_SMALL;
 	m->fontcolor = UI_FONT_CLR_FG;
 

@@ -1,0 +1,60 @@
+
+The outlines of this font are from the Sinhala LaTeX pagkage:
+
+  http://www.ocs.mq.edu.au/~vsaparam/sinhala.html
+
+Quoted from the README of that package:
+
+  "This is a package of Metafont fonts and a preprocessor suitable for
+  writing Sinhala script using TeX or LaTeX.  This package was
+  originally developed by Yannis Haralambous (Yannis.Haralambous at
+  univ-lille1 fr), with funding from the Wellcome Institute for the
+  History of Medicine, 183 Euston Road, London NW1 2BE, England (Contact
+  person: Dominik Wujastyk (D.Wujastyk at ucl ac uk)), which is using
+  the font in its Catalogue of Sinhala Manuscript. The original package
+  was available by ftp at ftp.bcc.ac.uk in:
+
+  /pub/users/ucgadkw/indology/software/sinhala1-TeX.zip
+
+  It was later modified by Vasantha Saparamadu (vsaparam at ocs mq edu
+  au) to add support for 'samanala' transliteration scheme developed by
+  Prasad Dharmasena (pkd at isr umd edu)."
+
+LKLUG font was created by Anuradha Ratnaweera (anuradha at taprobane
+org) and Harshani Devadithya using the outlines of the above font and
+adding OTF table entries.  "Kunddaliya" glyph added and OTF tables
+modified by Harshula Jayasuriya (harshula at gmail dot com)
+
+Debian packaging was reviewed and improved by Anuradha Weeraman and
+NIIBE Yutaka.
+
+The LKLUG font was created completely using FontForge
+(http://fontforge.sourceforge.net).
+
+Copyrights:
+  Copyright (C) 2004,2008 Anuradha Ratnaweera and Harshani Devadithya
+  Copyright (C) 2006 Harshula Jayasuriya
+  Copyright (C) 1994, The Wellcome Trust, London
+
+License:
+
+  LKLUG font is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License, version 2, as
+  published by the Free Software Foundation.
+
+  This program is distributed in the hope that it will be useful, but
+  WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  General Public License, version 2, for more details.
+
+  The Debian packaging is (C) 2004,2008, Anuradha Ratnaweera, and is
+  licensed under the GNU General Public License, version 2.
+
+  You should have received a copy of the GNU General Public License,
+  version 2, in the file `COPYING', or on Debian based systems in the
+  file `/usr/share/common-licenses/GPL-2'; if not, write to the Free
+  Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+  MA 02110-1301 USA.
+
+
+ 

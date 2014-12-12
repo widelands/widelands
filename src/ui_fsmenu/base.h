@@ -23,8 +23,13 @@
 #include <string>
 #include <memory>
 
-#include "graphic/font.h"
+#include "graphic/text_layout.h"
 #include "ui_basic/panel.h"
+
+namespace UI {
+struct Font;
+struct TextStyle;
+}
 
 class Image;
 
@@ -45,15 +50,7 @@ public:
 	uint32_t fs_small();
 	uint32_t fs_big();
 
-	UI::TextStyle & ts_small();
-	UI::TextStyle & ts_big();
-
-	UI::Font * font_small();
-	UI::Font * font_big();
-
 private:
-	UI::TextStyle textstyle_big_;
-	UI::TextStyle textstyle_small_;
 	std::string background_image_;
 };
 

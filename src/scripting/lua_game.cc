@@ -23,7 +23,6 @@
 
 #include <boost/format.hpp>
 
-#include "base/i18n.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "logic/campaign_visibility.h"

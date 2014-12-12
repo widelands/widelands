@@ -10,6 +10,19 @@ wl_library(graphic_color
   USES_SDL2
 )
 
+wl_library(graphic_text_layout
+  SRCS
+    text_layout.cc
+    text_layout.h
+    text_constants.h
+  DEPENDS
+    base_i18n
+    graphic
+    graphic_color
+    graphic_text
+)
+
+
 wl_library(graphic_image_io
   SRCS
     image_io.h
@@ -34,6 +47,7 @@ wl_library(graphic_image
   DEPENDS
     base_log
     base_macros
+    graphic
     graphic_image_io
     graphic_surface
 )
@@ -183,6 +197,7 @@ wl_library(graphic
     graphic_image_io
     graphic_surface
     graphic_text
+    graphic_text_layout
     helper
     io_fileread
     io_filesystem
@@ -193,5 +208,4 @@ wl_library(graphic
     scripting
     sound
     wui_overlay_manager
-    wui_text_layout
 )
