@@ -248,3 +248,27 @@ include "tribes/immovables/resi_water/init.lua"
 include "tribes/immovables/shipconstruction_atlanteans/init.lua"
 include "tribes/immovables/shipconstruction_barbarians/init.lua"
 include "tribes/immovables/shipconstruction_empire/init.lua"
+
+
+-- ===================================
+--    Militarysites
+-- ===================================
+
+include "tribes/militarysites/atlanteans/castle/init.lua"
+include "tribes/militarysites/atlanteans/guardhall/init.lua"
+include "tribes/militarysites/atlanteans/guardhouse/init.lua"
+include "tribes/militarysites/atlanteans/tower/init.lua"
+include "tribes/militarysites/atlanteans/tower_high/init.lua"
+include "tribes/militarysites/atlanteans/tower_small/init.lua"
+include "tribes/militarysites/barbarians/barrier/init.lua"
+include "tribes/militarysites/barbarians/citadel/init.lua"
+include "tribes/militarysites/barbarians/fortress/init.lua"
+include "tribes/militarysites/barbarians/sentry/init.lua"
+include "tribes/militarysites/barbarians/weaver/tower.lua"
+include "tribes/militarysites/empire/barrier/init.lua"
+include "tribes/militarysites/empire/blockhouse/init.lua"
+include "tribes/militarysites/empire/castle/init.lua"
+include "tribes/militarysites/empire/fortress/init.lua"
+include "tribes/militarysites/empire/outpost/init.lua"
+include "tribes/militarysites/empire/sentry/init.lua"
+include "tribes/militarysites/empire/tower/init.lua"

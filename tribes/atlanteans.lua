@@ -22,20 +22,6 @@ constructionsite=_Construction Site
 [dismantlesite types]
 dismantlesite=_Dismantle Site
 
-[global militarysite types]
-barrier.barbarians=_Barrier
-citadel.barbarians=_Citadel
-donjon.barbarians=_Donjon
-fortress.barbarians=_Fortress
-sentry.barbarians=_Sentry
-sentry.empire=_Sentry
-barracks.empire=_Barracks
-barrier.empire=_Barrier
-castle.empire=_Castle
-fortress.empire=_Fortress
-outpost.empire=_Outpost
-tower.empire=_Tower
-
 [warehouse types]
 headquarters=_Headquarters
 warehouse=_Warehouse
@@ -70,15 +56,6 @@ crystalmine=_Crystal Mine
 coalmine=_Coal Mine
 ironmine=_Iron Mine
 goldmine=_Gold Mine
-
-[militarysite types]
-guardhouse=_Guardhouse
-guardhall=_Guardhall
-high_tower=_High Tower
-small_tower=_Small Tower
-tower=_Tower
-castle=_Castle
-
 
 [trainingsite types]
 dungeon=_Dungeon
@@ -246,5 +223,12 @@ tribes:new_tribe {
 		"resi_stones1",
 		"resi_stones2",
 		"shipconstruction_atlanteans",
+	},
+	militarysites = {
+		"atlanteans_castle",
+		"atlanteans_guardhall",
+		"atlanteans_tower",
+		"atlanteans_tower_high",
+		"atlanteans_tower_small"
 	}
 }
