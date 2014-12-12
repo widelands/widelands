@@ -19,6 +19,6 @@ tribes:new_worker_type {
 	becomes = "barbarians_miner_master",
 
 	-- TRANSLATORS: Helptext for a worker: Chief Miner
-   helptext = _"Works deep in the mines to obtain coal, iron or gold.",
+   helptext = _"Works deep in the mines to obtain coal, iron, gold or granite.",
    animations = animations,
 }

@@ -3,35 +3,35 @@ dirname = path.dirname(__file__)
 animations = {
    idle = {
       pictures = { dirname .. "idle_\\d+.png" },
-      hotspot = { 11, 23 }
+      hotspot = { 3, 23 }
    },
    dig = {
       pictures = { dirname .. "dig_\\d+.png" },
-      hotspot = { 12, 24 },
+      hotspot = { 5, 22 },
       fps = 5
    },
    crop = {
       pictures = { dirname .. "plant_\\d+.png" },
-      hotspot = { 18, 24 },
+      hotspot = { 18, 23 },
       fps = 10
    },
    water = {
       pictures = { dirname .. "water_\\d+.png" },
-      hotspot = { 19, 25 },
+      hotspot = { 18, 26 },
       fps = 5
    }
 }
-add_worker_animations(animations, "walk", dirname, "walk", {11, 23}, 10)
-add_worker_animations(animations, "walkload", dirname, "walkload", {11, 23}, 10)
+add_worker_animations(animations, "walk", dirname, "walk", {10, 23}, 10)
+add_worker_animations(animations, "walkload", dirname, "walk", {10, 23}, 10)
 
 
 tribes:new_worker_type {
-   name = "barbarians_ranger",
+   name = "empire_forester",
    -- TRANSLATORS: This is a worker name used in lists of workers
-   descname = _"Ranger",
+   descname = _"Forester",
 
    buildcost = {
-		barbarians_carrier = 1,
+		empire_carrier = 1,
 		shovel = 1
 	},
 
@@ -47,7 +47,7 @@ tribes:new_worker_type {
 		}
 	},
 
-	-- TRANSLATORS: Helptext for a worker: Ranger
+	-- TRANSLATORS: Helptext for a worker: Forester
    helptext = _"Plants trees.",
    animations = animations,
 }

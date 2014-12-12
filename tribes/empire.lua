@@ -1,9 +1,7 @@
 # Comments are for graphic designers some ideas
 
 [tribe]
-# Workers positions in wares window. Columns are separated by ;,
-# Entries in the columns separated by ,
-workers_order=carrier, donkey, donkeybreeder;   stonemason, carpenter, lumberjack, forester, builder, shepherd, weaver, shipwright; fisher, hunter, farmer, miller, baker, brewer, pig-breeder, vinefarmer, innkeeper; geologist, miner, master-miner, charcoal_burner, smelter; toolsmith; soldier, trainer, weaponsmith, armorsmith, scout
+
 
 # No idea for the frontier. Maybe some javelins?
 [frontier]
@@ -16,42 +14,6 @@ pics=pics/flag_??.png
 hotspot=14 38
 fps=10
 
-[carrier types]
-carrier=_Carrier
-donkey=_Donkey
-
-[soldier types]
-soldier=_Soldier
-
-[worker types]
-armorsmith=_Armorsmith
-baker=_Baker
-brewer=_Brewer
-builder=_Builder
-charcoal_burner=_Charcoal Burner
-carpenter=_Carpenter
-farmer=_Farmer
-fisher=_Fisher
-forester=_Forester
-geologist=_Geologist
-hunter=_Hunter
-innkeeper=_Innkeeper
-lumberjack=_Lumberjack
-master-miner=_Master Miner
-miller=_Miller
-miner=_Miner
-pig-breeder=_Pig Breeder
-shepherd=_Shepherd
-shipwright=_Shipwright
-smelter=_Smelter
-stonemason=_Stonemason
-toolsmith=_Toolsmith
-trainer=_Trainer
-weaponsmith=_Weaponsmith
-weaver=_Weaver
-vinefarmer=_Vine Farmer
-scout=_Scout
-donkeybreeder=_Donkey Breeder
 
 [ship types]
 ship=_Ship
@@ -212,6 +174,67 @@ tribes:new_tribe {
 			"armor_gilded"
 		}
 	},
+	-- Workers positions in wares windows.
+   -- This also gives us the information which workers the tribe uses.
+   -- Each subtable is a column in the wares windows.
+   workers_order = {
+		{
+			-- Carriers
+			"empire_carrier",
+			"empire_donkey",
+			"empire_donkeybreeder"
+		},
+		{
+			-- Building Materials
+			"empire_stonemason",
+			"empire_carpenter",
+			"empire_lumberjack",
+			"empire_forester",
+			"empire_builder",
+			"empire_shepherd",
+			"empire_weaver",
+			"empire_shipwright"
+		},
+		{
+			-- Food
+			"empire_fisher",
+			"empire_hunter",
+			"empire_farmer",
+			"empire_miller",
+			"empire_baker",
+			"empire_brewer",
+			"empire_pigbreeder",
+			"empire_vinefarmer",
+			"empire_innkeeper"
+		},
+		{
+			-- Mining
+			"empire_geologist",
+			"empire_miner",
+			"empire_miner_master",
+			"empire_charcoal_burner",
+			"empire_smelter"
+		}
+		{
+			-- Tools
+			"empire_toolsmith"
+		}
+		{
+			-- Military
+			"empire_soldier",
+			"empire_trainer",
+			"empire_weaponsmith",
+			"empire_armorsmith",
+			"empire_scout"
+		}
+	},
+   carriers = {
+		"empire_carrier",
+		"empire_donkey"
+   },
+   soldiers = {
+		"empire_soldier"
+   },
    immovables = {
 		"ashes",
 		"destroyed_building",

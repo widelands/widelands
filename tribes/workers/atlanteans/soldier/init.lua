@@ -83,7 +83,10 @@ tribes:new_soldier_type {
 	-- Initial values and per level increments.
 	hp = 13500,
 	hp_incr_per_level = 4000,
-	attack = 1200-1600, -- NOCOM(#GunChleoc): Why are there 2 numbers here?
+	attack = {
+		minimum = 1200,
+		maximum = 1600
+	},
 	attack_incr_per_level = 800,
 	defense = 6,
 	defense_incr_per_level = 8,

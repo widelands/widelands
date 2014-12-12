@@ -21,6 +21,6 @@ tribes:new_worker_type {
 	},
 
 	-- TRANSLATORS: Helptext for a worker: Smelter
-   helptext = _"Smelts iron.",
+   helptext = _"Smelts ores into metal.",
    animations = animations,
 }
