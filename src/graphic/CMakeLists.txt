@@ -47,6 +47,7 @@ wl_library(graphic_image
   DEPENDS
     base_log
     base_macros
+    graphic
     graphic_image_io
     graphic_surface
 )
