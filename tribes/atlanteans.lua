@@ -27,35 +27,6 @@ headquarters=_Headquarters
 warehouse=_Warehouse
 port=_Port
 
-[productionsite types]
-quarry=_Quarry
-woodcutters_house=_Woodcutter’s House
-foresters_house=_Forester’s House
-gold-spinning-mill=_Gold Spinning Mill
-fishers_house=_Fisher’s House
-fish_breeders_house=_Fish Breeder’s House
-hunters_house=_Hunter’s House
-well=_Well
-scouts_house=_Scout’s House
-sawmill=_Sawmill
-smokery=_Smokery
-mill=_Mill
-shipyard=_Shipyard
-bakery=_Bakery
-charcoal_kiln=_Charcoal Kiln
-smelting_works=_Smelting Works
-toolsmithy=_Toolsmithy
-weaponsmithy=_Weapon Smithy
-armorsmithy=_Armor Smithy
-horsefarm=_Horse Farm
-spiderfarm=_Spider Farm
-weaving-mill=_Weaving Mill
-farm=_Farm
-blackroot_farm=_Blackroot Farm
-crystalmine=_Crystal Mine
-coalmine=_Coal Mine
-ironmine=_Iron Mine
-goldmine=_Gold Mine
 
 dirname = path.dirname(__file__)
 
@@ -229,5 +200,45 @@ tribes:new_tribe {
 	trainingsites = {
 		"atlanteans_dungeon",
 		"atlanteans_labyrinth",
-	}
+	},
+   productionsites = {
+		-- Carriers
+		"atlanteans_horsefarm",
+
+		-- Building Materials
+		"atlanteans_foresters_house",
+		"atlanteans_quarry",
+		"atlanteans_sawmill",
+		"atlanteans_spiderfarm",
+		"atlanteans_weaving_mill",
+		"atlanteans_woodcutters_house",
+
+		-- Food
+		"atlanteans_bakery",
+		"atlanteans_blackroot_farm",
+		"atlanteans_farm",
+		"atlanteans_fishbreeders_house",
+		"atlanteans_fishers_house",
+		"atlanteans_hunters_house",
+		"atlanteans_mill",
+		"atlanteans_smokery",
+		"atlanteans_well",
+
+		-- Mining
+		"atlanteans_charcoal_kiln",
+		"atlanteans_coalmine",
+		"atlanteans_crystalmine",
+		"atlanteans_goldmine",
+		"atlanteans_gold_spinning_mill",
+		"atlanteans_ironmine",
+		"atlanteans_smelting_works",
+
+		-- Tools, Military & Ships
+		"atlanteans_armorsmithy",
+		"atlanteans_scouts_house",
+		"atlanteans_shipyard",
+		"atlanteans_toolsmithy",
+		"atlanteans_weaponsmithy",
+
+	},
 }
