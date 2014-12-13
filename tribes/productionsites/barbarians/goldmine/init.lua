@@ -1,19 +1,19 @@
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   name = "atlanteans_goldmine",
+   name = "barbarians_goldmine",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Gold Mine",
    size = "mine",
+   enhancement = "barbarians_goldmine_deep",
 
    buildcost = {
-		log = 7,
-		planks = 4,
-		spidercloth = 1
+		log = 4,
+		granite = 2
 	},
 	return_on_dismantle = {
-		log = 3,
-		planks = 2
+		log = 2,
+		granite = 1
 	},
 
 	-- TRANSLATORS: Helptext for a building: Gold Mine
@@ -22,31 +22,34 @@ tribes:new_productionsite_type {
    animations = {
 		idle = {
 			pictures = { dirname .. "idle_\\d+.png" },
-			hotspot = { 50, 56 },
+			hotspot = { 21, 36 },
+		},
+		build = {
+			pictures = { dirname .. "build_\\d+.png" },
+			hotspot = { 21, 36 },
 		},
 		working = {
-			pictures = { dirname .. "idle_\\d+.png" }, -- TODO(GunChleoc): No animation yet.
-			hotspot = { 50, 56 },
+			pictures = { dirname .. "working_\\d+.png" },
+			hotspot = { 21, 36 },
 		},
 		empty = {
 			pictures = { dirname .. "empty_\\d+.png" },
-			hotspot = { 50, 56 },
+			hotspot = { 21, 36 },
 		},
 	},
 
    aihints = {
 		mines = "gold",
+		mines_percent = 30,
 		prohibited_till = 1200
    },
 
 	working_positions = {
-		atlanteans_miner = 3
+		barbarians_miner = 1
 	},
 
    inputs = {
-		bread_atlanteans = 10,
-		smoked_fish = 10,
-		smoked_meat = 6
+		ration = 6
 	},
    outputs = {
 		"gold_ore"
@@ -59,15 +62,9 @@ tribes:new_productionsite_type {
 			actions = {
 				"sleep=45000",
 				"return=skipped unless economy needs gold_ore",
-				"consume=smoked_fish,smoked_meat:2 bread_atlanteans:2",
+				"consume=ration",
 				"animate=working 20000",
-				"mine=gold 4 100 5 2",
-				"produce=gold_ore",
-				"animate=working 20000",
-				"mine=gold 4 100 5 2",
-				"produce=gold_ore",
-				"animate=working 20000",
-				"mine=gold 4 100 5 2",
+				"mine=gold 2 33 5 17",
 				"produce=gold_ore"
 			}
 		},
@@ -77,7 +74,7 @@ tribes:new_productionsite_type {
 		message =
 			_"This gold mine’s main vein is exhausted. Expect strongly diminished returns on investment." .. " " ..
 			-- TRANSLATORS: "it" is a mine.
-			_"You should consider dismantling or destroying it.",
+			_"You should consider enhancing, dismantling or destroying it.",
 		delay_attempts = 0
 	},
 }

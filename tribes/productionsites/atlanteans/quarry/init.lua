@@ -48,7 +48,6 @@ tribes:new_productionsite_type {
 				"sleep=25000"
 			}
 		},
-
 	},
 	out_of_resource_notification = {
 		title = _"Out of Rocks",

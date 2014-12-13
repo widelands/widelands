@@ -1,33 +1,33 @@
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   name = "atlanteans_horsefarm",
+   name = "barbarians_cattlefarm",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = _"Horse Farm",
+   descname = _"Cattle Farm",
    size = "big",
 
    buildcost = {
 		log = 2,
 		granite = 2,
-		planks = 1
+		blackwood = 1
 	},
 	return_on_dismantle = {
-		log = 1,
-		granite = 2
+		granite = 1,
+		blackwood = 1
 	},
 
-	-- TRANSLATORS: Helptext for a building: Horse Farm
+	-- TRANSLATORS: Helptext for a building: Cattle Farm
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {
 		idle = {
 			pictures = { dirname .. "idle_\\d+.png" },
-			hotspot = { 81, 62 },
+			hotspot = { 57, 80 },
 		},
 		working = {
 			pictures = { dirname .. "idle_\\d+.png" }, -- TODO(GunChleoc): No animation yet.
-			hotspot = { 81, 62 },
-		}
+			hotspot = { 57, 80 },
+		},
 	},
 
    aihints = {
@@ -35,30 +35,29 @@ tribes:new_productionsite_type {
    },
 
 	working_positions = {
-		atlanteans_horsebreeder = 1
+		barbarians_cattlebreeder = 1
 	},
 
    inputs = {
-		corn = 8,
+		wheat = 8,
 		water = 8
 	},
    outputs = {
-		"atlanteans_horse"
+		"barbarians_ox"
    },
 
 	programs = {
 		work = {
-			-- TRANSLATORS: Completed/Skipped/Did not start breeding horses because ...
-			descname = _"breeding horses",
+			-- TRANSLATORS: Completed/Skipped/Did not start rearing cattle because ...
+			descname = _"rearing cattle",
 			actions = {
 				"sleep=15000",
-				"return=skipped unless economy needs atlanteans_horse",
-				"consume=corn water",
-				"playFX=../../../sound/farm/horse 192",
-				"animate=working 15000", -- Feeding cute little foals ;)
-				"recruit=atlanteans_horse"
+				"return=skipped unless economy needs barbarians_ox",
+				"consume=wheat water",
+				"playFX=../../../sound/farm/ox 192",
+				"animate=working 15000", -- Animation of feeding the cattle
+				"recruit=barbarians_ox"
 			}
 		},
-
 	},
 }

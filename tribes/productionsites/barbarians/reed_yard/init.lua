@@ -1,0 +1,73 @@
+dirname = path.dirname(__file__)
+
+tribes:new_productionsite_type {
+   name = "barbarians_reed_yard",
+   -- TRANSLATORS: This is a building name used in lists of buildings
+   descname = _"Reed Yard",
+   size = "medium",
+
+   buildcost = {
+		log = 5,
+		granite = 2
+	},
+	return_on_dismantle = {
+		log = 2,
+		granite = 1
+	},
+
+	-- TRANSLATORS: Helptext for a building: Reed Yard
+   helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
+
+   animations = {
+		idle = {
+			pictures = { dirname .. "idle_\\d+.png" },
+			hotspot = { 46, 44 },
+		},
+	},
+
+   aihints = {
+		space_consumer = true,
+		forced_after = 0
+   },
+
+	working_positions = {
+		barbarians_gardener = 1
+	},
+
+   outputs = {
+		"thatch_reed"
+   },
+
+	programs = {
+		work = {
+			-- TRANSLATORS: Completed/Skipped/Did not start working because ...
+			descname = _"working",
+			actions = {
+				"call=plant_reed",
+				"call=harvest_reed",
+				"return=skipped"
+			}
+		},
+		plant_reed = {
+			-- TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
+			descname = _"planting reed",
+			actions = {
+				"sleep=18000", -- orig sleep=20000 but gardener animation was increased by 2sec
+				"worker=plantreed"
+			}
+		},
+		harvest_reed = {
+			-- TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
+			descname = _"harvesting reed",
+			actions = {
+				"sleep=5000",
+				"worker=harvestreed"
+			}
+		},
+	},
+	out_of_resource_notification = {
+		title = _"Out of Fields",
+		message = _"The gardener working at this reed yard has no cleared soil to plant his seeds.",
+		delay_attempts = 10
+	},
+}

@@ -1,48 +1,46 @@
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   name = "atlanteans_foresters_house",
+   name = "barbarians_gamekeepers_hut",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = _"Forester’s House",
+   descname = _"Gamekeeper’s Hut",
    size = "small",
 
    buildcost = {
-		log = 1,
-		planks = 1,
+		log = 4,
 		granite = 1
 	},
 	return_on_dismantle = {
-		granite = 1,
-		log = 1
+		log = 1,
+		granite = 1
 	},
 
-	-- TRANSLATORS: Helptext for a building: Forester’s House
+	-- TRANSLATORS: Helptext for a building: Gamekeeper’s Hut
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {
 		idle = {
 			pictures = { dirname .. "idle_\\d+.png" },
-			hotspot = { 37, 44 },
-		}
+			hotspot = { 44, 41 },
+		},
 	},
 
    aihints = {
-		space_consumer = true,
-		renews_map_resource = "log",
-		prohibited_till = 50
+		renews_map_resource = "meat",
+		prohibited_till = 900
    },
 
 	working_positions = {
-		atlanteans_forester = 1
+		barbarians_gamekeeper = 1
 	},
 
 	programs = {
 		work = {
-			-- TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
-			descname = _"planting trees",
+			-- TRANSLATORS: Completed/Skipped/Did not start working because ...
+			descname = _"working",
 			actions = {
-				"sleep=11000",
-				"worker=plant"
+				"sleep=52500",
+				"worker=release"
 			}
 		},
 	},

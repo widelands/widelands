@@ -1,19 +1,19 @@
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   name = "atlanteans_ironmine",
+   name = "barbarians_ironmine",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Iron Mine",
    size = "mine",
+   enhancement = "barbarians_ironmine_deep",
 
    buildcost = {
-		log = 7,
-		planks = 4,
-		spidercloth = 1
+		log = 4,
+		granite = 2
 	},
 	return_on_dismantle = {
 		log = 2,
-		planks = 2
+		granite = 1
 	},
 
 	-- TRANSLATORS: Helptext for a building: Iron Mine
@@ -22,31 +22,34 @@ tribes:new_productionsite_type {
    animations = {
 		idle = {
 			pictures = { dirname .. "idle_\\d+.png" },
-			hotspot = { 50, 56 },
+			hotspot = { 21, 36 },
+		},
+		build = {
+			pictures = { dirname .. "build_\\d+.png" },
+			hotspot = { 21, 36 },
 		},
 		working = {
-			pictures = { dirname .. "idle_\\d+.png" }, -- TODO(GunChleoc): No animation yet.
-			hotspot = { 50, 56 },
+			pictures = { dirname .. "working_\\d+.png" },
+			hotspot = { 21, 36 },
 		},
 		empty = {
 			pictures = { dirname .. "empty_\\d+.png" },
-			hotspot = { 50, 56 },
+			hotspot = { 21, 36 },
 		},
 	},
 
    aihints = {
 		mines = "iron",
-		prohibited_till = 1200
+		prohibited_till =900,
+		mines_percent = 30
    },
 
 	working_positions = {
-		atlanteans_miner = 3
+		barbarians_miner = 1
 	},
 
    inputs = {
-		bread_atlanteans = 10,
-		smoked_fish = 10,
-		smoked_meat = 6
+		ration = 6
 	},
    outputs = {
 		"iron_ore"
@@ -59,16 +62,10 @@ tribes:new_productionsite_type {
 			actions = {
 				"sleep=45000",
 				"return=skipped unless economy needs iron_ore",
-				"consume=smoked_fish,smoked_meat:2 bread_atlanteans:2",
+				"consume=ration",
 				"animate=working 20000",
-				"mine=iron 4 100 5 2",
-				"produce=iron_ore",
-				"animate=working 20000",
-				"mine=iron 4 100 5 2",
-				"produce=iron_ore:2",
-				"animate=working 20000",
-				"mine=iron 4 100 5 2",
-				"produce=iron_ore:2"
+				"mine=iron 2 33 5 17",
+				"produce=iron_ore"
 			}
 		},
 	},
@@ -77,7 +74,7 @@ tribes:new_productionsite_type {
 		message =
 			_"This iron mine’s main vein is exhausted. Expect strongly diminished returns on investment." .. " " ..
 			-- TRANSLATORS: "it" is a mine.
-			_"You should consider dismantling or destroying it.",
+			_"You should consider enhancing, dismantling or destroying it.",
 		delay_attempts = 0
 	},
 }

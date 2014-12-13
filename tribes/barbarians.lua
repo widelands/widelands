@@ -28,45 +28,6 @@ headquarters_interim=_Headquarters
 warehouse=_Warehouse
 port=_Port
 
-[productionsite types]
-quarry=_Quarry
-lumberjacks_hut=_Lumberjack’s Hut
-rangers_hut=_Ranger’s Hut
-fishers_hut=_Fisher’s Hut
-hunters_hut=_Hunter’s Hut
-gamekeepers_hut=_Gamekeeper’s Hut
-well=_Well
-scouts_hut=_Scout’s Hut
-hardener=_Wood Hardener
-lime_kiln=_Lime Kiln
-reed_yard=_Reed Yard
-bakery=_Bakery
-brewery=_Brewery
-micro-brewery=_Micro Brewery
-big_inn=_Big Inn
-inn=_Inn
-tavern=_Tavern
-charcoal_kiln=_Charcoal Kiln
-smelting_works=_Smelting Works
-shipyard=_Shipyard
-warmill=_War Mill
-axfactory=_Axfactory
-metalworks=_Metal Workshop
-cattlefarm=_Cattle Farm
-weaving-mill=_Weaving Mill
-farm=_Farm
-helmsmithy=_Helm Smithy
-granitemine=_Granite Mine
-deeper_coalmine=_Deeper Coal Mine
-deep_coalmine=_Deep Coal Mine
-coalmine=_Coal Mine
-deeper_oremine=_Deeper Iron Ore Mine
-deep_oremine=_Deep Iron Ore Mine
-oremine=_Iron Ore Mine
-deeper_goldmine=_Deeper Gold Mine
-deep_goldmine=_Deep Gold Mine
-goldmine=_Gold Mine
-
 dirname = path.dirname(__file__)
 
 tribes:new_tribe {
@@ -238,5 +199,53 @@ tribes:new_tribe {
 	trainingsites = {
 		"barbarians_battlearena",
 		"barbarians_trainingcamp",
-	}
+	},
+   productionsites = {
+		-- Carriers
+		"barbarians_cattlefarm",
+
+		-- Building Materials
+		"barbarians_lime_kiln",
+		"barbarians_lumberjacks_hut",
+		"barbarians_quarry",
+		"barbarians_rangers_hut",
+		"barbarians_reed_yard",
+		"barbarians_wood_hardener",
+
+		-- Food
+		"barbarians_bakery",
+		"barbarians_big_inn",
+		"barbarians_brewery",
+		"barbarians_farm",
+		"barbarians_fishers_hut",
+		"barbarians_gamekeepers_hut",
+		"barbarians_hunters_hut",
+		"barbarians_inn",
+		"barbarians_micro_brewery",
+		"barbarians_tavern",
+		"barbarians_well",
+
+		-- Mining
+		"barbarians_charcoal_kiln",
+		"barbarians_coalmine",
+		"barbarians_coalmine_deep",
+		"barbarians_coalmine_deeper",
+		"barbarians_goldmine",
+		"barbarians_goldmine_deep",
+		"barbarians_goldmine_deeper",
+		"barbarians_granitemine",
+		"barbarians_ironmine",
+		"barbarians_ironmine_deep",
+		"barbarians_ironmine_deeper",
+		"barbarians_smelting_works",
+
+		-- Tools, Military & Ships
+		"barbarians_axfactory",
+		"barbarians_helmsmithy",
+		"barbarians_metal_workshop",
+		"barbarians_scouts_hut",
+		"barbarians_shipyard",
+		"barbarians_warmill",
+		"barbarians_weaving_mill",
+	},
 }

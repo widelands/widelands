@@ -1,47 +1,46 @@
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   name = "atlanteans_fishbreeders_house",
+   name = "barbarians_scouts_hut",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = _"Fish Breeder’s House",
+   descname = _"Scout’s Hut",
    size = "small",
 
    buildcost = {
-		log = 1,
-		planks = 1,
+		log = 2,
 		granite = 1
 	},
 	return_on_dismantle = {
+		log = 1,
 		granite = 1
 	},
 
-	-- TRANSLATORS: Helptext for a building: Fish Breeder’s House
+	-- TRANSLATORS: Helptext for a building: Scout’s Hut
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {
 		idle = {
 			pictures = { dirname .. "idle_\\d+.png" },
-			hotspot = { 34, 42 },
+			hotspot = { 45, 43 },
 		},
 	},
 
-   aihints = {
-		needs_water = true,
-		renews_map_resource = "fish",
-		prohibited_till = 900
-   },
-
 	working_positions = {
-		atlanteans_fishbreeder = 1
+		barbarians_scout = 1
+	},
+
+   inputs = {
+		ration = 2
 	},
 
 	programs = {
 		work = {
-			-- TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
-			descname = _"breeding fish",
+			-- TRANSLATORS: Completed/Skipped/Did not start scouting because ...
+			descname = _"scouting",
 			actions = {
-				"sleep=24000",
-				"worker=breed"
+				"sleep=30000",
+				"consume=ration",
+				"worker=scout"
 			}
 		},
 	},

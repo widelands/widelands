@@ -1,52 +1,57 @@
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   name = "atlanteans_goldmine",
+   name = "barbarians_goldmine_deep",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = _"Gold Mine",
+   descname = _"Deep Gold Mine",
    size = "mine",
+   buildable = false,
+   enhanced_building = true,
+   enhancement = "barbarians_goldmine_deeper",
 
-   buildcost = {
-		log = 7,
-		planks = 4,
-		spidercloth = 1
+   enhancement_cost = {
+		log = 4,
+		granite = 2
 	},
-	return_on_dismantle = {
-		log = 3,
-		planks = 2
+	return_on_dismantle_on_enhanced = {
+		log = 2,
+		granite = 1
 	},
 
-	-- TRANSLATORS: Helptext for a building: Gold Mine
+	-- TRANSLATORS: Helptext for a building: Deep Gold Mine
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {
 		idle = {
 			pictures = { dirname .. "idle_\\d+.png" },
-			hotspot = { 50, 56 },
+			hotspot = { 21, 37 },
+		},
+		build = {
+			pictures = { dirname .. "build_\\d+.png" },
+			hotspot = { 21, 37 },
 		},
 		working = {
-			pictures = { dirname .. "idle_\\d+.png" }, -- TODO(GunChleoc): No animation yet.
-			hotspot = { 50, 56 },
+			pictures = { dirname .. "working_\\d+.png" },
+			hotspot = { 21, 37 },
 		},
 		empty = {
 			pictures = { dirname .. "empty_\\d+.png" },
-			hotspot = { 50, 56 },
+			hotspot = { 21, 37 },
 		},
 	},
 
    aihints = {
 		mines = "gold",
-		prohibited_till = 1200
+		mines_percent = 60
    },
 
 	working_positions = {
-		atlanteans_miner = 3
+		barbarians_miner = 1,
+		barbarians_miner_chief = 1,
 	},
 
    inputs = {
-		bread_atlanteans = 10,
-		smoked_fish = 10,
-		smoked_meat = 6
+		snack = 6
 	},
    outputs = {
 		"gold_ore"
@@ -57,18 +62,15 @@ tribes:new_productionsite_type {
 			-- TRANSLATORS: Completed/Skipped/Did not start mining because ...
 			descname = _"mining",
 			actions = {
-				"sleep=45000",
+				"sleep=42000",
 				"return=skipped unless economy needs gold_ore",
-				"consume=smoked_fish,smoked_meat:2 bread_atlanteans:2",
-				"animate=working 20000",
-				"mine=gold 4 100 5 2",
-				"produce=gold_ore",
-				"animate=working 20000",
-				"mine=gold 4 100 5 2",
-				"produce=gold_ore",
-				"animate=working 20000",
-				"mine=gold 4 100 5 2",
-				"produce=gold_ore"
+				"consume=snack",
+				"animate=working 18000",
+				"mine=gold 2 66 5 17",
+				"produce=gold_ore:2",
+				"animate=working 18000",
+				"mine=gold 2 66 5 17",
+				"produce=gold_ore:2"
 			}
 		},
 	},
@@ -77,7 +79,7 @@ tribes:new_productionsite_type {
 		message =
 			_"This gold mine’s main vein is exhausted. Expect strongly diminished returns on investment." .. " " ..
 			-- TRANSLATORS: "it" is a mine.
-			_"You should consider dismantling or destroying it.",
+			_"You should consider enhancing, dismantling or destroying it.",
 		delay_attempts = 0
 	},
 }

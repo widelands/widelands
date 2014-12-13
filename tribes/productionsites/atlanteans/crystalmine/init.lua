@@ -35,7 +35,7 @@ tribes:new_productionsite_type {
 	},
 
    aihints = {
-		mines = granite,
+		mines = "granite",
 		prohibited_till = 600
    },
 

@@ -1,52 +1,57 @@
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   name = "atlanteans_ironmine",
+   name = "barbarians_ironmine_deep",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = _"Iron Mine",
+   descname = _"Deep Iron Mine",
    size = "mine",
+   buildable = false,
+   enhanced_building = true,
+   enhancement = "barbarians_ironmine_deeper",
 
-   buildcost = {
-		log = 7,
-		planks = 4,
-		spidercloth = 1
+   enhancement_cost = {
+		log = 4,
+		granite = 2
 	},
-	return_on_dismantle = {
+	return_on_dismantle_on_enhanced = {
 		log = 2,
-		planks = 2
+		granite = 1
 	},
 
-	-- TRANSLATORS: Helptext for a building: Iron Mine
+	-- TRANSLATORS: Helptext for a building: Deep Iron Mine
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {
 		idle = {
 			pictures = { dirname .. "idle_\\d+.png" },
-			hotspot = { 50, 56 },
+			hotspot = { 21, 37 },
+		},
+		build = {
+			pictures = { dirname .. "build_\\d+.png" },
+			hotspot = { 21, 37 },
 		},
 		working = {
-			pictures = { dirname .. "idle_\\d+.png" }, -- TODO(GunChleoc): No animation yet.
-			hotspot = { 50, 56 },
+			pictures = { dirname .. "working_\\d+.png" },
+			hotspot = { 21, 37 },
 		},
 		empty = {
 			pictures = { dirname .. "empty_\\d+.png" },
-			hotspot = { 50, 56 },
+			hotspot = { 21, 37 },
 		},
 	},
 
    aihints = {
 		mines = "iron",
-		prohibited_till = 1200
+		mines_percent = 60
    },
 
 	working_positions = {
-		atlanteans_miner = 3
+		barbarians_miner = 1,
+		barbarians_miner_chief = 1,
 	},
 
    inputs = {
-		bread_atlanteans = 10,
-		smoked_fish = 10,
-		smoked_meat = 6
+		snack = 6
 	},
    outputs = {
 		"iron_ore"
@@ -57,18 +62,15 @@ tribes:new_productionsite_type {
 			-- TRANSLATORS: Completed/Skipped/Did not start mining because ...
 			descname = _"mining",
 			actions = {
-				"sleep=45000",
+				"sleep=43000",
 				"return=skipped unless economy needs iron_ore",
-				"consume=smoked_fish,smoked_meat:2 bread_atlanteans:2",
-				"animate=working 20000",
-				"mine=iron 4 100 5 2",
+				"consume=snack",
+				"animate=working 18000",
+				"mine=iron 2 66 5 17".
 				"produce=iron_ore",
-				"animate=working 20000",
-				"mine=iron 4 100 5 2",
-				"produce=iron_ore:2",
-				"animate=working 20000",
-				"mine=iron 4 100 5 2",
-				"produce=iron_ore:2"
+				"animate=working 18000",
+				"mine=iron 2 66 5 17",
+				"produce=iron_ore:1"
 			}
 		},
 	},
@@ -77,7 +79,7 @@ tribes:new_productionsite_type {
 		message =
 			_"This iron mine’s main vein is exhausted. Expect strongly diminished returns on investment." .. " " ..
 			-- TRANSLATORS: "it" is a mine.
-			_"You should consider dismantling or destroying it.",
+			_"You should consider enhancing, dismantling or destroying it.",
 		delay_attempts = 0
 	},
 }
