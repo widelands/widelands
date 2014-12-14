@@ -1,9 +1,7 @@
 -- The Barbarian Charcoal Kiln
-
 include "scripting/formatting.lua"
+set_textdomain("tribes")
 include "tribes/scripting/format_help.lua"
-
-set_textdomain("tribe_barbarians")
 
 return {
    func = function(building_description)

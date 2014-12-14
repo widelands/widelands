@@ -8,7 +8,7 @@ tribes:new_warehouse_type {
    buildable = false,
    destructible = false,
 
-	-- TRANSLATORS: Helptext for a building: Headquarters
+	-- #TRANSLATORS: Helptext for a building: Headquarters
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
 

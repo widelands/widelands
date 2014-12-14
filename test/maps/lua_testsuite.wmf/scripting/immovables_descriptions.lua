@@ -1,4 +1,4 @@
-set_textdomain("tribe_barbarians")
+set_textdomain("tribes")
 
 test_descr = lunit.TestCase("Immovable descriptions test")
 function test_descr:test_instantiation_forbidden()

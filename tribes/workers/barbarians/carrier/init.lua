@@ -17,6 +17,6 @@ tribes:new_carrier_type {
    descname = _"Carrier",
 
 	-- TRANSLATORS: Helptext for a worker: Carrier
-   helptext = _"Carries items along the roads.",
+   helptext = _"Carries items along your roads.",
    animations = animations,
 }

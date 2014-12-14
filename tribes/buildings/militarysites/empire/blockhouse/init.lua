@@ -15,7 +15,7 @@ tribes:new_militarysite_type {
 		planks = 1
 	},
 
-	-- TRANSLATORS: Helptext for a militarysite: Blockhouse
+	-- #TRANSLATORS: Helptext for a militarysite: Blockhouse
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {

@@ -42,6 +42,6 @@ tribes:new_worker_type {
 	},
 
 	-- TRANSLATORS: Helptext for a worker: Gamekeeper
-   helptext = _"The Gamekeeper makes sure that the natural population of animals never drops too low.",
+   helptext = _"The gamekeeper makes sure that the natural population of animals never drops too low.",
    animations = animations,
 }

@@ -18,7 +18,7 @@ tribes:new_productionsite_type {
 		marble = 1
 	},
 
-	-- TRANSLATORS: Helptext for a building: Tavern
+	-- #TRANSLATORS: Helptext for a building: Tavern
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {

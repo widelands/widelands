@@ -20,7 +20,7 @@ tribes:new_productionsite_type {
 		thatch_reed = 1
 	},
 
-	-- TRANSLATORS: Helptext for a building: Helm Smithy
+	-- #TRANSLATORS: Helptext for a building: Helm Smithy
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {

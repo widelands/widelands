@@ -16,7 +16,7 @@ tribes:new_productionsite_type {
 		planks = 1
 	},
 
-	-- TRANSLATORS: Helptext for a building: Coal Mine
+	-- #TRANSLATORS: Helptext for a building: Coal Mine
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {

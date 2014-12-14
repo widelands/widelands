@@ -22,7 +22,7 @@ tribes:new_ware_type{
 		-- TRANSLATORS: Helptext for a ware: Iron
 		atlanteans = _"It is used in the toolsmithy, armor smithy and weapon smithy.",
 		-- TRANSLATORS: Helptext for a ware: Iron
-		barbarians = _"It is used to produce weapons and tools in the metal workshop, axfactory, war mill and in the helm smithy.",
+		barbarians = _"It is used to produce weapons and tools in the metal workshop, axfactory, war mill and helm smithy.",
 		-- TRANSLATORS: Helptext for a ware: Iron
 		empire = _"Weapons, armor and tools are made of iron."
    },

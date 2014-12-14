@@ -18,7 +18,7 @@ tribes:new_militarysite_type {
 		granite = 3
 	},
 
-	-- TRANSLATORS: Helptext for a militarysite: Guardhall
+	-- #TRANSLATORS: Helptext for a militarysite: Guardhall
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {

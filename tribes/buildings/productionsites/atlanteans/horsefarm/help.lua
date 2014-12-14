@@ -1,9 +1,7 @@
 -- The Atlantean Horse Farm
-
 include "scripting/formatting.lua"
+set_textdomain("tribes")
 include "tribes/scripting/format_help.lua"
-
-set_textdomain("tribe_atlanteans")
 
 return {
    func = function(building_description)
@@ -14,7 +12,7 @@ return {
 
 	--General Section
 	building_help_general_string("atlanteans", building_description,
-		_"Breeds horses for adding them to the transportation system.") ..
+		_"Breeds the strong Atlantean horses for adding them to the transportation system.") ..
 
 	--Dependencies
 	building_help_dependencies_production("atlanteans", building_description) ..

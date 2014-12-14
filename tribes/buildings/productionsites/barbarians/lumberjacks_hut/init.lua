@@ -13,7 +13,7 @@ tribes:new_productionsite_type {
 		log = 2
 	},
 
-	-- TRANSLATORS: Helptext for a building: Lumberjack’s Hut
+	-- #TRANSLATORS: Helptext for a building: Lumberjack’s Hut
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {
@@ -52,7 +52,7 @@ tribes:new_productionsite_type {
 	},
 	out_of_resource_notification = {
 		title = _"Out of Trees",
-		message = _"The lumberjack working at this lumberjack’s hut can’t find any trees in his working radius. You should consider dismantling or destroying the building or building a rangers’s hut.",
+		message = _"The lumberjack working at this lumberjack’s hut can’t find any trees in his working radius. You should consider dismantling or destroying the building or building a ranger’s hut.",
 		delay_attempts = 60
 	},
 }

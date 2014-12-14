@@ -1,9 +1,7 @@
 -- The Imperial Marble Mine
-
 include "scripting/formatting.lua"
+set_textdomain("tribes")
 include "tribes/scripting/format_help.lua"
-
-set_textdomain("tribe_empire")
 
 return {
    func = function(building_description)
@@ -14,7 +12,7 @@ return {
 
 	--General Section
 	building_help_general_string("empire", building_description,
-		_"Carve marble and granite out of the rock in mountain terrain.") ..
+		_"Carves marble and granite out of the rock in mountain terrain.") ..
 
 	--Dependencies
 	building_help_dependencies_production("empire", building_description, true) ..

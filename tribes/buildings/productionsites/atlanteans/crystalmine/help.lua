@@ -1,9 +1,7 @@
 -- The Atlantean Crystal Mine
-
 include "scripting/formatting.lua"
+set_textdomain("tribes")
 include "tribes/scripting/format_help.lua"
-
-set_textdomain("tribe_atlanteans")
 
 return {
    func = function(building_description)
@@ -14,7 +12,7 @@ return {
 
 	--General Section
 	building_help_general_string("atlanteans", building_description,
-		_"Carve precious stones out of the rock in mountain terrain.") ..
+		_"Carves precious stones out of the rock in mountain terrain.") ..
 
 	--Dependencies
 	building_help_dependencies_production("atlanteans", building_description, true) ..

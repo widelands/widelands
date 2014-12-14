@@ -1,9 +1,7 @@
 -- The Barbarian Quarry
-
 include "scripting/formatting.lua"
+set_textdomain("tribes")
 include "tribes/scripting/format_help.lua"
-
-set_textdomain("tribe_barbarians")
 
 return {
    func = function(building_description)
@@ -14,7 +12,7 @@ return {
 
 	--General Section
 	building_help_general_string("barbarians", building_description,
-		_"Carves granite blocks out of rocks in the vicinity.", _"The quarry needs rocks to cut within the working radius.") ..
+		_"Cuts raw pieces of granite out of rocks in the vicinity.", _"The quarry needs rocks to cut within the working radius.") ..
 
 	--Dependencies
 	building_help_dependencies_production("barbarians", building_description, true) ..

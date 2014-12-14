@@ -4,7 +4,7 @@ tribes:new_tribe {
    name = "barbarians",
    author = _"The Widelands Development Team",
    -- TRANSLATORS: This is a tribe name
-   descname = _"_Barbarians",
+   descname = _"Barbarians",
    helptext = _"The mighty tribes of the east-lands.",
    bob_vision_range = 2,
    uiposition = 10,

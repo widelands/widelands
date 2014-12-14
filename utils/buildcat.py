@@ -59,8 +59,14 @@ MAINPOTS = [
         "../../world/*/*/*/*/*.lua",
         "../../world/*/*/*/*/*/*.lua",
     ]),
+    # NOCOM (GunChleoc): Test, proofread, merge po and then remove obsolete templates.
     ("tribes/tribes", [
-        "../../tribes/scripting/*.lua",
+        "../../tribes/*.lua",
+        "../../tribes/*/*.lua",
+        "../../tribes/*/*/*.lua",
+        "../../tribes/*/*/*/*.lua",
+        "../../tribes/*/*/*/*/*.lua",
+        "../../tribes/*/*/*/*/*/*.lua",
     ]),
 ]
 
@@ -91,30 +97,6 @@ ITERATIVEPOTS = [
     ),
     ("mp_scenario_%(name)s/mp_scenario_%(name)s", "maps/MP Scenarios/",
          [ "../../maps/MP Scenarios/%(name)s/scripting/*.lua", ]
-    ),
-    ("tribe_atlanteans/tribe_atlanteans", "tribes/",
-        ["../../tribes/atlanteans/conf",
-         "../../tribes/atlanteans/*/conf",
-         "../../tribes/atlanteans/scripting/*.lua",
-         "../../tribes/atlanteans/*/help.lua",
-         "../../global/militarysites/*/conf"
-    ]
-    ),
-    ("tribe_barbarians/tribe_barbarians", "tribes/",
-        ["../../tribes/barbarians/conf",
-         "../../tribes/barbarians/*/conf",
-         "../../tribes/barbarians/scripting/*.lua",
-         "../../tribes/barbarians/*/help.lua",
-         "../../global/militarysites/*/conf"
-    ]
-    ),
-    ("tribe_empire/tribe_empire", "tribes/",
-        ["../../tribes/empire/conf",
-         "../../tribes/empire/*/conf",
-         "../../tribes/empire/scripting/*.lua",
-         "../../tribes/empire/*/help.lua",
-         "../../global/militarysites/*/conf"
-    ]
     ),
 ]
 

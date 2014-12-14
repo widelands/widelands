@@ -18,7 +18,7 @@ tribes:new_productionsite_type {
 		marble_column = 2
 	},
 
-	-- TRANSLATORS: Helptext for a building: Armor Smithy
+	-- #TRANSLATORS: Helptext for a building: Armor Smithy
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {

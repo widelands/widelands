@@ -22,7 +22,7 @@ tribes:new_militarysite_type {
 		marble_column = 1
 	},
 
-	-- TRANSLATORS: Helptext for a building: Arena
+	-- #TRANSLATORS: Helptext for a building: Arena
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {

@@ -20,7 +20,7 @@ tribes:new_productionsite_type {
 		grout = 1
 	},
 
-	-- TRANSLATORS: Helptext for a building: Metal Workshop
+	-- #TRANSLATORS: Helptext for a building: Metal Workshop
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {
@@ -196,8 +196,8 @@ tribes:new_productionsite_type {
 			}
 		},
 		produce_shovel = {
-			-- TRANSLATORS: Completed/Skipped/Did not start making a produce_shovel because ...
-			descname = _"making a produce_shovel",
+			-- TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
+			descname = _"making a shovel",
 			actions = {
 				"return=skipped unless economy needs shovel",
 				"sleep=32000",

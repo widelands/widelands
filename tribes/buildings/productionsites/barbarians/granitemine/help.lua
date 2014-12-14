@@ -1,9 +1,7 @@
 -- The Barbarian Granite Mine
-
 include "scripting/formatting.lua"
+set_textdomain("tribes")
 include "tribes/scripting/format_help.lua"
-
-set_textdomain("tribe_barbarians")
 
 return {
    func = function(building_description)
@@ -14,7 +12,7 @@ return {
 
 	--General Section
 	building_help_general_string("barbarians", building_description,
-		_"Carve granite out of the rock in mountain terrain.",
+		_"Carves granite out of the rock in mountain terrain.",
 		_"This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more granite.":bformat("5%") .. "<br>" .. _"It cannot be upgraded.") ..
 
 	--Dependencies

@@ -15,7 +15,7 @@ tribes:new_productionsite_type {
 		granite = 1
 	},
 
-	-- TRANSLATORS: Helptext for a building: Fisher’s House
+	-- #TRANSLATORS: Helptext for a building: Fisher’s House
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {
@@ -50,7 +50,7 @@ tribes:new_productionsite_type {
 	},
 	out_of_resource_notification = {
 		title = _"Out of Fish",
-		message = _"The fisher working in this fisher’s house can’t find any fish in his working radius.",
+		message = _"The fisher working out of this fisher’s house can’t find any fish in his working radius.",
 		delay_attempts = 10
 	},
 }

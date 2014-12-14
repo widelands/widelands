@@ -38,6 +38,6 @@ tribes:new_worker_type {
 	},
 
 	-- TRANSLATORS: Helptext for a worker: Stonecutter
-   helptext = _"Cuts blocks of granite out of rocks.",
+   helptext = _"Cuts blocks of granite out of rocks in the vicinity.",
    animations = animations,
 }

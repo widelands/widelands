@@ -19,7 +19,7 @@ tribes:new_productionsite_type {
 		marble_column = 1
 	},
 
-	-- TRANSLATORS: Helptext for a building: Farm
+	-- #TRANSLATORS: Helptext for a building: Farm
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {

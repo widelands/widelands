@@ -16,7 +16,7 @@ tribes:new_productionsite_type {
 		granite = 2
 	},
 
-	-- TRANSLATORS: Helptext for a building: Donkey Farm
+	-- #TRANSLATORS: Helptext for a building: Donkey Farm
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {

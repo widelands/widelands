@@ -18,7 +18,7 @@ tribes:new_ware_type{
 		-- TRANSLATORS: Helptext for a ware: Hunting Spear
 		default = _"This spear is light enough to be thrown, but heavy enough to kill any animal in one blow. It is only used by hunters.",
 		-- TRANSLATORS: Helptext for a ware: Hunting Spear
-		barbarians = _"Hunting spears are produced in the metal works (but cease to be produced by the building if it is enhanced to an axfactory and war mill).",
+		barbarians = _"Hunting spears are produced in the metal workshop (but cease to be produced by the building if it is enhanced to an axfactory and war mill).",
 		-- TRANSLATORS: Helptext for a ware: Hunting Spear
 		empire = _"They are produced by the toolsmith."
    },

@@ -16,7 +16,7 @@ tribes:new_ware_type{
 	},
    helptext = {
 		-- TRANSLATORS: Helptext for a ware: Ration
-		default = _"A small bite to keep miners strong and working. The scout also consumes rations on his scouting trips",
+		default = _"A small bite to keep miners strong and working. The scout also consumes rations on his scouting trips.",
 		-- TRANSLATORS: Helptext for a ware: Ration
 		barbarians = _"Rations are produced in a tavern, an inn or a big inn out of fish or meat or pitta bread.",
 		-- TRANSLATORS: Helptext for a ware: Ration

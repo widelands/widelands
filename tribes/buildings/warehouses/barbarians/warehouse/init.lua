@@ -20,7 +20,7 @@ tribes:new_warehouse_type {
 		grout = 1
 	},
 
-	-- TRANSLATORS: Helptext for a building: Warehouse
+	-- #TRANSLATORS: Helptext for a building: Warehouse
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {

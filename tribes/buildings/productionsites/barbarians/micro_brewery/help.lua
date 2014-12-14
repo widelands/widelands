@@ -1,9 +1,7 @@
 -- The Barbarian Micro Brewery
-
 include "scripting/formatting.lua"
+set_textdomain("tribes")
 include "tribes/scripting/format_help.lua"
-
-set_textdomain("tribe_barbarians")
 
 return {
    func = function(building_description)
@@ -14,7 +12,7 @@ return {
 
 	--General Section
 	building_help_general_string("barbarians", building_description,
-		_"The micro brewery produces Beer of the lower grade. This beer is a vital component of the snacks that inns and big inns prepare for miners in deep mines.") ..
+		_"The micro brewery produces beer of the lower grade. This beer is a vital component of the snacks that inns and big inns prepare for miners in deep mines.") ..
 
 	--Dependencies
 	building_help_dependencies_production("barbarians", building_description) ..

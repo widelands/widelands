@@ -13,7 +13,7 @@ tribes:new_militarysite_type {
 		blackwood = 1
 	},
 
-	-- TRANSLATORS: Helptext for a militarysite: Sentry
+	-- #TRANSLATORS: Helptext for a militarysite: Sentry
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {

@@ -14,7 +14,7 @@ tribes:new_ware_type{
 	},
    helptext = {
 		-- TRANSLATORS: Helptext for a ware: Marble
-		empire = _"Marble is the beautiful stone which is cut out of the mountains or produced in a quarry. Marble is used as building material and gets chiselled into marble columns in the stonemason’s house."
+		empire = _"Marble is the beautiful stone which is cut out of the mountains or produced in a quarry. Marble is used as building material and gets chiseled into marble columns in the stonemason’s house."
    },
    animations = {
       idle = {

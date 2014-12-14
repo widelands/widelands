@@ -17,7 +17,7 @@ tribes:new_militarysite_type {
 		granite = 1
 	},
 
-	-- TRANSLATORS: Helptext for a militarysite: Small Tower
+	-- #TRANSLATORS: Helptext for a militarysite: Small Tower
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {

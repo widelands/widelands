@@ -22,7 +22,7 @@ tribes:new_productionsite_type {
 		grout = 1
 	},
 
-	-- TRANSLATORS: Helptext for a building: Axfactory
+	-- #TRANSLATORS: Helptext for a building: Axfactory
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {

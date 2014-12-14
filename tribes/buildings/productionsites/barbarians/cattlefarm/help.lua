@@ -1,9 +1,7 @@
 -- The Barbarian Cattle Farm
-
 include "scripting/formatting.lua"
+set_textdomain("tribes")
 include "tribes/scripting/format_help.lua"
-
-set_textdomain("tribe_barbarians")
 
 return {
    func = function(building_description)
@@ -14,7 +12,7 @@ return {
 
 	--General Section
 	building_help_general_string("barbarians", building_description,
-		_"Breeds oxen for adding them to the transportation system.") ..
+		_"Breeds strong oxen for adding them to the transportation system.") ..
 
 	--Dependencies
 	building_help_dependencies_production("barbarians", building_description) ..

@@ -21,6 +21,6 @@ tribes:new_worker_type {
 	},
 
 	-- TRANSLATORS: Helptext for a worker: Horse Breeder
-   helptext = _"Breeds the strong atlantean horses.",
+   helptext = _"Breeds the strong Atlantean horses for adding them to the transportation system.",
    animations = animations,
 }

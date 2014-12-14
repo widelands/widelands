@@ -23,7 +23,7 @@ tribes:new_militarysite_type {
 		quartz = 1
 	},
 
-	-- TRANSLATORS: Helptext for a building: Labyrinth
+	-- #TRANSLATORS: Helptext for a building: Labyrinth
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {

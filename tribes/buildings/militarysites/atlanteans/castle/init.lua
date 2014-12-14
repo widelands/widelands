@@ -20,7 +20,7 @@ tribes:new_militarysite_type {
 		log = 2
 	},
 
-	-- TRANSLATORS: Helptext for a militarysite: Castle
+	-- #TRANSLATORS: Helptext for a militarysite: Castle
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {

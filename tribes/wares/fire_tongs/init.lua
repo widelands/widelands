@@ -18,7 +18,7 @@ tribes:new_ware_type{
 	},
    helptext = {
 		-- TRANSLATORS: Helptext for a ware: Fire Tongs
-		default = _"Fire tongs are tools of the smelter, who works in the smelting works.",
+		default = _"Fire tongs are the tools of the smelter, who works in the smelting works.",
 		-- TRANSLATORS: Helptext for a ware: Fire Tongs
 		atlanteans = _"They are produced by the toolsmith.",
 		-- TRANSLATORS: Helptext for a ware: Fire Tongs

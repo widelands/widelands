@@ -1,9 +1,7 @@
 -- The Atlantean Quarry
-
 include "scripting/formatting.lua"
+set_textdomain("tribes")
 include "tribes/scripting/format_help.lua"
-
-set_textdomain("tribe_atlanteans")
 
 return {
    func = function(building_description)
@@ -14,7 +12,7 @@ return {
 
 	--General Section
 	building_help_general_string("atlanteans", building_description,
-		_"Carves granite out of rocks in the vicinity.", _"The quarry needs rocks to cut within the working radius.") ..
+		_"Cuts blocks of granite out of rocks in the vicinity.", _"The quarry needs rocks to cut within the working radius.") ..
 
 	--Dependencies
 	building_help_dependencies_production("atlanteans", building_description, true) ..

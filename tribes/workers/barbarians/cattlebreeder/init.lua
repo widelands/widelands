@@ -21,6 +21,6 @@ tribes:new_worker_type {
 	},
 
 	-- TRANSLATORS: Helptext for a worker: Cattle Breeder
-   helptext = _"Breeds the strong oxen that help with transporting wares.",
+   helptext = _"Breeds strong oxen for adding them to the transportation system.",
    animations = animations,
 }

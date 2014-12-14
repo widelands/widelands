@@ -25,7 +25,7 @@ tribes:new_warehouse_type {
 		gold = 1
 	},
 
-	-- TRANSLATORS: Helptext for a building: Port
+	-- #TRANSLATORS: Helptext for a building: Port
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {

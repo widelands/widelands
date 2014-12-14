@@ -21,7 +21,7 @@ tribes:new_productionsite_type {
 		grout = 1
 	},
 
-	-- TRANSLATORS: Helptext for a building: War Mill
+	-- #TRANSLATORS: Helptext for a building: War Mill
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {

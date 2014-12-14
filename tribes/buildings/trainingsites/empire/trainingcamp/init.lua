@@ -23,7 +23,7 @@ tribes:new_militarysite_type {
 		marble_column = 1
 	},
 
-	-- TRANSLATORS: Helptext for a building: Training Camp
+	-- #TRANSLATORS: Helptext for a building: Training Camp
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {

@@ -21,7 +21,7 @@ tribes:new_militarysite_type {
 		thatch_reed = 1
 	},
 
-	-- TRANSLATORS: Helptext for a building: Battle Arena
+	-- #TRANSLATORS: Helptext for a building: Battle Arena
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {

@@ -24,7 +24,7 @@ tribes:new_militarysite_type {
 		log = 1
 	},
 
-	-- TRANSLATORS: Helptext for a building: Dungeon
+	-- #TRANSLATORS: Helptext for a building: Dungeon
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {
@@ -97,7 +97,7 @@ tribes:new_militarysite_type {
 		},
 		upgrade_soldier_attack_3 = {
 			-- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-			descname = _"upgrading soldier attack from level level 3 to level 4",
+			descname = _"upgrading soldier attack from level 3 to level 4",
 			actions = {
 				"check_soldier=soldier attack 3",
 				"sleep=30000",

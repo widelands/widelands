@@ -1,9 +1,7 @@
 -- The Imperial Vineyard
-
 include "scripting/formatting.lua"
+set_textdomain("tribes")
 include "tribes/scripting/format_help.lua"
-
-set_textdomain("tribe_empire")
 
 return {
    func = function(building_description)
@@ -14,7 +12,7 @@ return {
 
 	--General Section
 	building_help_general_string("empire", building_description,
-		_"Plant grapevines and harvest grapes.") ..
+		_"Plants grapevines and harvests grapes.") ..
 
 	--Dependencies
 	building_help_dependencies_production("empire", building_description) ..

@@ -1,9 +1,7 @@
 -- The Barbarian Reed Yard
-
 include "scripting/formatting.lua"
+set_textdomain("tribes")
 include "tribes/scripting/format_help.lua"
-
-set_textdomain("tribe_barbarians")
 
 return {
    func = function(building_description)
@@ -14,7 +12,7 @@ return {
 
 	--General Section
 	building_help_general_string("barbarians", building_description,
-		_"The Reed Yard cultivates reed that serves two different purposes for the Barbarian tribe.",
+		_"The reed yard cultivates reed that serves two different purposes for the Barbarian tribe.",
 		_"Thatch reed is the traditional material for roofing, and it is woven into the extremely durable cloth that they use for their ships’ sails.") ..
 
 	--Dependencies

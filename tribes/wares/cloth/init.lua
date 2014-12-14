@@ -16,7 +16,7 @@ tribes:new_ware_type{
 	},
    helptext = {
 		-- TRANSLATORS: Helptext for a ware: Cloth
-		barbarians = _"Cloth is needed for barbarian ships. It is produced out of thatch reed.",
+		barbarians = _"Cloth is needed for Barbarian ships. It is produced out of thatch reed.",
 		-- TRANSLATORS: Helptext for a ware: Cloth
 		empire = _"Cloth is needed to build several buildings. It is also consumed in the armor smithy."
    },

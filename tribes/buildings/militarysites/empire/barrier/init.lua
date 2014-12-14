@@ -29,7 +29,7 @@ tribes:new_militarysite_type {
 		granite = 1
 	},
 
-	-- TRANSLATORS: Helptext for a militarysite: Barrier
+	-- #TRANSLATORS: Helptext for a militarysite: Barrier
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {

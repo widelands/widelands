@@ -33,6 +33,6 @@ tribes:new_worker_type {
 	},
 
 	-- TRANSLATORS: Helptext for a worker: Hunter
-   helptext = _"The Hunter brings good meat to the colonists.",
+   helptext = _"The hunter brings fresh, raw meat to the colonists.",
    animations = animations,
 }

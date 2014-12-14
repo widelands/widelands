@@ -13,7 +13,7 @@ add_worker_animations(animations, "walkload", dirname, "walkload", {8, 24}, 10)
 tribes:new_worker_type {
    name = "empire_miller",
    -- TRANSLATORS: This is a worker name used in lists of workers
-   descname = _"MIller",
+   descname = _"Miller",
 
    buildcost = {
 		empire_carrier = 1

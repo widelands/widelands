@@ -48,6 +48,6 @@ tribes:new_worker_type {
 	},
 
 	-- TRANSLATORS: Helptext for a worker: Stonemason
-   helptext = _"Cuts raw pieces of granite and marble out of rocks.",
+   helptext = _"Cuts blocks of granite and marble out of rocks in the vicinity.",
    animations = animations,
 }

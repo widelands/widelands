@@ -16,7 +16,7 @@ tribes:new_productionsite_type {
 		log = 1
 	},
 
-	-- TRANSLATORS: Helptext for a building: Forester’s House
+	-- #TRANSLATORS: Helptext for a building: Forester’s House
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {

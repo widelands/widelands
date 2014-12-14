@@ -22,7 +22,7 @@ tribes:new_ware_type{
 		-- TRANSLATORS: Helptext for a ware: Log
 		atlanteans = _"Atlanteans use logs also as the base for planks, which are used in nearly every building. Besides the sawmill, the charcoal kiln, the toolsmithy and the smokery also need logs for their work.",
 		-- TRANSLATORS: Helptext for a ware: Log
-		barbarians = _"Barbarian lumberjacks fell the trees; rangers take care of the supply of trees. Logs are also used in the metal workshop to build basic tools, and in the charcoal kiln for the production of coal. The wood hardener refines logs by hardening them in the fire, which produces blackwood.",
+		barbarians = _"Barbarian lumberjacks fell the trees; rangers take care of the supply of trees. Logs are also used in the metal workshop to build basic tools, and in the charcoal kiln for the production of coal. The wood hardener refines logs into blackwood by hardening them with fire.",
 		-- TRANSLATORS: Helptext for a ware: Log
 		empire = _"Imperial lumberjacks fell the trees; foresters take care of the supply of trees. Logs are also used by the charcoal kiln, the toolsmithy and the sawmill."
    },

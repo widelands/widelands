@@ -18,7 +18,7 @@ tribes:new_militarysite_type {
 		marble = 1
 	},
 
-	-- TRANSLATORS: Helptext for a militarysite: Outpost
+	-- #TRANSLATORS: Helptext for a militarysite: Outpost
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {

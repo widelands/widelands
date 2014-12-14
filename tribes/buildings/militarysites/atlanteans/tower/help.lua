@@ -1,9 +1,7 @@
 -- The Atlantean Tower
-
 include "scripting/formatting.lua"
+set_textdomain("tribes")
 include "tribes/scripting/format_help.lua"
-
-set_textdomain("tribe_atlanteans")
 
 return {
    func = function(building_description)

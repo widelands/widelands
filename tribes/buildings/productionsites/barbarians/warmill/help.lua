@@ -1,9 +1,7 @@
 -- The Barbarian War Mill
-
 include "scripting/formatting.lua"
+set_textdomain("tribes")
 include "tribes/scripting/format_help.lua"
-
-set_textdomain("tribe_barbarians")
 
 return {
    func = function(building_description)
@@ -27,7 +25,7 @@ return {
 	building_help_building_section("barbarians", building_description, "barbarians_axfactory", {"barbarians_metalworks", "barbarians_axfactory"}) ..
 
 	--Production Section
-	building_help_production_section(_"If all needed wares are delivered in time, this building can produce each ax in about %s on average.":bformat(
+	building_help_production_section(_"If all needed wares are delivered in time, this building can produce each type of ax in about %s on average.":bformat(
 		ngettext("%d second", "%d seconds", 57):bformat(57)
 		) .. " " ..
 		_"All weapons require the same time for making, but the consumption of the same raw materials increases from step to step. The last two need gold."

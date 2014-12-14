@@ -18,7 +18,7 @@ tribes:new_productionsite_type {
 		cloth = 1
 	},
 
-	-- TRANSLATORS: Helptext for a building: Shipyard
+	-- #TRANSLATORS: Helptext for a building: Shipyard
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {

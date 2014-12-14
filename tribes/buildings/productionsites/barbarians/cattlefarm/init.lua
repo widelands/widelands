@@ -16,7 +16,7 @@ tribes:new_productionsite_type {
 		blackwood = 1
 	},
 
-	-- TRANSLATORS: Helptext for a building: Cattle Farm
+	-- #TRANSLATORS: Helptext for a building: Cattle Farm
    helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
 
    animations = {

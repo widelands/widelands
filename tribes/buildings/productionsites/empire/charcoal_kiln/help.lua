@@ -1,9 +1,7 @@
 -- The Imperial Charcoal Kiln
-
 include "scripting/formatting.lua"
+set_textdomain("tribes")
 include "tribes/scripting/format_help.lua"
-
-set_textdomain("tribe_empire")
 
 return {
    func = function(building_description)

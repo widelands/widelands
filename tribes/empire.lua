@@ -4,7 +4,7 @@ tribes:new_tribe {
    name = "empire",
    author = _"The Widelands Development Team",
    -- TRANSLATORS: This is a tribe name
-   descname = _"_Empire",
+   descname = _"Empire",
    helptext = _"This is the culture of the Roman Empire.",
    bob_vision_range = 2,
    uiposition = 20,

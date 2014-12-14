@@ -21,6 +21,6 @@ tribes:new_worker_type {
 	},
 
 	-- TRANSLATORS: Helptext for a worker: Donkey Breeder
-   helptext = _"Breeds cute and helpful donkeys.",
+   helptext = _"Breeds cute and helpful donkeys for adding them to the transportation system.",
    animations = animations,
 }
