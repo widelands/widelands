@@ -229,7 +229,7 @@ add_subdirectory(src)
 install(
   DIRECTORY
     campaigns
-    fonts
+    i18n
     global
     tribes
     txts
