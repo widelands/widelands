@@ -1,5 +1,7 @@
 # Automatically created by Widelands bzr5319[campaigns] (Debug)
 
+# NOCOM(GunChleoc): This looks like a Barbarian set, but this is an Atlantean scenario. What is it used for?
+
 [global]
 packet_version="1"
 

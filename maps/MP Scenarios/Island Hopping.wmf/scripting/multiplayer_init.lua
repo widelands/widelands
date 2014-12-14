@@ -164,7 +164,7 @@ function place_headquarters()
    for idx, plr in ipairs(game.players) do
       local sf = map.player_slots[plr.number].starting_field
 
-      prefilled_buildings(plr, {"headquarters", sf.x, sf.y,
+      prefilled_buildings(plr, {"atlanteans_headquarters", sf.x, sf.y,
          wares = {
             diamond = 7,
             iron_ore = 5,
@@ -204,20 +204,20 @@ function place_headquarters()
             trident_light = 5,
          },
          workers = {
-            armorsmith = 1,
-            blackroot_farmer = 1,
-            builder = 10,
-            carrier = 40,
-            charcoal_burner = 1,
-            fish_breeder = 1,
-            geologist = 4,
-            miner = 4,
-            sawyer = 1,
-            stonecutter = 2,
-            toolsmith = 2,
-            weaponsmith = 1,
-            woodcutter = 3,
-            horse = 5,
+            atlanteans_armorsmith = 1,
+            atlanteans_blackroot_farmer = 1,
+            atlanteans_builder = 10,
+            atlanteans_carrier = 40,
+            atlanteans_charcoal_burner = 1,
+            atlanteans_fishbreeder = 1,
+            atlanteans_geologist = 4,
+            atlanteans_miner = 4,
+            atlanteans_sawyer = 1,
+            atlanteans_stonecutter = 2,
+            atlanteans_toolsmith = 2,
+            atlanteans_weaponsmith = 1,
+            atlanteans_woodcutter = 3,
+            atlanteans_horse = 5,
          },
          soldiers = {
             [{0,0,0,0}] = 35,
@@ -229,7 +229,7 @@ end
 -- Disable some Buildings for all players
 function disable_unused_buildings()
    for idx, plr in ipairs(game.players) do
-      plr:forbid_buildings{"shipyard"}
+      plr:forbid_buildings{"atlanteans_shipyard"}
    end
 end
 

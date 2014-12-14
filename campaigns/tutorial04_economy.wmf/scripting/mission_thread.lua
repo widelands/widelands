@@ -53,7 +53,7 @@ function burn_tavern_down()
    sleep(100*1000)
    message_box_objective(plr, ware_encyclopedia) -- a small insert
 
-   while #plr:get_buildings("tavern") < 2 do sleep(500) end
+   while #plr:get_buildings("empire_tavern") < 2 do sleep(500) end
    o.done = true
 
    plan_the_future()
@@ -117,7 +117,8 @@ function plan_the_future()
 
    local enough_wares = false
    while not enough_wares do
-      if (warehouse_field.immovable and (warehouse_field.immovable.descr.name == "warehouse")) then
+      if (warehouse_field.immovable and
+          (warehouse_field.immovable.descr.name == "empire_warehouse")) then
          if warehouse_field.immovable:get_wares("marble_column") >= 20 then
             enough_wares = true
          end

@@ -51,7 +51,7 @@ end
 function hop_to_next_island(plr, island_idx)
    -- Place the new HQ
    local new_hq_field = _start_fields[island_idx + 1][plr.number]
-   local new_hq = plr:place_building("headquarters", new_hq_field, false, true)
+   local new_hq = plr:place_building("atlanteans_headquarters", new_hq_field, false, true)
 
    -- Transfer stuff from HQs
    for i=1,island_idx do
@@ -65,7 +65,7 @@ function hop_to_next_island(plr, island_idx)
    end
 
    -- Transfer from existing warehouses
-   for idx,wh in ipairs(plr:get_buildings("warehouse")) do
+   for idx,wh in ipairs(plr:get_buildings("atlanteans_warehouse")) do
       local soldiers, workers, wares = _remove_content(wh)
       add_soldiers(new_hq, soldiers)
       add_workers(new_hq, workers)

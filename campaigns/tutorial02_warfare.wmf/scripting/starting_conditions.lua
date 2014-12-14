@@ -7,8 +7,8 @@ function init_player()
    plr:allow_buildings("all")
 
    prefilled_buildings(plr,
-      {"fortress", 32, 62, soldiers = {[{3,5,0,2}] = 8 }},
-      {"warehouse", 33, 57,
+      {"barbarians_fortress", 32, 62, soldiers = {[{3,5,0,2}] = 8 }},
+      {"barbarians_warehouse", 33, 57,
          soldiers = {
             [{0,0,0,0}] = 20, -- needed for training
             [{1,0,0,0}] = 1,
@@ -24,9 +24,9 @@ function init_player()
             [{3,5,0,2}] = 30,
          },
          workers = {
-            builder = 3,
-            ox = 15,
-            trainer = 2
+            barbarians_builder = 3,
+            barbarians_ox = 15,
+            barbarians_trainer = 2
          },
          wares = {
             log = 40,
@@ -51,10 +51,10 @@ function init_player()
             meat = 200
          }
       },
-      {"sentry", 28, 57, soldiers = {[{3,5,0,2}] = 2 }},
-      {"sentry", 37, 61, soldiers = {[{3,5,0,2}] = 2 }},
-      {"barrier", 30, 58, soldiers = {[{0,0,0,0}] = 1 }}, -- to make sure some soldiers walk out
-      {"lumberjacks_hut", 24, 1}
+      {"barbarians_sentry", 28, 57, soldiers = {[{3,5,0,2}] = 2 }},
+      {"barbarians_sentry", 37, 61, soldiers = {[{3,5,0,2}] = 2 }},
+      {"barbarians_barrier", 30, 58, soldiers = {[{0,0,0,0}] = 1 }}, -- to make sure some soldiers walk out
+      {"barbarians_lumberjacks_hut", 24, 1}
    )
 
    -- Build the roads

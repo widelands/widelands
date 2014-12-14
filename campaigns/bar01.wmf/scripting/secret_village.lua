@@ -95,33 +95,33 @@ function reveal_village()
 
    local plr = wl.Game().players[1]
    prefilled_buildings(plr,
-      {"sentry", 57, 9},
-      {"sentry", 52, 39},
-      {"hunters_hut", 56, 10},
-      {"gamekeepers_hut", 56, 12},
-      {"farm", 56, 16},
-      {"well", 54, 18},
-      {"bakery", 55, 20, wares = {wheat=6, water=6}},
-      {"lumberjacks_hut", 56, 21},
-      {"lumberjacks_hut", 55, 22},
-      {"lumberjacks_hut", 54, 24},
-      {"rangers_hut", 57, 24},
-      {"rangers_hut", 55, 25},
-      {"hardener", 54, 26, wares = {log = 8}},
+      {"barbarians_sentry", 57, 9},
+      {"barbarians_sentry", 52, 39},
+      {"barbarians_hunters_hut", 56, 10},
+      {"barbarians_gamekeepers_hut", 56, 12},
+      {"barbarians_farm", 56, 16},
+      {"barbarians_well", 54, 18},
+      {"barbarians_bakery", 55, 20, wares = {wheat = 6, water = 6}},
+      {"barbarians_lumberjacks_hut", 56, 21},
+      {"barbarians_lumberjacks_hut", 55, 22},
+      {"barbarians_lumberjacks_hut", 54, 24},
+      {"barbarians_rangers_hut", 57, 24},
+      {"barbarians_rangers_hut", 55, 25},
+      {"barbarians_wood_hardener", 54, 26, wares = {log = 8}},
       -- to make it more realistic
-      {"warehouse", 53, 28,
+      {"barbarians_warehouse", 53, 28,
          wares = {
             wheat = 20,
             log = 40,
             meat = 30
          }
       },
-      {"inn", 55, 28, wares = {bread_barbarians = 4, meat = 4}},
-      {"tavern", 57, 28, wares = {bread_barbarians=4, meat = 4}},
-      {"well", 52, 30},
-      {"farm", 54, 33},
-      {"bakery", 51, 35, wares = {wheat = 6, water = 6}},
-      {"well", 52, 37}
+      {"barbarians_inn", 55, 28, wares = {bread_barbarians = 4, meat = 4}},
+      {"barbarians_tavern", 57, 28, wares = {bread_barbarians = 4, meat = 4}},
+      {"barbarians_well", 52, 30},
+      {"barbarians_farm", 54, 33},
+      {"barbarians_bakery", 51, 35, wares = {wheat = 6, water = 6}},
+      {"barbarians_well", 52, 37}
    )
 
    -- Adjust the borders so that the village owns everything green
