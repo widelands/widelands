@@ -1,19 +1,4 @@
-# Comments are for graphic designers some ideas
-
-[tribe]
-
-# Some blue fires would be fine, but just an idea
-[frontier]
-pics=pics/frontier_??.png
-hotspot=3 12
-
-# Not just a plain color, maybe a cross or some stribes
-[flag]
-pics=pics/flag_??.png
-hotspot=15 35
-fps=10
-
-dirname = path.dirname(__file__)
+path.dirname(__file__)
 
 tribes:new_tribe {
    name = "atlanteans",
@@ -23,7 +8,21 @@ tribes:new_tribe {
    helptext = _"This tribe is known from the oldest tales. The sons and daughters of Atlantis.",
    bob_vision_range = 2,
    uiposition = 100,
-   icon = pics/icon.png, -- NOCOM convert
+   icon = "images/atlanteans/icon.png",
+
+   animations = {
+		-- Some blue fires would be fine, but just an idea
+		frontier = {
+			pictures = { dirname .. "images/atlanteans/frontier_\\d+.png" },
+			hotspot = { 3, 12 },
+		},
+		flag = {
+			-- Not just a plain color, maybe a cross or some stripes
+			pictures = { dirname .. "images/atlanteans/flag_\\d+.png" },
+			hotspot = { 15, 35 },
+			fps = 10
+		}
+	},
 
    -- Wares positions in wares windows.
    -- This also gives us the information which wares the tribe uses.

@@ -1,21 +1,3 @@
-# Comments are for graphic designers some ideas
-
-[tribe]
-
-[frontier]
-pics=pics/frontier_??.png
-hotspot=1 19
-
-
-[flag]
-pics=pics/flag_??.png
-hotspot=10 38
-fps=5
-
-
-[ship types]
-ship=_Ship
-
 dirname = path.dirname(__file__)
 
 tribes:new_tribe {
@@ -26,7 +8,19 @@ tribes:new_tribe {
    helptext = _"The mighty tribes of the east-lands.",
    bob_vision_range = 2,
    uiposition = 10,
-   icon = pics/icon.png, -- NOCOM convert
+   icon = "images/barbarians/icon.png",
+
+   animations = {
+		frontier = {
+			pictures = { dirname .. "images/barbarians/frontier_\\d+.png" },
+			hotspot = { 1, 19 },
+		},
+		flag = {
+			pictures = { dirname .. "images/barbarians/flag_\\d+.png" },
+			hotspot = { 10, 38 },
+			fps = 5
+		}
+	},
 
    -- Wares positions in wares windows.
    -- This also gives us the information which wares the tribe uses.

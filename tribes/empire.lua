@@ -1,19 +1,3 @@
-# Comments are for graphic designers some ideas
-
-[tribe]
-
-
-# No idea for the frontier. Maybe some javelins?
-[frontier]
-pics=pics/frontier_??.png
-hotspot=1 19
-
-# Not just a plain color, maybe a cross or some stribes
-[flag]
-pics=pics/flag_??.png
-hotspot=14 38
-fps=10
-
 dirname = path.dirname(__file__)
 
 tribes:new_tribe {
@@ -24,7 +8,21 @@ tribes:new_tribe {
    helptext = _"This is the culture of the Roman Empire.",
    bob_vision_range = 2,
    uiposition = 20,
-   icon = pics/icon.png, -- NOCOM convert
+   icon = "images/empire/icon.png",
+
+   animations = {
+		-- No idea for the frontier. Maybe some javelins?
+		frontier = {
+			pictures = { dirname .. "images/empire/frontier_\\d+.png" },
+			hotspot = { 1, 19 },
+		},
+		-- Not just a plain color, maybe a cross or some stripes
+		flag = {
+			pictures = { dirname .. "images/empire/flag_\\d+.png" },
+			hotspot = { 14, 38 },
+			fps = 10
+		}
+	},
 
    -- Wares positions in wares windows.
    -- This also gives us the information which wares the tribe uses.
