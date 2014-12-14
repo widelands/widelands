@@ -394,3 +394,11 @@ include "tribes/productionsites/empire/weaponsmithy/init.lua"
 include "tribes/productionsites/empire/weaving_mill/init.lua"
 include "tribes/productionsites/empire/well/init.lua"
 include "tribes/productionsites/empire/winery/init.lua"
+
+
+-- ===================================
+--    Partially FInished Buildings
+-- ===================================
+
+include "tribes/partially_finished/constructionsite/init.lua"
+include "tribes/partially_finished/dismantlesite/init.lua"

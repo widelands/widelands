@@ -1,8 +1,0 @@
-size=small   # dummy; overridden by building size
-buildable=no
-vision_range=2
-
-[idle]
-pics=dismanteling_i_??.png
-hotspot=5 5
-

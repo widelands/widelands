@@ -18,19 +18,6 @@ fps=10
 [ship types]
 ship=_Ship
 
-[constructionsite types]
-constructionsite=_Construction Site
-
-[dismantlesite types]
-dismantlesite=_Dismantle Site
-
-[warehouse types]
-headquarters=_Headquarters
-headquarters_shipwreck=_Headquarters Shipwreck
-warehouse=_Warehouse
-port=_Port
-
-
 dirname = path.dirname(__file__)
 
 tribes:new_tribe {
@@ -253,4 +240,16 @@ tribes:new_tribe {
 		"empire_toolsmithy",
 		"empire_weaponsmithy",
 	},
+   constructionsites = {
+		"constructionsite"
+	},
+   dismantlesites = {
+		"dismantlesite"
+	},
 }
+
+[warehouse types]
+headquarters=_Headquarters
+headquarters_shipwreck=_Headquarters Shipwreck
+warehouse=_Warehouse
+port=_Port
