@@ -53,7 +53,7 @@ obj_defeat_jomo = {
 
 function obj_message(title, text)
    return
-		rt("<p font-size=20 font-weight=bold font-face=DejaVuSerif font-color=3333FF>"
+		rt("<p font-size=20 font-weight=bold font-face=serif font-color=3333FF>"
 			..	title ..
 			"</p><p font-size=10> <br></p>"
 			.. p(text)

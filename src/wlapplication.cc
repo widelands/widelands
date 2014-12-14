@@ -54,6 +54,8 @@
 #include "graphic/default_resolution.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
+#include "graphic/text/font_set.h"
+#include "graphic/text_constants.h"
 #include "helper.h"
 #include "io/dedicated_log.h"
 #include "io/filesystem/disk_filesystem.h"
@@ -278,8 +280,8 @@ m_redirected_stdio(false)
 		throw wexception
 			("True Type library did not initialize: %s\n", TTF_GetError());
 
+	UI::g_fh1 = UI::create_fonthandler(g_gr); // This will create the fontset, so loading it first.
 	UI::g_fh = new UI::FontHandler();
-	UI::g_fh1 = UI::create_fonthandler(g_gr);
 
 	if (SDLNet_Init() == -1)
 		throw wexception("SDLNet_Init failed: %s\n", SDLNet_GetError());
@@ -720,7 +722,7 @@ bool WLApplication::init_settings() {
 
 	set_mouse_swap(s.get_bool("swapmouse", false));
 
-	// KLUDGE!
+	// TODO(unknown): KLUDGE!
 	// Without this the following config options get dropped by check_used().
 	// Profile needs support for a Syntax definition to solve this in a
 	// sensible way
@@ -750,7 +752,6 @@ bool WLApplication::init_settings() {
 	s.get_string("lasthost");
 	s.get_string("servername");
 	s.get_string("realname");
-	s.get_string("ui_font");
 	s.get_string("metaserver");
 	s.get_natural("metaserverport");
 	// KLUDGE!
@@ -772,7 +773,8 @@ void WLApplication::init_language() {
 	i18n::grab_textdomain("widelands");
 
 	// Set locale corresponding to selected language
-	i18n::set_locale(s.get_string("language", ""));
+	std::string language = s.get_string("language", "");
+	i18n::set_locale(language);
 }
 
 /**

@@ -26,6 +26,7 @@
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
+#include "graphic/text_constants.h"
 #include "logic/game_settings.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
@@ -33,8 +34,6 @@
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/textarea.h"
-#include "wui/text_constants.h"
-
 
 struct PlayerDescriptionGroupImpl {
 	GameSettingsProvider * settings;
@@ -52,8 +51,7 @@ PlayerDescriptionGroup::PlayerDescriptionGroup
 	(UI::Panel            * const parent,
 	 int32_t const x, int32_t const y, int32_t const w, int32_t const h,
 	 GameSettingsProvider * const settings,
-	 uint32_t               const plnum,
-	 UI::Font * font)
+	 uint32_t               const plnum)
 :
 UI::Panel(parent, x, y, w, h),
 d(new PlayerDescriptionGroupImpl)
@@ -67,7 +65,7 @@ d(new PlayerDescriptionGroupImpl)
 	int32_t xplayertribe = w * 80 / 125;
 	int32_t xplayerinit = w * 55 / 125;
 	d->plr_name = new UI::Textarea(this, xplrname, 0, xplayertype - xplrname, h);
-	d->plr_name->set_textstyle(UI::TextStyle::makebold(font, UI_FONT_CLR_FG));
+	d->plr_name->set_textstyle(UI::TextStyle::ui_small());
 	d->btnEnablePlayer = new UI::Checkbox(this, Point(xplayertype - 23, 0));
 	d->btnEnablePlayer->changedto.connect
 		(boost::bind(&PlayerDescriptionGroup::enable_player, this, _1));
@@ -79,7 +77,6 @@ d(new PlayerDescriptionGroupImpl)
 		 true, false);
 	d->btnPlayerType->sigclicked.connect
 		(boost::bind(&PlayerDescriptionGroup::toggle_playertype, boost::ref(*this)));
-	d->btnPlayerType->set_font(font);
 	d->btnPlayerTeam = new UI::Button
 		(this, "player_team",
 		 xplayerteam, h / 2, xplayerinit - xplayerteam - 2, h / 2,
@@ -88,7 +85,6 @@ d(new PlayerDescriptionGroupImpl)
 		 true, false);
 	d->btnPlayerTeam->sigclicked.connect
 		(boost::bind(&PlayerDescriptionGroup::toggle_playerteam, boost::ref(*this)));
-	d->btnPlayerTeam->set_font(font);
 	d->btnPlayerTribe = new UI::Button
 		(this, "player_tribe",
 		 xplayertribe, 0, w - xplayertribe, h / 2,
@@ -97,7 +93,6 @@ d(new PlayerDescriptionGroupImpl)
 		 true, false);
 	d->btnPlayerTribe->sigclicked.connect
 		(boost::bind(&PlayerDescriptionGroup::toggle_playertribe, boost::ref(*this)));
-	d->btnPlayerTribe->set_font(font);
 	d->btnPlayerInit = new UI::Button
 		(this, "player_initialization",
 		 xplayerinit, h / 2, w - xplayerinit, h / 2,
@@ -106,7 +101,6 @@ d(new PlayerDescriptionGroupImpl)
 		 true, false);
 	d->btnPlayerInit->sigclicked.connect
 		(boost::bind(&PlayerDescriptionGroup::toggle_playerinit, boost::ref(*this)));
-	d->btnPlayerInit->set_font(font);
 
 	refresh();
 }

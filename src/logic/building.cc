@@ -22,15 +22,18 @@
 #include <cstdio>
 #include <sstream>
 
+#include <boost/format.hpp>
+
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/request.h"
-#include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text/font_set.h"
+#include "graphic/text_layout.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/constructionsite.h"
@@ -44,7 +47,6 @@
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "wui/interactive_player.h"
-#include "wui/text_layout.h"
 
 namespace Widelands {
 
@@ -893,9 +895,9 @@ void Building::send_message
 	std::string rt_description;
 	rt_description.reserve
 		(strlen("<rt image=") + img.size() + 1 +
-		 strlen("<p font-size=14 font-face=DejaVuSerif></p>") +
+		 strlen("<p font-size=14 font-face=serif>") +
 		 description.size() +
-		 strlen("</rt>"));
+		 strlen("</p></rt>"));
 	rt_description  = "<rt image=";
 	rt_description += img;
 	{
@@ -904,9 +906,8 @@ void Building::send_message
 		for (;                                 *it == '?'; --it)
 			*it = '0';
 	}
-	rt_description += "><p font-size=14 font-face=DejaVuSerif>";
-	rt_description += description;
-	rt_description += "</p></rt>";
+	rt_description = (boost::format("%s><p font-face=serif font-size=14>%s</p></rt>")
+			% rt_description % description).str();
 
 	Message * msg = new Message
 		(msgsender, game.get_gametime(), title, rt_description,

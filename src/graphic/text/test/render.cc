@@ -37,7 +37,7 @@ StandaloneRenderer::StandaloneRenderer() {
 
 	texture_cache_.reset(create_texture_cache(500 << 20));  // 500 MB
 	image_cache_.reset(new ImageCache());
-	renderer_.reset(new RT::Renderer(image_cache_.get(), texture_cache_.get()));
+	renderer_.reset(new RT::Renderer(image_cache_.get(), texture_cache_.get(), new UI::FontSet("en")));
 }
 
 StandaloneRenderer::~StandaloneRenderer() {

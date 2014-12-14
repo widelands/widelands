@@ -20,9 +20,9 @@
 #include "ui_fsmenu/multiplayer.h"
 
 #include "base/i18n.h"
+#include "graphic/text_constants.h"
 #include "profile/profile.h"
 #include "wui/login_box.h"
-#include "wui/text_constants.h"
 
 FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer() :
 	FullscreenMenuMainMenu(),
@@ -85,7 +85,6 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer() :
 		showloginbox->sigclicked.connect
 			(boost::bind
 				(&FullscreenMenuMultiPlayer::show_internet_login, boost::ref(*this)));
-		showloginbox->set_font(font_small());
 	}
 }
 

@@ -24,6 +24,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/utility.hpp>
 
+#include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
@@ -44,7 +45,7 @@ using namespace boost;
 namespace {
 
 /// The size of the richtext surface cache in bytes. All work that the richtext
-//renderer does is / cached in this cache until it overflows.
+/// renderer does is / cached in this cache until it overflows.
 const uint32_t RICHTEXT_SURFACE_CACHE = 160 << 20;   // shifting converts to MB
 
 // An Image implementation that recreates a rich text texture when needed on
@@ -107,7 +108,8 @@ class FontHandler1 : public IFontHandler1 {
 public:
 	FontHandler1(ImageCache* image_cache)
 	   : texture_cache_(create_texture_cache(RICHTEXT_SURFACE_CACHE)),
-	     renderer_(new RT::Renderer(image_cache, texture_cache_.get())),
+	     fontset_(new UI::FontSet(i18n::get_locale())),
+	     renderer_(new RT::Renderer(image_cache, texture_cache_.get(), fontset_.get())),
 	     image_cache_(image_cache) {
 	}
 	virtual ~FontHandler1() {}
@@ -125,9 +127,17 @@ public:
 		return image_cache_->insert(hash, std::move(image));
 	}
 
+	UI::FontSet& fontset() const {return *fontset_.get();}
+
+	void reinitialize_fontset() {
+		fontset_.reset(new UI::FontSet(i18n::get_locale()));
+		renderer_.reset(new RT::Renderer(image_cache_, texture_cache_.get(), fontset_.get()));
+	}
+
 private:
 	std::unique_ptr<TextureCache> texture_cache_;
 	std::unique_ptr<RT::Renderer> renderer_;
+	unique_ptr<UI::FontSet> fontset_; // The currently active FontSet
 	ImageCache* const image_cache_;  // not owned
 };
 

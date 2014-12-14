@@ -47,6 +47,8 @@ wl_library(ui_fsmenu
     graphic
     graphic_image_io
     graphic_surface
+    graphic_text
+    graphic_text_layout
     helper
     io_filesystem
     logic
@@ -62,5 +64,4 @@ wl_library(ui_fsmenu
     widelands_ball_of_mud
     wui
     wui_chat_ui
-    wui_text_layout
 )
