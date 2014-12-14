@@ -1,0 +1,45 @@
+dirname = path.dirname(__file__)
+
+tribes:new_warehouse_type {
+   name = "barbarians_port",
+   -- TRANSLATORS: This is a building name used in lists of buildings
+   descname = _"Port",
+   size = "port",
+
+   buildcost = {
+		log = 3,
+		blackwood = 3,
+		granite = 5,
+		grout = 2,
+		iron = 2,
+		thatch_reed = 4,
+		gold = 2
+	},
+	return_on_dismantle = {
+		log = 1,
+		blackwood = 2,
+		granite = 3,
+		grout = 1,
+		iron = 1,
+		thatch_reed = 1,
+		gold = 1
+	},
+
+	-- TRANSLATORS: Helptext for a building: Port
+   helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
+
+   animations = {
+		idle = {
+			pictures = { dirname .. "idle_\\d+.png" },
+			hotspot = { 67, 80 },
+			fps = 10
+		},
+		build = {
+			pictures = { dirname .. "build_\\d+.png" },
+			hotspot = { 67, 80 }
+		}
+	},
+
+   conquers = 5,
+   heal_per_second = 170,
+}

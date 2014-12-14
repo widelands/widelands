@@ -397,7 +397,24 @@ include "tribes/productionsites/empire/winery/init.lua"
 
 
 -- ===================================
---    Partially FInished Buildings
+--    Warehouses
+-- ===================================
+
+include "tribes/warehouses/atlanteans/headquarters/init.lua"
+include "tribes/warehouses/atlanteans/port/init.lua"
+include "tribes/warehouses/atlanteans/warehouse/init.lua"
+include "tribes/warehouses/barbarians/headquarters/init.lua"
+include "tribes/warehouses/barbarians/headquarters_interim/init.lua"
+include "tribes/warehouses/barbarians/port/init.lua"
+include "tribes/warehouses/barbarians/warehouse/init.lua"
+include "tribes/warehouses/empire/headquarters/init.lua"
+include "tribes/warehouses/empire/headquarters_shipwreck/init.lua"
+include "tribes/warehouses/empire/port/init.lua"
+include "tribes/warehouses/empire/warehouse/init.lua"
+
+
+-- ===================================
+--    Partially Finished Buildings
 -- ===================================
 
 include "tribes/partially_finished/constructionsite/init.lua"

@@ -240,6 +240,12 @@ tribes:new_tribe {
 		"empire_toolsmithy",
 		"empire_weaponsmithy",
 	},
+   warehouses = {
+		"barbarians_headquarters",
+		"barbarians_headquarters_shipwreck",
+		"barbarians_port",
+		"barbarians_warehouse",
+	},
    constructionsites = {
 		"constructionsite"
 	},
@@ -247,9 +253,3 @@ tribes:new_tribe {
 		"dismantlesite"
 	},
 }
-
-[warehouse types]
-headquarters=_Headquarters
-headquarters_shipwreck=_Headquarters Shipwreck
-warehouse=_Warehouse
-port=_Port

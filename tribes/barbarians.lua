@@ -236,6 +236,12 @@ tribes:new_tribe {
 		"barbarians_warmill",
 		"barbarians_weaving_mill",
 	},
+   warehouses = {
+		"barbarians_headquarters",
+		"barbarians_headquarters_interim",
+		"barbarians_port",
+		"barbarians_warehouse",
+	},
    constructionsites = {
 		"constructionsite"
 	},
@@ -243,9 +249,3 @@ tribes:new_tribe {
 		"dismantlesite"
 	},
 }
-
-[warehouse types]
-headquarters=_Headquarters
-headquarters_interim=_Headquarters
-warehouse=_Warehouse
-port=_Port

@@ -229,6 +229,11 @@ tribes:new_tribe {
 		"atlanteans_weaponsmithy",
 
 	},
+   warehouses = {
+		"atlanteans_headquarters",
+		"atlanteans_port",
+		"atlanteans_warehouse",
+	},
    constructionsites = {
 		"constructionsite"
 	},
@@ -236,8 +241,3 @@ tribes:new_tribe {
 		"dismantlesite"
 	},
 }
-
-[warehouse types]
-headquarters=_Headquarters
-warehouse=_Warehouse
-port=_Port
