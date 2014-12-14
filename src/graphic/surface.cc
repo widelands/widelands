@@ -28,7 +28,6 @@
 #include "base/macros.h"
 #include "graphic/gl/blit_program.h"
 #include "graphic/gl/draw_line_program.h"
-#include "graphic/gl/draw_rect_program.h"
 #include "graphic/gl/fill_rect_program.h"
 #include "graphic/gl/utils.h"
 #include "graphic/graphic.h"
@@ -188,9 +187,10 @@ void blit_blended(const Rect& dst_rect,
 }
 
 void draw_rect(const Rect& rc, const RGBColor& clr, Surface* surface) {
-	surface->setup_gl();
-	glViewport(0, 0, surface->width(), surface->height());
-	DrawRectProgram::instance().draw(to_opengl(*surface, rc, ConversionMode::kMidPoint), clr);
+	draw_line(rc.x, rc.y, rc.x + rc.w, rc.y, clr, 1, surface);
+	draw_line(rc.x + rc.w, rc.y, rc.x + rc.w, rc.y + rc.h, clr, 1, surface);
+	draw_line(rc.x + rc.w, rc.y + rc.h, rc.x, rc.y + rc.h, clr, 1, surface);
+	draw_line(rc.x, rc.y + rc.h, rc.x, rc.y, clr, 1, surface);
 }
 
 void blit(const Rect& dst_rect,
