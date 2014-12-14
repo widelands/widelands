@@ -1,4 +1,4 @@
--- The Imperial Iron Ore Mine
+-- The Imperial Iron Mine
 
 include "scripting/formatting.lua"
 include "tribes/scripting/format_help.lua"

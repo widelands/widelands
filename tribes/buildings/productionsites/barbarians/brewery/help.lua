@@ -23,7 +23,7 @@ return {
 	building_help_crew_string("barbarians", building_description) ..
 
 	--Building Section
-	building_help_building_section("barbarians", building_description, "micro-brewery", {"micro-brewery"}) ..
+	building_help_building_section("barbarians", building_description, "barbarians_micro_brewery", {"barbarians_micro_brewery"}) ..
 
 	--Production Section
 	building_help_production_section(_[[Calculation needed]])

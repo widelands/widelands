@@ -1,4 +1,4 @@
--- The Barbarian Deeper Iron Ore Mine
+-- The Barbarian Deeper Iron Mine
 
 include "scripting/formatting.lua"
 include "tribes/scripting/format_help.lua"
@@ -25,7 +25,7 @@ return {
 	building_help_crew_string("barbarians", building_description) ..
 
 	--Building Section
-	building_help_building_section("barbarians", building_description, "deep_oremine", {"oremine", "deep_oremine"}) ..
+	building_help_building_section("barbarians", building_description, "barbarians_ironmine_deep", {"barbarians_ironmine", "barbarians_ironmine_deep"}) ..
 
 	--Production Section
 	building_help_production_section(_"If the food supply is steady, this mine can produce iron ore in %s on average.":bformat(

@@ -1,4 +1,4 @@
--- The Barbarian Iron Ore Mine
+-- The Barbarian Iron Mine
 
 include "scripting/formatting.lua"
 include "tribes/scripting/format_help.lua"

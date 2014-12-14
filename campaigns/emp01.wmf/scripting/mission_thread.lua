@@ -26,11 +26,11 @@ function mission_thread()
 
    campaign_message_box(saledus_1)
    p1:allow_buildings{"empire_blockhouse"}
-   local o = add_campaign_objective(obj_build_barracks)
+   local o = add_campaign_objective(obj_build_blockhouse)
    while #p1:get_buildings("empire_blockhouse") < 1 do sleep(3249) end
    o.done = true
 
-   -- Barracks are completed now
+   -- Blockhouse is completed now
    campaign_message_box(saledus_2)
    p1:allow_buildings{"empire_lumberjacks_house"}
    o = add_campaign_objective(obj_build_lumberjack)

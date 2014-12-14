@@ -17,6 +17,6 @@ return {
 		_"If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.") ..
 
 	--Building Section
-	building_help_building_section("empire", building_description, "fortress", {"fortress"})
+	building_help_building_section("empire", building_description, "empire_fortress", {"empire_fortress"})
    end
 }

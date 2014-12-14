@@ -30,11 +30,11 @@ return {
 	dependencies_training_food("barbarians", { {"fish", "meat"}, {"bread_barbarians"}}) ..
 	dependencies_training_weapons("barbarians", building_description, "and", {"ax_sharp", "ax_broad"}, "axfactory") ..
 	dependencies_training_weapons("barbarians", building_description, "or",
-		{"ax_sharp", "ax_broad", "ax_bronze", "ax_battle", "ax_warriors"}, "warmill") ..
+		{"ax_sharp", "ax_broad", "ax_bronze", "ax_battle", "ax_warriors"}, "barbarians_warmill") ..
 
 	rt(h3(_"Health Training:")) ..
 	dependencies_training_food("barbarians", { {"fish", "meat"}, {"bread_barbarians"}}) ..
-	dependencies_training_weapons("barbarians", building_description, "and", {"helmet", "helmet_mask", "helmet_warhelm"}, "helmsmithy") ..
+	dependencies_training_weapons("barbarians", building_description, "and", {"helmet", "helmet_mask", "helmet_warhelm"}, "barbarians_helmsmithy") ..
 
 	--Workers Section
 	building_help_crew_string("barbarians", building_description) ..

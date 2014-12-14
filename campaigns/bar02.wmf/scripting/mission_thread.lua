@@ -87,8 +87,8 @@ function foottracks()
 
    local pts = scroll_smoothly_to(game.map:get_field(67,19))
 
-   campaign_message_box(order_msg_2_build_a_donjon)
-   local o = add_campaign_objective(obj_build_a_donjon)
+   campaign_message_box(order_msg_2_build_a_tower)
+   local o = add_campaign_objective(obj_build_a_tower)
    p1:forbid_buildings{"barbarians_sentry"}
    p1:allow_buildings{"barbarians_tower"}
 

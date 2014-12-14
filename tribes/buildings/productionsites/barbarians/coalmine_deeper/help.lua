@@ -26,7 +26,7 @@ Wood may serve for a household fire and to keep you warm, but when it comes to w
 	building_help_crew_string("barbarians", building_description) ..
 
 	--Building Section
-	building_help_building_section("barbarians", building_description, "deep_coalmine", {"coalmine", "deep_coalmine"}) ..
+	building_help_building_section("barbarians", building_description, "barbarians_coalmine_deep", {"barbarians_coalmine", "barbarians_coalmine_deep"}) ..
 
 	--Production Section
 	building_help_production_section(_"If the food supply is steady, this mine can produce coal in %s on average.":bformat(

@@ -23,12 +23,12 @@ end
 -- ===========
 -- objectives
 -- ===========
-obj_build_barracks = {
-   name = "build_barracks",
-   title=_"Build a barracks",
+obj_build_blockhouse = {
+   name = "build_blockhouse",
+   title=_"Build a blockhouse",
    number = 1,
-   body = objective_text(_"Barracks",
-      listitem_bullet(_[[Build a barracks at the red house symbol on the east side of the forests, to the right of your provisional headquarters.]])
+   body = objective_text(_"Blockhouse",
+      listitem_bullet(_[[Build a blockhouse at the red house symbol on the east side of the forests, to the right of your provisional headquarters.]])
    ),
 }
 
@@ -119,8 +119,8 @@ saledus_1 = {
 		.. paragraphdivider() ..
 		_([[Well, perhaps my fear is misguided, but it can’t be wrong to keep watch in the forests – so that we can be sure to see any potential enemies before they can see us.]])
 		.. paragraphdivider() ..
-		_([[We really should build a barracks in the eastern portion of the forest. Then one of us can keep watch in the darkness and keep us safe from these creatures.]]))
-		.. new_objectives(obj_build_barracks),
+		_([[We really should build a blockhouse in the eastern portion of the forest. Then one of us can keep watch in the darkness and keep us safe from these creatures.]]))
+		.. new_objectives(obj_build_blockhouse),
    w=400,
 }
 
@@ -128,7 +128,7 @@ saledus_1 = {
 saledus_2 = {
    title=_"Safe For Now",
    body= saledus(_"Saledus speaks with a sigh of relief…",
-		_([[Sire, I saw that the construction of the barracks was completed, so I have assigned one of my best soldiers to it to keep watch on the desert.]])
+		_([[Sire, I saw that the construction of the blockhouse was completed, so I have assigned one of my best soldiers to it to keep watch on the desert.]])
 		.. paragraphdivider() ..
 	_([[This is a good step forward. Now we can feel a bit safer and can look forward to repairing our ship.]])),
    w=400,
@@ -139,7 +139,7 @@ amalea_1 = {
    body= amalea(_"Amalea smiles…",
 		_([[Hey Lutius, I just met Saledus outside.]])
 		.. paragraphdivider() ..
-		_([[He told me about the barracks. Well, I am not one of those girls who think we need more barracks – instead, we might concentrate on other things now.]])
+		_([[He told me about the blockhouse. Well, I am not one of those girls who think we need more blockhouse – instead, we might concentrate on other things now.]])
 		.. paragraphdivider() ..
 		_([[It is absolutely clear that we need wood to repair our ship. So, I walked through the forest yesterday and found a nice place for a lumberjack’s house, south of our provisional headquarters.]]))
 		.. new_objectives(obj_build_lumberjack),

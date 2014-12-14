@@ -456,7 +456,7 @@ introduce_expansion = {
    title = _"Expanding Your Territory!",
    body = rt(
       p(_[[There is one more thing I’d like to teach you now: Expanding your territory. The place that we started with around our headquarters is barely enough for a basic building infrastructure, and we do not have access to mountains, which we need to mine minerals and coal. So, we have to expand our territory.]]) ..
-      p(_[[Expanding is as simple as building a military building at the edge of your territory. The barbarians have a selection of different military buildings: sentries, barriers, donjons, fortresses and citadels. The bigger the building, the more expensive it is to build, but the more land it will conquer around itself and the more soldiers can be stationed there. The buildings also vary in their vision range: buildings with a tower see farther than others.]]) ..
+      p(_[[Expanding is as simple as building a military building at the edge of your territory. The barbarians have a selection of different military buildings: sentries, barriers, towers, fortresses and citadels. The bigger the building, the more expensive it is to build, but the more land it will conquer around itself and the more soldiers can be stationed there. The buildings also vary in their vision range: buildings with a tower see farther than others.]]) ..
       p(_[[As soon as a military building is manned, it will extend your land. I will tell your more about military buildings in another tutorial.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[Let’s try it out now: build a military building on your border.]]) ..
@@ -468,7 +468,7 @@ introduce_expansion = {
       h1(_"Make your territory grow") ..
       p(_[[In Widelands, it is necessary to build many buildings, which take up a lot of space. To expand your territory, you have to build military buildings next to your border. Every tribe has several military buildings.]]) ..
       paragraphdivider() ..
-      listitem_bullet(_[[The Barbarians have four different military buildings you can build: the sentry (small), the barrier and the donjon (both medium) and the fortress (big). Just choose the one you like most.]]) ..
+      listitem_bullet(_[[The Barbarians have four different military buildings you can build: the sentry (small), the barrier and the tower (both medium) and the fortress (big). Just choose the one you like most.]]) ..
       listitem_arrow(_[[Remember that big buildings (green icon) cannot be built on small (red) or medium (yellow) building plots, but buildings can be built on a building plot that provides more space than they need. You should always keep that in mind when you search for a suitable place.]])
    )
 }

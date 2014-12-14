@@ -41,12 +41,12 @@ obj_build_cattlefarm = {
    ),
 }
 
-obj_build_a_donjon = {
-   name = "build_a_donjon",
-   title = _"Build a donjon",
+obj_build_a_tower = {
+   name = "build_a_tower",
+   title = _"Build a tower",
    number = 1,
-   body = objective_text(_"Build a donjon",
-      listitem_bullet(_"Build a donjon at the north-east border of your territory to get greater visual range and to protect your people from sudden attacks by enemies."))
+   body = objective_text(_"Build a tower",
+      listitem_bullet(_"Build a tower at the north-east border of your territory to get greater visual range and to protect your people from sudden attacks by enemies."))
 }
 
 obj_explore_further = {
@@ -226,12 +226,12 @@ story_note_1 = {
 		_([[Khantrukh has just informed me that our basic food economy was built up successfully. Finally, none of us has to fear starvation anymore.]]))
 }
 
-order_msg_2_build_a_donjon = {
+order_msg_2_build_a_tower = {
    posy = 1,
    title = _"Tracks",
    body = boldreth(_"Boldreth says:",
-		_([[Thron told me that he discovered tracks in the snow to the northeast of our settlement. He has instructed us to build a donjon, to have a greater visual range over the area around our hall to protect our people from sudden attacks.]]))
-		.. new_objectives(obj_build_a_donjon)
+		_([[Thron told me that he discovered tracks in the snow to the northeast of our settlement. He has instructed us to build a tower, to have a greater visual range over the area around our hall to protect our people from sudden attacks.]]))
+		.. new_objectives(obj_build_a_tower)
 }
 
 order_msg_3_explore_further = {
@@ -271,7 +271,7 @@ story_note_3 = {
    posy = 1,
    title = _"Fortress Completed",
    body = thron(_"Thron says:",
-		_([[Finally! The fortress has just been completed, so the entrance to our settlement should be safe for now. For the future, we might think on building some more fortifications like barriers and donjons at the passages, but for now we can take a deep breath.]]))
+		_([[Finally! The fortress has just been completed, so the entrance to our settlement should be safe for now. For the future, we might think on building some more fortifications like barriers and towers at the passages, but for now we can take a deep breath.]]))
 }
 
 order_msg_6_build_enhanced_economy_and_training = {

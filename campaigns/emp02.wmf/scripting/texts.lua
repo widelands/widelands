@@ -46,7 +46,7 @@ obj_build_military_buildings = {
    title =_"Protect your colony",
    number = 1,
    body = objective_text(_"Protect Your Colony",
-      listitem_bullet(_[[Build some barracks and sentries around the colony.]])
+      listitem_bullet(_[[Build some blockhouses and sentries around the colony.]])
    ),
 }
 
@@ -156,7 +156,7 @@ saledus_1 = {
 		.. paragraphdivider() ..
 		_([[Perhaps the people aboard that ship were caught in the same storm which brought us to Malac’ Mor – and were brought to this island.]])
 		.. paragraphdivider() ..
-		_([[I beg you to be cautious and to build some barracks or sentries around our colony.]]))
+		_([[I beg you to be cautious and to build some blockhouses or sentries around our colony.]]))
 		.. new_objectives(obj_build_military_buildings)
 }
 

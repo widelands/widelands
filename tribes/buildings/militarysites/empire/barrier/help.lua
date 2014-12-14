@@ -21,6 +21,6 @@ return {
 	-- Display build cost, upgrade cost, and dismantle costs for both versions.
 	-- Dismantle returns for upgraded version: 2 granite, 1 planks, 1 marble
 	-- Dismantle returns for built version: 1 granite, 1 log, 1 planks
-	building_help_building_section("empire", building_description, "outpost", {"outpost"})
+	building_help_building_section("empire", building_description, "empire_outpost", {"empire_outpost"})
    end
 }

@@ -1,4 +1,4 @@
--- The Imperial Barracks
+-- The Imperial Blockhouse
 
 include "scripting/formatting.lua"
 include "tribes/scripting/format_help.lua"

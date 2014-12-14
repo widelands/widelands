@@ -20,6 +20,6 @@ return {
 	-- This building can both be upgraded or built directly.
 	-- Display build cost, upgrade cost, and dismantle costs for both versions.
 	-- Dismantle returns the same for both versions
-	building_help_building_section("empire", building_description, "barracks", {"barracks"})
+	building_help_building_section("empire", building_description, "empire_blockhouse", {"empire_blockhouse"})
    end
 }

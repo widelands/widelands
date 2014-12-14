@@ -28,7 +28,7 @@ return {
 	rt(h3(_"Defense Training:")) ..
 	dependencies_training_food("atlanteans", { {"smoked_fish", "smoked_meat"}, {"bread_atlanteans"}}) ..
 	dependencies_training_weapons("atlanteans", building_description, "and",
-		{"shield_steel", "shield_advanced"}, "armorsmithy") ..
+		{"shield_steel", "shield_advanced"}, "atlanteans_armorsmithy") ..
 
 	rt(h3(_"Evade Training:")) ..
 	dependencies_training_food("atlanteans", { {"smoked_fish", "smoked_meat"}}) ..
@@ -36,7 +36,7 @@ return {
 	rt(h3(_"Health Training:")) ..
 	dependencies_training_food("atlanteans", { {"smoked_fish", "smoked_meat"}, {"bread_atlanteans"}}) ..
 	dependencies_training_weapons("atlanteans", building_description, "and",
-		{"tabard_golden"}, "weaving-mill") ..
+		{"tabard_golden"}, "atlanteans_weaving_mill") ..
 
 	--Workers Section
 	building_help_crew_string("atlanteans", building_description) ..

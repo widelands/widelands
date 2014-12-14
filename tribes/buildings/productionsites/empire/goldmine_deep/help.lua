@@ -23,7 +23,7 @@ return {
 	building_help_crew_string("empire", building_description) ..
 
 	--Building Section
-	building_help_building_section("empire", building_description, "goldmine", {"goldmine"}) ..
+	building_help_building_section("empire", building_description, "empire_goldmine", {"empire_goldmine"}) ..
 
 	--Production Section
 	building_help_production_section(_[[Calculation needed]])

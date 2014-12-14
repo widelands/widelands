@@ -29,12 +29,12 @@ return {
 	rt(h3(_"Attack Training:")) ..
 	dependencies_training_food("empire", { {"fish", "meat"}, {"bread_empire"}}) ..
 	dependencies_training_weapons("empire", building_description, "and",
-		{"spear", "spear_advanced", "spear_heavy", "spear_war"}, "weaponsmithy") ..
+		{"spear", "spear_advanced", "spear_heavy", "spear_war"}, "empire_weaponsmithy") ..
 
 	rt(h3(_"Health Training:")) ..
 	dependencies_training_food("empire", { {"fish", "meat"}, {"bread_empire"}}) ..
 	dependencies_training_weapons("empire", building_description, "and",
-		{"armor_helmet", "armor", "armor_chain", "armor_gilded"}, "armorsmithy") ..
+		{"armor_helmet", "armor", "armor_chain", "armor_gilded"}, "empire_armorsmithy") ..
 
 	--Workers Section
 	building_help_crew_string("empire", building_description) ..

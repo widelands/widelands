@@ -25,7 +25,7 @@ return {
 	building_help_crew_string("barbarians", building_description) ..
 
 	--Building Section
-	building_help_building_section("barbarians", building_description, "oremine", {"oremine"}) ..
+	building_help_building_section("barbarians", building_description, "barbarians_ironmine", {"barbarians_ironmine"}) ..
 
 	--Production Section
 	building_help_production_section(_"If the food supply is steady, this mine can produce iron ore in %s on average.":bformat(

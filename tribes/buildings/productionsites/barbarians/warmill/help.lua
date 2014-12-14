@@ -24,7 +24,7 @@ return {
 	building_help_crew_string("barbarians", building_description) ..
 
 	--Building Section
-	building_help_building_section("barbarians", building_description, "axfactory", {"metalworks", "axfactory"}) ..
+	building_help_building_section("barbarians", building_description, "barbarians_axfactory", {"barbarians_metalworks", "barbarians_axfactory"}) ..
 
 	--Production Section
 	building_help_production_section(_"If all needed wares are delivered in time, this building can produce each ax in about %s on average.":bformat(
