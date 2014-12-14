@@ -54,7 +54,7 @@ tribes:new_militarysite_type {
 
 	programs = {
 		sleep = {
-			-- TRANSLATORS: "Completed/Skipped/Did not start sleeping because ...
+			-- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
 			descname = _"sleeping",
 			actions = {
 				"sleep=5000",
@@ -62,7 +62,7 @@ tribes:new_militarysite_type {
 			}
 		},
 		upgrade_soldier_evade_0 = {
-			-- TRANSLATORS: "Completed/Skipped/Did not start upgrading ... because ...
+			-- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 			descname = _"upgrading soldier evade from level 0 to level 1",
 			actions = {
 				"check_soldier=soldier evade 0", -- Fails when aren't any soldier of level 0 evade

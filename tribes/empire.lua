@@ -30,43 +30,6 @@ headquarters_shipwreck=_Headquarters Shipwreck
 warehouse=_Warehouse
 port=_Port
 
-[productionsite types]
-quarry=_Quarry
-lumberjacks_house=_Lumberjack’s House
-foresters_house=_Forester’s House
-fishers_house=_Fisher’s House
-hunters_house=_Hunter’s House
-well=_Well
-scouts_house=_Scout’s House
-stonemasons_house=_Stonemason’s House
-sawmill=_Sawmill
-mill=_Mill
-bakery=_Bakery
-brewery=_Brewery
-vineyard=_Vineyard
-winery=_Winery
-inn=_Inn
-tavern=_Tavern
-charcoal_kiln=_Charcoal Kiln
-smelting_works=_Smelting Works
-shipyard=_Shipyard
-toolsmithy=_Toolsmithy
-armorsmithy=_Armor Smithy
-donkeyfarm=_Donkey Farm
-sheepfarm=_Sheep Farm
-weaving-mill=_Weaving Mill
-piggery=_Piggery
-farm=_Farm
-weaponsmithy=_Weapon Smithy
-deep_marblemine=_Deep Marble Mine
-marblemine=_Marble Mine
-deep_coalmine=_Deep Coal Mine
-coalmine=_Coal Mine
-deep_oremine=_Deep Iron Ore Mine
-oremine=_Iron Ore Mine
-deep_goldmine=_Deep Gold Mine
-goldmine=_Gold Mine
-
 
 dirname = path.dirname(__file__)
 
@@ -243,5 +206,51 @@ tribes:new_tribe {
 		"empire_arena",
 		"empire_colosseum",
 		"empire_trainingcamp",
-	}
+	},
+   productionsites = {
+		-- Carriers
+		"empire_donkeyfarm",
+
+		-- Building Materials
+		"empire_foresters_house",
+		"empire_lumberjacks_house",
+		"empire_quarry",
+		"empire_sawmill",
+		"empire_stonemasons_house",
+		"empire_sheepfarm",
+		"empire_weaving_mill",
+
+		-- Food
+		"empire_bakery",
+		"empire_brewery",
+		"empire_farm",
+		"empire_fishers_house",
+		"empire_hunters_house",
+		"empire_inn",
+		"empire_mill",
+		"empire_piggery",
+		"empire_tavern",
+		"empire_vineyard",
+		"empire_well",
+		"empire_winery",
+
+		-- Mining
+		"empire_charcoal_kiln",
+		"empire_coalmine",
+		"empire_coalmine_deep",
+		"empire_goldmine",
+		"empire_goldmine_deep",
+		"empire_ironmine",
+		"empire_ironmine_deep",
+		"empire_marblemine",
+		"empire_marblemine_deep",
+		"empire_smelting_works",
+
+		-- Tools, Military & Ships
+		"empire_armorsmithy",
+		"empire_scouts_house",
+		"empire_shipvard",
+		"empire_toolsmithy",
+		"empire_weaponsmithy",
+	},
 }

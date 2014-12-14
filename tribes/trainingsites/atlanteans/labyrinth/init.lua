@@ -66,7 +66,7 @@ tribes:new_militarysite_type {
 
 	programs = {
 		sleep = {
-			-- TRANSLATORS: "Completed/Skipped/Did not start sleeping because ...
+			-- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
 			descname = _"sleeping",
 			actions = {
 				"sleep=5000",
@@ -74,7 +74,7 @@ tribes:new_militarysite_type {
 			}
 		},
 		upgrade_soldier_defense_0 = {
-			-- TRANSLATORS: "Completed/Skipped/Did not start upgrading ... because ...
+			-- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 			descname = _"upgrading soldier defense from level 0 to level 1",
 			actions = {
 				"check_soldier=soldier defense 0", -- Fails when aren't any soldier of level 0 defense
@@ -85,7 +85,7 @@ tribes:new_militarysite_type {
 			}
 		},
 		upgrade_soldier_defense_1 = {
-			-- TRANSLATORS: "Completed/Skipped/Did not start upgrading ... because ...
+			-- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 			descname = _"upgrading soldier defense from level 1 to level 2",
 			actions = {
 				"check_soldier=soldier defense 1", -- Fails when aren't any soldier of level 1 defense
@@ -96,7 +96,7 @@ tribes:new_militarysite_type {
 			}
 		},
 		upgrade_soldier_hp_0 = {
-			-- TRANSLATORS: "Completed/Skipped/Did not start upgrading ... because ...
+			-- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 			descname = _"upgrading soldier health from level 0 to level 1",
 			actions = {
 				"check_soldier=soldier hp 0", -- Fails when aren't any soldier of level 0 hp
@@ -107,7 +107,7 @@ tribes:new_militarysite_type {
 			}
 		},
 		upgrade_soldier_evade_0 = {
-			-- TRANSLATORS: "Completed/Skipped/Did not start upgrading ... because ...
+			-- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 			descname = _"upgrading soldier evade from level 0 to level 1",
 			actions = {
 				"check_soldier=soldier evade 0", -- Fails when aren't any soldier of level 0 evade
@@ -118,12 +118,12 @@ tribes:new_militarysite_type {
 			}
 		},
 		upgrade_soldier_evade_1 = {
-			-- TRANSLATORS: "Completed/Skipped/Did not start upgrading ... because ...
+			-- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 			descname = _"upgrading soldier evade from level 1 to level 2",
 			actions = {
 				"check_soldier=soldier evade 1", -- Fails when aren't any soldier of level 1 evade
 				"sleep=30000",
-				"check_soldier=soldier evade 1", -- Because the soldier can be expulsed by the player
+				"check_soldier=soldier evade 1", -- Because the soldier can be expelled by the player
 				"consume=bread_atlanteans:2 smoked_fish,smoked_meat:2",
 				"train=soldier evade 1 2"
 			}

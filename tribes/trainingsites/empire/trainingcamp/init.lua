@@ -66,7 +66,7 @@ tribes:new_militarysite_type {
 
 	programs = {
 		sleep = {
-			-- TRANSLATORS: "Completed/Skipped/Did not start sleeping because ...
+			-- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
 			descname = _"sleeping",
 			actions = {
 				"sleep=5000",
@@ -74,7 +74,7 @@ tribes:new_militarysite_type {
 			}
 		},
 		upgrade_soldier_attack_0 = {
-			-- TRANSLATORS: "Completed/Skipped/Did not start upgrading ... because ...
+			-- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 			descname = _"upgrading soldier attack from level 0 to level 1",
 			actions = {
 				"check_soldier=soldier attack 0" -- Fails when aren't any soldier of level 0 attack
@@ -85,7 +85,7 @@ tribes:new_militarysite_type {
 			}
 		},
 		upgrade_soldier_attack_1 = {
-			-- TRANSLATORS: "Completed/Skipped/Did not start upgrading ... because ...
+			-- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 			descname = _"upgrading soldier attack from level 1 to level 2",
 			actions = {
 				"check_soldier=soldier attack 1",
@@ -96,7 +96,7 @@ tribes:new_militarysite_type {
 			}
 		},
 		upgrade_soldier_attack_2 = {
-			-- TRANSLATORS: "Completed/Skipped/Did not start upgrading ... because ...
+			-- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 			descname = _"upgrading soldier attack from level 2 to level 3",
 			actions = {
 				"check_soldier=soldier attack 2",
@@ -107,7 +107,7 @@ tribes:new_militarysite_type {
 			}
 		},
 		upgrade_soldier_attack_3 = {
-			-- TRANSLATORS: "Completed/Skipped/Did not start upgrading ... because ...
+			-- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 			descname = _"upgrading soldier attack from level 3 to level 4",
 			actions = {
 				"check_soldier=soldier attack 3",
@@ -118,7 +118,7 @@ tribes:new_militarysite_type {
 			}
 		},
 		upgrade_soldier_hp_0 = {
-			-- TRANSLATORS: "Completed/Skipped/Did not start upgrading ... because ...
+			-- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 			descname = _"upgrading soldier health from level 0 to level 1",
 			actions = {
 				"check_soldier=soldier hp 0",
@@ -129,7 +129,7 @@ tribes:new_militarysite_type {
 			}
 		},
 		upgrade_soldier_hp_1 = {
-			-- TRANSLATORS: "Completed/Skipped/Did not start upgrading ... because ...
+			-- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 			descname = _"upgrading soldier health from level 1 to level 2",
 			actions = {
 				"check_soldier=soldier hp 1",
@@ -140,7 +140,7 @@ tribes:new_militarysite_type {
 			}
 		},
 		upgrade_soldier_hp_2 = {
-			-- TRANSLATORS: "Completed/Skipped/Did not start upgrading ... because ...
+			-- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 			descname = _"upgrading soldier health from level 2 to level 3",
 			actions = {
 				"check_soldier=soldier hp 2",
@@ -151,7 +151,7 @@ tribes:new_militarysite_type {
 			}
 		},
 		upgrade_soldier_hp_3 = {
-			-- TRANSLATORS: "Completed/Skipped/Did not start upgrading ... because ...
+			-- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 			descname = _"upgrading soldier health from level 3 to level 4",
 			actions = {
 				"check_soldier=soldier hp 3",

@@ -51,8 +51,8 @@ tribes:new_productionsite_type {
 
 	programs = {
 		work = {
-			-- TRANSLATORS: Completed/Skipped/Did not start _brewing because ...
-			descname = _"_brewing",
+			-- TRANSLATORS: Completed/Skipped/Did not start brewing stout because ...
+			descname = _"brewing stout",
 			actions = {
 				"sleep=30000",
 				"return=skipped unless economy needs stout",

@@ -54,8 +54,8 @@ tribes:new_productionsite_type {
 
 	programs = {
 		work = {
-			-- TRANSLATORS: Completed/Skipped/Did not start working because ...
-			descname = _"working",
+			-- TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
+			descname = _"baking bread",
 			actions = {
 				"sleep=20000",
 				"return=skipped unless economy needs bread_barbarians",

@@ -56,8 +56,8 @@ tribes:new_productionsite_type {
 
 	programs = {
 		work = {
-			-- TRANSLATORS: Completed/Skipped/Did not start mining because ...
-			descname = _"mining",
+			-- TRANSLATORS: Completed/Skipped/Did not start working because ...
+			descname = _"working",
 			actions = {
 				"call=mine_granite",
 				"call=mine_quartz",
