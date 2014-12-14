@@ -43,8 +43,6 @@ class TerrainProgram;
 // NOCOM(#sirver): document
 class RenderQueue {
 public:
-	static int z; // NOCOM(#sirver): ugly.
-
 	enum class Program {
 		TERRAIN,
 		BLIT,
@@ -57,21 +55,18 @@ public:
 	// NOCOM(#sirver): maybe BlendMode::REMOVE?
 
 	struct VanillaBlitArguments {
-		FloatRect destination_rect;
 		FloatRect source_rect;
 		int texture;
 		float opacity;
 	};
 
 	struct MonochromeBlitArguments {
-		FloatRect destination_rect;
 		FloatRect source_rect;
 		int texture;
 		RGBAColor blend;
 	};
 
 	struct BlendedBlitArguments {
-		FloatRect destination_rect;
 		FloatRect source_rect;
 		int texture;
 		int mask;
@@ -79,12 +74,10 @@ public:
 	};
 
 	struct RectArguments {
-		FloatRect destination_rect;
 		RGBAColor color;
 	};
 
 	struct LineArguments {
-		FloatRect destination_rect;
 		RGBColor color;
 		int line_width;
 	};
@@ -108,6 +101,7 @@ public:
 	struct Item {
 		Item() {}
 
+		FloatRect destination_rect;
 		Program program;
 		uint16_t z;
 		BlendMode blend_mode;
@@ -129,6 +123,10 @@ public:
 
 private:
 	RenderQueue();
+
+	// The z value that should be used for the next draw, so that it is on top
+	// of everything before.
+	int next_z;
 
 	std::unique_ptr<TerrainProgram> terrain_program_;
 	std::unique_ptr<DitherProgram> dither_program_;

@@ -160,13 +160,6 @@ void GameRenderer::draw(RenderTarget& dst,
 	const Rect& bounding_rect = dst.get_rect();
 	const Point surface_offset = bounding_rect.top_left() + dst.get_offset() - view_offset;
 
-	// NOCOM(#sirver): is this needed? if so, where?
-	// glScissor(bounding_rect.x,
-				 // surface->height() - bounding_rect.y - bounding_rect.h,
-				 // bounding_rect.w,
-				 // bounding_rect.h);
-	// glEnable(GL_SCISSOR_TEST);
-
 	Map& map = egbase.map();
 	const uint32_t gametime = egbase.get_gametime();
 
@@ -204,8 +197,12 @@ void GameRenderer::draw(RenderTarget& dst,
 
 	RenderQueue::Item i;
 	i.program = RenderQueue::Program::TERRAIN;
-	i.z = RenderQueue::z++;
 	i.blend_mode = BlendMode::Copy;
+	i.destination_rect =
+	   FloatRect(bounding_rect.x,
+	             surface->height() - bounding_rect.y - bounding_rect.h,
+	             bounding_rect.w,
+	             bounding_rect.h);
 	i.terrain_arguments.gametime = gametime;
 	i.terrain_arguments.screen = surface;
 	i.terrain_arguments.terrains = &egbase.world().terrains();
@@ -213,9 +210,6 @@ void GameRenderer::draw(RenderTarget& dst,
 	RenderQueue::instance().enqueue(i);
 
 	draw_objects(dst, egbase, view_offset, player, minfx, maxfx, minfy, maxfy);
-
-	// NOCOM(#sirver): bring back?
-	// glDisable(GL_SCISSOR_TEST);
 }
 
 void GameRenderer::draw_objects(RenderTarget& dst,

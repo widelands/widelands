@@ -28,7 +28,12 @@
 #include "graphic/gl/road_program.h"
 #include "graphic/gl/terrain_program.h"
 
-int RenderQueue::z;
+RenderQueue::RenderQueue()
+   : next_z(1),
+     terrain_program_(new TerrainProgram()),
+     dither_program_(new DitherProgram()),
+     road_program_(new RoadProgram()) {
+}
 
 // static
 RenderQueue& RenderQueue::instance() {
@@ -36,21 +41,18 @@ RenderQueue& RenderQueue::instance() {
 	return render_queue;
 }
 
-RenderQueue::RenderQueue()
-   : terrain_program_(new TerrainProgram()),
-     dither_program_(new DitherProgram()),
-     road_program_(new RoadProgram()) {
-}
-
+// NOCOM(#sirver): take individual parameters?
 void RenderQueue::enqueue(const Item& item) {
 	items_.emplace_back(item);
+	items_.back().z = next_z++;
 }
 
+// NOCOM(#sirver): document that this draws everything in this frame.
 void RenderQueue::draw() {
 	for (const Item& item : items_) {
 		switch (item.program) {
 		case Program::BLIT:
-			VanillaBlitProgram::instance().draw(item.vanilla_blit_arguments.destination_rect,
+			VanillaBlitProgram::instance().draw(item.destination_rect,
 			                                    item.vanilla_blit_arguments.source_rect,
 			                                    item.vanilla_blit_arguments.texture,
 			                                    item.vanilla_blit_arguments.opacity,
@@ -59,7 +61,7 @@ void RenderQueue::draw() {
 
 		case Program::BLIT_MONOCHROME:
 			MonochromeBlitProgram::instance().draw(
-			   item.monochrome_blit_arguments.destination_rect,
+			   item.destination_rect,
 			   item.monochrome_blit_arguments.source_rect,
 			   item.monochrome_blit_arguments.texture,
 			   item.monochrome_blit_arguments.blend);
@@ -67,7 +69,7 @@ void RenderQueue::draw() {
 
 		case Program::BLIT_BLENDED:
 			BlendedBlitProgram::instance().draw(
-			   item.blended_blit_arguments.destination_rect,
+			   item.destination_rect,
 			   item.blended_blit_arguments.source_rect,
 			   item.blended_blit_arguments.texture,
 			   item.blended_blit_arguments.mask,
@@ -76,16 +78,20 @@ void RenderQueue::draw() {
 
 		case Program::LINE:
 			DrawLineProgram::instance().draw(
-			   item.line_arguments.destination_rect.x,
-			   item.line_arguments.destination_rect.y,
-			   item.line_arguments.destination_rect.x + item.line_arguments.destination_rect.w,
-			   item.line_arguments.destination_rect.y + item.line_arguments.destination_rect.h,
+			   item.destination_rect.x,
+			   item.destination_rect.y,
+			   item.destination_rect.x + item.destination_rect.w,
+			   item.destination_rect.y + item.destination_rect.h,
 			   item.line_arguments.color,
 			   item.line_arguments.line_width);
 			break;
 
-
 		case Program::TERRAIN:
+			glScissor(item.destination_rect.x,
+			          item.destination_rect.y,
+			          item.destination_rect.w,
+			          item.destination_rect.h);
+			glEnable(GL_SCISSOR_TEST);
 			terrain_program_->draw(item.terrain_arguments.gametime,
 			                       *item.terrain_arguments.terrains,
 			                       *item.terrain_arguments.fields_to_draw);
@@ -95,11 +101,12 @@ void RenderQueue::draw() {
 			road_program_->draw(
 			   *item.terrain_arguments.screen, *item.terrain_arguments.fields_to_draw);
 			delete item.terrain_arguments.fields_to_draw;
+			glDisable(GL_SCISSOR_TEST);
 			break;
 
 		case Program::RECT:
 			FillRectProgram::instance().draw(
-			   item.rect_arguments.destination_rect, item.rect_arguments.color, item.blend_mode);
+			   item.destination_rect, item.rect_arguments.color, item.blend_mode);
 			break;
 
 		default:
@@ -107,7 +114,7 @@ void RenderQueue::draw() {
 		}
 	}
 	items_.clear();
-	z = 1;
+	next_z = 1;
 }
 
 // NOCOM(#sirver): do something here.

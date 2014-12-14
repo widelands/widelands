@@ -114,9 +114,8 @@ void fill_rect(const Rect& rc, const RGBAColor& clr, Surface* surface) {
 	if (is_a(Screen, surface)) {
 		RenderQueue::Item i;
 		i.program = RenderQueue::Program::RECT;
-		i.z = RenderQueue::z++;
 		i.blend_mode = BlendMode::Copy;
-		i.rect_arguments.destination_rect = rect;
+		i.destination_rect = rect;
 		i.rect_arguments.color = clr;
 		RenderQueue::instance().enqueue(i);
 		return;
@@ -140,10 +139,9 @@ void brighten_rect(const Rect& rc, const int32_t factor, Surface * surface)
 	if (is_a(Screen, surface)) {
 		RenderQueue::Item i;
 		i.program = RenderQueue::Program::RECT;
-		i.z = RenderQueue::z++;
 		i.blend_mode = blend_mode;
+		i.destination_rect = rect;
 		i.rect_arguments.color = color;
-		i.rect_arguments.destination_rect = rect;
 		RenderQueue::instance().enqueue(i);
 		return;
 	}
@@ -167,9 +165,8 @@ void draw_line
 	if (is_a(Screen, surface)) {
 		RenderQueue::Item i;
 		i.program = RenderQueue::Program::LINE;
-		i.z = RenderQueue::z++;
 		i.blend_mode = BlendMode::Copy;
-		i.line_arguments.destination_rect = FloatRect(gl_x1, gl_y1, gl_x2 - gl_x1, gl_y2 - gl_y1);
+		i.destination_rect = FloatRect(gl_x1, gl_y1, gl_x2 - gl_x1, gl_y2 - gl_y1);
 		i.line_arguments.color = color;
 		i.line_arguments.line_width = gwidth;
 		RenderQueue::instance().enqueue(i);
@@ -192,9 +189,8 @@ void blit_monochrome(const Rect& dst_rect,
 	if (is_a(Screen, surface)) {
 		RenderQueue::Item i;
 		i.program = RenderQueue::Program::BLIT_MONOCHROME;
-		i.z = RenderQueue::z++;
 		i.blend_mode = BlendMode::UseAlpha;
-		i.monochrome_blit_arguments.destination_rect = gl_dst_rect;
+		i.destination_rect = gl_dst_rect;
 		i.monochrome_blit_arguments.source_rect = gl_src_rect;
 		i.monochrome_blit_arguments.texture = image.get_gl_texture();
 		i.monochrome_blit_arguments.blend = blend;
@@ -219,9 +215,8 @@ void blit_blended(const Rect& dst_rect,
 	if (is_a(Screen, surface)) {
 		RenderQueue::Item i;
 		i.program = RenderQueue::Program::BLIT_BLENDED;
-		i.z = RenderQueue::z++;
 		i.blend_mode = BlendMode::UseAlpha;
-		i.blended_blit_arguments.destination_rect = gl_dst_rect;
+		i.destination_rect = gl_dst_rect;
 		i.blended_blit_arguments.source_rect = gl_src_rect;
 		i.blended_blit_arguments.texture = image.get_gl_texture();
 		i.blended_blit_arguments.mask = mask.get_gl_texture();
@@ -248,9 +243,8 @@ void blit(const Rect& dst_rect,
 	if (is_a(Screen, surface)) {
 		RenderQueue::Item i;
 		i.program = RenderQueue::Program::BLIT;
-		i.z = RenderQueue::z++;
 		i.blend_mode = blend_mode;
-		i.vanilla_blit_arguments.destination_rect = gl_dst_rect;
+		i.destination_rect = gl_dst_rect;
 		i.vanilla_blit_arguments.source_rect = gl_src_rect;
 		i.vanilla_blit_arguments.texture = image.get_gl_texture();
 		i.vanilla_blit_arguments.opacity = opacity;
