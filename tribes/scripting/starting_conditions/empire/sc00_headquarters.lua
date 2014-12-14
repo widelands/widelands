@@ -1,10 +1,10 @@
 -- =======================================================================
---                Starting conditions for Headquarters Medium
+--                Starting conditions for Headquarters
 -- =======================================================================
 
 include "scripting/infrastructure.lua"
 
-set_textdomain("tribe_empire")
+set_textdomain("tribes")
 
 return {
    name = _ "Headquarters",
@@ -18,7 +18,7 @@ return {
       p:allow_workers("all")
    end
 
-   prefilled_buildings(p, { "headquarters", sf.x, sf.y,
+   prefilled_buildings(p, { "empire_headquarters", sf.x, sf.y,
       wares = {
          armor_helmet = 4,
          spear_wooden = 5,
@@ -57,18 +57,18 @@ return {
          wool = 2,
       },
       workers = {
-         armorsmith = 1,
-         brewer = 1,
-         builder = 10,
-         carrier = 40,
-         charcoal_burner = 1,
-         geologist = 4,
-         lumberjack = 3,
-         miner = 4,
-         stonemason = 2,
-         toolsmith = 2,
-         weaponsmith = 1,
-         donkey = 5,
+         empire_armorsmith = 1,
+         empire_brewer = 1,
+         empire_builder = 10,
+         empire_carrier = 40,
+         empire_charcoal_burner = 1,
+         empire_geologist = 4,
+         empire_lumberjack = 3,
+         empire_miner = 4,
+         empire_stonemason = 2,
+         empire_toolsmith = 2,
+         empire_weaponsmith = 1,
+         empire_donkey = 5,
       },
       soldiers = {
          [{0,0,0,0}] = 45,

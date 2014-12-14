@@ -1,10 +1,10 @@
 -- =======================================================================
---                    Start conditions for Citadel Village
+--                    Start conditions for Fortified Village
 -- =======================================================================
 
 include "scripting/infrastructure.lua"
 
-set_textdomain("tribe_barbarians")
+set_textdomain("tribes")
 
 return {
    name = _ "Fortified Village",
@@ -18,11 +18,11 @@ return {
       plr:allow_workers("all")
    end
 
-   local h = plr:place_building("citadel", sf, false, true)
+   local h = plr:place_building("barbarians_citadel", sf, false, true)
    h:set_soldiers{[{0,0,0,0}] = 12}
 
    if not pcall(function()
-       place_building_in_region(plr, "warehouse", sf:region(7), {
+       place_building_in_region(plr, "barbarians_warehouse", sf:region(7), {
          wares = {
             ax = 5,
             bread_paddle = 2,
@@ -48,24 +48,24 @@ return {
             log = 79,
          },
          workers = {
-            brewer = 1,
-            builder = 10,
-            charcoal_burner = 1,
-            carrier = 38,
-            gardener = 1,
-            geologist = 4,
-            lumberjack = 2,
-            miner = 4,
-            ranger = 1,
-            stonemason = 2,
-            ox = 5,
+            barbarians_brewer = 1,
+            barbarians_builder = 10,
+            barbarians_charcoal_burner = 1,
+            barbarians_carrier = 38,
+            barbarians_gardener = 1,
+            barbarians_geologist = 4,
+            barbarians_lumberjack = 2,
+            barbarians_miner = 4,
+            barbarians_ranger = 1,
+            barbarians_stonemason = 2,
+            barbarians_ox = 5,
          },
          soldiers = {
             [{0,0,0,0}] = 25,
          }
       })
 
-      place_building_in_region(plr, "battlearena", sf:region(12), {
+      place_building_in_region(plr, "barbarians_battlearena", sf:region(12), {
          wares = {
             bread_barbarians = 8,
             fish = 6,
@@ -73,28 +73,28 @@ return {
          }
       })
 
-      place_building_in_region(plr, "trainingcamp", sf:region(12))
+      place_building_in_region(plr, "barbarians_trainingcamp", sf:region(12))
 
-      place_building_in_region(plr, "helmsmithy", sf:region(12), {
+      place_building_in_region(plr, "barbarians_helmsmithy", sf:region(12), {
          wares = { iron = 4, gold = 4 }
       })
-      place_building_in_region(plr, "metalworks", sf:region(12), {
+      place_building_in_region(plr, "barbarians_metalworks", sf:region(12), {
          wares = { iron = 8 },
       })
-      place_building_in_region(plr, "axfactory", sf:region(12), {
+      place_building_in_region(plr, "barbarians_axfactory", sf:region(12), {
          wares = { coal = 8 },
       })
-      place_building_in_region(plr, "hardener", sf:region(12), {
+      place_building_in_region(plr, "barbarians_hardener", sf:region(12), {
          wares = { log = 1 },
       })
-      place_building_in_region(plr, "lime_kiln", sf:region(12), {
+      place_building_in_region(plr, "barbarians_lime_kiln", sf:region(12), {
          wares = { granite = 6, coal = 3 },
       })
    end) then
-      plr:send_message(_"Not enough space", _(
-[[Some of your starting buildings didn’t have enough room and ]] ..
-[[weren’t built. You are at a disadvantage with this; consider restarting ]] ..
-[[this map with a fair starting condition.]]), {popup=true}
+      plr:send_message(
+			_"Not enough space",
+			_([[Some of your starting buildings didn’t have enough room and weren’t built. You are at a disadvantage with this; consider restarting this map with a fair starting condition.]]),
+			{popup=true}
       )
    end
 end,

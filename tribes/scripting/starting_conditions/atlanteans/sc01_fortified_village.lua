@@ -1,10 +1,10 @@
 -- =======================================================================
---                    Castle Village Starting Conditions
+--                    Fortified Village Starting Conditions
 -- =======================================================================
 
 include "scripting/infrastructure.lua"
 
-set_textdomain("tribe_atlanteans")
+set_textdomain("tribes")
 
 return {
    name = _ "Fortified Village",
@@ -17,11 +17,11 @@ return {
       plr:allow_workers("all")
    end
 
-   local h = plr:place_building("castle", sf, false, true)
+   local h = plr:place_building("atlanteans_castle", sf, false, true)
    h:set_soldiers{[{0,0,0,0}] = 12}
 
    if not pcall(function()
-      place_building_in_region(plr, "warehouse", sf:region(7), {
+      place_building_in_region(plr, "atlanteans_warehouse", sf:region(7), {
          wares = {
             diamond = 7,
             iron_ore = 5,
@@ -55,24 +55,24 @@ return {
             trident_light = 5,
          },
          workers = {
-            blackroot_farmer = 1,
-            builder = 10,
-            charcoal_burner = 1,
-            carrier = 38,
-            fish_breeder = 1,
-            geologist = 4,
-            miner = 4,
-            stonecutter = 2,
-            toolsmith = 1,
-            woodcutter = 3,
-            horse = 5,
+            atlanteans_blackroot_farmer = 1,
+            atlanteans_builder = 10,
+            atlanteans_charcoal_burner = 1,
+            atlanteans_carrier = 38,
+            atlanteans_fishbreeder = 1,
+            atlanteans_geologist = 4,
+            atlanteans_miner = 4,
+            atlanteans_stonecutter = 2,
+            atlanteans_toolsmith = 1,
+            atlanteans_woodcutter = 3,
+            atlanteans_horse = 5,
          },
          soldiers = {
             [{0,0,0,0}] = 23,
          },
       })
 
-      place_building_in_region(plr, "labyrinth", sf:region(11), {
+      place_building_in_region(plr, "atlanteans_labyrinth", sf:region(11), {
          wares = {
             bread_atlanteans = 4,
             smoked_fish = 3,
@@ -80,30 +80,29 @@ return {
          }
       })
 
-      place_building_in_region(plr, "dungeon", sf:region(11), {
+      place_building_in_region(plr, "atlanteans_dungeon", sf:region(11), {
          wares = {bread_atlanteans = 4, smoked_fish = 3, smoked_meat = 3}
       })
 
-      place_building_in_region(plr, "armorsmithy", sf:region(11), {
+      place_building_in_region(plr, "atlanteans_armorsmithy", sf:region(11), {
          wares = { coal=4, gold =4 }
       })
-      place_building_in_region(plr, "toolsmithy", sf:region(11), {
+      place_building_in_region(plr, "atlanteans_toolsmithy", sf:region(11), {
          wares = { log = 6 }
       })
-      place_building_in_region(plr, "weaponsmithy", sf:region(11), {
+      place_building_in_region(plr, "atlanteans_weaponsmithy", sf:region(11), {
          wares = { coal = 8, iron = 8 }
       })
 
-      place_building_in_region(plr, "sawmill", sf:region(11), {
+      place_building_in_region(plr, "atlanteans_sawmill", sf:region(11), {
          wares = { log = 1 }
       })
    end) then
-      plr:send_message(_"Not enough space", _(
-[[Some of your starting buildings didn’t have enough room and ]] ..
-[[weren’t built. You are at a disadvantage with this; consider restarting ]] ..
-[[this map with a fair starting condition.]]), {popup=true}
+      plr:send_message(
+			_"Not enough space",
+			_([[Some of your starting buildings didn’t have enough room and weren’t built. You are at a disadvantage with this; consider restarting this map with a fair starting condition.]]),
+			{popup=true}
       )
    end
-
 end
 }
