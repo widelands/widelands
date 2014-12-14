@@ -19,6 +19,7 @@
 
 #include "graphic/font_handler1.h"
 
+#include <functional>
 #include <memory>
 
 #include <boost/lexical_cast.hpp>
@@ -54,14 +55,14 @@ class RTImage : public Image {
 public:
 	RTImage(const string& ghash,
 	        TextureCache* texture_cache,
-	        RT::Renderer* rt_renderer,
+	        std::function<RT::Renderer* ()> get_renderer,
 	        const string& text,
 	        int gwidth)
 	   : hash_(ghash),
 	     text_(text),
 	     width_(gwidth),
-	     texture_cache_(texture_cache),
-	     rt_renderer_(rt_renderer) {
+		  get_renderer_(get_renderer),
+	     texture_cache_(texture_cache) {
 	}
 	virtual ~RTImage() {}
 
@@ -83,7 +84,7 @@ private:
 		if (surf)
 			return surf;
 
-		surf = rt_renderer_->render(text_, width_);
+		surf = get_renderer_()->render(text_, width_);
 		texture_cache_->insert(hash_, surf, true);
 		return surf;
 	}
@@ -91,10 +92,10 @@ private:
 	const string hash_;
 	const string text_;
 	int width_;
+	std::function<RT::Renderer* ()> get_renderer_;
 
 	// Nothing owned.
 	TextureCache* const texture_cache_;
-	RT::Renderer* const rt_renderer_;
 };
 
 }
@@ -109,7 +110,7 @@ public:
 	FontHandler1(ImageCache* image_cache)
 	   : texture_cache_(create_texture_cache(RICHTEXT_SURFACE_CACHE)),
 	     fontset_(new UI::FontSet(i18n::get_locale())),
-	     renderer_(new RT::Renderer(image_cache, texture_cache_.get(), fontset_.get())),
+	     rt_renderer_(new RT::Renderer(image_cache, texture_cache_.get(), fontset_.get())),
 	     image_cache_(image_cache) {
 	}
 	virtual ~FontHandler1() {}
@@ -121,7 +122,7 @@ public:
 			return image_cache_->get(hash);
 
 		std::unique_ptr<RTImage> image(
-		   new RTImage(hash, texture_cache_.get(), renderer_.get(), text, w));
+		   new RTImage(hash, texture_cache_.get(), [this] {return rt_renderer_.get();}, text, w));
 		image->width(); // force the rich text to get rendered in case there is an exception thrown.
 
 		return image_cache_->insert(hash, std::move(image));
@@ -131,13 +132,13 @@ public:
 
 	void reinitialize_fontset() {
 		fontset_.reset(new UI::FontSet(i18n::get_locale()));
-		renderer_.reset(new RT::Renderer(image_cache_, texture_cache_.get(), fontset_.get()));
+		rt_renderer_.reset(new RT::Renderer(image_cache_, texture_cache_.get(), fontset_.get()));
 	}
 
 private:
 	std::unique_ptr<TextureCache> texture_cache_;
-	std::unique_ptr<RT::Renderer> renderer_;
-	unique_ptr<UI::FontSet> fontset_; // The currently active FontSet
+	std::unique_ptr<UI::FontSet> fontset_; // The currently active FontSet
+	std::unique_ptr<RT::Renderer> rt_renderer_;
 	ImageCache* const image_cache_;  // not owned
 };
 
