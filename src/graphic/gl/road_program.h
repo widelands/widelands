@@ -39,7 +39,7 @@ public:
 
 	// Draws the roads. The 'surface' is needed to convert from pixel space to
 	// GL space.
-	void draw(const Surface& surface, const FieldsToDraw& fields_to_draw);
+	void draw(const Surface& surface, const FieldsToDraw& fields_to_draw, float z_value);
 
 private:
 	struct PerVertexData {
@@ -79,6 +79,7 @@ private:
 	// Uniforms.
 	GLint u_normal_road_texture_;
 	GLint u_busy_road_texture_;
+	GLint u_z_value_;
 
 	// All vertices that get rendered this frame.
 	std::vector<PerVertexData> vertices_;

@@ -40,6 +40,8 @@ attribute vec2 attr_texture_position;
 attribute float attr_texture_mix;
 attribute float attr_brightness;
 
+uniform float u_z_value;
+
 // Outputs.
 varying vec2 out_texture_position;
 varying float out_texture_mix;
@@ -49,7 +51,7 @@ void main() {
 	out_texture_position = attr_texture_position;
 	out_texture_mix = attr_texture_mix;
 	out_brightness = attr_brightness;
-	gl_Position = vec4(attr_position, 0., 1.);
+	gl_Position = vec4(attr_position, u_z_value, 1.);
 }
 )";
 
@@ -84,8 +86,9 @@ RoadProgram::RoadProgram() {
 	attr_texture_mix_ = glGetAttribLocation(gl_program_.object(), "attr_texture_mix");
 	attr_brightness_ = glGetAttribLocation(gl_program_.object(), "attr_brightness");
 
-	u_normal_road_texture_ = glGetUniformLocation(gl_program_.object(), "u_normal_road_texture");
 	u_busy_road_texture_ = glGetUniformLocation(gl_program_.object(), "u_busy_road_texture");
+	u_normal_road_texture_ = glGetUniformLocation(gl_program_.object(), "u_normal_road_texture");
+	u_z_value_ = glGetUniformLocation(gl_program_.object(), "u_z_value");
 
 	normal_road_texture_ = load_image("world/pics/roadt_normal.png");
 	busy_road_texture_ = load_image("world/pics/roadt_busy.png");
@@ -153,7 +156,7 @@ void RoadProgram::add_road(const Surface& surface,
 	vertices_.emplace_back(p4);
 }
 
-void RoadProgram::draw(const Surface& surface, const FieldsToDraw& fields_to_draw) {
+void RoadProgram::draw(const Surface& surface, const FieldsToDraw& fields_to_draw, float z_value) {
 	vertices_.clear();
 
 	for (size_t current_index = 0; current_index < fields_to_draw.size(); ++current_index) {
@@ -225,6 +228,8 @@ void RoadProgram::draw(const Surface& surface, const FieldsToDraw& fields_to_dra
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, busy_road_texture_->get_gl_texture());
 	glUniform1i(u_busy_road_texture_, 1);
+
+	glUniform1f(u_z_value_, z_value);
 
 	glDrawArrays(GL_TRIANGLES, 0, vertices_.size());
 

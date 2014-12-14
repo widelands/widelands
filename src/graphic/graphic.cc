@@ -113,8 +113,13 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool init_fullscreen)
 
 	glDrawBuffer(GL_BACK);
 
-	glDisable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS);
+
+	// NOCOM(#sirver): maybe only enable when needed?
 	glEnable(GL_TEXTURE_2D);
+
+	// NOCOM(#sirver): maybe move out of here
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -254,8 +259,11 @@ bool Graphic::need_update() const
 */
 void Graphic::refresh()
 {
-	screen_->setup_gl();
+	glEnable(GL_DEPTH_TEST);
+	// glClearDepthf(-1.f);
+	glClear(GL_DEPTH_BUFFER_BIT);
 
+	screen_->setup_gl();
 	RenderQueue::instance().draw();
 
 	// Setting the window size immediately after going out of fullscreen does

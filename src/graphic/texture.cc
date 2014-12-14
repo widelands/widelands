@@ -254,4 +254,6 @@ void Texture::set_pixel(uint16_t x, uint16_t y, uint32_t clr) {
 void Texture::setup_gl() {
 	glBindFramebuffer(GL_FRAMEBUFFER, GlFramebuffer::instance().id());
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
+	// NOCOM(#sirver): not good
+	glDisable(GL_DEPTH_TEST);
 }

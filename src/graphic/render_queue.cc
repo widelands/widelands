@@ -44,11 +44,25 @@ RenderQueue& RenderQueue::instance() {
 // NOCOM(#sirver): take individual parameters?
 void RenderQueue::enqueue(const Item& item) {
 	items_.emplace_back(item);
-	items_.back().z = next_z++;
+	items_.back().z = next_z;
+
+	// Add 5 since some items have multiple programs that all need a separate z
+	// buffer.
+	next_z += 5;
+}
+
+// NOCOM(#sirver): to static function
+// Maps [0, max_z] linearly to [-1, 1.] for use in vertix buffers.
+inline float to_opengl_z(int z, int max_z) {
+	return (2.f * z) / max_z - 1.;
 }
 
 // NOCOM(#sirver): document that this draws everything in this frame.
 void RenderQueue::draw() {
+	// NOCOM(#sirver): this assert is stupid and dangerous. Maybe instead use GL_LEQUAL.
+	// NOCOM(#sirver): pull out constant
+	assert(next_z < 65536);
+
 	for (const Item& item : items_) {
 		switch (item.program) {
 		case Program::BLIT:
@@ -92,14 +106,18 @@ void RenderQueue::draw() {
 			          item.destination_rect.w,
 			          item.destination_rect.h);
 			glEnable(GL_SCISSOR_TEST);
+
 			terrain_program_->draw(item.terrain_arguments.gametime,
 			                       *item.terrain_arguments.terrains,
-			                       *item.terrain_arguments.fields_to_draw);
+			                       *item.terrain_arguments.fields_to_draw,
+			                       to_opengl_z(item.z, next_z));
 			dither_program_->draw(item.terrain_arguments.gametime,
 			                      *item.terrain_arguments.terrains,
-			                      *item.terrain_arguments.fields_to_draw);
-			road_program_->draw(
-			   *item.terrain_arguments.screen, *item.terrain_arguments.fields_to_draw);
+			                      *item.terrain_arguments.fields_to_draw,
+			                      to_opengl_z(item.z + 1, next_z));
+			road_program_->draw(*item.terrain_arguments.screen,
+			                    *item.terrain_arguments.fields_to_draw,
+			                    to_opengl_z(item.z + 2, next_z));
 			delete item.terrain_arguments.fields_to_draw;
 			glDisable(GL_SCISSOR_TEST);
 			break;

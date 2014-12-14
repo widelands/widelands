@@ -40,6 +40,8 @@ attribute vec2 attr_position;
 attribute vec2 attr_texture_offset;
 attribute vec2 attr_texture_position;
 
+uniform float u_z_value;
+
 // Output of vertex shader.
 varying float var_brightness;
 varying vec2 var_texture_offset;
@@ -49,7 +51,7 @@ void main() {
 	var_texture_position = attr_texture_position;
 	var_brightness = attr_brightness;
 	var_texture_offset = attr_texture_offset;
-	gl_Position = vec4(attr_position, 0., 1.);
+	gl_Position = vec4(attr_position, u_z_value, 1.);
 }
 )";
 
@@ -83,9 +85,10 @@ TerrainProgram::TerrainProgram() {
 
 	u_terrain_texture_ = glGetUniformLocation(gl_program_.object(), "u_terrain_texture");
 	u_texture_dimensions_ = glGetUniformLocation(gl_program_.object(), "u_texture_dimensions");
+	u_z_value_ = glGetUniformLocation(gl_program_.object(), "u_z_value");
 }
 
-void TerrainProgram::gl_draw(int gl_texture, float texture_w, float texture_h) {
+void TerrainProgram::gl_draw(int gl_texture, float texture_w, float texture_h, float z_value) {
 	glUseProgram(gl_program_.object());
 
 	glEnableVertexAttribArray(attr_brightness_);
@@ -117,6 +120,7 @@ void TerrainProgram::gl_draw(int gl_texture, float texture_w, float texture_h) {
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, gl_texture);
 
+	glUniform1f(u_z_value_, z_value);
 	glUniform1i(u_terrain_texture_, 0);
 	glUniform2f(u_texture_dimensions_, texture_w, texture_h);
 
@@ -146,7 +150,8 @@ void TerrainProgram::add_vertex(const FieldsToDraw::Field& field,
 
 void TerrainProgram::draw(uint32_t gametime,
                           const DescriptionMaintainer<TerrainDescription>& terrains,
-                          const FieldsToDraw& fields_to_draw) {
+                          const FieldsToDraw& fields_to_draw,
+                          float z_value) {
 	// This method expects that all terrains have the same dimensions and that
 	// all are packed into the same texture atlas, i.e. all are in the same GL
 	// texture. It does not check for this invariance for speeds sake.
@@ -188,5 +193,8 @@ void TerrainProgram::draw(uint32_t gametime,
 	}
 
 	const Texture& texture = terrains.get_unmutable(0).get_texture(0);
-	gl_draw(texture.get_gl_texture(), texture.texture_coordinates().w, texture.texture_coordinates().h);
+	gl_draw(texture.get_gl_texture(),
+	        texture.texture_coordinates().w,
+	        texture.texture_coordinates().h,
+	        z_value);
 }

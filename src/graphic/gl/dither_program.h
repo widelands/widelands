@@ -38,7 +38,8 @@ public:
 	// Draws the terrain.
 	void draw(uint32_t gametime,
 	          const DescriptionMaintainer<Widelands::TerrainDescription>& terrains,
-	          const FieldsToDraw& fields_to_draw);
+	          const FieldsToDraw& fields_to_draw,
+	          float z_value);
 
 private:
 	// Adds the triangle between the indexes (which index 'fields_to_draw') to
@@ -72,7 +73,7 @@ private:
 	};
 
 	// Call through to GL.
-	void gl_draw(int gl_texture, float texture_w, float texture_h);
+	void gl_draw(int gl_texture, float texture_w, float texture_h, float z_value);
 
 	// The program used for drawing the terrain.
 	Gl::Program gl_program_;
@@ -91,6 +92,7 @@ private:
 	GLint u_dither_texture_;
 	GLint u_terrain_texture_;
 	GLint u_texture_dimensions_;
+	GLint u_z_value_;
 
 	// The texture mask for the dithering step.
 	std::unique_ptr<Texture> dither_mask_;
