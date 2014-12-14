@@ -32,8 +32,11 @@
 #include "graphic/gl/fill_rect_program.h"
 #include "graphic/gl/utils.h"
 #include "graphic/graphic.h"
+#include "graphic/render_queue.h"
+#include "graphic/screen.h"
 #include "graphic/texture.h"
 
+// NOCOM(#sirver): remove is_a from in here
 
 namespace  {
 
@@ -102,6 +105,11 @@ void src_and_dst_rect_to_gl(const Surface& surface,
 
 
 void fill_rect(const Rect& rc, const RGBAColor& clr, Surface* surface) {
+	if (is_a(Screen, surface)) {
+		// NOCOM(#sirver): do something
+		return;
+	}
+
 	surface->setup_gl();
 	glViewport(0, 0, surface->width(), surface->height());
 
@@ -116,6 +124,11 @@ void brighten_rect(const Rect& rc, const int32_t factor, Surface * surface)
 {
 	if (!factor)
 		return;
+
+	if (is_a(Screen, surface)) {
+		// NOCOM(#sirver): do something
+		return;
+	}
 
 	surface->setup_gl();
 	glViewport(0, 0, surface->width(), surface->height());
@@ -142,6 +155,11 @@ void brighten_rect(const Rect& rc, const int32_t factor, Surface * surface)
 void draw_line
 	(int x1, int y1, int x2, int y2, const RGBColor& color, int gwidth, Surface * surface)
 {
+	if (is_a(Screen, surface)) {
+		// NOCOM(#sirver): we should draw lines.
+		return;
+	}
+
 	surface->setup_gl();
 	glViewport(0, 0, surface->width(), surface->height());
 
@@ -161,11 +179,25 @@ void blit_monochrome(const Rect& dst_rect,
                      const Rect& src_rect,
                      const RGBAColor& blend,
                      Surface* surface) {
-	surface->setup_gl();
-	glViewport(0, 0, surface->width(), surface->height());
-
 	FloatRect gl_dst_rect, gl_src_rect;
 	src_and_dst_rect_to_gl(*surface, image, dst_rect, src_rect, &gl_dst_rect, &gl_src_rect);
+
+	if (is_a(Screen, surface)) {
+		// NOCOM(#sirver): should be monochromeblit
+		RenderQueue::Item i;
+		i.program = RenderQueue::Program::BLIT;
+		i.z = RenderQueue::z++;
+		i.blend_mode = BlendMode::UseAlpha;
+		i.vanilla_blit_arguments.destination_rect = gl_dst_rect;
+		i.vanilla_blit_arguments.source_rect = gl_src_rect;
+		i.vanilla_blit_arguments.texture = image.get_gl_texture();
+		i.vanilla_blit_arguments.opacity = blend.a / 255.;
+		RenderQueue::instance().enqueue(i);
+		return;
+	}
+
+	surface->setup_gl();
+	glViewport(0, 0, surface->width(), surface->height());
 
 	MonochromeBlitProgram::instance().draw(
 	   gl_dst_rect, gl_src_rect, image.get_gl_texture(), blend);
@@ -177,11 +209,25 @@ void blit_blended(const Rect& dst_rect,
                   const Rect& src_rect,
                   const RGBColor& blend,
                   Surface* surface) {
-	surface->setup_gl();
-	glViewport(0, 0, surface->width(), surface->height());
-
 	FloatRect gl_dst_rect, gl_src_rect;
 	src_and_dst_rect_to_gl(*surface, image, dst_rect, src_rect, &gl_dst_rect, &gl_src_rect);
+
+	if (is_a(Screen, surface)) {
+		// NOCOM(#sirver): should be blendedblit
+		RenderQueue::Item i;
+		i.program = RenderQueue::Program::BLIT;
+		i.z = RenderQueue::z++;
+		i.blend_mode = BlendMode::UseAlpha;
+		i.vanilla_blit_arguments.destination_rect = gl_dst_rect;
+		i.vanilla_blit_arguments.source_rect = gl_src_rect;
+		i.vanilla_blit_arguments.texture = image.get_gl_texture();
+		i.vanilla_blit_arguments.opacity = 1.;
+		RenderQueue::instance().enqueue(i);
+		return;
+	}
+
+	surface->setup_gl();
+	glViewport(0, 0, surface->width(), surface->height());
 
 	BlendedBlitProgram::instance().draw(
 	   gl_dst_rect, gl_src_rect, image.get_gl_texture(), mask.get_gl_texture(), blend);
@@ -199,11 +245,24 @@ void blit(const Rect& dst_rect,
           float opacity,
           BlendMode blend_mode,
           Surface* surface) {
-	glViewport(0, 0, surface->width(), surface->height());
-	surface->setup_gl();
-
 	FloatRect gl_dst_rect, gl_src_rect;
 	src_and_dst_rect_to_gl(*surface, image, dst_rect, src_rect, &gl_dst_rect, &gl_src_rect);
+
+	if (is_a(Screen, surface)) {
+		RenderQueue::Item i;
+		i.program = RenderQueue::Program::BLIT;
+		i.z = RenderQueue::z++;
+		i.blend_mode = blend_mode;
+		i.vanilla_blit_arguments.destination_rect = gl_dst_rect;
+		i.vanilla_blit_arguments.source_rect = gl_src_rect;
+		i.vanilla_blit_arguments.texture = image.get_gl_texture();
+		i.vanilla_blit_arguments.opacity = opacity;
+		RenderQueue::instance().enqueue(i);
+		return;
+	}
+
+	glViewport(0, 0, surface->width(), surface->height());
+	surface->setup_gl();
 
 	VanillaBlitProgram::instance().draw(
 	   gl_dst_rect, gl_src_rect, image.get_gl_texture(), opacity, blend_mode);

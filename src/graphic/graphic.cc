@@ -29,6 +29,7 @@
 #include "graphic/gl/system_headers.h"
 #include "graphic/image.h"
 #include "graphic/image_io.h"
+#include "graphic/render_queue.h"
 #include "graphic/rendertarget.h"
 #include "graphic/screen.h"
 #include "graphic/texture.h"
@@ -253,6 +254,8 @@ bool Graphic::need_update() const
 */
 void Graphic::refresh()
 {
+	RenderQueue::instance().draw();
+
 	// Setting the window size immediately after going out of fullscreen does
 	// not work properly. We work around this issue by resizing the window in
 	// refresh() when in window mode.

@@ -10,6 +10,19 @@ wl_library(graphic_color
   USES_SDL2
 )
 
+wl_library(graphic_render_queue
+  SRCS
+    render_queue.cc
+    render_queue.h
+  DEPENDS
+    # NOCOMMIT(#sirver): circular dep on graphic_surface
+    graphic_surface
+    base_exceptions
+    base_geometry
+    base_log
+    base_macros
+)
+
 wl_library(graphic_text_layout
   SRCS
     text_layout.cc
@@ -21,7 +34,6 @@ wl_library(graphic_text_layout
     graphic_color
     graphic_text
 )
-
 
 wl_library(graphic_image_io
   SRCS
@@ -46,7 +58,6 @@ wl_library(graphic_image_cache
   DEPENDS
     base_log
     base_macros
-    graphic
     graphic_image_io
     graphic_surface
 )
@@ -101,6 +112,7 @@ wl_library(graphic_surface
     graphic
     graphic_color
     graphic_gl_utils
+    graphic_render_queue
     graphic_sdl_utils
 )
 
@@ -192,6 +204,7 @@ wl_library(graphic
     graphic_gl_utils
     graphic_image_cache
     graphic_image_io
+    graphic_render_queue
     graphic_surface
     graphic_text
     graphic_text_layout
