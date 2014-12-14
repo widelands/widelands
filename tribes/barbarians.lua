@@ -26,7 +26,6 @@ tribes:new_tribe {
    helptext = _"The mighty tribes of the east-lands.",
    bob_vision_range = 2,
    uiposition = 10,
-   carrier2 = "ox", -- NOCOM convert
    icon = pics/icon.png, -- NOCOM convert
 
    -- Wares positions in wares windows.
@@ -147,12 +146,15 @@ tribes:new_tribe {
 		}
 	},
    carriers = {
-		"barbarians_carrier",
-		"barbarians_ox"
+		carrier = "barbarians_carrier",
+		carrier2 = "barbarians_ox"
    },
    soldiers = {
 		"barbarians_soldier",
    },
+   ships = {
+		"ship_barbarians",
+	}
    immovables = {
 		"ashes",
 		"destroyed_building",

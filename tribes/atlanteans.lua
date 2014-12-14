@@ -13,9 +13,6 @@ pics=pics/flag_??.png
 hotspot=15 35
 fps=10
 
-[ship types]
-ship=_Ship
-
 dirname = path.dirname(__file__)
 
 tribes:new_tribe {
@@ -26,7 +23,6 @@ tribes:new_tribe {
    helptext = _"This tribe is known from the oldest tales. The sons and daughters of Atlantis.",
    bob_vision_range = 2,
    uiposition = 100,
-   carrier2 = "horse", -- NOCOM convert
    icon = pics/icon.png, -- NOCOM convert
 
    -- Wares positions in wares windows.
@@ -147,12 +143,15 @@ tribes:new_tribe {
 		}
 	},
    carriers = {
-		"atlanteans_carrier",
-		"atlanteans_horse",
+		carrier = "atlanteans_carrier",
+		carrier2 = "atlanteans_horse",
    },
    soldiers = {
 		"atlanteans_soldier"
    },
+   ships = {
+		"ship_atlanteans",
+	}
    immovables = {
 		"ashes",
 		"blackrootfield_tiny",

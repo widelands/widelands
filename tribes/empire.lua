@@ -14,10 +14,6 @@ pics=pics/flag_??.png
 hotspot=14 38
 fps=10
 
-
-[ship types]
-ship=_Ship
-
 dirname = path.dirname(__file__)
 
 tribes:new_tribe {
@@ -28,7 +24,6 @@ tribes:new_tribe {
    helptext = _"This is the culture of the Roman Empire.",
    bob_vision_range = 2,
    uiposition = 20,
-   carrier2 = "donkey", -- NOCOM convert
    icon = pics/icon.png, -- NOCOM convert
 
    -- Wares positions in wares windows.
@@ -150,12 +145,15 @@ tribes:new_tribe {
 		}
 	},
    carriers = {
-		"empire_carrier",
-		"empire_donkey"
+		carrier = "empire_carrier",
+		carrier2 = "empire_donkey"
    },
    soldiers = {
 		"empire_soldier"
    },
+   ships = {
+		"ship_empire",
+	}
    immovables = {
 		"ashes",
 		"destroyed_building",

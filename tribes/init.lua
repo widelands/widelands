@@ -209,6 +209,15 @@ include "tribes/workers/empire/weaver/init.lua"
 
 
 -- ===================================
+--    Ships
+-- ===================================
+
+include "tribes/ships/ship_atlanteans/init.lua"
+include "tribes/ships/ship_barbarians/init.lua"
+include "tribes/ships/ship_empire/init.lua"
+
+
+-- ===================================
 --    Immovables
 -- ===================================
 
