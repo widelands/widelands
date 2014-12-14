@@ -21,11 +21,9 @@
 
 #include <memory>
 
-#include "graphic/gl/dither_program.h"
 #include "graphic/gl/fields_to_draw.h"
-#include "graphic/gl/road_program.h"
-#include "graphic/gl/terrain_program.h"
 #include "graphic/graphic.h"
+#include "graphic/render_queue.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"
 #include "logic/editor_game_base.h"
@@ -65,10 +63,6 @@
 // The dither triangle is the triangle that should be partially (either r or
 // d). Example: if r and d have different textures and r.dither_layer >
 // d.dither_layer, then we will repaint d with the dither texture as mask.
-
-std::unique_ptr<TerrainProgram> GameRenderer::terrain_program_;
-std::unique_ptr<DitherProgram> GameRenderer::dither_program_;
-std::unique_ptr<RoadProgram> GameRenderer::road_program_;
 
 namespace {
 
@@ -142,12 +136,6 @@ void GameRenderer::draw(RenderTarget& dst,
                         const EditorGameBase& egbase,
                         const Point& view_offset,
                         const Player* player) {
-	if (terrain_program_ == nullptr) {
-		terrain_program_.reset(new TerrainProgram());
-		dither_program_.reset(new DitherProgram());
-		road_program_.reset(new RoadProgram());
-	}
-
 	Point tl_map = dst.get_offset() + view_offset;
 
 	assert(tl_map.x >= 0); // divisions involving negative numbers are bad
@@ -172,20 +160,21 @@ void GameRenderer::draw(RenderTarget& dst,
 	const Rect& bounding_rect = dst.get_rect();
 	const Point surface_offset = bounding_rect.top_left() + dst.get_offset() - view_offset;
 
-	glScissor(bounding_rect.x,
-	          surface->height() - bounding_rect.y - bounding_rect.h,
-	          bounding_rect.w,
-	          bounding_rect.h);
-	glEnable(GL_SCISSOR_TEST);
+	// NOCOM(#sirver): is this needed? if so, where?
+	// glScissor(bounding_rect.x,
+				 // surface->height() - bounding_rect.y - bounding_rect.h,
+				 // bounding_rect.w,
+				 // bounding_rect.h);
+	// glEnable(GL_SCISSOR_TEST);
 
 	Map& map = egbase.map();
 	const uint32_t gametime = egbase.get_gametime();
 
-	FieldsToDraw fields_to_draw(minfx, maxfx, minfy, maxfy);
+	std::unique_ptr<FieldsToDraw> fields_to_draw(new FieldsToDraw(minfx, maxfx, minfy, maxfy));
 	for (int32_t fy = minfy; fy <= maxfy; ++fy) {
 		for (int32_t fx = minfx; fx <= maxfx; ++fx) {
 			FieldsToDraw::Field& f =
-			   *fields_to_draw.mutable_field(fields_to_draw.calculate_index(fx, fy));
+			   *fields_to_draw->mutable_field(fields_to_draw->calculate_index(fx, fy));
 
 			f.fx = fx;
 			f.fy = fy;
@@ -213,14 +202,20 @@ void GameRenderer::draw(RenderTarget& dst,
 		}
 	}
 
-	const World& world = egbase.world();
-	terrain_program_->draw(gametime, world.terrains(), fields_to_draw);
-	dither_program_->draw(gametime, world.terrains(), fields_to_draw);
-	road_program_->draw(*surface, fields_to_draw);
+	RenderQueue::Item i;
+	i.program = RenderQueue::Program::TERRAIN;
+	i.z = RenderQueue::z++;
+	i.blend_mode = BlendMode::Copy;
+	i.terrain_arguments.gametime = gametime;
+	i.terrain_arguments.screen = surface;
+	i.terrain_arguments.terrains = &egbase.world().terrains();
+	i.terrain_arguments.fields_to_draw = fields_to_draw.release();
+	RenderQueue::instance().enqueue(i);
 
 	draw_objects(dst, egbase, view_offset, player, minfx, maxfx, minfy, maxfy);
 
-	glDisable(GL_SCISSOR_TEST);
+	// NOCOM(#sirver): bring back?
+	// glDisable(GL_SCISSOR_TEST);
 }
 
 void GameRenderer::draw_objects(RenderTarget& dst,

@@ -15,12 +15,14 @@ wl_library(graphic_render_queue
     render_queue.cc
     render_queue.h
   DEPENDS
-    # NOCOMMIT(#sirver): circular dep on graphic_surface
-    graphic_surface
+    # NOCOMMIT(#sirver): circular dep on graphic_surface and other stuff
     base_exceptions
     base_geometry
     base_log
     base_macros
+    graphic_game_renderer
+    graphic_surface
+    logic
 )
 
 wl_library(graphic_text_layout
@@ -128,13 +130,13 @@ wl_library(graphic_game_renderer
   SRCS
     game_renderer.cc
     game_renderer.h
-    gl/dither_program.cc
-    gl/dither_program.h
     gl/fields_to_draw.h
     gl/road_program.cc
     gl/road_program.h
     gl/terrain_program.cc
     gl/terrain_program.h
+    gl/dither_program.cc
+    gl/dither_program.h
   DEPENDS
     base_exceptions
     base_geometry
@@ -143,6 +145,7 @@ wl_library(graphic_game_renderer
     graphic
     graphic_gl_utils
     graphic_image_io
+    graphic_render_queue
     graphic_surface
     io_filesystem
     logic

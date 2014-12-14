@@ -36,6 +36,7 @@ void Screen::pixel_to_gl(float* x, float* y) const {
 
 void Screen::setup_gl() {
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glViewport(0, 0, m_w, m_h);
 }
 
 int Screen::width() const {

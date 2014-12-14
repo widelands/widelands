@@ -22,6 +22,9 @@
 #include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/gl/blit_program.h"
+#include "graphic/gl/dither_program.h"
+#include "graphic/gl/road_program.h"
+#include "graphic/gl/terrain_program.h"
 
 int RenderQueue::z;
 
@@ -29,6 +32,12 @@ int RenderQueue::z;
 RenderQueue& RenderQueue::instance() {
 	static RenderQueue render_queue;
 	return render_queue;
+}
+
+RenderQueue::RenderQueue()
+   : terrain_program_(new TerrainProgram()),
+     dither_program_(new DitherProgram()),
+     road_program_(new RoadProgram()) {
 }
 
 void RenderQueue::enqueue(const Item& item) {
@@ -44,6 +53,36 @@ void RenderQueue::draw() {
 			                                    item.vanilla_blit_arguments.texture,
 			                                    item.vanilla_blit_arguments.opacity,
 			                                    item.blend_mode);
+			break;
+
+		case Program::BLIT_MONOCHROME:
+			MonochromeBlitProgram::instance().draw(
+			   item.monochrome_blit_arguments.destination_rect,
+			   item.monochrome_blit_arguments.source_rect,
+			   item.monochrome_blit_arguments.texture,
+			   item.monochrome_blit_arguments.blend);
+			break;
+
+		case Program::BLIT_BLENDED:
+			BlendedBlitProgram::instance().draw(
+			   item.blended_blit_arguments.destination_rect,
+			   item.blended_blit_arguments.source_rect,
+			   item.blended_blit_arguments.texture,
+			   item.blended_blit_arguments.mask,
+			   item.blended_blit_arguments.blend);
+			break;
+
+
+		case Program::TERRAIN:
+			terrain_program_->draw(item.terrain_arguments.gametime,
+			                       *item.terrain_arguments.terrains,
+			                       *item.terrain_arguments.fields_to_draw);
+			dither_program_->draw(item.terrain_arguments.gametime,
+			                      *item.terrain_arguments.terrains,
+			                      *item.terrain_arguments.fields_to_draw);
+			road_program_->draw(
+			   *item.terrain_arguments.screen, *item.terrain_arguments.fields_to_draw);
+			delete item.terrain_arguments.fields_to_draw;
 			break;
 
 		default:

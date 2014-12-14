@@ -254,6 +254,8 @@ bool Graphic::need_update() const
 */
 void Graphic::refresh()
 {
+	screen_->setup_gl();
+
 	RenderQueue::instance().draw();
 
 	// Setting the window size immediately after going out of fullscreen does
