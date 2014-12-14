@@ -21,6 +21,7 @@
 #define WL_GRAPHIC_GL_FILL_RECT_PROGRAM_H
 
 #include "base/rect.h"
+#include "graphic/blend_mode.h"
 #include "graphic/color.h"
 #include "graphic/gl/utils.h"
 
@@ -29,9 +30,10 @@ public:
 	// Returns the (singleton) instance of this class.
 	static FillRectProgram& instance();
 
-	// Fills a solid rect in 'color' into the currently activated
-	// framebuffer.
-	void draw(const FloatRect& gl_dst_rect, const RGBAColor& color);
+	// Fills a solid rect in 'color'. If blend_mode is
+	// BlendMode::UseAlpha, this will either brighten or darken the
+	// rect.
+	void draw(const FloatRect& gl_dst_rect, const RGBAColor& color, BlendMode blend_mode);
 
 private:
 	FillRectProgram();

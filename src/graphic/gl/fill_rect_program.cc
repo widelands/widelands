@@ -22,6 +22,7 @@
 #include <vector>
 
 #include "base/log.h"
+#include "base/wexception.h"
 
 namespace  {
 
@@ -90,7 +91,35 @@ FillRectProgram::FillRectProgram() {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void FillRectProgram::draw(const FloatRect& gl_dst_rect, const RGBAColor& color) {
+void FillRectProgram::draw(const FloatRect& gl_dst_rect, const RGBAColor& color, const BlendMode blend_mode) {
+	// This method does 3 things:
+	// - if blend_mode is Copy, we will copy color into the destination
+	// pixels without blending.
+	// - if blend_mode is Alpha and color.r < 0, we will
+	// GL_FUNC_REVERSE_SUBTRACT color.r from all RGB values in the
+	// destination buffer. color.a should be 0 for this.
+	// - if blend_mode is Alpha and color.r > 0, we will
+	// GL_ADD color.r to all RGB values in the destination buffer.
+	// color.a should be 0 for this.
+
+	// The simple trick here is to fill the rect, but using a different glBlendFunc that will sum
+	// src and target (or subtract them if factor is negative).
+	switch (blend_mode) {
+	case BlendMode::Subtract:
+		glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
+		/* fallthrough intended */
+	case BlendMode::UseAlpha:
+		glBlendFunc(GL_ONE, GL_ONE);
+		break;
+
+	case BlendMode::Copy:
+		glDisable(GL_BLEND);
+		break;
+
+	default:
+		break;
+	}
+
 	glUseProgram(gl_program_.object());
 	glEnableVertexAttribArray(attr_position_);
 	glBindBuffer(GL_ARRAY_BUFFER, gl_array_buffer_.object());
@@ -109,4 +138,20 @@ void FillRectProgram::draw(const FloatRect& gl_dst_rect, const RGBAColor& color)
 
 	glDisableVertexAttribArray(attr_position_);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	switch (blend_mode) {
+	case BlendMode::Subtract:
+		glBlendEquation(GL_FUNC_ADD);
+		/* fallthrough intended */
+	case BlendMode::UseAlpha:
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		break;
+
+	case BlendMode::Copy:
+		glEnable(GL_BLEND);
+		break;
+
+	default:
+		break;
+	}
 }

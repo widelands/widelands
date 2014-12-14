@@ -23,6 +23,7 @@
 #include "base/wexception.h"
 #include "graphic/gl/blit_program.h"
 #include "graphic/gl/dither_program.h"
+#include "graphic/gl/draw_line_program.h"
 #include "graphic/gl/fill_rect_program.h"
 #include "graphic/gl/road_program.h"
 #include "graphic/gl/terrain_program.h"
@@ -73,6 +74,16 @@ void RenderQueue::draw() {
 			   item.blended_blit_arguments.blend);
 			break;
 
+		case Program::LINE:
+			DrawLineProgram::instance().draw(
+			   item.line_arguments.destination_rect.x,
+			   item.line_arguments.destination_rect.y,
+			   item.line_arguments.destination_rect.x + item.line_arguments.destination_rect.w,
+			   item.line_arguments.destination_rect.y + item.line_arguments.destination_rect.h,
+			   item.line_arguments.color,
+			   item.line_arguments.line_width);
+			break;
+
 
 		case Program::TERRAIN:
 			terrain_program_->draw(item.terrain_arguments.gametime,
@@ -86,9 +97,9 @@ void RenderQueue::draw() {
 			delete item.terrain_arguments.fields_to_draw;
 			break;
 
-		case Program::FILL_RECT:
+		case Program::RECT:
 			FillRectProgram::instance().draw(
-			   item.fill_rect_arguments.destination_rect, item.fill_rect_arguments.color);
+			   item.rect_arguments.destination_rect, item.rect_arguments.color, item.blend_mode);
 			break;
 
 		default:

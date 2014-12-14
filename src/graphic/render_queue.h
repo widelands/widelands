@@ -50,7 +50,8 @@ public:
 		BLIT,
 		BLIT_MONOCHROME,
 		BLIT_BLENDED,
-		FILL_RECT,
+		RECT,
+		LINE,
 	};
 
 	// NOCOM(#sirver): maybe BlendMode::REMOVE?
@@ -77,9 +78,15 @@ public:
 		RGBAColor blend;
 	};
 
-	struct FillRectArguments {
+	struct RectArguments {
 		FloatRect destination_rect;
 		RGBAColor color;
+	};
+
+	struct LineArguments {
+		FloatRect destination_rect;
+		RGBColor color;
+		int line_width;
 	};
 
 
@@ -109,7 +116,8 @@ public:
 			MonochromeBlitArguments monochrome_blit_arguments;
 			BlendedBlitArguments blended_blit_arguments;
 			TerrainArguments terrain_arguments;
-			FillRectArguments fill_rect_arguments;
+			RectArguments rect_arguments;
+			LineArguments line_arguments;
 		};
 	};
 

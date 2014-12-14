@@ -24,10 +24,18 @@
 enum class BlendMode {
 	// Perform a normal blitting operation that respects the alpha channel if
 	// present.
-	UseAlpha = 0,
+	// NOCOM(#sirver): rename?
+	UseAlpha,
+
+	// NOCOM(#sirver): grep for all uses and change to switches
+	Subtract,
+
+	// NOCOM(#sirver): document
 
 	// Copy all pixel information, including alpha channel information.
+	// NOCOM(#sirver): rename to None
 	Copy
+
 };
 
 #endif  // end of include guard: WL_GRAPHIC_BLEND_MODE_H

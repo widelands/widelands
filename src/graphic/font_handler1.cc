@@ -45,9 +45,10 @@ using namespace boost;
 
 namespace {
 
+	// NOCOM(#sirver): revert
 /// The size of the richtext surface cache in bytes. All work that the richtext
 /// renderer does is / cached in this cache until it overflows.
-const uint32_t RICHTEXT_SURFACE_CACHE = 160 << 20;   // shifting converts to MB
+const uint32_t RICHTEXT_SURFACE_CACHE = 1024 << 20;   // shifting converts to MB
 
 // An Image implementation that recreates a rich text texture when needed on
 // the fly. It is meant to be saved into the ImageCache.
