@@ -89,8 +89,6 @@ wl_library(graphic_surface
     gl/blit_program.h
     gl/draw_line_program.cc
     gl/draw_line_program.h
-    gl/draw_rect_program.cc
-    gl/draw_rect_program.h
     gl/fill_rect_program.cc
     gl/fill_rect_program.h
     image.h
