@@ -30,15 +30,21 @@ public:
 
 	// Draws a line from (x1, y1) to (x2, y2) which are in gl
 	// coordinates in 'color' with a 'line_width' in pixels.
-	void draw(float x1, float y1, float x2, float y2, const RGBColor& color, int line_width);
+	void draw(float x1,
+	          float y1,
+	          float x2,
+	          float y2,
+	          const float z_value,
+	          const RGBColor& color,
+	          int line_width);
 
 private:
 	DrawLineProgram();
 
 	struct PerVertexData {
-		float gl_x, gl_y;
+		float gl_x, gl_y, gl_z;
 	};
-	static_assert(sizeof(PerVertexData) == 8, "Wrong padding.");
+	static_assert(sizeof(PerVertexData) == 12, "Wrong padding.");
 
 	// The buffer that contains the vertices for rendering.
 	Gl::Buffer gl_array_buffer_;

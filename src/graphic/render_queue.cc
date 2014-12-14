@@ -28,6 +28,15 @@
 #include "graphic/gl/road_program.h"
 #include "graphic/gl/terrain_program.h"
 
+namespace {
+
+// Maps [0, max_z] linearly to [1., -1.] for use in vertex shaders.
+inline float to_opengl_z(int z, int max_z) {
+	return -(2.f * z) / max_z + 1.f;
+}
+
+}  // namespace
+
 RenderQueue::RenderQueue()
    : next_z(1),
      terrain_program_(new TerrainProgram()),
@@ -46,15 +55,9 @@ void RenderQueue::enqueue(const Item& item) {
 	items_.emplace_back(item);
 	items_.back().z = next_z;
 
-	// Add 5 since some items have multiple programs that all need a separate z
-	// buffer.
-	next_z += 5;
-}
-
-// NOCOM(#sirver): to static function
-// Maps [0, max_z] linearly to [-1, 1.] for use in vertix buffers.
-inline float to_opengl_z(int z, int max_z) {
-	return (2.f * z) / max_z - 1.;
+	// Add more than once since some items have multiple programs that all need
+	// a separate z buffer.
+	next_z += 3;
 }
 
 // NOCOM(#sirver): document that this draws everything in this frame.
@@ -68,36 +71,37 @@ void RenderQueue::draw() {
 		case Program::BLIT:
 			VanillaBlitProgram::instance().draw(item.destination_rect,
 			                                    item.vanilla_blit_arguments.source_rect,
+			                                    to_opengl_z(item.z, next_z),
 			                                    item.vanilla_blit_arguments.texture,
 			                                    item.vanilla_blit_arguments.opacity,
 			                                    item.blend_mode);
 			break;
 
 		case Program::BLIT_MONOCHROME:
-			MonochromeBlitProgram::instance().draw(
-			   item.destination_rect,
-			   item.monochrome_blit_arguments.source_rect,
-			   item.monochrome_blit_arguments.texture,
-			   item.monochrome_blit_arguments.blend);
+			MonochromeBlitProgram::instance().draw(item.destination_rect,
+			                                       item.monochrome_blit_arguments.source_rect,
+			                                       to_opengl_z(item.z, next_z),
+			                                       item.monochrome_blit_arguments.texture,
+			                                       item.monochrome_blit_arguments.blend);
 			break;
 
 		case Program::BLIT_BLENDED:
-			BlendedBlitProgram::instance().draw(
-			   item.destination_rect,
-			   item.blended_blit_arguments.source_rect,
-			   item.blended_blit_arguments.texture,
-			   item.blended_blit_arguments.mask,
-			   item.blended_blit_arguments.blend);
+			BlendedBlitProgram::instance().draw(item.destination_rect,
+			                                    item.blended_blit_arguments.source_rect,
+			                                    to_opengl_z(item.z, next_z),
+			                                    item.blended_blit_arguments.texture,
+			                                    item.blended_blit_arguments.mask,
+			                                    item.blended_blit_arguments.blend);
 			break;
 
 		case Program::LINE:
-			DrawLineProgram::instance().draw(
-			   item.destination_rect.x,
-			   item.destination_rect.y,
-			   item.destination_rect.x + item.destination_rect.w,
-			   item.destination_rect.y + item.destination_rect.h,
-			   item.line_arguments.color,
-			   item.line_arguments.line_width);
+			DrawLineProgram::instance().draw(item.destination_rect.x,
+			                                 item.destination_rect.y,
+			                                 item.destination_rect.x + item.destination_rect.w,
+			                                 item.destination_rect.y + item.destination_rect.h,
+			                                 to_opengl_z(item.z, next_z),
+			                                 item.line_arguments.color,
+			                                 item.line_arguments.line_width);
 			break;
 
 		case Program::TERRAIN:
@@ -123,8 +127,10 @@ void RenderQueue::draw() {
 			break;
 
 		case Program::RECT:
-			FillRectProgram::instance().draw(
-			   item.destination_rect, item.rect_arguments.color, item.blend_mode);
+			FillRectProgram::instance().draw(item.destination_rect,
+			                                 to_opengl_z(item.z, next_z),
+			                                 item.rect_arguments.color,
+			                                 item.blend_mode);
 			break;
 
 		default:
@@ -134,5 +140,3 @@ void RenderQueue::draw() {
 	items_.clear();
 	next_z = 1;
 }
-
-// NOCOM(#sirver): do something here.

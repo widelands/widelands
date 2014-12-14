@@ -123,7 +123,7 @@ void fill_rect(const Rect& rc, const RGBAColor& clr, Surface* surface) {
 
 	surface->setup_gl();
 	glViewport(0, 0, surface->width(), surface->height());
-	FillRectProgram::instance().draw(rect, clr, BlendMode::Copy);
+	FillRectProgram::instance().draw(rect, 0.f, clr, BlendMode::Copy);
 }
 
 void brighten_rect(const Rect& rc, const int32_t factor, Surface * surface)
@@ -148,7 +148,7 @@ void brighten_rect(const Rect& rc, const int32_t factor, Surface * surface)
 
 	surface->setup_gl();
 	glViewport(0, 0, surface->width(), surface->height());
-	FillRectProgram::instance().draw(rect, color, blend_mode);
+	FillRectProgram::instance().draw(rect, 0.f, color, blend_mode);
 }
 
 void draw_line
@@ -175,7 +175,7 @@ void draw_line
 
 	surface->setup_gl();
 	glViewport(0, 0, surface->width(), surface->height());
-	DrawLineProgram::instance().draw(gl_x1, gl_y1, gl_x2, gl_y2, color, gwidth);
+	DrawLineProgram::instance().draw(gl_x1, gl_y1, gl_x2, gl_y2, 0.f, color, gwidth);
 }
 
 void blit_monochrome(const Rect& dst_rect,
@@ -200,7 +200,7 @@ void blit_monochrome(const Rect& dst_rect,
 
 	surface->setup_gl();
 	glViewport(0, 0, surface->width(), surface->height());
-	MonochromeBlitProgram::instance().draw(gl_dst_rect, gl_src_rect, image.get_gl_texture(), blend);
+	MonochromeBlitProgram::instance().draw(gl_dst_rect, gl_src_rect, 0.f, image.get_gl_texture(), blend);
 }
 
 void blit_blended(const Rect& dst_rect,
@@ -228,7 +228,7 @@ void blit_blended(const Rect& dst_rect,
 	surface->setup_gl();
 	glViewport(0, 0, surface->width(), surface->height());
 	BlendedBlitProgram::instance().draw(
-	   gl_dst_rect, gl_src_rect, image.get_gl_texture(), mask.get_gl_texture(), blend);
+	   gl_dst_rect, gl_src_rect, 0.f, image.get_gl_texture(), mask.get_gl_texture(), blend);
 }
 
 void blit(const Rect& dst_rect,
@@ -255,5 +255,5 @@ void blit(const Rect& dst_rect,
 	glViewport(0, 0, surface->width(), surface->height());
 	surface->setup_gl();
 	VanillaBlitProgram::instance().draw(
-	   gl_dst_rect, gl_src_rect, image.get_gl_texture(), opacity, blend_mode);
+	   gl_dst_rect, gl_src_rect, 0.f, image.get_gl_texture(), opacity, blend_mode);
 }

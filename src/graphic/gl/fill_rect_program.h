@@ -30,18 +30,24 @@ public:
 	// Returns the (singleton) instance of this class.
 	static FillRectProgram& instance();
 
-	// Fills a solid rect in 'color'. If blend_mode is
-	// BlendMode::UseAlpha, this will either brighten or darken the
-	// rect.
-	void draw(const FloatRect& gl_dst_rect, const RGBAColor& color, BlendMode blend_mode);
+	// Fills a solid rect in 'color'. If blend_mode is BlendMode::UseAlpha, this
+	// will brighten the rect, if it is BlendMode::Subtract it darkens it.
+	void draw(const FloatRect& destination_rect,
+	          float z_value,
+	          const RGBAColor& color,
+	          BlendMode blend_mode);
 
 private:
 	FillRectProgram();
 
 	struct PerVertexData {
-		float gl_x, gl_y;
+		PerVertexData(float init_gl_x, float init_gl_y, float init_gl_z)
+		   : gl_x(init_gl_x), gl_y(init_gl_y), gl_z(init_gl_z) {
+		}
+
+		float gl_x, gl_y, gl_z;
 	};
-	static_assert(sizeof(PerVertexData) == 8, "Wrong padding.");
+	static_assert(sizeof(PerVertexData) == 12, "Wrong padding.");
 
 	// The buffer that will contain the quad for rendering.
 	Gl::Buffer gl_array_buffer_;
@@ -53,7 +59,6 @@ private:
 	GLint attr_position_;
 
 	// Uniforms.
-	GLint u_rect_;
 	GLint u_color_;
 
 	DISALLOW_COPY_AND_ASSIGN(FillRectProgram);

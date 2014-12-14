@@ -30,17 +30,14 @@ const char kBlitVertexShader[] = R"(
 #version 120
 
 // Attributes.
-attribute vec2 attr_position;
-
-// Uniforms.
-uniform vec4 u_dst_rect;
-uniform vec4 u_src_rect;
+attribute vec3 attr_position;
+attribute vec2 attr_texture_position;
 
 varying vec2 out_texture_coordinate;
 
 void main() {
-	out_texture_coordinate = u_src_rect.xy + attr_position.xy * u_src_rect.zw;
-	gl_Position = vec4(u_dst_rect.xy + attr_position.xy * u_dst_rect.zw, 0., 1.);
+	out_texture_coordinate = attr_texture_position;
+	gl_Position = vec4(attr_position, 1.);
 }
 )";
 
@@ -107,11 +104,11 @@ public:
 
 	void activate(const FloatRect& gl_dest_rect,
 	              const FloatRect& gl_src_rect,
+	              const float z_value,
 	              const GLuint gl_texture,
-					  const float opacity,
+	              const float opacity,
 	              const BlendMode blend_mode);
 
-	void draw();
 	void draw_and_deactivate(BlendMode blend_mode);
 
 	GLuint program_object() const {
@@ -120,9 +117,22 @@ public:
 
 private:
 	struct PerVertexData {
-		float gl_x, gl_y;
+		PerVertexData(float init_gl_x,
+		              float init_gl_y,
+		              float init_gl_z,
+		              float init_texture_x,
+		              float init_texture_y)
+		   : gl_x(init_gl_x),
+		     gl_y(init_gl_y),
+		     gl_z(init_gl_z),
+		     texture_x(init_texture_x),
+		     texture_y(init_texture_y) {
+		}
+
+		float gl_x, gl_y, gl_z;
+		float texture_x, texture_y;
 	};
-	static_assert(sizeof(PerVertexData) == 8, "Wrong padding.");
+	static_assert(sizeof(PerVertexData) == 20, "Wrong padding.");
 
 	// The buffer that will contain the quad for rendering.
 	Gl::Buffer gl_array_buffer_;
@@ -132,12 +142,13 @@ private:
 
 	// Attributes.
 	GLint attr_position_;
+	GLint attr_texture_position_;
 
 	// Uniforms.
-	GLint u_dst_rect_;
+	// NOCOM(#sirver): opacity should be an attribute too - might just make color one.
 	GLint u_opacity_;
-	GLint u_src_rect_;
 	GLint u_texture_;
+
 	DISALLOW_COPY_AND_ASSIGN(BlitProgram);
 };
 
@@ -145,55 +156,62 @@ BlitProgram::BlitProgram(const std::string& fragment_shader) {
 	gl_program_.build(kBlitVertexShader, fragment_shader.c_str());
 
 	attr_position_ = glGetAttribLocation(gl_program_.object(), "attr_position");
+	attr_texture_position_ = glGetAttribLocation(gl_program_.object(), "attr_texture_position");
 
 	u_texture_ = glGetUniformLocation(gl_program_.object(), "u_texture");
 	u_opacity_ = glGetUniformLocation(gl_program_.object(), "u_opacity");
-	u_dst_rect_ = glGetUniformLocation(gl_program_.object(), "u_dst_rect");
-	u_src_rect_ = glGetUniformLocation(gl_program_.object(), "u_src_rect");
 
-	std::vector<PerVertexData> vertices;
-	vertices.push_back(PerVertexData
-			{0., 1.});
-	vertices.push_back(PerVertexData
-			{1., 1.});
-	vertices.push_back(PerVertexData
-			{0., 0.});
-	vertices.push_back(PerVertexData
-			{1., 0.});
-
-	glBindBuffer(GL_ARRAY_BUFFER, gl_array_buffer_.object());
-	glBufferData(
-	   GL_ARRAY_BUFFER, sizeof(PerVertexData) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
-	glVertexAttribPointer(attr_position_,
-								 2,
-								 GL_FLOAT,
-								 GL_FALSE,
-								 sizeof(PerVertexData),
-								 reinterpret_cast<void*>(0));
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 void BlitProgram::activate(const FloatRect& gl_dest_rect,
                        const FloatRect& gl_src_rect,
+							  const float z_value,
                        const GLuint gl_texture,
 							  const float opacity,
                        const BlendMode blend_mode) {
 	glUseProgram(gl_program_.object());
+
 	glEnableVertexAttribArray(attr_position_);
+	glEnableVertexAttribArray(attr_texture_position_);
+
+	std::vector<PerVertexData> vertices;
+	vertices.reserve(4);
+	vertices.emplace_back(gl_dest_rect.x, gl_dest_rect.y, z_value, gl_src_rect.x, gl_src_rect.y);
+	vertices.emplace_back(gl_dest_rect.x + gl_dest_rect.w,
+	                      gl_dest_rect.y,
+	                      z_value,
+	                      gl_src_rect.x + gl_src_rect.w,
+	                      gl_src_rect.y);
+
+	vertices.emplace_back(gl_dest_rect.x,
+	                      gl_dest_rect.y + gl_dest_rect.h,
+	                      z_value,
+	                      gl_src_rect.x,
+	                      gl_src_rect.y + gl_src_rect.h);
+
+	vertices.emplace_back(gl_dest_rect.x + gl_dest_rect.w,
+	                      gl_dest_rect.y + gl_dest_rect.h,
+	                      z_value,
+	                      gl_src_rect.x + gl_src_rect.w,
+	                      gl_src_rect.y + gl_src_rect.h);
+
 	glBindBuffer(GL_ARRAY_BUFFER, gl_array_buffer_.object());
+	glBufferData(
+	   GL_ARRAY_BUFFER, sizeof(PerVertexData) * vertices.size(), vertices.data(), GL_DYNAMIC_DRAW);
 
-	glVertexAttribPointer(attr_position_,
-								 2,
-								 GL_FLOAT,
-								 GL_FALSE,
-								 sizeof(PerVertexData),
-								 reinterpret_cast<void*>(0));
-
+	const auto set_attrib_pointer = [](const int vertex_index, int num_items, int offset) {
+		glVertexAttribPointer(vertex_index,
+		                      num_items,
+		                      GL_FLOAT,
+		                      GL_FALSE,
+		                      sizeof(PerVertexData),
+		                      reinterpret_cast<void*>(offset));
+	};
+	set_attrib_pointer(attr_position_, 3, offsetof(PerVertexData, gl_x));
+	set_attrib_pointer(attr_texture_position_, 2, offsetof(PerVertexData, texture_x));
 
 	glUniform1i(u_texture_, 0);
 	glUniform1f(u_opacity_, opacity);
-	glUniform4f(u_dst_rect_, gl_dest_rect.x, gl_dest_rect.y, gl_dest_rect.w, gl_dest_rect.h);
-	glUniform4f(u_src_rect_, gl_src_rect.x, gl_src_rect.y, gl_src_rect.w, gl_src_rect.h);
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, gl_texture);
@@ -211,6 +229,10 @@ void BlitProgram::draw_and_deactivate(BlendMode blend_mode) {
 	}
 
 	glDisableVertexAttribArray(attr_position_);
+	glDisableVertexAttribArray(attr_texture_position_);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
@@ -227,13 +249,13 @@ VanillaBlitProgram::VanillaBlitProgram() {
 	blit_program_.reset(new BlitProgram(kVanillaBlitFragmentShader));
 }
 
-
 void VanillaBlitProgram::draw(const FloatRect& gl_dest_rect,
-                       const FloatRect& gl_src_rect,
-                       const GLuint gl_texture,
-							  const float opacity,
-                       const BlendMode blend_mode) {
-	blit_program_->activate(gl_dest_rect, gl_src_rect, gl_texture, opacity, blend_mode);
+                              const FloatRect& gl_src_rect,
+                              const float z_value,
+                              const GLuint gl_texture,
+                              const float opacity,
+                              const BlendMode blend_mode) {
+	blit_program_->activate(gl_dest_rect, gl_src_rect, z_value, gl_texture, opacity, blend_mode);
 	blit_program_->draw_and_deactivate(blend_mode);
 }
 
@@ -253,10 +275,12 @@ MonochromeBlitProgram::MonochromeBlitProgram() {
 }
 
 void MonochromeBlitProgram::draw(const FloatRect& gl_dest_rect,
-                       const FloatRect& gl_src_rect,
-                       const GLuint gl_texture,
-							  const RGBAColor& blend) {
-	blit_program_->activate(gl_dest_rect, gl_src_rect, gl_texture, blend.a / 255., BlendMode::UseAlpha);
+                                 const FloatRect& gl_src_rect,
+                                 const float z_value,
+                                 const GLuint gl_texture,
+                                 const RGBAColor& blend) {
+	blit_program_->activate(
+	   gl_dest_rect, gl_src_rect, z_value, gl_texture, blend.a / 255., BlendMode::UseAlpha);
 
 	glUniform3f(u_blend_, blend.r / 255., blend.g / 255., blend.b / 255.);
 
@@ -279,11 +303,13 @@ BlendedBlitProgram::BlendedBlitProgram() {
 }
 
 void BlendedBlitProgram::draw(const FloatRect& gl_dest_rect,
-                       const FloatRect& gl_src_rect,
-                       const GLuint gl_texture_image,
-							  const GLuint gl_texture_mask,
-							  const RGBAColor& blend) {
-	blit_program_->activate(gl_dest_rect, gl_src_rect, gl_texture_image, blend.a / 255., BlendMode::UseAlpha);
+                              const FloatRect& gl_src_rect,
+                              const float z_value,
+                              const GLuint gl_texture_image,
+                              const GLuint gl_texture_mask,
+                              const RGBAColor& blend) {
+	blit_program_->activate(
+	   gl_dest_rect, gl_src_rect, z_value, gl_texture_image, blend.a / 255., BlendMode::UseAlpha);
 
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, gl_texture_mask);

@@ -247,9 +247,8 @@ void Graphic::update() {
 /**
  * Returns true if parts of the screen have been marked for refreshing.
 */
-bool Graphic::need_update() const
-{
-	return  m_update;
+bool Graphic::need_update() const {
+	return m_update;
 }
 
 /**
@@ -259,11 +258,11 @@ bool Graphic::need_update() const
 */
 void Graphic::refresh()
 {
+	screen_->setup_gl();
+
 	glEnable(GL_DEPTH_TEST);
-	// glClearDepthf(-1.f);
 	glClear(GL_DEPTH_BUFFER_BIT);
 
-	screen_->setup_gl();
 	RenderQueue::instance().draw();
 
 	// Setting the window size immediately after going out of fullscreen does

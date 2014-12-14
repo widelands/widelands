@@ -29,10 +29,10 @@ const char kDrawLineVertexShader[] = R"(
 #version 120
 
 // Attributes.
-attribute vec2 attr_position;
+attribute vec3 attr_position;
 
 void main() {
-	gl_Position = vec4(attr_position, 0., 1.);
+	gl_Position = vec4(attr_position, 1.);
 }
 )";
 
@@ -66,18 +66,18 @@ void DrawLineProgram::draw(const float x1,
                            const float y1,
                            const float x2,
                            const float y2,
+									const float z_value,
                            const RGBColor& color,
                            const int line_width) {
 	glUseProgram(gl_program_.object());
 	glEnableVertexAttribArray(attr_position_);
 
-	const std::vector<PerVertexData> vertices = {{x1, y1}, {x2, y2}};
-
+	const std::vector<PerVertexData> vertices = {{x1, y1, z_value}, {x2, y2, z_value}};
 	glBindBuffer(GL_ARRAY_BUFFER, gl_array_buffer_.object());
 	glBufferData(
 	   GL_ARRAY_BUFFER, sizeof(PerVertexData) * vertices.size(), vertices.data(), GL_STREAM_DRAW);
 	glVertexAttribPointer(attr_position_,
-								 2,
+								 3,
 								 GL_FLOAT,
 								 GL_FALSE,
 								 sizeof(PerVertexData),

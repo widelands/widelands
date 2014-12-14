@@ -43,6 +43,7 @@ public:
 	// values are copied or if alpha values are used.
 	void draw(const FloatRect& gl_dest_rect,
 	          const FloatRect& gl_src_rect,
+				 const float z_value,
 	          const GLuint gl_texture,
 				 float opacity,
 	          const BlendMode blend_mode);
@@ -67,6 +68,7 @@ public:
 	// luminance, then all values are multiplied with blend.
 	void draw(const FloatRect& gl_dest_rect,
 	          const FloatRect& gl_src_rect,
+				 const float z_value,
 	          const GLuint gl_texture,
 				 const RGBAColor& blend);
 
@@ -93,6 +95,7 @@ public:
 	// the 'blend'. This is used for blitting player colored images.
 	void draw(const FloatRect& gl_dest_rect,
 	          const FloatRect& gl_src_rect,
+				 const float z_value,
 	          const GLuint gl_texture_image,
 	          const GLuint gl_texture_mask,
 				 const RGBAColor& blend);

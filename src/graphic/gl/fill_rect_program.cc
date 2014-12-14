@@ -30,16 +30,10 @@ const char kFillRectVertexShader[] = R"(
 #version 120
 
 // Attributes.
-attribute vec2 attr_position;
-
-// Uniforms.
-uniform vec4 u_rect;
-
+attribute vec3 attr_position;
 
 void main() {
-	float x = u_rect.x + attr_position.x * u_rect.z;
-	float y = u_rect.y + attr_position.y * u_rect.w;
-	gl_Position = vec4(x, y, 0., 1.);
+	gl_Position = vec4(attr_position, 1.);
 }
 )";
 
@@ -65,33 +59,13 @@ FillRectProgram::FillRectProgram() {
 	gl_program_.build(kFillRectVertexShader, kFillRectFragmentShader);
 
 	attr_position_ = glGetAttribLocation(gl_program_.object(), "attr_position");
-
 	u_color_ = glGetUniformLocation(gl_program_.object(), "u_color");
-	u_rect_ = glGetUniformLocation(gl_program_.object(), "u_rect");
-
-	std::vector<PerVertexData> vertices;
-	vertices.push_back(PerVertexData
-			{0., 1.});
-	vertices.push_back(PerVertexData
-			{1., 1.});
-	vertices.push_back(PerVertexData
-			{0., 0.});
-	vertices.push_back(PerVertexData
-			{1., 0.});
-
-	glBindBuffer(GL_ARRAY_BUFFER, gl_array_buffer_.object());
-	glBufferData(
-	   GL_ARRAY_BUFFER, sizeof(PerVertexData) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
-	glVertexAttribPointer(attr_position_,
-								 2,
-								 GL_FLOAT,
-								 GL_FALSE,
-								 sizeof(PerVertexData),
-								 reinterpret_cast<void*>(0));
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void FillRectProgram::draw(const FloatRect& gl_dst_rect, const RGBAColor& color, const BlendMode blend_mode) {
+void FillRectProgram::draw(const FloatRect& destination_rect,
+                           const float z_value,
+                           const RGBAColor& color,
+                           const BlendMode blend_mode) {
 	// This method does 3 things:
 	// - if blend_mode is Copy, we will copy color into the destination
 	// pixels without blending.
@@ -121,17 +95,29 @@ void FillRectProgram::draw(const FloatRect& gl_dst_rect, const RGBAColor& color,
 	}
 
 	glUseProgram(gl_program_.object());
-	glEnableVertexAttribArray(attr_position_);
+
+	std::vector<PerVertexData> vertices;
+	vertices.reserve(4);
+
+	vertices.emplace_back(destination_rect.x, destination_rect.y, z_value);
+	vertices.emplace_back(destination_rect.x + destination_rect.w, destination_rect.y, z_value);
+	vertices.emplace_back(destination_rect.x, destination_rect.y + destination_rect.h, z_value);
+	vertices.emplace_back(
+	   destination_rect.x + destination_rect.w, destination_rect.y + destination_rect.h, z_value);
+
 	glBindBuffer(GL_ARRAY_BUFFER, gl_array_buffer_.object());
+	glBufferData(
+	   GL_ARRAY_BUFFER, sizeof(PerVertexData) * vertices.size(), vertices.data(), GL_DYNAMIC_DRAW);
 
 	glVertexAttribPointer(attr_position_,
-								 2,
+								 3,
 								 GL_FLOAT,
 								 GL_FALSE,
 								 sizeof(PerVertexData),
 								 reinterpret_cast<void*>(0));
 
-	glUniform4f(u_rect_, gl_dst_rect.x, gl_dst_rect.y, gl_dst_rect.w, gl_dst_rect.h);
+	glEnableVertexAttribArray(attr_position_);
+
 	glUniform4i(u_color_, color.r, color.g, color.b, color.a);
 
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
