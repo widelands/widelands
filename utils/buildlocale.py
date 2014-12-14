@@ -57,7 +57,7 @@ if __name__ == "__main__":
         # Find every directory that looks like ISO-639
         lang = set(p.splitext(p.basename(l))[0] for
                  l in glob("po/*/*.po"))
-        print "all available."
+        print("all available.")
 
     for l in lang:
         do_compile(l)

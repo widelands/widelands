@@ -130,8 +130,8 @@ XGETTEXTOPTS+=" --msgid-bugs-address=\"https://bugs.launchpad.net/widelands\""
 def are_we_in_root_directory():
     """Make sure we are called in the root directory"""
     if (not os.path.isdir("po")):
-        print "Error: no 'po/' subdir found.\n"
-        print ("This script needs to access translations placed " +
+        print("Error: no 'po/' subdir found.\n")
+        print("This script needs to access translations placed " +
             "under 'po/' subdir, but these seem unavailable. Check " +
             "that you called this script from Widelands' main dir.\n")
         sys.exit(1)
@@ -189,7 +189,7 @@ def do_compile_src( potfile, srcfiles ):
             for one_file in glob(os.path.normpath(one_pattern)):
                 gettext_input.write(one_file + "\n")
         return gettext_input.close()
-    except IOError, err_msg:
+    except IOError as err_msg:
         sys.stderr.write("Failed to call xgettext: %s\n" % err_msg)
         return -1
 
@@ -349,4 +349,4 @@ if __name__ == "__main__":
     # Make sure .pot files are up to date.
     do_update_potfiles()
 
-    print ""
+    print("")
