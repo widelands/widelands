@@ -10,7 +10,7 @@ run(function()
       blackwood = 1,
    }
    port2():set_workers{
-      builder = 1,
+      barbarians_builder = 1,
    }
 
    sleep(12000)
@@ -25,7 +25,7 @@ run(function()
    -- It is not in the port (still in the dock)
    assert_equal(0, port1():get_wares("blackwood"))
 
-   local new_ship = p1:place_bob("ship", map:get_field(10, 10))
+   local new_ship = p1:place_bob("barbarians_ship", map:get_field(10, 10))
    sleep(1000)
 
    assert_equal(1, p1:get_wares("blackwood"))

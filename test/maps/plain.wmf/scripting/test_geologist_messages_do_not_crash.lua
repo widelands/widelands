@@ -1,12 +1,12 @@
 run(function()
    sleep(5000)
 
-   assert_equal(1, #p1:get_buildings("headquarters"))
+   assert_equal(1, #p1:get_buildings("barbarians_headquarters"))
 
-   local hqs = p1:get_buildings("headquarters")
+   local hqs = p1:get_buildings("barbarians_headquarters")
    local hq = hqs[1]
    local fhq = hq.flag
-   hq:set_workers("geologist", 2)
+   hq:set_workers("barbarians_geologist", 2)
 
    local field = map:get_field(25,22)
    local flag = p1:place_flag(field)

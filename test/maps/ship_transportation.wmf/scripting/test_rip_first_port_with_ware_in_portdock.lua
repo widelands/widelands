@@ -3,7 +3,7 @@ run(function()
    game.desired_speed = 10 * 1000
 
    create_first_port()
-   local wh = p1:place_building("warehouse", map:get_field(13, 16), false, false)
+   local wh = p1:place_building("barbarians_warehouse", map:get_field(13, 16), false, false)
    connected_road(p1, wh.flag, "r,r,r", true)
    create_second_port()
 

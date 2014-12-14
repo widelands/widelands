@@ -20,9 +20,9 @@ function productionsite_tests:setup()
    player1:conquer(self.f2, 4)
    player1:conquer(self.f3, 4)
 
-   self.inn = player1:place_building("big_inn", self.f1, false, true)
-   self.warmill = player1:place_building("warmill", self.f2, false, true)
-   self.lumberjack = player1:place_building("lumberjacks_hut", self.f3, false, true)
+   self.inn = player1:place_building("barbarians_big_inn", self.f1, false, true)
+   self.warmill = player1:place_building("barbarians_warmill", self.f2, false, true)
+   self.lumberjack = player1:place_building("barbarians_lumberjacks_hut", self.f3, false, true)
 end
 function productionsite_tests:teardown()
    pcall(function()
@@ -36,9 +36,9 @@ function productionsite_tests:teardown()
    end)
 end
 function productionsite_tests:test_name()
-   assert_equal("big_inn", self.inn.descr.name)
-   assert_equal("warmill", self.warmill.descr.name)
-   assert_equal("lumberjacks_hut", self.lumberjack.descr.name)
+   assert_equal("barbarians_big_inn", self.inn.descr.name)
+   assert_equal("barbarians_warmill", self.warmill.descr.name)
+   assert_equal("barbarians_lumberjacks_hut", self.lumberjack.descr.name)
 end
 function productionsite_tests:test_type()
    assert_equal("productionsite", self.inn.descr.type_name)
@@ -54,57 +54,57 @@ function productionsite_tests:test_valid_workers()
    assert_equal(2, self.inn.valid_workers.innkeeper)
    assert_equal(2, _cnt(self.warmill.valid_workers))
    assert_equal(1, self.warmill.valid_workers.blacksmith)
-   assert_equal(1, self.warmill.valid_workers["master-blacksmith"])
+   assert_equal(1, self.warmill.valid_workers.blacksmith_master)
 end
 function productionsite_tests:test_set_workers()
-   self.inn:set_workers("innkeeper", 1)
+   self.inn:set_workers("barbarians_innkeeper", 1)
    assert_equal(1, _cnt(self.inn:get_workers("all")))
-   assert_equal(1, self.inn:get_workers("innkeeper"))
-   self.inn:set_workers{innkeeper=2}
+   assert_equal(1, self.inn:get_workers("barbarians_innkeeper"))
+   self.inn:set_workers{barbarians_innkeeper=2}
    assert_equal(2, _cnt(self.inn:get_workers("all")))
-   assert_equal(2, self.inn:get_workers("innkeeper"))
-   local rv = self.inn:get_workers{"innkeeper", "carrier"}
-   assert_equal(2, rv.innkeeper)
-   assert_equal(0, rv.carrier)
-   assert_equal(nil, rv.blacksmith)
+   assert_equal(2, self.inn:get_workers("barbarians_innkeeper"))
+   local rv = self.inn:get_workers{"barbarians_innkeeper", "barbarians_carrier"}
+   assert_equal(2, rv.barbarians_innkeeper)
+   assert_equal(0, rv.barbarians_carrier)
+   assert_equal(nil, rv.barbarians_blacksmith)
 end
 function productionsite_tests:test_worker_name()
    local f = self.inn.fields[1]
    while #f.bobs > 0 do
       f.bobs[1]:remove()
    end
-   self.inn:set_workers("innkeeper", 1) -- Innkeeper will be created as an instance.
+   self.inn:set_workers("barbarians_innkeeper", 1) -- Innkeeper will be created as an instance.
    assert_equal(1, #f.bobs)
-   assert_equal(f.bobs[1].descr.name, "innkeeper")
+   assert_equal(f.bobs[1].descr.name, "barbarians_innkeeper")
 end
 function productionsite_tests:test_set_workers_warmill()
-   self.warmill:set_workers("master-blacksmith",1)
+   self.warmill:set_workers("barbarians_blacksmith_master",1)
    assert_equal(1, _cnt(self.warmill:get_workers("all")))
-   local rv = self.warmill:get_workers{"blacksmith", "master-blacksmith", "carrier"}
-   assert_equal(0, rv.blacksmith)
-   assert_equal(1, rv["master-blacksmith"])
-   assert_equal(0, rv.carrier)
+   local rv = self.warmill:get_workers{"barbarians_blacksmith", "barbarians_blacksmith_master", "barbarians_carrier"}
+   assert_equal(0, rv.barbarians_blacksmith)
+   assert_equal(1, rv.barbarians_blacksmith_master)
+   assert_equal(0, rv.barbarians_carrier)
 
-   self.warmill:set_workers("blacksmith",1)
+   self.warmill:set_workers("barbarians_blacksmith",1)
    assert_equal(1, _cnt(self.warmill:get_workers("all")))
-   local rv = self.warmill:get_workers{"blacksmith", "master-blacksmith", "carrier"}
-   assert_equal(1, rv.blacksmith)
-   assert_equal(0, rv["master-blacksmith"])
-   assert_equal(0, rv.carrier)
+   local rv = self.warmill:get_workers{"barbarians_blacksmith", "barbarians_blacksmith_master", "barbarians_carrier"}
+   assert_equal(1, rv.barbarians_blacksmith)
+   assert_equal(0, rv.barbarians_blacksmith_master)
+   assert_equal(0, rv.barbarians_carrier)
 
-   self.warmill:set_workers{blacksmith=1, ["master-blacksmith"] = 1}
+   self.warmill:set_workers{barbarians_blacksmith=1, barbarians_blacksmith_master = 1}
    assert_equal(2, _cnt(self.warmill:get_workers("all")))
-   local rv = self.warmill:get_workers{"blacksmith", "master-blacksmith", "carrier"}
-   assert_equal(1, rv.blacksmith)
-   assert_equal(1, rv["master-blacksmith"])
-   assert_equal(0, rv.carrier)
+   local rv = self.warmill:get_workers{"barbarians_blacksmith", "barbarians_blacksmith_master", "barbarians_carrier"}
+   assert_equal(1, rv.barbarians_blacksmith)
+   assert_equal(1, rv.barbarians_blacksmith_master)
+   assert_equal(0, rv.barbarians_carrier)
 end
 function productionsite_tests:test_get_workers_all()
-   self.warmill:set_workers{blacksmith=1, ["master-blacksmith"] = 1}
+   self.warmill:set_workers{barbarians_blacksmith=1, barbarians_blacksmith_master = 1}
    local rv = self.warmill:get_workers("all")
-   assert_equal(1, rv.blacksmith)
-   assert_equal(1, rv["master-blacksmith"])
-   assert_equal(nil, rv.carrier)
+   assert_equal(1, rv.barbarians_blacksmith)
+   assert_equal(1, rv.barbarians_blacksmith_master)
+   assert_equal(nil, rv.barbarians_carrier)
 end
 
 function productionsite_tests:test_illegal_name()
@@ -114,12 +114,12 @@ function productionsite_tests:test_illegal_name()
 end
 function productionsite_tests:test_illegal_worker()
   assert_error("illegal worker", function()
-      self.warmill:set_workers("lumberjack", 1)
+      self.warmill:set_workers("barbarians_lumberjack", 1)
   end)
 end
 function productionsite_tests:test_no_space()
   assert_error("no_space", function()
-      self.warmill:set_workers{blacksmith=2}
+      self.warmill:set_workers{barbarians_blacksmith=2}
   end)
 end
 

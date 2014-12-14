@@ -69,24 +69,24 @@ function road_tests:test_no_worker_at_creation()
    assert_equal(0, _cnt(self.r:get_workers("all")))
 end
 function road_tests:test_carrier_creation()
-   self.r:set_workers("carrier",1)
+   self.r:set_workers("barbarians_carrier",1)
    assert_equal(1, _cnt(self.r:get_workers("all")))
-   assert_equal(1, self.r:get_workers("carrier"))
+   assert_equal(1, self.r:get_workers("barbarians_carrier"))
 end
 function road_tests:test_carrier_creation_and_deletion()
-   self.r:set_workers("carrier",1)
+   self.r:set_workers("barbarians_carrier",1)
    assert_equal(1, _cnt(self.r:get_workers("all")))
-   assert_equal(1, self.r:get_workers("carrier"))
-   self.r:set_workers("carrier",0)
+   assert_equal(1, self.r:get_workers("barbarians_carrier"))
+   self.r:set_workers("barbarians_carrier",0)
    assert_equal(0, _cnt(self.r:get_workers("all")))
-   assert_equal(0, self.r:get_workers("carrier"))
-   self.r:set_workers("carrier",1)
+   assert_equal(0, self.r:get_workers("barbarians_carrier"))
+   self.r:set_workers("barbarians_carrier",1)
    assert_equal(1, _cnt(self.r:get_workers("all")))
-   assert_equal(1, self.r:get_workers("carrier"))
+   assert_equal(1, self.r:get_workers("barbarians_carrier"))
 end
 function road_tests:test_carrier_creation_not_a_carrier()
-   assert_error("Not an carrier!", function()
-      self.r:set_workers{lumberjack=1}
+   assert_error("Not a carrier!", function()
+      self.r:set_workers{barbarians_lumberjack=1}
    end)
 end
 function road_tests:test_carrier_creation_illegal_name()
@@ -95,12 +95,12 @@ function road_tests:test_carrier_creation_illegal_name()
    end)
 end
 function road_tests:test_carrier_no_space()
-   self.r:set_workers{carrier=1}
+   self.r:set_workers{barbarians_carrier=1}
    assert_error("No space!", function ()
-      self.r:set_workers{carrier=2}
+      self.r:set_workers{barbarians_carrier=2}
    end)
 end
 function road_tests:test_valid_workers()
    assert_equal(1, _cnt(self.r.valid_workers))
-   assert_equal(1, self.r.valid_workers.carrier)
+   assert_equal(1, self.r.valid_workers.barbarians_carrier)
 end

@@ -8,7 +8,7 @@ run(function()
    start_expedition()
    cancel_expedition_in_port()
    sleep(500)
-   assert_equal(1, p1:get_workers("builder"))
+   assert_equal(1, p1:get_workers("barbarians_builder"))
 
    print("# All Tests passed.")
    wl.ui.MapView():close()

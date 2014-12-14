@@ -15,7 +15,7 @@ militarysite_tests = lunit.TestCase("MilitarySite Tests")
 function militarysite_tests:setup()
    self.f1 = map:get_field(10,10)
 
-   self.fortress = player1:place_building("fortress", self.f1)
+   self.fortress = player1:place_building("barbarians_fortress", self.f1)
 end
 function militarysite_tests:teardown()
    pcall(function()
@@ -23,7 +23,7 @@ function militarysite_tests:teardown()
    end)
 end
 function militarysite_tests:test_name()
-   assert_equal("fortress", self.fortress.descr.name)
+   assert_equal("barbarians_fortress", self.fortress.descr.name)
 end
 function militarysite_tests:test_type()
    assert_equal("militarysite", self.fortress.descr.type_name)

@@ -10,7 +10,7 @@ run(function()
       blackwood = 1,
    }
    port2():set_workers{
-      builder = 1,
+      barbarians_builder = 1,
    }
 
    assert_equal(p1:get_wares("blackwood"), 1)
@@ -26,7 +26,7 @@ run(function()
    -- No more blackwood.
    assert_equal(p1:get_wares("blackwood"), 0)
 
-   local new_ship = p1:place_bob("ship", map:get_field(10, 10))
+   local new_ship = p1:place_bob("barbarians_ship", map:get_field(10, 10))
    port1():set_wares{
       blackwood = 1,
    }

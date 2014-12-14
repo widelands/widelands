@@ -9,7 +9,7 @@ p1:allow_workers("all")
 
 function create_first_port()
    prefilled_buildings(p1,
-   { "port", 16, 16,
+   { "barbarians_port", 16, 16,
       wares = {},
       workers = {},
       soldiers = {}
@@ -22,7 +22,7 @@ end
 
 function create_second_port()
    prefilled_buildings(p1,
-   { "port", 16, 2,
+   { "barbarians_port", 16, 2,
       wares = {},
       workers = {},
       soldiers = {}
@@ -31,14 +31,14 @@ end
 
 function port2()
    local o = map:get_field(16, 2).immovable
-   if o and o.descr.name == "port" then
+   if o and o.descr.name == "barbarians_port" then
       return o
    end
    return nil
 end
 
 function start_building_farm()
-   p1:place_building("farm", map:get_field(18, 4), true, true)
+   p1:place_building("barbarians_farm", map:get_field(18, 4), true, true)
    connected_road(p1, map:get_field(18,5).immovable, "l,l|tl,tr|", true)
 end
 
@@ -46,7 +46,7 @@ function farm()
    return map:get_field(18, 4).immovable
 end
 
-ship = p1:place_bob("ship", map:get_field(10, 10))
+ship = p1:place_bob("barbarians_ship", map:get_field(10, 10))
 p1.see_all = true
 
 -- Save the game so that reloading does not skip

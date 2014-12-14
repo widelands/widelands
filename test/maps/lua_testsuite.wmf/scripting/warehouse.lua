@@ -4,17 +4,17 @@
 warehouse_tests = lunit.TestCase("warehouse tests")
 function warehouse_tests:setup()
    self.f = map:get_field(10,10)
-   self.w = player1:place_building("warehouse", self.f)
+   self.w = player1:place_building("barbarians_warehouse", self.f)
 end
 function warehouse_tests:teardown()
    pcall(function() self.f.brn.immovable:remove() end)
 end
 
 function warehouse_tests:test_name()
-   assert_equal("warehouse", self.w.descr.name)
+   assert_equal("barbarians_warehouse", self.w.descr.name)
 end
 function warehouse_tests:test_type()
-   assert_equal("warehouse", self.w.descr.type_name)
+   assert_equal("barbarians_warehouse", self.w.descr.type_name)
 end
 
 function warehouse_tests:test_upcasting_from_immovable_to_building()
@@ -95,34 +95,34 @@ function warehouse_tests:test_set_worker_illegal_worker()
    assert_error("Illegal worker should throw an error!", ill)
 end
 function warehouse_tests:test_set_get_workers_string_arg()
-   assert_equal(0, self.w:get_workers("builder"))
-   self.w:set_workers("builder", 190)
-   assert_equal(190, self.w:get_workers("builder"))
+   assert_equal(0, self.w:get_workers("barbarians_builder"))
+   self.w:set_workers("barbarians_builder", 190)
+   assert_equal(190, self.w:get_workers("barbarians_builder"))
 end
 function warehouse_tests:test_set_get_workers_table_arg()
-   k = self.w:get_workers{"builder", "lumberjack"}
-   assert_equal(0, k.builder)
-   assert_equal(0, k.lumberjack)
-   self.w:set_workers{builder=190, lumberjack=170}
-   k = self.w:get_workers{"builder", "lumberjack"}
-   assert_equal(190, k.builder)
-   assert_equal(170, k.lumberjack)
+   k = self.w:get_workers{"barbarians_builder", "lumberjack"}
+   assert_equal(0, k.barbarians_builder)
+   assert_equal(0, k.barbarians_lumberjack)
+   self.w:set_workers{barbarians_builder=190, barbarians_lumberjack=170}
+   k = self.w:get_workers{"barbarians_builder", "lumberjack"}
+   assert_equal(190, k.barbarians_builder)
+   assert_equal(170, k.barbarians_lumberjack)
 end
 function warehouse_tests:test_set_get_workers_set_is_not_increase()
-   k = self.w:get_workers{"builder", "lumberjack"}
-   k.builder = 20
-   k.lumberjack = 40
+   k = self.w:get_workers{"barbarians_builder", "lbarbarians_umberjack"}
+   k.barbarians_builder = 20
+   k.barbarians_lumberjack = 40
    self.w:set_workers(k)
-   k = self.w:get_workers{"builder", "lumberjack"}
-   assert_equal(20, k.builder)
-   assert_equal(40, k.lumberjack)
+   k = self.w:get_workers{"barbarians_builder", "barbarians_lumberjack"}
+   assert_equal(20, k.barbarians_builder)
+   assert_equal(40, k.barbarians_lumberjack)
 
-   k.builder = 10
-   k.lumberjack = 20
+   k.barbarians_builder = 10
+   k.barbarians_lumberjack = 20
    self.w:set_workers(k)
-   k = self.w:get_workers{"builder", "lumberjack"}
-   assert_equal(10, k.builder)
-   assert_equal(20, k.lumberjack)
+   k = self.w:get_workers{"barbarians_builder", "barbarians_lumberjack"}
+   assert_equal(10, k.barbarians_builder)
+   assert_equal(20, k.barbarians_lumberjack)
 end
 
 

@@ -98,11 +98,11 @@ function immovable_property_tests:setup()
    self.none = map:place_immovable("pebble1", map:get_field(19, 10))
    self.small = map:place_immovable("aspen_summer_old", map:get_field(18, 10))
    self.medium = player1:place_building(
-      "charcoal_kiln", map:get_field(10,10), false, true
+      "barbarians_charcoal_kiln", map:get_field(10,10), false, true
    )
    self.big = map:place_immovable("greenland_stones4", map:get_field(20, 10))
    self.big_building = player1:place_building(
-      "fortress", map:get_field(15,11), false, true
+      "barbarians_fortress", map:get_field(15,11), false, true
    )
 end
 function immovable_property_tests:teardown()
@@ -142,7 +142,7 @@ function immovable_property_tests:test_name_stone()
    assert_equal("greenland_stones4", self.big.descr.name)
 end
 function immovable_property_tests:test_name_fortress()
-   assert_equal("fortress", self.big_building.descr.name)
+   assert_equal("barbarians_fortress", self.big_building.descr.name)
 end
 
 function immovable_property_tests:test_type_pebble()
@@ -153,14 +153,14 @@ function immovable_property_tests:test_type_tree()
 end
 function immovable_property_tests:test_type_charcoal_kiln()
    assert_equal("productionsite", self.medium.descr.type_name)
-   assert_equal("charcoal_kiln", self.medium.descr.name)
+   assert_equal("barbarians_charcoal_kiln", self.medium.descr.name)
 end
 function immovable_property_tests:test_type_stone()
    assert_equal("immovable", self.big.descr.type_name)
 end
 function immovable_property_tests:test_type_fortress()
    assert_equal("militarysite", self.big_building.descr.type_name)
-   assert_equal("fortress", self.big_building.descr.name)
+   assert_equal("barbarians_fortress", self.big_building.descr.name)
 end
 
 function immovable_property_tests:test_fields_pebble()

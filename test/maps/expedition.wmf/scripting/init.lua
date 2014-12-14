@@ -15,7 +15,7 @@ p1 = game.players[1]
 
 p1:allow_workers("all")
 prefilled_buildings(p1,
-{ "headquarters", 8, 18,
+{ "barbarians_headquarters", 8, 18,
    wares = {
       blackwood = 3,
       grout = 2,
@@ -25,11 +25,11 @@ prefilled_buildings(p1,
       log = 3,
    },
    workers = {
-      builder = 1,
+      barbarians_builder = 1,
    },
 },
 -- But some wares needed for the expedition into the port.
-{ "port", 16, 16,
+{ "barbarians_port", 16, 16,
    wares = {
       gold = 2,
    },
@@ -38,10 +38,10 @@ prefilled_buildings(p1,
    soldiers = {
    }
 },
-{ "rangers_hut", 5, 20, workers = { ranger = 1 } },
-{ "rangers_hut", 4, 10, workers = { ranger = 1 } },
-{ "lumberjacks_hut", 7, 20, workers = { lumberjack = 1 } },
-{ "hardener", 10, 18, workers = { lumberjack = 1 } }
+{ "barbarians_rangers_hut", 5, 20, workers = { barbarians_ranger = 1 } },
+{ "barbarians_rangers_hut", 4, 10, workers = { barbarians_ranger = 1 } },
+{ "barbarians_lumberjacks_hut", 7, 20, workers = { barbarians_lumberjack = 1 } },
+{ "barbarians_wood_hardener", 10, 18, workers = { barbarians_lumberjack = 1 } }
 )
 
 hq = map:get_field(8, 18).immovable
@@ -90,11 +90,11 @@ function check_wares_in_port_are_all_there(args)
    -- We do not check for logs here as they might be carried out of the
    -- warehouse already when we check (because they might get requested by the
    -- hardener).
-   assert_equal(1, port:get_workers("builder"))
+   assert_equal(1, port:get_workers("barbarians_builder"))
 end
 
 function start_expedition()
-   assert_true(click_building(p1, "port"))
+   assert_true(click_building(p1, "barbarians_port"))
    sleep(100)
    assert_true(click_button("start_expedition"))
    sleep(100)
@@ -103,7 +103,7 @@ function start_expedition()
 end
 
 function cancel_expedition_in_port()
-   assert_true(click_building(p1, "port"))
+   assert_true(click_building(p1, "barbarians_port"))
    sleep(100)
    assert_true(click_button("cancel_expedition"))
    sleep(100)
@@ -122,7 +122,7 @@ function cancel_expedition_in_shipwindow(which_ship)
 end
 
 function dismantle_hardener()
-   assert_true(click_building(p1, "hardener"))
+   assert_true(click_building(p1, "barbarians_wood_hardener"))
    assert_true(click_button("dismantle"))
    assert_true(click_button("ok"))
    close_windows()
@@ -161,12 +161,12 @@ run(function()
 end)
 
 function create_one_ship()
-   first_ship = p1:place_bob("ship", map:get_field(10, 10))
+   first_ship = p1:place_bob("barbarians_ship", map:get_field(10, 10))
 end
 
 function create_two_ships()
    create_one_ship()
-   second_ship = p1:place_bob("ship", map:get_field(14, 10))
+   second_ship = p1:place_bob("barbarians_ship", map:get_field(14, 10))
 end
 
 function test_cancel_started_expedition_on_ship()
@@ -182,15 +182,15 @@ function test_cancel_started_expedition_on_ship()
    stable_save("ready_to_sail")
 
    sleep(10000)
-   assert_equal(1, p1:get_workers("builder"))
+   assert_equal(1, p1:get_workers("barbarians_builder"))
 
    -- Now cancel the expedition before it even got send out.
    cancel_expedition_in_shipwindow()
    sleep(100)
-   assert_equal(1, p1:get_workers("builder"))
+   assert_equal(1, p1:get_workers("barbarians_builder"))
    sleep(8000)  -- ship needs a while to get wares back.
    check_wares_in_port_are_all_there()
-   assert_equal(1, p1:get_workers("builder"))
+   assert_equal(1, p1:get_workers("barbarians_builder"))
 
    -- Dismantle the hardener to make sure that the builder is able to do his work.
    game.desired_speed = 50 * 1000
@@ -215,11 +215,11 @@ function test_cancel_started_expedition_underway()
    sleep(8000)
 
    stable_save("sailing")
-   assert_equal(1, p1:get_workers("builder"))
+   assert_equal(1, p1:get_workers("barbarians_builder"))
 
    cancel_expedition_in_shipwindow(first_ship)
    sleep(20000)
-   assert_equal(1, p1:get_workers("builder"))
+   assert_equal(1, p1:get_workers("barbarians_builder"))
    check_wares_in_port_are_all_there()
 
    -- Dismantle the hardener to make sure that the builder is able to do his work.
@@ -237,21 +237,21 @@ function test_cancel_when_port_space_was_reached()
    -- Send expedition to port space.
    start_expedition()
    wait_for_message("Expedition Ready")
-   assert_equal(1, p1:get_workers("builder"))
+   assert_equal(1, p1:get_workers("barbarians_builder"))
    sleep(500)
 
    click_on_ship(first_ship)
    assert_true(click_button("expccw"))
    wait_for_message("Port Space Found")
    sleep(500)
-   assert_equal(1, p1:get_workers("builder"))
+   assert_equal(1, p1:get_workers("barbarians_builder"))
 
    stable_save("reached_port_space")
-   assert_equal(1, p1:get_workers("builder"))
+   assert_equal(1, p1:get_workers("barbarians_builder"))
 
    cancel_expedition_in_shipwindow(first_ship)
    sleep(20000)
-   assert_equal(1, p1:get_workers("builder"))
+   assert_equal(1, p1:get_workers("barbarians_builder"))
    check_wares_in_port_are_all_there()
 
    -- Dismantle the hardener to make sure that the builder is able to do his work.
@@ -267,7 +267,7 @@ function test_transporting_works()
    game.desired_speed = 10 * 1000
 
    -- Some optimization. No need to feed the hardener and to wait for logs.
-   p1:get_buildings("hardener")[1]:remove()
+   p1:get_buildings("barbarians_wood_hardener")[1]:remove()
    hq:set_wares("log", 100)
    port:set_wares("blackwood", 100)
 
@@ -279,31 +279,31 @@ function test_transporting_works()
    wait_for_message("Port Space Found")
    assert_true(click_button("buildport"))
    sleep(500)
-   assert_equal(1, p1:get_workers("builder"))
+   assert_equal(1, p1:get_workers("barbarians_builder"))
    wait_for_message("Port")
    sleep(500)
-   assert_equal(1, p1:get_workers("builder"))
+   assert_equal(1, p1:get_workers("barbarians_builder"))
 
    stable_save("port_done")
    game.desired_speed = 25 * 1000
 
    -- build a lumberjack and see if the ship starts transporting stuff
-   p1:place_building("lumberjacks_hut", map:get_field(17, 1), true)
+   p1:place_building("barbarians_lumberjacks_hut", map:get_field(17, 1), true)
    connected_road(p1, map:get_field(18,2).immovable, "bl,l|", true)
-   while map:get_field(17, 1).immovable.descr.name ~= "lumberjacks_hut" do
+   while map:get_field(17, 1).immovable.descr.name ~= "barbarians_lumberjacks_hut" do
       sleep(3222)
    end
    assert_equal(1, p1:get_workers("builder"))
 
    -- build a lumberjack and see if the builder gets transported
-   p1:place_building("lumberjacks_hut", map:get_field(12, 18), true)
-   while map:get_field(12, 18).immovable.descr.name ~= "lumberjacks_hut" do
+   p1:place_building("barbarians_lumberjacks_hut", map:get_field(12, 18), true)
+   while map:get_field(12, 18).immovable.descr.name ~= "barbarians_lumberjacks_hut" do
       sleep(3222)
    end
-   assert_equal(1, p1:get_workers("builder"))
+   assert_equal(1, p1:get_workers("barbarians_builder"))
 
    -- Check that the first lumberjack house got his worker.
-   assert_equal(1, map:get_field(17, 1).immovable:get_workers("lumberjack"))
+   assert_equal(1, map:get_field(17, 1).immovable:get_workers("barbarians_lumberjack"))
 
    print("# All Tests passed.")
    wl.ui.MapView():close()
