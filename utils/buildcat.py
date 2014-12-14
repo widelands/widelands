@@ -118,26 +118,6 @@ ITERATIVEPOTS = [
     ),
 ]
 
-# Paths to search for exectuables
-PATHS = [
-    "/bin", "/usr/bin",
-    "/opt/local/bin", "/sw/bin",
-    "/usr/local/bin"
-]
-def find_exectuable(cmd):
-    """
-    Try to find the executable given some paths. Defaults to just return
-    the cmd if it is not found in any paths
-    """
-    for p in PATHS:
-        full_path = os.path.join(p, cmd)
-        if os.path.isfile(full_path) and os.access(full_path, os.X_OK):
-            return full_path
-    return cmd
-
-MSGMERGE = find_exectuable("msgmerge")
-XGETTEXT = find_exectuable("xgettext")
-
 
 # Options passed to common external programs
 XGETTEXTOPTS ="-k_ --from-code=UTF-8"
@@ -145,8 +125,6 @@ XGETTEXTOPTS+=" -F -c\"* TRANSLATORS\""
 # escaped double quotes are necessary for windows, as it ignores single quotes
 XGETTEXTOPTS+=" --copyright-holder=\"Widelands Development Team\""
 XGETTEXTOPTS+=" --msgid-bugs-address=\"https://bugs.launchpad.net/widelands\""
-
-MSGMERGEOPTS="-q --no-wrap"
 
 
 def are_we_in_root_directory():
@@ -202,7 +180,7 @@ def do_compile_src( potfile, srcfiles ):
     and write out the given potfile
     """
     # call xgettext and supply source filenames via stdin
-    gettext_input = subprocess.Popen(XGETTEXT + " %s --files-from=- --output=%s" % \
+    gettext_input = subprocess.Popen("xgettext %s --files-from=- --output=%s" % \
             (XGETTEXTOPTS, potfile), shell=True, stdin=subprocess.PIPE).stdin
     try:
         for one_pattern in srcfiles:
@@ -286,7 +264,8 @@ def do_update_potfiles():
 #
 ##############################################################################
 def do_buildpo(po, pot, dst):
-    rv = os.system(MSGMERGE + " %s %s %s -o %s" % (MSGMERGEOPTS, po, pot, dst))
+    msgmergeopts="-q --no-wrap"
+    rv = os.system("msgmerge %s %s %s -o %s" % (msgmergeopts, po, pot, dst))
     if rv:
         raise RuntimeError("msgmerge exited with errorcode %i!" % rv)
     return rv

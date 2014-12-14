@@ -16,8 +16,6 @@ import os.path as p
 
 import buildcat
 
-MSGFMT = buildcat.find_exectuable("msgfmt")
-
 def do_compile(lang):
     """Merge and compile every .po file found in po/lang"""
     sys.stdout.write("\t%s:\t" % lang)
@@ -31,7 +29,7 @@ def do_compile(lang):
 
         if not buildcat.do_buildpo(po, pot, "tmp.po"):
             buildcat.do_makedirs(os.path.dirname(mo))
-            err_code = os.system(MSGFMT + " -o %s tmp.po" % mo)
+            err_code = os.system("msgfmt -o %s tmp.po" % mo)
             if not err_code: # Success
                 os.remove("tmp.po")
                 sys.stdout.write(".")
