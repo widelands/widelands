@@ -50,6 +50,7 @@ public:
 		BLIT,
 		BLIT_MONOCHROME,
 		BLIT_BLENDED,
+		FILL_RECT,
 	};
 
 	// NOCOM(#sirver): maybe BlendMode::REMOVE?
@@ -75,6 +76,12 @@ public:
 		int mask;
 		RGBAColor blend;
 	};
+
+	struct FillRectArguments {
+		FloatRect destination_rect;
+		RGBAColor color;
+	};
+
 
 	struct TerrainArguments {
 		// NOCOM(#sirver): add destination_rect for glScissor
@@ -102,6 +109,7 @@ public:
 			MonochromeBlitArguments monochrome_blit_arguments;
 			BlendedBlitArguments blended_blit_arguments;
 			TerrainArguments terrain_arguments;
+			FillRectArguments fill_rect_arguments;
 		};
 	};
 

@@ -23,6 +23,7 @@
 #include "base/wexception.h"
 #include "graphic/gl/blit_program.h"
 #include "graphic/gl/dither_program.h"
+#include "graphic/gl/fill_rect_program.h"
 #include "graphic/gl/road_program.h"
 #include "graphic/gl/terrain_program.h"
 
@@ -83,6 +84,11 @@ void RenderQueue::draw() {
 			road_program_->draw(
 			   *item.terrain_arguments.screen, *item.terrain_arguments.fields_to_draw);
 			delete item.terrain_arguments.fields_to_draw;
+			break;
+
+		case Program::FILL_RECT:
+			FillRectProgram::instance().draw(
+			   item.fill_rect_arguments.destination_rect, item.fill_rect_arguments.color);
 			break;
 
 		default:

@@ -110,17 +110,25 @@ void draw_rect(const Rect& rc, const RGBColor& clr, Surface* surface) {
 }
 
 void fill_rect(const Rect& rc, const RGBAColor& clr, Surface* surface) {
+	const FloatRect rect = to_opengl(*surface, rc, ConversionMode::kExact);
 	if (is_a(Screen, surface)) {
-		// NOCOM(#sirver): do something
+		RenderQueue::Item i;
+		i.program = RenderQueue::Program::FILL_RECT;
+		i.z = RenderQueue::z++;
+		i.blend_mode = BlendMode::Copy;
+		i.fill_rect_arguments.destination_rect = rect;
+		i.fill_rect_arguments.color = clr;
+		RenderQueue::instance().enqueue(i);
 		return;
 	}
 
 	surface->setup_gl();
 	glViewport(0, 0, surface->width(), surface->height());
 
+	// NOCOM(#sirver): disable blend?
 	glBlendFunc(GL_ONE, GL_ZERO);
 
-	FillRectProgram::instance().draw(to_opengl(*surface, rc, ConversionMode::kExact), clr);
+	FillRectProgram::instance().draw(rect, clr);
 
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
