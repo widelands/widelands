@@ -543,7 +543,7 @@ void DefaultAI::update_all_buildable_fields(const int32_t gametime) {
 	       i < 25) {
 		BuildableField& bf = *buildable_fields.front();
 
-		//  check whether we kLost ownership of the node
+		//  check whether we lost ownership of the node
 		if (bf.coords.field->get_owned_by() != player_number()) {
 			delete &bf;
 			buildable_fields.pop_front();
@@ -581,7 +581,7 @@ void DefaultAI::update_all_mineable_fields(const int32_t gametime) {
 	       i < 40) {
 		MineableField* mf = mineable_fields.front();
 
-		//  check whether we kLost ownership of the node
+		//  check whether we lost ownership of the node
 		if (mf->coords.field->get_owned_by() != player_number()) {
 			delete mf;
 			mineable_fields.pop_front();
@@ -619,7 +619,7 @@ void DefaultAI::update_all_not_buildable_fields() {
 	}
 
 	for (uint32_t i = 0; i < maxchecks; ++i) {
-		//  check whether we kLost ownership of the node
+		//  check whether we lost ownership of the node
 		if (unusable_fields.front().field->get_owned_by() != pn) {
 			unusable_fields.pop_front();
 			continue;
@@ -2825,20 +2825,21 @@ bool DefaultAI::marine_main_decisions(uint32_t const gametime) {
 	}
 	territories_count += remote_ports_coords.size();
 
-	enum {kNeedShip = 0, kEnoughShips = 1, kDoNothing = 2 };
+	//NOCOM - how is it, when I added class here I have to cast everything
+	enum class fleetStatus: uint8_t {kNeedShip = 0, kEnoughShips = 1, kDoNothing = 2 };
 
 	// now we must compare ports vs ships to decide if new ship is needed or new expedition can start
-	uint8_t enough_ships = kDoNothing;
+	uint8_t enough_ships = static_cast<uint8_t>(fleetStatus::kDoNothing);
 	if (static_cast<float>(allships.size()) >
 	    static_cast<float>((territories_count - 1) * 0.6 + ports_count * 0.75)) {
-		enough_ships = kEnoughShips;
+		enough_ships = static_cast<uint8_t>(fleetStatus::kEnoughShips);
 	} else if (static_cast<float>(allships.size()) <
 	           static_cast<float>((territories_count - 1) * 0.6 + ports_count * 0.75)) {
-		enough_ships = kNeedShip;
+		enough_ships = static_cast<uint8_t>(fleetStatus::kNeedShip);
 	}
 
 	// building a ship? if yes, find a shipyard and order it to build a ship
-	if (shipyards_count > 0 && enough_ships == kNeedShip && idle_shipyard_stocked &&
+	if (shipyards_count > 0 && enough_ships == static_cast<uint8_t>(fleetStatus::kNeedShip) && idle_shipyard_stocked &&
 	    ports_count > 0) {
 
 		for (const ProductionSiteObserver& ps_obs : productionsites) {
@@ -2863,7 +2864,7 @@ bool DefaultAI::marine_main_decisions(uint32_t const gametime) {
 	}
 
 	// starting an expedition? if yes, find a port and order it to start an expedition
-	if (ports_count > 0 && enough_ships == kEnoughShips && expeditions_in_prep == 0 &&
+	if (ports_count > 0 && enough_ships == static_cast<uint8_t>(fleetStatus::kEnoughShips) && expeditions_in_prep == 0 &&
 	    expeditions_in_progress == 0) {
 		// we need to find a port
 		for (const WarehouseSiteObserver& wh_obs : warehousesites) {

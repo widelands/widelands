@@ -702,57 +702,6 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 		}
 	}
 
-	//default: { //NOCOM (tiborb): review if this is properly resolved
-		//// wait for input
-		//start_task_idle(game, descr().main_animation(), 1500);
-		//return;
-	//}
-	//}
-	//case EXP_COLONIZING: {
-		//assert(m_expedition->seen_port_buildspaces && !m_expedition->seen_port_buildspaces->empty());
-		//BaseImmovable* baim =
-		   //game.map()[m_expedition->seen_port_buildspaces->front()].get_immovable();
-		//assert(baim);
-		//upcast(ConstructionSite, cs, baim);
-
-		//for (int i = m_items.size() - 1; i >= 0; --i) {
-			//WareInstance* ware;
-			//Worker* worker;
-			//m_items.at(i).get(game, &ware, &worker);
-			//if (ware) {
-				//// no, we don't transfer the wares, we create new ones out of air and remove the old
-				//// ones ;)
-				//WaresQueue& wq = cs->waresqueue(ware->descr_index());
-				//const uint32_t max = wq.get_max_fill();
-				//const uint32_t cur = wq.get_filled();
-				//assert(max > cur);
-				//wq.set_filled(cur + 1);
-				//m_items.at(i).remove(game);
-				//m_items.resize(i);
-				//break;
-			//} else {
-				//assert(worker);
-				//worker->set_economy(nullptr);
-				//worker->set_location(cs);
-				//worker->set_position(game, cs->get_position());
-				//worker->reset_tasks(game);
-				//PartiallyFinishedBuilding::request_builder_callback(
-				   //game, *cs->get_builder_request(), worker->descr().worker_index(), worker, *cs);
-				//m_items.resize(i);
-			//}
-		//}
-		//if (m_items.empty()) {
-			//m_ship_state = TRANSPORT;  // That's it, expedition finished
-
-			//init_fleet(game);
-			//m_expedition.reset(nullptr);
-
-			//if (upcast(InteractiveGameBase, igb, game.get_ibase()))
-				//refresh_window(*igb);
-		//}
-		//return start_task_idle(game, descr().main_animation(), 1500);  // unload the next item
-	//}
-
 	default: {
 		// wait for input
 		start_task_idle(game, descr().main_animation(), 1500);
