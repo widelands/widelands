@@ -1729,10 +1729,12 @@ bool DefaultAI::construct_building(int32_t gametime) {
 				for (const WarehouseSiteObserver& wh_obs : warehousesites) {
 					const uint16_t actual_distance =
 					   map.calc_distance(bf->coords, wh_obs.site->get_position());
-					if (nearest_distance > actual_distance) {
-						nearest_distance = actual_distance;
-					}
+					nearest_distance = std::min(nearest_distance, actual_distance);
 				}
+				//but limit to 15
+				const uint16_t max_distance_considered = 15;
+				nearest_distance = std::min(nearest_distance, max_distance_considered);
+				prio += nearest_distance;
 
 				// take care about and enemies
 				if (bf->enemy_nearby_) {
