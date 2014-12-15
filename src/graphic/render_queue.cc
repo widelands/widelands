@@ -19,6 +19,9 @@
 
 #include "graphic/render_queue.h"
 
+#include <algorithm>
+#include <limits>
+
 #include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/gl/blit_program.h"
@@ -33,6 +36,33 @@ namespace {
 // Maps [0, max_z] linearly to [1., -1.] for use in vertex shaders.
 inline float to_opengl_z(int z, int max_z) {
 	return -(2.f * z) / max_z + 1.f;
+}
+
+// The key defines in which order we render things.
+//
+// For opaque objects, render order makes no difference in the final image, but
+//   - we batch up by program to have maximal batching.
+//   - and we want to render frontmost objects first, so that we do not render
+//     any pixel more than once.
+uint64_t make_key_opaque(uint64_t program, int z_value) {
+	assert(program < std::numeric_limits<uint16_t>::max());
+	assert(0 <= z_value && z_value < std::numeric_limits<uint16_t>::max());
+
+	// NOCOM(#sirver): add program - before z actually?
+	uint64_t sort_z_value = std::numeric_limits<uint16_t>::max() - z_value;
+	return (program << 48) | (sort_z_value << 32);
+}
+
+// For blended objects, we need to render furthest away objects first, and we
+// do not update the z-buffer. This guarantees that the image is correct.
+//   - if z value is the same, we order by program second to have potential batching.
+uint64_t make_key_blended(uint64_t program, int z_value) {
+	assert(program < std::numeric_limits<uint16_t>::max());
+	assert(0 <= z_value && z_value < std::numeric_limits<uint16_t>::max());
+
+	// Sort opaque objects increasing, alpha objects decreasing in order.
+	uint64_t sort_z_value = z_value;
+	return (sort_z_value << 48) | (program << 32);
 }
 
 }  // namespace
@@ -51,22 +81,53 @@ RenderQueue& RenderQueue::instance() {
 }
 
 // NOCOM(#sirver): take individual parameters?
-void RenderQueue::enqueue(const Item& item) {
-	items_.emplace_back(item);
-	items_.back().z = next_z;
+void RenderQueue::enqueue(const Item& given_item) {
+	Item* item;
+	if (given_item.blend_mode == BlendMode::Copy) {
+		opaque_items_.emplace_back(given_item);
+		item = &opaque_items_.back();
+		item->z = next_z;
+		item->key = make_key_opaque(static_cast<uint64_t>(item->program), item->z);
+	} else {
+		blended_items_.emplace_back(given_item);
+		item = &blended_items_.back();
+		item->z = next_z;
+		item->key = make_key_blended(static_cast<uint64_t>(item->program), item->z);
+	}
 
-	// Add more than once since some items have multiple programs that all need
-	// a separate z buffer.
+	// Add more than 1 since some items have multiple programs that all need a
+	// separate z buffer.
 	next_z += 3;
 }
 
 // NOCOM(#sirver): document that this draws everything in this frame.
 void RenderQueue::draw() {
-	// NOCOM(#sirver): this assert is stupid and dangerous. Maybe instead use GL_LEQUAL.
 	// NOCOM(#sirver): pull out constant
 	assert(next_z < 65536);
 
-	for (const Item& item : items_) {
+	glDisable(GL_BLEND);
+
+	// log("#sirver Drawing Opaque stuff.\n");
+	std::sort(opaque_items_.begin(), opaque_items_.end());
+	draw_items(opaque_items_);
+	opaque_items_.clear();
+
+	glEnable(GL_BLEND);
+	glDepthMask(GL_FALSE);
+
+	// log("#sirver Drawing blended stuff.\n");
+	std::sort(blended_items_.begin(), blended_items_.end());
+	draw_items(blended_items_);
+	blended_items_.clear();
+
+	glDepthMask(GL_TRUE);
+
+	next_z = 1;
+}
+
+void RenderQueue::draw_items(const std::vector<Item>& items) {
+	for (const Item& item : items) {
+		// log("#sirver    program: %d, item.z: %d %f, key: %llx\n", item.program, item.z, to_opengl_z(item.z, next_z), item.key);
 		switch (item.program) {
 		case Program::BLIT:
 			VanillaBlitProgram::instance().draw(item.destination_rect,
@@ -137,6 +198,4 @@ void RenderQueue::draw() {
 			throw wexception("Unknown item.program: %d", item.program);
 		}
 	}
-	items_.clear();
-	next_z = 1;
 }

@@ -84,7 +84,6 @@ public:
 
 
 	struct TerrainArguments {
-		// NOCOM(#sirver): add destination_rect for glScissor
 		TerrainArguments() {}
 
 		int gametime;
@@ -101,10 +100,15 @@ public:
 	struct Item {
 		Item() {}
 
+		inline bool operator<(const Item& other) const {
+			return key < other.key;
+		}
+
 		FloatRect destination_rect;
 		Program program;
 		uint16_t z;
 		BlendMode blend_mode;
+		uint64_t key;
 		union {
 			VanillaBlitArguments vanilla_blit_arguments;
 			MonochromeBlitArguments monochrome_blit_arguments;
@@ -124,6 +128,8 @@ public:
 private:
 	RenderQueue();
 
+	void draw_items(const std::vector<Item>& items);
+
 	// The z value that should be used for the next draw, so that it is on top
 	// of everything before.
 	int next_z;
@@ -132,7 +138,8 @@ private:
 	std::unique_ptr<DitherProgram> dither_program_;
 	std::unique_ptr<RoadProgram> road_program_;
 
-	std::vector<Item> items_;
+	std::vector<Item> blended_items_;
+	std::vector<Item> opaque_items_;
 
 	DISALLOW_COPY_AND_ASSIGN(RenderQueue);
 };
