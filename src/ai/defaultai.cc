@@ -2825,21 +2825,20 @@ bool DefaultAI::marine_main_decisions(uint32_t const gametime) {
 	}
 	territories_count += remote_ports_coords.size();
 
-	//NOCOM - how is it, when I added class here I have to cast everything
-	enum class fleetStatus: uint8_t {kNeedShip = 0, kEnoughShips = 1, kDoNothing = 2 };
+	enum class FleetStatus: uint8_t {kNeedShip = 0, kEnoughShips = 1, kDoNothing = 2 };
 
 	// now we must compare ports vs ships to decide if new ship is needed or new expedition can start
-	uint8_t enough_ships = static_cast<uint8_t>(fleetStatus::kDoNothing);
+	FleetStatus enough_ships = FleetStatus::kDoNothing;
 	if (static_cast<float>(allships.size()) >
 	    static_cast<float>((territories_count - 1) * 0.6 + ports_count * 0.75)) {
-		enough_ships = static_cast<uint8_t>(fleetStatus::kEnoughShips);
+		enough_ships = FleetStatus::kEnoughShips;
 	} else if (static_cast<float>(allships.size()) <
 	           static_cast<float>((territories_count - 1) * 0.6 + ports_count * 0.75)) {
-		enough_ships = static_cast<uint8_t>(fleetStatus::kNeedShip);
+		enough_ships = FleetStatus::kNeedShip;
 	}
 
 	// building a ship? if yes, find a shipyard and order it to build a ship
-	if (shipyards_count > 0 && enough_ships == static_cast<uint8_t>(fleetStatus::kNeedShip) && idle_shipyard_stocked &&
+	if (shipyards_count > 0 && enough_ships == FleetStatus::kNeedShip && idle_shipyard_stocked &&
 	    ports_count > 0) {
 
 		for (const ProductionSiteObserver& ps_obs : productionsites) {
@@ -2864,7 +2863,7 @@ bool DefaultAI::marine_main_decisions(uint32_t const gametime) {
 	}
 
 	// starting an expedition? if yes, find a port and order it to start an expedition
-	if (ports_count > 0 && enough_ships == static_cast<uint8_t>(fleetStatus::kEnoughShips) && expeditions_in_prep == 0 &&
+	if (ports_count > 0 && enough_ships == FleetStatus::kEnoughShips && expeditions_in_prep == 0 &&
 	    expeditions_in_progress == 0) {
 		// we need to find a port
 		for (const WarehouseSiteObserver& wh_obs : warehousesites) {
