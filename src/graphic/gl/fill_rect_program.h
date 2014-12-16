@@ -20,6 +20,8 @@
 #ifndef WL_GRAPHIC_GL_FILL_RECT_PROGRAM_H
 #define WL_GRAPHIC_GL_FILL_RECT_PROGRAM_H
 
+#include <vector>
+
 #include "base/rect.h"
 #include "graphic/blend_mode.h"
 #include "graphic/color.h"
@@ -27,9 +29,17 @@
 
 class FillRectProgram {
 public:
+	struct Arguments {
+		FloatRect destination_rect;
+		float z_value;
+		RGBAColor color;
+		BlendMode blend_mode;
+	};
+
 	// Returns the (singleton) instance of this class.
 	static FillRectProgram& instance();
 
+	// NOCOM(#sirver): kill method?
 	// Fills a solid rect in 'color'. If blend_mode is BlendMode::UseAlpha, this
 	// will brighten the rect, if it is BlendMode::Subtract it darkens it.
 	void draw(const FloatRect& destination_rect,
@@ -37,17 +47,38 @@ public:
 	          const RGBAColor& color,
 	          BlendMode blend_mode);
 
+
+	void draw(const std::vector<Arguments>& arguments);
+
 private:
 	FillRectProgram();
 
 	struct PerVertexData {
-		PerVertexData(float init_gl_x, float init_gl_y, float init_gl_z)
-		   : gl_x(init_gl_x), gl_y(init_gl_y), gl_z(init_gl_z) {
+		PerVertexData(float init_gl_x,
+		              float init_gl_y,
+		              float init_gl_z,
+		              float init_r,
+		              float init_g,
+		              float init_b,
+		              float init_a
+		              )
+		   : gl_x(init_gl_x),
+		     gl_y(init_gl_y),
+		     gl_z(init_gl_z),
+		     r(init_r),
+		     g(init_g),
+		     b(init_b),
+		     a(init_a) {
 		}
 
 		float gl_x, gl_y, gl_z;
+		float r, g, b, a;
 	};
-	static_assert(sizeof(PerVertexData) == 12, "Wrong padding.");
+	static_assert(sizeof(PerVertexData) == 28, "Wrong padding.");
+
+	// This is only kept around so that we do not constantly allocate memory for
+	// it.
+	std::vector<PerVertexData> vertices_;
 
 	// The buffer that will contain the quad for rendering.
 	Gl::Buffer gl_array_buffer_;
@@ -57,9 +88,7 @@ private:
 
 	// Attributes.
 	GLint attr_position_;
-
-	// Uniforms.
-	GLint u_color_;
+	GLint attr_color_;
 
 	DISALLOW_COPY_AND_ASSIGN(FillRectProgram);
 };

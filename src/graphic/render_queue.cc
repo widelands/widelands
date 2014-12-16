@@ -48,7 +48,7 @@ uint64_t make_key_opaque(uint64_t program, int z_value) {
 	assert(program < std::numeric_limits<uint16_t>::max());
 	assert(0 <= z_value && z_value < std::numeric_limits<uint16_t>::max());
 
-	// NOCOM(#sirver): add program - before z actually?
+	// NOCOM(#sirver): add program sorting - texture for example, so that batching them works.
 	uint64_t sort_z_value = std::numeric_limits<uint16_t>::max() - z_value;
 	return (program << 48) | (sort_z_value << 32);
 }
@@ -107,7 +107,7 @@ void RenderQueue::draw() {
 
 	glDisable(GL_BLEND);
 
-	// log("#sirver Drawing Opaque stuff.\n");
+	log("#sirver Drawing Opaque stuff: %d.\n", opaque_items_.size());
 	std::sort(opaque_items_.begin(), opaque_items_.end());
 	draw_items(opaque_items_);
 	opaque_items_.clear();
@@ -115,7 +115,7 @@ void RenderQueue::draw() {
 	glEnable(GL_BLEND);
 	glDepthMask(GL_FALSE);
 
-	// log("#sirver Drawing blended stuff.\n");
+	log("#sirver Drawing blended stuff: %d.\n", blended_items_.size());
 	std::sort(blended_items_.begin(), blended_items_.end());
 	draw_items(blended_items_);
 	blended_items_.clear();
@@ -126,8 +126,11 @@ void RenderQueue::draw() {
 }
 
 void RenderQueue::draw_items(const std::vector<Item>& items) {
-	for (const Item& item : items) {
-		// log("#sirver    program: %d, item.z: %d %f, key: %llx\n", item.program, item.z, to_opengl_z(item.z, next_z), item.key);
+	size_t i = 0;
+	while (i < items.size()) {
+		const Item& item = items[i];
+
+		log("#sirver    program: %d, item.z: %d %f, key: %llx\n", item.program, item.z, to_opengl_z(item.z, next_z), item.key);
 		switch (item.program) {
 		case Program::BLIT:
 			VanillaBlitProgram::instance().draw(item.destination_rect,
@@ -136,6 +139,7 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 			                                    item.vanilla_blit_arguments.texture,
 			                                    item.vanilla_blit_arguments.opacity,
 			                                    item.blend_mode);
+			++i;
 			break;
 
 		case Program::BLIT_MONOCHROME:
@@ -144,6 +148,7 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 			                                       to_opengl_z(item.z, next_z),
 			                                       item.monochrome_blit_arguments.texture,
 			                                       item.monochrome_blit_arguments.blend);
+			++i;
 			break;
 
 		case Program::BLIT_BLENDED:
@@ -153,6 +158,7 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 			                                    item.blended_blit_arguments.texture,
 			                                    item.blended_blit_arguments.mask,
 			                                    item.blended_blit_arguments.blend);
+			++i;
 			break;
 
 		case Program::LINE:
@@ -163,6 +169,7 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 			                                 to_opengl_z(item.z, next_z),
 			                                 item.line_arguments.color,
 			                                 item.line_arguments.line_width);
+			++i;
 			break;
 
 		case Program::TERRAIN:
@@ -185,14 +192,25 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 			                    to_opengl_z(item.z + 2, next_z));
 			delete item.terrain_arguments.fields_to_draw;
 			glDisable(GL_SCISSOR_TEST);
+			++i;
 			break;
 
-		case Program::RECT:
-			FillRectProgram::instance().draw(item.destination_rect,
-			                                 to_opengl_z(item.z, next_z),
-			                                 item.rect_arguments.color,
-			                                 item.blend_mode);
-			break;
+		case Program::RECT: {
+			std::vector<FillRectProgram::Arguments> args;
+			while (i < items.size()) {
+				const Item& current_item = items[i];
+				if (current_item.program != item.program) {
+					break;
+				}
+				args.emplace_back(FillRectProgram::Arguments{current_item.destination_rect,
+				                                             to_opengl_z(current_item.z, next_z),
+				                                             current_item.rect_arguments.color,
+				                                             current_item.blend_mode});
+				++i;
+			}
+			log("#sirver   Batched: args.size(): %d\n", args.size());
+			FillRectProgram::instance().draw(args);
+		} break;
 
 		default:
 			throw wexception("Unknown item.program: %d", item.program);
