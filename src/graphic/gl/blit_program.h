@@ -21,6 +21,7 @@
 #define WL_GRAPHIC_GL_BLIT_PROGRAM_H
 
 #include <memory>
+#include <vector>
 
 #include "base/macros.h"
 #include "base/rect.h"
@@ -32,6 +33,18 @@ class BlitProgram;
 
 class VanillaBlitProgram {
 public:
+	// NOCOM(#sirver): add a sorting step for texture?
+	struct Arguments {
+		FloatRect destination_rect;
+		FloatRect source_rect;
+		float z_value;
+		GLuint gl_texture;
+		float opacity;
+		BlendMode blend_mode;
+	};
+
+	void draw(const std::vector<Arguments>& arguments);
+
 	// Returns the (singleton) instance of this class.
 	static VanillaBlitProgram& instance();
 	~VanillaBlitProgram();

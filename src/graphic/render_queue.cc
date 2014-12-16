@@ -183,6 +183,9 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 			                       *item.terrain_arguments.terrains,
 			                       *item.terrain_arguments.fields_to_draw,
 			                       to_opengl_z(item.z, next_z));
+			// NOCOM(#sirver): not pretty. Instead put the other two in the blending buckte.
+			glEnable(GL_BLEND);
+
 			dither_program_->draw(item.terrain_arguments.gametime,
 			                      *item.terrain_arguments.terrains,
 			                      *item.terrain_arguments.fields_to_draw,
@@ -191,6 +194,7 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 			                    *item.terrain_arguments.fields_to_draw,
 			                    to_opengl_z(item.z + 2, next_z));
 			delete item.terrain_arguments.fields_to_draw;
+			glDisable(GL_BLEND);
 			glDisable(GL_SCISSOR_TEST);
 			++i;
 			break;

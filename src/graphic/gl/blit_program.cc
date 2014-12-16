@@ -102,14 +102,14 @@ class BlitProgram {
 public:
 	BlitProgram(const std::string& fragment_shader);
 
-	void activate(const FloatRect& gl_dest_rect,
-	              const FloatRect& gl_src_rect,
-	              const float z_value,
-	              const GLuint gl_texture,
-	              const float opacity,
-	              const BlendMode blend_mode);
+	void activate();
 
-	void draw_and_deactivate(BlendMode blend_mode);
+	void draw_and_deactivate(const FloatRect& gl_dest_rect,
+	                         const FloatRect& gl_src_rect,
+	                         const float z_value,
+	                         const GLuint gl_texture,
+	                         const float opacity,
+	                         const BlendMode blend_mode);
 
 	GLuint program_object() const {
 		return gl_program_.object();
@@ -163,17 +163,19 @@ BlitProgram::BlitProgram(const std::string& fragment_shader) {
 
 }
 
-void BlitProgram::activate(const FloatRect& gl_dest_rect,
+void BlitProgram::activate() {
+	glUseProgram(gl_program_.object());
+
+	glEnableVertexAttribArray(attr_position_);
+	glEnableVertexAttribArray(attr_texture_position_);
+}
+
+void BlitProgram::draw_and_deactivate(const FloatRect& gl_dest_rect,
                        const FloatRect& gl_src_rect,
 							  const float z_value,
                        const GLuint gl_texture,
 							  const float opacity,
                        const BlendMode blend_mode) {
-	glUseProgram(gl_program_.object());
-
-	glEnableVertexAttribArray(attr_position_);
-	glEnableVertexAttribArray(attr_texture_position_);
-
 	std::vector<PerVertexData> vertices;
 	vertices.reserve(4);
 	vertices.emplace_back(gl_dest_rect.x, gl_dest_rect.y, z_value, gl_src_rect.x, gl_src_rect.y);
@@ -219,9 +221,7 @@ void BlitProgram::activate(const FloatRect& gl_dest_rect,
 	if (blend_mode == BlendMode::Copy) {
 		glBlendFunc(GL_ONE, GL_ZERO);
 	}
-}
 
-void BlitProgram::draw_and_deactivate(BlendMode blend_mode) {
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
 	if (blend_mode == BlendMode::Copy) {
@@ -255,9 +255,23 @@ void VanillaBlitProgram::draw(const FloatRect& gl_dest_rect,
                               const GLuint gl_texture,
                               const float opacity,
                               const BlendMode blend_mode) {
-	blit_program_->activate(gl_dest_rect, gl_src_rect, z_value, gl_texture, opacity, blend_mode);
-	blit_program_->draw_and_deactivate(blend_mode);
+	draw({Arguments{gl_dest_rect, gl_src_rect, z_value, gl_texture, opacity, blend_mode}});
 }
+
+void VanillaBlitProgram::draw(const std::vector<Arguments>& arguments) {
+	// NOCOM(#sirver): change blit_program to take arguments.
+	// NOCOM(#sirver): change it to take a color too.
+	for (const Arguments arg : arguments) {
+		blit_program_->activate();
+		blit_program_->draw_and_deactivate(arg.destination_rect,
+		                                   arg.source_rect,
+		                                   arg.z_value,
+		                                   arg.gl_texture,
+		                                   arg.opacity,
+		                                   arg.blend_mode);
+	}
+}
+
 
 // static
 MonochromeBlitProgram& MonochromeBlitProgram::instance() {
@@ -279,12 +293,12 @@ void MonochromeBlitProgram::draw(const FloatRect& gl_dest_rect,
                                  const float z_value,
                                  const GLuint gl_texture,
                                  const RGBAColor& blend) {
-	blit_program_->activate(
-	   gl_dest_rect, gl_src_rect, z_value, gl_texture, blend.a / 255., BlendMode::UseAlpha);
+	blit_program_->activate();
 
 	glUniform3f(u_blend_, blend.r / 255., blend.g / 255., blend.b / 255.);
 
-	blit_program_->draw_and_deactivate(BlendMode::UseAlpha);
+	blit_program_->draw_and_deactivate(
+	   gl_dest_rect, gl_src_rect, z_value, gl_texture, blend.a / 255., BlendMode::UseAlpha);
 }
 
 // static
@@ -308,8 +322,7 @@ void BlendedBlitProgram::draw(const FloatRect& gl_dest_rect,
                               const GLuint gl_texture_image,
                               const GLuint gl_texture_mask,
                               const RGBAColor& blend) {
-	blit_program_->activate(
-	   gl_dest_rect, gl_src_rect, z_value, gl_texture_image, blend.a / 255., BlendMode::UseAlpha);
+	blit_program_->activate();
 
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, gl_texture_mask);
@@ -317,7 +330,8 @@ void BlendedBlitProgram::draw(const FloatRect& gl_dest_rect,
 
 	glUniform3f(u_blend_, blend.r / 255., blend.g / 255., blend.b / 255.);
 
-	blit_program_->draw_and_deactivate(BlendMode::UseAlpha);
+	blit_program_->draw_and_deactivate(
+	   gl_dest_rect, gl_src_rect, z_value, gl_texture_image, blend.a / 255., BlendMode::UseAlpha);
 
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, 0);
