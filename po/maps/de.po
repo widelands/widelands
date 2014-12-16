@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-12-08 11:33+0000\n"
-"PO-Revision-Date: 2014-10-30 04:46+0000\n"
+"PO-Revision-Date: 2014-12-15 23:14+0000\n"
 "Last-Translator: wl-zocker <Unknown>\n"
 "Language-Team: widelands-dev\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-09 05:31+0000\n"
-"X-Generator: Launchpad (build 17283)\n"
+"X-Launchpad-Export-Date: 2014-12-16 05:41+0000\n"
+"X-Generator: Launchpad (build 17286)\n"
 "X-Poedit-Country: GERMANY\n"
 "Language: de\n"
 "X-Poedit-Language: German\n"
@@ -61,15 +61,15 @@ msgstr ""
 
 #: ../../campaigns/campaigns.conf:27
 msgid "The Second Empire"
-msgstr ""
+msgstr "Das zweite Reich"
 
 #: ../../campaigns/campaigns.conf:29
 msgid "Barbarians"
-msgstr ""
+msgstr "Barbaren"
 
 #: ../../campaigns/campaigns.conf:31
 msgid "Easy. Introduces the Barbarians"
-msgstr ""
+msgstr "Einfach. Führt die Barbaren ein."
 
 #: ../../campaigns/campaigns.conf:32
 msgid ""
@@ -90,15 +90,15 @@ msgstr ""
 
 #: ../../campaigns/campaigns.conf:35
 msgid "The Months of Exile"
-msgstr ""
+msgstr "Monate des Exils"
 
 #: ../../campaigns/campaigns.conf:37
 msgid "Empire"
-msgstr ""
+msgstr "Imperium"
 
 #: ../../campaigns/campaigns.conf:39
 msgid "Easy. Introduces the Empire"
-msgstr ""
+msgstr "Einfach. Führt das Imperium ein."
 
 #: ../../campaigns/campaigns.conf:40
 msgid ""
@@ -116,15 +116,15 @@ msgstr ""
 
 #: ../../campaigns/campaigns.conf:43
 msgid "The Run for the Fire"
-msgstr ""
+msgstr "Die Jagd nach dem Feuer"
 
 #: ../../campaigns/campaigns.conf:45
 msgid "Atlanteans"
-msgstr ""
+msgstr "Atlanter"
 
 #: ../../campaigns/campaigns.conf:47
 msgid "Challenging. Introduces the Atlanteans"
-msgstr ""
+msgstr "Anspruchsvoll. Führt die Atlanter ein."
 
 #: ../../campaigns/campaigns.conf:48
 msgid ""

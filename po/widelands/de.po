@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-12-08 11:33+0000\n"
-"PO-Revision-Date: 2014-12-09 05:44+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"PO-Revision-Date: 2014-12-15 23:27+0000\n"
+"Last-Translator: Gabriel Margiani <Unknown>\n"
 "Language-Team: widelands-dev\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-12-10 05:26+0000\n"
-"X-Generator: Launchpad (build 17283)\n"
+"X-Launchpad-Export-Date: 2014-12-16 05:41+0000\n"
+"X-Generator: Launchpad (build 17286)\n"
 "Language: de\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -796,7 +796,7 @@ msgstr "Auswahl unbeweglicher Objekte"
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:94
 msgid "arable"
-msgstr "bebaubar"
+msgstr "urbar"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:104
@@ -2421,11 +2421,11 @@ msgstr ""
 #: ../../src/ui_fsmenu/launch_mpg.cc:496
 #, c-format
 msgid "You are Player %i."
-msgstr ""
+msgstr "Du bist Spieler %i."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:497
 msgid "You are a spectator."
-msgstr ""
+msgstr "Du bist ein Zuschauer."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:557
 msgid "Saved players are:"
@@ -2841,12 +2841,12 @@ msgstr "Widelands verlassen"
 #: ../../src/ui_fsmenu/main.cc:70
 #, c-format
 msgid "Version %1$s (%2$s)"
-msgstr ""
+msgstr "Version %1$s (%2$s)"
 
 #. * TRANSLATORS: Placeholders are the copyright years
 #: ../../src/ui_fsmenu/main.cc:75
 msgid "(C) %1%-%2% by the Widelands Development Team"
-msgstr ""
+msgstr "(C) %1%-%2% Widelands-Entwicklungsteam"
 
 #: ../../src/ui_fsmenu/main.cc:80
 msgid "Licensed under the GNU General Public License V2.0"

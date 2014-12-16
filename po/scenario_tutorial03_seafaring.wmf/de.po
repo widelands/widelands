@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-12-08 11:33+0000\n"
-"PO-Revision-Date: 2014-11-03 01:20+0000\n"
+"PO-Revision-Date: 2014-12-15 23:15+0000\n"
 "Last-Translator: wl-zocker <Unknown>\n"
 "Language-Team: widelands-dev\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-12-09 05:43+0000\n"
-"X-Generator: Launchpad (build 17283)\n"
+"X-Launchpad-Export-Date: 2014-12-16 05:41+0000\n"
+"X-Generator: Launchpad (build 17286)\n"
 "Language: de\n"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:20
@@ -40,6 +40,9 @@ msgid ""
 "But let me first give you an overview about your territory: here in the "
 "south, you have a whole economy with almost everything you need."
 msgstr ""
+"Aber lasse mich dir zuerst einen Überblick über dein Territorium geben: Hier "
+"im Süden hast du eine vollständige Wirtschaft mit fast allem, was du "
+"brauchst."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:32
 msgid "The Northern Part"
@@ -71,6 +74,9 @@ msgid ""
 "probably like to have a closer look at your camp. I will also take a short "
 "break and be back soon."
 msgstr ""
+"Aber ich will dich nicht drängen: Du bist gerade erst angekommen und "
+"möchtest wahrscheinlich dein Lager genauer anschauen. Ich werde ebenfalls "
+"eine kurze Pause machen und bald zurück sein."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:43
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:45
@@ -176,6 +182,8 @@ msgid ""
 "Although ports act as warehouses, you should not build more than necessary: "
 "they cost quartz, diamonds and gold, which makes them quite expensive."
 msgstr ""
+"Obwohl Häfen als Lagerhäuser dienen, solltest du nicht mehr als nötig bauen: "
+"Sie kosten Bergkristall, Diamanten und Gold, was sie sehr teuer macht."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:81
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:103
@@ -510,6 +518,11 @@ msgid ""
 "defend it, your newly built port won’t. You should therefore avoid settling "
 "next to an enemy."
 msgstr ""
+"Aber ich möchte dich warnen. Häfen sind wie Hauptquartiere: Sie können von "
+"einem Feind in der Nähe angegriffen werden. Während dein Hauptquartier "
+"Soldaten hat, um sich zu verteidigen, ist dein Hafen den Angreifern "
+"schutzlos ausgeliefert. Du solltest es daher vermeiden, neben einem Feind zu "
+"siedeln."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:190
 msgid ""
