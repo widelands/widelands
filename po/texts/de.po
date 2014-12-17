@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-12-08 11:33+0000\n"
+"POT-Creation-Date: 2014-12-16 11:38+0000\n"
 "PO-Revision-Date: 2014-12-06 06:33+0000\n"
 "Last-Translator: Gabriel Margiani <Unknown>\n"
 "Language-Team: widelands-dev\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-09 05:34+0000\n"
-"X-Generator: Launchpad (build 17283)\n"
+"X-Launchpad-Export-Date: 2014-12-17 05:37+0000\n"
+"X-Generator: Launchpad (build 17286)\n"
 "Language: de\n"
 
 #: ../../txts/README.lua:6
@@ -226,8 +226,8 @@ msgid "CTRL+Leftclick: skips confirmation dialogs"
 msgstr "Strg+Linksklick: Überspringt den Bestätigungsdialog"
 
 #: ../../txts/README.lua:78
-msgid "F11: takes a screenshot"
-msgstr "F11: Macht einen Screenshot"
+msgid "CTRL+F11: takes a screenshot"
+msgstr ""
 
 #: ../../txts/README.lua:80
 msgid ""
@@ -415,17 +415,17 @@ msgid "Elders"
 msgstr "Ältesten"
 
 #: ../../txts/developers:18
-#: ../../txts/developers:368
+#: ../../txts/developers:367
 msgid "Graphics"
 msgstr "Grafik"
 
 #: ../../txts/developers:23
-#: ../../txts/developers:361
+#: ../../txts/developers:360
 msgid "Homepage"
 msgstr "Homepage"
 
 #: ../../txts/developers:28
-#: ../../txts/developers:375
+#: ../../txts/developers:374
 msgid "Sound"
 msgstr "Geräusche"
 
@@ -437,47 +437,47 @@ msgstr "Sprachen"
 msgid "Coders"
 msgstr "Programmierer"
 
-#: ../../txts/developers:94
+#: ../../txts/developers:93
 msgid "Graphicians"
 msgstr "Grafiker"
 
-#: ../../txts/developers:124
+#: ../../txts/developers:123
 msgid "Musicians"
 msgstr "Musiker"
 
-#: ../../txts/developers:136
+#: ../../txts/developers:135
 msgid "Sound Effects"
 msgstr "Geräusche"
 
-#: ../../txts/developers:146
+#: ../../txts/developers:145
 msgid "Maps and Missions"
 msgstr "Karten und Missionen"
 
-#: ../../txts/developers:166
+#: ../../txts/developers:165
 msgid "Tutorials"
 msgstr "Einführungsspiele"
 
-#: ../../txts/developers:172
+#: ../../txts/developers:171
 msgid "Campaign Story"
 msgstr "Hintergrundgeschichte der Kampagne"
 
-#: ../../txts/developers:175
+#: ../../txts/developers:174
 msgid "Barbarian"
 msgstr "Barbaren"
 
-#: ../../txts/developers:181
+#: ../../txts/developers:180
 msgid "Empire"
 msgstr "Imperium"
 
-#: ../../txts/developers:185
+#: ../../txts/developers:184
 msgid "Atlantean"
 msgstr "Atlanter"
 
-#: ../../txts/developers:192
+#: ../../txts/developers:191
 msgid "Translators"
 msgstr "Übersetzer"
 
-#: ../../txts/developers:195
+#: ../../txts/developers:194
 msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
@@ -485,7 +485,7 @@ msgstr ""
 "Hinweis: Diese Liste enthält alle, die geholfen haben Widelands zu "
 "übersetzen, bevor wir zu Launchpad gewechselt sind. "
 
-#: ../../txts/developers:196
+#: ../../txts/developers:195
 msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
@@ -493,99 +493,99 @@ msgstr ""
 "Auf https://translations.launchpad.net/widelands sind alle Personen "
 "aufgelistet, die über Launchpad bei der Übersetzung geholfen haben."
 
-#: ../../txts/developers:200
+#: ../../txts/developers:199
 msgid "Czech"
 msgstr "Tschechisch"
 
-#: ../../txts/developers:207
+#: ../../txts/developers:206
 msgid "Dansk"
 msgstr "Dänisch"
 
-#: ../../txts/developers:213
+#: ../../txts/developers:212
 msgid "Dutch"
 msgstr "Niederländisch"
 
-#: ../../txts/developers:220
+#: ../../txts/developers:219
 msgid "Finnish"
 msgstr "Finnisch"
 
-#: ../../txts/developers:226
+#: ../../txts/developers:225
 msgid "French"
 msgstr "Französisch"
 
-#: ../../txts/developers:233
+#: ../../txts/developers:232
 msgid "Galician"
 msgstr "Galizisch"
 
-#: ../../txts/developers:238
+#: ../../txts/developers:237
 msgid "German"
 msgstr "Deutsch"
 
-#: ../../txts/developers:250
+#: ../../txts/developers:249
 msgid "Hebrew"
 msgstr "Hebräisch"
 
-#: ../../txts/developers:255
+#: ../../txts/developers:254
 msgid "Hungarian"
 msgstr "Ungarisch"
 
-#: ../../txts/developers:260
+#: ../../txts/developers:259
 msgid "Italian"
 msgstr "Italienisch"
 
-#: ../../txts/developers:265
+#: ../../txts/developers:264
 msgid "Polish"
 msgstr "Polnisch"
 
-#: ../../txts/developers:273
+#: ../../txts/developers:272
 msgid "Russian"
 msgstr "Russisch"
 
-#: ../../txts/developers:278
+#: ../../txts/developers:277
 msgid "Slovak"
 msgstr "Slowakisch"
 
-#: ../../txts/developers:283
+#: ../../txts/developers:282
 msgid "Spanish"
 msgstr "Spanisch"
 
-#: ../../txts/developers:288
+#: ../../txts/developers:287
 msgid "Swedish"
 msgstr "Schwedisch"
 
-#: ../../txts/developers:295
+#: ../../txts/developers:294
 msgid "Packagers"
 msgstr "Packer"
 
-#: ../../txts/developers:299
+#: ../../txts/developers:298
 msgid "Linux Distributions"
 msgstr "Linux-Distributionen"
 
-#: ../../txts/developers:310
+#: ../../txts/developers:309
 msgid "Other Unix Distributions"
 msgstr "Andere Unix-Distributionen"
 
-#: ../../txts/developers:321
+#: ../../txts/developers:320
 msgid "Non Unix Distributions"
 msgstr "Nicht-Unix-Distributionen"
 
-#: ../../txts/developers:333
+#: ../../txts/developers:332
 msgid "Homepage Coders"
 msgstr "Homepageentwickler"
 
-#: ../../txts/developers:342
+#: ../../txts/developers:341
 msgid "Documentation, Help and Wiki"
 msgstr "Dokumentation, Hilfe und Wiki"
 
-#: ../../txts/developers:357
+#: ../../txts/developers:356
 msgid "Former elders"
 msgstr "Ehemalige Ältesten"
 
-#: ../../txts/developers:380
+#: ../../txts/developers:379
 msgid "Translation"
 msgstr "Übersetzung"
 
-#: ../../txts/developers:387
+#: ../../txts/developers:386
 msgid "Other"
 msgstr "Andere"
 
