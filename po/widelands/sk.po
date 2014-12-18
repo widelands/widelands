@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2014-12-17 05:46+0000\n"
+"X-Launchpad-Export-Date: 2014-12-18 05:42+0000\n"
 "X-Generator: Launchpad (build 17286)\n"
 "Language: sk\n"
 
@@ -4175,9 +4175,3 @@ msgstr "Nasledovať"
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr "Vycentrovať pohľad na túto pozíciu"
-
-#~ msgid "Main menu font:"
-#~ msgstr "Typ písma v hlavnom menu:"
-
-#~ msgid "DejaVuSerif (Default)"
-#~ msgstr "DejaVuSerif (predvolené)"
