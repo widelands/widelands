@@ -811,15 +811,6 @@ bool WLApplication::init_hardware() {
 		|
 		(s.get_bool("coredump", false) ? SDL_INIT_NOPARACHUTE : 0);
 
-	//  NOTE Enable a workaround for bug #1784815, caused by SDL, which thinks
-	//  NOTE that it is perfectly fine for a library to tamper with the user's
-	//  NOTE privacy/powermanagement settings on the sly. The workaround was
-	//  NOTE introduced in SDL 1.2.13, so it will not work for older versions.
-	//  NOTE -> there is no such stdlib-function on win32
-	#ifndef _WIN32
-	setenv("SDL_VIDEO_ALLOW_SCREENSAVER", "1", 0);
-	#endif
-
 	if (SDL_Init(sdl_flags) == -1)
 		throw wexception
 			("Failed to initialize SDL, no valid video driver: %s",
