@@ -802,16 +802,10 @@ void WLApplication::shutdown_settings()
  * \return true if there were no fatal errors that prevent the game from running
  */
 bool WLApplication::init_hardware() {
-	uint8_t sdl_flags = 0;
 	Section & s = g_options.pull_section("global");
 
 	//Start the SDL core
-	sdl_flags =
-		SDL_INIT_VIDEO
-		|
-		(s.get_bool("coredump", false) ? SDL_INIT_NOPARACHUTE : 0);
-
-	if (SDL_Init(sdl_flags) == -1)
+	if (SDL_Init(SDL_INIT_VIDEO) == -1)
 		throw wexception
 			("Failed to initialize SDL, no valid video driver: %s",
 			 SDL_GetError());
