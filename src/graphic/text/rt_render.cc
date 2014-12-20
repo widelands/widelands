@@ -578,6 +578,7 @@ Texture* ImgRenderNode::render(TextureCache* /* texture_cache */) {
 class FontCache {
 public:
 	FontCache() = default;
+	~FontCache();
 
 	IFont& get_font(NodeStyle* style);
 
@@ -590,13 +591,19 @@ private:
 			return size < o.size || (size == o.size && face < o.face);
 		}
 	};
-	using FontMap = map<FontDescr, std::unique_ptr<IFont>>;
+	using FontMap = map<FontDescr, IFont*>;
 	using FontMapPair = pair<const FontDescr, std::unique_ptr<IFont>>;
 
 	FontMap m_fontmap;
 
 	DISALLOW_COPY_AND_ASSIGN(FontCache);
 };
+
+FontCache::~FontCache() {
+	for (FontMap::reference& entry : m_fontmap) {
+		delete entry.second;
+	}
+}
 
 IFont& FontCache::get_font(NodeStyle* ns) {
 	const bool is_bold = ns->font_style & IFont::BOLD;
@@ -649,7 +656,7 @@ IFont& FontCache::get_font(NodeStyle* ns) {
 	}
 	assert(font != nullptr);
 
-	return *m_fontmap.emplace(fd, std::move(font)).first->second;
+	return *m_fontmap.insert(std::make_pair(fd, font.release())).first->second;
 }
 
 class TagHandler;
