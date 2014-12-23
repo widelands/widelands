@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-12-16 11:38+0000\n"
-"PO-Revision-Date: 2014-12-21 19:33+0000\n"
+"PO-Revision-Date: 2014-12-22 18:45+0000\n"
 "Last-Translator: rm87 <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-12-22 05:29+0000\n"
+"X-Launchpad-Export-Date: 2014-12-23 05:39+0000\n"
 "X-Generator: Launchpad (build 17286)\n"
 "Language: et\n"
 
@@ -1512,94 +1512,95 @@ msgstr ""
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:377
 msgid "/warn <name> <reason>  -  Warn the user <name> because of <reason>"
-msgstr ""
+msgstr "/warn <name> <reason>  -  Hoiata kasutajat <name>  <reason> tõttu"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:379
 msgid "/kick <name> <reason>  -  Kick the user <name> because of <reason>"
 msgstr ""
+"/kick <name> <reason>  -  Viska kasutaja <name>  <reason> tõttu välja"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:381
 msgid "/forcePause            -  Force the game to pause."
-msgstr ""
+msgstr "/forcePause - Sunni mäng peatuma."
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:383
 msgid "/endForcedPause        -  Return game to normal speed."
-msgstr ""
+msgstr "/endForcedPause - Taasta mängu tavakiirus."
 
 #: ../../src/network/nethost.cc:392
 msgid "Wrong use, should be: /announce <message>"
-msgstr ""
+msgstr "Väär kasutus, peakas olema: /announce <message>"
 
 #: ../../src/network/nethost.cc:405
 msgid "Wrong use, should be: /warn <name> <reason>"
-msgstr ""
+msgstr "Väär kasutus, peakas olema: /warn <name> <reason>"
 
 #: ../../src/network/nethost.cc:413
 msgid "Why would you warn yourself?"
-msgstr ""
+msgstr "Miks sa peaksid end hoiatama?"
 
 #: ../../src/network/nethost.cc:415
 msgid "Why would you want to warn the dedicated server?"
-msgstr ""
+msgstr "Miks sa tahaksid hoiatada serverit?"
 
 #: ../../src/network/nethost.cc:419 ../../src/network/nethost.cc:445
 #, c-format
 msgid "The client %s could not be found."
-msgstr ""
+msgstr "Klienti %s ei leitud."
 
 #: ../../src/network/nethost.cc:430
 msgid "Wrong use, should be: /kick <name> <reason>"
-msgstr ""
+msgstr "Väär kasutus, peakas olema: /kick <name> <reason>"
 
 #: ../../src/network/nethost.cc:441
 msgid "You can not kick yourself!"
-msgstr ""
+msgstr "Sa ei saa end välja visata!"
 
 #: ../../src/network/nethost.cc:443
 msgid "You can not kick the dedicated server"
-msgstr ""
+msgstr "Sa ei saa serverit välja visata"
 
 #: ../../src/network/nethost.cc:448
 #, c-format
 msgid "Are you sure you want to kick %s?"
-msgstr ""
+msgstr "Oled sa kindel et soovid mängija %s välja visata?"
 
 #: ../../src/network/nethost.cc:449
 #, c-format
 msgid "The stated reason was: %s"
-msgstr ""
+msgstr "Väljatoodud põhjus oli: %s"
 
 #: ../../src/network/nethost.cc:450
 #, c-format
 msgid "If yes, type: /ack_kick %s"
-msgstr ""
+msgstr "Kui jah, siis kirjuta: /ack_kick %s"
 
 #: ../../src/network/nethost.cc:460
 msgid "kick acknowledgement cancelled: No name given!"
-msgstr ""
+msgstr "Väljaviskamise kinnitus tühistatud: Nime ei olnud antud!"
 
 #: ../../src/network/nethost.cc:462
 msgid "Wrong use, should be: /ack_kick <name>"
-msgstr ""
+msgstr "Väär kasutus, peakas olema: /ack_kick <name>"
 
 #: ../../src/network/nethost.cc:468
 msgid "kick acknowledgement cancelled: Wrong name given!"
-msgstr ""
+msgstr "Väljaviskamise kinnitus tühistatud: Anti vale nimi!"
 
 #: ../../src/network/nethost.cc:479
 msgid "Pause was already forced - game should be paused."
-msgstr ""
+msgstr "Peatamiskäsk juba anti - mäng peaks olema peatatud."
 
 #: ../../src/network/nethost.cc:491
 msgid "There is no forced pause - nothing to end."
-msgstr ""
+msgstr "Sundpeatamist ei ole - pole, mida lõpetada."
 
 #: ../../src/network/nethost.cc:502
 msgid "Invalid command! Type /help for a list of commands."
-msgstr ""
+msgstr "Vigane käsk! Kirjuta /help nägemaks võimalike käskude nimekirja."
 
 #: ../../src/network/nethost.cc:741
 #, c-format
@@ -1631,7 +1632,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:1242
 #, c-format
 msgid "%1$s told me to run the command: \"%2$s\""
-msgstr ""
+msgstr "%1$s palus mul käivitada käsu: \"%2$s\""
 
 #: ../../src/network/nethost.cc:1251
 msgid "Sorry! Saving was deactivated on this dedicated server!"
@@ -1643,7 +1644,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1266
 msgid "Game successfully saved!"
-msgstr ""
+msgstr "Mäng salvestati edukalt!"
 
 #: ../../src/network/nethost.cc:1269
 #, c-format
@@ -1652,21 +1653,21 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1278
 msgid "This server is not password protected!"
-msgstr ""
+msgstr "See server ei ole parooliga kaitstud!"
 
 #: ../../src/network/nethost.cc:1294
 msgid "The password was correct, access was granted!"
-msgstr ""
+msgstr "Parool oli õige, ligipääs antud!"
 
 #: ../../src/network/nethost.cc:1300
 #, c-format
 msgid "Unknown dedicated server command \"%s\"!"
-msgstr ""
+msgstr "Tundmatu serveri käsk \"%s\"!"
 
 #: ../../src/network/nethost.cc:2002
 #, c-format
 msgid "Computer %u"
-msgstr ""
+msgstr "Arvuti %u"
 
 #: ../../src/network/nethost.cc:2067 ../../src/wui/game_summary.cc:95
 msgid "Player"
@@ -1683,24 +1684,24 @@ msgstr ""
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%li sekund"
+msgstr[1] "%li sekundit"
 
 #: ../../src/network/network_gaming_messages.cc:122
 msgid "Client has left the game."
-msgstr ""
+msgstr "Klient lahkus mängust."
 
 #: ../../src/network/network_gaming_messages.cc:123
 msgid "Client crashed and performed an emergency save."
-msgstr ""
+msgstr "Klient jooksis kokku ning teostas erakorralise salvestamise."
 
 #: ../../src/network/network_gaming_messages.cc:124
 msgid "Connection was lost."
-msgstr ""
+msgstr "Ühendus kadus."
 
 #: ../../src/network/network_gaming_messages.cc:125
 msgid "Server has left the game."
-msgstr ""
+msgstr "Server lahkus mängust."
 
 #: ../../src/network/network_gaming_messages.cc:126
 msgid "The game has started just after you tried to connect."
@@ -1708,20 +1709,20 @@ msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:127
 msgid "Server has crashed and performed an emergency save."
-msgstr ""
+msgstr "Server jooksis kokku ning teostas erakorralise salvestamise."
 
 #: ../../src/network/network_gaming_messages.cc:128
 msgid "Connection to client timed out: no response for 10 minutes!"
-msgstr ""
+msgstr "Ühendus kliendiga aegus: mitte mingit vastust 10 minuti jooksul!"
 
 #: ../../src/network/network_gaming_messages.cc:129
 msgid "Client and host have become desynchronized."
-msgstr ""
+msgstr "Klient ja võõrustaja on sünkroonist välja jooksnud."
 
 #: ../../src/network/network_gaming_messages.cc:130
 #, c-format
 msgid "Kicked by the host: %s"
-msgstr ""
+msgstr "Võõrustaja poolt välja visatud: %s"
 
 #: ../../src/network/network_gaming_messages.cc:131
 #, c-format
@@ -1736,16 +1737,16 @@ msgstr "Midagi läks nihu: %s"
 #: ../../src/network/network_gaming_messages.cc:133
 #, c-format
 msgid "%1$s has left the game (%2$s)"
-msgstr ""
+msgstr "%1$s lahkus mängust (%2$s)"
 
 #: ../../src/network/network_gaming_messages.cc:134
 #, c-format
 msgid "Unknown user has left the game (%s)"
-msgstr ""
+msgstr "Tundmatu kasutaja lahkus mängust (%s)"
 
 #: ../../src/network/network_gaming_messages.cc:135
 msgid "Server sent a SYNCREQUEST even though no game is running."
-msgstr ""
+msgstr "Server saatis SYNCREQUEST kuigi ükski mäng ei käi."
 
 #: ../../src/network/network_gaming_messages.cc:136
 msgid "Received a PLAYERCOMMAND even though no game is running."
