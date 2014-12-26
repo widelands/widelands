@@ -41,7 +41,7 @@ return {
 	},
 
 	devanagari = {
-		serif = "nakula.ttf",
+		serif = "Nakula/nakula.ttf",
 		direction = "rtl"
 	},
 
@@ -56,7 +56,7 @@ return {
 	},
 
 	myanmar = {
-		serif = "mmrCensus.ttf",
+		serif = "mmrCensus/mmrCensus.ttf",
 	},
 
 	sinhala = {
