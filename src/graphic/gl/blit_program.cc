@@ -159,8 +159,6 @@ private:
 	GLint attr_texture_position_;
 
 	// Uniforms.
-	// NOCOM(#sirver): opacity should be an attribute too - might just make color one.
-	GLint u_opacity_;
 	GLint u_texture_;
 
 	DISALLOW_COPY_AND_ASSIGN(BlitProgram);
@@ -174,7 +172,6 @@ BlitProgram::BlitProgram(const std::string& fragment_shader) {
 	attr_texture_position_ = glGetAttribLocation(gl_program_.object(), "attr_texture_position");
 
 	u_texture_ = glGetUniformLocation(gl_program_.object(), "u_texture");
-	u_opacity_ = glGetUniformLocation(gl_program_.object(), "u_opacity");
 
 }
 
@@ -317,9 +314,6 @@ void VanillaBlitProgram::draw(const FloatRect& gl_dest_rect,
 }
 
 void VanillaBlitProgram::draw(const std::vector<Arguments>& arguments) {
-	// NOCOM(#sirver): change blit_program to take arguments.
-	// NOCOM(#sirver): change it to take a color too.
-
 	std::vector<BlitProgram::Arguments> blit_arguments;
 	for (const Arguments arg : arguments) {
 		blit_arguments.emplace_back(BlitProgram::Arguments{
@@ -355,13 +349,24 @@ void MonochromeBlitProgram::draw(const FloatRect& gl_dest_rect,
                                  const float z_value,
                                  const int gl_texture,
                                  const RGBAColor& blend) {
-	// NOCOM(#sirver): reimplement
-	// blit_program_->activate();
+	draw({Arguments{gl_dest_rect, gl_src_rect, z_value, gl_texture, blend, BlendMode::UseAlpha}});
+}
 
-	// glUniform3f(u_blend_, blend.r / 255., blend.g / 255., blend.b / 255.);
+void MonochromeBlitProgram::draw(const std::vector<Arguments>& arguments) {
+	std::vector<BlitProgram::Arguments> blit_arguments;
+	for (const Arguments arg : arguments) {
+		blit_arguments.emplace_back(BlitProgram::Arguments{
+		   arg.destination_rect,
+		   arg.source_rect,
+		   arg.z_value,
+		   arg.gl_texture,
+		   arg.blend,
+		   arg.blend_mode,
+		});
+	}
 
-	// blit_program_->draw_and_deactivate(
-		// gl_dest_rect, gl_src_rect, z_value, gl_texture, blend.a / 255., BlendMode::UseAlpha);
+	blit_program_->activate();
+	blit_program_->draw_and_deactivate(blit_arguments);
 }
 
 // static
@@ -384,6 +389,10 @@ void BlendedBlitProgram::draw(const FloatRect& gl_dest_rect,
                               const int gl_texture_image,
                               const int gl_texture_mask,
                               const RGBAColor& blend) {
+	draw({Arguments{gl_dest_rect, gl_src_rect, z_value, gl_texture_image, gl_texture_mask, blend}});
+}
+
+void BlendedBlitProgram::draw(const std::vector<Arguments>& arguments) {
 	// NOCOM(#sirver): reimplement
 	// blit_program_->activate();
 

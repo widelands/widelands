@@ -33,9 +33,11 @@
 
 namespace {
 
-// Maps [0, max_z] linearly to [1., -1.] for use in vertex shaders.
-inline float to_opengl_z(int z, int max_z) {
-	return -(2.f * z) / max_z + 1.f;
+constexpr int kMaximumZValue = std::numeric_limits<uint16_t>::max();
+
+// Maps [0, kMaximumZValue] linearly to [1., -1.] for use in vertex shaders.
+inline float to_opengl_z(const int z) {
+	return -(2.f * z) / kMaximumZValue + 1.f;
 }
 
 // The key defines in which order we render things.
@@ -102,8 +104,8 @@ void RenderQueue::enqueue(const Item& given_item) {
 
 // NOCOM(#sirver): document that this draws everything in this frame.
 void RenderQueue::draw() {
-	// NOCOM(#sirver): pull out constant
-	assert(next_z < 65536);
+	// NOCOM(#sirver): throw here instead of asserting.
+	assert(next_z < kMaximumZValue);
 
 	glDisable(GL_BLEND);
 
@@ -125,6 +127,47 @@ void RenderQueue::draw() {
 	next_z = 1;
 }
 
+
+// NOCOM(#sirver): make static too.
+inline void from_item(const RenderQueue::Item& item, VanillaBlitProgram::Arguments* args) {
+	args->source_rect = item.vanilla_blit_arguments.source_rect;
+	args->gl_texture = item.vanilla_blit_arguments.texture;
+	args->opacity = item.vanilla_blit_arguments.opacity;
+}
+
+inline void from_item(const RenderQueue::Item& item, MonochromeBlitProgram::Arguments* args) {
+	args->source_rect = item.monochrome_blit_arguments.source_rect;
+	args->gl_texture = item.monochrome_blit_arguments.texture;
+	args->blend = item.monochrome_blit_arguments.blend;
+}
+
+inline void from_item(const RenderQueue::Item& item, FillRectProgram::Arguments* args) {
+	args->color = item.rect_arguments.color;
+}
+
+// NOCOM(#sirver): make static
+template <typename T>
+std::vector<T> batch_up(const RenderQueue::Program program,
+                        const std::vector<RenderQueue::Item>& items,
+                        size_t* i) {
+	std::vector<T> all_args;
+	while (*i < items.size()) {
+		const RenderQueue::Item& current_item = items.at(*i);
+		if (current_item.program != program) {
+			break;
+		}
+		all_args.emplace_back();
+		T& args = all_args.back();
+		args.destination_rect = current_item.destination_rect;
+		args.z_value = to_opengl_z(current_item.z);
+		args.blend_mode = current_item.blend_mode;
+		from_item(current_item, &args);
+		++(*i);
+	}
+	log("#sirver   Batched: all_args.size(): %lu\n", all_args.size());
+	return all_args;
+}
+
 void RenderQueue::draw_items(const std::vector<Item>& items) {
 	size_t i = 0;
 	while (i < items.size()) {
@@ -133,43 +176,26 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 		log("#sirver    program: %d, item.z: %d %f, key: %llx\n",
 		    item.program,
 		    item.z,
-		    to_opengl_z(item.z, next_z),
+		    to_opengl_z(item.z),
 		    item.key);
 		switch (item.program) {
 			// NOCOM(#sirver): horrible code duplication.
-		case Program::BLIT: {
-			std::vector<VanillaBlitProgram::Arguments> args;
-			while (i < items.size()) {
-				const Item& current_item = items[i];
-				if (current_item.program != item.program) {
-					break;
-				}
-				args.emplace_back(
-				   VanillaBlitProgram::Arguments{current_item.destination_rect,
-				                                 current_item.vanilla_blit_arguments.source_rect,
-				                                 to_opengl_z(current_item.z, next_z),
-				                                 current_item.vanilla_blit_arguments.texture,
-				                                 current_item.vanilla_blit_arguments.opacity,
-				                                 current_item.blend_mode});
-				++i;
-			}
-			log("#sirver   Batched: args.size(): %d\n", args.size());
-			VanillaBlitProgram::instance().draw(args);
-		} break;
+		case Program::BLIT:
+			// NOCOM(#sirver): if a ID is moved into this program, I would not need to bass redundant
+			// information here.
+			VanillaBlitProgram::instance().draw(
+			   batch_up<VanillaBlitProgram::Arguments>(Program::BLIT, items, &i));
+		 break;
 
 		case Program::BLIT_MONOCHROME:
-			MonochromeBlitProgram::instance().draw(item.destination_rect,
-			                                       item.monochrome_blit_arguments.source_rect,
-			                                       to_opengl_z(item.z, next_z),
-			                                       item.monochrome_blit_arguments.texture,
-			                                       item.monochrome_blit_arguments.blend);
-			++i;
+			MonochromeBlitProgram::instance().draw(
+			   batch_up<MonochromeBlitProgram::Arguments>(Program::BLIT_MONOCHROME, items, &i));
 			break;
 
 		case Program::BLIT_BLENDED:
 			BlendedBlitProgram::instance().draw(item.destination_rect,
 			                                    item.blended_blit_arguments.source_rect,
-			                                    to_opengl_z(item.z, next_z),
+			                                    to_opengl_z(item.z),
 			                                    item.blended_blit_arguments.texture,
 			                                    item.blended_blit_arguments.mask,
 			                                    item.blended_blit_arguments.blend);
@@ -181,10 +207,15 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 			                                 item.destination_rect.y,
 			                                 item.destination_rect.x + item.destination_rect.w,
 			                                 item.destination_rect.y + item.destination_rect.h,
-			                                 to_opengl_z(item.z, next_z),
+			                                 to_opengl_z(item.z),
 			                                 item.line_arguments.color,
 			                                 item.line_arguments.line_width);
 			++i;
+			break;
+
+		case Program::RECT:
+			FillRectProgram::instance().draw(
+			   batch_up<FillRectProgram::Arguments>(Program::RECT, items, &i));
 			break;
 
 		case Program::TERRAIN:
@@ -197,39 +228,23 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 			terrain_program_->draw(item.terrain_arguments.gametime,
 			                       *item.terrain_arguments.terrains,
 			                       *item.terrain_arguments.fields_to_draw,
-			                       to_opengl_z(item.z, next_z));
+			                       to_opengl_z(item.z));
 			// NOCOM(#sirver): not pretty. Instead put the other two in the blending buckte.
 			glEnable(GL_BLEND);
 
 			dither_program_->draw(item.terrain_arguments.gametime,
 			                      *item.terrain_arguments.terrains,
 			                      *item.terrain_arguments.fields_to_draw,
-			                      to_opengl_z(item.z + 1, next_z));
+			                      to_opengl_z(item.z + 1));
 			road_program_->draw(*item.terrain_arguments.screen,
 			                    *item.terrain_arguments.fields_to_draw,
-			                    to_opengl_z(item.z + 2, next_z));
+			                    to_opengl_z(item.z + 2));
 			delete item.terrain_arguments.fields_to_draw;
 			glDisable(GL_BLEND);
 			glDisable(GL_SCISSOR_TEST);
 			++i;
 			break;
 
-		case Program::RECT: {
-			std::vector<FillRectProgram::Arguments> args;
-			while (i < items.size()) {
-				const Item& current_item = items[i];
-				if (current_item.program != item.program) {
-					break;
-				}
-				args.emplace_back(FillRectProgram::Arguments{current_item.destination_rect,
-				                                             to_opengl_z(current_item.z, next_z),
-				                                             current_item.rect_arguments.color,
-				                                             current_item.blend_mode});
-				++i;
-			}
-			log("#sirver   Batched: args.size(): %d\n", args.size());
-			FillRectProgram::instance().draw(args);
-		} break;
 
 		default:
 			throw wexception("Unknown item.program: %d", item.program);

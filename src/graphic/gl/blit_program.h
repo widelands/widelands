@@ -72,6 +72,15 @@ private:
 
 class MonochromeBlitProgram {
 public:
+	struct Arguments {
+		FloatRect destination_rect;
+		FloatRect source_rect;
+		float z_value;
+		int gl_texture;
+		RGBAColor blend;
+		BlendMode blend_mode;
+	};
+
 	// Returns the (singleton) instance of this class.
 	static MonochromeBlitProgram& instance();
 	~MonochromeBlitProgram();
@@ -86,6 +95,8 @@ public:
 	          const int gl_texture,
 				 const RGBAColor& blend);
 
+	void draw(const std::vector<Arguments>& arguments);
+
 private:
 	MonochromeBlitProgram();
 
@@ -96,6 +107,15 @@ private:
 
 class BlendedBlitProgram {
 public:
+	struct Arguments {
+		FloatRect destination_rect;
+		FloatRect source_rect;
+		float z_value;
+		int gl_texture;
+		int gl_texture_mask;
+		const RGBAColor blend;
+	};
+
 	// Returns the (singleton) instance of this class.
 	static BlendedBlitProgram& instance();
 	~BlendedBlitProgram();
@@ -110,6 +130,8 @@ public:
 	          const int gl_texture_image,
 	          const int gl_texture_mask,
 				 const RGBAColor& blend);
+
+	void draw(const std::vector<Arguments>& arguments);
 
 private:
 	BlendedBlitProgram();
