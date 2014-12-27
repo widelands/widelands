@@ -78,7 +78,7 @@ font-style
 
 font-decoration
    ``normal`` or ``underline``. Note that not everything is supported by all fonts.
-   Do not use with ``font-weight=bold`` or ``font-style=italic` at the same time;
+   Do not use with ``font-weight=bold`` or ``font-style=italic`` at the same time;
    double formatting is typographically bad.
 
 line-spacing
