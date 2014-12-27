@@ -31,18 +31,19 @@
 
 class BlitProgram;
 
+
 class VanillaBlitProgram {
 public:
-	// NOCOM(#sirver): add a sorting step for texture?
 	struct Arguments {
 		FloatRect destination_rect;
 		FloatRect source_rect;
 		float z_value;
-		GLuint gl_texture;
+		int gl_texture;
 		float opacity;
 		BlendMode blend_mode;
 	};
 
+	// NOCOM(#sirver): add a sorting step for texture?
 	void draw(const std::vector<Arguments>& arguments);
 
 	// Returns the (singleton) instance of this class.
@@ -57,7 +58,7 @@ public:
 	void draw(const FloatRect& gl_dest_rect,
 	          const FloatRect& gl_src_rect,
 				 const float z_value,
-	          const GLuint gl_texture,
+	          const int gl_texture,
 				 float opacity,
 	          const BlendMode blend_mode);
 
@@ -82,16 +83,13 @@ public:
 	void draw(const FloatRect& gl_dest_rect,
 	          const FloatRect& gl_src_rect,
 				 const float z_value,
-	          const GLuint gl_texture,
+	          const int gl_texture,
 				 const RGBAColor& blend);
 
 private:
 	MonochromeBlitProgram();
 
 	std::unique_ptr<BlitProgram> blit_program_;
-
-	// Uniforms.
-	GLint u_blend_;
 
 	DISALLOW_COPY_AND_ASSIGN(MonochromeBlitProgram);
 };
@@ -109,8 +107,8 @@ public:
 	void draw(const FloatRect& gl_dest_rect,
 	          const FloatRect& gl_src_rect,
 				 const float z_value,
-	          const GLuint gl_texture_image,
-	          const GLuint gl_texture_mask,
+	          const int gl_texture_image,
+	          const int gl_texture_mask,
 				 const RGBAColor& blend);
 
 private:
@@ -119,7 +117,6 @@ private:
 	std::unique_ptr<BlitProgram> blit_program_;
 
 	// Uniforms.
-	GLint u_blend_;
 	GLint u_mask_;
 
 	DISALLOW_COPY_AND_ASSIGN(BlendedBlitProgram);

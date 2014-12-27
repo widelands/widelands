@@ -107,7 +107,7 @@ void RenderQueue::draw() {
 
 	glDisable(GL_BLEND);
 
-	log("#sirver Drawing Opaque stuff: %d.\n", opaque_items_.size());
+	log("#sirver Drawing Opaque stuff: %ld.\n", opaque_items_.size());
 	std::sort(opaque_items_.begin(), opaque_items_.end());
 	draw_items(opaque_items_);
 	opaque_items_.clear();
@@ -115,7 +115,7 @@ void RenderQueue::draw() {
 	glEnable(GL_BLEND);
 	glDepthMask(GL_FALSE);
 
-	log("#sirver Drawing blended stuff: %d.\n", blended_items_.size());
+	log("#sirver Drawing blended stuff: %ld.\n", blended_items_.size());
 	std::sort(blended_items_.begin(), blended_items_.end());
 	draw_items(blended_items_);
 	blended_items_.clear();
@@ -130,17 +130,32 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 	while (i < items.size()) {
 		const Item& item = items[i];
 
-		log("#sirver    program: %d, item.z: %d %f, key: %llx\n", item.program, item.z, to_opengl_z(item.z, next_z), item.key);
+		log("#sirver    program: %d, item.z: %d %f, key: %llx\n",
+		    item.program,
+		    item.z,
+		    to_opengl_z(item.z, next_z),
+		    item.key);
 		switch (item.program) {
-		case Program::BLIT:
-			VanillaBlitProgram::instance().draw(item.destination_rect,
-			                                    item.vanilla_blit_arguments.source_rect,
-			                                    to_opengl_z(item.z, next_z),
-			                                    item.vanilla_blit_arguments.texture,
-			                                    item.vanilla_blit_arguments.opacity,
-			                                    item.blend_mode);
-			++i;
-			break;
+			// NOCOM(#sirver): horrible code duplication.
+		case Program::BLIT: {
+			std::vector<VanillaBlitProgram::Arguments> args;
+			while (i < items.size()) {
+				const Item& current_item = items[i];
+				if (current_item.program != item.program) {
+					break;
+				}
+				args.emplace_back(
+				   VanillaBlitProgram::Arguments{current_item.destination_rect,
+				                                 current_item.vanilla_blit_arguments.source_rect,
+				                                 to_opengl_z(current_item.z, next_z),
+				                                 current_item.vanilla_blit_arguments.texture,
+				                                 current_item.vanilla_blit_arguments.opacity,
+				                                 current_item.blend_mode});
+				++i;
+			}
+			log("#sirver   Batched: args.size(): %d\n", args.size());
+			VanillaBlitProgram::instance().draw(args);
+		} break;
 
 		case Program::BLIT_MONOCHROME:
 			MonochromeBlitProgram::instance().draw(item.destination_rect,

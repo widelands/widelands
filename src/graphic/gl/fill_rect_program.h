@@ -60,8 +60,7 @@ private:
 		              float init_r,
 		              float init_g,
 		              float init_b,
-		              float init_a
-		              )
+		              float init_a)
 		   : gl_x(init_gl_x),
 		     gl_y(init_gl_y),
 		     gl_z(init_gl_z),

@@ -78,7 +78,7 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 
 	while (i < arguments.size()) {
 		vertices_.clear();
-		const Arguments& args = arguments[i];
+		const Arguments& template_args = arguments[i];
 
 		// This method does 3 things:
 		// - if blend_mode is Copy, we will copy color into the destination
@@ -92,7 +92,7 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 
 		// The simple trick here is to fill the rect, but using a different glBlendFunc that will sum
 		// src and target (or subtract them if factor is negative).
-		switch (args.blend_mode) {
+		switch (template_args.blend_mode) {
 		case BlendMode::Subtract:
 			glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
 		/* fallthrough intended */
@@ -118,7 +118,7 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 		// Batch common rectangles up.
 		while (i < arguments.size()) {
 			const Arguments& current_args = arguments[i];
-			if (current_args.blend_mode != args.blend_mode) {
+			if (current_args.blend_mode != template_args.blend_mode) {
 				break;
 			}
 
@@ -195,7 +195,7 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 
 		glDrawArrays(GL_TRIANGLES, 0, vertices_.size());
 
-		switch (args.blend_mode) {
+		switch (template_args.blend_mode) {
 		case BlendMode::Subtract:
 			glBlendEquation(GL_FUNC_ADD);
 		/* fallthrough intended */
