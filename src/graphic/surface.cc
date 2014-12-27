@@ -168,14 +168,14 @@ void draw_line
 		i.blend_mode = BlendMode::Copy;
 		i.destination_rect = FloatRect(gl_x1, gl_y1, gl_x2 - gl_x1, gl_y2 - gl_y1);
 		i.line_arguments.color = color;
-		i.line_arguments.line_width = gwidth;
 		RenderQueue::instance().enqueue(i);
 		return;
 	}
 
 	surface->setup_gl();
 	glViewport(0, 0, surface->width(), surface->height());
-	DrawLineProgram::instance().draw(gl_x1, gl_y1, gl_x2, gl_y2, 0.f, color, gwidth);
+	DrawLineProgram::instance().draw(
+	   FloatPoint(gl_x1, gl_y1), FloatPoint(gl_x2, gl_y2), 0.f, color);
 }
 
 void blit_monochrome(const Rect& dst_rect,
@@ -205,7 +205,7 @@ void blit_monochrome(const Rect& dst_rect,
 
 void blit_blended(const Rect& dst_rect,
                   const Image& image,
-                  const Image& mask,
+                  const Image& texture_mask,
                   const Rect& src_rect,
                   const RGBColor& blend,
                   Surface* surface) {
@@ -220,7 +220,7 @@ void blit_blended(const Rect& dst_rect,
 		i.blended_blit_arguments.source_rect = gl_src_rect;
 		i.blended_blit_arguments.texture = image.get_gl_texture();
 		// NOCOM(#sirver): this must actually take a separate source rectangle.
-		i.blended_blit_arguments.texture_mask = mask.get_gl_texture();
+		i.blended_blit_arguments.texture_mask = texture_mask.get_gl_texture();
 		i.blended_blit_arguments.blend = blend;
 		RenderQueue::instance().enqueue(i);
 		return;
@@ -229,7 +229,7 @@ void blit_blended(const Rect& dst_rect,
 	surface->setup_gl();
 	glViewport(0, 0, surface->width(), surface->height());
 	BlendedBlitProgram::instance().draw(
-	   gl_dst_rect, gl_src_rect, 0.f, image.get_gl_texture(), mask.get_gl_texture(), blend);
+	   gl_dst_rect, gl_src_rect, 0.f, image.get_gl_texture(), texture_mask.get_gl_texture(), blend);
 }
 
 void blit(const Rect& dst_rect,

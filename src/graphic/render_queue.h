@@ -79,7 +79,6 @@ public:
 
 	struct LineArguments {
 		RGBColor color;
-		int line_width;
 	};
 
 

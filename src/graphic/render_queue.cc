@@ -152,6 +152,10 @@ inline void from_item(const RenderQueue::Item& item, BlendedBlitProgram::Argumen
 	args->texture_mask = item.blended_blit_arguments.texture_mask;
 }
 
+inline void from_item(const RenderQueue::Item& item, DrawLineProgram::Arguments* args) {
+	args->color = item.line_arguments.color;
+}
+
 // NOCOM(#sirver): make static
 template <typename T>
 std::vector<T> batch_up(const RenderQueue::Program program,
@@ -188,7 +192,7 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 		switch (item.program) {
 			// NOCOM(#sirver): horrible code duplication.
 		case Program::BLIT:
-			// NOCOM(#sirver): if a ID is moved into this program, I would not need to bass redundant
+			// NOCOM(#sirver): if a ID is moved into this program, I would not need to pass redundant
 			// information here.
 			VanillaBlitProgram::instance().draw(
 			   batch_up<VanillaBlitProgram::Arguments>(Program::BLIT, items, &i));
@@ -205,14 +209,8 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 			break;
 
 		case Program::LINE:
-			DrawLineProgram::instance().draw(item.destination_rect.x,
-			                                 item.destination_rect.y,
-			                                 item.destination_rect.x + item.destination_rect.w,
-			                                 item.destination_rect.y + item.destination_rect.h,
-			                                 to_opengl_z(item.z),
-			                                 item.line_arguments.color,
-			                                 item.line_arguments.line_width);
-			++i;
+			DrawLineProgram::instance().draw(
+			   batch_up<DrawLineProgram::Arguments>(Program::LINE, items, &i));
 			break;
 
 		case Program::RECT:

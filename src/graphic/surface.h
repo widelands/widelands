@@ -69,7 +69,7 @@ blit_monochrome
 
 /// This draws a playercolor blended image. See BlendedBlitProgram.
 void blit_blended
-	(const Rect& dst, const Image& image, const Image& mask, const Rect&
+	(const Rect& dst, const Image& image, const Image& texture_mask, const Rect&
 	 srcrc, const RGBColor& blend, Surface* destination);
 
 /// Draws a filled rect to the destination. No blending takes place, the values
