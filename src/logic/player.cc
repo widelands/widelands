@@ -1238,6 +1238,16 @@ const std::vector<uint32_t> * Player::get_ware_stock_statistics
 	return &m_ware_stocks[ware];
 }
 
+const Player::BuildingStatsVector& Player::get_building_statistics(const BuildingIndex& i) const {
+	return *const_cast<Player*>(this)->get_mutable_building_statistics(i);
+}
+
+Player::BuildingStatsVector* Player::get_mutable_building_statistics(const BuildingIndex& i) {
+	BuildingIndex const nr_buildings = tribe().get_nrbuildings();
+	if (m_building_stats.size() < nr_buildings)
+		m_building_stats.resize(nr_buildings);
+	return &m_building_stats[i];
+}
 
 /**
  * Add or remove the given building from building statistics.
@@ -1251,14 +1261,8 @@ void Player::update_building_statistics
 		constructionsite ?
 		constructionsite->building().name() : building.descr().name();
 
-	BuildingIndex const nr_buildings = tribe().get_nrbuildings();
-
-	// Get the valid vector for this
-	if (m_building_stats.size() < nr_buildings)
-		m_building_stats.resize(nr_buildings);
-
-	std::vector<BuildingStats> & stat =
-		m_building_stats[tribe().building_index(building_name.c_str())];
+	std::vector<BuildingStats>& stat =
+	   *get_mutable_building_statistics(tribe().building_index(building_name.c_str()));
 
 	if (ownership == NoteImmovable::Ownership::GAINED) {
 		BuildingStats new_building;

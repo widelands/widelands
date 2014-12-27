@@ -40,6 +40,7 @@
 [Setup]
 AppName={#Name}
 AppVerName={#VerName}
+AppVersion={#VerNumber}
 AppPublisher={#Publisher}
 AppPublisherURL={#URL}
 AppSupportURL={#URL}
@@ -54,13 +55,11 @@ OutputBaseFilename={#SetupFileName}
 SetupIconFile=..\WL.ico
 Compression=lzma/ultra
 SolidCompression=true
-VersionInfoVersion={#VerNumber}
 VersionInfoCompany={#Publisher}
 VersionInfoDescription={#VerName} Setup
 ShowLanguageDialog=yes
 WizardImageFile=.\WL.bmp
 WizardSmallImageFile=.\WLsmall.bmp
-AppVersion={#VerName}
 UninstallDisplayIcon={app}\unins000.exe
 UninstallDisplayName={#VerName}
 VersionInfoCopyright={#Publisher}
