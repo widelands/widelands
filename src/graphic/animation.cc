@@ -200,6 +200,9 @@ NonPackedAnimation::NonPackedAnimation(const string& directory, Section& section
 			pc_mask_image_files_.push_back(pc_filename);
 		}
 	}
+
+	// NOCOM(#sirver): Good?
+	ensure_graphics_are_loaded();
 }
 
 NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
