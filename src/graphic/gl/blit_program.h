@@ -38,7 +38,7 @@ public:
 		FloatRect destination_rect;
 		FloatRect source_rect;
 		float z_value;
-		int gl_texture;
+		int texture;
 		float opacity;
 		BlendMode blend_mode;
 	};
@@ -51,14 +51,14 @@ public:
 	~VanillaBlitProgram();
 
 	// Draws the rectangle 'gl_src_rect' from the texture with the name
-	// 'gl_texture' to 'gl_dest_rect' in the currently bound framebuffer. All alpha
+	// 'texture' to 'gl_dest_rect' in the currently bound framebuffer. All alpha
 	// values are multiplied by 'opacity' during the blit.
 	// All coordinates are in the OpenGL frame. The 'blend_mode' defines if the
 	// values are copied or if alpha values are used.
 	void draw(const FloatRect& gl_dest_rect,
 	          const FloatRect& gl_src_rect,
 				 const float z_value,
-	          const int gl_texture,
+	          const int texture,
 				 float opacity,
 	          const BlendMode blend_mode);
 
@@ -76,7 +76,7 @@ public:
 		FloatRect destination_rect;
 		FloatRect source_rect;
 		float z_value;
-		int gl_texture;
+		int texture;
 		RGBAColor blend;
 		BlendMode blend_mode;
 	};
@@ -86,13 +86,13 @@ public:
 	~MonochromeBlitProgram();
 
 	// Draws the rectangle 'gl_src_rect' from the texture with the name
-	// 'gl_texture' to 'gl_dest_rect' in the currently bound framebuffer. All
+	// 'texture' to 'gl_dest_rect' in the currently bound framebuffer. All
 	// coordinates are in the OpenGL frame. The image is first converted to
 	// luminance, then all values are multiplied with blend.
 	void draw(const FloatRect& gl_dest_rect,
 	          const FloatRect& gl_src_rect,
 				 const float z_value,
-	          const int gl_texture,
+	          const int texture,
 				 const RGBAColor& blend);
 
 	void draw(const std::vector<Arguments>& arguments);
@@ -111,9 +111,10 @@ public:
 		FloatRect destination_rect;
 		FloatRect source_rect;
 		float z_value;
-		int gl_texture;
-		int gl_texture_mask;
-		const RGBAColor blend;
+		int texture;
+		int texture_mask;
+		RGBAColor blend;
+		BlendMode blend_mode;
 	};
 
 	// Returns the (singleton) instance of this class.
@@ -122,13 +123,13 @@ public:
 
 	// Draws the rectangle 'gl_src_rect' from the texture with the name
 	// 'gl_texture_image' to 'gl_dest_rect' in the currently bound framebuffer. All
-	// coordinates are in the OpenGL frame. The 'gl_texture_mask' is used to selectively apply
+	// coordinates are in the OpenGL frame. The 'texture_mask' is used to selectively apply
 	// the 'blend'. This is used for blitting player colored images.
 	void draw(const FloatRect& gl_dest_rect,
 	          const FloatRect& gl_src_rect,
 				 const float z_value,
 	          const int gl_texture_image,
-	          const int gl_texture_mask,
+	          const int texture_mask,
 				 const RGBAColor& blend);
 
 	void draw(const std::vector<Arguments>& arguments);
@@ -137,9 +138,6 @@ private:
 	BlendedBlitProgram();
 
 	std::unique_ptr<BlitProgram> blit_program_;
-
-	// Uniforms.
-	GLint u_mask_;
 
 	DISALLOW_COPY_AND_ASSIGN(BlendedBlitProgram);
 };

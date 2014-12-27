@@ -131,18 +131,25 @@ void RenderQueue::draw() {
 // NOCOM(#sirver): make static too.
 inline void from_item(const RenderQueue::Item& item, VanillaBlitProgram::Arguments* args) {
 	args->source_rect = item.vanilla_blit_arguments.source_rect;
-	args->gl_texture = item.vanilla_blit_arguments.texture;
+	args->texture = item.vanilla_blit_arguments.texture;
 	args->opacity = item.vanilla_blit_arguments.opacity;
 }
 
 inline void from_item(const RenderQueue::Item& item, MonochromeBlitProgram::Arguments* args) {
 	args->source_rect = item.monochrome_blit_arguments.source_rect;
-	args->gl_texture = item.monochrome_blit_arguments.texture;
+	args->texture = item.monochrome_blit_arguments.texture;
 	args->blend = item.monochrome_blit_arguments.blend;
 }
 
 inline void from_item(const RenderQueue::Item& item, FillRectProgram::Arguments* args) {
 	args->color = item.rect_arguments.color;
+}
+
+inline void from_item(const RenderQueue::Item& item, BlendedBlitProgram::Arguments* args) {
+	args->source_rect = item.blended_blit_arguments.source_rect;
+	args->texture = item.blended_blit_arguments.texture;
+	args->blend = item.blended_blit_arguments.blend;
+	args->texture_mask = item.blended_blit_arguments.texture_mask;
 }
 
 // NOCOM(#sirver): make static
@@ -193,13 +200,8 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 			break;
 
 		case Program::BLIT_BLENDED:
-			BlendedBlitProgram::instance().draw(item.destination_rect,
-			                                    item.blended_blit_arguments.source_rect,
-			                                    to_opengl_z(item.z),
-			                                    item.blended_blit_arguments.texture,
-			                                    item.blended_blit_arguments.mask,
-			                                    item.blended_blit_arguments.blend);
-			++i;
+			BlendedBlitProgram::instance().draw(
+			   batch_up<BlendedBlitProgram::Arguments>(Program::BLIT_BLENDED, items, &i));
 			break;
 
 		case Program::LINE:

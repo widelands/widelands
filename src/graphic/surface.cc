@@ -219,7 +219,8 @@ void blit_blended(const Rect& dst_rect,
 		i.destination_rect = gl_dst_rect;
 		i.blended_blit_arguments.source_rect = gl_src_rect;
 		i.blended_blit_arguments.texture = image.get_gl_texture();
-		i.blended_blit_arguments.mask = mask.get_gl_texture();
+		// NOCOM(#sirver): this must actually take a separate source rectangle.
+		i.blended_blit_arguments.texture_mask = mask.get_gl_texture();
 		i.blended_blit_arguments.blend = blend;
 		RenderQueue::instance().enqueue(i);
 		return;

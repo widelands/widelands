@@ -101,11 +101,13 @@ void main() {
 
 class BlitProgram {
 public:
+	// NOCOM(#sirver): document these.
 	struct Arguments {
 		FloatRect destination_rect;
 		FloatRect source_rect;
 		float z_value;
-		int gl_texture;
+		int texture;
+		int texture_mask;
 		RGBAColor blend;
 		BlendMode blend_mode;
 	};
@@ -160,6 +162,7 @@ private:
 
 	// Uniforms.
 	GLint u_texture_;
+	GLint u_mask_;
 
 	DISALLOW_COPY_AND_ASSIGN(BlitProgram);
 };
@@ -172,7 +175,7 @@ BlitProgram::BlitProgram(const std::string& fragment_shader) {
 	attr_texture_position_ = glGetAttribLocation(gl_program_.object(), "attr_texture_position");
 
 	u_texture_ = glGetUniformLocation(gl_program_.object(), "u_texture");
-
+	u_mask_ = glGetUniformLocation(gl_program_.object(), "u_mask");
 }
 
 void BlitProgram::activate() {
@@ -199,7 +202,8 @@ void BlitProgram::draw_and_deactivate(const std::vector<Arguments>& arguments) {
 		while (i < arguments.size()) {
 			const Arguments& current_args = arguments[i];
 			if (current_args.blend_mode != template_args.blend_mode ||
-			    current_args.gl_texture != template_args.gl_texture) {
+			    current_args.texture != template_args.texture ||
+				 current_args.texture_mask != template_args.texture_mask) {
 				break;
 			}
 
@@ -254,9 +258,13 @@ void BlitProgram::draw_and_deactivate(const std::vector<Arguments>& arguments) {
 		             GL_DYNAMIC_DRAW);
 
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, template_args.gl_texture);
+		glBindTexture(GL_TEXTURE_2D, template_args.texture);
+
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, template_args.texture_mask);
 
 		glUniform1i(u_texture_, 0);
+		glUniform1i(u_mask_, 1);
 
 		const auto set_attrib_pointer = [](const int vertex_index, int num_items, int offset) {
 			glVertexAttribPointer(vertex_index,
@@ -288,6 +296,10 @@ void BlitProgram::draw_and_deactivate(const std::vector<Arguments>& arguments) {
 	glDisableVertexAttribArray(attr_texture_position_);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
@@ -307,10 +319,10 @@ VanillaBlitProgram::VanillaBlitProgram() {
 void VanillaBlitProgram::draw(const FloatRect& gl_dest_rect,
                               const FloatRect& gl_src_rect,
                               const float z_value,
-                              const int gl_texture,
+                              const int texture,
                               const float opacity,
                               const BlendMode blend_mode) {
-	draw({Arguments{gl_dest_rect, gl_src_rect, z_value, gl_texture, opacity, blend_mode}});
+	draw({Arguments{gl_dest_rect, gl_src_rect, z_value, texture, opacity, blend_mode}});
 }
 
 void VanillaBlitProgram::draw(const std::vector<Arguments>& arguments) {
@@ -320,7 +332,8 @@ void VanillaBlitProgram::draw(const std::vector<Arguments>& arguments) {
 		   arg.destination_rect,
 		   arg.source_rect,
 		   arg.z_value,
-		   arg.gl_texture,
+		   arg.texture,
+			0,
 		   RGBAColor(255, 255, 255, arg.opacity * 255),
 		   arg.blend_mode,
 		});
@@ -347,9 +360,9 @@ MonochromeBlitProgram::MonochromeBlitProgram() {
 void MonochromeBlitProgram::draw(const FloatRect& gl_dest_rect,
                                  const FloatRect& gl_src_rect,
                                  const float z_value,
-                                 const int gl_texture,
+                                 const int texture,
                                  const RGBAColor& blend) {
-	draw({Arguments{gl_dest_rect, gl_src_rect, z_value, gl_texture, blend, BlendMode::UseAlpha}});
+	draw({Arguments{gl_dest_rect, gl_src_rect, z_value, texture, blend, BlendMode::UseAlpha}});
 }
 
 void MonochromeBlitProgram::draw(const std::vector<Arguments>& arguments) {
@@ -359,7 +372,8 @@ void MonochromeBlitProgram::draw(const std::vector<Arguments>& arguments) {
 		   arg.destination_rect,
 		   arg.source_rect,
 		   arg.z_value,
-		   arg.gl_texture,
+		   arg.texture,
+			0,
 		   arg.blend,
 		   arg.blend_mode,
 		});
@@ -380,35 +394,37 @@ BlendedBlitProgram::~BlendedBlitProgram() {
 
 BlendedBlitProgram::BlendedBlitProgram() {
 	blit_program_.reset(new BlitProgram(kBlendedBlitFragmentShader));
-	u_mask_ = glGetUniformLocation(blit_program_->program_object(), "u_mask");
 }
 
 void BlendedBlitProgram::draw(const FloatRect& gl_dest_rect,
                               const FloatRect& gl_src_rect,
                               const float z_value,
-                              const int gl_texture_image,
-                              const int gl_texture_mask,
+                              const int texture_image,
+                              const int texture_mask,
                               const RGBAColor& blend) {
-	draw({Arguments{gl_dest_rect, gl_src_rect, z_value, gl_texture_image, gl_texture_mask, blend}});
+	draw({Arguments{gl_dest_rect,
+	                gl_src_rect,
+	                z_value,
+	                texture_image,
+	                texture_mask,
+	                blend,
+	                BlendMode::UseAlpha}});
 }
 
 void BlendedBlitProgram::draw(const std::vector<Arguments>& arguments) {
-	// NOCOM(#sirver): reimplement
-	// blit_program_->activate();
+	std::vector<BlitProgram::Arguments> blit_arguments;
+	for (const Arguments arg : arguments) {
+		blit_arguments.emplace_back(BlitProgram::Arguments{
+		   arg.destination_rect,
+		   arg.source_rect,
+		   arg.z_value,
+		   arg.texture,
+			arg.texture_mask,
+		   arg.blend,
+		   arg.blend_mode,
+		});
+	}
 
-	// glActiveTexture(GL_TEXTURE1);
-	// glBindTexture(GL_TEXTURE_2D, gl_texture_mask);
-	// glUniform1i(u_mask_, 1);
-
-	// NOCOM(#sirver): handle this.
-	// glUniform3f(u_blend_, blend.r / 255., blend.g / 255., blend.b / 255.);
-
-	// blit_program_->draw_and_deactivate(
-		// gl_dest_rect, gl_src_rect, z_value, gl_texture_image, blend.a / 255., BlendMode::UseAlpha);
-
-	// glActiveTexture(GL_TEXTURE1);
-	// glBindTexture(GL_TEXTURE_2D, 0);
-
-	// glActiveTexture(GL_TEXTURE0);
-	// glBindTexture(GL_TEXTURE_2D, 0);
+	blit_program_->activate();
+	blit_program_->draw_and_deactivate(blit_arguments);
 }

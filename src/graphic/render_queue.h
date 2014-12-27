@@ -69,7 +69,7 @@ public:
 	struct BlendedBlitArguments {
 		FloatRect source_rect;
 		int texture;
-		int mask;
+		int texture_mask;
 		RGBAColor blend;
 	};
 
