@@ -227,6 +227,9 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 	} else {
 		frametime_ = 1000 / get_positive_int(table, "fps");
 	}
+
+	// NOCOM(#sirver): good?
+	ensure_graphics_are_loaded();
 }
 
 void NonPackedAnimation::ensure_graphics_are_loaded() const {

@@ -47,6 +47,7 @@ World::~World() {
 }
 
 void World::load_graphics() {
+	log("#sirver Loading world graphics!\n");
 	TextureAtlas ta;
 
 	// These will be deleted at the end of the method.

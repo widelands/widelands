@@ -25,6 +25,7 @@
 #include <SDL_image.h>
 #include <png.h>
 
+#include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/texture.h"
 #include "io/fileread.h"
@@ -61,6 +62,7 @@ std::unique_ptr<Texture> load_image(const std::string& fname, FileSystem* fs) {
 }
 
 SDL_Surface* load_image_as_sdl_surface(const std::string& fname, FileSystem* fs) {
+	log("#sirver fname: %s\n", fname.c_str());
 	ensure_sdl_image_is_initialized();
 
 	FileRead fr;
