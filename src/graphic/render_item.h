@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 by the Widelands Development Team
+ * Copyright (C) 2006-2014 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,28 +13,13 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
 
-#ifndef WL_GRAPHIC_BLEND_MODE_H
-#define WL_GRAPHIC_BLEND_MODE_H
+#ifndef WL_GRAPHIC_RENDER_ITEM_H
+#define WL_GRAPHIC_RENDER_ITEM_H
 
-// Defines blending during blitting.
-enum class BlendMode {
-	// Perform a normal blitting operation that respects the alpha channel if
-	// present.
-	UseAlpha,
+// NOCOM(#sirver): what
 
-	// NOCOM(#sirver): grep for all uses and change to switches
-	Subtract,
-
-	// NOCOM(#sirver): document
-
-	// Copy all pixel information, including alpha channel information.
-	// NOCOM(#sirver): rename to None
-	Copy
-
-};
-
-#endif  // end of include guard: WL_GRAPHIC_BLEND_MODE_H
+#endif  // end of include guard: WL_GRAPHIC_RENDER_ITEM_H

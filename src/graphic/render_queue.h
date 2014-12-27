@@ -43,7 +43,7 @@ class TerrainProgram;
 // NOCOM(#sirver): document
 class RenderQueue {
 public:
-	enum class Program {
+	enum Program {
 		TERRAIN,
 		BLIT,
 		BLIT_MONOCHROME,
@@ -81,7 +81,6 @@ public:
 		RGBColor color;
 	};
 
-
 	struct TerrainArguments {
 		TerrainArguments() {}
 
@@ -91,7 +90,7 @@ public:
 		// NOCOM(#sirver): all of this does not belong here.
 		const DescriptionMaintainer<Widelands::TerrainDescription>* terrains;
 		// NOCOM(#sirver): not owning fields_to_draw is dangerous due to multithreading in future.
-		FieldsToDraw* fields_to_draw;  // owned.
+		FieldsToDraw* fields_to_draw;
 	};
 
 	// NOCOM(#sirver): document and figure out.
@@ -103,11 +102,12 @@ public:
 			return key < other.key;
 		}
 
+		int program_id;
+		float z_value;
 		FloatRect destination_rect;
-		Program program;
-		uint16_t z;
 		BlendMode blend_mode;
 		uint64_t key;
+
 		union {
 			VanillaBlitArguments vanilla_blit_arguments;
 			MonochromeBlitArguments monochrome_blit_arguments;

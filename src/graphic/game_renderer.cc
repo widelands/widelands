@@ -197,7 +197,7 @@ void GameRenderer::draw(RenderTarget& dst,
 
 	// Enqueue the drawing of the terrain.
 	RenderQueue::Item i;
-	i.program = RenderQueue::Program::TERRAIN;
+	i.program_id = RenderQueue::Program::TERRAIN;
 	i.blend_mode = BlendMode::Copy;
 	i.destination_rect =
 	   FloatRect(bounding_rect.x,

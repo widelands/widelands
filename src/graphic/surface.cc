@@ -113,7 +113,7 @@ void fill_rect(const Rect& rc, const RGBAColor& clr, Surface* surface) {
 	const FloatRect rect = to_opengl(*surface, rc, ConversionMode::kExact);
 	if (is_a(Screen, surface)) {
 		RenderQueue::Item i;
-		i.program = RenderQueue::Program::RECT;
+		i.program_id = RenderQueue::Program::RECT;
 		i.blend_mode = BlendMode::Copy;
 		i.destination_rect = rect;
 		i.rect_arguments.color = clr;
@@ -138,7 +138,7 @@ void brighten_rect(const Rect& rc, const int32_t factor, Surface * surface)
 	const FloatRect rect = to_opengl(*surface, rc, ConversionMode::kExact);
 	if (is_a(Screen, surface)) {
 		RenderQueue::Item i;
-		i.program = RenderQueue::Program::RECT;
+		i.program_id = RenderQueue::Program::RECT;
 		i.blend_mode = blend_mode;
 		i.destination_rect = rect;
 		i.rect_arguments.color = color;
@@ -164,7 +164,7 @@ void draw_line
 
 	if (is_a(Screen, surface)) {
 		RenderQueue::Item i;
-		i.program = RenderQueue::Program::LINE;
+		i.program_id = RenderQueue::Program::LINE;
 		i.blend_mode = BlendMode::Copy;
 		i.destination_rect = FloatRect(gl_x1, gl_y1, gl_x2 - gl_x1, gl_y2 - gl_y1);
 		i.line_arguments.color = color;
@@ -188,7 +188,7 @@ void blit_monochrome(const Rect& dst_rect,
 
 	if (is_a(Screen, surface)) {
 		RenderQueue::Item i;
-		i.program = RenderQueue::Program::BLIT_MONOCHROME;
+		i.program_id = RenderQueue::Program::BLIT_MONOCHROME;
 		i.blend_mode = BlendMode::UseAlpha;
 		i.destination_rect = gl_dst_rect;
 		i.monochrome_blit_arguments.source_rect = gl_src_rect;
@@ -214,7 +214,7 @@ void blit_blended(const Rect& dst_rect,
 
 	if (is_a(Screen, surface)) {
 		RenderQueue::Item i;
-		i.program = RenderQueue::Program::BLIT_BLENDED;
+		i.program_id = RenderQueue::Program::BLIT_BLENDED;
 		i.blend_mode = BlendMode::UseAlpha;
 		i.destination_rect = gl_dst_rect;
 		i.blended_blit_arguments.source_rect = gl_src_rect;
@@ -243,7 +243,7 @@ void blit(const Rect& dst_rect,
 
 	if (is_a(Screen, surface)) {
 		RenderQueue::Item i;
-		i.program = RenderQueue::Program::BLIT;
+		i.program_id = RenderQueue::Program::BLIT;
 		i.blend_mode = blend_mode;
 		i.destination_rect = gl_dst_rect;
 		i.vanilla_blit_arguments.source_rect = gl_src_rect;

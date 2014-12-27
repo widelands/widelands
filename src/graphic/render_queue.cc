@@ -34,6 +34,7 @@
 namespace {
 
 constexpr int kMaximumZValue = std::numeric_limits<uint16_t>::max();
+constexpr float kOpenGlZDelta = -2.f / kMaximumZValue;
 
 // Maps [0, kMaximumZValue] linearly to [1., -1.] for use in vertex shaders.
 inline float to_opengl_z(const int z) {
@@ -46,13 +47,13 @@ inline float to_opengl_z(const int z) {
 //   - we batch up by program to have maximal batching.
 //   - and we want to render frontmost objects first, so that we do not render
 //     any pixel more than once.
-uint64_t make_key_opaque(uint64_t program, int z_value) {
-	assert(program < std::numeric_limits<uint16_t>::max());
+uint64_t make_key_opaque(uint64_t program_id, int z_value) {
+	assert(program_id < std::numeric_limits<uint16_t>::max());
 	assert(0 <= z_value && z_value < std::numeric_limits<uint16_t>::max());
 
 	// NOCOM(#sirver): add program sorting - texture for example, so that batching them works.
 	uint64_t sort_z_value = std::numeric_limits<uint16_t>::max() - z_value;
-	return (program << 48) | (sort_z_value << 32);
+	return (program_id << 48) | (sort_z_value << 32);
 }
 
 // For blended objects, we need to render furthest away objects first, and we
@@ -88,13 +89,13 @@ void RenderQueue::enqueue(const Item& given_item) {
 	if (given_item.blend_mode == BlendMode::Copy) {
 		opaque_items_.emplace_back(given_item);
 		item = &opaque_items_.back();
-		item->z = next_z;
-		item->key = make_key_opaque(static_cast<uint64_t>(item->program), item->z);
+		item->z_value = to_opengl_z(next_z);
+		item->key = make_key_opaque(static_cast<uint64_t>(item->program_id), next_z);
 	} else {
 		blended_items_.emplace_back(given_item);
 		item = &blended_items_.back();
-		item->z = next_z;
-		item->key = make_key_blended(static_cast<uint64_t>(item->program), item->z);
+		item->z_value = to_opengl_z(next_z);
+		item->key = make_key_blended(static_cast<uint64_t>(item->program_id), next_z);
 	}
 
 	// Add more than 1 since some items have multiple programs that all need a
@@ -104,8 +105,9 @@ void RenderQueue::enqueue(const Item& given_item) {
 
 // NOCOM(#sirver): document that this draws everything in this frame.
 void RenderQueue::draw() {
-	// NOCOM(#sirver): throw here instead of asserting.
-	assert(next_z < kMaximumZValue);
+	if (next_z >= kMaximumZValue) {
+		throw wexception("Too many drawn layers. Ran out of z-values.");
+	}
 
 	glDisable(GL_BLEND);
 
@@ -158,19 +160,19 @@ inline void from_item(const RenderQueue::Item& item, DrawLineProgram::Arguments*
 
 // NOCOM(#sirver): make static
 template <typename T>
-std::vector<T> batch_up(const RenderQueue::Program program,
+std::vector<T> batch_up(const RenderQueue::Program program_id,
                         const std::vector<RenderQueue::Item>& items,
                         size_t* i) {
 	std::vector<T> all_args;
 	while (*i < items.size()) {
 		const RenderQueue::Item& current_item = items.at(*i);
-		if (current_item.program != program) {
+		if (current_item.program_id != program_id) {
 			break;
 		}
 		all_args.emplace_back();
 		T& args = all_args.back();
 		args.destination_rect = current_item.destination_rect;
-		args.z_value = to_opengl_z(current_item.z);
+		args.z_value = current_item.z_value;
 		args.blend_mode = current_item.blend_mode;
 		from_item(current_item, &args);
 		++(*i);
@@ -184,15 +186,14 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 	while (i < items.size()) {
 		const Item& item = items[i];
 
-		log("#sirver    program: %d, item.z: %d %f, key: %llx\n",
-		    item.program,
-		    item.z,
-		    to_opengl_z(item.z),
+		log("#sirver    program_id: %d, item.z_value: %f, key: %llx\n",
+		    item.program_id,
+		    item.z_value,
 		    item.key);
-		switch (item.program) {
+		switch (item.program_id) {
 			// NOCOM(#sirver): horrible code duplication.
 		case Program::BLIT:
-			// NOCOM(#sirver): if a ID is moved into this program, I would not need to pass redundant
+			// NOCOM(#sirver): if a ID is moved into this program_id, I would not need to pass redundant
 			// information here.
 			VanillaBlitProgram::instance().draw(
 			   batch_up<VanillaBlitProgram::Arguments>(Program::BLIT, items, &i));
@@ -228,17 +229,17 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 			terrain_program_->draw(item.terrain_arguments.gametime,
 			                       *item.terrain_arguments.terrains,
 			                       *item.terrain_arguments.fields_to_draw,
-			                       to_opengl_z(item.z));
+										  item.z_value);
 			// NOCOM(#sirver): not pretty. Instead put the other two in the blending buckte.
 			glEnable(GL_BLEND);
 
 			dither_program_->draw(item.terrain_arguments.gametime,
 			                      *item.terrain_arguments.terrains,
 			                      *item.terrain_arguments.fields_to_draw,
-			                      to_opengl_z(item.z + 1));
+			                      item.z_value + kOpenGlZDelta);
 			road_program_->draw(*item.terrain_arguments.screen,
 			                    *item.terrain_arguments.fields_to_draw,
-			                    to_opengl_z(item.z + 2));
+			                    item.z_value + 2 * kOpenGlZDelta);
 			delete item.terrain_arguments.fields_to_draw;
 			glDisable(GL_BLEND);
 			glDisable(GL_SCISSOR_TEST);
@@ -247,7 +248,7 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 
 
 		default:
-			throw wexception("Unknown item.program: %d", item.program);
+			throw wexception("Unknown item.program_id: %d", item.program_id);
 		}
 	}
 }

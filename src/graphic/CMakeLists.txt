@@ -14,6 +14,7 @@ wl_library(graphic_render_queue
   SRCS
     render_queue.cc
     render_queue.h
+    render_item.h
   DEPENDS
     # NOCOMMIT(#sirver): circular dep on graphic_surface and other stuff
     base_exceptions
