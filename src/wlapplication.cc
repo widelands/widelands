@@ -78,7 +78,6 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/campaign_select.h"
-#include "ui_fsmenu/editor.h"
 #include "ui_fsmenu/fileview.h"
 #include "ui_fsmenu/internet_lobby.h"
 #include "ui_fsmenu/intro.h"
@@ -1088,7 +1087,7 @@ void WLApplication::mainmenu()
 				break;
 			}
 			case FullscreenMenuMain::MenuTarget::kEditor:
-				mainmenu_editor();
+				EditorInteractive::run_editor(m_filename, m_script_to_run);
 				break;
 			default:
 			case FullscreenMenuMain::MenuTarget::kExit:
@@ -1264,42 +1263,6 @@ void WLApplication::mainmenu_multiplayer()
 				default:
 					break;
 			}
-		}
-	}
-}
-
-void WLApplication::mainmenu_editor()
-{
-	//  This is the code returned by UI::Panel::run() when the panel is dying.
-	//  Make sure that the program exits when the window manager says so.
-	static_assert
-		(static_cast<int32_t>(FullscreenMenuEditor::MenuTarget::kBack) == UI::Panel::dying_code,
-		 "Editor should be dying.");
-
-	for (;;) {
-		FullscreenMenuEditor editor_menu;
-		switch (static_cast<FullscreenMenuEditor::MenuTarget>(editor_menu.run())) {
-		case FullscreenMenuEditor::MenuTarget::kBack:
-			return;
-		case FullscreenMenuEditor::MenuTarget::kNewMap:
-			EditorInteractive::run_editor(m_filename, m_script_to_run);
-			return;
-		case FullscreenMenuEditor::MenuTarget::kLoadMap: {
-			std::string filename;
-			{
-				SinglePlayerGameSettingsProvider sp;
-				FullscreenMenuMapSelect emsm(&sp, nullptr, true);
-				if (emsm.run() <= 0)
-					break;
-
-				filename = emsm.get_map()->filename;
-			}
-			EditorInteractive::run_editor(filename.c_str(), "");
-			return;
-		}
-		default:
-			assert(false);
-			break;
 		}
 	}
 }
