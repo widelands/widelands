@@ -33,7 +33,7 @@ class Texture;
  * Interface to a basic surfaces that can be used as destination for blitting and drawing.
  * It also allows low level pixel access.
  */
-class Surface  {
+class Surface {
 public:
 	Surface() = default;
 	virtual ~Surface() {}
@@ -49,12 +49,18 @@ public:
 							const float opacity,
 	                  BlendMode blend_mode);
 
-	/// This draws a grayed out version.
-	virtual void blit_gray(const Rect& dst,
+	/// This draws a grayed out version. See MonochromeBlitProgram.
+	virtual void blit_monochrome(const Rect& dst,
 	                  const Texture*,
 	                  const Rect& srcrc,
-							const float opacity,
-	                  float opacity_factor);
+	                  const RGBAColor& multiplier);
+
+	/// This draws a playercolor blended image. See BlendedBlitProgram.
+	virtual void blit_blended(const Rect& dst,
+	                  const Texture* image,
+							const Texture* mask,
+	                  const Rect& srcrc,
+	                  const RGBColor& blend);
 
 	/// Draws a filled rect to the surface. No blending takes place, the values
 	// in the target are just replaced (i.e. / BlendMode would be BlendMode::Copy).

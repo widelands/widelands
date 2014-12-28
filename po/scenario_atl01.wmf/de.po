@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-11-29 07:58+0000\n"
-"PO-Revision-Date: 2014-10-30 04:47+0000\n"
+"POT-Creation-Date: 2014-12-08 11:33+0000\n"
+"PO-Revision-Date: 2014-12-15 23:17+0000\n"
 "Last-Translator: wl-zocker <Unknown>\n"
 "Language-Team: widelands-dev\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-11-30 04:35+0000\n"
-"X-Generator: Launchpad (build 17267)\n"
+"X-Launchpad-Export-Date: 2014-12-16 05:41+0000\n"
+"X-Generator: Launchpad (build 17286)\n"
 "Language: de\n"
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:71
@@ -239,11 +239,11 @@ msgstr "Baue eine Werkzeugschmiede"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:99
 msgid "Build training sites for soldiers"
-msgstr ""
+msgstr "Baue Trainingsgebäude für deine Soldaten"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:101
 msgid "Soldier Training Sites"
-msgstr ""
+msgstr "Ausbildungsstätten"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:102
 msgid ""
@@ -252,6 +252,11 @@ msgid ""
 "labyrinth trains evasion, health and defense. The items produced by the "
 "industry are used to train better soldiers in the two training sites."
 msgstr ""
+"Wie alle anderen Stämme können auch die Atlanter ihre Soldaten ausbilden: "
+"Das Verlies trainiert den Angriff – die Hauptfähigkeit der Atlanter – und "
+"das Labyrinth trainiert die Verteidigung, das Ausweichen und die "
+"Lebenspunkte. Die Waren, die von der Industrie produziert werden, werden für "
+"die Ausbildung der Soldaten in diesen beiden Gebäuden verwendet."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:103
 msgid "Build a dungeon and a labyrinth"
@@ -387,7 +392,7 @@ msgstr "Aufruhr und Verwirrung"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:153
 msgid "Emerging Chaos..."
-msgstr ""
+msgstr "Aufkommendes Chaos …"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:154
 msgid ""
@@ -396,6 +401,11 @@ msgid ""
 "accepted their fate while others tried to change the god’s mind by offering "
 "animals in his temple. But to no avail..."
 msgstr ""
+"Mit Schuldgefühlen beladen, beging der König Selbstmord. Daraufhin legten "
+"die Leute ihre Hoffnung in die Hände der Geistlichen, die aber auch keine "
+"wirkliche Hilfe bieten konnten. Die meisten Leute akzeptierten ihr "
+"Schicksal, während andere versuchten, den Gott durch das Opfern von Tieren "
+"in seinem Tempel zu besänftigen. Alles jedoch ohne Erfolg …"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:155
 msgid ""
@@ -1073,12 +1083,20 @@ msgid ""
 "the rest of this island, the water rises faster by the hour. But we can make "
 "our escape now and start over in some country farther away..."
 msgstr ""
+"Gepriesen sei Satul! Ostur, der junge Schiffsbauer hat es geschafft. Wir "
+"haben drei Schiffe – eines robuster als das andere – mit genug Platz für uns "
+"und einige wichtige Waren. Und gerade noch rechtzeitig, Lutas ist dabei, den "
+"Rest dieser Insel zu verschlingen, das Wasser steigt von Stunde zu Stunde. "
+"Aber wir können noch fliehen und woanders – weit weg von hier – neu beginnen "
+"…"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:401
 msgid ""
 "I expect a long journey, but we will find the land of Satul in the end. This "
 "is what I promised my people. And myself."
 msgstr ""
+"Es wird eine lange Reise, aber am Ende werden wir das Land Satuls finden. "
+"Dieses Versprechen gab ich meinem Volk. Und mir."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:402
 msgid "Congratulations"

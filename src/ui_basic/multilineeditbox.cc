@@ -24,6 +24,7 @@
 #include "base/utf8.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_layout.h"
 #include "graphic/wordwrap.h"
 #include "ui_basic/scrollbar.h"
 
@@ -44,7 +45,7 @@ struct MultilineEditbox::Data {
 	uint32_t cursor_pos;
 
 	/// Font and style
-	TextStyle textstyle;
+	UI::TextStyle textstyle;
 
 	/// Maximum length of the text string, in bytes
 	uint32_t maxbytes;
@@ -97,7 +98,7 @@ MultilineEditbox::Data::Data(MultilineEditbox & o)
 :
 scrollbar(&o, o.get_w() - ms_scrollbar_w, 0, ms_scrollbar_w, o.get_h(), false),
 cursor_pos(0),
-textstyle(TextStyle::ui_small()),
+textstyle(UI::TextStyle::ui_small()),
 maxbytes(0xffff),
 ww_valid(false),
 owner(o)

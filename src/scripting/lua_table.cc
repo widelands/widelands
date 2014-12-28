@@ -115,3 +115,13 @@ template <> int LuaTable::get_value() const {
 	}
 	return return_value;
 }
+
+const std::string get_string_with_default(const LuaTable& table,
+														const std::string& key,
+														const std::string& default_value) {
+	if (table.has_key(key)) {
+		return table.get_string(key);
+	} else {
+		return default_value;
+	}
+}

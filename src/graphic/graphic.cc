@@ -27,7 +27,6 @@
 #include "graphic/gl/system_headers.h"
 #include "graphic/image.h"
 #include "graphic/image_io.h"
-#include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
 #include "graphic/screen.h"
 #include "graphic/texture.h"
@@ -68,11 +67,9 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool init_fullscreen)
      m_window_mode_height(window_mode_h),
      m_update(true),
      texture_cache_(create_texture_cache(TRANSIENT_TEXTURE_CACHE_SIZE)),
-     image_cache_(new ImageCache(texture_cache_.get())),
+     image_cache_(new ImageCache()),
      animation_manager_(new AnimationManager())
 {
-	ImageTransformations::initialize();
-
 	// Request an OpenGL 2 context with double buffering.
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
@@ -94,8 +91,10 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool init_fullscreen)
 	m_glcontext = SDL_GL_CreateContext(m_sdl_window);
 	SDL_GL_MakeCurrent(m_sdl_window, m_glcontext);
 
-	// See graphic/gl/system_headers.h for an explanation of the
-	// next line.
+#ifdef USE_GLBINDING
+	glbinding::Binding::initialize();
+#else
+	// See graphic/gl/system_headers.h for an explanation of the next line.
 	glewExperimental = GL_TRUE;
 	GLenum err = glewInit();
 	if (err != GLEW_OK) {
@@ -103,6 +102,7 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool init_fullscreen)
 			 err, glewGetErrorString(err));
 		throw wexception("glewInit returns %i: Broken OpenGL installation.", err);
 	}
+#endif
 
 	log("Graphics: OpenGL: Version \"%s\"\n",
 		 reinterpret_cast<const char*>(glGetString(GL_VERSION)));

@@ -24,6 +24,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/utility.hpp>
 
+#include "base/i18n.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
@@ -57,7 +58,6 @@ public:
 	// Implements Image.
 	uint16_t width() const override {return texture()->width();}
 	uint16_t height() const override {return texture()->height();}
-	const string& hash() const override {return hash_;}
 	Texture* texture() const override {
 		Texture* surf = texture_cache_->get(hash_);
 		if (surf)
@@ -88,7 +88,9 @@ namespace UI {
 class FontHandler1 : public IFontHandler1 {
 public:
 	FontHandler1(ImageCache* image_cache, TextureCache* texture_cache, RT::Renderer* renderer) :
-		texture_cache_(texture_cache), image_cache_(image_cache), renderer_(renderer) {}
+		texture_cache_(texture_cache), image_cache_(image_cache),
+		fontset_(new UI::FontSet(i18n::get_locale())), renderer_(renderer) {}
+
 	virtual ~FontHandler1() {}
 
 	const Image* render(const string& text, uint16_t w = 0) override {
@@ -100,18 +102,28 @@ public:
 		std::unique_ptr<RTImage> image(new RTImage(hash, texture_cache_, renderer_.get(), text, w));
 		image->texture(); // force the rich text to get rendered in case there is an exception thrown.
 
-		return image_cache_->insert(image.release());
+		return image_cache_->insert(hash, std::move(image));
+	}
+
+	UI::FontSet& fontset() const {return *fontset_.get();}
+
+	void reinitialize_fontset() {
+		fontset_.reset(new UI::FontSet(i18n::get_locale()));
+		renderer_.reset(new RT::Renderer(image_cache_, texture_cache_, fontset_.get()));
 	}
 
 private:
 	TextureCache* const texture_cache_;  // not owned
 	ImageCache* const image_cache_;  // not owned
+	unique_ptr<UI::FontSet> fontset_; // The currently active FontSet
 	std::unique_ptr<RT::Renderer> renderer_;
 };
 
 IFontHandler1 * create_fonthandler(Graphic* gr) {
+
 	return new FontHandler1(
-	   &gr->images(), &gr->textures(), new RT::Renderer(&gr->images(), &gr->textures()));
+		&gr->images(), &gr->textures(), new RT::Renderer(&gr->images(), &gr->textures(),
+																		 new UI::FontSet(i18n::get_locale())));
 }
 
 IFontHandler1 * g_fh1 = nullptr;

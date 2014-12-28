@@ -58,21 +58,44 @@ void main() {
 }
 )";
 
-const char kGrayBlitFragmentShader[] = R"(
+const char kMonochromeBlitFragmentShader[] = R"(
 #version 120
 
-uniform float u_luminosity_factor;
 uniform float u_opacity;
 uniform sampler2D u_texture;
+uniform vec3 u_blend;
 
 varying vec2 out_texture_coordinate;
 
 void main() {
 	vec4 texture_color = texture2D(u_texture, out_texture_coordinate);
-	// See http://en.wikipedia.org/wiki/YUV.
-	float luminance = dot(vec3(0.299, 0.587, 0.114), texture_color.rgb) * u_luminosity_factor;
 
-	gl_FragColor = vec4(vec3(luminance), u_opacity * texture_color.a);
+	// See http://en.wikipedia.org/wiki/YUV.
+	float luminance = dot(vec3(0.299, 0.587, 0.114), texture_color.rgb);
+
+	gl_FragColor = vec4(vec3(luminance) * u_blend, u_opacity * texture_color.a);
+}
+)";
+
+const char kBlendedBlitFragmentShader[] = R"(
+#version 120
+
+uniform float u_opacity;
+uniform sampler2D u_texture;
+uniform sampler2D u_mask;
+uniform vec3 u_blend;
+
+varying vec2 out_texture_coordinate;
+
+void main() {
+	vec4 texture_color = texture2D(u_texture, out_texture_coordinate);
+	vec4 mask_color = texture2D(u_mask, out_texture_coordinate);
+
+	// See http://en.wikipedia.org/wiki/YUV.
+	float luminance = dot(vec3(0.299, 0.587, 0.114), texture_color.rgb);
+	float blend_influence = mask_color.r * mask_color.a;
+	gl_FragColor = vec4(
+	   mix(texture_color.rgb, u_blend * luminance, blend_influence), u_opacity * texture_color.a);
 }
 )";
 
@@ -215,28 +238,64 @@ void VanillaBlitProgram::draw(const FloatRect& gl_dest_rect,
 }
 
 // static
-GrayBlitProgram& GrayBlitProgram::instance() {
-	static GrayBlitProgram blit_program;
+MonochromeBlitProgram& MonochromeBlitProgram::instance() {
+	static MonochromeBlitProgram blit_program;
 	return blit_program;
 }
 
-GrayBlitProgram::~GrayBlitProgram() {
+MonochromeBlitProgram::~MonochromeBlitProgram() {
 }
 
-GrayBlitProgram::GrayBlitProgram() {
-	blit_program_.reset(new BlitProgram(kGrayBlitFragmentShader));
+MonochromeBlitProgram::MonochromeBlitProgram() {
+	blit_program_.reset(new BlitProgram(kMonochromeBlitFragmentShader));
 
-	u_luminosity_factor_ = glGetUniformLocation(blit_program_->program_object(), "u_luminosity_factor");
+	u_blend_ = glGetUniformLocation(blit_program_->program_object(), "u_blend");
 }
 
-void GrayBlitProgram::draw(const FloatRect& gl_dest_rect,
+void MonochromeBlitProgram::draw(const FloatRect& gl_dest_rect,
                        const FloatRect& gl_src_rect,
                        const GLuint gl_texture,
-							  const float opacity,
-                       const float luminosity_factor) {
-	blit_program_->activate(gl_dest_rect, gl_src_rect, gl_texture, opacity, BlendMode::UseAlpha);
+							  const RGBAColor& blend) {
+	blit_program_->activate(gl_dest_rect, gl_src_rect, gl_texture, blend.a / 255., BlendMode::UseAlpha);
 
-	glUniform1f(u_luminosity_factor_, luminosity_factor);
+	glUniform3f(u_blend_, blend.r / 255., blend.g / 255., blend.b / 255.);
 
 	blit_program_->draw_and_deactivate(BlendMode::UseAlpha);
+}
+
+// static
+BlendedBlitProgram& BlendedBlitProgram::instance() {
+	static BlendedBlitProgram blit_program;
+	return blit_program;
+}
+
+BlendedBlitProgram::~BlendedBlitProgram() {
+}
+
+BlendedBlitProgram::BlendedBlitProgram() {
+	blit_program_.reset(new BlitProgram(kBlendedBlitFragmentShader));
+	u_blend_ = glGetUniformLocation(blit_program_->program_object(), "u_blend");
+	u_mask_ = glGetUniformLocation(blit_program_->program_object(), "u_mask");
+}
+
+void BlendedBlitProgram::draw(const FloatRect& gl_dest_rect,
+                       const FloatRect& gl_src_rect,
+                       const GLuint gl_texture_image,
+							  const GLuint gl_texture_mask,
+							  const RGBAColor& blend) {
+	blit_program_->activate(gl_dest_rect, gl_src_rect, gl_texture_image, blend.a / 255., BlendMode::UseAlpha);
+
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, gl_texture_mask);
+	glUniform1i(u_mask_, 1);
+
+	glUniform3f(u_blend_, blend.r / 255., blend.g / 255., blend.b / 255.);
+
+	blit_program_->draw_and_deactivate(BlendMode::UseAlpha);
+
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, 0);
 }

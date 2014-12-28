@@ -2,20 +2,21 @@
 # Copyright (C) 2005-2007 Widelands Development Team
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005.
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014.
+# wl-zocker <wl-zocker@t-online.de>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-11-29 07:58+0000\n"
-"PO-Revision-Date: 2014-09-03 11:59+0000\n"
-"Last-Translator: Mirian Margiani <Unknown>\n"
-"Language-Team: German <widelands-public@lists.sourceforge.net>\n"
+"POT-Creation-Date: 2014-12-08 11:33+0000\n"
+"PO-Revision-Date: 2014-12-15 23:14+0000\n"
+"Last-Translator: wl-zocker <Unknown>\n"
+"Language-Team: widelands-dev\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-11-30 04:40+0000\n"
-"X-Generator: Launchpad (build 17267)\n"
+"X-Launchpad-Export-Date: 2014-12-16 05:41+0000\n"
+"X-Generator: Launchpad (build 17286)\n"
 "X-Poedit-Country: GERMANY\n"
 "Language: de\n"
 "X-Poedit-Language: German\n"
@@ -2059,7 +2060,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:13
 msgid "Krumta, carpenter of Chat’Karuth"
-msgstr ""
+msgstr "Krumta, Zimmermann in Chat’Karuth"
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:13
 msgid ""
@@ -2067,6 +2068,9 @@ msgid ""
 "soldier. Take 50 and you’re a hero. Take 20 and soon you will be a honorable "
 "lumberjack.’"
 msgstr ""
+"„Wenn du 200 Schläge zum Fällen eines Baumes brauchst, bist du ein Baby. Mit "
+"100 ein Soldat. Mit 50 ein Held. Mit 20 wirst du bald ein ehrenwerter "
+"Holzfäller sein.“"
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:16
 msgid "Fell trees in the surrounding area and process them into logs."
@@ -2075,6 +2079,8 @@ msgstr "Fällt Bäume in der Umgebung und verarbeitet sie zu Stämmen."
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:17
 msgid "The lumberjack’s hut needs trees to fell within the working radius."
 msgstr ""
+"Die Holzfällerhütte braucht Bäume, die gefällt werden können, innerhalb "
+"ihres Arbeitsbereich."
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:29
 msgid ""

@@ -20,6 +20,7 @@
 #ifndef WL_GRAPHIC_IMAGE_IO_H
 #define WL_GRAPHIC_IMAGE_IO_H
 
+#include <memory>
 #include <string>
 
 #include "base/wexception.h"
@@ -45,7 +46,7 @@ public:
 };
 
 /// Loads the image 'fn' from 'fs'.
-Texture* load_image(const std::string& fn, FileSystem* fs = nullptr);
+std::unique_ptr<Texture> load_image(const std::string& fn, FileSystem* fs = nullptr);
 
 /// Loads the image 'fn' from 'fs' into an SDL_Surface. Caller must SDL_FreeSurface() the returned value.
 SDL_Surface* load_image_as_sdl_surface(const std::string& fn, FileSystem* fs = nullptr);

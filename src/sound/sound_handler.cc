@@ -44,8 +44,17 @@
 #include "wui/mapview.h"
 #include "wui/mapviewpixelfunctions.h"
 
-#define DEFAULT_MUSIC_VOLUME  64
-#define DEFAULT_FX_VOLUME    128
+namespace  {
+
+constexpr int kDefaultMusicVolume = 64;
+constexpr int kDefaultFxVolume = 128;
+
+void report_initalization_error(const char* msg) {
+	log("WARNING: Failed to initialize sound system: %s\n", msg);
+	return;
+}
+
+}  // namespace
 
 /** The global \ref SoundHandler object
  * The sound handler is a static object because otherwise it'd be quite
@@ -99,23 +108,27 @@ void SoundHandler::init()
 	const uint16_t bufsize = 1024;
 #endif
 
-	if (nosound_)
-	{
+	if (nosound_) {
 		set_disable_music(true);
 		set_disable_fx(true);
 		lock_audio_disabling_ = true;
 		return;
 	}
 
-	if (SDL_InitSubSystem(SDL_INIT_AUDIO) == -1 ||
-	    Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, bufsize) == -1 ||
-	    Mix_Init(MIX_INIT_OGG) == -1) {
-		SDL_QuitSubSystem(SDL_INIT_AUDIO);
-		log("WARNING: Failed to initialize sound system: %s\n", Mix_GetError());
+	if (SDL_InitSubSystem(SDL_INIT_AUDIO) != 0) {
+		report_initalization_error(SDL_GetError());
+		return;
+	}
 
-		set_disable_music(true);
-		set_disable_fx(true);
-		lock_audio_disabling_ = true;
+	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, bufsize) != 0) {
+		initialization_error(Mix_GetError());
+		return;
+	}
+
+	constexpr int kMixInitFlags = MIX_INIT_OGG;
+	int initted = Mix_Init(kMixInitFlags);
+	if ((initted & kMixInitFlags) != kMixInitFlags) {
+		initialization_error("No Ogg support in SDL_Mixer.");
 		return;
 	}
 
@@ -126,6 +139,17 @@ void SoundHandler::init()
 
 	if (fx_lock_ == nullptr)
 		fx_lock_ = SDL_CreateMutex();
+}
+
+void SoundHandler::initialization_error(const std::string& msg) {
+	log("WARNING: Failed to initialize sound system: %s\n", msg.c_str());
+
+	SDL_QuitSubSystem(SDL_INIT_AUDIO);
+
+	set_disable_music(true);
+	set_disable_fx(true);
+	lock_audio_disabling_ = true;
+	return;
 }
 
 void SoundHandler::shutdown()
@@ -184,8 +208,8 @@ void SoundHandler::read_config()
 	} else {
 		set_disable_music(s.get_bool("disable_music",      false));
 		set_disable_fx   (s.get_bool("disable_fx",         false));
-		music_volume_ =  s.get_int ("music_volume",       DEFAULT_MUSIC_VOLUME);
-		fx_volume_    =  s.get_int ("fx_volume",          DEFAULT_FX_VOLUME);
+		music_volume_ =  s.get_int ("music_volume",       kDefaultMusicVolume);
+		fx_volume_    =  s.get_int ("fx_volume",          kDefaultFxVolume);
 	}
 
 	random_order_    =  s.get_bool("sound_random_order", true);
