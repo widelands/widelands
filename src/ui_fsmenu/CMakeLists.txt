@@ -4,8 +4,6 @@ wl_library(ui_fsmenu
     base.h
     campaign_select.cc
     campaign_select.h
-    editor.cc
-    editor.h
     fileview.cc
     fileview.h
     internet_lobby.cc
