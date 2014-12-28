@@ -606,10 +606,6 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 		editor.postload();
 		eia.start();
 
-		// NOCOM(#sirver): hack.
-		log("#sirver Now starting game. Yippie!\n");
-		g_gr->images().compactify();
-
 		if (!script_to_run.empty()) {
 			eia.egbase().lua().run_script(script_to_run);
 		}

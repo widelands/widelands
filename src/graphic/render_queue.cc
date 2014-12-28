@@ -148,10 +148,11 @@ inline void from_item(const RenderQueue::Item& item, FillRectProgram::Arguments*
 }
 
 inline void from_item(const RenderQueue::Item& item, BlendedBlitProgram::Arguments* args) {
-	args->source_rect = item.blended_blit_arguments.source_rect;
 	args->texture = item.blended_blit_arguments.texture;
+	args->source_rect = item.blended_blit_arguments.source_rect;
 	args->blend = item.blended_blit_arguments.blend;
 	args->texture_mask = item.blended_blit_arguments.texture_mask;
+	args->mask_source_rect = item.blended_blit_arguments.mask_source_rect;
 }
 
 inline void from_item(const RenderQueue::Item& item, DrawLineProgram::Arguments* args) {

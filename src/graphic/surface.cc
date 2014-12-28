@@ -66,14 +66,9 @@ inline void pixel_to_gl_texture(const int width, const int height, float* x, flo
 	*y = (*y / height);
 }
 
-// Convert 'dst' and 'srcrc' from pixel space into opengl space, taking into
-// account that we might be a subtexture in a bigger texture.
-void src_and_dst_rect_to_gl(const Surface& surface,
-                            const Image& image,
-                            const Rect& dst_rect,
-                            const Rect& src_rect,
-                            FloatRect* gl_dst_rect,
-                            FloatRect* gl_src_rect) {
+// Convert 'srcrc' from pixel space into opengl space, taking into account that
+// it might be a subtexture in a bigger texture.
+FloatRect source_rect_to_gl(const Image& image, const Rect& src_rect) {
 	// Source Rectangle. We have to take into account that the texture might be
 	// a subtexture in another bigger texture. So we first figure out the pixel
 	// coordinates given it is a full texture (values between 0 and 1) and then
@@ -92,12 +87,7 @@ void src_and_dst_rect_to_gl(const Surface& surface,
 	x2 = texture_coordinates.x + x2 * texture_coordinates.w;
 	y2 = texture_coordinates.y + y2 * texture_coordinates.h;
 
-	gl_src_rect->x = x1;
-	gl_src_rect->y = y1;
-	gl_src_rect->w = x2 - x1;
-	gl_src_rect->h = y2 - y1;
-
-	*gl_dst_rect = to_opengl(surface, dst_rect, ConversionMode::kExact);
+	return FloatRect(x1, y1, x2 - x1, y2 - y1);
 }
 
 }  // namespace
@@ -183,8 +173,8 @@ void blit_monochrome(const Rect& dst_rect,
                      const Rect& src_rect,
                      const RGBAColor& blend,
                      Surface* surface) {
-	FloatRect gl_dst_rect, gl_src_rect;
-	src_and_dst_rect_to_gl(*surface, image, dst_rect, src_rect, &gl_dst_rect, &gl_src_rect);
+	const FloatRect gl_src_rect = source_rect_to_gl(image, src_rect);
+	const FloatRect gl_dst_rect = to_opengl(*surface, dst_rect, ConversionMode::kExact);
 
 	if (is_a(Screen, surface)) {
 		RenderQueue::Item i;
@@ -209,18 +199,21 @@ void blit_blended(const Rect& dst_rect,
                   const Rect& src_rect,
                   const RGBColor& blend,
                   Surface* surface) {
-	FloatRect gl_dst_rect, gl_src_rect;
-	src_and_dst_rect_to_gl(*surface, image, dst_rect, src_rect, &gl_dst_rect, &gl_src_rect);
+	const FloatRect gl_src_rect = source_rect_to_gl(image, src_rect);
+	const FloatRect gl_mask_src_rect = source_rect_to_gl(texture_mask, src_rect);
+
+	const FloatRect gl_dst_rect = to_opengl(*surface, dst_rect, ConversionMode::kExact);
 
 	if (is_a(Screen, surface)) {
 		RenderQueue::Item i;
+		i.destination_rect = gl_dst_rect;
 		i.program_id = RenderQueue::Program::BLIT_BLENDED;
 		i.blend_mode = BlendMode::UseAlpha;
-		i.destination_rect = gl_dst_rect;
-		i.blended_blit_arguments.source_rect = gl_src_rect;
 		i.blended_blit_arguments.texture = image.get_gl_texture();
+		i.blended_blit_arguments.source_rect = gl_src_rect;
 		// NOCOM(#sirver): this must actually take a separate source rectangle.
 		i.blended_blit_arguments.texture_mask = texture_mask.get_gl_texture();
+		i.blended_blit_arguments.mask_source_rect = gl_mask_src_rect;
 		i.blended_blit_arguments.blend = blend;
 		RenderQueue::instance().enqueue(i);
 		return;
@@ -228,8 +221,13 @@ void blit_blended(const Rect& dst_rect,
 
 	surface->setup_gl();
 	glViewport(0, 0, surface->width(), surface->height());
-	BlendedBlitProgram::instance().draw(
-	   gl_dst_rect, gl_src_rect, 0.f, image.get_gl_texture(), texture_mask.get_gl_texture(), blend);
+	BlendedBlitProgram::instance().draw(gl_dst_rect,
+	                                    0.f,
+	                                    image.get_gl_texture(),
+	                                    gl_src_rect,
+	                                    texture_mask.get_gl_texture(),
+	                                    gl_mask_src_rect,
+	                                    blend);
 }
 
 void blit(const Rect& dst_rect,
@@ -238,8 +236,8 @@ void blit(const Rect& dst_rect,
           float opacity,
           BlendMode blend_mode,
           Surface* surface) {
-	FloatRect gl_dst_rect, gl_src_rect;
-	src_and_dst_rect_to_gl(*surface, image, dst_rect, src_rect, &gl_dst_rect, &gl_src_rect);
+	const FloatRect gl_src_rect = source_rect_to_gl(image, src_rect);
+	const FloatRect gl_dst_rect = to_opengl(*surface, dst_rect, ConversionMode::kExact);
 
 	if (is_a(Screen, surface)) {
 		RenderQueue::Item i;

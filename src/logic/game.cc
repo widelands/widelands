@@ -563,6 +563,11 @@ bool Game::run
 
 		m_state = gs_running;
 
+		// NOCOM(#sirver): this must happen somewhen else.
+		// NOCOM(#sirver): hack.
+		log("#sirver Now starting game. Yippie!\n");
+		g_gr->images().compactify();
+
 		get_ibase()->run();
 
 		m_state = gs_ending;
