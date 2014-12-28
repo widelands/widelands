@@ -25,6 +25,7 @@
 
 #include "base/wexception.h"
 
+// NOCOM(#sirver): can this use Image? Rename?
 TextureAtlas::Node::Node(const Rect& init_r) : used(false), r(init_r) {
 }
 
@@ -46,7 +47,7 @@ TextureAtlas::TextureAtlas() :
 {
 }
 
-void TextureAtlas::add(const Texture& texture) {
+void TextureAtlas::add(const Image& texture) {
 	blocks_.emplace_back(next_index_++, &texture);
 }
 

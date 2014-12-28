@@ -35,7 +35,7 @@ public:
 	// Add 'texture' as one of the textures to be packed. Ownership is
 	// not taken, but 'texture' must be valid until pack() has been
 	// called.
-	void add(const Texture& texture);
+	void add(const Image& texture);
 
 	// Packs the textures and returns the packed texture. 'textures'
 	// contains the individual sub textures (that do not own their
@@ -56,12 +56,12 @@ private:
 	};
 
 	struct Block {
-		Block(int init_index, const Texture* init_texture)
+		Block(int init_index, const Image* init_texture)
 		   : index(init_index), texture(init_texture) {
 		}
 
 		int index;
-		const Texture* texture;
+		const Image* texture;
 		Node* node;
 	};
 

@@ -111,7 +111,7 @@ void RenderQueue::draw() {
 
 	glDisable(GL_BLEND);
 
-	log("#sirver Drawing Opaque stuff: %ld.\n", opaque_items_.size());
+	// log("#sirver Drawing Opaque stuff: %ld.\n", opaque_items_.size());
 	std::sort(opaque_items_.begin(), opaque_items_.end());
 	draw_items(opaque_items_);
 	opaque_items_.clear();
@@ -119,7 +119,7 @@ void RenderQueue::draw() {
 	glEnable(GL_BLEND);
 	glDepthMask(GL_FALSE);
 
-	log("#sirver Drawing blended stuff: %ld.\n", blended_items_.size());
+	// log("#sirver Drawing blended stuff: %ld.\n", blended_items_.size());
 	std::sort(blended_items_.begin(), blended_items_.end());
 	draw_items(blended_items_);
 	blended_items_.clear();
@@ -177,7 +177,7 @@ std::vector<T> batch_up(const RenderQueue::Program program_id,
 		from_item(current_item, &args);
 		++(*i);
 	}
-	log("#sirver   Batched: all_args.size(): %lu\n", all_args.size());
+	// log("#sirver   Batched: %lu items for program_id: %d\n", all_args.size(), program_id);
 	return all_args;
 }
 
@@ -185,11 +185,6 @@ void RenderQueue::draw_items(const std::vector<Item>& items) {
 	size_t i = 0;
 	while (i < items.size()) {
 		const Item& item = items[i];
-
-		log("#sirver    program_id: %d, item.z_value: %f, key: %llx\n",
-		    item.program_id,
-		    item.z_value,
-		    item.key);
 		switch (item.program_id) {
 			// NOCOM(#sirver): horrible code duplication.
 		case Program::BLIT:

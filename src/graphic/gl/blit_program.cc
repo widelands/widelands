@@ -283,7 +283,7 @@ void BlitProgram::draw_and_deactivate(const std::vector<Arguments>& arguments) {
 			glBlendFunc(GL_ONE, GL_ZERO);
 		}
 
-		log("#sirver       BlitProgram: vertices.size(): %ld\n", vertices.size());
+		// log("#sirver       BlitProgram: vertices.size(): %ld\n", vertices.size());
 		glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 
 		if (template_args.blend_mode == BlendMode::Copy) {
