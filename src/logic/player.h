@@ -521,7 +521,7 @@ private:
 	BuildingStatsVector* get_mutable_building_statistics(const BuildingIndex& i);
 	void update_building_statistics(Building &, NoteImmovable::Ownership ownership);
 	void update_team_players();
-	void play_message_sound(const std::string & sender);
+	void play_message_sound(const Message::Type & msgtype);
 	void _enhance_or_dismantle
 		(Building *, BuildingIndex const index_of_new_building);
 

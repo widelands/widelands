@@ -49,7 +49,7 @@ function save_coroutine()
    objective.done = true
 
    p:send_message("dummy msg1", "dummy msg 1")
-   msg = p:send_message("hello nice", "World", {sender="blah", field = field })
+   msg = p:send_message("hello nice", "World", {field = field })
    player_slot = map.player_slots[1]
 
    myset = Set:new{
@@ -118,7 +118,6 @@ function check_coroutine()
    assert_table(msg)
    assert_equal("hello nice", msg.title)
    assert_equal("World", msg.body)
-   assert_equal("blah", msg.sender)
    assert_equal(field, msg.field)
 
    assert_table(map)
