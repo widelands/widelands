@@ -32,8 +32,8 @@
 namespace  {
 
 struct Edge {
-	Edge(const int init_rectangle_index, const float init_value, const FloatRect& init_rect)
-	   : rectangle_index(init_rectangle_index), value(init_value), rect(&init_rect) {
+	Edge(const int init_rectangle_index, const float init_value)
+	   : rectangle_index(init_rectangle_index), value(init_value) {
 	}
 
 	inline bool operator<(const Edge& other) const {
@@ -42,44 +42,60 @@ struct Edge {
 
 	int rectangle_index;
 	float value;
-	const FloatRect* rect;
 };
 
-inline int low(const FloatRect& r) {
-	return r.y;
-}
-
-inline int high(const FloatRect& r) {
-	return r.y + r.h;
-}
-
-struct SortByLow {
-	inline bool operator()(const FloatRect& r1, const FloatRect& r2) {
-		return low(r1) < low(r2);
+struct RectWrapper {
+	RectWrapper(const size_t init_original_index, const FloatRect* init_r)
+	   : original_index(init_original_index), r(init_r) {
 	}
+
+	inline float lower_x() const {
+		return r->x;
+	}
+
+	inline float higher_x() const {
+		return r->x + r->w;
+	}
+
+	inline float lower_y() const {
+		return r->y;
+	}
+
+	inline float higher_y() const {
+		return r->y + r->h;
+	}
+
+	// Sorts by the lower edge of the contained rectangle.
+	inline bool operator<(const RectWrapper& other) const {
+		return higher_y() < other.higher_y();
+	}
+
+	size_t original_index;
+	const FloatRect* r;
 };
 
 static std::set<std::pair<int, int>> pairs;
 
 void report_pair(const int a, const int b) {
+	log("#sirver a: %d,b: %d\n", a, b);
 	pairs.insert(std::make_pair(std::min(a, b), std::max(a, b)));
 }
 
-void stab(const std::vector<FloatRect>& H, const std::vector<int>& A, const std::vector<int>& B) {
+void stab(const std::vector<RectWrapper>& H, const std::vector<int>& A, const std::vector<int>& B) {
 	size_t i = 0;
 	size_t j = 0;
 	while (i < A.size() && j < B.size()) {
-		if (low(H[A[i]]) < low(H[B[j]])) {
+		if (H[A[i]].lower_y() < H[B[j]].lower_y()) {
 			size_t k = j;
-			while (k < B.size() && low(H[B[k]]) < high(H[A[i]])) {
-				report_pair(A[i], B[k]);
+			while (k < B.size() && H[B[k]].lower_y() < H[A[i]].higher_y()) {
+				report_pair(H[A[i]].original_index, H[B[k]].original_index);
 				++k;
 			}
 			++i;
 		} else {
 			size_t k = i;
-			while (k < A.size() && low(H[A[k]]) < high(H[B[j]])) {
-				report_pair(B[j], A[k]);
+			while (k < A.size() && H[A[k]].lower_y() < H[B[j]].higher_y()) {
+				report_pair(H[B[j]].original_index, H[A[k]].original_index);
 				++k;
 			}
 			++j;
@@ -87,72 +103,115 @@ void stab(const std::vector<FloatRect>& H, const std::vector<int>& A, const std:
 	}
 }
 
-void detect(const std::vector<Edge>& V, int low, int high, const std::vector<FloatRect>& H, const std::string indent) {
-	log("#sirver %slow: %d,high: %d\n", indent.c_str(), low, high);
-	if (high - low <= 1) {
+void detect(const std::vector<Edge>& V, int lower_index, int higher_index, const std::vector<RectWrapper>& H, const std::string indent) {
+	log("#sirver higher_index: %d,lower_index: %d\n", higher_index, lower_index);
+	if (higher_index - lower_index < 2) {
 		return;
 	}
 
 	std::vector<int> count1(H.size());
 	std::vector<int> count2(H.size());
 
-	// NOCOM(#sirver): what should H1 and H2 contain?
-	std::vector<FloatRect> H1, H2;
-	for (int i = low; i < (low + high) / 2; ++i) {
+	std::vector<RectWrapper> H1, H2;
+	// NOCOM(#sirver): index into H
+	std::vector<int> S11, S22, S12, S21;
+
+	const float min_value = V[lower_index].value;
+	const float max_value = V[higher_index - 1].value;
+
+	for (int i = lower_index; i < (lower_index + higher_index) / 2; ++i) {
 		++count1[V[i].rectangle_index];
 	}
-	for (int i = (low + high) / 2; i < high; ++i) {
+	for (int i = (lower_index + higher_index) / 2; i < higher_index; ++i) {
 		++count2[V[i].rectangle_index];
 	}
 
-	// NOCOM(#sirver): index into H
-	std::vector<int> S11, S22, S12, S21;
 	for (size_t i = 0; i < H.size(); ++i) {
-		if (count1[i] > 0) {
-			H1.push_back(H[i]);
+		if (count1[i] == 0 && count2[i] == 0) {
+			continue;
 		}
-		if (count2[i] > 0) {
-			H2.push_back(H[i]);
-		}
+		assert(count1[i] + countl2[i] <= 2);
 
-		if (count1[i] == 2 && count2[i] == 0) { // Only in V2, not spanning V2
+		if (count1[i] == 2 && count2[i] == 0) {
 			S11.push_back(i);
-		} else if (count1[i] == 1 && count2[i] == 0) { // Only in V1, spanning V2.
-			S12.push_back(i);
-		} else if (count1[i] == 0 && count2[i] == 2) { // Only in V2, not spanning V1.
+		} else if (count1[i] == 0 && count2[i] == 2) {
 			S22.push_back(i);
-		} else if (count1[i] == 0 && count2[i] == 1) { // Only in V2, spanning V1.
-			S21.push_back(i);
+		} else if (count1[i] == 1 && count2[i] == 1) {
+				// S12.push_back(i);
+				// S21.push_back(i);
+			// NOCOM(#sirver): what here?
+		} else if (count1[i] == 1 && count2[i] == 0) {
+			// If the right edge is over the highest value, we span V2.
+			if (H[i].higher_x() >= max_value) {
+				S12.push_back(i);
+			} else {
+				S11.push_back(i);
+			}
+		} else if (count1[i] == 0 && count2[i] == 1) {
+			// If the left edge is lower than the lowest value, we do span V1.
+			if (H[i].lower_x() <= min_value) {
+				S21.push_back(i);
+			} else {
+				S22.push_back(i);
+			}
+		} else {
+			assert(false);
 		}
 	}
+	log("#sirver S11: ");
+	for (const auto& i : S11) { log("%d ", i); }
+	log("\n");
+	log("#sirver S12: ");
+	for (const auto& i : S12) { log("%d ", i); }
+	log("\n");
+	log("#sirver S22: ");
+	for (const auto& i : S22) { log("%d ", i); }
+	log("\n");
+	log("#sirver S21: ");
+	for (const auto& i : S21) { log("%d ", i); }
+	log("\n");
 
 	stab(H, S12, S22);
 	stab(H, S21, S11);
 	stab(H, S12, S21);
 
-	detect(V, low, (low + high) / 2, H, indent + " ");
-	detect(V, (low + high) / 2, high, H, indent + " ");
+	detect(V, lower_index, (lower_index + higher_index) / 2, H, indent + " ");
+	detect(V, (lower_index + higher_index) / 2, higher_index, H, indent + " ");
 }
 
 }  // namespace
 
-void report(std::vector<FloatRect> H) {
-	std::sort(H.begin(), H.end(), SortByLow());
+std::vector<std::vector<int>> report(const std::vector<FloatRect>& H) {
+	std::vector<RectWrapper> rects;
+	rects.reserve(H.size());
+
+	for (size_t i = 0; i < H.size(); ++i) {
+		rects.emplace_back(i, &H[i]);
+	}
+
+	std::sort(rects.begin(), rects.end());
+
+	for (int i = 0; i < rects.size(); ++i) {
+		log("#sirver %f %f\n", rects[i].r->x, rects[i].r->y);
+	}
 
 	std::vector<Edge> V;
-	for (size_t i = 0; i < H.size(); ++i) {
-		const FloatRect& rect = H[i];
-		V.emplace_back(i, rect.x, rect);
-		V.emplace_back(i, rect.x + rect.w, rect);
+	for (size_t i = 0; i < rects.size(); ++i) {
+		const FloatRect& rect = *rects[i].r;
+		V.emplace_back(i, rect.x);
+		V.emplace_back(i, rect.x + rect.w);
 	}
 
 	std::sort(V.begin(), V.end());
 
-	detect(V, 0, V.size(), H, "");
+	detect(V, 0, V.size(), rects, "");
+
+	std::vector<std::vector<int>> rv;
+	rv.resize(H.size());
 
 	for (const auto& p : pairs) {
-		const FloatRect& r1 = H[p.first];
-		const FloatRect& r2 = H[p.second];
-		log("#sirver r1.x: %f,r1.y: %f, r2.x: %f, r2.y: %f\n", r1.x, r1.y, r2.x, r2.y);
+		log("#sirver intersection: %d %d\n", p.first, p.second);
+		rv[p.first].push_back(p.second);
 	}
+	return rv;
 }

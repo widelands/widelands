@@ -17,33 +17,50 @@
  *
  */
 
+#include <vector>
+
 #define BOOST_AUTO_TEST_MAIN
 #define BOOST_TEST_MODULE BaseGeometry
 #include <boost/test/unit_test.hpp>
 
 #include "base/rect.h"
 
+namespace {
+
+void check_equal_vectors(const std::vector<int>& a, const std::vector<int>& b) {
+	BOOST_CHECK_EQUAL(a.size(), b.size());
+	for (size_t i = 0; i < a.size(); ++i) {
+		BOOST_CHECK_EQUAL(a[i], b[i]);
+	}
+}
+
+}  // namespace
 // NOCOM(#sirver): into the header.
-void report(std::vector<FloatRect> H);
+std::vector<std::vector<int>> report(const std::vector<FloatRect>& H);
 
 // Example from the paper.
-// NOCOM(#sirver): bring back.
-// BOOST_AUTO_TEST_CASE(test_rectangle_intersection) {
-	// const FloatRect r1(107, 103, 175 - 107, 151 - 103);
-	// const FloatRect r2(184, 111, 274 - 184, 197 - 111);
-	// const FloatRect r3(213, 128, 249 - 213, 176 - 128);
+// BOOST_AUTO_TEST_CASE(test_rectangle_paper_example) {
+	// const FloatRect r0(107, 103, 175 - 107, 151 - 103);
+	// const FloatRect r1(184, 111, 274 - 184, 197 - 111);
+	// const FloatRect r2(213, 128, 249 - 213, 176 - 128);
 
-	// report({r1, r2, r3});
-	// BOOST_CHECK_EQUAL(0, 1);
+	// const auto rv = report({r0, r1, r2});
+	// check_equal_vectors({0}, rv[0]);
+	// check_equal_vectors({1, 2}, rv[1]);
+	// check_equal_vectors({2}, rv[2]);
 // }
 
 BOOST_AUTO_TEST_CASE(test_rectangle_intersection) {
-	const FloatRect r1(3, 2, 3, 2);
-	const FloatRect r2(2, 1, 7, 7);
-	const FloatRect r3(6, 5, 2, 2);
-	const FloatRect r4(5.5f, 3.5f, 1, 1);
-	const FloatRect r5(2, 9, 1, 1);
+	const FloatRect r0(3, 0, 3, 4);
+	const FloatRect r1(2, 1, 7, 7);
+	const FloatRect r2(6, 5, 2, 2);
+	const FloatRect r3(5.5f, 3.5f, 1, 1);
+	const FloatRect r4(2, 9, 1, 1);
 
-	report({r1, r2, r3, r4, r5});
-	BOOST_CHECK_EQUAL(0, 1);
+	const auto rv = report({r0, r1, r2, r3, r4});
+	check_equal_vectors({0, 1, 3}, rv[0]);
+	check_equal_vectors({1, 2, 3}, rv[1]);
+	check_equal_vectors({2}, rv[2]);
+	check_equal_vectors({3}, rv[3]);
+	check_equal_vectors({4}, rv[4]);
 }
