@@ -24,8 +24,6 @@
 #define BOOST_TEST_MODULE BaseGeometry
 #include <boost/test/unit_test.hpp>
 
-#include "base/log.h"
-#include "base/scoped_timer.h"
 #include "base/rect.h"
 
 namespace {
@@ -41,8 +39,6 @@ void check_equal_vectors(std::vector<int> a, std::vector<int> b) {
 }
 
 }  // namespace
-// NOCOM(#sirver): into the header.
-std::vector<std::vector<int>> report(const std::vector<FloatRect>& H);
 
 // Example from the paper.
 BOOST_AUTO_TEST_CASE(test_rectangle_paper_example) {
@@ -50,11 +46,10 @@ BOOST_AUTO_TEST_CASE(test_rectangle_paper_example) {
 	const FloatRect r1(184, 111, 274 - 184, 197 - 111);
 	const FloatRect r2(213, 128, 249 - 213, 176 - 128);
 
-	const auto rv = report({r0, r1, r2});
+	const auto rv = find_overlapping_rectangles({r0, r1, r2});
 	check_equal_vectors({}, rv[0]);
 	check_equal_vectors({2}, rv[1]);
 	check_equal_vectors({}, rv[2]);
-	BOOST_CHECK_EQUAL(0, 1);
 }
 
 // More complex example I came up with.
@@ -65,7 +60,7 @@ BOOST_AUTO_TEST_CASE(test_rectangle_intersection) {
 	const FloatRect r3(5.5f, 3.5f, 1, 1);
 	const FloatRect r4(2, 9, 1, 1);
 
-	const auto rv = report({r0, r1, r2, r3, r4});
+	const auto rv = find_overlapping_rectangles({r0, r1, r2, r3, r4});
 
 	check_equal_vectors({1, 3}, rv[0]);
 	check_equal_vectors({2, 3}, rv[1]);
@@ -88,7 +83,7 @@ BOOST_AUTO_TEST_CASE(test_rectangle_intersection_random) {
 	   FloatRect(0.849255, 0.056118, 0.280741, 0.157701),
 	   FloatRect(0.692919, 0.046653, 0.331695, 0.022189),
 	};
-	const auto rv = report(rects);
+	const auto rv = find_overlapping_rectangles(rects);
 	check_equal_vectors({1, 2, 3, 5, 6, 7, 8}, rv[0]);
 	check_equal_vectors({2, 6, 7}, rv[1]);
 	check_equal_vectors({3, 6, 7}, rv[2]);
@@ -205,7 +200,7 @@ BOOST_AUTO_TEST_CASE(test_rectangle_intersection_random_huge) {
 	   FloatRect(0.5476083363028251, 0.4798887621549048, 0.0169093898466285, 0.5549020219767852),
 	};
 
-	const auto rv = report(rects);
+	const auto rv = find_overlapping_rectangles(rects);
 	check_equal_vectors({9,
 	                     13,
 	                     17,
@@ -1097,8 +1092,8 @@ BOOST_AUTO_TEST_CASE(test_rectangle_intersection_random_huge) {
 	                     98,
 	                     99},
 	                    rv[25]);
-	check_equal_vectors(
-	   {96, 80, 91, 69, 40, 77, 48, 81, 52, 53, 55, 57, 85, 59, 92, 30, 31}, rv[26]);
+	check_equal_vectors({96, 80, 91, 69, 40, 77, 48, 81, 52, 53, 55, 57, 85, 59,
+			92, 30, 31}, rv[26]);
 	check_equal_vectors({29,
 	                     30,
 	                     31,
@@ -1439,11 +1434,11 @@ BOOST_AUTO_TEST_CASE(test_rectangle_intersection_random_huge) {
 	                     99},
 	                    rv[34]);
 	check_equal_vectors({64, 65, 70, 41, 74, 82, 78, 79, 50, 83, 58, 90, 94, 95}, rv[35]);
-	check_equal_vectors(
-	   {41, 42, 48, 49, 55, 57, 59, 63, 67, 68, 69, 76, 77, 79, 80, 81, 83, 88, 91, 92, 94, 99},
+	check_equal_vectors({41, 42, 48, 49, 55, 57, 59, 63, 67, 68, 69, 76, 77, 79,
+			80, 81, 83, 88, 91, 92, 94, 99},
 	   rv[36]);
-	check_equal_vectors(
-	   {39, 41, 46, 47, 49, 55, 57, 59, 62, 63, 66, 67, 68, 74, 79, 83, 84, 87, 91, 92, 94, 98, 99},
+	check_equal_vectors({39, 41, 46, 47, 49, 55, 57, 59, 62, 63, 66, 67, 68, 74,
+			79, 83, 84, 87, 91, 92, 94, 98, 99},
 	   rv[37]);
 	check_equal_vectors({39,
 	                     41,
@@ -1558,8 +1553,8 @@ BOOST_AUTO_TEST_CASE(test_rectangle_intersection_random_huge) {
 	                     98,
 	                     99},
 	                    rv[41]);
-	check_equal_vectors(
-	   {80, 98, 67, 68, 69, 81, 76, 77, 46, 48, 49, 91, 55, 88, 57, 59, 92, 94}, rv[42]);
+	check_equal_vectors({80, 98, 67, 68, 69, 81, 76, 77, 46, 48, 49, 91, 55, 88,
+			57, 59, 92, 94}, rv[42]);
 	check_equal_vectors({96, 49, 77}, rv[43]);
 	check_equal_vectors({69, 71, 75, 45, 80, 52, 89}, rv[44]);
 	check_equal_vectors({50,
@@ -1712,8 +1707,8 @@ BOOST_AUTO_TEST_CASE(test_rectangle_intersection_random_huge) {
 	                     95,
 	                     97},
 	                    rv[50]);
-	check_equal_vectors(
-	   {64, 65, 93, 70, 71, 78, 79, 80, 82, 83, 52, 97, 86, 56, 89, 58, 90, 94}, rv[51]);
+	check_equal_vectors({64, 65, 93, 70, 71, 78, 79, 80, 82, 83, 52, 97, 86, 56,
+			89, 58, 90, 94}, rv[51]);
 	check_equal_vectors({53,
 	                     54,
 	                     55,
@@ -1768,30 +1763,30 @@ BOOST_AUTO_TEST_CASE(test_rectangle_intersection_random_huge) {
 	                     98,
 	                     99},
 	                    rv[55]);
-	check_equal_vectors(
-	   {64, 65, 97, 69, 70, 93, 78, 79, 80, 82, 83, 89, 58, 60, 90, 94, 95}, rv[56]);
-	check_equal_vectors(
-	   {96, 66, 67, 68, 69, 76, 98, 79, 80, 81, 91, 84, 94, 87, 59, 92, 62, 63}, rv[57]);
-	check_equal_vectors(
-	   {64, 65, 68, 69, 70, 97, 72, 74, 78, 79, 80, 82, 83, 84, 89, 90, 60, 93, 94, 95}, rv[58]);
+	check_equal_vectors({64, 65, 97, 69, 70, 93, 78, 79, 80, 82, 83, 89, 58, 60,
+			90, 94, 95}, rv[56]);
+	check_equal_vectors({96, 66, 67, 68, 69, 76, 98, 79, 80, 81, 91, 84, 94, 87,
+			59, 92, 62, 63}, rv[57]);
+	check_equal_vectors({64, 65, 68, 69, 70, 97, 72, 74, 78, 79, 80, 82, 83,
+			84, 89, 90, 60, 93, 94, 95}, rv[58]);
 	check_equal_vectors({96, 98, 67, 68, 69, 76, 79, 80, 81, 84, 94, 87, 91, 92, 62, 63}, rv[59]);
-	check_equal_vectors(
-	   {64, 65, 68, 70, 97, 72, 73, 78, 79, 80, 82, 83, 84, 94, 90, 62, 95}, rv[60]);
+	check_equal_vectors({64, 65, 68, 70, 97, 72, 73, 78, 79, 80, 82, 83, 84, 94,
+			90, 62, 95}, rv[60]);
 	check_equal_vectors({65, 69, 71, 72, 75, 80, 86, 89}, rv[61]);
-	check_equal_vectors(
-	   {66, 67, 68, 69, 72, 74, 76, 98, 79, 80, 81, 83, 84, 99, 87, 89, 91, 92, 94, 63}, rv[62]);
+	check_equal_vectors({66, 67, 68, 69, 72, 74, 76, 98, 79, 80, 81, 83, 84, 99,
+			87, 89, 91, 92, 94, 63}, rv[62]);
 	check_equal_vectors({98, 67, 68, 69, 79, 80, 81, 84, 87, 92, 94}, rv[63]);
-	check_equal_vectors(
-	   {65, 69, 70, 97, 72, 74, 78, 79, 80, 82, 83, 84, 86, 89, 90, 93, 94, 95}, rv[64]);
-	check_equal_vectors(
-	   {68, 69, 70, 71, 72, 73, 74, 75, 78, 79, 80, 82, 83, 84, 85, 86, 89, 90, 93, 94, 95, 96, 97},
+	check_equal_vectors({65, 69, 70, 97, 72, 74, 78, 79, 80, 82, 83, 84, 86, 89,
+			90, 93, 94, 95}, rv[64]);
+	check_equal_vectors({68, 69, 70, 71, 72, 73, 74, 75, 78, 79, 80, 82, 83, 84,
+			85, 86, 89, 90, 93, 94, 95, 96, 97},
 	   rv[65]);
 	check_equal_vectors({67, 68, 76, 80, 84, 87, 88, 91, 92, 94}, rv[66]);
 	check_equal_vectors({98, 68, 69, 76, 77, 79, 80, 81, 84, 87, 88, 91, 92, 94}, rv[67]);
-	check_equal_vectors(
-	   {98, 99, 69, 72, 73, 74, 76, 77, 78, 79, 80, 81, 83, 84, 87, 89, 91, 92, 93, 94}, rv[68]);
-	check_equal_vectors(
-	   {70, 71, 72, 73, 75, 78, 79, 80, 81, 83, 85, 86, 87, 89, 90, 92, 93, 94, 96, 97, 98, 99},
+	check_equal_vectors({98, 99, 69, 72, 73, 74, 76, 77, 78, 79, 80, 81, 83, 84,
+			87, 89, 91, 92, 93, 94}, rv[68]);
+	check_equal_vectors({70, 71, 72, 73, 75, 78, 79, 80, 81, 83, 85, 86, 87, 89,
+			90, 92, 93, 94, 96, 97, 98, 99},
 	   rv[69]);
 	check_equal_vectors({97, 71, 74, 78, 79, 80, 82, 83, 84, 86, 89, 90, 93, 94, 95}, rv[70]);
 	check_equal_vectors({96, 97, 72, 73, 75, 78, 79, 80, 83, 85, 86, 89, 90, 93, 94}, rv[71]);
@@ -1803,8 +1798,8 @@ BOOST_AUTO_TEST_CASE(test_rectangle_intersection_random_huge) {
 	check_equal_vectors({80, 88, 92, 96}, rv[77]);
 	check_equal_vectors({97, 79, 80, 82, 83, 84, 86, 89, 90, 93, 94, 95}, rv[78]);
 	check_equal_vectors({97, 98, 99, 80, 82, 83, 84, 86, 87, 89, 90, 93, 94, 95}, rv[79]);
-	check_equal_vectors(
-	   {96, 97, 98, 99, 81, 82, 83, 84, 85, 86, 87, 89, 90, 91, 92, 93, 94, 95}, rv[80]);
+	check_equal_vectors({96, 97, 98, 99, 81, 82, 83, 84, 85, 86, 87, 89, 90, 91,
+			92, 93, 94, 95}, rv[80]);
 	check_equal_vectors({96, 98, 92, 94}, rv[81]);
 	check_equal_vectors({97, 83, 86, 89, 90, 93, 94, 95}, rv[82]);
 	check_equal_vectors({97, 98, 84, 86, 89, 90, 93, 94, 95}, rv[83]);
@@ -1825,7 +1820,3 @@ BOOST_AUTO_TEST_CASE(test_rectangle_intersection_random_huge) {
 	check_equal_vectors({99}, rv[98]);
 	check_equal_vectors({}, rv[99]);
 };
-
-BOOST_AUTO_TEST_CASE(test_rectangle_intersection_random_huge1) {
-#include "/tmp/blub.txt"
-}

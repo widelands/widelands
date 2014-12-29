@@ -3,6 +3,4 @@ wl_test(test_geometry
    test_geometry.cc
  DEPENDS
    base_geometry
-   base_log
-   base_scoped_timer
 )

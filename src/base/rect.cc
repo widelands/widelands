@@ -20,7 +20,6 @@
 #include "base/rect.h"
 
 #include <algorithm>
-#include <set>
 #include <vector>
 
 #include "base/log.h"
@@ -79,30 +78,31 @@ struct RectWrapper {
 	const FloatRect* r;
 };
 
-using ResultType = std::set<std::pair<size_t, size_t>>;
-
-void report_pair(const size_t a, const size_t b, ResultType* result) {
-	result->insert(std::make_pair(std::min(a, b), std::max(a, b)));
+inline void report_pair(size_t a, size_t b, OverlappingRects* result) {
+	if (a > b) {
+		std::swap(a, b);
+	}
+	(*result)[a].push_back(b);
 }
 
 void stab(const std::vector<RectWrapper>& H,
           const std::vector<size_t>& A,
           const std::vector<size_t>& B,
-          ResultType* result) {
-	size_t i = 0;
-	size_t j = 0;
-	while (i < A.size() && j < B.size()) {
-		if (H[A[i]].top() < H[B[j]].top()) {
-			size_t k = j;
-			while (k < B.size() && H[B[k]].top() < H[A[i]].bottom()) {
-				report_pair(H[A[i]].original_index, H[B[k]].original_index, result);
+          OverlappingRects* result) {
+	auto i = A.begin();
+	auto j = B.begin();
+	while (i != A.end() && j != B.end()) {
+		if (H[*i].top() < H[*j].top()) {
+			auto k = j;
+			while (k != B.end() && H[*k].top() < H[*i].bottom()) {
+				report_pair(H[*i].original_index, H[*k].original_index, result);
 				++k;
 			}
 			++i;
 		} else {
-			size_t k = i;
-			while (k < A.size() && H[A[k]].top() < H[B[j]].bottom()) {
-				report_pair(H[B[j]].original_index, H[A[k]].original_index, result);
+			auto k = i;
+			while (k != A.end() && H[*k].top() < H[*j].bottom()) {
+				report_pair(H[*j].original_index, H[*k].original_index, result);
 				++k;
 			}
 			++j;
@@ -114,73 +114,65 @@ void detect(const std::vector<VerticalEdge>& V,
             size_t low_index,
             size_t high_index,
             const std::vector<RectWrapper>& H,
-            ResultType* result) {
+            OverlappingRects* result) {
 	if (high_index - low_index < 2) {
 		return;
 	}
-
-	std::vector<int> count1(H.size());
-	std::vector<int> count2(H.size());
-
 
 	const float min_value = V[low_index].value;
 	const float max_value = V[high_index - 1].value;
 
 	const size_t mid_index = (high_index + low_index) / 2;
-	for (size_t i = low_index; i < mid_index; ++i) {
-		++count1[V[i].corresponding_rect_in_H];
-	}
-	for (size_t i = mid_index; i < high_index; ++i) {
-		++count2[V[i].corresponding_rect_in_H];
-	}
 
 	std::vector<size_t> S11, S22, S12, S21;
-	for (size_t i = 0; i < H.size(); ++i) {
-		if (count1[i] == 0 && count2[i] == 0) {
-			continue;
-		}
-
-		if (count1[i] == 2 && count2[i] == 0) {
-			S11.push_back(i);
-		} else if (count1[i] == 0 && count2[i] == 2) {
-			S22.push_back(i);
-		} else if (count1[i] == 1 && count2[i] == 0) {
-			// If the right edge is over the highest value, we span V2, otherwise
-			// we don't.
-			if (H[i].right() > max_value) {
-				S12.push_back(i);
-			} else {
-				S11.push_back(i);
-			}
-		} else if (count1[i] == 0 && count2[i] == 1) {
-			// If the left edge is lower than the lowest value, we do span V1
-			// otherwise we don't.
-			if (H[i].left() < min_value) {
-				S21.push_back(i);
-			} else {
-				S22.push_back(i);
-			}
+	for (size_t i = low_index; i < mid_index; ++i) {
+		const int k = V[i].corresponding_rect_in_H;
+		// If the right edge is over the highest value, we span V2, otherwise
+		// we don't.
+		if (H[k].right() > max_value) {
+			S12.push_back(k);
+		} else {
+			S11.push_back(k);
 		}
 	}
+
+	for (size_t i = mid_index; i < high_index; ++i) {
+		const int k = V[i].corresponding_rect_in_H;
+		// If the left edge is lower than the lowest value, we do span V1
+		// otherwise we don't.
+		if (H[k].left() < min_value) {
+			S21.push_back(k);
+		} else {
+			S22.push_back(k);
+		}
+	}
+
+	std::sort(S11.begin(), S11.end());
+	S11.erase(std::unique(S11.begin(), S11.end()), S11.end());
+	std::sort(S12.begin(), S12.end());
+	S12.erase(std::unique(S12.begin(), S12.end()), S12.end());
+	std::sort(S22.begin(), S22.end());
+	S22.erase(std::unique(S22.begin(), S22.end()), S22.end());
+	std::sort(S21.begin(), S21.end());
+	S21.erase(std::unique(S21.begin(), S21.end()), S21.end());
 
 	stab(H, S12, S22, result);
 	stab(H, S21, S11, result);
 	stab(H, S12, S21, result);
 
-	detect(V, low_index, (low_index + high_index) / 2, H, result);
-	detect(V, (low_index + high_index) / 2, high_index, H, result);
+	detect(V, low_index, mid_index, H, result);
+	detect(V, mid_index, high_index, H, result);
 }
 
 }  // namespace
 
-std::vector<std::vector<int>> report(const std::vector<FloatRect>& rectangles) {
+OverlappingRects find_overlapping_rectangles(const std::vector<FloatRect>& rectangles) {
 	std::vector<RectWrapper> H;
 	H.reserve(rectangles.size());
 	for (size_t i = 0; i < rectangles.size(); ++i) {
 		H.emplace_back(i, &rectangles[i]);
 	}
 	std::sort(H.begin(), H.end());
-
 
 	std::vector<VerticalEdge> V;
 	for (size_t i = 0; i < H.size(); ++i) {
@@ -190,14 +182,13 @@ std::vector<std::vector<int>> report(const std::vector<FloatRect>& rectangles) {
 	}
 	std::sort(V.begin(), V.end());
 
-	ResultType result;
-	detect(V, 0, V.size(), H, &result);
-
-	std::vector<std::vector<int>> rv;
+	OverlappingRects rv;
 	rv.resize(rectangles.size());
+	detect(V, 0, V.size(), H, &rv);
 
-	for (const auto& p : result) {
-		rv[p.first].push_back(p.second);
+	for (auto& vec : rv) {
+		std::sort(vec.begin(), vec.end());
+		vec.erase(std::unique(vec.begin(), vec.end()), vec.end());
 	}
 	return rv;
 }
