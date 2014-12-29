@@ -1,3 +1,5 @@
+add_subdirectory(test)
+
 wl_library(base_macros
   SRCS
     macros.h
@@ -30,11 +32,15 @@ wl_library(base_i18n
     base_macros
 )
 
+# NOCOMMIT(#sirver): remove base_log
 wl_library(base_geometry
   SRCS
     point.h
     point.cc
     rect.h
+    rect.cc
+  DEPENDS
+    base_log
 )
 
 wl_library(base_md5
