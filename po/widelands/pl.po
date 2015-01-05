@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-12-16 11:38+0000\n"
-"PO-Revision-Date: 2014-12-17 06:14+0000\n"
+"PO-Revision-Date: 2015-01-04 18:18+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-12-18 05:42+0000\n"
+"X-Launchpad-Export-Date: 2015-01-05 05:26+0000\n"
 "X-Generator: Launchpad (build 17286)\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -2386,11 +2386,11 @@ msgstr ""
 #: ../../src/ui_fsmenu/launch_mpg.cc:487
 #, c-format
 msgid "You are Player %i."
-msgstr ""
+msgstr "Jesteś graczem %i."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:488
 msgid "You are a spectator."
-msgstr ""
+msgstr "Jesteś obserwatorem."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:548
 msgid "Saved players are:"
@@ -2802,12 +2802,12 @@ msgstr "Wyjdź z Widelands"
 #: ../../src/ui_fsmenu/main.cc:70
 #, c-format
 msgid "Version %1$s (%2$s)"
-msgstr ""
+msgstr "Wersja %1$s (%2$s)"
 
 #. * TRANSLATORS: Placeholders are the copyright years
 #: ../../src/ui_fsmenu/main.cc:75
 msgid "(C) %1%-%2% by the Widelands Development Team"
-msgstr ""
+msgstr "(C) %1%-%2% Zespół Rozwojowy Widelands"
 
 #: ../../src/ui_fsmenu/main.cc:80
 msgid "Licensed under the GNU General Public License V2.0"
@@ -3124,7 +3124,7 @@ msgstr "Użyj języka systemu"
 
 #: ../../src/ui_fsmenu/options.cc:407
 msgid "English"
-msgstr ""
+msgstr "Angielski"
 
 #: ../../src/ui_fsmenu/options.cc:547
 msgid "Distance for windows to snap to other panels:"

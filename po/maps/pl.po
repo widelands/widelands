@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-12-16 11:38+0000\n"
-"PO-Revision-Date: 2014-11-17 11:58+0000\n"
+"PO-Revision-Date: 2015-01-04 18:34+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-17 05:33+0000\n"
+"X-Launchpad-Export-Date: 2015-01-05 05:26+0000\n"
 "X-Generator: Launchpad (build 17286)\n"
 "Language: pl\n"
 
@@ -58,15 +58,15 @@ msgstr ""
 
 #: ../../campaigns/campaigns.conf:27
 msgid "The Second Empire"
-msgstr ""
+msgstr "Drugie Imperium"
 
 #: ../../campaigns/campaigns.conf:29
 msgid "Barbarians"
-msgstr ""
+msgstr "Barbarzyńcy"
 
 #: ../../campaigns/campaigns.conf:31
 msgid "Easy. Introduces the Barbarians"
-msgstr ""
+msgstr "Łatwy. Wprowadza barbarzyńców"
 
 #: ../../campaigns/campaigns.conf:32
 msgid ""
@@ -84,18 +84,29 @@ msgid ""
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
 msgstr ""
+"W dniu śmierci Chat'Karuth był już starym człowiekiem, ojcem trzech silnych "
+"i ambitnych synów i watażką komendującym armią gotową stawić czoła każdemu, "
+"kto wystąpiłby przeciwko pradawnym lasom. Pod koniec jego wspaniałych rządów "
+"Chat'Karuth wyznaczył swojego najstarszego syna, Throna, jako następcę - co "
+"nie zaspokoiło ambicji reszty rodzeństwa. Stary watażka o tym wiedział. Za "
+"radą ojca Thron opuścił stolicę, Al'thunran, dom Tronu Posród Drzew i "
+"wycofał swoje siły na wysokie wzgórza, gdzie pochował zwłoki swojego ojca. "
+"Tam przysiągł na bogów i ducha ojca, że powróci i przywróci porządek. "
+"Podczas gdy jego bracia walczą ślepo ze sobą, Thronem i siłami, które "
+"pozostawił, by strzegły granic Al'thunran, ten próbuje na nowo pojednać "
+"rodzeństwo i zmusić plemiona do ponownego marszu pod wspólnym sztandarem."
 
 #: ../../campaigns/campaigns.conf:35
 msgid "The Months of Exile"
-msgstr ""
+msgstr "Miesiące wygnania"
 
 #: ../../campaigns/campaigns.conf:37
 msgid "Empire"
-msgstr ""
+msgstr "Imperium"
 
 #: ../../campaigns/campaigns.conf:39
 msgid "Easy. Introduces the Empire"
-msgstr ""
+msgstr "Łatwy. Wprowadza Imperium"
 
 #: ../../campaigns/campaigns.conf:40
 msgid ""
