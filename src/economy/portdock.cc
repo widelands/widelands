@@ -218,6 +218,8 @@ void PortDock::cleanup(EditorGameBase& egbase) {
 				Player& player = owner();
 				log("Message: Portdock lost, trying to restore it (player %d)\n",
 				    player.player_number());
+				printf("Message: Portdock lost, trying to restore it (player %d)\n", //NOCOM
+				    player.player_number());
 				wh->restore_portdock_or_destroy(egbase);
 				return;
 			}

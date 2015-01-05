@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "base/macros.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
@@ -165,11 +163,11 @@ void Ship::wakeup_neighbours(Game& game) {
  * ivar1 = helper flag for coordination of mutual evasion of ships
  */
 const Bob::Task Ship::taskShip = {
-	"ship",
-	static_cast<Bob::Ptr>(&Ship::ship_update),
-	nullptr,
-	nullptr,
-	true  // unique task
+   "ship",
+   static_cast<Bob::Ptr>(&Ship::ship_update),
+   nullptr,
+   nullptr,
+   true  // unique task
 };
 
 void Ship::start_task_ship(Game& game) {
@@ -452,11 +450,12 @@ void Ship::ship_update_expedition(Game& game, Bob::State&) {
 			// Send a message to the player, that a new port space was found
 			std::string msg_head = _("Port Space Found");
 			std::string msg_body = _("An expedition ship found a new port build space.");
-			send_message(game, "exp_port_space", msg_head, msg_body, "port.png");
+			send_message(game, msg_head, msg_body, "port.png");
 		}
 		m_expedition->seen_port_buildspaces.swap(temp_port_buildspaces);
 		if (new_port_space) {
-			Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::kWaitingForCommand));
+			Notifications::publish(
+			   NoteShipMessage(this, NoteShipMessage::Message::kWaitingForCommand));
 		}
 	}
 }
@@ -547,6 +546,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 		start_task_idle(game, descr().main_animation(), -1);
 		return;
 	}
+
 	case EXP_SCOUTING: {
 		if (m_expedition->island_exploration) {  // Exploration of the island
 			if (exp_close_to_coast()) {
@@ -567,8 +567,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 						std::string msg_head = _("Island Circumnavigated");
 						std::string msg_body = _("An expedition ship sailed around its"
 						                         " island without any events.");
-						send_message(
-						   game, "exp_island", msg_head, msg_body, "ship_explore_island_cw.png");
+						send_message(game, msg_head, msg_body, "ship_explore_island_cw.png");
 						m_ship_state = EXP_WAITING;
 
 						Notifications::publish(
@@ -629,9 +628,10 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			std::string msg_head = _("Coast Reached");
 			std::string msg_body =
 			   _("An expedition ship reached a coast and is waiting for further commands.");
-			send_message(game, "exp_coast", msg_head, msg_body, "ship_explore_island_cw.png");
+			send_message(game, msg_head, msg_body, "ship_explore_island_cw.png");
 
-			Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::kWaitingForCommand));
+			Notifications::publish(
+			   NoteShipMessage(this, NoteShipMessage::Message::kWaitingForCommand));
 
 			return;
 		}
@@ -673,12 +673,12 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			// Send a message to the player, that a port constructionsite is gone
 			std::string msg_head = _("New port constructionsite is gone");
 			std::string msg_body = _("Unloading of wares failed, expedition is cancelled now.");
-			send_message(game, "exp_port_space", msg_head, msg_body, "port.png");
+			send_message(game, msg_head, msg_body, "port.png");
 			send_signal(game, "cancel_expedition");
 		}
 
 		if (m_items.empty() || !baim) {  // we are done, either way
-			m_ship_state = TRANSPORT;  // That's it, expedition finished
+			m_ship_state = TRANSPORT;     // That's it, expedition finished
 
 			// Bring us back into a fleet and a economy.
 			init_fleet(game);
@@ -818,7 +818,7 @@ void Ship::start_task_expedition(Game& game) {
 	// Send a message to the player, that an expedition is ready to go
 	const std::string msg_head = _("Expedition Ready");
 	const std::string msg_body = _("An expedition ship is waiting for your commands.");
-	send_message(game, "exp_ready", msg_head, msg_body, "start_expedition.png");
+	send_message(game, msg_head, msg_body, "start_expedition.png");
 	Notifications::publish(NoteShipMessage(this, NoteShipMessage::Message::kWaitingForCommand));
 }
 
@@ -930,7 +930,6 @@ void Ship::log_general_info(const EditorGameBase& egbase) {
  * \param picture picture name relative to the pics directory
  */
 void Ship::send_message(Game& game,
-                        const std::string& msgsender,
                         const std::string& title,
                         const std::string& description,
                         const std::string& picture) {
@@ -944,8 +943,12 @@ void Ship::send_message(Game& game,
 	rt_description += description;
 	rt_description += "</p></rt>";
 
-	Message* msg =
-	   new Message(msgsender, game.get_gametime(), title, rt_description, get_position(), m_serial);
+	Message* msg = new Message(Message::Type::kSeafaring,
+	                           game.get_gametime(),
+	                           title,
+	                           rt_description,
+	                           get_position(),
+	                           m_serial);
 
 	get_owner()->add_message(game, *msg);
 }

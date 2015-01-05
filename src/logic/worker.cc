@@ -938,12 +938,24 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 					 % rdescr->name().c_str()
 					 % _("A geologist found resources.")).str();
 
+			Message::Type message_type = Message::Type::kGeologists;
+			if (rdescr->name() == "coal")
+				message_type = Message::Type::kGeologistsCoal;
+			else if (rdescr->name() == "gold")
+				message_type = Message::Type::kGeologistsGold;
+			else if (rdescr->name() == "granite")
+				message_type = Message::Type::kGeologistsGranite;
+			else if (rdescr->name() == "iron")
+				message_type = Message::Type::kGeologistsIron;
+			else if (rdescr->name() == "water")
+				message_type = Message::Type::kGeologistsWater;
+
 			//  We should add a message to the player's message queue - but only,
 			//  if there is not already a similar one in list.
 			owner().add_message_with_timeout
 				(game,
 				 *new Message
-				 	("geologist " + rdescr->name(), // e.g. "geologist gold"
+					(message_type,
 					 game.get_gametime(),
 				 	 rdescr->descname(),
 				 	 message,
@@ -1843,7 +1855,7 @@ void Worker::return_update(Game & game, State & state)
 		owner().add_message
 			(game,
 			 *new Message
-			 	("game engine",
+				(Message::Type::kGameLogic,
 				 game.get_gametime(),
 			 	 _("Worker got lost!"),
 				 message,

@@ -78,6 +78,8 @@ struct DefaultAI : ComputerPlayer {
 		NORMAL = 1,
 		DEFENSIVE = 0,
 	};
+	
+	enum class WalkSearch: uint8_t {kAnyPlayer, kOtherPlayers};
 
 	/// Implementation for Aggressive
 	struct AggressiveImpl : public ComputerPlayer::Implementation {
@@ -165,6 +167,10 @@ private:
 	uint32_t get_stocklevel(Widelands::WareIndex);  // count all direct outputs_
 	void check_helpersites(int32_t);
 	void review_wares_targets(int32_t);
+	
+	// sometimes scanning an area in radius gives inappropriate results, so this is to verify that other player is accessible
+	//via walking
+	bool other_player_accessible(const uint32_t max_distance, int32_t* tested_fields, uint16_t* mineable_fields_count, const Widelands::Coords starting_spot, const WalkSearch type);
 
 	int32_t recalc_with_border_range(const BuildableField&, int32_t);
 	int32_t calculate_need_for_ps(BuildingObserver&, int32_t);
@@ -271,6 +277,7 @@ private:
 	int32_t spots_;  // sum of buildable fields
 
 	enum {kReprioritize, kStopShipyard, kStapShipyard};
+
 	std::vector<int16_t> marineTaskQueue_;
 
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteFieldPossession>>

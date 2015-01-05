@@ -34,6 +34,13 @@
 
 // GLEW must be first. Do not include any other GL headers, it
 // should define all functions.
-#include <GL/glew.h>
+
+#ifdef USE_GLBINDING
+#   include <glbinding/gl/gl.h>
+#   include <glbinding/Binding.h>
+using namespace gl;
+#else
+#   include <GL/glew.h>
+#endif
 
 #endif  // end of include guard: WL_GRAPHIC_GL_SYSTEM_HEADERS_H

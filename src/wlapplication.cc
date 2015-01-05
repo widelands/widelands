@@ -78,7 +78,6 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/campaign_select.h"
-#include "ui_fsmenu/editor.h"
 #include "ui_fsmenu/fileview.h"
 #include "ui_fsmenu/internet_lobby.h"
 #include "ui_fsmenu/intro.h"
@@ -802,25 +801,10 @@ void WLApplication::shutdown_settings()
  * \return true if there were no fatal errors that prevent the game from running
  */
 bool WLApplication::init_hardware() {
-	uint8_t sdl_flags = 0;
 	Section & s = g_options.pull_section("global");
 
 	//Start the SDL core
-	sdl_flags =
-		SDL_INIT_VIDEO
-		|
-		(s.get_bool("coredump", false) ? SDL_INIT_NOPARACHUTE : 0);
-
-	//  NOTE Enable a workaround for bug #1784815, caused by SDL, which thinks
-	//  NOTE that it is perfectly fine for a library to tamper with the user's
-	//  NOTE privacy/powermanagement settings on the sly. The workaround was
-	//  NOTE introduced in SDL 1.2.13, so it will not work for older versions.
-	//  NOTE -> there is no such stdlib-function on win32
-	#ifndef _WIN32
-	setenv("SDL_VIDEO_ALLOW_SCREENSAVER", "1", 0);
-	#endif
-
-	if (SDL_Init(sdl_flags) == -1)
+	if (SDL_Init(SDL_INIT_VIDEO) == -1)
 		throw wexception
 			("Failed to initialize SDL, no valid video driver: %s",
 			 SDL_GetError());
@@ -1103,7 +1087,7 @@ void WLApplication::mainmenu()
 				break;
 			}
 			case FullscreenMenuMain::MenuTarget::kEditor:
-				mainmenu_editor();
+				EditorInteractive::run_editor(m_filename, m_script_to_run);
 				break;
 			default:
 			case FullscreenMenuMain::MenuTarget::kExit:
@@ -1279,42 +1263,6 @@ void WLApplication::mainmenu_multiplayer()
 				default:
 					break;
 			}
-		}
-	}
-}
-
-void WLApplication::mainmenu_editor()
-{
-	//  This is the code returned by UI::Panel::run() when the panel is dying.
-	//  Make sure that the program exits when the window manager says so.
-	static_assert
-		(static_cast<int32_t>(FullscreenMenuEditor::MenuTarget::kBack) == UI::Panel::dying_code,
-		 "Editor should be dying.");
-
-	for (;;) {
-		FullscreenMenuEditor editor_menu;
-		switch (static_cast<FullscreenMenuEditor::MenuTarget>(editor_menu.run())) {
-		case FullscreenMenuEditor::MenuTarget::kBack:
-			return;
-		case FullscreenMenuEditor::MenuTarget::kNewMap:
-			EditorInteractive::run_editor(m_filename, m_script_to_run);
-			return;
-		case FullscreenMenuEditor::MenuTarget::kLoadMap: {
-			std::string filename;
-			{
-				SinglePlayerGameSettingsProvider sp;
-				FullscreenMenuMapSelect emsm(&sp, nullptr, true);
-				if (emsm.run() <= 0)
-					break;
-
-				filename = emsm.get_map()->filename;
-			}
-			EditorInteractive::run_editor(filename.c_str(), "");
-			return;
-		}
-		default:
-			assert(false);
-			break;
 		}
 	}
 }

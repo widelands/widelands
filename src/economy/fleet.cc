@@ -162,6 +162,7 @@ void Fleet::find_other_fleet(EditorGameBase & egbase)
 		if (BaseImmovable * imm = cur.field->get_immovable()) {
 			if (imm->descr().type() == MapObjectType::PORTDOCK) {
 				if (upcast(PortDock, dock, imm)) {
+					printf (" dock has a fleet: %s\n", (dock->get_fleet())?"Y":"N"); //NOCOM
 					if (dock->get_fleet() != this && dock->get_owner() == get_owner()) {
 						dock->get_fleet()->merge(egbase, this);
 						return;
@@ -193,8 +194,11 @@ void Fleet::find_other_fleet(EditorGameBase & egbase)
  */
 void Fleet::merge(EditorGameBase & egbase, Fleet * other)
 {
+	printf(" egbase ports count: %1d\n", m_ports.size()); //NOCOM
+	printf(" other's ports count: %1d\n", other->m_ports.size()); //NOCOM	
 	if (m_ports.empty() && !other->m_ports.empty()) {
 		other->merge(egbase, this);
+		printf (" Fleet::merge early return\n"); //NOCOM
 		return;
 	}
 
@@ -226,6 +230,7 @@ void Fleet::merge(EditorGameBase & egbase, Fleet * other)
 	other->remove(egbase);
 
 	update(egbase);
+	printf (" Fleet::merge normal return\n"); //NOCOM
 }
 
 /**

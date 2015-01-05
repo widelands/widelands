@@ -62,9 +62,9 @@ void Screen::lock(Surface::LockMode mode)
 		// TODO(unknown): terrain dither picture somehow leave the alpha
 		// channel with non-1 values, so it is cleared before
 		// accessing pixels.
-		glColorMask(false, false, false, true);
+		glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_TRUE);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glColorMask(true, true, true, true);
+		glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
 		glReadPixels(0, 0, m_w, m_h, GL_RGBA, GL_UNSIGNED_BYTE, m_pixels.get());
 		swap_rows();
 	}
