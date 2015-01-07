@@ -125,7 +125,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 
 	// Subscribe to NoteFieldPossession.
 	field_possession_subscriber_ =
-		Notifications::subscribe<NoteFieldPossession>([this](const NoteFieldPossession& note) {
+	   Notifications::subscribe<NoteFieldPossession>([this](const NoteFieldPossession& note) {
 			if (note.player != player_) {
 			   return;
 		   }
@@ -136,7 +136,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 
 	// Subscribe to NoteImmovables.
 	immovable_subscriber_ =
-		Notifications::subscribe<NoteImmovable>([this](const NoteImmovable& note) {
+	   Notifications::subscribe<NoteImmovable>([this](const NoteImmovable& note) {
 			if (note.pi->owner().player_number() != player_->player_number()) {
 			   return;
 		   }
@@ -178,14 +178,14 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 			   } else {
 				   allships.back().island_circ_direction = false;
 			   }
-				break;
+			   break;
 
 			case NoteShipMessage::Message::kLost:
-			   for (std::list<ShipObserver>::iterator i = allships.begin(); i != allships.end(); ++i) {
+				for (std::list<ShipObserver>::iterator i = allships.begin(); i != allships.end(); ++i) {
 					if (i->ship == note.ship) {
 					   allships.erase(i);
 					   break;
-					}
+				   }
 			   }
 			   break;
 
@@ -199,7 +199,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 			   break;
 		   default:
 				;
-		   }
+			}
 		});
 }
 
@@ -1730,7 +1730,7 @@ bool DefaultAI::construct_building(int32_t gametime) {
 					   map.calc_distance(bf->coords, wh_obs.site->get_position());
 					nearest_distance = std::min(nearest_distance, actual_distance);
 				}
-				//but limit to 15
+				// but limit to 15
 				const uint16_t max_distance_considered = 15;
 				nearest_distance = std::min(nearest_distance, max_distance_considered);
 				prio += nearest_distance;
@@ -2826,7 +2826,7 @@ bool DefaultAI::marine_main_decisions(uint32_t const gametime) {
 	}
 	territories_count += remote_ports_coords.size();
 
-	enum class FleetStatus: uint8_t {kNeedShip = 0, kEnoughShips = 1, kDoNothing = 2 };
+	enum class FleetStatus : uint8_t {kNeedShip = 0, kEnoughShips = 1, kDoNothing = 2 };
 
 	// now we must compare ports vs ships to decide if new ship is needed or new expedition can start
 	FleetStatus enough_ships = FleetStatus::kDoNothing;
@@ -3208,12 +3208,8 @@ bool DefaultAI::check_militarysites(int32_t gametime) {
 	// look if there are any enemies building
 	FindNodeEnemiesBuilding find_enemy(player_, game());
 
-	//printf (" %1d: testing militarysite at: %3dx%3d\n",
-	//player_number(),
-	//ms->get_position().x,ms->get_position().y);
-
-	//first we make sure there is no enemy at all
-	if ( map.find_fields(Area<FCoords>(f, vision + 4), nullptr, find_enemy) == 0 ) {
+	// first we make sure there is no enemy at all
+	if (map.find_fields(Area<FCoords>(f, vision + 4), nullptr, find_enemy) == 0) {
 
 		mso.enemies_nearby_ = false;
 
@@ -3261,38 +3257,30 @@ bool DefaultAI::check_militarysites(int32_t gametime) {
 		}
 	} else {
 
-		int32_t unused1=0;
-		uint16_t unused2=0;
+		int32_t unused1 = 0;
+		uint16_t unused2 = 0;
 
-		//NOCOM
-		//bool unused3=other_player_accessible(vision + 4, &unused1, &unused2, ms->get_position(),WalkSearch::kOtherPlayers);
-		//printf ("testing military site at %3dx %3d, enemies nearby: accessible: %s, tested fields: %3d\n",
-		//ms->get_position().x,ms->get_position().y, 
-		//(unused3)?"Y":"N",
-		//unused1);
-		//end of NOCOM
-		
 		mso.enemies_nearby_ = true;
-		
-		//yes enemy is nearby, but still we must distinguish whether
-		//he is accessible (over the land)
 
-		//printf ("  going to run other_player_accessible\n");
+		// yes enemy is nearby, but still we must distinguish whether
+		// he is accessible (over the land)
 
-		if (other_player_accessible(vision + 4, &unused1, &unused2, ms->get_position(),WalkSearch::kOtherPlayers)) {
-			
+		if (other_player_accessible(
+		       vision + 4, &unused1, &unused2, ms->get_position(), WalkSearch::kOtherPlayers)) {
+
 			uint32_t const total_capacity = ms->max_soldier_capacity();
 			uint32_t const target_capacity = ms->soldier_capacity();
-	
+
 			game().send_player_change_soldier_capacity(*ms, total_capacity - target_capacity);
 			changed = true;
-	
+
 			// and also set preference to Heroes
 			if (MilitarySite::kPrefersHeroes != ms->get_soldier_preference()) {
-				game().send_player_militarysite_set_soldier_preference(*ms, MilitarySite::kPrefersHeroes);
+				game().send_player_militarysite_set_soldier_preference(
+				   *ms, MilitarySite::kPrefersHeroes);
 				changed = true;
 			}
-		} else { //otherwise decrease soldiers
+		} else {  // otherwise decrease soldiers
 			uint32_t const j = ms->soldier_capacity();
 
 			if (MilitarySite::kPrefersRookies != ms->get_soldier_preference()) {
@@ -3303,8 +3291,6 @@ bool DefaultAI::check_militarysites(int32_t gametime) {
 			}
 		}
 	}
-
-
 
 	// reorder:;
 	militarysites.push_back(militarysites.front());
@@ -3493,15 +3479,20 @@ void DefaultAI::out_of_resources_site(const ProductionSite& site) {
 		}
 }
 
-//walk and search for teritorry controlled by other player
-bool DefaultAI::other_player_accessible(const uint32_t max_distance, int32_t* tested_fields, uint16_t* mineable_fields_count, const Widelands::Coords starting_spot, const WalkSearch type) {
+// walk and search for teritorry controlled by other player
+// usually scanning radius is enough but sometimes we must walk to 
+// verify that an enemy teritory is really accessible by land
+bool DefaultAI::other_player_accessible(const uint32_t max_distance,
+                                        int32_t* tested_fields,
+                                        uint16_t* mineable_fields_count,
+                                        const Widelands::Coords starting_spot,
+                                        const WalkSearch type) {
 	Map& map = game().map();
-	// first making sure there are no other players nearby
 	std::list<uint32_t> queue;
 	std::unordered_set<uint32_t> done;
 	queue.push_front(coords_hash(starting_spot));
-	PlayerNumber const pn = player_->player_number();	
-	//Player *player = game().get_player(player_number()); NOCOM
+	PlayerNumber const pn = player_->player_number();
+
 	while (!queue.empty()) {
 		// if already processed
 		if (done.count(queue.front()) > 0) {
@@ -3521,24 +3512,23 @@ bool DefaultAI::other_player_accessible(const uint32_t max_distance, int32_t* te
 		Field* f = map.get_fcoords(tmp_coords).field;
 
 		// not interested if not walkable (starting spot is an exemption.
-		if (tmp_coords!=starting_spot && !(f->nodecaps() & MOVECAPS_WALK)) {
+		if (tmp_coords != starting_spot && !(f->nodecaps() & MOVECAPS_WALK)) {
 			continue;
 		}
 
-		// if owned by someone, but not current player:
+		// sometimes we search for any owned teritory (f.e. when considering
+		//a port location), but when testing (starting from) own military building
+		//we must ignore own teritory, of course
 		if (f->get_owned_by() > 0) {
-			if (type == WalkSearch::kAnyPlayer or 
-				(type == WalkSearch::kOtherPlayers && f->get_owned_by()!= pn ) ){
-				// just return 0 as score
-				//printf (" player searching from: %3dx%3d: other player found: %3dx%3d: field owner: %d, current player: %d\n",
-				//starting_spot.x,starting_spot.y,
-				//tmp_coords.x, tmp_coords.y,f->get_owned_by(),pn); //NOCOM
+			if (type == WalkSearch::kAnyPlayer ||
+			    (type == WalkSearch::kOtherPlayers && f->get_owned_by() != pn)) {
 				*tested_fields = done.size();
 				return true;
 			}
 		}
 
 		// increase mines counter
+		// (used when testing possible port location)
 		if (f->nodecaps() & BUILDCAPS_MINE) {
 			mineable_fields_count += 1;
 		};
@@ -3554,79 +3544,30 @@ bool DefaultAI::other_player_accessible(const uint32_t max_distance, int32_t* te
 			queue.push_front(coords_hash(neigh_coords2));
 		}
 	}
-	*tested_fields=done.size();
-	//printf (" player searching from: %3dx%3d - nothing found\n",
-	//starting_spot.x,starting_spot.y); //NOCOM
-	return false; //no players found
-}
+	*tested_fields = done.size();
 
+	return false;  // no players found
+}
 
 // this scores spot for potential colony
 uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 
 	uint8_t score = 0;
 	uint16_t mineable_fields_count = 0;
-	int32_t tested_fields=0;
-	const bool other_player = other_player_accessible(colony_scan_area_, &tested_fields, &mineable_fields_count,candidate_spot,WalkSearch::kAnyPlayer);
-	
-	//if we run into other player
-	// (in fact we should rather check for enemy....)
+	int32_t tested_fields = 0;
+	const bool other_player = other_player_accessible(colony_scan_area_,
+	                                                  &tested_fields,
+	                                                  &mineable_fields_count,
+	                                                  candidate_spot,
+	                                                  WalkSearch::kAnyPlayer);
+
+	// if we run into other player
+	// (maybe we should check for enemies, rather?)
 	if (other_player) {
 		return 0;
 	}
-	
+
 	Map& map = game().map();
-	//// first making sure there are no other players nearby
-	//std::list<uint32_t> queue;
-	//std::unordered_set<uint32_t> done;
-	//queue.push_front(coords_hash(candidate_spot));
-	//while (!queue.empty()) {
-
-		//// if already processed
-		//if (done.count(queue.front()) > 0) {
-			//queue.pop_front();
-			//continue;
-		//}
-
-		//done.insert(queue.front());
-
-		//Coords tmp_coords = coords_unhash(queue.front());
-
-		//// if beyond range
-		//if (map.calc_distance(candidate_spot, tmp_coords) > colony_scan_area_) {
-			//continue;
-		//}
-
-		//Field* f = map.get_fcoords(tmp_coords).field;
-
-		//// if owned by someone:
-		//if (f->get_owned_by() > 0) {
-			//// just return 0 as score
-			//return 0;
-		//}
-
-		//// not interested if not walkable
-		//if (!(f->nodecaps() & MOVECAPS_WALK)) {
-			//continue;
-		//}
-
-		//// increase mines counter
-		//if (f->nodecaps() & BUILDCAPS_MINE) {
-			//mineable_fields_count += 1;
-		//};
-
-		//// add neighbours to a queue (duplicates are no problem)
-		//// to relieve AI/CPU we skip every second field in each direction
-		//// obstacles are usually wider then one field
-		//for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
-			//Coords neigh_coords1;
-			//map.get_neighbour(tmp_coords, dir, &neigh_coords1);
-			//Coords neigh_coords2;
-			//map.get_neighbour(neigh_coords1, dir, &neigh_coords2);
-			//queue.push_front(coords_hash(neigh_coords2));
-		//}
-	//}
-
 	// if the island is too small
 	if (tested_fields < 50) {
 		return 0;

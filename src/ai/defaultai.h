@@ -24,7 +24,6 @@
 #include <memory>
 #include <unordered_set>
 
-
 #include "ai/ai_help_structs.h"
 #include "ai/computer_player.h"
 #include "base/i18n.h"
@@ -78,8 +77,8 @@ struct DefaultAI : ComputerPlayer {
 		NORMAL = 1,
 		DEFENSIVE = 0,
 	};
-	
-	enum class WalkSearch: uint8_t {kAnyPlayer, kOtherPlayers};
+
+	enum class WalkSearch : uint8_t {kAnyPlayer, kOtherPlayers };
 
 	/// Implementation for Aggressive
 	struct AggressiveImpl : public ComputerPlayer::Implementation {
@@ -167,10 +166,15 @@ private:
 	uint32_t get_stocklevel(Widelands::WareIndex);  // count all direct outputs_
 	void check_helpersites(int32_t);
 	void review_wares_targets(int32_t);
-	
-	// sometimes scanning an area in radius gives inappropriate results, so this is to verify that other player is accessible
-	//via walking
-	bool other_player_accessible(const uint32_t max_distance, int32_t* tested_fields, uint16_t* mineable_fields_count, const Widelands::Coords starting_spot, const WalkSearch type);
+
+	// sometimes scanning an area in radius gives inappropriate results, so this is to verify that
+	// other player is accessible
+	// via walking
+	bool other_player_accessible(uint32_t max_distance,
+	                             int32_t* tested_fields,
+	                             uint16_t* mineable_fields_count,
+	                             const Widelands::Coords starting_spot,
+	                             const WalkSearch type);
 
 	int32_t recalc_with_border_range(const BuildableField&, int32_t);
 	int32_t calculate_need_for_ps(BuildingObserver&, int32_t);
@@ -271,12 +275,12 @@ private:
 	Widelands::Coords
 	   last_attack_target_;         // flag to abuilding (position) that was attacked last time
 	int32_t next_attack_waittime_;  // second till the next attack consideration
-	bool seafaring_economy;  // false by default, until first port space is found
+	bool seafaring_economy;         // false by default, until first port space is found
 	uint32_t colony_scan_area_;  // distance from a possible port that is scanned for owned territory
 	// it decreases with failed scans
 	int32_t spots_;  // sum of buildable fields
 
-	enum {kReprioritize, kStopShipyard, kStapShipyard};
+	enum {kReprioritize, kStopShipyard, kStapShipyard };
 
 	std::vector<int16_t> marineTaskQueue_;
 

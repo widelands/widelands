@@ -167,7 +167,7 @@ const Bob::Task Ship::taskShip = {
    static_cast<Bob::Ptr>(&Ship::ship_update),
    nullptr,
    nullptr,
-   true  // unique task
+	true  // unique task
 };
 
 void Ship::start_task_ship(Game& game) {
