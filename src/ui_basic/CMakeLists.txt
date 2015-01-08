@@ -57,7 +57,7 @@ wl_library(ui_basic
     base_macros
     graphic
     graphic_color
-    graphic_image
+    graphic_surface
     graphic_text
     graphic_text_layout
     io_filesystem
