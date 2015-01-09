@@ -67,6 +67,9 @@ constexpr int kShipCheckInterval = 5 * 1000;
 constexpr int kMarineDecisionInterval = 20 * 1000;
 constexpr int kTrainingSitesCheckInterval = 30 * 1000;
 
+//this is intended for map developers, by default should be off
+constexpr bool kPrintStats = true;
+
 // Some buildings have to be built close to borders and their
 // priority might be decreased below 0, so this is to
 // compensate
@@ -103,6 +106,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
      next_trainingsites_check_due_(15 * 60 * 1000),
      next_bf_check_due_(1000),
      next_wares_review_due_(15 * 60 * 1000),
+     next_statistics_report_(30 * 60 *1000),
      inhibit_road_building_(0),
      time_of_last_construction_(0),
      enemy_last_seen_(-2 * 60 * 1000),
@@ -332,6 +336,12 @@ void DefaultAI::think() {
 	if (next_wares_review_due_ <= gametime) {
 		next_wares_review_due_ = gametime + 15 * 60 * 1000;
 		review_wares_targets(gametime);
+	}
+	
+	//print statistics
+	if (kPrintStats && next_statistics_report_ <= gametime) {
+		print_stats(gametime);
+		next_statistics_report_ += 30 * 60 * 1000; //NOCOM
 	}
 }
 
@@ -4182,31 +4192,46 @@ void DefaultAI::review_wares_targets(int32_t const gametime) {
 	}
 }
 
-// This is used for profiling, so usually this is not used :)
-void DefaultAI::print_land_stats() {
-	// this will just print statistics of land size
-	// intended for AI development only
+// This is used for map tweaking, so usually this is not used :)
+void DefaultAI::print_stats(uint32_t const gametime) {
+
+	//general statistics
 	uint32_t plr_in_game = 0;
-	uint32_t sum_l = 0;
-	uint32_t count_l = 0;
-	uint32_t sum_m = 0;
-	uint32_t count_m = 0;
+	PlayerNumber const pn = player_number();
 	PlayerNumber const nr_players = game().map().get_nrplayers();
 	iterate_players_existing_novar(p, nr_players, game())++ plr_in_game;
 	const Game::GeneralStatsVector& genstats = game().get_general_statistics();
 
-	for (uint8_t j = 1; j <= plr_in_game; ++j) {
-		log(" player: %1d, landsize: %5d, military strength: %3d\n",
-		    j,
-		    genstats[j - 1].land_size.back(),
-		    genstats[j - 1].miltary_strength.back());
+	log(" %1d: Statistics: landsize: %5d, military strength: %3d (time: %3d:%2d)\n",
+	    pn - 1,
+	    genstats[pn - 1].land_size.back(),
+	    genstats[pn - 1].miltary_strength.back(),
+	    gametime/(60*60*1000),
+	    (gametime/(60*1000))%60);
 
-		sum_l += genstats[j - 1].land_size.back();
-		count_l += 1;
-		sum_m += genstats[j - 1].miltary_strength.back();
-		count_m += 1;
+	//testing basic wares - printing ones with 0 stock in warehouses
+	if (warehousesites.empty()) {
+		printf (" %1d: Missing materials: no warehouses left\n",
+		pn);
+		return;
 	}
-
-	assert(count_l > 0 && count_m > 0);
-	log(" Average: Landsize: %5d, military strength: %3d\n", sum_l / count_l, sum_m / count_m);
+	
+	//we test following materials	
+	const std::vector <std::string> materials = { "coal", "log", "ironore", "marble",
+		 "plank", "water", "goldore", "granite", "fish", "diamond", "stone", "corn", 
+		 "wheat", "grape", "quartz" };
+	std::string summary="";
+	for (uint32_t j = 0; j < materials.size(); ++j) {
+		WareIndex const index = tribe_->ware_index(materials.at(j));
+		if (index == INVALID_INDEX) {
+			continue;
+		}
+		if (get_warehoused_stock(index)>0) {
+			continue;
+		}
+		summary = summary+materials.at(j)+", ";
+	}
+	printf (" %1d: Missing materials: %s\n",
+		pn,
+		summary.c_str());
 }

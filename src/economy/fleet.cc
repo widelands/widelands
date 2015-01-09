@@ -106,6 +106,7 @@ void Fleet::init(EditorGameBase & egbase)
 
 	if (m_ships.empty() && m_ports.empty()) {
 		molog("Empty fleet initialized; disband immediately\n");
+		printf("Empty fleet initialized; disband immediately\n");		
 		remove(egbase);
 		return;
 	}
