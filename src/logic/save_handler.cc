@@ -21,6 +21,8 @@
 
 #include <memory>
 
+#include <boost/format.hpp>
+
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/scoped_timer.h"
@@ -70,6 +72,25 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 		}
 
 		log("Autosave: interval elapsed (%d s), saving\n", elapsed);
+		//roll autosaves
+		//TODO(Tino): make configurable option
+		int32_t number_of_rolls = 5;
+		std::string next_file = (boost::format("%s_%i") % filename % number_of_rolls).str();
+		std::string filename_r = create_file_name(get_base_dir(), next_file);
+		if (g_fs->file_exists(filename_r)) {
+			g_fs->fs_unlink(filename_r);
+		}
+		number_of_rolls--;
+		while (number_of_rolls >= 0) {
+			next_file = (boost::format("%s_%i") % filename % number_of_rolls).str();
+			std::string filename_p = create_file_name(get_base_dir(), next_file);
+			if (g_fs->file_exists(filename_p)) {
+				g_fs->fs_rename(filename_p, filename_r);
+			}
+			filename_r = filename_p;
+			number_of_rolls--;
+		}
+		filename = "wl_autosave_0";
 	}
 
 	// TODO(unknown): defer saving to next tick so that this message is shown
