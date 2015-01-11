@@ -338,6 +338,9 @@ WLApplication::~WLApplication()
 // dispatching events until it is time to quit.
 void WLApplication::run()
 {
+	// This also grabs the mouse cursor if so desired.
+	refresh_graphics();
+
 	if (m_game_type == EDITOR) {
 		g_sound_handler.start_music("ingame");
 		EditorInteractive::run_editor(m_filename, m_script_to_run);
@@ -850,9 +853,6 @@ void WLApplication::shutdown_hardware()
 void WLApplication::parse_commandline
 	(int const argc, char const * const * const argv)
 {
-	//TODO(unknown): EXENAME gets written out on windows!
-	m_commandline["EXENAME"] = argv[0];
-
 	for (int i = 1; i < argc; ++i) {
 		std::string opt = argv[i];
 		std::string value;
