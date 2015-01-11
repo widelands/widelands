@@ -73,8 +73,7 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 
 		log("Autosave: interval elapsed (%d s), saving\n", elapsed);
 		//roll autosaves
-		//TODO(Tino): make configurable option
-		int32_t number_of_rolls = 5;
+		int32_t number_of_rolls = g_options.pull_section("global").get_int("autosave_roll");
 		std::string next_file = (boost::format("%s_%i") % filename % number_of_rolls).str();
 		std::string filename_r = create_file_name(get_base_dir(), next_file);
 		if (g_fs->file_exists(filename_r)) {

@@ -52,6 +52,7 @@ public:
 		bool fx;
 		std::string language;
 		int32_t autosave; // autosave interval in minutes
+		int32_t autosave_roll;
 		uint32_t maxfps;
 		uint32_t remove_replays;
 		bool remove_syncstreams;
@@ -189,6 +190,8 @@ private:
 
 	UI::Textarea                m_label_snap_dis_panel, m_label_snap_dis_border;
 	UI::SpinBox                 m_sb_dis_panel, m_sb_dis_border;
+	UI::Textarea                m_label_autosave_roll;
+	UI::SpinBox                 m_sb_autosave_roll;
 	UI::Checkbox                m_transparent_chat;
 	UI::MultilineTextarea       m_label_transparent_chat;
 	UI::Checkbox                m_message_sound;
