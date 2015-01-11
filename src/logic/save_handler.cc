@@ -73,10 +73,10 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 
 		log("Autosave: interval elapsed (%d s), saving\n", elapsed);
 		//roll autosaves
-		int32_t number_of_rolls = g_options.pull_section("global").get_int("autosave_roll");
+		int32_t number_of_rolls = g_options.pull_section("global").get_int("autosave_roll") - 1;
 		std::string next_file = (boost::format("%s_%i") % filename % number_of_rolls).str();
 		std::string filename_r = create_file_name(get_base_dir(), next_file);
-		if (g_fs->file_exists(filename_r)) {
+		if (number_of_rolls > 0 && g_fs->file_exists(filename_r)) {
 			g_fs->fs_unlink(filename_r);
 		}
 		number_of_rolls--;
@@ -89,7 +89,7 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 			filename_r = filename_p;
 			number_of_rolls--;
 		}
-		filename = "wl_autosave_0";
+		filename = next_file;
 	}
 
 	// TODO(unknown): defer saving to next tick so that this message is shown

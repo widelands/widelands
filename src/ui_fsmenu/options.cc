@@ -633,6 +633,13 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 					 boost::ref(*this)));
 	}
 
+	for (UI::Button* temp_button : m_sb_autosave_roll.get_buttons()) {
+		temp_button->sigclicked.connect
+				(boost::bind
+					(&FullscreenMenuAdvancedOptions::update_sb_autosave_roll_unit,
+					 boost::ref(*this)));
+	}
+
 	m_cancel.sigclicked.connect
 		(boost::bind
 			(&FullscreenMenuAdvancedOptions::end_modal,
@@ -678,6 +685,9 @@ void FullscreenMenuAdvancedOptions::update_sb_dis_border_unit() {
 	m_sb_dis_border.set_unit(ngettext("pixel", "pixels", m_sb_dis_border.get_value()));
 }
 
+void FullscreenMenuAdvancedOptions::update_sb_autosave_roll_unit() {
+	m_sb_autosave_roll.set_unit(ngettext("file", "files", m_sb_autosave_roll.get_value()));
+}
 
 OptionsCtrl::OptionsStruct FullscreenMenuAdvancedOptions::get_values() {
 	// Write all remaining data from UI elements

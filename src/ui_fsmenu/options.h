@@ -177,6 +177,7 @@ public:
 private:
 	void update_sb_dis_panel_unit();
 	void update_sb_dis_border_unit();
+	void update_sb_autosave_roll_unit();
 
 	uint32_t const              m_vbutw;
 	uint32_t const              m_butw;
