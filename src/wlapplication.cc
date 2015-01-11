@@ -853,9 +853,6 @@ void WLApplication::shutdown_hardware()
 void WLApplication::parse_commandline
 	(int const argc, char const * const * const argv)
 {
-	//TODO(unknown): EXENAME gets written out on windows!
-	m_commandline["EXENAME"] = argv[0];
-
 	for (int i = 1; i < argc; ++i) {
 		std::string opt = argv[i];
 		std::string value;
