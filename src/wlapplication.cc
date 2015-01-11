@@ -338,6 +338,9 @@ WLApplication::~WLApplication()
 // dispatching events until it is time to quit.
 void WLApplication::run()
 {
+	// This also grabs the mouse cursor if so desired.
+	refresh_graphics();
+
 	if (m_game_type == EDITOR) {
 		g_sound_handler.start_music("ingame");
 		EditorInteractive::run_editor(m_filename, m_script_to_run);
