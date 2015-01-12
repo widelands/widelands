@@ -70,36 +70,29 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 		if (elapsed < autosave_interval_in_seconds) {
 			return;
 		}
-
-		// NOCOM(#codereview): add the filename to this log message - it will make it easier to figure out which
-		// autosave to look at.
-		log("Autosave: interval elapsed (%d s), saving\n", elapsed);
 		//roll autosaves
-		// NOCOM(#codereview): I think having this as an option is useful, having it accesible through the GUI not so: people
-		// will mostly not touch it or even turn it lower. And this is strictly a dev option anyways.... In the long run, I'd like
-		// to get rid of the advanced options menu completely.
-		int32_t number_of_rolls = g_options.pull_section("global").get_int("autosave_roll") - 1;
-		// NOCOM(#codereview): shuold this not go from 0-9 instead of 1-10? Not
-		// sure. Also, use %02d so that file sort lexicographically too.
-		std::string next_file = (boost::format("%s_%i") % filename % number_of_rolls).str();
-		// NOCOM(#codereview): what does _r stand for?
-		std::string filename_r = create_file_name(get_base_dir(), next_file);
-		// NOCOM(#codereview): that seems wrong - you first delete filename_10, then try to save into filename_09. Check?
-		if (number_of_rolls > 0 && g_fs->file_exists(filename_r)) {
-			g_fs->fs_unlink(filename_r);
+		int32_t number_of_rolls = g_options.pull_section("global").get_int("rolling_autosave") - 1;
+		std::string filename_previous =
+			create_file_name(get_base_dir(),
+								(boost::format("%s_%02d") % filename % number_of_rolls).str());
+		if (number_of_rolls > 0 && g_fs->file_exists(filename_previous)) {
+			g_fs->fs_unlink(filename_previous);
+			log("Autosave: Deleted %s\n", filename_previous.c_str());
 		}
 		number_of_rolls--;
 		while (number_of_rolls >= 0) {
-			next_file = (boost::format("%s_%i") % filename % number_of_rolls).str();
-			// NOCOM(#codereview): _p?
-			const std::string filename_p = create_file_name(get_base_dir(), next_file);
-			if (g_fs->file_exists(filename_p)) {
-				g_fs->fs_rename(filename_p, filename_r);
+			const std::string filename_next =
+				create_file_name(get_base_dir(),
+									(boost::format("%s_%02d") % filename % number_of_rolls).str());
+			if (g_fs->file_exists(filename_next)) {
+				g_fs->fs_rename(filename_next, filename_previous);
+				log("Autosave: Rolled %s to %s\n", filename_next.c_str(), filename_previous.c_str());
 			}
-			filename_r = filename_p;
+			filename_previous = filename_next;
 			number_of_rolls--;
 		}
-		filename = next_file;
+		filename = filename_previous;
+		log("Autosave: interval elapsed (%d s), saving %s\n", elapsed, filename.c_str());
 	}
 
 	// TODO(unknown): defer saving to next tick so that this message is shown

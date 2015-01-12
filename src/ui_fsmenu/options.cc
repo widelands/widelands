@@ -564,23 +564,9 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 			 opt.border_snap_distance, 0, 99, ngettext("pixel", "pixels", opt.border_snap_distance),
 			 g_gr->images().get("pics/but1.png")),
 
-	m_label_autosave_roll
-		(this,
-		 m_hmargin,
-		 m_label_snap_dis_border.get_y() + m_label_snap_dis_border.get_h() + 2 * m_padding,
-		 _("Number of files to use for autosave"), UI::Align_VCenter),
-
-	m_sb_autosave_roll
-		(this,
-			 get_w() - m_hmargin - (get_w() / 5), m_label_autosave_roll.get_y(),
-			 get_w() / 5, m_vbutw,
-			 opt.autosave_roll, 1, 10, ngettext("file", "files", opt.autosave_roll),
-			 g_gr->images().get("pics/but1.png")),
-
-
 	m_transparent_chat (this, Point(m_hmargin,
-											  m_label_autosave_roll.get_y() +
-											  m_label_autosave_roll.get_h() + m_space)),
+											  m_label_snap_dis_border.get_y() +
+											  m_label_snap_dis_border.get_h() + m_space)),
 	m_label_transparent_chat
 		(this,
 		 m_hmargin + m_transparent_chat.get_w() + m_padding, m_transparent_chat.get_y(),
@@ -633,13 +619,6 @@ FullscreenMenuAdvancedOptions::FullscreenMenuAdvancedOptions
 					 boost::ref(*this)));
 	}
 
-	for (UI::Button* temp_button : m_sb_autosave_roll.get_buttons()) {
-		temp_button->sigclicked.connect
-				(boost::bind
-					(&FullscreenMenuAdvancedOptions::update_sb_autosave_roll_unit,
-					 boost::ref(*this)));
-	}
-
 	m_cancel.sigclicked.connect
 		(boost::bind
 			(&FullscreenMenuAdvancedOptions::end_modal,
@@ -685,10 +664,6 @@ void FullscreenMenuAdvancedOptions::update_sb_dis_border_unit() {
 	m_sb_dis_border.set_unit(ngettext("pixel", "pixels", m_sb_dis_border.get_value()));
 }
 
-void FullscreenMenuAdvancedOptions::update_sb_autosave_roll_unit() {
-	m_sb_autosave_roll.set_unit(ngettext("file", "files", m_sb_autosave_roll.get_value()));
-}
-
 OptionsCtrl::OptionsStruct FullscreenMenuAdvancedOptions::get_values() {
 	// Write all remaining data from UI elements
 	os.message_sound        = m_message_sound.get_state();
@@ -697,7 +672,6 @@ OptionsCtrl::OptionsStruct FullscreenMenuAdvancedOptions::get_values() {
 	os.border_snap_distance = m_sb_dis_border.get_value();
 	os.remove_syncstreams   = m_remove_syncstreams.get_state();
 	os.transparent_chat     = m_transparent_chat.get_state();
-	os.autosave_roll        = m_sb_autosave_roll.get_value();
 	return os;
 }
 
@@ -743,7 +717,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct() {
 	opt.music = !m_opt_section.get_bool("disable_music", false);
 	opt.fx = !m_opt_section.get_bool("disable_fx", false);
 	opt.autosave = m_opt_section.get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
-	opt.autosave_roll = m_opt_section.get_int("autosave_roll", 5);
+	opt.rolling_autosave = m_opt_section.get_int("rolling_autosave", 5);
 	opt.maxfps = m_opt_section.get_int("maxfps", 25);
 
 	opt.message_sound = m_opt_section.get_bool("sound_at_message", true);
@@ -773,7 +747,7 @@ void OptionsCtrl::save_options() {
 	m_opt_section.set_bool("disable_fx",           !opt.fx);
 	m_opt_section.set_string("language",            opt.language);
 	m_opt_section.set_int("autosave",               opt.autosave * 60);
-	m_opt_section.set_int("autosave_roll",          opt.autosave_roll);
+	m_opt_section.set_int("rolling_autosave",       opt.rolling_autosave);
 	m_opt_section.set_int("maxfps",                 opt.maxfps);
 
 	m_opt_section.set_bool("sound_at_message",      opt.message_sound);
