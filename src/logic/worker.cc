@@ -848,16 +848,16 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 	double total_weight = 0.0;
 	for (auto bsii : best_suited_immovables_index)
 	{
-		double weight = std::get<0>(bsii)
+		double weight = std::get<0>(bsii);
 		total_weight += weight * weight;
 	}
 
-	double choice = logic_rand_as_double(&game) * total_weight;
+	double choice = logic_rand_as_double(&game) * total_weight + std::numeric_limits<double>::epsilon();
 
 	for (auto bsii : best_suited_immovables_index)
 	if (0 < choice)
 	{
-		double weight = std::get<0>(bsii)
+		double weight = std::get<0>(bsii);
 		state.ivar2 = std::get<1>(bsii);
 		choice -= weight * weight;
 	}
