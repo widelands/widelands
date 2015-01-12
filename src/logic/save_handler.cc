@@ -71,18 +71,28 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 			return;
 		}
 
+		// NOCOM(#codereview): add the filename to this log message - it will make it easier to figure out which
+		// autosave to look at.
 		log("Autosave: interval elapsed (%d s), saving\n", elapsed);
 		//roll autosaves
+		// NOCOM(#codereview): I think having this as an option is useful, having it accesible through the GUI not so: people
+		// will mostly not touch it or even turn it lower. And this is strictly a dev option anyways.... In the long run, I'd like
+		// to get rid of the advanced options menu completely.
 		int32_t number_of_rolls = g_options.pull_section("global").get_int("autosave_roll") - 1;
+		// NOCOM(#codereview): shuold this not go from 0-9 instead of 1-10? Not
+		// sure. Also, use %02d so that file sort lexicographically too.
 		std::string next_file = (boost::format("%s_%i") % filename % number_of_rolls).str();
+		// NOCOM(#codereview): what does _r stand for?
 		std::string filename_r = create_file_name(get_base_dir(), next_file);
+		// NOCOM(#codereview): that seems wrong - you first delete filename_10, then try to save into filename_09. Check?
 		if (number_of_rolls > 0 && g_fs->file_exists(filename_r)) {
 			g_fs->fs_unlink(filename_r);
 		}
 		number_of_rolls--;
 		while (number_of_rolls >= 0) {
 			next_file = (boost::format("%s_%i") % filename % number_of_rolls).str();
-			std::string filename_p = create_file_name(get_base_dir(), next_file);
+			// NOCOM(#codereview): _p?
+			const std::string filename_p = create_file_name(get_base_dir(), next_file);
 			if (g_fs->file_exists(filename_p)) {
 				g_fs->fs_rename(filename_p, filename_r);
 			}
