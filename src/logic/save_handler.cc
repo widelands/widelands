@@ -91,7 +91,7 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 			filename_previous = filename_next;
 			number_of_rolls--;
 		}
-		filename = filename_previous;
+		filename = "wl_autosave_00";
 		log("Autosave: interval elapsed (%d s), saving %s\n", elapsed, filename.c_str());
 	}
 
