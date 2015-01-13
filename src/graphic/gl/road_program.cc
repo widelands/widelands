@@ -98,59 +98,69 @@ void RoadProgram::add_road(const Surface& surface,
                            const FieldsToDraw::Field& start,
                            const FieldsToDraw::Field& end,
                            const Widelands::RoadType road_type) {
-	static constexpr float kRoadThicknessInPixels = 3.;
+	// The thickness of the road in pixels on screen.
+	static constexpr float kRoadThicknessInPixels = 5.;
+
+	// The overshot of the road in either direction in percent.
+	static constexpr float kRoadElongationInPercent = .1;
+
 	const float delta_x = end.pixel_x - start.pixel_x;
 	const float delta_y = end.pixel_y - start.pixel_y;
 	const float vector_length = std::hypot(delta_x, delta_y);
 
+	const float road_overshoot_x = delta_x * kRoadElongationInPercent;
+	const float road_overshoot_y = delta_y * kRoadElongationInPercent;
+
 	// Find the reciprocal unit vector, so that we can calculate start and end
 	// points for the quad that will make the road.
-	const float dx = -delta_y / vector_length;
-	const float dy = delta_x / vector_length;
+	const float road_thickness_x = (-delta_y / vector_length) * kRoadThicknessInPixels;
+	const float road_thickness_y = (delta_x / vector_length) * kRoadThicknessInPixels;
 
 	const float texture_mix = road_type == Widelands::Road_Normal ? 0. : 1.;
-	PerVertexData p1 = {
-		start.pixel_x + kRoadThicknessInPixels * dx, start.pixel_y + kRoadThicknessInPixels * dy,
-		0., 0.,
-		start.brightness,
-		texture_mix,
-	};
-	surface.pixel_to_gl(&p1.gl_x, &p1.gl_y);
+	vertices_.emplace_back(PerVertexData{
+	   start.pixel_x - road_overshoot_x + road_thickness_x,
+	   start.pixel_y - road_overshoot_y + road_thickness_y,
+	   0.,
+	   0.,
+	   start.brightness,
+	   texture_mix,
+	});
+	surface.pixel_to_gl(&vertices_.back().gl_x, &vertices_.back().gl_y);
 
-	PerVertexData p2 = {
-		start.pixel_x - kRoadThicknessInPixels * dx, start.pixel_y - kRoadThicknessInPixels * dy,
-		0., 1.,
-		start.brightness,
-		texture_mix,
-	};
-	surface.pixel_to_gl(&p2.gl_x, &p2.gl_y);
+	vertices_.emplace_back(PerVertexData{
+	   start.pixel_x - road_overshoot_x - road_thickness_x,
+	   start.pixel_y - road_overshoot_y - road_thickness_y,
+	   0.,
+	   1.,
+	   start.brightness,
+	   texture_mix,
+	});
+	surface.pixel_to_gl(&vertices_.back().gl_x, &vertices_.back().gl_y);
 
-	PerVertexData p3 = {
-		end.pixel_x + kRoadThicknessInPixels * dx, end.pixel_y + kRoadThicknessInPixels * dy,
+	vertices_.emplace_back(PerVertexData{
+		end.pixel_x + road_overshoot_x + road_thickness_x,
+		end.pixel_y + road_overshoot_y + road_thickness_y,
 		1., 0.,
 		end.brightness,
 		texture_mix,
-	};
-	surface.pixel_to_gl(&p3.gl_x, &p3.gl_y);
-
-	PerVertexData p4 = {
-		end.pixel_x - kRoadThicknessInPixels * dx, end.pixel_y - kRoadThicknessInPixels * dy,
-		1., 1.,
-		end.brightness,
-		texture_mix,
-	};
-	surface.pixel_to_gl(&p4.gl_x, &p4.gl_y);
+	});
+	surface.pixel_to_gl(&vertices_.back().gl_x, &vertices_.back().gl_y);
 
 	// As OpenGl does not support drawing quads in modern days and we have a
 	// bunch of roads that might not be neighbored, we need to add two triangles
 	// for each road. :(. Another alternative would be to use primitive restart,
 	// but that is a fairly recent OpenGL feature.
-	vertices_.emplace_back(p1);
-	vertices_.emplace_back(p2);
-	vertices_.emplace_back(p3);
-	vertices_.emplace_back(p2);
-	vertices_.emplace_back(p3);
-	vertices_.emplace_back(p4);
+	vertices_.emplace_back(vertices_.at(vertices_.size() - 2));
+	vertices_.emplace_back(vertices_.at(vertices_.size() - 2));
+
+	vertices_.emplace_back(PerVertexData{
+		end.pixel_x + road_overshoot_x - road_thickness_x,
+		end.pixel_y + road_overshoot_y - road_thickness_y,
+		1., 1.,
+		end.brightness,
+		texture_mix,
+	});
+	surface.pixel_to_gl(&vertices_.back().gl_x, &vertices_.back().gl_y);
 }
 
 void RoadProgram::draw(const Surface& surface, const FieldsToDraw& fields_to_draw) {
