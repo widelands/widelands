@@ -738,6 +738,7 @@ bool WLApplication::init_settings() {
 	s.get_int("maxfps");
 	s.get_int("panel_snap_distance");
 	s.get_int("autosave");
+	s.get_int("rolling_autosave");
 	s.get_int("remove_replays");
 	s.get_bool("single_watchwin");
 	s.get_bool("auto_roadbuild_mode");
