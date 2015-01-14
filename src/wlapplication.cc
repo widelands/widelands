@@ -275,6 +275,9 @@ m_redirected_stdio(false)
 	// handling of graphics
 	init_hardware();
 
+	// This might grab the input.
+	refresh_graphics();
+
 	if (TTF_Init() == -1)
 		throw wexception
 			("True Type library did not initialize: %s\n", TTF_GetError());
