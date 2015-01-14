@@ -856,13 +856,13 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 
 	for (const auto bsii : best_suited_immovables_index)
 	{
+		double weight = std::get<0>(bsii);
+		state.ivar2 = std::get<1>(bsii);
+		choice -= weight * weight;
 		if (0 > choice)
 		{
 			break;
 		}
-		double weight = std::get<0>(bsii);
-		state.ivar2 = std::get<1>(bsii);
-		choice -= weight * weight;
 	}
 
 	Immovable& newimm =
