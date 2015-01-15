@@ -168,6 +168,10 @@ void blit_monochrome(const Rect& dst_rect,
 
 	MonochromeBlitProgram::instance().draw(
 	   gl_dst_rect, gl_src_rect, image.get_gl_texture(), blend);
+
+	// TODO(sirver): This is a hacky attempt to fix 1409267. It
+	// should not stick around.
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 void blit_blended(const Rect& dst_rect,
@@ -184,6 +188,10 @@ void blit_blended(const Rect& dst_rect,
 
 	BlendedBlitProgram::instance().draw(
 	   gl_dst_rect, gl_src_rect, image.get_gl_texture(), mask.get_gl_texture(), blend);
+
+	// TODO(sirver): This is a hacky attempt to fix 1409267. It
+	// should not stick around.
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 void draw_rect(const Rect& rc, const RGBColor& clr, Surface* surface) {
@@ -207,4 +215,8 @@ void blit(const Rect& dst_rect,
 
 	VanillaBlitProgram::instance().draw(
 	   gl_dst_rect, gl_src_rect, image.get_gl_texture(), opacity, blend_mode);
+
+	// TODO(sirver): This is a hacky attempt to fix 1409267. It
+	// should not stick around.
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
