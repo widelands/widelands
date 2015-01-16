@@ -281,7 +281,6 @@ FullscreenMenuOptions::FullscreenMenuOptions
 		 m_dock_windows_to_edges.get_h(),
 		 _("Save game automatically every"), UI::Align_VCenter),
 
-
 	m_sb_remove_replays
 		(this,
 		 get_w() - m_hmargin - 240,
@@ -665,7 +664,6 @@ void FullscreenMenuAdvancedOptions::update_sb_dis_border_unit() {
 	m_sb_dis_border.set_unit(ngettext("pixel", "pixels", m_sb_dis_border.get_value()));
 }
 
-
 OptionsCtrl::OptionsStruct FullscreenMenuAdvancedOptions::get_values() {
 	// Write all remaining data from UI elements
 	os.message_sound        = m_message_sound.get_state();
@@ -719,6 +717,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct() {
 	opt.music = !m_opt_section.get_bool("disable_music", false);
 	opt.fx = !m_opt_section.get_bool("disable_fx", false);
 	opt.autosave = m_opt_section.get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
+	opt.rolling_autosave = m_opt_section.get_int("rolling_autosave", 5);
 	opt.maxfps = m_opt_section.get_int("maxfps", 25);
 
 	opt.message_sound = m_opt_section.get_bool("sound_at_message", true);
@@ -748,6 +747,7 @@ void OptionsCtrl::save_options() {
 	m_opt_section.set_bool("disable_fx",           !opt.fx);
 	m_opt_section.set_string("language",            opt.language);
 	m_opt_section.set_int("autosave",               opt.autosave * 60);
+	m_opt_section.set_int("rolling_autosave",       opt.rolling_autosave);
 	m_opt_section.set_int("maxfps",                 opt.maxfps);
 
 	m_opt_section.set_bool("sound_at_message",      opt.message_sound);

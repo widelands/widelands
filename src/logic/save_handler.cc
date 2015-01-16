@@ -21,6 +21,8 @@
 
 #include <memory>
 
+#include <boost/format.hpp>
+
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/scoped_timer.h"
@@ -68,8 +70,29 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 		if (elapsed < autosave_interval_in_seconds) {
 			return;
 		}
-
-		log("Autosave: interval elapsed (%d s), saving\n", elapsed);
+		//roll autosaves
+		int32_t number_of_rolls = g_options.pull_section("global").get_int("rolling_autosave", 5) - 1;
+		std::string filename_previous =
+			create_file_name(get_base_dir(),
+								(boost::format("%s_%02d") % filename % number_of_rolls).str());
+		if (number_of_rolls > 0 && g_fs->file_exists(filename_previous)) {
+			g_fs->fs_unlink(filename_previous);
+			log("Autosave: Deleted %s\n", filename_previous.c_str());
+		}
+		number_of_rolls--;
+		while (number_of_rolls >= 0) {
+			const std::string filename_next =
+				create_file_name(get_base_dir(),
+									(boost::format("%s_%02d") % filename % number_of_rolls).str());
+			if (g_fs->file_exists(filename_next)) {
+				g_fs->fs_rename(filename_next, filename_previous);
+				log("Autosave: Rolled %s to %s\n", filename_next.c_str(), filename_previous.c_str());
+			}
+			filename_previous = filename_next;
+			number_of_rolls--;
+		}
+		filename = "wl_autosave_00";
+		log("Autosave: interval elapsed (%d s), saving %s\n", elapsed, filename.c_str());
 	}
 
 	// TODO(unknown): defer saving to next tick so that this message is shown
