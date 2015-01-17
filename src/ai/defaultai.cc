@@ -341,7 +341,7 @@ void DefaultAI::think() {
 	//print statistics
 	if (kPrintStats && next_statistics_report_ <= gametime) {
 		print_stats(gametime);
-		next_statistics_report_ += 30 * 60 * 1000; //NOCOM
+		next_statistics_report_ += 60 * 60 * 1000; //NOCOM
 	}
 }
 
@@ -4219,7 +4219,7 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 	//we test following materials	
 	const std::vector <std::string> materials = { "coal", "log", "ironore", "marble",
 		 "plank", "water", "goldore", "granite", "fish", "diamond", "stone", "corn", 
-		 "wheat", "grape", "quartz" };
+		 "wheat", "grape", "quartz", "bread", "meat" };
 	std::string summary="";
 	for (uint32_t j = 0; j < materials.size(); ++j) {
 		WareIndex const index = tribe_->ware_index(materials.at(j));
@@ -4231,7 +4231,12 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 		}
 		summary = summary+materials.at(j)+", ";
 	}
-	printf (" %1d: Missing materials: %s\n",
+	printf (" %1d: Buildings: Pr:%3d, Ml:%3d, Mi:%2d, Wh:%2d, Po:%2d. Missing: %s\n",
 		pn,
+		productionsites.size(),
+		militarysites.size(),
+		mines_.size(),
+		warehousesites.size()-num_ports,
+		num_ports,
 		summary.c_str());
 }

@@ -507,8 +507,17 @@ void Warehouse::init_portdock(EditorGameBase & egbase)
 		log("Attempting to setup port without neighboring water (coords: %3dx%3d).\n",
 		    get_position().x,
 		    get_position().y);
+		printf("Attempting to setup port without neighboring water (coords: %3dx%3d).\n",
+		    get_position().x,
+		    get_position().y);
 		return;
 	}
+
+	//if (upcast(Game, game, &egbase)) {
+		//if (game->get_gametime()>3*60*60*1000) {//NOCOM
+			//printf (" settin a port withouth portdock\n");
+			//return;}
+	//}
 
 	molog("Found %" PRIuS " fields for the dock\n", dock.size());
 
@@ -522,6 +531,12 @@ void Warehouse::init_portdock(EditorGameBase & egbase)
 
 	if (get_economy() != nullptr)
 		m_portdock->set_economy(get_economy());
+		
+	PortDock* pd_tmp = m_portdock; //NOCoM
+	if (!pd_tmp->get_fleet()) {
+		printf (" portdock created but without a fleet!\n");
+	}
+	
 }
 
 void Warehouse::destroy(EditorGameBase & egbase)
@@ -544,6 +559,7 @@ void Warehouse::restore_portdock_or_destroy(EditorGameBase& egbase) {
 		    get_position().y);
 		Building::destroy(egbase);
 	} else {
+		printf ("Message: portdock restored\n");
 		PortDock* pd_tmp = m_portdock;
 		if (!pd_tmp->get_fleet()) {
 			printf (" portdock restored but without a fleet!\n");

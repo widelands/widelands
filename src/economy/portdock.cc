@@ -152,6 +152,12 @@ void PortDock::init(EditorGameBase& egbase) {
 		set_position(egbase, coords);
 	}
 
+	//if (upcast(Game, game, &egbase)) {
+		//if (game->get_gametime()>3*60*60*1000) {//NOCOM
+			//printf (" settin a portdock withouth a fleet\n");
+			//return;}
+	//}
+
 	init_fleet(egbase);
 }
 
