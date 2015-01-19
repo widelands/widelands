@@ -335,11 +335,12 @@ uint16_t TextNode::hotspot_y() {
 Texture* TextNode::render(TextureCache* texture_cache) {
 	const Texture& img = m_font.render(m_txt, m_s.font_color, m_s.font_style, texture_cache);
 	Texture* rv = new Texture(img.width(), img.height());
-	rv->blit(Rect(0, 0, img.width(), img.height()),
-	         &img,
-	         Rect(0, 0, img.width(), img.height()),
-	         1.,
-	         BlendMode::Copy);
+	blit(Rect(0, 0, img.width(), img.height()),
+	     img,
+	     Rect(0, 0, img.width(), img.height()),
+	     1.,
+	     BlendMode::Copy,
+	     rv);
 	return rv;
 }
 
@@ -367,7 +368,7 @@ Texture* FillingTextNode::render(TextureCache* texture_cache) {
 	Texture* rv = new Texture(m_w, m_h);
 	for (uint16_t curx = 0; curx < m_w; curx += t.width()) {
 		Rect srcrect(Point(0, 0), min<int>(t.width(), m_w - curx), m_h);
-		rv->blit(Rect(curx, 0, srcrect.w, srcrect.h), &t, srcrect, 1., BlendMode::Copy);
+		blit(Rect(curx, 0, srcrect.w, srcrect.h), t, srcrect, 1., BlendMode::Copy, rv);
 	}
 	return rv;
 }
@@ -384,7 +385,7 @@ public:
 	Texture* render(TextureCache* texture_cache) override {
 		if (m_show_spaces) {
 			Texture* rv = new Texture(m_w, m_h);
-			rv->fill_rect(Rect(0, 0, m_w, m_h), RGBAColor(0xff, 0, 0, 0xff));
+			fill_rect(Rect(0, 0, m_w, m_h), RGBAColor(0xff, 0, 0, 0xff), rv);
 			return rv;
 		}
 		return TextNode::render(texture_cache);
@@ -436,10 +437,10 @@ public:
 				dst.y = 0;
 				srcrect.w = dst.w = min<int>(m_bg->width(), m_w - curx);
 				srcrect.h = dst.h = m_h;
-				rv->blit(dst, m_bg->texture(), srcrect, 1., BlendMode::Copy);
+				blit(dst, *m_bg, srcrect, 1., BlendMode::Copy, rv);
 			}
 		} else {
-			rv->fill_rect(Rect(0, 0, m_w, m_h), RGBAColor(255, 255, 255, 0));
+			fill_rect(Rect(0, 0, m_w, m_h), RGBAColor(255, 255, 255, 0), rv);
 		}
 		return rv;
 	}
@@ -476,13 +477,12 @@ public:
 	uint16_t hotspot_y() override {return height();}
 	Texture* render(TextureCache* texture_cache) override {
 		Texture* rv = new Texture(width(), height());
-		rv->fill_rect(Rect(0, 0, rv->width(), rv->height()), RGBAColor(255, 255, 255, 0));
+		fill_rect(Rect(0, 0, rv->width(), rv->height()), RGBAColor(255, 255, 255, 0), rv);
 
 		// Draw Solid background Color
 		bool set_alpha = true;
 		if (m_bg_clr_set) {
-			Rect fill_rect(Point(m_margin.left, m_margin.top), m_w, m_h);
-			rv->fill_rect(fill_rect, m_bg_clr);
+			fill_rect(Rect(Point(m_margin.left, m_margin.top), m_w, m_h), m_bg_clr, rv);
 			set_alpha = false;
 		}
 
@@ -497,7 +497,7 @@ public:
 					dst.y = cury;
 					src.w = dst.w = min<int>(m_bg_img->width(), m_w + m_margin.left - curx);
 					src.h = dst.h = min<int>(m_bg_img->height(), m_h + m_margin.top - cury);
-					rv->blit(dst, m_bg_img->texture(), src, 1., BlendMode::Copy);
+					blit(dst, *m_bg_img, src, 1., BlendMode::Copy, rv);
 				}
 			}
 			set_alpha = false;
@@ -512,7 +512,7 @@ public:
 				                node_texture->height());
 				Rect src = Rect(0, 0, node_texture->width(), node_texture->height());
 
-				rv->blit(dst, node_texture, src, 1., set_alpha ? BlendMode::Copy : BlendMode::UseAlpha);
+				blit(dst, *node_texture, src, 1., set_alpha ? BlendMode::Copy : BlendMode::UseAlpha, rv);
 				delete node_texture;
 			}
 			delete n;
@@ -563,11 +563,11 @@ private:
 
 Texture* ImgRenderNode::render(TextureCache* /* texture_cache */) {
 	Texture* rv = new Texture(m_image.width(), m_image.height());
-	rv->blit(Rect(0, 0, m_image.width(), m_image.height()),
-	         m_image.texture(),
+	blit(Rect(0, 0, m_image.width(), m_image.height()),
+	         m_image,
 	         Rect(0, 0, m_image.width(), m_image.height()),
 				1.,
-	         BlendMode::Copy);
+	         BlendMode::Copy, rv);
 	return rv;
 }
 // End: Helper Stuff

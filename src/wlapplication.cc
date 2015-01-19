@@ -275,6 +275,9 @@ m_redirected_stdio(false)
 	// handling of graphics
 	init_hardware();
 
+	// This might grab the input.
+	refresh_graphics();
+
 	if (TTF_Init() == -1)
 		throw wexception
 			("True Type library did not initialize: %s\n", TTF_GetError());
@@ -338,6 +341,9 @@ WLApplication::~WLApplication()
 // dispatching events until it is time to quit.
 void WLApplication::run()
 {
+	// This also grabs the mouse cursor if so desired.
+	refresh_graphics();
+
 	if (m_game_type == EDITOR) {
 		g_sound_handler.start_music("ingame");
 		EditorInteractive::run_editor(m_filename, m_script_to_run);
@@ -732,6 +738,7 @@ bool WLApplication::init_settings() {
 	s.get_int("maxfps");
 	s.get_int("panel_snap_distance");
 	s.get_int("autosave");
+	s.get_int("rolling_autosave");
 	s.get_int("remove_replays");
 	s.get_bool("single_watchwin");
 	s.get_bool("auto_roadbuild_mode");
@@ -850,9 +857,6 @@ void WLApplication::shutdown_hardware()
 void WLApplication::parse_commandline
 	(int const argc, char const * const * const argv)
 {
-	//TODO(unknown): EXENAME gets written out on windows!
-	m_commandline["EXENAME"] = argv[0];
-
 	for (int i = 1; i < argc; ++i) {
 		std::string opt = argv[i];
 		std::string value;

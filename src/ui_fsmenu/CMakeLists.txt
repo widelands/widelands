@@ -43,7 +43,6 @@ wl_library(ui_fsmenu
     build_info
     game_io
     graphic
-    graphic_image
     graphic_image_io
     graphic_surface
     graphic_text

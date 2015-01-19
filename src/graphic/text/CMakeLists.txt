@@ -24,7 +24,7 @@ wl_library(graphic_text
     base_log
     base_macros
     graphic_color
-    graphic_image
+    graphic_image_cache
     graphic_image_io
     graphic_sdl_utils
     graphic_surface

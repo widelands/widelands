@@ -52,6 +52,7 @@ public:
 		bool fx;
 		std::string language;
 		int32_t autosave; // autosave interval in minutes
+		int32_t rolling_autosave; //number of file to use for rolling autosave
 		uint32_t maxfps;
 		uint32_t remove_replays;
 		bool remove_syncstreams;

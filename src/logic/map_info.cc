@@ -93,7 +93,7 @@ int main(int argc, char ** argv)
 		// Write minimap
 		{
 			FileWrite fw;
-			save_surface_to_png(minimap.get(), &fw, COLOR_TYPE::RGBA);
+			save_to_png(minimap.get(), &fw, ColorType::RGBA);
 			fw.write(*in_out_filesystem, (map_file + ".png").c_str());
 		}
 
