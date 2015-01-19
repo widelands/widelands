@@ -106,7 +106,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
      next_trainingsites_check_due_(15 * 60 * 1000),
      next_bf_check_due_(1000),
      next_wares_review_due_(15 * 60 * 1000),
-     next_statistics_report_(30 * 60 *1000),
+     next_statistics_report_(30 * 60 * 1000),
      inhibit_road_building_(0),
      time_of_last_construction_(0),
      enemy_last_seen_(-2 * 60 * 1000),
@@ -337,7 +337,7 @@ void DefaultAI::think() {
 		next_wares_review_due_ = gametime + 15 * 60 * 1000;
 		review_wares_targets(gametime);
 	}
-	
+
 	//print statistics
 	if (kPrintStats && next_statistics_report_ <= gametime) {
 		print_stats(gametime);
@@ -3490,7 +3490,7 @@ void DefaultAI::out_of_resources_site(const ProductionSite& site) {
 }
 
 // walk and search for teritorry controlled by other player
-// usually scanning radius is enough but sometimes we must walk to 
+// usually scanning radius is enough but sometimes we must walk to
 // verify that an enemy teritory is really accessible by land
 bool DefaultAI::other_player_accessible(const uint32_t max_distance,
                                         int32_t* tested_fields,
@@ -4193,50 +4193,32 @@ void DefaultAI::review_wares_targets(int32_t const gametime) {
 }
 
 // This is used for map tweaking, so usually this is not used :)
+// TODO(tiborb ?): - it would be nice to have this activated from command line //NOCOM
 void DefaultAI::print_stats(uint32_t const gametime) {
 
-	//general statistics
-	uint32_t plr_in_game = 0;
 	PlayerNumber const pn = player_number();
-	PlayerNumber const nr_players = game().map().get_nrplayers();
-	iterate_players_existing_novar(p, nr_players, game())++ plr_in_game;
-	const Game::GeneralStatsVector& genstats = game().get_general_statistics();
 
-	log(" %1d: Statistics: landsize: %5d, military strength: %3d (time: %3d:%2d)\n",
-	    pn - 1,
-	    genstats[pn - 1].land_size.back(),
-	    genstats[pn - 1].miltary_strength.back(),
-	    gametime/(60*60*1000),
-	    (gametime/(60*1000))%60);
-
-	//testing basic wares - printing ones with 0 stock in warehouses
-	if (warehousesites.empty()) {
-		printf (" %1d: Missing materials: no warehouses left\n",
-		pn);
-		return;
-	}
-	
-	//we test following materials	
-	const std::vector <std::string> materials = { "coal", "log", "ironore", "marble",
-		 "plank", "water", "goldore", "granite", "fish", "diamond", "stone", "corn", 
+	//we test following materials
+	const std::vector <std::string> materials = {"coal", "log", "ironore", "marble",
+		 "plank", "water", "goldore", "granite", "fish", "diamond", "stone", "corn",
 		 "wheat", "grape", "quartz", "bread", "meat" };
-	std::string summary="";
+	std::string summary = "";
 	for (uint32_t j = 0; j < materials.size(); ++j) {
 		WareIndex const index = tribe_->ware_index(materials.at(j));
 		if (index == INVALID_INDEX) {
 			continue;
 		}
-		if (get_warehoused_stock(index)>0) {
+		if (get_warehoused_stock(index) > 0) {
 			continue;
 		}
-		summary = summary+materials.at(j)+", ";
+		summary = summary + materials.at(j)+", ";
 	}
 	printf (" %1d: Buildings: Pr:%3d, Ml:%3d, Mi:%2d, Wh:%2d, Po:%2d. Missing: %s\n",
 		pn,
 		productionsites.size(),
 		militarysites.size(),
 		mines_.size(),
-		warehousesites.size()-num_ports,
+		warehousesites.size() - num_ports,
 		num_ports,
 		summary.c_str());
 }

@@ -1,7 +1,7 @@
 help=_This tasty bread is made in bakeries out of cornflour, blackroot flour and water. It is appreciated as basic food for miners, scouts and soldiers in training sites (labyrinth and dungeon).
 
 default_target_quantity=20
-preciousness=2
+preciousness=5
 
 # No description yet
 [idle]
