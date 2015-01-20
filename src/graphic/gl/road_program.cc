@@ -104,6 +104,9 @@ void RoadProgram::add_road(const Surface& surface,
 	// The overshot of the road in either direction in percent.
 	static constexpr float kRoadElongationInPercent = .1;
 
+	// A tiny value we use instead 0, to make sure that we always sample inside of the texture.
+	constexpr float kEpsilon = 1e-6;
+
 	const float delta_x = end.pixel_x - start.pixel_x;
 	const float delta_y = end.pixel_y - start.pixel_y;
 	const float vector_length = std::hypot(delta_x, delta_y);
@@ -117,11 +120,12 @@ void RoadProgram::add_road(const Surface& surface,
 	const float road_thickness_y = (delta_x / vector_length) * kRoadThicknessInPixels;
 
 	const float texture_mix = road_type == Widelands::Road_Normal ? 0. : 1.;
+
 	vertices_.emplace_back(PerVertexData{
 	   start.pixel_x - road_overshoot_x + road_thickness_x,
 	   start.pixel_y - road_overshoot_y + road_thickness_y,
-	   0.,
-	   0.,
+	   kEpsilon,
+	   kEpsilon,
 	   start.brightness,
 	   texture_mix,
 	});
@@ -130,19 +134,20 @@ void RoadProgram::add_road(const Surface& surface,
 	vertices_.emplace_back(PerVertexData{
 	   start.pixel_x - road_overshoot_x - road_thickness_x,
 	   start.pixel_y - road_overshoot_y - road_thickness_y,
-	   0.,
-	   1.,
+	   kEpsilon,
+	   1.f - kEpsilon,
 	   start.brightness,
 	   texture_mix,
 	});
 	surface.pixel_to_gl(&vertices_.back().gl_x, &vertices_.back().gl_y);
 
 	vertices_.emplace_back(PerVertexData{
-		end.pixel_x + road_overshoot_x + road_thickness_x,
-		end.pixel_y + road_overshoot_y + road_thickness_y,
-		1., 0.,
-		end.brightness,
-		texture_mix,
+	   end.pixel_x + road_overshoot_x + road_thickness_x,
+	   end.pixel_y + road_overshoot_y + road_thickness_y,
+	   1.f - kEpsilon,
+	   kEpsilon,
+	   end.brightness,
+	   texture_mix,
 	});
 	surface.pixel_to_gl(&vertices_.back().gl_x, &vertices_.back().gl_y);
 
@@ -154,11 +159,12 @@ void RoadProgram::add_road(const Surface& surface,
 	vertices_.emplace_back(vertices_.at(vertices_.size() - 2));
 
 	vertices_.emplace_back(PerVertexData{
-		end.pixel_x + road_overshoot_x - road_thickness_x,
-		end.pixel_y + road_overshoot_y - road_thickness_y,
-		1., 1.,
-		end.brightness,
-		texture_mix,
+	   end.pixel_x + road_overshoot_x - road_thickness_x,
+	   end.pixel_y + road_overshoot_y - road_thickness_y,
+	   1.f - kEpsilon,
+	   1.f - kEpsilon,
+	   end.brightness,
+	   texture_mix,
 	});
 	surface.pixel_to_gl(&vertices_.back().gl_x, &vertices_.back().gl_y);
 }
