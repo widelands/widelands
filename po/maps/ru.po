@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-12-16 11:38+0000\n"
-"PO-Revision-Date: 2014-06-11 11:15+0000\n"
-"Last-Translator: Александр <sa13690@yandex.ru>\n"
+"PO-Revision-Date: 2015-01-19 21:45+0000\n"
+"Last-Translator: Vlad <vzharkih@yandex.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-17 05:33+0000\n"
-"X-Generator: Launchpad (build 17286)\n"
+"X-Launchpad-Export-Date: 2015-01-20 05:48+0000\n"
+"X-Generator: Launchpad (build 17304)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
@@ -57,11 +57,11 @@ msgstr ""
 
 #: ../../campaigns/campaigns.conf:29
 msgid "Barbarians"
-msgstr ""
+msgstr "Варвары"
 
 #: ../../campaigns/campaigns.conf:31
 msgid "Easy. Introduces the Barbarians"
-msgstr ""
+msgstr "Легко. Знакомство с Варварами"
 
 #: ../../campaigns/campaigns.conf:32
 msgid ""
@@ -86,11 +86,11 @@ msgstr ""
 
 #: ../../campaigns/campaigns.conf:37
 msgid "Empire"
-msgstr ""
+msgstr "Империя"
 
 #: ../../campaigns/campaigns.conf:39
 msgid "Easy. Introduces the Empire"
-msgstr ""
+msgstr "Легко. Знакомство с Империей"
 
 #: ../../campaigns/campaigns.conf:40
 msgid ""
@@ -112,7 +112,7 @@ msgstr ""
 
 #: ../../campaigns/campaigns.conf:45
 msgid "Atlanteans"
-msgstr ""
+msgstr "Атланты"
 
 #: ../../campaigns/campaigns.conf:47
 msgid "Challenging. Introduces the Atlanteans"
@@ -182,7 +182,7 @@ msgstr ""
 #: ../../campaigns/tutorial02_warfare.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:19
 msgid "Warfare"
-msgstr ""
+msgstr "Война"
 
 #: ../../campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""
@@ -193,7 +193,7 @@ msgstr ""
 #: ../../campaigns/tutorial03_seafaring.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:23
 msgid "Seafaring"
-msgstr ""
+msgstr "Мореплавание"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
@@ -204,7 +204,7 @@ msgstr ""
 #: ../../campaigns/tutorial04_economy.wmf/elemental:8
 #: ../../campaigns/tutorials.conf:27
 msgid "Economy"
-msgstr ""
+msgstr "Экономика"
 
 #: ../../campaigns/tutorial04_economy.wmf/elemental:10
 msgid ""
@@ -218,7 +218,7 @@ msgstr "Атолл"
 
 #: ../../maps/Atoll.wmf/elemental:11
 msgid "Who will be the real king of the big atoll?"
-msgstr ""
+msgstr "Кто будет настоящим королем большого атолла?"
 
 #: ../../maps/Calvisson.wmf/elemental:9
 msgid "Calvisson"
@@ -309,7 +309,7 @@ msgstr ""
 
 #: ../../maps/Fellowships.wmf/elemental:9
 msgid "Fellowships"
-msgstr ""
+msgstr "Братства"
 
 #: ../../maps/Fellowships.wmf/elemental:11
 msgid ""
@@ -545,7 +545,7 @@ msgstr ""
 
 #: ../../maps/River Explorers.wmf/elemental:9
 msgid "River Explorers"
-msgstr ""
+msgstr "Исследователи рек"
 
 #: ../../maps/River Explorers.wmf/elemental:11
 msgid ""
@@ -570,7 +570,7 @@ msgstr ""
 
 #: ../../maps/Sun of fire.wmf/elemental:9
 msgid "The Ancient Sun of Fire"
-msgstr ""
+msgstr "Древнее Солнце огня"
 
 #: ../../maps/Sun of fire.wmf/elemental:11
 msgid ""
@@ -749,7 +749,7 @@ msgstr ""
 
 #: ../../maps/Twin Lagoons.wmf/elemental:9
 msgid "Twin Lagoons"
-msgstr ""
+msgstr "Двойные лагуны"
 
 #: ../../maps/Twin Lagoons.wmf/elemental:11
 msgid ""

@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-12-16 11:38+0000\n"
-"PO-Revision-Date: 2014-12-17 06:38+0000\n"
-"Last-Translator: Александр <sa13690@yandex.ru>\n"
+"PO-Revision-Date: 2015-01-19 22:35+0000\n"
+"Last-Translator: Vlad <vzharkih@yandex.ru>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-12-18 05:42+0000\n"
-"X-Generator: Launchpad (build 17286)\n"
+"X-Launchpad-Export-Date: 2015-01-20 05:48+0000\n"
+"X-Generator: Launchpad (build 17304)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -43,14 +43,14 @@ msgstr "Оборонительный"
 #: ../../src/base/i18n.cc:331
 #, c-format
 msgid "%1$s & %2$s"
-msgstr ""
+msgstr "%1$s и %2$s"
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../src/base/i18n.cc:335
 #, c-format
 msgid "%1$s or %2$s"
-msgstr ""
+msgstr "%1$s или %2$s"
 
 #. * TRANSLATORS: Join the last 2 items on a list with a comma.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
@@ -59,14 +59,14 @@ msgstr ""
 #: ../../src/base/i18n.cc:339 ../../src/base/i18n.cc:349
 #, c-format
 msgid "%1$s, %2$s"
-msgstr ""
+msgstr "%1$s, %2$s"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../src/base/i18n.cc:343
 #, c-format
 msgid "%1$s and %2$s"
-msgstr ""
+msgstr "%1$s и %2$s"
 
 #. * TRANSLATORS: January. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
@@ -74,7 +74,7 @@ msgstr ""
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:95
 msgid "Jan"
-msgstr ""
+msgstr "Янв"
 
 #. * TRANSLATORS: February. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
@@ -82,7 +82,7 @@ msgstr ""
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:101
 msgid "Feb"
-msgstr ""
+msgstr "Фев"
 
 #. * TRANSLATORS: March. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
@@ -90,7 +90,7 @@ msgstr ""
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:107
 msgid "Mar"
-msgstr ""
+msgstr "Мар"
 
 #. * TRANSLATORS: April. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
@@ -98,7 +98,7 @@ msgstr ""
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:113
 msgid "Apr"
-msgstr ""
+msgstr "Апр"
 
 #. * TRANSLATORS: May. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
@@ -106,7 +106,7 @@ msgstr ""
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:119
 msgid "May"
-msgstr ""
+msgstr "Май"
 
 #. * TRANSLATORS: June. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
@@ -114,7 +114,7 @@ msgstr ""
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:125
 msgid "Jun"
-msgstr ""
+msgstr "Июн"
 
 #. * TRANSLATORS: July. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from the CLDR
@@ -494,7 +494,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:293
 #: ../../src/ui_fsmenu/mapselect.cc:409
 msgid "parent"
-msgstr ""
+msgstr "перейти выше"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:60
 #: ../../src/ui_fsmenu/loadgame.cc:277
@@ -661,6 +661,10 @@ msgid ""
 "\n"
 "Reason given:\n"
 msgstr ""
+"Ошибка сохранения карты!\n"
+"Сохраненный файл карты может быть поврежден!\n"
+"\n"
+"Возможная причина:\n"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:38
 msgid "Enter Directory Name: "
@@ -1194,11 +1198,11 @@ msgstr ""
 
 #: ../../src/logic/ship.cc:562
 msgid "An expedition ship sailed around its island without any events."
-msgstr ""
+msgstr "Корабль экспедиции обогнул остров без проишествий."
 
 #: ../../src/logic/ship.cc:619
 msgid "Coast Reached"
-msgstr ""
+msgstr "Берег достигнут"
 
 #: ../../src/logic/ship.cc:621
 msgid ""
@@ -1207,7 +1211,7 @@ msgstr "Экспедиционный корабль достиг побереж�
 
 #: ../../src/logic/ship.cc:785
 msgid "Expedition Ready"
-msgstr ""
+msgstr "Экспедиция готова"
 
 #: ../../src/logic/ship.cc:786
 msgid "An expedition ship is waiting for your commands."
@@ -1619,7 +1623,7 @@ msgstr ""
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:1217
 msgid "save $ - Saves the current game state as $.wgf"
-msgstr ""
+msgstr "save $ - Сохраняет текущее состояние игры как $.wgf"
 
 #: ../../src/network/nethost.cc:1230
 msgid "pwd $  - Sends the password $ to the host"
