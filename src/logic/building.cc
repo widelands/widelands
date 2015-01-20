@@ -880,7 +880,7 @@ void Building::set_seeing(bool see)
  */
 void Building::send_message
 	(Game & game,
-	 const std::string & msgsender,
+	 const Message::Type msgtype,
 	 const std::string & title,
 	 const std::string & description,
 	 bool link_to_building_lifetime,
@@ -910,7 +910,7 @@ void Building::send_message
 			% rt_description % description).str();
 
 	Message * msg = new Message
-		(msgsender, game.get_gametime(), title, rt_description,
+		(msgtype, game.get_gametime(), title, rt_description,
 		 get_position(), (link_to_building_lifetime ? m_serial : 0));
 
 	if (throttle_time)

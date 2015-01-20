@@ -78,7 +78,6 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/campaign_select.h"
-#include "ui_fsmenu/editor.h"
 #include "ui_fsmenu/fileview.h"
 #include "ui_fsmenu/internet_lobby.h"
 #include "ui_fsmenu/intro.h"
@@ -276,6 +275,9 @@ m_redirected_stdio(false)
 	// handling of graphics
 	init_hardware();
 
+	// This might grab the input.
+	refresh_graphics();
+
 	if (TTF_Init() == -1)
 		throw wexception
 			("True Type library did not initialize: %s\n", TTF_GetError());
@@ -339,6 +341,9 @@ WLApplication::~WLApplication()
 // dispatching events until it is time to quit.
 void WLApplication::run()
 {
+	// This also grabs the mouse cursor if so desired.
+	refresh_graphics();
+
 	if (m_game_type == EDITOR) {
 		g_sound_handler.start_music("ingame");
 		EditorInteractive::run_editor(m_filename, m_script_to_run);
@@ -733,6 +738,7 @@ bool WLApplication::init_settings() {
 	s.get_int("maxfps");
 	s.get_int("panel_snap_distance");
 	s.get_int("autosave");
+	s.get_int("rolling_autosave");
 	s.get_int("remove_replays");
 	s.get_bool("single_watchwin");
 	s.get_bool("auto_roadbuild_mode");
@@ -851,9 +857,6 @@ void WLApplication::shutdown_hardware()
 void WLApplication::parse_commandline
 	(int const argc, char const * const * const argv)
 {
-	//TODO(unknown): EXENAME gets written out on windows!
-	m_commandline["EXENAME"] = argv[0];
-
 	for (int i = 1; i < argc; ++i) {
 		std::string opt = argv[i];
 		std::string value;
@@ -1088,7 +1091,7 @@ void WLApplication::mainmenu()
 				break;
 			}
 			case FullscreenMenuMain::MenuTarget::kEditor:
-				mainmenu_editor();
+				EditorInteractive::run_editor(m_filename, m_script_to_run);
 				break;
 			default:
 			case FullscreenMenuMain::MenuTarget::kExit:
@@ -1264,42 +1267,6 @@ void WLApplication::mainmenu_multiplayer()
 				default:
 					break;
 			}
-		}
-	}
-}
-
-void WLApplication::mainmenu_editor()
-{
-	//  This is the code returned by UI::Panel::run() when the panel is dying.
-	//  Make sure that the program exits when the window manager says so.
-	static_assert
-		(static_cast<int32_t>(FullscreenMenuEditor::MenuTarget::kBack) == UI::Panel::dying_code,
-		 "Editor should be dying.");
-
-	for (;;) {
-		FullscreenMenuEditor editor_menu;
-		switch (static_cast<FullscreenMenuEditor::MenuTarget>(editor_menu.run())) {
-		case FullscreenMenuEditor::MenuTarget::kBack:
-			return;
-		case FullscreenMenuEditor::MenuTarget::kNewMap:
-			EditorInteractive::run_editor(m_filename, m_script_to_run);
-			return;
-		case FullscreenMenuEditor::MenuTarget::kLoadMap: {
-			std::string filename;
-			{
-				SinglePlayerGameSettingsProvider sp;
-				FullscreenMenuMapSelect emsm(&sp, nullptr, true);
-				if (emsm.run() <= 0)
-					break;
-
-				filename = emsm.get_map()->filename;
-			}
-			EditorInteractive::run_editor(filename.c_str(), "");
-			return;
-		}
-		default:
-			assert(false);
-			break;
 		}
 	}
 }

@@ -843,8 +843,27 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 	}
 
 	// Randomly pick one of the immovables to be planted.
-	const uint32_t idx = game.logic_rand() % best_suited_immovables_index.size();
-	state.ivar2 = std::get<1>(*std::next(best_suited_immovables_index.begin(), idx));
+
+	// Each candidate is weighted by its probability to grow.
+	double total_weight = 0.0;
+	for (const auto& bsii : best_suited_immovables_index)
+	{
+		double weight = std::get<0>(bsii);
+		total_weight += weight * weight;
+	}
+
+	double choice = logic_rand_as_double(&game) * total_weight;
+
+	for (const auto& bsii : best_suited_immovables_index)
+	{
+		double weight = std::get<0>(bsii);
+		state.ivar2 = std::get<1>(bsii);
+		choice -= weight * weight;
+		if (0 > choice)
+		{
+			break;
+		}
+	}
 
 	Immovable& newimm =
 	   game.create_immovable(pos, state.ivar2, state.svar1 == "tribe" ? &descr().tribe() : nullptr);
@@ -938,12 +957,24 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 					 % rdescr->name().c_str()
 					 % _("A geologist found resources.")).str();
 
+			Message::Type message_type = Message::Type::kGeologists;
+			if (rdescr->name() == "coal")
+				message_type = Message::Type::kGeologistsCoal;
+			else if (rdescr->name() == "gold")
+				message_type = Message::Type::kGeologistsGold;
+			else if (rdescr->name() == "granite")
+				message_type = Message::Type::kGeologistsGranite;
+			else if (rdescr->name() == "iron")
+				message_type = Message::Type::kGeologistsIron;
+			else if (rdescr->name() == "water")
+				message_type = Message::Type::kGeologistsWater;
+
 			//  We should add a message to the player's message queue - but only,
 			//  if there is not already a similar one in list.
 			owner().add_message_with_timeout
 				(game,
 				 *new Message
-				 	("geologist " + rdescr->name(), // e.g. "geologist gold"
+					(message_type,
 					 game.get_gametime(),
 				 	 rdescr->descname(),
 				 	 message,
@@ -1843,7 +1874,7 @@ void Worker::return_update(Game & game, State & state)
 		owner().add_message
 			(game,
 			 *new Message
-			 	("game engine",
+				(Message::Type::kGameLogic,
 				 game.get_gametime(),
 			 	 _("Worker got lost!"),
 				 message,
