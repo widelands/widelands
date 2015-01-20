@@ -116,7 +116,6 @@ fi
 
 bzr pull
 cd build
-cmake ..
 $buildtool
 rm  ../VERSION || true
 rm  ../widelands || true
