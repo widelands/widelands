@@ -16,8 +16,8 @@ grout=1
 
 [idle]
 pics=warehouse_i_??.png  # ???
-hotspot=58 75
+hotspot=60 78
 
 [build]
 pics=warehouse_b_??.png  # ???
-hotspot=58 75
+hotspot=60 78
