@@ -152,12 +152,6 @@ void PortDock::init(EditorGameBase& egbase) {
 		set_position(egbase, coords);
 	}
 
-	//if (upcast(Game, game, &egbase)) {
-		//if (game->get_gametime()>3*60*60*1000) {//NOCOM
-			//printf (" settin a portdock withouth a fleet\n");
-			//return;}
-	//}
-
 	init_fleet(egbase);
 }
 
@@ -223,8 +217,6 @@ void PortDock::cleanup(EditorGameBase& egbase) {
 			if (game->is_loaded()) {
 				Player& player = owner();
 				log("Message: Portdock lost, trying to restore it (player %d)\n",
-				    player.player_number());
-				printf("Message: Portdock lost, trying to restore it (player %d)\n", //NOCOM
 				    player.player_number());
 				wh->restore_portdock_or_destroy(egbase);
 				return;

@@ -106,7 +106,6 @@ void Fleet::init(EditorGameBase & egbase)
 
 	if (m_ships.empty() && m_ports.empty()) {
 		molog("Empty fleet initialized; disband immediately\n");
-		printf("Empty fleet initialized; disband immediately\n");		
 		remove(egbase);
 		return;
 	}
@@ -163,11 +162,13 @@ void Fleet::find_other_fleet(EditorGameBase & egbase)
 		if (BaseImmovable * imm = cur.field->get_immovable()) {
 			if (imm->descr().type() == MapObjectType::PORTDOCK) {
 				if (upcast(PortDock, dock, imm)) {
-					if (dock->get_fleet() == nullptr){//NOCOM
-						printf ("dock on %3dx%3d withouth fleet\n",
+					// here might be a problem so I (tiborb) put here
+					// this test, might be removed after some time
+					if (dock->get_fleet() == nullptr){
+						log ("The dock on %3dx%3d withouth a fleet!\n",
 						dock->m_dockpoints.front().x,
 						dock->m_dockpoints.front().y);
-					}						
+					}
 					if (dock->get_fleet() != this && dock->get_owner() == get_owner()) {
 						dock->get_fleet()->merge(egbase, this);
 						return;

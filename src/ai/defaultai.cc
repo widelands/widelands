@@ -68,7 +68,7 @@ constexpr int kMarineDecisionInterval = 20 * 1000;
 constexpr int kTrainingSitesCheckInterval = 30 * 1000;
 
 //this is intended for map developers, by default should be off
-constexpr bool kPrintStats = true;
+constexpr bool kPrintStats = false;
 
 // Some buildings have to be built close to borders and their
 // priority might be decreased below 0, so this is to
@@ -141,7 +141,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 	// Subscribe to NoteImmovables.
 	immovable_subscriber_ =
 	   Notifications::subscribe<NoteImmovable>([this](const NoteImmovable& note) {
-		   if (player_ == nullptr) {
+			if (player_ == nullptr) {
 			   return;
 		   }
 			if (note.pi->owner().player_number() != player_->player_number()) {
@@ -344,7 +344,7 @@ void DefaultAI::think() {
 	//print statistics
 	if (kPrintStats && next_statistics_report_ <= gametime) {
 		print_stats(gametime);
-		next_statistics_report_ += 60 * 60 * 1000; //NOCOM
+		next_statistics_report_ += 60 * 60 * 1000;
 	}
 }
 
@@ -4195,8 +4195,8 @@ void DefaultAI::review_wares_targets(int32_t const gametime) {
 	}
 }
 
-// This is used for map tweaking, so usually this is not used :)
-// TODO(tiborb ?): - it would be nice to have this activated from command line //NOCOM
+// This is used for map tweaking, so by default it is of (see kPrintStats)
+// TODO(tiborb ?): - it would be nice to have this activated by a command line switch
 void DefaultAI::print_stats(uint32_t const gametime) {
 
 	PlayerNumber const pn = player_number();
@@ -4214,9 +4214,9 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 		if (get_warehoused_stock(index) > 0) {
 			continue;
 		}
-		summary = summary + materials.at(j)+", ";
+		summary = summary + materials.at(j) + ", ";
 	}
-	printf (" %1d: Buildings: Pr:%3d, Ml:%3d, Mi:%2d, Wh:%2d, Po:%2d. Missing: %s\n",
+	log (" %1d: Buildings: Pr:%3d, Ml:%3d, Mi:%2d, Wh:%2d, Po:%2d. Missing: %s\n",
 		pn,
 		productionsites.size(),
 		militarysites.size(),

@@ -481,16 +481,14 @@ void Warehouse::init(EditorGameBase & egbase)
 	if (descr().get_isport()) {
 		init_portdock(egbase);
 		PortDock* pd = m_portdock;
+		// should help diagnose problems with marine
 		if (!pd->get_fleet()) {
-			printf(" Warning: portdock without a fleet created (%3dx%3d)\n",
-			get_position().x,get_position().y);
+			log(" Warning: portdock without a fleet created (%3dx%3d)\n",
+			get_position().x,
+			get_position().y);
 		}
 	}
-	
-	if(descr().get_isport() && !m_portdock)
-		printf(" Warning: port without a portdock created on %3dx%3d\n",
-		get_position().x,get_position().y);
-		
+
 }
 
 /**
@@ -507,17 +505,8 @@ void Warehouse::init_portdock(EditorGameBase & egbase)
 		log("Attempting to setup port without neighboring water (coords: %3dx%3d).\n",
 		    get_position().x,
 		    get_position().y);
-		printf("Attempting to setup port without neighboring water (coords: %3dx%3d).\n",
-		    get_position().x,
-		    get_position().y);
 		return;
 	}
-
-	//if (upcast(Game, game, &egbase)) {
-		//if (game->get_gametime()>3*60*60*1000) {//NOCOM
-			//printf (" settin a port withouth portdock\n");
-			//return;}
-	//}
 
 	molog("Found %" PRIuS " fields for the dock\n", dock.size());
 
@@ -531,12 +520,16 @@ void Warehouse::init_portdock(EditorGameBase & egbase)
 
 	if (get_economy() != nullptr)
 		m_portdock->set_economy(get_economy());
-		
-	PortDock* pd_tmp = m_portdock; //NOCoM
+
+	// this is just to indicate something wrong is going on
+	//(tiborb)
+	PortDock* pd_tmp = m_portdock;
 	if (!pd_tmp->get_fleet()) {
-		printf (" portdock created but without a fleet!\n");
+		log (" portdock for port at %3dx%3d created but without a fleet!\n",
+		    get_position().x,
+		    get_position().y);
 	}
-	
+
 }
 
 void Warehouse::destroy(EditorGameBase & egbase)
@@ -546,23 +539,17 @@ void Warehouse::destroy(EditorGameBase & egbase)
 
 // if the port still exists and we are in game we first try to restore the portdock
 void Warehouse::restore_portdock_or_destroy(EditorGameBase& egbase) {
-	if (egbase.objects().object_still_available(m_portdock)) {
-		printf (" removing portdock before re-init\n");
-		PortDock* pd = m_portdock;
-		pd->remove(egbase); //NOCOM ????
-		}
-	// re-init the portdock
 	Warehouse::init_portdock(egbase);
 	if (!m_portdock) {
-		printf(" Portdock lost, removing the port now (coords: %3dx%3d)\n",
+		log(" Portdock could not be restored, removing the port now (coords: %3dx%3d)\n",
 		    get_position().x,
 		    get_position().y);
 		Building::destroy(egbase);
 	} else {
-		printf ("Message: portdock restored\n");
+		molog ("Message: portdock restored\n");
 		PortDock* pd_tmp = m_portdock;
 		if (!pd_tmp->get_fleet()) {
-			printf (" portdock restored but without a fleet!\n");
+			log (" Portdock restored but without a fleet!\n");
 		}
 	}
 }

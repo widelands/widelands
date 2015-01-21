@@ -784,17 +784,16 @@ void CmdShipScoutDirection::execute (Game & game)
 {
 	upcast(Ship, ship, game.objects().get_object(serial));
 	if (ship && ship->get_owner()->player_number() == sender()) {
-		//NOCOM - following test should be aplied only to computer player
-		//but I dont know how this can be tested
-		//Also printf needs to be replaced by log()
+		//My (tiborb) idea wat to apply following test only on computer player
+		//but perhaps it will make no harm for all players
 		if (!(ship->get_ship_state() == Widelands::Ship::EXP_WAITING ||
 			ship->get_ship_state() == Widelands::Ship::EXP_FOUNDPORTSPACE)) {
-			printf (" %1d:ship on %3dx%3d received scout command but not in "
-			"EXP_WAITING or PORTSPACE_FOUND status (expedition: %s), ignoring...\n",
-			ship->get_owner()->player_number(),
-			ship->get_position().x,
-			ship->get_position().y,
-			(ship->state_is_expedition())?"Y":"N");
+			log (" %1d:ship on %3dx%3d received scout command but not in "
+				"EXP_WAITING or PORTSPACE_FOUND status (expedition: %s), ignoring...\n",
+				ship->get_owner()->player_number(),
+				ship->get_position().x,
+				ship->get_position().y,
+				(ship->state_is_expedition())?"Y":"N");
 			return;
 		}
 		ship->exp_scout_direction(game, dir);
@@ -854,14 +853,14 @@ void CmdShipConstructPort::execute (Game & game)
 {
 	upcast(Ship, ship, game.objects().get_object(serial));
 	if (ship && ship->get_owner()->player_number() == sender()) {
-		//NOCOM see NOCOM above
+		//for comment see comment above
 		if (ship->get_ship_state() != Widelands::Ship::EXP_FOUNDPORTSPACE) {
-			printf (" %1d:ship on %3dx%3d received build port command but "
+			log (" %1d:ship on %3dx%3d received build port command but "
 			"not in PORTSPACE_FOUND status (expedition: %s), ignoring...\n",
-			ship->get_owner()->player_number(),
-			ship->get_position().x,
-			ship->get_position().y,
-			(ship->state_is_expedition())?"Y":"N");
+				ship->get_owner()->player_number(),
+				ship->get_position().x,
+				ship->get_position().y,
+				(ship->state_is_expedition())?"Y":"N");
 			return;
 		}
 		ship->exp_construct_port(game, coords);
@@ -921,15 +920,15 @@ void CmdShipExploreIsland::execute (Game & game)
 {
 	upcast(Ship, ship, game.objects().get_object(serial));
 	if (ship && ship->get_owner()->player_number() == sender()) {
-		//see NOCOM above
+		//see comment above
 		if (!(ship->get_ship_state() == Widelands::Ship::EXP_WAITING ||
 			ship->get_ship_state() == Widelands::Ship::EXP_FOUNDPORTSPACE)) {
-			printf (" %1d:ship on %3dx%3d received explore island command "
+			log (" %1d:ship on %3dx%3d received explore island command "
 			"but not in EXP_WAITING or PORTSPACE_FOUND status (expedition: %s), ignoring...\n",
-			ship->get_owner()->player_number(),
-			ship->get_position().x,
-			ship->get_position().y,
-			(ship->state_is_expedition())?"Y":"N");
+				ship->get_owner()->player_number(),
+				ship->get_position().x,
+				ship->get_position().y,
+				(ship->state_is_expedition())?"Y":"N");
 			return;
 		}
 		ship->exp_explore_island(game, clockwise);
