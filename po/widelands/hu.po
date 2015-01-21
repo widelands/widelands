@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-12-16 11:38+0000\n"
-"PO-Revision-Date: 2014-12-17 06:29+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"PO-Revision-Date: 2015-01-20 22:11+0000\n"
+"Last-Translator: cn4ij <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-12-18 05:41+0000\n"
-"X-Generator: Launchpad (build 17286)\n"
+"X-Launchpad-Export-Date: 2015-01-21 05:32+0000\n"
+"X-Generator: Launchpad (build 17306)\n"
 "Language: hu\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -630,7 +630,7 @@ msgstr "névtelen"
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:248
 #, c-format
 msgid "Directory: %s"
-msgstr ""
+msgstr "Könyvtár: %s"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:250
 msgid "directory"
@@ -1974,7 +1974,7 @@ msgstr "Leírás:"
 #: ../../src/ui_fsmenu/campaign_select.cc:335
 #: ../../src/ui_fsmenu/loadgame.cc:122
 msgid "Return to the main menu"
-msgstr ""
+msgstr "Visszatérés a főmenübe"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:90
 msgid "Play this campaign"
@@ -1996,7 +1996,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/campaign_select.cc:343
 #: ../../src/ui_fsmenu/mapselect.cc:96
 msgid "Story and hints"
-msgstr ""
+msgstr "Kerettörténet és tippek"
 
 #. * TRANSLATORS: Campaign difficulty table header
 #: ../../src/ui_fsmenu/campaign_select.cc:108
@@ -2110,8 +2110,8 @@ msgstr[1] ""
 #: ../../src/ui_fsmenu/mapselect.cc:317
 msgid "Author:"
 msgid_plural "Authors:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Készítő:"
+msgstr[1] "Készítők:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:459
 msgid "Pick a tutorial from the list, then hit \"OK\"."
@@ -2137,7 +2137,7 @@ msgstr "Vissza"
 
 #: ../../src/ui_fsmenu/fileview.cc:75 ../../src/wui/watchwindow.cc:140
 msgid "Close"
-msgstr "Bezár"
+msgstr "Bezárás"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:55
 msgid "Metaserver Lobby"
@@ -2484,7 +2484,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/loadgame.cc:57
 msgid "Choose a replay"
-msgstr ""
+msgstr "Visszajátszás kiválasztása"
 
 #: ../../src/ui_fsmenu/loadgame.cc:57
 msgid "Choose a saved game"
@@ -2497,77 +2497,77 @@ msgstr "Törlés"
 
 #: ../../src/ui_fsmenu/loadgame.cc:117
 msgid "The time that elapsed inside this game"
-msgstr ""
+msgstr "A játékban eltelt idő"
 
 #: ../../src/ui_fsmenu/loadgame.cc:118
 msgid "The number of players"
-msgstr ""
+msgstr "A játékosok száma"
 
 #: ../../src/ui_fsmenu/loadgame.cc:119
 msgid "The win condition that was set for this game"
-msgstr ""
+msgstr "A játékhoz megadott elérendő cél"
 
 #: ../../src/ui_fsmenu/loadgame.cc:123
 msgid "Load this replay"
-msgstr ""
+msgstr "A kiválasztott visszajátszás betöltése"
 
 #: ../../src/ui_fsmenu/loadgame.cc:124
 msgid "The map that this replay is based on"
-msgstr ""
+msgstr "A térkép, amiről a visszajátszás készült"
 
 #: ../../src/ui_fsmenu/loadgame.cc:125
 msgid "Delete this replay"
-msgstr ""
+msgstr "A kiválasztott visszajátszás törlése"
 
 #: ../../src/ui_fsmenu/loadgame.cc:127 ../../src/ui_fsmenu/mapselect.cc:93
 msgid "Return to the single player menu"
-msgstr ""
+msgstr "Visszatérés az egyjátékos-menübe"
 
 #: ../../src/ui_fsmenu/loadgame.cc:128
 msgid "Load this game"
-msgstr ""
+msgstr "A kiválasztott játék betöltése"
 
 #: ../../src/ui_fsmenu/loadgame.cc:129
 msgid "The map that this game is based on"
-msgstr ""
+msgstr "A térkép, amiről a mentés készült"
 
 #: ../../src/ui_fsmenu/loadgame.cc:130
 msgid "Delete this game"
-msgstr ""
+msgstr "A kiválasztott játék törlése"
 
 #: ../../src/ui_fsmenu/loadgame.cc:139
 msgid "Save Date"
-msgstr ""
+msgstr "Mentés ideje"
 
 #: ../../src/ui_fsmenu/loadgame.cc:139
 msgid "The date this game was saved"
-msgstr ""
+msgstr "A játék elmentésének időpontja"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load.
 #. * TRANSLATORS: %s is a list of game modes.
 #: ../../src/ui_fsmenu/loadgame.cc:156
 #, c-format
 msgid "Game Mode: %s."
-msgstr ""
+msgstr "Játékmód. %s"
 
 #: ../../src/ui_fsmenu/loadgame.cc:159
 msgid "Numbers are the number of players."
-msgstr ""
+msgstr "A számok a játékosok számát jelentik."
 
 #. * TRANSLATORS: Game Mode table column when choosing a game/replay to load.
 #. * TRANSLATORS: Keep this to 5 letters maximum.
 #. * TRANSLATORS: A tooltip will explain if you need to use an abbreviation.
 #: ../../src/ui_fsmenu/loadgame.cc:165
 msgid "Mode"
-msgstr ""
+msgstr "Mód"
 
 #: ../../src/ui_fsmenu/loadgame.cc:169 ../../src/ui_fsmenu/mapselect.cc:105
 msgid "Map Name"
-msgstr "Térkép név"
+msgstr "Térkép neve"
 
 #: ../../src/ui_fsmenu/loadgame.cc:169
 msgid "The name of the map that was played"
-msgstr ""
+msgstr "A játszott térkép neve."
 
 #: ../../src/ui_fsmenu/loadgame.cc:173
 msgid "Filename"
@@ -2575,7 +2575,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/loadgame.cc:173
 msgid "The filename the game was saved under"
-msgstr ""
+msgstr "Amilyen néven mentve lett a játék"
 
 #: ../../src/ui_fsmenu/loadgame.cc:226
 msgid "Save Date:"
@@ -2583,19 +2583,19 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/loadgame.cc:235 ../../src/ui_fsmenu/loadgame.cc:356
 msgid "Filename:"
-msgstr ""
+msgstr "Fájlnév:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:239
 msgid "Do you really want to delete this replay?"
-msgstr ""
+msgstr "Valóban szeretnéd törölni ezt a visszajátszást?"
 
 #: ../../src/ui_fsmenu/loadgame.cc:242
 msgid "Do you really want to delete this game?"
-msgstr ""
+msgstr "Valóban szeretnéd törölni ezt a játékot?"
 
 #: ../../src/ui_fsmenu/loadgame.cc:246
 msgid "Confirm deleting file"
-msgstr ""
+msgstr "Fájltörlés megerősítése"
 
 #: ../../src/ui_fsmenu/loadgame.cc:278
 msgid "Gametime:"
@@ -2603,19 +2603,19 @@ msgstr "Játékidő:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:280
 msgid "Win Condition:"
-msgstr ""
+msgstr "Játék célja:"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay
 #. * TRANSLATORS: hour:minute
 #: ../../src/ui_fsmenu/loadgame.cc:464
 msgid "Today, %1%:%2%"
-msgstr ""
+msgstr "Ma %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay
 #. * TRANSLATORS: hour:minute
 #: ../../src/ui_fsmenu/loadgame.cc:477
 msgid "Yesterday, %1%:%2%"
-msgstr ""
+msgstr "Tegnap %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay
 #. * TRANSLATORS: month day, year
@@ -2629,7 +2629,7 @@ msgstr ""
 #. * TRANSLATORS: Make sure that this translation is consistent with the tooltip.
 #: ../../src/ui_fsmenu/loadgame.cc:509
 msgid "SP"
-msgstr ""
+msgstr "EJ"
 
 #. * TRANSLATORS: "Multiplayer Host" entry in the Game Mode table column.
 #. * TRANSLATORS: "Keep this to 2 letters maximum.
@@ -2638,7 +2638,7 @@ msgstr ""
 #. * TRANSLATORS: %1% is the number of players
 #: ../../src/ui_fsmenu/loadgame.cc:517
 msgid "H (%1%)"
-msgstr ""
+msgstr "Sz"
 
 #. * TRANSLATORS: "Multiplayer" entry in the Game Mode table column.
 #. * TRANSLATORS: "Keep this to 2 letters maximum.
@@ -2647,7 +2647,7 @@ msgstr ""
 #. * TRANSLATORS: %1% is the number of players
 #: ../../src/ui_fsmenu/loadgame.cc:526
 msgid "MP (%1%)"
-msgstr ""
+msgstr "TJ (%1%)"
 
 #. * TRANSLATORS: Used in filenames for loading games
 #: ../../src/ui_fsmenu/loadgame.cc:539
@@ -2678,7 +2678,7 @@ msgstr "Oktatójáték"
 
 #: ../../src/ui_fsmenu/main.cc:40 ../../src/ui_fsmenu/singleplayer.cc:33
 msgid "Single Player"
-msgstr "Egyjátékos mód"
+msgstr "Egy játékos"
 
 #: ../../src/ui_fsmenu/main.cc:43
 msgid "Multiplayer"
@@ -2686,7 +2686,7 @@ msgstr "Több játékos"
 
 #: ../../src/ui_fsmenu/main.cc:46
 msgid "Watch Replay"
-msgstr "Felvétel megtekintése"
+msgstr "Visszajátszás megtekintése"
 
 #: ../../src/ui_fsmenu/main.cc:52 ../../src/wui/game_options_menu.cc:70
 #: ../../src/wui/interactive_player.cc:107
@@ -2700,22 +2700,22 @@ msgstr "Licenc"
 
 #: ../../src/ui_fsmenu/main.cc:61 ../../src/wui/game_options_menu.cc:97
 msgid "Authors"
-msgstr "Szerzők"
+msgstr "Készítők"
 
 #: ../../src/ui_fsmenu/main.cc:64
 msgid "Exit Widelands"
-msgstr ""
+msgstr "Kilépés a Widelandsből"
 
 #. * TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release"
 #: ../../src/ui_fsmenu/main.cc:70
 #, c-format
 msgid "Version %1$s (%2$s)"
-msgstr ""
+msgstr "Verzió: %1$s (%2$s)"
 
 #. * TRANSLATORS: Placeholders are the copyright years
 #: ../../src/ui_fsmenu/main.cc:75
 msgid "(C) %1%-%2% by the Widelands Development Team"
-msgstr ""
+msgstr "(C) %1%-%2%, Widelands fejlesztőcsapat"
 
 #: ../../src/ui_fsmenu/main.cc:80
 msgid "Licensed under the GNU General Public License V2.0"
@@ -2723,7 +2723,7 @@ msgstr "Licenc: GNU General Public License V2.0"
 
 #: ../../src/ui_fsmenu/mapselect.cc:50
 msgid "Choose a map"
-msgstr "Válassz térképet"
+msgstr "Térkép kiválasztása"
 
 #: ../../src/ui_fsmenu/mapselect.cc:88
 msgid "Return to the editor menu"
@@ -2735,24 +2735,24 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:104
 msgid "Number of players"
-msgstr ""
+msgstr "Játékosok száma"
 
 #. * TRANSLATORS: Column title for number of players in map list
 #: ../../src/ui_fsmenu/mapselect.cc:104
 msgid "Pl."
-msgstr ""
+msgstr "J."
 
 #: ../../src/ui_fsmenu/mapselect.cc:105
 msgid "The name of the map or scenario"
-msgstr ""
+msgstr "A térkép vagy küldetés neve"
 
 #: ../../src/ui_fsmenu/mapselect.cc:107
 msgid "Size"
-msgstr ""
+msgstr "Méret"
 
 #: ../../src/ui_fsmenu/mapselect.cc:107
 msgid "The size of the map (Width x Height)"
-msgstr ""
+msgstr "A térkép mérete (szélesség × magasság)"
 
 #: ../../src/ui_fsmenu/mapselect.cc:135
 msgid "Show all maps"
@@ -2761,11 +2761,11 @@ msgstr "Minden térkép megjelenítése"
 #. * TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated.
 #: ../../src/ui_fsmenu/mapselect.cc:142
 msgid "Show original map names"
-msgstr ""
+msgstr "Eredeti térképnevek mutatása"
 
 #: ../../src/ui_fsmenu/mapselect.cc:151
 msgid "Official"
-msgstr ""
+msgstr "Hivatalos"
 
 #: ../../src/ui_fsmenu/mapselect.cc:152
 msgid "Unbalanced"
@@ -2773,7 +2773,7 @@ msgstr "Kiegyenlítetlen"
 
 #: ../../src/ui_fsmenu/mapselect.cc:153
 msgid "Seafaring"
-msgstr ""
+msgstr "Vízi"
 
 #: ../../src/ui_fsmenu/mapselect.cc:160
 msgid "Free for all"
@@ -2781,19 +2781,19 @@ msgstr "Mindenki mindenki ellen"
 
 #: ../../src/ui_fsmenu/mapselect.cc:161
 msgid "1v1"
-msgstr "1v1"
+msgstr "Egy egy ellen"
 
 #: ../../src/ui_fsmenu/mapselect.cc:168
 msgid "Teams of 2"
-msgstr "2-es csapatok"
+msgstr "2 fős csapatok"
 
 #: ../../src/ui_fsmenu/mapselect.cc:169
 msgid "Teams of 3"
-msgstr "3-as csapatok"
+msgstr "3 fős csapatok"
 
 #: ../../src/ui_fsmenu/mapselect.cc:170
 msgid "Teams of 4"
-msgstr "4-es csapatok"
+msgstr "4 fős csapatok"
 
 #. * TRANSLATORS: Tooltip in map description when map names are being displayed in English.
 #. * TRANSLATORS: %s is the localized name of the map.
@@ -2807,7 +2807,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/mapselect.cc:311
 #, c-format
 msgid "The original name of this map: %s"
-msgstr ""
+msgstr "A térkép eredeti neve: %s"
 
 #: ../../src/ui_fsmenu/mapselect.cc:315
 msgid "The name of this map"
@@ -2829,7 +2829,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:331
 msgid "Directory:"
-msgstr ""
+msgstr "Könyvtár:"
 
 #: ../../src/ui_fsmenu/mapselect.cc:333
 msgid "The name of this directory"
@@ -2842,7 +2842,7 @@ msgstr ""
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
 #: ../../src/ui_fsmenu/mapselect.cc:440
 msgid "Multiplayer Scenarios"
-msgstr ""
+msgstr "Többjátékos küldetések"
 
 #: ../../src/ui_fsmenu/mapselect.cc:582
 msgid "Nobody"
@@ -2901,7 +2901,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:118
 msgid "Host"
-msgstr "Host"
+msgstr "Szerver"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:120
 msgid "State"
@@ -2932,7 +2932,7 @@ msgstr "Beállítások"
 
 #: ../../src/ui_fsmenu/options.cc:135
 msgid "In-game resolution"
-msgstr "Játék felbontása"
+msgstr "Képernyőfelbontás a játékban"
 
 #: ../../src/ui_fsmenu/options.cc:151
 msgid "Fullscreen"
@@ -2956,11 +2956,11 @@ msgstr "Zene"
 
 #: ../../src/ui_fsmenu/options.cc:208
 msgid "Enable Sound"
-msgstr "Hang"
+msgstr "Hangok"
 
 #: ../../src/ui_fsmenu/options.cc:215
 msgid "In-game Options"
-msgstr "Játék beállítások"
+msgstr "Játékbeállítások"
 
 #: ../../src/ui_fsmenu/options.cc:223
 msgid "Use single watchwindow mode"
@@ -2968,7 +2968,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:233
 msgid "Start building road after placing a flag"
-msgstr ""
+msgstr "Útépítés megkezdése zászló elhelyezése után"
 
 #: ../../src/ui_fsmenu/options.cc:244
 msgid "Show buildings area preview"
@@ -2987,8 +2987,8 @@ msgstr "Ablakok igazítása a sarkokhoz"
 #: ../../src/ui_fsmenu/options.cc:274 ../../src/ui_fsmenu/options.cc:388
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "perc"
+msgstr[1] "perc"
 
 #: ../../src/ui_fsmenu/options.cc:282
 msgid "Save game automatically every"
@@ -2999,17 +2999,17 @@ msgstr "Automatikus mentés ennyi időnként:"
 #: ../../src/ui_fsmenu/options.cc:292 ../../src/ui_fsmenu/options.cc:392
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "nap"
+msgstr[1] "nap"
 
 #: ../../src/ui_fsmenu/options.cc:300
 msgid "Remove replays older than:"
-msgstr ""
+msgstr "Ennél régebbi visszajátszások törlése:"
 
 #. * TRANSLATORS Options: Save game automatically every:
 #: ../../src/ui_fsmenu/options.cc:312
 msgid "Off"
-msgstr "Ki"
+msgstr "Kikapcsolva"
 
 #. * TRANSLATORS Options: Remove Replays older than:
 #: ../../src/ui_fsmenu/options.cc:320
@@ -3031,26 +3031,26 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:547
 msgid "Distance for windows to snap to other panels:"
-msgstr "Ablak távolsága a többi paneltől:"
+msgstr "Ablakok összeillesztése, ha ennél közelebb kerülnek egymáshoz:"
 
 #: ../../src/ui_fsmenu/options.cc:551
 msgid "Distance for windows to snap to borders:"
-msgstr "Ablak távolsága a keretektől:"
+msgstr "Ablak szélhez illesztése, ha ennél közelebb kerül hozzá:"
 
 #: ../../src/ui_fsmenu/options.cc:558 ../../src/ui_fsmenu/options.cc:565
 #: ../../src/ui_fsmenu/options.cc:661 ../../src/ui_fsmenu/options.cc:665
 msgid "pixel"
 msgid_plural "pixels"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "képpont"
+msgstr[1] "képpont"
 
 #: ../../src/ui_fsmenu/options.cc:575
 msgid "Show in-game chat with transparent background"
-msgstr ""
+msgstr "Játék közbeni csevegés átlátszó háttérrel mutatása"
 
 #: ../../src/ui_fsmenu/options.cc:585
 msgid "Play a sound at message arrival."
-msgstr "Hangjelzés üzenetérkezés esetén"
+msgstr "Hangjelzés üzenet érkezésekor"
 
 #: ../../src/ui_fsmenu/options.cc:595
 msgid "Do not zip widelands data files (maps, replays and savegames)."
