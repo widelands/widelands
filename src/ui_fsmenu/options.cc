@@ -403,7 +403,7 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 
 	// We want these two entries on top - the most likely user's choice and the default.
 	m_language_list.add(_("Try system language"), "", nullptr, current_locale == "");
-	m_language_list.add(_("English"), "en", nullptr, current_locale == "en");
+	m_language_list.add("English", "en", nullptr, current_locale == "en");
 
 	// We start with the locale directory so we can pick up locales
 	// that don't have a configuration file yet.
