@@ -136,6 +136,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 		(boost::bind
 			 (&FullscreenMenuLoadGame::clicked_delete, boost::ref(*this)));
 	m_table.add_column(130, _("Save Date"), _("The date this game was saved"), UI::Align_Left);
+	int used_width = 130;
 	if (m_is_replay || m_settings->settings().multiplayer) {
 		std::vector<std::string> modes;
 		if (m_is_replay) {
@@ -164,11 +165,14 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 								 _("Mode"),
 								 (boost::format("%s %s") % mode_tooltip_1 % mode_tooltip_2).str(),
 								 UI::Align_Left);
-		m_table.add_column(m_table.get_w() - 130 - 65,
+		used_width += 65;
+	}
+	if (m_is_replay) {
+		m_table.add_column(m_table.get_w() - used_width,
 								 _("Map Name"), _("The name of the map that was played"),
 								 UI::Align_Left);
 	} else {
-		m_table.add_column(m_table.get_w() - 130,
+		m_table.add_column(m_table.get_w() - used_width,
 								 _("Filename"), _("The filename the game was saved under"),
 								 UI::Align_Left);
 	}
@@ -526,10 +530,15 @@ void FullscreenMenuLoadGame::fill_table() {
 							gametypestring = "";
 					}
 					te.set_string(1, gametypestring);
-					te.set_string(2, gpdp.get_mapname());
+					if (m_is_replay) {
+						te.set_string(2, gamedata->mapname);
+					} else {
+						te.set_string(2, FileSystem::filename_without_ext(gamedata->filename.c_str()));
+					}
 
 				} else {
 					const std::string fs_filename = FileSystem::filename_without_ext(gamedata->filename.c_str());
+					// NOCOM these are now wl_autosave_00 - autosave_09
 					if (fs_filename == "wl_autosave" || fs_filename == "wl_autosave2") {
 						/** TRANSLATORS: Used in filenames for loading games */
 						te.set_string(1, (boost::format(_("Autosave: %1%")) % gpdp.get_mapname()).str());
