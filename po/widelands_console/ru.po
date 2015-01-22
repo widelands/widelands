@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-12-16 11:38+0000\n"
-"PO-Revision-Date: 2015-01-20 00:48+0000\n"
+"PO-Revision-Date: 2015-01-21 23:05+0000\n"
 "Last-Translator: Vlad <vzharkih@yandex.ru>\n"
 "Language-Team: russian <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-01-21 05:32+0000\n"
+"X-Launchpad-Export-Date: 2015-01-22 05:37+0000\n"
 "X-Generator: Launchpad (build 17306)\n"
 
 #. * TRANSLATORS: %s = version information
@@ -78,6 +78,8 @@ msgid ""
 " --remove_syncstreams=[true|false]\n"
 "                      Remove syncstream files on startup"
 msgstr ""
+" --remove_syncstreams=[true|false]\n"
+"                      Удаляет файлы синхронизации потоков при запуске"
 
 #: ../../src/wlapplication_messages.cc:68
 msgid ""
@@ -85,26 +87,29 @@ msgid ""
 "                      Remove replays after this number of days.\n"
 "                      If this is 0, replays are not deleted."
 msgstr ""
+" --remove_replays=[...]\n"
+"                      Удаляет повторы после указанного числа дней.\n"
+"                      Если указан 0, то повторы не удаляются."
 
 #: ../../src/wlapplication_messages.cc:72
 msgid "Sound options:"
-msgstr ""
+msgstr "Настройки звука:"
 
 #: ../../src/wlapplication_messages.cc:73
 msgid " --nosound            Starts the game with sound disabled."
-msgstr ""
+msgstr " --nosound            Запуск игры без звука."
 
 #: ../../src/wlapplication_messages.cc:74
 msgid " --disable_fx         Disable sound effects."
-msgstr ""
+msgstr " --disable_fx         Выключить звуковые эффекты."
 
 #: ../../src/wlapplication_messages.cc:75
 msgid " --disable_music      Disable music."
-msgstr ""
+msgstr " --disable_music      Отключить музыку."
 
 #: ../../src/wlapplication_messages.cc:76
 msgid " --nozip              Do not save files as binary zip archives."
-msgstr ""
+msgstr " --nozip              Не сохранять файлы как бинарные zip-архивы."
 
 #: ../../src/wlapplication_messages.cc:77
 msgid ""
@@ -158,15 +163,15 @@ msgstr ""
 
 #: ../../src/wlapplication_messages.cc:98
 msgid " --xres=[...]         Width of the window in pixel."
-msgstr ""
+msgstr " --xres=[...]         Ширина окна в пикселях."
 
 #: ../../src/wlapplication_messages.cc:99
 msgid " --yres=[...]         Height of the window in pixel."
-msgstr ""
+msgstr " --yres=[...]         Высота окна в пикселях."
 
 #: ../../src/wlapplication_messages.cc:103
 msgid "Options for the internal window manager:"
-msgstr ""
+msgstr "Настройки внутреннего оконного менеджера:"
 
 #: ../../src/wlapplication_messages.cc:104
 msgid ""
@@ -204,11 +209,11 @@ msgstr ""
 
 #: ../../src/wlapplication_messages.cc:123
 msgid " --verbose            Enable verbose debug messages"
-msgstr ""
+msgstr " --verbose            Включить подробные сообщения отладки"
 
 #: ../../src/wlapplication_messages.cc:125
 msgid " --help               Show this help"
-msgstr ""
+msgstr " --help               Показать справку"
 
 #: ../../src/wlapplication_messages.cc:127
 msgid ""
@@ -217,3 +222,7 @@ msgid ""
 "\n"
 "Hope you enjoy this game!"
 msgstr ""
+"Хотите сообщить об ошибке? Есть предложения? Посетите сайт нашего проекта:\n"
+"        https://launchpad.net/widelands\n"
+"\n"
+"Надеемся Вам понравится эта игра!"
