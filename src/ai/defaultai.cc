@@ -122,18 +122,18 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 
 	// Subscribe to NoteImmovables.
 	immovable_subscriber_ =
-	   Notifications::subscribe<NoteImmovable>([this](const NoteImmovable& note) {
-		   if (player_ == nullptr) {
-			   return;
-		   }
+		Notifications::subscribe<NoteImmovable>([this](const NoteImmovable& note) {
+			if (player_ == nullptr) {
+				return;
+			}
 			if (note.pi->owner().player_number() != player_->player_number()) {
-			   return;
-		   }
+				return;
+			}
 			if (note.ownership == NoteImmovable::Ownership::GAINED) {
-			   gain_immovable(*note.pi);
-		   } else {
-			   lose_immovable(*note.pi);
-		   }
+				gain_immovable(*note.pi);
+			} else {
+				lose_immovable(*note.pi);
+			}
 		});
 
 	// Subscribe to ProductionSiteOutOfResources.
