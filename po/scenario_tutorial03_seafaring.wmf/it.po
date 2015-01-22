@@ -7,40 +7,44 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-12-08 11:33+0000\n"
-"PO-Revision-Date: 2012-01-01 19:54+0000\n"
+"POT-Creation-Date: 2014-12-16 11:38+0000\n"
+"PO-Revision-Date: 2015-01-15 15:53+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-12-09 05:43+0000\n"
-"X-Generator: Launchpad (build 17283)\n"
+"X-Launchpad-Export-Date: 2015-01-16 05:39+0000\n"
+"X-Generator: Launchpad (build 17303)\n"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:20
 msgid "Seafaring"
-msgstr ""
+msgstr "Viaggiare in mare"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:22
 msgid "Seafaring Tutorial"
-msgstr ""
+msgstr "Tutorial sui viaggi in mare"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:23
 msgid ""
 "Welcome back. In this tutorial, you are going to learn the most important "
 "things about seafaring, that is ships, ports, and expedition."
 msgstr ""
+"Bentornato. In questo tutorial, imparerai le cose più importanti sui viaggi "
+"in mare, cioè navi, porti, e spedizioni."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:24
 msgid ""
 "But let me first give you an overview about your territory: here in the "
 "south, you have a whole economy with almost everything you need."
 msgstr ""
+"Ma permettimi prima di darti una panoramica sul tuo territorio: qui nel sud, "
+"si dispone di una intera economia con quasi tutto il necessario."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:32
 msgid "The Northern Part"
-msgstr ""
+msgstr "La parte settentrionale"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:34
 msgid ""
@@ -66,7 +70,7 @@ msgstr ""
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:43
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:45
 msgid "Ports"
-msgstr ""
+msgstr "Porti"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:46
 msgid ""
@@ -86,21 +90,23 @@ msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:55
 msgid "Building ports"
-msgstr ""
+msgstr "Costruire dei porti"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:57
 msgid "How to build a port"
-msgstr ""
+msgstr "Come costruire un porto"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:58
 msgid ""
 "Ports are big buildings, but they can only be built at special locations: "
 "those marked with the"
 msgstr ""
+"I porti sono grandi edifici, ma possono essere costruiti solo in luoghi "
+"particolari: quelli contrassegnati con"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:60
 msgid "blue port space icon."
-msgstr ""
+msgstr "l'icona blu dello spazio portuale."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:62
 msgid ""
@@ -118,11 +124,11 @@ msgstr ""
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:65
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:68
 msgid "Build a port in the northern part of your camp."
-msgstr ""
+msgstr "Costruisci un porto nella parte settentrionale del tuo accampamento."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:70
 msgid "Build a port"
-msgstr ""
+msgstr "Costruisci un porto"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:71
 msgid "You always need a port when you want to transport wares with a ship."
@@ -148,11 +154,11 @@ msgstr ""
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:81
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:103
 msgid "Constructing ships"
-msgstr ""
+msgstr "Costruire delle navi"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:83
 msgid "Let’s build ships"
-msgstr ""
+msgstr "Costruiamo delle navi"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:84
 msgid "Great. Your port has just been finished. Now we need some ships."
@@ -227,7 +233,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:114
 msgid "Construct two ships"
-msgstr ""
+msgstr "Costruisci due navi"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:116
 msgid ""
@@ -245,11 +251,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:125
 msgid "No Iron"
-msgstr ""
+msgstr "Non c'è ferro"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:127
 msgid "We lack iron"
-msgstr ""
+msgstr "Ci manca il ferro"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:128
 msgid ""
@@ -277,7 +283,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:140
 msgid "Expeditions"
-msgstr ""
+msgstr "Spedizioni"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:141
 msgid ""
@@ -310,11 +316,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:150
 msgid "Start an expedition"
-msgstr ""
+msgstr "Inizia una spedizione"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:153
 msgid "Start an expedition."
-msgstr ""
+msgstr "Inizia una spedizione."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:155
 msgid ""
@@ -328,7 +334,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:163
 msgid "Start your expedition"
-msgstr ""
+msgstr "Inizia la tua spedizione"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:164
 msgid ""
@@ -344,12 +350,20 @@ msgid ""
 "you can make it travel around the coast, where it will look for suitable "
 "places for landing."
 msgstr ""
+"La tua nave sarà in attesa dei tuoi ordini davanti al porto. Non trasporterà "
+"più merci. Utilizza i pulsanti per mandare la tua nave in una qualunque "
+"delle sei direzioni principali della mappa di Widelands. Quando ha raggiunto "
+"un litorale, la si può fare viaggiare lungo la costa, dove cercherà dei "
+"luoghi adatti per l'approdo."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:166
 msgid ""
 "Once a port space has been found, you can construct a new port with the "
 "button in the center of the ship’s control window."
 msgstr ""
+"Una volta che è stato trovato uno spazio per il porto, è possibile costruire "
+"un nuovo porto con il pulsante al centro della finestra di controllo della "
+"nave."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:167
 msgid ""
@@ -363,6 +377,8 @@ msgid ""
 "Search for an island with a mountain, and look for a port space there. "
 "Colonize the island."
 msgstr ""
+"Cerca un'isola con una montagna e cerca lì uno spazio per un porto. "
+"Colonizza l'isola."
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:172
 msgid "Found a settlement"
@@ -384,11 +400,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:184
 msgid "Conclusion"
-msgstr ""
+msgstr "Conclusione"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:186
 msgid "Congratulations"
-msgstr ""
+msgstr "Congratulazioni"
 
 #: ../../campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:187
 msgid ""
@@ -422,10 +438,10 @@ msgstr ""
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../scripting/format_scenario.lua:146
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nuovo obiettivo"
+msgstr[1] "Nuovi obiettivi"

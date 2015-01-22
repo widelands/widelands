@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-12-08 11:33+0000\n"
-"PO-Revision-Date: 2014-12-06 02:59+0000\n"
+"POT-Creation-Date: 2014-12-16 11:38+0000\n"
+"PO-Revision-Date: 2015-01-15 15:31+0000\n"
 "Last-Translator: Davidus <davide97@gmail.com>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-09 05:34+0000\n"
-"X-Generator: Launchpad (build 17283)\n"
+"X-Launchpad-Export-Date: 2015-01-16 05:39+0000\n"
+"X-Generator: Launchpad (build 17303)\n"
 "X-Poedit-Country: ITALY\n"
 "Language: it\n"
 "X-Poedit-Language: Italian\n"
@@ -224,8 +224,8 @@ msgid "CTRL+Leftclick: skips confirmation dialogs"
 msgstr ""
 
 #: ../../txts/README.lua:78
-msgid "F11: takes a screenshot"
-msgstr "F11: cattura uno screenshot"
+msgid "CTRL+F11: takes a screenshot"
+msgstr ""
 
 #: ../../txts/README.lua:80
 msgid ""
@@ -406,17 +406,17 @@ msgid "Elders"
 msgstr "Anziani"
 
 #: ../../txts/developers:18
-#: ../../txts/developers:368
+#: ../../txts/developers:367
 msgid "Graphics"
 msgstr "Grafica"
 
 #: ../../txts/developers:23
-#: ../../txts/developers:361
+#: ../../txts/developers:360
 msgid "Homepage"
 msgstr "Pagina iniziale"
 
 #: ../../txts/developers:28
-#: ../../txts/developers:375
+#: ../../txts/developers:374
 msgid "Sound"
 msgstr "Suono"
 
@@ -428,47 +428,47 @@ msgstr "Lingue"
 msgid "Coders"
 msgstr "Programmatori"
 
-#: ../../txts/developers:94
+#: ../../txts/developers:93
 msgid "Graphicians"
 msgstr "Grafici"
 
-#: ../../txts/developers:124
+#: ../../txts/developers:123
 msgid "Musicians"
 msgstr "Musicisti"
 
-#: ../../txts/developers:136
+#: ../../txts/developers:135
 msgid "Sound Effects"
 msgstr "Effetti sonori"
 
-#: ../../txts/developers:146
+#: ../../txts/developers:145
 msgid "Maps and Missions"
 msgstr "Mappe e Missioni"
 
-#: ../../txts/developers:166
+#: ../../txts/developers:165
 msgid "Tutorials"
 msgstr ""
 
-#: ../../txts/developers:172
+#: ../../txts/developers:171
 msgid "Campaign Story"
 msgstr "Storia della Campagna"
 
-#: ../../txts/developers:175
+#: ../../txts/developers:174
 msgid "Barbarian"
 msgstr "Barbaro"
 
-#: ../../txts/developers:181
+#: ../../txts/developers:180
 msgid "Empire"
 msgstr "Impero"
 
-#: ../../txts/developers:185
+#: ../../txts/developers:184
 msgid "Atlantean"
 msgstr "Atlantidi"
 
-#: ../../txts/developers:192
+#: ../../txts/developers:191
 msgid "Translators"
 msgstr "Traduttori"
 
-#: ../../txts/developers:195
+#: ../../txts/developers:194
 msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
@@ -476,7 +476,7 @@ msgstr ""
 "NOTA: questa lista contiene le persone che hanno tradotto Widelands prima "
 "del passaggio a launchpad.net. "
 
-#: ../../txts/developers:196
+#: ../../txts/developers:195
 msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
@@ -484,99 +484,99 @@ msgstr ""
 "Visita https://translations.launchpad.net/widelands per una lista delle "
 "persone che hanno aiutato a tradurre Widelands tramite launchpad.net."
 
-#: ../../txts/developers:200
+#: ../../txts/developers:199
 msgid "Czech"
 msgstr "Ceco"
 
-#: ../../txts/developers:207
+#: ../../txts/developers:206
 msgid "Dansk"
 msgstr "Danese"
 
-#: ../../txts/developers:213
+#: ../../txts/developers:212
 msgid "Dutch"
 msgstr "Olandese"
 
-#: ../../txts/developers:220
+#: ../../txts/developers:219
 msgid "Finnish"
 msgstr "Finlandese"
 
-#: ../../txts/developers:226
+#: ../../txts/developers:225
 msgid "French"
 msgstr "Francese"
 
-#: ../../txts/developers:233
+#: ../../txts/developers:232
 msgid "Galician"
 msgstr "Galiziano"
 
-#: ../../txts/developers:238
+#: ../../txts/developers:237
 msgid "German"
 msgstr "Tedesco"
 
-#: ../../txts/developers:250
+#: ../../txts/developers:249
 msgid "Hebrew"
 msgstr "Ebraico"
 
-#: ../../txts/developers:255
+#: ../../txts/developers:254
 msgid "Hungarian"
 msgstr "Ungherese"
 
-#: ../../txts/developers:260
+#: ../../txts/developers:259
 msgid "Italian"
 msgstr "Italiano"
 
-#: ../../txts/developers:265
+#: ../../txts/developers:264
 msgid "Polish"
 msgstr "Polacco"
 
-#: ../../txts/developers:273
+#: ../../txts/developers:272
 msgid "Russian"
 msgstr "Russo"
 
-#: ../../txts/developers:278
+#: ../../txts/developers:277
 msgid "Slovak"
 msgstr "Slovacco"
 
-#: ../../txts/developers:283
+#: ../../txts/developers:282
 msgid "Spanish"
 msgstr "Spagnolo"
 
-#: ../../txts/developers:288
+#: ../../txts/developers:287
 msgid "Swedish"
 msgstr "Svedese"
 
-#: ../../txts/developers:295
+#: ../../txts/developers:294
 msgid "Packagers"
 msgstr "Pacchettizzatori"
 
-#: ../../txts/developers:299
+#: ../../txts/developers:298
 msgid "Linux Distributions"
 msgstr "Distribuzioni Linux"
 
-#: ../../txts/developers:310
+#: ../../txts/developers:309
 msgid "Other Unix Distributions"
 msgstr "Altre Distribuzioni Unix"
 
-#: ../../txts/developers:321
+#: ../../txts/developers:320
 msgid "Non Unix Distributions"
 msgstr "Distribuzioni Non Unix"
 
-#: ../../txts/developers:333
+#: ../../txts/developers:332
 msgid "Homepage Coders"
 msgstr "Pagina principale degli sviluppatori"
 
-#: ../../txts/developers:342
+#: ../../txts/developers:341
 msgid "Documentation, Help and Wiki"
 msgstr "Documentazione, Aiuto e Wiki"
 
-#: ../../txts/developers:357
+#: ../../txts/developers:356
 msgid "Former elders"
 msgstr "Ex anziani"
 
-#: ../../txts/developers:380
+#: ../../txts/developers:379
 msgid "Translation"
 msgstr "Traduzione"
 
-#: ../../txts/developers:387
+#: ../../txts/developers:386
 msgid "Other"
 msgstr "Altro"
 
@@ -750,6 +750,8 @@ msgid ""
 "Always build a forester’s and a fish breeder’s house, so you will not run "
 "out of logs or food."
 msgstr ""
+"Bisogna sempre costruire la capanna del taglialegna e la capanna del "
+"pescatore, se tu non vuoi finire il legno e il cibo."
 
 #: ../../txts/tips/barbarians.tip:6
 #: ../../txts/tips/empire.tip:6
