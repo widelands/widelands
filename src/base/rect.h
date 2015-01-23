@@ -20,8 +20,6 @@
 #ifndef WL_BASE_RECT_H
 #define WL_BASE_RECT_H
 
-#include <vector>
-
 #include "base/point.h"
 
 template <typename T>
@@ -59,9 +57,5 @@ struct GenericRect {
 
 using Rect = GenericRect<int>;
 using FloatRect = GenericRect<float>;
-
-// NOCOM(#sirver): document.
-using OverlappingRects = std::vector<std::vector<int>>;
-OverlappingRects find_overlapping_rectangles(const std::vector<FloatRect>& rectangles);
 
 #endif  // end of include guard: WL_BASE_RECT_H
