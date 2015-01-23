@@ -203,7 +203,7 @@ void Flag::attach_building(EditorGameBase & egbase, Building & building)
 
 	const Map & map = egbase.map();
 	egbase.set_road
-		(map.get_fcoords(map.tl_n(m_position)), Road_SouthEast, Road_Normal);
+		(map.get_fcoords(map.tl_n(m_position)), Road_SouthEast, Road_Busy);
 
 	building.set_economy(get_economy());
 }
