@@ -48,26 +48,83 @@ inline float to_opengl_z(const int z) {
 //   - we batch up by program to have maximal batching.
 //   - and we want to render frontmost objects first, so that we do not render
 //     any pixel more than once.
-uint64_t make_key_opaque(uint64_t program_id, int z_value, uint64_t texture) {
-	assert(program_id < std::numeric_limits<uint16_t>::max());
+static_assert(RenderQueue::HIGHEST_PROGRAM_ID < 8, "Need to change sorting keys.");  // 4 bits.
+uint64_t make_key_opaque(const int program_id, const int z_value) {
+	assert(program_id < HIGHEST_PROGRAM_ID);
 	assert(0 <= z_value && z_value < std::numeric_limits<uint16_t>::max());
 
-	// NOCOM(#sirver): add program sorting - texture for example, so that batching them works.
-	uint64_t sort_z_value = std::numeric_limits<uint16_t>::max() - z_value;
-	return (program_id << 48) | (texture << 32) | sort_z_value;
+	// TODO(sirver): As a higher priority for sorting then z value, texture
+	// could be used here. This allows for more batching of GL calls, but in my
+	// tests hardly made a difference for Widelands..
+	uint32_t sort_z_value = std::numeric_limits<uint16_t>::max() - z_value;
+	// IIII ZZZZ ZZZZ ZZZZ ZZZZ 0000 0000 0000
+	return (program_id << 28) | (sort_z_value << 12);
 }
 
 // For blended objects, we need to render furthest away objects first, and we
 // do not update the z-buffer. This guarantees that the image is correct.
 //   - if z value is the same, we order by program second to have potential batching.
-uint64_t make_key_blended(uint64_t program_id, int z_value, uint64_t texture) {
-	assert(program_id < std::numeric_limits<uint16_t>::max());
+uint32_t make_key_blended(const int program_id, const int z_value) {
+	assert(program_id < HIGHEST_PROGRAM_ID);
 	assert(0 <= z_value && z_value < std::numeric_limits<uint16_t>::max());
 
 	// Sort opaque objects increasing, alpha objects decreasing in order.
-	uint64_t sort_z_value = z_value;
-	return (sort_z_value << 48) | (program_id << 32) | texture;
-	// return (program_id << 48) | (texture << 32) | sort_z_value;
+	// ZZZZ ZZZZ ZZZZ ZZZZ IIII 0000 0000 0000
+	return (z_value << 16) | (program_id << 12);
+}
+
+// Construct 'args' used by the individual programs out of 'item'.
+inline void from_item(const RenderQueue::Item& item, VanillaBlitProgram::Arguments* args) {
+	args->source_rect = item.vanilla_blit_arguments.source_rect;
+	args->texture = item.vanilla_blit_arguments.texture;
+	args->opacity = item.vanilla_blit_arguments.opacity;
+}
+
+inline void from_item(const RenderQueue::Item& item, MonochromeBlitProgram::Arguments* args) {
+	args->source_rect = item.monochrome_blit_arguments.source_rect;
+	args->texture = item.monochrome_blit_arguments.texture;
+	args->blend = item.monochrome_blit_arguments.blend;
+}
+
+inline void from_item(const RenderQueue::Item& item, FillRectProgram::Arguments* args) {
+	args->color = item.rect_arguments.color;
+}
+
+inline void from_item(const RenderQueue::Item& item, BlendedBlitProgram::Arguments* args) {
+	args->texture = item.blended_blit_arguments.texture;
+	args->source_rect = item.blended_blit_arguments.source_rect;
+	args->blend = item.blended_blit_arguments.blend;
+	args->texture_mask = item.blended_blit_arguments.texture_mask;
+	args->mask_source_rect = item.blended_blit_arguments.mask_source_rect;
+}
+
+inline void from_item(const RenderQueue::Item& item, DrawLineProgram::Arguments* args) {
+	args->color = item.line_arguments.color;
+}
+
+// Batches up as many items from 'items' that have the same 'program_id'.
+// Increases 'index' and returns an argument vector that can directly be passed
+// to the individual program.
+template <typename T>
+std::vector<T> batch_up(const RenderQueue::Program program_id,
+                        const std::vector<RenderQueue::Item>& items,
+                        size_t* index) {
+	std::vector<T> all_args;
+	while (*index < items.size()) {
+		const RenderQueue::Item& current_item = items.at(*index);
+		if (current_item.program_id != program_id) {
+			break;
+		}
+		all_args.emplace_back();
+		T& args = all_args.back();
+		args.destination_rect = current_item.destination_rect;
+		args.z_value = current_item.z_value;
+		args.blend_mode = current_item.blend_mode;
+		from_item(current_item, &args);
+		++(*index);
+	}
+	// log("#sirver   Batched: %lu items for program_id: %d\n", all_args.size(), program_id);
+	return all_args;
 }
 
 }  // namespace
@@ -88,33 +145,21 @@ RenderQueue& RenderQueue::instance() {
 // NOCOM(#sirver): take individual parameters?
 void RenderQueue::enqueue(const Item& given_item) {
 	Item* item;
-	int texture = 0;
-	switch (given_item.program_id) {
-		case BLIT:
-			texture = given_item.vanilla_blit_arguments.texture;
-			break;
-		case BLIT_MONOCHROME:
-			texture = given_item.monochrome_blit_arguments.texture;
-			break;
-		case BLIT_BLENDED:
-			texture = given_item.blended_blit_arguments.texture;
-			break;
-	}
-
 	if (given_item.blend_mode == BlendMode::Copy) {
 		opaque_items_.emplace_back(given_item);
 		item = &opaque_items_.back();
 		item->z_value = to_opengl_z(next_z);
-		item->key = make_key_opaque(static_cast<uint64_t>(item->program_id), next_z, texture);
+		item->key = make_key_opaque(static_cast<uint64_t>(item->program_id), next_z);
 	} else {
 		blended_items_.emplace_back(given_item);
 		item = &blended_items_.back();
 		item->z_value = to_opengl_z(next_z);
-		item->key = make_key_blended(static_cast<uint64_t>(item->program_id), next_z, texture);
+		item->key = make_key_blended(static_cast<uint64_t>(item->program_id), next_z);
 	}
 
 	// Add more than 1 since some items have multiple programs that all need a
 	// separate z buffer.
+	// NOCOM(#sirver): fix this.
 	next_z += 3;
 }
 
@@ -145,67 +190,12 @@ void RenderQueue::draw() {
 }
 
 
-// NOCOM(#sirver): make static too.
-inline void from_item(const RenderQueue::Item& item, VanillaBlitProgram::Arguments* args) {
-	args->source_rect = item.vanilla_blit_arguments.source_rect;
-	args->texture = item.vanilla_blit_arguments.texture;
-	args->opacity = item.vanilla_blit_arguments.opacity;
-}
-
-inline void from_item(const RenderQueue::Item& item, MonochromeBlitProgram::Arguments* args) {
-	args->source_rect = item.monochrome_blit_arguments.source_rect;
-	args->texture = item.monochrome_blit_arguments.texture;
-	args->blend = item.monochrome_blit_arguments.blend;
-}
-
-inline void from_item(const RenderQueue::Item& item, FillRectProgram::Arguments* args) {
-	args->color = item.rect_arguments.color;
-}
-
-inline void from_item(const RenderQueue::Item& item, BlendedBlitProgram::Arguments* args) {
-	args->texture = item.blended_blit_arguments.texture;
-	args->source_rect = item.blended_blit_arguments.source_rect;
-	args->blend = item.blended_blit_arguments.blend;
-	args->texture_mask = item.blended_blit_arguments.texture_mask;
-	args->mask_source_rect = item.blended_blit_arguments.mask_source_rect;
-}
-
-inline void from_item(const RenderQueue::Item& item, DrawLineProgram::Arguments* args) {
-	args->color = item.line_arguments.color;
-}
-
-// NOCOM(#sirver): make static
-template <typename T>
-std::vector<T> batch_up(const RenderQueue::Program program_id,
-                        const std::vector<RenderQueue::Item>& items,
-                        size_t* i) {
-	std::vector<T> all_args;
-	while (*i < items.size()) {
-		const RenderQueue::Item& current_item = items.at(*i);
-		if (current_item.program_id != program_id) {
-			break;
-		}
-		all_args.emplace_back();
-		T& args = all_args.back();
-		args.destination_rect = current_item.destination_rect;
-		args.z_value = current_item.z_value;
-		args.blend_mode = current_item.blend_mode;
-		from_item(current_item, &args);
-		++(*i);
-	}
-	// log("#sirver   Batched: %lu items for program_id: %d\n", all_args.size(), program_id);
-	return all_args;
-}
-
 void RenderQueue::draw_items(const std::vector<Item>& items) {
 	size_t i = 0;
 	while (i < items.size()) {
 		const Item& item = items[i];
 		switch (item.program_id) {
-			// NOCOM(#sirver): horrible code duplication.
 		case Program::BLIT:
-			// NOCOM(#sirver): if a ID is moved into this program_id, I would not need to pass redundant
-			// information here.
 			VanillaBlitProgram::instance().draw(
 			   batch_up<VanillaBlitProgram::Arguments>(Program::BLIT, items, &i));
 		 break;

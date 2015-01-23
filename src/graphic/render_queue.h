@@ -50,6 +50,7 @@ public:
 		BLIT_BLENDED,
 		RECT,
 		LINE,
+		HIGHEST_PROGRAM_ID,
 	};
 
 	// NOCOM(#sirver): maybe BlendMode::REMOVE?
