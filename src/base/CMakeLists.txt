@@ -1,5 +1,3 @@
-add_subdirectory(test)
-
 wl_library(base_macros
   SRCS
     macros.h
@@ -37,7 +35,6 @@ wl_library(base_geometry
     point.h
     point.cc
     rect.h
-    rect.cc
   DEPENDS
     base_log
 )

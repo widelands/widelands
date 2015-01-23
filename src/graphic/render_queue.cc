@@ -137,29 +137,10 @@ void RenderQueue::draw() {
 	// log("#sirver Drawing blended stuff: %ld.\n", blended_items_.size());
 	std::sort(blended_items_.begin(), blended_items_.end());
 
-	// NOCOM(#sirver): not really needed, templatize original method?
-	// std::vector<FloatRect> destination_rects;
-	// for (const auto& item : blended_items_) {
-		// destination_rects.emplace_back(item.destination_rect);
-	// }
-	// log("#sirver destination_rects.size(): %d\n", destination_rects.size());
-	// const OverlappingRects overlapping_rects = find_overlapping_rectangles(destination_rects);
-	// for (int i = 0; i < overlapping_rects.size(); ++i) {
-		// if (overlapping_rects[i].empty()) {
-			// continue;
-		// }
-		// log("#sirver   %d: ", i);
-		// for (const auto& other : overlapping_rects[i]) {
-			// log("%d ", other);
-		// }
-		// log("\n");
-	// }
-
 	draw_items(blended_items_);
 	blended_items_.clear();
 
 	glDepthMask(GL_TRUE);
-
 	next_z = 1;
 }
 
