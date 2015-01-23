@@ -79,7 +79,7 @@ private:
 	Gl::Program gl_program_;
 
 	// The buffer that contains the data to be rendered.
-	Gl::Buffer gl_array_buffer_;
+	Gl::NewBuffer<PerVertexData> gl_array_buffer_;
 
 	// Attributes.
 	GLint attr_brightness_;

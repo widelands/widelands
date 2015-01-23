@@ -41,13 +41,6 @@ std::string shader_to_string(GLenum type) {
 	return "unknown";
 }
 
-// Creates one OpenGL buffer.
-GLuint create_buffer() {
-	GLuint buffer = 0;
-	glGenBuffers(1, &buffer);
-	return buffer;
-}
-
 }  // namespace
 
 /**
@@ -159,18 +152,6 @@ void Shader::compile(const char* source) {
 			throw wexception(
 			   "Error compiling %s shader:\n%s", shader_to_string(type_).c_str(), infoLog.get());
 		}
-	}
-}
-
-Buffer::Buffer() : buffer_object_(create_buffer()) {
-	if (!buffer_object_) {
-		throw wexception("Could not create GL program.");
-	}
-}
-
-Buffer::~Buffer() {
-	if (buffer_object_) {
-		glDeleteBuffers(1, &buffer_object_);
 	}
 }
 

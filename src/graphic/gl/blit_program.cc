@@ -161,7 +161,7 @@ private:
 	static_assert(sizeof(PerVertexData) == 44, "Wrong padding.");
 
 	// The buffer that will contain the quad for rendering.
-	Gl::Buffer gl_array_buffer_;
+	Gl::NewBuffer<PerVertexData> gl_array_buffer_;
 
 	// The program.
 	Gl::Program gl_program_;
@@ -176,14 +176,13 @@ private:
 	GLint u_texture_;
 	GLint u_mask_;
 
-	// Cached for effectiveness.
-	size_t serverside_buffer_size_;
+	// Cached for efficiency.
 	std::vector<PerVertexData> vertices_;
 
 	DISALLOW_COPY_AND_ASSIGN(BlitProgram);
 };
 
-BlitProgram::BlitProgram(const std::string& fragment_shader) : serverside_buffer_size_(0) {
+BlitProgram::BlitProgram(const std::string& fragment_shader) {
 	gl_program_.build(kBlitVertexShader, fragment_shader.c_str());
 
 	attr_blend_ = glGetAttribLocation(gl_program_.object(), "attr_blend");
@@ -207,13 +206,7 @@ void BlitProgram::activate() {
 void BlitProgram::draw_and_deactivate(const std::vector<Arguments>& arguments) {
 	size_t i = 0;
 
-	glBindBuffer(GL_ARRAY_BUFFER, gl_array_buffer_.object());
-
-	if (serverside_buffer_size_ < arguments.size() * 6) {
-		glBufferData(
-		   GL_ARRAY_BUFFER, sizeof(PerVertexData) * arguments.size() * 6, nullptr, GL_DYNAMIC_DRAW);
-		serverside_buffer_size_ = arguments.size() * 6;
-	}
+	gl_array_buffer_.bind();
 
 	const auto set_attrib_pointer = [](const int vertex_index, int num_items, int offset) {
 		glVertexAttribPointer(vertex_index,
@@ -327,7 +320,8 @@ void BlitProgram::draw_and_deactivate(const std::vector<Arguments>& arguments) {
 		offset = vertices_.size();
 	}
 
-	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(PerVertexData) * vertices_.size(), vertices_.data());
+	gl_array_buffer_.update(vertices_);
+
 	for (const auto& draw_arg : draw_args) {
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, draw_arg.texture);

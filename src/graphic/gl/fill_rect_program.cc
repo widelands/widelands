@@ -110,7 +110,7 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 
 		glUseProgram(gl_program_.object());
 
-		glBindBuffer(GL_ARRAY_BUFFER, gl_array_buffer_.object());
+		gl_array_buffer_.bind();
 
 		glEnableVertexAttribArray(attr_position_);
 		glEnableVertexAttribArray(attr_color_);
@@ -175,10 +175,7 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 			++i;
 		}
 
-		glBufferData(GL_ARRAY_BUFFER,
-		             sizeof(PerVertexData) * vertices_.size(),
-		             vertices_.data(),
-		             GL_DYNAMIC_DRAW);
+		gl_array_buffer_.update(vertices_);
 
 		// NOCOM(#sirver): finally pull this into a method.
 		const auto set_attrib_pointer = [](const int vertex_index, int num_items, int offset) {

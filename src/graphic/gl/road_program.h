@@ -65,7 +65,7 @@ private:
 	              const Widelands::RoadType road_type);
 
 	// The buffer that will contain 'vertices_' for rendering.
-	Gl::Buffer gl_array_buffer_;
+	Gl::NewBuffer<PerVertexData> gl_array_buffer_;
 
 	// The program used for drawing the roads.
 	Gl::Program gl_program_;

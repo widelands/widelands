@@ -20,10 +20,13 @@
 #define WL_GRAPHIC_GL_UTILS_H
 
 #include <memory>
+#include <vector>
 
 #include <stdint.h>
 
+#include "base/log.h"
 #include "base/macros.h"
+#include "base/wexception.h"
 #include "graphic/gl/system_headers.h"
 
 struct SDL_PixelFormat;
@@ -59,20 +62,46 @@ private:
 };
 
 // Thin wrapper around a OpenGL buffer object to ensure proper cleanup. Throws
-// on all errors.
-class Buffer {
+// on all errors. Also grows the server memory only when needed.
+template<typename T>
+class NewBuffer {
 public:
-	Buffer();
-	~Buffer();
+	NewBuffer() : buffer_size_(0) {
+		glGenBuffers(1, &object_);
+		if (!object_) {
+			throw wexception("Could not create GL program.");
+		}
+	}
 
-	GLuint object() const {
-		return buffer_object_;
+	~NewBuffer() {
+		if (object_) {
+			glDeleteBuffers(1, &object_);
+		}
+	}
+
+	// Calls glBindBuffer on the underlying buffer data.
+	void bind() const {
+		glBindBuffer(GL_ARRAY_BUFFER, object_);
+	}
+
+
+	// Copies 'elements' into the buffer. If the buffer is too small to hold the
+	// data, it is reallocated. Does not check if the buffer is already bound.
+	void update(const std::vector<T>& items) {
+		if (buffer_size_ < items.size()) {
+			log("#sirver object_: %d,items.size(): %lud\n", object_, items.size());
+			glBufferData(GL_ARRAY_BUFFER, items.size() * sizeof(T), items.data(), GL_DYNAMIC_DRAW);
+			buffer_size_ = items.size();
+		} else {
+			glBufferSubData(GL_ARRAY_BUFFER, 0, items.size() * sizeof(T), items.data());
+		}
 	}
 
 private:
-	const GLuint buffer_object_;
+	GLuint object_;
+	size_t buffer_size_;  // In number of elements.
 
-	DISALLOW_COPY_AND_ASSIGN(Buffer);
+	DISALLOW_COPY_AND_ASSIGN(NewBuffer);
 };
 
 }  // namespace Gl

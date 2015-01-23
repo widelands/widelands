@@ -168,11 +168,8 @@ void DitherProgram::gl_draw(int gl_texture, float texture_w, float texture_h, co
 	glEnableVertexAttribArray(attr_texture_offset_);
 	glEnableVertexAttribArray(attr_texture_position_);
 
-	glBindBuffer(GL_ARRAY_BUFFER, gl_array_buffer_.object());
-	glBufferData(GL_ARRAY_BUFFER,
-	             sizeof(PerVertexData) * vertices_.size(),
-	             vertices_.data(),
-	             GL_STREAM_DRAW);
+	gl_array_buffer_.bind();
+	gl_array_buffer_.update(vertices_);
 
 	const auto set_attrib_pointer = [](const int vertex_index, int num_items, int offset) {
 		glVertexAttribPointer(vertex_index,
