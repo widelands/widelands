@@ -160,7 +160,7 @@ private:
 	bool check_militarysites(int32_t);
 	bool marine_main_decisions(uint32_t);
 	bool check_ships(uint32_t);
-	void print_stats(uint32_t);
+	void print_stats();
 	uint32_t get_stocklevel_by_hint(size_t);
 	uint32_t get_stocklevel(BuildingObserver&);
 	uint32_t get_warehoused_stock(Widelands::WareIndex wt);

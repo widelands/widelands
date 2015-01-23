@@ -124,6 +124,22 @@ struct FindNodeUnownedMineable {
 	}
 };
 
+// Looking only for mines-capable fields nearby
+// of specific type
+struct FindNodeMineable {
+	bool accept(const Map&, const FCoords& fc) const {
+
+		return (fc.field->nodecaps() & BUILDCAPS_MINE) &&
+			(fc.field->get_resources() == res);
+	}
+
+	Game& game;
+	int32_t res;
+
+	FindNodeMineable(Game& g, int32_t r) : game(g), res(r)  {
+	}
+};
+
 // Fishers and fishbreeders must be built near water
 struct FindNodeWater {
 	FindNodeWater(const World& world) : world_(world) {
@@ -276,9 +292,12 @@ struct MineableField {
 	bool preferred_;
 
 	int32_t mines_nearby_;
+	//this is to provide that a mine is not built on the edge of mine area
+	int32_t same_mine_fields_nearby_;
 
 	MineableField(const Widelands::FCoords& fc)
-	   : coords(fc), next_update_due_(0), preferred_(false), mines_nearby_(0) {
+	   : coords(fc), next_update_due_(0), preferred_(false), mines_nearby_(0),
+	   same_mine_fields_nearby_(0) {
 	}
 };
 

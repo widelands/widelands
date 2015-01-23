@@ -343,7 +343,7 @@ void DefaultAI::think() {
 
 	//print statistics
 	if (kPrintStats && next_statistics_report_ <= gametime) {
-		print_stats(gametime);
+		print_stats();
 		next_statistics_report_ += 60 * 60 * 1000;
 	}
 }
@@ -941,6 +941,13 @@ void DefaultAI::update_mineable_field(MineableField& field) {
 				}
 			}
 		}
+	}
+
+	// 0 is default, and thus indicates that counting must be done
+	if (field.same_mine_fields_nearby_ == 0) {
+		FindNodeMineable find_mines_spots_nearby(game(), field.coords.field->get_resources());
+		field.same_mine_fields_nearby_ =
+		   map.find_fields(Area<FCoords>(field.coords, 4), nullptr, find_mines_spots_nearby);
 	}
 }
 
@@ -1639,10 +1646,10 @@ bool DefaultAI::construct_building(int32_t gametime) {
 					;  // we allow big buildings now
 				} else if (bf->unowned_land_nearby_ &&
 				           bo.expansion_type_) {  // decreasing probability for big buidlings
-					if (bo.desc->get_size() == 2 && gametime % 15 >= 1) {
+					if (bo.desc->get_size() == 2 && gametime % 2 >= 1) {
 						continue;
 					}
-					if (bo.desc->get_size() == 3 && gametime % 40 >= 1) {
+					if (bo.desc->get_size() == 3 && gametime % 3 >= 1) {
 						continue;
 					}
 				}
@@ -1891,6 +1898,13 @@ bool DefaultAI::construct_building(int32_t gametime) {
 					if (prio < 2) {
 						continue;
 					}
+
+					// prefer mines in the middle of mine fields of the
+					// same type, so we add a small bonus here
+					// depending on count of same mines nearby,
+					// though this does not reflects how many resources
+					// are (left) in nearby mines
+					prio += (*j)->same_mine_fields_nearby_ / 3;
 
 					// Continue if field is blocked at the moment
 					bool blocked = false;
@@ -4197,7 +4211,7 @@ void DefaultAI::review_wares_targets(int32_t const gametime) {
 
 // This is used for map tweaking, so by default it is of (see kPrintStats)
 // TODO(tiborb ?): - it would be nice to have this activated by a command line switch
-void DefaultAI::print_stats(uint32_t const gametime) {
+void DefaultAI::print_stats() {
 
 	PlayerNumber const pn = player_number();
 
