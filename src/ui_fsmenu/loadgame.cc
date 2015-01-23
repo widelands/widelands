@@ -58,7 +58,7 @@ std::string map_filename(const std::string& filename, const std::string& mapname
 	if (boost::starts_with(result, "wl_autosave")) {
 		std::vector<std::string> autosave_name;
 		boost::split(autosave_name, result, boost::is_any_of("_"));
-		if(autosave_name.empty() || autosave_name.size() < 3) {
+		if (autosave_name.empty() || autosave_name.size() < 3) {
 			/** TRANSLATORS: %1% is a map's name. */
 			result = (boost::format(_("Autosave: %1%")) % mapname_localized).str();
 		} else {
