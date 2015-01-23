@@ -102,7 +102,15 @@ void ImageCache::compactify() {
 	texture_atlases_.emplace_back(texture_atlas.pack(&new_textures));
 
 	assert(new_textures.size() == hashes.size());
+	std::set<int> gl_textures;
 	for (size_t i = 0; i < hashes.size(); ++i) {
+		gl_textures.insert(new_textures[i]->get_gl_texture());
 		images_[hashes[i]]->set_image(std::move(new_textures[i]));
 	}
+
+	log("#sirver Done compactifing:\n");
+	for (const auto& i : gl_textures) {
+		log("#sirver   i: %d\n", i);
+	}
+
 }

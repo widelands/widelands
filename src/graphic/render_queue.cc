@@ -23,6 +23,7 @@
 #include <limits>
 
 #include "base/log.h"
+#include "base/rect.h"
 #include "base/wexception.h"
 #include "graphic/gl/blit_program.h"
 #include "graphic/gl/dither_program.h"
@@ -47,25 +48,26 @@ inline float to_opengl_z(const int z) {
 //   - we batch up by program to have maximal batching.
 //   - and we want to render frontmost objects first, so that we do not render
 //     any pixel more than once.
-uint64_t make_key_opaque(uint64_t program_id, int z_value) {
+uint64_t make_key_opaque(uint64_t program_id, int z_value, uint64_t texture) {
 	assert(program_id < std::numeric_limits<uint16_t>::max());
 	assert(0 <= z_value && z_value < std::numeric_limits<uint16_t>::max());
 
 	// NOCOM(#sirver): add program sorting - texture for example, so that batching them works.
 	uint64_t sort_z_value = std::numeric_limits<uint16_t>::max() - z_value;
-	return (program_id << 48) | (sort_z_value << 32);
+	return (program_id << 48) | (texture << 32) | sort_z_value;
 }
 
 // For blended objects, we need to render furthest away objects first, and we
 // do not update the z-buffer. This guarantees that the image is correct.
 //   - if z value is the same, we order by program second to have potential batching.
-uint64_t make_key_blended(uint64_t program, int z_value) {
-	assert(program < std::numeric_limits<uint16_t>::max());
+uint64_t make_key_blended(uint64_t program_id, int z_value, uint64_t texture) {
+	assert(program_id < std::numeric_limits<uint16_t>::max());
 	assert(0 <= z_value && z_value < std::numeric_limits<uint16_t>::max());
 
 	// Sort opaque objects increasing, alpha objects decreasing in order.
 	uint64_t sort_z_value = z_value;
-	return (sort_z_value << 48) | (program << 32);
+	return (sort_z_value << 48) | (program_id << 32) | texture;
+	// return (program_id << 48) | (texture << 32) | sort_z_value;
 }
 
 }  // namespace
@@ -86,16 +88,29 @@ RenderQueue& RenderQueue::instance() {
 // NOCOM(#sirver): take individual parameters?
 void RenderQueue::enqueue(const Item& given_item) {
 	Item* item;
+	int texture = 0;
+	switch (given_item.program_id) {
+		case BLIT:
+			texture = given_item.vanilla_blit_arguments.texture;
+			break;
+		case BLIT_MONOCHROME:
+			texture = given_item.monochrome_blit_arguments.texture;
+			break;
+		case BLIT_BLENDED:
+			texture = given_item.blended_blit_arguments.texture;
+			break;
+	}
+
 	if (given_item.blend_mode == BlendMode::Copy) {
 		opaque_items_.emplace_back(given_item);
 		item = &opaque_items_.back();
 		item->z_value = to_opengl_z(next_z);
-		item->key = make_key_opaque(static_cast<uint64_t>(item->program_id), next_z);
+		item->key = make_key_opaque(static_cast<uint64_t>(item->program_id), next_z, texture);
 	} else {
 		blended_items_.emplace_back(given_item);
 		item = &blended_items_.back();
 		item->z_value = to_opengl_z(next_z);
-		item->key = make_key_blended(static_cast<uint64_t>(item->program_id), next_z);
+		item->key = make_key_blended(static_cast<uint64_t>(item->program_id), next_z, texture);
 	}
 
 	// Add more than 1 since some items have multiple programs that all need a
@@ -121,6 +136,25 @@ void RenderQueue::draw() {
 
 	// log("#sirver Drawing blended stuff: %ld.\n", blended_items_.size());
 	std::sort(blended_items_.begin(), blended_items_.end());
+
+	// NOCOM(#sirver): not really needed, templatize original method?
+	// std::vector<FloatRect> destination_rects;
+	// for (const auto& item : blended_items_) {
+		// destination_rects.emplace_back(item.destination_rect);
+	// }
+	// log("#sirver destination_rects.size(): %d\n", destination_rects.size());
+	// const OverlappingRects overlapping_rects = find_overlapping_rectangles(destination_rects);
+	// for (int i = 0; i < overlapping_rects.size(); ++i) {
+		// if (overlapping_rects[i].empty()) {
+			// continue;
+		// }
+		// log("#sirver   %d: ", i);
+		// for (const auto& other : overlapping_rects[i]) {
+			// log("%d ", other);
+		// }
+		// log("\n");
+	// }
+
 	draw_items(blended_items_);
 	blended_items_.clear();
 

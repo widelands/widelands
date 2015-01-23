@@ -176,10 +176,14 @@ private:
 	GLint u_texture_;
 	GLint u_mask_;
 
+	// Cached for effectiveness.
+	size_t serverside_buffer_size_;
+	std::vector<PerVertexData> vertices_;
+
 	DISALLOW_COPY_AND_ASSIGN(BlitProgram);
 };
 
-BlitProgram::BlitProgram(const std::string& fragment_shader) {
+BlitProgram::BlitProgram(const std::string& fragment_shader) : serverside_buffer_size_(0) {
 	gl_program_.build(kBlitVertexShader, fragment_shader.c_str());
 
 	attr_blend_ = glGetAttribLocation(gl_program_.object(), "attr_blend");
@@ -203,21 +207,57 @@ void BlitProgram::activate() {
 void BlitProgram::draw_and_deactivate(const std::vector<Arguments>& arguments) {
 	size_t i = 0;
 
-	// NOCOM(#sirver): make member.
-	std::vector<PerVertexData> vertices;
-
 	glBindBuffer(GL_ARRAY_BUFFER, gl_array_buffer_.object());
 
+	if (serverside_buffer_size_ < arguments.size() * 6) {
+		glBufferData(
+		   GL_ARRAY_BUFFER, sizeof(PerVertexData) * arguments.size() * 6, nullptr, GL_DYNAMIC_DRAW);
+		serverside_buffer_size_ = arguments.size() * 6;
+	}
+
+	const auto set_attrib_pointer = [](const int vertex_index, int num_items, int offset) {
+		glVertexAttribPointer(vertex_index,
+		                      num_items,
+		                      GL_FLOAT,
+		                      GL_FALSE,
+		                      sizeof(PerVertexData),
+		                      reinterpret_cast<void*>(offset));
+	};
+	set_attrib_pointer(attr_blend_, 4, offsetof(PerVertexData, blend_r));
+	set_attrib_pointer(attr_mask_texture_position_, 2, offsetof(PerVertexData, mask_texture_x));
+	set_attrib_pointer(attr_position_, 3, offsetof(PerVertexData, gl_x));
+	set_attrib_pointer(attr_texture_position_, 2, offsetof(PerVertexData, texture_x));
+
+	glUniform1i(u_texture_, 0);
+	glUniform1i(u_mask_, 1);
+
+	// NOCOM(#sirver): pull out
+	struct DrawArgs {
+		int offset;
+		int count;
+		int texture;
+		int texture_mask;
+		BlendMode blend_mode;
+	};
+	std::vector<DrawArgs> draw_args;
+
+	int offset = 0;
+	vertices_.clear();
 	while (i < arguments.size()) {
 		const Arguments& template_args = arguments[i];
-		vertices.clear();
 
 		// Batch common blit operations up.
 		while (i < arguments.size()) {
 			const Arguments& current_args = arguments[i];
 			if (current_args.blend_mode != template_args.blend_mode ||
-			    current_args.texture != template_args.texture ||
-				 current_args.texture_mask != template_args.texture_mask) {
+					current_args.texture != template_args.texture ||
+					current_args.texture_mask != template_args.texture_mask) {
+				// log("#sirver current_args.blend_mode: %d\n", current_args.blend_mode);
+				// log("#sirver template_args.blend_mode: %d\n", template_args.blend_mode);
+				// log("#sirver current_args.texture: %d\n", current_args.texture);
+				// log("#sirver template_args.texture: %d\n", template_args.texture);
+				// log("#sirver current_args.texture_mask: %d\n", current_args.texture_mask);
+				// log("#sirver template_args.texture_mask: %d\n", template_args.texture_mask);
 				break;
 			}
 
@@ -226,94 +266,82 @@ void BlitProgram::draw_and_deactivate(const std::vector<Arguments>& arguments) {
 			const float blend_b = current_args.blend.b / 255.;
 			const float blend_a = current_args.blend.a / 255.;
 
-			vertices.emplace_back(current_args.destination_rect.x,
-			                      current_args.destination_rect.y,
-			                      current_args.z_value,
-			                      current_args.source_rect.x,
-			                      current_args.source_rect.y,
-			                      current_args.mask_source_rect.x,
-			                      current_args.mask_source_rect.y,
-			                      blend_r,
-			                      blend_g,
-			                      blend_b,
-			                      blend_a);
+			vertices_.emplace_back(current_args.destination_rect.x,
+					current_args.destination_rect.y,
+					current_args.z_value,
+					current_args.source_rect.x,
+					current_args.source_rect.y,
+					current_args.mask_source_rect.x,
+					current_args.mask_source_rect.y,
+					blend_r,
+					blend_g,
+					blend_b,
+					blend_a);
 
-			vertices.emplace_back(current_args.destination_rect.x + current_args.destination_rect.w,
-			                      current_args.destination_rect.y,
-			                      current_args.z_value,
-			                      current_args.source_rect.x + current_args.source_rect.w,
-			                      current_args.source_rect.y,
-			                      current_args.mask_source_rect.x + current_args.mask_source_rect.w,
-			                      current_args.mask_source_rect.y,
-			                      blend_r,
-			                      blend_g,
-			                      blend_b,
-			                      blend_a);
+			vertices_.emplace_back(current_args.destination_rect.x + current_args.destination_rect.w,
+					current_args.destination_rect.y,
+					current_args.z_value,
+					current_args.source_rect.x + current_args.source_rect.w,
+					current_args.source_rect.y,
+					current_args.mask_source_rect.x + current_args.mask_source_rect.w,
+					current_args.mask_source_rect.y,
+					blend_r,
+					blend_g,
+					blend_b,
+					blend_a);
 
-			vertices.emplace_back(current_args.destination_rect.x,
-			                      current_args.destination_rect.y + current_args.destination_rect.h,
-			                      current_args.z_value,
-			                      current_args.source_rect.x,
-			                      current_args.source_rect.y + current_args.source_rect.h,
-			                      current_args.mask_source_rect.x,
-			                      current_args.mask_source_rect.y + current_args.mask_source_rect.h,
-			                      blend_r,
-			                      blend_g,
-			                      blend_b,
-			                      blend_a);
+			vertices_.emplace_back(current_args.destination_rect.x,
+					current_args.destination_rect.y + current_args.destination_rect.h,
+					current_args.z_value,
+					current_args.source_rect.x,
+					current_args.source_rect.y + current_args.source_rect.h,
+					current_args.mask_source_rect.x,
+					current_args.mask_source_rect.y + current_args.mask_source_rect.h,
+					blend_r,
+					blend_g,
+					blend_b,
+					blend_a);
 
-			vertices.emplace_back(vertices.at(vertices.size() - 2));
-			vertices.emplace_back(vertices.at(vertices.size() - 2));
+			vertices_.emplace_back(vertices_.at(vertices_.size() - 2));
+			vertices_.emplace_back(vertices_.at(vertices_.size() - 2));
 
-			vertices.emplace_back(current_args.destination_rect.x + current_args.destination_rect.w,
-			                      current_args.destination_rect.y + current_args.destination_rect.h,
-			                      current_args.z_value,
-			                      current_args.source_rect.x + current_args.source_rect.w,
-			                      current_args.source_rect.y + current_args.source_rect.h,
-			                      current_args.mask_source_rect.x + current_args.mask_source_rect.w,
-			                      current_args.mask_source_rect.y + current_args.mask_source_rect.h,
-			                      blend_r,
-			                      blend_g,
-			                      blend_b,
-			                      blend_a);
+			vertices_.emplace_back(current_args.destination_rect.x + current_args.destination_rect.w,
+					current_args.destination_rect.y + current_args.destination_rect.h,
+					current_args.z_value,
+					current_args.source_rect.x + current_args.source_rect.w,
+					current_args.source_rect.y + current_args.source_rect.h,
+					current_args.mask_source_rect.x + current_args.mask_source_rect.w,
+					current_args.mask_source_rect.y + current_args.mask_source_rect.h,
+					blend_r,
+					blend_g,
+					blend_b,
+					blend_a);
 			++i;
 		}
 
-		glBufferData(GL_ARRAY_BUFFER,
-		             sizeof(PerVertexData) * vertices.size(),
-		             vertices.data(),
-		             GL_DYNAMIC_DRAW);
+		draw_args.emplace_back(DrawArgs{offset,
+		                        static_cast<int>(vertices_.size() - offset),
+		                        template_args.texture,
+		                        template_args.texture_mask,
+		                        template_args.blend_mode});
+		offset = vertices_.size();
+	}
 
+	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(PerVertexData) * vertices_.size(), vertices_.data());
+	for (const auto& draw_arg : draw_args) {
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, template_args.texture);
+		glBindTexture(GL_TEXTURE_2D, draw_arg.texture);
 
 		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, template_args.texture_mask);
+		glBindTexture(GL_TEXTURE_2D, draw_arg.texture_mask);
 
-		glUniform1i(u_texture_, 0);
-		glUniform1i(u_mask_, 1);
-
-		const auto set_attrib_pointer = [](const int vertex_index, int num_items, int offset) {
-			glVertexAttribPointer(vertex_index,
-			                      num_items,
-			                      GL_FLOAT,
-			                      GL_FALSE,
-			                      sizeof(PerVertexData),
-			                      reinterpret_cast<void*>(offset));
-		};
-		set_attrib_pointer(attr_blend_, 4, offsetof(PerVertexData, blend_r));
-		set_attrib_pointer(attr_mask_texture_position_, 2, offsetof(PerVertexData, mask_texture_x));
-		set_attrib_pointer(attr_position_, 3, offsetof(PerVertexData, gl_x));
-		set_attrib_pointer(attr_texture_position_, 2, offsetof(PerVertexData, texture_x));
-
-		if (template_args.blend_mode == BlendMode::Copy) {
+		if (draw_arg.blend_mode == BlendMode::Copy) {
 			glBlendFunc(GL_ONE, GL_ZERO);
 		}
+		// log("#sirver       BlitProgram: vertices_.size(): %ld\n", vertices_.size());
+		glDrawArrays(GL_TRIANGLES, draw_arg.offset, draw_arg.count);
 
-		// log("#sirver       BlitProgram: vertices.size(): %ld\n", vertices.size());
-		glDrawArrays(GL_TRIANGLES, 0, vertices.size());
-
-		if (template_args.blend_mode == BlendMode::Copy) {
+		if (draw_arg.blend_mode == BlendMode::Copy) {
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		}
 	}

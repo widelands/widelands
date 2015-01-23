@@ -38,6 +38,8 @@ wl_library(base_geometry
     point.cc
     rect.h
     rect.cc
+  DEPENDS
+    base_log
 )
 
 wl_library(base_md5

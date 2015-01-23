@@ -62,11 +62,11 @@ struct RectWrapper {
 	}
 
 	inline float top() const {
-		return r->y;
+		return r->y + r->h;
 	}
 
 	inline float bottom() const {
-		return r->y + r->h;
+		return r->y;
 	}
 
 	// Sorts by the lower edge of the contained rectangle.
@@ -187,6 +187,7 @@ OverlappingRects find_overlapping_rectangles(const std::vector<FloatRect>& recta
 	detect(V, 0, V.size(), H, &rv);
 
 	for (auto& vec : rv) {
+		log("#sirver vec.size(): %d\n", vec.size());
 		std::sort(vec.begin(), vec.end());
 		vec.erase(std::unique(vec.begin(), vec.end()), vec.end());
 	}

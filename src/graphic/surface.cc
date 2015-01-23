@@ -211,7 +211,6 @@ void blit_blended(const Rect& dst_rect,
 		i.blend_mode = BlendMode::UseAlpha;
 		i.blended_blit_arguments.texture = image.get_gl_texture();
 		i.blended_blit_arguments.source_rect = gl_src_rect;
-		// NOCOM(#sirver): this must actually take a separate source rectangle.
 		i.blended_blit_arguments.texture_mask = texture_mask.get_gl_texture();
 		i.blended_blit_arguments.mask_source_rect = gl_mask_src_rect;
 		i.blended_blit_arguments.blend = blend;

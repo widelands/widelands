@@ -71,6 +71,7 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool init_fullscreen)
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 
 	log("Graphics: Try to set Videomode %ux%u\n", m_window_mode_width, m_window_mode_height);
 	m_sdl_window = SDL_CreateWindow("Widelands Window",
@@ -111,8 +112,6 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool init_fullscreen)
 	GLint glInt;
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &glInt);
 	log("Graphics: OpenGL: Max texture size: %u\n", glInt);
-
-	SDL_GL_SetSwapInterval(1);
 
 	glDrawBuffer(GL_BACK);
 
