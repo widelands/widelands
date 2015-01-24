@@ -54,6 +54,9 @@ public:
 	/// Adds this building type to the tribe description.
 	void add_trainingsite_type(const LuaTable& table);
 
+	/// Adds this building type to the tribe description.
+	void add_warehouse_type(const LuaTable& table);
+
 	/// Adds this ware type to the tribe description.
 	void add_ware_type(const LuaTable& table);
 

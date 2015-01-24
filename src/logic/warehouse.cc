@@ -265,6 +265,19 @@ WarehouseDescr::WarehouseDescr
 		m_workarea_info[m_conquers].insert(descname() + " conquer");
 }
 
+WarehouseDescr::WarehouseDescr
+	(const LuaTable& table)
+	: BuildingDescr(MapObjectType::WAREHOUSE, table),
+	  m_conquers         (0),
+	  m_heal_per_second  (0)
+{
+	m_heal_per_second = table.get_int("heal_per_second");
+	if(table.has_key("conquers")) {
+		m_conquers = table.get_int("conquers");
+		m_workarea_info[m_conquers].insert(descname() + " conquer");
+	}
+}
+
 /*
 ==============================
 IMPLEMENTATION
