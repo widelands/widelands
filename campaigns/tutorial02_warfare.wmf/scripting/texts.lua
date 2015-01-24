@@ -29,17 +29,17 @@ abilities = {
    body = rt(
       p(_[[A new soldier is created like a worker: when a military building needs a soldier, a carrier grabs the needed weapons and armor from a warehouse (or your headquarters) and walks up the road to your new building. Basic Barbarian soldiers do not use armor, they only need an ax.]]) ..
       p(_[[Take a look at the soldiers that are on their way to our military buildings. They look different from normal workers: they have a health bar over their head that displays their remaining health, and they have four symbols, which symbolize the individual soldier’s current levels in the four different categories: health, attack, defense and evade.]]) ..
-      p(_[[If a barbarian soldier is fully trained, he has level 3 health, level 5 attack, level 0 defense and level 2 evade. This is one fearsome warrior then! The individual abilities have the following meaning:]])
+      p(_[[If a Barbarian soldier is fully trained, he has level 3 health, level 5 attack, level 0 defense and level 2 evade. This is one fearsome warrior then! The individual abilities have the following meaning:]])
    ) ..
    rt("image=tribes/barbarians/soldier/hp_level0.png", h2(_"Health:"))..
-   rt(p(_[[The total life of a soldier. A barbarian soldier starts with 130 health, and he will gain 28 health with each health level.]])) ..
+   rt(p(_[[The total life of a soldier. A Barbarian soldier starts with 130 health, and he will gain 28 health with each health level.]])) ..
    rt("image=tribes/barbarians/soldier/attack_level0.png", h2(_"Attack:")) ..
-   rt(p(_[[The amount of damage a soldier will inflict on the enemy when an attack is successful. A barbarian soldier with attack level 0 inflicts ~14 points of health damage when he succeeds in hitting an enemy. For each attack level, he gains 7 damage points.]])) ..
+   rt(p(_[[The amount of damage a soldier will inflict on the enemy when an attack is successful. A Barbarian soldier with attack level 0 inflicts ~14 points of health damage when he succeeds in hitting an enemy. For each attack level, he gains 7 damage points.]])) ..
    -- The Atlanteans' image, because the Barbarian one has a white background
    rt("image=tribes/atlanteans/soldier/defense_level0.png", h2(_"Defense:")) ..
-   rt(p(_[[The defense is the percentage that is subtracted from the attack value. The barbarians cannot train in this skill and therefore have always defense level 0, which means that the damage is always reduced by 3%. If an attacker with an attack value of 35 points hits a barbarian soldier, the barbarian will lose 35·0.97 = 34 health.]])) ..
+   rt(p(_[[The defense is the percentage that is subtracted from the attack value. The Barbarians cannot train in this skill and therefore have always defense level 0, which means that the damage is always reduced by 3%. If an attacker with an attack value of 35 points hits a Barbarian soldier, the Barbarian will lose 35·0.97 = 34 health.]])) ..
    rt("image=tribes/barbarians/soldier/evade_level0.png", h2(_"Evade:")) ..
-   rt(p(_[[Evade is the chance that the soldier is able to dodge an attack. A level 0 barbarian has a 25% chance to evade an attack, and this increases in steps of 15% for each level.]]))
+   rt(p(_[[Evade is the chance that the soldier is able to dodge an attack. A level 0 Barbarian has a 25% chance to evade an attack, and this increases in steps of 15% for each level.]]))
 }
 
 battlearena1 = {
@@ -175,7 +175,7 @@ fortress_enhancement = {
       h1(_"Enhance Your Fortress") ..
       paragraphdivider() ..
       listitem_bullet(_[[Enhance your fortress to a mighty citadel.]]) ..
-      listitem_arrow(_[[The citadel can house 12 soldiers, and it is the biggest military building the barbarians can build. It also costs a lot of resources and takes a long time to build. It is most suited to guard strategically important points like constricted points or mountains.]])
+      listitem_arrow(_[[The citadel can house 12 soldiers, and it is the biggest military building the Barbarians can build. It also costs a lot of resources and takes a long time to build. It is most suited to guard strategically important points like constricted points or mountains.]])
    )
 }
 
