@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-12-08 11:33+0000\n"
-"PO-Revision-Date: 2014-12-09 05:18+0000\n"
+"POT-Creation-Date: 2014-12-16 11:38+0000\n"
+"PO-Revision-Date: 2014-12-17 06:46+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-12-10 05:28+0000\n"
-"X-Generator: Launchpad (build 17283)\n"
+"X-Launchpad-Export-Date: 2014-12-18 05:43+0000\n"
+"X-Generator: Launchpad (build 17286)\n"
 "Language: uk\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -192,7 +192,7 @@ msgid "Show Building Spaces (on/off)"
 msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:101
-#: ../../src/ui_fsmenu/launch_mpg.cc:171
+#: ../../src/ui_fsmenu/launch_mpg.cc:167
 msgid "Players"
 msgstr "Гравці"
 
@@ -245,7 +245,7 @@ msgstr "Без назви"
 #: ../../src/editor/editorinteractive.cc:592
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:148
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:511
-#: ../../src/logic/map.h:181 ../../src/ui_fsmenu/netsetup_lan.cc:199
+#: ../../src/logic/map.h:181 ../../src/ui_fsmenu/netsetup_lan.cc:191
 #: ../../src/wui/game_summary.cc:175
 msgid "Unknown"
 msgstr "Невідомо"
@@ -363,7 +363,7 @@ msgid "No resources"
 msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:120
-#: ../../src/ui_fsmenu/mapselect.cc:294
+#: ../../src/ui_fsmenu/mapselect.cc:293
 msgid "Map:"
 msgstr ""
 
@@ -454,7 +454,7 @@ msgstr "Розмір:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:93
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:103
-#: ../../src/ui_fsmenu/loadgame.cc:280
+#: ../../src/ui_fsmenu/loadgame.cc:279
 msgid "Players:"
 msgstr "Гравці:"
 
@@ -465,7 +465,7 @@ msgstr "Опис:"
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:117
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:127
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:56
-#: ../../src/scripting/lua_game.cc:393 ../../src/ui_basic/helpwindow.cc:84
+#: ../../src/scripting/lua_game.cc:392 ../../src/ui_basic/helpwindow.cc:85
 #: ../../src/ui_basic/messagebox.cc:90
 #: ../../src/ui_fsmenu/load_map_or_game.cc:66
 #: ../../src/wui/game_main_menu_save_game.cc:92
@@ -475,8 +475,8 @@ msgstr "Гаразд"
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:127
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:135
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:66
-#: ../../src/ui_fsmenu/launch_mpg.cc:88 ../../src/ui_fsmenu/options.cc:111
-#: ../../src/ui_fsmenu/options.cc:472
+#: ../../src/ui_fsmenu/launch_mpg.cc:85 ../../src/ui_fsmenu/options.cc:118
+#: ../../src/ui_fsmenu/options.cc:530
 #: ../../src/wui/game_main_menu_save_game.cc:102 ../../src/wui/login_box.cc:73
 msgid "Cancel"
 msgstr "Скасувати"
@@ -491,12 +491,12 @@ msgstr ""
 #. * TRANSLATORS: Parent directory
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:215
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:293
-#: ../../src/ui_fsmenu/mapselect.cc:410
+#: ../../src/ui_fsmenu/mapselect.cc:409
 msgid "parent"
 msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:60
-#: ../../src/ui_fsmenu/loadgame.cc:278
+#: ../../src/ui_fsmenu/loadgame.cc:277
 #: ../../src/wui/game_main_menu_save_game.cc:65
 msgid "Map Name:"
 msgstr "Ім'я мапи:"
@@ -588,7 +588,7 @@ msgid "Low"
 msgstr "Низько"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:257
-#: ../../src/logic/building.cc:531
+#: ../../src/logic/building.cc:533
 msgid "Medium"
 msgstr "Середня"
 
@@ -834,31 +834,31 @@ msgstr "Поточний розмір: %u"
 msgid "unknown"
 msgstr ""
 
-#: ../../src/logic/building.cc:524
+#: ../../src/logic/building.cc:526
 msgid "mine"
 msgstr "шахта"
 
-#: ../../src/logic/building.cc:525
+#: ../../src/logic/building.cc:527
 msgid "small"
 msgstr "малий"
 
-#: ../../src/logic/building.cc:526
+#: ../../src/logic/building.cc:528
 msgid "big"
 msgstr "великий"
 
-#: ../../src/logic/building.cc:526
+#: ../../src/logic/building.cc:528
 msgid "medium"
 msgstr "середній"
 
-#: ../../src/logic/building.cc:529
+#: ../../src/logic/building.cc:531
 msgid "Mine"
 msgstr "Шахта"
 
-#: ../../src/logic/building.cc:530
+#: ../../src/logic/building.cc:532
 msgid "Small"
 msgstr "Мала"
 
-#: ../../src/logic/building.cc:531
+#: ../../src/logic/building.cc:533
 msgid "Big"
 msgstr "Велика"
 
@@ -895,8 +895,8 @@ msgid "Adding player %u"
 msgstr "Додати гравця %u"
 
 #: ../../src/logic/game.cc:247 ../../src/logic/game.cc:339
-#: ../../src/ui_fsmenu/launch_mpg.cc:302 ../../src/ui_fsmenu/launch_spg.cc:241
-#: ../../src/ui_fsmenu/mapselect.cc:155
+#: ../../src/ui_fsmenu/launch_mpg.cc:293 ../../src/ui_fsmenu/launch_spg.cc:236
+#: ../../src/ui_fsmenu/mapselect.cc:154
 #: ../../src/wui/multiplayersetupgroup.cc:359
 msgid "Scenario"
 msgstr "Сценарій"
@@ -919,7 +919,7 @@ msgid "Loading map"
 msgstr "Завантаження мапи"
 
 #: ../../src/logic/game.cc:370 ../../src/logic/game.cc:403
-#: ../../src/wlapplication.cc:1474
+#: ../../src/wlapplication.cc:1476
 msgid "Loading..."
 msgstr "Завантаження..."
 
@@ -1183,41 +1183,41 @@ msgstr ""
 msgid "Game saved"
 msgstr ""
 
-#: ../../src/logic/ship.cc:460
+#: ../../src/logic/ship.cc:450
 msgid "Port Space Found"
 msgstr ""
 
-#: ../../src/logic/ship.cc:461
+#: ../../src/logic/ship.cc:451
 msgid "An expedition ship found a new port build space."
 msgstr ""
 
-#: ../../src/logic/ship.cc:568
+#: ../../src/logic/ship.cc:561
 msgid "Island Circumnavigated"
 msgstr ""
 
-#: ../../src/logic/ship.cc:569
+#: ../../src/logic/ship.cc:562
 msgid "An expedition ship sailed around its island without any events."
 msgstr ""
 
-#: ../../src/logic/ship.cc:624
+#: ../../src/logic/ship.cc:619
 msgid "Coast Reached"
 msgstr ""
 
-#: ../../src/logic/ship.cc:626
+#: ../../src/logic/ship.cc:621
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr ""
 
-#: ../../src/logic/ship.cc:788
+#: ../../src/logic/ship.cc:785
 msgid "Expedition Ready"
 msgstr ""
 
-#: ../../src/logic/ship.cc:789
+#: ../../src/logic/ship.cc:786
 msgid "An expedition ship is waiting for your commands."
 msgstr ""
 
 #: ../../src/logic/single_player_game_settings_provider.cc:87
-#: ../../src/network/nethost.cc:2073 ../../src/ui_fsmenu/launch_mpg.cc:571
+#: ../../src/network/nethost.cc:2073 ../../src/ui_fsmenu/launch_mpg.cc:562
 #: ../../src/wui/multiplayersetupgroup.cc:123
 #: ../../src/wui/multiplayersetupgroup.cc:294
 #, c-format
@@ -1228,7 +1228,7 @@ msgstr "Гравець %u"
 msgid "Logic error"
 msgstr "Логічна помилка"
 
-#: ../../src/logic/warehouse.cc:453
+#: ../../src/logic/warehouse.cc:417
 #, c-format
 msgid "A new %s was added to your economy."
 msgstr ""
@@ -1268,7 +1268,7 @@ msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Карта Bluebyte Settlers II. Коментарі відсутні!"
 
 #: ../../src/network/internet_gaming.cc:117
-#: ../../src/ui_fsmenu/internet_lobby.cc:432
+#: ../../src/ui_fsmenu/internet_lobby.cc:428
 msgid "Connection problem"
 msgstr "Проблема зв'язку"
 
@@ -1475,7 +1475,7 @@ msgstr ""
 "сервер вимкнено."
 
 #: ../../src/network/netclient.cc:199 ../../src/network/nethost.cc:847
-#: ../../src/wlapplication.cc:1364
+#: ../../src/wlapplication.cc:1366
 msgid "Preparing game"
 msgstr "Підготовка гри"
 
@@ -1917,11 +1917,11 @@ msgstr ""
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:987
+#: ../../src/scripting/lua_game.cc:986
 msgid "%1% (%2%)"
 msgstr ""
 
-#: ../../src/ui_basic/helpwindow.cc:48 ../../src/ui_basic/helpwindow.cc:191
+#: ../../src/ui_basic/helpwindow.cc:49 ../../src/ui_basic/helpwindow.cc:193
 #, c-format
 msgid "Help: %s"
 msgstr "Довідка: %s"
@@ -1934,191 +1934,191 @@ msgstr "Гаразд"
 msgid "No"
 msgstr "Ні"
 
-#: ../../src/ui_basic/progresswindow.cc:46
+#: ../../src/ui_basic/progresswindow.cc:47
 msgid "Preparing..."
 msgstr "Підготовка..."
 
 #. * TRANSLATORS: %i = number, %s = unit, e.g. "5 pixels" in the advanced options
-#: ../../src/ui_basic/spinbox.cc:125
+#: ../../src/ui_basic/spinbox.cc:127
 #, c-format
 msgid "%i %s"
 msgstr ""
 
-#: ../../src/ui_basic/spinbox.cc:136
+#: ../../src/ui_basic/spinbox.cc:138
 msgid "Increase the value"
 msgstr "Збільшити значення"
 
-#: ../../src/ui_basic/spinbox.cc:144
+#: ../../src/ui_basic/spinbox.cc:146
 msgid "Decrease the value"
 msgstr "Зменшити значення"
 
-#: ../../src/ui_basic/spinbox.cc:155
+#: ../../src/ui_basic/spinbox.cc:157
 msgid "Increase the value by 10"
 msgstr "Збільшувати значення по 10"
 
-#: ../../src/ui_basic/spinbox.cc:163
+#: ../../src/ui_basic/spinbox.cc:165
 msgid "Decrease the value by 10"
 msgstr "Зменшувати значення по10"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:50
+#: ../../src/ui_fsmenu/campaign_select.cc:49
 msgid "Choose a campaign"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:80
-#: ../../src/ui_fsmenu/campaign_select.cc:164
-#: ../../src/ui_fsmenu/campaign_select.cc:404
-#: ../../src/ui_fsmenu/mapselect.cc:70
+#: ../../src/ui_fsmenu/campaign_select.cc:79
+#: ../../src/ui_fsmenu/campaign_select.cc:163
+#: ../../src/ui_fsmenu/campaign_select.cc:403
+#: ../../src/ui_fsmenu/mapselect.cc:69
 msgid "Description:"
 msgstr "Опис:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:90
-#: ../../src/ui_fsmenu/campaign_select.cc:336
-#: ../../src/ui_fsmenu/loadgame.cc:123
+#: ../../src/ui_fsmenu/campaign_select.cc:89
+#: ../../src/ui_fsmenu/campaign_select.cc:335
+#: ../../src/ui_fsmenu/loadgame.cc:122
 msgid "Return to the main menu"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:91
+#: ../../src/ui_fsmenu/campaign_select.cc:90
 msgid "Play this campaign"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:92
+#: ../../src/ui_fsmenu/campaign_select.cc:91
 msgid "The name of this campaign"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:93
+#: ../../src/ui_fsmenu/campaign_select.cc:92
 msgid "The tribe you will be playing"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:94
+#: ../../src/ui_fsmenu/campaign_select.cc:93
 msgid "The difficulty of this campaign"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:95
-#: ../../src/ui_fsmenu/campaign_select.cc:344
-#: ../../src/ui_fsmenu/mapselect.cc:97
+#: ../../src/ui_fsmenu/campaign_select.cc:94
+#: ../../src/ui_fsmenu/campaign_select.cc:343
+#: ../../src/ui_fsmenu/mapselect.cc:96
 msgid "Story and hints"
 msgstr ""
 
 #. * TRANSLATORS: Campaign difficulty table header
-#: ../../src/ui_fsmenu/campaign_select.cc:109
+#: ../../src/ui_fsmenu/campaign_select.cc:108
 msgid "Diff."
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:109
+#: ../../src/ui_fsmenu/campaign_select.cc:108
 msgid "Difficulty"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:110
+#: ../../src/ui_fsmenu/campaign_select.cc:109
 #: ../../src/wui/multiplayersetupgroup.cc:451
 msgid "Tribe"
 msgstr "Плем'я"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:110
+#: ../../src/ui_fsmenu/campaign_select.cc:109
 msgid "Tribe Name"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:111
+#: ../../src/ui_fsmenu/campaign_select.cc:110
 msgid "Campaign Name"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:161
+#: ../../src/ui_fsmenu/campaign_select.cc:160
 msgid "Campaign Name:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:162
+#: ../../src/ui_fsmenu/campaign_select.cc:161
 msgid "Tribe:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:163
+#: ../../src/ui_fsmenu/campaign_select.cc:162
 msgid "Difficulty:"
 msgstr "Складність:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:296
+#: ../../src/ui_fsmenu/campaign_select.cc:295
 msgid "Choose a scenario"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:296
+#: ../../src/ui_fsmenu/campaign_select.cc:295
 msgid "Choose a tutorial"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:338
+#: ../../src/ui_fsmenu/campaign_select.cc:337
 msgid "Play this tutorial"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:339
+#: ../../src/ui_fsmenu/campaign_select.cc:338
 msgid "The name of this tutorial"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:340
+#: ../../src/ui_fsmenu/campaign_select.cc:339
 msgid "What you will learn in this tutorial"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:342
+#: ../../src/ui_fsmenu/campaign_select.cc:341
 msgid "Play this scenario"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:343
+#: ../../src/ui_fsmenu/campaign_select.cc:342
 msgid "The name of this scenario"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:361
+#: ../../src/ui_fsmenu/campaign_select.cc:360
 msgid "The order in which the tutorials should be played"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:362
+#: ../../src/ui_fsmenu/campaign_select.cc:361
 msgid "Tutorial Name"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:364
+#: ../../src/ui_fsmenu/campaign_select.cc:363
 msgid "The number of this scenario in the campaign"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:365
+#: ../../src/ui_fsmenu/campaign_select.cc:364
 msgid "Scenario Name"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:367
+#: ../../src/ui_fsmenu/campaign_select.cc:366
 msgid "#"
 msgstr "#"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:403
-#: ../../src/ui_fsmenu/mapselect.cc:292
+#: ../../src/ui_fsmenu/campaign_select.cc:402
+#: ../../src/ui_fsmenu/mapselect.cc:291
 msgid "Scenario:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:403
+#: ../../src/ui_fsmenu/campaign_select.cc:402
 msgid "Tutorial:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:419
+#: ../../src/ui_fsmenu/campaign_select.cc:418
 #, c-format
 msgid "Invalid path to file in campaigns.conf: %s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:430
+#: ../../src/ui_fsmenu/campaign_select.cc:429
 msgid "The designer of this tutorial"
 msgid_plural "The designers of this tutorial"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:433
+#: ../../src/ui_fsmenu/campaign_select.cc:432
 msgid "The designer of this scenario"
 msgid_plural "The designers of this scenario"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:436
-#: ../../src/ui_fsmenu/mapselect.cc:318
+#: ../../src/ui_fsmenu/campaign_select.cc:435
+#: ../../src/ui_fsmenu/mapselect.cc:317
 msgid "Author:"
 msgid_plural "Authors:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:460
+#: ../../src/ui_fsmenu/campaign_select.cc:459
 msgid "Pick a tutorial from the list, then hit \"OK\"."
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:462
+#: ../../src/ui_fsmenu/campaign_select.cc:461
 msgid ""
 "You can see a description of the currently selected tutorial on the right."
 msgstr ""
@@ -2128,7 +2128,7 @@ msgid "Editor"
 msgstr "Редактор"
 
 #: ../../src/ui_fsmenu/editor.cc:44 ../../src/ui_fsmenu/internet_lobby.cc:94
-#: ../../src/ui_fsmenu/launch_mpg.cc:141 ../../src/ui_fsmenu/launch_spg.cc:72
+#: ../../src/ui_fsmenu/launch_mpg.cc:137 ../../src/ui_fsmenu/launch_spg.cc:72
 #: ../../src/ui_fsmenu/load_map_or_game.cc:61
 #: ../../src/ui_fsmenu/multiplayer.cc:47
 #: ../../src/ui_fsmenu/netsetup_lan.cc:72
@@ -2169,47 +2169,47 @@ msgstr "Приєднатись до цієї гри"
 msgid "Open a new game"
 msgstr "Відкрити нову гру"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:159
+#: ../../src/ui_fsmenu/internet_lobby.cc:155
 msgid "User Status"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:162
+#: ../../src/ui_fsmenu/internet_lobby.cc:158
 msgid "Registered"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:164
+#: ../../src/ui_fsmenu/internet_lobby.cc:160
 msgid "Administrator"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:166
+#: ../../src/ui_fsmenu/internet_lobby.cc:162
 msgid "Unregistered"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:169
+#: ../../src/ui_fsmenu/internet_lobby.cc:165
 #: ../../src/wui/building_statistics_menu.cc:111
 msgid "Name"
 msgstr "Ім'я"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:170
+#: ../../src/ui_fsmenu/internet_lobby.cc:166
 msgid "Points"
 msgstr "Крапки"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:171
+#: ../../src/ui_fsmenu/internet_lobby.cc:167
 msgid "Game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:402
+#: ../../src/ui_fsmenu/internet_lobby.cc:398
 msgid "Connection timed out"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:405
+#: ../../src/ui_fsmenu/internet_lobby.cc:401
 msgid ""
 "Widelands was unable to get the IP address of the server in time.\n"
 "There seems to be a network problem, either on your side or on the side\n"
 "of the server.\n"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:433
+#: ../../src/ui_fsmenu/internet_lobby.cc:429
 msgid "Widelands was unable to connect to the host."
 msgstr "Widelands не вдалось підключитись до хосту."
 
@@ -2218,81 +2218,81 @@ msgid "Press ESC or click to continue ..."
 msgstr "Натисніть ESC, або кляцніть мишкою для продовження ..."
 
 #. * TRANSLATORS: Dialog box title for selecting between map or saved game for new multiplayer game
-#: ../../src/ui_fsmenu/launch_mpg.cc:55
+#: ../../src/ui_fsmenu/launch_mpg.cc:54
 msgid "Please select"
 msgstr "Будь ласка, виберіть"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:68 ../../src/ui_fsmenu/launch_mpg.cc:175
-#: ../../src/ui_fsmenu/netsetup_lan.cc:127 ../../src/wui/minimap.cc:142
+#: ../../src/ui_fsmenu/launch_mpg.cc:67 ../../src/ui_fsmenu/launch_mpg.cc:171
+#: ../../src/ui_fsmenu/netsetup_lan.cc:119 ../../src/wui/minimap.cc:142
 msgid "Map"
 msgstr "Мапа"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:68
+#: ../../src/ui_fsmenu/launch_mpg.cc:67
 msgid "Select a map"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:78
+#: ../../src/ui_fsmenu/launch_mpg.cc:76
 msgid "Saved game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:78
+#: ../../src/ui_fsmenu/launch_mpg.cc:76
 msgid "Select a saved game"
 msgstr "Вибір збереженої гри"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:88
+#: ../../src/ui_fsmenu/launch_mpg.cc:85
 msgid "Cancel selection"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:131
+#: ../../src/ui_fsmenu/launch_mpg.cc:127
 msgid "Change map or saved game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:136 ../../src/ui_fsmenu/launch_spg.cc:77
+#: ../../src/ui_fsmenu/launch_mpg.cc:132 ../../src/ui_fsmenu/launch_spg.cc:77
 msgid "Start game"
 msgstr "Розпочати гру"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:152
+#: ../../src/ui_fsmenu/launch_mpg.cc:148
 msgid "Show the help window"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:158 ../../src/ui_fsmenu/launch_mpg.cc:672
+#: ../../src/ui_fsmenu/launch_mpg.cc:154 ../../src/ui_fsmenu/launch_mpg.cc:663
 msgid "Multiplayer Game Setup"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:167
+#: ../../src/ui_fsmenu/launch_mpg.cc:163
 msgid "Clients"
 msgstr "Клієнти"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:179 ../../src/ui_fsmenu/launch_spg.cc:112
+#: ../../src/ui_fsmenu/launch_mpg.cc:175 ../../src/ui_fsmenu/launch_spg.cc:112
 msgid "Type of game"
 msgstr "Тип гри"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:224 ../../src/ui_fsmenu/launch_spg.cc:293
+#: ../../src/ui_fsmenu/launch_mpg.cc:215 ../../src/ui_fsmenu/launch_spg.cc:288
 msgid "(no map)"
 msgstr "(нема мапи)"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:225
+#: ../../src/ui_fsmenu/launch_mpg.cc:216
 msgid "The host has not yet selected a map or saved game."
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:304 ../../src/ui_fsmenu/launch_spg.cc:243
+#: ../../src/ui_fsmenu/launch_mpg.cc:295 ../../src/ui_fsmenu/launch_spg.cc:238
 msgid "Win condition is set through the scenario"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:306
+#: ../../src/ui_fsmenu/launch_mpg.cc:297
 #: ../../src/wui/multiplayersetupgroup.cc:361
 msgid "Savegame"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:308
+#: ../../src/ui_fsmenu/launch_mpg.cc:299
 msgid "The game is a saved game – the win condition was set before."
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:408
+#: ../../src/ui_fsmenu/launch_mpg.cc:399
 msgid "Saved game is directory"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:410
+#: ../../src/ui_fsmenu/launch_mpg.cc:401
 msgid ""
 "WARNING:\n"
 "The saved game you selected is a directory. This happens if you set the "
@@ -2301,11 +2301,11 @@ msgid ""
 "please select another saved game or zip the directories’ content."
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:439 ../../src/ui_fsmenu/launch_spg.cc:267
+#: ../../src/ui_fsmenu/launch_mpg.cc:430 ../../src/ui_fsmenu/launch_spg.cc:262
 msgid "File not found"
 msgstr "Файл не знайдено"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:441
+#: ../../src/ui_fsmenu/launch_mpg.cc:432
 #, c-format
 msgid ""
 "Widelands tried to start a game with a file that could not be found at the "
@@ -2316,39 +2316,39 @@ msgid ""
 "transfer was not yet finished!?!"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:465
+#: ../../src/ui_fsmenu/launch_mpg.cc:456
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write to the host about this problem."
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:496
+#: ../../src/ui_fsmenu/launch_mpg.cc:487
 #, c-format
 msgid "You are Player %i."
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:497
+#: ../../src/ui_fsmenu/launch_mpg.cc:488
 msgid "You are a spectator."
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:557
+#: ../../src/ui_fsmenu/launch_mpg.cc:548
 msgid "Saved players are:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:574
+#: ../../src/ui_fsmenu/launch_mpg.cc:565
 msgid "closed"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:646
+#: ../../src/ui_fsmenu/launch_mpg.cc:637
 msgid "Map details:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:647
+#: ../../src/ui_fsmenu/launch_mpg.cc:638
 #, c-format
 msgid "Size: %1$u x %2$u"
 msgstr "Розмір: %1$u x %2$u"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:649
+#: ../../src/ui_fsmenu/launch_mpg.cc:640
 #: ../../src/wui/game_main_menu_save_game.cc:170
 #, c-format
 msgid "%u Player"
@@ -2356,64 +2356,64 @@ msgid_plural "%u Players"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:652
+#: ../../src/ui_fsmenu/launch_mpg.cc:643
 msgid "Scenario mode selected"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:673
+#: ../../src/ui_fsmenu/launch_mpg.cc:664
 msgid "You are in the multiplayer launch game menu."
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:674
+#: ../../src/ui_fsmenu/launch_mpg.cc:665
 msgid "Client settings"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:677
+#: ../../src/ui_fsmenu/launch_mpg.cc:668
 msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role with the button following your nickname. Available roles are:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:681
+#: ../../src/ui_fsmenu/launch_mpg.cc:672
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:685
+#: ../../src/ui_fsmenu/launch_mpg.cc:676
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any player"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:687
+#: ../../src/ui_fsmenu/launch_mpg.cc:678
 msgid "Player settings"
 msgstr "Параметри програвача"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:690
+#: ../../src/ui_fsmenu/launch_mpg.cc:681
 msgid ""
 "In the middle are the settings for the players. To start a game, each player "
 "must be one of the following:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:693
+#: ../../src/ui_fsmenu/launch_mpg.cc:684
 msgid "Connected to one or more clients (see ‘Client settings’)."
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:696
+#: ../../src/ui_fsmenu/launch_mpg.cc:687
 msgid ""
 "Connected to a computer player (the face in the picture as well as the mouse "
 "hover texts indicate the strength of the currently selected computer player)."
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:699
+#: ../../src/ui_fsmenu/launch_mpg.cc:690
 msgid "Set as shared in starting position for another player."
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:700
+#: ../../src/ui_fsmenu/launch_mpg.cc:691
 msgid "Closed."
 msgstr "Закрито."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:703
+#: ../../src/ui_fsmenu/launch_mpg.cc:694
 msgid ""
 "The latter three can only be set by the hosting client by left-clicking the "
 "‘type’ button of a player. Hosting players can also set the initialization "
@@ -2421,17 +2421,17 @@ msgid ""
 "with) and the tribe and team for computer players"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:708
+#: ../../src/ui_fsmenu/launch_mpg.cc:699
 msgid ""
 "Every client connected to a player (the set ‘role’ player) can set the tribe "
 "and the team for that player"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:710
+#: ../../src/ui_fsmenu/launch_mpg.cc:701
 msgid "Map details"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:713
+#: ../../src/ui_fsmenu/launch_mpg.cc:704
 msgid ""
 "You can see information about the selected map or savegame on the right-hand "
 "side. A button next to the map name allows the host to change to a different "
@@ -2468,11 +2468,11 @@ msgstr "Плем'я гравця"
 msgid "Start type"
 msgstr "Тип початку"
 
-#: ../../src/ui_fsmenu/launch_spg.cc:169
+#: ../../src/ui_fsmenu/launch_spg.cc:164
 msgid "Switch to position"
 msgstr "перемкнутись на позицію"
 
-#: ../../src/ui_fsmenu/launch_spg.cc:269
+#: ../../src/ui_fsmenu/launch_spg.cc:264
 #, c-format
 msgid ""
 "Widelands tried to start a game with a file that could not be found at the "
@@ -2483,144 +2483,144 @@ msgid ""
 "but perhaps the transfer was not yet finished!?!"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:58
+#: ../../src/ui_fsmenu/loadgame.cc:57
 msgid "Choose a replay"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:58
+#: ../../src/ui_fsmenu/loadgame.cc:57
 msgid "Choose a saved game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:96
+#: ../../src/ui_fsmenu/loadgame.cc:95
 #: ../../src/wui/game_main_menu_save_game.cc:110
 msgid "Delete"
 msgstr "Видалити"
 
-#: ../../src/ui_fsmenu/loadgame.cc:118
+#: ../../src/ui_fsmenu/loadgame.cc:117
 msgid "The time that elapsed inside this game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:119
+#: ../../src/ui_fsmenu/loadgame.cc:118
 msgid "The number of players"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:120
+#: ../../src/ui_fsmenu/loadgame.cc:119
 msgid "The win condition that was set for this game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:124
+#: ../../src/ui_fsmenu/loadgame.cc:123
 msgid "Load this replay"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:125
+#: ../../src/ui_fsmenu/loadgame.cc:124
 msgid "The map that this replay is based on"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:126
+#: ../../src/ui_fsmenu/loadgame.cc:125
 msgid "Delete this replay"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:128 ../../src/ui_fsmenu/mapselect.cc:94
+#: ../../src/ui_fsmenu/loadgame.cc:127 ../../src/ui_fsmenu/mapselect.cc:93
 msgid "Return to the single player menu"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:129
+#: ../../src/ui_fsmenu/loadgame.cc:128
 msgid "Load this game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:130
+#: ../../src/ui_fsmenu/loadgame.cc:129
 msgid "The map that this game is based on"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:131
+#: ../../src/ui_fsmenu/loadgame.cc:130
 msgid "Delete this game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:140
+#: ../../src/ui_fsmenu/loadgame.cc:139
 msgid "Save Date"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:140
+#: ../../src/ui_fsmenu/loadgame.cc:139
 msgid "The date this game was saved"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load.
 #. * TRANSLATORS: %s is a list of game modes.
-#: ../../src/ui_fsmenu/loadgame.cc:157
+#: ../../src/ui_fsmenu/loadgame.cc:156
 #, c-format
 msgid "Game Mode: %s."
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:160
+#: ../../src/ui_fsmenu/loadgame.cc:159
 msgid "Numbers are the number of players."
 msgstr ""
 
 #. * TRANSLATORS: Game Mode table column when choosing a game/replay to load.
 #. * TRANSLATORS: Keep this to 5 letters maximum.
 #. * TRANSLATORS: A tooltip will explain if you need to use an abbreviation.
-#: ../../src/ui_fsmenu/loadgame.cc:166
+#: ../../src/ui_fsmenu/loadgame.cc:165
 msgid "Mode"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:170 ../../src/ui_fsmenu/mapselect.cc:106
+#: ../../src/ui_fsmenu/loadgame.cc:169 ../../src/ui_fsmenu/mapselect.cc:105
 msgid "Map Name"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:170
+#: ../../src/ui_fsmenu/loadgame.cc:169
 msgid "The name of the map that was played"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:174
+#: ../../src/ui_fsmenu/loadgame.cc:173
 msgid "Filename"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:174
+#: ../../src/ui_fsmenu/loadgame.cc:173
 msgid "The filename the game was saved under"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:227
+#: ../../src/ui_fsmenu/loadgame.cc:226
 msgid "Save Date:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:236 ../../src/ui_fsmenu/loadgame.cc:358
+#: ../../src/ui_fsmenu/loadgame.cc:235 ../../src/ui_fsmenu/loadgame.cc:356
 msgid "Filename:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:240
+#: ../../src/ui_fsmenu/loadgame.cc:239
 msgid "Do you really want to delete this replay?"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:243
+#: ../../src/ui_fsmenu/loadgame.cc:242
 msgid "Do you really want to delete this game?"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:247
+#: ../../src/ui_fsmenu/loadgame.cc:246
 msgid "Confirm deleting file"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:279
+#: ../../src/ui_fsmenu/loadgame.cc:278
 msgid "Gametime:"
 msgstr "Час гри:"
 
-#: ../../src/ui_fsmenu/loadgame.cc:281
+#: ../../src/ui_fsmenu/loadgame.cc:280
 msgid "Win Condition:"
 msgstr ""
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay
 #. * TRANSLATORS: hour:minute
-#: ../../src/ui_fsmenu/loadgame.cc:466
+#: ../../src/ui_fsmenu/loadgame.cc:464
 msgid "Today, %1%:%2%"
 msgstr ""
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay
 #. * TRANSLATORS: hour:minute
-#: ../../src/ui_fsmenu/loadgame.cc:479
+#: ../../src/ui_fsmenu/loadgame.cc:477
 msgid "Yesterday, %1%:%2%"
 msgstr ""
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay
 #. * TRANSLATORS: month day, year
-#: ../../src/ui_fsmenu/loadgame.cc:485
+#: ../../src/ui_fsmenu/loadgame.cc:483
 msgid "%2% %1%, %3%"
 msgstr ""
 
@@ -2628,7 +2628,7 @@ msgstr ""
 #. * TRANSLATORS: "Keep this to 6 letters maximum.
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
 #. * TRANSLATORS: Make sure that this translation is consistent with the tooltip.
-#: ../../src/ui_fsmenu/loadgame.cc:511
+#: ../../src/ui_fsmenu/loadgame.cc:509
 msgid "SP"
 msgstr ""
 
@@ -2637,7 +2637,7 @@ msgstr ""
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
 #. * TRANSLATORS: Make sure that this translation is consistent with the tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/ui_fsmenu/loadgame.cc:519
+#: ../../src/ui_fsmenu/loadgame.cc:517
 msgid "H (%1%)"
 msgstr ""
 
@@ -2646,29 +2646,29 @@ msgstr ""
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
 #. * TRANSLATORS: Make sure that this translation is consistent with the tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/ui_fsmenu/loadgame.cc:528
+#: ../../src/ui_fsmenu/loadgame.cc:526
 msgid "MP (%1%)"
 msgstr ""
 
 #. * TRANSLATORS: Used in filenames for loading games
-#: ../../src/ui_fsmenu/loadgame.cc:541
+#: ../../src/ui_fsmenu/loadgame.cc:539
 msgid "Autosave: %1%"
 msgstr ""
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be loaded
-#: ../../src/ui_fsmenu/loadgame.cc:552
+#: ../../src/ui_fsmenu/loadgame.cc:550
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
 msgstr ""
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/ui_fsmenu/loadgame.cc:555
+#: ../../src/ui_fsmenu/loadgame.cc:553
 msgid "Error message:"
 msgstr ""
 
 #. * TRANSLATORS: Prefix for incompatible files in load game screens
-#: ../../src/ui_fsmenu/loadgame.cc:568 ../../src/ui_fsmenu/loadgame.cc:570
+#: ../../src/ui_fsmenu/loadgame.cc:566 ../../src/ui_fsmenu/loadgame.cc:568
 #, c-format
 msgid "Incompatible: %s"
 msgstr ""
@@ -2722,134 +2722,134 @@ msgstr ""
 msgid "Licensed under the GNU General Public License V2.0"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:51
+#: ../../src/ui_fsmenu/mapselect.cc:50
 msgid "Choose a map"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:89
+#: ../../src/ui_fsmenu/mapselect.cc:88
 msgid "Return to the editor menu"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:92
+#: ../../src/ui_fsmenu/mapselect.cc:91
 msgid "Return to the multiplayer game setup"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:105
+#: ../../src/ui_fsmenu/mapselect.cc:104
 msgid "Number of players"
 msgstr ""
 
 #. * TRANSLATORS: Column title for number of players in map list
-#: ../../src/ui_fsmenu/mapselect.cc:105
+#: ../../src/ui_fsmenu/mapselect.cc:104
 msgid "Pl."
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:106
+#: ../../src/ui_fsmenu/mapselect.cc:105
 msgid "The name of the map or scenario"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:108
+#: ../../src/ui_fsmenu/mapselect.cc:107
 msgid "Size"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:108
+#: ../../src/ui_fsmenu/mapselect.cc:107
 msgid "The size of the map (Width x Height)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:136
+#: ../../src/ui_fsmenu/mapselect.cc:135
 msgid "Show all maps"
 msgstr ""
 
 #. * TRANSLATORS: Checkbox title. If this checkbox is enabled, map names aren't translated.
-#: ../../src/ui_fsmenu/mapselect.cc:143
+#: ../../src/ui_fsmenu/mapselect.cc:142
 msgid "Show original map names"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:152
+#: ../../src/ui_fsmenu/mapselect.cc:151
 msgid "Official"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:153
+#: ../../src/ui_fsmenu/mapselect.cc:152
 msgid "Unbalanced"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:154
+#: ../../src/ui_fsmenu/mapselect.cc:153
 msgid "Seafaring"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:161
+#: ../../src/ui_fsmenu/mapselect.cc:160
 msgid "Free for all"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:162
+#: ../../src/ui_fsmenu/mapselect.cc:161
 msgid "1v1"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:169
+#: ../../src/ui_fsmenu/mapselect.cc:168
 msgid "Teams of 2"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:170
+#: ../../src/ui_fsmenu/mapselect.cc:169
 msgid "Teams of 3"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:171
+#: ../../src/ui_fsmenu/mapselect.cc:170
 msgid "Teams of 4"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in map description when map names are being displayed in English.
 #. * TRANSLATORS: %s is the localized name of the map.
-#: ../../src/ui_fsmenu/mapselect.cc:306
+#: ../../src/ui_fsmenu/mapselect.cc:305
 #, c-format
 msgid "The name of this map in your language: %s"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in map description when translated map names are being displayed.
 #. * TRANSLATORS: %s is the English name of the map.
-#: ../../src/ui_fsmenu/mapselect.cc:312
+#: ../../src/ui_fsmenu/mapselect.cc:311
 #, c-format
 msgid "The original name of this map: %s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:316
+#: ../../src/ui_fsmenu/mapselect.cc:315
 msgid "The name of this map"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:319
+#: ../../src/ui_fsmenu/mapselect.cc:318
 msgid "The designer of this map"
 msgid_plural "The designers of this map"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:329
+#: ../../src/ui_fsmenu/mapselect.cc:328
 msgid "Edit this map"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:329
+#: ../../src/ui_fsmenu/mapselect.cc:328
 msgid "Play this map"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:332
+#: ../../src/ui_fsmenu/mapselect.cc:331
 msgid "Directory:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:334
+#: ../../src/ui_fsmenu/mapselect.cc:333
 msgid "The name of this directory"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:340
+#: ../../src/ui_fsmenu/mapselect.cc:339
 msgid "Open this directory"
 msgstr ""
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
-#: ../../src/ui_fsmenu/mapselect.cc:441
+#: ../../src/ui_fsmenu/mapselect.cc:440
 msgid "Multiplayer Scenarios"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:583
+#: ../../src/ui_fsmenu/mapselect.cc:582
 msgid "Nobody"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapselect.cc:584
+#: ../../src/ui_fsmenu/mapselect.cc:583
 msgid ""
 "This map file is not present in your filesystem. The data shown here was "
 "sent by the server."
@@ -2871,8 +2871,8 @@ msgstr "LAN / Direct IP"
 msgid "Show login dialog"
 msgstr "Показати діалог входу"
 
-#: ../../src/ui_fsmenu/multiplayer.cc:115
-#: ../../src/ui_fsmenu/netsetup_lan.cc:121 ../../src/wui/login_box.cc:77
+#: ../../src/ui_fsmenu/multiplayer.cc:114
+#: ../../src/ui_fsmenu/netsetup_lan.cc:113 ../../src/wui/login_box.cc:77
 msgid "nobody"
 msgstr "Нікого"
 
@@ -2900,170 +2900,166 @@ msgstr ""
 msgid "Load previous host"
 msgstr "Завантажити попередній хост"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:126
+#: ../../src/ui_fsmenu/netsetup_lan.cc:118
 msgid "Host"
 msgstr "Хост"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:128
+#: ../../src/ui_fsmenu/netsetup_lan.cc:120
 msgid "State"
 msgstr "Стан"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:197
+#: ../../src/ui_fsmenu/netsetup_lan.cc:189
 #: ../../src/wui/multiplayersetupgroup.cc:276
-#: ../../src/wui/playerdescrgroup.cc:161
+#: ../../src/wui/playerdescrgroup.cc:155
 msgid "Open"
 msgstr "Відкрити"
 
-#: ../../src/ui_fsmenu/netsetup_lan.cc:198
+#: ../../src/ui_fsmenu/netsetup_lan.cc:190
 #: ../../src/wui/multiplayersetupgroup.cc:265
 msgid "Closed"
 msgstr "Закрито"
 
-#: ../../src/ui_fsmenu/options.cc:106 ../../src/ui_fsmenu/options.cc:483
+#: ../../src/ui_fsmenu/options.cc:113 ../../src/ui_fsmenu/options.cc:541
 msgid "Advanced Options"
 msgstr "Додаткові параметри"
 
-#: ../../src/ui_fsmenu/options.cc:116 ../../src/ui_fsmenu/options.cc:477
+#: ../../src/ui_fsmenu/options.cc:123 ../../src/ui_fsmenu/options.cc:535
 msgid "Apply"
 msgstr "Застосувати"
 
-#: ../../src/ui_fsmenu/options.cc:122
+#: ../../src/ui_fsmenu/options.cc:129
 msgid "General Options"
 msgstr "Загальні параметри"
 
-#: ../../src/ui_fsmenu/options.cc:128
+#: ../../src/ui_fsmenu/options.cc:135
 msgid "In-game resolution"
 msgstr "Розширення в грі"
 
-#: ../../src/ui_fsmenu/options.cc:144
+#: ../../src/ui_fsmenu/options.cc:151
 msgid "Fullscreen"
 msgstr "На весь екран"
 
-#: ../../src/ui_fsmenu/options.cc:155
+#: ../../src/ui_fsmenu/options.cc:162
 msgid "Grab Input"
 msgstr "Перехват вводу"
 
-#: ../../src/ui_fsmenu/options.cc:162
+#: ../../src/ui_fsmenu/options.cc:169
 msgid "Maximum FPS:"
 msgstr "Максимум FPS:"
 
-#: ../../src/ui_fsmenu/options.cc:175
+#: ../../src/ui_fsmenu/options.cc:182
 msgid "Language"
 msgstr "Мова"
 
-#: ../../src/ui_fsmenu/options.cc:191
+#: ../../src/ui_fsmenu/options.cc:198
 msgid "Enable Music"
 msgstr "Вкл. музику"
 
-#: ../../src/ui_fsmenu/options.cc:201
+#: ../../src/ui_fsmenu/options.cc:208
 msgid "Enable Sound"
 msgstr "Увімкнути звук"
 
-#: ../../src/ui_fsmenu/options.cc:208
+#: ../../src/ui_fsmenu/options.cc:215
 msgid "In-game Options"
 msgstr "Налаштування гри"
 
-#: ../../src/ui_fsmenu/options.cc:216
+#: ../../src/ui_fsmenu/options.cc:223
 msgid "Use single watchwindow mode"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:226
+#: ../../src/ui_fsmenu/options.cc:233
 msgid "Start building road after placing a flag"
 msgstr "Будувати дорогу після розміщення прапорця"
 
-#: ../../src/ui_fsmenu/options.cc:237
+#: ../../src/ui_fsmenu/options.cc:244
 msgid "Show buildings area preview"
 msgstr "Попередній перегляд зони будівництва"
 
-#: ../../src/ui_fsmenu/options.cc:248
+#: ../../src/ui_fsmenu/options.cc:255
 msgid "Snap windows only when overlapping"
 msgstr "Вирівнювати вікна лише при накладання"
 
-#: ../../src/ui_fsmenu/options.cc:258
+#: ../../src/ui_fsmenu/options.cc:265
 msgid "Dock windows to edges"
 msgstr "Клеїти вікна до країв"
 
 #. * TRANSLATORS: Options: Save game automatically every:
 #. * TRANSLATORS: This will have a number added in front of it
-#: ../../src/ui_fsmenu/options.cc:267 ../../src/ui_fsmenu/options.cc:391
+#: ../../src/ui_fsmenu/options.cc:274 ../../src/ui_fsmenu/options.cc:388
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_fsmenu/options.cc:275
+#: ../../src/ui_fsmenu/options.cc:282
 msgid "Save game automatically every"
 msgstr "Автоматично зберігати гру кожні"
 
 #. * TRANSLATORS: Options: Remove Replays older than:
 #. * TRANSLATORS: This will have a number added in front of it
-#: ../../src/ui_fsmenu/options.cc:285 ../../src/ui_fsmenu/options.cc:395
+#: ../../src/ui_fsmenu/options.cc:292 ../../src/ui_fsmenu/options.cc:392
 msgid "day"
 msgid_plural "days"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_fsmenu/options.cc:293
+#: ../../src/ui_fsmenu/options.cc:300
 msgid "Remove replays older than:"
 msgstr ""
 
 #. * TRANSLATORS Options: Save game automatically every:
-#: ../../src/ui_fsmenu/options.cc:305
+#: ../../src/ui_fsmenu/options.cc:312
 msgid "Off"
 msgstr "Викл."
 
 #. * TRANSLATORS Options: Remove Replays older than:
-#: ../../src/ui_fsmenu/options.cc:313
+#: ../../src/ui_fsmenu/options.cc:320
 msgid "Never"
 msgstr ""
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
-#: ../../src/ui_fsmenu/options.cc:360 ../../src/ui_fsmenu/options.cc:366
+#: ../../src/ui_fsmenu/options.cc:367 ../../src/ui_fsmenu/options.cc:373
 msgid "%1% x %2%"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:378
+#: ../../src/ui_fsmenu/options.cc:406
 msgid "Try system language"
 msgstr "Спробувати системну мову"
 
-#: ../../src/ui_fsmenu/options.cc:489
-msgid "Main menu font:"
-msgstr "Шрифт головного меню:"
+#: ../../src/ui_fsmenu/options.cc:407
+msgid "English"
+msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:499
+#: ../../src/ui_fsmenu/options.cc:547
 msgid "Distance for windows to snap to other panels:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:503
+#: ../../src/ui_fsmenu/options.cc:551
 msgid "Distance for windows to snap to borders:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:510 ../../src/ui_fsmenu/options.cc:517
-#: ../../src/ui_fsmenu/options.cc:657 ../../src/ui_fsmenu/options.cc:661
+#: ../../src/ui_fsmenu/options.cc:558 ../../src/ui_fsmenu/options.cc:565
+#: ../../src/ui_fsmenu/options.cc:661 ../../src/ui_fsmenu/options.cc:665
 msgid "pixel"
 msgid_plural "pixels"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_fsmenu/options.cc:527
+#: ../../src/ui_fsmenu/options.cc:575
 msgid "Show in-game chat with transparent background"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:537
+#: ../../src/ui_fsmenu/options.cc:585
 msgid "Play a sound at message arrival."
 msgstr "Сигналити коли отримано повідомлення."
 
-#: ../../src/ui_fsmenu/options.cc:547
+#: ../../src/ui_fsmenu/options.cc:595
 msgid "Do not zip widelands data files (maps, replays and savegames)."
 msgstr "Не стискати дані гри (мапи, збереження)."
 
-#: ../../src/ui_fsmenu/options.cc:557
+#: ../../src/ui_fsmenu/options.cc:605
 msgid "Remove Syncstream dumps on startup"
 msgstr ""
-
-#: ../../src/ui_fsmenu/options.cc:597
-msgid "DejaVuSerif (Default)"
-msgstr "DejaVuSerif (Default)"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:40
 msgid "New Game"
@@ -3082,11 +3078,11 @@ msgstr "Завантажити гру"
 msgid "Suggested Teams:"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1114
+#: ../../src/wlapplication.cc:1116
 msgid "Game data error"
 msgstr "Помилка даних гри"
 
-#: ../../src/wlapplication.cc:1124
+#: ../../src/wlapplication.cc:1126
 #, c-format
 msgid ""
 "\n"
@@ -3101,7 +3097,7 @@ msgstr ""
 "Повідомлення яке стосується даної помилки Ви знайдете в стандартному виводі "
 "(stdout.txt в Windows). Ви використовуєте збірку %1$s (%2$s). "
 
-#: ../../src/wlapplication.cc:1131
+#: ../../src/wlapplication.cc:1133
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -3154,23 +3150,23 @@ msgid "Do you really want to cancel the active expedition?"
 msgstr ""
 
 #. * TRANSLATORS: %1% of %2% soldiers. Used in Attack box.
-#: ../../src/wui/attack_box.cc:136
+#: ../../src/wui/attack_box.cc:138
 msgid "%1% / %2%"
 msgstr ""
 
-#: ../../src/wui/attack_box.cc:151
+#: ../../src/wui/attack_box.cc:153
 msgid "Soldiers:"
 msgstr "Солдати:"
 
-#: ../../src/wui/attack_box.cc:159
+#: ../../src/wui/attack_box.cc:161
 msgid "Send less soldiers"
 msgstr "Відправити менше солдат"
 
-#: ../../src/wui/attack_box.cc:176
+#: ../../src/wui/attack_box.cc:180
 msgid "Number of soldiers"
 msgstr "Кількість солдат"
 
-#: ../../src/wui/attack_box.cc:186
+#: ../../src/wui/attack_box.cc:190
 msgid "Send more soldiers"
 msgstr "Відправити більше солдат"
 
@@ -3224,61 +3220,61 @@ msgstr "Показати попередні"
 msgid "Show next"
 msgstr "Показати наступного"
 
-#: ../../src/wui/buildingwindow.cc:189
+#: ../../src/wui/buildingwindow.cc:188
 msgid "Cancel the expedition"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:199
+#: ../../src/wui/buildingwindow.cc:198
 msgid "Start an expedition"
 msgstr ""
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:216
+#: ../../src/wui/buildingwindow.cc:215
 msgid "Continue"
 msgstr "Продовжити"
 
-#: ../../src/wui/buildingwindow.cc:216
+#: ../../src/wui/buildingwindow.cc:215
 msgid "Stop"
 msgstr "Стоп"
 
-#: ../../src/wui/buildingwindow.cc:240
+#: ../../src/wui/buildingwindow.cc:239
 #, c-format
 msgid "Enhance to %s"
 msgstr "Підвищити до %s"
 
-#: ../../src/wui/buildingwindow.cc:242 ../../src/wui/fieldaction.cc:107
+#: ../../src/wui/buildingwindow.cc:241 ../../src/wui/fieldaction.cc:107
 msgid "Construction costs:"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:267
+#: ../../src/wui/buildingwindow.cc:266
 msgid "Destroy"
 msgstr "Знищити"
 
-#: ../../src/wui/buildingwindow.cc:285
+#: ../../src/wui/buildingwindow.cc:284
 msgid "Dismantle"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:285
+#: ../../src/wui/buildingwindow.cc:284
 msgid "Returns:"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:317 ../../src/wui/buildingwindow.cc:508
+#: ../../src/wui/buildingwindow.cc:316 ../../src/wui/buildingwindow.cc:507
 msgid "Hide work area"
 msgstr "Приховати робочу область"
 
-#: ../../src/wui/buildingwindow.cc:332
+#: ../../src/wui/buildingwindow.cc:331
 msgid "Debug"
 msgstr "Відладження"
 
-#: ../../src/wui/buildingwindow.cc:343
+#: ../../src/wui/buildingwindow.cc:342
 msgid "Center view on this"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:361
+#: ../../src/wui/buildingwindow.cc:360
 msgid "Help"
 msgstr "Допомога"
 
-#: ../../src/wui/buildingwindow.cc:511
+#: ../../src/wui/buildingwindow.cc:510
 msgid "Show work area"
 msgstr "Показати робочу область"
 
@@ -3420,7 +3416,7 @@ msgid "Ware Statistics"
 msgstr "Статистика товарів"
 
 #: ../../src/wui/game_main_menu.cc:65 ../../src/wui/stock_menu.cc:40
-#: ../../src/wui/ware_statistics_menu.cc:208 ../../src/wui/waresdisplay.cc:58
+#: ../../src/wui/ware_statistics_menu.cc:208 ../../src/wui/waresdisplay.cc:57
 msgid "Stock"
 msgstr "Запаси"
 
@@ -3816,26 +3812,26 @@ msgid "Shared in"
 msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:307
-#: ../../src/wui/playerdescrgroup.cc:174
+#: ../../src/wui/playerdescrgroup.cc:168
 msgid "Computer"
 msgstr "Комп'ютер"
 
 #. * TRANSLATORS %s = AI type, e.g. 'Agressive'
 #: ../../src/wui/multiplayersetupgroup.cc:311
 #: ../../src/wui/multiplayersetupgroup.cc:314
-#: ../../src/wui/playerdescrgroup.cc:180
+#: ../../src/wui/playerdescrgroup.cc:174
 #, c-format
 msgid "AI: %s"
 msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:311
 #: ../../src/wui/multiplayersetupgroup.cc:325
-#: ../../src/wui/playerdescrgroup.cc:196
+#: ../../src/wui/playerdescrgroup.cc:190
 msgid "Random"
 msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:319
-#: ../../src/wui/playerdescrgroup.cc:184
+#: ../../src/wui/playerdescrgroup.cc:178
 msgid "Human"
 msgstr "Людина"
 
@@ -3852,27 +3848,27 @@ msgid "Start"
 msgstr "Почати"
 
 #: ../../src/wui/multiplayersetupgroup.cc:459
-#: ../../src/wui/playerdescrgroup.cc:105
+#: ../../src/wui/playerdescrgroup.cc:100
 msgid "Initialization"
 msgstr "Ініціалізація"
 
-#: ../../src/wui/playerdescrgroup.cc:177
+#: ../../src/wui/playerdescrgroup.cc:171
 msgid "AI: Random"
 msgstr ""
 
-#: ../../src/wui/plot_area.cc:108
+#: ../../src/wui/plot_area.cc:106
 msgid "d"
 msgstr ""
 
-#: ../../src/wui/plot_area.cc:109
+#: ../../src/wui/plot_area.cc:107
 msgid "h"
 msgstr ""
 
-#: ../../src/wui/plot_area.cc:110
+#: ../../src/wui/plot_area.cc:108
 msgid "min"
 msgstr ""
 
-#: ../../src/wui/plot_area.cc:279
+#: ../../src/wui/plot_area.cc:277
 msgid "game"
 msgstr "гра"
 
@@ -3977,25 +3973,25 @@ msgstr ""
 msgid "Capacity"
 msgstr "Ємність"
 
-#: ../../src/wui/soldierlist.cc:392 ../../src/wui/soldierlist.cc:406
-#: ../../src/wui/soldierlist.cc:474
+#: ../../src/wui/soldierlist.cc:391 ../../src/wui/soldierlist.cc:405
+#: ../../src/wui/soldierlist.cc:473
 msgid "Click soldier to send away"
 msgstr "Клікніть на солдатів щоб надіслати їх"
 
 #. * TRANSLATORS: Health, Attack, Defense, Evade
-#: ../../src/wui/soldierlist.cc:408
+#: ../../src/wui/soldierlist.cc:407
 msgid "HP: 8/8  AT: 8/8  DE: 8/8  EV: 8/8_"
 msgstr ""
 
-#: ../../src/wui/soldierlist.cc:416
+#: ../../src/wui/soldierlist.cc:415
 msgid "Prefer Rookies"
 msgstr ""
 
-#: ../../src/wui/soldierlist.cc:418
+#: ../../src/wui/soldierlist.cc:417
 msgid "Prefer Heroes"
 msgstr ""
 
-#: ../../src/wui/soldierlist.cc:479
+#: ../../src/wui/soldierlist.cc:478
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
 msgstr ""
@@ -4076,23 +4072,23 @@ msgstr ""
 msgid "Expedition"
 msgstr ""
 
-#: ../../src/wui/waresqueuedisplay.cc:194
+#: ../../src/wui/waresqueuedisplay.cc:192
 msgid "Highest priority"
 msgstr "Найвищий пріоритет"
 
-#: ../../src/wui/waresqueuedisplay.cc:197
+#: ../../src/wui/waresqueuedisplay.cc:195
 msgid "Normal priority"
 msgstr "Нормальний пріоритет"
 
-#: ../../src/wui/waresqueuedisplay.cc:200
+#: ../../src/wui/waresqueuedisplay.cc:198
 msgid "Lowest priority"
 msgstr "Низький пріорітет"
 
-#: ../../src/wui/waresqueuedisplay.cc:246
+#: ../../src/wui/waresqueuedisplay.cc:244
 msgid "Decrease the number of wares you want to be stored here."
 msgstr ""
 
-#: ../../src/wui/waresqueuedisplay.cc:256
+#: ../../src/wui/waresqueuedisplay.cc:254
 msgid "Increase the number of wares you want to be stored here."
 msgstr ""
 
