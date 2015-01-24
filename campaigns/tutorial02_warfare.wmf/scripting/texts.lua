@@ -104,7 +104,7 @@ trainingcamp2 = {
    body = rt(
       p(_[[Great, our training camp has now been finished, too. Now nothing will hinder us from getting the strongest warriors the world has ever seen.]]) ..
       p(_[[To train in the training camp, our soldiers need food like in the battle arena, but no strongbeer. Instead, they need different axes for attack training and helmets for health training.]]) ..
-      p(_[[This equipment is produced in smithies out of coal, iron, and sometimes gold. To explain this in detail would lead too far at the moment. You will learn more about this in the second scenario of the Barbarian campaign.]]) ..
+      p(_[[This equipment is produced in smithies out of coal, iron, and sometimes gold. You will learn more about this in the second scenario of the Barbarian campaign.]]) ..
       p(_[[You should also keep in mind that each of the three tribes in Widelands has its own way of training, so the buildings and wares are different. Also, the ability levels cannot be compared: an Imperial soldier with evade level 0 has a 30% chance of evading, while a Barbarian soldier at the same level only has a 25% chance.]])
    )
 }
@@ -126,13 +126,13 @@ soldier_capacity = {
    title = _"Soldier capacity",
    body = rt(
       h1(_"Adjusting the number of soldiers") ..
-      p(_[[There is another way how you can control the strength of a military building: by the number of soldiers stationed there. Just click on the arrow buttons to decrease or increase the desired number of soldiers. Every buildings has a maximum capacity. In case of the barrier, it is five, for example.]]) ..
+      p(_[[There is another way how you can control the strength of a military building: by the number of soldiers stationed there. Just click on the arrow buttons to decrease or increase the desired number of soldiers. Every building has a maximum capacity. In case of the barrier, it is five, for example.]]) ..
       p(_[[If you wish to send a certain soldier away, you can simply click on it. It will then be replaced by another soldier.]]) ..
       p(_[[Let me also describe what the numbers in the statistics string mean. This string can contain up to three numbers, e.g. ‘1 (+5) soldier (+2)’.]]) ..
       paragraphdivider() ..
       listitem_bullet(_[[The first number describes how many soldiers are currently in this building. In this example, only one soldier is left inside (each military building is always guarded by at least one soldier).]]) ..
-      listitem_bullet(_[[The second number tells you how many additional soldiers reside in this building, but are currently outside. The five soldiers are maybe attacking an enemy. They will return when they have been successful.]]) ..
-      listitem_bullet(_[[The third number indicates the missing soldiers. From the eight soldiers (1 + 5 + 2) you wish to have here, two have maybe died. They will be replaced by new soldiers from your warehouse, if possible.]])
+      listitem_bullet(_[[The second number tells you how many additional soldiers reside in this building, but are currently outside. The five soldiers may be attacking an enemy. They will return when they have been successful.]]) ..
+      listitem_bullet(_[[The third number indicates the missing soldiers. From the eight soldiers (1 + 5 + 2) you wish to have here, two may have died. They will be replaced by new soldiers from your warehouse, if possible.]])
    )
 }
 

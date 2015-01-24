@@ -221,7 +221,7 @@ tell_about_minimap = {
    rt(
       p(_[[The minimap shows the complete map in miniature. You can directly jump to any field by left-clicking on it. You can also toggle buildings, roads, flags and player indicators on and off inside the minimap.]]) ..
       paragraphdivider() ..
-      listitem_bullet(_[[Try it out. Open the minimap, click on a few buttons and try moving around. Close it when you have have experimented enough.]])
+      listitem_bullet(_[[Try it out. Open the minimap, click on a few buttons and try moving around. Close it when you have experimented enough.]])
    ),
    h = 350,
    obj_name = "use_minimap",
