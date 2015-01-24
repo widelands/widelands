@@ -168,6 +168,13 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 	// Subscribe to ShipNotes.
 	shipnotes_subscriber_ =
 	   Notifications::subscribe<NoteShipMessage>([this](const NoteShipMessage& note) {
+			//this is to prevent crash on loading
+			//I wonder if the fix is proper and AI will be subscribed to notifcations later
+			//It would be a pity if AI get no notifications for those ships in the future
+			//NOCOM - see question above
+			if (player_ == nullptr) {
+				return;
+			}		   
 			if (note.ship->get_owner()->player_number() != player_->player_number()) {
 			   return;
 		   }
