@@ -27,6 +27,7 @@
 #include "logic/game_data_error.h"
 #include "logic/tribe.h"
 #include "profile/profile.h"
+#include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 
 namespace Widelands {
@@ -62,37 +63,75 @@ const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
 void WorkerProgram::parse
 	(WorkerDescr * descr, Parser * parser, char const * const name)
 {
-	Section & program_s = parser->prof->get_safe_section(name);
+	if(parser->prof == nullptr) {
+		const LuaTable program_table = table.get_table(name);
 
-	for (uint32_t idx = 0;; ++idx) {
-		try
-		{
-			char const * const string = program_s.get_string(
-													 std::to_string(static_cast<unsigned int>(idx)).c_str(),
-													 nullptr);
-			if (!string)
-				break;
+		for (uint32_t idx = 1;; ++idx) {
+			try
+			{
+				const std::string string =
+						program_table.get_string(std::to_string(static_cast<unsigned int>(idx)));
 
-			const std::vector<std::string> cmd(split_string(string, " \t\r\n"));
-			if (cmd.empty())
-				continue;
+				if (string.empty()) {
+					break;
+				}
 
-			// Find the appropriate parser
-			Worker::Action act;
-			uint32_t mapidx;
+				const std::vector<std::string> cmd(split_string(string, " \t\r\n"));
+				if (cmd.empty()) {
+					continue;
+				}
 
-			for (mapidx = 0; s_parsemap[mapidx].name; ++mapidx)
-				if (cmd[0] == s_parsemap[mapidx].name)
+				// Find the appropriate parser
+				Worker::Action act;
+				uint32_t mapidx;
+
+				for (mapidx = 0; s_parsemap[mapidx].name; ++mapidx)
+					if (cmd[0] == s_parsemap[mapidx].name)
+						break;
+
+				if (!s_parsemap[mapidx].name)
+					throw wexception("unknown command type \"%s\"", cmd[0].c_str());
+
+				(this->*s_parsemap[mapidx].function)(descr, &act, parser, cmd);
+
+				m_actions.push_back(act);
+			} catch (const std::exception & e) {
+				throw wexception("Line %i: %s", idx, e.what());
+			}
+		}
+	} else {
+		Section & program_s = parser->prof->get_safe_section(name);
+
+		for (uint32_t idx = 0;; ++idx) {
+			try
+			{
+				char const * const string = program_s.get_string(
+														 std::to_string(static_cast<unsigned int>(idx)).c_str(),
+														 nullptr);
+				if (!string)
 					break;
 
-			if (!s_parsemap[mapidx].name)
-				throw wexception("unknown command type \"%s\"", cmd[0].c_str());
+				const std::vector<std::string> cmd(split_string(string, " \t\r\n"));
+				if (cmd.empty())
+					continue;
 
-			(this->*s_parsemap[mapidx].function)(descr, &act, parser, cmd);
+				// Find the appropriate parser
+				Worker::Action act;
+				uint32_t mapidx;
 
-			m_actions.push_back(act);
-		} catch (const std::exception & e) {
-			throw wexception("Line %i: %s", idx, e.what());
+				for (mapidx = 0; s_parsemap[mapidx].name; ++mapidx)
+					if (cmd[0] == s_parsemap[mapidx].name)
+						break;
+
+				if (!s_parsemap[mapidx].name)
+					throw wexception("unknown command type \"%s\"", cmd[0].c_str());
+
+				(this->*s_parsemap[mapidx].function)(descr, &act, parser, cmd);
+
+				m_actions.push_back(act);
+			} catch (const std::exception & e) {
+				throw wexception("Line %i: %s", idx, e.what());
+			}
 		}
 	}
 
@@ -450,7 +489,7 @@ void WorkerProgram::parse_animation
 		descr->add_animation
 			(cmd[1].c_str(),
 			 (g_gr->animations().load(parser->directory,
-			  	 parser->prof->get_safe_section(cmd[1].c_str()))));
+				 parser->prof->get_safe_section(cmd[1].c_str())))); // NOCOM(GunChleoc): Do LuaTable version
 	}
 	act->iparam1 = descr->get_animation(cmd[1].c_str());
 

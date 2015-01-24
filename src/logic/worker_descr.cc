@@ -127,6 +127,7 @@ WorkerDescr::WorkerDescr
 			parser.descr = this;
 			parser.directory = directory;
 			parser.prof = &prof;
+			parser.table = nullptr;
 
 			program = new WorkerProgram(program_name);
 			program->parse(this, &parser, program_name.c_str());
@@ -224,7 +225,8 @@ WorkerDescr::WorkerDescr(const LuaTable& table) :
 
 				parser.descr = this;
 				parser.directory = directory;
-				parser.prof = &prof; // This needs to be a Lua table
+				parser.prof = nullptr;
+				parser.table = &items_table;
 
 				program = new WorkerProgram(program_name);
 				program->parse(this, &parser, program_name.c_str());
