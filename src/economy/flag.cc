@@ -203,7 +203,7 @@ void Flag::attach_building(EditorGameBase & egbase, Building & building)
 
 	const Map & map = egbase.map();
 	egbase.set_road
-		(map.get_fcoords(map.tl_n(m_position)), Road_SouthEast, Road_Busy);
+		(map.get_fcoords(map.tl_n(m_position)), RoadType::kSouthEast, RoadType::kBusy);
 
 	building.set_economy(get_economy());
 }
@@ -219,7 +219,7 @@ void Flag::detach_building(EditorGameBase & egbase)
 
 	const Map & map = egbase.map();
 	egbase.set_road
-		(map.get_fcoords(map.tl_n(m_position)), Road_SouthEast, Road_None);
+		(map.get_fcoords(map.tl_n(m_position)), RoadType::kSouthEast, RoadType::kNone);
 
 	m_building = nullptr;
 }

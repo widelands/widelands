@@ -119,7 +119,7 @@ void RoadProgram::add_road(const Surface& surface,
 	const float road_thickness_x = (-delta_y / vector_length) * kRoadThicknessInPixels;
 	const float road_thickness_y = (delta_x / vector_length) * kRoadThicknessInPixels;
 
-	const float texture_mix = road_type == Widelands::Road_Normal ? 0. : 1.;
+	const float texture_mix = road_type == Widelands::RoadType::kNormal ? 0. : 1.;
 
 	vertices_.emplace_back(PerVertexData{
 	   start.pixel_x - road_overshoot_x + road_thickness_x,
@@ -179,8 +179,8 @@ void RoadProgram::draw(const Surface& surface, const FieldsToDraw& fields_to_dra
 		const int rn_index = fields_to_draw.calculate_index(field.fx + 1, field.fy);
 		if (rn_index != -1) {
 			const Widelands::RoadType road =
-			   static_cast<Widelands::RoadType>(field.roads & Widelands::Road_Mask);
-			if (road != Widelands::Road_None) {
+				static_cast<Widelands::RoadType>(field.roads & Widelands::RoadType::kMask);
+			if (road != Widelands::RoadType::kNone) {
 				add_road(surface, field, fields_to_draw.at(rn_index), road);
 			}
 		}
@@ -189,8 +189,8 @@ void RoadProgram::draw(const Surface& surface, const FieldsToDraw& fields_to_dra
 		const int brn_index = fields_to_draw.calculate_index(field.fx + (field.fy & 1), field.fy + 1);
 		if (brn_index != -1) {
 			const Widelands::RoadType road =
-			   static_cast<Widelands::RoadType>((field.roads >> 2) & Widelands::Road_Mask);
-			if (road != Widelands::Road_None) {
+				static_cast<Widelands::RoadType>((field.roads >> 2) & Widelands::RoadType::kMask);
+			if (road != Widelands::RoadType::kNone) {
 				add_road(surface, field, fields_to_draw.at(brn_index), road);
 			}
 		}
@@ -200,8 +200,8 @@ void RoadProgram::draw(const Surface& surface, const FieldsToDraw& fields_to_dra
 		   fields_to_draw.calculate_index(field.fx + (field.fy & 1) - 1, field.fy + 1);
 		if (bln_index != -1) {
 			const Widelands::RoadType road =
-			   static_cast<Widelands::RoadType>((field.roads >> 4) & Widelands::Road_Mask);
-			if (road != Widelands::Road_None) {
+				static_cast<Widelands::RoadType>((field.roads >> 4) & Widelands::RoadType::kMask);
+			if (road != Widelands::RoadType::kNone) {
 				add_road(surface, field, fields_to_draw.at(bln_index), road);
 			}
 		}

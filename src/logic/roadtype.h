@@ -30,15 +30,15 @@ namespace Widelands {
 // the drawing code to keep around what kind of road it should draw. I guess
 // that is the reason why it was combined in the first place. Still it is ugly.
 enum RoadType {
-	Road_None = 0,
-	Road_Normal = 1,
-	Road_Busy = 2,
-	Road_Water = 3,
-	Road_Mask = 3,
+	kNone = 0,
+	kNormal = 1,
+	kBusy = 2,
+	kWater = 3,
+	kMask = 3,
 
-	Road_East      = 0, //  shift values
-	Road_SouthEast = 2,
-	Road_SouthWest = 4,
+	kEast      = 0, //  shift values
+	kSouthEast = 2,
+	kSouthWest = 4,
 };
 
 }

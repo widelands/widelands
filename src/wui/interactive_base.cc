@@ -767,7 +767,7 @@ void InteractiveBase::roadb_add_overlay()
 		int32_t const shift = 2 * (dir - Widelands::WALK_E);
 
 		uint8_t set_to = overlay_manager.get_road_overlay(c);
-		set_to |=  Widelands::Road_Normal << shift;
+		set_to |=  Widelands::RoadType::kNormal << shift;
 		overlay_manager.register_road_overlay(c, set_to, m_jobid);
 	}
 
