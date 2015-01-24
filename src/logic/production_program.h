@@ -34,6 +34,7 @@
 #include "logic/program_result.h"
 #include "logic/training_attribute.h"
 #include "logic/widelands.h"
+#include "scripting/lua_table.h"
 
 class Profile;
 
@@ -518,6 +519,13 @@ struct ProductionProgram {
 	                  const std::string& descname,
 	                  const World&,
 	                  ProductionSiteDescr*);
+
+	ProductionProgram(const std::string& _name,
+							const std::string& _descname,
+							const LuaTable actions,
+							const World&,
+							ProductionSiteDescr*);
+
 	~ProductionProgram() {
 		for (Action * action : m_actions) {
 			delete action;

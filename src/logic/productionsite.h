@@ -61,7 +61,7 @@ struct ProductionSiteDescr : public BuildingDescr {
 		 const std::string & directory, Profile &, Section & global_s,
 		 const TribeDescr &, const World&);
 
-	ProductionSiteDescr(MapObjectType type, const LuaTable& t);
+	ProductionSiteDescr(MapObjectType type, const LuaTable& t, const World&);
 
 	~ProductionSiteDescr() override;
 

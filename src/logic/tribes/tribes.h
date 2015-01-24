@@ -36,7 +36,7 @@ class WorkerDescr;
 // NOCOM(#sirver): Make this compatible with TribeDescr.
 class Tribes {
 public:
-	Tribes();
+	Tribes(EditorGameBase &);
 	~Tribes();
 
 	/// Adds this building type to the tribe description.
@@ -47,6 +47,9 @@ public:
 
 	/// Adds this building type to the tribe description.
 	void add_militarysite_type(const LuaTable& table);
+
+	/// Adds this building type to the tribe description.
+	void add_productionsite_type(const LuaTable& table);
 
 	/// Adds this ware type to the tribe description.
 	void add_ware_type(const LuaTable& table);

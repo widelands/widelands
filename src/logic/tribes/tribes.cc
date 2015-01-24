@@ -22,12 +22,13 @@
 #include "logic/constructionsite.h"
 #include "logic/dismantlesite.h"
 #include "logic/militarysite.h"
+#include "logic/productionsite.h"
 #include "logic/ware_descr.h"
 #include "logic/worker_descr.h"
 
 namespace Widelands {
 
-Tribes::Tribes() :
+Tribes::Tribes(EditorGameBase& egbase) :
 	buildings_(new DescriptionMaintainer<BuildingDescr>()),
 	wares_(new DescriptionMaintainer<WareDescr>()),
 	workers_(new DescriptionMaintainer<WorkerDescr>()) {
@@ -44,6 +45,11 @@ void Tribes::add_dismantlesite_type(const LuaTable& t) {
 void Tribes::add_militarysite_type(const LuaTable& t) {
 	buildings_->add(new MilitarySiteDescr(t));
 }
+
+void Tribes::add_productionsite_type(const LuaTable& t) {
+	buildings_->add(new ProductionSiteDescr(t, egbase.world()));
+}
+
 
 void Tribes::add_ware_type(const LuaTable& t) {
 	wares_->add(new WareDescr(t));

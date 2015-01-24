@@ -21,6 +21,7 @@
 
 #include <sstream>
 
+#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -1745,4 +1746,57 @@ ProductionProgram::ProductionProgram(
 	if (m_actions.empty())
 		throw GameDataError("no actions");
 }
+
+ProductionProgram::ProductionProgram(const std::string& _name,
+						const std::string& _descname,
+						const LuaTable actions, const World& world,
+						ProductionSiteDescr* building)
+	: m_name(name), m_descname(_descname) {
+
+	for (const std::string& action_string : actions.keys()) {
+		std::vector<std::string> parts;
+		boost::split(parts, action_string, boost::is_any_of("="));
+		if (parts.size() != 2) {
+			throw GameDataError("invalid line: %s.", line.c_str());
+		}
+
+		ProductionProgram::Action* action;
+
+		if (parts[0] == "return")
+			action = new ActReturn(parts[1], *building);
+		else if (parts[0] == "call")
+			action = new ActCall(parts[1], *building);
+		else if (parts[0] == "sleep")
+			action = new ActSleep(parts[1]);
+		else if (parts[0] == "animate")
+			;
+		// NOCOM(GunChleoc): implement	action = new ActAnimate(parts[1], directory, prof, building);
+		else if (parts[0] ==  "consume")
+			action = new ActConsume(parts[1], *building);
+		else if (parts[0] == "produce")
+			action = new ActProduce(parts[1], *building);
+		else if (parts[0] == "recruit")
+			action = new ActRecruit(parts[1], *building);
+		else if (parts[0] == "worker")
+			action = new ActWorker(parts[1], _name, building);
+		else if (parts[0] == "mine")
+			action = new ActMine(parts[1], world, _name, building);
+		else if (parts[0] == "check_soldier")
+			action = new ActCheckSoldier(parts[1]);
+		else if (parts[0] == "train")
+			action = new ActTrain(parts[1]);
+		else if (parts[0] == "playFX")
+			action = new ActPlayFX(directory, parts[1]);
+		else if (parts[0] == "construct")
+			action = new ActConstruct(parts[1], _name, building);
+		else if (parts[0] == "check_map")
+			action = new ActCheckMap(parts[1]);
+		else
+			throw GameDataError("unknown command type \"%s\"", parts[1].c_str());
+		m_actions.push_back(action);
+	}
+	if (m_actions.empty())
+		throw GameDataError("no actions");
+}
+
 }

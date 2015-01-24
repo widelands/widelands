@@ -154,9 +154,120 @@ ProductionSiteDescr::ProductionSiteDescr
 
 
 ProductionSiteDescr::ProductionSiteDescr
-	(MapObjectType _type, const LuaTable& table) : BuildingDescr(_type, table)
+	(MapObjectType _type, const LuaTable& table, const World& world) : BuildingDescr(_type, table)
 {
-	// NOCOM(GunChleoc): Implement this
+	const LuaTable items_table;
+
+	if (table.has_key("out_of_resource_notification")) {
+		items_table = table.get_table("out_of_resource_notification");
+		m_out_of_resource_title = items_table.get_string("title");
+		m_out_of_resource_message = items_table.get_string("message");
+		m_out_of_resource_delay_attempts = items_table.get_int("delay_attempts");
+	} else {
+		m_out_of_resource_title = "";
+		m_out_of_resource_message = "";
+		m_out_of_resource_delay_attempts = 0;
+	}
+
+	if (table.has_key("outputs")) {
+		items_table = table.get_table("outputs");
+		for (int item_key : items_table.keys()) {
+			try {
+				const std::string& output = items_table.get_string(item_key);
+				WareIndex idx = tribes().ware_index(output);
+				if (idx != INVALID_INDEX) {
+					if (m_output_ware_types.count(idx))
+						throw wexception("this ware type has already been declared as an output");
+					m_output_ware_types.insert(idx);
+				} else if ((idx = tribes().worker_index(output)) != INVALID_INDEX) {
+					if (m_output_worker_types.count(idx))
+						throw wexception("this worker type has already been declared as an output");
+					m_output_worker_types.insert(idx);
+				} else
+					throw wexception("tribes do not define a ware or worker type with this name");
+			} catch (const WException & e) {
+				throw wexception("output \"%s\": %s", output.c_str(), e.what());
+			}
+		}
+	}
+
+	if (table.has_key("inputs")) {
+		items_table = table.get_table("inputs");
+		for (const std::string& ware_name : items_table.keys()) {
+			int amount = items_table.get_int(ware_name);
+			try {
+				if (amount < 1 || 255 < amount) {
+					throw wexception("count is out of range 1 .. 255");
+				}
+				WareIndex const idx = tribe().ware_index(ware_name);
+				if (idx != INVALID_INDEX) {
+					for (const WareAmount& temp_inputs : inputs()) {
+						if (temp_inputs.first == idx) {
+							throw wexception("duplicated");
+						}
+					}
+					m_inputs.push_back(std::pair<WareIndex, uint8_t>(idx, amount));
+				} else {
+					throw wexception
+						("tribes do not define a ware type with this name");
+				}
+			} catch (const WException & e) {
+				throw wexception("input \"%s=%d\": %s", ware_name, amount, e.what());
+			}
+		}
+	}
+
+
+	// Are we only a production site?
+	// If not, we might not have a worker
+	if (table.has_key("working_positions")) {
+		items_table = table.get_table("working_positions");
+		for (const std::string& worker_name : items_table.keys()) {
+			int amount = items_table.get_int(worker_name);
+			try {
+				if (amount < 1 || 255 < amount) {
+					throw wexception("count is out of range 1 .. 255");
+				}
+				WareIndex const woi = tribe().worker_index(worker_name);
+				if (woi != INVALID_INDEX) {
+					for (const WareAmount& wp : working_positions()) {
+						if (wp.first == woi) {
+							throw wexception("duplicated");
+						}
+					}
+					m_working_positions.push_back(std::pair<WareIndex, uint32_t>(woi, amount));
+				} else {
+					throw wexception("invalid");
+				}
+			} catch (const WException & e) {
+				throw wexception("%s=\"%d\": %s", worker_name, amount, e.what());
+			}
+		}
+	}
+
+	if (working_positions().empty() && !table.has_key("max_soldiers")) {
+		throw wexception("no working/soldier positions");
+	}
+
+	// Get programs
+	if (table.has_key("programs")) {
+		items_table = table.get_table("programs");
+		for (std::string program_name : items_table.keys()) {
+			std::transform
+				(program_name.begin(), program_name.end(), program_name.begin(),
+				 tolower);
+			try {
+				if (m_programs.count(program_name)) {
+					throw wexception("this program has already been declared");
+				}
+				m_programs[program_name] =
+						new ProductionProgram(program_name, items_table.get_string("descname"),
+													 items_table.get_table("actions"), world, this);
+			} catch (const std::exception & e) {
+				throw wexception("program %s: %s", program_name.c_str(), e.what());
+			}
+		}
+	}
 }
 
 

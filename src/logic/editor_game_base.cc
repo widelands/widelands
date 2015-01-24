@@ -137,7 +137,7 @@ Tribes* EditorGameBase::mutable_tribes() {
 		// tribe immediately though, because the lua scripts need to have access
 		// to tribe through this method already.
 		ScopedTimer timer("Loading the tribe took %ums");
-		tribe_.reset(new Tribes());
+		tribe_.reset(new Tribes(*this));
 
 		try {
 			lua_->run_script("tribes/init.lua");
