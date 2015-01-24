@@ -485,6 +485,7 @@ Tribes
 
 const char LuaTribes::className[] = "Tribes";
 const MethodType<LuaTribes> LuaTribes::Methods[] = {
+	METHOD(LuaTribes, new_militarysite_type),
 	METHOD(LuaTribes, new_ware_type),
 	METHOD(LuaTribes, new_worker_type),
 	{0, 0},
@@ -517,6 +518,29 @@ void LuaTribes::__unpersist(lua_State*) {
  LUA METHODS
  ==========================================================
  */
+
+/* RST
+	.. method:: new_militarysite_type(table)
+
+		Adds a new militarysite building type. Takes a single argument, a table with
+		the descriptions. See the files in tribe/ for usage examples.
+
+		:returns: :const:`nil`
+*/
+int LuaTribes::new_militarysite_type(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		get_egbase(L).mutable_tribes()->add_militarysite_type(table);
+	} catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
 
 /* RST
 	.. method:: new_ware_type(table)

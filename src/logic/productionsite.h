@@ -31,6 +31,7 @@
 #include "logic/building.h"
 #include "logic/production_program.h"
 #include "logic/program_result.h"
+#include "scripting/lua_table.h"
 
 namespace Widelands {
 
@@ -59,6 +60,9 @@ struct ProductionSiteDescr : public BuildingDescr {
 		(MapObjectType type, char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const TribeDescr &, const World&);
+
+	ProductionSiteDescr(MapObjectType type, const LuaTable& t);
+
 	~ProductionSiteDescr() override;
 
 	Building & create_object() const override;

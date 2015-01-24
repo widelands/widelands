@@ -35,6 +35,9 @@
 #include "logic/wareworker.h"
 #include "logic/widelands.h"
 #include "logic/workarea_info.h"
+#include "scripting/lua_table.h"
+// NOCOM(GunChleoc): Compiler barfs at this - circular dependency between scripting + logic.
+// The basic problem here is that LuaTable depends on Coroutine, which in turn has knowledge about the game.
 
 namespace UI {class Window;}
 struct BuildingHints;
@@ -65,6 +68,9 @@ struct BuildingDescr : public MapObjectDescr {
 		(MapObjectType type, char const * _name, char const * _descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const TribeDescr &);
+
+	BuildingDescr(MapObjectType type, const LuaTable& t);
+
 	~BuildingDescr() override {}
 
 	bool is_buildable   () const {return m_buildable;}

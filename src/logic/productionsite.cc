@@ -152,6 +152,14 @@ ProductionSiteDescr::ProductionSiteDescr
 	}
 }
 
+
+ProductionSiteDescr::ProductionSiteDescr
+	(MapObjectType _type, const LuaTable& table) : BuildingDescr(_type, table)
+{
+	// NOCOM(GunChleoc): Implement this
+}
+
+
 ProductionSiteDescr::~ProductionSiteDescr()
 {
 	while (m_programs.size()) {

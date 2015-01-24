@@ -173,6 +173,22 @@ BuildingDescr::BuildingDescr
 	m_vision_range = global_s.get_int("vision_range");
 }
 
+BuildingDescr::BuildingDescr
+	(const MapObjectType _type, const LuaTable& table)
+	:
+	MapObjectDescr(_type,  table.get_string("name"), table.get_string("descname")),
+	m_buildable     (true),
+	m_icon     (nullptr),
+	m_size          (BaseImmovable::SMALL),
+	m_mine          (false),
+	m_port          (false),
+	//m_hints         (prof.get_section("aihints")),
+	m_global        (false),
+	m_vision_range  (0)
+{
+	// NOCOM(GunChleoc): Implement this
+}
+
 
 Building & BuildingDescr::create
 	(EditorGameBase     &       egbase,

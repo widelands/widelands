@@ -27,6 +27,7 @@
 #include "logic/productionsite.h"
 #include "logic/requirements.h"
 #include "logic/soldiercontrol.h"
+#include "scripting/lua_table.h"
 
 namespace Widelands {
 
@@ -38,6 +39,9 @@ struct MilitarySiteDescr : public ProductionSiteDescr {
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &,  Section & global_s,
 		 const TribeDescr & tribe, const World& world);
+
+	MilitarySiteDescr(const LuaTable& t);
+
 	~MilitarySiteDescr() override {}
 
 	Building & create_object() const override;

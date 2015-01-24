@@ -762,8 +762,6 @@ int LuaPlayer::allow_workers(lua_State * L) {
 
 	for (WareIndex i = 0; i < tribe.get_nrworkers(); ++i) {
 		const WorkerDescr & worker_descr = *tribe.get_worker_descr(i);
-		if (!worker_descr.is_buildable())
-			continue;
 
 		player.allow_worker_type(i, true);
 

@@ -19,14 +19,20 @@
 
 #include "logic/tribes/tribes.h"
 
+#include "logic/militarysite.h"
 #include "logic/ware_descr.h"
 #include "logic/worker_descr.h"
 
 namespace Widelands {
 
 Tribes::Tribes() :
+	buildings_(new DescriptionMaintainer<BuildingDescr>()),
 	wares_(new DescriptionMaintainer<WareDescr>()),
 	workers_(new DescriptionMaintainer<WorkerDescr>()) {
+}
+
+void Tribes::add_militarysite_type(const LuaTable& t) {
+	buildings_->add(new MilitarySiteDescr(t));
 }
 
 void Tribes::add_ware_type(const LuaTable& t) {
@@ -34,17 +40,26 @@ void Tribes::add_ware_type(const LuaTable& t) {
 }
 
 void Tribes::add_worker_type(const LuaTable& t) {
-	wares_->add(new WorkerDescr(t));
+	workers_->add(new WorkerDescr(t));
 }
 
+
 WareIndex Tribes::get_nrwares() const {
-	return wares_.get_nitems();
+	return wares_.size();
 }
 
 WareIndex Tribes::get_nrworkers() const {
-	return workers_.get_nitems();
+	return workers_.size();
 }
 
+
+BuildingIndex Tribes::safe_building_index(const std::string& buildingname) const {
+	const BuildingIndex result = building_index(buildingname);
+	if (result == -1) {
+		throw GameDataError("Unknown building type \"%s\"", buildingname.c_str());
+	}
+	return result;
+}
 
 WareIndex Tribes::safe_ware_index(const std::string& warename) const {
 	const WareIndex result = ware_index(warename);
@@ -62,10 +77,18 @@ WareIndex Tribes::safe_worker_index(const std::string& workername) const {
 	return result;
 }
 
+BuildingIndex Tribes::building_index(const std::string& buildingname) const {
+	int result = -1;
+	for (size_t i = 0; i < buildings_.size(); ++i) {
+		if (buildings_.get(i)->name() == buildingname.name()) {
+			return result;
+		}
+	}
+}
 
 WareIndex Tribes::ware_index(const std::string& warename) const {
 	int result = -1;
-	for (size_t i = 0; i < wares_.get_nitems(); ++i) {
+	for (size_t i = 0; i < wares_.size(); ++i) {
 		if (wares_.get(i)->name() == warename.name()) {
 			return result;
 		}
@@ -74,13 +97,16 @@ WareIndex Tribes::ware_index(const std::string& warename) const {
 
 WareIndex Tribes::worker_index(const std::string& workername) const {
 	int result = -1;
-	for (size_t i = 0; i < workers_.get_nitems(); ++i) {
+	for (size_t i = 0; i < workers_.size(); ++i) {
 		if (workers_.get(i)->name() == workername.name()) {
 			return result;
 		}
 	}
 }
 
+BuildingDescr const * Tribes::get_building_descr(BuildingIndex building_index) const {
+	return buildings_.get(building_index);
+}
 
 WareDescr const * Tribes::get_ware_descr(WareIndex ware_index) const {
 	return wares_.get(ware_index);

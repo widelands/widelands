@@ -69,6 +69,31 @@ MilitarySiteDescr::MilitarySiteDescr
 	m_defeated_you_str = global_s.get_safe_string("defeated_you_string");
 }
 
+MilitarySiteDescr::MilitarySiteDescr(const LuaTable& table)
+	:
+	ProductionSiteDescr
+		(MapObjectType::MILITARYSITE, table),
+	m_conquer_radius     (0),
+	m_num_soldiers       (0),
+	m_heal_per_second    (0)
+{
+	m_conquer_radius      = table.get_int("conquers");
+	m_num_soldiers        = table.get_int("max_soldiers");
+	m_heal_per_second     = table.get_int("heal_per_second");
+
+	if (m_conquer_radius > 0)
+		m_workarea_info[m_conquer_radius].insert(descname() + " conquer");
+	m_prefers_heroes_at_start = table.get_bool("prefer_heroes");
+
+	const LuaTable items_table = table.get_table("messages");
+	m_occupied_str = items_table.get_string("occupied");
+	m_aggressor_str = items_table.get_string("aggressor");
+	m_attack_str = items_table.get_string("attack");
+	m_defeated_enemy_str = items_table.get_string("defeated_enemy");
+	m_defeated_you_str = items_table.get_string("defeated_you");
+}
+
+
 /**
 ===============
 Create a new building of this type

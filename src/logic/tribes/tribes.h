@@ -39,6 +39,9 @@ public:
 	Tribes();
 	~Tribes();
 
+	/// Adds this building type to the tribe description.
+	void add_militarysite_type(const LuaTable& table);
+
 	/// Adds this ware type to the tribe description.
 	void add_ware_type(const LuaTable& table);
 
@@ -49,14 +52,17 @@ public:
 	WareIndex get_nrwares() const;
 	WareIndex get_nrworkers() const;
 
-	WareIndex safe_ware_index(const std::string & warename) const;
-	WareIndex safe_worker_index(const std::string & workername) const;
+	BuildingIndex safe_building_index(const std::string& buildingname) const;
+	WareIndex safe_ware_index(const std::string& warename) const;
+	WareIndex safe_worker_index(const std::string& workername) const;
 
-	WareIndex ware_index(const std::string & warename) const;
-	WareIndex worker_index(const std::string & workername) const;
+	BuildingIndex building_index(const std::string& buildingname) const;
+	WareIndex ware_index(const std::string& warename) const;
+	WareIndex worker_index(const std::string& workername) const;
 
-	WareDescr const * get_ware_descr(WareIndex ware_index) const;
-	WorkerDescr const * get_worker_descr(WareIndex worker_index) const;
+	BuildingDescr const* get_building_descr(BuildingIndex building_index) const;
+	WareDescr const* get_ware_descr(WareIndex ware_index) const;
+	WorkerDescr const* get_worker_descr(WareIndex worker_index) const;
 
 	void set_ware_type_has_demand_check(WareIndex ware_index, const std::string& tribename);
 	void set_worker_type_has_demand_check(WareIndex worker_index, const std::string& tribename);
@@ -65,6 +71,7 @@ public:
 private:
 	std::unique_ptr<DescriptionMaintainer<WareDescr>> wares_;
 	std::unique_ptr<DescriptionMaintainer<WorkerDescr>> workers_;
+	std::unique_ptr<DescriptionMaintainer<BuildingDescr>> buildings_;
 
 	DISALLOW_COPY_AND_ASSIGN(Tribes);
 };
