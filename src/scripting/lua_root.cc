@@ -489,6 +489,7 @@ const MethodType<LuaTribes> LuaTribes::Methods[] = {
 	METHOD(LuaTribes, new_constructionsite_type),
 	METHOD(LuaTribes, new_militarysite_type),
 	METHOD(LuaTribes, new_productionsite_type),
+	METHOD(LuaTribes, new_trainingsite_type),
 	METHOD(LuaTribes, new_ware_type),
 	METHOD(LuaTribes, new_worker_type),
 	{0, 0},
@@ -611,6 +612,27 @@ int LuaTribes::new_productionsite_type(lua_State* L) {
 	return 0;
 }
 
+/* RST
+	.. method:: new_trainingsite_type(table)
+
+		Adds a new productionsite building type. Takes a single argument, a table with
+		the descriptions. See the files in tribe/ for usage examples.
+
+		:returns: :const:`nil`
+*/
+int LuaTribes::new_trainingsite_type(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		get_egbase(L).mutable_tribes()->add_trainingsite_type(table);
+	} catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
 
 
 /* RST

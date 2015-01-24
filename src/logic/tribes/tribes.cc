@@ -23,6 +23,7 @@
 #include "logic/dismantlesite.h"
 #include "logic/militarysite.h"
 #include "logic/productionsite.h"
+#include "logic/trainingsite.h"
 #include "logic/ware_descr.h"
 #include "logic/worker_descr.h"
 
@@ -48,6 +49,10 @@ void Tribes::add_militarysite_type(const LuaTable& t) {
 
 void Tribes::add_productionsite_type(const LuaTable& t) {
 	buildings_->add(new ProductionSiteDescr(t, egbase.world()));
+}
+
+void Tribes::add_trainingsite_type(const LuaTable& t) {
+	buildings_->add(new TrainingSiteDescr(t, egbase.world()));
 }
 
 

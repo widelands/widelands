@@ -36,6 +36,9 @@ struct TrainingSiteDescr : public ProductionSiteDescr {
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const TribeDescr & tribe, const World& world);
+
+	TrainingSiteDescr(MapObjectType type, const LuaTable& t, const World&);
+
 	~TrainingSiteDescr() override {}
 
 	Building & create_object() const override;

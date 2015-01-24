@@ -91,6 +91,61 @@ TrainingSiteDescr::TrainingSiteDescr
 	}
 }
 
+TrainingSiteDescr::TrainingSiteDescr
+	(MapObjectType type, const LuaTable& table, const World&)
+	:
+	ProductionSiteDescr
+		(MapObjectType::TRAININGSITE, table, world),
+	m_num_soldiers      (table.get_int("soldier_capacity")),
+	m_max_stall         (table.get_int("trainer_patience")),
+
+	m_train_hp          (false),
+	m_train_attack      (false),
+	m_train_defense     (false),
+	m_train_evade       (false),
+	m_min_hp            (0),
+	m_min_attack        (0),
+	m_min_defense       (0),
+	m_min_evade         (0),
+	m_max_hp            (0),
+	m_max_attack        (0),
+	m_max_defense       (0),
+	m_max_evade         (0)
+{
+	const LuaTable items_table;
+
+	// Read the range of levels that can update this building
+	//  TODO(unknown): This is currently hardcoded to "soldier" but it should search for
+	//  sections starting with the name of each soldier type.
+	//  These sections also seem redundant. Eliminate them (having the
+	//  programs should be enough).
+	if (table.has_key("soldier hp")) {
+		items_table = table.get_table("soldier hp");
+		m_train_hp      = true;
+		m_min_hp        = items_table.get_int("min_level");
+		m_max_hp        = items_table.get_int("max_level");
+	}
+	if (table.has_key("soldier attack")) {
+		items_table = table.get_table("soldier attack");
+		m_train_attack      = true;
+		m_min_attack        = items_table.get_int("min_level");
+		m_max_attack        = items_table.get_int("max_level");
+	}
+	if (table.has_key("soldier defense")) {
+		items_table = table.get_table("soldier defense");
+		m_train_defense      = true;
+		m_min_defense        = items_table.get_int("min_level");
+		m_max_defense        = items_table.get_int("max_level");
+	}
+	if (table.has_key("soldier evade")) {
+		items_table = table.get_table("soldier evade");
+		m_train_evade      = true;
+		m_min_evade        = items_table.get_int("min_level");
+		m_max_evade        = items_table.get_int("max_level");
+	}
+}
+
+
 /**
  * Create a new training site
  * \return  the new training site

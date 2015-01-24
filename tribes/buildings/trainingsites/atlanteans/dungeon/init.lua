@@ -1,6 +1,6 @@
 dirname = path.dirname(__file__)
 
-tribes:new_militarysite_type {
+tribes:new_trainingsite_type {
    name = "atlanteans_dungeon",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = _"Dungeon",
