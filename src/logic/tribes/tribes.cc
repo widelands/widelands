@@ -20,14 +20,21 @@
 #include "logic/tribes/tribes.h"
 
 #include "logic/ware_descr.h"
+#include "logic/worker_descr.h"
 
 namespace Widelands {
 
-Tribes::Tribes() : wares_(new DescriptionMaintainer<WareDescr>()) {
+Tribes::Tribes() :
+	wares_(new DescriptionMaintainer<WareDescr>()),
+	workers_(new DescriptionMaintainer<WorkerDescr>()) {
 }
 
 void Tribes::add_ware_type(const LuaTable& t) {
 	wares_->add(new WareDescr(t));
+}
+
+void Tribes::add_worker_type(const LuaTable& t) {
+	wares_->add(new WorkerDescr(t));
 }
 
 WareIndex Tribes::get_nrwares() const {

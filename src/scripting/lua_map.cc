@@ -1774,10 +1774,12 @@ void LuaWareDescription::__unpersist(lua_State* L) {
 // So you can get something like this in the buildingdesc constructor:
 // tribe.mutable_ware_description("log")->add_producer(*this);
 int LuaWareDescription::get_consumers(lua_State * L) {
-	const TribeDescr& tribe = get()->tribe();
-	BuildingIndex const nr_buildings = tribe.get_nrbuildings();
+	// NOCOM(GunChleoc): reimplement (re: comment above)
+	//const TribeDescr& tribe = get()->tribe();
+	//BuildingIndex const nr_buildings = tribe.get_nrbuildings();
 
 	lua_newtable(L);
+	/*
 	int index = 1;
 
 	for (BuildingIndex i = 0; i < nr_buildings; ++i) {
@@ -1796,6 +1798,7 @@ int LuaWareDescription::get_consumers(lua_State * L) {
 			}
 		}
 	}
+	*/
 	return 1;
 }
 
@@ -1823,10 +1826,12 @@ int LuaWareDescription::get_icon_name(lua_State * L) {
 // So you can get something like this in the buildingdesc constructor:
 // tribe.mutable_ware_description("log")->add_producer(*this);
 int LuaWareDescription::get_producers(lua_State * L) {
-	const TribeDescr& tribe = get()->tribe();
-	BuildingIndex const nr_buildings = tribe.get_nrbuildings();
+// NOCOM(GunChleoc): reimplement (re: comment above)
+	//const TribeDescr& tribe = get()->tribe();
+	//BuildingIndex const nr_buildings = tribe.get_nrbuildings();
 
 	lua_newtable(L);
+	/*
 	int index = 1;
 
 	for (BuildingIndex i = 0; i < nr_buildings; ++i) {
@@ -1844,6 +1849,7 @@ int LuaWareDescription::get_producers(lua_State * L) {
 			}
 		}
 	}
+	*/
 	return 1;
 }
 

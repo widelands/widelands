@@ -31,6 +31,7 @@ constexpr const Widelands::WareIndex kInvalidWare = -1;
 namespace Widelands {
 
 class WareDescr;
+class WorkerDescr;
 
 // NOCOM(#sirver): Make this compatible with TribeDescr.
 class Tribes {
@@ -40,6 +41,9 @@ public:
 
 	/// Adds this ware type to the tribe description.
 	void add_ware_type(const LuaTable& table);
+
+	/// Adds this worker type to the tribe description.
+	void add_worker_type(const LuaTable& table);
 
 	// NOCOM(#GunChleoc): Do we want all wares for all tribes here?
 	WareIndex get_nrwares() const;
@@ -53,6 +57,7 @@ public:
 
 private:
 	std::unique_ptr<DescriptionMaintainer<WareDescr>> wares_;
+	std::unique_ptr<DescriptionMaintainer<WorkerDescr>> workers_;
 
 	DISALLOW_COPY_AND_ASSIGN(Tribes);
 };

@@ -34,19 +34,33 @@
 
 namespace Widelands {
 
+namespace {
+
+// NOCOM(GunChleoc): Copied over from critter.cc, can we unify this?
+
+// Sets the dir animations in 'anims' with the animations
+// '<prefix>_(ne|e|se|sw|w|nw)' which must be defined in 'mo'.
+void assign_diranimation(DirAnimations* anims, MapObjectDescr& mo, const std::string& prefix) {
+	static char const* const dirstrings[6] = {"ne", "e", "se", "sw", "w", "nw"};
+	for (int32_t dir = 1; dir <= 6; ++dir) {
+		anims->set_animation(dir, mo.get_animation(prefix + std::string("_") + dirstrings[dir - 1]));
+	}
+}
+
+}  // namespace
+
 WorkerDescr::WorkerDescr
 	(const MapObjectType object_type, char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const TribeDescr & _tribe)
 	:
 	BobDescr(object_type, _name, _descname, &_tribe),
-	m_helptext          (global_s.get_string("help", "")),
-	m_ware_hotspot      (global_s.get_point("ware_hotspot", Point(0, 15))),
-	m_icon_fname        (directory + "/menu.png"),
-	m_icon              (nullptr),
-	m_buildable         (false),
-	m_needed_experience  (-1),
-	m_becomes           (INVALID_INDEX)
+	helptext_          (global_s.get_string("help", "")),
+	ware_hotspot_      (global_s.get_point("ware_hotspot", Point(0, 15))),
+	icon_fname_        (directory + "/menu.png"),
+	icon_              (nullptr),
+	needed_experience_  (-1),
+	becomes_           (INVALID_INDEX)
 {
 	{ //  global options
 		Section & idle_s = prof.get_safe_section("idle");
@@ -55,15 +69,14 @@ WorkerDescr::WorkerDescr
 
 	add_attribute(MapObject::Attribute::WORKER);
 
-	m_default_target_quantity =
+	default_target_quantity_ =
 		global_s.get_positive("default_target_quantity", std::numeric_limits<uint32_t>::max());
 
 	if (Section * const s = prof.get_section("buildcost")) {
-		m_buildable = true;
 		while (Section::Value const * const val = s->get_next_val())
 			try {
 				std::string const input = val->get_name();
-				if (m_buildcost.count(input))
+				if (buildcost_.count(input))
 					throw wexception("a buildcost item of this ware type has already been defined");
 				if (tribe().ware_index(input) == INVALID_INDEX &&
 				    tribe().worker_index(input) == INVALID_INDEX)
@@ -75,7 +88,7 @@ WorkerDescr::WorkerDescr
 				uint8_t const count = value;
 				if (count != value)
 					throw wexception("count is out of range 1 .. 255");
-				m_buildcost.insert(std::pair<std::string, uint8_t>(input, value));
+				buildcost_.insert(std::pair<std::string, uint8_t>(input, value));
 			} catch (const WException & e) {
 				throw wexception
 					("[buildcost] \"%s=%s\": %s",
@@ -89,13 +102,13 @@ WorkerDescr::WorkerDescr
 		add_animation("work", g_gr->animations().load(directory, *work_s));
 
 	// Read the walking animations
-	m_walk_anims.parse(*this, directory, prof, "walk");
-	m_walkload_anims.parse(*this, directory, prof, "walkload", true);
+	walk_anims_.parse(*this, directory, prof, "walk");
+	walkload_anims_.parse(*this, directory, prof, "walkload", true);
 
 	// Read the becomes and experience
 	if (char const * const becomes_name = global_s.get_string("becomes")) {
-		m_becomes = tribe().safe_worker_index(becomes_name);
-		m_needed_experience = global_s.get_safe_positive("experience");
+		becomes_ = tribe().safe_worker_index(becomes_name);
+		needed_experience_ = global_s.get_safe_positive("experience");
 	}
 
 	// Read programs
@@ -107,7 +120,7 @@ WorkerDescr::WorkerDescr
 		WorkerProgram * program = nullptr;
 
 		try {
-			if (m_programs.count(program_name))
+			if (programs_.count(program_name))
 				throw wexception("this program has already been declared");
 			WorkerProgram::Parser parser;
 
@@ -117,7 +130,7 @@ WorkerDescr::WorkerDescr
 
 			program = new WorkerProgram(program_name);
 			program->parse(this, &parser, program_name.c_str());
-			m_programs[program_name.c_str()] = program;
+			programs_[program_name.c_str()] = program;
 		}
 
 		catch (const std::exception & e) {
@@ -127,12 +140,120 @@ WorkerDescr::WorkerDescr
 	}
 }
 
+WorkerDescr::WorkerDescr(const LuaTable& table) :
+	MapObjectDescr(MapObjectType::WORKER, table.get_string("name"), table.get_string("descname")),
+	icon_fname_        (directory + "/menu.png"),
+	icon_              (nullptr),
+	ware_hotspot_      (Point(0, 15)),
+	needed_experience_ (-1),
+	becomes_           (INVALID_INDEX)
+{
+	const LuaTable items_table = table.get_table("buildcost");
+	for (const std::string& key : items_table.keys()) {
+		try {
+			if (buildcost_.count(key)) {
+				throw wexception("a buildcost item of this ware type has already been defined: %s", key.c_str());
+			}
+			// NOCOM(GunChleoc): Do the check with the new tribes object
+			/*
+			if (tribe().ware_index(key) == INVALID_INDEX &&
+				 tribe().worker_index(key) == INVALID_INDEX) {
+				throw wexception
+					("\"%s\" has not been defined as a ware/worker type (wrong "
+					 "declaration order?)",
+					 key.c_str());
+			}
+			*/
+			int32_t const value = items_table.get_int(key);
+			uint8_t const count = value;
+			if (count != value)
+				throw wexception("count is out of range 1 .. 255");
+			buildcost_.insert(std::pair<std::string, uint8_t>(key, count));
+		} catch (const WException & e) {
+			throw wexception
+				("[buildcost] \"%s=%d\": %s",
+				 key.c_str(), value, e.what());
+		}
+	}
+
+	helptext_ = table.get_string("helptext");
+
+	items_table = table.get_table("animations");
+	for (const std::string& key : items_table.keys()) {
+		const LuaTable anims_table = table.get_table(key);
+		for (const std::string& anim_key : anims_table.keys()) {
+			// NOCOM(GunChleoc): And the hotspot + fps?
+			add_animation(anim_key, g_gr->animations().load(anims_table.get_string("pictures")));
+		}
+	}
+
+	// If worker has a work animation load and add it.
+	if(table.has_key("work")) {
+		items_table = table.get_table("work");
+		for (const std::string& key : items_table.keys()) {
+			// NOCOM(GunChleoc): And the hotspot + fps? Also check anims below.
+			add_animation(key, g_gr->animations().load(items_table.get_string("pictures")));
+		}
+	}
+
+	// Read the walking animations
+	assign_diranimation(&walk_anims_, *this, "walk");
+	assign_diranimation(&walkload_anims_, *this, "walkload");
+
+	// Read the becomes and experience
+	if(table.has_key("becomes")) {
+		becomes_ = table.get_string("becomes");
+		needed_experience_ = table.get_int("experience");
+	}
+
+	// Read programs
+	if(table.has_key("programs")) {
+		items_table = table.get_table("programs");
+		for (std::string program_name : items_table.keys()) {
+			std::transform
+				(program_name.begin(), program_name.end(), program_name.begin(),
+				 tolower);
+			WorkerProgram * program = nullptr;
+
+			try {
+				if (programs_.count(program_name))
+					throw wexception("this program has already been declared");
+
+				// NOCOM(GunChleoc): Redefine the parser for Lua Tables.
+				WorkerProgram::Parser parser;
+
+				parser.descr = this;
+				parser.directory = directory;
+				parser.prof = &prof; // This needs to be a Lua table
+
+				program = new WorkerProgram(program_name);
+				program->parse(this, &parser, program_name.c_str());
+				programs_[program_name.c_str()] = program;
+			}
+
+			catch (const std::exception & e) {
+				delete program;
+				throw wexception("program %s: %s", program_name.c_str(), e.what());
+			}
+		}
+	}
+
+	// For carriers
+	if(table.has_key("default_target_quantity")) {
+		default_target_quantity_ = items_table.get_int("default_target_quantity");
+	}
+	if(table.has_key("ware_hotspot")) {
+		items_table = table.get_table("ware_hotspot");
+		ware_hotspot_(Point(items_table.get_int("1"),items_table.get_int("2")));
+	}
+}
+
 
 WorkerDescr::~WorkerDescr()
 {
-	while (m_programs.size()) {
-		delete m_programs.begin()->second;
-		m_programs.erase(m_programs.begin());
+	while (programs_.size()) {
+		delete programs_.begin()->second;
+		programs_.erase(programs_.begin());
 	}
 }
 
@@ -147,7 +268,7 @@ const TribeDescr& WorkerDescr::tribe() const {
  */
 void WorkerDescr::load_graphics()
 {
-	m_icon = g_gr->images().get(m_icon_fname);
+	icon_ = g_gr->images().get(icon_fname_);
 }
 
 
@@ -157,9 +278,9 @@ void WorkerDescr::load_graphics()
 WorkerProgram const * WorkerDescr::get_program
 	(const std::string & programname) const
 {
-	Programs::const_iterator it = m_programs.find(programname);
+	Programs::const_iterator it = programs_.find(programname);
 
-	if (it == m_programs.end())
+	if (it == programs_.end())
 		throw wexception
 			("%s has no program '%s'", name().c_str(), programname.c_str());
 
