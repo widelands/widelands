@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-01-23 05:46+0000\n"
+"X-Launchpad-Export-Date: 2015-01-24 05:32+0000\n"
 "X-Generator: Launchpad (build 17306)\n"
 "Language: et\n"
 
@@ -4144,18 +4144,3 @@ msgstr ""
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "Allowed Buildings"
-#~ msgstr "Lubatud hooned"
-
-#~ msgid "Allowed Buildings:"
-#~ msgstr "Lubatud hooned:"
-
-#~ msgid "Forbidden Buildings:"
-#~ msgstr "Keelatud hooned:"
-
-#~ msgid "Forbid"
-#~ msgstr "Keela"
-
-#~ msgid "Allow"
-#~ msgstr "Luba"

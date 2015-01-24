@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 1 ? 0: (((n % 100 > 19) || ((n % 100 "
 "== 0) && (n != 0))) ? 2: 1));\n"
-"X-Launchpad-Export-Date: 2015-01-23 05:49+0000\n"
+"X-Launchpad-Export-Date: 2015-01-24 05:34+0000\n"
 "X-Generator: Launchpad (build 17306)\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -4124,15 +4124,3 @@ msgstr ""
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "Allowed Buildings:"
-#~ msgstr "Clădiri permise"
-
-#~ msgid "Forbidden Buildings:"
-#~ msgstr "Clădiri interzise"
-
-#~ msgid "Forbid"
-#~ msgstr "Interzis"
-
-#~ msgid "Allow"
-#~ msgstr "Permiteți"

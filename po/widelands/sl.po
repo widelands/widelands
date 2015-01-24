@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2015-01-23 05:49+0000\n"
+"X-Launchpad-Export-Date: 2015-01-24 05:34+0000\n"
 "X-Generator: Launchpad (build 17306)\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -4145,30 +4145,3 @@ msgstr "Sledi"
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "Allowed Buildings"
-#~ msgstr "Dovoljene zgradbe"
-
-#~ msgid "Allowed Buildings:"
-#~ msgstr "Dovoljene zgradbe:"
-
-#~ msgid "Forbidden Buildings:"
-#~ msgstr "Prepovedane zgradbe:"
-
-#~ msgid "Forbid"
-#~ msgstr "Prepovej"
-
-#~ msgid "Allow"
-#~ msgstr "Dovoli"
-
-#~ msgid "A new %s was added to your economy."
-#~ msgstr "V vaše gospodarstvo je dodan nov %s."
-
-#~ msgid "Clear"
-#~ msgstr "Počisti"
-
-#~ msgid "Invert"
-#~ msgstr "Preobrni"
-
-#~ msgid "center main mapview on location"
-#~ msgstr "Pozicioniraj pogled na lokacijo"

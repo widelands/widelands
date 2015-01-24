@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2015-01-23 05:46+0000\n"
+"X-Launchpad-Export-Date: 2015-01-24 05:32+0000\n"
 "X-Generator: Launchpad (build 17306)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "Language: cs\n"
@@ -4237,30 +4237,3 @@ msgstr "Následovat"
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr "Vycentrovat hlavní pohled"
-
-#~ msgid "Allowed Buildings"
-#~ msgstr "Povolené budovy"
-
-#~ msgid "Allowed Buildings:"
-#~ msgstr "Povolené budovy:"
-
-#~ msgid "Forbidden Buildings:"
-#~ msgstr "Zakázané budovy:"
-
-#~ msgid "Forbid"
-#~ msgstr "Zakázat"
-
-#~ msgid "Allow"
-#~ msgstr "Povolit"
-
-#~ msgid "A new %s was added to your economy."
-#~ msgstr "Nové %s přibylo do tvojí ekonomiky."
-
-#~ msgid "Clear"
-#~ msgstr "Vymazat"
-
-#~ msgid "Invert"
-#~ msgstr "Přepnout"
-
-#~ msgid "center main mapview on location"
-#~ msgstr "vycentrovat pohled hlavní mapy na lokaci"

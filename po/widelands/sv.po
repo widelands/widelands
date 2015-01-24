@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-01-23 05:49+0000\n"
+"X-Launchpad-Export-Date: 2015-01-24 05:34+0000\n"
 "X-Generator: Launchpad (build 17306)\n"
 "Language: sv\n"
 
@@ -4185,30 +4185,3 @@ msgstr "Följ"
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr "Centrera huvudanblicken på detta"
-
-#~ msgid "Allowed Buildings"
-#~ msgstr "Tillåtna byggnader"
-
-#~ msgid "Allowed Buildings:"
-#~ msgstr "Tillåtna byggnader:"
-
-#~ msgid "Forbidden Buildings:"
-#~ msgstr "Förbjudna byggnader:"
-
-#~ msgid "Forbid"
-#~ msgstr "Förbjud"
-
-#~ msgid "Allow"
-#~ msgstr "Tillåt"
-
-#~ msgid "A new %s was added to your economy."
-#~ msgstr "Din ekonomi utökades med en/ett ny(tt) %s."
-
-#~ msgid "Clear"
-#~ msgstr "Rensa"
-
-#~ msgid "Invert"
-#~ msgstr "Invertera"
-
-#~ msgid "center main mapview on location"
-#~ msgstr "centrera huvudkartvy på plats"

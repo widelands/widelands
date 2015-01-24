@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2015-01-23 05:47+0000\n"
+"X-Launchpad-Export-Date: 2015-01-24 05:33+0000\n"
 "X-Generator: Launchpad (build 17306)\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -4189,32 +4189,3 @@ msgstr "追跡"
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr "ここに視点移動"
-
-#~ msgid "Allowed Buildings"
-#~ msgstr "許可された建物"
-
-#~ msgid "Allowed Buildings:"
-#~ msgstr "許可された建物"
-
-#~ msgid "Forbidden Buildings:"
-#~ msgstr "禁止された建物"
-
-#~ msgid "Forbid"
-#~ msgstr "禁止"
-
-#~ msgid "Allow"
-#~ msgstr "許可"
-
-#~ msgid "A new %s was added to your economy."
-#~ msgstr ""
-#~ "新しい%sを\n"
-#~ "経済に追加しました。"
-
-#~ msgid "Clear"
-#~ msgstr "クリア"
-
-#~ msgid "Invert"
-#~ msgstr "反転"
-
-#~ msgid "center main mapview on location"
-#~ msgstr "この位置に視点移動"

@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-01-23 05:48+0000\n"
+"X-Launchpad-Export-Date: 2015-01-24 05:33+0000\n"
 "X-Generator: Launchpad (build 17306)\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -4203,27 +4203,3 @@ msgstr "Følg"
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "Allowed Buildings"
-#~ msgstr "Tillatte bygninger"
-
-#~ msgid "Allowed Buildings:"
-#~ msgstr "Tillatte bygninger:"
-
-#~ msgid "Forbidden Buildings:"
-#~ msgstr "Forbudte bygninger:"
-
-#~ msgid "Forbid"
-#~ msgstr "Forby"
-
-#~ msgid "Allow"
-#~ msgstr "Tillat"
-
-#~ msgid "A new %s was added to your economy."
-#~ msgstr "En ny %s ble lagt til i økonomien din."
-
-#~ msgid "Clear"
-#~ msgstr "Tøm"
-
-#~ msgid "Invert"
-#~ msgstr "Inverter"

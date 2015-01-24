@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-01-23 05:47+0000\n"
+"X-Launchpad-Export-Date: 2015-01-24 05:33+0000\n"
 "X-Generator: Launchpad (build 17306)\n"
 "X-Poedit-Country: ITALY\n"
 "Language: it\n"
@@ -4262,30 +4262,3 @@ msgstr "Seguire"
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr "Centra vista principale su questo"
-
-#~ msgid "Allowed Buildings"
-#~ msgstr "Costruzioni permesse"
-
-#~ msgid "Allowed Buildings:"
-#~ msgstr "Costruzioni permesse:"
-
-#~ msgid "Forbidden Buildings:"
-#~ msgstr "Costruzioni proibite:"
-
-#~ msgid "Forbid"
-#~ msgstr "Impedisci"
-
-#~ msgid "Allow"
-#~ msgstr "Consenti"
-
-#~ msgid "A new %s was added to your economy."
-#~ msgstr "Un nuovo %s è stato aggiunto alla tua economia."
-
-#~ msgid "Clear"
-#~ msgstr "Azzera"
-
-#~ msgid "Invert"
-#~ msgstr "Inverti"
-
-#~ msgid "center main mapview on location"
-#~ msgstr "centra la mappa principale sul luogo"

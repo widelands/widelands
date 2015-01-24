@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-01-23 05:46+0000\n"
+"X-Launchpad-Export-Date: 2015-01-24 05:32+0000\n"
 "X-Generator: Launchpad (build 17306)\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -4123,9 +4123,3 @@ msgstr ""
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "Forbid"
-#~ msgstr "Prohibir"
-
-#~ msgid "Clear"
-#~ msgstr "Esborra"

@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-01-23 05:47+0000\n"
+"X-Launchpad-Export-Date: 2015-01-24 05:33+0000\n"
 "X-Generator: Launchpad (build 17306)\n"
 "Language: hu\n"
 
@@ -4158,30 +4158,3 @@ msgstr "Követ"
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "Allowed Buildings"
-#~ msgstr "Engedélyezett épületek"
-
-#~ msgid "Allowed Buildings:"
-#~ msgstr "Engedélyezett épületek:"
-
-#~ msgid "Forbidden Buildings:"
-#~ msgstr "Tiltott épületek:"
-
-#~ msgid "Forbid"
-#~ msgstr "Letilt"
-
-#~ msgid "Allow"
-#~ msgstr "Engedélyez"
-
-#~ msgid "A new %s was added to your economy."
-#~ msgstr "Egy új %s lett hozzáadva a gazdaságodhoz."
-
-#~ msgid "Clear"
-#~ msgstr "Törlés"
-
-#~ msgid "Invert"
-#~ msgstr "Megfordít"
-
-#~ msgid "center main mapview on location"
-#~ msgstr "Nézet középre igazítása a helyhez"

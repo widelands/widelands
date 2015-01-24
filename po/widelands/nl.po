@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-01-23 05:46+0000\n"
+"X-Launchpad-Export-Date: 2015-01-24 05:32+0000\n"
 "X-Generator: Launchpad (build 17306)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -4254,30 +4254,3 @@ msgstr "Volg"
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr "Beeld centreren"
-
-#~ msgid "Allowed Buildings"
-#~ msgstr "Toegestane gebouwen"
-
-#~ msgid "Allowed Buildings:"
-#~ msgstr "Toegestane gebouwen:"
-
-#~ msgid "Forbidden Buildings:"
-#~ msgstr "Verboden gebouwen:"
-
-#~ msgid "Forbid"
-#~ msgstr "Verbied"
-
-#~ msgid "Allow"
-#~ msgstr "Toestaan"
-
-#~ msgid "A new %s was added to your economy."
-#~ msgstr "Een nieuwe %s is aan je economie toegevoegd."
-
-#~ msgid "Clear"
-#~ msgstr "Wissen"
-
-#~ msgid "Invert"
-#~ msgstr "Omkeren"
-
-#~ msgid "center main mapview on location"
-#~ msgstr "centreer overzichtskaart  op locatie"

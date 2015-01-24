@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-01-23 05:48+0000\n"
+"X-Launchpad-Export-Date: 2015-01-24 05:33+0000\n"
 "X-Generator: Launchpad (build 17306)\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -4153,30 +4153,3 @@ msgstr "Følg"
 #: ../../src/wui/watchwindow.cc:118
 msgid "Center the main view on this"
 msgstr ""
-
-#~ msgid "Allowed Buildings"
-#~ msgstr "Tillét bygg"
-
-#~ msgid "Allowed Buildings:"
-#~ msgstr "Tilletne bygg"
-
-#~ msgid "Forbidden Buildings:"
-#~ msgstr "Forbodne bygg"
-
-#~ msgid "Forbid"
-#~ msgstr "Forby"
-
-#~ msgid "Allow"
-#~ msgstr "Tillét"
-
-#~ msgid "A new %s was added to your economy."
-#~ msgstr "Ein ny %s vart lagt til i økonomien din."
-
-#~ msgid "Clear"
-#~ msgstr "Fjern"
-
-#~ msgid "Invert"
-#~ msgstr "Vend om"
-
-#~ msgid "center main mapview on location"
-#~ msgstr "sentrer hovudkartvisinga på stad"
