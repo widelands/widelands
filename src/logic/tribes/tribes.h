@@ -47,13 +47,20 @@ public:
 
 	// NOCOM(#GunChleoc): Do we want all wares for all tribes here?
 	WareIndex get_nrwares() const;
+	WareIndex get_nrworkers() const;
 
 	WareIndex safe_ware_index(const std::string & warename) const;
+	WareIndex safe_worker_index(const std::string & workername) const;
+
 	WareIndex ware_index(const std::string & warename) const;
+	WareIndex worker_index(const std::string & workername) const;
 
 	WareDescr const * get_ware_descr(WareIndex ware_index) const;
+	WorkerDescr const * get_worker_descr(WareIndex worker_index) const;
 
 	void set_ware_type_has_demand_check(WareIndex ware_index, const std::string& tribename);
+	void set_worker_type_has_demand_check(WareIndex worker_index, const std::string& tribename);
+
 
 private:
 	std::unique_ptr<DescriptionMaintainer<WareDescr>> wares_;

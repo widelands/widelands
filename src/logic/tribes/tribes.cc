@@ -41,6 +41,11 @@ WareIndex Tribes::get_nrwares() const {
 	return wares_.get_nitems();
 }
 
+WareIndex Tribes::get_nrworkers() const {
+	return workers_.get_nitems();
+}
+
+
 WareIndex Tribes::safe_ware_index(const std::string& warename) const {
 	const WareIndex result = ware_index(warename);
 	if (result == -1) {
@@ -48,6 +53,15 @@ WareIndex Tribes::safe_ware_index(const std::string& warename) const {
 	}
 	return result;
 }
+
+WareIndex Tribes::safe_worker_index(const std::string& workername) const {
+	const WareIndex result = worker_index(workername);
+	if (result == -1) {
+		throw GameDataError("Unknown worker type \"%s\"", workername.c_str());
+	}
+	return result;
+}
+
 
 WareIndex Tribes::ware_index(const std::string& warename) const {
 	int result = -1;
@@ -58,12 +72,31 @@ WareIndex Tribes::ware_index(const std::string& warename) const {
 	}
 }
 
+WareIndex Tribes::worker_index(const std::string& workername) const {
+	int result = -1;
+	for (size_t i = 0; i < workers_.get_nitems(); ++i) {
+		if (workers_.get(i)->name() == workername.name()) {
+			return result;
+		}
+	}
+}
+
+
 WareDescr const * Tribes::get_ware_descr(WareIndex ware_index) const {
 	return wares_.get(ware_index);
 }
 
-void set_ware_type_has_demand_check(WareIndex ware_index, const std::string& tribename) const {
+WorkerDescr const * Tribes::get_worker_descr(WareIndex worker_index) const {
+	return workers_.get(worker_index);
+}
+
+
+void Tribes::set_ware_type_has_demand_check(WareIndex ware_index, const std::string& tribename) const {
 	wares_.get(ware_index)->set_has_demand_check(tribename);
+}
+
+void Tribes::set_worker_type_has_demand_check(WareIndex worker_index, const std::string& tribename) const {
+	workers_.get(worker_index)->set_has_demand_check(tribename);
 }
 
 } // namespace Widelands
