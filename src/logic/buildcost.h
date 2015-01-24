@@ -23,6 +23,7 @@
 #include <map>
 
 #include "logic/widelands.h"
+#include "scripting/lua_table.h"
 
 class FileRead;
 class FileWrite;
@@ -34,6 +35,7 @@ struct TribeDescr;
 
 struct Buildcost : std::map<WareIndex, uint8_t> {
 	void parse(const TribeDescr & tribe, Section & buildcost_s);
+	void parse(const LuaTable & t);
 
 	uint32_t total() const;
 

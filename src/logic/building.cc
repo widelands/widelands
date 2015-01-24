@@ -176,17 +176,137 @@ BuildingDescr::BuildingDescr
 BuildingDescr::BuildingDescr
 	(const MapObjectType _type, const LuaTable& table)
 	:
-	MapObjectDescr(_type,  table.get_string("name"), table.get_string("descname")),
+	MapObjectDescr(_type, table.get_string("name"), table.get_string("descname")),
 	m_buildable     (true),
 	m_icon     (nullptr),
 	m_size          (BaseImmovable::SMALL),
 	m_mine          (false),
 	m_port          (false),
-	//m_hints         (prof.get_section("aihints")),
+	m_hints         (table.get_table("aihints")),
 	m_global        (false),
 	m_vision_range  (0)
 {
 	// NOCOM(GunChleoc): Implement this
+	try {
+		const std::string size = table.get_string("size");
+		if (size == "small")
+			m_size = BaseImmovable::SMALL;
+		else if (size == "medium")
+			m_size = BaseImmovable::MEDIUM;
+		else if (size == "big")
+			m_size = BaseImmovable::BIG;
+		else if (size == "mine") {
+			m_size = BaseImmovable::SMALL;
+			m_mine = true;
+		} else if (size == "port") {
+			m_size = BaseImmovable::BIG;
+			m_port = true;
+		} else {
+			throw GameDataError
+				("expected %s but found \"%s\"",
+				 "{\"small\"|\"medium\"|\"big\"|\"port\"|\"mine\"}", size);
+		}
+	} catch (const WException & e) {
+		throw GameDataError("size: %s", e.what());
+	}
+
+	// NOCOM(GunChleoc); We need the path from somewhere
+	//m_helptext_script = directory + "/help.lua";
+	if (!g_fs->file_exists(m_helptext_script))
+		m_helptext_script = "";
+
+	// Parse build options
+	m_buildable = table.has_key("buildable") ? table.get_bool("buildable") : true;
+	m_destructible = table.has_key("destructible") ? table.get_bool("destructible") : true;
+	m_enhancement = INVALID_INDEX;
+
+	if (table.has_key("enhancement")) {
+		const std::string& enhancement = table.get_string("enhancement");
+
+		if (enhancement == name()) {
+			throw wexception("enhancement to same type");
+		}
+		BuildingIndex const en_i = tribe().building_index(enhancement);
+		if (en_i != INVALID_INDEX) {
+			m_enhancement = en_i;
+
+			//  Merge the enhancements workarea info into this building's
+			//  workarea info.
+			const BuildingDescr * tmp_enhancement =
+				tribe().get_building_descr(en_i);
+			for (std::pair<uint32_t, std::set<std::string>> area : tmp_enhancement->m_workarea_info)
+			{
+				std::set<std::string> & strs = m_workarea_info[area.first];
+				for (std::string str : area.second)
+					strs.insert(str);
+			}
+		} else {
+			throw wexception
+				("\"%s\" has not been defined as a building type (wrong declaration order?)",
+				enhancement.c_str());
+		}
+	}
+
+	m_enhanced_building = table.has_key("enhanced_building") ? table.get_bool("enhanced_building") : false;
+
+	// NOCOM(GunChleoc): Deal with dirname and animations
+	m_global = directory.find("global/") < directory.size();
+	if (m_buildable || m_enhanced_building) {
+		//  get build icon
+		m_icon_fname  = directory;
+		m_icon_fname += "/menu.png";
+
+		//  build animation
+		if (Section * const build_s = prof.get_section("build")) {
+			if (build_s->get_int("fps", -1) != -1)
+				throw wexception("fps defined for build animation!");
+			if (!is_animation_known("build"))
+				add_animation("build", g_gr->animations().load(directory, *build_s));
+		}
+
+		// Get costs
+		if (m_buildable) {
+			try {
+				m_buildcost.parse(table.get_table("buildcost"));
+				m_return_dismantle.parse(table.get_table("return_on_dismantle"));
+			} catch (const WException & e) {
+				throw wexception
+						("A buildable building must define \"buildcost\" and \"return_on_dismantle\": %s",
+						 e.what());
+			}
+		}
+
+		if (m_enhanced_building) {
+			try {
+				m_enhance_cost.parse(table.get_table("enhancement_cost"));
+				m_return_enhanced.parse(table.get_table("return_on_dismantle_on_enhanced"));
+			} catch (const WException & e) {
+				throw wexception
+						("An enhanced building must define \"enhancement_cost\""
+						 "and \"return_on_dismantle_on_enhanced\": %s", e.what());
+			}
+		}
+	} else if (m_global) {
+		// NOCOM(GunChleoc): Deal with dirname and animations
+		//  get build icon for global buildings (for statistics window)
+		m_icon_fname  = directory;
+		m_icon_fname += "/menu.png";
+	}
+
+	LuaTable items_table = table.get_table("animations");
+	for (const std::string& key : items_table.keys()) {
+		const LuaTable anims_table = table.get_table(key);
+		for (const std::string& anim_key : anims_table.keys()) {
+			// NOCOM(GunChleoc): And the hotspot + fps?
+			if (!is_animation_known(anim_key)) {
+				add_animation(anim_key, g_gr->animations().load(anims_table.get_string("pictures")));
+			}
+		}
+	}
+
+	if(table.has_key("vision_range")) {
+		m_vision_range = table.get_int("vision_range");
+	}
 }
 
 

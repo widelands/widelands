@@ -112,7 +112,7 @@ TrainingSiteDescr::TrainingSiteDescr
 	m_max_defense       (0),
 	m_max_evade         (0)
 {
-	const LuaTable items_table;
+	LuaTable items_table;
 
 	// Read the range of levels that can update this building
 	//  TODO(unknown): This is currently hardcoded to "soldier" but it should search for

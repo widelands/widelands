@@ -23,6 +23,7 @@
 #include <stdint.h>
 
 #include "base/macros.h"
+#include "scripting/lua_table.h"
 
 class Section;
 
@@ -31,6 +32,7 @@ class Section;
 /// special properties of a building.
 struct BuildingHints {
 	BuildingHints(Section*);
+	BuildingHints(const LuaTable&);
 	~BuildingHints();
 
 	char const* get_renews_map_resource() const {
@@ -87,7 +89,7 @@ struct BuildingHints {
 	}
 
 private:
-	char* renews_map_resource;
+	std::string renews_map_resource;
 	char* mines_;
 	bool log_producer_;
 	bool stone_producer_;

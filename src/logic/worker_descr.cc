@@ -149,7 +149,7 @@ WorkerDescr::WorkerDescr(const LuaTable& table) :
 	needed_experience_ (-1),
 	becomes_           (INVALID_INDEX)
 {
-	const LuaTable items_table = table.get_table("buildcost");
+	LuaTable items_table = table.get_table("buildcost");
 	for (const std::string& key : items_table.keys()) {
 		try {
 			if (buildcost_.count(key)) {

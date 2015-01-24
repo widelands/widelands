@@ -56,7 +56,7 @@ WareDescr::WareDescr(const LuaTable& table) :
 	icon_fname_(table.get_string("menu_picture")),
 	icon_(g_gr->images().get("pics/but0.png")) {
 
-	const LuaTable items_table = table.get_table("default_target_quantity");
+	LuaTable items_table = table.get_table("default_target_quantity");
 	for (const std::string& key : items_table.keys()) {
 		default_target_quantities_.insert(key, items_table.get_int(key));
 	}

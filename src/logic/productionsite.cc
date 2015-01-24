@@ -156,7 +156,7 @@ ProductionSiteDescr::ProductionSiteDescr
 ProductionSiteDescr::ProductionSiteDescr
 	(MapObjectType _type, const LuaTable& table, const World& world) : BuildingDescr(_type, table)
 {
-	const LuaTable items_table;
+	LuaTable items_table;
 
 	if (table.has_key("out_of_resource_notification")) {
 		items_table = table.get_table("out_of_resource_notification");
