@@ -485,6 +485,8 @@ Tribes
 
 const char LuaTribes::className[] = "Tribes";
 const MethodType<LuaTribes> LuaTribes::Methods[] = {
+	METHOD(LuaTribes, new_dismantlesite_type),
+	METHOD(LuaTribes, new_constructionsite_type),
 	METHOD(LuaTribes, new_militarysite_type),
 	METHOD(LuaTribes, new_ware_type),
 	METHOD(LuaTribes, new_worker_type),
@@ -518,6 +520,51 @@ void LuaTribes::__unpersist(lua_State*) {
  LUA METHODS
  ==========================================================
  */
+
+/* RST
+	.. method:: new_constructionsite_type(table)
+
+		Adds a new constructionsite building type. Takes a single argument, a table with
+		the descriptions. See the files in tribe/ for usage examples.
+
+		:returns: :const:`nil`
+*/
+int LuaTribes::new_constructionsite_type(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		get_egbase(L).mutable_tribes()->add_constructionsite_type(table);
+	} catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/* RST
+	.. method:: new_dismantlesite_type(table)
+
+		Adds a new disnamtlesite building type. Takes a single argument, a table with
+		the descriptions. See the files in tribe/ for usage examples.
+
+		:returns: :const:`nil`
+*/
+int LuaTribes::new_dismantlesite_type(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		get_egbase(L).mutable_tribes()->add_dismantlesite_type(table);
+	} catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
 
 /* RST
 	.. method:: new_militarysite_type(table)

@@ -48,6 +48,12 @@ DismantleSiteDescr::DismantleSiteDescr
 	add_attribute(MapObject::Attribute::CONSTRUCTIONSITE); // Yep, this is correct.
 }
 
+DismantleSiteDescr::DismantleSiteDescr(const LuaTable& table)
+	: BuildingDescr(MapObjectType::DISMANTLESITE, table)
+{
+	add_attribute(MapObject::Attribute::CONSTRUCTIONSITE); // Yep, this is correct.
+}
+
 Building & DismantleSiteDescr::create_object() const {
 	return *new DismantleSite(*this);
 }

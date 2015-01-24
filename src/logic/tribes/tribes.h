@@ -40,6 +40,12 @@ public:
 	~Tribes();
 
 	/// Adds this building type to the tribe description.
+	void add_constructionsite_type(const LuaTable& table);
+
+	/// Adds this building type to the tribe description.
+	void add_dismantlesite_type(const LuaTable& table);
+
+	/// Adds this building type to the tribe description.
 	void add_militarysite_type(const LuaTable& table);
 
 	/// Adds this ware type to the tribe description.

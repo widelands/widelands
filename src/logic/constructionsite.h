@@ -25,6 +25,7 @@
 #include "base/macros.h"
 #include "logic/partially_finished_building.h"
 #include "logic/player.h"
+#include "scripting/lua_table.h"
 
 namespace Widelands {
 
@@ -55,6 +56,9 @@ struct ConstructionSiteDescr : public BuildingDescr {
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const TribeDescr & tribe);
+
+	ConstructionSiteDescr(const LuaTable& t);
+
 	~ConstructionSiteDescr() override {}
 
 	Building & create_object() const override;

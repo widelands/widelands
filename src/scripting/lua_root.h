@@ -140,6 +140,8 @@ public:
 	/*
 	 * Lua methods
 	 */
+	int new_constructionsite_type(lua_State* L);
+	int new_dismantlesite_type(lua_State* L);
 	int new_militarysite_type(lua_State* L);
 	int new_ware_type(lua_State* L);
 	int new_worker_type(lua_State* L);

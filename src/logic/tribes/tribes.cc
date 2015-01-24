@@ -19,6 +19,8 @@
 
 #include "logic/tribes/tribes.h"
 
+#include "logic/constructionsite.h"
+#include "logic/dismantlesite.h"
 #include "logic/militarysite.h"
 #include "logic/ware_descr.h"
 #include "logic/worker_descr.h"
@@ -29,6 +31,14 @@ Tribes::Tribes() :
 	buildings_(new DescriptionMaintainer<BuildingDescr>()),
 	wares_(new DescriptionMaintainer<WareDescr>()),
 	workers_(new DescriptionMaintainer<WorkerDescr>()) {
+}
+
+void Tribes::add_constructionsite_type(const LuaTable& t) {
+	buildings_->add(new ConstructionSiteDescr(t));
+}
+
+void Tribes::add_dismantlesite_type(const LuaTable& t) {
+	buildings_->add(new DismantleSiteDescr(t));
 }
 
 void Tribes::add_militarysite_type(const LuaTable& t) {

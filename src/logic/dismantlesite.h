@@ -24,6 +24,7 @@
 #include "logic/building.h"
 #include "logic/partially_finished_building.h"
 #include "logic/player.h"
+#include "scripting/lua_table.h"
 
 namespace Widelands {
 
@@ -49,6 +50,9 @@ struct DismantleSiteDescr : public BuildingDescr {
 	                    Profile&,
 	                    Section& global_s,
 							  const TribeDescr& tribe);
+
+	DismantleSiteDescr(const LuaTable& t);
+
 	~DismantleSiteDescr() override {}
 
 	Building& create_object() const override;

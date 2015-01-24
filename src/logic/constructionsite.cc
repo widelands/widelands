@@ -59,6 +59,18 @@ ConstructionSiteDescr::ConstructionSiteDescr
 	}
 }
 
+ConstructionSiteDescr::ConstructionSiteDescr(const LuaTable& table)
+	: BuildingDescr(MapObjectType::CONSTRUCTIONSITE, table)
+{
+	add_attribute(MapObject::CONSTRUCTIONSITE);
+
+	// animation when a worker entered the site
+	const LuaTable items_table = table.get_table("animations");
+	if (items_table.has_key("idle_with_worker")) {
+		// NOCOM(GunChleoc): And the hotspot + fps?
+		add_animation(anim_key, g_gr->animations().load(anims_table.get_string("pictures")));
+	}
+}
 
 Building & ConstructionSiteDescr::create_object() const {
 	return *new ConstructionSite(*this);
