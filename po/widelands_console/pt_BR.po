@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2015-01-22 11:01+0000\n"
-"PO-Revision-Date: 2014-09-19 11:36+0000\n"
-"Last-Translator: Juarez S. <juarezpedraiii@gmail.com>\n"
+"PO-Revision-Date: 2015-01-25 00:22+0000\n"
+"Last-Translator: Rayback <raybackpc@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-01-23 05:50+0000\n"
+"X-Launchpad-Export-Date: 2015-01-25 05:23+0000\n"
 "X-Generator: Launchpad (build 17306)\n"
 "Language: pt_BR\n"
 
@@ -22,11 +22,11 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:40
 #, c-format
 msgid "This is Widelands Build %s"
-msgstr ""
+msgstr "Esse é Widelands Versão %s"
 
 #: ../../src/wlapplication_messages.cc:43
 msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
-msgstr ""
+msgstr "Uso: widelands <option0>=<value0> ... <optionN>=<valueN>"
 
 #: ../../src/wlapplication_messages.cc:44
 msgid "Options:"
@@ -35,28 +35,36 @@ msgstr "Opções:"
 #: ../../src/wlapplication_messages.cc:46
 msgid " --<config-entry-name>=value overwrites any config file setting"
 msgstr ""
+" --<config-entry-name>=valor substitui qualquer configuração de arquivo de "
+"configuração"
 
 #: ../../src/wlapplication_messages.cc:47
 msgid ""
 " --logfile=FILENAME   Log output to file FILENAME instead of \n"
 "                      terminal output"
 msgstr ""
+" --logfile=FILENAME Saída do log para arquivo FILENAME em vez de\n"
+"                      saída terminal"
 
 #: ../../src/wlapplication_messages.cc:49
 msgid ""
 " --datadir=DIRNAME    Use specified directory for the widelands\n"
 "                      data files"
 msgstr ""
+" --datadir=DIRNAME Usa diretório específico para o Widelands\n"
+"                      arquivo de dados"
 
 #: ../../src/wlapplication_messages.cc:51
 msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays"
 msgstr ""
+" --homedir=DIRNAME Usa diretório específico para configuração de Widelands\n"
+"                      arquivos, jogos salvos e replays"
 
 #: ../../src/wlapplication_messages.cc:54
 msgid "                      Default is ~/.widelands"
-msgstr ""
+msgstr "                      Padrão é ~/.widelands"
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
@@ -66,12 +74,17 @@ msgid ""
 "                      Generates a core dump on segfaults instead of\n"
 "                      using the SDL"
 msgstr ""
+" --coredump=[true|false]\n"
+"                      Gera um núcleo segfaults em vez de\n"
+"                      usando a SDL"
 
 #: ../../src/wlapplication_messages.cc:62
 msgid ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      The locale to use."
 msgstr ""
+" --language=[de_DE|sv_SE|...]\n"
+"                      O local para uso."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain

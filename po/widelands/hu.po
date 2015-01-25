@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2015-01-22 11:01+0000\n"
-"PO-Revision-Date: 2015-01-23 02:38+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"PO-Revision-Date: 2015-01-24 19:09+0000\n"
+"Last-Translator: cn4ij <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-01-24 05:33+0000\n"
+"X-Launchpad-Export-Date: 2015-01-25 05:23+0000\n"
 "X-Generator: Launchpad (build 17306)\n"
 "Language: hu\n"
 
@@ -1200,7 +1200,7 @@ msgstr ""
 #: ../../src/wui/multiplayersetupgroup.cc:294
 #, c-format
 msgid "Player %u"
-msgstr "%u játékos"
+msgstr "%u. játékos"
 
 #: ../../src/logic/soldier.cc:1576 ../../src/logic/soldier.cc:1585
 msgid "Logic error"
@@ -2024,19 +2024,19 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:295
 msgid "Choose a tutorial"
-msgstr ""
+msgstr "Oktatójáték kiválasztása"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:337
 msgid "Play this tutorial"
-msgstr ""
+msgstr "Oktatójáték indítása"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:338
 msgid "The name of this tutorial"
-msgstr ""
+msgstr "A kiválaszott oktatójáték neve"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:339
 msgid "What you will learn in this tutorial"
-msgstr ""
+msgstr "Amit megtanulsz ebben az oktatójátékban"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:341
 msgid "Play this scenario"
@@ -2048,11 +2048,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:360
 msgid "The order in which the tutorials should be played"
-msgstr ""
+msgstr "Ebben a sorrendben érdemes végigjátszani az oktatójátékokat"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:361
 msgid "Tutorial Name"
-msgstr ""
+msgstr "Oktatójáték neve"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:363
 msgid "The number of this scenario in the campaign"
@@ -2073,7 +2073,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:402
 msgid "Tutorial:"
-msgstr ""
+msgstr "Oktatójáték:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:418
 #, c-format
@@ -2083,8 +2083,8 @@ msgstr ""
 #: ../../src/ui_fsmenu/campaign_select.cc:429
 msgid "The designer of this tutorial"
 msgid_plural "The designers of this tutorial"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "A kiválasztott oktatójáték készítője"
+msgstr[1] "A kiválasztott oktatójáték készítői"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:432
 msgid "The designer of this scenario"
@@ -2101,12 +2101,12 @@ msgstr[1] "Készítők:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:459
 msgid "Pick a tutorial from the list, then hit \"OK\"."
-msgstr ""
+msgstr "Válassz egy oktatójátékot a listáról, majd kattints az OK gombra."
 
 #: ../../src/ui_fsmenu/campaign_select.cc:461
 msgid ""
 "You can see a description of the currently selected tutorial on the right."
-msgstr ""
+msgstr "A megjelölt játékról a jobb oldalon találsz leírást."
 
 #: ../../src/ui_fsmenu/fileview.cc:75 ../../src/wui/watchwindow.cc:140
 msgid "Close"
@@ -2201,7 +2201,7 @@ msgstr "A folytatáshoz kattints vagy nyomd meg az ESC billentyűt…"
 #. * TRANSLATORS: Dialog box title for selecting between map or saved game for new multiplayer game
 #: ../../src/ui_fsmenu/launch_mpg.cc:54
 msgid "Please select"
-msgstr "Kérlek válassz"
+msgstr "Kérlek, válassz"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:67 ../../src/ui_fsmenu/launch_mpg.cc:171
 #: ../../src/ui_fsmenu/netsetup_lan.cc:119 ../../src/wui/minimap.cc:138
@@ -2306,11 +2306,11 @@ msgstr ""
 #: ../../src/ui_fsmenu/launch_mpg.cc:487
 #, c-format
 msgid "You are Player %i."
-msgstr ""
+msgstr "Te vagy a(z) %i. játékos."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:488
 msgid "You are a spectator."
-msgstr ""
+msgstr "Te egy néző vagy."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:548
 msgid "Saved players are:"
@@ -2322,7 +2322,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:637
 msgid "Map details:"
-msgstr ""
+msgstr "Térkép adatai:"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:638
 #, c-format
@@ -2334,8 +2334,8 @@ msgstr "Méret: %1$u x %2$u"
 #, c-format
 msgid "%u Player"
 msgid_plural "%u Players"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u játékos"
+msgstr[1] "%u játékos"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:643
 msgid "Scenario mode selected"
@@ -2347,52 +2347,62 @@ msgstr "A többjátékos mód beállító menüjében vagy."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:665
 msgid "Client settings"
-msgstr "Kliens beállítások"
+msgstr "Kliensbeállítások"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:668
 msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role with the button following your nickname. Available roles are:"
 msgstr ""
+"Bal oldalon látható a résztvevők listája, téged is beleértve. Szerepedet a "
+"beceneved mögötti gombbal állíthatod be. A lehetséges szerepek:"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:672
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
 msgstr ""
+"Játékos, a megfelelő színű zászlóval. Ha egynél több résztvevő választja "
+"ugyanazon színt, akkor közösen irányítanak egy játékost (\"megosztott "
+"királyság mód\")."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:676
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any player"
-msgstr ""
+msgstr "Néző mód: mindent lát, de senkit sem tud irányítani."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:678
 msgid "Player settings"
-msgstr "Játékos beállítások"
+msgstr "Játékosbeállítások"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:681
 msgid ""
 "In the middle are the settings for the players. To start a game, each player "
 "must be one of the following:"
 msgstr ""
+"Középen a játékosok beállításai láthatók. A játék megkezdéséhez minden "
+"játékosnak az alábbiak egyikének kell lennie:"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:684
 msgid "Connected to one or more clients (see ‘Client settings’)."
-msgstr ""
+msgstr "Csatlakozva egy vagy több klienshez (lásd: Kliensbeállítások)"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:687
 msgid ""
 "Connected to a computer player (the face in the picture as well as the mouse "
 "hover texts indicate the strength of the currently selected computer player)."
 msgstr ""
+"Csatlakozva egy számítógépes játékoshoz (a képen látható arc és az egeret "
+"fölé mozgatva megjelenő szöveg mutatja az éppen kiválasztott számítógépes "
+"játékos erősségét)."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:690
 msgid "Set as shared in starting position for another player."
-msgstr ""
+msgstr "Osztozva egy másik játékos kezdőpozíciójával."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:691
 msgid "Closed."
-msgstr "Zárva."
+msgstr "Kizárva."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:694
 msgid ""
@@ -2410,7 +2420,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:701
 msgid "Map details"
-msgstr ""
+msgstr "Térkép adatai"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:704
 msgid ""
@@ -2419,6 +2429,10 @@ msgid ""
 "map. Furthermore, the host is able to set a specific win condition, and "
 "finally can start the game as soon as all players are set up."
 msgstr ""
+"A jobb oldalon a kiválasztott térképről vagy játékmentésről találsz "
+"információkat. A játék szervezője a térkép neve melletti gombbal választhat "
+"másik térképet. Továbbá a szervező megadhat egy játékcélt is, majd – ha "
+"minden játékos be lett állítva – elindíthatja a játékot."
 
 #: ../../src/ui_fsmenu/launch_spg.cc:62
 msgid "Select map"
@@ -2812,7 +2826,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:328
 msgid "Play this map"
-msgstr ""
+msgstr "Játék indítása"
 
 #: ../../src/ui_fsmenu/mapselect.cc:331
 msgid "Directory:"
@@ -2880,7 +2894,7 @@ msgstr "Kapcsolat gépneve:"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:67
 msgid "Host a new game"
-msgstr ""
+msgstr "Új játék készítése"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:78
 msgid "Load previous host"
@@ -2903,7 +2917,7 @@ msgstr "Szabad"
 #: ../../src/ui_fsmenu/netsetup_lan.cc:190
 #: ../../src/wui/multiplayersetupgroup.cc:265
 msgid "Closed"
-msgstr "Lezárt"
+msgstr "Kizárva"
 
 #: ../../src/ui_fsmenu/options.cc:113 ../../src/ui_fsmenu/options.cc:540
 msgid "Advanced Options"
@@ -3909,7 +3923,7 @@ msgstr "Kezdés"
 #: ../../src/wui/multiplayersetupgroup.cc:459
 #: ../../src/wui/playerdescrgroup.cc:100
 msgid "Initialization"
-msgstr "Inicializálás"
+msgstr "Kezdőállapot"
 
 #: ../../src/wui/playerdescrgroup.cc:171
 msgid "AI: Random"
