@@ -57,6 +57,12 @@ public:
 	/// Adds this building type to the tribe description.
 	void add_warehouse_type(const LuaTable& table);
 
+	/// Adds this immovable type to the tribe description.
+	void add_immovable_type(const LuaTable& table);
+
+	/// Adds this ship type to the tribe description.
+	void add_ship_type(const LuaTable& table);
+
 	/// Adds this ware type to the tribe description.
 	void add_ware_type(const LuaTable& table);
 
@@ -84,9 +90,11 @@ public:
 
 
 private:
+	std::unique_ptr<DescriptionMaintainer<BuildingDescr>> buildings_;
+	std::unique_ptr<DescriptionMaintainer<BuildingDescr>> immovables_;
+	std::unique_ptr<DescriptionMaintainer<BuildingDescr>> ships_;
 	std::unique_ptr<DescriptionMaintainer<WareDescr>> wares_;
 	std::unique_ptr<DescriptionMaintainer<WorkerDescr>> workers_;
-	std::unique_ptr<DescriptionMaintainer<BuildingDescr>> buildings_;
 
 	DISALLOW_COPY_AND_ASSIGN(Tribes);
 };

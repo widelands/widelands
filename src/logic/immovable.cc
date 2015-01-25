@@ -223,12 +223,11 @@ ImmovableDescr IMPLEMENTATION
  */
 ImmovableDescr::ImmovableDescr
 	(char const * const _name, char const * const _descname,
-	 const std::string & directory, Profile & prof, Section & global_s,
-	 TribeDescr const * const owner_tribe)
+	 const std::string & directory, Profile & prof, Section & global_s)
 :
 	MapObjectDescr(MapObjectType::IMMOVABLE, _name, _descname),
 	m_size          (BaseImmovable::NONE),
-	m_owner_tribe   (owner_tribe)
+	owner_type_           (MapObjectDescr::OwnerType::kTribe)
 {
 	if (char const * const string = global_s.get_string("size"))
 		try {
@@ -282,11 +281,11 @@ ImmovableDescr::ImmovableDescr
 	}
 }
 
-ImmovableDescr::ImmovableDescr(const LuaTable& table, const World& world) :
+ImmovableDescr::ImmovableDescr(const LuaTable& table, const World& world, MapObjectDescr::OwnerType type) :
 	MapObjectDescr(
 	MapObjectType::IMMOVABLE, table.get_string("name"), table.get_string("descname")),
 	m_size(BaseImmovable::NONE),
-	m_owner_tribe(nullptr)  // Can only parse world immovables for now.
+	owner_type_(type)
 {
 	m_size = string_to_size(table.get_string("size"));
 	add_attributes(table.get_table("attributes")->array_entries<std::string>(), {MapObject::Attribute::RESI});
@@ -317,6 +316,11 @@ ImmovableDescr::ImmovableDescr(const LuaTable& table, const World& world) :
 		                      table.get_string("editor_category").c_str());
 	}
 	editor_category_ = world.editor_immovable_categories().get(editor_category_index);
+
+	LuaTable helptexts_table = table.get_table("helptext");
+	for (const std::string& key : helptexts_table.keys()) {
+		helptexts_.insert(key, helptexts_table.get_string(key));
+	}
 
 	make_sure_default_program_is_there();
 }
@@ -612,7 +616,7 @@ Load/save support
 ==============================
 */
 
-#define IMMOVABLE_SAVEGAME_VERSION 5
+#define IMMOVABLE_SAVEGAME_VERSION 6
 
 void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 {
@@ -722,10 +726,9 @@ void Immovable::save
 	fw.unsigned_8(HeaderImmovable);
 	fw.unsigned_8(IMMOVABLE_SAVEGAME_VERSION);
 
-	if (const TribeDescr * const tribe = descr().get_owner_tribe())
-		fw.string(tribe->name());
-	else
-		fw.c_string("world");
+	// NOCOM(GunChleoc) This used to be get_owner_tribe. I can't find the load code.
+	// I don't know how saveloading will be handled anyway.
+	fw.unsigned_8(descr().owner_type());
 
 	fw.string(descr().name());
 
@@ -911,8 +914,8 @@ ImmovableProgram::ActTransform::ActTransform
 					if (segments[0] == "world")
 						tribe = false;
 					else if (segments[0] == "tribe") {
-						if (!descr.get_owner_tribe())
-							throw GameDataError("scope \"tribe\", but have no owner tribe");
+						if (descr.owner_type() != MapObjectDescr::OwnerType::kTribe)
+							throw GameDataError("scope \"tribe\" does not match the immovable type");
 						tribe = true;
 					} else
 						throw GameDataError
@@ -940,14 +943,12 @@ void ImmovableProgram::ActTransform::execute
 	if (probability == 0 || game.logic_rand() % 256 < probability) {
 		Player * player = immovable.get_owner();
 		Coords const c = immovable.get_position();
-		TribeDescr const * const owner_tribe =
-			tribe ? immovable.descr().get_owner_tribe() : nullptr;
 		immovable.remove(game); //  Now immovable is a dangling reference!
 
 		if (bob) {
-			game.create_bob(c, type_name, owner_tribe, player);
+			game.create_bob(c, type_name, MapObjectDescr::OwnerType::kTribe, player);
 		} else {
-			Immovable & imm = game.create_immovable(c, type_name, owner_tribe);
+			Immovable & imm = game.create_immovable(c, type_name, MapObjectDescr::OwnerType::kTribe);
 			if (player)
 				imm.set_owner(player);
 		}
@@ -971,11 +972,10 @@ ImmovableProgram::ActGrow::ActGrow
 			case ':': {
 				*p = '\0';
 				++p;
-				TribeDescr const * const owner_tribe = descr.get_owner_tribe();
-				if (!owner_tribe)
+				if (descr.get_owner_type() != MapObjectDescr::OwnerType::kTribe)
 					throw GameDataError
 						(
-						 "immovable type not in tribe but target type has scope "
+						 "immovable type not in tribes but target type has scope "
 						 "(\"%s\")",
 						 parameters);
 				else if (strcmp(parameters, "world"))
@@ -1008,9 +1008,8 @@ void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const 
 
 	if (logic_rand_as_double(&game) <
 	    probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains())) {
-		TribeDescr const* const owner_tribe = tribe ? descr.get_owner_tribe() : nullptr;
 		immovable.remove(game);  //  Now immovable is a dangling reference!
-		game.create_immovable(f, type_name, owner_tribe);
+		game.create_immovable(f, type_name, MapObjectDescr::OwnerType::kTribe);
 	} else {
 		immovable.program_step(game);
 	}
@@ -1056,11 +1055,10 @@ ImmovableProgram::ActSeed::ActSeed(char * parameters, ImmovableDescr & descr)
 			case ':': {
 				*p = '\0';
 				++p;
-				TribeDescr const * const owner_tribe = descr.get_owner_tribe();
-				if (!owner_tribe)
+				if (descr.get_owner_type() != MapObjectDescr::OwnerType::kTribe)
 					throw GameDataError
 						(
-						 "immovable type not in tribe but target type has scope "
+						 "immovable type not in tribes but target type has scope "
 						 "(\"%s\")",
 						 parameters);
 				else if (strcmp(parameters, "world"))
@@ -1127,7 +1125,8 @@ void ImmovableProgram::ActSeed::execute
 		       probability_to_grow(
 		          descr.terrain_affinity(), new_location, map, game.world().terrains())) {
 			game.create_immovable(
-			   mr.location(), type_name, tribe ? immovable.descr().get_owner_tribe() : nullptr);
+						mr.location(), type_name,
+						tribe ? MapObjectDescr::OwnerType::kTribe : MapObjectDescr::OwnerType::kWorld);
 		}
 	}
 
@@ -1138,7 +1137,7 @@ ImmovableProgram::ActConstruction::ActConstruction
 	(char * parameters, ImmovableDescr & descr, const std::string & directory, Profile & prof)
 {
 	try {
-		if (!descr.get_owner_tribe())
+		if (descr.get_owner_type() != MapObjectDescr::OwnerType::kTribe)
 			throw GameDataError("only usable for tribe immovable");
 
 		std::vector<std::string> params = split_string(parameters, " ");
@@ -1169,7 +1168,7 @@ struct ActConstructionData : ImmovableActionData {
 	const char * name() const override {return "construction";}
 	void save(FileWrite & fw, Immovable & imm) override {
 		fw.unsigned_8(CONSTRUCTION_DATA_VERSION);
-		delivered.save(fw, *imm.descr().get_owner_tribe());
+		delivered.save(fw, *imm.descr().get_owner_type()); // NOCOM(GunChleoc): Will this work?
 	}
 
 	static ActConstructionData * load(FileRead & fr, Immovable & imm) {
@@ -1178,7 +1177,7 @@ struct ActConstructionData : ImmovableActionData {
 		try {
 			uint8_t version = fr.unsigned_8();
 			if (version == CONSTRUCTION_DATA_VERSION) {
-				d->delivered.load(fr, *imm.descr().get_owner_tribe());
+				d->delivered.load(fr, *imm.descr().get_owner_type()); // NOCOM(GunChleoc): Will this work?
 			} else
 				throw GameDataError("unknown version %u", version);
 		} catch (const WException & e) {

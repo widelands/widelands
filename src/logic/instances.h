@@ -89,6 +89,11 @@ std::string to_string(MapObjectType type);
  */
 struct MapObjectDescr {
 
+	enum class OwnerType {
+		kWorld,
+		kTribe
+	};
+
 	MapObjectDescr(const MapObjectType init_type,
 	                 const std::string& init_name,
 	                 const std::string& init_descname)
@@ -124,6 +129,9 @@ struct MapObjectDescr {
 
 	bool is_animation_known(const std::string & name) const;
 	void add_animation(const std::string & name, uint32_t anim);
+
+	/// Sets the directional animations in 'anims' with the animations '<prefix>_(ne|e|se|sw|w|nw)'.
+	void add_directional_animation(DirAnimations* anims, const std::string& prefix);
 
 protected:
 	// Add all the special attributes to the attribute list. Only the 'allowed_special'

@@ -115,7 +115,7 @@ struct ImmovableDescr : public MapObjectDescr {
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 TribeDescr const * const);
-	ImmovableDescr(const LuaTable&, const World&);
+	ImmovableDescr(const LuaTable&, const World&, MapObjectDescr::OwnerType owner_type);
 	~ImmovableDescr() override;
 
 	int32_t get_size() const {return m_size;}
@@ -123,7 +123,7 @@ struct ImmovableDescr : public MapObjectDescr {
 
 	Immovable & create(EditorGameBase &, Coords) const;
 
-	TribeDescr const * get_owner_tribe() const {return m_owner_tribe;}
+	MapObjectDescr::OwnerType owner_type() const {return owner_type_;}
 
 	const Buildcost & buildcost() const {return m_buildcost;}
 
@@ -143,13 +143,15 @@ protected:
 	int32_t     m_size;
 	Programs    m_programs;
 
-	/// The tribe to which this ImmovableDescr belongs or 0 if it is a
-	/// world immovable
-	const TribeDescr * const m_owner_tribe;
+	/// Whether this ImmovableDescr belongs to a tribe or the world
+	const MapObjectDescr::OwnerType owner_type_;
 
 	/// Buildcost for externally constructible immovables (for ship construction)
 	/// \see ActConstruction
 	Buildcost m_buildcost;
+
+	// tribename or "default", helptext
+	std::unordered_map<std::string, std::string> helptexts_; ///< Long descriptive texts
 
 private:
 	// Adds a default program if none was defined.

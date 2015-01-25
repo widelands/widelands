@@ -42,6 +42,9 @@ struct ShipDescr : BobDescr {
 		(char const * name, char const * descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const TribeDescr &);
+
+	ShipDescr(const LuaTable& t);
+
 	~ShipDescr() override {}
 
 	Bob & create_object() const override;

@@ -21,8 +21,10 @@
 
 #include "logic/constructionsite.h"
 #include "logic/dismantlesite.h"
+#include "logic/immovable.h"
 #include "logic/militarysite.h"
 #include "logic/productionsite.h"
+#include "logic/ship.h"
 #include "logic/trainingsite.h"
 #include "logic/warehouse.h"
 #include "logic/ware_descr.h"
@@ -58,6 +60,14 @@ void Tribes::add_trainingsite_type(const LuaTable& t) {
 
 void Tribes::add_warehouse_type(const LuaTable& t) {
 	buildings_->add(new WarehouseDescr(t));
+}
+
+void Tribes::add_immovable_type(const LuaTable& t) {
+	immovables_->add(new ImmovableDescr(t, egbase.world(), MapObjectDescr::OwnerType::kTribe));
+}
+
+void Tribes::add_ship_type(const LuaTable& t) {
+	ships_->add(new ShipDescr(t));
 }
 
 

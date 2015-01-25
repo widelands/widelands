@@ -52,10 +52,17 @@ namespace Widelands {
 
 BobDescr::BobDescr(MapObjectType object_type, const std::string& init_name,
                   const std::string& init_descname,
-                  TribeDescr const* tribe)
+						MapObjectDescr::OwnerType owner_type)
 	:
 	MapObjectDescr(object_type, init_name, init_descname),
-	owner_tribe_    (tribe)
+	owner_type_   (owner_type)
+{
+}
+
+BobDescr::BobDescr(const MapObjectType type, const LuaTable& table)
+	:
+	MapObjectDescr(type,  table.get_string("name"), table.get_string("descname")),
+	owner_type_   (owner_type)
 {
 }
 
@@ -69,10 +76,13 @@ BobDescr::BobDescr(MapObjectType object_type, const std::string& init_name,
  */
 uint32_t BobDescr::vision_range() const
 {
-	if (owner_tribe_) {
-		if (upcast(const ShipDescr, ship, this))
+	if (owner_type == MapObjectDescr::OwnerType::kTribe) {
+		if (upcast(const ShipDescr, ship, this)) {
 			return ship->vision_range();
-		return owner_tribe_->get_bob_vision_range();
+		}
+		 // NOCOM(GunChleoc): How do we handle this? Currently, it is set to 2 for all tribes.
+		//return owner_tribe_->get_bob_vision_range();
+		return 2;
 	}
 
 	return 0;

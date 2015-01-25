@@ -968,7 +968,7 @@ int LuaMap::place_immovable(lua_State * const L) {
 				report_error(L, "Unknown immovable <%s> for tribe <%s>", objname, from_where.c_str());
 			}
 
-			m = &egbase.create_immovable(c->coords(), imm_idx, &tribe);
+			m = &egbase.create_immovable(c->coords(), imm_idx, MapObjectDescr::OwnerType::kTribe);
 		} catch (GameDataError &) {
 			report_error(L, "Problem loading tribe <%s>. Maybe not existent?", from_where.c_str());
 		}
@@ -977,7 +977,7 @@ int LuaMap::place_immovable(lua_State * const L) {
 		if (imm_idx < 0)
 			report_error(L, "Unknown immovable <%s>", objname);
 
-		m = &egbase.create_immovable(c->coords(), imm_idx, nullptr);
+		m = &egbase.create_immovable(c->coords(), imm_idx, MapObjectDescr::OwnerType::kWorld);
 	}
 
 	return LuaMaps::upcasted_map_object_to_lua(L, m);

@@ -34,21 +34,6 @@
 
 namespace Widelands {
 
-namespace {
-
-// NOCOM(GunChleoc): Copied over from critter.cc, can we unify this?
-
-// Sets the dir animations in 'anims' with the animations
-// '<prefix>_(ne|e|se|sw|w|nw)' which must be defined in 'mo'.
-void assign_diranimation(DirAnimations* anims, MapObjectDescr& mo, const std::string& prefix) {
-	static char const* const dirstrings[6] = {"ne", "e", "se", "sw", "w", "nw"};
-	for (int32_t dir = 1; dir <= 6; ++dir) {
-		anims->set_animation(dir, mo.get_animation(prefix + std::string("_") + dirstrings[dir - 1]));
-	}
-}
-
-}  // namespace
-
 WorkerDescr::WorkerDescr
 	(const MapObjectType object_type, char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
@@ -142,7 +127,7 @@ WorkerDescr::WorkerDescr
 }
 
 WorkerDescr::WorkerDescr(const LuaTable& table) :
-	MapObjectDescr(MapObjectType::WORKER, table.get_string("name"), table.get_string("descname")),
+	BobDescr(MapObjectType::WORKER, table),
 	icon_fname_        (directory + "/menu.png"),
 	icon_              (nullptr),
 	ware_hotspot_      (Point(0, 15)),
@@ -198,8 +183,8 @@ WorkerDescr::WorkerDescr(const LuaTable& table) :
 	}
 
 	// Read the walking animations
-	assign_diranimation(&walk_anims_, *this, "walk");
-	assign_diranimation(&walkload_anims_, *this, "walkload");
+	add_directional_animation(&walk_anims_, "walk");
+	add_directional_animation(&walkload_anims_, "walkload");
 
 	// Read the becomes and experience
 	if(table.has_key("becomes")) {
@@ -259,6 +244,7 @@ WorkerDescr::~WorkerDescr()
 	}
 }
 
+// NOCOM(GunChleoc): WorkerDescr, won't know their tribe, only the workers.
 const TribeDescr& WorkerDescr::tribe() const {
 	const TribeDescr* owner_tribe = get_owner_tribe();
 	assert(owner_tribe != nullptr);

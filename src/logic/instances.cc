@@ -256,6 +256,13 @@ void MapObjectDescr::add_animation
 	m_anims.insert(std::pair<std::string, uint32_t>(animname, anim));
 }
 
+void MapObjectDescr::add_directional_animation(DirAnimations* anims, const std::string& prefix) {
+	static char const* const dirstrings[6] = {"ne", "e", "se", "sw", "w", "nw"};
+	for (int32_t dir = 1; dir <= 6; ++dir) {
+		anims->set_animation(dir, get_animation(prefix + std::string("_") + dirstrings[dir - 1]));
+	}
+}
+
 std::string MapObjectDescr::get_animation_name(uint32_t const anim) const {
 
 	for (const std::pair<std::string, uint32_t>& temp_anim : m_anims) {

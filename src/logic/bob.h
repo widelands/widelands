@@ -58,13 +58,16 @@ public:
 	BobDescr(MapObjectType type,
 	         const std::string& init_name,
 	         const std::string& init_descname,
-	         TribeDescr const* tribe);
+				MapObjectDescr::OwnerType owner_type);
+
+	BobDescr(const MapObjectType type, const LuaTable& t);
+
 	~BobDescr() override {}
 
 	Bob& create(EditorGameBase&, Player* owner, const Coords&) const;
 
-	TribeDescr const* get_owner_tribe() const {
-		return owner_tribe_;
+	MapObjectDescr::OwnerType get_owner_type() const {
+		return owner_type_;
 	}
 
 	virtual uint32_t movecaps() const {
@@ -76,7 +79,7 @@ protected:
 	virtual Bob& create_object() const = 0;
 
 private:
-	const TribeDescr* const owner_tribe_;  //  nullptr if world bob
+	const MapObjectDescr::OwnerType owner_type_;
 	DISALLOW_COPY_AND_ASSIGN(BobDescr);
 };
 

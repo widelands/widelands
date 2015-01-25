@@ -146,6 +146,8 @@ public:
 	int new_productionsite_type(lua_State* L);
 	int new_trainingsite_type(lua_State* L);
 	int new_warehouse_type(lua_State* L);
+	int new_immovable_type(lua_State* L);
+	int new_ship_type(lua_State* L);
 	int new_ware_type(lua_State* L);
 	int new_worker_type(lua_State* L);
 

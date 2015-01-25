@@ -61,15 +61,6 @@ std::vector<std::string> section_to_strings(Section* section) {
 	return return_value;
 }
 
-// Sets the dir animations in 'anims' with the animations
-// '<prefix>_(ne|e|se|sw|w|nw)' which must be defined in 'mo'.
-void assign_diranimation(DirAnimations* anims, MapObjectDescr& mo, const std::string& prefix) {
-	static char const* const dirstrings[6] = {"ne", "e", "se", "sw", "w", "nw"};
-	for (int32_t dir = 1; dir <= 6; ++dir) {
-		anims->set_animation(dir, mo.get_animation(prefix + std::string("_") + dirstrings[dir - 1]));
-	}
-}
-
 }  // namespace
 
 void CritterProgram::parse(const std::vector<std::string>& lines) {
@@ -189,7 +180,7 @@ CritterDescr::CritterDescr(const LuaTable& table)
 		for (const std::string& animation : anims->keys<std::string>()) {
 			add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
 		}
-		assign_diranimation(&m_walk_anims, *this, "walk");
+		add_directional_animation(&m_walk_anims, "walk");
 	}
 
 	add_attributes(
@@ -446,7 +437,7 @@ void Critter::save
 	fw.unsigned_8(CRITTER_SAVEGAME_VERSION);
 
 	std::string owner =
-		descr().get_owner_tribe() ? descr().get_owner_tribe()->name() : "world";
+		descr().get_owner_type() == MapObjectDescr::OwnerType::kTribe ? "tribe" : "world";
 	fw.c_string(owner);
 	fw.c_string(descr().name());
 

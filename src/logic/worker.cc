@@ -847,7 +847,10 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 	state.ivar2 = std::get<1>(*std::next(best_suited_immovables_index.begin(), idx));
 
 	Immovable& newimm =
-	   game.create_immovable(pos, state.ivar2, state.svar1 == "tribe" ? &descr().tribe() : nullptr);
+		game.create_immovable(pos, state.ivar2,
+									 state.svar1 == "tribe" ?
+										 MapObjectDescr::OwnerType::kTribe :
+										 MapObjectDescr::OwnerType::kWorld);
 	newimm.set_owner(get_owner());
 
 	if (action.iparam1 == Action::plantUnlessObject)
@@ -866,7 +869,10 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 bool Worker::run_create_bob(Game & game, State & state, const Action &)
 {
 	game.create_bob
-		(get_position(), state.ivar2, state.svar1 == "world" ? nullptr : &descr().tribe());
+		(get_position(), state.ivar2,
+		 state.svar1 == "world" ?
+			 MapObjectDescr::OwnerType::kWorld :
+			 MapObjectDescr::OwnerType::kTribe);
 	++state.ivar1;
 	schedule_act(game, 10);
 	return true;
@@ -960,7 +966,7 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 			 	(rdescr,
 			 	 rdescr->detectable() ?
 			 	 position.field->get_resources_amount() : 0),
-			 &t);
+			 MapObjectDescr::OwnerType::kTribe);
 	}
 
 	++state.ivar1;

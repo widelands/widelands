@@ -138,14 +138,22 @@ public:
 							 PlayerNumber,
 	                   bool loading = false,
 	                   Building::FormerBuildings former_buildings = Building::FormerBuildings());
+	// NOCOM(GunChleoc): Bobs and Immovables need to lose the TribeDescr
 	Bob& create_bob(Coords, const BobDescr&, Player* owner = nullptr);
-	Bob& create_bob(Coords, int, TribeDescr const* const = nullptr, Player* owner = nullptr);
+	Bob& create_bob(Coords,
+						 int,
+						 MapObjectDescr::OwnerType type = MapObjectDescr::OwnerType::kWorld,
+						 Player* owner = nullptr);
 	Bob& create_bob(Coords,
 	                const std::string& name,
-						 TribeDescr const* const = nullptr,
+						 MapObjectDescr::OwnerType type = MapObjectDescr::OwnerType::kWorld,
 	                Player* owner = nullptr);
-	Immovable& create_immovable(Coords, uint32_t idx, TribeDescr const*);
-	Immovable& create_immovable(Coords, const std::string& name, TribeDescr const*);
+	Immovable& create_immovable(Coords,
+										 uint32_t idx,
+										 MapObjectDescr::OwnerType = MapObjectDescr::OwnerType::kWorld);
+	Immovable& create_immovable(Coords,
+										 const std::string& name,
+										 MapObjectDescr::OwnerType = MapObjectDescr::OwnerType::kWorld);
 
 	int32_t get_gametime() const {
 		return gametime_;

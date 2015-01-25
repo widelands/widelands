@@ -543,7 +543,7 @@ int LuaPlayerBase::place_bob(lua_State * L) {
 
 	EditorGameBase & egbase = get_egbase(L);
 	Player& player = get(L, egbase);
-	Bob& bob = egbase.create_bob(c->coords(), name, &player.tribe(), &player);
+	Bob& bob = egbase.create_bob(c->coords(), name, MapObjectDescr::OwnerType::kTribe, &player);
 
 	LuaMaps::upcasted_map_object_to_lua(L, &bob);
 

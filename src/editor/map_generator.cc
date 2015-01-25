@@ -104,8 +104,8 @@ void MapGenerator::generate_bobs
 		egbase_.create_immovable
 			(fc,
 			 bobCategory->get_immovable
-			 	(static_cast<size_t>(rng.rand() / (kMaxElevation / num))),
-			 nullptr);
+				(static_cast<size_t>(rng.rand() / (kMaxElevation / num))),
+			 MapObjectDescr::OwnerType::kWorld);
 
 	if (set_moveable && (num = bobCategory->num_critters()))
 		egbase_.create_bob
@@ -114,7 +114,7 @@ void MapGenerator::generate_bobs
 			 	(bobCategory->get_critter
 			 	 	(static_cast<size_t>(rng.rand() / (kMaxElevation / num)))
 			 	 .c_str()),
-			 nullptr);
+			 MapObjectDescr::OwnerType::kWorld);
 }
 
 void MapGenerator::generate_resources(uint32_t const* const random1,

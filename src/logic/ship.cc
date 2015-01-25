@@ -70,6 +70,27 @@ ShipDescr::ShipDescr
 	m_vision_range = global_s.get_natural("vision_range", 7);
 }
 
+ShipDescr::ShipDescr(const LuaTable& table)
+	:
+	BobDescr(MapObjectType::SHIP, table)
+{
+	LuaTable items_table = table.get_table("animations");
+	for (const std::string& key : items_table.keys()) {
+		const LuaTable anims_table = table.get_table(key);
+		for (const std::string& anim_key : anims_table.keys()) {
+			// NOCOM(GunChleoc): And the hotspot + fps?
+			add_animation(anim_key, g_gr->animations().load(anims_table.get_string("pictures")));
+		}
+	}
+
+	// Read the sailing animations
+	add_directional_animation(&m_sail_anims, "sail");
+
+	m_capacity = table.has_key("capacity") ? table.get_int("capacity") : 20;
+	m_vision_range = table.has_key("vision_range") ? table.get_int("vision_range") : 7;
+}
+
+
 uint32_t ShipDescr::movecaps() const {
 	return MOVECAPS_SWIM;
 }
@@ -1076,7 +1097,7 @@ void Ship::save
 	fw.unsigned_8(HeaderShip);
 	fw.unsigned_8(SHIP_SAVEGAME_VERSION);
 
-	fw.c_string(descr().get_owner_tribe()->name());
+	fw.unsigned_8(descr().get_owner_type()); // NOCOM(GunChleoc): Handle loading
 	fw.c_string(descr().name());
 
 	Bob::save(egbase, mos, fw);

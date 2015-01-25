@@ -386,12 +386,12 @@ Bob & EditorGameBase::create_bob(Coords c, const BobDescr & descr, Player * owne
 
 Bob & EditorGameBase::create_bob
 	(Coords const c,
-	 int const idx, TribeDescr const * const tribe, Player * owner)
+	 int const idx, MapObjectDescr::OwnerType type, Player * owner)
 {
 	const BobDescr & descr =
 		*
-		(tribe ?
-		 tribe->get_bob_descr(idx)
+		(type == MapObjectDescr::OwnerType::kTribe ?
+		 tribes().get_bob_descr(idx)
 		 :
 		 world().get_bob_descr(idx));
 
@@ -399,18 +399,18 @@ Bob & EditorGameBase::create_bob
 }
 
 Bob & EditorGameBase::create_bob
-	(Coords c, const std::string & name, const Widelands::TribeDescr * const tribe,
+	(Coords c, const std::string & name, MapObjectDescr::OwnerType type,
 	 Player * owner)
 {
 	const BobDescr * descr =
-		tribe ?
-		tribe->get_bob_descr(name) :
+		type == MapObjectDescr::OwnerType::kTribe ?
+		tribes().get_bob_descr(name) :
 		world().get_bob_descr(name);
 
 	if (!descr)
 		throw wexception
 			("create_bob(%i,%i,%s,%s): bob not found",
-			 c.x, c.y, name.c_str(), tribe ? tribe->name().c_str() : "world");
+			 c.x, c.y, name.c_str(), type == MapObjectDescr::OwnerType::kTribe ? "tribes" : "world");
 
 	return create_bob(c, *descr, owner);
 }
@@ -425,12 +425,12 @@ Does not perform any placability checks.
 ===============
 */
 Immovable & EditorGameBase::create_immovable
-	(Coords const c, uint32_t const idx, TribeDescr const * const tribe)
+	(Coords const c, uint32_t const idx, MapObjectDescr::OwnerType type)
 {
 	const ImmovableDescr & descr =
 		*
-		(tribe ?
-		 tribe->get_immovable_descr(idx)
+		(type == MapObjectDescr::OwnerType::kTribe ?
+		 tribes().get_immovable_descr(idx)
 		 :
 		 world().get_immovable_descr(idx));
 	assert(&descr);
@@ -440,20 +440,20 @@ Immovable & EditorGameBase::create_immovable
 }
 
 Immovable & EditorGameBase::create_immovable
-	(Coords const c, const std::string & name, TribeDescr const * const tribe)
+	(Coords const c, const std::string & name, MapObjectDescr::OwnerType type)
 {
 	const int32_t idx =
-		tribe ?
-		tribe->get_immovable_index(name.c_str())
+		type == MapObjectDescr::OwnerType::kTribe ?
+		tribes().get_immovable_index(name.c_str())
 		:
 		world().get_immovable_index(name.c_str());
 	if (idx < 0)
 		throw wexception
 			("EditorGameBase::create_immovable(%i, %i): %s is not defined for "
 			 "%s",
-			 c.x, c.y, name.c_str(), tribe ? tribe->name().c_str() : "world");
+			 c.x, c.y, name.c_str(), type == MapObjectDescr::OwnerType::kTribe ? "tribes" : "world");
 
-	return create_immovable(c, idx, tribe);
+	return create_immovable(c, idx, type);
 }
 
 /*

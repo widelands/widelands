@@ -333,7 +333,7 @@ void write_tribe(StreamWrite* wr, TribeDescr const* tribe) {
 
 // Encode a Immovable_Type into 'wr'.
 void write_immovable_type(StreamWrite* wr, const ImmovableDescr& immovable) {
-	write_tribe(wr, immovable.get_owner_tribe());
+	wr->unsigned_8(immovable.owner_type());
 	wr->string(immovable.name());
 }
 
