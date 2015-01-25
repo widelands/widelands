@@ -150,6 +150,7 @@ public:
 	int new_ship_type(lua_State* L);
 	int new_ware_type(lua_State* L);
 	int new_worker_type(lua_State* L);
+	int new_tribe(lua_State* L);
 
 	/*
 	 * C methods

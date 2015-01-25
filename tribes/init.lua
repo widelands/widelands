@@ -428,3 +428,13 @@ include "tribes/buildings/warehouses/empire/warehouse/init.lua"
 
 include "tribes/buildings/partially_finished/constructionsite/init.lua"
 include "tribes/buildings/partially_finished/dismantlesite/init.lua"
+
+
+
+-- ===================================
+--    Tribes
+-- ===================================
+
+include "tribes/atlanteans.lua"
+include "tribes/barbarians.lua"
+include "tribes/empire.lua"

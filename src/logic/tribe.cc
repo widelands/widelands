@@ -55,8 +55,163 @@
 
 
 using namespace std;
+/*
+ uiposition = 100,
+ icon = "images/atlanteans/icon.png",
+
+ soldiers = {
+	 "atlanteans_soldier"
+ },
+
+ */
+
 
 namespace Widelands {
+
+TribeDescr::TribeDescr
+	(const LuaTable& table, EditorGameBase & egbase)
+	: m_name(table.get_string("name"))
+{
+	try {
+		// NOCOM(GunChleoc): Will PARSE_MAP_OBJECT_TYPES_BEGIN / PARSE_MAP_OBJECT_TYPES_END be obsolete?
+
+		// Grab the localization textdomain.
+		i18n::Textdomain td(std::string("tribes"));
+
+		// NOCOM(GunChleoc) Use these? table.get_string("author");
+		//table.get_string("descname"); // descriptive name
+		//table.get_string("helptext"); // long description
+		m_bob_vision_range = table.get_int("bob_vision_range"); // NOCOM(GunChleoc): Usage?
+
+
+		m_frontier_animation_id =
+			g_gr->animations().load(path, root_conf.get_safe_section("frontier"));
+		m_flag_animation_id =
+			g_gr->animations().load(path, root_conf.get_safe_section("flag"));
+
+		LuaTable items_table = table.get_table("animations");
+		LuaTable anims_table = items_table.get_table("frontier");
+		m_frontier_animation_id = g_gr->animations().load(anims_table.get_string("pictures"));
+		anims_table = items_table.get_table("flag");
+		m_flag_animation_id = g_gr->animations().load(anims_table.get_string("pictures"));
+		// NOCOM(GunChleoc): And the hotspot + fps?
+
+		// NOCOM(GunChleoc): TODO: safeguard against double entries
+
+		items_table = table.get_table("ships");
+		for (const std::string& key : items_table.keys()) {
+			m_bobs->add(egbase.tribes().get_ship_descr(items_table.get_string(key)));
+		}
+
+		items_table = table.get_table("wares_order");
+		for (const LuaTable column_table : items_table.keys()) {
+			vector<WareIndex> column;
+			for (const std::string& key : column_table.keys()) {
+				const std::string warename = column_table.get_string(key);
+				WareIndex id = egbase.tribes().safe_ware_index(warename);
+				column.push_back(id);
+				m_wares->add(egbase.tribes().get_ware_descr(warename));
+				m_wares_order_coords.resize(m_wares->size());
+				m_wares_order_coords[id] =
+						std::pair<uint32_t, uint32_t>(m_wares_order.size(), column.size() - 1);
+			}
+			if (!column.empty()) m_wares_order.push_back(column);
+		}
+
+		items_table = table.get_table("immovables");
+		for (const std::string& key : items_table.keys()) {
+			m_immovables->add(egbase.tribes().get_immovable_descr(items_table.get_string(key)));
+		}
+
+		items_table = table.get_table("workers_order");
+		for (const LuaTable column_table : items_table.keys()) {
+			vector<WareIndex> column;
+			for (const std::string& key : column_table.keys()) {
+				const std::string workername = column_table.get_string(key);
+				WareIndex id = egbase.tribes().safe_worker_index(workername);
+				column.push_back(id);
+				m_workers->add(egbase.tribes().get_worker_descr(workername));
+				m_workers_order_coords.resize(m_workers->size());
+				m_workers_order_coords[id] =
+						std::pair<uint32_t, uint32_t>(m_workers_order.size(), column.size() - 1);
+			}
+			if (!column.empty()) m_workers_order.push_back(column);
+			//PARSE_SPECIAL_WORKER_TYPES("carrier", CarrierDescr);
+			//PARSE_SPECIAL_WORKER_TYPES("soldier", SoldierDescr);
+		}
+
+		items_table = table.get_table("constructionsites");
+		for (const std::string& key : items_table.keys()) {
+			const std::string& buildingname = items_table.get_string(key);
+			egbase.tribes().safe_building_index(buildingname); // Check that it is defined.
+			m_buildings->add(egbase.tribes().get_building_descr(buildingname));
+		}
+
+		items_table = table.get_table("dismantlesites");
+		for (const std::string& key : items_table.keys()) {
+			const std::string& buildingname = items_table.get_string(key);
+			egbase.tribes().safe_building_index(buildingname); // Check that it is defined.
+			m_buildings->add(egbase.tribes().get_building_descr(buildingname));
+		}
+
+		items_table = table.get_table("militarysites");
+		for (const std::string& key : items_table.keys()) {
+			const std::string& buildingname = items_table.get_string(key);
+			egbase.tribes().safe_building_index(buildingname); // Check that it is defined.
+			m_buildings->add(egbase.tribes().get_building_descr(buildingname));
+		}
+
+		items_table = table.get_table("trainingsites");
+		for (const std::string& key : items_table.keys()) {
+			const std::string& buildingname = items_table.get_string(key);
+			egbase.tribes().safe_building_index(buildingname); // Check that it is defined.
+			m_buildings->add(egbase.tribes().get_building_descr(buildingname));
+		}
+
+		items_table = table.get_table("productionsites");
+		for (const std::string& key : items_table.keys()) {
+			const std::string& buildingname = items_table.get_string(key);
+			egbase.tribes().safe_building_index(buildingname); // Check that it is defined.
+			m_buildings->add(egbase.tribes().get_building_descr(buildingname));
+		}
+
+		items_table = table.get_table("warehouses");
+		for (const std::string& key : items_table.keys()) {
+			const std::string& buildingname = items_table.get_string(key);
+			egbase.tribes().safe_building_index(buildingname); // Check that it is defined.
+			m_buildings->add(egbase.tribes().get_building_descr(buildingname));
+		}
+
+		items_table = table.get_table("carriers");
+		m_carrier = items_table.get_string("carrier");
+		m_carrier2 = items_table.get_string("carrier2");
+
+
+
+		try {
+			const std::string path = "tribes/scripting/starting_conditions/";
+
+
+			// Read initializations -- all scripts are initializations currently
+			for (const std::string& script :
+				  filter(g_fs->list_directory(path + tribename),
+							[](const string& fn) {return boost::ends_with(fn, ".lua");})) {
+				std::unique_ptr<LuaTable> t = egbase.lua().run_script(script);
+				t->do_not_warn_about_unaccessed_keys();
+
+				m_initializations.resize(m_initializations.size() + 1);
+				Initialization& init = m_initializations.back();
+				init.script = script;
+				init.descname = t->get_string("name");
+			}
+		} catch (const std::exception & e) {
+			throw GameDataError("tribe scripting: %s", e.what());
+		}
+	} catch (const WException & e) {
+		throw GameDataError("tribe %s: %s", m_name.c_str(), e.what());
+	}
+}
+
 
 TribeDescr::TribeDescr
 	(const std::string & tribename, EditorGameBase & egbase)
@@ -261,7 +416,6 @@ TribeDescr::TribeDescr
 		throw GameDataError("tribe %s: %s", tribename.c_str(), e.what());
 	}
 }
-
 
 /*
 ===============

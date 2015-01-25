@@ -31,6 +31,7 @@
 #include "logic/productionsite.h"
 #include "logic/ship.h"
 #include "logic/trainingsite.h"
+#include "logic/tribe.h"
 #include "logic/warehouse.h"
 #include "logic/ware_descr.h"
 #include "logic/worker_descr.h"
@@ -79,6 +80,9 @@ public:
 	/// Adds this worker type to the tribe description.
 	void add_worker_type(const LuaTable& table);
 
+	/// Adds a specific tribe's configuration.
+	void add_tribe(const LuaTable& table);
+
 	// NOCOM(#GunChleoc): Do we want all wares for all tribes here?
 	WareIndex get_nrwares() const;
 	WareIndex get_nrworkers() const;
@@ -109,6 +113,7 @@ private:
 	std::unique_ptr<DescriptionMaintainer<ShipDescr>> ships_;
 	std::unique_ptr<DescriptionMaintainer<WareDescr>> wares_;
 	std::unique_ptr<DescriptionMaintainer<WorkerDescr>> workers_;
+	std::unique_ptr<DescriptionMaintainer<WorkerDescr>> tribes_;
 
 	std::vector<WareIndex> worker_types_without_cost_;
 

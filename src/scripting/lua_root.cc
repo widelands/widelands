@@ -485,13 +485,17 @@ Tribes
 
 const char LuaTribes::className[] = "Tribes";
 const MethodType<LuaTribes> LuaTribes::Methods[] = {
-	METHOD(LuaTribes, new_dismantlesite_type),
 	METHOD(LuaTribes, new_constructionsite_type),
+	METHOD(LuaTribes, new_dismantlesite_type),
 	METHOD(LuaTribes, new_militarysite_type),
 	METHOD(LuaTribes, new_productionsite_type),
 	METHOD(LuaTribes, new_trainingsite_type),
+	METHOD(LuaTribes, new_warehouse_type),
+	METHOD(LuaTribes, new_immovable_type),
+	METHOD(LuaTribes, new_ship_type),
 	METHOD(LuaTribes, new_ware_type),
 	METHOD(LuaTribes, new_worker_type),
+	METHOD(LuaTribes, new_tribe),
 	{0, 0},
 };
 const PropertyType<LuaTribes> LuaTribes::Properties[] = {
@@ -738,6 +742,29 @@ int LuaTribes::new_worker_type(lua_State* L) {
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
 		get_egbase(L).mutable_tribes()->add_worker_type(table);
+	} catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+
+/* RST
+	.. method:: new_tribe(table)
+
+		Adds a new tribe. Takes a single argument, a table with
+		the descriptions. See the files in tribe/ for usage examples.
+
+		:returns: :const:`nil`
+*/
+int LuaTribes::new_tribe(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		get_egbase(L).mutable_tribes()->add_tribe(table);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}

@@ -76,7 +76,7 @@ ShipDescr::ShipDescr(const LuaTable& table)
 {
 	LuaTable items_table = table.get_table("animations");
 	for (const std::string& key : items_table.keys()) {
-		const LuaTable anims_table = table.get_table(key);
+		const LuaTable anims_table = items_table.get_table(key);
 		for (const std::string& anim_key : anims_table.keys()) {
 			// NOCOM(GunChleoc): And the hotspot + fps?
 			add_animation(anim_key, g_gr->animations().load(anims_table.get_string("pictures")));

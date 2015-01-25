@@ -21,6 +21,7 @@
 #define WL_LOGIC_TRIBE_H
 
 #include <map>
+#include <memory>
 #include <vector>
 
 #include "base/macros.h"
@@ -54,6 +55,7 @@ Two players can choose the same tribe.
 */
 struct TribeDescr {
 	TribeDescr(const std::string & name, EditorGameBase &);
+	TribeDescr(const LuaTable& t, EditorGameBase&);
 
 	//  Static function to check for tribes.
 	static bool exists_tribe
@@ -178,11 +180,12 @@ private:
 	uint32_t m_flag_animation_id;
 	uint32_t m_bob_vision_range;
 
-	DescriptionMaintainer<WorkerDescr> m_workers;
-	DescriptionMaintainer<BuildingDescr> m_buildings;
-	DescriptionMaintainer<WareDescr> m_wares;
-	DescriptionMaintainer<ImmovableDescr> m_immovables;  // The player immovables
-	DescriptionMaintainer<BobDescr> m_bobs;
+	std::unique_ptr<DescriptionMaintainer<WorkerDescr>> m_workers;
+	std::unique_ptr<DescriptionMaintainer<BuildingDescr>> m_buildings;
+	std::unique_ptr<DescriptionMaintainer<WareDescr>> m_wares;
+	std::unique_ptr<DescriptionMaintainer<ImmovableDescr>> m_immovables;  // The player immovables
+	std::unique_ptr<DescriptionMaintainer<BobDescr>> m_bobs;
+	std::string                       m_carrier; // NOCOM(GunChleoc): Use this to define the basic carrier. We need a logic change here.
 	std::string                       m_carrier2;
 	// Order and positioning of wares in the warehouse display
 	WaresOrder                        m_wares_order;

@@ -295,7 +295,7 @@ BuildingDescr::BuildingDescr
 
 	LuaTable items_table = table.get_table("animations");
 	for (const std::string& key : items_table.keys()) {
-		const LuaTable anims_table = table.get_table(key);
+		const LuaTable anims_table = items_table.get_table(key);
 		for (const std::string& anim_key : anims_table.keys()) {
 			// NOCOM(GunChleoc): And the hotspot + fps?
 			if (!is_animation_known(anim_key)) {

@@ -71,6 +71,10 @@ void Tribes::add_worker_type(const LuaTable& t) {
 	}
 }
 
+void Tribes::add_tribe(const LuaTable& t) {
+	tribes_->add(new TribeDescr(t, egbase));
+}
+
 WareIndex Tribes::get_nrwares() const {
 	return wares_.size();
 }
@@ -159,7 +163,6 @@ WareDescr const * Tribes::get_ware_descr(WareIndex ware_index) const {
 WorkerDescr const * Tribes::get_worker_descr(WareIndex worker_index) const {
 	return workers_.get(worker_index);
 }
-
 
 void Tribes::set_ware_type_has_demand_check(WareIndex ware_index, const std::string& tribename) const {
 	wares_.get(ware_index)->set_has_demand_check(tribename);
