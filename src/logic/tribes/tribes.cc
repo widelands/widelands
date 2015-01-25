@@ -19,17 +19,6 @@
 
 #include "logic/tribes/tribes.h"
 
-#include "logic/constructionsite.h"
-#include "logic/dismantlesite.h"
-#include "logic/immovable.h"
-#include "logic/militarysite.h"
-#include "logic/productionsite.h"
-#include "logic/ship.h"
-#include "logic/trainingsite.h"
-#include "logic/warehouse.h"
-#include "logic/ware_descr.h"
-#include "logic/worker_descr.h"
-
 namespace Widelands {
 
 Tribes::Tribes(EditorGameBase& egbase) :
@@ -70,15 +59,17 @@ void Tribes::add_ship_type(const LuaTable& t) {
 	ships_->add(new ShipDescr(t));
 }
 
-
 void Tribes::add_ware_type(const LuaTable& t) {
 	wares_->add(new WareDescr(t));
 }
 
 void Tribes::add_worker_type(const LuaTable& t) {
-	workers_->add(new WorkerDescr(t));
+	auto& worker_descr = new WorkerDescr(t);
+	WareIndex const worker_idx = workers_->add(worker_descr);
+	if (worker_descr.buildcost().empty()) {
+		worker_types_without_cost_.push_back(worker_idx);
+	}
 }
-
 
 WareIndex Tribes::get_nrwares() const {
 	return wares_.size();
@@ -122,6 +113,14 @@ BuildingIndex Tribes::building_index(const std::string& buildingname) const {
 	}
 }
 
+int Tribes::immovable_index(const std::string& immovablename) const {
+	return immovables_.get_index(immovablename);
+}
+
+int Tribes::ship_index(const std::string& shipname) const {
+	return ships_.get_index(shipname);
+}
+
 WareIndex Tribes::ware_index(const std::string& warename) const {
 	int result = -1;
 	for (size_t i = 0; i < wares_.size(); ++i) {
@@ -144,6 +143,15 @@ BuildingDescr const * Tribes::get_building_descr(BuildingIndex building_index) c
 	return buildings_.get(building_index);
 }
 
+ImmovableDescr const * Tribes::get_immovable_descr(const std::string& immovablename) const {
+	return immovables_.get(immovable_index(immovablename));
+}
+
+ShipDescr const * Tribes::get_ship_descr(const std::string& shipname) const {
+	return ships_.get(ship_index(shipname));
+}
+
+
 WareDescr const * Tribes::get_ware_descr(WareIndex ware_index) const {
 	return wares_.get(ware_index);
 }
@@ -159,6 +167,10 @@ void Tribes::set_ware_type_has_demand_check(WareIndex ware_index, const std::str
 
 void Tribes::set_worker_type_has_demand_check(WareIndex worker_index, const std::string& tribename) const {
 	workers_.get(worker_index)->set_has_demand_check(tribename);
+}
+
+const std::vector<WareIndex>& Tribes::worker_types_without_cost() const {
+	return worker_types_without_cost_;
 }
 
 } // namespace Widelands

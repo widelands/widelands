@@ -23,7 +23,17 @@
 #include <memory>
 
 #include "base/macros.h"
+#include "logic/constructionsite.h"
 #include "logic/description_maintainer.h"
+#include "logic/dismantlesite.h"
+#include "logic/immovable.h"
+#include "logic/militarysite.h"
+#include "logic/productionsite.h"
+#include "logic/ship.h"
+#include "logic/trainingsite.h"
+#include "logic/warehouse.h"
+#include "logic/ware_descr.h"
+#include "logic/worker_descr.h"
 #include "scripting/lua_table.h"
 
 constexpr const Widelands::WareIndex kInvalidWare = -1;
@@ -78,23 +88,29 @@ public:
 	WareIndex safe_worker_index(const std::string& workername) const;
 
 	BuildingIndex building_index(const std::string& buildingname) const;
+	int immovable_index(const std::string& immovablename) const;
+	int ship_index(const std::string& shipname) const;
 	WareIndex ware_index(const std::string& warename) const;
 	WareIndex worker_index(const std::string& workername) const;
 
 	BuildingDescr const* get_building_descr(BuildingIndex building_index) const;
+	ImmovableDescr const* get_immovable_descr(const std::string& immovablename) const;
+	ShipDescr const* get_ship_descr(const std::string& shipname) const;
 	WareDescr const* get_ware_descr(WareIndex ware_index) const;
 	WorkerDescr const* get_worker_descr(WareIndex worker_index) const;
 
 	void set_ware_type_has_demand_check(WareIndex ware_index, const std::string& tribename);
 	void set_worker_type_has_demand_check(WareIndex worker_index, const std::string& tribename);
-
+	const std::vector<WareIndex>& worker_types_without_cost() const;
 
 private:
 	std::unique_ptr<DescriptionMaintainer<BuildingDescr>> buildings_;
-	std::unique_ptr<DescriptionMaintainer<BuildingDescr>> immovables_;
-	std::unique_ptr<DescriptionMaintainer<BuildingDescr>> ships_;
+	std::unique_ptr<DescriptionMaintainer<ImmovableDescr>> immovables_;
+	std::unique_ptr<DescriptionMaintainer<ShipDescr>> ships_;
 	std::unique_ptr<DescriptionMaintainer<WareDescr>> wares_;
 	std::unique_ptr<DescriptionMaintainer<WorkerDescr>> workers_;
+
+	std::vector<WareIndex> worker_types_without_cost_;
 
 	DISALLOW_COPY_AND_ASSIGN(Tribes);
 };
