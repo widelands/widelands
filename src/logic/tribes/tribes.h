@@ -23,6 +23,7 @@
 #include <memory>
 
 #include "base/macros.h"
+#include "logic/carrier.h"
 #include "logic/constructionsite.h"
 #include "logic/description_maintainer.h"
 #include "logic/dismantlesite.h"
@@ -30,6 +31,7 @@
 #include "logic/militarysite.h"
 #include "logic/productionsite.h"
 #include "logic/ship.h"
+#include "logic/soldier.h"
 #include "logic/trainingsite.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
@@ -78,6 +80,12 @@ public:
 	void add_ware_type(const LuaTable& table);
 
 	/// Adds this worker type to the tribe description.
+	void add_carrier_type(const LuaTable& table);
+
+	/// Adds this worker type to the tribe description.
+	void add_soldier_type(const LuaTable& table);
+
+	/// Adds this worker type to the tribe description.
 	void add_worker_type(const LuaTable& table);
 
 	/// Adds a specific tribe's configuration.
@@ -113,7 +121,7 @@ private:
 	std::unique_ptr<DescriptionMaintainer<ShipDescr>> ships_;
 	std::unique_ptr<DescriptionMaintainer<WareDescr>> wares_;
 	std::unique_ptr<DescriptionMaintainer<WorkerDescr>> workers_;
-	std::unique_ptr<DescriptionMaintainer<WorkerDescr>> tribes_;
+	std::unique_ptr<DescriptionMaintainer<TribeDescr>> tribes_;
 
 	std::vector<WareIndex> worker_types_without_cost_;
 

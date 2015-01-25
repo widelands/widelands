@@ -142,7 +142,6 @@ wl_library(logic
     militarysite.h
     nodecaps.h
     objective.h
-    parse_map_object_types.h
     partially_finished_building.cc
     partially_finished_building.h
     path.cc

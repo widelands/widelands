@@ -45,6 +45,9 @@ struct SoldierDescr : public WorkerDescr {
 		(char const * const _name, char const * const _descname,
 		 const std::string & directory, Profile &, Section & global_s,
 		 const TribeDescr &);
+
+	SoldierDescr(const LuaTable& t);
+
 	~SoldierDescr() override {}
 
 	void load_graphics() override;
@@ -112,7 +115,7 @@ protected:
 	std::vector<std::string> m_evade_pics_fn;
 	std::vector<std::string> m_defense_pics_fn;
 
-	// animation names
+	// animation names // NOCOM(GunChleoc): Will be obsolete?
 	std::vector<std::string> m_attack_success_w_name;
 	std::vector<std::string> m_attack_failure_w_name;
 	std::vector<std::string> m_evade_success_w_name;

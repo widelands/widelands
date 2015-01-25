@@ -54,7 +54,6 @@ buildings it can build and the associated graphics.
 Two players can choose the same tribe.
 */
 struct TribeDescr {
-	TribeDescr(const std::string & name, EditorGameBase &);
 	TribeDescr(const LuaTable& t, EditorGameBase&);
 
 	//  Static function to check for tribes.
@@ -187,6 +186,7 @@ private:
 	std::unique_ptr<DescriptionMaintainer<BobDescr>> m_bobs;
 	std::string                       m_carrier; // NOCOM(GunChleoc): Use this to define the basic carrier. We need a logic change here.
 	std::string                       m_carrier2;
+	std::string                       m_soldier; // NOCOM(GunChleoc): We can probably remove these from the init.
 	// Order and positioning of wares in the warehouse display
 	WaresOrder                        m_wares_order;
 	WaresOrderCoords                  m_wares_order_coords;

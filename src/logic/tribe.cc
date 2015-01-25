@@ -56,15 +56,9 @@
 
 using namespace std;
 /*
- uiposition = 100,
+ * NOCOM TODO
  icon = "images/atlanteans/icon.png",
-
- soldiers = {
-	 "atlanteans_soldier"
- },
-
  */
-
 
 namespace Widelands {
 
@@ -73,8 +67,6 @@ TribeDescr::TribeDescr
 	: m_name(table.get_string("name"))
 {
 	try {
-		// NOCOM(GunChleoc): Will PARSE_MAP_OBJECT_TYPES_BEGIN / PARSE_MAP_OBJECT_TYPES_END be obsolete?
-
 		// Grab the localization textdomain.
 		i18n::Textdomain td(std::string("tribes"));
 
@@ -136,8 +128,6 @@ TribeDescr::TribeDescr
 						std::pair<uint32_t, uint32_t>(m_workers_order.size(), column.size() - 1);
 			}
 			if (!column.empty()) m_workers_order.push_back(column);
-			//PARSE_SPECIAL_WORKER_TYPES("carrier", CarrierDescr);
-			//PARSE_SPECIAL_WORKER_TYPES("soldier", SoldierDescr);
 		}
 
 		items_table = table.get_table("constructionsites");
@@ -186,11 +176,11 @@ TribeDescr::TribeDescr
 		m_carrier = items_table.get_string("carrier");
 		m_carrier2 = items_table.get_string("carrier2");
 
-
+		items_table = table.get_table("soldiers");
+		m_soldier = items_table.get_string(1);
 
 		try {
 			const std::string path = "tribes/scripting/starting_conditions/";
-
 
 			// Read initializations -- all scripts are initializations currently
 			for (const std::string& script :
@@ -212,210 +202,6 @@ TribeDescr::TribeDescr
 	}
 }
 
-
-TribeDescr::TribeDescr
-	(const std::string & tribename, EditorGameBase & egbase)
-	: m_name(tribename)
-{
-	std::string path = "tribes/";
-	try {
-		path            += tribename;
-
-		// Grab the localization textdomain.
-		// 'path' must be without final /
-		i18n::Textdomain textdomain(std::string("tribe_") + tribename);
-
-		path            += '/';
-		std::string::size_type base_path_size = path.size();
-
-		path += "conf";
-		Profile root_conf(path.c_str());
-		path.resize(base_path_size);
-
-		{
-			std::set<std::string> names; //  To enforce name uniqueness.
-
-			PARSE_MAP_OBJECT_TYPES_BEGIN("ship")
-				m_bobs.add
-					(new ShipDescr
-					 	(_name, _descname, path, prof, global_s, *this));
-			PARSE_MAP_OBJECT_TYPES_END;
-
-			PARSE_MAP_OBJECT_TYPES_BEGIN("ware")
-				m_wares.add
-					(new WareDescr
-					 	(*this, _name, _descname, path, prof, global_s));
-			PARSE_MAP_OBJECT_TYPES_END;
-
-			const World& world = egbase.world();
-
-			PARSE_MAP_OBJECT_TYPES_BEGIN("immovable")
-				m_immovables.add
-					(new ImmovableDescr
-					 	(_name, _descname, path, prof, global_s, this));
-			PARSE_MAP_OBJECT_TYPES_END;
-
-#define PARSE_SPECIAL_WORKER_TYPES(name, descr_type)                                               \
-	PARSE_MAP_OBJECT_TYPES_BEGIN(name)                                                              \
-	auto& worker_descr = *new descr_type(_name, _descname, path, prof, global_s, *this);      \
-	WareIndex const worker_idx = m_workers.add(&worker_descr);                                     \
-	if (worker_descr.is_buildable() && worker_descr.buildcost().empty())                            \
-		m_worker_types_without_cost.push_back(worker_idx);                                           \
-	PARSE_MAP_OBJECT_TYPES_END;
-
-			PARSE_SPECIAL_WORKER_TYPES("carrier", CarrierDescr);
-			PARSE_SPECIAL_WORKER_TYPES("soldier", SoldierDescr);
-
-#define PARSE_WORKER_TYPES(name)                                                                   \
-	PARSE_MAP_OBJECT_TYPES_BEGIN(name)                                                              \
-	auto& worker_descr =                                                                      \
-		*new WorkerDescr(MapObjectType::WORKER, _name, _descname, path, prof, global_s, *this);   \
-	WareIndex const worker_idx = m_workers.add(&worker_descr);                                     \
-	if (worker_descr.is_buildable() && worker_descr.buildcost().empty())                            \
-		m_worker_types_without_cost.push_back(worker_idx);                                           \
-	PARSE_MAP_OBJECT_TYPES_END;
-
-			PARSE_WORKER_TYPES("worker");
-
-			PARSE_MAP_OBJECT_TYPES_BEGIN("constructionsite")
-				m_buildings.add
-					(new ConstructionSiteDescr
-					 	(_name, _descname, path, prof, global_s, *this));
-			PARSE_MAP_OBJECT_TYPES_END;
-			safe_building_index("constructionsite"); // Check that it is defined.
-
-			PARSE_MAP_OBJECT_TYPES_BEGIN("dismantlesite")
-				m_buildings.add
-					(new DismantleSiteDescr
-					 	(_name, _descname, path, prof, global_s, *this));
-			PARSE_MAP_OBJECT_TYPES_END;
-			safe_building_index("dismantlesite"); // Check that it is defined.
-
-			PARSE_MAP_OBJECT_TYPES_BEGIN("warehouse")
-				m_buildings.add
-					(new WarehouseDescr
-					 	(_name, _descname, path, prof, global_s, *this));
-			PARSE_MAP_OBJECT_TYPES_END;
-
-			PARSE_MAP_OBJECT_TYPES_BEGIN("productionsite")
-				m_buildings.add(new ProductionSiteDescr(
-					MapObjectType::PRODUCTIONSITE, _name, _descname, path, prof, global_s, *this, world));
-			PARSE_MAP_OBJECT_TYPES_END;
-
-			PARSE_MAP_OBJECT_TYPES_BEGIN("militarysite")
-				m_buildings.add
-					(new MilitarySiteDescr
-					 	(_name, _descname, path, prof, global_s, *this, world));
-			PARSE_MAP_OBJECT_TYPES_END;
-
-
-			// global militarysites are in /global not in /tribes
-			std::string temp                = path;
-			std::string::size_type sizetemp = base_path_size;
-			path           = "global/militarysites/";
-			base_path_size = path.size();
-
-			PARSE_MAP_OBJECT_TYPES_BEGIN("global militarysite")
-				m_buildings.add
-					(new MilitarySiteDescr
-					 	(_name, _descname, path, prof, global_s, *this, world));
-			PARSE_MAP_OBJECT_TYPES_END;
-
-			// Reset path and base_path_size
-			path           = temp;
-			base_path_size = sizetemp;
-
-
-			PARSE_MAP_OBJECT_TYPES_BEGIN("trainingsite")
-				m_buildings.add
-					(new TrainingSiteDescr
-					 	(_name, _descname, path, prof, global_s, *this, world));
-			PARSE_MAP_OBJECT_TYPES_END;
-
-		}
-
-		try {
-			{
-				Section & tribe_s = root_conf.get_safe_section("tribe");
-				tribe_s.get_string("author");
-				tribe_s.get_string("name"); // descriptive name
-				tribe_s.get_string("descr"); // long description
-				m_bob_vision_range = tribe_s.get_int("bob_vision_range");
-				m_carrier2         = tribe_s.get_string("carrier2");
-
-				/// Load and parse ware and worker categorization
-#define PARSE_ORDER_INFORMATION(w) /* w is ware or worker */ \
-	{ \
-		m_##w##s_order_coords.resize(m_##w##s.get_nitems()); \
-\
-		std::string categories_s \
-			(tribe_s.get_safe_string(#w "s_order")); \
-		for (boost::split_iterator<string::iterator> It1 = \
-			boost::make_split_iterator \
-				(categories_s, boost::token_finder(boost::is_any_of(";"))); \
-			It1 != boost::split_iterator<string::iterator>(); \
-			++It1) { \
-			vector<WareIndex> column; \
-			std::string column_s = boost::copy_range<std::string>(*It1); \
-			for (boost::split_iterator<string::iterator> It2 = \
-				boost::make_split_iterator \
-					(column_s, boost::token_finder(boost::is_any_of(","))); \
-				It2 != boost::split_iterator<string::iterator>(); \
-				++It2) { \
-				std::string instance_name = boost::copy_range<std::string>(*It2); \
-				boost::trim(instance_name); \
-				WareIndex id = safe_##w##_index(instance_name); \
-				column.push_back(id); \
-				/* it has been added to the column, but the column not */ \
-				/* yet to the array */ \
-				m_ ## w ## s_order_coords[id] = std::pair<uint32_t, uint32_t> \
-					(m_ ## w ## s_order.size(), column.size() - 1); \
-			} \
-			if (!column.empty()) m_##w##s_order.push_back(column); \
-		} \
-\
-		/* Check that every ##w## has been added */ \
-		for \
-			(WareIndex id = 0; \
-			 id < m_##w##s.get_nitems(); ++id) { \
-			if (id != m_ ## w ## s_order[m_ ## w ## s_order_coords[id].first] \
-					[m_##w##s_order_coords[id].second]) { \
-				log("Didn't find " #w " %s in " #w "s_order field of tribe %s!\n", \
-					  get_##w##_descr(id)->name().c_str(), name().c_str()); \
-			} \
-		} \
-	}
-
-				PARSE_ORDER_INFORMATION(ware);
-				PARSE_ORDER_INFORMATION(worker);
-			}
-
-			m_frontier_animation_id =
-			   g_gr->animations().load(path, root_conf.get_safe_section("frontier"));
-			m_flag_animation_id =
-			   g_gr->animations().load(path, root_conf.get_safe_section("flag"));
-
-			{
-				// Read initializations -- all scripts are initializations currently
-				for (const std::string& script :
-					  filter(g_fs->list_directory(path + "scripting"),
-				            [](const string& fn) {return boost::ends_with(fn, ".lua");})) {
-					std::unique_ptr<LuaTable> t = egbase.lua().run_script(script);
-					t->do_not_warn_about_unaccessed_keys();
-
-					m_initializations.resize(m_initializations.size() + 1);
-					Initialization& init = m_initializations.back();
-					init.script = script;
-					init.descname = t->get_string("name");
-				}
-			}
-		} catch (const std::exception & e) {
-			throw GameDataError("root conf: %s", e.what());
-		}
-	} catch (const WException & e) {
-		throw GameDataError("tribe %s: %s", tribename.c_str(), e.what());
-	}
-}
 
 /*
 ===============
@@ -451,37 +237,37 @@ void TribeDescr::load_graphics()
  * does this tribe exist?
  */
 bool TribeDescr::exists_tribe
-	(const std::string & name, TribeBasicInfo * const info)
+	(const std::string & tribename, TribeBasicInfo * const info)
 {
-	std::string buf = "tribes/";
-	buf            += name;
-	buf            += "/conf";
-
-	LuaInterface lua;
-	FileRead f;
-	if (f.try_open(*g_fs, buf)) {
-		if (info)
+	try {
+		LuaInterface lua;
+		const std::string initfile = "/tribes/" + tribename + ".lua";
+		std::unique_ptr<LuaTable> t(lua.run_script(initfile));
+		if (info) {
 			try {
-				Profile prof(buf.c_str());
-				info->name = name;
-				info->uiposition =
-					prof.get_safe_section("tribe").get_int("uiposition", 0);
+				info->name = tribename;
+				info->uiposition = table.haskey("uiposition") ? table.get_int("uiposition") : 0;
 
-				std::string path = "tribes/" + name + "/scripting";
+				const std::string path = "tribes/scripting/starting_conditions/";
+					// Read initializations -- all scripts are initializations currently
 				for (const std::string& script :
-					  filter(g_fs->list_directory(path),
-				            [](const string& fn) {return boost::ends_with(fn, ".lua");})) {
-					std::unique_ptr<LuaTable> t = lua.run_script(script);
+					  filter(g_fs->list_directory(path + tribename),
+								[](const string& fn) {return boost::ends_with(fn, ".lua");})) {
+					std::unique_ptr<LuaTable> t = egbase.lua().run_script(script);
 					t->do_not_warn_about_unaccessed_keys();
+
 					info->initializations.push_back(
-					   TribeBasicInfo::Initialization(script, t->get_string("name")));
+								TribeBasicInfo::Initialization(script, t->get_string("name")));
 				}
 			} catch (const WException & e) {
 				throw GameDataError
 					("reading basic info for tribe \"%s\": %s",
-					 name.c_str(), e.what());
+					 tribename.c_str(), e.what());
 			}
-		return true;
+			return true;
+		}
+	} catch (LuaError& e) {
+		throw GameDataError("Unable to verify if tribe exists from %s: %s", initfile.c_str(), e.what());
 	}
 	return false;
 }
@@ -495,6 +281,7 @@ struct TribeBasicComparator {
 /**
  * Fills the given string vector with the names of all tribes that exist.
  */
+// NOCOM(GunChleoc) this stuff really belongs in Tribes, but it is used by manually_load_tribes. Need to have a look at the control flow.
 std::vector<std::string> TribeDescr::get_all_tribenames() {
 	std::vector<std::string> tribenames;
 
@@ -518,7 +305,7 @@ std::vector<std::string> TribeDescr::get_all_tribenames() {
 	return tribenames;
 }
 
-
+// NOCOM(GunChleoc) this stuff really belongs in Tribes, but it is used by manually_load_tribes. Need to have a look at the control flow.
 std::vector<TribeBasicInfo> TribeDescr::get_all_tribe_infos() {
 	std::vector<TribeBasicInfo> tribes;
 

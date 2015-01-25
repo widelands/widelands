@@ -1859,6 +1859,7 @@ void CmdSetStockPolicy::execute(Game & game)
 				return;
 			}
 
+			// NOCOM(GunChleoc): Warehouse shouldn't know it's tribe?
 			const TribeDescr & tribe = warehouse->descr().tribe();
 			if (m_isworker) {
 				if (!(m_ware < tribe.get_nrworkers())) {

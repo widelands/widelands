@@ -50,6 +50,7 @@ public:
 		 const std::string & directory, Profile &,  Section & global_s,
 		 const TribeDescr &);
 
+	WorkerDescr(MapObjectType type, const LuaTable& t);
 	WorkerDescr(const LuaTable& t);
 
 	~WorkerDescr() override;

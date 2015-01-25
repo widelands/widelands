@@ -63,8 +63,24 @@ void Tribes::add_ware_type(const LuaTable& t) {
 	wares_->add(new WareDescr(t));
 }
 
+void Tribes::add_carrier_type(const LuaTable& t) {
+	CarrierDescr& worker_descr = new CarrierDescr(t);
+	WareIndex const worker_idx = workers_->add(worker_descr);
+	if (worker_descr.buildcost().empty()) {
+		worker_types_without_cost_.push_back(worker_idx);
+	}
+}
+
+void Tribes::add_soldierr_type(const LuaTable& t) {
+	SoldierDescr& worker_descr = new SoldierDescr(t);
+	WareIndex const worker_idx = workers_->add(worker_descr);
+	if (worker_descr.buildcost().empty()) {
+		worker_types_without_cost_.push_back(worker_idx);
+	}
+}
+
 void Tribes::add_worker_type(const LuaTable& t) {
-	auto& worker_descr = new WorkerDescr(t);
+	WorkerDescr& worker_descr = new WorkerDescr(t);
 	WareIndex const worker_idx = workers_->add(worker_descr);
 	if (worker_descr.buildcost().empty()) {
 		worker_types_without_cost_.push_back(worker_idx);

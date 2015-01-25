@@ -196,6 +196,82 @@ SoldierDescr::SoldierDescr
 
 }
 
+SoldierDescr::SoldierDescr(const LuaTable& table) :
+	WorkerDescr(MapObjectType::SOLDIER, table)
+{
+	add_attribute(MapObject::Attribute::SOLDIER);
+
+	m_base_hp = table.get_int("hp");
+
+	// Parse attack
+	LuaTable items_table = table.get_table("attack");
+	m_min_attack = items_table.get_int("minimum");
+	m_max_attack = items_table.get_int("maximum");
+	if (m_min_attack > m_max_attack) {
+		throw GameDataError("Minimum attack %d is greater than maximum attack %d.", m_min_attack, m_max_attack);
+	}
+
+	// Parse defend
+	m_defense           = table.get_int("defense");
+
+	// Parse evade
+	m_evade             = table.get_int("evade");
+
+	// Parse increases per level
+	m_hp_incr           = table.get_int("hp_incr_per_level");
+	m_attack_incr       = table.get_int("attack_incr_per_level");
+	m_defense_incr      = table.get_int("defense_incr_per_level");
+	m_evade_incr        = table.get_int("evade_incr_per_level");
+
+	// Parse max levels
+	m_max_hp_level      = table.get_int("max_hp_level");
+	m_max_attack_level  = table.get_int("max_attack_level");
+	m_max_defense_level = table.get_int("max_defense_level");
+	m_max_evade_level   = table.get_int("max_evade_level");
+
+	// Load the filenames
+	m_hp_pics_fn     .resize(m_max_hp_level      + 1);
+	m_attack_pics_fn .resize(m_max_attack_level  + 1);
+	m_defense_pics_fn.resize(m_max_defense_level + 1);
+	m_evade_pics_fn  .resize(m_max_evade_level   + 1);
+
+	// NOCOM(GunChleoc): We need the directory
+	std::string dir = directory;
+	dir += "/";
+	for (uint32_t i = 0; i <= m_max_hp_level;      ++i) {
+		m_hp_pics_fn[i] = dir;
+		m_hp_pics_fn[i] += table.get_string((boost::format("hp_level_%u_pic")
+																	% i).str());
+
+	}
+	for (uint32_t i = 0; i <= m_max_attack_level;  ++i) {
+		m_attack_pics_fn[i] = dir;
+		m_attack_pics_fn[i] += table.get_string((boost::format("attack_level_%u_pic")
+																		 % i).str());
+	}
+	for (uint32_t i = 0; i <= m_max_defense_level; ++i) {
+		m_defense_pics_fn[i] = dir;
+		m_defense_pics_fn[i] += table.get_string((boost::format("defense_level_%u_pic")
+																		  % i).str());
+	}
+	for (uint32_t i = 0; i <= m_max_evade_level;   ++i) {
+		m_evade_pics_fn[i] = dir;
+		m_evade_pics_fn[i] += table.get_string((boost::format("evade_level_%u_pic")
+																		% i).str());
+	}
+
+	//  All animations
+	items_table = table.get_table("animations");
+	for (const std::string& key : items_table.keys()) {
+		const LuaTable anims_table = items_table.get_table(key);
+		for (const std::string& anim_key : anims_table.keys()) {
+			// NOCOM(GunChleoc): And the hotspot + fps?
+			add_animation(anim_key, g_gr->animations().load(anims_table.get_string("pictures")));
+		}
+	}
+}
+
+// NOCOM(GunChleoc): Will be obsolete?
 std::vector<std::string> SoldierDescr::load_animations_from_string
 	(const std::string & directory, Profile & prof,
 	 Section & global_s, const char * anim_name)

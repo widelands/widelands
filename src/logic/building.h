@@ -130,6 +130,7 @@ struct BuildingDescr : public MapObjectDescr {
 	bool has_help_text() const {return m_helptext_script != "";}
 	std::string helptext_script() const {return m_helptext_script;}
 
+	// NOCOM(GunChleoc): Get rid
 	const TribeDescr & tribe() const {return m_tribe;}
 	WorkareaInfo m_workarea_info;
 

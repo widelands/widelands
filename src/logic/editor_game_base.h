@@ -138,7 +138,7 @@ public:
 							 PlayerNumber,
 	                   bool loading = false,
 	                   Building::FormerBuildings former_buildings = Building::FormerBuildings());
-	// NOCOM(GunChleoc): Bobs and Immovables need to lose the TribeDescr
+
 	Bob& create_bob(Coords, const BobDescr&, Player* owner = nullptr);
 	Bob& create_bob(Coords,
 						 int,

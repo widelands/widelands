@@ -126,8 +126,8 @@ WorkerDescr::WorkerDescr
 	}
 }
 
-WorkerDescr::WorkerDescr(const LuaTable& table) :
-	BobDescr(MapObjectType::WORKER, table),
+WorkerDescr::WorkerDescr(MapObjectType type, const LuaTable& table) :
+	BobDescr(type, table),
 	icon_fname_        (directory + "/menu.png"),
 	icon_              (nullptr),
 	ware_hotspot_      (Point(0, 15)),
@@ -234,6 +234,10 @@ WorkerDescr::WorkerDescr(const LuaTable& table) :
 		ware_hotspot_(Point(items_table.get_int("1"),items_table.get_int("2")));
 	}
 }
+
+WorkerDescr::WorkerDescr(const LuaTable& table) :
+	WorkerDescr(MapObjectType::WORKER, table)
+{}
 
 
 WorkerDescr::~WorkerDescr()

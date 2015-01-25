@@ -494,6 +494,8 @@ const MethodType<LuaTribes> LuaTribes::Methods[] = {
 	METHOD(LuaTribes, new_immovable_type),
 	METHOD(LuaTribes, new_ship_type),
 	METHOD(LuaTribes, new_ware_type),
+	METHOD(LuaTribes, new_carrier_type),
+	METHOD(LuaTribes, new_soldier_type),
 	METHOD(LuaTribes, new_worker_type),
 	METHOD(LuaTribes, new_tribe),
 	{0, 0},
@@ -720,6 +722,50 @@ int LuaTribes::new_ware_type(lua_State* L) {
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
 		get_egbase(L).mutable_tribes()->add_ware_type(table);
+	} catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/* RST
+	.. method:: new_carrier_type(table)
+
+		Adds a new carrier worker type. Takes a single argument, a table with
+		the descriptions. See the files in tribe/ for usage examples.
+
+		:returns: :const:`nil`
+*/
+int LuaTribes::new_carrier_type(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		get_egbase(L).mutable_tribes()->add_carrier_type(table);
+	} catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/* RST
+	.. method:: new_soldier_type(table)
+
+		Adds a new soldier worker type. Takes a single argument, a table with
+		the descriptions. See the files in tribe/ for usage examples.
+
+		:returns: :const:`nil`
+*/
+int LuaTribes::new_soldier_type(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		get_egbase(L).mutable_tribes()->add_soldier_type(table);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}

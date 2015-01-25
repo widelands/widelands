@@ -36,6 +36,12 @@ struct CarrierDescr : public WorkerDescr {
 		WorkerDescr(MapObjectType::CARRIER, _name, _descname, directory, prof, global_s, _tribe)
 	{
 	}
+
+	CarrierDescr(const LuaTable& table):
+		WorkerDescr(MapObjectType::CARRIER, table)
+	{
+	}
+
 	~CarrierDescr() override {}
 
 protected:

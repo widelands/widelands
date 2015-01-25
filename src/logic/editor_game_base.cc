@@ -185,11 +185,18 @@ const TribeDescr & EditorGameBase::manually_load_tribe
 		}
 	}
 
-	TribeDescr & result = *new TribeDescr(tribe, *this);
-	//resize the configuration of our wares if they won't fit in the current window (12 = info label size)
-	int number = (g_gr->get_yres() - 270) / (WARE_MENU_PIC_HEIGHT + WARE_MENU_PIC_PAD_Y + 12);
-	result.resize_ware_orders(number);
-	tribes_.push_back(&result);
+	try {
+		LuaInterface lua;
+		const std::string scriptfile = "/tribes/" + tribe + ".lua";
+		std::unique_ptr<LuaTable> t(lua.run_script(scriptfile));
+		TribeDescr & result = *new TribeDescr(t, *this);
+		//resize the configuration of our wares if they won't fit in the current window (12 = info label size)
+		int number = (g_gr->get_yres() - 270) / (WARE_MENU_PIC_HEIGHT + WARE_MENU_PIC_PAD_Y + 12);
+		result.resize_ware_orders(number);
+		tribes_.push_back(&result);
+	} catch (LuaError& e) {
+		throw GameDataError("Unable to manually load tribe from %s: %s", scriptfile.c_str(), e.what());
+	}
 	return result;
 }
 
