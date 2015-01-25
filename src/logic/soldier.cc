@@ -51,7 +51,6 @@
 #include "logic/warehouse.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "profile/profile.h"
 #include "wui/mapviewpixelconstants.h"
 
 namespace Widelands {
@@ -72,129 +71,6 @@ void remove_spaces(std::string& s) {
 
 constexpr int kRetreatWhenHealthDropsBelowThisPercentage = 50;
 }  // namespace
-
-SoldierDescr::SoldierDescr
-	(char const * const _name, char const * const _descname,
-	 const std::string & directory, Profile & prof, Section & global_s,
-	 const TribeDescr & _tribe)
-	:
-	WorkerDescr(MapObjectType::SOLDIER, _name, _descname, directory, prof, global_s, _tribe)
-{
-	add_attribute(MapObject::Attribute::SOLDIER);
-
-	m_base_hp = global_s.get_safe_positive("hp");
-
-	try { //  parse attack
-		const char * const attack = global_s.get_safe_string("attack");
-		std::vector<std::string> list(split_string(attack, "-"));
-		if (list.size() != 2)
-			throw GameDataError
-				("expected %s but found \"%s\"", "\"min-max\"", attack);
-		for (std::string& temp_str : list) {
-			remove_spaces(temp_str);
-		}
-		char * endp;
-		m_min_attack = strtol(list[0].c_str(), &endp, 0);
-		if (*endp || 0 == m_min_attack)
-			throw GameDataError
-				("expected %s but found \"%s\"",
-				 "positive integer", list[0].c_str());
-		m_max_attack = strtol(list[1].c_str(), &endp, 0);
-		if (*endp || m_max_attack < m_min_attack)
-			throw GameDataError
-				("expected positive integer >= %u but found \"%s\"",
-				 m_min_attack, list[1].c_str());
-	} catch (const WException & e) {
-		throw GameDataError("attack: %s", e.what());
-	}
-
-	// Parse defend
-	m_defense           = global_s.get_safe_int("defense");
-
-	// Parse evade
-	m_evade             = global_s.get_safe_int("evade");
-
-	// Parse increases per level
-	m_hp_incr           = global_s.get_safe_int("hp_incr_per_level");
-	m_attack_incr       = global_s.get_safe_int("attack_incr_per_level");
-	m_defense_incr      = global_s.get_safe_int("defense_incr_per_level");
-	m_evade_incr        = global_s.get_safe_int("evade_incr_per_level");
-
-	// Parse max levels
-	m_max_hp_level      = global_s.get_safe_int("max_hp_level");
-	m_max_attack_level  = global_s.get_safe_int("max_attack_level");
-	m_max_defense_level = global_s.get_safe_int("max_defense_level");
-	m_max_evade_level   = global_s.get_safe_int("max_evade_level");
-
-	// Load the filenames
-	m_hp_pics_fn     .resize(m_max_hp_level      + 1);
-	m_attack_pics_fn .resize(m_max_attack_level  + 1);
-	m_defense_pics_fn.resize(m_max_defense_level + 1);
-	m_evade_pics_fn  .resize(m_max_evade_level   + 1);
-
-	std::string dir = directory;
-	dir += "/";
-	for (uint32_t i = 0; i <= m_max_hp_level;      ++i) {
-		m_hp_pics_fn[i] = dir;
-		m_hp_pics_fn[i] += global_s.get_safe_string((boost::format("hp_level_%u_pic")
-																	% i).str());
-
-	}
-	for (uint32_t i = 0; i <= m_max_attack_level;  ++i) {
-		m_attack_pics_fn[i] = dir;
-		m_attack_pics_fn[i] += global_s.get_safe_string((boost::format("attack_level_%u_pic")
-																		 % i).str());
-	}
-	for (uint32_t i = 0; i <= m_max_defense_level; ++i) {
-		m_defense_pics_fn[i] = dir;
-		m_defense_pics_fn[i] += global_s.get_safe_string((boost::format("defense_level_%u_pic")
-																		  % i).str());
-	}
-	for (uint32_t i = 0; i <= m_max_evade_level;   ++i) {
-		m_evade_pics_fn[i] = dir;
-		m_evade_pics_fn[i] += global_s.get_safe_string((boost::format("evade_level_%u_pic")
-																		% i).str());
-	}
-
-	{  ///  Battle animations
-		/// attack_success_*-> soldier is attacking and hit his opponent
-		/// attack_failure_*-> soldier is attacking and miss hit, defender evades
-		/// evade_success_* -> soldier is defending and opponent misses
-		/// evade_failure_* -> soldier is defending and opponent hits
-		/// die_*           -> soldier is dying
-		m_attack_success_w_name =
-			load_animations_from_string
-				(directory, prof, global_s, "attack_success_w");
-		m_attack_success_e_name =
-			load_animations_from_string
-				(directory, prof, global_s, "attack_success_e");
-		m_attack_failure_w_name =
-			load_animations_from_string
-				(directory, prof, global_s, "attack_failure_w");
-		m_attack_failure_e_name =
-			load_animations_from_string
-				(directory, prof, global_s, "attack_failure_e");
-		m_evade_success_w_name =
-			load_animations_from_string
-				(directory, prof, global_s, "evade_success_w");
-		m_evade_success_e_name =
-			load_animations_from_string
-				(directory, prof, global_s, "evade_success_e");
-		m_evade_failure_w_name =
-			load_animations_from_string
-				(directory, prof, global_s, "evade_failure_w");
-		m_evade_failure_e_name =
-			load_animations_from_string
-				(directory, prof, global_s, "evade_failure_e");
-		m_die_w_name =
-			load_animations_from_string
-				(directory, prof, global_s, "die_w");
-		m_die_e_name =
-			load_animations_from_string
-				(directory, prof, global_s, "die_e");
-	}
-
-}
 
 SoldierDescr::SoldierDescr(const LuaTable& table) :
 	WorkerDescr(MapObjectType::SOLDIER, table)

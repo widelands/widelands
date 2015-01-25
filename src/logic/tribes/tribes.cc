@@ -22,9 +22,13 @@
 namespace Widelands {
 
 Tribes::Tribes(EditorGameBase& egbase) :
+	egbase_(egbase),
 	buildings_(new DescriptionMaintainer<BuildingDescr>()),
+	immovables_(new DescriptionMaintainer<ImmovableDescr>()),
+	ships_(new DescriptionMaintainer<ShipDescr>()),
 	wares_(new DescriptionMaintainer<WareDescr>()),
-	workers_(new DescriptionMaintainer<WorkerDescr>()) {
+	workers_(new DescriptionMaintainer<WorkerDescr>()),
+	tribes_(new DescriptionMaintainer<TribeDescr>()) {
 }
 
 void Tribes::add_constructionsite_type(const LuaTable& t) {
@@ -40,11 +44,11 @@ void Tribes::add_militarysite_type(const LuaTable& t) {
 }
 
 void Tribes::add_productionsite_type(const LuaTable& t) {
-	buildings_->add(new ProductionSiteDescr(t, egbase.world()));
+	buildings_->add(new ProductionSiteDescr(t, egbase_));
 }
 
 void Tribes::add_trainingsite_type(const LuaTable& t) {
-	buildings_->add(new TrainingSiteDescr(t, egbase.world()));
+	buildings_->add(new TrainingSiteDescr(t, egbase_));
 }
 
 void Tribes::add_warehouse_type(const LuaTable& t) {
@@ -52,7 +56,7 @@ void Tribes::add_warehouse_type(const LuaTable& t) {
 }
 
 void Tribes::add_immovable_type(const LuaTable& t) {
-	immovables_->add(new ImmovableDescr(t, egbase.world(), MapObjectDescr::OwnerType::kTribe));
+	immovables_->add(new ImmovableDescr(t, egbase_.world(), MapObjectDescr::OwnerType::kTribe));
 }
 
 void Tribes::add_ship_type(const LuaTable& t) {
@@ -71,7 +75,7 @@ void Tribes::add_carrier_type(const LuaTable& t) {
 	}
 }
 
-void Tribes::add_soldierr_type(const LuaTable& t) {
+void Tribes::add_soldier_type(const LuaTable& t) {
 	SoldierDescr& worker_descr = new SoldierDescr(t);
 	WareIndex const worker_idx = workers_->add(worker_descr);
 	if (worker_descr.buildcost().empty()) {
@@ -88,7 +92,7 @@ void Tribes::add_worker_type(const LuaTable& t) {
 }
 
 void Tribes::add_tribe(const LuaTable& t) {
-	tribes_->add(new TribeDescr(t, egbase));
+	tribes_->add(new TribeDescr(t, egbase_));
 }
 
 WareIndex Tribes::get_nrwares() const {

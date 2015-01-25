@@ -45,14 +45,8 @@ class WorkerDescr : public BobDescr
 public:
 	using Buildcost = std::map<std::string, uint8_t>;
 
-	WorkerDescr
-		(MapObjectType type, char const * const name, char const * const descname,
-		 const std::string & directory, Profile &,  Section & global_s,
-		 const TribeDescr &);
-
 	WorkerDescr(MapObjectType type, const LuaTable& t);
 	WorkerDescr(const LuaTable& t);
-
 	~WorkerDescr() override;
 
 	Bob & create_object() const override;

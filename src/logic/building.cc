@@ -41,7 +41,6 @@
 #include "logic/productionsite.h"
 #include "logic/tribe.h"
 #include "logic/worker.h"
-#include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "wui/interactive_player.h"
 #include "wui/text_layout.h"
@@ -49,129 +48,6 @@
 namespace Widelands {
 
 static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
-
-
-BuildingDescr::BuildingDescr
-	(const MapObjectType _type, char const * const _name, char const * const _descname,
-	 const std::string & directory, Profile & prof, Section & global_s,
-	 const TribeDescr & _descr)
-	:
-	MapObjectDescr(_type, _name, _descname),
-	m_tribe         (_descr),
-	m_buildable     (true),
-	m_icon     (nullptr),
-	m_size          (BaseImmovable::SMALL),
-	m_mine          (false),
-	m_port          (false),
-	m_hints         (prof.get_section("aihints")),
-	m_global        (false),
-	m_vision_range  (0)
-{
-	try {
-		char const * const string = global_s.get_safe_string("size");
-		if      (!strcasecmp(string, "small"))
-			m_size = BaseImmovable::SMALL;
-		else if (!strcasecmp(string, "medium"))
-			m_size = BaseImmovable::MEDIUM;
-		else if (!strcasecmp(string, "big"))
-			m_size = BaseImmovable::BIG;
-		else if (!strcasecmp(string, "mine")) {
-			m_size = BaseImmovable::SMALL;
-			m_mine = true;
-		} else if (!strcasecmp(string, "port")) {
-			m_size = BaseImmovable::BIG;
-			m_port = true;
-		} else
-			throw GameDataError
-				("expected %s but found \"%s\"",
-				 "{\"small\"|\"medium\"|\"big\"|\"port\"|\"mine\"}", string);
-	} catch (const WException & e) {
-		throw GameDataError("size: %s", e.what());
-	}
-
-	m_helptext_script = directory + "/help.lua";
-	if (!g_fs->file_exists(m_helptext_script))
-		m_helptext_script = "";
-
-	// Parse build options
-	m_buildable = global_s.get_bool("buildable", true);
-	m_destructible = global_s.get_bool("destructible", true);
-	m_enhancement = INVALID_INDEX;
-
-	if (Section::Value const * const enVal = global_s.get_next_val("enhancement"))
-	{
-		std::string const target_name = enVal->get_string();
-		if (target_name == name())
-			throw wexception("enhancement to same type");
-		BuildingIndex const en_i = tribe().building_index(target_name);
-		if (en_i != INVALID_INDEX) {
-			m_enhancement = en_i;
-
-			//  Merge the enhancements workarea info into this building's
-			//  workarea info.
-			const BuildingDescr * tmp_enhancement =
-				tribe().get_building_descr(en_i);
-			for (std::pair<uint32_t, std::set<std::string>> area : tmp_enhancement->m_workarea_info)
-			{
-				std::set<std::string> & strs = m_workarea_info[area.first];
-				for (std::string str : area.second)
-					strs.insert(str);
-			}
-		} else
-			throw wexception
-				("\"%s\" has not been defined as a building type (wrong declaration order?)",
-				target_name.c_str());
-	}
-
-	m_enhanced_building = global_s.get_bool("enhanced_building", false);
-	m_global = directory.find("global/") < directory.size();
-	if (m_buildable || m_enhanced_building) {
-		//  get build icon
-		m_icon_fname  = directory;
-		m_icon_fname += "/menu.png";
-
-		//  build animation
-		if (Section * const build_s = prof.get_section("build")) {
-			if (build_s->get_int("fps", -1) != -1)
-				throw wexception("fps defined for build animation!");
-			if (!is_animation_known("build"))
-				add_animation("build", g_gr->animations().load(directory, *build_s));
-		}
-
-		// Get costs
-		if (m_buildable) {
-			Section & buildcost_s = prof.get_safe_section("buildcost");
-			m_buildcost.parse(m_tribe, buildcost_s);
-			Section & returnsect_s = prof.get_safe_section("return_on_dismantle");
-			m_return_dismantle.parse(m_tribe, returnsect_s);
-		}
-
-		if (m_enhanced_building) {
-			Section & en_buildcost_s = prof.get_safe_section("enhancement_cost");
-			m_enhance_cost.parse(m_tribe, en_buildcost_s);
-			Section & en_returnsect_s = prof.get_safe_section("return_on_dismantle_on_enhanced");
-			m_return_enhanced.parse(m_tribe, en_returnsect_s);
-		}
-	} else if (m_global) {
-		//  get build icon for global buildings (for statistics window)
-		m_icon_fname  = directory;
-		m_icon_fname += "/menu.png";
-	}
-
-	{ //  parse basic animation data
-		Section & idle_s = prof.get_safe_section("idle");
-		if (!is_animation_known("idle"))
-			add_animation("idle", g_gr->animations().load(directory, idle_s));
-		if (Section * unoccupied = prof.get_section("unoccupied"))
-			if (!is_animation_known("unoccupied"))
-				add_animation("unoccupied", g_gr->animations().load(directory, *unoccupied));
-		if (Section * empty = prof.get_section("empty"))
-			if (!is_animation_known("empty"))
-				add_animation("empty", g_gr->animations().load(directory, *empty));
-	}
-
-	m_vision_range = global_s.get_int("vision_range");
-}
 
 BuildingDescr::BuildingDescr
 	(const MapObjectType _type, const LuaTable& table)

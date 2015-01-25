@@ -56,12 +56,7 @@ class WorkerDescr;
 struct ProductionSiteDescr : public BuildingDescr {
 	friend struct ProductionProgram; // To add animations
 
-	ProductionSiteDescr
-		(MapObjectType type, char const * name, char const * descname,
-		 const std::string & directory, Profile &, Section & global_s,
-		 const TribeDescr &, const World&);
-
-	ProductionSiteDescr(MapObjectType type, const LuaTable& t, const World&);
+	ProductionSiteDescr(MapObjectType type, const LuaTable& t, EditorGameBase& egbase);
 
 	~ProductionSiteDescr() override;
 

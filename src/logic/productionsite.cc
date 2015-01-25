@@ -38,7 +38,6 @@
 #include "logic/tribe.h"
 #include "logic/warelist.h"
 #include "logic/world/world.h"
-#include "profile/profile.h"
 #include "wui/text_constants.h"
 
 namespace Widelands {
@@ -54,107 +53,7 @@ ProductionSite BUILDING
 */
 
 ProductionSiteDescr::ProductionSiteDescr
-	(MapObjectType _type, char const * const _name, char const * const _descname,
-	 const std::string & directory, Profile & prof, Section & global_s,
-	 const TribeDescr & _tribe, const World& world)
-	:
-	BuildingDescr(_type, _name, _descname, directory, prof, global_s, _tribe)
-{
-	Section * const section = prof.get_section("out_of_resource_notification");
-	if (section != nullptr)
-	{
-		m_out_of_resource_title = section->get_string("title", "");
-		m_out_of_resource_message = section->get_string("message", "");
-		m_out_of_resource_delay_attempts = section->get_natural("delay_attempts", 0);
-	}
-	else
-	{
-		m_out_of_resource_title = "";
-		m_out_of_resource_message = "";
-		m_out_of_resource_delay_attempts = 0;
-	}
-	while
-		(Section::Value const * const op = global_s.get_next_val("output"))
-		try {
-			WareIndex idx = tribe().ware_index(op->get_string());
-			if (idx != INVALID_INDEX) {
-				if (m_output_ware_types.count(idx))
-					throw wexception("this ware type has already been declared as an output");
-				m_output_ware_types.insert(idx);
-			} else if ((idx = tribe().worker_index(op->get_string())) != INVALID_INDEX) {
-				if (m_output_worker_types.count(idx))
-					throw wexception("this worker type has already been declared as an output");
-				m_output_worker_types.insert(idx);
-			} else
-				throw wexception("tribe does not define a ware or worker type with this name");
-		} catch (const WException & e) {
-			throw wexception("output \"%s\": %s", op->get_string(), e.what());
-		}
-
-	if (Section * const s = prof.get_section("inputs"))
-		while (Section::Value const * const val = s->get_next_val())
-			try {
-				WareIndex const idx = tribe().ware_index(val->get_name());
-				if (idx != INVALID_INDEX) {
-					for (const WareAmount& temp_inputs : inputs()) {
-						if (temp_inputs.first == idx) {
-							throw wexception("duplicated");
-						}
-					}
-					int32_t const value = val->get_int();
-					if (value < 1 || 255 < value)
-						throw wexception("count is out of range 1 .. 255");
-					m_inputs.push_back(std::pair<WareIndex, uint8_t>(idx, value));
-				} else
-					throw wexception
-						("tribe does not define a ware type with this name");
-			} catch (const WException & e) {
-				throw wexception("input \"%s=%s\": %s", val->get_name(), val->get_string(), e.what());
-			}
-
-	// Are we only a production site?
-	// If not, we might not have a worker
-	if (Section * const working_positions_s = prof.get_section("working positions"))
-		while (Section::Value const * const v = working_positions_s->get_next_val())
-			try {
-				WareIndex const woi = tribe().worker_index(v->get_name());
-				if (woi != INVALID_INDEX) {
-					for (const WareAmount& wp : working_positions()) {
-						if (wp.first == woi) {
-							throw wexception("duplicated");
-						}
-					}
-					m_working_positions.push_back(std::pair<WareIndex, uint32_t>(woi, v->get_positive()));
-				} else
-					throw wexception("invalid");
-			} catch (const WException & e) {
-				throw wexception("%s=\"%s\": %s", v->get_name(), v->get_string(), e.what());
-			}
-	if (working_positions().empty() && !global_s.has_val("max_soldiers"))
-		throw wexception("no working/soldier positions");
-
-	// Get programs
-	if (Section * const programs_s = prof.get_section("programs"))
-	while (Section::Value const * const v = programs_s->get_next_val()) {
-		std::string program_name = v->get_name();
-		std::transform
-			(program_name.begin(), program_name.end(), program_name.begin(),
-			 tolower);
-		try {
-			if (m_programs.count(program_name))
-				throw wexception("this program has already been declared");
-			m_programs[program_name] =
-				new ProductionProgram
-					(directory, prof, program_name, v->get_string(), world, this);
-		} catch (const std::exception & e) {
-			throw wexception("program %s: %s", program_name.c_str(), e.what());
-		}
-	}
-}
-
-
-ProductionSiteDescr::ProductionSiteDescr
-	(MapObjectType _type, const LuaTable& table, const World& world) : BuildingDescr(_type, table)
+	(MapObjectType _type, const LuaTable& table, EditorGameBase& egbase) : BuildingDescr(_type, table)
 {
 	LuaTable items_table;
 
@@ -262,7 +161,8 @@ ProductionSiteDescr::ProductionSiteDescr
 				}
 				m_programs[program_name] =
 						new ProductionProgram(program_name, items_table.get_string("descname"),
-													 items_table.get_table("actions"), world, this);
+													 items_table.get_table("actions"),
+													 EditorGameBase& egbase.world(), this);
 			} catch (const std::exception & e) {
 				throw wexception("program %s: %s", program_name.c_str(), e.what());
 			}

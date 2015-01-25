@@ -34,62 +34,10 @@
 #include "logic/soldier.h"
 #include "logic/tribe.h"
 #include "logic/worker.h"
-#include "profile/profile.h"
-
 
 namespace Widelands {
 
 const uint32_t TrainingSite::training_state_multiplier = 12;
-
-TrainingSiteDescr::TrainingSiteDescr
-	(char const * const _name, char const * const _descname,
-	 const std::string & directory, Profile & prof, Section & global_s,
-	 const TribeDescr & _tribe, const World& world)
-	:
-	ProductionSiteDescr
-		(MapObjectType::TRAININGSITE, _name, _descname, directory, prof, global_s, _tribe, world),
-	m_num_soldiers      (global_s.get_safe_int("soldier_capacity")),
-	m_max_stall         (global_s.get_safe_int("trainer_patience")),
-
-	m_train_hp          (false),
-	m_train_attack      (false),
-	m_train_defense     (false),
-	m_train_evade       (false),
-	m_min_hp            (0),
-	m_min_attack        (0),
-	m_min_defense       (0),
-	m_min_evade         (0),
-	m_max_hp            (0),
-	m_max_attack        (0),
-	m_max_defense       (0),
-	m_max_evade         (0)
-{
-	// Read the range of levels that can update this building
-	//  TODO(unknown): This is currently hardcoded to "soldier" but it should search for
-	//  sections starting with the name of each soldier type.
-	//  These sections also seem redundant. Eliminate them (having the
-	//  programs should be enough).
-	if (Section * const s = prof.get_section("soldier hp")) {
-		m_train_hp      = true;
-		m_min_hp        = s->get_safe_int("min_level");
-		m_max_hp        = s->get_safe_int("max_level");
-	}
-	if (Section * const s = prof.get_section("soldier attack")) {
-		m_train_attack  = true;
-		m_min_attack    = s->get_safe_int("min_level");
-		m_max_attack    = s->get_safe_int("max_level");
-	}
-	if (Section * const s = prof.get_section("soldier defense")) {
-		m_train_defense = true;
-		m_min_defense   = s->get_safe_int("min_level");
-		m_max_defense   = s->get_safe_int("max_level");
-	}
-	if (Section * const s = prof.get_section("soldier evade")) {
-		m_train_evade   = true;
-		m_min_evade     = s->get_safe_int("min_level");
-		m_max_evade     = s->get_safe_int("max_level");
-	}
-}
 
 TrainingSiteDescr::TrainingSiteDescr
 	(MapObjectType type, const LuaTable& table, const World&)

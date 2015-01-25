@@ -44,31 +44,9 @@
 #include "logic/widelands_geometry_io.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "profile/profile.h"
 #include "wui/interactive_gamebase.h"
 
 namespace Widelands {
-
-ShipDescr::ShipDescr
-	(const char * given_name, const char * gdescname,
-	 const std::string & directory, Profile & prof, Section & global_s,
-	 const TribeDescr & gtribe)
-	:
-	BobDescr(MapObjectType::SHIP, given_name, gdescname, &gtribe)
-{
-	{ //  global options
-		Section & idle_s = prof.get_safe_section("idle");
-		add_animation("idle", g_gr->animations().load(directory, idle_s));
-	}
-	m_sail_anims.parse(*this, directory, prof, "sail");
-
-	Section * sinking_s = prof.get_section("sinking");
-	if (sinking_s)
-		add_animation("sinking", g_gr->animations().load(directory, *sinking_s));
-
-	m_capacity     = global_s.get_natural("capacity", 20);
-	m_vision_range = global_s.get_natural("vision_range", 7);
-}
 
 ShipDescr::ShipDescr(const LuaTable& table)
 	:

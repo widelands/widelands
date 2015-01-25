@@ -37,14 +37,9 @@ class Economy;
 struct Fleet;
 class PortDock;
 
-struct ShipDescr : BobDescr {
-	ShipDescr
-		(char const * name, char const * descname,
-		 const std::string & directory, Profile &, Section & global_s,
-		 const TribeDescr &);
-
+class ShipDescr : BobDescr {
+public:
 	ShipDescr(const LuaTable& t);
-
 	~ShipDescr() override {}
 
 	Bob & create_object() const override;

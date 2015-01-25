@@ -34,30 +34,12 @@
 #include "logic/game.h"
 #include "logic/tribe.h"
 #include "logic/worker.h"
-#include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/window.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/text_constants.h"
 
 namespace Widelands {
-
-ConstructionSiteDescr::ConstructionSiteDescr
-	(char const * const _name, char const * const _descname,
-	 const std::string & directory, Profile & prof, Section & global_s,
-	 const TribeDescr & _tribe)
-	:
-	BuildingDescr(MapObjectType::CONSTRUCTIONSITE, _name, _descname, directory, prof, global_s, _tribe)
-{
-	add_attribute(MapObject::CONSTRUCTIONSITE);
-
-	{ // animation when a worker entered the site
-		Section & sec = prof.get_safe_section("idle_with_worker");
-		if (!is_animation_known("idle_with_worker"))
-			add_animation
-				("idle_with_worker", g_gr->animations().load(directory, sec));
-	}
-}
 
 ConstructionSiteDescr::ConstructionSiteDescr(const LuaTable& table)
 	: BuildingDescr(MapObjectType::CONSTRUCTIONSITE, table)

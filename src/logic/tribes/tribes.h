@@ -49,7 +49,7 @@ class WorkerDescr;
 // NOCOM(#sirver): Make this compatible with TribeDescr.
 class Tribes {
 public:
-	Tribes(EditorGameBase &);
+	Tribes(EditorGameBase&);
 	~Tribes();
 
 	/// Adds this building type to the tribe description.
@@ -116,6 +116,7 @@ public:
 	const std::vector<WareIndex>& worker_types_without_cost() const;
 
 private:
+	EditorGameBase& egbase_;
 	std::unique_ptr<DescriptionMaintainer<BuildingDescr>> buildings_;
 	std::unique_ptr<DescriptionMaintainer<ImmovableDescr>> immovables_;
 	std::unique_ptr<DescriptionMaintainer<ShipDescr>> ships_;

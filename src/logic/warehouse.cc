@@ -46,7 +46,6 @@
 #include "logic/soldier.h"
 #include "logic/tribe.h"
 #include "logic/worker.h"
-#include "profile/profile.h"
 
 namespace Widelands {
 
@@ -250,20 +249,6 @@ Worker & WarehouseSupply::launch_worker(Game & game, const Request & req)
 Warehouse Building
 ==============================
 */
-
-
-/// Warehouse Descr
-WarehouseDescr::WarehouseDescr
-	(char const* const _name, char const* const _descname,
-	 const std::string& directory, Profile& prof, Section& global_s, const TribeDescr& _tribe)
-	: BuildingDescr(MapObjectType::WAREHOUSE, _name, _descname, directory, prof, global_s, _tribe),
-	  m_conquers         (0),
-	  m_heal_per_second  (0)
-{
-	m_heal_per_second = global_s.get_safe_int("heal_per_second");
-	if ((m_conquers = prof.get_safe_section("global").get_positive("conquers", 0)))
-		m_workarea_info[m_conquers].insert(descname() + " conquer");
-}
 
 WarehouseDescr::WarehouseDescr
 	(const LuaTable& table)

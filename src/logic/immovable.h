@@ -108,13 +108,10 @@ struct ImmovableActionData;
 /**
  * Immovable represents a standard immovable such as trees or stones.
  */
-struct ImmovableDescr : public MapObjectDescr {
+class ImmovableDescr : public MapObjectDescr {
+public:
 	using Programs = std::map<std::string, ImmovableProgram *>;
 
-	ImmovableDescr
-		(char const * name, char const * descname,
-		 const std::string & directory, Profile &, Section & global_s,
-		 TribeDescr const * const);
 	ImmovableDescr(const LuaTable&, const World&, MapObjectDescr::OwnerType owner_type);
 	~ImmovableDescr() override;
 

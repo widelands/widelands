@@ -38,16 +38,6 @@
 
 namespace Widelands {
 
-DismantleSiteDescr::DismantleSiteDescr
-	(char const * const _name, char const * const _descname,
-	 const std::string & directory, Profile & prof, Section & global_s,
-	 const TribeDescr & _tribe)
-	:
-	BuildingDescr(MapObjectType::DISMANTLESITE, _name, _descname, directory, prof, global_s, _tribe)
-{
-	add_attribute(MapObject::Attribute::CONSTRUCTIONSITE); // Yep, this is correct.
-}
-
 DismantleSiteDescr::DismantleSiteDescr(const LuaTable& table)
 	: BuildingDescr(MapObjectType::DISMANTLESITE, table)
 {

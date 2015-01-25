@@ -51,14 +51,9 @@ with the transport and Flag code.
 Every tribe has exactly one ConstructionSiteDescr.
 The ConstructionSite's idling animation is the basic construction site marker.
 */
-struct ConstructionSiteDescr : public BuildingDescr {
-	ConstructionSiteDescr
-		(char const * name, char const * descname,
-		 const std::string & directory, Profile &, Section & global_s,
-		 const TribeDescr & tribe);
-
+class ConstructionSiteDescr : public BuildingDescr {
+public:
 	ConstructionSiteDescr(const LuaTable& t);
-
 	~ConstructionSiteDescr() override {}
 
 	Building & create_object() const override;

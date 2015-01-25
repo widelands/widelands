@@ -61,16 +61,11 @@ class Building;
 /*
  * Common to all buildings!
  */
-struct BuildingDescr : public MapObjectDescr {
+class BuildingDescr : public MapObjectDescr {
+public:
 	using FormerBuildings = std::vector<BuildingIndex>;
 
-	BuildingDescr
-		(MapObjectType type, char const * _name, char const * _descname,
-		 const std::string & directory, Profile &, Section & global_s,
-		 const TribeDescr &);
-
 	BuildingDescr(MapObjectType type, const LuaTable& t);
-
 	~BuildingDescr() override {}
 
 	bool is_buildable   () const {return m_buildable;}

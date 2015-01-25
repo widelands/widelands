@@ -38,36 +38,8 @@
 #include "logic/soldier.h"
 #include "logic/tribe.h"
 #include "logic/worker.h"
-#include "profile/profile.h"
 
 namespace Widelands {
-
-MilitarySiteDescr::MilitarySiteDescr
-	(char        const * const _name,
-	 char        const * const _descname,
-	 const std::string & directory, Profile & prof,  Section & global_s,
-	 const TribeDescr & _tribe,
-	 const World& world)
-	:
-	ProductionSiteDescr
-		(MapObjectType::MILITARYSITE, _name, _descname, directory, prof, global_s, _tribe, world),
-	m_conquer_radius     (0),
-	m_num_soldiers       (0),
-	m_heal_per_second    (0)
-{
-	m_conquer_radius      = global_s.get_safe_int("conquers");
-	m_num_soldiers        = global_s.get_safe_int("max_soldiers");
-	m_heal_per_second     = global_s.get_safe_int("heal_per_second");
-
-	if (m_conquer_radius > 0)
-		m_workarea_info[m_conquer_radius].insert(descname() + " conquer");
-	m_prefers_heroes_at_start = global_s.get_safe_bool("prefer_heroes");
-	m_occupied_str = global_s.get_safe_string("occupied_string");
-	m_aggressor_str = global_s.get_safe_string("aggressor_string");
-	m_attack_str = global_s.get_safe_string("attack_string");
-	m_defeated_enemy_str = global_s.get_safe_string("defeated_enemy_string");
-	m_defeated_you_str = global_s.get_safe_string("defeated_you_string");
-}
 
 MilitarySiteDescr::MilitarySiteDescr(const LuaTable& table)
 	:

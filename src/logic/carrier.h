@@ -25,23 +25,9 @@
 
 namespace Widelands {
 
-struct CarrierDescr : public WorkerDescr {
-	CarrierDescr(char const* const _name,
-	              char const* const _descname,
-	              const std::string& directory,
-	              Profile& prof,
-	              Section& global_s,
-	              const TribeDescr& _tribe)
-		:
-		WorkerDescr(MapObjectType::CARRIER, _name, _descname, directory, prof, global_s, _tribe)
-	{
-	}
-
-	CarrierDescr(const LuaTable& table):
-		WorkerDescr(MapObjectType::CARRIER, table)
-	{
-	}
-
+class CarrierDescr : public WorkerDescr {
+public:
+	CarrierDescr(const LuaTable& table) : WorkerDescr(MapObjectType::CARRIER, table)	{}
 	~CarrierDescr() override {}
 
 protected:

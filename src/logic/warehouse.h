@@ -48,14 +48,9 @@ Warehouse
 */
 struct WarehouseSupply;
 
-struct WarehouseDescr : public BuildingDescr {
-	WarehouseDescr
-		(char const * name, char const * descname,
-		 const std::string & directory, Profile &, Section & global_s,
-		 const TribeDescr &);
-
+class WarehouseDescr : public BuildingDescr {
+public:
 	WarehouseDescr(const LuaTable& t);
-
 	~WarehouseDescr() override {}
 
 	Building & create_object() const override;

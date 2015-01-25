@@ -31,14 +31,9 @@ namespace Widelands {
 
 class World;
 
-struct TrainingSiteDescr : public ProductionSiteDescr {
-	TrainingSiteDescr
-		(char const * name, char const * descname,
-		 const std::string & directory, Profile &, Section & global_s,
-		 const TribeDescr & tribe, const World& world);
-
+class TrainingSiteDescr : public ProductionSiteDescr {
+public:
 	TrainingSiteDescr(MapObjectType type, const LuaTable& t, const World&);
-
 	~TrainingSiteDescr() override {}
 
 	Building & create_object() const override;

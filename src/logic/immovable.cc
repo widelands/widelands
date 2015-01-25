@@ -219,68 +219,8 @@ ImmovableDescr IMPLEMENTATION
 */
 
 /**
- * Parse an immovable from its conf file.
+ * Parse an immovable from its init file.
  */
-ImmovableDescr::ImmovableDescr
-	(char const * const _name, char const * const _descname,
-	 const std::string & directory, Profile & prof, Section & global_s)
-:
-	MapObjectDescr(MapObjectType::IMMOVABLE, _name, _descname),
-	m_size          (BaseImmovable::NONE),
-	owner_type_           (MapObjectDescr::OwnerType::kTribe)
-{
-	if (char const * const string = global_s.get_string("size"))
-		try {
-			if      (!strcasecmp(string, "small"))
-				m_size = BaseImmovable::SMALL;
-			else if (!strcasecmp(string, "medium"))
-				m_size = BaseImmovable::MEDIUM;
-			else if (!strcasecmp(string, "big"))
-				m_size = BaseImmovable::BIG;
-			else
-				throw GameDataError
-					("expected %s but found \"%s\"",
-					 "{\"small\"|\"medium\"|\"big\"}", string);
-		} catch (const WException & e) {
-			throw GameDataError("size: %s", e.what());
-		}
-
-	// parse attributes
-	{
-		std::vector<std::string> attributes;
-		while (Section::Value const * const v = global_s.get_next_val("attrib")) {
-			attributes.emplace_back(v->get_string());
-		}
-		add_attributes(attributes, {MapObject::Attribute::RESI});
-	}
-
-	//  parse the programs
-	while (Section::Value const * const v = global_s.get_next_val("program")) {
-		std::string program_name = v->get_string();
-		std::transform
-			(program_name.begin(), program_name.end(), program_name.begin(),
-			 tolower);
-		try {
-			if (m_programs.count(program_name))
-				throw GameDataError("this program has already been declared");
-			m_programs[program_name] =
-				new ImmovableProgram(directory, prof, program_name, *this);
-		} catch (const std::exception & e) {
-			throw GameDataError
-				("program %s: %s", program_name.c_str(), e.what());
-		}
-	}
-
-	make_sure_default_program_is_there();
-
-	if (owner_tribe) {
-		// shipconstruction has a cost associated.
-		if (Section * buildcost_s = prof.get_section("buildcost")) {
-			m_buildcost.parse(*owner_tribe, *buildcost_s);
-		}
-	}
-}
-
 ImmovableDescr::ImmovableDescr(const LuaTable& table, const World& world, MapObjectDescr::OwnerType type) :
 	MapObjectDescr(
 	MapObjectType::IMMOVABLE, table.get_string("name"), table.get_string("descname")),

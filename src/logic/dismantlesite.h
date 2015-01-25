@@ -43,16 +43,9 @@ the destructed building.
 */
 class DismantleSite;
 
-struct DismantleSiteDescr : public BuildingDescr {
-	DismantleSiteDescr(char const* name,
-	                    char const* descname,
-	                    const std::string& directory,
-	                    Profile&,
-	                    Section& global_s,
-							  const TribeDescr& tribe);
-
+class DismantleSiteDescr : public BuildingDescr {
+public:
 	DismantleSiteDescr(const LuaTable& t);
-
 	~DismantleSiteDescr() override {}
 
 	Building& create_object() const override;
