@@ -175,7 +175,7 @@ function dependencies_training_food(tribename, foods)
 		local images = ""
 		local text = ""
 		for countfood, food in pairs(foodlist) do
-			local ware_description = wl.Game():get_ware_description(tribename, food)
+			local ware_description = wl.Game():get_ware_description(food)
 			if(countfood > 1) then
 				images = images .. ";"
 				text = _"%1$s or %2$s":bformat(text, ware_description.descname)
@@ -212,7 +212,7 @@ function dependencies_training_weapons(tribename, building_description, and_or, 
 		if(count > 1) then
 			weaponsstring = weaponsstring .. ";"
 		end
-		local weapon_description = wl.Game():get_ware_description(tribename, weapon)
+		local weapon_description = wl.Game():get_ware_description(weapon)
 		weaponsstring = weaponsstring .. weapon_description.icon_name
 	end
 	-- TRANSLATORS: This is a headline, you can see it in the building help for trainingsites, in the dependencies section
@@ -261,7 +261,7 @@ function building_help_general_string(tribename, building_description, purpose, 
 	elseif(building_description.is_port or building_description.name == "shipyard") then
 		representative_resource = nil
 	elseif(building_description.type_name == "warehouse") then
-		representative_resource = wl.Game():get_ware_description(tribename, "log")
+		representative_resource = wl.Game():get_ware_description("log")
 	elseif(building_description.type_name == "militarysite" or
 			 building_description.type_name == "trainingsite") then
 		representative_resource = wl.Game():get_worker_description(tribename, "soldier")
@@ -512,7 +512,7 @@ function building_help_building_section(tribename, building_description, enhance
 				result = result .. rt(h3(_"Build cost:"))
 			end
 			for ware, amount in pairs(building_description.build_cost) do
-				local ware_description = wl.Game():get_ware_description(tribename, ware)
+				local ware_description = wl.Game():get_ware_description(ware)
 				result = result .. building_help_building_line(ware_description, amount)
 			end
 		end
@@ -530,7 +530,7 @@ function building_help_building_section(tribename, building_description, enhance
 			end
 
 			for ware, amount in pairs(building_description.enhancement_cost) do
-				local ware_description = wl.Game():get_ware_description(tribename, ware)
+				local ware_description = wl.Game():get_ware_description(ware)
 				result = result .. building_help_building_line(ware_description, amount)
 			end
 
@@ -567,7 +567,7 @@ function building_help_building_section(tribename, building_description, enhance
 			end
 			if (warescost ~= {}) then
 				for ware, amount in pairs(warescost) do
-					local ware_description = wl.Game():get_ware_description(tribename, ware)
+					local ware_description = wl.Game():get_ware_description(ware)
 					result = result .. building_help_building_line(ware_description, amount)
 				end
 			else
@@ -578,7 +578,7 @@ function building_help_building_section(tribename, building_description, enhance
 			if (building_description.buildable) then
 				result = result .. rt(h3(_"If built directly, dismantle yields:"))
 				for ware, amount in pairs(building_description.returned_wares) do
-					local ware_description = wl.Game():get_ware_description(tribename, ware)
+					local ware_description = wl.Game():get_ware_description(ware)
 					result = result .. building_help_building_line(ware_description, amount)
 				end
 				result = result .. rt(h3(_"If enhanced, dismantle yields:"))
@@ -615,7 +615,7 @@ function building_help_building_section(tribename, building_description, enhance
 			end
 			if (warescost ~= {}) then
 				for ware, amount in pairs(warescost) do
-					local ware_description = wl.Game():get_ware_description(tribename, ware)
+					local ware_description = wl.Game():get_ware_description(ware)
 					result = result .. building_help_building_line(ware_description, amount)
 				end
 			else
@@ -626,7 +626,7 @@ function building_help_building_section(tribename, building_description, enhance
 			-- Dismantle yields
 			result = result .. rt(h3(_"Dismantle yields:"))
 			for ware, amount in pairs(building_description.returned_wares) do
-				local ware_description = wl.Game():get_ware_description(tribename, ware)
+				local ware_description = wl.Game():get_ware_description(ware)
 				result = result .. building_help_building_line(ware_description, amount)
 			end
 		end
@@ -635,7 +635,7 @@ function building_help_building_section(tribename, building_description, enhance
 		if (building_description.enhancement) then
 			result = result .. text_line(_"Can be enhanced to:", building_description.enhancement.descname)
 			for ware, amount in pairs(building_description.enhancement.enhancement_cost) do
-				local ware_description = wl.Game():get_ware_description(tribename, ware)
+				local ware_description = wl.Game():get_ware_description(ware)
 				result = result .. building_help_building_line(ware_description, amount)
 			end
 		end
@@ -735,7 +735,7 @@ function building_help_tool_string(tribename, toolnames, no_of_workers)
 	local result = rt(h3(ngettext("Worker uses:","Workers use:", no_of_workers)))
 	local game  = wl.Game();
 	for i, toolname in ipairs(toolnames) do
-		local ware_description = game:get_ware_description(tribename, toolname)
+		local ware_description = game:get_ware_description(toolname)
 		result = result .. image_line(ware_description.icon_name, 1, p(ware_description.descname))
 	end
 	return result

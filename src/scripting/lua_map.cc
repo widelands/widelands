@@ -197,11 +197,11 @@ PARSERS(ware, Ware)
 PARSERS(worker, Worker)
 #undef PARSERS
 
-WaresMap count_wares_on_flag_(Flag& f, const TribeDescr & tribe) {
+WaresMap count_wares_on_flag_(Flag& f, const Tribes& tribes) {
 	WaresMap rv;
 
 	for (const WareInstance * ware : f.get_wares()) {
-		WareIndex i = tribe.ware_index(ware->descr().name());
+		WareIndex i = tribes.ware_index(ware->descr().name());
 		if (!rv.count(i))
 			rv.insert(Widelands::WareAmount(i, 1));
 		else
@@ -2369,7 +2369,7 @@ int LuaFlag::set_wares(lua_State * L)
 	const TribeDescr & tribe = f->owner().tribe();
 
 	WaresMap setpoints = m_parse_set_wares_arguments(L, tribe);
-	WaresMap c_wares = count_wares_on_flag_(*f, tribe);
+	WaresMap c_wares = count_wares_on_flag_(*f, egbase.tribes());
 
 	uint32_t nwares = 0;
 
@@ -2396,7 +2396,7 @@ int LuaFlag::set_wares(lua_State * L)
 		if (d < 0) {
 			while (d) {
 				for (const WareInstance * ware : f->get_wares()) {
-					if (tribe.ware_index(ware->descr().name()) == sp.first) {
+					if (egbase.tribes().ware_index(ware->descr().name()) == sp.first) {
 						const_cast<WareInstance *>(ware)->remove(egbase);
 						++d;
 						break;
@@ -2419,12 +2419,13 @@ int LuaFlag::set_wares(lua_State * L)
 
 // Documented in parent Class
 int LuaFlag::get_wares(lua_State * L) {
-	const TribeDescr & tribe = get(L, get_egbase(L))->owner().tribe();
+	EditorGameBase& egbase = get_egbase(L);
+	const TribeDescr & tribe = get(L, egbase)->owner().tribe();
 
 	bool return_number = false;
 	WaresSet wares_set = m_parse_get_wares_arguments(L, tribe, &return_number);
 
-	WaresMap wares = count_wares_on_flag_(*get(L, get_egbase(L)), tribe);
+	WaresMap wares = count_wares_on_flag_(*get(L, egbase), egbase.tribes());
 
 	if (wares_set.size() == tribe.get_nrwares()) { // Want all returned
 		wares_set.clear();

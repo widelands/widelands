@@ -176,9 +176,8 @@ int LuaEditorGameBase::get_building_description(lua_State* L) {
 
 
 /* RST
-	.. function:: get_ware_description(tribename, ware_description.name)
+	.. function:: get_ware_description(ware_description.name)
 
-		:arg tribe_name: the name of the tribe that this building belongs to
 		:arg ware_name: the name of the ware
 
 		Registers a ware description so Lua can reference it from the game.
@@ -186,20 +185,17 @@ int LuaEditorGameBase::get_building_description(lua_State* L) {
 		(RO) The :class:`~wl.Game.Ware_description`.
 */
 int LuaEditorGameBase::get_ware_description(lua_State* L) {
-	if (lua_gettop(L) != 3) {
+	if (lua_gettop(L) != 2) {
 		report_error(L, "Wrong number of arguments");
 	}
-	const std::string tribe_name = luaL_checkstring(L, 2);
-	const std::string ware_name = luaL_checkstring(L, 3);
-	const TribeDescr* tribe_description = get_egbase(L).get_tribe(tribe_name);
-	if (!tribe_description) {
-		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
-	}
-	WareIndex ware_index = tribe_description->ware_index(ware_name);
+	EditorGameBase& egbase = get_egbase(L);
+	const std::string ware_name = luaL_checkstring(L, 2);
+
+	WareIndex ware_index = egbase.tribes().ware_index(ware_name);
 	if (ware_index == INVALID_INDEX) {
 		report_error(L, "Ware %s does not exist", ware_name.c_str());
 	}
-	const WareDescr* ware_description = tribe_description->get_ware_descr(ware_index);
+	const WareDescr* ware_description = egbase.tribes().get_ware_descr(ware_index);
 	return LuaMaps::upcasted_map_object_descr_to_lua(L, ware_description);
 }
 
@@ -614,10 +610,11 @@ int LuaPlayerBase::get_workers(lua_State * L) {
 */
 // UNTESTED
 int LuaPlayerBase::get_wares(lua_State * L) {
-	Player& player = get(L, get_egbase(L));
+	EditorGameBase& egbase = get_egbase(L);
+	Player& player = get(L, egbase);
 	const std::string warename = luaL_checkstring(L, -1);
 
-	const WareIndex ware = player.tribe().ware_index(warename);
+	const WareIndex ware = egbase.tribes().ware_index(warename);
 
 	uint32_t nwares = 0;
 	for (uint32_t i = 0; i < player.get_nr_economies(); ++i) {
