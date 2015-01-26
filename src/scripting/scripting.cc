@@ -159,12 +159,6 @@ LuaInterface::LuaInterface() {
 	open_lua_library(m_L, LUA_DBLIBNAME, luaopen_debug, true);
 	open_lua_library(m_L, LUA_COLIBNAME, luaopen_coroutine, true);
 
-#ifndef NDEBUG
-	open_lua_library(m_L, LUA_LOADLIBNAME, luaopen_package, true);
-	open_lua_library(m_L, LUA_IOLIBNAME, luaopen_io, true);
-	open_lua_library(m_L, LUA_OSLIBNAME, luaopen_os, true);
-#endif
-
 	// Push the instance of this class into the registry
 	// MSVC2008 requires that stored and retrieved types are
 	// same, so use LuaInterface* on both sides.
