@@ -206,7 +206,7 @@ end
 --    :returns: a list weapons images with the producing and receiving building
 --
 function dependencies_training_weapons(tribename, building_description, and_or, weapons, manufacturer)
-	local manufacturer_description = wl.Game():get_building_description(tribename, manufacturer)
+	local manufacturer_description = wl.Game():get_building_description(manufacturer)
 	local weaponsstring = ""
 	for count, weapon in pairs(weapons) do
 		if(count > 1) then
@@ -246,7 +246,7 @@ end
 --
 function building_help_general_string(tribename, building_description, purpose, note)
 	-- Need to get the building description again to make sure we have the correct type, e.g. "productionsite"
-	local building_description = wl.Game():get_building_description(tribename, building_description.name)
+	local building_description = wl.Game():get_building_description(building_description.name)
 
 -- TODO(GunChleoc) "carrier" for headquarters, "ship" for ports, "scout" for scouts_hut, "shipwright" for shipyard?
 -- TODO(GunChleoc) use aihints for gamekeeper, forester?
@@ -357,7 +357,7 @@ end
 --    :returns: an rt string with images describing a chain of ware/building dependencies
 --
 function building_help_dependencies_production(tribename, building_description, add_constructionsite)
-	local building_description = wl.Game():get_building_description(tribename, building_description.name)
+	local building_description = wl.Game():get_building_description(building_description.name)
 	local result = ""
 	local hasinput = false
 	for i, ware_description in ipairs(building_description.inputs) do
@@ -423,7 +423,8 @@ function building_help_dependencies_production(tribename, building_description, 
 	for i, ware_description in ipairs(building_description.output_ware_types) do
 		-- constructionsite isn't listed with the consumers, so we need a special switch
 		if (add_constructionsite) then
-			local constructionsite_description = wl.Game():get_building_description(tribename, "constructionsite")
+			local constructionsite_description =
+			   wl.Game():get_building_description("constructionsite")
 			outgoing = outgoing .. dependencies({ware_description, constructionsite_description},
 															 constructionsite_description.descname)
 		end
@@ -445,7 +446,15 @@ function building_help_dependencies_production(tribename, building_description, 
 		local addsoldier = false
 		for j, buildcost in ipairs(soldier.buildcost) do
 			if(buildcost == ware) then
-			local headquarters_description = wl.Game():get_building_description(tribename, "headquarters")
+			local headquarters_description
+			-- NOCOM(GunChleoc): This is now atlantean_headquarters etc. Ugly hack, can this be improved?
+		if (tribename == "atlanteans") then
+		   headquarters_description = wl.Game():get_worker_description("atlanteans_headquarters")
+		elseif (tribename == "barbarians") then
+		   headquarters_description = wl.Game():get_worker_description("barbarians_headquarters")
+		else
+		   headquarters_description = wl.Game():get_worker_description("empire_headquarters")
+		end
 			outgoing = outgoing .. dependencies({ware, headquarters_description, soldier}, soldier.descname)
 			end
 		end
@@ -534,7 +543,7 @@ function building_help_building_section(tribename, building_description, enhance
 		if (building_description.enhanced) then
 			local former_building = nil
 			if (enhanced_from) then
-				former_building = wl.Game():get_building_description(tribename, enhanced_from)
+				former_building = wl.Game():get_building_description(enhanced_from)
 				if (building_description.buildable) then
 					result = result .. text_line(_"Or enhanced from:", former_building.descname)
 				else
@@ -561,7 +570,7 @@ function building_help_building_section(tribename, building_description, enhance
 			end
 
 			for index, former in pairs(former_buildings) do
-				former_building = wl.Game():get_building_description(tribename, former)
+				former_building = wl.Game():get_building_description(former)
 				if (former_building.buildable) then
 					for ware, amount in pairs(former_building.build_cost) do
 						if (warescost[ware]) then
@@ -609,7 +618,7 @@ function building_help_building_section(tribename, building_description, enhance
 				end
 			end
 			for index, former in pairs(former_buildings) do
-				former_building = wl.Game():get_building_description(tribename, former)
+				former_building = wl.Game():get_building_description(former)
 				if (former_building.buildable) then
 					for ware, amount in pairs(former_building.returned_wares) do
 						if (warescost[ware]) then
@@ -671,7 +680,7 @@ end
 --
 function building_help_crew_string(tribename, building_description)
 	-- Need to get the building description again to make sure we have the correct type, e.g. "productionsite"
-	local building_description = wl.Game():get_building_description(tribename, building_description.name)
+	local building_description = wl.Game():get_building_description(building_description.name)
 	local result = ""
 
 	if(building_description.type_name == "productionsite" or building_description.type_name == "trainingsite") then

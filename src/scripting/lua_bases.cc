@@ -146,9 +146,8 @@ int LuaEditorGameBase::get_players(lua_State * L) {
  */
 
 /* RST
-	.. function:: get_building_description(tribename, building_description.name)
+	.. function:: get_building_description(building_description.name)
 
-		:arg tribe_name: the name of the tribe that this building belongs to
 		:arg building_name: the name of the building
 
 		Registers a building description so Lua can reference it from the game.
@@ -156,20 +155,15 @@ int LuaEditorGameBase::get_players(lua_State * L) {
 		(RO) The :class:`~wl.Game.Building_description`.
 */
 int LuaEditorGameBase::get_building_description(lua_State* L) {
-	if (lua_gettop(L) != 3) {
+	if (lua_gettop(L) != 2) {
 		report_error(L, "Wrong number of arguments");
 	}
-	const std::string tribe_name = luaL_checkstring(L, 2);
-	const std::string building_name = luaL_checkstring(L, 3);
-	const TribeDescr* tribe_description = get_egbase(L).get_tribe(tribe_name);
-	if (!tribe_description) {
-		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
-	}
-	const BuildingIndex building_index = tribe_description->building_index(building_name);
+	const std::string building_name = luaL_checkstring(L, 2);
+	const BuildingIndex building_index = egbase.tribes().building_index(building_name);
 	if (building_index == INVALID_INDEX) {
 		report_error(L, "Building %s does not exist", building_name.c_str());
 	}
-	const BuildingDescr* building_description = tribe_description->get_building_descr(building_index);
+	const BuildingDescr* building_description = egbase.tribes().get_building_descr(building_index);
 
 	return LuaMaps::upcasted_map_object_descr_to_lua(L, building_description);
 }

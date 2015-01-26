@@ -6,7 +6,7 @@ include "tribes/scripting/format_help.lua"
 return {
    func = function(building_description)
 	-- need to get this again, so the building description will be of type "trainingsite"
-	local building_description = wl.Game():get_building_description("barbarians", building_description.name)
+	local building_description = wl.Game():get_building_description(building_description.name)
 	return
 
 	--Lore Section
