@@ -48,7 +48,6 @@
 #include "logic/worker_program.h"
 #include "logic/world/resource_description.h"
 #include "logic/world/world.h"
-#include "profile/profile.h"
 #include "sound/sound_handler.h"
 
 namespace Widelands {
@@ -1703,49 +1702,6 @@ void ProductionProgram::ActConstruct::building_work_failed
 	psite.program_end(game, Failed);
 }
 
-ProductionProgram::ProductionProgram(
-		const std::string& directory, Profile& prof, const std::string& _name,
-		const std::string& _descname, const World& world,
-		ProductionSiteDescr* building)
-	: m_name(_name), m_descname(_descname) {
-	Section& program_s = prof.get_safe_section(_name.c_str());
-	while (Section::Value* const v = program_s.get_next_val()) {
-		ProductionProgram::Action* action;
-		if (!strcmp(v->get_name(), "return"))
-			action = new ActReturn(v->get_string(), *building);
-		else if (!strcmp(v->get_name(), "call"))
-			action = new ActCall(v->get_string(), *building);
-		else if (!strcmp(v->get_name(), "sleep"))
-			action = new ActSleep(v->get_string());
-		else if (!strcmp(v->get_name(), "animate"))
-			action = new ActAnimate(v->get_string(), directory, prof, building);
-		else if (!strcmp(v->get_name(), "consume"))
-			action = new ActConsume(v->get_string(), *building);
-		else if (!strcmp(v->get_name(), "produce"))
-			action = new ActProduce(v->get_string(), *building);
-		else if (!strcmp(v->get_name(), "recruit"))
-			action = new ActRecruit(v->get_string(), *building);
-		else if (!strcmp(v->get_name(), "worker"))
-			action = new ActWorker(v->get_string(), _name, building);
-		else if (!strcmp(v->get_name(), "mine"))
-			action = new ActMine(v->get_string(), world, _name, building);
-		else if (!strcmp(v->get_name(), "check_soldier"))
-			action = new ActCheckSoldier(v->get_string());
-		else if (!strcmp(v->get_name(), "train"))
-			action = new ActTrain(v->get_string());
-		else if (!strcmp(v->get_name(), "playFX"))
-			action = new ActPlayFX(directory, v->get_string());
-		else if (!strcmp(v->get_name(), "construct"))
-			action = new ActConstruct(v->get_string(), _name, building);
-		else if (!strcmp(v->get_name(), "check_map"))
-			action = new ActCheckMap(v->get_string());
-		else
-			throw GameDataError("unknown command type \"%s\"", v->get_name());
-		m_actions.push_back(action);
-	}
-	if (m_actions.empty())
-		throw GameDataError("no actions");
-}
 
 ProductionProgram::ProductionProgram(const std::string& _name,
 						const std::string& _descname,

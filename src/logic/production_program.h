@@ -513,13 +513,6 @@ struct ProductionProgram {
 		uint32_t radius;
 	};
 
-	ProductionProgram(const std::string& directory,
-	                  Profile&,
-	                  const std::string& name,
-	                  const std::string& descname,
-	                  const World&,
-	                  ProductionSiteDescr*);
-
 	ProductionProgram(const std::string& _name,
 							const std::string& _descname,
 							const LuaTable actions,

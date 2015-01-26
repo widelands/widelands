@@ -23,34 +23,8 @@
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/tribe.h"
-#include "profile/profile.h"
 
 namespace Widelands {
-
-void Buildcost::parse(const TribeDescr & tribe, Section & buildcost_s)
-{
-	while (Section::Value const * const val = buildcost_s.get_next_val())
-		try {
-			WareIndex const idx = tribe.ware_index(val->get_name());
-			if (idx != INVALID_INDEX) {
-				if (count(idx))
-					throw wexception
-						("a buildcost item of this ware type has already been "
-						 "defined");
-				int32_t const value = val->get_int();
-				if (value < 1 || 255 < value)
-					throw wexception("count is out of range 1 .. 255");
-				insert(std::pair<WareIndex, uint8_t>(idx, value));
-			} else
-				throw wexception
-					("tribe does not define a ware type with this name");
-		} catch (const WException & e) {
-			throw wexception
-				("[buildcost] \"%s=%s\": %s",
-				 val->get_name(), val->get_string(), e.what());
-		}
-}
-
 
 void Buildcost::parse(const LuaTable& table)
 {
