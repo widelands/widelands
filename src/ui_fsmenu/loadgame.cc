@@ -47,6 +47,7 @@
 
 namespace {
 
+// NOCOM(#codereview): please document, not sure what this does?
 std::string map_filename(const std::string& filename, const std::string& mapname) {
 	std::string result = FileSystem::filename_without_ext(filename.c_str());
 	std::string mapname_localized;
