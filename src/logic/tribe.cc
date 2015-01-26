@@ -180,6 +180,7 @@ TribeDescr::TribeDescr
 		m_soldier = items_table.get_string(1);
 
 		try {
+			// NOCOM(GunChleoc): Use the new init.lua in tribes/scripting
 			const std::string path = "tribes/scripting/starting_conditions/";
 
 			// Read initializations -- all scripts are initializations currently
@@ -248,6 +249,7 @@ bool TribeDescr::exists_tribe
 				info->name = tribename;
 				info->uiposition = table.haskey("uiposition") ? table.get_int("uiposition") : 0;
 
+				// NOCOM(GunChleoc): Use the new init.lua in tribes/scripting
 				const std::string path = "tribes/scripting/starting_conditions/";
 					// Read initializations -- all scripts are initializations currently
 				for (const std::string& script :
