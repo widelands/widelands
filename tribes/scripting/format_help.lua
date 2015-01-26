@@ -264,7 +264,14 @@ function building_help_general_string(tribename, building_description, purpose, 
 		representative_resource = wl.Game():get_ware_description("log")
 	elseif(building_description.type_name == "militarysite" or
 			 building_description.type_name == "trainingsite") then
-		representative_resource = wl.Game():get_worker_description(tribename, "soldier")
+		-- NOCOM(GunChleoc): This is now atlantean_soldier etc. Ugly hack, can this be improved?
+		if (tribename == "atlanteans") then
+		   representative_resource = wl.Game():get_worker_description("atlanteans_soldier")
+		elseif (tribename == "barbarians") then
+		   representative_resource = wl.Game():get_worker_description("barbarians_soldier")
+		else
+		   representative_resource = wl.Game():get_worker_description("empire_soldier")
+		end
 	end
 
 	local result = rt(h2(_"General"))
@@ -426,7 +433,15 @@ function building_help_dependencies_production(tribename, building_description, 
 		end
 
 		-- soldiers aren't listed with the consumers
-		local soldier  = wl.Game():get_worker_description(tribename, "soldier")
+		local soldier
+		-- NOCOM(GunChleoc): This is now atlantean_soldier etc. Ugly hack, can this be improved?
+		if (tribename == "atlanteans") then
+		   soldier = wl.Game():get_worker_description("atlanteans_soldier")
+		elseif (tribename == "barbarians") then
+		   soldier = wl.Game():get_worker_description("barbarians_soldier")
+		else
+		   soldier = wl.Game():get_worker_description("empire_soldier")
+		end
 		local addsoldier = false
 		for j, buildcost in ipairs(soldier.buildcost) do
 			if(buildcost == ware) then

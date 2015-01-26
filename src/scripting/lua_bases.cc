@@ -201,9 +201,8 @@ int LuaEditorGameBase::get_ware_description(lua_State* L) {
 
 
 /* RST
-	.. function:: get_worker_description(tribename, worker_description.name)
+	.. function:: get_worker_description(worker_description.name)
 
-		:arg tribe_name: the name of the tribe that this building belongs to
 		:arg worker_name: the name of the worker
 
 		Registers a worker description so Lua can reference it from the game.
@@ -211,20 +210,16 @@ int LuaEditorGameBase::get_ware_description(lua_State* L) {
 		(RO) The :class:`~wl.Game.Worker_description`.
 */
 int LuaEditorGameBase::get_worker_description(lua_State* L) {
-	if (lua_gettop(L) != 3) {
+	if (lua_gettop(L) != 2) {
 		report_error(L, "Wrong number of arguments");
 	}
-	const std::string tribe_name = luaL_checkstring(L, 2);
-	const std::string worker_name = luaL_checkstring(L, 3);
-	const TribeDescr* tribe_description = get_egbase(L).get_tribe(tribe_name);
-	if (!tribe_description) {
-		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
-	}
-	const WareIndex worker_index = tribe_description->worker_index(worker_name);
+	const std::string worker_name = luaL_checkstring(L, 2);
+
+	const WareIndex worker_index = egbase.tribes().worker_index(worker_name);
 	if (worker_index == INVALID_INDEX) {
 		report_error(L, "Worker %s does not exist", worker_name.c_str());
 	}
-	const WorkerDescr* worker_description = tribe_description->get_worker_descr(worker_index);
+	const WorkerDescr* worker_description = egbase.tribes().get_worker_descr(worker_index);
 	return LuaMaps::upcasted_map_object_descr_to_lua(L, worker_description);
 }
 
