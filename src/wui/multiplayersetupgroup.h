@@ -20,7 +20,6 @@
 #ifndef WL_WUI_MULTIPLAYERSETUPGROUP_H
 #define WL_WUI_MULTIPLAYERSETUPGROUP_H
 
-#include <memory>
 #include <map>
 #include <memory>
 #include <string>
@@ -32,8 +31,6 @@
 #include "ui_basic/box.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/textarea.h"
-
-#define MAXCLIENTS 64
 
 struct GameSettingsProvider;
 struct MultiPlayerSetupGroupOptions;
@@ -62,8 +59,8 @@ struct MultiPlayerSetupGroup : public UI::Panel {
 private:
 	GameSettingsProvider   * const s;
 	std::unique_ptr<NetworkPlayerSettingsBackend> npsb;
-	std::vector<MultiPlayerClientGroup *> c;
-	std::vector<MultiPlayerPlayerGroup *> p;
+	std::vector<MultiPlayerClientGroup*> multi_player_client_groups;  // not owned
+	std::vector<MultiPlayerPlayerGroup*> multi_player_player_groups;  // not owned
 	UI::Box                  clientbox, playerbox;
 	std::vector<UI::Textarea *> labels;
 
