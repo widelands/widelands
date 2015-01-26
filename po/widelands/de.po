@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2015-01-22 11:01+0000\n"
-"PO-Revision-Date: 2015-01-23 02:24+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"PO-Revision-Date: 2015-01-25 13:32+0000\n"
+"Last-Translator: Ole <pottmann88484@gmail.com>\n"
 "Language-Team: widelands-dev\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2015-01-24 05:33+0000\n"
+"X-Launchpad-Export-Date: 2015-01-26 05:37+0000\n"
 "X-Generator: Launchpad (build 17306)\n"
 "Language: de\n"
 
@@ -3642,7 +3642,7 @@ msgstr "G: %s"
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:175
 msgid "Center main mapview on location"
-msgstr ""
+msgstr "Hauptkart hier rauf zentrieren"
 
 #. * TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey
 #: ../../src/wui/game_message_menu.cc:500
