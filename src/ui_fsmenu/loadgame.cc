@@ -47,7 +47,9 @@
 
 namespace {
 
-// NOCOM(#codereview): please document, not sure what this does?
+// This function concatenates the filename and localized map name for a savegame/replay.
+// If the filename starts with the map name, the map name is omitted.
+// It also prefixes autosave files with a numbered and localized "Autosave" prefix.
 std::string map_filename(const std::string& filename, const std::string& mapname) {
 	std::string result = FileSystem::filename_without_ext(filename.c_str());
 	std::string mapname_localized;
