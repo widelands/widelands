@@ -480,7 +480,8 @@ Tribes
 
 .. class:: Tribes
 
-	// NOCOM(#sirver): document
+	This offers access to the objects available for the tribes and allows to add
+	new objects.
 */
 
 const char LuaTribes::className[] = "Tribes";
