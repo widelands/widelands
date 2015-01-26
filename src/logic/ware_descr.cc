@@ -25,30 +25,8 @@
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "logic/tribe.h"
-#include "profile/profile.h"
 
 namespace Widelands {
-
-WareDescr::WareDescr
-	(char const * const _name,
-	 char const * const _descname,
-	 const std::string & directory, Profile & prof, Section & global_s)
-	:
-	MapObjectDescr(MapObjectType::WARE, _name, _descname),
-	generic_name_   ("NOCOM generic name"),
-	icon_fname_    (directory + "/menu.png"),
-	icon_(g_gr->images().get("pics/but0.png"))
-{
-	helptexts_.insert("default", "NOCOM default helptext");
-	default_target_quantities_.insert
-			("default",
-			 global_s.get_positive("default_target_quantity", std::numeric_limits<uint32_t>::max()));
-
-	add_animation("idle", g_gr->animations().load(directory, prof.get_safe_section("idle")));
-
-	// NOCOM take care of tribes
-	preciousnesses_.insert("default", global_s.get_natural("preciousness", 0));
-}
 
 WareDescr::WareDescr(const LuaTable& table) :
 	MapObjectDescr(MapObjectType::WARE, table.get_string("name"), table.get_string("descname")),
