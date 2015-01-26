@@ -1,10 +1,10 @@
 dirname = path.dirname(__file__)
 
 terrain_affinity = {
-   preferred_temperature = 279.97182496111952,
-   preferred_humidity = 0.72237116516525124,
-   preferred_fertility = 0.71381323883046222,
-   pickiness = 0.0,
+   preferred_temperature = 283.81248780942167,
+   preferred_humidity = 0.70557470200287675,
+   preferred_fertility = 0.33588939650946081,
+   pickiness = 0.59843914180773927,
 }
 
 world:new_immovable_type{
