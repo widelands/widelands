@@ -1,7 +1,4 @@
 This directory holds tools and scripts for win32-system users.
-* you can run buildcat.sh in msys (with installed python) to compile
-  the gettext translation files
-* You can find a Makefile for mingw-gcc >= 4.1 in subdirectory "mingw"
 * You can find an InnoSetup-Script "Widelands.iss" for packing your 
   compiled Widelands build in subdiretory "innosetup".
-  the needed software can be find at http://www.jrsoftware.org
+  the needed software can be found at http://www.jrsoftware.org
