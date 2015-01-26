@@ -16,8 +16,18 @@ tribes:new_productionsite_type {
 		granite = 1
 	},
 
-	-- #TRANSLATORS: Helptext for a building: Gold Mine
-   helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
+   helptexts = {
+		-- TRANSLATORS: Lore helptext for a building
+		lore = _[[‘Soft and supple.<br> And yet untouched by time and weather.<br> Rays of sun, wrought into eternity ...’]],
+		-- TRANSLATORS: Lore author helptext for a building
+		lore_author = _[[Excerpt from ‘Our Treasures Underground’,<br> a traditional Barbarian song.]],
+		-- TRANSLATORS: Purpose helptext for a building
+		purpose = _"Digs gold ore out of the ground in mountain terrain.",
+		-- TRANSLATORS: Note helptext for a building
+		note = _"This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any gold ore.":bformat("1/3"),
+		-- TRANSLATORS: Performance helptext for a building
+		performance = _"If the food supply is steady, this mine can produce gold ore in %s on average.":bformat(ngettext("%d second", "%d seconds", 65):bformat(65))
+   }
 
    animations = {
 		idle = {

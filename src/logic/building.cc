@@ -62,7 +62,6 @@ BuildingDescr::BuildingDescr
 	m_global        (false),
 	m_vision_range  (0)
 {
-	// NOCOM(GunChleoc): Implement this
 	try {
 		const std::string size = table.get_string("size");
 		if (size == "small")
@@ -183,6 +182,13 @@ BuildingDescr::BuildingDescr
 	if(table.has_key("vision_range")) {
 		m_vision_range = table.get_int("vision_range");
 	}
+
+	items_table = table.get_table("helptexts");
+	helptexts_.lore_ = items_table.get_string("lore");
+	helptexts_.lore_author_ = items_table.get_string("lore_author");
+	helptexts_.purpose_ = items_table.get_string("purpose");
+	helptexts_.note_ = items_table.get_string("note");
+	helptexts_.performance_ = items_table.get_string("performance");
 }
 
 

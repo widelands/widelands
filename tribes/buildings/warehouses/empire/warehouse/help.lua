@@ -4,16 +4,13 @@ set_textdomain("tribes")
 include "tribes/scripting/format_help.lua"
 
 return {
-   func = function(building_description)
+	func = function(building_description)
 	return
 
-	--Lore Section
-	building_help_lore_string("empire", building_description, _[[Text needed]], _[[Source needed]]) ..
-	--General Section
-	building_help_general_string("empire", building_description,
-		_"Warehouses store soldiers, wares and tools.") ..
+		--General Section
+		building_help_general_string(building_description) ..
 
-	--Building Section
-	building_help_building_section("empire", building_description)
-   end
+		--Building Section
+		building_help_building_section(building_description) ..
+	end
 }

@@ -168,6 +168,7 @@ public:
 	int get_enhanced(lua_State *);
 	int get_enhancement_cost(lua_State *);
 	int get_enhancement(lua_State *);
+	int get_helptexts(lua_State*);
 	int get_icon_name(lua_State*);
 	int get_is_mine(lua_State *);
 	int get_is_port(lua_State *);

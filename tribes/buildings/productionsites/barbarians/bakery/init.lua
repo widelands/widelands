@@ -18,8 +18,18 @@ tribes:new_productionsite_type {
 		granite = 2
 	},
 
-	-- #TRANSLATORS: Helptext for a building: Bakery
-   helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
+   helptexts = {
+		-- TRANSLATORS: Lore helptext for a building
+		lore = _"Text needed",
+		-- TRANSLATORS: Lore author helptext for a building
+		lore_author = _"Source needed",
+		-- TRANSLATORS: Purpose helptext for a building
+		purpose = _"Bakes pitta bread for soldiers and miners alike.",
+		-- #TRANSLATORS: Note helptext for a building
+		note = "",
+		-- TRANSLATORS: Performance helptext for a building
+		performance = _"If all needed wares are delivered in time, this building can produce a pitta bread in %s on average.":bformat(ngettext("%d second", "%d seconds", 30):bformat(30))
+   }
 
    animations = {
 		idle = {

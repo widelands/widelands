@@ -23,8 +23,18 @@ tribes:new_trainingsite_type {
 		quartz = 1
 	},
 
-	-- #TRANSLATORS: Helptext for a building: Labyrinth
-   helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
+   helptexts = {
+		-- TRANSLATORS: Lore helptext for a building
+		lore = _"Text needed",
+		-- TRANSLATORS: Lore author helptext for a building
+		lore_author = _"Source needed",
+		-- TRANSLATORS: Purpose helptext for a building
+		purpose = _"Trains soldiers in ‘Defense’, ‘Evade’, and ‘Health’."	.. " " .."Equips the soldiers with all necessary weapons and armor parts.",
+		-- #TRANSLATORS: Note helptext for a building
+		note = "",
+		-- TRANSLATORS: Performance helptext for a building
+		performance = _"Calculation needed"
+   }
 
    animations = {
 		idle = {
@@ -49,6 +59,9 @@ tribes:new_trainingsite_type {
 		shield_advanced = 4,
 		tabard_golden = 5
 	},
+	outputs = {
+		"atlanteans_soldier",
+   },
 
 	["soldier defense"] = {
 		min_level = 0,

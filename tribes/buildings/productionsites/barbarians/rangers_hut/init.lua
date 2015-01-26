@@ -13,8 +13,19 @@ tribes:new_productionsite_type {
 		log = 3
 	},
 
-	-- #TRANSLATORS: Helptext for a building: Farm
-   helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
+   helptexts = {
+		--"Wer zwei Halme dort wachsen lässt, wo sonst nur einer wächst, der ist größer als der größte Feldherr!" – Friedrich der Große
+		-- TRANSLATORS: Lore helptext for a building
+		lore = _"‘He who can grow two trees where normally only one will grow exceeds the most important general!’",
+		-- TRANSLATORS: Lore author helptext for a building
+		lore_author = _"Chat’Karuth in a conversation with a Ranger",
+		-- TRANSLATORS: Purpose helptext for a building
+		purpose = _"Plants trees in the surrounding area.",
+		-- TRANSLATORS: Note helptext for a building
+		note = _"The ranger’s hut needs free space within the working radius to plant the trees.",
+		-- TRANSLATORS: Performance helptext for a building
+		performance = _"The ranger needs %s to plant a tree, not counting the time he needs to reach the destination and go home again.":bformat(ngettext("%d second", "%d seconds", 5):bformat(5))
+   }
 
    animations = {
 		idle = {

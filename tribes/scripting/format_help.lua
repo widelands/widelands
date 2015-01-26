@@ -84,7 +84,7 @@ end
 
 
 -- RST
--- .. function:: dependencies(tribename, items[, text = nil])
+-- .. function:: dependencies(items[, text = nil])
 --
 --    Creates a dependencies line of any length.
 --
@@ -106,21 +106,20 @@ end
 
 
 -- RST
--- .. function:: dependencies_resi(tribename, resource, items[, text = nil])
+-- .. function:: dependencies_resi(resource, items[, text = nil])
 --
 --    Creates a dependencies line of any length for resources (that don't have menu.png files).
 --
---    :arg tribename: name of the tribe.
 --    :arg resource: name of the geological resource.
 --    :arg items: ware/building descriptions in the correct order from left to right as table (set in {}).
 --    :arg text: comment of the image.
 --    :returns: a row of pictures connected by arrows.
 --
-function dependencies_resi(tribename, resource, items, text)
+function dependencies_resi(resource, items, text)
 	if not text then
 		text = ""
 	end
-	string = "image=tribes/" .. tribename .. "/" .. resource  .. "/idle_00.png"
+	string = "image=tribes/immovables/" .. resource  .. "/idle_00.png"
 	for k,v in ipairs({table.unpack(items)}) do
 		string = string .. ";pics/arrow-right.png;" ..  v.icon_name
 	end
@@ -149,13 +148,13 @@ function dependencies_training(tribename, building_description, untrained, inter
 	return
 		rt(h2(_"Dependencies")) .. rt(h3(_"Soldiers:")) ..
 		dependencies_basic({
-			"tribes/" .. tribename .. "/soldier/" .. untrained .. ".png",
+			"tribes/workers/" .. tribename .. "/soldier/" .. untrained .. ".png",
 			building_description.icon_name,
-			"tribes/" .. tribename .. "/soldier/" .. interim1 .. ".png"}) ..
+			"tribes/workers/" .. tribename .. "/soldier/" .. interim1 .. ".png"}) ..
 		dependencies_basic({
-			"tribes/" .. tribename .. "/soldier/" .. interim2 .. ".png",
+			"tribes/workers/" .. tribename .. "/soldier/" .. interim2 .. ".png",
 			building_description.icon_name,
-			"tribes/" .. tribename .. "/soldier/" .. fulltrained .. ".png"})
+			"tribes/workers/" .. tribename .. "/soldier/" .. fulltrained .. ".png"})
 end
 
 
@@ -164,12 +163,11 @@ end
 --
 --    Creates dependencies lines for food in training sites.
 --
---    :arg tribename: name of the tribe.
 --    :arg foods: an array of arrays with food items. Outer array has "and" logic and
 --	          will appear from back to front, inner arrays have "or" logic
 --    :returns: a list of food descriptions with images
 --
-function dependencies_training_food(tribename, foods)
+function dependencies_training_food(foods)
 	local result = ""
 	for countlist, foodlist in pairs(foods) do
 		local images = ""
@@ -194,18 +192,17 @@ end
 
 
 -- RST
--- .. function:: dependencies_training_weapons(tribename, building_description, and_or, weapons, manufacturer)
+-- .. function:: dependencies_training_weapons(building_description, and_or, weapons, manufacturer)
 --
 --    Creates a dependencies line for any number of weapons.
 --
---    :arg tribename: name of the tribe.
 --    :arg building_description: the trainingsite's building description from C++
 --    :arg and_or: if this is "and" or "or", adds these keyword at the beginning of the equipment string
 --    :arg weapons: an array of weapon names
 --    :arg manufacturer: the name of the building manufacturing the weapons
 --    :returns: a list weapons images with the producing and receiving building
 --
-function dependencies_training_weapons(tribename, building_description, and_or, weapons, manufacturer)
+function dependencies_training_weapons(building_description, and_or, weapons, manufacturer)
 	local manufacturer_description = wl.Game():get_building_description(manufacturer)
 	local weaponsstring = ""
 	for count, weapon in pairs(weapons) do
@@ -233,55 +230,58 @@ end
 --  ************* Main buildinghelp functions *************
 --  =======================================================
 
+
 -- RST
--- .. function building_help_general_string(tribename, building_description, resourcename, purpose[, note])
+-- .. function building_help_general_string(building_description, resourcename, purpose[, note])
 --
 --    Creates the string for the general section in building help
 --
---    :arg tribename: e.g. "barbarians".
 --    :arg building_description: The building's building description from C++
---    :arg purpose: A string explaining the purpose of the building
---    :arg purpose: A string with a note about the building. Drop this argument if you don't want to add a note.
 --    :returns: rt of the formatted text
 --
-function building_help_general_string(tribename, building_description, purpose, note)
+function building_help_general_string(building_description)
 	-- Need to get the building description again to make sure we have the correct type, e.g. "productionsite"
 	local building_description = wl.Game():get_building_description(building_description.name)
+
+	local helptexts = building_description.helptexts
+	local result = rt(h2(_"Lore")) ..
+		rt("image=" .. building_description.representative_image, p(helptexts["lore"]))
+	if (helptexts["lore_author"] ~= "") then
+		result = result .. rt("text-align=right",
+		                      p("font-size=10 font-style=italic",
+		                        helptexts["lore_author"]))
+	end
+
+	result = result .. rt(h2(_"General"))
+	result = result .. rt(h3(_"Purpose:"))
 
 -- TODO(GunChleoc) "carrier" for headquarters, "ship" for ports, "scout" for scouts_hut, "shipwright" for shipyard?
 -- TODO(GunChleoc) use aihints for gamekeeper, forester?
 	local representative_resource = nil
-	if(building_description.type_name == "productionsite") then
+	if (building_description.type_name == "productionsite" or
+	    building_description.type_name == "militarysite"
+	    building_description.type_name == "trainingsite" or) then
 		representative_resource = building_description.output_ware_types[1]
 		if(not representative_resource) then
 			representative_resource = building_description.output_worker_types[1]
 		end
 -- TODO(GunChleoc) need a bob_descr for the ship -> port and shipyard
 -- TODO(GunChleoc) create descr objects for flag, portdock, ...
-	elseif(building_description.is_port or building_description.name == "shipyard") then
+	elseif (building_description.is_port or building_description.name == "shipyard") then
 		representative_resource = nil
-	elseif(building_description.type_name == "warehouse") then
+	elseif (building_description.type_name == "warehouse") then
 		representative_resource = wl.Game():get_ware_description("log")
-	elseif(building_description.type_name == "militarysite" or
-			 building_description.type_name == "trainingsite") then
-		-- NOCOM(GunChleoc): This is now atlantean_soldier etc. Ugly hack, can this be improved?
-		if (tribename == "atlanteans") then
-		   representative_resource = wl.Game():get_worker_description("atlanteans_soldier")
-		elseif (tribename == "barbarians") then
-		   representative_resource = wl.Game():get_worker_description("barbarians_soldier")
-		else
-		   representative_resource = wl.Game():get_worker_description("empire_soldier")
-		end
 	end
 
-	local result = rt(h2(_"General"))
-	result = result .. rt(h3(_"Purpose:"))
 	if(representative_resource) then
-		result = result .. image_line(representative_resource.icon_name, 1, p(purpose))
+		result = result .. image_line(representative_resource.icon_name, 1, p(helptexts.purpose))
 	else
-		result = result .. rt(p(purpose))
+		result = result .. rt(p(helptexts.purpose))
 	end
-	if (note) then	result = result .. rt(h3(_"Note:")) .. rt(p(note)) end
+
+	if (helptexts.note ~= "") then
+		result = result .. rt(h3(_"Note:")) .. rt(p(helptexts.note))
+	end
 
 	if(building_description.type_name == "productionsite") then
 		if(building_description.workarea_radius and building_description.workarea_radius > 0) then
@@ -326,28 +326,7 @@ end
 
 
 -- RST
--- .. function building_help_lore_string(tribename, building_description, flavourtext[, author])
---
---    Displays the building's main image with a flavour text.
---
---    :arg tribename: e.g. "barbarians".
---    :arg building_description: The building description we get from C++
---    :arg flavourtext: e.g. "Catches fish in the sea".
---    :arg author: e.g. "Krumta, carpenter of Chat'Karuth". This paramater is optional.
---    :returns: rt of the image with the text
---
-function building_help_lore_string(tribename, building_description, flavourtext, author)
-	local result = rt(h2(_"Lore")) ..
-		rt("image=" .. building_description.representative_image, p(flavourtext))
-		if author then
-			result = result .. rt("text-align=right",p("font-size=10 font-style=italic", author))
-		end
-	return result
-end
-
-
--- RST
--- .. function:: building_help_outputs(tribename, building_description[, add_constructionsite])
+-- .. function:: building_help_dependencies_production(tribename, building_description[, add_constructionsite])
 --
 --    The input and output wares of a productionsite
 --
@@ -398,7 +377,6 @@ function building_help_dependencies_production(tribename, building_description, 
 			elseif(resi_name == "marble") then resi_name = "stones"
 			elseif(resi_name == "gold_ore") then resi_name = "gold" end
 			result = result .. dependencies_resi(
-				tribename,
 				"resi_"..resi_name.."2",
 				{building_description, ware_description},
 				ware_description.descname
@@ -448,13 +426,13 @@ function building_help_dependencies_production(tribename, building_description, 
 			if(buildcost == ware) then
 			local headquarters_description
 			-- NOCOM(GunChleoc): This is now atlantean_headquarters etc. Ugly hack, can this be improved?
-		if (tribename == "atlanteans") then
-		   headquarters_description = wl.Game():get_worker_description("atlanteans_headquarters")
-		elseif (tribename == "barbarians") then
-		   headquarters_description = wl.Game():get_worker_description("barbarians_headquarters")
-		else
-		   headquarters_description = wl.Game():get_worker_description("empire_headquarters")
-		end
+			if (tribename == "atlanteans") then
+				headquarters_description = wl.Game():get_worker_description("atlanteans_headquarters")
+			elseif (tribename == "barbarians") then
+				headquarters_description = wl.Game():get_worker_description("barbarians_headquarters")
+			else
+				headquarters_description = wl.Game():get_worker_description("empire_headquarters")
+			end
 			outgoing = outgoing .. dependencies({ware, headquarters_description, soldier}, soldier.descname)
 			end
 		end
@@ -486,11 +464,10 @@ end
 
 -- RST
 --
--- .. function:: building_help_building_section(tribename, building_description[, enhanced_from, former_buildings])
+-- .. function:: building_help_building_section(building_description[, enhanced_from, former_buildings])
 --
 --    Formats the "Building" section in the building help: Enhancing info, costs and space required
 --
---    :arg tribename: e.g. "barbarians".
 --    :arg building_description: The building description we get from C++
 --    :arg enhanced_from: The building name that this building is usually enhanced from.
 --                        Leave blank if this is a basic building.
@@ -499,7 +476,7 @@ end
 --                        and dismantle costs.
 --    :returns: an rt string describing the building section
 --
-function building_help_building_section(tribename, building_description, enhanced_from, former_buildings)
+function building_help_building_section(building_description, enhanced_from, former_buildings)
 
 	local result = rt(h2(_"Building"))
 
@@ -670,15 +647,14 @@ end
 
 
 -- RST
--- .. function building_help_crew_string(tribename, building_description)
+-- .. function building_help_crew_string(building_description)
 --
 --    Displays the building's workers with an image and the tool they use
 --
---    :arg tribename: e.g. "barbarians".
 --    :arg building_description: the building_description from C++.
 --    :returns: Workers/Crew section of the help file
 --
-function building_help_crew_string(tribename, building_description)
+function building_help_crew_string(building_description)
 	-- Need to get the building description again to make sure we have the correct type, e.g. "productionsite"
 	local building_description = wl.Game():get_building_description(building_description.name)
 	local result = ""
@@ -697,6 +673,7 @@ function building_help_crew_string(tribename, building_description)
 			-- Get the tools for the workers.
 			if(worker_description.buildable) then
 				for j, buildcost in ipairs(worker_description.buildcost) do
+					-- NOCOM(GunChleoc): Different carrier types now
 					if( not (buildcost == "carrier" or buildcost == "none" or buildcost == nil)) then
 						toolnames[#toolnames + 1] = buildcost
 					end
@@ -716,7 +693,7 @@ function building_help_crew_string(tribename, building_description)
 		end
 
 		if(#toolnames > 0) then
-			result = result .. building_help_tool_string(tribename, toolnames, number_of_workers)
+			result = result .. building_help_tool_string(toolnames, number_of_workers)
 		end
 
 		if(becomes_description) then
@@ -746,16 +723,15 @@ end
 
 
 -- RST
--- .. function building_help_tool_string(tribename, toolname)
+-- .. function building_help_tool_string( toolname)
 --
 --    Displays tools with an intro text and images
 --
---    :arg tribename: e.g. "barbarians".
 --    :arg toolnames: e.g. {"shovel", "basket"}.
 --    :arg no_of_workers: the number of workers using the tools; for plural formatting.
 --    :returns: text_line for the tools
 --
-function building_help_tool_string(tribename, toolnames, no_of_workers)
+function building_help_tool_string(toolnames, no_of_workers)
 	local result = rt(h3(ngettext("Worker uses:","Workers use:", no_of_workers)))
 	local game  = wl.Game();
 	for i, toolname in ipairs(toolnames) do
@@ -766,13 +742,18 @@ function building_help_tool_string(tribename, toolnames, no_of_workers)
 end
 
 -- RST
--- .. building_help_production_section(performance_description)
+-- .. building_help_production_section(building_description)
 --
 --    Displays the production/performance section with a headline
 --
---    :arg performance_description: a string describing the performance of tha building
+--    :arg building_description: The building's building description from C++
 --    :returns: rt for the production section
 --
-function building_help_production_section(performance_description)
-	return rt(h2(_"Production")) .. text_line(_"Performance:", performance_description)
+function building_help_production_section(building_description)
+	if (building_description.helptexts.performance ~= "") then
+		return rt(h2(_"Production")) ..
+		  text_line(_"Performance:", building_description.helptexts.performance)
+	else
+		return ""
+	end
 end

@@ -13,8 +13,18 @@ tribes:new_productionsite_type {
 		log = 2
 	},
 
-	-- #TRANSLATORS: Helptext for a building: Fisher’s Hut
-   helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
+   helptexts = {
+		-- TRANSLATORS: Lore helptext for a building
+		lore = _"‘What do you mean, my fish ain’t fresh?!’",
+		-- TRANSLATORS: Lore author helptext for a building
+		lore_author = _"Source needed",
+		-- TRANSLATORS: Purpose helptext for a building
+		purpose = _"Fishes on the coast near the hut.",
+		-- TRANSLATORS: Note helptext for a building
+		note = _"The fisher’s hut needs water full of fish within the working radius.",
+		-- TRANSLATORS: Performance helptext for a building
+		performance = _"The fisher pauses %s before going to work again.":bformat(ngettext("%d second", "%d seconds", 18):bformat(18))
+   }
 
    animations = {
 		idle = {

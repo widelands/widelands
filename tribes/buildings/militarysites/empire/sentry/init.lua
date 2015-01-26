@@ -24,8 +24,18 @@ tribes:new_militarysite_type {
 		granite = 1
 	},
 
-	-- #TRANSLATORS: Helptext for a militarysite: Sentry
-   helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
+   helptexts = {
+		-- TRANSLATORS: Lore helptext for a building
+		lore = _"Text needed",
+		-- TRANSLATORS: Lore author helptext for a building
+		lore_author = _"Source needed",
+		-- TRANSLATORS: Purpose helptext for a building
+		purpose = _"Garrisons soldiers to expand your territory.",
+		-- TRANSLATORS: Note helptext for a building
+		note = _"If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.",
+		-- #TRANSLATORS: Performance helptext for a building
+		performance = ""
+   }
 
    animations = {
 		idle = {
@@ -33,6 +43,10 @@ tribes:new_militarysite_type {
 			hotspot = { 37, 60 }
 		}
 	},
+
+	outputs = {
+		"empire_soldier",
+   },
 
 	max_soldiers = 2,
    heal_per_second = 80,

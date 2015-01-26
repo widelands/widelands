@@ -64,6 +64,13 @@ class Building;
 class BuildingDescr : public MapObjectDescr {
 public:
 	using FormerBuildings = std::vector<BuildingIndex>;
+	struct HelpTexts {
+		const std::string lore_;
+		const std::string lore_author_;
+		const std::string purpose_;
+		const std::string note_;
+		const std::string performance_;
+	};
 
 	BuildingDescr(MapObjectType type, const LuaTable& t);
 	~BuildingDescr() override {}
@@ -92,6 +99,8 @@ public:
 	 * The returned wares for a enhaced building
 	 */
 	const Buildcost & returned_wares_enhanced() const {return m_return_enhanced;}
+
+	const HelpTexts& helptexts() const {return helptexts_;}
 	const Image* get_icon() const {return m_icon;}
 	std::string icon_name() const {return m_icon_fname;}
 	int32_t get_size() const {return m_size;}
@@ -153,6 +162,7 @@ private:
 	bool          m_enhanced_building; // if it is one, it is bulldozable
 	BuildingHints m_hints;             // hints (knowledge) for computer players
 	bool          m_global;            // whether this is a "global" building
+	const HelpTexts helptexts_;
 	std::string   m_helptext_script;
 
 	// for migration, 0 is the default, meaning get_conquers() + 4

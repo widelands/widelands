@@ -8,8 +8,6 @@ tribes:new_militarysite_type {
    vision_range = 17,
    enhancement = "atlanteans_tower_high",
 
-
-
    buildcost = {
 		log = 2,
 		planks = 3,
@@ -22,8 +20,18 @@ tribes:new_militarysite_type {
 		granite = 3
 	},
 
-	-- #TRANSLATORS: Helptext for a militarysite: Tower
-   helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
+   helptexts = {
+		-- TRANSLATORS: Lore helptext for a building
+		lore = _"Text needed",
+		-- TRANSLATORS: Lore author helptext for a building
+		lore_author = _"Source needed",
+		-- TRANSLATORS: Purpose helptext for a building
+		purpose = _"Garrisons soldiers to expand your territory.",
+		-- TRANSLATORS: Note helptext for a building
+		note = _"If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.",
+		-- #TRANSLATORS: Performance helptext for a building
+		performance = ""
+   }
 
    animations = {
 		idle = {
@@ -31,6 +39,10 @@ tribes:new_militarysite_type {
 			hotspot = { 55, 60 },
 		}
 	},
+
+	outputs = {
+		"atlanteans_soldier",
+   },
 
    max_soldiers = 4,
    heal_per_second = 120,

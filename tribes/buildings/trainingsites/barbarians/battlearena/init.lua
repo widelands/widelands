@@ -21,8 +21,18 @@ tribes:new_trainingsite_type {
 		thatch_reed = 1
 	},
 
-	-- #TRANSLATORS: Helptext for a building: Battle Arena
-   helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
+   helptexts = {
+		-- TRANSLATORS: Lore helptext for a building
+		lore = _"‘No better friend you have in battle than the enemy’s blow that misses.’",
+		-- TRANSLATORS: Lore author helptext for a building
+		lore_author = _"Said to originate from Neidhardt, the famous trainer.",
+		-- TRANSLATORS: Purpose helptext for a building
+		purpose = _"Trains soldiers in ‘Evade’." .. " " .. _"‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to remain totally unaffected.",
+		-- TRANSLATORS: Note helptext for a building
+		note = _"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their initial level.",
+		-- TRANSLATORS: Performance helptext for a building
+		performance = _"If all needed wares are delivered in time, a battle arena can train evade for one soldier from 0 to the highest level in %1$s and %2$s on average.":bformat(ngettext("%d minute", "%d minutes", 1):bformat(1), ngettext("%d second", "%d seconds", 10):bformat(10))
+   }
 
    animations = {
 		idle = {
@@ -59,6 +69,9 @@ tribes:new_trainingsite_type {
 		meat = 6,
 		stout = 6
 	},
+	outputs = {
+		"barbarians_soldier",
+   },
 
 	["soldier evade"] = {
 		min_level = 0,

@@ -15,8 +15,18 @@ tribes:new_productionsite_type {
 		granite = 1
 	},
 
-	-- #TRANSLATORS: Helptext for a building: Hunter’s Hut
-   helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
+   helptexts = {
+		-- TRANSLATORS: Lore helptext for a building
+		lore = _[[‘As silent as a panther,<br> as deft as a weasel,<br> as swift as an arrow,<br> as deadly as a viper.’]],
+		-- TRANSLATORS: Lore author helptext for a building
+		lore_author = _"‘The Art of Hunting’",
+		-- TRANSLATORS: Purpose helptext for a building
+		purpose = _"Hunts animals to produce meat.",
+		-- TRANSLATORS: Note helptext for a building
+		note = _"The hunter’s hut needs animals to hunt within the working radius.",
+		-- TRANSLATORS: Performance helptext for a building
+		performance = _"The hunter pauses %s before going to work again.":bformat(ngettext("%d second", "%d seconds", 35):bformat(35))
+   }
 
    animations = {
 		idle = {

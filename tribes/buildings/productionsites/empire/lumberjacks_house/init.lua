@@ -15,8 +15,18 @@ tribes:new_productionsite_type {
 		planks = 1
 	},
 
-	-- #TRANSLATORS: Helptext for a building: Lumberjack’s House
-   helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
+   helptexts = {
+		-- TRANSLATORS: Lore helptext for a building
+		lore = _"Text needed",
+		-- TRANSLATORS: Lore author helptext for a building
+		lore_author = _"Source needed",
+		-- TRANSLATORS: Purpose helptext for a building
+		purpose = _"Fells trees in the surrounding area and processes them into logs.",
+		-- TRANSLATORS: Note helptext for a building
+		note = _"The lumberjack's house needs trees to fell within the working radius.",
+		-- TRANSLATORS: Performance helptext for a building
+		performance = _"Calculation needed"
+   }
 
    animations = {
 		idle = {

@@ -15,8 +15,19 @@ tribes:new_productionsite_type {
 		granite = 1
 	},
 
-	-- #TRANSLATORS: Helptext for a building: Gamekeeper’s Hut
-   helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
+   helptexts = {
+		-- TRANSLATORS: Lore helptext for a building
+		lore = _[[‘He loves the animals and to breed them<br>
+			as we love to cook and eat them.’]],
+		-- TRANSLATORS: Lore author helptext for a building
+		lore_author = _"Barbarian nursery rhyme",
+		-- TRANSLATORS: Purpose helptext for a building
+		purpose = _"Releases animals into the wild to steady the meat production.",
+		-- #TRANSLATORS: Note helptext for a building
+		note = "",
+		-- TRANSLATORS: Performance helptext for a building
+		performance = _"The gamekeeper pauses %s before going to work again.":bformat(ngettext("%d second", "%d seconds", 52.5):bformat(52.5))
+   }
 
    animations = {
 		idle = {

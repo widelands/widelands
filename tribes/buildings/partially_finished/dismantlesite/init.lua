@@ -8,8 +8,18 @@ tribes:new_dismantlesite_type {
    buildable = false,
    vision_range = 2,
 
- 	-- TRANSLATORS: Helptext for a building: Dismantle Site
-   helptext = "", -- TODO(GunChleoc): Have a look at this after merging the branch.
+   helptexts = {
+		-- TRANSLATORS: Lore helptext for a building
+		lore = _"Text needed",
+		-- TRANSLATORS: Lore author helptext for a building
+		lore_author = _"Source needed",
+		-- TRANSLATORS: Purpose helptext for a building
+		purpose = _"Text needed",
+		-- #TRANSLATORS: Note helptext for a building
+		note = "",
+		-- TRANSLATORS: Performance helptext for a building
+		performance = _"Calculation needed"
+   }
 
    animations = {
 		idle = {

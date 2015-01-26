@@ -20,8 +20,18 @@ tribes:new_trainingsite_type {
 		gold = 2
 	},
 
-	-- #TRANSLATORS: Helptext for a building: Training Camp
-   helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
+   helptexts = {
+		-- TRANSLATORS: Lore helptext for a building
+		lore = _"‘He who is strong shall neither forgive nor forget, but revenge injustice suffered – in the past and for all future.’",
+		-- TRANSLATORS: Lore author helptext for a building
+		lore_author = _"Chief Chat’Karuth in a speech to his army.",
+		-- TRANSLATORS: Purpose helptext for a building
+		purpose = _"Trains soldiers in ‘Attack’ and in ‘Health’." .. " " .."Equips the soldiers with all necessary weapons and armor parts.",
+		-- TRANSLATORS: Note helptext for a building
+		note = _"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their initial level.",
+		-- TRANSLATORS: Performance helptext for a building
+		performance = _"If all needed wares are delivered in time, a training camp can train one new soldier in attack and health to the final level in %1$s and %2$s on average.":bformat(ngettext("%d minute", "%d minutes", 4):bformat(4), ngettext("%d second", "%d seconds", 40):bformat(40))
+   }
 
    animations = {
 		idle = {
@@ -60,6 +70,9 @@ tribes:new_trainingsite_type {
 		helmet_mask = 2,
 		helmet_warhelm = 2
 	},
+	outputs = {
+		"barbarians_soldier",
+   },
 
 	["soldier attack"] = {
 		min_level = 0,

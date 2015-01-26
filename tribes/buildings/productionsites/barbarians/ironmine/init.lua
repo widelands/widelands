@@ -16,8 +16,18 @@ tribes:new_productionsite_type {
 		granite = 1
 	},
 
-	-- #TRANSLATORS: Helptext for a building: Iron Mine
-   helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
+   helptexts = {
+		-- TRANSLATORS: Lore helptext for a building
+		lore = _"‘I look at my own pick wearing away day by day and I realize why my work is important.’",
+		-- TRANSLATORS: Lore author helptext for a building
+		lore_author = _"Quote from an anonymous miner.",
+		-- TRANSLATORS: Purpose helptext for a building
+		purpose = _"Digs iron ore out of the ground in mountain terrain.",
+		-- TRANSLATORS: Note helptext for a building
+		note = _"This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any iron ore.":bformat("1/3"),
+		-- TRANSLATORS: Performance helptext for a building
+		performance = _"If the food supply is steady, this mine can produce iron ore in %s on average.":bformat(ngettext("%d second", "%d seconds", 65):bformat(65))
+   }
 
    animations = {
 		idle = {

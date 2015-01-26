@@ -24,8 +24,18 @@ tribes:new_trainingsite_type {
 		log = 1
 	},
 
-	-- #TRANSLATORS: Helptext for a building: Dungeon
-   helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
+   helptexts = {
+		-- TRANSLATORS: Lore helptext for a building
+		lore = _"Text needed",
+		-- TRANSLATORS: Lore author helptext for a building
+		lore_author = _"Source needed",
+		-- TRANSLATORS: Purpose helptext for a building
+		purpose = _"Trains soldiers in ‘Attack’."	.. " " .."Equips the soldiers with all necessary weapons and armor parts.",
+		-- #TRANSLATORS: Note helptext for a building
+		note = "",
+		-- TRANSLATORS: Performance helptext for a building
+		performance = _"Calculation needed"
+   }
 
    animations = {
 		idle = {
@@ -47,6 +57,9 @@ tribes:new_trainingsite_type {
 		trident_double = 4,
 		trident_heavy_double = 4
 	},
+   outputs = {
+		"atlanteans_soldier",
+   },
 
 	["soldier attack"] = {
 		min_level = 0,

@@ -21,8 +21,18 @@ tribes:new_productionsite_type {
 		grout = 1
 	},
 
-	-- #TRANSLATORS: Helptext for a building: War Mill
-   helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
+   helptexts = {
+		-- TRANSLATORS: Lore helptext for a building
+		lore = _"‘A new warrior’s ax brings forth the best in its wielder – or the worst in its maker.’",
+		-- TRANSLATORS: Lore author helptext for a building
+		lore_author = _[[An old Barbarian proverb<br> meaning that you need to take some risks sometimes.]],
+		-- TRANSLATORS: Purpose helptext for a building
+		purpose = _"The war mill produces all the axes that the barbarians use for warfare.",
+		-- TRANSLATORS: Note helptext for a building
+		note = _"The barbarian war mill is their most advanced production site for weapons. As such it needs to be upgraded from an axfactory.",
+		-- TRANSLATORS: Performance helptext for a building
+		performance = _"If all needed wares are delivered in time, this building can produce each type of ax in about %s on average.":bformat(ngettext("%d second", "%d seconds", 57):bformat(57)) .. " " ..	_"All weapons require the same time for making, but the consumption of the same raw materials increases from step to step. The last two need gold."
+   }
 
    animations = {
 		idle = {

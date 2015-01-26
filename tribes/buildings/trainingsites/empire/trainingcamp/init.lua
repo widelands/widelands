@@ -23,8 +23,18 @@ tribes:new_trainingsite_type {
 		marble_column = 1
 	},
 
-	-- #TRANSLATORS: Helptext for a building: Training Camp
-   helptext = "", -- NOCOM(GunChleoc): See what we can shift over from help.lua here
+   helptexts = {
+		-- TRANSLATORS: Lore helptext for a building
+		lore = _"Text needed",
+		-- TRANSLATORS: Lore author helptext for a building
+		lore_author = _"Source needed",
+		-- TRANSLATORS: Purpose helptext for a building
+		purpose = _"Trains soldiers in ‘Attack’ and in ‘Health’." .. " " .."Equips the soldiers with all necessary weapons and armor parts.",
+		-- TRANSLATORS: Note helptext for a building
+		note = _"Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.",
+		-- TRANSLATORS: Performance helptext for a building
+		performance = _"Calculation needed"
+   }
 
    animations = {
 		idle = {
@@ -54,6 +64,9 @@ tribes:new_trainingsite_type {
 		armor_chain = 2,
 		armor_gilded = 2
 	},
+	outputs = {
+		"empire_soldier",
+   },
 
 	["soldier attack"] = {
 		min_level = 0,
