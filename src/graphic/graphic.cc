@@ -260,12 +260,7 @@ bool Graphic::need_update() const {
 */
 void Graphic::refresh()
 {
-	screen_->setup_gl();
-
-	glEnable(GL_DEPTH_TEST);
-	glClear(GL_DEPTH_BUFFER_BIT);
-
-	RenderQueue::instance().draw();
+	RenderQueue::instance().draw(screen_->width(), screen_->height());
 
 	// Setting the window size immediately after going out of fullscreen does
 	// not work properly. We work around this issue by resizing the window in

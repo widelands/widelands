@@ -160,10 +160,16 @@ void RenderQueue::enqueue(const Item& given_item) {
 }
 
 // NOCOM(#sirver): document that this draws everything in this frame.
-void RenderQueue::draw() {
+void RenderQueue::draw(const int screen_width, const int screen_height) {
 	if (next_z >= kMaximumZValue) {
 		throw wexception("Too many drawn layers. Ran out of z-values.");
 	}
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glViewport(0, 0, screen_width, screen_height);
+
+	glEnable(GL_DEPTH_TEST);
+	glClear(GL_DEPTH_BUFFER_BIT);
 
 	glDisable(GL_BLEND);
 
@@ -182,6 +188,7 @@ void RenderQueue::draw() {
 	blended_items_.clear();
 
 	glDepthMask(GL_TRUE);
+	glDisable(GL_DEPTH_TEST);
 	next_z = 1;
 }
 

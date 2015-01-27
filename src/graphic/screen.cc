@@ -35,12 +35,6 @@ void Screen::pixel_to_gl(float* x, float* y) const {
 	*y = 1. - (*y / m_h) * 2.;
 }
 
-// NOCOM(#sirver): remove this and do it in the render queue.
-void Screen::setup_gl() {
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	glViewport(0, 0, m_w, m_h);
-}
-
 int Screen::width() const {
 	return m_w;
 }

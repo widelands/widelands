@@ -46,7 +46,6 @@ public:
 	// Implements Surface
 	int width() const override;
 	int height() const override;
-	void setup_gl() override;
 	void pixel_to_gl(float* x, float* y) const override;
 
 	// Implements Image.
@@ -91,6 +90,8 @@ public:
 	void set_pixel(uint16_t x, uint16_t y, uint32_t clr);
 
 private:
+	// Configures OpenGL to draw to this surface.
+	void setup_gl();
 	void init(uint16_t w, uint16_t h);
 
 	// Implements surface.

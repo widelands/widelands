@@ -74,11 +74,7 @@ public:
 	// Converts the given pixel into an OpenGl point. This might
 	// need some flipping of axis, depending if you want to render
 	// on the screen or on a texture.
-	// NOCOM(#sirver): next functions private?
 	virtual void pixel_to_gl(float* x, float* y) const = 0;
-
-	// Setups OpenGL to render to this surface.
-	virtual void setup_gl() = 0;
 
 private:
 	/// The actual implementation of the methods below.

@@ -253,13 +253,10 @@ void Texture::set_pixel(uint16_t x, uint16_t y, uint32_t clr) {
 }
 
 
-// NOCOM(#sirver): can be private again, I think.
 void Texture::setup_gl() {
 	glBindFramebuffer(GL_FRAMEBUFFER, GlFramebuffer::instance().id());
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
 	glViewport(0, 0, m_w, m_h);
-	// NOCOM(#sirver): not good
-	glDisable(GL_DEPTH_TEST);
 }
 
 void Texture::do_blit(const FloatRect& dst_rect,

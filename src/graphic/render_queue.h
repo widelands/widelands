@@ -121,7 +121,7 @@ public:
 
 	void enqueue(const Item& item);
 
-	void draw();
+	void draw(int screen_width, int screen_height);
 
 private:
 	RenderQueue();
