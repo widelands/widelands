@@ -62,8 +62,7 @@ public:
 	};
 
 	struct MonochromeBlitArguments {
-		FloatRect source_rect;
-		int texture;
+		BlitSource texture;
 		RGBAColor blend;
 	};
 

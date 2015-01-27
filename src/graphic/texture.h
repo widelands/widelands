@@ -98,11 +98,17 @@ private:
 	             const BlitSource& texture,
 	             float opacity,
 	             BlendMode blend_mode) override;
-
 	void do_blit_blended(const FloatRect& dst_rect,
 	                     const BlitSource& texture,
 	                     const BlitSource& mask,
 	                     const RGBColor& blend) override;
+	void do_blit_monochrome(const FloatRect& dst_rect,
+	                        const BlitSource& texture,
+	                        const RGBAColor& blend) override;
+	void
+	do_draw_line(const FloatPoint& start, const FloatPoint& end, const RGBColor& color) override;
+	void
+	do_fill_rect(const FloatRect& dst_rect, const RGBAColor& color, BlendMode blend_mode) override;
 
 	// Width and height.
 	int m_w, m_h;

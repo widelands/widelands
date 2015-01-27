@@ -385,7 +385,7 @@ public:
 	Texture* render(TextureCache* texture_cache) override {
 		if (m_show_spaces) {
 			Texture* rv = new Texture(m_w, m_h);
-			fill_rect(Rect(0, 0, m_w, m_h), RGBAColor(0xff, 0, 0, 0xff), rv);
+			rv->fill_rect(Rect(0, 0, m_w, m_h), RGBAColor(0xff, 0, 0, 0xff));
 			return rv;
 		}
 		return TextNode::render(texture_cache);
@@ -440,7 +440,7 @@ public:
 				rv->blit(dst, *m_bg, srcrect, 1., BlendMode::Copy);
 			}
 		} else {
-			fill_rect(Rect(0, 0, m_w, m_h), RGBAColor(255, 255, 255, 0), rv);
+			rv->fill_rect(Rect(0, 0, m_w, m_h), RGBAColor(255, 255, 255, 0));
 		}
 		return rv;
 	}
@@ -477,12 +477,12 @@ public:
 	uint16_t hotspot_y() override {return height();}
 	Texture* render(TextureCache* texture_cache) override {
 		Texture* rv = new Texture(width(), height());
-		fill_rect(Rect(0, 0, rv->width(), rv->height()), RGBAColor(255, 255, 255, 0), rv);
+		rv->fill_rect(Rect(0, 0, rv->width(), rv->height()), RGBAColor(255, 255, 255, 0));
 
 		// Draw Solid background Color
 		bool set_alpha = true;
 		if (m_bg_clr_set) {
-			fill_rect(Rect(Point(m_margin.left, m_margin.top), m_w, m_h), m_bg_clr, rv);
+			rv->fill_rect(Rect(Point(m_margin.left, m_margin.top), m_w, m_h), m_bg_clr);
 			set_alpha = false;
 		}
 

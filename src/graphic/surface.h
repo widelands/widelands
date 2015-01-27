@@ -56,9 +56,25 @@ public:
 	                  const Rect& srcrc,
 	                  const RGBColor& blend);
 
+	/// This draws a grayed out version. See MonochromeBlitProgram.
+	void
+	blit_monochrome(const Rect& dst, const Image&, const Rect& srcrc, const RGBAColor& multiplier);
+
+	/// Draws a filled rect to the destination. No blending takes place, the values
+	// in the target are just replaced (i.e. / BlendMode would be BlendMode::Copy).
+	void fill_rect(const Rect&, const RGBAColor&);
+
+	/// draw a line to the destination
+	// NOCOM(#sirver): take two points
+	void draw_line(int x1, int y1, int x2, int y2, const RGBColor& color, int width);
+
+	/// makes a rectangle on the destination brighter (or darker).
+	void brighten_rect(const Rect&, int factor);
+
 	// Converts the given pixel into an OpenGl point. This might
 	// need some flipping of axis, depending if you want to render
 	// on the screen or on a texture.
+	// NOCOM(#sirver): next functions private?
 	virtual void pixel_to_gl(float* x, float* y) const = 0;
 
 	// Setups OpenGL to render to this surface.
@@ -76,28 +92,20 @@ private:
 	                             const BlitSource& mask,
 	                             const RGBColor& blend) = 0;
 
+	virtual void do_blit_monochrome(const FloatRect& dst_rect,
+	                                const BlitSource& texture,
+	                                const RGBAColor& blend) = 0;
+
+	virtual void
+	do_draw_line(const FloatPoint& start, const FloatPoint& end, const RGBColor& color) = 0;
+
+	virtual void
+	do_fill_rect(const FloatRect& dst_rect, const RGBAColor& color, BlendMode blend_mode) = 0;
+
 	DISALLOW_COPY_AND_ASSIGN(Surface);
 };
 
 /// Draws a rect (frame only) to the surface.
 void draw_rect(const Rect&, const RGBColor&, Surface* destination);
-
-/// This draws a grayed out version. See MonochromeBlitProgram.
-void
-blit_monochrome
-	(const Rect& dst, const Image&, const Rect& srcrc,
-	 const RGBAColor& multiplier, Surface* destination);
-
-/// Draws a filled rect to the destination. No blending takes place, the values
-// in the target are just replaced (i.e. / BlendMode would be BlendMode::Copy).
-void fill_rect(const Rect&, const RGBAColor&, Surface* destination);
-
-/// draw a line to the destination
-void draw_line
-	(int x1, int y1, int x2, int y2, const RGBColor& color,
-	 int width, Surface* destination);
-
-/// makes a rectangle on the destination brighter (or darker).
-void brighten_rect(const Rect&, int factor, Surface* destination);
 
 #endif  // end of include guard: WL_GRAPHIC_SURFACE_H

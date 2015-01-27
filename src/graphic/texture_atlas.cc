@@ -134,7 +134,7 @@ std::unique_ptr<Texture> TextureAtlas::pack(std::vector<std::unique_ptr<Texture>
 	}
 
 	std::unique_ptr<Texture> packed_texture(new Texture(root->r.w, root->r.h));
-	fill_rect(Rect(0, 0, root->r.w, root->r.h), RGBAColor(0, 0, 0, 0), packed_texture.get());
+	packed_texture->fill_rect(Rect(0, 0, root->r.w, root->r.h), RGBAColor(0, 0, 0, 0));
 
 	// Sort blocks by index so that they come back in the correct ordering.
 	std::sort(blocks_.begin(), blocks_.end(), [](const Block& i, const Block& j) {

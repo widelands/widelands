@@ -37,9 +37,8 @@ class VanillaBlitProgram {
 public:
 	struct Arguments {
 		FloatRect destination_rect;
-		FloatRect source_rect;
 		float z_value;
-		int texture;
+		BlitSource texture;
 		float opacity;
 		BlendMode blend_mode;
 	};
@@ -74,9 +73,8 @@ class MonochromeBlitProgram {
 public:
 	struct Arguments {
 		FloatRect destination_rect;
-		FloatRect source_rect;
 		float z_value;
-		int texture;
+		BlitSource texture;
 		RGBAColor blend;
 		BlendMode blend_mode;
 	};
@@ -90,9 +88,8 @@ public:
 	// coordinates are in the OpenGL frame. The image is first converted to
 	// luminance, then all values are multiplied with blend.
 	void draw(const FloatRect& gl_dest_rect,
-	          const FloatRect& gl_src_rect,
 				 const float z_value,
-	          const int texture,
+				 const BlitSource& blit_source,
 				 const RGBAColor& blend);
 
 	void draw(const std::vector<Arguments>& arguments);
@@ -110,10 +107,8 @@ public:
 	struct Arguments {
 		FloatRect destination_rect;
 		float z_value;
-		int texture;
-		FloatRect source_rect;
-		int texture_mask;
-		FloatRect mask_source_rect;
+		BlitSource texture;
+		BlitSource mask;
 		RGBAColor blend;
 		BlendMode blend_mode;
 	};

@@ -127,13 +127,12 @@ void RenderTarget::draw_line
 	(int32_t x1, int32_t y1, int32_t x2, int32_t y2,
 	 const RGBColor& color, uint8_t gwidth)
 {
-	::draw_line(x1 + m_offset.x + m_rect.x,
-	            y1 + m_offset.y + m_rect.y,
-	            x2 + m_offset.x + m_rect.x,
-	            y2 + m_offset.y + m_rect.y,
-	            color,
-	            gwidth,
-	            m_surface);
+	m_surface->draw_line(x1 + m_offset.x + m_rect.x,
+	                     y1 + m_offset.y + m_rect.y,
+	                     x2 + m_offset.x + m_rect.x,
+	                     y2 + m_offset.y + m_rect.y,
+	                     color,
+	                     gwidth);
 }
 
 /**
@@ -151,14 +150,14 @@ void RenderTarget::fill_rect(const Rect& rect, const RGBAColor& clr)
 {
 	Rect r(rect);
 	if (clip(r))
-		::fill_rect(r, clr, m_surface);
+		m_surface->fill_rect(r, clr);
 }
 
 void RenderTarget::brighten_rect(const Rect& rect, int32_t factor)
 {
 	Rect r(rect);
 	if (clip(r))
-		::brighten_rect(r, factor, m_surface);
+		m_surface->brighten_rect(r, factor);
 }
 
 /**
@@ -232,12 +231,11 @@ void RenderTarget::blitrect_scale_monochrome(const Rect& destination_rect,
 	Point destination_point(destination_rect.x, destination_rect.y);
 	Rect srcrect(source_rect);
 	if (to_surface_geometry(&destination_point, &srcrect)) {
-		blit_monochrome(
+		m_surface->blit_monochrome(
 		   Rect(destination_point.x, destination_point.y, destination_rect.w, destination_rect.h),
 		   *image,
 		   source_rect,
-		   blend,
-		   m_surface);
+		   blend);
 	}
 }
 

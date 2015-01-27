@@ -107,3 +107,35 @@ void Screen::do_blit_blended(const FloatRect& dst_rect,
 	i.blended_blit_arguments.blend = blend;
 	RenderQueue::instance().enqueue(i);
 }
+
+void Screen::do_blit_monochrome(const FloatRect& dst_rect,
+                                const BlitSource& texture,
+                                const RGBAColor& blend) {
+	RenderQueue::Item i;
+	i.program_id = RenderQueue::Program::BLIT_MONOCHROME;
+	i.blend_mode = BlendMode::UseAlpha;
+	i.destination_rect = dst_rect;
+	i.monochrome_blit_arguments.texture = texture;
+	i.monochrome_blit_arguments.blend = blend;
+	RenderQueue::instance().enqueue(i);
+}
+
+void Screen::do_draw_line(const FloatPoint& start,
+                          const FloatPoint& end,
+                          const RGBColor& color) {
+	RenderQueue::Item i;
+	i.program_id = RenderQueue::Program::LINE;
+	i.blend_mode = BlendMode::Copy;
+	i.destination_rect = FloatRect(start.x, start.y, end.x - start.x, end.y - start.y);
+	i.line_arguments.color = color;
+	RenderQueue::instance().enqueue(i);
+}
+
+void Screen::do_fill_rect(const FloatRect& dst_rect, const RGBAColor& color, BlendMode blend_mode) {
+	RenderQueue::Item i;
+	i.program_id = RenderQueue::Program::RECT;
+	i.blend_mode = blend_mode;
+	i.destination_rect = dst_rect;
+	i.rect_arguments.color = color;
+	RenderQueue::instance().enqueue(i);
+}

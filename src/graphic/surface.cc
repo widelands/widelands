@@ -26,16 +26,7 @@
 #include <SDL.h>
 
 #include "base/macros.h"
-#include "graphic/gl/blit_program.h"
-#include "graphic/gl/draw_line_program.h"
-#include "graphic/gl/fill_rect_program.h"
 #include "graphic/gl/utils.h"
-#include "graphic/graphic.h"
-#include "graphic/render_queue.h"
-#include "graphic/screen.h"
-#include "graphic/texture.h"
-
-// NOCOM(#sirver): remove is_a from in here
 
 namespace  {
 
@@ -120,104 +111,51 @@ BlitSource to_blit_source(const Image& image, const Rect& src_rect) {
 }  // namespace
 
 void draw_rect(const Rect& rc, const RGBColor& clr, Surface* surface) {
-	draw_line(rc.x, rc.y, rc.x + rc.w, rc.y, clr, 1, surface);
-	draw_line(rc.x + rc.w, rc.y, rc.x + rc.w, rc.y + rc.h, clr, 1, surface);
-	draw_line(rc.x + rc.w, rc.y + rc.h, rc.x, rc.y + rc.h, clr, 1, surface);
-	draw_line(rc.x, rc.y + rc.h, rc.x, rc.y, clr, 1, surface);
+	surface->draw_line(rc.x, rc.y, rc.x + rc.w, rc.y, clr, 1);
+	surface->draw_line(rc.x + rc.w, rc.y, rc.x + rc.w, rc.y + rc.h, clr, 1);
+	surface->draw_line(rc.x + rc.w, rc.y + rc.h, rc.x, rc.y + rc.h, clr, 1);
+	surface->draw_line(rc.x, rc.y + rc.h, rc.x, rc.y, clr, 1);
 }
 
-void fill_rect(const Rect& rc, const RGBAColor& clr, Surface* surface) {
-	const FloatRect rect = to_opengl(*surface, rc, ConversionMode::kExact);
-	if (is_a(Screen, surface)) {
-		RenderQueue::Item i;
-		i.program_id = RenderQueue::Program::RECT;
-		i.blend_mode = BlendMode::Copy;
-		i.destination_rect = rect;
-		i.rect_arguments.color = clr;
-		RenderQueue::instance().enqueue(i);
+void Surface::fill_rect(const Rect& rc, const RGBAColor& clr) {
+	const FloatRect rect = to_opengl(*this, rc, ConversionMode::kExact);
+	do_fill_rect(rect, clr, BlendMode::Copy);
+}
+
+void Surface::brighten_rect(const Rect& rc, const int32_t factor)
+{
+	if (!factor) {
 		return;
 	}
-
-	surface->setup_gl();
-	glViewport(0, 0, surface->width(), surface->height());
-	FillRectProgram::instance().draw(rect, 0.f, clr, BlendMode::Copy);
-}
-
-void brighten_rect(const Rect& rc, const int32_t factor, Surface * surface)
-{
-	if (!factor)
-		return;
 
 	const BlendMode blend_mode = factor < 0 ? BlendMode::Subtract : BlendMode::UseAlpha;
 	const int abs_factor = std::abs(factor);
 	const RGBAColor color(abs_factor, abs_factor, abs_factor, 0);
-
-	const FloatRect rect = to_opengl(*surface, rc, ConversionMode::kExact);
-	if (is_a(Screen, surface)) {
-		RenderQueue::Item i;
-		i.program_id = RenderQueue::Program::RECT;
-		i.blend_mode = blend_mode;
-		i.destination_rect = rect;
-		i.rect_arguments.color = color;
-		RenderQueue::instance().enqueue(i);
-		return;
-	}
-
-	surface->setup_gl();
-	glViewport(0, 0, surface->width(), surface->height());
-	FillRectProgram::instance().draw(rect, 0.f, color, blend_mode);
+	const FloatRect rect = to_opengl(*this, rc, ConversionMode::kExact);
+	do_fill_rect(rect, color, blend_mode);
 }
 
-void draw_line
-	(int x1, int y1, int x2, int y2, const RGBColor& color, int gwidth, Surface * surface)
+void Surface::draw_line
+	(int x1, int y1, int x2, int y2, const RGBColor& color, int gwidth)
 {
 	float gl_x1 = x1 + 0.5;
 	float gl_y1 = y1 + 0.5;
-	surface->pixel_to_gl(&gl_x1, &gl_y1);
+	pixel_to_gl(&gl_x1, &gl_y1);
 
 	float gl_x2 = x2 + 0.5;
 	float gl_y2 = y2 + 0.5;
-	surface->pixel_to_gl(&gl_x2, &gl_y2);
+	pixel_to_gl(&gl_x2, &gl_y2);
 
-	if (is_a(Screen, surface)) {
-		RenderQueue::Item i;
-		i.program_id = RenderQueue::Program::LINE;
-		i.blend_mode = BlendMode::Copy;
-		i.destination_rect = FloatRect(gl_x1, gl_y1, gl_x2 - gl_x1, gl_y2 - gl_y1);
-		i.line_arguments.color = color;
-		RenderQueue::instance().enqueue(i);
-		return;
-	}
-
-	surface->setup_gl();
-	glViewport(0, 0, surface->width(), surface->height());
-	DrawLineProgram::instance().draw(
-	   FloatPoint(gl_x1, gl_y1), FloatPoint(gl_x2, gl_y2), 0.f, color);
+	do_draw_line(FloatPoint(gl_x1, gl_y1), FloatPoint(gl_x2, gl_y2), color);
 }
 
-void blit_monochrome(const Rect& dst_rect,
-                     const Image& image,
-                     const Rect& src_rect,
-                     const RGBAColor& blend,
-                     Surface* surface) {
-	const FloatRect gl_src_rect = source_rect_to_gl(image, src_rect);
-	const FloatRect gl_dst_rect = to_opengl(*surface, dst_rect, ConversionMode::kExact);
-
-	if (is_a(Screen, surface)) {
-		RenderQueue::Item i;
-		i.program_id = RenderQueue::Program::BLIT_MONOCHROME;
-		i.blend_mode = BlendMode::UseAlpha;
-		i.destination_rect = gl_dst_rect;
-		i.monochrome_blit_arguments.source_rect = gl_src_rect;
-		i.monochrome_blit_arguments.texture = image.get_gl_texture();
-		i.monochrome_blit_arguments.blend = blend;
-		RenderQueue::instance().enqueue(i);
-		return;
-	}
-
-	surface->setup_gl();
-	glViewport(0, 0, surface->width(), surface->height());
-	MonochromeBlitProgram::instance().draw(gl_dst_rect, gl_src_rect, 0.f, image.get_gl_texture(), blend);
+void Surface::blit_monochrome(const Rect& dst_rect,
+                              const Image& image,
+                              const Rect& src_rect,
+                              const RGBAColor& blend) {
+	const FloatRect gl_dst_rect = to_opengl(*this, dst_rect, ConversionMode::kExact);
+	const BlitSource texture = to_blit_source(image, src_rect);
+	do_blit_monochrome(gl_dst_rect, texture, blend);
 }
 
 void Surface::blit_blended(const Rect& dst_rect,

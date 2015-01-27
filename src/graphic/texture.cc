@@ -24,6 +24,8 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "graphic/gl/blit_program.h"
+#include "graphic/gl/draw_line_program.h"
+#include "graphic/gl/fill_rect_program.h"
 #include "graphic/gl/utils.h"
 #include "graphic/graphic.h"
 #include "graphic/sdl_utils.h"
@@ -275,4 +277,23 @@ void Texture::do_blit_blended(const FloatRect& dst_rect,
 
 	setup_gl();
 	BlendedBlitProgram::instance().draw(dst_rect, 0.f, texture, mask, blend);
+}
+
+void Texture::do_blit_monochrome(const FloatRect& dst_rect,
+                                 const BlitSource& texture,
+                                 const RGBAColor& blend) {
+	setup_gl();
+	MonochromeBlitProgram::instance().draw(dst_rect, 0.f, texture, blend);
+}
+
+void
+Texture::do_draw_line(const FloatPoint& start, const FloatPoint& end, const RGBColor& color) {
+	setup_gl();
+	DrawLineProgram::instance().draw(start, end, 0.f, color);
+}
+
+void
+Texture::do_fill_rect(const FloatRect& dst_rect, const RGBAColor& color, BlendMode blend_mode) {
+	setup_gl();
+	FillRectProgram::instance().draw(dst_rect, 0.f, color, blend_mode);
 }
