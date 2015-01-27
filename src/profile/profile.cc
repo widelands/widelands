@@ -19,9 +19,11 @@
 
 #include "profile/profile.h"
 
+#include <algorithm>
 #include <cctype>
 #include <cstdarg>
 #include <cstdio>
+#include <cstdlib>
 #include <cstring>
 #include <limits>
 #include <string>
@@ -74,28 +76,38 @@ static char const * falseWords[FALSE_WORDS] =
 
 Profile g_options(Profile::err_log);
 
-Section::Value::Value(const char * const nname, const char * const nval) :
-	m_used(false), m_name(strdup(nname)), m_value(strdup(nval))
-{}
-
-Section::Value::Value(const Section::Value & o) :
-m_used(o.m_used), m_name(strdup(o.m_name)), m_value(strdup(o.m_value)) {}
-
-Section::Value::~Value()
+Section::Value::Value(const string & nname, const char * const nval) :
+	m_used(false),
+	m_name(nname)
 {
-	free(m_name);
-	free(m_value);
+	set_string(nval);
 }
 
-Section::Value & Section::Value::operator= (const Section::Value & o)
+Section::Value::Value(const Section::Value & o) :
+	m_used(o.m_used),
+	m_name(o.m_name)
 {
-	if (this != &o) {
-		free(m_name);
-		free(m_value);
-		m_used = o.m_used;
-		m_name = strdup(o.m_name);
-		m_value = strdup(o.m_value);
-	}
+	set_string(o.m_value.get());
+}
+
+Section::Value::Value(Section::Value && o)
+	: Value()
+{
+	using std::swap;
+	swap(*this, o);
+}
+
+Section::Value & Section::Value::operator= (Section::Value other)
+{
+	using std::swap;
+	swap(*this, other);
+	return *this;
+}
+
+Section::Value & Section::Value::operator= (Section::Value && other)
+{
+	using std::swap;
+	swap(*this, other);
 	return *this;
 }
 
@@ -112,12 +124,12 @@ void Section::Value::mark_used()
 int32_t Section::Value::get_int() const
 {
 	char * endp;
-	long int const i = strtol(m_value, &endp, 0);
+	long int const i = strtol(m_value.get(), &endp, 0);
 	if (*endp)
-		throw wexception("%s: '%s' is not an integer", get_name(), m_value);
+		throw wexception("%s: '%s' is not an integer", get_name(), get_string());
 	int32_t const result = i;
 	if (i != result)
-		throw wexception("%s: '%s' is out of range",   get_name(), m_value);
+		throw wexception("%s: '%s' is out of range",   get_name(), get_string());
 
 	return result;
 }
@@ -126,9 +138,9 @@ int32_t Section::Value::get_int() const
 uint32_t Section::Value::get_natural() const
 {
 	char * endp;
-	long long int i = strtoll(m_value, &endp, 0);
+	long long int i = strtoll(m_value.get(), &endp, 0);
 	if (*endp || i < 0)
-		throw wexception("%s: '%s' is not natural", get_name(), m_value);
+		throw wexception("%s: '%s' is not natural", get_name(), get_string());
 	return i;
 }
 
@@ -136,9 +148,9 @@ uint32_t Section::Value::get_natural() const
 uint32_t Section::Value::get_positive() const
 {
 	char * endp;
-	long long int i = strtoll(m_value, &endp, 0);
+	long long int i = strtoll(m_value.get(), &endp, 0);
 	if (*endp || i < 1)
-		throw wexception("%s: '%s' is not positive", get_name(), m_value);
+		throw wexception("%s: '%s' is not positive", get_name(), get_string());
 	return i;
 }
 
@@ -146,31 +158,43 @@ uint32_t Section::Value::get_positive() const
 bool Section::Value::get_bool() const
 {
 	for (int32_t i = 0; i < TRUE_WORDS; ++i)
-		if (!strcasecmp(m_value, trueWords[i]))
+		if (!strcasecmp(m_value.get(), trueWords[i]))
 			return true;
 	for (int32_t i = 0; i < FALSE_WORDS; ++i)
-		if (!strcasecmp(m_value, falseWords[i]))
+		if (!strcasecmp(m_value.get(), falseWords[i]))
 			return false;
 
-	throw wexception("%s: '%s' is not a boolean value", get_name(), m_value);
+	throw wexception("%s: '%s' is not a boolean value", get_name(), get_string());
 }
 
 
 Point Section::Value::get_point() const
 {
-	char * endp = m_value;
+	char * endp = m_value.get();
 	long int const x = strtol(endp, &endp, 0);
 	long int const y = strtol(endp, &endp, 0);
 	if (*endp)
-		throw wexception("%s: '%s' is not a Point", get_name(), m_value);
+		throw wexception("%s: '%s' is not a Point", get_name(), get_string());
 
 	return Point(x, y);
 }
 
 void Section::Value::set_string(char const * const value)
 {
-	free(m_value);
-	m_value = strdup(value);
+	using std::copy;
+
+	auto len = strlen(value) + 1;
+	m_value.reset(new char[len]);
+	copy(value, value + len, m_value.get());
+}
+
+void swap(Section::Value & first, Section::Value & second)
+{
+	using std::swap;
+
+	swap(first.m_name,  second.m_name);
+	swap(first.m_value, second.m_value);
+	swap(first.m_used,  second.m_used);
 }
 
 
