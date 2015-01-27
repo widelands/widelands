@@ -314,8 +314,7 @@ Section::Value & Section::create_val
 Section::Value & Section::create_val_duplicate
 	(char const * const name, char const * const value)
 {
-	Value v(name, value);
-	m_values.push_back(v);
+	m_values.emplace_back(name, value);
 	return m_values.back();
 }
 
