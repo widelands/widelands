@@ -99,7 +99,7 @@ WareIndex Tribes::nrwares() const {
 	return wares_.size();
 }
 
-WareIndex Tribes::get_nrworkers() const {
+WareIndex Tribes::nrworkers() const {
 	return workers_.size();
 }
 

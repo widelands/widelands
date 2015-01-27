@@ -104,27 +104,27 @@ void EconomyDataPacket::write(FileWrite & fw)
 {
 	fw.unsigned_16(CURRENT_ECONOMY_VERSION);
 
-	for (std::pair<WareIndex, WareDescr> ware: m_eco->owner().tribe().wares()) {
+	const TribeDescr & tribe = m_eco->owner().tribe();
+	for (std::pair<WareIndex, WareDescr> ware: tribe.wares()) {
 		const Economy::TargetQuantity & tq =
 			m_eco->m_ware_target_quantities[ware.first];
 		if (Time const last_modified = tq.last_modified) {
 			fw.unsigned_32(last_modified);
-			fw.c_string(tribe.get_ware_descr(ware.first)->name());
+			fw.c_string(ware.second.name());
 			fw.unsigned_32(tq.permanent);
 		}
 	}
 
-	const TribeDescr & tribe = m_eco->owner().tribe();
-	for (WareIndex i = tribe.get_nrworkers(); i;) {
-		--i;
+	for (std::pair<WareIndex, WorkerDescr> worker: tribe.workers()) {
 		const Economy::TargetQuantity & tq =
-			m_eco->m_worker_target_quantities[i];
+			m_eco->m_worker_target_quantities[worker.first];
 		if (Time const last_modified = tq.last_modified) {
 			fw.unsigned_32(last_modified);
-			fw.c_string(tribe.get_worker_descr(i)->name());
+			fw.c_string(worker.second.name());
 			fw.unsigned_32(tq.permanent);
 		}
 	}
+
 	fw.unsigned_32(0); //  terminator
 	fw.unsigned_32(m_eco->m_request_timerid);
 }

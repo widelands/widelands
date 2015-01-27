@@ -408,7 +408,7 @@ void Warehouse::init(EditorGameBase & egbase)
 	Building::init(egbase);
 
 	WareIndex const nr_wares = egbase.tribes().nrwares();
-	WareIndex const nr_workers = descr().tribe().get_nrworkers();
+	WareIndex const nr_workers = egbase.tribes().nrworkers();
 	m_supply->set_nrwares(nr_wares);
 	m_supply->set_nrworkers(nr_workers);
 

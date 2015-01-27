@@ -95,7 +95,7 @@ uint32_t IdleWorkerSupply::nr_supplies(const Game &, const Request & req) const
 {
 	assert
 		(req.get_type() != wwWORKER ||
-		 req.get_index() < m_worker.descr().tribe().get_nrworkers());
+		 m_worker.descr().tribe().has_worker(req.get_index()));
 	if
 		(req.get_type() == wwWORKER &&
 		 m_worker.descr().can_act_as(req.get_index()) &&

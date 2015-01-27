@@ -92,10 +92,13 @@ public:
 	void add_tribe(const LuaTable& table);
 
 	WareIndex nrwares() const;
-	WareIndex get_nrworkers() const;
+	WareIndex nrworkers() const;
 
 	bool ware_exists(const WareIndex& index) const {
 		return wares_.count(index) == 1;
+	}
+	bool worker_exists(const WareIndex& index) const {
+		return workers_.count(index) == 1;
 	}
 
 	BuildingIndex safe_building_index(const std::string& buildingname) const;

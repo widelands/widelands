@@ -985,16 +985,11 @@ void Game::sample_statistics()
 				wastock += eco->stock_ware(ware.first);
 			}
 
-			WareIndex const tribe_workers = tribe.get_nrworkers();
-			for
-				(WareIndex workerid = 0;
-				 workerid < tribe_workers;
-				 ++workerid)
-				if
-					(!
-					 dynamic_cast<CarrierDescr const *>
-					 	(tribe.get_worker_descr(workerid)))
-					wostock += eco->stock_worker(workerid);
+			for (std::pair<WareIndex, WorkerDescr> worker: tribe.workers()) {
+				if (worker_descr.type() != MapObjectType::CARRIER) {
+					wostock += eco->stock_worker(worker.first);
+				}
+			}
 		}
 		nr_wares  [p - 1] = wastock;
 		nr_workers[p - 1] = wostock;

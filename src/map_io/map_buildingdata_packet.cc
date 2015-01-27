@@ -467,7 +467,7 @@ void MapBuildingdataPacket::read_warehouse
 			 packet_version <= CURRENT_WAREHOUSE_PACKET_VERSION)
 		{
 			WareIndex const nr_wares = game.tribes().nrwares();
-			WareIndex const nr_tribe_workers = warehouse.descr().tribe().get_nrworkers();
+			WareIndex const nr_tribe_workers = game.tribes().nrworkers();
 			warehouse.m_supply->set_nrwares(nr_wares);
 			warehouse.m_supply->set_nrworkers(nr_tribe_workers);
 			warehouse.m_ware_policy.resize(nr_wares, Warehouse::SP_Normal);

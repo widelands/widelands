@@ -74,11 +74,10 @@ Request::Request
 		throw wexception
 			("creating ware request with index %u, but the ware for this index doesn't exist",
 			 index);
-	if (w == wwWORKER && _target.owner().tribe().get_nrworkers() <= index)
+	if (w == wwWORKER && !_target.owner().egbase().tribes().worker_exists(index))
 		throw wexception
-			("creating worker request with index %u, but tribe has only %u "
-			 "worker types",
-			 index, _target.owner().tribe().get_nrworkers());
+			("creating worker request with index %u, but the worker for this index doesn't exist",
+			 index);
 	if (m_economy)
 		m_economy->add_request(*this);
 }
@@ -182,16 +181,15 @@ void Request::write
 {
 	fw.unsigned_16(REQUEST_VERSION);
 
-	//  Target and econmy should be set. Same is true for callback stuff.
-
+	//  Target and economy should be set. Same is true for callback stuff.
 	assert(m_type == wwWARE || m_type == wwWORKER);
-	const TribeDescr & tribe = m_target.owner().tribe();
-	assert(m_type != wwWARE   || m_target.owner().egbase().tribes().ware_exists(m_index));
-	assert(m_type != wwWORKER || m_index < tribe.get_nrworkers());
-	fw.c_string
-		(m_type == wwWARE                        ?
-		 tribe.get_ware_descr  (m_index)->name() :
-		 tribe.get_worker_descr(m_index)->name());
+	if (m_type == wwWARE ) {
+		assert(game.tribes().ware_exists(m_index));
+		fw.c_string(game.tribes().get_ware_descr(m_index)->name());
+	} else if (m_type == wwWORKER ) {
+		assert(game.tribes().worker_exists(m_index));
+		fw.c_string(game.tribes().get_worker_descr(m_index)->name());
+	}
 
 	fw.unsigned_32(m_count);
 

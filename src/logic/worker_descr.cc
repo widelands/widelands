@@ -221,9 +221,10 @@ Bob & WorkerDescr::create_object() const
 * check if worker can be substitute for a requested worker type
  */
 bool WorkerDescr::can_act_as(WareIndex const index) const {
-	assert(index < tribe().get_nrworkers());
-	if (index == worker_index())
+	assert(tribe().has_worker(index));
+	if (index == worker_index()) {
 		return true;
+	}
 
 	// if requested worker type can be promoted, compare with that type
 	const WorkerDescr & descr = *tribe().get_worker_descr(index);

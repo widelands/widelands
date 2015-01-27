@@ -2925,11 +2925,9 @@ const PropertyType<LuaProductionSite> LuaProductionSite::Properties[] = {
 int LuaProductionSite::get_valid_wares(lua_State * L) {
 	ProductionSite * ps = get(L, get_egbase(L));
 
-	const TribeDescr & tribe = ps->owner().tribe();
-
 	lua_newtable(L);
 	for (const WareAmount& input_ware : ps->descr().inputs()) {
-		lua_pushstring(L, tribe.get_ware_descr((input_ware.first))->name());
+		lua_pushstring(L, input_ware.second->name());
 		lua_pushuint32(L, input_ware.second);
 		lua_rawset(L, -3);
 	}

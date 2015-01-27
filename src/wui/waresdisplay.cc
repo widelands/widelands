@@ -150,15 +150,15 @@ bool AbstractWaresDisplay::handle_mouserelease(uint8_t btn, int32_t x, int32_t y
 	bool to_be_selected = !ware_selected(m_selection_anchor);
 
 	if (m_type == Widelands::wwWORKER) {
-		for (Widelands::WareIndex i = 0; i < m_tribe.get_nrworkers(); ++i)
+		for (std::pair<Widelands::WareIndex, Widelands::WorkerDescr> worker : m_wh.owner().tribe().workers()) {
 		{
-			if (!m_in_selection[i]) {
+			if (!m_in_selection[worker.first]) {
 				continue;
 			}
 			if (to_be_selected) {
-				select_ware(i);
+				select_ware(worker.first);
 			} else {
-				unselect_ware(i);
+				unselect_ware(worker.first);
 			}
 		}
 	} else {
@@ -289,10 +289,9 @@ void WaresDisplay::remove_all_warelists() {
 void AbstractWaresDisplay::draw(RenderTarget & dst)
 {
 	if (m_type == Widelands::wwWORKER) {
-		for (Widelands::WareIndex i = 0; i < m_tribe.get_nrworkers(); ++i)
-		{
-			if (m_hidden[id]) continue;
-			draw_ware(dst, id);
+		for (std::pair<Widelands::WareIndex, Widelands::WorkerDescr> worker : m_wh.owner().tribe().workers()) {
+			if (m_hiddenworker.first) continue;
+			draw_ware(dst, worker.first);
 		}
 	} else {
 		for (std::pair<Widelands::WareIndex, Widelands::WareDescr> ware: m_tribe.wares()) {

@@ -1851,12 +1851,10 @@ void CmdSetStockPolicy::execute(Game & game)
 				return;
 			}
 
-			// NOCOM(GunChleoc): Warehouse shouldn't know it's tribe?
-			const TribeDescr & tribe = warehouse->descr().tribe();
 			if (m_isworker) {
-				if (!(m_ware < tribe.get_nrworkers())) {
+				if (!(game.tribes().worker_exists(m_ware))) {
 					log
-						("Cmd_SetStockPolicy: sender %u, worker %u out of bounds\n",
+						("Cmd_SetStockPolicy: sender %u, worker %u does not exist\n",
 						 sender(), m_ware);
 					return;
 				}

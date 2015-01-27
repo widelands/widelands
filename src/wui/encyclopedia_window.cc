@@ -89,9 +89,8 @@ void EncyclopediaWindow::fill_wares() {
 	const TribeDescr & tribe = iaplayer().player().tribe();
 	std::vector<Ware> ware_vec;
 
-	for (std::pair<WareIndex, WareDescr> ware: tribe.wares()) {
-		WareDescr const * ware_descr = tribe.get_ware_descr(ware.first);
-		Ware w(i, ware_descr);
+	for (std::pair<WareIndex, WareDescr> ware : tribe.wares()) {
+		Ware w(i, ware.second);
 		ware_vec.push_back(w);
 	}
 

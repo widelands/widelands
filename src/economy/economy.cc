@@ -46,7 +46,7 @@ Economy::Economy(Player & player) :
 {
 	const TribeDescr & tribe = player.tribe();
 	WareIndex const nr_wares   = player.egbase().tribes().nrwares();
-	WareIndex const nr_workers = tribe.get_nrworkers();
+	WareIndex const nr_workers = player.egbase().tribes().nrworkers();
 	m_wares.set_nrwares(nr_wares);
 	m_workers.set_nrwares(nr_workers);
 
@@ -542,12 +542,13 @@ void Economy::_merge(Economy & e)
 			this_tq = other_tq;
 		}
 	}
-	for (WareIndex i = m_owner.tribe().get_nrworkers(); i;) {
-		--i;
-		TargetQuantity other_tq = e.m_worker_target_quantities[i];
-		TargetQuantity & this_tq = m_worker_target_quantities[i];
-		if (this_tq.last_modified < other_tq.last_modified)
+
+	for (std::pair<WareIndex, WorkerDescr> worker: m_owner.tribe().workers()) {
+		TargetQuantity other_tq = e.m_worker_target_quantities[worker.first];
+		TargetQuantity& this_tq = m_worker_target_quantities[worker.first];
+		if (this_tq.last_modified < other_tq.last_modified) {
 			this_tq = other_tq;
+		}
 	}
 
 	//  If the options window for e is open, but not the one for *this, the user
@@ -592,9 +593,8 @@ void Economy::_split(const std::set<OPtr<Flag> > & flags)
 		e.m_ware_target_quantities[ware.first] = m_ware_target_quantities[ware.first];
 	}
 
-	for (WareIndex i = m_owner.tribe().get_nrworkers(); i;) {
-		--i;
-		e.m_worker_target_quantities[i] = m_worker_target_quantities[i];
+	for (std::pair<WareIndex, WorkerDescr> worker: m_owner.tribe().workers()) {
+		e.m_worker_target_quantities[worker.first] = m_worker_target_quantities[worker.first];
 	}
 
 	for (const OPtr<Flag> temp_flag : flags) {
@@ -937,16 +937,11 @@ void Economy::_create_requested_workers(Game & game)
 		return;
 
 	const TribeDescr & tribe = owner().tribe();
-	for
-		(WareIndex index = 0;
-		 index < tribe.get_nrworkers(); ++index)
-	{
-		if (!owner().is_worker_type_allowed(index))
-			continue;
-		if (!tribe.get_worker_descr(index)->is_buildable())
-			continue;
 
-		_create_requested_worker(game, index);
+	for (std::pair<WareIndex, WorkerDescr> worker: m_owner.tribe().workers()) {
+		if (owner().is_worker_type_allowed(worker.first)) {
+			_create_requested_worker(game, worker.first);
+		}
 	}
 }
 

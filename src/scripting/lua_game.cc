@@ -760,23 +760,17 @@ int LuaPlayer::allow_workers(lua_State * L) {
 	const std::vector<WareIndex> & worker_types_without_cost =
 		tribe.worker_types_without_cost();
 
-	for (WareIndex i = 0; i < tribe.get_nrworkers(); ++i) {
-		const WorkerDescr & worker_descr = *tribe.get_worker_descr(i);
+	for (std::pair<WareIndex, WorkerDescr> worker : tribe.workers()) {
+		player.allow_worker_type(worker.first, true);
 
-		player.allow_worker_type(i, true);
-
-		if (worker_descr.buildcost().empty()) {
+		if (worker.second.buildcost().empty()) {
 			//  Workers of this type can be spawned in warehouses. Start it.
 			uint8_t worker_types_without_cost_index = 0;
 			for (;; ++worker_types_without_cost_index) {
-				assert
-					(worker_types_without_cost_index
-					 <
-					 worker_types_without_cost.size());
-				if
-					(worker_types_without_cost.at
-						(worker_types_without_cost_index) == i)
+				assert(worker_types_without_cost_index < worker_types_without_cost.size());
+				if (worker_types_without_cost.at(worker_types_without_cost_index) == worker.first) {
 					break;
+				}
 			}
 			for (uint32_t j = player.get_nr_economies(); j;) {
 				Economy & economy = *player.get_economy_by_number(--j);
