@@ -26,6 +26,7 @@
 #include "base/rect.h"
 #include "graphic/blend_mode.h"
 #include "graphic/color.h"
+#include "graphic/gl/blit_source.h"
 #include "graphic/image.h"
 
 class Texture;
@@ -41,6 +42,20 @@ public:
 	virtual int width() const = 0;
 	virtual int height() const = 0;
 
+	/// This draws a part of 'texture'.
+	void blit(const Rect& dst,
+	          const Image&,
+	          const Rect& srcrc,
+	          const float opacity,
+	          BlendMode blend_mode);
+
+	/// This draws a playercolor blended image. See BlendedBlitProgram.
+	void blit_blended(const Rect& dst,
+	                  const Image& image,
+	                  const Image& texture_mask,
+	                  const Rect& srcrc,
+	                  const RGBColor& blend);
+
 	// Converts the given pixel into an OpenGl point. This might
 	// need some flipping of axis, depending if you want to render
 	// on the screen or on a texture.
@@ -50,27 +65,28 @@ public:
 	virtual void setup_gl() = 0;
 
 private:
+	/// The actual implementation of the methods below.
+	virtual void do_blit(const FloatRect& dst_rect,
+	                     const BlitSource& texture,
+	                     float opacity,
+	                     BlendMode blend_mode) = 0;
+
+	virtual void do_blit_blended(const FloatRect& dst_rect,
+	                             const BlitSource& texture,
+	                             const BlitSource& mask,
+	                             const RGBColor& blend) = 0;
+
 	DISALLOW_COPY_AND_ASSIGN(Surface);
 };
 
 /// Draws a rect (frame only) to the surface.
 void draw_rect(const Rect&, const RGBColor&, Surface* destination);
 
-/// This draws a part of 'texture' to 'surface'.
-void blit
-	(const Rect& dst, const Image&, const Rect& srcrc, const float opacity,
-	 BlendMode blend_mode, Surface* destination);
-
 /// This draws a grayed out version. See MonochromeBlitProgram.
 void
 blit_monochrome
 	(const Rect& dst, const Image&, const Rect& srcrc,
 	 const RGBAColor& multiplier, Surface* destination);
-
-/// This draws a playercolor blended image. See BlendedBlitProgram.
-void blit_blended
-	(const Rect& dst, const Image& image, const Image& texture_mask, const Rect&
-	 srcrc, const RGBColor& blend, Surface* destination);
 
 /// Draws a filled rect to the destination. No blending takes place, the values
 // in the target are just replaced (i.e. / BlendMode would be BlendMode::Copy).

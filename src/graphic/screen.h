@@ -44,6 +44,15 @@ public:
 	std::unique_ptr<Texture> to_texture() const;
 
 private:
+	void do_blit(const FloatRect& dst_rect,
+	             const BlitSource& texture,
+	             float opacity,
+	             BlendMode blend_mode) override;
+
+	void do_blit_blended(const FloatRect& dst_rect,
+	                     const BlitSource& texture,
+	                     const BlitSource& mask,
+	                     const RGBColor& blend) override;
 	const int m_w, m_h;
 
 	DISALLOW_COPY_AND_ASSIGN(Screen);

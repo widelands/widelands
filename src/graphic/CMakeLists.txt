@@ -91,6 +91,7 @@ wl_library(graphic_surface
     blend_mode.h
     gl/blit_program.cc
     gl/blit_program.h
+    gl/blit_source.h
     gl/draw_line_program.cc
     gl/draw_line_program.h
     gl/fill_rect_program.cc

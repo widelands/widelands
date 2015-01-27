@@ -106,6 +106,7 @@ void main() {
 class BlitProgram {
 public:
 	// NOCOM(#sirver): document these.
+	// NOCOM(#sirver): change to use BlitSource
 	struct Arguments {
 		FloatRect destination_rect;
 		float z_value;
@@ -367,12 +368,11 @@ VanillaBlitProgram::VanillaBlitProgram() {
 }
 
 void VanillaBlitProgram::draw(const FloatRect& gl_dest_rect,
-                              const FloatRect& gl_src_rect,
                               const float z_value,
-                              const int texture,
+										const BlitSource& texture,
                               const float opacity,
                               const BlendMode blend_mode) {
-	draw({Arguments{gl_dest_rect, gl_src_rect, z_value, texture, opacity, blend_mode}});
+	draw({Arguments{gl_dest_rect, texture.source_rect, z_value, texture.name, opacity, blend_mode}});
 }
 
 void VanillaBlitProgram::draw(const std::vector<Arguments>& arguments) {
@@ -450,17 +450,15 @@ BlendedBlitProgram::BlendedBlitProgram() {
 
 void BlendedBlitProgram::draw(const FloatRect& gl_dest_rect,
                               const float z_value,
-                              const int texture_image,
-                              const FloatRect& source_rect,
-                              const int texture_mask,
-                              const FloatRect& mask_source_rect,
+										const BlitSource& texture,
+										const BlitSource& mask,
                               const RGBAColor& blend) {
 	draw({Arguments{gl_dest_rect,
 	                z_value,
-	                texture_image,
-	                source_rect,
-	                texture_mask,
-						 mask_source_rect,
+	                texture.name,
+	                texture.source_rect,
+	                mask.name,
+						 mask.source_rect,
 	                blend,
 	                BlendMode::UseAlpha}});
 }

@@ -24,6 +24,7 @@
 
 #include "base/wexception.h"
 #include "graphic/gl/utils.h"
+#include "graphic/render_queue.h"
 #include "graphic/texture.h"
 
 Screen::Screen(int w, int h) : m_w(w), m_h(h) {
@@ -34,6 +35,7 @@ void Screen::pixel_to_gl(float* x, float* y) const {
 	*y = 1. - (*y / m_h) * 2.;
 }
 
+// NOCOM(#sirver): remove this and do it in the render queue.
 void Screen::setup_gl() {
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glViewport(0, 0, m_w, m_h);
@@ -77,4 +79,31 @@ std::unique_ptr<Texture> Screen::to_texture() const {
 	                                                0xff000000);
 
 	return std::unique_ptr<Texture>(new Texture(surface));
+}
+
+void Screen::do_blit(const FloatRect& dst_rect,
+                     const BlitSource& texture,
+                     float opacity,
+                     BlendMode blend_mode) {
+	RenderQueue::Item i;
+	i.program_id = RenderQueue::Program::BLIT;
+	i.blend_mode = blend_mode;
+	i.destination_rect = dst_rect;
+	i.vanilla_blit_arguments.texture = texture;
+	i.vanilla_blit_arguments.opacity = opacity;
+	RenderQueue::instance().enqueue(i);
+}
+
+void Screen::do_blit_blended(const FloatRect& dst_rect,
+                             const BlitSource& texture,
+                             const BlitSource& mask,
+                             const RGBColor& blend) {
+	RenderQueue::Item i;
+	i.destination_rect = dst_rect;
+	i.program_id = RenderQueue::Program::BLIT_BLENDED;
+	i.blend_mode = BlendMode::UseAlpha;
+	i.blended_blit_arguments.texture = texture;
+	i.blended_blit_arguments.mask = mask;
+	i.blended_blit_arguments.blend = blend;
+	RenderQueue::instance().enqueue(i);
 }

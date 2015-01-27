@@ -75,8 +75,8 @@ uint32_t make_key_blended(const int program_id, const int z_value) {
 
 // Construct 'args' used by the individual programs out of 'item'.
 inline void from_item(const RenderQueue::Item& item, VanillaBlitProgram::Arguments* args) {
-	args->source_rect = item.vanilla_blit_arguments.source_rect;
-	args->texture = item.vanilla_blit_arguments.texture;
+	args->source_rect = item.vanilla_blit_arguments.texture.source_rect;
+	args->texture = item.vanilla_blit_arguments.texture.name;
 	args->opacity = item.vanilla_blit_arguments.opacity;
 }
 
@@ -91,11 +91,11 @@ inline void from_item(const RenderQueue::Item& item, FillRectProgram::Arguments*
 }
 
 inline void from_item(const RenderQueue::Item& item, BlendedBlitProgram::Arguments* args) {
-	args->texture = item.blended_blit_arguments.texture;
-	args->source_rect = item.blended_blit_arguments.source_rect;
+	args->texture = item.blended_blit_arguments.texture.name;
+	args->source_rect = item.blended_blit_arguments.texture.source_rect;
 	args->blend = item.blended_blit_arguments.blend;
-	args->texture_mask = item.blended_blit_arguments.texture_mask;
-	args->mask_source_rect = item.blended_blit_arguments.mask_source_rect;
+	args->texture_mask = item.blended_blit_arguments.mask.name;
+	args->mask_source_rect = item.blended_blit_arguments.mask.source_rect;
 }
 
 inline void from_item(const RenderQueue::Item& item, DrawLineProgram::Arguments* args) {

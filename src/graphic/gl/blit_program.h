@@ -27,6 +27,7 @@
 #include "base/rect.h"
 #include "graphic/blend_mode.h"
 #include "graphic/color.h"
+#include "graphic/gl/blit_source.h"
 #include "graphic/gl/system_headers.h"
 
 class BlitProgram;
@@ -56,9 +57,8 @@ public:
 	// All coordinates are in the OpenGL frame. The 'blend_mode' defines if the
 	// values are copied or if alpha values are used.
 	void draw(const FloatRect& gl_dest_rect,
-	          const FloatRect& gl_src_rect,
 				 const float z_value,
-	          const int texture,
+				 const BlitSource& texture,
 				 float opacity,
 	          const BlendMode blend_mode);
 
@@ -128,10 +128,8 @@ public:
 	// the 'blend'. This is used for blitting player colored images.
 	void draw(const FloatRect& gl_dest_rect,
 	          const float z_value,
-	          const int gl_texture_image,
-	          const FloatRect& gl_src_rect,
-	          const int texture_mask,
-	          const FloatRect& mask_source_rect,
+				 const BlitSource& texture,
+				 const BlitSource& mask,
 	          const RGBAColor& blend);
 
 	void draw(const std::vector<Arguments>& arguments);

@@ -93,6 +93,17 @@ public:
 private:
 	void init(uint16_t w, uint16_t h);
 
+	// Implements surface.
+	void do_blit(const FloatRect& dst_rect,
+	             const BlitSource& texture,
+	             float opacity,
+	             BlendMode blend_mode) override;
+
+	void do_blit_blended(const FloatRect& dst_rect,
+	                     const BlitSource& texture,
+	                     const BlitSource& mask,
+	                     const RGBColor& blend) override;
+
 	// Width and height.
 	int m_w, m_h;
 
