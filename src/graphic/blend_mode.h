@@ -26,15 +26,12 @@ enum class BlendMode {
 	// present.
 	UseAlpha,
 
-	// NOCOM(#sirver): grep for all uses and change to switches
+	// Used internally for Surface::brighten_rect() if the rect is actually to
+	// be darkened.
 	Subtract,
 
-	// NOCOM(#sirver): document
-
 	// Copy all pixel information, including alpha channel information.
-	// NOCOM(#sirver): rename to None
-	Copy
-
+	Copy,
 };
 
 #endif  // end of include guard: WL_GRAPHIC_BLEND_MODE_H

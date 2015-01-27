@@ -279,7 +279,6 @@ Load tribe graphics
 */
 void TribeDescr::load_graphics()
 {
-	log("#sirver Loading tribe graphics: %s!\n", name().c_str());
 	for (WareIndex i = 0; i < m_workers.get_nitems(); ++i)
 		m_workers.get(i)->load_graphics();
 

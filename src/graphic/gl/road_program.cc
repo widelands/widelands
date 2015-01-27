@@ -220,18 +220,13 @@ void RoadProgram::draw(const Surface& surface, const FieldsToDraw& fields_to_dra
 	gl_array_buffer_.bind();
 	gl_array_buffer_.update(vertices_);
 
-	const auto set_attrib_pointer = [](const int vertex_index, int num_items, int offset) {
-		glVertexAttribPointer(vertex_index,
-		                      num_items,
-		                      GL_FLOAT,
-		                      GL_FALSE,
-		                      sizeof(PerVertexData),
-		                      reinterpret_cast<void*>(offset));
-	};
-	set_attrib_pointer(attr_position_, 2, offsetof(PerVertexData, gl_x));
-	set_attrib_pointer(attr_texture_position_, 2, offsetof(PerVertexData, texture_x));
-	set_attrib_pointer(attr_brightness_, 1, offsetof(PerVertexData, brightness));
-	set_attrib_pointer(attr_texture_mix_, 1, offsetof(PerVertexData, texture_mix));
+	Gl::vertex_attrib_pointer(attr_position_, 2, sizeof(PerVertexData), offsetof(PerVertexData, gl_x));
+	Gl::vertex_attrib_pointer(
+	   attr_texture_position_, 2, sizeof(PerVertexData), offsetof(PerVertexData, texture_x));
+	Gl::vertex_attrib_pointer(
+	   attr_brightness_, 1, sizeof(PerVertexData), offsetof(PerVertexData, brightness));
+	Gl::vertex_attrib_pointer(
+	   attr_texture_mix_, 1, sizeof(PerVertexData), offsetof(PerVertexData, texture_mix));
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 

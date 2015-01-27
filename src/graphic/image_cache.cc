@@ -107,10 +107,4 @@ void ImageCache::compactify() {
 		gl_textures.insert(new_textures[i]->get_gl_texture());
 		images_[hashes[i]]->set_image(std::move(new_textures[i]));
 	}
-
-	log("#sirver Done compactifing:\n");
-	for (const auto& i : gl_textures) {
-		log("#sirver   i: %d\n", i);
-	}
-
 }

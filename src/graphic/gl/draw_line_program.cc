@@ -26,8 +26,6 @@
 
 namespace  {
 
-// NOCOM(#sirver): this looks so similar to FillRectProgram. Combine?
-
 const char kDrawLineVertexShader[] = R"(
 #version 120
 
@@ -113,16 +111,8 @@ void DrawLineProgram::draw(const std::vector<Arguments>& arguments) {
 	gl_array_buffer_.bind();
 	gl_array_buffer_.update(vertices_);
 
-	const auto set_attrib_pointer = [](const int vertex_index, int num_items, int offset) {
-		glVertexAttribPointer(vertex_index,
-		                      num_items,
-		                      GL_FLOAT,
-		                      GL_FALSE,
-		                      sizeof(PerVertexData),
-		                      reinterpret_cast<void*>(offset));
-	};
-	set_attrib_pointer(attr_position_, 3, offsetof(PerVertexData, gl_x));
-	set_attrib_pointer(attr_color_, 3, offsetof(PerVertexData, color_r));
+	Gl::vertex_attrib_pointer(attr_position_, 3, sizeof(PerVertexData), offsetof(PerVertexData, gl_x));
+	Gl::vertex_attrib_pointer(attr_color_, 3, sizeof(PerVertexData), offsetof(PerVertexData, color_r));
 
 	glLineWidth(1);
 	glDrawArrays(GL_LINES, 0, vertices_.size());

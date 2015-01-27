@@ -118,10 +118,6 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool init_fullscreen)
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 
-	// NOCOM(#sirver): maybe only enable when needed?
-	glEnable(GL_TEXTURE_2D);
-
-	// NOCOM(#sirver): maybe move out of here
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 

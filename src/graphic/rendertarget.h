@@ -60,8 +60,7 @@ public:
 	int32_t width() const;
 	int32_t height() const;
 
-	void draw_line
-		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t width = 1);
+	void draw_line(const Point& start, const Point& end, const RGBColor& color, uint8_t width = 1);
 	void draw_rect(const Rect&, const RGBColor&);
 	void fill_rect(const Rect&, const RGBAColor&);
 	void brighten_rect(const Rect&, int32_t factor);

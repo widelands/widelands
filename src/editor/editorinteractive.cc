@@ -605,8 +605,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 		eia.select_tool(eia.tools.increase_height, EditorTool::First);
 		editor.postload();
 
-		// NOCOM(#sirver): hack
-		log("#sirver Now starting game. Yippie!\n");
+		// NOCOM(#sirver): remove before submitting
 		g_gr->images().compactify();
 
 		eia.start();

@@ -49,7 +49,7 @@ inline float to_opengl_z(const int z) {
 //   - and we want to render frontmost objects first, so that we do not render
 //     any pixel more than once.
 static_assert(RenderQueue::HIGHEST_PROGRAM_ID < 8, "Need to change sorting keys.");  // 4 bits.
-uint64_t make_key_opaque(const int program_id, const int z_value) {
+uint32_t make_key_opaque(const int program_id, const int z_value) {
 	assert(program_id < HIGHEST_PROGRAM_ID);
 	assert(0 <= z_value && z_value < std::numeric_limits<uint16_t>::max());
 
@@ -119,7 +119,6 @@ std::vector<T> batch_up(const RenderQueue::Program program_id,
 		from_item(current_item, &args);
 		++(*index);
 	}
-	// log("#sirver   Batched: %lu items for program_id: %d\n", all_args.size(), program_id);
 	return all_args;
 }
 
@@ -145,12 +144,12 @@ void RenderQueue::enqueue(const Item& given_item) {
 		opaque_items_.emplace_back(given_item);
 		item = &opaque_items_.back();
 		item->z_value = to_opengl_z(next_z);
-		item->key = make_key_opaque(static_cast<uint64_t>(item->program_id), next_z);
+		item->key = make_key_opaque(static_cast<uint32_t>(item->program_id), next_z);
 	} else {
 		blended_items_.emplace_back(given_item);
 		item = &blended_items_.back();
 		item->z_value = to_opengl_z(next_z);
-		item->key = make_key_blended(static_cast<uint64_t>(item->program_id), next_z);
+		item->key = make_key_blended(static_cast<uint32_t>(item->program_id), next_z);
 	}
 
 	// Add more than 1 since some items have multiple programs that all need a
@@ -173,7 +172,6 @@ void RenderQueue::draw(const int screen_width, const int screen_height) {
 
 	glDisable(GL_BLEND);
 
-	// log("#sirver Drawing Opaque stuff: %ld.\n", opaque_items_.size());
 	std::sort(opaque_items_.begin(), opaque_items_.end());
 	draw_items(opaque_items_);
 	opaque_items_.clear();
@@ -181,9 +179,7 @@ void RenderQueue::draw(const int screen_width, const int screen_height) {
 	glEnable(GL_BLEND);
 	glDepthMask(GL_FALSE);
 
-	// log("#sirver Drawing blended stuff: %ld.\n", blended_items_.size());
 	std::sort(blended_items_.begin(), blended_items_.end());
-
 	draw_items(blended_items_);
 	blended_items_.clear();
 

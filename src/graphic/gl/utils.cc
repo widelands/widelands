@@ -193,4 +193,9 @@ void Program::build(const char* vertex_shader_source, const char* fragment_shade
 	}
 }
 
+void vertex_attrib_pointer(int vertex_index, int num_items, int stride, int offset) {
+	glVertexAttribPointer(
+	   vertex_index, num_items, GL_FLOAT, GL_FALSE, stride, reinterpret_cast<void*>(offset));
+}
+
 }  // namespace Gl

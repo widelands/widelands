@@ -89,7 +89,6 @@ public:
 	// data, it is reallocated. Does not check if the buffer is already bound.
 	void update(const std::vector<T>& items) {
 		if (buffer_size_ < items.size()) {
-			log("#sirver object_: %d,items.size(): %lud\n", object_, items.size());
 			glBufferData(GL_ARRAY_BUFFER, items.size() * sizeof(T), items.data(), GL_DYNAMIC_DRAW);
 			buffer_size_ = items.size();
 		} else {
@@ -103,6 +102,9 @@ private:
 
 	DISALLOW_COPY_AND_ASSIGN(NewBuffer);
 };
+
+// Calls glVertexAttribPointer.
+void vertex_attrib_pointer(int vertex_index, int num_items, int stride, int offset);
 
 }  // namespace Gl
 

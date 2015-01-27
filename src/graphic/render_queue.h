@@ -93,7 +93,6 @@ public:
 	};
 
 	// NOCOM(#sirver): document and figure out.
-	// // NOCOM(#sirver): maybe combine to a single 64 bit value?
 	struct Item {
 		Item() {}
 
@@ -104,8 +103,8 @@ public:
 		int program_id;
 		float z_value;
 		FloatRect destination_rect;
+		uint32_t key;
 		BlendMode blend_mode;
-		uint64_t key;
 
 		union {
 			VanillaBlitArguments vanilla_blit_arguments;

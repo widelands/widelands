@@ -65,8 +65,7 @@ public:
 	void fill_rect(const Rect&, const RGBAColor&);
 
 	/// draw a line to the destination
-	// NOCOM(#sirver): take two points
-	void draw_line(int x1, int y1, int x2, int y2, const RGBColor& color, int width);
+	void draw_line(const Point& start, const Point& end, const RGBColor& color, int width);
 
 	/// makes a rectangle on the destination brighter (or darker).
 	void brighten_rect(const Rect&, int factor);

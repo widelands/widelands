@@ -59,31 +59,6 @@ inline void pixel_to_gl_texture(const int width, const int height, float* x, flo
 
 // Convert 'srcrc' from pixel space into opengl space, taking into account that
 // it might be a subtexture in a bigger texture.
-// NOCOM(#sirver): KILL
-FloatRect source_rect_to_gl(const Image& image, const Rect& src_rect) {
-	// Source Rectangle. We have to take into account that the texture might be
-	// a subtexture in another bigger texture. So we first figure out the pixel
-	// coordinates given it is a full texture (values between 0 and 1) and then
-	// adjust these for the texture coordinates in the parent texture.
-	const FloatRect& texture_coordinates = image.texture_coordinates();
-
-	float x1 = src_rect.x;
-	float y1 = src_rect.y;
-	pixel_to_gl_texture(image.width(), image.height(), &x1, &y1);
-	x1 = texture_coordinates.x + x1 * texture_coordinates.w;
-	y1 = texture_coordinates.y + y1 * texture_coordinates.h;
-
-	float x2 = src_rect.x + src_rect.w;
-	float y2 = src_rect.y + src_rect.h;
-	pixel_to_gl_texture(image.width(), image.height(), &x2, &y2);
-	x2 = texture_coordinates.x + x2 * texture_coordinates.w;
-	y2 = texture_coordinates.y + y2 * texture_coordinates.h;
-
-	return FloatRect(x1, y1, x2 - x1, y2 - y1);
-}
-
-// Convert 'srcrc' from pixel space into opengl space, taking into account that
-// it might be a subtexture in a bigger texture.
 BlitSource to_blit_source(const Image& image, const Rect& src_rect) {
 	// Source Rectangle. We have to take into account that the texture might be
 	// a subtexture in another bigger texture. So we first figure out the pixel
@@ -111,10 +86,10 @@ BlitSource to_blit_source(const Image& image, const Rect& src_rect) {
 }  // namespace
 
 void draw_rect(const Rect& rc, const RGBColor& clr, Surface* surface) {
-	surface->draw_line(rc.x, rc.y, rc.x + rc.w, rc.y, clr, 1);
-	surface->draw_line(rc.x + rc.w, rc.y, rc.x + rc.w, rc.y + rc.h, clr, 1);
-	surface->draw_line(rc.x + rc.w, rc.y + rc.h, rc.x, rc.y + rc.h, clr, 1);
-	surface->draw_line(rc.x, rc.y + rc.h, rc.x, rc.y, clr, 1);
+	surface->draw_line(Point(rc.x, rc.y), Point(rc.x + rc.w, rc.y), clr, 1);
+	surface->draw_line(Point(rc.x + rc.w, rc.y), Point(rc.x + rc.w, rc.y + rc.h), clr, 1);
+	surface->draw_line(Point(rc.x + rc.w, rc.y + rc.h), Point(rc.x, rc.y + rc.h), clr, 1);
+	surface->draw_line(Point(rc.x, rc.y + rc.h), Point(rc.x, rc.y), clr, 1);
 }
 
 void Surface::fill_rect(const Rect& rc, const RGBAColor& clr) {
@@ -136,14 +111,14 @@ void Surface::brighten_rect(const Rect& rc, const int32_t factor)
 }
 
 void Surface::draw_line
-	(int x1, int y1, int x2, int y2, const RGBColor& color, int gwidth)
+	(const Point& start, const Point& end, const RGBColor& color, int gwidth)
 {
-	float gl_x1 = x1 + 0.5;
-	float gl_y1 = y1 + 0.5;
+	float gl_x1 = start.x + 0.5;
+	float gl_y1 = start.y + 0.5;
 	pixel_to_gl(&gl_x1, &gl_y1);
 
-	float gl_x2 = x2 + 0.5;
-	float gl_y2 = y2 + 0.5;
+	float gl_x2 = end.x + 0.5;
+	float gl_y2 = end.y + 0.5;
 	pixel_to_gl(&gl_x2, &gl_y2);
 
 	do_draw_line(FloatPoint(gl_x1, gl_y1), FloatPoint(gl_x2, gl_y2), color);

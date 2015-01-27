@@ -43,9 +43,6 @@ public:
 		BlendMode blend_mode;
 	};
 
-	// NOCOM(#sirver): add a sorting step for texture?
-	void draw(const std::vector<Arguments>& arguments);
-
 	// Returns the (singleton) instance of this class.
 	static VanillaBlitProgram& instance();
 	~VanillaBlitProgram();
@@ -60,6 +57,9 @@ public:
 				 const BlitSource& texture,
 				 float opacity,
 	          const BlendMode blend_mode);
+
+	// Draws a bunch of items at once.
+	void draw(const std::vector<Arguments>& arguments);
 
 private:
 	VanillaBlitProgram();
@@ -92,6 +92,7 @@ public:
 				 const BlitSource& blit_source,
 				 const RGBAColor& blend);
 
+	// Draws a bunch of items at once.
 	void draw(const std::vector<Arguments>& arguments);
 
 private:
@@ -127,6 +128,7 @@ public:
 				 const BlitSource& mask,
 	          const RGBAColor& blend);
 
+	// Draws a bunch of items at once.
 	void draw(const std::vector<Arguments>& arguments);
 
 private:

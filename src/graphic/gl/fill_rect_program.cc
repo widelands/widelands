@@ -177,18 +177,9 @@ void FillRectProgram::draw(const std::vector<Arguments>& arguments) {
 
 		gl_array_buffer_.update(vertices_);
 
-		// NOCOM(#sirver): finally pull this into a method.
-		const auto set_attrib_pointer = [](const int vertex_index, int num_items, int offset) {
-			glVertexAttribPointer(vertex_index,
-			                      num_items,
-			                      GL_FLOAT,
-			                      GL_FALSE,
-			                      sizeof(PerVertexData),
-			                      reinterpret_cast<void*>(offset));
-		};
-
-		set_attrib_pointer(attr_position_, 3, offsetof(PerVertexData, gl_x));
-		set_attrib_pointer(attr_color_, 4, offsetof(PerVertexData, r));
+		Gl::vertex_attrib_pointer(
+		   attr_position_, 3, sizeof(PerVertexData), offsetof(PerVertexData, gl_x));
+		Gl::vertex_attrib_pointer(attr_color_, 4, sizeof(PerVertexData), offsetof(PerVertexData, r));
 
 		glDrawArrays(GL_TRIANGLES, 0, vertices_.size());
 

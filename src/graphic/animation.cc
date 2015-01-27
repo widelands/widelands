@@ -201,7 +201,7 @@ NonPackedAnimation::NonPackedAnimation(const string& directory, Section& section
 		}
 	}
 
-	// NOCOM(#sirver): Good?
+	// NOCOM(#sirver): remove before submitting.
 	ensure_graphics_are_loaded();
 }
 
@@ -231,7 +231,7 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 		frametime_ = 1000 / get_positive_int(table, "fps");
 	}
 
-	// NOCOM(#sirver): good?
+	// NOCOM(#sirver): remove before submitting
 	ensure_graphics_are_loaded();
 }
 

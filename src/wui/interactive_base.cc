@@ -378,21 +378,18 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 			UI::Align_BottomRight);
 	}
 
-	// NOCOM(#sirver): revert
-	static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
-	const std::string fps_text =
-		(fps_format % (1000.0 / m_frametime) % (1000.0 / (m_avg_usframetime / 1000))).str();
-	log("#sirver fps_text: %s\n", fps_text.c_str());
 	// Blit FPS when in debug mode.
-	// if (get_display_flag(dfDebug)) {
-		// static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
-		// const std::string fps_text =
-			// (fps_format % (1000.0 / m_frametime) % (1000.0 / (m_avg_usframetime / 1000))).str();
-		// dst.blit(Point(5, (is_game) ? 25 : 5),
-					// UI::g_fh1->render(fps_text),
-					// BlendMode::UseAlpha,
-					// UI::Align_Left);
-	// }
+	if (get_display_flag(dfDebug)) {
+		static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
+		const std::string fps_text = as_uifont
+			((fps_format %
+			  (1000.0 / m_frametime) % (1000.0 / (m_avg_usframetime / 1000)))
+			 .str(), UI_FONT_SIZE_SMALL);
+		dst.blit(Point(5, (is_game) ? 25 : 5),
+		         UI::g_fh1->render(fps_text),
+		         BlendMode::UseAlpha,
+		         UI::Align_Left);
+	}
 }
 
 /** InteractiveBase::mainview_move(int32_t x, int32_t y)

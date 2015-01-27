@@ -101,12 +101,23 @@ void main() {
 }
 )";
 
+// While drawing we put all draw calls into a buffer, so that we have to
+// transfer the buffer to the GPU only once, even though we might need to do
+// many glDraw* calls. This structure represents the parameters for one glDraw*
+// call.
+struct DrawBatch {
+	int offset;
+	int count;
+	int texture;
+	int mask;
+	BlendMode blend_mode;
+};
+
 }  // namespace
 
 class BlitProgram {
 public:
 	// NOCOM(#sirver): document these.
-	// NOCOM(#sirver): change to use BlitSource
 	struct Arguments {
 		FloatRect destination_rect;
 		float z_value;
@@ -127,7 +138,6 @@ public:
 
 private:
 	struct PerVertexData {
-		// NOCOM(#sirver): blended needs to much extra. fix?
 		PerVertexData(float init_gl_x,
 		              float init_gl_y,
 		              float init_gl_z,
@@ -207,32 +217,20 @@ void BlitProgram::draw_and_deactivate(const std::vector<Arguments>& arguments) {
 
 	gl_array_buffer_.bind();
 
-	const auto set_attrib_pointer = [](const int vertex_index, int num_items, int offset) {
-		glVertexAttribPointer(vertex_index,
-		                      num_items,
-		                      GL_FLOAT,
-		                      GL_FALSE,
-		                      sizeof(PerVertexData),
-		                      reinterpret_cast<void*>(offset));
-	};
-	set_attrib_pointer(attr_blend_, 4, offsetof(PerVertexData, blend_r));
-	set_attrib_pointer(attr_mask_texture_position_, 2, offsetof(PerVertexData, mask_texture_x));
-	set_attrib_pointer(attr_position_, 3, offsetof(PerVertexData, gl_x));
-	set_attrib_pointer(attr_texture_position_, 2, offsetof(PerVertexData, texture_x));
+	Gl::vertex_attrib_pointer(attr_blend_, 4, sizeof(PerVertexData), offsetof(PerVertexData, blend_r));
+	Gl::vertex_attrib_pointer(attr_mask_texture_position_,
+	                       2,
+	                       sizeof(PerVertexData),
+	                       offsetof(PerVertexData, mask_texture_x));
+	Gl::vertex_attrib_pointer(attr_position_, 3, sizeof(PerVertexData), offsetof(PerVertexData, gl_x));
+	Gl::vertex_attrib_pointer(
+	   attr_texture_position_, 2, sizeof(PerVertexData), offsetof(PerVertexData, texture_x));
 
 	glUniform1i(u_texture_, 0);
 	glUniform1i(u_mask_, 1);
 
-	// NOCOM(#sirver): pull out
-	struct DrawArgs {
-		int offset;
-		int count;
-		int texture;
-		int mask;
-		BlendMode blend_mode;
-	};
-	std::vector<DrawArgs> draw_args;
-
+	// Prepare the buffer for many draw calls.
+	std::vector<DrawBatch> draw_batches;
 	int offset = 0;
 	vertices_.clear();
 	while (i < arguments.size()) {
@@ -244,12 +242,6 @@ void BlitProgram::draw_and_deactivate(const std::vector<Arguments>& arguments) {
 			if (current_args.blend_mode != template_args.blend_mode ||
 					current_args.texture.name != template_args.texture.name ||
 					current_args.mask.name != template_args.mask.name) {
-				// log("#sirver current_args.blend_mode: %d\n", current_args.blend_mode);
-				// log("#sirver template_args.blend_mode: %d\n", template_args.blend_mode);
-				// log("#sirver current_args.texture: %d\n", current_args.texture);
-				// log("#sirver template_args.texture: %d\n", template_args.texture);
-				// log("#sirver current_args.mask: %d\n", current_args.mask);
-				// log("#sirver template_args.mask: %d\n", template_args.mask);
 				break;
 			}
 
@@ -311,17 +303,17 @@ void BlitProgram::draw_and_deactivate(const std::vector<Arguments>& arguments) {
 			++i;
 		}
 
-		draw_args.emplace_back(DrawArgs{offset,
-		                        static_cast<int>(vertices_.size() - offset),
-		                        template_args.texture.name,
-		                        template_args.mask.name,
-		                        template_args.blend_mode});
+		draw_batches.emplace_back(DrawBatch{offset,
+		                                    static_cast<int>(vertices_.size() - offset),
+		                                    template_args.texture.name,
+		                                    template_args.mask.name,
+		                                    template_args.blend_mode});
 		offset = vertices_.size();
 	}
-
 	gl_array_buffer_.update(vertices_);
 
-	for (const auto& draw_arg : draw_args) {
+	// Now do the draw calls.
+	for (const auto& draw_arg : draw_batches) {
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, draw_arg.texture);
 
@@ -331,7 +323,6 @@ void BlitProgram::draw_and_deactivate(const std::vector<Arguments>& arguments) {
 		if (draw_arg.blend_mode == BlendMode::Copy) {
 			glBlendFunc(GL_ONE, GL_ZERO);
 		}
-		// log("#sirver       BlitProgram: vertices_.size(): %ld\n", vertices_.size());
 		glDrawArrays(GL_TRIANGLES, draw_arg.offset, draw_arg.count);
 
 		if (draw_arg.blend_mode == BlendMode::Copy) {
