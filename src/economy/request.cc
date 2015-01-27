@@ -69,11 +69,11 @@ Request::Request
 	m_last_request_time(m_required_time)
 {
 	assert(m_type == wwWARE || m_type == wwWORKER);
-	if (w == wwWARE && _target.owner().tribe().get_nrwares() <= index)
+
+	if (w == wwWARE && !_target.owner().egbase().tribes().ware_exists(index))
 		throw wexception
-			("creating ware request with index %u, but tribe has only %u "
-			 "ware types",
-			 index, _target.owner().tribe().get_nrwares  ());
+			("creating ware request with index %u, but the ware for this index doesn't exist",
+			 index);
 	if (w == wwWORKER && _target.owner().tribe().get_nrworkers() <= index)
 		throw wexception
 			("creating worker request with index %u, but tribe has only %u "
@@ -186,7 +186,7 @@ void Request::write
 
 	assert(m_type == wwWARE || m_type == wwWORKER);
 	const TribeDescr & tribe = m_target.owner().tribe();
-	assert(m_type != wwWARE   || m_index < tribe.get_nrwares  ());
+	assert(m_type != wwWARE   || m_target.owner().egbase().tribes().ware_exists(m_index));
 	assert(m_type != wwWORKER || m_index < tribe.get_nrworkers());
 	fw.c_string
 		(m_type == wwWARE                        ?

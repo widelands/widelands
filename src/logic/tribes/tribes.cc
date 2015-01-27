@@ -95,7 +95,7 @@ void Tribes::add_tribe(const LuaTable& t) {
 	tribes_->add(new TribeDescr(t, egbase_));
 }
 
-WareIndex Tribes::get_nrwares() const {
+WareIndex Tribes::nrwares() const {
 	return wares_.size();
 }
 

@@ -163,11 +163,11 @@ Player::Player
 	m_allowed_worker_types  (tribe_descr.get_nrworkers  (), true),
 	m_allowed_building_types(tribe_descr.get_nrbuildings(), true),
 	m_ai(""),
-	m_current_produced_statistics(tribe_descr.get_nrwares    ()),
-	m_current_consumed_statistics(tribe_descr.get_nrwares    ()),
-	m_ware_productions  (tribe_descr.get_nrwares    ()),
-	m_ware_consumptions  (tribe_descr.get_nrwares    ()),
-	m_ware_stocks  (tribe_descr.get_nrwares          ())
+	m_current_produced_statistics(tribe_descr.get_nrwares()), // NOCOM(GunChleoc): All tribes' wares or just the current tribe?
+	m_current_consumed_statistics(tribe_descr.get_nrwares()),
+	m_ware_productions  (tribe_descr.get_nrwares()),
+	m_ware_consumptions  (tribe_descr.get_nrwares()),
+	m_ware_stocks  (tribe_descr.get_nrwares())
 {
 	set_name(name);
 
@@ -1186,7 +1186,7 @@ void Player::sample_statistics()
  */
 void Player::ware_produced(WareIndex const wareid) {
 	assert (m_ware_productions.size() == tribe().get_nrwares());
-	assert(wareid < tribe().get_nrwares());
+	assert(egbase().tribes().ware_exists(wareid));
 
 	++m_current_produced_statistics[wareid];
 }
@@ -1201,7 +1201,7 @@ void Player::ware_produced(WareIndex const wareid) {
  */
 void Player::ware_consumed(WareIndex const wareid, uint8_t const count) {
 	assert (m_ware_consumptions.size() == tribe().get_nrwares());
-	assert(wareid < tribe().get_nrwares());
+	assert(egbase().tribes().ware_exists(wareid));
 
 	m_current_consumed_statistics[wareid] += count;
 }
@@ -1381,7 +1381,7 @@ void Player::read_statistics(FileRead & fr, uint32_t const version)
 
 		if (nr_wares > 0) {
 			if (nr_wares == tribe().get_nrwares()) {
-				assert(m_ware_productions.size() == nr_wares);
+				assert(m_ware_productions.size() == nr_wares); // NOCOM(GunChleoc) All tribes' wares?
 				assert(m_current_produced_statistics.size() == nr_wares);
 
 				for (uint32_t i = 0; i < m_current_produced_statistics.size(); ++i) {

@@ -91,9 +91,12 @@ public:
 	/// Adds a specific tribe's configuration.
 	void add_tribe(const LuaTable& table);
 
-	// NOCOM(#GunChleoc): Do we want all wares for all tribes here?
-	WareIndex get_nrwares() const;
+	WareIndex nrwares() const;
 	WareIndex get_nrworkers() const;
+
+	bool ware_exists(const WareIndex& index) const {
+		return wares_.count(index) == 1;
+	}
 
 	BuildingIndex safe_building_index(const std::string& buildingname) const;
 	int safe_immovable_index(const std::string& immovablename) const;

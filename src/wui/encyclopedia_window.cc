@@ -87,12 +87,11 @@ EncyclopediaWindow::EncyclopediaWindow
 
 void EncyclopediaWindow::fill_wares() {
 	const TribeDescr & tribe = iaplayer().player().tribe();
-	WareIndex const nr_wares = tribe.get_nrwares();
 	std::vector<Ware> ware_vec;
 
-	for (WareIndex i = 0; i < nr_wares; ++i) {
-		WareDescr const * ware = tribe.get_ware_descr(i);
-		Ware w(i, ware);
+	for (std::pair<WareIndex, WareDescr> ware: tribe.wares()) {
+		WareDescr const * ware_descr = tribe.get_ware_descr(ware.first);
+		Ware w(i, ware_descr);
 		ware_vec.push_back(w);
 	}
 

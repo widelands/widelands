@@ -1250,11 +1250,10 @@ CmdSetWareTargetQuantity::CmdSetWareTargetQuantity
 void CmdSetWareTargetQuantity::execute(Game & game)
 {
 	Player & player = game.player(sender());
-	if
-		(economy  () < player.get_nr_economies() &&
-		 ware_type() < player.tribe().get_nrwares())
+	if (economy() < player.get_nr_economies() && game.tribes().ware_exists(ware_type())) {
 		player.get_economy_by_number(economy())->set_ware_target_quantity
-			(ware_type(),  m_permanent, duetime());
+			(ware_type(), m_permanent, duetime());
+	}
 }
 
 #define PLAYER_CMD_SETWARETARGETQUANTITY_VERSION 2
@@ -1313,10 +1312,7 @@ void CmdResetWareTargetQuantity::execute(Game & game)
 {
 	Player & player = game.player(sender());
 	const TribeDescr & tribe = player.tribe();
-	if
-		(economy  () < player.get_nr_economies() &&
-		 ware_type() < tribe.get_nrwares())
-	{
+	if (economy() < player.get_nr_economies() && game.tribes().ware_exists(ware_type())) {
 		const int32_t count =
 			tribe.get_ware_descr(ware_type())->default_target_quantity();
 		player.get_economy_by_number(economy())->set_ware_target_quantity
@@ -1372,11 +1368,10 @@ CmdSetWorkerTargetQuantity::CmdSetWorkerTargetQuantity
 void CmdSetWorkerTargetQuantity::execute(Game & game)
 {
 	Player & player = game.player(sender());
-	if
-		(economy  () < player.get_nr_economies() &&
-		 ware_type() < player.tribe().get_nrwares())
+	if (economy() < player.get_nr_economies() && game.tribes().ware_exists(ware_type())) {
 		player.get_economy_by_number(economy())->set_worker_target_quantity
 			(ware_type(),  m_permanent, duetime());
+	}
 }
 
 #define PLAYER_CMD_SETWORKERTARGETQUANTITY_VERSION 2
@@ -1435,10 +1430,7 @@ void CmdResetWorkerTargetQuantity::execute(Game & game)
 {
 	Player & player = game.player(sender());
 	const TribeDescr & tribe = player.tribe();
-	if
-		(economy  () < player.get_nr_economies() &&
-		 ware_type() < tribe.get_nrwares())
-	{
+	if (economy() < player.get_nr_economies() && game.tribes().ware_exists(ware_type())) {
 		const int32_t count =
 			tribe.get_ware_descr(ware_type())->default_target_quantity();
 		player.get_economy_by_number(economy())->set_worker_target_quantity
@@ -1870,9 +1862,9 @@ void CmdSetStockPolicy::execute(Game & game)
 				}
 				warehouse->set_worker_policy(m_ware, m_policy);
 			} else {
-				if (!(m_ware < tribe.get_nrwares())) {
+				if (!(game.tribes().ware_exists(m_ware))) {
 					log
-						("Cmd_SetStockPolicy: sender %u, ware %u out of bounds\n",
+						("Cmd_SetStockPolicy: sender %u, ware %u does not exist\n",
 						 sender(), m_ware);
 					return;
 				}

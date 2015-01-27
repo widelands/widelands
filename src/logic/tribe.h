@@ -66,7 +66,7 @@ struct TribeDescr {
 	const std::string & name() const {return name_;}
 
 	// NOCOM(GunChleoc): Look at the usage, ranged-bases for loops now?
-	WareIndex get_nrworkers() const {return workers_.get_nitems();}
+	WareIndex get_nrworkers() const {return workers_.size();}
 
 	WorkerDescr const * get_worker_descr(const WareIndex& index) const {
 		return workers_.at(index);
@@ -82,12 +82,17 @@ struct TribeDescr {
 	}
 
 	// NOCOM(GunChleoc): Look at the usage, ranged-bases for loops now?
-	WareIndex get_nrwares() const {return wares_.get_nitems();}
+	WareIndex get_nrwares() const {return wares_.size();}
+
+	const std::map<WareIndex, WareDescr> wares() { return wares_;}
 
 	WareIndex safe_ware_index(const std::string & warename) const;
 	WareIndex ware_index(const std::string & warename) const;
 	WareDescr const * get_ware_descr(const WareIndex& index) const {
 		return wares_.at(index);
+	}
+	bool has_ware(const WareIndex& index) const {
+		return wares_.count(index) == 1;
 	}
 	void set_ware_type_has_demand_check(const WareIndex& index, const std::string& tribename) const {
 		wares_.at(index)->set_has_demand_check(tribename);
@@ -99,7 +104,7 @@ struct TribeDescr {
 
 	// NOCOM(GunChleoc): Look at the usage, ranged-bases for loops now?
 	BuildingIndex get_nrbuildings() const {
-		return buildings_.get_nitems();
+		return buildings_.size();
 	}
 	BuildingIndex safe_building_index(char const * name) const;
 	BuildingDescr const * get_building_descr(const BuildingIndex& index) const {
@@ -185,7 +190,7 @@ private:
 	std::map<int, ImmovableDescr> immovables_;  // The player immovables
 	std::map<int, ShipDescr> ships_;
 	std::map<WareIndex, WorkerDescr> workers_;
-	std::map<WareIndex,WareDescr> wares_;
+	std::map<WareIndex, WareDescr> wares_;
 	std::string                       m_carrier; // NOCOM(GunChleoc): Use this to define the basic carrier. We need a logic change here.
 	std::string                       carrier_;
 	std::string                       m_soldier; // NOCOM(GunChleoc): We can probably remove these from the init.

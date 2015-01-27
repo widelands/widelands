@@ -45,7 +45,7 @@ Economy::Economy(Player & player) :
 	m_request_timerid(0)
 {
 	const TribeDescr & tribe = player.tribe();
-	WareIndex const nr_wares   = tribe.get_nrwares();
+	WareIndex const nr_wares   = player.egbase().tribes().nrwares();
 	WareIndex const nr_workers = tribe.get_nrworkers();
 	m_wares.set_nrwares(nr_wares);
 	m_workers.set_nrwares(nr_workers);
@@ -55,8 +55,12 @@ Economy::Economy(Player & player) :
 	m_ware_target_quantities   = new TargetQuantity[nr_wares];
 	for (WareIndex i = 0; i < nr_wares; ++i) {
 		TargetQuantity tq;
-		tq.permanent =
-			tribe.get_ware_descr(i)->default_target_quantity();
+		if (tribe.has_ware(i)) {
+			tq.permanent =
+				tribe.get_ware_descr(i)->default_target_quantity();
+		} else {
+			tq.permanent = 0;
+		}
 		tq.last_modified = 0;
 		m_ware_target_quantities[i] = tq;
 	}
@@ -381,7 +385,7 @@ void Economy::add_workers(WareIndex const id, uint32_t const count)
 */
 void Economy::remove_wares(WareIndex const id, uint32_t const count)
 {
-	assert(id < m_owner.tribe().get_nrwares());
+	assert(m_owner.egbase().tribes().ware_exists(id));
 	//log("%p: remove(%i, %i) from %i\n", this, id, count, m_wares.stock(id));
 
 	m_wares.remove(id, count);
@@ -531,12 +535,12 @@ bool Economy::needs_worker(WareIndex const worker_type) const {
 */
 void Economy::_merge(Economy & e)
 {
-	for (WareIndex i = m_owner.tribe().get_nrwares(); i;) {
-		--i;
-		TargetQuantity other_tq = e.m_ware_target_quantities[i];
-		TargetQuantity & this_tq = m_ware_target_quantities[i];
-		if (this_tq.last_modified < other_tq.last_modified)
+	for (std::pair<WareIndex, WareDescr> ware: m_owner.tribe().wares()) {
+		TargetQuantity other_tq = e.m_ware_target_quantities[ware.first];
+		TargetQuantity& this_tq = m_ware_target_quantities[ware.first];
+		if (this_tq.last_modified < other_tq.last_modified) {
 			this_tq = other_tq;
+		}
 	}
 	for (WareIndex i = m_owner.tribe().get_nrworkers(); i;) {
 		--i;
@@ -584,10 +588,10 @@ void Economy::_split(const std::set<OPtr<Flag> > & flags)
 
 	Economy & e = *new Economy(m_owner);
 
-	for (WareIndex i = m_owner.tribe().get_nrwares  (); i;) {
-		--i;
-		e.m_ware_target_quantities[i] = m_ware_target_quantities[i];
+	for (std::pair<WareIndex, WareDescr> ware: m_owner.tribe().wares()) {
+		e.m_ware_target_quantities[ware.first] = m_ware_target_quantities[ware.first];
 	}
+
 	for (WareIndex i = m_owner.tribe().get_nrworkers(); i;) {
 		--i;
 		e.m_worker_target_quantities[i] = m_worker_target_quantities[i];

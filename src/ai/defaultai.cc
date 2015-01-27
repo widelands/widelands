@@ -269,13 +269,13 @@ void DefaultAI::late_initialization() {
 	player_ = game().get_player(player_number());
 	tribe_ = &player_->tribe();
 	log("ComputerPlayer(%d): initializing (%u)\n", player_number(), type_);
-	WareIndex const nr_wares = tribe_->get_nrwares();
-	wares.resize(nr_wares);
 
-	for (WareIndex i = 0; i < nr_wares; ++i) {
-		wares.at(i).producers_ = 0;
-		wares.at(i).consumers_ = 0;
-		wares.at(i).preciousness_ = tribe_->get_ware_descr(i)->preciousness();
+	std::map<WareIndex, WareDescr> wares_tribe = tribe_->wares();
+	wares.resize(wares_tribe.size());
+	for (std::pair<WareIndex, WareDescr> ware: wares_tribe) {
+		wares.at(ware.first).producers_ = 0;
+		wares.at(ware.first).consumers_ = 0;
+		wares.at(ware.first).preciousness_ = tribe_->get_ware_descr(ware.first)->preciousness();
 	}
 
 	// collect information about the different buildings our tribe can construct

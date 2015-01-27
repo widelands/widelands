@@ -2457,6 +2457,7 @@ int LuaFlag::get_wares(lua_State * L) {
 	const TribeDescr & tribe = get(L, egbase)->owner().tribe();
 
 	bool return_number = false;
+	// NOCOM(GunChleoc): Tribes or TribeDescr?
 	WaresSet wares_set = m_parse_get_wares_arguments(L, tribe, &return_number);
 
 	WaresMap wares = count_wares_on_flag_(*get(L, egbase), egbase.tribes());
@@ -2980,6 +2981,7 @@ int LuaProductionSite::get_wares(lua_State * L) {
 	const TribeDescr & tribe = ps->owner().tribe();
 
 	bool return_number = false;
+	// NOCOM(GunChleoc): Tribes or TribeDescr?
 	WaresSet wares_set = m_parse_get_wares_arguments(L, tribe, &return_number);
 
 	WaresSet valid_wares;

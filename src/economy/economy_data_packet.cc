@@ -103,17 +103,18 @@ void EconomyDataPacket::read(FileRead & fr)
 void EconomyDataPacket::write(FileWrite & fw)
 {
 	fw.unsigned_16(CURRENT_ECONOMY_VERSION);
-	const TribeDescr & tribe = m_eco->owner().tribe();
-	for (WareIndex i = tribe.get_nrwares(); i;) {
-		--i;
+
+	for (std::pair<WareIndex, WareDescr> ware: m_eco->owner().tribe().wares()) {
 		const Economy::TargetQuantity & tq =
-			m_eco->m_ware_target_quantities[i];
+			m_eco->m_ware_target_quantities[ware.first];
 		if (Time const last_modified = tq.last_modified) {
 			fw.unsigned_32(last_modified);
-			fw.c_string(tribe.get_ware_descr(i)->name());
+			fw.c_string(tribe.get_ware_descr(ware.first)->name());
 			fw.unsigned_32(tq.permanent);
 		}
 	}
+
+	const TribeDescr & tribe = m_eco->owner().tribe();
 	for (WareIndex i = tribe.get_nrworkers(); i;) {
 		--i;
 		const Economy::TargetQuantity & tq =

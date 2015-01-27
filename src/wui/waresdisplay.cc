@@ -20,6 +20,7 @@
 #include "wui/waresdisplay.h"
 
 #include <cstdio>
+#include <utility>
 
 #include <boost/lexical_cast.hpp>
 
@@ -33,6 +34,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
+#include "logic/ware_descr.h"
 #include "logic/worker.h"
 #include "wui/text_layout.h"
 
@@ -59,13 +61,13 @@ AbstractWaresDisplay::AbstractWaresDisplay
 
 	m_selected
 		(m_type == Widelands::wwWORKER ? m_tribe.get_nrworkers()
-	                          : m_tribe.get_nrwares(), false),
+									  : m_tribe.get_nrwares(), false),
 	m_hidden
 		(m_type == Widelands::wwWORKER ? m_tribe.get_nrworkers()
-	                          : m_tribe.get_nrwares(), false),
+									  : m_tribe.get_nrwares(), false),
 	m_in_selection
 		(m_type == Widelands::wwWORKER ? m_tribe.get_nrworkers()
-	                          : m_tribe.get_nrwares(), false),
+									  : m_tribe.get_nrwares(), false),
 	m_selectable(selectable),
 	m_horizontal(horizontal),
 	m_selection_anchor(Widelands::INVALID_INDEX),
@@ -145,19 +147,30 @@ bool AbstractWaresDisplay::handle_mouserelease(uint8_t btn, int32_t x, int32_t y
 		return UI::Panel::handle_mouserelease(btn, x, y);
 	}
 
-	Widelands::WareIndex const number =
-		m_type == Widelands::wwWORKER ? m_tribe.get_nrworkers() : m_tribe.get_nrwares();
-
 	bool to_be_selected = !ware_selected(m_selection_anchor);
-	for (Widelands::WareIndex i = 0; i < number; ++i)
-	{
-		if (!m_in_selection[i]) {
-			continue;
+
+	if (m_type == Widelands::wwWORKER) {
+		for (Widelands::WareIndex i = 0; i < m_tribe.get_nrworkers(); ++i)
+		{
+			if (!m_in_selection[i]) {
+				continue;
+			}
+			if (to_be_selected) {
+				select_ware(i);
+			} else {
+				unselect_ware(i);
+			}
 		}
-		if (to_be_selected) {
-			select_ware(i);
-		} else {
-			unselect_ware(i);
+	} else {
+		for (std::pair<Widelands::WareIndex, Widelands::WareDescr> ware: m_tribe.wares()) {
+			if (!m_in_selection[ware.first]) {
+				continue;
+			}
+			if (to_be_selected) {
+				select_ware(ware.first);
+			} else {
+				unselect_ware(ware.first);
+			}
 		}
 	}
 
@@ -275,20 +288,17 @@ void WaresDisplay::remove_all_warelists() {
 
 void AbstractWaresDisplay::draw(RenderTarget & dst)
 {
-	Widelands::WareIndex number =
-		m_type == Widelands::wwWORKER ?
-		m_tribe.get_nrworkers() :
-		m_tribe.get_nrwares();
-
-	uint8_t totid = 0;
-	for
-		(Widelands::WareIndex id = 0;
-		 id < number;
-		 ++id, ++totid)
-	{
-		if (m_hidden[id]) continue;
-
-		draw_ware(dst, id);
+	if (m_type == Widelands::wwWORKER) {
+		for (Widelands::WareIndex i = 0; i < m_tribe.get_nrworkers(); ++i)
+		{
+			if (m_hidden[id]) continue;
+			draw_ware(dst, id);
+		}
+	} else {
+		for (std::pair<Widelands::WareIndex, Widelands::WareDescr> ware: m_tribe.wares()) {
+			if (m_hidden[ware.first]) continue;
+			draw_ware(dst, ware.first);
+		}
 	}
 }
 

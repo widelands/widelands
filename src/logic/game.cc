@@ -980,12 +980,11 @@ void Game::sample_statistics()
 		for (uint32_t j = 0; j < plr->get_nr_economies(); ++j) {
 			Economy * const eco = plr->get_economy_by_number(j);
 			const TribeDescr & tribe = plr->tribe();
-			WareIndex const tribe_wares = tribe.get_nrwares();
-			for
-				(WareIndex wareid = 0;
-				 wareid < tribe_wares;
-				 ++wareid)
-				wastock += eco->stock_ware(wareid);
+
+			for (std::pair<WareIndex, WareDescr> ware: tribe.wares()) {
+				wastock += eco->stock_ware(ware.first);
+			}
+
 			WareIndex const tribe_workers = tribe.get_nrworkers();
 			for
 				(WareIndex workerid = 0;
