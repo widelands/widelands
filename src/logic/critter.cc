@@ -408,11 +408,8 @@ MapObject::Loader* Critter::load(EditorGameBase& egbase,
 				descr =
 					dynamic_cast<const CritterDescr*>(egbase.world().get_bob_descr(critter_name));
 			} else {
-				egbase.manually_load_tribe(owner);
-
-				if (const TribeDescr * tribe = egbase.get_tribe(owner))
-					descr = dynamic_cast<const CritterDescr *>
-						(tribe->get_bob_descr(critter_name));
+				throw GameDataError
+					("Tribes don't have critters %s/%s", owner.c_str(), critter_name.c_str());
 			}
 
 			if (!descr)

@@ -353,7 +353,7 @@ bool Worker::run_setbobdescription
 		state.svar1 == "world" ?
 		game.world().get_bob(bob.c_str())
 		:
-		descr ().tribe().get_bob(bob.c_str());
+		descr ().tribe().get_ship_descr(bob.c_str()); // NOCOM(GunChleoc): We need an extra function for ships
 
 	if (state.ivar2 < 0) {
 		molog("  WARNING: Unknown bob %s\n", action.sparamv[idx].c_str());

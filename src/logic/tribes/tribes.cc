@@ -112,6 +112,22 @@ BuildingIndex Tribes::safe_building_index(const std::string& buildingname) const
 	return result;
 }
 
+int Tribes::safe_immovable_index(const std::string& immovablename) const {
+	const int result = immovable_index(immovablename);
+	if (result == -1) {
+		throw GameDataError("Unknown immovable type \"%s\"", immovablename.c_str());
+	}
+	return result;
+}
+
+int safe_ship_index(const std::string& shipname) const {
+	const int result = ship_index(shipname);
+	if (result == -1) {
+		throw GameDataError("Unknown ship type \"%s\"", shipname.c_str());
+	}
+	return result;
+}
+
 WareIndex Tribes::safe_ware_index(const std::string& warename) const {
 	const WareIndex result = ware_index(warename);
 	if (result == -1) {

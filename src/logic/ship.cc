@@ -1050,13 +1050,14 @@ MapObject::Loader * Ship::load
 
 			egbase.manually_load_tribe(owner);
 
-			if (const TribeDescr * tribe = egbase.get_tribe(owner))
-				descr = dynamic_cast<const ShipDescr *>
-					(tribe->get_bob_descr(name));
+			if (const TribeDescr * tribe = egbase.get_tribe(owner)) {
+				descr =  tribe->get_ship_descr(name);
+			}
 
-			if (!descr)
+			if (!descr) {
 				throw GameDataError
 					("undefined ship %s/%s", owner.c_str(), name.c_str());
+			}
 
 			loader->init(egbase, mol, descr->create_object());
 			loader->load(fr, version);

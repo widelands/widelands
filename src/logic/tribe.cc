@@ -41,7 +41,6 @@
 #include "logic/game_data_error.h"
 #include "logic/immovable.h"
 #include "logic/militarysite.h"
-#include "logic/parse_map_object_types.h"
 #include "logic/ship.h"
 #include "logic/soldier.h"
 #include "logic/trainingsite.h"
@@ -63,8 +62,8 @@ using namespace std;
 namespace Widelands {
 
 TribeDescr::TribeDescr
-	(const LuaTable& table, EditorGameBase & egbase)
-	: m_name(table.get_string("name"))
+	(const LuaTable& table, const EditorGameBase & egbase)
+	: name_(table.get_string("name"), egbase_(egbase))
 {
 	try {
 		// Grab the localization textdomain.
@@ -92,7 +91,9 @@ TribeDescr::TribeDescr
 
 		items_table = table.get_table("ships");
 		for (const std::string& key : items_table.keys()) {
-			m_bobs->add(egbase.tribes().get_ship_descr(items_table.get_string(key)));
+			const std::string shipname = column_table.get_string(key);
+			int id = egbase.tribes().safe_ship_index(shipname);
+			ships_[id] = egbase.tribes().get_ship_descr(shipname);
 		}
 
 		items_table = table.get_table("wares_order");
@@ -101,9 +102,9 @@ TribeDescr::TribeDescr
 			for (const std::string& key : column_table.keys()) {
 				const std::string warename = column_table.get_string(key);
 				WareIndex id = egbase.tribes().safe_ware_index(warename);
+				wares_[id] = egbase.tribes().get_ware_descr(warename);
 				column.push_back(id);
-				m_wares->add(egbase.tribes().get_ware_descr(warename));
-				m_wares_order_coords.resize(m_wares->size());
+				m_wares_order_coords.resize(wares_->size());
 				m_wares_order_coords[id] =
 						std::pair<uint32_t, uint32_t>(m_wares_order.size(), column.size() - 1);
 			}
@@ -112,7 +113,9 @@ TribeDescr::TribeDescr
 
 		items_table = table.get_table("immovables");
 		for (const std::string& key : items_table.keys()) {
-			m_immovables->add(egbase.tribes().get_immovable_descr(items_table.get_string(key)));
+			const std::string immovablename = column_table.get_string(key);
+			int id = egbase.tribes().safe_immovable_index(immovablename);
+			immovables_[id] = egbase.tribes().get_immovable_descr(immovablename);
 		}
 
 		items_table = table.get_table("workers_order");
@@ -121,9 +124,9 @@ TribeDescr::TribeDescr
 			for (const std::string& key : column_table.keys()) {
 				const std::string workername = column_table.get_string(key);
 				WareIndex id = egbase.tribes().safe_worker_index(workername);
+				workers_[id] = egbase.tribes().get_worker_descr(workername);
 				column.push_back(id);
-				m_workers->add(egbase.tribes().get_worker_descr(workername));
-				m_workers_order_coords.resize(m_workers->size());
+				m_workers_order_coords.resize(workers_->size());
 				m_workers_order_coords[id] =
 						std::pair<uint32_t, uint32_t>(m_workers_order.size(), column.size() - 1);
 			}
@@ -132,49 +135,37 @@ TribeDescr::TribeDescr
 
 		items_table = table.get_table("constructionsites");
 		for (const std::string& key : items_table.keys()) {
-			const std::string& buildingname = items_table.get_string(key);
-			egbase.tribes().safe_building_index(buildingname); // Check that it is defined.
-			m_buildings->add(egbase.tribes().get_building_descr(buildingname));
+			add_building(items_table.get_string(key));
 		}
 
 		items_table = table.get_table("dismantlesites");
 		for (const std::string& key : items_table.keys()) {
-			const std::string& buildingname = items_table.get_string(key);
-			egbase.tribes().safe_building_index(buildingname); // Check that it is defined.
-			m_buildings->add(egbase.tribes().get_building_descr(buildingname));
+			add_building(items_table.get_string(key));
 		}
 
 		items_table = table.get_table("militarysites");
 		for (const std::string& key : items_table.keys()) {
-			const std::string& buildingname = items_table.get_string(key);
-			egbase.tribes().safe_building_index(buildingname); // Check that it is defined.
-			m_buildings->add(egbase.tribes().get_building_descr(buildingname));
+			add_building(items_table.get_string(key));
 		}
 
 		items_table = table.get_table("trainingsites");
 		for (const std::string& key : items_table.keys()) {
-			const std::string& buildingname = items_table.get_string(key);
-			egbase.tribes().safe_building_index(buildingname); // Check that it is defined.
-			m_buildings->add(egbase.tribes().get_building_descr(buildingname));
+			add_building(items_table.get_string(key));
 		}
 
 		items_table = table.get_table("productionsites");
 		for (const std::string& key : items_table.keys()) {
-			const std::string& buildingname = items_table.get_string(key);
-			egbase.tribes().safe_building_index(buildingname); // Check that it is defined.
-			m_buildings->add(egbase.tribes().get_building_descr(buildingname));
+			add_building(items_table.get_string(key));
 		}
 
 		items_table = table.get_table("warehouses");
 		for (const std::string& key : items_table.keys()) {
-			const std::string& buildingname = items_table.get_string(key);
-			egbase.tribes().safe_building_index(buildingname); // Check that it is defined.
-			m_buildings->add(egbase.tribes().get_building_descr(buildingname));
+			add_building(items_table.get_string(key));
 		}
 
 		items_table = table.get_table("carriers");
 		m_carrier = items_table.get_string("carrier");
-		m_carrier2 = items_table.get_string("carrier2");
+		carrier_ = items_table.get_string("carrier2");
 
 		items_table = table.get_table("soldiers");
 		m_soldier = items_table.get_string(1);
@@ -199,7 +190,7 @@ TribeDescr::TribeDescr
 			throw GameDataError("tribe scripting: %s", e.what());
 		}
 	} catch (const WException & e) {
-		throw GameDataError("tribe %s: %s", m_name.c_str(), e.what());
+		throw GameDataError("tribe %s: %s", name_.c_str(), e.what());
 	}
 }
 
@@ -220,17 +211,17 @@ Load tribe graphics
 */
 void TribeDescr::load_graphics()
 {
-	for (WareIndex i = 0; i < m_workers.get_nitems(); ++i)
-		m_workers.get(i)->load_graphics();
+	for (std::pair<WareIndex, WorkerDescr> worker: workers_) {
+		worker.second.load_graphics();
+	}
 
-	for (WareIndex i = 0; i < m_wares.get_nitems  (); ++i)
-		m_wares.get(i)->load_graphics();
+	for (std::pair<WareIndex, WareDescr> ware: wares_) {
+		ware.second.load_graphics();
+	}
 
-	for
-		(BuildingIndex i = 0;
-		 i < m_buildings.get_nitems();
-		 ++i)
-		m_buildings.get(i)->load_graphics();
+	for (std::pair<BuildingIndex, BuildingDescr> building: buildings_) {
+		building.second.load_graphics();
+	}
 }
 
 
@@ -384,28 +375,17 @@ uint32_t TribeDescr::get_resource_indicator
  * Return the given ware or die trying
  */
 WareIndex TribeDescr::safe_ware_index(const std::string & warename) const {
-	const WareIndex result = ware_index(warename);
-	if (result == INVALID_INDEX) {
-		throw GameDataError("tribe %s does not define ware type \"%s\"", name().c_str(), warename.c_str());
-	}
-	return result;
+	return egbase_.tribes().safe_ware_index(warename);
 }
-
 WareIndex TribeDescr::ware_index(const std::string & warename) const {
-	WareIndex const wi = m_wares.get_index(warename);
-	return wi;
+	return egbase_.tribes().ware_index(warename);
 }
 
 /*
  * Return the given worker or die trying
  */
 WareIndex TribeDescr::safe_worker_index(const std::string& workername) const {
-const WareIndex result = worker_index(workername);
-	if (result == INVALID_INDEX) {
-		throw GameDataError(
-		   "tribe %s does not define worker type \"%s\"", name().c_str(), workername.c_str());
-	}
-	return result;
+	return egbase_.tribes().safe_worker_index(workername);
 }
 
 /*
@@ -451,6 +431,11 @@ void TribeDescr::resize_ware_orders(size_t maxLength) {
 		m_wares_order.clear();
 		m_wares_order = new_wares_order;
 	}
+}
+
+void TribeDescr::add_building(const std::string& buildingname) {
+	BuildingIndex id = egbase_.tribes().safe_building_index(buildingname);
+	buildings_[id] = egbase_.tribes().get_building_descr(buildingname);
 }
 
 }

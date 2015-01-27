@@ -96,6 +96,8 @@ public:
 	WareIndex get_nrworkers() const;
 
 	BuildingIndex safe_building_index(const std::string& buildingname) const;
+	int safe_immovable_index(const std::string& immovablename) const;
+	int safe_ship_index(const std::string& shipname) const;
 	WareIndex safe_ware_index(const std::string& warename) const;
 	WareIndex safe_worker_index(const std::string& workername) const;
 
