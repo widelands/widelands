@@ -563,9 +563,6 @@ bool Game::run
 
 		m_state = gs_running;
 
-		// NOCOM(#sirver): remove before submitting.
-		g_gr->images().compactify();
-
 		get_ibase()->run();
 
 		m_state = gs_ending;

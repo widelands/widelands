@@ -605,9 +605,6 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 		eia.select_tool(eia.tools.increase_height, EditorTool::First);
 		editor.postload();
 
-		// NOCOM(#sirver): remove before submitting
-		g_gr->images().compactify();
-
 		eia.start();
 
 		if (!script_to_run.empty()) {
