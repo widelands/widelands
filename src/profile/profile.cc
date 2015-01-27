@@ -213,28 +213,8 @@ void Section::set_name(const std::string& name) {
 	m_section_name = name;
 }
 
-Section::Section(Profile * const prof, const char * const name) :
+Section::Section(Profile * const prof, const std::string & name) :
 m_profile(prof), m_used(false), m_section_name(name) {}
-
-Section::Section(const Section & o) :
-	m_profile     (o.m_profile),
-	m_used        (o.m_used),
-	m_section_name(o.m_section_name),
-	m_values      (o.m_values)
-{
-	assert(this != &o);
-}
-
-Section & Section::operator= (const Section & o) {
-	if (this != &o) {
-		m_profile      = o.m_profile;
-		m_used         = o.m_used;
-		m_section_name = o.m_section_name;
-		m_values       = o.m_values;
-	}
-
-	return *this;
-}
 
 /** Section::is_used()
  *

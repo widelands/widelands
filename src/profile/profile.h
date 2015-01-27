@@ -95,10 +95,7 @@ public:
 
 	using ValueList = std::vector<Value>;
 
-	Section(Profile *, char const * name);
-	Section(const Section &);
-
-	Section & operator= (const Section &);
+	Section(Profile *, const std::string & name);
 
 	/// \returns whether a value with the given name exists.
 	/// Does not mark the value as used.
