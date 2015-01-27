@@ -28,6 +28,8 @@
 #include <limits>
 #include <string>
 
+#include <boost/algorithm/string.hpp>
+
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
@@ -158,10 +160,10 @@ uint32_t Section::Value::get_positive() const
 bool Section::Value::get_bool() const
 {
 	for (int32_t i = 0; i < TRUE_WORDS; ++i)
-		if (!strcasecmp(m_value.get(), trueWords[i]))
+		if (boost::iequals(m_value.get(), trueWords[i]))
 			return true;
 	for (int32_t i = 0; i < FALSE_WORDS; ++i)
-		if (!strcasecmp(m_value.get(), falseWords[i]))
+		if (boost::iequals(m_value.get(), falseWords[i]))
 			return false;
 
 	throw wexception("%s: '%s' is not a boolean value", get_name(), get_string());
@@ -252,7 +254,7 @@ void Section::check_used() const
 bool Section::has_val(char const * const name) const
 {
 	for (const Value& temp_value : m_values) {
-		if (!strcasecmp(temp_value.get_name(), name)) {
+		if (boost::iequals(temp_value.get_name(), name)) {
 			return true;
 		}
 	}
@@ -269,7 +271,7 @@ bool Section::has_val(char const * const name) const
 Section::Value * Section::get_val(char const * const name)
 {
 	for (Value& value : m_values) {
-		if (!strcasecmp(value.get_name(), name)) {
+		if (boost::iequals(value.get_name(), name)) {
 			value.mark_used();
 			return &value;
 		}
@@ -288,7 +290,7 @@ Section::Value * Section::get_next_val(char const * const name)
 {
 	for (Value& value : m_values) {
 		if (!value.is_used()) {
-			if (!name || !strcasecmp(value.get_name(), name)) {
+			if (!name || boost::iequals(value.get_name(), name)) {
 				value.mark_used();
 				return &value;
 			}
@@ -301,7 +303,7 @@ Section::Value & Section::create_val
 	(char const * const name, char const * const value)
 {
 	for (Value& temp_value : m_values) {
-		if (!strcasecmp(temp_value.get_name(), name)) {
+		if (boost::iequals(temp_value.get_name(), name)) {
 			temp_value.set_string(value);
 			return temp_value;
 		}
@@ -621,7 +623,7 @@ void Profile::check_used() const
 Section * Profile::get_section(const std::string & name)
 {
 	for (Section& temp_section : m_sections) {
-		if (!strcasecmp(temp_section.get_name(), name.c_str())) {
+		if (boost::iequals(temp_section.get_name(), name.c_str())) {
 			temp_section.mark_used();
 			return &temp_section;
 		}
@@ -665,7 +667,7 @@ Section * Profile::get_next_section(char const * const name)
 {
 	for (Section& section : m_sections) {
 		if (!section.is_used()) {
-			if (!name || !strcasecmp(section.get_name(), name)) {
+			if (!name || boost::iequals(section.get_name(), name)) {
 				section.mark_used();
 				return &section;
 			}
@@ -678,7 +680,7 @@ Section * Profile::get_next_section(char const * const name)
 Section & Profile::create_section          (char const * const name)
 {
 	for (Section& section : m_sections) {
-		if (!strcasecmp(section.get_name(), name)) {
+		if (boost::iequals(section.get_name(), name)) {
 			return section;
 		}
 	}
