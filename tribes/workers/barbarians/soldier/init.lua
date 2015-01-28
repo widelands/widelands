@@ -64,6 +64,7 @@ tribes:new_soldier_type {
    name = "barbarians_soldier",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = _"Soldier",
+   vision_range = 2,
 
    buildcost = {
 		barbarians_carrier = 1,

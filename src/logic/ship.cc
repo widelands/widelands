@@ -65,7 +65,6 @@ ShipDescr::ShipDescr(const LuaTable& table)
 	add_directional_animation(&m_sail_anims, "sail");
 
 	m_capacity = table.has_key("capacity") ? table.get_int("capacity") : 20;
-	m_vision_range = table.has_key("vision_range") ? table.get_int("vision_range") : 7;
 }
 
 

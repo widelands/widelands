@@ -6,7 +6,6 @@ tribes:new_tribe {
    -- TRANSLATORS: This is a tribe name
    descname = _"Atlanteans",
    helptext = _"This tribe is known from the oldest tales. The sons and daughters of Atlantis.",
-   bob_vision_range = 2,
    uiposition = 100,
    icon = "images/atlanteans/icon.png",
 

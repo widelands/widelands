@@ -138,8 +138,6 @@ struct TribeDescr {
 		return m_flag_animation_id;
 	}
 
-	uint32_t get_bob_vision_range() const {return m_bob_vision_range;}
-
 	uint32_t get_resource_indicator
 		(const ResourceDescription * const res, const uint32_t amount) const;
 
@@ -179,7 +177,6 @@ private:
 
 	uint32_t m_frontier_animation_id;
 	uint32_t m_flag_animation_id;
-	uint32_t m_bob_vision_range;
 
 	std::set<BuildingIndex>           buildings_;
 	std::set<int>                     immovables_;  // The player immovables

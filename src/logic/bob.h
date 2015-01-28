@@ -80,6 +80,7 @@ protected:
 
 private:
 	const MapObjectDescr::OwnerType owner_type_;
+	const uint32_t vision_range_;
 	DISALLOW_COPY_AND_ASSIGN(BobDescr);
 };
 

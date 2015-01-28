@@ -72,8 +72,6 @@ TribeDescr::TribeDescr
 		// NOCOM(GunChleoc) Use these? table.get_string("author");
 		//table.get_string("descname"); // descriptive name
 		//table.get_string("helptext"); // long description
-		m_bob_vision_range = table.get_int("bob_vision_range"); // NOCOM(GunChleoc): Usage?
-
 
 		m_frontier_animation_id =
 			g_gr->animations().load(path, root_conf.get_safe_section("frontier"));

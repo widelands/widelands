@@ -14,6 +14,7 @@ tribes:new_worker_type {
    name = "barbarians_blacksmith_master",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = _"Master Blacksmith",
+   vision_range = 2,
 
 	-- TRANSLATORS: Helptext for a worker: Master Blacksmith
    helptext = _"Produces weapons for soldiers and tools for workers.",

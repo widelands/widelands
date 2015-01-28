@@ -16,6 +16,7 @@ tribes:new_worker_type {
    name = "atlanteans_shipwright",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = _"Shipwright",
+   vision_range = 2,
 
    buildcost = {
 		atlanteans_carrier = 1,

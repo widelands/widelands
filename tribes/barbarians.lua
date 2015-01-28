@@ -6,7 +6,6 @@ tribes:new_tribe {
    -- TRANSLATORS: This is a tribe name
    descname = _"Barbarians",
    helptext = _"The mighty tribes of the east-lands.",
-   bob_vision_range = 2,
    uiposition = 10,
    icon = "images/barbarians/icon.png",
 

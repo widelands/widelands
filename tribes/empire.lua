@@ -6,7 +6,6 @@ tribes:new_tribe {
    -- TRANSLATORS: This is a tribe name
    descname = _"Empire",
    helptext = _"This is the culture of the Roman Empire.",
-   bob_vision_range = 2,
    uiposition = 20,
    icon = "images/empire/icon.png",
 

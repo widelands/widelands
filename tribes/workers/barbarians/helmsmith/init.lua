@@ -14,6 +14,7 @@ tribes:new_worker_type {
    name = "barbarians_helmsmith",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = _"Helmsmith",
+   vision_range = 2,
 
    buildcost = {
 		barbarians_carrier = 1,

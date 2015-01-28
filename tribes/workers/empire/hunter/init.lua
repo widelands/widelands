@@ -15,6 +15,7 @@ tribes:new_worker_type {
    name = "empire_hunter",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = _"Hunter",
+   vision_range = 2,
 
    buildcost = {
 		empire_carrier = 1,
