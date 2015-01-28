@@ -87,7 +87,7 @@ private:
 	                                const RGBAColor& blend) = 0;
 
 	virtual void
-	do_draw_line(const FloatPoint& start, const FloatPoint& end, const RGBColor& color) = 0;
+	do_draw_line(const FloatPoint& start, const FloatPoint& end, const RGBColor& color, int width) = 0;
 
 	virtual void
 	do_fill_rect(const FloatRect& dst_rect, const RGBAColor& color, BlendMode blend_mode) = 0;

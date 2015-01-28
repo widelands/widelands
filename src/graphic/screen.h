@@ -53,8 +53,10 @@ private:
 	void do_blit_monochrome(const FloatRect& dst_rect,
 	                        const BlitSource& texture,
 	                        const RGBAColor& blend) override;
-	void
-	do_draw_line(const FloatPoint& start, const FloatPoint& end, const RGBColor& color) override;
+	void do_draw_line(const FloatPoint& start,
+	                  const FloatPoint& end,
+	                  const RGBColor& color,
+	                  int width) override;
 	void
 	do_fill_rect(const FloatRect& dst_rect, const RGBAColor& color, BlendMode blend_mode) override;
 

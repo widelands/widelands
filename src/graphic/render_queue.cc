@@ -49,6 +49,7 @@ inline float to_opengl_z(const int z) {
 //   - and we want to render frontmost objects first, so that we do not render
 //     any pixel more than once.
 static_assert(RenderQueue::HIGHEST_PROGRAM_ID < 8, "Need to change sorting keys.");  // 4 bits.
+// NOCOM(#sirver): add texture back in for third sort order
 uint32_t make_key_opaque(const int program_id, const int z_value) {
 	assert(program_id < HIGHEST_PROGRAM_ID);
 	assert(0 <= z_value && z_value < std::numeric_limits<uint16_t>::max());
@@ -96,6 +97,7 @@ inline void from_item(const RenderQueue::Item& item, BlendedBlitProgram::Argumen
 
 inline void from_item(const RenderQueue::Item& item, DrawLineProgram::Arguments* args) {
 	args->color = item.line_arguments.color;
+	args->line_width = item.line_arguments.line_width;
 }
 
 // Batches up as many items from 'items' that have the same 'program_id'.

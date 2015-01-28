@@ -85,7 +85,7 @@ void Surface::brighten_rect(const Rect& rc, const int32_t factor)
 }
 
 void Surface::draw_line
-	(const Point& start, const Point& end, const RGBColor& color, int gwidth)
+	(const Point& start, const Point& end, const RGBColor& color, int line_width)
 {
 	float gl_x1 = start.x + 0.5;
 	float gl_y1 = start.y + 0.5;
@@ -95,7 +95,7 @@ void Surface::draw_line
 	float gl_y2 = end.y + 0.5;
 	pixel_to_gl_renderbuffer(width(), height(), &gl_x2, &gl_y2);
 
-	do_draw_line(FloatPoint(gl_x1, gl_y1), FloatPoint(gl_x2, gl_y2), color);
+	do_draw_line(FloatPoint(gl_x1, gl_y1), FloatPoint(gl_x2, gl_y2), color, line_width);
 }
 
 void Surface::blit_monochrome(const Rect& dst_rect,

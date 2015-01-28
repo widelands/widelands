@@ -36,6 +36,7 @@ public:
 		FloatRect destination_rect;
 		float z_value;
 		RGBAColor color;
+		uint8_t line_width;
 		BlendMode blend_mode;
 	};
 
@@ -44,11 +45,13 @@ public:
 
 	// Draws a line from (x1, y1) to (x2, y2) which are in gl
 	// coordinates in 'color' with a 'line_width' in pixels.
-	// NOCOM(#sirver): make sure line_width is always 1.
-	void
-	draw(const FloatPoint& start, const FloatPoint& end, const float z_value, const RGBColor& color);
+	void draw(const FloatPoint& start,
+	          const FloatPoint& end,
+	          const float z_value,
+	          const RGBColor& color,
+	          const int line_width);
 
-	void draw(const std::vector<Arguments>& arguments);
+	void draw(std::vector<Arguments> arguments);
 
 
 private:

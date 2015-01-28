@@ -101,12 +101,14 @@ void Screen::do_blit_monochrome(const FloatRect& dst_rect,
 
 void Screen::do_draw_line(const FloatPoint& start,
                           const FloatPoint& end,
-                          const RGBColor& color) {
+                          const RGBColor& color,
+								  const int line_width) {
 	RenderQueue::Item i;
 	i.program_id = RenderQueue::Program::LINE;
 	i.blend_mode = BlendMode::Copy;
 	i.destination_rect = FloatRect(start.x, start.y, end.x - start.x, end.y - start.y);
 	i.line_arguments.color = color;
+	i.line_arguments.line_width = line_width;
 	RenderQueue::instance().enqueue(i);
 }
 

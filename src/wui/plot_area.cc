@@ -433,8 +433,7 @@ void WuiPlotArea::draw_plot_line
 			cury -= static_cast<int32_t>(length_y);
 		}
 
-		// NOCOM(#sirver): this used to draw lines with widht == 2. bring back?
-		dst.draw_line(Point(lx, ly), Point(curx, cury), color, 1);
+		dst.draw_line(Point(lx, ly), Point(curx, cury), color, 2);
 
 		posx -= sub;
 

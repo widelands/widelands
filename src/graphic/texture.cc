@@ -283,9 +283,9 @@ void Texture::do_blit_monochrome(const FloatRect& dst_rect,
 }
 
 void
-Texture::do_draw_line(const FloatPoint& start, const FloatPoint& end, const RGBColor& color) {
+Texture::do_draw_line(const FloatPoint& start, const FloatPoint& end, const RGBColor& color, int width) {
 	setup_gl();
-	DrawLineProgram::instance().draw(start, end, 0.f, color);
+	DrawLineProgram::instance().draw(start, end, 0.f, color, width);
 }
 
 void

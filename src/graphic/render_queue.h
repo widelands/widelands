@@ -78,6 +78,7 @@ public:
 
 	struct LineArguments {
 		RGBColor color;
+		uint8_t line_width;
 	};
 
 	struct TerrainArguments {
