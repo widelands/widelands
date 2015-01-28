@@ -197,6 +197,9 @@ protected:
 	void create_options_window
 		(InteractiveGameBase &, UI::Window * & registry) override;
 
+
+	void load_finish(EditorGameBase & egbase) override;
+
 protected:
 	struct State {
 		const ProductionProgram * program; ///< currently running program
