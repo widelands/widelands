@@ -144,9 +144,10 @@ int LuaPlayer::get_allowed_buildings(lua_State * L) {
 	Player& player = get(L, egbase);
 
 	lua_newtable(L);
-	for (std::pair<BuildingIndex, BuildingDescr> building : egbase.tribes().buildings()) {
-		lua_pushstring(L, building.second.name().c_str());
-		lua_pushboolean(L, player.is_building_type_allowed(building.first));
+	for (const BuildingIndex& building_index : egbase.tribes().buildings()) {
+		const BuildingDescr& building_descr = egbase.tribes().get_building_descr(building_index);
+		lua_pushstring(L, building_descr.name().c_str());
+		lua_pushboolean(L, player.is_building_type_allowed(building_index));
 		lua_settable(L, -3);
 	}
 	return 1;
@@ -758,15 +759,16 @@ int LuaPlayer::allow_workers(lua_State * L) {
 	const std::vector<WareIndex> & worker_types_without_cost =
 		tribe.worker_types_without_cost();
 
-	for (std::pair<WareIndex, WorkerDescr> worker : tribe.workers()) {
-		player.allow_worker_type(worker.first, true);
+	for (const WareIndex& worker_index : tribe.workers()) {
+		player.allow_worker_type(worker_index, true);
+		const WorkerDescr& worker_descr = game.tribes().get_worker_descr(worker_index);
 
-		if (worker.second.buildcost().empty()) {
+		if (worker_descr.buildcost().empty()) {
 			//  Workers of this type can be spawned in warehouses. Start it.
 			uint8_t worker_types_without_cost_index = 0;
 			for (;; ++worker_types_without_cost_index) {
 				assert(worker_types_without_cost_index < worker_types_without_cost.size());
-				if (worker_types_without_cost.at(worker_types_without_cost_index) == worker.first) {
+				if (worker_types_without_cost.at(worker_types_without_cost_index) == worker_index) {
 					break;
 				}
 			}
@@ -816,8 +818,8 @@ void LuaPlayer::m_parse_building_list
 		if (opt != "all") {
 			report_error(L, "'%s' was not understood as argument!", opt.c_str());
 		}
-		for (std::pair<BuildingIndex, BuildingDescr> building : tribe.buildings()) {
-				rv.push_back(building.first);
+		for (const BuildingIndex& building_index : tribe.buildings()) {
+				rv.push_back(building_index);
 		}
 	} else {
 		// array of strings argument

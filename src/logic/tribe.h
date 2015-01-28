@@ -54,7 +54,7 @@ buildings it can build and the associated graphics.
 Two players can choose the same tribe.
 */
 struct TribeDescr {
-	TribeDescr(const LuaTable& t, const EditorGameBase&);
+	TribeDescr(const LuaTable& table, const EditorGameBase& egbase);
 
 	//  Static function to check for tribes.
 	static bool exists_tribe
@@ -64,52 +64,54 @@ struct TribeDescr {
 
 
 	const std::string & name() const {return name_;}
+	const EditorGameBase& egbase() const {return egbase_;}
 
 	// NOCOM(GunChleoc): Look at the usage, ranged-bases for loops now?
 	WareIndex get_nrworkers() const {return workers_.size();}
 
+	const std::set<WareIndex> workers() { return workers_;}
+
 	WorkerDescr const * get_worker_descr(const WareIndex& index) const {
-		return workers_.at(index);
+		return egbase_.tribes().get_worker_descr(index);
 	}
 	WareIndex worker_index(const std::string & workername) const {
-		WareIndex index = egbase_.tribes().worker_index(workername);
-		return workers_.at(index);
+		return egbase_.tribes().worker_index(workername);
 	}
 
 	WareIndex carrier2() const {
-		assert(!carrier_.empty());
-		return safe_worker_index(carrier_);
+		assert(!carrier2_.empty());
+		return egbase_.tribes().safe_worker_index(carrier2_);
 	}
 
 	// NOCOM(GunChleoc): Look at the usage, ranged-bases for loops now?
 	WareIndex get_nrwares() const {return wares_.size();}
 
-	const std::map<WareIndex, WareDescr> wares() { return wares_;}
+	const std::set<WareIndex> wares() { return wares_;}
 
 	WareIndex safe_ware_index(const std::string & warename) const;
 	WareIndex ware_index(const std::string & warename) const;
 	WareDescr const * get_ware_descr(const WareIndex& index) const {
-		return wares_.at(index);
+		return egbase_.tribes().get_ware_descr(index);
 	}
 	bool has_ware(const WareIndex& index) const {
 		return wares_.count(index) == 1;
 	}
 	void set_ware_type_has_demand_check(const WareIndex& index, const std::string& tribename) const {
-		wares_.at(index)->set_has_demand_check(tribename);
+		egbase_.tribes().get_ware_descr(index)->set_has_demand_check(tribename);
 	}
 	void set_worker_type_has_demand_check(const WareIndex& index) const {
-		workers_.at(index)->set_has_demand_check();
+		egbase_.tribes().get_worker_descr(index)->set_has_demand_check();
 	}
 	WareIndex safe_worker_index(const std::string & workername) const;
 
 	bool has_building(const BuildingIndex& index) const {
 		return buildings_.count(index) == 1;
 	}
-	const std::map<BuildingIndex, BuildingDescr> buildings() { return buildings_;}
+	const std::set<BuildingIndex> buildings() { return buildings_;}
 
-	BuildingIndex safe_building_index(char const * name) const;
+	BuildingIndex safe_building_index(const std::string& buildingname) const;
 	BuildingDescr const * get_building_descr(const BuildingIndex& index) const {
-		return buildings_.at(index);
+		return egbase_.tribes().get_building_descr(index);
 	}
 	BuildingIndex building_index(const std::string & buildingname) const {
 		return egbase_.tribes().building_index(buildingname);
@@ -120,17 +122,7 @@ struct TribeDescr {
 	}
 
 	ImmovableDescr const * get_immovable_descr(int index) const {
-		return immovables_.at(index);
-	}
-	ImmovableDescr const * get_immovable_descr(const std::string& immovablename) const {
-		return egbase_.tribes().immovable_index(immovablename);
-	}
-
-	ShipDescr const * get_ship_descr(int const index) const {
-		return ships_.at(index);
-	}
-	ShipDescr const * get_ship_descr(const std::string & shipname) const {
-		return egbase_.tribes().ship_index(shipname);
+		return egbase_.tribes().get_immovable_descr(index);
 	}
 
 	const std::vector<WareIndex> & worker_types_without_cost() const {
@@ -178,6 +170,7 @@ struct TribeDescr {
 	void resize_ware_orders(size_t maxLength);
 
 private:
+	// Helper function for adding a building type
 	void add_building(const std::string& buildingname);
 
 	const std::string name_;
@@ -187,13 +180,13 @@ private:
 	uint32_t m_flag_animation_id;
 	uint32_t m_bob_vision_range;
 
-	std::map<BuildingIndex, BuildingDescr> buildings_;
-	std::map<int, ImmovableDescr> immovables_;  // The player immovables
-	std::map<int, ShipDescr> ships_;
-	std::map<WareIndex, WorkerDescr> workers_;
-	std::map<WareIndex, WareDescr> wares_;
+	std::set<BuildingIndex>           buildings_;
+	std::set<int>                     immovables_;  // The player immovables
+	std::set<int>                     ships_;
+	std::set<WareIndex>               workers_;
+	std::set<WareIndex>               wares_;
 	std::string                       m_carrier; // NOCOM(GunChleoc): Use this to define the basic carrier. We need a logic change here.
-	std::string                       carrier_;
+	std::string                       carrier2_;
 	std::string                       m_soldier; // NOCOM(GunChleoc): We can probably remove these from the init.
 	// Order and positioning of wares in the warehouse display
 	WaresOrder                        m_wares_order;

@@ -66,8 +66,8 @@ void MapAllowedBuildingTypesPacket::read
 				//  All building types default to false in the game (not in the
 				//  editor).
 				if (game) {
-					for (std::pair<BuildingIndex, BuildingDescr> building : game->tribes().buildings()) {
-						player->allow_building_type(building.first, false);
+					for (const BuildingIndex& building_index : game->tribes().buildings()) {
+						player->allow_building_type(building_index, false);
 					}
 				}
 				try {
@@ -113,9 +113,10 @@ void MapAllowedBuildingTypesPacket::write
 		Section & section = prof.create_section(section_key.c_str());
 
 		//  Write for all buildings if it is enabled.
-		for (std::pair<BuildingIndex, BuildingDescr> building : tribe.buildings()) {
-			if (player->is_building_type_allowed(building.first)) {
-				section.set_bool(building.second.name().c_str(), true);
+		for (const Widelands::BuildingIndex& building_index : tribe.buildings()) {
+			if (player->is_building_type_allowed(building_index)) {
+				const BuildingDescr& building_descr = egbase.tribes().get_building_descr(building_index);
+				section.set_bool(building_descr.name().c_str(), true);
 			}
 		}
 	}

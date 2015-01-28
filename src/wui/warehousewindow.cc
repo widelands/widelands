@@ -148,25 +148,25 @@ WarehouseWaresPanel::WarehouseWaresPanel
 void WarehouseWaresPanel::set_policy(Warehouse::StockPolicy newpolicy) {
 	if (m_gb.can_act(m_wh.owner().player_number())) {
 		if (m_type == Widelands::wwWORKER) {
-			for (std::pair<WareIndex, WorkerDescr> worker : m_wh.owner().tribe().workers()) {
-				if (m_display.ware_selected(worker.first)) {
+			for (const Widelands::WareIndex& worker_index :  m_wh.owner().tribe().workers()) {
+				if (m_display.ware_selected(worker_index)) {
 					m_gb.game().send_player_command
 						(*new Widelands::CmdSetStockPolicy
 							(m_gb.game().get_gametime(),
 							 m_wh.owner().player_number(),
 							 m_wh, true,
-							 worker.first, newpolicy));
+							 worker_index, newpolicy));
 				}
 			}
 		} else {
-			for (std::pair<Widelands::WareIndex, Widelands::WareDescr> ware: m_tribe.wares()) {
-				if (m_display.ware_selected(ware.first)) {
+			for (const Widelands::WareIndex& ware_index : m_tribe.wares()) {
+				if (m_display.ware_selected(ware_index)) {
 					m_gb.game().send_player_command
 						(*new Widelands::CmdSetStockPolicy
 							(m_gb.game().get_gametime(),
 							 m_wh.owner().player_number(),
 							 m_wh, false,
-							 ware.first, newpolicy));
+							 ware_index, newpolicy));
 				}
 			}
 		}

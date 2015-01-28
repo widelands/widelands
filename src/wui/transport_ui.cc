@@ -83,15 +83,17 @@ private:
 		{
 			const Widelands::TribeDescr& owner_tribe = m_economy.owner().tribe();
 			if (type == Widelands::wwWORKER) {
-				for (std::pair<WareIndex, WorkerDescr> worker : owner_tribe.workers()) {
-					if (!worker.second.has_demand_check()) {
-						hide_ware(worker.first);
+				for (const WareIndex& worker_index : owner_tribe.workers()) {
+					const WorkerDescr& worker_descr = owner_tribe.egbase().tribes().get_worker_descr(worker_index);
+					if (!worker_descr.has_demand_check()) {
+						hide_ware(worker_index);
 					}
 				}
 			} else {
-				for (std::pair<WareIndex, WareDescr> ware: owner_tribe.wares()) {
-					if (!ware.second.has_demand_check(owner_tribe.name())) {
-						hide_ware(ware.first);
+				for (const WareIndex& ware_index : owner_tribe.wares()) {
+					const WareDescr& ware_descr = owner_tribe.egbase().tribes().get_ware_descr(ware_index);
+					if (!ware_descr.has_demand_check(owner_tribe.name())) {
+						hide_ware(ware_index);
 					}
 				}
 			}
@@ -148,17 +150,17 @@ private:
 
 		void decrease_target() {
 
-			for (std::pair<WareIndex, WareDescr> ware: m_economy.owner().tribe().wares()) {
-				if (m_display.ware_selected(ware.first)) {
+			for (const WareIndex& ware_index : m_economy.owner().tribe().wares()) {
+				if (m_display.ware_selected(ware_index)) {
 					const Economy::TargetQuantity & tq =
-						m_economy.ware_target_quantity(ware.first);
+						m_economy.ware_target_quantity(ware_index);
 					if (1 < tq.permanent) {
 						Widelands::Player & player = m_economy.owner();
 						Game & game = dynamic_cast<Game&>(player.egbase());
 						game.send_player_command
 							(*new Widelands::CmdSetWareTargetQuantity
 								(game.get_gametime(), player.player_number(),
-								 player.get_economy_number(&m_economy), ware.first,
+								 player.get_economy_number(&m_economy), ware_index,
 								 tq.permanent - 1));
 					}
 				}
@@ -166,16 +168,16 @@ private:
 		}
 
 		void increase_target() {
-			for (std::pair<WareIndex, WareDescr> ware: m_economy.owner().tribe().wares()) {
-				if (m_display.ware_selected(ware.first)) {
+			for (const WareIndex& ware_index : m_economy.owner().tribe().wares()) {
+				if (m_display.ware_selected(ware_index)) {
 					const Economy::TargetQuantity & tq =
-						m_economy.ware_target_quantity(ware.first);
+						m_economy.ware_target_quantity(ware_index);
 					Widelands::Player & player = m_economy.owner();
 					Game & game = dynamic_cast<Game&>(player.egbase());
 					game.send_player_command
 						(*new Widelands::CmdSetWareTargetQuantity
 							(game.get_gametime(), player.player_number(),
-							 player.get_economy_number(&m_economy), ware.first,
+							 player.get_economy_number(&m_economy), ware_index,
 							 tq.permanent + 1));
 				}
 			}
@@ -183,14 +185,14 @@ private:
 
 		void reset_target() {
 
-			for (std::pair<WareIndex, WareDescr> ware: m_economy.owner().tribe().wares()) {
-				if (m_display.ware_selected(ware.first)) {
+			for (const WareIndex& ware_index : m_economy.owner().tribe().wares()) {
+				if (m_display.ware_selected(ware_index)) {
 					Widelands::Player & player = m_economy.owner();
 					Game & game = dynamic_cast<Game&>(player.egbase());
 					game.send_player_command
 						(*new Widelands::CmdResetWareTargetQuantity
 							(game.get_gametime(), player.player_number(),
-							 player.get_economy_number(&m_economy), ware.first));
+							 player.get_economy_number(&m_economy), ware_index));
 				}
 			}
 		}
@@ -231,10 +233,10 @@ private:
 
 
 		void decrease_target() {
-			for (std::pair<WareIndex, WorkerDescr> worker : m_economy.owner().tribe().workers()) {
+			for (const WareIndex& worker_index :  m_economy.owner().tribe().workers()) {
 				if (m_display.ware_selected(id)) {
 					const Economy::TargetQuantity & tq =
-						m_economy.worker_target_quantity(worker.first);
+						m_economy.worker_target_quantity(worker_index);
 					if (1 < tq.permanent) {
 						Widelands::Player & player = m_economy.owner();
 						Game & game = dynamic_cast<Game&>(player.egbase());
@@ -249,30 +251,30 @@ private:
 		}
 
 		void increase_target() {
-			for (std::pair<WareIndex, WorkerDescr> worker : m_economy.owner().tribe().workers()) {
-				if (m_display.ware_selected(worker.first)) {
+			for (const WareIndex& worker_index :  m_economy.owner().tribe().workers()) {
+				if (m_display.ware_selected(worker_index)) {
 					const Economy::TargetQuantity & tq =
-						m_economy.worker_target_quantity(worker.first);
+						m_economy.worker_target_quantity(worker_index);
 					Widelands::Player & player = m_economy.owner();
 					Game & game = dynamic_cast<Game&>(player.egbase());
 					game.send_player_command
 						(*new Widelands::CmdSetWorkerTargetQuantity
 							(game.get_gametime(), player.player_number(),
-							 player.get_economy_number(&m_economy), worker.first,
+							 player.get_economy_number(&m_economy), worker_index,
 							 tq.permanent + 1));
 				}
 			}
 		}
 
 		void reset_target() {
-			for (std::pair<WareIndex, WorkerDescr> worker : m_economy.owner().tribe().workers()) {
-				if (m_display.ware_selected(worker.first)) {
+			for (const WareIndex& worker_index :  m_economy.owner().tribe().workers()) {
+				if (m_display.ware_selected(worker_index)) {
 					Widelands::Player & player = m_economy.owner();
 					Game & game = dynamic_cast<Game&>(player.egbase());
 					game.send_player_command
 						(*new Widelands::CmdResetWorkerTargetQuantity
 							(game.get_gametime(), player.player_number(),
-							 player.get_economy_number(&m_economy), worker.first));
+							 player.get_economy_number(&m_economy), worker_index));
 				}
 			}
 		}

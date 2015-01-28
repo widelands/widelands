@@ -535,17 +535,17 @@ bool Economy::needs_worker(WareIndex const worker_type) const {
 */
 void Economy::_merge(Economy & e)
 {
-	for (std::pair<WareIndex, WareDescr> ware: m_owner.tribe().wares()) {
-		TargetQuantity other_tq = e.m_ware_target_quantities[ware.first];
-		TargetQuantity& this_tq = m_ware_target_quantities[ware.first];
+	for (const WareIndex& ware_index : m_owner.tribe().wares()) {
+		TargetQuantity other_tq = e.m_ware_target_quantities[ware_index];
+		TargetQuantity& this_tq = m_ware_target_quantities[ware_index];
 		if (this_tq.last_modified < other_tq.last_modified) {
 			this_tq = other_tq;
 		}
 	}
 
-	for (std::pair<WareIndex, WorkerDescr> worker: m_owner.tribe().workers()) {
-		TargetQuantity other_tq = e.m_worker_target_quantities[worker.first];
-		TargetQuantity& this_tq = m_worker_target_quantities[worker.first];
+	for (const WareIndex& worker_index : m_owner.tribe().workers()) {
+		TargetQuantity other_tq = e.m_worker_target_quantities[worker_index];
+		TargetQuantity& this_tq = m_worker_target_quantities[worker_index];
 		if (this_tq.last_modified < other_tq.last_modified) {
 			this_tq = other_tq;
 		}
@@ -589,12 +589,12 @@ void Economy::_split(const std::set<OPtr<Flag> > & flags)
 
 	Economy & e = *new Economy(m_owner);
 
-	for (std::pair<WareIndex, WareDescr> ware: m_owner.tribe().wares()) {
-		e.m_ware_target_quantities[ware.first] = m_ware_target_quantities[ware.first];
+	for (const WareIndex& ware_index : m_owner.tribe().wares()) {
+		e.m_ware_target_quantities[ware_index] = m_ware_target_quantities[ware_index];
 	}
 
-	for (std::pair<WareIndex, WorkerDescr> worker: m_owner.tribe().workers()) {
-		e.m_worker_target_quantities[worker.first] = m_worker_target_quantities[worker.first];
+	for (const WareIndex& worker_index : m_owner.tribe().workers()) {
+		e.m_worker_target_quantities[worker_index] = m_worker_target_quantities[worker_index];
 	}
 
 	for (const OPtr<Flag> temp_flag : flags) {
@@ -936,11 +936,9 @@ void Economy::_create_requested_workers(Game & game)
 	if (!warehouses().size())
 		return;
 
-	const TribeDescr & tribe = owner().tribe();
-
-	for (std::pair<WareIndex, WorkerDescr> worker: m_owner.tribe().workers()) {
-		if (owner().is_worker_type_allowed(worker.first)) {
-			_create_requested_worker(game, worker.first);
+	for (const WareIndex& worker_index : owner().tribe().workers()) {
+		if (owner().is_worker_type_allowed(worker_index)) {
+			_create_requested_worker(game, worker_index);
 		}
 	}
 }

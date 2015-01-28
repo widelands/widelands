@@ -349,11 +349,12 @@ bool Worker::run_setbobdescription
 		bob = list[1];
 	}
 
-	state.ivar2 =
-		state.svar1 == "world" ?
-		game.world().get_bob(bob.c_str())
-		:
-		descr ().tribe().get_ship_descr(bob.c_str()); // NOCOM(GunChleoc): We need an extra function for ships
+	if(state.svar1 == "world") {
+		state.ivar2 = game.world().get_bob(bob.c_str());
+	} else {
+		int ship_index = game.tribes().ship_index(bob.c_str());
+		state.ivar2 = game.tribes().get_ship_descr(ship_index);
+	}
 
 	if (state.ivar2 < 0) {
 		molog("  WARNING: Unknown bob %s\n", action.sparamv[idx].c_str());

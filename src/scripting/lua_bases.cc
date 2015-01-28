@@ -26,6 +26,7 @@
 #include "logic/constants.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
+#include "logic/tribes/tribes.h"
 #include "logic/ware_descr.h"
 #include "scripting/lua_map.h"
 
@@ -471,13 +472,15 @@ int LuaPlayerBase::place_building(lua_State * L) {
 	if (lua_gettop(L) >= 5)
 		force = luaL_checkboolean(L, 5);
 
-	const TribeDescr& td = get(L, get_egbase(L)).tribe();
-	BuildingIndex i = td.building_index(name);
-	if (i == INVALID_INDEX)
+	const Tribes& tribes = get_egbase(L).tribes();
+
+	if (!tribes.building_exists(name)) {
 		report_error(L, "Unknown Building: '%s'", name);
+	}
+	BuildingIndex building_index = tribes.building_index(name);
 
 	BuildingDescr::FormerBuildings former_buildings;
-	find_former_buildings(td, i, &former_buildings);
+	find_former_buildings(tribes, building_index, &former_buildings);
 	if (constructionsite) {
 		former_buildings.pop_back();
 	}
@@ -486,14 +489,14 @@ int LuaPlayerBase::place_building(lua_State * L) {
 	if (force) {
 		if (constructionsite) {
 			b = &get(L, get_egbase(L)).force_csite
-				(c->coords(), i, former_buildings);
+				(c->coords(), building_index, former_buildings);
 		} else {
 			b = &get(L, get_egbase(L)).force_building
 				(c->coords(), former_buildings);
 		}
 	} else {
 		b = get(L, get_egbase(L)).build
-			(c->coords(), i, constructionsite, former_buildings);
+			(c->coords(), building_index, constructionsite, former_buildings);
 	}
 	if (!b)
 		report_error(L, "Couldn't place building!");

@@ -42,6 +42,7 @@
 #include "logic/productionsite.h"
 #include "logic/trainingsite.h"
 #include "logic/tribe.h"
+#include "logic/tribes/tribes.h"
 #include "logic/warehouse.h"
 #include "logic/world/world.h"
 #include "profile/profile.h"
@@ -270,25 +271,25 @@ void DefaultAI::late_initialization() {
 	tribe_ = &player_->tribe();
 	log("ComputerPlayer(%d): initializing (%u)\n", player_number(), type_);
 
-	std::map<WareIndex, WareDescr> wares_tribes = game().tribes().wares();
-	wares.resize(wares_tribes.size());
-	for (std::pair<WareIndex, WareDescr> ware: wares_tribes) {
+	wares.resize(game().tribes().nrwares());
+	for (const WareIndex& ware_index : game().tribes().wares()) {
+		const WareDescr& ware_descr = game.tribes().get_ware_descr(ware_index);
 		wares.at(ware.first).producers_ = 0;
 		wares.at(ware.first).consumers_ = 0;
-		wares.at(ware.first).preciousness_ = ware.second.preciousness(tribe_->name());
+		wares.at(ware.first).preciousness_ = ware_descr.preciousness(tribe_->name());
 	}
 
 	// collect information about the different buildings our tribe can construct
 	const World& world = game().world();
 
-	for (std::pair<BuildingIndex, BuildingDescr> building : tribe.buildings()) {
-		const BuildingDescr& bld = building.second;
+	for (const BuildingIndex& building_index : tribe.buildings()) {
+		const BuildingDescr& bld = game().tribes().get_building_descr(building_index);
 		const std::string& building_name = bld.name();
 		const BuildingHints& bh = bld.hints();
 		buildings_.resize(buildings_.size() + 1);
 		BuildingObserver& bo = buildings_.back();
 		bo.name = building_name.c_str();
-		bo.id = building.first;
+		bo.id = building_index;
 		bo.desc = &bld;
 		bo.type = BuildingObserver::BORING;
 		bo.cnt_built_ = 0;

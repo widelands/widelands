@@ -584,16 +584,16 @@ void ProductionSite::request_worker_callback
 		}
 		if (!worker_placed) {
 			// Find the next smaller version of this worker
-			int counter = 0;
-			for (std::pair<WareIndex, WorkerDescr> worker : psite.descr().tribe().workers()) {
-				if (worker.second->becomes() == idx) {
-					idx = worker.second;
+			for (const WareIndex& worker_index : game.tribes().workers()) {
+						const WorkerDescr& worker_descr = game.tribes().get_worker_descr(worker_index);
+				if (worker_descr.becomes() == idx) {
+					idx = worker_index;
+					worker_placed = true;
 					break;
 				}
-				++counter;
 			}
 
-			if (counter == psite.descr().tribe().get_nrworkers())
+			if (!worker_placed)
 				throw
 					wexception
 						("Something went wrong! No fitting place for worker %s in %s at (%u, %u) found!",

@@ -63,8 +63,9 @@ void MapAllowedWorkerTypesPacket::read
 					if (s == nullptr)
 						continue;
 
-					for (std::pair<WareIndex, WorkerDescr> worker : tribe.workers()) {
-						player->allow_worker_type(w, s->get_bool(worker.second.name().c_str(), true));
+					for (const WareIndex& worker_index : tribe.workers()) {
+						const WorkerDescr& worker_descr = egbase().tribes().get_worker_descr(worker_index);
+						player->allow_worker_type(w, s->get_bool(worker_descr.name().c_str(), true));
 					}
 
 				} catch (const WException & e) {
@@ -96,9 +97,10 @@ void MapAllowedWorkerTypesPacket::write
 		Section & section = prof.create_section(section_key.c_str());
 
 		// Only write the workers which are disabled.
-		for (std::pair<WareIndex, WorkerDescr> worker : tribe.workers()) {
-			if (!player->is_worker_type_allowed(worker.first)) {
-				section.set_bool(worker.second.name().c_str(), false);
+		for (const WareIndex& worker_index : tribe.workers()) {
+			if (!player->is_worker_type_allowed(worker_index)) {
+				const WorkerDescr& worker_descr = egbase().tribes().get_worker_descr(worker_index);
+				section.set_bool(worker_descr.name().c_str(), false);
 				forbidden_worker_seen = true;
 			}
 		}

@@ -1808,14 +1808,15 @@ int LuaWareDescription::get_consumers(lua_State * L) {
 	lua_newtable(L);
 	int index = 1;
 
-	for (std::pair<BuildingIndex, BuildingDescr> building : egbase.tribes().buildings()) {
-		if (upcast(ProductionSiteDescr const, de, building.second)) {
+	for (const BuildingIndex& building_index : egbase.tribes().buildings()) {
+		const BuildingDescr& building_descr = egbase.tribes().get_building_descr(building_index);
+		if (upcast(ProductionSiteDescr const, de, &building_descr)) {
 			// inputs() returns type WareAmount = std::pair<WareIndex, uint32_t>
 			for (auto ware_amount : de->inputs()) {
 				if (std::string(get()->name()) ==
 					std::string(egbase.tribes().get_ware_descr(ware_amount.first)->name())) {
 					lua_pushint32(L, index++);
-						upcasted_map_object_descr_to_lua(L, building.second);
+						upcasted_map_object_descr_to_lua(L, building_descr);
 					lua_rawset(L, -3);
 				}
 			}
@@ -1852,13 +1853,14 @@ int LuaWareDescription::get_producers(lua_State * L) {
 	lua_newtable(L);
 	int index = 1;
 
-	for (std::pair<BuildingIndex, BuildingDescr> building : egbase.tribes().buildings()) {
-		if (upcast(ProductionSiteDescr const, de, building.second)) {
+	for (const BuildingIndex& building_index : egbase.tribes().buildings()) {
+		const BuildingDescr& building_descr = egbase.tribes().get_building_descr(building_index);
+		if (upcast(ProductionSiteDescr const, de, &building_descr)) {
 			for (auto ware_index : de->output_ware_types()) {
 				if (std::string(get()->name()) ==
 					std::string(egbase.tribes().get_ware_descr(ware_index)->name())) {
 					lua_pushint32(L, index++);
-					upcasted_map_object_descr_to_lua(L, building.second);
+					upcasted_map_object_descr_to_lua(L, building_descr);
 					lua_rawset(L, -3);
 				}
 			}

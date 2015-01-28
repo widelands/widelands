@@ -101,6 +101,9 @@ public:
 	bool worker_exists(const WareIndex& index) const {
 		return workers_.count(index) == 1;
 	}
+	bool building_exists(const std::string& buildingname) const {
+		return building_index(buildingname) != -1;
+	}
 	bool building_exists(const BuildingIndex& index) const {
 		return buildings_.count(index) == 1;
 	}

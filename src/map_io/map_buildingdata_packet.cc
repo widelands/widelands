@@ -260,9 +260,10 @@ void MapBuildingdataPacket::read_formerbuildings_v2
 		if (!oldest->is_enhanced()) {
 			break;
 		}
-		for (std::pair<BuildingIndex, BuildingDescr> building : game.tribes().buildings()) {
-			if (building.second.enhancement() == former_idx) {
-				b.m_old_buildings.insert(b.m_old_buildings.begin(), building.first);
+		for (const BuildingIndex& building_index : game.tribes().buildings()) {
+			const BuildingDescr& building_descr = game.tribes().get_building_descr(building_index);
+			if (building_descr.enhancement() == former_idx) {
+				b.m_old_buildings.insert(b.m_old_buildings.begin(), building_index);
 				break;
 			}
 		}

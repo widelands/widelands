@@ -105,22 +105,24 @@ void EconomyDataPacket::write(FileWrite & fw)
 	fw.unsigned_16(CURRENT_ECONOMY_VERSION);
 
 	const TribeDescr & tribe = m_eco->owner().tribe();
-	for (std::pair<WareIndex, WareDescr> ware: tribe.wares()) {
+	for (const WareIndex& ware_index : tribe().wares()) {
 		const Economy::TargetQuantity & tq =
-			m_eco->m_ware_target_quantities[ware.first];
+			m_eco->m_ware_target_quantities[ware_index];
 		if (Time const last_modified = tq.last_modified) {
+			const WareDescr& ware_descr = tribe.egbase().tribes().get_ware_descr(ware_index);
 			fw.unsigned_32(last_modified);
-			fw.c_string(ware.second.name());
+			fw.c_string(ware_descr.name());
 			fw.unsigned_32(tq.permanent);
 		}
 	}
 
-	for (std::pair<WareIndex, WorkerDescr> worker: tribe.workers()) {
+	for (const WareIndex& worker_index : tribe.workers()) {
 		const Economy::TargetQuantity & tq =
-			m_eco->m_worker_target_quantities[worker.first];
+			m_eco->m_worker_target_quantities[worker_index];
 		if (Time const last_modified = tq.last_modified) {
+					const WorkerDescr& worker_descr = tribe.egbase().tribes().get_worker_descr(worker_index);
 			fw.unsigned_32(last_modified);
-			fw.c_string(worker.second.name());
+			fw.c_string(worker_descr.name());
 			fw.unsigned_32(tq.permanent);
 		}
 	}

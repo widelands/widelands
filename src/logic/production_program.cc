@@ -1580,7 +1580,9 @@ ProductionProgram::ActConstruct::ActConstruct(
 const ImmovableDescr & ProductionProgram::ActConstruct::get_construction_descr
 	(ProductionSite & psite) const
 {
-	const ImmovableDescr * descr = psite.descr().tribe().get_immovable_descr(objectname);
+	// NOCMOM(GunChleoc): psite.descr() shouldn't know its tribe
+	TribeDescr tribe = psite.descr().tribe();
+	const ImmovableDescr * descr = tribe.get_immovable_descr(tribe.get_immovable_index(objectname));
 	if (!descr)
 		throw wexception("ActConstruct: immovable '%s' does not exist", objectname.c_str());
 

@@ -62,7 +62,7 @@ using namespace std;
 namespace Widelands {
 
 TribeDescr::TribeDescr
-	(const LuaTable& table, const EditorGameBase & egbase)
+	(const LuaTable& table, const EditorGameBase& egbase)
 	: name_(table.get_string("name"), egbase_(egbase))
 {
 	try {
@@ -87,13 +87,18 @@ TribeDescr::TribeDescr
 		m_flag_animation_id = g_gr->animations().load(anims_table.get_string("pictures"));
 		// NOCOM(GunChleoc): And the hotspot + fps?
 
-		// NOCOM(GunChleoc): TODO: safeguard against double entries
-
 		items_table = table.get_table("ships");
 		for (const std::string& key : items_table.keys()) {
 			const std::string shipname = column_table.get_string(key);
-			int id = egbase.tribes().safe_ship_index(shipname);
-			ships_[id] = egbase.tribes().get_ship_descr(id);
+			try {
+				int ship_index = egbase_.tribes().safe_ship_index(shipname);
+				if(ships_.count(ship_index) == 1) {
+					throw new GameDataError("Duplicate definition of ship", shipname);
+				}
+				ships_.insert(building_index);
+			} catch (const WException& e) {
+				throw new GameDataError("Failed adding ship %s to tribe %s: %s", shipname, name_, e.what);
+			}
 		}
 
 		items_table = table.get_table("wares_order");
@@ -101,12 +106,19 @@ TribeDescr::TribeDescr
 			vector<WareIndex> column;
 			for (const std::string& key : column_table.keys()) {
 				const std::string warename = column_table.get_string(key);
-				WareIndex id = egbase.tribes().safe_ware_index(warename);
-				wares_[id] = egbase.tribes().get_ware_descr(warename);
-				column.push_back(id);
-				m_wares_order_coords.resize(wares_->size());
-				m_wares_order_coords[id] =
-						std::pair<uint32_t, uint32_t>(m_wares_order.size(), column.size() - 1);
+				try {
+					WareIndex ware_index = egbase_.tribes().safe_ware_index(warename);
+					if(wares_.count(ware_index) == 1) {
+						throw new GameDataError("Duplicate definition of ware", warename);
+					}
+					wares_.insert(ware_index);
+					column.push_back(ware_index);
+					m_wares_order_coords.resize(wares_->size());
+					m_wares_order_coords[ware_index] =
+							std::pair<uint32_t, uint32_t>(m_wares_order.size(), column.size() - 1);
+				} catch (const WException& e) {
+					throw new GameDataError("Failed adding ware %s to tribe %s: %s", warename, name_, e.what);
+				}
 			}
 			if (!column.empty()) m_wares_order.push_back(column);
 		}
@@ -114,8 +126,15 @@ TribeDescr::TribeDescr
 		items_table = table.get_table("immovables");
 		for (const std::string& key : items_table.keys()) {
 			const std::string immovablename = column_table.get_string(key);
-			int id = egbase.tribes().safe_immovable_index(immovablename);
-			immovables_[id] = egbase.tribes().get_immovable_descr(id);
+			try {
+				int immovable_index = egbase_.tribes().safe_immovable_index(immovablename);
+				if(immovables_.count(immovable_index) == 1) {
+					throw new GameDataError("Duplicate definition of immovable", immovablename);
+				}
+				immovables_.insert(immovable_index);
+			} catch (const WException& e) {
+				throw new GameDataError("Failed adding immovable %s to tribe %s: %s", immovablename, name_, e.what);
+			}
 		}
 
 		items_table = table.get_table("workers_order");
@@ -123,12 +142,19 @@ TribeDescr::TribeDescr
 			vector<WareIndex> column;
 			for (const std::string& key : column_table.keys()) {
 				const std::string workername = column_table.get_string(key);
-				WareIndex id = egbase.tribes().safe_worker_index(workername);
-				workers_[id] = egbase.tribes().get_worker_descr(workername);
-				column.push_back(id);
-				m_workers_order_coords.resize(workers_->size());
-				m_workers_order_coords[id] =
-						std::pair<uint32_t, uint32_t>(m_workers_order.size(), column.size() - 1);
+				try {
+					WareIndex worker_index = egbase_.tribes().safe_worker_index(workername);
+					if(workers_.count(worker_index) == 1) {
+						throw new GameDataError("Duplicate definition of worker", workername);
+					}
+					workers_.insert(worker_index);
+					column.push_back(worker_index);
+					m_workers_order_coords.resize(workers_->size());
+					m_workers_order_coords[worker_index] =
+							std::pair<uint32_t, uint32_t>(m_workers_order.size(), column.size() - 1);
+				} catch (const WException& e) {
+					throw new GameDataError("Failed adding worker %s to tribe %s: %s", workername, name_, e.what);
+				}
 			}
 			if (!column.empty()) m_workers_order.push_back(column);
 		}
@@ -165,7 +191,7 @@ TribeDescr::TribeDescr
 
 		items_table = table.get_table("carriers");
 		m_carrier = items_table.get_string("carrier");
-		carrier_ = items_table.get_string("carrier2");
+		carrier2_ = items_table.get_string("carrier2");
 
 		items_table = table.get_table("soldiers");
 		m_soldier = items_table.get_string(1);
@@ -209,18 +235,19 @@ void TribeDescr::postload(EditorGameBase &) {
 Load tribe graphics
 ===============
 */
+// NOCOM(GunChleoc): This should be done in Tribes - more efficient. We get duplicates here.
 void TribeDescr::load_graphics()
 {
-	for (std::pair<WareIndex, WorkerDescr> worker: workers_) {
-		worker.second.load_graphics();
+	for (const WareIndex& worker_index : workers_) {
+		egbase_.tribes().get_worker_descr(worker_index).load_graphics();
 	}
 
-	for (std::pair<WareIndex, WareDescr> ware: wares_) {
-		ware.second.load_graphics();
+	for (const WareIndex& ware_index : wares_) {
+		egbase_.tribes().get_ware_descr(ware_index).load_graphics();
 	}
 
-	for (std::pair<BuildingIndex, BuildingDescr> building: buildings_) {
-		building.second.load_graphics();
+	for (const BuildingIndex& building_index: buildings_) {
+		egbase_.tribes().get_building_descr(building_index).load_graphics();
 	}
 }
 
@@ -391,13 +418,8 @@ WareIndex TribeDescr::safe_worker_index(const std::string& workername) const {
 /*
  * Return the given building or die trying
  */
-BuildingIndex TribeDescr::safe_building_index(char const* const buildingname) const {
-	const BuildingIndex result = building_index(buildingname);
-	if (result == INVALID_INDEX) {
-		throw GameDataError(
-		   "tribe %s does not define building type \"%s\"", name().c_str(), buildingname);
-	}
-	return result;
+BuildingIndex TribeDescr::safe_building_index(const std::string& buildingname) const {
+	return egbase_.tribes().safe_building_index(buildingname);
 }
 
 void TribeDescr::resize_ware_orders(size_t maxLength) {
@@ -434,8 +456,15 @@ void TribeDescr::resize_ware_orders(size_t maxLength) {
 }
 
 void TribeDescr::add_building(const std::string& buildingname) {
-	BuildingIndex id = egbase_.tribes().safe_building_index(buildingname);
-	buildings_[id] = egbase_.tribes().get_building_descr(buildingname);
+	try {
+		BuildingIndex building_index = egbase_.tribes().safe_building_index(buildingname);
+		if(buildings_.count(building_index) == 1) {
+			throw new GameDataError("Duplicate definition of building", buildingname);
+		}
+		buildings_.insert(building_index);
+	} catch (const WException& e) {
+		throw new GameDataError("Failed adding building %s to tribe %s: %s", buildingname, name_, e.what);
+	}
 }
 
 }

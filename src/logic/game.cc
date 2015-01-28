@@ -981,13 +981,13 @@ void Game::sample_statistics()
 			Economy * const eco = plr->get_economy_by_number(j);
 			const TribeDescr & tribe = plr->tribe();
 
-			for (std::pair<WareIndex, WareDescr> ware: tribe.wares()) {
-				wastock += eco->stock_ware(ware.first);
+			for (const WareIndex& ware_index : tribe().wares()) {
+				wastock += eco->stock_ware(ware_index);
 			}
 
-			for (std::pair<WareIndex, WorkerDescr> worker: tribe.workers()) {
+			for (const WareIndex& worker_index : tribe.workers()) {
 				if (worker_descr.type() != MapObjectType::CARRIER) {
-					wostock += eco->stock_worker(worker.first);
+					wostock += eco->stock_worker(worker_index);
 				}
 			}
 		}

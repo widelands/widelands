@@ -374,8 +374,8 @@ void BuildingStatisticsMenu::update() {
 	const Widelands::Player      & player = iplayer().player();
 	const Widelands::TribeDescr & tribe  = player.tribe();
 	const Widelands::Map         & map   = iplayer().game().map();
-	for (std::pair<Widelands::BuildingIndex, Widelands::BuildingDescr> building : tribe.buildings()) {
-		const Widelands::BuildingDescr & building_descr = building.second;
+	for (const BuildingIndex& building_index : tribe.buildings()) {
+		const Widelands::BuildingDescr& building_descr = player.egbase().tribes().get_building_descr(building_index);
 
 		if(!(building_descr.is_buildable()
 			 || building_descr.is_enhanced()
@@ -384,14 +384,14 @@ void BuildingStatisticsMenu::update() {
 		}
 
 		const std::vector<Widelands::Player::BuildingStats> & vec =
-			player.get_building_statistics(building.first);
+			player.get_building_statistics(building_index);
 
 		//  walk all entries, add new ones if needed
 		UI::Table<uintptr_t const>::EntryRecord * te = nullptr;
 		const uint32_t table_size = m_table.size();
 		for (uint32_t l = 0; l < table_size; ++l) {
 			UI::Table<uintptr_t const>::EntryRecord & er = m_table.get_record(l);
-			if (UI::Table<uintptr_t const>::get(er) == building.first) {
+			if (UI::Table<uintptr_t const>::get(er) == building_index) {
 				te = &er;
 				break;
 			}
@@ -399,9 +399,9 @@ void BuildingStatisticsMenu::update() {
 
 		//  If not in list, add new one, as long as this building is enabled.
 		if (!te) {
-			if (! iplayer().player().is_building_type_allowed(building.first))
+			if (! iplayer().player().is_building_type_allowed(building_index))
 				continue;
-			te = &m_table.add(building.first);
+			te = &m_table.add(building_index);
 		}
 
 		uint32_t nr_owned   = 0;
@@ -422,7 +422,7 @@ void BuildingStatisticsMenu::update() {
 		}
 
 		const bool is_selected = //  Is this entry selected?
-			m_table.has_selection() && m_table.get_selected() == building.first;
+			m_table.has_selection() && m_table.get_selected() == building_index;
 
 		if (is_selected) {
 			m_anim = building_descr.get_ui_anim();

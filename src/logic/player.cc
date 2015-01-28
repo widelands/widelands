@@ -113,7 +113,7 @@ const RGBColor Player::Colors[MAX_PLAYERS] = {
  * filled with the BuildingDescr.
  */
 void find_former_buildings
-	(const Widelands::TribeDescr & tribe_descr, const Widelands::BuildingIndex bi,
+	(const Tribes& tribes, const Widelands::BuildingIndex bi,
 	 Widelands::Building::FormerBuildings* former_buildings)
 {
 	assert(former_buildings && former_buildings->empty());
@@ -121,13 +121,14 @@ void find_former_buildings
 
 	for (;;) {
 		Widelands::BuildingIndex oldest_idx = former_buildings->front();
-		const Widelands::BuildingDescr * oldest = tribe_descr.get_building_descr(oldest_idx);
+		const Widelands::BuildingDescr * oldest = tribes.get_building_descr(oldest_idx);
 		if (!oldest->is_enhanced()) {
 			break;
 		}
-		for (std::pair<BuildingIndex, BuildingDescr> building : tribe_descr.buildings()) {
-			if (building.second.enhancement() == oldest_idx) {
-				former_buildings->insert(former_buildings->begin(), building.first);
+		for (const BuildingIndex& building_index : tribes.buildings()) {
+			const BuildingDescr& building_descr = tribes.get_building_descr(building_index);
+			if (building_descr.enhancement() == oldest_idx) {
+				former_buildings->insert(former_buildings->begin(), building_index);
 				break;
 			}
 		}

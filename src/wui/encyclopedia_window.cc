@@ -89,8 +89,9 @@ void EncyclopediaWindow::fill_wares() {
 	const TribeDescr & tribe = iaplayer().player().tribe();
 	std::vector<Ware> ware_vec;
 
-	for (std::pair<WareIndex, WareDescr> ware : tribe.wares()) {
-		Ware w(i, ware.second);
+	for (const WareIndex& ware_index : tribe.wares()) {
+		const WareDescr& ware_descr = tribe.egbase().tribes().get_ware_descr(ware_index);
+		Ware w(i, ware_descr);
 		ware_vec.push_back(w);
 	}
 
@@ -113,14 +114,15 @@ void EncyclopediaWindow::ware_selected(uint32_t) {
 
 	bool found = false;
 
-	for (std::pair<BuildingIndex, BuildingDescr> building : tribe.buildings()) {
-		if (upcast(ProductionSiteDescr const, de, building.second)) {
+	for (const BuildingIndex& building_index : tribe.buildings()) {
+		const BuildingDescr& building_descr = tribe.egbase().tribes().get_building_descr(building_index);
+		if (upcast(ProductionSiteDescr const, de, &building_descr)) {
 			if
-				((building.second.is_buildable() || building.second.is_enhanced())
+				((building_descr.is_buildable() || building_descr.is_enhanced())
 				 &&
 				 de->output_ware_types().count(wares.get_selected()))
 			{
-				prodSites.add(de->descname(), i, de->get_icon());
+				prodSites.add(de->descname(), building_index, de->get_icon());
 				found = true;
 			}
 		}
