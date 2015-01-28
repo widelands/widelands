@@ -74,6 +74,7 @@ wl_library(graphic_sdl_utils
 
 wl_library(graphic_gl_utils
   SRCS
+    gl/coordinate_conversion.h
     gl/system_headers.h
     gl/utils.cc
     gl/utils.h

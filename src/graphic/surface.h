@@ -70,11 +70,6 @@ public:
 	/// makes a rectangle on the destination brighter (or darker).
 	void brighten_rect(const Rect&, int factor);
 
-	// Converts the given pixel into an OpenGl point. This might
-	// need some flipping of axis, depending if you want to render
-	// on the screen or on a texture.
-	virtual void pixel_to_gl(float* x, float* y) const = 0;
-
 private:
 	/// The actual implementation of the methods below.
 	virtual void do_blit(const FloatRect& dst_rect,

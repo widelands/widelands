@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/graphic.h"
 #include "graphic/render_queue.h"
@@ -159,6 +160,8 @@ void GameRenderer::draw(RenderTarget& dst,
 
 	const Rect& bounding_rect = dst.get_rect();
 	const Point surface_offset = bounding_rect.top_left() + dst.get_offset() - view_offset;
+	const int surface_width = surface->width();
+	const int surface_height = surface->height();
 
 	Map& map = egbase.map();
 	const uint32_t gametime = egbase.get_gametime();
@@ -184,7 +187,7 @@ void GameRenderer::draw(RenderTarget& dst,
 
 			f.gl_x = f.pixel_x = x + surface_offset.x;
 			f.gl_y = f.pixel_y = y + surface_offset.y - fcoords.field->get_height() * HEIGHT_FACTOR;
-			surface->pixel_to_gl(&f.gl_x, &f.gl_y);
+			pixel_to_gl_renderbuffer(surface_width, surface_height, &f.gl_x, &f.gl_y);
 
 			f.ter_d = fcoords.field->terrain_d();
 			f.ter_r = fcoords.field->terrain_r();

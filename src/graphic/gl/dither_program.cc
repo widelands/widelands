@@ -69,9 +69,8 @@ varying vec2 var_texture_offset;
 void main() {
 	vec4 clr = texture2D(u_terrain_texture,
 			var_texture_offset + u_texture_dimensions * fract(var_texture_position));
-	clr.rgb *= var_brightness;
-	clr.a = 1. - texture2D(u_dither_texture, var_dither_texture_position).a;
-	gl_FragColor = clr;
+	gl_FragColor = vec4(clr.rgb * var_brightness,
+			1. - texture2D(u_dither_texture, var_dither_texture_position).a);
 }
 )";
 
@@ -119,16 +118,16 @@ void DitherProgram::add_vertex(const FieldsToDraw::Field& field,
 
 	switch (order_index) {
 	case 0:
-		back.dither_texture_x = 0.;
-		back.dither_texture_y = 0.;
+		back.dither_texture_x = 1.;
+		back.dither_texture_y = 1.;
 		break;
 	case 1:
-		back.dither_texture_x = 1.;
-		back.dither_texture_y = 0.;
+		back.dither_texture_x = 0.;
+		back.dither_texture_y = 1.;
 		break;
 	case 2:
 		back.dither_texture_x = 0.5;
-		back.dither_texture_y = 1.;
+		back.dither_texture_y = 0.;
 		break;
 	default:
 		throw wexception("Never here.");

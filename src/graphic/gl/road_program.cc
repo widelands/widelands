@@ -22,6 +22,7 @@
 #include <cmath>
 
 #include "base/log.h"
+#include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
@@ -124,6 +125,9 @@ void RoadProgram::add_road(const Surface& surface,
 
 	const float texture_mix = road_type == Widelands::Road_Normal ? 0. : 1.;
 
+	const int surface_width = surface.width();
+	const int surface_height = surface.height();
+
 	vertices_.emplace_back(PerVertexData{
 	   start.pixel_x - road_overshoot_x + road_thickness_x,
 	   start.pixel_y - road_overshoot_y + road_thickness_y,
@@ -132,7 +136,7 @@ void RoadProgram::add_road(const Surface& surface,
 	   start.brightness,
 	   texture_mix,
 	});
-	surface.pixel_to_gl(&vertices_.back().gl_x, &vertices_.back().gl_y);
+	pixel_to_gl_renderbuffer(surface_width, surface_height, &vertices_.back().gl_x, &vertices_.back().gl_y);
 
 	vertices_.emplace_back(PerVertexData{
 	   start.pixel_x - road_overshoot_x - road_thickness_x,
@@ -142,7 +146,7 @@ void RoadProgram::add_road(const Surface& surface,
 	   start.brightness,
 	   texture_mix,
 	});
-	surface.pixel_to_gl(&vertices_.back().gl_x, &vertices_.back().gl_y);
+	pixel_to_gl_renderbuffer(surface_width, surface_height, &vertices_.back().gl_x, &vertices_.back().gl_y);
 
 	vertices_.emplace_back(PerVertexData{
 	   end.pixel_x + road_overshoot_x + road_thickness_x,
@@ -152,7 +156,7 @@ void RoadProgram::add_road(const Surface& surface,
 	   end.brightness,
 	   texture_mix,
 	});
-	surface.pixel_to_gl(&vertices_.back().gl_x, &vertices_.back().gl_y);
+	pixel_to_gl_renderbuffer(surface_width, surface_height, &vertices_.back().gl_x, &vertices_.back().gl_y);
 
 	// As OpenGl does not support drawing quads in modern days and we have a
 	// bunch of roads that might not be neighbored, we need to add two triangles
@@ -169,7 +173,7 @@ void RoadProgram::add_road(const Surface& surface,
 	   end.brightness,
 	   texture_mix,
 	});
-	surface.pixel_to_gl(&vertices_.back().gl_x, &vertices_.back().gl_y);
+	pixel_to_gl_renderbuffer(surface_width, surface_height, &vertices_.back().gl_x, &vertices_.back().gl_y);
 }
 
 void RoadProgram::draw(const Surface& surface, const FieldsToDraw& fields_to_draw, float z_value) {

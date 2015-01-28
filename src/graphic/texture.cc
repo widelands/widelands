@@ -24,6 +24,7 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "graphic/gl/blit_program.h"
+#include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/draw_line_program.h"
 #include "graphic/gl/fill_rect_program.h"
 #include "graphic/gl/utils.h"
@@ -107,6 +108,8 @@ Texture::Texture(SDL_Surface * surface, bool intensity)
 
 	SDL_LockSurface(surface);
 
+	Gl::swap_rows(m_w, m_h, bpp, static_cast<uint8_t*>(surface->pixels));
+
 	glTexImage2D
         (GL_TEXTURE_2D, 0, static_cast<GLint>(intensity ? GL_INTENSITY : GL_RGBA), m_w, m_h, 0,
 		 pixels_format, GL_UNSIGNED_BYTE, surface->pixels);
@@ -126,10 +129,7 @@ Texture::Texture(const GLuint texture, const Rect& subrect, int parent_w, int pa
 	m_texture = texture;
 	m_owns_texture = false;
 
-	m_texture_coordinates.w = static_cast<float>(m_w - 1) / parent_w;
-	m_texture_coordinates.h = static_cast<float>(m_h - 1) / parent_h;
-	m_texture_coordinates.x = (static_cast<float>(subrect.x) + 0.5) / parent_w;
-	m_texture_coordinates.y = (static_cast<float>(subrect.y) + 0.5) / parent_h;
+	m_texture_coordinates = rect_to_gl_texture(parent_w, parent_h, subrect, ConversionMode::kExact);
 }
 
 Texture::~Texture()
@@ -153,11 +153,6 @@ int Texture::get_gl_texture() const {
 
 const FloatRect& Texture::texture_coordinates() const {
 	return m_texture_coordinates;
-}
-
-void Texture::pixel_to_gl(float* x, float* y) const {
-	*x = (*x / m_w) * 2. - 1.;
-	*y = (*y / m_h) * 2. - 1.;
 }
 
 void Texture::init(uint16_t w, uint16_t h)
@@ -201,6 +196,8 @@ void Texture::lock() {
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 	glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_pixels.get());
 	glBindTexture(GL_TEXTURE_2D, 0);
+
+	Gl::swap_rows(m_w, m_h, 4, m_pixels.get());
 }
 
 void Texture::unlock(UnlockMode mode) {
@@ -210,6 +207,8 @@ void Texture::unlock(UnlockMode mode) {
 	assert(m_pixels);
 
 	if (mode == Unlock_Update) {
+		Gl::swap_rows(m_w, m_h, 4, m_pixels.get());
+
 		glBindTexture(GL_TEXTURE_2D, m_texture);
 		glTexImage2D
             (GL_TEXTURE_2D, 0, static_cast<GLint>(GL_RGBA), m_w, m_h, 0, GL_RGBA,

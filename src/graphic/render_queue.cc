@@ -167,8 +167,7 @@ void RenderQueue::draw(const int screen_width, const int screen_height) {
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glViewport(0, 0, screen_width, screen_height);
 
-	glEnable(GL_DEPTH_TEST);
-	glClear(GL_DEPTH_BUFFER_BIT);
+	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
 	glDisable(GL_BLEND);
 
@@ -184,7 +183,7 @@ void RenderQueue::draw(const int screen_width, const int screen_height) {
 	blended_items_.clear();
 
 	glDepthMask(GL_TRUE);
-	glDisable(GL_DEPTH_TEST);
+
 	next_z = 1;
 }
 

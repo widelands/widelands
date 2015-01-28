@@ -30,11 +30,6 @@
 Screen::Screen(int w, int h) : m_w(w), m_h(h) {
 }
 
-void Screen::pixel_to_gl(float* x, float* y) const {
-	*x = (*x / m_w) * 2. - 1.;
-	*y = 1. - (*y / m_h) * 2.;
-}
-
 int Screen::width() const {
 	return m_w;
 }
@@ -47,17 +42,7 @@ std::unique_ptr<Texture> Screen::to_texture() const {
 	std::unique_ptr<uint8_t[]> pixels(new uint8_t[m_w * m_h * 4]);
 	glReadPixels(0, 0, m_w, m_h, GL_RGBA, GL_UNSIGNED_BYTE, pixels.get());
 
-	// Swap order of rows in m_pixels, to compensate for the upside-down nature of the
-	// OpenGL coordinate system.
-	uint8_t* begin_row = pixels.get();
-	uint8_t* end_row = pixels.get() + (m_w * (m_h - 1) * 4);
-	while (begin_row < end_row) {
-		for (int x = 0; x < m_w * 4; ++x) {
-			std::swap(begin_row[x], end_row[x]);
-		}
-		begin_row += m_w * 4;
-		end_row -= m_w * 4;
-	}
+	Gl::swap_rows(m_w, m_h, 4, pixels.get());
 
 	// Ownership of pixels is not taken here. But the Texture() transfers it to
 	// the GPU, frees the SDL surface and after that we are free to free

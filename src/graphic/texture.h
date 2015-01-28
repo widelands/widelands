@@ -46,7 +46,6 @@ public:
 	// Implements Surface
 	int width() const override;
 	int height() const override;
-	void pixel_to_gl(float* x, float* y) const override;
 
 	// Implements Image.
 	int get_gl_texture() const override;

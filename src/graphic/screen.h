@@ -35,7 +35,6 @@ public:
 	// Implements Surface.
 	int width() const override;
 	int height() const override;
-	void pixel_to_gl(float* x, float* y) const override;
 
 	// Reads out the current pixels in the framebuffer and returns
 	// them as a texture for screenshots. This is a very slow process,

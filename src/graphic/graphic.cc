@@ -116,7 +116,7 @@ Graphic::Graphic(int window_mode_w, int window_mode_h, bool init_fullscreen)
 	glDrawBuffer(GL_BACK);
 
 	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LESS);
+	glDepthFunc(GL_LEQUAL);
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
