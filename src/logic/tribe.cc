@@ -85,20 +85,6 @@ TribeDescr::TribeDescr
 		m_flag_animation_id = g_gr->animations().load(anims_table.get_string("pictures"));
 		// NOCOM(GunChleoc): And the hotspot + fps?
 
-		items_table = table.get_table("ships");
-		for (const std::string& key : items_table.keys()) {
-			const std::string shipname = column_table.get_string(key);
-			try {
-				int ship_index = egbase_.tribes().safe_ship_index(shipname);
-				if(ships_.count(ship_index) == 1) {
-					throw new GameDataError("Duplicate definition of ship", shipname);
-				}
-				ships_.insert(building_index);
-			} catch (const WException& e) {
-				throw new GameDataError("Failed adding ship %s to tribe %s: %s", shipname, name_, e.what);
-			}
-		}
-
 		items_table = table.get_table("wares_order");
 		for (const LuaTable column_table : items_table.keys()) {
 			vector<WareIndex> column;
@@ -190,12 +176,16 @@ TribeDescr::TribeDescr
 			add_building(items_table.get_string(key));
 		}
 
-		items_table = table.get_table("carriers");
-		carrier_ = items_table.get_string("carrier");
-		carrier2_ = items_table.get_string("carrier2");
+		carrier_ = parse_worker(table.get_string("carrier"));
+		carrier2_ = parse_worker(table.get_string("carrier2"));
+		soldier_ = parse_worker(table.get_string("soldier"));
 
-		items_table = table.get_table("soldiers");
-		m_soldier = items_table.get_string(1);
+		const std::string shipname = table.get_string("ship");
+		try {
+			ship_ = egbase_.tribes().safe_ship_index(shipname);
+		} catch (const WException& e) {
+			throw new GameDataError("Failed adding ship %s to tribe %s: %s", shipname, name_, e.what);
+		}
 
 		try {
 			// NOCOM(GunChleoc): Use the new init.lua in tribes/scripting
@@ -466,6 +456,16 @@ void TribeDescr::add_building(const std::string& buildingname) {
 	} catch (const WException& e) {
 		throw new GameDataError("Failed adding building %s to tribe %s: %s", buildingname, name_, e.what);
 	}
+}
+
+WareIndex TribeDescr::parse_worker(const std::string& workername) {
+	WareIndex worker;
+	try {
+		worker = egbase_.tribes().safe_worker_index(workername);
+	} catch (const WException& e) {
+		throw new GameDataError("Failed adding special worker %s to tribe %s: %s", workername, name_, e.what);
+	}
+	return worker;
 }
 
 }

@@ -581,10 +581,10 @@ void Warehouse::act(Game & game, uint32_t const data)
 
 	//  Military stuff: Kill the soldiers that are dead.
 	if (m_next_military_act <= gametime) {
-		WareIndex const ware = descr().tribe().safe_worker_index("soldier");
+		WareIndex const soldier_index = descr().tribe().soldier();
 
-		if (m_incorporated_workers.count(ware)) {
-			WorkerList & soldiers = m_incorporated_workers[ware];
+		if (m_incorporated_workers.count(soldier_index)) {
+			WorkerList & soldiers = m_incorporated_workers[soldier_index];
 
 			uint32_t total_heal = descr().get_heal_per_second();
 			// Using an explicit iterator, as we plan to erase some
@@ -601,7 +601,7 @@ void Warehouse::act(Game & game, uint32_t const data)
 				//  Soldier dead ...
 				if (!soldier || soldier->get_current_hitpoints() == 0) {
 					it = soldiers.erase(it);
-					m_supply->remove_workers(ware, 1);
+					m_supply->remove_workers(soldier_index, 1);
 					continue;
 				}
 
@@ -1206,7 +1206,7 @@ void Warehouse::aggressor(Soldier & enemy)
 		 	 FindBobEnemySoldier(&owner())))
 		return;
 
-	WareIndex const soldier_index = descr().tribe().worker_index("soldier");
+	WareIndex const soldier_index = descr().tribe().soldier();
 	Requirements noreq;
 
 	if (!count_workers(game, soldier_index, noreq))
@@ -1219,7 +1219,7 @@ void Warehouse::aggressor(Soldier & enemy)
 bool Warehouse::attack(Soldier & enemy)
 {
 	Game & game = dynamic_cast<Game&>(owner().egbase());
-	WareIndex const soldier_index = descr().tribe().worker_index("soldier");
+	WareIndex const soldier_index = descr().tribe().soldier();
 	Requirements noreq;
 
 	if (count_workers(game, soldier_index, noreq)) {
@@ -1317,8 +1317,8 @@ std::vector<Soldier *> Warehouse::present_soldiers() const
 {
 	std::vector<Soldier *> rv;
 
-	WareIndex const ware = descr().tribe().safe_worker_index("soldier");
-	IncorporatedWorkers::const_iterator sidx = m_incorporated_workers.find(ware);
+	WareIndex const soldier_index = descr().tribe().soldier();
+	IncorporatedWorkers::const_iterator sidx = m_incorporated_workers.find(soldier_index);
 
 	if (sidx != m_incorporated_workers.end()) {
 		const WorkerList & soldiers = sidx->second;
@@ -1337,15 +1337,15 @@ int Warehouse::incorporate_soldier(EditorGameBase & egbase, Soldier & soldier) {
 
 int Warehouse::outcorporate_soldier(EditorGameBase & /* egbase */, Soldier & soldier) {
 
-	WareIndex const ware = descr().tribe().safe_worker_index("soldier");
-	if (m_incorporated_workers.count(ware)) {
-		WorkerList & soldiers = m_incorporated_workers[ware];
+	WareIndex const soldier_index = descr().tribe().soldier();
+	if (m_incorporated_workers.count(soldier_index)) {
+		WorkerList & soldiers = m_incorporated_workers[soldier_index];
 
 		WorkerList::iterator i = std::find
 			(soldiers.begin(), soldiers.end(), &soldier);
 
 		soldiers.erase(i);
-		m_supply->remove_workers(ware, 1);
+		m_supply->remove_workers(soldier_index, 1);
 	}
 #ifndef NDEBUG
 	else

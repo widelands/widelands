@@ -446,7 +446,7 @@ int do_get_soldiers(lua_State* L, const Widelands::SoldierControl& sc, const Tri
 		}
 	} else {
 		const SoldierDescr& soldier_descr = dynamic_cast<const SoldierDescr&>
-			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
+			(*tribe.get_worker_descr(tribe.soldier()));
 
 		// Only return the number of those requested
 		const SoldierMapDescr wanted = unbox_lua_soldier_description(L, 2, soldier_descr);
@@ -472,7 +472,7 @@ int do_set_soldiers
 	const TribeDescr& tribe = owner->tribe();
 	const SoldierDescr& soldier_descr =  //  soldiers
 		dynamic_cast<const SoldierDescr&>
-			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
+			(*tribe.get_worker_descr(tribe.soldier()));
 	SoldiersMap setpoints = m_parse_set_soldiers_arguments(L, soldier_descr);
 
 	// Get information about current soldiers

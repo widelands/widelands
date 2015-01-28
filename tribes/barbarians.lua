@@ -138,16 +138,12 @@ tribes:new_tribe {
 			"barbarians_scout"
 		}
 	},
-   carriers = {
-		carrier = "barbarians_carrier",
-		carrier2 = "barbarians_ox"
-   },
-   soldiers = {
-		"barbarians_soldier",
-   },
-   ships = {
-		"ship_barbarians",
-	}
+
+	carrier = "barbarians_carrier",
+	carrier2 = "barbarians_ox"
+   soldier = "barbarians_soldier",
+   ship = "ship_barbarians",
+
    immovables = {
 		"ashes",
 		"destroyed_building",

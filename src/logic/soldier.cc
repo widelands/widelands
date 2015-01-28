@@ -613,7 +613,7 @@ void Soldier::calc_info_icon_size
 	(const TribeDescr & tribe, uint32_t & w, uint32_t & h)
 {
 	const SoldierDescr * soldierdesc = static_cast<const SoldierDescr *>
-		(tribe.get_worker_descr(tribe.worker_index("soldier")));
+		(tribe.get_worker_descr(tribe.soldier()));
 	const Image* hppic = soldierdesc->get_hp_level_pic(0);
 	const Image* attackpic = soldierdesc->get_attack_level_pic(0);
 	const Image* defensepic = soldierdesc->get_defense_level_pic(0);
@@ -930,7 +930,7 @@ void Soldier::attack_update(Game & game, State & state)
 		if (upcast(Warehouse, wh, enemy)) {
 			Requirements noreq;
 			defenders = wh->count_workers
-				(game, wh->descr().tribe().worker_index("soldier"), noreq);
+				(game, wh->descr().tribe().soldier(), noreq);
 		}
 		//  Any enemy soldier at baseflag count as defender.
 		std::vector<Bob *> soldiers;

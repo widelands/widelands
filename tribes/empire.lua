@@ -141,16 +141,12 @@ tribes:new_tribe {
 			"empire_scout"
 		}
 	},
-   carriers = {
-		carrier = "empire_carrier",
-		carrier2 = "empire_donkey"
-   },
-   soldiers = {
-		"empire_soldier"
-   },
-   ships = {
-		"ship_empire",
-	}
+
+	carrier = "empire_carrier",
+	carrier2 = "empire_donkey"
+   soldier = "empire_soldier",
+   ship = "ship_empire",
+
    immovables = {
 		"ashes",
 		"destroyed_building",

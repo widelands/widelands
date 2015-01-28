@@ -753,7 +753,7 @@ void MapBuildingdataPacket::read_militarysite
 					(new Request
 						(militarysite,
 						 (!militarysite.m_normal_soldier_request) ? 0
-						: militarysite.descr().tribe().safe_worker_index("soldier"),
+						: militarysite.descr().tribe().soldier(),
 						MilitarySite::request_soldier_callback,
 						wwWORKER));
 				militarysite.m_upgrade_soldier_request->read(fr, game, mol);

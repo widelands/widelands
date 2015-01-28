@@ -394,7 +394,7 @@ void MilitarySite::update_normal_soldier_request()
 			m_normal_soldier_request.reset
 				(new Request
 					(*this,
-					 descr().tribe().safe_worker_index("soldier"),
+					 descr().tribe().soldier(),
 					 MilitarySite::request_soldier_callback,
 					 wwWORKER));
 			m_normal_soldier_request->set_requirements (m_soldier_requirements);
@@ -450,7 +450,7 @@ void MilitarySite::update_upgrade_soldier_request()
 		m_upgrade_soldier_request.reset
 				(new Request
 				(*this,
-				descr().tribe().safe_worker_index("soldier"),
+				descr().tribe().soldier(),
 				MilitarySite::request_soldier_callback,
 				wwWORKER));
 

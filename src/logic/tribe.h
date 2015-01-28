@@ -80,13 +80,20 @@ struct TribeDescr {
 	}
 
 	WareIndex carrier() const {
-		assert(!carrier_.empty());
-		return egbase_.tribes().safe_worker_index(carrier_);
+		assert(egbase_.tribes().worker_exists(carrier_));
+		return carrier_;
 	}
-
 	WareIndex carrier2() const {
-		assert(!carrier2_.empty());
-		return egbase_.tribes().safe_worker_index(carrier2_);
+		assert(egbase_.tribes().worker_exists(carrier2_));
+		return carrier2_;
+	}
+	WareIndex soldier() const {
+		assert(egbase_.tribes().worker_exists(soldier_));
+		return soldier_;
+	}
+	int ship() const {
+		assert(egbase_.tribes().ship_exists(ship_));
+		return ship_;
 	}
 
 	// NOCOM(GunChleoc): Look at the usage, ranged-bases for loops now?
@@ -176,6 +183,7 @@ struct TribeDescr {
 private:
 	// Helper function for adding a building type
 	void add_building(const std::string& buildingname);
+	WareIndex parse_worker(const std::string& workername);
 
 	const std::string name_;
 	const EditorGameBase& egbase_;
@@ -185,12 +193,12 @@ private:
 
 	std::set<BuildingIndex>           buildings_;
 	std::set<int>                     immovables_;  // The player immovables
-	std::set<int>                     ships_;
 	std::set<WareIndex>               workers_;
 	std::set<WareIndex>               wares_;
-	std::string                       carrier_;  // The basic carrier for this tribe
-	std::string                       carrier2_; // Additional carrier for busy roads
-	std::string                       m_soldier; // NOCOM(GunChleoc): We can probably remove these from the init.
+	WareIndex                         carrier_;  // The basic carrier for this tribe
+	WareIndex                         carrier2_; // Additional carrier for busy roads
+	WareIndex                         soldier_;  // The soldier that this tribe uses
+	int                               ship_;     // The ship that this tribe uses
 	// Order and positioning of wares in the warehouse display
 	WaresOrder                        m_wares_order;
 	WaresOrderCoords                  m_wares_order_coords;

@@ -140,16 +140,12 @@ tribes:new_tribe {
 			"atlanteans_scout"
 		}
 	},
-   carriers = {
-		carrier = "atlanteans_carrier",
-		carrier2 = "atlanteans_horse",
-   },
-   soldiers = {
-		"atlanteans_soldier"
-   },
-   ships = {
-		"ship_atlanteans",
-	}
+
+	carrier = "atlanteans_carrier",
+	carrier2 = "atlanteans_horse",
+   soldier = "atlanteans_soldier"
+   ship = "ship_atlanteans"
+
    immovables = {
 		"ashes",
 		"blackrootfield_tiny",
