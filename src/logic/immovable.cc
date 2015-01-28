@@ -233,7 +233,7 @@ ImmovableDescr::ImmovableDescr
 	using boost::iequals;
 
 	if (global_s.has_val("size")) {
-		auto size = global_s.get_string("size");
+		const auto& size = global_s.get_string("size");
 		try {
 			if      (iequals(size, "small"))
 				m_size = BaseImmovable::SMALL;

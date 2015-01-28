@@ -185,7 +185,7 @@ void Section::Value::set_string(char const * const value)
 {
 	using std::copy;
 
-	auto len = strlen(value) + 1;
+	const auto len = strlen(value) + 1;
 	m_value.reset(new char[len]);
 	copy(value, value + len, m_value.get());
 }

@@ -73,7 +73,7 @@ BuildingDescr::BuildingDescr
 	using boost::iequals;
 
 	try {
-		auto size = global_s.get_safe_string("size");
+		const auto& size = global_s.get_safe_string("size");
 		if      (iequals(size, "small"))
 			m_size = BaseImmovable::SMALL;
 		else if (iequals(size, "medium"))
