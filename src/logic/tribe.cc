@@ -148,6 +148,9 @@ TribeDescr::TribeDescr
 						throw new GameDataError("Duplicate definition of worker", workername);
 					}
 					workers_.insert(worker_index);
+					if (egbase_.tribes().get_worker_descr(worker_index).buildcost().empty()) {
+						worker_types_without_cost_.push_back(worker_index);
+					}
 					column.push_back(worker_index);
 					m_workers_order_coords.resize(workers_->size());
 					m_workers_order_coords[worker_index] =

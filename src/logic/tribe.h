@@ -31,6 +31,7 @@
 #include "logic/immovable.h"
 #include "logic/ship.h"
 #include "logic/tribe_basic_info.h"
+#include "logic/tribes/tribes.h"
 #include "logic/ware_descr.h"
 #include "logic/worker.h"
 
@@ -126,7 +127,7 @@ struct TribeDescr {
 	}
 
 	const std::vector<WareIndex> & worker_types_without_cost() const {
-		return m_worker_types_without_cost;
+		return worker_types_without_cost_;
 	}
 
 	uint32_t frontier_animation() const {
@@ -194,7 +195,7 @@ private:
 	WaresOrder                        m_workers_order;
 	WaresOrderCoords                  m_workers_order_coords;
 
-	std::vector<WareIndex> m_worker_types_without_cost;
+	std::vector<WareIndex> worker_types_without_cost_;
 
 	std::vector<Initialization> m_initializations;
 

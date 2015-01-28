@@ -134,7 +134,6 @@ public:
 
 	void set_ware_type_has_demand_check(WareIndex ware_index, const std::string& tribename);
 	void set_worker_type_has_demand_check(WareIndex worker_index, const std::string& tribename);
-	const std::vector<WareIndex>& worker_types_without_cost() const;
 
 private:
 	EditorGameBase& egbase_;
@@ -144,8 +143,6 @@ private:
 	std::unique_ptr<DescriptionMaintainer<WareDescr>> wares_;
 	std::unique_ptr<DescriptionMaintainer<WorkerDescr>> workers_;
 	std::unique_ptr<DescriptionMaintainer<TribeDescr>> tribes_;
-
-	std::vector<WareIndex> worker_types_without_cost_;
 
 	DISALLOW_COPY_AND_ASSIGN(Tribes);
 };

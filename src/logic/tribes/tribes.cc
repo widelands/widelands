@@ -68,27 +68,15 @@ void Tribes::add_ware_type(const LuaTable& t) {
 }
 
 void Tribes::add_carrier_type(const LuaTable& t) {
-	CarrierDescr& worker_descr = new CarrierDescr(t);
-	WareIndex const worker_idx = workers_->add(worker_descr);
-	if (worker_descr.buildcost().empty()) {
-		worker_types_without_cost_.push_back(worker_idx);
-	}
+	workers_->add(new CarrierDescr(t));
 }
 
 void Tribes::add_soldier_type(const LuaTable& t) {
-	SoldierDescr& worker_descr = new SoldierDescr(t);
-	WareIndex const worker_idx = workers_->add(worker_descr);
-	if (worker_descr.buildcost().empty()) {
-		worker_types_without_cost_.push_back(worker_idx);
-	}
+	workers_->add(SoldierDescr(t));
 }
 
 void Tribes::add_worker_type(const LuaTable& t) {
-	WorkerDescr& worker_descr = new WorkerDescr(t);
-	WareIndex const worker_idx = workers_->add(worker_descr);
-	if (worker_descr.buildcost().empty()) {
-		worker_types_without_cost_.push_back(worker_idx);
-	}
+	workers_->add(new WorkerDescr(t));
 }
 
 void Tribes::add_tribe(const LuaTable& t) {
@@ -209,10 +197,6 @@ void Tribes::set_ware_type_has_demand_check(WareIndex ware_index, const std::str
 
 void Tribes::set_worker_type_has_demand_check(WareIndex worker_index, const std::string& tribename) const {
 	workers_.get(worker_index)->set_has_demand_check(tribename);
-}
-
-const std::vector<WareIndex>& Tribes::worker_types_without_cost() const {
-	return worker_types_without_cost_;
 }
 
 } // namespace Widelands
