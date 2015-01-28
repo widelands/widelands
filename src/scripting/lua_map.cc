@@ -218,7 +218,7 @@ static int sort_claimers(const PlrInfluence& first, const PlrInfluence& second) 
 // Return the valid workers for a Road.
 WorkersMap get_valid_workers_for(const Road& r) {
 	WorkersMap valid_workers;
-	valid_workers.insert(WorkerAmount(r.owner().tribe().worker_index("carrier"), 1));
+	valid_workers.insert(WorkerAmount(r.owner().tribe().carrier(), 1));
 
 	if (r.get_roadtype() == Road_Busy)
 		valid_workers.insert(WorkerAmount(r.owner().tribe().carrier2(), 1));
@@ -1949,7 +1949,7 @@ int LuaWorkerDescription::get_buildable(lua_State * L) {
 /* RST
 	.. attribute:: buildcost
 
-		(RO) a list of building requirements, e.g. {"carrier", "ax"}
+		(RO) a list of building requirements, e.g. {"atlanteans_carrier", "ax"}
 */
 int LuaWorkerDescription::get_buildcost(lua_State * L) {
 	lua_newtable(L);

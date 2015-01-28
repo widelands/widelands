@@ -558,8 +558,7 @@ void MapBuildingdataPacket::read_warehouse
 
 			if (1 == packet_version) { //  a single next_spawn time for "carrier"
 				uint32_t const next_spawn = fr.unsigned_32();
-				WareIndex const worker_index =
-					tribe.safe_worker_index("carrier");
+				WareIndex const worker_index = tribe.carrier();
 				if (worker_index == INVALID_INDEX) {
 					log
 						("WARNING: %s %u has a next_spawn time for nonexistent "

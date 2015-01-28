@@ -717,7 +717,7 @@ void Warehouse::remove_workers(WareIndex const id, uint32_t const count)
 /// Launch a carrier to fetch an ware from our flag.
 bool Warehouse::fetch_from_flag(Game & game)
 {
-	WareIndex const carrierid = descr().tribe().safe_worker_index("carrier");
+	WareIndex const carrierid = descr().tribe().carrier();
 
 	if (!m_supply->stock_workers(carrierid)) // XXX yep, let's cheat
 		insert_workers(carrierid, 1);
@@ -873,7 +873,7 @@ WareInstance & Warehouse::launch_ware(Game & game, WareIndex const ware_index) {
 void Warehouse::do_launch_ware(Game & game, WareInstance & ware)
 {
 	// Create a carrier
-	WareIndex const carrierid = descr().tribe().worker_index("carrier");
+	WareIndex const carrierid = descr().tribe().carrier();
 	const WorkerDescr & workerdescr = *descr().tribe().get_worker_descr(carrierid);
 
 	Worker & worker = workerdescr.create(game, owner(), this, m_position);

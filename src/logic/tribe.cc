@@ -191,7 +191,7 @@ TribeDescr::TribeDescr
 		}
 
 		items_table = table.get_table("carriers");
-		m_carrier = items_table.get_string("carrier");
+		carrier_ = items_table.get_string("carrier");
 		carrier2_ = items_table.get_string("carrier2");
 
 		items_table = table.get_table("soldiers");

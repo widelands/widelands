@@ -79,6 +79,11 @@ struct TribeDescr {
 		return egbase_.tribes().worker_index(workername);
 	}
 
+	WareIndex carrier() const {
+		assert(!carrier_.empty());
+		return egbase_.tribes().safe_worker_index(carrier_);
+	}
+
 	WareIndex carrier2() const {
 		assert(!carrier2_.empty());
 		return egbase_.tribes().safe_worker_index(carrier2_);
@@ -183,8 +188,8 @@ private:
 	std::set<int>                     ships_;
 	std::set<WareIndex>               workers_;
 	std::set<WareIndex>               wares_;
-	std::string                       m_carrier; // NOCOM(GunChleoc): Use this to define the basic carrier. We need a logic change here.
-	std::string                       carrier2_;
+	std::string                       carrier_;  // The basic carrier for this tribe
+	std::string                       carrier2_; // Additional carrier for busy roads
 	std::string                       m_soldier; // NOCOM(GunChleoc): We can probably remove these from the init.
 	// Order and positioning of wares in the warehouse display
 	WaresOrder                        m_wares_order;
