@@ -20,10 +20,11 @@
 #ifndef WL_GRAPHIC_GL_FIELDS_TO_DRAW_H
 #define WL_GRAPHIC_GL_FIELDS_TO_DRAW_H
 
-#include <vector>
 #include <cstddef>
+#include <vector>
 
 #include <stdint.h>
+
 
 // Helper struct that contains the data needed for drawing all fields. All
 // methods are inlined for performance reasons.
@@ -37,6 +38,8 @@ public:
 		float brightness;            // brightness of the pixel
 		uint8_t ter_r, ter_d;        // Texture index of the right and down triangle.
 		uint8_t roads;  // Bitmask of roads to render, see logic/roadtype.h.
+		std::string normal_road_filename;
+		std::string busy_road_filename;
 	};
 
 	FieldsToDraw(int minfx, int maxfx, int minfy, int maxfy)

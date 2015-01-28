@@ -86,9 +86,6 @@ RoadProgram::RoadProgram() {
 
 	u_normal_road_texture_ = glGetUniformLocation(gl_program_.object(), "u_normal_road_texture");
 	u_busy_road_texture_ = glGetUniformLocation(gl_program_.object(), "u_busy_road_texture");
-
-	normal_road_texture_ = load_image("world/pics/roadt_normal.png");
-	busy_road_texture_ = load_image("world/pics/roadt_busy.png");
 }
 
 RoadProgram::~RoadProgram() {
@@ -235,11 +232,18 @@ void RoadProgram::draw(const Surface& surface, const FieldsToDraw& fields_to_dra
 
 	// Bind the textures.
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, normal_road_texture_->get_gl_texture());
+	// NOCOM(GunChleoc): need to get the tribe's texture from FieldsToDraw here.
+	size_t counter = 0;
+	std::string normal_road_filename;
+	for (; normal_road_filename.empty() && counter < fields_to_draw.size(); ++counter) {
+		normal_road_filename = fields_to_draw.at(counter).normal_road_filename;
+	}
+	glBindTexture(GL_TEXTURE_2D, load_image(normal_road_filename)->get_gl_texture());
 	glUniform1i(u_normal_road_texture_, 0);
 
 	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, busy_road_texture_->get_gl_texture());
+	// NOCOM(GunChleoc): need to get the tribe's texture from FieldsToDraw here.
+	glBindTexture(GL_TEXTURE_2D, load_image(fields_to_draw.at(counter).busy_road_filename)->get_gl_texture());
 	glUniform1i(u_busy_road_texture_, 1);
 
 	glDrawArrays(GL_TRIANGLES, 0, vertices_.size());

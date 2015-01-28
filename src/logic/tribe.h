@@ -62,7 +62,7 @@ struct TribeDescr {
 	static std::vector<TribeBasicInfo> get_all_tribe_infos();
 
 
-	const std::string & name() const {return m_name;}
+	const std::string& name() const {return m_name;}
 	const std::string& road_busy() const {return m_road_busy;}
 	const std::string& road_normal() const {return m_road_normal;}
 
@@ -177,8 +177,8 @@ struct TribeDescr {
 private:
 	const std::string m_name;
 
-	const std::string m_road_busy;
-	const std::string m_road_normal;
+	std::string m_road_busy;
+	std::string m_road_normal;
 
 	uint32_t m_frontier_animation_id;
 	uint32_t m_flag_animation_id;

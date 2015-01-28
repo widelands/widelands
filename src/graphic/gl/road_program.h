@@ -83,10 +83,6 @@ private:
 	// All vertices that get rendered this frame.
 	std::vector<PerVertexData> vertices_;
 
-	// The road textures.
-	std::unique_ptr<Texture> normal_road_texture_;
-	std::unique_ptr<Texture> busy_road_texture_;
-
 	DISALLOW_COPY_AND_ASSIGN(RoadProgram);
 };
 

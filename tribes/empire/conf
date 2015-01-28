@@ -9,8 +9,8 @@ uiposition=20
 carrier2=donkey
 icon=pics/icon.png
 
-road_busy=pics/roadt_busy.png
-road_normal=pics/roadt_normal.png
+road_busy=tribes/empire/pics/roadt_busy.png
+road_normal=tribes/empire/pics/roadt_normal.png
 
 # Wares and workers positions in wares window. Columns are separated by ;,
 # Entries in the columns separated by ,
