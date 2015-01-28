@@ -88,11 +88,6 @@ void DrawLineProgram::draw(const FloatPoint& start,
 void DrawLineProgram::draw(std::vector<Arguments> arguments) {
 	size_t i = 0;
 
-	std::sort(
-	   arguments.begin(), arguments.end(), [](const Arguments& first, const Arguments& second) {
-		   return first.line_width < second.line_width;
-		});
-
 	glUseProgram(gl_program_.object());
 	glEnableVertexAttribArray(attr_position_);
 	glEnableVertexAttribArray(attr_color_);
@@ -142,9 +137,6 @@ void DrawLineProgram::draw(std::vector<Arguments> arguments) {
 
 	// Now do the draw calls.
 	for (const auto& draw_arg : draw_batches) {
-		log("#sirver draw_arg.offset: %d\n", draw_arg.offset);
-		log("#sirver draw_arg.count: %d\n", draw_arg.count);
-		log("#sirver draw_arg.line_width: %d\n", draw_arg.line_width);
 		glLineWidth(draw_arg.line_width);
 		glDrawArrays(GL_LINES, draw_arg.offset, draw_arg.count);
 	}

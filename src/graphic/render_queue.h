@@ -104,7 +104,7 @@ public:
 		int program_id;
 		float z_value;
 		FloatRect destination_rect;
-		uint32_t key;
+		uint64_t key;
 		BlendMode blend_mode;
 
 		union {

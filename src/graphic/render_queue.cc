@@ -49,29 +49,31 @@ inline float to_opengl_z(const int z) {
 //   - and we want to render frontmost objects first, so that we do not render
 //     any pixel more than once.
 static_assert(RenderQueue::HIGHEST_PROGRAM_ID < 8, "Need to change sorting keys.");  // 4 bits.
-// NOCOM(#sirver): add texture back in for third sort order
-uint32_t make_key_opaque(const int program_id, const int z_value) {
+
+uint64_t
+make_key_opaque(const uint64_t program_id, const uint64_t z_value, const uint64_t extra_value) {
 	assert(program_id < HIGHEST_PROGRAM_ID);
 	assert(0 <= z_value && z_value < std::numeric_limits<uint16_t>::max());
 
 	// TODO(sirver): As a higher priority for sorting then z value, texture
 	// could be used here. This allows for more batching of GL calls, but in my
 	// tests hardly made a difference for Widelands..
-	uint32_t sort_z_value = std::numeric_limits<uint16_t>::max() - z_value;
-	// IIII ZZZZ ZZZZ ZZZZ ZZZZ 0000 0000 0000
-	return (program_id << 28) | (sort_z_value << 12);
+	uint64_t sort_z_value = std::numeric_limits<uint16_t>::max() - z_value;
+	// IIII0000 EEEEEEEE EEEEEEEE EEEEEEEE EEEEEEEE ZZZZZZZZ ZZZZZZZZ
+	return (program_id << 60) | (extra_value << 16) | (sort_z_value);
 }
 
 // For blended objects, we need to render furthest away objects first, and we
 // do not update the z-buffer. This guarantees that the image is correct.
 //   - if z value is the same, we order by program second to have potential batching.
-uint32_t make_key_blended(const int program_id, const int z_value) {
+uint64_t
+make_key_blended(const uint64_t program_id, const uint64_t z_value, const uint64_t extra_value) {
 	assert(program_id < HIGHEST_PROGRAM_ID);
 	assert(0 <= z_value && z_value < std::numeric_limits<uint16_t>::max());
 
 	// Sort opaque objects increasing, alpha objects decreasing in order.
-	// ZZZZ ZZZZ ZZZZ ZZZZ IIII 0000 0000 0000
-	return (z_value << 16) | (program_id << 12);
+	// ZZZZZZZZ ZZZZZZZZ IIII0000 EEEEEEEE EEEEEEEE EEEEEEEE EEEEEEEE
+	return (z_value << 40) | (program_id << 36) | extra_value;
 }
 
 // Construct 'args' used by the individual programs out of 'item'.
@@ -142,16 +144,44 @@ RenderQueue& RenderQueue::instance() {
 // NOCOM(#sirver): take individual parameters?
 void RenderQueue::enqueue(const Item& given_item) {
 	Item* item;
+	uint32_t extra_value = 0;
+
+	switch (given_item.program_id) {
+		case Program::BLIT:
+		   extra_value = given_item.vanilla_blit_arguments.texture.name;
+		 break;
+
+		case Program::BLIT_MONOCHROME:
+		   extra_value = given_item.monochrome_blit_arguments.texture.name;
+			break;
+
+		case Program::BLIT_BLENDED:
+		   extra_value = given_item.blended_blit_arguments.texture.name;
+			break;
+
+		case Program::LINE:
+		   extra_value = given_item.line_arguments.line_width;
+			break;
+
+		case Program::RECT:
+			/* fallthrough intended */
+		case Program::TERRAIN:
+			break;
+
+		default:
+		   throw wexception("Unknown given_item.program_id: %d", given_item.program_id);
+	}
+
 	if (given_item.blend_mode == BlendMode::Copy) {
 		opaque_items_.emplace_back(given_item);
 		item = &opaque_items_.back();
 		item->z_value = to_opengl_z(next_z);
-		item->key = make_key_opaque(static_cast<uint32_t>(item->program_id), next_z);
+		item->key = make_key_opaque(static_cast<uint64_t>(item->program_id), next_z, extra_value);
 	} else {
 		blended_items_.emplace_back(given_item);
 		item = &blended_items_.back();
 		item->z_value = to_opengl_z(next_z);
-		item->key = make_key_blended(static_cast<uint32_t>(item->program_id), next_z);
+		item->key = make_key_blended(static_cast<uint64_t>(item->program_id), next_z, extra_value);
 	}
 
 	// Add more than 1 since some items have multiple programs that all need a
