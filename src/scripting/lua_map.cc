@@ -960,17 +960,13 @@ int LuaMap::place_immovable(lua_State * const L) {
 	BaseImmovable * m = nullptr;
 	if (from_where != "world") {
 		try {
-			const Widelands::TribeDescr & tribe =
-				egbase.manually_load_tribe(from_where);
+			//const Widelands::TribeDescr & tribe =
+			// NOCOM(GunCHleoc): Do we need somethig like this for tribes()?	egbase.manually_load_tribe(from_where);
 
-			int32_t const imm_idx = tribe.get_immovable_index(objname);
-			if (imm_idx < 0) {
-				report_error(L, "Unknown immovable <%s> for tribe <%s>", objname, from_where.c_str());
-			}
-
+			int32_t const imm_idx = egbase.tribes().safe_immovable_index(objname);
 			m = &egbase.create_immovable(c->coords(), imm_idx, MapObjectDescr::OwnerType::kTribe);
-		} catch (GameDataError &) {
-			report_error(L, "Problem loading tribe <%s>. Maybe not existent?", from_where.c_str());
+		} catch (GameDataError& e) {
+			report_error(L, "Problem loading immovable <%s>. Maybe not existent? %s", objname.c_str(), e.what());
 		}
 	} else {
 		int32_t const imm_idx = egbase.world().get_immovable_index(objname);

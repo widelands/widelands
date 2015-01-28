@@ -107,7 +107,6 @@ BuildingIndex Tribes::nrbuildings() const {
 	return buildings_.size();
 }
 
-
 BuildingIndex Tribes::safe_building_index(const std::string& buildingname) const {
 	const BuildingIndex result = building_index(buildingname);
 	if (result == -1) {
@@ -187,12 +186,12 @@ BuildingDescr const * Tribes::get_building_descr(BuildingIndex building_index) c
 	return buildings_.get(building_index);
 }
 
-ImmovableDescr const * Tribes::get_immovable_descr(const std::string& immovablename) const {
-	return immovables_.get(immovable_index(immovablename));
+ImmovableDescr const * Tribes::get_immovable_descr(int immovable_index) const {
+	return immovables_.get(immovable_index);
 }
 
-ShipDescr const * Tribes::get_ship_descr(const std::string& shipname) const {
-	return ships_.get(ship_index(shipname));
+ShipDescr const * Tribes::get_ship_descr(int ship_index) const {
+	return ships_.get(ship_index);
 }
 
 

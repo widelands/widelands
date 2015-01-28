@@ -1048,15 +1048,13 @@ MapObject::Loader * Ship::load
 			std::string name = fr.c_string();
 			const ShipDescr * descr = nullptr;
 
-			egbase.manually_load_tribe(owner);
+			// NOCOM(GunChleoc): Do we need to do the same with tribes()? egbase.manually_load_tribe(owner);
 
-			if (const TribeDescr * tribe = egbase.get_tribe(owner)) {
-				descr =  tribe->get_ship_descr(name);
-			}
-
-			if (!descr) {
-				throw GameDataError
-					("undefined ship %s/%s", owner.c_str(), name.c_str());
+			try {
+				int32_t const idx = egbase.tribes().safe_ship_index(name);
+				descr = egbase.tribes().get_ship_descr(idx);
+			} catch (const WException& e) {
+				throw GameDataError("Failed to load ship: %s", e.what());
 			}
 
 			loader->init(egbase, mol, descr->create_object());

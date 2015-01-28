@@ -827,10 +827,11 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 		}
 	} else {
 		state.svar1 = "tribe";
-		uint32_t immovable_index = descr().tribe().get_immovable_index(list[1]);
 
-		if (immovable_index > 0) {
-			const ImmovableDescr* imm = descr().tribe().get_immovable_descr(immovable_index);
+		uint32_t immovable_index = game.tribes().immovable_index(list[1]);
+
+		if (game.tribes().immovable_exists(immovable_index)) {
+			const ImmovableDescr* imm = game.tribes().get_immovable_descr(immovable_index);
 			test_suitability(immovable_index, *imm);
 		}
 	}

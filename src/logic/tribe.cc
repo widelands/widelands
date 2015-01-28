@@ -93,7 +93,7 @@ TribeDescr::TribeDescr
 		for (const std::string& key : items_table.keys()) {
 			const std::string shipname = column_table.get_string(key);
 			int id = egbase.tribes().safe_ship_index(shipname);
-			ships_[id] = egbase.tribes().get_ship_descr(shipname);
+			ships_[id] = egbase.tribes().get_ship_descr(id);
 		}
 
 		items_table = table.get_table("wares_order");
@@ -115,7 +115,7 @@ TribeDescr::TribeDescr
 		for (const std::string& key : items_table.keys()) {
 			const std::string immovablename = column_table.get_string(key);
 			int id = egbase.tribes().safe_immovable_index(immovablename);
-			immovables_[id] = egbase.tribes().get_immovable_descr(immovablename);
+			immovables_[id] = egbase.tribes().get_immovable_descr(id);
 		}
 
 		items_table = table.get_table("workers_order");

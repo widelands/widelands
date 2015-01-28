@@ -101,6 +101,15 @@ public:
 	bool worker_exists(const WareIndex& index) const {
 		return workers_.count(index) == 1;
 	}
+	bool building_exists(const BuildingIndex& index) const {
+		return buildings_.count(index) == 1;
+	}
+	bool immovable_exists(int index) const {
+		return immovables_.count(index) == 1;
+	}
+	bool ship_exists(int index) const {
+		return ships_.count(index) == 1;
+	}
 
 	BuildingIndex safe_building_index(const std::string& buildingname) const;
 	int safe_immovable_index(const std::string& immovablename) const;
@@ -115,8 +124,8 @@ public:
 	WareIndex worker_index(const std::string& workername) const;
 
 	BuildingDescr const* get_building_descr(BuildingIndex building_index) const;
-	ImmovableDescr const* get_immovable_descr(const std::string& immovablename) const;
-	ShipDescr const* get_ship_descr(const std::string& shipname) const;
+	ImmovableDescr const* get_immovable_descr(int immovable_index) const;
+	ShipDescr const* get_ship_descr(int ship_index) const;
 	WareDescr const* get_ware_descr(WareIndex ware_index) const;
 	WorkerDescr const* get_worker_descr(WareIndex worker_index) const;
 

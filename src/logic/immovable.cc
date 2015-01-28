@@ -717,18 +717,13 @@ MapObject::Loader * Immovable::load
 			Immovable * imm = nullptr;
 
 			if (owner_name != "world") { //  It is a tribe immovable.
-				egbase.manually_load_tribe(owner_name);
-
-				if (TribeDescr const * const tribe = egbase.get_tribe(owner_name)) {
-					int32_t const idx = tribe->get_immovable_index(old_name);
-					if (idx != -1)
-						imm = new Immovable(*tribe->get_immovable_descr(idx));
-					else
-						throw GameDataError
-							("tribe %s does not define immovable type \"%s\"",
-							 owner_name.c_str(), old_name.c_str());
-				} else
-					throw wexception("unknown tribe %s", owner_name.c_str());
+				// NOCOM(GunChleoc): DO we need something like this for tribes()? egbase.manually_load_tribe(owner_name);
+				try {
+					int32_t const idx = egbase.tribes().safe_immovable_index(old_name);
+					imm = new Immovable(egbase.tribes().get_immovable_descr(idx));
+				} catch (const WException& e) {
+					throw GameDataError("Failed to load immovable: %s", e.what());
+				}
 			} else { //  world immovable
 				const World & world = egbase.world();
 				const std::string new_name = lookup_table.lookup_immovable(old_name);

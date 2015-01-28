@@ -451,7 +451,7 @@ Immovable & EditorGameBase::create_immovable
 {
 	const int32_t idx =
 		type == MapObjectDescr::OwnerType::kTribe ?
-		tribes().get_immovable_index(name.c_str())
+		tribes().immovable_index(name.c_str())
 		:
 		world().get_immovable_index(name.c_str());
 	if (idx < 0)
