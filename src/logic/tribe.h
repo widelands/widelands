@@ -64,94 +64,51 @@ struct TribeDescr {
 	static std::vector<TribeBasicInfo> get_all_tribe_infos();
 
 
-	const std::string & name() const {return name_;}
-	const EditorGameBase& egbase() const {return egbase_;}
+	const std::string& name() const;
+	const EditorGameBase& egbase();
 
 	// NOCOM(GunChleoc): Look at the usage, ranged-bases for loops now?
-	WareIndex get_nrworkers() const {return workers_.size();}
+	WareIndex get_nrwares() const;
+	WareIndex get_nrworkers() const;
 
-	const std::set<WareIndex> workers() { return workers_;}
+	const std::set<BuildingIndex> buildings() const;
+	const std::set<WareIndex> wares() const;
+	const std::set<WareIndex> workers() const;
 
-	WorkerDescr const * get_worker_descr(const WareIndex& index) const {
-		return egbase_.tribes().get_worker_descr(index);
-	}
-	WareIndex worker_index(const std::string & workername) const {
-		return egbase_.tribes().worker_index(workername);
-	}
+	bool has_building(const BuildingIndex& index) const;
+	bool has_ware(const WareIndex& index) const;
 
-	WareIndex carrier() const {
-		assert(egbase_.tribes().worker_exists(carrier_));
-		return carrier_;
-	}
-	WareIndex carrier2() const {
-		assert(egbase_.tribes().worker_exists(carrier2_));
-		return carrier2_;
-	}
-	WareIndex soldier() const {
-		assert(egbase_.tribes().worker_exists(soldier_));
-		return soldier_;
-	}
-	int ship() const {
-		assert(egbase_.tribes().ship_exists(ship_));
-		return ship_;
-	}
-
-	// NOCOM(GunChleoc): Look at the usage, ranged-bases for loops now?
-	WareIndex get_nrwares() const {return wares_.size();}
-
-	const std::set<WareIndex> wares() { return wares_;}
-
-	WareIndex safe_ware_index(const std::string & warename) const;
+	BuildingIndex building_index(const std::string & buildingname) const;
+	int immovable_index(const std::string & immovablename) const;
 	WareIndex ware_index(const std::string & warename) const;
-	WareDescr const * get_ware_descr(const WareIndex& index) const {
-		return egbase_.tribes().get_ware_descr(index);
-	}
-	bool has_ware(const WareIndex& index) const {
-		return wares_.count(index) == 1;
-	}
-	void set_ware_type_has_demand_check(const WareIndex& index, const std::string& tribename) const {
-		egbase_.tribes().get_ware_descr(index)->set_has_demand_check(tribename);
-	}
-	void set_worker_type_has_demand_check(const WareIndex& index) const {
-		egbase_.tribes().get_worker_descr(index)->set_has_demand_check();
-	}
+	WareIndex worker_index(const std::string & workername) const;
+
+	/// Return the given building or die trying
+	BuildingIndex safe_building_index(const std::string& buildingname) const;
+	/// Return the given ware or die trying
+	WareIndex safe_ware_index(const std::string & warename) const;
+	/// Return the given worker or die trying
 	WareIndex safe_worker_index(const std::string & workername) const;
 
-	bool has_building(const BuildingIndex& index) const {
-		return buildings_.count(index) == 1;
-	}
-	const std::set<BuildingIndex> buildings() { return buildings_;}
+	BuildingDescr const * get_building_descr(const BuildingIndex& index) const;
+	ImmovableDescr const * get_immovable_descr(int index) const;
+	WareDescr const * get_ware_descr(const WareIndex& index) const;
+	WorkerDescr const * get_worker_descr(const WareIndex& index) const;
 
-	BuildingIndex safe_building_index(const std::string& buildingname) const;
-	BuildingDescr const * get_building_descr(const BuildingIndex& index) const {
-		return egbase_.tribes().get_building_descr(index);
-	}
-	BuildingIndex building_index(const std::string & buildingname) const {
-		return egbase_.tribes().building_index(buildingname);
-	}
+	WareIndex carrier() const;
+	WareIndex carrier2() const;
+	WareIndex soldier() const;
+	int ship() const;
+	const std::vector<WareIndex>& worker_types_without_cost() const;
 
-	int get_immovable_index(const std::string & immovablename) const {
-		return egbase_.tribes().immovable_index(immovablename);
-	}
-
-	ImmovableDescr const * get_immovable_descr(int index) const {
-		return egbase_.tribes().get_immovable_descr(index);
-	}
-
-	const std::vector<WareIndex> & worker_types_without_cost() const {
-		return worker_types_without_cost_;
-	}
-
-	uint32_t frontier_animation() const {
-		return m_frontier_animation_id;
-	}
-
-	uint32_t flag_animation() const {
-		return m_flag_animation_id;
-	}
+	uint32_t frontier_animation() const;
+	uint32_t flag_animation() const;
 
 	uint32_t get_resource_indicator
 		(const ResourceDescription * const res, const uint32_t amount) const;
+
+	void set_ware_type_has_demand_check(const WareIndex& index, const std::string& tribename) const;
+	void set_worker_type_has_demand_check(const WareIndex& index) const;
 
 	void postload(EditorGameBase&);
 	void load_graphics();
@@ -168,14 +125,14 @@ struct TribeDescr {
 
 	using WaresOrder = std::vector<std::vector<Widelands::WareIndex>>;
 	using WaresOrderCoords = std::vector<std::pair<uint32_t, uint32_t>>;
-	const WaresOrder & wares_order() const {return m_wares_order;}
+	const WaresOrder & wares_order() const {return wares_order_;}
 	const WaresOrderCoords & wares_order_coords() const {
-		return m_wares_order_coords;
+		return wares_order_coords_;
 	}
 
-	const WaresOrder & workers_order() const {return m_workers_order;}
+	const WaresOrder & workers_order() const {return workers_order_;}
 	const WaresOrderCoords & workers_order_coords() const {
-		return m_workers_order_coords;
+		return workers_order_coords_;
 	}
 
 	void resize_ware_orders(size_t maxLength);
@@ -195,17 +152,17 @@ private:
 	std::set<int>                     immovables_;  // The player immovables
 	std::set<WareIndex>               workers_;
 	std::set<WareIndex>               wares_;
+	// Special units
 	WareIndex                         carrier_;  // The basic carrier for this tribe
 	WareIndex                         carrier2_; // Additional carrier for busy roads
 	WareIndex                         soldier_;  // The soldier that this tribe uses
 	int                               ship_;     // The ship that this tribe uses
+	std::vector<WareIndex>            worker_types_without_cost_;
 	// Order and positioning of wares in the warehouse display
-	WaresOrder                        m_wares_order;
-	WaresOrderCoords                  m_wares_order_coords;
-	WaresOrder                        m_workers_order;
-	WaresOrderCoords                  m_workers_order_coords;
-
-	std::vector<WareIndex> worker_types_without_cost_;
+	WaresOrder                        wares_order_;
+	WaresOrderCoords                  wares_order_coords_;
+	WaresOrder                        workers_order_;
+	WaresOrderCoords                  workers_order_coords_;
 
 	std::vector<Initialization> m_initializations;
 

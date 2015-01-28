@@ -97,14 +97,14 @@ TribeDescr::TribeDescr
 					}
 					wares_.insert(ware_index);
 					column.push_back(ware_index);
-					m_wares_order_coords.resize(wares_->size());
-					m_wares_order_coords[ware_index] =
-							std::pair<uint32_t, uint32_t>(m_wares_order.size(), column.size() - 1);
+					wares_order_coords_.resize(wares_->size());
+					wares_order_coords_[ware_index] =
+							std::pair<uint32_t, uint32_t>(wares_order_.size(), column.size() - 1);
 				} catch (const WException& e) {
 					throw new GameDataError("Failed adding ware %s to tribe %s: %s", warename, name_, e.what);
 				}
 			}
-			if (!column.empty()) m_wares_order.push_back(column);
+			if (!column.empty()) wares_order_.push_back(column);
 		}
 
 		items_table = table.get_table("immovables");
@@ -136,14 +136,14 @@ TribeDescr::TribeDescr
 						worker_types_without_cost_.push_back(worker_index);
 					}
 					column.push_back(worker_index);
-					m_workers_order_coords.resize(workers_->size());
-					m_workers_order_coords[worker_index] =
-							std::pair<uint32_t, uint32_t>(m_workers_order.size(), column.size() - 1);
+					workers_order_coords_.resize(workers_->size());
+					workers_order_coords_[worker_index] =
+							std::pair<uint32_t, uint32_t>(workers_order_.size(), column.size() - 1);
 				} catch (const WException& e) {
 					throw new GameDataError("Failed adding worker %s to tribe %s: %s", workername, name_, e.what);
 				}
 			}
-			if (!column.empty()) m_workers_order.push_back(column);
+			if (!column.empty()) workers_order_.push_back(column);
 		}
 
 		items_table = table.get_table("constructionsites");
@@ -337,6 +337,94 @@ std::vector<TribeBasicInfo> TribeDescr::get_all_tribe_infos() {
 }
 
 
+/**
+  * Access functions
+  */
+
+const std::string& TribeDescr::name() const {return name_;}
+const EditorGameBase& TribeDescr::egbase() const {return egbase_;}
+
+WareIndex TribeDescr::get_nrwares() const {return wares_.size();}
+WareIndex TribeDescr::get_nrworkers() const {return workers_.size();}
+
+const std::set<BuildingIndex> TribeDescr::buildings() const { return buildings_;}
+const std::set<WareIndex> TribeDescr::wares() const { return wares_;}
+const std::set<WareIndex> TribeDescr::workers() const { return workers_;}
+
+bool TribeDescr::has_building(const BuildingIndex& index) const {
+	return buildings_.count(index) == 1;
+}
+bool TribeDescr::has_ware(const WareIndex& index) const {
+	return wares_.count(index) == 1;
+}
+
+BuildingIndex TribeDescr::building_index(const std::string & buildingname) const {
+	return egbase_.tribes().building_index(buildingname);
+}
+
+int TribeDescr::immovable_index(const std::string & immovablename) const {
+	return egbase_.tribes().immovable_index(immovablename);
+}
+WareIndex TribeDescr::ware_index(const std::string & warename) const {
+	return egbase_.tribes().ware_index(warename);
+}
+WareIndex TribeDescr::worker_index(const std::string & workername) const {
+	return egbase_.tribes().worker_index(workername);
+}
+
+BuildingIndex TribeDescr::safe_building_index(const std::string& buildingname) const {
+	return egbase_.tribes().safe_building_index(buildingname);
+}
+
+WareIndex TribeDescr::safe_ware_index(const std::string & warename) const {
+	return egbase_.tribes().safe_ware_index(warename);
+}
+WareIndex TribeDescr::safe_worker_index(const std::string& workername) const {
+	return egbase_.tribes().safe_worker_index(workername);
+}
+
+WareDescr const * TribeDescr::get_ware_descr(const WareIndex& index) const {
+	return egbase_.tribes().get_ware_descr(index);
+}
+WorkerDescr const* TribeDescr::get_worker_descr(const WareIndex& index) const {
+	return egbase_.tribes().get_worker_descr(index);
+}
+
+BuildingDescr const * TribeDescr::get_building_descr(const BuildingIndex& index) const {
+	return egbase_.tribes().get_building_descr(index);
+}
+ImmovableDescr const * TribeDescr::get_immovable_descr(int index) const {
+	return egbase_.tribes().get_immovable_descr(index);
+}
+
+WareIndex TribeDescr::carrier() const {
+	assert(egbase_.tribes().worker_exists(carrier_));
+	return carrier_;
+}
+WareIndex TribeDescr::carrier2() const {
+	assert(egbase_.tribes().worker_exists(carrier2_));
+	return carrier2_;
+}
+WareIndex TribeDescr::soldier() const {
+	assert(egbase_.tribes().worker_exists(soldier_));
+	return soldier_;
+}
+int TribeDescr::ship() const {
+	assert(egbase_.tribes().ship_exists(ship_));
+	return ship_;
+}
+const std::vector<WareIndex>& TribeDescr::worker_types_without_cost() const {
+	return worker_types_without_cost_;
+}
+
+uint32_t TribeDescr::frontier_animation() const {
+	return m_frontier_animation_id;
+}
+
+uint32_t TribeDescr::flag_animation() const {
+	return m_flag_animation_id;
+}
+
 /*
 ==============
 Find the best matching indicator for the given amount.
@@ -346,7 +434,7 @@ uint32_t TribeDescr::get_resource_indicator
 	(ResourceDescription const * const res, uint32_t const amount) const
 {
 	if (!res || !amount) {
-		int32_t idx = get_immovable_index("resi_none");
+		int32_t idx = immovable_index("resi_none");
 		if (idx == -1)
 			throw GameDataError
 				("tribe %s does not declare a resource indicator resi_none!",
@@ -358,7 +446,7 @@ uint32_t TribeDescr::get_resource_indicator
 	int32_t num_indicators = 0;
 	for (;;) {
 		const std::string resi_filename = (boost::format("resi_%s%i") % res->name().c_str() % i).str();
-		if (get_immovable_index(resi_filename) == -1)
+		if (immovable_index(resi_filename) == -1)
 			break;
 		++i;
 		++num_indicators;
@@ -384,40 +472,23 @@ uint32_t TribeDescr::get_resource_indicator
 	if (static_cast<int32_t>(amount) < res->max_amount())
 		bestmatch += 1; // Resi start with 1, not 0
 
-	return get_immovable_index((boost::format("resi_%s%i")
+	return immovable_index((boost::format("resi_%s%i")
 										 % res->name().c_str()
 										 % bestmatch).str());
 }
 
-/*
- * Return the given ware or die trying
- */
-WareIndex TribeDescr::safe_ware_index(const std::string & warename) const {
-	return egbase_.tribes().safe_ware_index(warename);
+void TribeDescr::set_ware_type_has_demand_check(const WareIndex& index, const std::string& tribename) const {
+	egbase_.tribes().get_ware_descr(index)->set_has_demand_check(tribename);
 }
-WareIndex TribeDescr::ware_index(const std::string & warename) const {
-	return egbase_.tribes().ware_index(warename);
-}
-
-/*
- * Return the given worker or die trying
- */
-WareIndex TribeDescr::safe_worker_index(const std::string& workername) const {
-	return egbase_.tribes().safe_worker_index(workername);
-}
-
-/*
- * Return the given building or die trying
- */
-BuildingIndex TribeDescr::safe_building_index(const std::string& buildingname) const {
-	return egbase_.tribes().safe_building_index(buildingname);
+void TribeDescr::set_worker_type_has_demand_check(const WareIndex& index) const {
+	egbase_.tribes().get_worker_descr(index)->set_has_demand_check();
 }
 
 void TribeDescr::resize_ware_orders(size_t maxLength) {
 	bool need_resize = false;
 
 	//check if we actually need to resize
-	for (WaresOrder::iterator it = m_wares_order.begin(); it != m_wares_order.end(); ++it) {
+	for (WaresOrder::iterator it = wares_order_.begin(); it != wares_order_.end(); ++it) {
 		if (it->size() > maxLength) {
 			need_resize = true;
 		  }
@@ -428,21 +499,21 @@ void TribeDescr::resize_ware_orders(size_t maxLength) {
 
 		//build new smaller wares_order
 		WaresOrder new_wares_order;
-		for (WaresOrder::iterator it = m_wares_order.begin(); it != m_wares_order.end(); ++it) {
+		for (WaresOrder::iterator it = wares_order_.begin(); it != wares_order_.end(); ++it) {
 			new_wares_order.push_back(std::vector<Widelands::WareIndex>());
 			for (std::vector<Widelands::WareIndex>::iterator it2 = it->begin(); it2 != it->end(); ++it2) {
 				if (new_wares_order.rbegin()->size() >= maxLength) {
 					new_wares_order.push_back(std::vector<Widelands::WareIndex>());
 				}
 				new_wares_order.rbegin()->push_back(*it2);
-				m_wares_order_coords[*it2].first = new_wares_order.size() - 1;
-				m_wares_order_coords[*it2].second = new_wares_order.rbegin()->size() - 1;
+				wares_order_coords_[*it2].first = new_wares_order.size() - 1;
+				wares_order_coords_[*it2].second = new_wares_order.rbegin()->size() - 1;
 			}
 		}
 
 		//remove old array
-		m_wares_order.clear();
-		m_wares_order = new_wares_order;
+		wares_order_.clear();
+		wares_order_ = new_wares_order;
 	}
 }
 

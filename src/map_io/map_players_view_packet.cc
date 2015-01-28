@@ -238,7 +238,7 @@ struct BuildingNonexistent : public FileRead::DataError {
 // name in the tribe.
 const ImmovableDescr& read_immovable_type(StreamRead* fr, const TribeDescr& tribe) {
 	std::string name = fr->c_string();
-	int32_t const index = tribe.get_immovable_index(name);
+	int32_t const index = tribe.immovable_index(name);
 	if (index == -1)
 		throw TribeImmovableNonexistent(tribe.name(), name);
 	return *tribe.get_immovable_descr(index);
