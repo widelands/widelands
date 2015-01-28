@@ -32,6 +32,11 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
 
+namespace  {
+
+constexpr int kBiggestAreaForCompactification = 250 * 250;
+
+}  // namespace
 ImageCache::ProxyImage::ProxyImage(std::unique_ptr<const Image> image) : image_(std::move(image)) {
 }
 
@@ -69,7 +74,6 @@ bool ImageCache::has(const std::string& hash) const {
 }
 
 const Image* ImageCache::insert(const std::string& hash, std::unique_ptr<const Image> image) {
-	// NOCOM(#sirver): who is calling this?
 	assert(!has(hash));
 	const Image* return_value = image.get();
 	images_.insert(make_pair(hash, std::unique_ptr<ProxyImage>(new ProxyImage(std::move(image)))));
@@ -91,14 +95,19 @@ void ImageCache::compactify() {
 
 	std::vector<std::string> hashes;
 	for (const auto& pair : images_) {
-		// NOCOM(#sirver): filter on size of graphics.
-		texture_atlas.add(pair.second->image());
+		const auto& image = pair.second->image();
+		if (image.width() * image.height() > kBiggestAreaForCompactification) {
+			continue;
+		}
+
+		texture_atlas.add(image);
 		hashes.push_back(pair.first);
 	}
 
 	std::vector<std::unique_ptr<Texture>> new_textures;
-	// NOCOM(#sirver): limit the size of the texture atlas to max GL texture size.
-	// NOCOM(#sirver): experiment with arbitrary small texture sizes so that all images fit.
+
+	// TODO(sirver): Limit the size of the texture atlas to a max GL texture size. This might return more than one
+	// packed image. Make sure that the code works also for small max texture sizes.
 	texture_atlases_.emplace_back(texture_atlas.pack(&new_textures));
 
 	assert(new_textures.size() == hashes.size());
