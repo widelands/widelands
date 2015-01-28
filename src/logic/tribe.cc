@@ -187,6 +187,8 @@ TribeDescr::TribeDescr
 				tribe_s.get_string("descr"); // long description
 				m_bob_vision_range = tribe_s.get_int("bob_vision_range");
 				m_carrier2         = tribe_s.get_string("carrier2");
+				m_road_busy         = tribe_s.get_string("road_busy");
+				m_road_normal         = tribe_s.get_string("road_normal");
 
 				/// Load and parse ware and worker categorization
 #define PARSE_ORDER_INFORMATION(w) /* w is ware or worker */ \
