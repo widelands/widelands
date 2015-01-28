@@ -93,6 +93,7 @@ public:
 
 	WareIndex nrwares() const;
 	WareIndex nrworkers() const;
+	BuildingIndex nrbuildings() const;
 
 	bool ware_exists(const WareIndex& index) const {
 		return wares_.count(index) == 1;

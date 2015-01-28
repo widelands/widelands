@@ -279,17 +279,16 @@ void DefaultAI::late_initialization() {
 	}
 
 	// collect information about the different buildings our tribe can construct
-	BuildingIndex const nr_buildings = tribe_->get_nrbuildings();
 	const World& world = game().world();
 
-	for (BuildingIndex i = 0; i < nr_buildings; ++i) {
-		const BuildingDescr& bld = *tribe_->get_building_descr(i);
+	for (std::pair<BuildingIndex, BuildingDescr> building : tribe.buildings()) {
+		const BuildingDescr& bld = building.second;
 		const std::string& building_name = bld.name();
 		const BuildingHints& bh = bld.hints();
 		buildings_.resize(buildings_.size() + 1);
 		BuildingObserver& bo = buildings_.back();
 		bo.name = building_name.c_str();
-		bo.id = i;
+		bo.id = building.first;
 		bo.desc = &bld;
 		bo.type = BuildingObserver::BORING;
 		bo.cnt_built_ = 0;

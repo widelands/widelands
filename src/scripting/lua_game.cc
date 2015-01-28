@@ -140,15 +140,13 @@ int LuaPlayer::get_name(lua_State * L) {
 		:meth:`allow_buildings` or :meth:`forbid_buildings` for that.
 */
 int LuaPlayer::get_allowed_buildings(lua_State * L) {
-	Player & p = get(L, get_egbase(L));
-	const TribeDescr & t = p.tribe();
+	EditorGameBase& egbase = get_egbase(L);
+	Player& player = get(L, egbase);
 
 	lua_newtable(L);
-	for
-		(BuildingIndex i = 0; i < t.get_nrbuildings(); ++i)
-	{
-		lua_pushstring(L, t.get_building_descr(i)->name().c_str());
-		lua_pushboolean(L, p.is_building_type_allowed(i));
+	for (std::pair<BuildingIndex, BuildingDescr> building : egbase.tribes().buildings()) {
+		lua_pushstring(L, building.second.name().c_str());
+		lua_pushboolean(L, player.is_building_type_allowed(building.first));
 		lua_settable(L, -3);
 	}
 	return 1;
@@ -815,12 +813,12 @@ void LuaPlayer::m_parse_building_list
 {
 	if (lua_isstring(L, -1)) {
 		std::string opt = luaL_checkstring(L, -1);
-		if (opt != "all")
+		if (opt != "all") {
 			report_error(L, "'%s' was not understood as argument!", opt.c_str());
-		for
-			(BuildingIndex i = 0;
-			 i < tribe.get_nrbuildings(); ++i)
-				rv.push_back(i);
+		}
+		for (std::pair<BuildingIndex, BuildingDescr> building : tribe.buildings()) {
+				rv.push_back(building.first);
+		}
 	} else {
 		// array of strings argument
 		luaL_checktype(L, -1, LUA_TTABLE);

@@ -141,15 +141,15 @@ void MapSaver::save() {
 
  //  allowed building types
 	iterate_players_existing_const(plnum, nr_players, m_egbase, player) {
-		BuildingIndex const nr_buildings = player->tribe().get_nrbuildings();
-		for (BuildingIndex i = 0; i < nr_buildings; ++i)
-			if (!player->is_building_type_allowed(i)) {
+		for (std::pair<BuildingIndex, BuildingDescr> building : m_egbase.tribes().buildings()) {
+			if (!player->is_building_type_allowed(building.first)) {
 				log("Writing Allowed Building Types Data ... ");
 				MapAllowedBuildingTypesPacket p;
 				p                                  .write(m_fs, m_egbase, *m_mos);
 				log("took %ums\n ", timer.ms_since_last_query());
 				goto end_find_a_forbidden_building_type_loop;
 			}
+		}
 	} end_find_a_forbidden_building_type_loop:;
 
 	// !!!!!!!!!! NOTE

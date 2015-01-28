@@ -374,29 +374,24 @@ void BuildingStatisticsMenu::update() {
 	const Widelands::Player      & player = iplayer().player();
 	const Widelands::TribeDescr & tribe  = player.tribe();
 	const Widelands::Map         & map   = iplayer().game().map();
-	Widelands::BuildingIndex      const nr_buildings = tribe.get_nrbuildings();
-	for
-		(Widelands::BuildingIndex i = 0;
-		 i < nr_buildings;
-		 ++i)
-	{
-		const Widelands::BuildingDescr & building =
-			*tribe.get_building_descr(i);
-		if
-			(!(building.is_buildable()
-			 || building.is_enhanced()
-			 || building.global()))
+	for (std::pair<Widelands::BuildingIndex, Widelands::BuildingDescr> building : tribe.buildings()) {
+		const Widelands::BuildingDescr & building_descr = building.second;
+
+		if(!(building_descr.is_buildable()
+			 || building_descr.is_enhanced()
+			 || building_descr.global())) {
 			continue;
+		}
 
 		const std::vector<Widelands::Player::BuildingStats> & vec =
-			player.get_building_statistics(i);
+			player.get_building_statistics(building.first);
 
 		//  walk all entries, add new ones if needed
 		UI::Table<uintptr_t const>::EntryRecord * te = nullptr;
 		const uint32_t table_size = m_table.size();
 		for (uint32_t l = 0; l < table_size; ++l) {
 			UI::Table<uintptr_t const>::EntryRecord & er = m_table.get_record(l);
-			if (UI::Table<uintptr_t const>::get(er) == i) {
+			if (UI::Table<uintptr_t const>::get(er) == building.first) {
 				te = &er;
 				break;
 			}
@@ -404,15 +399,15 @@ void BuildingStatisticsMenu::update() {
 
 		//  If not in list, add new one, as long as this building is enabled.
 		if (!te) {
-			if (! iplayer().player().is_building_type_allowed(i))
+			if (! iplayer().player().is_building_type_allowed(building.first))
 				continue;
-			te = &m_table.add(i);
+			te = &m_table.add(building.first);
 		}
 
 		uint32_t nr_owned   = 0;
 		uint32_t nr_build   = 0;
 		uint32_t total_prod = 0;
-		upcast(Widelands::ProductionSiteDescr const, productionsite, &building);
+		upcast(Widelands::ProductionSiteDescr const, productionsite, &building_descr);
 		for (uint32_t l = 0; l < vec.size(); ++l) {
 			if (vec[l].is_constructionsite)
 				++nr_build;
@@ -427,10 +422,10 @@ void BuildingStatisticsMenu::update() {
 		}
 
 		const bool is_selected = //  Is this entry selected?
-			m_table.has_selection() && m_table.get_selected() == i;
+			m_table.has_selection() && m_table.get_selected() == building.first;
 
 		if (is_selected) {
-			m_anim = building.get_ui_anim();
+			m_anim = building_descr.get_ui_anim();
 			m_btn[PrevOwned]       ->set_enabled(nr_owned);
 			m_btn[NextOwned]       ->set_enabled(nr_owned);
 			m_btn[PrevConstruction]->set_enabled(nr_build);
@@ -439,16 +434,16 @@ void BuildingStatisticsMenu::update() {
 
 		//  add new Table Entry
 		te->set_picture
-			(Columns::Name, building.get_icon(), building.descname());
+			(Columns::Name, building_descr.get_icon(), building_descr.descname());
 
 		{
 			char const * pic = "pics/novalue.png";
-			if (building.get_ismine()) {
+			if (building_descr.get_ismine()) {
 				pic = "pics/menu_tab_buildmine.png";
-			} else if (building.get_isport()) {
+			} else if (building_descr.get_isport()) {
 				pic = "pics/menu_tab_buildport.png";
 			}
-			else switch (building.get_size()) {
+			else switch (building_descr.get_size()) {
 			case Widelands::BaseImmovable::SMALL:
 				pic = "pics/menu_tab_buildsmall.png";
 				break;

@@ -63,7 +63,7 @@ private:
 	void read_productionsite
 		(ProductionSite         &, FileRead  &, Game &, MapObjectLoader &);
 	void read_formerbuildings_v2
-		(Building               &, FileRead  &, Game &, MapObjectLoader &);
+		(Building               &, FileRead  &, Game& game, MapObjectLoader &);
 
 	void write_constructionsite
 		(const ConstructionSite &, FileWrite &, Game &, MapObjectSaver  &);

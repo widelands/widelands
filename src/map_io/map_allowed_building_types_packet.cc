@@ -65,11 +65,11 @@ void MapAllowedBuildingTypesPacket::read
 				const TribeDescr & tribe = player->tribe();
 				//  All building types default to false in the game (not in the
 				//  editor).
-				if (game)
-					for
-						(BuildingIndex i = tribe.get_nrbuildings();
-						 0 < i;)
-						player->allow_building_type(--i, false);
+				if (game) {
+					for (std::pair<BuildingIndex, BuildingDescr> building : game->tribes().buildings()) {
+						player->allow_building_type(building.first, false);
+					}
+				}
 				try {
 					Section & s = prof.get_safe_section((boost::format("player_%u")
 																	 % static_cast<unsigned int>(p)).str());
@@ -113,11 +113,11 @@ void MapAllowedBuildingTypesPacket::write
 		Section & section = prof.create_section(section_key.c_str());
 
 		//  Write for all buildings if it is enabled.
-		BuildingIndex const nr_buildings = tribe.get_nrbuildings();
-		for (BuildingIndex b = 0; b < nr_buildings; ++b)
-			if (player->is_building_type_allowed(b))
-				section.set_bool
-					(tribe.get_building_descr(b)->name().c_str(), true);
+		for (std::pair<BuildingIndex, BuildingDescr> building : tribe.buildings()) {
+			if (player->is_building_type_allowed(building.first)) {
+				section.set_bool(building.second.name().c_str(), true);
+			}
+		}
 	}
 
 	prof.write("allowed_building_types", false, fs);

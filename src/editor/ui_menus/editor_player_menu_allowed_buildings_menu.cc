@@ -108,15 +108,11 @@ EditorPlayerMenuAllowedBuildingsMenu
 	m_forbidden.double_clicked.connect
 		(boost::bind(&EditorPlayerMenuAllowedBuildingsMenu::forbidden_double_clicked, this, _1));
 
-	const Widelands::TribeDescr & tribe = player.tribe();
-	BuildingIndex const nr_buildings = tribe.get_nrbuildings();
-	for (BuildingIndex i = 0; i < nr_buildings; ++i) {
-		const Widelands::BuildingDescr & building =
-			*tribe.get_building_descr(i);
-		if (!building.is_enhanced() && !building.is_buildable())
+	for (std::pair<BuildingIndex, Widelands::BuildingDescr> building : player.tribe().buildings()) {
+		if (!building.second.is_enhanced() && !building.second.is_buildable())
 			continue;
-		(m_player.is_building_type_allowed(i) ? m_allowed : m_forbidden).add
-			(building.descname(), i, building.get_icon());
+		(m_player.is_building_type_allowed(building.first) ? m_allowed : m_forbidden).add
+			(building.second.descname(), building.first, building.second.get_icon());
 	}
 	m_forbidden.sort();
 	m_allowed  .sort();

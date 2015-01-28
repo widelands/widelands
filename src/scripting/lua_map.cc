@@ -1808,31 +1808,23 @@ void LuaWareDescription::__unpersist(lua_State* L) {
 // So you can get something like this in the buildingdesc constructor:
 // tribe.mutable_ware_description("log")->add_producer(*this);
 int LuaWareDescription::get_consumers(lua_State * L) {
-	// NOCOM(GunChleoc): reimplement (re: comment above)
-	//const TribeDescr& tribe = get()->tribe();
-	//BuildingIndex const nr_buildings = tribe.get_nrbuildings();
-
+	EditorGameBase& egbase = get_egbase(L);
 	lua_newtable(L);
-	/*
 	int index = 1;
 
-	for (BuildingIndex i = 0; i < nr_buildings; ++i) {
-
-		const BuildingDescr & descr = *tribe.get_building_descr(i);
-
-		if (upcast(ProductionSiteDescr const, de, &descr)) {
+	for (std::pair<BuildingIndex, BuildingDescr> building : egbase.tribes().buildings()) {
+		if (upcast(ProductionSiteDescr const, de, building.second)) {
 			// inputs() returns type WareAmount = std::pair<WareIndex, uint32_t>
 			for (auto ware_amount : de->inputs()) {
 				if (std::string(get()->name()) ==
-					std::string(tribe.get_ware_descr(ware_amount.first)->name())) {
+					std::string(egbase.tribes().get_ware_descr(ware_amount.first)->name())) {
 					lua_pushint32(L, index++);
-						upcasted_map_object_descr_to_lua(L, tribe.get_building_descr(i));
+						upcasted_map_object_descr_to_lua(L, building.second);
 					lua_rawset(L, -3);
 				}
 			}
 		}
 	}
-	*/
 	return 1;
 }
 
@@ -1860,30 +1852,22 @@ int LuaWareDescription::get_icon_name(lua_State * L) {
 // So you can get something like this in the buildingdesc constructor:
 // tribe.mutable_ware_description("log")->add_producer(*this);
 int LuaWareDescription::get_producers(lua_State * L) {
-// NOCOM(GunChleoc): reimplement (re: comment above)
-	//const TribeDescr& tribe = get()->tribe();
-	//BuildingIndex const nr_buildings = tribe.get_nrbuildings();
-
+	EditorGameBase& egbase = get_egbase(L);
 	lua_newtable(L);
-	/*
 	int index = 1;
 
-	for (BuildingIndex i = 0; i < nr_buildings; ++i) {
-
-		const BuildingDescr & descr = *tribe.get_building_descr(i);
-
-		if (upcast(ProductionSiteDescr const, de, &descr)) {
+	for (std::pair<BuildingIndex, BuildingDescr> building : egbase.tribes().buildings()) {
+		if (upcast(ProductionSiteDescr const, de, building.second)) {
 			for (auto ware_index : de->output_ware_types()) {
 				if (std::string(get()->name()) ==
-					std::string(tribe.get_ware_descr(ware_index)->name())) {
+					std::string(egbase.tribes().get_ware_descr(ware_index)->name())) {
 					lua_pushint32(L, index++);
-					upcasted_map_object_descr_to_lua(L, tribe.get_building_descr(i));
+					upcasted_map_object_descr_to_lua(L, building.second);
 					lua_rawset(L, -3);
 				}
 			}
 		}
 	}
-	*/
 	return 1;
 }
 

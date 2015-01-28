@@ -113,13 +113,10 @@ void EncyclopediaWindow::ware_selected(uint32_t) {
 
 	bool found = false;
 
-	BuildingIndex const nr_buildings = tribe.get_nrbuildings();
-	for (BuildingIndex i = 0; i < nr_buildings; ++i) {
-		const BuildingDescr & descr = *tribe.get_building_descr(i);
-		if (upcast(ProductionSiteDescr const, de, &descr)) {
-
+	for (std::pair<BuildingIndex, BuildingDescr> building : tribe.buildings()) {
+		if (upcast(ProductionSiteDescr const, de, building.second)) {
 			if
-				((descr.is_buildable() || descr.is_enhanced())
+				((building.second.is_buildable() || building.second.is_enhanced())
 				 &&
 				 de->output_ware_types().count(wares.get_selected()))
 			{

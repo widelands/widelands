@@ -103,6 +103,10 @@ WareIndex Tribes::nrworkers() const {
 	return workers_.size();
 }
 
+BuildingIndex Tribes::nrbuildings() const {
+	return buildings_.size();
+}
+
 
 BuildingIndex Tribes::safe_building_index(const std::string& buildingname) const {
 	const BuildingIndex result = building_index(buildingname);

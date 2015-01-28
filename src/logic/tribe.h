@@ -102,10 +102,11 @@ struct TribeDescr {
 	}
 	WareIndex safe_worker_index(const std::string & workername) const;
 
-	// NOCOM(GunChleoc): Look at the usage, ranged-bases for loops now?
-	BuildingIndex get_nrbuildings() const {
-		return buildings_.size();
+	bool has_building(const BuildingIndex& index) const {
+		return buildings_.count(index) == 1;
 	}
+	const std::map<BuildingIndex, BuildingDescr> buildings() { return buildings_;}
+
 	BuildingIndex safe_building_index(char const * name) const;
 	BuildingDescr const * get_building_descr(const BuildingIndex& index) const {
 		return buildings_.at(index);

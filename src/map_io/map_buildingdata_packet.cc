@@ -233,10 +233,9 @@ void MapBuildingdataPacket::read
 }
 
 void MapBuildingdataPacket::read_formerbuildings_v2
-	(Building& b, FileRead&, Game&, MapObjectLoader&)
+	(Building& b, FileRead&, Game& game, MapObjectLoader&)
 {
-	const TribeDescr & t = b.descr().tribe();
-	BuildingIndex b_idx = t.building_index(b.descr().name());
+	BuildingIndex b_idx = game.tribes().building_index(b.descr().name());
 	if (is_a(ProductionSite, &b)) {
 		assert(b.m_old_buildings.empty());
 		b.m_old_buildings.push_back(b_idx);
@@ -257,14 +256,13 @@ void MapBuildingdataPacket::read_formerbuildings_v2
 	// iterate through all buildings to find first predecessor
 	for (;;) {
 		BuildingIndex former_idx = b.m_old_buildings.front();
-		const BuildingDescr * oldest = t.get_building_descr(former_idx);
+		const BuildingDescr * oldest = game.tribes().get_building_descr(former_idx);
 		if (!oldest->is_enhanced()) {
 			break;
 		}
-		for (BuildingIndex i = 0; i < t.get_nrbuildings(); ++i) {
-			BuildingDescr const * ob = t.get_building_descr(i);
-			if (ob->enhancement() == former_idx) {
-				b.m_old_buildings.insert(b.m_old_buildings.begin(), i);
+		for (std::pair<BuildingIndex, BuildingDescr> building : game.tribes().buildings()) {
+			if (building.second.enhancement() == former_idx) {
+				b.m_old_buildings.insert(b.m_old_buildings.begin(), building.first);
 				break;
 			}
 		}

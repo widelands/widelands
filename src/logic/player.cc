@@ -125,14 +125,9 @@ void find_former_buildings
 		if (!oldest->is_enhanced()) {
 			break;
 		}
-		for
-			(Widelands::BuildingIndex i = 0;
-			 i < tribe_descr.get_nrbuildings();
-			 ++i)
-		{
-			const Widelands::BuildingDescr* ob = tribe_descr.get_building_descr(i);
-			if (ob->enhancement() == oldest_idx) {
-				former_buildings->insert(former_buildings->begin(), i);
+		for (std::pair<BuildingIndex, BuildingDescr> building : tribe_descr.buildings()) {
+			if (building.second.enhancement() == oldest_idx) {
+				former_buildings->insert(former_buildings->begin(), building.first);
 				break;
 			}
 		}
@@ -160,8 +155,8 @@ Player::Player
 	m_civil_blds_lost    (0),
 	m_civil_blds_defeated(0),
 	m_fields            (nullptr),
-	m_allowed_worker_types  (tribe_descr.get_nrworkers  (), true),
-	m_allowed_building_types(tribe_descr.get_nrbuildings(), true),
+	m_allowed_worker_types  (the_egbase.tribes().nrworkers(), true),
+	m_allowed_building_types(the_egbase.tribes().nrbuildings(), true),
 	m_ai(""),
 	m_current_produced_statistics(tribe_descr.get_nrwares()), // NOCOM(GunChleoc): All tribes' wares or just the current tribe?
 	m_current_consumed_statistics(tribe_descr.get_nrwares()),
@@ -547,13 +542,15 @@ Building * Player::build
 	int32_t buildcaps;
 
 	// Validate building type
-	if (idx >= tribe().get_nrbuildings())
+	if (!tribe().has_building(idx)) {
 		return nullptr;
-	const BuildingDescr & descr = *tribe().get_building_descr(idx);
+	}
 
-	if (!descr.is_buildable())
+	const BuildingDescr & descr = egbase().tribes().get_building_descr(idx);
+
+	if (!descr.is_buildable()) {
 		return nullptr;
-
+	}
 
 	// Validate build position
 	const Map & map = egbase().map();
@@ -1251,7 +1248,8 @@ void Player::update_building_statistics
 		constructionsite ?
 		constructionsite->building().name() : building.descr().name();
 
-	BuildingIndex const nr_buildings = tribe().get_nrbuildings();
+	// NOCOM(GunChleoc): Building statistic should show the tribe's buildings + conquered military buildings.
+	BuildingIndex const nr_buildings = egbase.tribes().nrbuildings();
 
 	// Get the valid vector for this
 	if (m_building_stats.size() < nr_buildings)
