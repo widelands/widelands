@@ -39,7 +39,6 @@ public:
 	// Returns the (singleton) instance of this class.
 	static FillRectProgram& instance();
 
-	// NOCOM(#sirver): kill method?
 	// Fills a solid rect in 'color'. If blend_mode is BlendMode::UseAlpha, this
 	// will brighten the rect, if it is BlendMode::Subtract it darkens it.
 	void draw(const FloatRect& destination_rect,

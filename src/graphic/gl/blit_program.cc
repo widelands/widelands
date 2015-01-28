@@ -117,7 +117,6 @@ struct DrawBatch {
 
 class BlitProgram {
 public:
-	// NOCOM(#sirver): document these.
 	struct Arguments {
 		FloatRect destination_rect;
 		float z_value;

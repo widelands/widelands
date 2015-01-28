@@ -55,11 +55,14 @@ public:
 	// Returns true if the given hash is stored in the cache.
 	bool has(const std::string& hash) const;
 
-	// NOCOM(#sirver): document
+	// For debug only: Takes all images that are in the ImageCache right now and
+	// puts them into one huge texture atlas.
 	void compactify();
 
 private:
-	// NOCOM(#sirver): document
+	// We return a wrapped Image so that we can swap out the pointer to the
+	// image under our user. This can happen when we move an Image from a stand
+	// alone texture into being a subrect of a texture atlas.
 	class ProxyImage : public Image {
 	public:
 		ProxyImage(std::unique_ptr<const Image> image);

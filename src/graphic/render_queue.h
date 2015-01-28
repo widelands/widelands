@@ -39,8 +39,6 @@ class RoadProgram;
 class Surface;
 class TerrainProgram;
 
-// NOCOM(#sirver): this should be a base class. Figure out how to make it widelands agnostic.
-
 // NOCOM(#sirver): document
 class RenderQueue {
 public:

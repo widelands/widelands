@@ -141,7 +141,6 @@ RenderQueue& RenderQueue::instance() {
 	return render_queue;
 }
 
-// NOCOM(#sirver): take individual parameters?
 void RenderQueue::enqueue(const Item& given_item) {
 	Item* item;
 	uint32_t extra_value = 0;
