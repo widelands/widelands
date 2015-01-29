@@ -28,9 +28,11 @@
 
 #include "base/i18n.h"
 #include "base/macros.h"
+#include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "io/fileread.h"
+#include "io/filesystem/filesystem.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/carrier.h"
@@ -187,8 +189,6 @@ TribeDescr::TribeDescr
 				tribe_s.get_string("descr"); // long description
 				m_bob_vision_range = tribe_s.get_int("bob_vision_range");
 				m_carrier2         = tribe_s.get_string("carrier2");
-				m_road_busy         = tribe_s.get_string("road_busy");
-				m_road_normal         = tribe_s.get_string("road_normal");
 
 				/// Load and parse ware and worker categorization
 #define PARSE_ORDER_INFORMATION(w) /* w is ware or worker */ \
@@ -235,6 +235,16 @@ TribeDescr::TribeDescr
 
 				PARSE_ORDER_INFORMATION(ware);
 				PARSE_ORDER_INFORMATION(worker);
+			}
+			Section road_s = root_conf.get_safe_section("roads"); {
+				m_road_filenames.emplace(Widelands::RoadTextureType::kBusy, road_s.get_safe_string("busy"));
+				m_road_filenames.emplace(Widelands::RoadTextureType::kNormal, road_s.get_safe_string("normal"));
+				for (std::pair<Widelands::RoadTextureType, std::string> road : m_road_filenames) {
+					if (!g_fs->file_exists(road.second)) {
+						throw new GameDataError("File %s for roadtype %d in tribe %s does not exist",
+														road.second.c_str(), road.first, m_name.c_str());
+					}
+				}
 			}
 
 			m_frontier_animation_id =

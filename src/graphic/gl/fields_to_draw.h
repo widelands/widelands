@@ -21,6 +21,7 @@
 #define WL_GRAPHIC_GL_FIELDS_TO_DRAW_H
 
 #include <cstddef>
+#include <string>
 #include <vector>
 
 #include <stdint.h>

@@ -41,6 +41,11 @@ enum RoadType {
 	kSouthWest = 4,
 };
 
+enum class RoadTextureType {
+	kNormal,
+	kBusy,
+};
+
 }
 
 #endif  // end of include guard: WL_LOGIC_ROADTYPE_H

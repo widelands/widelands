@@ -29,6 +29,7 @@
 #include "logic/building.h"
 #include "logic/description_maintainer.h"
 #include "logic/immovable.h"
+#include "logic/roadtype.h"
 #include "logic/tribe_basic_info.h"
 #include "logic/ware_descr.h"
 #include "logic/worker.h"
@@ -63,8 +64,7 @@ struct TribeDescr {
 
 
 	const std::string& name() const {return m_name;}
-	const std::string& road_busy() const {return m_road_busy;}
-	const std::string& road_normal() const {return m_road_normal;}
+	const std::string& road_filename(Widelands::RoadTextureType roadtype) const {return m_road_filenames.at(roadtype);}
 
 	WareIndex get_nrworkers() const {return m_workers.get_nitems();}
 	WorkerDescr const * get_worker_descr(const WareIndex& index) const {
@@ -177,8 +177,7 @@ struct TribeDescr {
 private:
 	const std::string m_name;
 
-	std::string m_road_busy;
-	std::string m_road_normal;
+	std::map<Widelands::RoadTextureType, std::string> m_road_filenames; // Key, filename for road texture
 
 	uint32_t m_frontier_animation_id;
 	uint32_t m_flag_animation_id;

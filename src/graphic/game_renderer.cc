@@ -212,8 +212,9 @@ void GameRenderer::draw(RenderTarget& dst,
 			PlayerNumber owner_number = fcoords.field->get_owned_by();
 			if (owner_number > 0) {
 				const Player& owner = egbase.player(owner_number);
-				f.busy_road_filename = owner.tribe().road_busy();
-				f.normal_road_filename = owner.tribe().road_normal();
+				// NOCOM(GunChleoc): We want a texture atlas instead
+				f.busy_road_filename = owner.tribe().road_filename(Widelands::RoadTextureType::kBusy);
+				f.normal_road_filename = owner.tribe().road_filename(Widelands::RoadTextureType::kNormal);
 			}
 
 			f.roads = field_roads(fcoords, map, player);
