@@ -151,7 +151,7 @@ void DitherProgram::maybe_add_dithering_triangle(
 	if (terrains.get_unmutable(my_terrain).dither_layer() <
 	    other_terrain_description.dither_layer()) {
 		const FloatPoint texture_offset =
-		   other_terrain_description.get_texture(gametime).texture_coordinates().top_left();
+		   other_terrain_description.get_texture(gametime).texture_coordinates().origin();
 		add_vertex(fields_to_draw.at(idx1), 0, texture_offset);
 		add_vertex(fields_to_draw.at(idx2), 1, texture_offset);
 		add_vertex(fields_to_draw.at(idx3), 2, texture_offset);

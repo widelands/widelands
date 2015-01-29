@@ -97,7 +97,7 @@ bool RenderTarget::enter_window
 			*prevofs = m_offset;
 
 		// Apply the changes
-		m_offset = rc.top_left() - (newrect.top_left() - m_rect.top_left() - m_offset);
+		m_offset = rc.origin() - (newrect.origin() - m_rect.origin() - m_offset);
 		m_rect = newrect;
 
 		return true;
@@ -343,7 +343,7 @@ void RenderTarget::drawanimrect
 	const Animation& anim = g_gr->animations().get_animation(animation);
 
 	Point destination_point = dst - anim.hotspot();
-	destination_point += gsrcrc.top_left();
+	destination_point += gsrcrc.origin();
 
 	Rect srcrc(gsrcrc);
 
@@ -448,6 +448,6 @@ bool RenderTarget::to_surface_geometry(Point* dst, Rect* srcrc) const
 		srcrc->h = m_rect.h - dst->y;
 	}
 
-	*dst += m_rect.top_left();
+	*dst += m_rect.origin();
 	return true;
 }

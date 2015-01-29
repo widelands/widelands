@@ -36,13 +36,13 @@ struct GenericRect {
 	   : GenericRect(T(p.x), T(p.y), width, height) {
 	}
 
-	/// The top left point of this rectangle.
-	GenericPoint<T> top_left() const {
+	/// The Point (x, y).
+	GenericPoint<T> origin() const {
 		return GenericPoint<T>(x, y);
 	}
 
-	/// The bottom right point of this rectangle.
-	GenericPoint<T> bottom_right() const {
+	/// The point (x + w, y + h).
+	GenericPoint<T> opposite_of_origin() const {
 		return GenericPoint<T>(x + w, y + h);
 	}
 

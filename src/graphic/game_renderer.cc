@@ -159,7 +159,7 @@ void GameRenderer::draw(RenderTarget& dst,
 		return;
 
 	const Rect& bounding_rect = dst.get_rect();
-	const Point surface_offset = bounding_rect.top_left() + dst.get_offset() - view_offset;
+	const Point surface_offset = bounding_rect.origin() + dst.get_offset() - view_offset;
 	const int surface_width = surface->width();
 	const int surface_height = surface->height();
 

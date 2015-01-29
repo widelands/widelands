@@ -150,7 +150,7 @@ std::unique_ptr<Texture> TextureAtlas::pack(std::vector<std::unique_ptr<Texture>
 
 		textures->emplace_back(new Texture(
 		   packed_texture->get_gl_texture(),
-		   Rect(block.node->r.top_left(), block.texture->width(), block.texture->height()),
+		   Rect(block.node->r.origin(), block.texture->width(), block.texture->height()),
 		   root->r.w,
 		   root->r.h));
 	}
