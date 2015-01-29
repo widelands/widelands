@@ -138,6 +138,9 @@ public:
 	/// Load tribes' graphics
 	void load_graphics();
 
+	/// Complete the Description objects' information with data from other Description objects.
+	void post_load();
+
 private:
 	EditorGameBase& egbase_;
 	std::unique_ptr<DescriptionMaintainer<BuildingDescr>> buildings_;

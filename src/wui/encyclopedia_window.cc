@@ -112,24 +112,13 @@ void EncyclopediaWindow::ware_selected(uint32_t) {
 	prodSites.clear();
 	condTable.clear();
 
-	bool found = false;
-
-	for (const BuildingIndex& building_index : tribe.buildings()) {
-		const BuildingDescr& building_descr = tribe.egbase().tribes().get_building_descr(building_index);
-		if (upcast(ProductionSiteDescr const, de, &building_descr)) {
-			if
-				((building_descr.is_buildable() || building_descr.is_enhanced())
-				 &&
-				 de->output_ware_types().count(wares.get_selected()))
-			{
-				prodSites.add(de->descname(), building_index, de->get_icon());
-				found = true;
-			}
+	if (selectedWare->consumers() > 0) {
+		for (const BuildingIndex& building_index : selectedWare->consumers()) {
+			const BuildingDescr& building_descr = tribe.egbase().tribes().get_building_descr(building_index);
+			prodSites.add(building_descr.descname(), building_index, building_descr.get_icon());
 		}
-	}
-	if (found)
 		prodSites.select(0);
-
+	}
 }
 
 void EncyclopediaWindow::prod_site_selected(uint32_t) {

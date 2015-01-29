@@ -141,6 +141,7 @@ Tribes* EditorGameBase::mutable_tribes() {
 
 		try {
 			lua_->run_script("tribes/init.lua");
+			tribes_->post_load();
 		}
 		catch (const WException& e) {
 			log("Could not read tribe information: %s", e.what());

@@ -112,4 +112,21 @@ void WareDescr::set_has_demand_check(const std::string& tribename) {
 	}
 }
 
+void WareDescr::add_consumer(const BuildingIndex& building_index) {
+	consumers_.emplace(building_index);
+}
+
+void WareDescr::add_producer(const BuildingIndex& building_index) {
+	producers_.emplace(building_index);
+}
+
+const std::set<BuildingIndex>& WareDescr::consumers() {
+	return consumers_;
+}
+
+const std::set<BuildingIndex>& WareDescr::producers() {
+	return producers_;
+}
+
+
 }

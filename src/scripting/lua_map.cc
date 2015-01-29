@@ -1797,30 +1797,14 @@ void LuaWareDescription::__unpersist(lua_State* L) {
 		(RO) An array with :class:`LuaBuildingDescription` with buildings that
 		need this ware for their production.
 */
-// TODO(GunChleoc): move the calculation somewhere else.
-// You get the (mutable) wares_description container from the tribe_description
-// into the building constructor and add a member (mutable_ware_description(), either in TribeDescr
-// or if there is a container with every ware in there than there).
-// So you can get something like this in the buildingdesc constructor:
-// tribe.mutable_ware_description("log")->add_producer(*this);
 int LuaWareDescription::get_consumers(lua_State * L) {
-	EditorGameBase& egbase = get_egbase(L);
 	lua_newtable(L);
 	int index = 1;
-
-	for (const BuildingIndex& building_index : egbase.tribes().buildings()) {
-		const BuildingDescr& building_descr = egbase.tribes().get_building_descr(building_index);
-		if (upcast(ProductionSiteDescr const, de, &building_descr)) {
-			// inputs() returns type WareAmount = std::pair<WareIndex, uint32_t>
-			for (auto ware_amount : de->inputs()) {
-				if (std::string(get()->name()) ==
-					std::string(egbase.tribes().get_ware_descr(ware_amount.first)->name())) {
-					lua_pushint32(L, index++);
-						upcasted_map_object_descr_to_lua(L, building_descr);
-					lua_rawset(L, -3);
-				}
-			}
-		}
+	for (const BuildingIndex& building_index : get()->consumers()) {
+		const BuildingDescr& building_descr = get_egbase(L).tribes().get_building_descr(building_index);
+		lua_pushint32(L, index++);
+		upcasted_map_object_descr_to_lua(L, building_descr);
+		lua_rawset(L, -3);
 	}
 	return 1;
 }
@@ -1842,29 +1826,14 @@ int LuaWareDescription::get_icon_name(lua_State * L) {
 		(RO) An array with :class:`LuaBuildingDescription` with buildings that
 		can procude this ware.
 */
-// TODO(GunChleoc): move the calculation somewhere else.
-// You get the (mutable) wares_description container from the tribe_description
-// into the building constructor and add a member (mutable_ware_description(), either in TribeDescr
-// or if there is a container with every ware in there than there).
-// So you can get something like this in the buildingdesc constructor:
-// tribe.mutable_ware_description("log")->add_producer(*this);
 int LuaWareDescription::get_producers(lua_State * L) {
-	EditorGameBase& egbase = get_egbase(L);
 	lua_newtable(L);
 	int index = 1;
-
-	for (const BuildingIndex& building_index : egbase.tribes().buildings()) {
-		const BuildingDescr& building_descr = egbase.tribes().get_building_descr(building_index);
-		if (upcast(ProductionSiteDescr const, de, &building_descr)) {
-			for (auto ware_index : de->output_ware_types()) {
-				if (std::string(get()->name()) ==
-					std::string(egbase.tribes().get_ware_descr(ware_index)->name())) {
-					lua_pushint32(L, index++);
-					upcasted_map_object_descr_to_lua(L, building_descr);
-					lua_rawset(L, -3);
-				}
-			}
-		}
+	for (const BuildingIndex& building_index : get()->producers()) {
+		const BuildingDescr& building_descr = get_egbase(L).tribes().get_building_descr(building_index);
+		lua_pushint32(L, index++);
+		upcasted_map_object_descr_to_lua(L, building_descr);
+		lua_rawset(L, -3);
 	}
 	return 1;
 }

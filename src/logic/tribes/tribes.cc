@@ -215,4 +215,19 @@ void Tribes::load_graphics()
 	}
 }
 
+void Tribes::post_load() {
+	for (BuildingIndex i = 0; i < buildings_->get_nitems(); ++i) {
+		const BuildingDescr& building_descr = buildings_->get(i);
+		// Add consumers and producers to wares.
+		if (upcast(ProductionSiteDescr const, de, &building_descr)) {
+			for (const BillOfMaterials& ware_amount : de->inputs()) {
+				get_ware_descr(ware_amount.first)->add_consumer(i);
+			}
+			for (const WareIndex& ware_index : de->output_ware_types()) {
+				get_ware_descr(ware_index)->add_producer(i);
+			}
+		}
+	}
+}
+
 } // namespace Widelands

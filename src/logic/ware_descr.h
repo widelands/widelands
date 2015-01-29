@@ -82,6 +82,16 @@ public:
 	/// configuration for the 'tribename', sets the default value to 1.
 	void set_has_demand_check(const std::string& tribename);
 
+	// Add a building to the list of consumers
+	void add_consumer(const BuildingIndex& building_index);
+	// Add a building to the list of producers
+	void add_producer(const BuildingIndex& building_index);
+
+	// The buildings that consume this ware
+	const std::set<BuildingIndex>& consumers();
+	// The buildings that produce this ware
+	const std::set<BuildingIndex>& producers();
+
 private:
 	const std::string generic_name_;
 	// tribename, quantity. No default.
@@ -90,6 +100,9 @@ private:
 	std::unordered_map<std::string, int> preciousnesses_;
 	// tribename or "default", helptext
 	std::unordered_map<std::string, std::string> helptexts_; ///< Long descriptive texts
+
+	std::set<BuildingIndex> consumers_; // Buildings that consume this ware
+	std::set<BuildingIndex> producers_; // Buildings that produce this ware
 
 	std::string icon_fname_; ///< Filename of ware's main picture
 	const Image* icon_;       ///< Index of ware's picture in picture stack
