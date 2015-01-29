@@ -636,11 +636,11 @@ void Game::cleanup_for_load()
 
 	EditorGameBase::cleanup_for_load();
 
-	for (TribeDescr* tribe : tribes_) {
+	for (TribeDescr* tribe : tribe_descriptions_) {
 		delete tribe;
 	}
 
-	tribes_.clear();
+	tribe_descriptions_.clear();
 	cmdqueue().flush();
 
 	// Statistics

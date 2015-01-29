@@ -110,9 +110,6 @@ struct TribeDescr {
 	void set_ware_type_has_demand_check(const WareIndex& index, const std::string& tribename) const;
 	void set_worker_type_has_demand_check(const WareIndex& index) const;
 
-	void postload(EditorGameBase&);
-	void load_graphics();
-
 	struct Initialization {
 		std::string script;
 		std::string descname;

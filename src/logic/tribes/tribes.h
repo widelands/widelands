@@ -135,6 +135,9 @@ public:
 	void set_ware_type_has_demand_check(WareIndex ware_index, const std::string& tribename);
 	void set_worker_type_has_demand_check(WareIndex worker_index, const std::string& tribename);
 
+	/// Load tribes' graphics
+	void load_graphics();
+
 private:
 	EditorGameBase& egbase_;
 	std::unique_ptr<DescriptionMaintainer<BuildingDescr>> buildings_;

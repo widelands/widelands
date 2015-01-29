@@ -84,7 +84,7 @@ EditorGameBase::~EditorGameBase() {
 	delete map_;
 	delete player_manager_.release();
 
-	for (TribeDescr* tribe_descr : tribes_) {
+	for (TribeDescr* tribe_descr : tribe_descriptions_) {
 		delete tribe_descr;
 	}
 	if (g_gr) { // dedicated does not use the sound_handler
@@ -132,12 +132,12 @@ const Tribes& EditorGameBase::tribes() const {
 }
 
 Tribes* EditorGameBase::mutable_tribes() {
-	if (!tribe_) {
+	if (!tribes_) {
 		// Lazy initialization of Tribes. We need to create the pointer to the
 		// tribe immediately though, because the lua scripts need to have access
 		// to tribe through this method already.
 		ScopedTimer timer("Loading the tribe took %ums");
-		tribe_.reset(new Tribes(*this));
+		tribes_.reset(new Tribes(*this));
 
 		try {
 			lua_->run_script("tribes/init.lua");
@@ -147,7 +147,7 @@ Tribes* EditorGameBase::mutable_tribes() {
 			throw;
 		}
 	}
-	return tribe_.get();
+	return tribes_.get();
 }
 
 
@@ -179,7 +179,7 @@ Player * EditorGameBase::add_player
 const TribeDescr & EditorGameBase::manually_load_tribe
 	(const std::string & tribe)
 {
-	for (const TribeDescr* tribe_descr : tribes_) {
+	for (const TribeDescr* tribe_descr : tribe_descriptions_) {
 		if (tribe_descr->name() == tribe) {
 			return *tribe_descr;
 		}
@@ -193,7 +193,7 @@ const TribeDescr & EditorGameBase::manually_load_tribe
 		//resize the configuration of our wares if they won't fit in the current window (12 = info label size)
 		int number = (g_gr->get_yres() - 270) / (WARE_MENU_PIC_HEIGHT + WARE_MENU_PIC_PAD_Y + 12);
 		result.resize_ware_orders(number);
-		tribes_.push_back(&result);
+		tribe_descriptions_.push_back(&result);
 	} catch (LuaError& e) {
 		throw GameDataError("Unable to manually load tribe from %s: %s", scriptfile.c_str(), e.what());
 	}
@@ -215,7 +215,7 @@ Player& EditorGameBase::player(const int32_t n) const
 /// Returns a tribe description from the internally loaded list
 const TribeDescr * EditorGameBase::get_tribe(const std::string& tribename) const
 {
-	for (const TribeDescr* tribe : tribes_) {
+	for (const TribeDescr* tribe : tribe_descriptions_) {
 		if (tribe->name() == tribename) {
 			return tribe;
 		}
@@ -278,10 +278,10 @@ void EditorGameBase::postload()
 
 	// Postload tribes
 	id = 0;
-	while (id < tribes_.size()) {
+	while (id < tribe_descriptions_.size()) {
 		for (pid = 1; pid <= MAX_PLAYERS; ++pid)
 			if (const Player * const plr = get_player(pid))
-				if (&plr->tribe() == tribes_[id])
+				if (&plr->tribe() == tribe_descriptions_[id])
 					break;
 
 		if
@@ -290,11 +290,11 @@ void EditorGameBase::postload()
 			 !dynamic_cast<const Game *>(this))
 		{ // if this is editor, load the tribe anyways
 			// the tribe is used, postload it
-			tribes_[id]->postload(*this);
+			tribe_descriptions_[id]->postload(*this);
 			++id;
 		} else {
-			delete tribes_[id]; // the tribe is no longer used, remove it
-			tribes_.erase(tribes_.begin() + id);
+			delete tribe_descriptions_[id]; // the tribe is no longer used, remove it
+			tribe_descriptions_.erase(tribe_descriptions_.begin() + id);
 		}
 	}
 
@@ -309,12 +309,8 @@ void EditorGameBase::postload()
  */
 void EditorGameBase::load_graphics(UI::ProgressWindow & loader_ui)
 {
-	loader_ui.step(_("Loading world data"));
-
-	for (TribeDescr* tribe_descr : tribes_) {
-		loader_ui.stepf(_("Loading tribes"));
-		tribe_descr->load_graphics();
-	}
+	loader_ui.step(_("Loading tribes' graphics"));
+	tribes_.load_graphics();
 
 	// TODO(unknown): load player graphics? (maybe)
 }

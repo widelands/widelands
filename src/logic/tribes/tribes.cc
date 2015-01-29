@@ -199,4 +199,20 @@ void Tribes::set_worker_type_has_demand_check(WareIndex worker_index, const std:
 	workers_.get(worker_index)->set_has_demand_check(tribename);
 }
 
+
+void Tribes::load_graphics()
+{
+	for (const WorkerDescr& worker : workers_) {
+		worker.load_graphics();
+	}
+
+	for (const WareDescr& ware : wares_) {
+		ware.load_graphics();
+	}
+
+	for (const BuildingDescr& building: buildings_) {
+		building.load_graphics();
+	}
+}
+
 } // namespace Widelands

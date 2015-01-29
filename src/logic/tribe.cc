@@ -213,37 +213,6 @@ TribeDescr::TribeDescr
 
 
 /*
-===============
-Load all logic data
-===============
-*/
-void TribeDescr::postload(EditorGameBase &) {
-	// TODO(unknown): move more loads to postload
-}
-
-/*
-===============
-Load tribe graphics
-===============
-*/
-// NOCOM(GunChleoc): This should be done in Tribes - more efficient. We get duplicates here.
-void TribeDescr::load_graphics()
-{
-	for (const WareIndex& worker_index : workers_) {
-		egbase_.tribes().get_worker_descr(worker_index).load_graphics();
-	}
-
-	for (const WareIndex& ware_index : wares_) {
-		egbase_.tribes().get_ware_descr(ware_index).load_graphics();
-	}
-
-	for (const BuildingIndex& building_index: buildings_) {
-		egbase_.tribes().get_building_descr(building_index).load_graphics();
-	}
-}
-
-
-/*
  * does this tribe exist?
  */
 bool TribeDescr::exists_tribe

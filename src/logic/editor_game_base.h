@@ -223,7 +223,7 @@ public:
 
 protected:
 	using TribeVector = std::vector<TribeDescr*>;
-	TribeVector tribes_;
+	TribeVector tribe_descriptions_;
 
 private:
 	/// \param preferred_player
@@ -271,7 +271,7 @@ private:
 	std::unique_ptr<PlayersManager> player_manager_;
 
 	std::unique_ptr<World> world_;
-	std::unique_ptr<Tribes> tribe_;
+	std::unique_ptr<Tribes> tribes_;
 	InteractiveBase* ibase_;
 	Map* map_;
 
