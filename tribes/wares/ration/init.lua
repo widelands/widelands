@@ -12,7 +12,7 @@ tribes:new_ware_type{
 	},
    preciousness = {
 		barbarians = 5,
-		empire = 5
+		empire = 4
 	},
    helptext = {
 		-- TRANSLATORS: Helptext for a ware: Ration

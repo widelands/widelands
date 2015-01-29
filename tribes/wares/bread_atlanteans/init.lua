@@ -10,7 +10,7 @@ tribes:new_ware_type{
 		atlanteans = 20
 	},
    preciousness = {
-		atlanteans = 2
+		atlanteans = 5
 	},
    helptext = {
 		-- TRANSLATORS: Helptext for a ware: Bread

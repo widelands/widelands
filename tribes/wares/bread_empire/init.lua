@@ -10,7 +10,7 @@ tribes:new_ware_type{
 		empire = 20
 	},
    preciousness = {
-		empire = 4
+		empire = 5
 	},
    helptext = {
 		-- TRANSLATORS: Helptext for a ware: Bread
