@@ -377,9 +377,7 @@ void BuildingStatisticsMenu::update() {
 	for (const BuildingIndex& building_index : tribe.buildings()) {
 		const Widelands::BuildingDescr& building_descr = player.egbase().tribes().get_building_descr(building_index);
 
-		if(!(building_descr.is_buildable()
-			 || building_descr.is_enhanced()
-			 || building_descr.global())) {
+		if(!(building_descr.is_buildable() || building_descr.is_enhanced())) {
 			continue;
 		}
 

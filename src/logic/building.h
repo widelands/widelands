@@ -78,7 +78,6 @@ public:
 	bool is_buildable   () const {return m_buildable;}
 	bool is_destructible() const {return m_destructible;}
 	bool is_enhanced    () const {return m_enhanced_building;}
-	bool global() const {return m_global;}
 
 	/**
 	 * The build cost for direct construction
@@ -166,7 +165,6 @@ private:
 	BuildingIndex  m_enhanced_from; // The building this building was enhanced from, or INVALID_INDEX
 	bool          m_enhanced_building; // if it is one, it is bulldozable
 	BuildingHints m_hints;             // hints (knowledge) for computer players
-	bool          m_global;            // whether this is a "global" building
 	const HelpTexts helptexts_;
 	std::string   m_helptext_script;
 

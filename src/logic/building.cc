@@ -60,7 +60,6 @@ BuildingDescr::BuildingDescr
 	m_port          (false),
 	m_enhanced_from (INVALID_INDEX),
 	m_hints         (table.get_table("aihints")),
-	m_global        (false),
 	m_vision_range  (0)
 {
 	try {
@@ -126,7 +125,6 @@ BuildingDescr::BuildingDescr
 	m_enhanced_building = table.has_key("enhanced_building") ? table.get_bool("enhanced_building") : false;
 
 	// NOCOM(GunChleoc): Deal with dirname and animations
-	m_global = directory.find("global/") < directory.size();
 	if (m_buildable || m_enhanced_building) {
 		//  get build icon
 		m_icon_fname  = directory;
@@ -162,11 +160,6 @@ BuildingDescr::BuildingDescr
 						 "and \"return_on_dismantle_on_enhanced\": %s", e.what());
 			}
 		}
-	} else if (m_global) {
-		// NOCOM(GunChleoc): Deal with dirname and animations
-		//  get build icon for global buildings (for statistics window)
-		m_icon_fname  = directory;
-		m_icon_fname += "/menu.png";
 	}
 
 	LuaTable items_table = table.get_table("animations");
