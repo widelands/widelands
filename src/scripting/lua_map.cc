@@ -1132,6 +1132,7 @@ const PropertyType<LuaBuildingDescription> LuaBuildingDescription::Properties[] 
 	PROP_RO(LuaBuildingDescription, conquers),
 	PROP_RO(LuaBuildingDescription, destructible),
 	PROP_RO(LuaBuildingDescription, enhanced),
+	PROP_RO(LuaBuildingDescription, enhanced_from),
 	PROP_RO(LuaBuildingDescription, enhancement_cost),
 	PROP_RO(LuaBuildingDescription, enhancement),
 	PROP_RO(LuaBuildingDescription, helptexts),
@@ -1226,6 +1227,20 @@ int LuaBuildingDescription::get_destructible(lua_State * L) {
 int LuaBuildingDescription::get_enhanced(lua_State * L) {
 	lua_pushboolean(L, get()->is_enhanced());
 	return 1;
+}
+
+/* RST
+	.. attribute:: enhanced_from
+
+			(RO) returns the building that this was enhanced from, or nil if this isn't an enhanced building.
+*/
+int LuaBuildingDescription::get_enhanced_from(lua_State * L) {
+
+	if (!get()->is_enhanced()) {
+		return 0;
+	}
+	const BuildingIndex& enhanced_from = get()->enhanced_from();
+	return upcasted_map_object_descr_to_lua(L, get()->tribe().get_building_descr(enhanced_from));
 }
 
 

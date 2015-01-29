@@ -58,6 +58,7 @@ BuildingDescr::BuildingDescr
 	m_size          (BaseImmovable::SMALL),
 	m_mine          (false),
 	m_port          (false),
+	m_enhanced_from (INVALID_INDEX),
 	m_hints         (table.get_table("aihints")),
 	m_global        (false),
 	m_vision_range  (0)

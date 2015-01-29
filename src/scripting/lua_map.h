@@ -166,6 +166,7 @@ public:
 	int get_conquers(lua_State *);
 	int get_destructible(lua_State *);
 	int get_enhanced(lua_State *);
+	int get_enhanced_from(lua_State *);
 	int get_enhancement_cost(lua_State *);
 	int get_enhancement(lua_State *);
 	int get_helptexts(lua_State*);

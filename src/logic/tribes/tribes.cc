@@ -217,7 +217,7 @@ void Tribes::load_graphics()
 
 void Tribes::post_load() {
 	for (BuildingIndex i = 0; i < buildings_->get_nitems(); ++i) {
-		const BuildingDescr& building_descr = buildings_->get(i);
+		const BuildingDescr& building_descr = get_building_descr(i);
 		// Add consumers and producers to wares.
 		if (upcast(ProductionSiteDescr const, de, &building_descr)) {
 			for (const BillOfMaterials& ware_amount : de->inputs()) {
@@ -226,6 +226,11 @@ void Tribes::post_load() {
 			for (const WareIndex& ware_index : de->output_ware_types()) {
 				get_ware_descr(ware_index)->add_producer(i);
 			}
+		}
+		// Register which buildings buildings can have been enhanced from
+		const BuildingIndex& enhancement = building_descr.enhancement();
+		if(building_exists(enhancement)) {
+			get_building_descr(enhancement)->set_enhanced_from(i);
 		}
 	}
 }
