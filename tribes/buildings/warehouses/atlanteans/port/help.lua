@@ -4,19 +4,7 @@ set_textdomain("tribes")
 include "tribes/scripting/format_help.lua"
 
 return {
-	func = function(building_description)
-	return
-
-		--General Section
-		building_help_general_string(building_description) ..
-
-		--Dependencies
-		-- TODO(GunChleoc) expedition costs here?
-
-		--Building Section
-		building_help_building_section(building_description) ..
-
-		--Production Section
-		building_help_production_section()
-	end
+   func = function(building_description)
+		return building_help("atlanteans", building_description)
+   end
 }

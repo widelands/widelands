@@ -5,12 +5,6 @@ include "tribes/scripting/format_help.lua"
 
 return {
    func = function(building_description)
-	return
-
-	--General Section
-	building_help_general_string(building_description) ..
-
-	--Building Section
-	building_help_building_section(building_description, "atlanteans_tower", {"atlanteans_tower"})
+		return building_help("atlanteans", building_description)
    end
 }

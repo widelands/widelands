@@ -463,19 +463,14 @@ end
 
 -- RST
 --
--- .. function:: building_help_building_section(building_description[, enhanced_from, former_buildings])
+-- .. function:: building_help_building_section(building_description)
 --
 --    Formats the "Building" section in the building help: Enhancing info, costs and space required
 --
 --    :arg building_description: The building description we get from C++
---    :arg enhanced_from: The building name that this building is usually enhanced from.
---                        Leave blank if this is a basic building.
---    :former_buildings:  A table of building names representing the chain of buildings that this
---                        building was enhanced from. This is used to calculate cumulative building
---                        and dismantle costs.
 --    :returns: an rt string describing the building section
 --
-function building_help_building_section(building_description, enhanced_from, former_buildings)
+function building_help_building_section(building_description)
 
 	local result = rt(h2(_"Building"))
 
@@ -516,18 +511,14 @@ function building_help_building_section(building_description, enhanced_from, for
 				result = result .. building_help_building_line(ware_description, amount)
 			end
 		end
+		local former_building = nil
 		if (building_description.enhanced) then
-			local former_building = nil
-			if (enhanced_from) then
-				former_building = wl.Game():get_building_description(enhanced_from)
+			former_building = building_description.get_enhanced_from
 				if (building_description.buildable) then
 					result = result .. text_line(_"Or enhanced from:", former_building.descname)
 				else
 					result = result .. text_line(_"Enhanced from:", former_building.descname)
 				end
-			else
-				result = result .. text_line(_"Enhanced from:", _"Unknown")
-			end
 
 			for ware, amount in pairs(building_description.enhancement_cost) do
 				local ware_description = wl.Game():get_ware_description(ware)
@@ -543,6 +534,13 @@ function building_help_building_section(building_description, enhanced_from, for
 				else
 					warescost[ware] = amount
 				end
+			end
+
+			local former_buildings = {};
+			former_building = building_description
+			while former_building.enhanced do
+				former_building = former_building.get_enhanced_from
+				table.insert(former_buildings, former_building)
 			end
 
 			for index, former in pairs(former_buildings) do
@@ -756,3 +754,40 @@ function building_help_production_section(building_description)
 		return ""
 	end
 end
+
+
+-- RST
+-- .. function building_help(tribename, building_description)
+--
+--    Main function to create a building help string. Trainigsites aren't supported yet.
+--
+--    :arg tribename: The name of the tribe that is used for tribe-specific information.
+--    :arg building_description: The building's building description from C++
+--    :returns: rt of the formatted text
+--
+function building_help(tribename, building_description)
+	-- Need to get the building description again to make sure we have the correct type, e.g. "productionsite"
+	local building_description = wl.Game():get_building_description(building_description.name)
+	local result = ""
+	if (building_description.type_name == "productionsite") then
+		return building_help_general_string(building_description) ..
+			building_help_dependencies_production(tribename, building_description) ..
+			building_help_crew_string(building_description) ..
+			building_help_building_section(building_description) ..building_help_production_section()
+	else if (building_description.type_name == "militarysite") then
+		return building_help_general_string(building_description) ..
+			building_help_building_section(building_description)
+	else if (building_description.type_name == "warehouse") then
+		if (building_description.is_port) then
+			return building_help_general_string(building_description) ..
+				-- TODO(GunChleoc) expedition costs here?
+				building_help_building_section(building_description) ..
+				building_help_production_section()
+		else
+			return building_help_general_string(building_description) ..
+				building_help_building_section(building_description)
+		end
+	else
+		return ""
+	end
+}
