@@ -68,6 +68,7 @@ constexpr int kMarineDecisionInterval = 20 * 1000;
 constexpr int kTrainingSitesCheckInterval = 30 * 1000;
 
 //this is intended for map developers, by default should be off
+// NOCOM(#codereview): If this should be off by default, why is it set to "true"?
 constexpr bool kPrintStats = false;
 
 // Some buildings have to be built close to borders and their
@@ -174,7 +175,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 			//NOCOM - see question above
 			if (player_ == nullptr) {
 				return;
-			}		   
+			}
 			if (note.ship->get_owner()->player_number() != player_->player_number()) {
 			   return;
 		   }
