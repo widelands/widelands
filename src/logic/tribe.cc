@@ -326,6 +326,9 @@ bool TribeDescr::has_building(const BuildingIndex& index) const {
 bool TribeDescr::has_ware(const WareIndex& index) const {
 	return wares_.count(index) == 1;
 }
+bool TribeDescr::is_construction_material(const WareIndex& ware_index) const {
+	return construction_materials_.count(ware_index) == 1;
+}
 
 BuildingIndex TribeDescr::building_index(const std::string & buildingname) const {
 	return egbase_.tribes().building_index(buildingname);
@@ -493,6 +496,20 @@ void TribeDescr::add_building(const std::string& buildingname) {
 			throw new GameDataError("Duplicate definition of building", buildingname);
 		}
 		buildings_.insert(building_index);
+
+		// Register construction materials
+		for (std::pair<WareIndex, uint8_t> build_cost : get_building_descr(building_index)->buildcost()) {
+			if (!is_construction_material(build_cost.first)) {
+				construction_materials_.emplace(build_cost.first);
+			}
+		}
+		for (std::pair<WareIndex, uint8_t> enhancement_cost :
+			  get_building_descr(building_index)->enhancement_cost()) {
+			if (!is_construction_material(enhancement_cost.first)) {
+				construction_materials_.emplace(enhancement_cost.first);
+			}
+		}
+
 	} catch (const WException& e) {
 		throw new GameDataError("Failed adding building %s to tribe %s: %s", buildingname, name_, e.what);
 	}

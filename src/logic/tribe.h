@@ -77,6 +77,7 @@ struct TribeDescr {
 
 	bool has_building(const BuildingIndex& index) const;
 	bool has_ware(const WareIndex& index) const;
+	bool is_construction_material(const WareIndex& ware_index) const;
 
 	BuildingIndex building_index(const std::string & buildingname) const;
 	int immovable_index(const std::string & immovablename) const;
@@ -149,6 +150,7 @@ private:
 	std::set<int>                     immovables_;  // The player immovables
 	std::set<WareIndex>               workers_;
 	std::set<WareIndex>               wares_;
+	std::set<WareIndex>               construction_materials_; // The wares that are used by construction sites
 	// Special units
 	WareIndex                         carrier_;  // The basic carrier for this tribe
 	WareIndex                         carrier2_; // Additional carrier for busy roads

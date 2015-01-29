@@ -11,7 +11,7 @@ return {
 		building_help_general_string(building_description) ..
 
 		--Dependencies
-		building_help_dependencies_production("atlanteans", building_description, true) ..
+		building_help_dependencies_production("atlanteans", building_description) ..
 
 		--Workers Section
 		building_help_crew_string(building_description) ..

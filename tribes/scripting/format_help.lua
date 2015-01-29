@@ -326,16 +326,15 @@ end
 
 
 -- RST
--- .. function:: building_help_dependencies_production(tribename, building_description[, add_constructionsite])
+-- .. function:: building_help_dependencies_production(tribename, building_description)
 --
 --    The input and output wares of a productionsite
 --
 --    :arg tribename: e.g. "barbarians".
 --    :arg building_description: The building description we get from C++
---    :arg add_constructionsite: True if this is building supplies its wares to constructionsites.
 --    :returns: an rt string with images describing a chain of ware/building dependencies
 --
-function building_help_dependencies_production(tribename, building_description, add_constructionsite)
+function building_help_dependencies_production(tribename, building_description)
 	local building_description = wl.Game():get_building_description(building_description.name)
 	local result = ""
 	local hasinput = false
@@ -399,8 +398,8 @@ function building_help_dependencies_production(tribename, building_description, 
 
 	local outgoing = ""
 	for i, ware_description in ipairs(building_description.output_ware_types) do
-		-- constructionsite isn't listed with the consumers, so we need a special switch
-		if (add_constructionsite) then
+		-- constructionsite isn't listed with the consumers, so we need a special check
+		if (ware_description.is_construction_material(tribename)) then
 			local constructionsite_description =
 			   wl.Game():get_building_description("constructionsite")
 			outgoing = outgoing .. dependencies({ware_description, constructionsite_description},
