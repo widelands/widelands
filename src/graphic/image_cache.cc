@@ -24,6 +24,7 @@
 #include <string>
 
 #include <SDL.h>
+#include <boost/format.hpp>
 
 #include "base/log.h"
 #include "graphic/image.h"
@@ -90,6 +91,8 @@ const Image* ImageCache::get(const std::string& hash) {
 	return it->second.get();
 }
 
+// NOCOM(#sirver): check headers
+
 void ImageCache::compactify() {
 	TextureAtlas texture_atlas;
 
@@ -109,6 +112,10 @@ void ImageCache::compactify() {
 	// TODO(sirver): Limit the size of the texture atlas to a max GL texture size. This might return more than one
 	// packed image. Make sure that the code works also for small max texture sizes.
 	texture_atlases_.emplace_back(texture_atlas.pack(&new_textures));
+
+	// NOCOM(#sirver): remove
+	std::unique_ptr<StreamWrite> sw(g_fs->open_stream_write("texture_atlas.png"));
+	   save_to_png(texture_atlases_.back().get(), sw.get(), ColorType::RGBA);
 
 	assert(new_textures.size() == hashes.size());
 	std::set<int> gl_textures;

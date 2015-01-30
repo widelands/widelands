@@ -22,6 +22,16 @@
 
 #include "base/rect.h"
 
+// Convert the 'rect' in pixel space into opengl space.
+enum class ConversionMode {
+	// Convert the rect as given.
+	kLeftBottom,
+
+	// Convert the rect so that the borders are in the center
+	// of the pixels.
+	kMidPoint,
+};
+
 // Converts the pixel (x, y) in a texture to a gl coordinate in [0, 1].
 inline void pixel_to_gl_texture(const int width, const int height, float* x, float* y) {
 	*x = (*x / width);
@@ -34,41 +44,29 @@ inline void pixel_to_gl_renderbuffer(const int width, const int height, float* x
 	*y = 1. - (*y / height) * 2.;
 }
 
-// Convert the 'rect' in pixel space into opengl space.
-enum class ConversionMode {
-	// Convert the rect as given.
-	kExact,
-
-	// Convert the rect so that the borders are in the center
-	// of the pixels.
-	kMidPoint,
-};
-
 // Converts 'rect' given on a screen of 'width' x 'height' pixels into a rect
-// in opengl coordinates in a renderbuffer, i.e. in [-1, 1]. The returned
+// in opengl coordinates in a renderbuffer, i.e. in [-1, 1]. The edges The returned
 // rectangle has positive width and height.
 inline FloatRect
-rect_to_gl_renderbuffer(const int width, const int height, const Rect& rect, ConversionMode mode) {
-	const float delta = mode == ConversionMode::kExact ? 0. : 0.5;
-	float left = rect.x + delta;
-	float top = rect.y + delta;
-	float right = rect.x + rect.w - delta;
-	float bottom = rect.y + rect.h - delta;
+rect_to_gl_renderbuffer(const int width, const int height, const Rect& rect) {
+	float left = rect.x;
+	float top = rect.y;
+	float right = rect.x + rect.w;
+	float bottom = rect.y + rect.h;
 	pixel_to_gl_renderbuffer(width, height, &left, &top);
 	pixel_to_gl_renderbuffer(width, height, &right, &bottom);
 	return FloatRect(left, bottom, right - left, top - bottom);
 }
 
-// Converts 'rect' given on a screen of 'width' x 'height' pixels into a rect
-// in opengl coordinates in a texture, i.e. in [0, 1]. The returned rectangle
-// has positive width and height.
+// Converts 'rect' given on a texture of 'width' x 'height' pixels into a rect
+// in opengl coordinates in a texture, i.e. in [0, 1]. Texture pixels are sampled in their center.
+// The returned rectangle has positive width and height.
 inline FloatRect
-rect_to_gl_texture(const int width, const int height, const Rect& rect, ConversionMode mode) {
-	const float delta = mode == ConversionMode::kExact ? 0. : 0.5;
-	float left = rect.x + delta;
-	float top = rect.y + delta;
-	float right = rect.x + rect.w - delta;
-	float bottom = rect.y + rect.h - delta;
+rect_to_gl_texture(const int width, const int height, const FloatRect& rect) {
+	float left = rect.x;
+	float top = rect.y;
+	float right = rect.x + rect.w;
+	float bottom = rect.y + rect.h;
 	pixel_to_gl_texture(width, height, &left, &top);
 	pixel_to_gl_texture(width, height, &right, &bottom);
 	return FloatRect(left, bottom, right - left, top - bottom);

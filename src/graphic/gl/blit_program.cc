@@ -97,7 +97,7 @@ void main() {
 	float luminance = dot(vec3(0.299, 0.587, 0.114), texture_color.rgb);
 	float blend_influence = mask_color.r * mask_color.a;
 	gl_FragColor = vec4(
-	   mix(texture_color.rgb, out_blend.rgb * luminance, blend_influence), out_blend.a * texture_color.a);
+		mix(texture_color.rgb, out_blend.rgb * luminance, blend_influence), out_blend.a * texture_color.a);
 }
 )";
 

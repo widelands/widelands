@@ -88,6 +88,9 @@ public:
 	// Sets the pixel to the 'clr'.
 	void set_pixel(uint16_t x, uint16_t y, uint32_t clr);
 
+	// NOCOM(#sirver): remove
+	bool owns_texture() const { return m_owns_texture; }
+
 private:
 	// Configures OpenGL to draw to this surface.
 	void setup_gl();

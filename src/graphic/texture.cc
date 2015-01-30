@@ -108,7 +108,7 @@ Texture::Texture(SDL_Surface * surface, bool intensity)
 
 	SDL_LockSurface(surface);
 
-	Gl::swap_rows(m_w, m_h, bpp, static_cast<uint8_t*>(surface->pixels));
+	Gl::swap_rows(m_w, m_h, surface->pitch, bpp, static_cast<uint8_t*>(surface->pixels));
 
 	glTexImage2D
         (GL_TEXTURE_2D, 0, static_cast<GLint>(intensity ? GL_INTENSITY : GL_RGBA), m_w, m_h, 0,
@@ -129,7 +129,8 @@ Texture::Texture(const GLuint texture, const Rect& subrect, int parent_w, int pa
 	m_texture = texture;
 	m_owns_texture = false;
 
-	m_texture_coordinates = rect_to_gl_texture(parent_w, parent_h, subrect, ConversionMode::kExact);
+	m_texture_coordinates =
+	   rect_to_gl_texture(parent_w, parent_h, FloatRect(subrect.x, subrect.y, subrect.w, subrect.h));
 }
 
 Texture::~Texture()
@@ -197,7 +198,7 @@ void Texture::lock() {
 	glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_pixels.get());
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	Gl::swap_rows(m_w, m_h, 4, m_pixels.get());
+	Gl::swap_rows(m_w, m_h, m_w, 4, m_pixels.get());
 }
 
 void Texture::unlock(UnlockMode mode) {
@@ -207,7 +208,7 @@ void Texture::unlock(UnlockMode mode) {
 	assert(m_pixels);
 
 	if (mode == Unlock_Update) {
-		Gl::swap_rows(m_w, m_h, 4, m_pixels.get());
+		Gl::swap_rows(m_w, m_h, m_w, 4, m_pixels.get());
 
 		glBindTexture(GL_TEXTURE_2D, m_texture);
 		glTexImage2D
@@ -252,6 +253,8 @@ void Texture::set_pixel(uint16_t x, uint16_t y, uint32_t clr) {
 }
 
 
+// NOCOM(#sirver):
+// http://stackoverflow.com/questions/17068703/2d-drawing-in-opengl-linear-filtering-with-pixel-accuracy-at-native-size
 void Texture::setup_gl() {
 	glBindFramebuffer(GL_FRAMEBUFFER, GlFramebuffer::instance().id());
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
