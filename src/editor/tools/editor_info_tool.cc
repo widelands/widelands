@@ -123,7 +123,7 @@ int32_t EditorInfoTool::handle_click_impl(Widelands::Map& map,
 		terrain_is_strings.push_back(_("unpassable"));
 	}
 	buf += "• " + (boost::format(_("Category: %s"))
-						% localize_item_list(terrain_is_strings, i18n::ConcatenateWith::AMPERSAND)).str() + "\n";
+						% i18n::localize_list(terrain_is_strings, i18n::ConcatenateWith::AMPERSAND)).str() + "\n";
 	buf += "• " + (boost::format(_("Editor Category: %s")) % ter.editor_category().descname()).str() + "\n";
 
 	// *** Resources info
