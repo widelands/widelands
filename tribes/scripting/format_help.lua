@@ -132,33 +132,6 @@ end
 --  =======================================================
 
 -- RST
--- .. function:: dependencies_training(tribename, building_description, interim1, interim2)
---
---    Creates a dependencies line for soldiers in a training site.
---
---    :arg tribename: name of the tribe.
---    :arg building_description: the trainingsite's building description from C++
---    :arg untrained: the soldier level trained from in the first line, e.g. "untrained".
---    :arg interim1: the soldier level trained to in the first line, e.g. "untrained+evade".
---    :arg interim1: the soldier level trained from in the second line, e.g. "fulltrained-evade".
---    :arg fulltrained: the soldier level trained to in the second line, e.g. "fulltrained".
---    :returns: a row of pictures connected by arrows.
---
-function dependencies_training(tribename, building_description, untrained, interim1, interim2, fulltrained)
-	return
-		rt(h2(_"Dependencies")) .. rt(h3(_"Soldiers:")) ..
-		dependencies_basic({
-			"tribes/workers/" .. tribename .. "/soldier/" .. untrained .. ".png",
-			building_description.icon_name,
-			"tribes/workers/" .. tribename .. "/soldier/" .. interim1 .. ".png"}) ..
-		dependencies_basic({
-			"tribes/workers/" .. tribename .. "/soldier/" .. interim2 .. ".png",
-			building_description.icon_name,
-			"tribes/workers/" .. tribename .. "/soldier/" .. fulltrained .. ".png"})
-end
-
-
--- RST
 -- .. function:: dependencies_training_food
 --
 --    Creates dependencies lines for food in training sites.
@@ -192,37 +165,53 @@ end
 
 
 -- RST
--- .. function:: dependencies_training_weapons(building_description, and_or, weapons, manufacturer)
+-- .. function:: dependencies_training_weapons(weapons)
 --
 --    Creates a dependencies line for any number of weapons.
 --
---    :arg building_description: the trainingsite's building description from C++
---    :arg and_or: if this is "and" or "or", adds these keyword at the beginning of the equipment string
 --    :arg weapons: an array of weapon names
---    :arg manufacturer: the name of the building manufacturing the weapons
 --    :returns: a list weapons images with the producing and receiving building
 --
-function dependencies_training_weapons(building_description, and_or, weapons, manufacturer)
-	local manufacturer_description = wl.Game():get_building_description(manufacturer)
-	local weaponsstring = ""
-	for count, weapon in pairs(weapons) do
-		if(count > 1) then
-			weaponsstring = weaponsstring .. ";"
+function dependencies_training_weapons(weapons)
+	local result;
+	local producers;
+	for count, weaponname in pairs(weapons) do
+		local weapon_description = wl.Game():get_ware_description(weaponname)
+		for i, producer in ipairs(weapon_description.producers) do
+			if (producers[producer] == nil) then
+				producers[producer] = {}
+			end
+			producers[producer][weaponname] = true;
 		end
-		local weapon_description = wl.Game():get_ware_description(weapon)
-		weaponsstring = weaponsstring .. weapon_description.icon_name
 	end
-	-- TRANSLATORS: This is a headline, you can see it in the building help for trainingsites, in the dependencies section
-	local equipmentstring = _"Equipment from"
-	-- TRANSLATORS: This is a headline, you can see it in the building help for trainingsites, in the dependencies section
-	if (and_or == "and" ) then equipmentstring = _"and equipment from"
-	-- TRANSLATORS: This is a headline, you can see it in the building help for trainingsites, in the dependencies section
-	elseif (and_or == "or" ) then equipmentstring = _"or equipment from" end
-	return rt(p(equipmentstring)) ..
-		dependencies_basic(
-			{manufacturer_description.icon_name, weaponsstring},
-			rt(p(manufacturer_description.descname))
+
+	local building_count = 0;
+	for manufacturer, weaponnames in ipairs(producers) do
+		local manufacturer_description = wl.Game():get_building_description(manufacturer)
+		local weaponsstring = ""
+		for count, weapon in pairs(weaponnames) do
+			if(count > 1) then
+				weaponsstring = weaponsstring .. ";"
+			end
+			local weapon_description = wl.Game():get_ware_description(weapon)
+			weaponsstring = weaponsstring .. weapon_description.icon_name
+		end
+		local equipmentstring
+		if (building_count == 0) then
+			-- TRANSLATORS: This is a headline, you can see it in the building help for trainingsites, in the dependencies section
+			equipmentstring = _"and equipment from"
+		else
+			-- TRANSLATORS: This is a headline, you can see it in the building help for trainingsites, in the dependencies section
+			equipmentstring = _"or equipment from"
+		end
+		building_count = building_count + 1;
+		result = result .. rt(p(equipmentstring)) ..
+			dependencies_basic(
+				{manufacturer_description.icon_name, weaponsstring},
+				rt(p(manufacturer_description.descname))
 		)
+	end
+	return result
 end
 
 
@@ -440,6 +429,63 @@ function building_help_dependencies_production(tribename, building_description)
 
 	if (result == "") then result = rt(p(_"None")) end
 	return rt(h2(_"Dependencies")) .. result
+end
+
+-- RST
+-- .. function:: building_help_dependencies_training(tribename, building_description)
+--
+--    Shows the production dependencies for a training site.
+--
+--    :arg tribename: name of the tribe.
+--    :arg building_description: the trainingsite's building description from C++
+--    :returns: rt string with training dependencies information.
+--
+function building_help_dependencies_training(tribename, building_description)
+	local result = rt(h2(_"Dependencies"))
+	if(building_description.max_hp and building_description.min_hp) then
+		result = result .. rt(h3(_"Health Training:")) ..
+		result = result .. rt(h3(_"Soldiers:")) ..
+		result = result ..
+			dependencies_basic({
+				"tribes/workers/" .. tribename .. "/soldier/hp_level" .. building_description.min_hp .. ".png",
+				building_description.icon_name,
+				"tribes/workers/" .. tribename .. "/soldier/hp_level" .. (building_description.max_hp + 1) ..".png"})
+		result = result .. dependencies_training_food(building_description.food_hp)
+		result = result .. dependencies_training_weapons(building_description.weapons_hp)
+	end
+	if(building_description.max_attack and building_description.min_attack) then
+		result = result .. rt(h3(_"Attack Training:")) ..
+		result = result .. rt(h3(_"Soldiers:")) ..
+			dependencies_basic({
+				"tribes/workers/" .. tribename .. "/soldier/attack_level" .. building_description.min_attack .. ".png",
+				building_description.icon_name,
+				"tribes/workers/" .. tribename .. "/soldier/attack_level" .. (building_description.max_attack + 1) ..".png"})
+		result = result .. dependencies_training_food(building_description.food_attack)
+		result = result .. dependencies_training_weapons(building_description.weapons_attack)
+	end
+	if(building_description.max_defense and building_description.min_defense) then
+		result = result .. rt(h3(_"Defense Training:")) ..
+		result = result .. rt(h3(_"Soldiers:")) ..
+		result = result ..
+			dependencies_basic({
+				"tribes/workers/" .. tribename .. "/soldier/defense_level" .. building_description.min_defense .. ".png",
+				building_description.icon_name,
+				"tribes/workers/" .. tribename .. "/soldier/defense_level" .. (building_description.max_defense + 1) ..".png"})
+		result = result .. dependencies_training_food(building_description.food_defense)
+		result = result .. dependencies_training_weapons(building_description.weapons_defense)
+	end
+	if(building_description.max_evade and building_description.min_evade) then
+		result = result .. rt(h3(_"Evade Training:")) ..
+		result = result .. rt(h3(_"Soldiers:")) ..
+		result = result ..
+			dependencies_basic({
+				"tribes/workers/" .. tribename .. "/soldier/evade_level" .. building_description.min_evade .. ".png",
+				building_description.icon_name,
+				"tribes/workers/" .. tribename .. "/soldier/evade_level" .. (building_description.max_evade + 1) ..".png"})
+		result = result .. dependencies_training_food(building_description.food_evade)
+		result = result .. dependencies_training_weapons(building_description.weapons_evade)
+	end
+	return result
 end
 
 
@@ -757,15 +803,15 @@ end
 
 
 -- RST
--- .. function building_help(tribename, building_description)
+-- .. function building_help(building_description, tribename)
 --
---    Main function to create a building help string. Trainigsites aren't supported yet.
+--    Main function to create a building help string.
 --
---    :arg tribename: The name of the tribe that is used for tribe-specific information.
 --    :arg building_description: The building's building description from C++
+--    :arg tribename: The name of the tribe that is used for tribe-specific information.
 --    :returns: rt of the formatted text
 --
-function building_help(tribename, building_description)
+function building_help(building_description, tribename)
 	-- Need to get the building description again to make sure we have the correct type, e.g. "productionsite"
 	local building_description = wl.Game():get_building_description(building_description.name)
 	local result = ""
@@ -787,6 +833,11 @@ function building_help(tribename, building_description)
 			return building_help_general_string(building_description) ..
 				building_help_building_section(building_description)
 		end
+	else if (building_description.type_name == "trainingsite") then
+		return building_help_general_string(building_description) ..
+			building_help_dependencies_training(tribename, building_description) ..
+			building_help_crew_string(building_description) ..
+			building_help_building_section(building_description) ..building_help_production_section()
 	else if (building_description.type_name == "constructionsite" or
 				building_description.type_name == "dismantlesite") then
 				-- TODO(GunChleoc) Get them a crew string for the builder
@@ -794,4 +845,11 @@ function building_help(tribename, building_description)
 	else
 		return ""
 	end
+}
+
+-- The main function call
+return {
+   func = function(building_description, tribename)
+		return building_help(building_description, tribename)
+   end
 }

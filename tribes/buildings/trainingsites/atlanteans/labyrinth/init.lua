@@ -65,17 +65,34 @@ tribes:new_trainingsite_type {
 
 	["soldier defense"] = {
 		min_level = 0,
-		max_level = 1
+		max_level = 1,
+		food = {
+			{"smoked_fish", "smoked_meat"},
+			{"bread_atlanteans"}
+		}
+		weapons = {
+			"shield_steel",
+			"shield_advanced"
+		}
 	},
 	["soldier hp"] = {
 		min_level = 0,
-		max_level = 0
+		max_level = 0,
+		food = {
+			{"smoked_fish", "smoked_meat"},
+			{"bread_atlanteans"}
+		}
+		weapons = {
+			"tabard_golden"
+		}
 	},
 	["soldier evade"] = {
 		min_level = 0,
-		max_level = 1
+		max_level = 1,
+		food = {
+			{"smoked_fish", "smoked_meat"}
+		}
 	},
-
 
 	programs = {
 		sleep = {

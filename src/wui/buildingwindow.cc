@@ -345,30 +345,28 @@ void BuildingWindow::create_capsbuttons(UI::Box * capsbuttons)
 			(gotobtn,
 			 UI::Box::AlignCenter);
 
-		if (m_building.descr().has_help_text()) {
-			if (!requires_destruction_separator) {
-				// When there was no separation of destruction buttons put
-				// the infinite space here (e.g. Warehouses)
-				capsbuttons->add_inf_space();
-			}
-
-			UI::Button * helpbtn =
-				new UI::Button
-					(capsbuttons, "help", 0, 0, 34, 34,
-					 g_gr->images().get("pics/but4.png"),
-					 g_gr->images().get("pics/menu_help.png"),
-					 _("Help"));
-
-			UI::UniqueWindow::Registry& registry =
-			   igbase().unique_windows().get_registry(m_building.descr().name() + "_help");
-			registry.open_window = [this, &registry] {
-				new UI::LuaTextHelpWindow(
-				   &igbase(), registry, m_building.descr(), &igbase().egbase().lua());
-			};
-
-			helpbtn->sigclicked.connect(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(registry)));
-			capsbuttons->add(helpbtn, UI::Box::AlignCenter);
+		if (!requires_destruction_separator) {
+			// When there was no separation of destruction buttons put
+			// the infinite space here (e.g. Warehouses)
+			capsbuttons->add_inf_space();
 		}
+
+		UI::Button * helpbtn =
+			new UI::Button
+				(capsbuttons, "help", 0, 0, 34, 34,
+				 g_gr->images().get("pics/but4.png"),
+				 g_gr->images().get("pics/menu_help.png"),
+				 _("Help"));
+
+		UI::UniqueWindow::Registry& registry =
+			igbase().unique_windows().get_registry(m_building.descr().name() + "_help");
+		registry.open_window = [this, &registry] {
+			new UI::LuaTextHelpWindow(
+				&igbase(), registry, m_building.descr(), &igbase().egbase().lua());
+		};
+
+		helpbtn->sigclicked.connect(boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(registry)));
+		capsbuttons->add(helpbtn, UI::Box::AlignCenter);
 	}
 }
 

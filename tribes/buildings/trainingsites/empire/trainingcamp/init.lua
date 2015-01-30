@@ -70,11 +70,31 @@ tribes:new_trainingsite_type {
 
 	["soldier attack"] = {
 		min_level = 0,
-		max_level = 3
+		max_level = 3,
+		food = {
+			{"fish", "meat"},
+			{"bread_empire"}
+		},
+		weapons = {
+			"spear",
+			"spear_advanced",
+			"spear_heavy",
+			"spear_war"
+		}
 	},
 	["soldier hp"] = {
 		min_level = 0,
-		max_level = 3
+		max_level = 3,
+		food = {
+			{"fish", "meat"},
+			{"bread_empire"}
+		},
+		weapons = {
+			"armor_helmet",
+			"armor",
+			"armor_chain",
+			"armor_gilded"
+		}
 	},
 
 	programs = {

@@ -193,9 +193,12 @@ LuaTextHelpWindow::LuaTextHelpWindow
 {
 	try {
 		std::unique_ptr<LuaTable> t(
-		   lua->run_script(building_description.helptext_script()));
+			lua->run_script("tribes/scripting/format_help.lua");
 		std::unique_ptr<LuaCoroutine> cr(t->get_coroutine("func"));
 		cr->push_arg(&building_description);
+		// NOCOM(GunChleoc): Should buildingdescr know its tribe?
+		// Iterate through all tribes to see which one has the building?
+		cr->push_arg(&building_description.tribe());
 		cr->resume();
 		const std::string help_text = cr->pop_string();
 		textarea->set_text(help_text);

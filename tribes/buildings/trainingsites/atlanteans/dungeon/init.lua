@@ -63,7 +63,17 @@ tribes:new_trainingsite_type {
 
 	["soldier attack"] = {
 		min_level = 0,
-		max_level = 3
+		max_level = 3,
+		food = {
+			{"smoked_fish", "smoked_meat"},
+			{"bread_atlanteans"}
+		},
+		weapons = {
+			"trident_long",
+			"trident_steel",
+			"trident_double",
+			"trident_heavy_double"
+		}
 	},
 
 	programs = {

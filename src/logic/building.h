@@ -134,10 +134,8 @@ public:
 
 	virtual uint32_t get_conquers() const;
 	virtual uint32_t vision_range() const;
-	bool has_help_text() const {return m_helptext_script != "";}
-	std::string helptext_script() const {return m_helptext_script;}
 
-	// NOCOM(GunChleoc): Get rid
+	// NOCOM(GunChleoc): Get rid?
 	const TribeDescr & tribe() const {return m_tribe;}
 	WorkareaInfo m_workarea_info;
 
@@ -166,7 +164,6 @@ private:
 	bool          m_enhanced_building; // if it is one, it is bulldozable
 	BuildingHints m_hints;             // hints (knowledge) for computer players
 	const HelpTexts helptexts_;
-	std::string   m_helptext_script;
 
 	// for migration, 0 is the default, meaning get_conquers() + 4
 	uint32_t m_vision_range;

@@ -85,11 +85,6 @@ BuildingDescr::BuildingDescr
 		throw GameDataError("size: %s", e.what());
 	}
 
-	// NOCOM(GunChleoc); We need the path from somewhere
-	//m_helptext_script = directory + "/help.lua";
-	if (!g_fs->file_exists(m_helptext_script))
-		m_helptext_script = "";
-
 	// Parse build options
 	m_buildable = table.has_key("buildable") ? table.get_bool("buildable") : true;
 	m_destructible = table.has_key("destructible") ? table.get_bool("destructible") : true;

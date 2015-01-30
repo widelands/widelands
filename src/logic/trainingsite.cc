@@ -72,24 +72,96 @@ TrainingSiteDescr::TrainingSiteDescr
 		m_train_hp      = true;
 		m_min_hp        = items_table.get_int("min_level");
 		m_max_hp        = items_table.get_int("max_level");
+		// For building help - NOCOM(GunChleoc): Extract function
+		if (items_table.has_key("food")) {
+			LuaTable food_table = items_table.get_table("food");
+			for (int key : food_table.keys()) {
+				std::vector<std::string> food_vector;
+				LuaTable food_row = food_table.get_table(key);
+				for (int key2 : food_row.keys()) {
+					food_vector.push_back(food_row.get_string(key2));
+				}
+				food_hp_.push_back(food_vector);
+			}
+		}
+		if (items_table.has_key("weapons")) {
+			LuaTable weapons_table = items_table.get_table("weapons");
+			for (int key : weapons_table.keys()) {
+				weapons_hp_.push_back(weapons_table.get_string(key));
+			}
+		}
 	}
 	if (table.has_key("soldier attack")) {
 		items_table = table.get_table("soldier attack");
 		m_train_attack      = true;
 		m_min_attack        = items_table.get_int("min_level");
 		m_max_attack        = items_table.get_int("max_level");
+		// For building help - NOCOM(GunChleoc): Extract function
+		if (items_table.has_key("food")) {
+			LuaTable food_table = items_table.get_table("food");
+			for (int key : food_table.keys()) {
+				std::vector<std::string> food_vector;
+				LuaTable food_row = food_table.get_table(key);
+				for (int key2 : food_row.keys()) {
+					food_vector.push_back(food_row.get_string(key2));
+				}
+				food_attack_.push_back(food_vector);
+			}
+		}
+		if (items_table.has_key("weapons")) {
+			LuaTable weapons_table = items_table.get_table("weapons");
+			for (int key : weapons_table.keys()) {
+				weapons_attack_.push_back(weapons_table.get_string(key));
+			}
+		}
 	}
 	if (table.has_key("soldier defense")) {
 		items_table = table.get_table("soldier defense");
 		m_train_defense      = true;
 		m_min_defense        = items_table.get_int("min_level");
 		m_max_defense        = items_table.get_int("max_level");
+		// For building help - NOCOM(GunChleoc): Extract function
+		if (items_table.has_key("food")) {
+			LuaTable food_table = items_table.get_table("food");
+			for (int key : food_table.keys()) {
+				std::vector<std::string> food_vector;
+				LuaTable food_row = food_table.get_table(key);
+				for (int key2 : food_row.keys()) {
+					food_vector.push_back(food_row.get_string(key2));
+				}
+				food_defense_.push_back(food_vector);
+			}
+		}
+		if (items_table.has_key("weapons")) {
+			LuaTable weapons_table = items_table.get_table("weapons");
+			for (int key : weapons_table.keys()) {
+				weapons_defense_.push_back(weapons_table.get_string(key));
+			}
+		}
 	}
 	if (table.has_key("soldier evade")) {
 		items_table = table.get_table("soldier evade");
 		m_train_evade      = true;
 		m_min_evade        = items_table.get_int("min_level");
 		m_max_evade        = items_table.get_int("max_level");
+		// For building help - NOCOM(GunChleoc): Extract function
+		if (items_table.has_key("food")) {
+			LuaTable food_table = items_table.get_table("food");
+			for (int key : food_table.keys()) {
+				std::vector<std::string> food_vector;
+				LuaTable food_row = food_table.get_table(key);
+				for (int key2 : food_row.keys()) {
+					food_vector.push_back(food_row.get_string(key2));
+				}
+				food_evade_.push_back(food_vector);
+			}
+		}
+		if (items_table.has_key("weapons")) {
+			LuaTable weapons_table = items_table.get_table("weapons");
+			for (int key : weapons_table.keys()) {
+				weapons_evade_.push_back(weapons_table.get_string(key));
+			}
+		}
 	}
 }
 

@@ -76,6 +76,23 @@ int wares_map_to_lua(lua_State* L, const Buildcost& wares_map, const TribeDescr&
 	return 1;
 }
 
+// Pushes a lua table of tables with food ware names on the stack. Returns 1.
+int food_list_to_lua(lua_State* L, const std::vector<std::vector<std::string>>& table) {
+	lua_newtable(L);
+	int counter = 1;
+	for (const std::vector<std::string>& foodlist : table) {
+		lua_pushnumber(L, counter);
+		lua_newtable(L);
+		for (const std::string& foodname : foodlist) {
+			lua_pushstring(L, foodname);
+			lua_settable(L, -2);
+		}
+		lua_settable(L,-3);
+		++counter;
+	}
+	return 1;
+}
+
 
 struct SoldierMapDescr {
 	SoldierMapDescr(uint8_t ghp, uint8_t gat, uint8_t gde, uint8_t gev)
@@ -1603,6 +1620,10 @@ const MethodType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Methods
 	{nullptr, nullptr},
 };
 const PropertyType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Properties[] = {
+	PROP_RO(LuaTrainingSiteDescription, food_attack),
+	PROP_RO(LuaTrainingSiteDescription, food_defense),
+	PROP_RO(LuaTrainingSiteDescription, food_evade),
+	PROP_RO(LuaTrainingSiteDescription, food_hp),
 	PROP_RO(LuaTrainingSiteDescription, max_attack),
 	PROP_RO(LuaTrainingSiteDescription, max_defense),
 	PROP_RO(LuaTrainingSiteDescription, max_evade),
@@ -1612,6 +1633,10 @@ const PropertyType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Prope
 	PROP_RO(LuaTrainingSiteDescription, min_defense),
 	PROP_RO(LuaTrainingSiteDescription, min_evade),
 	PROP_RO(LuaTrainingSiteDescription, min_hp),
+	PROP_RO(LuaTrainingSiteDescription, weapons_attack),
+	PROP_RO(LuaTrainingSiteDescription, weapons_defense),
+	PROP_RO(LuaTrainingSiteDescription, weapons_evade),
+	PROP_RO(LuaTrainingSiteDescription, weapons_hp),
 	{nullptr, nullptr, nullptr},
 };
 
@@ -1620,6 +1645,44 @@ const PropertyType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Prope
  PROPERTIES
  ==========================================================
  */
+
+/* RST
+	.. attribute:: food_attack
+
+		(RO) A table of tables with food ware names used for Attack training
+*/
+int LuaTrainingSiteDescription::get_food_attack(lua_State * L) {
+	return food_list_to_lua(L, get()->get_food_attack());
+}
+
+/* RST
+	.. attribute:: food_defense
+
+		(RO) A table of tables with food ware names used for Defense training
+*/
+int LuaTrainingSiteDescription::get_food_defense(lua_State * L) {
+	return food_list_to_lua(L, get()->get_food_defense());
+}
+
+/* RST
+	.. attribute:: food_evade
+
+		(RO) A table of tables with food ware names used for Evade training
+*/
+int LuaTrainingSiteDescription::get_food_evade(lua_State * L) {
+	return food_list_to_lua(L, get()->get_food_evade());
+}
+
+
+/* RST
+	.. attribute:: food_hp
+
+		(RO) A table of tables with food ware names used for Health training
+*/
+int LuaTrainingSiteDescription::get_food_hp(lua_State * L) {
+	return food_list_to_lua(L, get()->get_food_hp());
+}
+
 
 /* RST
 	.. attribute:: max_attack
@@ -1741,6 +1804,62 @@ int LuaTrainingSiteDescription::get_min_hp(lua_State * L) {
 	if (descr->get_train_hp())
 		lua_pushinteger(L, descr->get_min_level(atrHP));
 	else lua_pushnil(L);
+	return 1;
+}
+
+/* RST
+	.. attribute:: weapons_attack
+
+		(RO) A table with weapon ware names used for Attack training
+*/
+int LuaTrainingSiteDescription::get_weapons_attack(lua_State * L) {
+	lua_newtable(L);
+	for (const std::string& weaponname : get()->get_weapons_attack()) {
+		lua_pushstring(L, weaponname);
+		lua_settable(L, -2);
+	}
+	return 1;
+}
+
+/* RST
+	.. attribute:: weapons_defense
+
+		(RO) A table with weapon ware names used for Defense training
+*/
+int LuaTrainingSiteDescription::get_weapons_defense(lua_State * L) {
+	lua_newtable(L);
+	for (const std::string& weaponname : get()->get_weapons_defense()) {
+		lua_pushstring(L, weaponname);
+		lua_settable(L, -2);
+	}
+	return 1;
+}
+
+/* RST
+	.. attribute:: weapons_evade
+
+		(RO) A table with weapon ware names used for Evade training
+*/
+int LuaTrainingSiteDescription::get_weapons_evade(lua_State * L) {
+	lua_newtable(L);
+	for (const std::string& weaponname : get()->get_weapons_evade()) {
+		lua_pushstring(L, weaponname);
+		lua_settable(L, -2);
+	}
+	return 1;
+}
+
+/* RST
+	.. attribute:: weapons_hp
+
+		(RO) A table with weapon ware names used for Health training
+*/
+int LuaTrainingSiteDescription::get_weapons_hp(lua_State * L) {
+	lua_newtable(L);
+	for (const std::string& weaponname : get()->get_weapons_hp()) {
+		lua_pushstring(L, weaponname);
+		lua_settable(L, -2);
+	}
 	return 1;
 }
 

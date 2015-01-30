@@ -76,13 +76,32 @@ tribes:new_trainingsite_type {
 
 	["soldier attack"] = {
 		min_level = 0,
-		max_level = 4
+		max_level = 4,
+		food = {
+			{"fish", "meat"},
+			{"bread_barbarians"}
+		},
+		weapons = {
+			"ax_sharp",
+			"ax_broad",
+			"ax_bronze",
+			"ax_battle",
+			"ax_warriors"
+		}
 	},
 	["soldier hp"] = {
 		min_level = 0,
-		max_level = 2
+		max_level = 2.
+		food = {
+			{"fish", "meat"},
+			{"bread_barbarians"}
+		},
+		weapons = {
+			"helmet",
+			"helmet_mask",
+			"helmet_warhelm"
+		}
 	},
-
 
 	programs = {
 		sleep = {
