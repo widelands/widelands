@@ -787,6 +787,10 @@ function building_help(tribename, building_description)
 			return building_help_general_string(building_description) ..
 				building_help_building_section(building_description)
 		end
+	else if (building_description.type_name == "constructionsite" or
+				building_description.type_name == "dismantlesite") then
+				-- TODO(GunChleoc) Get them a crew string for the builder
+		return building_help_general_string(building_description)
 	else
 		return ""
 	end

@@ -14,7 +14,7 @@ tribes:new_constructionsite_type {
 		-- TRANSLATORS: Lore author helptext for a building
 		lore_author = _"Source needed",
 		-- TRANSLATORS: Purpose helptext for a building
-		purpose = _"Text needed",
+		purpose = _"A new building is being built at this construction site.",
 		-- #TRANSLATORS: Note helptext for a building
 		note = "",
 		-- TRANSLATORS: Performance helptext for a building

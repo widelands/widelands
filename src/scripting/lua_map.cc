@@ -549,6 +549,8 @@ int upcasted_map_object_descr_to_lua(lua_State* L, const MapObjectDescr* const d
 		switch (descr->type()) {
 			case MapObjectType::CONSTRUCTIONSITE:
 				return CAST_TO_LUA(ConstructionSiteDescr, LuaConstructionSiteDescription);
+			case MapObjectType::DISMANTLESITE:
+				return CAST_TO_LUA(DismantleSiteDescr, LuaDismantleSiteDescription);
 			case MapObjectType::PRODUCTIONSITE:
 				return CAST_TO_LUA(ProductionSiteDescr, LuaProductionSiteDescription);
 			case MapObjectType::MILITARYSITE:
@@ -1401,6 +1403,24 @@ const PropertyType<LuaConstructionSiteDescription> LuaConstructionSiteDescriptio
 
 
 /* RST
+DismantleSiteDescription
+---------------------------
+
+.. class:: DismantleSiteDescription
+
+	 A static description of a tribe's dismantlesite, so it can be used in help files
+	 without having to access an actual building on the map.
+	 See also class BuildingDescription and class MapObjectDescription for more properties.
+*/
+const char LuaDismantleSiteDescription::className[] = "DismantleSiteDescription";
+const MethodType<LuaDismantleSiteDescription> LuaDismantleSiteDescription::Methods[] = {
+	{nullptr, nullptr},
+};
+const PropertyType<LuaDismantleSiteDescription> LuaDismantleSiteDescription::Properties[] = {
+	{nullptr, nullptr, nullptr},
+};
+
+/* RST
 ProductionSiteDescription
 -------------------------
 
@@ -2101,6 +2121,9 @@ int LuaMapObject::get_descr(lua_State * L) {
 	}
 	else if (is_a(ConstructionSiteDescr, desc)) {
 		return CAST_TO_LUA(ConstructionSiteDescr, LuaConstructionSiteDescription);
+	}
+	else if (is_a(DismantleSiteDescr, desc)) {
+		return CAST_TO_LUA(DismantleSiteDescr, LuaDismantleSiteDescription);
 	}
 	else if (is_a(BuildingDescr, desc)) {
 		return CAST_TO_LUA(BuildingDescr, LuaBuildingDescription);
@@ -4135,6 +4158,11 @@ void luaopen_wlmap(lua_State * L) {
 	register_class<LuaConstructionSiteDescription>(L, "map", true);
 	add_parent<LuaConstructionSiteDescription, LuaBuildingDescription>(L);
 	add_parent<LuaConstructionSiteDescription, LuaMapObjectDescription>(L);
+	lua_pop(L, 1); // Pop the meta table
+
+	register_class<LuaDismantleSiteDescription>(L, "map", true);
+	add_parent<LuaDismantleSiteDescription, LuaBuildingDescription>(L);
+	add_parent<LuaDismantleSiteDescription, LuaMapObjectDescription>(L);
 	lua_pop(L, 1); // Pop the meta table
 
 	register_class<LuaProductionSiteDescription>(L, "map", true);
