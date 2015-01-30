@@ -98,11 +98,6 @@ static int L_string_bformat(lua_State * L) {
 					fmt % luaL_checkstring(L, i);
 					break;
 
-				case LUA_TTABLE:
-				case LUA_TFUNCTION:
-				case LUA_TUSERDATA:
-				case LUA_TTHREAD:
-				case LUA_TLIGHTUSERDATA:
 				default:
 					report_error(L, "Cannot format the given type %s at index %i", lua_typename(L, i), i);
 			}
