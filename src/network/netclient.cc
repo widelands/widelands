@@ -124,12 +124,14 @@ NetClient::NetClient
 	d->desiredspeed = 1000;
 	file = nullptr;
 
-	// Temporarily register win condition scripts to get the default
-	std::set<std::string> win_condition_scripts =
-		filter(g_fs->list_directory("scripting/win_conditions"),
-	          [](const std::string& fn) {return boost::ends_with(fn, ".lua");});
-	assert(win_condition_scripts.size());
-	d->settings.win_condition_script = *win_condition_scripts.begin();
+	// Get the default win condition script
+	LuaInterface lua;
+	std::unique_ptr<LuaTable> win_conditions(lua.run_script("scripting/win_conditions/init.lua"));
+	std::string filename = win_conditions->get_string(1);
+	if (!g_fs->file_exists(filename)) {
+		throw wexception("Win condition file \"%s\" does not exist", filename.c_str());
+	}
+	d->settings.win_condition_script = filename;
 }
 
 NetClient::~NetClient ()

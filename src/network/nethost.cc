@@ -57,6 +57,7 @@
 #include "network/network_protocol.h"
 #include "network/network_system.h"
 #include "profile/profile.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/launch_mpg.h"
@@ -294,14 +295,19 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 	}
 
 	void next_win_condition() override {
-		if (m_win_condition_scripts.size() < 1) {
+		if (m_win_condition_scripts.empty()) {
 			if (!m_lua)
 				m_lua = new LuaInterface();
-			std::set<std::string> win_conditions =
-				filter(g_fs->list_directory("scripting/win_conditions"),
-			          [](const std::string& fn) {return boost::ends_with(fn, ".lua");});
-			m_win_condition_scripts.insert(
-			   m_win_condition_scripts.end(), win_conditions.begin(), win_conditions.end());
+			std::unique_ptr<LuaTable> win_conditions(m_lua->run_script("scripting/win_conditions/init.lua"));
+			for (int key : win_conditions->keys<int>()) {
+				std::string filename = win_conditions->get_string(key);
+				if (g_fs->file_exists(filename)) {
+					m_win_condition_scripts.push_back(filename);
+				} else {
+					throw wexception("Win condition file \"%s\" does not exist", filename.c_str());
+				}
+			}
+
 			m_cur_wincondition = -1;
 		}
 
