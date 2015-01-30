@@ -176,6 +176,7 @@ TribeDescr::TribeDescr
 			add_building(items_table.get_string(key));
 		}
 
+		builder_ = parse_worker(table.get_string("builder"));
 		carrier_ = parse_worker(table.get_string("carrier"));
 		carrier2_ = parse_worker(table.get_string("carrier2"));
 		soldier_ = parse_worker(table.get_string("soldier"));
@@ -369,6 +370,10 @@ ImmovableDescr const * TribeDescr::get_immovable_descr(int index) const {
 	return egbase_.tribes().get_immovable_descr(index);
 }
 
+WareIndex TribeDescr::builder() const {
+	assert(egbase_.tribes().worker_exists(builder_));
+	return builder_;
+}
 WareIndex TribeDescr::carrier() const {
 	assert(egbase_.tribes().worker_exists(carrier_));
 	return carrier_;

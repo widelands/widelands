@@ -833,8 +833,9 @@ void Building::log_general_info(const EditorGameBase & egbase) {
 
 void Building::add_worker(Worker & worker) {
 	if (!get_workers().size()) {
-		if (worker.descr().name() != "builder")
+		if (descr().tribe().safe_worker_index(worker.descr().name()) != descr().tribe().builder()) {
 			set_seeing(true);
+		}
 	}
 	PlayerImmovable::add_worker(worker);
 	workers_changed();

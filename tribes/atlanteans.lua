@@ -88,12 +88,13 @@ tribes:new_tribe {
 		}
 	},
 
-   -- Workers positions in wares windows.
+   -- Workers positions in workers windows.
    -- This also gives us the information which workers the tribe uses.
-   -- Each subtable is a column in the wares windows.
+   -- Each subtable is a column in the workers windows.
    workers_order = {
 		{
 			-- Carriers
+			"atlanteans_builder",
 			"atlanteans_carrier",
 			"atlanteans_horse",
 			"atlanteans_horsebreeder"
@@ -141,6 +142,7 @@ tribes:new_tribe {
 		}
 	},
 
+	builder = "atlanteans_builder",
 	carrier = "atlanteans_carrier",
 	carrier2 = "atlanteans_horse",
    soldier = "atlanteans_soldier"

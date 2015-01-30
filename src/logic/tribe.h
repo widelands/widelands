@@ -96,6 +96,7 @@ struct TribeDescr {
 	WareDescr const * get_ware_descr(const WareIndex& index) const;
 	WorkerDescr const * get_worker_descr(const WareIndex& index) const;
 
+	WareIndex builder() const;
 	WareIndex carrier() const;
 	WareIndex carrier2() const;
 	WareIndex soldier() const;
@@ -152,6 +153,7 @@ private:
 	std::set<WareIndex>               wares_;
 	std::set<WareIndex>               construction_materials_; // The wares that are used by construction sites
 	// Special units
+	WareIndex                         builder_;  // The builder for this tribe
 	WareIndex                         carrier_;  // The basic carrier for this tribe
 	WareIndex                         carrier2_; // Additional carrier for busy roads
 	WareIndex                         soldier_;  // The soldier that this tribe uses

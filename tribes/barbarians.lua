@@ -82,14 +82,13 @@ tribes:new_tribe {
 		}
 	},
 
-	-- Workers positions in wares windows.
+	-- Workers positions in workers windows.
    -- This also gives us the information which workers the tribe uses.
-   -- Each subtable is a column in the wares windows.
-   -- NOCOM(#GunChleoc): We have worker, carrier and solder types here.
-   -- Maybe we need an extra list after all.
+   -- Each subtable is a column in the workers windows.
    workers_order = {
 		{
 			-- Carriers
+			"barbarians_builder",
 			"barbarians_carrier",
 			"barbarians_ox",
 			"barbarians_cattlebreeder"
@@ -139,6 +138,7 @@ tribes:new_tribe {
 		}
 	},
 
+	builder = "barbarians_builder",
 	carrier = "barbarians_carrier",
 	carrier2 = "barbarians_ox"
    soldier = "barbarians_soldier",
