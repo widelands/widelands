@@ -71,25 +71,8 @@ WorkerDescr::WorkerDescr(MapObjectType type, const LuaTable& table) :
 
 	helptext_ = table.get_string("helptext");
 
-	items_table = table.get_table("animations");
-	for (const std::string& key : items_table.keys()) {
-		const LuaTable anims_table = items_table.get_table(key);
-		for (const std::string& anim_key : anims_table.keys()) {
-			// NOCOM(GunChleoc): And the hotspot + fps?
-			add_animation(anim_key, g_gr->animations().load(anims_table.get_string("pictures")));
-		}
-	}
-
-	// If worker has a work animation load and add it.
-	if(table.has_key("work")) {
-		items_table = table.get_table("work");
-		for (const std::string& key : items_table.keys()) {
-			// NOCOM(GunChleoc): And the hotspot + fps? Also check anims below.
-			add_animation(key, g_gr->animations().load(items_table.get_string("pictures")));
-		}
-	}
-
 	// Read the walking animations
+	// NOCOM(GunChleoc): Double-check if this works
 	add_directional_animation(&walk_anims_, "walk");
 	add_directional_animation(&walkload_anims_, "walkload");
 

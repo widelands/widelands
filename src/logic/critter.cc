@@ -175,13 +175,7 @@ CritterDescr::CritterDescr(const LuaTable& table)
               table.get_string("descname"),
               nullptr)  // Can only handle world critters.
 {
-	{
-		std::unique_ptr<LuaTable> anims(table.get_table("animations"));
-		for (const std::string& animation : anims->keys<std::string>()) {
-			add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
-		}
-		add_directional_animation(&m_walk_anims, "walk");
-	}
+	add_directional_animation(&m_walk_anims, "walk");
 
 	add_attributes(
 	   table.get_table("attributes")->array_entries<std::string>(), std::set<uint32_t>());

@@ -124,10 +124,6 @@ protected:
 	std::vector<std::string> m_evade_failure_e_name;
 	std::vector<std::string> m_die_e_name;
 
-	std::vector<std::string> load_animations_from_string
-			(const std::string & directory, Profile & prof, Section & global_s,
-			 const char * anim_name);
-
 private:
 	DISALLOW_COPY_AND_ASSIGN(SoldierDescr);
 };

@@ -49,13 +49,9 @@ WareDescr::WareDescr(const LuaTable& table) :
 		helptexts_.insert(key, items_table.get_string(key));
 	}
 
-	items_table = table.get_table("animations");
-	for (const std::string& key : items_table.keys()) {
-		const LuaTable anims_table = table.get_table(key);
-		for (const std::string& anim_key : anims_table.keys()) {
-			// NOCOM(GunChleoc): And the hotspot?
-			add_animation(anim_key, g_gr->animations().load(anims_table.get_string("pictures")));
-		}
+	std::unique_ptr<LuaTable> anims(table.get_table("animations"));
+	for (const std::string& animation : anims->keys<std::string>()) {
+		add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
 	}
 }
 

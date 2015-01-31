@@ -119,19 +119,11 @@ BuildingDescr::BuildingDescr
 
 	m_enhanced_building = table.has_key("enhanced_building") ? table.get_bool("enhanced_building") : false;
 
-	// NOCOM(GunChleoc): Deal with dirname and animations
+	// NOCOM(GunChleoc): Deal with dirname
 	if (m_buildable || m_enhanced_building) {
 		//  get build icon
 		m_icon_fname  = directory;
 		m_icon_fname += "/menu.png";
-
-		//  build animation
-		if (Section * const build_s = prof.get_section("build")) {
-			if (build_s->get_int("fps", -1) != -1)
-				throw wexception("fps defined for build animation!");
-			if (!is_animation_known("build"))
-				add_animation("build", g_gr->animations().load(directory, *build_s));
-		}
 
 		// Get costs
 		if (m_buildable) {
@@ -157,27 +149,21 @@ BuildingDescr::BuildingDescr
 		}
 	}
 
-	LuaTable items_table = table.get_table("animations");
-	for (const std::string& key : items_table.keys()) {
-		const LuaTable anims_table = items_table.get_table(key);
-		for (const std::string& anim_key : anims_table.keys()) {
-			// NOCOM(GunChleoc): And the hotspot + fps?
-			if (!is_animation_known(anim_key)) {
-				add_animation(anim_key, g_gr->animations().load(anims_table.get_string("pictures")));
-			}
-		}
+	std::unique_ptr<LuaTable> anims(table.get_table("animations"));
+	for (const std::string& animation : anims->keys<std::string>()) {
+		add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
 	}
 
 	if(table.has_key("vision_range")) {
 		m_vision_range = table.get_int("vision_range");
 	}
 
-	items_table = table.get_table("helptexts");
-	helptexts_.lore_ = items_table.get_string("lore");
-	helptexts_.lore_author_ = items_table.get_string("lore_author");
-	helptexts_.purpose_ = items_table.get_string("purpose");
-	helptexts_.note_ = items_table.get_string("note");
-	helptexts_.performance_ = items_table.get_string("performance");
+	std::unique_ptr<LuaTable> items_table(table.get_table("helptexts"));
+	helptexts_.lore_ = items_table->get_string("lore");
+	helptexts_.lore_author_ = items_table->get_string("lore_author");
+	helptexts_.purpose_ = items_table->get_string("purpose");
+	helptexts_.note_ = items_table->get_string("note");
+	helptexts_.performance_ = items_table->get_string("performance");
 }
 
 

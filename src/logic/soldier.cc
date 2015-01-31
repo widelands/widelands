@@ -135,48 +135,6 @@ SoldierDescr::SoldierDescr(const LuaTable& table) :
 		m_evade_pics_fn[i] += table.get_string((boost::format("evade_level_%u_pic")
 																		% i).str());
 	}
-
-	//  All animations
-	items_table = table.get_table("animations");
-	for (const std::string& key : items_table.keys()) {
-		const LuaTable anims_table = items_table.get_table(key);
-		for (const std::string& anim_key : anims_table.keys()) {
-			// NOCOM(GunChleoc): And the hotspot + fps?
-			add_animation(anim_key, g_gr->animations().load(anims_table.get_string("pictures")));
-		}
-	}
-}
-
-// NOCOM(GunChleoc): Will be obsolete?
-std::vector<std::string> SoldierDescr::load_animations_from_string
-	(const std::string & directory, Profile & prof,
-	 Section & global_s, const char * anim_name)
-{
-	std::vector<std::string> list;
-	try {
-		const char * anim_string = global_s.get_safe_string(anim_name);
-		list = split_string(anim_string, ",");
-		if (list.size() < 1)
-			throw GameDataError
-				("expected %s but found \"%s\"",
-				 "\"anim_name[,another_anim,...]\"", anim_string);
-
-		// Sanitation
-		for (std::string& temp_str : list) {
-			remove_spaces(temp_str);
-
-			// Check that section exists
-			Section &
-				anim_s = prof.get_safe_section(temp_str.c_str());
-
-			add_animation
-				(temp_str.c_str(), g_gr->animations().load(directory, anim_s));
-		}
-	} catch (const WException & e) {
-		throw GameDataError("%s : %s", anim_name, e.what());
-	}
-
-	return list;
 }
 
 /**
