@@ -784,8 +784,6 @@ void CmdShipScoutDirection::execute (Game & game)
 {
 	upcast(Ship, ship, game.objects().get_object(serial));
 	if (ship && ship->get_owner()->player_number() == sender()) {
-		//My (tiborb) idea wat to apply following test only on computer player
-		//but perhaps it will make no harm for all players
 		if (!(ship->get_ship_state() == Widelands::Ship::EXP_WAITING ||
 			ship->get_ship_state() == Widelands::Ship::EXP_FOUNDPORTSPACE)) {
 			log (" %1d:ship on %3dx%3d received scout command but not in "
@@ -853,7 +851,6 @@ void CmdShipConstructPort::execute (Game & game)
 {
 	upcast(Ship, ship, game.objects().get_object(serial));
 	if (ship && ship->get_owner()->player_number() == sender()) {
-		//for comment see comment above
 		if (ship->get_ship_state() != Widelands::Ship::EXP_FOUNDPORTSPACE) {
 			log (" %1d:ship on %3dx%3d received build port command but "
 			"not in PORTSPACE_FOUND status (expedition: %s), ignoring...\n",
@@ -920,7 +917,6 @@ void CmdShipExploreIsland::execute (Game & game)
 {
 	upcast(Ship, ship, game.objects().get_object(serial));
 	if (ship && ship->get_owner()->player_number() == sender()) {
-		//see comment above
 		if (!(ship->get_ship_state() == Widelands::Ship::EXP_WAITING ||
 			ship->get_ship_state() == Widelands::Ship::EXP_FOUNDPORTSPACE)) {
 			log (" %1d:ship on %3dx%3d received explore island command "

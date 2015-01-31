@@ -69,6 +69,7 @@ constexpr int kTrainingSitesCheckInterval = 30 * 1000;
 
 //this is intended for map developers, by default should be off
 // NOCOM(#codereview): If this should be off by default, why is it set to "true"?
+// NOCOM(#codereview): also, should that not be in the editor? It feels quite out of place in the AI.
 constexpr bool kPrintStats = false;
 
 // Some buildings have to be built close to borders and their
@@ -173,6 +174,32 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 			//I wonder if the fix is proper and AI will be subscribed to notifcations later
 			//It would be a pity if AI get no notifications for those ships in the future
 			//NOCOM - see question above
+			// NOCOM(#codereview): This is save. Basically you subscribe the AI
+			// class to all notifications that are related to ships and you
+			// capture the 'this' in this lambda - that means that all members are
+			// available in here. As soon as somebody associates us with a player
+			// - for example in late initialization - we know which notes we need
+			// to react on. We still get all notifications, but now we know which
+			// one we need to care for.
+			// The only issue I see here is that when you play a game from start
+			// to finish, you get all notifications. On load though, we get none
+			// and only after late_initialization has been called we get
+			// notifications. So if you depend on a consistent state, loading
+			// might be bad. But that depends on your AI design at all.
+			// Not sure if that was clear, so one example. Let's assume we had a
+			// NoteShipMessage 'new_ship_ready'. And the AI has a list of ships -
+			// whenever we see the message we add the ship to the list. That is
+			// fine if you play a game from start to finish - you see all
+			// has_ships notes and your list is correct and contains all ships
+			// ever made.
+			// Lets save while we have 2 ships already. On load these ships are
+			// loaded again into the game, but since late_initialization is only
+			// called after load (I think) we do not see the notifications for
+			// these ships being added - because player_ is still nullptr. that
+			// means the AI's list of ships has 0 entries even though the player
+			// has 2 ships. I am not sure if this problem is currently in the AI
+			// somewhere or not, that is just the only thing I can think off right
+			// now that would be a problem.
 			if (player_ == nullptr) {
 				return;
 			}
@@ -188,6 +215,8 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 
 			   allships.push_back(ShipObserver());
 			   allships.back().ship = note.ship;
+				// NOCOM(#codereview): it looks like you do exactly what I described above. You have to update
+				// allships with all existing ships after load then, in late_initialization.
 				if (game().get_gametime() % 2 == 0) {
 				   allships.back().island_circ_direction = true;
 			   } else {

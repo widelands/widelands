@@ -409,6 +409,9 @@ struct ShipObserver {
 	Widelands::Ship* ship;
 	Widelands::Coords expedition_start_point_;
 	std::unordered_set<uint32_t> visited_spots_;
+	// NOCOM(#codereview): consider making the next two bools into enums each.
+	// Especially waiting_for_command_ sounds like it will evolve into a state
+	// machine in the future.
 	bool island_circ_direction = true;  // a ship circumvents all island in the same direction
 	bool waiting_for_command_ = false;
 	int32_t last_command_time = 0;
