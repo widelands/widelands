@@ -46,7 +46,6 @@ wl_library(graphic_image_cache
   DEPENDS
     base_log
     base_macros
-    graphic
     graphic_image_io
     graphic_surface
 )
@@ -200,7 +199,7 @@ wl_library(graphic
     logic
     notifications
     profile
-    scripting
+    scripting_lua_table
     sound
     wui_overlay_manager
 )

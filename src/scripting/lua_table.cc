@@ -23,6 +23,8 @@
 
 #include <boost/format.hpp>
 
+#include "base/log.h"
+
 LuaTable::LuaTable(lua_State* L) : L_(L), warn_about_unaccessed_keys_(true) {
 	// S: <table>
 	lua_pushlightuserdata(L_, const_cast<LuaTable*>(this));  // S: this

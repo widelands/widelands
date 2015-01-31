@@ -17,26 +17,16 @@
  *
  */
 
-#include "scripting/factory.h"
+#ifndef WL_SCRIPTING_REPORT_ERROR_H
+#define WL_SCRIPTING_REPORT_ERROR_H
 
-#include "scripting/lua_editor.h"
-#include "scripting/lua_game.h"
+#include "scripting/lua.h"
 
-void EditorFactory::push_player(lua_State * L, Widelands::PlayerNumber plr) {
-	to_lua<LuaEditor::LuaPlayer>(L, new LuaEditor::LuaPlayer(plr));
-}
+#ifdef __GNUC__
+void report_error(lua_State*, const char*, ...)
+	__attribute__((__format__(__printf__, 2, 3), noreturn));
+#else
+[[noreturn]] void report_error(lua_State*, const char*, ...)
+#endif
 
-void GameFactory::push_player(lua_State * L, Widelands::PlayerNumber plr) {
-		to_lua<LuaGame::LuaPlayer>(L, new LuaGame::LuaPlayer(plr));
-}
-
-Factory & get_factory(lua_State * const L) {
-	lua_getfield(L, LUA_REGISTRYINDEX, "factory");
-	Factory * fac = static_cast<Factory *>(lua_touserdata(L, -1));
-	lua_pop(L, 1); // pop this userdata
-
-	if (!fac)
-		throw LuaError("\"factory\" field was nil, which should be impossible!");
-
-	return *fac;
-}
+#endif  // end of include guard: WL_SCRIPTING_REPORT_ERROR_H

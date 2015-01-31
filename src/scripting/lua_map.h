@@ -34,8 +34,8 @@
 #include "logic/trainingsite.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
+#include "scripting/lua.h"
 #include "scripting/luna.h"
-#include "third_party/eris/lua.hpp"
 
 
 namespace Widelands {

@@ -96,7 +96,8 @@ wl_library(editor
     map_io_map_loader
     profile
     random
-    scripting
+    scripting_lua_interface
+    scripting_lua_table
     ui_basic
     ui_fsmenu
     widelands_ball_of_mud

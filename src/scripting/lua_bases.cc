@@ -27,6 +27,8 @@
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/ware_descr.h"
+#include "scripting/factory.h"
+#include "scripting/globals.h"
 #include "scripting/lua_map.h"
 
 

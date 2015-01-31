@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,19 +13,20 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
 
-#ifndef WL_SCRIPTING_LUA_GLOBALS_H
-#define WL_SCRIPTING_LUA_GLOBALS_H
+#ifndef WL_SCRIPTING_GLOBALS_H
+#define WL_SCRIPTING_GLOBALS_H
 
-#include "scripting/lua.h"
+#include "logic/game.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 
-namespace LuaGlobals {
+Widelands::Game & get_game(lua_State *);
+Widelands::EditorGameBase & get_egbase(lua_State *);
+Widelands::MapObjectLoader * get_mol(lua_State *);
+Widelands::MapObjectSaver * get_mos(lua_State *);
 
-void luaopen_globals(lua_State *);
-
-}
-
-#endif  // end of include guard: WL_SCRIPTING_LUA_GLOBALS_H
+#endif  // end of include guard: WL_SCRIPTING_GLOBALS_H

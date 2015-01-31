@@ -17,26 +17,31 @@
  *
  */
 
-#include "scripting/factory.h"
+#ifndef WL_SCRIPTING_LUA_INTERFACE_H
+#define WL_SCRIPTING_LUA_INTERFACE_H
 
-#include "scripting/lua_editor.h"
-#include "scripting/lua_game.h"
+#include <memory>
+#include <string>
 
-void EditorFactory::push_player(lua_State * L, Widelands::PlayerNumber plr) {
-	to_lua<LuaEditor::LuaPlayer>(L, new LuaEditor::LuaPlayer(plr));
-}
+#include "scripting/lua.h"
+#include "scripting/lua_errors.h"
 
-void GameFactory::push_player(lua_State * L, Widelands::PlayerNumber plr) {
-		to_lua<LuaGame::LuaPlayer>(L, new LuaGame::LuaPlayer(plr));
-}
+class LuaTable;
 
-Factory & get_factory(lua_State * const L) {
-	lua_getfield(L, LUA_REGISTRYINDEX, "factory");
-	Factory * fac = static_cast<Factory *>(lua_touserdata(L, -1));
-	lua_pop(L, 1); // pop this userdata
+// Provides an interface to call and execute Lua Code.
+class LuaInterface {
+public:
+	LuaInterface();
+	virtual ~LuaInterface();
 
-	if (!fac)
-		throw LuaError("\"factory\" field was nil, which should be impossible!");
+	// Interpret the given string, will throw 'LuaError' on any error.
+	void interpret_string(const std::string&);
 
-	return *fac;
-}
+	// Runs 'script' and returns the table it returned.
+	virtual std::unique_ptr<LuaTable> run_script(const std::string& script);
+
+protected:
+	lua_State* m_L;
+};
+
+#endif  // end of include guard: WL_SCRIPTING_LUA_INTERFACE_H

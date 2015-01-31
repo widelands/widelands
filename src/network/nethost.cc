@@ -57,7 +57,7 @@
 #include "network/network_protocol.h"
 #include "network/network_system.h"
 #include "profile/profile.h"
-#include "scripting/scripting.h"
+#include "scripting/lua_interface.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/launch_mpg.h"
 #include "wlapplication.h"
