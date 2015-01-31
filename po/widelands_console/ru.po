@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2015-01-22 11:01+0000\n"
-"PO-Revision-Date: 2015-01-21 23:05+0000\n"
+"PO-Revision-Date: 2015-01-30 20:43+0000\n"
 "Last-Translator: Vlad <vzharkih@yandex.ru>\n"
 "Language-Team: russian <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-01-23 05:50+0000\n"
+"X-Launchpad-Export-Date: 2015-01-31 05:44+0000\n"
 "X-Generator: Launchpad (build 17306)\n"
 
 #. * TRANSLATORS: %s = version information
@@ -39,18 +39,24 @@ msgid ""
 " --logfile=FILENAME   Log output to file FILENAME instead of \n"
 "                      terminal output"
 msgstr ""
+" --logfile=FILENAME   Лог записывается в файл FILENAME вместо \n"
+"                      вывода в терминале"
 
 #: ../../src/wlapplication_messages.cc:49
 msgid ""
 " --datadir=DIRNAME    Use specified directory for the widelands\n"
 "                      data files"
 msgstr ""
+" --datadir=DIRNAME    Используйте указанную папку для файлов\n"
+"                      данных игры"
 
 #: ../../src/wlapplication_messages.cc:51
 msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays"
 msgstr ""
+" --homedir=DIRNAME    Используйте указанную папку для файлов настроек,\n"
+"                      сохранений и повторов игры"
 
 #: ../../src/wlapplication_messages.cc:54
 msgid "                      Default is ~/.widelands"
@@ -64,12 +70,17 @@ msgid ""
 "                      Generates a core dump on segfaults instead of\n"
 "                      using the SDL"
 msgstr ""
+" --coredump=[true|false]\n"
+"                      Создает дамп ядра при аварийном завершении вместо\n"
+"                      использования SDL"
 
 #: ../../src/wlapplication_messages.cc:62
 msgid ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      The locale to use."
 msgstr ""
+" --language=[de_DE|sv_SE|...]\n"
+"                      Используемый язык."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands textdomain
@@ -93,7 +104,7 @@ msgstr ""
 
 #: ../../src/wlapplication_messages.cc:71
 msgid " --autosave=[...]     Automatically save each n minutes"
-msgstr ""
+msgstr " --autosave=[...]     Автоматическое сохранение каждые N минут"
 
 #: ../../src/wlapplication_messages.cc:72
 msgid ""
