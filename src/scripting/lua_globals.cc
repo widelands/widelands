@@ -81,7 +81,8 @@ static int L_string_bformat(lua_State * L) {
 
 				case LUA_TNUMBER:
 					{
-						int d = lua_tointeger(L, i);
+						//TODO(#nocom, code review): any reason why this is wrapped in a block? Otherwise, can I remove the enclosing block and outdent it?
+						const int d = lua_tointeger(L, i);
 						if (d == 0 && !lua_isnumber(L, 1)) {
 							fmt % d;
 						} else {
