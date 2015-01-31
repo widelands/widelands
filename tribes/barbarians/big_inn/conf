@@ -35,20 +35,23 @@ work=_working
 
 [produce_ration]
 return=skipped unless economy needs ration
-sleep=33000
+sleep=14000
 consume=fish,pittabread,meat
+animate=working 19000
 produce=ration
 
 [produce_snack]
 return=skipped unless economy needs snack
-sleep=35000
+sleep=15000
 consume=pittabread fish,meat beer
+animate=working 20000
 produce=snack
 
 [produce_meal]
 return=skipped unless economy needs meal
-sleep=37000
+sleep=17000
 consume=pittabread fish,meat strongbeer
+animate=working 20000
 produce=meal
 
 [work]
@@ -59,4 +62,12 @@ return=skipped
 
 [idle]
 pics=big_inn_i_??.png  # ???
-hotspot=53 62
+hotspot=57 88
+
+[build]
+pics=big_inn_b_??.png  # ???
+hotspot=57 88
+
+[working]
+pics=big_inn_w_??.png  # ???
+hotspot=57 88
