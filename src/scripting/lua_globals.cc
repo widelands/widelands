@@ -81,7 +81,6 @@ static int L_string_bformat(lua_State * L) {
 
 				case LUA_TNUMBER:
 					{
-						//TODO(#nocom, code review): any reason why this is wrapped in a block? Otherwise, can I remove the enclosing block and outdent it?
 						const int d = lua_tointeger(L, i);
 						if (d == 0 && !lua_isnumber(L, 1)) {
 							fmt % d;
@@ -107,7 +106,7 @@ static int L_string_bformat(lua_State * L) {
 					report_error(L, "Cannot format the given type %s at index %i", lua_typename(L, i), i);
 
 				default:
-					const std::string type = boost::lexical_cast<std::string>(lua_typename(L, i));
+					const std::string type = lua_typename(L, i);
 					throw LuaError("Unexpected type " + type + " is not supported");
 			}
 		}
