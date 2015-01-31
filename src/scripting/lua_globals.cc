@@ -98,8 +98,16 @@ static int L_string_bformat(lua_State * L) {
 					fmt % luaL_checkstring(L, i);
 					break;
 
-				default:
+				case LUA_TTABLE:
+				case LUA_TFUNCTION:
+				case LUA_TUSERDATA:
+				case LUA_TTHREAD:
+				case LUA_TLIGHTUSERDATA:
 					report_error(L, "Cannot format the given type %s at index %i", lua_typename(L, i), i);
+
+				default:
+					const std::string type = boost::lexical_cast<std::string>(lua_typename(L, i));
+					throw LuaError("Unexpected type " + type + " is not supported");
 			}
 		}
 
