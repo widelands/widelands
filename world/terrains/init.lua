@@ -30,7 +30,7 @@ world:new_terrain_type{
    name = "wiese1",
 
    -- The name that will be used in UI and translated.
-   descname = _ "Meadow 1",
+   descname = _ "Meadow",
 
    -- The category for sorting this into menus in the editor.
    editor_category = "green",
@@ -68,7 +68,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "wiese2",
-   descname = _ "Meadow 2",
+   descname = _ "Meadow",
    editor_category = "green",
    is = "green",
    valid_resources = {"water"},
@@ -84,7 +84,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "wiese3",
-   descname = _ "Meadow 3",
+   descname = _ "Meadow",
    editor_category = "green",
    is = "green",
    valid_resources = {"water"},
@@ -99,7 +99,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "wiese4",
-   descname = _ "Meadow 4",
+   descname = _ "Meadow",
    editor_category = "green",
    is = "green",
    valid_resources = {"water"},
@@ -159,7 +159,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "berg1",
-   descname = _ "Mountain 1",
+   descname = _ "Mountain",
    editor_category = "green",
    is = "mountain",
    valid_resources = { "coal", "iron", "gold", "granite" },
@@ -174,7 +174,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "berg2",
-   descname = _ "Mountain 2",
+   descname = _ "Mountain",
    editor_category = "green",
    is = "mountain",
    valid_resources = {"coal", "iron", "gold", "granite"},
@@ -189,7 +189,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "berg3",
-   descname = _ "Mountain 3",
+   descname = _ "Mountain",
    editor_category = "green",
    is = "mountain",
    valid_resources = {"coal", "iron", "gold", "granite"},
@@ -204,7 +204,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "berg4",
-   descname = _ "Mountain 4",
+   descname = _ "Mountain",
    editor_category = "green",
    is = "mountain",
    valid_resources = {"coal", "iron", "gold", "granite"},
@@ -315,7 +315,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "ashes2",
-   descname = _ "Ashes 2",
+   descname = _ "Ashes",
    editor_category = "wasteland",
    is = "green",
    valid_resources = { "water" },
@@ -330,7 +330,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "hardground1",
-   descname = _ "Hard Ground 1",
+   descname = _ "Hard Ground",
    editor_category = "wasteland",
    is = "green",
    valid_resources = { "water" },
@@ -345,7 +345,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "hardground2",
-   descname = _ "Hard Ground 2",
+   descname = _ "Hard Ground",
    editor_category = "wasteland",
    is = "green",
    valid_resources = { "water" },
@@ -360,7 +360,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "hardground3",
-   descname = _ "Hard Ground 3",
+   descname = _ "Hard Ground",
    editor_category = "wasteland",
    is = "green",
    valid_resources = { "water" },
@@ -375,7 +375,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "hardground4",
-   descname = _ "Hard Ground 4",
+   descname = _ "Hard Ground",
    editor_category = "wasteland",
    is = "green",
    valid_resources = { "water" },
@@ -405,7 +405,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "wasteland_mountain1",
-   descname = _ "Mountain 1",
+   descname = _ "Mountain",
    editor_category = "wasteland",
    is = "mountain",
    valid_resources = { "coal", "iron", "gold", "granite" },
@@ -420,7 +420,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "wasteland_mountain2",
-   descname = _ "Mountain 2",
+   descname = _ "Mountain",
    editor_category = "wasteland",
    is = "mountain",
    valid_resources = { "coal", "iron", "gold", "granite" },
@@ -435,7 +435,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "wasteland_mountain3",
-   descname = _ "Mountain 3",
+   descname = _ "Mountain",
    editor_category = "wasteland",
    is = "mountain",
    valid_resources = { "coal", "iron", "gold", "granite" },
@@ -450,7 +450,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "wasteland_mountain4",
-   descname = _ "Mountain 4",
+   descname = _ "Mountain",
    editor_category = "wasteland",
    is = "mountain",
    valid_resources = { "coal", "iron", "gold", "granite" },
@@ -465,7 +465,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "wasteland_beach",
-   descname = _ "Beach (Wasteland)",
+   descname = _ "Beach",
    editor_category = "wasteland",
    is = "dry",
    valid_resources = {},
@@ -480,7 +480,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "lava-stone1",
-   descname = _ "Lava Rocks 1",
+   descname = _ "Lava Rocks",
    editor_category = "wasteland",
    is = "acid",
    valid_resources = {},
@@ -496,7 +496,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "lava-stone2",
-   descname = _ "Lava Rocks 2",
+   descname = _ "Lava Rocks",
    editor_category = "wasteland",
    is = "acid",
    valid_resources = {},
@@ -512,7 +512,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "wasteland_water",
-   descname = _ "Water (Wasteland)",
+   descname = _ "Water",
    editor_category = "wasteland",
    is = "water",
    valid_resources = { "fish" },
@@ -547,7 +547,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "tundra2",
-   descname = _ "Tundra 2",
+   descname = _ "Tundra",
    editor_category = "winter",
    is = "green",
    valid_resources = { "water" },
@@ -562,7 +562,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "tundra3",
-   descname = _ "Tundra 3",
+   descname = _ "Tundra",
    editor_category = "winter",
    is = "green",
    valid_resources = { "water" },
@@ -622,7 +622,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "winter_mountain1",
-   descname = _ "Mountain 1 (Winter)",
+   descname = _ "Mountain",
    editor_category = "winter",
    is = "mountain",
    valid_resources = { "coal", "iron", "gold", "granite" },
@@ -637,7 +637,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "winter_mountain2",
-   descname = _ "Mountain 2 (Winter)",
+   descname = _ "Mountain",
    editor_category = "winter",
    is = "mountain",
    valid_resources = { "coal", "iron", "gold", "granite" },
@@ -652,7 +652,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "winter_mountain3",
-   descname = _ "Mountain 3 (Winter)",
+   descname = _ "Mountain",
    editor_category = "winter",
    is = "mountain",
    valid_resources = { "coal", "iron", "gold", "granite" },
@@ -667,7 +667,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "winter_mountain4",
-   descname = _ "Mountain 4 (Winter)",
+   descname = _ "Mountain",
    editor_category = "winter",
    is = "mountain",
    valid_resources = { "coal", "iron", "gold", "granite" },
@@ -697,7 +697,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "winter_beach",
-   descname = _ "Beach (Winter)",
+   descname = _ "Beach",
    editor_category = "winter",
    is = "dry",
    valid_resources = {},
@@ -728,7 +728,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "ice_floes2",
-   descname = _ "Ice Floes 2",
+   descname = _ "Ice Floes",
    editor_category = "winter",
    is = "water",
    valid_resources = {"fish"},
@@ -744,7 +744,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "winter_water",
-   descname = _ "Water (Winter)",
+   descname = _ "Water",
    editor_category = "winter",
    is = "water",
    valid_resources = {"fish"},
@@ -764,7 +764,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "desert4",
-   descname = _ "Desert 4",
+   descname = _ "Desert",
    editor_category = "desert",
    is = "green",
    valid_resources = {"water"},
@@ -794,7 +794,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "desert_steppe",
-   descname = _ "Steppe (Desert)",
+   descname = _ "Steppe",
    editor_category = "desert",
    is = "green",
    valid_resources = {"water"},
@@ -809,7 +809,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "meadow",
-   descname = _ "Meadow (Desert)",
+   descname = _ "Meadow",
    editor_category = "desert",
    is = "green",
    valid_resources = {"water"},
@@ -824,7 +824,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "mountainmeadow",
-   descname = _ "Mountain Meadow (Desert)",
+   descname = _ "Mountain Meadow",
    editor_category = "desert",
    is = "green",
    valid_resources = {"water"},
@@ -839,7 +839,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "highmountainmeadow",
-   descname = _ "High Mountain Meadow (Desert)",
+   descname = _ "High Mountain Meadow",
    editor_category = "desert",
    is = "green",
    valid_resources = {"water"},
@@ -854,7 +854,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "mountain1",
-   descname = _ "Mountain 1 (Desert)",
+   descname = _ "Mountain",
    editor_category = "desert",
    is = "mountain",
    valid_resources = { "coal", "iron", "gold", "granite" },
@@ -869,7 +869,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "mountain2",
-   descname = _ "Mountain 2 (Desert)",
+   descname = _ "Mountain",
    editor_category = "desert",
    is = "mountain",
    valid_resources = { "coal", "iron", "gold", "granite" },
@@ -884,7 +884,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "mountain3",
-   descname = _ "Mountain 3 (Desert)",
+   descname = _ "Mountain",
    editor_category = "desert",
    is = "mountain",
    valid_resources = { "coal", "iron", "gold", "granite" },
@@ -899,7 +899,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "mountain4",
-   descname = _ "Mountain 4 (Desert)",
+   descname = _ "Mountain",
    editor_category = "desert",
    is = "mountain",
    valid_resources = { "coal", "iron", "gold", "granite" },
@@ -914,7 +914,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "desert1",
-   descname = _ "Desert 1",
+   descname = _ "Desert",
    editor_category = "desert",
    is = "dry",
    valid_resources = {},
@@ -929,7 +929,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "desert2",
-   descname = _ "Desert 2",
+   descname = _ "Desert",
    editor_category = "desert",
    is = "dry",
    valid_resources = {},
@@ -944,7 +944,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "desert3",
-   descname = _ "Desert 3",
+   descname = _ "Desert",
    editor_category = "desert",
    is = "dry",
    valid_resources = {},
@@ -959,7 +959,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "desert_beach",
-   descname = _ "Beach (Desert)",
+   descname = _ "Beach",
    editor_category = "desert",
    is = "dry",
    valid_resources = {},
@@ -974,7 +974,7 @@ world:new_terrain_type{
 
 world:new_terrain_type{
    name = "desert_water",
-   descname = _ "Water (Desert)",
+   descname = _ "Water",
    editor_category = "desert",
    is = "water",
    valid_resources = {"fish"},
