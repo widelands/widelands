@@ -2,11 +2,11 @@
 dirname = path.dirname(__file__)
 
 return {
-	dirname .. "02_collectors.lua",
-	dirname .. "04_wood_gnome.lua",
-	dirname .. "03_territorial_time.lua",
-	dirname .. "03_territorial_lord.lua",
-	dirname .. "01_defeat_all.lua",
-	dirname .. "00_endless_game.lua",
-	dirname .. "05_endless_game_fogless.lua",
+	dirname .. "collectors.lua",
+	dirname .. "wood_gnome.lua",
+	dirname .. "territorial_time.lua",
+	dirname .. "territorial_lord.lua",
+	dirname .. "defeat_all.lua",
+	dirname .. "endless_game.lua",
+	dirname .. "endless_game_fogless.lua",
 }

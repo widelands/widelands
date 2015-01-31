@@ -299,7 +299,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			if (!m_lua)
 				m_lua = new LuaInterface();
 			std::unique_ptr<LuaTable> win_conditions(m_lua->run_script("scripting/win_conditions/init.lua"));
-			for (int key : win_conditions->keys<int>()) {
+			for (const int key : win_conditions->keys<int>()) {
 				std::string filename = win_conditions->get_string(key);
 				if (g_fs->file_exists(filename)) {
 					m_win_condition_scripts.push_back(filename);
