@@ -104,6 +104,7 @@ static int L_string_bformat(lua_State * L) {
 				case LUA_TTHREAD:
 				case LUA_TLIGHTUSERDATA:
 					report_error(L, "Cannot format the given type %s at index %i", lua_typename(L, i), i);
+					break;
 
 				default:
 					const std::string type = lua_typename(L, i);
