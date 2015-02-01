@@ -107,8 +107,10 @@ static int L_string_bformat(lua_State * L) {
 					break;
 
 				default:
-					const std::string type = lua_typename(L, i);
-					throw LuaError("Unexpected type " + type + " is not supported");
+					{
+						const std::string type = lua_typename(L, i);
+						throw LuaError("Unexpected type " + type + " is not supported");
+					}
 			}
 		}
 
