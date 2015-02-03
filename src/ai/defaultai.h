@@ -79,6 +79,7 @@ struct DefaultAI : ComputerPlayer {
 	};
 
 	enum class WalkSearch : uint8_t {kAnyPlayer, kOtherPlayers };
+	enum class NewShip : uint8_t {kBuilt, kFoundOnLoad };
 
 	/// Implementation for Aggressive
 	struct AggressiveImpl : public ComputerPlayer::Implementation {
@@ -192,6 +193,7 @@ private:
 	void lose_immovable(const Widelands::PlayerImmovable&);
 	void gain_building(Widelands::Building&);
 	void lose_building(const Widelands::Building&);
+	void gain_ship(Widelands::Ship&, NewShip);
 	void expedition_management(ShipObserver&);
 	void out_of_resources_site(const Widelands::ProductionSite&);
 

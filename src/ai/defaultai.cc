@@ -68,8 +68,6 @@ constexpr int kMarineDecisionInterval = 20 * 1000;
 constexpr int kTrainingSitesCheckInterval = 30 * 1000;
 
 //this is intended for map developers, by default should be off
-// NOCOM(#codereview): If this should be off by default, why is it set to "true"?
-// NOCOM(#codereview): also, should that not be in the editor? It feels quite out of place in the AI.
 constexpr bool kPrintStats = false;
 
 // Some buildings have to be built close to borders and their
@@ -170,36 +168,10 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 	// Subscribe to ShipNotes.
 	shipnotes_subscriber_ =
 	   Notifications::subscribe<NoteShipMessage>([this](const NoteShipMessage& note) {
-			//this is to prevent crash on loading
-			//I wonder if the fix is proper and AI will be subscribed to notifcations later
-			//It would be a pity if AI get no notifications for those ships in the future
-			//NOCOM - see question above
-			// NOCOM(#codereview): This is save. Basically you subscribe the AI
-			// class to all notifications that are related to ships and you
-			// capture the 'this' in this lambda - that means that all members are
-			// available in here. As soon as somebody associates us with a player
-			// - for example in late initialization - we know which notes we need
-			// to react on. We still get all notifications, but now we know which
-			// one we need to care for.
-			// The only issue I see here is that when you play a game from start
-			// to finish, you get all notifications. On load though, we get none
-			// and only after late_initialization has been called we get
-			// notifications. So if you depend on a consistent state, loading
-			// might be bad. But that depends on your AI design at all.
-			// Not sure if that was clear, so one example. Let's assume we had a
-			// NoteShipMessage 'new_ship_ready'. And the AI has a list of ships -
-			// whenever we see the message we add the ship to the list. That is
-			// fine if you play a game from start to finish - you see all
-			// has_ships notes and your list is correct and contains all ships
-			// ever made.
-			// Lets save while we have 2 ships already. On load these ships are
-			// loaded again into the game, but since late_initialization is only
-			// called after load (I think) we do not see the notifications for
-			// these ships being added - because player_ is still nullptr. that
-			// means the AI's list of ships has 0 entries even though the player
-			// has 2 ships. I am not sure if this problem is currently in the AI
-			// somewhere or not, that is just the only thing I can think off right
-			// now that would be a problem.
+
+			// in a short time between start and late_initialization the player
+			// can get notes that can not be processed.
+			// It seems that this causes no problem, at least no substantial
 			if (player_ == nullptr) {
 				return;
 			}
@@ -210,18 +182,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 			switch (note.message) {
 
 			case NoteShipMessage::Message::kGained:
-
-			   marineTaskQueue_.push_back(kStopShipyard);
-
-			   allships.push_back(ShipObserver());
-			   allships.back().ship = note.ship;
-				// NOCOM(#codereview): it looks like you do exactly what I described above. You have to update
-				// allships with all existing ships after load then, in late_initialization.
-				if (game().get_gametime() % 2 == 0) {
-				   allships.back().island_circ_direction = true;
-			   } else {
-				   allships.back().island_circ_direction = false;
-			   }
+			   gain_ship(*note.ship, NewShip::kBuilt);
 			   break;
 
 			case NoteShipMessage::Message::kLost:
@@ -552,10 +513,32 @@ void DefaultAI::late_initialization() {
 		resource_necessity_water_needed_ = true;
 	}
 
-	// Add all fields that we own
 	Map& map = game().map();
-	std::set<OPtr<PlayerImmovable>> found_immovables;
 
+	//here we scan entire map for own ships
+	std::set<OPtr<Ship>> found_ships;
+	for (int16_t y = 0; y < map.get_height(); ++y) {
+		for (int16_t x = 0; x < map.get_width(); ++x) {
+			FCoords f = map.get_fcoords(Coords(x, y));
+			//there are too many bobs on the map so we investigate
+			//only bobs on water
+			if (f.field->nodecaps() & MOVECAPS_SWIM){
+				for (Bob * bob = f.field->get_first_bob();
+					bob;
+					bob = bob->get_next_on_field()) {
+					if (upcast(Ship, ship, bob)) {
+						if (ship->get_owner() == player_ && !found_ships.count(ship)) {
+							found_ships.insert(ship);
+							gain_ship(*ship, NewShip::kFoundOnLoad);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	//here we scan entire map for owned unused fields and own buildings
+	std::set<OPtr<PlayerImmovable>> found_immovables;
 	for (int16_t y = 0; y < map.get_height(); ++y) {
 		for (int16_t x = 0; x < map.get_width(); ++x) {
 			FCoords f = map.get_fcoords(Coords(x, y));
@@ -567,7 +550,6 @@ void DefaultAI::late_initialization() {
 			unusable_fields.push_back(f);
 
 			if (upcast(PlayerImmovable, imm, f.field->get_immovable())) {
-
 				//  Guard by a set - immovables might be on several nodes at once.
 				if (&imm->owner() == player_ && !found_immovables.count(imm)) {
 					found_immovables.insert(imm);
@@ -3504,6 +3486,24 @@ void DefaultAI::gain_immovable(PlayerImmovable& pi) {
 	}
 }
 
+// this is called whenever we gain ownership of a Ship
+void DefaultAI::gain_ship(Ship& ship, NewShip type) {
+
+	if (type == NewShip::kBuilt) {
+		marineTaskQueue_.push_back(kStopShipyard);
+	} else {
+		seafaring_economy = true;
+	}
+
+	allships.push_back(ShipObserver());
+	allships.back().ship = &ship;
+	if (game().get_gametime() % 2 == 0) {
+	   allships.back().island_circ_direction = ShipObserver::CLOCKWISE;
+	} else {
+	   allships.back().island_circ_direction = ShipObserver::COUNTERCLOCKWISE;
+	}
+}
+
 // this is called whenever we lose ownership of a PlayerImmovable
 void DefaultAI::lose_immovable(const PlayerImmovable& pi) {
 	if (upcast(Building const, building, &pi)) {
@@ -3841,6 +3841,7 @@ void DefaultAI::gain_building(Building& b) {
 			warehousesites.back().bo = &bo;
 			if (bo.is_port_) {
 				++num_ports;
+				seafaring_economy = true;
 			}
 		}
 	}
@@ -4246,7 +4247,11 @@ void DefaultAI::review_wares_targets(int32_t const gametime) {
 	}
 }
 
-// This is used for map tweaking, so by default it is of (see kPrintStats)
+// This prints some basic statistics during a game to the command line -
+// missing materials and counts of different types of buildings.
+// The main purpose of this is when a game creator needs to finetune a map
+// and needs to know what resourcess are missing for which player and so on.
+// By default it is off (see kPrintStats)
 // TODO(tiborb ?): - it would be nice to have this activated by a command line switch
 void DefaultAI::print_stats() {
 
