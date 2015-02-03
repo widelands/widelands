@@ -2,14 +2,14 @@
 # Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
-# GunChleoc <fios@foramnagaidhlig.net>, 2013, 2014.
+# GunChleoc <fios@foramnagaidhlig.net>, 2013, 2014, 2015.
 # bratzbert <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2015-01-22 11:01+0000\n"
-"PO-Revision-Date: 2015-01-23 02:25+0000\n"
+"PO-Revision-Date: 2015-02-03 02:53+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
@@ -17,8 +17,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2015-01-24 05:33+0000\n"
-"X-Generator: Launchpad (build 17306)\n"
+"X-Launchpad-Export-Date: 2015-02-03 05:47+0000\n"
+"X-Generator: Launchpad (build 17330)\n"
 "Language: gd\n"
 
 #: ../../src/ai/computer_player.cc:39
@@ -1235,15 +1235,15 @@ msgstr "Mearachd an loidsig"
 
 #: ../../src/logic/warehouse.cc:455
 msgid "A new port was added to your economy."
-msgstr ""
+msgstr "Chaidh port ùr a chur ris an eaconamaidh agad."
 
 #: ../../src/logic/warehouse.cc:462
 msgid "A new headquarters was added to your economy."
-msgstr ""
+msgstr "Chaidh prìomh-àras ùr a chur ris an eaconamaidh agad."
 
 #: ../../src/logic/warehouse.cc:469
 msgid "A new warehouse was added to your economy."
-msgstr ""
+msgstr "Chaidh taigh-stòrais ùr a chur ris an eaconamaidh agad."
 
 #: ../../src/logic/worker.cc:120
 #, c-format
@@ -3675,7 +3675,7 @@ msgstr "Ais-thionndaidh na thagh thu"
 #: ../../src/wui/game_message_menu.cc:621
 #, c-format
 msgid "Del: %s"
-msgstr ""
+msgstr "Del: %s"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:152
@@ -3692,12 +3692,12 @@ msgstr "Dhan tasglann"
 #: ../../src/wui/game_message_menu.cc:173
 #, c-format
 msgid "G: %s"
-msgstr ""
+msgstr "G: %s"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:175
 msgid "Center main mapview on location"
-msgstr ""
+msgstr "Meadhanaich sealladh a’ mhapa air an ionad"
 
 #. * TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey
 #: ../../src/wui/game_message_menu.cc:500
@@ -3707,68 +3707,68 @@ msgstr ""
 #: ../../src/wui/game_message_menu.cc:523
 #: ../../src/wui/game_message_menu.cc:527
 msgid "%1% (Hotkey: %2%)"
-msgstr ""
+msgstr "%1% (Hotkey: %2%)"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:502
 msgid "Show all messages"
-msgstr ""
+msgstr "Seall a h-uile teachdaireachd"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:513
 msgid "Show geologists' messages only"
-msgstr ""
+msgstr "Na seall ach teachdaireachdan nan clach-eòlaichean"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:517
 msgid "Show economy messages only"
-msgstr ""
+msgstr "Na seall ach teachdaireachdan na h-eaconamaidh"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:521
 msgid "Show seafaring messages only"
-msgstr ""
+msgstr "Na seall ach teachdaireachdan na seòladaireachd"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:525
 msgid "Show warfare messages only"
-msgstr ""
+msgstr "Na seall ach teachdaireachdan a’ chogaidh"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:529
 msgid "Show scenario messages only"
-msgstr ""
+msgstr "Na seall ach teachdaireachdan a’ chnàmh-sgeòil"
 
 #. * TRANSLATORS: This is a message's type
 #: ../../src/wui/game_message_menu.cc:543
 msgid "Geologists"
-msgstr ""
+msgstr "Clach-eòlaichean"
 
 #. * TRANSLATORS: This is a message's type
 #: ../../src/wui/game_message_menu.cc:548
 msgid "Economy"
-msgstr ""
+msgstr "Eaconamaidh"
 
 #. * TRANSLATORS: This is a message's type
 #: ../../src/wui/game_message_menu.cc:558
 msgid "Warfare"
-msgstr ""
+msgstr "Cogadh"
 
 #. * TRANSLATORS: This show up instead of a message's type when there are no messages found
 #: ../../src/wui/game_message_menu.cc:568
 msgid "No message found"
-msgstr ""
+msgstr "Cha deach teachdaireachd a lorg"
 
 #. * TRANSLATORS: This is the default message type
 #: ../../src/wui/game_message_menu.cc:572
 msgid "General"
-msgstr ""
+msgstr "Coitcheann"
 
 #. * TRANSLATORS: %s is a message's type
 #: ../../src/wui/game_message_menu.cc:578
 #, c-format
 msgid "Type of this message: %s"
-msgstr ""
+msgstr "Seòrsa na teachdaireachd seo: %s"
 
 #: ../../src/wui/game_message_menu.cc:607
 msgid "Messages: Archive"
