@@ -186,7 +186,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame
 				/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
 				/** TRANSLATORS: %s is a list of game modes. */
 				((boost::format(_("Game Mode: %s."))
-				  % i18n::localize_item_list(modes, i18n::ConcatenateWith::COMMA))).str();
+				  % i18n::localize_list(modes, i18n::ConcatenateWith::COMMA))).str();
 		const std::string mode_tooltip_2 =
 				_("Numbers are the number of players.");
 

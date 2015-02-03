@@ -405,8 +405,8 @@ void DefaultAI::late_initialization() {
 		bo.prohibited_till_ = bh.get_prohibited_till() * 1000;  // value in conf is in seconds
 		bo.forced_after_ = bh.get_forced_after() * 1000;        // value in conf is in seconds
 		bo.is_port_ = bld.get_isport();
-		if (char const* const s = bh.get_renews_map_resource()) {
-			bo.production_hint_ = tribe_->safe_ware_index(s);
+		if (bh.get_renews_map_resource()) {
+			bo.production_hint_ = tribe_->safe_ware_index(bh.get_renews_map_resource());
 		}
 
 		// I just presume cut wood is named "log" in the game
@@ -429,8 +429,8 @@ void DefaultAI::late_initialization() {
 
 			if (bo.type == BuildingObserver::MINE) {
 				// get the resource needed by the mine
-				if (char const* const s = bh.get_mines()) {
-					bo.mines_ = world.get_resource(s);
+				if (bh.get_mines()) {
+					bo.mines_ = world.get_resource(bh.get_mines());
 				}
 
 				bo.mines_percent_ = bh.get_mines_percent();

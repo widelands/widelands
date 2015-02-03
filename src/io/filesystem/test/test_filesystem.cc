@@ -41,9 +41,7 @@ static std::string Win32Path(std::string s)
 }
 static int setenv(const char* envname, const char* envval, int overwrite)
 {
-	std::stringstream s;
-	s << envname << "=" << Win32Path(envval);
-	return _putenv(s.str().c_str());
+	return _putenv_s(envname, envval);
 }
 #else
 // BOOST_CHECK_EQUAL generates an old-style cast usage warning, so ignore
