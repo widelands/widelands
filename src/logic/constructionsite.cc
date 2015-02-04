@@ -30,6 +30,7 @@
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/tribe.h"
@@ -38,7 +39,6 @@
 #include "sound/sound_handler.h"
 #include "ui_basic/window.h"
 #include "wui/interactive_gamebase.h"
-#include "wui/text_constants.h"
 
 namespace Widelands {
 

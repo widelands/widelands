@@ -446,14 +446,30 @@ void Warehouse::init(EditorGameBase & egbase)
 		m_next_stock_remove_act = schedule_act(*game, 4000);
 
 		log("Message: adding (wh) (%s) %i \n", to_string(descr().type()).c_str(), player.player_number());
-		send_message
-			(*game,
-			 "warehouse",
-			 descr().descname(),
-			 (boost::format(_("A new %s was added to your economy."))
-			  % descr().descname().c_str()).str(),
-			 true);
+
+		if (descr().name() == "port") {
+			send_message
+				(*game,
+				 Message::Type::kSeafaring,
+				 descr().descname(),
+				 _("A new port was added to your economy."),
+				 true);
+		} else if (descr().name() == "headquarters") {
+			send_message
+				(*game,
+				 Message::Type::kEconomy,
+				 descr().descname(),
+				 _("A new headquarters was added to your economy."),
+				 true);
+		} else {
+			send_message
+				(*game,
+				 Message::Type::kEconomy,
+				 descr().descname(),
+				 _("A new warehouse was added to your economy."),
+				 true);
 		}
+	}
 
 	if (uint32_t const conquer_radius = descr().get_conquers())
 		egbase.conquer_area

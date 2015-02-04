@@ -122,15 +122,18 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, uint8_t const t)
 
 	// Subscribe to NoteImmovables.
 	immovable_subscriber_ =
-	   Notifications::subscribe<NoteImmovable>([this](const NoteImmovable& note) {
+		Notifications::subscribe<NoteImmovable>([this](const NoteImmovable& note) {
+			if (player_ == nullptr) {
+				return;
+			}
 			if (note.pi->owner().player_number() != player_->player_number()) {
-			   return;
-		   }
+				return;
+			}
 			if (note.ownership == NoteImmovable::Ownership::GAINED) {
-			   gain_immovable(*note.pi);
-		   } else {
-			   lose_immovable(*note.pi);
-		   }
+				gain_immovable(*note.pi);
+			} else {
+				lose_immovable(*note.pi);
+			}
 		});
 
 	// Subscribe to ProductionSiteOutOfResources.
@@ -317,8 +320,8 @@ void DefaultAI::late_initialization() {
 		bo.mountain_conqueror_ = bh.is_mountain_conqueror();
 		bo.prohibited_till_ = bh.get_prohibited_till() * 1000;  // value in conf is in seconds
 		bo.forced_after_ = bh.get_forced_after() * 1000;        // value in conf is in seconds
-		if (char const* const s = bh.get_renews_map_resource()) {
-			bo.production_hint_ = tribe_->safe_ware_index(s);
+		if (bh.renews_map_resource()) {
+			bo.production_hint_ = tribe_->safe_ware_index(bh.get_renews_map_resource());
 		}
 
 		// I just presume cut wood is named "log" in the game
@@ -342,8 +345,8 @@ void DefaultAI::late_initialization() {
 
 			if (bo.type == BuildingObserver::MINE) {
 				// get the resource needed by the mine
-				if (char const* const s = bh.get_mines()) {
-					bo.mines_ = world.get_resource(s);
+				if (bh.has_mines()) {
+					bo.mines_ = world.get_resource(bh.get_mines());
 				}
 
 				bo.mines_percent_ = bh.get_mines_percent();

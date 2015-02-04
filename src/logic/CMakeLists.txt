@@ -230,6 +230,8 @@ wl_library(logic
     game_io
     graphic
     graphic_color
+    graphic_text
+    graphic_text_layout
     graphic_image_io
     graphic_surface
     graphic_texture_atlas
@@ -253,5 +255,4 @@ wl_library(logic
     wui
     wui_mapview_pixelfunctions
     wui_overlay_manager
-    wui_text_layout
 )

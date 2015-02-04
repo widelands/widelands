@@ -24,6 +24,8 @@
 #include "base/macros.h"
 #include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 #include "logic/findbob.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
@@ -31,8 +33,6 @@
 #include "logic/ship.h"
 #include "profile/profile.h"
 #include "wui/game_summary.h"
-#include "wui/text_constants.h"
-#include "wui/text_layout.h"
 
 namespace {
 

@@ -40,7 +40,7 @@ animate=working 35000
 return=completed
 
 [idle]
-pics=work_??.png
+pics=idle_??.png
 hotspot=50 63
 
 [build]

@@ -7,25 +7,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2014-12-05 11:30+0000\n"
-"PO-Revision-Date: 2014-10-29 18:28+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"POT-Creation-Date: 2014-12-16 11:38+0000\n"
+"PO-Revision-Date: 2015-01-16 15:26+0000\n"
+"Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-12-06 05:37+0000\n"
-"X-Generator: Launchpad (build 17274)\n"
+"X-Launchpad-Export-Date: 2015-01-17 05:36+0000\n"
+"X-Generator: Launchpad (build 17304)\n"
 "Language: it\n"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:17
 msgid "Introduction"
-msgstr ""
+msgstr "Introduzione"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:19
 msgid "Soldiers, Training and Warfare"
-msgstr ""
+msgstr "Soldati, addestramento e guerra"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:20
 msgid ""
@@ -35,6 +35,11 @@ msgid ""
 "mainly focused on economics, not on military strategies, and its mechanics "
 "deserve explanation."
 msgstr ""
+"In questo scenario, ho intenzione di parlarti dei soldati, del loro "
+"addestramento e della loro professione: la guerra. Sebbene Widelands "
+"riguardi la costruzione, non la distruzione, c'è un nemico che a volte devi "
+"sconfiggere. Ma la guerra è focalizzata principalmente sull'economia, non "
+"sulle strategie militari, e la sua meccanica merita una spiegazione."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:21
 msgid ""
@@ -42,10 +47,13 @@ msgid ""
 "also have enough wares, so you do not have to take care of your weapons "
 "production. In a real game, you will not have this luxury."
 msgstr ""
+"Ho creato un piccolo villaggio che contiene gli edifici più importanti. Hai "
+"anche abbastanza merci, in modo da non avere da prenderti cura della tua "
+"produzione di armi. In una partita vera e propria, non avrai questo lusso."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:28
 msgid "Soldiers’ abilities"
-msgstr ""
+msgstr "Abilità dei soldati"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:30
 msgid ""
@@ -80,6 +88,8 @@ msgid ""
 "The total life of a soldier. A barbarian soldier starts with 130 health, and "
 "he will gain 28 health with each health level."
 msgstr ""
+"La vita totale di un soldato. Un soldato barbaro inizia con 130 punti "
+"salute, e guadagnerà 28 punti salute ad ogni livello di salute."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:36
 msgid "Attack:"
@@ -120,18 +130,23 @@ msgstr ""
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:47
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:67
 msgid "The Battle Arena"
-msgstr ""
+msgstr "L'arena di battaglia"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:49
 msgid ""
 "Now I have talked about training and levels. Let me elaborate on that."
 msgstr ""
+"Ora ho parlato di addestramento e livelli. Lascia che ti chiarisca queste "
+"cose."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:50
 msgid ""
 "A newly created soldier has no experience and is not very good at fighting. "
 "To make him stronger, you can build training sites."
 msgstr ""
+"Un soldato appena creato non ha alcuna esperienza e non è molto bravo a "
+"combattere. Per renderlo più forte, puoi costruire dei centri di "
+"addestramento."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:51
 msgid ""
@@ -147,11 +162,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:57
 msgid "Build a battle arena"
-msgstr ""
+msgstr "Costruisci un'arena di battaglia"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:60
 msgid "Build a battle arena. It is a big building."
-msgstr ""
+msgstr "Costruisci un'arena di battaglia. È un edificio grande."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:61
 msgid ""
@@ -161,7 +176,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:69
 msgid "The Battle Arena Has Been Constructed"
-msgstr ""
+msgstr "L'arena di battaglia è stata costruita"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:70
 msgid ""
@@ -210,7 +225,7 @@ msgstr ""
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:86
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:103
 msgid "The Training Camp"
-msgstr ""
+msgstr "Il campo di addestramento"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:87
 msgid ""
@@ -222,11 +237,11 @@ msgstr ""
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:89
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:97
 msgid "Build a training camp."
-msgstr ""
+msgstr "Costruisci un campo di addestramento."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:93
 msgid "Build a training camp"
-msgstr ""
+msgstr "Costruisci un campo di addestramento"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:95
 msgid ""
@@ -267,7 +282,7 @@ msgstr ""
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:114
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:116
 msgid "Heroes and Rookies"
-msgstr ""
+msgstr "Eroi e reclute"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:117
 msgid ""
@@ -297,11 +312,11 @@ msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:126
 msgid "Soldier capacity"
-msgstr ""
+msgstr "Capacità di soldati"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:128
 msgid "Adjusting the number of soldiers"
-msgstr ""
+msgstr "Regolare il numero di soldati"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:129
 msgid ""
@@ -351,7 +366,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143
 msgid "Dismantling military buildings"
-msgstr ""
+msgstr "Smantellare gli edifici militari"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:144
 msgid ""
@@ -380,7 +395,7 @@ msgstr ""
 #: TRANSLATORS: 'it' refers to the Barbarian sentry
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:149
 msgid "Dismantle it."
-msgstr ""
+msgstr "Smantellalo."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:151
 msgid ""
@@ -461,7 +476,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:185
 msgid "Defeat your Enemy"
-msgstr ""
+msgstr "Sconfiggi il tuo nemico"
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:187
 msgid "Defeat the Enemy"
@@ -529,6 +544,10 @@ msgid ""
 "setting up a new game, you can also choose peaceful win conditions. You "
 "should definitely try them out, they’re worth it."
 msgstr ""
+"Ma una guerra è costosa, e non è sempre il percorso che conduce alla meta. "
+"Quando si configura una nuova partita, è anche possibile scegliere le "
+"condizioni di vittoria pacifica. Dovresti sicuramente provarle, ne valgono "
+"la pena."
 
 #: ../../campaigns/tutorial02_warfare.wmf/scripting/texts.lua:210
 msgid ""

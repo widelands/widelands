@@ -109,4 +109,4 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(BlendedBlitProgram);
 };
 
-#endif  // end of include guard: WL_GRAPHIC_GL_DRAW_RECT_PROGRAM_H
+#endif  // end of include guard: WL_GRAPHIC_GL_BLIT_PROGRAM_H

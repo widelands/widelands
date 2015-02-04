@@ -23,7 +23,6 @@
 #include <boost/format.hpp>
 
 #include "base/macros.h"
-#include "graphic/font.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "logic/building.h"

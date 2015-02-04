@@ -23,7 +23,6 @@
 
 #include <boost/format.hpp>
 
-#include "base/i18n.h"
 #include "build_info.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
@@ -82,7 +81,7 @@ static int L_string_bformat(lua_State * L) {
 
 				case LUA_TNUMBER:
 					{
-						int d = lua_tointeger(L, i);
+						const int d = lua_tointeger(L, i);
 						if (d == 0 && !lua_isnumber(L, 1)) {
 							fmt % d;
 						} else {
@@ -105,6 +104,13 @@ static int L_string_bformat(lua_State * L) {
 				case LUA_TTHREAD:
 				case LUA_TLIGHTUSERDATA:
 					report_error(L, "Cannot format the given type %s at index %i", lua_typename(L, i), i);
+					break;
+
+				default:
+					{
+						const std::string type = lua_typename(L, i);
+						throw LuaError("Unexpected type " + type + " is not supported");
+					}
 			}
 		}
 

@@ -26,7 +26,6 @@
 #include "base/log.h"
 #include "graphic/image.h"
 #include "graphic/image_io.h"
-#include "graphic/in_memory_image.h"
 #include "graphic/texture.h"
 
 ImageCache::ImageCache() {
@@ -49,7 +48,7 @@ const Image* ImageCache::insert(const std::string& hash, std::unique_ptr<const I
 const Image* ImageCache::get(const std::string& hash) {
 	ImageMap::const_iterator it = images_.find(hash);
 	if (it == images_.end()) {
-		images_.insert(make_pair(hash, new_in_memory_image(load_image(hash).release())));
+		images_.insert(make_pair(hash, load_image(hash)));
 		return get(hash);
 	}
 	return it->second.get();
