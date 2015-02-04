@@ -405,7 +405,7 @@ void DefaultAI::late_initialization() {
 		bo.prohibited_till_ = bh.get_prohibited_till() * 1000;  // value in conf is in seconds
 		bo.forced_after_ = bh.get_forced_after() * 1000;        // value in conf is in seconds
 		bo.is_port_ = bld.get_isport();
-		if (bh.get_renews_map_resource()) {
+		if (bh.renews_map_resource()) {
 			bo.production_hint_ = tribe_->safe_ware_index(bh.get_renews_map_resource());
 		}
 
