@@ -23,6 +23,7 @@
 
 #include <boost/format.hpp>
 
+#include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/texture.h"
 #include "logic/game_data_error.h"

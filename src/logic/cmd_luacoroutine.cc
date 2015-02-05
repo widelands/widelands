@@ -27,8 +27,8 @@
 #include "logic/game_controller.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
+#include "scripting/logic.h"
 #include "scripting/lua_coroutine.h"
-#include "scripting/scripting.h"
 
 namespace Widelands {
 

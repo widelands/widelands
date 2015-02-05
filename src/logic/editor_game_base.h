@@ -31,11 +31,11 @@
 #include "logic/map.h"
 #include "logic/player_area.h"
 #include "notifications/notifications.h"
+#include "scripting/lua_interface.h"
 
 namespace UI {struct ProgressWindow;}
 struct FullscreenMenuLaunchGame;
 class InteractiveBase;
-class LuaInterface;
 
 namespace Widelands {
 
@@ -190,7 +190,7 @@ public:
 	}
 
 	/// Lua frontend, used to run Lua scripts
-	LuaInterface& lua() {
+	virtual LuaInterface& lua() {
 		return *lua_;
 	}
 

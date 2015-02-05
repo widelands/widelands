@@ -56,7 +56,8 @@ wl_library(ui_fsmenu
     map_io_map_loader
     network
     profile
-    scripting
+    scripting_lua_interface
+    scripting_lua_table
     sound
     ui_basic
     widelands_ball_of_mud

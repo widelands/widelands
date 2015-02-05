@@ -36,7 +36,6 @@
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "map_io/widelands_map_loader.h"
-#include "scripting/scripting.h"
 
 using namespace Widelands;
 

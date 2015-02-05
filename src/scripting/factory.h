@@ -22,7 +22,7 @@
 
 
 #include "logic/widelands.h"
-#include "third_party/eris/lua.hpp"
+#include "scripting/lua.h"
 
 /*
  * Class to create the correct type for types shared between Editor and Game.
@@ -47,5 +47,7 @@ public:
 
 	void push_player(lua_State * L, Widelands::PlayerNumber plr) override;
 };
+
+Factory & get_factory(lua_State * const L);
 
 #endif  // end of include guard: WL_SCRIPTING_FACTORY_H
