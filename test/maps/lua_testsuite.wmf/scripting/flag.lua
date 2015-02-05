@@ -139,3 +139,19 @@ function flag_tests:test_get_wares_non_existant_name()
       self.f:get_wares{"meat", "balloon"}
    end)
 end
+
+-- ===================
+-- buildings and roads
+-- ===================
+-- NOCOM(#codereview): Write separate tests for these 2 functions, so it will be easier to track down any bugs.
+function flag_tests:roads_and_buildings_test()
+   self.wf = map:get_field(4,14)
+   self.w = player1:place_building("warehouse", self.wf)
+   self.f1=self.w.flag
+   self.r = player1:place_road(self.f1, "br", "br", "br")
+   self.f2 = self.f1.fields[1].brn.brn.brn.immovable
+   assert_not_nil(self.f2.roads.tl)
+   assert_not_nil(self.f2.roads.tl.start_flag)
+   assert_not_nil(self.f1.building)
+   assert_equal(self.f2.debug_economy,self.w.debug_economy)
+end

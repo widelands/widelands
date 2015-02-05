@@ -596,11 +596,7 @@ public:
 	/*
 	 * Properties
 	 */
-	// NOCOM(#codereview): Why are these methods in this class? They belong in LuaFlag in lua_map, right?
-	// this is LuaFlag, is not it? //NOCOM
 	int get_roads(lua_State * L);
-	// NOCOM(#codereview): add a test for this method.
-	// see game.lua    //NOCOM
 	int get_building(lua_State * L);
 	/*
 	 * Lua Methods
