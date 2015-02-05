@@ -29,6 +29,7 @@
 #include "economy/request.h"
 #include "economy/ware_instance.h"
 #include "economy/wares_queue.h"
+#include "graphic/text_constants.h"
 #include "logic/carrier.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
@@ -38,7 +39,6 @@
 #include "logic/tribe.h"
 #include "logic/warelist.h"
 #include "logic/world/world.h"
-#include "wui/text_constants.h"
 
 namespace Widelands {
 
@@ -229,6 +229,11 @@ ProductionSite::ProductionSite(const ProductionSiteDescr & ps_descr) :
 
 ProductionSite::~ProductionSite() {
 	delete[] m_working_positions;
+}
+
+void ProductionSite::load_finish(EditorGameBase & egbase) {
+	Building::load_finish(egbase);
+	calc_statistics();
 }
 
 
@@ -944,7 +949,7 @@ void ProductionSite::notify_player(Game & game, uint8_t minutes)
 			assert(!descr().out_of_resource_message().empty());
 			send_message
 				(game,
-					  "produce",
+				 Message::Type::kEconomy,
 				 descr().out_of_resource_title(),
 				 descr().out_of_resource_message(),
 				 true,

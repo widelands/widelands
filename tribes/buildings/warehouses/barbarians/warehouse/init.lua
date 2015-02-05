@@ -36,13 +36,11 @@ tribes:new_warehouse_type {
    animations = {
 		idle = {
 			pictures = { dirname .. "idle_\\d+.png" },
-			hotspot = { 58, 58 }
+			hotspot = { 60, 78 }
 		},
 		build = {
 			pictures = { dirname .. "build_\\d+.png" },
-			hotspot = { 58, 58 }
+			hotspot = { 60, 78 }
 		}
 	},
-
-   heal_per_second = 170,
 }

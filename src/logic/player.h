@@ -489,11 +489,7 @@ public:
 	void count_civil_bld_defeated() {++m_civil_blds_defeated;}
 
 	// Statistics
-	const BuildingStatsVector & get_building_statistics
-		(const BuildingIndex& i) const
-	{
-		return m_building_stats[i];
-	}
+	const BuildingStatsVector& get_building_statistics(const BuildingIndex& i) const;
 
 	std::vector<uint32_t> const * get_ware_production_statistics
 		(WareIndex const) const;
@@ -522,9 +518,10 @@ public:
 	}
 
 private:
+	BuildingStatsVector* get_mutable_building_statistics(const BuildingIndex& i);
 	void update_building_statistics(Building &, NoteImmovable::Ownership ownership);
 	void update_team_players();
-	void play_message_sound(const std::string & sender);
+	void play_message_sound(const Message::Type & msgtype);
 	void _enhance_or_dismantle
 		(Building *, BuildingIndex const index_of_new_building);
 

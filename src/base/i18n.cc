@@ -254,7 +254,7 @@ void set_locale(std::string name) {
 	locale = lang;
 #endif
 #ifdef _WIN32
-	putenv(const_cast<char *>((std::string("LANG=") + lang).c_str()));
+	_putenv_s("LANG", lang.c_str());
 	locale = lang;
 #endif
 
@@ -309,7 +309,7 @@ void set_locale(std::string name) {
 	if (!textdomains.empty()) {
 		char const * const domain = textdomains.back().first.c_str();
 
-		bind_textdomain_codeset (domain, "UTF-8");
+		bind_textdomain_codeset(domain, "UTF-8");
 		bindtextdomain(domain, textdomains.back().second.c_str());
 		textdomain(domain);
 	}
@@ -318,7 +318,7 @@ void set_locale(std::string name) {
 const std::string & get_locale() {return locale;}
 
 
-std::string localize_item_list(const std::vector<std::string>& items, ConcatenateWith listtype) {
+std::string localize_list(const std::vector<std::string>& items, ConcatenateWith listtype) {
 	std::string result = "";
 	for (std::vector<std::string>::const_iterator it = items.begin(); it != items.end(); ++it) {
 		if (it == items.begin()) {

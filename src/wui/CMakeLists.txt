@@ -1,12 +1,3 @@
-wl_library(wui_text_layout
-  SRCS
-    text_layout.cc
-    text_layout.h
-    text_constants.h
-  DEPENDS
-    graphic_color
-)
-
 wl_library(wui_chat_ui
   SRCS
     chatoverlay.cc
@@ -158,9 +149,10 @@ wl_library(wui
     graphic
     graphic_color
     graphic_game_renderer
-    graphic_image
     graphic_minimap_renderer
     graphic_surface
+    graphic_text
+    graphic_text_layout
     io_fileread
     io_filesystem
     logic
@@ -170,7 +162,8 @@ wl_library(wui
     network
     notifications
     profile
-    scripting
+    scripting_lua_interface
+    scripting_lua_table
     sound
     ui_basic
     ui_fsmenu
@@ -178,5 +171,4 @@ wl_library(wui
     wui_chat_ui
     wui_mapview_pixelfunctions
     wui_overlay_manager
-    wui_text_layout
 )

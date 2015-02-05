@@ -54,6 +54,8 @@
 #include "graphic/default_resolution.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
+#include "graphic/text/font_set.h"
+#include "graphic/text_constants.h"
 #include "helper.h"
 #include "io/dedicated_log.h"
 #include "io/filesystem/disk_filesystem.h"
@@ -76,7 +78,6 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/campaign_select.h"
-#include "ui_fsmenu/editor.h"
 #include "ui_fsmenu/fileview.h"
 #include "ui_fsmenu/internet_lobby.h"
 #include "ui_fsmenu/intro.h"
@@ -274,12 +275,15 @@ m_redirected_stdio(false)
 	// handling of graphics
 	init_hardware();
 
+	// This might grab the input.
+	refresh_graphics();
+
 	if (TTF_Init() == -1)
 		throw wexception
 			("True Type library did not initialize: %s\n", TTF_GetError());
 
+	UI::g_fh1 = UI::create_fonthandler(g_gr); // This will create the fontset, so loading it first.
 	UI::g_fh = new UI::FontHandler();
-	UI::g_fh1 = UI::create_fonthandler(g_gr);
 
 	if (SDLNet_Init() == -1)
 		throw wexception("SDLNet_Init failed: %s\n", SDLNet_GetError());
@@ -337,6 +341,9 @@ WLApplication::~WLApplication()
 // dispatching events until it is time to quit.
 void WLApplication::run()
 {
+	// This also grabs the mouse cursor if so desired.
+	refresh_graphics();
+
 	if (m_game_type == EDITOR) {
 		g_sound_handler.start_music("ingame");
 		EditorInteractive::run_editor(m_filename, m_script_to_run);
@@ -378,7 +385,6 @@ void WLApplication::run()
 			const std::string & server = s.get_string ("servername",     name.c_str());
 			const bool registered      = s.get_bool   ("registered",     false);
 			const std::string & pwd    = s.get_string ("password",       "");
-			uint32_t            maxcl  = s.get_natural("maxclients",     8);
 			for (;;) { // endless loop
 				if (!InternetGaming::ref().login(name, pwd, registered, meta, port)) {
 					dedicatedlog("ERROR: Could not connect to metaserver (reason above)!\n");
@@ -398,7 +404,6 @@ void WLApplication::run()
 				}
 
 				InternetGaming::ref().set_local_servername(realservername);
-				InternetGaming::ref().set_local_maxclients(maxcl);
 
 				NetHost netgame(name, true);
 
@@ -720,7 +725,7 @@ bool WLApplication::init_settings() {
 
 	set_mouse_swap(s.get_bool("swapmouse", false));
 
-	// KLUDGE!
+	// TODO(unknown): KLUDGE!
 	// Without this the following config options get dropped by check_used().
 	// Profile needs support for a Syntax definition to solve this in a
 	// sensible way
@@ -731,6 +736,7 @@ bool WLApplication::init_settings() {
 	s.get_int("maxfps");
 	s.get_int("panel_snap_distance");
 	s.get_int("autosave");
+	s.get_int("rolling_autosave");
 	s.get_int("remove_replays");
 	s.get_bool("single_watchwin");
 	s.get_bool("auto_roadbuild_mode");
@@ -750,7 +756,6 @@ bool WLApplication::init_settings() {
 	s.get_string("lasthost");
 	s.get_string("servername");
 	s.get_string("realname");
-	s.get_string("ui_font");
 	s.get_string("metaserver");
 	s.get_natural("metaserverport");
 	// KLUDGE!
@@ -772,7 +777,8 @@ void WLApplication::init_language() {
 	i18n::grab_textdomain("widelands");
 
 	// Set locale corresponding to selected language
-	i18n::set_locale(s.get_string("language", ""));
+	std::string language = s.get_string("language", "");
+	i18n::set_locale(language);
 }
 
 /**
@@ -800,25 +806,10 @@ void WLApplication::shutdown_settings()
  * \return true if there were no fatal errors that prevent the game from running
  */
 bool WLApplication::init_hardware() {
-	uint8_t sdl_flags = 0;
 	Section & s = g_options.pull_section("global");
 
 	//Start the SDL core
-	sdl_flags =
-		SDL_INIT_VIDEO
-		|
-		(s.get_bool("coredump", false) ? SDL_INIT_NOPARACHUTE : 0);
-
-	//  NOTE Enable a workaround for bug #1784815, caused by SDL, which thinks
-	//  NOTE that it is perfectly fine for a library to tamper with the user's
-	//  NOTE privacy/powermanagement settings on the sly. The workaround was
-	//  NOTE introduced in SDL 1.2.13, so it will not work for older versions.
-	//  NOTE -> there is no such stdlib-function on win32
-	#ifndef _WIN32
-	setenv("SDL_VIDEO_ALLOW_SCREENSAVER", "1", 0);
-	#endif
-
-	if (SDL_Init(sdl_flags) == -1)
+	if (SDL_Init(SDL_INIT_VIDEO) == -1)
 		throw wexception
 			("Failed to initialize SDL, no valid video driver: %s",
 			 SDL_GetError());
@@ -864,9 +855,6 @@ void WLApplication::shutdown_hardware()
 void WLApplication::parse_commandline
 	(int const argc, char const * const * const argv)
 {
-	//TODO(unknown): EXENAME gets written out on windows!
-	m_commandline["EXENAME"] = argv[0];
-
 	for (int i = 1; i < argc; ++i) {
 		std::string opt = argv[i];
 		std::string value;
@@ -1101,7 +1089,7 @@ void WLApplication::mainmenu()
 				break;
 			}
 			case FullscreenMenuMain::MenuTarget::kEditor:
-				mainmenu_editor();
+				EditorInteractive::run_editor(m_filename, m_script_to_run);
 				break;
 			default:
 			case FullscreenMenuMain::MenuTarget::kExit:
@@ -1277,42 +1265,6 @@ void WLApplication::mainmenu_multiplayer()
 				default:
 					break;
 			}
-		}
-	}
-}
-
-void WLApplication::mainmenu_editor()
-{
-	//  This is the code returned by UI::Panel::run() when the panel is dying.
-	//  Make sure that the program exits when the window manager says so.
-	static_assert
-		(static_cast<int32_t>(FullscreenMenuEditor::MenuTarget::kBack) == UI::Panel::dying_code,
-		 "Editor should be dying.");
-
-	for (;;) {
-		FullscreenMenuEditor editor_menu;
-		switch (static_cast<FullscreenMenuEditor::MenuTarget>(editor_menu.run())) {
-		case FullscreenMenuEditor::MenuTarget::kBack:
-			return;
-		case FullscreenMenuEditor::MenuTarget::kNewMap:
-			EditorInteractive::run_editor(m_filename, m_script_to_run);
-			return;
-		case FullscreenMenuEditor::MenuTarget::kLoadMap: {
-			std::string filename;
-			{
-				SinglePlayerGameSettingsProvider sp;
-				FullscreenMenuMapSelect emsm(&sp, nullptr, true);
-				if (emsm.run() <= 0)
-					break;
-
-				filename = emsm.get_map()->filename;
-			}
-			EditorInteractive::run_editor(filename.c_str(), "");
-			return;
-		}
-		default:
-			assert(false);
-			break;
 		}
 	}
 }

@@ -26,6 +26,7 @@
 #include "base/i18n.h"
 #include "base/warning.h"
 #include "graphic/graphic.h"
+#include "graphic/text_constants.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/constants.h"
@@ -37,12 +38,11 @@
 #include "logic/player.h"
 #include "map_io/map_loader.h"
 #include "profile/profile.h"
+#include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
-#include "scripting/scripting.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
 #include "wui/playerdescrgroup.h"
-#include "wui/text_constants.h"
 
 FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG
 	(GameSettingsProvider * const settings, GameController * const ctrl,
@@ -138,9 +138,9 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG
 	m_cur_wincondition = -1;
 	win_condition_clicked();
 
-	m_title  .set_textstyle(ts_big());
-	m_mapname.set_textstyle(ts_small());
-	m_wincondition_type.set_textstyle(ts_small());
+	m_title  .set_textstyle(UI::TextStyle::ui_big());
+	m_mapname.set_textstyle(UI::TextStyle::ui_small());
+	m_wincondition_type.set_textstyle(UI::TextStyle::ui_small());
 
 	UI::TextStyle tsmaller
 		(UI::TextStyle::makebold
@@ -150,11 +150,6 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG
 	m_team.set_textstyle(tsmaller);
 	m_tribe.set_textstyle(tsmaller);
 	m_init.set_textstyle(tsmaller);
-
-	m_select_map.set_font(font_small());
-	m_wincondition.set_font(font_small());
-	m_back.set_font(font_small());
-	m_ok.set_font(font_small());
 
 	uint32_t y = get_h() * 3 / 10 - m_buth;
 	char posIco[42];
@@ -173,7 +168,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG
 			new PlayerDescriptionGroup
 				(this,
 				 get_w() / 25, y, get_w() * 16 / 25, get_h() * 17 / 500 * 2,
-				 settings, i, font_small());
+				 settings, i);
 		y += m_buth / 1.17;
 	}
 }

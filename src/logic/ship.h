@@ -37,8 +37,26 @@ class Economy;
 struct Fleet;
 class PortDock;
 
+// This can't be part of the Ship class because of forward declaration in game.h
+enum class ScoutingDirection {
+	kCounterClockwise = 0, // This comes first for savegame compatibility (used to be = 0)
+	kClockwise = 1
+};
+
+struct NoteShipMessage {
+	CAN_BE_SEND_AS_NOTE(NoteId::ShipMessage)
+
+	Ship* ship;
+
+	enum class Message {kLost, kGained, kWaitingForCommand};
+	Message message;
+
+	NoteShipMessage(Ship* const init_ship, Message const init_message)
+	   : ship(init_ship), message(init_message) {
+	}
+};
+
 class ShipDescr : BobDescr {
-public:
 	ShipDescr(const LuaTable& t);
 	~ShipDescr() override {}
 
@@ -180,7 +198,7 @@ struct Ship : Bob {
 
 	void exp_scout_direction(Game &, uint8_t);
 	void exp_construct_port (Game &, const Coords&);
-	void exp_explore_island (Game &, bool);
+	void exp_explore_island (Game &, ScoutingDirection);
 
 	void exp_cancel (Game &);
 	void sink_ship  (Game &);
@@ -203,8 +221,7 @@ private:
 	void init_fleet(EditorGameBase &);
 	void set_fleet(Fleet * fleet);
 
-	void send_message
-		(Game &, const std::string &, const std::string &, const std::string &, const std::string &);
+	void send_message(Game &, const std::string &, const std::string &, const std::string &);
 
 	UI::Window * m_window;
 
@@ -221,7 +238,7 @@ private:
 		bool island_exploration;
 		uint8_t direction;
 		Coords exploration_start;
-		bool clockwise;
+		ScoutingDirection scouting_direction;
 		std::unique_ptr<Economy> economy;
 	};
 	std::unique_ptr<Expedition> m_expedition;

@@ -1,8 +1,8 @@
 wl_test(test_scripting
  SRCS
-   ./scripting_test_main.cc
-   ./test_luna.cc
+   scripting_test_main.cc
+   test_luna.cc
  DEPENDS
-   third_party_eris
-   scripting
+   scripting_base
+   scripting_luna
 )

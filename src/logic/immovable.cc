@@ -20,6 +20,7 @@
 #include "logic/immovable.h"
 
 #include <cstdio>
+#include <cstring>
 #include <memory>
 
 #include <boost/algorithm/string.hpp>
@@ -31,6 +32,8 @@
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_constants.h"
+#include "graphic/text_layout.h"
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -54,8 +57,6 @@
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 #include "wui/interactive_base.h"
-#include "wui/text_constants.h"
-#include "wui/text_layout.h"
 
 namespace Widelands {
 

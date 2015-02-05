@@ -33,9 +33,9 @@ struct MessageQueue : private std::map<MessageId, Message *> {
 	friend class MapPlayersMessagesPacket;
 
 	MessageQueue() {
-		m_counts[Message::New]      = 0; //  C++0x:
-		m_counts[Message::Read]     = 0; //  C++0x:
-		m_counts[Message::Archived] = 0; //  C++0x:
+		m_counts[static_cast<int>(Message::Status::kNew)]      = 0; //  C++0x:
+		m_counts[static_cast<int>(Message::Status::kRead)]     = 0; //  C++0x:
+		m_counts[static_cast<int>(Message::Status::kArchived)] = 0; //  C++0x:
 	}                                   //  C++0x:
 
 	~MessageQueue() {
@@ -67,8 +67,8 @@ struct MessageQueue : private std::map<MessageId, Message *> {
 	/// \returns the number of messages with the given status.
 	uint32_t nr_messages(Message::Status const status) const {
 		assert_counts();
-		assert(status < 3);
-		return m_counts[status];
+		assert(static_cast<int>(status) < 3);
+		return m_counts[static_cast<int>(status)];
 	}
 
 	/// Adds the message. Takes ownership of the message. Assumes that it has
@@ -81,8 +81,8 @@ struct MessageQueue : private std::map<MessageId, Message *> {
 	/// The loading code calls this function to add messages form the map file.
 	MessageId add_message(Message & message) {
 		assert_counts();
-		assert(message.status() < 3);
-		++m_counts[message.status()];
+		assert(static_cast<int>(message.status()) < 3);
+		++m_counts[static_cast<int>(message.status())];
 		insert
 			(std::map<MessageId, Message *>::end(),
 			 std::pair<MessageId, Message *>(++m_current_message_id, &message));
@@ -93,14 +93,14 @@ struct MessageQueue : private std::map<MessageId, Message *> {
 	/// Sets the status of the message with the given id, if it exists.
 	void set_message_status(const MessageId& id, Message::Status const status) {
 		assert_counts();
-		assert(status < 3);
+		assert(static_cast<int>(status) < 3);
 		MessageQueue::iterator const it = find(id);
 		if (it != end()) {
 			Message & message = *it->second;
-			assert(it->second->status() < 3);
-			assert(m_counts[message.status()]);
-			--m_counts[message.status    ()];
-			++m_counts[message.set_status(status)];
+			assert(static_cast<int>(it->second->status()) < 3);
+			assert(m_counts[static_cast<int>(message.status())]);
+			--m_counts[static_cast<int>(message.status())];
+			++m_counts[static_cast<int>(message.set_status(status))];
 		}
 		assert_counts();
 	}
@@ -117,9 +117,9 @@ struct MessageQueue : private std::map<MessageId, Message *> {
 			return;
 		}
 		Message & message = *it->second;
-		assert(message.status() < 3);
-		assert(m_counts[message.status()]);
-		--m_counts[message.status()];
+		assert(static_cast<int>(message.status()) < 3);
+		assert(m_counts[static_cast<int>(message.status())]);
+		--m_counts[static_cast<int>(message.status())];
 		delete &message;
 		erase(it);
 		assert_counts();
@@ -143,9 +143,9 @@ private:
 	void clear() {
 		assert_counts();
 		m_current_message_id        = MessageId::null();
-		m_counts[Message::New]      = 0;
-		m_counts[Message::Read]     = 0;
-		m_counts[Message::Archived] = 0;
+		m_counts[static_cast<int>(Message::Status::kNew)]      = 0;
+		m_counts[static_cast<int>(Message::Status::kRead)]     = 0;
+		m_counts[static_cast<int>(Message::Status::kArchived)] = 0;
 		std::map<MessageId, Message *>::clear();
 		assert_counts();
 	}
@@ -161,9 +161,9 @@ private:
 	void assert_counts() const {
 		assert
 			(size() ==
-			 m_counts[Message::New]  +
-			 m_counts[Message::Read] +
-			 m_counts[Message::Archived]);
+			 m_counts[static_cast<int>(Message::Status::kNew)]  +
+			 m_counts[static_cast<int>(Message::Status::kRead)] +
+			 m_counts[static_cast<int>(Message::Status::kArchived)]);
 	}
 
 	DISALLOW_COPY_AND_ASSIGN(MessageQueue);

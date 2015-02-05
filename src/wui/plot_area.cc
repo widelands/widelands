@@ -27,12 +27,11 @@
 #include <boost/lexical_cast.hpp>
 
 #include "base/i18n.h"
-#include "graphic/font.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_layout.h"
 #include "ui_basic/panel.h"
-#include "wui/text_layout.h"
 
 using namespace std;
 
@@ -70,13 +69,12 @@ enum UNIT {
 };
 
 string ytick_text_style(const string& text, const RGBColor& clr) {
-	static boost::format
-			f("<rt><p><font face=DejaVuSansCondensed size=13 color=%02x%02x%02x>%s</font></p></rt>");
+	static boost::format f("<rt><p><font face=condensed size=13 color=%02x%02x%02x>%s</font></p></rt>");
 	f % int(clr.r) % int(clr.g) % int(clr.b);
 	f % text;
 	return f.str();
-
 }
+
 string xtick_text_style(const string& text) {
 	return ytick_text_style(text, RGBColor(255, 0, 0));
 }

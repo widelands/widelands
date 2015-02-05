@@ -20,17 +20,22 @@
 #include "logic/building.h"
 
 #include <cstdio>
+#include <cstring>
 #include <sstream>
+
+#include <boost/algorithm/string.hpp>
+#include <boost/format.hpp>
 
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/request.h"
-#include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text/font_set.h"
+#include "graphic/text_layout.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/constructionsite.h"
@@ -43,7 +48,6 @@
 #include "logic/worker.h"
 #include "sound/sound_handler.h"
 #include "wui/interactive_player.h"
-#include "wui/text_layout.h"
 
 namespace Widelands {
 
@@ -62,18 +66,20 @@ BuildingDescr::BuildingDescr
 	m_hints         (table.get_table("aihints")),
 	m_vision_range  (0)
 {
+	using boost::iequals;
+
 	try {
 		const std::string size = table.get_string("size");
-		if (size == "small")
+		if (iequals(size, "small")) {
 			m_size = BaseImmovable::SMALL;
-		else if (size == "medium")
+		} else if (iequals(size, "medium")) {
 			m_size = BaseImmovable::MEDIUM;
-		else if (size == "big")
+		} else if (iequals(size, "big")) {
 			m_size = BaseImmovable::BIG;
-		else if (size == "mine") {
+		} else if (iequals(size, "mine")) {
 			m_size = BaseImmovable::SMALL;
 			m_mine = true;
-		} else if (size == "port") {
+		} else if (iequals(size, "port")) {
 			m_size = BaseImmovable::BIG;
 			m_port = true;
 		} else {
@@ -872,7 +878,7 @@ void Building::set_seeing(bool see)
  */
 void Building::send_message
 	(Game & game,
-	 const std::string & msgsender,
+	 const Message::Type msgtype,
 	 const std::string & title,
 	 const std::string & description,
 	 bool link_to_building_lifetime,
@@ -887,9 +893,9 @@ void Building::send_message
 	std::string rt_description;
 	rt_description.reserve
 		(strlen("<rt image=") + img.size() + 1 +
-		 strlen("<p font-size=14 font-face=DejaVuSerif></p>") +
+		 strlen("<p font-size=14 font-face=serif>") +
 		 description.size() +
-		 strlen("</rt>"));
+		 strlen("</p></rt>"));
 	rt_description  = "<rt image=";
 	rt_description += img;
 	{
@@ -898,12 +904,11 @@ void Building::send_message
 		for (;                                 *it == '?'; --it)
 			*it = '0';
 	}
-	rt_description += "><p font-size=14 font-face=DejaVuSerif>";
-	rt_description += description;
-	rt_description += "</p></rt>";
+	rt_description = (boost::format("%s><p font-face=serif font-size=14>%s</p></rt>")
+			% rt_description % description).str();
 
 	Message * msg = new Message
-		(msgsender, game.get_gametime(), title, rt_description,
+		(msgtype, game.get_gametime(), title, rt_description,
 		 get_position(), (link_to_building_lifetime ? m_serial : 0));
 
 	if (throttle_time)

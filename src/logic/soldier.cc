@@ -1481,7 +1481,7 @@ void Soldier::battle_update(Game & game, State &)
 					owner().add_message
 						(game,
 						 *new Message
-						 	("game engine",
+							(Message::Type::kGameLogic,
 							 game.get_gametime(),
 						 	 _("Logic error"),
 							 messagetext,
@@ -1490,7 +1490,7 @@ void Soldier::battle_update(Game & game, State &)
 					opponent.owner().add_message
 						(game,
 						 *new Message
-						 	("game engine",
+							(Message::Type::kGameLogic,
 							 game.get_gametime(),
 						 	 _("Logic error"),
 							 messagetext,

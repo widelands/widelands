@@ -19,31 +19,7 @@
 
 #include "ai/ai_hints.h"
 
-#include <cstdlib>
-#include <cstring>
-
 #include "profile/profile.h"
-
-BuildingHints::~BuildingHints() {
-	free(mines_);
-}
-
-BuildingHints::BuildingHints(Section* const section)
-	: renews_map_resource(section ? section->get_string("renews_map_resource") : ""),
-	  mines_(section ? section->get_string("mines") : ""),
-     log_producer_(section ? section->get_bool("logproducer") : false),
-     stone_producer_(section ? section->get_bool("stoneproducer") : false),
-     needs_water_(section ? section->get_bool("needs_water") : false),
-     mines_water_(section ? section->get_bool("mines_water") : false),
-     recruitment_(section ? section->get_bool("recruitment") : false),
-     space_consumer_(section ? section->get_bool("space_consumer") : false),
-     expansion_(section ? section->get_bool("expansion") : false),
-     fighting_(section ? section->get_bool("fighting") : false),
-     mountain_conqueror_(section ? section->get_bool("mountain_conqueror") : false),
-     prohibited_till_(section ? section->get_int("prohibited_till", 0) : 0),
-     forced_after_(section ? section->get_int("forced_after", 864000) : 0),  // 10 days default
-     mines_percent_(section ? section->get_int("mines_percent", 100) : 0) {
-}
 
 BuildingHints::BuildingHints(const LuaTable& table)
 	: renews_map_resource(table.has_key("renews_map_resource") ? table.get_string("renews_map_resource") : ""),
@@ -60,4 +36,4 @@ BuildingHints::BuildingHints(const LuaTable& table)
 	  prohibited_till_(table.has_key("prohibited_till") ? table.get_int("prohibited_till", 0) : 0),
 	  forced_after_(table.has_key("forced_after") ? table.get_int("forced_after", 864000) : 0),  // 10 days default
 	  mines_percent_(table.has_key("mines_percent") ? table.get_int("mines_percent", 100) : 0) {
-}
+{}

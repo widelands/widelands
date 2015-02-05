@@ -20,8 +20,8 @@
 #ifndef WL_SCRIPTING_LUA_EDITOR_H
 #define WL_SCRIPTING_LUA_EDITOR_H
 
+#include "scripting/lua.h"
 #include "scripting/lua_bases.h"
-#include "third_party/eris/lua.hpp"
 
 namespace LuaEditor {
 

@@ -35,11 +35,15 @@ tribes:new_productionsite_type {
    animations = {
 		idle = {
 			pictures = { dirname .. "idle_\\d+.png" },
-			hotspot = { 32, 56 },
+			hotspot = { 57, 88 },
+		},
+		build = {
+			pictures = { dirname .. "build_\\d+.png" },
+			hotspot = { 57, 88 },
 		},
 		working = {
-			pictures = { dirname .. "idle_\\d+.png" }, -- TODO(GunChleoc): No animation yet.
-			hotspot = { 32, 56 },
+			pictures = { dirname .. "working_\\d+.png" },
+			hotspot = { 57, 88 },
 		},
 	},
 

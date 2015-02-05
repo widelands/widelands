@@ -243,6 +243,9 @@ public:
 	bool lock_audio_disabling_;
 
 protected:
+	// Prints an error and disables the sound system.
+	void initialization_error(const std::string& msg);
+
 	void load_one_fx(const char * filename, const std::string & fx_name);
 	int32_t stereo_position(Widelands::Coords position);
 	bool play_or_not

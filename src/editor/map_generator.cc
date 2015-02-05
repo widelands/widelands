@@ -29,8 +29,8 @@
 #include "logic/map.h"
 #include "logic/world/map_gen.h"
 #include "logic/world/world.h"
+#include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
-#include "scripting/scripting.h"
 
 constexpr uint32_t kAverageElevation = 0x80000000;
 constexpr uint32_t kMaxElevation = 0xffffffff;

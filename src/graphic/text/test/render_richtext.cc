@@ -140,7 +140,7 @@ int main(int argc, char** argv) {
 
 		std::unique_ptr<FileSystem> fs(&FileSystem::create("."));
 		std::unique_ptr<StreamWrite> sw(fs->open_stream_write(outname));
-		if (!save_surface_to_png(texture.get(), sw.get(), COLOR_TYPE::RGBA)) {
+		if (!save_to_png(texture.get(), sw.get(), ColorType::RGBA)) {
 			std::cout << "Could not encode PNG." << std::endl;
 		}
 	} catch (RT::Exception& e) {

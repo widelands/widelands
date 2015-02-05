@@ -39,7 +39,6 @@
 #include "graphic/image.h"
 #include "graphic/image_cache.h"
 #include "graphic/surface.h"
-#include "graphic/texture_cache.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/bob.h"
 #include "logic/instances.h"
@@ -326,17 +325,19 @@ void NonPackedAnimation::blit
 	assert(idx < nr_frames());
 
 	if (!hasplrclrs_ || clr == nullptr) {
-		target->blit(Rect(dst.x, dst.y, srcrc.w, srcrc.h),
-		             frames_.at(idx)->texture(),
-		             srcrc,
-		             1.,
-		             BlendMode::UseAlpha);
+		::blit(Rect(dst.x, dst.y, srcrc.w, srcrc.h),
+		     *frames_.at(idx),
+		     srcrc,
+		     1.,
+		     BlendMode::UseAlpha,
+		     target);
 	} else {
-		target->blit_blended(Rect(dst.x, dst.y, srcrc.w, srcrc.h),
-		                     frames_.at(idx)->texture(),
-		                     pcmasks_.at(idx)->texture(),
-		                     srcrc,
-		                     *clr);
+		blit_blended(Rect(dst.x, dst.y, srcrc.w, srcrc.h),
+		             *frames_.at(idx),
+		             *pcmasks_.at(idx),
+		             srcrc,
+		             *clr,
+		             target);
 	}
 }
 

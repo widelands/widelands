@@ -20,8 +20,10 @@
 #ifndef WL_SCRIPTING_LUA_BASES_H
 #define WL_SCRIPTING_LUA_BASES_H
 
+#include "logic/editor_game_base.h"
+#include "logic/player.h"
+#include "scripting/lua.h"
 #include "scripting/luna.h"
-#include "third_party/eris/lua.hpp"
 
 namespace LuaBases {
 
@@ -108,7 +110,7 @@ public:
 	/*
 	 * C methods
 	 */
-	Widelands::Player & get(lua_State * L, Widelands::EditorGameBase &);
+	Widelands::Player& get(lua_State* L, Widelands::EditorGameBase&);
 
 protected:
 	inline Widelands::PlayerNumber player_number() {return m_pl;}

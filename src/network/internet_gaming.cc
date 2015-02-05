@@ -42,7 +42,6 @@ InternetGaming::InternetGaming() :
 	m_reg                    (false),
 	m_port                   (INTERNET_GAMING_PORT),
 	m_clientrights           (INTERNET_CLIENT_UNREGISTERED),
-	m_maxclients             (1),
 	m_gameip                 (""),
 	clientupdateonmetaserver (true),
 	gameupdateonmetaserver   (true),
@@ -72,7 +71,6 @@ void InternetGaming::reset() {
 	m_port                   = INTERNET_GAMING_PORT;
 	m_clientname             = "";
 	m_clientrights           = INTERNET_CLIENT_UNREGISTERED;
-	m_maxclients             = 1;
 	m_gamename               = "";
 	m_gameip                 = "";
 	clientupdateonmetaserver = true;
@@ -656,7 +654,7 @@ void InternetGaming::open_game() {
 	SendPacket s;
 	s.string(IGPCMD_GAME_OPEN);
 	s.string(m_gamename);
-	s.string(boost::lexical_cast<std::string>(m_maxclients));
+	s.string("1024"); // Used to be maxclients, no longer used.
 	s.send(m_sock);
 	dedicatedlog("InternetGaming: Client opened a game with the name %s.\n", m_gamename.c_str());
 	m_state = IN_GAME;

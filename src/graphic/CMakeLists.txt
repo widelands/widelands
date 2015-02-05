@@ -10,6 +10,19 @@ wl_library(graphic_color
   USES_SDL2
 )
 
+wl_library(graphic_text_layout
+  SRCS
+    text_layout.cc
+    text_layout.h
+    text_constants.h
+  DEPENDS
+    base_i18n
+    graphic
+    graphic_color
+    graphic_text
+)
+
+
 wl_library(graphic_image_io
   SRCS
     image_io.h
@@ -25,9 +38,8 @@ wl_library(graphic_image_io
     io_stream
 )
 
-wl_library(graphic_image
+wl_library(graphic_image_cache
   SRCS
-    image.h
     image_cache.cc
     image_cache.h
   USES_SDL2
@@ -65,10 +77,9 @@ wl_library(graphic_surface
     gl/blit_program.h
     gl/draw_line_program.cc
     gl/draw_line_program.h
-    gl/draw_rect_program.cc
-    gl/draw_rect_program.h
     gl/fill_rect_program.cc
     gl/fill_rect_program.h
+    image.h
     screen.cc
     screen.h
     surface.cc
@@ -135,7 +146,6 @@ wl_library(graphic_minimap_renderer
     base_macros
     economy
     graphic
-    graphic_image
     graphic_surface
     logic
     wui_mapview_pixelfunctions
@@ -157,8 +167,6 @@ wl_library(graphic
     font_handler1.h
     graphic.cc
     graphic.h
-    in_memory_image.cc
-    in_memory_image.h
     rendertarget.cc
     rendertarget.h
     richtext.cc
@@ -179,10 +187,11 @@ wl_library(graphic
     build_info
     graphic_color
     graphic_gl_utils
-    graphic_image
+    graphic_image_cache
     graphic_image_io
     graphic_surface
     graphic_text
+    graphic_text_layout
     helper
     io_fileread
     io_filesystem
@@ -190,8 +199,7 @@ wl_library(graphic
     logic
     notifications
     profile
-    scripting
+    scripting_lua_table
     sound
     wui_overlay_manager
-    wui_text_layout
 )

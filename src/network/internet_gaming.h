@@ -90,15 +90,8 @@ struct InternetGaming : public ChatProvider {
 	bool update_for_clients();
 	const std::vector<InternetClient> & clients();
 
-	/// \returns the maximum allowed number of clients in a game (players + spectators)
-	uint32_t max_clients() {return INTERNET_GAMING_MAX_CLIENTS_PER_GAME;}
-
-	/// sets the maximum number of players that may be in the game
-	void set_local_maxclients(uint32_t mp) {m_maxclients = mp;}
-
 	/// sets the name of the local server as shown in the games list
 	void set_local_servername(const std::string & name) {m_gamename = name;}
-
 
 	/// \returns the name of the local server
 	std::string & get_local_servername() {return m_gamename;}
@@ -173,7 +166,6 @@ private:
 
 	/// informations of the clients game
 	std::string      m_gamename;
-	uint32_t         m_maxclients;
 	std::string      m_gameip;
 
 	/// Metaserver informations

@@ -52,7 +52,6 @@
 #include "logic/warehouse.h"
 #include "profile/profile.h"
 #include "scripting/lua_table.h"
-#include "scripting/scripting.h"
 #include "sound/sound_handler.h"
 #include "wui/interactive_player.h"
 
@@ -288,15 +287,15 @@ void Player::update_team_players() {
  * Plays the corresponding sound when a message is received and if sound is
  * enabled.
  */
-void Player::play_message_sound(const std::string & sender) {
-#define MAYBE_PLAY(a, b) if (sender == a) { \
-	g_sound_handler.play_fx(b, 200, PRIO_ALWAYS_PLAY); \
+void Player::play_message_sound(const Message::Type & msgtype) {
+#define MAYBE_PLAY(type, file) if (msgtype == type) { \
+	g_sound_handler.play_fx(file, 200, PRIO_ALWAYS_PLAY); \
 	return; \
 	}
 
 	if (g_options.pull_section("global").get_bool("sound_at_message", true)) {
-		MAYBE_PLAY("site_occupied", "sound/military/site_occupied");
-		MAYBE_PLAY("under_attack", "sound/military/under_attack");
+		MAYBE_PLAY(Message::Type::kEconomySiteOccupied, "sound/military/site_occupied");
+		MAYBE_PLAY(Message::Type::kWarfareUnderAttack, "sound/military/under_attack");
 
 		g_sound_handler.play_fx("sound/message", 200, PRIO_ALWAYS_PLAY);
 	}
@@ -317,7 +316,7 @@ MessageId Player::add_message
 	// Sound & popup
 	if (InteractivePlayer * const iplayer = game.get_ipl()) {
 		if (&iplayer->player() == this) {
-			play_message_sound(message.sender());
+			play_message_sound(message.type());
 			if (popup)
 				iplayer->popup_message(id, message);
 		}
@@ -335,7 +334,7 @@ MessageId Player::add_message_with_timeout
 	Coords      const position = m   .position    ();
 	for (std::pair<MessageId, Message *>  tmp_message : messages()) {
 		if
-			(tmp_message.second->sender() == m.sender()      &&
+			(tmp_message.second->type() == m.type()      &&
 			 gametime < tmp_message.second->sent() + timeout &&
 			 map.calc_distance(tmp_message.second->position(), position) <= radius)
 		{
@@ -1236,6 +1235,16 @@ const std::vector<uint32_t> * Player::get_ware_stock_statistics
 	return &m_ware_stocks[ware];
 }
 
+const Player::BuildingStatsVector& Player::get_building_statistics(const BuildingIndex& i) const {
+	return *const_cast<Player*>(this)->get_mutable_building_statistics(i);
+}
+
+Player::BuildingStatsVector* Player::get_mutable_building_statistics(const BuildingIndex& i) {
+	BuildingIndex const nr_buildings = tribe().get_nrbuildings();
+	if (m_building_stats.size() < nr_buildings)
+		m_building_stats.resize(nr_buildings);
+	return &m_building_stats[i];
+}
 
 /**
  * Add or remove the given building from building statistics.
@@ -1256,8 +1265,8 @@ void Player::update_building_statistics
 	if (m_building_stats.size() < nr_buildings)
 		m_building_stats.resize(nr_buildings);
 
-	std::vector<BuildingStats> & stat =
-		m_building_stats[tribe().building_index(building_name.c_str())];
+	std::vector<BuildingStats>& stat =
+	   *get_mutable_building_statistics(tribe().building_index(building_name.c_str()));
 
 	if (ownership == NoteImmovable::Ownership::GAINED) {
 		BuildingStats new_building;

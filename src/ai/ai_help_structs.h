@@ -21,6 +21,7 @@
 #define WL_AI_AI_HELP_STRUCTS_H
 
 #include <list>
+#include <unordered_set>
 
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -30,6 +31,7 @@
 #include "logic/instances.h"
 #include "logic/map.h"
 #include "logic/player.h"
+#include "logic/ship.h"
 #include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
 
@@ -119,6 +121,22 @@ struct FindNodeUnownedMineable {
 	Game& game;
 
 	FindNodeUnownedMineable(Player* p, Game& g) : player_(p), game(g) {
+	}
+};
+
+// Looking only for mines-capable fields nearby
+// of specific type
+struct FindNodeMineable {
+	bool accept(const Map&, const FCoords& fc) const {
+
+		return (fc.field->nodecaps() & BUILDCAPS_MINE) &&
+			(fc.field->get_resources() == res);
+	}
+
+	Game& game;
+	int32_t res;
+
+	FindNodeMineable(Game& g, int32_t r) : game(g), res(r)  {
 	}
 };
 
@@ -227,10 +245,9 @@ struct BuildableField {
 	int16_t military_stationed_;
 	// stationed (manned) military buildings nearby
 	int16_t military_unstationed_;
-	// some buildings must be postponed bit
-	int32_t prohibited_till_;
-	// and then some must be forced
-	int32_t forced_after_;
+	bool is_portspace_;
+	bool port_nearby_;  // to increase priority if a port is nearby,
+	// especially for new colonies
 
 	std::vector<uint8_t> consumers_nearby_;
 	std::vector<uint8_t> producers_nearby_;
@@ -261,7 +278,9 @@ struct BuildableField {
 	     military_loneliness_(1000),
 	     military_in_constr_nearby_(0),
 	     military_presence_(0),
-	     military_stationed_(0) {
+	     military_stationed_(0),
+	     is_portspace_(false),
+	     port_nearby_(false) {
 	}
 };
 
@@ -273,9 +292,12 @@ struct MineableField {
 	bool preferred_;
 
 	int32_t mines_nearby_;
+	//this is to provide that a mine is not built on the edge of mine area
+	int32_t same_mine_fields_nearby_;
 
 	MineableField(const Widelands::FCoords& fc)
-	   : coords(fc), next_update_due_(0), preferred_(false), mines_nearby_(0) {
+	   : coords(fc), next_update_due_(0), preferred_(false), mines_nearby_(0),
+	   same_mine_fields_nearby_(0) {
 	}
 };
 
@@ -310,12 +332,14 @@ struct BuildingObserver {
 	bool plants_trees_;
 	bool recruitment_;  // is "producing" workers?
 	bool is_buildable_;
-	bool need_trees_;          // lumberjack = true
-	bool need_stones_;         // quarry = true
-	bool mines_water_;         // wells
-	bool need_water_;          // fisher, fish_breeder = true
-	bool is_hunter_;           // need to identify hunters
-	bool is_fisher_;           // need to identify fishers
+	bool need_trees_;   // lumberjack = true
+	bool need_stones_;  // quarry = true
+	bool mines_water_;  // wells
+	bool need_water_;   // fisher, fish_breeder = true
+	bool is_hunter_;    // need to identify hunters
+	bool is_fisher_;    // need to identify fishers
+	bool is_port_;
+	bool is_shipyard_;
 	bool space_consumer_;      // farm, vineyard... = true
 	bool expansion_type_;      // military building used that can be used to control area
 	bool fighting_type_;       // military building built near enemies
@@ -327,7 +351,6 @@ struct BuildingObserver {
 
 	int32_t mines_;           // type of resource it mines_
 	uint16_t mines_percent_;  // % of res it can mine
-
 	uint32_t current_stats_;
 
 	std::vector<int16_t> inputs_;
@@ -370,6 +393,28 @@ struct MilitarySiteObserver {
 	// when considering attack most military sites are inside territory and should be skipped during
 	// evaluation
 	bool enemies_nearby_;
+};
+
+struct TrainingSiteObserver {
+	Widelands::TrainingSite* site;
+	BuildingObserver* bo;
+};
+
+struct WarehouseSiteObserver {
+	Widelands::Warehouse* site;
+	BuildingObserver* bo;
+};
+
+struct ShipObserver {
+	Widelands::Ship* ship;
+	Widelands::Coords expedition_start_point_;
+	std::unordered_set<uint32_t> visited_spots_;
+
+	// a ship circumvents all islands in the same direction, the value
+	// is assigned only once
+	Widelands::ScoutingDirection island_circ_direction = Widelands::ScoutingDirection::kClockwise;
+	bool waiting_for_command_ = false;
+	int32_t last_command_time = 0;
 };
 
 struct WareObserver {

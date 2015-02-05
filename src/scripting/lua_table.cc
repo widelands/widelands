@@ -23,6 +23,8 @@
 
 #include <boost/format.hpp>
 
+#include "base/log.h"
+
 LuaTable::LuaTable(lua_State* L) : L_(L), warn_about_unaccessed_keys_(true) {
 	// S: <table>
 	lua_pushlightuserdata(L_, const_cast<LuaTable*>(this));  // S: this
@@ -114,4 +116,14 @@ template <> int LuaTable::get_value() const {
 		throw LuaError("Could not convert value at top of the stack to integer.");
 	}
 	return return_value;
+}
+
+const std::string get_string_with_default(const LuaTable& table,
+														const std::string& key,
+														const std::string& default_value) {
+	if (table.has_key(key)) {
+		return table.get_string(key);
+	} else {
+		return default_value;
+	}
 }

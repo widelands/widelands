@@ -19,6 +19,8 @@
 
 #include "wui/chat_msg_layout.h"
 
+#include <boost/format.hpp>
+
 #include "chat/chat.h"
 #include "graphic/color.h"
 #include "logic/constants.h"
@@ -42,6 +44,7 @@ std::string color(const int16_t playern)
 
 // TODO(sirver): remove as soon as old text renderer is gone.
 std::string format_as_old_richtext(const ChatMessage& chat_message) {
+	const std::string& font_face = "serif";
 	std::string message = "<p font-color=#33ff33 font-size=9>";
 
 	// Escape richtext characters
@@ -89,42 +92,45 @@ std::string format_as_old_richtext(const ChatMessage& chat_message) {
 	strftime(ts, sizeof(ts), "[%H:%M] </p>", localtime(&chat_message.time));
 	message += ts;
 
-	message += "<p font-size=14 font-face=DejaVuSerif font-color=#";
-	message += color(chat_message.playern);
+	message = (boost::format("%s<p font-size=14 font-face=%s font-color=#%s")
+				  % message % font_face % color(chat_message.playern)).str();
 
 	if (chat_message.recipient.size() && chat_message.sender.size()) {
 		// Personal message handling
 		if (sanitized.compare(0, 3, "/me")) {
-			message += " font-decoration=underline>";
-			message += chat_message.sender;
-			message += " @ ";
-			message += chat_message.recipient;
-			message += ":</p><p font-size=14 font-face=DejaVuSerif> ";
-			message += sanitized;
+
+			message = (boost::format("%s font-decoration=underline>%s @ %s:</p><p font-size=14 font-face=%s %s")
+						  % message
+						  % chat_message.sender
+						  % chat_message.recipient
+						  % font_face
+						  % sanitized).str();
 		} else {
-			message += ">@";
-			message += chat_message.recipient;
-			message += " >> </p><p font-size=14";
-			message += " font-face=DejaVuSerif font-color=#";
-			message += color(chat_message.playern);
-			message += " font-style=italic> ";
-			message += chat_message.sender;
-			message += sanitized.substr(3);
+
+			message =
+				(boost::format("%s>@%s >> </p>"
+									"<p font-size=14 font-face=%s font-color=#%s font-style=italic> %s%s")
+				 % message
+				 % chat_message.recipient
+				 % font_face
+				 % color(chat_message.playern)
+				 % chat_message.sender
+				 % sanitized.substr(3)).str();
 		}
 	} else {
 		// Normal messages handling
 		if (!sanitized.compare(0, 3, "/me")) {
-			message += " font-style=italic>-> ";
-			if (chat_message.sender.size())
-				message += chat_message.sender;
-			else
-				message += "***";
-			message += sanitized.substr(3);
+			message = (boost::format("%s font-style=italic>-> %s%s")
+						  % message
+						  % (chat_message.sender.size() ? chat_message.sender.c_str() : "***")
+						  % sanitized.substr(3)).str();
+
 		} else if (chat_message.sender.size()) {
-			message += " font-decoration=underline>";
-			message += chat_message.sender;
-			message += ":</p><p font-size=14 font-face=DejaVuSerif> ";
-			message += sanitized;
+			message = (boost::format("%s font-decoration=underline>%s:</p><p font-size=14 font-face=%s> %s")
+						  % message
+						  % chat_message.sender
+						  % font_face
+						  % sanitized).str();
 		} else {
 			message += " font-weight=bold>*** ";
 			message += sanitized;
@@ -137,6 +143,7 @@ std::string format_as_old_richtext(const ChatMessage& chat_message) {
 
 // Returns a richtext string that can be displayed to the user.
 std::string format_as_richtext(const ChatMessage& chat_message) {
+	const std::string& font_face = "serif";
 	std::string message = "<p><font color=33ff33 size=9>";
 
 	// Escape richtext characters
@@ -186,27 +193,27 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 	strftime(ts, sizeof(ts), "[%H:%M] ", localtime(&chat_message.time));
 	message += ts;
 
-	message += "</font><font size=14 face=DejaVuSerif color=";
-	message += color(chat_message.playern);
+	message = (boost::format("%s</font><font size=14 face=%s color=%s")
+				  % message % font_face % color(chat_message.playern)).str();
 
 	if (chat_message.recipient.size() && chat_message.sender.size()) {
 		// Personal message handling
 		if (sanitized.compare(0, 3, "/me")) {
-			message += " bold=1>";
-			message += chat_message.sender;
-			message += " @ ";
-			message += chat_message.recipient;
-			message += ":</font><font size=14 face=DejaVuSerif shadow=1 color=eeeeee> ";
-			message += sanitized;
+			message = (boost::format("%s bold=1>%s @ %s:</font><font size=14 face=%s shadow=1 color=eeeeee> %s")
+					% message
+					% chat_message.sender
+					% chat_message.recipient
+					% font_face
+					% sanitized).str();
+
 		} else {
-			message += ">@";
-			message += chat_message.recipient;
-			message += " \\> </font><font size=14";
-			message += " face=DejaVuSerif color=";
-			message += color(chat_message.playern);
-			message += " italic=1 shadow=1> ";
-			message += chat_message.sender;
-			message += sanitized.substr(3);
+			message = (boost::format("%s>@%s \\> </font><font size=14 face=%s color=%s italic=1 shadow=1> %s%s")
+					% message
+					% chat_message.recipient
+					% font_face
+					% color(chat_message.playern)
+					% chat_message.sender
+					% sanitized.substr(3)).str();
 		}
 	} else {
 		// Normal messages handling
@@ -218,10 +225,11 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 				message += "***";
 			message += sanitized.substr(3);
 		} else if (chat_message.sender.size()) {
-			message += " bold=1>";
-			message += chat_message.sender;
-			message += ":</font><font size=14 face=DejaVuSerif shadow=1 color=eeeeee> ";
-			message += sanitized;
+			message = (boost::format("%s bold=1>%s:</font><font size=14 face=%s shadow=1 color=eeeeee> %s")
+						 % message
+						 % chat_message.sender
+						 % font_face
+						 % sanitized).str();
 		} else {
 			message += " bold=1>*** ";
 			message += sanitized;
