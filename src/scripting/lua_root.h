@@ -20,9 +20,9 @@
 #ifndef WL_SCRIPTING_LUA_ROOT_H
 #define WL_SCRIPTING_LUA_ROOT_H
 
+#include "scripting/lua.h"
 #include "scripting/lua_bases.h"
 #include "scripting/luna.h"
-#include "third_party/eris/lua.hpp"
 
 namespace LuaRoot {
 

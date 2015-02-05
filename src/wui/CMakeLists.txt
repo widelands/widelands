@@ -162,7 +162,8 @@ wl_library(wui
     network
     notifications
     profile
-    scripting
+    scripting_lua_interface
+    scripting_lua_table
     sound
     ui_basic
     ui_fsmenu

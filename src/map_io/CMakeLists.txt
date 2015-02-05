@@ -15,7 +15,7 @@ wl_library(map_io_map_loader
     io_filesystem
     logic
     map_io
-    scripting
+    scripting_lua_interface
 )
 
 # TODO(sirver): separate map_object_loader/saver into
@@ -101,6 +101,6 @@ wl_library(map_io
     logic
     logic_widelands_geometry
     profile
-    scripting
+    scripting_logic
     wui
 )

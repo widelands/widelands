@@ -20,7 +20,7 @@
 #ifndef WL_MAP_IO_WIDELANDS_MAP_LOADER_H
 #define WL_MAP_IO_WIDELANDS_MAP_LOADER_H
 
-#include <cstring>
+#include <boost/algorithm/string.hpp>
 #include <memory>
 #include <string>
 
@@ -46,7 +46,7 @@ struct WidelandsMapLoader : public MapLoader {
 	MapObjectLoader * get_map_object_loader() {return m_mol.get();}
 
 	static bool is_widelands_map(const std::string & filename) {
-		return !strcasecmp(&filename.c_str()[filename.size() - 4], WLMF_SUFFIX);
+		return boost::iends_with(filename, WLMF_SUFFIX);
 	}
 
 	// If this was made pre one-world, the name of the world.

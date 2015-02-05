@@ -20,8 +20,10 @@
 #include "logic/building.h"
 
 #include <cstdio>
+#include <cstring>
 #include <sstream>
 
+#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
 #include "base/macros.h"
@@ -69,24 +71,26 @@ BuildingDescr::BuildingDescr
 	m_global        (false),
 	m_vision_range  (0)
 {
+	using boost::iequals;
+
 	try {
-		char const * const string = global_s.get_safe_string("size");
-		if      (!strcasecmp(string, "small"))
+		const auto& size = global_s.get_safe_string("size");
+		if      (iequals(size, "small"))
 			m_size = BaseImmovable::SMALL;
-		else if (!strcasecmp(string, "medium"))
+		else if (iequals(size, "medium"))
 			m_size = BaseImmovable::MEDIUM;
-		else if (!strcasecmp(string, "big"))
+		else if (iequals(size, "big"))
 			m_size = BaseImmovable::BIG;
-		else if (!strcasecmp(string, "mine")) {
+		else if (iequals(size, "mine")) {
 			m_size = BaseImmovable::SMALL;
 			m_mine = true;
-		} else if (!strcasecmp(string, "port")) {
+		} else if (iequals(size, "port")) {
 			m_size = BaseImmovable::BIG;
 			m_port = true;
 		} else
 			throw GameDataError
 				("expected %s but found \"%s\"",
-				 "{\"small\"|\"medium\"|\"big\"|\"port\"|\"mine\"}", string);
+				 "{\"small\"|\"medium\"|\"big\"|\"port\"|\"mine\"}", size);
 	} catch (const WException & e) {
 		throw GameDataError("size: %s", e.what());
 	}

@@ -19,12 +19,16 @@
 
 #include "profile/profile.h"
 
+#include <algorithm>
 #include <cctype>
 #include <cstdarg>
 #include <cstdio>
+#include <cstdlib>
 #include <cstring>
 #include <limits>
 #include <string>
+
+#include <boost/algorithm/string.hpp>
 
 #include "base/i18n.h"
 #include "base/log.h"
@@ -74,28 +78,38 @@ static char const * falseWords[FALSE_WORDS] =
 
 Profile g_options(Profile::err_log);
 
-Section::Value::Value(const char * const nname, const char * const nval) :
-	m_used(false), m_name(strdup(nname)), m_value(strdup(nval))
-{}
-
-Section::Value::Value(const Section::Value & o) :
-m_used(o.m_used), m_name(strdup(o.m_name)), m_value(strdup(o.m_value)) {}
-
-Section::Value::~Value()
+Section::Value::Value(const string & nname, const char * const nval) :
+	m_used(false),
+	m_name(nname)
 {
-	free(m_name);
-	free(m_value);
+	set_string(nval);
 }
 
-Section::Value & Section::Value::operator= (const Section::Value & o)
+Section::Value::Value(const Section::Value & o) :
+	m_used(o.m_used),
+	m_name(o.m_name)
 {
-	if (this != &o) {
-		free(m_name);
-		free(m_value);
-		m_used = o.m_used;
-		m_name = strdup(o.m_name);
-		m_value = strdup(o.m_value);
-	}
+	set_string(o.m_value.get());
+}
+
+Section::Value::Value(Section::Value && o)
+	: Value()
+{
+	using std::swap;
+	swap(*this, o);
+}
+
+Section::Value & Section::Value::operator= (Section::Value other)
+{
+	using std::swap;
+	swap(*this, other);
+	return *this;
+}
+
+Section::Value & Section::Value::operator= (Section::Value && other)
+{
+	using std::swap;
+	swap(*this, other);
 	return *this;
 }
 
@@ -112,12 +126,12 @@ void Section::Value::mark_used()
 int32_t Section::Value::get_int() const
 {
 	char * endp;
-	long int const i = strtol(m_value, &endp, 0);
+	long int const i = strtol(m_value.get(), &endp, 0);
 	if (*endp)
-		throw wexception("%s: '%s' is not an integer", get_name(), m_value);
+		throw wexception("%s: '%s' is not an integer", get_name(), get_string());
 	int32_t const result = i;
 	if (i != result)
-		throw wexception("%s: '%s' is out of range",   get_name(), m_value);
+		throw wexception("%s: '%s' is out of range",   get_name(), get_string());
 
 	return result;
 }
@@ -126,9 +140,9 @@ int32_t Section::Value::get_int() const
 uint32_t Section::Value::get_natural() const
 {
 	char * endp;
-	long long int i = strtoll(m_value, &endp, 0);
+	long long int i = strtoll(m_value.get(), &endp, 0);
 	if (*endp || i < 0)
-		throw wexception("%s: '%s' is not natural", get_name(), m_value);
+		throw wexception("%s: '%s' is not natural", get_name(), get_string());
 	return i;
 }
 
@@ -136,9 +150,9 @@ uint32_t Section::Value::get_natural() const
 uint32_t Section::Value::get_positive() const
 {
 	char * endp;
-	long long int i = strtoll(m_value, &endp, 0);
+	long long int i = strtoll(m_value.get(), &endp, 0);
 	if (*endp || i < 1)
-		throw wexception("%s: '%s' is not positive", get_name(), m_value);
+		throw wexception("%s: '%s' is not positive", get_name(), get_string());
 	return i;
 }
 
@@ -146,31 +160,43 @@ uint32_t Section::Value::get_positive() const
 bool Section::Value::get_bool() const
 {
 	for (int32_t i = 0; i < TRUE_WORDS; ++i)
-		if (!strcasecmp(m_value, trueWords[i]))
+		if (boost::iequals(m_value.get(), trueWords[i]))
 			return true;
 	for (int32_t i = 0; i < FALSE_WORDS; ++i)
-		if (!strcasecmp(m_value, falseWords[i]))
+		if (boost::iequals(m_value.get(), falseWords[i]))
 			return false;
 
-	throw wexception("%s: '%s' is not a boolean value", get_name(), m_value);
+	throw wexception("%s: '%s' is not a boolean value", get_name(), get_string());
 }
 
 
 Point Section::Value::get_point() const
 {
-	char * endp = m_value;
+	char * endp = m_value.get();
 	long int const x = strtol(endp, &endp, 0);
 	long int const y = strtol(endp, &endp, 0);
 	if (*endp)
-		throw wexception("%s: '%s' is not a Point", get_name(), m_value);
+		throw wexception("%s: '%s' is not a Point", get_name(), get_string());
 
 	return Point(x, y);
 }
 
 void Section::Value::set_string(char const * const value)
 {
-	free(m_value);
-	m_value = strdup(value);
+	using std::copy;
+
+	const auto len = strlen(value) + 1;
+	m_value.reset(new char[len]);
+	copy(value, value + len, m_value.get());
+}
+
+void swap(Section::Value & first, Section::Value & second)
+{
+	using std::swap;
+
+	swap(first.m_name,  second.m_name);
+	swap(first.m_value, second.m_value);
+	swap(first.m_used,  second.m_used);
 }
 
 
@@ -189,28 +215,8 @@ void Section::set_name(const std::string& name) {
 	m_section_name = name;
 }
 
-Section::Section(Profile * const prof, const char * const name) :
+Section::Section(Profile * const prof, const std::string & name) :
 m_profile(prof), m_used(false), m_section_name(name) {}
-
-Section::Section(const Section & o) :
-	m_profile     (o.m_profile),
-	m_used        (o.m_used),
-	m_section_name(o.m_section_name),
-	m_values      (o.m_values)
-{
-	assert(this != &o);
-}
-
-Section & Section::operator= (const Section & o) {
-	if (this != &o) {
-		m_profile      = o.m_profile;
-		m_used         = o.m_used;
-		m_section_name = o.m_section_name;
-		m_values       = o.m_values;
-	}
-
-	return *this;
-}
 
 /** Section::is_used()
  *
@@ -248,7 +254,7 @@ void Section::check_used() const
 bool Section::has_val(char const * const name) const
 {
 	for (const Value& temp_value : m_values) {
-		if (!strcasecmp(temp_value.get_name(), name)) {
+		if (boost::iequals(temp_value.get_name(), name)) {
 			return true;
 		}
 	}
@@ -265,7 +271,7 @@ bool Section::has_val(char const * const name) const
 Section::Value * Section::get_val(char const * const name)
 {
 	for (Value& value : m_values) {
-		if (!strcasecmp(value.get_name(), name)) {
+		if (boost::iequals(value.get_name(), name)) {
 			value.mark_used();
 			return &value;
 		}
@@ -284,7 +290,7 @@ Section::Value * Section::get_next_val(char const * const name)
 {
 	for (Value& value : m_values) {
 		if (!value.is_used()) {
-			if (!name || !strcasecmp(value.get_name(), name)) {
+			if (!name || boost::iequals(value.get_name(), name)) {
 				value.mark_used();
 				return &value;
 			}
@@ -297,7 +303,7 @@ Section::Value & Section::create_val
 	(char const * const name, char const * const value)
 {
 	for (Value& temp_value : m_values) {
-		if (!strcasecmp(temp_value.get_name(), name)) {
+		if (boost::iequals(temp_value.get_name(), name)) {
 			temp_value.set_string(value);
 			return temp_value;
 		}
@@ -308,8 +314,7 @@ Section::Value & Section::create_val
 Section::Value & Section::create_val_duplicate
 	(char const * const name, char const * const value)
 {
-	Value v(name, value);
-	m_values.push_back(v);
+	m_values.emplace_back(name, value);
 	return m_values.back();
 }
 
@@ -617,7 +622,7 @@ void Profile::check_used() const
 Section * Profile::get_section(const std::string & name)
 {
 	for (Section& temp_section : m_sections) {
-		if (!strcasecmp(temp_section.get_name(), name.c_str())) {
+		if (boost::iequals(temp_section.get_name(), name.c_str())) {
 			temp_section.mark_used();
 			return &temp_section;
 		}
@@ -661,7 +666,7 @@ Section * Profile::get_next_section(char const * const name)
 {
 	for (Section& section : m_sections) {
 		if (!section.is_used()) {
-			if (!name || !strcasecmp(section.get_name(), name)) {
+			if (!name || boost::iequals(section.get_name(), name)) {
 				section.mark_used();
 				return &section;
 			}
@@ -674,7 +679,7 @@ Section * Profile::get_next_section(char const * const name)
 Section & Profile::create_section          (char const * const name)
 {
 	for (Section& section : m_sections) {
-		if (!strcasecmp(section.get_name(), name)) {
+		if (boost::iequals(section.get_name(), name)) {
 			return section;
 		}
 	}

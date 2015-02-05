@@ -32,8 +32,16 @@ produce=coal
 
 [idle]
 pics=charcoal_kiln_i_??.png  # ???
-hotspot=47 54
+hotspot=50 71
+
+[build]
+pics=charcoal_kiln_b_??.png  # ???
+hotspot=50 71
+
+[unoccupied]
+pics=charcoal_kiln_b_03.png  # ???
+hotspot=50 71
 
 [working]
-pics=charcoal_kiln_i_??.png  # ???
-hotspot=47 54
+pics=charcoal_kiln_w_??.png  # ???
+hotspot=50 71

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,30 +13,11 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
 
-
-#include "scripting/c_utils.h"
-
-#include <cstdarg>
-#include <cstdio>
-#include <iostream>
-
-#include "scripting/factory.h"
-#include "scripting/scripting.h"
-
-Factory & get_factory(lua_State * const L) {
-	lua_getfield(L, LUA_REGISTRYINDEX, "factory");
-	Factory * fac = static_cast<Factory *>(lua_touserdata(L, -1));
-	lua_pop(L, 1); // pop this userdata
-
-	if (!fac)
-		throw LuaError("\"factory\" field was nil, which should be impossible!");
-
-	return *fac;
-}
+#include "scripting/globals.h"
 
 Widelands::Game & get_game(lua_State * const L) {
 	lua_getfield(L, LUA_REGISTRYINDEX, "game");
@@ -94,28 +75,4 @@ Widelands::MapObjectSaver * get_mos(lua_State * const L) {
 			("\"mos\" field was nil. This should be impossible.");
 
 	return mos;
-}
-
-/*
- * Returns an error to lua. This method never returns as lua_error long jumps.
- */
-void report_error(lua_State * L, const char * const fmt, ...) {
-	char buffer[2048];
-	va_list va;
-
-	va_start(va, fmt);
-	vsnprintf(buffer, sizeof(buffer), fmt, va);
-	va_end(va);
-
-	// Also create a traceback
-	lua_getglobal(L, "debug");
-	assert(lua_istable(L, -1));
-	lua_getfield(L, -1, "traceback");
-	assert(lua_isfunction(L, -1));
-	lua_pushstring(L, buffer); // error message
-	lua_pushinteger(L, 2);  /* skip this function and traceback */
-	lua_call(L, 2, 1);  /* call debug.traceback */
-
-	lua_error(L); // lua_error never returns.
-	throw LuaError("Never here."); // Shutup compiler warnings.
 }
