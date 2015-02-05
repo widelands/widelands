@@ -109,8 +109,9 @@ void ImageCache::compactify() {
 
 	std::vector<std::unique_ptr<Texture>> new_textures;
 
-	// TODO(sirver): Limit the size of the texture atlas to a max GL texture size. This might return more than one
-	// packed image. Make sure that the code works also for small max texture sizes.
+	// TODO(sirver): Limit the size of the texture atlas to a max GL texture
+	// size. This might return more than one packed image. Make sure that the
+	// code works also for small max texture sizes.
 	texture_atlases_.emplace_back(texture_atlas.pack(&new_textures));
 
 	// NOCOM(#sirver): remove

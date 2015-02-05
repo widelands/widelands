@@ -254,7 +254,8 @@ void Texture::set_pixel(uint16_t x, uint16_t y, uint32_t clr) {
 
 
 // NOCOM(#sirver):
-// http://stackoverflow.com/questions/17068703/2d-drawing-in-opengl-linear-filtering-with-pixel-accuracy-at-native-size
+// http://stackoverflow.com/questions/17068703/
+//    2d-drawing-in-opengl-linear-filtering-with-pixel-accuracy-at-native-size
 void Texture::setup_gl() {
 	glBindFramebuffer(GL_FRAMEBUFFER, GlFramebuffer::instance().id());
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_texture, 0);
