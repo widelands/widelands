@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
 #include "base/log.h"
@@ -156,15 +157,7 @@ std::string SaveHandler::create_file_name
 	(std::string dir, std::string filename)
 {
 	// ok, first check if the extension matches (ignoring case)
-	bool assign_extension = true;
-	if (filename.size() >= strlen(WLGF_SUFFIX)) {
-		char buffer[10]; // enough for the extension
-		filename.copy
-			(buffer, sizeof(WLGF_SUFFIX), filename.size() - strlen(WLGF_SUFFIX));
-		if (!strncasecmp(buffer, WLGF_SUFFIX, strlen(WLGF_SUFFIX)))
-			assign_extension = false;
-	}
-	if (assign_extension)
+	if (!boost::iends_with(filename, WLGF_SUFFIX))
 		filename += WLGF_SUFFIX;
 
 	// Now append directory name

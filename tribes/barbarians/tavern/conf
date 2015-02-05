@@ -37,8 +37,12 @@ produce=ration
 
 [idle]
 pics=tavern_i_??.png  # ???
-hotspot=32 56
+hotspot=57 88
+
+[build]
+pics=tavern_b_??.png  # ???
+hotspot=57 88
 
 [working]
-pics=tavern_i_??.png  # ???
-hotspot=32 56
+pics=tavern_w_??.png  # ???
+hotspot=57 88
