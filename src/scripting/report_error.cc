@@ -17,26 +17,32 @@
  *
  */
 
-#include "scripting/factory.h"
+#include "scripting/report_error.h"
 
-#include "scripting/lua_editor.h"
-#include "scripting/lua_game.h"
+#include <cassert>
 
-void EditorFactory::push_player(lua_State * L, Widelands::PlayerNumber plr) {
-	to_lua<LuaEditor::LuaPlayer>(L, new LuaEditor::LuaPlayer(plr));
-}
+#include "scripting/lua_errors.h"
 
-void GameFactory::push_player(lua_State * L, Widelands::PlayerNumber plr) {
-		to_lua<LuaGame::LuaPlayer>(L, new LuaGame::LuaPlayer(plr));
-}
+/*
+ * Returns an error to lua. This method never returns as lua_error long jumps.
+ */
+void report_error(lua_State * L, const char * const fmt, ...) {
+	char buffer[2048];
+	va_list va;
 
-Factory & get_factory(lua_State * const L) {
-	lua_getfield(L, LUA_REGISTRYINDEX, "factory");
-	Factory * fac = static_cast<Factory *>(lua_touserdata(L, -1));
-	lua_pop(L, 1); // pop this userdata
+	va_start(va, fmt);
+	vsnprintf(buffer, sizeof(buffer), fmt, va);
+	va_end(va);
 
-	if (!fac)
-		throw LuaError("\"factory\" field was nil, which should be impossible!");
+	// Also create a traceback
+	lua_getglobal(L, "debug");
+	assert(lua_istable(L, -1));
+	lua_getfield(L, -1, "traceback");
+	assert(lua_isfunction(L, -1));
+	lua_pushstring(L, buffer); // error message
+	lua_pushinteger(L, 2);  /* skip this function and traceback */
+	lua_call(L, 2, 1);  /* call debug.traceback */
 
-	return *fac;
+	lua_error(L); // lua_error never returns.
+	throw LuaError("Never here."); // Shutup compiler warnings.
 }

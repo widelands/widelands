@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,19 +13,24 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
 
-#ifndef WL_SCRIPTING_LUA_GLOBALS_H
-#define WL_SCRIPTING_LUA_GLOBALS_H
-
 #include "scripting/lua.h"
 
-namespace LuaGlobals {
-
-void luaopen_globals(lua_State *);
-
+void lua_pushstring (lua_State * L, const std::string & s) {
+	lua_pushstring(L, s.c_str());
 }
 
-#endif  // end of include guard: WL_SCRIPTING_LUA_GLOBALS_H
+lua_State * luaL_checkthread(lua_State * L, int n) {
+	luaL_checktype(L, n, LUA_TTHREAD);
+	lua_State * thread = lua_tothread(L, n);
+	return thread;
+}
+
+bool luaL_checkboolean(lua_State * L, int n) {
+	if (lua_isboolean(L, n))
+		return lua_toboolean(L, n);
+	return luaL_checkinteger(L, n);
+}

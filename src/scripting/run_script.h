@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2014 by the Widelands Development Team
+ * Copyright (C) 2006-2015 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,21 +17,21 @@
  *
  */
 
-#ifndef WL_SCRIPTING_LUA_ERRORS_H
-#define WL_SCRIPTING_LUA_ERRORS_H
+#ifndef WL_SCRIPTING_RUN_SCRIPT_H
+#define WL_SCRIPTING_RUN_SCRIPT_H
 
-#include <string>
+#include <memory>
 
-#include "base/wexception.h"
+#include "io/filesystem/filesystem.h"
+#include "scripting/lua.h"
+#include "scripting/lua_table.h"
 
-class LuaError : public WException {
-public:
-	LuaError(const std::string& reason);
-};
+// Checks the return value of a function all for nonzero state and throws the
+// string that the function hopefully pushed as an Error. Returns 'rv' if there
+// is no error.
+int check_return_value_for_errors(lua_State* L, int rv);
 
-class LuaScriptNotExistingError : public LuaError {
-public:
-	LuaScriptNotExistingError(const std::string& name);
-};
+// Runs the 'script' searched in the given 'fs'.
+std::unique_ptr<LuaTable> run_script(lua_State* L, const std::string& path, FileSystem* fs);
 
-#endif  // end of include guard: WL_SCRIPTING_LUA_ERRORS_H
+#endif  // end of include guard: WL_SCRIPTING_RUN_SCRIPT_H
